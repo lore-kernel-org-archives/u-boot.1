@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CFA2EE021A
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 05:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 141E3EE021D
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 06:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB224864F0;
-	Fri, 15 Sep 2023 07:11:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D6D67864D4;
+	Fri, 15 Sep 2023 08:10:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QMH8HA51";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CtbJLsbF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64B338684C; Fri, 15 Sep 2023 07:11:54 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+ id 24DDE866DA; Fri, 15 Sep 2023 08:10:15 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76C01864F0
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 07:11:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F94386466
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 08:10:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-501be2d45e0so2946484e87.3
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 22:11:52 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5029e4bfa22so2930080e87.3
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 23:10:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694754712; x=1695359512; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694758212; x=1695363012; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sRdyvRPaNVoToIKd9QWa6d6rh+h8LSKR6yY66jCu9kI=;
- b=QMH8HA51OC59TF3OhQWYYLJmEGOHKodgh0w4wzACDnHNrfSpBrUjXIkhuOMnK5pFm/
- 4WMK6F7q3//fptkdIOhes1Q/cFcPNpwSRGlnV6K7UtcnjyGj97kzRoks+7jGCd5qP/tL
- Op0sZyJ3XNzKc8TfA7GXP2BVy5r/7sWXs0ajrzuMcXGclTHJS0NMtm63NMkFLC+ervFr
- 6G/7z7ZJA5wPFqXqg2Vwe7Qr7fCH12CntzqA4kaTEeMl07TDA0frIxlWZdqtxnUAWz96
- PuQ66AtD0yIQyk/m9m65cJhdJIamdR8+AV9JuBBGBsSDOFJamIEaM5lV5jsxe8QgVvgy
- AYuA==
+ bh=1YcsMcLBe/ey94wZJNZ8ZleXQ6eV5wrkChHI97YZeG0=;
+ b=CtbJLsbFSzVasFTDk2vB93B16F0H5mFlPw8TIlFsDoqWmwSxE75tJslBpD9Q36IR5/
+ UV4PIjW+blI0Tczs8eO8Kv8LAoPGp5udAAqg9gLK60S+msA1VluJMGEMvedt2DNVg+qT
+ GYY/lLpZ4p/s5agSviw8YgiR+32lrdyal6ABIaHJvC6b+X+TGbdB68EW5F1lHbQqYD3J
+ xWWWuNjHF6o42VbLiIG71radxt+q/b8Ie6hHxgkxcl2LHcDqOJooGT1ksp/te1FzW8Wg
+ CclX+0p8YuL4eoaA1h8vLm3P0IOpbVj9DdNDW0bR2oM8Fc87xaM1Nl66cbCPNVbQD4/c
+ /C5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694754712; x=1695359512;
+ d=1e100.net; s=20230601; t=1694758212; x=1695363012;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sRdyvRPaNVoToIKd9QWa6d6rh+h8LSKR6yY66jCu9kI=;
- b=N0flAsmZ85Z/nAbWKbEmSS/lAwXXve9ghT4Ju5Cp2ykxlC270s02i8evTAcdD5Egp3
- ko1WqY6EHS98hWTeL18U1MKEdRjtZrxH0kGbbhN0xt7dKRWVpE8XGtMMMbw4aGr0J9Ad
- jnnA2oVz9KGbPs7pjpqsMtjv4nVT7J10Mj9D/9H/S51jcUl0EeFsJGRymXVAM53PBdjI
- cg65NzCMJqQmtNdoFLitHcN/Dge2iycx7zl9aYdoXzWQuF9fpdEBPueEXPculSKSbQvF
- xWytXN2e8GILqHGXp3bGA2W2nTVln1V+tP/o6Mi1G3NyXy57TyZn/fXbZhi+XQxT5jvY
- skHw==
-X-Gm-Message-State: AOJu0Yzk5D7s4ewn0T9Hpx/DMTMaX91um4Zt4wWL8uqbQsMHlGIy5UIq
- qWFCoRhOffRBQcagzrezzXskaOKTLdsmuJGzF34QTw==
-X-Google-Smtp-Source: AGHT+IEml86uJnzWPZKpMXBqVQaM/2scuGkGoonY+qSyqixlkz+5T9EYLBTqNWqyCVVzf6knKaVhXohvbG/RinMjdIA=
-X-Received: by 2002:a19:4f59:0:b0:500:9a45:636 with SMTP id
- a25-20020a194f59000000b005009a450636mr512856lfk.13.1694754711061; Thu, 14 Sep
- 2023 22:11:51 -0700 (PDT)
+ bh=1YcsMcLBe/ey94wZJNZ8ZleXQ6eV5wrkChHI97YZeG0=;
+ b=IlVwvT6zbYadCkJUUiVj7Ygg/oilJq/SK1Mej5kvpKZAP5Qnel+iG+ZgBbrddG12j2
+ W2EAFbvF7dDML4IjodcPkVtYmUh+pdepORfv0SZoOdCYYjkxNa2OrT0MIkH8aZUnrnd1
+ DhIZLEWD57PyKdZ9l7oyk53NtWAOoWBYPs/I1NbdWalfXPbpE28LIo1Z2MJuV35/+CLT
+ j5egKxdU8oc77le+cyDfbpKnqcyNk2hE0fQ7jTRFaU+T53RtQasHPTBJpqoBvoASO0fl
+ ARCGnUcYzapNLTbn1YIlLoh4cW0aanjXNP3xETbCVa5evi0NjJ7UG3PWgdn5ThBvWIg0
+ 4AWQ==
+X-Gm-Message-State: AOJu0YzYwS5ENBSBVbRnLy0zJcsLN8+VMIR/x0hsFKJLCcUDHKf3jTpv
+ ncYWtvgBtmEMMwQgSwO2dHrC5DYsjf9vQH/tqF4nGA==
+X-Google-Smtp-Source: AGHT+IG9H+svBNQRpK5HTpa/kF5gBVZIiDHDX5eblf8XdurWeR3vAcwg7P6gKMzmLcHfoKyo1u9siueqC1sfprBZaYU=
+X-Received: by 2002:a05:6512:559:b0:4fe:279b:8a02 with SMTP id
+ h25-20020a056512055900b004fe279b8a02mr507970lfl.67.1694758211762; Thu, 14 Sep
+ 2023 23:10:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230914165615.1058529-1-sjg@chromium.org>
- <20230914165615.1058529-5-sjg@chromium.org>
-In-Reply-To: <20230914165615.1058529-5-sjg@chromium.org>
+References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ <20230901102542.609239-7-masahisa.kojima@linaro.org> <ZQMRRQ4zOnKUU4WK@hera>
+ <CADQ0-X-NCj03ghuGj946KtO-2nO+BdXUt5HcDz8dH5ez2WHghA@mail.gmail.com>
+In-Reply-To: <CADQ0-X-NCj03ghuGj946KtO-2nO+BdXUt5HcDz8dH5ez2WHghA@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 15 Sep 2023 08:11:15 +0300
-Message-ID: <CAC_iWj+uCm8vk4SB6=UcHLqDX+RN0bPUuYJR+XFMP5ENH8c9YA@mail.gmail.com>
-Subject: Re: [PATCH v5 05/21] FWU: Avoid showing an unselectable menu option
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Mark Kettenis <mark.kettenis@xs4all.nl>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Brandon Maier <brandon.maier@collins.com>, 
- Kautuk Consul <kconsul@ventanamicro.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>
+Date: Fri, 15 Sep 2023 09:09:35 +0300
+Message-ID: <CAC_iWjLwEetNVqyCoNNaAusFMJym+ku2v5zez4hUFMOBDEadeQ@mail.gmail.com>
+Subject: Re: [PATCH v2 6/6] doc: uefi: add HTTP Boot support
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,83 +87,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Sept 2023 at 19:56, Simon Glass <sjg@chromium.org> wrote:
+On Fri, 15 Sept 2023 at 02:52, Masahisa Kojima
+<masahisa.kojima@linaro.org> wrote:
 >
-> Use a menuconfig to avoid showing a menu which cannot be selected in many
-> cases.
+> On Thu, 14 Sept 2023 at 22:57, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > On Fri, Sep 01, 2023 at 07:25:42PM +0900, Masahisa Kojima wrote:
+> > > This adds the description about HTTP Boot.
+> > >
+> > > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > > ---
+> > >  doc/develop/uefi/uefi.rst | 21 +++++++++++++++++++++
+> > >  1 file changed, 21 insertions(+)
+> > >
+> > > diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+> > > index a7a41f2fac..fd87bb1edb 100644
+> > > --- a/doc/develop/uefi/uefi.rst
+> > > +++ b/doc/develop/uefi/uefi.rst
+> > > @@ -594,6 +594,27 @@ UEFI variables. Booting according to these variables is possible via::
+> > >  As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
+> > >  command 'efidebug' can be used to set the variables.
+> > >
+> > > +UEFI HTTP Boot
+> > > +~~~~~~~~~~~~~~
+> > > +
+> > > +HTTP Boot provides the capability for system deployment and configuration
+> > > +over the network. HTTP Boot can be activated by specifying::
+> > > +
+> > > +    CONFIG_CMD_DNS
+> > > +    CONFIG_CMD_WGET
+> > > +    CONFIG_BLKMAP
+> > > +
+> > > +Set up the load option specifying the target URI::
+> > > +
+> > > +    efidebug boot add -u 1 netinst http://foo/bar
+> > > +
+> > > +When this load option is selected as boot selection, resolve the
+> > > +host ip address by dhs, then download the file with wget.
+> >
+> >  dhs -> dns
+> OK.
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Acked-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Reviewed-by: Tom Rini <trini@konsulko.com>
-> ---
+> >  what happens if it's an IP address?
+> Current implementation tries to resolve the IP address as a host name,
+> so the DNS process will end up with "host not found".
+> We need to preset the "httpserverip" env variable to proceed the wget.
 >
-> (no changes since v3)
+> For this series, without a lwip port, this limitation should be noted here.
 >
-> Changes in v3:
-> - Drop comment about an update/ directory
->
-> Changes in v2:
-> - Fix FMU typo in the subject
-> - Drop now-unnecessary depends on FWU_MULTI_BANK_UPDATE
->
->  lib/Kconfig             | 4 ----
->  lib/fwu_updates/Kconfig | 9 +++++----
->  2 files changed, 5 insertions(+), 8 deletions(-)
->
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 9addcfab373..bfab2f3165a 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -1118,8 +1118,4 @@ config PHANDLE_CHECK_SEQ
->
->  endmenu
->
-> -menu "FWU Multi Bank Updates"
-> -
->  source lib/fwu_updates/Kconfig
-> -
-> -endmenu
-> diff --git a/lib/fwu_updates/Kconfig b/lib/fwu_updates/Kconfig
-> index 71f34793d92..d35247d0e5d 100644
-> --- a/lib/fwu_updates/Kconfig
-> +++ b/lib/fwu_updates/Kconfig
-> @@ -1,4 +1,4 @@
-> -config FWU_MULTI_BANK_UPDATE
-> +menuconfig FWU_MULTI_BANK_UPDATE
->         bool "Enable FWU Multi Bank Update Feature"
->         depends on EFI_CAPSULE_ON_DISK
->         select PARTITION_TYPE_GUID
-> @@ -10,24 +10,25 @@ config FWU_MULTI_BANK_UPDATE
->           multiple banks(copies) of the firmware images. One of the
->           bank is selected for updating all the firmware components
->
-> +if FWU_MULTI_BANK_UPDATE
-> +
->  config FWU_NUM_BANKS
->         int "Number of Banks defined by the platform"
-> -       depends on FWU_MULTI_BANK_UPDATE
->         help
->           Define the number of banks of firmware images on a platform
->
->  config FWU_NUM_IMAGES_PER_BANK
->         int "Number of firmware images per bank"
-> -       depends on FWU_MULTI_BANK_UPDATE
->         help
->           Define the number of firmware images per bank. This value
->           should be the same for all the banks.
->
->  config FWU_TRIAL_STATE_CNT
->         int "Number of times system boots in Trial State"
-> -       depends on FWU_MULTI_BANK_UPDATE
->         default 3
->         help
->           With FWU Multi Bank Update feature enabled, number of times
->           the platform is allowed to boot in Trial State after an
->           update.
-> +
-> +endif
-> --
-> 2.42.0.459.ge4e396fd5e-goog
->
+> I could take the ip address format check code from iwip or other projects,
+> but I did not do that since there is a workaround(set "httpserverip"
+> env variable).
+> In addition, when the lwip port lands, this case is properly handled.
+> If the IP address is used as host, the DNS process is skipped.
 
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Ok, then update this with information on how to use an IP address
+instead of a hostname and once LWIP lands we can update it
+
+Thanks
+/Ilias
+>
+> Thanks,
+> Masahisa Kojima
+>
+> >
+> > > +If the downloaded file extension is .iso or .img file, efibootmgr tries to
+> > > +mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> > > +If the downloaded file extension is .efi and file is PE-COFF image,
+> > > +load the downloaded file and start it.
+> > > +
+> > >  Executing the built in hello world application
+> > >  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > >
+> > > --
+> > > 2.34.1
+> > >
+> >
+> > Thanks
+> > /Ilias
