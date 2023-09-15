@@ -4,132 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F05EE6457
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 13:47:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE8EEE645C
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 13:59:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8679C864E8;
-	Fri, 15 Sep 2023 15:47:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 8E1C286583;
+	Fri, 15 Sep 2023 15:59:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Ur18bV4d";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="FoeszvtQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23956864D4; Fri, 15 Sep 2023 15:47:41 +0200 (CEST)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on0709.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0e::709])
+ id A000C86571; Fri, 15 Sep 2023 15:59:11 +0200 (CEST)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20628.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eab::628])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB04C864E8
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 15:47:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6262786583
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 15:59:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JGXN7apbH2aqeEHCXNz+VoAkZ014aRXyhAJAtfqg5B9AaZvYSDUnrAA9gCNnLA1mhjJr+C+dTqIgZq5U5T/ranf654x0wJUTe4rRr8WiPal1qSA4RtYRsAu8Ne9ibDe7Jl2cEloBWJnhW+VYbsqkI5nXJ4R6lRCe8rr1I6TLwD0GP1JFodnyCo1qsk/Y4pvu5hbEzkDJF3cvvfEhg8lAn0OUlvemSavh0BR3cHMoRfzLxP6xcabQAAoh+w2kjRtqQC0eg7UB969TonImGDJsjXO3e4pKEm1C4i2gWVjOD364zShjEbxd6HJfz59CK2ICbgsz5uXlPDA3nAR46mn2EQ==
+ b=MjXsEmuQa49W00ABcP67lQOeWSS4IXNUl7STq2jC+2/EDaKy+PtuQgESiiNZSHXjkGwWvYt2gcb6NLw1WpqOCuu7W/SFgH62i73we9bZjGzzm8gGMbCo4F2qpYkv5GHFfSvkCud8G1QQe8leq7q5VjhhrHclECsDJZhL8+qCKM3n0YUvszDL64Hsqixmj2WEB6u/GOl5UdwXxw+ocm+hlzTnzDtS8mfuzIGVwad00TGdkyAf0+VoIpV+KJm0L2QWgqRSEoWBcQNAFZepBsTC9PKTAUkw2IAelR1loIagoF7gQ/aNFPzdYTLeLr/W/NeXG9lmhC7v6b1KQq+UzmXY0A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DwfXvSrHwvkwfvBztBR7xUpSARwsEOTFeZcUkQzqUPY=;
- b=DVJSB51A4rsy3zpxahzF8DveMrHsm0pmGVgj00cHBKTHrSV4AN0o1tQqoyP2E2qWdqILDzLj39lzi7GtS76lnJJOg7zaUo9CzmJ7H/wBKvGk7R2jCGT1Qmq5wtRVBe8/CQupzoqQqYEglqSbghhscDtxbiQCKgOuCXjQh2CX3gcNLDgkRXChhLAg4IiAbziMvkc2xy602dqmPAwwtn1ymWR2ILgeiaTSFPOrIEB3nH1vmjdaTo6bH+KHiMiTk2U8Q9R2QJiA5s0iJCpIkBwv+GY2IOhyjtKBUCFwNo9OtfRSunmEAucNq2S0W1C/LI2JeXiEQYXzMOEOT8O+lkCYaA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ bh=rmTi/PrsyFJJHonBo6k2SzeL12cCCuGoUdEddsewsH0=;
+ b=XjkObWCvDmmgdHEncq2m+eZbsJVCJk/FZ0qcVidA8mmhfpmeyPQ2y3rRBLb+UP1TRsCKds+xDlFoVj4nvSZa/jl1JIBEjKRzTMgAJS40jJ399gQO/FsWESOLx5fB1egbqyNdJdZtXrCD/YT+ihXWzAnDBdC9pFIKgF70ZL3E/4F/tpNsIwt8DHFD+2laRt1xqkk01e/kZ3JOgGlPzm7tmL36aw66Tv3+FBPDumJjayqjGp8xJd7cTEMzpHQI/jQF3fpJ9hYLS+NRPklceJxtppyfa3gLzDMIz0G+4SYImIbD6mqXTlJkaiPTZ8x/vTwPJccAKjbr/lWKUQ8MZ/GatA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DwfXvSrHwvkwfvBztBR7xUpSARwsEOTFeZcUkQzqUPY=;
- b=Ur18bV4drU/lcbzOp1+3VR1gg2SIMhvEpAopPXwwzbRHJK1ehRueu9ErtnguNIBdIWzdtUOafA2CLVXWWxQC0YMFm2IRH/CS0X+Ah2Kf/UkZK8sbMIMt+vUpsqC4+om/tcCXdfXQb7b72/iebhq0HKZPX2s/Zm2mvDh9awLVaH4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by PAWPR10MB8187.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:391::10)
+ bh=rmTi/PrsyFJJHonBo6k2SzeL12cCCuGoUdEddsewsH0=;
+ b=FoeszvtQYYjZNuauC0fJeWC6LntoEDjC+hJyBHeh5drMcScFOXz1MKvYnSouHVXPkvrVCzH/ezlkyAts9CWnL2f0PsTPIMJOQ5EeGQPRZTIJtxxjfvveB3w/6LZ9e7e81zqJ+SFzqLHyok9po0e+lTa3B4Fyt4eN8JtfZoGo+eA=
+Received: from BL1PR13CA0087.namprd13.prod.outlook.com (2603:10b6:208:2b8::32)
+ by CH3PR12MB7643.namprd12.prod.outlook.com (2603:10b6:610:152::19)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.21; Fri, 15 Sep
- 2023 13:47:37 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6768.029; Fri, 15 Sep 2023
- 13:47:36 +0000
-Message-ID: <bb43c4d4-8d01-49a7-76b1-2f1a3c78918f@prevas.dk>
-Date: Fri, 15 Sep 2023 15:47:34 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: USB: error messages on DWC3 gadget endpoint dequeue
-Content-Language: en-US, da
-To: =?UTF-8?Q?Jo=c3=a3o_Paulo_Silva_Gon=c3=a7alves?=
- <joao.goncalves@toradex.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "marex@denx.de" <marex@denx.de>
-Cc: "lukma@denx.de" <lukma@denx.de>
-References: <6c9901297ce8cda6ec83304187582b3d658a6457.camel@toradex.com>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <6c9901297ce8cda6ec83304187582b3d658a6457.camel@toradex.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: MM0P280CA0075.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::14) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6745.23; Fri, 15 Sep
+ 2023 13:59:05 +0000
+Received: from BL02EPF0001A107.namprd05.prod.outlook.com
+ (2603:10b6:208:2b8:cafe::e7) by BL1PR13CA0087.outlook.office365.com
+ (2603:10b6:208:2b8::32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.21 via Frontend
+ Transport; Fri, 15 Sep 2023 13:59:05 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL02EPF0001A107.mail.protection.outlook.com (10.167.241.136) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6792.19 via Frontend Transport; Fri, 15 Sep 2023 13:59:04 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Sep
+ 2023 08:59:03 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>
+Subject: [PATCH] net: eth-uclass: Setup ROM source only when ROM reading passes
+Date: Fri, 15 Sep 2023 15:59:01 +0200
+Message-ID: <a4f5d4780be93819a7d3dae5915af5b3503c4f28.1694786338.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.36.1
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1520; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=HPCz43CJU+pVBj1jGHvfTRLV6LYLS7E23bu3Z8nyW+E=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlSWZOWrvfPKvtk3nanWaNgkycF70on90hXLv+wn98W7C
+ /WkCN/oiGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABN5oMUwh1d0/8ZV2ifYlT9W
+ OWo0qm1l+aWbwzC/SP6zeXn51d5bu2cxXHfm+N35e0MBAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|PAWPR10MB8187:EE_
-X-MS-Office365-Filtering-Correlation-Id: 558bb469-bd18-4a67-4bf7-08dbb5f2521b
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A107:EE_|CH3PR12MB7643:EE_
+X-MS-Office365-Filtering-Correlation-Id: 05194911-ef9d-4668-3c49-08dbb5f3ebe7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: GBRPl4LAfWZL7/dEzbM3iY5VreqojV7VngGGccH/OomVYnepvUl/ZhsR6RY2C3eFsz31gtT8wyle3onBRLNIXiAAfz1gq6H4qRGGgAPP7l7ZvhfMq8JUU87Om2Tm/0O+4bVPAtQDGy4mt7A8rjW9Ys8nh6DmmzB30c79mXMUeG3pjHdq2tiQmrFuNmfAerMpBAjf0SJLGb8Uf3HOS4Nhb/ro5UhKSBzSsHmHJE12PFpDCIUxddDPEu9EEU16yR50HInHpUhBZgg6Q9FX5bczyg+GqkduaE+wSzY12xHmWkbNgJPg9Eic4fJ9514e7BbTirq+R9R12Qht4IT3bqxYmuZ/M+bYqTrypQGjhE/aBaslTRh72wopnG8G025lf5WEWpfQoXy3CcE8e1ysKRtMrWjGe/vCcCGaNSWNJiMcHitXUXa82cUJaHL98XExpF5uU1rFv9L5k6mjCzCEg6yLOq+5bM7jdrXQQ6koA3Q60hgKdC/2sV1CfQ6tIcnzSpFdjLDY5pxHGO51CwkHfnfbjIbtEaGbaWysjuqEDlXMT/NHM3odvfUlqsnvky8cTsqZYUIkyNlH7z7vrGLagb7YlDVuBik2NIiTZeq7m+v3DfAvHy1UT+UY6e8Uk4uj0UjpIo9qMUtWMW4CHgIiw9/BgFz/UohNcrVfDTRw0JfmOU4=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(39840400004)(376002)(396003)(366004)(346002)(451199024)(186009)(1800799009)(31686004)(38350700002)(2906002)(38100700002)(66574015)(2616005)(86362001)(26005)(31696002)(15650500001)(4326008)(8936002)(44832011)(8676002)(8976002)(36756003)(5660300002)(41300700001)(316002)(66476007)(66556008)(66946007)(110136005)(83380400001)(6486002)(6512007)(6506007)(52116002)(478600001)(966005)(43740500002)(45980500001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MnNkVVhMeHBjU1VSQTk3VytmeXVrYnNxVHV4bHFOcGNhKzd1MTd2WE56MzJr?=
- =?utf-8?B?czJrV2g2QmtuVHJIT3dnTkIrK281U0NWanE3Z1RKdmdZa0pDU3VlU2hQdTQ4?=
- =?utf-8?B?M25DWE5CQkJ0L1l4Y2NaRVYybDF5MHF1dFI4REMwZi95TzRDbFBvT2R4Qkk2?=
- =?utf-8?B?QXp3SzU5K1pZdktOb2RvTEFQaDBwQlBLZGpPVktIWUlvZG1wOE5rUEtJNS9O?=
- =?utf-8?B?Z2Foc2h5Qk9uSXhUUXgyVkJhZFAweUJIK0ZRUGNnMFJoYjI2NnBBSGlpaXhE?=
- =?utf-8?B?WGVVbEJrbXQrMUdWQjd2NzhmdXA5ci8yK0lEVG12SjJJK1BYcGZkY2ppTWtj?=
- =?utf-8?B?Q1dZc3d3Z2JNY2JDSHVlZGZEVVlheGc2OFl0R0wreEU2cVc0aFNDejNRaVJK?=
- =?utf-8?B?MkVjdlR2d1dScUxwUDc0VW5zMS9LZEk0VE1vaVNpcjNkVTNpWWRkaHpYdkRZ?=
- =?utf-8?B?SzdRUHg3cC9Ga3B0MnlIWWRFUkNoWEpLdllzSXVQbDN3UzRmb3VtZjVMd24w?=
- =?utf-8?B?WkxVdjdsRzBOWEhZWXFrS1QrN3pJaVJMdzF1QzA4c3N6Zk40cm5xRjdyWGp2?=
- =?utf-8?B?M0NtVld2VFdvbzhqaEpMYUJFL3F0cGkrSWxWVWZsdmUzQWFMU3BHQkhYbUpo?=
- =?utf-8?B?T2lIbUtzeGQybEVaczJnS1I1UTJWb3ZEeGpkVG51RmRRS1lxSFNGVWd5cDJS?=
- =?utf-8?B?bzdrZVhEL3pJMEI2M1U4WmRqbHQ2cUJlSWdWTHg3Uk9GdEc1cnRFbEpZM2k1?=
- =?utf-8?B?dERKd0FnQmk2eG1zV3dPQ0xIT0Y5UE4zK3hQd05nNXBZaVNRcFVUMWNCSEx2?=
- =?utf-8?B?NmJkQ1FzR0hPc25lT0pFaWRDNEpWYjdvRDVpV3pGR2NZMEFadmF2TVFDNkYz?=
- =?utf-8?B?Tzg1MlVucUFYM3hWTmlpSWhwWGRSRjBpSDJkemdBUHJkTDhseVJEN0hPclFw?=
- =?utf-8?B?YU1laGpFYkM3emphMWx6Nmc0WFc1c3IxZVRKZG1ocmEwTkNLN0pFdkc2NjFO?=
- =?utf-8?B?WFdSNU9OUzBBT3I1SGZLL2dkcXl1N3FBL1BjSUg2QlFzbk1wQmhmdzhjSmUx?=
- =?utf-8?B?c25KZXdyRER4cnIxYmdGT3M0NW9aNGFIdC9kYjZUUURqNG1MWkpYekRTbjBs?=
- =?utf-8?B?R29CZmNQZFd1MHhkU1IxVDNidzdNaUdNbVNud2VLdjFwU3RQRXdCQnFuUlRF?=
- =?utf-8?B?aXRnQW1GeVRYUGZ6Uy85d1hPSWJLTkpRdjJqRVRoc1p2RkMrQllDWDdxNDU0?=
- =?utf-8?B?NTdROGVwMGhENFdiSnFUOU9xeGsxRTJtWEZObE5tTUN4d1lqU3grWW9rcmk2?=
- =?utf-8?B?NnRTMlQ3czBGb29IRmM2SFVOTHBSQ1U3cmVRcG5UZmdDWUIvL3BrdURvT2VF?=
- =?utf-8?B?WUJtVHp6ZGNIU1dGS2ZRL3Z0Y1hzMnFpZmFJdUNFdjFBNC91WjBXL2xudjhw?=
- =?utf-8?B?MlNRNEhoTXZiTUIvTDRpU3B5eGRVMEtYU0xsc29PZkJkVXo1MGw2VlpZOEZJ?=
- =?utf-8?B?Q3NGK1NvT2tWYWR6VVBXb05UbGJnb0czVCtEZVVhVXFDTGQ5TFMzYUpBbGpz?=
- =?utf-8?B?VXh0M2Y3Zy9hWnovNEtZWXVyL1RzczhUTDU3VjdYamxlQTgxL0VLK0xpV2pZ?=
- =?utf-8?B?YWZBakRERXpleWl1V2dqV1YzZ21ZaE56ZkJ6M2ZYNC8rYzVzVjJ6QjFTSXMz?=
- =?utf-8?B?RFNQYUpBeGI3Mi9xUC9Xb1pGWHl3alNDaG1tZ3B5YU5lclhYRzZyRXNlZmZ3?=
- =?utf-8?B?cGhGaGFTZ2l0YmRUUWh5QW5ZejdtRVlnMHJWUFgxK3NjeStVNGRLZGtjYjJI?=
- =?utf-8?B?Ty9xYlphRTdXaytoT090N3p0OERlZElSUlBWZzdCYitIWGo1bytVRTVyaVF6?=
- =?utf-8?B?S2dPTFRZRHc4UlpnZi91R0UrN0xmZlRzaEF4eWxPR0pTMWM3RUUxY0E5Rlhj?=
- =?utf-8?B?MjJUS21zWnBxbFdoRnJiTnNjSVA4RWNncjVCWm1tMkVGZUNxUVpFTHhHWWxM?=
- =?utf-8?B?SVpZYk1YckR2OGYxVHU3YmhDQ3MrQWN5OGYyWUdhVDZjYzhyMVNhUVVNTHFE?=
- =?utf-8?B?bU53UG9ZK1JCWWN6dnpwMkdVUjE0Q2FycjlXQ2lpaGtwcGRBY1loSjlCNFlX?=
- =?utf-8?B?TkN0SWtJQWpqQklobWR5eExncWlVWHZlRHRobmpaeDFTdFAyT3lsZWJyd1d2?=
- =?utf-8?B?UEE9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 558bb469-bd18-4a67-4bf7-08dbb5f2521b
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 13:47:36.8594 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: SC18o3YImc/fxEs8JH1M2UpjqA57D94iOZpV2oZ6jXkJHLoh1tAoaieONClQvjkgy6lMn4r9zNBtG2lkILAsc0Pg43S6Sg1dnyMLtvSZUXY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR10MB8187
+X-Microsoft-Antispam-Message-Info: 7qWS1xgcdWKQTosT0MRPaWlKkjbhe4lsL6qq3KySbDFxjNSpp5I/w0/uOEV+12Mn0vN7AbZO9FElVl8WVa8HX/hNdOjFEAPbRHMHbBqbCkr6qnjDFutVuTvxdxJWDZZKriu/AmVUt2/EFWW5aPeMe89yNUhMdYfCEijLpM6aD4D/IE5lgtQnIA2jxvvhSomKCKHlYeUqI/zin2jT6L1AYu0NS5LELthX2F1X4SEUOlHyIy7Q9HoLysdSpqxg58Bs8k1ATmKiGewvC7T7BYD8Lz8etoULA7otWiN2ubJ3atrdSMl1LU/6HyJJb8gXw7zb4YzXQfHRmg8QngaQyUpFfMNC5eo1Xt7pUO3jFkren9Uj/cs7YHeeH+Xgzm4GFm0u9jphExiHHrhWKuI2KCc9A+xBbBmRKJDC26blWvC/2ITC0LwheYIvXTrVIyfpRYa4lJ60zDLg7LzCCJGd64FiAQbC9eoLnNBUU1BDG1PetirMjwT5PZOqWJVKkZBWhtWdyet5RFkSuq6OL1mO17U3l9VDVXsEDpOX28Nezn3+boG381vVgVHA/ZQF8yGb9vgRk2+94//g08+tpSK/gRXRbkI7bW5tqewtBYqNiH9qoyVvpMFJQ8g1z8SUVoD+NIVEy4UAqDZCkRItpnGzSCxYoFWDsCjrtX/SIsdSs3BLeSO5o/qMzKFo47Uq0V8oR2wXeH/un06JOuUyemlX4s0LvPVOwrKs5FebCoCLaFMTZaosohZcq0/nTw5GkR0kJQhp/ogRE0KwDbi6wzUG1Xk7/Q==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(136003)(376002)(396003)(346002)(82310400011)(1800799009)(186009)(451199024)(46966006)(40470700004)(36840700001)(41300700001)(8936002)(47076005)(8676002)(83380400001)(5660300002)(336012)(36860700001)(316002)(26005)(478600001)(70206006)(54906003)(70586007)(110136005)(16526019)(426003)(2616005)(40460700003)(81166007)(36756003)(356005)(4326008)(82740400003)(86362001)(2906002)(44832011)(40480700001)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 13:59:04.2068 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 05194911-ef9d-4668-3c49-08dbb5f3ebe7
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A107.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7643
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,53 +125,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 15/09/2023 15.05, João Paulo Silva Gonçalves wrote:
-> Hi Marek,
-> 
-> I was testing fastboot image download over usb for imx8mp (from usb
-> recovery patch of verdin-imx8mp) and i am having error messages on
-> endpoint request dequeue function of DWC3 gadget controller. However,
-> download is working fine, so this message may not be an error. They are
-> happening because fastboot tx before sending a new usb request dequeue
-> the same request, maybe to be sure it does not send it twice. Can I
-> just ignore these messages? Maybe change its log level to dbg instead
-> of error? What do you think? The messages I am seeing are below and are
-> the ones with "... was not queued to ep1in-bulk". 
+There is no reason to setup ROM source if read_rom_hwaddr hook doesn't
+exist or reading mac address fails. It is ending up with confusion about
+mac address source.
 
-We apply this internally (sorry if it's whitespace damaged), but I never
-fully understood the problem nor how the referenced kernel thread was
-resolved, which is why I haven't sent it upstream yet.
+It is nicely visible if you put mac address to DT as
+local-mac-address = [ff ff ff ff ff ff];
+but also save ethaddr to variables
+setenv -f ethaddr 02:18:31:7e:3e:01
 
-    dwc3: gadget: Handle dequeuing of non queued request gracefully
+Before this patch U-Boot prints that source is DT
+Address in ROM is		ff:ff:ff:ff:ff:ff
+Address in environment is	02:18:31:7e:3e:01
 
-    Trying to dequeue an request that is currently not queued should be
-a no-op
-    and be handled gracefully.
+After that source is DT:
+Address in DT is		ff:ff:ff:ff:ff:ff
+Address in environment is	02:18:31:7e:3e:01
 
-    Checking on list/queue empty indicate whether the request is queue
-or not.
-    Handling this gracefully allows for race condition free synchronization
-    between the complete callback being called to to a completed
-transfer and
-    trying to call usb_ep_dequeue() at the same time.
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-    Inspired by:
-https://patchwork.kernel.org/project/linux-usb/patch/20191106144553.16956-1-alexandru.ardelean@analog.com/
+ net/eth-uclass.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index eb416b832aa..378d19d8e99 100644
---- a/drivers/usb/dwc3/gadget.c
-+++ b/drivers/usb/dwc3/gadget.c
-@@ -1113,6 +1113,9 @@ static int dwc3_gadget_ep_dequeue(struct usb_ep *ep,
-
-        spin_lock_irqsave(&dwc->lock, flags);
-
-+       if (list_empty(&dep->request_list) && list_empty(&dep->req_queued))
-+               goto out0;
+diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+index c393600fabcd..e40b869e1c31 100644
+--- a/net/eth-uclass.c
++++ b/net/eth-uclass.c
+@@ -588,10 +588,14 @@ static int eth_post_probe(struct udevice *dev)
+ 	/* Check if the device has a valid MAC address in device tree */
+ 	if (!eth_dev_get_mac_address(dev, pdata->enetaddr) ||
+ 	    !is_valid_ethaddr(pdata->enetaddr)) {
+-		source = "ROM";
+ 		/* Check if the device has a MAC address in ROM */
+-		if (eth_get_ops(dev)->read_rom_hwaddr)
+-			eth_get_ops(dev)->read_rom_hwaddr(dev);
++		if (eth_get_ops(dev)->read_rom_hwaddr) {
++			int ret;
 +
-        list_for_each_entry(r, &dep->request_list, list) {
-                if (r == req)
-                        break;
-
-Rasmus
++			ret = eth_get_ops(dev)->read_rom_hwaddr(dev);
++			if (!ret)
++				source = "ROM";
++		}
+ 	}
+ 
+ 	eth_env_get_enetaddr_by_index("eth", dev_seq(dev), env_enetaddr);
+-- 
+2.36.1
 
