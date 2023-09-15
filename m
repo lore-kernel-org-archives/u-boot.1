@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C81D9EE0205
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 02:39:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 031D6EE021A
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 04:15:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B79DB864EE;
-	Fri, 15 Sep 2023 04:39:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C3D4286828;
+	Fri, 15 Sep 2023 06:15:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Mzq1Hr55";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cz/ljcP/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9B39865D0; Fri, 15 Sep 2023 04:39:45 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4843B86852; Fri, 15 Sep 2023 06:15:45 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 916E386489
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 04:39:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E960867C7
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 06:15:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1694745581; x=1695350381; i=xypron.glpk@gmx.de;
- bh=mGukCXali2EsMxU3JX6vgRAbDw9AyKZqTp+4q7Kjzqs=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
- b=Mzq1Hr55jqQeW2RrQmDLfcW9wqR/DmkS9cUa+Mu6XEwgHk7tWyc3uILDt7Oy+eTKVoIxl4qBpaX
- aBcR3vR7+TwNasMeEcjaVKc1uPCeKmH1iMuwn+2nVGU1WAQhZcqTTVTK9T80I1ycLorSfM9xB9oWi
- efOBuviK5nycJemSK3q079VxegbLxlywpyIRM0rM+3pbIuSunqCB09HoVFyq9ztlhpu7fZtQi9fvX
- GSTxzP+Nv3Gel7rE3JWfH1E9OS2MIcK84Ii1XhX2mqSxVP/usLZVl9VuYBk4g8/sp3uCAzxwBMc4W
- kieZbcUvr9I25IEgWJKKfajmDsHM586hBgQQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MrQJ5-1rTZ6J3hTT-00oVfG; Fri, 15
- Sep 2023 04:39:41 +0200
-Date: Fri, 15 Sep 2023 04:39:39 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Masahiro Yamada <masahiroy@kernel.org>
-Subject: Re: [PATCH v2 27/27] qconfig: Update the documentation
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20230915002236.798760-28-sjg@chromium.org>
-References: <20230915002236.798760-1-sjg@chromium.org>
- <20230915002236.798760-28-sjg@chromium.org>
-Message-ID: <EAEB2C14-4192-47FC-8AB8-E3CF15987361@gmx.de>
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-68fcb4dc8a9so1611176b3a.2
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 21:15:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1694751340; x=1695356140; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qPsBCbGPxADQFHGGubus0vL72Q/ibTI9+fZYJtg7xNw=;
+ b=cz/ljcP/tRhkgzGSLkQMSDlBgMe50do75/K+8oNfS/ff2xcO2enEpw8zZDCmX0AJUu
+ /pB4RlcH+QzaTk3lKKwVI2ZbwpGIj6Dtsg6Zw0iXvX91Mxv1OJQQf2UvI0I3sP8q2NTl
+ MQInFx5vCG6bkWOU0r/FOxmVD6QEliKwPmbIaDg5hMw8ugayh9HsH26pXu5wluiHAAyJ
+ xjU8QEZ6lJNlRqEbcizx4qPj6IDoo4ohXSKJDuAhX1d+8DTOZ5+Qs5UFDb/3HM40M6Y4
+ d1IeHeCzMBBIkncldff6rxrnXNRvn937mUsuBGTWVypKFp8RbHko6jNFaNsevG0hBlD0
+ c/ZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694751340; x=1695356140;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qPsBCbGPxADQFHGGubus0vL72Q/ibTI9+fZYJtg7xNw=;
+ b=afL2XRnxbcBASl7ixfXHuKgR8Y/OwQE77plnHOy43IZIPmXu8S8J7fDlYAl4M95/lx
+ 8gxPbflILjdEcOe5+jWxarNXhUtidHh0w7yHFaEINS4OKoNJVQe6FBK+KmdlE1TK92Dw
+ nvHMG4X1QXuljiYb6kbJ4ijJvslXadyjgATJ8jY+FsshWQz/l7XLRxeUqrEQwly843A7
+ NMmWuBCeUARyH35vX6tK3LMuNE2YgkW+uFvTRPJBjDw9+DkQ6u8vFpUGSyTfFYj6CLvG
+ iQezST6gwZ7s9mHGXxdchvyVw7Og7COaGECRqjINpbxWwpRKXB6zCwt8qtfl9f0o6V6v
+ 5srQ==
+X-Gm-Message-State: AOJu0YxKS1MCOsZWUmqz8SPbWX3BouKpG40GM0mYq2uaDNaKeUBSWrfM
+ Z0csgYSZ+dUtnbmEsU/L7o75AHi65Rj0M4Od1AzBVQ==
+X-Google-Smtp-Source: AGHT+IHSS7XLNA4SvUS2c2hnNmzhFmLtlaNkxfW+OWt/XAP/JaFl55q7zLG/Ik6j9Uw/kwDl3zjCLygGHOO4eUh+65s=
+X-Received: by 2002:a05:6a21:3299:b0:159:f39a:54e1 with SMTP id
+ yt25-20020a056a21329900b00159f39a54e1mr782139pzb.51.1694751340538; Thu, 14
+ Sep 2023 21:15:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:/1kPCqylpLWYQ41kY+dW/Au++mZZOMvip+AhReRxMVu3fIrB6W2
- 1kgAc6dy32EzEYFYDsDcBNVA+gW4k/wG4kW9o5oNlQHVoh587Zci3aujHKlm3eDGke+ChyU
- dmRSGfRknhw5GsrUbStzU7xgZGwlJjNxGodbFRpVYag3AwmYlN9q1z1Z3TzWgNG5fDXQypm
- DKl/MV3owHPw6Up7HiV2Q==
-UI-OutboundReport: notjunk:1;M01:P0:eOS5AGuud/E=;qMSZ0SXUwju+ZhO0Zi52ZgfVFkj
- 2r6MF6oY3Ev11wyhbkGkySK59eF0M+3hLPcbjp/nAZwq01TQH+pCkDG+/PBP+o0pb9tm7Z4S5
- OpQJu3PQESXlT3Lv0FLOpbxKvRCPvAwJLhP31JWjJU9jVCjEa9ksHll2ZtBkEOBOGzbqKoLv3
- ju6wfn2GItSiU4vKS465GlKIqJ8SxlHzc4M0xDh28P7KVm4DitX8n8hEtK4f6xqH7BOcJ/Yob
- RNEeVxm5Nl35GkP0B+/ZuM2G5I9A019FSsNGMrCdQyoCmhAhajdKA2HbOoi9ImE4DRT43Anrz
- j/7/gVL7dJ559uQKQh5gw09YkMWrCXqc9tRX/m1XFZdbrAsKTvgs+WSIIE/GjS8kvVe0x+qIs
- qLY8lseUUHJowyxDoJDYz87pWwmSZoycRtb8KSELQAuGn2D9j0Sjcu4mE0ApcWsj4AyIeP8Si
- TS4t+o5XSTAQcCUafKB3lT7NlohulCgUF4xLvSDX/s6FLFJwgd25tFfJ56OEYUE5j3iPv+t6H
- f6MgySwqJYjf0AxahhU//zOtYGIQvIm46T36EfQ1nLezdZGPXgtLO67gC4tzoiV81vkQep4Hw
- pM4+ZL6iu5VI2yf028l1pMb6F5VEGvVU7JOW0UflG/eClAMM6+vCWbi52/as2YUiHIX8IZFBe
- 1n2AWgxQK0itycmrQUP2/TQBMoPRa7h0F3lXxwTMVkj3T0b8qGJ5FgnJ6ZW4pD9NEE5Emxbf3
- YVpZapiIi9SWI7Np/j2J9gr64ZnrxREeaL+Lu2TaP/iSLiKTiwBnqTT0MpPCUo+URFhWqf6U8
- RgFIc4IlQ+n0lvnKoHhGaCtCC8icqHYUxhOq9h9+/11gdmhafR7N1u6jrE6rkhbt09nUOcHXi
- 5Vqnh/j+yiEJUZ7mulUc2OCyd/G/Xg+d/CqicARRgjC0eLSyX1g7uJKBtLO2z92PTsSFiWr+B
- qLBf+dP8aLlfrHYa5O2GNjUnYZU=
+References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
+ <20230901102542.609239-5-masahisa.kojima@linaro.org> <ZQMRB9allzBqrFGX@hera>
+In-Reply-To: <ZQMRB9allzBqrFGX@hera>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Fri, 15 Sep 2023 13:15:29 +0900
+Message-ID: <CADQ0-X9mDQbRRatGsKuJNYUGVRC8K-N96HAHXuxpR_wMG=HHAA@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] efi_loader: support boot from URI device path
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,386 +86,282 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Ilias,
 
-
-Am 15=2E September 2023 02:22:29 MESZ schrieb Simon Glass <sjg@chromium=2E=
-org>:
->Update qconfig's documentation to better reflect its new purpose in life=
-=2E
+On Thu, 14 Sept 2023 at 22:56, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->---
+> Kojima-san
 >
->Changes in v2:
->- Reinstate the -C option
+> On Fri, Sep 01, 2023 at 07:25:40PM +0900, Masahisa Kojima wrote:
+> > This supports to boot from the URI device path.
+> > When user selects the URI device path, bootmgr downloads
+> > the file using wget into the address specified by loadaddr
+> > env variable.
+> > If the file is .iso or .img file, mount the image with blkmap
+> > then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> > If the file is .efi file, load and start the downloaded file.
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> >  lib/efi_loader/efi_bootmgr.c | 197 +++++++++++++++++++++++++++++++++++
+> >  1 file changed, 197 insertions(+)
+> >
+> > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> > index a40762c74c..0e8d2ca9d1 100644
+> > --- a/lib/efi_loader/efi_bootmgr.c
+> > +++ b/lib/efi_loader/efi_bootmgr.c
+> > @@ -7,10 +7,14 @@
+> >
+> >  #define LOG_CATEGORY LOGC_EFI
+> >
+> > +#include <blk.h>
+> > +#include <blkmap.h>
+> >  #include <common.h>
+> >  #include <charset.h>
+> > +#include <dm.h>
+> >  #include <log.h>
+> >  #include <malloc.h>
+> > +#include <net.h>
+> >  #include <efi_default_filename.h>
+> >  #include <efi_loader.h>
+> >  #include <efi_variable.h>
+> > @@ -168,6 +172,193 @@ out:
+> >       return ret;
+> >  }
+> >
+> > +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
+> > +/**
+> > + * mount_image() - mount the image with blkmap
+> > + *
+> > + * @lo_label u16 label string of load option
+> > + * @image_addr:      image address
+> > + * @image_size       image size
+> > + * Return:   pointer to the UCLASS_BLK udevice, NULL if failed
+> > + */
+> > +static struct udevice *mount_image(u16 *lo_label, ulong image_addr, int image_size)
+> > +{
+> > +     int err;
+> > +     struct blkmap *bm;
+> > +     struct udevice *bm_dev;
+> > +     char *label = NULL, *p;
+> > +
+> > +     label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
+> > +     if (!label)
+> > +             return NULL;
+> > +
+> > +     p = label;
+> > +     utf16_utf8_strcpy(&p, lo_label);
+> > +     err = blkmap_create_ramdisk(label, image_addr, image_size, &bm_dev);
+> > +     if (err) {
+> > +             efi_free_pool(label);
+> > +             return NULL;
+> > +     }
+> > +     bm = dev_get_plat(bm_dev);
+> > +
+> > +     efi_free_pool(label);
+> > +
+> > +     return bm->blk;
+> > +}
+> > +
+> > +/**
+> > + * try_load_default_file() - try to load the default file
+> > + *
+> > + * Search the device having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
+> > + * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> > + *
+> > + * @dev                      pointer to the UCLASS_BLK or UCLASS_PARTITION udevice
+> > + * @image_handle:    pointer to handle for newly installed image
+> > + * Return:           status code
+> > + */
+> > +static efi_status_t try_load_default_file(struct udevice *dev,
+> > +                                       efi_handle_t *image_handle)
+> > +{
+> > +     efi_status_t ret;
+> > +     efi_handle_t bm_handle;
+> > +     struct efi_handler *handler;
+> > +     struct efi_device_path *file_path;
+> > +     struct efi_device_path *device_path;
+> > +
+> > +     if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&bm_handle)) {
+> > +             log_warning("DM_TAG_EFI not found\n");
+> > +             return EFI_INVALID_PARAMETER;
+> > +     }
+> > +
+> > +     ret = efi_search_protocol(bm_handle,
+> > +                               &efi_simple_file_system_protocol_guid, &handler);
+> > +     if (ret != EFI_SUCCESS)
+> > +             return ret;
+> > +
+> > +     ret = efi_search_protocol(bm_handle, &efi_guid_device_path, &handler);
+> > +     if (ret != EFI_SUCCESS)
+> > +             return ret;
+> > +
+> > +     ret = efi_protocol_open(handler, (void **)&device_path, efi_root, NULL,
+> > +                             EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> > +     if (ret != EFI_SUCCESS)
+> > +             return ret;
+> > +
+> > +     file_path = expand_media_path(device_path);
+> > +     ret = EFI_CALL(efi_load_image(true, efi_root, file_path, NULL, 0,
+> > +                                   image_handle));
+> > +
+> > +     efi_free_pool(file_path);
+> > +
+> > +     return ret;
+> > +}
 >
-> doc/develop/index=2Erst                       |   2 +-
-> doc/develop/{moveconfig=2Erst =3D> qconfig=2Erst} | 144 +++++-----------=
-----
-> 2 files changed, 38 insertions(+), 108 deletions(-)
-> rename doc/develop/{moveconfig=2Erst =3D> qconfig=2Erst} (61%)
+> We need to decide what we want here.  There were recently some patches from
+> Raymond [0] which piggybacked on your earlier eficonfig work.  I think the
+> last patch of this series hasn't been merged due to a test failing, but we
+> should fix it.
+> That patch has a different approach.  Everytime a disk appears it will add
+> a boot option if the default filepath is found and that's how we fixed the
+
+efi_bootmgr_update_media_device_boot_option() automatically adds the
+boot option if the device handle installed EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
+but it does not check whether the default file path is found or not.
+When the user selects the automatically created boot option,
+expand_media_path()
+is called and efibootmgr tries to boot with the default file.
+
+> behaviour of efibootmgr to adhere to the EFI spec.  This patch is doing the
+> opposite, trying to detect the BOOTAA64.EFI etc on the fly.  I think I
+> prefer the approach you have here, but we should end up with one solution
+> to solve both.
+
+This HTTP Boot case is slightly different from the case where the user selects
+the automatically added boot option.
+In this case, user selects the URI device path boot option. The
+efibootmgr downloads the
+file, mount the image, and try to boot with the default file name on the fly.
+When the patch[0] is merged, it is possible to boot the downloaded iso
+image from the
+automatically added "blkmap" boot option, but I think efibootmgr needs
+to boot with
+the URI device path user selected that this series does, not boot
+from the "blkmap" boot option.
+
 >
->diff --git a/doc/develop/index=2Erst b/doc/develop/index=2Erst
->index 0d12484ace8a=2E=2E003cdfccf112 100644
->--- a/doc/develop/index=2Erst
->+++ b/doc/develop/index=2Erst
->@@ -88,7 +88,7 @@ Refactoring
->=20
->    checkpatch
->    coccinelle
->-   moveconfig
->+   qconfig
->=20
-> Code quality
-> ------------
->diff --git a/doc/develop/moveconfig=2Erst b/doc/develop/qconfig=2Erst
->similarity index 61%
->rename from doc/develop/moveconfig=2Erst
->rename to doc/develop/qconfig=2Erst
->index ad8596e6c61a=2E=2E111e2b2545d9 100644
->--- a/doc/develop/moveconfig=2Erst
->+++ b/doc/develop/qconfig=2Erst
->@@ -1,100 +1,37 @@
-> =2E=2E SPDX-License-Identifier: GPL-2=2E0+
->=20
->-moveconfig - Migrating and querying CONFIG options
->-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
->+qconfig - Querying CONFIG options
->+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
->-Since Kconfig was introduced to U-Boot, we have worked on moving
->-config options from headers to Kconfig (defconfig)=2E
->+It is not possible to see all the CONFIG options used by a board without
->+building its `=2Econfig` file=2E This tool allowing this to be done effi=
-ciently for
+> > +
+> > +/**
+> > + * load_default_file_from_blk_dev() - load the default file
+> > + *
+> > + * @blk              pointer to the UCLASS_BLK udevice
+> > + * @handle:  pointer to handle for newly installed image
+> > + * Return:   status code
+> > + */
+> > +static efi_status_t load_default_file_from_blk_dev(struct udevice *blk,
+> > +                                                efi_handle_t *handle)
+> > +{
+> > +     efi_status_t ret;
+> > +     struct udevice *partition;
+> > +
+> > +     /* image that has no partition table but a file system */
+> > +     ret = try_load_default_file(blk, handle);
+> > +     if (ret == EFI_SUCCESS)
+> > +             return ret;
+> > +
+> > +     /* try the partitions */
+> > +     device_foreach_child(partition, blk) {
+> > +             enum uclass_id id;
+> > +
+> > +             id = device_get_uclass_id(partition);
+> > +             if (id != UCLASS_PARTITION)
+> > +                     continue;
+> > +
+> > +             ret = try_load_default_file(partition, handle);
+> > +             if (ret == EFI_SUCCESS)
+> > +                     return ret;
+> > +     }
+> > +
+> > +     return EFI_NOT_FOUND;
+> > +}
+> > +
+> > +/**
+> > + * try_load_from_uri_path() - Handle the URI device path
+> > + *
+> > + * @uridp:   uri device path
+> > + * @lo_label label of load option
+> > + * @handle:  pointer to handle for newly installed image
+> > + * Return:   status code
+> > + */
+> > +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+> > +                                        u16 *lo_label,
+> > +                                        efi_handle_t *handle)
+> > +{
+> > +     char *s;
+> > +     int uri_len;
+> > +     int image_size;
+> > +     efi_status_t ret;
+> > +     ulong image_addr;
+> > +
+> > +     s = env_get("loadaddr");
+> > +     if (!s) {
+> > +             log_err("Error: loadaddr is not set\n");
+> > +             return EFI_INVALID_PARAMETER;
+> > +     }
+> > +     image_addr = hextoul(s, NULL);
+> > +     image_size = wget_with_dns(image_addr, uridp->uri);
+> > +     if (image_size < 0)
+> > +             return EFI_INVALID_PARAMETER;
+> > +
+> > +     /*
+> > +      * If the file extension is ".iso" or ".img", mount it and try to load
+> > +      * the default file.
+>
+> Don't we have a better way to validate isos and efi apps instead of
+> the extension?  The efi is checked against a valid PE/COFF image so I guess
+> we'll really on the mount to fail for isos?
 
-%s/allowing/allows/
+EDK2 reference implementation checks the file type with the following priority.
+ 1) "Content-Type" header in HTTP response message
+ 2) Filename Extensions
+Documentation is here[1].
 
+Since "Content-Type" is not available in the current U-Boot wget, file extension
+is used to identify ISO images.
 
->+all boards, or a subset, writing the results to a unified database file=
-=2E
->=20
->-This tool intends to help this tremendous work=2E
->+This database can be queried, to find boards which used a certain combin=
-ation
->+of options, to aid in discovering Kconfig options which imply others=2E
->+
->+The tool also permits syncing of defconfigs, which corrects the ordering=
- and
+[1] https://github.com/tianocore/tianocore.github.io/wiki/HTTP-Boot#ram-disk-boot-from-http
 
-%s/syncing/synchronizing/
-
-
->+drops options which are implied by others=2E
->+
->+Finally, it allow scanning the source code to look for inconsistencies i=
-n the
-
-%s/allow/allows/
-
-
->+use of Kconfig options=2E
->=20
-> Installing
-> ----------
-
-
-%s/Installing/Installation/
-
->=20
-> You may need to install 'python3-asteval' for the 'asteval' module=2E
->=20
->-Usage
->------
->-
->-First, you must edit the Kconfig to add the menu entries for the configs
->-you are moving=2E
->-
->-Then run this tool giving CONFIG names you want to move=2E
->-For example, if you want to move CONFIG_CMD_USB and CONFIG_TEXT_BASE,
->-simply type as follows::
->-
->-  $ tools/moveconfig=2Epy CONFIG_CMD_USB CONFIG_TEXT_BASE
->-
->-The tool walks through all the defconfig files and move the given CONFIG=
-s=2E
->-
->-The log is also displayed on the terminal=2E
->-
->-The log is printed for each defconfig as follows::
->-
->-  <defconfig_name>
->-     <action1>
->-     <action2>
->-     <action3>
->-     =2E=2E=2E
->-
->-`<defconfig_name>` is the name of the defconfig=2E
->-
->-`<action*>` shows what the tool did for that defconfig=2E
->-It looks like one of the following:
->-
->- - Move 'CONFIG\_=2E=2E=2E '
->-   This config option was moved to the defconfig
->-
->- - CONFIG\_=2E=2E=2E is not defined in Kconfig=2E  Do nothing=2E
->-   The entry for this CONFIG was not found in Kconfig=2E  The option is =
-not
->-   defined in the config header, either=2E  So, this case can be just sk=
-ipped=2E
->-
->- - CONFIG\_=2E=2E=2E is not defined in Kconfig (suspicious)=2E  Do nothi=
-ng=2E
->-   This option is defined in the config header, but its entry was not fo=
-und
->-   in Kconfig=2E
->-   There are two common cases:
->-
->-     - You forgot to create an entry for the CONFIG before running
->-       this tool, or made a typo in a CONFIG passed to this tool=2E
->-     - The entry was hidden due to unmet 'depends on'=2E
->-
->-   The tool does not know if the result is reasonable, so please check i=
-t
->-   manually=2E
->-
->- - 'CONFIG\_=2E=2E=2E' is the same as the define in Kconfig=2E  Do nothi=
-ng=2E
->-   The define in the config header matched the one in Kconfig=2E
->-   We do not need to touch it=2E
->-
->- - Compiler is missing=2E  Do nothing=2E
->-   The compiler specified for this architecture was not found
->-   in your PATH environment=2E
->-   (If -e option is passed, the tool exits immediately=2E)
->-
->- - Failed to process=2E
->-   An error occurred during processing this defconfig=2E  Skipped=2E
->-   (If -e option is passed, the tool exits immediately on error=2E)
->-
->-Finally, you will be asked, Clean up headers? [y/n]:
->-
->-If you say 'y' here, the unnecessary config defines are removed
->-from the config headers (include/configs/\*=2Eh)=2E
->-It just uses the regex method, so you should not rely on it=2E
->-Just in case, please do 'git diff' to see what happened=2E
->-
->-
-> How does it work?
-> -----------------
->=20
->-This tool runs configuration and builds include/autoconf=2Emk for every
->-defconfig=2E  The config options defined in Kconfig appear in the =2Econ=
-fig
->-file (unless they are hidden because of unmet dependency=2E)
->+When building a database (`-b`), this tool runs configuration and builds
->+include/autoconf=2Emk for every defconfig=2E  The config options defined=
- in Kconfig
-
-How about *=2Econfig fragments?
-
->+appear in the =2Econfig file (unless they are hidden because of unmet de=
-pendency=2E)
-> On the other hand, the config options defined by board headers are seen
->-in include/autoconf=2Emk=2E  The tool looks for the specified options in=
- both
->-of them to decide the appropriate action for the options=2E  If the give=
-n
->-config option is found in the =2Econfig, but its value does not match th=
-e
->-one from the board header, the config option in the =2Econfig is replace=
-d
->-with the define in the board header=2E  Then, the =2Econfig is synced by
->-"make savedefconfig" and the defconfig is updated with it=2E
->+in include/autoconf=2Emk=2E
->+
->+When resyncing defconfigs (`-s`) the =2Econfig is synced by "make savede=
-fconfig"
-
-%s/resyncing/resynchronizing/
-
->+and the defconfig is updated with it=2E
->=20
-> For faster processing, this tool handles multi-threading=2E  It creates
-
-%s/handles multi-threading/uses parallelization/
-
-> separate build directories where the out-of-tree build is run=2E  The
->@@ -109,7 +46,7 @@ Toolchains
-> Appropriate toolchain are necessary to generate include/autoconf=2Emk
-
-%s/toolchain/toolchains/
-
-> for all the architectures supported by U-Boot=2E  Most of them are avail=
-able
-> at the kernel=2Eorg site, some are not provided by kernel=2Eorg=2E This =
-tool uses
-
-That 'some are not =2E=2E=2E' clause is superfluous=2E
+Thanks,
+Masahisa Kojima
 
 
->-the same tools as buildman, so see that tool for setup (e=2Eg=2E --fetch=
--arch)=2E
->+the same tools as buildman, so see that tool for setup (e=2Eg=2E `--fetc=
-h-arch`)=2E
-
-Are you really referring to other tools than buildman itself? Which tools?
-
-Please, provide a link to the buildman documentation and provide an exampl=
-e here=2E
-
-
->=20
->=20
-> Tips and trips
-
-Do you mean 'Examples'?
-
-Best regards
-
-Heinrich
-
-
->@@ -117,32 +54,32 @@ Tips and trips
->=20
-> To sync only X86 defconfigs::
->=20
->-   =2E/tools/moveconfig=2Epy -s -d <(grep -l X86 configs/*)
->+   =2E/tools/qconfig=2Epy -s -d <(grep -l X86 configs/*)
->=20
-> or::
->=20
->-   grep -l X86 configs/* | =2E/tools/moveconfig=2Epy -s -d -
->+   grep -l X86 configs/* | =2E/tools/qconfig=2Epy -s -d -
->=20
-> To process CONFIG_CMD_FPGAD only for a subset of configs based on path m=
-atch::
->=20
->    ls configs/{hrcon*,iocon*,strider*} | \
->-       =2E/tools/moveconfig=2Epy -Cy CONFIG_CMD_FPGAD -d -
->+       =2E/tools/qconfig=2Epy -C CONFIG_CMD_FPGAD -d -
->=20
->=20
-> Finding boards with particular CONFIG combinations
-> --------------------------------------------------
->=20
->-You can use `moveconfig=2Epy` to figure out which boards have a CONFIG e=
-nabled, or
->+You can use `qconfig=2Epy` to figure out which boards have a CONFIG enab=
-led, or
-> which do not=2E To use it, first build a database::
->=20
->-    =2E/tools/moveconfig=2Epy -b
->+    =2E/tools/qconfig=2Epy -b
->=20
-> Then you can run queries using the `-f` flag followed by a list of CONFI=
-G terms=2E
-> Each term is CONFIG name, with or without a tilde (~) prefix=2E The tool=
- searches
-> for boards which match the CONFIG name, or do not match if tilde is used=
-=2E For
-> example, to find boards which enabled CONFIG_SCSI but not CONFIG_BLK::
->=20
->-    tools/moveconfig=2Epy -f SCSI ~BLK
->+    tools/qconfig=2Epy -f SCSI ~BLK
->     3 matches
->     pg_wcom_seli8_defconfig highbank_defconfig pg_wcom_expu1_defconfig
->=20
->@@ -158,11 +95,11 @@ each of the x86 defconfig files=2E
->=20
-> This tool can help find such configs=2E To use it, first build a databas=
-e::
->=20
->-    =2E/tools/moveconfig=2Epy -b
->+    =2E/tools/qconfig=2Epy -b
->=20
-> Then try to query it::
->=20
->-   =2E/tools/moveconfig=2Epy -i CONFIG_I8042_KEYB
->+   =2E/tools/qconfig=2Epy -i CONFIG_I8042_KEYB
->    CONFIG_I8042_KEYB found in 33/5155 defconfigs
->    28 : CONFIG_X86
->    28 : CONFIG_SA_PCIEX_LENGTH
->@@ -193,12 +130,12 @@ indicates that CONFIG_I8042_KEYB is not needed for =
-the remaining 5 boards=2E Many
-> of the options listed are not suitable as they are not related=2E E=2Eg=
-=2E it would be
-> odd for CONFIG_RAMBASE to imply CONFIG_I8042_KEYB=2E
->=20
->-Using this search you can reduce the size of moveconfig patches=2E
->+Using this search you can reduce the size of qconfig patches=2E
->=20
-> You can automatically add 'imply' statements in the Kconfig with the -a
-> option::
->=20
->-    =2E/tools/moveconfig=2Epy -s -i CONFIG_SCSI \
->+    =2E/tools/qconfig=2Epy -s -i CONFIG_SCSI \
->             -a CONFIG_ARCH_LS1021A,CONFIG_ARCH_LS1043A
->=20
-> This will add 'imply SCSI' to the two CONFIG options mentioned, assuming=
- that
->@@ -220,7 +157,7 @@ the size of their defconfig files=2E
->=20
-> If you want to add an 'imply' to every imply config in the list, you can=
- use::
->=20
->-    =2E/tools/moveconfig=2Epy -s -i CONFIG_SCSI -a all
->+    =2E/tools/qconfig=2Epy -s -i CONFIG_SCSI -a all
->=20
-> To control which ones are displayed, use -I <list> where list is a list =
-of
-> options (use '-I help' to see possible options and their meaning)=2E
->@@ -230,7 +167,7 @@ To skip showing you options that already have an 'imp=
-ly' attached, use -A=2E
-> When you have finished adding 'imply' options you can regenerate the
-> defconfig files for affected boards with something like::
->=20
->-    git show --stat | =2E/tools/moveconfig=2Epy -s -d -
->+    git show --stat | =2E/tools/qconfig=2Epy -s -d -
->=20
-> This will regenerate only those defconfigs changed in the current commit=
-=2E
-> If you start with (say) 100 defconfigs being changed in the commit, and =
-add
->@@ -241,9 +178,9 @@ number of defconfigs changed in the commit=2E
-> Available options
-> -----------------
->=20
->- -c, --color
->-   Surround each portion of the log with escape sequences to display it
->-   in color on the terminal=2E
->+ --nocolour
->+   Disables colouring of output=2E This is normally used when writing to=
- a
->+   terminal=2E
->=20
->  -C, --commit
->    Create a git commit with the changes when the operation is complete=
-=2E A
->@@ -275,9 +212,6 @@ Available options
->    because SPL related options (mostly prefixed with CONFIG_SPL\_) are
->    sometimes blocked by CONFIG_SPL_BUILD ifdef conditionals=2E
->=20
->- -H, --headers-only
->-   Only cleanup the headers; skip the defconfig processing
->-
->  -j, --jobs
->    Specify the number of threads to run simultaneously=2E  If not specif=
-ied,
->    the number of threads is the same as the number of CPU cores=2E
->@@ -293,10 +227,6 @@ Available options
->  -v, --verbose
->    Show any build errors as boards are built
->=20
->- -y, --yes
->-   Instead of prompting, automatically go ahead with all operations=2E T=
-his
->-   includes cleaning up headers, the config whitelist and the README=2E
->-
-> To see the complete list of supported options, run::
->=20
->-  tools/moveconfig=2Epy -h
->+  tools/qconfig=2Epy -h
+>
+> > +      * If the file is ".efi" and PE-COFF image, load the downloaded file.
+> > +      */
+> > +     uri_len = strlen(uridp->uri); /* todo: directly use uridp->uri */
+> > +     if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+> > +         !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+> > +             struct udevice *blk;
+> > +
+> > +             blk = mount_image(lo_label, image_addr, image_size);
+> > +             if (!blk)
+> > +                     return EFI_INVALID_PARAMETER;
+> > +
+> > +             ret = load_default_file_from_blk_dev(blk, handle);
+> > +     } else if (!strncmp(&uridp->uri[uri_len - 4], ".efi", 4)) {
+> > +             efi_handle_t mem_handle = NULL;
+> > +             struct efi_device_path *file_path = NULL;
+> > +
+> > +             ret = efi_check_pe((void *)image_addr, image_size, NULL);
+> > +             if (ret != EFI_SUCCESS) {
+> > +                     log_err("Error: downloaded image is not a PE-COFF image\n");
+> > +                     return EFI_INVALID_PARAMETER;
+> > +             }
+> > +
+> > +             file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+> > +                                         (uintptr_t)image_addr, image_size);
+> > +             ret = efi_install_multiple_protocol_interfaces(
+> > +                     &mem_handle, &efi_guid_device_path, file_path, NULL);
+> > +             if (ret != EFI_SUCCESS)
+> > +                     return EFI_INVALID_PARAMETER;
+> > +
+> > +             ret = EFI_CALL(efi_load_image(false, efi_root, file_path,
+> > +                                           (void *)image_addr, image_size,
+>
+> [0] https://lore.kernel.org/u-boot/20230619212303.128288-1-raymond.mao@linaro.org/
+>
+> Thanks
+> /Ilias
