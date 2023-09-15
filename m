@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15B8CEEAA7D
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 00:24:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B9EEEEAA7F
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 00:24:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2890D86915;
+	by phobos.denx.de (Postfix) with ESMTP id 7D478867C7;
 	Fri, 15 Sep 2023 02:23:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WxuQpl+M";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Esx5EBkl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A374686496; Fri, 15 Sep 2023 02:22:56 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 659638693D; Fri, 15 Sep 2023 02:22:57 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B83486496
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 02:22:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55C8B86906
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 02:22:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-79329a8f78bso55171039f.3
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 17:22:54 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-79565370aa3so59135439f.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 17:22:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694737373; x=1695342173; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694737374; x=1695342174; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tUQnWK6vyR/eSx0hsTdUDTACGaRMPeszII1aHbI0Hn8=;
- b=WxuQpl+MQ3WLVJvgNZjNgb2BDXgMW824I5E0DdDmIcOnXxQpf4Gq6nFIml4kJ4QPcK
- +HJ0aaKMmEj9YJsUMyiIj0V69GhNkUBf0VwyiDdXI87v8CV1KKY+0Ufh4sCU0E6e0Yu8
- 4HOBYEukD0UEZYpQAdVzRG+FQS4pCZkwFPDPg=
+ bh=rC3VySPVAwfkBQ6EUfmdqQXeiGlI0E5RP8O/HfLq2ZY=;
+ b=Esx5EBklOUPmzB+NMMcdYHoOpqJTNHYhUXcc8s7ls+SAt+NBGM8vkK91FrVO8b6Heq
+ 6MbXJY6gsvYh6nibG9IW13SHdwuya91/XzPdaOxgbexY8Jvrlj5rgVmg1rfoOI82W+mP
+ zRkQZ8aC/oo+g98AXbXFTRraDNnVYN7IT3528=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694737373; x=1695342173;
+ d=1e100.net; s=20230601; t=1694737374; x=1695342174;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tUQnWK6vyR/eSx0hsTdUDTACGaRMPeszII1aHbI0Hn8=;
- b=fj2+IqwEofARjFlyHfgaGqmQRFsoj5pgyJnXasyPPnSSZwFUhMW2mxJD5kKVWfBLbC
- 5kqDKkuIvh7NvRnnqhDqSEVkL71ZGo0Ske0tmrerESlHnoO6JC4oUS/kGaFTC7Sjz/RI
- i5CurVXEuxRwkozGu1kZjImYG51UqyCDdci1a6g0g/eBiT9/D4YeSk17j+Nh+H9syCfd
- TJQSg+eWnBNtIppOzafCv+O+j1oNLdQKwfoh/xV/tWsfauaQzjwQieDqg11d2OQO14M+
- ePZj5rRzyU9ywnQxvRxALqYU3e/Lsfpw9V6NZF52MHy2YqzhbEa+kKml5vjaebo4wl8O
- tGnA==
-X-Gm-Message-State: AOJu0YyNXgWXgWorcZHtrSg/YDa1waCl7kQrLCAftuxsruhshad1mDBu
- mICx5y9z+KndX9g5J0s1z8+2uRg3Opt7rGPZZxs=
-X-Google-Smtp-Source: AGHT+IG4fVDR64twGzRiV8wLFYx9pJ+Dcc4a567YfsHZC7e/XY86vW+c22XM1EMRGAirXPUt2qDu+g==
-X-Received: by 2002:a5e:8915:0:b0:792:2cb6:5c65 with SMTP id
- k21-20020a5e8915000000b007922cb65c65mr70237ioj.8.1694737373285; 
+ bh=rC3VySPVAwfkBQ6EUfmdqQXeiGlI0E5RP8O/HfLq2ZY=;
+ b=A8UcXe4snzIwfynaCXzx6K/p8Cis/OmkVSu8QSDzFlO/JUeM/czK/Zd/E/+GGHE7MW
+ COrXR8aXHl4yDTSAyCKgQSz6tQ4coRXvhGtmo/SvT71dZM0Ef/GNGNVNsqImPCuOqu8z
+ qFeujdWjn4NyL3WcRT5LfvxyfZEbgkJrLXyVtM0m/AR8qSVFrtMqZLeVRv1CqlqYufPu
+ kE+AeeM28xm4n3NlldvbeLHwyMH5lPZr613XrV+oY1ySXFBuMrQoR6Izi7J+SFoBfWTa
+ QBa/AeV89XIMzgjSw1jsx19lHkSEQW8KdTggm+LrnDnUkD+8xeAK2n7yOE1T1L5WVDB7
+ YI/w==
+X-Gm-Message-State: AOJu0Yw4v0KdW2tEli5GRTiIgkppKunsZGbNGo5Pdg1Qs4Q+cL4w8OQD
+ 6PV9cz3Nj6KbS/mqWFtj2lSGugq+VtX9YvbAkxA=
+X-Google-Smtp-Source: AGHT+IEzFl650av70mFXQAUWF/vJMtkFBUGTL+ZPgGkbAT1WCWPqKYfCyq6h0t3b6c1sSNjMgiq2pQ==
+X-Received: by 2002:a5e:880a:0:b0:794:d7e8:d239 with SMTP id
+ l10-20020a5e880a000000b00794d7e8d239mr49592ioj.17.1694737373980; 
  Thu, 14 Sep 2023 17:22:53 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- i23-20020a5e8517000000b007836e9ff198sm744796ioj.55.2023.09.14.17.22.52
+ i23-20020a5e8517000000b007836e9ff198sm744796ioj.55.2023.09.14.17.22.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 14 Sep 2023 17:22:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Masahiro Yamada <masahiroy@kernel.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 07/27] moveconfig: Drop suspicious boards
-Date: Thu, 14 Sep 2023 18:22:09 -0600
-Message-ID: <20230915002236.798760-8-sjg@chromium.org>
+Subject: [PATCH v2 08/27] moveconfig: Correct some regular-expression strings
+Date: Thu, 14 Sep 2023 18:22:10 -0600
+Message-ID: <20230915002236.798760-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230915002236.798760-1-sjg@chromium.org>
 References: <20230915002236.798760-1-sjg@chromium.org>
@@ -88,66 +88,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This code isn't needed anymore. Drop it.
+Use the 'r' prefix for these strings to avoid pylint warnings.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/moveconfig.py | 25 -------------------------
- 1 file changed, 25 deletions(-)
+ tools/moveconfig.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/tools/moveconfig.py b/tools/moveconfig.py
-index 87a670f6e855..36202fe5134c 100755
+index 36202fe5134c..0b0ce64e81fe 100755
 --- a/tools/moveconfig.py
 +++ b/tools/moveconfig.py
-@@ -601,11 +601,6 @@ class Slot:
-         """
-         return self.failed_boards
+@@ -1153,10 +1153,10 @@ def prefix_config(cfg):
+     return op + cfg
  
--    def get_suspicious_boards(self):
--        """Returns a set of boards (defconfigs) with possible misconversion.
--        """
--        return self.suspicious_boards - self.failed_boards
--
- class Slots:
  
-     """Controller of the array of subprocess slots."""
-@@ -684,25 +679,6 @@ class Slots:
+-RE_MK_CONFIGS = re.compile('CONFIG_(\$\(SPL_(?:TPL_)?\))?([A-Za-z0-9_]*)')
+-RE_IFDEF = re.compile('(ifdef|ifndef)')
+-RE_C_CONFIGS = re.compile('CONFIG_([A-Za-z0-9_]*)')
+-RE_CONFIG_IS = re.compile('CONFIG_IS_ENABLED\(([A-Za-z0-9_]*)\)')
++RE_MK_CONFIGS = re.compile(r'CONFIG_(\$\(SPL_(?:TPL_)?\))?([A-Za-z0-9_]*)')
++RE_IFDEF = re.compile(r'(ifdef|ifndef)')
++RE_C_CONFIGS = re.compile(r'CONFIG_([A-Za-z0-9_]*)')
++RE_CONFIG_IS = re.compile(r'CONFIG_IS_ENABLED\(([A-Za-z0-9_]*)\)')
  
-             write_file(output_file, boards)
- 
--    def show_suspicious_boards(self):
--        """Display all boards (defconfigs) with possible misconversion."""
--        boards = set()
--        output_file = 'moveconfig.suspicious'
--
--        for slot in self.slots:
--            boards |= slot.get_suspicious_boards()
--
--        if boards:
--            boards = '\n'.join(boards) + '\n'
--            msg = 'The following boards might have been converted incorrectly.\n'
--            msg += 'It is highly recommended to check them manually:\n'
--            msg += boards
--            msg += '(the list has been saved in %s)\n' % output_file
--            print(color_text(self.args.color, COLOR_YELLOW,
--                                            msg), file=sys.stderr)
--
--            write_file(output_file, boards)
--
- class ReferenceSource:
- 
-     """Reference source against which original configs should be parsed."""
-@@ -780,7 +756,6 @@ def move_config(toolchains, args, db_queue):
- 
-     print('')
-     slots.show_failed_boards()
--    slots.show_suspicious_boards()
- 
- def find_kconfig_rules(kconf, config, imply_config):
-     """Check whether a config has a 'select' or 'imply' keyword
+ class ConfigUse:
+     def __init__(self, cfg, is_spl, fname, rest):
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
