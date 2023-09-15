@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB8E6EE6457
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 11:32:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A05EEE6459
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 11:52:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C36D864EE;
-	Fri, 15 Sep 2023 13:32:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A8A1E86590;
+	Fri, 15 Sep 2023 13:52:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="FquCC6VV";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="fESR7XAK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36BBE86545; Fri, 15 Sep 2023 13:32:27 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::612])
+ id 9A6B1865AB; Fri, 15 Sep 2023 13:52:07 +0200 (CEST)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20603.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8a::603])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4022864EC
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 13:32:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E7EC86482
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 13:52:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nzPChS0807akO20lLaycFJaCpZWnoINadt/S/Z7oZUg4a/0ml7WYvTfPjtDKn5TT0QW0++j7b/gH2I2RARxn3Xff/KDCYaCe9Q+IerXirkyOychPIFzQ2NTlU7ce3PEwaS9taHolZ2VHICrb/HBoxSzgRbEY8v0MNE+4mYKx5ZRHOud0P6/9LJ7bHFOLf/mnt2Ydi+30TFNSXBP4HlylZrl0b6Ngx7arhuxpVU0UMLMh3lsf6zMEGHTfXoHiHzs+pWUZSQ4vMYjASDyhYiHWG9Y1OCSxbnLnQhTFBhTxhqk0pTHuaQ8ArSZlcwMo9NlzTnY/J/GoZ5rraFH4DNnJNg==
+ b=c2TSOw2HhkxcRR5vwaMzHRBBm8+6yogSoFReyUsg+wxG+/bwByLUBElZKGDCJL5YrJ7elUB2xP9pzY2kwDyEVYaR2k6ViyyQ4j2cIZDgOvwRxDK/l1COFu8prETDeSbB8kK8WM4CsGdkx+zdiNtvJ6Iixrx2BuSsDe4OOQmS/5+HjKwEAXU9gk+5R4zuZGoIdlzVygOBPvQgGqq2K5frcE20zATfE9XnOdk7svhsSxwsPmgS1mURrZnRsZQwZTZsH8npvNc3kEHvgdG07L9X6xP9qslTL2G3FfrHQmCL969yLFFhik2G2kkIlTUVcs0g/KnVhnsW1FnXtKrvbyIdUg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=55JOODjUODXTF3yCkZsmDMJXpn63EcH1xw/UphH0U4A=;
- b=P/kktk6D2DFNzgfSrOmxDlAZVzYg3biLhi+DpQMf5ZXTWZxTLWo7E1AzGMv47uCOkv/2uW7wUKExmJkJPoW5cqHpO+vsl5i3fT/zj4vWPtFAvNltHTGpTz3y1E3CryASeW0Y78PViT0VkSonrmyp+o8s5h2bWDRVzup/rl/uyBwPD/ibyunAocy/PGIVyFgiCui26VXA+deVTqUi0F+gs4H3Jg2V6sIpwIulzOH3oFS0Jt2dXlZTCB6rgUDrA3lF2AxggxlZqBkLYVWrUxIuJ1/4bEkeSGLL4h3Q1EYIT5LHwd6YMAREG8JuYgg+eotn2kixBQ5B3BbxtYpLYOiSEw==
+ bh=0hXpCmiwmwM4OdWZuk12Lpii4jdoV2oMvmuAU7HUNZ4=;
+ b=YceH/woU3cc3hWYNnXIZrTDDLUhdLejgOH10WDokTrScL35AuqjP9t3nItXEyVJQwv7EJe8uQb+bemK//qN/ZT3MlFAQA4bY5MuFdy7BO9mBL7LCHRb4TDReQOofCQXWemfinkTTl1BR0UvJrTRcUovNZ9LKMfM6PzqJ8jRU/oWMKoCmstNRzwVTVUGyR3DbJc6T4n6A/S+hpeauyRwjlso5TTxwxcgrfdBUyQJlPehDiJDHouLmB3TXyTJR1lOo8JME+YzFTSR1RnnDW14C6xhiyjsiMYfOXIW5GZxnUAED4KdzEKYMTdyRX2l6AJ/bvj9+ndmFXZkY/NEz1SfBgQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=weidmueller.com smtp.mailfrom=amd.com;
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=55JOODjUODXTF3yCkZsmDMJXpn63EcH1xw/UphH0U4A=;
- b=FquCC6VVSyxwX7ASjvko0dAZOrWLWEIyNlKKlIru+DuV6xhJhq5u4PwVUErkbbwEMwRT3dY4jvcyAV7EZDkEQTnJ+KmAQjTfudvxI99X6tBhB4TcSAhWovZWZHEuxz1ohDJ4LfVYZ4ga13qQyucrV1xUfT3ydpfttpYQppvWJRo=
-Received: from MW4PR03CA0150.namprd03.prod.outlook.com (2603:10b6:303:8c::35)
- by SN7PR12MB6981.namprd12.prod.outlook.com (2603:10b6:806:263::22)
+ bh=0hXpCmiwmwM4OdWZuk12Lpii4jdoV2oMvmuAU7HUNZ4=;
+ b=fESR7XAKlsWaMyarvcDMHDBT4hgVZEKKGT4deUAVku69MUb3/mTqvDcRos4kzyBmSZ/73KjSu7XPqo6SmA8nVvsgRDfKshtqvtDRP+RgzmPvBh2EyMAw1GF3oFY/OepaBZ99xY3I1XoMB3B4w8Asgs//WsNbq4UG8D49MhC4cSo=
+Received: from MW4PR04CA0319.namprd04.prod.outlook.com (2603:10b6:303:82::24)
+ by IA1PR12MB6308.namprd12.prod.outlook.com (2603:10b6:208:3e4::14)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.33; Fri, 15 Sep
- 2023 11:32:20 +0000
-Received: from CO1PEPF000044FD.namprd21.prod.outlook.com
- (2603:10b6:303:8c:cafe::f1) by MW4PR03CA0150.outlook.office365.com
- (2603:10b6:303:8c::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.31; Fri, 15 Sep
+ 2023 11:52:02 +0000
+Received: from MWH0EPF000989E5.namprd02.prod.outlook.com
+ (2603:10b6:303:82:cafe::a6) by MW4PR04CA0319.outlook.office365.com
+ (2603:10b6:303:82::24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.21 via Frontend
- Transport; Fri, 15 Sep 2023 11:32:19 +0000
+ Transport; Fri, 15 Sep 2023 11:52:01 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,22 +59,24 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000044FD.mail.protection.outlook.com (10.167.241.203) with Microsoft
+ MWH0EPF000989E5.mail.protection.outlook.com (10.167.241.132) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.20 via Frontend Transport; Fri, 15 Sep 2023 11:32:18 +0000
+ 15.20.6792.20 via Frontend Transport; Fri, 15 Sep 2023 11:52:01 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 15 Sep
- 2023 06:32:17 -0500
-Message-ID: <4becd24a-125a-4fb3-aebb-c3315f301830@amd.com>
-Date: Fri, 15 Sep 2023 13:32:15 +0200
+ 2023 06:51:59 -0500
+Message-ID: <74662763-65a4-4e64-bad2-0d5b3bd58229@amd.com>
+Date: Fri, 15 Sep 2023 13:51:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Corrected pcap_prog register address
+Subject: Re: [PATCH] pinctrl: zynqmp: Display the tristate configuration for
+ all pins
 Content-Language: en-US
-To: <lukas.funke-oss@weidmueller.com>, <u-boot@lists.denx.de>
-CC: Lukas Funke <lukas.funke@weidmueller.com>
-References: <20230915093901.1062825-1-lukas.funke-oss@weidmueller.com>
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ <u-boot@lists.denx.de>
+CC: <git@xilinx.com>
+References: <20230914100620.26346-1-venkatesh.abbarapu@amd.com>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -120,7 +122,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20230915093901.1062825-1-lukas.funke-oss@weidmueller.com>
+In-Reply-To: <20230914100620.26346-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -128,26 +130,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044FD:EE_|SN7PR12MB6981:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3de5d4c8-99a3-4781-af79-08dbb5df6b77
+X-MS-TrafficTypeDiagnostic: MWH0EPF000989E5:EE_|IA1PR12MB6308:EE_
+X-MS-Office365-Filtering-Correlation-Id: f32a881d-b8d3-41a5-f812-08dbb5e22c7d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: u+h2KCPKZSPNwTPxonoWHmxi73tJ+tHZHBrCobFeNQKO5FYs7MD0x0yKXwX9KvABXHxL2ttuKyH8BHqMsS6T7GvpFv9FySDViofmjw4kIBREJ+M+8XvlpcsWznuRuRq6T+HhYoF5qwkZGPdo22a6Nce7CKoQU9saeryvAuni2nbAUuTtZpunjW+LPTkfraeKB0dXmc8g0BY0s4PU8nd7XY4oeStWh4StxgNdRnHeeWm69IqYcbGSC2HwJ8b2wslXILxzRhvlf0NRQZ+jVzW7oC1GunnuPaCDsV4jEr6xmS6rYoKCwzTzP1JHIKubLjQuzj6AvsSTXSlt+ADfWx3cyYVOaPpogDyeHZixPt6cNWt+BKcBjSxMNdbowTzgOFvHaVaWXKdXj5XHujv80TrGPViWfv178NG0UUmTT/pxo3uXCKEzPe1BSXliKyrdUoYWOxrM8ogBRXamTyjsVy7qluiDCJUB7Pmr9N8dUZUvQQVWMu0A04DJXedeAxSYwEuAvoMoPpwUuvOpHLxQaBeHTGcAolUlr0Ggr40l+tMNgw3YA4J0GEZKy8wlqUmdFJVJD+QZzZNXoLqs/R8mqkX4bgEyKCQJ67nMva+/Si5gQ669EkCxyNFVklE0EeFeNDgU+bySzD/h2QioytV3LykQR4X+jRlCltY9JdYiaWf5FzAxVIYobGGih6hymF3Seki3lvP0N2ILRglVBg61Ay0qSMNn7nsWEm5+lPgvjP0VT/advE30hQuKVWAFz01bQ+eSFNcWZFjGsy0RsJWMHqQtBflcanX16eweLPIexcprAJ0=
+X-Microsoft-Antispam-Message-Info: r+2PlTpwLqxCr1e0zZEDKHUtQYq+7/dig7Kc2BxpBtqiqDSVUJoXfcfDR8YWZW0KJWlSqJ6lAK+V4EFYD3+jEEIvDqaAMqYWF1SGdRZcecu0wZDuqeZtTodWWYUqYeJHR+RtQKhCyyZuAk/ex0bFd3Vm8PFT8h4NZ8he4zQLdYxgShQjmzoU+uc7pPSap5rxEtS1fX0j6B6XgoEgTB6kPL/ohRVAFVUi/lvn4+Oie9Goz07nmRn6wnIhu1b19t+G16/3exJam3SLppuFSer8zhEQOfrcwFvJ6CWqBcUt8rxiFx4llNR3sfNq+Md7E3G3bh9+4YHXqUDnCUNHL6UzEk0fhCGYlznbLR3PW1A2VkCmmLhIb6YMGLfGQ9Qrm9KYyv4MxqPHwzjVRrznZgKJu3aBxLdSXpybXYGqzvuYpYkchjC8TqHzDe0Cas2msMLIQ2rqCrJa20Qh0yoxekRhHGy8JtA7Zg0oZLkIQf0taUhyM5KhHxPDDrD2QszU7FN6aGx5av/ropmHVzeuriLZAyyxrI66Z94bKrLWoJLxlJ3J4/pUDWPdLWEtoc3ROROJ/c5jRsakDXdpJGBh7qsgB/c71L5X7cdysykr7oaNqjDYYBAWgJ3oJtoWcABjjrMVXmcfauoblVP5ayMPv5OBsNjovYZWpRfDwfdI0p4a90BVb7ajQycivwUQP7FMYXK6S65iUSh6xvArZUanE54bxhppO28gvbVIFsuEyH0fpTrCHDV+Hhxo9s4W6jWykgNPf+VWydAr/l6pNQ3jvLs8A/t85J+lxGbUkOf1FXfO/vTDfDaltM+0b0eDRb6BDoce
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(376002)(396003)(39860400002)(136003)(186009)(1800799009)(451199024)(82310400011)(46966006)(40470700004)(36840700001)(70586007)(966005)(316002)(110136005)(16576012)(8676002)(70206006)(36756003)(478600001)(47076005)(26005)(2616005)(356005)(83380400001)(426003)(53546011)(82740400003)(86362001)(31696002)(81166007)(40480700001)(36860700001)(16526019)(40460700003)(2906002)(44832011)(336012)(31686004)(4744005)(41300700001)(5660300002)(8936002)(4326008)(43740500002)(36900700001);
+ SFS:(13230031)(4636009)(136003)(346002)(376002)(396003)(39860400002)(1800799009)(82310400011)(186009)(451199024)(36840700001)(46966006)(40470700004)(2906002)(8676002)(53546011)(40480700001)(6666004)(31696002)(107886003)(16526019)(2616005)(26005)(40460700003)(86362001)(8936002)(16576012)(4326008)(44832011)(41300700001)(110136005)(316002)(356005)(70586007)(36756003)(81166007)(5660300002)(70206006)(82740400003)(478600001)(83380400001)(426003)(47076005)(36860700001)(31686004)(336012)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 11:32:18.6834 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3de5d4c8-99a3-4781-af79-08dbb5df6b77
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 11:52:01.5027 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f32a881d-b8d3-41a5-f812-08dbb5e22c7d
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044FD.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000989E5.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6981
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6308
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,34 +168,72 @@ X-Virus-Status: Clean
 
 
 
-On 9/15/23 11:39, lukas.funke-oss@weidmueller.com wrote:
-> From: Lukas Funke <lukas.funke@weidmueller.com>
+On 9/14/23 12:06, Venkatesh Yadav Abbarapu wrote:
+> Read the tristate config for all the pins and display it.
 > 
-> Currently the pcap_prog struct variable is pointing to 0x3004 which is
-> incorrect according to [1]. The variable should point to 0x3000.
+> ZynqMP> pinmux status MIO1
+> MIO1: slew:fast	bias:enabled pull:up input:cmos	drive:12mA
+>        volt:1.8	tri_state:enabled
 > 
-> [1] https://www.xilinx.com/htmldocs/registers/ug1087/ug1087-zynq-ultrascale-registers.html#csu___pcap_prog.html
-> 
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
+>   drivers/pinctrl/pinctrl-zynqmp.c | 8 ++++++--
+>   1 file changed, 6 insertions(+), 2 deletions(-)
 > 
->   arch/arm/mach-zynqmp/include/mach/hardware.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-zynqmp/include/mach/hardware.h b/arch/arm/mach-zynqmp/include/mach/hardware.h
-> index 634bf169c6..8cb6494e52 100644
-> --- a/arch/arm/mach-zynqmp/include/mach/hardware.h
-> +++ b/arch/arm/mach-zynqmp/include/mach/hardware.h
-> @@ -166,7 +166,7 @@ struct csu_regs {
->   	u32 jtag_dap_cfg;
->   	u32 idcode;
->   	u32 version;
-> -	u32 reserved2[3055];
-> +	u32 reserved2[3054];
->   	u32 pcap_prog;
->   };
+> diff --git a/drivers/pinctrl/pinctrl-zynqmp.c b/drivers/pinctrl/pinctrl-zynqmp.c
+> index 02626a7561..d98834b1aa 100644
+> --- a/drivers/pinctrl/pinctrl-zynqmp.c
+> +++ b/drivers/pinctrl/pinctrl-zynqmp.c
+> @@ -533,6 +533,8 @@ static int zynqmp_pinctrl_get_pin_muxing(struct udevice *dev,
+>   				     &pinmux.drive_strength);
+>   	zynqmp_pm_pinctrl_get_config(selector, PM_PINCTRL_CONFIG_VOLTAGE_STATUS,
+>   				     &pinmux.volt_sts);
+> +	zynqmp_pm_pinctrl_get_config(selector, PM_PINCTRL_CONFIG_TRI_STATE,
+> +				     &pinmux.tri_state);
 >   
+>   	switch (pinmux.drive_strength) {
+>   	case PM_PINCTRL_DRIVE_STRENGTH_2MA:
+> @@ -553,13 +555,15 @@ static int zynqmp_pinctrl_get_pin_muxing(struct udevice *dev,
+>   		return -EINVAL;
+>   	}
+>   
+> -	snprintf(buf, size, "slew:%s\tbias:%s\tpull:%s\tinput:%s\tdrive:%dmA\tvolt:%s",
+> +	snprintf(buf, size,
+> +		 "slew:%s\tbias:%s\tpull:%s\tinput:%s\tdrive:%dmA\tvolt:%s\ttri_state:%s",
+>   		 pinmux.slew ? "slow" : "fast",
+>   		 pinmux.bias ? "enabled" : "disabled",
+>   		 pinmux.pull_ctrl ? "up" : "down",
+>   		 pinmux.input_type ? "schmitt" : "cmos",
+>   		 pinmux.drive_strength,
+> -		 pinmux.volt_sts ? "1.8" : "3.3");
+> +		 pinmux.volt_sts ? "1.8" : "3.3",
+> +		 pinmux.tri_state ? "enabled" : "disabled");
+>   
+>   	return 0;
+>   }
 
-Good catch.
-Applied.
-M
+When I run it on SOM I get some lines truncated.
+
+MIO12     : slew:slow	bias:enabled	pull:up	input:cmos	drive:4mA	volt:1.8 
+tri_state:disabled
+MIO13     : slew:slow	bias:disabled	pull:up	input:cmos	drive:4mA	volt:1.8 
+tri_state:disable
+MIO14     : slew:slow	bias:disabled	pull:up	input:cmos	drive:4mA	volt:1.8 
+tri_state:disable
+
+it is because of buf limit is 80 chars (PINMUX_SIZE)
+
+It means we have 2 options.
+1. keep this patch as it is and send one more which extend PINMUX_SIZE limit
+2. change enabled/disabled to something shorter
+
+The longest line is
+slew:show\tbias:disabled\tpull:down\tinput:schmitt\tdriver:12mA\tvolt:1.8\ttri_state:disabled\0
+which is based on my calculation 88 chars.
+
+It means if you want to increase that macro 90 chars should be enough.
+Please let me know which way you want to go.
+
+Thanks,
+Michal
+
