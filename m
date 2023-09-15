@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 031D6EE021A
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 04:15:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0183FEEAA42
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 04:17:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3D4286828;
-	Fri, 15 Sep 2023 06:15:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3DAD586828;
+	Fri, 15 Sep 2023 06:17:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cz/ljcP/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vsO9XaCX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4843B86852; Fri, 15 Sep 2023 06:15:45 +0200 (CEST)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id 56238868D9; Fri, 15 Sep 2023 06:17:46 +0200 (CEST)
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com
+ [IPv6:2607:f8b0:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E960867C7
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 06:15:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 00963867C7
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 06:17:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-68fcb4dc8a9so1611176b3a.2
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 21:15:42 -0700 (PDT)
+Received: by mail-pg1-x533.google.com with SMTP id
+ 41be03b00d2f7-54290603887so1283940a12.1
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 21:17:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694751340; x=1695356140; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1694751462; x=1695356262; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qPsBCbGPxADQFHGGubus0vL72Q/ibTI9+fZYJtg7xNw=;
- b=cz/ljcP/tRhkgzGSLkQMSDlBgMe50do75/K+8oNfS/ff2xcO2enEpw8zZDCmX0AJUu
- /pB4RlcH+QzaTk3lKKwVI2ZbwpGIj6Dtsg6Zw0iXvX91Mxv1OJQQf2UvI0I3sP8q2NTl
- MQInFx5vCG6bkWOU0r/FOxmVD6QEliKwPmbIaDg5hMw8ugayh9HsH26pXu5wluiHAAyJ
- xjU8QEZ6lJNlRqEbcizx4qPj6IDoo4ohXSKJDuAhX1d+8DTOZ5+Qs5UFDb/3HM40M6Y4
- d1IeHeCzMBBIkncldff6rxrnXNRvn937mUsuBGTWVypKFp8RbHko6jNFaNsevG0hBlD0
- c/ZQ==
+ bh=0DBzdfKNMi6fEXHNvcA0Vm0uj60tLjBuDnOt9gNcjfQ=;
+ b=vsO9XaCXJrymu5W7FAWiJUpyXAEehPPOA/RvjM+wnCkAjlPDgPv7QWY8lBpVfGIi7z
+ sZEBqB/MHeronhcS0bDRHNgiaqO42/PmEgquACBH0LLtXFZBnGxprqKtYyh/EQAeROrK
+ zvecJ5jJGUW820UjtDNgUMFaMgQmyKjARyv9vfVheWIZ7/humpRnovnmycEzCtXTedPf
+ DprbUMFuzbxBzLdSI3DMtsbmbimKmI45/WmRKZV8aQdMPZEXXPmfzIUJFPrjwWzNActT
+ qXxwHiUwEJ3gDPDIlXIcRqwO1HrXfFdzgNshrWOjncv+VK34jqEtJi19JMKdBhhoL2m1
+ duzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694751340; x=1695356140;
+ d=1e100.net; s=20230601; t=1694751462; x=1695356262;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qPsBCbGPxADQFHGGubus0vL72Q/ibTI9+fZYJtg7xNw=;
- b=afL2XRnxbcBASl7ixfXHuKgR8Y/OwQE77plnHOy43IZIPmXu8S8J7fDlYAl4M95/lx
- 8gxPbflILjdEcOe5+jWxarNXhUtidHh0w7yHFaEINS4OKoNJVQe6FBK+KmdlE1TK92Dw
- nvHMG4X1QXuljiYb6kbJ4ijJvslXadyjgATJ8jY+FsshWQz/l7XLRxeUqrEQwly843A7
- NMmWuBCeUARyH35vX6tK3LMuNE2YgkW+uFvTRPJBjDw9+DkQ6u8vFpUGSyTfFYj6CLvG
- iQezST6gwZ7s9mHGXxdchvyVw7Og7COaGECRqjINpbxWwpRKXB6zCwt8qtfl9f0o6V6v
- 5srQ==
-X-Gm-Message-State: AOJu0YxKS1MCOsZWUmqz8SPbWX3BouKpG40GM0mYq2uaDNaKeUBSWrfM
- Z0csgYSZ+dUtnbmEsU/L7o75AHi65Rj0M4Od1AzBVQ==
-X-Google-Smtp-Source: AGHT+IHSS7XLNA4SvUS2c2hnNmzhFmLtlaNkxfW+OWt/XAP/JaFl55q7zLG/Ik6j9Uw/kwDl3zjCLygGHOO4eUh+65s=
-X-Received: by 2002:a05:6a21:3299:b0:159:f39a:54e1 with SMTP id
- yt25-20020a056a21329900b00159f39a54e1mr782139pzb.51.1694751340538; Thu, 14
- Sep 2023 21:15:40 -0700 (PDT)
+ bh=0DBzdfKNMi6fEXHNvcA0Vm0uj60tLjBuDnOt9gNcjfQ=;
+ b=KD3JH3kVLwwLYySH5Uao1DRhNqCJ0CP1lMz8KRtuOCzLNYkEy0807LiuhJUy+rX3ak
+ qD0c/iJWX6BL97euf5N+Qf98hrpC3RQhXYy2fAZ4v0i9Mm5gb4+raA63e6sWkxGo4NJy
+ DVbBlsUwzDDDt54DptDqhcCZSO0fZGhzs5gP+Gn5ymlxlU3jDsuKxTuOYddpCTwopkng
+ WrSl7rv65jDN/4oWUVwUCH60GU0fiKl/rW4gOoZsxRH3Ks+ZdpNCzQ1QLjsRph20E8Nf
+ tcKMOcQDxyTaxXqgRmVRILhVpnnOuQOJEmnAtadz7TeY6nH3PQGU/gGnZYHp7NDSqtIX
+ zvyw==
+X-Gm-Message-State: AOJu0Yy7fHqOC5vkjyp2TiC5YbtuFocOO/zH9UPYxX7UdF+NHnY07zKx
+ bJX0ppX6dBN03EMpiMrDc52nAADQR8mTFgu6PXoMJw==
+X-Google-Smtp-Source: AGHT+IEU2JEizGn/QoXTukPirEVExoIJes3M2fGGApje/ba2RqMslVYLoiBD8D/nLKw2aJeJ7HONP2MD4xnM23i0sj0=
+X-Received: by 2002:a05:6a21:a582:b0:14c:6a05:dfbf with SMTP id
+ gd2-20020a056a21a58200b0014c6a05dfbfmr901062pzc.60.1694751462303; Thu, 14 Sep
+ 2023 21:17:42 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
- <20230901102542.609239-5-masahisa.kojima@linaro.org> <ZQMRB9allzBqrFGX@hera>
-In-Reply-To: <ZQMRB9allzBqrFGX@hera>
+ <20230901102542.609239-5-masahisa.kojima@linaro.org>
+ <8b9f5c70-ebd9-48e0-8d4f-738cc950dfb7@gmx.de>
+In-Reply-To: <8b9f5c70-ebd9-48e0-8d4f-738cc950dfb7@gmx.de>
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Fri, 15 Sep 2023 13:15:29 +0900
-Message-ID: <CADQ0-X9mDQbRRatGsKuJNYUGVRC8K-N96HAHXuxpR_wMG=HHAA@mail.gmail.com>
+Date: Fri, 15 Sep 2023 13:17:31 +0900
+Message-ID: <CADQ0-X9KdjdqsX_qbLkRhNgDPPLWWTUvKrO4s9pnJ_QSvR_pUg@mail.gmail.com>
 Subject: Re: [PATCH v2 4/6] efi_loader: support boot from URI device path
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Takahiro Akashi <takahiro.akashi@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,14 +88,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Heinrich,
 
-On Thu, 14 Sept 2023 at 22:56, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 14 Sept 2023 at 23:55, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
-> Kojima-san
->
-> On Fri, Sep 01, 2023 at 07:25:40PM +0900, Masahisa Kojima wrote:
+> On 01.09.23 12:25, Masahisa Kojima wrote:
 > > This supports to boot from the URI device path.
 > > When user selects the URI device path, bootmgr downloads
 > > the file using wget into the address specified by loadaddr
@@ -104,8 +103,8 @@ On Thu, 14 Sept 2023 at 22:56, Ilias Apalodimas
 > >
 > > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 > > ---
-> >  lib/efi_loader/efi_bootmgr.c | 197 +++++++++++++++++++++++++++++++++++
-> >  1 file changed, 197 insertions(+)
+> >   lib/efi_loader/efi_bootmgr.c | 197 +++++++++++++++++++++++++++++++++++
+> >   1 file changed, 197 insertions(+)
 > >
 > > diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
 > > index a40762c74c..0e8d2ca9d1 100644
@@ -113,22 +112,22 @@ On Thu, 14 Sept 2023 at 22:56, Ilias Apalodimas
 > > +++ b/lib/efi_loader/efi_bootmgr.c
 > > @@ -7,10 +7,14 @@
 > >
-> >  #define LOG_CATEGORY LOGC_EFI
+> >   #define LOG_CATEGORY LOGC_EFI
 > >
 > > +#include <blk.h>
 > > +#include <blkmap.h>
-> >  #include <common.h>
-> >  #include <charset.h>
+> >   #include <common.h>
+> >   #include <charset.h>
 > > +#include <dm.h>
-> >  #include <log.h>
-> >  #include <malloc.h>
+> >   #include <log.h>
+> >   #include <malloc.h>
 > > +#include <net.h>
-> >  #include <efi_default_filename.h>
-> >  #include <efi_loader.h>
-> >  #include <efi_variable.h>
+> >   #include <efi_default_filename.h>
+> >   #include <efi_loader.h>
+> >   #include <efi_variable.h>
 > > @@ -168,6 +172,193 @@ out:
 > >       return ret;
-> >  }
+> >   }
 > >
 > > +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
 > > +/**
@@ -210,39 +209,6 @@ On Thu, 14 Sept 2023 at 22:56, Ilias Apalodimas
 > > +
 > > +     return ret;
 > > +}
->
-> We need to decide what we want here.  There were recently some patches from
-> Raymond [0] which piggybacked on your earlier eficonfig work.  I think the
-> last patch of this series hasn't been merged due to a test failing, but we
-> should fix it.
-> That patch has a different approach.  Everytime a disk appears it will add
-> a boot option if the default filepath is found and that's how we fixed the
-
-efi_bootmgr_update_media_device_boot_option() automatically adds the
-boot option if the device handle installed EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-but it does not check whether the default file path is found or not.
-When the user selects the automatically created boot option,
-expand_media_path()
-is called and efibootmgr tries to boot with the default file.
-
-> behaviour of efibootmgr to adhere to the EFI spec.  This patch is doing the
-> opposite, trying to detect the BOOTAA64.EFI etc on the fly.  I think I
-> prefer the approach you have here, but we should end up with one solution
-> to solve both.
-
-This HTTP Boot case is slightly different from the case where the user selects
-the automatically added boot option.
-In this case, user selects the URI device path boot option. The
-efibootmgr downloads the
-file, mount the image, and try to boot with the default file name on the fly.
-When the patch[0] is merged, it is possible to boot the downloaded iso
-image from the
-automatically added "blkmap" boot option, but I think efibootmgr needs
-to boot with
-the URI device path user selected that this series does, not boot
-from the "blkmap" boot option.
-
->
 > > +
 > > +/**
 > > + * load_default_file_from_blk_dev() - load the default file
@@ -309,28 +275,24 @@ from the "blkmap" boot option.
 > > +     /*
 > > +      * If the file extension is ".iso" or ".img", mount it and try to load
 > > +      * the default file.
+> > +      * If the file is ".efi" and PE-COFF image, load the downloaded file.
+> > +      */
 >
-> Don't we have a better way to validate isos and efi apps instead of
-> the extension?  The efi is checked against a valid PE/COFF image so I guess
-> we'll really on the mount to fail for isos?
+> There is no requirement that EFI binaries have an .efi extension.
+> Does EDK II require it?
 
-EDK2 reference implementation checks the file type with the following priority.
- 1) "Content-Type" header in HTTP response message
- 2) Filename Extensions
-Documentation is here[1].
-
-Since "Content-Type" is not available in the current U-Boot wget, file extension
-is used to identify ISO images.
-
-[1] https://github.com/tianocore/tianocore.github.io/wiki/HTTP-Boot#ram-disk-boot-from-http
+No, sorry.
+".efi" extension check should be removed.
 
 Thanks,
 Masahisa Kojima
 
-
 >
-> > +      * If the file is ".efi" and PE-COFF image, load the downloaded file.
-> > +      */
+> Best regards
+>
+> Heinrich
+>
+>
 > > +     uri_len = strlen(uridp->uri); /* todo: directly use uridp->uri */
 > > +     if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
 > > +         !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
@@ -360,8 +322,30 @@ Masahisa Kojima
 > > +
 > > +             ret = EFI_CALL(efi_load_image(false, efi_root, file_path,
 > > +                                           (void *)image_addr, image_size,
+> > +                                           handle));
+> > +     } else {
+> > +             log_err("Error: file type is not supported\n");
+> > +             return EFI_INVALID_PARAMETER;
+> > +     }
+> > +
+> > +     return ret;
+> > +}
+> > +#endif
+> > +
+> >   /**
+> >    * try_load_entry() - try to load image for boot option
+> >    *
+> > @@ -211,6 +402,12 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
+> >               if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
+> >                       /* file_path doesn't contain a device path */
+> >                       ret = try_load_from_short_path(lo.file_path, handle);
+> > +#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
+> > +             } else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
+> > +                     ret = try_load_from_uri_path(
+> > +                             (struct efi_device_path_uri *)lo.file_path,
+> > +                             lo.label, handle);
+> > +#endif
+> >               } else {
+> >                       file_path = expand_media_path(lo.file_path);
+> >                       ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
 >
-> [0] https://lore.kernel.org/u-boot/20230619212303.128288-1-raymond.mao@linaro.org/
->
-> Thanks
-> /Ilias
