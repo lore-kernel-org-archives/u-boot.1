@@ -4,110 +4,110 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EDC7EE6457
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 11:27:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4594EE6459
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 11:27:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A77586945;
+	by phobos.denx.de (Postfix) with ESMTP id 61BE986967;
 	Fri, 15 Sep 2023 13:26:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="yJXdJWqj";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="g5OYP4AM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE5BF868D9; Fri, 15 Sep 2023 05:18:21 +0200 (CEST)
-Received: from NAM02-SN1-obe.outbound.protection.outlook.com
- (mail-sn1nam02on20602.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7ea9::602])
+ id 165CC86466; Fri, 15 Sep 2023 06:51:13 +0200 (CEST)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20617.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eb2::617])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D780686823
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 05:18:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EC5B86466
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 06:51:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RE/9ccH5emzIgTOIbZXibUSRXvOoh9k4DGYHxdJWfm40kJZZizMdyPqXs1JXl9M3JIro2Fp6zS/TJ3q1uSUlCnGt/KVdQatbTdhwVlvCfRFMstqNHlVZgzQIH96gOrHla5fGtc8HeVGn88kSM2eEMzJH0hI8xzqLGlX3stfiHwdgPs8ivy95Z2apFPSpKMDoWJWxQC1ZFtJA5A7F09TmrlJ0XjNqz1bP+MZ20WC1fo7YowMYE0LkKn4Kaog4rbH99gHCSUWt/2MiVO2/UfrTLDNuYlC16koTIiDiBVQOIKSos3YHjpej2srg4UZmLODuoacCpUjo8GTw3BGKbBv0HA==
+ b=QSO5skkmOTp/M+BVH6p4bZ+lmZeOih9kkLdC1/5kqueAbEvAkYWUXUGilNt+amCHfogtWzHRH7ezt0a9s9egOBo4VtKQOIEczWZiEWcdI6z1fElMrWpxbnzRVGgCbwevbNPthTaB9ciJqtO4VOHnk29CL0L6eGf49gTkhP3wiGBSEwqVp/ajGsRuqk2AUBD516vjmQOFQiIk5SGB0+SebkIVt1qEvUnBR/3WrFCR2DiWtg57B92vTcTw9P/tjDUMaum3jWyzvWyGhRIoNmvt/G9L+FWA+WHm9enqTKUZfcrS9JmXzwhoHoDCB+pPpXn9vk+1EV07FxXWp2VtKZCa9A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ynMHvMI+MGed962qLaau+RzGR987E846RgvQsRjNTbg=;
- b=YefNLdRPqJmE1HPeuNqbvFFZZe+hnCd6bkSf5upDI6tPm06u8R+Wfegh2GpHPAdGnvRHlDFNdSsAz3ZdJXDDFQb7iotE+X50m4ZJQkFfzM/pEES06uv13UHC4F2b6AIv9sEYpRrAl4LBzNS+avLfZHIdTyzYritB0BpOrQLGL2NryaS8BDeLCkByVq7xb9pptw86iFqbl8lQvjmTVAs6vRjeHpFIqL9NEmgD5AoEn4LgRMEyKBKnShn1EoJYx3pg1FEG/RG5iehYcWHsZBStydu0hSB5ymivmJHKFM8XHIS5prGRku80ZV9vV78+7CZqmoSm86izmWoxuY85J6hwyA==
+ bh=UdoP//sEr3rl0fnMsf4Y/pDV+wc3YGeDZ9wGI0ljTzc=;
+ b=TE9T5u3KURessV52/EEHWOJSBPAVHoUjzYx6uhX47Luz01uMgWNcI3Jj00XY2YC4Qgptg/krULXhskIJqDey7cbGe3a4f/5NHzH7+9kfq4ULeTsoTfQ6exEHSslFCn+rftEeyZPDyIUyw65Iq+TWg1PyVztnYZV0CKXd/5FRWFjlkRlW8p91cc3nTJVsJ4flFMdMKXlO7xDVcDFMZnO1RWyCU2TRNaML3ZaYUW7M2WocHvmX/cfnNqcUsjc5O9Asinn99y2kE2QwzgCwhkTXDpz+6mjdLIF97xjSIfPvIUUKUxs48SEESSqTd6/7o0hNptT47OLeGakJYxbPVynKsA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ynMHvMI+MGed962qLaau+RzGR987E846RgvQsRjNTbg=;
- b=yJXdJWqj7BaOqgX1fg+eWJrUN7TOIHEygd2j84EtUy1XOEwGTJDvVTLdIGmJBWsE+Ne8bSeHE7jjWnNw2BELN2Vyi3VqWhtp811R/zGZAdZsrqGvQ5EJnQn7oA8pnGtZc+A8E2G+ahWy4bTksXpLuoMj8KipW3UdDz7zcEIw9IA=
-Received: from DM6PR03CA0023.namprd03.prod.outlook.com (2603:10b6:5:40::36) by
- SN7PR12MB8769.namprd12.prod.outlook.com (2603:10b6:806:34b::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.21; Fri, 15 Sep
- 2023 03:18:14 +0000
-Received: from SN1PEPF0002636E.namprd02.prod.outlook.com
- (2603:10b6:5:40:cafe::76) by DM6PR03CA0023.outlook.office365.com
- (2603:10b6:5:40::36) with Microsoft SMTP Server (version=TLS1_2,
+ bh=UdoP//sEr3rl0fnMsf4Y/pDV+wc3YGeDZ9wGI0ljTzc=;
+ b=g5OYP4AMb6NgmaEM8rGvRt2amkUQvdxm73fgysZ139lXNwLilJ9Qlfo2PYFkWki8HIJItn0NBT+SpdBnXf52nEvJSOv7BaCSl+17JMZuX6oUI5TTEPlLS3qLG6EBg2GBt+o2JJDU4Hm4caOo0sHdBFfWIoQyXPPyQpf/HLGXAc0=
+Received: from MW4PR03CA0265.namprd03.prod.outlook.com (2603:10b6:303:b4::30)
+ by CY5PR12MB6430.namprd12.prod.outlook.com (2603:10b6:930:3a::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.35; Fri, 15 Sep
+ 2023 04:51:07 +0000
+Received: from CO1PEPF000044EF.namprd05.prod.outlook.com
+ (2603:10b6:303:b4:cafe::c3) by MW4PR03CA0265.outlook.office365.com
+ (2603:10b6:303:b4::30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.20 via Frontend
- Transport; Fri, 15 Sep 2023 03:18:14 +0000
+ Transport; Fri, 15 Sep 2023 04:51:07 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SN1PEPF0002636E.mail.protection.outlook.com (10.167.241.139) with Microsoft
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000044EF.mail.protection.outlook.com (10.167.241.69) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.20 via Frontend Transport; Fri, 15 Sep 2023 03:18:13 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ 15.20.6792.20 via Frontend Transport; Fri, 15 Sep 2023 04:51:07 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 14 Sep
- 2023 22:18:12 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ 2023 23:51:01 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 14 Sep
- 2023 20:18:11 -0700
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ 2023 23:50:51 -0500
+Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Thu, 14 Sep 2023 22:18:10 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+ Transport; Thu, 14 Sep 2023 23:50:50 -0500
+From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
 To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <git@xilinx.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Subject: [PATCH v2 2/2] spi: zynqmp_qspi: Workaround for small data cache issue
-Date: Fri, 15 Sep 2023 08:47:59 +0530
-Message-ID: <20230915031759.28889-3-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230915031759.28889-1-venkatesh.abbarapu@amd.com>
-References: <20230915031759.28889-1-venkatesh.abbarapu@amd.com>
+CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <michal.simek@amd.com>, 
+ <git@xilinx.com>
+Subject: [PATCH] net: phy: xilinx-gmii2rgmii: Removed hardcoded phy address 0
+ for bridge
+Date: Fri, 15 Sep 2023 10:20:43 +0530
+Message-ID: <20230915045043.4167628-1-tejas.arvind.bhumkar@amd.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636E:EE_|SN7PR12MB8769:EE_
-X-MS-Office365-Filtering-Correlation-Id: 34b02617-7322-4e9a-b47c-08dbb59a654e
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044EF:EE_|CY5PR12MB6430:EE_
+X-MS-Office365-Filtering-Correlation-Id: 74c10970-5d2c-4c41-1707-08dbb5a75faf
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: vGtSZ7cVGkHOqK1P3+ksujCtaSZEysrmZD6UbKyvKl3jbsmJKo2/YzfZRuCfJxx7ZRsyY5Tm8l8phYY6DBE+wHLkk+bQCCmA6uQXYanImQYhkdMY7DKsqDynrsZS5rqYgppbualcoEDfD2eYR8qMIjAnCeYlJXuB74TqrE4uYn8xCr6n45lTB2LdlJY3Fv43AhNZ4jwWdgt1MglNi4BGKSvAZAlUfQR+sn4hDQaaycO0USEwEpJ7a37wC/gI1qxaw7hh++KkH8py3a8vvg2W/yqIECXouRdBbNqstY9MF72g7VSUPWKdetfvhL1/8op+Wad3bQ0Gihv8ZOZuI49vhYXumFla/09NQvr5GBdSZecCg/vplIRf/Ne6wg11OeUqrTG/wX/9UY/xGcJRrcqWK3D8b63f9TFd/mTUSHkf9uXADEa7JwcdY3oZrujPIilHne42NgQEmY5NnpDchrk3BWpe7e/mRaaP8hFPpGVTAViBt6/fLv0H8Drlz8+L+UjaIIkRFCcaVGmgc3nZnv2kdh8Ycg54+7Fxo5R/3i3+F8DJJ+3z6S/G9Ko5EKRsGK0X5wshj0FKN+JBsC7eq5CkhHwEHilnsxNH9Y0F7hhFH7v6gMcGCezpVlqaGXztnML3BR1nn6Zebt+sJZ/XQi5QkRSA5K8yaFzhdxGkY+OVv1ExC3GUSAOzESV7Hgi3hduK7pVbUh8nhcn2240l9EMzjphMNvmUdKw25gDvaYCERdbu7EmaAsSwS/2QFrMdZ7oQ8MEiqCB3123KvI4rmwLe9w==
+X-Microsoft-Antispam-Message-Info: EbYOA5C5PIfM/UbHQAuib1WEkQogDKQfYF+XCk5aUW3AvLpFp5JAgkgO6eSzphLTSc7qzrMGyaqT18xt+ST579hcJr5QuHQZXOJFMWQzui8DIEtWOTfn7KhWMtOowsN5Vkpp/C99tSPbPhihfP7ke0ZiJLFSgeTLDAok/Uwpd2u2EuuCv7mJ+djZIvjgcORimJ3VZdBn5pUuPxfM+QOGtbXd+pW7iWWCWvfTbPBuZeTdXmvjKhDKMmxUA3u1WaIB0W0YK47TDvfLqYNBusLOq0l6P+aKIM3XFbIeE0vqa0QjLboWLIowKeRz4ExKdW/95g3ATAMpk++EJbcNnkf7TlPOu+oAREtpDzR/8ndRVQg0tc4GHal85kHnFf9foD2tWRcHx2f/hk6v9YSsPnMut38R8F2jwsD6eExD7kWsNJmjJtvWwLnAwAvasrrO6UhsX2zQEVbTrLiEJeTz7h+0qk8k5yWjTO19YBZmOahvAC9cm3DThrlQoLG2cygBuvnmKZPDQE9DD1oywTO62NEtqMJSsnSNz1789zWsUC/fLQdSehPn+wN/Q+JcAB7KwCC+W90lMqXIWkVQmm9VD1TShqQILvM1QJDZGxmzbUwJn9UQeUB9Eq9CI8iPicigrSKaQzd7XwavzAbeuuZJAsgLwUwCTpVD6yFcS6+MaQaNxsaTD8HZjeoXji+BmbJXHj0fBV/yvi5Na1Yw73l9nzvnQMTXXFh2lk7yKYKevYvh7Rfw/YkjTjGIIWr1myMoI+J0qjOLouuCbWCRnqV8I2l9ng==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(346002)(39860400002)(396003)(136003)(82310400011)(451199024)(186009)(1800799009)(46966006)(40470700004)(36840700001)(6666004)(478600001)(83380400001)(26005)(1076003)(2616005)(336012)(426003)(4744005)(2906002)(54906003)(70206006)(70586007)(316002)(6916009)(4326008)(5660300002)(8676002)(41300700001)(8936002)(47076005)(40460700003)(40480700001)(36860700001)(36756003)(86362001)(82740400003)(356005)(81166007)(36900700001);
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(39860400002)(136003)(376002)(396003)(346002)(1800799009)(186009)(82310400011)(451199024)(46966006)(40470700004)(36840700001)(40460700003)(6666004)(82740400003)(83380400001)(86362001)(356005)(103116003)(47076005)(36860700001)(36756003)(2616005)(107886003)(1076003)(426003)(40480700001)(26005)(8676002)(2906002)(70586007)(336012)(54906003)(478600001)(70206006)(316002)(41300700001)(6916009)(81166007)(4326008)(5660300002)(8936002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 03:18:13.1523 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 34b02617-7322-4e9a-b47c-08dbb59a654e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 04:51:07.0814 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 74c10970-5d2c-4c41-1707-08dbb5a75faf
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636E.namprd02.prod.outlook.com
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044EF.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8769
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6430
 X-Mailman-Approved-At: Fri, 15 Sep 2023 13:26:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -125,30 +125,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Cache related issues are seen with small sized data reads.
-Due to this, proper data is not read. Also some times sf probe
-fails randomly. To workaround this issue, invalidate dcache after read DMA
-is triggered.
+Current code expects bridge phy address at 0 which is not correct
+expectation because bridge phy address is configurable.
+That's why update the code to read reg property to figure it out
+where bridge is and use it in phy creation code.
 
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
 ---
- drivers/spi/zynqmp_gqspi.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/net/phy/phy.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/spi/zynqmp_gqspi.c b/drivers/spi/zynqmp_gqspi.c
-index a506d15227..ec59ef5804 100644
---- a/drivers/spi/zynqmp_gqspi.c
-+++ b/drivers/spi/zynqmp_gqspi.c
-@@ -707,6 +707,8 @@ static int zynqmp_qspi_start_dma(struct zynqmp_qspi_priv *priv,
- 			return -ETIMEDOUT;
- 		}
- 
-+		invalidate_dcache_range(addr, addr + size);
+diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+index ae21acb059..d64a83b83d 100644
+--- a/drivers/net/phy/phy.c
++++ b/drivers/net/phy/phy.c
+@@ -838,7 +838,10 @@ static struct phy_device *phy_connect_gmii2rgmii(struct mii_dev *bus,
+ 	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
+ 		node = ofnode_by_compatible(node, "xlnx,gmii-to-rgmii-1.0");
+ 		if (ofnode_valid(node)) {
+-			phydev = phy_device_create(bus, 0,
++			int gmiirgmii_phyaddr;
 +
- 		writel(GQSPI_DMA_DST_I_STS_DONE, &dma_regs->dmaisr);
- 
- 		debug("buf:0x%lx, rxbuf:0x%lx, *buf:0x%x len: 0x%x\n",
++			gmiirgmii_phyaddr = ofnode_read_u32_default(node, "reg", 0);
++			phydev = phy_device_create(bus, gmiirgmii_phyaddr,
+ 						   PHY_GMII2RGMII_ID, false);
+ 			if (phydev)
+ 				phydev->node = node;
 -- 
-2.17.1
+2.27.0
 
