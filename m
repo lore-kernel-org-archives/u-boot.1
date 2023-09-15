@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8802EED61E
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 17:51:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF42AEED61E
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 17:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD8BF863DD;
-	Fri, 15 Sep 2023 19:51:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1FBBF86529;
+	Fri, 15 Sep 2023 19:51:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="PDuFqChp";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="BtcdqG7I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3261186504; Fri, 15 Sep 2023 19:51:05 +0200 (CEST)
+ id 32A1C864EC; Fri, 15 Sep 2023 19:51:05 +0200 (CEST)
 Received: from EUR05-DB8-obe.outbound.protection.outlook.com
  (mail-db8eur05on2072a.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:7e1a::72a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9102B864EC
+ by phobos.denx.de (Postfix) with ESMTPS id 33CDC86366
  for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 19:51:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=m4DABZ4M3vyKbdqsqlnzV0ZurZsfR+hMLt+sy9ltEge7CHivaqKxYJ7ADFjNpOdb56c5cFz4ICCZDLGjhgqYkTflOxhQsK3LhbAiP3cNQWt7MfSEaS8CEtQybLNesB2lMiMgpXX/CJtiJSswUI9SHZFCHdrqiEgp8GScJv0aZMeCUwghbB+wIPkx53zWJ2PoABGBMyQqOgizhzqEOilXJlt7zy4/CKnYY97sMUI66k4YUG6QRQIk5Qnrbh8Z4owTi+EvB0s9pDnH9Ug/LyMuD1ZgKlogrLj0UZwBZInvKxW6CbsEaaXZiCds77PLtv4mHFAQNFrC1fVugkh8SSg1zw==
+ b=mDqVX2Mo9kF3thftoTNbny8ebJ7U9a6q3Sdn06wIcWvh+mSWTdFjik6wVAh0C153yPh6ZxD/Sqn2dnov7qH4q/ZgRqCMHmcHFOKurG++BFBgA8nrv4KyhWpUEiod73tfjY8afNUcdV8xmyFhghou3GFhb64KtFNgTd2tXJINVUZ8bNlS0Vn1WhHS2fu9juzrK4MO0rZlL4jODr/LZ4BiDCt4yG8PQi8TihNQLnwuC7lbmCzJhFQwiODNUQFQ2/2mPo+GQJS5brYdQYfdXlBAxT2aSoxczOd+0rQhor7KrKy12fXM1CrsUlRBR7B2v/azvFd5a1y7JdaJIzjpDpKxEg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2DddT8dUFMxduwEiPvzivl7NyaIzBbHGPfhvS1xYloQ=;
- b=EbzbJoOe0Wq8mrCsTSQVxcRcOX8+D1uZcKXTDg0mXuEjp7a32wg1Yt5l+i/MOvX6s1vvfe0eJMs1KlXPCIx11EMS9ToP6WtYi41FE6NcYrsM9giHMv218pv8MxqVhKmaTXJYALYDvMjRB8ZUfWGYPgz30kjn+JQq/JToJLA/TREfCPaQi/3GgPJ0emxliuY3Ru8RvfEGsVzo4sBBCvrho4oHQbaoPKjGO9cq/OwT/Q1/NsW8novQ1bXO+SeKgA9k9jCDCG0Hf6GD2PTHGs5B2Xz4KCONa/78I6oh2Vf60wIBs7wsNFbOKfZwoYngzsjq+o+7Gi7dtuH4Lbvh5T38Tg==
+ bh=puU3OdBt5uqfncjd8seh7PfUB3G8S8V98TzUb4tPwV4=;
+ b=SSOzV1LMCZ9uO7GEXg65hJ0lkeyQ4BqrC8ETrNT2RhgoKcEwvpjlU27La6yF1/yU0psQf79I2+9O/iNOohVBKuujXzTETSgBkUGPa/QKMfAsVFKNeamkOlQG0vkw0dZtTn/nBkI3F3Lg8ZLyqZdNoXzFv8IagxLRph0y4rI3y1o8oaseATOGlKV06qFFDmqe7AkY+kvHD+MeA1hmomFFNfBWxXPLzkYbec6mdhreTH3GncQyKIbDC88nBo7sFAGMk97ZvEDRVDrVzbGi6orCombahssoJN3HmOrvk6VdCTH/wb4RoG1lcQ4x6zPxIbj5x+nfaqHo9duUD1DnvpdYHg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2DddT8dUFMxduwEiPvzivl7NyaIzBbHGPfhvS1xYloQ=;
- b=PDuFqChprDZYzZ/iJtWtnBJeX/atB4eP3zAoiHOC37n+mmG4ab1cwflVOzqV/2OJJG1I4JunLzLKSDh9Oxr3jxPpVo3YjzQ5W4BmlxJkH95CPULm1WcdY3R/GKYe0BSnPd/FI+VVfwF6LT+aK0cY/c3Hk7iGtYVp0LfqHEhxQPU=
+ bh=puU3OdBt5uqfncjd8seh7PfUB3G8S8V98TzUb4tPwV4=;
+ b=BtcdqG7IKsJ5qhlcDF2Vl1aZNIfgR4uhYy1lcW+13g+L/16tEl5FAHTeEVT4llusQmm6BgcRfhiovdd9ieuqEBU3S4+Wn49iBQkbbGOoigpewEKrLYc7KCbO/RxOe2aJQEQyU0K//MjFeChC3gPVcsWMBH+3tzbJd5L8UdTKVCQ=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
@@ -57,13 +57,11 @@ To: u-boot@lists.denx.de
 Cc: Tom Rini <trini@konsulko.com>, Sean Anderson <seanga2@gmail.com>,
  Simon Glass <sjg@chromium.org>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH 1/2] spl: make SYS_SPL_MALLOC depend on !(SPL_STACK_R &&
- SPL_SYS_MALLOC_SIMPLE)
-Date: Fri, 15 Sep 2023 19:50:49 +0200
-Message-Id: <20230915175050.4109711-2-rasmus.villemoes@prevas.dk>
+Subject: [PATCH 0/2] make CONFIG_SPL_SYS_MALLOC_SIMPLE &&
+ CONFIG_SYS_SPL_MALLOC actually work
+Date: Fri, 15 Sep 2023 19:50:48 +0200
+Message-Id: <20230915175050.4109711-1-rasmus.villemoes@prevas.dk>
 X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20230915175050.4109711-1-rasmus.villemoes@prevas.dk>
-References: <20230915175050.4109711-1-rasmus.villemoes@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: MM0P280CA0067.SWEP280.PROD.OUTLOOK.COM
@@ -72,53 +70,53 @@ X-ClientProxiedBy: MM0P280CA0067.SWEP280.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|AM0PR10MB3970:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1566ad96-01c6-4aaa-2e14-08dbb61452b0
+X-MS-Office365-Filtering-Correlation-Id: 214519ac-d7cd-4667-2fb2-08dbb6145253
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: qi0VXo604IoYFR+dBXtrFycaTvby6lTRX3vQUUKng/34waMOK0oxTXln204BlqWGs0lH0Q9h+gtD9ejiuwbw4EceAiJUH0hWBbBTuX06ALsPLJxSXK40PAT9ZnmeTcCcr6wE98+D3VB7cwSxS80sIQ0Oot6G1A4n5sMCwIMBO3YEBpWUmPh/Mj8rLc17/7eouGazJFnCa098jBINGbJzHz1XnAdJjJj50oigchmMkW8GnP70LjcTEULX2JvK6mX9DIdGGLAUdlWS88JKQIzkp8fJWJJWAK6wfrKMkEatpUQbV9WuxroA4rjTIr8p8F4iElBs75tD8vCymsbSs4c6mY1QYqZd0NlR7KsZiveMHvpbCoitMrtqJcnmjD0JRSxSX2TPYKIgTwVR9T+A60g1s2bKWA/4mz+1HkYWdYfPJPOZPqyw8/h+E1kW2q6Hy2eYS1OCu77Q5qH1XXf/3RLvcTQkQ7SYTRijflcuyQ731CHCVkYZtPu3JUVdzqEfMaqf9gckmcaDSTmpL7rAgCO6XyzyzyusAZv+oEILQqhKg9RI6smWbtWffvZzM2v6iZGczksscTLx12A+EzTNiHL0aTolPCHphWvC9rWanoq0jbzGkK5LtN3Ky2jrbQmZxVtZ
+X-Microsoft-Antispam-Message-Info: S/QV7kiS7/t/mCGfi8KCnzZZfP2yXwcKgEUqxzVhaCUsoP14O2Ba63+SrQ+S5A3olkTtXH1o/0wRA45m3GXwSiAcYd1XJbsaGi8ZnQ37HrNV1TQgX89V7E9xQv8NsoeWyI9xI8ruHODflayUYsxKr8RA8ZeQ/1TVsFhAvf/cxYsVdYIGyi8Y0jbDUnC5TO98XeC7N1bB9Ds6E49PkF3EDc4AClE+AvZwUbHQ+LHkv7SS4aEC/QevnYMNp/PZoPFeq4zI0PsNSpjygiLDFKpl9GkLWOPxTTSKXglCw57Xoojx0mTw0XBItJgsJA3p7FK3n5W5XNtOYWLQYcC3gWAtXMc/58N9kD7nIQsNTwxzs/Y/cVo8B5Bwa87EHYWhqd1h1y7DjBNonso04+stI9cw37lbcHdhbS1aGZmQfGTaje1KVpklGpVZC01jD15CkIr3DVuDX0Im6fiozLYkVdtsr6mYtjEzlqmMq7Y05B0I8pn1EGgPvnACayGznwpDj/lZf6Q9MREFDvrMGF0DNGBJOOzc6KhFKHfK9kywcE2HXif14YzGpPo1nvXF6iZ5HP7+TiYa/ShifquWFQyg6wGCi+wzxSHjVTbulY5rtYwajR0tqAyVWXFVtLb6gc3AXEO1
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
  SFS:(13230031)(396003)(376002)(346002)(136003)(39850400004)(366004)(186009)(1800799009)(451199024)(6512007)(6486002)(6506007)(52116002)(6666004)(83380400001)(38350700002)(86362001)(38100700002)(36756003)(2616005)(107886003)(1076003)(26005)(6916009)(66946007)(66556008)(66476007)(54906003)(316002)(41300700001)(2906002)(44832011)(5660300002)(8676002)(4326008)(8976002)(8936002)(478600001);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?154gM/TEYb48vTJqoSEDgXGPd35tGmQHR6ZObS4lZVJjUqOCmcxWSgGoNqJR?=
- =?us-ascii?Q?WKpqrOd9EfMNYNnB8I636GJX4qLH1jvqL56Xb2tZkVYRONGpnlj9N7LPX+fO?=
- =?us-ascii?Q?4twcyksGkYjX2pznnygfPsB+yJHCv1XxQjMHGin7Gil0fFv0vxLlVXY+Pp0i?=
- =?us-ascii?Q?KQ5+BY0DYjBHrAafOdT8Bd+2xgNd6XVnKZkRg3V/l71S4y5vkVJyWa2e7Ntq?=
- =?us-ascii?Q?ZBLTt7mdElEmImVXiatkNmkIaYB3rLnq4KA+O4vAEBOaHGKq8wuVkWlizO9V?=
- =?us-ascii?Q?ftI6k2I3enSmhWtzXxl/0Xw/zvGm3KH3UUt+n3uFvSj3P/zd/Dbh0Ze/S/5V?=
- =?us-ascii?Q?HMdG97EnyyS6hYXd8wsOb4aiJBSVqYMfsFD0EtaGh5IrpLg+7p/OgK5sqrBS?=
- =?us-ascii?Q?u6vvQ05S1BkKMG6BF88gYLt6z2fr47PI2h6Iiv15eAQ2XTj3z/uRQfi6IDVZ?=
- =?us-ascii?Q?G4cF5DhC1nlgD2d4kdb/htN5gvpld1YWPimjZedOIRXnzKahUmJheiGNup3g?=
- =?us-ascii?Q?hLIGFF3wro7eVaJE3hzWePu9HLzy7yPcqCooUNNc8YtsoKbXYx7DW5Dbe9Rn?=
- =?us-ascii?Q?6OL3nYX0kCyk4FQFFlaA5L8/OusFcQmt0HWSwjruGbUD3g3M/+EGZVsTub1G?=
- =?us-ascii?Q?ygx6WIzAaqYEC5h8eiMaqV60f8I6G/TG1MeE2K/MMae2LfwJB84HqXAclB45?=
- =?us-ascii?Q?tIB9k+YgIdzfVdoy2cqvcTmfa4YFavmJUnYNIROakQ6yXZoHxW+nGFD4zH4P?=
- =?us-ascii?Q?X5+vPbIM9u5NhOEuAE1DZjrU6Nw7c9meT2lCvCTnBH1GMfK7zk/kPivp5QI5?=
- =?us-ascii?Q?+Q7Y/n2IIh9wWR9sekY9HhJCvI1BLz10m2O3RS2NajsMAHp38GAQxAXS6A9Z?=
- =?us-ascii?Q?5wA6G1M7LyAerGgi4ChgKvt7KMZa7drTmNhuBOPqTc59WBzxQ+pFJ0fIX3M0?=
- =?us-ascii?Q?gdsJszF03mgRkc9+PGpOLLPZm8pvIffNjkl9Xre6sjba50QidOWnk4jQoVAo?=
- =?us-ascii?Q?Oqn2HB5cO9BfyZj+hTNJZ/JOzwBTuEXLLFYtwV87q166dkqx7wvlyPQvJ8y+?=
- =?us-ascii?Q?vraG6/QANH1hjgQ9EOebqBWmcsju0N9q8ERZGSJ+SmtR+vca0YrifUqO7Fkf?=
- =?us-ascii?Q?fVEqi/FQpveci/Cvkb2MimSPRcpnZU8lF62LAfCYNv8hZnL6ZMB9gyu/hjUV?=
- =?us-ascii?Q?Nku0lv1BiV0X6l46RTCkxyZ9Q7sp4G0n+7yoKue4FbVUUzKMbQ6eQU2poKrN?=
- =?us-ascii?Q?pVJEM1gXMox0hj6ifXjp4nFDa4lPoSyvqIgab8+DB/6Jbc4wkqLm8pGcBs/R?=
- =?us-ascii?Q?XIHtyXCheK8zK6JGnuVZmCajvUKn1FIHmGmewQiY9Q3UsIB8WKNugEBw9EHo?=
- =?us-ascii?Q?iP6OoFLLn5pbeSwQjFkbARZMf9LrxhVRqdwuycBSEnwqhQ8A214pwh4FaURv?=
- =?us-ascii?Q?y8qMx13ci8jrof0yL1+bUbRohBSXVDvlKBaShjuqoSjfn8oD0oBkekMs0Hym?=
- =?us-ascii?Q?ukD5IMlEibMfs7j71y0akNrsmUmR44UOYmlDAYPImYLScFoFY1eUuuvemP/5?=
- =?us-ascii?Q?6lRHKV1u919FfoS7uVfMh3nF3HZEIKUlREPu//+nLkIccP0MUcj7Eo102duM?=
- =?us-ascii?Q?SA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?h1PetkaQki6UtOLaHug6l5+AF6jaqlVa4JPq1ZTsZm/C42wCvAP0+Qe0Vedb?=
+ =?us-ascii?Q?CeaWRMcVHRrqbrTUO6V1t7FuvCGQdH6ml7WzDdE10rSbI0VpBYKpMwNxk9tB?=
+ =?us-ascii?Q?+vYIhzbXeQjMl/S0+V8H8NiMF4ufU9rISATPvVR80MgTIg7sldQ2B/c7f2qU?=
+ =?us-ascii?Q?iSYMui9YlkLhQ+XHbmkSbEZ9nY3OhFP8f9HrXxGKG18DdyJz7SeQ+8ZqPL+n?=
+ =?us-ascii?Q?iSXB4DwAsN24zOnh1Nb1DQjpyaGB2A6vyBcjRl5xxFb8ky+pOyFyXye+t5hR?=
+ =?us-ascii?Q?7Ouq5vDfk/GFo80fUq6d2YHjPXBtS7BmnCRCTEWg16MSHwv0/KQQz3f+sbe9?=
+ =?us-ascii?Q?W+5B97mnJGVlI0NLmINfbrtyA/pKc58rZUJbAHIINL4tWhhUIyAJlJJlPxad?=
+ =?us-ascii?Q?FAwv/Otq5I/EPYQqlXA3LzAlvrwR3/UJB7sHtaysUry0tWS1K1NVKHzidVmP?=
+ =?us-ascii?Q?N4Pu4TANmQlG6z75W4IAXcAdqLKXpbDvNOqIN9uaZxwY6TA6YNB8wzlDBlmD?=
+ =?us-ascii?Q?edi2IsGQTwq50gwWv5pSdmkxhfBkfSuXi3EXLw4cdx1EkusCasWd66VFkPe5?=
+ =?us-ascii?Q?hE1gluU4USjSibPJsG8Ml7UTtGZV7MAqNYDs3hXfLq7nKDWperIDbWf5BjAX?=
+ =?us-ascii?Q?Wm69ChBSDtKxug3vEE57vXCaZkMcH0tNhlFfoYKcUceUSn9N47tivUDKGbTn?=
+ =?us-ascii?Q?48WmBcHQ0zt0SdG6R/fXPXDFjspaWFOMZhUFPAELvZY99BKyzg/ntCBdtKf9?=
+ =?us-ascii?Q?/qheCJCiG2IQ5+O91q+adSA3rlwymls1jtE4YcBzyuxxE40a3/QxH5MZzAg1?=
+ =?us-ascii?Q?vp8MpYTVPI/nnIb4Dol4nJ8CRkoRfjqMqU7EF0bQ24HYtZ+OIrqt14LQgDh6?=
+ =?us-ascii?Q?lEPD4fX1CORe/h8KpTKgMIMQub2FRNAHRZt3IZXWnuXxeY2F+G1eaYMDwtm2?=
+ =?us-ascii?Q?vGZA3d6cXEFYUz8lYQ/viQHvZIoq3rRRQtoGWlC+97fQEQ87ZXuDAt+MDjug?=
+ =?us-ascii?Q?sbtuc9lK6Gao+WwlJ6VdZ3tWccNeaJQ1PuwMZgt71Eskkql+EmiJwF3bHWn7?=
+ =?us-ascii?Q?HxlnnCzDQoa45LU1eG2SbbZNon9V6Zof/SOQvhZJ9jA9DKHShcOrSVBOnqQb?=
+ =?us-ascii?Q?GLOok8O6iNPb+NrCKIUzP3nQHCtIxYYHLAHYKJJ4O/4j/CBT6eVI1/Yku6D2?=
+ =?us-ascii?Q?XP40HZJMEAcMpUq6gvaWZF4ck2I+rAoRkmEJEbdQ4FiGQGm9q4qTPRAnFbLk?=
+ =?us-ascii?Q?KGKkBvVB3q2DCqK3PLJg6E5iDAGMOBh5eYLICHOUwTSQS7iQdUnIl3ThKHNI?=
+ =?us-ascii?Q?oulJm0xhXIPhn9Y5pyuBjubtuMOvZz9fgE4n1D75tUsySrr7GWh1//+B3cBR?=
+ =?us-ascii?Q?p91Sv3AuaO/9ghxOzmz4vrQlzPz7nnP7D5BHteujsD/t2qmz1RZBH7A/lBfA?=
+ =?us-ascii?Q?7iQO14xyIcaTfUu8QZ5Xco+tpwTTPzxjGr0wPg9JT0UIodwJUgoUizGgmrAm?=
+ =?us-ascii?Q?2nQIdfUBoOdKKJBI7BMgiRHpojxey1sEny8lHEw6hp4x7WuXsvDaGV7gH33s?=
+ =?us-ascii?Q?dHp931vxYkm1JvyJL9nw5IdiSt81ARm8QP5DS6ws3wJqqQJocEbQei7tuDNT?=
+ =?us-ascii?Q?nw=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1566ad96-01c6-4aaa-2e14-08dbb61452b0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 214519ac-d7cd-4667-2fb2-08dbb6145253
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 17:51:00.6872 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2023 17:51:00.1658 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eAnANaxyHksR3NkQT+JKyaQMKCfibPgIwERUkKen5YOBSb27sVHdhTMVROwdGo8aiDUKy1bXK8RGnM7om1PpAQZ8XLqR7omKDtFEMy43E7Y=
+X-MS-Exchange-CrossTenant-UserPrincipalName: 9kCM5PmKgstT01DwsaQZHsO5/u1a+8zCxjhuDU1s5oJhs90V1B0n+rXq1xpYBJ4MZQSArspAec91tRNV1v+czU3Br5+FnNZrOBH5ehijfQE=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR10MB3970
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -136,72 +134,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, one can have both SYS_SPL_MALLOC=y and
-SPL_SYS_MALLOC_SIMPLE=y.
+Currently, setting both CONFIG_SPL_SYS_MALLOC_SIMPLE and
+CONFIG_SYS_SPL_MALLOC (but not CONFIG_SPL_STACK_R) doesn't work as
+expected: The SIMPLE option means that all malloc etc. calls are
+directed at build-time to the implementation in malloc_simple.c, but
+the mem_alloc_init() call which is done in board_init_f() currently
+calls into dlmalloc.c, and updates the variables describing the
+dlmalloc arena - which is of course completely unused. And the
+malloc() implementation continues to hand out allocations from the
+initial SPL_SYS_MALLOC_F_LEN bytes.
 
-However, while the former does make board_init_r() in spl.c call
-mem_malloc_init(), that has no effect at all, because that just
-updates a few bookkeeping variables, but as the linker map shows, the
-latter setting has (as expected) caused most of dlmalloc.o to be
-garbage-collected. That is, those bookkeeping variables are not used
-for anything.
+These two patches are an attempt at making the combination in $subject
+actually work as one would expect: define an area of sdram to be used
+as a malloc arena, but still manage that using the malloc_simple()
+implementation.
 
-IOWs, with SYS_SPL_MALLOC=y and SPL_SYS_MALLOC_SIMPLE=y, the value of
-CONFIG_SYS_SPL_MALLOC_SIZE is irrelevant, and one still only has the
-small, SRAM-backed, malloc arena available.
+Since this now changes the mem_alloc_init() from being a harmless
+no-op call to actually doing something, there's a risk of some boards
+breaking. The solution for those boards will probably be to just drop
+CONFIG_SYS_SPL_MALLOC, since that hasn't actually done anything.
 
-Now I want to change that so that the mem_malloc_init() instead
-updates the gd->malloc* variables to point at the SDRAM area.
+Rasmus Villemoes (2):
+  spl: make SYS_SPL_MALLOC depend on !(SPL_STACK_R &&
+    SPL_SYS_MALLOC_SIMPLE)
+  malloc_simple: add mem_malloc_init_simple()
 
-However, there's a small complication, namely when SPL_STACK_R=y is
-also in the mix. In that case, the "simple" malloc arena is indeed
-updated to point at the SDRAM area carved out of the new stack (see
-spl_relocate_stack_gd()). So that case works in the sense that one
-does get a "large" "simple" malloc arena (of size
-SPL_STACK_R_MALLOC_SIMPLE_LEN) - but CONFIG_SYS_SPL_MALLOC_SIZE is
-still irrelevant. Once I change the mem_malloc_init() logic, this
-would then break, because the gd->malloc* variables would be updated
-again. Also, it doesn't really make sense to allow the .config to
-essentially specify two different SDRAM-backed malloc arenas.
+ common/dlmalloc.c      | 2 +-
+ common/malloc_simple.c | 7 +++++++
+ common/spl/Kconfig     | 1 +
+ include/malloc.h       | 7 +++++--
+ 4 files changed, 14 insertions(+), 3 deletions(-)
 
-So since CONFIG_SYS_SPL_MALLOC and its dependent options are no-ops
-currently when SPL_STACK_R && SPL_SYS_MALLOC_SIMPLE, simply forbid
-that combination.
-
-Simple grepping suggests that these boards/configs are affected, in
-that they become a tiny bit smaller, and the defconfig will need
-refreshing:
-
-  am62ax_evm_r5_defconfig
-  am62x_evm_r5_defconfig
-  am64x_evm_a53_defconfig
-  am64x_evm_r5_defconfig
-  am65x_evm_a53_defconfig
-  am65x_hs_evm_a53_defconfig
-  iot2050_defconfig
-  j7200_evm_a72_defconfig
-  j721e_evm_a72_defconfig
-  j721s2_evm_a72_defconfig
-  j721s2_evm_r5_defconfig
-  verdin-am62_r5_defconfig
-
-Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
----
- common/spl/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index c5dd476db5..fca9ada337 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -405,6 +405,7 @@ config SPL_SEPARATE_BSS
- config SYS_SPL_MALLOC
- 	bool "Enable malloc pool in SPL"
- 	depends on SPL_FRAMEWORK
-+	depends on !(SPL_STACK_R && SPL_SYS_MALLOC_SIMPLE)
- 
- config HAS_CUSTOM_SPL_MALLOC_START
- 	bool "For the SPL malloc pool, define a custom starting address"
 -- 
 2.37.2
 
