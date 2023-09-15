@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2B3EEEAA7A
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 00:24:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F735EEAA7D
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 00:24:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5227869A3;
-	Fri, 15 Sep 2023 02:23:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09ED0869F6;
+	Fri, 15 Sep 2023 02:23:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lD7VHgSD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VvQp53n4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAAE186900; Fri, 15 Sep 2023 02:22:59 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 7CDBC864C7; Fri, 15 Sep 2023 02:23:00 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B619B86852
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 02:22:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56A0A864C7
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 02:22:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-7926a450a0aso59807939f.3
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 17:22:57 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-7951f0e02ecso52879239f.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 17:22:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694737376; x=1695342176; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694737377; x=1695342177; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oUTDj1PFePlkpC0R79rh22XZtzbNewxCUokez5FOH+Q=;
- b=lD7VHgSD0yYG1kkiWlgG+C4t3+59FSODYgwNQDZqTfxYwswOB4xXUHeVUuAbMQp6qT
- Ou1nwH/8sXIPtR77bVdRNKoB8CmO6nl60DNcNdn7IvQdLfzQFYYazv663zwt+hgtLVY8
- UAnw6bv/74dAXNaABJ4D/RksF0MUnhn/sRNIs=
+ bh=iH2IBlAf7yLZHqrzwTJ8hzLX752MB446BTGA2b/Ytko=;
+ b=VvQp53n4P+RHNT4TGGfN/J/vfIxGP/WYLPccSyatymQ/QqbdfuAWEsNdcHtrxGAS3g
+ JAdbewdLe0NLQKWBzdJwKpDk25uxhQnpFVk1653cC3GdfcqLwEqhpv2A5kh6VeDFxaDC
+ OXE1KxGEIO8OtN+ZkVKcqs/yzpUKOrByITylo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694737376; x=1695342176;
+ d=1e100.net; s=20230601; t=1694737377; x=1695342177;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oUTDj1PFePlkpC0R79rh22XZtzbNewxCUokez5FOH+Q=;
- b=VGUa/HiwewWrF2SdQ/a8ZqDdArx8N+mlPVS0754FFFbyPsOx566/JBOR0kuhPa/WG8
- uk7U+9Z0wkApskhOuQvjiIJ6//Sn8QAn1lT9Bx41/knNvDo+FVvHy5FgFogp/TZXC5KJ
- cScH0pQTu4KCD4na4CKu0VAcV0lG1B941XCRgPcFOn3YirITRW05Z6E8pZCw99a9h8mu
- qESLK3wOvdkTpHWpBxq/H+AplBNIqosWqw6tY3z3fffMbAkGOg3y5siU9DDYoWFncpkW
- +kSxAsXMOhkr0Rlfp9xSQqcu0Kb9SvikihpzXVxiQYlV6ALEqVAfGB5M/dNnsYcOs7wU
- ADyA==
-X-Gm-Message-State: AOJu0YyfGZC18b67PgZFwCiRzPLXde4UAU3v8Mls3Dx12RgMf2s1BRap
- 0T4io5QbMfv0b8hjyI3wa8EDePNohwmU1JDMve4=
-X-Google-Smtp-Source: AGHT+IEFrMVIrLJ//ALfChv7l2wry+VbEWvO8DUGVb1cTbmnu3xq0J5Fl7G5qvwnu7DYApYjM0KF4w==
-X-Received: by 2002:a5d:9a87:0:b0:783:4bc6:636e with SMTP id
- c7-20020a5d9a87000000b007834bc6636emr21048iom.21.1694737376175; 
+ bh=iH2IBlAf7yLZHqrzwTJ8hzLX752MB446BTGA2b/Ytko=;
+ b=SbPnPDOt83hwAVvZbB2sh0wcJb7PtzPdGV7azszIR3RGkknCjN4IjNdbDN9UFlH8/A
+ OKhYuBAfEdmGKRUPxI6/fQPz4q7Z62ExabbcIEW7buXpV3iP4V8hyb34ml37DRKFNX46
+ 2UtGVUxrmuzd6k9V29eYLh1fKHCOb/fB8Rb78OWrE3iiB8VWohdxeQwbJ5AIj0aL2Hi0
+ guSeA+RBP7DcJRQ8vvk7Io1E6EDwchk36ynLlg67DkqmV1mYvNV+OiRWXQlJjDtJkEFA
+ z29/FcJichR4hn1O+zu/Hr+CkYb+Q25mo5ONKXz4AiVz3ZTL4m3r7NEyszpN1KiDgG+W
+ 2WAg==
+X-Gm-Message-State: AOJu0YyGeF1ZLifpLPP5uO6UkTXAcvzccWRxWN25DkU94RD36FO6w9N0
+ L/pzk4UejF3hbBhY9yEWv50RGZWf37lTQmvtmDI=
+X-Google-Smtp-Source: AGHT+IGCTg8MsbqDGrPhah1UJ8J5OengOxSOhcEUitR3RJuhBk/oZJERExrAt1o+bzZ7y8fm3MLTug==
+X-Received: by 2002:a6b:a16:0:b0:791:acd7:233f with SMTP id
+ z22-20020a6b0a16000000b00791acd7233fmr32402ioi.15.1694737376899; 
  Thu, 14 Sep 2023 17:22:56 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- i23-20020a5e8517000000b007836e9ff198sm744796ioj.55.2023.09.14.17.22.55
+ i23-20020a5e8517000000b007836e9ff198sm744796ioj.55.2023.09.14.17.22.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 14 Sep 2023 17:22:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Masahiro Yamada <masahiroy@kernel.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 11/27] moveconfig: Correct unused variables
-Date: Thu, 14 Sep 2023 18:22:13 -0600
-Message-ID: <20230915002236.798760-12-sjg@chromium.org>
+Subject: [PATCH v2 12/27] moveconfig: Correct non-snake variables names
+Date: Thu, 14 Sep 2023 18:22:14 -0600
+Message-ID: <20230915002236.798760-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230915002236.798760-1-sjg@chromium.org>
 References: <20230915002236.798760-1-sjg@chromium.org>
@@ -88,140 +88,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix pylint warnings about unused variables.
+Correct some variable names that do not conform to snake case, with the
+three-character minimum.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/moveconfig.py | 26 ++++++++++++--------------
- 1 file changed, 12 insertions(+), 14 deletions(-)
+ tools/moveconfig.py | 70 ++++++++++++++++++++++-----------------------
+ 1 file changed, 35 insertions(+), 35 deletions(-)
 
 diff --git a/tools/moveconfig.py b/tools/moveconfig.py
-index 42298dd5d9c8..911e272d11a3 100755
+index 911e272d11a3..2234f28a7724 100755
 --- a/tools/moveconfig.py
 +++ b/tools/moveconfig.py
-@@ -620,7 +620,7 @@ class Slots:
-         self.slots = []
-         devnull = subprocess.DEVNULL
-         make_cmd = get_make_cmd()
--        for i in range(args.jobs):
-+        for _ in range(args.jobs):
-             self.slots.append(Slot(toolchains, args, progress, devnull,
-                                    make_cmd, reference_src_dir, db_queue))
+@@ -235,10 +235,10 @@ def read_file(fname, as_lines=True, skip_unicode=False):
+                 return [line.rstrip('\n') for line in inf.readlines()]
+             else:
+                 return inf.read()
+-        except UnicodeDecodeError as e:
++        except UnicodeDecodeError as exc:
+             if not skip_unicode:
+                 raise
+-            print(f"Failed on file '{fname}: {e}")
++            print(f"Failed on file '{fname}: {exc}")
+             return None
  
-@@ -772,7 +772,7 @@ def find_kconfig_rules(kconf, config, imply_config):
+ def try_expand(line):
+@@ -331,13 +331,13 @@ class KconfigParser:
+         arch = ''
+         cpu = ''
+         for line in read_file(self.dotconfig):
+-            m = self.re_arch.match(line)
+-            if m:
+-                arch = m.group(1)
++            m_arch = self.re_arch.match(line)
++            if m_arch:
++                arch = m_arch.group(1)
+                 continue
+-            m = self.re_cpu.match(line)
+-            if m:
+-                cpu = m.group(1)
++            m_cpu = self.re_cpu.match(line)
++            if m_cpu:
++                cpu = m_cpu.group(1)
+ 
+         if not arch:
+             return None
+@@ -422,7 +422,7 @@ class Slot:
+         If the subprocess is still running, wait until it finishes.
+         """
+         if self.state != STATE_IDLE:
+-            while self.ps.poll() == None:
++            while self.proc.poll() == None:
+                 pass
+         shutil.rmtree(self.build_dir)
+ 
+@@ -467,10 +467,10 @@ class Slot:
+         if self.state == STATE_IDLE:
+             return True
+ 
+-        if self.ps.poll() == None:
++        if self.proc.poll() == None:
+             return False
+ 
+-        if self.ps.poll() != 0:
++        if self.proc.poll() != 0:
+             self.handle_error()
+         elif self.state == STATE_DEFCONFIG:
+             if self.reference_src_dir and not self.current_src_dir:
+@@ -499,7 +499,7 @@ class Slot:
+                                'Failed to process.\n')
+         if self.args.verbose:
+             self.log += color_text(self.args.color, COLOR_LIGHT_CYAN,
+-                                   self.ps.stderr.read().decode())
++                                   self.proc.stderr.read().decode())
+         self.finish(False)
+ 
+     def do_defconfig(self):
+@@ -507,9 +507,9 @@ class Slot:
+ 
+         cmd = list(self.make_cmd)
+         cmd.append(self.defconfig)
+-        self.ps = subprocess.Popen(cmd, stdout=self.devnull,
+-                                   stderr=subprocess.PIPE,
+-                                   cwd=self.current_src_dir)
++        self.proc = subprocess.Popen(cmd, stdout=self.devnull,
++                                     stderr=subprocess.PIPE,
++                                     cwd=self.current_src_dir)
+         self.state = STATE_DEFCONFIG
+ 
+     def do_autoconf(self):
+@@ -528,9 +528,9 @@ class Slot:
+         cmd = list(self.make_cmd)
+         cmd.append('KCONFIG_IGNORE_DUPLICATES=1')
+         cmd.append(AUTO_CONF_PATH)
+-        self.ps = subprocess.Popen(cmd, stdout=self.devnull, env=env,
+-                                   stderr=subprocess.PIPE,
+-                                   cwd=self.current_src_dir)
++        self.proc = subprocess.Popen(cmd, stdout=self.devnull, env=env,
++                                     stderr=subprocess.PIPE,
++                                     cwd=self.current_src_dir)
+         self.state = STATE_AUTOCONF
+ 
+     def do_build_db(self):
+@@ -552,8 +552,8 @@ class Slot:
+ 
+         cmd = list(self.make_cmd)
+         cmd.append('savedefconfig')
+-        self.ps = subprocess.Popen(cmd, stdout=self.devnull,
+-                                   stderr=subprocess.PIPE)
++        self.proc = subprocess.Popen(cmd, stdout=self.devnull,
++                                     stderr=subprocess.PIPE)
+         self.state = STATE_SAVEDEFCONFIG
+ 
+     def update_defconfig(self):
+@@ -1145,13 +1145,13 @@ def prefix_config(cfg):
+     >>> prefix_config('A123')
+     'CONFIG_A123'
      """
-     sym = kconf.syms.get(imply_config)
-     if sym:
--        for sel, cond in (sym.selects + sym.implies):
-+        for sel, _ in (sym.selects + sym.implies):
-             if sel.name == config:
-                 return sym
-     return None
-@@ -941,7 +941,7 @@ def do_imply_config(config_list, add_imply, imply_flags, skip_added,
-     if add_imply and add_imply != 'all':
-         add_imply = add_imply.split(',')
+-    op = ''
++    oper = ''
+     if cfg[0] == '~':
+-        op = cfg[0]
++        oper = cfg[0]
+         cfg = cfg[1:]
+     if not cfg.startswith('CONFIG_'):
+         cfg = 'CONFIG_' + cfg
+-    return op + cfg
++    return oper + cfg
  
--    all_configs, all_defconfigs, config_db, defconfig_db = read_database()
-+    all_configs, all_defconfigs, _, defconfig_db = read_database()
  
-     # Work through each target config option in turn, independently
-     for config in config_list:
-@@ -1101,7 +1101,7 @@ def do_find_config(config_list):
-             is preceded by a tilde (~) then it must be false, otherwise it must
-             be true)
-     """
--    all_configs, all_defconfigs, config_db, defconfig_db = read_database()
-+    _, all_defconfigs, config_db, _ = read_database()
- 
-     # Start with all defconfigs
-     out = all_defconfigs
-@@ -1199,9 +1199,7 @@ def scan_makefiles(fnames):
+ RE_MK_CONFIGS = re.compile(r'CONFIG_(\$\(SPL_(?:TPL_)?\))?([A-Za-z0-9_]*)')
+@@ -1199,12 +1199,12 @@ def scan_makefiles(fnames):
      fname_uses = {}
      for fname, rest in fnames:
          m_iter = RE_MK_CONFIGS.finditer(rest)
--        found = False
-         for m in m_iter:
--            found = True
-             real_opt = m.group(2)
+-        for m in m_iter:
+-            real_opt = m.group(2)
++        for mat in m_iter:
++            real_opt = mat.group(2)
              if real_opt == '':
                  continue
-@@ -1242,9 +1240,11 @@ def scan_src_files(fnames):
-     >>> RE_CONFIG_IS.search('#if CONFIG_IS_ENABLED(OF_PLATDATA)').groups()
-     ('OF_PLATDATA',)
-     """
-+    fname = None
-+    rest = None
-+
+             is_spl = False
+-            if m.group(1):
++            if mat.group(1):
+                 is_spl = True
+             use = ConfigUse(real_opt, is_spl, fname, rest)
+             if fname not in fname_uses:
+@@ -1244,8 +1244,8 @@ def scan_src_files(fnames):
+     rest = None
+ 
      def add_uses(m_iter, is_spl):
-         for m in m_iter:
--            found = True
-             real_opt = m.group(1)
+-        for m in m_iter:
+-            real_opt = m.group(1)
++        for mat in m_iter:
++            real_opt = mat.group(1)
              if real_opt == '':
                  continue
-@@ -1302,7 +1302,7 @@ def do_scan_source(path, do_update):
-         """
-         # Make sure we know about all the options
-         not_found = collections.defaultdict(list)
--        for use, rest in all_uses.items():
-+        for use, _ in all_uses.items():
-             name = use.cfg
-             if name in IGNORE_SYMS:
-                 continue
-@@ -1314,7 +1314,6 @@ def do_scan_source(path, do_update):
-                 # If it is an SPL symbol, try prepending all SPL_ prefixes to
-                 # find at least one SPL symbol
-                 if use.is_spl:
--                    add_to_dict = False
-                     for prefix in SPL_PREFIXES:
-                         try_name = prefix + name
-                         sym = kconf.syms.get(try_name)
-@@ -1332,7 +1331,6 @@ def do_scan_source(path, do_update):
-                 elif not use.is_spl:
-                     check = False
-             else: # MODE_NORMAL
--                debug = False
-                 sym = kconf.syms.get(name)
-                 if not sym:
-                     proper_name = is_not_proper(name)
-@@ -1373,7 +1371,7 @@ def do_scan_source(path, do_update):
-     print(f'Scanning source in {path}')
-     args = ['git', 'grep', '-E', r'IS_ENABLED|\bCONFIG']
-     with subprocess.Popen(args, stdout=subprocess.PIPE) as proc:
--        out, err = proc.communicate()
-+        out, _ = proc.communicate()
-     lines = out.splitlines()
-     re_fname = re.compile('^([^:]*):(.*)')
-     src_list = []
-@@ -1407,7 +1405,7 @@ def do_scan_source(path, do_update):
-             print(f'Not sure how to handle file {fname}')
+             use = ConfigUse(real_opt, is_spl, fname, rest)
+@@ -1573,9 +1573,9 @@ doc/develop/moveconfig.rst for documentation.'''
+     # We are either building the database or forcing a sync of defconfigs
+     config_db = {}
+     db_queue = queue.Queue()
+-    t = DatabaseThread(config_db, db_queue)
+-    t.daemon = True
+-    t.start()
++    dbt = DatabaseThread(config_db, db_queue)
++    dbt.daemon = True
++    dbt.start()
  
-     # Scan the Makefiles
--    all_uses, fname_uses = scan_makefiles(mk_list)
-+    all_uses, _ = scan_makefiles(mk_list)
+     check_clean_directory()
+     bsettings.setup('')
+@@ -1598,12 +1598,12 @@ doc/develop/moveconfig.rst for documentation.'''
+         subprocess.call(['git', 'commit', '-s', '-m', msg])
  
-     spl_not_found = set()
-     proper_not_found = set()
-@@ -1428,7 +1426,7 @@ def do_scan_source(path, do_update):
-     proper_not_found |= set([key for key in not_found.keys()])
+     if args.build_db:
+-        with open(CONFIG_DATABASE, 'w', encoding='utf-8') as fd:
++        with open(CONFIG_DATABASE, 'w', encoding='utf-8') as outf:
+             for defconfig, configs in config_db.items():
+-                fd.write(f'{defconfig}\n')
++                outf.write(f'{defconfig}\n')
+                 for config in sorted(configs.keys()):
+-                    fd.write(f'   {config}={configs[config]}\n')
+-                fd.write('\n')
++                    outf.write(f'   {config}={configs[config]}\n')
++                outf.write('\n')
  
-     # Scan the source code
--    all_uses, fname_uses = scan_src_files(src_list)
-+    all_uses, _ = scan_src_files(src_list)
- 
-     # Make sure we know about all the options
-     print('\nCONFIG options present in source but not Kconfig:')
-@@ -1529,7 +1527,7 @@ doc/develop/moveconfig.rst for documentation.'''
- 
-     if args.test:
-         sys.argv = [sys.argv[0]]
--        fail, count = doctest.testmod()
-+        fail, _ = doctest.testmod()
-         if fail:
-             return 1
-         unittest.main()
+ if __name__ == '__main__':
+     sys.exit(main())
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
