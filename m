@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3675EEAA7D
-	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 00:25:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E952EEEAA7A
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 00:26:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 590D086A50;
+	by phobos.denx.de (Postfix) with ESMTP id B3B3286A6D;
 	Fri, 15 Sep 2023 02:23:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kdP15u9V";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NB9pe1qA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9816986A2F; Fri, 15 Sep 2023 02:23:04 +0200 (CEST)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id 45CA986A3C; Fri, 15 Sep 2023 02:23:05 +0200 (CEST)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8532486886
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 02:23:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 462EA8698E
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 02:23:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-7927f241772so58580839f.1
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 17:23:02 -0700 (PDT)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-794c7d95ba5so60567739f.0
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 17:23:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1694737381; x=1695342181; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1694737382; x=1695342182; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P2P4icNFoTbPTYy92NRcn3nOAGm3ffZwc4JjLnVNPLk=;
- b=kdP15u9V6HaPeslzk82YNKGPo9Qh8AubCenOVEBqrTEDTiuGlKQ29d4eSRthb4Ro20
- 3jrLaBJ36J5oPPB4uYPBa5CLVBTTRhjovnTpId7I/2obq2+RDEUfiAVGTbAvo5GAloBC
- r3CoNzhLkR8YQV8tXjuH+MP35ae91Z5UDyPDo=
+ bh=hVwRtE41w7vAorF1SAOgGuLPbYZOJpdZLtoAjRKWTII=;
+ b=NB9pe1qAm3/hwqIlsCfrh4nUMyqlL3dAdoQnmGvBVeQe9olTDwnRBjyygTSYVKntJs
+ EIMaWQnkCJEcy9jwTo4+zp92Ia9yahq5fxvkppZJKGxnSbvgKu2lpkMYlyluuGsp0XJ2
+ lkTuhWjnokAuHBC3v+v0pbOgzPeuUM0chzUuI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694737381; x=1695342181;
+ d=1e100.net; s=20230601; t=1694737382; x=1695342182;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=P2P4icNFoTbPTYy92NRcn3nOAGm3ffZwc4JjLnVNPLk=;
- b=tvv2OPzJuG2HnE5cwnxTAoLmYBgozs4Nw+iW2kOOVPXNENJQOrjA/Tc+xoVxTGnOGe
- KEglKHt7nESarBNxaNkE5fJD89o13NDq1Q+6YpbOtriz32WGr4R9OhnJsZOaqC4bwhLX
- 5iIyB6ijHx5kZMMrV+BOx6WrYWGgu8+WYRD2xG4bj6hb0OkuhyFYPHOBIGY7RpKumv/O
- jtE8XwaQC4tQs0Jr0qUNKhhxrS2/EyKbPYMM3mmRZgm6PfWxRv3a4zJXIKm416BViMZd
- +MfaHfNmW+TdlMoyv336QxGKhZTKTQpBqbXLJzpHmQ5kwbJxKB1Cp/j8zoI3flGT9C97
- ky2g==
-X-Gm-Message-State: AOJu0YxntmoCoeZ45KpBh3YfBgA1WNXvdZDlC4BH1je0zN3TJr70KTQR
- 0xF+lLbvCoaPKPnEGMfM71uLEn93dF2uHyYWBcU=
-X-Google-Smtp-Source: AGHT+IG2uN5XtV6Y16b5LEIF4MTibLYI7hSGfwUjyRslZjgLjoJaXR2k/iuBbYoX66+xO7HeqkIhCQ==
-X-Received: by 2002:a6b:da05:0:b0:79a:b526:2f1c with SMTP id
- x5-20020a6bda05000000b0079ab5262f1cmr39627iob.21.1694737381223; 
+ bh=hVwRtE41w7vAorF1SAOgGuLPbYZOJpdZLtoAjRKWTII=;
+ b=mC+QIWeStcwwlFw4xY5fI10vSOMWphuODyghBDUDyqflPbSlwrAyCekwdfJb1Nbufz
+ kPBd4KUZP5dBiN4CEriA1fq65eRh+9lYl7tDh+B5y88OKcdxn0Y1lYwNmB15Eln07e9+
+ wL+Awj3ANRtw49QM8D0kwqSPUpyPtR9Bz7lgbJCrkku90TnHnovRpAkynTGqrYC6wMf7
+ wtEkbRhl/X9ftk1+NNkM91/e3HThyf1fwStv/hemojp73gpwsOm2s4LTF5Pk+qGmFSMu
+ pSPdTUAW9thDQB2h4igHL3R+iqJJHCW398F1wkOrRY9/Z8VD+foFVRKCei6c9QDmqE3B
+ wTVw==
+X-Gm-Message-State: AOJu0Ywjdi+BUkP7nd/TeQKsB8LvvOl8J77gy5En500hJls0UFDmtGwq
+ gLgeyAtZ1zePssqO45Erk+BH+/08uPc9hn9fBoI=
+X-Google-Smtp-Source: AGHT+IGzhQsfV5mhpombyyxyqyjEUJGkp/suLZFKwjHGvWu9mI3Ll1SHWdgW1ImK87iuZg5TrDhH4Q==
+X-Received: by 2002:a6b:e40a:0:b0:792:9406:a453 with SMTP id
+ u10-20020a6be40a000000b007929406a453mr40489iog.14.1694737381895; 
  Thu, 14 Sep 2023 17:23:01 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- i23-20020a5e8517000000b007836e9ff198sm744796ioj.55.2023.09.14.17.23.00
+ i23-20020a5e8517000000b007836e9ff198sm744796ioj.55.2023.09.14.17.23.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 14 Sep 2023 17:23:01 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Masahiro Yamada <masahiroy@kernel.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 18/27] moveconfig: Reduce the amount of output
-Date: Thu, 14 Sep 2023 18:22:20 -0600
-Message-ID: <20230915002236.798760-19-sjg@chromium.org>
+Subject: [PATCH v2 19/27] moveconfig: Avoid showing progress at the end
+Date: Thu, 14 Sep 2023 18:22:21 -0600
+Message-ID: <20230915002236.798760-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230915002236.798760-1-sjg@chromium.org>
 References: <20230915002236.798760-1-sjg@chromium.org>
@@ -88,97 +88,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Output a single line in the case where the defconfig only has one line
-of output. Show the name without the _defconfig suffix, since that is the
-same for all boards.
+When the process is finished, moveconfig leaves a line saying that all
+boards were processed (for better or worse). Drop this, since it is
+unncessary.
 
-Use a list for the log so it is easier to process at the end.
+Future work will provide a summary at the end instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/moveconfig.py | 29 +++++++++++++++++------------
- 1 file changed, 17 insertions(+), 12 deletions(-)
+ tools/moveconfig.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/tools/moveconfig.py b/tools/moveconfig.py
-index 568386f7b9d0..9d228720c739 100755
+index 9d228720c739..0131034a3787 100755
 --- a/tools/moveconfig.py
 +++ b/tools/moveconfig.py
-@@ -410,7 +410,7 @@ class Slot:
-         self.state = STATE_IDLE
-         self.failed_boards = set()
-         self.defconfig = None
--        self.log = ''
-+        self.log = []
-         self.current_src_dir = None
-         self.proc = None
+@@ -282,7 +282,8 @@ class Progress:
  
-@@ -446,7 +446,7 @@ class Slot:
-             return False
+     def show(self):
+         """Display the progress."""
+-        print(f' {self.current} defconfigs out of {self.total}\r', end=' ')
++        if self.current != self.total:
++            print(f' {self.current} defconfigs out of {self.total}\r', end=' ')
+         sys.stdout.flush()
  
-         self.defconfig = defconfig
--        self.log = ''
-+        self.log = []
-         self.current_src_dir = self.reference_src_dir
-         self.do_defconfig()
-         return True
-@@ -498,11 +498,12 @@ class Slot:
-     def handle_error(self):
-         """Handle error cases."""
  
--        self.log += color_text(self.args.color, COLOR_LIGHT_RED,
--                               'Failed to process.\n')
-+        self.log.append(color_text(self.args.color, COLOR_LIGHT_RED,
-+                                   'Failed to process'))
-         if self.args.verbose:
--            self.log += color_text(self.args.color, COLOR_LIGHT_CYAN,
--                                   self.proc.stderr.read().decode())
-+            for line in self.proc.stderr.read().decode().splitlines():
-+                self.log.append(color_text(self.args.color, COLOR_LIGHT_CYAN,
-+                                           line))
-         self.finish(False)
- 
-     def do_defconfig(self):
-@@ -522,8 +523,8 @@ class Slot:
-         try:
-             tchain = self.toolchains.Select(arch)
-         except ValueError:
--            self.log += color_text(self.args.color, COLOR_YELLOW,
--                    f"Tool chain for '{arch}' is missing.  Do nothing.\n")
-+            self.log.append(color_text(self.args.color, COLOR_YELLOW,
-+                    f"Tool chain for '{arch}' is missing: do nothing"))
-             self.finish(False)
-             return
-         env = tchain.MakeEnvironment(False)
-@@ -565,8 +566,8 @@ class Slot:
-         updated = not filecmp.cmp(orig_defconfig, new_defconfig)
- 
-         if updated:
--            self.log += color_text(self.args.color, COLOR_LIGHT_BLUE,
--                                   'defconfig was updated.\n')
-+            self.log.append(color_text(self.args.color, COLOR_LIGHT_BLUE,
-+                                       'defconfig updated'))
- 
-         if not self.args.dry_run and updated:
-             shutil.move(new_defconfig, orig_defconfig)
-@@ -581,9 +582,13 @@ class Slot:
-         """
-         # output at least 30 characters to hide the "* defconfigs out of *".
-         if self.log:
--            log = self.defconfig.ljust(30) + '\n'
-+            name = self.defconfig[:-len('_defconfig')]
- 
--            log += '\n'.join([ '    ' + s for s in self.log.split('\n') ])
-+            # Put the first log line on the first line
-+            log = name.ljust(20) + ' ' + self.log[0]
-+
-+            if len(self.log) > 1:
-+                log += '\n' + '\n'.join(['    ' + s for s in self.log[1:]])
-             # Some threads are running in parallel.
-             # Print log atomically to not mix up logs from different threads.
-             print(log, file=(sys.stdout if success else sys.stderr))
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
