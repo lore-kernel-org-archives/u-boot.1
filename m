@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 598CFEEAA7D
-	for <u-boot@archiver.kernel.org>; Thu, 14 Sep 2023 23:52:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD1AEEAA7A
+	for <u-boot@archiver.kernel.org>; Fri, 15 Sep 2023 00:22:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BAE986679;
-	Fri, 15 Sep 2023 01:52:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9F40D865FB;
+	Fri, 15 Sep 2023 02:22:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J3iGCdkI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fbPr2n1Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CEA886741; Fri, 15 Sep 2023 01:52:34 +0200 (CEST)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id 6509D86660; Fri, 15 Sep 2023 02:22:43 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 361DE8660B
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 01:52:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54E428648D
+ for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 02:22:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-68fb79ef55eso1418220b3a.0
- for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 16:52:32 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-77acb04309dso53832939f.2
+ for <u-boot@lists.denx.de>; Thu, 14 Sep 2023 17:22:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1694735550; x=1695340350; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UHPvkeUuk9EmQ8js9iGy4EauLX0D+z+/I+13SK4L3PY=;
- b=J3iGCdkIGX9Ypph+eSFRfRR9O5/dk+VXXyDIL/DRcVbBZmRRbMsM8L/CAupAjS7Cs+
- th9NJzuMYiGGXrXcttM4Infx3WhVO+ffMUvOpyf1F3NMAYc6cX6nTs0nNb37h3AsMEoq
- L9rqY6eYPusyA0cHmv++ea73Nd0MfN/UhNgZSNzDlElbWKRE+vv139uWKhghh/gUQ5RZ
- oQNioRiJ7DQ3616fbWEHzY8UfUZ2h1WaZXY7fDVjB40gaKb0Ym4oXWFUhL/3AFeZ7KLk
- CrncQlV/TQbzNXwdCEhfF+uYt6kiLkealiEXTbkhiOfRRshRxwTXBvFxAqI8EDPfb1Cr
- Fa7Q==
+ d=chromium.org; s=google; t=1694737360; x=1695342160; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4pTCxKNZ1fEdOx3Q8WFjNEyLJejEfZh8vFBtt6CVTYg=;
+ b=fbPr2n1Qg1S7DENyZT9BfJmw8pA1mgOCSMkCmEof/7x5s71evVDzdvXAh1VlTYyd1+
+ b4HKXyhZADkKNiH7Vvc2VrBvR3Ebg9jz0GpjXgE3rR04SgLWjHjl4rHNZwYSUslUmuB3
+ FMWcMOYiw+RywupOdLskxj/suqukQ/YFwrhJU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694735550; x=1695340350;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1694737360; x=1695342160;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UHPvkeUuk9EmQ8js9iGy4EauLX0D+z+/I+13SK4L3PY=;
- b=gM+eOj5TU2wf619Yf4gtO1lX5U2t0KpAu/bkOJzG3HR9FkV8BV9hTR5Pajdza0IeAG
- fqp9//NySzfuNbZ3pyF7fOqOIg1dCv4VzPH5XYq9J6qriQg8e5waCEYhmAK6aeeM+oCM
- xVxf1LjSMEaM/rQ57r98h+MT3n/jTmWhut9bOUghZrY0MoQZ1u/82RizywMvoJsqnn1K
- uhR5u+2pSYkxoZywbhZVzoYpXcuCsNPyKIOSszEv3tH+WnxA2MsfJMLubGIXU5//dZmw
- dZzGrqy9ssk1u6u8F7/1376oOqIQgygIwu1MbDGJ1y0YF2v5jZVhKjgZaWgR1G7nSse5
- jLTg==
-X-Gm-Message-State: AOJu0Yw2oLMoUzAJ7EwfA1FTZvrEIYHx8TIZlbb60KOpKu7DjwfNhpzN
- DwdunKzDXhXHivutdwZBVjBqydS5FoUol03EPQwRpQ==
-X-Google-Smtp-Source: AGHT+IFzvYVzI6xaJlQduEo6HYUtjKura2sQ33IdzRP6XHp2V4faqqTPJgdOShgD4lFnX0XDYNkY2OxtfN78FqsH8+o=
-X-Received: by 2002:a05:6a20:938a:b0:14e:9092:4291 with SMTP id
- x10-20020a056a20938a00b0014e90924291mr373469pzh.7.1694735550409; Thu, 14 Sep
- 2023 16:52:30 -0700 (PDT)
+ bh=4pTCxKNZ1fEdOx3Q8WFjNEyLJejEfZh8vFBtt6CVTYg=;
+ b=eidPK8MXbn6YvYruF/XK77SFCNtklWNsHcZ7XR9AOWODLlGvPp39c9dePelnPdEieM
+ OlFqsoYOMydlwOCaOmpEuUKuxVIO0Oje74ubmgn6bTatmBF1SYwTGhpzHuJm+Ug0R4rZ
+ 7SNu9zGZ1pjungfIituf/pL/CGpxHXJxjZpJzLU4WW/KretXOZhLa479hbNq4o3zg1j4
+ XaTLUPpuiHTL3zZrboy8koD1f9VUZ/jYQxO9HBKX0Afh9M3gRotkIbsBBZ6uT9jA2Jr5
+ B8/JPAh2MDeeGEYVzTjkszoG7gv8PjpvoIk6d4ALKxwOlRrrr/4Xh/SAg03r3IQPD+eU
+ rfLA==
+X-Gm-Message-State: AOJu0YxDUgOL+HKK/l43F9qz/pyVzTxlHSJ8O3qiBO+DlcSsX8ZjqIwA
+ 2E9AB64qkoKK6IT2OiOJ7G1dcsmiZHDeQMLpNds=
+X-Google-Smtp-Source: AGHT+IG3Gon31DrC4B5Vuf8th57rz01qD3Uf/pqTArJ50kl7DzvgeayCqBo12RkVaCwNx6u7xqXTXQ==
+X-Received: by 2002:a5d:8b93:0:b0:798:3e95:274f with SMTP id
+ p19-20020a5d8b93000000b007983e95274fmr29614iol.19.1694737359954; 
+ Thu, 14 Sep 2023 17:22:39 -0700 (PDT)
+Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ i23-20020a5e8517000000b007836e9ff198sm744796ioj.55.2023.09.14.17.22.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 14 Sep 2023 17:22:39 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Masahiro Yamada <masahiroy@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Maxim Cournoyer <maxim.cournoyer@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>
+Subject: [PATCH v2 00/27] moveconfig: Drop old code and tidy up
+Date: Thu, 14 Sep 2023 18:22:02 -0600
+Message-ID: <20230915002236.798760-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 MIME-Version: 1.0
-References: <20230901102542.609239-1-masahisa.kojima@linaro.org>
- <20230901102542.609239-7-masahisa.kojima@linaro.org> <ZQMRRQ4zOnKUU4WK@hera>
-In-Reply-To: <ZQMRRQ4zOnKUU4WK@hera>
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Fri, 15 Sep 2023 08:52:19 +0900
-Message-ID: <CADQ0-X-NCj03ghuGj946KtO-2nO+BdXUt5HcDz8dH5ez2WHghA@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] doc: uefi: add HTTP Boot support
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,73 +87,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 14 Sept 2023 at 22:57, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> On Fri, Sep 01, 2023 at 07:25:42PM +0900, Masahisa Kojima wrote:
-> > This adds the description about HTTP Boot.
-> >
-> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> > ---
-> >  doc/develop/uefi/uefi.rst | 21 +++++++++++++++++++++
-> >  1 file changed, 21 insertions(+)
-> >
-> > diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-> > index a7a41f2fac..fd87bb1edb 100644
-> > --- a/doc/develop/uefi/uefi.rst
-> > +++ b/doc/develop/uefi/uefi.rst
-> > @@ -594,6 +594,27 @@ UEFI variables. Booting according to these variables is possible via::
-> >  As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
-> >  command 'efidebug' can be used to set the variables.
-> >
-> > +UEFI HTTP Boot
-> > +~~~~~~~~~~~~~~
-> > +
-> > +HTTP Boot provides the capability for system deployment and configuration
-> > +over the network. HTTP Boot can be activated by specifying::
-> > +
-> > +    CONFIG_CMD_DNS
-> > +    CONFIG_CMD_WGET
-> > +    CONFIG_BLKMAP
-> > +
-> > +Set up the load option specifying the target URI::
-> > +
-> > +    efidebug boot add -u 1 netinst http://foo/bar
-> > +
-> > +When this load option is selected as boot selection, resolve the
-> > +host ip address by dhs, then download the file with wget.
->
->  dhs -> dns
-OK.
+This tool is designed to move CONFIG options to Kconfig. Since this task
+is complete, some of its functionality is no-longer needed.
 
->  what happens if it's an IP address?
-Current implementation tries to resolve the IP address as a host name,
-so the DNS process will end up with "host not found".
-We need to preset the "httpserverip" env variable to proceed the wget.
+This series drops the old code and tidies up some pylint errors.
 
-For this series, without a lwip port, this limitation should be noted here.
+It also improves the output by only displaying failures and providing a
+summary at the end.
 
-I could take the ip address format check code from iwip or other projects,
-but I did not do that since there is a workaround(set "httpserverip"
-env variable).
-In addition, when the lwip port lands, this case is properly handled.
-If the IP address is used as host, the DNS process is skipped.
+Finally, the tool is given a new name.
 
-Thanks,
-Masahisa Kojima
+Future work may provide a way to integrate the search functionality with
+buildman, to permit building boards with a a particular combination of
+CONFIG options.
 
->
-> > +If the downloaded file extension is .iso or .img file, efibootmgr tries to
-> > +mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> > +If the downloaded file extension is .efi and file is PE-COFF image,
-> > +load the downloaded file and start it.
-> > +
-> >  Executing the built in hello world application
-> >  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> >
-> > --
-> > 2.34.1
-> >
->
-> Thanks
-> /Ilias
+Changes in v2:
+- Reinstate the -C option
+
+Simon Glass (27):
+  moveconfig: Drop -H option
+  moveconfig: Avoid deprecation warning for setDaemon
+  moveconfig: Correct ordering of asteval import
+  moveconfig: Drop unused cleanup options
+  moveconfig: Drop CONFIG-moving code
+  moveconfig: Drop check_defconfig() and update_dotconfig()
+  moveconfig: Drop suspicious boards
+  moveconfig: Correct some regular-expression strings
+  moveconfig: Correct parameter-type warnings
+  moveconfig: Use f strings where possible
+  moveconfig: Correct unused variables
+  moveconfig: Correct non-snake variables names
+  moveconfig: Correct use of members not declared in __init__()
+  moveconfig: Correct list-comprehension warnings
+  moveconfig: Use an encoding with open()
+  moveconfig: Fix misc pylint warnings
+  moveconfig: Only show output when there is a reason
+  moveconfig: Reduce the amount of output
+  moveconfig: Avoid showing progress at the end
+  moveconfig: Use u_boot_pylib for terminal colour
+  moveconfig: Show failures in progress
+  moveconfig: Show a summary at the end
+  moveconfig: Drop the initial output
+  moveconfig: Move summaries to the end
+  moveconfig: Rename the tool to qconfig
+  qconfig: Rename the database file
+  qconfig: Update the documentation
+
+ .gitignore                                  |   4 +-
+ doc/develop/index.rst                       |   2 +-
+ doc/develop/{moveconfig.rst => qconfig.rst} | 144 +---
+ tools/{moveconfig.py => qconfig.py}         | 894 +++++---------------
+ 4 files changed, 263 insertions(+), 781 deletions(-)
+ rename doc/develop/{moveconfig.rst => qconfig.rst} (61%)
+ rename tools/{moveconfig.py => qconfig.py} (65%)
+
+-- 
+2.42.0.459.ge4e396fd5e-goog
+
