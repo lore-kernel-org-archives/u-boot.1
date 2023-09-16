@@ -4,81 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7E75C2BA2B
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 22:38:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8897C2BA2B
+	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 22:52:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14F3B85E44;
-	Sun, 17 Sep 2023 00:38:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2EF578585E;
+	Sun, 17 Sep 2023 00:51:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="s5JY0XsY";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="o77CVpC3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C466C85E44; Sun, 17 Sep 2023 00:38:14 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id CA3648585E; Sun, 17 Sep 2023 00:51:57 +0200 (CEST)
+Received: from s.wrqvwxzv.outbound-mail.sendgrid.net
+ (s.wrqvwxzv.outbound-mail.sendgrid.net [149.72.154.232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B815685DFA
- for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 00:38:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69F118556F
+ for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 00:51:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-d81d09d883dso1665506276.0
- for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 15:38:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1694903891; x=1695508691; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=m0tJScoyyXBDx127g74wQQbEbfQi3H6EbfwzeDWjwVY=;
- b=s5JY0XsYTXs8j6pGmYsPKR4c+MTrDFsf/TrHW2tvvfC6EqPSwpUeO+YpeBk1bkg5nM
- VRI6mOqKDPiposdEulPfh3vD0BVLyoFs3Z3oAHs0p479ucGt0VznCD1OwhSpyMtXIHdi
- hUuslgdiGqCDVkikYc7yVoQvbM86T/awxLRLA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694903891; x=1695508691;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=m0tJScoyyXBDx127g74wQQbEbfQi3H6EbfwzeDWjwVY=;
- b=tVayaZH8rh2uXnIFLvz2ltRHTxmZjlGheEkuwYnuJPlwzzyUzhqUD7fWVFPcqNyGc3
- CeH3QmIE0I+Iq7EsHQLv29YhMbSheP76fxyA65OH/So9nA6e84vWvcYc+3m0S3/xJ1Tb
- LNONAtwcCZMyPnGegU6RX2RPR9C1nYhuhRXnemL6dACVbW5x8PJR2H8Ie8En7m2JH4SG
- Elc+9SyXtJLRonW/5ZsKiNbc1Pf/Z38xrYtBP3G2sKQwFoH6RL6mvYKyIKHo+g7ZxVbi
- GpzEMOpUREutelx+qpndQTV0L5mjEcxe4zDtrygVeW6MGtPeC0dyJ219xHeku2j+/5pr
- TRfw==
-X-Gm-Message-State: AOJu0YxVF7o11cK/ULSm6vRqatSEyOxJIhhh6HdpGkw4td04igHuW7eQ
- WOExBgqQXMkQfAlrV7niNTGq9A==
-X-Google-Smtp-Source: AGHT+IHk+teSAXxOrRJWuOf6v/HIsd8bxiI4XSCGLM56X13KljbeOJm5Pz14GLGAjku/833V1y9ipg==
-X-Received: by 2002:a5b:644:0:b0:d09:96fe:ac23 with SMTP id
- o4-20020a5b0644000000b00d0996feac23mr3925560ybq.3.1694903891402; 
- Sat, 16 Sep 2023 15:38:11 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-7b8e-9e18-0a32-e8bf.res6.spectrum.com.
- [2603:6081:7b00:6400:7b8e:9e18:a32:e8bf])
- by smtp.gmail.com with ESMTPSA id
- v82-20020a252f55000000b00d8161769507sm1456006ybv.25.2023.09.16.15.38.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Sep 2023 15:38:10 -0700 (PDT)
-Date: Sat, 16 Sep 2023 18:38:08 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Ryan Lahfa <ryan-uboot@lahfa.xyz>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Zhaofeng Li <hello@zhaofeng.li>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ramon Fried <rfried.dev@gmail.com>, Artem Lapkin <email2tema@gmail.com>
-Subject: Re: [PATCH] boot/pxe-utils: populate initrd_filesize for extlinux boot
-Message-ID: <20230916223808.GJ305624@bill-the-cat>
-References: <20230916131812.4035430-1-ryan-uboot@lahfa.xyz>
- <20230916131812.4035430-3-ryan-uboot@lahfa.xyz>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
+ content-transfer-encoding:cc:content-type:from:subject:to;
+ s=s1; bh=g6aUicTojbH1Amwgbt1CPBFTisdNRc42Jyzz7el+xEg=;
+ b=o77CVpC3CGP99m+fY78p2KpHU8bktAPTOlszQ0TkLvpBIkpXlgEtQNFQs5/vtqC9tHXU
+ 6PNfZVfvfMrcaycJ0GcfBeEdlIat6K7vfadh8mBEzVlKxbXYNi5W/uEu3iaYjGVSEbXe2d
+ QgYH3+XdpJWyx05B9OjAdkKjuI6nY1PDJhCsoEHJQp2re3M/g3B5xtinDoQwbb3C30JQf6
+ XMIS4CRTKBlE25SsSI5z5KfJ1Rkhiu6B2hRGTSj76SXzzye5lOb8sGE2e2lz11A3reJauT
+ tkCLqCNoa0ql1RewSu/XsuYA91JU7mb+dlzD8J04Y2PLalvu7hEoCgSUX0X5LfDw==
+Received: by filterdrecv-d7bbbc8bf-jd6t6 with SMTP id
+ filterdrecv-d7bbbc8bf-jd6t6-1-65063189-11
+ 2023-09-16 22:51:53.896684201 +0000 UTC m=+121223.450778399
+Received: from [192.168.1.50] (unknown) by geopod-ismtpd-0 (SG) with ESMTP
+ id E4M_i7FVR42dhmkguYTCzA Sat, 16 Sep 2023 22:51:53.596 +0000 (UTC)
+Message-ID: <dfcd6379-0efe-d335-d971-40302b291901@kwiboo.se>
+Date: Sat, 16 Sep 2023 22:51:54 +0000 (UTC)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5SvUcNb2uDPYpeiF"
-Content-Disposition: inline
-In-Reply-To: <20230916131812.4035430-3-ryan-uboot@lahfa.xyz>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v3] board: rockchip: Add Bananapi R2Pro Board
+Content-Language: en-US
+References: <20230820160004.44880-1-linux@fw-web.de>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20230820160004.44880-1-linux@fw-web.de>
+X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h9COyRGcZcbDZiOzP?=
+ =?us-ascii?Q?ZXEmsnGq8e+DUxI1gxAPN4umGqgRSJthuXu7Nxr?=
+ =?us-ascii?Q?uOBtvNEM38I2LLRXIYBwyJ57xNzLyxyq7+A1w5a?=
+ =?us-ascii?Q?0OyJ12e8XGWiCJorbDBqptuxsiiJ1ftguWJcCBn?=
+ =?us-ascii?Q?XJNFZCUUFm7dJYFBYmAu7PN1UtpP5FU8BU46bs?=
+To: Frank Wunderlich <linux@fw-web.de>
+Cc: Frank Wunderlich <frank-w@public-files.de>, Simon Glass
+ <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
+ <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,62 +80,223 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Frank,
 
---5SvUcNb2uDPYpeiF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2023-08-20 18:00, Frank Wunderlich wrote:
+> From: Frank Wunderlich <frank-w@public-files.de>
+> 
+> Add Bananapi R2 Pro board.
+> 
+> Till now evb dts could be used, but iodomain is different
+> (evb has 1v8 on vccio2 and vccio4 which are 3v3 on r2pro)
+> and with iodomain driver this can cause hardware fault.
+> 
+> Devicetree in mainline-Linux:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/rockchip/rk3568-bpi-r2-pro.dts
+> 
+> Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+> ---
+> v3:
+> - disable gmac0 as switch-driver is not yet ready to attach to the mac
+> v2:
+> - drop switch-node for now as u-boot driver works differently to linux
+> ---
+>  arch/arm/dts/Makefile                     |   3 +-
+>  arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi |  23 +
+>  arch/arm/dts/rk3568-bpi-r2pro.dts         | 549 ++++++++++++++++++++++
+>  configs/bpi-r2pro-rk3568_defconfig        | 101 ++++
+>  4 files changed, 675 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/rk3568-bpi-r2pro.dts
+>  create mode 100644 configs/bpi-r2pro-rk3568_defconfig
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index bd518064f35f..767bf9db39fb 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -182,7 +182,8 @@ dtb-$(CONFIG_ROCKCHIP_RK3568) += \
+>  	rk3568-nanopi-r5s.dtb \
+>  	rk3568-odroid-m1.dtb \
+>  	rk3568-radxa-e25.dtb \
+> -	rk3568-rock-3a.dtb
+> +	rk3568-rock-3a.dtb \
+> +	rk3568-bpi-r2pro.dtb
+>  
+>  dtb-$(CONFIG_ROCKCHIP_RK3588) += \
+>  	rk3588-edgeble-neu6a-io.dtb \
+> diff --git a/arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi b/arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..382a52a28b10
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi
+> @@ -0,0 +1,23 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * (C) Copyright 2021 Rockchip Electronics Co., Ltd
+> + */
+> +
+> +#include "rk356x-u-boot.dtsi"
+> +
+> +/ {
+> +	chosen {
+> +		stdout-path = &uart2;
+> +		u-boot,spl-boot-order = "same-as-spl", &sdmmc0, &sdhci;
 
-On Sat, Sep 16, 2023 at 03:14:58PM +0200, Ryan Lahfa wrote:
+This is the default order in rk356x-u-boot.dtsi and can be dropped.
 
-> Currently, it seems like the `initrd_filesize` was uninitialized for a
-> while.
->=20
-> This is particularly problematic when attempting to `zboot` with a
-> initrd with a size coming from `label->initrd`, because it will provide
-> you with a 0-long initrd at boot time, making the kernel fail to
-> continue the boot.
->=20
-> This fixes the issue and I confirmed it enable me booting a U-Boot on
-> QEMU x86_64 q35 with NixOS kernel and initrds.
->=20
-> Signed-off-by: Ryan Lahfa <ryan-uboot@lahfa.xyz>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Bin Meng <bmeng.cn@gmail.com>
-> Cc: Zhaofeng Li <hello@zhaofeng.li>
-> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Artem Lapkin <email2tema@gmail.com>
+> +	};
+> +};
+> +
+> +&sdmmc0 {
+> +	status = "okay";
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+sdmmc0 is already enabled in rk3568-bpi-r2pro.dts
 
-And since you mentioned it in the follow-up, here's the tag so patchwork
-will pick it up:
+> +};
+> +
+> +&uart2 {
+> +	clock-frequency = <24000000>;
+> +	bootph-pre-ram;
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/rk3568-bpi-r2pro.dts b/arch/arm/dts/rk3568-bpi-r2pro.dts
+> new file mode 100644
+> index 000000000000..e4fcbb8a1174
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3568-bpi-r2pro.dts
 
-Fixes: 085cbdafca9c ("pxe: simplify label_boot()")
+Should be a 1:1 copy from kernel.
 
-Thanks!
+[...]
 
---=20
-Tom
+> diff --git a/configs/bpi-r2pro-rk3568_defconfig b/configs/bpi-r2pro-rk3568_defconfig
+> new file mode 100644
+> index 000000000000..e8936261eab3
+> --- /dev/null
+> +++ b/configs/bpi-r2pro-rk3568_defconfig
+> @@ -0,0 +1,101 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_TEXT_BASE=0x00a00000
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_NR_DRAM_BANKS=2
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
+> +CONFIG_DEFAULT_DEVICE_TREE="rk3568-bpi-r2pro"
+> +CONFIG_ROCKCHIP_RK3568=y
+> +CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_SPL_STACK_R_ADDR=0x600000
+> +CONFIG_SPL_STACK=0x400000
+> +CONFIG_DEBUG_UART_BASE=0xFE660000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +#CONFIG_OF_SYSTEM_SETUP=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-bpi-r2pro"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0x4000000
+> +CONFIG_SPL_BSS_MAX_SIZE=0x4000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +CONFIG_SPL_STACK_R=y
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PMIC=y
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_NET=n
+> +CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_ROCKCHIP_GPIO_V2=y
 
---5SvUcNb2uDPYpeiF
-Content-Type: application/pgp-signature; name="signature.asc"
+This Kconfig option does not exits.
 
------BEGIN PGP SIGNATURE-----
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_ETH_DESIGNWARE=y
+> +CONFIG_GMAC_ROCKCHIP=y
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUGLlAACgkQFHw5/5Y0
-tyxOmAv9HmiETbtQKB1hBtV1Yn8GL+MyN3eORvGBuVojBSHDE9+ahSorXNjH50U8
-SdE1mpXjEZ8nxhZv33G0MVcgUpgap5192WwafRbuqWRS9u5z8aqxmeFUBhOZURO9
-vQ3EHtkGd8U8UhDT4GOrFrQy2Lo/srbofcOlrYEcNsPfamX/RMg4LBXHE2eYEUlP
-SPD19trbDjx5PsWgzSa7EaOSEfCBCCNDRwf2AtNb49EajlUzVbMuSbeM/ANJU5Nx
-7xh4+ITayPji+mmqKiGJ8KM0y2fBFZ6kzAcguQNs3OUUSzGQ0z3IN97mOFkZ55On
-fXqQsMVQPAXYRpElhQdkTeOm+k3wc0lIbfT/ZhRWyjOGoP8oY6yeRiryxhMaORum
-OOI3QVHZNXjn5A5KPFIuY8mDsqkLj57kx5s6CIDOstGdBfYwfsjzC2SBvAjqekNv
-b6/gixNwh/E7wivlLqsj/iusf/ooICb4x9xUgtE2MFVkZUf7lbPDLc5S64JuEm4m
-0KBbM66g
-=Q0dN
------END PGP SIGNATURE-----
+Please drop CONFIG_ETH_DESIGNWARE and CONFIG_GMAC_ROCKCHIP.
 
---5SvUcNb2uDPYpeiF--
+The following series that add GMAC support for RK3568 and RK3588 will
+use DWC_ETH_QOS and DWC_ETH_QOS_ROCKCHIP Kconfig options.
+
+rockchip: Add GMAC support for RK3568 and RK3588
+https://patchwork.ozlabs.org/project/uboot/cover/20230807000817.1701012-1-jonas@kwiboo.se/
+
+> +CONFIG_DM_PMIC=y
+> +CONFIG_PMIC_RK8XX=y
+> +CONFIG_REGULATOR_RK8XX=y
+> +CONFIG_REGULATOR_PWM=y
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_SYSRESET_PSCI=y
+> +CONFIG_ERRNO_STR=y
+> +CONFIG_SYS_PROMPT="BPI-R2PRO> "
+> +CONFIG_CMD_SYSBOOT=y
+> +CONFIG_CMD_BOOTDEV=y
+> +CONFIG_BOOTSTD_FULL=y
+> +CONFIG_CMD_EFICONFIG=n
+> +CONFIG_EFI_LOADER=n
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_XHCI_DWC3=y
+
+This should not be enabled for rk3568, USB_DWC3_GENERIC provide usb
+support.
+
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_UHCI_HCD=y
+> +CONFIG_USB_DWC2=y
+
+There should not be any need to enable this driver on rk3568.
+
+> +CONFIG_USB_DWC3=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_AHCI=y
+> +CONFIG_DWC_AHCI=y
+> +CONFIG_SCSI=y
+> +CONFIG_DM_SCSI=y
+> +CONFIG_CMD_SCSI=y
+
+Please run moveconfig.py to clean up and re-order the defconfig.
+
+Regards,
+Jonas
