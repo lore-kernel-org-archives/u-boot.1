@@ -4,112 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 750C4C2BA12
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 19:37:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A97ECC2BA12
+	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 19:37:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA9F68585E;
-	Sat, 16 Sep 2023 21:37:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 27F3C85DFA;
+	Sat, 16 Sep 2023 21:37:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="lNAHDoDp";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="gFYiFKlq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6D40833DE; Sat, 16 Sep 2023 21:37:06 +0200 (CEST)
+ id 8A15385DEA; Sat, 16 Sep 2023 21:37:08 +0200 (CEST)
 Received: from JPN01-TYC-obe.outbound.protection.outlook.com
  (mail-tycjpn01acsn20808.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:7010::808])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB7928477A
- for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 21:37:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 701AD847C3
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 21:37:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=wiagn233@outlook.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Ot/XCF4DWFKzhUK/jjPITtIq8VlH6cQ1qYpBLrhDLmo1FTt9yubxYetVjiqYw94/qvDi8kVUUQsUKzU8fVjiynbB4dlSod3M+HIGUViqKt7UqAcctQsG+aTbRLA5fm4DHRjjNbpiheVwloTNHYlU4P8VZ3GOWJp+RXQ9ANZTGtSD72VuBiBJcP8Ivx49Qek+FWm/gIhf4eNEqOPhFHA4cHqHT3fenQcYpSlpvKQXWgeUlsKc0rVDy9K9meOyC5h4+9eVamQbluVNxxeiJ9gQDWEmr+pjCkhFy+JWZjWphqb7dZcj9VkEUoMOssl9UmCkMCG17zmXDfug5h9dvXWbRQ==
+ b=N6BvXU111MyfShazVd+DsZJYcoNnat6FFypd3o5HhAaS7anPp70MTOGkEtPgct7WBjp9/LR0OvZZKGYcIQ3EvcxcxMnHC9Bko/9q0/K6fYscs6/61esKSjRQmFKo6uZiRJX8WyU0OwzTE4U0ynEcS0fWTbvOwc1Iwv5HMYHpVfzFflrooh3MJdb7l4O+0KWdKPzKJqFLrGz8FY6TpaspXYu0RJtduJObwmAGv2L9hg0dqjddShugSzSq/7w1+t9CSxiIgSvA1dJ/hl3CxXNlSkWYCxZkJZ44dqHjRAQu7nJdJ6ZkVA+E0jmyRBZg2V9e4jsdZ2ygf1NxieafrYB+pg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D+Wa78yGFiYASvSMKp4fAQ9e+p2jC/5zTHX9CWTbyxA=;
- b=Lpp3n0ybAyQf5pV9o4JmPEXcKJoQl67qeTjPz/wFti1YSpTEzLWoD0xqgikXvyy4+lEFYenuZwVFxfdaBmOLYoL1y5EpJDeoDN1Hx8F9E2a8/kJS8Og8VBch6jpAOuGy1RRjKleuHvYSLiRuFPw/IfjAfDgIFBg7aQJelQGugE74kopeq6cvzVsjEMybT7UADpBcGn0zqPSLcZ+yh2porRKvVJVhoZB2TapneqQnyVU/+E6b8XCGKBzGqFHQ/vNV6GdWky2EOj03FoOeRt/tL+EQr1gQAl6tmQZN9cV/0MtcAlRC9TDOTPjTu98t6QhaVuokucxhlA8okUXcKWR+JQ==
+ bh=BHt812mqa8qLrkLcgwhrPtfgZQAvgqvmjtjYHKrz4Rg=;
+ b=DBVEfSmruRwT2gbnqYvHzXrW6XTwbIo92TJFa2zkzPex6nOoT8wzg1/ag/umDaWdsqNZ2i/17nGB9mgYOR8Y7GuG5k5wC4tklEJOVR+XV3BzeJ4EMYcJv7JlC2VdqBGo5RZQqu7d9Te5fC7tJFC9fiLrOzPw3Pb4jlp1Qf42SlMwRzaO+mbLAZ37KARhE3DdsmDnyQaMKOhaJHV2W+EBaKNioHUdM+TxzgG6wszbR8nhno8g3p1xk4iC+KQTdF4W1wzzKGlACeMSMUaTW3aLLrSGUfQuMfJlFvdm6d4ofAMXCs7Nnl8+GboWu12URE5OR5HgthraUJCd9jHYn54e0A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D+Wa78yGFiYASvSMKp4fAQ9e+p2jC/5zTHX9CWTbyxA=;
- b=lNAHDoDprlvaLMYGpBa3m2kNat6Ihpw+L9dHFwlkcR/e2o9LqqQUYZNWLRdKhzEiTa3RdwdYRoxA6fsa+NIp7jA4rt2aPOd8/EcoYKIEOtj/t/MIgV7bYl7YWMCZ9kEWDhXm8l4HBcL5LhOf9Srlqus7SOY1VVwQRiBMLGuA8xbFwO9gTmB0EDL6ZHAJDHMclLZhpS+56H8a2JLCa9hkrC7nbyRGL5Ly1yAvoN/Picw+gPCdbfbAgshw/RYVfKdPOJ2NPOTrwIgIQrOa3ig1+h9Y/eUwwDnyEfBUfKBfqohpJYiL8TRmSmOqj6Llsj5vK/HHXme5OllRmGEACY296Q==
+ bh=BHt812mqa8qLrkLcgwhrPtfgZQAvgqvmjtjYHKrz4Rg=;
+ b=gFYiFKlq+JLim8/gavwjQXShYMa7KaaBgDH4nY+atq/97IxBQGREN+c059BIxbO2l+Oezy0fN4y10pV7QVOKhVDMfC0lpQ3BG4/Esk+9qLvj91NiYL48qNZDLajerLQD2yNWlHHHCdzENAfcCJ5/suJ13e73S9Chk9WSRtcevdL7vIXMCi1cCgRobvQFMHDCyuZzsQGFVfJKhzKPTuvmuQSMudiMUV6IZ3BHnlEcx+xdHndyRLao+uGSKGO7DYR6WAZ7OQUJehKVcZNcOrcSTla75zBl2ORyy7V2MxTj070f0JfI7Epq9MBdV5kGorZZSD1ERo2iVrm2w5HuokJ/RQ==
 Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:23e::10)
  by TYCP286MB3132.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:293::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.13; Sat, 16 Sep
- 2023 19:37:00 +0000
+ 2023 19:37:02 +0000
 Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
  ([fe80::bfaf:cb8:24b7:f67b]) by TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
  ([fe80::bfaf:cb8:24b7:f67b%7]) with mapi id 15.20.6813.013; Sat, 16 Sep 2023
- 19:37:00 +0000
+ 19:37:02 +0000
 From: Shengyu Qu <wiagn233@outlook.com>
 To: rick@andestech.com, ycliang@andestech.com, yanhong.wang@starfivetech.com,
  u-boot@lists.denx.de, jamipkettunen@gmail.com
 Cc: mps@arvanta.net,
 	Shengyu Qu <wiagn233@outlook.com>
-Subject: [PATCH v1 1/2] configs: visionfive2: Enable CONFIG_OF_BOARD_SETUP
-Date: Sun, 17 Sep 2023 03:36:32 +0800
-Message-ID: <TY3P286MB26118386C9AFBADE39E736B298F5A@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+Subject: [PATCH v1 2/2] board: visionfive2: Fixup memory size passed to kernel
+Date: Sun, 17 Sep 2023 03:36:33 +0800
+Message-ID: <TY3P286MB2611B6FF6D407C87B7D661E898F5A@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20230916193633.3928-1-wiagn233@outlook.com>
 References: <20230916193633.3928-1-wiagn233@outlook.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-TMN: [xsbgDv51nGbQwT5DF1f37AS/59zw/dc0]
+X-TMN: [plvLMyJdPY562jXOuTCFAok5WXBjMZpy]
 X-ClientProxiedBy: PS2PR02CA0007.apcprd02.prod.outlook.com
  (2603:1096:300:41::19) To TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
  (2603:1096:400:23e::10)
-X-Microsoft-Original-Message-ID: <20230916193633.3928-2-wiagn233@outlook.com>
+X-Microsoft-Original-Message-ID: <20230916193633.3928-3-wiagn233@outlook.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: TY3P286MB2611:EE_|TYCP286MB3132:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4501b82d-5592-4dbb-52c3-08dbb6ec4bdd
-X-MS-Exchange-SLBlob-MailProps: ZILSnhm0P3nGuO75oxpEOTfZ3D200KVorA+0vWii7F50eRUoTW1zVg4wAVEbvntH8ob0C6H+V4nBXA8cW0et0ptyklrKOpmMM1ni0vevJfmh11Ya6js9DXGVeLm4GA6eyCwpKDoFDsDmexPGmg06i8ZvWTb4Aw+LscQGZspqScghpCzC3of6DtXScmDwFZuPKshSLa8dAFAS5gbheCnVB10/uLsgApDhl9f/F0yQBwPaI4g3HDLCydMiXBDfWvcrOK8GSJONjMmOD3JYKxwf613KLeM0uNuFEtdIeQCNwV80YHujO6ajbOzzb9aPgjWJKiQCUxfWuVYv/eTOKiMan98S1rmjOXzGT3s6P/6Z3MoIKzAAMtbOaYanm7SOZ+DanGhoKlICZau+drrEEP1q1UjGREShCqomTWh7KViQW2RA3F47yY8jDlY50TIwyeufYcOLPoQLi16Otg2PreZaEeKt4ciDxQjXl9JexQ47ZAxFcF90Dg6LYT3RtOiesQ3MwrKl/AJTwLVEd4Lsdpk4SoxAPS0FUnQdac6gaPKHHja6cMSyo9WvMaoQcNE1+/MkW7QUZ7Xc1zzTMfy4Mbu4LI3lcih0yZR+W5g//sPX4XXsmqQoTRaW2h9O3vX04AHzLYWIbAFlxbUAs3bjnUoSRwcqPdZcmei74qCESJZsxIwz6fWy3CXgpC/JBH3jYoQvoRo7FHSihRRbKVYLdDOChe7fy1HRpWJJP7HevdlwjoszCF3YOpMMNilB40nMQEPxKIM5OeBy6E9IyMxarXv39DmTft3QCVGI
+X-MS-Office365-Filtering-Correlation-Id: fe3bd457-9f55-43cb-8a40-08dbb6ec4cc4
+X-MS-Exchange-SLBlob-MailProps: AZnQBsB9XmoFiihN0bLfIuxrIYm/gcvOuYNEpLLPU/Q5vl8BVUw2MjoufFqK5DXsMRSdNPpq81Ycns+IRxZbW8XHuc32pKNBr5l6ShgVwciXR9xbjTctA+RkRUiAGK0SKAQUQKO75PH2NFbnDmoxvgeH1UxITS05h0RWxP2WQHTZ+95FSWmHCB4QcOvDHV9IUwmxgurb0FthtvW4FqVdbIf+Oa5kJXqE8B/Ew6YIys0JCKToZAqIVR0wkVwvi445qiSxk1bshVZZ+FFpeClbJ0YTMWRLA/imRHi8PajkKGLh4eQYjOtK7M5QYFpsymhq/WE64gdWiKEeT8abfl+vLeOEYNChDrNcutQxuqh7+gWnvrnGPnMl+SFAVmLlhPPEFdmvb0WvJnIqQO6QN3B05CFdAS9DWgSitGCtBwRbuoGWETdjyAN4WH0zlpbHkVVYpPB/2wcYb+GxturibMPFDVLPxdTlgiD1jg+g44d9bSjQs8twJYEqUtnYkvQ2Ts6yttEv6MrBhDGzpdh8XgyhWnZ6ePxyIF2pxerulLA97UgI1GGg5Uvttk1qyFkhLA7WWWNwntyxAtaY+CohpqKfxQR5zrOi//HvsJaPMj3+JAiaxrQdxmpJpWJ9aGImm/dcdgZfko0f/XQJv3eKNwx5BOP0PJPyGGz8xTLnKgCYof2tgExBXZUrS2LKbnhKIaMhb8x+6OjZLlU6djYnMdtRXb41ch5WG+fFwzRkL+LPQ73bXDBWJusfKq8iVrBSJIP3Kndvi+M9ubs=
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Pnv0xTyk3tAEeXnOnJcgmFBXiIdMg+zt38E9fHwY1k4UxRPrl+2hf8WjXGS/Z+1vG5lys71WNteCQdU1OAY1e3WVnw3BVzVUHVyEGZ5g4f2KEvlCaCBcNYiycCiOsv0pbtAyFUuBJ57OoM5FON7hLKRxiLdrpVmHBlPOAtkhM5m/sFdfzDWPadTzu5Mx0dRjWW5oElczbplQn/7csiTeDodWivSAsZc1j6NUZ7xrgAsTEZa1EnOBKoPN/TUoKHUbfw6lNg6GZqPNqAFOdef21AcJMtaXE8CfP+XfWHZ1Uti0iU7RFYXpP/GRZy1pAbk8iOzZ+LVgvDuNPIafe3hor2R8u01nZRmFfUy4SpQz9HdZuszBVQShDQj0ksn+dhlQ9zB/iAOfDQ61evvZ/EK2DmmG6CXuq1GDZTwnM1pAepbsEQueVNGulCUiMQqMS3ZAFMcvr/47lIWVhEQ62hp39g4EBBWDPF2CEIdfR8kMQ17sQNL5vvPgdpzTwH9+6KQ6uCZj+uyqbK8EG7V/rTdKps+Km3MwARQxSZNrq6uCvU54TxQ1/nSREjx4BsHmimjMbKP5r0BxnzAHbZrmNZVEbJt68ODl+kAZ1WwN4PLDzbyIXKuwBS3VqUcvMCzMXdRU
+X-Microsoft-Antispam-Message-Info: Ol4ybOMdFYOOHiyZ4+k4IefbGlenQF9FEG47TLbFvSdLFwraKrB6yNHgArgwPV7ilGBKm0SF07QqmBnZtIp4G+2K1DLC4AzSNeqBrvglvvec8f0DhqBweu21LCtAsPjjFw8usvc1OxuYdt6nzLqZdKCZFV7NS8keJSEoHdLq2QKpx3zU/UHxgubMcZW8VtSEJPbxVBCNG6zchqyicC5GiitVLqCd4mPADnGDfQYho+fYssRY+NR1ghGkBv3cODWxXtVxWZ5psQFuZBcZqAadVHqGXMUBxQkT4a8IeZ6yy0WT+x3eAjvaSV8iB4xSFN+Hgq/FLiZfAB8XG7FtZ+Ak+RlDuxLkxATKf3ilWfH0uI2ZtCVgQNS/49mQlpbWS0Wr59hP8S/piqezUg7HssFI153PoJ0V7a20HbZ4nlx73IrHln/ZRHXh+SZqME0fkxx3J17bVgS0MIkz9MP5WyY4Xb+WZTRNPs0h94TvCenqpBcm2S6f8Fw4IwRZGCKxo6aZRZtoMRMewpacdss/+qtYTOMVbhyq8Rqv8SwsdRPT3BF2FrLpl20w9tFRPizFBRwR+7KGuXhzUBPFk1onKoOQ0MV84AHutW8v9akitapmBzy+vi1cfEdZ1WHpPp6g5lsB
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QzBRMXFzaTJkWHFNQ0hXbWEyemU3czNVcDRrTG5MWW1NOWIwM0hKeTVTTStq?=
- =?utf-8?B?UWYrd0g3QWo2enNBSC8yTVNoRStHRituYlZGK295OURxOGpSd1FzNE5oNjho?=
- =?utf-8?B?MkU1eVRKVjhabjdXTmY2NTJucDIwSTV4UVpxblhtdUMxWlo3VWVXWDEzRi9z?=
- =?utf-8?B?aG5mU1BPK2IraXJTaFhOYUMzZ0RSUDVlY2pBOUY5S3NqTFA2Sy9yczAyOUlL?=
- =?utf-8?B?ZWo0aGt6a2xRUFRrUTVWaUE3TUdZbVlpTm9Nd3lwQWJIdno3VWxoL0hsR2tY?=
- =?utf-8?B?Q2FWQ0NnK29kSUJISEJZUm9UT3JOb2hPUW42YXJTekdmeFhialF4Uzl6WThC?=
- =?utf-8?B?VS9oYy9hYXY5aFBJYnhGZEsxaFkvbWNiN3NPQjM4SHg5REdVTUlPaTNRMGsw?=
- =?utf-8?B?M2Q0WlZiZHY0dkhyY0hxclN6cFdLMlB1YkZGc3NzUi9lWXdQM0l6SlgxeWcr?=
- =?utf-8?B?U085NHNmZTB5ZUVpZGRBUVV3cFZVWnQvMzhGVDNSeFFNNzk3RFpvQmhJeWgw?=
- =?utf-8?B?bUF5ZzI2VCs2ZkRrc2RVUXQ4aENlSjcvb0RiRk1Bd1k4YU14c0hvd0lHcEtn?=
- =?utf-8?B?cUV1OSt1S0ZNSUZiZ05LT1ZXM0t5NFJzQmEyZnJMLzRjdlhnVXVBb0tpZXNV?=
- =?utf-8?B?ZXQwcXYvelFGb3pnQlJma0dnSnBMVjI2eEhlNDFmM2JQU0V6OXp3MStkN3J0?=
- =?utf-8?B?TkV4WXpHbitmcjhhb09obFYwLzlEbC91RUs4R0NhaGhOZTRNVVlvNXdHUVJk?=
- =?utf-8?B?Y05pdit5aytPQUFaQ3lsZFlscHhnazd1UG9qbUNzNUp6eGVhb1cxbDNLeVBG?=
- =?utf-8?B?UnNFY29HWXJMdWkzTWJsdndURlQ5VXF6ckNBVFZIQmZRWmNRMzMzQWo2a2xV?=
- =?utf-8?B?UkRyYTNLYXk2WFBBY3dpV2dKYXpGMEd1Vytmd0RUdnRsOVJFU0xCcDhWQ0RJ?=
- =?utf-8?B?aTRURFRGRFZlenZQSHkxU2dLN0t4RlhRM3dxeDBjZWp0YnZyaE10Sk9rVXRC?=
- =?utf-8?B?Ui9nVGxzTjZDR3FsVll2YVg2YUU3UzFiNXhrTlhKMmtsSkQ2MG5yQnN5c2Ru?=
- =?utf-8?B?UzBOSXBtZVVtTVdJcmlsQUxGemU2TkZWcUg0OUJCMVF0VWlBZW9CRTBHOWxh?=
- =?utf-8?B?M2VmOElzemtVcW1qY1ZGMGtTcVZndDczYU1UeTNZRmRxWVp1cWx5Z3dqdWtB?=
- =?utf-8?B?RDBtZ2ZIZVA4RWVkdXNwSGRSNS8wR2pkTWtQclBkTm1GZ1NZUkE0NTJYeGdG?=
- =?utf-8?B?MWQwd3JOQmlXM0VCTXZ2RjFYamlIMlFQSmFJRDVEUFpDTkF0YmR6V0t1Z1pH?=
- =?utf-8?B?Wm1HZzhvNTl4OTBxbURhdE1oSGhSQkZhdnNiTElhMWFQN0hsWFhiOVo5VUFq?=
- =?utf-8?B?UjhoNXhEK09aZVNuTmtidzJKZ1dLSktkMnBFQStQdXZqZjJGT1Q4b0ZYVDNZ?=
- =?utf-8?B?c1Z1Rm4vckpYWWVrbGtrUDkzSkFHckxRWGtpVjlUQXpMcGFCUTJBazRzcHhu?=
- =?utf-8?B?MzUxdEhMZW5oREYvWmFnLzhJMGErOVFjRUxPNFJqVmRmeTNtSTl1ZHY3NCsw?=
- =?utf-8?B?Nms3MytiZEJ1SUUzcWFhUHRGcW0xQVRqc0ZMZmw4bDJWNHU4STAzZldpbWtO?=
- =?utf-8?B?bnh0U0xBMStZOHBteENWMS9UeWZyN0E9PQ==?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bHVWQ0dXdFlCQWZucTFuL3k0dWlmQUVwNXZvSk5IZmtQdzcxWEREVnFTQzZT?=
+ =?utf-8?B?bm9jcmRTQXZUSmdidzJkM0tRM3V0emFCVW5TbmVsRFN2eG5lWDNjcDVnQnJF?=
+ =?utf-8?B?UC9FMnFGUWpqdjB6akI4azRpYUZ6cjNoa0Yxd2R6eHl2dy92eC80RDlTKzU4?=
+ =?utf-8?B?bWM5MEdPelBJMmY4T0VoaXUrOC9GU0FNL1IrUU4yT1VieWtudU53Y2NMUU8x?=
+ =?utf-8?B?VjVPTDlEWDlTOTlCdjZTakJYVE9VZ1pDMFNnUkhuUTIzaWMxaE5hN0lLZEFU?=
+ =?utf-8?B?RTRQUkgwMXJqZmlMZDZQaWZQc0RINnY0N2JGUUdrUUJXUDZhVjFBbzBydlJQ?=
+ =?utf-8?B?TDE2RndqNG8xQTRhZHpFSUdTUVNKOFFGR3dMNUFSNWJab2dIVDZkMHpMTlJG?=
+ =?utf-8?B?eFNFOS9mdmI4ZTBtL2dlTHRIR01pd2ZSRVBCOTd5OVAwd21tV080Q1F2SUdI?=
+ =?utf-8?B?akw0R0tPb09jQ3FEUFlPZVRRYmREV2JSSnd6TzhSNStQYVBFRVFSWGZVR2lz?=
+ =?utf-8?B?K1pScjhRM0Evazk5TzRXaDEzb0x6cDJoQUFQWG1MQTdDRDVJU0VlQjBIcVpx?=
+ =?utf-8?B?YWE1MXFYTU5FSzdyQURGbEs0WE1JMTM3dUpHQnhCMXNqd3ltVFdndXVyWnk4?=
+ =?utf-8?B?NDlXTGhXZHQxenJ0azl4aWNwcXMwbkVxSklTSnZXekJtVVBJL2pHZXZCSE9C?=
+ =?utf-8?B?eVZOYmhvZEtnWEJmTWR5SkZTLzBqN21mQVNCekJNT0ZGK3RuMEE5MEpzM3o1?=
+ =?utf-8?B?L3hWbFQ3Yk9kb1FPV2d3SmFCZlduRHdJVklBQUJZSGtXbHpNUlFyY3hpZ004?=
+ =?utf-8?B?bnM5OTdXZ0ZWWHVQYWsxUTRNa3UvL1Vmd1U1UlZMTWJhOWoxWGh4U0k3RnVI?=
+ =?utf-8?B?dUtwQ3lockM3WmthMkVMY29CN3JvRnE3RGJYWWZUMVlhc1hBRGNjQlNCMWhv?=
+ =?utf-8?B?Zkh2QmlRTXhtMVo5amN3U3BnY2MvcTFsNm9WbHV5UTdqMys0UkJXMG8rOExs?=
+ =?utf-8?B?V1VQREJUZkFKQW5HU0dhRVd3aUJxNGNZOFZjVW16b2dWYUx1L0diZFBCYzVm?=
+ =?utf-8?B?dDdMbUR4aENvNlN5YlVnU1dVdmdyckg3dkJkSGlRVEk2SWI2WG5iNWpBZld0?=
+ =?utf-8?B?WnNBWDQ1TStwclBCSFJvbmluMFFBMDNTY0psNGtzMGE2aWZXNzhZWFc4VWcr?=
+ =?utf-8?B?cnk1aFl4azFPMEJwZm5JV2hyUHFqUXU3M1BhWktMT2ZqR3B5WU5DWHZqcGE4?=
+ =?utf-8?B?SzdsNmNRNk1XUnFURHJSS0Yra0RqbmdIZXpKY0pUU25DeG5DTFk5aGsxUit2?=
+ =?utf-8?B?T2VyUnJCRDBwbkQwUi9naUExTExSLzdwRkpjU3YrajdhakRRYjk0bk53K2Ni?=
+ =?utf-8?B?OEMrSHpJTmo0Q2lCd3NYRHhoR01Nd3F1dGVpdzVSZEczem5JVFhka3hQdWhG?=
+ =?utf-8?B?MGl5c3MzYTNGUjVUVG1jMzRMRjlWZWVOWGZzWVBITGhYdlJybUVvTVI0cTR3?=
+ =?utf-8?B?Zzd6eHljaGJMeDJwWmZGME1wckFuSFBVa3dHS1VhNGpoc2EzU1RBbThScWVl?=
+ =?utf-8?B?bFdmbkpiVXNvT25lYzdiTW9jbVYvNlRRZXV0aC90SW02VnlYclNGQWZrckNQ?=
+ =?utf-8?B?ZGNOZlVUOGZHTVY0SzFnOXVraGkzUVE9PQ==?=
 X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4501b82d-5592-4dbb-52c3-08dbb6ec4bdd
+X-MS-Exchange-CrossTenant-Network-Message-Id: fe3bd457-9f55-43cb-8a40-08dbb6ec4cc4
 X-MS-Exchange-CrossTenant-AuthSource: TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2023 19:37:00.7479 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2023 19:37:02.2815 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
@@ -130,27 +130,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable CONFIG_OF_BOARD_SETUP, so we could use ft_board_setup() to fixup
-memory size passed to kernel.
+Use fdt_fixup_memory to make the memory size data from dtb match
+the actual size.
 
 Signed-off-by: Shengyu Qu <wiagn233@outlook.com>
 Tested-by: Milan P. Stanić <mps@arvanta.net>
 ---
- configs/starfive_visionfive2_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ board/starfive/visionfive2/starfive_visionfive2.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index 2376dad538..4d1459a3c2 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -36,6 +36,7 @@ CONFIG_SPL_OPENSBI_LOAD_ADDR=0x40000000
- CONFIG_ARCH_RV64I=y
- CONFIG_CMODEL_MEDANY=y
- CONFIG_RISCV_SMODE=y
-+CONFIG_OF_BOARD_SETUP=y
- # CONFIG_OF_BOARD_FIXUP is not set
- CONFIG_FIT=y
- CONFIG_DISTRO_DEFAULTS=y
+diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
+index 9847e0efdb..700b60ac74 100644
+--- a/board/starfive/visionfive2/starfive_visionfive2.c
++++ b/board/starfive/visionfive2/starfive_visionfive2.c
+@@ -12,7 +12,9 @@
+ #include <linux/bitops.h>
+ #include <asm/arch-jh7110/eeprom.h>
+ #include <env.h>
++#include <fdt_support.h>
+ 
++DECLARE_GLOBAL_DATA_PTR;
+ #define JH7110_L2_PREFETCHER_BASE_ADDR		0x2030000
+ #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
+ 
+@@ -76,3 +78,8 @@ void *board_fdt_blob_setup(int *err)
+ 
+ 	return (ulong *)&_end;
+ }
++
++int ft_board_setup(void *blob, struct bd_info *bd)
++{
++	return fdt_fixup_memory(blob, 0x40000000, gd->ram_size);
++}
 -- 
 2.42.0
 
