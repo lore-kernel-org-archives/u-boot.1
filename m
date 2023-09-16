@@ -4,81 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE08CD37BB
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 13:31:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0C57CD37BB
+	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 13:31:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6C6C8662F;
-	Sat, 16 Sep 2023 15:31:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E43F867EF;
+	Sat, 16 Sep 2023 15:31:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lahfa.xyz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LNpmhdUp";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1920E8650A; Sat, 16 Sep 2023 07:22:15 +0200 (CEST)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A13338662F; Sat, 16 Sep 2023 15:18:26 +0200 (CEST)
+Received: from nef.ens.fr (nef2.ens.fr [129.199.96.40])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 020DE864C4
- for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 07:22:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BFBA48654B
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 15:18:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=lahfa.xyz
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bhupesh.linux@gmail.com
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-68fc292de9dso2086178b3a.0
- for <u-boot@lists.denx.de>; Fri, 15 Sep 2023 22:22:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1694841731; x=1695446531; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:references:subject:to:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pxTtJxpEugnY5DiLi8bmm1rP95Jz/heVBLdqQhUAP8w=;
- b=LNpmhdUpceqlcRUbemcmx/NfvAqY5J8/9/i/DVS0x/+0PFKba+1nVQHI8mMGOaRHIn
- BgJUyBwh5RFdnb7z34YFC/trk4NgSt04DhZrzCdq2s+wjnQEQpwuKTLN4Nl88yNKjhf9
- FD7nDEahtqDwLPvwSTBr43dn85Oo4MciNIxNWbWc8NX4lnyofQbdIZCPhYIFVsj062cC
- f8X6JmS3X04H9aFSWQyDGKqZw9NA3AZjJ5q5xPq9lgeWMGvVDFmYJWp27Ykb1ZTyNaRS
- y+/yQ8GCBSVbWjIKMlfYVZcG7BZ9+vUqmARcqE+p4vpVgTri73/EZTcxvxUWAJ6wy7Cw
- kojA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694841731; x=1695446531;
- h=content-transfer-encoding:in-reply-to:references:subject:to:from
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=pxTtJxpEugnY5DiLi8bmm1rP95Jz/heVBLdqQhUAP8w=;
- b=DdfMZGCJAMd6RLCCt7BW4rkTBMeZDO8/UDpWrW14FOZuXPVUX55mDj+kZ86UTeI7NP
- zqbalS5v1zWWuir407DI/UZwceilP+71MQHq/tUzen6BnSPz+xi5mgxgF8QAkbt5nCM/
- qGMO+j6dm9gFK29LhO8tPlCmMid7fKJ2dX+5J4mrl/xk3t03AjUkA4ZboAixUnchUH/5
- q7Ipsr4XPcXEPlq52WkOmPSeUOLLiJGHpJGuoJxjCUlChEwAGVk1kBjj+i0OeMphzB3m
- VpjohKGxoV72SQ/xbgHpsMMS8H+14wJlf5N/1auB13P54B9zGZLcURvxz+GRcl60/NJq
- ezmQ==
-X-Gm-Message-State: AOJu0YxWrhvW/L/vPwyp+KK9ImmIyeX+OpCE0dTkrNmHsjUWUfC9scqb
- yhBiTXUu7vkdQo+aec8YzaQ=
-X-Google-Smtp-Source: AGHT+IFaACgGIlKaVHWSk9OT7WwnGGuCAKG5X92GUmPJ4dXK+v0AlEYDg2aOuL9TbxLgpykfV9sGFA==
-X-Received: by 2002:a05:6a00:198e:b0:68e:351b:15b9 with SMTP id
- d14-20020a056a00198e00b0068e351b15b9mr4504542pfl.4.1694841731136; 
- Fri, 15 Sep 2023 22:22:11 -0700 (PDT)
-Received: from ?IPV6:2401:4900:1c60:c4b6:ed28:95c7:9a77:34ba?
- ([2401:4900:1c60:c4b6:ed28:95c7:9a77:34ba])
- by smtp.gmail.com with ESMTPSA id
- h13-20020a62b40d000000b0067f2f7eccdcsm3738806pfn.193.2023.09.15.22.22.08
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 15 Sep 2023 22:22:10 -0700 (PDT)
-Message-ID: <c8474d6e-1e92-bbde-3bd3-52183947a7ce@gmail.com>
-Date: Sat, 16 Sep 2023 10:52:06 +0530
+ spf=pass smtp.mailfrom=ryan.lahfa@ens.fr
+X-ENS-nef-client: 129.199.1.22 ( name = clipper-gw.ens.fr )
+Received: from clipper.ens.fr (clipper-gw.ens.fr [129.199.1.22])
+ by nef.ens.fr (8.14.4/1.01.28121999) with ESMTP id 38GDINoE001206
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 15:18:23 +0200
+Received: from  localhost using smtps by clipper.ens.fr (8.14.4/jb-1.1)
+ id 38GDINru121649 for <u-boot@lists.denx.de>;
+ Sat, 16 Sep 2023 15:18:23 +0200 (authenticated user rlahfa)
+X-ENS-Received: (bny92-8_migr-88-174-101-154.fbx.proxad.net [88.174.101.154]
+ (may be forged))
+X-Envelope-To: <u-boot@lists.denx.de>
+From: Ryan Lahfa <ryan-uboot@lahfa.xyz>
+To: u-boot@lists.denx.de
+Subject: zboot: [PATCH] boot/pxe-utils: populate initrd_filesize for extlinux
+ boot
+Date: Sat, 16 Sep 2023 15:14:56 +0200
+Message-ID: <20230916131812.4035430-1-ryan-uboot@lahfa.xyz>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.1
-From: bhupesh.linux@gmail.com
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, sjg@chromium.org,
- trini@konsulko.com, n-francis@ti.com
-Subject: Re: [PATCH] MAINTAINERS: ufs: Change Bhupesh's email address
-References: <20230915181442.3403172-1-bhupesh.linux@gmail.com>
- <4c9658ca-1cf8-e985-8ced-28061a449ca2@denx.de>
-In-Reply-To: <4c9658ca-1cf8-e985-8ced-28061a449ca2@denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3
+ (nef.ens.fr [129.199.96.32]); Sat, 16 Sep 2023 15:18:23 +0200 (CEST)
 X-Mailman-Approved-At: Sat, 16 Sep 2023 15:31:28 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,15 +60,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The reason for this is that initrd_filesize is constantly equal to zero
+or more specifically, potentially uninitialized memory.
 
+I believe this was introduced in
+085cbdafca9c3d7bc2f27523a343f61db82f2ccb ("pxe: simplify label_boot()"),
+diff here:
 
-On 9/16/23 2:36 AM, Marek Vasut <marex@denx.de> wrote:
-> On 9/15/23 20:14, Bhupesh Sharma wrote:
-> > Set my current personal email in the MAINTAINERS file.
-> 
-> Why this change so soon ? Did linaro raise any concerns about the 
-> maintainership ?
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index b08aee9896..defbe465e4 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -532,11 +532,10 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 		}
+ 
+ 		initrd_addr_str = env_get("ramdisk_addr_r");
+-		strcpy(initrd_filesize, simple_xtoa(size));
+-
+-		strncpy(initrd_str, initrd_addr_str, 18);
+-		strcat(initrd_str, ":");
+-		strncat(initrd_str, initrd_filesize, 9);
++		size = snprintf(initrd_str, sizeof(initrd_str), "%s:%lx",
++				initrd_addr_str, size);
++		if (size >= sizeof(initrd_str))
++			return 1;
+ 	}
+ 
+ 	if (get_relfile_envaddr(ctx, label->kernel, "kernel_addr_r",
 
-No, I am going to pursue things out of Linaro now, but still related to Qcom upstream.
+The initrd_filesize completely disappears.
 
-Thanks
+We re-copy the size information inside initrd_filesize, maybe, too
+naively, something may have to be done to reduce the overflow potential
+if it exist at all.
+
+pxe_utils.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
