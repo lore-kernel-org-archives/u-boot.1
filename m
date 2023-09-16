@@ -4,51 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76392CD37BC
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 13:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F35E9CD37BB
+	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 14:18:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0A9E868D7;
-	Sat, 16 Sep 2023 15:31:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=lahfa.xyz
+	by phobos.denx.de (Postfix) with ESMTP id E6E85864D4;
+	Sat, 16 Sep 2023 16:18:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="kaHKu1Ny";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2B0E86672; Sat, 16 Sep 2023 15:23:47 +0200 (CEST)
-Received: from nef.ens.fr (nef2.ens.fr [129.199.96.40])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7606C8652B; Sat, 16 Sep 2023 16:18:17 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13CE286589
- for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 15:23:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 27E74864CD
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 16:18:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=lahfa.xyz
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=ryan-uboot@lahfa.xyz
-X-ENS-nef-client: 129.199.1.22 ( name = clipper-gw.ens.fr )
-Received: from clipper.ens.fr (clipper-gw.ens.fr [129.199.1.22])
- by nef.ens.fr (8.14.4/1.01.28121999) with ESMTP id 38GDNd9C001720
- ; Sat, 16 Sep 2023 15:23:39 +0200
-Received: from  localhost using smtps by clipper.ens.fr (8.14.4/jb-1.1)
- id 38GDNc4b128737 ; Sat, 16 Sep 2023 15:23:38 +0200 (authenticated user rlahfa)
-X-ENS-Received: (bny92-8_migr-88-174-101-154.fbx.proxad.net [88.174.101.154]
- (may be forged))
-Date: Sat, 16 Sep 2023 15:23:34 +0200
-From: Ryan Lahfa <ryan-uboot@lahfa.xyz>
-To: Ryan Lahfa <ryan-uboot@lahfa.xyz>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Zhaofeng Li <hello@zhaofeng.li>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ramon Fried <rfried.dev@gmail.com>, Artem Lapkin <email2tema@gmail.com>
-Subject: Re: [PATCH] boot/pxe-utils: populate initrd_filesize for extlinux boot
-Message-ID: <dmyr2w4nyag3yaoknbjrm7v2lqlcrqptsm4r4v7hsxaww6ufkc@x4r4m4yvuun2>
-References: <20230916131812.4035430-1-ryan-uboot@lahfa.xyz>
- <20230916131812.4035430-3-ryan-uboot@lahfa.xyz>
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=public-files.de;
+ s=s31663417; t=1694873885; x=1695478685; i=frank-w@public-files.de;
+ bh=qXiAgOIygMcF/fz9MwVc+w1kyE4izEbzVcA1titQ1Ns=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=kaHKu1NymWwqUsoWD0gxfUL7zqi4E7k/gftLLbTKPpG9ahlrqqIGGbun9V1kBH1Y49IGjzA/roN
+ BoKNZLPak3O6ljJRrrftXQVxKMob2mWkyX/VCq9OLvzy8ENB7+zZUWZSMJZBWXj1zVTnw/xpRXE45
+ UbQHc1avXMOOP2wbLdoCYmPHbowRv05cv3idhLta0x1bMY2dqieoOzbvHXp1rKKJnVXm7WU8a9Ghk
+ mSLb1sePoJ733wpbrxFTj0a3MIoZYQ5A77/Jv0p0Tgf3/QLFb5CaTmV4x+/oNGLEw/8edEXqhsCJj
+ cEw9nuVgS85Z5ckdrDs8sWKlwAs4yEwfEyjA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [217.61.145.236] ([217.61.145.236]) by web-mail.gmx.net
+ (3c-app-gmx-bs23.server.lan [172.19.170.75]) (via HTTP); Sat, 16 Sep 2023
+ 16:18:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230916131812.4035430-3-ryan-uboot@lahfa.xyz>
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.4.3
- (nef.ens.fr [129.199.96.32]); Sat, 16 Sep 2023 15:23:39 +0200 (CEST)
-X-Mailman-Approved-At: Sat, 16 Sep 2023 15:31:28 +0200
+Message-ID: <trinity-6cf108b4-a879-40e2-a04a-54451262d671-1694873885042@3c-app-gmx-bs23>
+From: Frank Wunderlich <frank-w@public-files.de>
+To: Frank Wunderlich <linux@fw-web.de>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>, Marek
+ Vasut <marex@denx.de>, Jonas Karlman <jonas@kwiboo.se>
+Subject: Aw: [PATCH v3] board: rockchip: Add Bananapi R2Pro Board
+Content-Type: text/plain; charset=UTF-8
+Date: Sat, 16 Sep 2023 16:18:05 +0200
+Importance: normal
+Sensitivity: Normal
+In-Reply-To: <20230820160004.44880-1-linux@fw-web.de>
+References: <20230820160004.44880-1-linux@fw-web.de>
+X-UI-Message-Type: mail
+X-Priority: 3
+X-Provags-ID: V03:K1:lXOm7xy6F/CEtigv/9HHPLMWHHJh2xLbHZx2iCQUG0C6/kA+GJqLHVQXr8kIa9pwag/JH
+ 5jkA0DKV/sn/akJo3mC1taay26lx2iaoqf9k9bYEO3CJKpZAXvrsU6As5OCLMh1zamTYzQxB14Hb
+ 5LYH9BG98QFYgqM4zyaZ/i9y/9z2IPIM4iA/MNMyIj8jIFKxYUCTNxQjKv1XAPTq+3jAyJEq/vA+
+ uBb7LwVwnlNaZqOcworOyvdyuKnUrOVQBr39ureb12tlyxMIHkYtmTzz/gE1WvoKQ1/fmalgbZYP
+ xc=
+UI-OutboundReport: notjunk:1;M01:P0:FHIKTOBs/ek=;zLP1PaHglwJ/Qx3+HH0SsZ6/rwa
+ w46ZmKycoFwSshd4JcBPVUxJl5IYDBwDxNoQ1LN0nrUI02/YNZ77jDu9/3kSr+xIOWZL8BFpJ
+ RZK8ITXh/76MO/H+Onl2NcDQPaNUHD+1+3tfKEhX6Lbr7LVRL3epsDrlijOZdDbvykcbDjVfy
+ Dt0SJiaiLuYnYNGdv9KsJwZTppnwsV7BOmaiYqU2iBv23BEwbFT+horRDa65G6jvzSMSjOeEZ
+ MEYhEUG8N5wk1D/H6XSrfA4ABEcowiirltVpZrJidG5vS/2MwOc6DcZBlwcKioAN+PO7TbT/o
+ xp4qa+6t2L+11xOUqP/LTr5ilhKVnc8b6ar49BPRRHzC3CERatPNhqgBGouAP7J68flZUD5vQ
+ 0bhVy5CCUoNrJCeUIcRxVOFCvRLQWKksfn0Ck9Ipo1bo4OE4XoJbw/2LiF1bdxZxesapPscxm
+ WbyMivsh2G9DZfwganeqvx9BB2Lxv+lC/2WTTVDfCRPHv6p5S+NSosLphbgY75m98D8hO64hV
+ ba1j1PdcJIFKyrevB/pLU9cZ3HZ+66pOzbpdMJy9V1FQZCaBF8qclN8kPpHoMjK13YSvBU50s
+ q1GcOqsVvn6gxOlqlH2ITujobqIIJxKWgb7oS5hEf7TmCkcHmwFRPtp8M26uMHeFrRfnIFLil
+ OuNi2B7S59FK8B7nYHv+6xSdYj3AkQE/Qf4PU2m0LBsrXvggt0lsBOBg4JgVQdS1pIjsrmnU4
+ uqdmp6We48j1vYOXpO06mINAqhXuY+LJbfr4XyUZ+BU9Dk2ITjhdcwPx2EX5Jb7wwzUMJURNM
+ FLbzaakQ0x92QtIAEBjmpwRA==
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,22 +89,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Sep 16, 2023 at 03:14:58PM +0200, Ryan Lahfa wrote:
-> Currently, it seems like the `initrd_filesize` was uninitialized for a
-> while.
-> 
-> This is particularly problematic when attempting to `zboot` with a
-> initrd with a size coming from `label->initrd`, because it will provide
-> you with a 0-long initrd at boot time, making the kernel fail to
-> continue the boot.
-> 
-> This fixes the issue and I confirmed it enable me booting a U-Boot on
-> QEMU x86_64 q35 with NixOS kernel and initrds.
+Hi,
 
-The original message was lost because I do not use `git send-email` that
-often but, this issue appears to be introduced in
-085cbdafca9c3d7bc2f27523a343f61db82f2ccb ("pxe: simplify label_boot()").
+just a friedly reminder. would be great if it can be merged in next uboot-=
+version.
 
-Kind regards,
--- 
-Ryan Lahfa
+regards Frank
+
+
+> Gesendet: Sonntag, 20. August 2023 um 18:00 Uhr
+> Von: "Frank Wunderlich" <linux@fw-web.de>
+> An: u-boot@lists.denx.de
+> Cc: "Frank Wunderlich" <frank-w@public-files.de>, "Simon Glass" <sjg@chr=
+omium.org>, "Philipp Tomsich" <philipp.tomsich@vrull.eu>, "Kever Yang" <ke=
+ver.yang@rock-chips.com>, "Marek Vasut" <marex@denx.de>, "Jonas Karlman" <=
+jonas@kwiboo.se>
+> Betreff: [PATCH v3] board: rockchip: Add Bananapi R2Pro Board
+>
+> From: Frank Wunderlich <frank-w@public-files.de>
+>
+> Add Bananapi R2 Pro board.
+>
+> Till now evb dts could be used, but iodomain is different
+> (evb has 1v8 on vccio2 and vccio4 which are 3v3 on r2pro)
+> and with iodomain driver this can cause hardware fault.
+>
+> Devicetree in mainline-Linux:
+> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/=
+arch/arm64/boot/dts/rockchip/rk3568-bpi-r2-pro.dts
+>
+> Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+> ---
+> v3:
+> - disable gmac0 as switch-driver is not yet ready to attach to the mac
+> v2:
+> - drop switch-node for now as u-boot driver works differently to linux
+> ---
+>  arch/arm/dts/Makefile                     |   3 +-
+>  arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi |  23 +
+>  arch/arm/dts/rk3568-bpi-r2pro.dts         | 549 ++++++++++++++++++++++
+>  configs/bpi-r2pro-rk3568_defconfig        | 101 ++++
+>  4 files changed, 675 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/rk3568-bpi-r2pro.dts
+>  create mode 100644 configs/bpi-r2pro-rk3568_defconfig
+
