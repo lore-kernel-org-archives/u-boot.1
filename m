@@ -4,68 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48679C2BA2B
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 22:36:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46874C2BA2B
+	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 22:38:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A1708556F;
-	Sun, 17 Sep 2023 00:36:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B141380422;
+	Sun, 17 Sep 2023 00:38:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="DnnnL4yG";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="haAnIFuT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10787854BD; Sun, 17 Sep 2023 00:36:37 +0200 (CEST)
-Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
- (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
+ id 04A9B854BD; Sun, 17 Sep 2023 00:38:09 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B462C8556F
- for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 00:36:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1C75803AE
+ for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 00:38:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
- content-transfer-encoding:cc:content-type:from:subject:to;
- s=s1; bh=sojpvlmAEC/SXAB75gwXq8K/XnwjK1yZXh5wSfyIKro=;
- b=DnnnL4yGJdi6n69ZKfattUcIJTscBWTdP2ACpeACrMWKyTbdZkxfVj/O/WvogmQZ7e7i
- 71JA6Nx4/nZfpgsZrdYyj3FDpPqOmqAU95MZHutkzdsmyu+ZqlQ3npcjZ8URN+16LmGfG7
- 5KV1rPUxwaiekhKlN7iU1od/xTIce7my5oQLcU+yJxW6ygiaSl7hdACKZvpzVTblafKUdl
- 03gkasPVHyioJwbUAC/JCi4MaAGnywa7gyTcRKLDmUc0PaPh9CRzm1iaN56Q4cM4Gys+mO
- ciLhrWExqynvvhhrRw7lfp97j4wbtLdgGNqInLBYPZK5DhX0oWa9Z+Gbq0UjZJcw==
-Received: by filterdrecv-7765c6879f-kht5h with SMTP id
- filterdrecv-7765c6879f-kht5h-1-65062DF1-5
- 2023-09-16 22:36:33.211591986 +0000 UTC m=+120104.323691084
-Received: from [192.168.1.50] (unknown) by geopod-ismtpd-8 (SG) with ESMTP
- id JuYTxpoqS2-UuPiOsxkPZQ Sat, 16 Sep 2023 22:36:32.833 +0000 (UTC)
-Message-ID: <5ce50e56-ed40-de94-e2a4-8b55c8006058@kwiboo.se>
-Date: Sat, 16 Sep 2023 22:36:33 +0000 (UTC)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-d7f0a60a159so2912520276.0
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 15:38:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1694903885; x=1695508685; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BHpK1t1wqN9n2CAVJYx9pE3WbrPYCTT93la2R8kS/Rk=;
+ b=haAnIFuT5vyq08YSVUU3iWZtLxtYImXYyslPPOGK+u5Li76u88YvIIdJf2c05UgD3/
+ Zj0aOufLJCK3Ihu2r1n/9BYBCo7eSLfT6BxueHIYhe3otOb2DAGz+sHzPLB2sTK9lUTf
+ Qxhe9NmDGT15y+DJoiem0DFkBZlJZizPwbpRA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694903885; x=1695508685;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BHpK1t1wqN9n2CAVJYx9pE3WbrPYCTT93la2R8kS/Rk=;
+ b=R6pJVuNYcmxH2BKJnHEtWrEiZP45mvwb8gUQLt6fpQOtbZkbPPEGqvdIsgVlRZe6tZ
+ h7vqEJ41cOwFuhhil1xENylVb/n6hOEXENJUE/rKSnbC5EewzPX6cGtbW1133d7Pjm6G
+ jM+Taz4M6lN1Z99VyOP7oAAQBXTCDC4TlT0HsXK/u9efDqr7QJ72aTohu/Kg0cpdRnvJ
+ 5GI5Wq2LWNw4n2CXheW10d3Ii9X+zo2w9zHbGJb3Xsrkf6c52s2EqQVtmWLXeypzs6uM
+ wJttKEJiXFpUlqJ9Svjkb0TzOzaWfPxIpEVBZ6P4AcU61SKHRPFUrFlVSLOQKu3A3HYJ
+ +3Cg==
+X-Gm-Message-State: AOJu0Yw78v9IqJxDN2Ym6cBPuRa+GT6pC2cmnxiAI7w+rkXfwzuyQjPL
+ te9BPM5g7E5jQs7FgJsNRXa+Gg==
+X-Google-Smtp-Source: AGHT+IEiuGzhvuP/4BJq1Xu0K515tG4vn5vmArjt/4YnOcw2AtLBGG4r5u2rPP9S9N7giYWCpz7D8g==
+X-Received: by 2002:a25:d883:0:b0:c39:9e09:2c71 with SMTP id
+ p125-20020a25d883000000b00c399e092c71mr5413716ybg.41.1694903885563; 
+ Sat, 16 Sep 2023 15:38:05 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-7b8e-9e18-0a32-e8bf.res6.spectrum.com.
+ [2603:6081:7b00:6400:7b8e:9e18:a32:e8bf])
+ by smtp.gmail.com with ESMTPSA id
+ e9-20020a259249000000b00d43697c429esm1384297ybo.50.2023.09.16.15.38.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 16 Sep 2023 15:38:04 -0700 (PDT)
+Date: Sat, 16 Sep 2023 18:38:03 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PULL] u-boot-usb/next
+Message-ID: <20230916223803.GI305624@bill-the-cat>
+References: <20230916101618.5191-1-marex@denx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: Aw: [PATCH v3] board: rockchip: Add Bananapi R2Pro Board
-Content-Language: en-US
-References: <20230820160004.44880-1-linux@fw-web.de>
- <trinity-6cf108b4-a879-40e2-a04a-54451262d671-1694873885042@3c-app-gmx-bs23>
- <f00dad5e-bbe7-7a4d-e955-ce317cefb932@denx.de>
- <E81B855A-F7F8-4405-B4A7-8261D55C075D@public-files.de>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <E81B855A-F7F8-4405-B4A7-8261D55C075D@public-files.de>
-X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h+It+BvinUAh1DSel?=
- =?us-ascii?Q?BFWy82=2FO8cL6vtEQAfbDYnkK4exb3iPKLIKTNN5?=
- =?us-ascii?Q?ZYtA+LDR6Xbzes5UA9utZVUcWTAfhe9vMBxSruH?=
- =?us-ascii?Q?1Sa0jAuTdXjo1QWkz5VrqQyObBVxaeB4IGroDj8?=
- =?us-ascii?Q?mu5lsR6BQltL4wM7LKH=2FIHifWZtt5jHDkFPRdR?=
-To: frank-w@public-files.de, Marek Vasut <marex@denx.de>, Frank Wunderlich
- <linux@fw-web.de>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>
-X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ako/50k5KZkLTmMY"
+Content-Disposition: inline
+In-Reply-To: <20230916101618.5191-1-marex@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,48 +91,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-09-16 18:45, Frank Wunderlich wrote:
-> Am 16. September 2023 18:07:44 MESZ schrieb Marek Vasut <marex@denx.de>:
->> On 9/16/23 16:18, Frank Wunderlich wrote:
->>> Hi,
->>>
->>> just a friedly reminder. would be great if it can be merged in next uboot-version.
->>
->> +CC Tom
->>
->>> regards Frank
->>>
->>>
->>>> Gesendet: Sonntag, 20. August 2023 um 18:00 Uhr
->>>> Von: "Frank Wunderlich" <linux@fw-web.de>
->>>> An: u-boot@lists.denx.de
->>>> Cc: "Frank Wunderlich" <frank-w@public-files.de>, "Simon Glass" <sjg@chromium.org>, "Philipp Tomsich" <philipp.tomsich@vrull.eu>, "Kever Yang" <kever.yang@rock-chips.com>, "Marek Vasut" <marex@denx.de>, "Jonas Karlman" <jonas@kwiboo.se>
->>>> Betreff: [PATCH v3] board: rockchip: Add Bananapi R2Pro Board
->>>>
->>>> From: Frank Wunderlich <frank-w@public-files.de>
->>>>
->>>> Add Bananapi R2 Pro board.
->>>>
->>>> Till now evb dts could be used, but iodomain is different
->>>> (evb has 1v8 on vccio2 and vccio4 which are 3v3 on r2pro)
->>>> and with iodomain driver this can cause hardware fault.
->>>>
->>>> Devicetree in mainline-Linux:
->>>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/rockchip/rk3568-bpi-r2-pro.dts
->>
->> What would be real helpful is a commit ID from which the DT was copied , so it can be easily updated in the future.
-> 
-> It is no plain copy...i removed parts not relevant for uboot now (from current linux version). E.g. switch driver is currently bundled in mtk ethernet driver and using different devicetree structure than linux dsa driver. We have to separate it before we can use it on r2pro. But this will take some time...also pcie(-phy) does not have a driver yet,so before adding dead code i dropped these parts for now.
 
-pcie(-phy) should have a working driver for rk3568 as of v2023.10-rc2,
-and is extended to support PCIe bifurcation with the following series:
+--ako/50k5KZkLTmMY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-rockchip: rk3568: Fix use of PCIe bifurcation
-https://patchwork.ozlabs.org/project/uboot/list/?series=366997&state=*
+On Sat, Sep 16, 2023 at 12:16:18PM +0200, Marek Vasut wrote:
 
-Regards,
-Jonas
+> The following changes since commit 2fe4b54556ea6271237b35de68dc458bfceab9=
+4c:
+>=20
+>   Merge branch '2023-09-14-remove-NEEDS_MANUAL_RELOC' into next (2023-09-=
+14 16:23:49 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://source.denx.de/u-boot-usb.git next
+>=20
+> for you to fetch changes up to 2caf974b5fac69a1b778e64503f2c107a8d7c3a3:
+>=20
+>   board: usb: Replace legacy usb_gadget_handle_interrupts() (2023-09-15 2=
+3:38:02 +0200)
+>=20
 
-> 
-> regards Frank
+Applied to u-boot/next, thanks!
 
+--=20
+Tom
+
+--ako/50k5KZkLTmMY
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUGLkUACgkQFHw5/5Y0
+tyyNwwv/VxbdzY7inl7HJg79vO5v5rvBoyM4lmiKBC87+SIG0wYD77eljlKGeXN8
+YoEEYRHEqtma/K3C9ss1TFQqjmaO5tgKnbkVvHmBkS/2HvWC2nm6U8EIcnSVojWC
+4E2S7X0wED/K+6qXUjKscBf7wWPAEW6m4+YYHdriwrHR8v2vNFMWA02BZRf26tk6
+/+24I/2CfGu+fooIYo5iOdBuxs8jBnfjLCVaknaxZzi8lqSeauygxaZRDFMfdywf
+hbkpGlkYt54nlIy7L1pli/KxjxEasHbPnVVo8MF3yf/TL8k4iLuD96ojGnCwAg8n
+zrprfh6AKyArJ07afY2Kr79Y2o2plo7B6xjomVd4hE9Vp2uaa4X00q6FlYNmlujf
+ra9AhUTOz+/IU86MSgrpr7s4VK7US0PiEcDko0TDNhskorWN7zIRRUTEjB6QDWmx
+XQXBRRHcDlUCxku0kW59YNsimS5R6skk4JuqKP15DEQdKpbLCndLCVdFSEa8A3K+
+s9ku3Dqb
+=lZ4S
+-----END PGP SIGNATURE-----
+
+--ako/50k5KZkLTmMY--
