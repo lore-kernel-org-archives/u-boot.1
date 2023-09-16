@@ -4,76 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D72CD37B6
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 08:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36830CD37B7
+	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 08:23:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ACD186504;
-	Sat, 16 Sep 2023 10:23:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 96C63862B6;
+	Sat, 16 Sep 2023 10:23:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="erLq8nxS";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DJc4RHyM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A6248650A; Sat, 16 Sep 2023 10:23:07 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id AC4CD864D7; Sat, 16 Sep 2023 10:23:49 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6772A86503
- for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 10:23:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCE3F86290
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 10:23:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=massimo.pegorer+oss@gmail.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-404573e6c8fso27868855e9.1
- for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 01:23:05 -0700 (PDT)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-3ff7d73a6feso32650215e9.1
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 01:23:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1694852585; x=1695457385; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1694852627; x=1695457427; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:sender:from:to:cc:subject:date:message-id:reply-to;
- bh=QuwLIPVk/uRNLcc2W3inuJxZwPuTgc431WKv7WAGimg=;
- b=erLq8nxSUO9R/dbklPee4Fy1dW8SNniwYNHmxap0KlaOMuLkLRLunLTBJZTmcIhu2r
- CS1DXoVRDUwYxry1VB3hZGZRi5HNWyXI8qiU4OOXM1PBJgo4QRqBUvpPVqlpvqc6kd7M
- QKhVk4Jqm7snUaLaQMWD74G3M7fLiATOxqV1Ie5bCJpiLfGymULdTAo58En8P+cTMVGf
- w8Tw0BcRCu/pCG80ZbEclVy0QBQsNBHL2m8we+AmKe2NNRVSOKZFoOunxglMRm1VEckP
- 6ZjS0XsUv8tjqw0J+iHyNKPjX0flepCtBNplZWpPUS/r5FNa0xnfBrPgStsXMem5rBlk
- UjNA==
+ bh=SZNeA/n5BLBh9MFeKSb7P7kJHnSKo7n+M1NYBCHIGCk=;
+ b=DJc4RHyMc4LKDHgwx5eMpg7zRs12TI8MQLDZ1CgeOX17XijhrAmsPd+Et1jcxb6BFs
+ Lwii7JRYMpq7fG/yu59FXMuTBTVV4bf6dMHldKRMNtsU4JzWE9KucGYBpky3EXvdSbjx
+ uWs6o3JPqw0NEh2gEhoZkmSj6DXfEMxsjCPjvdSk7Pk0MhDgWK/qN5M69268XomWfAKG
+ R05dcUNbRwpeUz1VpbZUP1bOSi2fV5uWCvDA7AFNRAkR3S0W3dGE5Y/USSZZG8MLDsPB
+ u+5qCfmwdD3U3t09MMtA/NtjLONqOHWKJfKosrxWZtUmgr+nnBD0Ex6OSdaYe3MqWWsR
+ tAPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694852585; x=1695457385;
+ d=1e100.net; s=20230601; t=1694852627; x=1695457427;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:sender:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QuwLIPVk/uRNLcc2W3inuJxZwPuTgc431WKv7WAGimg=;
- b=p407rDXizc7ltXF7ZimanHBsNGUCcyGltvCXHbMPjeGyTbi3ilORbAG/HK/quoXv46
- UdoIJrlEDblCoUT5nQVQgH4lIw9ay5tsefC6PxCXsZlwoidlFaaZU+Z5HyNAJDonxt1t
- YCtW/USqvjIkc2mapv9NNCXQhXFAc+lRAZmrcqmsPzNWzv+UnNvPgJLumFWa1uL7UA4m
- tmIDkp23ZSsbSfphP86YKYSD03FQdapNZPi+zDyqccAZJ/NO+7lDKrXagRCcKeaUnm5h
- kbcBop2ZOK46CtLKVq1IfnmeaWQMCQWxx81Kt0auIJmZwqcuc9mmulpMfnE2ptlA25mX
- tS3w==
-X-Gm-Message-State: AOJu0YyhsPywEJWfrdD2qnJM+80Eh+H4BmLvLiOWMs8x6HvMwRn6pAUJ
- CIiMmdin4+cqOCLwdFGKrdCsafXNwH4=
-X-Google-Smtp-Source: AGHT+IEDwQKLjK6/a4+dEn8AgWW211SALM3UZl646rx7yRhISlMLG6VkTKBBpk32wCvG1q4FT6E4Uw==
-X-Received: by 2002:a1c:6a0a:0:b0:3fa:77ed:9894 with SMTP id
- f10-20020a1c6a0a000000b003fa77ed9894mr3216138wmc.7.1694852584866; 
- Sat, 16 Sep 2023 01:23:04 -0700 (PDT)
+ bh=SZNeA/n5BLBh9MFeKSb7P7kJHnSKo7n+M1NYBCHIGCk=;
+ b=kLCvfoftCwJ5h8X9JF0mxqLF3Ds5LLfiuUe5G/DMYSmEK2Hqd0AwRS//130AniT+UU
+ UFQ6/jaDryLxye6ikIMQZ2LsmoDsjQbQ9vnecCDEWxJFNwsFDCXxrEZMb3d4gGMEhWUI
+ ic1H/W9X8tTQZR2NLynzrP8WjNKF3xWMjjxt0zyb3ATxmfBdEy+kAdK3ra881275ZL1E
+ rjsgbsE381GIJJJ758ZU8YtdoAaTlfJ7GMmpEvihOsG7w9QF3IMkZz8iVdx+GgmjQ8QZ
+ VdIN+QG0QwQeb+XxbKJi1yqUcnaIe/PNU5hznCjgo5uKbQJRfEyuyVjpl8RfbA+VoGRo
+ nfgA==
+X-Gm-Message-State: AOJu0YyeW15jqSiku9g2/UfYf7O/TltZYgN6i4+kVgOJvD2d6WOcu1JR
+ rx1awTvVjA3VScQcvnIM06wkjM2GOCU=
+X-Google-Smtp-Source: AGHT+IEWFaXNOhp+MRk1wF6Esl4AGNjcbqXxWwUX8UEh9PfsadaCWtHvrDtvGYichP5q3lgfdmg7qw==
+X-Received: by 2002:a05:600c:2299:b0:400:419c:bbde with SMTP id
+ 25-20020a05600c229900b00400419cbbdemr3620040wmf.18.1694852626962; 
+ Sat, 16 Sep 2023 01:23:46 -0700 (PDT)
 Received: from pegmas-T15.fritz.box ([151.71.172.204])
  by smtp.gmail.com with ESMTPSA id
- r4-20020adfdc84000000b0031753073abcsm6475794wrj.36.2023.09.16.01.23.04
+ y5-20020a1c4b05000000b0040303a9965asm9542507wma.40.2023.09.16.01.23.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 16 Sep 2023 01:23:04 -0700 (PDT)
+ Sat, 16 Sep 2023 01:23:46 -0700 (PDT)
 From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Joseph Chen <chenjh@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Subject: [PATCH 1/4] spl: atf: Improve comments and code readability
-Date: Sat, 16 Sep 2023 10:23:01 +0200
-Message-Id: <20230916082301.583248-1-massimo.pegorer+oss@gmail.com>
+Subject: [PATCH 2/4] image: fit: Improve functions description comments
+Date: Sat, 16 Sep 2023 10:23:44 +0200
+Message-Id: <20230916082344.583308-1-massimo.pegorer+oss@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,98 +90,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename bl31_entry static function to avoid name clash with its first
-argument. Fix spaces misuse. Describe code accurately: load address
-is used if getting entry point address fails, and not if addresses
-differ. Remove not up-to-date comment about BL3-2 usage.
+Load and entry addresses are returned in ulong variables, which are
+32 or 64 bit depending on architecture. Specify that on failure these
+functions do not set memory pointed by load / entry argument: this
+detail is relavant for correct functions usage.
 
 Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
 ---
- common/spl/spl_atf.c | 34 +++++++++++++++-------------------
- 1 file changed, 15 insertions(+), 19 deletions(-)
+ boot/image-fit.c | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/common/spl/spl_atf.c b/common/spl/spl_atf.c
-index 2c10252834..3d022ed4e7 100644
---- a/common/spl/spl_atf.c
-+++ b/common/spl/spl_atf.c
-@@ -189,10 +189,10 @@ static inline void raw_write_daif(unsigned int daif)
- 
- typedef void (*atf_entry_t)(struct bl31_params *params, void *plat_params);
- 
--static void bl31_entry(uintptr_t bl31_entry, uintptr_t bl32_entry,
--		       uintptr_t bl33_entry, uintptr_t fdt_addr)
-+static void spl_enter_atf(uintptr_t bl31_entry, uintptr_t bl32_entry,
-+			  uintptr_t bl33_entry, uintptr_t fdt_addr)
- {
--	atf_entry_t  atf_entry = (atf_entry_t)bl31_entry;
-+	atf_entry_t atf_entry = (atf_entry_t)bl31_entry;
- 	void *bl31_params;
- 
- 	if (CONFIG_IS_ENABLED(ATF_LOAD_IMAGE_V2))
-@@ -240,7 +240,7 @@ static int spl_fit_images_find(void *blob, int os)
- 
- uintptr_t spl_fit_images_get_entry(void *blob, int node)
- {
--	ulong  val;
-+	ulong val;
- 	int ret;
- 
- 	ret = fit_image_get_entry(blob, node, &val);
-@@ -253,25 +253,25 @@ uintptr_t spl_fit_images_get_entry(void *blob, int node)
- 
- void spl_invoke_atf(struct spl_image_info *spl_image)
- {
--	uintptr_t  bl32_entry = 0;
--	uintptr_t  bl33_entry = CONFIG_TEXT_BASE;
-+	uintptr_t bl32_entry = 0;
-+	uintptr_t bl33_entry = CONFIG_TEXT_BASE;
- 	void *blob = spl_image->fdt_addr;
- 	uintptr_t platform_param = (uintptr_t)blob;
- 	int node;
- 
- 	/*
--	 * Find the OP-TEE binary (in /fit-images) load address or
--	 * entry point (if different) and pass it as the BL3-2 entry
--	 * point, this is optional.
-+	 * Find (in /fit-images) the TEE binary entry point address
-+	 * (or load address if entry point is missing) and pass it as
-+	 * the BL3-2 entry point. This is optional.
- 	 */
- 	node = spl_fit_images_find(blob, IH_OS_TEE);
- 	if (node >= 0)
- 		bl32_entry = spl_fit_images_get_entry(blob, node);
- 
- 	/*
--	 * Find the U-Boot binary (in /fit-images) load addreess or
--	 * entry point (if different) and pass it as the BL3-3 entry
--	 * point.
-+	 * Find (in /fit-images) the U-Boot binary entry point address
-+	 * (or load address if entry point is missing) and pass it as
-+	 * the BL3-3 entry point.
- 	 * This will need to be extended to support Falcon mode.
- 	 */
- 
-@@ -281,17 +281,13 @@ void spl_invoke_atf(struct spl_image_info *spl_image)
- 
- 	/*
- 	 * If ATF_NO_PLATFORM_PARAM is set, we override the platform
--	 * parameter and always pass 0.  This is a workaround for
-+	 * parameter and always pass 0. This is a workaround for
- 	 * older ATF versions that have insufficiently robust (or
- 	 * overzealous) argument validation.
- 	 */
- 	if (CONFIG_IS_ENABLED(ATF_NO_PLATFORM_PARAM))
- 		platform_param = 0;
- 
--	/*
--	 * We don't provide a BL3-2 entry yet, but this will be possible
--	 * using similar logic.
--	 */
--	bl31_entry(spl_image->entry_point, bl32_entry,
--		   bl33_entry, platform_param);
-+	spl_enter_atf(spl_image->entry_point, bl32_entry,
-+		      bl33_entry, platform_param);
- }
+diff --git a/boot/image-fit.c b/boot/image-fit.c
+index 3cc556b727..7e87a513e7 100644
+--- a/boot/image-fit.c
++++ b/boot/image-fit.c
+@@ -869,10 +869,11 @@ static int fit_image_get_address(const void *fit, int noffset, char *name,
+  * fit_image_get_load() - get load addr property for given component image node
+  * @fit: pointer to the FIT format image header
+  * @noffset: component image node offset
+- * @load: pointer to the uint32_t, will hold load address
++ * @load: pointer to ulong, will hold load address
+  *
+  * fit_image_get_load() finds load address property in a given component
+  * image node. If the property is found, its value is returned to the caller.
++ * Otherwise, on failure, *load will be left untouched.
+  *
+  * returns:
+  *     0, on success
+@@ -887,14 +888,11 @@ int fit_image_get_load(const void *fit, int noffset, ulong *load)
+  * fit_image_get_entry() - get entry point address property
+  * @fit: pointer to the FIT format image header
+  * @noffset: component image node offset
+- * @entry: pointer to the uint32_t, will hold entry point address
+- *
+- * This gets the entry point address property for a given component image
+- * node.
++ * @entry: pointer to ulong, will hold entry point address
+  *
+  * fit_image_get_entry() finds entry point address property in a given
+- * component image node.  If the property is found, its value is returned
+- * to the caller.
++ * component image node. If the property is found, its value is returned
++ * to the caller. Otherwise, on failure, *entry will be left untouched.
+  *
+  * returns:
+  *     0, on success
 -- 
 2.34.1
 
