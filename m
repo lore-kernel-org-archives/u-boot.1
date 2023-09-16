@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC48C2BA12
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 22:19:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48679C2BA2B
+	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 22:36:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1363847C3;
-	Sun, 17 Sep 2023 00:19:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A1708556F;
+	Sun, 17 Sep 2023 00:36:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="bZBoha2R";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="DnnnL4yG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8800084B20; Sun, 17 Sep 2023 00:19:10 +0200 (CEST)
-Received: from s.wfbtzhsw.outbound-mail.sendgrid.net
- (s.wfbtzhsw.outbound-mail.sendgrid.net [159.183.224.105])
+ id 10787854BD; Sun, 17 Sep 2023 00:36:37 +0200 (CEST)
+Received: from s.wrqvtzvf.outbound-mail.sendgrid.net
+ (s.wrqvtzvf.outbound-mail.sendgrid.net [149.72.126.143])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D13F2803AB
- for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 00:19:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B462C8556F
+ for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 00:36:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -29,40 +29,40 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
  content-transfer-encoding:cc:content-type:from:subject:to;
- s=s1; bh=cIrrZDg4rqNcviIiD9bRRFNvckwDNeug0Uj37Y/Vmqk=;
- b=bZBoha2RHmR5FkLSdzIlmy0LttLqedJ9PDqE+AdJ7pmdddLX0SXxwROOFpWZynqB2AhK
- iKq/MkxtnfM3znLRWK3ekJEH8aO7jgcn4BOiFH7h0+s4YWgjAOn/52woizXhNsdqflCDl9
- fgsZ2GoJCJxiHTRfOcvBKplE8uTPegxKEU2Kb8rd2T0t7mYdCwGTysnh3kUZdFb+ZjiRPm
- HftHTEwwU3h/lJBKdpaXByBiO4L4EnQ0BeendiQBCSTFYkKYtDON3rSC1NMRayEkmOvVFO
- Ebv0LfAnWZS7P0OgK/97lfyGoreUvMq1AE1IXVWycfA88ZKvzRXqcoNMtlVA+3rQ==
-Received: by filterdrecv-d7bbbc8bf-wstxc with SMTP id
- filterdrecv-d7bbbc8bf-wstxc-1-650629DA-8
- 2023-09-16 22:19:06.463543446 +0000 UTC m=+117891.179427251
-Received: from [192.168.1.50] (unknown) by geopod-ismtpd-0 (SG) with ESMTP
- id vlAe9v3rQcisWjYIyPb2Ug Sat, 16 Sep 2023 22:19:06.093 +0000 (UTC)
-Message-ID: <7e069c36-fe99-3701-9572-1363b694645b@kwiboo.se>
-Date: Sat, 16 Sep 2023 22:19:06 +0000 (UTC)
+ s=s1; bh=sojpvlmAEC/SXAB75gwXq8K/XnwjK1yZXh5wSfyIKro=;
+ b=DnnnL4yGJdi6n69ZKfattUcIJTscBWTdP2ACpeACrMWKyTbdZkxfVj/O/WvogmQZ7e7i
+ 71JA6Nx4/nZfpgsZrdYyj3FDpPqOmqAU95MZHutkzdsmyu+ZqlQ3npcjZ8URN+16LmGfG7
+ 5KV1rPUxwaiekhKlN7iU1od/xTIce7my5oQLcU+yJxW6ygiaSl7hdACKZvpzVTblafKUdl
+ 03gkasPVHyioJwbUAC/JCi4MaAGnywa7gyTcRKLDmUc0PaPh9CRzm1iaN56Q4cM4Gys+mO
+ ciLhrWExqynvvhhrRw7lfp97j4wbtLdgGNqInLBYPZK5DhX0oWa9Z+Gbq0UjZJcw==
+Received: by filterdrecv-7765c6879f-kht5h with SMTP id
+ filterdrecv-7765c6879f-kht5h-1-65062DF1-5
+ 2023-09-16 22:36:33.211591986 +0000 UTC m=+120104.323691084
+Received: from [192.168.1.50] (unknown) by geopod-ismtpd-8 (SG) with ESMTP
+ id JuYTxpoqS2-UuPiOsxkPZQ Sat, 16 Sep 2023 22:36:32.833 +0000 (UTC)
+Message-ID: <5ce50e56-ed40-de94-e2a4-8b55c8006058@kwiboo.se>
+Date: Sat, 16 Sep 2023 22:36:33 +0000 (UTC)
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH v2 2/2] riscv: dts: starfive: generate
- u-boot-spl.bin.normal.out
-References: <20230906120008.86717-1-heinrich.schuchardt@canonical.com>
- <20230906120008.86717-3-heinrich.schuchardt@canonical.com>
+Subject: Re: Aw: [PATCH v3] board: rockchip: Add Bananapi R2Pro Board
 Content-Language: en-US
+References: <20230820160004.44880-1-linux@fw-web.de>
+ <trinity-6cf108b4-a879-40e2-a04a-54451262d671-1694873885042@3c-app-gmx-bs23>
+ <f00dad5e-bbe7-7a4d-e955-ce317cefb932@denx.de>
+ <E81B855A-F7F8-4405-B4A7-8261D55C075D@public-files.de>
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20230906120008.86717-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <E81B855A-F7F8-4405-B4A7-8261D55C075D@public-files.de>
 X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h0WiOFdPFIzFBqTMG?=
- =?us-ascii?Q?TyOH=2FOuEjzMa2qHRUY0LAdTT+6SY=2FQ5n0K0oI+4?=
- =?us-ascii?Q?0txDRhsOVzehbkNXJDHazwsZxr6tqyqUgpOXOuy?=
- =?us-ascii?Q?EWG+=2FKYmLomGDmGbKJ6z1NZqgW0BuTeLmQh01NE?=
- =?us-ascii?Q?iueW8250xCvgG7i3dKcJp9x5uSKdQhSeRpYlgF?=
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Rick Chen
- <rick@andestech.com>, Leo <ycliang@andestech.com>, Yanhong Wang
- <yanhong.wang@starfivetech.com>
-Cc: Simon Glass <sjg@chromium.org>, Marc Kleine-Budde <mkl@pengutronix.de>,
- Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h+It+BvinUAh1DSel?=
+ =?us-ascii?Q?BFWy82=2FO8cL6vtEQAfbDYnkK4exb3iPKLIKTNN5?=
+ =?us-ascii?Q?ZYtA+LDR6Xbzes5UA9utZVUcWTAfhe9vMBxSruH?=
+ =?us-ascii?Q?1Sa0jAuTdXjo1QWkz5VrqQyObBVxaeB4IGroDj8?=
+ =?us-ascii?Q?mu5lsR6BQltL4wM7LKH=2FIHifWZtt5jHDkFPRdR?=
+To: frank-w@public-files.de, Marek Vasut <marex@denx.de>, Frank Wunderlich
+ <linux@fw-web.de>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>
 X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
 Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
@@ -82,83 +82,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-09-06 14:00, Heinrich Schuchardt wrote:
-> The StarFive VisionFive 2 board cannot load spl/u-boot-spl.bin but needs a
-> prefixed header. We have referring to a vendor tool (spl_tool) for this
-> task. 'mkimage -T sfspl' can generate the prefixed file.
+On 2023-09-16 18:45, Frank Wunderlich wrote:
+> Am 16. September 2023 18:07:44 MESZ schrieb Marek Vasut <marex@denx.de>:
+>> On 9/16/23 16:18, Frank Wunderlich wrote:
+>>> Hi,
+>>>
+>>> just a friedly reminder. would be great if it can be merged in next uboot-version.
+>>
+>> +CC Tom
+>>
+>>> regards Frank
+>>>
+>>>
+>>>> Gesendet: Sonntag, 20. August 2023 um 18:00 Uhr
+>>>> Von: "Frank Wunderlich" <linux@fw-web.de>
+>>>> An: u-boot@lists.denx.de
+>>>> Cc: "Frank Wunderlich" <frank-w@public-files.de>, "Simon Glass" <sjg@chromium.org>, "Philipp Tomsich" <philipp.tomsich@vrull.eu>, "Kever Yang" <kever.yang@rock-chips.com>, "Marek Vasut" <marex@denx.de>, "Jonas Karlman" <jonas@kwiboo.se>
+>>>> Betreff: [PATCH v3] board: rockchip: Add Bananapi R2Pro Board
+>>>>
+>>>> From: Frank Wunderlich <frank-w@public-files.de>
+>>>>
+>>>> Add Bananapi R2 Pro board.
+>>>>
+>>>> Till now evb dts could be used, but iodomain is different
+>>>> (evb has 1v8 on vccio2 and vccio4 which are 3v3 on r2pro)
+>>>> and with iodomain driver this can cause hardware fault.
+>>>>
+>>>> Devicetree in mainline-Linux:
+>>>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/rockchip/rk3568-bpi-r2-pro.dts
+>>
+>> What would be real helpful is a commit ID from which the DT was copied , so it can be easily updated in the future.
 > 
-> Use binman to invoke mkimage for the generation of file
-> spl/u-boot-spl.bin.normal.out.
-> 
-> Update the documentation.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Tested-by: Chanho Park <chanho61.park@samsung.com>
-> ---
-> v2:
-> 	Fix a typo in a comment in tools/sfspl.c
-> 	Add Tested-by credit
-> ---
->  .../dts/jh7110-starfive-visionfive-2-u-boot.dtsi   | 10 ++++++++++
->  doc/board/starfive/visionfive2.rst                 | 14 ++------------
->  2 files changed, 12 insertions(+), 12 deletions(-)
-> 
-> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-> index 13f69da31e..defe2b605f 100644
-> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
-> @@ -103,4 +103,14 @@
->  			};
->  		};
->  	};
-> +	u-boot-spl {
-> +		filename = "spl/u-boot-spl.bin.normal.out";
-> +
-> +		mkimage {
-> +			args = "-T sfspl";
-> +			blob {
-> +				filename = "spl/u-boot-spl.bin";
-> +			};
-> +		};
-> +	};
+> It is no plain copy...i removed parts not relevant for uboot now (from current linux version). E.g. switch driver is currently bundled in mtk ethernet driver and using different devicetree structure than linux dsa driver. We have to separate it before we can use it on r2pro. But this will take some time...also pcie(-phy) does not have a driver yet,so before adding dead code i dropped these parts for now.
 
-This should probably be:
+pcie(-phy) should have a working driver for rk3568 as of v2023.10-rc2,
+and is extended to support PCIe bifurcation with the following series:
 
-mkimage {
-	filename = "spl/u-boot-spl.bin.normal.out";
-	args = "-T sfspl";
-
-	u-boot-spl {
-	};
-};
+rockchip: rk3568: Fix use of PCIe bifurcation
+https://patchwork.ozlabs.org/project/uboot/list/?series=366997&state=*
 
 Regards,
 Jonas
 
->  };
-> diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
-> index 941899a0a4..f5575ab68b 100644
-> --- a/doc/board/starfive/visionfive2.rst
-> +++ b/doc/board/starfive/visionfive2.rst
-> @@ -65,18 +65,8 @@ Now build the U-Boot SPL and U-Boot proper
->  	make starfive_visionfive2_defconfig
->  	make OPENSBI=$(opensbi_dir)/opensbi/build/platform/generic/firmware/fw_dynamic.bin
->  
-> -This will generate spl/u-boot-spl.bin and FIT image (u-boot.itb)
-> -
-> -u-boot-spl.bin cannot be used directly on StarFive VisionFive2,we need
-> -to convert the u-boot-spl.bin to u-boot-spl.bin.normal.out with
-> -the below command:
-> -
-> -	./spl_tool -c -f $(Uboot_PATH)/spl/u-boot-spl.bin
-> -
-> -More detailed description of spl_tool,please refer spl_tool documenation.
-> -(Note: spl_tool git repo is at https://github.com/starfive-tech/Tools/tree/master/spl_tool)
-> -
-> -This will generate u-boot-spl.bin.normal.out file.
-> +This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
-> +as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
->  
->  Flashing
->  ~~~~~~~~
+> 
+> regards Frank
 
