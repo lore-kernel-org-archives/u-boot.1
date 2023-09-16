@@ -4,80 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6932C2BA12
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 19:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06ABAC2BA18
+	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 19:37:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA724833F5;
-	Sat, 16 Sep 2023 21:36:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 74999846B8;
+	Sat, 16 Sep 2023 21:37:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UFVDyqYP";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="Wx29zCaH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E26E2833F5; Sat, 16 Sep 2023 21:36:47 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BC904854BD; Sat, 16 Sep 2023 21:37:06 +0200 (CEST)
+Received: from JPN01-TYC-obe.outbound.protection.outlook.com
+ (mail-tycjpn01acsn20808.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:7010::808])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84824833DE
- for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 21:36:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FC86833DE
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 21:37:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-52bcd4db4e6so3921605a12.0
- for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 12:36:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1694893004; x=1695497804; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=r1S/r+URo22jl/SotTbH85pmDFpo+PNNv27wAxk13Xo=;
- b=UFVDyqYPBSy5ITz9xScwWZVi6KO84U2csQJRDE41PqqZjmb8yJHlTF/8zUVQya6E2v
- T9poc1QoH82frpYUIleM9h1pg+8Ta+f1dlbsExXqrPQzH0U2Y7WbNm5WQqoHfNuof3FW
- AwMwex7QFyXFn9g3Kp7HtobCfkfJKe8Z3969mFJTm0s1HL8FASZcbAxCAl6LmIqkfIi5
- GCXZ/zoruU77k6Rqn3j1jIlK7vaY2WJcB90MTzAcxig58MYi41Y9Y6MZlfopX2fNgj6y
- DuFVMoojARQWomE1Ju0ut9BnBNcVtOq9H7sg8sNje87PcaH+iSbxi+wTWxNm/ea8Sb5r
- uVSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1694893004; x=1695497804;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=r1S/r+URo22jl/SotTbH85pmDFpo+PNNv27wAxk13Xo=;
- b=czml+14Ht/bQQi95iZIjc6HfTTEEh6NPYuGolhBvFPSs0S0FVHgn6/Gn1DC+6zOcoP
- zs7kfEwa+OvvMEmHicceXwohKzmHmSycJSGY3zIZ14u7qL59UOisNF26T8HQGHyRbynI
- vn3wOA3hFsuGSCMGdYfYuOmn1eGRtgH1xU1e4aAVKvnOyhcgQwstVB13v8ZATx6/e8/x
- jMDUz+pqNJfU0l8V/HiWzk85JCVLXX/iYXJLJ7EH+EhqkcjhBh06rfn8WyzHOuSZUiOC
- JO99VmNWVtY+2775u9oHTgSOFwrimoDaFu32SMhovASfor5J/NwCoUDwxbRbcfSat3aV
- vR3w==
-X-Gm-Message-State: AOJu0YzSpcZdlQ1XMUUbGTtsPNJAyG8E2kiVKZ7q4kv+tA2l3hvVJCoB
- NnYIKdotmPIgeDMSMW+vVBd50MIjt7zsT/W5ChRqM75wOcc=
-X-Google-Smtp-Source: AGHT+IELTtAUtBjBYOKI1qZEar0AXEQNvvUt1q5DKNhmLk6Wo7gAwvXZcpxh/CpJFBXOV2Vn6JwpGHPq2QG5l0lWodw=
-X-Received: by 2002:aa7:d394:0:b0:525:691c:cd50 with SMTP id
- x20-20020aa7d394000000b00525691ccd50mr4953917edq.24.1694893003716; Sat, 16
- Sep 2023 12:36:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=wiagn233@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=iTjDm6eRmDH9xd35wzSLCPAYNXrD/MWs0Ro1OL7VscKzOoUmohrkKBcNCTzvkpLwJOBkLW23PjMMM5RCj6UgX+qoGRPXbepzVaXuqW4cRHVmAevvyICNFFYS2DV2IDxbeoIxYHWGq80W9EyIYXGcDsvf/C0DGcBW5K9riKOgo2n5pib18ZQlwUmpTp2J1MNEBEXCQjy6K3UrZQtbU8P2vkmj6zLqEV/ngtNRiD7sTpZ/Je/GJ6EdJ8DDPTt5DCA3IeCPuzc5Uj4haE2iOquXXS2zAEKT/FRtKzj+YJtHLRDdbWUpdFszlw1cp4+8p9lyarMg1c8Av2EVE9SyhT50vQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=loFRZufCrGh/EwyaZqq4rZB3W931zJY+Pd66bhERcPs=;
+ b=nM9fmZNJhnvnZHx3dJprfzl+kNCUvDum2kHxZyRlzvA+iM/KWuRueqTTLnryHhhA2kmdro5FtOSxLAuzjCpfpz3YqJQf1duYg2EIq1xwr2SPBwZPoEML3XdwCHKdQILMRQty3CIaSinsT6wsmjMo3GiHbTikooAmzm7sloYh1dsiuCpCJFlkSdFU42a+z6ylcZiW7HBG1655oDkLfyJ4l/TmjRZdzSy4NQsamIXdjHHmdfl0dC9+8FsTLRGMkmdmoCuslgtiNuMCEYFNsiiwTaUJl7PIgoIdyc2V0lLmJJCsu1LIBQF2OWeCH0vY4gm1AH6+Zzj4vj/sznF8iTpq1g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=loFRZufCrGh/EwyaZqq4rZB3W931zJY+Pd66bhERcPs=;
+ b=Wx29zCaH2sl1U5sD1N2bSA7Ss4QSCgi48d01nocLjK6dC7aYmm1WC6sqPHWVVphAhsbfYEn8FYrXEJQc/YrTFaXVTKMvdOq4qZS9ch6Xk2TBOtIU0jOgDZx523hgY3bJMLMoI0kdcyJieHciJOSsY/nRD5MjaCytJYRv/vmIWrHEoCC4dX4lmROvmv8ebFZI4cL99nSgexEgQq+lQfyEDs2zKaQKp8GURgXQGugRXEY85jHcTotV2Lopf4Vub1RXavkOP8hFlZLQXmZ55s0hugJHJQub5bL9ag5J5MgQJ0cK6uN5JO2eSo2qQUs4K1XhdyN9Su4HVk+1f+RwHXlXNQ==
+Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:23e::10)
+ by TYCP286MB3132.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:293::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.13; Sat, 16 Sep
+ 2023 19:36:59 +0000
+Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::bfaf:cb8:24b7:f67b]) by TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::bfaf:cb8:24b7:f67b%7]) with mapi id 15.20.6813.013; Sat, 16 Sep 2023
+ 19:36:59 +0000
+From: Shengyu Qu <wiagn233@outlook.com>
+To: rick@andestech.com, ycliang@andestech.com, yanhong.wang@starfivetech.com,
+ u-boot@lists.denx.de, jamipkettunen@gmail.com
+Cc: mps@arvanta.net,
+	Shengyu Qu <wiagn233@outlook.com>
+Subject: [PATCH v1 0/2] Fix memory size problem on Visionfive 2
+Date: Sun, 17 Sep 2023 03:36:31 +0800
+Message-ID: <TY3P286MB2611C04E3893A31204D9EFB598F5A@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+X-Mailer: git-send-email 2.42.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-TMN: [YgMiLodmKTSI200Ea9kGyjcuU68S6j6x]
+X-ClientProxiedBy: PS2PR02CA0007.apcprd02.prod.outlook.com
+ (2603:1096:300:41::19) To TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:23e::10)
+X-Microsoft-Original-Message-ID: <20230916193633.3928-1-wiagn233@outlook.com>
 MIME-Version: 1.0
-References: <CAJaLiFyTMW40gdMRjQhSTcUb_4ZRtLPo119EfBih9k_bcpNbdg@mail.gmail.com>
- <20230913162217.GN305624@bill-the-cat>
- <CAJaLiFw9btZtcro_qqtYqTJziZwLuUJ=0QAuu+E5=Ooux4-WkA@mail.gmail.com>
- <20230913201355.GR305624@bill-the-cat>
- <CAPnjgZ3rMLpRh_uEjsvipeTp92UEXDrO98q7e8M7f-Hh60NpYg@mail.gmail.com>
- <CAJaLiFze0mRf4m06MUc7=B5ADxFo=qYUzjbCDGzBbZ7tv7tiLA@mail.gmail.com>
- <CAJaLiFxX+XQNKfda5rrRhA+8Q9p2kEuzdJi=UK1N=y3LsMXjTQ@mail.gmail.com>
- <CAJaLiFxbtt6i-nwLOvFwX9aDwCGeaZY=m3=e2rH6QNz13EjAHg@mail.gmail.com>
-In-Reply-To: <CAJaLiFxbtt6i-nwLOvFwX9aDwCGeaZY=m3=e2rH6QNz13EjAHg@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Sat, 16 Sep 2023 12:36:31 -0700
-Message-ID: <CAJaLiFy05F3Cr4X4G2mVkppXnBEFZrHQ+5CngYN8eJPg8ENWkg@mail.gmail.com>
-Subject: Re: bootstd: CACHE Misaligned operation errors (Marvell Armada 385)
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TY3P286MB2611:EE_|TYCP286MB3132:EE_
+X-MS-Office365-Filtering-Correlation-Id: 51203ccd-073a-4301-533a-08dbb6ec4a24
+X-MS-Exchange-SLBlob-MailProps: a+H6FLLcF3rrVmitAocszJPF8ZsL7sNyftC3iMW4wwD0Q6hJFe3QS/DJZn0Mty55ooPLDq727Xx0VWgJs3LuTUNzaXYBJ54d0gDfGB+52EQ3aeY/RL0HXyj3kFDq5BVJdTAOYIm0s5/93NQl45uhJUEUu6ft3DDYZp6LoBQg9O6U+3N32Pm4PP2Ewq/N642TZ478yq2NwNkvYb78WEMsdMiZb+EwKVj1UQGeinKjjAeapCWlJib1XrflDggi6VCwwMARR9XPJBIMCD02YxxByXrFbavlJdy64SuZ9blEmNsrxtvnx+hfG0TdagMkTAJ1A98r5BfcfoyX6TXGuey7zC5o5qFuMZ/tJSFEaUNATJv8D87sOoulqAVg7NckLrjqxSehWijk2IbjgWLKZF1At2mmoa51ICKvPfmi3CAGV9+zJWvZxCs/EGze7XuuED/sV84y8n4wXWRNMP4TD7vK2mATipRUEu2Jx+QElaDjLnW27+AtQYElLdlFnkHT5ZqEeWQN05klYo+bql44bdgcqvu4CADEJgFmrhCJXqI3NIIkZied4cszhtNyAnVg7Znm2Y1DNuAoOvVrMU072V6M9ugytt3nmJ692TX9CGeikikXPhXZBO2+51GoXJn7KYYVm4XuVe0kJsOlQesPtLveTw3bKsSpDvFZE4eLjyGl5yKhhEx8y/xf1kNUT+SttXi2KqqhivKzKuK+/E3KGDbbacRt5BYfM2fDeELLab8yf15FOjfP/rKYoOdi+aV1dVZYuVsGHzabFxhclCfgCdZAwH5+2UeX9CQYSfzDeDcAMPg4mfErV3dIR7rGm6SnlD8x
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: CG/vbH6mb0AumbSDzNUvyxEhw3g9SHsFJ0RqCdJPhHhKfNzGVCZ6d2dyOkcP8ftyhWz2ZPtClWmjeQXuvV7OMu6/bdEOHvzM1B3oJrcuP1z8Y90QPMkB6RBhFaK+d62V2wC9FE9Nmrzrm/hvaEdeP5J56jeoDkrdFnbPanBpp1m6vq/xwz+jbaa81MVI2y24hoWHOjKmEQJRHVN+gGzSMjXPrrjKrrAjJp+wnRdPJSJZUbsdhHzXkJ6eU4zXAgY2utd0bjC4yMxYQHtkl6iXQpFEK5ZOQK9DG0JPJHVRk9KXv5JiGNz6bqYBjihFClF3CiU9xbBSjLPJ3MjUXC4CP/g79TdMeL11grTQO+tf7AI92ovqhgdX0MXwBNUyNaCTZKiNK4X0huDMxZ7xf6tVRJ7YlBWrzsgIUh/kseDfzloTHN9qti4D+FGeupyZ32vGI8U36Ux+mj+R83qRWUs72O+0tlftmW6mICt2di2Zqcm/qYhsOrjMeByZYgm4jEAQrEU1MUpNoX98gYoN4gcYzcE2hULhlzKJ1a9DGs6ct+crl+e4xww4S7P1IUhMrOM1MDJMVT9is94XHMmRofgn8MIsLqV8vQ74YWd2pOXkxQsaVkqID2ElVdimLzJFox1U
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dUJvRjNxYnVFcEoyQXNFbnBEdGNCWGY3eFpQR0toV240cTJJNjBoNVA0eHp4?=
+ =?utf-8?B?SmJYM1o5USs1c2VWTy94NmhDZ2hORGRMbDMxdEdrQlphcDFrLzMzM1I2Ung4?=
+ =?utf-8?B?cVQvSm9UWjl3NVlYWGU2TFFIb2poZlh5S1NCL1lGL3h4WU9zS0RyOUl1dUc3?=
+ =?utf-8?B?VG1LZ2JheUo5Y3JVc0xqTjVGQnZwVmZvWU1TQUFPbFpXZVYrb3hlc3kvL0hZ?=
+ =?utf-8?B?N2tpeHZzUzdjcVZlQ0hkNXRGOERQNHNYR0EwVnFqekxJWUhkSXppVE1EMXMz?=
+ =?utf-8?B?L0NsNXV4dXVIWTFyVjdLdnpta2I1WDNNQjBJUGdQZjFOeUh6THNWdjY5WHZM?=
+ =?utf-8?B?UU0reE0zTTMyWHVoOS9pNzV5TThoY0tBVWtxalVjaGtYZkVpdG1pdytFMmxF?=
+ =?utf-8?B?RkFqZE9PZ2tTMUZoQVBvMVdqS0hrVDhsTytyYk10YVZOZUVBN2lHelpEcVVX?=
+ =?utf-8?B?b3BrWEhTc2NIVUIwMCtNRk1TKytBdFArb1hWTHd0ejJSTm1HaXZuMjBxb3o4?=
+ =?utf-8?B?TkVwTmx4OGpKYWVzRkVuYUsxQStYd3RzYmNTU2ZTdXFHVG1UT1VwekFtSng5?=
+ =?utf-8?B?a0VCVDBLcktNMHdpYjJ0S29yTThUL3lISU5FSnpuZkNEd0NVMFNuRndYTi9J?=
+ =?utf-8?B?d2RWYzFHM2dSWkNNbGk4cjVTRmp2dU5ramJYSkwvRVF5V3U4cmZ5c1pkTkZD?=
+ =?utf-8?B?SG5QTy9CbW4vaVE3WVViOHg1ZEtvSU5wL0wyeSswSXpZVE1NUU5CNDFmWFdB?=
+ =?utf-8?B?THE0S1c3aGpXcUlJdkVWWVUvUVZQZ05neXNPbGtsWGlHelNwQ2xSRklNUlor?=
+ =?utf-8?B?cFlPS1k5KzE2Wi85d3NhTklOcmdGcFkvcWZ6eWExL0pRT1phOFJiZUFIdldJ?=
+ =?utf-8?B?N1UxdVhPZEZhYWxhcVRrckw3cFdGME5iY1hWWTNKTlVkNUVWQ0tnRFlodjFY?=
+ =?utf-8?B?OXZMVXhld3ZiQTQwZUMzVEFkMkIvWXd5Q3JMTFJ6TG9yS1RtUm9LTnVGQ0k3?=
+ =?utf-8?B?T0k3WHZMMmVNK1djQ0F4dE05c0R0ZVl5b0pMWFNDdVVieHhYSzNya2lRK1N4?=
+ =?utf-8?B?bHFGVlpnRDAvQWRrTWpOdENBNDNJdEdDT2V4WWhadzFSVFQveFlBWHhuWW1T?=
+ =?utf-8?B?T3FFRC9peGJlS3lacE9VdFpjNVMySmtZS0ZTMk5NbmgrL3RGSmtveGxyT0FS?=
+ =?utf-8?B?SzkzRktuOFI1OGRRTzN3TjRUcFdBdGpONytrWG0xeFpKOTBLQnNwbzBMcXhl?=
+ =?utf-8?B?cjFHSmlKb24wc0RXYzFXa1pGWExCT3lKRWhyeDIySXNNbklwQzlueFpiNFZ2?=
+ =?utf-8?B?ZjU3NGZQZXlHUTVTWEwvRG1FRjZyRzQvNHhYQ3J5ODd2Yk84WE1kbUFJTG5x?=
+ =?utf-8?B?QjhUWVdMSi9yU3RFMDExc1V2RTF6VVBiQ1BQTFE2MGExelkrYStiNDE3SCtw?=
+ =?utf-8?B?RWE1VnFkdmlGR3Y1MStPV0M4S1YzejNQODZ1enoyYjU5MTNoZGNjWUJKMDIx?=
+ =?utf-8?B?dUR4YVRpeDlHbzMzTGE2cDl0OU1Rc3BVUnVQd3dlcktQWmJrYmZCNGVpZ0Q5?=
+ =?utf-8?B?Rmc3aEp4aWhxS0pCUCtxSEVESzc1Y1FwM2VwU0sxRG15amwwMno4bGRJRW12?=
+ =?utf-8?B?VGpLeHFyZGpSekNaTkt2VXRRaXFFUkE9PQ==?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51203ccd-073a-4301-533a-08dbb6ec4a24
+X-MS-Exchange-CrossTenant-AuthSource: TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2023 19:36:59.1160 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCP286MB3132
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,159 +128,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Currently, we pass u-boot device tree to kernel on Starfive Visionfive 2
+, and this is wrong since u-boot dts is not sync with Linux for this
+board. Jami's patch[1] fixes this problem, but we are still sending
+unmodified version to kernel that doesn't have a correct memory size
+info. This series are based on Jami's work and provide a fix for that.
 
-On Fri, Sep 15, 2023 at 8:40=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wrote=
-:
->
-> On Fri, Sep 15, 2023 at 6:32=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wro=
-te:
-> >
-> > Hi Tom, Hi Simon,
-> >
-> > On Wed, Sep 13, 2023 at 9:53=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> w=
-rote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Wed, Sep 13, 2023 at 8:38=E2=80=AFPM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 13 Sept 2023 at 14:14, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Sep 13, 2023 at 12:56:53PM -0700, Tony Dinh wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Wed, Sep 13, 2023 at 9:22=E2=80=AFAM Tom Rini <trini@konsulk=
-o.com> wrote:
-> > > > > > >
-> > > > > > > On Tue, Sep 12, 2023 at 12:38:00PM -0700, Tony Dinh wrote:
-> > > > > > >
-> > > > > > > > I've been testing the boostd for a few Marvell boards and s=
-eeing this
-> > > > > > > > error on the Thecus N2350 (Marvell Armada 385, dual-core CP=
-U). The
-> > > > > > > > "bootflow scan scsi" command triggered the "CACHE: Misalign=
-ed
-> > > > > > > > operation at range" error. However, this error did not affe=
-ct the
-> > > > > > > > result of the scan, i.e. the bootflow for scsi partition wa=
-s created
-> > > > > > > > correctly, and u-boot is running normally.
-> > > > > > > >
-> > > > > > > > Enabling CONFIG_SYS_DCACHE_OFF got rid of the errors altoge=
-ther.
-> > > > > > > > Perhaps this is a case where the DCACHE is not required and=
- should be
-> > > > > > > > turned off?
-> > > > > > > >
-> > > > > > > > Please see the log after the break below.
-> > > > > > >
-> > > > > > > Can you please try -next ?  There's at least one SCSI related=
- cache
-> > > > > > > alignment fix there that's not in master, thanks.
-> > > > > >
-> > > > > > Unfortunately I got the same errors. This time the ranges are
-> > > > > > different, of course.
-> > > > > >
-> > > > > > master:
-> > > > > >
-> > > > > > N2350 > bootflow scan scsi
-> > > > > > CACHE: Misaligned operation at range [3fb99f88, 3fb9a388]
-> > > > > > CACHE: Misaligned operation at range [3fb99f88, 3fb9a388]
-> > > > > > CACHE: Misaligned operation at range [3fb99f88, 3fb9a388]
-> > > > > > ERROR: v7_outer_cache_inval_range - start address is not aligne=
-d - 0x3fb99f88
-> > > > > > ERROR: v7_outer_cache_inval_range - stop address is not aligned=
- - 0x3fb9a388
-> > > > > >
-> > > > > > next:
-> > > > > >
-> > > > > > N2350 > bootflow scan scsi
-> > > > > > CACHE: Misaligned operation at range [3fb80388, 3fb80788]
-> > > > > > CACHE: Misaligned operation at range [3fb80388, 3fb80788]
-> > > > > > CACHE: Misaligned operation at range [3fb80388, 3fb80788]
-> > > > > > ERROR: v7_outer_cache_inval_range - start address is not aligne=
-d - 0x3fb80388
-> > > > > > ERROR: v7_outer_cache_inval_range - stop address is not aligned=
- - 0x3fb80788
-> > > > >
-> > > > > Can you debug to where these calls are so we can align these buff=
-ers?
-> > > > > See 02660defdc8a ("scsi: Cache align temporary buffer") for an ex=
-ample.
-> > > >
-> > > > I wonder if we need to use memalign() when allocating memory to rea=
-d things from the media? But I am not sure which file time is being read, o=
-r which bootmeth it is.
-> > >
-> > > Looks like we probably need to align the buffer tempbuff.
-> > >
-> > > /drivers/scsi/scsi.c
-> > > static int scsi_detect_dev(struct udevice *dev, int target, int lun,
-> > >   struct blk_desc *dev_desc)
-> > > {
-> > > unsigned char perq, modi;
-> > > lbaint_t capacity;
-> > > unsigned long blksz;
-> > > struct scsi_cmd *pccb =3D (struct scsi_cmd *)&tempccb;
-> > > int count, err;
-> > >
-> > > pccb->target =3D target;
-> > > pccb->lun =3D lun;
-> > > pccb->pdata =3D (unsigned char *)&tempbuff;
-> > > pccb->datalen =3D 512;
-> > >
-> > > If you look at the log I posted previously, this error shows up durin=
-g
-> > > "bootflow scan scsi".
-> > >
-> >
-> > Taking the hint from Simon. I turned on log_debug and can see where
-> > the alignment is not correct. It is fs.c fs_read_alloc(). The
-> > memalign() call here probably needs to be revised to take into
-> > consideration ARCH_DMA_MINALIGN somehow? It is 64 for armv7.
-> >
-> > diff --git a/fs/fs.c b/fs/fs.c
-> > index 2b815b1db0..b70281532e 100644
-> > --- a/fs/fs.c
-> > +++ b/fs/fs.c
-> > @@ -1019,9 +1019,12 @@ int fs_read_alloc(const char *fname, ulong
-> > size, uint align, void **bufp)
-> >         int ret;
-> >
-> >         buf =3D memalign(align, size + 1);
-> > +       log_debug("aligned buf addr 0x%x\n", (unsigned int)buf);
-> > +
-> >         if (!buf)
-> >                 return log_msg_ret("buf", -ENOMEM);
-> >         addr =3D map_to_sysmem(buf);
-> > +       log_debug("aligned buf sysmem addr 0x%x\n", (unsigned int)addr)=
-;
-> >
-> >         ret =3D fs_read(fname, addr, 0, size, &bytes_read);
-> >         if (ret) {
-> >
-> > Please see the log below after the break.
->
-> Actually, it looks like the fix should be in bootmeth_script.c.
->
-> diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
-> index 0269e0f9b0..68e77aa50a 100644
-> --- a/boot/bootmeth_script.c
-> +++ b/boot/bootmeth_script.c
-> @@ -99,7 +99,7 @@ static int script_read_bootflow_file(struct udevice *bo=
-otstd,
->         if (!bflow->subdir)
->                 return log_msg_ret("prefix", -ENOMEM);
->
-> -       ret =3D bootmeth_alloc_file(bflow, 0x10000, 1);
-> +       ret =3D bootmeth_alloc_file(bflow, 0x10000, ARCH_DMA_MINALIGN);
+[1] https://patchwork.ozlabs.org/project/uboot/cover/20230911153253.20701-1-jamipkettunen@gmail.com/
 
-Yes, it is working with the patch above. I don't see the misaligned
-errors anymore.
+Shengyu Qu (2):
+  configs: visionfive2: Enable CONFIG_OF_BOARD_SETUP
+  board: visionfive2: Fixup memory size passed to kernel
 
-All the best ,
-Tony
+ board/starfive/visionfive2/starfive_visionfive2.c | 7 +++++++
+ configs/starfive_visionfive2_defconfig            | 1 +
+ 2 files changed, 8 insertions(+)
+
+-- 
+2.42.0
+
