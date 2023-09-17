@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12F25CD37B3
-	for <u-boot@archiver.kernel.org>; Sun, 17 Sep 2023 14:17:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F25BECD37B3
+	for <u-boot@archiver.kernel.org>; Sun, 17 Sep 2023 14:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6FB286B3F;
-	Sun, 17 Sep 2023 16:14:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3968086B4E;
+	Sun, 17 Sep 2023 16:14:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="MY2tVoON";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="g0lQ01s6";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pSr+6I5C";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="wUzxbwMl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ACC486B25; Sun, 17 Sep 2023 16:13:59 +0200 (CEST)
+ id A0F7386B27; Sun, 17 Sep 2023 16:13:59 +0200 (CEST)
 Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
  [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CDD586B09
+ by phobos.denx.de (Postfix) with ESMTPS id 78AE886B10
  for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 16:13:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
@@ -32,20 +32,20 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RpVKJ73mKz9sWf
- for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 16:13:56 +0200 (CEST)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4RpVKK37k6z9sWf
+ for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 16:13:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1694960037;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mbnidjx+SJBQO+cvs4AFVofUjOA+Ox3txQYKY9Meh1Y=;
- b=MY2tVoONqJ1WaOpVFT6irBNVlVJyNJgcQvSoCwAFT47u5GXIYIsJKcT6GM0LKwCoSkxrdD
- JN6mgxQsP6+Op2hpUvCNDzqkE31xon+HHHzlXlyyjc+Orrkyzdel3UYBQluVdfAr/V5cpl
- CFyzFvIq5v1nb6g5/qLLyiruXvKKVxJkoSgOB5pmA8ncMVKMUbYM2xa/xzAiHd0fAQvp3E
- AmabbwHI1v3ToBUHemLW94l1ovozhkiQ5kgj9ra9nW6E3+bC53Ox/1G8R2sw8/0zo+jfu+
- QbX7Q1olpaF+QzXQCFMEewEoWOAOLSGxftpctXj3mIr2Kc8ZWbYAo+EZzm3KAQ==
+ bh=pSZy+Iu/l42YAUM6Lc7Jrk7b43jbw4pIeMQZ2k6mkwA=;
+ b=pSr+6I5CFm+3MKq4o3c7xfbS+QFcQWojXW/PmdpLi8Xf6BzWaKeJ8XQzITbhZMqkKvA2ml
+ v/SCuQJagfvT2vC+UUJIpaKoE0lGjOlS8dqcPlSm2NUFzqgOuRHH6A07R56+ubXcPadPz6
+ Um/+tiXhB1C3GGPheh6IZIgrRysFBNXtXg+4DyaHrACvhmgYgG9jyn0s9e7DGoYjTVgszX
+ gKu+RiBGPzQrHHJGw6E2hdD6g8bVlHX/HTw0rsUq2/k1tslzAwqgstcFpgzVb3M3O5dQTr
+ ul4eIuANB2FurQiOXEdJTfejSKA52GWzDaZKbYPzy+mFONmiYobFFRjyDXQuEg==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1694960035;
@@ -53,25 +53,25 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mbnidjx+SJBQO+cvs4AFVofUjOA+Ox3txQYKY9Meh1Y=;
- b=g0lQ01s6WcpkzMIIcM94bMCV1OH1o8HbV7a7cMQ2Mrf8JNt8rZff5o9dVFfMPRWvkdCJpJ
- hvGf6N7qALahSDh7ZA1n/DgAQwTv8lhBl1x0njuSiAWRPaiwd6C4XcmmbFwoaRNssCsrXo
- 25KlPF4XakqwoaRFD6e8Jef53iUfx2BWcvQma++d0KMbT9WAtKuM6A1xDDgAvTlr5f9cM8
- dH2Nit7y0c3smuggdg8xFV8vgaPP0JkxsfPBp2myRp3CilNq53JtGfSsekLR2BVAw0ar4L
- 2FGZfd+NBPx4tZf1CzLFfMd8szFsklv9Z9ZSvG38tf0tUclJHd7NUFkJVr/xzg==
+ bh=pSZy+Iu/l42YAUM6Lc7Jrk7b43jbw4pIeMQZ2k6mkwA=;
+ b=wUzxbwMlepcxbskDaKVveUXO9IVcgaYkoqLcuY5fII6UmwUEeMx+zLbuYQRBr9a38uX5SW
+ 2QMtU2Lmw5BLbkBRmJBje1Ew5J8DgofeVsemkXlYxFzAqeOeCsQ4ws/4vlrFT2UB/hRtqU
+ GobUvKfmS52pRwsnGJ2eloPmvjFmRcSSb13K2nvk+neBhuUXyqgO4yQDlP6KFGmP34hSKZ
+ SMlLuacPtcrReWpiRqGF7rlgkT+GjoOGthDCb1VsNzZ3uO+5t/Az8Z4DhtrcsmlFMCZi5k
+ P4MVwwSogDZ8rZKODUHZK2CCE09/hE9MIxd1aEhPhWxFBpeCbKJwPZrCuKNZOw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 08/19] ARM: dts: renesas: Synchronize R-Car R8A77980 V3H DTs
+Subject: [PATCH 09/19] ARM: dts: renesas: Synchronize R-Car R8A77990 E3 DTs
  with Linux 6.5.3
-Date: Sun, 17 Sep 2023 16:13:08 +0200
-Message-Id: <20230917141319.379939-8-marek.vasut+renesas@mailbox.org>
+Date: Sun, 17 Sep 2023 16:13:09 +0200
+Message-Id: <20230917141319.379939-9-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230917141319.379939-1-marek.vasut+renesas@mailbox.org>
 References: <20230917141319.379939-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 17a9869579be8488a17
-X-MBO-RS-META: 1wtnektgqsnahch86ea8oyu7ea8owmnd
-X-Rspamd-Queue-Id: 4RpVKJ73mKz9sWf
+X-MBO-RS-ID: b8805e6e8f96ffc66b0
+X-MBO-RS-META: akhwu1ryzheioe8dc3w95reumdoyjiz6
+X-Rspamd-Queue-Id: 4RpVKK37k6z9sWf
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,76 +88,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Synchronize R-Car R8A77980 V3H DTs with Linux 6.5.3,
+Synchronize R-Car R8A77990 E3 DTs with Linux 6.5.3,
 commit 238589d0f7b421aae18c5704dc931595019fa6c7 .
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- arch/arm/dts/condor-common.dtsi  | 1 +
- arch/arm/dts/r8a77980-condor.dts | 8 ++++++++
- arch/arm/dts/r8a77980-v3hsk.dts  | 1 +
- arch/arm/dts/r8a77980.dtsi       | 5 ++++-
- 4 files changed, 14 insertions(+), 1 deletion(-)
+ arch/arm/dts/r8a77990.dtsi | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/dts/condor-common.dtsi b/arch/arm/dts/condor-common.dtsi
-index dfbe35bf46e..7c34d14dcd7 100644
---- a/arch/arm/dts/condor-common.dtsi
-+++ b/arch/arm/dts/condor-common.dtsi
-@@ -21,6 +21,7 @@
+diff --git a/arch/arm/dts/r8a77990.dtsi b/arch/arm/dts/r8a77990.dtsi
+index 3053b4b2149..1be0b99c15e 100644
+--- a/arch/arm/dts/r8a77990.dtsi
++++ b/arch/arm/dts/r8a77990.dtsi
+@@ -49,17 +49,14 @@
+ 		opp-shared;
+ 		opp-800000000 {
+ 			opp-hz = /bits/ 64 <800000000>;
+-			opp-microvolt = <820000>;
+ 			clock-latency-ns = <300000>;
+ 		};
+ 		opp-1000000000 {
+ 			opp-hz = /bits/ 64 <1000000000>;
+-			opp-microvolt = <820000>;
+ 			clock-latency-ns = <300000>;
+ 		};
+ 		opp-1200000000 {
+ 			opp-hz = /bits/ 64 <1200000000>;
+-			opp-microvolt = <820000>;
+ 			clock-latency-ns = <300000>;
+ 			opp-suspend;
+ 		};
+@@ -1469,7 +1466,7 @@
  
- 	chosen {
- 		stdout-path = "serial0:115200n8";
-+		bootargs = "ignore_loglevel rw root=/dev/nfs ip=on";
- 	};
- 
- 	d1_8v: regulator-2 {
-diff --git a/arch/arm/dts/r8a77980-condor.dts b/arch/arm/dts/r8a77980-condor.dts
-index 1d326552e2f..68d1f1d53b3 100644
---- a/arch/arm/dts/r8a77980-condor.dts
-+++ b/arch/arm/dts/r8a77980-condor.dts
-@@ -14,3 +14,11 @@
- 	model = "Renesas Condor board based on r8a77980";
- 	compatible = "renesas,condor", "renesas,r8a77980";
- };
-+
-+&i2c0 {
-+	eeprom@50 {
-+		compatible = "rohm,br24t01", "atmel,24c01";
-+		reg = <0x50>;
-+		pagesize = <8>;
-+	};
-+};
-diff --git a/arch/arm/dts/r8a77980-v3hsk.dts b/arch/arm/dts/r8a77980-v3hsk.dts
-index d168b0e7747..77d22df25ff 100644
---- a/arch/arm/dts/r8a77980-v3hsk.dts
-+++ b/arch/arm/dts/r8a77980-v3hsk.dts
-@@ -122,6 +122,7 @@
- 	phy0: ethernet-phy@0 {
- 		compatible = "ethernet-phy-id0022.1622",
- 			     "ethernet-phy-ieee802.3-c22";
-+		rxc-skew-ps = <1500>;
- 		reg = <0>;
- 		interrupt-parent = <&gpio4>;
- 		interrupts = <23 IRQ_TYPE_LEVEL_LOW>;
-diff --git a/arch/arm/dts/r8a77980.dtsi b/arch/arm/dts/r8a77980.dtsi
-index c4ac28a0f71..5ed2daaca1f 100644
---- a/arch/arm/dts/r8a77980.dtsi
-+++ b/arch/arm/dts/r8a77980.dtsi
-@@ -1386,7 +1386,8 @@
- 				 <0x02000000 0 0xfe200000 0 0xfe200000 0 0x0200000>,
- 				 <0x02000000 0 0x30000000 0 0x30000000 0 0x8000000>,
- 				 <0x42000000 0 0x38000000 0 0x38000000 0 0x8000000>;
--			dma-ranges = <0x42000000 0 0x40000000 0 0x40000000 0 0x80000000>;
+ 		rcar_sound: sound@ec500000 {
+ 			/*
+-			 * #sound-dai-cells is required
++			 * #sound-dai-cells is required if simple-card
+ 			 *
+ 			 * Single DAI : #sound-dai-cells = <0>;	<&rcar_sound>;
+ 			 * Multi  DAI : #sound-dai-cells = <1>;	<&rcar_sound N>;
+@@ -1873,8 +1870,8 @@
+ 				 <0x02000000 0 0xfe200000 0 0xfe200000 0 0x00200000>,
+ 				 <0x02000000 0 0x30000000 0 0x30000000 0 0x08000000>,
+ 				 <0x42000000 0 0x38000000 0 0x38000000 0 0x08000000>;
+-			/* Map all possible DDR as inbound ranges */
+-			dma-ranges = <0x42000000 0 0x40000000 0 0x40000000 0 0x40000000>;
 +			/* Map all possible DDR/IOMMU as inbound ranges */
 +			dma-ranges = <0x42000000 0 0x00000000 0 0x00000000 1 0x00000000>;
- 			interrupts = <GIC_SPI 148 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 149 IRQ_TYPE_LEVEL_HIGH>,
- 				     <GIC_SPI 150 IRQ_TYPE_LEVEL_HIGH>;
-@@ -1399,6 +1400,8 @@
+ 			interrupts = <GIC_SPI 116 IRQ_TYPE_LEVEL_HIGH>,
+ 				     <GIC_SPI 117 IRQ_TYPE_LEVEL_HIGH>,
+ 				     <GIC_SPI 118 IRQ_TYPE_LEVEL_HIGH>;
+@@ -1885,6 +1882,8 @@
+ 			clock-names = "pcie", "pcie_bus";
+ 			power-domains = <&sysc R8A77990_PD_ALWAYS_ON>;
  			resets = <&cpg 319>;
- 			phys = <&pcie_phy>;
- 			phy-names = "pcie";
-+			iommu-map = <0 &ipmmu_vi0 5 1>;
++			iommu-map = <0 &ipmmu_hc 0 1>;
 +			iommu-map-mask = <0>;
  			status = "disabled";
  		};
