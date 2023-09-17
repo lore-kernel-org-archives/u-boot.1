@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48390CD37B3
-	for <u-boot@archiver.kernel.org>; Sun, 17 Sep 2023 14:10:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E4BCD37B4
+	for <u-boot@archiver.kernel.org>; Sun, 17 Sep 2023 14:10:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A8A28658D;
+	by phobos.denx.de (Postfix) with ESMTP id 737598662F;
 	Sun, 17 Sep 2023 16:09:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eeFjoceo";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ZJfBD8EB";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="RKhTjjBs";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="XIkufckc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B983867EF; Sun, 17 Sep 2023 16:09:15 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 2360D86611; Sun, 17 Sep 2023 16:09:15 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 882AB86611
- for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 16:09:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AF54866DC
+ for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 16:09:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RpVCr3KcJz9sWt
- for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 16:09:12 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RpVCs00jtz9sQ8
+ for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 16:09:13 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694959752;
+ s=mail20150812; t=1694959753;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=4aNIOkbhsEEOXRqQS9KBPN5mNdQUU4rNcDxjbtV7ou0=;
- b=eeFjoceoTEbgktgAZY8S9EzqAkKhqyVzszLigUrAgQId5v6itPP/VPfOKoNDjeK92o6mMU
- fVB4zW8IRTMHvBIZwVn7/3V8jG0dV9Use4zjsJauMON9cp0nlYJEjZvECM0hweEdxv1P8v
- hGnw/1SPQRlF46qf4U5CKFCf/vqqnnhIf08tLzw8mcmKMuVpuf4EAY44WdFrw2kbn0wt1Q
- 8Scq7HjWKrHerx/hl6vE2KB8Shf9JdIPX9gSAQB7XSg3NAp1BGx58mKDyKo79iU2ALM6RG
- 7ON/NI+AhfUS5sNiYcKwLqiIASSb09yqD2+ePigpjSSFec2Qw0szj1U2VvIHaQ==
+ bh=o+vCxcr9fr66y3vmJw1NUX/2Gv8Rz/TNepoSHfur8S4=;
+ b=RKhTjjBszVKhESDYuwVK/jHE9tYVBik3Kj4zXxd3r+lkMKcn8h+mIsA+vv4e1XdbMxMuD4
+ KPoVO58aru+NnwvFUNQrqLj2t+NJWk+/Wce+J6WsACz6BEd+fsf0Clpmpganp/h3P/vgIC
+ iUa2fxtoyJ4Y0JRkveiP/fPHPxQRSt75+wAYcxhi3fR19z3rqkQtIqOzsPk7+//GZrkW4R
+ kHVSrFW78brgcc1ZUCjrBlmaS67wm5hQyRukGRztp78MueptLTpaeVltuIdPl6Ex5H5o9/
+ JA84+Td5Uzd/nHDlHMlgNje+r+uA6fYjPglOxwhjKXVPR3msPD5JVAc7dkZ9Ag==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1694959750;
+ s=mail20150812; t=1694959751;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=4aNIOkbhsEEOXRqQS9KBPN5mNdQUU4rNcDxjbtV7ou0=;
- b=ZJfBD8EBTfdvAjL7vhnZVV58PIW17wp5dlmhhYMmpcG/Xs+3G7YA9w8JywspNtlt9af8uJ
- zgee4uAPwyBQ/r42HcwpUqcwbGVaFJKdW17TtBTKhifbOXyCypkDK23ftT8+sB5Y4hSP9J
- vHN3C3/vb76u1aUpvuZU41hZKkzIwPk+KJN4z/MwFSQIKhF48pSwqhVQbb0kugr+vtWPmg
- yKGDx50wbsSKFvRjEWBqtY1WEwZ6oRiry4Oa9OFStV8bgNRkx4vphCctvpxuvYXvHnMwOF
- OTQkishKLPSVeEl/Yn2QN94cB/2TJ5ICHw79CNpmHnFgd/TCvkpbKU+KYApjkQ==
+ bh=o+vCxcr9fr66y3vmJw1NUX/2Gv8Rz/TNepoSHfur8S4=;
+ b=XIkufckctwxFTAEK55jFuR0u7vrQHva2uTv1cEiaKrJMYhA94eRP2uyb+uJRRLDvvwE13O
+ qS4VSQuZiKhugKns/KQlZOyTW/jvL330o7FPTDudaYwZuBYb5W3pzWX0n7h8N4qDeOgnT4
+ AvZFBCdqqEuMcYIVK6Jb81JMb65mee1X52Kr2FMgSFuI+iRvMxF/Vm2WBz4XDScShcSvZ5
+ 9dvkhIdlNFaTmLuUumoGkyxM4dleO6pJyTkKotnaP6KVzo91YI0Mp6dNMVsLpZy8U8tMAC
+ +fl498oHbL9KlFWdeE96ZJ8G/Hf3VZ6ur7FvTxQvGhvK6kEAU6albo5Z0kIKZQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 06/18] pinctrl: renesas: Synchronize R8A7791 M2-W and R8A7793
- M2-N PFC tables with Linux 6.5.3
-Date: Sun, 17 Sep 2023 16:08:37 +0200
-Message-Id: <20230917140849.379711-6-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 07/18] pinctrl: renesas: Synchronize R8A7792 V2H PFC tables
+ with Linux 6.5.3
+Date: Sun, 17 Sep 2023 16:08:38 +0200
+Message-Id: <20230917140849.379711-7-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230917140849.379711-1-marek.vasut+renesas@mailbox.org>
 References: <20230917140849.379711-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 52bc846d17f78d6c760
-X-MBO-RS-META: sh3sz93mnrshrgiexiwffmusw6zzxkkp
+X-MBO-RS-META: mrbmbspdm9xb9fq9xnkwfh5ow9418yhp
+X-MBO-RS-ID: 611eeccc81db6ef1d0d
+X-Rspamd-Queue-Id: 4RpVCs00jtz9sQ8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,45 +87,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Synchronize R-Car R8A7791 M2-W and R8A7793 M2-N PFC tables with Linux 6.5.3,
+Synchronize R-Car R8A7792 V2H PFC tables with Linux 6.5.3,
 commit 238589d0f7b421aae18c5704dc931595019fa6c7 .
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/pinctrl/renesas/pfc-r8a7791.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/pinctrl/renesas/pfc-r8a7792.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/pinctrl/renesas/pfc-r8a7791.c b/drivers/pinctrl/renesas/pfc-r8a7791.c
-index 219333106fc..b25453ed285 100644
---- a/drivers/pinctrl/renesas/pfc-r8a7791.c
-+++ b/drivers/pinctrl/renesas/pfc-r8a7791.c
-@@ -25,7 +25,7 @@
- 	PORT_GP_CFG_32(3, fn, sfx, SH_PFC_PIN_CFG_PULL_UP),		\
- 	PORT_GP_CFG_32(4, fn, sfx, SH_PFC_PIN_CFG_PULL_UP),		\
- 	PORT_GP_CFG_32(5, fn, sfx, SH_PFC_PIN_CFG_PULL_UP),		\
--	PORT_GP_CFG_24(6, fn, sfx, SH_PFC_PIN_CFG_IO_VOLTAGE | SH_PFC_PIN_CFG_PULL_UP),	\
-+	PORT_GP_CFG_24(6, fn, sfx, SH_PFC_PIN_CFG_IO_VOLTAGE_18_33 | SH_PFC_PIN_CFG_PULL_UP),	\
- 	PORT_GP_CFG_1(6, 24, fn, sfx, SH_PFC_PIN_CFG_PULL_UP),		\
- 	PORT_GP_CFG_1(6, 25, fn, sfx, SH_PFC_PIN_CFG_PULL_UP),		\
- 	PORT_GP_CFG_1(6, 26, fn, sfx, SH_PFC_PIN_CFG_PULL_UP),		\
-@@ -6555,7 +6555,7 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
- 		FN_SEL_SSP_0, FN_SEL_SSP_1, FN_SEL_SSP_2, 0,
- 		/* RESERVED [6] */ ))
+diff --git a/drivers/pinctrl/renesas/pfc-r8a7792.c b/drivers/pinctrl/renesas/pfc-r8a7792.c
+index 81cfe81c7f5..08f1f97af6e 100644
+--- a/drivers/pinctrl/renesas/pfc-r8a7792.c
++++ b/drivers/pinctrl/renesas/pfc-r8a7792.c
+@@ -2629,7 +2629,7 @@ static const struct pinmux_cfg_reg pinmux_config_regs[] = {
+ 		/* IP7_1_0 [2] */
+ 		FN_PWM0, FN_TCLK1, FN_FSO_CFE_0, 0 ))
  	},
 -	{ },
 +	{ /* sentinel */ }
  };
  
- static int r8a7791_pin_to_pocctrl(unsigned int pin, u32 *pocctrl)
-@@ -6877,7 +6877,7 @@ static const struct pinmux_bias_reg pinmux_bias_regs[] = {
- 		[30] = SH_PFC_PIN_NONE,
- 		[31] = SH_PFC_PIN_NONE,
- 	} },
--	{ /* sentinel */ },
-+	{ /* sentinel */ }
- };
- 
- static const struct sh_pfc_soc_operations r8a7791_pfc_ops = {
+ static const struct pinmux_bias_reg pinmux_bias_regs[] = {
 -- 
 2.40.1
 
