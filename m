@@ -4,65 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8897C2BA2B
-	for <u-boot@archiver.kernel.org>; Sat, 16 Sep 2023 22:52:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C496FC2BA1B
+	for <u-boot@archiver.kernel.org>; Sun, 17 Sep 2023 00:01:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EF578585E;
-	Sun, 17 Sep 2023 00:51:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 77D7485894;
+	Sun, 17 Sep 2023 02:01:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="o77CVpC3";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jSStN1qc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA3648585E; Sun, 17 Sep 2023 00:51:57 +0200 (CEST)
-Received: from s.wrqvwxzv.outbound-mail.sendgrid.net
- (s.wrqvwxzv.outbound-mail.sendgrid.net [149.72.154.232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 321B485E44; Sun, 17 Sep 2023 02:01:02 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69F118556F
- for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 00:51:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A57AF8585E
+ for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 02:00:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
- content-transfer-encoding:cc:content-type:from:subject:to;
- s=s1; bh=g6aUicTojbH1Amwgbt1CPBFTisdNRc42Jyzz7el+xEg=;
- b=o77CVpC3CGP99m+fY78p2KpHU8bktAPTOlszQ0TkLvpBIkpXlgEtQNFQs5/vtqC9tHXU
- 6PNfZVfvfMrcaycJ0GcfBeEdlIat6K7vfadh8mBEzVlKxbXYNi5W/uEu3iaYjGVSEbXe2d
- QgYH3+XdpJWyx05B9OjAdkKjuI6nY1PDJhCsoEHJQp2re3M/g3B5xtinDoQwbb3C30JQf6
- XMIS4CRTKBlE25SsSI5z5KfJ1Rkhiu6B2hRGTSj76SXzzye5lOb8sGE2e2lz11A3reJauT
- tkCLqCNoa0ql1RewSu/XsuYA91JU7mb+dlzD8J04Y2PLalvu7hEoCgSUX0X5LfDw==
-Received: by filterdrecv-d7bbbc8bf-jd6t6 with SMTP id
- filterdrecv-d7bbbc8bf-jd6t6-1-65063189-11
- 2023-09-16 22:51:53.896684201 +0000 UTC m=+121223.450778399
-Received: from [192.168.1.50] (unknown) by geopod-ismtpd-0 (SG) with ESMTP
- id E4M_i7FVR42dhmkguYTCzA Sat, 16 Sep 2023 22:51:53.596 +0000 (UTC)
-Message-ID: <dfcd6379-0efe-d335-d971-40302b291901@kwiboo.se>
-Date: Sat, 16 Sep 2023 22:51:54 +0000 (UTC)
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 239A03F13B
+ for <u-boot@lists.denx.de>; Sun, 17 Sep 2023 00:00:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1694908854;
+ bh=Zofkr/ENRYkyGZF0SYj1snVg2DzUV5SR8jTJBkLdTwE=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=jSStN1qccILkeItP9sSS/4RIwaHV46uCCbciQ7vaHqFgo/cZa2myYZnHsEIADYW/e
+ opwo4aeiMoJNUqBzqcBS2EVA90Isl7t+AD8uy9GR8skIe087fUT0LtDyQmjk1QNU5G
+ rn7tW/rq+8C4P4nSqhJqKAO7NfdsPRurRZm/rnc1F+G0LGNV/7654+4CzIHHB38nBp
+ ORbnG7f5YdplwVPjtPyPTpgfiMoyWejenaRtghgUgBkj3rOD8t0jHGD2X5msXK2FnD
+ lmCDUwH6Ndz7kCgH20/bF49KaabIAPzgBWaeOWFhqPqTHVw5aP/GMXYu5klL/Br+Qd
+ MNU3Ul9zDYhpg==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-3f41a04a297so26708745e9.3
+ for <u-boot@lists.denx.de>; Sat, 16 Sep 2023 17:00:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1694908853; x=1695513653;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Zofkr/ENRYkyGZF0SYj1snVg2DzUV5SR8jTJBkLdTwE=;
+ b=XbITs7Bsrj8KuN2gfzkT4BG1GMlubkisSTxIFvhjpeWME29c6UJDVWTuITGdqiZJ8F
+ PECNNuVMXfBNgegIYJkuBO9a4kc5X9SxDy9IfwXoYHHxMKR3cythAS3JWZuWU6m0Njcj
+ xpHrMD87kWpXGgx5IZFcMsGT6Y4E9qybSzRxbRD83u7syxuQrdW4rVtSJZ4KRwLVISW+
+ m7tipkXenEgQMTo9DecMA6LLakfrXFgAxcjcTQHb9X4FdwG0YYNt2sVAtGKvY8Uqghhc
+ c6K48AxyfePKX2xKGWB0cOUKHzE+t9PWH9GfEbg8WCfqxe/bykywmbKfC20McsT+27fX
+ WuNQ==
+X-Gm-Message-State: AOJu0YxuyZYWRnK/5vpmtJ7H94+ut5aywLTTr6WkqDbWfqHIIfW1Apnc
+ Fc3RvzpPshRnKQgADZ6M4MmHkZgD+u9HhIj69AxEm6TbJU5mSwRnRjY7n/mq8pzxnA4kcFMjW+5
+ qwZqW9jE0IkrrdAOShaTI+jDpCSmIqGc=
+X-Received: by 2002:a1c:f717:0:b0:401:cb45:3fb8 with SMTP id
+ v23-20020a1cf717000000b00401cb453fb8mr4958566wmh.38.1694908852691; 
+ Sat, 16 Sep 2023 17:00:52 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFHLRBZwKuIfLBMuiWdsj979qiZxbssfrpdyWuKImY/0c7Bfo8UrafFhTLBCFWG5/HMXLNqEQ==
+X-Received: by 2002:a1c:f717:0:b0:401:cb45:3fb8 with SMTP id
+ v23-20020a1cf717000000b00401cb453fb8mr4958547wmh.38.1694908851668; 
+ Sat, 16 Sep 2023 17:00:51 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ v13-20020a05600c214d00b00401dc20a070sm11299595wml.43.2023.09.16.17.00.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 16 Sep 2023 17:00:51 -0700 (PDT)
+Message-ID: <047fd798-5501-42fd-a5cb-ff1d84043f96@canonical.com>
+Date: Sun, 17 Sep 2023 02:00:51 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH v3] board: rockchip: Add Bananapi R2Pro Board
-Content-Language: en-US
-References: <20230820160004.44880-1-linux@fw-web.de>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20230820160004.44880-1-linux@fw-web.de>
-X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h9COyRGcZcbDZiOzP?=
- =?us-ascii?Q?ZXEmsnGq8e+DUxI1gxAPN4umGqgRSJthuXu7Nxr?=
- =?us-ascii?Q?uOBtvNEM38I2LLRXIYBwyJ57xNzLyxyq7+A1w5a?=
- =?us-ascii?Q?0OyJ12e8XGWiCJorbDBqptuxsiiJ1ftguWJcCBn?=
- =?us-ascii?Q?XJNFZCUUFm7dJYFBYmAu7PN1UtpP5FU8BU46bs?=
-To: Frank Wunderlich <linux@fw-web.de>
-Cc: Frank Wunderlich <frank-w@public-files.de>, Simon Glass
- <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
- <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
-Content-Type: text/plain; charset=us-ascii
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] riscv: dts: starfive: generate
+ u-boot-spl.bin.normal.out
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Marc Kleine-Budde <mkl@pengutronix.de>,
+ Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>
+References: <20230906120008.86717-1-heinrich.schuchardt@canonical.com>
+ <20230906120008.86717-3-heinrich.schuchardt@canonical.com>
+ <7e069c36-fe99-3701-9572-1363b694645b@kwiboo.se>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <7e069c36-fe99-3701-9572-1363b694645b@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,223 +109,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Frank,
 
-On 2023-08-20 18:00, Frank Wunderlich wrote:
-> From: Frank Wunderlich <frank-w@public-files.de>
+
+On 9/17/23 00:19, Jonas Karlman wrote:
+> On 2023-09-06 14:00, Heinrich Schuchardt wrote:
+>> The StarFive VisionFive 2 board cannot load spl/u-boot-spl.bin but needs a
+>> prefixed header. We have referring to a vendor tool (spl_tool) for this
+>> task. 'mkimage -T sfspl' can generate the prefixed file.
+>>
+>> Use binman to invoke mkimage for the generation of file
+>> spl/u-boot-spl.bin.normal.out.
+>>
+>> Update the documentation.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> Tested-by: Chanho Park <chanho61.park@samsung.com>
+>> ---
+>> v2:
+>> 	Fix a typo in a comment in tools/sfspl.c
+>> 	Add Tested-by credit
+>> ---
+>>   .../dts/jh7110-starfive-visionfive-2-u-boot.dtsi   | 10 ++++++++++
+>>   doc/board/starfive/visionfive2.rst                 | 14 ++------------
+>>   2 files changed, 12 insertions(+), 12 deletions(-)
+>>
+>> diff --git a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
+>> index 13f69da31e..defe2b605f 100644
+>> --- a/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
+>> +++ b/arch/riscv/dts/jh7110-starfive-visionfive-2-u-boot.dtsi
+>> @@ -103,4 +103,14 @@
+>>   			};
+>>   		};
+>>   	};
+>> +	u-boot-spl {
+>> +		filename = "spl/u-boot-spl.bin.normal.out";
+>> +
+>> +		mkimage {
+>> +			args = "-T sfspl";
+>> +			blob {
+>> +				filename = "spl/u-boot-spl.bin";
+>> +			};
+>> +		};
+>> +	};
 > 
-> Add Bananapi R2 Pro board.
+> This should probably be:
 > 
-> Till now evb dts could be used, but iodomain is different
-> (evb has 1v8 on vccio2 and vccio4 which are 3v3 on r2pro)
-> and with iodomain driver this can cause hardware fault.
+> mkimage {
+> 	filename = "spl/u-boot-spl.bin.normal.out";
+> 	args = "-T sfspl";
 > 
-> Devicetree in mainline-Linux:
-> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/rockchip/rk3568-bpi-r2-pro.dts
+> 	u-boot-spl {
+> 	};
+> };
+
+@Jonas
+If I replace the node u-boot-spl by the suggested mkimage node, I get a 
+file spl/u-boot-spl.bin.normal.out which is identical to 
+spl/u-boot-spl.bin. It lacks the header that mkimage should create.
+
+Replacing the blob node by a u-boot-spl node is possible. Whether it is 
+better readable is a matter of taste.
+
+@Simon:
+Could you, please, have a look at doc/develop/package/entries.rst. It 
+seems not to fully describe how binman is controlled via the device-tree.
+
+* A blob sub-node for the mkimage node is not described.
+* A mkimage node which is not a direct subnode of binman is not mentioned.
+* Why the target filename must be outside of the mkimage node in my case 
+is not evident.
+
+Maybe a more formal description of the schema in a yaml file would help.
+
+Best regards
+
+Heinrich
+
 > 
-> Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
-> ---
-> v3:
-> - disable gmac0 as switch-driver is not yet ready to attach to the mac
-> v2:
-> - drop switch-node for now as u-boot driver works differently to linux
-> ---
->  arch/arm/dts/Makefile                     |   3 +-
->  arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi |  23 +
->  arch/arm/dts/rk3568-bpi-r2pro.dts         | 549 ++++++++++++++++++++++
->  configs/bpi-r2pro-rk3568_defconfig        | 101 ++++
->  4 files changed, 675 insertions(+), 1 deletion(-)
->  create mode 100644 arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi
->  create mode 100644 arch/arm/dts/rk3568-bpi-r2pro.dts
->  create mode 100644 configs/bpi-r2pro-rk3568_defconfig
+> Regards,
+> Jonas
 > 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index bd518064f35f..767bf9db39fb 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -182,7 +182,8 @@ dtb-$(CONFIG_ROCKCHIP_RK3568) += \
->  	rk3568-nanopi-r5s.dtb \
->  	rk3568-odroid-m1.dtb \
->  	rk3568-radxa-e25.dtb \
-> -	rk3568-rock-3a.dtb
-> +	rk3568-rock-3a.dtb \
-> +	rk3568-bpi-r2pro.dtb
->  
->  dtb-$(CONFIG_ROCKCHIP_RK3588) += \
->  	rk3588-edgeble-neu6a-io.dtb \
-> diff --git a/arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi b/arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi
-> new file mode 100644
-> index 000000000000..382a52a28b10
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3568-bpi-r2pro-u-boot.dtsi
-> @@ -0,0 +1,23 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * (C) Copyright 2021 Rockchip Electronics Co., Ltd
-> + */
-> +
-> +#include "rk356x-u-boot.dtsi"
-> +
-> +/ {
-> +	chosen {
-> +		stdout-path = &uart2;
-> +		u-boot,spl-boot-order = "same-as-spl", &sdmmc0, &sdhci;
-
-This is the default order in rk356x-u-boot.dtsi and can be dropped.
-
-> +	};
-> +};
-> +
-> +&sdmmc0 {
-> +	status = "okay";
-
-sdmmc0 is already enabled in rk3568-bpi-r2pro.dts
-
-> +};
-> +
-> +&uart2 {
-> +	clock-frequency = <24000000>;
-> +	bootph-pre-ram;
-> +	status = "okay";
-> +};
-> diff --git a/arch/arm/dts/rk3568-bpi-r2pro.dts b/arch/arm/dts/rk3568-bpi-r2pro.dts
-> new file mode 100644
-> index 000000000000..e4fcbb8a1174
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3568-bpi-r2pro.dts
-
-Should be a 1:1 copy from kernel.
-
-[...]
-
-> diff --git a/configs/bpi-r2pro-rk3568_defconfig b/configs/bpi-r2pro-rk3568_defconfig
-> new file mode 100644
-> index 000000000000..e8936261eab3
-> --- /dev/null
-> +++ b/configs/bpi-r2pro-rk3568_defconfig
-> @@ -0,0 +1,101 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_TEXT_BASE=0x00a00000
-> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
-> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
-> +CONFIG_NR_DRAM_BANKS=2
-> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
-> +CONFIG_DEFAULT_DEVICE_TREE="rk3568-bpi-r2pro"
-> +CONFIG_ROCKCHIP_RK3568=y
-> +CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_SPL_STACK_R_ADDR=0x600000
-> +CONFIG_SPL_STACK=0x400000
-> +CONFIG_DEBUG_UART_BASE=0xFE660000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +#CONFIG_OF_SYSTEM_SETUP=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-bpi-r2pro"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> +CONFIG_SPL_BSS_START_ADDR=0x4000000
-> +CONFIG_SPL_BSS_MAX_SIZE=0x4000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> +CONFIG_SPL_STACK_R=y
-> +CONFIG_SPL_ATF=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +CONFIG_CMD_MMC=y
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +CONFIG_NET=n
-> +CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_ROCKCHIP_GPIO_V2=y
-
-This Kconfig option does not exits.
-
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_ETH_DESIGNWARE=y
-> +CONFIG_GMAC_ROCKCHIP=y
-
-Please drop CONFIG_ETH_DESIGNWARE and CONFIG_GMAC_ROCKCHIP.
-
-The following series that add GMAC support for RK3568 and RK3588 will
-use DWC_ETH_QOS and DWC_ETH_QOS_ROCKCHIP Kconfig options.
-
-rockchip: Add GMAC support for RK3568 and RK3588
-https://patchwork.ozlabs.org/project/uboot/cover/20230807000817.1701012-1-jonas@kwiboo.se/
-
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_REGULATOR_PWM=y
-> +CONFIG_PWM_ROCKCHIP=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_BAUDRATE=1500000
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_SYSRESET_PSCI=y
-> +CONFIG_ERRNO_STR=y
-> +CONFIG_SYS_PROMPT="BPI-R2PRO> "
-> +CONFIG_CMD_SYSBOOT=y
-> +CONFIG_CMD_BOOTDEV=y
-> +CONFIG_BOOTSTD_FULL=y
-> +CONFIG_CMD_EFICONFIG=n
-> +CONFIG_EFI_LOADER=n
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_XHCI_DWC3=y
-
-This should not be enabled for rk3568, USB_DWC3_GENERIC provide usb
-support.
-
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_UHCI_HCD=y
-> +CONFIG_USB_DWC2=y
-
-There should not be any need to enable this driver on rk3568.
-
-> +CONFIG_USB_DWC3=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_CMD_USB=y
-> +CONFIG_AHCI=y
-> +CONFIG_DWC_AHCI=y
-> +CONFIG_SCSI=y
-> +CONFIG_DM_SCSI=y
-> +CONFIG_CMD_SCSI=y
-
-Please run moveconfig.py to clean up and re-order the defconfig.
-
-Regards,
-Jonas
+>>   };
+>> diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
+>> index 941899a0a4..f5575ab68b 100644
+>> --- a/doc/board/starfive/visionfive2.rst
+>> +++ b/doc/board/starfive/visionfive2.rst
+>> @@ -65,18 +65,8 @@ Now build the U-Boot SPL and U-Boot proper
+>>   	make starfive_visionfive2_defconfig
+>>   	make OPENSBI=$(opensbi_dir)/opensbi/build/platform/generic/firmware/fw_dynamic.bin
+>>   
+>> -This will generate spl/u-boot-spl.bin and FIT image (u-boot.itb)
+>> -
+>> -u-boot-spl.bin cannot be used directly on StarFive VisionFive2,we need
+>> -to convert the u-boot-spl.bin to u-boot-spl.bin.normal.out with
+>> -the below command:
+>> -
+>> -	./spl_tool -c -f $(Uboot_PATH)/spl/u-boot-spl.bin
+>> -
+>> -More detailed description of spl_tool,please refer spl_tool documenation.
+>> -(Note: spl_tool git repo is at https://github.com/starfive-tech/Tools/tree/master/spl_tool)
+>> -
+>> -This will generate u-boot-spl.bin.normal.out file.
+>> +This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
+>> +as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+>>   
+>>   Flashing
+>>   ~~~~~~~~
+> 
