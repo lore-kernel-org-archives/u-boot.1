@@ -4,46 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10E9ECD37B0
-	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 12:12:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1736CD37B0
+	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 12:12:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF5CD86915;
-	Mon, 18 Sep 2023 14:12:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2ED7A868C0;
+	Mon, 18 Sep 2023 14:12:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F2F08690B; Mon, 18 Sep 2023 14:12:38 +0200 (CEST)
+ id B08388692F; Mon, 18 Sep 2023 14:12:40 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78BA68082A
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 14:12:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68A67868C0
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 14:12:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 38ICCPoP050540;
- Mon, 18 Sep 2023 20:12:25 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 38ICCVr6050561;
+ Mon, 18 Sep 2023 20:12:31 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Mon, 18 Sep 2023 20:12:25 +0800
+ Mon, 18 Sep 2023 20:12:27 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
  Randolph <randolph@andestech.com>
-Subject: [PATCH V2 0/3] andes: rearrange defconfig and dts
-Date: Mon, 18 Sep 2023 20:11:33 +0800
-Message-ID: <20230918121136.2295900-1-randolph@andestech.com>
+Subject: [PATCH V2 1/3] configs: andes: add vender prefix for target name
+Date: Mon, 18 Sep 2023 20:11:34 +0800
+Message-ID: <20230918121136.2295900-2-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230918121136.2295900-1-randolph@andestech.com>
+References: <20230918121136.2295900-1-randolph@andestech.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 38ICCPoP050540
+X-MAIL: Atcsqr.andestech.com 38ICCVr6050561
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,30 +62,164 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Changes in v2:
-- Split the original patch into three smaller ones
+Modify "CONFIG_TARGET_AE350" to "CONFIG_TARGET_ANDES_AE350"
 
-Randolph (3):
-  configs: andes: add vender prefix for target name
-  configs: andes: rearrange SPL mode memory layout
-  dts: andes: add SPL config option for itb layout
+Signed-off-by: Randolph <randolph@andestech.com>
+---
+ arch/riscv/Kconfig                   | 4 ++--
+ arch/riscv/dts/Makefile              | 2 +-
+ board/AndesTech/ae350/Kconfig        | 2 +-
+ configs/ae350_rv32_defconfig         | 2 +-
+ configs/ae350_rv32_spl_defconfig     | 2 +-
+ configs/ae350_rv32_spl_xip_defconfig | 2 +-
+ configs/ae350_rv32_xip_defconfig     | 2 +-
+ configs/ae350_rv64_defconfig         | 2 +-
+ configs/ae350_rv64_spl_defconfig     | 2 +-
+ configs/ae350_rv64_spl_xip_defconfig | 2 +-
+ configs/ae350_rv64_xip_defconfig     | 2 +-
+ 11 files changed, 12 insertions(+), 12 deletions(-)
 
- arch/riscv/Kconfig                   |  4 ++--
- arch/riscv/dts/Makefile              |  2 +-
- arch/riscv/dts/ae350-u-boot.dtsi     |  1 +
- arch/riscv/dts/ae350_32.dts          |  1 -
- arch/riscv/dts/ae350_64.dts          |  1 -
- board/AndesTech/ae350/Kconfig        |  8 +++++++-
- configs/ae350_rv32_defconfig         |  3 ++-
- configs/ae350_rv32_spl_defconfig     | 10 ++++++----
- configs/ae350_rv32_spl_xip_defconfig |  8 +++++---
- configs/ae350_rv32_xip_defconfig     |  3 ++-
- configs/ae350_rv64_defconfig         |  3 ++-
- configs/ae350_rv64_spl_defconfig     | 10 ++++++----
- configs/ae350_rv64_spl_xip_defconfig |  8 +++++---
- configs/ae350_rv64_xip_defconfig     |  3 ++-
- 14 files changed, 41 insertions(+), 24 deletions(-)
-
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index 6771d8d919..aff1f33665 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -8,8 +8,8 @@ choice
+ 	prompt "Target select"
+ 	optional
+ 
+-config TARGET_AE350
+-	bool "Support ae350"
++config TARGET_ANDES_AE350
++	bool "Support Andes ae350"
+ 
+ config TARGET_MICROCHIP_ICICLE
+ 	bool "Support Microchip PolarFire-SoC Icicle Board"
+diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
+index f1525cb668..be6c8a4227 100644
+--- a/arch/riscv/dts/Makefile
++++ b/arch/riscv/dts/Makefile
+@@ -1,6 +1,6 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+-dtb-$(CONFIG_TARGET_AE350) += ae350_32.dtb ae350_64.dtb
++dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
+ dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
+ dtb-$(CONFIG_TARGET_QEMU_VIRT) += qemu-virt32.dtb qemu-virt64.dtb
+ dtb-$(CONFIG_TARGET_OPENPITON_RISCV64) += openpiton-riscv64.dtb
+diff --git a/board/AndesTech/ae350/Kconfig b/board/AndesTech/ae350/Kconfig
+index 75815bf99a..a85e7d6351 100644
+--- a/board/AndesTech/ae350/Kconfig
++++ b/board/AndesTech/ae350/Kconfig
+@@ -1,4 +1,4 @@
+-if TARGET_AE350
++if TARGET_ANDES_AE350
+ 
+ config SYS_CPU
+ 	default "andesv5"
+diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
+index 06a683d986..2fbb87a9b3 100644
+--- a/configs/ae350_rv32_defconfig
++++ b/configs/ae350_rv32_defconfig
+@@ -9,7 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
+ CONFIG_SYS_PROMPT="RISC-V # "
+ CONFIG_SYS_MONITOR_LEN=786432
+ CONFIG_SYS_LOAD_ADDR=0x100000
+-CONFIG_TARGET_AE350=y
++CONFIG_TARGET_ANDES_AE350=y
+ CONFIG_FIT=y
+ CONFIG_SYS_MONITOR_BASE=0x88000000
+ CONFIG_DISTRO_DEFAULTS=y
+diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
+index 75e55ba724..4adc1134ba 100644
+--- a/configs/ae350_rv32_spl_defconfig
++++ b/configs/ae350_rv32_spl_defconfig
+@@ -11,7 +11,7 @@ CONFIG_SYS_MONITOR_LEN=786432
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
+ CONFIG_SPL=y
+ CONFIG_SYS_LOAD_ADDR=0x100000
+-CONFIG_TARGET_AE350=y
++CONFIG_TARGET_ANDES_AE350=y
+ CONFIG_RISCV_SMODE=y
+ # CONFIG_AVAILABLE_HARTS is not set
+ CONFIG_FIT=y
+diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
+index c2221b891e..e19eb546a6 100644
+--- a/configs/ae350_rv32_spl_xip_defconfig
++++ b/configs/ae350_rv32_spl_xip_defconfig
+@@ -12,7 +12,7 @@ CONFIG_SYS_MONITOR_LEN=786432
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
+ CONFIG_SPL=y
+ CONFIG_SYS_LOAD_ADDR=0x100000
+-CONFIG_TARGET_AE350=y
++CONFIG_TARGET_ANDES_AE350=y
+ CONFIG_RISCV_SMODE=y
+ CONFIG_SPL_XIP=y
+ CONFIG_FIT=y
+diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
+index 6d19400c2d..f1c1e5bc00 100644
+--- a/configs/ae350_rv32_xip_defconfig
++++ b/configs/ae350_rv32_xip_defconfig
+@@ -9,7 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
+ CONFIG_SYS_PROMPT="RISC-V # "
+ CONFIG_SYS_MONITOR_LEN=786432
+ CONFIG_SYS_LOAD_ADDR=0x100000
+-CONFIG_TARGET_AE350=y
++CONFIG_TARGET_ANDES_AE350=y
+ CONFIG_XIP=y
+ CONFIG_FIT=y
+ CONFIG_SYS_MONITOR_BASE=0x88000000
+diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
+index 0d7f0a552e..3f30842a8e 100644
+--- a/configs/ae350_rv64_defconfig
++++ b/configs/ae350_rv64_defconfig
+@@ -8,7 +8,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
+ CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
+ CONFIG_SYS_PROMPT="RISC-V # "
+ CONFIG_SYS_LOAD_ADDR=0x100000
+-CONFIG_TARGET_AE350=y
++CONFIG_TARGET_ANDES_AE350=y
+ CONFIG_ARCH_RV64I=y
+ CONFIG_FIT=y
+ CONFIG_SYS_MONITOR_BASE=0x88000000
+diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
+index 6a72b5a047..629c5bab77 100644
+--- a/configs/ae350_rv64_spl_defconfig
++++ b/configs/ae350_rv64_spl_defconfig
+@@ -10,7 +10,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
+ CONFIG_SPL=y
+ CONFIG_SYS_LOAD_ADDR=0x100000
+-CONFIG_TARGET_AE350=y
++CONFIG_TARGET_ANDES_AE350=y
+ CONFIG_ARCH_RV64I=y
+ CONFIG_RISCV_SMODE=y
+ # CONFIG_AVAILABLE_HARTS is not set
+diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
+index 43581c79b1..4557e05445 100644
+--- a/configs/ae350_rv64_spl_xip_defconfig
++++ b/configs/ae350_rv64_spl_xip_defconfig
+@@ -11,7 +11,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
+ CONFIG_SPL=y
+ CONFIG_SYS_LOAD_ADDR=0x100000
+-CONFIG_TARGET_AE350=y
++CONFIG_TARGET_ANDES_AE350=y
+ CONFIG_ARCH_RV64I=y
+ CONFIG_RISCV_SMODE=y
+ CONFIG_SPL_XIP=y
+diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
+index 02d7694489..cabbf75f84 100644
+--- a/configs/ae350_rv64_xip_defconfig
++++ b/configs/ae350_rv64_xip_defconfig
+@@ -8,7 +8,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
+ CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
+ CONFIG_SYS_PROMPT="RISC-V # "
+ CONFIG_SYS_LOAD_ADDR=0x100000
+-CONFIG_TARGET_AE350=y
++CONFIG_TARGET_ANDES_AE350=y
+ CONFIG_ARCH_RV64I=y
+ CONFIG_XIP=y
+ CONFIG_FIT=y
 -- 
 2.34.1
 
