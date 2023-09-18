@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7364CC46CA1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 14:22:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C87EBCD37B0
+	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 14:45:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E076F869F1;
-	Mon, 18 Sep 2023 16:22:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A8A4386A08;
+	Mon, 18 Sep 2023 16:45:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hacutVbN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SgSrXkD5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 431B3869F2; Mon, 18 Sep 2023 16:22:23 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 2031C86A08; Mon, 18 Sep 2023 16:45:53 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B349869E6
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 16:22:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1466E869AC
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 16:45:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-59be6605e1dso49002617b3.3
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 07:22:21 -0700 (PDT)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-d7b9c04591fso4383777276.3
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 07:45:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695046940; x=1695651740; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1695048349; x=1695653149; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Too3zN3m/INZ9ggHfkJ1r6R0i5F0DsYTbT8XCfpj0No=;
- b=hacutVbNWdqAy7AZCFeD9zuqUt3/tMmRqFI6LnbNiZp/k+DCJ0Spll4lEVwdxeoMgO
- LkscIl3n1ykxlQK6yuTft2dTevp1WLHvcOTfnBv7egLfIg5Jcfbezp/hJn8tOdP5j1Sq
- gatdS5E0nP9C91MMahwDuCd3APBemmgNrCyXs=
+ bh=isp2hGXl7nDbc846C13MYKtLFrolJrKS+y314LGoONg=;
+ b=SgSrXkD58Ra8Szi5TNXtUL7rmBaM+CH5w/ESJLMYzbM+uXyrBiX84EfRfTFGnGwFTp
+ 8NHyqTvZsd59qHofjThvo/TPK/iLKgbC5RoGm7MX0sXN6fiHVkYITkrXqezof8NOBL0U
+ Gjs1L8x4ypPC4IotZxujnG9pLA2KG9WsMFT8g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695046940; x=1695651740;
+ d=1e100.net; s=20230601; t=1695048349; x=1695653149;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Too3zN3m/INZ9ggHfkJ1r6R0i5F0DsYTbT8XCfpj0No=;
- b=LYN9/45ZNm/67fgotpP2uXmFY66cZ/8550oIceW3b41/A1htLEN1opszo3FUeBQhFk
- gTytC1pA65URtnQ5DMM0f4Sp3c1IjkfLmE8JTdZWd8duSdcG61K38guOB3Sj6c4kAbWC
- v8KcnhBQc0lRmJaQqLxCRzeOde7eTJ5MRC+UFZOD+2Yb0gG70uYFx9Id9TkO4Pr3EjMm
- onReyX7O9xHpVBSHKc42m0iXANUWOjbRPPHrG6vW6piQUN0rxD3lau9vwbbkFQmHdtwn
- Q+NRAA3qyGSxjDjNe2GRAMSYzIVOLszdnI1xBmRwMf8kgJbhc9uv2mHPpHMB5fYW8sEz
- rzew==
-X-Gm-Message-State: AOJu0YyQXEIYRmRizHjjhFqmhdOvTyQ0URK3dgq9a0aaMrPBiRvT7dgI
- 3oFRoBvtr4EWOqAkiaDRADgBdirf/GiAtRIiWH67sw==
-X-Google-Smtp-Source: AGHT+IEtgCXJpWY/SFkx3CCgxsTS/LQgINXxsa36H9YmX9cYAraJ8SIGIh+IsQOvEaKgkb4aqhLNcQ==
-X-Received: by 2002:a0d:ebc6:0:b0:58f:a190:f6b with SMTP id
- u189-20020a0debc6000000b0058fa1900f6bmr9266280ywe.26.1695046940009; 
- Mon, 18 Sep 2023 07:22:20 -0700 (PDT)
+ bh=isp2hGXl7nDbc846C13MYKtLFrolJrKS+y314LGoONg=;
+ b=tHg76NJR8MamyWh+3N8ZnGbbmubGyZ4w4KgtvuyCnBSyyEPJWOr88CjJ3GUWxnivxh
+ PpWm1830FJUbYSHYyRuDbMCDLASIwekUb0BacUlPWrgTwCJkUT0eybqUhrOoolOOUhnD
+ l87wUDyGdbfTy+NaWDqMR/1yfrIieu9NZ0MF5CQ/oPyArZAECulWs5h7IZFwxz79FphD
+ lvsBf3S9M18dey17EiYwu9R+306aTIfUruy6MOk5GCGqEvq0PlehCjS6E8P9CqdSXmGd
+ buvLQz3gaUbNPwtxqdKNgTvt+EmXSPfuOFOXknUM0w1lA3M1+1M/Rni+A9adPa5Nztwg
+ ZGlw==
+X-Gm-Message-State: AOJu0YyPiIg4s0NvyqTUR90fBnBEDVYoxOEyjsyFwEPNw0AUBeIsHCN8
+ uNSuLsTXJHqQoehqmijUKHNLJQ==
+X-Google-Smtp-Source: AGHT+IFilf4HhgFglL4EGUMwR9SyGB+gkV/hzz63LpzUjCCj+oD7G7sUG9n3nhE41xszaE7TI+6Fmw==
+X-Received: by 2002:a25:4086:0:b0:d73:eaff:3045 with SMTP id
+ n128-20020a254086000000b00d73eaff3045mr9493223yba.13.1695048349725; 
+ Mon, 18 Sep 2023 07:45:49 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-fccb-cc62-ada8-13e0.res6.spectrum.com.
  [2603:6081:7b00:6400:fccb:cc62:ada8:13e0])
  by smtp.gmail.com with ESMTPSA id
- m202-20020a0dcad3000000b00570253fc3e5sm2558886ywd.105.2023.09.18.07.22.19
+ b7-20020a259207000000b00d815cb9accbsm2199892ybo.32.2023.09.18.07.45.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 07:22:19 -0700 (PDT)
-Date: Mon, 18 Sep 2023 10:22:17 -0400
+ Mon, 18 Sep 2023 07:45:49 -0700 (PDT)
+Date: Mon, 18 Sep 2023 10:45:47 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] linux/compat.h: Define empty __initconst and __initdata
-Message-ID: <20230918142217.GO305624@bill-the-cat>
-References: <20230917140939.379762-1-marek.vasut+renesas@mailbox.org>
+To: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de,
+ dsx724 <da@lessconfused.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Suniel Mahesh <sunil@amarulasolutions.com>
+Subject: Re: [PATCH v4 1/4] spl: fit: support for booting a GZIP-compressed
+ U-boot binary
+Message-ID: <20230918144547.GS305624@bill-the-cat>
+References: <20230910182448.285542-1-abbaraju.manojsai@amarulasolutions.com>
+ <20230917192628.363502-1-abbaraju.manojsai@amarulasolutions.com>
+ <20230917192628.363502-2-abbaraju.manojsai@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8C2OdR7u6yCPLzNc"
+ protocol="application/pgp-signature"; boundary="HJCqhLY5RlM7D46w"
 Content-Disposition: inline
-In-Reply-To: <20230917140939.379762-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230917192628.363502-2-abbaraju.manojsai@amarulasolutions.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,38 +98,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---8C2OdR7u6yCPLzNc
+--HJCqhLY5RlM7D46w
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Sep 17, 2023 at 04:09:39PM +0200, Marek Vasut wrote:
+On Mon, Sep 18, 2023 at 12:56:25AM +0530, Manoj Sai wrote:
 
-> Introduce two new empty macros used in various static tables in Linux.
+> If GZIP Compression support is enabled, GZIP compressed U-Boot binary
+> will be at a specified RAM location which is defined at
+> CONFIG_SYS_LOAD_ADDR and will be assign it as the source address.
 >=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> gunzip function in spl_load_fit_image ,will decompress the GZIP
+> compressed U-Boot binary which is placed at
+> source address(CONFIG_SYS_LOAD_ADDR)  to the default
+> CONFIG_SYS_TEXT_BASE location.
+>=20
+> spl_load_fit_image function will load the decompressed U-Boot
+> binary, which is placed at the CONFIG_SYS_TEXT_BASE location.
+>=20
+> Signed-off-by: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
+> Signed-off-by: Suniel Mahesh <sunil@amarulasolutions.com>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---8C2OdR7u6yCPLzNc
+--HJCqhLY5RlM7D46w
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUIXRkACgkQFHw5/5Y0
-tywF/wv+MV9Ur1ARUGqj9Fk8ZaQd6HpNs7x2/D5R/+j+deOmPYzvBhNH/0aLqnLZ
-3ujjh2iCRdthdOFOQJBfbn3dHC2WiePcBlaQJhSH574rEtVxtYAcjRg6V4DqbKA9
-bc3AHBlpiiKgSSs7bJ7nUCVLsaj61RTvmkw3Wh4E80xRTgE1xtSw6dEoik8Egsrv
-EvSmDlBqMIy7fqFb8LZRrv96LhQ+fgMuQ18JYqaEUye2DJ18euHl0OirxarVvYdX
-j0YiT+IdDZwidS0uJEZjFXRiIhWYARDwCOylQx9kjrntxbCIb1mqtTDoWafxb4t9
-e6LeQZfOG1wfMqkxSDBPOfwYQtyEEUCehlbZZldOh4hn6FTXBQMYP36eBf70xXeg
-xErcZYqCPHk41oArWAjstl1MiNtd7sDwoq9eF+2Pt6hhERIf5xIsU9OmC/8My1yX
-oED7MyZ7mDpUO7Ck/Xiy6HnB1lfCajyzA/Y2QZZMHllMdG+4luFhfDAhgf/zDx0I
-bhj9NVge
-=IfUG
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUIYpgACgkQFHw5/5Y0
+tyyY2wwAsn3TANKWyhxE2XmJPzVK0PNlHyH8S+WRHEUXXmFbjpliwqtwyNj4A55C
+ltajTC7vNjEgdwBenqQmPadZpBMAL1F3o6BePI2wvllsplgptVndX74esUXn+baq
+6nMa9Wwc1DfqSsuqBtnI9RZeE94E+tbdl9gh07xk21FVDn7hmCKkUaUTYlYT40fn
+qt2XAaROoqxvTZvBhrI4klpXn+zUaxmIYWcdV1XCffjDSyEqOGOAhF9gXbXAzsFX
+1oXVhO5YimgKh0zOqRA84h/6Y3RWR3oYrh6MNMDBBWyaJS4jzpnhltg2Oo22YNbg
+O5Tti2OxKqAFM2JPCIOnQvxDqXoBF0b7ThIrrqt2rViPat0f54AnoD1Jkp3B5iky
+n7vuunFo5rFyAWSEH3BEgFdWaxj+mgM90gN2t2d1kkGXDYcTxr3scccNd98M/ihx
+SgeuZnf+u16HYO1NyIh1ryP36b1Qm+uyrtl2J9Az7bzBFfwdWNxZUCm873jbV8np
+9EDIQjWc
+=mqbj
 -----END PGP SIGNATURE-----
 
---8C2OdR7u6yCPLzNc--
+--HJCqhLY5RlM7D46w--
