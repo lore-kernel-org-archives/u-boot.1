@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53067C46CA1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 14:12:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5FCFCD37B0
+	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 14:12:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2A1F86986;
-	Mon, 18 Sep 2023 16:12:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07EDC86936;
+	Mon, 18 Sep 2023 16:12:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Pcu5xG/0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WVSCc1+D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 549BE86936; Mon, 18 Sep 2023 16:12:48 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id CF238869A3; Mon, 18 Sep 2023 16:12:54 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E21686993
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 16:12:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4BE98699B
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 16:12:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-59bc956b029so43694837b3.2
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 07:12:43 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-59bc97d7b3dso71817177b3.1
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 07:12:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695046362; x=1695651162; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1695046370; x=1695651170; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Z9+y6VCeIc08eDbS1nK8rqPzVFXlXOLNn+enfW7Sfso=;
- b=Pcu5xG/03v4gI53xUoj0TYYwAcqfUhVSScRGyEoy2/ITMhzRxtzxk3w6aGpO6ZiO9u
- Znqz+Cps1PBzOSDfqnQUg1e6wnBWl04DaS/C142j9F8GGI0alyV+NltbYheVCg4SzXQk
- 8E1Qd98UnH1eW/VnaGh++5HV37kjcrRKdmKTc=
+ bh=Kh9vXeXwomOtJc+naNSMZLc3gogQJ3/Ui8o3FaeaxAc=;
+ b=WVSCc1+D4ONaqPutXJo+KOtvOhddXVMossHlg9rxbVg70riJx0qCKQsecNnPqjbG93
+ bWATkSNNgyl/BeUqCxVoS4NcBGApo6N+e+z73uA/u5cbcEh1wmTVbtuQyzAs/R8y8BsE
+ l4yoWktcCCHQs1MmEk7/ovxjACEoYRplEnS7U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695046362; x=1695651162;
+ d=1e100.net; s=20230601; t=1695046370; x=1695651170;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z9+y6VCeIc08eDbS1nK8rqPzVFXlXOLNn+enfW7Sfso=;
- b=VOIThWFZXGsvu9IPI9LbbdTE+qQsMyYBCDTVZxY+o8rUkQgGYvAgR/0mEfAJVL2awz
- f+SLZnmRAGqiuN97Ky0PE8vEdF5S4j3qh2JsLbJr/WLA4YB6nES0pWiSoV6GvMbH6fwo
- OI46eW1uFbpLxeBeANbxRD9CmtdH6hfkYm/L2c0hMS7JG+f1WEd6BlNkEKnzpnb0F3Su
- NpHzWRf5lQ2JEJwcYkexYoWI9xVGqZblNxqt3WaH8lMPlGzDpe2NklgodQhN57lJT24F
- O1FXAM5sTAPHw7jg8JUvEQ5CcbqLulHs2LkjNfFqtoTmYRVoKe+6Ig7D/GKShAwdAlIO
- IQug==
-X-Gm-Message-State: AOJu0Yx0Rul2E7ldmeUr38qlHc3KaYdXJ8lvK7dE/n580JkW3vcuw28C
- kAa+FjcPDl4MumHWsMSheFHIfQ==
-X-Google-Smtp-Source: AGHT+IFttu8Srn+Kmo+rDg6r7Gaic3sgUJqzPVJoJbukggvaYB/FYCSB4jnDt2xe4nX5P9+Z90+fwQ==
-X-Received: by 2002:a0d:ea45:0:b0:584:6239:8f36 with SMTP id
- t66-20020a0dea45000000b0058462398f36mr9211782ywe.14.1695046362376; 
- Mon, 18 Sep 2023 07:12:42 -0700 (PDT)
+ bh=Kh9vXeXwomOtJc+naNSMZLc3gogQJ3/Ui8o3FaeaxAc=;
+ b=dw7I7lHCIs15XdIQX700HOPv7+7ypJ5vusY1aCrN396iSG3wdLDKtgcgvpByz+7JHq
+ Vo82m4z83DtGHbhYHJ3vLSZztGQ/wrwf1NGIPvzSJEPsc5UaFhPuGUyj+NT72hVKJuxF
+ 6RPKLRX1+TuE8znpeqfGfrMFrLD4Vu7faGYAdU2imF/kt2Pu0W8CBo0Ty+kiovzZ/ngh
+ Q5RgA+RM1KD48JzCqSJtQsgVF5CBZM5giQiu/+RL5hIu8s3jQRgsMRsYaYzEf6a9dpbF
+ 3gRjehSJr5iJbf0J6Oa4HrFtFU0X/rc2bS7vFAMCFaC5Z2/TqOeXjY2wrAUiH5XuBBVV
+ /n7w==
+X-Gm-Message-State: AOJu0YxQFYYEjQtX/MR1UblpTLTqliHAHVM/UXpKhlYT8QlAADMAm5fH
+ xWEXfw2dYaV6wD+yfAjFSnBYYg==
+X-Google-Smtp-Source: AGHT+IGYFA5kD0esyO23Etvv0fRW2QQcRCXPfzLqoJqlByBgP04BBu8qZrZyaSYVoiRpEgM16+gA1w==
+X-Received: by 2002:a81:918c:0:b0:589:e815:8d71 with SMTP id
+ i134-20020a81918c000000b00589e8158d71mr10350967ywg.11.1695046370608; 
+ Mon, 18 Sep 2023 07:12:50 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-fccb-cc62-ada8-13e0.res6.spectrum.com.
  [2603:6081:7b00:6400:fccb:cc62:ada8:13e0])
  by smtp.gmail.com with ESMTPSA id
- m17-20020a819c11000000b005707fb5110bsm2561606ywa.58.2023.09.18.07.12.41
+ v15-20020a81a54f000000b00583f8f41cb8sm2528923ywg.63.2023.09.18.07.12.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 07:12:41 -0700 (PDT)
-Date: Mon, 18 Sep 2023 10:12:39 -0400
+ Mon, 18 Sep 2023 07:12:50 -0700 (PDT)
+Date: Mon, 18 Sep 2023 10:12:48 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Jesse Taube <mr.bossman075@gmail.com>
-Cc: u-boot@lists.denx.de,
- Giulio Benetti <giulio.benetti@benettiengineering.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v1] configs: imxrt1050-evk: enable distro bootcmd
-Message-ID: <20230918141239.GK305624@bill-the-cat>
-References: <20230918034734.322676-1-Mr.Bossman075@gmail.com>
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, sjg@chromium.org,
+ xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
+ rfried.dev@gmail.com, seanedmond@microsoft.com,
+ tobias@waldekranz.com, sr@denx.de, john@metanate.com,
+ git@xilinx.com, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+Subject: Re: [PATCH v2 1/2] cmd: thordown: Add proper dependency for
+ CMD_THOR_DOWNLOAD
+Message-ID: <20230918141248.GL305624@bill-the-cat>
+References: <20230904031528.11817-1-venkatesh.abbarapu@amd.com>
+ <20230904031528.11817-2-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XYm7oh0HTwS0VyVc"
+ protocol="application/pgp-signature"; boundary="CZWydAjvAqkfnTct"
 Content-Disposition: inline
-In-Reply-To: <20230918034734.322676-1-Mr.Bossman075@gmail.com>
+In-Reply-To: <20230904031528.11817-2-venkatesh.abbarapu@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,51 +98,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---XYm7oh0HTwS0VyVc
+--CZWydAjvAqkfnTct
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Sep 17, 2023 at 11:47:34PM -0400, Jesse Taube wrote:
+On Mon, Sep 04, 2023 at 08:45:27AM +0530, Venkatesh Yadav Abbarapu wrote:
 
-> Add support to boot from script.scr from mmc.
+> When CONFIG_CMD_USB and CONFIG_USB are disabled some compilation errors a=
+re seen as below.
 >=20
-> imxrt1050-evk was not able to boot from script.scr because we did not
-> include config_distro_bootcmd.h and set the device to mmc.
+> cmd/thordown.o: in function `usb_gadget_initialize':
+> include/linux/usb/gadget.h:981: undefined reference to `board_usb_init'
+> cmd/thordown.o: in function `do_thor_down':
+> cmd/thordown.c:68: undefined reference to `g_dnl_unregister'
+> cmd/thordown.o: in function `usb_gadget_release':
+> include/linux/usb/gadget.h:986: undefined reference to `board_usb_cleanup'
+> cmd/thordown.o: in function `do_thor_down':
+> cmd/thordown.c:41: undefined reference to `g_dnl_register'
+> cmd/thordown.c:48: undefined reference to `thor_init'
+> cmd/thordown.c:56: undefined reference to `thor_handle'
+> gnu/aarch64/lin/aarch64-linux/bin/aarch64-linux-gnu-ld.bfd: line 4:  8485
+> Segmentation fault      (core dumped) $CC --sysroot=3D$LIBC
+> --no-warn-rwx-segment "$@"
+> Makefile:1779: recipe for target 'u-boot' failed
+> make: *** [u-boot] Error 139
+> make: *** Deleting file 'u-boot'
 >=20
-> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
+> Add dependency of USB_GADGET_DOWNLOAD for CONFIG_CMD_THOR_DOWNLOAD to fix=
+ the errors.
+>=20
+> Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 
-A few things.  In general, we should be switching to standard boot
-instead of the script-based distro_bootcmd.  Second:
-
-> +/* Config distro_bootcmd */
-> +#ifndef CONFIG_SPL_BUILD
-> +#define BOOT_TARGET_DEVICES(func) \
-> +	func(MMC, mmc, 0)
-> +#include <config_distro_bootcmd.h>
-> +#endif
-
-It's not allowed to use checks for CONFIG_SPL_BUILD like this.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---XYm7oh0HTwS0VyVc
+--CZWydAjvAqkfnTct
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUIWtEACgkQFHw5/5Y0
-tywWIAv+OmziJ/GQ8wXxtz6ut/FxVn6wQwcE1asKU2+TxBSSvUGPzLAvBUX5t3YQ
-Wls9yMDVgO4gvQVW8BH1sYKvG+deOgEdIvXiTr8mdsDkXwUZcyUM8kB9laao6DdD
-5wrHlV4jEF5dIbUpTiR/cR18u8wnWl2E7G7pwjuAMf2uyQW71kpV/iGK/kQdzT6q
-dfI0eptGVXGEujVfr+pCCeL5Qf9XMXoTRbzaL3GYmv6HsEQfHS4FJFFB7cUHijBh
-oSJAwaQBNBWpcPdlabjqE0YIWff45kFrKoyqSYBhIY4cYlI6hMgSLsdPqyVIyF6y
-szz7XK68jzs8F65MuecafQyTDZ6BycRSJH8Y9US7U2vDsAKd6Ei1kJ78JwJ2h66x
-93oUuSLibB3zLvDjC6ZfMVSOBHh8z0snU9ZCMsI+HQKed0pfRoLWatqO8eDNCMKj
-LBTHmUbDfkHBUun0eH/yGp16AvfE/ruDiZktscsEgBNhbZZgFpMOuLIMHSsKmiYx
-G0vBOWGb
-=AFek
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUIWuAACgkQFHw5/5Y0
+tyzsAwv/UTjRPKo4c7vezu324zShhDQIAg/2zZQxm+VHM/6XmgtI/aGkf/TrfTIc
+FtljYIRdbGh/ZJeFHwsJdDkYciI1EkIYRx2FDBax3pXfTD0OIUo5IlRf7TTaG/OM
+fU9LMr2IooN510e6UxQAwJuoNd5/H+FJclDSG1gPHGgtAqKr2Qe+ohDbwUmTe0vs
+mTbYys0GnnUewOPV9dUc+lq6GluSh86HXtLTxKa8DeqSKgI2CzEPGjJP3uYBWyY7
+B9o0uLmITcAWoy3Aobc4Ndv79eQqTU14a6FMm0od3YI59IoPYUjpuJrT6deUL+/E
+/WiMKoaQ/txE93MwfvFQdg+/4x0lAnzAVoCwTNX5gAuqWpdPwKmZreO1hxCXJopF
+VvZtKue8sKOUgucqjWJ8US9uWYxgWOnjeOWp4pYFgJeoB8906mjY1EE/J7jyA4hX
+dzxC3zaU9xBBa5+j9dzHaevFebqkdZSL3+nC5T+rgJJUa06WnozAsdizEKM0/08P
+6OzWR+TZ
+=WLiN
 -----END PGP SIGNATURE-----
 
---XYm7oh0HTwS0VyVc--
+--CZWydAjvAqkfnTct--
