@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19BAEC46CA1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 09:10:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D58EC46CA1
+	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 09:10:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71BA08642C;
-	Mon, 18 Sep 2023 11:10:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2141867EF;
+	Mon, 18 Sep 2023 11:10:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="QeFsYlXT";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="jtOzb8k5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 678318642C; Mon, 18 Sep 2023 11:10:06 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2061a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::61a])
+ id 738A186802; Mon, 18 Sep 2023 11:10:34 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20608.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::608])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60E8E80274
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 11:10:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2617E80274
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 11:10:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PXuZJx34MqMC0+00u/bwvYAxmXtuAsedhguhu1MWwMJLYpekZAVacSOlz+x5iUcYvOwjw17yRDxDs27z15JbJdeTXHg3e8DlhEijunLMQWpSEpahU9L+AmMz3XPDSTilk6A85kiuS2w/PALebPGkaNNMdMQ0Coz7kYoRhRDLMzjib8jS9TIw66SmH0QjssLx9imKQp2BmYf/+pYuMeAIAUKXQ4nBWfH+LfhTvo3XK0+fZtsLTXyzcfKZw5V9KhQWZvKcx6gsnmUAjfaq659adi8nLuV+Gd5To2c80gXePjeuLI1pyjaBh81yyxhIRaiVhyIXtQHwFE6KveTXNYBudQ==
+ b=NCIDUS8Pz71wBCUSkRUd8LPSbODVSH14F8Bjx8603ZvDJwBdr4Hpql9BDFSqQPw5vf2bCY1wPL3p1uafrbIiwQLATOUGpMBa3R75zA2LdS75BfSYiOrCq9GzQ0srnSU/xRf0VA2jiLbVrundV10dx6vA9U6JcHdPtSHjx5+aYDHKOLEstdbbrV9kSGHvKNQdRBV5YqXORrgP2AW72PI8YrgWRSyna22UTsGuYjyZ2QrTv2bVKmJZDk1QlVoOdJBWShLGcdSkac5JDtnL589IbiyuPbT92sFdlonFFQaehnIqdsvNwOCh1oGIOZZrpVVAgXv9OGG3acUUx/9zmq6kmA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+YXOF/41V7xNRF0oizvjr2OPN/+f4IS5gmoI0laERGA=;
- b=e+2zUTpbclGqji45iAaIV1GP4WGxBCQSvf3oOPIzIcsJpm7+p0CPpfYsvFOQHA7ifCKb0a9G3OofjQc6G3i8zjF6fUzPfAbfkwJfn9kLBKLMFbBALt77mju0wjzJCfCF7CLyKpUVyVZuPmcNeFiKpKXS+KioyUWuDiA5vaj7wo4IguaVWNdHimX7rvxvKVgvXpIydXV5kEFBLgFlb8I8Pgel/Kb0rz1/y6xzFaf8q+3jmrzzJGxrNE1IdaACeqURLxVAWw5dHsmDqeMapD3gN4D3IbgA8pbg6ygeAih8IqpSCwmu6QDNlob8RtBbELQuaGR/zEA70vNtSEZqUIF9AA==
+ bh=cTYrPrBDVTo/U3R96ccZZm+IpjMdAIbBGFa3MOp6uFM=;
+ b=EzGm5mwsQTVWbp5EkewiT0BybgA6LtvLgqrBxJb4p/2+e37nhCQNgC+AYip8VhlNCD3JExuS+5Wm2jslmoC/nnQObitplWXduYOCdUiZjRTfpz0gkWIjTTvpRiLjJAZug/Qp10oN8uvxUpAzj3jKg6YuX4VgPsAzyxtHN11Yt2kWdC5tyPRZ3Lm6dft39/t2wwjhF+sUlC1auPQMDYY1ynwL9m6IFiaJKsu28bc5+TOy2knDdKcv98dI5IjpTwExEmNZTBS7TRqwidooIHKItqSKUN7OthFmEUCipWsrhBCjyEifsbKlL8LdMngX0ZPxin+KiWlAKMCPLARbnZtMQg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+YXOF/41V7xNRF0oizvjr2OPN/+f4IS5gmoI0laERGA=;
- b=QeFsYlXTSci+fSyfp2Ph8/g9/c/+2a3WBQGjRJE7vaeyUDtdy2Zi31PkrYMOn3B0ozbMMhehGxr6sB5mAZ3uXUEoFAM1USQ5qYI3kSl4Z2McT7YY6a1UiL9DkodTrHgGcPTnnSfm63fZO+P5GLW6ADdH2keAO/097aC6IOtMVII=
-Received: from MW4PR03CA0281.namprd03.prod.outlook.com (2603:10b6:303:b5::16)
- by CH3PR12MB7593.namprd12.prod.outlook.com (2603:10b6:610:141::20)
+ bh=cTYrPrBDVTo/U3R96ccZZm+IpjMdAIbBGFa3MOp6uFM=;
+ b=jtOzb8k5duSBt0hTMP+qtvLcT/f3SAeDZ9c/gV16yBRL+KnXbVBC+ydhAeIGv86yvQeNRDheXUPvqThhjh0K4aloE7LNerKVpd93g+Lv0MpgOrdXv/e3rQUHciwSaNbwoeaKwZAABKHlQUXUpWT6WIBvIgeXeLsP4/fwvBeRYJw=
+Received: from MW4PR04CA0235.namprd04.prod.outlook.com (2603:10b6:303:87::30)
+ by MN0PR12MB5833.namprd12.prod.outlook.com (2603:10b6:208:378::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.26; Mon, 18 Sep
- 2023 09:10:00 +0000
-Received: from CO1PEPF000044FA.namprd21.prod.outlook.com
- (2603:10b6:303:b5:cafe::47) by MW4PR03CA0281.outlook.office365.com
- (2603:10b6:303:b5::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6768.31; Mon, 18 Sep
+ 2023 09:10:27 +0000
+Received: from CO1PEPF000044FB.namprd21.prod.outlook.com
+ (2603:10b6:303:87:cafe::35) by MW4PR04CA0235.outlook.office365.com
+ (2603:10b6:303:87::30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.27 via Frontend
- Transport; Mon, 18 Sep 2023 09:10:00 +0000
+ Transport; Mon, 18 Sep 2023 09:10:27 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,26 +59,24 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000044FA.mail.protection.outlook.com (10.167.241.200) with Microsoft
+ CO1PEPF000044FB.mail.protection.outlook.com (10.167.241.201) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.0 via Frontend Transport; Mon, 18 Sep 2023 09:09:59 +0000
+ 15.20.6838.0 via Frontend Transport; Mon, 18 Sep 2023 09:10:27 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 18 Sep
- 2023 04:09:54 -0500
-Message-ID: <9e4e9635-dac6-4c73-878a-c879330d4e8d@amd.com>
-Date: Mon, 18 Sep 2023 11:09:54 +0200
+ 2023 04:10:25 -0500
+Message-ID: <0d59cbfc-959a-4307-b84e-a16fe06f7c16@amd.com>
+Date: Mon, 18 Sep 2023 11:10:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] xilinx: Sync DTs with Xilinx tree
+Subject: Re: [PATCH] clk: versal: Fix the function versal_clock_ref
 Content-Language: en-US
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ <u-boot@lists.denx.de>
+CC: <git@xilinx.com>
+References: <20230912033055.2549-1-venkatesh.abbarapu@amd.com>
 From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Harini Katakam <harini.katakam@amd.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Piyush Mehta <piyush.mehta@amd.com>, "Radhey
- Shyam Pandey" <radhey.shyam.pandey@amd.com>, Robert Hancock
- <robert.hancock@calian.com>, Simon Glass <sjg@chromium.org>
-References: <cover.1694441445.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -123,7 +121,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <cover.1694441445.git.michal.simek@amd.com>
+In-Reply-To: <20230912033055.2549-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -131,26 +129,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044FA:EE_|CH3PR12MB7593:EE_
-X-MS-Office365-Filtering-Correlation-Id: a1d2051b-3711-448c-3091-08dbb82708f5
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044FB:EE_|MN0PR12MB5833:EE_
+X-MS-Office365-Filtering-Correlation-Id: e3d54e6c-1a79-412b-e1e7-08dbb827199b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: x44DrnGAInbVQANxowneOWW1/I0o9xdCvFEySU/B4S5dp0iVBLvAF1VqBUhlEyYCbSv8Jjo1rw557Us9zkSFUQu2chP/ElBsCmBt9HErGNjw9dKr+lzEJDZ9s/Fzq6j/OWqSdZL+fefsi0syPJlvhlAIgd7DuPs50RWME05TQ7Wqb1W8WUvntrTqnAtFTlNwMCCbAAeDKxxJLO3jnaE5QQ1Hwqh65WIkd801KSGOgQB0F5VPduiUfXLKryvkbVcAxNjGkeBVxBhDjNIyT+ArczNPOn1UTaOPHD7tkqB9z15DRdky6EVlZ/Wg4QkH3p93ar/6mRhL3nI5sLx7VO8YBZU/Gg6jDtgSTUmzynSRTktzmR7Whrp61eAJfBhilokhxVSQ6jpX03dK3kjU6zzHmF3ZMA/ZqR4otEEqMFgtllJ0h+76O7XS7rbec5NuvFWa2LJCsxEtZmlUR2295NKEFvWqZ07GUcwoXWNl8n2GrynsHSpu1pPmnU37W3mv+yh8XrxqnBcujlc/lP62wo9R3yyoUVBiW4P1MWeDY08rNHGyBfFwYoCI/US/HQBKKorq2KikLt6vQlDzQIXu9H8wn8rHgjaQS2MCu0u/Z3QaU4EJUh3GWY+7DTxBAkRee+DMmoEnqIBxe0776zYmKIXzDPHRoZwm/HD9jd0aQKkfdSjQqqdBNvyFQ17zub9Mw1Xl4Tc3crUuLqCnoqVNpYTtjXD4TXIh8BepmnhlMNoMBY1WR51L0q78dHBWlsnjEdFd9fZdktZf28AWOXtlaIGQkMedqtbhaH0dZRFZvAuHExBBMonihwLY1IMHkSkF11a+
+X-Microsoft-Antispam-Message-Info: QzpaXCimSeMTrj7C6nEHUPq1wClbTmpu4JqeRiZ3PhOzpOxWS3+sngEOOvFlrBI4kZrXz3HYQB1zeYI4/pPwsYCFftRFPxt3Dt5Y8BALGoejcKxZs3htLJ13DGyBf6gCQyBpCf3rghqepOBJHvzMZ+RGF78ootMbu6lVL9OxLh9SIBsyz3bTaFcf03yL2kyxlPcnvjxiVEaVBaGcGfm5Wol2Y+X5irFv1zzrXhDdViHXRRrC/ZioQ0YtGNd1SS89SKVGon6x2SYWZ6kLBrlL4UW7zZm1xet6+pgZSQn/rsk1tEpkhpgUq2G9Ktf5M8B06H5DL6zDr8rOVWH6kx4c0leOGqSuSggpo/vYBikOZ4eXAEipW8ZvVQwcUOgMaOABDkTfk4kv/uz7LoROGb/q5X+IydkP7vns/ebrlFCDh49Mifhbz86RKoKFwd+hH3fYUv3VqjefHi7hgSJtpo721JbeB1wMNhI3c5Vwg8/UJfhgOE5iGEKC2aCyF+i/5k9tOlsrkTz1kuLcIwYXTJjYEL+34XOcIbXnz97+AzGnfMWjVWueRRlyu3x6e83QmUkppDO5bJleV79AslHN+GCWzA4jWV2M+oi7Fus3It5dPFjTqGu4JhmNwFI3SKs3hzadjwR70CBGaGgnKWHgYy5t3O9dz6mXhTtYq22uKBVZ2B9YUKOcL632kyqi/iDhYpnv3F5ng8QiWjDZE9rnz3iAFAKHwNhoD+X4g7s5rebL5UpMaMo/BxsB2S0tAfiv3Quov6fygtFjlElcTfAqxK+wMz/11z+TpAeEGl45tceL4X8q3Pt+sKgUfwudhYcpIzER
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(136003)(39860400002)(396003)(376002)(1800799009)(186009)(82310400011)(451199024)(36840700001)(46966006)(40470700004)(356005)(81166007)(26005)(16526019)(82740400003)(2616005)(8936002)(8676002)(4326008)(40460700003)(83380400001)(36860700001)(2906002)(36756003)(4744005)(47076005)(426003)(336012)(31696002)(40480700001)(5660300002)(44832011)(86362001)(53546011)(478600001)(31686004)(16576012)(316002)(54906003)(70206006)(70586007)(110136005)(41300700001)(43740500002)(36900700001);
+ SFS:(13230031)(4636009)(376002)(396003)(136003)(346002)(39860400002)(1800799009)(82310400011)(451199024)(186009)(36840700001)(40470700004)(46966006)(40460700003)(47076005)(478600001)(107886003)(31696002)(426003)(16526019)(36860700001)(2616005)(44832011)(336012)(26005)(53546011)(82740400003)(36756003)(81166007)(86362001)(83380400001)(2906002)(40480700001)(8676002)(8936002)(356005)(5660300002)(110136005)(4326008)(31686004)(316002)(16576012)(70206006)(70586007)(41300700001)(43740500002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2023 09:09:59.5172 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a1d2051b-3711-448c-3091-08dbb82708f5
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2023 09:10:27.4220 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e3d54e6c-1a79-412b-e1e7-08dbb827199b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044FA.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044FB.namprd21.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7593
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5833
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,39 +167,176 @@ X-Virus-Status: Clean
 
 
 
-On 9/11/23 16:10, Michal Simek wrote:
-> Hi,
+On 9/12/23 05:30, Venkatesh Yadav Abbarapu wrote:
+> For reference clocks, PM_CLK_GET_PARENT call is not allowed.
+> PM_CLK_GET_PARENT only allowed for MUX clocks. Rename the
+> versal_clock_ref() with versal_clock_get_ref_rate() for better
+> readability. Fix the versal_clock_get_ref_rate function by
+> passing the parent_id, and check whether the parent_id
+> belongs to ref_clk or pl_alt_ref_clk.
+> Also adding the function versal_clock_get_fixed_factor_rate()
+> if the clk_id belongs to the fixed factor clock.
 > 
-> I am sending patches which I found are not sent out yet.
-> These 5 patches are fixing typos or incorrect device description or adding
-> already defined properties.
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   drivers/clk/clk_versal.c | 98 ++++++++++++++++++++++++++--------------
+>   1 file changed, 65 insertions(+), 33 deletions(-)
 > 
-> Thanks,
-> Michal
-> 
-> 
-> Amit Kumar Mahapatra (1):
->    arm64: versal: Add no-wp DT property in OSPI flash node
-> 
-> Michal Simek (1):
->    arm64: zynqmp: Rename xlnx,mio_bank to xlnx,mio-bank for DLC21
-> 
-> Saeed Nowshadi (1):
->    arm64: zynqmp: Fix i2c address for si570_user1 clock
-> 
-> Srinivas Neeli (1):
->    arm64: zynqmp: Add resets property for CAN nodes
-> 
-> Thippeswamy Havalige (1):
->    arm64: zynqmp: Update ECAM size to discover up to 256 buses
-> 
->   arch/arm/dts/versal-mini-ospi.dtsi      | 1 +
->   arch/arm/dts/versal-net-mini-ospi.dtsi  | 1 +
->   arch/arm/dts/zynqmp-dlc21-revA.dts      | 4 ++--
->   arch/arm/dts/zynqmp-e-a2197-00-revA.dts | 7 ++++---
->   arch/arm/dts/zynqmp.dtsi                | 4 +++-
->   5 files changed, 11 insertions(+), 6 deletions(-)
-> 
+> diff --git a/drivers/clk/clk_versal.c b/drivers/clk/clk_versal.c
+> index b3b3333123..2e004beca2 100644
+> --- a/drivers/clk/clk_versal.c
+> +++ b/drivers/clk/clk_versal.c
+> @@ -68,6 +68,13 @@
+>   #define CLOCK_NODE_TYPE_DIV	4
+>   #define CLOCK_NODE_TYPE_GATE	6
+>   
+> +#define PM_CLK_REF_CLK		(0x830c06aU)
+> +#define PM_CLK_PL_ALT_REF_CLK	(0x830c06bU)
+> +#define PM_CLK_MUXED_IRO	(0x830c06cU)
+> +#define PM_CLK_EMIO		(0x830c071U)
+> +
+> +#define TOPOLOGY_TYPE_FIXEDFACTOR	0x3
+> +
+>   enum clk_type {
+>   	CLK_TYPE_OUTPUT,
+>   	CLK_TYPE_EXTERNAL,
+> @@ -365,48 +372,37 @@ static u32 versal_clock_set_div(u32 clk_id, u32 div)
+>   	return div;
+>   }
+>   
+> -static u64 versal_clock_ref(u32 clk_id)
+> +static u64 versal_clock_get_ref_rate(u32 clk_id)
+>   {
+> -	u32 ret_payload[PAYLOAD_ARG_CNT];
+> -	int ref;
+> -
+> -	xilinx_pm_request(PM_CLOCK_GETPARENT, clk_id, 0, 0, 0, ret_payload);
+> -	ref = ret_payload[0];
+> -	if (!(ref & 1))
+> +	if (clk_id == PM_CLK_REF_CLK || clk_id == PM_CLK_MUXED_IRO || clk_id == PM_CLK_EMIO)
+>   		return ref_clk;
+> -	if (ref & 2)
+> +	else if (clk_id == PM_CLK_PL_ALT_REF_CLK)
+>   		return pl_alt_ref_clk;
+> -	return 0;
+> +	else
+> +		return 0;
+>   }
+>   
+> -static u64 versal_clock_get_pll_rate(u32 clk_id)
+> +static int versal_clock_get_fixed_factor_rate(u32 clock_id, u32 parent_id)
+>   {
+> +	struct versal_pm_query_data qdata = {0};
+>   	u32 ret_payload[PAYLOAD_ARG_CNT];
+> -	u32 fbdiv;
+> -	u32 res;
+> -	u32 frac;
+> -	u64 freq;
+> -	u32 parent_rate, parent_id;
+> -	u32 id = clk_id & 0xFFF;
+> +	u32 mult, div;
+> +	u32 parent_rate;
+> +	int ret;
+>   
+> -	xilinx_pm_request(PM_CLOCK_GETSTATE, clk_id, 0, 0, 0, ret_payload);
+> -	res = ret_payload[1];
+> -	if (!res) {
+> -		printf("0%x PLL not enabled\n", clk_id);
+> -		return 0;
+> -	}
+> +	qdata.qid = PM_QID_CLOCK_GET_FIXEDFACTOR_PARAMS;
+> +	qdata.arg1 = clock_id;
+>   
+> -	parent_id = clock[clock[id].parent[0].id].clk_id;
+> -	parent_rate = versal_clock_ref(parent_id);
+> +	ret = versal_pm_query(qdata, ret_payload);
+> +	if (ret)
+> +		return ret;
+>   
+> -	xilinx_pm_request(PM_CLOCK_GETDIVIDER, clk_id, 0, 0, 0, ret_payload);
+> -	fbdiv = ret_payload[1];
+> -	xilinx_pm_request(PM_CLOCK_PLL_GETPARAM, clk_id, 2, 0, 0, ret_payload);
+> -	frac = ret_payload[1];
+> +	mult = ret_payload[1];
+> +	div = ret_payload[2];
+>   
+> -	freq = (fbdiv * parent_rate) >> (1 << frac);
+> +	parent_rate = versal_clock_get_ref_rate(parent_id);
+> +	return parent_rate * mult / div;
+>   
+> -	return freq;
+>   }
+>   
+>   static u32 versal_clock_mux(u32 clk_id)
+> @@ -437,6 +433,37 @@ static u32 versal_clock_get_parentid(u32 clk_id)
+>   	return clock[clock[id].parent[parent_id].id].clk_id;
+>   }
+>   
+> +static u64 versal_clock_get_pll_rate(u32 clk_id)
+> +{
+> +	u32 ret_payload[PAYLOAD_ARG_CNT];
+> +	u32 fbdiv;
+> +	u32 res;
+> +	u32 frac;
+> +	u64 freq;
+> +	u32 parent_rate, parent_id, parent_ref_clk_id;
+> +	u32 id = clk_id & 0xFFF;
+> +
+> +	xilinx_pm_request(PM_CLOCK_GETSTATE, clk_id, 0, 0, 0, ret_payload);
+> +	res = ret_payload[1];
+> +	if (!res) {
+> +		printf("0%x PLL not enabled\n", clk_id);
+> +		return 0;
+> +	}
+> +
+> +	parent_id = clock[clock[id].parent[0].id].clk_id;
+> +	parent_ref_clk_id = versal_clock_get_parentid(parent_id);
+> +	parent_rate = versal_clock_get_ref_rate(parent_ref_clk_id);
+> +
+> +	xilinx_pm_request(PM_CLOCK_GETDIVIDER, clk_id, 0, 0, 0, ret_payload);
+> +	fbdiv = ret_payload[1];
+> +	xilinx_pm_request(PM_CLOCK_PLL_GETPARAM, clk_id, 2, 0, 0, ret_payload);
+> +	frac = ret_payload[1];
+> +
+> +	freq = (fbdiv * parent_rate) >> (1 << frac);
+> +
+> +	return freq;
+> +}
+> +
+>   static u32 versal_clock_gate(u32 clk_id)
+>   {
+>   	u32 id = clk_id & 0xFFF;
+> @@ -479,14 +506,19 @@ static u64 versal_clock_calc(u32 clk_id)
+>   	u32 parent_id;
+>   	u64 clk_rate;
+>   	u32 div;
+> +	struct clock_topology topology;
+>   
+>   	if (versal_clock_pll(clk_id, &clk_rate))
+>   		return clk_rate;
+>   
+>   	parent_id = versal_clock_get_parentid(clk_id);
+>   	if (((parent_id >> NODE_SUBCLASS_SHIFT) &
+> -	     NODE_CLASS_MASK) == NODE_SUBCLASS_CLOCK_REF)
+> -		return versal_clock_ref(clk_id);
+> +	     NODE_CLASS_MASK) == NODE_SUBCLASS_CLOCK_REF) {
+> +		topology = clock[clk_id & 0x3FF].node[0];
+> +		if (topology.type == TOPOLOGY_TYPE_FIXEDFACTOR)
+> +			return versal_clock_get_fixed_factor_rate(clk_id, parent_id);
+> +		return versal_clock_get_ref_rate(parent_id);
+> +	}
+>   
+>   	if (!parent_id)
+>   		return 0;
+> @@ -505,7 +537,7 @@ static int versal_clock_get_rate(u32 clk_id, u64 *clk_rate)
+>   {
+>   	if (((clk_id >>  NODE_SUBCLASS_SHIFT) &
+>   	     NODE_CLASS_MASK) == NODE_SUBCLASS_CLOCK_REF)
+> -		*clk_rate = versal_clock_ref(clk_id);
+> +		*clk_rate = versal_clock_get_ref_rate(clk_id);
+>   
+>   	if (versal_clock_pll(clk_id, clk_rate))
+>   		return 0;
 
 Applied.
 M
