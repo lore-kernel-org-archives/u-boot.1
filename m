@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58489C46CA1
-	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 15:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBCA7CD37B0
+	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 15:37:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6CE786A21;
-	Mon, 18 Sep 2023 17:04:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 002E286A1D;
+	Mon, 18 Sep 2023 17:37:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mTIpS1UC";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZirbcBl2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF79886A23; Mon, 18 Sep 2023 17:04:47 +0200 (CEST)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5458E869C4; Mon, 18 Sep 2023 17:37:06 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0B8A86A1D
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 17:04:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 384A586A27
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 17:37:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-59bfb0825efso39572817b3.3
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 08:04:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695049484; x=1695654284; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pLXcMaF7GZlR1YNtdnPTQu1v3Dh80aRgxVG8L4xqfWg=;
- b=mTIpS1UC27oPtX56DSoIoqpyz4Ul9Et4sDBrreWLeIchh0hDZGj0eo4eN/Oif7dsbJ
- Lrx41WpeFqlL71vy0tyQhijp8K8tl3s2edQ7DSchLwV8UT+KowI4QO49fg3ioiaN9UE7
- MP3BPt0a+MFR6Kg1F19HK70AGm4nM+hCutRMk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695049484; x=1695654284;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pLXcMaF7GZlR1YNtdnPTQu1v3Dh80aRgxVG8L4xqfWg=;
- b=Nu+cp9w7ddJp4Z84mjISWhy2U3N9W7yWDM8MZmV+NPziBEeVN+hfbFmLBH6yTP6TZa
- 12G/Or/UirmqTwA6K3qH3zH4gnt1JavD91XWcZpcrlzNAGZ6CB6z/K8XWZ3pZA7PHdwA
- JFnPO4rquXE/17zb7R+AoS0R+TNy5Uu9JIbeel/Tgf4ggALbZKhwuUe1Vh3pQuF1qaUq
- SgfGDgXM48sC7W+yvAM1J+uyM5TX8FaUmguFXF3SNqiOf4OX2gIad9wTySrG0Ng4/OG+
- nF7sc2x2oTN6/XhrTQ+F4AQCV97ExRYBl0dUPijgoVusnY75Oow3g/GlFSpMGciSZQr3
- skhQ==
-X-Gm-Message-State: AOJu0YwH/XbkVGOtSfTsE4FEuaUm3rB24ltEDs/J4ItwzfnTWT9sAnBf
- DBqiiTXRMi78jEwAHCOvVYy7ZEdbobhfkNLYMmriBA==
-X-Google-Smtp-Source: AGHT+IF+koM+pNzDrMkwBlBrrQLGBv4SnO5aFV3nnBXA+w1GHd5Nu7xHEKTUm23gFIJTrIqSAzstoA==
-X-Received: by 2002:a81:6cc4:0:b0:59b:eb5b:fbbb with SMTP id
- h187-20020a816cc4000000b0059beb5bfbbbmr10275882ywc.12.1695049484590; 
- Mon, 18 Sep 2023 08:04:44 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-fccb-cc62-ada8-13e0.res6.spectrum.com.
- [2603:6081:7b00:6400:fccb:cc62:ada8:13e0])
- by smtp.gmail.com with ESMTPSA id
- x11-20020a817c0b000000b0054bfc94a10dsm2607357ywc.47.2023.09.18.08.04.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 18 Sep 2023 08:04:44 -0700 (PDT)
-Date: Mon, 18 Sep 2023 11:04:42 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Randolph <randolph@andestech.com>
-Cc: u-boot@lists.denx.de, randolph.sklin@gmail.com, dylan@andestech.com,
- tim609@andestech.com
-Subject: Re: [PATCH V2 1/3] configs: andes: add vender prefix for target name
-Message-ID: <20230918150442.GV305624@bill-the-cat>
-References: <20230918121136.2295900-1-randolph@andestech.com>
- <20230918121136.2295900-2-randolph@andestech.com>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=76259f6df1=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 38IDQdmU009703; Mon, 18 Sep 2023 17:37:01 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=2GwW0W2p/CbuBpgMvTezCXTabVr9Dt+HEAgV/OZv9og=; b=Zi
+ rbcBl237awe1KZqDmeJRDWBpL0BkYPEr+LWMFfWxtSNtxpw17AcGi/y9rv1QQyz8
+ VyNJT7hVmEgOos1KunmzHbkhIl/ZStCn2+JbRnep7HYwl5CRvt6EW+fHYylph4M+
+ bNecrG++JQs54tjj+6VbbcZ/0Z/iusmrfsnc1Wymz4xw48oF/4ptnRv8w8+rkMnj
+ J9F/Km0k9h2766PavaYy0JuVy8o6R1D6+SRnPlRrP2nEN350kxYDKFIXJXHeC8Jx
+ EF9Vakh6sdeY5BP1OujfuFY9zVrjTJwo94FOiKrJYNsQAjzC8Oz9lKR6cPnejB45
+ VZJr8Kbk1dT2brxZvPYA==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t53pwpqyg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 18 Sep 2023 17:37:00 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0146D10005B;
+ Mon, 18 Sep 2023 17:36:58 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DEBB026A9B3;
+ Mon, 18 Sep 2023 17:36:58 +0200 (CEST)
+Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 18 Sep
+ 2023 17:36:58 +0200
+Message-ID: <6014678e-2525-97d7-6073-7f7a6fa16f58@foss.st.com>
+Date: Mon, 18 Sep 2023 17:36:57 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Der17iYIQ6AcxtX5"
-Content-Disposition: inline
-In-Reply-To: <20230918121136.2295900-2-randolph@andestech.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v2 1/7] rng: stm32: rename STM32 RNG driver
+To: Gatien Chevallier <gatien.chevallier@foss.st.com>, <u-boot@lists.denx.de>
+CC: Patrice Chotard <patrice.chotard@foss.st.com>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ <uboot-stm32@st-md-mailman.stormreply.com>, Grzegorz Szymaszek
+ <gszymaszek@short.pl>
+References: <20230911153724.799535-1-gatien.chevallier@foss.st.com>
+ <20230911153724.799535-2-gatien.chevallier@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20230911153724.799535-2-gatien.chevallier@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.601,FMLib:17.11.176.26
+ definitions=2023-09-18_08,2023-09-18_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,39 +93,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---Der17iYIQ6AcxtX5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 9/11/23 17:37, Gatien Chevallier wrote:
+> Rename the RNG driver as it is usable by other STM32 platforms
+> than the STM32MP1x ones. Rename CONFIG_RNG_STM32MP1 to
+> CONFIG_RNG_STM32
+>
+> Signed-off-by: Gatien Chevallier <gatien.chevallier@foss.st.com>
+> Reviewed-by: Grzegorz Szymaszek <gszymaszek@short.pl>
+> ---
+>
+> Changes in V2:
+> 	- Added ARCH_STM32 in the "depends on" section of the
+> 	  RNG_STM32 configuration field.
+> 	- Added Grzegorz's tag and discarded Patrick's and
+> 	  Heinrich's as there's a modification
+>
+>   MAINTAINERS                                 | 2 +-
+>   configs/stm32mp15_basic_defconfig           | 2 +-
+>   configs/stm32mp15_defconfig                 | 2 +-
+>   configs/stm32mp15_trusted_defconfig         | 2 +-
+>   drivers/rng/Kconfig                         | 8 ++++----
+>   drivers/rng/Makefile                        | 2 +-
+>   drivers/rng/{stm32mp1_rng.c => stm32_rng.c} | 0
+>   7 files changed, 9 insertions(+), 9 deletions(-)
+>   rename drivers/rng/{stm32mp1_rng.c => stm32_rng.c} (100%)
+>
 
-On Mon, Sep 18, 2023 at 08:11:34PM +0800, Randolph wrote:
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-> Modify "CONFIG_TARGET_AE350" to "CONFIG_TARGET_ANDES_AE350"
->=20
-> Signed-off-by: Randolph <randolph@andestech.com>
+Thanks
+Patrick
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---Der17iYIQ6AcxtX5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUIZwoACgkQFHw5/5Y0
-tyz5kQwAuZ8ExzmVc2Ja6FMKXvV5Thzj/6G0XKWUOQOwWjmiehMiXzXbdWpmv/xA
-oZ0XfeMBhyym9RjJ+qFH/Oggb5iVGG/ex6wxAu/tqz0CRJwix1SwqsqeAT1tzPzI
-4FQ7NjIAPGVetQGl5Evi2HBVJwAGlauf2uvBn9u3DtcbywL6Jynu5NJkYKRSsNvU
-IaNsbCfmHanJdfjE9UVLSwx9j155PQlSJTMhZl9ufnkQBvL8F7tU8e7lnAdzt7Ru
-aOgmJz0IgFMEv7t0QqU9B1FylK4BMb6RFky4G5QqdQyy42vnQl8zknfUNvN9QSMZ
-mRp6eleVzu0Lx1h477792wW7g0lWZHis/l51p+tTi5LewH9tKfKfhzqqc204bnA/
-Hym3M8wzO+NUHFv3jXZ6ye71OHJBCxeoPN1w4uM2p61K4xQEDG0LnY/yu+MZi/sp
-UaZXAz5fxV1yqJx1ruLBgVThi5NzvOpfnrDHE7dku5WHbH3EV2y1FPhkDuDoVepK
-nTJMqu3G
-=Tf1l
------END PGP SIGNATURE-----
-
---Der17iYIQ6AcxtX5--
