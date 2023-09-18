@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1736CD37B0
-	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 12:12:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6250C46CA1
+	for <u-boot@archiver.kernel.org>; Mon, 18 Sep 2023 12:13:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2ED7A868C0;
-	Mon, 18 Sep 2023 14:12:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 868018695F;
+	Mon, 18 Sep 2023 14:12:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B08388692F; Mon, 18 Sep 2023 14:12:40 +0200 (CEST)
+ id E94EE86967; Mon, 18 Sep 2023 14:12:45 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68A67868C0
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 14:12:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6F258690B
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 14:12:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 38ICCVr6050561;
- Mon, 18 Sep 2023 20:12:31 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 38ICCaik050577;
+ Mon, 18 Sep 2023 20:12:36 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Mon, 18 Sep 2023 20:12:27 +0800
+ Mon, 18 Sep 2023 20:12:32 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
  Randolph <randolph@andestech.com>
-Subject: [PATCH V2 1/3] configs: andes: add vender prefix for target name
-Date: Mon, 18 Sep 2023 20:11:34 +0800
-Message-ID: <20230918121136.2295900-2-randolph@andestech.com>
+Subject: [PATCH V2 2/3] configs: andes: rearrange SPL mode memory layout
+Date: Mon, 18 Sep 2023 20:11:35 +0800
+Message-ID: <20230918121136.2295900-3-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230918121136.2295900-1-randolph@andestech.com>
 References: <20230918121136.2295900-1-randolph@andestech.com>
@@ -45,7 +45,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 38ICCVr6050561
+X-MAIL: Atcsqr.andestech.com 38ICCaik050577
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,164 +62,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modify "CONFIG_TARGET_AE350" to "CONFIG_TARGET_ANDES_AE350"
+Unify the memory layout for u-boot SPL mode
+Add "CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS"
 
 Signed-off-by: Randolph <randolph@andestech.com>
 ---
- arch/riscv/Kconfig                   | 4 ++--
- arch/riscv/dts/Makefile              | 2 +-
- board/AndesTech/ae350/Kconfig        | 2 +-
- configs/ae350_rv32_defconfig         | 2 +-
- configs/ae350_rv32_spl_defconfig     | 2 +-
- configs/ae350_rv32_spl_xip_defconfig | 2 +-
- configs/ae350_rv32_xip_defconfig     | 2 +-
- configs/ae350_rv64_defconfig         | 2 +-
- configs/ae350_rv64_spl_defconfig     | 2 +-
- configs/ae350_rv64_spl_xip_defconfig | 2 +-
- configs/ae350_rv64_xip_defconfig     | 2 +-
- 11 files changed, 12 insertions(+), 12 deletions(-)
+ configs/ae350_rv32_spl_defconfig     | 7 ++++---
+ configs/ae350_rv32_spl_xip_defconfig | 5 +++--
+ configs/ae350_rv64_spl_defconfig     | 7 ++++---
+ configs/ae350_rv64_spl_xip_defconfig | 5 +++--
+ 4 files changed, 14 insertions(+), 10 deletions(-)
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index 6771d8d919..aff1f33665 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -8,8 +8,8 @@ choice
- 	prompt "Target select"
- 	optional
- 
--config TARGET_AE350
--	bool "Support ae350"
-+config TARGET_ANDES_AE350
-+	bool "Support Andes ae350"
- 
- config TARGET_MICROCHIP_ICICLE
- 	bool "Support Microchip PolarFire-SoC Icicle Board"
-diff --git a/arch/riscv/dts/Makefile b/arch/riscv/dts/Makefile
-index f1525cb668..be6c8a4227 100644
---- a/arch/riscv/dts/Makefile
-+++ b/arch/riscv/dts/Makefile
-@@ -1,6 +1,6 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
--dtb-$(CONFIG_TARGET_AE350) += ae350_32.dtb ae350_64.dtb
-+dtb-$(CONFIG_TARGET_ANDES_AE350) += ae350_32.dtb ae350_64.dtb
- dtb-$(CONFIG_TARGET_MICROCHIP_ICICLE) += mpfs-icicle-kit.dtb
- dtb-$(CONFIG_TARGET_QEMU_VIRT) += qemu-virt32.dtb qemu-virt64.dtb
- dtb-$(CONFIG_TARGET_OPENPITON_RISCV64) += openpiton-riscv64.dtb
-diff --git a/board/AndesTech/ae350/Kconfig b/board/AndesTech/ae350/Kconfig
-index 75815bf99a..a85e7d6351 100644
---- a/board/AndesTech/ae350/Kconfig
-+++ b/board/AndesTech/ae350/Kconfig
-@@ -1,4 +1,4 @@
--if TARGET_AE350
-+if TARGET_ANDES_AE350
- 
- config SYS_CPU
- 	default "andesv5"
-diff --git a/configs/ae350_rv32_defconfig b/configs/ae350_rv32_defconfig
-index 06a683d986..2fbb87a9b3 100644
---- a/configs/ae350_rv32_defconfig
-+++ b/configs/ae350_rv32_defconfig
-@@ -9,7 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
- CONFIG_SYS_PROMPT="RISC-V # "
- CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SYS_LOAD_ADDR=0x100000
--CONFIG_TARGET_AE350=y
-+CONFIG_TARGET_ANDES_AE350=y
- CONFIG_FIT=y
- CONFIG_SYS_MONITOR_BASE=0x88000000
- CONFIG_DISTRO_DEFAULTS=y
 diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
-index 75e55ba724..4adc1134ba 100644
+index 4adc1134ba..b28a0a84fb 100644
 --- a/configs/ae350_rv32_spl_defconfig
 +++ b/configs/ae350_rv32_spl_defconfig
-@@ -11,7 +11,7 @@ CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x100000
--CONFIG_TARGET_AE350=y
-+CONFIG_TARGET_ANDES_AE350=y
- CONFIG_RISCV_SMODE=y
- # CONFIG_AVAILABLE_HARTS is not set
- CONFIG_FIT=y
-diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
-index c2221b891e..e19eb546a6 100644
---- a/configs/ae350_rv32_spl_xip_defconfig
-+++ b/configs/ae350_rv32_spl_xip_defconfig
-@@ -12,7 +12,7 @@ CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x100000
--CONFIG_TARGET_AE350=y
-+CONFIG_TARGET_ANDES_AE350=y
- CONFIG_RISCV_SMODE=y
- CONFIG_SPL_XIP=y
- CONFIG_FIT=y
-diff --git a/configs/ae350_rv32_xip_defconfig b/configs/ae350_rv32_xip_defconfig
-index 6d19400c2d..f1c1e5bc00 100644
---- a/configs/ae350_rv32_xip_defconfig
-+++ b/configs/ae350_rv32_xip_defconfig
-@@ -9,7 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
+@@ -8,14 +8,14 @@ CONFIG_ENV_SECT_SIZE=0x1000
+ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
  CONFIG_SYS_PROMPT="RISC-V # "
  CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SYS_LOAD_ADDR=0x100000
--CONFIG_TARGET_AE350=y
-+CONFIG_TARGET_ANDES_AE350=y
- CONFIG_XIP=y
- CONFIG_FIT=y
- CONFIG_SYS_MONITOR_BASE=0x88000000
-diff --git a/configs/ae350_rv64_defconfig b/configs/ae350_rv64_defconfig
-index 0d7f0a552e..3f30842a8e 100644
---- a/configs/ae350_rv64_defconfig
-+++ b/configs/ae350_rv64_defconfig
-@@ -8,7 +8,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
- CONFIG_SYS_PROMPT="RISC-V # "
- CONFIG_SYS_LOAD_ADDR=0x100000
--CONFIG_TARGET_AE350=y
-+CONFIG_TARGET_ANDES_AE350=y
- CONFIG_ARCH_RV64I=y
- CONFIG_FIT=y
- CONFIG_SYS_MONITOR_BASE=0x88000000
-diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
-index 6a72b5a047..629c5bab77 100644
---- a/configs/ae350_rv64_spl_defconfig
-+++ b/configs/ae350_rv64_spl_defconfig
-@@ -10,7 +10,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
+-CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
  CONFIG_SPL=y
  CONFIG_SYS_LOAD_ADDR=0x100000
--CONFIG_TARGET_AE350=y
-+CONFIG_TARGET_ANDES_AE350=y
- CONFIG_ARCH_RV64I=y
+ CONFIG_TARGET_ANDES_AE350=y
  CONFIG_RISCV_SMODE=y
  # CONFIG_AVAILABLE_HARTS is not set
-diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
-index 43581c79b1..4557e05445 100644
---- a/configs/ae350_rv64_spl_xip_defconfig
-+++ b/configs/ae350_rv64_spl_xip_defconfig
-@@ -11,7 +11,7 @@ CONFIG_SYS_PROMPT="RISC-V # "
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
+ CONFIG_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0x00200000
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
+ CONFIG_SYS_MONITOR_BASE=0x88000000
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=3
+@@ -23,9 +23,10 @@ CONFIG_DISPLAY_CPUINFO=y
+ CONFIG_DISPLAY_BOARDINFO=y
+ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_SPL_MAX_SIZE=0x100000
+-CONFIG_SPL_BSS_START_ADDR=0x4000000
++CONFIG_SPL_BSS_START_ADDR=0x400000
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_CACHE=y
++CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
+index e19eb546a6..5e8f1b3631 100644
+--- a/configs/ae350_rv32_spl_xip_defconfig
++++ b/configs/ae350_rv32_spl_xip_defconfig
+@@ -9,7 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
+ CONFIG_SPL_TEXT_BASE=0x80000000
+ CONFIG_SYS_PROMPT="RISC-V # "
+ CONFIG_SYS_MONITOR_LEN=786432
+-CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
  CONFIG_SPL=y
  CONFIG_SYS_LOAD_ADDR=0x100000
--CONFIG_TARGET_AE350=y
-+CONFIG_TARGET_ANDES_AE350=y
- CONFIG_ARCH_RV64I=y
- CONFIG_RISCV_SMODE=y
- CONFIG_SPL_XIP=y
-diff --git a/configs/ae350_rv64_xip_defconfig b/configs/ae350_rv64_xip_defconfig
-index 02d7694489..cabbf75f84 100644
---- a/configs/ae350_rv64_xip_defconfig
-+++ b/configs/ae350_rv64_xip_defconfig
-@@ -8,7 +8,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
+ CONFIG_TARGET_ANDES_AE350=y
+@@ -24,9 +24,10 @@ CONFIG_DISPLAY_CPUINFO=y
+ CONFIG_DISPLAY_BOARDINFO=y
+ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_SPL_MAX_SIZE=0x100000
+-CONFIG_SPL_BSS_START_ADDR=0x4000000
++CONFIG_SPL_BSS_START_ADDR=0x400000
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_CACHE=y
++CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
+index 629c5bab77..1592ec811a 100644
+--- a/configs/ae350_rv64_spl_defconfig
++++ b/configs/ae350_rv64_spl_defconfig
+@@ -7,7 +7,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
+ CONFIG_ENV_SECT_SIZE=0x1000
  CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
  CONFIG_SYS_PROMPT="RISC-V # "
+-CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
+ CONFIG_SPL=y
  CONFIG_SYS_LOAD_ADDR=0x100000
--CONFIG_TARGET_AE350=y
-+CONFIG_TARGET_ANDES_AE350=y
- CONFIG_ARCH_RV64I=y
- CONFIG_XIP=y
+ CONFIG_TARGET_ANDES_AE350=y
+@@ -15,7 +15,7 @@ CONFIG_ARCH_RV64I=y
+ CONFIG_RISCV_SMODE=y
+ # CONFIG_AVAILABLE_HARTS is not set
  CONFIG_FIT=y
+-CONFIG_SPL_LOAD_FIT_ADDRESS=0x00200000
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
+ CONFIG_SYS_MONITOR_BASE=0x88000000
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=3
+@@ -23,9 +23,10 @@ CONFIG_DISPLAY_CPUINFO=y
+ CONFIG_DISPLAY_BOARDINFO=y
+ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_SPL_MAX_SIZE=0x100000
+-CONFIG_SPL_BSS_START_ADDR=0x4000000
++CONFIG_SPL_BSS_START_ADDR=0x400000
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_CACHE=y
++CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
+diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
+index 4557e05445..97f961b6c9 100644
+--- a/configs/ae350_rv64_spl_xip_defconfig
++++ b/configs/ae350_rv64_spl_xip_defconfig
+@@ -8,7 +8,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
+ CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
+ CONFIG_SPL_TEXT_BASE=0x80000000
+ CONFIG_SYS_PROMPT="RISC-V # "
+-CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
+ CONFIG_SPL=y
+ CONFIG_SYS_LOAD_ADDR=0x100000
+ CONFIG_TARGET_ANDES_AE350=y
+@@ -24,9 +24,10 @@ CONFIG_DISPLAY_CPUINFO=y
+ CONFIG_DISPLAY_BOARDINFO=y
+ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_SPL_MAX_SIZE=0x100000
+-CONFIG_SPL_BSS_START_ADDR=0x4000000
++CONFIG_SPL_BSS_START_ADDR=0x400000
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_CACHE=y
++CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_SYS_BOOTM_LEN=0x4000000
+ CONFIG_CMD_IMLS=y
 -- 
 2.34.1
 
