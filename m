@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253CBCD3445
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:20:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DD49CD3447
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:20:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2F0786A84;
-	Tue, 19 Sep 2023 09:19:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 023FD86AA7;
+	Tue, 19 Sep 2023 09:19:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Je36p6l0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cBkToTCZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3054B86A81; Tue, 19 Sep 2023 09:19:52 +0200 (CEST)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 373CC86A21; Tue, 19 Sep 2023 09:19:56 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E01F86A9F
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6705086A21
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-98377c5d53eso680034366b.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:49 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5310aec4121so2423312a12.2
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695107989; x=1695712789; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695107994; x=1695712794; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q4Il5nIaNGerDUL7WqdAWOQP7Tqp9i+pVnR4YoPywus=;
- b=Je36p6l0sf0gG+TfaWN6Cy6896dK81rh94y736Kn3n2+zRcgLaHxuudFTJJW9YkFyy
- AEIwRqvp4+Ar89ownRisdF99kK9lw5zPYl/a37eAfHbtn6DDnvK0OFQ626VmniLHpPyT
- V4ulyA/aDbndaGz+ZzTKhunRSdC64aT/dyWAdThWdV/MFBdLq0Oq8CDqXRJxl6ViADZX
- 5C1R3gc4HoumPjLCLL7tUIoypc4fvXIoYUujS4f4BapByyvm5ySLGsSltsOpFdM9lmhG
- bnvksO/HmLSN0DS5mwLJF3ZUVPuUEgU4qrxs9+6DfIBuVcjekP/oBRi3DabuGDzyP9SA
- 20xA==
+ bh=9uJGLRjNGP/0VTVFp0r6+uB0nCbqxTKEEAVsEFSYmyA=;
+ b=cBkToTCZnxcKi6kVQ49ti+XmETmzeh1QRT69V+sXxVpmoxtdzSnqr7mQgWzQ3qoqRK
+ LTocSE25YE3wT3gD5HNcg+GqJo7B/Yt4YuXktcM20PlBLZzlkbE2vn2+o5IbVbeXcPRO
+ uVBjxljzgNhiofUOirBlsquG6fm94MWDO3hCo7JLuz9qTKqA1NsiE8nkU6xe+VNUW2Av
+ OZh4swEmFH9+wOeIPv4lf/nctDzyzmGgeuOvM3FEaYPo8cIUdUTPLkyn4GAy7YDtgSfn
+ X48fV1OMnUdhYRezvycAGCUaPQ8FNVudipqC1wQLysslRjyYrF0Uj/OTk/k8Ph6vcdnK
+ sN4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695107989; x=1695712789;
+ d=1e100.net; s=20230601; t=1695107994; x=1695712794;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q4Il5nIaNGerDUL7WqdAWOQP7Tqp9i+pVnR4YoPywus=;
- b=vevse8PVup0Pqzv6J76jqVeT+mxSCGh3cgP0CgwmPeWZUqOmvCCxURWFkKQXSknTv3
- WkZvo7JrYf9RT5uOPIw0KSlJEfDlctmE+INDYmLe9Pnh0sDLBN0YNRjtvxu9xPOInYlR
- X9IBbyNbsTAa8ysuPPQYNv5K51YRu9GBR5dj2QtBvqZHWJF6nMC4MwoRbbAw68VjjCEb
- zVgzmcIlpAvUYom2lQy1xg/CukVcZ845XyLZyvCc+A6F/rUBidk1dOYFJYYXP80amQ2v
- tWM8bE5NCA2qT4VwthHYMmfUwzIITK7JlyPIVcMyI3TWKzixrcgtJcwJ9t8NIqb92jsH
- +6zQ==
-X-Gm-Message-State: AOJu0YxD1WSoc+MshIqoicC6cB1tyIMb6zBpa5bcfhQ9qyXNkZXljAy2
- wfLALJlky3ly6fuzBnzqlJJlp+hpgtQuRptfa3Y=
-X-Google-Smtp-Source: AGHT+IGYCQG7Uq1jQ18QSeZjMO3iOkmfnYx46Au6amuBWMMhjzEAhztOyvKRFeQgo0T0uhLwD3AVDFZtI5ODiNyF9go=
-X-Received: by 2002:a17:906:31c7:b0:9ad:805d:f123 with SMTP id
- f7-20020a17090631c700b009ad805df123mr10004814ejf.18.1695107988820; Tue, 19
- Sep 2023 00:19:48 -0700 (PDT)
+ bh=9uJGLRjNGP/0VTVFp0r6+uB0nCbqxTKEEAVsEFSYmyA=;
+ b=qyqiHQUbJq33UUvpqkjIYijeaP9E80bnpn6iT9lGnWM/ll+2H7zDC75j7XJ/pe2V5E
+ ZYyHbINcA4NcOsAjRdYzgNt0bEkHXv5j2Aj8Gb+ZsOOypedra+eK1JWLH8kkr/8ulu39
+ YDJ1C1HZnqr3xRRYrE6T4s0RmEB2pMMWshQgn8+7TBP586C4rChjv2YHUUmRXW2K78eE
+ JDRaI0U1CfhC9nXfib7x8JN6kidikvsgWVrKdBNji/7bYd8IN84fMOwnQWruuhQIUyW7
+ 43sjn7+sisNBrrmZ5xI+Ew7TPFzfkWI3Bfc1noKfTeFtcg17bg5GoXfobVuAC68yFjyR
+ 4sFA==
+X-Gm-Message-State: AOJu0YxPERTAjJeZnyHeDWXqlXahuZmnmM5zRuJ7Ub1UXhFzDyAsYUqY
+ xNt2BpFvsU0HaQURFZ+ahUjBu7qEbn7GAUKoFZQ=
+X-Google-Smtp-Source: AGHT+IGbo/zcosFtstziOwvTXF4Z+xTN77ioGiIV7CqK4kN5rxJpcXzwcvohcifJUkzXmovKzLBko4QKSKORK/38VE4=
+X-Received: by 2002:a05:6402:644:b0:523:aef9:3b7b with SMTP id
+ u4-20020a056402064400b00523aef93b7bmr9849477edx.4.1695107993978; Tue, 19 Sep
+ 2023 00:19:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-8-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-8-sjg@chromium.org>
+ <20230823211059.1235147-9-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-9-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:19:36 +0800
-Message-ID: <CAEUhbmVLr+B7sU7MQjKjgbzNaB6XGB84p0RuPhKcHSDVytPQ-A@mail.gmail.com>
-Subject: Re: [PATCH v4 07/20] x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
+Date: Tue, 19 Sep 2023 15:19:38 +0800
+Message-ID: <CAEUhbmXe2_DN6ZEv_DwSuWq_inXXNtpHvkiyWkfnekFqWOkumA@mail.gmail.com>
+Subject: Re: [PATCH v4 08/20] x86: coreboot: Drop USB init on startup
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -93,27 +93,41 @@ Hi Simon,
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> The debug UART on modern machines uses a 32-bit wide transfer. Without
-> this, setting debug output causes a hang or no output. It is not obvious
-> (when enabling CONFIG_DEBUG_UART) that this is needed.
+> This is very annoying as it is quite slow on many machines. Also, U-Boot
+> has an existing 'preboot' mechanism to enable this feature if desired.
 >
-> Enable 32-bit access to avoid this trap.
+> Drop this code so that it is possible to choose whether to init USB or
+> not.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
 > (no changes since v1)
 >
->  configs/coreboot64_defconfig | 1 +
->  configs/coreboot_defconfig   | 1 +
->  2 files changed, 2 insertions(+)
+>  arch/x86/cpu/coreboot/coreboot.c | 4 ----
+>  1 file changed, 4 deletions(-)
 >
+> diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/cor=
+eboot.c
+> index c2ceaa9a56c..567f1ab116c 100644
+> --- a/arch/x86/cpu/coreboot/coreboot.c
+> +++ b/arch/x86/cpu/coreboot/coreboot.c
+> @@ -86,10 +86,6 @@ static int last_stage_init(void)
+>         if (IS_ENABLED(CONFIG_SPL_BUILD))
+>                 return 0;
+>
+> -       /* start usb so that usb keyboard can be used as input device */
+> -       if (IS_ENABLED(CONFIG_USB_KEYBOARD))
+> -               usb_init();
 
-Can we use CONFIG_NS16550_DYNAMIC?
+Dropping this causes USB keyboards to fail to be usable as the U-Boot
+input device.
 
-Hardcode CONFIG_SYS_NS16550_MEM32 in the defconfig just works for one
-configuration like yours, but it fails on some other configurations,
-e.g.: IO port based ns16550.
+> -
+>         board_final_init();
+>
+>         return 0;
+> --
 
 Regards,
 Bin
