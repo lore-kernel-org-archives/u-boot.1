@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85468CD54A7
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 08:20:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B37CCD54AA
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 08:27:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1A4386A09;
-	Tue, 19 Sep 2023 10:20:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9878886AA4;
+	Tue, 19 Sep 2023 10:27:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MzKv+itw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FeywP+Go";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 152D08669C; Tue, 19 Sep 2023 10:20:30 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 23C9686ACA; Tue, 19 Sep 2023 10:27:06 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46D5986AA4
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 10:20:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52AEB86A49
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 10:27:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-9ae22bf33a0so194912366b.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 01:20:28 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5315b70c50dso1569525a12.2
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 01:27:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695111628; x=1695716428; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695112024; x=1695716824; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n6OFoH8RPJ/kDzhjJhFtO1PxhvDqxbWaeE9eDzrdBsU=;
- b=MzKv+itwgpfRweAbIye6MyFdSeJ4xFs+kNmwBHDAxZ7eI/EF1kh6jLdcDJHKxOkFkZ
- Dt3DkU0zVxPrLQOy+fjZqqKulj8pChVVFUzQULviDUY1KSr+9ldxrRInDaUyEElpxe53
- SwsmsMavSYB5G/+bAO6wqWHnS+k6BM508XS8Tq8N3Hcwv+etNQ6NejukJjLIPgUpprqr
- 0b3cIXtN7VxCe3aXvjjAkt3tZ3y795NvIxcnFPb6n8MOx8lKbjw3tmAgYj9Wkkb12/4l
- A6UVLNLY89dzbzUhOQ7Ijv1wlrFwyQ03yTc7cz4pUHsR3EQ4hpDcAhueUUHJvEYlsjoL
- WWSw==
+ bh=oD5gr2aq/1FhIatHgRym0dyYA0nkSf1m++k2HvnMy8Y=;
+ b=FeywP+GoRR+USmyuuakHlV1k9hFX/51+ZiEl/WYAJJyrXGOZnXhZ/n5vssC1Ejkl8G
+ evpHBFtEZGfjbLWNNI18RkKn4S8Zqblyeg5fnvAeBRWwK2D1EtrdCw++EbeubPZGGVG7
+ ViiRqLpsGNuexcnk4Qjy/nBjMldvGo7x375w6MCjZf+9J88J/YApFAHFp+aabyNrqypN
+ uNjiSeLw9QVqKA1G6D6q+oOFnt2vdmgRNku3EIU86+3rCMBTQIp0JmneR8qdvMRiQi7l
+ jUTLJBB1jUgn3TsZH004sLxzevqQSZFOqxMsMsFMjnEYMwhafggTZYiJlwPNL/TYA+jH
+ TM1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695111628; x=1695716428;
+ d=1e100.net; s=20230601; t=1695112024; x=1695716824;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n6OFoH8RPJ/kDzhjJhFtO1PxhvDqxbWaeE9eDzrdBsU=;
- b=NSfNvTWhE0F+D9rjNXJr5uPkgQ49VL39za58CGuyZI6O3FPuWHF8J0VCW2C/x5MjZ+
- t4jEjSlOp7vn2qFFvAKCioCLHC+FnVwHwOke9qv7f76C9MFLUgzKdtkZlG4wPedoUfbe
- N0QEPv5UxSmTFem6tylAEE7JrOKGOM8C0qP/jkKeG+5QimsmJdiXRYzY13+hiKGszWK1
- LwAg9HYzASmDoaaqHoFQJFPunNT7ab5Zs6ze0BAWwEuzltR/dAPKxycPVCzAkBN+ynWD
- 3IQVG8L/U+i//RGEvzbFONi32WYgD188Yjl7fzgS6liUakG2DQ0SKg7Ww9MmLt/B3UIU
- 26pg==
-X-Gm-Message-State: AOJu0Yyvbi+Y0Jm5kqH8mJfpcMt566yW3D5Plbby9wMIrPiA3pH6Msm/
- p4OMGTVDyF8tp+M1HdTsJbaNOjsz0+yOMKRpHQs=
-X-Google-Smtp-Source: AGHT+IGzaoeJwmEAiWFiq2MDtW7Q6JoryFeVQHDVETXKl1exLXCkRyC8Qa3btdLUbybNawfzfdhrTsowGqXbez/iXb8=
-X-Received: by 2002:a17:906:8a68:b0:9a2:26e4:a5e2 with SMTP id
- hy8-20020a1709068a6800b009a226e4a5e2mr2615040ejc.25.1695111627758; Tue, 19
- Sep 2023 01:20:27 -0700 (PDT)
+ bh=oD5gr2aq/1FhIatHgRym0dyYA0nkSf1m++k2HvnMy8Y=;
+ b=coPqujD/QK8vddz5VnZvfAf2datrStCHa8/wDR6XaCRqFpdPj4KPn/fJrOyg9dPClB
+ Nk5XoDIPz99iYHUJKR1lM60wpTQivStDsysyZpq3qjCQ+FKrW09tany4qN2yVCMEMyOR
+ 5t008LqwiLblWDnXPAMV9OchHsIjsYMP7+KIKnnRrjjKdCRncjNTJu3Cmz91pGt9ROJq
+ wmx2+0r+PeruJDelOX1I35Rig/Hs/Mhg2Xwwi57UgZ+eI2J39cGluGvB0MRSaxSA2apF
+ 0Ek5z5nPoVMmzaAnZe/nYUj365uc97ZZiRUlsZWpivqngejRO4llMA4CBfszbmMwGiyt
+ c7VQ==
+X-Gm-Message-State: AOJu0YymwHPLbBkmmTKH9EdHEd6bK2z7z9llDujcFBivvbtk0xDrTqNq
+ wFn/tvH95Gb258nuJyyeebmhoFFlXE9hJKtZ8vU=
+X-Google-Smtp-Source: AGHT+IFMCIqhrkZz2pom9uS4Kkcaj9WM0Va1ir/cnu5R/8rV1HEFAdTrH0NIeyc6eW4fE518RQbTvTXNMvkV8fLx5WU=
+X-Received: by 2002:aa7:d74b:0:b0:522:3ef1:b1d with SMTP id
+ a11-20020aa7d74b000000b005223ef10b1dmr7634306eds.6.1695112023698; Tue, 19 Sep
+ 2023 01:27:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230901120822.1.Ic1e930902ae178ecee565ab48b9579482d03056c@changeid>
-In-Reply-To: <20230901120822.1.Ic1e930902ae178ecee565ab48b9579482d03056c@changeid>
+References: <20230907155825.48056-1-sjg@chromium.org>
+ <20230907155825.48056-2-sjg@chromium.org>
+In-Reply-To: <20230907155825.48056-2-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 16:20:16 +0800
-Message-ID: <CAEUhbmWPPV5Ub5aon57nkfJ8Gyi=VY91HNuNtKf=bqDKFmRwoA@mail.gmail.com>
-Subject: Re: [PATCH] x86: doc: Document the -cdrom issues I ran into
+Date: Tue, 19 Sep 2023 16:26:52 +0800
+Message-ID: <CAEUhbmXF5fEMA90SFWsLuORLmUSq4jFGVamFAUfzjMUpmMGd6w@mail.gmail.com>
+Subject: Re: [PATCH v2 1/9] dm: core: Allow marking driver model as dead
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng@tinylab.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
+ Pavel Herrmann <morpheus.ibis@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,19 +88,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Sep 2, 2023 at 2:08=E2=80=AFAM Simon Glass <sjg@chromium.org> wrote=
-:
+On Thu, Sep 7, 2023 at 11:58=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
 >
-> Add a note about using -cdrom with QEMU.
+> On x86 devices we use CAR (Cache-As-RAM) to hold the malloc() region in
+> SPL, since SDRAM is not set up yet. This means that driver model stores
+> its tables in this region.
 >
-> Suggested-by: Bin Meng <bmeng@tinylab.org>
+> When preparing to jump from SPL to U-Boot proper, we must disable CAR, so
+> that the CPU can uses the caches normally. This means that driver model
+> tables become inaccessible. From there until we jump to U-Boot proper, we
+> must avoid using driver model.
+>
+> This is only a problem on boards which operate this way, for example
+> chromebook_link64
+>
+> Add a flag to indicate that driver model is dead and should not be used.
+> It can be used in SPL to avoid hanging the machine.
+>
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
->  doc/board/emulation/qemu-x86.rst | 3 +++
->  1 file changed, 3 insertions(+)
+> Changes in v2:
+> - Add new patch to allow marking driver model as dead
+>
+>  common/spl/spl.c                  | 2 +-
+>  include/asm-generic/global_data.h | 5 +++++
+>  2 files changed, 6 insertions(+), 1 deletion(-)
 >
 
-Reviewed-by: Bin Meng <bmeng@tinylab.org>
-
-applied to u-boot-86/next, thanks!
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
