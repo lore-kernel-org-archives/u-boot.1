@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7473CE79A8
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:11:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6DB5CE79A9
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:11:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A75E586BF4;
-	Tue, 19 Sep 2023 20:09:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 06ED486BFA;
+	Tue, 19 Sep 2023 20:09:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Gt2u+n4H";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S+yDftYO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EDA886BDF; Tue, 19 Sep 2023 20:09:39 +0200 (CEST)
+ id E758F86BE8; Tue, 19 Sep 2023 20:09:39 +0200 (CEST)
 Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
  [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D18F86BC2
+ by phobos.denx.de (Postfix) with ESMTPS id D722286B7E
  for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-34fc881e09bso12815345ab.2
+ e9e14a558f8ab-34fcc3ac97bso13853815ab.0
  for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695146976; x=1695751776; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2O373WIz4eUYPv1os+1A5Czw0DnT/bMpGoCcmbsqARQ=;
- b=Gt2u+n4Htz7fJkM6mncREvmscOoRqyTMAi3o1qmprh9vx/4JnNtZ+dwP7tMLd62kWk
- /owQj3TrCjfo/vescfK8oCxLOe+jIOIAcwNJSuXTDYdCjx61aYRvQEOqinzyf1OylBWw
- b8rhUZZtD3EwepMnzJ2uba4D0Wup/5ekfbw3c=
+ bh=Tig6Rmk+SgwvwsBLaf5mPTf1t6RjXhvUaflrOOMhIxM=;
+ b=S+yDftYOgFYlLlaVG0YUJg8MXUIpKWcXFkhDt9QCSjKDDnCNP7zUavsaf4CyvVw2h8
+ 0QZ8BLVVbTZmF/UBX/mXFeLWa6zDx4TSx2KyBgv2WUxepsQmdwoVLZmGiSqwenbNfG/W
+ vsdY8ak335s9lA8qW6UCym69NkIKwhHyEq9PA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695146976; x=1695751776;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2O373WIz4eUYPv1os+1A5Czw0DnT/bMpGoCcmbsqARQ=;
- b=ftgLRBRw/ZWTA3SRr/4poQzpagU8BrudHZend0c6zbB0tm/CCb1YhHax636jOApYIT
- iKW/DoYC4UJggc1K1Pd1fsziwJktJAIfoALoVVUMwkoLQ7UWqxVyp/uck8GUFnNVDywN
- xD8+2OjmFyIOVrq8S71mIVb8pzwnPxIAH6LRTPbAbtRdNwuj/0xwl3UzkADenIMTawZg
- 8SeSAidaYIoAiayZv5obM/OkkSVKOym+hQmMzbEzdDuy+xD1CvjwBXEbk+tkrPGFVwvU
- +i0c9FIq+R4inkXL7RKRX0hxMAldA/fCG83eGA9tYUKW/aPGaLu07z6OchvnP9d06k0a
- //3Q==
-X-Gm-Message-State: AOJu0YyqlecXRJC0Sxh4I1OH8wayEoF3LpU1JqR02/gOG5cXH3xW9Fjy
- W2yKYiMWPv1+f0JkGQoalEID0isxMtpPSnbUnv8=
-X-Google-Smtp-Source: AGHT+IG8BKXL+gLDao29tjLrq1NB+9bxqjaNuzNXVkN0gpEXVvQ/QRX/q6Lqlvc7jrKXIkvtpcejsA==
-X-Received: by 2002:a92:c7d3:0:b0:350:f0bb:6a33 with SMTP id
- g19-20020a92c7d3000000b00350f0bb6a33mr448817ilk.13.1695146975880; 
- Tue, 19 Sep 2023 11:09:35 -0700 (PDT)
+ bh=Tig6Rmk+SgwvwsBLaf5mPTf1t6RjXhvUaflrOOMhIxM=;
+ b=tpl2EJ0AQnVcWSJVA6iXq4GW4tr1ODctfitUg/8rgieLindPMCh3dJM1Y07YQk1DCM
+ 8O6GNanE7hhQERCcAXoXlFZeTNz7C1eNo4PVYmH3qI564ZnJHiEd2M9MQb2VaQET5tEa
+ Fi9dMU3fiitxK8M3ypd9B4J6hQumvXo+qoIZZUEqCjNNPt+Nr3XIkSM5J1DL+3LrilsE
+ /UmwPeTtdERdpZfa8un49zMK+Xn6LJ1UlFWFAzkqrhcl6OhaxTAZeeoE1hgKces7xfQ2
+ wg0s9BkOBtsft9O7+203srAJdStQ9YrC/BuEj6OkUIpQqb0m1kce2nXwJwlMuj7CcVEM
+ o8iA==
+X-Gm-Message-State: AOJu0YwuMuHsEizgieNnyiSABlHNs1UylXhplkVkaHVioMqMUljXAnWu
+ f5UJlXlg5rcl0k+5YUntA4tSShfYs3e85MtO2kg=
+X-Google-Smtp-Source: AGHT+IGDe1JgYZQkuLk5jPyRpzQ6cnEhebys8iz7QQXYjitnP0xy0Q0iHk4Zk59kL+7Z7jURA/l6KQ==
+X-Received: by 2002:a05:6e02:1347:b0:34c:cf1f:2a4a with SMTP id
+ k7-20020a056e02134700b0034ccf1f2a4amr436185ilr.4.1695146976528; 
+ Tue, 19 Sep 2023 11:09:36 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
  by smtp.gmail.com with ESMTPSA id
- b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.35
+ b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 11:09:35 -0700 (PDT)
+ Tue, 19 Sep 2023 11:09:36 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 10/36] cli: Terminate the string in cread_line_process_ch()
-Date: Tue, 19 Sep 2023 12:08:40 -0600
-Message-ID: <20230919180918.2904313-11-sjg@chromium.org>
+Subject: [PATCH 11/36] cli: Allow history to be disabled
+Date: Tue, 19 Sep 2023 12:08:41 -0600
+Message-ID: <20230919180918.2904313-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230919180918.2904313-1-sjg@chromium.org>
 References: <20230919180918.2904313-1-sjg@chromium.org>
@@ -88,50 +88,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than relying on the caller, terminate the string inside this
-function. Do this each time we return, whether input is finished or
-not. It is not needed when the input is aborted, since the string will
-be discarded in that case.
+When inputting text outside the command line we don't want history to be
+accessible. Add an option to control this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/cli_readline.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ common/cli_readline.c | 42 ++++++++++++++++++++++--------------------
+ include/cli.h         |  2 ++
+ 2 files changed, 24 insertions(+), 20 deletions(-)
 
 diff --git a/common/cli_readline.c b/common/cli_readline.c
-index 62d419bb36a..fdb84d9204f 100644
+index fdb84d9204f..fa8f525d3a4 100644
 --- a/common/cli_readline.c
 +++ b/common/cli_readline.c
-@@ -263,6 +263,7 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
- 
- 	if (ichar == '\n') {
- 		putc('\n');
-+		buf[cls->eol_num] = '\0';	/* terminate the string */
- 		return 0;
- 	}
- 
-@@ -413,6 +414,12 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
+@@ -361,32 +361,33 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
  		break;
- 	}
+ 	case CTL_CH('p'):
+ 	case CTL_CH('n'):
+-	{
+-		char *hline;
++		if (cls->history) {
++			char *hline;
  
-+	/*
-+	 * keep the string terminated...if we added a char at the end then we
-+	 * want a \0 after it
-+	 */
-+	buf[cls->eol_num] = '\0';
-+
- 	return -EAGAIN;
- }
+-		if (ichar == CTL_CH('p'))
+-			hline = hist_prev();
+-		else
+-			hline = hist_next();
++			if (ichar == CTL_CH('p'))
++				hline = hist_prev();
++			else
++				hline = hist_next();
  
-@@ -467,7 +474,6 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 			break;
- 	}
- 	*len = cls->eol_num;
--	buf[cls->eol_num] = '\0';	/* lose the newline */
+-		if (!hline) {
+-			getcmd_cbeep();
+-			break;
+-		}
++			if (!hline) {
++				getcmd_cbeep();
++				break;
++			}
  
- 	if (buf[0] && buf[0] != CREAD_HIST_CHAR)
- 		cread_add_to_hist(buf);
+-		/* nuke the current line */
+-		/* first, go home */
+-		BEGINNING_OF_LINE();
++			/* nuke the current line */
++			/* first, go home */
++			BEGINNING_OF_LINE();
+ 
+-		/* erase to end of line */
+-		ERASE_TO_EOL();
++			/* erase to end of line */
++			ERASE_TO_EOL();
+ 
+-		/* copy new line into place and display */
+-		strcpy(buf, hline);
+-		cls->eol_num = strlen(buf);
+-		REFRESH_TO_EOL();
++			/* copy new line into place and display */
++			strcpy(buf, hline);
++			cls->eol_num = strlen(buf);
++			REFRESH_TO_EOL();
++			break;
++		}
+ 		break;
+-	}
+ 	case '\t':
+ 		if (IS_ENABLED(CONFIG_AUTO_COMPLETE)) {
+ 			int num2, col;
+@@ -438,6 +439,7 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
+ 	cls->len = *len;
+ 	cls->prompt = prompt;
+ 	cls->buf = buf;
++	cls->history = true;
+ 
+ 	if (init_len)
+ 		cread_add_str(buf, init_len, 1, &cls->num, &cls->eol_num, buf,
+diff --git a/include/cli.h b/include/cli.h
+index bbc53276435..252bdb70ab0 100644
+--- a/include/cli.h
++++ b/include/cli.h
+@@ -31,6 +31,7 @@ struct cli_ch_state {
+  * @num: Current cursor position, where 0 is the start
+  * @eol_num: Number of characters in the buffer
+  * @insert: true if in 'insert' mode
++ * @history: true if history should be accessible
+  * @buf: Buffer containing line
+  * @prompt: Prompt for the line
+  */
+@@ -39,6 +40,7 @@ struct cli_line_state {
+ 	uint eol_num;
+ 	uint len;
+ 	bool insert;
++	bool history;
+ 	char *buf;
+ 	const char *prompt;
+ };
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
