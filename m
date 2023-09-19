@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138CECD3447
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:21:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A6B2CD3447
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C67686A78;
-	Tue, 19 Sep 2023 09:20:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AFA2586A77;
+	Tue, 19 Sep 2023 09:20:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jYclY22K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ggXVvS0y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD0CA86ACA; Tue, 19 Sep 2023 09:20:13 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 762CC86A26; Tue, 19 Sep 2023 09:20:15 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1B4986A81
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:20:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 39DB286AC6
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:20:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2c00c0f11b2so28552651fa.1
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:20:11 -0700 (PDT)
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-502153ae36cso8590855e87.3
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:20:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1695108011; x=1695712811; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IRKdWDfK3dzksTU8ZJHvwNeMiXPus2JEuw1GvXkDcsI=;
- b=jYclY22KYKUUWUSRO7EA5Y5Ycxq4ez1T0qNPhKXwl1dCQTSCpeHrOetyffSpXIUaLe
- 2OWxACRPV1mCpsJ3kzuf4COICSlkto8srUcZvKuH8zdcAYjZzwq9rvpF9qZUIHxg8APj
- W5gftHpIZDzrZVYWZ9DuuzH5qmL0fBwBjlaeG5uPoVCQrxWfbBt41ybKVmFXqUUfe9sw
- wVdqI/MLL62Wp35E0Knf8e+2PVTJaRiA7tOQphoASJA9MkTg9YaSgDk4X9uaiDfw45ft
- 6Pz3wao+KwATy0Qg59LcIed70cLKzdRfkFLqNxceyZOKvQgycDBy7NXPFKN1tIq6DZQR
- /RCw==
+ bh=A93VBx7rrugHJqgBKn5kfENPwNs1coGO6GImFL/lhJ0=;
+ b=ggXVvS0yYMzB+eFrpqyWQFRtfePu/OerMBCAWs1yigouPiP5yCspRAnhXx2vsMQ9UD
+ Mf1Fmp138zmryguIGNgDvBGqLpUMw+k6rDDSBsjLXm1ERtyh1/gvK/fD5Uq9ultje4Qe
+ cPkfpaW8hYlT9jT3qc1hd7yfHs5sdCGA9DwXtt6fU5awfLrA+uN6XBDEPJ+Q4v8Ot53C
+ zdOXJHLn0yKK8Q2qiUf/JrwAmp4YpS9mbB1mqG730dcfPZ9PV74qqcRVbZRxq783dJqY
+ hYmUi4hQJdGRa+RlVv7zJUNdEgunwf3G4Z5w7dQ4Imj4k4qYd0paOHnL0FrUuRkM71/Z
+ aBug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695108011; x=1695712811;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IRKdWDfK3dzksTU8ZJHvwNeMiXPus2JEuw1GvXkDcsI=;
- b=m35AT5LQ3cvHayTuvSmu8aIx/juN1P7tQW4TGVKgNUUzQ4Ujye4nic5r/hCdCf+Ph3
- hY0YuaAHAHbmaESfBgojhPVJELO+0e8k42Yo1fa5Fn+3HBRmuEuSoKBMq2xo7kg+rQk/
- ls4XA3UPhayZOmBgKTjWiKGQBIcDSzPRc+Mn8A8JC6EFKnxYFOwwYSTmlwmjfK277HG4
- MqObOcibCyPMZMybxOqY+wD+8ya4YWfYVtcEfmL3ha4MImLmcq65w7Y1eRHTo4f5IVEF
- bCx59xhp4q9j+MAr8QfIw7jaYJaD30VzVXkzC8DCZ5o+Perw5Pb59blcELq9z0ZW/hqa
- VvrA==
-X-Gm-Message-State: AOJu0YzVWlP+kqLIQ9+dpZ1shadZaZS5aSUQs1lUlsCHGGzGoBueABhy
- K4CNVccm10hJ6fztMIDS5XfBgST7WRW/ttpGlZo=
-X-Google-Smtp-Source: AGHT+IG/J4e0mhSSX3dzGN4MU5WSmRcHhG0bBuujniKfOoPi7RVOUwZ1r7QOGHebccauCBcOPmfvtwi+yjWTuDbJZuU=
-X-Received: by 2002:a2e:964d:0:b0:2bc:f1d3:b54c with SMTP id
- z13-20020a2e964d000000b002bcf1d3b54cmr10214637ljh.20.1695108010999; Tue, 19
- Sep 2023 00:20:10 -0700 (PDT)
+ bh=A93VBx7rrugHJqgBKn5kfENPwNs1coGO6GImFL/lhJ0=;
+ b=ATzUUZUQ/aVZYUjYdq+iX4jJDiesBZbPiz36bp87WR+BJvcG6PiyQgZ0cYs9mbAW3I
+ DQzl7aq7q/5MIcMMnPgHaIz8JDzJHIoawqXaViVacoqOPbjIp3k7rYzCdIvviPbOYTwn
+ xzH6eKNb2hL+4ZxT0AFp/mhN5ALAs5wMKdt7aQ9NHuj7Vp7sQ6qftGshKO/w2RFRsq6k
+ slXZQ2B7y2+Ryq4XnT9GZgd/U7x/BqveoeUlDz9sb2qf/davJ2W82Sw2MqCYD3FxJoUZ
+ 2YmQBtm1ywP67VLF38i68d/XLMfEUeDuEctsLCzXLbEUleLVvKC/EypLuKPVfTpzloUk
+ UfTg==
+X-Gm-Message-State: AOJu0YxYI7+bQkcbJyrKqdWF1dETtwxUHtRxyTBGvXXjkny0qp0nrIN6
+ 4J6+TttTfQSTaeNIegdwwPsG4sEGQ8k5Q6++gc8=
+X-Google-Smtp-Source: AGHT+IEqN1vJ5cV4b/pUxOFTm9Bp8nQ1sLFg+PeeHNQvo+KnXngKpKk6Fbpq+WKI+WJyDQYW/VLGaqXzAC+756WwfQw=
+X-Received: by 2002:ac2:58d7:0:b0:4ff:b830:4b6b with SMTP id
+ u23-20020ac258d7000000b004ffb8304b6bmr7687984lfo.14.1695108011519; Tue, 19
+ Sep 2023 00:20:11 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-15-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-15-sjg@chromium.org>
+ <20230823211059.1235147-17-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-17-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:19:54 +0800
-Message-ID: <CAEUhbmXKXvU7poM6paK+9HzgQ4w=fidoS4HAGBbM6nND6fP1AQ@mail.gmail.com>
-Subject: Re: [PATCH v4 14/20] Record the position of the SMBIOS tables
+Date: Tue, 19 Sep 2023 15:19:56 +0800
+Message-ID: <CAEUhbmWrq9DAKoeUA2AcvM3BpLGx3YZj20BjosdHRJmqRsE5UQ@mail.gmail.com>
+Subject: Re: [PATCH v4 16/20] x86: coreboot: Record the position of the SMBIOS
+ tables
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -91,25 +92,39 @@ X-Virus-Status: Clean
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> Remember where these end up so that we can pass this information on to
-> the EFI layer.
+> Make a note of where coreboot installed the SMBIOS tables so that we can
+> pass this on to EFI.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
-> Changes in v4:
-> - Fix arm and riscv
+> (no changes since v2)
 >
 > Changes in v2:
 > - Add new patch
 >
->  arch/arm/include/asm/global_data.h     | 3 +++
->  arch/riscv/include/asm/global_data.h   | 3 +++
->  arch/sandbox/include/asm/global_data.h | 1 +
->  arch/x86/include/asm/global_data.h     | 1 +
->  arch/x86/lib/tables.c                  | 3 +++
->  include/asm-generic/global_data.h      | 8 ++++++++
->  6 files changed, 19 insertions(+)
+>  arch/x86/lib/coreboot/cb_sysinfo.c | 1 +
+>  1 file changed, 1 insertion(+)
 >
+> diff --git a/arch/x86/lib/coreboot/cb_sysinfo.c b/arch/x86/lib/coreboot/c=
+b_sysinfo.c
+> index dfbc80c430e..f7fd9ea5bcb 100644
+> --- a/arch/x86/lib/coreboot/cb_sysinfo.c
+> +++ b/arch/x86/lib/coreboot/cb_sysinfo.c
+> @@ -471,6 +471,7 @@ int get_coreboot_info(struct sysinfo_t *info)
+>                 return -ENOENT;
+>         gd->arch.coreboot_table =3D addr;
+>         gd_set_acpi_start(map_to_sysmem(info->rsdp));
+> +       gd_set_smbios_start(info->smbios_start);
+
+use map_to_sysmem() too?
+
+>         gd->flags |=3D GD_FLG_SKIP_LL_INIT;
+>
+>         return 0;
+> --
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+
+Regards,
+Bin
