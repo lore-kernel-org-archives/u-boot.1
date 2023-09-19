@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80B17CE79A9
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:15:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4100DCE79A8
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:15:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1973886BFC;
+	by phobos.denx.de (Postfix) with ESMTP id 77C2286C5D;
 	Tue, 19 Sep 2023 20:10:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VdyDANoG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fs7WKNLO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 404B286B7E; Tue, 19 Sep 2023 20:09:56 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id F3A0786C4C; Tue, 19 Sep 2023 20:09:56 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3797586BE1
+ by phobos.denx.de (Postfix) with ESMTPS id DFB6586C2B
  for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-79329a8f78bso228389939f.3
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-7928dc54896so228481939f.3
  for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695146993; x=1695751793; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=br+gTWjreyxwUihvRfRNisrw3ValdGM8WF+1kSL5kpA=;
- b=VdyDANoGDbzdSFSkG6OrTX/kHvS8ChDFrvm0vpPEs5jIiWY5RnvwfKILgSCK3fV9lD
- qxhAAzrS8E8kvBk/qNwswNN2IZSL1WTMwyiwAIYCl7yHrl2dNegbp6V9I/QMVaLi3qds
- qsPxY23Q5lOLmEw+DWsIHBWuNx56lfajcgfvY=
+ bh=LOJ5w1KzOEDzj72DiNSd15Oyfe6f6W5yadLAiBSFMHU=;
+ b=Fs7WKNLO3cgT+Oj48T8iV3X8ODMPGQpoKiY5sCSEousIfNAPn9yBN4WriDuhb8Gb8x
+ UH2DHvC2FRuF0/3K7JCMCOLNc36EZzPQvLgskFEdF3eHU2iTOQ68E1aIaM415tf2jOcJ
+ yu8OLsapN++sra1j9m4Eun+xRmHqSGR1TsPg0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695146993; x=1695751793;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=br+gTWjreyxwUihvRfRNisrw3ValdGM8WF+1kSL5kpA=;
- b=L5MdpUS7GvuzXItcVdb/jigm+fdbU227yTiAkHxxHfGs4YUg9lecXD13kmj+ecrluL
- I6ptH9TC8MIXAMWwPDwKvJ1lKW7JyfZk73T4bdeDSqR/4WvJm2Vy3zOt11HPZM3uoKRA
- kA9tAKp0dc3TrgjEqEaOcbAftTBwB4HKyoR4MGM5Zhx3nu+qdYAD6m3kNtFaDsO3W3e3
- DFMrERaFT+KCrS3iCSuw6GQvGLD3FLFgNs/WG6j9lh4wsTmkXacOQheegp3h40cSWtz1
- YyPiXBm2AFdqCN8Qq+95A1K+wxs4yPnC49HLS1tfcnKLTTvcKKyhc0s89+YFcKPPgMaI
- nEFQ==
-X-Gm-Message-State: AOJu0Yznk0oxymkSYFeC2dGE9Ob07ET/JK9KD6LOn1zmOpvaNteK66DS
- 6hELlIEw60azY7EFL52gA9zOwym7+FTUXPDei1Q=
-X-Google-Smtp-Source: AGHT+IHwxIh3XOFhJ7rXO3O0So3C5Q0EK7gipHu2xhiT7tVUoz2oLbSCPHPasLtrKSnnxd7QKeKDLg==
-X-Received: by 2002:a05:6e02:b24:b0:349:2cd0:4368 with SMTP id
- e4-20020a056e020b2400b003492cd04368mr680234ilu.18.1695146992898; 
- Tue, 19 Sep 2023 11:09:52 -0700 (PDT)
+ bh=LOJ5w1KzOEDzj72DiNSd15Oyfe6f6W5yadLAiBSFMHU=;
+ b=Ml0k6XAIBFBm6n2/55SRydjzoZfqE/roUZwFSuT9hs3WVdCa9NbtHltPbEAO2pPFe1
+ aAnaR4HY/KXwEiZoaky+eV7jdJ1LqWtoVoznnCPNpiOJ0kL9ue/VmZBdUtSOh14c3yza
+ qGlc53zJziGJMa5SoZNkCIETjRAxaX8qe/nex+n1PDeack6V5Ydd2Rw126FNW2vDhmof
+ 5qshKol9HVdfJ3CPBs5fYco0LkpZM/bDhScaHG9NVQ8bZM0AbVmxUjJ5UCFaQ2wf9qEz
+ zSAsMA9rhI30kpdfDYcwaRxRKMdTAFE7Oo7fQhB29po2qyWlQHtdEcKJty5LTvK4ySTJ
+ qNvA==
+X-Gm-Message-State: AOJu0Yz2Iz8ouOj88X37Pt6qJxJAyC/SKxX2Tu1gZG259ZlyWCucyk84
+ ztjztr1mhKjJe+wgW6u3u1uhkpezmEBIBirEjwg=
+X-Google-Smtp-Source: AGHT+IEPTPrGSdWUxnkbBaktoitNT4QSiEywiTJWDavsfPV3rSSYDb3+z696YSenNiuTrJco/h48Bg==
+X-Received: by 2002:a05:6e02:1aa5:b0:34c:e7a3:894 with SMTP id
+ l5-20020a056e021aa500b0034ce7a30894mr688886ilv.16.1695146993561; 
+ Tue, 19 Sep 2023 11:09:53 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
  by smtp.gmail.com with ESMTPSA id
- b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.52
+ b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 11:09:52 -0700 (PDT)
+ Tue, 19 Sep 2023 11:09:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH 32/36] expo: Support handling any key in cedit
-Date: Tue, 19 Sep 2023 12:09:02 -0600
-Message-ID: <20230919180918.2904313-33-sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 33/36] expo: Plumb in textline to cedit
+Date: Tue, 19 Sep 2023 12:09:03 -0600
+Message-ID: <20230919180918.2904313-34-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230919180918.2904313-1-sjg@chromium.org>
 References: <20230919180918.2904313-1-sjg@chromium.org>
@@ -88,58 +88,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present cedit only supports menu keys. For textline objects we need
-to insert normal ASCII characters.
-
-We also need to handle backspace, which is ASCII 9.
-
-In fact, expo does not make use of all the menu keys, so partition
-them accordingly and update the logic to support normal ASCII
-characters, too.
+Support textlines in the configuration editor.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/cedit.c   | 2 +-
- include/menu.h | 7 ++++++-
- 2 files changed, 7 insertions(+), 2 deletions(-)
+ boot/cedit.c | 58 +++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 57 insertions(+), 1 deletion(-)
 
 diff --git a/boot/cedit.c b/boot/cedit.c
-index bb194af77bd..407793aaddd 100644
+index 407793aaddd..f2387170127 100644
 --- a/boot/cedit.c
 +++ b/boot/cedit.c
-@@ -176,7 +176,7 @@ int cedit_run(struct expo *exp)
- 		key = 0;
- 		if (ichar) {
- 			key = bootmenu_conv_key(ichar);
--			if (key == BKEY_NONE)
-+			if (key == BKEY_NONE || key >= BKEY_FIRST_EXTRA)
- 				key = ichar;
+@@ -81,6 +81,12 @@ int cedit_arange(struct expo *exp, struct video_priv *vpriv, uint scene_id)
+ 			scene_menu_arrange(scn, (struct scene_obj_menu *)obj);
+ 			y += 50;
+ 			break;
++		case SCENEOBJT_TEXTLINE:
++			scene_obj_set_pos(scn, obj->id, 50, y);
++			scene_textline_arrange(scn,
++					(struct scene_obj_textline *)obj);
++			y += 50;
++			break;
  		}
- 		if (!key)
-diff --git a/include/menu.h b/include/menu.h
-index 64ce89b7d26..6571c39b143 100644
---- a/include/menu.h
-+++ b/include/menu.h
-@@ -50,12 +50,17 @@ enum bootmenu_key {
- 	BKEY_DOWN,
- 	BKEY_SELECT,
- 	BKEY_QUIT,
-+	BKEY_SAVE,
-+
-+	/* 'extra' keys, which are used by menus but not cedit */
- 	BKEY_PLUS,
- 	BKEY_MINUS,
- 	BKEY_SPACE,
--	BKEY_SAVE,
+ 	}
  
- 	BKEY_COUNT,
-+
-+	/* Keys from here on are not used by cedit */
-+	BKEY_FIRST_EXTRA = BKEY_PLUS,
- };
+@@ -295,6 +301,7 @@ static int h_write_settings(struct scene_obj *obj, void *vpriv)
+ {
+ 	struct cedit_iter_priv *priv = vpriv;
+ 	struct abuf *buf = priv->buf;
++	int ret;
  
- /**
+ 	switch (obj->type) {
+ 	case SCENEOBJT_NONE:
+@@ -305,7 +312,7 @@ static int h_write_settings(struct scene_obj *obj, void *vpriv)
+ 		const struct scene_obj_menu *menu;
+ 		const char *str;
+ 		char name[80];
+-		int ret, i;
++		int i;
+ 
+ 		/* write the ID of the current item */
+ 		menu = (struct scene_obj_menu *)obj;
+@@ -335,6 +342,15 @@ static int h_write_settings(struct scene_obj *obj, void *vpriv)
+ 
+ 		break;
+ 	}
++	case SCENEOBJT_TEXTLINE: {
++		const struct scene_obj_textline *tline;
++
++		tline = (struct scene_obj_textline *)obj;
++		ret = write_dt_string(buf, obj->name, abuf_data(&tline->buf));
++		if (ret)
++			return log_msg_ret("wr2", ret);
++		break;
++	}
+ 	}
+ 
+ 	return 0;
+@@ -405,6 +421,19 @@ static int h_read_settings(struct scene_obj *obj, void *vpriv)
+ 
+ 		break;
+ 	}
++	case SCENEOBJT_TEXTLINE: {
++		const struct scene_obj_textline *tline;
++		const char *val;
++		int len;
++
++		tline = (struct scene_obj_textline *)obj;
++
++		val = ofnode_read_prop(node, obj->name, &len);
++		if (len >= tline->max_chars)
++			return log_msg_ret("str", -ENOSPC);
++		strcpy(abuf_data(&tline->buf), val);
++		break;
++	}
+ 	}
+ 
+ 	return 0;
+@@ -472,6 +501,20 @@ static int h_write_settings_env(struct scene_obj *obj, void *vpriv)
+ 		if (ret)
+ 			return log_msg_ret("st2", ret);
+ 		break;
++	case SCENEOBJT_TEXTLINE: {
++		const struct scene_obj_textline *tline;
++
++		tline = (struct scene_obj_textline *)obj;
++		str = abuf_data(&tline->buf);
++		ret = env_set(var, str);
++		if (ret)
++			return log_msg_ret("set", ret);
++
++		if (priv->verbose)
++			printf("%s=%s\n", var, str);
++
++		break;
++	}
+ 	}
+ 
+ 	return 0;
+@@ -521,6 +564,19 @@ static int h_read_settings_env(struct scene_obj *obj, void *vpriv)
+ 		 */
+ 		menu->cur_item_id = val;
+ 		break;
++	case SCENEOBJT_TEXTLINE: {
++		const struct scene_obj_textline *tline;
++		const char *value;
++
++		tline = (struct scene_obj_textline *)obj;
++		value = env_get(var);
++		if (strlen(value) >= tline->max_chars)
++			return log_msg_ret("str", -ENOSPC);
++		if (priv->verbose)
++			printf("%s=%s\n", var, value);
++		strcpy(abuf_data(&tline->buf), value);
++		break;
++	}
+ 	}
+ 
+ 	return 0;
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
