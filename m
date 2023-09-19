@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C3FFCD54A7
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 08:31:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DB39CD54A8
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 08:39:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D470886B0A;
-	Tue, 19 Sep 2023 10:31:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CD81B86AB9;
+	Tue, 19 Sep 2023 10:39:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jq0AE32T";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RP9qqg73";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 279C886A49; Tue, 19 Sep 2023 10:31:00 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9CCF486AA4; Tue, 19 Sep 2023 10:39:43 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57DDD86B16
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 10:30:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0CCFE86A26
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 10:39:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-530bc7c5bc3so3702358a12.1
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 01:30:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695112258; x=1695717058; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SdL/3OFzagnPJ4/Xmy/FqXOKBeE96BMuQPoaitW+MKc=;
- b=Jq0AE32T6krBKp9KWESFurwLLhewiZ8k5Zu+ZFvl1Ri3jmqXaYJxkgqF8pRUUGnrmS
- rBidP0J7fIjtlwIfZd5gm3x8KMm3I3uV04bThSwlH+XSKpNUQlFkWNBZ9u9nPNn3z6vc
- Yupy7U2a1ODnVmB4FqJpG9oObie3Co5K5lHdDpm5cD7A6v7wls2ToHDXm0rri+NBvpxr
- NupNqSUNwGWrc1EWGeYbs+gFZtEasp+c2mkD/upmgS3SP7896mbInRorGj4rbl0m8Qqm
- X7eij8bvgJ4RSY/0HghPggiXchtyDPq+zQQbkMtyosrJ2DP2wP8XgoqvDIhQWZBsQimd
- Rr9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695112258; x=1695717058;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SdL/3OFzagnPJ4/Xmy/FqXOKBeE96BMuQPoaitW+MKc=;
- b=O9wLXdeOFGnqDvr53dZAHIepwv9M5ttzmUaNGxErudQ9wwcNJfDSJ1hP+OypsY8R9K
- fzTCegMR1BXZEX30VtiLp8f6+BxTdBhiAsY3QIn9ATC6bODkr/MoWs2M7iCxX1DCzOXs
- 1RRregnu2Gfqd3Y7T2vWgBM1uwG7geQq+lCq1VkTp5nHnY+s1vK7Bu1uqns6AAzBz8t9
- 8pEExQf+AvA0M8g4mE1XG7r3LfyX1kfFGzups6nB7hkvsukdNIbGt+oW0dzljmnCrx31
- 225Fjf1HxeoMgK5X47kPMn4EE4IzmqHlQp9eO1uqsVXElABrTstaL6v6w9oS/roI6Qxz
- 01QQ==
-X-Gm-Message-State: AOJu0YyoeU8Rsc/D+pZtK4Ww18Fs7DdTE7MTV5hhc3hAioAFHYXGHDTX
- CS6ZXAtHvFkoZyYg2Z5hpJlMqjr76NRKKTc1XZM=
-X-Google-Smtp-Source: AGHT+IEWsm6uuqy2zZ5fNRyppObfuSL0WqjcbEdp5LgxcO48c4XBa6r+3b/GuMRrD2a2LTvP3WhA3BhL/UBAvxnVJ3w=
-X-Received: by 2002:a17:906:518d:b0:9a5:852f:10ae with SMTP id
- y13-20020a170906518d00b009a5852f10aemr11047867ejk.60.1695112256835; Tue, 19
- Sep 2023 01:30:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38J8dcWH098228;
+ Tue, 19 Sep 2023 03:39:38 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695112778;
+ bh=z9t+1spsM+vnwGgzR8mkznrtXW2u4NtVy3MUWB8+GZg=;
+ h=From:Subject:Date:To:CC;
+ b=RP9qqg737XamnLBgMexkL2uvuxeGUoct806U88K3+YSa8pL75YU8jGYmO6ctXeEt7
+ JjiaZsI6WLf56ji0fsAQwxoupTE2u4V2u+JEi9wfWHSVvPQkSJ2WQXAQ4DotoOZEbl
+ gaAFoyjJMMYd2nu7IcO2sQj7/CxWLUOQbPbVnqmI=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38J8dc05018698
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 19 Sep 2023 03:39:38 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
+ Sep 2023 03:39:38 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 19 Sep 2023 03:39:38 -0500
+Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38J8dYu5001331;
+ Tue, 19 Sep 2023 03:39:35 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [PATCH] J721S2 DTS Sync from v6.6-rc1 to u-boot
+Date: Tue, 19 Sep 2023 14:09:30 +0530
+Message-ID: <20230919-b4-upstream-j721s2-r5-pinmux-v5-0-a54d6ee26310@ti.com>
 MIME-Version: 1.0
-References: <20230907155825.48056-1-sjg@chromium.org>
-In-Reply-To: <20230907155825.48056-1-sjg@chromium.org>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 16:30:45 +0800
-Message-ID: <CAEUhbmWVMs2D1hKq2mVEF7UA3L4O+ajexErZQbNwGDxJsa5c9Q@mail.gmail.com>
-Subject: Re: [PATCH v2 0/9] x86: Fixes for chromebook_link64 and
- chromebook_samus_tpl
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
- Pavel Herrmann <morpheus.ibis@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAEJeCWUC/5XOu27DMAwF0F8JNJeFSEuy26n/UXTQg65VwA9Ij
+ uEi8L9XyhAgWz1eEjy8N5E5Rc7i/XITibeY4zyVoF8uwg92+maIoWRBkhrZoQGn4LrkNbEd4ac
+ lzARJwxKn8boDaa98MOhId6IQzmYGl+zkh4o8Dife17pfEvdxv7///Cp5iHmd0++9zYZ1+s/HG
+ 4KEXmnVKU2tkfZjja9+HkVVNzojUZGs7lGhYyWdf5KaM1JTOwVjJL0h6cY8SeqMpIoUPKJy7Fm
+ H9iEdx/EHg0JJPsMBAAA=
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
+ <a-nandan@ti.com>, Andrew Davis <afd@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Nikhil M Jain <n-jain1@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1695112774; l=2960;
+ i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
+ bh=AkLMRBsTGpZXnEmVjm11bN64C7GCl07Qx4roALmvc0Q=;
+ b=CvQi2OdVeaT8nF97Sb//uXtfceckAYciT+hVpV7LvxQUmE6lEJdA5TQQ5QwdelTDot17+EhME
+ 5y8YJO6cp3XCNShmxqS9XIMnjnbQkcG/p56kbJafCXiExL+2M4Vudvp
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,34 +93,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 7, 2023 at 11:58=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> These boards have various problems which prevent them from booting. In
-> the case of link there was a recent regression with PCI probing added to
-> SPL. For samus_tpl it needs a few tweaks to get things back up and
-> running.
->
-> This series resolves all known issues.
->
-> For v2, the 'Avoid starting up PCI automatically in SPL' patch has been
-> replaced with a global_data flag.
->
-> Changes in v2:
-> - Add new patch to allow marking driver model as dead
-> - Reword commit message for clarity and to fix typo
-> - Add new patch to mark driver model as dead when disabling CAR
->
-> Simon Glass (9):
->   dm: core: Allow marking driver model as dead
->   x86: broadwell: Show the memory delay
->   x86: Add some log categories
->   x86: samus_tpl: Correct text base and alloc sizes
->   x86: spl: Change the condition for copying U-Boot to RAM
->   x86: broadwell: Avoid initing the CPU twice
->   x86: broadwell: Set up MTRRs
->   x86: dm: Mark driver model as dead when disabling CAR
->   x86: doc: Update the list of supported Chromebooks
->
+The sync tries to ensure that U-boot remains functional with the updated
+Linux DTS and all the fixes from Linux move to U-boot during the sync.
 
-series applied to u-boot-x86/next, thanks!
+The series tries to sync from Linux v6.6-rc1 along with addition of
+the documentation for J721S2 that had been previously missing.
+
+DMA fixes [0] are currently being upstreamed to Linux. 
+
+Test Logs are included in [1]
+
+[0]: https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
+[1]: https://gist.github.com/manorit2001/dbad09fd00e8b7c3872e85874c8e648c
+
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Changes in v5:
+- Fix the link ( Apurva )
+- Sync with v6.6-rc1
+    - Remove mcu_ringacc override from -u-boot.dtsi
+- Added a patch revert that bring some instability in SK-AM68
+- Update the commit messages to that of 6.6-rc1
+- Link to v4: https://lore.kernel.org/r/20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com
+
+---
+Manorit Chawdhry (6):
+      Revert "arm: dts: k3-j7*: ddr: Update to 0.10 version of DDR config tool"
+      arm: mach-k3: j721s2: Add mcu_timer0 id to the dev list
+      k3-j721s2: Sync from Linux tag v6.6-rc1
+      k3-am68: Sync from Linux tag v6.6-rc1
+      docs: board: ti: Add j721s2_evm documentation
+      board: ti: j721s2: MAINTAINERS: Update the MAINTAINERS File.
+
+Udit Kumar (1):
+      configs: j721s2_evm_r5_defconfig: Increase malloc pool size in DRAM
+
+ arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi     |  75 +-
+ arch/arm/dts/k3-am68-sk-base-board.dts             | 524 +++++++++-----
+ arch/arm/dts/k3-am68-sk-r5-base-board.dts          | 151 +---
+ arch/arm/dts/k3-am68-sk-som.dtsi                   | 112 +--
+ arch/arm/dts/k3-j721e-ddr-evm-lp4-4266.dtsi        |  98 +--
+ .../dts/k3-j721s2-common-proc-board-u-boot.dtsi    |  66 +-
+ arch/arm/dts/k3-j721s2-common-proc-board.dts       | 376 ++++++----
+ arch/arm/dts/k3-j721s2-ddr-evm-lp4-4266.dtsi       | 464 ++++++------
+ arch/arm/dts/k3-j721s2-main.dtsi                   | 777 ++++++++++++++++++++-
+ arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi             | 374 +++++++++-
+ arch/arm/dts/k3-j721s2-r5-common-proc-board.dts    | 158 +----
+ arch/arm/dts/k3-j721s2-som-p0.dtsi                 | 172 ++---
+ arch/arm/dts/k3-j721s2-thermal.dtsi                | 101 +++
+ arch/arm/dts/k3-j721s2.dtsi                        |  12 +-
+ arch/arm/dts/k3-serdes.h                           | 204 ++++++
+ arch/arm/mach-k3/j721s2/dev-data.c                 |   1 +
+ board/ti/j721s2/MAINTAINERS                        |  11 +-
+ configs/j721s2_evm_r5_defconfig                    |   1 +
+ doc/board/ti/j721s2_evm.rst                        | 341 +++++++++
+ doc/board/ti/k3.rst                                |   1 +
+ 20 files changed, 2859 insertions(+), 1160 deletions(-)
+---
+base-commit: 2fe4b54556ea6271237b35de68dc458bfceab94c
+change-id: 20230816-b4-upstream-j721s2-r5-pinmux-25c4cd61b258
+
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
+
