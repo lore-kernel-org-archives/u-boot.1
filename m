@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC44ECD3445
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:22:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E6B3CD3445
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:22:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBC7986ADA;
-	Tue, 19 Sep 2023 09:20:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1DCD386A26;
+	Tue, 19 Sep 2023 09:20:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SjfGwcd+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S7/t6r4g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E76386AF3; Tue, 19 Sep 2023 09:20:22 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 631D286AF3; Tue, 19 Sep 2023 09:20:24 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7289F86A21
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:20:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A36086ACF
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:20:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-50336768615so22247e87.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:20:20 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-50336768615so22289e87.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:20:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695108020; x=1695712820; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695108022; x=1695712822; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t/iSnfyWzCgOC2q/1HUp5zSmmhBhfP2tqBYoUqy1TDI=;
- b=SjfGwcd+rK8HL7yysLf/1DZTQl/13ySNOLNN4ynzWdXgEr7BDDZBrKLEh+8g2FgqfB
- vuj4JUdSEwHwtNeUBWMTO8J/aiW5YjU3yRCJhW35BZJcRZt63iJiFEy9oaG8GTEVKFiU
- XwXGOX+14noRp+hTuwagbpVgKU20Tf8gUXhJLkaUytvNgpnjhkSpTIzyCp9r/NC2kepF
- EdTKDUXOKWhOhJD1vG61542QCLpwCA9qDMAo5H5wIEi23QHsYyvAD0zDFa2eWdKiEPVR
- GVqfc5uDFawO+5vphLakvXp9/hqqD+hr3CHEwBeliraLDLFa4WMNfXb1AqtFjg8jMZm/
- F8YQ==
+ bh=+Dy2O5PYidDrFnxRDaSLSsd/fPm96U3yHyyb/xJOqUc=;
+ b=S7/t6r4gWl8ajzlRFp0dF/rgJcV+wxCqVlogmZR//dX2OsBQVgTZZ0qs99qJUEIDfn
+ goJOeH+yvCak9/Ai6aPWZn8EKcsKz0/eI6u0G8cDk8+mgIXMOZ+fymgH26U8DyjYHsRB
+ 0iw6mmKax0hrKj7WvmDWzR3CAc6vKUONbfdbKPDZfjYHsdj579otzX1c95QOnCNox0S8
+ PkXTOJu7SYdra0cH/rWCmrIrnEx3WZf7FnsOAKFJVxq66lBZpxrjp7TmaLy/jdXdgSlk
+ bmGF/OBmFSc4g3ynFcOOZfshVc/F53Ur9ad9jqSRSR4xxYxhI8Cwq4zj+H8MtAFjc2Uu
+ zcSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695108020; x=1695712820;
+ d=1e100.net; s=20230601; t=1695108022; x=1695712822;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=t/iSnfyWzCgOC2q/1HUp5zSmmhBhfP2tqBYoUqy1TDI=;
- b=vfkzbtgwpDj8eGFpGOj3xhFodhAnc/wSPBUmpkKV/pSmuERE3NO3S3a7p8jftf0RRq
- T/HfwBPO136X18iFuuaXrwLTAqzDvpKnFta0LIB8IcJmS3ciBmYFsdHDBl+6pqNIgMyJ
- QPHKCz/Ww24lqk0JijNjTKChK/Sm3Cw5x08gr9vnx2RbmWa1bfy81xO/j21asSDWr1Mk
- Z6xbdM/FaIvCdHqvRzIImqERvc1EEnQyVyGjrZsflS2zlDVQOFAVPJDdG9K7v1A5/kdH
- bFMsHMhOYVO5N0vb3Q7Fi3xTHN5xKRrHL9219JPldWc/Ma2Y4mwYN+NRUG6KcxsOmJ6r
- /OxA==
-X-Gm-Message-State: AOJu0YyXaCddmx/K/SYevx7MGIvUU01phJWX79Z/MIRWdKOp0hS8Y1n/
- SHO3jrYgG1ZPyeveJv2MP8RIRyolywajLhqR+LaF893J
-X-Google-Smtp-Source: AGHT+IHLF6UEHutParqxF4mSyp0LVX4WRmgf0wkVkTB5Tkkw6yPIoXMTO8MplOUyazOEj0laFYMVkp8eoL58jT5RmTk=
-X-Received: by 2002:a05:6512:3a8b:b0:4fb:8585:eefe with SMTP id
- q11-20020a0565123a8b00b004fb8585eefemr10942987lfu.57.1695108019674; Tue, 19
- Sep 2023 00:20:19 -0700 (PDT)
+ bh=+Dy2O5PYidDrFnxRDaSLSsd/fPm96U3yHyyb/xJOqUc=;
+ b=H2siP/wtv2k1OgosY4jlJUiu5ljvvp6+nUgJb3aBH4XhxXpWanlXEEThlFvISTUUHt
+ +T5GLEl9VvfGRnRq4Z5I/VBe4cSPoBizTWeufRpo18lvjr7KDT3dyjsxY280jJMIwOi7
+ vic16yjMkJj3k43XNR3AQqDcc19EN8Auo2GVG3rCaqMw1MWba689D6OgMfg6OYEAgexZ
+ qPl/WKjRyrqgExNp+GkSyNLi783Tyx1PBza5nkI00OVq/Sbrr5AJ5vSdxAaz8Il1zx5E
+ 1co8MgF4ozhQq3PuagGkxB46d7DPG2iI4Q/nGZOcRd+yP/c78xG7ys7NZUUX0HfGXOzI
+ ehLg==
+X-Gm-Message-State: AOJu0YwEx1Lx7kcLHM5JcTPmi03dfDa1bgdsgcss9Onjh4Rg0wPh+rRv
+ 7shnGWZ/NbPMAwZ5/dlLW0wG2ZQxWV21KTM2zc8=
+X-Google-Smtp-Source: AGHT+IF8OT1BuOftsSvdysajpB9ZVZMWdlg1B0sF/9kOvtX4S+NKwOatvn5x8Ir55PUd8Qqg8TTH3DCE+KO+8XaPo+Y=
+X-Received: by 2002:ac2:51b5:0:b0:4f8:75cf:fdd7 with SMTP id
+ f21-20020ac251b5000000b004f875cffdd7mr8786625lfk.22.1695108021855; Tue, 19
+ Sep 2023 00:20:21 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-20-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-20-sjg@chromium.org>
+ <20230823211059.1235147-12-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-12-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:20:04 +0800
-Message-ID: <CAEUhbmXjFsf3D-rJW3yiLQ4EUNytdhdnBi9a2mV6vWxAz9+Brw@mail.gmail.com>
-Subject: Re: [PATCH v4 19/20] x86: doc: Split out manual booting into its own
- file
+Date: Tue, 19 Sep 2023 15:19:47 +0800
+Message-ID: <CAEUhbmVbf0aM2ymwdjSGR+w=9RUZi3erAAsbeeYisvbCKaLWsA@mail.gmail.com>
+Subject: Re: [PATCH v4 11/20] efi: x86: Correct the condition for installing
+ ACPI tables
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,10 +93,17 @@ X-Virus-Status: Clean
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> Move this out of the main file since for simple users it is easier to
-> rely on standard boot.
+> It is not always the case that U-Boot builds the ACPI tables itself. For
+> example, when booting from coreboot, the ACPI tables are built by
+> coreboot.
+>
+> Correct the Makefile condition so that U-Boot can pass on tables built
+> by a previous firmware stage.
+>
+> Tidy up the installation-condition code while we are here.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 > ---
 >
 > (no changes since v2)
@@ -103,11 +111,9 @@ e:
 > Changes in v2:
 > - Add new patch
 >
->  doc/arch/x86/index.rst       |   1 +
->  doc/arch/x86/manual_boot.rst | 276 +++++++++++++++++++++++++++++++++++
->  doc/arch/x86/x86.rst         | 272 +---------------------------------
->  3 files changed, 280 insertions(+), 269 deletions(-)
->  create mode 100644 doc/arch/x86/manual_boot.rst
+>  lib/efi_loader/Makefile    |  2 +-
+>  lib/efi_loader/efi_setup.c | 10 +++++-----
+>  2 files changed, 6 insertions(+), 6 deletions(-)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
