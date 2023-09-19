@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF84CCE79A8
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:13:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C90CE79A9
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:13:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDB9E86C29;
-	Tue, 19 Sep 2023 20:09:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2035F86C42;
+	Tue, 19 Sep 2023 20:09:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="elRoA6wr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H69eWf/Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B98C86C1C; Tue, 19 Sep 2023 20:09:48 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 5920686C27; Tue, 19 Sep 2023 20:09:49 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CAFC86C1D
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FCFB86BF8
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-79275d86bc3so227081239f.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:46 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-34fdc6209c6so9968005ab.3
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695146985; x=1695751785; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695146986; x=1695751786; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RTMQw4RBzTRb2QRV8ZmfaOCi8CGT7PSN5lB748VKBrc=;
- b=elRoA6wr6bKOwxujST8AfZdTVxvK5FlbFV4dq3MdF0cy8p9dak6gsVwf1OE6ss7ZvZ
- 5eoPxqkK9gTaVSpHvlLdNCoRsex3ybydgK5GH+p14Oz14PlfbD5XMIwBfwwtWfur/j6R
- +sm/dOHiBqlpIkI3W6niMu4/+an4i9QDOmXgA=
+ bh=DFBCmKRdGQRxwyVgTpghvQkcMlqyxBgHnr6c0LHrjAs=;
+ b=H69eWf/ZpaddavXcT3yAzW7809v4tqxWTgyB2wi/P2OqILwG3R9/RoBXCyk1S0+c8y
+ FS0jz56pSeB9JxFOcg6vw27JNQwu7i6f1LihxJvzmYUBYUCgk+I2XLKNUEx1GfJIc002
+ 78UXvsL6JKo9xqa7ho8YsWEk2XIiKmqTVPuZA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695146985; x=1695751785;
+ d=1e100.net; s=20230601; t=1695146986; x=1695751786;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RTMQw4RBzTRb2QRV8ZmfaOCi8CGT7PSN5lB748VKBrc=;
- b=S5597wxFL/97h6ONl1lkJjsmzRZo+sKdCbDuJ2evT3Ts8VmlWtj7LJEVQArBgaTzmn
- 0iehcjAwVufiXpmmbqkgktORDfGbrMnokZokzOBCBCOTI/UNZCIo/u9dFsAnCoG1N56h
- o784Ms80PnEcTk9vMOhTcFY2vdoenLAxVvfwPUa7A5Xara4vbLtDkw1wxzZkNJorKFj8
- bNLD+NN3t51ATleaTMJJluHHHFR8gycbDreMDEQRNK6OIKlTItETWmkQEEeE+i95uNHt
- ZQsk/DnWoDHt3uOsSottcN6ohTMGIMJYy3D5lfU0Gj13FpWxdoE7kpS7dw+2NpW8eJZ1
- ajYQ==
-X-Gm-Message-State: AOJu0Yy+wh82qqoUt98CYDTLRD+7X5SWVHdhIq6k9o55JOAyIEGypua8
- uEf4XoIpxhg0Ps7l9lVc5p03DAy/HhvX/xvw5B4=
-X-Google-Smtp-Source: AGHT+IEuhOm+RPOKbl7VX3cemQQweyTGxJKZdDaC/K8KibZFVJYkpEB4Xr+7zj6GxBFixhlOduBo3A==
-X-Received: by 2002:a05:6e02:20ef:b0:34d:f026:7aa1 with SMTP id
- q15-20020a056e0220ef00b0034df0267aa1mr720130ilv.26.1695146985061; 
+ bh=DFBCmKRdGQRxwyVgTpghvQkcMlqyxBgHnr6c0LHrjAs=;
+ b=lqNMv3l0eClq2fHxutegeAoWeask02rjlMbz/q/BtZqK5y8Mxat8YIh4pma4dvz4Bp
+ 0dRTd9mO7c04DpVrl3pqeZBxPgLuR/Bqclu3jk2TLnTO4142gqBCOzsWlbTvyhFYUz79
+ TUr8bUY9sD1cLe4QzMC6RHi29T+nSezTAAGwDly73UsXMaccdZVWLwgrERc2t9O9LBaP
+ /h5tVa5Tj1JESNOvJmrZSQcWwDjIs1EcvGXVIZyHWNNMjfBqTKneKqco2kztSTFHtf2n
+ 1JvUdcIEYJf7lEs2MT/S7s9Aih9Wv+V4Ne0CUBujOCiOxfHprUEIQsBlnkomHsqiHfuL
+ M8Xw==
+X-Gm-Message-State: AOJu0YzgaMLu2Lw3E54UGtOedFsmuOgJR0lAbztcPJHpo+8F8s++b8hL
+ zajLQSdcn2SLtlcP/gWRGA2Bm3rqLylnw1jG9MI=
+X-Google-Smtp-Source: AGHT+IFzEbCyDi3I5LDMaYPY0KTKfBO3oV74uovf4RyqZzBDSkjUKoSsYByOp6MAhOvJyNTJuFEmuQ==
+X-Received: by 2002:a92:c24f:0:b0:348:b114:a3d2 with SMTP id
+ k15-20020a92c24f000000b00348b114a3d2mr732915ilo.21.1695146985906; 
  Tue, 19 Sep 2023 11:09:45 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
  by smtp.gmail.com with ESMTPSA id
- b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.44
+ b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 11:09:44 -0700 (PDT)
+ Tue, 19 Sep 2023 11:09:45 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 22/36] expo: Correct the logic for duplicate-ID detection
-Date: Tue, 19 Sep 2023 12:08:52 -0600
-Message-ID: <20230919180918.2904313-23-sjg@chromium.org>
+Subject: [PATCH 23/36] expo: Allow highlighting other scene-object types
+Date: Tue, 19 Sep 2023 12:08:53 -0600
+Message-ID: <20230919180918.2904313-24-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230919180918.2904313-1-sjg@chromium.org>
 References: <20230919180918.2904313-1-sjg@chromium.org>
@@ -88,30 +88,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update scene_txt_str() to account for the possibility that the passed-in
-str_id may be 0
+So far only menus can be highlighted. With the coming addition of
+text lines we need to be able to highlight other objects. Add a function
+to determine whether an object can be highlighted.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ boot/scene.c   | 11 ++++-------
+ include/expo.h |  8 ++++++++
+ 2 files changed, 12 insertions(+), 7 deletions(-)
 
 diff --git a/boot/scene.c b/boot/scene.c
-index 9c4466c1a47..8e5d3aa7dc0 100644
+index 8e5d3aa7dc0..4d7cabd75f4 100644
 --- a/boot/scene.c
 +++ b/boot/scene.c
-@@ -176,8 +176,9 @@ int scene_txt_str(struct scene *scn, const char *name, uint id, uint str_id,
- 	ret = expo_str(scn->expo, name, str_id, str);
- 	if (ret < 0)
- 		return log_msg_ret("str", ret);
--	else if (ret != str_id)
-+	if (str_id && ret != str_id)
- 		return log_msg_ret("id", -EEXIST);
-+	str_id = ret;
+@@ -516,7 +516,7 @@ static void send_key_obj(struct scene *scn, struct scene_obj *obj, int key,
+ 					       sibling)) {
+ 			obj = list_entry(obj->sibling.prev,
+ 					 struct scene_obj, sibling);
+-			if (obj->type == SCENEOBJT_MENU) {
++			if (scene_obj_can_highlight(obj)) {
+ 				event->type = EXPOACT_POINT_OBJ;
+ 				event->select.id = obj->id;
+ 				log_debug("up to obj %d\n", event->select.id);
+@@ -528,7 +528,7 @@ static void send_key_obj(struct scene *scn, struct scene_obj *obj, int key,
+ 		while (!list_is_last(&obj->sibling, &scn->obj_head)) {
+ 			obj = list_entry(obj->sibling.next, struct scene_obj,
+ 					 sibling);
+-			if (obj->type == SCENEOBJT_MENU) {
++			if (scene_obj_can_highlight(obj)) {
+ 				event->type = EXPOACT_POINT_OBJ;
+ 				event->select.id = obj->id;
+ 				log_debug("down to obj %d\n", event->select.id);
+@@ -537,7 +537,7 @@ static void send_key_obj(struct scene *scn, struct scene_obj *obj, int key,
+ 		}
+ 		break;
+ 	case BKEY_SELECT:
+-		if (obj->type == SCENEOBJT_MENU) {
++		if (scene_obj_can_highlight(obj)) {
+ 			event->type = EXPOACT_OPEN;
+ 			event->select.id = obj->id;
+ 			log_debug("open obj %d\n", event->select.id);
+@@ -685,12 +685,9 @@ void scene_highlight_first(struct scene *scn)
+ 	struct scene_obj *obj;
  
- 	ret = scene_obj_add(scn, name, id, SCENEOBJT_TEXT,
- 			    sizeof(struct scene_obj_txt),
+ 	list_for_each_entry(obj, &scn->obj_head, sibling) {
+-		switch (obj->type) {
+-		case SCENEOBJT_MENU:
++		if (scene_obj_can_highlight(obj)) {
+ 			scene_set_highlight_id(scn, obj->id);
+ 			return;
+-		default:
+-			break;
+ 		}
+ 	}
+ }
+diff --git a/include/expo.h b/include/expo.h
+index 297d892de8e..b192d55665a 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -146,6 +146,8 @@ enum scene_obj_t {
+ 	SCENEOBJT_NONE		= 0,
+ 	SCENEOBJT_IMAGE,
+ 	SCENEOBJT_TEXT,
++
++	/* types from here on can be highlighted */
+ 	SCENEOBJT_MENU,
+ };
+ 
+@@ -203,6 +205,12 @@ struct scene_obj {
+ 	struct list_head sibling;
+ };
+ 
++/* object can be highlighted when moving around expo */
++static inline bool scene_obj_can_highlight(const struct scene_obj *obj)
++{
++	return obj->type >= SCENEOBJT_MENU;
++}
++
+ /**
+  * struct scene_obj_img - information about an image object in a scene
+  *
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
