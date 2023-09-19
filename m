@@ -4,91 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4271CD5BCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 15:11:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E83CBCD5BCD
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 15:14:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAB36867B5;
-	Tue, 19 Sep 2023 17:11:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 5E95986517;
+	Tue, 19 Sep 2023 17:14:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="FlVjZOwT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kkNuYaCR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE2D6866EC; Tue, 19 Sep 2023 17:11:09 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7503D86548; Tue, 19 Sep 2023 17:14:28 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 206BB867B5
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 17:11:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6B042864A7
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 17:14:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ivprusov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 4A02F100008;
- Tue, 19 Sep 2023 18:11:04 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 4A02F100008
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1695136264;
- bh=QUJb6we87GpLSR4vBwZFIU06vZYAZlpvhE5WwGbPdbY=;
- h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
- b=FlVjZOwTegpzToLAsU8Yuzc52SHOKvhuMVc35V0wIoRGPt3uW73g58JBGXKvWWMgn
- Kqu+hyX/sc/EXOaRc8DFJQQwcNaAdLRx19xHUzAEmLIeqgC19ilf3NBP9lzC/xVRv3
- MbjZw4rsNzqe228eUQTc48BTXNf63GPInKzL+53hW5lXN44MjlS/PD/pw0YnyrMh5p
- Hilw2nobnBj57NWjalx30Y0xvTbtPN85Tr7Tvy/SDN/DyFSjNX73n4zBW3NgbVf7ns
- uuzPfigHlFp8sFmSxxMe3dvT/2a6MciCgvkVv2yB82j6aao/LCmc97yVS5c/Vrol6n
- qOVrhrZstzL8Q==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 19 Sep 2023 18:11:04 +0300 (MSK)
-Received: from pc (100.64.160.123) by p-i-exch-sc-m01.sberdevices.ru
- (172.16.192.107) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.30; Tue, 19 Sep
- 2023 18:11:03 +0300
-Date: Tue, 19 Sep 2023 18:11:01 +0300
-From: Igor Prusov <ivprusov@salutedevices.com>
-To: Simon Glass <sjg@google.com>
-CC: Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, <prusovigor@gmail.com>,
- <kernel@sberdevices.ru>, <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>
-Subject: Re: [RESEND PATCH v1 2/2] clk: Add clock driver for Amlogic A1
-Message-ID: <20230919151101.r737krvo2w533pww@pc>
-References: <20230917101308.1250-1-ivprusov@salutedevices.com>
- <20230917101308.1250-3-ivprusov@salutedevices.com>
- <CAPnjgZ2NsSiArxW2gn0bD2JgMxqXXA=Lqx48NLfGeKVhxTMeEQ@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-59e6ebdf949so43000067b3.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:14:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695136465; x=1695741265; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=l1HsFPWwZB0+DuJM3+FvQfNbvJszcgg8H4sKpoIGg80=;
+ b=kkNuYaCRrgUGcpUbpEZKHz5kIVbxxg3P4u0/8pDfJjZ3dQOp3TV7XI+YUsOVnFRSFc
+ 0onCi68jrKmmgmsyao2hSYGwr4eozFSQ8IEoF1k7dgVrByfxv04JYcVSj+oVPH6LtSfI
+ YNKUO/v9HsEAiQW/v26IiU6RVlHdVvbJqGG8E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695136465; x=1695741265;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l1HsFPWwZB0+DuJM3+FvQfNbvJszcgg8H4sKpoIGg80=;
+ b=LJgM4sRBG1EHrmUJTTzRlbQPyAXKHBbVQNNSpqej0UErccGCHrW1ae3/ktRUeGP6FY
+ f0t3HWC6rXUixYYvvIRbSsqFAb99DQcu0SRvddkOeiAbFYJ9YSq8KnP8u3vqZ6VRSu0j
+ sXGtewjewoinKvHmD2obhBKHurNfDagrgBNeex+KfB89hpB2o39rZDKz2i//H4cuzhum
+ pY84HTYw3TVM4161X7N54F1OVsBrBEor/5zVZmPuRHkLNwSmKellcvKbA76bI/SEWYWS
+ ktYH0Ohp4cJE1P5A681R3xMfnrtinwYKYtTIRweG53slt2Z7hMwPkTE1g2YKuKCcWUJQ
+ AQbA==
+X-Gm-Message-State: AOJu0Yzv/WvsyAdE15P4+o68Wnj9Qh/u1otqHzhEF4TXepJnb1aOdcrm
+ JvON6eebcSsWAMX/a1i5UHf7Xg==
+X-Google-Smtp-Source: AGHT+IEkr54MiFJiVptXa1YYqfsbroDS3MxfMrLetBwsM6eiPfxtIM6mtwU/0Ywff2iIkQ9fE1nM9A==
+X-Received: by 2002:a81:840a:0:b0:59b:6f83:e564 with SMTP id
+ u10-20020a81840a000000b0059b6f83e564mr3339817ywf.4.1695136465105; 
+ Tue, 19 Sep 2023 08:14:25 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-715d-a992-91e3-9182.res6.spectrum.com.
+ [2603:6081:7b00:6400:715d:a992:91e3:9182])
+ by smtp.gmail.com with ESMTPSA id
+ c80-20020a814e53000000b0057399b3bd26sm3244874ywb.33.2023.09.19.08.14.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Sep 2023 08:14:24 -0700 (PDT)
+Date: Tue, 19 Sep 2023 11:14:22 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Trevor Woerner <twoerner@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Michal Suchanek <msuchanek@suse.de>
+Subject: Re: [PATCH] am33xx: ignore return value from usb_ether_init()
+Message-ID: <20230919151422.GF305624@bill-the-cat>
+References: <20230831024951.22599-1-twoerner@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="UERYmTXRlbqFyPOX"
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2NsSiArxW2gn0bD2JgMxqXXA=Lqx48NLfGeKVhxTMeEQ@mail.gmail.com>
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 179967 [Sep 19 2023]
-X-KSMG-AntiSpam-Version: 5.9.59.0
-X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 534 534
- 808c2ea49f7195c68d40844e073217da4fa0d1e3, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
- 127.0.0.199:7.1.2; p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
- lore.kernel.org:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2023/09/19 13:13:00
-X-KSMG-LinksScanning: Clean, bases: 2023/09/19 13:13:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/09/19 04:37:00 #21921740
-X-KSMG-AntiVirus-Status: Clean, skipped
+In-Reply-To: <20230831024951.22599-1-twoerner@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,40 +93,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon, 
 
-On Mon, Sep 18, 2023 at 07:04:47PM -0600, Simon Glass wrote:
-> On Sun, 17 Sept 2023 at 04:14, Igor Prusov <ivprusov@salutedevices.com> wrote:
-> >
-> > This patch adds basic clock driver for Amlogic A1 Family which supports
-> > enabling/disabling some gates, getting frequencies and setting rate
-> > with limited reparenting.
-> >
-> > Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
-> > ---
-> >  arch/arm/include/asm/arch-meson/clock-a1.h |  23 +
-> >  drivers/clk/meson/Kconfig                  |   8 +
-> >  drivers/clk/meson/Makefile                 |   1 +
-> >  drivers/clk/meson/a1.c                     | 681 +++++++++++++++++++++
-> >  4 files changed, 713 insertions(+)
-> >  create mode 100644 arch/arm/include/asm/arch-meson/clock-a1.h
-> >  create mode 100644 drivers/clk/meson/a1.c
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> This could use a few more comments, IMO.
-Sure, I can add some more comments in V2. 
+--UERYmTXRlbqFyPOX
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Did it come from Linux?
-No, I wrote this specifically for u-boot. I initally was looking at
-other drivers in clk/meson/ for reference, but decided to go for
-something like clk_k210 driver to separate clocks topology and ops
-implementation. These clocks were added to Linux in [1], but AFAIU we
-can't simply re-use Linux clock drivers and get working rate
-propogation, reparenting e.t.c.
+On Wed, Aug 30, 2023 at 10:49:50PM -0400, Trevor Woerner wrote:
 
-[1]: https://lore.kernel.org/all/20230523135351.19133-1-ddrokosov@sberdevices.ru/
+> In 2cb43ef1c223 ("usb: ether: Fix error handling in usb_ether_init") the =
+error
+> handling of usb_ether_init() was changed. Not a single other call site of=
+ this
+> function checks its return value, therefore follow suit in the am33xx cod=
+e.
+>=20
+> Do not cause the boot to halt if the usb gadget ethernet initialization f=
+ails:
+>=20
+> 	initcall sequence 9ffdbd84 failed at call 808024b9 (err=3D-19)
+> 	### ERROR ### Please RESET the board ###
+>=20
+> Signed-off-by: Trevor Woerner <twoerner@gmail.com>
+> Reviewed-by: Michal Such=E1nek <msuchanek@suse.de>
 
--- 
-Best Regards,
-Igor Prusov
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--UERYmTXRlbqFyPOX
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUJussACgkQFHw5/5Y0
+tyzEcQwAjigyh4IF0LBnOeIj8EmZUBr50gCzm/fvhHApar/9sc2VQdwDPjCru35O
+2hzXUp6mIDPiwx6AnVJJlxJ52pU0T0lhyA5TmF+HV2k+ZmdUYJT9xF0KrCAcMFr+
+D1XJS7UZ9Nz91/XtP5220fEno59pmhazLAacNeePeWqaS1i6oWEvxqF6AqTKaHc4
+rzieM22WTW4q8HrBSLcWWdGHzzOSc6MUgKKMJHKiW0k5sbgYPOnFhkR0vyXMZCh5
+/TG/jeGXrct4WAE4G2YuR30lU1WvDHzlaLqg9Vi0RCtMJjzky/NsqN9Li9YltCLL
+kRJJeWe7k3J+CStAcFUKGoN1YqBYr8OlzsY3bxzF2UgExEv7CyGNc0lMWJsMLwPZ
+4va6vat++5Bss6BzjccIziAobtiYe5Oo9bcbNPlcSgd7YKBBfiLajw6YMgX4xyyL
+rvDvYAyayPZNAoNI6xIvWzK2Vn/4drZI5DHvCbw20kuWwdj4Q3dSLl8pW09pURwY
+U9AqcaUQ
+=muqN
+-----END PGP SIGNATURE-----
+
+--UERYmTXRlbqFyPOX--
