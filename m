@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63C90CE79A9
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:13:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EF79CE79A9
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:13:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2035F86C42;
+	by phobos.denx.de (Postfix) with ESMTP id 73C9586C33;
 	Tue, 19 Sep 2023 20:09:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H69eWf/Z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XV0ter2i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5920686C27; Tue, 19 Sep 2023 20:09:49 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 1B5BC86C33; Tue, 19 Sep 2023 20:09:50 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FCFB86BF8
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A94886BFC
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-34fdc6209c6so9968005ab.3
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-34df2a961a0so20941915ab.2
  for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695146986; x=1695751786; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DFBCmKRdGQRxwyVgTpghvQkcMlqyxBgHnr6c0LHrjAs=;
- b=H69eWf/ZpaddavXcT3yAzW7809v4tqxWTgyB2wi/P2OqILwG3R9/RoBXCyk1S0+c8y
- FS0jz56pSeB9JxFOcg6vw27JNQwu7i6f1LihxJvzmYUBYUCgk+I2XLKNUEx1GfJIc002
- 78UXvsL6JKo9xqa7ho8YsWEk2XIiKmqTVPuZA=
+ bh=kTkcUIE4kNEaIiuQpBp67lq90HlYQoFGSaqCHTdwHeI=;
+ b=XV0ter2ifvKssUINXhVhKeTGxK7SRShyhPo9Lja6HdzGgzEt6ehZecqMt6u60naCsU
+ UuW4DjhaHHQKi0CJHEFV4AngkPhAy12sA8byet9P0c656RDD9szkvXgiq4CAw842ede4
+ AgKubqy7LZzsW98BNkFyKxx6ibk2SofJmaQPc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695146986; x=1695751786;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DFBCmKRdGQRxwyVgTpghvQkcMlqyxBgHnr6c0LHrjAs=;
- b=lqNMv3l0eClq2fHxutegeAoWeask02rjlMbz/q/BtZqK5y8Mxat8YIh4pma4dvz4Bp
- 0dRTd9mO7c04DpVrl3pqeZBxPgLuR/Bqclu3jk2TLnTO4142gqBCOzsWlbTvyhFYUz79
- TUr8bUY9sD1cLe4QzMC6RHi29T+nSezTAAGwDly73UsXMaccdZVWLwgrERc2t9O9LBaP
- /h5tVa5Tj1JESNOvJmrZSQcWwDjIs1EcvGXVIZyHWNNMjfBqTKneKqco2kztSTFHtf2n
- 1JvUdcIEYJf7lEs2MT/S7s9Aih9Wv+V4Ne0CUBujOCiOxfHprUEIQsBlnkomHsqiHfuL
- M8Xw==
-X-Gm-Message-State: AOJu0YzgaMLu2Lw3E54UGtOedFsmuOgJR0lAbztcPJHpo+8F8s++b8hL
- zajLQSdcn2SLtlcP/gWRGA2Bm3rqLylnw1jG9MI=
-X-Google-Smtp-Source: AGHT+IFzEbCyDi3I5LDMaYPY0KTKfBO3oV74uovf4RyqZzBDSkjUKoSsYByOp6MAhOvJyNTJuFEmuQ==
-X-Received: by 2002:a92:c24f:0:b0:348:b114:a3d2 with SMTP id
- k15-20020a92c24f000000b00348b114a3d2mr732915ilo.21.1695146985906; 
- Tue, 19 Sep 2023 11:09:45 -0700 (PDT)
+ bh=kTkcUIE4kNEaIiuQpBp67lq90HlYQoFGSaqCHTdwHeI=;
+ b=sx3K0MKATvVJ0qN3JIBD3n++U377SzLlDYjahzYwdHSNkR6hCg/PdmxidO05sOlPLe
+ 74BFVJ2OfZ9EQVr4iojPjnT0sgCkUfu+06WTsnleVKGjrD11f0OUdKMbf/qhxcCURj+q
+ rPr69au1dRxNb0rLdx2d5kNxfvDbQpSyzK0H6x3Gc3UzrdfJIjQomJLIqXUHkBeU4JVE
+ m+lMiDgBk4Xx+USvrWG1TWySJPLtKtltihNrSjLdskfSftMyhhRuC0WIQ4w6KYncwZkD
+ ltBaWkw30bxPWjotZIXmhoK4YN9kQ2HLswvt8liQCKL15fO7CzHqzuedkyez3H2hI0ym
+ QxYw==
+X-Gm-Message-State: AOJu0Yw6wkMmfCZtdwxnT9teLShd24voYAss/4qFRGif3G9ISdnfUch8
+ Q6goQH9pL1p7HwoRN9DlA8D7LDFvSwxce1AL064=
+X-Google-Smtp-Source: AGHT+IFLFks9cI8bO0h6JfLfAFiDs+Vns5tO8BjWONmfzXIm/cghb++gqyu/fYWbnBSi8zT5LHvdZA==
+X-Received: by 2002:a05:6e02:156b:b0:34f:75eb:f81 with SMTP id
+ k11-20020a056e02156b00b0034f75eb0f81mr602747ilu.5.1695146986683; 
+ Tue, 19 Sep 2023 11:09:46 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
  by smtp.gmail.com with ESMTPSA id
- b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.45
+ b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 11:09:45 -0700 (PDT)
+ Tue, 19 Sep 2023 11:09:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 23/36] expo: Allow highlighting other scene-object types
-Date: Tue, 19 Sep 2023 12:08:53 -0600
-Message-ID: <20230919180918.2904313-24-sjg@chromium.org>
+Subject: [PATCH 24/36] expo: Add a function to write a property to a devicetree
+Date: Tue, 19 Sep 2023 12:08:54 -0600
+Message-ID: <20230919180918.2904313-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230919180918.2904313-1-sjg@chromium.org>
 References: <20230919180918.2904313-1-sjg@chromium.org>
@@ -88,88 +88,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-So far only menus can be highlighted. With the coming addition of
-text lines we need to be able to highlight other objects. Add a function
-to determine whether an object can be highlighted.
+When the devicetree is too small for the property being written, we need
+to expand the devicetree and retry the write.
+
+Put this logic into a function so it can be reused.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene.c   | 11 ++++-------
- include/expo.h |  8 ++++++++
- 2 files changed, 12 insertions(+), 7 deletions(-)
+ boot/cedit.c | 38 ++++++++++++++++++++++++++------------
+ 1 file changed, 26 insertions(+), 12 deletions(-)
 
-diff --git a/boot/scene.c b/boot/scene.c
-index 8e5d3aa7dc0..4d7cabd75f4 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -516,7 +516,7 @@ static void send_key_obj(struct scene *scn, struct scene_obj *obj, int key,
- 					       sibling)) {
- 			obj = list_entry(obj->sibling.prev,
- 					 struct scene_obj, sibling);
--			if (obj->type == SCENEOBJT_MENU) {
-+			if (scene_obj_can_highlight(obj)) {
- 				event->type = EXPOACT_POINT_OBJ;
- 				event->select.id = obj->id;
- 				log_debug("up to obj %d\n", event->select.id);
-@@ -528,7 +528,7 @@ static void send_key_obj(struct scene *scn, struct scene_obj *obj, int key,
- 		while (!list_is_last(&obj->sibling, &scn->obj_head)) {
- 			obj = list_entry(obj->sibling.next, struct scene_obj,
- 					 sibling);
--			if (obj->type == SCENEOBJT_MENU) {
-+			if (scene_obj_can_highlight(obj)) {
- 				event->type = EXPOACT_POINT_OBJ;
- 				event->select.id = obj->id;
- 				log_debug("down to obj %d\n", event->select.id);
-@@ -537,7 +537,7 @@ static void send_key_obj(struct scene *scn, struct scene_obj *obj, int key,
- 		}
- 		break;
- 	case BKEY_SELECT:
--		if (obj->type == SCENEOBJT_MENU) {
-+		if (scene_obj_can_highlight(obj)) {
- 			event->type = EXPOACT_OPEN;
- 			event->select.id = obj->id;
- 			log_debug("open obj %d\n", event->select.id);
-@@ -685,12 +685,9 @@ void scene_highlight_first(struct scene *scn)
- 	struct scene_obj *obj;
- 
- 	list_for_each_entry(obj, &scn->obj_head, sibling) {
--		switch (obj->type) {
--		case SCENEOBJT_MENU:
-+		if (scene_obj_can_highlight(obj)) {
- 			scene_set_highlight_id(scn, obj->id);
- 			return;
--		default:
--			break;
- 		}
- 	}
+diff --git a/boot/cedit.c b/boot/cedit.c
+index b7329c3245e..bb194af77bd 100644
+--- a/boot/cedit.c
++++ b/boot/cedit.c
+@@ -269,6 +269,28 @@ static int get_cur_menuitem_text(const struct scene_obj_menu *menu,
+ 	return 0;
  }
-diff --git a/include/expo.h b/include/expo.h
-index 297d892de8e..b192d55665a 100644
---- a/include/expo.h
-+++ b/include/expo.h
-@@ -146,6 +146,8 @@ enum scene_obj_t {
- 	SCENEOBJT_NONE		= 0,
- 	SCENEOBJT_IMAGE,
- 	SCENEOBJT_TEXT,
-+
-+	/* types from here on can be highlighted */
- 	SCENEOBJT_MENU,
- };
  
-@@ -203,6 +205,12 @@ struct scene_obj {
- 	struct list_head sibling;
- };
- 
-+/* object can be highlighted when moving around expo */
-+static inline bool scene_obj_can_highlight(const struct scene_obj *obj)
++static int write_dt_string(struct abuf *buf, const char *name, const char *str)
 +{
-+	return obj->type >= SCENEOBJT_MENU;
++	int ret, i;
++
++	/* write the text of the current item */
++	ret = -EAGAIN;
++	for (i = 0; ret && i < 2; i++) {
++		ret = fdt_property_string(abuf_data(buf), name, str);
++		if (!i) {
++			ret = check_space(ret, buf);
++			if (ret)
++				return log_msg_ret("rs2", -ENOMEM);
++		}
++	}
++
++	/* this should not happen */
++	if (ret)
++		return log_msg_ret("str", -EFAULT);
++
++	return 0;
 +}
 +
- /**
-  * struct scene_obj_img - information about an image object in a scene
-  *
+ static int h_write_settings(struct scene_obj *obj, void *vpriv)
+ {
+ 	struct cedit_iter_priv *priv = vpriv;
+@@ -285,6 +307,7 @@ static int h_write_settings(struct scene_obj *obj, void *vpriv)
+ 		char name[80];
+ 		int ret, i;
+ 
++		/* write the ID of the current item */
+ 		menu = (struct scene_obj_menu *)obj;
+ 		ret = -EAGAIN;
+ 		for (i = 0; ret && i < 2; i++) {
+@@ -304,20 +327,11 @@ static int h_write_settings(struct scene_obj *obj, void *vpriv)
+ 		if (ret)
+ 			return log_msg_ret("mis", ret);
+ 
++		/* write the text of the current item */
+ 		snprintf(name, sizeof(name), "%s-str", obj->name);
+-		ret = -EAGAIN;
+-		for (i = 0; ret && i < 2; i++) {
+-			ret = fdt_property_string(abuf_data(buf), name, str);
+-			if (!i) {
+-				ret = check_space(ret, buf);
+-				if (ret)
+-					return log_msg_ret("rs2", -ENOMEM);
+-			}
+-		}
+-
+-		/* this should not happen */
++		ret = write_dt_string(buf, name, str);
+ 		if (ret)
+-			return log_msg_ret("wr2", -EFAULT);
++			return log_msg_ret("wr2", ret);
+ 
+ 		break;
+ 	}
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
