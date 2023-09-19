@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC30CD3447
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:21:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC44ECD3445
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:22:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66A1E86AEA;
-	Tue, 19 Sep 2023 09:20:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBC7986ADA;
+	Tue, 19 Sep 2023 09:20:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M7YlJOqI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SjfGwcd+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B69A486AE8; Tue, 19 Sep 2023 09:20:20 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 4E76386AF3; Tue, 19 Sep 2023 09:20:22 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD9B986AD9
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:20:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7289F86A21
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:20:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2c00df105f8so27307241fa.2
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:20:18 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-50336768615so22247e87.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:20:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695108018; x=1695712818; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695108020; x=1695712820; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hmlibWxzW4v9fA+Ssx2b3DieUxRctOSlf0dH75zLBJg=;
- b=M7YlJOqIcoP3s2WkYY8CXrGIowHQcTulwDocySreYPwsdxcKGg4cyLnmoHkhbZ7SuY
- pCNvrVzet+c8hCK3hIOT0gHl8IwukXm+CspHEVIsRBiZxiNurd44SvESkAaHzQkV7WLE
- 74jo1v7yHk58ldRD//8PihBFdMCdfVn265YsVQ0ITgck37elmyXkAbVTs7FMYMkGspf8
- jo1CSkPi3c6qBT6WFonISgm5h0YpC5xT/d5v/SN32VyoEWSr66Rqfr3SM5ojNQtJRNeS
- 6bggR+BYbqzGZqrqgHUE+GUr7ef9tViN0yneqLqINwTNS7N5MJ9goGAts4HRLXFd1jTH
- pGrA==
+ bh=t/iSnfyWzCgOC2q/1HUp5zSmmhBhfP2tqBYoUqy1TDI=;
+ b=SjfGwcd+rK8HL7yysLf/1DZTQl/13ySNOLNN4ynzWdXgEr7BDDZBrKLEh+8g2FgqfB
+ vuj4JUdSEwHwtNeUBWMTO8J/aiW5YjU3yRCJhW35BZJcRZt63iJiFEy9oaG8GTEVKFiU
+ XwXGOX+14noRp+hTuwagbpVgKU20Tf8gUXhJLkaUytvNgpnjhkSpTIzyCp9r/NC2kepF
+ EdTKDUXOKWhOhJD1vG61542QCLpwCA9qDMAo5H5wIEi23QHsYyvAD0zDFa2eWdKiEPVR
+ GVqfc5uDFawO+5vphLakvXp9/hqqD+hr3CHEwBeliraLDLFa4WMNfXb1AqtFjg8jMZm/
+ F8YQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695108018; x=1695712818;
+ d=1e100.net; s=20230601; t=1695108020; x=1695712820;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hmlibWxzW4v9fA+Ssx2b3DieUxRctOSlf0dH75zLBJg=;
- b=AwCHVtm5FjqgqGMv42p3sOS0GHiPZrGokd6M+y6eoDEySVmDL/952SU5UMB5zGbKLS
- IyH7c56voTBZC65TS/Jmuorj120cHf/GGtbQWILz0KENYTWy4R/n0mOUzVEam+87JUw3
- 0yJI2pKAdpdqfRZRAlR6sNn5LOyWDlGz9GhwMo60ErR2w3B+nahSj5rZ2wERZERUtBHG
- BC6L4pGaGB4RxyGJ4fLeLRvxqSbNtnW3ia+pFK5aiVG2frLTerE9fyfU17jCXTUmuSM7
- nb8k+o2xjUTFMxC2I5bH4C2aeOo9cqG5HtTQpegsmV6SLxOlw2op4vpBhis4DKFhdIds
- MokA==
-X-Gm-Message-State: AOJu0Yzy+n2DMZLoovFHKH4T/GhWPI83nDN8vdk7/08ndIjmJn0h0ES9
- 5d+impbLAJ//DJQyv5DnHAyxKTd0YxcyYR6lXpE=
-X-Google-Smtp-Source: AGHT+IGdZFgPVRU4mBYOtnBq2w2GQS/GGCReV9TWxTzSmgFj6fwKIfne3wDvUo3EX9jMFJLXsX+BxGwtSym5D9vxgg8=
-X-Received: by 2002:a05:6512:709:b0:4fb:780d:2a49 with SMTP id
- b9-20020a056512070900b004fb780d2a49mr8579731lfs.5.1695108018195; Tue, 19 Sep
- 2023 00:20:18 -0700 (PDT)
+ bh=t/iSnfyWzCgOC2q/1HUp5zSmmhBhfP2tqBYoUqy1TDI=;
+ b=vfkzbtgwpDj8eGFpGOj3xhFodhAnc/wSPBUmpkKV/pSmuERE3NO3S3a7p8jftf0RRq
+ T/HfwBPO136X18iFuuaXrwLTAqzDvpKnFta0LIB8IcJmS3ciBmYFsdHDBl+6pqNIgMyJ
+ QPHKCz/Ww24lqk0JijNjTKChK/Sm3Cw5x08gr9vnx2RbmWa1bfy81xO/j21asSDWr1Mk
+ Z6xbdM/FaIvCdHqvRzIImqERvc1EEnQyVyGjrZsflS2zlDVQOFAVPJDdG9K7v1A5/kdH
+ bFMsHMhOYVO5N0vb3Q7Fi3xTHN5xKRrHL9219JPldWc/Ma2Y4mwYN+NRUG6KcxsOmJ6r
+ /OxA==
+X-Gm-Message-State: AOJu0YyXaCddmx/K/SYevx7MGIvUU01phJWX79Z/MIRWdKOp0hS8Y1n/
+ SHO3jrYgG1ZPyeveJv2MP8RIRyolywajLhqR+LaF893J
+X-Google-Smtp-Source: AGHT+IHLF6UEHutParqxF4mSyp0LVX4WRmgf0wkVkTB5Tkkw6yPIoXMTO8MplOUyazOEj0laFYMVkp8eoL58jT5RmTk=
+X-Received: by 2002:a05:6512:3a8b:b0:4fb:8585:eefe with SMTP id
+ q11-20020a0565123a8b00b004fb8585eefemr10942987lfu.57.1695108019674; Tue, 19
+ Sep 2023 00:20:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-19-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-19-sjg@chromium.org>
+ <20230823211059.1235147-20-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-20-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:20:02 +0800
-Message-ID: <CAEUhbmXHAjbFmnm55T3ppChwChroTNHK46XFU4Mx2uyuNvTD4g@mail.gmail.com>
-Subject: Re: [PATCH v4 18/20] x86: doc: Update summaries and add links
+Date: Tue, 19 Sep 2023 15:20:04 +0800
+Message-ID: <CAEUhbmXjFsf3D-rJW3yiLQ4EUNytdhdnBi9a2mV6vWxAz9+Brw@mail.gmail.com>
+Subject: Re: [PATCH v4 19/20] x86: doc: Split out manual booting into its own
+ file
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -91,8 +92,8 @@ X-Virus-Status: Clean
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> Refresh the summary information so it is more up-to-date. Add links to
-> the coreboot and slimbootloader docs.
+> Move this out of the main file since for simple users it is easier to
+> rely on standard boot.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
@@ -102,8 +103,11 @@ e:
 > Changes in v2:
 > - Add new patch
 >
->  doc/arch/x86/x86.rst | 17 ++++++++++-------
->  1 file changed, 10 insertions(+), 7 deletions(-)
+>  doc/arch/x86/index.rst       |   1 +
+>  doc/arch/x86/manual_boot.rst | 276 +++++++++++++++++++++++++++++++++++
+>  doc/arch/x86/x86.rst         | 272 +---------------------------------
+>  3 files changed, 280 insertions(+), 269 deletions(-)
+>  create mode 100644 doc/arch/x86/manual_boot.rst
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
