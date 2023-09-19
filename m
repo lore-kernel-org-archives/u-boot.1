@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F2ACCD54AF
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 11:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5676CD54B5
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 11:21:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A537E86AE1;
-	Tue, 19 Sep 2023 13:19:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BB0786AE1;
+	Tue, 19 Sep 2023 13:21:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qYBGL+ez";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oinEqNZY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38B2C86B34; Tue, 19 Sep 2023 13:19:11 +0200 (CEST)
+ id 7DE7586B1D; Tue, 19 Sep 2023 13:20:59 +0200 (CEST)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC53D86ADA
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 13:19:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2613886ADA
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 13:20:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38JBJ2cl005691;
- Tue, 19 Sep 2023 06:19:02 -0500
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38JBKtgS006385;
+ Tue, 19 Sep 2023 06:20:55 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695122342;
- bh=QMFlYlbkuXUqJqMflA1D4PlbyV52BveKCNLHy+4rB9c=;
+ s=ti-com-17Q1; t=1695122455;
+ bh=D6cX3PmBCpRML/p/pNZhQm0kMSHWbaxEJghmt3dI8fs=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=qYBGL+ez6dCiDAx2KPHijHTbD3koT0FDInNfoviSS+i2mrfe+48mGosxOMWyhJsio
- UL9+HO3sjlpW33A3eEX7/8pX4vKcluixshQKztnqE6PLpEP2Yv0tmBfrOxT6rxrifD
- dZ3kOWM2D99l3gC9ZrzLkb/X+j+0vsvXm0vo+YFQ=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38JBJ2I0026492
+ b=oinEqNZYk0QPBa7T7aZZr+R8MdN8uVaideVSRRaPUMVJB4Qsl/OVHZQEuReTTHvCq
+ HM/PQIIERWpuXS5m1inZT8EHJmvvlHgh/GCF5q61CC+U3Lboj84qWvhJD4j94chnqP
+ vwEzCqtPqGkfFtFODeCxuxc2RT7Eqg0xL7JmTm/A=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38JBKtmV121700
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Sep 2023 06:19:02 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Sep 2023 06:20:55 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Sep 2023 06:19:02 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE102.ent.ti.com
+ Sep 2023 06:20:55 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE102.ent.ti.com
  (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Sep 2023 06:19:02 -0500
+ Frontend Transport; Tue, 19 Sep 2023 06:20:55 -0500
 Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38JBJ2RH059587;
- Tue, 19 Sep 2023 06:19:02 -0500
-Date: Tue, 19 Sep 2023 06:19:02 -0500
-From: Nishanth Menon <nm@ti.com>
-To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "sjoerd@collabora.com"
- <sjoerd@collabora.com>, "a-govindraju@ti.com" <a-govindraju@ti.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "g-vlaev@ti.com" <g-vlaev@ti.com>, "d-gole@ti.com" <d-gole@ti.com>,
- "vigneshr@ti.com" <vigneshr@ti.com>, "sjg@chromium.org" <sjg@chromium.org>
-Subject: Re: [PATCH v2 4/8] arm: dts: k3-am625-sk: Enable emmc in SPL
-Message-ID: <20230919111902.5xuvptr4iqmgsmkr@quotable>
-References: <20230406185542.1179073-1-sjoerd@collabora.com>
- <20230406185542.1179073-5-sjoerd@collabora.com>
- <4b593377588ba713229c6671edf0c0848a857bf4.camel@siemens.com>
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38JBKsHM019460;
+ Tue, 19 Sep 2023 06:20:54 -0500
+Date: Tue, 19 Sep 2023 16:50:53 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Nishanth Menon <nm@ti.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
+ <a-nandan@ti.com>,
+ Andrew Davis <afd@ti.com>, Nikhil M Jain <n-jain1@ti.com>
+Subject: Re: [PATCH] J721S2 DTS Sync from v6.6-rc1 to u-boot
+Message-ID: <20230919112053.g2dwnssl7s7hqjo5@ula0497581>
+References: <20230919-b4-upstream-j721s2-r5-pinmux-v5-0-a54d6ee26310@ti.com>
+ <20230919111314.aumeucsnla6bk6zn@librarian>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <4b593377588ba713229c6671edf0c0848a857bf4.camel@siemens.com>
+In-Reply-To: <20230919111314.aumeucsnla6bk6zn@librarian>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,63 +83,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 07:35-20230919, Sverdlin, Alexander wrote:
-> Hello Sjoerd,
-> 
-> On Thu, 2023-04-06 at 20:55 +0200, Sjoerd Simons wrote:
-> > sdhci0 on the k3-am625-sk is the emmc, enable this in SPL as well to
-> > allow booting from that media.
+Hi Nishanth,
+
+On 06:13-20230919, Nishanth Menon wrote:
+> On 14:09-20230919, Manorit Chawdhry wrote:
+> > The sync tries to ensure that U-boot remains functional with the updated
+> > Linux DTS and all the fixes from Linux move to U-boot during the sync.
 > > 
-> > Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
-> > Reviewed-by: Tom Rini <trini@konsulko.com>
-> 
-> thanks for the patch! I've tested the eMMC boot on AM625 SK
-> and this was exactly the missing piece, with the patch it boots fine:
-> 
-> Tested-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-
-note: I have also posted https://lore.kernel.org/r/20230911162535.1044560-4-nm@ti.com
-
-That should take care of this in the kernel sync next time around.
-
-But, for next:
-
-Reviewed-by: Nishanth Menon  <nm@ti.com>
-
-> 
+> > The series tries to sync from Linux v6.6-rc1 along with addition of
+> > the documentation for J721S2 that had been previously missing.
+> > 
+> > DMA fixes [0] are currently being upstreamed to Linux. 
+> > 
+> > Test Logs are included in [1]
+> > 
+> > [0]: https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
+> > [1]: https://gist.github.com/manorit2001/dbad09fd00e8b7c3872e85874c8e648c
+> > 
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > > ---
+> > Changes in v5:
+> > - Fix the link ( Apurva )
+> > - Sync with v6.6-rc1
+> >     - Remove mcu_ringacc override from -u-boot.dtsi
+> > - Added a patch revert that bring some instability in SK-AM68
+> > - Update the commit messages to that of 6.6-rc1
+> > - Link to v4: https://lore.kernel.org/r/20230816-b4-upstream-j721s2-r5-pinmux-v4-0-dc114bece5d7@ti.com
 > > 
-> > (no changes since v1)
+> > ---
+> > Manorit Chawdhry (6):
+> >       Revert "arm: dts: k3-j7*: ddr: Update to 0.10 version of DDR config tool"
+> >       arm: mach-k3: j721s2: Add mcu_timer0 id to the dev list
+> >       k3-j721s2: Sync from Linux tag v6.6-rc1
+> >       k3-am68: Sync from Linux tag v6.6-rc1
+> >       docs: board: ti: Add j721s2_evm documentation
+> >       board: ti: j721s2: MAINTAINERS: Update the MAINTAINERS File.
 > > 
-> >  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 8 ++++++++
-> >  1 file changed, 8 insertions(+)
+> > Udit Kumar (1):
+> >       configs: j721s2_evm_r5_defconfig: Increase malloc pool size in DRAM
 > > 
-> > diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> > index 0def84b4cf0..5f90a4b56f1 100644
-> > --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> > +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> > @@ -92,6 +92,14 @@
-> >         bootph-pre-ram;
-> >  };
-> >  
-> > +&sdhci0 {
-> > +       bootph-pre-ram;
-> > +};
-> > +
-> > +&main_mmc0_pins_default {
-> > +       bootph-pre-ram;
-> > +};
-> > +
-> >  &sdhci1 {
-> >         bootph-pre-ram;
-> >  };
 > 
-> -- 
-> Alexander Sverdlin
-> Siemens AG
-> www.siemens.com
+> Not sure what happened to your patches, but they are missing sequence
+> numbering and versioning info.
+> 
 
--- 
+Am not sure either.. I had been using b4 for all the patches and I still
+see that my next revision queued by b4 also has the same problem. Not
+exactly sure what went wrong with b4 but would be careful next time.
+Thanks for pointing it out.
+
 Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Manorit
+
+> -- 
+> Regards,
+> Nishanth Menon
+> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
