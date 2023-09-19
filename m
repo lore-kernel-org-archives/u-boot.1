@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1AA1CD54A7
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 08:29:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C3FFCD54A7
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 08:31:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C5CB86B0A;
-	Tue, 19 Sep 2023 10:29:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D470886B0A;
+	Tue, 19 Sep 2023 10:31:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eMTbeiBf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jq0AE32T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 529FB86B0D; Tue, 19 Sep 2023 10:29:27 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 279C886A49; Tue, 19 Sep 2023 10:31:00 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 879A686A49
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 10:29:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57DDD86B16
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 10:30:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-99bf3f59905so716939466b.3
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 01:29:25 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-530bc7c5bc3so3702358a12.1
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 01:30:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695112165; x=1695716965; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695112258; x=1695717058; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+dtZJ0zMcSH4otb8LNr2+KwUjvqnT7vifN629n7S6J0=;
- b=eMTbeiBf+RLqW2ZJD0CeQ5bYoV1kSOgxUDz/lOcGEg/CLGW+tI1Bor7ub0pD+KFwPt
- 6FirySqEBD8o6GrnqW56huRka+GWDhnlNcBm09rpRIiF4rvq6gx59a8rSGxqshQEayUM
- a+2uqs3NuQyNLVTTIJEJRWSBhbFupC3etE7pEqbNox8hAz0XH94bPFogAVBU4ULZICY2
- KRz6bI0o+uvggGGMB8u298zB9ycJDsxHuEneQaXkljKJkP2YeziDXCaV4Id9sxs1GK+h
- S2HdA9K8lURVEP8Qb69FLQMy/VU+SH6yNhk9gyBrjdEbtp/LeflABbX9o/i/yQlzPO+l
- B7HQ==
+ bh=SdL/3OFzagnPJ4/Xmy/FqXOKBeE96BMuQPoaitW+MKc=;
+ b=Jq0AE32T6krBKp9KWESFurwLLhewiZ8k5Zu+ZFvl1Ri3jmqXaYJxkgqF8pRUUGnrmS
+ rBidP0J7fIjtlwIfZd5gm3x8KMm3I3uV04bThSwlH+XSKpNUQlFkWNBZ9u9nPNn3z6vc
+ Yupy7U2a1ODnVmB4FqJpG9oObie3Co5K5lHdDpm5cD7A6v7wls2ToHDXm0rri+NBvpxr
+ NupNqSUNwGWrc1EWGeYbs+gFZtEasp+c2mkD/upmgS3SP7896mbInRorGj4rbl0m8Qqm
+ X7eij8bvgJ4RSY/0HghPggiXchtyDPq+zQQbkMtyosrJ2DP2wP8XgoqvDIhQWZBsQimd
+ Rr9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695112165; x=1695716965;
+ d=1e100.net; s=20230601; t=1695112258; x=1695717058;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+dtZJ0zMcSH4otb8LNr2+KwUjvqnT7vifN629n7S6J0=;
- b=LViFJ4VhDS0En0aMxFAnzvGvTFBHbPbmV141LIJQrELIEQ4QTheO/i5FM+AyM1y7ne
- JE95d7h2Kge6pCtAv+VPHkAuAXJUFsyE3EKrUc1zts+Ir/Ko9F2xFu4MpBTLsSKstnyF
- laDHVfaNslIc2vRgafk/0mZallEpvjkIySeEOXsoGHeeBHuYkM+xsb9Ouqu31kbp4IHS
- 9Pl8Z6/hvADjnUF4looWYP8RQU3cDbxZKMCUFgXOCXDJGNcrY+YgxVfkWIlkM5cdDlgW
- DZwi3jzzQnzNTsBxOKX5510n/yC0GZ4rAzBAENMDwzx/qOytsRs8fLhP+2Yxp3Qxkh65
- c92g==
-X-Gm-Message-State: AOJu0YxouZuk7A6aZoKi9M28tQmawCjMSLjXevzpQcxYEL/bdymzZnM3
- iq4GP9hm/742HsgQzLFntyMmO7fbQOU3y0u21PHz00TbToI=
-X-Google-Smtp-Source: AGHT+IFJPYvXnnUFjBzUcVmVIs86hPKr8peGYkg5O3iWJkOJV+bmAao3HYf6AjCgte8hwT0NE9zb4t4ypwFtzZKzU0g=
-X-Received: by 2002:a17:907:2716:b0:9a5:c5a8:a1a0 with SMTP id
- w22-20020a170907271600b009a5c5a8a1a0mr9581443ejk.49.1695112164756; Tue, 19
- Sep 2023 01:29:24 -0700 (PDT)
+ bh=SdL/3OFzagnPJ4/Xmy/FqXOKBeE96BMuQPoaitW+MKc=;
+ b=O9wLXdeOFGnqDvr53dZAHIepwv9M5ttzmUaNGxErudQ9wwcNJfDSJ1hP+OypsY8R9K
+ fzTCegMR1BXZEX30VtiLp8f6+BxTdBhiAsY3QIn9ATC6bODkr/MoWs2M7iCxX1DCzOXs
+ 1RRregnu2Gfqd3Y7T2vWgBM1uwG7geQq+lCq1VkTp5nHnY+s1vK7Bu1uqns6AAzBz8t9
+ 8pEExQf+AvA0M8g4mE1XG7r3LfyX1kfFGzups6nB7hkvsukdNIbGt+oW0dzljmnCrx31
+ 225Fjf1HxeoMgK5X47kPMn4EE4IzmqHlQp9eO1uqsVXElABrTstaL6v6w9oS/roI6Qxz
+ 01QQ==
+X-Gm-Message-State: AOJu0YyoeU8Rsc/D+pZtK4Ww18Fs7DdTE7MTV5hhc3hAioAFHYXGHDTX
+ CS6ZXAtHvFkoZyYg2Z5hpJlMqjr76NRKKTc1XZM=
+X-Google-Smtp-Source: AGHT+IEWsm6uuqy2zZ5fNRyppObfuSL0WqjcbEdp5LgxcO48c4XBa6r+3b/GuMRrD2a2LTvP3WhA3BhL/UBAvxnVJ3w=
+X-Received: by 2002:a17:906:518d:b0:9a5:852f:10ae with SMTP id
+ y13-20020a170906518d00b009a5852f10aemr11047867ejk.60.1695112256835; Tue, 19
+ Sep 2023 01:30:56 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230907155825.48056-1-sjg@chromium.org>
- <20230907155825.48056-8-sjg@chromium.org>
-In-Reply-To: <20230907155825.48056-8-sjg@chromium.org>
+In-Reply-To: <20230907155825.48056-1-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 16:29:13 +0800
-Message-ID: <CAEUhbmU5PeHkFk+nJipZXyCHKf70wJFEZM0uzThYcGF3sa=Acg@mail.gmail.com>
-Subject: Re: [PATCH v2 7/9] x86: broadwell: Set up MTRRs
+Date: Tue, 19 Sep 2023 16:30:45 +0800
+Message-ID: <CAEUhbmWVMs2D1hKq2mVEF7UA3L4O+ajexErZQbNwGDxJsa5c9Q@mail.gmail.com>
+Subject: Re: [PATCH v2 0/9] x86: Fixes for chromebook_link64 and
+ chromebook_samus_tpl
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
+ Pavel Herrmann <morpheus.ibis@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,18 +91,31 @@ X-Virus-Status: Clean
 On Thu, Sep 7, 2023 at 11:58=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> The current condition does not handle the samus_tpl case where it sets
-> up the RAM in SPL but needs to commit the MTRRs in U-Boot proper.
+> These boards have various problems which prevent them from booting. In
+> the case of link there was a recent regression with PCI probing added to
+> SPL. For samus_tpl it needs a few tweaks to get things back up and
+> running.
 >
-> Add another case to handle this and update the comment.
+> This series resolves all known issues.
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> For v2, the 'Avoid starting up PCI automatically in SPL' patch has been
+> replaced with a global_data flag.
 >
-> (no changes since v1)
+> Changes in v2:
+> - Add new patch to allow marking driver model as dead
+> - Reword commit message for clarity and to fix typo
+> - Add new patch to mark driver model as dead when disabling CAR
 >
->  arch/x86/lib/init_helpers.c | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
+> Simon Glass (9):
+>   dm: core: Allow marking driver model as dead
+>   x86: broadwell: Show the memory delay
+>   x86: Add some log categories
+>   x86: samus_tpl: Correct text base and alloc sizes
+>   x86: spl: Change the condition for copying U-Boot to RAM
+>   x86: broadwell: Avoid initing the CPU twice
+>   x86: broadwell: Set up MTRRs
+>   x86: dm: Mark driver model as dead when disabling CAR
+>   x86: doc: Update the list of supported Chromebooks
 >
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+series applied to u-boot-x86/next, thanks!
