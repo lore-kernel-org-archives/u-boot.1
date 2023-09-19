@@ -4,75 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD248CD3437
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 04:58:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E36CD3437
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 06:08:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBAAE86A09;
-	Tue, 19 Sep 2023 06:58:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4DA4486A24;
+	Tue, 19 Sep 2023 08:08:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dzx4F04g";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IUL/gsAK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2C7086A1D; Tue, 19 Sep 2023 06:58:22 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 48AD386A2F; Tue, 19 Sep 2023 08:07:59 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6802F864F3
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 06:58:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44A9086A09
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:07:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38J4wHq9032020;
- Mon, 18 Sep 2023 23:58:17 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38J67o1u029834;
+ Tue, 19 Sep 2023 01:07:50 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695099497;
- bh=B4xBfwSqjKN+BG6b55kr1mPZD9lEWBxGskH+MDEYJPg=;
- h=From:Date:Subject:To:CC;
- b=dzx4F04gfPBP40hWLoeeQZoF9Iu6fdW/Vtxs/p70sMonAw2BZa3zu6nlNxWIeHAlk
- 1YC64bH0+/QNxiqKfm8mCOVebDjDJO+hvBlfzBw8JAkPw7yJsEUFPrP0GJ8rRqaAFa
- QYnz7tU9eswx5Fen0lREEjKxVk9G4ncFdpXn6B8A=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38J4wHsb115286
+ s=ti-com-17Q1; t=1695103670;
+ bh=2Q6ztbztJVh39i7Kv0J9SEGGW+znLdMw4kZXRaP6fd8=;
+ h=From:To:CC:Subject:Date;
+ b=IUL/gsAKcNl5yFHUs6IkjDflQQ3Yp5qaFyOelWNeS5ZM5Hmx0xJqVqchU6t3Ov0kN
+ k2ZZ/iaf8L247jP83xjmsxerZDe1i94K2znBU1lhSjvDzVh53II+rcbSSc5NGw3CWv
+ 0b7vaKG6pi3tUiXxpmROEWWbW45srORSP1J2yors=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38J67o02026398
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 18 Sep 2023 23:58:17 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 18
- Sep 2023 23:58:16 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE103.ent.ti.com
+ Tue, 19 Sep 2023 01:07:50 -0500
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE103.ent.ti.com
  (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
+ Sep 2023 01:07:49 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 18 Sep 2023 23:58:16 -0500
-Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38J4wEa7009959;
- Mon, 18 Sep 2023 23:58:15 -0500
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Tue, 19 Sep 2023 10:28:12 +0530
-Subject: [PATCH] env: ti: ti_common.env: Fix get_overlaystring for FIT
- Image
+ Frontend Transport; Tue, 19 Sep 2023 01:07:49 -0500
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38J67l85067118;
+ Tue, 19 Sep 2023 01:07:47 -0500
+From: Udit Kumar <u-kumar1@ti.com>
+To: <nm@ti.com>, <vigneshr@ti.com>, <seanga2@gmail.com>
+CC: <u-boot@lists.denx.de>, <lukma@denx.de>, <bb@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>
+Subject: [PATCH] clk: ti: Notify AVS driver upon setting clock rate
+Date: Tue, 19 Sep 2023 11:36:49 +0530
+Message-ID: <20230919060649.2518147-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-ID: <20230919-b4-upstream-overlaystring-v1-1-4c56e8d66173@ti.com>
-X-B4-Tracking: v=1; b=H4sIAGMqCWUC/x3MTQ5AMBBA4avIrE1SRfxcRSxaBpNQMkWIuLvG8
- lu894AnYfJQRw8Inex5dQFJHEE3GTcSch8MWulUVUmONsNj87uQWXA9SWZzB7EbUauCdGnLLh8
- shH4TGvj63037vh9z5tasawAAAA==
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye
- <a-limaye@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1695099494; l=1725;
- i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
- bh=8UwRJmH4BLyVNP8LX/PrQJMRCuY1LqLNFLV3uC2ixps=;
- b=Kn64owNsl7T2UdSD39FOyYW08G4SY845zHgMYg4WBJms1n0en/z527Mih1nt+oK9MWhSS2Xwn
- msN9eu376sUAFg+LF1tT3UIPdnkqmPpiqjU2h7AsbZeknG7zu2DVzmT
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,51 +78,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After the refactor with conf- nodes in fitImage, overlaystring wasn't
-didn't handle the new conf- nodes in FIT Booting. Fix get_overlaystring
-to handle conf- nodes.
+AVS is enabled at R5 SPL stage, where clk-k3 is used
+instead if clk-sci driver.
 
-Fixes: 837833a724b7 ("environment: ti: Add get_fit_config command to get FIT config string")
-Reported-by: Aniket Limaye <a-limaye@ti.com>
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+clk-k3 driver to notify AVS driver upon setting clock rate
+so that voltage is changed accordingly.
+
+Fixes: e0aa873bc7cd ("clk: clk-ti-sci: Notify AVS driver upon setting clock rate")
+
+Cc: Keerthy <j-keerthy@ti.com>
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 ---
-Test Logs:
-=> setenv name_overlays ti/k3-dt.dtbo ti/k3-dt1.dtbo
-=> run get_overlaystring
-=> printenv overlaystring
-overlaystring=#conf-ti_k3-dt.dtbo#conf-ti_k3-dt1.dtbo
----
- include/env/ti/ti_common.env | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ drivers/clk/ti/clk-k3.c  | 5 +++++
+ drivers/clk/ti/clk-sci.c | 5 -----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
-index e87a41a6590b..4d0590912614 100644
---- a/include/env/ti/ti_common.env
-+++ b/include/env/ti/ti_common.env
-@@ -16,9 +16,14 @@ addr_fit=0x90000000
- name_fit=fitImage
- update_to_fit=setenv loadaddr ${addr_fit}; setenv bootfile ${name_fit}
- get_overlaystring=
--	for overlay in $name_overlays;
--	do;
--	setenv overlaystring ${overlaystring}'#'${overlay};
-+	for overlay in $name_overlays; do;
-+    if test ${boot_fit} -eq 1;
-+      then
-+        setexpr name_fit_overlay gsub / _ conf-${overlay};
-+        setenv overlaystring ${overlaystring}'#'${name_fit_overlay};
-+      else
-+        setenv overlaystring ${overlaystring}'#'${overlay};
-+    fi;
- 	done;
- get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
- run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
-
----
-base-commit: 2fe4b54556ea6271237b35de68dc458bfceab94c
-change-id: 20230915-b4-upstream-overlaystring-207e28b8c5fb
-
-Best regards,
+diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
+index ba925fa3c4..8016c3784a 100644
+--- a/drivers/clk/ti/clk-k3.c
++++ b/drivers/clk/ti/clk-k3.c
+@@ -11,6 +11,7 @@
+ #include <errno.h>
+ #include <soc.h>
+ #include <clk-uclass.h>
++#include <k3-avs.h>
+ #include "k3-clk.h"
+ 
+ #define PLL_MIN_FREQ	800000000
+@@ -339,6 +340,10 @@ static ulong ti_clk_set_rate(struct clk *clk, ulong rate)
+ 		}
+ 	}
+ 
++	if (IS_ENABLED(CONFIG_K3_AVS0))
++		k3_avs_notify_freq(data->map[clk->id].dev_id,
++				   data->map[clk->id].clk_id, rate);
++
+ 	return new_rate;
+ }
+ 
+diff --git a/drivers/clk/ti/clk-sci.c b/drivers/clk/ti/clk-sci.c
+index 74df5a397b..298fa9dc8b 100644
+--- a/drivers/clk/ti/clk-sci.c
++++ b/drivers/clk/ti/clk-sci.c
+@@ -17,7 +17,6 @@
+ #include <dm/device_compat.h>
+ #include <linux/err.h>
+ #include <linux/soc/ti/ti_sci_protocol.h>
+-#include <k3-avs.h>
+ 
+ /**
+  * struct ti_sci_clk_data - clock controller information structure
+@@ -94,10 +93,6 @@ static ulong ti_sci_clk_set_rate(struct clk *clk, ulong rate)
+ 
+ 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
+ 
+-#ifdef CONFIG_K3_AVS0
+-	k3_avs_notify_freq(clk->id, clk->data, rate);
+-#endif
+-
+ 	ret = cops->set_freq(sci, clk->id, clk->data, 0, rate, ULONG_MAX);
+ 	if (ret) {
+ 		dev_err(clk->dev, "%s: set_freq failed (%d)\n", __func__, ret);
 -- 
-Manorit Chawdhry <m-chawdhry@ti.com>
+2.34.1
 
