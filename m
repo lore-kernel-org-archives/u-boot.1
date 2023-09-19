@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59DFFCD3448
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1B11CD3445
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:20:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0060986A8F;
-	Tue, 19 Sep 2023 09:19:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 539D686A8A;
+	Tue, 19 Sep 2023 09:19:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WeOHXz3J";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mYBK5jBs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 195BC86A21; Tue, 19 Sep 2023 09:19:45 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id F0CA986A9E; Tue, 19 Sep 2023 09:19:47 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EF1F86A84
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A30C86A21
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-9ad8a822508so668918166b.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:43 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-99de884ad25so707648866b.3
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695107983; x=1695712783; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695107986; x=1695712786; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZVgnBsgKXzzJ/V41MylawU+dpqdnFLRdP/g8NkSCyNo=;
- b=WeOHXz3J28km1ziHTyNQgHH2+TsicE+zOhNqX2jBIJJwqfsiyHLlAWEab2V+ty57RF
- fpmH9CYRnXDfW9fC05UIBBS8H/bzwJF0Ml1dXtMJIMyxg9DAncPGORp1SQdOua1G8omi
- ZqgjEtEI1n0wFY7FnbxgHdFn0cYBvbKgg27KsL6vejWHdLQHufRQxE7tZUtPKK/Jlw0U
- ZtzL1Ph2Fsy4v88VR4nnUW9zoun7Wz2eheo2sF41ixjonQib1C2LlppNyNA1PXjhowne
- iGo/MmRQ6HCsE7jtmNMqwA5wg2L6b26SRm7MGvagAOIKQE+OV45GN2iWqlbiMvYshFrJ
- uy4A==
+ bh=omBncyWLVeP606zrycOUhrfuIxSOk+7+1IrwryzNLHs=;
+ b=mYBK5jBsdYFUHtmu0fcQOk7EY0Bbu6COrlAAlwVYoRg+r4XkYdZlX0rgAS+RB7yJ4E
+ ydzFsnRDWuJrTPp6SPaskaV7OHzhpTGooPF4bLBXmTj+Zh4DiTK8loYaKpPhMzqhGhiw
+ CTrug4S5230Hh9S0R3ldzxHUzbYEINQc3K4jvd2NIcKCKQ1JrPEU4Wc7JDCBkElx7EPL
+ KtH0C68LA662ugw3QK9PZ4Q0e1Zrk4IUzaWAfc0uAhuLExSamd2GU3xWFb+sgzAfDtcf
+ UAxwEY/BSbaKh/D5EaeouZ7xOWOOP42regNzXJDlXdgfn0ME2cIwed1OIOhX4YVwUfw+
+ rgfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695107983; x=1695712783;
+ d=1e100.net; s=20230601; t=1695107986; x=1695712786;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZVgnBsgKXzzJ/V41MylawU+dpqdnFLRdP/g8NkSCyNo=;
- b=ZnE7HVLGHSsaDcsomhGI/Ij4vmbOrEVCiEPVCRN4jU38gIcmlVNCAenLccOJ+QnXot
- cYokDk+By0UMrsKcMR7zdLJobZTlKYQhWNVclKenrHGG1ekUlU7BQTcjDGD97CweunVJ
- J+o1xGTCPG/6tMinnFYQZkww7RMmtnILrIwch8fOA03JzHO1ST7GhXXg6CWxHZgIKunq
- dTa+6oeYVMC3otLJw2IYwEEPa79GAI0jZWLwBB56ezFG+gZFEUBm8RACC/vt8hRdk6wp
- SJX44pgNoDt2tPSt5qSNOwoPTBzK37mGlEx1UFa7c4Gchd25qWQt/P9ZxsyXTlDE6KqO
- qiAw==
-X-Gm-Message-State: AOJu0Yy097K6jUQWcSF43sHazVNBKg9afrRFrHb2ceLL1P3u7dt62trL
- k2oV2Bune+ZSvmzPbO5mtHDqzhP8/0A9zcLlflM=
-X-Google-Smtp-Source: AGHT+IHlpPD0thzSj9TXgKbb3OUfx2/u7LuwHuJ0waBXqGshu1Cci7UUE7FaOuAQLkSrwWMe/nppMtUAsGA7y33/gEo=
-X-Received: by 2002:a17:906:5a5f:b0:9aa:20b2:35e7 with SMTP id
- my31-20020a1709065a5f00b009aa20b235e7mr9020082ejc.9.1695107982784; Tue, 19
- Sep 2023 00:19:42 -0700 (PDT)
+ bh=omBncyWLVeP606zrycOUhrfuIxSOk+7+1IrwryzNLHs=;
+ b=gUNPQzSybvK9LgmABy3J7TBVBT1LG9C0WwavX43mP1z0e+81n+IHt6d4gG7Zmbvho7
+ V0IL+EFDQyhK1OC09rky4lfN/p8RBETKeg7eJ7sj6GrR3kVo6ta0NXLM3od9E4bEYoWR
+ fPKHZxMtivzSDgb6A4lNmlmCTRiLvrmihuI6WEVrzyGYdMNSNnd78ituEcKL/JUTRzR6
+ qCQBvwctCjsZGiIQzjUkvmLwSPJaxnybTvu39dABqgoc4TPy+iELURDitsqXsq5O5b5X
+ 9WxnlQDic82FbvNkUCn2ToM31YLw8bSGLCB006BwminMqaZI2X9NSy9FjWNiDAbv8zwA
+ wGyQ==
+X-Gm-Message-State: AOJu0Yz9utTVuH3VDbnT8E6MykX/IRuxMQ4r2UHyonm4vs4w6G1zEhom
+ ZJ8/aMnD7jv0kyihtEGn7Pr65bgbD7PIYYHqmtw=
+X-Google-Smtp-Source: AGHT+IEIzbEpxLDETp/hH+a15lr9MfdpVAnsMasqHO0mQOulIyCpLWl6yeeaILGIE2u4mwmIjMM0koh2EhX5VcnPssY=
+X-Received: by 2002:a17:906:73cb:b0:9a5:c4ae:9fec with SMTP id
+ n11-20020a17090673cb00b009a5c4ae9fecmr10669590ejl.52.1695107985360; Tue, 19
+ Sep 2023 00:19:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-6-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-6-sjg@chromium.org>
+ <20230823211059.1235147-7-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-7-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:19:29 +0800
-Message-ID: <CAEUhbmXg24aiPR1YJivd6S4cJZLGQ8U5S0NA-f1p4c51+JJ6ug@mail.gmail.com>
-Subject: Re: [PATCH v4 05/20] x86: Allow APCI in SPL
+Date: Tue, 19 Sep 2023 15:19:32 +0800
+Message-ID: <CAEUhbmVbt8ErjpkmwMW5an=k_hmtvM6grDD8BNBKDofHy7r4Ng@mail.gmail.com>
+Subject: Re: [PATCH v4 06/20] x86: coreboot: Look for DBG2 UART in SPL too
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -91,16 +91,48 @@ X-Virus-Status: Clean
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> This is needed so we can find the DBG2 table provided by coreboot. Add a
-> Kconfig so it can be enabled.
+> If coreboot does not set up sysinfo for the UART, SPL currently hangs.
+> Use the DBG2 teechnique there as well. This allows coreboot64 to boot fro=
+m
+
+typo: technique
+
+> coreboot even if the console info is missing from sysinfo
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
 > (no changes since v1)
 >
->  lib/Kconfig | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  configs/coreboot64_defconfig | 1 +
+>  drivers/serial/Kconfig       | 2 +-
+>  2 files changed, 2 insertions(+), 1 deletion(-)
 >
+> diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
+> index 5623197f6be..e8165961c19 100644
+> --- a/configs/coreboot64_defconfig
+> +++ b/configs/coreboot64_defconfig
+> @@ -54,4 +54,5 @@ CONFIG_SYS_64BIT_LBA=3Dy
+>  CONFIG_SOUND=3Dy
+>  CONFIG_SOUND_I8254=3Dy
+>  CONFIG_CONSOLE_SCROLL_LINES=3D5
+> +CONFIG_SPL_ACPI=3Dy
+>  # CONFIG_GZIP is not set
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> index 7ca42df6a7e..27b4b9d9650 100644
+> --- a/drivers/serial/Kconfig
+> +++ b/drivers/serial/Kconfig
+> @@ -672,7 +672,7 @@ config COREBOOT_SERIAL
+>  config COREBOOT_SERIAL_FROM_DBG2
+>         bool "Obtain UART from ACPI tables"
+>         depends on COREBOOT_SERIAL
+> -       default y if !SPL
+> +       default y
+>         help
+>           Select this to try to find a DBG2 record in the ACPI tables, in=
+ the
+>           event that coreboot does not provide information about the UART=
+ in the
+> --
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
