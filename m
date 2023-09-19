@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98D36CD3445
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:19:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C3D6CD3445
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:20:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58F5B86A3F;
-	Tue, 19 Sep 2023 09:19:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A73C786A3C;
+	Tue, 19 Sep 2023 09:19:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YGShc9Vl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lYXqxX0K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BE7986416; Tue, 19 Sep 2023 09:19:38 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 5858C86A49; Tue, 19 Sep 2023 09:19:40 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AAD0386A3C
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C73386A3A
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-530ea522f5eso2595282a12.3
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:36 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-9a64619d8fbso702415666b.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695107976; x=1695712776; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695107978; x=1695712778; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g7/JEZyGc5fZPDOyKlhQAH8UPvVmSttGInfS49bnzzY=;
- b=YGShc9Vl02f0Wp4ZoYiSE8pxx0vgbwIUGwbaik5/AgbFtS/QFlG4JwtVV/+1+uiSoU
- IgCya1T5uKMUU5tOD0yAt5RgKLyBgFVr2WphwYZwVQwmz7hoGwQDInysMtV3a8mTztm9
- Rd8xvcA+ix7NlzxnT47k4e0VnKRoKl21ziYPEPBej/Ofkq4b12fVfpjBC7Cv2lZKkt1D
- MMapNx4O0qO6WpGj5c/RJsoHuk/lkrbSTdBdZf9ESLUr59FEawSKylDQOINlMJd5b26d
- ZkO38DTMgaZxiuwsGtgwFUiwJsFdLtThekINV9Q3qEmZ5eLlMFBSLo/e/3HwjP6KUslo
- Z8iA==
+ bh=BiFpF1wntFdy/4RE/BbFMY77jfNxE99Ambg1CzMWNpg=;
+ b=lYXqxX0KxadJ5w4Wgv2zFh5dVS+eQ2KkxKHFReGFddK4MEltw0GausLQc20ZrIczVP
+ yUGOVhF88UkEJ2bsIpGY5UVNsn/ZwvYZQcbsCv07pYnWnufL2ATbDycr9UPbtBRzkmQI
+ RX1pRXSpteIz1oE1dllnB5i/tXHugq+IrC8aRe7u3l9D77hZ2zY3vhEnFGoeYbY7Dx6S
+ q4Bd5cf+JD5tCB9J8oB19tfg4OGvnIKP2nYPMYzbqLzcnzUKpatGjNUVZpZV6kEnIG1Y
+ mf60HZsrb5ns3u2HfidE4bgtWm6rX67KUHgbalS748ouGvQfJSxsgvfePiN5JTq6yeKu
+ V0MQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695107976; x=1695712776;
+ d=1e100.net; s=20230601; t=1695107978; x=1695712778;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g7/JEZyGc5fZPDOyKlhQAH8UPvVmSttGInfS49bnzzY=;
- b=lX+9CAt2LJKRcvY8WtypaQsDhlQ8mAk5+XwHHvnLG2jFYW9WgVNNo+WyUfO2bKG8AK
- lXrfY24zjAk5DeYQl2To2QpfBGk6Gocj5CL7wumgl/NT27Ic0yYstamklN7H2AeZ3Vgb
- wqLFFoJMcdu+8HZIfC4XjxBgRAGm9xCR+Dh4vQt3BXSCPBeHn/f8DskfZezirPgvGPz/
- emOFoAWEQR2M7uFlk/po06yx7KSrnFo8spRduiNhvStoD3wuVPL57K8izMz+pE/LUlDT
- O+lWiXbWU3RVHy7mKogGnSc+UsJZBIwABDsTHejwD5MaKGOjfcLv3qq3uufF/O67oQv5
- T1Zw==
-X-Gm-Message-State: AOJu0YxUedPcrKShi8vAWOFt9Up6iaif2wpQ18eRQ1wVy5O7zyaI9yC8
- /s3uNeckKqE05SDc/zF13NcZzjBhCrm3e8oI0NU=
-X-Google-Smtp-Source: AGHT+IEkTDcQcRlUbnRSHhaPDRghJH7mVIAzXRAdjSfFw/fqK2ZwM7IaXjwmVK7e3nF5RGW40LY3K/3kxXfUD3oYxWw=
-X-Received: by 2002:a05:6402:f1b:b0:530:ccf7:37af with SMTP id
- i27-20020a0564020f1b00b00530ccf737afmr7496231eda.12.1695107975946; Tue, 19
- Sep 2023 00:19:35 -0700 (PDT)
+ bh=BiFpF1wntFdy/4RE/BbFMY77jfNxE99Ambg1CzMWNpg=;
+ b=H2RTVPJCpU5zNneD19soWljcLa5UxZtZzc8QKY63LiZ946y0QBuqEH1T2DbM86gfSZ
+ VrP5tFKOXANNYjZ3aVt6X5bHzJkgkXFIMyor8fEemseqrjmVTEU61u+TIl5vXrtMz7lO
+ cpz9rYssANOggptGKP4NDy5aSMdBEM82mywWiQgVohLrAwFYy3U9rJTxlElJM3AMa0xi
+ 4yvtU/h/Z/uq4y6UF/m2ajChkndwO5v4ecgbYk6G0KZwd5O5dnOKFLk2iC0WhXsFdixM
+ g1wL434VpV/TTf49SR2lkX6aoBcVofHfNB4DIg77cftLqPFk1BUijiqxw/NsFkJ67rGK
+ vuqw==
+X-Gm-Message-State: AOJu0YyVlJf00DTodRrSE5EXPmPVemOirW6bxUnJ2kOuhJHWsVNJnrda
+ myaOgj6wbp0aEn20AU2antgvpyqTegV+PFvgM4k=
+X-Google-Smtp-Source: AGHT+IF5p/gyHCc12mQnGkbTvlBoSa2Ipn7uStW+47ucRtcJkhwpgsjE9zJG0l5IT8o4+DP+vQ+hc0jrn/X1ksE2R9o=
+X-Received: by 2002:a17:906:51c6:b0:9aa:16c4:be16 with SMTP id
+ v6-20020a17090651c600b009aa16c4be16mr9816639ejk.57.1695107978149; Tue, 19 Sep
+ 2023 00:19:38 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-4-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-4-sjg@chromium.org>
+ <20230823211059.1235147-5-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-5-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:19:24 +0800
-Message-ID: <CAEUhbmUPEkFNSgu=QXb2Q26m=m-7TtbvTLL2=hp02D=RDu05Rg@mail.gmail.com>
-Subject: Re: [PATCH v4 03/20] x86: coreboot: Rearrange arch_cpu_init()
+Date: Tue, 19 Sep 2023 15:19:26 +0800
+Message-ID: <CAEUhbmXGUnVFFG-fLyrcSnFr=S_jhVjMUKPT0mjG1556M9Jrqg@mail.gmail.com>
+Subject: Re: [PATCH v4 04/20] x86: Set the CPU vendor in SPL
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -91,57 +91,18 @@ X-Virus-Status: Clean
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> Init errors in SPL are currently ignored by this function.
->
-> Change the code to init the CPU, reporting an error if something is wrong=
-.
-> After that, look for the coreboot table.
+> We don't read this information in 64-bit mode, since we don't have the
+> macros for doing it. Set it to Intel by default. This allows the TSC time=
+r
+> to work correctly.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
 > (no changes since v1)
 >
->  arch/x86/cpu/coreboot/coreboot.c | 12 +++++++++---
->  1 file changed, 9 insertions(+), 3 deletions(-)
+>  arch/x86/cpu/x86_64/cpu.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
 >
-> diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/cor=
-eboot.c
-> index 835b2c77746..c2ceaa9a56c 100644
-> --- a/arch/x86/cpu/coreboot/coreboot.c
-> +++ b/arch/x86/cpu/coreboot/coreboot.c
-> @@ -21,7 +21,14 @@
->
->  int arch_cpu_init(void)
->  {
-> -       int ret =3D get_coreboot_info(&lib_sysinfo);
-> +       int ret;
-> +
-> +       ret =3D IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
-> +                x86_cpu_init_f();
-
-nits: not aligned
-
-> +       if (ret)
-> +               return ret;
-> +
-> +       ret =3D get_coreboot_info(&lib_sysinfo);
->         if (ret !=3D 0) {
->                 printf("Failed to parse coreboot tables.\n");
->                 return ret;
-> @@ -29,8 +36,7 @@ int arch_cpu_init(void)
->
->         timestamp_init();
->
-> -       return IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
-> -                x86_cpu_init_f();
-> +       return 0;
->  }
->
->  int checkcpu(void)
-> --
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
-
-Regards,
-Bin
