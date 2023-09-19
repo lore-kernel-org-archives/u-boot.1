@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BB77CD5BA7
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 12:08:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11528CD5BB5
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 12:57:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A65486B54;
-	Tue, 19 Sep 2023 14:08:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3130E8073D;
+	Tue, 19 Sep 2023 14:57:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SktgPpBd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Oi+h43x+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14E87807BC; Tue, 19 Sep 2023 13:35:53 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 70A0B86AE7; Tue, 19 Sep 2023 14:57:54 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4ED386AE8
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 13:35:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73AAA805CB
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 14:57:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38JBZjNv121532;
- Tue, 19 Sep 2023 06:35:45 -0500
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38JCvmrk015136;
+ Tue, 19 Sep 2023 07:57:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695123345;
- bh=HFzIWAZL41FHWnRPEMBLxknO2f4I4FN6DzBdudiR9V4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=SktgPpBdv7e6fXWIayT9OZhamtq1fdeSeyNJzZz+DJtb+mjKm5MFK23JqaZFSwTZH
- jod66OsmdML3YPIPjdk6d3oyjy/XNH+I5s7KLSu6aUg23Bh16fF2TdO8QXxeoRdR6M
- nZwpuJP+X+5/jSCBw9mZbe0UlAKXe41+nUMzZlz4=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38JBZjNf034842
+ s=ti-com-17Q1; t=1695128268;
+ bh=HUhXtniuhIIowbRExXKJAbSsW2RECClr7cE3L6Wwu5w=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Oi+h43x+D0hvJ4XA2Zgl6ffysoAYxkx03jrVlb1gnvQo/06skK8J9SjUGdg1Zw9Jh
+ IwL577PXBJ3ESlG7Fg8dzkEk/tpgNZmlaMe0ITc4hzLX7wqiuKHNUgZB/XCQHckxqK
+ GnhQV7F4M7iqJ36IYF8IjT4A1PaDLBa8marCPjjs=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38JCvmSG042183
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Sep 2023 06:35:45 -0500
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 19 Sep 2023 07:57:48 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Sep 2023 06:33:09 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 07:57:47 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Sep 2023 06:33:08 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38JBX86s030344;
- Tue, 19 Sep 2023 06:33:08 -0500
-Date: Tue, 19 Sep 2023 17:03:07 +0530
-From: Dhruva Gole <d-gole@ti.com>
-To: Nishanth Menon <nm@ti.com>
-CC: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "sjoerd@collabora.com"
- <sjoerd@collabora.com>, "a-govindraju@ti.com" <a-govindraju@ti.com>,
- "trini@konsulko.com" <trini@konsulko.com>,
- "g-vlaev@ti.com" <g-vlaev@ti.com>, "vigneshr@ti.com" <vigneshr@ti.com>,
- "sjg@chromium.org" <sjg@chromium.org>
-Subject: Re: [PATCH v2 4/8] arm: dts: k3-am625-sk: Enable emmc in SPL
-Message-ID: <20230919113307.gggr427iyee3olw5@dhruva>
-References: <20230406185542.1179073-1-sjoerd@collabora.com>
- <20230406185542.1179073-5-sjoerd@collabora.com>
- <4b593377588ba713229c6671edf0c0848a857bf4.camel@siemens.com>
- <20230919111902.5xuvptr4iqmgsmkr@quotable>
+ Frontend Transport; Tue, 19 Sep 2023 07:57:48 -0500
+Received: from [10.249.141.75] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38JCvjrJ037679;
+ Tue, 19 Sep 2023 07:57:45 -0500
+Message-ID: <a5567b72-838f-2cbd-034d-4a26c53694d5@ti.com>
+Date: Tue, 19 Sep 2023 18:27:44 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230919111902.5xuvptr4iqmgsmkr@quotable>
-X-Mailman-Approved-At: Tue, 19 Sep 2023 14:08:23 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH] clk: ti: Notify AVS driver upon setting clock rate
+To: Nishanth Menon <nm@ti.com>
+CC: <vigneshr@ti.com>, <seanga2@gmail.com>, <u-boot@lists.denx.de>,
+ <lukma@denx.de>, <bb@ti.com>, Keerthy <j-keerthy@ti.com>
+References: <20230919060649.2518147-1-u-kumar1@ti.com>
+ <20230919111458.4k2hwroyx3egbftf@reassure>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20230919111458.4k2hwroyx3egbftf@reassure>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,72 +82,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sep 19, 2023 at 06:19:02 -0500, Nishanth Menon wrote:
-> On 07:35-20230919, Sverdlin, Alexander wrote:
-> > Hello Sjoerd,
-> > 
-> > On Thu, 2023-04-06 at 20:55 +0200, Sjoerd Simons wrote:
-> > > sdhci0 on the k3-am625-sk is the emmc, enable this in SPL as well to
-> > > allow booting from that media.
-> > > 
-> > > Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
-> > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > 
-> > thanks for the patch! I've tested the eMMC boot on AM625 SK
-> > and this was exactly the missing piece, with the patch it boots fine:
-> > 
-> > Tested-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> 
-> note: I have also posted https://lore.kernel.org/r/20230911162535.1044560-4-nm@ti.com
-> 
-> That should take care of this in the kernel sync next time around.
-> 
-> But, for next:
-> 
-> Reviewed-by: Nishanth Menon  <nm@ti.com>
-> 
 
-Reviewed-by: Dhruva Gole <d-gole@ti.com>
+On 9/19/2023 4:44 PM, Nishanth Menon wrote:
+> On 11:36-20230919, Udit Kumar wrote:
+>> AVS is enabled at R5 SPL stage, where clk-k3 is used
+>> instead if clk-sci driver.
+>>
+>> [..]
+> Why drop from here? we do have am64 and am65 that use ti-sci, correct?
 
-> > 
-> > > ---
-> > > 
-> > > (no changes since v1)
-> > > 
-> > >  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 8 ++++++++
-> > >  1 file changed, 8 insertions(+)
-> > > 
-> > > diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> > > index 0def84b4cf0..5f90a4b56f1 100644
-> > > --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> > > +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> > > @@ -92,6 +92,14 @@
-> > >         bootph-pre-ram;
-> > >  };
-> > >  
-> > > +&sdhci0 {
-> > > +       bootph-pre-ram;
-> > > +};
-> > > +
-> > > +&main_mmc0_pins_default {
-> > > +       bootph-pre-ram;
-> > > +};
-> > > +
-> > >  &sdhci1 {
-> > >         bootph-pre-ram;
-> > >  };
-> > 
-> > -- 
-> > Alexander Sverdlin
-> > Siemens AG
-> > www.siemens.com
-> 
-> -- 
-> Regards,
-> Nishanth Menon
-> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
-> 
+Thanks,
 
--- 
-Best regards,
-Dhruva Gole <d-gole@ti.com>
+am64/am65 slipped out of my mind while creating this patch.
+
+will fix in v2.
+
+>>   	ret = cops->set_freq(sci, clk->id, clk->data, 0, rate, ULONG_MAX);
+>>   	if (ret) {
+>>   		dev_err(clk->dev, "%s: set_freq failed (%d)\n", __func__, ret);
+>> -- 
+>> 2.34.1
+>>
