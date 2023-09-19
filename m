@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE992CD5BD3
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 15:14:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B20FCD5BD4
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 15:15:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A6C486A84;
+	by phobos.denx.de (Postfix) with ESMTP id 8431186AC6;
 	Tue, 19 Sep 2023 17:14:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YOf85Eg9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LT7/sYlj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8CA986A94; Tue, 19 Sep 2023 17:14:39 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 768B886A82; Tue, 19 Sep 2023 17:14:41 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B408864A7
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 17:14:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2D6C86A33
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 17:14:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-52c88a03f99so6736935a12.2
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:14:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-59c2ca01f27so34101967b3.2
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:14:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695136476; x=1695741276; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OY/2HnIB276O/WTAh6rASsd+ItrhmOR4Q2+FFayEMlE=;
- b=YOf85Eg93P65/S0bQuQLqO0XbdMv2BvyIIhkniXMaFnD/oHu+k2yAf3jIbybLMoGLI
- TLOwAgdZHpXbFCy91KYuTw7J5B9j0eeiukkOiGTWEUhUG12FawB3fHV3xqYZAwdOgGOj
- 2dcnHof2pMXo+tFr51e5fINuxYd8MaMRwULXN3hGbF0dMy63zGTY4W8aJ/S4F2quF9F5
- 9NHwll1R4h8PAn/QwPm5eoCUYwKDU+IJrQTMxC3X13FTGy3iC7/MV+x+PhxAhhOxT44a
- 2haclzsKfalbj9/Dzue9YtlG3up8X2Ag3+xzRcfS9GZt3TxnZqyT1P/qKHsXFF5AgjTD
- gYKA==
+ d=konsulko.com; s=google; t=1695136477; x=1695741277; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=2pzPyvQkbOjzAbHydDue4idkADx2HKJsRtrbLEoVTcw=;
+ b=LT7/sYljOKfh8Q7fb1ibYlcJnjeeMb1J9EODthvMPgh3lSX8ZHyZc9yEiM+juq0Rt4
+ QAKTSFK7DHD+cWy3rEEoRN/XIIT8oNt/XfK0zHYDEBV5z8fYF/GWEVedMsQ6taJkzsmp
+ WxMCADjXTw34UomzVu3+N/r6ZsRuWb8fZAeA4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695136476; x=1695741276;
- h=content-transfer-encoding:in-reply-to:references:cc:to:from
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OY/2HnIB276O/WTAh6rASsd+ItrhmOR4Q2+FFayEMlE=;
- b=XLbVMQojx44wn8Zv59lCiblCiFCGYsYLtt1LXOgSOjmWyc76kO/cf3A3EFjRF2ZKNV
- iPySZ9CDYtVzor5B6IyvE72At4DVB+HD42N0ohHC7oHNfWDBTr3ljmjKYYTAKwbtVLUq
- DxMqCta4F8dY10odlQrQrmgzIEsCGepAlS0YaiPOvvPHHpZ3W/7Av5lLFVHRFS6uHrTa
- T+2jUba3422YzcavPdVXUnGuOy5lwP0jzwtXrcFpAfGLUN20YzRue+QbPSkxyOZ0FGbH
- TeWFsvOR7IO+EOQjDTBWmXbstmSyBejofLgK+/SnxuH7r2Yq+N/cq6ZEK5zZyO1zw0fK
- t5dw==
-X-Gm-Message-State: AOJu0YzAMKLYQIFy/xEuDOkGYxd/uTDW6TltGQgY0k9gme4z9p2vDR44
- irPfBDqXfPhvuDOGcr6r+Gk=
-X-Google-Smtp-Source: AGHT+IGeuoke7MEEPdTABJGmEFpidUZY4LquhvdqQs/mMUoLMVrBcSv+gXnHk20Dxil5mvMtv2RuPA==
-X-Received: by 2002:a05:6402:f1b:b0:530:ccf7:37af with SMTP id
- i27-20020a0564020f1b00b00530ccf737afmr8664422eda.12.1695136475925; 
- Tue, 19 Sep 2023 08:14:35 -0700 (PDT)
-Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ d=1e100.net; s=20230601; t=1695136477; x=1695741277;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2pzPyvQkbOjzAbHydDue4idkADx2HKJsRtrbLEoVTcw=;
+ b=ebsTZPb4yK//PQOsK2mBAduIdb9IaHIJ9bY2rM6VxNZXjMos4Zly+OXy/frGqhvei6
+ F+rtYxLuTuiOvO8AeuhNp2bbi4HvJH6sN7mj/GkGeBvIAxErFUHYehZ4GNC6MirDxVTS
+ 4AxwWL5lMi2DhZYfWCa12lD3v5dAk/wnlhNbtUQnyjNsx5oYtCUv5OL7W5aj1GKsxaJj
+ cDZqOeZNfgF13UmzsPHh7QEyr0gN9WhAeUPGP/0rq8Rk0Xl4ZJxTZda7/M7/Gfx7NvUj
+ mzAIDPgF/dtR9S6mWl5arExL7QN09dbDfq1oi3JG/jiX83xVE52vxnkymq1ryui4oLTd
+ bdmQ==
+X-Gm-Message-State: AOJu0YwK1Jj3muv/PlAIMWDozz4IItbHLXx8ABQNqwo0VZrI6rk8zJ/+
+ zZab7s3CNZjdYx2fIG8cpYtLAA==
+X-Google-Smtp-Source: AGHT+IFSl2L2kUsQthgjUMoM2EfYpSo60eb24OvyPjaMwjgOOQgtqggQtJJf+H0/42ANAQ8lN4axBQ==
+X-Received: by 2002:a0d:da85:0:b0:595:320d:c9e2 with SMTP id
+ c127-20020a0dda85000000b00595320dc9e2mr13693065ywe.24.1695136476682; 
+ Tue, 19 Sep 2023 08:14:36 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-715d-a992-91e3-9182.res6.spectrum.com.
+ [2603:6081:7b00:6400:715d:a992:91e3:9182])
  by smtp.gmail.com with ESMTPSA id
- by6-20020a0564021b0600b0052a198d8a4dsm7409444edb.52.2023.09.19.08.14.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ w65-20020a0dd444000000b0058c55d40765sm3202050ywd.106.2023.09.19.08.14.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 19 Sep 2023 08:14:35 -0700 (PDT)
-Message-ID: <d34d4de5-b9c4-648a-ba5f-cd6828194d78@gmail.com>
-Date: Tue, 19 Sep 2023 17:14:34 +0200
+Date: Tue, 19 Sep 2023 11:14:34 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Reid Tonking <reidt@ti.com>
+Cc: u-boot@lists.denx.de, nm@ti.com, u-kumar1@ti.com, vigneshr@ti.com,
+ m-chawdhry@ti.com, Neha Francis <n-francis@ti.com>
+Subject: Re: [PATCH] drivers: misc: k3_avs: Add Linux compatibles to maintain
+ sync
+Message-ID: <20230919151434.GH305624@bill-the-cat>
+References: <20230907180635.89011-1-reidt@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v2] rockchip: include: asm: fix entering download mode
- rk3066
-Content-Language: en-US
-From: Johan Jonker <jbx6244@gmail.com>
-To: kever.yang@rock-chips.com
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
-References: <183eaaad-ef37-22a2-f041-a32e499c7f88@gmail.com>
-In-Reply-To: <183eaaad-ef37-22a2-f041-a32e499c7f88@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="4vHnNC5CE7fi+ZWL"
+Content-Disposition: inline
+In-Reply-To: <20230907180635.89011-1-reidt@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,28 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-It looks as if all the TABs are gone.
+--4vHnNC5CE7fi+ZWL
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Will resend.
+On Thu, Sep 07, 2023 at 01:06:35PM -0500, Reid Tonking wrote:
 
-Johan
+> The ti,j7200-vtm and ti,j721e-vtm compatibles are used for voltage
+> and thermal monitoring (VTM) by (drivers/thermal/k3_j72xx_bandgap.c)
+> in Linux, but the same hardware is used for adaptive voltage scaling
+> (AVS) in u-boot, This brings both drivers in line with the same
+> compatibles.
+>=20
+> Since the j7200 uses the config as the j721e, the data is inherited
+> from j721e vs creating a duplicate
+>=20
+> Signed-off-by: Neha Francis <n-francis@ti.com>
+> Signed-off-by: Reid Tonking <reidt@ti.com>
+> Reviewed-by: Nishanth Menon <nm@ti.com>
 
-On 9/19/23 16:57, Johan Jonker wrote:
-> Keep track of the re-entries with help of the lr register.
-> This binary can be re-used and called from various BROM functions.
-> Only when it's called from the part that handles SPI, NAND or EMMC
-> hardware it needs to early return to BROM ones.
-> In download mode when it handles data on USB OTG and UART0
-> this section must be skipped.
->
-> Unlike newer Rockchip SoC models the rk3066 BROM code does not have built-in
-> support to enter download mode on return to BROM. This binary must check
-> the boot mode register for the BOOT_BROM_DOWNLOAD flag and reset if it's set.
-> It then returns to BROM to the end of the function that reads boot blocks.
-> From there the BROM code goes into a download mode and waits for data
-> on USB OTG and UART0.
->
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> ---
+Applied to u-boot/next, thanks!
+
+--=20
+Tom
+
+--4vHnNC5CE7fi+ZWL
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUJutkACgkQFHw5/5Y0
+tywnoAwAmg9NVY1Xm4zJeYFQo6qbQ81h5RAbPHo5NcH3jdnWh77l96PIXFFX4ApR
+28+2SulX3E0eWLzpAbwCtMgnOUcdacmCTg8L3g4kU2oCqu2/Ui5eZBnA1F2nQapl
+snKvyST6ljfS+2M6g+eDFnrqi9RV/j1ftNlSom36Ut5R4AM8GY91cDzvsY521WrK
+H0Qm3OgEh3v0RstsFEk4df4V0F5/YI+/UazUu2nsECuuJDKdmJAr+fWNkKCEq6LA
+nLfOS7NPm+b+e+AVu2zF418T3Dl0WqcHHOnOLLbsu4fq/ZDQbJ07akw4LaYxhPF6
+RFDfyQvZhcpQjQY93hnMCAD8mF0EV4/NoL90Ypaj5SznW9baISVCGVJpA1tLRsyb
+bYqC4q6CpMMWB5DRQJuG+aOMQXmRSGF1QxYNDYoA+ATwnWLp6IkJFIRDYdz0SFxD
+S/7xhB2OWwsEEUYbN2dDNvBLbWYsW361qwRDwrPFdjJU0iEG9C4GAkEHjYt32S5U
+dOFZBrp8
+=kWa9
+-----END PGP SIGNATURE-----
+
+--4vHnNC5CE7fi+ZWL--
