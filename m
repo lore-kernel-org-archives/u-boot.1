@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF02ACE79A8
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:12:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52C3CCE79A8
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:12:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 055DD86C22;
+	by phobos.denx.de (Postfix) with ESMTP id 6B47F86BF9;
 	Tue, 19 Sep 2023 20:09:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lO2glawB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ezFpUxK8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8AB0886C1E; Tue, 19 Sep 2023 20:09:46 +0200 (CEST)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 386C386BF9; Tue, 19 Sep 2023 20:09:47 +0200 (CEST)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D13A86BE1
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11ED886BF8
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-34f68fe0944so20928255ab.2
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:44 -0700 (PDT)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-34fe2814b0dso7937745ab.3
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695146982; x=1695751782; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695146983; x=1695751783; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tROP6EQIWq9nw+l80hGZyfAmW8x8IXHXYimznruf3BY=;
- b=lO2glawBw5hQZiytDc6PJEc7HADAKyMLTVLnAXuM/zeRkB8Bsy52iaqGB2VxkX1FDL
- 4fYBSXFPURt1D6mSLfj08ITUI3cLQCfLjiyfU0zWx0uwFtHUNcCkf2PIklupXqq68ToQ
- ph8/Hf7fLn9lmGxNVMr2rMF8IVmSg5R9O8gak=
+ bh=bcQKmqPHWTOBvnV4DA0AxnYY/+/UiZ3CpTwH+PrqaJo=;
+ b=ezFpUxK8goMN9JiVCyDvZFjyv5rIwroKklaDKvMSg6OVf81WxAOyciBd1dxgITSLR/
+ /gkbW7bC5NW1Q5YeMwONrAewssHoaHms+gIfb330hu5Qhw+MArRrdlBndCu9Nw/3rh/w
+ a+ZH93GMcSQ/G0rIW+IYRMXjJtYAXg8ygyE2I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695146982; x=1695751782;
+ d=1e100.net; s=20230601; t=1695146983; x=1695751783;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tROP6EQIWq9nw+l80hGZyfAmW8x8IXHXYimznruf3BY=;
- b=h9ZdpaK3kF3f9SbOVbNF+fx91qQaaTcFkJrCbL4YAfnq/Hhq+ZvcBM0b0ZCGP/rt1c
- 7OCEru1+uw+tyGtMN6scALw++974grI/p/rHzSm4GcUVkbWaFdbCNaCnR5giy6H1aa44
- 7GAA1Fm1qWUBoiocVAZ71A6iy2zBdijsA0m78S4pizUMFgbyFGJif1C954W/umWZxhEy
- BmgTSZCAG5f4samsIpPPSLRKDMU+k7d+v6i0N0TMux8ZfLuWU8z/kbnnm+gPC2i8zj7v
- EEHIhT5umpVUi8NqZOgORddUObJkFyEocwpPxEPDzghdEbCGb6owvJTKAQRexdZqUdHb
- fTqw==
-X-Gm-Message-State: AOJu0Ywnv4Ab2pdNr5JeBaOr2wDOGdujr8rL4cxM0RE/vjU/XMiBUyS0
- UXjaJ0fSIuA9YpvLObnBX7J+kaoa9j3o3IqnBQg=
-X-Google-Smtp-Source: AGHT+IHbM3tS1RbmnAfD98xhGRUnzSPqYPHIqJ+2PGTh7PVZeHIdWo8qbLlJPMu5voHPXgi7J2TyBg==
-X-Received: by 2002:a05:6e02:1aa5:b0:34f:f0d9:5a1c with SMTP id
- l5-20020a056e021aa500b0034ff0d95a1cmr716834ilv.15.1695146982772; 
- Tue, 19 Sep 2023 11:09:42 -0700 (PDT)
+ bh=bcQKmqPHWTOBvnV4DA0AxnYY/+/UiZ3CpTwH+PrqaJo=;
+ b=tR6FZob6j9L+fneIqYdCCJsu45bCrui5WvmUlUSlMlnR7TYpjVJTE0qOiEfJahnczE
+ CaheVhLRG3VVI+ky3+cp7KIyHKQWZQZts4BZfWIio8qeDrckgwNn5MYDyZ/OAxiJNxHX
+ /OEAVsw3cSDmKTm3MXmv1cT1cvOf0EvwK5fHjqat6sp3cKGrA9MoWZJhWjB7EUNFVM13
+ kLfb7UxxzADG6LVhNZisBpfSHdK6htm4kJM4m1KrNjaojXmww9/VuboKswztz86iuACK
+ wmjG0IyCGPuMNhSqqCkETlP0MPmuLS/sXbGWpixISB2hh4FeHyvwo3ebZrrEIEzgwI75
+ EhPw==
+X-Gm-Message-State: AOJu0YwOm1kg2lwIJXaqIPdgDtAHBsgI3q76gmydpzLo4uyOVyJc0r69
+ 9kOrJIlD2sHrfWfX+MNa8tfEqy5r5cGra0824T4=
+X-Google-Smtp-Source: AGHT+IGzjsIqXcmD/UqIQyrIur6zf5EWedBNe0KMVJ6p9CwkM8c3Zc4QRVqbxP+HtNb8r1M4YR6Qig==
+X-Received: by 2002:a05:6e02:3201:b0:34f:1e9c:45d5 with SMTP id
+ cd1-20020a056e02320100b0034f1e9c45d5mr555493ilb.32.1695146983686; 
+ Tue, 19 Sep 2023 11:09:43 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
  by smtp.gmail.com with ESMTPSA id
- b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.42
+ b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 11:09:42 -0700 (PDT)
+ Tue, 19 Sep 2023 11:09:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 19/36] expo: Fix up comments for get_cur_menuitem_text() et al
-Date: Tue, 19 Sep 2023 12:08:49 -0600
-Message-ID: <20230919180918.2904313-20-sjg@chromium.org>
+Subject: [PATCH 20/36] expo: Use switch statements more for object types
+Date: Tue, 19 Sep 2023 12:08:50 -0600
+Message-ID: <20230919180918.2904313-21-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230919180918.2904313-1-sjg@chromium.org>
 References: <20230919180918.2904313-1-sjg@chromium.org>
@@ -88,67 +88,222 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This internal function could use a comment. Add one.
+In a lot of cases menus are the only objects which are have their own
+behaviour in the cedit, e.g. to move between menus. With expo expanding
+to support text, this is no-longer true.
 
-Also tidy up a few other comments.
+Use a switch() statement so that we can simply insert a new 'case' for
+the new object types.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-
-fixup: comments
 ---
 
- boot/cedit.c          | 10 ++++++++++
- boot/scene_internal.h |  2 +-
- include/expo.h        |  2 +-
- 3 files changed, 12 insertions(+), 2 deletions(-)
+ boot/cedit.c | 88 +++++++++++++++++++++++++++++++---------------------
+ boot/scene.c | 38 ++++++++++++++++++-----
+ 2 files changed, 83 insertions(+), 43 deletions(-)
 
 diff --git a/boot/cedit.c b/boot/cedit.c
-index 73645f70b6c..1324a861998 100644
+index 1324a861998..b7329c3245e 100644
 --- a/boot/cedit.c
 +++ b/boot/cedit.c
-@@ -229,6 +229,16 @@ static int check_space(int ret, struct abuf *buf)
+@@ -71,10 +71,16 @@ int cedit_arange(struct expo *exp, struct video_priv *vpriv, uint scene_id)
+ 
+ 	y = 100;
+ 	list_for_each_entry(obj, &scn->obj_head, sibling) {
+-		if (obj->type == SCENEOBJT_MENU) {
++		switch (obj->type) {
++		case SCENEOBJT_NONE:
++		case SCENEOBJT_IMAGE:
++		case SCENEOBJT_TEXT:
++			break;
++		case SCENEOBJT_MENU:
+ 			scene_obj_set_pos(scn, obj->id, 50, y);
+ 			scene_menu_arrange(scn, (struct scene_obj_menu *)obj);
+ 			y += 50;
++			break;
+ 		}
+ 	}
+ 
+@@ -422,31 +428,37 @@ static int h_write_settings_env(struct scene_obj *obj, void *vpriv)
+ 	const char *str;
+ 	int val, ret;
+ 
+-	if (obj->type != SCENEOBJT_MENU)
+-		return 0;
+-
+-	menu = (struct scene_obj_menu *)obj;
+-	val = menu->cur_item_id;
+ 	snprintf(var, sizeof(var), "c.%s", obj->name);
+ 
+-	if (priv->verbose)
+-		printf("%s=%d\n", var, val);
++	switch (obj->type) {
++	case SCENEOBJT_NONE:
++	case SCENEOBJT_IMAGE:
++	case SCENEOBJT_TEXT:
++		break;
++	case SCENEOBJT_MENU:
++		menu = (struct scene_obj_menu *)obj;
++		val = menu->cur_item_id;
+ 
+-	ret = env_set_ulong(var, val);
+-	if (ret)
+-		return log_msg_ret("set", ret);
++		if (priv->verbose)
++			printf("%s=%d\n", var, val);
+ 
+-	ret = get_cur_menuitem_text(menu, &str);
+-	if (ret)
+-		return log_msg_ret("mis", ret);
++		ret = env_set_ulong(var, val);
++		if (ret)
++			return log_msg_ret("set", ret);
+ 
+-	snprintf(name, sizeof(name), "c.%s-str", obj->name);
+-	if (priv->verbose)
+-		printf("%s=%s\n", name, str);
++		ret = get_cur_menuitem_text(menu, &str);
++		if (ret)
++			return log_msg_ret("mis", ret);
+ 
+-	ret = env_set(name, str);
+-	if (ret)
+-		return log_msg_ret("st2", ret);
++		snprintf(name, sizeof(name), "c.%s-str", obj->name);
++		if (priv->verbose)
++			printf("%s=%s\n", name, str);
++
++		ret = env_set(name, str);
++		if (ret)
++			return log_msg_ret("st2", ret);
++		break;
++	}
+ 
  	return 0;
  }
+@@ -474,24 +486,28 @@ static int h_read_settings_env(struct scene_obj *obj, void *vpriv)
+ 	char var[60];
+ 	int val;
  
-+/**
-+ * get_cur_menuitem_text() - Get the text of the currently selected item
-+ *
-+ * Looks up the object for the current item, finds text object for it and looks
-+ * up the string for that text
-+ *
-+ * @menu: Menu to look at
-+ * @strp: Returns a pointer to the next
-+ * Return: 0 if OK, -ENOENT if something was not found
-+ */
- static int get_cur_menuitem_text(const struct scene_obj_menu *menu,
- 				 const char **strp)
+-	if (obj->type != SCENEOBJT_MENU)
+-		return 0;
+-
+-	menu = (struct scene_obj_menu *)obj;
+-	val = menu->cur_item_id;
+ 	snprintf(var, sizeof(var), "c.%s", obj->name);
+ 
+-	val = env_get_ulong(var, 10, 0);
+-	if (priv->verbose)
+-		printf("%s=%d\n", var, val);
+-	if (!val)
+-		return log_msg_ret("get", -ENOENT);
+-
+-	/*
+-	 * note that no validation is done here, to make sure the ID is valid
+-	 * and actually points to a menu item
+-	 */
+-	menu->cur_item_id = val;
++	switch (obj->type) {
++	case SCENEOBJT_NONE:
++	case SCENEOBJT_IMAGE:
++	case SCENEOBJT_TEXT:
++		break;
++	case SCENEOBJT_MENU:
++		menu = (struct scene_obj_menu *)obj;
++		val = env_get_ulong(var, 10, 0);
++		if (priv->verbose)
++			printf("%s=%d\n", var, val);
++		if (!val)
++			return log_msg_ret("get", -ENOENT);
++
++		/*
++		 * note that no validation is done here, to make sure the ID is
++		 * valid * and actually points to a menu item
++		 */
++		menu->cur_item_id = val;
++		break;
++	}
+ 
+ 	return 0;
+ }
+diff --git a/boot/scene.c b/boot/scene.c
+index 6c52948eb69..08ed85e9188 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -423,13 +423,20 @@ int scene_arrange(struct scene *scn)
+ 	int ret;
+ 
+ 	list_for_each_entry(obj, &scn->obj_head, sibling) {
+-		if (obj->type == SCENEOBJT_MENU) {
++		switch (obj->type) {
++		case SCENEOBJT_NONE:
++		case SCENEOBJT_IMAGE:
++		case SCENEOBJT_TEXT:
++			break;
++		case SCENEOBJT_MENU: {
+ 			struct scene_obj_menu *menu;
+ 
+ 			menu = (struct scene_obj_menu *)obj,
+ 			ret = scene_menu_arrange(scn, menu);
+ 			if (ret)
+ 				return log_msg_ret("arr", ret);
++			break;
++		}
+ 		}
+ 	}
+ 
+@@ -452,9 +459,16 @@ int scene_render_deps(struct scene *scn, uint id)
+ 		if (ret && ret != -ENOTSUPP)
+ 			return log_msg_ret("ren", ret);
+ 
+-		if (obj->type == SCENEOBJT_MENU)
++		switch (obj->type) {
++		case SCENEOBJT_NONE:
++		case SCENEOBJT_IMAGE:
++		case SCENEOBJT_TEXT:
++			break;
++		case SCENEOBJT_MENU:
+ 			scene_menu_render_deps(scn,
+ 					       (struct scene_obj_menu *)obj);
++			break;
++		}
+ 	}
+ 
+ 	return 0;
+@@ -537,7 +551,6 @@ static void send_key_obj(struct scene *scn, struct scene_obj *obj, int key,
+ 
+ int scene_send_key(struct scene *scn, int key, struct expo_action *event)
  {
-diff --git a/boot/scene_internal.h b/boot/scene_internal.h
-index 695a907dc6a..42efcee092f 100644
---- a/boot/scene_internal.h
-+++ b/boot/scene_internal.h
-@@ -185,7 +185,7 @@ int scene_render_deps(struct scene *scn, uint id);
-  * Renders the menu and all of its attached objects
-  *
-  * @scn: Scene to render
-- * @menu: Menu render
-+ * @menu: Menu to render
-  * Returns: 0 if OK, -ve on error
-  */
- int scene_menu_render_deps(struct scene *scn, struct scene_obj_menu *menu);
-diff --git a/include/expo.h b/include/expo.h
-index a2b3a71c159..297d892de8e 100644
---- a/include/expo.h
-+++ b/include/expo.h
-@@ -505,7 +505,7 @@ int scene_txt(struct scene *scn, const char *name, uint id, uint str_id,
- 	      struct scene_obj_txt **txtp);
+-	struct scene_obj_menu *menu;
+ 	struct scene_obj *obj;
+ 	int ret;
  
- /**
-- * scene_txt_str() - add a new string to expr and text object to a scene
-+ * scene_txt_str() - add a new string to expo and text object to a scene
-  *
-  * @scn: Scene to update
-  * @name: Name to use (this is allocated by this call)
+@@ -561,10 +574,21 @@ int scene_send_key(struct scene *scn, int key, struct expo_action *event)
+ 			return 0;
+ 		}
+ 
+-		menu = (struct scene_obj_menu *)obj,
+-		ret = scene_menu_send_key(scn, menu, key, event);
+-		if (ret)
+-			return log_msg_ret("key", ret);
++		switch (obj->type) {
++		case SCENEOBJT_NONE:
++		case SCENEOBJT_IMAGE:
++		case SCENEOBJT_TEXT:
++			break;
++		case SCENEOBJT_MENU: {
++			struct scene_obj_menu *menu;
++
++			menu = (struct scene_obj_menu *)obj,
++			ret = scene_menu_send_key(scn, menu, key, event);
++			if (ret)
++				return log_msg_ret("key", ret);
++			break;
++		}
++		}
+ 		return 0;
+ 	}
+ 
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
