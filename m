@@ -4,64 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E36CD3437
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 06:08:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D935CD3447
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:19:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DA4486A24;
-	Tue, 19 Sep 2023 08:08:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AD31F86A24;
+	Tue, 19 Sep 2023 09:19:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IUL/gsAK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OiV7IVlT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48AD386A2F; Tue, 19 Sep 2023 08:07:59 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8838B86A26; Tue, 19 Sep 2023 09:19:31 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44A9086A09
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:07:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCCE786416
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38J67o1u029834;
- Tue, 19 Sep 2023 01:07:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695103670;
- bh=2Q6ztbztJVh39i7Kv0J9SEGGW+znLdMw4kZXRaP6fd8=;
- h=From:To:CC:Subject:Date;
- b=IUL/gsAKcNl5yFHUs6IkjDflQQ3Yp5qaFyOelWNeS5ZM5Hmx0xJqVqchU6t3Ov0kN
- k2ZZ/iaf8L247jP83xjmsxerZDe1i94K2znBU1lhSjvDzVh53II+rcbSSc5NGw3CWv
- 0b7vaKG6pi3tUiXxpmROEWWbW45srORSP1J2yors=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38J67o02026398
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Sep 2023 01:07:50 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Sep 2023 01:07:49 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Sep 2023 01:07:49 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38J67l85067118;
- Tue, 19 Sep 2023 01:07:47 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <nm@ti.com>, <vigneshr@ti.com>, <seanga2@gmail.com>
-CC: <u-boot@lists.denx.de>, <lukma@denx.de>, <bb@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>
-Subject: [PATCH] clk: ti: Notify AVS driver upon setting clock rate
-Date: Tue, 19 Sep 2023 11:36:49 +0530
-Message-ID: <20230919060649.2518147-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-530e721f077so2886696a12.2
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1695107969; x=1695712769; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=LvYkHb4cJ74rEd1sM1a0tUR/EddOehzr68asjEMMNU4=;
+ b=OiV7IVlThqk/hxE8rbpSEbiAh7KuLcuAXsogBmA9Qu7IariwvEHTlG/gcumzRkslCE
+ PRjMt+W+qunj+LGtxc+fYoT5JMVJ3QNWFq3gyl5UgxWcXYqdVA268JPmw2Fpt72VdhMP
+ pReSTrkL0Ep8j8MTBNGy/UlhRIu0kmjByqY3WcFIIxzgP48T6WB56t5W5a5Vo/s6jsNy
+ LFnG01HgpWwj4MhLTjKe6xQZly8U2qinYYKKgxxDMWZGVf306B2WZjwlWblj8vsTt6oY
+ agQ/AF1P9Ehdnsf42df9nTxsRmxFEt5cNenoox2PfRyzJK9tNXot+ZIVdHZiaxbxuDDj
+ P6mQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695107969; x=1695712769;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=LvYkHb4cJ74rEd1sM1a0tUR/EddOehzr68asjEMMNU4=;
+ b=leEE9+tLCo0weSIwZ3ERlHBA9EIwMGHR0hzmiXr8LgBJaBvf5zJrS+g6RJjIoRkVvV
+ hC2yEQqj2Be/h3DwIumcSIzF4URmHtdhGDTtbVDk2+seVE1x/WVHfOTz3aWfXNj4ci0Q
+ BrSjtSDzKyG2YL46AWjcUUmhXvLAgXJ1+Ex9ePerhPRbzSYojSytZDU3mGArHFizLY1S
+ BQMFOhYYwFPvhJTb/BAWdtgQPL/CdjLl8s5xjXlW1O6NAFu3gZx8EWXtpmJ9iSG6ba4h
+ XobiDLW0bKRCWuYIgI+NP5GB6Fdw72x9PJIeWLDtEXd3f98Va7/x1Y4AvuB3Yrgwxq+E
+ YMEg==
+X-Gm-Message-State: AOJu0YwsVFkApuma9G8K9NoXk5MCdEvUS3rEtRa8ESXIVoMX83nHg5i0
+ 69Tk0ByOA8e77GjZVI83F9Kw20bh8V+wO/L0074=
+X-Google-Smtp-Source: AGHT+IHJrjQSEuVUEFyN1qfPBcvpcjn1bdGKrCWiuq+Mftz4++EiJGySe4ugEgoU/zP50eChbXh/RMyoc5+a9xCwFuA=
+X-Received: by 2002:aa7:d809:0:b0:523:4acb:7f41 with SMTP id
+ v9-20020aa7d809000000b005234acb7f41mr9698766edq.14.1695107969098; Tue, 19 Sep
+ 2023 00:19:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230823211059.1235147-1-sjg@chromium.org>
+ <20230823211059.1235147-2-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-2-sjg@chromium.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 19 Sep 2023 15:19:16 +0800
+Message-ID: <CAEUhbmWvMmjjRm7a14NCyWPkNOpSqio4PNuzpMu9Pw7xwh9f=Q@mail.gmail.com>
+Subject: Re: [PATCH v4 01/20] x86: coreboot: Add IDE and SATA
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,67 +88,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AVS is enabled at R5 SPL stage, where clk-k3 is used
-instead if clk-sci driver.
+On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Add these options to permit access to more disk types.
+>
+> Add some documentation as well.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v1)
+>
+>  configs/coreboot64_defconfig    |  1 +
+>  configs/coreboot_defconfig      |  9 +++++++++
+>  doc/board/coreboot/coreboot.rst | 20 ++++++++++++++++++++
+>  3 files changed, 30 insertions(+)
+>
 
-clk-k3 driver to notify AVS driver upon setting clock rate
-so that voltage is changed accordingly.
-
-Fixes: e0aa873bc7cd ("clk: clk-ti-sci: Notify AVS driver upon setting clock rate")
-
-Cc: Keerthy <j-keerthy@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
- drivers/clk/ti/clk-k3.c  | 5 +++++
- drivers/clk/ti/clk-sci.c | 5 -----
- 2 files changed, 5 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
-index ba925fa3c4..8016c3784a 100644
---- a/drivers/clk/ti/clk-k3.c
-+++ b/drivers/clk/ti/clk-k3.c
-@@ -11,6 +11,7 @@
- #include <errno.h>
- #include <soc.h>
- #include <clk-uclass.h>
-+#include <k3-avs.h>
- #include "k3-clk.h"
- 
- #define PLL_MIN_FREQ	800000000
-@@ -339,6 +340,10 @@ static ulong ti_clk_set_rate(struct clk *clk, ulong rate)
- 		}
- 	}
- 
-+	if (IS_ENABLED(CONFIG_K3_AVS0))
-+		k3_avs_notify_freq(data->map[clk->id].dev_id,
-+				   data->map[clk->id].clk_id, rate);
-+
- 	return new_rate;
- }
- 
-diff --git a/drivers/clk/ti/clk-sci.c b/drivers/clk/ti/clk-sci.c
-index 74df5a397b..298fa9dc8b 100644
---- a/drivers/clk/ti/clk-sci.c
-+++ b/drivers/clk/ti/clk-sci.c
-@@ -17,7 +17,6 @@
- #include <dm/device_compat.h>
- #include <linux/err.h>
- #include <linux/soc/ti/ti_sci_protocol.h>
--#include <k3-avs.h>
- 
- /**
-  * struct ti_sci_clk_data - clock controller information structure
-@@ -94,10 +93,6 @@ static ulong ti_sci_clk_set_rate(struct clk *clk, ulong rate)
- 
- 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
- 
--#ifdef CONFIG_K3_AVS0
--	k3_avs_notify_freq(clk->id, clk->data, rate);
--#endif
--
- 	ret = cops->set_freq(sci, clk->id, clk->data, 0, rate, ULONG_MAX);
- 	if (ret) {
- 		dev_err(clk->dev, "%s: set_freq failed (%d)\n", __func__, ret);
--- 
-2.34.1
-
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
