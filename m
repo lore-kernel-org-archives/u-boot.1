@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E1DCD3445
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:19:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98D36CD3445
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:19:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08D1286A77;
-	Tue, 19 Sep 2023 09:19:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 58F5B86A3F;
+	Tue, 19 Sep 2023 09:19:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VmLiVn5G";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YGShc9Vl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1913086A67; Tue, 19 Sep 2023 09:19:36 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 7BE7986416; Tue, 19 Sep 2023 09:19:38 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3730B86A3A
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAD0386A3C
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-529fb04a234so6503102a12.3
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:34 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-530ea522f5eso2595282a12.3
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695107974; x=1695712774; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695107976; x=1695712776; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m3bUTVtl0R8Dj1nVUILhKkOaWA2KeqvEHQNPT4zmtpU=;
- b=VmLiVn5GJeQmv9dvxSW6kXxoM/6vlAYxlMGqzm3SS6vCxPS93MReq02+CImnGkI3kF
- XIzzbfATzBk8QI1So9os+IheiZlMlNs1UtXrv0SvwdjWF/eSH4g0AHZaDnMw3u1Gm2BB
- KrCw8Hd86v7tOqjA/fIaOaq0gciiUpZXoCFRt99DgvUzI05qFxx2DFxuKTg9Tb4GMRjX
- u7zzwgy2EKDEhYtoeYabcojgyspMigMT96Lq+7OxQ0Bh7Gx8XrEX1u8WCR2YHVlz6AJ4
- 7gtQuX5p60X1/p6/vzqoULZMQkJf7OT2tKVXf2yh/1A7zSp8/4L8EbazNNO9nTZgIqYF
- YIsw==
+ bh=g7/JEZyGc5fZPDOyKlhQAH8UPvVmSttGInfS49bnzzY=;
+ b=YGShc9Vl02f0Wp4ZoYiSE8pxx0vgbwIUGwbaik5/AgbFtS/QFlG4JwtVV/+1+uiSoU
+ IgCya1T5uKMUU5tOD0yAt5RgKLyBgFVr2WphwYZwVQwmz7hoGwQDInysMtV3a8mTztm9
+ Rd8xvcA+ix7NlzxnT47k4e0VnKRoKl21ziYPEPBej/Ofkq4b12fVfpjBC7Cv2lZKkt1D
+ MMapNx4O0qO6WpGj5c/RJsoHuk/lkrbSTdBdZf9ESLUr59FEawSKylDQOINlMJd5b26d
+ ZkO38DTMgaZxiuwsGtgwFUiwJsFdLtThekINV9Q3qEmZ5eLlMFBSLo/e/3HwjP6KUslo
+ Z8iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695107974; x=1695712774;
+ d=1e100.net; s=20230601; t=1695107976; x=1695712776;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=m3bUTVtl0R8Dj1nVUILhKkOaWA2KeqvEHQNPT4zmtpU=;
- b=Bs6FLfVqKf93gR4WrF0c61gm8CFRK3FV3sP6Oyex7h7FbC3WXPE94KdDLBTvlPPEHe
- m13eek0UJNpKW2iw8es0JiEHIYDwMk68lK8hqJEOWQ7mpzeR8EvffyvTOPn29kYze87A
- nOA93IRewF8gFOBddXO5Z7eVO3XkxpLMvdaJ+DQWZDH4eZMwfVjMQYqJu5PjfxIo9JdQ
- u2n1rgcUDliHQyUgECqiIZdQjnMNjM1JjGe2w8mrWJoZYE0evTl3qxsqBJhtae+f+jvM
- 5wCRlgXFHSE83PW+08NAPbRBpniwiIOknT0gu/rSwbYFBTHn3m7E3Txo2QZWhxrxKq+R
- Qy1w==
-X-Gm-Message-State: AOJu0YzY5EBHh4QwJmLbdpUWUul4pZu+xt/469jrLEgdFixsPodSVgnW
- JT+gWl5HuKlM/QWIk0J8O6LkFit0oTB0hJ5y2CPQ/cKF
-X-Google-Smtp-Source: AGHT+IF061qp7R1m40+BZCXQIEINZV8ABNmdAW6l2s62jtEf4Ii5tkvET+5Te6DpC2EAPK7JZ0aXs+ag0RyYVtktYs0=
-X-Received: by 2002:aa7:d68d:0:b0:525:70b3:72c2 with SMTP id
- d13-20020aa7d68d000000b0052570b372c2mr9210124edr.14.1695107973529; Tue, 19
- Sep 2023 00:19:33 -0700 (PDT)
+ bh=g7/JEZyGc5fZPDOyKlhQAH8UPvVmSttGInfS49bnzzY=;
+ b=lX+9CAt2LJKRcvY8WtypaQsDhlQ8mAk5+XwHHvnLG2jFYW9WgVNNo+WyUfO2bKG8AK
+ lXrfY24zjAk5DeYQl2To2QpfBGk6Gocj5CL7wumgl/NT27Ic0yYstamklN7H2AeZ3Vgb
+ wqLFFoJMcdu+8HZIfC4XjxBgRAGm9xCR+Dh4vQt3BXSCPBeHn/f8DskfZezirPgvGPz/
+ emOFoAWEQR2M7uFlk/po06yx7KSrnFo8spRduiNhvStoD3wuVPL57K8izMz+pE/LUlDT
+ O+lWiXbWU3RVHy7mKogGnSc+UsJZBIwABDsTHejwD5MaKGOjfcLv3qq3uufF/O67oQv5
+ T1Zw==
+X-Gm-Message-State: AOJu0YxUedPcrKShi8vAWOFt9Up6iaif2wpQ18eRQ1wVy5O7zyaI9yC8
+ /s3uNeckKqE05SDc/zF13NcZzjBhCrm3e8oI0NU=
+X-Google-Smtp-Source: AGHT+IEkTDcQcRlUbnRSHhaPDRghJH7mVIAzXRAdjSfFw/fqK2ZwM7IaXjwmVK7e3nF5RGW40LY3K/3kxXfUD3oYxWw=
+X-Received: by 2002:a05:6402:f1b:b0:530:ccf7:37af with SMTP id
+ i27-20020a0564020f1b00b00530ccf737afmr7496231eda.12.1695107975946; Tue, 19
+ Sep 2023 00:19:35 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-3-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-3-sjg@chromium.org>
+ <20230823211059.1235147-4-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-4-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:19:21 +0800
-Message-ID: <CAEUhbmUjM_3HfEUaZLJRgCSbDj__iL0n9_gdDnFES0SQ7uFK_Q@mail.gmail.com>
-Subject: Re: [PATCH v4 02/20] x86: coreboot: Enable standard boot
+Date: Tue, 19 Sep 2023 15:19:24 +0800
+Message-ID: <CAEUhbmUPEkFNSgu=QXb2Q26m=m-7TtbvTLL2=hp02D=RDu05Rg@mail.gmail.com>
+Subject: Re: [PATCH v4 03/20] x86: coreboot: Rearrange arch_cpu_init()
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -91,115 +91,54 @@ X-Virus-Status: Clean
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> Enable bootstd options and provide instructions on how to boot a linux
-> distro using coreboot.
+> Init errors in SPL are currently ignored by this function.
+>
+> Change the code to init the CPU, reporting an error if something is wrong=
+.
+> After that, look for the coreboot table.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
 > (no changes since v1)
 >
->  configs/coreboot64_defconfig    | 14 ++------------
->  configs/coreboot_defconfig      |  1 +
->  doc/board/coreboot/coreboot.rst | 16 ++++++++++++++--
->  3 files changed, 17 insertions(+), 14 deletions(-)
+>  arch/x86/cpu/coreboot/coreboot.c | 12 +++++++++---
+>  1 file changed, 9 insertions(+), 3 deletions(-)
 >
-> diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
-> index a456547a25d..5623197f6be 100644
-> --- a/configs/coreboot64_defconfig
-> +++ b/configs/coreboot64_defconfig
-> @@ -10,39 +10,29 @@ CONFIG_VENDOR_COREBOOT=3Dy
->  CONFIG_TARGET_COREBOOT=3Dy
->  CONFIG_FIT=3Dy
->  CONFIG_FIT_SIGNATURE=3Dy
-> +CONFIG_BOOTSTD_FULL=3Dy
-> +CONFIG_BOOTSTD_DEFAULTS=3Dy
->  CONFIG_SYS_MONITOR_BASE=3D0x01120000
->  CONFIG_SHOW_BOOT_PROGRESS=3Dy
->  CONFIG_USE_BOOTARGS=3Dy
->  CONFIG_BOOTARGS=3D"root=3D/dev/sdb3 init=3D/sbin/init rootwait ro"
-> -CONFIG_USE_BOOTCOMMAND=3Dy
-> -CONFIG_BOOTCOMMAND=3D"ext2load scsi 0:3 01000000 /boot/vmlinuz; zboot 01=
-000000"
->  CONFIG_PRE_CONSOLE_BUFFER=3Dy
->  CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
->  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
->  CONFIG_SPL_NO_BSS_LIMIT=3Dy
-> -CONFIG_HUSH_PARSER=3Dy
->  CONFIG_SYS_PBSIZE=3D532
->  CONFIG_CMD_IDE=3Dy
->  CONFIG_CMD_MMC=3Dy
-> -CONFIG_CMD_PART=3Dy
->  CONFIG_CMD_SATA=3Dy
->  CONFIG_CMD_USB=3Dy
->  # CONFIG_CMD_SETEXPR is not set
-> -CONFIG_CMD_DHCP=3Dy
->  CONFIG_BOOTP_BOOTFILESIZE=3Dy
-> -CONFIG_CMD_PING=3Dy
->  CONFIG_CMD_TIME=3Dy
->  CONFIG_CMD_SOUND=3Dy
-> -CONFIG_CMD_EXT2=3Dy
-> -CONFIG_CMD_EXT4=3Dy
->  CONFIG_CMD_EXT4_WRITE=3Dy
-> -CONFIG_CMD_FAT=3Dy
-> -CONFIG_CMD_FS_GENERIC=3Dy
->  CONFIG_MAC_PARTITION=3Dy
->  # CONFIG_SPL_MAC_PARTITION is not set
->  # CONFIG_SPL_DOS_PARTITION is not set
-> -CONFIG_ISO_PARTITION=3Dy
-> -CONFIG_EFI_PARTITION=3Dy
->  # CONFIG_SPL_EFI_PARTITION is not set
->  CONFIG_ENV_OVERWRITE=3Dy
->  CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-> diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-> index aedad4c93c3..311ca6672cb 100644
-> --- a/configs/coreboot_defconfig
-> +++ b/configs/coreboot_defconfig
-> @@ -10,6 +10,7 @@ CONFIG_TARGET_COREBOOT=3Dy
->  CONFIG_FIT=3Dy
->  CONFIG_FIT_SIGNATURE=3Dy
->  CONFIG_BOOTSTD_FULL=3Dy
-> +CONFIG_BOOTSTD_DEFAULTS=3Dy
->  CONFIG_SYS_MONITOR_BASE=3D0x01110000
->  CONFIG_SHOW_BOOT_PROGRESS=3Dy
->  CONFIG_USE_BOOTARGS=3Dy
-> diff --git a/doc/board/coreboot/coreboot.rst b/doc/board/coreboot/coreboo=
-t.rst
-> index be5b0de5495..88437c27740 100644
-> --- a/doc/board/coreboot/coreboot.rst
-> +++ b/doc/board/coreboot/coreboot.rst
-> @@ -67,9 +67,21 @@ To use 4GB of memory, typically necessary for booting =
-Linux distros, add
->  In addition to the 32-bit 'coreboot' build there is a 'coreboot64' build=
-. This
->  produces an image which can be booted from coreboot (32-bit). Internally=
- it
->  works by using a 32-bit SPL binary to switch to 64-bit for running U-Boo=
-t. It
-> -can be useful for running UEFI applications, for example.
-> +can be useful for running UEFI applications, for example with the corebo=
-ot
-> +build in `$CBDIR`::
+> diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/cor=
+eboot.c
+> index 835b2c77746..c2ceaa9a56c 100644
+> --- a/arch/x86/cpu/coreboot/coreboot.c
+> +++ b/arch/x86/cpu/coreboot/coreboot.c
+> @@ -21,7 +21,14 @@
+>
+>  int arch_cpu_init(void)
+>  {
+> -       int ret =3D get_coreboot_info(&lib_sysinfo);
+> +       int ret;
 > +
-> +   DISK=3Dubuntu-23.04-desktop-amd64.iso
-> +   CBDIR=3D~/coreboot/build
-> +
-> +   cp $CBDIR/coreboot.rom.in coreboot.rom
-> +   cbfstool coreboot.rom add-flat-binary -f u-boot-x86-with-spl.bin \
-> +      -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000
+> +       ret =3D IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
+> +                x86_cpu_init_f();
 
-nits: lzma, to be consistent with the existing doc
+nits: not aligned
 
+> +       if (ret)
+> +               return ret;
 > +
-> +   qemu-system-x86_64 -m 2G -smp 4 -bios coreboot.rom \
-> +      -drive id=3Ddisk,file=3D$DISK,if=3Dnone \
-> +      -device ahci,id=3Dahci \
-> +      -device ide-hd,drive=3Ddisk,bus=3Dahci.0 \
+> +       ret =3D get_coreboot_info(&lib_sysinfo);
+>         if (ret !=3D 0) {
+>                 printf("Failed to parse coreboot tables.\n");
+>                 return ret;
+> @@ -29,8 +36,7 @@ int arch_cpu_init(void)
 >
-> -This has only been lightly tested.
+>         timestamp_init();
 >
->  CBFS access
->  -----------
+> -       return IS_ENABLED(CONFIG_X86_RUN_64BIT) ? x86_cpu_reinit_f() :
+> -                x86_cpu_init_f();
+> +       return 0;
+>  }
+>
+>  int checkcpu(void)
 > --
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
