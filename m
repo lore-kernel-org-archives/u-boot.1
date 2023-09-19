@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B511CCE79A9
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:13:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF84CCE79A8
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:13:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BD37E86C2C;
-	Tue, 19 Sep 2023 20:09:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BDB9E86C29;
+	Tue, 19 Sep 2023 20:09:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fZW5F5TO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="elRoA6wr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C195086BFC; Tue, 19 Sep 2023 20:09:47 +0200 (CEST)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 5B98C86C1C; Tue, 19 Sep 2023 20:09:48 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA0C086C13
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CAFC86C1D
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-34fc96995ddso12459535ab.2
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:45 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-79275d86bc3so227081239f.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695146984; x=1695751784; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695146985; x=1695751785; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XIf5GY7E98K/C20/v2JBzGURhjk8M+JGeTFIwpXBvGE=;
- b=fZW5F5TOo6dT8KhXmUeTfX8zpN/nh1EeHo4izeDtfV/JzqQJBkZ2Sx+6ry/H3eFNld
- KTo+qa2vSNx1WJhBhmfasgr0FRMZl2kDUHIqIlaAfSyMu9mkVRs1XHE2Ze+P/P//h5Jq
- ml7J/HK3D1q9+Gwgpn6Ww/Qt4pBVHdVhdhQq8=
+ bh=RTMQw4RBzTRb2QRV8ZmfaOCi8CGT7PSN5lB748VKBrc=;
+ b=elRoA6wr6bKOwxujST8AfZdTVxvK5FlbFV4dq3MdF0cy8p9dak6gsVwf1OE6ss7ZvZ
+ 5eoPxqkK9gTaVSpHvlLdNCoRsex3ybydgK5GH+p14Oz14PlfbD5XMIwBfwwtWfur/j6R
+ +sm/dOHiBqlpIkI3W6niMu4/+an4i9QDOmXgA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695146984; x=1695751784;
+ d=1e100.net; s=20230601; t=1695146985; x=1695751785;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XIf5GY7E98K/C20/v2JBzGURhjk8M+JGeTFIwpXBvGE=;
- b=C2SlfrBaddQbLY2BLgBj19b5W7fHn/II75zY0drN1zPdb2Ru7TEtRqmWo2pJK2b3IE
- UtMPpPxUGTxj1LcS8ceTuzyZglWkIGoBAULrxH5hMHSm72sRNDLgNEPNPZa7Jz56uBl6
- DpGwRHv567ny7qvKqRWY3V7H/HoGsslW+JnLenCw8Nl/fmCrHITAkOMOj/kkCiifp7UZ
- OdwXyUae9kCVKG+E/5X4SC65AkMgINwUCm3SDcLzSxrMOYMG/gk/bM9B1EkETGdMMPWr
- 49VuJEyzCKP8o2Uth+W09OF0RhaKeigAqDCfQC5K0kla4xhMZ4wX0KZnZ5Wrcc3udJhu
- s9/w==
-X-Gm-Message-State: AOJu0YyVfnxyXPnM34bkEkvx+dqKUzGP0HdoWIRLd8NeDbAEdfttmpaz
- jd1qQE4ynYx5h71788ATNR+VPOHZ/rOLSPFaHh0=
-X-Google-Smtp-Source: AGHT+IEBSfOmcBeKnSKHdHvhFeg+ZEgkAz3v4psk4nUvIlnqRBKdDNq588kJ1SYKXdg90D48n8SrpA==
-X-Received: by 2002:a05:6e02:1a8f:b0:34f:2cb0:5d0 with SMTP id
- k15-20020a056e021a8f00b0034f2cb005d0mr667939ilv.30.1695146984382; 
- Tue, 19 Sep 2023 11:09:44 -0700 (PDT)
+ bh=RTMQw4RBzTRb2QRV8ZmfaOCi8CGT7PSN5lB748VKBrc=;
+ b=S5597wxFL/97h6ONl1lkJjsmzRZo+sKdCbDuJ2evT3Ts8VmlWtj7LJEVQArBgaTzmn
+ 0iehcjAwVufiXpmmbqkgktORDfGbrMnokZokzOBCBCOTI/UNZCIo/u9dFsAnCoG1N56h
+ o784Ms80PnEcTk9vMOhTcFY2vdoenLAxVvfwPUa7A5Xara4vbLtDkw1wxzZkNJorKFj8
+ bNLD+NN3t51ATleaTMJJluHHHFR8gycbDreMDEQRNK6OIKlTItETWmkQEEeE+i95uNHt
+ ZQsk/DnWoDHt3uOsSottcN6ohTMGIMJYy3D5lfU0Gj13FpWxdoE7kpS7dw+2NpW8eJZ1
+ ajYQ==
+X-Gm-Message-State: AOJu0Yy+wh82qqoUt98CYDTLRD+7X5SWVHdhIq6k9o55JOAyIEGypua8
+ uEf4XoIpxhg0Ps7l9lVc5p03DAy/HhvX/xvw5B4=
+X-Google-Smtp-Source: AGHT+IEuhOm+RPOKbl7VX3cemQQweyTGxJKZdDaC/K8KibZFVJYkpEB4Xr+7zj6GxBFixhlOduBo3A==
+X-Received: by 2002:a05:6e02:20ef:b0:34d:f026:7aa1 with SMTP id
+ q15-20020a056e0220ef00b0034df0267aa1mr720130ilv.26.1695146985061; 
+ Tue, 19 Sep 2023 11:09:45 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
  by smtp.gmail.com with ESMTPSA id
  b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.44
@@ -64,9 +64,9 @@ From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 21/36] expo: Correct some swallowed errors in scene
-Date: Tue, 19 Sep 2023 12:08:51 -0600
-Message-ID: <20230919180918.2904313-22-sjg@chromium.org>
+Subject: [PATCH 22/36] expo: Correct the logic for duplicate-ID detection
+Date: Tue, 19 Sep 2023 12:08:52 -0600
+Message-ID: <20230919180918.2904313-23-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230919180918.2904313-1-sjg@chromium.org>
 References: <20230919180918.2904313-1-sjg@chromium.org>
@@ -88,45 +88,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Return the reported error, rather than assuming it is -ENOMEM
+Update scene_txt_str() to account for the possibility that the passed-in
+str_id may be 0
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- boot/scene.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ boot/scene.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/boot/scene.c b/boot/scene.c
-index 08ed85e9188..9c4466c1a47 100644
+index 9c4466c1a47..8e5d3aa7dc0 100644
 --- a/boot/scene.c
 +++ b/boot/scene.c
-@@ -137,7 +137,7 @@ int scene_img(struct scene *scn, const char *name, uint id, char *data,
- 			    sizeof(struct scene_obj_img),
- 			    (struct scene_obj **)&img);
+@@ -176,8 +176,9 @@ int scene_txt_str(struct scene *scn, const char *name, uint id, uint str_id,
+ 	ret = expo_str(scn->expo, name, str_id, str);
  	if (ret < 0)
--		return log_msg_ret("obj", -ENOMEM);
-+		return log_msg_ret("obj", ret);
+ 		return log_msg_ret("str", ret);
+-	else if (ret != str_id)
++	if (str_id && ret != str_id)
+ 		return log_msg_ret("id", -EEXIST);
++	str_id = ret;
  
- 	img->data = data;
- 
-@@ -157,7 +157,7 @@ int scene_txt(struct scene *scn, const char *name, uint id, uint str_id,
+ 	ret = scene_obj_add(scn, name, id, SCENEOBJT_TEXT,
  			    sizeof(struct scene_obj_txt),
- 			    (struct scene_obj **)&txt);
- 	if (ret < 0)
--		return log_msg_ret("obj", -ENOMEM);
-+		return log_msg_ret("obj", ret);
- 
- 	txt->str_id = str_id;
- 
-@@ -183,7 +183,7 @@ int scene_txt_str(struct scene *scn, const char *name, uint id, uint str_id,
- 			    sizeof(struct scene_obj_txt),
- 			    (struct scene_obj **)&txt);
- 	if (ret < 0)
--		return log_msg_ret("obj", -ENOMEM);
-+		return log_msg_ret("obj", ret);
- 
- 	txt->str_id = str_id;
- 
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
