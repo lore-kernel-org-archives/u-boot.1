@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07FD6CE79A8
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 21:25:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D8E8CE79A9
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 21:27:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F321866AA;
-	Tue, 19 Sep 2023 23:25:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AA2F486BC0;
+	Tue, 19 Sep 2023 23:27:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DoeE7iQb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UgDi4UR9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67F6786A45; Tue, 19 Sep 2023 23:25:49 +0200 (CEST)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id 7D88186BDC; Tue, 19 Sep 2023 23:27:48 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 539288642A
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 23:25:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 359AC86BC0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 23:27:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-d81f35511e6so390355276.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 14:25:47 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-59c268676a9so38853637b3.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 14:27:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695158746; x=1695763546; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Z2oGc2NRJ16OskkgXleVeqicZpiikKX+WJ347F8OyKE=;
- b=DoeE7iQbX4jGalugabRQJyzhuQdD+YF3Cc2Ke5R5Fe0hGDuNCCFFkvB9AXfOO2QwpI
- WKY5CMKmos7HZNMdqoUgEP4LYdGP0rInIbufnG0/X5A9Z5w3T+1DLa5w9Q2MAz4NiITA
- fPLcYkRYh4f+jy5HEi+cCSmRnv98YezG5DeuM=
+ d=gmail.com; s=20230601; t=1695158865; x=1695763665; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NcVqTg1uj81hHFD2+rfmf/CyEy4o3Ogv/Y6EUhfKpQ8=;
+ b=UgDi4UR9/FwxWd61mhsDHqCX1YHjRS0DwZJjeNgP1QJTAyN76FVWAQnozPeRVMYaAl
+ rbmU3Z6a4Etauc6pjvEg8mzGsO7WgBzCP6LnRDxeKjmpfto+8n+6ucG7KDcCL+8DOdxH
+ 0qlBvF2UucBuC3SE6b/RCcPgeZcRD2+Y4hL9hLMc6fZlbJrocihAP8ESEwanbbAMf7XD
+ 6xmDh/EP2YU/4DwccVGzsOYLvaI6V9Vf2+RLQweBoGOtbAkjQ699kUzDv2KiAoGOvZ/K
+ TBhNPQj3NvSa0j261bLc5+a0XqQiY/OlXqHwcNDOG7RbQ78B7TFlEAWzda7FmFBkhMNf
+ 3X/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695158746; x=1695763546;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Z2oGc2NRJ16OskkgXleVeqicZpiikKX+WJ347F8OyKE=;
- b=YeGy2abFrnCU37e5dRZXCYg/+pSDcoYcGU7LiXBS3p1aT7E/JtNCAqGnZ6+OjkdwmF
- GOV/RxuupMDMEab8tSPSeHpSDE3CBsqEVlZXO+1hGSwyYjCpW4BP5uYO69uaciDE7Wme
- VOIyImY/fyJ73C90EzMKZ9zBXswEqeq8ei2F43uP3IPLhSKbVtcm6elWdwJe7874lVD+
- XJAuYxcewp65AFOUFvP5VfBD4bN+d52jzMDbzk26CtKUmSDmYKqru0rmLdpXd/Nt2Ad0
- qlaIpuojrSfXjIml2dyyRteRpQB+7P7DKv3BB/SsfHasFJVq86ipXiWBKH+3j+jO/8Hs
- Q00Q==
-X-Gm-Message-State: AOJu0Yzkb//HlQftl7P3csRZieATmnby1nCiWdLexrCgzgKBUZZ5/t0g
- 50n/Nbx969hxifHfP76owt824Q==
-X-Google-Smtp-Source: AGHT+IGdcD5a6/6y4Db9SywxAqr+gUNVLak59ZyjWzuzMXCLsojPyvAGTZopTaT0U2kBVuDTuqrsFA==
-X-Received: by 2002:a5b:f87:0:b0:d81:61fe:ca91 with SMTP id
- q7-20020a5b0f87000000b00d8161feca91mr1160495ybh.0.1695158745928; 
- Tue, 19 Sep 2023 14:25:45 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-eb6c-8990-1b3a-d2e2.res6.spectrum.com.
- [2603:6081:7b00:6400:eb6c:8990:1b3a:d2e2])
+ d=1e100.net; s=20230601; t=1695158865; x=1695763665;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NcVqTg1uj81hHFD2+rfmf/CyEy4o3Ogv/Y6EUhfKpQ8=;
+ b=BcIDfmswYvFoVyp4ETpC+jKnv4Oscdqn1gh2blznqHyW0qoydsGmtUL1bjA26kapjO
+ UJXv3zHmNdVLDbYcDTBGK9NvNTdMM0GLREzYEf6BI+nWPBsHcD8YhI4mAohqnmOflta+
+ AACP40xz8nYZC1VLlt2Le3+Xvy90jeFaKx0WmXEH9bs3asEzPHt0a+GVLrYz/GerExT0
+ YVOyWPeKRcpKM8i4bh7P59AhJzctsCyJHZPgiO/eotKnomYVxhc1w5Y6xXLuXtTOaDQX
+ bwPBae8HVr8bsn1mv54r+nrXWGeFRmrulbxxsIQx9FIOqfA/l5N1olVjeqkdUvPaXn/l
+ imxg==
+X-Gm-Message-State: AOJu0YziTwYTMpY2SpPziWdRW8QP+fGPhqt6oVcec9LN+PcjLgtVrMeU
+ KlluXHUWVubJ3DDuSGkiQUQ=
+X-Google-Smtp-Source: AGHT+IE77pigjuqf9hmqceS7x+QcC0g7yqExu0MFirrvpugp2VdHM9DuFwdZZZOvHLSR4t9At33vYA==
+X-Received: by 2002:a81:4e95:0:b0:59b:c847:bce0 with SMTP id
+ c143-20020a814e95000000b0059bc847bce0mr745767ywb.42.1695158864844; 
+ Tue, 19 Sep 2023 14:27:44 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
  by smtp.gmail.com with ESMTPSA id
- v142-20020a25c594000000b00d13b72fae3esm3020418ybe.2.2023.09.19.14.25.44
+ d64-20020a0df443000000b00592a065e2a3sm3420492ywf.87.2023.09.19.14.27.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 14:25:44 -0700 (PDT)
-Date: Tue, 19 Sep 2023 17:25:42 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Sean Anderson <seanga2@gmail.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH 1/2] spl: make SYS_SPL_MALLOC depend on !(SPL_STACK_R &&
- SPL_SYS_MALLOC_SIMPLE)
-Message-ID: <20230919212542.GM305624@bill-the-cat>
-References: <20230915175050.4109711-1-rasmus.villemoes@prevas.dk>
- <20230915175050.4109711-2-rasmus.villemoes@prevas.dk>
+ Tue, 19 Sep 2023 14:27:44 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH] bootstd: use ARCH_DMA_MINALIGN in memalign() when allocating
+ memory
+Date: Tue, 19 Sep 2023 14:27:21 -0700
+Message-Id: <20230919212722.16216-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OpF/PXtL3C7SMFDS"
-Content-Disposition: inline
-In-Reply-To: <20230915175050.4109711-2-rasmus.villemoes@prevas.dk>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,85 +91,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Use ARCH_DMA_MINALIGN in memalign() when allocating memory to read the script from the media.
 
---OpF/PXtL3C7SMFDS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Ref: https://lore.kernel.org/u-boot/CAJaLiFy05F3Cr4X4G2mVkppXnBEFZrHQ+5CngYN8eJPg8ENWkg@mail.gmail.com/T/#m26daadc2463fe653b814a94e6309e5e6bb6be1d1
 
-On Fri, Sep 15, 2023 at 07:50:49PM +0200, Rasmus Villemoes wrote:
+Note: this patch depends on the previous patch
+https://patchwork.ozlabs.org/project/uboot/patch/20230917230649.30357-1-mibodhi@gmail.com/
 
-> Currently, one can have both SYS_SPL_MALLOC=3Dy and
-> SPL_SYS_MALLOC_SIMPLE=3Dy.
->=20
-> However, while the former does make board_init_r() in spl.c call
-> mem_malloc_init(), that has no effect at all, because that just
-> updates a few bookkeeping variables, but as the linker map shows, the
-> latter setting has (as expected) caused most of dlmalloc.o to be
-> garbage-collected. That is, those bookkeeping variables are not used
-> for anything.
->=20
-> IOWs, with SYS_SPL_MALLOC=3Dy and SPL_SYS_MALLOC_SIMPLE=3Dy, the value of
-> CONFIG_SYS_SPL_MALLOC_SIZE is irrelevant, and one still only has the
-> small, SRAM-backed, malloc arena available.
->=20
-> Now I want to change that so that the mem_malloc_init() instead
-> updates the gd->malloc* variables to point at the SDRAM area.
->=20
-> However, there's a small complication, namely when SPL_STACK_R=3Dy is
-> also in the mix. In that case, the "simple" malloc arena is indeed
-> updated to point at the SDRAM area carved out of the new stack (see
-> spl_relocate_stack_gd()). So that case works in the sense that one
-> does get a "large" "simple" malloc arena (of size
-> SPL_STACK_R_MALLOC_SIMPLE_LEN) - but CONFIG_SYS_SPL_MALLOC_SIZE is
-> still irrelevant. Once I change the mem_malloc_init() logic, this
-> would then break, because the gd->malloc* variables would be updated
-> again. Also, it doesn't really make sense to allow the .config to
-> essentially specify two different SDRAM-backed malloc arenas.
->=20
-> So since CONFIG_SYS_SPL_MALLOC and its dependent options are no-ops
-> currently when SPL_STACK_R && SPL_SYS_MALLOC_SIMPLE, simply forbid
-> that combination.
->=20
-> Simple grepping suggests that these boards/configs are affected, in
-> that they become a tiny bit smaller, and the defconfig will need
-> refreshing:
->=20
->   am62ax_evm_r5_defconfig
->   am62x_evm_r5_defconfig
->   am64x_evm_a53_defconfig
->   am64x_evm_r5_defconfig
->   am65x_evm_a53_defconfig
->   am65x_hs_evm_a53_defconfig
->   iot2050_defconfig
->   j7200_evm_a72_defconfig
->   j721e_evm_a72_defconfig
->   j721s2_evm_a72_defconfig
->   j721s2_evm_r5_defconfig
->   verdin-am62_r5_defconfig
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-I've boot tested this on j721e and am65x evms, so it's likely true that
-all of these platforms are fine.
+ boot/bootmeth_script.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---=20
-Tom
+diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+index 96e0ec5efa..de2e510da1 100644
+--- a/boot/bootmeth_script.c
++++ b/boot/bootmeth_script.c
+@@ -99,7 +99,7 @@ static int script_read_bootflow_file(struct udevice *bootstd,
+ 	if (!bflow->subdir)
+ 		return log_msg_ret("prefix", -ENOMEM);
+ 
+-	ret = bootmeth_alloc_file(bflow, 0x10000, 1);
++	ret = bootmeth_alloc_file(bflow, 0x10000, ARCH_DMA_MINALIGN);
+ 	if (ret)
+ 		return log_msg_ret("read", ret);
+ 
+-- 
+2.39.2
 
---OpF/PXtL3C7SMFDS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUKEdMACgkQFHw5/5Y0
-tyymhwv/a6W5/di59KxmpnBEgmPBeGlpmgrzOp8CrO7f7hBxCAJWfSmie2seQHv7
-uhpsfeDZa1fB7fVktTwiCc7m4ubT2B+oGYREZbnP+QreAXWtG0OllouITuNW9fim
-sB4aC0EBwbFlx8GgGuNSApHww8WuvPPc2As9pQycJoVGQSjlQ1yC/niDx4l2nynK
-KhJosghmpu1C5Enco5avvBJMyWcQY6cRX5zs2z3VJZPKgubHpPcAT8t+RQ4XQydW
-rnZ1l2Km248bWCQYbj2Yj7CxoIlb2lFOQLgTHXYAChu03WYTqPLFJwRRnCAYIYX8
-lma7/t4PBglTYIWJqGPKsPmVhJ6LAyra38CWGq44TakifNpnExp4+MeoEHeN2s3o
-0xqE389rKm/UtPglBvzpCJ2joOJIa6fg4McJ1+Txhda1SnlwNYE8/zjbFTfxmIJc
-qzYgeXj7IBvHXmjazPmCC147/Tc7a5cNv9c/0tgnFWx+bOhF37MIQNrQ3+cEa0Yt
-1EZp3rTP
-=4ooH
------END PGP SIGNATURE-----
-
---OpF/PXtL3C7SMFDS--
