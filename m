@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13ABBCE79A8
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:04:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C823ECE79A8
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:09:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E53786AEB;
-	Tue, 19 Sep 2023 20:04:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id F146886BC3;
+	Tue, 19 Sep 2023 20:09:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="emmkdwi7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aKU1Yubr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B2D786B90; Tue, 19 Sep 2023 20:04:23 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AC8EA86B90; Tue, 19 Sep 2023 20:09:30 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCDDB86A6D
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:04:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47A6086AA8
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38JI489o108133;
- Tue, 19 Sep 2023 13:04:08 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695146648;
- bh=6mRiFePL0MoJSuX/IkXjUecoLHDfbmNZtcy2k3Xwohk=;
- h=Date:Subject:To:References:From:In-Reply-To;
- b=emmkdwi7u8GjhYtYLf/bw97Z3tc5ZC1WNWEPKRYR12HIjwgVvAtYmjT1oStvfjmPD
- ehdFGDg0KB9OYhknznnQWfKPOD5d8WDnaDGW15WnnXqvedAqWVp2WkiptIdy2+GkYp
- cLM0Cx2wLGzmwjz7Gvd4D+diAYjKn9VC5PVy9pVU=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38JI48xh091072
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 19 Sep 2023 13:04:08 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 19
- Sep 2023 13:04:07 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 19 Sep 2023 13:04:07 -0500
-Received: from [10.250.64.197] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38JI40dQ126339;
- Tue, 19 Sep 2023 13:04:01 -0500
-Message-ID: <d11ebcfc-a6ef-1129-74ac-6e9b7bab7ef8@ti.com>
-Date: Tue, 19 Sep 2023 23:33:59 +0530
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-34fc2773fa4so13962815ab.2
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695146965; x=1695751765; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mmnDSLRCs4IFa3VsV1DXxkWMs5vHDpx4MWvooQDbm0s=;
+ b=aKU1YubrwG/IPJYUrrutB+eANhbfZxDo4/T5iynwMKGuJ/V6BLnCrD2esS/pniehHR
+ jIGtZOI9KOmVRCszo5g2ManRyniZXPjYKvlNBGdEQl8nctHyzwGwmknLCHcgg+Px0G4n
+ I4AwM2k7QB1WoYsTtaWc8XJcoRciFfIjqZtu4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695146965; x=1695751765;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mmnDSLRCs4IFa3VsV1DXxkWMs5vHDpx4MWvooQDbm0s=;
+ b=VHHhMTmmOHdXQ8LPgILdNpomKBdoYOb/hFieb/qRe09YbBW15bBKDqypHt6tSJfnMP
+ KrAyB5Vh+eA3KpczsqsVZYCoyyi/BWxZFXWT5VFw4Ah1yQjtEAIFuoaRcU5hdqPmA8ha
+ 9yDtyIL3eAHYGrT0FyjY6iERAJrbCEd86TuXLOKUsxehLHKCQ9YgLY4DdV0QVyrP5I82
+ rrtQ5f7O/ZcLeH030eswFWkC9xcFesNHHkJK9kDINFMMKSKiGYrEwUtdeSbE44vr/7Qg
+ ZHRyc6WAdE05SuGn17rd7V0iK96+GiO0xlhtZIr3Gye/gacuNrqsXBnBpTZ6tK+jjP1p
+ JleQ==
+X-Gm-Message-State: AOJu0Yze169dBPzgJ2c2lipBBmgLlyyPJi4oPjipG7H+uUtj+2emrYnH
+ nIxdKfOeSIexbpEzqx2mhJLZ7xBqGNfHEppwmLQ=
+X-Google-Smtp-Source: AGHT+IHyEPigp07DkfUDDew/C3pvzZ0R1Pb/sWz3Aqm7t3iJSXpgdkwQVPX6LMBU/W+ONZv/jtZR5g==
+X-Received: by 2002:a05:6e02:d09:b0:34f:e656:8deb with SMTP id
+ g9-20020a056e020d0900b0034fe6568debmr559347ilj.17.1695146964651; 
+ Tue, 19 Sep 2023 11:09:24 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
+ by smtp.gmail.com with ESMTPSA id
+ b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Sep 2023 11:09:24 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexey Romanov <avromanov@sberdevices.ru>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Robert Marko <robimarko@gmail.com>,
+ Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>
+Subject: [PATCH 00/36] expo: Support editing lines of text
+Date: Tue, 19 Sep 2023 12:08:30 -0600
+Message-ID: <20230919180918.2904313-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v3 16/16] doc: board: ti: k3: Add J784S4 EVM and AM69 SK
- documentation
-Content-Language: en-US
-To: Roger Quadros <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon
- <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph
- Siemsen <ralph.siemsen@linaro.org>, Yanhong Wang
- <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-References: <20230908110551.861575-1-a-nandan@ti.com>
- <20230908110551.861575-17-a-nandan@ti.com>
- <33a00080-3184-bb55-a4bf-67f19d6c8427@kernel.org>
-From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <33a00080-3184-bb55-a4bf-67f19d6c8427@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,411 +98,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+So far expo only supports menus. These are quite flexible for various
+kinds of settings, but cannot deal with free-form input, such as a
+serial number or a machine name.
 
-On 09/09/23 17:08, Roger Quadros wrote:
->
-> On 08/09/2023 14:05, Apurva Nandan wrote:
->> TI K3 J784S4 and AM69 SK are new additions to the K3 SoC family.
-> J784S4 is a SoC variant, AM69-SK is a board using AM69 SoC variant.
-> How can a board be part of SoC family?
+This series adds support for a textline object, which is a single line
+of text. It has a maximum length and its value is stored within the expo
+structure.
 
-Okay will fix that statement.
+U-Boot already has a command-line editor which provides most of the
+features needed by expo. But the code runs in its own loop and only
+returns when the line is finished. This is not suitable for expo, which
+must handle a keypress at a time, returning to its caller after each
+one.
 
-> Looking at the TRM [1] there seem to be 6 different SoC variants
-> i.e. J784S4, TDA4AP, TDA4VP, TDA4AH, TDA4VH, AM69
->
-> I suppose all of them will use the same base SoC device tree and platform code?
->
-> Now about the boards. So far there seem to be 2 boards J784S4-EVM and AM69-SK.
->
-> Why are you combining information for both in one location in this patch?
-> I would suggest to have separate location for AM69-SK.
-Both boards are supported by same source and one build. So being
-identical in boot flow etc, I think we can keeping documentation for both
-boards under one file, the only difference being in boot mode pins and
-debugger setup.
-> [1] - https://www.ti.com/document-viewer/lit/html/spruj52
->
->> Add documentation about the J784S4 EVM and AM69 SK.
->>
->> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
->> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
->> ---
->>   board/ti/j784s4/MAINTAINERS |   1 +
->>   doc/board/ti/j784s4_evm.rst | 339 ++++++++++++++++++++++++++++++++++++
->>   doc/board/ti/k3.rst         |   1 +
->>   3 files changed, 341 insertions(+)
->>   create mode 100644 doc/board/ti/j784s4_evm.rst
->>
->> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
->> index 7d3549dd31..be2f9a04b7 100644
->> --- a/board/ti/j784s4/MAINTAINERS
->> +++ b/board/ti/j784s4/MAINTAINERS
->> @@ -18,3 +18,4 @@ F:	arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
->>   F:	arch/arm/dts/k3-am69-sk.dts
->>   F:	arch/arm/dts/k3-am69-sk-u-boot.dtsi
->>   F:	arch/arm/dts/k3-am69-r5-sk.dts
->> +F:	doc/board/ti/j784s4_evm.rst
->> diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
->> new file mode 100644
->> index 0000000000..1e2b7f3820
->> --- /dev/null
->> +++ b/doc/board/ti/j784s4_evm.rst
->> @@ -0,0 +1,339 @@
->> +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
->> +.. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
->> +
->> +J784S4 and AM69 Platforms
->> +=========================
->> +
->> +Introduction:
->> +-------------
->> +The J784S4 SoC belongs to the K3 Multicore SoC architecture
->> +platform, providing advanced system integration in automotive,
->> +ADAS and industrial applications requiring AI at the network edge.
->> +This SoC extends the K3 Jacinto 7 family of SoCs with focus on
->> +raising performance and integration while providing interfaces,
->> +memory architecture and compute performance for multi-sensor, high
->> +concurrency applications.
->> +
->> +The device is partitioned into three functional domains, each containing
->> +specific processing cores and peripherals:
->> +
->> +1. Wake-up (WKUP) domain:
->> +    * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
->> +
->> +2. Microcontroller (MCU) domain:
->> +    * Dual core ARM Cortex-R5F processor, runs device management
->> +      and SoC early boot
->> +
->> +3. MAIN domain:
->> +    * Dual core 64-bit ARM Cortex-A72, runs HLOS
->> +
->> +More info can be found in TRM: http://www.ti.com/lit/zip/spruj52
->> +
->> +Platform information:
->> +
->> +* https://www.ti.com/tool/J784S4XEVM
->> +* https://www.ti.com/tool/SK-AM69
->> +
->> +Boot Flow:
->> +----------
->> +Below is the pictorial representation of boot flow:
->> +
->> +.. image:: img/boot_diagram_k3_current.svg
->> +
->> +- On this platform, "TI Foundational Security (TIFS)" functions as the
->> +  security enclave master. While "Device Manager (DM)", also known as the
->> +  "TISCI server" in TI terminology, offers all the essential services.
->> +
->> +- As illustrated in the diagram above, R5 SPL manages power and clock
->> +  services independently before handing over control to DM. The A72 or
->> +  the C7x (Aux core) software components request TIFS/DM to handle
->> +  security or device management services.
->> +
->> +Sources:
->> +--------
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_boot_sources
->> +    :end-before: .. k3_rst_include_end_boot_sources
->> +
->> +Build procedure:
->> +----------------
->> +0. Setup the environment variables:
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_common_env_vars_desc
->> +    :end-before: .. k3_rst_include_end_common_env_vars_desc
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_board_env_vars_desc
->> +    :end-before: .. k3_rst_include_end_board_env_vars_desc
->> +
->> +Set the variables corresponding to this platform:
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_common_env_vars_defn
->> +    :end-before: .. k3_rst_include_end_common_env_vars_defn
->> +.. code-block:: bash
->> +
->> + $ export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
->> + $ export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
->> + $ export TFA_BOARD=generic
->> + $ export TFA_EXTRA_ARGS="K3_USART=0x8"
->> + $ export OPTEE_PLATFORM=k3-j784s4
->> + $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
->> +
->> +.. j784s4_evm_rst_include_start_build_steps
->> +
->> +1. Trusted Firmware-A:
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_build_steps_tfa
->> +    :end-before: .. k3_rst_include_end_build_steps_tfa
->> +
->> +
->> +2. OP-TEE:
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_build_steps_optee
->> +    :end-before: .. k3_rst_include_end_build_steps_optee
->> +
->> +3. U-Boot:
->> +
->> +.. _j784s4_evm_rst_u_boot_r5:
->> +
->> +* 3.1 R5:
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
->> +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
->> +
->> +.. _j784s4_evm_rst_u_boot_a72:
->> +
->> +* 3.2 A72:
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_build_steps_uboot
->> +    :end-before: .. k3_rst_include_end_build_steps_uboot
->> +.. j784s4_evm_rst_include_end_build_steps
->> +
->> +Target Images
->> +--------------
->> +In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
->> +variant (GP, HS-FS, HS-SE) requires a different source for these files.
->> +
->> + - GP
->> +
->> +    * tiboot3-j784s4-gp-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
->> +    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
->> +
->> + - HS-FS
->> +
->> +    * tiboot3-j784s4-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
->> +    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
->> +
->> + - HS-SE
->> +
->> +    * tiboot3-j784s4-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
->> +    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
->> +
->> +Image formats:
->> +--------------
->> +
->> +- tiboot3.bin
->> +
->> +.. image:: img/multi_cert_tiboot3.bin.svg
->> +
->> +- tispl.bin
->> +
->> +.. image:: img/dm_tispl.bin.svg
->> +
->> +R5 Memory Map:
->> +--------------
->> +
->> +.. list-table::
->> +   :widths: 16 16 16
->> +   :header-rows: 1
->> +
->> +   * - Region
->> +     - Start Address
->> +     - End Address
->> +
->> +   * - SPL
->> +     - 0x41c00000
->> +     - 0x41c40000
->> +
->> +   * - EMPTY
->> +     - 0x41c40000
->> +     - 0x41c61f20
->> +
->> +   * - STACK
->> +     - 0x41c65f20
->> +     - 0x41c61f20
->> +
->> +   * - Global data
->> +     - 0x41c65f20
->> +     - 0x41c66000
->> +
->> +   * - Heap
->> +     - 0x41c66000
->> +     - 0x41c76000
->> +
->> +   * - BSS
->> +     - 0x41c76000
->> +     - 0x41c80000
->> +
->> +   * - DM DATA
->> +     - 0x41c80000
->> +     - 0x41c84130
->> +
->> +   * - EMPTY
->> +     - 0x41c84130
->> +     - 0x41cff9fc
->> +
->> +   * - MCU Scratchpad
->> +     - 0x41cff9fc
->> +     - 0x41cffbfc
->> +
->> +   * - ROM DATA
->> +     - 0x41cffbfc
->> +     - 0x41cfffff
->> +
->> +Switch Setting for Boot Mode
->> +----------------------------
->> +
->> +Boot Mode pins provide means to select the boot mode and options before the
->> +device is powered up. After every POR, they are the main source to populate
->> +the Boot Parameter Tables.
->> +
->> +Boot Mode Pins for J784S4-EVM
->> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->> +
->> +The following tables shows some common boot modes used on J784S4 SoC platform.
->> +More details can be found in the Technical Reference Manual:
->> +http://www.ti.com/lit/zip/spruj52 under the `Boot Mode Pins` section.
->> +
->> +.. list-table:: J784S4 EVM Boot Modes
->> +   :widths: 16 16 16
->> +   :header-rows: 1
->> +
->> +   * - Switch Label
->> +     - SW9: 12345678
->> +     - SW8: 12345678
->> +
->> +   * - SD
->> +     - 00000000
->> +     - 10000010
->> +
->> +   * - EMMC
->> +     - 01000000
->> +     - 10000000
->> +
->> +   * - OSPI
->> +     - 01000000
->> +     - 00000110
->> +
->> +   * - UART
->> +     - 01110000
->> +     - 00000000
->> +
->> +   * - USB DFU
->> +     - 00100000
->> +     - 10000000
->> +
->> +For SW8 and SW9, the switch state in the "ON" position = 1.
->> +
->> +Boot Mode Pins for AM69-SK
->> +^^^^^^^^^^^^^^^^^^^^^^^^^^
->> +
->> +The following table shows some common boot modes used on AM69-SK platform.
->> +More details can be found in the User Guide for AM69-SK:
->> +https://www.ti.com/lit/ug/spruj70/spruj70.pdf under the `Bootmode Settings`
->> +section.
->> +
->> +.. list-table:: AM69 SK Boot Modes
->> +   :widths: 16 16
->> +   :header-rows: 1
->> +
->> +   * - Switch Label
->> +     - SW2: 1234
->> +
->> +   * - SD
->> +     - 0000
->> +
->> +   * - EMMC
->> +     - 0110
->> +
->> +   * - OSPI
->> +     - 1110
->> +
->> +   * - UART
->> +     - 1010
->> +
->> +For SW2, the switch state in the "ON" position = 1.
->> +
->> +Debugging U-Boot
->> +----------------
->> +
->> +See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
->> +detailed setup information.
->> +
->> +.. warning::
->> +
->> +  **OpenOCD support since**: v0.12.0
->> +
->> +  If the default package version of OpenOCD in your development
->> +  environment's distribution needs to be updated, it might be necessary to
->> +  build OpenOCD from the source.
->> +
->> +Debugging U-Boot on J784S4-EVM
->> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
->> +    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
->> +
->> +To start OpenOCD and connect to the board
->> +
->> +.. code-block:: bash
->> +
->> +  openocd -f board/ti_j784s4evm.cfg
->> +
->> +Debugging U-Boot on SK-AM69
->> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_openocd_connect_cti20
->> +    :end-before: .. k3_rst_include_end_openocd_connect_cti20
->> +
->> +.. include::  k3.rst
->> +    :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
->> +    :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
->> +
->> +For SK-AM69, the openocd_connect.cfg is as follows:
->> +
->> +.. code-block:: tcl
->> +
->> +  # TUMPA example:
->> +  # http://www.tiaowiki.com/w/TIAO_USB_Multi_Protocol_Adapter_User's_Manual
->> +  source [find interface/ftdi/tumpa.cfg]
->> +
->> +  transport select jtag
->> +
->> +  # default JTAG configuration has only SRST and no TRST
->> +  reset_config srst_only srst_push_pull
->> +
->> +  # delay after SRST goes inactive
->> +  adapter srst delay 20
->> +
->> +  if { ![info exists SOC] } {
->> +    # Set the SoC of interest
->> +    set SOC j784s4
->> +  }
->> +
->> +  source [find target/ti_k3.cfg]
->> +
->> +  ftdi tdo_sample_edge falling
->> +
->> +  # Speeds for FT2232H are in multiples of 2, and 32MHz is tops
->> +  # max speed we seem to achieve is ~20MHz.. so we pick 16MHz
->> +  adapter speed 16000
->> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
->> index 95cdb36625..314975e9ba 100644
->> --- a/doc/board/ti/k3.rst
->> +++ b/doc/board/ti/k3.rst
->> @@ -36,6 +36,7 @@ K3 Based SoCs
->>      am65x_evm
->>      j7200_evm
->>      j721e_evm
->> +   j784s4_evm
->>   
->>   Boot Flow Overview
->>   ------------------
+In order to use the CLI code, some significant refactoring is included
+here. This mostly involves moving the internal loop of the CLI to a
+separate function and recording its state in a struct, just as was done
+for single keypresses some time back. A minor addition is support for
+Ctrl-W to delete a word, since strangely this is currently only present
+in the simple version.
+
+The video-console system provides most of the features needed by
+testline, but a few things are missing. This series provides:
+
+- primitive cursor support so the user can see where he is typing
+- saving and restoring of the text-entry context, so that expo can allow
+  the user to continue where he left off, including deleting previously
+  entered characters correctly (for Truetype)
+- obtaining the nominal width of a string of n characters, so that a
+  suitable width can be chosen for the textline object
+
+Note that no support is provided for clearing the cursor. This was
+addressed in a previous series[1] which could perhaps be rebased. For
+this implementation, the cursor is therefore not enabled for the normal
+command line, only for expo.
+
+Reading and writing textline objects is supported for FDT and
+environment, but not for CMOS RAM, since it would likely use too much
+RAM to store a string.
+
+In terms of code size, the overall size increase is 180 bytes for
+Thumb02 boards, 160 of whcih is the addition of Ctrl-W to delete a word.
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=280178&state=*
+
+
+Simon Glass (36):
+  cli: Move simple readline into a function
+  cli: Add a command to show cmdline history
+  cli: Drop some #ifdefs in cli_readline
+  cli: Drop #ifdefs for CONFIG_AUTO_COMPLETE in cli_readline
+  cli: Implement delete-word in cread_line()
+  cli: Use unsigned int instead of unsigned long
+  cli: Convert cread_line() to use a struct for the main vars
+  cli: Unindent some code in cread_line()
+  cli: Create a function to process characters
+  cli: Terminate the string in cread_line_process_ch()
+  cli: Allow history to be disabled
+  cli: Allow command completion to be disabled
+  cli: Add a function to set up a new cread
+  video: Allow obtaining the nominal size of a string size
+  video: Allow saving and restoring text-entry state
+  video: Export vidconsole_entry_start()
+  video: Support showing a cursor
+  expo: Add better error reporting
+  expo: Fix up comments for get_cur_menuitem_text() et al
+  expo: Use switch statements more for object types
+  expo: Correct some swallowed errors in scene
+  expo: Correct the logic for duplicate-ID detection
+  expo: Allow highlighting other scene-object types
+  expo: Add a function to write a property to a devicetree
+  expo: Make calculation of an object bounding box generic
+  expo: Allow rendering the background of any object
+  expo: Add some scene fields needed for text entry
+  expo: Add basic support for textline objects
+  expo: Support opening a textline
+  expo: Plumb in textlines to a scene
+  video: Mark truetype_measure() static
+  expo: Support handling any key in cedit
+  expo: Plumb in textline to cedit
+  expo: Support building an expo with a textline
+  expo: Update tests to include textline
+  expo: Update documentation to include textline
+
+ arch/sandbox/dts/cedit.dtsi         |   8 +
+ boot/Makefile                       |   3 +-
+ boot/cedit.c                        | 196 ++++++++---
+ boot/expo_build.c                   | 103 +++++-
+ boot/scene.c                        | 237 +++++++++++--
+ boot/scene_internal.h               | 128 ++++++-
+ boot/scene_menu.c                   |  68 +---
+ boot/scene_textline.c               | 229 +++++++++++++
+ cmd/Kconfig                         |   7 +
+ cmd/Makefile                        |   1 +
+ cmd/history.c                       |  23 ++
+ common/cli_readline.c               | 498 ++++++++++++++++------------
+ doc/develop/cedit.rst               |   3 +-
+ doc/develop/expo.rst                |  48 ++-
+ doc/usage/cmd/history.rst           |  68 ++++
+ doc/usage/index.rst                 |   1 +
+ drivers/video/console_core.c        |  31 ++
+ drivers/video/console_normal.c      |  29 ++
+ drivers/video/console_truetype.c    | 191 ++++++++++-
+ drivers/video/vidconsole-uclass.c   |  71 +++-
+ drivers/video/vidconsole_internal.h |  24 ++
+ include/cli.h                       |  51 +++
+ include/command.h                   |   6 +
+ include/expo.h                      |  60 +++-
+ include/menu.h                      |   7 +-
+ include/test/cedit-test.h           |   5 +-
+ include/video_console.h             | 123 +++++++
+ test/boot/cedit.c                   |  30 +-
+ test/boot/expo.c                    |   2 +-
+ test/boot/files/expo_ids.h          |   3 +
+ test/boot/files/expo_layout.dts     |   8 +
+ test/cmd/Makefile                   |   1 +
+ test/cmd/history.c                  |  49 +++
+ 33 files changed, 1935 insertions(+), 377 deletions(-)
+ create mode 100644 boot/scene_textline.c
+ create mode 100644 cmd/history.c
+ create mode 100644 doc/usage/cmd/history.rst
+ create mode 100644 test/cmd/history.c
 
 -- 
-Thanks and regards,
-Apurva Nandan,
-Texas Instruments India.
+2.42.0.459.ge4e396fd5e-goog
 
