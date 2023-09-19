@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E3A8CD5BD6
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 15:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A621CD5BD6
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 15:28:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21C7686A84;
-	Tue, 19 Sep 2023 17:27:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8A7C486AA6;
+	Tue, 19 Sep 2023 17:28:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JqS8x0G5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mkAOYU7s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C1DB86AD0; Tue, 19 Sep 2023 17:27:30 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 410CB86AA6; Tue, 19 Sep 2023 17:28:04 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C9C186993
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 17:27:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C37486908
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 17:28:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-53136a13cd4so2386239a12.1
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:27:28 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9a65f9147ccso766586066b.1
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:28:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695137247; x=1695742047; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7IiDhzqVRViaPiP3Yrz/dU073U7qJAZKLNrsBgMV2Tw=;
- b=JqS8x0G5mvm3q/od3XIk3GZ+kte/+ENngEa1ukQDKw+2akBfYxIfECT/q7+sbbhuli
- UxAs9QFImLuyybDAhL5nMHqqqrQIJdxbLxvZxIx+994h6rBvOW2+uiGATxpLEkU9mJyX
- nxVzmzstLQSxkWinfb5CexCiUkTPsB+yWeVKE=
+ d=gmail.com; s=20230601; t=1695137282; x=1695742082; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OA7Lp2xct3jfQY1XfQUOHb64xkXWzIY7ak81N1QUcwo=;
+ b=mkAOYU7s79kltCEzSBCYXl/ihDna0f+LlwrUH/OHcGgkIxSWUKTPhSl7AtZuBXqS7m
+ +mjVNxWSFwAJ6mIT3dxwh5v2eVnvdP7ckwsWsoNU+ky4ST2lLoGSEFk7EMsd6YFpSSi7
+ LW8I5W4PKzjQtItG20q+1W5EJSSBgbNvvIoQrpGkYazUaH5WiVY02CPp51LfApIAet/s
+ sj0m8YQSHBkAE+DdDP2VVDyuLsuGrYxDQIjQtGYmPImrEqrQjoGBh7h/Q8QAFUYtcUxz
+ T5hmL+DqgSGPtbQK4ASqPEWlR/LxUeeMkUp4x544djllXcBvYhtjKDHsp4+gqxJnkeiH
+ SMlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695137247; x=1695742047;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7IiDhzqVRViaPiP3Yrz/dU073U7qJAZKLNrsBgMV2Tw=;
- b=w+Xlzvz35dxXbdG8Bsdm06jQfHxYv4fss5sYZLkluXqzabLobdAE5xW2qmqAWcxX4o
- Bv18aFleale72QAMBemdXiizICKiCV6s0o7bCCNy0Py7f+KuTWRTf5s0IgTBc2GQokz2
- I5JSj7D/LLk52Y/nYWmoYrd6hbRIMKIHmMcKl1BKQpdGQhi/QRST8GQ3LAktR2zLXKSz
- qoJVJ0NkMX89AIDblLSrgPmz8zEX4xDSQdkuPcruFEo6mHxW5gX0xj5MMyzGGfl+dHBQ
- KvraCBjEhT3XXVYAEKc3yKnNiH5xXx1csV7i5sRdk8PepY4oRPugHyAm62g+gNSesu51
- D1zg==
-X-Gm-Message-State: AOJu0YxfBuCRbo6Ik/7LnCMzHXVJEbXj7MiSC34phkCLLwQuAfkwK9GO
- R2nI8YnFbvdARbz2ky2AYshz1zDFmnp9hTuKnxdRsg==
-X-Google-Smtp-Source: AGHT+IEShODQtR6RpsbkfAzvQ/ybHrV9M952GG7Y+mw69LaMX/6Ci6R6Yot+oMMY9xVeekh9lPjb/tEBBQHmfDHNn1Y=
-X-Received: by 2002:a05:6402:14c8:b0:52f:bd60:b54b with SMTP id
- f8-20020a05640214c800b0052fbd60b54bmr12402599edx.37.1695137247467; Tue, 19
- Sep 2023 08:27:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695137282; x=1695742082;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=OA7Lp2xct3jfQY1XfQUOHb64xkXWzIY7ak81N1QUcwo=;
+ b=E/UuwvAvsI4giimHUmdCqCJtCk89+aRpeajW7GzPFS9wDzY6tJ1WFlifgewI2UbGUt
+ M54X5NooURYCx3Ksbp8ONi6fjIyUMsssRvx/D9zB/ZqTJP7kcXuU+Ygssh0D2M461/HM
+ RA3GRqty3RmYqL3RQ//6iCwS6oTkxsEhoHbGzmn44QZXnX5IZvpcDdD8dznZz7uiOlKW
+ CGZH4Pvyp65llSzPPTqgdk7NTuSZ7onaW6HlDTBy+Ki9xetTFzeuaMjfKDVYekEVZ+xP
+ 1plq93U9xgxFYVKP/vcDOg/3HeiBtAoJw0s+SvB2AIUC/0IpQWLYSdG22hzu1w/nGb2M
+ kQwg==
+X-Gm-Message-State: AOJu0YywRxubXag7mUJGf75jOE6uWHVsVF0J3V5V11ts4h+OJwo4HVHo
+ kCsT+4pk2cEwCGX3ksHNuGA=
+X-Google-Smtp-Source: AGHT+IEHe8DHnUc36RCTxPNYfQ7YT9s3qaZMoK2QdWdL2pbM4GCGG+KUAq22q0WyxpW9iAe1W+rvjg==
+X-Received: by 2002:a17:907:778d:b0:9ae:3d17:d5d5 with SMTP id
+ ky13-20020a170907778d00b009ae3d17d5d5mr1081438ejc.70.1695137281632; 
+ Tue, 19 Sep 2023 08:28:01 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ by smtp.gmail.com with ESMTPSA id
+ jw24-20020a17090776b800b009a168ab6ee2sm7923858ejc.164.2023.09.19.08.28.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Sep 2023 08:28:01 -0700 (PDT)
+Message-ID: <decbd275-3171-89a3-abf5-cb0caae0f2b7@gmail.com>
+Date: Tue, 19 Sep 2023 17:28:00 +0200
 MIME-Version: 1.0
-References: <20230907214012.74978-1-sjg@chromium.org>
-In-Reply-To: <20230907214012.74978-1-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Sep 2023 09:27:09 -0600
-Message-ID: <CAPnjgZ1Twk4Vq9OXEUeYUK4VXXC_niMzc47ZLk4Zf7f822K5iw@mail.gmail.com>
-Subject: Re: [PATCH v6 1/2] schemas: Add some common reserved-memory usages
-To: devicetree@vger.kernel.org
-Cc: Dhaval Sharma <dhaval@rivosinc.com>, Guo Dong <guo.dong@intel.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Yunhui Cui <cuiyunhui@bytedance.com>, 
- Chiu Chasel <chasel.chiu@intel.com>, Mark Rutland <mark.rutland@arm.com>,
- linux-acpi@vger.kernel.org, Rob Herring <robh@kernel.org>,
- Maximilian Brune <maximilian.brune@9elements.com>, 
- Ard Biesheuvel <ardb@kernel.org>, Tom Rini <trini@konsulko.com>, 
- Lean Sheng Tan <sheng.tan@9elements.com>, Gua Guo <gua.guo@intel.com>, 
- ron minnich <rminnich@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [RESEND PATCH v2] rockchip: include: asm: fix entering download mode
+ rk3066
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,44 +93,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Keep track of the re-entries with help of the lr register.
+This binary can be re-used and called from various BROM functions.
+Only when it's called from the part that handles SPI, NAND or EMMC
+hardware it needs to early return to BROM ones.
+In download mode when it handles data on USB OTG and UART0
+this section must be skipped.
 
-On Thu, 7 Sept 2023 at 15:40, Simon Glass <sjg@chromium.org> wrote:
->
-> It is common to split firmware into 'Platform Init', which does the
-> initial hardware setup and a "Payload" which selects the OS to be booted.
-> Thus an handover interface is required between these two pieces.
->
-> This aims to provide an small schema addition for the memory mapping
-> needed to keep these two pieces working together well.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v6:
-> - Drop mention of UEFI
-> - Use compatible strings instead of node names
->
-> Changes in v5:
-> - Drop the memory-map node (should have done that in v4)
-> - Tidy up schema a bit
->
-> Changes in v4:
-> - Make use of the reserved-memory node instead of creating a new one
->
-> Changes in v3:
-> - Reword commit message again
-> - cc a lot more people, from the FFI patch
-> - Split out the attributes into the /memory nodes
->
-> Changes in v2:
-> - Reword commit message
->
->  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++++
->  1 file changed, 71 insertions(+)
->  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.yaml
+Unlike newer Rockchip SoC models the rk3066 BROM code does not have built-in
+support to enter download mode on return to BROM. This binary must check
+the boot mode register for the BOOT_BROM_DOWNLOAD flag and reset if it's set.
+It then returns to BROM to the end of the function that reads boot blocks.
+From there the BROM code goes into a download mode and waits for data
+on USB OTG and UART0.
 
-If there are no more comments could these two patches be applied, please?
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+---
 
-Regards,
-Simon
+Note:
+  Normal boot flow is OK.
+  In download mode this binary hangs after return to BROM for unknown reasons.
+  Replace CODE471_OPTION with 30_LPDDR2_300MHz_DD.bin for now.
+
+  Could Rockchip disclose what further conditions must be met
+  in rk3066 download mode?
+
+Changed V2:
+  Move file to rk3066 specific location
+  Replace retry_counter by LR check
+  Add DNL mode return address
+  Restyle
+  Reword
+---
+ arch/arm/include/asm/arch-rk3066/boot0.h | 77 +++++++++++++++++++++++-
+ arch/arm/mach-rockchip/Kconfig           | 17 +++++-
+ arch/arm/mach-rockchip/rk3066/Kconfig    |  6 ++
+ 3 files changed, 98 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/include/asm/arch-rk3066/boot0.h b/arch/arm/include/asm/arch-rk3066/boot0.h
+index 28c0fb9a4c6b..1af4b9c1d7ba 100644
+--- a/arch/arm/include/asm/arch-rk3066/boot0.h
++++ b/arch/arm/include/asm/arch-rk3066/boot0.h
+@@ -3,6 +3,81 @@
+ #ifndef __ASM_ARCH_BOOT0_H__
+ #define __ASM_ARCH_BOOT0_H__
+
+-#include <asm/arch-rockchip/boot0.h>
++#include <asm/arch-rockchip/boot_mode.h>
+
++/*
++ * Execution starts on the instruction following this 4-byte header
++ * (containing the magic 'RK30'). This magic constant will be written into
++ * the final image by the rkimage tool, but we need to reserve space for it here.
++ */
++#ifdef CONFIG_SPL_BUILD
++	b	1f  /* if overwritten, entry-address is at the next word */
++1:
++#endif
++
++#if CONFIG_IS_ENABLED(ROCKCHIP_EARLYRETURN_TO_BROM)
++/*
++ * Keep track of the re-entries with help of the lr register.
++ * This binary can be re-used and called from various BROM functions.
++ * Only when it's called from the part that handles SPI, NAND or EMMC
++ * hardware it needs to early return to BROM ones.
++ * In download mode when it handles data on USB OTG and UART0
++ * this section must be skipped.
++ */
++	ldr	r3, =CONFIG_ROCKCHIP_BOOT_LR_REG
++	cmp	lr, r3          /* if (LR != CONFIG_ROCKCHIP_BOOT_LR_REG)        */
++	bne	reset           /*     goto reset;                               */
++/*
++ * Unlike newer Rockchip SoC models the rk3066 BROM code does not have built-in
++ * support to enter download mode on return to BROM. This binary must check
++ * the boot mode register for the BOOT_BROM_DOWNLOAD flag and reset if it's set.
++ * It then returns to BROM to the end of the function that reads boot blocks.
++ * From there the BROM code goes into a download mode and waits for data
++ * on USB OTG and UART0.
++ */
++	ldr	r2, =BOOT_BROM_DOWNLOAD
++	ldr	r3, =CONFIG_ROCKCHIP_BOOT_MODE_REG
++	ldr	r0, [r3]        /* if (readl(CONFIG_ROCKCHIP_BOOT_MODE_REG) !=   */
++	cmp	r0, r2          /*     BOOT_BROM_DOWNLOAD) {                     */
++	bne	early_return    /*     goto early_return;                        */
++				/* } else {                                      */
++	mov	r0, #0
++	str	r0, [r3]        /*     writel(0, CONFIG_ROCKCHIP_BOOT_MODE_REG); */
++
++	ldr	r3, =CONFIG_ROCKCHIP_BOOT_RETURN_REG
++	bx	r3              /*     return to CONFIG_ROCKCHIP_BOOT_RETURN_REG;*/
++
++early_return:
++	bx	lr              /*  return to LR in BROM                         */
++
++SAVE_SP_ADDR:
++	.word 0
++
++	.globl save_boot_params
++save_boot_params:
++	push	{r1-r12, lr}
++	ldr	r0, =SAVE_SP_ADDR
++	str	sp, [r0]
++	b	save_boot_params_ret
++
++	.globl back_to_bootrom
++back_to_bootrom:
++	ldr	r0, =SAVE_SP_ADDR
++	ldr	sp, [r0]
++	mov	r0, #0
++	pop	{r1-r12, pc}
++#endif
++
++#if (defined(CONFIG_SPL_BUILD))
++/* U-Boot proper of armv7 does not need this */
++	b reset
++#endif
++
++/*
++ * For armv7, the addr '_start' will be used as vector start address
++ * and is written to the VBAR register, which needs to aligned to 0x20.
++ */
++	.align(5), 0x0
++_start:
++	ARM_VECTORS
+ #endif
+diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+index 07b5595dac8c..84a2f0d5ff48 100644
+--- a/arch/arm/mach-rockchip/Kconfig
++++ b/arch/arm/mach-rockchip/Kconfig
+@@ -402,7 +402,7 @@ config SPL_ROCKCHIP_BACK_TO_BROM
+ config TPL_ROCKCHIP_BACK_TO_BROM
+ 	bool "TPL returns to bootrom"
+ 	default y
+-	select ROCKCHIP_BROM_HELPER
++	select ROCKCHIP_BROM_HELPER if !ROCKCHIP_RK3066
+ 	select TPL_BOOTROM_SUPPORT
+ 	depends on TPL
+ 	help
+@@ -448,6 +448,21 @@ config ROCKCHIP_BOOT_MODE_REG
+ 	  The Soc will enter to different boot mode(defined in asm/arch-rockchip/boot_mode.h)
+ 	  according to the value from this register.
+
++config ROCKCHIP_BOOT_LR_REG
++	hex "Rockchip boot early return LR address"
++	depends on TPL_ROCKCHIP_EARLYRETURN_TO_BROM || SPL_ROCKCHIP_EARLYRETURN_TO_BROM
++	help
++	  With ROCKCHIP_EARLYRETURN_TO_BROM enabled this LR address is
++	  used to keep track of the re-entries.
++
++config ROCKCHIP_BOOT_RETURN_REG
++	hex "Rockchip download mode return address"
++	depends on TPL_ROCKCHIP_EARLYRETURN_TO_BROM || SPL_ROCKCHIP_EARLYRETURN_TO_BROM
++	help
++	  Rockchip SoC models without built-in support to enter
++	  download mode after early return to BROM code use a SoC
++	  specific return address in BROM.
++
+ config ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON
+ 	bool "Disable device boot on power plug-in"
+ 	depends on PMIC_RK8XX
+diff --git a/arch/arm/mach-rockchip/rk3066/Kconfig b/arch/arm/mach-rockchip/rk3066/Kconfig
+index 95d7fc8a2917..3721f7469a9e 100644
+--- a/arch/arm/mach-rockchip/rk3066/Kconfig
++++ b/arch/arm/mach-rockchip/rk3066/Kconfig
+@@ -10,6 +10,12 @@ config TARGET_MK808
+ config ROCKCHIP_BOOT_MODE_REG
+ 	default 0x20004040
+
++config ROCKCHIP_BOOT_LR_REG
++	default 0x00001058
++
++config ROCKCHIP_BOOT_RETURN_REG
++	default 0x00001100
++
+ config SYS_SOC
+ 	default "rk3066"
+
+--
+2.39.2
+
