@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FF94CD3447
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:21:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 138CECD3447
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:21:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F4C086A24;
-	Tue, 19 Sep 2023 09:20:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5C67686A78;
+	Tue, 19 Sep 2023 09:20:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RwuD4ENG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jYclY22K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96D6486AB3; Tue, 19 Sep 2023 09:20:07 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id AD0CA86ACA; Tue, 19 Sep 2023 09:20:13 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8FE586A21
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:20:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1B4986A81
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:20:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-50300e9e75bso4578157e87.1
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:20:05 -0700 (PDT)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2c00c0f11b2so28552651fa.1
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:20:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695108005; x=1695712805; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695108011; x=1695712811; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+We61I/YLX8+XFY767ftciu3+b5XLCAs/zsxUUiOj/k=;
- b=RwuD4ENG3SgkKFG8tgyI183Clo6KYAm5Mw26zWFRBGPRZssIeGjSuB3yGVFa8Da5e4
- Db8SQJOGZJEPpPh99M9qTL0c2xbt4ecb6UpcyvRtX5SUlZzzHhYdsQEiy75tIab80kCE
- mN4SxfR/4HtHMYmQbuqgxPGMImT9sKYzH1G3YyYIc/kljyCoGwM9/CLK+BVeo77FhFDV
- culdsT2FcGUE95uDcCvE2fIkKtGQEkThUy5uzbZhT/5pzCtW7xnsv8FFF009m+nbykTs
- RK3Tu6Q8ypQDd7z/ZlkRd+PFiE4KT/hUSBe09Ls823HfCscV0QXUFpWHX2AxkijZt6MY
- 7Gig==
+ bh=IRKdWDfK3dzksTU8ZJHvwNeMiXPus2JEuw1GvXkDcsI=;
+ b=jYclY22KYKUUWUSRO7EA5Y5Ycxq4ez1T0qNPhKXwl1dCQTSCpeHrOetyffSpXIUaLe
+ 2OWxACRPV1mCpsJ3kzuf4COICSlkto8srUcZvKuH8zdcAYjZzwq9rvpF9qZUIHxg8APj
+ W5gftHpIZDzrZVYWZ9DuuzH5qmL0fBwBjlaeG5uPoVCQrxWfbBt41ybKVmFXqUUfe9sw
+ wVdqI/MLL62Wp35E0Knf8e+2PVTJaRiA7tOQphoASJA9MkTg9YaSgDk4X9uaiDfw45ft
+ 6Pz3wao+KwATy0Qg59LcIed70cLKzdRfkFLqNxceyZOKvQgycDBy7NXPFKN1tIq6DZQR
+ /RCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695108005; x=1695712805;
+ d=1e100.net; s=20230601; t=1695108011; x=1695712811;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+We61I/YLX8+XFY767ftciu3+b5XLCAs/zsxUUiOj/k=;
- b=Y+LP4hvG07F0nBp7/iGK4psepT51cLIKuvqlunpiLBw0NX/c+cv8JOHpTeKrNz7c6Z
- AbAxKs3a5wk4ppCHhagM4cpufZ3mkZKPqJafz1sLKmOIyRP8JS6pd/g1iXPVWVxB47VQ
- ZFmQVoA+nkesri2LPn7AlHoZjHbPaE+ZT4LieOOgS3rPHnVJ/e+2QStEJqyp4yYm0BRv
- b3aiyS2eepOWf5j5TD1N81cCEP/ON7qSXXSPnoXUBmnN7mtANpiPaU4sEV5z5ruMhkTA
- WyjPhwYvJWcBBdG+09hbAsUR1ejvE+ArkkwmrtHlpxJJzlRh2sHBXVUOy8f1DtVZfeVF
- LxZQ==
-X-Gm-Message-State: AOJu0YxO+octH/MIAUjNycc2UMZC5vwvscNj0+SqZTepyJvjdK0eU6ZI
- K9LAKQqVN2QjDGQNuQOMW6MzX7KGPLdT+ETrHGA=
-X-Google-Smtp-Source: AGHT+IEdcVPwYUE75HTuTIhB9p48Rp0wbb3MX+/8DfhsHVIBumQQqzmvZW8u83jOYSqWqLsDJHu9F6W2xMl8AYb8uu8=
-X-Received: by 2002:a19:6d01:0:b0:500:8443:744a with SMTP id
- i1-20020a196d01000000b005008443744amr8026534lfc.7.1695108004956; Tue, 19 Sep
- 2023 00:20:04 -0700 (PDT)
+ bh=IRKdWDfK3dzksTU8ZJHvwNeMiXPus2JEuw1GvXkDcsI=;
+ b=m35AT5LQ3cvHayTuvSmu8aIx/juN1P7tQW4TGVKgNUUzQ4Ujye4nic5r/hCdCf+Ph3
+ hY0YuaAHAHbmaESfBgojhPVJELO+0e8k42Yo1fa5Fn+3HBRmuEuSoKBMq2xo7kg+rQk/
+ ls4XA3UPhayZOmBgKTjWiKGQBIcDSzPRc+Mn8A8JC6EFKnxYFOwwYSTmlwmjfK277HG4
+ MqObOcibCyPMZMybxOqY+wD+8ya4YWfYVtcEfmL3ha4MImLmcq65w7Y1eRHTo4f5IVEF
+ bCx59xhp4q9j+MAr8QfIw7jaYJaD30VzVXkzC8DCZ5o+Perw5Pb59blcELq9z0ZW/hqa
+ VvrA==
+X-Gm-Message-State: AOJu0YzVWlP+kqLIQ9+dpZ1shadZaZS5aSUQs1lUlsCHGGzGoBueABhy
+ K4CNVccm10hJ6fztMIDS5XfBgST7WRW/ttpGlZo=
+X-Google-Smtp-Source: AGHT+IG/J4e0mhSSX3dzGN4MU5WSmRcHhG0bBuujniKfOoPi7RVOUwZ1r7QOGHebccauCBcOPmfvtwi+yjWTuDbJZuU=
+X-Received: by 2002:a2e:964d:0:b0:2bc:f1d3:b54c with SMTP id
+ z13-20020a2e964d000000b002bcf1d3b54cmr10214637ljh.20.1695108010999; Tue, 19
+ Sep 2023 00:20:10 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-13-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-13-sjg@chromium.org>
+ <20230823211059.1235147-15-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-15-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:19:51 +0800
-Message-ID: <CAEUhbmVbVYqVp4c1DSaqOOLD1gLNTWFrQ4htcfQ08xRYY5rSFg@mail.gmail.com>
-Subject: Re: [PATCH v4 12/20] x86: smbios: Add a Kconfig indicating
- SMBIOS-table presence
+Date: Tue, 19 Sep 2023 15:19:54 +0800
+Message-ID: <CAEUhbmXKXvU7poM6paK+9HzgQ4w=fidoS4HAGBbM6nND6fP1AQ@mail.gmail.com>
+Subject: Re: [PATCH v4 14/20] Record the position of the SMBIOS tables
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -92,30 +91,25 @@ X-Virus-Status: Clean
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> When booted from coreboot, U-Boot does not build the SMBIOS tables, but
-> it should still pass them on to the OS. Add a new option which indicates
-> whether SMBIOS tables are present, however they were built.
->
-> Flip the ordering so that the dependency is listed first, which is less
-> confusing.
->
-> Adjust GENERATE_SMBIOS_TABLE to depend on this new symbol.
+> Remember where these end up so that we can pass this information on to
+> the EFI layer.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 > ---
 >
-> (no changes since v3)
->
-> Changes in v3:
-> - Allow SMBIOS if EFI_LOADER is enabled
-> - Reword the help
+> Changes in v4:
+> - Fix arm and riscv
 >
 > Changes in v2:
 > - Add new patch
 >
->  lib/Kconfig | 15 ++++++++++++++-
->  1 file changed, 14 insertions(+), 1 deletion(-)
+>  arch/arm/include/asm/global_data.h     | 3 +++
+>  arch/riscv/include/asm/global_data.h   | 3 +++
+>  arch/sandbox/include/asm/global_data.h | 1 +
+>  arch/x86/include/asm/global_data.h     | 1 +
+>  arch/x86/lib/tables.c                  | 3 +++
+>  include/asm-generic/global_data.h      | 8 ++++++++
+>  6 files changed, 19 insertions(+)
 >
 
 Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
