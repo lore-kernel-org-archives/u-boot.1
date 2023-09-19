@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6EC3CD5BCD
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 15:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE992CD5BD3
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 15:14:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8F7986A38;
-	Tue, 19 Sep 2023 17:14:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A6C486A84;
+	Tue, 19 Sep 2023 17:14:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Kvgi4y3T";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YOf85Eg9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CC7886A33; Tue, 19 Sep 2023 17:14:35 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id E8CA986A94; Tue, 19 Sep 2023 17:14:39 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE0ED86A38
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 17:14:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B408864A7
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 17:14:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-59e8d963adbso27397807b3.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:14:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-52c88a03f99so6736935a12.2
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 08:14:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695136471; x=1695741271; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S/1LFhW+xsy0FrXcjK8QsT1xjxIWAdFFUDrZ08THXts=;
- b=Kvgi4y3TdEoKg3ib2DqOxL1oTqzIWpa8Ak6cXp4dA4gtUpsPCeD7Fu5cU6u12la7U6
- p3DuGHpy4tkDJv8hW8Eq0ssTCpC0Z4CDFXePkNAu7bIE0fqyNmdlQ2fSa9BI7yz/4LZv
- y4YAZamG68YvSbSTosYNiuSBcrThG+Ao6/KXA=
+ d=gmail.com; s=20230601; t=1695136476; x=1695741276; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=OY/2HnIB276O/WTAh6rASsd+ItrhmOR4Q2+FFayEMlE=;
+ b=YOf85Eg93P65/S0bQuQLqO0XbdMv2BvyIIhkniXMaFnD/oHu+k2yAf3jIbybLMoGLI
+ TLOwAgdZHpXbFCy91KYuTw7J5B9j0eeiukkOiGTWEUhUG12FawB3fHV3xqYZAwdOgGOj
+ 2dcnHof2pMXo+tFr51e5fINuxYd8MaMRwULXN3hGbF0dMy63zGTY4W8aJ/S4F2quF9F5
+ 9NHwll1R4h8PAn/QwPm5eoCUYwKDU+IJrQTMxC3X13FTGy3iC7/MV+x+PhxAhhOxT44a
+ 2haclzsKfalbj9/Dzue9YtlG3up8X2Ag3+xzRcfS9GZt3TxnZqyT1P/qKHsXFF5AgjTD
+ gYKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695136471; x=1695741271;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S/1LFhW+xsy0FrXcjK8QsT1xjxIWAdFFUDrZ08THXts=;
- b=olGMNBwxao3C9oRZQDLb9UK66rQNeZvknQO6o61aCmhp8zL9nXeIQiAKwtCMVDK5B2
- y/Bi5772z/9BCCcxUYg7NztysJLbGsvEAHkG47G2PThmejzbYg4OjQ1eFvs7rnqUn/ZU
- /h/2Tsgn4EtoC6dWTa8z+ixenmHgIOS4gylZCymHaSeKTUFjC0ygQsg8c2hZGtRRoMo+
- 08ERGWB0XDP6gbl5/0a7CnKFXRxsKqn1AUSzNr9f9YmK0NWAhRk9Mrf+CNb2rHRxdbpr
- 1PuSuhwkU6fGdSp3si2BoIZ0M82zFpZnskW8B80n/PxrLGCyWpfa0SQVg1+l08r9I7t9
- F9Pw==
-X-Gm-Message-State: AOJu0Yx7voz6/NZZHmRH/8NM1n+9fCAu5ei6bAnM9X42tOz7rYdjZGrv
- bB18v75UNBmKfC6OmO+e/lIVwA==
-X-Google-Smtp-Source: AGHT+IHtNO/42AEDv+tnCJHrRXa5V6cd+EMpgynIQCK2gaUXzZmyYAF/JoBHbE7LPC5rmYlRiv816w==
-X-Received: by 2002:a81:7282:0:b0:56d:3b91:7e78 with SMTP id
- n124-20020a817282000000b0056d3b917e78mr12915924ywc.20.1695136471404; 
- Tue, 19 Sep 2023 08:14:31 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-715d-a992-91e3-9182.res6.spectrum.com.
- [2603:6081:7b00:6400:715d:a992:91e3:9182])
+ d=1e100.net; s=20230601; t=1695136476; x=1695741276;
+ h=content-transfer-encoding:in-reply-to:references:cc:to:from
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=OY/2HnIB276O/WTAh6rASsd+ItrhmOR4Q2+FFayEMlE=;
+ b=XLbVMQojx44wn8Zv59lCiblCiFCGYsYLtt1LXOgSOjmWyc76kO/cf3A3EFjRF2ZKNV
+ iPySZ9CDYtVzor5B6IyvE72At4DVB+HD42N0ohHC7oHNfWDBTr3ljmjKYYTAKwbtVLUq
+ DxMqCta4F8dY10odlQrQrmgzIEsCGepAlS0YaiPOvvPHHpZ3W/7Av5lLFVHRFS6uHrTa
+ T+2jUba3422YzcavPdVXUnGuOy5lwP0jzwtXrcFpAfGLUN20YzRue+QbPSkxyOZ0FGbH
+ TeWFsvOR7IO+EOQjDTBWmXbstmSyBejofLgK+/SnxuH7r2Yq+N/cq6ZEK5zZyO1zw0fK
+ t5dw==
+X-Gm-Message-State: AOJu0YzAMKLYQIFy/xEuDOkGYxd/uTDW6TltGQgY0k9gme4z9p2vDR44
+ irPfBDqXfPhvuDOGcr6r+Gk=
+X-Google-Smtp-Source: AGHT+IGeuoke7MEEPdTABJGmEFpidUZY4LquhvdqQs/mMUoLMVrBcSv+gXnHk20Dxil5mvMtv2RuPA==
+X-Received: by 2002:a05:6402:f1b:b0:530:ccf7:37af with SMTP id
+ i27-20020a0564020f1b00b00530ccf737afmr8664422eda.12.1695136475925; 
+ Tue, 19 Sep 2023 08:14:35 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
  by smtp.gmail.com with ESMTPSA id
- p62-20020a819841000000b0059b50f126fbsm2356928ywg.114.2023.09.19.08.14.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 08:14:30 -0700 (PDT)
-Date: Tue, 19 Sep 2023 11:14:29 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Nikhil M Jain <n-jain1@ti.com>
-Cc: u-boot@lists.denx.de, devarsht@ti.com, vigneshr@ti.com
-Subject: Re: [PATCH] tools: logos: Rename TI logo files
-Message-ID: <20230919151429.GG305624@bill-the-cat>
-References: <20230901103913.38407-1-n-jain1@ti.com>
+ by6-20020a0564021b0600b0052a198d8a4dsm7409444edb.52.2023.09.19.08.14.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 19 Sep 2023 08:14:35 -0700 (PDT)
+Message-ID: <d34d4de5-b9c4-648a-ba5f-cd6828194d78@gmail.com>
+Date: Tue, 19 Sep 2023 17:14:34 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/dvbJoQyxPJNROUH"
-Content-Disposition: inline
-In-Reply-To: <20230901103913.38407-1-n-jain1@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v2] rockchip: include: asm: fix entering download mode
+ rk3066
+Content-Language: en-US
+From: Johan Jonker <jbx6244@gmail.com>
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
+References: <183eaaad-ef37-22a2-f041-a32e499c7f88@gmail.com>
+In-Reply-To: <183eaaad-ef37-22a2-f041-a32e499c7f88@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,43 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
---/dvbJoQyxPJNROUH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It looks as if all the TABs are gone.
 
-On Fri, Sep 01, 2023 at 04:09:13PM +0530, Nikhil M Jain wrote:
+Will resend.
 
-> Change the file name from ti.gz and ti.bmp to ti_logos_414x97_32bpp to
-> help user understand the resolution and identify the logo files when
-> placed in the boot partition and update the splashfile name with the
-> same in .env file.
->=20
-> Signed-off-by: Nikhil M Jain <n-jain1@ti.com>
-> Reviewed-by: Devarsh Thakkar <devarsht@ti.com>
+Johan
 
-Applied to u-boot/next, thanks!
-
---=20
-Tom
-
---/dvbJoQyxPJNROUH
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUJutUACgkQFHw5/5Y0
-tyyf7wwAm+5x0Amfh57dNyPaPHh93JCQTrCLtwUjlJXcX4lbYzrjLSbVaKEtpTGY
-zY3Iu3+zAv+EwWkVuuy8Gp42v2AiOjVOZj9byF/sKe/MyFSrASo/zDy//ccUEk6a
-fbakgdba7pY+zfeJrxexVwV2Vre8kqfFfRod8328PdfL3RaMdpc+9cX3OPo3ZrBi
-LN3CiA0lMLC+pdU2lBdZS8tOf2oT69nnX0fixB2JmoCUe6VQXdKG6YGWSrZcG2yb
-NhTkeXeiyhOWX+j1l1T3fI7KRA7VYBzVtgOUDdYNCi/PAYG3TgMgNox/flzkRfFJ
-je2Ifz3Ld/9zgz/kIBFs6+tSejGbqm0phv0AxNQ1OIx6lKjUkA0Cgd/TGcLrTxVD
-Mj48ScofvppNon2rB8lBC+nyhnQzC8fg+4ps+BLGz2UTbFDQ40jJhiFVhfaK/606
-vCyUOrirapgAMyo3YC0opvPoImCvQZ22M5EjBLRDqGoBoTTnmdaQmxMy3SY9yQnH
-v6Cj/bvq
-=wd8M
------END PGP SIGNATURE-----
-
---/dvbJoQyxPJNROUH--
+On 9/19/23 16:57, Johan Jonker wrote:
+> Keep track of the re-entries with help of the lr register.
+> This binary can be re-used and called from various BROM functions.
+> Only when it's called from the part that handles SPI, NAND or EMMC
+> hardware it needs to early return to BROM ones.
+> In download mode when it handles data on USB OTG and UART0
+> this section must be skipped.
+>
+> Unlike newer Rockchip SoC models the rk3066 BROM code does not have built-in
+> support to enter download mode on return to BROM. This binary must check
+> the boot mode register for the BOOT_BROM_DOWNLOAD flag and reset if it's set.
+> It then returns to BROM to the end of the function that reads boot blocks.
+> From there the BROM code goes into a download mode and waits for data
+> on USB OTG and UART0.
+>
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+> ---
