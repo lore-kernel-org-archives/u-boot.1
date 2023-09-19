@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41D14CD342E
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 01:05:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 165C6CD342F
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 01:05:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB55486A3A;
-	Tue, 19 Sep 2023 03:05:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18E63869F1;
+	Tue, 19 Sep 2023 03:05:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="JZL4XkYv";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="WaG4QnVB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FEDA869F1; Tue, 19 Sep 2023 03:05:10 +0200 (CEST)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
+ id 9AB1186A49; Tue, 19 Sep 2023 03:05:12 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9857D86A38
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 03:05:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C770386915
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 03:05:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-32008e339adso2171618f8f.2
- for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 18:05:07 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-52c4d3ff424so6333167a12.0
+ for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 18:05:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1695085507; x=1695690307; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=a4JBA064AgXmgZDHrDtlHsitfsoeIvrobIHhAOnOCHU=;
- b=JZL4XkYvEXvRotwdk+mij92pNymn/++snAYHPT1Ifu0DXNhWnGQwArisk+2pCNzle3
- CuB8LrA+tn/ioV6sEv3FBO8zmT7lnxvw+sgktD3yCIy/GeFHLIvSECC6s3MKuDIrQDRn
- HFsMYTPTHFgvkzIvWzSBqjLs8Ab38806ryNYLLgvCM3JXvddlmEknKE3Y76aTQMl1uDl
- iKSSy3bz/4essrE9DPgxB5U38wRoavt66QfrrC0YWCDP2vdzwXDto64txKWiM0/DO0pd
- y7deGJUMZSx8GXn3spWpKPl5YRjdZA18rOQduKLaY3jjwbKu8KOtfcTUJCuiJ/yVIOCA
- 2UlA==
+ d=google.com; s=20230601; t=1695085510; x=1695690310; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Cn+dG64XMs3aHg+XLGsO8RRVegwsHXAN0CSNX5CCzcE=;
+ b=WaG4QnVB5TkxJeo56pP7fgEtojtF5BH3TwtVApCvcGfimjo8sZho1z6rG8y63/O4Kg
+ +hPoWq1/ZlRs/13tHe3jDCWmxEKWIkP3ZY3k/uaJ9wzSMZr3+53pkNWcwpfTYqyTIhTT
+ UhXVoUE9TUgVfpl/2iYxHkH9PBIRHGfFkRXyCR56kE6Drw+sARdR26g6CxnBZ01RqpCi
+ /or8irNmh0zFtlEDY3nqK0XewmN9wKs1cZ6BmQusRBqgwaxj8eOZ8bPIswlDW/C1z8BO
+ VEyEgCf5veHQiTgGBWSWZRo3in5qoXxLyr6nvZofgeKInuHpaa7JesXXOEtCAsUrT++4
+ sqxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695085507; x=1695690307;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=a4JBA064AgXmgZDHrDtlHsitfsoeIvrobIHhAOnOCHU=;
- b=I59uKYzKQ5Ke+T0N+yhInP3CL3KszB0H5lkE6/p+NjFwDJ2fFAfjOeDO9hGCAA8l3g
- oSdHFqOZ27Ezs6i1NeWgkezElwgjYwXBar9ehAugm3i+R9isxMzzoyqETRVM+ijBwLFW
- O3Xk6katpbAtZI9bGi25zRiLzbcxMjLaStbcIxy0hZ9wrBPtRUjoK5f+fQmIQfY2T75Q
- 3SgiQXwfxjccEFSBFT40L5iuocfFkJyK4iL5+9fEiFu+pl2vc+Q8/FTeSa2XfA6WVAET
- EI0wb9yG8zfzEG16rILc4K5Ri44OTYBIfkfFxMo2lE2Zz9XcmbXfqaifaER+5F9z2fF+
- OkeQ==
-X-Gm-Message-State: AOJu0YwHXBK+n6u67fbKIbVcTG8uipEqn0Xth7asy8MhjedEnk6raiVt
- HbpdJ8/IT00KbYzN0c9FLcKQS6uSqhgoiomb9rFhjA==
-X-Google-Smtp-Source: AGHT+IGfykER7ZVQONxw/MLc31M5x8AE2tP4p+N992N+CJECBNkIglYJxs2E3YTyiiPueOFDVbnX8NhJn0y2TPlopUk=
-X-Received: by 2002:adf:ef88:0:b0:317:7af4:5294 with SMTP id
- d8-20020adfef88000000b003177af45294mr8762838wro.44.1695085506907; Mon, 18 Sep
- 2023 18:05:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695085510; x=1695690310;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Cn+dG64XMs3aHg+XLGsO8RRVegwsHXAN0CSNX5CCzcE=;
+ b=G51F99mQs6onKUoD74enaYrju/YE7qaIGjUUPvWLH+ODVXTIPXSK2Qk+11TRuaJ+kJ
+ uu4Goh+uN4FosbGddTnhW1OrPp5lp9H2LMhsf7Qy74KHzY875+24iVxnPSNIGtlp1ZnT
+ eeexcmudwXOvwnvTuvU6QFJAckjtp4zjDik9F7njrfd94K0Yc5lnC+KT3nHCf8FV3pZ4
+ G1ZPK4PQGfdaykBHXAJbO2bEKV3F8OVXcnGfekvWEBEAuiDwf6FA/ftiqocIsADW5ekh
+ tup7qmjNXQf4FjKPggn3tsgEA8dxGe5YHPE2EBuK+jlevnpe0Awif/307hWPGEIH+iM1
+ Zqxg==
+X-Gm-Message-State: AOJu0Yydh4qKVvnPvYL+otTytWwEYvOSSA8Fsn+BAc0kyjT1Z9Md41ZA
+ ySFwlsrehpexmHQHnGJSXs6115chFA/zKGYFA84cHg==
+X-Google-Smtp-Source: AGHT+IHOJMpifZw9je5k13PgtJw9mkzVoCjvW01HXzUkDJvi18OzaHlvQ8di03SvUXzV+oHoAztt+CPCedBEpAJYksc=
+X-Received: by 2002:a05:6402:ca3:b0:532:c08a:eac0 with SMTP id
+ cn3-20020a0564020ca300b00532c08aeac0mr42225edb.26.1695085510243; Mon, 18 Sep
+ 2023 18:05:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230917101308.1250-1-ivprusov@salutedevices.com>
- <20230917101308.1250-3-ivprusov@salutedevices.com>
-In-Reply-To: <20230917101308.1250-3-ivprusov@salutedevices.com>
+References: <20230915221153.2767153-1-yoann.congal@smile.fr>
+In-Reply-To: <20230915221153.2767153-1-yoann.congal@smile.fr>
 From: Simon Glass <sjg@google.com>
-Date: Mon, 18 Sep 2023 19:04:47 -0600
-Message-ID: <CAPnjgZ2NsSiArxW2gn0bD2JgMxqXXA=Lqx48NLfGeKVhxTMeEQ@mail.gmail.com>
-Subject: Re: [RESEND PATCH v1 2/2] clk: Add clock driver for Amlogic A1
-To: Igor Prusov <ivprusov@salutedevices.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, prusovigor@gmail.com, kernel@sberdevices.ru,
- u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Date: Mon, 18 Sep 2023 19:04:58 -0600
+Message-ID: <CAPnjgZ3bQoR7W819cMoR4x0WSYx-8+1nArkCf9h6o7MXuqTg5w@mail.gmail.com>
+Subject: Re: [PATCH] doc: usage: load: document part as hexadecimal
+To: Yoann Congal <yoann.congal@smile.fr>
+Cc: u-boot@lists.denx.de,
+ =?UTF-8?Q?Micka=C3=ABl_Tansorier?= <mickael.tansorier@smile.fr>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,22 +86,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 17 Sept 2023 at 04:14, Igor Prusov <ivprusov@salutedevices.com> wrote:
+On Fri, 15 Sept 2023 at 21:33, Yoann Congal <yoann.congal@smile.fr> wrote:
 >
-> This patch adds basic clock driver for Amlogic A1 Family which supports
-> enabling/disabling some gates, getting frequencies and setting rate
-> with limited reparenting.
+> From: Micka=C3=ABl Tansorier <mickael.tansorier@smile.fr>
 >
-> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
+> `part` option is in hexadecimal, so information is missing in usage
+> documentation.
+>
+> Callgraph for `part` parsing is :
+> do_load -> fs_set_blk_dev -> part_get_info_by_dev_and_name_or_num ->
+> blk_get_device_part_str -> hextoul (This is why it is hexadecimal)
+>
+> Signed-off-by: Micka=C3=ABl Tansorier <mickael.tansorier@smile.fr>
+> Reviewed-by: Yoann Congal <yoann.congal@smile.fr>
 > ---
->  arch/arm/include/asm/arch-meson/clock-a1.h |  23 +
->  drivers/clk/meson/Kconfig                  |   8 +
->  drivers/clk/meson/Makefile                 |   1 +
->  drivers/clk/meson/a1.c                     | 681 +++++++++++++++++++++
->  4 files changed, 713 insertions(+)
->  create mode 100644 arch/arm/include/asm/arch-meson/clock-a1.h
->  create mode 100644 drivers/clk/meson/a1.c
+>  doc/usage/cmd/load.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-This could use a few more comments, IMO. Did it come from Linux?
