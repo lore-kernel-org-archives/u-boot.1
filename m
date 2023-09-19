@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFC34CE79A9
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE28CE79A9
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:10:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F03486BCE;
+	by phobos.denx.de (Postfix) with ESMTP id BB1DC86BD7;
 	Tue, 19 Sep 2023 20:09:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LhVQZyqB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IhipT+Z7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EE7C86BC0; Tue, 19 Sep 2023 20:09:34 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 1A67786BD5; Tue, 19 Sep 2023 20:09:35 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22F0286BC8
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 10FFF86AA8
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-34fdc6209c6so9967135ab.3
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:32 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-34fc7f51441so13473535ab.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695146971; x=1695751771; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RQMDMM4HL8NoLuid2FNHrcggI9EBebqKacjVSqiohas=;
- b=LhVQZyqBNovDuVIOKUH9oZQsDjyaWk6trILiYS7d0h69t8DEyg0z4qZlfq0iEc8j7X
- XqOvAwJ0hW0c+oNMwAoAoRt0mHH84Byu7BqR7DKlT3/awb0dJ0j/++HmgKRjemRKvtIW
- jzzhprNZ4uvKnYutc0K7mNBDqbCx6R0zk/rHU=
+ bh=aK9/BJIE8uEO1eqLJrPO0kbhlae5h0FMLY6PGx4CX00=;
+ b=IhipT+Z7UAio423pW0+cxeBUVPeiPk3X0Sxmr7fLN3VDNryEgV3RfFTEt0N5OeesMv
+ UDfUBXE/ClERm556oTZtfIkia1DXcBoUn8fJLTHL6raS9wx4+9tWx20xlQEhukLbCUT+
+ gjhm/nc+BoBQKTOr0LWLNpCeObnu5fnvssgtw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695146971; x=1695751771;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RQMDMM4HL8NoLuid2FNHrcggI9EBebqKacjVSqiohas=;
- b=YzvQWIUfAQOfmV/V2NQwpSylrIf3afyjVDOfjmwzc+LR+hj6H3oLMJQ7dRNDZ7z55D
- LpQZH9H2c9e+/BxGbG4IgBIsXcWqV+f/XZd7KsbC4GoHdWGwsvwCHDq1nz0QczWUoBmy
- OYKFy7Mx8uPyTTXG34ihxpTIjzUaCn43/tdvJIcx2bgBoWmJaiIkc17amqELosWDnZuS
- gxn4xu4egmQfcj8P2MS+T/njhVOAYvHBQo/RcvO3r17oWBYNy4mHKIqS4O55JLxtYwrk
- SDtiFagRKkhq/0L7crbrk93AzdBlu1CqNTxcFMa+G6zRcyAmJRH4CXTiKtdrzIQj81dr
- dywg==
-X-Gm-Message-State: AOJu0YxzrhqOSC890g0/85jAOovGX3wQ7ldEWyEICFACnBxgbHQMSlFO
- XLca/0hrhij/SVNC6slxX58eK9hgERjIZ945tHc=
-X-Google-Smtp-Source: AGHT+IFMM6jDfuj04qcZn8Zn1rU90JHAWy2Dtds1//EoijWrL/Lstd2DdKXHuzpTAxwrQCUHCWGfDg==
-X-Received: by 2002:a05:6e02:1d0c:b0:350:e9c6:e765 with SMTP id
- i12-20020a056e021d0c00b00350e9c6e765mr818294ila.11.1695146970794; 
- Tue, 19 Sep 2023 11:09:30 -0700 (PDT)
+ bh=aK9/BJIE8uEO1eqLJrPO0kbhlae5h0FMLY6PGx4CX00=;
+ b=bOYNUBMyU4SX2SsNHWYq+5wl/Pi5jdp74bChoq5yk4TCc1kYS1uWKoxkVI+/wqagyd
+ OBmT84T9xFP40lwU7xjxWRuyfJPAUWPhxBRIgfZiLbYJnB193Naw+ZKwybvmWFW7Qz87
+ bh7Xdmn+ZZm4Vsv2FIoVHRXGvTDboVjmkf9vLyX4QQ5uYqUFT/nQRySY8jdqDy7TuYey
+ yuFXhc4CsigW6EPlMBLwAxeSVfrkbjtAd5jpCKwrwQsoAyKgdSma8fzNCPjyNY1G9upj
+ eu7MG/Hs+fcB6hBdDxrPJCAXYPZBgdJbIwr1P8FcZas7c2lPe3xuA5SARP38wCBiWTrd
+ j2ew==
+X-Gm-Message-State: AOJu0YxUIQ48iUUvj0zQHpgC2FIFw762AhcSwIZsSMH795OJdNXKLV60
+ VxFK8OlvWE9NZDQ/owVTLFO8Ga8kFm8EvW6uH5Y=
+X-Google-Smtp-Source: AGHT+IHXuz8GA3tXlJ+skUReSpCpW8PQgsdYTdYH7Tx8Ul2Z0mbBj3My/F0SI+l2+6KlsB0M2M7G6Q==
+X-Received: by 2002:a05:6e02:1bed:b0:34f:1e9c:45df with SMTP id
+ y13-20020a056e021bed00b0034f1e9c45dfmr707970ilv.4.1695146971702; 
+ Tue, 19 Sep 2023 11:09:31 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
  by smtp.gmail.com with ESMTPSA id
- b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.30
+ b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 11:09:30 -0700 (PDT)
+ Tue, 19 Sep 2023 11:09:31 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 04/36] cli: Drop #ifdefs for CONFIG_AUTO_COMPLETE in
- cli_readline
-Date: Tue, 19 Sep 2023 12:08:34 -0600
-Message-ID: <20230919180918.2904313-5-sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH 05/36] cli: Implement delete-word in cread_line()
+Date: Tue, 19 Sep 2023 12:08:35 -0600
+Message-ID: <20230919180918.2904313-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230919180918.2904313-1-sjg@chromium.org>
 References: <20230919180918.2904313-1-sjg@chromium.org>
@@ -90,149 +88,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use a static inline and adjust the logic to avoid the need for #ifdefs in
-cli_readline_into_buffer()
+The Ctrl-W option is implemented in the cread_line_simple() but not in
+the full version. This seems odd, so add an implementation.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/cli_readline.c | 85 +++++++++++++++++++++----------------------
- include/command.h     |  6 +++
- 2 files changed, 48 insertions(+), 43 deletions(-)
+ common/cli_readline.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
 diff --git a/common/cli_readline.c b/common/cli_readline.c
-index 61f9ba99068..458e927e492 100644
+index 458e927e492..687e239bfa7 100644
 --- a/common/cli_readline.c
 +++ b/common/cli_readline.c
-@@ -386,27 +386,27 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 			REFRESH_TO_EOL();
- 			continue;
- 		}
--#ifdef CONFIG_AUTO_COMPLETE
--		case '\t': {
--			int num2, col;
-+		case '\t':
-+			if (IS_ENABLED(CONFIG_AUTO_COMPLETE)) {
-+				int num2, col;
-+
-+				/* do not autocomplete when in the middle */
-+				if (num < eol_num) {
-+					getcmd_cbeep();
-+					break;
-+				}
+@@ -89,6 +89,14 @@ static char hist_lines[HIST_MAX][HIST_SIZE + 1];	/* Save room for NULL */
  
--			/* do not autocomplete when in the middle */
--			if (num < eol_num) {
--				getcmd_cbeep();
-+				buf[num] = '\0';
-+				col = strlen(prompt) + eol_num;
-+				num2 = num;
-+				if (cmd_auto_complete(prompt, buf, &num2, &col)) {
-+					col = num2 - num;
-+					num += col;
-+					eol_num += col;
-+				}
- 				break;
- 			}
--
--			buf[num] = '\0';
--			col = strlen(prompt) + eol_num;
--			num2 = num;
--			if (cmd_auto_complete(prompt, buf, &num2, &col)) {
--				col = num2 - num;
--				num += col;
--				eol_num += col;
--			}
--			break;
--		}
--#endif
-+			fallthrough;
- 		default:
- 			cread_add_char(ichar, insert, &num, &eol_num, buf,
- 				       *len);
-@@ -519,14 +519,15 @@ static int cread_line_simple(const char *const prompt, char *p)
- 			continue;
+ #define add_idx_minus_one() ((hist_add_idx == 0) ? hist_max : hist_add_idx-1)
  
- 		default:
--			/*
--			 * Must be a normal character then
--			 */
--			if (n < CONFIG_SYS_CBSIZE-2) {
--				if (c == '\t') {	/* expand TABs */
--#ifdef CONFIG_AUTO_COMPLETE
-+			/* Must be a normal character then */
-+			if (n >= CONFIG_SYS_CBSIZE - 2) { /* Buffer full */
-+				putc('\a');
-+				break;
-+			}
-+			if (c == '\t') {	/* expand TABs */
-+				if (IS_ENABLED(CONFIG_AUTO_COMPLETE)) {
- 					/*
--					 * if auto completion triggered just
-+					 * if auto-completion triggered just
- 					 * continue
- 					 */
- 					*p = '\0';
-@@ -536,26 +537,24 @@ static int cread_line_simple(const char *const prompt, char *p)
- 						p = p_buf + n;	/* reset */
- 						continue;
- 					}
--#endif
--					puts(tab_seq + (col & 07));
--					col += 8 - (col & 07);
--				} else {
--					char __maybe_unused buf[2];
--
--					/*
--					 * Echo input using puts() to force an
--					 * LCD flush if we are using an LCD
--					 */
--					++col;
--					buf[0] = c;
--					buf[1] = '\0';
--					puts(buf);
- 				}
--				*p++ = c;
--				++n;
--			} else {			/* Buffer full */
--				putc('\a');
-+				puts(tab_seq + (col & 07));
-+				col += 8 - (col & 07);
-+			} else {
-+				char __maybe_unused buf[2];
-+
-+				/*
-+				 * Echo input using puts() to force an LCD
-+				 * flush if we are using an LCD
-+				 */
-+				++col;
-+				buf[0] = c;
-+				buf[1] = '\0';
-+				puts(buf);
- 			}
-+			*p++ = c;
-+			++n;
-+			break;
- 		}
- 	}
- }
-diff --git a/include/command.h b/include/command.h
-index ae7bb4a30b0..44636fbfc56 100644
---- a/include/command.h
-+++ b/include/command.h
-@@ -91,6 +91,12 @@ int var_complete(int argc, char *const argv[], char last_char, int maxv,
- 		 char *cmdv[]);
- int cmd_auto_complete(const char *const prompt, char *buf, int *np,
- 		      int *colp);
-+#else
-+static inline int cmd_auto_complete(const char *const prompt, char *buf,
-+				    int *np, int *colp)
++static void getcmd_putchars(int count, int ch)
 +{
-+	return 0;
++	int i;
++
++	for (i = 0; i < count; i++)
++		getcmd_putch(ch);
 +}
- #endif
- 
- /**
++
+ static void hist_init(void)
+ {
+ 	int i;
+@@ -337,6 +345,29 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
+ 		case CTL_CH('o'):
+ 			insert = !insert;
+ 			break;
++		case CTL_CH('w'):
++			if (num) {
++				uint base;
++
++				for (base = num - 1;
++				     base >= 0 && buf[base] == ' ';)
++					base--;
++				for (; base > 0 && buf[base - 1] != ' ';)
++					base--;
++
++				/* now delete chars from base to num */
++				wlen = num - base;
++				eol_num -= wlen;
++				memmove(&buf[base], &buf[num],
++					eol_num - base + 1);
++				num = base;
++				getcmd_putchars(wlen, CTL_BACKSPACE);
++				puts(buf + base);
++				getcmd_putchars(wlen, ' ');
++				getcmd_putchars(wlen + eol_num - num,
++						CTL_BACKSPACE);
++			}
++			break;
+ 		case CTL_CH('x'):
+ 		case CTL_CH('u'):
+ 			BEGINNING_OF_LINE();
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
