@@ -4,72 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3E0DCD342F
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 01:05:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86DC5CD342E
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 01:05:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A656D86983;
-	Tue, 19 Sep 2023 03:05:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 0AD0B869F5;
+	Tue, 19 Sep 2023 03:05:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="dkkZ78Qj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kEETY1mo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 758AC86915; Tue, 19 Sep 2023 03:05:00 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 4C03D869F5; Tue, 19 Sep 2023 03:05:02 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7E1186993
+ by phobos.denx.de (Postfix) with ESMTPS id B7AF4869F1
  for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 03:04:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-522bd411679so6561021a12.0
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-31dd10c2b8bso4843307f8f.3
  for <u-boot@lists.denx.de>; Mon, 18 Sep 2023 18:04:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1695085498; x=1695690298; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695085498; x=1695690298; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Qn6mf74Sl/6O1llPotrAEb210NvEUkB3PyyNcWrXdKY=;
- b=dkkZ78Qj4cssEqMIp5BuJfvHUz1+Ciesn3XMyixTDNcScX3PxqZwooUt+ULc4ynvgv
- jbqpOp2hSFiX114rvmEXrkJnNNUlp67PqX6tAs6cLMLUcExysdbLvtLSIfnOCla49KQt
- v6HWstZoEAAld2M73PuaiHO9cIqMjTSBwYsJNWPelOwJu4JXMTp/VE3Vg30asLk1mUIi
- XQCzxfKYaTAW3LMyeu4qeh1qDvCb+SnTty0SE35XvMVFkplAOMscRIv2xPlbsXcpNfRQ
- PpFLDg805kF1RD4RgtYDIdSomoi4Z/yMo4amaWY48rqtMBYxu9/k0d+ZTS7Dupt9cGn0
- 2+Yg==
+ bh=QEJ+5uRN/Fax2LRsEGmdta4AcNFRLNy+9N+CwqEimJI=;
+ b=kEETY1moptCw1Wte5ILF0T622yVqcR1z1Bw5K9VCeMjnlRSf7Ib9t8BKcj1IabnNYl
+ 3B/ntvhVJswvldX0fUCouVTS6qWSTXnwn8nZ166o++atIypNPefEkqrs/cyvR0oXwvqB
+ rCmNwJnoCctp54IvGkBoGN779bthjJIgJdcXs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695085498; x=1695690298;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Qn6mf74Sl/6O1llPotrAEb210NvEUkB3PyyNcWrXdKY=;
- b=oTYsSl0LGi8j8lNmRj51FAnUtbibiWjinKGUt96Pn7Zl/yaYllEvMI6pQoEVPenOUn
- HX8jlW/M70Xu9wPXUDWyOxhyHO40Eiwb1H9bxaXmXmxPm6PDmcZtM4c9HaUSu3SiVHgh
- eOvqK64wfdb6Q2/aDO/TpPN9EeZkbQDL1pGVlVh88a6KNXNZEB7ANA6DhwqiCm+P/15N
- gPreTWaohisrcRV8HWZ4dac4OZ06x5INelOG7ZSO3aq13HbFensUB+cDUG7Xg9DIeAp7
- YqelBLJzQjeV6mYwLOVpyLvjiNK7RDbUuhAis3lxe4x74eK9YjJNyE3rMumVjUsr1e/Z
- 9Y7Q==
-X-Gm-Message-State: AOJu0Yx4ssKIzaVorhliSXLU9FLda8sUSIgYvgeaYfXDPhpMbBTMPwbx
- MzBcOpsgTKy8tTx8CbN4frMKKnKTE17Qe15JzTsdTg==
-X-Google-Smtp-Source: AGHT+IFjV9MbkiTvLXnWJei4QJEOZCq4Bpl1VGIAOZe0RlZBgfwK5GV8SvMaY9FfugitKkRMRAPgtE5+imcUovgc8xs=
-X-Received: by 2002:aa7:d04c:0:b0:52b:db31:3c5c with SMTP id
- n12-20020aa7d04c000000b0052bdb313c5cmr8551578edo.0.1695085498037; Mon, 18 Sep
- 2023 18:04:58 -0700 (PDT)
+ bh=QEJ+5uRN/Fax2LRsEGmdta4AcNFRLNy+9N+CwqEimJI=;
+ b=K+LJ3cWG7qqw0M/nxxi63fhawXyA6xAFBWFADuUFRLgiFpdF8sbvnBN3o4Pyw7lErO
+ BPeyc8mH2GTBV6Ssh8uOTs4vvKt0y8n2zrAciMwYkK0Rn/Dt6fx2pKk15n6tZbKf4Ca+
+ Mca+29plSjsr2o3+S+uhEttKZA9btdj7xT9giwVoIPz5E0I5ztGYxwc4Rm6ee3d8PUQH
+ B9e3oR+LZVyd5N8zIiM0jlSpek5BLIHWKikNpcfb6sDL4C/crZNBS4BMrZK6W7joTCLV
+ X0si7vU0qXiLE7gvWVVaSI/cN1SkNpzfbshld/dcNiaCgXJPVCNBhc7k18DsvKHb8MdC
+ Lffg==
+X-Gm-Message-State: AOJu0YyoUNkubLP5Rykg8jCQ76rXakRgSPKLLGzzoeaq2bbY16Y8pJZJ
+ q4iooWCSMm6YmNw9NwsMjZgOre/dwcJDtBJz5kH4Yw==
+X-Google-Smtp-Source: AGHT+IHxp1s56nNgq4H16EtFlQxm3VQRtdUkxJObpM2D9N8F8uk21B30VykfSBcFcr4/nAw0vLTDUjrRrTDjg4rmKUA=
+X-Received: by 2002:a5d:6ad2:0:b0:31f:db12:f5db with SMTP id
+ u18-20020a5d6ad2000000b0031fdb12f5dbmr7739879wrw.32.1695085498137; Mon, 18
+ Sep 2023 18:04:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230917101308.1250-1-ivprusov@salutedevices.com>
- <20230917101308.1250-2-ivprusov@salutedevices.com>
-In-Reply-To: <20230917101308.1250-2-ivprusov@salutedevices.com>
-From: Simon Glass <sjg@google.com>
-Date: Mon, 18 Sep 2023 19:04:44 -0600
-Message-ID: <CAPnjgZ011OA9WviiQ+rsdk30MjTR6KP=6heT8RozU-CBu-vr9Q@mail.gmail.com>
-Subject: Re: [RESEND PATCH v1 1/2] dt-bindings: clock: Add Amlogic A1 clock
- bindings
-To: Igor Prusov <ivprusov@salutedevices.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, prusovigor@gmail.com, kernel@sberdevices.ru,
- u-boot-amlogic@groups.io, u-boot@lists.denx.de
+References: <1628fc37-2c9f-493d-82c2-9bf225f2645a@moroto.mountain>
+ <20230809013930.GR3630934@bill-the-cat>
+In-Reply-To: <20230809013930.GR3630934@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 18 Sep 2023 19:04:41 -0600
+Message-ID: <CAPnjgZ3cooZZGKryY5UwBpd7O2kL5W1z++QxQf-Z304eaKvzUg@mail.gmail.com>
+Subject: Re: [PATCH] video: Add parentheses around VNBYTES() macro
+To: Tom Rini <trini@konsulko.com>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>,
+ Anatolij Gustschin <agust@denx.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,16 +82,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 17 Sept 2023 at 04:14, Igor Prusov <ivprusov@salutedevices.com> wrote:
->
-> Add clock bindings for Amlogic A1 from linux-next next-20230821.
->
-> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
-> ---
->  .../clock/amlogic,a1-peripherals-clkc.h       | 168 ++++++++++++++++++
->  .../dt-bindings/clock/amlogic,a1-pll-clkc.h   |  25 +++
->  2 files changed, 193 insertions(+)
->  create mode 100644 include/dt-bindings/clock/amlogic,a1-peripherals-clkc.h
->  create mode 100644 include/dt-bindings/clock/amlogic,a1-pll-clkc.h
+Hi Tom, Dan,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 8 Aug 2023 at 19:39, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Jul 26, 2023 at 09:54:08AM +0300, Dan Carpenter wrote:
+>
+> > The VNBYTES() macro needs to have parentheses to prevent some (harmless)
+> > macro expansion bugs.  The VNBYTES() macro is used like this:
+> >
+> >       VID_TO_PIXEL(x) * VNBYTES(vid_priv->bpix)
+> >
+> > The * operation is done before the / operation.  It still ends up with
+> > the same results, but it's not ideal.
+> >
+> > Signed-off-by: Dan Carpenter <dan.carpenter@linaro.org>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+>
+> In that this seems correct:
+>
+> Applied to u-boot/next, thanks!
+>
+> But I want to note that with gcc-13.1 (and binutils 2.40) or more
+> specifically the kernel.org arm/aarch64/etc toolchains, this causes the
+> generated code to change:
+>    aarch64: (for 1/1 boards) all +8.0 text +8.0
+>             bananapi-m5    : all +8 text +8
+>                u-boot: add: 0/0, grow: 1/0 bytes: 8/0 (8)
+>                  function                                   old     new   delta
+>                  video_post_probe                           248     256      +8
+>
+> So I don't know that this was a harmless bug.
+
+Hmm I should have read the comment directly above...
+
+"Note we omit the outer brackets to allow multiplication by fractional pixels."
+
+Having said that, it doesn't seem to matter getting (if indeed we do)
+a less accurate result.
+
+Regards,
+Simon
