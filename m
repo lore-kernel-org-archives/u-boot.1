@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1B11CD3445
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253CBCD3445
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 07:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 539D686A8A;
-	Tue, 19 Sep 2023 09:19:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A2F0786A84;
+	Tue, 19 Sep 2023 09:19:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mYBK5jBs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Je36p6l0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0CA986A9E; Tue, 19 Sep 2023 09:19:47 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 3054B86A81; Tue, 19 Sep 2023 09:19:52 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A30C86A21
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E01F86A9F
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 09:19:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-99de884ad25so707648866b.3
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:46 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-98377c5d53eso680034366b.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 00:19:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695107986; x=1695712786; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695107989; x=1695712789; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=omBncyWLVeP606zrycOUhrfuIxSOk+7+1IrwryzNLHs=;
- b=mYBK5jBsdYFUHtmu0fcQOk7EY0Bbu6COrlAAlwVYoRg+r4XkYdZlX0rgAS+RB7yJ4E
- ydzFsnRDWuJrTPp6SPaskaV7OHzhpTGooPF4bLBXmTj+Zh4DiTK8loYaKpPhMzqhGhiw
- CTrug4S5230Hh9S0R3ldzxHUzbYEINQc3K4jvd2NIcKCKQ1JrPEU4Wc7JDCBkElx7EPL
- KtH0C68LA662ugw3QK9PZ4Q0e1Zrk4IUzaWAfc0uAhuLExSamd2GU3xWFb+sgzAfDtcf
- UAxwEY/BSbaKh/D5EaeouZ7xOWOOP42regNzXJDlXdgfn0ME2cIwed1OIOhX4YVwUfw+
- rgfg==
+ bh=Q4Il5nIaNGerDUL7WqdAWOQP7Tqp9i+pVnR4YoPywus=;
+ b=Je36p6l0sf0gG+TfaWN6Cy6896dK81rh94y736Kn3n2+zRcgLaHxuudFTJJW9YkFyy
+ AEIwRqvp4+Ar89ownRisdF99kK9lw5zPYl/a37eAfHbtn6DDnvK0OFQ626VmniLHpPyT
+ V4ulyA/aDbndaGz+ZzTKhunRSdC64aT/dyWAdThWdV/MFBdLq0Oq8CDqXRJxl6ViADZX
+ 5C1R3gc4HoumPjLCLL7tUIoypc4fvXIoYUujS4f4BapByyvm5ySLGsSltsOpFdM9lmhG
+ bnvksO/HmLSN0DS5mwLJF3ZUVPuUEgU4qrxs9+6DfIBuVcjekP/oBRi3DabuGDzyP9SA
+ 20xA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695107986; x=1695712786;
+ d=1e100.net; s=20230601; t=1695107989; x=1695712789;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=omBncyWLVeP606zrycOUhrfuIxSOk+7+1IrwryzNLHs=;
- b=gUNPQzSybvK9LgmABy3J7TBVBT1LG9C0WwavX43mP1z0e+81n+IHt6d4gG7Zmbvho7
- V0IL+EFDQyhK1OC09rky4lfN/p8RBETKeg7eJ7sj6GrR3kVo6ta0NXLM3od9E4bEYoWR
- fPKHZxMtivzSDgb6A4lNmlmCTRiLvrmihuI6WEVrzyGYdMNSNnd78ituEcKL/JUTRzR6
- qCQBvwctCjsZGiIQzjUkvmLwSPJaxnybTvu39dABqgoc4TPy+iELURDitsqXsq5O5b5X
- 9WxnlQDic82FbvNkUCn2ToM31YLw8bSGLCB006BwminMqaZI2X9NSy9FjWNiDAbv8zwA
- wGyQ==
-X-Gm-Message-State: AOJu0Yz9utTVuH3VDbnT8E6MykX/IRuxMQ4r2UHyonm4vs4w6G1zEhom
- ZJ8/aMnD7jv0kyihtEGn7Pr65bgbD7PIYYHqmtw=
-X-Google-Smtp-Source: AGHT+IEIzbEpxLDETp/hH+a15lr9MfdpVAnsMasqHO0mQOulIyCpLWl6yeeaILGIE2u4mwmIjMM0koh2EhX5VcnPssY=
-X-Received: by 2002:a17:906:73cb:b0:9a5:c4ae:9fec with SMTP id
- n11-20020a17090673cb00b009a5c4ae9fecmr10669590ejl.52.1695107985360; Tue, 19
- Sep 2023 00:19:45 -0700 (PDT)
+ bh=Q4Il5nIaNGerDUL7WqdAWOQP7Tqp9i+pVnR4YoPywus=;
+ b=vevse8PVup0Pqzv6J76jqVeT+mxSCGh3cgP0CgwmPeWZUqOmvCCxURWFkKQXSknTv3
+ WkZvo7JrYf9RT5uOPIw0KSlJEfDlctmE+INDYmLe9Pnh0sDLBN0YNRjtvxu9xPOInYlR
+ X9IBbyNbsTAa8ysuPPQYNv5K51YRu9GBR5dj2QtBvqZHWJF6nMC4MwoRbbAw68VjjCEb
+ zVgzmcIlpAvUYom2lQy1xg/CukVcZ845XyLZyvCc+A6F/rUBidk1dOYFJYYXP80amQ2v
+ tWM8bE5NCA2qT4VwthHYMmfUwzIITK7JlyPIVcMyI3TWKzixrcgtJcwJ9t8NIqb92jsH
+ +6zQ==
+X-Gm-Message-State: AOJu0YxD1WSoc+MshIqoicC6cB1tyIMb6zBpa5bcfhQ9qyXNkZXljAy2
+ wfLALJlky3ly6fuzBnzqlJJlp+hpgtQuRptfa3Y=
+X-Google-Smtp-Source: AGHT+IGYCQG7Uq1jQ18QSeZjMO3iOkmfnYx46Au6amuBWMMhjzEAhztOyvKRFeQgo0T0uhLwD3AVDFZtI5ODiNyF9go=
+X-Received: by 2002:a17:906:31c7:b0:9ad:805d:f123 with SMTP id
+ f7-20020a17090631c700b009ad805df123mr10004814ejf.18.1695107988820; Tue, 19
+ Sep 2023 00:19:48 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-7-sjg@chromium.org>
-In-Reply-To: <20230823211059.1235147-7-sjg@chromium.org>
+ <20230823211059.1235147-8-sjg@chromium.org>
+In-Reply-To: <20230823211059.1235147-8-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Tue, 19 Sep 2023 15:19:32 +0800
-Message-ID: <CAEUhbmVbt8ErjpkmwMW5an=k_hmtvM6grDD8BNBKDofHy7r4Ng@mail.gmail.com>
-Subject: Re: [PATCH v4 06/20] x86: coreboot: Look for DBG2 UART in SPL too
+Date: Tue, 19 Sep 2023 15:19:36 +0800
+Message-ID: <CAEUhbmVLr+B7sU7MQjKjgbzNaB6XGB84p0RuPhKcHSDVytPQ-A@mail.gmail.com>
+Subject: Re: [PATCH v4 07/20] x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -88,16 +88,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
+
 On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> If coreboot does not set up sysinfo for the UART, SPL currently hangs.
-> Use the DBG2 teechnique there as well. This allows coreboot64 to boot fro=
-m
-
-typo: technique
-
-> coreboot even if the console info is missing from sysinfo
+> The debug UART on modern machines uses a 32-bit wide transfer. Without
+> this, setting debug output causes a hang or no output. It is not obvious
+> (when enabling CONFIG_DEBUG_UART) that this is needed.
+>
+> Enable 32-bit access to avoid this trap.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
@@ -105,34 +105,15 @@ typo: technique
 > (no changes since v1)
 >
 >  configs/coreboot64_defconfig | 1 +
->  drivers/serial/Kconfig       | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
+>  configs/coreboot_defconfig   | 1 +
+>  2 files changed, 2 insertions(+)
 >
-> diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
-> index 5623197f6be..e8165961c19 100644
-> --- a/configs/coreboot64_defconfig
-> +++ b/configs/coreboot64_defconfig
-> @@ -54,4 +54,5 @@ CONFIG_SYS_64BIT_LBA=3Dy
->  CONFIG_SOUND=3Dy
->  CONFIG_SOUND_I8254=3Dy
->  CONFIG_CONSOLE_SCROLL_LINES=3D5
-> +CONFIG_SPL_ACPI=3Dy
->  # CONFIG_GZIP is not set
-> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-> index 7ca42df6a7e..27b4b9d9650 100644
-> --- a/drivers/serial/Kconfig
-> +++ b/drivers/serial/Kconfig
-> @@ -672,7 +672,7 @@ config COREBOOT_SERIAL
->  config COREBOOT_SERIAL_FROM_DBG2
->         bool "Obtain UART from ACPI tables"
->         depends on COREBOOT_SERIAL
-> -       default y if !SPL
-> +       default y
->         help
->           Select this to try to find a DBG2 record in the ACPI tables, in=
- the
->           event that coreboot does not provide information about the UART=
- in the
-> --
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Can we use CONFIG_NS16550_DYNAMIC?
+
+Hardcode CONFIG_SYS_NS16550_MEM32 in the defconfig just works for one
+configuration like yours, but it fails on some other configurations,
+e.g.: IO port based ns16550.
+
+Regards,
+Bin
