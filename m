@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C59FCE79A9
-	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:11:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30104CE79A8
+	for <u-boot@archiver.kernel.org>; Tue, 19 Sep 2023 18:12:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C86E86BFE;
+	by phobos.denx.de (Postfix) with ESMTP id 780F186C04;
 	Tue, 19 Sep 2023 20:09:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fS2mtcHb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XAtZY0zu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F4C486BE8; Tue, 19 Sep 2023 20:09:42 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 7332486BC8; Tue, 19 Sep 2023 20:09:43 +0200 (CEST)
+Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
+ [IPv6:2607:f8b0:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 356F086B7E
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 348CE86BEB
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:09:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34fcd361e91so11385095ab.3
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:40 -0700 (PDT)
+Received: by mail-il1-x132.google.com with SMTP id
+ e9e14a558f8ab-34e25ad38cbso18289735ab.1
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 11:09:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695146979; x=1695751779; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695146980; x=1695751780; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UumrJGXMFjWrtv3H/syYMi8hGSXjg5929Scm3TOZl/k=;
- b=fS2mtcHbWZ9g1izX+3tNUnIMN4BJaIvkD8HCA84koKOIW/PU6hutCg/P4+vswQGrsk
- U50NDhOGYwZ+AXvQxfD5OZKGjhcORHzTDC6k23Khk2jQEnEs7CYIjiJ8ozqnJYOH1dFg
- 7QrEOLO/0ujB4V/Rs3hv8V9tInFnaFY3MT5dI=
+ bh=AjfHr5HjQCO/ZrtYHL0zMu16TMC1E6yL1i3vM7ZhzBU=;
+ b=XAtZY0zu7P+YKbfmu/9465yzGlE583vJqmpqViTJKwoKpbQ/l64zKHVvW+vD5vvEUH
+ BAcRSsRNRIvtsK/kxDYhg+9XEVp8etyysEHt9TagVIJ2VsNp9wM/M9rdOf+7sajQ1aY0
+ Eqo14DopTGKQdpWEqw/FhP9dg6vQwYqXaR1wU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695146979; x=1695751779;
+ d=1e100.net; s=20230601; t=1695146980; x=1695751780;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UumrJGXMFjWrtv3H/syYMi8hGSXjg5929Scm3TOZl/k=;
- b=aSfWgQ9hgrmem4nxHEYQEQPXvPDZe29Qkf2QAaJo9hqWej/I5dsBMPn4QXwsHlDTz0
- zDpCe1tNcraVYTmk8V7LZ0AkGlY1AZ+jLA+Jl5uIBYtNYq+DHkO4DyJGbHpPd6Jad+sP
- H7/2q+SnuQn88uyIe6BCBkwShGuvTtqA7hJkVQwRT/D/DKwzv9/UB+i2B88lC3zORk2Y
- 9hcjjGrUt2hgwO32F5JzkLTIPi4pWxINCQMHLO2GYq9ftW3gYH0kc89dmjUYJHQt1Lo4
- qcjTHIGcMJHL6xwe18hQPHKt9cIyzxrDFAHOFfcjdCHVVAkTkfW5y1MBxEkcOq3bf/7b
- B58w==
-X-Gm-Message-State: AOJu0YxmpDLynef/ytSd9DDu8IQl7Vs0x7g6eN73AB+X8FyYTeaa3pqg
- pQrY83FOzfLHrF0FM/1gCDkfXgm7CuR04qHWgL4=
-X-Google-Smtp-Source: AGHT+IG4oWJPpDAJ4IEbFDChaGh/E32iyP1MZz94fq/2ijOzmKcu7OxoECbhA9MLWH1f4DcyZ+g9aQ==
-X-Received: by 2002:a92:cda5:0:b0:348:d325:2788 with SMTP id
- g5-20020a92cda5000000b00348d3252788mr644918ild.32.1695146978870; 
- Tue, 19 Sep 2023 11:09:38 -0700 (PDT)
+ bh=AjfHr5HjQCO/ZrtYHL0zMu16TMC1E6yL1i3vM7ZhzBU=;
+ b=v0ekRLLhSvdl+gzgoaSFdtlH+IXPnQNcySh6KWR3EZNYVtP5IaeJwElC4xW1qhOXpC
+ 71/g7g4SroK/1jfX/VMAPu8wZK3JBnD639cCbuIRu9+xsPkJFbebVK3VQ9hUbXqtjp2s
+ 5J0IlbluQ8wOObm56BiA8MMN8jDkOBrau4Ya+6xOpoDuFfVMCQnZXj79sttsZHEKG0be
+ Opvs1QYmcTBNJ4oSfpkEZFp8hyhCkgU0k3Y8XfI67Yv+ngtdlyZJNFloHJeVJxB1shPg
+ mN7dsjiDPPRhpDMwms9i6aa/okGjY6sePcj6F/GtzaOIVUQboK2ZoupVb0AKEezHS/T3
+ YAng==
+X-Gm-Message-State: AOJu0YxufXcF5ODsijo6oDf1cW5NE2pCakf1WJR6AzruydwoFODaMgEb
+ ipa080ZrXExdXntK+lxcEBBSAzcyiU3c5tOyDJM=
+X-Google-Smtp-Source: AGHT+IFAyrEiEU/e0DMR1rSOE62c+UIkFgcX2cmUO+9A9l2Sy7fDFTRl6q2SgIASGCZtu4ZmZgc5Bg==
+X-Received: by 2002:a05:6e02:925:b0:349:927a:5d85 with SMTP id
+ o5-20020a056e02092500b00349927a5d85mr477691ilt.22.1695146979810; 
+ Tue, 19 Sep 2023 11:09:39 -0700 (PDT)
 Received: from kea.bld.corp.google.com ([2620:15c:183:200:5337:a30a:1478:27f0])
  by smtp.gmail.com with ESMTPSA id
- b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.38
+ b9-20020a056e020c8900b0034e1092bccfsm3885352ile.80.2023.09.19.11.09.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 11:09:38 -0700 (PDT)
+ Tue, 19 Sep 2023 11:09:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH 14/36] video: Allow obtaining the nominal size of a string size
-Date: Tue, 19 Sep 2023 12:08:44 -0600
-Message-ID: <20230919180918.2904313-15-sjg@chromium.org>
+Subject: [PATCH 15/36] video: Allow saving and restoring text-entry state
+Date: Tue, 19 Sep 2023 12:08:45 -0600
+Message-ID: <20230919180918.2904313-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230919180918.2904313-1-sjg@chromium.org>
 References: <20230919180918.2904313-1-sjg@chromium.org>
@@ -88,58 +88,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present there is a method for measuring text, but if the actual text
-string is not known, it cannot be used.
+Text entry operates within a context which includes quite a bit of
+information. For example, with Truetype fonts, each character in the
+text string has a position stored, so that it is possible to
+backspace to that character. This information is built up as strings
+are drawn on the display.
 
-For text editor we want to set the size of the entry box to cover the
-expected text size. Add the concept of a 'norminal' size with a method
-to calculate that for the vidconsole.
+For the command line, there is just a single context. It is created
+when command-line entry starts and it is destroyed (or at least not
+needed anymore) when the user presses <enter> to enter the command.
 
-If the method is not implemented, fall back to using the font size,
-which is sufficient for fixed-width fonts.
+By contrast, expo needs to be able to switch in and out of a text-entry
+context, since it is also displaying other objects in the scene.
+
+Add a way to save and restore the entry context for a vidconsole. This
+is only needed for the truetype vidconsole, so add a method for that,
+storing the information in an abuf struct.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- drivers/video/console_truetype.c  | 31 +++++++++++++++++++++++++++++++
- drivers/video/vidconsole-uclass.c | 22 ++++++++++++++++++++++
- include/video_console.h           | 30 ++++++++++++++++++++++++++++++
- 3 files changed, 83 insertions(+)
+ drivers/video/console_truetype.c  | 53 +++++++++++++++++++++++++++++++
+ drivers/video/vidconsole-uclass.c | 32 +++++++++++++++++++
+ include/video_console.h           | 49 ++++++++++++++++++++++++++++
+ 3 files changed, 134 insertions(+)
 
 diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
-index 0f9bb49e44f..8ed79c37676 100644
+index 8ed79c37676..1ce01a96bb6 100644
 --- a/drivers/video/console_truetype.c
 +++ b/drivers/video/console_truetype.c
-@@ -750,6 +750,36 @@ int truetype_measure(struct udevice *dev, const char *name, uint size,
+@@ -4,6 +4,7 @@
+  */
+ 
+ #include <common.h>
++#include <abuf.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <malloc.h>
+@@ -175,6 +176,17 @@ struct console_tt_priv {
+ 	int pos_ptr;
+ };
+ 
++/**
++ * struct console_tt_store - Format used for save/restore of entry information
++ *
++ * @priv: Private data
++ * @cur: Current cursor position
++ */
++struct console_tt_store {
++	struct console_tt_priv priv;
++	struct pos_info cur;
++};
++
+ static int console_truetype_set_row(struct udevice *dev, uint row, int clr)
+ {
+ 	struct video_priv *vid_priv = dev_get_uclass_priv(dev->parent);
+@@ -780,6 +792,45 @@ static int truetype_nominal(struct udevice *dev, const char *name, uint size,
  	return 0;
  }
  
-+static int truetype_nominal(struct udevice *dev, const char *name, uint size,
-+			    uint num_chars, struct vidconsole_bbox *bbox)
++static int truetype_entry_save(struct udevice *dev, struct abuf *buf)
 +{
-+	struct console_tt_metrics *met;
-+	stbtt_fontinfo *font;
-+	int lsb, advance;
-+	int width;
-+	int ret;
++	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
++	struct console_tt_priv *priv = dev_get_priv(dev);
++	struct console_tt_store store;
++	const uint size = sizeof(store);
 +
-+	ret = get_metrics(dev, name, size, &met);
-+	if (ret)
-+		return log_msg_ret("sel", ret);
++	/*
++	 * store the whole priv structure as it is simpler that picking out
++	 * what we need
++	 */
++	if (!abuf_realloc(buf, size))
++		return log_msg_ret("sav", -ENOMEM);
 +
-+	font = &met->font;
-+	width = 0;
++	store.priv = *priv;
++	store.cur.xpos_frac = vc_priv->xcur_frac;
++	store.cur.ypos  = vc_priv->ycur;
++	memcpy(abuf_data(buf), &store, size);
 +
-+	/* First get some basic metrics about this character */
-+	stbtt_GetCodepointHMetrics(font, 'W', &advance, &lsb);
++	return 0;
++}
 +
-+	width = advance;
++static int truetype_entry_restore(struct udevice *dev, struct abuf *buf)
++{
++	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
++	struct console_tt_priv *priv = dev_get_priv(dev);
++	struct console_tt_store store;
 +
-+	bbox->valid = true;
-+	bbox->x0 = 0;
-+	bbox->y0 = 0;
-+	bbox->x1 = tt_ceil((double)width * num_chars * met->scale);
-+	bbox->y1 = met->font_size;
++	memcpy(&store, abuf_data(buf), sizeof(store));
++
++	vc_priv->xcur_frac = store.cur.xpos_frac;
++	vc_priv->ycur = store.cur.ypos;
++	priv->pos_ptr = store.priv.pos_ptr;
++	memcpy(priv->pos, store.priv.pos,
++	       store.priv.pos_ptr * sizeof(struct pos_info));
 +
 +	return 0;
 +}
@@ -147,40 +189,58 @@ index 0f9bb49e44f..8ed79c37676 100644
  const char *console_truetype_get_font_size(struct udevice *dev, uint *sizep)
  {
  	struct console_tt_priv *priv = dev_get_priv(dev);
-@@ -802,6 +832,7 @@ struct vidconsole_ops console_truetype_ops = {
- 	.get_font_size	= console_truetype_get_font_size,
+@@ -833,6 +884,8 @@ struct vidconsole_ops console_truetype_ops = {
  	.select_font	= truetype_select_font,
  	.measure	= truetype_measure,
-+	.nominal	= truetype_nominal,
+ 	.nominal	= truetype_nominal,
++	.entry_save	= truetype_entry_save,
++	.entry_restore	= truetype_entry_restore,
  };
  
  U_BOOT_DRIVER(vidconsole_truetype) = {
 diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
-index b5b3b662590..23b1b81731b 100644
+index 23b1b81731b..07427ba346b 100644
 --- a/drivers/video/vidconsole-uclass.c
 +++ b/drivers/video/vidconsole-uclass.c
-@@ -618,6 +618,28 @@ int vidconsole_measure(struct udevice *dev, const char *name, uint size,
+@@ -10,6 +10,7 @@
+ #define LOG_CATEGORY UCLASS_VIDEO_CONSOLE
+ 
+ #include <common.h>
++#include <abuf.h>
+ #include <command.h>
+ #include <console.h>
+ #include <log.h>
+@@ -640,6 +641,37 @@ int vidconsole_nominal(struct udevice *dev, const char *name, uint size,
  	return 0;
  }
  
-+int vidconsole_nominal(struct udevice *dev, const char *name, uint size,
-+		       uint num_chars, struct vidconsole_bbox *bbox)
++int vidconsole_entry_save(struct udevice *dev, struct abuf *buf)
 +{
-+	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
 +	struct vidconsole_ops *ops = vidconsole_get_ops(dev);
 +	int ret;
 +
 +	if (ops->measure) {
-+		ret = ops->nominal(dev, name, size, num_chars, bbox);
++		ret = ops->entry_save(dev, buf);
 +		if (ret != -ENOSYS)
 +			return ret;
 +	}
 +
-+	bbox->valid = true;
-+	bbox->x0 = 0;
-+	bbox->y0 = 0;
-+	bbox->x1 = priv->x_charsize * num_chars;
-+	bbox->y1 = priv->y_charsize;
++	/* no data so make sure the buffer is empty */
++	abuf_realloc(buf, 0);
++
++	return 0;
++}
++
++int vidconsole_entry_restore(struct udevice *dev, struct abuf *buf)
++{
++	struct vidconsole_ops *ops = vidconsole_get_ops(dev);
++	int ret;
++
++	if (ops->measure) {
++		ret = ops->entry_restore(dev, buf);
++		if (ret != -ENOSYS)
++			return ret;
++	}
 +
 +	return 0;
 +}
@@ -189,49 +249,75 @@ index b5b3b662590..23b1b81731b 100644
  			    enum colour_idx bg, struct vidconsole_colour *old)
  {
 diff --git a/include/video_console.h b/include/video_console.h
-index 2694e44f6ec..5234c85efd6 100644
+index 5234c85efd6..28d65451889 100644
 --- a/include/video_console.h
 +++ b/include/video_console.h
-@@ -224,6 +224,21 @@ struct vidconsole_ops {
+@@ -8,6 +8,7 @@
+ 
+ #include <video.h>
+ 
++struct abuf;
+ struct video_priv;
+ 
+ #define VID_FRAC_DIV	256
+@@ -239,6 +240,30 @@ struct vidconsole_ops {
  	 */
- 	int (*measure)(struct udevice *dev, const char *name, uint size,
- 		       const char *text, struct vidconsole_bbox *bbox);
+ 	int (*nominal)(struct udevice *dev, const char *name, uint size,
+ 		       uint num_chars, struct vidconsole_bbox *bbox);
 +
 +	/**
-+	 * nominal() - Measure the expected width of a line of text
++	 * entry_save() - Save any text-entry information for later use
 +	 *
-+	 * Uses an average font width and nominal height
++	 * Saves text-entry context such as a list of positions for each
++	 * character in the string.
 +	 *
 +	 * @dev: Console device to use
-+	 * @name: Font name, NULL for default
-+	 * @size: Font size, ignored if @name is NULL
-+	 * @num_chars: Number of characters to use
-+	 * @bbox: Returns nounding box of @num_chars characters
-+	 * Returns: 0 if OK, -ve on error
++	 * @buf: Buffer to hold saved data
++	 * Return: 0 if OK, -ENOMEM if out of memory
 +	 */
-+	int (*nominal)(struct udevice *dev, const char *name, uint size,
-+		       uint num_chars, struct vidconsole_bbox *bbox);
++	int (*entry_save)(struct udevice *dev, struct abuf *buf);
++
++	/**
++	 * entry_restore() - Restore text-entry information for current use
++	 *
++	 * Restores text-entry context such as a list of positions for each
++	 * character in the string.
++	 *
++	 * @dev: Console device to use
++	 * @buf: Buffer containing data to restore
++	 * Return: 0 if OK, -ve on error
++	 */
++	int (*entry_restore)(struct udevice *dev, struct abuf *buf);
  };
  
  /* Get a pointer to the driver operations for a video console device */
-@@ -263,6 +278,21 @@ int vidconsole_select_font(struct udevice *dev, const char *name, uint size);
- int vidconsole_measure(struct udevice *dev, const char *name, uint size,
- 		       const char *text, struct vidconsole_bbox *bbox);
+@@ -293,6 +318,30 @@ int vidconsole_measure(struct udevice *dev, const char *name, uint size,
+ int vidconsole_nominal(struct udevice *dev, const char *name, uint size,
+ 		       uint num_chars, struct vidconsole_bbox *bbox);
  
 +/**
-+ * vidconsole_nominal() - Measure the expected width of a line of text
++ * vidconsole_entry_save() - Save any text-entry information for later use
 + *
-+ * Uses an average font width and nominal height
++ * Saves text-entry context such as a list of positions for each
++ * character in the string.
 + *
 + * @dev: Console device to use
-+ * @name: Font name, NULL for default
-+ * @size: Font size, ignored if @name is NULL
-+ * @num_chars: Number of characters to use
-+ * @bbox: Returns nounding box of @num_chars characters
-+ * Returns: 0 if OK, -ve on error
++ * @buf: Buffer to hold saved data
++ * Return: 0 if OK, -ENOMEM if out of memory
 + */
-+int vidconsole_nominal(struct udevice *dev, const char *name, uint size,
-+		       uint num_chars, struct vidconsole_bbox *bbox);
++int vidconsole_entry_save(struct udevice *dev, struct abuf *buf);
++
++/**
++ * entry_restore() - Restore text-entry information for current use
++ *
++ * Restores text-entry context such as a list of positions for each
++ * character in the string.
++ *
++ * @dev: Console device to use
++ * @buf: Buffer containing data to restore
++ * Return: 0 if OK, -ve on error
++ */
++int vidconsole_entry_restore(struct udevice *dev, struct abuf *buf);
 +
  /**
   * vidconsole_push_colour() - Temporarily change the font colour
