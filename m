@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA8ACE79AD
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 07:05:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77BFECE79AC
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 07:20:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CE4D86BAC;
-	Wed, 20 Sep 2023 09:05:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AB66686BFC;
+	Wed, 20 Sep 2023 09:20:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fiOnTtgP";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mSwR4Cfu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 959DB86BE8; Wed, 20 Sep 2023 09:05:53 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E9B9986C48; Wed, 20 Sep 2023 09:20:04 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47A7386AFB
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 09:05:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1581286B69
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 09:20:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-d81afd5273eso5633526276.3
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 00:05:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695193550; x=1695798350; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Trntn6XUx2404wXEJfEPAnBs0ob90g1dG2gzgCgRxsA=;
- b=fiOnTtgPxLqkPlcUxUJ0NFIVdoOXATaML5TeXA7dlDLaJHqv6zGZN+waUWpGSEWopx
- hFBizPwAozzFjVPISVv3nADt2nQCRKlH8VkXUXpxdZ980XgnfR+7v8g0uocAv8DzL0Gy
- PHDccJVazFb5Il5IfQEI/Ut0mNJYHJ5f3sNzYg+xXjz+bDGlDVcWfAzeQ0bIGNa2n0I5
- fFi4gerfpGtchH5LNV3GeWiQDCN657zypLr2upv+vo5arNK7gEQAdEUR1AlV2Uk4fTfQ
- J3PoBAhdkuuS1Ozmq+Ds1USZayz9w0y4fCfveQClVrNktCU1gpxeSXiokYilFMEabxk/
- mrlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695193550; x=1695798350;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Trntn6XUx2404wXEJfEPAnBs0ob90g1dG2gzgCgRxsA=;
- b=exI0/Wze6S5daZlgMDHC6QGMsOr105rSBqp3sc8XNoxtYaU6gn0Nxdm9QlYBQFjdJu
- FmCWkldwBLb8mxFZYGvdIYtz8wLy8q1rd15KcENVaAqnYVtpWfBzcXWSSl7E8YeBj0/w
- QJPl8PM/yWmrZdTlk6KSEfedkfbTl529GjX8NixxW00Jh8o5wTplLblTV5oJnyczvSEO
- FsEbca9qwazF46PGemp1v89rtwxfUptp1W3KDylNK+9jBzO+tCN67EK3PBkYWmiNQDn6
- sLy/cxkQXn/i9I+ImpD+wLldnvcpv3fEGYV0tRNin8TU8tknUSYX8b+iQRQik09JbUx8
- vaqQ==
-X-Gm-Message-State: AOJu0Yxxp9MLaoxC85asQaOnO0MoTFYldfkmIdHMqNO63GUTGOX/xAaR
- w0QE13teRJARmasBiMuWHNbYKrRKdRYX9k2Wl4k=
-X-Google-Smtp-Source: AGHT+IEUDu4gw6/ZVMZiHUEgRjepfZ6ZzA0VNueArMZQbE1ogTFSgRd1cIIoj0r7+QSJXxowQxRPqoAzf7nDJIHd03U=
-X-Received: by 2002:a25:c544:0:b0:d7f:cdc8:e184 with SMTP id
- v65-20020a25c544000000b00d7fcdc8e184mr1811845ybe.49.1695193549822; Wed, 20
- Sep 2023 00:05:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1695194401; x=1695799201; i=xypron.glpk@gmx.de;
+ bh=zk/4VmNVEDijn8NE5rWODc82CS7RAmFsEhOGAwGsN9Y=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=mSwR4CfuGFEYTvJErkgP+QmWuSUjBcmR+8nPi4u9EECZTvXO+5krPelYDTz1TF9mnqP1W/wLrZt
+ JyvSG84yjKiwGdD2L4lX8G9Ali8WtZ3gPEXR/V402gGtMkcDug5WEN+7Mdz/6SbLjIokACppARPGh
+ 5n3syJf9udpOTm+RD0ZS9RouGDKKVnOTxZTnGXc14CHpZ+6GgN9g+YmPgeGADgtJEtDbBY4uDasdL
+ 38lgYh5sNEbonqpDdxJOL5UlcCsZZJ7C72VfpA0rIN6dTW6mEDQVYkvgqXJYGag0GKRpE3kV8j71r
+ DsNj6AXq2Hr7FaZYf5LVvasB4ehOl+hvQSZg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MdvmO-1rITEl35dO-00b4ZF; Wed, 20
+ Sep 2023 09:20:01 +0200
+Message-ID: <6c3f7c16-c67b-4c7d-9d91-0e214702fa88@gmx.de>
+Date: Wed, 20 Sep 2023 09:19:53 +0200
 MIME-Version: 1.0
-References: <20230919100222.9319-1-heinrich.schuchardt@canonical.com>
- <CAPnjgZ37dufD9oGuzSBkAoOz6GqndSuYbdYRkQv57k+V14bKJw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ37dufD9oGuzSBkAoOz6GqndSuYbdYRkQv57k+V14bKJw@mail.gmail.com>
-From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Wed, 20 Sep 2023 09:05:38 +0200
-Message-ID: <CAC928Hbjn_P7CAGiH1vYzWB60DHDBOZcd64r6jWArLrm8ANk2w@mail.gmail.com>
-Subject: Re: [PATCH 1/1] binman: doc: Remove incomplete sentence
-To: Simon Glass <sjg@chromium.org>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 08/20] x86: coreboot: Drop USB init on startup
+Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20230920030027.1385833-1-sjg@chromium.org>
+ <20230920030027.1385833-9-sjg@chromium.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20230920030027.1385833-9-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:maGYHrd0hX1AIvjf/lOyTBs7wEP0hqXn8SAJ9+X+Kwebud6VvQX
+ WijiTeZUycgT/N+wLytFJjtIkB/gPGscfIrgtPhreKZH6vTYnbv9Nd767hjPTD7JnryVrxZ
+ c3BDvXND7Zai3ucTTrYWroDvZyUJ422Y2KyrD+rAE5XaLXOFypze4YougPA0uYJ80TH47Ae
+ BV2k7F9lPrRlgpk9wdZBg==
+UI-OutboundReport: notjunk:1;M01:P0:l00ueKkqaOY=;fOkmMDLqczkqfJnNoNROMre1kCX
+ gE+n205yws3VzILp9Km/ykOcm8DN+A8iA8UQyFCkA4JfIFnhsNwKRVrieoqZG+7UvhJacYe7A
+ jkSvBMc67elwDh2K/LErVgY0yM7q8cXFYRIeYpxISPk8COeMz3D6Z5YxxwtLTDCiu3BXsnckj
+ ba9ctkxftwN/R7D/lBelqh+0aa9XMsZRe3RlSBbklZ+0WLqw9oJmv94nD8RpPkNAf1ymhyyFZ
+ Pv9J2P6t9GwVQn25b3bSC9WY9N2N14lmMQiw8zEfF/t8NaSMagYi2PREV3LXfqBw0sfJmsj+z
+ NWTraPid6wfWX0+iSGMVjKbJcvOu26xs0x1HlBxS1T3fAEmL0JISV2GRnjh5Z1YdUHCNgWkw2
+ B6j9sXBcLmZTSwXZiGvn1nSKAuRBPi2HxHsJ9EbTFCTphTBBrA/xW6YqIskQgudt2AxYR7j/v
+ 9Ka7HjOAoSrNGpR+AZRlS+8CWi43czSAIv59rPVrlffniAaqL27SGizUCUbxgAdPeYSI1FOdg
+ YPWY/icHdA9/JyugmuSdB2jX8ut601dPVVFOHGogfpkuwDdgEIRNOAblVfWG3tEnGpvklu0pd
+ gayZ1An3+JdLyr+QfhoSBjhF9gfQG7pdbxbrcExiCMEbH8DKfsGYhTUa1myQjcnNgguq1OjVi
+ XWABTzJB2T12LGXdt72RU5d1nltiQS7AhwX3i2aLGNTeK0w9SfHrdb/GldQbnQBnYj0NJQvMj
+ pHlgReTaakN0dAo/QYMqemcGiUJw08fEYIvgQZTZVz4AdkI+H1c84vo2C3XbIKBfOD/obv5tp
+ RKZKMIDzecL8tp3FeQpqd0fGwa4zD/i3qxE3/xkF1P+v8uY8txL3ZGU0npBgAVAJ2HNAW0746
+ Ugx/RVJ2yPZmFvsHy4Sk1XdI9ZkWDvr4rwi1YICz6mEQJx++/QbgC2MNMZGntkNKY3OFrbbJK
+ vddlpQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,53 +87,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Il giorno mer 20 set 2023 alle ore 04:59 Simon Glass
-<sjg@chromium.org> ha scritto:
+On 9/20/23 05:00, Simon Glass wrote:
+> This is very annoying as it is quite slow on many machines. Also, U-Boot
+> has an existing 'preboot' mechanism to enable this feature if desired.
 >
-> Hi Heinrich,
+> Drop this code so that it is possible to choose whether to init USB or
+> not.
 >
+> Use the existing USE_PREBOOT mechanism instead.
 >
-> On Tue, 19 Sept 2023 at 04:02, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > This is the difference between version 1 and 2 of Massimo's patch:
-> >
-> > binman: doc: fix reference tag placement for Logging section
-> > v2: https://lore.kernel.org/u-boot/20230913161633.999542-1-massimo.pegorer+oss@gmail.com/
-> > v1: https://lore.kernel.org/u-boot/20230909135235.21242-1-massimo.pegorer+oss@gmail.com/
-> >
-> > Fixes: 0f40e23fd22 ("binman: add documentation for binman sign option")
-> > Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> >  tools/binman/binman.rst | 2 --
-> >  1 file changed, 2 deletions(-)
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
 >
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Changes in v5:
+> - Make use of the uSE_PREBOOT mechanism
+>
+>   arch/x86/cpu/coreboot/Kconfig    | 1 +
+>   arch/x86/cpu/coreboot/coreboot.c | 4 ----
+>   2 files changed, 1 insertion(+), 4 deletions(-)
+>
+> diff --git a/arch/x86/cpu/coreboot/Kconfig b/arch/x86/cpu/coreboot/Kconf=
+ig
+> index b97c27790419..178f8ad18162 100644
+> --- a/arch/x86/cpu/coreboot/Kconfig
+> +++ b/arch/x86/cpu/coreboot/Kconfig
+> @@ -25,6 +25,7 @@ config SYS_COREBOOT
+>   	imply FS_CBFS
+>   	imply CBMEM_CONSOLE
+>   	imply X86_TSC_READ_BASE
+> +	imply USE_PREBOOT
 
-Acked-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+For automatic initialization of the PCI bus we have CONFIG_PCI_INIT_R.
+Wouldn't it be preferable to also have a CONFIG_USB_INIT_R instead of
+relying on console commands in CONFIG_PREBOOT?
 
-Thanks.
-Massimo
+Best regards
 
+Heinrich
+
+>   	select BINMAN if X86_64
 >
-> I don't mind which patch is applied.
+>   endif
+> diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/co=
+reboot.c
+> index da43d66e95d7..82fe4c71cd27 100644
+> --- a/arch/x86/cpu/coreboot/coreboot.c
+> +++ b/arch/x86/cpu/coreboot/coreboot.c
+> @@ -86,10 +86,6 @@ static int last_stage_init(void)
+>   	if (IS_ENABLED(CONFIG_SPL_BUILD))
+>   		return 0;
 >
+> -	/* start usb so that usb keyboard can be used as input device */
+> -	if (IS_ENABLED(CONFIG_USB_KEYBOARD))
+> -		usb_init();
+> -
+>   	board_final_init();
 >
-> >
-> > diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-> > index 8945b19446..020988d955 100644
-> > --- a/tools/binman/binman.rst
-> > +++ b/tools/binman/binman.rst
-> > @@ -1480,8 +1480,6 @@ as set in stone, so Binman will ensure it doesn't change. Without this feature,
-> >  repacking an entry might cause it to disobey the original constraints provided
-> >  when it was created.
-> >
-> > - Repacking an image involves
-> > -
-> >
-> >  Signing FIT container with private key in an image
-> >  --------------------------------------------------
-> > --
-> > 2.40.1
-> >
+>   	return 0;
+
