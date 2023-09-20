@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FAEDC04FE8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 18:41:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 594BCC04FE4
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 18:42:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75E3F86BE1;
-	Wed, 20 Sep 2023 20:41:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D6B2386BFC;
+	Wed, 20 Sep 2023 20:42:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ScC2XRjC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q5Ia54JP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7265A86BF7; Wed, 20 Sep 2023 20:41:04 +0200 (CEST)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id C25EA86C04; Wed, 20 Sep 2023 20:42:08 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B9E886BDE
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 20:41:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2B4286BDE
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 20:42:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-273d9b1908eso11290a91.0
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 11:41:02 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-690fe1d9ba1so26097b3a.0
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 11:42:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695235260; x=1695840060; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695235325; x=1695840125; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eUvzNKqZTkJNVT5/uzbRrSbko1gPiXraYFGJ3CzOMlM=;
- b=ScC2XRjCw2m5KWpwGaYVzaHnQYyq3IA26Z45A9y9q5NEMEsW2XPr7WntxGcD9PAYiS
- f1xXdJmAoMoWVcoboexdhG7qDsj6+qoMdzeHxUw+4s0mvAvBteI254VjbAZzQzl4xpRB
- uWm1Vt0C4zGmgwHbCz5MofbvbOer+ftefZjdHT3ouIeGWAr4EcjqWhO6Qg63Kxx4SDP1
- b+QOhaYk5idWxKadTEB4N8XdpIrLhgA6KsOhO+b86QdgUAtdCkBJl5igiBZRtfcA/K1z
- tX+tAiWZFM9q9c2lodQWhGWPttIiPANiDMcLnohX2bjmF8AFySB/6/u3rKWdmmy70sgk
- 6I0w==
+ bh=yloPY2fdjVeIacRfnt3NVPsEjhqctGR1ZtN1kYyqUTM=;
+ b=Q5Ia54JPvHjKAhwMlVx2JVfpRAO2B9lyR7LXBCENlWkwD0iGv+5Eg2zY+i6HvwZYnd
+ A4lsgAkPqpqDQ3eXdjalUWAcxpztQqmzXa6oOXgBT4N0x0GiYXSZlSf2OB7a8T4l0jfr
+ QyOEC7Q71CbHosbnqgU2aW2Fn5p75pV/O0MyCr2N+HIlbRbib9PhnhmNzGY6R5d/Wc8f
+ Ov9t9A0+0cUy2Arbxb7JkTDY7ilObpVGC1I6BzDqV//DSDLay7bjUY5C4aTHP0y04LaZ
+ IpSatcWVHCoOJNCR2E1IdM89mR8sUrcWyZrmcH4KopMoiGJz75wRgUoufm8OfCuNTGTa
+ hMBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695235260; x=1695840060;
+ d=1e100.net; s=20230601; t=1695235325; x=1695840125;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eUvzNKqZTkJNVT5/uzbRrSbko1gPiXraYFGJ3CzOMlM=;
- b=B8/GCksDZC2aE1qv+EWPao3BqvXhLA3zcxyKUAN3eiFlm6TuycYhwY1S0lZeCzhwRD
- 8Y3ESbbmxXbQrFUxolHBTq1JqlJzZEMyc8g9aXLgqXon+SdAiOcVcIFG1pye77nc79DG
- CKbZeWlzJQ1Z9md8SFTGXlJ1sEdxXPFGLwcpkJddyGmC5j6Pty+q0u/gW5oP/xtu98Kx
- 3mK4z/hXTMSU0Sm4n59x83acYPgO+Vl7HK7cXqHDD3jYxZ5cTjCnC3izlUcDAY7RQ8Pp
- dMKdHxbUno1N/l6xDM8fQ9ibqmxgRVFVjt3zst0TU1yEw+R9hPdNyUwi3i9vkFH8iksP
- 76nQ==
-X-Gm-Message-State: AOJu0Yz7xjUBHP+huOIl1MfymFozqj9jrBKUKBjU2rZS6uefrfBCQlLc
- JHBp0XfufcaliXoGhAD8yE5/zYo1dWUq2MdOCdE=
-X-Google-Smtp-Source: AGHT+IG39rRj7ZYAIDWH59KXf/E6FMh3vAtdORqtGAl32cUm+drnciVmVxHEjcuqy5nNc2voVkP4qgxLRW4TB8hV5yI=
-X-Received: by 2002:a17:90a:414b:b0:274:60c7:e15a with SMTP id
- m11-20020a17090a414b00b0027460c7e15amr3236842pjg.4.1695235260637; Wed, 20 Sep
- 2023 11:41:00 -0700 (PDT)
+ bh=yloPY2fdjVeIacRfnt3NVPsEjhqctGR1ZtN1kYyqUTM=;
+ b=rmh1dayzNgITaonhB1HwT7TrpryraukoXS/dXhdmo+FDAXHA7/CZBJ8MF7xX8e2hHo
+ iW7A0P5HqnuuOHg7IdVQDbLRP5nLtWLKJgYhjLSc28RoEbFVfRYIEaUHGoG8bcdNN1tD
+ aBSbp6Tw9aM2p9vinqtSCBtlZMjvw65URvPjRcSFNZHWlXp8bkq1G9Ver2Kd7ihowIVC
+ mC0khONotykhTpjtIMrkEGd1Acz+V0sZSzAkToxrxJHl5iyUmFR/DkKlmPmAfbb6ygMn
+ qExpIsLolaOorerWk6OoJUCN6Q9fRlBjldqSyKOaq6ENN8PdZgkO1NTdKe0MLOKcXqff
+ uZmQ==
+X-Gm-Message-State: AOJu0Yy/KZkHygxxzGgnf47JvSsxRFVz71SqByqafnv/xKPFaQBFi1Ny
+ 8ZhTG5w7XBCtbh74HgX+Tw+zq4X9FdBt/Tju0k3wMpFPpCs=
+X-Google-Smtp-Source: AGHT+IFQ02gnKDqaUVjWlkketXLGltHpSlK4rjRfJDcd433udAcqYcGZTfqXVxtMIPwMzXQaVtx3kFIUhqeZHQf+SFk=
+X-Received: by 2002:a05:6a20:a126:b0:14e:2c56:7b02 with SMTP id
+ q38-20020a056a20a12600b0014e2c567b02mr3879707pzk.0.1695235324953; Wed, 20 Sep
+ 2023 11:42:04 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230919092847.42391-1-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20230919092847.42391-1-rasmus.villemoes@prevas.dk>
+References: <20230904132437.36435-1-hiagofranco@gmail.com>
+In-Reply-To: <20230904132437.36435-1-hiagofranco@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 20 Sep 2023 15:40:48 -0300
-Message-ID: <CAOMZO5BYB7e-+-KBynxQt6LmdoFXSnFxE+_uL3HgEnU50BTvjw@mail.gmail.com>
-Subject: Re: [PATCH] imx8mp: binman: rename spl and u-boot nodes
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, uboot-imx@nxp.com, 
- Marek Vasut <marex@denx.de>
+Date: Wed, 20 Sep 2023 15:41:53 -0300
+Message-ID: <CAOMZO5C_4rsL5YELCEA5b94G8Njc3pdRkRcpi=b_t2axc6fSug@mail.gmail.com>
+Subject: Re: [PATCH] verdin-imx8mp: drop unused tdx easy installer ifdef
+To: Hiago De Franco <hiagofranco@gmail.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Hiago De Franco <hiago.franco@toradex.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,21 +87,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 19, 2023 at 6:29=E2=80=AFAM Rasmus Villemoes
-<rasmus.villemoes@prevas.dk> wrote:
+On Mon, Sep 4, 2023 at 11:09=E2=80=AFAM Hiago De Franco <hiagofranco@gmail.=
+com> wrote:
 >
-> The hab signing script doc/imx/habv4/csf_examples/mx8m/csf.sh does
+> From: Hiago De Franco <hiago.franco@toradex.com>
 >
->   fdtget -t x u-boot.dtb /binman/imx-boot/uboot offset
+> Drop unused code related to CONFIG_TDX_EASY_INSTALLER, that existed only =
+on
+> toradex downstream branch.
 >
-> to figure out the offset of u-boot.itb inside flash.bin. That works
-> fine for imx8mm, imx8mn, imx8mq, but fails for imx8mp because in that
-> case 'uboot' is merely a label and not actually the node name.
->
-> Homogenize these cases and make imx8mp the same as the other imx8m*
-> variants. The binman type is explicitly given and no longer derived
-> from the node name, and the csf.sh script will work for all four SOCs.
->
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
 
 Reviewed-by: Fabio Estevam <festevam@denx.de>
