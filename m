@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90EB1CE79CE
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 12:44:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D436CE79D0
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 12:44:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AE7486BEE;
-	Wed, 20 Sep 2023 14:43:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C9612867D6;
+	Wed, 20 Sep 2023 14:43:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 427D1867D6; Wed, 20 Sep 2023 14:43:10 +0200 (CEST)
+ id 306D986BE6; Wed, 20 Sep 2023 14:43:12 +0200 (CEST)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id EF90F86BEE
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 14:43:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 496FE86BE7
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 14:43:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,162,1694703600"; d="scan'208";a="180389802"
+X-IronPort-AV: E=Sophos;i="6.03,162,1694703600"; d="scan'208";a="180389794"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 20 Sep 2023 21:43:06 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 20 Sep 2023 21:43:03 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.83])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 2FEE7433CFB5;
- Wed, 20 Sep 2023 21:43:03 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id F2486433CFB9;
+ Wed, 20 Sep 2023 21:43:00 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
@@ -34,9 +34,9 @@ To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH 11/16] mmc: renesas-sdhi: Initialize module on RZ/G2L
-Date: Wed, 20 Sep 2023 13:42:07 +0100
-Message-Id: <20230920124212.63535-12-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
+Date: Wed, 20 Sep 2023 13:42:06 +0100
+Message-Id: <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
 References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
@@ -58,110 +58,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On the Renesas RZ/G2L SoC family, we must ensure that the required clock
-signals are enabled and the reset signal is de-asserted before we try to
-communicate with the SDHI module.
+Extend the existing driver to support the SCIF serial ports on the
+Renesas RZ/G2L (R9A07G044) SoC. This also requires us to ensure that the
+relevant reset signal is de-asserted before we try to talk to the SCIF
+module.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
 Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 ---
- drivers/mmc/renesas-sdhi.c | 61 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 61 insertions(+)
+ arch/arm/mach-rmobile/Kconfig |  1 +
+ drivers/serial/serial_sh.c    | 32 ++++++++++++++++++++++++++++++--
+ drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
+ 3 files changed, 49 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-index 8e716f74491f..170c5dcc2ebe 100644
---- a/drivers/mmc/renesas-sdhi.c
-+++ b/drivers/mmc/renesas-sdhi.c
-@@ -20,6 +20,7 @@
- #include <linux/io.h>
- #include <linux/sizes.h>
- #include <power/regulator.h>
+diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
+index 973e84fcf7ba..0ab22356aee5 100644
+--- a/arch/arm/mach-rmobile/Kconfig
++++ b/arch/arm/mach-rmobile/Kconfig
+@@ -77,6 +77,7 @@ config RZG2L
+ 	imply RENESAS_SDHI
+ 	imply CLK_RZG2L
+ 	imply PINCTRL_RZG2L
++	imply SCIF_CONSOLE
+ 	help
+ 	  Enable support for the Renesas RZ/G2L family of SoCs, including the
+ 	  the RZ/G2L itself (based on the R9A07G044 SoC).
+diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
+index 5e543dbf3d58..a2e9a57137a6 100644
+--- a/drivers/serial/serial_sh.c
++++ b/drivers/serial/serial_sh.c
+@@ -17,6 +17,8 @@
+ #include <linux/compiler.h>
+ #include <dm/platform_data/serial_sh.h>
+ #include <linux/delay.h>
++#include <dm/device_compat.h>
 +#include <reset.h>
- #include <asm/unaligned.h>
- #include "tmio-common.h"
+ #include "serial_sh.h"
  
-@@ -964,6 +965,8 @@ static int renesas_sdhi_probe(struct udevice *dev)
- 	u32 quirks = dev_get_driver_data(dev);
- 	struct fdt_resource reg_res;
- 	DECLARE_GLOBAL_DATA_PTR;
-+	struct clk imclk2, aclk;
-+	struct reset_ctl rst;
- 	int ret;
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -79,8 +81,16 @@ sh_serial_setbrg_generic(struct uart_port *port, int clk, int baudrate)
  
- 	priv->clk_get_rate = renesas_sdhi_clk_get_rate;
-@@ -1012,6 +1015,49 @@ static int renesas_sdhi_probe(struct udevice *dev)
- 		goto err_clkh;
- 	}
+ static void handle_error(struct uart_port *port)
+ {
+-	sci_in(port, SCxSR);
+-	sci_out(port, SCxSR, SCxSR_ERROR_CLEAR(port));
++	/* The RZ/G2L datasheet says that error conditions are cleared by
++	 * resetting the error bits in the FSR register to zero.
++	 */
++	if (IS_ENABLED(CONFIG_RZG2L)) {
++		unsigned short status = sci_in(port, SCxSR);
++		sci_out(port, SCxSR, status & ~SCIF_ERRORS);
++	} else {
++		sci_in(port, SCxSR);
++		sci_out(port, SCxSR, SCxSR_ERROR_CLEAR(port));
++	}
+ 	sci_in(port, SCLSR);
+ 	sci_out(port, SCLSR, 0x00);
+ }
+@@ -193,6 +203,23 @@ static int sh_serial_probe(struct udevice *dev)
+ 	priv->type	= plat->type;
+ 	priv->clk_mode	= plat->clk_mode;
  
 +	if (IS_ENABLED(CONFIG_RZG2L)) {
-+		/*
-+		 * On members of the RZ/G2L SoC family, we need to enable
-+		 * additional chip detect and bus clocks, then release the SDHI
-+		 * module from reset.
-+		 */
-+		ret = clk_get_by_name(dev, "cd", &imclk2);
-+		if (ret < 0) {
-+			dev_err(dev, "failed to get imclk2 (chip detect clk)\n");
-+			goto err_get_imclk2;
-+		}
-+
-+		ret = clk_get_by_name(dev, "aclk", &aclk);
-+		if (ret < 0) {
-+			dev_err(dev, "failed to get aclk\n");
-+			goto err_get_aclk;
-+		}
-+
-+		ret = clk_enable(&imclk2);
-+		if (ret < 0) {
-+			dev_err(dev, "failed to enable imclk2 (chip detect clk)\n");
-+			goto err_imclk2;
-+		}
-+
-+		ret = clk_enable(&aclk);
-+		if (ret < 0) {
-+			dev_err(dev, "failed to enable aclk\n");
-+			goto err_aclk;
-+		}
++		struct reset_ctl rst;
++		int ret;
 +
 +		ret = reset_get_by_index(dev, 0, &rst);
 +		if (ret < 0) {
 +			dev_err(dev, "failed to get reset line\n");
-+			goto err_reset;
++			return ret;
 +		}
 +
 +		ret = reset_deassert(&rst);
 +		if (ret < 0) {
 +			dev_err(dev, "failed to de-assert reset line\n");
-+			goto err_reset;
++			return ret;
 +		}
 +	}
 +
- 	priv->quirks = quirks;
- 	ret = tmio_sd_probe(dev, quirks);
- 	if (ret)
-@@ -1028,6 +1074,21 @@ static int renesas_sdhi_probe(struct udevice *dev)
- 	return 0;
+ 	sh_serial_init_generic(priv);
  
- err_tmio_probe:
-+	if (IS_ENABLED(CONFIG_RZG2L))
-+		reset_assert(&rst);
-+err_reset:
-+	if (IS_ENABLED(CONFIG_RZG2L))
-+		clk_disable(&aclk);
-+err_aclk:
-+	if (IS_ENABLED(CONFIG_RZG2L))
-+		clk_disable(&imclk2);
-+err_imclk2:
-+	if (IS_ENABLED(CONFIG_RZG2L))
-+		clk_free(&aclk);
-+err_get_aclk:
-+	if (IS_ENABLED(CONFIG_RZG2L))
-+		clk_free(&imclk2);
-+err_get_imclk2:
- 	clk_disable(&priv->clk);
- err_clkh:
- 	clk_free(&priv->clkh);
+ 	return 0;
+@@ -211,6 +238,7 @@ static const struct udevice_id sh_serial_id[] ={
+ 	{.compatible = "renesas,scif", .data = PORT_SCIF},
+ 	{.compatible = "renesas,scifa", .data = PORT_SCIFA},
+ 	{.compatible = "renesas,hscif", .data = PORT_HSCIF},
++	{.compatible = "renesas,scif-r9a07g044", .data = PORT_SCIFA},
+ 	{}
+ };
+ 
+diff --git a/drivers/serial/serial_sh.h b/drivers/serial/serial_sh.h
+index 149ec1fe7397..58c2d22bc757 100644
+--- a/drivers/serial/serial_sh.h
++++ b/drivers/serial/serial_sh.h
+@@ -90,7 +90,7 @@ struct uart_port {
+ # define SCSCR_INIT(port)	0x38 /* TIE=0,RIE=0,TE=1,RE=1,REIE=1 */
+ # define SCIF_ORER 0x0001  /* overrun error bit */
+ #elif defined(CONFIG_RCAR_GEN2) || defined(CONFIG_RCAR_64) || \
+-      defined(CONFIG_R7S72100)
++      defined(CONFIG_R7S72100) || defined(CONFIG_RZG2L)
+ # if defined(CFG_SCIF_A)
+ #  define SCIF_ORER	0x0200
+ # else
+@@ -312,6 +312,9 @@ static inline void sci_##name##_out(struct uart_port *port,\
+ 					sh4_scif_offset, sh4_scif_size)
+ 		#define SCIF_FNS(name, sh4_scif_offset, sh4_scif_size) \
+ 			CPU_SCIF_FNS(name, sh4_scif_offset, sh4_scif_size)
++#elif defined(CONFIG_RZG2L)
++#define SCIF_FNS(reg_name, reg_offset, reg_size) \
++	CPU_SCIF_FNS(reg_name, reg_offset, reg_size)
+ #else
+ #define SCIx_FNS(name, sh3_sci_offset, sh3_sci_size,\
+ 				sh4_sci_offset, sh4_sci_size, \
+@@ -387,6 +390,20 @@ SCIF_FNS(SCLSR,  0,  0, 0x14, 16)
+ #else
+ SCIF_FNS(SCLSR,  0,  0, 0x24, 16)
+ #endif
++#elif defined(CONFIG_RZG2L)
++SCIF_FNS(SCSMR,  0x00, 16)
++SCIF_FNS(SCBRR,  0x02,  8)
++SCIF_FNS(SCSCR,  0x04, 16)
++SCIF_FNS(SCxTDR, 0x06,  8)
++SCIF_FNS(SCxSR,  0x08, 16)
++SCIF_FNS(SCxRDR, 0x0A,  8)
++SCIF_FNS(SCFCR,  0x0C, 16)
++SCIF_FNS(SCFDR,  0x0E, 16)
++SCIF_FNS(SCSPTR, 0x10, 16)
++SCIF_FNS(SCLSR,  0x12, 16)
++SCIF_FNS(SCSEMR, 0x14,  8)
++SCIF_FNS(SCxTCR, 0x16, 16)
++SCIF_FNS(DL,     0x00,  0)
+ #else
+ /*      reg      SCI/SH3   SCI/SH4  SCIF/SH3   SCIF/SH4  SCI/H8*/
+ /*      name     off  sz   off  sz   off  sz   off  sz   off  sz*/
 -- 
 2.34.1
 
