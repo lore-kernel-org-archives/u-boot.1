@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB512CE79A8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:00:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F023FCE79A9
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:00:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 715BD86BF9;
+	by phobos.denx.de (Postfix) with ESMTP id C70B486BE8;
 	Wed, 20 Sep 2023 04:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e5jCCDZL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VIYskNjV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B530186BD9; Wed, 20 Sep 2023 04:59:46 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id C4D7B86BED; Wed, 20 Sep 2023 04:59:46 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B85A686BEB
+ by phobos.denx.de (Postfix) with ESMTPS id B5BC586BE8
  for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 04:59:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-59bdad64411so65063957b3.3
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-59ed7094255so12399397b3.3
  for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 19:59:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695178783; x=1695783583; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CU9KME8ZIYZnXnjGz58ZOZT3YMAVCbPo/o6vIQ3AMFM=;
- b=e5jCCDZLU8rkCfdemiSXTwA8mxywCU8ZEOPbxQQhauPSY/cDxbbeYT/dhRGK+nEr2r
- 4ITcGAVyFnmeCB1t4eywmB6oWqc+wkntGJKmgHF5Ln3AFkEc1UFXGqw9QeaZIhzDCvc+
- O8hQ6yi4JPi7dvEVAAAGIqspCuZn5bz3KTnKc=
+ bh=qixgxkpBwlzBTubxThcNJuximYfCMOzi+YnFeiinutA=;
+ b=VIYskNjVD9IcM2jpkAwa5vv7SsygKT2fvTuTd1um9YfC+fZvqfe0uSTQYjicX1kt41
+ iI1YVdwFd+cESU3zT7r7fFQ6ulNwY1Bb8zcEdZN3OPgXzO2Kt2gvrQA7dGUErC9bmHpu
+ WKCEw8n9ghWPcO29EAi2kOg3vcNW52/Mj+oLI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695178783; x=1695783583;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CU9KME8ZIYZnXnjGz58ZOZT3YMAVCbPo/o6vIQ3AMFM=;
- b=eWr3uRhgTi38CzyyqVGk1gO1jkLjr2p+XVr7W4Z2F5oA4mt9MyPJSO+4xnZLI11ZB5
- Ggart9tYA20POv+gxWXoVPf8GMftWdyvB2R67feCVqZvqwlnCjfPeRuTrgUrt/HsSUXk
- jEPdG4bn2CbK/siKJlJ/73TeSfce6BkIjlbQpk6uX2RTgm0KUZJD7nIU75kN1ULrGLrn
- 3bpCG6y8qabq/yKW1fPk35zVyU2AikcsunSWIfUYq+pTFet/1r8BQTEUJ7Ht3qtxWrQa
- 4lWUoKtQtiV0a+qHv8mVsyWLSlRJFBXVbtq6dtJh5R6DywQZeOGkV670aECSc+l1Md2m
- YdMg==
-X-Gm-Message-State: AOJu0YxMivvZCB6xLtyM2uHHrAlTtWtjsAFgvv/ALD55EQYJ6mojLCtF
- FH5qckqpqHYQPLbrUIszgDdChlwja9SJD6lWpsEyYQ==
-X-Google-Smtp-Source: AGHT+IESm6/N8YWf2x6AO6+C3uopnGxWIwzz9B1HI/sBUe+JC0zfQ44tXgmXMlUq4BfPbyAj2sS4yXYLSVFDUKdvEBc=
-X-Received: by 2002:a0d:ca86:0:b0:589:e66e:abe4 with SMTP id
- m128-20020a0dca86000000b00589e66eabe4mr1292069ywd.11.1695178783067; Tue, 19
- Sep 2023 19:59:43 -0700 (PDT)
+ bh=qixgxkpBwlzBTubxThcNJuximYfCMOzi+YnFeiinutA=;
+ b=uba0vSJlo0UbeYEIT/G3WGeawAMoKOVXeZC8HP3jEJJ0tqMy8U9pb+IZXTKm3iYNlT
+ mJGrjs6v4psORY1yNkIsiLUz7o7PvBpLx/el9+SX3w0TUF5usZueaggPtNsih3R1brie
+ zyUCeegTobdbBtpFSxhzKIsxpt++UOY6Y53vyf5+1xoU5CJDGlb5cdA7ORtyKQtSKRUN
+ RXTyCyVRGkoRisRD+keYuJ9IkKwJ3d2/dWwZMjQQmGRSoXkB/f+Ssl2lWAu65nhc6WSp
+ 3EP+3d36Ze5RKbydHw2xYkoVIipFIyQtbr6lBeg0JZYKbkm5lpN38D2RmhmKWb+Wqv2O
+ rX9Q==
+X-Gm-Message-State: AOJu0YzRyZpFnPDAWkykefSewhLRaRttupnPo4VyLvGJuAz1VKcxmBzl
+ SRt6yDhkFZYaka0KS6iDDEMzM7rXb2XXZtS8yCGUcQ==
+X-Google-Smtp-Source: AGHT+IHXSm9iR1fqYex7sCd29NJA8tBUCfCSQq0AZCUmQvNbSvCbj8KfQYMW25gfRrKmkVv9p26KHw9/TlSRbH3sVEE=
+X-Received: by 2002:a81:5247:0:b0:589:e586:6f0a with SMTP id
+ g68-20020a815247000000b00589e5866f0amr1458015ywb.3.1695178783071; Tue, 19 Sep
+ 2023 19:59:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-8-sjg@chromium.org>
- <CAEUhbmVLr+B7sU7MQjKjgbzNaB6XGB84p0RuPhKcHSDVytPQ-A@mail.gmail.com>
-In-Reply-To: <CAEUhbmVLr+B7sU7MQjKjgbzNaB6XGB84p0RuPhKcHSDVytPQ-A@mail.gmail.com>
+References: <20230910191304.191580-1-sjg@chromium.org>
+ <20230910191304.191580-2-sjg@chromium.org>
+ <CAEUhbmWnsbtdTaa6tktO_7cWBRXdzsftQAFk95qboVet6trYxA@mail.gmail.com>
+In-Reply-To: <CAEUhbmWnsbtdTaa6tktO_7cWBRXdzsftQAFk95qboVet6trYxA@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Sep 2023 20:58:58 -0600
-Message-ID: <CAPnjgZ3QVt_tddadLuiLLWEQzN1q4XwMb-2b_rv0j2nKG1tMjA@mail.gmail.com>
-Subject: Re: [PATCH v4 07/20] x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
+Date: Tue, 19 Sep 2023 20:59:02 -0600
+Message-ID: <CAPnjgZ28fe4hJeBODiSqq=zqKuobmKc3kFgkVLYFB_3DgHHowA@mail.gmail.com>
+Subject: Re: [PATCH v4 2/2] x86: Update cbmem driver
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Alex Sadovsky <nable.maininbox@googlemail.com>, 
+ Paul Menzel <pmenzel@molgen.mpg.de>,
+ Jean-Marie Lemetayer <j.lemetayer@kerlink.fr>, 
+ Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Konrad Dybcio <konrad.dybcio@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,40 +92,140 @@ X-Virus-Status: Clean
 
 Hi Bin,
 
-On Tue, 19 Sept 2023 at 01:19, Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, 19 Sept 2023 at 02:47, Bin Meng <bmeng.cn@gmail.com> wrote:
 >
 > Hi Simon,
 >
-> On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
+> On Mon, Sep 11, 2023 at 3:13=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
 ote:
 > >
-> > The debug UART on modern machines uses a 32-bit wide transfer. Without
-> > this, setting debug output causes a hang or no output. It is not obviou=
-s
-> > (when enabling CONFIG_DEBUG_UART) that this is needed.
+> > This driver is not actually built since a Kconfig was never created for
+> > it.
 > >
-> > Enable 32-bit access to avoid this trap.
+> > Add a Kconfig (which is already implied by COREBOOT) and update the
+> > implementation to avoid using unnecessary memory. Drop the #ifdef at th=
+e
+> > top since we can rely on Kconfig to get that right.
+> >
+> > To enable it (in addition to serial and video), use:
+> >
+> >    setenv stdout serial,vidconsole,cbmem
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
-> > (no changes since v1)
+> > Changes in v4:
+> > - Add some comments to help understand the overflow mechanism
 > >
-> >  configs/coreboot64_defconfig | 1 +
-> >  configs/coreboot_defconfig   | 1 +
-> >  2 files changed, 2 insertions(+)
+> > Changes in v2:
+> > - Update to support the new overflow mechanism
+> >
+> >  drivers/misc/Kconfig         |  8 +++++++
+> >  drivers/misc/cbmem_console.c | 43 ++++++++++++++++++++++--------------
+> >  2 files changed, 34 insertions(+), 17 deletions(-)
+> >
+> > diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> > index a6e3f62ecb09..c930e4a361bf 100644
+> > --- a/drivers/misc/Kconfig
+> > +++ b/drivers/misc/Kconfig
+> > @@ -122,6 +122,14 @@ config VEXPRESS_CONFIG
+> >           configuration bus on the Arm Versatile Express boards via
+> >           a sysreg driver.
+> >
+> > +config CBMEM_CONSOLE
+> > +       bool "Write console output to coreboot cbmem"
+> > +       depends on X86
+> > +       help
+> > +         Enables console output to the cbmem console, which is a memor=
+y
+> > +         region set up by coreboot to hold a record of all console out=
+put.
+> > +         Enable this only if booting from coreboot.
+> > +
+> >  config CMD_CROS_EC
+> >         bool "Enable crosec command"
+> >         depends on CROS_EC
+> > diff --git a/drivers/misc/cbmem_console.c b/drivers/misc/cbmem_console.=
+c
+> > index 8bbe33d414da..3cbe9fb1a46a 100644
+> > --- a/drivers/misc/cbmem_console.c
+> > +++ b/drivers/misc/cbmem_console.c
+> > @@ -5,27 +5,37 @@
+> >
+> >  #include <common.h>
+> >  #include <console.h>
+> > -#ifndef CONFIG_SYS_COREBOOT
+> > -#error This driver requires coreboot
+> > -#endif
+> > -
+> >  #include <asm/cb_sysinfo.h>
+> >
+> > -struct cbmem_console {
+> > -       u32 buffer_size;
+> > -       u32 buffer_cursor;
+> > -       u8  buffer_body[0];
+> > -}  __attribute__ ((__packed__));
+> > -
+> > -static struct cbmem_console *cbmem_console_p;
+> > -
+> >  void cbmemc_putc(struct stdio_dev *dev, char data)
+> >  {
+> > -       int cursor;
+> > +       const struct sysinfo_t *sysinfo =3D cb_get_sysinfo();
+> > +       struct cbmem_console *cons;
+> > +       uint pos, flags;
+> > +
+> > +       if (!sysinfo)
+> > +               return;
+> > +       cons =3D sysinfo->cbmem_cons;
+> > +       if (!cons)
+> > +               return;
+> > +
+> > +       pos =3D cons->cursor & CBMC_CURSOR_MASK;
+> > +
+> > +       /* preserve the overflow flag if present */
+> > +       flags =3D cons->cursor & ~CBMC_CURSOR_MASK;
+> > +
+> > +       cons->body[pos++] =3D data;
+> > +
+> > +       /*
+> > +        * Deal with overflow - the flag may be cleared by another prog=
+ram which
+> > +        * reads the buffer out, e.g. Linux
+> > +        */
+>
+> U-Boot is not memory resident, so this does not sound like a correct
+> overflow mechanism to me.
+
+I am not sure what you mean. This logic is used in coreboot and some
+payloads, so I want to do the same in U-Boot. It basically let's
+U-Boot handle an overflow properly by setting the overflow flag. A
+later program (e.g. Linux) can then tell that that an overflow
+occurred.
+
+
+>
+> > +       if (pos >=3D cons->size) {
+> > +               pos =3D 0;
+> > +               flags |=3D CBMC_OVERFLOW;
+> > +       }
+> >
+> > -       cursor =3D cbmem_console_p->buffer_cursor++;
+> > -       if (cursor < cbmem_console_p->buffer_size)
+> > -               cbmem_console_p->buffer_body[cursor] =3D data;
+> > +       cons->cursor =3D flags | pos;
+> >  }
+> >
+> >  void cbmemc_puts(struct stdio_dev *dev, const char *str)
+> > @@ -40,7 +50,6 @@ int cbmemc_init(void)
+> >  {
+> >         int rc;
+> >         struct stdio_dev cons_dev;
+> > -       cbmem_console_p =3D lib_sysinfo.cbmem_cons;
+> >
+> >         memset(&cons_dev, 0, sizeof(cons_dev));
 > >
 >
-> Can we use CONFIG_NS16550_DYNAMIC?
-
-We do actually use this for coreboot.
-
->
-> Hardcode CONFIG_SYS_NS16550_MEM32 in the defconfig just works for one
-> configuration like yours, but it fails on some other configurations,
-> e.g.: IO port based ns16550.
-
-This is for the debug UART which does not support CONFIG_NS16550_DYNAMIC
 
 Regards,
 Simon
