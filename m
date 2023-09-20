@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC550C00523
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 15:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE5AC04AA9
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 16:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0355863DE;
-	Wed, 20 Sep 2023 17:30:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4016086AF3;
+	Wed, 20 Sep 2023 18:01:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="llZwY5R+";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="TSlIgOSa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7530E866D0; Wed, 20 Sep 2023 17:30:20 +0200 (CEST)
-Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
- [IPv6:2607:f8b0:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B297586AF3; Wed, 20 Sep 2023 18:01:19 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59EB6807BC
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 17:30:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 808CC86AE6
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:01:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pf1-x42e.google.com with SMTP id
- d2e1a72fcca58-68fb98745c1so5315724b3a.1
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 08:30:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695223817; x=1695828617; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AWmsDHNz5KVPyQcrDC9AVH9USqnmsvsPIzAmth3ADiQ=;
- b=llZwY5R+8af6vrJ7bXNEmIZQJq5zcQp3ibhoGniDvz9h43Y0Iw8DVSLeeo4XaVLSwD
- ENIugWx91tSEnUL/WRiLs27KIMjfOJ05Yf43HkXBNELCDwvY8ZvMSpoKykD8oEorvIOi
- JcLv0Cs/DXoyRG/5pVPgPGG5LRgVfu4gmITDjwujSOC1aKBXksyR72Hib2Onqmz2vslC
- ERYIGXKxgJ9blsJgnED0E31jEeaWtn0SwvLK8/qUD77XbWeBKF8UnJy5FjZJ/kV+fJ1b
- Y+YD8p64Xf1KjBxqZmkUPzyDyzEuSrQZ09oMN32OvKDDpapMwMFp/fRT7hq3fo80BTc3
- DkwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695223817; x=1695828617;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AWmsDHNz5KVPyQcrDC9AVH9USqnmsvsPIzAmth3ADiQ=;
- b=w0NzjdcbLhn+PN/LyOXmUhgWGZP3hT7inOXTH5NRacxaUjivGWzZmONnhMxOFVfjeL
- 0OI1dqUWJuLWYFCXyHyOOAUbQjYNs1CXFaeMmYCMjMq35ftkuIoGlqOJZp0vJLZzvN9H
- boB2xx+TbnkOrabyi2FB0WTwoRCUs9yPVEV4sjPcF80xt4SQZ2RYw/TQK3s/1PsUlFM/
- PenN2wufIco/7ePp4RobzHSAslx7hYlgBGu9Dr5Tgf73hxVdALdNe+SmOfVo6zxM91lK
- sIAa+Yv+LGlPBSZhRDGELrU26yD+9l1aQ3zhaLaXP5UclbxHYD7LsxveDYLn54js7LV+
- uYyA==
-X-Gm-Message-State: AOJu0YwP0KW258fmATTFUjaNYq1QCAsziuqTSL4FhPeQHQTsxrFUTwzu
- kr+TiX5kWX9o0VmV0zPQ3e3/20VkPzHwLvA0KKFzrw==
-X-Google-Smtp-Source: AGHT+IFdAMeKQjk51naz3yvfrn/EkfE633eAeo4eZqt0b90XbStES5X9qedQJJJDL3FBM2nVq5j+/83TTlJCl+hX+ws=
-X-Received: by 2002:a05:6a20:258b:b0:135:4df7:f165 with SMTP id
- k11-20020a056a20258b00b001354df7f165mr3234550pzd.21.1695223816663; Wed, 20
- Sep 2023 08:30:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1695225661; x=1695830461; i=xypron.glpk@gmx.de;
+ bh=icILC+hdtDei2med+InneXvNjVZwkjo/XwLy8rCFj/M=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=TSlIgOSaMdibHRJKM1c4eazXochL5koygQJwGV7dHbnb74EfiSwlkINyFmS8eGTbMLL+pkOeYkP
+ 4pbv9YTt9ygV80ahBXlwX8Rhsrb7VzJPT8JOsDmXhHE+2/QO3J0qCHrhCmcfEnScT1nH6JfBW5Gvs
+ ZJCnkHkXfwNEcHWoTrb2x6nCXkzLBGQF5oP7Y4YEzxOyHpXZpR7dN4hCx8/hWHpEmDIIReJZ5MhMj
+ R2iqfCEY+f6VnpWKg+opqZccy92fkJpusYPZZu6WijIvMqq0sMQKQMYOtbLvCdFoWLRZ138SxwIeU
+ PdH31d1oC+hI3i7zRR/1LAsEhfTzCRwnfwFg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MNKm0-1r2IfH2A9K-00OpVi; Wed, 20
+ Sep 2023 18:01:01 +0200
+Message-ID: <77e477a1-e880-4954-b7de-a71b53fa16a6@gmx.de>
+Date: Wed, 20 Sep 2023 18:01:00 +0200
 MIME-Version: 1.0
-References: <20230920084121.1248590-1-masahisa.kojima@linaro.org>
-In-Reply-To: <20230920084121.1248590-1-masahisa.kojima@linaro.org>
-From: Raymond Mao <raymond.mao@linaro.org>
-Date: Wed, 20 Sep 2023 17:30:05 +0200
-Message-ID: <CAEfUkUKpNyU9h0Y16u0NnfJzSWcFVHAsiE_HdCQt+O7X8h65Rg@mail.gmail.com>
-Subject: Re: [PATCH v11] Boot var automatic management for removable medias
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [BUG] sandbox_defconfig u-boot -T crashes
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:niq3HifVsbF0Tq1rLrfsul66yNqe604bNhEwS0DrFGnDAiKj9a7
+ UH1a7KlvZ+VyelOrWMNwC/34R12gFojQJqJkypjzLwjhQD9rpULV//YtNu7P2TeB8HP+h6I
+ RBOkvN39cSwKR6f5yk1Ti3jo5zOBI+bLBZDtTXbNaFFmbLmaD04BtyP+mK82OE7tBcgkV6x
+ AfM2RRVwXI63FOwQ3U3dA==
+UI-OutboundReport: notjunk:1;M01:P0:+S+iPBPsor0=;t9Rq7rv+lFw7GxEjXLd/bhHHDJ8
+ PdDFaMg2r4wDHw2ZBXNz08K6jjVPKbJbi+/7v63t+kx7VDfgP5Jm+hMJAKk/wYaDc6Mw6r7NE
+ R2vFBzwmr229VzYNvVa9jJ1eTmpU86zQ9BRLV1U31RuZSt9mH9b5UtBe/MXTskEzwX2inYcuC
+ JTtnVd8L0UNC+fd628JvkXVqK0Nw34G703waRP/cMldtnTKe6I1OBkbgQK984GQiYQU/1GXaw
+ lDbNFkc+EJ1NcwyHr3j63PzMN6zQpLj0O3VdHgbvPfBOgeph6nBbbW+a4vs3adF+4Tn9fkJUW
+ 470QmQvDDblxz6r39Ka9wvbbC3RXkHaXRGZQl5GA6YHj/r/mC9Yted++F9MxPknTRHY0S4U61
+ w7hCahRrfAosTabiQrbPJiRzwtYgHQZOqOQJCVpK4/w94OgAaLYT8Msd3NPqrdz6v0JIJ7e6N
+ TH9wRsBy4k3ffz/Zbe7IH//h2/NgUUcTG20ZPHjB6um+85jeBnYr2+iEupRjI4nnLioWXE9eZ
+ KKbmRoCbJ/4azvV/mkkZzCFRdSEgvuT+2cvlC1eD3TLuaO1qpXn7uiRTfzf9o2iTa5K716+XC
+ 12FasvwvIL7NSOs/AtR2ecAO1Te/DIu7b3iA50UGcrE13FKzDk+pAV7uE2MY1Oir64cnvjekZ
+ GgLQBO06BMd5tPtOiAcYtoosrwMBpJ2QQAfFkRqKj30LM1FpgRNZ7uq8oO7r1vvUH/Uw7GzMb
+ fELI+3TNnTn1vNJ4rOEVIkryOZsnkQ3LNp762Qw/C15CgzJyZeKBeP/aIdyzyTRGCnBtNFsjK
+ 36Fdym2J6Aq4nchUtBi4u5AKHzVcsOEY0kVEXb0+ytTqIi8wNaatc4/qu/9L/VMYCS8g8F9Cm
+ z3jBNBmMU61GGmad5LsF17LDXWrW2/WLAWgsH9pRSh45qFoxxDQ+vSxNJQ9AsOHTP9h50WWx6
+ yNIGzCnqShlmXf3K7c+EBIYM7LQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,13 +84,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Masahisa,
+Hello Simon,
 
-Thanks for spending time on this test failure! I am not sure why this
-cannot be reproduced in my end, but I totally agree with the rationale you
-analyzed - my previous patch will just add boot options whenever a media is
-probed.
-Thanks for adding the changes into the pytest.
+I have built sandbox_defconfig using origin/master
+(b9b83a86f0e8 ("Merge branch 'master' of
+https://source.denx.de/u-boot/custodians/u-boot-sh"))
+on Ubuntu 23.10.
 
-Regards,
-Raymond
+Running ./u-boot -T leads to a crash:
+
+#9  0x00007ffff7a28189 in __libc_start_main_impl (main=3D0x555555591540
+<main>, argc=3D2, argv=3D0x7fffffffd918, init=3D<optimized out>,
+fini=3D<optimized out>, rtld_fini=3D<optimized out>,
+     stack_end=3D0x7fffffffd908) at ../csu/libc-start.c:360
+360     in ../csu/libc-start.c
+(gdb)
+#8  0x00007ffff7a280d0 in __libc_start_call_main
+(main=3Dmain@entry=3D0x555555591540 <main>, argc=3Dargc@entry=3D2,
+argv=3Dargv@entry=3D0x7fffffffd918)
+     at ../sysdeps/nptl/libc_start_call_main.h:58
+58      ../sysdeps/nptl/libc_start_call_main.h: No such file or directory.
+(gdb)
+#7  0x0000555555591e19 in sandbox_main (argc=3D2, argv=3D0x7fffffffd918) a=
+t
+arch/sandbox/cpu/start.c:557
+557             board_init_r(gd->new_gd, 0);
+(gdb)
+#6  board_init_r (new_gd=3D<optimized out>, dest_addr=3Ddest_addr@entry=3D=
+0)
+at common/board_r.c:818
+818             if (initcall_run_list(init_sequence_r))
+(gdb)
+#5  0x00005555555d961e in initcall_run_list
+(init_sequence=3D0x5555558e1860 <init_sequence_r>) at include/initcall.h:4=
+6
+46                      ret =3D (*init_fnc_ptr)();
+(gdb)
+#4  0x00005555555e695d in stdio_add_devices () at common/stdio.c:332
+332                     for (ret =3D
+uclass_first_device_check(UCLASS_KEYBOARD, &dev);
+(gdb)
+#3  0x00005555555f9e4f in uclass_first_device_check (devp=3D<optimized
+out>, id=3DUCLASS_KEYBOARD) at drivers/core/uclass.c:644
+644             return device_probe(*devp);
+(gdb)
+#2  0x00005555555f7235 in device_probe (dev=3D0x1ac9c800) at
+drivers/core/device.c:583
+
+583                     ret =3D drv->probe(dev);
+(gdb)
+#1  0x000055555560ae09 in input_stdio_register (dev=3D0x1aead870) at
+drivers/input/input.c:674
+674             if (!error && strcmp(env_get("stdin"), dev->name) =3D=3D 0=
+) {
+(gdb)
+#0  strcmp (cs=3D0x1 <error: Cannot access memory at address 0x1>,
+ct=3D0x1aead879 "ros-ec-keyb", ct@entry=3D0x1aead878 "cros-ec-keyb") at
+lib/string.c:217
+217                     ret =3D a - b;
+
+
+env_get("stdin") returns NULL here and should not be used without checking=
+.
+
+Best regards
+
+Heinrich
