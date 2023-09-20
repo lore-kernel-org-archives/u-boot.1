@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51A4BCE79AD
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:43:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57C9ECE79AD
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:43:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3287F86C4A;
+	by phobos.denx.de (Postfix) with ESMTP id 93DB886C7E;
 	Wed, 20 Sep 2023 05:42:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Mb7yhyGq";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="NuPws52W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D701E86A38; Wed, 20 Sep 2023 05:28:01 +0200 (CEST)
+ id 6E92A86A84; Wed, 20 Sep 2023 05:28:07 +0200 (CEST)
 Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2062d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::62d])
+ (mail-bn8nam12on20609.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5b::609])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0712586C15
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 05:27:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 26A7486BAC
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 05:28:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YZ08R857YOKvvv8EYBAKDgWT3BrdJkD3O5IaocGHRJavs6c6mpgVtfHT0Q6iiUAtnPUB2rYHDjPkbt9edfy32sHEio+6KOgQXSuwCXZ3Mn5mXfKW5XpYLWb4d/1sR/4MJ5A5JK7pvpxrjca0O/7QcMLXqKmWl/xfXJWoWF6oSir0ZbsYYluMCEDi/zGvttapsk0x22BKm458fA3/GSQ5J+tUFWYnzki6wju8nPnEIa5/R/ewSwAx5krPepVSncxN2FZeTzr/67wv+Uh0oSbxvKkukzdXQ2wOjeKTS8lau3ser3sZRbquN9x1NUrltIuM3Y8QQIfsNnzg6fEVO4u9CA==
+ b=G1vZ6n4l20ghbhyrXNT1nRNg5StOhMO9C96zzQdIqU1JY6pa+jH+QFCP0Po/zveXsBSsxN/CotzZos2kX40wW2/n3fSrfIcqOplcWNNjGHS0ElQW5L/MKhjBACt7mNSda7ivBB3sLcozgmPCcGTlQUE81FiFEy/tk7Geo21EYrtCnSm6sHAz56q0QGwxz+zJYmTsLEKBvIc4Cl9pdUgMYITZTl5jZiGFCPGplnU7OxkERvf5CL/zvSEfdEoDSBD0Ce8WmP9opwSR8etZmrzvzQQWn2RO93VqlQQYZ97QgppTzF/4H2rgWJpToIFXpYnb5Lk7ypCpSH3pH50Thn2BdQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+01UZCMNsz+8xbnwMQkfGV/yfqTfBN0UHf+xih7z/1I=;
- b=bJgzEMLC/F8oTbJDetO6Jf4xEEwbwATDZmOeIfNEAg5AdbCqYzHVPRmIuhDblM46MuUdOTtRIWbxSar8eXMZEYz37wAWo/WCSaGBlmT5Ptx6M7bNEFDd5Z/KQHg+XbzIY3zTF2tIkyAbx0XgCO+DRRPncSq4US3EXQFc7qU7G5GVuF72uA4w17xG+qRQP0KUFwizkoDKFtcF9UJpqM+LP4UJxjAggcgQXNi2jeljw1CWeRWcDBVpyPbqKVcs2ds7dGtv62vR1ETLJCucOqroNrOuwSChEqhVz0jBpqiEZZJgC9/WhXMWyjMGqnV8yOHKxlD9VsntkSJvY0ean+xIGQ==
+ bh=toiErde3x/v17V1JxxMqhK4SDIMOq8Lv3J0FWybWIaA=;
+ b=Tq9+j7j/cAzaTNKs77yCpf1WRWDz9qmsUGPQJ+XbXbLlBkj3djLSkKyL5rX66Ofje184BJCi4kD4P+9n/TgKnLlvO7sTVLCN6cfbYe8hcP7tb2X0fSd+TzVK48CEx4N3K2b/jRMeRNNrEeksU/RFvDZuTL2HC4JZwrvvFVOsGxgXVjbJFkqIoKNfC/TaZKZQJgszR2cQFqy5GGKIxw1xzwQemZHMpUSPbIFwd7xWZpuZY3+q9DMaAWasMAKfN3+FPBv+ebL+Est8UBUczvvTlx4r65ztfkS53NCv7NTwzKLSNXzRa7Jg5g23kAic/V+r4yNMWO5uoEL3VX0w/vcaCg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+01UZCMNsz+8xbnwMQkfGV/yfqTfBN0UHf+xih7z/1I=;
- b=Mb7yhyGq/bJ59BNBcUJli0FfyFK1GUvGb5TB2z79Pc9fsNBY/TQVqk83Z78UfeotkEE99zeRavzMUGzCWN0G+GR/ks7grUcq++eBUpbV5H9grhd1NGtWsBtbfzomV0eZCtY1yzLv4gthTuVsFcObixc0ESGDpXOg+iyKOU3+ALQ=
-Received: from DS7PR03CA0233.namprd03.prod.outlook.com (2603:10b6:5:3ba::28)
- by CY5PR12MB6130.namprd12.prod.outlook.com (2603:10b6:930:26::12) with
+ bh=toiErde3x/v17V1JxxMqhK4SDIMOq8Lv3J0FWybWIaA=;
+ b=NuPws52WvkJ37m2a+3NFzo0rGer6j9nn+VO6JXnE6ljuRNBShgUwZaAuusYPuoUs+enzqBfzEiyTJDS3OvbHMU/2XU7Y+1wbHEcYeHirk2wbSRyBOSTRn5IsKVb+M/UL7E9FbXqOjoV6nveZdJ97mKopW+PT82FXtcfKrSt0YhU=
+Received: from DM6PR02CA0059.namprd02.prod.outlook.com (2603:10b6:5:177::36)
+ by MW4PR12MB8610.namprd12.prod.outlook.com (2603:10b6:303:1ef::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.27; Wed, 20 Sep
- 2023 03:27:54 +0000
-Received: from DS1PEPF0001709A.namprd05.prod.outlook.com
- (2603:10b6:5:3ba:cafe::8) by DS7PR03CA0233.outlook.office365.com
- (2603:10b6:5:3ba::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.28; Wed, 20 Sep
+ 2023 03:27:57 +0000
+Received: from DS1PEPF0001709B.namprd05.prod.outlook.com
+ (2603:10b6:5:177:cafe::93) by DM6PR02CA0059.outlook.office365.com
+ (2603:10b6:5:177::36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.29 via Frontend
- Transport; Wed, 20 Sep 2023 03:27:54 +0000
+ Transport; Wed, 20 Sep 2023 03:27:57 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,48 +59,51 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
 Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS1PEPF0001709A.mail.protection.outlook.com (10.167.18.104) with Microsoft
+ DS1PEPF0001709B.mail.protection.outlook.com (10.167.18.105) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.19 via Frontend Transport; Wed, 20 Sep 2023 03:27:54 +0000
+ 15.20.6792.20 via Frontend Transport; Wed, 20 Sep 2023 03:27:57 +0000
 Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 19 Sep
- 2023 22:27:33 -0500
+ 2023 22:27:56 -0500
 Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
  (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Tue, 19 Sep 2023 22:27:32 -0500
+ Transport; Tue, 19 Sep 2023 22:27:54 -0500
 From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <sjg@chromium.org>, <git@xilinx.com>
-Subject: [PATCH v6 0/2] Add support to fetch baudrate from dtb
-Date: Wed, 20 Sep 2023 08:57:23 +0530
-Message-ID: <20230920032725.21748-1-venkatesh.abbarapu@amd.com>
+CC: <michal.simek@amd.com>, <sjg@chromium.org>, <git@xilinx.com>, "Algapally
+ Santosh Sagar" <santoshsagar.algapally@amd.com>
+Subject: [PATCH v6 2/2] serial: zynqmp: Fetch baudrate from dtb and update
+Date: Wed, 20 Sep 2023 08:57:25 +0530
+Message-ID: <20230920032725.21748-3-venkatesh.abbarapu@amd.com>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20230920032725.21748-1-venkatesh.abbarapu@amd.com>
+References: <20230920032725.21748-1-venkatesh.abbarapu@amd.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001709A:EE_|CY5PR12MB6130:EE_
-X-MS-Office365-Filtering-Correlation-Id: ac2bdfd7-9561-4cd8-e9c7-08dbb98993ce
+X-MS-TrafficTypeDiagnostic: DS1PEPF0001709B:EE_|MW4PR12MB8610:EE_
+X-MS-Office365-Filtering-Correlation-Id: 889aedf2-4483-4b1a-ca2d-08dbb9899575
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 32+6HXeNlkMUOdkMi+4pTyCt1Ur9r7++dEuq//sD2d9fH6NzZ6Mr6OHCMQoNr/YxHNuqBuWHtjBKBRTEbSq5mJil8HIOfTvPXWi1TYU2GeNrnre/ZJflk9pfm3IfwN3svjhAqc1BEC5vY+T2aCC84B0/gaWn15JylgzGJrzFL1cGl45Hd7ESeON5trRmE50IbpmCUOe4ZZ2SXHQtYsdEVzQoywYX2hX0xTIqSBS5iO0UEqEofWomngJe9EAnDNJoPDuM/Q9YPinvrydOHNb6r6SzFy4oVuMGZew/W8HQdtDnswPtWYYFSTqEOhVpixg3KCKCNWJ62mwhICOm+AdSeUY2bYSPTMobZe6v3IsUU39SIW8aL5758toedy1s9XTjgVbACSkUpHa15S1TkeKcmuAfQEa4JsV07vEU+i1CIVJ/gCCQvNe60TbK9WccG7YjDkG8z7dLMt/TOUGlsoxJsDZgluiw5PmJOs4q3wI6kvHum/oFUbNz70ScCjiuQ9Bp+b6M1ygEaatIgSCl52chNhXNuntMcBh98pqI8LoetZUIjU/OUJuGcHk3XcAz7qEvW88iXsA466bIVZ6l4E1vkFr6LMdI+8p4YmPTEp005IwhSSLiPrUaCHzXXU/lumS0fvYAdZSr0QnBVcCot4FX98FBMnqkArPffvaXg6QBrHOYp0efsAd5BfnTAPVyy1AT0E0gYMtN1r7Co/1PgeLlURGL3c1Hlf+41f6G+k0dUuFXA21s5LGRlhS8HqaI0LX5o719HutdTDTtbN3oeByZow==
+X-Microsoft-Antispam-Message-Info: 8xR+WSh7KDcSpTe1hiHFJui33etubvtVUdBoNGLc6ABNPzb+tXuxX/U1KLiaPatXR1ca2XPUmYoi7VHLhTts2ZcrYXKnikI2wkFW6X33CkoToD++XFb9xCKpdLDrWeiJ+A/GMqUgHTARgzyuO53p0fGQpKw03C2kgfTz8cbUOJZulufgBzuQZ256HJZdyyj6geIjiOqMGtLWaYixsMF6EkpJP2Cut4KuGejaULiLHGfNn8gVUJPn+cXh5MuJQqu/P9fN24R7uKocw8X5nodIoUrrnCYcm3/aJgBto7UgJ0LTHIJ0MwnQIlIPue+jHJyrIoKxcNQPRCQ1AshkkoxdOtGI200QXivDUKahv3A/cQMJnaQImrf3s4m5QWt02/yx701D3JsMh6yN+t8APhe4DEnL+o84QVK7PLEGmpZAHwRW4ntvXKIRM87imaHyUmdvIBd8xMR9IxNjsfMqbAYKAtIdm0FpEvT121qYIPmyx4j/bH54DdJXhQhfx1VzUrsD887irGgzEtPYRJrsp9kWfaEb8sW5jGZc7gvJt21ae5RKF8f4o9dMLPzRT0VcEzp4yLjFnlKn6XJukpDOE+OM5YfQqfgvr82UEofnL8PWc6eToFJXRcIBOIIHXmAnQp0OdXYu+RY166F4op0rBEVZaPLVhcIEjKsxI3f5X8xr9dpL/ek56NV/Cyd27+ReTzU2K2We465PX66Q57j9CWfte56d9Ej1hZL8qWGbqkoEG2K44Vg+cMmHoYrOlznonapoxvw7QaREofXz9E8CY/HBGw==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(136003)(376002)(396003)(346002)(1800799009)(186009)(82310400011)(451199024)(40470700004)(46966006)(36840700001)(1076003)(107886003)(2616005)(26005)(426003)(336012)(5660300002)(8936002)(8676002)(4326008)(356005)(82740400003)(36860700001)(83380400001)(47076005)(478600001)(6666004)(81166007)(40480700001)(316002)(6916009)(70586007)(70206006)(54906003)(41300700001)(86362001)(36756003)(2906002)(40460700003)(36900700001);
+ SFS:(13230031)(4636009)(136003)(346002)(39860400002)(396003)(376002)(82310400011)(186009)(1800799009)(451199024)(40470700004)(36840700001)(46966006)(6666004)(478600001)(26005)(1076003)(426003)(83380400001)(47076005)(15650500001)(4326008)(2616005)(336012)(2906002)(70206006)(70586007)(8676002)(54906003)(5660300002)(6916009)(8936002)(316002)(41300700001)(40460700003)(40480700001)(36860700001)(86362001)(82740400003)(36756003)(356005)(81166007)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2023 03:27:54.3745 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac2bdfd7-9561-4cd8-e9c7-08dbb98993ce
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Sep 2023 03:27:57.1458 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 889aedf2-4483-4b1a-ca2d-08dbb9899575
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709A.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709B.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6130
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB8610
 X-Mailman-Approved-At: Wed, 20 Sep 2023 05:42:43 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,62 +121,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In this patch series
-- Add support in Kconfig and convert for armada boards
-- Fetch baudrate from the dtb and update
+From: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
 
-Changes in v6:
-- Changed Kconfig OF_SERIAL_DT_BAUD to OF_SERIAL_BAUD.
-- Added IS_ENABLED() in place of #ifdef CONFIG_OF_SERIAL_AUD
+The baudrate configured in .config is taken by default by serial. If
+change of baudrate is required then the .config needs to changed and
+u-boot recompilation is required or the u-boot environment needs to be
+updated.
 
-Changes in v5:
-- Adding DEFAULT_ENV_IS_RW Kconfig in missing files
-- Updating DEFAULT_ENV_IS_RW to CONFIG_DEFAULT_ENV_IS_RW
+To avoid this, support is added to fetch the baudrate directly from the
+device tree file and update.
+The serial, prints the log with the configured baudrate in the dtb.
+The commit c4df0f6f315c ("arm: mvebu: Espressobin: Set default value for
+$fdtfile env variable") is taken as reference for changing the default
+environment variable.
 
-Changes in v4:
-- Moved SERIAL_DT_BAUD to another patch
-- Added doc file for fetching serial baudrate from DT.
-- Changed Kconfig SERIAL_DT_BAUD to OF_SERIAL_DT_BAUD
-- Added function docs wherever required.
-- Moved changes from fdtdec api to ofnode
-- Changed serial_get_valid_baudrate to check_valid_baudrate
-- Added function fetch_baud_from_dtb to fetch baud from DT
-- Used dectoul() for parsing baudrate
+The default environment stores the default baudrate value, When default
+baudrate and dtb baudrate are not same glitches are seen on the serial.
+So, the environment also needs to be updated with the dtb baudrate to
+avoid the glitches on the serial.
 
-Changes in v3:
-- Add SERIAL_DT_BAUD to Kconfig
-- Moved DEFAULT_ENV_IS_RW to Kconfig also updated armada files
-- Moved filler changes from zynqmp.h to generic file env_default.h
-- Removed ENV_RW_FILLER and added padding in the generic file env_default.h.
-- Print baudrate parameter properly when SERIAL_DT is enabled.
-
-Changes in v2:
-- Changed to #ifdef from #if CONFIG_IS_ENABLED to enable patching in spl.
-- Added SPL_ENV_SUPPORT dependency in SERIAL_DT_BAUD to allow SPL compilation.
-- Moved DEFAULT_ENV_IS_RW to Kconfig also updated armada files
-- Moved ENV_RW_FILLER to generic file env_default.h.
-- Increased the ENV_RW_FILLER padding to support 8000000 baud.
-
-Algapally Santosh Sagar (2):
-  configs: Add support in Kconfig and convert for armada boards
-  serial: zynqmp: Fetch baudrate from dtb and update
-
- configs/eDPU_defconfig                      |  1 +
- configs/mvebu_db-88f3720_defconfig          |  1 +
- configs/mvebu_espressobin-88f3720_defconfig |  1 +
- configs/uDPU_defconfig                      |  1 +
- doc/README.serial_dt_baud                   | 41 ++++++++++++++++++++
- drivers/core/ofnode.c                       | 18 +++++++++
- drivers/serial/Kconfig                      | 15 +++++++
- drivers/serial/serial-uclass.c              | 43 +++++++++++++++++++++
- include/configs/mvebu_armada-37xx.h         |  1 -
- include/dm/ofnode.h                         | 14 ++++++-
- include/env_default.h                       |  8 +++-
- include/env_internal.h                      |  2 +-
- include/serial.h                            | 15 +++++++
- 13 files changed, 155 insertions(+), 6 deletions(-)
+Signed-off-by: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ doc/README.serial_dt_baud      | 41 ++++++++++++++++++++++++++++++++
+ drivers/core/ofnode.c          | 18 ++++++++++++++
+ drivers/serial/Kconfig         |  9 +++++++
+ drivers/serial/serial-uclass.c | 43 ++++++++++++++++++++++++++++++++++
+ include/dm/ofnode.h            | 14 +++++++++--
+ include/env_default.h          |  6 ++++-
+ include/serial.h               | 15 ++++++++++++
+ 7 files changed, 143 insertions(+), 3 deletions(-)
  create mode 100644 doc/README.serial_dt_baud
 
+diff --git a/doc/README.serial_dt_baud b/doc/README.serial_dt_baud
+new file mode 100644
+index 0000000000..f8768d0e1b
+--- /dev/null
++++ b/doc/README.serial_dt_baud
+@@ -0,0 +1,41 @@
++Fetch serial baudrate from DT
++-----------------------------
++
++To support fetching of baudrate from DT, the following is done:-
++
++The baudrate configured in Kconfig symbol CONFIG_BAUDRATE is taken by default by serial.
++If change of baudrate is required then the Kconfig symbol CONFIG_BAUDRATE needs to
++changed and U-Boot recompilation is required or the U-Boot environment needs to be updated.
++
++To avoid this, add support to fetch the baudrate directly from the device tree file and
++update the environment.
++
++The default environment stores the default baudrate value. When default baudrate and dtb
++baudrate are not same glitches are seen on the serial.
++So, the environment also needs to be updated with the dtb baudrate to avoid the glitches on
++the serial which is enabled by OF_SERIAL_BAUD.
++
++The Kconfig SPL_ENV_SUPPORT needs to be enabled to allow patching in SPL.
++
++The Kconfig DEFAULT_ENV_IS_RW which is enabled by OF_SERIAL_BAUD with making the environment
++writable.
++
++The ofnode_read_baud() function parses and fetches the baudrate value from the DT. This value
++is validated and updated to baudrate during serial init. Padding is added at the end of the
++default environment and the dt baudrate is updated with the latest value.
++
++Example:-
++
++The serial port options are of the form "bbbbpnf", where "bbbb" is the baud rate, "p" is parity ("n", "o", or "e"),
++"n" is number of bits, and "f" is flow control ("r" for RTS or omit it). Default is "115200n8".
++
++chosen {
++		bootargs = "earlycon console=ttyPS0,115200 clk_ignore_unused root=/dev/ram0 rw init_fatal_sh=1";
++		stdout-path = "serial0:115200n8";
++	};
++
++From the chosen node, stdout-path property is obtained as string.
++
++	stdout-path = "serial0:115200n8";
++
++The string is parsed to get the baudrate 115200. This string is converted to integer and updated to the environment.
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index 8df16e56af..42f51ca93c 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -895,6 +895,24 @@ ofnode ofnode_get_chosen_node(const char *name)
+ 	return ofnode_path(prop);
+ }
+ 
++int ofnode_read_baud(void)
++{
++	const char *str, *p;
++	u32 baud;
++
++	str = ofnode_read_chosen_string("stdout-path");
++	if (!str)
++		return -EINVAL;
++
++	/* Parse string serial0:115200n8 */
++	p = strchr(str, ':');
++	if (!p)
++		return -EINVAL;
++
++	baud = dectoul(p + 1, NULL);
++	return baud;
++}
++
+ const void *ofnode_read_aliases_prop(const char *propname, int *sizep)
+ {
+ 	ofnode node;
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index 4d27034c3f..7fdf600dc5 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -24,6 +24,15 @@ config BAUDRATE
+ 	  in the SPL stage (most drivers) or for choosing a default baudrate
+ 	  in the absence of an environment setting (serial_mxc.c).
+ 
++config OF_SERIAL_BAUD
++	bool "Fetch serial baudrate from device tree"
++	depends on DM_SERIAL && SPL_ENV_SUPPORT
++	select DEFAULT_ENV_IS_RW
++	help
++	  Select this to enable fetching and setting of the baudrate
++	  configured in the DT. Replace the default baudrate with the DT
++	  baudrate and also set it to the environment.
++
+ config DEFAULT_ENV_IS_RW
+ 	bool "Make default environment as writable"
+ 	help
+diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
+index 067fae2614..e5304b397d 100644
+--- a/drivers/serial/serial-uclass.c
++++ b/drivers/serial/serial-uclass.c
+@@ -154,12 +154,55 @@ static void serial_find_console_or_panic(void)
+ }
+ #endif /* CONFIG_SERIAL_PRESENT */
+ 
++int check_valid_baudrate(int baud)
++{
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(baudrate_table); ++i) {
++		if (baud == baudrate_table[i])
++			return 0;
++	}
++
++	return -EINVAL;
++}
++
++int fetch_baud_from_dtb(void)
++{
++	int baud_value, ret;
++
++	baud_value = ofnode_read_baud();
++	ret = check_valid_baudrate(baud_value);
++	if (ret)
++		return ret;
++
++	return baud_value;
++}
++
+ /* Called prior to relocation */
+ int serial_init(void)
+ {
+ #if CONFIG_IS_ENABLED(SERIAL_PRESENT)
+ 	serial_find_console_or_panic();
+ 	gd->flags |= GD_FLG_SERIAL_READY;
++
++	if (IS_ENABLED(CONFIG_OF_SERIAL_BAUD)) {
++		int ret = 0;
++		char *ptr = &default_environment[0];
++
++		/*
++		 * Fetch the baudrate from the dtb and update the value in the
++		 * default environment.
++		 */
++		ret = fetch_baud_from_dtb();
++		if (ret != -EINVAL && ret != -EFAULT) {
++			gd->baudrate = ret;
++
++			while (*ptr != '\0' && *(ptr + 1) != '\0')
++				ptr++;
++			ptr += 2;
++			sprintf(ptr, "baudrate=%d", gd->baudrate);
++		}
++	}
+ 	serial_setbrg();
+ #endif
+ 
+diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+index 0f38b3e736..f0854cc28d 100644
+--- a/include/dm/ofnode.h
++++ b/include/dm/ofnode.h
+@@ -942,12 +942,22 @@ const char *ofnode_read_chosen_string(const char *propname);
+ ofnode ofnode_get_chosen_node(const char *propname);
+ 
+ /**
+- * ofnode_read_aliases_prop() - get the value of a aliases property
++ * ofnode_read_baud() - get the baudrate from string value of chosen property
+  *
+- * This looks for a property within the /aliases node and returns its value
++ * This looks for stdout-path property within the /chosen node and parses its
++ * value to return baudrate.
+  *
+  * This only works with the control FDT.
+  *
++ * Return: baudrate value if found, else -ve error code
++ */
++int ofnode_read_baud(void);
++
++/**
++ * ofnode_read_aliases_prop() - get the value of a aliases property
++ *
++ * This looks for a property within the /aliases node and returns its value
++ *
+  * @propname: Property name to look for
+  * @sizep: Returns size of property, or `FDT_ERR_...` error code if function
+  *	returns NULL
+diff --git a/include/env_default.h b/include/env_default.h
+index 227cad7c34..2ca4a087d3 100644
+--- a/include/env_default.h
++++ b/include/env_default.h
+@@ -42,7 +42,7 @@ const char default_environment[] = {
+ #if defined(CONFIG_BOOTDELAY)
+ 	"bootdelay="	__stringify(CONFIG_BOOTDELAY)	"\0"
+ #endif
+-#if defined(CONFIG_BAUDRATE) && (CONFIG_BAUDRATE >= 0)
++#if !defined(CONFIG_OF_SERIAL_BAUD) && defined(CONFIG_BAUDRATE) && (CONFIG_BAUDRATE >= 0)
+ 	"baudrate="	__stringify(CONFIG_BAUDRATE)	"\0"
+ #endif
+ #ifdef	CONFIG_LOADS_ECHO
+@@ -118,6 +118,10 @@ const char default_environment[] = {
+ #endif
+ #ifdef	CFG_EXTRA_ENV_SETTINGS
+ 	CFG_EXTRA_ENV_SETTINGS
++#endif
++#ifdef CONFIG_OF_SERIAL_BAUD
++	/* Padding for baudrate at the end when environment is writable */
++	"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+ #endif
+ 	"\0"
+ #else /* CONFIG_USE_DEFAULT_ENV_FILE */
+diff --git a/include/serial.h b/include/serial.h
+index 42bdf3759c..31a97ca9cf 100644
+--- a/include/serial.h
++++ b/include/serial.h
+@@ -337,6 +337,21 @@ int serial_setconfig(struct udevice *dev, uint config);
+  */
+ int serial_getinfo(struct udevice *dev, struct serial_device_info *info);
+ 
++/**
++ * check_valid_baudrate() - Check whether baudrate is valid or not
++ *
++ * @baud: baud rate to check
++ * Return: 0 if OK, -ve on error
++ */
++int check_valid_baudrate(int baud);
++
++/**
++ * fetch_baud_from_dtb() - Fetch the baudrate value from DT
++ *
++ * Return: baudrate if OK, -ve on error
++ */
++int fetch_baud_from_dtb(void);
++
+ void atmel_serial_initialize(void);
+ void mcf_serial_initialize(void);
+ void mpc85xx_serial_initialize(void);
 -- 
 2.17.1
 
