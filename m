@@ -4,64 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F67CCE79CE
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 12:20:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BFD5CE79D0
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 12:42:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA1B186AFE;
-	Wed, 20 Sep 2023 14:20:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A60E867D6;
+	Wed, 20 Sep 2023 14:42:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YPpBtE5Y";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0020D86AE6; Wed, 20 Sep 2023 14:20:31 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9808286B09
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 14:20:29 +0200 (CEST)
+ id 02A0F86A30; Wed, 20 Sep 2023 14:42:37 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id DB461867D6
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 14:42:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38KCKPlQ016859;
- Wed, 20 Sep 2023 07:20:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695212425;
- bh=GRlvbLQrgR1e8jaDCLlmulgkXBEGgkZAm4Mw120RkS8=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=YPpBtE5YSdn5QLiSkJrm8lHN9iWDfT/YInc97csdSTts/zTt7UlDtoMImUA6tkeK7
- y7ZcexknaVycIC4qlukx9Aa1gHlsULt3UqCoPxPpFQWYnHLTrEvUBLXgHrU4p9xR6v
- InwSQQc+pC7RAUF+q9w+i6sVvVFYZoNaZ4Dbolrs=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38KCKPdD035400
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 20 Sep 2023 07:20:25 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 20
- Sep 2023 07:20:25 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 20 Sep 2023 07:20:25 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38KCKPxn025775;
- Wed, 20 Sep 2023 07:20:25 -0500
-Date: Wed, 20 Sep 2023 07:20:25 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Udit Kumar <u-kumar1@ti.com>
-CC: <vigneshr@ti.com>, <seanga2@gmail.com>, <u-boot@lists.denx.de>,
- <lukma@denx.de>, <bb@ti.com>, Keerthy <j-keerthy@ti.com>
-Subject: Re: [PATCH v3] clk: ti: Notify AVS driver upon setting clock rate
-Message-ID: <20230920122025.nr2dsnf663ox76p7@outdoors>
-References: <20230920120256.2901860-1-u-kumar1@ti.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,162,1694703600"; d="scan'208";a="176658332"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 20 Sep 2023 21:42:31 +0900
+Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.83])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 1ABE8433CFB6;
+ Wed, 20 Sep 2023 21:42:28 +0900 (JST)
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Hai Pham <hai.pham.ud@renesas.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 00/16] Add support for the Renesas RZ/G2L SMARC EVK
+Date: Wed, 20 Sep 2023 13:41:56 +0100
+Message-Id: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230920120256.2901860-1-u-kumar1@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,127 +55,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17:32-20230920, Udit Kumar wrote:
-> AVS is enabled at R5 SPL stage, on few platforms like J721E
-> and J7200 clk-k3 is used instead if clk-sci driver.
-> 
-> Add support in clk-k3 driver as well to notify AVS driver
-> on setting clock rate so that voltage is changed accordingly.
-> 
-> Also add support in clk-sci driver to do AVS notification
-> before or after clock setting based upon current rate and new clock
-> rate.
-> 
-> Cc: Keerthy <j-keerthy@ti.com>
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-> ---
-> Boot logs with v3:
-> https://gist.github.com/uditkumarti/12a753a822c0aec9ca3028648c29dfa8
-> 
-> Change log:
-> Change in v3:
-> - Updated AVS notification before/after clock setting based upon
-> new and current rate
-> - Added modifed notification in clk-sci driver as well
-> - v2 link
-> https://lore.kernel.org/all/20230919140408.2608521-1-u-kumar1@ti.com/
-> 
-> Changes in v2:
-> - Kept clk-sci.c as is because this is used by
-> AM64 and AM65 platforms
-> - v1 link
-> https://lore.kernel.org/all/20230919060649.2518147-1-u-kumar1@ti.com
-> 
->  drivers/clk/ti/clk-k3.c  | 11 +++++++++++
->  drivers/clk/ti/clk-sci.c | 11 ++++++++---
->  2 files changed, 19 insertions(+), 3 deletions(-)
-> 
-> diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
-> index ba925fa3c4..e8d8f8adf3 100644
-> --- a/drivers/clk/ti/clk-k3.c
-> +++ b/drivers/clk/ti/clk-k3.c
-> @@ -11,6 +11,7 @@
->  #include <errno.h>
->  #include <soc.h>
->  #include <clk-uclass.h>
-> +#include <k3-avs.h>
->  #include "k3-clk.h"
->  
->  #define PLL_MIN_FREQ	800000000
-> @@ -242,7 +243,13 @@ static ulong ti_clk_set_rate(struct clk *clk, ulong rate)
->  	const struct clk_ops *ops;
->  	ulong new_rate, rem;
->  	ulong diff, new_diff;
-> +	int set_avs_after_clock = 1;
+These patches add initial support for the RZ/G2L SMARC Evaluation board
+kit (EVK), consisting of the RZ/G2L System-on-Module (SOM) based on the
+R9A07G044L2 SoC, and a common SMARC carrier board. Support is included
+for the CPG (clock & reset control module), PFC (pinctrl & gpio module),
+SDHI (eMMC & SD card interfaces) & SCIF (serial port) modules. Enough
+functionality is included to boot a modern Linux kernel from the eMMC or
+SD card interfaces.
 
-int freq_scale_up = rate >= ti_clk_get_rate(clk) ? 1 : 0;
+The first patch in the series is an updated version of a patch I've sent
+previously [1]. It's included here as the later patch to enable RZ/G2L
+SCIF support depends on it.
 
->  
-> +	if (rate >= ti_clk_get_rate(clk) && IS_ENABLED(CONFIG_K3_AVS0)) {
+Further work will follow in time to add support for other interfaces on
+the RZ/G2L (such as Ethernet) and other SoCs in the RZ/G2L family
+(including the RZ/G2UL, RZ/G2LC, RZ/V2L & RZ/Five).
 
-I think it is better to put IS_ENABLED() as the first check.
-See other usage:
-$ git grep IS_ENABLED . |grep if|grep '&&'
+[1]: https://lore.kernel.org/all/20230822181025.339748-2-paul.barker.ct@bp.renesas.com/
 
-> +		k3_avs_notify_freq(data->map[clk->id].dev_id,
-> +				   data->map[clk->id].clk_id, rate);
-> +		set_avs_after_clock = 0;
-> +	}
->  	/*
->  	 * We must propagate rate change to parent if current clock type
->  	 * does not allow setting it.
-> @@ -339,6 +346,10 @@ static ulong ti_clk_set_rate(struct clk *clk, ulong rate)
->  		}
->  	}
->  
-> +	if (set_avs_after_clock && IS_ENABLED(CONFIG_K3_AVS0))
-> +		k3_avs_notify_freq(data->map[clk->id].dev_id,
-> +				   data->map[clk->id].clk_id, rate);
-> +
->  	return new_rate;
->  }
->  
-> diff --git a/drivers/clk/ti/clk-sci.c b/drivers/clk/ti/clk-sci.c
-> index 74df5a397b..1926843dcc 100644
-> --- a/drivers/clk/ti/clk-sci.c
-> +++ b/drivers/clk/ti/clk-sci.c
-> @@ -91,12 +91,14 @@ static ulong ti_sci_clk_set_rate(struct clk *clk, ulong rate)
->  	const struct ti_sci_handle *sci = data->sci;
->  	const struct ti_sci_clk_ops *cops = &sci->ops.clk_ops;
->  	int ret;
-> +	u8 set_avs_after_clock = 1;
->  
->  	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
->  
-> -#ifdef CONFIG_K3_AVS0
-> -	k3_avs_notify_freq(clk->id, clk->data, rate);
-> -#endif
-> +	if (rate >= ti_sci_clk_get_rate(clk) && IS_ENABLED(CONFIG_K3_AVS0)) {
-> +		k3_avs_notify_freq(clk->id, clk->data, rate);
-> +		set_avs_after_clock = 0;
-> +	}
->  
->  	ret = cops->set_freq(sci, clk->id, clk->data, 0, rate, ULONG_MAX);
->  	if (ret) {
-> @@ -104,6 +106,9 @@ static ulong ti_sci_clk_set_rate(struct clk *clk, ulong rate)
->  		return ret;
->  	}
->  
-> +	if (set_avs_after_clock && IS_ENABLED(CONFIG_K3_AVS0))
-> +		k3_avs_notify_freq(clk->id, clk->data, rate);
-> +
->  	return rate;
->  }
->  
-> -- 
-> 2.34.1
-> 
+Paul Barker (16):
+  serial: sh: Fix compile error when lacking HSCIF support
+  dt-bindings: Add RZ/G2L CPG bindings
+  dt-bindings: Add RZ/G2L PFC bindings
+  dt-bindings: Add RZ/G2L IRQC bindings
+  arm: rmobile: Add basic RZ/G2L family support
+  arm: rmobile: Add basic R9A07G044L SoC support
+  clk: renesas: Add RZ/G2L CPG driver
+  arm: rmobile: Restrict PINCTRL_PFC selection to R-Car gen3/gen4
+  pinctrl: renesas: Add RZ/G2L PFC driver
+  serial: sh: Add RZ/G2L SCIF support
+  mmc: renesas-sdhi: Initialize module on RZ/G2L
+  arm: rmobile: Include <asm/types.h> in header
+  arm: rmobile: Add CPU detection for RZ/G2L
+  arm: rmobile: Support RZ/G2L memory map
+  arm: dts: Import RZ/G2L SMARC EVK device tree
+  board: rzg2l: Add RZ/G2L SMARC EVK board
 
-First look - it looks fine, but note: these are two different patches.
-the clk-sci.c is a fix for an existing implementation and clk-k3.c is a
-new feature addition. please don't mix the two.
+ arch/arm/dts/Makefile                         |    3 +
+ arch/arm/dts/r9a07g044.dtsi                   | 1273 +++++++++++++++++
+ arch/arm/dts/r9a07g044l2-smarc.dts            |   18 +
+ arch/arm/dts/r9a07g044l2.dtsi                 |   13 +
+ arch/arm/dts/rz-smarc-common.dtsi             |  183 +++
+ arch/arm/dts/rzg2l-smarc-pinfunction.dtsi     |  137 ++
+ arch/arm/dts/rzg2l-smarc-som.dtsi             |  353 +++++
+ arch/arm/dts/rzg2l-smarc.dtsi                 |  144 ++
+ arch/arm/mach-rmobile/Kconfig                 |   19 +-
+ arch/arm/mach-rmobile/Kconfig.rzg2l           |   32 +
+ arch/arm/mach-rmobile/Makefile                |    5 +-
+ arch/arm/mach-rmobile/cpu_info-rzg2l.c        |   63 +
+ arch/arm/mach-rmobile/include/mach/rmobile.h  |    5 +
+ arch/arm/mach-rmobile/include/mach/rzg2l.h    |   13 +
+ arch/arm/mach-rmobile/memmap-rzg2l.c          |  115 ++
+ board/renesas/rzg2l/Kconfig                   |   18 +
+ board/renesas/rzg2l/MAINTAINERS               |    6 +
+ board/renesas/rzg2l/Makefile                  |    4 +
+ board/renesas/rzg2l/rzg2l.c                   |   76 +
+ configs/renesas_rzg2l_smarc_defconfig         |   52 +
+ drivers/clk/renesas/Kconfig                   |    9 +
+ drivers/clk/renesas/Makefile                  |    2 +
+ drivers/clk/renesas/r9a07g044-cpg.c           |  384 +++++
+ drivers/clk/renesas/rzg2l-cpg.c               |  502 +++++++
+ drivers/clk/renesas/rzg2l-cpg.h               |  318 ++++
+ drivers/mmc/renesas-sdhi.c                    |   61 +
+ drivers/pinctrl/renesas/Kconfig               |    9 +
+ drivers/pinctrl/renesas/Makefile              |    1 +
+ drivers/pinctrl/renesas/rzg2l-pfc.c           |  906 ++++++++++++
+ drivers/serial/serial_sh.c                    |   34 +-
+ drivers/serial/serial_sh.h                    |   19 +-
+ include/configs/rzg2l-smarc.h                 |   14 +
+ include/dt-bindings/clock/r9a07g044-cpg.h     |  220 +++
+ .../interrupt-controller/irqc-rzg2l.h         |   25 +
+ include/dt-bindings/pinctrl/rzg2l-pinctrl.h   |   23 +
+ 35 files changed, 5054 insertions(+), 5 deletions(-)
+ create mode 100644 arch/arm/dts/r9a07g044.dtsi
+ create mode 100644 arch/arm/dts/r9a07g044l2-smarc.dts
+ create mode 100644 arch/arm/dts/r9a07g044l2.dtsi
+ create mode 100644 arch/arm/dts/rz-smarc-common.dtsi
+ create mode 100644 arch/arm/dts/rzg2l-smarc-pinfunction.dtsi
+ create mode 100644 arch/arm/dts/rzg2l-smarc-som.dtsi
+ create mode 100644 arch/arm/dts/rzg2l-smarc.dtsi
+ create mode 100644 arch/arm/mach-rmobile/Kconfig.rzg2l
+ create mode 100644 arch/arm/mach-rmobile/cpu_info-rzg2l.c
+ create mode 100644 arch/arm/mach-rmobile/include/mach/rzg2l.h
+ create mode 100644 arch/arm/mach-rmobile/memmap-rzg2l.c
+ create mode 100644 board/renesas/rzg2l/Kconfig
+ create mode 100644 board/renesas/rzg2l/MAINTAINERS
+ create mode 100644 board/renesas/rzg2l/Makefile
+ create mode 100644 board/renesas/rzg2l/rzg2l.c
+ create mode 100644 configs/renesas_rzg2l_smarc_defconfig
+ create mode 100644 drivers/clk/renesas/r9a07g044-cpg.c
+ create mode 100644 drivers/clk/renesas/rzg2l-cpg.c
+ create mode 100644 drivers/clk/renesas/rzg2l-cpg.h
+ create mode 100644 drivers/pinctrl/renesas/rzg2l-pfc.c
+ create mode 100644 include/configs/rzg2l-smarc.h
+ create mode 100644 include/dt-bindings/clock/r9a07g044-cpg.h
+ create mode 100644 include/dt-bindings/interrupt-controller/irqc-rzg2l.h
+ create mode 100644 include/dt-bindings/pinctrl/rzg2l-pinctrl.h
 
+
+base-commit: b9b83a86f0e84e837191db120c279a9cc0e3434b
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.34.1
+
