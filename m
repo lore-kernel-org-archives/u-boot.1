@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1BFCE79A8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F272CE79A9
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:02:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 190EB86C0E;
-	Wed, 20 Sep 2023 05:00:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6C24986C6B;
+	Wed, 20 Sep 2023 05:00:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eASAzkuH";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HRddMaFZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B26E86C16; Wed, 20 Sep 2023 05:00:42 +0200 (CEST)
+ id 1F2E086BDA; Wed, 20 Sep 2023 05:00:43 +0200 (CEST)
 Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
  [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 170C886C24
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 05:00:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1266C86C5C
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 05:00:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-34f6c725d94so19792995ab.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:00:40 -0700 (PDT)
+ e9e14a558f8ab-34fcd36c86eso13623345ab.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:00:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695178838; x=1695783638; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695178839; x=1695783639; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0sRI343GvqzYFDxWMILmwgFvZaS020FNFioeiUle4sM=;
- b=eASAzkuHESpBNAngu8Gb6GNWDr7Ry45p9c+YTGy49qQamJrsLl45ZnR1bJSi3mHmPi
- rJx0k+tnjxZ5OK5MPbKaeLqqwl6BTNdovrOMpO8HsNA91ayWp9krGunxLfiwrvxs4rB4
- 5uCi0heQXjndumHCo7jgo4oJ6QZwc5+WQt55M=
+ bh=hw3Yy9YI/uqhvkRv49xo0YdmYt+5WbklY9l9kJjFMak=;
+ b=HRddMaFZDWevsNrovowww15HEMMqeyMEk6D0m8tVly90qcAmyupSGD/1NgZ1KOtlla
+ 3xO7BmaOFRX8niDIyeyWZkuBATUHPw8lO1Tz600lVPPwxn8fNr7UiIiJ43X2FwrjkzLm
+ bU6yiUVIwXZEC3+/ys66zjKkeY/57LP3c/THU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695178838; x=1695783638;
+ d=1e100.net; s=20230601; t=1695178839; x=1695783639;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0sRI343GvqzYFDxWMILmwgFvZaS020FNFioeiUle4sM=;
- b=ZSlgNN246E6jUdyCOMbUNOitkyS5MhkuzHLbCg4/gvA07KP1YQUnhyWfHFbBAtdVa2
- BT+47wcbxwRWkCeUbwXvxn78YQlqQ2LWE2ea65Ghdf9KB1L1X/PDhP/ljQJjie20Fi00
- 3g/DY5Xr+47A/cnkCT6wukosXZEg0kd8yGAi3d6ROBgsMwiw93n0VrlHhXXk1ZO6Ajsp
- QCyHCAbhQemXSc97y+I6BLYcJZ43kMpIO3QBUy7f11QZllM5El70k6ZdP8DCg0kwfwNB
- QG4NZ/T8vtlQz1l424nqwaHp2Q8QPlL457QY2hVNp/oVsJsWgXI19P6/RHK5LO3uUxhC
- EYKw==
-X-Gm-Message-State: AOJu0YzQvxbA1C/CtoUsJcc0NIWeYANnibxzRy0nRbx+tWWywPtAo4Fq
- 4qrrM48J0GeJXQHyG5ohYQG1093aQzIg/HIzRqg=
-X-Google-Smtp-Source: AGHT+IEWBuTsA1AQ2lBob9RJ6E9k+n6YPAi7RND5dMO7fMpVuwRJ0AzzmD1opFNAKooltArNqwLhbg==
-X-Received: by 2002:a05:6e02:10c6:b0:34a:c4ae:1937 with SMTP id
- s6-20020a056e0210c600b0034ac4ae1937mr1526002ilj.13.1695178838722; 
- Tue, 19 Sep 2023 20:00:38 -0700 (PDT)
+ bh=hw3Yy9YI/uqhvkRv49xo0YdmYt+5WbklY9l9kJjFMak=;
+ b=dZ2cbeQZtzHIouddR78C+wJx8jeK3Vc8AtPcXiDdjbdblyJKfXWdK/mRUrD51aHacW
+ F4nBPSJGJjewB288ss5sgIFnKTkOHJhTCbu6LMu+Lgdha3t+cIZ2fubBciXItHgmIRJw
+ W9HayUphgoGnTEGTdEVvdN13rmlEm+C1henuDWORwhZ2XKFuqSzd4AtzuLP+aNF1rWA4
+ GpO16zy0zo7NaypnNz0Z85I3gKds855AfYnx2JWuGabnUUzRNiakHyFwm/rbFHX/qM5F
+ fn1Jo4U4vOD0lPDK1Cgz4S6opL/woMQFUaLjJjpQHhGaCVgYNp0TNK6bex3yPcwamIUq
+ 03LQ==
+X-Gm-Message-State: AOJu0YwdlLE6LCNiIFvSTx38rprjusBNoNNLCdbB26YDCddhPYkq1n5u
+ /og+LASk8U5FaHPIbb4mEH38S8WWpoPWIsJugD4=
+X-Google-Smtp-Source: AGHT+IFSH2JFeHImRVnRe1p07cwf3s1NuVvz1KVsA9VuIEFTPlSJUg53AeYOkmHr/dVqWa9i73czyg==
+X-Received: by 2002:a05:6e02:174a:b0:34d:ee49:5114 with SMTP id
+ y10-20020a056e02174a00b0034dee495114mr2076149ill.23.1695178839686; 
+ Tue, 19 Sep 2023 20:00:39 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- s5-20020a92d905000000b0034feb68437fsm1835423iln.24.2023.09.19.20.00.38
+ s5-20020a92d905000000b0034feb68437fsm1835423iln.24.2023.09.19.20.00.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 20:00:38 -0700 (PDT)
+ Tue, 19 Sep 2023 20:00:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 08/20] x86: coreboot: Drop USB init on startup
-Date: Tue, 19 Sep 2023 21:00:09 -0600
-Message-ID: <20230920030027.1385833-9-sjg@chromium.org>
+Subject: [PATCH v5 09/20] x86: coreboot: Align options between coreboot and
+ coreboot64
+Date: Tue, 19 Sep 2023 21:00:10 -0600
+Message-ID: <20230920030027.1385833-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230920030027.1385833-1-sjg@chromium.org>
 References: <20230920030027.1385833-1-sjg@chromium.org>
@@ -88,51 +89,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is very annoying as it is quite slow on many machines. Also, U-Boot
-has an existing 'preboot' mechanism to enable this feature if desired.
-
-Drop this code so that it is possible to choose whether to init USB or
-not.
-
-Use the existing USE_PREBOOT mechanism instead.
+These two builds are similar but have some different options for not good
+reason. Line them up to be as similar as possible.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
-Changes in v5:
-- Make use of the uSE_PREBOOT mechanism
+(no changes since v2)
 
- arch/x86/cpu/coreboot/Kconfig    | 1 +
- arch/x86/cpu/coreboot/coreboot.c | 4 ----
- 2 files changed, 1 insertion(+), 4 deletions(-)
+Changes in v2:
+- Update the malloc size too
 
-diff --git a/arch/x86/cpu/coreboot/Kconfig b/arch/x86/cpu/coreboot/Kconfig
-index b97c27790419..178f8ad18162 100644
---- a/arch/x86/cpu/coreboot/Kconfig
-+++ b/arch/x86/cpu/coreboot/Kconfig
-@@ -25,6 +25,7 @@ config SYS_COREBOOT
- 	imply FS_CBFS
- 	imply CBMEM_CONSOLE
- 	imply X86_TSC_READ_BASE
-+	imply USE_PREBOOT
- 	select BINMAN if X86_64
- 
- endif
-diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
-index da43d66e95d7..82fe4c71cd27 100644
---- a/arch/x86/cpu/coreboot/coreboot.c
-+++ b/arch/x86/cpu/coreboot/coreboot.c
-@@ -86,10 +86,6 @@ static int last_stage_init(void)
- 	if (IS_ENABLED(CONFIG_SPL_BUILD))
- 		return 0;
- 
--	/* start usb so that usb keyboard can be used as input device */
--	if (IS_ENABLED(CONFIG_USB_KEYBOARD))
--		usb_init();
--
- 	board_final_init();
- 
- 	return 0;
+ configs/coreboot64_defconfig | 7 +++++++
+ configs/coreboot_defconfig   | 9 ---------
+ 2 files changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
+index c04056339462..dc3548aa736c 100644
+--- a/configs/coreboot64_defconfig
++++ b/configs/coreboot64_defconfig
+@@ -1,5 +1,6 @@
+ CONFIG_X86=y
+ CONFIG_TEXT_BASE=0x1120000
++CONFIG_SYS_MALLOC_LEN=0x2000000
+ CONFIG_NR_DRAM_BANKS=8
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_DEFAULT_DEVICE_TREE="coreboot"
+@@ -18,6 +19,9 @@ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
++CONFIG_LOG=y
++CONFIG_LOGF_LINE=y
++CONFIG_LOGF_FUNC=y
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_NO_BSS_LIMIT=y
+ CONFIG_SYS_PBSIZE=532
+@@ -50,10 +54,13 @@ CONFIG_SYS_ATA_ALT_OFFSET=0
+ CONFIG_ATAPI=y
+ CONFIG_LBA48=y
+ CONFIG_SYS_64BIT_LBA=y
++CONFIG_NVME_PCI=y
+ # CONFIG_PCI_PNP is not set
+ CONFIG_SYS_NS16550_MEM32=y
+ CONFIG_SOUND=y
+ CONFIG_SOUND_I8254=y
+ CONFIG_CONSOLE_SCROLL_LINES=5
+ CONFIG_SPL_ACPI=y
++CONFIG_CMD_DHRYSTONE=y
+ # CONFIG_GZIP is not set
++CONFIG_SMBIOS_PARSER=y
+diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
+index e7e45c2b0a9b..630eb9aa384c 100644
+--- a/configs/coreboot_defconfig
++++ b/configs/coreboot_defconfig
+@@ -24,23 +24,14 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_PCI_INIT_R=y
+ CONFIG_CMD_IDE=y
+ CONFIG_CMD_MMC=y
+-CONFIG_CMD_PART=y
+ CONFIG_CMD_SATA=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+-CONFIG_CMD_DHCP=y
+ CONFIG_BOOTP_BOOTFILESIZE=y
+-CONFIG_CMD_PING=y
+ CONFIG_CMD_TIME=y
+ CONFIG_CMD_SOUND=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_EXT4=y
+ CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
+ CONFIG_MAC_PARTITION=y
+-CONFIG_ISO_PARTITION=y
+-CONFIG_EFI_PARTITION=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
