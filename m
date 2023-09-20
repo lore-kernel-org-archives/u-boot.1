@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B99CE79CC
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 11:13:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A82CE79CB
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 11:14:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F03886A2F;
-	Wed, 20 Sep 2023 13:13:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 69E2286AFA;
+	Wed, 20 Sep 2023 13:14:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZbyexTNO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MSX/qU6C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C6CF86A2F; Wed, 20 Sep 2023 13:13:47 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 92B8986813; Wed, 20 Sep 2023 13:14:10 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C9B786813
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 13:13:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 823A786AFA
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 13:14:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-273d9b1908eso1666609a91.0
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 04:13:44 -0700 (PDT)
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-578bb70ad89so173097a12.0
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 04:14:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695208423; x=1695813223; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695208447; x=1695813247; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SDyrIQ72JpT/AmeI2spj9OffQJVAWVcnjKcJy4vVE3k=;
- b=ZbyexTNOEmE1BwE8BdS6UmiQAap+pU/PyazKojeb13l9soUQJMIMOUr1iob3Q1ojQu
- TJBF5bIzWL9JY/Z2r479yHewj/ftRBamFdnHNAG4GkQNGJObAtdnsLeo00o0rJf1z2My
- 4rVXYGpS7nnT0f95UGMw/RwsthczrSa9INV7iy/VmsLxiPQG2EAQTAMwKnckFlDxwk85
- 8/2JZusNUmqO5NoDXTn6FCQWuQw8mDRayIc5sevjEkbsPkCfH5KsrX/C6JHGCdqbFzcq
- nmhpcFmW1zjsAGc8MIrUZAJQ/uLqSqYg1xIVqcyFyZSbIoxe/ubgKc3R+RC5tMjXKNJC
- bpZw==
+ bh=aCgdva+CuqwJbSJOFKFRg7Pira/CLZM3GuiCUncXbMs=;
+ b=MSX/qU6CgpyUznB2afu+DAjDfegzp7n/6nBrBENpuNCFtMfWIRQddqyJT5zej7Rxcp
+ xt220J0mzt+aTv/3i22RY34tW0uj7Jm3kj+/tF/W+IAHBuZtAb/BXLJzCguuHA8SbnZO
+ KIzmw+7B90FJ9Vd6UMPDcW7L4464UcryzfPQyR+720SvRcBAwxqC+jztqZ+3JTk8lRw/
+ oUThmXiPx343RHj0HG6vfvDqC2qR7RZmhmz18qV+na/dEgRZ/VX12cvu6ocYwipwsmis
+ ezvmpX3nbMCMeb1u2PXNM7N3lA1OGZBX9ss+6GQN4nhljtczdvr3iWHfzgKKgPw2KqZu
+ tNMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695208423; x=1695813223;
+ d=1e100.net; s=20230601; t=1695208447; x=1695813247;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SDyrIQ72JpT/AmeI2spj9OffQJVAWVcnjKcJy4vVE3k=;
- b=BIZYKQjtXwqr0gZv3glto3DC4xHseKYfmPgQ2OADgL/nz++evCMRDUBGjRD8uR1TzR
- bJf418+uLkZiuVKrExJiRxdv5Zd2qdYGmBFqCaZrF4H6mw0DDucjnZJHtakRWqrcl+WO
- KhVQY6oADTwrg8qKsFy8SGuDdQGoMMnaKQk+mZp8WE+1nIOwvlEGybIQMpja/8xG0cZJ
- 2nLU4eU327pMUX2i5bv69D8DY5eRo1OpoVD8naVeg4qQHl0a3fpyYXY8MiyN7rQBR8EJ
- 5LY9Y5wtLhcv3oA+68pKliNxa1Kf4fg+Z72zxDpsfgUBwJvl30tyacbfmgeVVU3jQfdY
- U5Eg==
-X-Gm-Message-State: AOJu0YwNrwdlzEoTfMaF8X6wMe65Sof/5aRiv78613uz6qUiBw0LkAbh
- 14IVk0KwXiqVHJQZ11eKy477w+S8tN+nokHLzOo=
-X-Google-Smtp-Source: AGHT+IGiCp5n9XjhZLlBQg6YRn2WpNCP8+ThMyvR6MJXcrytyLm11G4ztBexep+t0I+DTMA3jtI07NQJFLdnxWwTWXk=
-X-Received: by 2002:a17:90a:296:b0:269:34a6:d4ca with SMTP id
- w22-20020a17090a029600b0026934a6d4camr2246274pja.0.1695208422846; Wed, 20 Sep
- 2023 04:13:42 -0700 (PDT)
+ bh=aCgdva+CuqwJbSJOFKFRg7Pira/CLZM3GuiCUncXbMs=;
+ b=nWjJ0bW754RfaPNf8c0INgv1Ljhd/N6aGpPVTeH7HXaLKYOEA+to4IBNipQZicLZlm
+ 3euIevHeYyxNGICol09Kbtbu46C+Duxwp0u/w7bUTEhjsGfVBVt+4r9yUCFelOGCe7CB
+ GwZ2wX3r2q3q8EcMJ4cmN24OeCDEtuA8VaiqI8WMiiBMB19Ew2CzScjs8wSq5zdp1xEu
+ L2J+BtPmMC/MKyAw65HLXtFRzAmkc2HMO7G6x574siu0ZyOr+2IlIbRxAFXiFVN+anhT
+ YeC93N84yl36uZJrULzo+ej/asrhMPTQq3rgFFrGzvXYkkq6qAElDxmdFebK9tzWXWrZ
+ jdHA==
+X-Gm-Message-State: AOJu0Yzs14cd4lbxEuNUxLdvfy4Vn/dnoz3sWEp0u+bgwihy4nxjeLC4
+ 8ADJO5yZq87FvpqHjVMoIc/3xieOhvr6auj3D+c=
+X-Google-Smtp-Source: AGHT+IEnTFI+PZq00ki7KxnoANwM4EAPBtn+a68X+RnNjBKzXQ46TI8wFWn3buFhdDn7kRqRxFkJscFwgC3srgj3I8U=
+X-Received: by 2002:a05:6a21:6d92:b0:13f:65ca:52a2 with SMTP id
+ wl18-20020a056a216d9200b0013f65ca52a2mr2272589pzb.5.1695208446783; Wed, 20
+ Sep 2023 04:14:06 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230919134932.134678-1-rasmus.villemoes@prevas.dk>
- <20230919134932.134678-2-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20230919134932.134678-2-rasmus.villemoes@prevas.dk>
+ <20230919134932.134678-3-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20230919134932.134678-3-rasmus.villemoes@prevas.dk>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 20 Sep 2023 08:13:31 -0300
-Message-ID: <CAOMZO5CyKMybyxTNVBq7pgwXvmoZnp3t4_iexjg_yUd+j_XdiA@mail.gmail.com>
-Subject: Re: [PATCH resend 1/2] imx: spl_imx_romapi: avoid tricky use of
- spl_load_simple_fit() to get full FIT size
+Date: Wed, 20 Sep 2023 08:13:54 -0300
+Message-ID: <CAOMZO5DcppvD7_yx1PqCkHd23uJ2B64RNknJJOPBHBSsEO5_eg@mail.gmail.com>
+Subject: Re: [PATCH resend 2/2] imx: spl_imx_romapi.c: remove dead code
 To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, uboot-imx@nxp.com
 Content-Type: text/plain; charset="UTF-8"
@@ -91,33 +90,8 @@ X-Virus-Status: Clean
 On Tue, Sep 19, 2023 at 10:49=E2=80=AFAM Rasmus Villemoes
 <rasmus.villemoes@prevas.dk> wrote:
 >
-> Currently, spl_imx_romapi uses a somewhat tricky workaround for the
-> fact that a FIT image with external data doesn't directly allow one to
-> know the full size of the file: It does a dummy spl_load_simple_fit(),
-> having the ->read callback remember the largest offset requested, and
-> then does a last call to rom_api_download_image() to fetch the
-> remaining part of the full FIT image.
->
-> We can avoid that by just keeping track of how much we have downloaded
-> already, and if the ->read() requests something outside the current
-> valid buffer, fetch up to the end of the current request.
->
-> The current method also suffers from not working when CONFIG_IMX_HAB
-> is enabled: While in that case u-boot.itb is not built with external
-> data, so the fdt header does contain the full size of the dtb
-> structure. However, it does not account for the extra CONFIG_CSF_SIZE
-> added by board_spl_fit_size_align(). And also, the data it hands out
-> during the first dummy spl_load_simple_fit() is of course garbage, and
-> wouldn't pass the verification.
->
-> So we really need to call spl_load_simple_fit() only once, let that
-> figure out just how big the FIT image is (including whatever data, CSF
-> or "ordinary" external data, has been tacked on beyond the fdt
-> structure), and always provide valid data from the ->read callback.
->
-> This only affects the CONFIG_SPL_LOAD_FIT case - I don't have any
-> hardware or experience with the CONFIG_SPL_LOAD_IMX_CONTAINER case, so
-> I leave that alone for now.
+> These IS_ENABLED(CONFIG_SPL_LOAD_FIT) cases can no longer be reached,
+> and thus get_fit_image_size() is also redundant.
 >
 > Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 
