@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62749CE79A8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:01:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D1BFCE79A8
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:02:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8F6B86C5D;
-	Wed, 20 Sep 2023 05:00:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 190EB86C0E;
+	Wed, 20 Sep 2023 05:00:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XvjFYRJb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eASAzkuH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 532E086C0B; Wed, 20 Sep 2023 05:00:41 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 1B26E86C16; Wed, 20 Sep 2023 05:00:42 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DB4686C0D
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 05:00:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 170C886C24
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 05:00:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34ff11dfdf2so8076445ab.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:00:39 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-34f6c725d94so19792995ab.0
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:00:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695178838; x=1695783638; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=i25damI3XW7924Vwz565XUdd2oHacfiVQ1totcJ71g0=;
- b=XvjFYRJbXeF8+zW+ZwTkadzB1OhJDCu0qE627cGZYvUx+b+jU4B81bxAcEv56J84Nj
- C3G3SZJLTU4KPcr6vGZUZHHzLPWgdGQCvLtks2PTmyC+VtJQ9oTo41DszALq8633yGZR
- 9Y0ZYP2A9nKfSccTX6ebcBtHFAqMJ+6Um/tYU=
+ bh=0sRI343GvqzYFDxWMILmwgFvZaS020FNFioeiUle4sM=;
+ b=eASAzkuHESpBNAngu8Gb6GNWDr7Ry45p9c+YTGy49qQamJrsLl45ZnR1bJSi3mHmPi
+ rJx0k+tnjxZ5OK5MPbKaeLqqwl6BTNdovrOMpO8HsNA91ayWp9krGunxLfiwrvxs4rB4
+ 5uCi0heQXjndumHCo7jgo4oJ6QZwc5+WQt55M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695178838; x=1695783638;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=i25damI3XW7924Vwz565XUdd2oHacfiVQ1totcJ71g0=;
- b=c0HyfruqYCZDPU0M4NC1TLWXZXLYRMHkeitbqLHjSsHlu/B//ImNdJJ8LDUDj1jVSB
- NnUG7ODWIdACZIUJ2lNEHJ9Lpz8H3iHOXvanuTxVCbtHdebp3BKJSUpa7OGUOWx96aRu
- 4YX7X1da3XuG+CoJQe9Pm2+tAqirZQPVs36/5c78Zd41U4q6gaCiSO8vT+Ip4/+GA52W
- AFkfuIoY7dXYM95Qqkpust8L12oGcwL1d1+iZzrr/FQysd3G+VHmE7U3AquAGpo6mbfX
- /Wbwq5xrvbm9dbSkA3y8d+LVSwAEy9xDjRV4zzx0/gAwT2detMJzKSqcSnXoBSe5pzKT
- 7ahw==
-X-Gm-Message-State: AOJu0Yxbtg4R+TP+F4ssXCol3gl/a73dT9yjFDsMjVv67yE3JRkpOBM5
- 85m7TG2kYhe/ykvVxmzDt1NaPkwtx4evJHnrnvY=
-X-Google-Smtp-Source: AGHT+IFPtbeZTEtvhsezL2AoMfdpuoX6tGpQmrwKiYKm6uh1mlFDmDjV/cN574oH/xeZPHLhVT4sCA==
-X-Received: by 2002:a05:6e02:1d91:b0:34f:2edd:9213 with SMTP id
- h17-20020a056e021d9100b0034f2edd9213mr1918849ila.21.1695178837895; 
- Tue, 19 Sep 2023 20:00:37 -0700 (PDT)
+ bh=0sRI343GvqzYFDxWMILmwgFvZaS020FNFioeiUle4sM=;
+ b=ZSlgNN246E6jUdyCOMbUNOitkyS5MhkuzHLbCg4/gvA07KP1YQUnhyWfHFbBAtdVa2
+ BT+47wcbxwRWkCeUbwXvxn78YQlqQ2LWE2ea65Ghdf9KB1L1X/PDhP/ljQJjie20Fi00
+ 3g/DY5Xr+47A/cnkCT6wukosXZEg0kd8yGAi3d6ROBgsMwiw93n0VrlHhXXk1ZO6Ajsp
+ QCyHCAbhQemXSc97y+I6BLYcJZ43kMpIO3QBUy7f11QZllM5El70k6ZdP8DCg0kwfwNB
+ QG4NZ/T8vtlQz1l424nqwaHp2Q8QPlL457QY2hVNp/oVsJsWgXI19P6/RHK5LO3uUxhC
+ EYKw==
+X-Gm-Message-State: AOJu0YzQvxbA1C/CtoUsJcc0NIWeYANnibxzRy0nRbx+tWWywPtAo4Fq
+ 4qrrM48J0GeJXQHyG5ohYQG1093aQzIg/HIzRqg=
+X-Google-Smtp-Source: AGHT+IEWBuTsA1AQ2lBob9RJ6E9k+n6YPAi7RND5dMO7fMpVuwRJ0AzzmD1opFNAKooltArNqwLhbg==
+X-Received: by 2002:a05:6e02:10c6:b0:34a:c4ae:1937 with SMTP id
+ s6-20020a056e0210c600b0034ac4ae1937mr1526002ilj.13.1695178838722; 
+ Tue, 19 Sep 2023 20:00:38 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- s5-20020a92d905000000b0034feb68437fsm1835423iln.24.2023.09.19.20.00.37
+ s5-20020a92d905000000b0034feb68437fsm1835423iln.24.2023.09.19.20.00.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 20:00:37 -0700 (PDT)
+ Tue, 19 Sep 2023 20:00:38 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 07/20] x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
-Date: Tue, 19 Sep 2023 21:00:08 -0600
-Message-ID: <20230920030027.1385833-8-sjg@chromium.org>
+Subject: [PATCH v5 08/20] x86: coreboot: Drop USB init on startup
+Date: Tue, 19 Sep 2023 21:00:09 -0600
+Message-ID: <20230920030027.1385833-9-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230920030027.1385833-1-sjg@chromium.org>
 References: <20230920030027.1385833-1-sjg@chromium.org>
@@ -88,45 +88,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The debug UART on modern machines uses a 32-bit wide transfer. Without
-this, setting debug output causes a hang or no output. It is not obvious
-(when enabling CONFIG_DEBUG_UART) that this is needed.
+This is very annoying as it is quite slow on many machines. Also, U-Boot
+has an existing 'preboot' mechanism to enable this feature if desired.
 
-Enable 32-bit access to avoid this trap.
+Drop this code so that it is possible to choose whether to init USB or
+not.
+
+Use the existing USE_PREBOOT mechanism instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v5:
+- Make use of the uSE_PREBOOT mechanism
 
- configs/coreboot64_defconfig | 1 +
- configs/coreboot_defconfig   | 1 +
- 2 files changed, 2 insertions(+)
+ arch/x86/cpu/coreboot/Kconfig    | 1 +
+ arch/x86/cpu/coreboot/coreboot.c | 4 ----
+ 2 files changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
-index e8165961c199..c04056339462 100644
---- a/configs/coreboot64_defconfig
-+++ b/configs/coreboot64_defconfig
-@@ -51,6 +51,7 @@ CONFIG_ATAPI=y
- CONFIG_LBA48=y
- CONFIG_SYS_64BIT_LBA=y
- # CONFIG_PCI_PNP is not set
-+CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SOUND=y
- CONFIG_SOUND_I8254=y
- CONFIG_CONSOLE_SCROLL_LINES=5
-diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
-index 311ca6672cbd..e7e45c2b0a9b 100644
---- a/configs/coreboot_defconfig
-+++ b/configs/coreboot_defconfig
-@@ -59,6 +59,7 @@ CONFIG_LBA48=y
- CONFIG_SYS_64BIT_LBA=y
- CONFIG_NVME_PCI=y
- # CONFIG_PCI_PNP is not set
-+CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SOUND=y
- CONFIG_SOUND_I8254=y
- CONFIG_CONSOLE_SCROLL_LINES=5
+diff --git a/arch/x86/cpu/coreboot/Kconfig b/arch/x86/cpu/coreboot/Kconfig
+index b97c27790419..178f8ad18162 100644
+--- a/arch/x86/cpu/coreboot/Kconfig
++++ b/arch/x86/cpu/coreboot/Kconfig
+@@ -25,6 +25,7 @@ config SYS_COREBOOT
+ 	imply FS_CBFS
+ 	imply CBMEM_CONSOLE
+ 	imply X86_TSC_READ_BASE
++	imply USE_PREBOOT
+ 	select BINMAN if X86_64
+ 
+ endif
+diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
+index da43d66e95d7..82fe4c71cd27 100644
+--- a/arch/x86/cpu/coreboot/coreboot.c
++++ b/arch/x86/cpu/coreboot/coreboot.c
+@@ -86,10 +86,6 @@ static int last_stage_init(void)
+ 	if (IS_ENABLED(CONFIG_SPL_BUILD))
+ 		return 0;
+ 
+-	/* start usb so that usb keyboard can be used as input device */
+-	if (IS_ENABLED(CONFIG_USB_KEYBOARD))
+-		usb_init();
+-
+ 	board_final_init();
+ 
+ 	return 0;
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
