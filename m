@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EA1ACD4933
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 22:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B77BCD4933
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 23:00:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0874786C73;
-	Thu, 21 Sep 2023 00:58:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5E82586C78;
+	Thu, 21 Sep 2023 00:58:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Lq5IkQr3";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="KvFc+YaV";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ykBfpRaS";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="YDanPVFr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A8C286C83; Thu, 21 Sep 2023 00:58:45 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 0F25886C58; Thu, 21 Sep 2023 00:58:46 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56EE186C55
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 00:58:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36D9886C40
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 00:58:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,46 +31,46 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4RrYqR220Bz9sl0;
- Thu, 21 Sep 2023 00:58:43 +0200 (CEST)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4RrYqS0rB3z9sy9;
+ Thu, 21 Sep 2023 00:58:44 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1695250723;
+ s=mail20150812; t=1695250724;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YxwqJnlILnBra2OEyGyp3G4dFugWJJUU4zVgdc0K6PA=;
- b=Lq5IkQr3AvBfczahuWAzL/GJ1TVdGeeehzdhrvo5GKImSdLzShcti43Upv/vmC5sVZ+Vds
- Dh9YQIQtiUk9d3rmfLa9E+fSfyv+yOHiywgGlNnNRJIntgf8w4/WwVshXYlQQ3PLa1fvmu
- SCVWy3E9x28YyIhL9NtHiPSl4OE2kEIG8509mL85r+bMi2XEy86klqKLCNitR3Fn8ZgY+h
- H/xL/B4kCLrl3gbZqcIX9rbre7IY1WA26gS35fvSMNWOJb5UxYBGts8VSv0WOOrh6QZ7BD
- cH2K68bCZQBfQFqCpR0sQsZumjHv8hzl9UIzIC/DVHqDslEqffACHRi/e+4fTg==
+ bh=bPE9DObCSPy/mABUifYxDnJzyfL9hQP7Vaz41MjeS7g=;
+ b=ykBfpRaS75vbfrpjYGEWYmZPIeiKzGQany7lkf5OMKmLK5pchAU0lG+sYOqRyrKkp567ZP
+ 7aQYgZAOuq+jQNw0nnDq//KYPuEev3vZQH+GPYKW1ja6DQUaB3oLUL5v0iKffVT28yoNl9
+ C/BVGG4wC0JIucKuOo3wZ/4DK6igyMgUzQ43Ff6Cj+4tqn9rrYlY2LMKd3G+yPt0WS63dF
+ IpX3navfmdDfvNx25TMVWH7dL35P/qAmmKbMy2itiav6kRvj2n0IkyTjsBGPgz2ygjYqu2
+ ui+/wK6SP9vTstPzyj0PZcnH4/yZIUWriDuoGFXOBVOJWzAW+lfRilHnvV1Iqw==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1695250721;
+ s=mail20150812; t=1695250722;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YxwqJnlILnBra2OEyGyp3G4dFugWJJUU4zVgdc0K6PA=;
- b=KvFc+YaVvuMn+/fp3escfL0OvV9cs3M84kO/de2u4/PUijmsdZWmtxss3RvNvAluxHfgli
- Dk9jp0BBvTHDLw1sUMhSPmmF+8DROVmPlCNTBWeAuTJepw2zIYWsFg7+2/cHvV/LYjxk75
- E/xBoJN/zOvYtCpeqxvL54MO5j0iNqQnXoIAZV7d0JVAB3LMBFJUgEMsILS8DV49/cvn72
- PWt73otzgDASPamGBCHaGMZPn3lkQnL7qCxwvjmGRiDiFIjWfQIwRCC32jsrnIhHMF8f6E
- pNxa9TF8k/cp8bKu/fHAx977/zNvX0mKKTldqX5164hWsgCXsQUpqfJpKiLQkA==
+ bh=bPE9DObCSPy/mABUifYxDnJzyfL9hQP7Vaz41MjeS7g=;
+ b=YDanPVFrbCh8465y6CIHtDTlG/2sLXu6YB5UkvxNp3uGZJR+T3LwCbtA4oMhSSbMWwgx7v
+ A7TCKOwr6Jd/Dl7mTBwyhO0NRZ7ezkvkzUk3YJyg1+uGrs0HQhCIgPZnPj9OwBgMI/BS17
+ Q0TXPXBX3tW8mTslgzrr1QzZWL2JTkxd0adqKLcfaPMCWmFyH6anrVhyARR4kIwBchuxFa
+ fSAEKQSsbwRMnM58GI1J1/ei2G1NzqcuwnR21GfvGnJRLhvZOGDUS/a66ZCYVmhlXvEEUT
+ N4vegjtKCoKcf+fF60NRhdbpgXWSnm3nRoMejLdLOAMNfUOgqtCHUyGi4r7TCg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Bin Meng <bmeng.cn@gmail.com>, Mario Six <mario.six@gdsys.cc>,
  Nikhil M Jain <n-jain1@ti.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 8/9] test: bdinfo: Test bdinfo -m
-Date: Thu, 21 Sep 2023 00:58:10 +0200
-Message-Id: <20230920225811.153474-8-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 9/9] test: bdinfo: Test bdinfo -e
+Date: Thu, 21 Sep 2023 00:58:11 +0200
+Message-Id: <20230920225811.153474-9-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20230920225811.153474-1-marek.vasut+renesas@mailbox.org>
 References: <20230920225811.153474-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 60904d9055e75d48377
-X-MBO-RS-META: mu5a6e4r7ugahk6n6qwrppij9brht1za
+X-MBO-RS-ID: 23f1c4b090ca61f66b3
+X-MBO-RS-META: spr5ba15sqgcth9dhnjkkmw6k7yrfy9z
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,7 +87,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The bdinfo -m should print only the board memory layout.
+The bdinfo -e should print only the board ethernet settings.
 Test the expected output.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -97,60 +97,30 @@ Cc: Mario Six <mario.six@gdsys.cc>
 Cc: Nikhil M Jain <n-jain1@ti.com>
 Cc: Simon Glass <sjg@chromium.org>
 ---
- test/cmd/bdinfo.c | 26 +++++++++++++++++++++++---
- 1 file changed, 23 insertions(+), 3 deletions(-)
+ test/cmd/bdinfo.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
 diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
-index 2f34d877e5c..f090667fb42 100644
+index f090667fb42..6caee4b0b50 100644
 --- a/test/cmd/bdinfo.c
 +++ b/test/cmd/bdinfo.c
-@@ -130,13 +130,11 @@ static int lmb_test_dump_all(struct unit_test_state *uts, struct lmb *lmb)
- 	return 0;
- }
+@@ -263,6 +263,20 @@ static int bdinfo_test_memory(struct unit_test_state *uts)
  
--static int bdinfo_test_all(struct unit_test_state *uts)
-+static int bdinfo_test_mem(struct unit_test_state *uts)
- {
- 	struct bd_info *bd = gd->bd;
- 	int i;
+ BDINFO_TEST(bdinfo_test_memory, UT_TESTF_CONSOLE_REC);
  
--	ut_assertok(test_num_l(uts, "boot_params", 0));
--
- 	for (i = 0; i < CONFIG_NR_DRAM_BANKS; ++i) {
- 		if (bd->bi_dram[i].size) {
- 			ut_assertok(test_num_l(uts, "DRAM bank", i));
-@@ -147,6 +145,15 @@ static int bdinfo_test_all(struct unit_test_state *uts)
- 		}
- 	}
- 
-+	return 0;
-+}
-+
-+static int bdinfo_test_all(struct unit_test_state *uts)
++static int bdinfo_test_eth(struct unit_test_state *uts)
 +{
-+	ut_assertok(test_num_l(uts, "boot_params", 0));
-+
-+	ut_assertok(bdinfo_test_mem(uts));
-+
- 	/* CONFIG_SYS_HAS_SRAM testing not supported */
- 	ut_assertok(test_num_l(uts, "flashstart", 0));
- 	ut_assertok(test_num_l(uts, "flashsize", 0));
-@@ -243,6 +250,19 @@ static int bdinfo_test_help(struct unit_test_state *uts)
- 
- BDINFO_TEST(bdinfo_test_help, UT_TESTF_CONSOLE_REC);
- 
-+static int bdinfo_test_memory(struct unit_test_state *uts)
-+{
-+	/* Test BDINFO memory layout only print */
++	/* Test BDINFO ethernet settings only print */
 +	ut_assertok(console_record_reset_enable());
-+	ut_assertok(run_commandf("bdinfo -m"));
-+	ut_assertok(bdinfo_test_mem(uts));
++	ut_assertok(run_commandf("bdinfo -e"));
++	if (IS_ENABLED(CONFIG_CMD_NET))
++		ut_assertok(test_eth(uts));
 +	ut_assertok(ut_check_console_end(uts));
 +
 +	return 0;
 +}
 +
-+BDINFO_TEST(bdinfo_test_memory, UT_TESTF_CONSOLE_REC);
++BDINFO_TEST(bdinfo_test_eth, UT_TESTF_CONSOLE_REC);
 +
  int do_ut_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
  {
