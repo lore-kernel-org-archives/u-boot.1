@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0569ACE79A8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 02:59:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB512CE79A8
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:00:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA61A86BDA;
-	Wed, 20 Sep 2023 04:59:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 715BD86BF9;
+	Wed, 20 Sep 2023 04:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A5El/it6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e5jCCDZL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A0AD86AD0; Wed, 20 Sep 2023 04:59:42 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id B530186BD9; Wed, 20 Sep 2023 04:59:46 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59CDF86BC4
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 04:59:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B85A686BEB
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 04:59:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-59bd2e19c95so66903267b3.0
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 19:59:40 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-59bdad64411so65063957b3.3
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 19:59:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695178779; x=1695783579; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695178783; x=1695783583; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RtTWTPKDvz3EPfRVboh/613cuZVjkxIU0dtfIn+SYJI=;
- b=A5El/it6ckSG2NMqM7BQHzgiv2e3It9n6J4Otum6KT+Pg38i2E/hQk9uUay6ZESfqZ
- QDXrpW1CfdqLO1efhHphUWPo7xYGJySW3Vd8bKi0VvPIAoHs9c2t737elD+JqfmbxJcO
- wRKAFFuZsenc40GNXmzfaTo9A29ecYVk53C8c=
+ bh=CU9KME8ZIYZnXnjGz58ZOZT3YMAVCbPo/o6vIQ3AMFM=;
+ b=e5jCCDZLU8rkCfdemiSXTwA8mxywCU8ZEOPbxQQhauPSY/cDxbbeYT/dhRGK+nEr2r
+ 4ITcGAVyFnmeCB1t4eywmB6oWqc+wkntGJKmgHF5Ln3AFkEc1UFXGqw9QeaZIhzDCvc+
+ O8hQ6yi4JPi7dvEVAAAGIqspCuZn5bz3KTnKc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695178779; x=1695783579;
+ d=1e100.net; s=20230601; t=1695178783; x=1695783583;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RtTWTPKDvz3EPfRVboh/613cuZVjkxIU0dtfIn+SYJI=;
- b=nwrST0U/+1h9eojKQ1pvDJNUWgmn6DrADmWPz1kVcZSU9yRqmvykclnv0inCgA4elk
- opQ3+Ft32NPwyZcimRmV5F+9PZh7UR3VDdznpCMdWHogOR6PMrG7DGNdMOuPl6spmbHh
- O/TC15CCzP59/VFW04Lw3WsqmcMN9umxeqLTb+yuRx9KUSou21yQvNiqQJykQUwHpB+I
- jHnM5wNhR+ROwAJafAaiDgyocgCf1a1ii1HbGcduq57Zyn4GwF7qyg3Ck/BnlX0ICRHA
- ckeM36o+OMH79autKVc1MH0RwiKseVTjP4lCkaM2xGBojeTBFcB8IP72u0RsXvVMGZZR
- ydlQ==
-X-Gm-Message-State: AOJu0YyccqAVVLCZ8n/kU8tPQoXRWtO+qfd/9hRBLDfGy1UZ+BiSjBUE
- XtW6gUMA86yfG1dekYZJGX419RiX80tEBB0kkbmwp2iCRzG9CtrnzNw=
-X-Google-Smtp-Source: AGHT+IG+9tbB2xNntV93zu95sY9c+A9VPAyfP+YzuCCuUfJxFUIwJtKS0VjbtjbqIgwE5s2vv6Vhgn76TVojhf4vDLA=
-X-Received: by 2002:a81:c213:0:b0:58f:bda3:8dd with SMTP id
- z19-20020a81c213000000b0058fbda308ddmr1331386ywc.32.1695178778900; Tue, 19
- Sep 2023 19:59:38 -0700 (PDT)
+ bh=CU9KME8ZIYZnXnjGz58ZOZT3YMAVCbPo/o6vIQ3AMFM=;
+ b=eWr3uRhgTi38CzyyqVGk1gO1jkLjr2p+XVr7W4Z2F5oA4mt9MyPJSO+4xnZLI11ZB5
+ Ggart9tYA20POv+gxWXoVPf8GMftWdyvB2R67feCVqZvqwlnCjfPeRuTrgUrt/HsSUXk
+ jEPdG4bn2CbK/siKJlJ/73TeSfce6BkIjlbQpk6uX2RTgm0KUZJD7nIU75kN1ULrGLrn
+ 3bpCG6y8qabq/yKW1fPk35zVyU2AikcsunSWIfUYq+pTFet/1r8BQTEUJ7Ht3qtxWrQa
+ 4lWUoKtQtiV0a+qHv8mVsyWLSlRJFBXVbtq6dtJh5R6DywQZeOGkV670aECSc+l1Md2m
+ YdMg==
+X-Gm-Message-State: AOJu0YxMivvZCB6xLtyM2uHHrAlTtWtjsAFgvv/ALD55EQYJ6mojLCtF
+ FH5qckqpqHYQPLbrUIszgDdChlwja9SJD6lWpsEyYQ==
+X-Google-Smtp-Source: AGHT+IESm6/N8YWf2x6AO6+C3uopnGxWIwzz9B1HI/sBUe+JC0zfQ44tXgmXMlUq4BfPbyAj2sS4yXYLSVFDUKdvEBc=
+X-Received: by 2002:a0d:ca86:0:b0:589:e66e:abe4 with SMTP id
+ m128-20020a0dca86000000b00589e66eabe4mr1292069ywd.11.1695178783067; Tue, 19
+ Sep 2023 19:59:43 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230823211059.1235147-1-sjg@chromium.org>
- <20230823211059.1235147-9-sjg@chromium.org>
- <CAEUhbmXe2_DN6ZEv_DwSuWq_inXXNtpHvkiyWkfnekFqWOkumA@mail.gmail.com>
-In-Reply-To: <CAEUhbmXe2_DN6ZEv_DwSuWq_inXXNtpHvkiyWkfnekFqWOkumA@mail.gmail.com>
+ <20230823211059.1235147-8-sjg@chromium.org>
+ <CAEUhbmVLr+B7sU7MQjKjgbzNaB6XGB84p0RuPhKcHSDVytPQ-A@mail.gmail.com>
+In-Reply-To: <CAEUhbmVLr+B7sU7MQjKjgbzNaB6XGB84p0RuPhKcHSDVytPQ-A@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 19 Sep 2023 20:58:59 -0600
-Message-ID: <CAPnjgZ0DQPjsdoqpWCf6W37YsqcQxW-47kfaX_jjLExBqVQcQA@mail.gmail.com>
-Subject: Re: [PATCH v4 08/20] x86: coreboot: Drop USB init on startup
+Date: Tue, 19 Sep 2023 20:58:58 -0600
+Message-ID: <CAPnjgZ3QVt_tddadLuiLLWEQzN1q4XwMb-2b_rv0j2nKG1tMjA@mail.gmail.com>
+Subject: Re: [PATCH v4 07/20] x86: coreboot: Enable CONFIG_SYS_NS16550_MEM32
 To: Bin Meng <bmeng.cn@gmail.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -94,46 +94,33 @@ On Tue, 19 Sept 2023 at 01:19, Bin Meng <bmeng.cn@gmail.com> wrote:
 > On Thu, Aug 24, 2023 at 5:11=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
 ote:
 > >
-> > This is very annoying as it is quite slow on many machines. Also, U-Boo=
-t
-> > has an existing 'preboot' mechanism to enable this feature if desired.
+> > The debug UART on modern machines uses a 32-bit wide transfer. Without
+> > this, setting debug output causes a hang or no output. It is not obviou=
+s
+> > (when enabling CONFIG_DEBUG_UART) that this is needed.
 > >
-> > Drop this code so that it is possible to choose whether to init USB or
-> > not.
+> > Enable 32-bit access to avoid this trap.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
 > > (no changes since v1)
 > >
-> >  arch/x86/cpu/coreboot/coreboot.c | 4 ----
-> >  1 file changed, 4 deletions(-)
+> >  configs/coreboot64_defconfig | 1 +
+> >  configs/coreboot_defconfig   | 1 +
+> >  2 files changed, 2 insertions(+)
 > >
-> > diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/c=
-oreboot.c
-> > index c2ceaa9a56c..567f1ab116c 100644
-> > --- a/arch/x86/cpu/coreboot/coreboot.c
-> > +++ b/arch/x86/cpu/coreboot/coreboot.c
-> > @@ -86,10 +86,6 @@ static int last_stage_init(void)
-> >         if (IS_ENABLED(CONFIG_SPL_BUILD))
-> >                 return 0;
-> >
-> > -       /* start usb so that usb keyboard can be used as input device *=
-/
-> > -       if (IS_ENABLED(CONFIG_USB_KEYBOARD))
-> > -               usb_init();
 >
-> Dropping this causes USB keyboards to fail to be usable as the U-Boot
-> input device.
+> Can we use CONFIG_NS16550_DYNAMIC?
 
-OK I will enable the normal USE_PREBOOT mechanism in v5
-
+We do actually use this for coreboot.
 
 >
-> > -
-> >         board_final_init();
-> >
-> >         return 0;
-> > --
+> Hardcode CONFIG_SYS_NS16550_MEM32 in the defconfig just works for one
+> configuration like yours, but it fails on some other configurations,
+> e.g.: IO port based ns16550.
+
+This is for the debug UART which does not support CONFIG_NS16550_DYNAMIC
+
 Regards,
 Simon
