@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B4BFCE79A8
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:02:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF6F5CE79A9
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 03:02:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7892186C52;
+	by phobos.denx.de (Postfix) with ESMTP id D374186C9B;
 	Wed, 20 Sep 2023 05:00:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cQEjZ2xP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Fq8RUzgq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D24BD86BF7; Wed, 20 Sep 2023 05:00:45 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 65E6886BFF; Wed, 20 Sep 2023 05:00:46 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89AFE86C52
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 05:00:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57B5D86C6B
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 05:00:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-34ff3ea2b23so7725955ab.2
- for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:00:43 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-34fdbda09bbso10357225ab.2
+ for <u-boot@lists.denx.de>; Tue, 19 Sep 2023 20:00:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695178842; x=1695783642; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695178843; x=1695783643; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=CnqfsVHxbvtxsyvywy4WW48EE01uChnQp1VMr1E5BMA=;
- b=cQEjZ2xPzl70j0WQqLkSOgw15ow3Gkw2NkPHfkugmV2d0nzK4Zu+T36cVWyzmcJlSV
- QivROxIrkZIVMy5OUOfzH+GCWu1thlJPS/qwuIxM1foyofaWVoZ0/qfqiCXAv9NOLAtz
- 7locd42hEfLD9ujobCtSJhW4F0ugGgtaGo9Pg=
+ bh=3pUM+QcA7uQKhfeT+gP55x83zFJyYFQndO1iFOOHWYk=;
+ b=Fq8RUzgqsTCy6T4a4EI/Pxqt3J16nlbdw8pOKBVuNTd4bjigTg1X1AMc/63gpTlYdW
+ dyzaB91rmw3T5yvnpInNRbSkSgf+FtIs46H+Aoic1S53nRxfPFFicEmyX3k1JKLVx1EG
+ Aum5YSFYtd2Flei/buiFbPE9zZQAaQFKkJpow=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695178842; x=1695783642;
+ d=1e100.net; s=20230601; t=1695178843; x=1695783643;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CnqfsVHxbvtxsyvywy4WW48EE01uChnQp1VMr1E5BMA=;
- b=p7Lgz7QDb96h6o9HTkysEeOPbBTHTy7r+C1L9Gq3BK3HAy4VYjo+4eE1agQjIATmt6
- qPKSlxeQeN7UB78VoSQhDiDCCSYGp74B15RyNCQHa0zxkrhCAZjvVluZ9RLl88kVub0g
- QxXaS5ONHBirSOvImOL5yR8wP3viuC5CpX+IQRpNHXuPVvB32vzobxul2rZ6aOgxg9cv
- lmJBD+88lqHd/O1zNqVeaKCUjSLPzJEGTOi01QdbBqVgECx25Vs1BevzGEAqP3WsW9dl
- sVatOHz5v8nX+JXEWh5cXUMhO0xcLQaUrmVt9YITgtJhE9mcW1S35MrsZsu/3hm1TIRT
- 8DHA==
-X-Gm-Message-State: AOJu0YzvUHlWEQ/A9gTgg1NlQXIIhnKSVNk3rBqRAKFbMtDB6E5S5ryQ
- fQTEzV73NbxcXH8QcpRiw0pxFvVpfQ+iFcNX52w=
-X-Google-Smtp-Source: AGHT+IHxTPO2gIVeOMJkZ/rxK7nEozaV/RWy99ksFxhnwXKeC/Vi/z32PquZYl+4N4+Sg2EqL9k9mA==
-X-Received: by 2002:a05:6e02:11a2:b0:34d:f0d4:c436 with SMTP id
- 2-20020a056e0211a200b0034df0d4c436mr1447421ilj.3.1695178842188; 
- Tue, 19 Sep 2023 20:00:42 -0700 (PDT)
+ bh=3pUM+QcA7uQKhfeT+gP55x83zFJyYFQndO1iFOOHWYk=;
+ b=XQNJBdSCThHewVvA9kIUDQU13wAa/Apr2qJ7H2DBPbCT0tbkV68dR8/LKxwJsNV6cS
+ 0qOa+2bKARgyfGVNepnTT6DNyUvVf9wUOvoV+bhhRUiGl1LICvk0SI4PfPWnuvsjgW1A
+ I8EPS8nLMJzQjOvAbsXLbL3yEyUQiRvsnv23ind0hlad6YvXMTGgwECq7rfS8XK2aTxV
+ TWYYj23mcQu83jo8z6Vn+GNh7CF8a2nhKN/b6QT73PnOzscHzrx8/FaYh1HjVIpR58FV
+ SNNVw8D6BBihYYhhTvG0uUBZmFm+QuLHmPQN0VRwthjr8LoYTTFpqQwlLli8JCSfNB7m
+ yDfA==
+X-Gm-Message-State: AOJu0Yw8/Nz4+qVKEg33Tt8KHXXoDus3crYBNEQDcjG/Iou8L3xY2vtn
+ DYTpFgB95cyMoOdZAaI59YX291G8FHtz/0dZ/RU=
+X-Google-Smtp-Source: AGHT+IHt7ht0ZODUYoG4Ik3+LKHqGOzN3wpoFnOJnGrb/e2/ukCC2s6UkiHxUEDRaN5KpAopE2CwEA==
+X-Received: by 2002:a05:6e02:1d83:b0:349:3020:d103 with SMTP id
+ h3-20020a056e021d8300b003493020d103mr1863911ila.25.1695178843007; 
+ Tue, 19 Sep 2023 20:00:43 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- s5-20020a92d905000000b0034feb68437fsm1835423iln.24.2023.09.19.20.00.41
+ s5-20020a92d905000000b0034feb68437fsm1835423iln.24.2023.09.19.20.00.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Sep 2023 20:00:41 -0700 (PDT)
+ Tue, 19 Sep 2023 20:00:42 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v5 12/20] x86: smbios: Add a Kconfig indicating SMBIOS-table
- presence
-Date: Tue, 19 Sep 2023 21:00:13 -0600
-Message-ID: <20230920030027.1385833-13-sjg@chromium.org>
+Subject: [PATCH v5 13/20] bootstd: Keep track of use of usb stop
+Date: Tue, 19 Sep 2023 21:00:14 -0600
+Message-ID: <20230920030027.1385833-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.459.ge4e396fd5e-goog
 In-Reply-To: <20230920030027.1385833-1-sjg@chromium.org>
 References: <20230920030027.1385833-1-sjg@chromium.org>
@@ -89,66 +88,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When booted from coreboot, U-Boot does not build the SMBIOS tables, but
-it should still pass them on to the OS. Add a new option which indicates
-whether SMBIOS tables are present, however they were built.
-
-Flip the ordering so that the dependency is listed first, which is less
-confusing.
-
-Adjust GENERATE_SMBIOS_TABLE to depend on this new symbol.
+When 'usb stop' is run, doing 'bootflow scan' does not run the USB hunter
+again so does not see any devices. Fix this by telling bootstd about the
+state of USB.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Allow SMBIOS if EFI_LOADER is enabled
-- Reword the help
+ boot/bootdev-uclass.c         | 27 +++++++++++++++++++++++++++
+ drivers/usb/host/usb-uclass.c |  8 ++++++++
+ include/bootdev.h             |  9 +++++++++
+ 3 files changed, 44 insertions(+)
 
-Changes in v2:
-- Add new patch
-
- lib/Kconfig | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
-
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 7edaeebfdaf5..6b5389f3a87d 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -975,8 +975,8 @@ config BLOBLIST_TABLES
+diff --git a/boot/bootdev-uclass.c b/boot/bootdev-uclass.c
+index 69506e3865fc..974ddee5d2fa 100644
+--- a/boot/bootdev-uclass.c
++++ b/boot/bootdev-uclass.c
+@@ -830,6 +830,33 @@ int bootdev_hunt(const char *spec, bool show)
+ 	return result;
+ }
  
- config GENERATE_SMBIOS_TABLE
- 	bool "Generate an SMBIOS (System Management BIOS) table"
-+	depends on SMBIOS
- 	default y
--	depends on X86 || EFI_LOADER
- 	help
- 	  The System Management BIOS (SMBIOS) specification addresses how
- 	  motherboard and system vendors present management information about
-@@ -1045,6 +1045,19 @@ config SPL_OID_REGISTRY
- 	  unambiguous persistent name (https://en.wikipedia.org/wiki/Object_identifier).
- 	  Enable fast lookup object identifier registry in the SPL.
++int bootdev_unhunt(enum uclass_id id)
++{
++	struct bootdev_hunter *start;
++	int n_ent, i;
++
++	start = ll_entry_start(struct bootdev_hunter, bootdev_hunter);
++	n_ent = ll_entry_count(struct bootdev_hunter, bootdev_hunter);
++	for (i = 0; i < n_ent; i++) {
++		struct bootdev_hunter *info = start + i;
++
++		if (info->uclass == id) {
++			struct bootstd_priv *std;
++			int ret;
++
++			ret = bootstd_get_priv(&std);
++			if (ret)
++				return log_msg_ret("std", ret);
++			if (!(std->hunters_used & BIT(i)))
++				return -EALREADY;
++			std->hunters_used &= ~BIT(i);
++			return 0;
++		}
++	}
++
++	return -ENOENT;
++}
++
+ int bootdev_hunt_prio(enum bootdev_prio_t prio, bool show)
+ {
+ 	struct bootdev_hunter *start;
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index e5fe949f254c..27e172a4fe5b 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -9,6 +9,7 @@
+ #define LOG_CATEGORY UCLASS_USB
  
-+config SMBIOS
-+	bool "SMBIOS support"
-+	depends on X86 || EFI_LOADER
-+	default y
-+	help
-+	  Indicates that this platform can support System Management BIOS
-+	  (SMBIOS) tables. These provide various pieces of information about
-+	  the board, such as the manufacturer and the model name.
+ #include <common.h>
++#include <bootdev.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <log.h>
+@@ -208,6 +209,13 @@ int usb_stop(void)
+ #ifdef CONFIG_USB_STORAGE
+ 	usb_stor_reset();
+ #endif
++	if (IS_ENABLED(CONFIG_BOOTSTD)) {
++		int ret;
 +
-+	  See GENERATE_SMBIOS_TABLE which controls whether U-Boot actually
-+	  creates these tables, rather than them coming from a previous firmware
-+	  stage.
++		ret = bootdev_unhunt(UCLASS_USB);
++		if (IS_ENABLED(CONFIG_BOOTSTD_FULL) && ret && ret != -EALREADY)
++			printf("failed to unhunt USB (err=%dE)\n", ret);
++	}
+ 	uc_priv->companion_device_count = 0;
+ 	usb_started = 0;
+ 
+diff --git a/include/bootdev.h b/include/bootdev.h
+index 848233187f87..b079a91b5b7f 100644
+--- a/include/bootdev.h
++++ b/include/bootdev.h
+@@ -320,6 +320,15 @@ int bootdev_hunt(const char *spec, bool show);
+  */
+ int bootdev_hunt_prio(enum bootdev_prio_t prio, bool show);
+ 
++/**
++ * bootdev_unhunt() - Mark a device as needing to be hunted again
++ *
++ * @id: uclass ID to update
++ * Return: 0 if done, -EALREADY if already in this state, -ENOENT if no hunter
++ * found for that uclass
++ */
++int bootdev_unhunt(enum uclass_id id);
 +
- config SMBIOS_PARSER
- 	bool "SMBIOS parser"
- 	help
+ /**
+  * bootdev_hunt_and_find_by_label() - Hunt for bootdevs by label
+  *
 -- 
 2.42.0.459.ge4e396fd5e-goog
 
