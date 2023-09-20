@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A927CCE79AB
-	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 07:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D8FCE79AC
+	for <u-boot@archiver.kernel.org>; Wed, 20 Sep 2023 08:14:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CC0286AC0;
-	Wed, 20 Sep 2023 09:45:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 1A02986AFA;
+	Wed, 20 Sep 2023 10:14:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="NxtiVddI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D2xX6KCT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 176B986AA7; Wed, 20 Sep 2023 09:45:35 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 61F2386B10; Wed, 20 Sep 2023 10:14:35 +0200 (CEST)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C74586C3E
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 09:45:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id AE59E86AEE
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 10:14:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-530e180ffcbso4192226a12.1
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 00:45:31 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-578b4981526so1205780a12.0
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 01:14:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1695195931; x=1695800731;
- darn=lists.denx.de; 
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Y6wFaQuObfeEipzODxmiguDZEKiWBCREDCNx43vJogk=;
- b=NxtiVddIZpm6l2Z0kyfAoiduLd+GISlCiaZZrQGXZ7dVHaf7wxMMx3N94+C2Oqbs/n
- KTZ0D2buK+IohxyKLmoqXYYPiO3XkFwmwfUxMZL2w3V09mzDHVHMF6kvtYO0Bu/pxpMG
- f5Q4dN5g3566hnpfrsnbKvcD46YTt/DUGnZn0=
+ d=linaro.org; s=google; t=1695197671; x=1695802471; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BzAOnsl4Qs5yUwYCOEOTQxj8ETOWpza7NsWK4otbvoQ=;
+ b=D2xX6KCTNg+tLcSfhLjqD7de+GKQ5iV8z54M0EMt/UsIBwEOusIoffzfI0DH/+J+Kl
+ WP2Lt21jQlFQ32hKpvFRXjz7uZ/1bmCMQ8HIJuwkKJoeWphodmYLp2T2R4XaeOK4Y9CB
+ n6klmsl/ELbZkULOddtUBo2d5Zj3HQmeGQwiXFHufmKLY3xWsIE0IAY2zeo9iWqfXMxQ
+ bAqgPk2BU///rMYH0ZgSeJ2eIw6/lKFjTsIHjuW/OKX2V6vCHRVp3HRRwWIFjR1st9ua
+ kXoVP4rmbIfQVe1/Jwn21RiTr1/UfEHokpuYbgZvRCKPuSnjIP65VC2BWi1EW89e3WAv
+ 7M0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695195931; x=1695800731;
- h=to:subject:message-id:date:from:in-reply-to:references:mime-version
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Y6wFaQuObfeEipzODxmiguDZEKiWBCREDCNx43vJogk=;
- b=HBYcYIPlRRyboylK0/ui1UcPxnNob3pkeBfmJCMs1kRPul0jevwMZYSfW5e+U15to7
- Srr1+wk2CO/nsvhuQSQJ9xdIjj+nuzZGaC0ywLc300qy4gsSRgXwXsLgfG6laNStZCYN
- qmqMHNa5pTDsFn507BilzmXJlUPnJCb9ibBKJU9D9u0VSDaGsA1tWg/Ryk+jrcTSyblD
- puTwUr1beoCadBeoNObVt4RAoSKF2rlVCc84Z4wnvlbv5hHVGFg7clPVEOK3qFrKtv9G
- gz55lK23KL3Udj+L3O+N/unu9Sz1g58JYSKygWmMuuieubps2KAlq7Z+LulyMgaeZ72u
- zKEA==
-X-Gm-Message-State: AOJu0YzDl31VONi8Nkw7105s/yeHxW+pZIIYRjc9ObGpU3KiA0s2hf2e
- wIAphuwuKDKcCjgi/RCvMGk4o4d0F3CNskCJSqvNtQ==
-X-Google-Smtp-Source: AGHT+IG9lfxxdc65YE+c/9HDzZOcmJNcmoGPKKnowO9r9Z5vYHz4/w2B3/fyoiecjs2XPum75XumEPoHWwewHZg46yE=
-X-Received: by 2002:aa7:d291:0:b0:525:734a:bf30 with SMTP id
- w17-20020aa7d291000000b00525734abf30mr1545157edq.36.1695195930603; Wed, 20
- Sep 2023 00:45:30 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695197671; x=1695802471;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BzAOnsl4Qs5yUwYCOEOTQxj8ETOWpza7NsWK4otbvoQ=;
+ b=PCl7+/+1ouQSl+QpXBgrsmPEIgGsVPbDUBXUUrC4mfLlk6UMf50aFMcvLU9ukno9bL
+ GUxpzhZGKnWg1qTDA38mpAnk9e/E1rrw/lMNQDNBsoQMsW54UWEmlQYBXOE9oLlM9npI
+ CfUWqJPVM1oUzw9edzZ/Md6rlsX/cvkSfIOlguJOaddyNexweVYSBDphvkSXlxv2eDeo
+ RusqakMm9j461y7SultG3q+Q6vKCsd2cE24WChXJMx9sYGCxAo1S5O30uBoPW2nHnmBH
+ vvZtix54Up5w8l1tvOZTD9tcJD6txHVtEC5BcYSzdB7h85lHdj4KQBm7GghNHU2aOMsZ
+ W2uQ==
+X-Gm-Message-State: AOJu0YxNX6xA0omCzZ/7hi8w3iJIXbukKFHfikqwPAHNKO1LQaMgRs3X
+ Y4STh3Gy9DgknJpwtx7ivhW8YVhs860ZtUAUDfIifg==
+X-Google-Smtp-Source: AGHT+IHejbWoyOhScD5GU4NjSHpzPEfNJTtt2a22dlMOcJDuEUDPl15PQdgVpn7Q7d890MFOSqxW3Gzmo/XEF93a+gM=
+X-Received: by 2002:a17:90a:8048:b0:26b:6095:bc3f with SMTP id
+ e8-20020a17090a804800b0026b6095bc3fmr1786233pjw.33.1695197670641; Wed, 20 Sep
+ 2023 01:14:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230808130250.188588-1-ada@thorsis.com>
- <20230808130250.188588-3-ada@thorsis.com>
- <CAOf5uwkgaoGyB3kS7Kf4GZyvAcGDJMTRPajXa4SQVy7LU6BJDA@mail.gmail.com>
- <20230808-elusive-apple-4e3ce1331b5a@ifak-system.com>
- <e913d8c6-3daf-0a58-3813-253cb5dee79c@collabora.com>
- <CAOf5uwkzJXU6XU-3gaSAkApzjv0Yf_C7iqjwrVptsyWyfRTm8g@mail.gmail.com>
- <e05bf619-0d9b-2b56-9b50-41b1e24b5500@collabora.com>
- <20230920-renewed-lantern-717bbbd48120@ifak-system.com>
-In-Reply-To: <20230920-renewed-lantern-717bbbd48120@ifak-system.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Wed, 20 Sep 2023 09:45:18 +0200
-Message-ID: <CAOf5uwm8LHejpxf7A1R_0iymr6d2rcbYTLHeg-sGv4Y1vrS2_Q@mail.gmail.com>
-Subject: Re: [PATCH 2/2] mtd: nand: raw: atmel: Add error handling when
- rb-gpios missing
-To: Eugen Hristev <eugen.hristev@collabora.com>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>, 
- U-Boot-Denx <u-boot@lists.denx.de>, Mihai Sain <mihai.sain@microchip.com>
+References: <20230619212303.128288-1-raymond.mao@linaro.org>
+ <20230619212303.128288-4-raymond.mao@linaro.org>
+ <bc6db8a2-1e30-8707-8263-13f417b176dd@gmx.de>
+ <4171409a-6da4-8075-4dd9-140adeb78f3b@gmx.de>
+ <CAEfUkUJWj=+3gt=aTbenUUjkpRPpWPb_W6tNsyOVOcE9JENuBA@mail.gmail.com>
+ <CADQ0-X9JaYxxT4ySmKiFs3xjA88wx-1iNxHQJ+ZZq7hwSL6=1g@mail.gmail.com>
+ <91930fc5-d588-128d-6f83-f627e27bfd32@gmx.de>
+ <CAEfUkULzueHM7nER3RcAJJEzNt16vOgpVfB3QJO+Kn3B9rtFSQ@mail.gmail.com>
+In-Reply-To: <CAEfUkULzueHM7nER3RcAJJEzNt16vOgpVfB3QJO+Kn3B9rtFSQ@mail.gmail.com>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Wed, 20 Sep 2023 17:14:19 +0900
+Message-ID: <CADQ0-X-GDHr754Vp3+pKABpP4FBuYbSfZnx9pfQVVUtnerFDwQ@mail.gmail.com>
+Subject: Re: [PATCH v10 3/4] Boot var automatic management for removable medias
+To: Raymond Mao <raymond.mao@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,210 +95,288 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi Raymond, Heinrich, Ilias,
 
-Il mer 20 set 2023, 08:13 Alexander Dahl <ada@thorsis.com> ha scritto:
-
-> Hello Eugen, hello Michael,
+On Wed, 19 Jul 2023 at 07:11, Raymond Mao <raymond.mao@linaro.org> wrote:
 >
-> Am Wed, Aug 23, 2023 at 01:59:58PM +0300 schrieb Eugen Hristev:
-> > On 8/23/23 09:54, Michael Nazzareno Trimarchi wrote:
-> > > Hi
-> > >
-> > > On Wed, Aug 23, 2023 at 8:28=E2=80=AFAM Eugen Hristev
-> > > <eugen.hristev@collabora.com> wrote:
-> > > >
-> > > > Hi,
-> > > >
-> > > > On 8/8/23 18:03, Alexander Dahl wrote:
-> > > > > Hello Michael,
-> > > > >
-> > > > > Am Tue, Aug 08, 2023 at 03:49:45PM +0200 schrieb Michael Nazzaren=
-o
-> Trimarchi:
-> > > > > > Hi
-> > > > > >
-> > > > > > On Tue, Aug 8, 2023 at 3:03=E2=80=AFPM Alexander Dahl <ada@thor=
-sis.com>
+> Hi Heinrich,
+>
+> I checkouted the 'origin/removable_medias' branch from the 'EFI U-Boot Cu=
+stodian Tree'.
+> Run the secureboot test suite on the sandbox locally by './test/py/test.p=
+y --bd sandbox --build -k efi_secboot'.
+> But there are no errors observed for 'test_signed.py'.
+> Below is the output logs:
+> ```
+> ./test/py/test.py --bd sandbox --build -k efi_secboot
+> +make O=3D/home/raymond/upstream/U-Boot-custodian/u-boot-efi/build-sandbo=
+x -s sandbox_defconfig
+> +make O=3D/home/raymond/upstream/U-Boot-custodian/u-boot-efi/build-sandbo=
+x -s -j2
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D test session starts =3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> platform linux -- Python 3.10.9, pytest-6.2.5, py-1.10.0, pluggy-0.13.0
+> rootdir: /home/raymond/upstream/U-Boot-custodian/u-boot-efi/test/py, conf=
+igfile: pytest.ini
+> plugins: xdist-2.5.0, forked-1.6.0
+> collected 1147 items / 1128 deselected / 19 selected
+>
+> test/py/tests/test_efi_secboot/test_authvar.py .....                     =
+                                                                           =
+                                                [ 26%]
+> test/py/tests/test_efi_secboot/test_signed.py ........                   =
+                                                                           =
+                                                [ 68%]
+> test/py/tests/test_efi_secboot/test_signed_intca.py ...                  =
+                                                                           =
+                                                [ 84%]
+> test/py/tests/test_efi_secboot/test_unsigned.py ...                      =
+                                                                           =
+                                                [100%]
+>
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D 19 passed, 1128 deselected in 78.28s (0:01:18) =3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ```
+> Is it a pipeline issue? I didn't find a button to retrigger the failed jo=
+bs. Do I have the permissions?
+>
+>
+> The HEAD of my testing workspace is on:
+> ```
+> commit c88c134c29934654a696aef61ba63ff2c9a8481e (HEAD -> removable_medias=
+, origin/removable_medias)
+> Author: Raymond Mao <raymond.mao@linaro.org>
+> Date:   Mon Jun 19 14:23:00 2023 -0700
+>
+>     Boot var automatic management for removable medias
+> ```
+> Same as the one for pipeline: https://source.denx.de/u-boot/custodians/u-=
+boot-efi/-/pipelines/16948
+
+I could reproduce the error on efi_secboot tests and find the cause.
+
+The efi_secboot tests expect that BootOrder is not defined.
+WIth this "Boot var automatic management for removable medias" patch,
+BootOrder is added when the disk is detected.
+In my testing, the BootOrder variable has two entries and the test ends up =
+with
+an unexpected failure since efibootmgr falls back to BootOrder when
+loading from BootNext failed.
+
+=3D=3D=3D
+Loading from BootNext failed, falling back to BootOrder
+Loading Boot0000 'mmc 1:1' failed
+Loading Boot0001 'host 0:1' failed
+efi_bootmgr_load() returned: 14
+efi_start_image() returned: 2
+=3D=3D=3D
+
+I think we need to clear the BootOrder variable at the beginning of tests.
+I will resend this patch with efi_secboot pytest modification.
+
+Thanks,
+Masahisa Kojima
+
+>
+> Thanks!
+> Regards,
+> Raymond
+>
+> On Tue, 18 Jul 2023 at 11:35, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+>>
+>> On 18.07.23 11:03, Masahisa Kojima wrote:
+>> > Hi Raymond,
+>> >
+>> > On Tue, 18 Jul 2023 at 05:23, Raymond Mao <raymond.mao@linaro.org> wro=
+te:
+>> >>
+>> >> Hi Heinrich,
+>> >>
+>> >> I run 'make tests' with the patches locally but no errors observed fr=
+om 'test_signed.py', below are few lines from the output console:
+>> >> ```
+>> >> test/py/tests/test_efi_secboot/test_signed.py ssssssss               =
+                                                                           =
+                                                    [      90%]
+>> >> ```
+>> >
+>> > I think the test cases are just skipped, not executed.
+>> >
+>> > I guess that some required packages are missing on the host machine,
+>> > such as sbsigntool, efitools and libguestfs-tools.
+>> > build-sandbox/test-log.html will help to analyze why the tests are ski=
+pped.
+>> >
+>> > The following document describes prerequisites to run python tests.
+>> > https://u-boot.readthedocs.io/en/latest/develop/py_testing.html
+>> >
+>> > 'make tests' runs many test cases and takes time.
+>> > './test/py/test.py --bd sandbox --build -k efi_secboot' will run only
+>> > the efi_secboot test
+>> > and it will be useful for debugging purposes.
+>> >
+>> > Thanks,
+>> > Masahisa Kojima
+>>
+>> To get more output describing why tests are skipped or fail use
+>>
+>>     export PYTEST_ADDOPTS=3D"-ra"
+>>
+>> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/16948
+>> shows the errors with the suggested patch.
+>>
+>> Best regards
+>>
+>> Heinrich
+>>
+>> >
+>> >
+>> >>
+>> >> Regards,
+>> >> Raymond
+>> >>
+>> >> On Sat, 15 Jul 2023 at 05:19, Heinrich Schuchardt <xypron.glpk@gmx.de=
 > wrote:
-> > > > > > >
-> > > > > > > Adapt behaviour to Linux kernel driver.
-> > > > > > >
-> > > > > > > The return value of gpio_request_by_name_nodev() was not
-> checked before,
-> > > > > > > and thus in case 'rb-gpios' was missing in DT, rb.type was se=
-t
-> to
-> > > > > > > ATMEL_NAND_GPIO_RB nevertheless, leading to output like this
-> for
-> > > > > > > example (on sam9x60-curiosity with the line removed from dts)=
-:
-> > > > > > >
-> > > > > > >       NAND:  Could not find valid ONFI parameter page; aborti=
-ng
-> > > > > > >       device found, Manufacturer ID: 0xc2, Chip ID: 0xdc
-> > > > > > >       Macronix NAND 512MiB 3,3V 8-bit
-> > > > > > >       512 MiB, SLC, erase size: 256 KiB, page size: 4096, OOB
-> size: 64
-> > > > > > >       atmel-nand-controller nand-controller: NAND scan failed=
-:
-> -22
-> > > > > > >       Failed to probe nand driver (err =3D -22)
-> > > > > > >       Failed to initialize NAND controller. (error -22)
-> > > > > > >       0 MiB
-> > > > > > >
-> > > > > > > Note: not having that gpio assigned in dts is fine, the drive=
-r
-> does not
-> > > > > > > override nand_chip->dev_ready() then and a generic solution i=
+>> >>>
+>> >>> On 7/9/23 10:56, Heinrich Schuchardt wrote:
+>> >>>> On 6/19/23 23:23, Raymond Mao wrote:
+>> >>>>> Changes for complying to EFI spec =C2=A73.5.1.1
+>> >>>>> 'Removable Media Boot Behavior'.
+>> >>>>> Boot variables can be automatically generated during a removable
+>> >>>>> media is probed. At the same time, unused boot variables will be
+>> >>>>> detected and removed.
+>> >>>>>
+>> >>>>> Please note that currently the function 'efi_disk_remove' has no
+>> >>>>> ability to distinguish below two scenarios
+>> >>>>> a) Unplugging of a removable media under U-Boot
+>> >>>>> b) U-Boot exiting and booting an OS
+>> >>>>> Thus currently the boot variables management is not added into
+>> >>>>> 'efi_disk_remove' to avoid boot options being added/erased
+>> >>>>> repeatedly under scenario b) during power cycles
+>> >>>>> See TODO comments under function 'efi_disk_remove' for more detail=
 s
-> used.
-> > > > > > >
-> > > > > > > Fixes: 6a8dfd57220d ("nand: atmel: Add DM based NAND driver")
-> > > > > > > Signed-off-by: Alexander Dahl <ada@thorsis.com>
-> > > > > > > ---
-> > > > > > >    drivers/mtd/nand/raw/atmel/nand-controller.c | 11
-> +++++++----
-> > > > > > >    1 file changed, 7 insertions(+), 4 deletions(-)
-> > > > > > >
-> > > > > > > diff --git a/drivers/mtd/nand/raw/atmel/nand-controller.c
-> b/drivers/mtd/nand/raw/atmel/nand-controller.c
-> > > > > > > index 2b29c8def6..8e745a5111 100644
-> > > > > > > --- a/drivers/mtd/nand/raw/atmel/nand-controller.c
-> > > > > > > +++ b/drivers/mtd/nand/raw/atmel/nand-controller.c
-> > > > > > > @@ -1600,10 +1600,13 @@ static struct atmel_nand
-> *atmel_nand_create(struct atmel_nand_controller *nc,
-> > > > > > >                           nand->cs[i].rb.type =3D
-> ATMEL_NAND_NATIVE_RB;
-> > > > > > >                           nand->cs[i].rb.id =3D val;
-> > > > > > >                   } else {
-> > > > > > > -                       gpio_request_by_name_nodev(np,
-> "rb-gpios", 0,
-> > > > > > > -
-> &nand->cs[i].rb.gpio,
-> > > > > > > -
-> GPIOD_IS_IN);
-> > > > > > > -                       nand->cs[i].rb.type =3D
-> ATMEL_NAND_GPIO_RB;
-> > > > > > > +                       ret =3D gpio_request_by_name_nodev(np=
-,
-> "rb-gpios", 0,
-> > > > > > > +
-> &nand->cs[i].rb.gpio,
-> > > > > > > +
-> GPIOD_IS_IN);
-> > > > > > > +                       if (ret)
-> > > > > > > +                               dev_err(nc->dev, "Failed to
-> get R/B gpio (err =3D %d)\n", ret);
-> > > > > >
-> > > > > > Should not then an error here
-> > > > >
-> > > > > Different log level or no message at all?
-> > > > >
-> > > > > Note: Linux prints the same message with error level in that case=
-.
-> > > > >
-> > > > > Greets
-> > > > > Alex
-> > > > >
-> > > >
-> > > > Since the rb-gpios is optional, we can continue probing without it.
-> > > > Throwing an error message is optional and pure informative. So I am
-> fine
-> > > > with it
-> > > >
-> > >
-> > > Yes ok, but I'm not sure linux give an error if the gpio is get as
-> > > optional and condition
-> > > is IS_ERR. Am I right?
-> >
-> >
-> >                       if (IS_ERR(gpio) && PTR_ERR(gpio) !=3D -ENOENT) {
-> >                               dev_err(nc->dev,
-> >                                       "Failed to get R/B gpio (err =3D
-> %ld)\n",
-> >                                       PTR_ERR(gpio));
-> >                               return ERR_CAST(gpio);
-> >                       }
-> >
-> > So Linux throws the message if IS_ERR . If the property is missing
-> (ENOENT)
-> > it moves on.
-> >
-> > Can we replicate the same behavior or this behavior does not suit us in
-> > U-boot ?
-> >
-> > Basically I think it should be :
-> >
-> >               if (ret && ret !=3D -ENOENT)
-> >                       dev_err(...)
-> >               if (!ret)
-> >                       rb.type =3D ATMEL_NAND_GPIO_RB;
-> >
-> > Is this what you had in mind Michael ?
->
-> The discussion between you guys somehow got stuck.  I still have this
-> patch on my TODO list, but I'm not sure how to proceed.  Please advice
-> in which direction to go forward, there's still an error condition
-> (described in the initial commit message) here, which needs to be
-> handled, otherwise the NAND flash might not be usable.
-
-
-Yes the suggestion above is what is the right path to follow.
-
-Michael
-
->
-> Greets
-> Alex
->
-> >
-> > Eugen
-> >
-> > >
-> > > For the rest is fine
-> > >
-> > > Michael
-> > >
-> > > > What I wanted to ask is what happens with nand->cs[i].rb.type , is
-> it 0
-> > > > by default ?
-> > > >
-> > > > Other than that, I can apply this patch, Michael, do you have any
-> more
-> > > > comments on it ?
-> > > >
-> > > > Thanks,
-> > > > Eugen
-> > > > > >
-> > > > > > Michael
-> > > > > >
-> > > > > > > +                       else
-> > > > > > > +                               nand->cs[i].rb.type =3D
-> ATMEL_NAND_GPIO_RB;
-> > > > > > >                   }
-> > > > > > >
-> > > > > > >                   gpio_request_by_name_nodev(np, "cs-gpios", =
-0,
-> > > > > > > --
-> > > > > > > 2.30.2
-> > > > > > >
-> > > > > >
-> > > > > >
-> > > > > > --
-> > > > > > Michael Nazzareno Trimarchi
-> > > > > > Co-Founder & Chief Executive Officer
-> > > > > > M. +39 347 913 2170
-> > > > > > michael@amarulasolutions.com
-> > > > > > __________________________________
-> > > > > >
-> > > > > > Amarula Solutions BV
-> > > > > > Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-> > > > > > T. +31 (0)85 111 9172
-> > > > > > info@amarulasolutions.com
-> > > > > > www.amarulasolutions.com
-> > > >
-> > >
-> > >
-> >
->
+>> >>>>>
+>> >>>>> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+>> >>>>> ---
+>> >>>>> Changes in v3
+>> >>>>> - Split the patch into moving and renaming functions and
+>> >>>>>     individual patches for each changed functionality
+>> >>>>> Changes in v5
+>> >>>>> - Move function call of efi_bootmgr_update_media_device_boot_optio=
+n()
+>> >>>>>     from efi_init_variables() to efi_init_obj_list()
+>> >>>>> Changes in v6
+>> >>>>> - Revert unrelated changes
+>> >>>>> Changes in v7
+>> >>>>> - adapt the return code of function
+>> >>>>>     efi_bootmgr_update_media_device_boot_option()
+>> >>>>> Changes in v8
+>> >>>>> - add a note in the commit message for future reference
+>> >>>>> Changes in v9
+>> >>>>> - amend the note text in the commit message
+>> >>>>> - add a TODO comment in 'efi_disk_remove'
+>> >>>>> Changes in v10
+>> >>>>> - fix typo and build failures with 'CONFIG_CMD_BOOTEFI_BOOTMGR=3Dn=
+'
+>> >>>>>
+>> >>>>>    lib/efi_loader/efi_disk.c  | 18 ++++++++++++++++++
+>> >>>>>    lib/efi_loader/efi_setup.c |  7 +++++++
+>> >>>>>    2 files changed, 25 insertions(+)
+>> >>>>>
+>> >>>>> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+>> >>>>> index d2256713a8..911a4adfb1 100644
+>> >>>>> --- a/lib/efi_loader/efi_disk.c
+>> >>>>> +++ b/lib/efi_loader/efi_disk.c
+>> >>>>> @@ -687,6 +687,13 @@ int efi_disk_probe(void *ctx, struct event *e=
+vent)
+>> >>>>>                return -1;
+>> >>>>>        }
+>> >>>>> +    /* only do the boot option management when UEFI sub-system is
+>> >>>>> initialized */
+>> >>>>> +    if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) &&
+>> >>>>> efi_obj_list_initialized =3D=3D EFI_SUCCESS) {
+>> >>>>> +        ret =3D efi_bootmgr_update_media_device_boot_option();
+>> >>>>> +        if (ret !=3D EFI_SUCCESS)
+>> >>>>> +            return -1;
+>> >>>>> +    }
+>> >>>>> +
+>> >>>>>        return 0;
+>> >>>>>    }
+>> >>>>> @@ -773,6 +780,17 @@ int efi_disk_remove(void *ctx, struct event *=
+event)
+>> >>>>>            return efi_disk_delete_part(dev);
+>> >>>>>        else
+>> >>>>>            return 0;
+>> >>>>> +
+>> >>>>> +    /*
+>> >>>>> +     * TODO A flag to distinguish below 2 different scenarios of =
+this
+>> >>>>> +     * function call is needed:
+>> >>>>> +     * a) Unplugging of a removable media under U-Boot
+>> >>>>> +     * b) U-Boot exiting and booting an OS
+>> >>>>> +     * In case of scenario a),
+>> >>>>> efi_bootmgr_update_media_device_boot_option()
+>> >>>>> +     * needs to be invoked here to update the boot options and re=
+move
+>> >>>>> the
+>> >>>>> +     * unnecessary ones.
+>> >>>>> +     */
+>> >>>>
+>> >>>> As in future we want to integrate more EFI drivers with the driver =
+model
+>> >>>> such a status should be in a global variable. It will have to be se=
+t in
+>> >>>> ExitBootServices() before invoking dm_remove_devices_flags().
+>> >>>>
+>> >>>> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> >>>>
+>> >>>>> +
+>> >>>>>    }
+>> >>>>>    /**
+>> >>>>> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup=
+.c
+>> >>>>> index 58d4e13402..69c8b27730 100644
+>> >>>>> --- a/lib/efi_loader/efi_setup.c
+>> >>>>> +++ b/lib/efi_loader/efi_setup.c
+>> >>>>> @@ -245,6 +245,13 @@ efi_status_t efi_init_obj_list(void)
+>> >>>>>        if (ret !=3D EFI_SUCCESS)
+>> >>>>>            goto out;
+>> >>>>> +    if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR)) {
+>> >>>>> +        /* update boot option after variable service initialized =
+*/
+>> >>>>> +        ret =3D efi_bootmgr_update_media_device_boot_option();
+>> >>>>> +        if (ret !=3D EFI_SUCCESS)
+>> >>>>> +            goto out;
+>> >>>>> +    }
+>> >>>>> +
+>> >>>>>        /* Define supported languages */
+>> >>>>>        ret =3D efi_init_platform_lang();
+>> >>>>>        if (ret !=3D EFI_SUCCESS)
+>> >>>>
+>> >>>
+>> >>> This patch leads to a test failure in
+>> >>>
+>> >>> test/py/tests/test_efi_secboot/test_signed.py::TestEfiSignedImage::t=
+est_efi_signed_image_auth2
+>> >>>
+>> >>> No EFI system partition
+>> >>> Failed to persist EFI variables
+>> >>>
+>> >>> Please, run 'make tests' before resubmitting.
+>> >>>
+>> >>> Best regards
+>> >>>
+>> >>> Heinrich
+>>
