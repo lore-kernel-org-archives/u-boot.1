@@ -4,58 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E878E7D0A4
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 18:45:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AFE9E7D0A2
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 18:46:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 798C786BF2;
-	Thu, 21 Sep 2023 20:45:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CE105869F1;
+	Thu, 21 Sep 2023 20:45:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1695321915;
-	bh=V3jD7VfgP+yIJoOg/SMK8Fb9jJ8XROxTT5Z8ez1pQOk=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=kAA9XbNFZdjWBA4KW0ElVohArnig/ci8oUoz23BZw4zJUtnIwGx9So1nj8XdMh/SX
-	 3mpLukakxanJLgoAQZRvmWSVLzLkiyHeIlVHI87tCI1hDxbkNny+t1wykPCZ/0/rFw
-	 rzrrlNgw9aEvjuWjp6l09WlFMZpvRilYMzoKsL9hNNHpumi9vM1refJ+D57yDrdJ37
-	 xNPKU5oPcxuCboVNPA9lU/85Ve1QJSa4SOZB/pkXP6SlbfpedjxanMrHmd1Mf/K8Ln
-	 HCJBPNby8AjJu23Xo5dwJoCKN8MBg89wHW/Sk1fNVfJdrSibDFYF5+THDfYpu9xJLt
-	 9EY6f9NLtij3Q==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="l832ZPKw";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C0BA986BEC; Thu, 21 Sep 2023 20:45:28 +0200 (CEST)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D707F86A9F;
- Thu, 21 Sep 2023 20:45:10 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1695321911;
- bh=V3jD7VfgP+yIJoOg/SMK8Fb9jJ8XROxTT5Z8ez1pQOk=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ulkyGtuFULNqt92RJhWVGf0wAnjCLdKAU6zLHtJ7e8o5ed2TKKtOUuMfnn2YWOxQJ
- Ek/LstWuOx++6d0m60E2rSHHmPVhaB+TZynOWBMynDmtT46C9v39vkWvzV+EJFMh8c
- mUvSY2RYjK/WwdW8fMZcIWpn/V2UEP7T1mhKDRP1/9k7S17OoTYch2hWjuCKU+mhIh
- NnqCD+QM/3Apt8tHdJZpPXrolpT7AuKQEeWy1aPe+V/J3LlSBYWeWiR6mG9KaLG0i2
- p9mJ08Kq6yEb60NVzYnSN8ZcgIq9VXE16DCML2lMo3N5mEorCD9+Bin0AeF7loVGwI
- ra6DhRrmenB9w==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Fabio Estevam <festevam@gmail.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Ovidiu Panait <ovpanait@gmail.com>, Roger Quadros <rogerq@kernel.org>,
- Simon Glass <sjg@chromium.org>, Stefano Babic <sbabic@denx.de>,
- u-boot@dh-electronics.com
-Subject: [PATCH 5/5] arm64: dts: imx8mp: Add DT overlay describing i.MX8MP
- DHCOM SoM rev.100
-Date: Thu, 21 Sep 2023 20:44:20 +0200
-Message-Id: <20230921184420.45186-5-marex@denx.de>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230921184420.45186-1-marex@denx.de>
-References: <20230921184420.45186-1-marex@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 2E1FE869F1
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 20:45:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-79f7e7342e3so47969339f.1
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 11:45:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695321925; x=1695926725; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DnKiy3ihwgd/VOoqSanohGN5ffhK+cZ/VpjdYKJUjf8=;
+ b=l832ZPKwAszo8A4z+F4IunJy6zr8PT+K58IfkKifkq5loiVpzv9j3HzEKenT8TEEQW
+ aw6vacJMjAU22WOMcoqA8OI+HhVCpP/VBeo9SKj9Bh5m1GcdJzfDPYHY4+yMPOAmfSa4
+ R5JTeQmHW9ZO6agGPnCM2Miw1BmcZ1r182B4c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695321925; x=1695926725;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DnKiy3ihwgd/VOoqSanohGN5ffhK+cZ/VpjdYKJUjf8=;
+ b=rLLtSF5JDxelDs+B7ZPiYy2ALJwxxfKYAaROU3dZB2gvQ/1CO7QemFGYUEmipbYtOs
+ JYQehFbWIAjbUjS8tdOaezNUiGxXc5hg4S0fdB/ACSjr+L7IqQ+ImvIlkYX/RP7N6ku6
+ Tw5yKUJUAMR84Szpbva2vJMvWKLDz5dcCxffyoXivtlGhqNh6L5UtztQW+PFY1+PDOEX
+ 6yEMMilQc5e8WjmeK1p8uhqkXooemhUvd7tC8tboyCOia72gwVtfEzdBa01YwO/lYvd+
+ awG6lUieXxM28CrQaoOFhn6Wxk5rC23UeH7Bxh7PX9RQOI0MTRV1xZVSQnHqByjZEIC2
+ G8OQ==
+X-Gm-Message-State: AOJu0YyJVesIl/819AbfpQcZ/Ni8V565E5RFKPgMtbpIBzMs9KxMkwm9
+ f2ugLr9o+9KbWsE5/3ijIQ5bbg==
+X-Google-Smtp-Source: AGHT+IFLx+QxNqVoEsIFpwCXXYW/u8hYUS5LzSu0VrhuBFkVi/scOpz5E7kCyC+9y88eBDeWXVQ/9A==
+X-Received: by 2002:a6b:7303:0:b0:787:34d:f223 with SMTP id
+ e3-20020a6b7303000000b00787034df223mr7074088ioh.11.1695321924839; 
+ Thu, 21 Sep 2023 11:45:24 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:a636:e615:ea83:bc42])
+ by smtp.gmail.com with ESMTPSA id
+ d26-20020a02a49a000000b004290fd3a68dsm511017jam.1.2023.09.21.11.45.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Sep 2023 11:45:24 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: devicetree@vger.kernel.org
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, linux-mtd@lists.infradead.org,
+ Tom Rini <trini@konsulko.com>, Rob Herring <robh@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Conor Dooley <conor+dt@kernel.org>,
+ Dhruva Gole <d-gole@ti.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>,
+ Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
+Subject: [PATCH] dt-bindings: mtd: Add a schema for binman
+Date: Thu, 21 Sep 2023 12:45:14 -0600
+Message-ID: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,270 +92,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The current imx8mp-dhcom-som.dtsi describes production rev.200 SoM,
-add DT overlay which reinstates rev.100 SoM description to permit
-prototype rev.100 SoMs to be used until they get phased out.
+Binman[1] is a tool for creating firmware images. It allows you to
+combine various binaries and place them in an output file.
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>
-Cc: Ovidiu Panait <ovpanait@gmail.com>
-Cc: Roger Quadros <rogerq@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: u-boot@dh-electronics.com
----
- arch/arm/dts/Makefile                         |   2 +
- .../dts/imx8mp-dhcom-pdk3-overlay-rev100.dts  |  10 ++
- .../dts/imx8mp-dhcom-som-overlay-rev100.dts   | 120 ++++++++++++++++++
- arch/arm/dts/imx8mp-dhcom-u-boot.dtsi         |   8 +-
- board/dhelectronics/dh_imx8mp/spl.c           |  16 +++
- 5 files changed, 152 insertions(+), 4 deletions(-)
- create mode 100644 arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
- create mode 100644 arch/arm/dts/imx8mp-dhcom-som-overlay-rev100.dts
+Binman uses a DT schema to describe an image, in enough detail that
+it can be automatically built from component parts, disassembled,
+replaced, listed, etc.
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index a116207b473..f05aa3d21f6 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -1042,11 +1042,13 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
- 	imx8mq-phanbell.dtb \
- 	imx8mp-beacon-kit.dtb \
- 	imx8mp-data-modul-edm-sbc.dtb \
-+	imx8mp-dhcom-som-overlay-rev100.dtbo \
- 	imx8mp-dhcom-som-overlay-eth1xfast.dtbo \
- 	imx8mp-dhcom-som-overlay-eth2xfast.dtbo \
- 	imx8mp-dhcom-pdk-overlay-eth2xfast.dtbo \
- 	imx8mp-dhcom-pdk2.dtb \
- 	imx8mp-dhcom-pdk3.dtb \
-+	imx8mp-dhcom-pdk3-overlay-rev100.dtbo \
- 	imx8mp-evk.dtb \
- 	imx8mp-icore-mx8mp-edimm2.2.dtb \
- 	imx8mp-msc-sm2s.dtb \
-diff --git a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
+Images are typically stored in flash, which is why this binding is
+targeted at mtd. Previous discussion is at [2] [3].
+
+[1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
+[2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.org/
+[3] https://www.spinics.net/lists/devicetree/msg626149.html
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+ .../bindings/mtd/partitions/binman.yaml       | 50 +++++++++++++++
+ .../bindings/mtd/partitions/binman/entry.yaml | 61 +++++++++++++++++++
+ .../bindings/mtd/partitions/partitions.yaml   |  1 +
+ MAINTAINERS                                   |  5 ++
+ 4 files changed, 117 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+ create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
 new file mode 100644
-index 00000000000..f27e6429abe
+index 00000000000000..c792d5a37b700a
 --- /dev/null
-+++ b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
-@@ -0,0 +1,10 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-+/*
-+ * Copyright (C) 2023 Marek Vasut <marex@denx.de>
-+ */
-+/dts-v1/;
-+/plugin/;
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+@@ -0,0 +1,50 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++# Copyright 2023 Google LLC
 +
-+&ethphy0g {
-+	reg = <7>;
-+};
-diff --git a/arch/arm/dts/imx8mp-dhcom-som-overlay-rev100.dts b/arch/arm/dts/imx8mp-dhcom-som-overlay-rev100.dts
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Binman firmware layout
++
++maintainers:
++  - Simon Glass <sjg@chromium.org>
++
++description: |
++  The binman node provides a layout for firmware, used when packaging firmware
++  from multiple projects. For now it just supports a very simple set of
++  features, as a starting point for discussion.
++
++  Documentation for Binman is available at:
++
++  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html
++
++  with the current image-description format at:
++
++  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#image-description-format
++
++properties:
++  compatible:
++    const: u-boot,binman
++
++required:
++  - compatible
++
++additionalProperties: false
++
++examples:
++  - |
++    firmware {
++      binman {
++        compatible = "u-boot,binman";
++
++        u-boot {
++          size = <0xa0000>;
++        };
++
++        atf-bl31 {
++          offset = <0x100000>;
++        };
++      };
++    };
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
 new file mode 100644
-index 00000000000..5d9a00c9429
+index 00000000000000..8003eb4f1a994f
 --- /dev/null
-+++ b/arch/arm/dts/imx8mp-dhcom-som-overlay-rev100.dts
-@@ -0,0 +1,120 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
-+/*
-+ * Copyright (C) 2023 Marek Vasut <marex@denx.de>
-+ */
-+/dts-v1/;
-+/plugin/;
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+@@ -0,0 +1,61 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++# Copyright 2023 Google LLC
 +
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/partitions/binman/entry.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+#include "imx8mp-pinfunc.h"
++title: Binman entry
 +
-+&brcmf {
-+	reset-gpios = <&gpio1 13 GPIO_ACTIVE_LOW>;
-+};
++maintainers:
++  - Simon Glass <sjg@chromium.org>
 +
-+&eeprom0 {	/* EEPROM with EQoS MAC address */
-+	compatible = "atmel,24c02";
-+	pagesize = <16>;
-+};
++description: |
++  The entry node specifies a single entry in the firmware.
 +
-+&eeprom1 {	/* EEPROM with FEC MAC address */
-+	compatible = "atmel,24c02";
-+	pagesize = <16>;
-+};
++  Entries have a specific type, such as "u-boot" or "atf-bl31". If the type
++  is missing, the name is used as the type.
 +
-+&ethphy0f { /* SMSC LAN8740Ai */
-+	pinctrl-0 = <&pinctrl_ethphy0 &pinctrl_ioexp>;
-+	reset-gpios = <&gpio3 20 GPIO_ACTIVE_LOW>;
-+};
++  Note: This definition is intended to be hierarchical, so that entries can
++  appear in other entries. Schema for that is TBD.
 +
-+&ethphy0g { /* Micrel KSZ9131RNXI */
-+	pinctrl-0 = <&pinctrl_ethphy0 &pinctrl_ioexp>;
-+	reset-gpios = <&gpio3 20 GPIO_ACTIVE_LOW>;
-+};
++properties:
++  $nodename:
++    pattern: "^[-a-z]+(-[0-9]+)?$"
 +
-+&i2c3 {
-+	adc@48 {
-+		compatible = "ti,tla2024";
-+		interrupts-extended;
-+	};
-+};
++  type:
++    $ref: /schemas/types.yaml#/definitions/string
 +
-+&ioexp {
-+	status = "disabled";
-+};
++  offset:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    description: |
++      Provides the offset of this entry from the start of its parent section.
++      If this is omitted, Binman will determine this by packing the enclosing
++      section according to alignment rules, etc.
 +
-+&reg_eth_vio {
-+	gpio = <&gpio2 10 GPIO_ACTIVE_LOW>;
-+	pinctrl-0 = <&pinctrl_enet_vio>;
-+	pinctrl-names = "default";
-+};
++  size:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    description: |
++      Provides the size of this entry in bytes. If this is omitted, Binman will
++      use the content size, along with any alignment information, to determine
++      the size of the entry.
 +
-+&rv3032 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_rtc>;
-+	interrupts-extended = <&gpio5 5 IRQ_TYPE_LEVEL_LOW>;
-+};
++additionalProperties: false
 +
-+&uart2 {
-+	bluetooth {
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_uart2_bt>;
-+		shutdown-gpios = <&gpio1 12 GPIO_ACTIVE_HIGH>;
-+	};
-+};
++examples:
++  - |
++    firmware {
++      binman {
++        compatible = "u-boot,binman";
 +
-+&usb_dwc3_0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_usb0_vbus>;
-+};
++        u-boot {
++          size = <0xa0000>;
++        };
 +
-+&usdhc1 {
-+	pinctrl-0 = <&pinctrl_usdhc1 &pinctrl_usdhc1_wl_reg_en>;
-+	pinctrl-1 = <&pinctrl_usdhc1_100mhz &pinctrl_usdhc1_wl_reg_en>;
-+	pinctrl-2 = <&pinctrl_usdhc1_200mhz &pinctrl_usdhc1_wl_reg_en>;
-+};
-+
-+&iomuxc {
-+	pinctrl-0 = <&pinctrl_hog_base
-+		     &pinctrl_dhcom_a &pinctrl_dhcom_b &pinctrl_dhcom_c
-+		     &pinctrl_dhcom_d &pinctrl_dhcom_e &pinctrl_dhcom_f
-+		     &pinctrl_dhcom_g &pinctrl_dhcom_h &pinctrl_dhcom_i
-+		     &pinctrl_dhcom_j &pinctrl_dhcom_k &pinctrl_dhcom_l
-+		     /* GPIO_M is connected to CLKOUT2 */
-+		     &pinctrl_dhcom_int>;
-+
-+	pinctrl_enet_vio: dhcom-enet-vio-grp {
-+		fsl,pins = <
-+			MX8MP_IOMUXC_SD1_RESET_B__GPIO2_IO10		0x22
-+		>;
-+	};
-+
-+	pinctrl_rtc: dhcom-rtc-grp {
-+		fsl,pins = <
-+			/* RTC_#INT Interrupt */
-+			MX8MP_IOMUXC_SPDIF_EXT_CLK__GPIO5_IO05		0x400001c6
-+		>;
-+	};
-+
-+	pinctrl_uart2_bt: dhcom-uart2-bt-grp {
-+		fsl,pins = <
-+			/* BT_REG_EN */
-+			MX8MP_IOMUXC_GPIO1_IO12__GPIO1_IO12		0x144
-+		>;
-+	};
-+
-+	pinctrl_usb0_vbus: dhcom-usb0-grp {
-+		fsl,pins = <
-+			MX8MP_IOMUXC_GPIO1_IO10__USB1_OTG_ID		0x0
-+		>;
-+	};
-+
-+	pinctrl_usdhc1_wl_reg_en: dhcom-usdhc1-wl-reg-en-grp {
-+		fsl,pins = <
-+			/* WL_REG_EN */
-+			MX8MP_IOMUXC_GPIO1_IO13__GPIO1_IO13		0x144
-+		>;
-+	};
-+};
-diff --git a/arch/arm/dts/imx8mp-dhcom-u-boot.dtsi b/arch/arm/dts/imx8mp-dhcom-u-boot.dtsi
-index 6f21fbe1151..a29db0ddd3f 100644
---- a/arch/arm/dts/imx8mp-dhcom-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-dhcom-u-boot.dtsi
-@@ -178,13 +178,13 @@
- 					};
- 				};
++        second-area {
++          type = "atf-bl31";
++          offset = <0x100000>;
++        };
++      };
++    };
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+index 1dda2c80747bd7..849fd15d085ccc 100644
+--- a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
++++ b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+@@ -15,6 +15,7 @@ maintainers:
  
--				fdt-dto-imx8mp-dhcom-pdk-overlay-rev100 {
--					description = "imx8mp-dhcom-pdk-overlay-rev100";
-+				fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100 {
-+					description = "imx8mp-dhcom-pdk3-overlay-rev100";
- 					type = "flat_dt";
- 					compression = "none";
+ oneOf:
+   - $ref: arm,arm-firmware-suite.yaml
++  - $ref: binman.yaml
+   - $ref: brcm,bcm4908-partitions.yaml
+   - $ref: brcm,bcm947xx-cfe-partitions.yaml
+   - $ref: fixed-partitions.yaml
+diff --git a/MAINTAINERS b/MAINTAINERS
+index a4c30221eb305d..ebcbfb4292e8dc 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3505,6 +3505,11 @@ F:	Documentation/filesystems/bfs.rst
+ F:	fs/bfs/
+ F:	include/uapi/linux/bfs_fs.h
  
- 					blob-ext {
--						filename = "imx8mp-dhcom-pdk-overlay-rev100.dtbo";
-+						filename = "imx8mp-dhcom-pdk3-overlay-rev100.dtbo";
- 					};
- 				};
- 			};
-@@ -198,7 +198,7 @@
- 					      "fdt-dto-imx8mp-dhcom-som-overlay-eth2xfast",
- 					      "fdt-dto-imx8mp-dhcom-pdk-overlay-eth2xfast",
- 					      "fdt-dto-imx8mp-dhcom-som-overlay-rev100",
--					      "fdt-dto-imx8mp-dhcom-pdk-overlay-rev100";
-+					      "fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100";
- 				};
- 			};
- 		};
-diff --git a/board/dhelectronics/dh_imx8mp/spl.c b/board/dhelectronics/dh_imx8mp/spl.c
-index 8dc464b1dd7..1b05da53c35 100644
---- a/board/dhelectronics/dh_imx8mp/spl.c
-+++ b/board/dhelectronics/dh_imx8mp/spl.c
-@@ -44,6 +44,7 @@ static const iomux_v3_cfg_t wdog_pads[] = {
- };
- 
- static bool dh_gigabit_eqos, dh_gigabit_fec;
-+static u8 dh_som_rev;
- 
- static void dh_imx8mp_early_init_f(void)
- {
-@@ -166,6 +167,15 @@ int board_spl_fit_append_fdt_skip(const char *name)
- 		}
- 	}
- 
-+	if (dh_som_rev == 0x0) { /* Prototype SoM rev.100 */
-+		if (!strcmp(name, "fdt-dto-imx8mp-dhcom-som-overlay-rev100"))
-+			return 0;
++BINMAN
++M:	Simon Glass <sjg@chromium.org>
++S:	Supported
++F:	Documentation/devicetree/bindings/mtd/partitions/binman*
 +
-+		if (!strcmp(name, "fdt-dto-imx8mp-dhcom-pdk3-overlay-rev100") &&
-+		    of_machine_is_compatible("dh,imx8mp-dhcom-pdk3"))
-+			return 0;
-+	}
-+
- 	return 1;	/* Skip this DTO */
- }
- 
-@@ -175,6 +185,9 @@ static void dh_imx8mp_board_cache_config(void)
- 	const u32 mux_sion[] = {
- 		FIELD_GET(MUX_CTRL_OFS_MASK, MX8MP_PAD_ENET_RX_CTL__GPIO1_IO24),
- 		FIELD_GET(MUX_CTRL_OFS_MASK, MX8MP_PAD_SAI1_TXFS__GPIO4_IO10),
-+		FIELD_GET(MUX_CTRL_OFS_MASK, MX8MP_PAD_NAND_DQS__GPIO3_IO14),
-+		FIELD_GET(MUX_CTRL_OFS_MASK, MX8MP_PAD_SAI1_TXD7__GPIO4_IO19),
-+		FIELD_GET(MUX_CTRL_OFS_MASK, MX8MP_PAD_SAI5_MCLK__GPIO3_IO25),
- 	};
- 	int i;
- 
-@@ -183,6 +196,9 @@ static void dh_imx8mp_board_cache_config(void)
- 
- 	dh_gigabit_eqos = !(readl(GPIO1_BASE_ADDR) & BIT(24));
- 	dh_gigabit_fec = !(readl(GPIO4_BASE_ADDR) & BIT(10));
-+	dh_som_rev = !!(readl(GPIO3_BASE_ADDR) & BIT(14));
-+	dh_som_rev |= !!(readl(GPIO4_BASE_ADDR) & BIT(19)) << 1;
-+	dh_som_rev |= !!(readl(GPIO3_BASE_ADDR) & BIT(25)) << 2;
- 
- 	for (i = 0; i < ARRAY_SIZE(mux_sion); i++)
- 		clrbits_le32(mux_base + mux_sion[i], IOMUX_CONFIG_SION);
+ BITMAP API
+ M:	Yury Norov <yury.norov@gmail.com>
+ R:	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 -- 
-2.40.1
+2.42.0.515.g380fc7ccd1-goog
 
