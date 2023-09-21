@@ -4,64 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C11AE71086
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:04:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB96E71088
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:16:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C06D86377;
-	Thu, 21 Sep 2023 17:04:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6E33186429;
+	Thu, 21 Sep 2023 17:16:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AqCDXvBO";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1695309369;
+	bh=AVaykbtxJ3vljB/qdyOLFHPDmhgiG8pPQ62or8susPI=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Jk1liICuzcxtgY+SKfsLDA8w6psde56w3kFGE5WS0ZmxUGENUf1ySBsaWycRQAkfJ
+	 FN1qowZo1rs7/KGNHB+FnsULR1Bs1Yfy6YxNL6ugNLlJ2JNrF6rauZOfN35S72GFOJ
+	 FhMwwx79WS7+4ZOvCFBKzsgs9PP1pWRht9JoAuvFmVvZs/JxWoUxbv/Rv+jia6ASEg
+	 tZOlmrBpcC359KcqJsIoBZgJ6naO7RLoPVhFX+oJXcmj/U90Rrx1Y3YpyCg0359/2v
+	 JXDRYyhuk8BrMQbumPZE2xS1/63XazyYWCnm4KG3pwFOQZ1dB8CDhMY9n1EjPPz+xQ
+	 ciAl4iE1+HRLQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DCD586429; Thu, 21 Sep 2023 17:04:10 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 9F66F867D2; Thu, 21 Sep 2023 17:16:08 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB0818615A
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:04:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43A6B86377
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:16:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 0DA9F60B7D
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:04:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D3F6C4E761
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:04:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695308645;
- bh=v/UXUlQM2o4IUFlP504e4uf9p/cLTlPizAFmLyo22oE=;
- h=From:Date:Subject:To:Cc:From;
- b=AqCDXvBOvHQfJrDCCTkhdhwoCQ7SZXPjOuzakv1wHlOYCb92Kp/Esu4bRWN4QBvEJ
- dZUMsGsOBK7uWPbbK2+km5sQKVSZMcEMnVBb3SPYv/qpNWnBbpnuPK9WAoLiZ0hP3f
- 8mWxsIgDAsvwJUJn1I49YSwtaW43YWV+Z/KUoeLGtVMbIEdFrdwHoqfhEPh8Bux298
- BLCEo/XTcreBfVZXcz65V6Pct84pPQGN+vKj0ckQTS3ulD61s/mdV+AjW26397KoH/
- PUOdS1VbbkEpP7KOmxWCT9Jn6NoQ8bvMXYFFj5rQFOuh0A6dD0IPBrk7CsBlSKHxQo
- Sxzi6t7k86oEQ==
-Received: by mail-oa1-f42.google.com with SMTP id
- 586e51a60fabf-1d544a4a2f2so598647fac.3
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:04:05 -0700 (PDT)
-X-Gm-Message-State: AOJu0YzIzE5I/3ISO8aFum9uX30jUmvVSSEEIkw05uEET7CXGGbFAk0c
- GfTKFR/RGSgprQwfkEYsu3tzoaQ1iZ3YttgRqVY=
-X-Google-Smtp-Source: AGHT+IET8/xFNTajWEANT0SJvXDmZ00WxjlgoDr0fpSUQZ4vAiXNffUoHt5ME083Q1wG5pxxl7Rudh6nz+PySKuuCuQ=
-X-Received: by 2002:a05:6870:56a4:b0:1ba:2c95:a168 with SMTP id
- p36-20020a05687056a400b001ba2c95a168mr6227251oao.35.1695308644629; Thu, 21
- Sep 2023 08:04:04 -0700 (PDT)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4RrzW72WVwz9sSl;
+ Thu, 21 Sep 2023 17:16:03 +0200 (CEST)
+Message-ID: <84b0485a-5175-8bee-474f-b713f16c00dd@denx.de>
+Date: Thu, 21 Sep 2023 17:16:01 +0200
 MIME-Version: 1.0
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Fri, 22 Sep 2023 00:03:27 +0900
-X-Gmail-Original-Message-ID: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
-Message-ID: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
-Subject: Question about boot failure of AM64-SK
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Nishanth Menon <nm@ti.com>, srk@ti.com, s-vadapalli@ti.com,
- n-francis@ti.com, m-chawdhry@ti.com
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] arm64: versal: Add SelectMAP boot mode identification
+Content-Language: en-US
+To: Michal Simek <michal.simek@amd.com>, "Polak, Leszek" <LPolak@arri.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <DU0PR07MB8419EB5D613237A44374949DC8FAA@DU0PR07MB8419.eurprd07.prod.outlook.com>
+ <5f2b9d87-7427-4a6f-9a67-017ae78cb51d@amd.com>
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <5f2b9d87-7427-4a6f-9a67-017ae78cb51d@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,142 +69,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi.
+On 9/21/23 13:14, Michal Simek wrote:
+> 
+> 
+> On 9/19/23 14:47, Polak, Leszek wrote:
+>> Add missing SelectMAP bootmode for proper identification during boot.
+>>
+>> The SelectMAP configuration interface provides an 8-bit, 16-bit or
+>> 32-bit bidirectional data bus interface to the Versal FPGA
+>> configuration logic that can be used for both configuration and
+>> readback.
+>>
+>> A connected microcontoller to the SelectMAP interface can load boot
+>> image with bitstream, TF-A (ARM Trusted Firmware) and U-Boot.
+>>
+>> This commit adds the missing identification of the SelectMAP mode.
+>>
+>> Signed-off-by: Leszek Polak <lpolak@arri.de>
+>> Cc: Michal Simek <michal.simek@amd.com>
+>> Cc: Stefan Roese <sr@denx.de>
 
-I am seeing a boot failure on AM64-SK.
+Reviewed-by: Stefan Roese <sr@denx.de>
 
+Thanks,
+Stefan
 
-I got the following error in SPL of the main core.
-Do you have any clue?
+>> ---
+>>   arch/arm/mach-versal-net/include/mach/hardware.h | 1 +
+>>   arch/arm/mach-versal/include/mach/hardware.h     | 1 +
+>>   board/xilinx/versal-net/board.c                  | 4 ++++
+>>   board/xilinx/versal/board.c                      | 5 +++++
+>>   4 files changed, 11 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-versal-net/include/mach/hardware.h 
+>> b/arch/arm/mach-versal-net/include/mach/hardware.h
+>> index 9bddb8b00723..767cdd368682 100644
+>> --- a/arch/arm/mach-versal-net/include/mach/hardware.h
+>> +++ b/arch/arm/mach-versal-net/include/mach/hardware.h
+>> @@ -66,6 +66,7 @@ struct crp_regs {
+>>   #define EMMC_MODE    0x00000006
+>>   #define USB_MODE    0x00000007
+>>   #define OSPI_MODE    0x00000008
+>> +#define SELECTMAP_MODE    0x0000000A
+>>   #define SD1_LSHFT_MODE    0x0000000E /* SD1 Level shifter */
+>>   #define JTAG_MODE    0x00000000
+>>   #define BOOT_MODE_USE_ALT    0x100
+>> diff --git a/arch/arm/mach-versal/include/mach/hardware.h 
+>> b/arch/arm/mach-versal/include/mach/hardware.h
+>> index 000af974e867..9d1c2f0dcfc1 100644
+>> --- a/arch/arm/mach-versal/include/mach/hardware.h
+>> +++ b/arch/arm/mach-versal/include/mach/hardware.h
+>> @@ -82,6 +82,7 @@ struct crp_regs {
+>>   #define EMMC_MODE    0x00000006
+>>   #define USB_MODE    0x00000007
+>>   #define OSPI_MODE    0x00000008
+>> +#define SELECTMAP_MODE    0x0000000A
+>>   #define SD1_LSHFT_MODE    0x0000000E /* SD1 Level shifter */
+>>   #define JTAG_MODE    0x00000000
+>>   #define BOOT_MODE_USE_ALT    0x100
+>> diff --git a/board/xilinx/versal-net/board.c 
+>> b/board/xilinx/versal-net/board.c
+>> index f0d2224b332e..992e0df73b30 100644
+>> --- a/board/xilinx/versal-net/board.c
+>> +++ b/board/xilinx/versal-net/board.c
+>> @@ -287,6 +287,10 @@ int board_late_init(void)
+>>           mode = "mmc";
+>>           bootseq = dev_seq(dev);
+>>           break;
+>> +    case SELECTMAP_MODE:
+>> +        puts("SELECTMAP_MODE\n");
+>> +        mode = "selectmap";
+> 
+> We are not defining distro boot for selectmap that's why boot_targets 
+> don't need to be extended. That's why please remove this line.
+> 
+>> +        break;
+>>       default:
+>>           mode = "";
+>>           printf("Invalid Boot Mode:0x%x\n", bootmode);
+>> diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+>> index 60bf37d3c90f..b619dbc73c80 100644
+>> --- a/board/xilinx/versal/board.c
+>> +++ b/board/xilinx/versal/board.c
+>> @@ -213,6 +213,10 @@ int board_late_init(void)
+>>           mode = "mmc";
+>>           bootseq = dev_seq(dev);
+>>           break;
+>> +    case SELECTMAP_MODE:
+>> +        puts("SELECTMAP_MODE\n");
+>> +        mode = "selectmap";
+> 
+> The same here.
+> 
+>> +        break;
+>>       default:
+>>           mode = "";
+>>           printf("Invalid Boot Mode:0x%x\n", bootmode);
+>> @@ -298,6 +302,7 @@ enum env_location env_get_location(enum 
+>> env_operation op, int prio)
+>>               return ENVL_SPI_FLASH;
+>>           return ENVL_NOWHERE;
+>>       case JTAG_MODE:
+>> +    case SELECTMAP_MODE:
+>>       default:
+>>           return ENVL_NOWHERE;
+>>       }
+>> -- 
+>> 2.42.0
+> 
+> The rest looks good to me.
+> 
+> Thanks,
+> Michal
 
-
-Error reading cluster
-fit read sector 0, sectors=985528, dst=, count=18446744073709551615,
-size=0xf09b8
-
-
-The resulting count looks crazy, but I imagine it was just
-that the negative error code was converted to ulong.
-
-
-
-For debugging, I enabled debug() under common/spl/.
-The rest is the same as the latest mainline.
-
-The full log is as follows:
-
-
-
-U-Boot SPL 2023.10-rc4-00047-gb9b83a86f0-dirty (Sep 21 2023 - 14:38:15 +0000)
-SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.7--v09.00.07 (Kool Koala)')
-EEPROM not available at 0x50, trying to read at 0x51
-SPL initial stack usage: 13384 bytes
-SPL malloc() before relocation used 0x32ec bytes (12 KB)
->>SPL: board_init_r()
-spl_init
-Trying to boot from MMC2
-spl: mmc boot mode: fs
-Found FIT
-fit read sector 0, sectors=874340, dst=, count=874339, size=0xd5764
-firmware: 'atf'
-Embedded data: dst=701c0000, size=b2a8
-Warning: Detected image signing certificate on GP device. Skipping
-certificate to prevent boot failure. This will fail if the image was
-also encrypted
-Image OS is ARM Trusted Firmware
-loadables: 'tee'
-Embedded data: dst=9e800000, size=753e0
-Warning: Detected image signing certificate on GP device. Skipping
-certificate to prevent boot failure. This will fail if the image was
-also encrypted
-Loadable is Trusted Execution Environment
-loadables: 'dm'
-Embedded data: dst=89000000, size=0
-Loadable is Unknown OS
-loadables: 'spl'
-Embedded data: dst=80080000, size=4ff18
-Warning: Detected image signing certificate on GP device. Skipping
-certificate to prevent boot failure. This will fail if the image was
-also encrypted
-Loadable is U-Boot
-fdt: 'fdt-1'
-Embedded data: dst=800cf888, size=2af2
-Warning: Detected image signing certificate on GP device. Skipping
-certificate to prevent boot failure. This will fail if the image was
-also encrypted
-loadables: 'spl'
-no string for index 3
-Unsupported OS image.. Jumping nevertheless..
-Loading Environment from MMC... MMC Device 0 not found
-*** Warning - No MMC card found, using default environment
-
-Starting ATF on ARM64 core...
-
-NOTICE:  BL31: v2.9(release):v2.9.0
-NOTICE:  BL31: Built : 10:06:58, Sep 21 2023
-I/TC:
-I/TC: OP-TEE version: 3.22.0 (gcc version 11.4.0 (Ubuntu
-11.4.0-1ubuntu1~22.04)) #1 Thu Sep 21 10:06:54 UTC 2023 aarch64
-I/TC: WARNING: This OP-TEE configuration might be insecure!
-I/TC: WARNING: Please check
-https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
-I/TC: Primary CPU initializing
-I/TC: SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.7--v09.00.07 (Kool Koala)')
-I/TC: HUK Initialized
-I/TC: Activated SA2UL device
-I/TC: Fixing SA2UL firewall owner for GP device
-I/TC: Enabled firewalls for SA2UL TRNG device
-I/TC: SA2UL TRNG initialized
-I/TC: SA2UL Drivers initialized
-I/TC: Primary CPU switching to normal world boot
-
-U-Boot SPL 2023.10-rc4-00047-gb9b83a86f0-dirty (Sep 21 2023 - 14:38:20 +0000)
-SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.7--v09.00.07 (Kool Koala)')
-SPL malloc() before relocation used 0x1f80 bytes (7 KB)
->>SPL: board_init_r()
-spl_init
-Trying to boot from MMC2
-spl: mmc boot mode: fs
-Found FIT
-Error reading cluster
-fit read sector 0, sectors=985528, dst=, count=18446744073709551615,
-size=0xf09b8
-SPL: failed to boot from all boot devices
-### ERROR ### Please RESET the board ###
-
-
-
-
-
-My build sequence is something like this:
-
-
-
-      # for wakeup
-      make -j "$(nproc)" O=build-wakeup CROSS_COMPILE=arm-linux-gnueabihf- \
-          BINMAN_INDIRS="${SNAPCRAFT_STAGE}/ti-linux-firmware" \
-          am64x_evm_r5_defconfig all
-      cp build-wakeup/tiboot3-am64x-gp-evm.bin "${STAGE}/tiboot3.bin"
-
-      # for main
-      make -j "$(nproc)" O=build-main am64x_evm_a53_defconfig
-      make -j "$(nproc)" O=build-main CROSS_COMPILE=aarch64-linux-gnu- \
-          BINMAN_INDIRS="${STAGE}/ti-linux-firmware" \
-          BL31="${STAGE}/bl31.bin" \
-          TEE="${STAGE}/tee-raw.bin" \
-          all
-      cp build-main/tispl.bin build-main/u-boot.img "${STAGE}"
-
-
-
-
-
-
-Strangely, AM62-SK booted successfully,
-but AM64-SK failed.
-I do not know why.
-
+Viele Grüße,
+Stefan Roese
 
 -- 
-Best Regards
-Masahiro Yamada
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
