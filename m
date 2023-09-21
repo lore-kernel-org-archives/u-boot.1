@@ -4,68 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4663EE71093
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 16:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2B8DE71094
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 16:29:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3725886484;
-	Thu, 21 Sep 2023 18:22:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0CB108644E;
+	Thu, 21 Sep 2023 18:29:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iCO7fMJO";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="PooN0UZT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 452AB8655E; Thu, 21 Sep 2023 18:22:50 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7338D864AA; Thu, 21 Sep 2023 18:29:20 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 038598644E
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 18:22:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3BBB8642C
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 18:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id A0209B82133
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 16:22:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52835C611A4
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 16:22:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695313366;
- bh=J2f+cwahFBnNEGQSYdkxvMqfUGAXiM6UkpUW81SmvO0=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=iCO7fMJO60YPCmp5Qo37cX8FdCzT1dATrExXoBa2VXvzIhVpVd+zVfFyFoVCSQQYj
- DmpdxMRo2Z28ZSzIW039LvEl1rOQxTGI/FzIOc3YKtRX1x/x32yX7jTcXmoHBm5Jxx
- JdlMXE0M/7Hv/j477ZAvolapCCMdAwBFBeDS3sq6m3jnoq5+xSJ4uv0nb6AnE0z7bn
- a4SAAnRqhQELtAv6wfWEtkTLLw+FnlbBP0gpUmt7wh4mMZsf3c4WHzkdrnvzlj7aUT
- 22KNwW1Y2ogpS40FzR/YSKI53Z/2hVCmtSCjWfnj/hUA9sel4cIz0CclgptqerTyDT
- 3j/y/npAR62Kw==
-Received: by mail-oi1-f169.google.com with SMTP id
- 5614622812f47-3adf06730c4so740684b6e.1
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 09:22:46 -0700 (PDT)
-X-Gm-Message-State: AOJu0YxYmvAmXZpcT2b9CUnQlUFmZlRKOOLV5RktYiMhHXIpfmZBbDwG
- wGfCgHUqHjI21wxmn6KkIn7Zg75v+PNdUzZPlCc=
-X-Google-Smtp-Source: AGHT+IFAW72229lsy41NDIncsO6RDtdNdBNVIezUaJuVyiAFi0+bNfMoQN4VaJ2yCLXl/dO6J8Dp+kFI1OMlQmRKxqk=
-X-Received: by 2002:a05:6871:20b:b0:1d6:564d:cfbd with SMTP id
- t11-20020a056871020b00b001d6564dcfbdmr7063347oad.14.1695313365692; Thu, 21
- Sep 2023 09:22:45 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-532c81b9adbso1373381a12.1
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 09:29:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1695313758; x=1695918558; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fOE+u9CkqsXO6VyFoHMdGVO/cxveVZ1qgLDLNyYebAk=;
+ b=PooN0UZTko++THrXwrPz7ezH+EuRZFJXp4gZi/weblUAA6ryJbTjhgx0NeObPah7sI
+ Xm96rdSox2J2K9GVfCea4KQQ+rZYxqIotT4xDfD3HloUzcarJIrwhLgduahc/wroZwby
+ 0/mCHHrfx8VM2peNwJtPH88k+f4J88KoU6HKRYUHFPK3AuwYqvIHZTNFndGMf/yRkQBu
+ 3BGLsli43coM4f9jNbSlLmVa/QKg1MESVAtp3aLf9pN3CA9KwbBvue8ksNm1AEN3rB2w
+ 1EwurD8Ak1uBFeeHhROS0Tv0qDYqEEQ/TkatqDwn3ak8X31LDAtHtwhBwicWZ2GuoWIF
+ i8bQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695313758; x=1695918558;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fOE+u9CkqsXO6VyFoHMdGVO/cxveVZ1qgLDLNyYebAk=;
+ b=PZ85q6e4Gcw3B53yvnc2PQ9PlmzHjFaII0H99K/yTINy69Kpx8wjf59KikzXxLY5YZ
+ AJ+IF3oljDxnmdcLGDFKGUl9GDb1mnIt1H9+Xto52wWJxcDeWE97s8RqIp5rfQxnHdRc
+ +dAoz+lWf/5Jx/u9JV7hsGjPaHZQBaJuqQ43YNoE1bupW/LETgd+NGt50oFRS2qPvwqG
+ JOhi5ISmQxg6U5Wpsis8mgJFvyg8jS3eXQXeKBF90CSUFIyxyMKQUu8VPW/dGcUtr+42
+ q3tzOMkMxI3pcOmkdoVPH2P/dnxvxUoMUSo7kNwowLeFuoilkzJPseIxQaftb7IMpC1S
+ gpTQ==
+X-Gm-Message-State: AOJu0YwPyU6rWCigpQNOYJxAYZb4+YDREbBQ4TpZD0QWfvUmKC5qAl4c
+ Em7WneY4Pm5VhiZx00H+VuN1nHiodI+gHBbDTFvtXg==
+X-Google-Smtp-Source: AGHT+IFw6NzPyWzqG/uy6JwqDWfPj5SM7Fhuq6Kw8uNor/s2JgevaDUQgEOp/mMatEsUa3LUrO41Zd7C3dZK0raoUKQ=
+X-Received: by 2002:a05:6402:f1a:b0:533:12b1:ebe7 with SMTP id
+ i26-20020a0564020f1a00b0053312b1ebe7mr5485056eda.15.1695313758038; Thu, 21
+ Sep 2023 09:29:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
-In-Reply-To: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Fri, 22 Sep 2023 01:22:08 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAQKucgcJViKGts4GmwUxNZ2Wi-rpEqst4=ueBj66-QTeg@mail.gmail.com>
-Message-ID: <CAK7LNAQKucgcJViKGts4GmwUxNZ2Wi-rpEqst4=ueBj66-QTeg@mail.gmail.com>
-Subject: Re: Question about boot failure of AM64-SK
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Nishanth Menon <nm@ti.com>, srk@ti.com, s-vadapalli@ti.com,
- n-francis@ti.com, m-chawdhry@ti.com
+References: <20230921153720.542101-1-artur@conclusive.pl>
+ <20230921153720.542101-2-artur@conclusive.pl>
+In-Reply-To: <20230921153720.542101-2-artur@conclusive.pl>
+From: Simon Glass <sjg@google.com>
+Date: Thu, 21 Sep 2023 10:29:06 -0600
+Message-ID: <CAPnjgZ0QSYEAy4auM-COVF0B5Ls5E+8QL3_kYXbAJrm4RYWDpQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] common: add prototype for populate_serial_number()
+To: Artur Rojek <artur@conclusive.pl>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>,
+ Jakub Klama <jakub@conclusive.pl>, 
+ Marcin Jabrzyk <marcin@conclusive.pl>, Wojciech Kloska <wojciech@conclusive.pl>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,55 +87,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 22, 2023 at 12:03=E2=80=AFAM Masahiro Yamada <masahiroy@kernel.=
-org> wrote:
+Hi Artur,
+
+On Thu, 21 Sept 2023 at 09:44, Artur Rojek <artur@conclusive.pl> wrote:
 >
-> Hi.
+> Provide function prototype for populate_serial_number().
+> This is useful for boards that wish to read their serial number from
+> EEPROM at init.
 >
-> I am seeing a boot failure on AM64-SK.
+> Signed-off-by: Artur Rojek <artur@conclusive.pl>
+> ---
+>  include/init.h | 1 +
+>  1 file changed, 1 insertion(+)
 >
+> diff --git a/include/init.h b/include/init.h
+> index 3bf30476a2e0..e0b7fbc943ad 100644
+> --- a/include/init.h
+> +++ b/include/init.h
+> @@ -283,6 +283,7 @@ void board_init_r(struct global_data *id, ulong dest_addr)
+>  int cpu_init_r(void);
+>  int last_stage_init(void);
+>  int mac_read_from_eeprom(void);
+> +int populate_serial_number(int devnum);
+
+Please can you add a comment for this function? You can move it from the C file.
+
+I also suggest renaming it to something like eeprom_get_serial() or
+something like that.
+
+>  int set_cpu_clk_info(void);
+>  int update_flash_size(int flash_size);
+>  int arch_early_init_r(void);
+> --
+> 2.42.0
 >
-> I got the following error in SPL of the main core.
-> Do you have any clue?
 
+BTW tlv_eeprom.c should really be converted to driver model.
 
-
-As a side-topic, I downloaded a prebuilt image
-from https://www.ti.com/tool/SK-AM64
-
-It failed too (but in a different way).
-
-I flashed tisdk-debian-bookworm-am64xx-evm.wic
-to a SD card by using the 'dd' command, then I got this:
-
-
-
-U-Boot SPL 2023.04 (Jul 14 2023 - 08:10:06 +0000)
-EEPROM not available at 0x50, trying to read at 0x51
-k3_system_controller sysctrler: k3_sysctrler_start: Boot Notification
-response failed. ret =3D -110
-Firmware init failed on rproc (-110)
-
-resetting ...
-ti_sci system-controller@44043000: ti_sci_get_response: Message
-receive failed. ret =3D -110
-ti_sci system-controller@44043000: ti_sci_get_response: Message
-receive failed. ret =3D -110
-ti_sci system-controller@44043000: ti_sci_get_response: Message
-receive failed. ret =3D -110
-no sysreset
-### ERROR ### Please RESET the board ###
-
-
-
-
-Am I doing something wrong?
-
-
-
-
-
-
---=20
-Best Regards
-Masahiro Yamada
+Regards,
+Simon
