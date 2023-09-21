@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD670CD4939
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:04:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82165CD4938
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:04:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0682086CFD;
-	Thu, 21 Sep 2023 03:03:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 069AB86CDB;
+	Thu, 21 Sep 2023 03:04:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="OJUDUGhK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CGmbFUwS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E3CB86CF2; Thu, 21 Sep 2023 03:03:11 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 9D9A286CDB; Thu, 21 Sep 2023 03:04:14 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B24F486CAB
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:03:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E1EF86C72
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:04:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-59c0b9ad491so5357597b3.1
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:03:08 -0700 (PDT)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-59be6605e1dso5247257b3.3
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:04:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1695258187; x=1695862987; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695258251; x=1695863051; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=za9rj2EcOqaV93JRSu5Ipys2i1t8FM6njb26Ty0RL6M=;
- b=OJUDUGhK8ASCvveJzjFV2lsJT8orPZT6gcmLKvRXea+KvJdqxs+Q3Vdrth0ahBKPHt
- HDMQbtHI+eJD8wOJXg7DYWaWUi49ADLchj3MAduH2FClXAbSp32gtgVnEt7FxF/iXzEy
- HodzwyIzjjcKX6gMq5F5TJnN+q/HJ0bwj8kMSP6P6x5X7NvaGiBwn7wkNur/7/jhuXdz
- 5x3gUiB+f0dsBTx+9T7vudRVzMaiA363t4HX+ZDCAgbdXTcinKslX8q2GG6Pe6e3MXsp
- S+Vp//ckmwUbBFroIGziT4VwEgPzwxvRMnYXejelPIqODJ7EFC2LrKwSJeMSqcO313fs
- VHuQ==
+ bh=9vS9GdfCXLSSLtFDE5dmkNlsdsLOQBws4gyTSAN9jnQ=;
+ b=CGmbFUwSH3DvbTYfuJlI24IMVmzUozL8Dqi2i3aX8BvFEWm7dRi0iDbSTLSm0PuBpC
+ exI/l+Tuz117dBtMRAdPK5JVRZMBsgZCP6MQOfND4xYMXMYCuDpFG5tbkIoslA7UqqhN
+ OFfl2GsovOKfBbLFM6pLhGPnUPUS8VabP6iBY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695258187; x=1695862987;
+ d=1e100.net; s=20230601; t=1695258251; x=1695863051;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=za9rj2EcOqaV93JRSu5Ipys2i1t8FM6njb26Ty0RL6M=;
- b=WSyureneMHQrEoIXD2Sr8/LpW8PvwcSKshBVE8BXxoxVC76fEpX/ecwajtiLx8BvNU
- +IQ4FloPULa/oEZ0PtASSlh9tIdw1IPhGlgL4gh42buuD0Qkkb8/BC2yW01X7hXQjNNV
- +MPB9HaK1fiG6hMtkDsuAcADZmzN5+loPfBQSg5RQJROmt4fywQcEi4LVNojKTPmDowT
- 0MBJgYsWcPfjsKv1o5PNEJPcV2kdBjojEJ3tNHs6t8dAS9oiw6JPOXrQEcBqD7JkZCsu
- XtLCyHzzSAc3mJZPalTsp8DRrQ8wIHBrQ7s+sHhpv10FefEEwXyZRuhnKfxMmwYR6Baj
- TT8Q==
-X-Gm-Message-State: AOJu0YyYyEdb+P/5uSKPSjKZTy5tkLbn9wMSfVdd1AGmFESjdN79lb+n
- 7jBowusxznMFf2kRobEN8vzEjk0bsV2nnBeG0DkqEw==
-X-Google-Smtp-Source: AGHT+IF3zvWeITQ8fyo8rOK8b4FgpyxjOrPe7WNMu9GgrJ6LERNHkxYLK3+IxKAw6Rls/oQJbZJr61ZRQrPPhnURNYQ=
-X-Received: by 2002:a81:9150:0:b0:595:733b:38b with SMTP id
- i77-20020a819150000000b00595733b038bmr3962439ywg.19.1695258187120; Wed, 20
- Sep 2023 18:03:07 -0700 (PDT)
+ bh=9vS9GdfCXLSSLtFDE5dmkNlsdsLOQBws4gyTSAN9jnQ=;
+ b=XqitxHDcs8TC7wsugeCgB9xhDrkqgxNGIAv1dGwCOUS+cD3LMyD7R4/8FIE61pErlL
+ IvW4RU7BkBsqJLIPDqGqjyvFnpzjZFJRpOJIzbspnrc1zrlr/ozJA8mwxPmKV+5IvSPX
+ cv93Fdpi1Ap3qI4lycyCHpkTJyAxl4cHGfc3NShIvxldbsEO5XwvWNL9kT5coB84LbIX
+ hE2tmMgoE7k1DCtvYvtwNXyXEm4PTSt1KdubbkC01J6FzmfXrT7qnDEIHDaodMavcpNT
+ ZvLeL3CuwAkVce4p7yQona+Vpre8hGmiaEL0ssKjdDWHT3Y4XyMcvMglj8T1vO3XqSQ1
+ h4xQ==
+X-Gm-Message-State: AOJu0Yy2gFK+W8AQ9DHRSIDl1fPYQZnGi7u1NKtJ/d4mTFiaag1a87VO
+ I/tfptVo73Tyfm2ZLGmR5SDUAxRMWYlrTYXfpA8eSyVjBb1nDaHks6A=
+X-Google-Smtp-Source: AGHT+IElDsHel+yInDw48sfCqOGGkH8ZbEydUcb0p/oJ0cCltv2aE6CTq3LP1e/T8zVvlmqEb+mCmXBemLZ+od2u+Zc=
+X-Received: by 2002:a0d:cc90:0:b0:56c:e70b:b752 with SMTP id
+ o138-20020a0dcc90000000b0056ce70bb752mr3950547ywd.13.1695258250817; Wed, 20
+ Sep 2023 18:04:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230920025450.6281-1-venkatesh.abbarapu@amd.com>
-In-Reply-To: <20230920025450.6281-1-venkatesh.abbarapu@amd.com>
-From: Simon Glass <sjg@google.com>
-Date: Wed, 20 Sep 2023 19:02:35 -0600
-Message-ID: <CAPnjgZ1jqbZDdQmzk__6JP6Fzq=bp0Jg01DDg09brVMX1ZbqrQ@mail.gmail.com>
-Subject: Re: [PATCH v2] cmd: sf: Fix the flash_is_unlocked api size parameter
+References: <20230920032725.21748-1-venkatesh.abbarapu@amd.com>
+ <20230920032725.21748-2-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20230920032725.21748-2-venkatesh.abbarapu@amd.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 20 Sep 2023 19:02:38 -0600
+Message-ID: <CAPnjgZ1fZMwsJmVbHH7Gaf8HLwdc1GaGWyBZYNu8KkeCFB=33w@mail.gmail.com>
+Subject: Re: [PATCH v6 1/2] configs: Add support in Kconfig and convert for
+ armada boards
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, jagan@amarulasolutions.com, 
- git@xilinx.com
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com, 
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,33 +83,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 19 Sept 2023 at 21:42, Venkatesh Yadav Abbarapu
+Hi Venkatesh,
+
+On Tue, 19 Sept 2023 at 21:28, Venkatesh Yadav Abbarapu
 <venkatesh.abbarapu@amd.com> wrote:
 >
-> When flash erase is called with size parameter, code is checking
-> if sectors are locked or not. But for checking, the whole device
-> length minus offset is used instead of actual size which should
-> be erased. That's why when only some sectors are locked it is
-> not possible to erase unlocked sectors.
+> From: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
 >
-> The length is calculated as "length = max_chipsize - offset",
-> flash_is_unlocked() api is getting updated with length which is
-> incorrect. Fix this flash_is_unlocked() api by passing the size
-> parameter.
+> The DEFAULT_ENV_IS_RW is moved to the Kconfig for easier configuration.
+
+Please use imperative mood [1]
+
+Move the DEFAULT_ENV_IS_RW to Kconfig for ...
+
+> Hence, the CONFIG_DEFAULT_ENV_IS_RW config is added to the defconfig files
+> to allow enabling them for armada boards.
+
+Hence, add the ...
+
 >
-> ZynqMP> sf erase 0 100000
-> len=0x8000000 which is flash size
-> size=0x100000
->
-> We need to update the size in the flash_is_unlocked() api and not
-> the length.
->
+> Signed-off-by: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
 > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
-> Changes in v2:
-> - Updated the commit description.
-> ---
->  cmd/sf.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  configs/eDPU_defconfig                      | 1 +
+>  configs/mvebu_db-88f3720_defconfig          | 1 +
+>  configs/mvebu_espressobin-88f3720_defconfig | 1 +
+>  configs/uDPU_defconfig                      | 1 +
+>  drivers/serial/Kconfig                      | 6 ++++++
+>  include/configs/mvebu_armada-37xx.h         | 1 -
+>  include/env_default.h                       | 2 +-
+>  include/env_internal.h                      | 2 +-
+>  8 files changed, 12 insertions(+), 3 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+[1] https://www.kernel.org/doc/html/latest/process/submitting-patches.html
