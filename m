@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4309CD493D
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:59:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 000B9CD4938
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:59:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10EAA86DB5;
-	Thu, 21 Sep 2023 03:58:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 651B886D7B;
+	Thu, 21 Sep 2023 03:58:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fXWlB7kf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eAJoM9Cc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9FF686DAE; Thu, 21 Sep 2023 03:58:03 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 83C7C86DC1; Thu, 21 Sep 2023 03:58:08 +0200 (CEST)
+Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
+ [IPv6:2607:f8b0:4864:20::e35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A30086D7A
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56FF186D69
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:58:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-79d1a920137so21128539f.0
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:58 -0700 (PDT)
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-4526f0bdf72so237852137.1
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:58:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261477; x=1695866277; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695261480; x=1695866280; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sM51kDu9E3jeyr/KNGV0RRsyMMy9BHZZ4VYramK76O0=;
- b=fXWlB7kfjIWFJHvh+Nkg+9CF9Xok75GnLbR75xuPv2syw9veH0Co0qgkpf9wMU7zuD
- UVcMraPR3bqifUyLly1hVq9YMGJsmiDzEZgPtbm+lbS/lwAAnPHI3dpV1zHbfoJLRun1
- rBXvCEP8UWIDgB6KfL1VRs52CWCNeBc3dLC6I=
+ bh=ovTfh6ERTsrOYQaBI8e8Lj6TjUXB7ByPOJaNS0CwdHw=;
+ b=eAJoM9Cc8xUjcHKYnAvh7a15dsVb20vO5+/gi87lTfY47UFSJsWVZ2WlpM+0gCFvBe
+ ZH7DdeAMTUJEk7aTgoBjGsz0eZyd/59WoEIr6f6MkrgwRbPMWRTNDI/aoXTSfeExOmA1
+ MoofZJJ3l1d3oP3RVwn+0+lKGLfN/93naCOn0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261477; x=1695866277;
+ d=1e100.net; s=20230601; t=1695261480; x=1695866280;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sM51kDu9E3jeyr/KNGV0RRsyMMy9BHZZ4VYramK76O0=;
- b=je3C62XhWO+I77D4L8TmcpJbacxk6JpdCE13p8sY6lL54aU2qg5UohiveOLje2M+F6
- WxxWYAjBQsIFnDMLJ9nanbACFUC3eHrcakYTmsnrJjd00t31+CgSBNZxsWsnxPrDaR0y
- fU+bkRdajtwQrHHwHdjTMiu9R6LN4mgzFwa4KVgNSNbfNvQCnnYE9uAgrEZX/A2IU2gb
- PfRPxMT2NeWrKOY+XsXUPMrceoJiLXob05R8x4J47Ougru0tk9MidD/Zekf1Iw+JUzxD
- TR4P2viJfUScf607oxrqwhEZrZB2ck5nsOANchHbU7gnV0950b1z877C1dzDES1IvuiT
- USVw==
-X-Gm-Message-State: AOJu0YyrTI0EDmXELlo5sDLA2lJX/LfRAsS6DxhU06UqhCBa1SMFFIUT
- 0FS3WE6wDxdDTTKlkBhd0w8yC/4sKIfZyLH1o+E=
-X-Google-Smtp-Source: AGHT+IHn+btA9oLZpcUwAiXbTxJU2SvaQarKtjmP11e5wSmX2eYAyrWrys553n/sGSn0wggNpGRplg==
-X-Received: by 2002:a5d:8b54:0:b0:786:f4a0:d37e with SMTP id
- c20-20020a5d8b54000000b00786f4a0d37emr5319290iot.4.1695261476784; 
- Wed, 20 Sep 2023 18:57:56 -0700 (PDT)
+ bh=ovTfh6ERTsrOYQaBI8e8Lj6TjUXB7ByPOJaNS0CwdHw=;
+ b=wWgcUbFEX29jpRzpvGWbuLPNR5bRi4yhzRM0lKx4niqQuIxgb/8wLmhm2UKHFHzH07
+ Pb/ncOE0Rh9VqQ9HHs7j5f+GeDR4LRDdO4bLX0n3Ysiif8hUwzY6Cv7/bka9RdEA0tic
+ tu5Put29kITSEofk0ycBVlclW1PlBxi4cTzdYJoHRPmeRXHQ2+n5Gwfj23yqK64dR4Qo
+ Nx0AxYiNy4ytR+XCqLDo6DJ2qi+xmaVMfPTqPEW+wZxuo1o13FXqszQfe0vZymn/S/qL
+ sdye+JOwm2wMmwaXXko7cxcULzN8J2e8KssHNf5Uen5Sqk5OzTRcp6+wP4SHqPIozEMg
+ fZ2w==
+X-Gm-Message-State: AOJu0YxJ21rXVnngbadHM1AVxcZvshZuIh6WMLqdhleRZ7Z4pqpQfLfy
+ PeiUxprDb09S58R+041hDqvbwcT/vcZGUYjgwVw=
+X-Google-Smtp-Source: AGHT+IHGDI6DT15weVbQawqZ7tarx8s83vQKiZLZwfEtaUTCfsTY68mMSDpxiov2eaFWpv8OG1V/Ww==
+X-Received: by 2002:a67:fc43:0:b0:450:c5e4:4869 with SMTP id
+ p3-20020a67fc43000000b00450c5e44869mr4541996vsq.25.1695261480104; 
+ Wed, 20 Sep 2023 18:58:00 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.56
+ y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:57:56 -0700 (PDT)
+ Wed, 20 Sep 2023 18:57:59 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH v2 13/32] spl: Use the correct FIT_..._PROP constants
-Date: Wed, 20 Sep 2023 19:57:02 -0600
-Message-ID: <20230921015730.1511373-14-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
+Subject: [PATCH v2 16/32] dm: core: Ensure we run flattree tests on ofnode
+Date: Wed, 20 Sep 2023 19:57:05 -0600
+Message-ID: <20230921015730.1511373-17-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
 References: <20230921015730.1511373-1-sjg@chromium.org>
@@ -91,47 +88,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than open-coding the property names, use the existing constants
-provided for this purpose. This better aligns the simple-FIT code with
-the full FIT implementation.
+We need the UT_TESTF_SCAN_FDT flag set for these tests to run with flat
+tree. In some cases it is missing, so add it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/spl/spl_fit.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+ test/dm/ofnode.c | 33 ++++++++++++++++++---------------
+ 1 file changed, 18 insertions(+), 15 deletions(-)
 
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 5b5f6c620457..03ff9a5db9a8 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -43,7 +43,7 @@ static int find_node_from_desc(const void *fit, int node, const char *str)
- 	for (child = fdt_first_subnode(fit, node); child >= 0;
- 	     child = fdt_next_subnode(fit, child)) {
- 		int len;
--		const char *desc = fdt_getprop(fit, child, "description", &len);
-+		const char *desc = fdt_getprop(fit, child, FIT_DESC_PROP, &len);
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index 49fa5d27e6ec..a29c9aae870b 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -114,7 +114,7 @@ static int dm_test_ofnode_compatible_ot(struct unit_test_state *uts)
  
- 		if (!desc)
- 			continue;
-@@ -475,10 +475,11 @@ static int spl_fit_record_loadable(const struct spl_fit_info *ctx, int index,
- 	node = spl_fit_get_image_node(ctx, "loadables", index);
- 
- 	ret = fdt_record_loadable(blob, index, name, image->load_addr,
--				  image->size, image->entry_point,
--				  fdt_getprop(ctx->fit, node, "type", NULL),
--				  fdt_getprop(ctx->fit, node, "os", NULL),
--				  fdt_getprop(ctx->fit, node, "arch", NULL));
-+			image->size, image->entry_point,
-+			fdt_getprop(ctx->fit, node, FIT_TYPE_PROP, NULL),
-+			fdt_getprop(ctx->fit, node, FIT_OS_PROP, NULL),
-+			fdt_getprop(ctx->fit, node, FIT_ARCH_PROP, NULL));
-+
- 	return ret;
+ 	return 0;
  }
+-DM_TEST(dm_test_ofnode_compatible_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_compatible_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
  
+ static int dm_test_ofnode_get_by_phandle(struct unit_test_state *uts)
+ {
+@@ -146,7 +146,8 @@ static int dm_test_ofnode_get_by_phandle_ot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_get_by_phandle_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_get_by_phandle_ot,
++	UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 
+ static int check_prop_values(struct unit_test_state *uts, ofnode start,
+ 			     const char *propname, const char *propval,
+@@ -196,7 +197,8 @@ static int dm_test_ofnode_by_prop_value_ot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_by_prop_value_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_by_prop_value_ot,
++	UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 
+ static int dm_test_ofnode_fmap(struct unit_test_state *uts)
+ {
+@@ -237,7 +239,7 @@ static int dm_test_ofnode_read(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_read, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
++DM_TEST(dm_test_ofnode_read, UT_TESTF_SCAN_FDT);
+ 
+ static int dm_test_ofnode_read_ot(struct unit_test_state *uts)
+ {
+@@ -256,7 +258,7 @@ static int dm_test_ofnode_read_ot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_read_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_read_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 
+ static int dm_test_ofnode_phandle(struct unit_test_state *uts)
+ {
+@@ -452,7 +454,8 @@ static int dm_test_ofnode_get_child_count_ot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_get_child_count_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_get_child_count_ot,
++	UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 
+ static int dm_test_ofnode_is_enabled(struct unit_test_state *uts)
+ {
+@@ -526,7 +529,7 @@ static int dm_test_ofnode_get_reg_ot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_get_reg_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_get_reg_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 
+ static int dm_test_ofnode_get_path(struct unit_test_state *uts)
+ {
+@@ -566,7 +569,7 @@ static int dm_test_ofnode_get_path_ot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_get_path_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_get_path_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 
+ static int dm_test_ofnode_conf(struct unit_test_state *uts)
+ {
+@@ -581,7 +584,7 @@ static int dm_test_ofnode_conf(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_conf, 0);
++DM_TEST(dm_test_ofnode_conf, UT_TESTF_SCAN_FDT);
+ 
+ static int dm_test_ofnode_for_each_compatible_node(struct unit_test_state *uts)
+ {
+@@ -646,7 +649,7 @@ static int dm_test_ofnode_string(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_string, 0);
++DM_TEST(dm_test_ofnode_string, UT_TESTF_SCAN_FDT);
+ 
+ static int dm_test_ofnode_string_err(struct unit_test_state *uts)
+ {
+@@ -717,7 +720,7 @@ static int dm_test_ofnode_get_phy(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_get_phy, 0);
++DM_TEST(dm_test_ofnode_get_phy, UT_TESTF_SCAN_FDT);
+ 
+ /**
+  * make_ofnode_fdt() - Create an FDT for testing with ofnode
+@@ -901,7 +904,7 @@ static int dm_test_ofnode_write_copy_ot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_write_copy_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_write_copy_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 
+ static int dm_test_ofnode_u32(struct unit_test_state *uts)
+ {
+@@ -1103,7 +1106,7 @@ static int dm_test_ofnode_by_compatible_ot(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_ofnode_by_compatible_ot, UT_TESTF_OTHER_FDT);
++DM_TEST(dm_test_ofnode_by_compatible_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 
+ static int dm_test_ofnode_find_subnode(struct unit_test_state *uts)
+ {
+@@ -1272,7 +1275,7 @@ static int dm_test_livetree_align(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_livetree_align, UT_TESTF_LIVE_TREE);
++DM_TEST(dm_test_livetree_align, UT_TESTF_SCAN_FDT | UT_TESTF_LIVE_TREE);
+ 
+ /* check that it is possible to load an arbitrary livetree */
+ static int dm_test_livetree_ensure(struct unit_test_state *uts)
+@@ -1291,4 +1294,4 @@ static int dm_test_livetree_ensure(struct unit_test_state *uts)
+ 
+ 	return 0;
+ }
+-DM_TEST(dm_test_livetree_ensure, 0);
++DM_TEST(dm_test_livetree_ensure, UT_TESTF_SCAN_FDT);
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
