@@ -4,77 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6B35CD494C
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 05:09:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48CDCCD494D
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 05:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED6A686CF6;
-	Thu, 21 Sep 2023 07:09:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9ABB786D04;
+	Thu, 21 Sep 2023 07:14:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M+f0vBgP";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="DZ9VphjJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A192986CF6; Thu, 21 Sep 2023 07:09:24 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D6ECA86D01; Thu, 21 Sep 2023 07:14:27 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8DD286D0A
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 07:09:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0579D86D01
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 07:14:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-532aaba8747so530278a12.3
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 22:09:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695272962; x=1695877762; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eRzAYBsNfKLtzS29ydfssRKmbT4osFoZ/dopX2/V4N4=;
- b=M+f0vBgPFW9A9SJQhvc8e9oA7cTVjcn6UnmhZGnjxLC9XxTc1eNrndBrubzDFt6c1O
- euTqTQnHMs40BkGVWrRVHFzIWxa0w/TGS2PqXqktlJJKzkK0V2FkjAE9SZy0/rBTf8kc
- sYnDynWknIz/Mrh+u0irE9IIN/Of/JsJVByN0G8bjzEWfVv79U4hb9pFRYVbAUSOL74V
- GQt3epM/y+SEOShIe1fnpO8zRTWto7G9hVL1Djri7w6lWacAztKax+8UTIis69Tm+XNW
- 2RLTMLCZ1fDiPe52rnQzrhYTjB9/a1UeO0eE2S9SiKmKpvkP21ma5J4hOL8FClrduZM4
- dTSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695272962; x=1695877762;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eRzAYBsNfKLtzS29ydfssRKmbT4osFoZ/dopX2/V4N4=;
- b=MhwcXDHZuUap86vkHeJAK3+RmEkq6qarRm8gWjrjuA0Jf+Eh24/4vd5jzjAl807RyE
- UOruL1OsMlYWESSuljrTKpf+JC7stldYANHRnfdJ5I+IjSqALeOCPzJp6Q5oggOSOhrd
- 7LS9Xb3pNWa1I6yQsTH/dAmhXDHsTmK89fTXqIz+zD5TfY9OAccH3Y1VBHARkmpj33FE
- jOWNaq2NqmyooQ2YmYhJRd4juU4vku6HNcFFnoO1fMzE67TbJZhI0o2tU6SSSKYr5bh1
- pTEQMvgqPus3QNeYxa1iAQA1yflSYls83mPIcuDgMZAtOhhaGKT/7uemmvBFzOdXjmeo
- jY0Q==
-X-Gm-Message-State: AOJu0YyHDbAOwMOAvM1wCGEB8/gdsneoIlmqlIunRL2TQZQ4y7XamiKd
- Orj7mpgz4GmgjMR4aUYMn4nXU/4dTh/G7b4o1ZnbNrAA
-X-Google-Smtp-Source: AGHT+IG4w9o6V7wevbNiXZ0I6HmL798ArgcE39RZgBu6WmYaAgpAX2P2+Bp7dcuWU3NfTs0pBOZZGjqsyX647pKgieg=
-X-Received: by 2002:aa7:c0c6:0:b0:530:a226:1f25 with SMTP id
- j6-20020aa7c0c6000000b00530a2261f25mr3551544edp.17.1695272962112; Wed, 20 Sep
- 2023 22:09:22 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38L5EL5p003808;
+ Thu, 21 Sep 2023 00:14:21 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695273261;
+ bh=QAX23GN3g7nrPL9htyouCsqUIi5dkZqLRD/PzfFSIYQ=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=DZ9VphjJCRx1tnzBpNvErbckZsE9En0xFvGr+lYUT0wZ4OZbTbQaay3/y7eMTNjgw
+ 0COGJkwZttKbc7P3pXdEZzxcAMjKoE3QxxiMDK0LyJS2/Ed9cMiEW6Sdtl+wUSWB4M
+ VB8WRkiFnNjVRKh/fOJcr3ag6o2SS8OZD34un9DI=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38L5ELTc002332
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 21 Sep 2023 00:14:21 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
+ Sep 2023 00:14:20 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 21 Sep 2023 00:14:20 -0500
+Received: from [10.249.141.75] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38L5EFch046256;
+ Thu, 21 Sep 2023 00:14:17 -0500
+Message-ID: <cf5e4159-3841-eb10-9a19-c01a19908193@ti.com>
+Date: Thu, 21 Sep 2023 10:44:15 +0530
 MIME-Version: 1.0
-References: <20230920030027.1385833-1-sjg@chromium.org>
- <20230920030027.1385833-9-sjg@chromium.org>
- <6c3f7c16-c67b-4c7d-9d91-0e214702fa88@gmx.de>
- <e40d4f2f-7fdf-d565-eeba-ca27f1fa44d7@denx.de>
- <54f9ad4b-3b76-4c7d-8f82-da9ab850f1e8@gmx.de>
-In-Reply-To: <54f9ad4b-3b76-4c7d-8f82-da9ab850f1e8@gmx.de>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Thu, 21 Sep 2023 13:09:09 +0800
-Message-ID: <CAEUhbmV6jb=3FfB=i=DVUFh4f=+zGWiudKyqjwzEyVBfcYRQfw@mail.gmail.com>
-Subject: Re: [PATCH v5 08/20] x86: coreboot: Drop USB init on startup
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Marek Vasut <marex@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v3] clk: ti: Notify AVS driver upon setting clock rate
+To: Nishanth Menon <nm@ti.com>
+CC: <vigneshr@ti.com>, <seanga2@gmail.com>, <u-boot@lists.denx.de>,
+ <lukma@denx.de>, <bb@ti.com>, Keerthy <j-keerthy@ti.com>, <u-kumar1@ti.com>
+References: <20230920120256.2901860-1-u-kumar1@ti.com>
+ <20230920122025.nr2dsnf663ox76p7@outdoors>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20230920122025.nr2dsnf663ox76p7@outdoors>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,69 +82,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Thanks Nishanth
 
-On Wed, Sep 20, 2023 at 9:37=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
-x.de> wrote:
->
-> On 20.09.23 13:50, Marek Vasut wrote:
-> > On 9/20/23 09:19, Heinrich Schuchardt wrote:
-> >> On 9/20/23 05:00, Simon Glass wrote:
-> >>> This is very annoying as it is quite slow on many machines. Also, U-B=
-oot
-> >>> has an existing 'preboot' mechanism to enable this feature if desired=
-.
-> >>>
-> >>> Drop this code so that it is possible to choose whether to init USB o=
-r
-> >>> not.
-> >>>
-> >>> Use the existing USE_PREBOOT mechanism instead.
-> >>>
-> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>> ---
-> >>>
-> >>> Changes in v5:
-> >>> - Make use of the uSE_PREBOOT mechanism
-> >>>
-> >>>   arch/x86/cpu/coreboot/Kconfig    | 1 +
-> >>>   arch/x86/cpu/coreboot/coreboot.c | 4 ----
-> >>>   2 files changed, 1 insertion(+), 4 deletions(-)
-> >>>
-> >>> diff --git a/arch/x86/cpu/coreboot/Kconfig
-> >>> b/arch/x86/cpu/coreboot/Kconfig
-> >>> index b97c27790419..178f8ad18162 100644
-> >>> --- a/arch/x86/cpu/coreboot/Kconfig
-> >>> +++ b/arch/x86/cpu/coreboot/Kconfig
-> >>> @@ -25,6 +25,7 @@ config SYS_COREBOOT
-> >>>       imply FS_CBFS
-> >>>       imply CBMEM_CONSOLE
-> >>>       imply X86_TSC_READ_BASE
-> >>> +    imply USE_PREBOOT
-> >>
-> >> For automatic initialization of the PCI bus we have CONFIG_PCI_INIT_R.
-> >> Wouldn't it be preferable to also have a CONFIG_USB_INIT_R instead of
-> >> relying on console commands in CONFIG_PREBOOT?
-> >
-> > I'd much prefer 'preboot=3Dusb init' or whatever console command, since
-> > this is not hard-coded into the U-Boot binary and can be overridden by
-> > user if the 'usb init' is inconvenient/unnecessary/... without replacin=
-g
-> > and/or rebuilding the U-Boot binary.
->
-> Just for the record this means using CONFIG_PREBOOT:
->
-> include/env_default.h:
->
-> #ifdef  CONFIG_PREBOOT_DEFINED
->      "preboot=3D"    CONFIG_PREBOOT    "\0"
-> #endif
->
-> Thank you for the clarification.
+On 9/20/2023 5:50 PM, Nishanth Menon wrote:
+> On 17:32-20230920, Udit Kumar wrote:
+>> AVS is enabled at R5 SPL stage, on few platforms like J721E
+>> and J7200 clk-k3 is used instead if clk-sci driver.
+>> [...]
+>> I think it is better to put IS_ENABLED() as the first check.
+>> See other usage:
+>> $ git grep IS_ENABLED . |grep if|grep '&&'
 
-Will you update the coreboot documentation to mention the PREBOOT
-mechanism to initialize USB so that a USB keyboard can be used as the
-input for the U-Boot console?
+  will address in next version
 
-Regards,
-Bin
+>>
+>> [..]
+> First look - it looks fine, but note: these are two different patches.
+> the clk-sci.c is a fix for an existing implementation and clk-k3.c is a
+> new feature addition. please don't mix the two.
+
+Sure, Let me send two patches then,
+
+One for new implementation clk-k3.c version v4.
+
+and another for clk-sci.c with Fixes tag.
+
