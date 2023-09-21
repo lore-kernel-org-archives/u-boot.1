@@ -4,70 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20937CD4938
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 02:01:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 379CFCD493F
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 02:02:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0A3886DB0;
-	Thu, 21 Sep 2023 03:58:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47BC986D57;
+	Thu, 21 Sep 2023 03:58:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gNVJ6ptj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FxXFBpPi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A278E86ACF; Thu, 21 Sep 2023 03:58:24 +0200 (CEST)
-Received: from mail-vs1-xe32.google.com (mail-vs1-xe32.google.com
- [IPv6:2607:f8b0:4864:20::e32])
+ id D3C2F86D19; Thu, 21 Sep 2023 03:58:25 +0200 (CEST)
+Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
+ [IPv6:2607:f8b0:4864:20::e2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1250886DDC
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:58:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F48086D57
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:58:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe32.google.com with SMTP id
- ada2fe7eead31-452863742f3so258664137.1
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:58:14 -0700 (PDT)
+Received: by mail-vs1-xe2a.google.com with SMTP id
+ ada2fe7eead31-4527d436ddfso265001137.1
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:58:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261493; x=1695866293; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695261494; x=1695866294; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U1dM9JMmRW8yQ3TFMqGkJLaChsjSR8HioCbLG1P0Zyg=;
- b=gNVJ6ptjOf/CHOu+ynItz/SxZrneIOLuRTLYhD2R06eaGYtz2t/h4yiUlyr7WBs1Ek
- 7Qa83hvMAGgeBnNrixj/bGRoMqT/52w83zY+C37vKbMQsNd/AVuf7qp0ivyV9sWLkhzN
- VdaobklgSZkrD7k2JGdVw+jlayGN09USBe7QU=
+ bh=UhP20/J+z0W4sFtNvAkzJCRhwJFMRa2Cj+VUkoRHIEk=;
+ b=FxXFBpPi+7iEFcXE2YnTl1WJfkTcLe72AdYLBORg/14ifZCUoiRuKXws0JiexubQXC
+ KLL5D3mVRS7WXBxLpwtdpneuyGP3h1aRp98YdDeNq9kAe9/++g8Y5z34b42eKgtUmdow
+ unXsg8aIwON7sGAkXBn9rmag/dH8TBuNuOrgs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261493; x=1695866293;
+ d=1e100.net; s=20230601; t=1695261494; x=1695866294;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U1dM9JMmRW8yQ3TFMqGkJLaChsjSR8HioCbLG1P0Zyg=;
- b=LG6AtEWd1Z82cCSgsWl5b3VyIIzzxtHC582uJrGY+e2JLSSXTs8wXcUWZglD17wCWq
- dMQLQiP7u0B40pRTZIjHVupF7/L1qZM7qAOApeIC2ekDpMyMPhn2W/JajAVtBhRJjQi7
- g2m1nhJV9Lh9Y9VR9oNluJTeSfT7bIf8C48W0c1Wy37byKk6OwLI3Tj2p34AKy6N0xW4
- yClIIJJ2cgRgxL9AO4Zdu+tdSmn3AXQO3/oXDH+u4U27dPMGf9xbkl/TsRDr73cw55EW
- Z5o6Gdzia14X9KYUBPT5hGnl8QI0jl1QbJcBbvSyxOg8VM2Xfhp3sH+F+SpQ8pW12ous
- vbRw==
-X-Gm-Message-State: AOJu0Yyw79cIoNd17tbcvbMfVzu+F+x3uWzxZEsu8mxikmHvDVL3ZL75
- CSKbtcMJPYSesyEyCzpDkXpvD8aBzBEi5dKWlN4=
-X-Google-Smtp-Source: AGHT+IH/+o8zKhOyMsV7+zwOochivMLWZ1O3f3JqpIHt7oAKyD/WvzJXnqVEn3AgNW6QA4K288oEJg==
-X-Received: by 2002:a67:ea94:0:b0:44d:5a92:ec43 with SMTP id
- f20-20020a67ea94000000b0044d5a92ec43mr4283206vso.24.1695261492798; 
- Wed, 20 Sep 2023 18:58:12 -0700 (PDT)
+ bh=UhP20/J+z0W4sFtNvAkzJCRhwJFMRa2Cj+VUkoRHIEk=;
+ b=LWBRWnaUNbJBdKwfictBn294vAQfuRRHLNidIIpEFbcYvMheVzHfzfodezLqsPucZ7
+ pJYXfT456tBP0PJuduf4tgZUt0kyB810LTUdqHMUtZz+E3cVXVghkKTg9EXZng7fQGsa
+ BN+P/YuQ4BjsHflgo0B6ChsRiSTAEJV8uvkjQSxjtfzB/BFhA8JzAWswiK+qRHn4IP6u
+ f1Svu9stJXNte/d27qBTfXhARCd9Ke7By7B6OBv4sn0wiICEhcuAAeGnbBf9v1aze0fS
+ UGJA5mYQr+g4TCbRdN4hJ5bsQ9iip3s6XUhwlJcqF58N4FNSjab7Y8OI6Ffl+/gHOcgU
+ /4TQ==
+X-Gm-Message-State: AOJu0YwREFtUvED2X84wykNfwuEGLDlkEcJo7/Gebv2+SU+t4qUAo0nr
+ 0gMU2RI+Kgq4JXeMUwUIgxd3gL5MGqyH9why1jg=
+X-Google-Smtp-Source: AGHT+IE7cPbjHRGtiUXmeGJqU3VNi7TsaLkzn79eoRiDT58WM2b6329uXNYc84FFWkHHlHCE3ZcLXA==
+X-Received: by 2002:a05:6102:256:b0:450:f5cb:c3ce with SMTP id
+ a22-20020a056102025600b00450f5cbc3cemr4280640vsq.17.1695261493969; 
+ Wed, 20 Sep 2023 18:58:13 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.58.11
+ y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.58.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:58:12 -0700 (PDT)
+ Wed, 20 Sep 2023 18:58:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Pavel Skripkin <paskripkin@gmail.com>
-Subject: [PATCH v2 27/32] sandbox: Only read the state if we have a state file
-Date: Wed, 20 Sep 2023 19:57:16 -0600
-Message-ID: <20230921015730.1511373-28-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Corentin Guillevic <corentin.guillevic@smile.fr>,
+ Harald Seiler <hws@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>
+Subject: [PATCH v2 28/32] sandbox: Move the bloblist down a little in memory
+Date: Wed, 20 Sep 2023 19:57:17 -0600
+Message-ID: <20230921015730.1511373-29-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
 References: <20230921015730.1511373-1-sjg@chromium.org>
@@ -89,51 +93,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We should not read this unless requested. Make it conditional on the
-option being provided.
+Move this down by 4KB so that it is large enough to hold the devicetree.
 
-Add some debugging to show the state being written.
+Also fix up the devicetree address in the documetation while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/sandbox/cpu/start.c | 8 +++++---
- arch/sandbox/cpu/state.c | 1 +
- 2 files changed, 6 insertions(+), 3 deletions(-)
+ common/Kconfig               | 2 +-
+ doc/arch/sandbox/sandbox.rst | 4 ++--
+ test/lib/kconfig.c           | 4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
-index 5dc4db8bf605..efbc60e66805 100644
---- a/arch/sandbox/cpu/start.c
-+++ b/arch/sandbox/cpu/start.c
-@@ -522,9 +522,11 @@ int sandbox_main(int argc, char *argv[])
- 		state->ram_buf_fname = NULL;
- 	}
+diff --git a/common/Kconfig b/common/Kconfig
+index 21eaa5e815f9..5e79b5422178 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1012,7 +1012,7 @@ endchoice
  
--	ret = sandbox_read_state(state, state->state_fname);
--	if (ret)
--		goto err;
-+	if (state->read_state && state->state_fname) {
-+		ret = sandbox_read_state(state, state->state_fname);
-+		if (ret)
-+			goto err;
-+	}
+ config BLOBLIST_ADDR
+ 	hex "Address of bloblist"
+-	default 0xc000 if SANDBOX
++	default 0xb000 if SANDBOX
+ 	depends on BLOBLIST_FIXED
+ 	help
+ 	  Sets the address of the bloblist, set up by the first part of U-Boot
+diff --git a/doc/arch/sandbox/sandbox.rst b/doc/arch/sandbox/sandbox.rst
+index a3631de74932..23902dee89e7 100644
+--- a/doc/arch/sandbox/sandbox.rst
++++ b/doc/arch/sandbox/sandbox.rst
+@@ -614,8 +614,8 @@ that are mapped into that memory:
+ =======   ========================   ===============================
+ Addr      Config                     Usage
+ =======   ========================   ===============================
+-      0   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
+-   c000   CONFIG_BLOBLIST_ADDR       Blob list
++    100   CONFIG_SYS_FDT_LOAD_ADDR   Device tree
++   b000   CONFIG_BLOBLIST_ADDR       Blob list
+   10000   CFG_MALLOC_F_ADDR          Early memory allocation
+   f0000   CONFIG_PRE_CON_BUF_ADDR    Pre-console buffer
+  100000   CONFIG_TRACE_EARLY_ADDR    Early trace buffer (if enabled). Also used
+diff --git a/test/lib/kconfig.c b/test/lib/kconfig.c
+index 76225ba8ffa9..3914f699659f 100644
+--- a/test/lib/kconfig.c
++++ b/test/lib/kconfig.c
+@@ -22,9 +22,9 @@ static int lib_test_is_enabled(struct unit_test_state *uts)
+ 	ut_asserteq(0, CONFIG_IS_ENABLED(OF_PLATDATA));
+ 	ut_asserteq(0, CONFIG_IS_ENABLED(_UNDEFINED));
  
- 	if (state->handle_signals) {
- 		ret = os_setup_signal_handlers();
-diff --git a/arch/sandbox/cpu/state.c b/arch/sandbox/cpu/state.c
-index fcc0028ff4a2..e38bb248b7ff 100644
---- a/arch/sandbox/cpu/state.c
-+++ b/arch/sandbox/cpu/state.c
-@@ -521,6 +521,7 @@ int state_uninit(void)
- 			printf("Failed to write sandbox state\n");
- 			return -1;
- 		}
-+		log_debug("Wrote state to file '%s'\n", state->ram_buf_fname);
- 	}
+-	ut_asserteq(0xc000,
++	ut_asserteq(0xb000,
+ 		    IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED, CONFIG_BLOBLIST_ADDR));
+-	ut_asserteq(0xc000,
++	ut_asserteq(0xb000,
+ 		    CONFIG_IF_ENABLED_INT(BLOBLIST_FIXED, BLOBLIST_ADDR));
  
- 	/* Delete this at the last moment so as not to upset gdb too much */
+ 	/*
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
