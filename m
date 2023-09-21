@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0902DCD4938
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:02:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C7CACD4939
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:02:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5C2986C1C;
-	Thu, 21 Sep 2023 03:02:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 411D186C75;
+	Thu, 21 Sep 2023 03:02:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VJQ1OACK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UsiMC29G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C40D86C2A; Thu, 21 Sep 2023 03:02:44 +0200 (CEST)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id 6DE2D86B55; Thu, 21 Sep 2023 03:02:49 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC80F86B55
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:02:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B76E86C65
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:02:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2b9338e4695so6176461fa.2
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:02:41 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-50307acd445so789629e87.0
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:02:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695258161; x=1695862961; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695258167; x=1695862967; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BnKEcRxEdT0ajE/1fxD6PiaK9kxO9qL1r9/+uRgL+O8=;
- b=VJQ1OACKyy2M+4F2WiJO9JdnbFchvi5INrqxVuwXOlQlcle88y+k/yerzMOBB2GLWc
- Lm9XfyMsBK37nD+4U2SN+4z4L6fftfn/nemSX3Vw4sPrc4gn3k3OGE3Pcls4z0fDGAQN
- xwrV3IqofOY3Lco6Zy/La0faQ9BrAA3s8irgo=
+ bh=XinUxMBTpVJFecw1xk8+hcgmj/TRXaYR0NBvNYesOtg=;
+ b=UsiMC29G+kWkBdDDiJnNW0VDW0qM5t9OkiNpgXeLdvYZBfBv0GmuxTzAXIEoL9G4Sk
+ nT7QuAZzMXanLfa2wBkRFaH3C146VqoE1CJj/66CEXGZjY6hFblG/EmVEyY6g5zIXxsP
+ eq/WQkQ7xl1hT1liMJ7SIZXlUcptI+GeFiaAk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695258161; x=1695862961;
+ d=1e100.net; s=20230601; t=1695258167; x=1695862967;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BnKEcRxEdT0ajE/1fxD6PiaK9kxO9qL1r9/+uRgL+O8=;
- b=IM7eaCLmYa6HGjb6ewlA+1m3Sl/TvxGpJmXtF3safs8ff6hcMhypgBydQUMASBDvJ3
- ZyLSwBcbaK2mQFIHiX59K1oFjwHf9A3GRIqmyJErFAsnfXlsC7o+MoybSdHA9sjQv6aT
- 5pZ7iR3YGQ8q1gFpPfVncTGiCi09SJVyS3+tOrfQUFrZQwbANLa30NnvXu42NKwd/udU
- pvX+MjeGIdK0GT2cXilY7FTB8wUD5yUz6bBAzsUidh8VMwJ1wERie4OI1E/3z/f4Y9+o
- mx3f+0viH+ygJo1Tryy4T4ifRzJSlwyLJl9Go45STKPvrDE+cZzAfuROHBsaUrUHPoqL
- vmbQ==
-X-Gm-Message-State: AOJu0YxVdFyMApDQ6BIdGWwaWlNh5V5DClIVxgqFxsgR+n/8x8eFLMf8
- s13ceHsNnI4EPMCkMNBNl2mHJOLHB9hizc06T3OuJg==
-X-Google-Smtp-Source: AGHT+IE1npuQMVIh5JtLPvdVfGDti+dyxk/BVLUAJ7hNKHHQf50g8FaDPs8vH1o3YDj0hCr8AgHfRO0pxFrN0b1StyQ=
-X-Received: by 2002:a19:8c14:0:b0:500:ac10:1641 with SMTP id
- o20-20020a198c14000000b00500ac101641mr3663121lfd.46.1695258160916; Wed, 20
- Sep 2023 18:02:40 -0700 (PDT)
+ bh=XinUxMBTpVJFecw1xk8+hcgmj/TRXaYR0NBvNYesOtg=;
+ b=hLvIS7CeXd9ukrv3PkifbE7KUzApwitXwMpqxbOWj1kopWMBJVfJXp/ZsoQ17UXUfW
+ zQW9Z+JTV6lfaLP6Xz7DXNnWsPOqBjJJ9JRt//3s1zIRRQUP3gUbxoGMnYYoBbiNtL9O
+ qbhdnfv75bTLVFcrQ/RNkIUVuQ8K6dtHMvl/sJZ0JBN7hTJ93kE6BerKBcJl/favslJT
+ nmYXouAk2hE04kd7/TqUEwFftx5+27pE22Ut4GSW/wv7wtJTv1yLipMaS/QDQ9K9vM1O
+ 3RHeE6590Vle1G9nDi5Ucm7yuADZFCnJRbTldTFo9r1RyxNp5uZ91iutfmiXHLY9d0CI
+ MtYQ==
+X-Gm-Message-State: AOJu0YwAszFTD1oxvJu7/sJkR/g+qmsERBBzRWexKZ6HFUesdnIcAY9E
+ 4di5HGuF8ViN4vYKzKiH73ddv+T1WjIUB+qWk3X/dw==
+X-Google-Smtp-Source: AGHT+IGoZLk1/Y8RAIq9sl/VcKlpPNiSMK+epQpKgB/hS1VRPEOtWAYnSw0Dxg8NMaJCp3Tq9Cfm3+0GbhZAwxw/cdY=
+X-Received: by 2002:ac2:5dd7:0:b0:502:d302:e025 with SMTP id
+ x23-20020ac25dd7000000b00502d302e025mr3375775lfq.2.1695258166644; Wed, 20 Sep
+ 2023 18:02:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230915175050.4109711-1-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20230915175050.4109711-1-rasmus.villemoes@prevas.dk>
+References: <20230915101640.1166332-1-masahisa.kojima@linaro.org>
+ <20230915101640.1166332-2-masahisa.kojima@linaro.org>
+In-Reply-To: <20230915101640.1166332-2-masahisa.kojima@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Sep 2023 19:02:23 -0600
-Message-ID: <CAPnjgZ2NzoYi9vVWxnnCNU0yudbVCnN2qMRm_gq1zVW-=SuUCg@mail.gmail.com>
-Subject: Re: [PATCH 0/2] make CONFIG_SPL_SYS_MALLOC_SIMPLE &&
- CONFIG_SYS_SPL_MALLOC actually work
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Sean Anderson <seanga2@gmail.com>
+Date: Wed, 20 Sep 2023 19:02:17 -0600
+Message-ID: <CAPnjgZ1FdD0kXNBYjcjt=HoBEuurGUasjYD0Hj523oQTqV1m8A@mail.gmail.com>
+Subject: Re: [PATCH v3 1/7] net: wget: prevent overwriting reserved memory
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,48 +84,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
+Hi Masahisa,
 
-On Fri, 15 Sept 2023 at 11:51, Rasmus Villemoes
-<rasmus.villemoes@prevas.dk> wrote:
+On Fri, 15 Sept 2023 at 04:17, Masahisa Kojima
+<masahisa.kojima@linaro.org> wrote:
 >
-> Currently, setting both CONFIG_SPL_SYS_MALLOC_SIMPLE and
-> CONFIG_SYS_SPL_MALLOC (but not CONFIG_SPL_STACK_R) doesn't work as
-> expected: The SIMPLE option means that all malloc etc. calls are
-> directed at build-time to the implementation in malloc_simple.c, but
+> This introduces the valid range check to store the received
+> blocks using lmb. The same logic is implemented in tftp.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>  net/wget.c | 80 +++++++++++++++++++++++++++++++++++++++++++++++++-----
+>  1 file changed, 73 insertions(+), 7 deletions(-)
+>
 
-Sort-of. It is control by both a CONFIG and GD_FLG_FULL_MALLOC_INIT.
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-> the mem_alloc_init() call which is done in board_init_f() currently
-> calls into dlmalloc.c, and updates the variables describing the
-> dlmalloc arena - which is of course completely unused. And the
-> malloc() implementation continues to hand out allocations from the
-> initial SPL_SYS_MALLOC_F_LEN bytes.
+> diff --git a/net/wget.c b/net/wget.c
+> index 2dbfeb1a1d..9690e4539c 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -4,16 +4,20 @@
+>   * Copyright Duncan Hare <dh@synoia.com> 2017
+>   */
 >
-> These two patches are an attempt at making the combination in $subject
-> actually work as one would expect: define an area of sdram to be used
-> as a malloc arena, but still manage that using the malloc_simple()
-> implementation.
+> +#include <asm/global_data.h>
+>  #include <command.h>
+>  #include <common.h>
+>  #include <display_options.h>
+>  #include <env.h>
+>  #include <image.h>
+> +#include <lmb.h>
+>  #include <mapmem.h>
+>  #include <net.h>
+>  #include <net/tcp.h>
+>  #include <net/wget.h>
 >
-> Since this now changes the mem_alloc_init() from being a harmless
-> no-op call to actually doing something, there's a risk of some boards
-> breaking. The solution for those boards will probably be to just drop
-> CONFIG_SYS_SPL_MALLOC, since that hasn't actually done anything.
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+>  static const char bootfile1[] = "GET ";
+>  static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
+>  static const char http_eom[] = "\r\n\r\n";
+> @@ -55,6 +59,29 @@ static unsigned int retry_tcp_ack_num;       /* TCP retry acknowledge number*/
+>  static unsigned int retry_tcp_seq_num; /* TCP retry sequence number */
+>  static int retry_len;                  /* TCP retry length */
 >
-> Rasmus Villemoes (2):
->   spl: make SYS_SPL_MALLOC depend on !(SPL_STACK_R &&
->     SPL_SYS_MALLOC_SIMPLE)
->   malloc_simple: add mem_malloc_init_simple()
->
->  common/dlmalloc.c      | 2 +-
->  common/malloc_simple.c | 7 +++++++
->  common/spl/Kconfig     | 1 +
->  include/malloc.h       | 7 +++++--
->  4 files changed, 14 insertions(+), 3 deletions(-)
->
-> --
-> 2.37.2
->
+> +static ulong wget_load_size;
+> +
+> +/**
+> + * wget_init_max_size() - initialize maximum load size
+> + *
+> + * Return:     0 if success, -1 if fails
+> + */
+> +static int wget_init_load_size(void)
+> +{
+> +       struct lmb lmb;
+> +       phys_size_t max_size;
+> +
+> +       lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
+
+That function should be changed to const void * but we plan to move to
+ofnode anyway, so let's not worry about it.
+
+[..]
 
 Regards,
 Simon
