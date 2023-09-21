@@ -4,68 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B71CD4939
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:06:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11814CD4939
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32BAC86D5A;
+	by phobos.denx.de (Postfix) with ESMTP id 8CC5686D61;
 	Thu, 21 Sep 2023 03:06:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IXTeIh3C";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WsyibXwQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EFB786D1C; Thu, 21 Sep 2023 03:06:06 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 879F886D28; Thu, 21 Sep 2023 03:06:06 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11E1D86D28
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:05:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9D2486D24
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:05:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-59c00b5c8b2so5339327b3.1
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:05:59 -0700 (PDT)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-59c0b5f984aso5281807b3.2
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:05:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695258357; x=1695863157; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UQkOagCLtG3SnpfT0Zo4ikhAMgK932Hy1naQ/yvGpQE=;
- b=IXTeIh3CoGz/eFWTMoBcJZGgPWf8Kz9BgfKFYFdgblKry9ytmnovupXBBQLPwWIhIR
- +X0HXDhMRLWcJ/2lDbVSEqlrQsyUpo4lCBlQayx7fxk7k1AOdNDwTjqZbQOeRFtY2PyH
- NE8IVbER1J8wqEjD6LVUsas/2kzkexcJ6A25M=
+ bh=zo2D2hAb1mXrsYpPciEVf1kN0Usi9Gb/l35FFDHvDnY=;
+ b=WsyibXwQzOZNDQRMqqLizHnVG+P4VFeywbut0Aez404qfoPo9vH7GWYjOSnsVdaVDl
+ S+YVoHMMp3eYnl3p5ON4hW4FIqTYkeUKgH7q9FKpxdDBIoJnS5XAmomtwsoSKTV/DqPX
+ 6Ou4g5VtielcgYmOUCs+rED2PUyB1ID3dNQYQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695258357; x=1695863157;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UQkOagCLtG3SnpfT0Zo4ikhAMgK932Hy1naQ/yvGpQE=;
- b=P3vQPDWhUvrtdi0hCkU7oH6U7OEco+DpVLRsAgtB41+0md4/PVWyMsA0Af9qvthF59
- 0HSRvkWhuqAnneeEiE84vfhaiZJXIkpaGRFGoyF4X3mQwA8gfxJA4FgEBasbo3ZmhakD
- NRjEmtzGDnX0nWiAV6RvEngKJM6y2EyRgTfdW9csLGc8LKRhtnHw1cTtUJBhTe6G37wN
- iGFq29LWWR5Aij29DEnZ/6ozGxDSiBS6cyTKtDDCNfBZ04k58Ak7ofHrZLq8IlotfYdz
- /7VdhT03Ujt7AeWAqbuuFK7AbZVjOeLonvLuFLsP3qn02PfCfdhz9SkSP6hwu7YX/qdD
- OzlQ==
-X-Gm-Message-State: AOJu0YwwA/6mzJu+KHl1DVVmpMac15AayS2JQFyeszN+4IOR36VRB7ai
- yEZVJygENBN0XRkNN7qFTNbK3+Q+/GECKFaltpP69w==
-X-Google-Smtp-Source: AGHT+IEmzuA8l1TPaSTbRmQ4b6BBREjiAOCLwn0szHGo59Ys+2zFZihZgRjpgSEyN4jvroD/VYwPJITPE9lF2vFie14=
-X-Received: by 2002:a0d:df14:0:b0:57a:2e83:4daf with SMTP id
- i20-20020a0ddf14000000b0057a2e834dafmr4282277ywe.32.1695258357395; Wed, 20
+ bh=zo2D2hAb1mXrsYpPciEVf1kN0Usi9Gb/l35FFDHvDnY=;
+ b=rcr484V6U4dfbq+9lEOrsUwAnlx0kJTWKMjdxj6rNo7bGkEGTPlgYnvZyjeUSovGAZ
+ Jpqd07L5n6OQtyoxjAJOaQJ8ORS1RwrLL1tuiQd9UVpyhSvmgHK7R7xR2Zk4VXJW/Yhs
+ a6NmqeMGKGJ8bjxbM5WaWv+JWbplPpe1Dx14UUfHleSSQ+CABD3q2ZJfbs/8LuNkfo0y
+ CEuIEcaWbQ7kYBv50J6WufgQc3pg/srSArBHD2hFKyM0iNBHWVpWz4MbCOqWlLucohM0
+ loODg9xhApcCkj/7WBKSqDTuov0LXxAYvGVg1XHfY9vBmJ2TMWZqcjdlZYthYYdh05Qr
+ aubg==
+X-Gm-Message-State: AOJu0YxnhpRLle/7OdddtOjjOwV4vOEVkU2qa791wvnyMyXazwwxHxiQ
+ KHK2tc4uak98ndHile74SGFdWOUpWoq1rEO41lUwgQ==
+X-Google-Smtp-Source: AGHT+IHrPY9yWbTpvO9+Nd1YoEE8Sn5NTT67qmUWJobVJ0hKzff1iEFV1zSF66H83OVR33ZmebSg9MrqTXf3fBcezbw=
+X-Received: by 2002:a0d:fbc4:0:b0:59b:4bb2:fc2c with SMTP id
+ l187-20020a0dfbc4000000b0059b4bb2fc2cmr3563517ywf.48.1695258357423; Wed, 20
  Sep 2023 18:05:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230915175050.4109711-1-rasmus.villemoes@prevas.dk>
- <20230915175050.4109711-2-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20230915175050.4109711-2-rasmus.villemoes@prevas.dk>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-10-sjg@chromium.org>
+ <20230830213916.GL3101304@bill-the-cat>
+In-Reply-To: <20230830213916.GL3101304@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Sep 2023 19:03:04 -0600
-Message-ID: <CAPnjgZ0JdA5_2oF+hVEpSE4ztzOpjDMkxE2J6M6FfCx3TA+eww@mail.gmail.com>
-Subject: Re: [PATCH 1/2] spl: make SYS_SPL_MALLOC depend on !(SPL_STACK_R &&
- SPL_SYS_MALLOC_SIMPLE)
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Sean Anderson <seanga2@gmail.com>
+Date: Wed, 20 Sep 2023 19:03:34 -0600
+Message-ID: <CAPnjgZ165AgX0VTWWbHTiEfwP_R5qdwcUQKWoJ7x3G0PYHT3aw@mail.gmail.com>
+Subject: Re: [PATCH 09/32] spl: Avoid an #ifdef when printing gd->malloc_ptr
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
+ Nikhil M Jain <n-jain1@ti.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,62 +86,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Sept 2023 at 11:51, Rasmus Villemoes
-<rasmus.villemoes@prevas.dk> wrote:
->
-> Currently, one can have both SYS_SPL_MALLOC=y and
-> SPL_SYS_MALLOC_SIMPLE=y.
->
-> However, while the former does make board_init_r() in spl.c call
-> mem_malloc_init(), that has no effect at all, because that just
-> updates a few bookkeeping variables, but as the linker map shows, the
-> latter setting has (as expected) caused most of dlmalloc.o to be
-> garbage-collected. That is, those bookkeeping variables are not used
-> for anything.
->
-> IOWs, with SYS_SPL_MALLOC=y and SPL_SYS_MALLOC_SIMPLE=y, the value of
-> CONFIG_SYS_SPL_MALLOC_SIZE is irrelevant, and one still only has the
-> small, SRAM-backed, malloc arena available.
->
-> Now I want to change that so that the mem_malloc_init() instead
-> updates the gd->malloc* variables to point at the SDRAM area.
->
-> However, there's a small complication, namely when SPL_STACK_R=y is
-> also in the mix. In that case, the "simple" malloc arena is indeed
-> updated to point at the SDRAM area carved out of the new stack (see
-> spl_relocate_stack_gd()). So that case works in the sense that one
-> does get a "large" "simple" malloc arena (of size
-> SPL_STACK_R_MALLOC_SIMPLE_LEN) - but CONFIG_SYS_SPL_MALLOC_SIZE is
-> still irrelevant. Once I change the mem_malloc_init() logic, this
-> would then break, because the gd->malloc* variables would be updated
-> again. Also, it doesn't really make sense to allow the .config to
-> essentially specify two different SDRAM-backed malloc arenas.
->
-> So since CONFIG_SYS_SPL_MALLOC and its dependent options are no-ops
-> currently when SPL_STACK_R && SPL_SYS_MALLOC_SIMPLE, simply forbid
-> that combination.
->
-> Simple grepping suggests that these boards/configs are affected, in
-> that they become a tiny bit smaller, and the defconfig will need
-> refreshing:
->
->   am62ax_evm_r5_defconfig
->   am62x_evm_r5_defconfig
->   am64x_evm_a53_defconfig
->   am64x_evm_r5_defconfig
->   am65x_evm_a53_defconfig
->   am65x_hs_evm_a53_defconfig
->   iot2050_defconfig
->   j7200_evm_a72_defconfig
->   j721e_evm_a72_defconfig
->   j721s2_evm_a72_defconfig
->   j721s2_evm_r5_defconfig
->   verdin-am62_r5_defconfig
->
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> ---
->  common/spl/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Wed, 30 Aug 2023 at 15:39, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Aug 30, 2023 at 12:04:40PM -0600, Simon Glass wrote:
+> > Use an accessor in the header file to avoid this.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  common/spl/spl.c                  | 9 +++++----
+> >  include/asm-generic/global_data.h | 7 +++++++
+> >  2 files changed, 12 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/common/spl/spl.c b/common/spl/spl.c
+> > index f0a90c280da..f5cef81000c 100644
+> > --- a/common/spl/spl.c
+> > +++ b/common/spl/spl.c
+> > @@ -876,10 +876,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+> >       } else {
+> >               debug("Unsupported OS image.. Jumping nevertheless..\n");
+> >       }
+> > -#if CONFIG_VAL(SYS_MALLOC_F_LEN) && !defined(CONFIG_SPL_SYS_MALLOC_SIZE)
+> > -     debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->malloc_ptr,
+> > -           gd->malloc_ptr / 1024);
+> > -#endif
+> > +     if (IS_ENABLED(CONFIG_SYS_MALLOC_F) &&
+> > +         !IS_ENABLED(CONFIG_SPL_SYS_MALLOC_SIZE))
+> > +             debug("SPL malloc() used 0x%lx bytes (%ld KB)\n",
+> > +                   gd_malloc_ptr(), gd_malloc_ptr() / 1024);
+> > +
+> >       bootstage_mark_name(get_bootstage_id(false), "end phase");
+> >  #ifdef CONFIG_BOOTSTAGE_STASH
+> >       ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+> > diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+> > index 8fc205ded1a..edf9ff6823f 100644
+> > --- a/include/asm-generic/global_data.h
+> > +++ b/include/asm-generic/global_data.h
+> > @@ -573,6 +573,13 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
+> >  #define gd_malloc_start()    0
+> >  #define gd_set_malloc_start(val)
+> >  #endif
+> > +
+> > +#if CONFIG_VAL(SYS_MALLOC_F_LEN)
+> > +#define gd_malloc_ptr()              gd->malloc_ptr
+> > +#else
+> > +#define gd_malloc_ptr()              0L
+> > +#endif
+> > +
+> >  /**
+> >   * enum gd_flags - global data flags
+> >   *
+>
+> This is another case where readability is not improved. I also have a
+> bad feeling that changing that exact area had some unintended
+> consequences from the compiler, that totally should not have happened.
+> But maybe that was something in a similar code section instead.
+
+The improvement is in the C file...here we have an accessor in the
+header file as has been done elsewhere.
+
+Do you have any more details on the problem you mention? I will align
+the accessor to the struct member which should resolve it.
+
+Regards,
+Simon
