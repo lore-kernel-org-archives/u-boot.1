@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B27E7071C
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 11:09:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91C2BE70719
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 11:14:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 636B986B35;
-	Thu, 21 Sep 2023 13:09:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0ADE2864EE;
+	Thu, 21 Sep 2023 13:14:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ksTHA9nY";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="mH5D7uWg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33C5286B40; Thu, 21 Sep 2023 13:09:53 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::60e])
+ id 63AD88646E; Thu, 21 Sep 2023 13:14:24 +0200 (CEST)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20603.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8a::603])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27C3E86AFB
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 13:09:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AB8E864EE
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 13:14:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IUDbpal/HMFZ3YuEFDBFXRxxK57vetgWknMlju2VADkGdbLnzWFpjCWLx6Ddb52a9qS8V0gF1sHdRzqN74LfUbDd7E6YV6ZkjMSkl22bfHVOiU1hEA7Bym61sNGGkB18VGjVW3r/MUtogroG9LuMREaUg3RQVsR7tmpb2gJ4XCx+hG0EcY8IrHayTTM0fb/vGu2ANsWqt4zhzrEWn3kyeqLO3Dv237DnPTuaxcoBl+j+mWNC69u6FoYWjFlJxRTawnRK1nnuMJ2imOIC8uFc/BVWSGZfv7ka6saA1vBjt4JAv6gtjwpaUzCHWL0YRpPUbod1jvu5tDDIVmwpG8jllA==
+ b=NaOn9AXC5PrfjU6eCPcPoj0poy++QRGj2vnHohnphTdLnshGk1ZALLziQV4eNiFySJdL4U9R1KlSYkMlqblmcdzAGTo2Ja+QdFBT2Zf7tEWSsXeAC+dPb8LN2CJoVj2a9gSYqt7k5K1ynR2TgtoYkzgWgzCy6IjAC8C4bCziSveZYhljIA9vvMGGByc+1OugEQB6eW5KWYGq2BQvZ47Ft+nKffb9NB+F6EiSQEVty5a35IuUKMAVQ99ByxgM8y6S6gmfg8Ji6pw6YeXBtH13RGaRPqFj++yNKaDWNKgYn9owyElzmjEj3npMd99QMUyCxl16zc1vwxsuGe/cRYtyhA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yn0m3LqnOZDi0CNURnkwr0oMHC1SJlxAavn9jeBJAEA=;
- b=V4WxlTy0SpoSJflgxeRzttV7fX3iUJ7GcfoT8cGaQhq27MMlwwglpq0JGyJdifp1dSf8f5O6WLPnHl6ihNBZ3u85RtjjG4F/iuUIWJV2I1E0ouRNSXS4sQLcYMiDL4u3bhFqkRiGza6sLnwzm7n0J0QhdEMjEAoeQlwyHOprzdlc1vmwmYbw1YfzDA2oR2ZPkMTOINh5F0TKkfBeDkpcBbHMaZMRU1Mlc1iStdSopu3QXoXBhLywXMsivoyIfUAcQdSq4mRvDd9hthsRQqWgzPD/bolttPkTeR4uzkTunXR0G7QGkDLMoIPZ1v/5JKRUtpUXxBobl2T0/skD1i1y/A==
+ bh=wiCA0RAnVF/clqep7e5aqE9J5As0qpjSCAZyETx3AJM=;
+ b=WQTRd/XgwMOO9owtmyJQGzbLELb1Xk+3ejSv6fACK6p5S1zE2ml7F8RjUuirXv/s0C0vzJKyEtR9ilfNozTFb+Psn2JfjHZxAE6nslXXX2r9rCpYxDLLiZs6zGAzRtW8eD49C8+VQL7T76GLeHmULDKhATvoON4Tg8Mg3aMXFPJq9vZvJePz13y8hvGMmJMtktn9a77RGjQXFX1PzNwHv5GB7r9fXHMa9t3Q+FQZmGFLefV6aO90bIxznDiUaQmwHboVTEfJmjzgi0LBtmtqKU0ry607YsI0D59rsuJK5bLBCsul+8vMK0qKphaknjoIFQ3r/rZL21FvTzICvJWvew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
+ 165.204.84.17) smtp.rcpttodomain=arri.de smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yn0m3LqnOZDi0CNURnkwr0oMHC1SJlxAavn9jeBJAEA=;
- b=ksTHA9nYTPAZi1w24wk10AYtzDT9IAsNmUmTcgjuS7sZMeqCIH9uKAV9wrF3gAR4+HvCpnTgzA/FiK43gR1PlN1Y+gcdQZdMlWJeCH1D2fv6KgqCNr2SICbLbR/rNy6Pugq6n7Y36k0w7nf9V4cSBzESGVun/YfodJIfNhtK8N8=
-Received: from DM6PR07CA0087.namprd07.prod.outlook.com (2603:10b6:5:337::20)
- by PH8PR12MB7133.namprd12.prod.outlook.com (2603:10b6:510:22e::16) with
+ bh=wiCA0RAnVF/clqep7e5aqE9J5As0qpjSCAZyETx3AJM=;
+ b=mH5D7uWgg0WvegLYRnsALGL5iK2G3ZqDuyyIm/8CYOsASu2n1EuZuP3tMqfgj5X4Ruo+y2WURv0L8bq4zSYQ83+wEPrtx58LnMAkXrSr1v0ZiI31LHLSv6Umz7vf6iw3/oFNkdihc08khoj1DYwYxRmgENvKy3/55wrZ74r+h94=
+Received: from DM6PR14CA0043.namprd14.prod.outlook.com (2603:10b6:5:18f::20)
+ by CH3PR12MB8259.namprd12.prod.outlook.com (2603:10b6:610:124::22) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.28; Thu, 21 Sep
- 2023 11:09:45 +0000
-Received: from DS1PEPF0001709C.namprd05.prod.outlook.com
- (2603:10b6:5:337:cafe::62) by DM6PR07CA0087.outlook.office365.com
- (2603:10b6:5:337::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.30 via Frontend
- Transport; Thu, 21 Sep 2023 11:09:44 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.21; Thu, 21 Sep
+ 2023 11:14:17 +0000
+Received: from DS1PEPF00017097.namprd05.prod.outlook.com
+ (2603:10b6:5:18f:cafe::d7) by DM6PR14CA0043.outlook.office365.com
+ (2603:10b6:5:18f::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.31 via Frontend
+ Transport; Thu, 21 Sep 2023 11:14:17 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,23 +59,23 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF0001709C.mail.protection.outlook.com (10.167.18.106) with Microsoft
+ DS1PEPF00017097.mail.protection.outlook.com (10.167.18.101) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.20 via Frontend Transport; Thu, 21 Sep 2023 11:09:44 +0000
+ 15.20.6792.19 via Frontend Transport; Thu, 21 Sep 2023 11:14:16 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 21 Sep
- 2023 06:09:42 -0500
-Message-ID: <9315e3f8-a708-40d5-b739-c99760a6f2bc@amd.com>
-Date: Thu, 21 Sep 2023 13:09:42 +0200
+ 2023 06:14:15 -0500
+Message-ID: <5f2b9d87-7427-4a6f-9a67-017ae78cb51d@amd.com>
+Date: Thu, 21 Sep 2023 13:14:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/2] Fix issues for small sized data reads
+Subject: Re: [PATCH] arm64: versal: Add SelectMAP boot mode identification
 Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+To: "Polak, Leszek" <LPolak@arri.de>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-CC: <jagan@amarulasolutions.com>, <git@xilinx.com>
-References: <20230915031759.28889-1-venkatesh.abbarapu@amd.com>
+CC: Stefan Roese <sr@denx.de>
+References: <DU0PR07MB8419EB5D613237A44374949DC8FAA@DU0PR07MB8419.eurprd07.prod.outlook.com>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -121,7 +121,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20230915031759.28889-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <DU0PR07MB8419EB5D613237A44374949DC8FAA@DU0PR07MB8419.eurprd07.prod.outlook.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -129,26 +129,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0001709C:EE_|PH8PR12MB7133:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2db268d8-bf7d-4a55-9307-08dbba9342e8
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017097:EE_|CH3PR12MB8259:EE_
+X-MS-Office365-Filtering-Correlation-Id: aeec08ce-5986-42a6-e7c5-08dbba93e525
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: XFsewcwlNKAM0Bt7xEMrBCWj12Rbs18wtY6mTWXv5rGaXzCeOksaUy85DqUUhouVqr2IYtF05B62bbpQs1tk5gG4Bk5xgR98/SngbK7+gyiX7F6kVB1ANVh4B7TOFzYf8MZEeXO83gSXATswUKtS81A9+y48kdBvABYQgl7xRJY5TWqn+ywxFr9vcDLOAWpsqA8PXV/LYf+Yk1XMnIkXrPUZXq/HAbR2z1jhgE77jeoEZ8KmkaogNMogdVLyCLZCi2vy7dBc+iS15xQAl8ceEGR3y+6KG38kRXskAR9qL/eIw0/k94qNNua1rzwF5pXxilSFYWQYbKK9or5lF4TTl9Vn372apL5a8HgBFpRhs6gmXpLBRUcHoOghlqH8/VXpmNXMLbIqMh6MG0U1gsErcZCEv0O3XMwKApmG1sbtlFj3qcJIH7XA8Fgk9ajFEFvwujYDoUv514EU6x/ElICkr6kB1J0zqC4Fl0v65nYGuRHOF15JO7d7x2RnnBp0mSot+fAvPT4kVtEapsNY+gUOs5gQnu5tRJWhq7mQc80HNJo3kUSAWgDSFM76LKas90TnYHqorwjNW1KOLQ32Qx/V0Jg5VFYyAU37At2354XoiQwXQQXB604sANuV28eZC6Tf2GJL0ap5mxUbRezX7SzBx+tii8srnb8io9v0tjcKQnzIev0Ad9PuEuR4EkUKAoYNt+zykh1aOx4tqIRJyeUc6NbrDpLa+B6oyBzCx0gKiDubb7pWDwVZ365eAqjguRNs2dazjlOjYlZgJeGGb1+Mtl47jpg3dw7+H+I/jDEo2BppLIx3GFyEzVOqqPeI1m2F
+X-Microsoft-Antispam-Message-Info: dPXRBjB2mAyRIIy6L3a+2RDJj7yc8vkGf5VhDVaVpG9HkkcRQ661y9Vip5rC9Dn/0bisa7MzmB0uq3+cG76d6skCJizGLNwi8leInMdsR0RWEXuqpQj10KBVMTauvNBqwh+rlZqs2vlsf6weDfXCa/phD6F+I2NjDPIQvV5ZVtaRwrVMQedC4mzcRymptV344eAsQXQOZp8YeTBMTkypC75A1t/hbSRffohKGfUlW1Wkar7tUPIr33CizQ5d7JCyl/wqP4HNFhCUYLTbEdhF0e7hmH+Wm9QsxhYfHAR0fwJoaWeSFwAPM02h0xFGJiirebKNVSTSf240jFmUFQQdZxznQF3uzUjNXp4PFuBlltPSy788W5VfCWL/D4bZpxuHMi08j+R/D0Ew6+Nm8gBlZN6f2gHJWW+wtA1J2mkPZKfH6wSiL0ErjJp4mptkfulbM8Z0DujD/p76VJHzQmr3NYZYUwUsccqgcIquWgC6VVLptU5B6fZdfDKCAwAyIbZqTJIPqb882IbFLbBHfmirIVcf1BW8DYMHFcKIraj2MB2zMTEEQFnqhI8gkvQszn2FVvzwFB460ytqgdHMc7icKP7CFQeCsG5xh3ECo87SNZ9cH5ljzBc2Tuvm3iJGlMarL0jgMJTdpqkiK+GzNlaBzgzNWrCWe2Dk2FRBHoreyaGtPlX7hlm5Zm7gCdjcLBTmdk2Xv/7sJWVRYC2tk+yivncGRtqUlkAEm1nsuKTN9Ykc6OXzlzzhx4EgK6gBx9kp1K1fweM971oq7eszgTqj9ihEJSf+egzkzDWcPR2Qshv7vbOv4Qox5uwC+b8DR7Pv
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(396003)(346002)(376002)(136003)(39860400002)(451199024)(186009)(1800799009)(82310400011)(36840700001)(40470700004)(46966006)(31686004)(426003)(53546011)(31696002)(40480700001)(356005)(40460700003)(36756003)(82740400003)(26005)(36860700001)(86362001)(107886003)(2906002)(4744005)(478600001)(83380400001)(47076005)(70586007)(70206006)(8936002)(44832011)(2616005)(41300700001)(5660300002)(16526019)(4326008)(8676002)(316002)(336012)(16576012)(81166007)(110136005)(54906003)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(346002)(39860400002)(376002)(136003)(396003)(82310400011)(186009)(1800799009)(451199024)(36840700001)(46966006)(40470700004)(356005)(53546011)(82740400003)(81166007)(2616005)(40480700001)(70586007)(70206006)(110136005)(86362001)(478600001)(6666004)(31696002)(36860700001)(47076005)(426003)(336012)(40460700003)(26005)(16526019)(5660300002)(4326008)(44832011)(8676002)(16576012)(316002)(41300700001)(8936002)(2906002)(36756003)(31686004)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2023 11:09:44.7772 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2db268d8-bf7d-4a55-9307-08dbba9342e8
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2023 11:14:16.9701 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: aeec08ce-5986-42a6-e7c5-08dbba93e525
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0001709C.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017097.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7133
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8259
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,21 +167,102 @@ X-Virus-Status: Clean
 
 
 
-On 9/15/23 05:17, Venkatesh Yadav Abbarapu wrote:
-> Change flush cache to invalidate cache and also fix
-> cache related issues are seen with small sized data reads.
-> Due to this, proper data is not read. Also some times
-> sf probe fails randomly.
+On 9/19/23 14:47, Polak, Leszek wrote:
+> Add missing SelectMAP bootmode for proper identification during boot.
 > 
-> Ashok Reddy Soma (1):
->    spi: zynqmp_qspi: Change flush cache to invalidate cache
+> The SelectMAP configuration interface provides an 8-bit, 16-bit or
+> 32-bit bidirectional data bus interface to the Versal FPGA
+> configuration logic that can be used for both configuration and
+> readback.
 > 
-> Venkatesh Yadav Abbarapu (1):
->    spi: zynqmp_qspi: Workaround for small data cache issue
+> A connected microcontoller to the SelectMAP interface can load boot
+> image with bitstream, TF-A (ARM Trusted Firmware) and U-Boot.
 > 
->   drivers/spi/zynqmp_gqspi.c | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
+> This commit adds the missing identification of the SelectMAP mode.
 > 
+> Signed-off-by: Leszek Polak <lpolak@arri.de>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Stefan Roese <sr@denx.de>
+> ---
+>   arch/arm/mach-versal-net/include/mach/hardware.h | 1 +
+>   arch/arm/mach-versal/include/mach/hardware.h     | 1 +
+>   board/xilinx/versal-net/board.c                  | 4 ++++
+>   board/xilinx/versal/board.c                      | 5 +++++
+>   4 files changed, 11 insertions(+)
+> 
+> diff --git a/arch/arm/mach-versal-net/include/mach/hardware.h b/arch/arm/mach-versal-net/include/mach/hardware.h
+> index 9bddb8b00723..767cdd368682 100644
+> --- a/arch/arm/mach-versal-net/include/mach/hardware.h
+> +++ b/arch/arm/mach-versal-net/include/mach/hardware.h
+> @@ -66,6 +66,7 @@ struct crp_regs {
+>   #define EMMC_MODE	0x00000006
+>   #define USB_MODE	0x00000007
+>   #define OSPI_MODE	0x00000008
+> +#define SELECTMAP_MODE	0x0000000A
+>   #define SD1_LSHFT_MODE	0x0000000E /* SD1 Level shifter */
+>   #define JTAG_MODE	0x00000000
+>   #define BOOT_MODE_USE_ALT	0x100
+> diff --git a/arch/arm/mach-versal/include/mach/hardware.h b/arch/arm/mach-versal/include/mach/hardware.h
+> index 000af974e867..9d1c2f0dcfc1 100644
+> --- a/arch/arm/mach-versal/include/mach/hardware.h
+> +++ b/arch/arm/mach-versal/include/mach/hardware.h
+> @@ -82,6 +82,7 @@ struct crp_regs {
+>   #define EMMC_MODE	0x00000006
+>   #define USB_MODE	0x00000007
+>   #define OSPI_MODE	0x00000008
+> +#define SELECTMAP_MODE	0x0000000A
+>   #define SD1_LSHFT_MODE	0x0000000E /* SD1 Level shifter */
+>   #define JTAG_MODE	0x00000000
+>   #define BOOT_MODE_USE_ALT	0x100
+> diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
+> index f0d2224b332e..992e0df73b30 100644
+> --- a/board/xilinx/versal-net/board.c
+> +++ b/board/xilinx/versal-net/board.c
+> @@ -287,6 +287,10 @@ int board_late_init(void)
+>   		mode = "mmc";
+>   		bootseq = dev_seq(dev);
+>   		break;
+> +	case SELECTMAP_MODE:
+> +		puts("SELECTMAP_MODE\n");
+> +		mode = "selectmap";
 
-Applied.
-M
+We are not defining distro boot for selectmap that's why boot_targets don't need 
+to be extended. That's why please remove this line.
+
+> +		break;
+>   	default:
+>   		mode = "";
+>   		printf("Invalid Boot Mode:0x%x\n", bootmode);
+> diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+> index 60bf37d3c90f..b619dbc73c80 100644
+> --- a/board/xilinx/versal/board.c
+> +++ b/board/xilinx/versal/board.c
+> @@ -213,6 +213,10 @@ int board_late_init(void)
+>   		mode = "mmc";
+>   		bootseq = dev_seq(dev);
+>   		break;
+> +	case SELECTMAP_MODE:
+> +		puts("SELECTMAP_MODE\n");
+> +		mode = "selectmap";
+
+The same here.
+
+> +		break;
+>   	default:
+>   		mode = "";
+>   		printf("Invalid Boot Mode:0x%x\n", bootmode);
+> @@ -298,6 +302,7 @@ enum env_location env_get_location(enum env_operation op, int prio)
+>   			return ENVL_SPI_FLASH;
+>   		return ENVL_NOWHERE;
+>   	case JTAG_MODE:
+> +	case SELECTMAP_MODE:
+>   	default:
+>   		return ENVL_NOWHERE;
+>   	}
+> --
+> 2.42.0
+
+The rest looks good to me.
+
+Thanks,
+Michal
