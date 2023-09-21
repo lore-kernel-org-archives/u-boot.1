@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14C63E7D0A2
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 20:45:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F95AE7D0AE
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 21:58:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CBDD863DE;
-	Thu, 21 Sep 2023 22:45:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7E94A86459;
+	Thu, 21 Sep 2023 23:58:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="TT/heBMG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lSMS1oqk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4080D805CA; Thu, 21 Sep 2023 22:45:29 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id 6C67E86466; Thu, 21 Sep 2023 23:58:43 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39E3A805CA
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 22:45:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E4C18603A
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 23:58:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-59c0281d72dso17469357b3.0
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 13:45:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-99c1c66876aso177424466b.2
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 14:58:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695329126; x=1695933926; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695333521; x=1695938321; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VuJ/M9qZhNRMIw1OJNhCwNax5GGjaFhakAPBT54OXy0=;
- b=TT/heBMGZvF54wIbgoOb/bxiDvRQRHK2dt6d7i+kxGtLINbWGOXNC44N+KHnfV1hDc
- ttu2/LOa4vbgX0xwtvp08xDuYCe1MKDrzSirsuRiWDAltaRRQjqQNSnUsnEOiU5VFuMG
- +Sq0Td+3+k2whlJnuJz/Jl6BDufaM4qX5nf2Uk+CupzIKxqzpm1gp3/LOjWV65uFkYr0
- Jk0vS40aaxBTjWnjfqcpNcjpNrvEBmQxf45D8yObbF+Z7OPPyAyO70eLvnwUmQ7tp7xT
- t5cB7HQYJniitcYlC35Tk1KL0ZAa8mWLBDH4uufQHXIxtbi8I8z3dpEHvwL8aUrmwpSV
- 8GgQ==
+ bh=663oj4wHnabK0pp7sOx4Lg2LuhN7OFgWWhmy5LHGsug=;
+ b=lSMS1oqk08mdOg27gaeVIi+ANLpJQqm1lIek7BXEwnMlgHmQuwZHtlMQjYWFKrTAFa
+ 4gbU8XjNUEj07c945QJi1/+UsbsboKENOHKQDHv+jc5UQzjdMrRAXseO+grkVr3+cpoo
+ Re3HRnAJon+UZM5ugf+3VBnwtj2vuR1fEkgOVUYl/uQfTsWf0aQdXPhqCU4IbUxw7k9T
+ /aTxK3axWS3Z6J/hAXJFamYftI2mVl1b0A5XbBblEDnizUvd+mZ96cmzmYu9UQg/Wtgw
+ Dx0yxV9K5XiA2Z+jaJ0/gm6XVLF5mEQVpYSSKMFbjjCi6ATxqUU+uciZBf8WwZcesKd/
+ SPPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695329126; x=1695933926;
+ d=1e100.net; s=20230601; t=1695333521; x=1695938321;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VuJ/M9qZhNRMIw1OJNhCwNax5GGjaFhakAPBT54OXy0=;
- b=jHyYqyeZpwVc0N78N5ya80J5XhmmFRaXp0PiaTpT6++iVQTIbh3OFrLt/uihzUxUK4
- /A6q3dEy8p7cIK44UNcC+OlR/x1g0qhR2e8EltwSn6j7o/2u+/4bcWTwm+fqvtToa4Lu
- XP0PeQc5f+JSvtAxH6odVBECs0QXYnr9kZEO1c28tEPFM537I7cMtfBNiZTSmM5LKBP3
- mDFuEqlvCAvQTietqIFMU02lZ8unmLOqTLMMoPArLdd8mrA66KxF6ejrMC8n+H5mH11b
- 2KT0Sm+DwXPraClOe+0c6wI3lfj+TBnBfFhulmL3SHWFXTGajR0eLRSNAxwcQKSBY32e
- K/3g==
-X-Gm-Message-State: AOJu0YwIUyD9iAYUua3q6a9LLsRYsRvcB1rIbXLeKUHrvHauqE+Nmn77
- wouHK81iPrC29V6v+0BAXzYZeoSzzP6cPytzuEzuDQ==
-X-Google-Smtp-Source: AGHT+IEqx7pX/esSOHjWQJWj5f0afnyYARsCON6Hc0Fs+5TTrceB93t0WuBaISsz6xCMl+ls7eotghTmFOZkOzLTHn4=
-X-Received: by 2002:a0d:dd07:0:b0:591:4f2b:7eea with SMTP id
- g7-20020a0ddd07000000b005914f2b7eeamr6945885ywe.18.1695329124999; Thu, 21 Sep
- 2023 13:45:24 -0700 (PDT)
+ bh=663oj4wHnabK0pp7sOx4Lg2LuhN7OFgWWhmy5LHGsug=;
+ b=R+M/FiBvRWJpSwcccYYpThd4brXT5FsJ155kczCTjGq80o5rQjsaAvmkoTadto0iY5
+ LYXk9/Vj0yatFKMmV9Nz14swMT+5acstS3jB9qZjNTXO21oyPwyjxsKfoKkNauhzHPCC
+ AAlbLGdD/l8wHD3/8JWeebZ0qPtoaCGLiy4wY0dy9zJKoyAfeLiCSttL832/jnfB27TA
+ ugJ0aUrYndH+iBjRrSlprePaOkjR0qMC+HYmTtCTeRV6pqQ/+7D054Jb+CQ+M2zE6YXi
+ G7eCmUbctTKdFhxa3y1G23yWqZVIEioN7K+OKzTPgFiGNwJBifN7v4o+g12sr79sVXiW
+ FiiA==
+X-Gm-Message-State: AOJu0YxdK75zXePT0ylFTuP+Tks1q6TQWkjaAGgDCIm4DA0wD3ikd4Sy
+ nihBhcm0mP7L0os5OvFX1yrcqx1m8M9NHcFJoqs=
+X-Google-Smtp-Source: AGHT+IGOcQCKGEKauX+EqSe5fuCYsZXZXRwiVE51Wqm6cv/lAUsiPrRr/UbttFnkFJc5f41ss4SH/tsk2QuCZiP7btE=
+X-Received: by 2002:a17:906:2cc:b0:9a5:b878:7336 with SMTP id
+ 12-20020a17090602cc00b009a5b8787336mr6937393ejk.7.1695333520860; Thu, 21 Sep
+ 2023 14:58:40 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230918061139.810552-1-linus.walleij@linaro.org>
- <61ebf7f5-7990-0134-2eee-dc5a6881ccd0@gmail.com>
-In-Reply-To: <61ebf7f5-7990-0134-2eee-dc5a6881ccd0@gmail.com>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Thu, 21 Sep 2023 22:45:13 +0200
-Message-ID: <CACRpkdZpjSTuCJVsM6+2a2gD-SOKWnedS8UrBz0xSh-sg+PvMQ@mail.gmail.com>
-Subject: Re: [PATCH] RFT: mips: implement __udivdi3
-To: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Mauro Condarelli <mc5686@mclink.it>
+References: <20230921133748.1543007-1-sjg@chromium.org>
+ <20230921133748.1543007-2-sjg@chromium.org>
+In-Reply-To: <20230921133748.1543007-2-sjg@chromium.org>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 22 Sep 2023 05:58:29 +0800
+Message-ID: <CAEUhbmVoYz+pu5vtPz3CvQqctp1_E0yDmpFFsPkV3ZLebt=GeQ@mail.gmail.com>
+Subject: Re: [PATCH v7 1/3] fixup: Move python control earlier in Makefile
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,40 +88,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 21, 2023 at 3:42=E2=80=AFPM Daniel Schwierzeck
-<daniel.schwierzeck@gmail.com> wrote:
+On Thu, Sep 21, 2023 at 9:37=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Move this control into the common area of the main Makefile, so it
+> applies to non-build rules as well. This allows 'make mrproper' to handle
+> python files as it should.
+>
+> This should be squashed into:
+>
+>    65a33eba10d Allow Python packages to be dropped
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v7:
+> - Add new fixup patch to move python control earlier in Makefile
+>
+>  Makefile | 17 +++++++++--------
+>  1 file changed, 9 insertions(+), 8 deletions(-)
+>
 
-> I played around a bit and following simplified code compiles on various
-> MIPS32 and MIPS64 boards. (E.g. "echo CONFIG_FS_SQUASHFS=3Dy >>
-> configs/malta[|64|el|64el]_defconfig && make malta[|64|el|64el]_defconfig=
-")
->
->
->
-> /* SPDX-License-Identifier: GPL-2.0 */
->
-> #include "libgcc.h"
->
-> #if BITS_PER_LONG =3D=3D 32
->
-> #include <div64.h>
->
-> long long __udivdi3(long long u, word_type b)
-> {
->         long long ret =3D u;
->
->         __div64_32(&ret, b);
->         return ret;
-> }
->
-> #endif /* BITS_PER_LONG =3D=3D 32 */
->
-> What do you think?
-
-Looks good to me!
-
-You can just modify the patch, sign off and apply,
-I guess? Go ahead!
-
-Yours,
-Linus Walleij
+squashed into "65a33eba10d Allow Python packages to be dropped" on
+u-boot-x86/next, thanks!
