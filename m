@@ -4,58 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9CD1E71084
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 14:52:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C11AE71086
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:04:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41E8286ACF;
-	Thu, 21 Sep 2023 16:52:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C06D86377;
+	Thu, 21 Sep 2023 17:04:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="XW+L8FYw";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AqCDXvBO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4019786AA8; Thu, 21 Sep 2023 16:52:02 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ id 6DCD586429; Thu, 21 Sep 2023 17:04:10 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B80F86098
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 16:52:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id EB0818615A
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:04:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugen.hristev@collabora.com
-Received: from [192.168.0.125] (unknown [82.76.24.202])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (No client certificate requested) (Authenticated sender: ehristev)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 811526607318;
- Thu, 21 Sep 2023 15:51:59 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1695307920;
- bh=cOeizgoDmgWqZ1SidV7oa8x3FT2KOGyVdJLHkvUHdiI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=XW+L8FYweHdBnWhlNDn2ToQoJUGPE9GUrCgv22BUs1bHG/iTdm4KSun6p2URELMOv
- GFnqw5oAqqa3XsPDTdW/4KtqrzpURaHv2ln7EAI3QNxveh6hfKPAyHWnTwOSWQae+I
- Mg0MBOn3OW0N7u/Yc6exmNG203pBwueVO2cwx5SID2oiY/FFmK1k6hfFTrQ+Ubp44R
- 0IaGWBP5E6V0S6/LbVQobxMlS2mEptr6dU+avWeD47S3YwmdFdlarQNGjMFuf5xCBX
- C9+xrTCAk8E00BnYdAP0fdf08QotcE7phQpoRcoCLkx/fzMKkror62IbmYjk8rPFQV
- QDI612/noH4fA==
-Message-ID: <fc944f13-8446-c428-2d11-9ec2e176b771@collabora.com>
-Date: Thu, 21 Sep 2023 17:51:57 +0300
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahiroy@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 0DA9F60B7D
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:04:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6D3F6C4E761
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:04:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1695308645;
+ bh=v/UXUlQM2o4IUFlP504e4uf9p/cLTlPizAFmLyo22oE=;
+ h=From:Date:Subject:To:Cc:From;
+ b=AqCDXvBOvHQfJrDCCTkhdhwoCQ7SZXPjOuzakv1wHlOYCb92Kp/Esu4bRWN4QBvEJ
+ dZUMsGsOBK7uWPbbK2+km5sQKVSZMcEMnVBb3SPYv/qpNWnBbpnuPK9WAoLiZ0hP3f
+ 8mWxsIgDAsvwJUJn1I49YSwtaW43YWV+Z/KUoeLGtVMbIEdFrdwHoqfhEPh8Bux298
+ BLCEo/XTcreBfVZXcz65V6Pct84pPQGN+vKj0ckQTS3ulD61s/mdV+AjW26397KoH/
+ PUOdS1VbbkEpP7KOmxWCT9Jn6NoQ8bvMXYFFj5rQFOuh0A6dD0IPBrk7CsBlSKHxQo
+ Sxzi6t7k86oEQ==
+Received: by mail-oa1-f42.google.com with SMTP id
+ 586e51a60fabf-1d544a4a2f2so598647fac.3
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:04:05 -0700 (PDT)
+X-Gm-Message-State: AOJu0YzIzE5I/3ISO8aFum9uX30jUmvVSSEEIkw05uEET7CXGGbFAk0c
+ GfTKFR/RGSgprQwfkEYsu3tzoaQ1iZ3YttgRqVY=
+X-Google-Smtp-Source: AGHT+IET8/xFNTajWEANT0SJvXDmZ00WxjlgoDr0fpSUQZ4vAiXNffUoHt5ME083Q1wG5pxxl7Rudh6nz+PySKuuCuQ=
+X-Received: by 2002:a05:6870:56a4:b0:1ba:2c95:a168 with SMTP id
+ p36-20020a05687056a400b001ba2c95a168mr6227251oao.35.1695308644629; Thu, 21
+ Sep 2023 08:04:04 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v2 RESEND] mmc: dw_mmc: reset controller after data error
-Content-Language: en-US
-To: peng.fan@nxp.com, jh80.chung@samsung.com, u-boot@lists.denx.de
-Cc: kever.yang@rock-chips.com, Ziyuan Xu <xzy.xu@rock-chips.com>,
- Jason Zhu <jason.zhu@rock-chips.com>
-References: <20230619103347.278004-1-eugen.hristev@collabora.com>
-From: Eugen Hristev <eugen.hristev@collabora.com>
-In-Reply-To: <20230619103347.278004-1-eugen.hristev@collabora.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Masahiro Yamada <masahiroy@kernel.org>
+Date: Fri, 22 Sep 2023 00:03:27 +0900
+X-Gmail-Original-Message-ID: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
+Message-ID: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
+Subject: Question about boot failure of AM64-SK
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Nishanth Menon <nm@ti.com>, srk@ti.com, s-vadapalli@ti.com,
+ n-francis@ti.com, m-chawdhry@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,67 +78,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 6/19/23 13:33, Eugen Hristev wrote:
-> From: Ziyuan Xu <xzy.xu@rock-chips.com>
-> 
-> Per dw_mmc databook, it's recommended to reset the host controller if
-> some data-related error occurred.
-> Implement a reset mechanism.
-> 
-> Signed-off-by: Ziyuan Xu <xzy.xu@rock-chips.com>
-> Co-developed-by: Jason Zhu <jason.zhu@rock-chips.com>
-> Signed-off-by: Jason Zhu <jason.zhu@rock-chips.com>
-> [eugen.hristev@collabora.com: modified a bit the variables initialization]
-> Signed-off-by: Eugen Hristev <eugen.hristev@collabora.com>
-> ---
+Hi.
 
-Hi,
+I am seeing a boot failure on AM64-SK.
 
-Gentle ping.
-This patch require any more changes?
 
-Thanks,
-Eugen
+I got the following error in SPL of the main core.
+Do you have any clue?
 
->   drivers/mmc/dw_mmc.c | 20 +++++++++++++++++++-
->   1 file changed, 19 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-> index 5085a3b491da..d6cad998b0cd 100644
-> --- a/drivers/mmc/dw_mmc.c
-> +++ b/drivers/mmc/dw_mmc.c
-> @@ -138,7 +138,7 @@ static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
->   {
->   	struct mmc *mmc = host->mmc;
->   	int ret = 0;
-> -	u32 timeout, mask, size, i, len = 0;
-> +	u32 timeout, reset_timeout = 100, status, ctrl, mask, size, i, len = 0;
->   	u32 *buf = NULL;
->   	ulong start = get_timer(0);
->   	u32 fifo_depth = (((host->fifoth_val & RX_WMARK_MASK) >>
-> @@ -159,6 +159,24 @@ static int dwmci_data_transfer(struct dwmci_host *host, struct mmc_data *data)
->   		/* Error during data transfer. */
->   		if (mask & (DWMCI_DATA_ERR | DWMCI_DATA_TOUT)) {
->   			debug("%s: DATA ERROR!\n", __func__);
-> +
-> +			dwmci_wait_reset(host, DWMCI_RESET_ALL);
-> +			dwmci_writel(host, DWMCI_CMD, DWMCI_CMD_PRV_DAT_WAIT |
-> +				     DWMCI_CMD_UPD_CLK | DWMCI_CMD_START);
-> +
-> +			do {
-> +				status = dwmci_readl(host, DWMCI_CMD);
-> +				if (!reset_timeout--)
-> +					break;
-> +				udelay(100);
-> +			} while (status & DWMCI_CMD_START);
-> +
-> +			if (!host->fifo_mode) {
-> +				ctrl = dwmci_readl(host, DWMCI_BMOD);
-> +				ctrl |= DWMCI_BMOD_IDMAC_RESET;
-> +				dwmci_writel(host, DWMCI_BMOD, ctrl);
-> +			}
-> +
->   			ret = -EINVAL;
->   			break;
->   		}
 
+Error reading cluster
+fit read sector 0, sectors=985528, dst=, count=18446744073709551615,
+size=0xf09b8
+
+
+The resulting count looks crazy, but I imagine it was just
+that the negative error code was converted to ulong.
+
+
+
+For debugging, I enabled debug() under common/spl/.
+The rest is the same as the latest mainline.
+
+The full log is as follows:
+
+
+
+U-Boot SPL 2023.10-rc4-00047-gb9b83a86f0-dirty (Sep 21 2023 - 14:38:15 +0000)
+SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.7--v09.00.07 (Kool Koala)')
+EEPROM not available at 0x50, trying to read at 0x51
+SPL initial stack usage: 13384 bytes
+SPL malloc() before relocation used 0x32ec bytes (12 KB)
+>>SPL: board_init_r()
+spl_init
+Trying to boot from MMC2
+spl: mmc boot mode: fs
+Found FIT
+fit read sector 0, sectors=874340, dst=, count=874339, size=0xd5764
+firmware: 'atf'
+Embedded data: dst=701c0000, size=b2a8
+Warning: Detected image signing certificate on GP device. Skipping
+certificate to prevent boot failure. This will fail if the image was
+also encrypted
+Image OS is ARM Trusted Firmware
+loadables: 'tee'
+Embedded data: dst=9e800000, size=753e0
+Warning: Detected image signing certificate on GP device. Skipping
+certificate to prevent boot failure. This will fail if the image was
+also encrypted
+Loadable is Trusted Execution Environment
+loadables: 'dm'
+Embedded data: dst=89000000, size=0
+Loadable is Unknown OS
+loadables: 'spl'
+Embedded data: dst=80080000, size=4ff18
+Warning: Detected image signing certificate on GP device. Skipping
+certificate to prevent boot failure. This will fail if the image was
+also encrypted
+Loadable is U-Boot
+fdt: 'fdt-1'
+Embedded data: dst=800cf888, size=2af2
+Warning: Detected image signing certificate on GP device. Skipping
+certificate to prevent boot failure. This will fail if the image was
+also encrypted
+loadables: 'spl'
+no string for index 3
+Unsupported OS image.. Jumping nevertheless..
+Loading Environment from MMC... MMC Device 0 not found
+*** Warning - No MMC card found, using default environment
+
+Starting ATF on ARM64 core...
+
+NOTICE:  BL31: v2.9(release):v2.9.0
+NOTICE:  BL31: Built : 10:06:58, Sep 21 2023
+I/TC:
+I/TC: OP-TEE version: 3.22.0 (gcc version 11.4.0 (Ubuntu
+11.4.0-1ubuntu1~22.04)) #1 Thu Sep 21 10:06:54 UTC 2023 aarch64
+I/TC: WARNING: This OP-TEE configuration might be insecure!
+I/TC: WARNING: Please check
+https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
+I/TC: Primary CPU initializing
+I/TC: SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.7--v09.00.07 (Kool Koala)')
+I/TC: HUK Initialized
+I/TC: Activated SA2UL device
+I/TC: Fixing SA2UL firewall owner for GP device
+I/TC: Enabled firewalls for SA2UL TRNG device
+I/TC: SA2UL TRNG initialized
+I/TC: SA2UL Drivers initialized
+I/TC: Primary CPU switching to normal world boot
+
+U-Boot SPL 2023.10-rc4-00047-gb9b83a86f0-dirty (Sep 21 2023 - 14:38:20 +0000)
+SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.7--v09.00.07 (Kool Koala)')
+SPL malloc() before relocation used 0x1f80 bytes (7 KB)
+>>SPL: board_init_r()
+spl_init
+Trying to boot from MMC2
+spl: mmc boot mode: fs
+Found FIT
+Error reading cluster
+fit read sector 0, sectors=985528, dst=, count=18446744073709551615,
+size=0xf09b8
+SPL: failed to boot from all boot devices
+### ERROR ### Please RESET the board ###
+
+
+
+
+
+My build sequence is something like this:
+
+
+
+      # for wakeup
+      make -j "$(nproc)" O=build-wakeup CROSS_COMPILE=arm-linux-gnueabihf- \
+          BINMAN_INDIRS="${SNAPCRAFT_STAGE}/ti-linux-firmware" \
+          am64x_evm_r5_defconfig all
+      cp build-wakeup/tiboot3-am64x-gp-evm.bin "${STAGE}/tiboot3.bin"
+
+      # for main
+      make -j "$(nproc)" O=build-main am64x_evm_a53_defconfig
+      make -j "$(nproc)" O=build-main CROSS_COMPILE=aarch64-linux-gnu- \
+          BINMAN_INDIRS="${STAGE}/ti-linux-firmware" \
+          BL31="${STAGE}/bl31.bin" \
+          TEE="${STAGE}/tee-raw.bin" \
+          all
+      cp build-main/tispl.bin build-main/u-boot.img "${STAGE}"
+
+
+
+
+
+
+Strangely, AM62-SK booted successfully,
+but AM64-SK failed.
+I do not know why.
+
+
+-- 
+Best Regards
+Masahiro Yamada
