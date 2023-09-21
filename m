@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A726CD493C
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:58:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F743CD493C
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:59:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 908DB86D86;
+	by phobos.denx.de (Postfix) with ESMTP id F187E86A26;
 	Thu, 21 Sep 2023 03:58:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kj/wK1f5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jPWSQMdv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7917586D92; Thu, 21 Sep 2023 03:58:00 +0200 (CEST)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id F2C2586D91; Thu, 21 Sep 2023 03:58:00 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6689186C10
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E53786D83
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-7955636f500so19967839f.1
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:53 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-7927611c54bso19609039f.2
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261472; x=1695866272; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695261473; x=1695866273; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5QcbAD2DcA1kyWT7zyiskBkdTt2QYZXZXwDv0EmXg6A=;
- b=kj/wK1f5HrTr0ChAx/k1Sg70E53GFBgJjU5EsIuu6iHv41THO6gX0zt/ZBD2ZbwQ+M
- beXR24zd6LOXHrfOGWhKijRaOVlR/1jIsKGPxn8AMzV3kT2BJOiPQJ7Zn5BC2R4RR4Vn
- KIdmxzueKEV6KnDgKT8pb2rrSR+JTTP8B/tDg=
+ bh=BFzSItGDxkpfjOdxUglVy/5ZiMFOgMjwXZ+onDRqB48=;
+ b=jPWSQMdvtdatakkPtaFzeCs5jkV89SkMkndRtrMewTY0EnnzkYq2JeWz3CIN7G+UU6
+ hQoDiPqC402eZ6FWdovOeu941AAdPzq2ZehJ8EQHL36HOD/eWQSzdJPvgsQLAqnKE84l
+ RSP6Wc6qLJJbbp1dWF/raCcK6zbUIbKdi1fxw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261472; x=1695866272;
+ d=1e100.net; s=20230601; t=1695261473; x=1695866273;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5QcbAD2DcA1kyWT7zyiskBkdTt2QYZXZXwDv0EmXg6A=;
- b=L8UTKW0VeVpyX/Lk6dL5Pw4stBJMWY45t1sy6aVVgQIzmZCAyqbdfHhdgqkgNGeduu
- J7TeMVGHGW0lgasybYzutQoYPdMbcoLUi2f7eP/cUZD5VuJ+9TQbNnYTU9pXKDAqbmKq
- /scFS6alG/DxdmhGbd+Bco0yOb9K3MqdorhFu33o9L4SBLnPH75eGfFRFXM1O0bscxhX
- OtQRUstzwjA7UWdi2FfGTBHI1WIjrk4+JOMpRpCgjBnOw2acEfQBSor+TBh3Aj8ysUEu
- 8LX4Otbt5kOCevka1dtl6VN8zpCrzN7RAJCw7tj2xAE+pLpsajqR32xx4nI55LtAfzk6
- qWgw==
-X-Gm-Message-State: AOJu0YwVcsoBXj6YsxLcEAf09hirq6jTVZ0tDB9783aR568xGhNcba9E
- 11F1euWq2bpm+hzHt86kAW/U2FU6UjtaDdM2o9E=
-X-Google-Smtp-Source: AGHT+IEQ3uaybxpwd7C86x5jYDrbU6Gzl5eto6sE9PEOgwsJB8lrsMq2nltZ6FSXHvj0zCr3AJhlEg==
-X-Received: by 2002:a05:6e02:1b06:b0:349:36e1:10fb with SMTP id
- i6-20020a056e021b0600b0034936e110fbmr5452666ilv.18.1695261471965; 
- Wed, 20 Sep 2023 18:57:51 -0700 (PDT)
+ bh=BFzSItGDxkpfjOdxUglVy/5ZiMFOgMjwXZ+onDRqB48=;
+ b=Z9Mo6JIsHtduTV5I4gh7qz/WjOsbGNF6Xd9keffDznmBdLE2lNeEugN0YxjhsTL9O7
+ jUqAqpr6gOv8+l/NHafn2PfSGeI+TBpbxkGxvkLyOYHeRy+6OFumArvwLY+63DZ2IYHx
+ 0tGdJBHUrg1j7Hk60e/QKB3Ld30WDnkq3G0VzcqUjskU7SzdzwNQkXG6J/CK0e3xS9+U
+ 4Nuw+IogghfQG0RguMGJx5r7wB9vzPmSYAxbXp16v3n5h7aUm+K4E1ngxlIUSIolZbAf
+ DeZaMrYB9p9qjfMcL5ls67zP0qHxAIuH7NajbfnxsMW6wsME2VvgZ5YdLdpCmWklyepl
+ pZZA==
+X-Gm-Message-State: AOJu0Ywf11stEpXAF6Mr0yzZg1fDin+b7STY+wjZNB83QzJo8bk9EGYA
+ kbf5JS8MbzDMAegxmHtdtqcS9sOysW2V2FQ70dg=
+X-Google-Smtp-Source: AGHT+IH/g9tekgJFE23yv5I2m1IBjbQM3QAFyWwIw6Nxg4aUIsXlplQvA9ZygGtGuqTCPQbuXBoODw==
+X-Received: by 2002:a6b:6a09:0:b0:792:9406:a453 with SMTP id
+ x9-20020a6b6a09000000b007929406a453mr4398146iog.14.1695261473306; 
+ Wed, 20 Sep 2023 18:57:53 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.51
+ y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:57:51 -0700 (PDT)
+ Wed, 20 Sep 2023 18:57:52 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Nikhil M Jain <n-jain1@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
-Subject: [PATCH v2 09/32] spl: Avoid an #ifdef when printing gd->malloc_ptr
-Date: Wed, 20 Sep 2023 19:56:58 -0600
-Message-ID: <20230921015730.1511373-10-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>
+Subject: [PATCH v2 10/32] spl: Remove #ifdefs with BOOTSTAGE
+Date: Wed, 20 Sep 2023 19:56:59 -0600
+Message-ID: <20230921015730.1511373-11-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
 References: <20230921015730.1511373-1-sjg@chromium.org>
@@ -90,56 +88,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use an accessor in the header file to avoid this.
+This feature has some helpers in its header file so that its functions
+resolve to nothing when the feature is disabled. Add a few more and use
+these to simplify the code.
+
+With this there are no more #ifdefs in board_init_r()
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Use the same condition for both pieces to avoid possible problems
+(no changes since v1)
 
- common/spl/spl.c                  | 9 +++++----
- include/asm-generic/global_data.h | 7 +++++++
- 2 files changed, 12 insertions(+), 4 deletions(-)
+ common/spl/spl.c    | 15 +++------------
+ include/bootstage.h | 26 ++++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+), 12 deletions(-)
 
 diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 8511c66d7394..5f57b51ca2d1 100644
+index 5f57b51ca2d1..8541bef00466 100644
 --- a/common/spl/spl.c
 +++ b/common/spl/spl.c
-@@ -864,10 +864,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 	} else {
- 		debug("Unsupported OS image.. Jumping nevertheless..\n");
+@@ -542,17 +542,11 @@ static int spl_common_init(bool setup_malloc)
+ 		      ret);
+ 		return ret;
  	}
--#if CONFIG_VAL(SYS_MALLOC_F_LEN) && !defined(CONFIG_SPL_SYS_MALLOC_SIZE)
--	debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->malloc_ptr,
--	      gd->malloc_ptr / 1024);
--#endif
-+	if (IS_ENABLED(CONFIG_SYS_MALLOC_F) &&
-+	    !IS_ENABLED(CONFIG_SPL_SYS_MALLOC_SIZE))
-+		debug("SPL malloc() used 0x%lx bytes (%ld KB)\n",
-+		      gd_malloc_ptr(), gd_malloc_ptr() / 1024);
-+
+-#ifdef CONFIG_BOOTSTAGE_STASH
+ 	if (!u_boot_first_phase()) {
+-		const void *stash = map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR,
+-					       CONFIG_BOOTSTAGE_STASH_SIZE);
+-
+-		ret = bootstage_unstash(stash, CONFIG_BOOTSTAGE_STASH_SIZE);
++		ret = bootstage_unstash_default();
+ 		if (ret)
+-			debug("%s: Failed to unstash bootstage: ret=%d\n",
+-			      __func__, ret);
++			log_debug("Failed to unstash bootstage: ret=%d\n", ret);
+ 	}
+-#endif /* CONFIG_BOOTSTAGE_STASH */
+ 	bootstage_mark_name(get_bootstage_id(true),
+ 			    spl_phase_name(spl_phase()));
+ #if CONFIG_IS_ENABLED(LOG)
+@@ -870,12 +864,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 		      gd_malloc_ptr(), gd_malloc_ptr() / 1024);
+ 
  	bootstage_mark_name(get_bootstage_id(false), "end phase");
- #ifdef CONFIG_BOOTSTAGE_STASH
- 	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index 8fc205ded1a3..edf9ff6823f2 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -573,6 +573,13 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
- #define gd_malloc_start()	0
- #define gd_set_malloc_start(val)
- #endif
+-#ifdef CONFIG_BOOTSTAGE_STASH
+-	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+-			      CONFIG_BOOTSTAGE_STASH_SIZE);
++	ret = bootstage_stash_default();
+ 	if (ret)
+ 		debug("Failed to stash bootstage: err=%d\n", ret);
+-#endif
+ 
+ 	if (IS_ENABLED(CONFIG_SPL_VIDEO_REMOVE)) {
+ 		struct udevice *dev;
+diff --git a/include/bootstage.h b/include/bootstage.h
+index 685939ccffc0..38388afc259b 100644
+--- a/include/bootstage.h
++++ b/include/bootstage.h
+@@ -244,6 +244,8 @@ void show_boot_progress(int val);
+ 
+ #ifdef ENABLE_BOOTSTAGE
+ 
++#include <mapmem.h>
 +
-+#if CONFIG_VAL(SYS_MALLOC_F_LEN)
-+#define gd_malloc_ptr()		gd->malloc_ptr
-+#else
-+#define gd_malloc_ptr()		0L
-+#endif
+ /* This is the full bootstage implementation */
+ 
+ /**
+@@ -364,6 +366,20 @@ int bootstage_stash(void *base, int size);
+  */
+ int bootstage_unstash(const void *base, int size);
+ 
++static inline int bootstage_stash_default(void)
++{
++	return bootstage_stash(map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR, 0),
++			       CONFIG_BOOTSTAGE_STASH_SIZE);
++}
++
++static inline int bootstage_unstash_default(void)
++{
++	const void *stash = map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR,
++				       CONFIG_BOOTSTAGE_STASH_SIZE);
++
++	return bootstage_unstash(stash, CONFIG_BOOTSTAGE_STASH_SIZE);
++}
 +
  /**
-  * enum gd_flags - global data flags
+  * bootstage_get_size() - Get the size of the bootstage data
   *
+@@ -440,6 +456,16 @@ static inline int bootstage_unstash(const void *base, int size)
+ 	return 0;	/* Pretend to succeed */
+ }
+ 
++static inline int bootstage_stash_default(void)
++{
++	return 0;	/* Pretend to succeed */
++}
++
++static inline int bootstage_unstash_default(void)
++{
++	return 0;	/* Pretend to succeed */
++}
++
+ static inline int bootstage_get_size(void)
+ {
+ 	return 0;
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
