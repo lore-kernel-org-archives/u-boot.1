@@ -4,75 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85B4BCD493C
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:57:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF5BCD493C
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:57:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0EA886D4A;
-	Thu, 21 Sep 2023 03:57:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E4F886D41;
+	Thu, 21 Sep 2023 03:57:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Kj8gF3Cc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FiUFzsHj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B724886D42; Thu, 21 Sep 2023 03:57:45 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id ED81586D41; Thu, 21 Sep 2023 03:57:52 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF05486D0C
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 658BA86D34
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-79329a8f78bso20542339f.3
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:40 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-7926b7f8636so10929639f.1
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261459; x=1695866259; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695261464; x=1695866264; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6vy+OSsAw9p44CDHD/da6p9nUe3NcjHsvR6/t2CloHM=;
- b=Kj8gF3CcAJYfL4zCdQKqZ5EwxP/ljmjCwp3NxwyNydVnRr1X2in7ZLkZVD3xFWSwxZ
- 1SqDkaymiTKF0bjYOlZLAvZ+LxNTmbCgmPFjQixjYdp9lQ4Gii8GWNwc44O2TeJYmYmQ
- mS7gThYWhMIxAWjtLf7TcLynj7uBvDeoNymLU=
+ bh=O2nJm9PTO/caN1ajeqdMeJOj+YRkBj1GSo9NgalCZCI=;
+ b=FiUFzsHjEL/ueZYWrF34B8azBRThbm51RhhVHL/6kf37Wz+lItra1X1xc0iFQdlxiK
+ AbxV/ARZcyZ3NvIWIAdUeh/WfrSlvKu7nPVOLSSJzXMCNVerEyNqf2oIOD5v1GWohHJN
+ pYe7Qa/OC9r+Q+RTiXWJtrexKvevXLeenD39U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261459; x=1695866259;
+ d=1e100.net; s=20230601; t=1695261464; x=1695866264;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6vy+OSsAw9p44CDHD/da6p9nUe3NcjHsvR6/t2CloHM=;
- b=sHkkyKBzJg3u1FQmOMe+oz1wWSkWqDr6Fn6vFwTQ4eScDpQG5p9/ogW6/X8sURNMtu
- IpUnuNwcIn5UVUBeMJR0BJQ7BxlCbh294890hgCIoP5CKFlXiIy5qNy/SWI4TUnDSEca
- /agVukbSnWwaB1F3u8htPNnbZZxRTvmAXI0oFNv1+3ZP9M0/u2hsXqjyi7brkfHEW2Ym
- 2jKY5BDA2G049oW342JNFW20h94OXL1WvZ/vXyH085YG7sEzMWnAiqvxFch9REsU5nCz
- AsF8trt1nmaAVfBxEPvRidedsMPZc/8oo4M2PlUW/Zj6FDUG85fDFinMiSdvtbC1kFcG
- XPDA==
-X-Gm-Message-State: AOJu0YxXCQBJ1BxZmKaooBVGnF30ImejCy3u+cn/5lU6G12NJ9whOCge
- lAy9ZjONXV6xIUZ11n+WV4ShCsTKByjuBVTNZIA=
-X-Google-Smtp-Source: AGHT+IFXnRpKKgBAX690hnihcZHgNz6IEoOIX5H1Du34giidZdIsQisAicBiymwiClOLLaurbOnOgA==
-X-Received: by 2002:a05:6e02:12e8:b0:351:ab2:2626 with SMTP id
- l8-20020a056e0212e800b003510ab22626mr310370iln.24.1695261459260; 
- Wed, 20 Sep 2023 18:57:39 -0700 (PDT)
+ bh=O2nJm9PTO/caN1ajeqdMeJOj+YRkBj1GSo9NgalCZCI=;
+ b=pS5Ldi+Qk044nddOhiNsHbxNORaoMPNAEkOxJLFbEy3KcGO7O+ba0U04SZqXAt4gI5
+ QmQlA7bDgGneB6MPfX7kK20T+dY4Nls7U0R8cuypNe2AfjkWR95SSBN41EA3TGTbA6pZ
+ YAVOFvR3+0RyVFwYsT3Ft4gjRf0RVYJMI2t3B26tZkE8cwY21nfjnPdxf1R3ZQZHmehh
+ y6HW4p7HBnn9HwQjVSQ/Zr3QWtNzEcrans0/0KwQzSw4Gw7zsczTuy6nGr68avn9J/t0
+ UbNNAJBIx61k9ij7BI8nTbjekXA5NijLQItD5MrMKIfEuxEoxfjlSWXckcAYePI258Ir
+ URuw==
+X-Gm-Message-State: AOJu0YwC+x/99QDKH7+6wghYYQ7Eli8dfOL38cGMpQIjQJrC4rLE8mMo
+ u2spTVBZ80P7hrTAMb2/PA3xDNGNGvGr3Hu5+u4=
+X-Google-Smtp-Source: AGHT+IEjKVtw6mQXsse8NYkTEQ2jAVGa2Dq3XIDwu50uvgCjZS7MuL5713tdzbm/Z3M3fX62MpUyRQ==
+X-Received: by 2002:a05:6602:1608:b0:792:8c29:7b with SMTP id
+ x8-20020a056602160800b007928c29007bmr6483355iow.10.1695261463730; 
+ Wed, 20 Sep 2023 18:57:43 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.38
+ y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:57:38 -0700 (PDT)
+ Wed, 20 Sep 2023 18:57:43 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Michal Simek <michal.simek@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Adam Ford <aford173@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Elena Popa <elena.popa@nxp.com>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>,
+ =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nikhil M Jain <n-jain1@ti.com>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH v2 01/32] dm: core: support reading a single indexed u64 value
-Date: Wed, 20 Sep 2023 19:56:50 -0600
-Message-ID: <20230921015730.1511373-2-sjg@chromium.org>
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Lukasz Majewski <lukma@denx.de>,
+ Mario Kicherer <dev@kicherer.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>, Mingkai Hu <mingkai.hu@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Raffaele RECALCATI <raffaele.recalcati@bticino.it>,
+ Roger Quadros <rogerq@kernel.org>,
+ Simone CIANNI <simone.cianni@bticino.it>,
+ Thomas Weber <weber@corscience.de>, Tim Harvey <tharvey@gateworks.com>,
+ Tom McLeod <tom.mcleod@opalkelly.com>,
+ Vikas Manocha <vikas.manocha@st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v2 03/32] spl: Rename SYS_SPL_ARGS_ADDR to
+ SPL_PAYLOAD_ARGS_ADDR
+Date: Wed, 20 Sep 2023 19:56:52 -0600
+Message-ID: <20230921015730.1511373-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
 References: <20230921015730.1511373-1-sjg@chromium.org>
@@ -94,197 +110,616 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Michal Simek <michal.simek@amd.com>
+Rename this so that SPL is first, as per U-Boot convention. Also add
+PAYLOAD_ since this is where in memory the parameters for the payload
+have been stored.
 
-Add helper function to allow reading a single indexed u64 value from a
-device-tree property containing multiple u64 values, that is an array of
-u64's.
-
-Co-developed-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Rename based on Tom's feedback
 
- arch/sandbox/dts/test.dts |  1 +
- drivers/core/of_access.c  | 16 ++++++++++++----
- drivers/core/ofnode.c     | 30 ++++++++++++++++++++++++++++++
- include/dm/of_access.h    | 19 +++++++++++++++++++
- include/dm/ofnode.h       | 12 ++++++++++++
- test/dm/ofnode.c          |  8 ++++++++
- 6 files changed, 82 insertions(+), 4 deletions(-)
+ arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon |  2 +-
+ common/spl/Kconfig                                  |  2 +-
+ common/spl/spl.c                                    |  8 ++++----
+ common/spl/spl_ext.c                                |  4 ++--
+ common/spl/spl_fat.c                                |  4 ++--
+ common/spl/spl_mmc.c                                |  2 +-
+ common/spl/spl_nand.c                               | 10 +++++-----
+ common/spl/spl_nor.c                                |  8 ++++----
+ common/spl/spl_spi.c                                |  2 +-
+ common/spl/spl_ubi.c                                |  2 +-
+ common/spl/spl_xip.c                                |  2 +-
+ configs/am3517_evm_defconfig                        |  2 +-
+ configs/devkit8000_defconfig                        |  2 +-
+ configs/display5_defconfig                          |  2 +-
+ configs/display5_factory_defconfig                  |  2 +-
+ configs/gwventana_emmc_defconfig                    |  2 +-
+ configs/gwventana_nand_defconfig                    |  2 +-
+ configs/igep00x0_defconfig                          |  2 +-
+ configs/imx28_xea_defconfig                         |  2 +-
+ configs/imx6dl_mamoj_defconfig                      |  2 +-
+ configs/imx6q_logic_defconfig                       |  2 +-
+ configs/imx6qdl_icore_mipi_defconfig                |  2 +-
+ configs/imx6qdl_icore_mmc_defconfig                 |  2 +-
+ configs/imx6qdl_icore_rqs_defconfig                 |  2 +-
+ configs/ls1046ardb_qspi_spl_defconfig               |  2 +-
+ configs/mccmon6_nor_defconfig                       |  2 +-
+ configs/omap35_logic_defconfig                      |  2 +-
+ configs/omap35_logic_somlv_defconfig                |  2 +-
+ configs/omap3_logic_defconfig                       |  2 +-
+ configs/omap3_logic_somlv_defconfig                 |  2 +-
+ configs/riotboard_defconfig                         |  2 +-
+ configs/stm32746g-eval_spl_defconfig                |  2 +-
+ configs/stm32f746-disco_spl_defconfig               |  2 +-
+ configs/stm32f769-disco_spl_defconfig               |  2 +-
+ configs/syzygy_hub_defconfig                        |  2 +-
+ configs/vyasa-rk3288_defconfig                      |  2 +-
+ configs/xilinx_zynq_virt_defconfig                  |  2 +-
+ configs/xilinx_zynqmp_virt_defconfig                |  2 +-
+ doc/develop/falcon.rst                              |  2 +-
+ 39 files changed, 51 insertions(+), 51 deletions(-)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 63fda15da764..d4693e3c7a93 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -301,6 +301,7 @@
- 		uint-value = <(-1234)>;
- 		int64-value = /bits/ 64 <0x1111222233334444>;
- 		int-array = <5678 9123 4567>;
-+		int64-array = /bits/ 64 <0x1111222233334444 0x4444333322221111>;
- 		str-value = "test string";
- 		interrupts-extended = <&irq 3 0>;
- 		acpi,name = "GHIJ";
-diff --git a/drivers/core/of_access.c b/drivers/core/of_access.c
-index 57f10445b122..1bb4d8eab709 100644
---- a/drivers/core/of_access.c
-+++ b/drivers/core/of_access.c
-@@ -570,26 +570,34 @@ int of_read_u32_index(const struct device_node *np, const char *propname,
- 	return 0;
- }
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon b/arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon
+index b3c6693a42c2..2bbe4e2d1235 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon
++++ b/arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon
+@@ -30,7 +30,7 @@ to understand the device tree in FIT image should be the one actually used, or
+ leave it absent to favor the stored sectors. It is easier to deploy the FIT
+ image with embedded static device tree to multiple boards.
  
--int of_read_u64(const struct device_node *np, const char *propname, u64 *outp)
-+int of_read_u64_index(const struct device_node *np, const char *propname,
-+		      int index, u64 *outp)
- {
- 	const __be64 *val;
+-Macro CONFIG_SYS_SPL_ARGS_ADDR serves two purposes. One is the pointer to load
++Macro CONFIG_SPL_PAYLOAD_ARGS_ADDR serves two purposes. One is the pointer to load
+ the stored sectors to. Normally this is the static device tree. The second
+ purpose is the memory location of signature header for secure boot. After the
+ FIT image is loaded into memory, it is validated against the signature header
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index b9d96fbe1355..463235979427 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1063,7 +1063,7 @@ config SPL_OS_BOOT
+ 	  Enable booting directly to an OS from SPL.
+ 	  for more info read doc/README.falcon
  
- 	debug("%s: %s: ", __func__, propname);
- 	if (!np)
- 		return -EINVAL;
--	val = of_find_property_value_of_size(np, propname, sizeof(*outp));
-+
-+	val = of_find_property_value_of_size(np, propname,
-+					     sizeof(*outp) * (index + 1));
- 	if (IS_ERR(val)) {
- 		debug("(not found)\n");
- 		return PTR_ERR(val);
+-config SYS_SPL_ARGS_ADDR
++config SPL_PAYLOAD_ARGS_ADDR
+ 	hex "Address in memory to load 'args' file for Falcon Mode to"
+ 	depends on SPL_OS_BOOT
+ 	default 0x88000000 if ARCH_OMAP2PLUS
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 1e50043cf77b..acd154986e15 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -818,8 +818,8 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
  	}
  
--	*outp = be64_to_cpup(val);
-+	*outp = be64_to_cpup(val + index);
- 	debug("%#llx (%lld)\n", (unsigned long long)*outp,
--              (unsigned long long)*outp);
-+	      (unsigned long long)*outp);
+ 	memset(&spl_image, '\0', sizeof(spl_image));
+-#ifdef CONFIG_SYS_SPL_ARGS_ADDR
+-	spl_image.arg = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
++#ifdef CONFIG_SPL_PAYLOAD_ARGS_ADDR
++	spl_image.arg = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
+ #endif
+ 	spl_image.boot_device = BOOT_DEVICE_NONE;
+ 	board_boot_order(spl_boot_list);
+@@ -877,8 +877,8 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ #if CONFIG_IS_ENABLED(OS_BOOT)
+ 	case IH_OS_LINUX:
+ 		debug("Jumping to Linux\n");
+-#if defined(CONFIG_SYS_SPL_ARGS_ADDR)
+-		spl_fixup_fdt((void *)CONFIG_SYS_SPL_ARGS_ADDR);
++#if defined(CONFIG_SPL_PAYLOAD_ARGS_ADDR)
++		spl_fixup_fdt((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
+ #endif
+ 		spl_board_prepare_for_linux();
+ 		jump_to_image_linux(&spl_image);
+diff --git a/common/spl/spl_ext.c b/common/spl/spl_ext.c
+index 2bf34344391c..902564a60776 100644
+--- a/common/spl/spl_ext.c
++++ b/common/spl/spl_ext.c
+@@ -97,7 +97,7 @@ int spl_load_image_ext_os(struct spl_image_info *spl_image,
+ 			puts("spl: ext4fs_open failed\n");
+ 			goto defaults;
+ 		}
+-		err = ext4fs_read((void *)CONFIG_SYS_SPL_ARGS_ADDR, 0, filelen, &actlen);
++		err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0, filelen, &actlen);
+ 		if (err < 0) {
+ 			printf("spl: error reading image %s, err - %d, falling back to default\n",
+ 			       file, err);
+@@ -127,7 +127,7 @@ defaults:
+ 	if (err < 0)
+ 		puts("spl: ext4fs_open failed\n");
+ 
+-	err = ext4fs_read((void *)CONFIG_SYS_SPL_ARGS_ADDR, 0, filelen, &actlen);
++	err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0, filelen, &actlen);
+ 	if (err < 0) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 		printf("%s: error reading image %s, err - %d\n",
+diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+index f8a5b80a3bd2..c6e2526ade12 100644
+--- a/common/spl/spl_fat.c
++++ b/common/spl/spl_fat.c
+@@ -128,7 +128,7 @@ int spl_load_image_fat_os(struct spl_image_info *spl_image,
+ #if defined(CONFIG_SPL_ENV_SUPPORT) && defined(CONFIG_SPL_OS_BOOT)
+ 	file = env_get("falcon_args_file");
+ 	if (file) {
+-		err = file_fat_read(file, (void *)CONFIG_SYS_SPL_ARGS_ADDR, 0);
++		err = file_fat_read(file, (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
+ 		if (err <= 0) {
+ 			printf("spl: error reading image %s, err - %d, falling back to default\n",
+ 			       file, err);
+@@ -153,7 +153,7 @@ defaults:
+ #endif
+ 
+ 	err = file_fat_read(CONFIG_SPL_FS_LOAD_ARGS_NAME,
+-			    (void *)CONFIG_SYS_SPL_ARGS_ADDR, 0);
++			    (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
+ 	if (err <= 0) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 		printf("%s: error reading image %s, err - %d\n",
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index 20f687e13891..0ab85d2168c1 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -235,7 +235,7 @@ static int mmc_load_image_raw_os(struct spl_image_info *spl_image,
+ 	count = blk_dread(mmc_get_blk_desc(mmc),
+ 		CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR,
+ 		CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS,
+-		(void *) CONFIG_SYS_SPL_ARGS_ADDR);
++		(void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
+ 	if (count != CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 		puts("mmc_load_image_raw_os: mmc block read error\n");
+diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
+index dc45204fc0e6..6cc34004f49d 100644
+--- a/common/spl/spl_nand.c
++++ b/common/spl/spl_nand.c
+@@ -159,11 +159,11 @@ static int spl_nand_load_image(struct spl_image_info *spl_image,
+ 			CONFIG_CMD_SPL_WRITE_SIZE,
+ 			(void *)CONFIG_TEXT_BASE);
+ 		/* copy to destintion */
+-		for (dst = (int *)CONFIG_SYS_SPL_ARGS_ADDR,
+-				src = (int *)CONFIG_TEXT_BASE;
+-				src < (int *)(CONFIG_TEXT_BASE +
+-				CONFIG_CMD_SPL_WRITE_SIZE);
+-				src++, dst++) {
++		for (dst = (int *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
++		     src = (int *)CONFIG_TEXT_BASE;
++			src < (int *)(CONFIG_TEXT_BASE +
++				      CONFIG_CMD_SPL_WRITE_SIZE);
++		     src++, dst++) {
+ 			writel(readl(src), dst);
+ 		}
+ 
+diff --git a/common/spl/spl_nor.c b/common/spl/spl_nor.c
+index 5b65b96a77db..79d4f1d7aa87 100644
+--- a/common/spl/spl_nor.c
++++ b/common/spl/spl_nor.c
+@@ -54,8 +54,8 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
+ 						  CONFIG_SYS_OS_BASE,
+ 						  (void *)header);
+ 
+-#if defined CONFIG_SYS_SPL_ARGS_ADDR && defined CONFIG_CMD_SPL_NOR_OFS
+-			memcpy((void *)CONFIG_SYS_SPL_ARGS_ADDR,
++#if defined CONFIG_SPL_PAYLOAD_ARGS_ADDR && defined CONFIG_CMD_SPL_NOR_OFS
++			memcpy((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
+ 			       (void *)CONFIG_CMD_SPL_NOR_OFS,
+ 			       CONFIG_CMD_SPL_WRITE_SIZE);
+ #endif
+@@ -74,8 +74,8 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
+ 			       (void *)(CONFIG_SYS_OS_BASE +
+ 					sizeof(struct legacy_img_hdr)),
+ 			       spl_image->size);
+-#ifdef CONFIG_SYS_SPL_ARGS_ADDR
+-			spl_image->arg = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
++#ifdef CONFIG_SPL_PAYLOAD_ARGS_ADDR
++			spl_image->arg = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
+ #endif
+ 
+ 			return 0;
+diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
+index 2aff025f76ee..d69069a75bfe 100644
+--- a/common/spl/spl_spi.c
++++ b/common/spl/spl_spi.c
+@@ -47,7 +47,7 @@ static int spi_load_image_os(struct spl_image_info *spl_image,
+ 	/* Read device tree. */
+ 	spi_flash_read(flash, CFG_SYS_SPI_ARGS_OFFS,
+ 		       CFG_SYS_SPI_ARGS_SIZE,
+-		       (void *)CONFIG_SYS_SPL_ARGS_ADDR);
++		       (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
  
  	return 0;
  }
+diff --git a/common/spl/spl_ubi.c b/common/spl/spl_ubi.c
+index bcac25cd021c..d7ab9efd1108 100644
+--- a/common/spl/spl_ubi.c
++++ b/common/spl/spl_ubi.c
+@@ -50,7 +50,7 @@ int spl_ubi_load_image(struct spl_image_info *spl_image,
+ 		volumes[0].vol_id = CONFIG_SPL_UBI_LOAD_KERNEL_ID;
+ 		volumes[0].load_addr = (void *)CONFIG_SYS_LOAD_ADDR;
+ 		volumes[1].vol_id = CONFIG_SPL_UBI_LOAD_ARGS_ID;
+-		volumes[1].load_addr = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
++		volumes[1].load_addr = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
  
-+int of_read_u64(const struct device_node *np, const char *propname, u64 *outp)
-+{
-+	return of_read_u64_index(np, propname, 0, outp);
-+}
-+
- int of_property_match_string(const struct device_node *np, const char *propname,
- 			     const char *string)
+ 		ret = ubispl_load_volumes(&info, volumes, 2);
+ 		if (!ret) {
+diff --git a/common/spl/spl_xip.c b/common/spl/spl_xip.c
+index 77c23ba05978..959915ffa610 100644
+--- a/common/spl/spl_xip.c
++++ b/common/spl/spl_xip.c
+@@ -14,7 +14,7 @@ static int spl_xip(struct spl_image_info *spl_image,
  {
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index a4dc9bde085c..8311282abf69 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -344,6 +344,36 @@ int ofnode_read_u32_index(ofnode node, const char *propname, int index,
- 	return 0;
- }
+ #if CONFIG_IS_ENABLED(OS_BOOT)
+ 	if (!spl_start_uboot()) {
+-		spl_image->arg = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
++		spl_image->arg = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
+ 		spl_image->name = "Linux";
+ 		spl_image->os = IH_OS_LINUX;
+ 		spl_image->load_addr = CONFIG_SYS_LOAD_ADDR;
+diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconfig
+index dda235492784..7b449c703b6c 100644
+--- a/configs/am3517_evm_defconfig
++++ b/configs/am3517_evm_defconfig
+@@ -33,7 +33,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x2a0000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/devkit8000_defconfig b/configs/devkit8000_defconfig
+index 1431e54dc95e..ef16da176a91 100644
+--- a/configs/devkit8000_defconfig
++++ b/configs/devkit8000_defconfig
+@@ -28,7 +28,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x80000100
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x80000100
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x500
+diff --git a/configs/display5_defconfig b/configs/display5_defconfig
+index 9c4334af15c5..00b6f692e3d9 100644
+--- a/configs/display5_defconfig
++++ b/configs/display5_defconfig
+@@ -46,7 +46,7 @@ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_SAVEENV=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x100
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x3F00
+diff --git a/configs/display5_factory_defconfig b/configs/display5_factory_defconfig
+index 67ba7658861a..911b75a317a6 100644
+--- a/configs/display5_factory_defconfig
++++ b/configs/display5_factory_defconfig
+@@ -41,7 +41,7 @@ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_DMA=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x100
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x3F00
+diff --git a/configs/gwventana_emmc_defconfig b/configs/gwventana_emmc_defconfig
+index eb29268c6fa7..1970c2290db7 100644
+--- a/configs/gwventana_emmc_defconfig
++++ b/configs/gwventana_emmc_defconfig
+@@ -49,7 +49,7 @@ CONFIG_SPL_FIT_IMAGE_TINY=y
+ CONFIG_SPL_DMA=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/gwventana_nand_defconfig b/configs/gwventana_nand_defconfig
+index 17a86d6447d0..1bc943341514 100644
+--- a/configs/gwventana_nand_defconfig
++++ b/configs/gwventana_nand_defconfig
+@@ -50,7 +50,7 @@ CONFIG_SPL_DMA=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_NAND_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x1200000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
+index e0cc39959669..5e2a8e04c660 100644
+--- a/configs/igep00x0_defconfig
++++ b/configs/igep00x0_defconfig
+@@ -42,7 +42,7 @@ CONFIG_SPL_UBI_LOAD_KERNEL_ID=3
+ CONFIG_SPL_UBI_LOAD_ARGS_ID=4
+ CONFIG_SPL_ONENAND_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
+index 96d15e89af80..4035f798d15d 100644
+--- a/configs/imx28_xea_defconfig
++++ b/configs/imx28_xea_defconfig
+@@ -51,7 +51,7 @@ CONFIG_SPL_DMA=y
+ CONFIG_SPL_MMC_TINY=y
+ CONFIG_SPL_DM_SPI_FLASH=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x44000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x44000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x800
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x400
+diff --git a/configs/imx6dl_mamoj_defconfig b/configs/imx6dl_mamoj_defconfig
+index 933a9d83f344..35ded27c8355 100644
+--- a/configs/imx6dl_mamoj_defconfig
++++ b/configs/imx6dl_mamoj_defconfig
+@@ -20,7 +20,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=3
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x13000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x13000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/imx6q_logic_defconfig b/configs/imx6q_logic_defconfig
+index b307fea5f25c..71d6bf0e114c 100644
+--- a/configs/imx6q_logic_defconfig
++++ b/configs/imx6q_logic_defconfig
+@@ -36,7 +36,7 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot-dtb.img"
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_NAND_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x500000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+diff --git a/configs/imx6qdl_icore_mipi_defconfig b/configs/imx6qdl_icore_mipi_defconfig
+index ecb8fb2ba57b..59c3da32dce4 100644
+--- a/configs/imx6qdl_icore_mipi_defconfig
++++ b/configs/imx6qdl_icore_mipi_defconfig
+@@ -36,7 +36,7 @@ CONFIG_BOOTCOMMAND="run $modeboot"
+ CONFIG_SPL_RAW_IMAGE_SUPPORT=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/imx6qdl_icore_mmc_defconfig b/configs/imx6qdl_icore_mmc_defconfig
+index 42889188cc30..836b3d1814d1 100644
+--- a/configs/imx6qdl_icore_mmc_defconfig
++++ b/configs/imx6qdl_icore_mmc_defconfig
+@@ -39,7 +39,7 @@ CONFIG_BOOTCOMMAND="run $modeboot"
+ CONFIG_SPL_RAW_IMAGE_SUPPORT=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/imx6qdl_icore_rqs_defconfig b/configs/imx6qdl_icore_rqs_defconfig
+index 2ab42979fa60..aa44cdc52d9e 100644
+--- a/configs/imx6qdl_icore_rqs_defconfig
++++ b/configs/imx6qdl_icore_rqs_defconfig
+@@ -33,7 +33,7 @@ CONFIG_BOOTCOMMAND="run $modeboot"
+ CONFIG_SPL_RAW_IMAGE_SUPPORT=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/ls1046ardb_qspi_spl_defconfig b/configs/ls1046ardb_qspi_spl_defconfig
+index e11a90f09b20..d8beb3c053a1 100644
+--- a/configs/ls1046ardb_qspi_spl_defconfig
++++ b/configs/ls1046ardb_qspi_spl_defconfig
+@@ -61,7 +61,7 @@ CONFIG_SPL_I2C=y
+ CONFIG_SPL_MPC8XXX_INIT_DDR=y
+ CONFIG_SPL_NOR_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x90000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x90000000
+ CONFIG_SYS_OS_BASE=0x40980000
+ CONFIG_SPL_WATCHDOG=y
+ CONFIG_SPL_TARGET="spl/u-boot-spl.pbl"
+diff --git a/configs/mccmon6_nor_defconfig b/configs/mccmon6_nor_defconfig
+index 88a72b392993..5e8fbd01bf9e 100644
+--- a/configs/mccmon6_nor_defconfig
++++ b/configs/mccmon6_nor_defconfig
+@@ -29,7 +29,7 @@ CONFIG_SPL_FIT_IMAGE_TINY=y
+ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_NOR_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SYS_OS_BASE=0x8180000
+ CONFIG_SYS_MAXARGS=32
+ CONFIG_SYS_PBSIZE=532
+diff --git a/configs/omap35_logic_defconfig b/configs/omap35_logic_defconfig
+index 3534753dd3e1..990f05c72e50 100644
+--- a/configs/omap35_logic_defconfig
++++ b/configs/omap35_logic_defconfig
+@@ -37,7 +37,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/omap35_logic_somlv_defconfig b/configs/omap35_logic_somlv_defconfig
+index 835252acc9bd..c768d398523e 100644
+--- a/configs/omap35_logic_somlv_defconfig
++++ b/configs/omap35_logic_somlv_defconfig
+@@ -38,7 +38,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/omap3_logic_defconfig b/configs/omap3_logic_defconfig
+index e747a0c1e932..48a87722d5ea 100644
+--- a/configs/omap3_logic_defconfig
++++ b/configs/omap3_logic_defconfig
+@@ -36,7 +36,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/omap3_logic_somlv_defconfig b/configs/omap3_logic_somlv_defconfig
+index b9d6284faad6..ac684a907820 100644
+--- a/configs/omap3_logic_somlv_defconfig
++++ b/configs/omap3_logic_somlv_defconfig
+@@ -38,7 +38,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/riotboard_defconfig b/configs/riotboard_defconfig
+index f8bc8c639692..6ab405d7f98d 100644
+--- a/configs/riotboard_defconfig
++++ b/configs/riotboard_defconfig
+@@ -35,7 +35,7 @@ CONFIG_SPL_FS_EXT4=y
+ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot-dtb.img"
+ CONFIG_SPL_FS_LOAD_ARGS_NAME="imx6dl-riotboard.dtb"
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x13000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x13000000
+ CONFIG_SYS_MAXARGS=32
+ CONFIG_SYS_PBSIZE=532
+ CONFIG_CMD_GPIO=y
+diff --git a/configs/stm32746g-eval_spl_defconfig b/configs/stm32746g-eval_spl_defconfig
+index 03e123e44a2e..8b60365cc24e 100644
+--- a/configs/stm32746g-eval_spl_defconfig
++++ b/configs/stm32746g-eval_spl_defconfig
+@@ -37,7 +37,7 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_MTD_SUPPORT=y
+ CONFIG_SPL_XIP_SUPPORT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x80c0000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x80c0000
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_CMD_GPT=y
+diff --git a/configs/stm32f746-disco_spl_defconfig b/configs/stm32f746-disco_spl_defconfig
+index 84aaec1e3390..0a3042b3279a 100644
+--- a/configs/stm32f746-disco_spl_defconfig
++++ b/configs/stm32f746-disco_spl_defconfig
+@@ -37,7 +37,7 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_MTD_SUPPORT=y
+ CONFIG_SPL_XIP_SUPPORT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x80c0000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x80c0000
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_CMD_GPT=y
+diff --git a/configs/stm32f769-disco_spl_defconfig b/configs/stm32f769-disco_spl_defconfig
+index dd17cad73622..f570cbbe73aa 100644
+--- a/configs/stm32f769-disco_spl_defconfig
++++ b/configs/stm32f769-disco_spl_defconfig
+@@ -36,7 +36,7 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_MTD_SUPPORT=y
+ CONFIG_SPL_XIP_SUPPORT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x81c0000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x81c0000
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_CMD_GPT=y
+diff --git a/configs/syzygy_hub_defconfig b/configs/syzygy_hub_defconfig
+index 7bcb3191000e..78cbaa7a0b83 100644
+--- a/configs/syzygy_hub_defconfig
++++ b/configs/syzygy_hub_defconfig
+@@ -32,7 +32,7 @@ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x2000000
+ CONFIG_SPL_FS_LOAD_ARGS_NAME="system.dtb"
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x10000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x10000000
+ CONFIG_SYS_MAXARGS=32
+ CONFIG_SYS_PBSIZE=2071
+ CONFIG_SYS_BOOTM_LEN=0x3c00000
+diff --git a/configs/vyasa-rk3288_defconfig b/configs/vyasa-rk3288_defconfig
+index 9bca6fe2eeaa..0ae901a72391 100644
+--- a/configs/vyasa-rk3288_defconfig
++++ b/configs/vyasa-rk3288_defconfig
+@@ -32,7 +32,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
+ CONFIG_SPL_STACK_R=y
+ CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x2000
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0xffe5000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0xffe5000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x8800
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x8000
+diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
+index 4ea5caff547f..9589848e8e1c 100644
+--- a/configs/xilinx_zynq_virt_defconfig
++++ b/configs/xilinx_zynq_virt_defconfig
+@@ -43,7 +43,7 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+ CONFIG_SPL_FS_LOAD_ARGS_NAME="system.dtb"
+ CONFIG_SPL_FPGA=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x10000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x10000000
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
+ CONFIG_SYS_MAXARGS=32
+diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+index 59be5f42493a..7f79167db716 100644
+--- a/configs/xilinx_zynqmp_virt_defconfig
++++ b/configs/xilinx_zynqmp_virt_defconfig
+@@ -44,7 +44,7 @@ CONFIG_SPL_FS_LOAD_KERNEL_NAME="atf-uboot.ub"
+ CONFIG_SPL_FS_LOAD_ARGS_NAME="u-boot.bin"
+ CONFIG_SPL_FPGA=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x8000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x8000000
+ CONFIG_SPL_RAM_SUPPORT=y
+ CONFIG_SPL_RAM_DEVICE=y
+ CONFIG_SPL_SPI_LOAD=y
+diff --git a/doc/develop/falcon.rst b/doc/develop/falcon.rst
+index a569d1a29517..2f25fc8532f5 100644
+--- a/doc/develop/falcon.rst
++++ b/doc/develop/falcon.rst
+@@ -63,7 +63,7 @@ CONFIG_CMD_SPL
+     Enable the "spl export" command.
+     The command "spl export" is then available in U-Boot mode.
  
-+int ofnode_read_u64_index(ofnode node, const char *propname, int index,
-+			  u64 *outp)
-+{
-+	const fdt64_t *cell;
-+	int len;
-+
-+	assert(ofnode_valid(node));
-+
-+	if (ofnode_is_np(node))
-+		return of_read_u64_index(ofnode_to_np(node), propname, index,
-+					 outp);
-+
-+	cell = fdt_getprop(ofnode_to_fdt(node), ofnode_to_offset(node),
-+			   propname, &len);
-+	if (!cell) {
-+		debug("(not found)\n");
-+		return -EINVAL;
-+	}
-+
-+	if (len < (sizeof(u64) * (index + 1))) {
-+		debug("(not large enough)\n");
-+		return -EOVERFLOW;
-+	}
-+
-+	*outp = fdt64_to_cpu(cell[index]);
-+	debug("%#llx (%lld)\n", *outp, *outp);
-+
-+	return 0;
-+}
-+
- u32 ofnode_read_u32_index_default(ofnode node, const char *propname, int index,
- 				  u32 def)
- {
-diff --git a/include/dm/of_access.h b/include/dm/of_access.h
-index c556a18f7d9c..9361d0a87bfb 100644
---- a/include/dm/of_access.h
-+++ b/include/dm/of_access.h
-@@ -333,6 +333,25 @@ int of_read_u32(const struct device_node *np, const char *propname, u32 *outp);
- int of_read_u32_index(const struct device_node *np, const char *propname,
- 		      int index, u32 *outp);
+-CONFIG_SYS_SPL_ARGS_ADDR
++CONFIG_SPL_PAYLOAD_ARGS_ADDR
+     Address in RAM where the parameters must be copied by SPL.
+     In most cases, it is <start_of_ram> + 0x100.
  
-+/**
-+ * of_read_u64_index() - Find and read a 64-bit value from a multi-value
-+ *                       property
-+ *
-+ * @np:		device node from which the property value is to be read.
-+ * @propname:	name of the property to be searched.
-+ * @index:	index of the u32 in the list of values
-+ * @outp:	pointer to return value, modified only if return value is 0.
-+ *
-+ * Search for a property in a device node and read a 64-bit value from
-+ * it.
-+ *
-+ * Return:
-+ *   0 on success, -EINVAL if the property does not exist, or -EOVERFLOW if the
-+ *   property data isn't large enough.
-+ */
-+int of_read_u64_index(const struct device_node *np, const char *propname,
-+		      int index, u64 *outp);
-+
- /**
-  * of_read_u64() - Find and read a 64-bit integer from a property
-  *
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index 0f38b3e736de..0a85db31f360 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -434,6 +434,18 @@ int ofnode_read_u32(ofnode node, const char *propname, u32 *outp);
- int ofnode_read_u32_index(ofnode node, const char *propname, int index,
- 			  u32 *outp);
- 
-+/**
-+ * ofnode_read_u64_index() - Read a 64-bit integer from a multi-value property
-+ *
-+ * @node:	valid node reference to read property from
-+ * @propname:	name of the property to read from
-+ * @index:	index of the integer to return
-+ * @outp:	place to put value (if found)
-+ * Return: 0 if OK, -ve on error
-+ */
-+int ofnode_read_u64_index(ofnode node, const char *propname, int index,
-+			  u64 *outp);
-+
- /**
-  * ofnode_read_s32() - Read a 32-bit integer from a property
-  *
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index 6fbebc7da085..b74f5c2ebcff 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -967,6 +967,14 @@ static int dm_test_ofnode_u64(struct unit_test_state *uts)
- 	ut_asserteq_64(0x1111222233334444, val);
- 	ut_asserteq(-EINVAL, ofnode_read_u64(node, "missing", &val));
- 
-+	ut_assertok(ofnode_read_u64_index(node, "int64-array", 0, &val));
-+	ut_asserteq_64(0x1111222233334444, val);
-+	ut_assertok(ofnode_read_u64_index(node, "int64-array", 1, &val));
-+	ut_asserteq_64(0x4444333322221111, val);
-+	ut_asserteq(-EOVERFLOW,
-+		    ofnode_read_u64_index(node, "int64-array", 2, &val));
-+	ut_asserteq(-EINVAL, ofnode_read_u64_index(node, "missing", 0, &val));
-+
- 	return 0;
- }
- DM_TEST(dm_test_ofnode_u64, UT_TESTF_SCAN_FDT);
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
