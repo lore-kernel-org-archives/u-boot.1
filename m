@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB269E71089
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:21:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EAE9E7108E
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:30:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F378864EE;
-	Thu, 21 Sep 2023 17:21:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EA45D865D0;
+	Thu, 21 Sep 2023 17:30:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HLRnLX/w";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="c6p7X9Ca";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C164286377; Thu, 21 Sep 2023 17:20:59 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7EBEB86661; Thu, 21 Sep 2023 17:30:34 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BDD5864EE
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:20:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B230864EE
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:30:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2182961DA0
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:20:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C39B3C4E773
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:20:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695309653;
- bh=rx2mBq0S4jOILd4Wy6fahnc3smaID9qQL5yme6+cfXo=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=HLRnLX/wSplzOGEeyeBmR/Fv4NUMnPnLmnmnxPUt/KtmG2LhWs1zHxcxO+l/7d1xm
- 7RIIcOpj3VUysvVz80wzBpWSV3EZr6PxbixD2ttI0aXZGwjLWIcpCmSZchVuf9ONyF
- r1FIAwffNsSq4WxcwyB0ZkGVq9oB6hkqMKnIPMU45DVjq8a1ZvwpA8NNcDZb2RONzA
- HDeXASWJk18PEXGIvcwzJkuNvnTl/nO8srNo8BOrkdjQQvsTXqVE6gMPm+BPLgjycc
- 3Hgb8ggMrlKSkgEmISe4WBwkBx3EBlSPYnmC/UM8+z8fRARyWz7iCG/YfZ04dc2zCS
- FA19n/Gv/JchA==
-Received: by mail-lf1-f41.google.com with SMTP id
- 2adb3069b0e04-5041bb9ce51so1888917e87.1
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:20:53 -0700 (PDT)
-X-Gm-Message-State: AOJu0Ywr3DRY0GeCQs0sJMdyyi5AAixKQc1fcmqcRZtJuG6qwFbt3dO8
- 6yb2MjoKFam46VrHBeQp7kcSCizs2NbqC5Mfdw==
-X-Google-Smtp-Source: AGHT+IF6PiJLK0gbCkd0ug1K5ldijn1PTOoqwsaU2NTp56tyTljvoRHYmhguxEitR2xZCgafPoy7TVLHNd/qL9jHCJw=
-X-Received: by 2002:a05:6512:2387:b0:503:af9:eb1c with SMTP id
- c7-20020a056512238700b005030af9eb1cmr6330203lfv.27.1695309651666; Thu, 21 Sep
- 2023 08:20:51 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230907214012.74978-1-sjg@chromium.org>
- <CAL_Jsq+WfWrZErmz4u3_-CoVAuxL21UndcRekfJ1e61ZMMBqRw@mail.gmail.com>
- <CAPnjgZ3ALq9Hr+t4CywO113mKr83xCgFhfz+6=jav3T3R1_TGA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3ALq9Hr+t4CywO113mKr83xCgFhfz+6=jav3T3R1_TGA@mail.gmail.com>
-From: Rob Herring <robh@kernel.org>
-Date: Thu, 21 Sep 2023 10:20:39 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqJdTR9morobxty1egHFmTwL1-Kh3-sQ5CY7xit80fE2jw@mail.gmail.com>
-Message-ID: <CAL_JsqJdTR9morobxty1egHFmTwL1-Kh3-sQ5CY7xit80fE2jw@mail.gmail.com>
-Subject: Re: [PATCH v6 1/2] schemas: Add some common reserved-memory usages
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-59e7fb87f1cso13959857b3.2
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:30:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695310231; x=1695915031; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=SJCG34xxanBYzzLG8IK8C8eXrMX17H8yQRH86k6ghH0=;
+ b=c6p7X9CadiStFPeIaW0bzJWcxQhLn5IAZS4ZPH5Geb9tWed9FRZDqGxkPq4hqAzEgI
+ XyiaNHxxpCvusmB+xg94YNJ40i34OYyJ36sUhIh7Sn6Cwu5fxZ/iVPXvXGmssXNHQ0Cb
+ YV0KfdeAdurD5fvweuMEniQtl0F8tR1UgodlU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695310231; x=1695915031;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SJCG34xxanBYzzLG8IK8C8eXrMX17H8yQRH86k6ghH0=;
+ b=YUHyDHrfzuq5aosLDfxyyyWGmYZrdIqeTbzRYcnGEYZ+TbfgW0NRlWwqCuJCZbn66R
+ r6/70+q6BA88UnNYPYhx1g4WGQH/TexWx7TsPpIOZzuMEU8zvMnSaeS7fvhRkfznGH+l
+ uIuSm+/IkFlgIFRHAw/6OwOazfIa4hCrQF/gG6xEtXRDEHDkW5OoQj3N/Kzh4mQbh9ZZ
+ Dp4SGJkiurO8j0+9fl51/x8tJjZ80Dh3Cw8EnTt1GW9nfZL3rdi7jo1Ug5AZE/hFTM4F
+ /YsDvtfGxLJzYzvd45NZmb394HhwfVfVy6m6woHxxtqJkSrZ58wyNwyyPn10/K0oYiEi
+ BJhQ==
+X-Gm-Message-State: AOJu0YyaQBq6LKzU6BNKgDcov34F0juPdgSNUc6BPwRoqbAJjjRBLHxp
+ wUAXM2ZMq7hKaVN7hYuUE9IIMw==
+X-Google-Smtp-Source: AGHT+IFlyQM8d11hGuNYO03tZN1DrnZ0B2A0NkPvsr6JYbhyRPB0DZ0ctKZkBP/rXGXwpcBo0q+xTw==
+X-Received: by 2002:a0d:db0f:0:b0:59c:786:f58f with SMTP id
+ d15-20020a0ddb0f000000b0059c0786f58fmr5774329ywe.6.1695310230991; 
+ Thu, 21 Sep 2023 08:30:30 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-46ac-83a0-07b5-e9a6.res6.spectrum.com.
+ [2603:6081:7b00:6400:46ac:83a0:7b5:e9a6])
+ by smtp.gmail.com with ESMTPSA id
+ p142-20020a0de694000000b005773afca47bsm384493ywe.27.2023.09.21.08.30.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Sep 2023 08:30:30 -0700 (PDT)
+Date: Thu, 21 Sep 2023 11:30:27 -0400
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, Dhaval Sharma <dhaval@rivosinc.com>, 
- Guo Dong <guo.dong@intel.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Yunhui Cui <cuiyunhui@bytedance.com>, Chiu Chasel <chasel.chiu@intel.com>, 
- Mark Rutland <mark.rutland@arm.com>, linux-acpi@vger.kernel.org, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Ard Biesheuvel <ardb@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
- Gua Guo <gua.guo@intel.com>, ron minnich <rminnich@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH] common: Drop linux/printk.h from common header
+Message-ID: <20230921153027.GQ305624@bill-the-cat>
+References: <20230915002147.797352-1-sjg@chromium.org>
+ <20230915194832.GF305624@bill-the-cat>
+ <CAPnjgZ2Xo2+wNkH+hrKL_FetmD7vpB8dHi7mtSRNPMWHkqQLcw@mail.gmail.com>
+ <20230915215449.GG305624@bill-the-cat>
+ <CAPnjgZ1KWxNiZ7=dnQry=Shw-Q=791Bo44RLvf2DTaekdu6ebQ@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="o4LI/G8Ft5o6r5Qt"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ1KWxNiZ7=dnQry=Shw-Q=791Bo44RLvf2DTaekdu6ebQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,181 +95,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 21, 2023 at 9:38=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Rob,
->
-> On Thu, 21 Sept 2023 at 08:25, Rob Herring <robh@kernel.org> wrote:
-> >
-> > On Thu, Sep 7, 2023 at 4:40=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
-rote:
-> > >
-> > > It is common to split firmware into 'Platform Init', which does the
-> > > initial hardware setup and a "Payload" which selects the OS to be boo=
-ted.
-> > > Thus an handover interface is required between these two pieces.
-> > >
-> > > This aims to provide an small schema addition for the memory mapping
-> > > needed to keep these two pieces working together well.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v6:
-> > > - Drop mention of UEFI
-> > > - Use compatible strings instead of node names
-> > >
-> > > Changes in v5:
-> > > - Drop the memory-map node (should have done that in v4)
-> > > - Tidy up schema a bit
-> > >
-> > > Changes in v4:
-> > > - Make use of the reserved-memory node instead of creating a new one
-> > >
-> > > Changes in v3:
-> > > - Reword commit message again
-> > > - cc a lot more people, from the FFI patch
-> > > - Split out the attributes into the /memory nodes
-> > >
-> > > Changes in v2:
-> > > - Reword commit message
-> > >
-> > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++=
-++
-> > >  1 file changed, 71 insertions(+)
-> > >  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.=
-yaml
-> > >
-> > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml b/=
-dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > new file mode 100644
-> > > index 0000000..4889f59
-> > > --- /dev/null
-> > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > @@ -0,0 +1,71 @@
-> > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> > > +%YAML 1.2
-> > > +---
-> > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserved.y=
-aml#
-> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > +
-> > > +title: Common memory reservations
-> > > +
-> > > +description: |
-> > > +  Specifies that the reserved memory region can be used for the purp=
-ose
-> > > +  indicated by its compatible string.
-> > > +
-> > > +  Clients may reuse this reserved memory if they understand what it =
-is for,
-> > > +  subject to the notes below.
-> > > +
-> > > +maintainers:
-> > > +  - Simon Glass <sjg@chromium.org>
-> > > +
-> > > +allOf:
-> > > +  - $ref: reserved-memory.yaml
-> > > +
-> > > +properties:
-> > > +  compatible:
-> > > +    description: |
-> > > +      This describes some common memory reservations:
-> > > +
-> > > +         acpi-reclaim: Contains ACPI tables; memory may be reclaimed=
- when the
-> > > +           tables are no-longer needed
-> >
-> > I think you are mixing 2 things with the name here. What the memory
-> > contains and what to do with it. You don't need the latter. The
-> > consumer of the region will know what to do with it if anything based
-> > on knowing what is in the region. For example, The DTB passed to the
-> > OS is typically in a reserved region (probably still /mem-reserve/
-> > though). The DTB may remain there forever or the OS could copy it
-> > somewhere else and free the reserved region. The Linux kernel does
-> > both depending on the arch. (Of course there is no "dtb" compatible
-> > because we have to pass the location of the dtb to even find the
-> > reserved regions in the first place.)
-> >
-> > So the question here is whether just "acpi" (or "acpi-tables"?) would
-> > be explicit enough?
->
-> Yes acpi-tables would be enough.
->
-> >
-> > > +         acpi-nvs: Contains ACPI Non-volatile-storage data; memory m=
-ay be
-> > > +           reclaimed when the tables are no-longer needed
-> >
-> > No need to say anything about reclaiming.
->
-> OK...so what about all that discussion about being able to reclaim the
-> memory if you know what it is for? Where should that be written? Or is
-> it somewhere else already?
 
-Reclaiming is a policy of the consumer of the data. It belongs in the
-documentation of the consumer if you are going to document it.
+--o4LI/G8Ft5o6r5Qt
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The global policy is you can't use reserved regions and you can't
-reclaim them if you don't know what they are. If you want to add
-something to that effect in reserved-memory.yaml or the spec, that's
-fine, but that's not a per compatible thing.
+On Wed, Sep 20, 2023 at 07:03:25PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, 15 Sept 2023 at 15:54, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Fri, Sep 15, 2023 at 02:01:33PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Fri, 15 Sept 2023 at 13:48, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Sep 14, 2023 at 06:21:46PM -0600, Simon Glass wrote:
+> > > >
+> > > > > This old patch was marked as deferred. Bring it back to life, to =
+continue
+> > > > > towards the removal of common.h
+> > > > >
+> > > > > Move this out of the common header and include it only where need=
+ed.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > [snip]
+> > > > >  317 files changed, 322 insertions(+), 3 deletions(-)
+> > > >
+> > > > So, going back to the original series here, how did you determine t=
+hat
+> > > > the files changed here need <linux/printk.h> ? I can see how to get
+> > > > there with some grep'ing but I think my original complaint was that=
+ we
+> > > > added the new header too widely.
+> > >
+> > > Basically I used ctags to get the symbols from the header file, then
+> > > grepped files for them. For that one, it is:
+> > >
+> > > KERN_ALERT,KERN_CONT,KERN_CRIT,KERN_DEBUG,KERN_EMERG,KERN_ERR,KERN_IN=
+FO,KERN_NOTICE,KERN_WARNING,__KERNEL_PRINTK__,__printk,no_printk,pr_alert,p=
+r_cont,pr_crit,pr_debug,pr_debug,pr_devel,pr_devel,pr_emerg,pr_err,pr_fmt,p=
+r_info,pr_notice,pr_warn,pr_warning,printk,printk_once
+> >
+> > OK, good.
+> >
+> > > I was a little miffed that a comment along these lines from Heinrich,
+> > > with no actual evidence, and no response to my follow-up questions,
+> > > caused the series to be dropped. It isn't easy to do these sorts of
+> > > clean-ups.
+> >
+> > Well, I know earlier on I had concerns and spotted specific cases where
+> > it was off.
+> >
+> > > A lot of files include things like net.h and image.h which bring in
+> > > many headers...but we should clean up those header files up too
+> > > (particularly image.h). So I think the standard should be: "include
+> > > what you use".
+> >
+> > Yes, we should first get rid of common.h and then see what we can
+> > remove next.
+>=20
+> Are you OK with this patch? If so I could send another, but should
+> perhaps wait until this is in -next ?
 
-> > I know some ACPIisms (e.g. DSDT), but I don't know what NVS or
-> > "Non-volatile-storage data" is in an ACPI context.
-> >
-> > > +         boot-code: Contains code used for booting; memory may be re=
-claimed by
-> > > +           the OS when it is running
-> > > +         boot-code: Contains data used for booting; memory may be re=
-claimed by
-> >
-> > boot-data?
->
-> Yes
->
-> >
-> > > +           the OS when it is running
-> >
-> > I thought these were for stages before we get to OS?
->
-> Yes...but of course these will be passed on to the OS in some form.
-> See above re reclaiming.
->
-> >
-> > > +         runtime-code: Contains code used for interacting with the s=
-ystem when
-> > > +           running; memory may be reclaimed if this code is not call=
-ed
-> > > +         runtime-data: Contains data used for interacting with the s=
-ystem when
-> > > +           running; memory may be reclaimed if the runtime code is n=
-ot used
-> >
-> > "boot" vs. "runtime" seem too vague. However, if these mean EFI boot
-> > time services and runtime services, then I understand exactly what
-> > they are. In that case dropping 'uefi,' was a mistake. But EFI has its
-> > own way to define these regions, right?
->
-> I really don't want to do another round of that circle. I was asked to
-> drop mention of EFI which I did. If these are too vague, what should I
-> do instead? Perhaps:
->
-> boot-code / data
-> os-code / data
+I'll pick this up for next soon, yes.  And then we can do another.
 
-The kernel is boot code (and os code and runtime code). Can I use
-these for the kernel image? Certainly not. But they are too vague to
-understand when to use them and when not to. Are they specific to EDK2
-implementation? Then perhaps they need an 'edk2' prefix.
+--=20
+Tom
 
-Either these are related to EFI boot time services and runtime
-services or they aren't. Which is it? If they are related, then EFI
-should certainly be mentioned. Review comments are wrong all the time
-when the reasoning is missing or misunderstood. Please back up and
-explain why these are needed. Maybe it's buried in prior threads
-somewhere, but I'm not going back to re-read all that. This patch has
-to stand on its own.
+--o4LI/G8Ft5o6r5Qt
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Rob
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUMYZAACgkQFHw5/5Y0
+tyyRCQv/SwsW8nA6U0Je/VA8ZCYrHYeZR4lhNkIa7S59zlsnMiynHS66Da2PetzC
+i3Vb+Ie15pjceJet3uytzBemoxkl+1BPyx5GxrArzyuBB1NmgyyQUAKk/qPZGfIj
+m+hxvD/3FlMTTUpNwfPPcI8aXyWQJmR/Ofdb5Tb57CAsAfWmOZuR3cq5RurekKfy
+h0iQknZ9aQGXjUaE1JtGDf8jC/Q6AIM7/rOTqN2VRwJyUDP1JJK9PomEJ6qtWO0Y
+zqc2Ta9xqKLCeL2sjIwmnLzcKNHi20g876zO/X/KHamLtUDhM4iuxWqqccNtEt+/
+YIGnRUKN9APSlpHqEs8oIIBhEOt7wKn2TLYCnvnfHzma0dJ9V7tyPd3KLmd1A1/d
+91eb2OmY0DHESa64bETqkES2RCgATGxvWi00CRtT5gnBwZ7EI+E8fFRKDu3oRHRC
+ntDZU2lShQq9HHG+jvE/IOLLWhN7kBzrsIPP2qfTL+AfLfK9D1kPBb1bxABJHH4u
+4HDBdbCl
+=Ng6f
+-----END PGP SIGNATURE-----
+
+--o4LI/G8Ft5o6r5Qt--
