@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4826E70717
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 11:26:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43A14E7071E
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 11:27:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C93F86BFC;
+	by phobos.denx.de (Postfix) with ESMTP id 8F51386C06;
 	Thu, 21 Sep 2023 13:25:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="WHaKNL2s";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="gJ7eZeQv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECC0A8615A; Thu, 21 Sep 2023 10:14:10 +0200 (CEST)
+ id 096018646E; Thu, 21 Sep 2023 10:14:12 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C194580282
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 10:14:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08C2986ADC
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 10:14:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 565A910000B;
- Thu, 21 Sep 2023 11:14:07 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 565A910000B
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 87E8710000D;
+ Thu, 21 Sep 2023 11:14:08 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 87E8710000D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1695284047;
- bh=dlXj43g5n5wLSuDFsul5sPiBafXmfl3jqz49wuuBosg=;
+ s=mail; t=1695284048;
+ bh=zRwmYq7SUUlXKRk1k0/th3AqQa7Z9ujN1JZEA9VTdkE=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=WHaKNL2sXIlp8g4AmElq983TMrQ7nN3IMU/ZlY6uxrZldCGH8Hivb2511SeibIZQr
- P+Z6TSz7vSWq6eqk49Ah1zrNHNTVhC+mKZRle3fULSYD70e7jarQPM0I7pA6mrZpwe
- u0EQX2r6cfA7scmtkjQJXwXPnK8z6j3GLeueXu5/WQfVCq2iD71qFzB3pJk7OlOYtM
- rcJpyZMShG44U+TfjZ9qSpJgBmPqQ4V2N792thoUHJcg7ZkOJrZk3BwwunMc1DS7dP
- 1Bk8gBtN3asZtgzyEPr7CzKn/7UFH4GKMi1w9K4scsUU2rMG1raH2CnOC6s0XQBi5i
- 6U145n/PsEFbQ==
+ b=gJ7eZeQvLjOI6P49psgqJur3Cfp3ddw6XUQeLyQzDs54pCTrB4ikGd/0pytiGHTDo
+ hL1HlLCCWfZxEvBnX/A1IFpFrp2mFjnq+pJgNJ6ESnnY1plfTNkGEc0xxR2TvfKrzh
+ KFjYxpx6xcDhECWtQSNvg8vD/eHkB8welI/TYW46qz18EGQew9TzCHn3Gw2j2KwSJ6
+ yFlKVntxu5O7ZxOd7wHt6Grq4r2McyVNP2MgH1fZ7Vo4eULtrjKfP07jQ4tbIXVHXv
+ 4G/4FdFwSNFwkov5YJ53hIY/FWPP2e7LElbnaXQ9Lk0GBORigP+l4v8I5vpUs+Q8eF
+ zzscXY8sRtaOQ==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 21 Sep 2023 11:14:07 +0300 (MSK)
+ Thu, 21 Sep 2023 11:14:08 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Thu, 21 Sep 2023 11:14:06 +0300
+ 15.2.1118.30; Thu, 21 Sep 2023 11:14:07 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <takahiro.akashi@linaro.org>, <ilias.apalodimas@linaro.org>,
@@ -58,9 +58,9 @@ To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>,
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>, Simon
  Glass <sjg@chromium.org>
-Subject: [PATCH v3 4/8] sandbox: add tests for UCLASS_SM
-Date: Thu, 21 Sep 2023 11:13:37 +0300
-Message-ID: <20230921081346.22157-5-avromanov@salutedevices.com>
+Subject: [PATCH v3 5/8] sandbox: defconfig: enable CONFIG_SM option
+Date: Thu, 21 Sep 2023 11:13:38 +0300
+Message-ID: <20230921081346.22157-6-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20230921081346.22157-1-avromanov@salutedevices.com>
 References: <20230921081346.22157-1-avromanov@salutedevices.com>
@@ -110,99 +110,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patchs adds simple tests for Secure Monitor uclass.
+We use this option to test UCLASS_SM.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- test/dm/Makefile |  1 +
- test/dm/sm.c     | 65 ++++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 66 insertions(+)
- create mode 100644 test/dm/sm.c
+ configs/sandbox_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 7a79b6e1a2..30550a62ad 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -107,6 +107,7 @@ obj-$(CONFIG_DM_SPI) += spi.o
- obj-$(CONFIG_SPMI) += spmi.o
- obj-y += syscon.o
- obj-$(CONFIG_RESET_SYSCON) += syscon-reset.o
-+obj-$(CONFIG_SM) += sm.o
- obj-$(CONFIG_SYSINFO) += sysinfo.o
- obj-$(CONFIG_SYSINFO_GPIO) += sysinfo-gpio.o
- obj-$(CONFIG_UT_DM) += tag.o
-diff --git a/test/dm/sm.c b/test/dm/sm.c
-new file mode 100644
-index 0000000000..7ebb0c9c85
---- /dev/null
-+++ b/test/dm/sm.c
-@@ -0,0 +1,65 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2023 SberDevices, Inc.
-+ *
-+ * Author: Alexey Romanov <avromanov@salutedevices.com>
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <sm.h>
-+#include <sandbox-sm.h>
-+#include <asm/ptrace.h>
-+#include <dm/device-internal.h>
-+#include <dm/test.h>
-+#include <test/ut.h>
-+#include <linux/sizes.h>
-+
-+static int dm_test_sm(struct unit_test_state *uts)
-+{
-+	struct udevice *dev;
-+	struct pt_regs regs;
-+	char buffer[128] = { 0 };
-+	char test_string[] = "secure-monitor";
-+	int ret, val;
-+
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SM,
-+		"secure-monitor", &dev));
-+
-+	ret = sm_call(dev, SANDBOX_SMC_CMD_COUNT, NULL, &regs);
-+	ut_asserteq(ret, -EINVAL);
-+
-+	ret = sm_call(dev, SANDBOX_SMC_CMD_COMMON, &val, &regs);
-+	ut_asserteq(ret, 0);
-+	ut_asserteq(val, 0);
-+
-+	ret = sm_call_write(dev, buffer, sizeof(buffer),
-+		SANDBOX_SMC_CMD_COUNT, &regs);
-+	ut_asserteq(ret, -EINVAL);
-+
-+	ret = sm_call_write(dev, buffer, SZ_4K + 1,
-+		SANDBOX_SMC_CMD_WRITE_MEM, &regs);
-+	ut_asserteq(ret, -EINVAL);
-+
-+	ret = sm_call_write(dev, buffer, sizeof(buffer),
-+		SANDBOX_SMC_CMD_COUNT, &regs);
-+	ut_asserteq(ret, -EINVAL);
-+
-+	ret = sm_call_write(dev, buffer, SZ_4K + 1,
-+		SANDBOX_SMC_CMD_READ_MEM, &regs);
-+	ut_asserteq(ret, -EINVAL);
-+
-+	ret = sm_call_write(dev, test_string, sizeof(test_string),
-+		SANDBOX_SMC_CMD_WRITE_MEM, &regs);
-+	ut_asserteq(ret, sizeof(test_string));
-+
-+	ret = sm_call_read(dev, buffer, sizeof(buffer),
-+		SANDBOX_SMC_CMD_READ_MEM, &regs);
-+	ut_asserteq(ret, sizeof(buffer));
-+
-+	ut_asserteq_str(buffer, test_string);
-+
-+	return 0;
-+}
-+
-+DM_TEST(dm_test_sm, UT_TESTF_SCAN_FDT);
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index be46cae7aa..0745a4ecca 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -270,6 +270,7 @@ CONFIG_RTC_RV8803=y
+ CONFIG_SCSI=y
+ CONFIG_DM_SCSI=y
+ CONFIG_SANDBOX_SERIAL=y
++CONFIG_SM=y
+ CONFIG_SMEM=y
+ CONFIG_SANDBOX_SMEM=y
+ CONFIG_SOUND=y
 -- 
 2.25.1
 
