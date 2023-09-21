@@ -4,56 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 046CDE706F0
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 08:42:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26E81E706F0
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 08:44:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AB6C8648F;
-	Thu, 21 Sep 2023 10:42:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 887D4866AA;
+	Thu, 21 Sep 2023 10:44:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KvrO/Bk7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jhBmwb7T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01F2A86844; Thu, 21 Sep 2023 10:42:56 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B924286844; Thu, 21 Sep 2023 10:44:14 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F03DF86410
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 10:42:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 881AD864C4
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 10:44:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 521E23FB4B; 
- Thu, 21 Sep 2023 08:42:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1695285773;
- bh=ZSGmPY3jaeuXmEQ1SPIEHibF76pND7f3R1IVV2MqX6c=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=KvrO/Bk7qnd54LEK2SeQXbnLyeB7X0PHk4MQoI4FVdqfMnP+c6S+lBwMXpjKCkYHG
- naZrd7LmXF3DOoHm5Q9ZMcii65S0EKUH6HG3WAgY8s6Pkd5kR/sOTWqI8JkmwKhU4a
- +7G2VrvkimM8QIbKA/ivx3fir/PvTIfgi8gkUIPTCA5r2jqSUfX7ixhknpmxhI0yEd
- 3pLska+xO3C4BWpbzBaq/bktfK7DQdry5eMkWQPBrSid7sqQZ/YPzD3KXUrMZmvmVQ
- jIdemjLTfL223tXkHV63C78whFFCFELOH5+Ji6zjE/lTUoLs4pzXTQqCE5UkdWHclU
- usfpi2E5JF1Zw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Rick Chen <rick@andestech.com>,
-	Leo <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd/exception: support RISC-V compressed instruction
-Date: Thu, 21 Sep 2023 10:42:18 +0200
-Message-Id: <20230921084218.57260-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38L8i9l5064558;
+ Thu, 21 Sep 2023 03:44:09 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695285849;
+ bh=ccDiiV/GAlawHXPJYKocGJT4TLcX30LuDjJspXCynVk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=jhBmwb7T5ThEUiKzlmC1HQeYZ0T9RwQIR3mLuyULhSnm8VWKovN2yFYvNtl5DZdOP
+ Ce9YkYVK1gF0HdOtH/0tBk5JkLbWU5+G1/qWKXb6eyvQLCqmrmUwViqCkzQRnbGrC5
+ aFT7jxVDickc/CLRTAJgpvHC4YxFHb3Hu9h0VIPs=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38L8i9Yr033924
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 21 Sep 2023 03:44:09 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
+ Sep 2023 03:44:09 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 21 Sep 2023 03:44:09 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38L8i82G030541;
+ Thu, 21 Sep 2023 03:44:08 -0500
+Date: Thu, 21 Sep 2023 14:14:07 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye
+ <a-limaye@ti.com>
+Subject: Re: [PATCH] env: ti: ti_common.env: Fix get_overlaystring for FIT
+ Image
+Message-ID: <20230921084407.ehgwtkxbe3gedqg3@ula0497581>
+References: <20230919-b4-upstream-overlaystring-v1-1-4c56e8d66173@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20230919-b4-upstream-overlaystring-v1-1-4c56e8d66173@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,72 +81,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Eliminating the C extension on application processors is under
-discussion.
+Hi 
 
-Support emitting a compressed instruction. This will lead to an
-illegal instruction exception if the C extension is not implemented.
+On 10:28-20230919, Manorit Chawdhry wrote:
+> After the refactor with conf- nodes in fitImage, overlaystring wasn't
+> didn't handle the new conf- nodes in FIT Booting. Fix get_overlaystring
+> to handle conf- nodes.
+> 
+> Fixes: 837833a724b7 ("environment: ti: Add get_fit_config command to get FIT config string")
+> Reported-by: Aniket Limaye <a-limaye@ti.com>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+> Test Logs:
+> => setenv name_overlays ti/k3-dt.dtbo ti/k3-dt1.dtbo
+> => run get_overlaystring
+> => printenv overlaystring
+> overlaystring=#conf-ti_k3-dt.dtbo#conf-ti_k3-dt1.dtbo
+> ---
+>  include/env/ti/ti_common.env | 11 ++++++++---
+>  1 file changed, 8 insertions(+), 3 deletions(-)
+> 
+> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> index e87a41a6590b..4d0590912614 100644
+> --- a/include/env/ti/ti_common.env
+> +++ b/include/env/ti/ti_common.env
+> @@ -16,9 +16,14 @@ addr_fit=0x90000000
+>  name_fit=fitImage
+>  update_to_fit=setenv loadaddr ${addr_fit}; setenv bootfile ${name_fit}
+>  get_overlaystring=
+> -	for overlay in $name_overlays;
+> -	do;
+> -	setenv overlaystring ${overlaystring}'#'${overlay};
+> +	for overlay in $name_overlays; do;
+> +    if test ${boot_fit} -eq 1;
+> +      then
+> +        setexpr name_fit_overlay gsub / _ conf-${overlay};
+> +        setenv overlaystring ${overlaystring}'#'${name_fit_overlay};
+> +      else
+> +        setenv overlaystring ${overlaystring}'#'${overlay};
+> +    fi;
 
-For testing build qemu-riscv64_defconfig with CONFIG_RISCV_ISA_C=n
-and run with
+Checkpatch didn't comment but see tabs and spaces mixed in the file...
 
-    qemu-system-riscv64 -M virt -bios u-boot -nographic -cpu rv64,c=false
+Would re-roll with the fix.
 
-    => exception compressed
-    Unhandled exception: Illegal instruction
-    EPC: 0000000087731708 RA: 000000008773fe44 TVAL: 0000000000004501
-    EPC: 000000008001b708 RA: 0000000080029e44 reloc adjusted
+Regards,
+Manorit
 
-    Code: 0b93 0000 0493 0000 0993 0000 f06f ccdf (4501)
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/riscv/exception.c | 18 +++++++++++++++---
- 1 file changed, 15 insertions(+), 3 deletions(-)
-
-diff --git a/cmd/riscv/exception.c b/cmd/riscv/exception.c
-index 7a08061d12..db8d8af048 100644
---- a/cmd/riscv/exception.c
-+++ b/cmd/riscv/exception.c
-@@ -8,6 +8,15 @@
- #include <common.h>
- #include <command.h>
- 
-+static int do_compressed(struct cmd_tbl *cmdtp, int flag, int argc,
-+			 char *const argv[])
-+{
-+	/* c.li a0, 0; c.li a0, 0 */
-+	asm volatile (".long 0x45014501\n");
-+	printf("The system supports compressed instructions.\n");
-+	return CMD_RET_SUCCESS;
-+}
-+
- static int do_ebreak(struct cmd_tbl *cmdtp, int flag, int argc,
- 			char *const argv[])
- {
-@@ -35,6 +44,8 @@ static int do_undefined(struct cmd_tbl *cmdtp, int flag, int argc,
- }
- 
- static struct cmd_tbl cmd_sub[] = {
-+	U_BOOT_CMD_MKENT(compressed, CONFIG_SYS_MAXARGS, 1, do_compressed,
-+			 "", ""),
- 	U_BOOT_CMD_MKENT(ebreak, CONFIG_SYS_MAXARGS, 1, do_ebreak,
- 			 "", ""),
- 	U_BOOT_CMD_MKENT(unaligned, CONFIG_SYS_MAXARGS, 1, do_unaligned,
-@@ -46,9 +57,10 @@ static struct cmd_tbl cmd_sub[] = {
- static char exception_help_text[] =
- 	"<ex>\n"
- 	"  The following exceptions are available:\n"
--	"  ebreak    - breakpoint\n"
--	"  undefined - illegal instruction\n"
--	"  unaligned - load address misaligned\n"
-+	"  compressed - compressed instruction\n"
-+	"  ebreak     - breakpoint\n"
-+	"  undefined  - illegal instruction\n"
-+	"  unaligned  - load address misaligned\n"
- 	;
- 
- #include <exception.h>
--- 
-2.40.1
-
+>  	done;
+>  get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
+>  run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
+> 
+> ---
+> base-commit: 2fe4b54556ea6271237b35de68dc458bfceab94c
+> change-id: 20230915-b4-upstream-overlaystring-207e28b8c5fb
+> 
+> Best regards,
+> -- 
+> Manorit Chawdhry <m-chawdhry@ti.com>
+> 
