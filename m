@@ -4,77 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53AD3CD4938
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43B71CD4939
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:06:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBD0A86D3A;
-	Thu, 21 Sep 2023 03:06:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 32BAC86D5A;
+	Thu, 21 Sep 2023 03:06:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kaIqEV7Y";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IXTeIh3C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B11386D22; Thu, 21 Sep 2023 03:06:04 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 6EFB786D1C; Thu, 21 Sep 2023 03:06:06 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E622986D23
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:05:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 11E1D86D28
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:05:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-59be8a2099bso5732907b3.0
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:05:58 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-59c00b5c8b2so5339327b3.1
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:05:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695258357; x=1695863157; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AwT8s7T33SnIDtx5FzPjq+0enwuIAPVo2HGxxB+95yg=;
- b=kaIqEV7YoRarOmT2ha740TnAt9S9WnVOMidnQQC7nJH00P5/l2RkN+8TgngrT10VgD
- Oh8zm9VbUEwhufh29BfFyCijwQzi5s2ST036zkVgiswGsCla4f91SfmjhPKReX/ReUxk
- FqbMNT0OH7fWqkCO9mI39xJwOnOxZT8U9q2Cc=
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=UQkOagCLtG3SnpfT0Zo4ikhAMgK932Hy1naQ/yvGpQE=;
+ b=IXTeIh3CoGz/eFWTMoBcJZGgPWf8Kz9BgfKFYFdgblKry9ytmnovupXBBQLPwWIhIR
+ +X0HXDhMRLWcJ/2lDbVSEqlrQsyUpo4lCBlQayx7fxk7k1AOdNDwTjqZbQOeRFtY2PyH
+ NE8IVbER1J8wqEjD6LVUsas/2kzkexcJ6A25M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695258357; x=1695863157;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AwT8s7T33SnIDtx5FzPjq+0enwuIAPVo2HGxxB+95yg=;
- b=xIQlCJxmYCa2fn+fqr6Nhiw9/sGOnFZbR3eA9kKL75Z39CPUcw3DgIXG1bkNoCoZ5J
- LkxhLsL/P3EN3Oj6GfY+wEnMdaNpO1RB98wG6b/PhxyI8HfPQEPG0Yn17TZAZEyQvcS1
- k3RaPUENdyK2LdWlnAPSMPqIQiuOYMTpjRWUh9AIv04s47qd0dIUty795VX1gLWg9bF+
- MCNtfyznSOdJHPFaoQqqCRivCp8X2DfP2+Xunrf4bMTYupl+AfekDlLPdK5AbMiSMusv
- Jm/71vbG7BxjsYs6L+gNylb2KIWCDBpQxFQGZSgz9TBQuvPaUWglquTkC02JV8bMLYQW
- e9QQ==
-X-Gm-Message-State: AOJu0YwzYhYGS4cDHpi/nyE8iY5J2/cpbc8coZ4R4of/C+y3CokvmO1X
- Oum1kMwS4/KzvAW8IJ5j6APnCCQK0FR1VI59Z/fz8g==
-X-Google-Smtp-Source: AGHT+IEG7EUt0Igc7WpFPM6oC3cxBhN9Pp8KTfxOgnbRhplF/xynBCT4i5jTR/vcUsgG5GrpHmuHef0isre3PTZt26s=
-X-Received: by 2002:a81:4e02:0:b0:59b:1b87:a95b with SMTP id
- c2-20020a814e02000000b0059b1b87a95bmr3616499ywb.20.1695258357439; Wed, 20 Sep
- 2023 18:05:57 -0700 (PDT)
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UQkOagCLtG3SnpfT0Zo4ikhAMgK932Hy1naQ/yvGpQE=;
+ b=P3vQPDWhUvrtdi0hCkU7oH6U7OEco+DpVLRsAgtB41+0md4/PVWyMsA0Af9qvthF59
+ 0HSRvkWhuqAnneeEiE84vfhaiZJXIkpaGRFGoyF4X3mQwA8gfxJA4FgEBasbo3ZmhakD
+ NRjEmtzGDnX0nWiAV6RvEngKJM6y2EyRgTfdW9csLGc8LKRhtnHw1cTtUJBhTe6G37wN
+ iGFq29LWWR5Aij29DEnZ/6ozGxDSiBS6cyTKtDDCNfBZ04k58Ak7ofHrZLq8IlotfYdz
+ /7VdhT03Ujt7AeWAqbuuFK7AbZVjOeLonvLuFLsP3qn02PfCfdhz9SkSP6hwu7YX/qdD
+ OzlQ==
+X-Gm-Message-State: AOJu0YwwA/6mzJu+KHl1DVVmpMac15AayS2JQFyeszN+4IOR36VRB7ai
+ yEZVJygENBN0XRkNN7qFTNbK3+Q+/GECKFaltpP69w==
+X-Google-Smtp-Source: AGHT+IEmzuA8l1TPaSTbRmQ4b6BBREjiAOCLwn0szHGo59Ys+2zFZihZgRjpgSEyN4jvroD/VYwPJITPE9lF2vFie14=
+X-Received: by 2002:a0d:df14:0:b0:57a:2e83:4daf with SMTP id
+ i20-20020a0ddf14000000b0057a2e834dafmr4282277ywe.32.1695258357395; Wed, 20
+ Sep 2023 18:05:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-6-sjg@chromium.org>
- <20230831175055.GN3101304@bill-the-cat>
-In-Reply-To: <20230831175055.GN3101304@bill-the-cat>
+References: <20230915175050.4109711-1-rasmus.villemoes@prevas.dk>
+ <20230915175050.4109711-2-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20230915175050.4109711-2-rasmus.villemoes@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Sep 2023 19:03:31 -0600
-Message-ID: <CAPnjgZ3FNvR3JGrSFHwMGqny5JHtA7qoX5g13ZBO8Rib67EUmg@mail.gmail.com>
-Subject: Re: [PATCH 05/32] spl: mx6: powerpc: Drop the condition on
- timer_init()
-To: Tom Rini <trini@konsulko.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
- Andy Fleming <afleming@gmail.com>, Mario Six <mario.six@gdsys.cc>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nikhil M Jain <n-jain1@ti.com>, 
- Priyanka Jain <priyanka.jain@nxp.com>, Stefan Roese <sr@denx.de>
+Date: Wed, 20 Sep 2023 19:03:04 -0600
+Message-ID: <CAPnjgZ0JdA5_2oF+hVEpSE4ztzOpjDMkxE2J6M6FfCx3TA+eww@mail.gmail.com>
+Subject: Re: [PATCH 1/2] spl: make SYS_SPL_MALLOC depend on !(SPL_STACK_R &&
+ SPL_SYS_MALLOC_SIMPLE)
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Sean Anderson <seanga2@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,49 +83,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Thu, 31 Aug 2023 at 11:51, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 15 Sept 2023 at 11:51, Rasmus Villemoes
+<rasmus.villemoes@prevas.dk> wrote:
 >
-> On Wed, Aug 30, 2023 at 12:04:36PM -0600, Simon Glass wrote:
+> Currently, one can have both SYS_SPL_MALLOC=y and
+> SPL_SYS_MALLOC_SIMPLE=y.
 >
-> > It doesn't make sense to have some boards do this differently. Drop the
-> > condition in the hope that the maintainers can figure out any run-time
-> > problems.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  common/spl/spl.c | 6 ------
-> >  1 file changed, 6 deletions(-)
-> >
-> > diff --git a/common/spl/spl.c b/common/spl/spl.c
-> > index 78db9ef5318..3f513b0563a 100644
-> > --- a/common/spl/spl.c
-> > +++ b/common/spl/spl.c
-> > @@ -766,13 +766,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
-> >               if (spl_init())
-> >                       hang();
-> >       }
-> > -#if !defined(CONFIG_PPC) && !defined(CONFIG_ARCH_MX6)
-> > -     /*
-> > -      * timer_init() does not exist on PPC systems. The timer is initi=
-alized
-> > -      * and enabled (decrementer) in interrupt_init() here.
-> > -      */
-> >       timer_init();
-> > -#endif
+> However, while the former does make board_init_r() in spl.c call
+> mem_malloc_init(), that has no effect at all, because that just
+> updates a few bookkeeping variables, but as the linker map shows, the
+> latter setting has (as expected) caused most of dlmalloc.o to be
+> garbage-collected. That is, those bookkeeping variables are not used
+> for anything.
 >
-> PowerPC might be a little tricky, did qemu-ppce500 run?  And please
-> reach out to some of the iMX folks instead of just dropping this and
-> hoping it works.
+> IOWs, with SYS_SPL_MALLOC=y and SPL_SYS_MALLOC_SIMPLE=y, the value of
+> CONFIG_SYS_SPL_MALLOC_SIZE is irrelevant, and one still only has the
+> small, SRAM-backed, malloc arena available.
+>
+> Now I want to change that so that the mem_malloc_init() instead
+> updates the gd->malloc* variables to point at the SDRAM area.
+>
+> However, there's a small complication, namely when SPL_STACK_R=y is
+> also in the mix. In that case, the "simple" malloc arena is indeed
+> updated to point at the SDRAM area carved out of the new stack (see
+> spl_relocate_stack_gd()). So that case works in the sense that one
+> does get a "large" "simple" malloc arena (of size
+> SPL_STACK_R_MALLOC_SIMPLE_LEN) - but CONFIG_SYS_SPL_MALLOC_SIZE is
+> still irrelevant. Once I change the mem_malloc_init() logic, this
+> would then break, because the gd->malloc* variables would be updated
+> again. Also, it doesn't really make sense to allow the .config to
+> essentially specify two different SDRAM-backed malloc arenas.
+>
+> So since CONFIG_SYS_SPL_MALLOC and its dependent options are no-ops
+> currently when SPL_STACK_R && SPL_SYS_MALLOC_SIMPLE, simply forbid
+> that combination.
+>
+> Simple grepping suggests that these boards/configs are affected, in
+> that they become a tiny bit smaller, and the defconfig will need
+> refreshing:
+>
+>   am62ax_evm_r5_defconfig
+>   am62x_evm_r5_defconfig
+>   am64x_evm_a53_defconfig
+>   am64x_evm_r5_defconfig
+>   am65x_evm_a53_defconfig
+>   am65x_hs_evm_a53_defconfig
+>   iot2050_defconfig
+>   j7200_evm_a72_defconfig
+>   j721e_evm_a72_defconfig
+>   j721s2_evm_a72_defconfig
+>   j721s2_evm_r5_defconfig
+>   verdin-am62_r5_defconfig
+>
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> ---
+>  common/spl/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
 
-Yes, CI passes.
-
-+Christophe Leroy
-+Marek Beh=C3=BAn
-
-PowerPC people, does this look OK?
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
