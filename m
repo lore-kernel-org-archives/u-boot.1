@@ -4,74 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2397CD4938
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:58:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A726CD493C
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:58:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3782286D0C;
-	Thu, 21 Sep 2023 03:58:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 908DB86D86;
+	Thu, 21 Sep 2023 03:58:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WvdU9abs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kj/wK1f5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C19486D90; Thu, 21 Sep 2023 03:57:59 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 7917586D92; Thu, 21 Sep 2023 03:58:00 +0200 (CEST)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19A5A86C68
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6689186C10
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-77ac14ff51bso20257539f.3
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:52 -0700 (PDT)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-7955636f500so19967839f.1
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261470; x=1695866270; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695261472; x=1695866272; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4zoLuQcXyoYCk6ByOF8q9m2fNbeMpze570xVRdNuBbU=;
- b=WvdU9abs/9i2+MUsDaeGbk/158g2zBjIlg+hu8l6pxM6ytds3jQDe0T7UKGi1eR3oR
- 64/0hljkz9A3GU5gJKQseNVlVUG4JP8Iqlf2XKvonxvCGDxdGd3Cbwerz/r9x/3dYS/F
- +nuj6abU9gaeNt+Zwi8yPA39jjNzK/0TjT/bA=
+ bh=5QcbAD2DcA1kyWT7zyiskBkdTt2QYZXZXwDv0EmXg6A=;
+ b=kj/wK1f5HrTr0ChAx/k1Sg70E53GFBgJjU5EsIuu6iHv41THO6gX0zt/ZBD2ZbwQ+M
+ beXR24zd6LOXHrfOGWhKijRaOVlR/1jIsKGPxn8AMzV3kT2BJOiPQJ7Zn5BC2R4RR4Vn
+ KIdmxzueKEV6KnDgKT8pb2rrSR+JTTP8B/tDg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261470; x=1695866270;
+ d=1e100.net; s=20230601; t=1695261472; x=1695866272;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=4zoLuQcXyoYCk6ByOF8q9m2fNbeMpze570xVRdNuBbU=;
- b=YNPn3r6zD7CPZnFtNcDgw9eXClvnpFyeXc2ZFai9migXfclWiB4Cm8lCsClRw2PEa3
- IPpxfdXym2YL+m/kMponmDj949jQBve7xAXgH5p1yih2j1tpS3iOuXhvyyFmJb4QplMv
- Rodg2aMa9H3rJa4FQmYQdHf0ZkrdhFUZ1XqrGoDTN4nMm4nAXMpY/MayrmKja35l++XO
- miFaa7BbXncYVeEwa5JJ1WzMu6aEkOD7eTa2qVykNSi7uDsBk+Dl1yb56d5m0zTvppq0
- /DP/CRc3AysDbl+/VOftatTWJYE9iish9Ym+p5wyiUSZRh2XjMBaWDGEkZvGHOKV6ZdV
- zvSw==
-X-Gm-Message-State: AOJu0Yzxu8fX+YXJ5vEWBNZr3GweR0xkVZ8ftzHx0vmb/jdIjoJdlt3i
- lIMacryXLV+pBEJiXirGwrHoBDgDsGPE4J62enA=
-X-Google-Smtp-Source: AGHT+IF3Lv4ZTh2MqvXMBzL16Cj9fmPielQIPlhWxt7EqlD/XhM4xpLBP3qShUrbCoPPSyILOurIOA==
-X-Received: by 2002:a92:3005:0:b0:34d:e998:fb4f with SMTP id
- x5-20020a923005000000b0034de998fb4fmr4031840ile.10.1695261470661; 
- Wed, 20 Sep 2023 18:57:50 -0700 (PDT)
+ bh=5QcbAD2DcA1kyWT7zyiskBkdTt2QYZXZXwDv0EmXg6A=;
+ b=L8UTKW0VeVpyX/Lk6dL5Pw4stBJMWY45t1sy6aVVgQIzmZCAyqbdfHhdgqkgNGeduu
+ J7TeMVGHGW0lgasybYzutQoYPdMbcoLUi2f7eP/cUZD5VuJ+9TQbNnYTU9pXKDAqbmKq
+ /scFS6alG/DxdmhGbd+Bco0yOb9K3MqdorhFu33o9L4SBLnPH75eGfFRFXM1O0bscxhX
+ OtQRUstzwjA7UWdi2FfGTBHI1WIjrk4+JOMpRpCgjBnOw2acEfQBSor+TBh3Aj8ysUEu
+ 8LX4Otbt5kOCevka1dtl6VN8zpCrzN7RAJCw7tj2xAE+pLpsajqR32xx4nI55LtAfzk6
+ qWgw==
+X-Gm-Message-State: AOJu0YwVcsoBXj6YsxLcEAf09hirq6jTVZ0tDB9783aR568xGhNcba9E
+ 11F1euWq2bpm+hzHt86kAW/U2FU6UjtaDdM2o9E=
+X-Google-Smtp-Source: AGHT+IEQ3uaybxpwd7C86x5jYDrbU6Gzl5eto6sE9PEOgwsJB8lrsMq2nltZ6FSXHvj0zCr3AJhlEg==
+X-Received: by 2002:a05:6e02:1b06:b0:349:36e1:10fb with SMTP id
+ i6-20020a056e021b0600b0034936e110fbmr5452666ilv.18.1695261471965; 
+ Wed, 20 Sep 2023 18:57:51 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.49
+ y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:57:50 -0700 (PDT)
+ Wed, 20 Sep 2023 18:57:51 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Nikhil M Jain <n-jain1@ti.com>, Ovidiu Panait <ovpanait@gmail.com>,
- Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH v2 08/32] spl: Drop the switch() statement for OS selection
-Date: Wed, 20 Sep 2023 19:56:57 -0600
-Message-ID: <20230921015730.1511373-9-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
+Subject: [PATCH v2 09/32] spl: Avoid an #ifdef when printing gd->malloc_ptr
+Date: Wed, 20 Sep 2023 19:56:58 -0600
+Message-ID: <20230921015730.1511373-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
 References: <20230921015730.1511373-1-sjg@chromium.org>
@@ -93,105 +90,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This code is pretty ugly, with many #ifdefs
-
-There are quite a lot of IH_OS_U_BOOT values so the compiler struggles
-to create a jump table here. Also, most of the options are normally
-disabled.
-
-Change it to an else...if construct instead. Add an accessor for the
-spl_image field behind an #ifdef to avoid needing #ifdef in the C code.
+Use an accessor in the header file to avoid this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Use the same condition for both pieces to avoid possible problems
 
- common/spl/spl.c | 32 ++++++++++----------------------
- include/spl.h    |  9 +++++++++
- 2 files changed, 19 insertions(+), 22 deletions(-)
+ common/spl/spl.c                  | 9 +++++----
+ include/asm-generic/global_data.h | 7 +++++++
+ 2 files changed, 12 insertions(+), 4 deletions(-)
 
 diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 703f45cd8044..8511c66d7394 100644
+index 8511c66d7394..5f57b51ca2d1 100644
 --- a/common/spl/spl.c
 +++ b/common/spl/spl.c
-@@ -748,7 +748,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 		BOOT_DEVICE_NONE,
- 	};
- 	struct spl_image_info spl_image;
--	int ret;
-+	int ret, os;
- 
- 	debug(">>" SPL_TPL_PROMPT "board_init_r()\n");
- 
-@@ -841,39 +841,27 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 			       ret);
- 	}
- 
--	switch (spl_image.os) {
--	case IH_OS_U_BOOT:
-+	os = spl_image.os;
-+	if (os == IH_OS_U_BOOT) {
- 		debug("Jumping to %s...\n", spl_phase_name(spl_next_phase()));
--		break;
--#if CONFIG_IS_ENABLED(ATF)
--	case IH_OS_ARM_TRUSTED_FIRMWARE:
-+	} else if (CONFIG_IS_ENABLED(ATF) && os == IH_OS_ARM_TRUSTED_FIRMWARE) {
- 		debug("Jumping to U-Boot via ARM Trusted Firmware\n");
--		spl_fixup_fdt(spl_image.fdt_addr);
-+		spl_fixup_fdt(spl_image_fdt_addr(&spl_image));
- 		spl_invoke_atf(&spl_image);
--		break;
--#endif
--#if CONFIG_IS_ENABLED(OPTEE_IMAGE)
--	case IH_OS_TEE:
-+	} else if (CONFIG_IS_ENABLED(OPTEE_IMAGE) && os == IH_OS_TEE) {
- 		debug("Jumping to U-Boot via OP-TEE\n");
--		spl_board_prepare_for_optee(spl_image.fdt_addr);
-+		spl_board_prepare_for_optee(spl_image_fdt_addr(&spl_image));
- 		jump_to_image_optee(&spl_image);
--		break;
--#endif
--#if CONFIG_IS_ENABLED(OPENSBI)
--	case IH_OS_OPENSBI:
-+	} else if (CONFIG_IS_ENABLED(OPENSBI) && os == IH_OS_OPENSBI) {
- 		debug("Jumping to U-Boot via RISC-V OpenSBI\n");
- 		spl_invoke_opensbi(&spl_image);
--		break;
--#endif
--#if CONFIG_IS_ENABLED(OS_BOOT)
--	case IH_OS_LINUX:
-+	} else if (CONFIG_IS_ENABLED(OS_BOOT) && os == IH_OS_LINUX) {
- 		debug("Jumping to Linux\n");
- 		if (IS_ENABLED(CONFIG_SPL_OS_BOOT))
- 			spl_fixup_fdt((void *)SPL_PAYLOAD_ARGS_ADDR);
- 		spl_board_prepare_for_linux();
- 		jump_to_image_linux(&spl_image);
--#endif
--	default:
-+	} else {
+@@ -864,10 +864,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	} else {
  		debug("Unsupported OS image.. Jumping nevertheless..\n");
  	}
- #if CONFIG_VAL(SYS_MALLOC_F_LEN) && !defined(CONFIG_SPL_SYS_MALLOC_SIZE)
-diff --git a/include/spl.h b/include/spl.h
-index d16cea3ea50b..60b55b75195b 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -263,6 +263,15 @@ struct spl_image_info {
+-#if CONFIG_VAL(SYS_MALLOC_F_LEN) && !defined(CONFIG_SPL_SYS_MALLOC_SIZE)
+-	debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->malloc_ptr,
+-	      gd->malloc_ptr / 1024);
+-#endif
++	if (IS_ENABLED(CONFIG_SYS_MALLOC_F) &&
++	    !IS_ENABLED(CONFIG_SPL_SYS_MALLOC_SIZE))
++		debug("SPL malloc() used 0x%lx bytes (%ld KB)\n",
++		      gd_malloc_ptr(), gd_malloc_ptr() / 1024);
++
+ 	bootstage_mark_name(get_bootstage_id(false), "end phase");
+ #ifdef CONFIG_BOOTSTAGE_STASH
+ 	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index 8fc205ded1a3..edf9ff6823f2 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -573,6 +573,13 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
+ #define gd_malloc_start()	0
+ #define gd_set_malloc_start(val)
  #endif
- };
- 
-+static inline void *spl_image_fdt_addr(struct spl_image_info *info)
-+{
-+#if CONFIG_IS_ENABLED(LOAD_FIT) || CONFIG_IS_ENABLED(LOAD_FIT_FULL)
-+	return info->fdt_addr;
++
++#if CONFIG_VAL(SYS_MALLOC_F_LEN)
++#define gd_malloc_ptr()		gd->malloc_ptr
 +#else
-+	return 0;
++#define gd_malloc_ptr()		0L
 +#endif
-+}
 +
  /**
-  * Information required to load data from a device
+  * enum gd_flags - global data flags
   *
 -- 
 2.42.0.515.g380fc7ccd1-goog
