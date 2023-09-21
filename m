@@ -4,65 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8663EE7108E
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:36:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB79E71090
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0708E86B35;
-	Thu, 21 Sep 2023 17:36:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id D9FC88645F;
+	Thu, 21 Sep 2023 17:39:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Qj6JPvPW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Xv4NWN1/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5BE886B09; Thu, 21 Sep 2023 17:36:43 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8F60886482; Thu, 21 Sep 2023 17:39:55 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A6C386661
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:36:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8612B8642C
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:39:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id A4B0EB82132
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:36:41 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 541D2C4E770
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:36:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695310600;
- bh=hw/ck6FwM+9TAp5BkQ5Ju6ReeJ6fUDz1ft583pHYwLE=;
- h=From:Date:Subject:To:Cc:From;
- b=Qj6JPvPWMC/uEqqIb1smEq5z2BoIWGtf9i5xyaYbbTBbz+xQO4bWdNyNRm+LGhgcx
- uR4mIvED5nxZOG5b3DXx+htaoR/W/sX+gB/fmPHfYtEpK3YirpFcweXiYSjF9l3TZ6
- YsB+NKmbekfFZ9PESxKdnfY7KqfQU6UAVod3Lfl+ROQnpuJcP+RmTXjEMUIhnGeV7U
- tzUYU3ANBGukUemMO1G86dCm+xzvIZtHG+8B5mqiRpd6HOwKC5X4HIb1nzpMznKBSs
- m/HV1hIhUftInQRTYEi3alvZLW/Axcn2gBv+NDNYs5XEJ2uzeCrzkjdkCW9vbZHLNi
- HiGSD/kNkoilw==
-Received: by mail-ot1-f54.google.com with SMTP id
- 46e09a7af769-6c07e122a78so678117a34.2
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:36:40 -0700 (PDT)
-X-Gm-Message-State: AOJu0YwRszPLO6g4nFHcqrTpByYiph39upp9W3iaHeFjVXrZ1NGm4gmi
- HzIgL4HK6oKoG++ijjfxbUHASwdZ68QMY3hB3Iw=
-X-Google-Smtp-Source: AGHT+IFcTTKmdlyr6zFm6WVFuTs4zzLq1PuzyoODsledOOptGgorPXeDOUXiqYLlPyY32tjrzn9Rp2aOAs8ewjUcDUg=
-X-Received: by 2002:a05:6870:d0c7:b0:1d6:925:83fe with SMTP id
- k7-20020a056870d0c700b001d6092583femr6668221oaa.0.1695310599650; Thu, 21 Sep
- 2023 08:36:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d7b79a4899bso1298000276.2
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:39:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695310792; x=1695915592; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7eTQmPc1ARuBR2CT5ptHgiZJ6AsMIWUUtiNcFLXdpeA=;
+ b=Xv4NWN1/1pheUBBqm5EYausyDKCPeKLdXRe34+iCNgYXWIPkFS7ygPSMYu7gK6MbQb
+ Pm5h8EwctvA2RQlgfdpfq3IuTNLi6gt0DAOfmc7PSqnM+bXkvnab6y55C5FIlp51uHQe
+ prNTfVqrpnuE/HKBFDHU04tR3yTS+pFIuZ9sY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695310792; x=1695915592;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7eTQmPc1ARuBR2CT5ptHgiZJ6AsMIWUUtiNcFLXdpeA=;
+ b=PRn5B7k0iGpsIrNlF+7qfFuEN9aHOrE6YIAbzLryazFWRD+YcmHRiq9FAk95Dy44pO
+ 3P+Zl3HZmtdFh99Bx0eTXBf4uFxinAFE+lmhnx7OltxXnZ1nr+5A+L7yGzIcVbF4C5wL
+ yLJIlkwtMBEdKuiGaKGzszcVlb9kEz9eYvNUAizSGo8geiqw3fmFteYmZBQu4SRKfvKG
+ jYgA1g3ZZmkYHQVWZ/hILfAeYUnhsB1vbEv2woBET1cJyhpsdsCYFtleW/3S70pvpoUC
+ Qu9Ggldd8URqJY6LS4ogjwEd9V61rQ1zLeTcZko58dG3kavbiy5HHQU4nQLeZ6zOkqMb
+ P+SA==
+X-Gm-Message-State: AOJu0YyBcL/hW/lNRErydTceQlP8Ew7dqnnTzYE3RAAv3PQXysVovK5h
+ 5v2e3X8nLR8eXpR6fTg6ZAMeBQ==
+X-Google-Smtp-Source: AGHT+IHHAUZq8BDP9+8FBzSIO7egxtjiefUi4v0XMN02WJrh0jpz7BBaDUv7/NQBAnaO5O1zxIzFgQ==
+X-Received: by 2002:a25:3789:0:b0:d81:b42a:1c58 with SMTP id
+ e131-20020a253789000000b00d81b42a1c58mr5517140yba.41.1695310792250; 
+ Thu, 21 Sep 2023 08:39:52 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-46ac-83a0-07b5-e9a6.res6.spectrum.com.
+ [2603:6081:7b00:6400:46ac:83a0:7b5:e9a6])
+ by smtp.gmail.com with ESMTPSA id
+ u17-20020a25f811000000b00d20d4ffbbdbsm400207ybd.0.2023.09.21.08.39.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Sep 2023 08:39:51 -0700 (PDT)
+Date: Thu, 21 Sep 2023 11:39:49 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@google.com>
+Cc: Maxim Uvarov <maxim.uvarov@linaro.org>, u-boot@lists.denx.de,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, goldsimon@gmx.de
+Subject: Re: [PATCHv9 01/15] submodule: add lwIP as git submodule
+Message-ID: <20230921153949.GS305624@bill-the-cat>
+References: <20230914161828.3662-1-maxim.uvarov@linaro.org>
+ <20230914161828.3662-2-maxim.uvarov@linaro.org>
+ <CAPnjgZ3tr5rqdPfnUS=5F19-7R9SU6fpe3F7o9+TghKs=m7zrA@mail.gmail.com>
 MIME-Version: 1.0
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Fri, 22 Sep 2023 00:36:02 +0900
-X-Gmail-Original-Message-ID: <CAK7LNASYfwjuCQ70BZ5Gco+rme=H_fArxyT5rFsE334p2viSoA@mail.gmail.com>
-Message-ID: <CAK7LNASYfwjuCQ70BZ5Gco+rme=H_fArxyT5rFsE334p2viSoA@mail.gmail.com>
-Subject: [Question] TI's u-boot.img is built twice
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>, srk@ti.com,
- n-francis@ti.com, s-vadapalli@ti.com, m-chawdhry@ti.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="yzIsVf7bnCrGEaK0"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3tr5rqdPfnUS=5F19-7R9SU6fpe3F7o9+TghKs=m7zrA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,77 +95,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi.
 
-Since the TI platform migrated to binman,
-u-boot.img is built twice.
+--yzIsVf7bnCrGEaK0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-It is created by "mkimage -E",
-then overwritten by binman.
+On Wed, Sep 20, 2023 at 07:03:07PM -0600, Simon Glass wrote:
+> Hi Maxim,
+>=20
+> On Thu, 14 Sept 2023 at 10:20, Maxim Uvarov <maxim.uvarov@linaro.org> wro=
+te:
+> >
+> > add external lwIP library as a git submodule.
+>=20
+> Oh dear...what is the motivation for using a submodule?
 
+That we don't have a better alternative.  Using "git subtree" has it's
+own problems and won't make things overall better.
 
-So, the data are embedded in the FIT structure
-instead of being appended.
+> Our current stack is nicely integrated into U-Boot. This would make
+> moving between development branches much more painful.
 
-Is this intentional?
+It really shouldn't matter in that case.  Unless you're trying out a new
+lwip upstream commit, nothing changes in there.  It _may_ mean that if
+we want to update lwip it's not something that can be staged first in
+the -next branch but instead something to pull in just after release,
+but I'd need to see how smart or not git is today about things like
+that.
 
-To me, it looks weird.
+> I would much prefer that we bring in the necessary code, and that you
+> send a patch every 3 months or so to deal with updates, making sure
+> there are no code-size regressions.
 
+And I much prefer something that will make sure that we don't start
+making changes in upstream code and diverging.  I don't think there's a
+mechanic short of submodule that will do that for us.
 
+--=20
+Tom
 
+--yzIsVf7bnCrGEaK0
+Content-Type: application/pgp-signature; name="signature.asc"
 
-To confirm it, apply the following hack.
+-----BEGIN PGP SIGNATURE-----
 
-Since u-boot.img is overwritten by binman,
-copy it to u-boot.img.backup.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUMY8UACgkQFHw5/5Y0
+tyzaxAwArUDOKkRVFCGCHqnCVVA+wdq5r8dP2ZlLASakKPQZ4rW/cYowRfiu9v4i
+1LJlaANzjaa58d5cLzTcdcEjL6nSuM1FtK4gAfdR9hOBivvtW+ix8WyPTDp2B+84
+rZjezYYKQfwTtzhxfYIr54wJ8s1+ZYFJQ1ayihZZAfKRH5STlPP4qCN7iTXZc48/
+PXNaCKRUwzuOWr3BdbhUFh1JcKwdcyIPS0/fQgc0Jgp+mLWhaSbw8KUf4a1k9IuO
+m6pWZ3V6FL8aG2kYUgEoOkEk8SK3J+DgaBeJrg37dm37Egv65QP2Lh6JmPLC99pV
+1ZBLnc/dlMFmFo3xQcRjIAOUW98JlV40w+y8dQbzf+uG+b6E3cL4UmihZRWkdppG
+hwRYkNwgo0flx6Pzqx3EpN732wJTkKZhnUKzl65jGSdY/7BeuKEwRhoHZbx8kI/I
+4GeflOVHcsqaAxUh0vPunwR0bseoKeoJKeS01knnomDsh2L/KRieum8QVzlYKMhg
+kkqiVcTU
+=6dDd
+-----END PGP SIGNATURE-----
 
-
-
-
-diff --git a/Makefile b/Makefile
-index 87f9fc786e..4cffa8a061 100644
---- a/Makefile
-+++ b/Makefile
-@@ -1112,6 +1112,7 @@ endef
- # Timestamp file to make sure that binman always runs
- .binman_stamp: $(INPUTS-y) FORCE
- ifeq ($(CONFIG_BINMAN),y)
-+       cp u-boot.img u-boot.img.backup
-        $(call if_changed,binman)
- endif
-        @touch $@
-
-
-
-Then, build it for the main core.
-
-
-make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu-
-   am64x_evm_a53_defconfig all
-   TEE=~/ref/OP-TEE/optee_os/out/arm-plat-k3/core/tee-raw.bin
-   BL31=~/ref/trusted-firmware-a/build/k3/lite/release/bl31.bin
-   BINMAN_INDIRS=~/ref/ti-linux-firmware
-
-
-
-
-Compare the two files.
-Run fdtdump to see what happened to them.
-
-
-$ diff -u u-boot.img  u-boot.img.backup
-Binary files u-boot.img and u-boot.img.backup differ
-
-
-$ fdtdump u-boot.img
-    => u-boot and dt are embedded.
-
-$ fdtdump u-boot.img.backup
-    => u-boot and dt are appended after the
-       FIT structure
-
-
-
--- 
-Best Regards
-Masahiro Yamada
+--yzIsVf7bnCrGEaK0--
