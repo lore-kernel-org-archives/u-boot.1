@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03709E7D0AF
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 22:00:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5DAEE7D0A1
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 23:32:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CB3F86410;
-	Fri, 22 Sep 2023 00:00:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D6389863DE;
+	Fri, 22 Sep 2023 01:32:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PXuDXw20";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GJz10LuS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E48D8641B; Fri, 22 Sep 2023 00:00:04 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 8202C86459; Fri, 22 Sep 2023 01:32:54 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADD2486400
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:00:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 835AA833F5
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 01:32:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-532784c8770so1778657a12.1
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:00:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-59c0d002081so18586327b3.2
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 16:32:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695333602; x=1695938402; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6MrTitYGl8M+zZAeSZtP5lALx4uOzN0cdKYdzZA3UTg=;
- b=PXuDXw20/Vo+KLuFmMFuKLEBWiINlYnlZOpx3JpiZaOWXfDVY1caambP4yrxFRbRCc
- pin1lwcM8dn33s2DVjGxxbeI4E0S1XpcT0czv7znnGon4Izyb05lL31jQQbcC6If+Dyj
- 6Zg9gWKWm14RFgCzj6OuuDLbdJk2Zypk0nPV3dbZAnzMPZBgXRRqXWcm8pesyymhevXC
- ispG7EN7oKGNDcIuz8ab0hw+yrlCppu2k3TD11dIiy+sfBTxpCA5wtbKOI/XeNgrqa1S
- N6SebpJCU0FNP8wAUFXuH2gK6yjk/fC4ZCEA9b8Iykg+XM8DsCDO1iyDy/aJXUgG4pWg
- AvqQ==
+ d=konsulko.com; s=google; t=1695339171; x=1695943971; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=nhDvkqV+B0Hn5aqGePXRCiYKZ+gOCCanU+L5KdfVCow=;
+ b=GJz10LuS7ZcaOxy6zQKcVaGjjsXvwvvIBDTfWQ+lIaZdmFbc7m60+qNlsJMHen56EW
+ CXeN+qqCtbsp14pnYwshF7U7BcAaitbB6Nk3+NpAq8YnkO3JWLxIja/1WY8k29Fnmrfp
+ TUFeHJJ8wZylvsPzwUXPac9TZ5/yPMMwVsbo8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695333602; x=1695938402;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6MrTitYGl8M+zZAeSZtP5lALx4uOzN0cdKYdzZA3UTg=;
- b=tBzGS4wzrTK+/LH23oI6Yct5CgLkLtHjKeydKvLpVPMxfSVLJdAGC8RsyOpKvFJd8r
- yUZZ4jCWNCSB2z5OVtI/H9cF4HZ2dWr0KM1f/VR3xLHrI+uib7VWDnBYLGYiX6nrarzT
- 61CazvuyJJ9D43F/uvo1LGSMP8SpopsA2p4JtPbMcFhlTqyhPRZd69vhbiVHcNTGeV7q
- HvQY/Mr4xk3ZfR4wSWLhYmGUBiVMJVMr4vjKc2XafoPMHHl+lXGKzWv0J9tBOOOEOm6j
- 2klJQEwUFw/TODmtBfYdlC6M31A+ig0mmUxfOpSgQplAzsl5Wc+3KK8AJGgKZGJ9BxHK
- YySw==
-X-Gm-Message-State: AOJu0YzloLgiHjTDWOZDn4Bv0M/EUNoIf2dRYzzlZF6A5GlAefPdI4u2
- ix4nVCDa/ydPMqHhrbfusTAC5qsRy53Ex/HlKGI=
-X-Google-Smtp-Source: AGHT+IG4jirPDzTndqdS24l+6kWEja0OaBYLoFDcx0+el2RcYJJTI7+ATROwrnAJgKIx8rqplTOA8utncIg5kUG7+eM=
-X-Received: by 2002:a17:906:300e:b0:9a1:bebc:8282 with SMTP id
- 14-20020a170906300e00b009a1bebc8282mr6014175ejz.32.1695333601916; Thu, 21 Sep
- 2023 15:00:01 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695339171; x=1695943971;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nhDvkqV+B0Hn5aqGePXRCiYKZ+gOCCanU+L5KdfVCow=;
+ b=tYRYSoWkG4Xr1W6+BzDw4fEfxLYO9DSpIb8EOFXeBQVMDrC4HfFcYSCtTpktOPDf30
+ o0EOgD0N6PkZ1imq/rvs684Jqm607OtvIwIFsfNtb68kOyP+UeMf7ZHGEG7FaFhpqXsM
+ qArcXc686FYUbCG7jiwEMqQLtwXikmYJAndWyR4XLD8kQ0XXSvUnzZXpjdmn6jvS04VR
+ kWo0SpPxXBD0zHnN7io3dwWXkZKq9zdifx0PdFy2TzuawwUiyGKePfQSoC6VleK47rCz
+ R6ZdO72yoq2Spt2eeG+1X1/A82lVlkgV2mLgUJzHtuMj24P+DU9NaZKtWIDkz0lHyRoO
+ 5Wag==
+X-Gm-Message-State: AOJu0Yy+J+wxoFQyZAM3X2Uhr8zI/MsTnPvUYwkG2LV15JIpXv2VpJYS
+ udMx3S5pFk0agcNDaWQg7+lzgaCM73GZ6DIZObSVMQ==
+X-Google-Smtp-Source: AGHT+IGpzTTUhKvKqB7EijzYScasw/fZq787knbs3Z5i5P1baenxKFFsvE7o89qHoCYVW/pHffJqYg==
+X-Received: by 2002:a25:ca81:0:b0:d55:cf49:9144 with SMTP id
+ a123-20020a25ca81000000b00d55cf499144mr7643350ybg.15.1695339170714; 
+ Thu, 21 Sep 2023 16:32:50 -0700 (PDT)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-b22c-a20b-ddfe-6409.res6.spectrum.com.
+ [2603:6081:7b00:6400:b22c:a20b:ddfe:6409])
+ by smtp.gmail.com with ESMTPSA id
+ n11-20020a25808b000000b00d8168e226e6sm566793ybk.47.2023.09.21.16.32.49
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Sep 2023 16:32:49 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH 1/3] Makefile: Allow for board directories to not have a
+ Makefile
+Date: Thu, 21 Sep 2023 19:32:46 -0400
+Message-Id: <20230921233248.159047-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230921133748.1543007-1-sjg@chromium.org>
- <20230921133748.1543007-3-sjg@chromium.org>
-In-Reply-To: <20230921133748.1543007-3-sjg@chromium.org>
-From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 22 Sep 2023 05:59:50 +0800
-Message-ID: <CAEUhbmWsRtKceAU305KA+v+uMn_rgX++RF-7j_SPPj-fTuc3wA@mail.gmail.com>
-Subject: Re: [PATCH v7 2/3] x86: coreboot: Drop USB init on startup
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,32 +87,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 21, 2023 at 9:37=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> This is very annoying as it is quite slow on many machines. Also, U-Boot
-> has an existing 'preboot' mechanism to enable this feature if desired.
->
-> Drop this code so that it is possible to choose whether to init USB or
-> not.
->
-> Use the existing USE_PREBOOT mechanism instead.
->
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v7:
-> - Add docs about how USB keyboard works on coreboot
->
-> Changes in v5:
-> - Make use of the uSE_PREBOOT mechanism
->
->  arch/x86/cpu/coreboot/Kconfig    | 1 +
->  arch/x86/cpu/coreboot/coreboot.c | 4 ----
->  doc/board/coreboot/coreboot.rst  | 7 +++++++
->  3 files changed, 8 insertions(+), 4 deletions(-)
->
+It is entirely possible at this point to have platforms in U-Boot that
+do not have board-specific C code (just Kconfig or environment) and so
+make it optional to have to descend in to and then build in the board
+directory.
 
-Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ Makefile             | 2 +-
+ scripts/Makefile.spl | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-series applied to u-boot-x86/next, thanks!
+diff --git a/Makefile b/Makefile
+index 9be24c4ec613..5e27bceb8e6c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -877,7 +877,7 @@ libs-$(CONFIG_UT_ENV) += test/env/
+ libs-$(CONFIG_UT_OPTEE) += test/optee/
+ libs-$(CONFIG_UT_OVERLAY) += test/overlay/
+ 
+-libs-y += $(if $(BOARDDIR),board/$(BOARDDIR)/)
++libs-y += $(if $(wildcard $(srctree)/board/$(BOARDDIR)/Makefile),board/$(BOARDDIR)/)
+ 
+ libs-y := $(sort $(libs-y))
+ 
+diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
+index 15ac87286d5a..32f4384657b1 100644
+--- a/scripts/Makefile.spl
++++ b/scripts/Makefile.spl
+@@ -96,7 +96,7 @@ c_flags := $(KBUILD_CFLAGS) $(cpp_flags)
+ 
+ HAVE_VENDOR_COMMON_LIB = $(if $(wildcard $(srctree)/board/$(VENDOR)/common/Makefile),y,n)
+ 
+-libs-y += $(if $(BOARDDIR),board/$(BOARDDIR)/)
++libs-y += $(if $(wildcard $(srctree)/board/$(BOARDDIR)/Makefile),board/$(BOARDDIR)/)
+ libs-$(HAVE_VENDOR_COMMON_LIB) += board/$(VENDOR)/common/
+ 
+ ifeq ($(CONFIG_TPL_BUILD),y)
+-- 
+2.34.1
+
