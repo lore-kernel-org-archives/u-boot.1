@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F743CD493C
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34ABFCD4938
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:59:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F187E86A26;
-	Thu, 21 Sep 2023 03:58:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 518AE86D9D;
+	Thu, 21 Sep 2023 03:58:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jPWSQMdv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nsV3WJpF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2C2586D91; Thu, 21 Sep 2023 03:58:00 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id E51A686D2E; Thu, 21 Sep 2023 03:58:01 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E53786D83
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E47F586D43
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-7927611c54bso19609039f.2
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:54 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-792717ef3c9so19958339f.3
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261473; x=1695866273; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695261474; x=1695866274; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BFzSItGDxkpfjOdxUglVy/5ZiMFOgMjwXZ+onDRqB48=;
- b=jPWSQMdvtdatakkPtaFzeCs5jkV89SkMkndRtrMewTY0EnnzkYq2JeWz3CIN7G+UU6
- hQoDiPqC402eZ6FWdovOeu941AAdPzq2ZehJ8EQHL36HOD/eWQSzdJPvgsQLAqnKE84l
- RSP6Wc6qLJJbbp1dWF/raCcK6zbUIbKdi1fxw=
+ bh=cgkogzhiEXdlbV8juENoI1pWnElzsXS/La849mQTrJo=;
+ b=nsV3WJpFRcrLo5HPgQLlpJ4U1GeNLnts7WoJaE+uGOCtMpbPQaoTrKAaE4scYAM+1F
+ aIosdtuEH+Ol8DDgArUcXQTdKSp6XUlO2xyggM5Wq0EYIe5kghC6bW6qeG9Jl9KASo58
+ rRCe2q664/qZ2T4djjXjFSroGPlNAgj95eELE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261473; x=1695866273;
+ d=1e100.net; s=20230601; t=1695261474; x=1695866274;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BFzSItGDxkpfjOdxUglVy/5ZiMFOgMjwXZ+onDRqB48=;
- b=Z9Mo6JIsHtduTV5I4gh7qz/WjOsbGNF6Xd9keffDznmBdLE2lNeEugN0YxjhsTL9O7
- jUqAqpr6gOv8+l/NHafn2PfSGeI+TBpbxkGxvkLyOYHeRy+6OFumArvwLY+63DZ2IYHx
- 0tGdJBHUrg1j7Hk60e/QKB3Ld30WDnkq3G0VzcqUjskU7SzdzwNQkXG6J/CK0e3xS9+U
- 4Nuw+IogghfQG0RguMGJx5r7wB9vzPmSYAxbXp16v3n5h7aUm+K4E1ngxlIUSIolZbAf
- DeZaMrYB9p9qjfMcL5ls67zP0qHxAIuH7NajbfnxsMW6wsME2VvgZ5YdLdpCmWklyepl
- pZZA==
-X-Gm-Message-State: AOJu0Ywf11stEpXAF6Mr0yzZg1fDin+b7STY+wjZNB83QzJo8bk9EGYA
- kbf5JS8MbzDMAegxmHtdtqcS9sOysW2V2FQ70dg=
-X-Google-Smtp-Source: AGHT+IH/g9tekgJFE23yv5I2m1IBjbQM3QAFyWwIw6Nxg4aUIsXlplQvA9ZygGtGuqTCPQbuXBoODw==
-X-Received: by 2002:a6b:6a09:0:b0:792:9406:a453 with SMTP id
- x9-20020a6b6a09000000b007929406a453mr4398146iog.14.1695261473306; 
- Wed, 20 Sep 2023 18:57:53 -0700 (PDT)
+ bh=cgkogzhiEXdlbV8juENoI1pWnElzsXS/La849mQTrJo=;
+ b=PjQNQn3EBZ8/wEhs5X3RwK0a8l9XQ/n8pHRmtQQnzkCgN4Y3I27fFVCEWSIz2i7JnV
+ jrtrAEkqUYDjo2aGDC/CxSdGFzoCOXRnON/PcrXbS09Nl5KQ/WiZPDbwwRaAkLjE27or
+ kdZyTXI65sQtdIBUX/A6y+8cabsF27V+mCFSpXzIM4Fj+fjpunet/0Ss/55+9bG5Ov6j
+ UPtm0Dbk27lCe8eTazRe/7IphvdLJSNR9TjHy/qbGHPxW1EEuy/H3gwbjdRgOkkpHsy8
+ x/SIOE4Z5lKU6nmM0wKl1guPdUrrHDzSSZv3QXAIOWwCzqXPDdJ5lL3+WeBYp9+88/y/
+ YYYw==
+X-Gm-Message-State: AOJu0YyiHy74E+IUxBfE4ZkWwJIGuoQFuVybcFcLAhy0sq5Fu3D/tL9T
+ 2ZIMsgmJcQQDqhsLE/CC732rfQGLld/3t0R67a0=
+X-Google-Smtp-Source: AGHT+IESMtX055h1Bwc6VwhhAb70KcsxvNjNPH+6if4AMQP/lBoqv9q9uxOAn94Nd7IewjkJhXUXXA==
+X-Received: by 2002:a5d:9404:0:b0:792:9416:9c7f with SMTP id
+ v4-20020a5d9404000000b0079294169c7fmr4700336ion.9.1695261474592; 
+ Wed, 20 Sep 2023 18:57:54 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.52
+ y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:57:52 -0700 (PDT)
+ Wed, 20 Sep 2023 18:57:54 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>
-Subject: [PATCH v2 10/32] spl: Remove #ifdefs with BOOTSTAGE
-Date: Wed, 20 Sep 2023 19:56:59 -0600
-Message-ID: <20230921015730.1511373-11-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH v2 11/32] spl: Rename spl_load_fit_image() to load_simple_fit()
+Date: Wed, 20 Sep 2023 19:57:00 -0600
+Message-ID: <20230921015730.1511373-12-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
 References: <20230921015730.1511373-1-sjg@chromium.org>
@@ -88,110 +91,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This feature has some helpers in its header file so that its functions
-resolve to nothing when the feature is disabled. Add a few more and use
-these to simplify the code.
+We have two functions called spl_load_fit_image(), one in spl.c and one in
+spl_fit.c
 
-With this there are no more #ifdefs in board_init_r()
+Rename the second one, to indicate that it relates to simple FIT parsing,
+rather than the full version.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/spl/spl.c    | 15 +++------------
- include/bootstage.h | 26 ++++++++++++++++++++++++++
- 2 files changed, 29 insertions(+), 12 deletions(-)
+ common/spl/spl_fit.c | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
 
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 5f57b51ca2d1..8541bef00466 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -542,17 +542,11 @@ static int spl_common_init(bool setup_malloc)
- 		      ret);
- 		return ret;
- 	}
--#ifdef CONFIG_BOOTSTAGE_STASH
- 	if (!u_boot_first_phase()) {
--		const void *stash = map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR,
--					       CONFIG_BOOTSTAGE_STASH_SIZE);
--
--		ret = bootstage_unstash(stash, CONFIG_BOOTSTAGE_STASH_SIZE);
-+		ret = bootstage_unstash_default();
- 		if (ret)
--			debug("%s: Failed to unstash bootstage: ret=%d\n",
--			      __func__, ret);
-+			log_debug("Failed to unstash bootstage: ret=%d\n", ret);
- 	}
--#endif /* CONFIG_BOOTSTAGE_STASH */
- 	bootstage_mark_name(get_bootstage_id(true),
- 			    spl_phase_name(spl_phase()));
- #if CONFIG_IS_ENABLED(LOG)
-@@ -870,12 +864,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 		      gd_malloc_ptr(), gd_malloc_ptr() / 1024);
- 
- 	bootstage_mark_name(get_bootstage_id(false), "end phase");
--#ifdef CONFIG_BOOTSTAGE_STASH
--	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
--			      CONFIG_BOOTSTAGE_STASH_SIZE);
-+	ret = bootstage_stash_default();
- 	if (ret)
- 		debug("Failed to stash bootstage: err=%d\n", ret);
--#endif
- 
- 	if (IS_ENABLED(CONFIG_SPL_VIDEO_REMOVE)) {
- 		struct udevice *dev;
-diff --git a/include/bootstage.h b/include/bootstage.h
-index 685939ccffc0..38388afc259b 100644
---- a/include/bootstage.h
-+++ b/include/bootstage.h
-@@ -244,6 +244,8 @@ void show_boot_progress(int val);
- 
- #ifdef ENABLE_BOOTSTAGE
- 
-+#include <mapmem.h>
-+
- /* This is the full bootstage implementation */
- 
- /**
-@@ -364,6 +366,20 @@ int bootstage_stash(void *base, int size);
-  */
- int bootstage_unstash(const void *base, int size);
- 
-+static inline int bootstage_stash_default(void)
-+{
-+	return bootstage_stash(map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR, 0),
-+			       CONFIG_BOOTSTAGE_STASH_SIZE);
-+}
-+
-+static inline int bootstage_unstash_default(void)
-+{
-+	const void *stash = map_sysmem(CONFIG_BOOTSTAGE_STASH_ADDR,
-+				       CONFIG_BOOTSTAGE_STASH_SIZE);
-+
-+	return bootstage_unstash(stash, CONFIG_BOOTSTAGE_STASH_SIZE);
-+}
-+
- /**
-  * bootstage_get_size() - Get the size of the bootstage data
-  *
-@@ -440,6 +456,16 @@ static inline int bootstage_unstash(const void *base, int size)
- 	return 0;	/* Pretend to succeed */
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index 1bfdc0af4969..8e7d033dd1a4 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -207,7 +207,7 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
  }
  
-+static inline int bootstage_stash_default(void)
-+{
-+	return 0;	/* Pretend to succeed */
-+}
-+
-+static inline int bootstage_unstash_default(void)
-+{
-+	return 0;	/* Pretend to succeed */
-+}
-+
- static inline int bootstage_get_size(void)
+ /**
+- * spl_load_fit_image(): load the image described in a certain FIT node
++ * load_simple_fit(): load the image described in a certain FIT node
+  * @info:	points to information about the device to load data from
+  * @sector:	the start sector of the FIT image on the device
+  * @ctx:	points to the FIT context structure
+@@ -220,9 +220,9 @@ static int get_aligned_image_size(struct spl_load_info *info, int data_size,
+  *
+  * Return:	0 on success or a negative error number.
+  */
+-static int spl_load_fit_image(struct spl_load_info *info, ulong sector,
+-			      const struct spl_fit_info *ctx, int node,
+-			      struct spl_image_info *image_info)
++static int load_simple_fit(struct spl_load_info *info, ulong sector,
++			   const struct spl_fit_info *ctx, int node,
++			   struct spl_image_info *image_info)
  {
- 	return 0;
+ 	int offset;
+ 	size_t length;
+@@ -385,8 +385,7 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ 		else
+ 			return node;
+ 	} else {
+-		ret = spl_load_fit_image(info, sector, ctx, node,
+-					 &image_info);
++		ret = load_simple_fit(info, sector, ctx, node, &image_info);
+ 		if (ret < 0)
+ 			return ret;
+ 	}
+@@ -425,8 +424,8 @@ static int spl_fit_append_fdt(struct spl_image_info *spl_image,
+ 					      __func__);
+ 			}
+ 			image_info.load_addr = (ulong)tmpbuffer;
+-			ret = spl_load_fit_image(info, sector, ctx,
+-						 node, &image_info);
++			ret = load_simple_fit(info, sector, ctx, node,
++					      &image_info);
+ 			if (ret < 0)
+ 				break;
+ 
+@@ -616,7 +615,7 @@ static int spl_fit_load_fpga(struct spl_fit_info *ctx,
+ 	warn_deprecated("'fpga' property in config node. Use 'loadables'");
+ 
+ 	/* Load the image and set up the fpga_image structure */
+-	ret = spl_load_fit_image(info, sector, ctx, node, &fpga_image);
++	ret = load_simple_fit(info, sector, ctx, node, &fpga_image);
+ 	if (ret) {
+ 		printf("%s: Cannot load the FPGA: %i\n", __func__, ret);
+ 		return ret;
+@@ -741,7 +740,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ 	}
+ 
+ 	/* Load the image and set up the spl_image structure */
+-	ret = spl_load_fit_image(info, sector, &ctx, node, spl_image);
++	ret = load_simple_fit(info, sector, &ctx, node, spl_image);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -782,7 +781,7 @@ int spl_load_simple_fit(struct spl_image_info *spl_image,
+ 			continue;
+ 
+ 		image_info.load_addr = 0;
+-		ret = spl_load_fit_image(info, sector, &ctx, node, &image_info);
++		ret = load_simple_fit(info, sector, &ctx, node, &image_info);
+ 		if (ret < 0) {
+ 			printf("%s: can't load image loadables index %d (ret = %d)\n",
+ 			       __func__, index, ret);
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
