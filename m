@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 959CFE7106D
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 13:38:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D702E7106D
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 13:38:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D06B8655E;
-	Thu, 21 Sep 2023 15:37:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F250B86660;
+	Thu, 21 Sep 2023 15:37:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jT1Sooxh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YCEq2540";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C0058655E; Thu, 21 Sep 2023 15:37:57 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 33993865A6; Thu, 21 Sep 2023 15:37:58 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 033BC86380
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:37:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25A13864EE
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:37:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-79545e141c7so24089039f.0
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 06:37:54 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-79277cfc73bso40077739f.1
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 06:37:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695303473; x=1695908273; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KE48hH8WVgsd1bETkPjLJVoXHX9OnAPNe2rWgJeAdo8=;
- b=jT1Sooxh/vwRQv84ufyRRvjw2GRg8zRz+d90CPmHd95WRV1akwNRJzoaYJV7kgx2op
- SMHIO/AB3kT0e2BfECs/KzIRpcwsM1WjlU/cpt4ToGleygJguINktPB9U9md9wv/cQGi
- fua8KQCnV6f0JdSmEMMeokwcnR8CGmG8hpC1k=
+ d=chromium.org; s=google; t=1695303474; x=1695908274; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=h1kaIWonyeR9fAL3AZZRK3McWjCWyTB8pLQNEecblbE=;
+ b=YCEq2540Ano9K82jMRx2hAKqaUOSD1jo+T7j9a7bis55/sk4+U62msA78D9SZjZ/TR
+ gcEXnjzu/Vm9jzWBGA8fLJi/bHDlbXKAlxnSr31HuHjQ1LvDr7UQ4Nfp4InoBx0j6Bb+
+ 9zXmkyjaoYZIC6BInyb2vjH9eZ/PsRg4YfcYI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695303473; x=1695908273;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KE48hH8WVgsd1bETkPjLJVoXHX9OnAPNe2rWgJeAdo8=;
- b=aiZhfA5VTmX1BQ92f3sQDEE9euvBe5coi2zqTX/IVaGn9C5w9dhMxKWhosqiOXvx45
- cpJX5yGYAud3LYGty6ZxuqREQSZTStDo46zCHmB8xwUbaP01E8cFPIM31awgXzguPeBX
- FUg+1Vu4D7mQ55aqUAnbg8ca5mqC/0+OQmY7dd5GeRhIJd/z7IZ6z7hyCekZWiaQtv9Q
- cfi/kgvi5xayaIiOjA3bxEhdJRxti8vsxeG+N6pqyAy+xJCwf2o/v6773ymeugQGrTSk
- dYV+KfIaklEEHXKxIoIbP/GrvjRtWOIf9wBgExB6Miicc4GdldWip3WkCujnz0w43cS/
- g9bA==
-X-Gm-Message-State: AOJu0Yyj6ejaLMhq2qpAxrpy1r7sjnjgy7557zUJGxpnRggIsgVmfyKP
- RafKa7SkNsJeSHttDjGdNnxSzj0+wyiBaNBDBuk=
-X-Google-Smtp-Source: AGHT+IEKQBVY0Ab7KNpK37SRflm66vbQ+jATyks4YOfWl1nlLf430D5YZxbFZ1bYUTX0HpX391FX/w==
-X-Received: by 2002:a05:6602:34a:b0:790:b44f:b9ee with SMTP id
- w10-20020a056602034a00b00790b44fb9eemr4667782iou.10.1695303473367; 
- Thu, 21 Sep 2023 06:37:53 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695303474; x=1695908274;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=h1kaIWonyeR9fAL3AZZRK3McWjCWyTB8pLQNEecblbE=;
+ b=b4PaitKWjl8ExydUTIxAA+b1+PRiaJ62fK+gUKGhiQ2af58aVjV2s6R2xroBUuMK9B
+ 31eFjvANxvTZlTnbVoAsAL3ffcyZXOtwGZBom8CVliUABu1PIBdOLiC89ysELDaRHfmz
+ I8CqqnQkMwsPzjIEkfCHJ0JlI2ZZigHdejO95CcI/MojEOfb8D8qmZ1PojC8aml3esKX
+ tA3B/+ec8GktjsBu7M/Xu5EJNYwfLDkTFb96vLVkK1kxcsEKxX1kGtUyBUoy9hM0nh7N
+ 7syqLH2DtKWkWi89uxWa3xr8vv4A9T2VmFPp70r6m6tUXwT9/qRgT+L/tLBo2Tc41CFM
+ Eu7w==
+X-Gm-Message-State: AOJu0YwQfF+V7UhDxRMPJBFkqTaee2tPtVxYpFeVRwBocksYbssPRWx7
+ EbdEq50OS5ssgwKUJ8JeivylednaDPdXTlWURwk=
+X-Google-Smtp-Source: AGHT+IHQw70UNdudTgP6ZQNJB1ev9umqr7UBPrLHX9pjSI/eUiHPqEW72RFmQbevZnf1pffDzI7Qew==
+X-Received: by 2002:a6b:7412:0:b0:790:fab3:2052 with SMTP id
+ s18-20020a6b7412000000b00790fab32052mr5599555iog.5.1695303474713; 
+ Thu, 21 Sep 2023 06:37:54 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- w17-20020a5ed611000000b007835686237asm389786iom.27.2023.09.21.06.37.52
+ w17-20020a5ed611000000b007835686237asm389786iom.27.2023.09.21.06.37.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Sep 2023 06:37:52 -0700 (PDT)
+ Thu, 21 Sep 2023 06:37:54 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 0/3] x86: efi: Fixes and improvements for coreboot
-Date: Thu, 21 Sep 2023 07:37:42 -0600
-Message-ID: <20230921133748.1543007-1-sjg@chromium.org>
+Subject: [PATCH v7 1/3] fixup: Move python control earlier in Makefile
+Date: Thu, 21 Sep 2023 07:37:43 -0600
+Message-ID: <20230921133748.1543007-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
+In-Reply-To: <20230921133748.1543007-1-sjg@chromium.org>
+References: <20230921133748.1543007-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,46 +88,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This little series fixes various bugs and annoyances in coreboot and
-coreboot64.
+Move this control into the common area of the main Makefile, so it
+applies to non-build rules as well. This allows 'make mrproper' to handle
+python files as it should.
 
-With this both coreboot and coreboot64 start up and work reasonably well
-on Brya (x86 Chromebook) and U-Boot can boot common Linux distros.
+This should be squashed into:
 
-- Make coreboot64 debug UART start reliably
-- Avoid the long USB-init delay on startup
-- Correct the timer speed on coreboo64
-- Fix a bootstd cros bug (will likely be squashed into another patch)
-- Fix the terribly slow console scrolling
+   65a33eba10d Allow Python packages to be dropped
 
-With v2 I have also brought in some lost x86 patches so they are all in
-one series.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
 Changes in v7:
 - Add new fixup patch to move python control earlier in Makefile
-- Add docs about how USB keyboard works on coreboot
-- Drop patches previously applied
-- Rebase to x86/next
 
-Changes in v5:
-- Make use of the uSE_PREBOOT mechanism
+ Makefile | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
 
-Changes in v2:
-- Add new patch
-- Add new patch
-
-Simon Glass (3):
-  fixup: Move python control earlier in Makefile
-  x86: coreboot: Drop USB init on startup
-  x86: doc: Update summaries and add links
-
- Makefile                         | 17 +++++++++--------
- arch/x86/cpu/coreboot/Kconfig    |  1 +
- arch/x86/cpu/coreboot/coreboot.c |  4 ----
- doc/arch/x86/x86.rst             | 17 ++++++++++-------
- doc/board/coreboot/coreboot.rst  |  7 +++++++
- 5 files changed, 27 insertions(+), 19 deletions(-)
-
+diff --git a/Makefile b/Makefile
+index 264f31bfe473..efbaf434df48 100644
+--- a/Makefile
++++ b/Makefile
+@@ -485,6 +485,15 @@ export RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o    \
+ export RCS_TAR_IGNORE := --exclude SCCS --exclude BitKeeper --exclude .svn \
+ 			 --exclude CVS --exclude .pc --exclude .hg --exclude .git
+ 
++export PYTHON_ENABLE
++
++# This is y if U-Boot should not build any Python tools or libraries. Typically
++# you would need to set this if those tools/libraries (typically binman and
++# pylibfdt) cannot be built by your environment and are provided separately.
++ifeq ($(NO_PYTHON),)
++PYTHON_ENABLE=y
++endif
++
+ # ===========================================================================
+ # Rules shared between *config targets and build targets
+ 
+@@ -646,20 +655,12 @@ export CFLAGS_NON_EFI	# Compiler flags to remove when building EFI app
+ export EFI_TARGET	# binutils target if EFI is natively supported
+ 
+ export LTO_ENABLE
+-export PYTHON_ENABLE
+ 
+ # This is y if LTO is enabled for this build. See NO_LTO=1 to disable LTO
+ ifeq ($(NO_LTO),)
+ LTO_ENABLE=$(if $(CONFIG_LTO),y)
+ endif
+ 
+-# This is y if U-Boot should not build any Python tools or libraries. Typically
+-# you would need to set this if those tools/libraries (typically binman and
+-# pylibfdt) cannot be built by your environment and are provided separately.
+-ifeq ($(NO_PYTHON),)
+-PYTHON_ENABLE=y
+-endif
+-
+ # If board code explicitly specified LDSCRIPT or CONFIG_SYS_LDSCRIPT, use
+ # that (or fail if absent).  Otherwise, search for a linker script in a
+ # standard location.
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
