@@ -4,77 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74217E7D0A6
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 19:57:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10AA5E7D0A2
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 20:29:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E80B38667A;
-	Thu, 21 Sep 2023 21:57:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C83386459;
+	Thu, 21 Sep 2023 22:29:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arvanta.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lj/aXzhp";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCFB18667B; Thu, 21 Sep 2023 21:57:18 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8636586405
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 21:57:16 +0200 (CEST)
+ id 7CB9786466; Thu, 21 Sep 2023 22:29:37 +0200 (CEST)
+Received: from fx.arvanta.net (93-87-244-166.static.isp.telekom.rs
+ [93.87.244.166]) by phobos.denx.de (Postfix) with ESMTP id 49B33863DE
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 22:29:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-59c0b5f984aso16992587b3.2
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 12:57:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695326235; x=1695931035; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xZLs2j1AOwoDI3JBy2yvWrNXnmwfZ1OEovRYl5wITGI=;
- b=lj/aXzhpGnty1OMynQxKGeaQf42AanHv9Qv8b949N8UE8yPZHpKy2aHCYY4mF91kgc
- /gfmMTPB0Y20tdOncfJtcxDJuDluMpNqhq5MZda1kasaj2riNNlCBOsPwE5U0f3Apwdy
- kIg41i1r3WQIzj06jXMdkv02+ghj/6XnKcQ5E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695326235; x=1695931035;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xZLs2j1AOwoDI3JBy2yvWrNXnmwfZ1OEovRYl5wITGI=;
- b=FVXviS2iLkweZ0u0RE/FKfjpXgQFKDFfgCv6uyydK/d6iBb0FvWT4vjXIrvrKiyM1b
- o3zdljWEEnuzrWOArMlyJldV1UDzr2dwQ1jBsZ7rGjD5PbElKCWdOuCRskJ9ZjB4Zf9z
- yO43ZpBbSANkk7X0NkwDzxR/4eOeKaXvpK1EWvULrxG3u0Tb1VJrYXfi8vznrAV44vQA
- ty+FfHEr/fUQtJBNoQnLAC67W41X7YJ6PwfuE4okTcBZDRyHirHZclqERjOadLppnwO4
- fPplOxgKepaNlnEML5+rA885L8WGKVCAAg2VhgAGxERYAGPSBfHtaN+dQTo13nGjsQsi
- 2aTQ==
-X-Gm-Message-State: AOJu0Yz8gZH8avLj1SptbKewQAqhw+h3P5gGS122CEuG8QIIMGcAEYLP
- aRYHS3DWkiq5LfcZzlxMdvGecQ==
-X-Google-Smtp-Source: AGHT+IErtqTzkF96lhqby9oscQl9OjinIwD77yziyVMCkvSjhZkgKktkZfgQT+ELRua2EQJuyOdBHw==
-X-Received: by 2002:a81:834c:0:b0:59c:678:7a32 with SMTP id
- t73-20020a81834c000000b0059c06787a32mr6870181ywf.29.1695326235276; 
- Thu, 21 Sep 2023 12:57:15 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-46ac-83a0-07b5-e9a6.res6.spectrum.com.
- [2603:6081:7b00:6400:46ac:83a0:7b5:e9a6])
- by smtp.gmail.com with ESMTPSA id
- m23-20020a0dca17000000b0057d24f8278bsm491772ywd.104.2023.09.21.12.57.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Sep 2023 12:57:14 -0700 (PDT)
-Date: Thu, 21 Sep 2023 15:57:13 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com
-Subject: Re: [PULL] u-boot-riscv/master
-Message-ID: <20230921195713.GY305624@bill-the-cat>
-References: <ZQueAcAG6ODgtTn1@swlinux02>
+ dmarc=none (p=none dis=none) header.from=arvanta.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=mps@arvanta.net
+Received: from m1 (m1pro.arvanta.net [10.5.1.5])
+ by fx.arvanta.net (Postfix) with ESMTP id 3628D7E3F;
+ Thu, 21 Sep 2023 22:29:08 +0200 (CEST)
+Date: Thu, 21 Sep 2023 22:29:33 +0200
+From: Milan =?utf-8?Q?P=2E_Stani=C4=87?= <mps@arvanta.net>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] riscv: set fdtfile on VisionFive 2
+Message-ID: <20230921202933.GA22421@m1>
+References: <20230907112128.342315-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lDJbEY7mYSd5mwOX"
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <ZQueAcAG6ODgtTn1@swlinux02>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20230907112128.342315-1-heinrich.schuchardt@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,55 +51,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 2023-09-07 at 13:21, Heinrich Schuchardt wrote:
+> Multiple revisions of the StarFive VisionFive 2 board exist. They can be
+> identified by reading their EEPROM.
+> 
+> Linux uses two differently named device-tree files. To load the correct
+> device-tree we need to set $fdtfile to the device-tree file name that
+> matches the board revision.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 
---lDJbEY7mYSd5mwOX
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Sep 21, 2023 at 09:36:01AM +0800, Leo Liang wrote:
-
-> Hi Tom,
->=20
-> The following changes since commit b9b83a86f0e84e837191db120c279a9cc0e343=
-4b:
->=20
->   Merge branch 'master' of https://source.denx.de/u-boot/custodians/u-boo=
-t-sh (2023-09-17 09:25:42 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
->=20
-> for you to fetch changes up to 43177705ab29ed1ccca970096de1ef3c6095e7e6:
->=20
->   board: visionfive2: Fixup memory size passed to kernel (2023-09-20 20:3=
-0:30 +0800)
->=20
-> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
--riscv/-/pipelines/17777
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---lDJbEY7mYSd5mwOX
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUMoBkACgkQFHw5/5Y0
-tyxFSQwAqsyjzIt3IZwiEf+7JHSzDzg4iBZmrcKmeRhIYJC4dxCHCG8YHnSzAWEa
-kjCdJB/QRBABuunbtAYeBHA6QachPjIR6m+XrpEa7rPUh3R4SvEQ1OwJJ1cJsUl1
-YFx4XJuJpLJZSarj3kLcVNmSJ47QedURW7qxpccLpMXT/ydMjApLfrRs9AN7e0nA
-RdoNfs+sIecyeOdMGCXCelw5kWwulOTpgMk8iQrVGiOF5nDtCcUF0/FE8lJlMAQm
-nHtq3PC/lqEennEbN8MGE8Z3BQeWCk1zDty985Maa1STVwci7V07AwAKMPWLk2Se
-QENopckl0GlihCOKJQhN2iTws/5K04eGCp/dVL7Irz3/nihQkkxm4DqeKHS6AgFm
-vPswxOHX6wlNTwnYTfetPu9HkGKs9Eozfmu74nKgvHesH9+qSqf0c5WVyqfV9NOm
-LXSVhMyZ1jH5u2Z2LqfwU3q8w3t7JdQvRAKGFRtfb82LMAMb63eSNxh5kQyXO0nn
-EOxll/GV
-=UkbX
------END PGP SIGNATURE-----
-
---lDJbEY7mYSd5mwOX--
+Tested-by: Milan P. Stanić <mps@arvanta.net>
+> ---
+>  arch/riscv/Kconfig                            |  1 +
+>  .../visionfive2/starfive_visionfive2.c        | 43 ++++++++++++++++++-
+>  2 files changed, 42 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+> index 6771d8d919..1c62c2345b 100644
+> --- a/arch/riscv/Kconfig
+> +++ b/arch/riscv/Kconfig
+> @@ -26,6 +26,7 @@ config TARGET_SIFIVE_UNMATCHED
+>  
+>  config TARGET_STARFIVE_VISIONFIVE2
+>  	bool "Support StarFive VisionFive2 Board"
+> +	select BOARD_LATE_INIT
+>  
+>  config TARGET_TH1520_LPI4A
+>  	bool "Support Sipeed's TH1520 Lichee PI 4A Board"
+> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
+> index d609262b67..05d8d2d657 100644
+> --- a/board/starfive/visionfive2/starfive_visionfive2.c
+> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
+> @@ -5,14 +5,20 @@
+>   */
+>  
+>  #include <common.h>
+> -#include <asm/io.h>
+> -#include <asm/sections.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+> +#include <env.h>
+> +#include <asm/arch/eeprom.h>
+> +#include <asm/io.h>
+> +#include <asm/sections.h>
+>  #include <linux/bitops.h>
+>  
+>  #define JH7110_L2_PREFETCHER_BASE_ADDR		0x2030000
+>  #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
+> +#define FDTFILE_VISIONFIVE2_1_2A \
+> +	"starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
+> +#define FDTFILE_VISIONFIVE2_1_3B \
+> +	"starfive/jh7110-starfive-visionfive-2-v1.3b.dtb"
+>  
+>  /* enable U74-mc hart1~hart4 prefetcher */
+>  static void enable_prefetcher(void)
+> @@ -33,6 +39,31 @@ static void enable_prefetcher(void)
+>  	}
+>  }
+>  
+> +/**
+> + * set_fdtfile() - set the $fdtfile variable based on the board revision
+> + */
+> +static void set_fdtfile(void)
+> +{
+> +	u8 version;
+> +	const char *fdtfile;
+> +
+> +	version = get_pcb_revision_from_eeprom();
+> +	switch (version) {
+> +	case 'a':
+> +	case 'A':
+> +		fdtfile = FDTFILE_VISIONFIVE2_1_2A;
+> +	        break;
+> +
+> +	case 'b':
+> +	case 'B':
+> +	default:
+> +		fdtfile = FDTFILE_VISIONFIVE2_1_3B;
+> +	        break;
+> +	};
+> +
+> +	env_set("fdtfile", fdtfile);
+> +}
+> +
+>  int board_init(void)
+>  {
+>  	enable_caches();
+> @@ -41,6 +72,14 @@ int board_init(void)
+>  	return 0;
+>  }
+>  
+> +int board_late_init(void)
+> +{
+> +	if (CONFIG_IS_ENABLED(ID_EEPROM))
+> +		set_fdtfile();
+> +
+> +	return 0;
+> +}
+> +
+>  void *board_fdt_blob_setup(int *err)
+>  {
+>  	*err = 0;
