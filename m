@@ -4,68 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAE19CD4939
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:06:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C56CD4938
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:06:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 655F486D4C;
+	by phobos.denx.de (Postfix) with ESMTP id D909C86D25;
 	Thu, 21 Sep 2023 03:06:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hJXk1P5J";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Ubjdkddf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B739F86D47; Thu, 21 Sep 2023 03:06:02 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id B60B586D44; Thu, 21 Sep 2023 03:06:02 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF95B86D1A
+ by phobos.denx.de (Postfix) with ESMTPS id D039086D1D
  for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:05:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-59bc956b029so5211587b3.2
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-59ea6064e2eso5589187b3.2
  for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:05:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695258357; x=1695863157; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1695258357; x=1695863157; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=75Xzcy99Dw9zOlKHwNcPtMNnY1hP3R/rBUmeNz7kCSI=;
- b=hJXk1P5JwThKS4nHqyrQAxLKvr08ZYk0dmnxkY1CcEXOJfACii15qlE4ps+cUHA3Tm
- oJR+54atmRCw8ovnNjhiUtFNkg8ZSuuK4f0JWyQNbauvLAssg6ufdjmteeN5A96hlQSL
- DfRPsbs1HC8zwDKkS+gHZMf1dvHLcGMPXpilA=
+ bh=LInRrprO9M0Fwwnl+GVZa6Zg6CvfEdCFXZtcLjYUS18=;
+ b=UbjdkddfBb6eT4lciOZ/9/O7aclX7Pnaj+lNnPmaQROz6conaVoL3iQoA3XPV3vO69
+ MMUD+eK01j7fTjcydsmzwvWFFHO6qYD7M5O7UHQ/vroLgs+I2xDAwFa7mAukhBz58DnU
+ uKETbUWeBlUpKTylKMTUahMTzRmdFTkpMRNYFzT25IhB9/SB28EsYTWBcC/+8gZRQkom
+ pXktEipHuFN9bjVCQiIXRtX4E0MPwJZYmRjg7+uRo03WK2nrnvMeufZ5DCHEhsoHCBiI
+ XwYUxuXCHsC8mRwpMRTeEXKOEg9MSnfANYijfqWc53fFzIkZsvQr0XmCfO3w7O9Jqypu
+ IdkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695258357; x=1695863157;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=75Xzcy99Dw9zOlKHwNcPtMNnY1hP3R/rBUmeNz7kCSI=;
- b=u3QubKNvxhCZ4gxANKLUi7Jg/7zcdifXbx98XKBtCjlE3lrfjD19cOkGdpjK6RVffN
- LE0QCaBaVLXjRIi0VinC9ep+FN09UvD+zE174bXBVCcX/hlSLmt8wMhq3mifXEQDgUV8
- vLUVdWawHseIhEXhWBo0Ndtwtt5Z/E8S51/4ekBa0dAf7Rg369z2IHlbhYt+lxjcdGsp
- FWJPFMg+1GDvPZ8OolCCq9t60JDa5aPrx52rJd7xfvWmp4tZmQLMk7+IfnYEkIXtPt6I
- 6ALgc1SXLAdXwhK/HhXZQAJseGFKuvelQCxE9xYU3RKmYripkBpJLXXRq1ZJbmudB5L2
- osww==
-X-Gm-Message-State: AOJu0YxfDngaMEelHlRd6spYkRFIbcKeDmenrpDvDK3k2esSPqkx88o2
- t0n5Uw/zhRq81GTWnyVooBm9BXfREFFPQY3X5g+nCEMrT/URNapXbgA=
-X-Google-Smtp-Source: AGHT+IGX3rL62eIwzOj8xZx42MKMuaG9BqryqDifDOiWL3OxNxAKHoZs6AY+eHZaxDJUKmc2qw6pxMby5bSPjIvnO6o=
-X-Received: by 2002:a0d:c085:0:b0:58c:b8b4:2785 with SMTP id
- b127-20020a0dc085000000b0058cb8b42785mr4149276ywd.45.1695258357399; Wed, 20
+ bh=LInRrprO9M0Fwwnl+GVZa6Zg6CvfEdCFXZtcLjYUS18=;
+ b=K5DQmrjerWY5IlIVLEYMoTSaQQBSxJK0+A8s21ftc8lL7sjBPM4F99bVBEURuwi9oZ
+ BIq//lq9nEaLQcd2eNo6O0vxXOOuhptcTOvB1mgkovrF6rbgLwHFKJbCeG1ut04DaK7H
+ 3Yinq/hrgyRjpv/M3Y1dW+ozTEwoJkYgLw0OZBWGNtFzboHVfQoj5oq+QlPQ8ETnSvZD
+ pyoMvQhUqhLxm1y/ulEFSZxAFXTncPm0c/p0S97CMVfzZPHJ1sPqndIGcMVf9NuJFKpJ
+ uqHGfRQXpngrIxgISZ+Lzzxgot5PTYNRMPGwThklhcOm/s1dcj4Mj20/21tm9GxwWcFo
+ 15/A==
+X-Gm-Message-State: AOJu0YxfUFEhsrmtkeph1AOyb4HRSDNuJRayp+AJRVpOxcX72bMg3S3W
+ C6i5jvC5xgkT3QPeFFFz3Ckz6z6DeNIXaOoCVVq9+w==
+X-Google-Smtp-Source: AGHT+IFgsj3tKt0jo+XmNzxPv8d6K7FMQBWTJFXMDnPX5dD511/YuPXgm9TmALGQNlyLHAdv+zHiNETpAwZFjyNvZ2g=
+X-Received: by 2002:a0d:dfd8:0:b0:59a:b7b2:5f02 with SMTP id
+ i207-20020a0ddfd8000000b0059ab7b25f02mr4227176ywe.18.1695258357413; Wed, 20
  Sep 2023 18:05:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
- <20230919113705.109639-3-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20230919113705.109639-3-rasmus.villemoes@prevas.dk>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Sep 2023 19:02:58 -0600
-Message-ID: <CAPnjgZ2BF7puarV6UNRuEjwXxtZYN27WD_0QKX-qrYxdku+CNA@mail.gmail.com>
-Subject: Re: [PATCH 2/4] binman: test: rename 275_fit_align.dts ->
- 275_fit_align_external.dts
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Kever Yang <kever.yang@rock-chips.com>
+References: <20230911163536.20735-1-avromanov@salutedevices.com>
+ <20230911163536.20735-7-avromanov@salutedevices.com>
+In-Reply-To: <20230911163536.20735-7-avromanov@salutedevices.com>
+From: Simon Glass <sjg@google.com>
+Date: Wed, 20 Sep 2023 19:03:12 -0600
+Message-ID: <CAPnjgZ2WSTE46=pA+44nYB4BmtyyTYkRU3WPxguEfsUxpFnRFA@mail.gmail.com>
+Subject: Re: [PATCH v2 6/8] drivers: introduce Meson Secure Monitor driver
+To: Alexey Romanov <avromanov@salutedevices.com>
+Cc: neil.armstrong@linaro.org, narmstrong@baylibre.com, 
+ takahiro.akashi@linaro.org, ilias.apalodimas@linaro.org, post@lespocky.de, 
+ marex@denx.de, msuchanek@suse.de, sughosh.ganu@linaro.org, 
+ jh80.chung@samsung.com, paul.barker@sancloud.com, u-boot-amlogic@groups.io, 
+ u-boot@lists.denx.de, kernel@sberdevices.ru
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,19 +88,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 19 Sept 2023 at 05:37, Rasmus Villemoes
-<rasmus.villemoes@prevas.dk> wrote:
+On Mon, 11 Sept 2023 at 10:35, Alexey Romanov
+<avromanov@salutedevices.com> wrote:
 >
-> In preparation for adding a test case for fit,align without
-> fit,external-offset present, rename the existing test case and
-> corresponding file.
+> This patch adds an implementation of the Meson Secure Monitor
+> driver based on UCLASS_SM.
 >
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 > ---
->  tools/binman/ftest.py                                         | 4 ++--
->  .../test/{275_fit_align.dts => 275_fit_align_external.dts}    | 0
->  2 files changed, 2 insertions(+), 2 deletions(-)
->  rename tools/binman/test/{275_fit_align.dts => 275_fit_align_external.dts} (100%)
+>  MAINTAINERS           |   1 +
+>  drivers/sm/Kconfig    |   7 ++
+>  drivers/sm/Makefile   |   1 +
+>  drivers/sm/meson-sm.c | 198 ++++++++++++++++++++++++++++++++++++++++++
+>  include/meson/sm.h    |  19 ++++
+>  5 files changed, 226 insertions(+)
+>  create mode 100644 drivers/sm/meson-sm.c
+>  create mode 100644 include/meson/sm.h
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
