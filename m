@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F95AE7D0AE
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 21:58:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03709E7D0AF
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 22:00:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E94A86459;
-	Thu, 21 Sep 2023 23:58:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0CB3F86410;
+	Fri, 22 Sep 2023 00:00:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lSMS1oqk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PXuDXw20";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C67E86466; Thu, 21 Sep 2023 23:58:43 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 8E48D8641B; Fri, 22 Sep 2023 00:00:04 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E4C18603A
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 23:58:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ADD2486400
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:00:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng.cn@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-99c1c66876aso177424466b.2
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 14:58:41 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-532784c8770so1778657a12.1
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:00:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695333521; x=1695938321; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695333602; x=1695938402; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=663oj4wHnabK0pp7sOx4Lg2LuhN7OFgWWhmy5LHGsug=;
- b=lSMS1oqk08mdOg27gaeVIi+ANLpJQqm1lIek7BXEwnMlgHmQuwZHtlMQjYWFKrTAFa
- 4gbU8XjNUEj07c945QJi1/+UsbsboKENOHKQDHv+jc5UQzjdMrRAXseO+grkVr3+cpoo
- Re3HRnAJon+UZM5ugf+3VBnwtj2vuR1fEkgOVUYl/uQfTsWf0aQdXPhqCU4IbUxw7k9T
- /aTxK3axWS3Z6J/hAXJFamYftI2mVl1b0A5XbBblEDnizUvd+mZ96cmzmYu9UQg/Wtgw
- Dx0yxV9K5XiA2Z+jaJ0/gm6XVLF5mEQVpYSSKMFbjjCi6ATxqUU+uciZBf8WwZcesKd/
- SPPw==
+ bh=6MrTitYGl8M+zZAeSZtP5lALx4uOzN0cdKYdzZA3UTg=;
+ b=PXuDXw20/Vo+KLuFmMFuKLEBWiINlYnlZOpx3JpiZaOWXfDVY1caambP4yrxFRbRCc
+ pin1lwcM8dn33s2DVjGxxbeI4E0S1XpcT0czv7znnGon4Izyb05lL31jQQbcC6If+Dyj
+ 6Zg9gWKWm14RFgCzj6OuuDLbdJk2Zypk0nPV3dbZAnzMPZBgXRRqXWcm8pesyymhevXC
+ ispG7EN7oKGNDcIuz8ab0hw+yrlCppu2k3TD11dIiy+sfBTxpCA5wtbKOI/XeNgrqa1S
+ N6SebpJCU0FNP8wAUFXuH2gK6yjk/fC4ZCEA9b8Iykg+XM8DsCDO1iyDy/aJXUgG4pWg
+ AvqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695333521; x=1695938321;
+ d=1e100.net; s=20230601; t=1695333602; x=1695938402;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=663oj4wHnabK0pp7sOx4Lg2LuhN7OFgWWhmy5LHGsug=;
- b=R+M/FiBvRWJpSwcccYYpThd4brXT5FsJ155kczCTjGq80o5rQjsaAvmkoTadto0iY5
- LYXk9/Vj0yatFKMmV9Nz14swMT+5acstS3jB9qZjNTXO21oyPwyjxsKfoKkNauhzHPCC
- AAlbLGdD/l8wHD3/8JWeebZ0qPtoaCGLiy4wY0dy9zJKoyAfeLiCSttL832/jnfB27TA
- ugJ0aUrYndH+iBjRrSlprePaOkjR0qMC+HYmTtCTeRV6pqQ/+7D054Jb+CQ+M2zE6YXi
- G7eCmUbctTKdFhxa3y1G23yWqZVIEioN7K+OKzTPgFiGNwJBifN7v4o+g12sr79sVXiW
- FiiA==
-X-Gm-Message-State: AOJu0YxdK75zXePT0ylFTuP+Tks1q6TQWkjaAGgDCIm4DA0wD3ikd4Sy
- nihBhcm0mP7L0os5OvFX1yrcqx1m8M9NHcFJoqs=
-X-Google-Smtp-Source: AGHT+IGOcQCKGEKauX+EqSe5fuCYsZXZXRwiVE51Wqm6cv/lAUsiPrRr/UbttFnkFJc5f41ss4SH/tsk2QuCZiP7btE=
-X-Received: by 2002:a17:906:2cc:b0:9a5:b878:7336 with SMTP id
- 12-20020a17090602cc00b009a5b8787336mr6937393ejk.7.1695333520860; Thu, 21 Sep
- 2023 14:58:40 -0700 (PDT)
+ bh=6MrTitYGl8M+zZAeSZtP5lALx4uOzN0cdKYdzZA3UTg=;
+ b=tBzGS4wzrTK+/LH23oI6Yct5CgLkLtHjKeydKvLpVPMxfSVLJdAGC8RsyOpKvFJd8r
+ yUZZ4jCWNCSB2z5OVtI/H9cF4HZ2dWr0KM1f/VR3xLHrI+uib7VWDnBYLGYiX6nrarzT
+ 61CazvuyJJ9D43F/uvo1LGSMP8SpopsA2p4JtPbMcFhlTqyhPRZd69vhbiVHcNTGeV7q
+ HvQY/Mr4xk3ZfR4wSWLhYmGUBiVMJVMr4vjKc2XafoPMHHl+lXGKzWv0J9tBOOOEOm6j
+ 2klJQEwUFw/TODmtBfYdlC6M31A+ig0mmUxfOpSgQplAzsl5Wc+3KK8AJGgKZGJ9BxHK
+ YySw==
+X-Gm-Message-State: AOJu0YzloLgiHjTDWOZDn4Bv0M/EUNoIf2dRYzzlZF6A5GlAefPdI4u2
+ ix4nVCDa/ydPMqHhrbfusTAC5qsRy53Ex/HlKGI=
+X-Google-Smtp-Source: AGHT+IG4jirPDzTndqdS24l+6kWEja0OaBYLoFDcx0+el2RcYJJTI7+ATROwrnAJgKIx8rqplTOA8utncIg5kUG7+eM=
+X-Received: by 2002:a17:906:300e:b0:9a1:bebc:8282 with SMTP id
+ 14-20020a170906300e00b009a1bebc8282mr6014175ejz.32.1695333601916; Thu, 21 Sep
+ 2023 15:00:01 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230921133748.1543007-1-sjg@chromium.org>
- <20230921133748.1543007-2-sjg@chromium.org>
-In-Reply-To: <20230921133748.1543007-2-sjg@chromium.org>
+ <20230921133748.1543007-3-sjg@chromium.org>
+In-Reply-To: <20230921133748.1543007-3-sjg@chromium.org>
 From: Bin Meng <bmeng.cn@gmail.com>
-Date: Fri, 22 Sep 2023 05:58:29 +0800
-Message-ID: <CAEUhbmVoYz+pu5vtPz3CvQqctp1_E0yDmpFFsPkV3ZLebt=GeQ@mail.gmail.com>
-Subject: Re: [PATCH v7 1/3] fixup: Move python control earlier in Makefile
+Date: Fri, 22 Sep 2023 05:59:50 +0800
+Message-ID: <CAEUhbmWsRtKceAU305KA+v+uMn_rgX++RF-7j_SPPj-fTuc3wA@mail.gmail.com>
+Subject: Re: [PATCH v7 2/3] x86: coreboot: Drop USB init on startup
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -91,23 +91,29 @@ X-Virus-Status: Clean
 On Thu, Sep 21, 2023 at 9:37=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
 e:
 >
-> Move this control into the common area of the main Makefile, so it
-> applies to non-build rules as well. This allows 'make mrproper' to handle
-> python files as it should.
+> This is very annoying as it is quite slow on many machines. Also, U-Boot
+> has an existing 'preboot' mechanism to enable this feature if desired.
 >
-> This should be squashed into:
+> Drop this code so that it is possible to choose whether to init USB or
+> not.
 >
->    65a33eba10d Allow Python packages to be dropped
+> Use the existing USE_PREBOOT mechanism instead.
 >
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >
 > Changes in v7:
-> - Add new fixup patch to move python control earlier in Makefile
+> - Add docs about how USB keyboard works on coreboot
 >
->  Makefile | 17 +++++++++--------
->  1 file changed, 9 insertions(+), 8 deletions(-)
+> Changes in v5:
+> - Make use of the uSE_PREBOOT mechanism
+>
+>  arch/x86/cpu/coreboot/Kconfig    | 1 +
+>  arch/x86/cpu/coreboot/coreboot.c | 4 ----
+>  doc/board/coreboot/coreboot.rst  | 7 +++++++
+>  3 files changed, 8 insertions(+), 4 deletions(-)
 >
 
-squashed into "65a33eba10d Allow Python packages to be dropped" on
-u-boot-x86/next, thanks!
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+
+series applied to u-boot-x86/next, thanks!
