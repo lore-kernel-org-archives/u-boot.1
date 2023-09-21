@@ -4,82 +4,142 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D100E7108F
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67742E7108E
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FB9C86466;
-	Thu, 21 Sep 2023 17:43:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DBCD386B35;
+	Thu, 21 Sep 2023 17:43:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=wiedemann-group.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GbWBj7v9";
+	dkim=pass (1024-bit key; unprotected) header.d=stwmm.onmicrosoft.com header.i=@stwmm.onmicrosoft.com header.b="U+E49u5P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27A42864AA; Thu, 21 Sep 2023 17:43:19 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 506E986661; Thu, 21 Sep 2023 14:29:59 +0200 (CEST)
+Received: from mail.sensor-technik.de (mail.sensor-technik.de [80.150.181.156])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10B0A8642C
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:43:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F48E865ED
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 14:29:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=wiedemann-group.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-59e7fb87f1cso14162117b3.2
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:43:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695310996; x=1695915796; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QpzON6IagT1zSY96gsHe2l8FYeET4UgspmiPTs/L51M=;
- b=GbWBj7v9kUhkGCOVx/oxo1mPwIrt684T9H/kEjME7zMqoVCfCPqwV3LjjU5tp5GHM5
- HINygqrIp6dEU5Ent1wP71QI/N3d8DIKKiJYliX1X8AqhyX0/Zcximkyo8Nn4htouwaR
- KwJHu3NlFeDvtCUEcm+fEFe12J9zcHDygLSUo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695310996; x=1695915796;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QpzON6IagT1zSY96gsHe2l8FYeET4UgspmiPTs/L51M=;
- b=AY9tYXT8nsd1R7NN5rA6uK1tnaG+UPBbkuuYC+hvHzyyahGArmcF/uY0Xp/Phntozz
- CIkyVh2idDWMAVHYOZIZ4qTze6nC1XkzmQKjFYvAqRdEeJ5OY40koZNhwhN//1GeeI3N
- s8LKufP7KK5kMEbDT1umD0BoeK681hO8Xr8idoaM1YVWd/+ggx8Eap5omSMa5ADuGF91
- Qd3gI73VjHe9Ok4fHiF77ditefDeh4OOzQLTm+PbJmqUsuX9us7EtZm8VWrEIA3SyDgv
- ER8J5viPY2CB7GABJezkjfkmQl+JVwKVdjSiJghp2NlGfCTZ+j2fr3mQpwvWHWpZOmFA
- +Y2Q==
-X-Gm-Message-State: AOJu0YyxQrmtzOl/g0/Iy9lyPC3X+0Jz22Ost8HDCFxvAJDsmAl/DUbG
- /ZavbXI0L9gA6VCD2hTSpIPYBg==
-X-Google-Smtp-Source: AGHT+IGzd9bLlE9PYLBCZhv7EOSLvCWBPIuvwFQ8U/dAuY6hG3lwKU9RtmdHEHIEM/YILLz1Q5OVIg==
-X-Received: by 2002:a81:9445:0:b0:586:a684:e7ba with SMTP id
- l66-20020a819445000000b00586a684e7bamr5518787ywg.39.1695310995783; 
- Thu, 21 Sep 2023 08:43:15 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-46ac-83a0-07b5-e9a6.res6.spectrum.com.
- [2603:6081:7b00:6400:46ac:83a0:7b5:e9a6])
- by smtp.gmail.com with ESMTPSA id
- v134-20020a81488c000000b00570253fc3e5sm380175ywa.105.2023.09.21.08.43.15
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Sep 2023 08:43:15 -0700 (PDT)
-Date: Thu, 21 Sep 2023 11:43:13 -0400
-From: Tom Rini <trini@konsulko.com>
-To: mchitale@ventanamicro.com
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Anderson <sean.anderson@seco.com>
-Subject: Re: [PATCH v1 2/2] spl: Add support for booting from ESP
-Message-ID: <20230921154313.GT305624@bill-the-cat>
-References: <20230914100821.755904-1-mchitale@ventanamicro.com>
- <20230914100821.755904-3-mchitale@ventanamicro.com>
- <20230914162924.GA305624@bill-the-cat>
- <06ea71aab661cf0535bcef98dad2aba61d1884f1.camel@ventanamicro.com>
+ spf=pass smtp.mailfrom=alex.michel@wiedemann-group.com
+Received: from stwz1.stww2k.local (HELO stwz1.wiedemann-group.com)
+ ([172.25.209.3])
+ by mail.sensor-technik.de with ESMTP; 21 Sep 2023 14:29:57 +0200
+Received: from stwz1.stww2k.local (localhost [127.0.0.1])
+ by stwz1.wiedemann-group.com (Postfix) with ESMTP id 001F2B5ABC
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 14:29:57 +0200 (CEST)
+Received: from mail.wiedemann-group.com (stwexm.stww2k.local [172.25.2.110])
+ by stwz1.wiedemann-group.com (Postfix) with ESMTP id D7471B5AAC
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 14:29:47 +0200 (CEST)
+Received: from stwexm.stww2k.local (172.25.2.110) by stwexm.stww2k.local
+ (172.25.2.110) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.32; Thu, 21 Sep
+ 2023 14:29:47 +0200
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (104.47.17.174)
+ by stwexm.stww2k.local (172.25.2.110) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2375.32 via Frontend Transport; Thu, 21 Sep 2023 14:29:47 +0200
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OL5BRa89HvNHLgyoolPsQS/kbv7OmRagKfJHpDsqMJ5GcjXHZfg9CS7TTRKNGXm4gKB9f4IjS8vFO5TwHfqIMfZwLHbfVb5ywZ3dvNNoKIWXHPrXxs6NB5LU52yhfMRCnctZAaVM1XXPE4t6FymPVnw7fE2Awagt2oa2kbBjNygu/+XRP3CZWvMTIAlGydu8lDu2q8ranvyV+aFJi9/hq1YDOFMTuHYNXH6M0/LAi7X0bh4O+aB8Pv1rrS1Y/P/1onKg1YX3a8Oy0aBj5d7NQhwdPHaFU5VAUYK5ZFjvctrFv++wttxx2bmCybs8n41T6r7TInLaMnOPfFUiYbOzLw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KXdKYog1nr2XAoLY9IxQ0GQPjeRy3XrpilbzRa9mrCM=;
+ b=eU5MXn3gt8aWxEWE2lsK6667zIljtTM4qahdW8R0a5SqtEcOr+WlI32ucGb8/qoCqEVXXWeXLzoa2YrGwSpu99/m+taHo5ebmu/Xb7e6UIlAiE7vh56PrTFnzBjMIXB64pgPg9hUGnK5LmN2dyguluuvK+tsCOyLkWbbLEQubZ2ZsC7p6kQJDFhPUBvE84aP8MqabdikLGYdb3InuGTWwcxqW2jjqdAsk7qc9/JtVx6V+ZrMTppfV+0mfazsocFMNfC4YzI/RDPBSQPI3CBw/zr6iFm/QyeUuRa6uZghGeU9b/P0PUQSdnVTB1Oz/og0XCr87W0mBKLfeNxNtk3NoA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wiedemann-group.com; dmarc=pass action=none
+ header.from=wiedemann-group.com; dkim=pass header.d=wiedemann-group.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stwmm.onmicrosoft.com; 
+ s=selector1-stwmm-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KXdKYog1nr2XAoLY9IxQ0GQPjeRy3XrpilbzRa9mrCM=;
+ b=U+E49u5PfgGK+5vg8PSB5ZxTgbUPnzJKkEqDy9F37fuFa4VVRTOuMEM4xW0lND8rMbyXohdZ24XqrxIjnbWxxQXKwNHxEpBDsukHW6YJFSHec72fN1agHtUDhNgGNRHt7k1VbjXADhPKpBr4rqEV2dhAbHWRS2MTYSFcIcOHv+8=
+Received: from AS1P250MB0608.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:48d::22)
+ by AM8P250MB0089.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:36c::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.27; Thu, 21 Sep
+ 2023 12:29:46 +0000
+Received: from AS1P250MB0608.EURP250.PROD.OUTLOOK.COM
+ ([fe80::fe48:ed2d:5ec6:dc56]) by AS1P250MB0608.EURP250.PROD.OUTLOOK.COM
+ ([fe80::fe48:ed2d:5ec6:dc56%6]) with mapi id 15.20.6813.017; Thu, 21 Sep 2023
+ 12:29:46 +0000
+From: Michel Alex <Alex.Michel@wiedemann-group.com>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: [PATCH] misc: i2c_eeprom: consider pagesize when writing to eeprom
+Thread-Topic: [PATCH] misc: i2c_eeprom: consider pagesize when writing to
+ eeprom
+Thread-Index: AdnshtQ9/kG20rp0TrapVzJklV7R8g==
+Date: Thu, 21 Sep 2023 12:29:45 +0000
+Message-ID: <AS1P250MB0608EFCD6443148D5D9837C6A9F8A@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=wiedemann-group.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS1P250MB0608:EE_|AM8P250MB0089:EE_
+x-ms-office365-filtering-correlation-id: 9b580a67-0048-43a3-b028-08dbba9e7098
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 1nFYfckA8+gKVxgqcLyMbXFn1Cjq/9YmNGarlv8yTb/0acY7GD3GAFdkPYYsIIrIhu/KI6c4wVZ6NgJdFTo/KmShAQDeFSTX33soMDPUvtTn9EtxA/BulasjjYjSLmx7ucgEL35sWyhK8cxBazk01g4O/xzTEom6b9atzvuwTR1Ak0+IRj1pv8/03Sel4+ajuYS2GsxPH8NY2tfo2oQEJst9/ksB47jR3gHOe61l9bei+P50RrseEbTMUVkLBgOyhQjFMSPbeUgTrrmoir9j25PIyPt/Ln6FqAqFq7S1L+lmVwFVJaD6V1x3f8pmYKCHPoOC4d45zMlrcLoxz46My19Kw3nSTKOzLzNSAYSsp4SQeJK06geXLDKQEV5rxQ5SRZI6bCVBul4CuS24er/Hf7UFsg8paE0gPZcG03wR3OSkqKr+iXeavdzqCwcG6DVL1CtbE3kHHMsoLgU0yTYO7Zxj97tFm8v51WHLdplAWSIJZswD8K7OGsByfSP8M+AtgomE44xM8csYlpqVpwbDzvjgrkY2a5bd5epK2h26ldGGbDPxLLqQyql3YMGCaFmtAhO2i26r2RpKh0mYGIMPhHqeQvb56bbbtu0rQBXcfevfaNF5/BgXOsZuzgxyesGW
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS1P250MB0608.EURP250.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(136003)(366004)(346002)(396003)(39850400004)(186009)(1800799009)(451199024)(76116006)(55016003)(2906002)(5660300002)(83380400001)(38100700002)(38070700005)(122000001)(6506007)(71200400001)(66476007)(7696005)(478600001)(9686003)(6916009)(316002)(26005)(8676002)(41300700001)(64756008)(66946007)(8936002)(66446008)(52536014)(66556008)(86362001)(33656002);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?2tKaIn0qMJLlxv3a40IY9tQdE0XrUkcGzPaEVZqqvPtZzIZLYvnn14rmufbd?=
+ =?us-ascii?Q?BWh38+/F+tRagkWq5FYatVKFJ6OSPdR8V8gKiLKR6E9MixudTWT6Q5X9poMC?=
+ =?us-ascii?Q?zuSLKIdJMVQKTJzZYFMuXjujLGK+Hc2mO8+UqjNJjicQMPhTditZdMYqtuzl?=
+ =?us-ascii?Q?tkfx1VbPcPLgxy3Hk31nPZldZ6gl9oHIhFnpxlbo8CLFmv8jTEwDAyHON5qj?=
+ =?us-ascii?Q?pwTMOndAJfV+Sp1Yl/uRlPoTl2G3fk58rwULRR9lqnh2THn09aBcID3sAjCR?=
+ =?us-ascii?Q?oju2AVnN503w50wVdwn/4QuIkznbvchsi2CLNkB+IT10NuwIllwKLwrAM7nE?=
+ =?us-ascii?Q?sdwrH40YIsvr4kk4FVUdSEYlUK566fhr9zMxrr/HzKdlxhemC97fGwhBVPy6?=
+ =?us-ascii?Q?22vX3XEQB/V0+TqdZRknh+5jiildZPRmGNpFQeU5j01WlrOk/xHCqBMNTOXS?=
+ =?us-ascii?Q?Eb3Jemib6TS9+8ujH6lLQi40iY8vB2Ju/zH+ESODDCPTL/A26VOetWrg70SX?=
+ =?us-ascii?Q?c06+sKojP2bY8Kqy+kLODrciOOGN6C6vFb1I8parMXZ5p9Hb0mI8mbi5SnfI?=
+ =?us-ascii?Q?cvHrO8M0mFQ/n9YizGGvyvAvDwQTYHmve9ITFQL0hdjjP7UgL3MaNL4exQv1?=
+ =?us-ascii?Q?4Cz3x96HPwueB0xfQRl/mez7OtYD12HP3yoyoeztZaLC+5Pnb+ww8UuFzRzP?=
+ =?us-ascii?Q?XUx3JqLBBC+65ByXvC2vcCxuDhPduEXJV43CDr9aUfNTU8efkQDe5CT5AmMc?=
+ =?us-ascii?Q?AaBgOeE3XGlvh+/EDVOsUv52YTD0HXXErtPWRaKWP/MkTs+Pu8++6mngv2wi?=
+ =?us-ascii?Q?fvdLN8JFt3VDwH86C1hHV3CJEKtNjzwghFUS6P9mfN563otznwlLeT9lAFsJ?=
+ =?us-ascii?Q?9aVRDeApDKlf5JCdhRwlmGYa0zo0Bvv5q9raRU653t8/29yWjiFs0hnFvPEl?=
+ =?us-ascii?Q?/5efcTwhGSLlfFd6qjgm9NoT5prFCk/3eeJbNrqONL9eLuAF1XrhaKhbZnLh?=
+ =?us-ascii?Q?XxaQRzOOumuo22/gcnxY0bW16eUEv2XoAZ7XZbFrr5saV2GcXDkEshh14Q3a?=
+ =?us-ascii?Q?9afUovYQqJyReyGq9UQw/m+8s7Eb0u8QUsUoM/eCGLtiBJhXqWMzOeWwMNBa?=
+ =?us-ascii?Q?/CJ1bg1aO0q1kt6bT3poR4GRvJFC4vkIYXS5O1+8278GtVRzJupvLOvFJIAk?=
+ =?us-ascii?Q?F/tc2bgxPxnTJmGkpnQKPhrLzd8pT1S+TMxWfAH61GEkiFjq6bb7HT8G8vty?=
+ =?us-ascii?Q?TZln1dvn2Uj7bUyCdjBv9J7gas9PY3jzbUYXixRoI7VBF5+agJXWtcAwxcm7?=
+ =?us-ascii?Q?g9IFXqzBGCAfq7PYsvWS7bS25pYt6XZFRt/4uAyW8ud6OeNoNQF8TKN8R0eZ?=
+ =?us-ascii?Q?VnXEUqbIYygbF+VPJhlM12CaEStRFqjUsH1dqksmyb9cW+PxcLArkoy32NoK?=
+ =?us-ascii?Q?Kl0bzDYfQyn+ytxAF3gY4ltaIEzT889nedWwvyLVjIp5Ap5txZisbbiKshDj?=
+ =?us-ascii?Q?2JxYVO+IpoidE0z0Jcl5tDo8enWqbFaH3ziSK9uEW8rkDO8DHBPi8p276jvr?=
+ =?us-ascii?Q?qbp7oGBty1W0qvjN+fsbuS3Eyj3u5BYoQvzEHPCBggVJGArtkAdNoH+U+JmA?=
+ =?us-ascii?Q?9g=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="q/G/qFSC2U3qXEbD"
-Content-Disposition: inline
-In-Reply-To: <06ea71aab661cf0535bcef98dad2aba61d1884f1.camel@ventanamicro.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: O6f5WiFDKI6GLowdu2OA96gENsEQmIfYP0BWeMSsReh3W4QYaj0g7x36BVQcoleNXgMVZA3C2oh5AX4b3CCP/0H0SKID6cpqQcDTZOrfqwc3c5CI1Qlh7sWdd1Z0PkhLNrnTuLR+bnex5NiSkzNHsFQ6NWIcb4i3oiVDgVOKbLOcS87c6iXqLXN51oi/DWJUomHjd0PVEzx0VZ68F60QT7tsG3s/81gNqSqHYBRHt5vgvFa41asolU2bCtIpmepENEE4NkRXdIZbFHK0RABWljEex62pCMBWlgDF6/2zhFuk6XzqXn0LZpDJiiJsl6QhyxFyuXEOboebUGW/V2eZIkThxqlkDucAJpzuO15hWTX7JHUaVeAlboSYt+w5K3VcqMxvevOZepVsyHH90GViTJN4cmfgF3yVI2Uru2vAD8nSBSUI27WbZcEN+Qjjtz//al7lqdIATl+8lsNaqjowjJ/bZe/bjz70AcOyWOIE7MHSsejJBYAMHvphXnzkp2z4Mm/zGONEGGDxQ3liKu07aVIBsZP7LPLRJTomqR1URgxqt6J2UBXMEWiZysnKDmTG+HMnXamOCBaVZWFx1cfXKAKWWMXPreKqqGEnqzHD8LzMKOakRc582oegGAX+ATPtGeU33gnGbICC2vHYF0jPO+syjBBRWz9EJaPpbVgH+tfgt9enfjIauQO1SKuK6fgMse3Uv+NJ/wfOjUwVH+b4I/wy8w3ZIQTGWXmmzy4+WVcDLHvQTtci+IZ/DdNIPfYJ
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS1P250MB0608.EURP250.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b580a67-0048-43a3-b028-08dbba9e7098
+X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Sep 2023 12:29:45.9347 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: f92d38a3-9c84-427f-afc3-aef091509c71
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: PjTd5LTHDqqm/vd9JcUHIZpDYTDdZhvN98Oa46E3Ll77OwVdNJBaxLDIN/zjltUPa2rrhhuoYiR6T3eswC9PPbjwHHSu+3QcnUTvZAPIgtw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8P250MB0089
+X-C2ProcessedOrg: 71f8fb5e-29e9-40bb-a2d4-613e155b19df
+X-TBoneOriginalFrom: Michel Alex <Alex.Michel@wiedemann-group.com>
+X-TBoneOriginalTo: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+X-TBoneDomainSigned: false
+X-Mailman-Approved-At: Thu, 21 Sep 2023 17:43:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,110 +156,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Calculate the maximum length of the buffer when writing
+accross the page boundary. If the buffer length exceeds
+the page boundary, split it. Use this length instead of
+comparing the length with the pagesize, because the write
+start address can be somewhere in the middle of a page.
 
---q/G/qFSC2U3qXEbD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Alex Michel <alex.michel@wiedemann-group.com>
+---
+ drivers/misc/i2c_eeprom.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-On Thu, Sep 21, 2023 at 05:03:37PM +0530, mchitale@ventanamicro.com wrote:
-> On Thu, 2023-09-14 at 12:29 -0400, Tom Rini wrote:
-> > On Thu, Sep 14, 2023 at 03:38:21PM +0530, Mayuresh Chitale wrote:
-> >=20
-> > > Some platforms as described by EBBR specification may store images
-> > > in
-> > > the FIRMWARE directory of the UEFI system partition(ESP). Add
-> > > support
-> > > to boot from the EFI system partition if it is enabled for a
-> > > platform.
-> > >=20
-> > > Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> > [snip]
-> > > +config SPL_ESP_BOOT
-> > > +	bool "Load next stage boot image from the UEFI system
-> > > partition"
-> > > +	select SPL_PARTITION_TYPE_GUID
-> > > +	help
-> > > +	  When enabled, first try to boot from the UEFI system
-> > > partition as
-> > > +	  described in the Ch.4 of the EBBR specification.
-> >=20
-> > We need to select this by perhaps BOOT_DEFAULTS or BOOTMETH_DISTRO,
-> > whatever is supposed to signify that yes, this is going to be a
-> > SystemReady IR (or higher) compliant build.
-> I am not sure about the SystemReady compliance but I think the config
-> option can be enabled for those platforms which require it.
-
-It's "nearly everyone" that needs the option, which is why I'm saying it
-needs to be part of the high level options that a board selects to say
-they want to be compliant.
-
-> > [snip]
-> > >  int spl_blk_load_image(struct spl_image_info *spl_image,
-> > >  		       struct spl_boot_device *bootdev,
-> > >  		       enum uclass_id uclass_id, int devnum, int
-> > > partnum)
-> > >  {
-> > >  	const char *filename =3D CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
-> > > -	struct legacy_img_hdr *header;
-> > [snip]
-> > > @@ -63,24 +88,26 @@ int spl_blk_load_image(struct spl_image_info
-> > > *spl_image,
-> > >  	}
-> > > =20
-> > >  	blk_show_device(uclass_id, devnum);
-> > > -	header =3D spl_get_load_buffer(-sizeof(*header),
-> > > sizeof(*header));
-> > > -
-> > [snip]
-> >=20
-> > Is this an artifact of Sean's patch series where "header" is no
-> > longer
-> > actually used?  As-is this won't compile on top of next (which is
-> > where
-> > given Sean's feedback, the series needs to be rebased upon anyhow).
-> Yes, I will rebase on the latest next without Sean's series and resend
-> the patch.
-
-OK.
-
-> > > +	/*
-> > > +	 * First try to boot from EFI System partition. In case of
-> > > failure,
-> > > +	 * fall back to the configured partition.
-> > > +	 */
-> >=20
-> > I don't know that this is the right behavior.  If we're configured to
-> > boot from partition X, we boot from partition X.  If we're configured
-> > to
-> > find the ESP and use that, we find and use that.
->=20
-> This is to maintain compatibility and make more attempts to boot. So
-> the same SPL binary can load images from devices with or without the
-> ESP.
-
-Yes, I don't think that's what we want.  It should be an either/or not a
-a then b.
-
+diff --git a/drivers/misc/i2c_eeprom.c b/drivers/misc/i2c_eeprom.c
+index bdd7e018cc..f345e34179 100644
+--- a/drivers/misc/i2c_eeprom.c
++++ b/drivers/misc/i2c_eeprom.c
+@@ -60,6 +60,17 @@ static int i2c_eeprom_std_read(struct udevice *dev, int =
+offset, u
+int8_t *buf,                                                               =
+                 return dm_i2c_read(dev, offset, buf, size);
+ }
+=20
++static int i2c_eeprom_len(unsigned offset, unsigned len, unsigned pagesize=
+)
++{
++       int page_offset =3D       ((offset) & (pagesize - 1));
++       unsigned maxlen =3D pagesize - page_offset;
++
++       if (len > maxlen)
++               len =3D maxlen;
++
++       return len;
++}
++
+ static int i2c_eeprom_std_write(struct udevice *dev, int offset,
+                                const uint8_t *buf, int size)
+ {
+@@ -67,7 +78,7 @@ static int i2c_eeprom_std_write(struct udevice *dev, int =
+offset,
+        int ret;
+=20
+        while (size > 0) {
+-               int write_size =3D min_t(int, size, priv->pagesize);
++               int write_size =3D i2c_eeprom_len(offset, size, priv->pages=
+ize);
+=20
+                ret =3D dm_i2c_write(dev, offset, buf, write_size);
+                if (ret)
 --=20
-Tom
+2.34.1
 
---q/G/qFSC2U3qXEbD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUMZJEACgkQFHw5/5Y0
-tyyQqgv/cgelHy6HKhV6YbJJRqmq1uYqWvYKCS3vG7xCWZfxqgElqYdnC+VqXiUX
-LEO8IeXak+ofFscB10bpfwTm47ABgeoqUCNqk3mkS/1J4mCpA74ssYU1wc3gRnqL
-wkTzNrR2XH6FZBvPiXjk7xHp6zsVo6K85CHGWUNl6BFakq5jXPdIwRfpNfCTonGB
-w0DLLUTEF7f+PC8S1IuwmzD+RukwTVXfi+U2MjGU4Aq9s62z+3Unh1HBIFQjsd75
-0KSbPi++4Q8FiPMbAc+uqTSQYQWit4aV9GmVelIr/vXJ+ejYOTaw9soKeEOLalUc
-kB2qRZwHsXQMnEtb56nwbJhBdL59noh55kOEuaCADOZxLghhHucehIebHQBYV8eD
-qsEs4VSJv9tQ54eWMyZZonsobgBOugQcwhgVmsY8EmT8BDMQ5b6XvOxR7+pLpATa
-y+qLrx/XrNyv5l5PErgDxmoZEuuJn8BunTlmphkBIZ11sXUC3tfEbJ8B3B5jkcaV
-ODDb2HGI
-=R2wU
------END PGP SIGNATURE-----
-
---q/G/qFSC2U3qXEbD--
