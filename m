@@ -4,81 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ABB8E71090
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:53:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4663EE71093
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 16:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CFF4867B5;
-	Thu, 21 Sep 2023 17:53:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3725886484;
+	Thu, 21 Sep 2023 18:22:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SU6ofO1r";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iCO7fMJO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0CB986484; Thu, 21 Sep 2023 17:53:46 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 452AB8655E; Thu, 21 Sep 2023 18:22:50 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC47C86466
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:53:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 038598644E
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 18:22:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-59be6605e1dso13917597b3.3
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:53:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695311623; x=1695916423; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Sst3Kf4/n5KTIROS4NCnDVEXh9qcjg/AyD7TBEf9j7o=;
- b=SU6ofO1r0x3E3OXvG3UUa+ACSIY6AVCQFg+MgC2EIGHBa7cHeULsGSVUedVh5EbIxM
- u1C+/+5mZScPM5TLrRKo8/lCTfQDjKe5msWJbOPttITrPAasJxCMpSdA3poMz1D2+/FL
- ofpuVz+bGc9WpXJP8OSMYCj4Znk+6f/UugBxc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695311623; x=1695916423;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Sst3Kf4/n5KTIROS4NCnDVEXh9qcjg/AyD7TBEf9j7o=;
- b=C7n56e8bQT+tvbtmA2tvShSvBlPX0/apCRs8gznKoJ5uiKlQ1RQQjIFngSuA7biaSR
- ZyzaIjsgEHKfM4haKrP9a5Lj1rZL4l3Dtt6GkwiEjRlLf40gi38gZqwyzFEC4Z9IvJ0z
- h1zThZ888TP0CJM/QV2OBZbdvpZDwG5GJ4gns3HSTybA4Rdn5ZNhwwBzzZNjrXkE5GM9
- 6W9ArLF5k0e1aLPD8UnN/3jdidZOyDpDRsi4gXgm3bNTX/iM4E1J8zji6p7MK4zna1by
- r0zTP87uU8eagvYQzQ62+KeZvA0w6W20kFkOWExpkzZq/nJcO6SoKDKZtH0Ar1aOskmz
- nEzw==
-X-Gm-Message-State: AOJu0YwagZJ/p2jjsB8YWnMkeD5dPZPMHqiIQyjhDZRNE6y5FPc/0XNs
- 1eZId6kcXbN0OG6Crt319N2Si3LQF9BHwJv47nW4kQ==
-X-Google-Smtp-Source: AGHT+IGFMzT1dqGomXgEaKnzxxMuiQxICfolUqdbCn2FwiPihqnj0OypiPAdXbQC1ZxNKNdMvEixZQ==
-X-Received: by 2002:a81:5256:0:b0:59b:dadf:298a with SMTP id
- g83-20020a815256000000b0059bdadf298amr6005691ywb.4.1695311623551; 
- Thu, 21 Sep 2023 08:53:43 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-46ac-83a0-07b5-e9a6.res6.spectrum.com.
- [2603:6081:7b00:6400:46ac:83a0:7b5:e9a6])
- by smtp.gmail.com with ESMTPSA id
- j128-20020a0dc786000000b005928ba6806dsm393385ywd.97.2023.09.21.08.53.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Sep 2023 08:53:43 -0700 (PDT)
-Date: Thu, 21 Sep 2023 11:53:41 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
-Cc: Linus Walleij <linus.walleij@linaro.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] bmips: Add Inteno XG6846 board
-Message-ID: <20230921155341.GU305624@bill-the-cat>
-References: <20230920074225.1130769-1-linus.walleij@linaro.org>
- <20230920142252.GO305624@bill-the-cat>
- <CACRpkdYqO1nH51VxjbpnPjaPy7eHaMDCSP5tWBDB1SB3R0cCcQ@mail.gmail.com>
- <20230920185547.GP305624@bill-the-cat>
- <ea1b9ef4-0cf5-ed92-2b70-6d8f70be17ac@gmail.com>
+ spf=pass smtp.mailfrom=masahiroy@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id A0209B82133
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 16:22:47 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52835C611A4
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 16:22:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1695313366;
+ bh=J2f+cwahFBnNEGQSYdkxvMqfUGAXiM6UkpUW81SmvO0=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=iCO7fMJO60YPCmp5Qo37cX8FdCzT1dATrExXoBa2VXvzIhVpVd+zVfFyFoVCSQQYj
+ DmpdxMRo2Z28ZSzIW039LvEl1rOQxTGI/FzIOc3YKtRX1x/x32yX7jTcXmoHBm5Jxx
+ JdlMXE0M/7Hv/j477ZAvolapCCMdAwBFBeDS3sq6m3jnoq5+xSJ4uv0nb6AnE0z7bn
+ a4SAAnRqhQELtAv6wfWEtkTLLw+FnlbBP0gpUmt7wh4mMZsf3c4WHzkdrnvzlj7aUT
+ 22KNwW1Y2ogpS40FzR/YSKI53Z/2hVCmtSCjWfnj/hUA9sel4cIz0CclgptqerTyDT
+ 3j/y/npAR62Kw==
+Received: by mail-oi1-f169.google.com with SMTP id
+ 5614622812f47-3adf06730c4so740684b6e.1
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 09:22:46 -0700 (PDT)
+X-Gm-Message-State: AOJu0YxYmvAmXZpcT2b9CUnQlUFmZlRKOOLV5RktYiMhHXIpfmZBbDwG
+ wGfCgHUqHjI21wxmn6KkIn7Zg75v+PNdUzZPlCc=
+X-Google-Smtp-Source: AGHT+IFAW72229lsy41NDIncsO6RDtdNdBNVIezUaJuVyiAFi0+bNfMoQN4VaJ2yCLXl/dO6J8Dp+kFI1OMlQmRKxqk=
+X-Received: by 2002:a05:6871:20b:b0:1d6:564d:cfbd with SMTP id
+ t11-20020a056871020b00b001d6564dcfbdmr7063347oad.14.1695313365692; Thu, 21
+ Sep 2023 09:22:45 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fH0+IcmVRAThUovc"
-Content-Disposition: inline
-In-Reply-To: <ea1b9ef4-0cf5-ed92-2b70-6d8f70be17ac@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
+In-Reply-To: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
+From: Masahiro Yamada <masahiroy@kernel.org>
+Date: Fri, 22 Sep 2023 01:22:08 +0900
+X-Gmail-Original-Message-ID: <CAK7LNAQKucgcJViKGts4GmwUxNZ2Wi-rpEqst4=ueBj66-QTeg@mail.gmail.com>
+Message-ID: <CAK7LNAQKucgcJViKGts4GmwUxNZ2Wi-rpEqst4=ueBj66-QTeg@mail.gmail.com>
+Subject: Re: Question about boot failure of AM64-SK
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Nishanth Menon <nm@ti.com>, srk@ti.com, s-vadapalli@ti.com,
+ n-francis@ti.com, m-chawdhry@ti.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,108 +82,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Fri, Sep 22, 2023 at 12:03=E2=80=AFAM Masahiro Yamada <masahiroy@kernel.=
+org> wrote:
+>
+> Hi.
+>
+> I am seeing a boot failure on AM64-SK.
+>
+>
+> I got the following error in SPL of the main core.
+> Do you have any clue?
 
---fH0+IcmVRAThUovc
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 21, 2023 at 04:00:24PM +0200, Daniel Schwierzeck wrote:
->=20
->=20
-> On 9/20/23 20:55, Tom Rini wrote:
-> > On Wed, Sep 20, 2023 at 08:51:07PM +0200, Linus Walleij wrote:
-> > > On Wed, Sep 20, 2023 at 4:22=E2=80=AFPM Tom Rini <trini@konsulko.com>=
- wrote:
-> > >=20
-> > > > > + * This is a diet version of the device tree from Linux,
-> > > > > + * suitable for U-Boot.
-> > > > > + */
-> > > >=20
-> > > > We shouldn't need a diet version of the tree.  If it's reasonably d=
-one
-> > > > and stable in the kernel, we can even move towards just passing the
-> > > > U-Boot tree along to Linux.
-> > >=20
-> > > The device tree is not stable in the kernel.
-> > > It exists in OpenWrt and the creators of the bmips target are
-> > > kind of absent for the moment. The reason it is not in Linux
-> > > is that the "switch ethernet" driver and bindings need to be
-> > > upstreamed before the device trees can be upstreamed.
-> > >=20
-> > > But I can try to bring in more of it for sure :)
-> >=20
-> > Just like ARM the goal is just to drop in the kernel dts here.
->=20
-> I guess this approach works well for ARM but not for MIPS. Most MIPS cons=
-umer boards
-> are just maintained in OpenWRT but not in mainline Linux. And there are a=
- few boards
-> which have been just mainlined in U-Boot but not Linux so them also don't=
- have a
-> stable Linux DT.
->=20
-> As MIPS is a dead architecture I suggest to just go with the minimal DT s=
-uited for U-Boot ;)
 
-OK, I'll let it go then.
+As a side-topic, I downloaded a prebuilt image
+from https://www.ti.com/tool/SK-AM64
 
-> > > > > +++ b/board/inteno/xg6846/xg6846.c
-> > > > > @@ -0,0 +1,6 @@
-> > > > > +// SPDX-License-Identifier: GPL-2.0+
-> > > > > +/*
-> > > > > + * Copyright (C) 2023 Linus Walleij <linusw@kernel.org>
-> > > > > + */
-> > > > > +
-> > > > > +#include <common.h>
-> > > >=20
-> > > > So basically just an empty object file.  Can we just _not_ have
-> > > > something here, if we perhaps don't set SYS_BOARD?  I assume if the=
-re's
-> > > > just nothing here the link rules fail.
-> > >=20
-> > > Admittedly my knowledge of U-Boot internals are not the
-> > > best and this is a bit of a copy and paste job from
-> > > board/comtrend/ar5387un/ar-5387un.c which looks like
-> > > this and sets a bad example I suppose.
-> >=20
-> > Yeah, I didn't know we had someone doing that already here, whoops.
-> >=20
-> > > I guess you are asking me to modify U-Boots build system to
-> > > make the whole .c and Makefile inside a board subdir optional
-> > > so we can delete all such empty boardfiles?
-> >=20
-> > Well, it'd sure be nice if we could avoid having a dummy C file.  If
-> > it looks like a nightmare once you take a peek, we can just live with
-> > it.
-> >=20
->=20
-> I just tested it, you can simply add an empty board/inteno/xg6846/Makefil=
-e and
-> remove board/inteno/xg6846/xg6846.c. But you can also remove the Makefile.
-> Just the Kconfig and MAINTAINERS file are needed.
+It failed too (but in a different way).
 
-Oh nice, thanks!
+I flashed tisdk-debian-bookworm-am64xx-evm.wic
+to a SD card by using the 'dd' command, then I got this:
+
+
+
+U-Boot SPL 2023.04 (Jul 14 2023 - 08:10:06 +0000)
+EEPROM not available at 0x50, trying to read at 0x51
+k3_system_controller sysctrler: k3_sysctrler_start: Boot Notification
+response failed. ret =3D -110
+Firmware init failed on rproc (-110)
+
+resetting ...
+ti_sci system-controller@44043000: ti_sci_get_response: Message
+receive failed. ret =3D -110
+ti_sci system-controller@44043000: ti_sci_get_response: Message
+receive failed. ret =3D -110
+ti_sci system-controller@44043000: ti_sci_get_response: Message
+receive failed. ret =3D -110
+no sysreset
+### ERROR ### Please RESET the board ###
+
+
+
+
+Am I doing something wrong?
+
+
+
+
+
 
 --=20
-Tom
-
---fH0+IcmVRAThUovc
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUMZwIACgkQFHw5/5Y0
-tywmJAv+M4etkHcs1+IhndxLK85ZtbhCMdb0k5zDtah8zAXnYzUI0/qxt2jezORJ
-lRZiZuX/DsahtNUOewj8hr1x7iA2bfZiJzoIYgpME9BGnKTgcobfo07VkrqTkBSc
-rWIwz+Hl5M7bcwX1NTNbckjoR1qi042ez58mT0BV2+c9vEuzh4AF3mvccRfaQsd8
-b36y1CIbUujAcwiYXwpc2X79Rja/8mxBLuABqZOcsQXCXD8zSg96cmKBgf7rt0xo
-GSorT6NBFCc4LKbEGQzDx28Mu55uRpD63E6gfm5GsIgD6DMHWPkV9tSxFQmiPeS5
-sgd3A91I4+nENJmMBsZsJy9JRA8k3dKwkIxIMkoWly5nfGeH+OsM/jp9vWxpayaM
-p/KQvXX5NRM57zoxTN64eqdYIdMoCVZ8IRgPW+GpOLAbuXjfMNw+0xYnWppeRtfZ
-ZO6GVFOOFJ4btynzpmjD5+eHzybC0T9oneRInVtX03Ro0HqI0J/oKjcTAMaYfZcu
-YYNXIcgi
-=HyWJ
------END PGP SIGNATURE-----
-
---fH0+IcmVRAThUovc--
+Best Regards
+Masahiro Yamada
