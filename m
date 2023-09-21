@@ -4,106 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5812AE7071F
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 11:25:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42E7EE7071F
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 11:26:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2766E86BC8;
+	by phobos.denx.de (Postfix) with ESMTP id CA8C0864C4;
 	Thu, 21 Sep 2023 13:25:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="CQZROgi8";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="C8QpWADz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BCB0486BFB; Thu, 21 Sep 2023 06:21:58 +0200 (CEST)
-Received: from NAM04-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam04on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e8c::612])
+ id 495B980282; Thu, 21 Sep 2023 10:14:07 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3E5D86C9A
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 06:21:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4BAD8615A
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 10:14:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RAFYWQ34ymL25utkCC1C2LrWE2QKzJsGRvIYnjVP4ATJ1XeD4zd0yd+webPX+zhXELtexqFRownuU+THj8TlFQ6i89iwisryIXNji3hcckJjDbljdu7JnnXASsc/GrLe1HXKlIICKALooNflxLHTBkXHZXZ/YyWO0pUYIpQI0VljMK9TtxT2kkj0R3NXAymPu+bHP2b3UhoyIP6Xg3xanEkniEbZ8jJUee5jjsS99Y0nMS1K9Io/w1S6PM+PPG0uzLamgo+6ea7JZ9FsFUMVq+vTPDRRVu290ctnfhgMyeXlan31/BMnIOXC0B/uoMfwXO/4GylX0Kk5RP6udkEpeA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=toiErde3x/v17V1JxxMqhK4SDIMOq8Lv3J0FWybWIaA=;
- b=TOJ8h574MALVoQK+BSy4gEIa2Whex2OOEW/aDqRO1b4aiqp7NraJGQt4V6w1jTeuJLTJtAx+5IDJSnVxFEFNVvp/fg2Z7SsM3gqMWIKvLBd/azuOPzYF/+lJ+0Ca9j1ol8QyNULJ374lPFiNqi1A2AZxYH5iJCfXx8wGs0D9Y5baTcu3hb13SpDHz/MDtlsVhratxPu7RuxNagsAN1S9acMTMOlrMRkRL4omIrr23lm/qM9bjw/yxPxFikg/QF+xp6WdxsiS/ihrz/dfTBPnBCEZjB6pVsMDa/fg/1PQAdfKl5q3HG9Ci+cHo2yOtF5tOyR32ZESAgNTB6evnPFJbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=toiErde3x/v17V1JxxMqhK4SDIMOq8Lv3J0FWybWIaA=;
- b=CQZROgi8YwUbd6XuN9EHfFVxF+pKs0SX3JMl/xWJQDLahq+qI62lKt8b3KtCXnweJzA3QJC21G8Xh5rgYv0oo4VT1ydFMZFxYNjxsYHwQ9bmcWNpNUOeVQpgkc3udawHzPYfaVkrg/kGk5JKHsQnAWpv4ke/5bj0OtEJmIF0U/s=
-Received: from PH8PR21CA0009.namprd21.prod.outlook.com (2603:10b6:510:2ce::26)
- by SJ2PR12MB8063.namprd12.prod.outlook.com (2603:10b6:a03:4d1::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.20; Thu, 21 Sep
- 2023 04:21:49 +0000
-Received: from SN1PEPF0002BA4D.namprd03.prod.outlook.com
- (2603:10b6:510:2ce:cafe::bd) by PH8PR21CA0009.outlook.office365.com
- (2603:10b6:510:2ce::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.9 via Frontend
- Transport; Thu, 21 Sep 2023 04:21:49 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002BA4D.mail.protection.outlook.com (10.167.242.70) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.20 via Frontend Transport; Thu, 21 Sep 2023 04:21:48 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 20 Sep
- 2023 23:21:47 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Wed, 20 Sep 2023 23:21:46 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <sjg@chromium.org>, <git@xilinx.com>, "Algapally
- Santosh Sagar" <santoshsagar.algapally@amd.com>
-Subject: [PATCH v7 2/2] serial: zynqmp: Fetch baudrate from dtb and update
-Date: Thu, 21 Sep 2023 09:51:30 +0530
-Message-ID: <20230921042130.21139-3-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230921042130.21139-1-venkatesh.abbarapu@amd.com>
-References: <20230921042130.21139-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 24A8912000D;
+ Thu, 21 Sep 2023 11:14:04 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 24A8912000D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1695284044;
+ bh=YxvkgfQEPHv2TYRGAjFuhc5l6teQEiPS0geqMx4CFe4=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=C8QpWADzyw8A55YRdJK3mq1U7sW9sxlY508Gg0FfUy7HWM/fequncDxUv8E+kky53
+ mryYahjG1gMe9Mnf5XV8mhpXuX4vhNks3F5Zd1IVEaTp3CC2wpdma6G8htUuzSTg3M
+ V2t55kpXkBTcl9ZOzrb9ZQuJ8cQX3KpVs9Pd4mdy2J47nY7IkwkZKj8wTBen6TDzwo
+ acatEB/bc77HqhsWtVC/ea52XdElooN+XJh7NG4sYEgdaL49LcH2500dx9JbhEl8mv
+ DIEh7DTAJ9eUWj5B07yH2gX+TcrH7dVdaWDg7q+7VpQdR+hQWvowIHtKS8J4dYNNWm
+ tbNgTOFw/A/GQ==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Thu, 21 Sep 2023 11:14:03 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.30; Thu, 21 Sep 2023 11:14:03 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
+ <takahiro.akashi@linaro.org>, <ilias.apalodimas@linaro.org>,
+ <post@lespocky.de>, <marex@denx.de>, <msuchanek@suse.de>,
+ <sughosh.ganu@linaro.org>, <jh80.chung@samsung.com>,
+ <paul.barker@sancloud.com>
+CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
+ <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>, Simon
+ Glass <sjg@chromium.org>
+Subject: [PATCH v3 1/8] drivers: introduce Secure Monitor uclass
+Date: Thu, 21 Sep 2023 11:13:34 +0300
+Message-ID: <20230921081346.22157-2-avromanov@salutedevices.com>
+X-Mailer: git-send-email 2.41.0
+In-Reply-To: <20230921081346.22157-1-avromanov@salutedevices.com>
+References: <20230921081346.22157-1-avromanov@salutedevices.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4D:EE_|SJ2PR12MB8063:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4a8a0081-d416-46c7-4c26-08dbba5a460c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: LaEaYACEoo4Etz8XRXtaoN4xtAwucYqZMj5FkRhUjWIOQ1uINDiljEpK6L84FOWT3C1BZbsYtBEd11YOQnC60ngEfY7Bskn+EFrEX6Sdgh5tNlK9DvuRyxZou+IEfRp8PZP3H/qvlcqLKb7teyM5aTFThU8jtsTq5A+hYlSBQw//q/l5+p3LMml0YXufrFbHQ0YztxORjn9MfqXpGEiIsAx2eXpqMUjMEyVEzWXBtOfKlgWCVnyhw7vK2q+6Bm2iPwbNbf9bKvvS5mSvE2526gfrVO3aOrS6JcCNlRiFjrmKAkSeC3eUnIIIa+RNAu70uQXUmlEJIBjAR+HurRLMoI/u/uWef/+YQLcLSxYcZ/uxvmfwK5+vHidZwy7OUJm/jZLQS9k0S2yWScENqkF2yQY5bKpvDZmPMk4t3mFj6tEJ6NKQRzr4MqPwPciEKSSu09LvaVDsfwPWCsHkvFcwvS3naNcfQt3cWmwB15ho4f5qZlLipjKerJI570iWrfZbi67ILQ4l4lm9ZIcKaxOPKrY6UJiheJwMaBtcm8E92oRZLC9gzgfSHxIyw9KRh6O3+Vnp8TDbTgpIXNWDNDcVNxAm/Bgd/yhk8eIYBAxF8PTv8bn471lEWeZc6FtYb5RfSoSBSRNDQWlXMVBobBhx9x2/r3uX5Zh9gQEqiyq1ugmNrv3ksiKL+5rcJlfBA8JY+/HtwH00iDWHf1nSGrtF7kbt4hEM9xQuIggFAIHvadhk7rE3V9MdW5fZWsoR9tzyIC5rWkrYvsOhJivPNvImdw==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(136003)(39860400002)(346002)(396003)(1800799009)(82310400011)(186009)(451199024)(36840700001)(46966006)(40470700004)(6666004)(478600001)(47076005)(83380400001)(426003)(26005)(2616005)(2906002)(336012)(15650500001)(70586007)(70206006)(54906003)(316002)(6916009)(8676002)(8936002)(5660300002)(1076003)(4326008)(41300700001)(40460700003)(81166007)(82740400003)(86362001)(36860700001)(36756003)(40480700001)(356005)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2023 04:21:48.7466 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4a8a0081-d416-46c7-4c26-08dbba5a460c
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4D.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8063
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180016 [Sep 21 2023]
+X-KSMG-AntiSpam-Version: 5.9.59.0
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 534 534
+ 808c2ea49f7195c68d40844e073217da4fa0d1e3,
+ {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ 100.64.160.123:7.1.2; p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/09/21 03:17:00 #21936738
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-Mailman-Approved-At: Thu, 21 Sep 2023 13:25:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -121,273 +109,300 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
+At the moment, we don't have a common API for working with
+SM, only the smc_call() function. This approach is not generic
+and difficult to configure and maintain.
 
-The baudrate configured in .config is taken by default by serial. If
-change of baudrate is required then the .config needs to changed and
-u-boot recompilation is required or the u-boot environment needs to be
-updated.
+This patch adds UCLASS_SM with the generic API:
 
-To avoid this, support is added to fetch the baudrate directly from the
-device tree file and update.
-The serial, prints the log with the configured baudrate in the dtb.
-The commit c4df0f6f315c ("arm: mvebu: Espressobin: Set default value for
-$fdtfile env variable") is taken as reference for changing the default
-environment variable.
+- sm_call()
+- sm_call_write()
+- sm_call_read()
 
-The default environment stores the default baudrate value, When default
-baudrate and dtb baudrate are not same glitches are seen on the serial.
-So, the environment also needs to be updated with the dtb baudrate to
-avoid the glitches on the serial.
+These functions operate with struct pt_regs, which describes
+Secure Monitor arguments.
 
-Signed-off-by: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- doc/README.serial_dt_baud      | 41 ++++++++++++++++++++++++++++++++
- drivers/core/ofnode.c          | 18 ++++++++++++++
- drivers/serial/Kconfig         |  9 +++++++
- drivers/serial/serial-uclass.c | 43 ++++++++++++++++++++++++++++++++++
- include/dm/ofnode.h            | 14 +++++++++--
- include/env_default.h          |  6 ++++-
- include/serial.h               | 15 ++++++++++++
- 7 files changed, 143 insertions(+), 3 deletions(-)
- create mode 100644 doc/README.serial_dt_baud
+ drivers/Kconfig        |  2 ++
+ drivers/Makefile       |  1 +
+ drivers/sm/Kconfig     |  2 ++
+ drivers/sm/Makefile    |  3 ++
+ drivers/sm/sm-uclass.c | 55 ++++++++++++++++++++++++++++++++
+ include/dm/uclass-id.h |  1 +
+ include/sm-uclass.h    | 72 ++++++++++++++++++++++++++++++++++++++++++
+ include/sm.h           | 67 +++++++++++++++++++++++++++++++++++++++
+ 8 files changed, 203 insertions(+)
+ create mode 100644 drivers/sm/Kconfig
+ create mode 100644 drivers/sm/Makefile
+ create mode 100644 drivers/sm/sm-uclass.c
+ create mode 100644 include/sm-uclass.h
+ create mode 100644 include/sm.h
 
-diff --git a/doc/README.serial_dt_baud b/doc/README.serial_dt_baud
+diff --git a/drivers/Kconfig b/drivers/Kconfig
+index 75ac149d31..72e6405322 100644
+--- a/drivers/Kconfig
++++ b/drivers/Kconfig
+@@ -112,6 +112,8 @@ source "drivers/scsi/Kconfig"
+ 
+ source "drivers/serial/Kconfig"
+ 
++source "drivers/sm/Kconfig"
++
+ source "drivers/smem/Kconfig"
+ 
+ source "drivers/sound/Kconfig"
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 6f1de58e00..b7bd3633b1 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -124,3 +124,4 @@ obj-$(CONFIG_DM_RNG) += rng/
+ endif
+ 
+ obj-y += soc/
++obj-y += sm/
+diff --git a/drivers/sm/Kconfig b/drivers/sm/Kconfig
 new file mode 100644
-index 0000000000..f8768d0e1b
+index 0000000000..6cc6d55578
 --- /dev/null
-+++ b/doc/README.serial_dt_baud
-@@ -0,0 +1,41 @@
-+Fetch serial baudrate from DT
-+-----------------------------
++++ b/drivers/sm/Kconfig
+@@ -0,0 +1,2 @@
++config SM
++	bool "Enable Secure Monitor driver support"
+diff --git a/drivers/sm/Makefile b/drivers/sm/Makefile
+new file mode 100644
+index 0000000000..9f4683ba06
+--- /dev/null
++++ b/drivers/sm/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0-only
 +
-+To support fetching of baudrate from DT, the following is done:-
++obj-y += sm-uclass.o
+diff --git a/drivers/sm/sm-uclass.c b/drivers/sm/sm-uclass.c
+new file mode 100644
+index 0000000000..6a8b702629
+--- /dev/null
++++ b/drivers/sm/sm-uclass.c
+@@ -0,0 +1,55 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2023 SberDevices, Inc.
++ *
++ * Author: Alexey Romanov <avromanov@salutedevices.com>
++ */
 +
-+The baudrate configured in Kconfig symbol CONFIG_BAUDRATE is taken by default by serial.
-+If change of baudrate is required then the Kconfig symbol CONFIG_BAUDRATE needs to
-+changed and U-Boot recompilation is required or the U-Boot environment needs to be updated.
++#include <common.h>
++#include <dm.h>
++#include <errno.h>
++#include <sm-uclass.h>
 +
-+To avoid this, add support to fetch the baudrate directly from the device tree file and
-+update the environment.
-+
-+The default environment stores the default baudrate value. When default baudrate and dtb
-+baudrate are not same glitches are seen on the serial.
-+So, the environment also needs to be updated with the dtb baudrate to avoid the glitches on
-+the serial which is enabled by OF_SERIAL_BAUD.
-+
-+The Kconfig SPL_ENV_SUPPORT needs to be enabled to allow patching in SPL.
-+
-+The Kconfig DEFAULT_ENV_IS_RW which is enabled by OF_SERIAL_BAUD with making the environment
-+writable.
-+
-+The ofnode_read_baud() function parses and fetches the baudrate value from the DT. This value
-+is validated and updated to baudrate during serial init. Padding is added at the end of the
-+default environment and the dt baudrate is updated with the latest value.
-+
-+Example:-
-+
-+The serial port options are of the form "bbbbpnf", where "bbbb" is the baud rate, "p" is parity ("n", "o", or "e"),
-+"n" is number of bits, and "f" is flow control ("r" for RTS or omit it). Default is "115200n8".
-+
-+chosen {
-+		bootargs = "earlycon console=ttyPS0,115200 clk_ignore_unused root=/dev/ram0 rw init_fatal_sh=1";
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+From the chosen node, stdout-path property is obtained as string.
-+
-+	stdout-path = "serial0:115200n8";
-+
-+The string is parsed to get the baudrate 115200. This string is converted to integer and updated to the environment.
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 8df16e56af..42f51ca93c 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -895,6 +895,24 @@ ofnode ofnode_get_chosen_node(const char *name)
- 	return ofnode_path(prop);
- }
- 
-+int ofnode_read_baud(void)
++static const struct sm_ops *get_sm_ops(struct udevice *dev)
 +{
-+	const char *str, *p;
-+	u32 baud;
-+
-+	str = ofnode_read_chosen_string("stdout-path");
-+	if (!str)
-+		return -EINVAL;
-+
-+	/* Parse string serial0:115200n8 */
-+	p = strchr(str, ':');
-+	if (!p)
-+		return -EINVAL;
-+
-+	baud = dectoul(p + 1, NULL);
-+	return baud;
++	return (const struct sm_ops *)dev->driver->ops;
 +}
 +
- const void *ofnode_read_aliases_prop(const char *propname, int *sizep)
- {
- 	ofnode node;
-diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-index 4d27034c3f..7fdf600dc5 100644
---- a/drivers/serial/Kconfig
-+++ b/drivers/serial/Kconfig
-@@ -24,6 +24,15 @@ config BAUDRATE
- 	  in the SPL stage (most drivers) or for choosing a default baudrate
- 	  in the absence of an environment setting (serial_mxc.c).
- 
-+config OF_SERIAL_BAUD
-+	bool "Fetch serial baudrate from device tree"
-+	depends on DM_SERIAL && SPL_ENV_SUPPORT
-+	select DEFAULT_ENV_IS_RW
-+	help
-+	  Select this to enable fetching and setting of the baudrate
-+	  configured in the DT. Replace the default baudrate with the DT
-+	  baudrate and also set it to the environment.
-+
- config DEFAULT_ENV_IS_RW
- 	bool "Make default environment as writable"
- 	help
-diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
-index 067fae2614..e5304b397d 100644
---- a/drivers/serial/serial-uclass.c
-+++ b/drivers/serial/serial-uclass.c
-@@ -154,12 +154,55 @@ static void serial_find_console_or_panic(void)
- }
- #endif /* CONFIG_SERIAL_PRESENT */
- 
-+int check_valid_baudrate(int baud)
++int sm_call(struct udevice *dev, u32 cmd, s32 *ret, struct pt_regs *args)
 +{
-+	int i;
++	const struct sm_ops *ops = get_sm_ops(dev);
 +
-+	for (i = 0; i < ARRAY_SIZE(baudrate_table); ++i) {
-+		if (baud == baudrate_table[i])
-+			return 0;
-+	}
++	if (ops->sm_call)
++		return ops->sm_call(dev, cmd, ret, args);
 +
-+	return -EINVAL;
++	return -ENOSYS;
 +}
 +
-+int fetch_baud_from_dtb(void)
++int sm_call_read(struct udevice *dev, void *buffer, size_t size,
++		 u32 cmd, struct pt_regs *args)
 +{
-+	int baud_value, ret;
++	const struct sm_ops *ops = get_sm_ops(dev);
 +
-+	baud_value = ofnode_read_baud();
-+	ret = check_valid_baudrate(baud_value);
-+	if (ret)
-+		return ret;
++	if (ops->sm_call_read)
++		return ops->sm_call_read(dev, buffer, size, cmd,
++					 args);
 +
-+	return baud_value;
++	return -ENOSYS;
 +}
 +
- /* Called prior to relocation */
- int serial_init(void)
- {
- #if CONFIG_IS_ENABLED(SERIAL_PRESENT)
- 	serial_find_console_or_panic();
- 	gd->flags |= GD_FLG_SERIAL_READY;
++int sm_call_write(struct udevice *dev, void *buffer, size_t size,
++		   u32 cmd, struct pt_regs *args)
++{
++	const struct sm_ops *ops = get_sm_ops(dev);
 +
-+	if (IS_ENABLED(CONFIG_OF_SERIAL_BAUD)) {
-+		int ret = 0;
-+		char *ptr = &default_environment[0];
++	if (ops->sm_call_write)
++		return ops->sm_call_write(dev, buffer, size, cmd,
++					  args);
 +
-+		/*
-+		 * Fetch the baudrate from the dtb and update the value in the
-+		 * default environment.
-+		 */
-+		ret = fetch_baud_from_dtb();
-+		if (ret != -EINVAL && ret != -EFAULT) {
-+			gd->baudrate = ret;
++	return -ENOSYS;
++}
 +
-+			while (*ptr != '\0' && *(ptr + 1) != '\0')
-+				ptr++;
-+			ptr += 2;
-+			sprintf(ptr, "baudrate=%d", gd->baudrate);
-+		}
-+	}
- 	serial_setbrg();
- #endif
- 
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index 0f38b3e736..f0854cc28d 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -942,12 +942,22 @@ const char *ofnode_read_chosen_string(const char *propname);
- ofnode ofnode_get_chosen_node(const char *propname);
- 
- /**
-- * ofnode_read_aliases_prop() - get the value of a aliases property
-+ * ofnode_read_baud() - get the baudrate from string value of chosen property
-  *
-- * This looks for a property within the /aliases node and returns its value
-+ * This looks for stdout-path property within the /chosen node and parses its
-+ * value to return baudrate.
-  *
-  * This only works with the control FDT.
-  *
-+ * Return: baudrate value if found, else -ve error code
++UCLASS_DRIVER(sm) = {
++	.name           = "sm",
++	.id             = UCLASS_SM,
++};
+diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+index 376f741cc2..545c9352a8 100644
+--- a/include/dm/uclass-id.h
++++ b/include/dm/uclass-id.h
+@@ -80,6 +80,7 @@ enum uclass_id {
+ 	UCLASS_MDIO,		/* MDIO bus */
+ 	UCLASS_MDIO_MUX,	/* MDIO MUX/switch */
+ 	UCLASS_MEMORY,		/* Memory Controller device */
++	UCLASS_SM,		/* Secure Monitor driver */
+ 	UCLASS_MISC,		/* Miscellaneous device */
+ 	UCLASS_MMC,		/* SD / MMC card or chip */
+ 	UCLASS_MOD_EXP,		/* RSA Mod Exp device */
+diff --git a/include/sm-uclass.h b/include/sm-uclass.h
+new file mode 100644
+index 0000000000..c114484044
+--- /dev/null
++++ b/include/sm-uclass.h
+@@ -0,0 +1,72 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2023 SberDevices, Inc.
++ *
++ * Author: Alexey Romanov <avromanov@salutedevices.com>
 + */
-+int ofnode_read_baud(void);
++
++#ifndef __SM_UCLASS_H__
++#define __SM_UCLASS_H__
++
++#include <asm/types.h>
++#include <asm/ptrace.h>
++
++struct udevice;
 +
 +/**
-+ * ofnode_read_aliases_prop() - get the value of a aliases property
++ * struct sm_ops - The functions that a SM driver must implement.
 + *
-+ * This looks for a property within the /aliases node and returns its value
++ * @sm_call: Request a secure monitor call with specified command.
 + *
-  * @propname: Property name to look for
-  * @sizep: Returns size of property, or `FDT_ERR_...` error code if function
-  *	returns NULL
-diff --git a/include/env_default.h b/include/env_default.h
-index 227cad7c34..2ca4a087d3 100644
---- a/include/env_default.h
-+++ b/include/env_default.h
-@@ -42,7 +42,7 @@ const char default_environment[] = {
- #if defined(CONFIG_BOOTDELAY)
- 	"bootdelay="	__stringify(CONFIG_BOOTDELAY)	"\0"
- #endif
--#if defined(CONFIG_BAUDRATE) && (CONFIG_BAUDRATE >= 0)
-+#if !defined(CONFIG_OF_SERIAL_BAUD) && defined(CONFIG_BAUDRATE) && (CONFIG_BAUDRATE >= 0)
- 	"baudrate="	__stringify(CONFIG_BAUDRATE)	"\0"
- #endif
- #ifdef	CONFIG_LOADS_ECHO
-@@ -118,6 +118,10 @@ const char default_environment[] = {
- #endif
- #ifdef	CFG_EXTRA_ENV_SETTINGS
- 	CFG_EXTRA_ENV_SETTINGS
-+#endif
-+#ifdef CONFIG_OF_SERIAL_BAUD
-+	/* Padding for baudrate at the end when environment is writable */
-+	"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
- #endif
- 	"\0"
- #else /* CONFIG_USE_DEFAULT_ENV_FILE */
-diff --git a/include/serial.h b/include/serial.h
-index 42bdf3759c..31a97ca9cf 100644
---- a/include/serial.h
-+++ b/include/serial.h
-@@ -337,6 +337,21 @@ int serial_setconfig(struct udevice *dev, uint config);
-  */
- int serial_getinfo(struct udevice *dev, struct serial_device_info *info);
- 
-+/**
-+ * check_valid_baudrate() - Check whether baudrate is valid or not
++ * @sm_call_read: Request a secure monitor call and retrieve data
++ * from secure-monitor (depends on specified command).
 + *
-+ * @baud: baud rate to check
-+ * Return: 0 if OK, -ve on error
++ * @sm_call_write: Request a secure monitor call and send data
++ * to secure-monitor (depends on specified command).
++ *
++ * The individual methods are described more fully below.
 + */
-+int check_valid_baudrate(int baud);
++struct sm_ops {
++	/**
++	 * sm_call - generic SMC call to the secure-monitor
++	 *
++	 * @dev:	Pointer to UCLASS_SM device
++	 * @cmd_index:	Index of the SMC function ID
++	 * @smc_ret:	Returned value from secure world
++	 * @args:	SMC arguments
++	 *
++	 * @return:	0 on success, a negative value on error
++	 */
++	int (*sm_call)(struct udevice *dev, u32 cmd, s32 *smc_ret,
++		       struct pt_regs *args);
++
++	/**
++	 * sm_call_write - send data to secure-monitor
++	 *
++	 * @dev:	Pointer to UCLASS_SM device
++	 * @buffer:	Buffer containing data to send
++	 * @size:	Size of the buffer
++	 * @cmd:	Index of the SMC function ID
++	 * @args:	SMC arguments
++	 *
++	 * @return:	size of sent data on success, a negative value on error
++	 */
++	int (*sm_call_write)(struct udevice *dev, void *buffer,
++			     size_t size, u32 cmd, struct pt_regs *args);
++
++	/**
++	 * sm_call_read - retrieve data from secure-monitor
++	 *
++	 * @dev:	Pointer to UCLASS_SM device
++	 * @buffer:	Buffer to store the retrieved data
++	 * @size:	Size of the buffer
++	 * @cmd:	Index of the SMC function ID
++	 * @args:	SMC arguments
++	 *
++	 * @return:	size of read data on success, a negative value on error
++	 */
++	int (*sm_call_read)(struct udevice *dev, void *buffer,
++			    size_t size, u32 cmd, struct pt_regs *args);
++};
++
++#endif /* __SM_UCLASS_H__ */
+diff --git a/include/sm.h b/include/sm.h
+new file mode 100644
+index 0000000000..afa9c89055
+--- /dev/null
++++ b/include/sm.h
+@@ -0,0 +1,67 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2023 SberDevices, Inc.
++ *
++ * Author: Alexey Romanov <avromanov@salutedevices.ru>
++ */
++
++#ifndef __SM_H__
++#define __SM_H__
++
++/*
++ * NOTE: UCLASS_SM is designed with the idea that
++ * each driver should convert @cmd to some raw
++ * value, which is known only for driver, and set this
++ * value to the first element of the @args->regs array.
++ * Therefore, it is necessary to pass the remaining
++ * arguments starting at index = 1. Anyway, driver
++ * implementation may vary, so, please, check the specific
++ * implementation of the driver you are using.
++ */
++
++#include <asm/types.h>
++#include <asm/ptrace.h>
++
++struct udevice;
 +
 +/**
-+ * fetch_baud_from_dtb() - Fetch the baudrate value from DT
++ * sm_call - generic SMC call to the secure-monitor
 + *
-+ * Return: baudrate if OK, -ve on error
++ * @dev:	Pointer to UCLASS_SM device
++ * @cmd_index:	Index of the SMC function ID
++ * @smc_ret:	Returned value from secure world
++ * @args:	SMC arguments
++ *
++ * @return:	0 on success, a negative value on error
 + */
-+int fetch_baud_from_dtb(void);
++int sm_call(struct udevice *dev, u32 cmd, s32 *ret, struct pt_regs *args);
 +
- void atmel_serial_initialize(void);
- void mcf_serial_initialize(void);
- void mpc85xx_serial_initialize(void);
++/**
++ * sm_call_read - retrieve data from secure-monitor
++ *
++ * @dev:	Pointer to UCLASS_MESON_SM device
++ * @buffer:	Buffer to store the retrieved data
++ * @size:	Size of the buffer
++ * @cmd:	Index of the SMC function ID
++ * @args:	SMC arguments
++ *
++ * @return:	size of read data on success, a negative value on error
++ */
++int sm_call_read(struct udevice *dev, void *buffer, size_t size,
++		 u32 cmd, struct pt_regs *args);
++
++/**
++ * sm_call_write - send data to secure-monitor
++ *
++ * @dev:	Pointer to UCLASS_SM device
++ * @buffer:	Buffer containing data to send
++ * @size:	Size of the buffer
++ * @cmd:	Index of the SMC function ID
++ * @args:	SMC arguments
++ *
++ * @return:	size of sent data on success, a negative value on error
++ */
++int sm_call_write(struct udevice *dev, void *buffer, size_t size,
++		  u32 cmd, struct pt_regs *args);
++
++#endif /* __SM_H__ */
 -- 
-2.17.1
+2.25.1
 
