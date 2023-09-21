@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 000B9CD4938
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 073F7CD493D
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:59:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 651B886D7B;
-	Thu, 21 Sep 2023 03:58:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B6FAB86D96;
+	Thu, 21 Sep 2023 03:58:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eAJoM9Cc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A3LiN2Ep";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83C7C86DC1; Thu, 21 Sep 2023 03:58:08 +0200 (CEST)
-Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
- [IPv6:2607:f8b0:4864:20::e35])
+ id CED1786D92; Thu, 21 Sep 2023 03:58:08 +0200 (CEST)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56FF186D69
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:58:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BF3E86D7B
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:57:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe35.google.com with SMTP id
- ada2fe7eead31-4526f0bdf72so237852137.1
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:58:01 -0700 (PDT)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-79329a8f78bso20548339f.3
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:57:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261480; x=1695866280; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695261477; x=1695866277; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ovTfh6ERTsrOYQaBI8e8Lj6TjUXB7ByPOJaNS0CwdHw=;
- b=eAJoM9Cc8xUjcHKYnAvh7a15dsVb20vO5+/gi87lTfY47UFSJsWVZ2WlpM+0gCFvBe
- ZH7DdeAMTUJEk7aTgoBjGsz0eZyd/59WoEIr6f6MkrgwRbPMWRTNDI/aoXTSfeExOmA1
- MoofZJJ3l1d3oP3RVwn+0+lKGLfN/93naCOn0=
+ bh=rd5/hilknhcayViP68Eq5w07tYwW4pWcqIR2G2BOikM=;
+ b=A3LiN2Ep4jKCnOSr+EmEq58ZFwICSrsAXUrzSIN+7wSts4VOBLth5OIUKw6axNkPJm
+ n9J6YdBJCoKQ2ScI1TQrcnbDq8Yw3beY0wdLx4tCR27Sug4Myqv+KYm2pBHG9e6HITal
+ 9KvIyRXoWhdekUwIW/bFKZhZd+2YbO7EaR+zM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261480; x=1695866280;
+ d=1e100.net; s=20230601; t=1695261477; x=1695866277;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ovTfh6ERTsrOYQaBI8e8Lj6TjUXB7ByPOJaNS0CwdHw=;
- b=wWgcUbFEX29jpRzpvGWbuLPNR5bRi4yhzRM0lKx4niqQuIxgb/8wLmhm2UKHFHzH07
- Pb/ncOE0Rh9VqQ9HHs7j5f+GeDR4LRDdO4bLX0n3Ysiif8hUwzY6Cv7/bka9RdEA0tic
- tu5Put29kITSEofk0ycBVlclW1PlBxi4cTzdYJoHRPmeRXHQ2+n5Gwfj23yqK64dR4Qo
- Nx0AxYiNy4ytR+XCqLDo6DJ2qi+xmaVMfPTqPEW+wZxuo1o13FXqszQfe0vZymn/S/qL
- sdye+JOwm2wMmwaXXko7cxcULzN8J2e8KssHNf5Uen5Sqk5OzTRcp6+wP4SHqPIozEMg
- fZ2w==
-X-Gm-Message-State: AOJu0YxJ21rXVnngbadHM1AVxcZvshZuIh6WMLqdhleRZ7Z4pqpQfLfy
- PeiUxprDb09S58R+041hDqvbwcT/vcZGUYjgwVw=
-X-Google-Smtp-Source: AGHT+IHGDI6DT15weVbQawqZ7tarx8s83vQKiZLZwfEtaUTCfsTY68mMSDpxiov2eaFWpv8OG1V/Ww==
-X-Received: by 2002:a67:fc43:0:b0:450:c5e4:4869 with SMTP id
- p3-20020a67fc43000000b00450c5e44869mr4541996vsq.25.1695261480104; 
- Wed, 20 Sep 2023 18:58:00 -0700 (PDT)
+ bh=rd5/hilknhcayViP68Eq5w07tYwW4pWcqIR2G2BOikM=;
+ b=nDmC/5uNyJ40qo5TJPdXrn17sbRf+8kOsVHRJJorQoIiZfs7uDMy+f7vN0iqWc3ob5
+ Qe+NtQ+fsRUQBD9/oZfpsICTyvUzeqi+Z/AwtK2oUsXYYbpPWV4jK/wbs/4PrJY9AaSv
+ bY0LnE3FP96a0RyA10nTtDzPuOT/blW5WTa8UNL7FXfKCy/DiHZ1OfTb4/iXpo28oySN
+ JyPF3wI2wWKPm9OiS5XNGKBYdbKU8UUkQkVU7Av/8Sfcww84tkTub8ea66Weic25PMGh
+ 9utJSnyEGDmG2G9eLIC7KLQGUe6pfRxr3s/pQEBLdDlzN1bb1ACWbOoI3rZecoc+sJrd
+ ypqA==
+X-Gm-Message-State: AOJu0YyJ2mF9LZkVDehHgkkM5rfjlu5HY6vxNHmr8NX9x5FGc71YodGI
+ kBkXiV+rzBq2j7/KwW751lgr+H5MqDFAJeQjjVo=
+X-Google-Smtp-Source: AGHT+IGe9JUEORCd91RPxd0jaZVibp0WCi7zElEtB8uzoBBhDnO29T1XMFj/lKGz/m2mbHJZ5D4iNA==
+X-Received: by 2002:a5e:d510:0:b0:795:bea:ae13 with SMTP id
+ e16-20020a5ed510000000b007950beaae13mr4482740iom.20.1695261477779; 
+ Wed, 20 Sep 2023 18:57:57 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.59
+ y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:57:59 -0700 (PDT)
+ Wed, 20 Sep 2023 18:57:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH v2 16/32] dm: core: Ensure we run flattree tests on ofnode
-Date: Wed, 20 Sep 2023 19:57:05 -0600
-Message-ID: <20230921015730.1511373-17-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>
+Subject: [PATCH v2 14/32] spl: Move bloblist writing until the image is known
+Date: Wed, 20 Sep 2023 19:57:03 -0600
+Message-ID: <20230921015730.1511373-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
 References: <20230921015730.1511373-1-sjg@chromium.org>
@@ -88,156 +88,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We need the UT_TESTF_SCAN_FDT flag set for these tests to run with flat
-tree. In some cases it is missing, so add it.
+The bloblist should not be finalised until the image is fully set up.
+This allows any final handoff information to be included in the bloblist.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/dm/ofnode.c | 33 ++++++++++++++++++---------------
- 1 file changed, 18 insertions(+), 15 deletions(-)
+ common/spl/spl.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index 49fa5d27e6ec..a29c9aae870b 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -114,7 +114,7 @@ static int dm_test_ofnode_compatible_ot(struct unit_test_state *uts)
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 1f0412b96b32..b554ea0b1944 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -728,18 +728,6 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	}
  
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_compatible_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_compatible_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
+ 	spl_perform_fixups(&spl_image);
+-	if (CONFIG_IS_ENABLED(HANDOFF)) {
+-		ret = write_spl_handoff();
+-		if (ret)
+-			printf(SPL_TPL_PROMPT
+-			       "SPL hand-off write failed (err=%d)\n", ret);
+-	}
+-	if (CONFIG_IS_ENABLED(BLOBLIST)) {
+-		ret = bloblist_finish();
+-		if (ret)
+-			printf("Warning: Failed to finish bloblist (ret=%d)\n",
+-			       ret);
+-	}
  
- static int dm_test_ofnode_get_by_phandle(struct unit_test_state *uts)
- {
-@@ -146,7 +146,8 @@ static int dm_test_ofnode_get_by_phandle_ot(struct unit_test_state *uts)
+ 	os = spl_image.os;
+ 	if (os == IH_OS_U_BOOT) {
+@@ -786,6 +774,18 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 				       dev->name, rc);
+ 		}
+ 	}
++	if (CONFIG_IS_ENABLED(HANDOFF)) {
++		ret = write_spl_handoff();
++		if (ret)
++			printf(SPL_TPL_PROMPT
++			       "SPL hand-off write failed (err=%d)\n", ret);
++	}
++	if (CONFIG_IS_ENABLED(BLOBLIST)) {
++		ret = bloblist_finish();
++		if (ret)
++			printf("Warning: Failed to finish bloblist (ret=%d)\n",
++			       ret);
++	}
  
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_get_by_phandle_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_get_by_phandle_ot,
-+	UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
- static int check_prop_values(struct unit_test_state *uts, ofnode start,
- 			     const char *propname, const char *propval,
-@@ -196,7 +197,8 @@ static int dm_test_ofnode_by_prop_value_ot(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_by_prop_value_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_by_prop_value_ot,
-+	UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
- static int dm_test_ofnode_fmap(struct unit_test_state *uts)
- {
-@@ -237,7 +239,7 @@ static int dm_test_ofnode_read(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_read, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
-+DM_TEST(dm_test_ofnode_read, UT_TESTF_SCAN_FDT);
- 
- static int dm_test_ofnode_read_ot(struct unit_test_state *uts)
- {
-@@ -256,7 +258,7 @@ static int dm_test_ofnode_read_ot(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_read_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_read_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
- static int dm_test_ofnode_phandle(struct unit_test_state *uts)
- {
-@@ -452,7 +454,8 @@ static int dm_test_ofnode_get_child_count_ot(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_get_child_count_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_get_child_count_ot,
-+	UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
- static int dm_test_ofnode_is_enabled(struct unit_test_state *uts)
- {
-@@ -526,7 +529,7 @@ static int dm_test_ofnode_get_reg_ot(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_get_reg_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_get_reg_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
- static int dm_test_ofnode_get_path(struct unit_test_state *uts)
- {
-@@ -566,7 +569,7 @@ static int dm_test_ofnode_get_path_ot(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_get_path_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_get_path_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
- static int dm_test_ofnode_conf(struct unit_test_state *uts)
- {
-@@ -581,7 +584,7 @@ static int dm_test_ofnode_conf(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_conf, 0);
-+DM_TEST(dm_test_ofnode_conf, UT_TESTF_SCAN_FDT);
- 
- static int dm_test_ofnode_for_each_compatible_node(struct unit_test_state *uts)
- {
-@@ -646,7 +649,7 @@ static int dm_test_ofnode_string(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_string, 0);
-+DM_TEST(dm_test_ofnode_string, UT_TESTF_SCAN_FDT);
- 
- static int dm_test_ofnode_string_err(struct unit_test_state *uts)
- {
-@@ -717,7 +720,7 @@ static int dm_test_ofnode_get_phy(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_get_phy, 0);
-+DM_TEST(dm_test_ofnode_get_phy, UT_TESTF_SCAN_FDT);
- 
- /**
-  * make_ofnode_fdt() - Create an FDT for testing with ofnode
-@@ -901,7 +904,7 @@ static int dm_test_ofnode_write_copy_ot(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_write_copy_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_write_copy_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
- static int dm_test_ofnode_u32(struct unit_test_state *uts)
- {
-@@ -1103,7 +1106,7 @@ static int dm_test_ofnode_by_compatible_ot(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_by_compatible_ot, UT_TESTF_OTHER_FDT);
-+DM_TEST(dm_test_ofnode_by_compatible_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
- static int dm_test_ofnode_find_subnode(struct unit_test_state *uts)
- {
-@@ -1272,7 +1275,7 @@ static int dm_test_livetree_align(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_livetree_align, UT_TESTF_LIVE_TREE);
-+DM_TEST(dm_test_livetree_align, UT_TESTF_SCAN_FDT | UT_TESTF_LIVE_TREE);
- 
- /* check that it is possible to load an arbitrary livetree */
- static int dm_test_livetree_ensure(struct unit_test_state *uts)
-@@ -1291,4 +1294,4 @@ static int dm_test_livetree_ensure(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_livetree_ensure, 0);
-+DM_TEST(dm_test_livetree_ensure, UT_TESTF_SCAN_FDT);
+ 	spl_board_prepare_for_boot();
+ 	jump_to_image_no_args(&spl_image);
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
