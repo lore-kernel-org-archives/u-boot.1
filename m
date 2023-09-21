@@ -4,55 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB96E71088
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB269E71089
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 15:21:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E33186429;
-	Thu, 21 Sep 2023 17:16:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0F378864EE;
+	Thu, 21 Sep 2023 17:21:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1695309369;
-	bh=AVaykbtxJ3vljB/qdyOLFHPDmhgiG8pPQ62or8susPI=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Jk1liICuzcxtgY+SKfsLDA8w6psde56w3kFGE5WS0ZmxUGENUf1ySBsaWycRQAkfJ
-	 FN1qowZo1rs7/KGNHB+FnsULR1Bs1Yfy6YxNL6ugNLlJ2JNrF6rauZOfN35S72GFOJ
-	 FhMwwx79WS7+4ZOvCFBKzsgs9PP1pWRht9JoAuvFmVvZs/JxWoUxbv/Rv+jia6ASEg
-	 tZOlmrBpcC359KcqJsIoBZgJ6naO7RLoPVhFX+oJXcmj/U90Rrx1Y3YpyCg0359/2v
-	 JXDRYyhuk8BrMQbumPZE2xS1/63XazyYWCnm4KG3pwFOQZ1dB8CDhMY9n1EjPPz+xQ
-	 ciAl4iE1+HRLQ==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="HLRnLX/w";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F66F867D2; Thu, 21 Sep 2023 17:16:08 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id C164286377; Thu, 21 Sep 2023 17:20:59 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43A6B86377
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:16:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BDD5864EE
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 17:20:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4RrzW72WVwz9sSl;
- Thu, 21 Sep 2023 17:16:03 +0200 (CEST)
-Message-ID: <84b0485a-5175-8bee-474f-b713f16c00dd@denx.de>
-Date: Thu, 21 Sep 2023 17:16:01 +0200
+ key-exchange X25519 server-signature RSA-PSS (2048 bits))
+ (No client certificate requested)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 2182961DA0
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:20:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C39B3C4E773
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:20:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1695309653;
+ bh=rx2mBq0S4jOILd4Wy6fahnc3smaID9qQL5yme6+cfXo=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=HLRnLX/wSplzOGEeyeBmR/Fv4NUMnPnLmnmnxPUt/KtmG2LhWs1zHxcxO+l/7d1xm
+ 7RIIcOpj3VUysvVz80wzBpWSV3EZr6PxbixD2ttI0aXZGwjLWIcpCmSZchVuf9ONyF
+ r1FIAwffNsSq4WxcwyB0ZkGVq9oB6hkqMKnIPMU45DVjq8a1ZvwpA8NNcDZb2RONzA
+ HDeXASWJk18PEXGIvcwzJkuNvnTl/nO8srNo8BOrkdjQQvsTXqVE6gMPm+BPLgjycc
+ 3Hgb8ggMrlKSkgEmISe4WBwkBx3EBlSPYnmC/UM8+z8fRARyWz7iCG/YfZ04dc2zCS
+ FA19n/Gv/JchA==
+Received: by mail-lf1-f41.google.com with SMTP id
+ 2adb3069b0e04-5041bb9ce51so1888917e87.1
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 08:20:53 -0700 (PDT)
+X-Gm-Message-State: AOJu0Ywr3DRY0GeCQs0sJMdyyi5AAixKQc1fcmqcRZtJuG6qwFbt3dO8
+ 6yb2MjoKFam46VrHBeQp7kcSCizs2NbqC5Mfdw==
+X-Google-Smtp-Source: AGHT+IF6PiJLK0gbCkd0ug1K5ldijn1PTOoqwsaU2NTp56tyTljvoRHYmhguxEitR2xZCgafPoy7TVLHNd/qL9jHCJw=
+X-Received: by 2002:a05:6512:2387:b0:503:af9:eb1c with SMTP id
+ c7-20020a056512238700b005030af9eb1cmr6330203lfv.27.1695309651666; Thu, 21 Sep
+ 2023 08:20:51 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm64: versal: Add SelectMAP boot mode identification
-Content-Language: en-US
-To: Michal Simek <michal.simek@amd.com>, "Polak, Leszek" <LPolak@arri.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <DU0PR07MB8419EB5D613237A44374949DC8FAA@DU0PR07MB8419.eurprd07.prod.outlook.com>
- <5f2b9d87-7427-4a6f-9a67-017ae78cb51d@amd.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <5f2b9d87-7427-4a6f-9a67-017ae78cb51d@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20230907214012.74978-1-sjg@chromium.org>
+ <CAL_Jsq+WfWrZErmz4u3_-CoVAuxL21UndcRekfJ1e61ZMMBqRw@mail.gmail.com>
+ <CAPnjgZ3ALq9Hr+t4CywO113mKr83xCgFhfz+6=jav3T3R1_TGA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3ALq9Hr+t4CywO113mKr83xCgFhfz+6=jav3T3R1_TGA@mail.gmail.com>
+From: Rob Herring <robh@kernel.org>
+Date: Thu, 21 Sep 2023 10:20:39 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqJdTR9morobxty1egHFmTwL1-Kh3-sQ5CY7xit80fE2jw@mail.gmail.com>
+Message-ID: <CAL_JsqJdTR9morobxty1egHFmTwL1-Kh3-sQ5CY7xit80fE2jw@mail.gmail.com>
+Subject: Re: [PATCH v6 1/2] schemas: Add some common reserved-memory usages
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, Dhaval Sharma <dhaval@rivosinc.com>, 
+ Guo Dong <guo.dong@intel.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Yunhui Cui <cuiyunhui@bytedance.com>, Chiu Chasel <chasel.chiu@intel.com>, 
+ Mark Rutland <mark.rutland@arm.com>, linux-acpi@vger.kernel.org, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Ard Biesheuvel <ardb@kernel.org>, 
+ Tom Rini <trini@konsulko.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ Gua Guo <gua.guo@intel.com>, ron minnich <rminnich@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,123 +88,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/21/23 13:14, Michal Simek wrote:
-> 
-> 
-> On 9/19/23 14:47, Polak, Leszek wrote:
->> Add missing SelectMAP bootmode for proper identification during boot.
->>
->> The SelectMAP configuration interface provides an 8-bit, 16-bit or
->> 32-bit bidirectional data bus interface to the Versal FPGA
->> configuration logic that can be used for both configuration and
->> readback.
->>
->> A connected microcontoller to the SelectMAP interface can load boot
->> image with bitstream, TF-A (ARM Trusted Firmware) and U-Boot.
->>
->> This commit adds the missing identification of the SelectMAP mode.
->>
->> Signed-off-by: Leszek Polak <lpolak@arri.de>
->> Cc: Michal Simek <michal.simek@amd.com>
->> Cc: Stefan Roese <sr@denx.de>
+On Thu, Sep 21, 2023 at 9:38=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Hi Rob,
+>
+> On Thu, 21 Sept 2023 at 08:25, Rob Herring <robh@kernel.org> wrote:
+> >
+> > On Thu, Sep 7, 2023 at 4:40=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
+rote:
+> > >
+> > > It is common to split firmware into 'Platform Init', which does the
+> > > initial hardware setup and a "Payload" which selects the OS to be boo=
+ted.
+> > > Thus an handover interface is required between these two pieces.
+> > >
+> > > This aims to provide an small schema addition for the memory mapping
+> > > needed to keep these two pieces working together well.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > Changes in v6:
+> > > - Drop mention of UEFI
+> > > - Use compatible strings instead of node names
+> > >
+> > > Changes in v5:
+> > > - Drop the memory-map node (should have done that in v4)
+> > > - Tidy up schema a bit
+> > >
+> > > Changes in v4:
+> > > - Make use of the reserved-memory node instead of creating a new one
+> > >
+> > > Changes in v3:
+> > > - Reword commit message again
+> > > - cc a lot more people, from the FFI patch
+> > > - Split out the attributes into the /memory nodes
+> > >
+> > > Changes in v2:
+> > > - Reword commit message
+> > >
+> > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++=
+++
+> > >  1 file changed, 71 insertions(+)
+> > >  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.=
+yaml
+> > >
+> > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml b/=
+dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > new file mode 100644
+> > > index 0000000..4889f59
+> > > --- /dev/null
+> > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > @@ -0,0 +1,71 @@
+> > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> > > +%YAML 1.2
+> > > +---
+> > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserved.y=
+aml#
+> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > +
+> > > +title: Common memory reservations
+> > > +
+> > > +description: |
+> > > +  Specifies that the reserved memory region can be used for the purp=
+ose
+> > > +  indicated by its compatible string.
+> > > +
+> > > +  Clients may reuse this reserved memory if they understand what it =
+is for,
+> > > +  subject to the notes below.
+> > > +
+> > > +maintainers:
+> > > +  - Simon Glass <sjg@chromium.org>
+> > > +
+> > > +allOf:
+> > > +  - $ref: reserved-memory.yaml
+> > > +
+> > > +properties:
+> > > +  compatible:
+> > > +    description: |
+> > > +      This describes some common memory reservations:
+> > > +
+> > > +         acpi-reclaim: Contains ACPI tables; memory may be reclaimed=
+ when the
+> > > +           tables are no-longer needed
+> >
+> > I think you are mixing 2 things with the name here. What the memory
+> > contains and what to do with it. You don't need the latter. The
+> > consumer of the region will know what to do with it if anything based
+> > on knowing what is in the region. For example, The DTB passed to the
+> > OS is typically in a reserved region (probably still /mem-reserve/
+> > though). The DTB may remain there forever or the OS could copy it
+> > somewhere else and free the reserved region. The Linux kernel does
+> > both depending on the arch. (Of course there is no "dtb" compatible
+> > because we have to pass the location of the dtb to even find the
+> > reserved regions in the first place.)
+> >
+> > So the question here is whether just "acpi" (or "acpi-tables"?) would
+> > be explicit enough?
+>
+> Yes acpi-tables would be enough.
+>
+> >
+> > > +         acpi-nvs: Contains ACPI Non-volatile-storage data; memory m=
+ay be
+> > > +           reclaimed when the tables are no-longer needed
+> >
+> > No need to say anything about reclaiming.
+>
+> OK...so what about all that discussion about being able to reclaim the
+> memory if you know what it is for? Where should that be written? Or is
+> it somewhere else already?
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+Reclaiming is a policy of the consumer of the data. It belongs in the
+documentation of the consumer if you are going to document it.
 
-Thanks,
-Stefan
+The global policy is you can't use reserved regions and you can't
+reclaim them if you don't know what they are. If you want to add
+something to that effect in reserved-memory.yaml or the spec, that's
+fine, but that's not a per compatible thing.
 
->> ---
->>   arch/arm/mach-versal-net/include/mach/hardware.h | 1 +
->>   arch/arm/mach-versal/include/mach/hardware.h     | 1 +
->>   board/xilinx/versal-net/board.c                  | 4 ++++
->>   board/xilinx/versal/board.c                      | 5 +++++
->>   4 files changed, 11 insertions(+)
->>
->> diff --git a/arch/arm/mach-versal-net/include/mach/hardware.h 
->> b/arch/arm/mach-versal-net/include/mach/hardware.h
->> index 9bddb8b00723..767cdd368682 100644
->> --- a/arch/arm/mach-versal-net/include/mach/hardware.h
->> +++ b/arch/arm/mach-versal-net/include/mach/hardware.h
->> @@ -66,6 +66,7 @@ struct crp_regs {
->>   #define EMMC_MODE    0x00000006
->>   #define USB_MODE    0x00000007
->>   #define OSPI_MODE    0x00000008
->> +#define SELECTMAP_MODE    0x0000000A
->>   #define SD1_LSHFT_MODE    0x0000000E /* SD1 Level shifter */
->>   #define JTAG_MODE    0x00000000
->>   #define BOOT_MODE_USE_ALT    0x100
->> diff --git a/arch/arm/mach-versal/include/mach/hardware.h 
->> b/arch/arm/mach-versal/include/mach/hardware.h
->> index 000af974e867..9d1c2f0dcfc1 100644
->> --- a/arch/arm/mach-versal/include/mach/hardware.h
->> +++ b/arch/arm/mach-versal/include/mach/hardware.h
->> @@ -82,6 +82,7 @@ struct crp_regs {
->>   #define EMMC_MODE    0x00000006
->>   #define USB_MODE    0x00000007
->>   #define OSPI_MODE    0x00000008
->> +#define SELECTMAP_MODE    0x0000000A
->>   #define SD1_LSHFT_MODE    0x0000000E /* SD1 Level shifter */
->>   #define JTAG_MODE    0x00000000
->>   #define BOOT_MODE_USE_ALT    0x100
->> diff --git a/board/xilinx/versal-net/board.c 
->> b/board/xilinx/versal-net/board.c
->> index f0d2224b332e..992e0df73b30 100644
->> --- a/board/xilinx/versal-net/board.c
->> +++ b/board/xilinx/versal-net/board.c
->> @@ -287,6 +287,10 @@ int board_late_init(void)
->>           mode = "mmc";
->>           bootseq = dev_seq(dev);
->>           break;
->> +    case SELECTMAP_MODE:
->> +        puts("SELECTMAP_MODE\n");
->> +        mode = "selectmap";
-> 
-> We are not defining distro boot for selectmap that's why boot_targets 
-> don't need to be extended. That's why please remove this line.
-> 
->> +        break;
->>       default:
->>           mode = "";
->>           printf("Invalid Boot Mode:0x%x\n", bootmode);
->> diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
->> index 60bf37d3c90f..b619dbc73c80 100644
->> --- a/board/xilinx/versal/board.c
->> +++ b/board/xilinx/versal/board.c
->> @@ -213,6 +213,10 @@ int board_late_init(void)
->>           mode = "mmc";
->>           bootseq = dev_seq(dev);
->>           break;
->> +    case SELECTMAP_MODE:
->> +        puts("SELECTMAP_MODE\n");
->> +        mode = "selectmap";
-> 
-> The same here.
-> 
->> +        break;
->>       default:
->>           mode = "";
->>           printf("Invalid Boot Mode:0x%x\n", bootmode);
->> @@ -298,6 +302,7 @@ enum env_location env_get_location(enum 
->> env_operation op, int prio)
->>               return ENVL_SPI_FLASH;
->>           return ENVL_NOWHERE;
->>       case JTAG_MODE:
->> +    case SELECTMAP_MODE:
->>       default:
->>           return ENVL_NOWHERE;
->>       }
->> -- 
->> 2.42.0
-> 
-> The rest looks good to me.
-> 
-> Thanks,
-> Michal
+> > I know some ACPIisms (e.g. DSDT), but I don't know what NVS or
+> > "Non-volatile-storage data" is in an ACPI context.
+> >
+> > > +         boot-code: Contains code used for booting; memory may be re=
+claimed by
+> > > +           the OS when it is running
+> > > +         boot-code: Contains data used for booting; memory may be re=
+claimed by
+> >
+> > boot-data?
+>
+> Yes
+>
+> >
+> > > +           the OS when it is running
+> >
+> > I thought these were for stages before we get to OS?
+>
+> Yes...but of course these will be passed on to the OS in some form.
+> See above re reclaiming.
+>
+> >
+> > > +         runtime-code: Contains code used for interacting with the s=
+ystem when
+> > > +           running; memory may be reclaimed if this code is not call=
+ed
+> > > +         runtime-data: Contains data used for interacting with the s=
+ystem when
+> > > +           running; memory may be reclaimed if the runtime code is n=
+ot used
+> >
+> > "boot" vs. "runtime" seem too vague. However, if these mean EFI boot
+> > time services and runtime services, then I understand exactly what
+> > they are. In that case dropping 'uefi,' was a mistake. But EFI has its
+> > own way to define these regions, right?
+>
+> I really don't want to do another round of that circle. I was asked to
+> drop mention of EFI which I did. If these are too vague, what should I
+> do instead? Perhaps:
+>
+> boot-code / data
+> os-code / data
 
-Viele Grüße,
-Stefan Roese
+The kernel is boot code (and os code and runtime code). Can I use
+these for the kernel image? Certainly not. But they are too vague to
+understand when to use them and when not to. Are they specific to EDK2
+implementation? Then perhaps they need an 'edk2' prefix.
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+Either these are related to EFI boot time services and runtime
+services or they aren't. Which is it? If they are related, then EFI
+should certainly be mentioned. Review comments are wrong all the time
+when the reasoning is missing or misunderstood. Please back up and
+explain why these are needed. Maybe it's buried in prior threads
+somewhere, but I'm not going back to re-read all that. This patch has
+to stand on its own.
+
+Rob
