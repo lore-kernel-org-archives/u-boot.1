@@ -4,64 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94B1EE71094
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 17:04:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAD27E7D0A0
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 17:18:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BCA586BE5;
-	Thu, 21 Sep 2023 19:04:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E69428645F;
+	Thu, 21 Sep 2023 19:18:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WBzmlFfu";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="hlt+0v8B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51F2786B7A; Thu, 21 Sep 2023 19:04:03 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id DD4D786B29; Thu, 21 Sep 2023 19:06:48 +0200 (CEST)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D25A186BD5
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 19:04:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A0D4E863CF
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 19:06:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=microchip.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38LH3vOq082241;
- Thu, 21 Sep 2023 12:03:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695315837;
- bh=KejzwxNgEhTaNAiS1kN9toLDLE0iCN9sbXxre/tqClo=;
- h=From:To:CC:Subject:Date;
- b=WBzmlFfuRGOLXL8p7tialu9rucOlN3nTSNWkCut6ZfgTSaxtp3xBibj7UKU2jYCQf
- GspLVUSC2SIEKFz+iJ8Ear3BsUpTlCh5tfDQImXEz+SALKsbGwQJlTlOAsfKC2cVoF
- /IWmr9I9kadku/HvPtov2VpCi0NHC2adhxzpzigc=
-Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38LH3vSP028455
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 21 Sep 2023 12:03:57 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
- Sep 2023 12:03:56 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 21 Sep 2023 12:03:57 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38LH3red048162;
- Thu, 21 Sep 2023 12:03:54 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <nm@ti.com>, <vigneshr@ti.com>, <seanga2@gmail.com>
-CC: <u-boot@lists.denx.de>, <lukma@denx.de>, <bb@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>
-Subject: [PATCH] clk: ti: clk-sci: Notify AVS driver based upon clock rate
-Date: Thu, 21 Sep 2023 22:33:43 +0530
-Message-ID: <20230921170343.3214027-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=Durai.ManickamKR@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1695316006; x=1726852006;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=6p+tt14UFGRhfkOH+tjMOGxJERwyfenp+zvq7iVXC/4=;
+ b=hlt+0v8BnaaHMN8o4Zl3pubsTKSnjuSSJXTaopJw5NfkRrPJEkFZBDFr
+ oDtrIwTL5T6uj9zWAGdocr/Cn/FZEASpYOHAyCtDx3JSUk/wCyof9+3Nr
+ WmGZjKTVeIDZvcelYSPV7lpVyEqw22xjAyPE7K1uYSIOieGhM6jLgE+zG
+ DA2zeO9DdobOnUK4Bv6Heds3R8gPACXcoA0H5eqpy3rjSC5YuwyqrNq70
+ fACqY5zTuv8S7yNzRK4wYv+6bZlGVJ8ceGP4kklsjnXXzL2RNQl9DulGX
+ cpLVK20dcJCTKKS+tg2ismvAs9g/NA11L7JUDhkOnbwxGuqK+rs7oRYz8 Q==;
+X-CSE-ConnectionGUID: +MSlomsGQRGNiRXDNe2IEg==
+X-CSE-MsgGUID: tR4wZjYwSaiMHaqB61mqhQ==
+X-ThreatScanner-Verdict: Negative
+X-IronPort-AV: E=Sophos;i="6.03,166,1694761200"; 
+   d="scan'208";a="5770712"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 21 Sep 2023 10:06:44 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.21; Thu, 21 Sep 2023 10:06:43 -0700
+Received: from che-lt-i66125lx.microchip.com (10.10.85.11) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
+ 15.1.2507.21 via Frontend Transport; Thu, 21 Sep 2023 10:06:40 -0700
+From: Durai Manickam KR <durai.manickamkr@microchip.com>
+To: <u-boot@lists.denx.de>
+CC: <durai.manickamkr@microchip.com>, <hari.prasathge@microchip.com>,
+ <varshini.rajendran@microchip.com>, <cristian.birsan@microchip.com>,
+ <nicolas.ferre@microchip.com>, <balamanikandan.gunasundar@microchip.com>
+Subject: [PATCH 0/4] Add support for sam9x60 curiosity
+Date: Thu, 21 Sep 2023 22:36:27 +0530
+Message-ID: <20230921170631.45752-1-durai.manickamkr@microchip.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Thu, 21 Sep 2023 19:18:38 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,54 +83,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AVS driver needs to be notified before or after clock change,
-depending upon new rate is greater or less than current clock rate.
+This patch series adds boot from NAND support, configs update and 
+fixes. The changes has been done on top of u-boot version 2023.07.
 
-Fixes: 1e0aa873bc7cd ("clk: clk-ti-sci: Notify AVS driver upon setting clock rate")
+Durai Manickam KR (4):
+  configs: at91: sam9x60_curiosity: update
+    sam9x60_curiosity_mmc_defconfig
+  configs: at91: sam9x60_curiosity: Add
+    sam9x60_curiosity_nandflash_defconfig
+  ARM: dts: at91: sam9x60_curiosity: Enable NAND support
+  ARM: dts: at91: sam9x60_curiosity: fix eeprom compatible
 
-Cc: Keerthy <j-keerthy@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
-Boot logs
-https://gist.github.com/uditkumarti/5a05f9b18b8e5bc347ef98c901cc13d4
+ arch/arm/dts/at91-sam9x60_curiosity.dts       | 106 +++++++++++++++++-
+ board/atmel/sam9x60_curiosity/MAINTAINERS     |   1 +
+ configs/sam9x60_curiosity_mmc_defconfig       |  14 +++
+ configs/sam9x60_curiosity_nandflash_defconfig |  92 +++++++++++++++
+ 4 files changed, 212 insertions(+), 1 deletion(-)
+ create mode 100644 configs/sam9x60_curiosity_nandflash_defconfig
 
-Separate patch for clk-sci driver to handle AVS,
-as per review feedback in
-https://lore.kernel.org/all/20230920120256.2901860-1-u-kumar1@ti.com/
-
- drivers/clk/ti/clk-sci.c | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/clk/ti/clk-sci.c b/drivers/clk/ti/clk-sci.c
-index 74df5a397b..8fc3254c99 100644
---- a/drivers/clk/ti/clk-sci.c
-+++ b/drivers/clk/ti/clk-sci.c
-@@ -91,12 +91,12 @@ static ulong ti_sci_clk_set_rate(struct clk *clk, ulong rate)
- 	const struct ti_sci_handle *sci = data->sci;
- 	const struct ti_sci_clk_ops *cops = &sci->ops.clk_ops;
- 	int ret;
-+	int freq_scale_up = rate >= ti_sci_clk_get_rate(clk) ? 1 : 0;
- 
- 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
- 
--#ifdef CONFIG_K3_AVS0
--	k3_avs_notify_freq(clk->id, clk->data, rate);
--#endif
-+	if (IS_ENABLED(CONFIG_K3_AVS0) && freq_scale_up)
-+		k3_avs_notify_freq(clk->id, clk->data, rate);
- 
- 	ret = cops->set_freq(sci, clk->id, clk->data, 0, rate, ULONG_MAX);
- 	if (ret) {
-@@ -104,6 +104,9 @@ static ulong ti_sci_clk_set_rate(struct clk *clk, ulong rate)
- 		return ret;
- 	}
- 
-+	if (IS_ENABLED(CONFIG_K3_AVS0) && !freq_scale_up)
-+		k3_avs_notify_freq(clk->id, clk->data, rate);
-+
- 	return rate;
- }
- 
 -- 
-2.34.1
+2.25.1
 
