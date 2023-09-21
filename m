@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E94CD4938
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 02:00:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFE6BCD4938
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 02:01:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D025686DF2;
-	Thu, 21 Sep 2023 03:58:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A49986DA3;
+	Thu, 21 Sep 2023 03:58:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HlqIzUpn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jd6jBSDR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C961D86BFB; Thu, 21 Sep 2023 03:58:18 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 55C758615A; Thu, 21 Sep 2023 03:58:20 +0200 (CEST)
+Received: from mail-vs1-xe31.google.com (mail-vs1-xe31.google.com
+ [IPv6:2607:f8b0:4864:20::e31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B20A86D6E
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:58:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E0BA86C3E
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:58:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-79545e141c7so11607639f.0
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:58:00 -0700 (PDT)
+Received: by mail-vs1-xe31.google.com with SMTP id
+ ada2fe7eead31-452527dded1so242860137.0
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:58:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695261479; x=1695866279; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695261488; x=1695866288; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x6QZuQgplt3iU4tAg/IkdXpx55MqjaPvuCvnlaaaC58=;
- b=HlqIzUpnp44jQpG9d/FHZAbKyPxYYh/phNXFyTpbSCr0P03BwdY4dApbDIKa0HIyqJ
- FoS8UaJkfV9zXL+poBfTHGmwGXS3O1IGSpuzDIdnGUO2FF/HkgMhjAnWQP4cy584VHQV
- mYJmxRPygIfYDTXBolmBPPW/Pw5QzFtztkviE=
+ bh=wv3ykVIZE/QtHXnzcOO9VmR4yUqIAZmtqoPu6ubEKFE=;
+ b=jd6jBSDR73wSlH4SVyhPVheM1yhUBHSvcg9fCTD+OeOx7ZxMesiNGSIbbtPW8OyEHc
+ C51Z1HiOWSltHmQj2zUGDDgV7n6APDIn/K/3mNfZrptOsOH5B6j6n0DDluXgnFiTltvE
+ MvILWZJ7kshgp4yNr5ul35wg6ar1vdabDweIs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695261479; x=1695866279;
+ d=1e100.net; s=20230601; t=1695261488; x=1695866288;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=x6QZuQgplt3iU4tAg/IkdXpx55MqjaPvuCvnlaaaC58=;
- b=eiCtzNqdsIhhlDXbbU5UijofRBP8JTZTBlpWoUXTJaPOnofolyxtgJ1FIZdqIk7ik3
- rk5c/kL126BHysJ0as76Nb5N1qcVpXxXCU/kNhjGKCjx6jKzpcG7Pnih5ZK6PKoORHUn
- DXXlMO8DepR01xhKTd4wMjdoXEOgVleotdRq+UbrWaro7ZtqwwKa+ze11BvKIMuRywKt
- SqeMOltmyFTnyWX46eMMB5Nrq49K0ciYOOR34jDuHhT4/i44WOhe3ox4ulqcGGkEscJP
- SjaDWcQvB5c5l7cmRKrsnX95KVCqF1eeUarfauULF3qLyZ72yoZigHta3R1hSk2H+CoV
- a2jA==
-X-Gm-Message-State: AOJu0YyFDrOg6vJ0/I3nTNcRmXyGYuZljPZZdS/0agflPafYWBmEraMt
- +ej6IMgtK2uKsExDFOdP9ipe1WFPBdLRiKzSTuw=
-X-Google-Smtp-Source: AGHT+IEqlvnu/Ny1Fos9KNLShTnK8LG+jjvn91GpsjNRLnxNKz0QOcqTZlOZoqMJaHzO/jAtmgOtvQ==
-X-Received: by 2002:a6b:dc1a:0:b0:791:8f62:31ef with SMTP id
- s26-20020a6bdc1a000000b007918f6231efmr3802688ioc.5.1695261478903; 
- Wed, 20 Sep 2023 18:57:58 -0700 (PDT)
+ bh=wv3ykVIZE/QtHXnzcOO9VmR4yUqIAZmtqoPu6ubEKFE=;
+ b=gpkYvKL1UUTN80m5YOh/48satraKU803ykbEmkuEUeFLr3B1RRW4WuaNtLT5ocdkr8
+ a85X1m/UF4evGGWcMT6XI9uRhvk18cQsVjkghBnPjRYB17/7XyPTOXGxaXMsChha9UPp
+ DvSJSSNQYkm7S/zj2pdPGTG2N4SAPXz6cuSPfbGB0TCiDIZxL+Xc4cisrrEsKuPZjZqt
+ q5VixS2Jp7wq8U4BbLifiWsIv0ngKpSrIzVxq53nJDwZB9eYx7YKNPEFZbnBRKH/KDUH
+ fiPuPZKJSbKy4NPtAACnvt/R5vyfQQug8iducLv+kLwuQfE21Fn4KNdfyYmhq9arzvV5
+ DEaA==
+X-Gm-Message-State: AOJu0YzKlo941Dg4ViypHBCFhC9paGzcvxYee16A49SM/lMvrxdAd1FW
+ DIyb4bfD2EFaMfG9G2j3JP8+IJeTEJJqNGLPNfs=
+X-Google-Smtp-Source: AGHT+IGLznH3oauj/QySapz07VotVz6/ulGqxnz8EVuv1Irtr0ZGNJIgEJGHggeGpRZcJpwMCivxDQ==
+X-Received: by 2002:a67:e8da:0:b0:452:58cc:d29e with SMTP id
+ y26-20020a67e8da000000b0045258ccd29emr4946950vsn.11.1695261488012; 
+ Wed, 20 Sep 2023 18:58:08 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.57.58
+ y4-20020a02c004000000b00437c3a7b49dsm85317jai.156.2023.09.20.18.58.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 18:57:58 -0700 (PDT)
+ Wed, 20 Sep 2023 18:58:07 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH v2 15/32] dm: core: Reverse the argument order in
- ofnode_copy_props()
-Date: Wed, 20 Sep 2023 19:57:04 -0600
-Message-ID: <20230921015730.1511373-16-sjg@chromium.org>
+Subject: [PATCH v2 23/32] dm: core: Support writing a 64-bit value
+Date: Wed, 20 Sep 2023 19:57:12 -0600
+Message-ID: <20230921015730.1511373-24-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921015730.1511373-1-sjg@chromium.org>
 References: <20230921015730.1511373-1-sjg@chromium.org>
@@ -89,121 +88,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Follow the order used by memcpy() as it may be less confusing.
+Add support for writing a single 64-bit value into a property.
+
+Repurpose the existing tests to handle this case too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/vbe_request.c    | 2 +-
- boot/vbe_simple_os.c  | 2 +-
- drivers/core/ofnode.c | 2 +-
- include/dm/ofnode.h   | 6 +++---
- test/dm/ofnode.c      | 9 ++++-----
- 5 files changed, 10 insertions(+), 11 deletions(-)
+ drivers/core/ofnode.c | 17 ++++++++++++++++-
+ include/dm/ofnode.h   | 10 ++++++++++
+ test/dm/ofnode.c      | 15 +++++++++++++--
+ 3 files changed, 39 insertions(+), 3 deletions(-)
 
-diff --git a/boot/vbe_request.c b/boot/vbe_request.c
-index 2f218d4bf97c..917251afa1ca 100644
---- a/boot/vbe_request.c
-+++ b/boot/vbe_request.c
-@@ -187,7 +187,7 @@ static int bootmeth_vbe_ft_fixup(void *ctx, struct event *event)
- 		ret = ofnode_add_subnode(dest_parent, name, &dest);
- 		if (ret && ret != -EEXIST)
- 			return log_msg_ret("add", ret);
--		ret = ofnode_copy_props(node, dest);
-+		ret = ofnode_copy_props(dest, node);
- 		if (ret)
- 			return log_msg_ret("cp", ret);
- 
-diff --git a/boot/vbe_simple_os.c b/boot/vbe_simple_os.c
-index 3285e438a568..84626cdeaf24 100644
---- a/boot/vbe_simple_os.c
-+++ b/boot/vbe_simple_os.c
-@@ -94,7 +94,7 @@ static int bootmeth_vbe_simple_ft_fixup(void *ctx, struct event *event)
- 
- 		/* Copy over the vbe properties for fwupd */
- 		log_debug("Fixing up: %s\n", dev->name);
--		ret = ofnode_copy_props(dev_ofnode(dev), subnode);
-+		ret = ofnode_copy_props(subnode, dev_ofnode(dev));
- 		if (ret)
- 			return log_msg_ret("cp", ret);
- 
 diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 8311282abf69..8227eac1e4fe 100644
+index 0229695dba1f..2ef4114cb6f8 100644
 --- a/drivers/core/ofnode.c
 +++ b/drivers/core/ofnode.c
-@@ -1672,7 +1672,7 @@ int ofnode_add_subnode(ofnode node, const char *name, ofnode *subnodep)
- 	return ret;	/* 0 or -EEXIST */
+@@ -1621,7 +1621,22 @@ int ofnode_write_u32(ofnode node, const char *propname, u32 value)
+ 		return -ENOMEM;
+ 	*val = cpu_to_fdt32(value);
+ 
+-	return ofnode_write_prop(node, propname, val, sizeof(value), false);
++	return ofnode_write_prop(node, propname, val, sizeof(value), true);
++}
++
++int ofnode_write_u64(ofnode node, const char *propname, u64 value)
++{
++	fdt64_t *val;
++
++	assert(ofnode_valid(node));
++
++	log_debug("%s = %llx", propname, (unsigned long long)value);
++	val = malloc(sizeof(*val));
++	if (!val)
++		return -ENOMEM;
++	*val = cpu_to_fdt64(value);
++
++	return ofnode_write_prop(node, propname, val, sizeof(value), true);
  }
  
--int ofnode_copy_props(ofnode src, ofnode dst)
-+int ofnode_copy_props(ofnode dst, ofnode src)
- {
- 	struct ofprop prop;
- 
+ int ofnode_write_bool(ofnode node, const char *propname, bool value)
 diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index 0a85db31f360..abdfa58036d5 100644
+index 58c6849534ea..726d8f82ddf2 100644
 --- a/include/dm/ofnode.h
 +++ b/include/dm/ofnode.h
-@@ -1545,7 +1545,7 @@ int ofnode_add_subnode(ofnode parent, const char *name, ofnode *nodep);
- /**
-  * ofnode_copy_props() - copy all properties from one node to another
-  *
-- * Makes a copy of all properties from the source note in the destination node.
-+ * Makes a copy of all properties from the source node to the destination node.
-  * Existing properties in the destination node remain unchanged, except that
-  * any with the same name are overwritten, including changing the size of the
-  * property.
-@@ -1553,9 +1553,9 @@ int ofnode_add_subnode(ofnode parent, const char *name, ofnode *nodep);
-  * For livetree, properties are copied / allocated, so the source tree does not
-  * need to be present afterwards.
-  *
-+ * @dst: Destination node to write properties to
-  * @src: Source node to read properties from
-- * @dst: Destination node to write properties too
+@@ -1460,6 +1460,16 @@ int ofnode_write_string(ofnode node, const char *propname, const char *value);
   */
--int ofnode_copy_props(ofnode src, ofnode dst);
-+int ofnode_copy_props(ofnode dst, ofnode src);
+ int ofnode_write_u32(ofnode node, const char *propname, u32 value);
  
- #endif
++/**
++ * ofnode_write_u64() - Set an integer property of an ofnode
++ *
++ * @node:	The node for whose string property should be set
++ * @propname:	The name of the string property to set
++ * @value:	The new value of the 64-bit integer property
++ * Return: 0 if successful, -ve on error
++ */
++int ofnode_write_u64(ofnode node, const char *propname, u64 value);
++
+ /**
+  * ofnode_write_bool() - Set a boolean property of an ofnode
+  *
 diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index b74f5c2ebcff..49fa5d27e6ec 100644
+index af844a50308e..5e63efdfa891 100644
 --- a/test/dm/ofnode.c
 +++ b/test/dm/ofnode.c
-@@ -1190,12 +1190,11 @@ static int dm_test_ofnode_too_many(struct unit_test_state *uts)
+@@ -990,7 +990,8 @@ static int dm_test_ofnode_u32_array(struct unit_test_state *uts)
  }
- DM_TEST(dm_test_ofnode_too_many, UT_TESTF_SCAN_FDT);
+ DM_TEST(dm_test_ofnode_u32_array, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
  
--static int check_copy_props(struct unit_test_state *uts, ofnode src,
--			    ofnode dst)
-+static int check_copy_props(struct unit_test_state *uts, ofnode dst, ofnode src)
+-static int dm_test_ofnode_read_u64(struct unit_test_state *uts)
++/* test ofnode_read_u64() and ofnode_write_u64() */
++static int dm_test_ofnode_u64(struct unit_test_state *uts)
  {
- 	u32 reg[2], val;
+ 	ofnode node;
+ 	u64 val;
+@@ -999,6 +1000,10 @@ static int dm_test_ofnode_read_u64(struct unit_test_state *uts)
+ 	ut_assert(ofnode_valid(node));
+ 	ut_assertok(ofnode_read_u64(node, "int64-value", &val));
+ 	ut_asserteq_64(0x1111222233334444, val);
++	ut_assertok(ofnode_write_u64(node, "new-int64-value", 0x9876543210));
++	ut_assertok(ofnode_read_u64(node, "new-int64-value", &val));
++	ut_asserteq_64(0x9876543210, val);
++
+ 	ut_asserteq(-EINVAL, ofnode_read_u64(node, "missing", &val));
  
--	ut_assertok(ofnode_copy_props(src, dst));
-+	ut_assertok(ofnode_copy_props(dst, src));
+ 	ut_assertok(ofnode_read_u64_index(node, "int64-array", 0, &val));
+@@ -1009,9 +1014,15 @@ static int dm_test_ofnode_read_u64(struct unit_test_state *uts)
+ 		    ofnode_read_u64_index(node, "int64-array", 2, &val));
+ 	ut_asserteq(-EINVAL, ofnode_read_u64_index(node, "missing", 0, &val));
  
- 	ut_assertok(ofnode_read_u32(dst, "ping-expect", &val));
- 	ut_asserteq(3, val);
-@@ -1227,7 +1226,7 @@ static int dm_test_ofnode_copy_props(struct unit_test_state *uts)
- 	src = ofnode_path("/b-test");
- 	dst = ofnode_path("/some-bus");
- 
--	ut_assertok(check_copy_props(uts, src, dst));
-+	ut_assertok(check_copy_props(uts, dst, src));
- 
- 	/* check a property that is in the destination already */
- 	ut_asserteq_str("mux0", ofnode_read_string(dst, "mux-control-names"));
-@@ -1243,7 +1242,7 @@ static int dm_test_ofnode_copy_props_ot(struct unit_test_state *uts)
- 
- 	src = ofnode_path("/b-test");
- 	dst = oftree_path(otree, "/node/subnode2");
--	ut_assertok(check_copy_props(uts, src, dst));
-+	ut_assertok(check_copy_props(uts, dst, src));
- 
++	ut_assertok(ofnode_write_u64(node, "int64-array", 0x9876543210));
++	ut_assertok(ofnode_read_u64_index(node, "int64-array", 0, &val));
++	ut_asserteq_64(0x9876543210, val);
++	ut_asserteq(-EOVERFLOW,
++		    ofnode_read_u64_index(node, "int64-array", 1, &val));
++
  	return 0;
  }
+-DM_TEST(dm_test_ofnode_read_u64, UT_TESTF_SCAN_FDT);
++DM_TEST(dm_test_ofnode_u64, UT_TESTF_SCAN_FDT);
+ 
+ static int dm_test_ofnode_add_subnode(struct unit_test_state *uts)
+ {
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
