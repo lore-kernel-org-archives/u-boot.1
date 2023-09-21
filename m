@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25770E70719
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 11:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E4BE70714
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 11:08:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8659786AF7;
-	Thu, 21 Sep 2023 13:07:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED07E86AFE;
+	Thu, 21 Sep 2023 13:08:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="HP4kmmVa";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="N0+jTabX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0D9286AFB; Thu, 21 Sep 2023 13:07:51 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::60d])
+ id 1CB8A86B09; Thu, 21 Sep 2023 13:08:39 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20605.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::605])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABAE4867C7
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 13:07:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18E6786AFB
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 13:08:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cO+QtH0jQnPuo6CBHnsQLrUJ1YUqw1OuNz6tMCrRZmR0Dwx68QgbRtGJ3QR9PrY9zS5C5idL4QjLZeSBtcy4dGz7AcBpaOS0POyoj3YgwbNos6jbxw1suQn8kDv8t/Rct8g37ERYvM3hgwelS+2G+AaDts+lOhGlY1Z23xEK/t1LDUNymFWQH3BZiSPqzrZYw7ZA4c4zhUiEc65h107ABHeoe2p1h+R8dS8N0QIfa2MXMH/gHj4y0VRFTb8wIz/Eda2AUmVyawVYpBrU2kDXeUbkBbLBSOa6UPAJeS3ecdOk9xGHwbVC0JDHE9vUFR5ni3SN9k8KUI2cfPOEd8Rcyg==
+ b=Oqo1yc3pgfYUx9Xymv3cUx6kCqkj6WkvnGy+BogGpJ2b1d7w1dQ0L0kDNjkTvZy2roM0X/Yh6RGbG6S1hzqcQ8mYdmQ+w3KcLuMT7eRP4E9coo8MV4cxtYiC7WrwY031YAyM7dbcEK6aVSPwk+JTcwtVtmkH9QykWhBPddkTOaKOYK5zPzgeG07zW3R97Zc3k53W4OjIXhwIIcQUrIb/a1j1K/BAttOn2AeZJKMqKGPi2XaUw/Hk10aR6RtJCJgCmM+puK7i5BTQ4bfkjUO9JR9qhOq9KweEu8YGbEylHJXvqW2HVHwfJ9bz8dUDs4Ep86CR5JjqjKWrkn4dBo0N1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jNSuBtc/lqOPR1sfhMTcJgFsumf9+3VRBk0tOxaHZyI=;
- b=e5rnhKCw2W8FfexesGlFj6qoWCR7mRWfMo1XzTZPeBFEToyyhBJOqUlMlBRECD2lViTe6D/ho1JqA6cJ+cAymaoW/VrwiQRduYo8u6DHeOSmS/lf63ES8szktSPehQmCDxJN0YGzOkO9gKhZGCHJnmc8i+fZsCvPom0CkHMeQWcpTQd7F2hrKrzqcH/GNfsQSWWpa67zdShoPn8z31pOr62b+S9HQ9ihlfbiakHOGwDFOnzNTqQyt4Mmemr8RbYhahamm5fnR8RXGtUkvLNbOW97DXFfNCU+C/VCDQ3LayFeE8yBOEqYG4Ol4nWZcMVmAUpMf8H/Lg6Ipr1/coLO+g==
+ bh=592Y0DNdka9uX+w/zuK5qbBN8sKomzJjziLG61BoWVo=;
+ b=JQCc6+XjoEaNxEHl3BIFIIhcQiy0saw7fNaq5n686F4LPWbgQldn0Z8cG4Y6wHTkGUvW9LqXZz8cKzszAUTMv8KzmiWNyFgyoHWTjwWhq0t/E00GNL1H/LporJZOmk9Qeq8bn8ziyIPf7o6vOOcFqcgKF+EOeJCIpnqNeTnHm+XnFWSFl00jlCbIlMhLhPujEAcHJnF9CYSrYttNXhP2h+colq/hpZcPbBX+kC68uEJVpix0ilA9TapCOs+iGpjgOSv8IgM5B7kQFA0qTGKRdBxDYyOFHjp2D1TT7Di0feG/Xw1D+xUUi4ThUmXntIHnV/0ZFk63Qrjl/54FtkNMWw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jNSuBtc/lqOPR1sfhMTcJgFsumf9+3VRBk0tOxaHZyI=;
- b=HP4kmmVadB3K0g9dICvGav/EspOpd0m8fTfpJqPL1G1tMU/ImFIfLDKfbyB/mJ0IRFG4nu9Fr9nEMEqnpoAzjw6LIOH+ymbXHrzkmnzyiO8H2cv5A6i3PVMyLwHVyBDFEkToDWXU8YeE5AbiuHId3EfoNeCciJtizMtb/naOD6I=
-Received: from SA1P222CA0040.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2d0::8)
- by PH7PR12MB7284.namprd12.prod.outlook.com (2603:10b6:510:20b::18) with
+ bh=592Y0DNdka9uX+w/zuK5qbBN8sKomzJjziLG61BoWVo=;
+ b=N0+jTabXToDloreb2EYtHCxNhyLjY6mCoeRjfywVs5AdukDdl4WiSi5FVt+/3y27Ht39e1BnGwIKD1WvjdbbFj7UXn8aTAoqu4ebJZp3VFBMSicRIwsEVFexg2ZjX8sdFzzjOYZxRK+ow5H/eTk+uYeFC4W0SxK1xtqqru0udXA=
+Received: from SA1PR05CA0013.namprd05.prod.outlook.com (2603:10b6:806:2d2::19)
+ by DS0PR12MB9447.namprd12.prod.outlook.com (2603:10b6:8:1b4::20) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.20; Thu, 21 Sep
- 2023 11:07:46 +0000
-Received: from SN1PEPF0002BA4E.namprd03.prod.outlook.com
- (2603:10b6:806:2d0:cafe::ec) by SA1P222CA0040.outlook.office365.com
- (2603:10b6:806:2d0::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.31 via Frontend
- Transport; Thu, 21 Sep 2023 11:07:46 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.20; Thu, 21 Sep
+ 2023 11:08:33 +0000
+Received: from SN1PEPF0002BA4B.namprd03.prod.outlook.com
+ (2603:10b6:806:2d2:cafe::f8) by SA1PR05CA0013.outlook.office365.com
+ (2603:10b6:806:2d2::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.11 via Frontend
+ Transport; Thu, 21 Sep 2023 11:08:32 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,23 +59,24 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002BA4E.mail.protection.outlook.com (10.167.242.71) with Microsoft
+ SN1PEPF0002BA4B.mail.protection.outlook.com (10.167.242.68) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.20 via Frontend Transport; Thu, 21 Sep 2023 11:07:45 +0000
+ 15.20.6792.19 via Frontend Transport; Thu, 21 Sep 2023 11:08:32 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 21 Sep
- 2023 06:07:43 -0500
-Message-ID: <ab72c480-e9f8-416e-adf5-726f7d40c4f5@amd.com>
-Date: Thu, 21 Sep 2023 13:07:43 +0200
+ 2023 06:08:30 -0500
+Message-ID: <c4f19845-a97c-417a-ba55-ef21df34a4b9@amd.com>
+Date: Thu, 21 Sep 2023 13:08:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/3] trace: Fix flyrecord alignment issue
+Subject: Re: [PATCH] net: phy: xilinx-gmii2rgmii: Removed hardcoded phy
+ address 0 for bridge
 Content-Language: en-US
+To: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, <u-boot@lists.denx.de>
+CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <git@xilinx.com>
+References: <20230915045043.4167628-1-tejas.arvind.bhumkar@amd.com>
 From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-References: <cover.1694779918.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -120,7 +121,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <cover.1694779918.git.michal.simek@amd.com>
+In-Reply-To: <20230915045043.4167628-1-tejas.arvind.bhumkar@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -128,26 +129,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4E:EE_|PH7PR12MB7284:EE_
-X-MS-Office365-Filtering-Correlation-Id: 851dc118-73cd-4d82-ac3a-08dbba92fbd0
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4B:EE_|DS0PR12MB9447:EE_
+X-MS-Office365-Filtering-Correlation-Id: a2c98fdd-90b1-4a0f-d174-08dbba9317e8
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: C+F5AQq9JUF5olb+2CjRAv8qc9bKEuX8xPh7p3ojdFkfXy/SRRf706rtHGjDztfEE//k1SZUW0IJNqTTB6ov08eRDU4RTIzYorKy55qhSVFdQsp/ehC1m97b+FExpimMC6y/FgB08HDo9lOtvj7XToGCHl7Y7Sh0/Ow6Iw9y93P4nlKeYE9R6XPiig2tf9biuwhQfPmvPlDVfE3gnckNDnKjM0wDFbbk+RfbCGorcvoUZo6YjF5MLAcl0RYiov6UypwKhGpy94tTG6pT+RUyKpLakIfmSP9YK7Zc/MbTFrjIUIS9I1RzYLPg1xn0o0ePAP/+LCgrQYEfDZkjJ3mK+eD4GQr/kVkAQ6Nlp9iQTOA8hZQjgXrZSjhJWohZFRaDnepaCQ22O3WjGElJvhxjgviX6QnHVVfSTvq1Co3imfb3jjPEPqXY7CIXZEN7n0ORFpfVwVDC3TDQlQRRTAoQRU7FqvcUWMNsP9V/DZ8kNWCkSq7eNCMEg62v824wA0e8L8qmk0KA8v2WBn2jH8KqEjdaBNpQffnsBu57+MuFbr3g336qnOTONv4olLYaS7Z7jKNkM6w0mROwNOBANjrlEmQlV4k12/7tJwAGe3a6oa4CONcEUyHzH5NqZL28erFTYwQuhDWIq731v1i+8pap6pHYWAbj1PwMk0eKOkfkVsniviI34LXhsFco6lPkKfLDETY724fCHwUGFXoL6SYHExEnNo+unwpw6JOql9uBjYyHH+GcESJI6tchrsN5EZEYEzimoW37ybfOc7d0nhJsaLdc9M72OV/F+UZ6lWnYahOx5f/6pKLJE2H6mBqUEoaD
+X-Microsoft-Antispam-Message-Info: d2NTc7h4dvWetX6EEv1TlCSiAmfZZw3mMJJ8M4N6Syau0gR7mN0I1fODnzmE8U7FcToNakNzBttqG6UZwfenF+XiFdqkh2yv9iPJ5IuMrNEHYxQBGN5On9EunTVx9ukh1tXuw5lpNKT672TGITNXo6+We6e58VbDCTKMQZAYFmX1AAmgKtM6CxPUsW/PmrNDh2aA8aIMgMUe/l505SgwURPsoxmh0YkcZ5Jk+fWQsS9+vOqRldg4zhPH+Zu6ed/dPxkEbIt1Qit3Mkq6/F8p2U4bIepaA5OjpwvpYP2BuG+eRBXB6mzovKymZnqncQ8BUzEDtDV9KhlYqh37kDEVm+bkLSoYP6aNYqPcKtdcZZXaPTLdoP04lMRKe4MEiT4vDtPgX3ITCSHq4gnYxVLSczZp2Y3WX2UsON27zl7IxJTr0Yd4HhTQ1CaevSHrEy91OljTjh3PbWvZLw4enz/XNziRcf3w9m1uXvzoWfQGMF+/vKw7quHhSopN4J1QGGeGbonV0rUOqJIaft/hDFILvGcPk/S2UJzPzDoz5gE/0wts7qLJdcmat1dS7J0T2fVRBFBTyTnW9NqnuAttRBiPGqqbIaw1oNnUuiK4Tje24MUEKzcFuE2fVRH3xyVvBPQjHhnCqfFQ5paovgIxmfwXh9wsXESXXhQx5ci//BdlzGkxHz4PFOqltZznGr8Z+wmN7Ai8HUdl43Njqv0Rnt2zcevpDxFSYNKDG6jgop8E4o2uEFGuKXikcpelwmmwGspW3KNU1RNAVNB8RAy4Cr9hFe6z6RC6+5felXjhHBSLmik4iZkEVzaFCx+9o5QvLomv
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(136003)(396003)(346002)(376002)(186009)(451199024)(1800799009)(82310400011)(36840700001)(40470700004)(46966006)(426003)(16526019)(336012)(81166007)(356005)(478600001)(82740400003)(53546011)(316002)(2616005)(26005)(110136005)(70206006)(16576012)(83380400001)(36756003)(31686004)(47076005)(36860700001)(4744005)(8676002)(44832011)(5660300002)(8936002)(2906002)(40460700003)(40480700001)(31696002)(41300700001)(70586007)(86362001)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(396003)(346002)(39860400002)(136003)(376002)(82310400011)(451199024)(186009)(1800799009)(46966006)(40470700004)(36840700001)(53546011)(83380400001)(336012)(478600001)(8676002)(2616005)(26005)(107886003)(426003)(16526019)(47076005)(2906002)(70206006)(54906003)(70586007)(44832011)(316002)(16576012)(8936002)(110136005)(5660300002)(4326008)(41300700001)(40460700003)(31696002)(36756003)(36860700001)(40480700001)(81166007)(82740400003)(86362001)(356005)(31686004)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2023 11:07:45.5180 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 851dc118-73cd-4d82-ac3a-08dbba92fbd0
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2023 11:08:32.6524 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a2c98fdd-90b1-4a0f-d174-08dbba9317e8
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4B.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7284
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9447
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,31 +167,34 @@ X-Virus-Status: Clean
 
 
 
-On 9/15/23 14:12, Michal Simek wrote:
-> Hi,
+On 9/15/23 06:50, Tejas Bhumkar wrote:
+> Current code expects bridge phy address at 0 which is not correct
+> expectation because bridge phy address is configurable.
+> That's why update the code to read reg property to figure it out
+> where bridge is and use it in phy creation code.
 > 
-> sandbox is getting bigger and bigger and I have reached the case that
-> adding some more functions ends up in CI loop failure. After some
-> investigation I found that flyrecord header have incorrect information
-> about data offset which is caused by incorrect alignment calculation.
-> That's why this series is fixing alignment calculation.
-> I have done it via 3 patches where the first two are just preparing code
-> for actual fixup.
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+> ---
+>   drivers/net/phy/phy.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
 > 
-> Thanks,
-> Michal
-> 
-> Changes in v2:
-> - s/start_addr/start_ofs/g'
-> 
-> Michal Simek (3):
->    trace: Use 64bit variable for start and len
->    trace: Move trace_clocks description above record offset calculation
->    trace: Fix alignment logic in flyrecord header
-> 
->   tools/proftool.c | 39 ++++++++++++++++++++++++++++++++++-----
->   1 file changed, 34 insertions(+), 5 deletions(-)
-> 
+> diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+> index ae21acb059..d64a83b83d 100644
+> --- a/drivers/net/phy/phy.c
+> +++ b/drivers/net/phy/phy.c
+> @@ -838,7 +838,10 @@ static struct phy_device *phy_connect_gmii2rgmii(struct mii_dev *bus,
+>   	ofnode_for_each_subnode(node, dev_ofnode(dev)) {
+>   		node = ofnode_by_compatible(node, "xlnx,gmii-to-rgmii-1.0");
+>   		if (ofnode_valid(node)) {
+> -			phydev = phy_device_create(bus, 0,
+> +			int gmiirgmii_phyaddr;
+> +
+> +			gmiirgmii_phyaddr = ofnode_read_u32_default(node, "reg", 0);
+> +			phydev = phy_device_create(bus, gmiirgmii_phyaddr,
+>   						   PHY_GMII2RGMII_ID, false);
+>   			if (phydev)
+>   				phydev->node = node;
 
 Applied.
 M
