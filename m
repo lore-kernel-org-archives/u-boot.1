@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C7CACD4939
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:02:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD70DCD4939
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 01:03:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 411D186C75;
-	Thu, 21 Sep 2023 03:02:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FF9586CB8;
+	Thu, 21 Sep 2023 03:02:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UsiMC29G";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DandkJBz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DE2D86B55; Thu, 21 Sep 2023 03:02:49 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 405FD86CC4; Thu, 21 Sep 2023 03:02:51 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B76E86C65
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:02:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55F3086CAF
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 03:02:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-50307acd445so789629e87.0
- for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:02:47 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-53339349956so216302a12.3
+ for <u-boot@lists.denx.de>; Wed, 20 Sep 2023 18:02:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695258167; x=1695862967; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695258168; x=1695862968; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XinUxMBTpVJFecw1xk8+hcgmj/TRXaYR0NBvNYesOtg=;
- b=UsiMC29G+kWkBdDDiJnNW0VDW0qM5t9OkiNpgXeLdvYZBfBv0GmuxTzAXIEoL9G4Sk
- nT7QuAZzMXanLfa2wBkRFaH3C146VqoE1CJj/66CEXGZjY6hFblG/EmVEyY6g5zIXxsP
- eq/WQkQ7xl1hT1liMJ7SIZXlUcptI+GeFiaAk=
+ bh=yVnFA4Wrv2HmJpQK8tXW9qmrkP1U0cC4h0LffsNEFjE=;
+ b=DandkJBzIK6jkKNh1VbBn3w8U7mFq99B8VFk8N6eiKchbKSIdseIzlNNHJ+kUjhLvx
+ oSYWhT2c+gsd8RimxRKx8mqFAeyn0VtjdyNTU2iQ/gTggc17eUjmnoDdMS2Xv4mLTAdQ
+ fDqOfTufqzoSKlJW2ghb++43lfG6a45VXGkAM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695258167; x=1695862967;
+ d=1e100.net; s=20230601; t=1695258168; x=1695862968;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=XinUxMBTpVJFecw1xk8+hcgmj/TRXaYR0NBvNYesOtg=;
- b=hLvIS7CeXd9ukrv3PkifbE7KUzApwitXwMpqxbOWj1kopWMBJVfJXp/ZsoQ17UXUfW
- zQW9Z+JTV6lfaLP6Xz7DXNnWsPOqBjJJ9JRt//3s1zIRRQUP3gUbxoGMnYYoBbiNtL9O
- qbhdnfv75bTLVFcrQ/RNkIUVuQ8K6dtHMvl/sJZ0JBN7hTJ93kE6BerKBcJl/favslJT
- nmYXouAk2hE04kd7/TqUEwFftx5+27pE22Ut4GSW/wv7wtJTv1yLipMaS/QDQ9K9vM1O
- 3RHeE6590Vle1G9nDi5Ucm7yuADZFCnJRbTldTFo9r1RyxNp5uZ91iutfmiXHLY9d0CI
- MtYQ==
-X-Gm-Message-State: AOJu0YwAszFTD1oxvJu7/sJkR/g+qmsERBBzRWexKZ6HFUesdnIcAY9E
- 4di5HGuF8ViN4vYKzKiH73ddv+T1WjIUB+qWk3X/dw==
-X-Google-Smtp-Source: AGHT+IGoZLk1/Y8RAIq9sl/VcKlpPNiSMK+epQpKgB/hS1VRPEOtWAYnSw0Dxg8NMaJCp3Tq9Cfm3+0GbhZAwxw/cdY=
-X-Received: by 2002:ac2:5dd7:0:b0:502:d302:e025 with SMTP id
- x23-20020ac25dd7000000b00502d302e025mr3375775lfq.2.1695258166644; Wed, 20 Sep
- 2023 18:02:46 -0700 (PDT)
+ bh=yVnFA4Wrv2HmJpQK8tXW9qmrkP1U0cC4h0LffsNEFjE=;
+ b=RLxMJ4KMMOz7dF8RSKjDJW/RgSshusUVJLEwymn+YxiFe6P4bW1k//7qZM5z0kOE+I
+ Ott7w31oNCbob2jkO9f78oGVT3gyOnLMrWqIUzqqy5rRhsYGMAuwZyPZWP72cBxYIIji
+ lAKBUvcanu9D5CJnQGXopLmonBkYK/UCKh4eLlmsH4qfJ4oEOf2oLiCEQgTOVBemCNk/
+ AzXPJMhnFredvXFDG9VqGIZExQ7gaO/zcvCYAyTpPn0x7apeLeEfgy4fq8bbCJ1AWOL4
+ BIs8G1p86NY794G2pobLgLN/q2HQvvCrnOQz9Z7oODWUdGCBEaskFqPw7qCVNAd7AtE3
+ S5pA==
+X-Gm-Message-State: AOJu0Yw0UjFneD4kGXi32m2DeH8XNJ4EXiEjQCW5dOwwsZnaPcBpt5ns
+ +Xe4Uv6JskyGJKbh/loo3oqeLrrgyHtzTpkL7nbpbkJqtkFj/H53M8I=
+X-Google-Smtp-Source: AGHT+IHWEvOAwT55MyAb4a+lNAKgUd90bIiovQ2B/6ytBxPY6a5WbwaNODC3+VoCZa5uuhF1UPPfLG7A0B0ICCWNeKY=
+X-Received: by 2002:aa7:cb06:0:b0:525:6c74:5e58 with SMTP id
+ s6-20020aa7cb06000000b005256c745e58mr3568121edt.23.1695258167820; Wed, 20 Sep
+ 2023 18:02:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230915101640.1166332-1-masahisa.kojima@linaro.org>
- <20230915101640.1166332-2-masahisa.kojima@linaro.org>
-In-Reply-To: <20230915101640.1166332-2-masahisa.kojima@linaro.org>
+References: <20230912213504.65513-1-seanedmond@linux.microsoft.com>
+ <20230912213504.65513-2-seanedmond@linux.microsoft.com>
+In-Reply-To: <20230912213504.65513-2-seanedmond@linux.microsoft.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 20 Sep 2023 19:02:17 -0600
-Message-ID: <CAPnjgZ1FdD0kXNBYjcjt=HoBEuurGUasjYD0Hj523oQTqV1m8A@mail.gmail.com>
-Subject: Re: [PATCH v3 1/7] net: wget: prevent overwriting reserved memory
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Date: Wed, 20 Sep 2023 19:02:29 -0600
+Message-ID: <CAPnjgZ0jEjRhr0UhcZxhMYxswKomfvt=zxWxyOdvK+ZvA-w7Dw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/5] fdt: common API to populate kaslr seed
+To: seanedmond@linux.microsoft.com
+Cc: u-boot@lists.denx.de, dphadke@linux.microsoft.com, 
+ ilias.apalodimas@linaro.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,69 +82,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Masahisa,
-
-On Fri, 15 Sept 2023 at 04:17, Masahisa Kojima
-<masahisa.kojima@linaro.org> wrote:
+On Tue, 12 Sept 2023 at 15:35, <seanedmond@linux.microsoft.com> wrote:
 >
-> This introduces the valid range check to store the received
-> blocks using lmb. The same logic is implemented in tftp.
+> From: Dhananjay Phadke <dphadke@linux.microsoft.com>
 >
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> fdt_fixup_kaslr_seed() will update given ofnode with random seed value.
+> Source for random seed can be TPM or RNG driver in u-boot or sec
+> firmware (ARM).
+>
+> Signed-off-by: Dhananjay Phadke <dphadke@linux.microsoft.com>
+> Signed-off-by: Sean Edmond <senaedmond@microsoft.com>
 > ---
->  net/wget.c | 80 +++++++++++++++++++++++++++++++++++++++++++++++++-----
->  1 file changed, 73 insertions(+), 7 deletions(-)
+>  arch/arm/cpu/armv8/sec_firmware.c | 39 +++++++++++--------------------
+>  common/fdt_support.c              | 19 +++++++++++++++
+>  drivers/core/ofnode.c             | 17 ++++++++++++++
+>  include/dm/ofnode.h               | 12 ++++++++++
+>  include/fdt_support.h             |  9 +++++++
+>  5 files changed, 71 insertions(+), 25 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
-
-> diff --git a/net/wget.c b/net/wget.c
-> index 2dbfeb1a1d..9690e4539c 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -4,16 +4,20 @@
->   * Copyright Duncan Hare <dh@synoia.com> 2017
->   */
->
-> +#include <asm/global_data.h>
->  #include <command.h>
->  #include <common.h>
->  #include <display_options.h>
->  #include <env.h>
->  #include <image.h>
-> +#include <lmb.h>
->  #include <mapmem.h>
->  #include <net.h>
->  #include <net/tcp.h>
->  #include <net/wget.h>
->
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
->  static const char bootfile1[] = "GET ";
->  static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
->  static const char http_eom[] = "\r\n\r\n";
-> @@ -55,6 +59,29 @@ static unsigned int retry_tcp_ack_num;       /* TCP retry acknowledge number*/
->  static unsigned int retry_tcp_seq_num; /* TCP retry sequence number */
->  static int retry_len;                  /* TCP retry length */
->
-> +static ulong wget_load_size;
-> +
-> +/**
-> + * wget_init_max_size() - initialize maximum load size
-> + *
-> + * Return:     0 if success, -1 if fails
-> + */
-> +static int wget_init_load_size(void)
-> +{
-> +       struct lmb lmb;
-> +       phys_size_t max_size;
-> +
-> +       lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
-
-That function should be changed to const void * but we plan to move to
-ofnode anyway, so let's not worry about it.
-
-[..]
-
-Regards,
-Simon
