@@ -4,63 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 405D8E71096
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 17:00:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A87FE7109A
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 17:03:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53F4086898;
-	Thu, 21 Sep 2023 19:00:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7F1F86B34;
+	Thu, 21 Sep 2023 19:03:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JbTeKKw8";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UwSpjcYg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88B26869F1; Thu, 21 Sep 2023 19:00:54 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 7B40486B35; Thu, 21 Sep 2023 19:03:57 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34E8E864D4
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 19:00:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16596864D4
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 19:03:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38LH0kT1010372;
- Thu, 21 Sep 2023 12:00:46 -0500
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38LH3rG3069646;
+ Thu, 21 Sep 2023 12:03:53 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695315646;
- bh=8Jza0T0eFx5ok1nfeLrfMN9pN6/PYoq26z//cZUmwPo=;
- h=From:To:CC:Subject:Date;
- b=JbTeKKw8BHx5mLG+M4VsJdOubrPO+t5DJnN44z8kNP3anOWVgA2mHq1pBxthyp3Wh
- AAzRXZJy6xubA5ezj08Ukj/jLb1Q6e8R+vXDJDTjnvQRDZBnkX4odfIg4N/L/w14t/
- HzzsfZbntdeJUdL0FnD1nPRTk+wwJmQKBaArUmEo=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38LH0kpj026602
+ s=ti-com-17Q1; t=1695315833;
+ bh=ysa587sGA45ga04FgrxLjimZULgT0oAhYNP3AKdGGeY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=UwSpjcYgUvBWIdC5bS/1MgmaiEPA9yEyZ2gsaMIXTQgzAEX0MCrWfxfbnibteCOC2
+ SohSV23xz8ICrXuxm0un71WeTtufwTkEHSEb4fMXi6pIX8k4TR+MF72GCIexnGH4ft
+ te5mkLZF04rNiWRVUhDI3lfC9XBSnBKhKBzpE/qc=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38LH3rfo028430
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 21 Sep 2023 12:00:46 -0500
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 21 Sep 2023 12:03:53 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
- Sep 2023 12:00:46 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 12:03:52 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 21 Sep 2023 12:00:46 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38LH0hfM039570;
- Thu, 21 Sep 2023 12:00:43 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <nm@ti.com>, <vigneshr@ti.com>, <seanga2@gmail.com>
-CC: <u-boot@lists.denx.de>, <lukma@denx.de>, <bb@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Keerthy <j-keerthy@ti.com>
-Subject: [PATCH v4] clk: ti: clk-k3: Notify AVS driver upon setting clock rate
-Date: Thu, 21 Sep 2023 22:30:38 +0530
-Message-ID: <20230921170038.3213991-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ Frontend Transport; Thu, 21 Sep 2023 12:03:52 -0500
+Received: from [10.250.38.120] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38LH3qZu048138;
+ Thu, 21 Sep 2023 12:03:52 -0500
+Message-ID: <7e57d094-6b2d-d535-40d0-84a562889370@ti.com>
+Date: Thu, 21 Sep 2023 12:03:52 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v2] env: ti: ti_common.env: Fix get_overlaystring for FIT
+ Image
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>
+References: <20230921-b4-upstream-overlaystring-v2-1-22e0b71e3334@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20230921-b4-upstream-overlaystring-v2-1-22e0b71e3334@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -78,77 +82,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-AVS is enabled at R5 SPL stage, on few platforms like J721E
-and J7200 clk-k3 is used instead if clk-sci driver.
+On 9/21/23 5:49 AM, Manorit Chawdhry wrote:
+> After the refactor with conf- nodes in fitImage, overlaystring wasn't
+> didn't handle the new conf- nodes in FIT Booting. Fix get_overlaystring
+> to handle conf- nodes.
+> 
+> Fixes: 837833a724b7 ("environment: ti: Add get_fit_config command to get FIT config string")
+> Reported-by: Aniket Limaye <a-limaye@ti.com>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+> Test Logs:
+> => setenv name_overlays ti/k3-dt.dtbo ti/k3-dt1.dtbo
+> => run get_overlaystring
+> => printenv overlaystring
+> overlaystring=#conf-ti_k3-dt.dtbo#conf-ti_k3-dt1.dtbo
+> ---
+> Changes in v2:
+> - Fix tabs
+> - Link to v1: https://lore.kernel.org/r/20230919-b4-upstream-overlaystring-v1-1-4c56e8d66173@ti.com
+> ---
+>   include/env/ti/ti_common.env | 11 ++++++++---
+>   1 file changed, 8 insertions(+), 3 deletions(-)
+> 
+> diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> index e87a41a6590b..bc554fe7ca6d 100644
+> --- a/include/env/ti/ti_common.env
+> +++ b/include/env/ti/ti_common.env
+> @@ -16,9 +16,14 @@ addr_fit=0x90000000
+>   name_fit=fitImage
+>   update_to_fit=setenv loadaddr ${addr_fit}; setenv bootfile ${name_fit}
+>   get_overlaystring=
+> -	for overlay in $name_overlays;
+> -	do;
+> -	setenv overlaystring ${overlaystring}'#'${overlay};
+> +	for overlay in $name_overlays; do;
+> +		if test ${boot_fit} -eq 1;
+> +			then
 
-Add support in clk-k3 driver as well to notify AVS driver
-on setting clock rate so that voltage is changed accordingly.
+Why is the `then` tabbed out here, you can make it on the end of
+the above line, same as you changed for `do`. Then untab all this
+by one.
 
-Cc: Keerthy <j-keerthy@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
-Boot logs with v4:
-https://gist.github.com/uditkumarti/bab0ec09eadb4b167ec1ab93e08637a8
+> +				setexpr name_fit_overlay gsub / _ conf-${overlay};
+> +				setenv overlaystring ${overlaystring}'#'${name_fit_overlay};
+> +			else
+> +				setenv overlaystring ${overlaystring}'#'${overlay};
 
-Change log:
-Change in v4:
-- changed if condition order as per review feedback
-- splitted patch into two
-- v3 link
-https://lore.kernel.org/all/20230920120256.2901860-1-u-kumar1@ti.com/
+If you set `overlay` using setexpr, then this line is common and doesn't need to
+be out here. Also do we use this overlaystring for anything other than the
+FIT case? And if not, why do we need this boot_fit == 1 check at all?
 
-Change in v3:
-- Updated AVS notification before/after clock setting based upon
-new and current rate
-- Added modifed notification in clk-sci driver as well
-- v2 link
-https://lore.kernel.org/all/20230919140408.2608521-1-u-kumar1@ti.com/
+Andrew
 
-Changes in v2:
-- Kept clk-sci.c as is because this is used by
-AM64 and AM65 platforms
-- v1 link
-https://lore.kernel.org/all/20230919060649.2518147-1-u-kumar1@ti.com
-
-
- drivers/clk/ti/clk-k3.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
-index ba925fa3c4..10f7240f77 100644
---- a/drivers/clk/ti/clk-k3.c
-+++ b/drivers/clk/ti/clk-k3.c
-@@ -11,6 +11,7 @@
- #include <errno.h>
- #include <soc.h>
- #include <clk-uclass.h>
-+#include <k3-avs.h>
- #include "k3-clk.h"
- 
- #define PLL_MIN_FREQ	800000000
-@@ -242,7 +243,11 @@ static ulong ti_clk_set_rate(struct clk *clk, ulong rate)
- 	const struct clk_ops *ops;
- 	ulong new_rate, rem;
- 	ulong diff, new_diff;
-+	int freq_scale_up = rate >= ti_clk_get_rate(clk) ? 1 : 0;
- 
-+	if (IS_ENABLED(CONFIG_K3_AVS0) && freq_scale_up)
-+		k3_avs_notify_freq(data->map[clk->id].dev_id,
-+				   data->map[clk->id].clk_id, rate);
- 	/*
- 	 * We must propagate rate change to parent if current clock type
- 	 * does not allow setting it.
-@@ -339,6 +344,10 @@ static ulong ti_clk_set_rate(struct clk *clk, ulong rate)
- 		}
- 	}
- 
-+	if (IS_ENABLED(CONFIG_K3_AVS0) && !freq_scale_up)
-+		k3_avs_notify_freq(data->map[clk->id].dev_id,
-+				   data->map[clk->id].clk_id, rate);
-+
- 	return new_rate;
- }
- 
--- 
-2.34.1
-
+> +		fi;
+>   	done;
+>   get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
+>   run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
+> 
+> ---
+> base-commit: 2fe4b54556ea6271237b35de68dc458bfceab94c
+> change-id: 20230915-b4-upstream-overlaystring-207e28b8c5fb
+> 
+> Best regards,
