@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D702E7106D
-	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 13:38:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77005E7106C
+	for <u-boot@archiver.kernel.org>; Thu, 21 Sep 2023 13:38:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F250B86660;
-	Thu, 21 Sep 2023 15:37:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 561BD866D0;
+	Thu, 21 Sep 2023 15:38:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YCEq2540";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bgO+jxqw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33993865A6; Thu, 21 Sep 2023 15:37:58 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 1719F86660; Thu, 21 Sep 2023 15:37:59 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25A13864EE
- for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:37:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09A6686530
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 15:37:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-79277cfc73bso40077739f.1
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-792979d4cb5so39378139f.2
  for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 06:37:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695303474; x=1695908274; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695303475; x=1695908275; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h1kaIWonyeR9fAL3AZZRK3McWjCWyTB8pLQNEecblbE=;
- b=YCEq2540Ano9K82jMRx2hAKqaUOSD1jo+T7j9a7bis55/sk4+U62msA78D9SZjZ/TR
- gcEXnjzu/Vm9jzWBGA8fLJi/bHDlbXKAlxnSr31HuHjQ1LvDr7UQ4Nfp4InoBx0j6Bb+
- 9zXmkyjaoYZIC6BInyb2vjH9eZ/PsRg4YfcYI=
+ bh=w/MN8L+PtDQyzVfV5/ghsXz9EzeVeEQE1zHwn9ZPihU=;
+ b=bgO+jxqwrDGPuPPa8g2mUTO4vvijS8mvwyrld9hUK7yjkcmitm+z0+vDdi3zUJcqIp
+ Rifn6zGXCZE2zVejXww6QNYi1U4EOh7IkYAAYmy+BcaM80Jo3ZF38iHf8prZwA3/uaLf
+ zyvvWfHxmeMQWAWo4Ibt7aqyMjF9doE2HA6u0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695303474; x=1695908274;
+ d=1e100.net; s=20230601; t=1695303475; x=1695908275;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h1kaIWonyeR9fAL3AZZRK3McWjCWyTB8pLQNEecblbE=;
- b=b4PaitKWjl8ExydUTIxAA+b1+PRiaJ62fK+gUKGhiQ2af58aVjV2s6R2xroBUuMK9B
- 31eFjvANxvTZlTnbVoAsAL3ffcyZXOtwGZBom8CVliUABu1PIBdOLiC89ysELDaRHfmz
- I8CqqnQkMwsPzjIEkfCHJ0JlI2ZZigHdejO95CcI/MojEOfb8D8qmZ1PojC8aml3esKX
- tA3B/+ec8GktjsBu7M/Xu5EJNYwfLDkTFb96vLVkK1kxcsEKxX1kGtUyBUoy9hM0nh7N
- 7syqLH2DtKWkWi89uxWa3xr8vv4A9T2VmFPp70r6m6tUXwT9/qRgT+L/tLBo2Tc41CFM
- Eu7w==
-X-Gm-Message-State: AOJu0YwQfF+V7UhDxRMPJBFkqTaee2tPtVxYpFeVRwBocksYbssPRWx7
- EbdEq50OS5ssgwKUJ8JeivylednaDPdXTlWURwk=
-X-Google-Smtp-Source: AGHT+IHQw70UNdudTgP6ZQNJB1ev9umqr7UBPrLHX9pjSI/eUiHPqEW72RFmQbevZnf1pffDzI7Qew==
-X-Received: by 2002:a6b:7412:0:b0:790:fab3:2052 with SMTP id
- s18-20020a6b7412000000b00790fab32052mr5599555iog.5.1695303474713; 
- Thu, 21 Sep 2023 06:37:54 -0700 (PDT)
+ bh=w/MN8L+PtDQyzVfV5/ghsXz9EzeVeEQE1zHwn9ZPihU=;
+ b=J7k6bSY8RpQ7O86oa1ShadLnhUR009l3ENa/osRr3Avm4y7Ag6kIWzo3tZxXMsOCWv
+ WRZP1s1N6NGHRsNWeSqCdJPlk0T33gegPoSO5e6FARKkk/E473quU3A0q3sZVAqA+1T7
+ teP7RfR4Xy+TnILYRCu0OwhNctEhWrvfVcqMsq7mR1BiyobmFaCGfOpgfMEurU8MJtLe
+ MQH0pe0M9JfzACmKu5cToa+cYh8Ziszybk6b+ZgY4y86KvQnCMRvv0Ms2cH42/8sRu2h
+ sbF23gEoU4f39mm0KPXzi2ipY3m260ugbB9/RMHkU+J3xTgizSrHJT/o9xyn4/QmNg7B
+ v5vw==
+X-Gm-Message-State: AOJu0YwuPqNCpSt12twDvQrZuPQEZRdpVZRfUnSR1zEmbS1WSfH4psF6
+ MKj28lXIkmVmu+yLw6CYnI/JybadbZbJyy/98dk=
+X-Google-Smtp-Source: AGHT+IGPpfTgL1f+KS2l15zH9CrZ7RdlK52Kzf7bZmU8KTzlXl5U7qeAcJqIpNDWz+zdfuuQAGzW5g==
+X-Received: by 2002:a5e:d510:0:b0:795:bea:ae13 with SMTP id
+ e16-20020a5ed510000000b007950beaae13mr5749593iom.20.1695303475606; 
+ Thu, 21 Sep 2023 06:37:55 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- w17-20020a5ed611000000b007835686237asm389786iom.27.2023.09.21.06.37.54
+ w17-20020a5ed611000000b007835686237asm389786iom.27.2023.09.21.06.37.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Sep 2023 06:37:54 -0700 (PDT)
+ Thu, 21 Sep 2023 06:37:55 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v7 1/3] fixup: Move python control earlier in Makefile
-Date: Thu, 21 Sep 2023 07:37:43 -0600
-Message-ID: <20230921133748.1543007-2-sjg@chromium.org>
+Subject: [PATCH v7 2/3] x86: coreboot: Drop USB init on startup
+Date: Thu, 21 Sep 2023 07:37:44 -0600
+Message-ID: <20230921133748.1543007-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230921133748.1543007-1-sjg@chromium.org>
 References: <20230921133748.1543007-1-sjg@chromium.org>
@@ -88,64 +88,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this control into the common area of the main Makefile, so it
-applies to non-build rules as well. This allows 'make mrproper' to handle
-python files as it should.
+This is very annoying as it is quite slow on many machines. Also, U-Boot
+has an existing 'preboot' mechanism to enable this feature if desired.
 
-This should be squashed into:
+Drop this code so that it is possible to choose whether to init USB or
+not.
 
-   65a33eba10d Allow Python packages to be dropped
+Use the existing USE_PREBOOT mechanism instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v7:
-- Add new fixup patch to move python control earlier in Makefile
+- Add docs about how USB keyboard works on coreboot
 
- Makefile | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
+Changes in v5:
+- Make use of the uSE_PREBOOT mechanism
 
-diff --git a/Makefile b/Makefile
-index 264f31bfe473..efbaf434df48 100644
---- a/Makefile
-+++ b/Makefile
-@@ -485,6 +485,15 @@ export RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o    \
- export RCS_TAR_IGNORE := --exclude SCCS --exclude BitKeeper --exclude .svn \
- 			 --exclude CVS --exclude .pc --exclude .hg --exclude .git
+ arch/x86/cpu/coreboot/Kconfig    | 1 +
+ arch/x86/cpu/coreboot/coreboot.c | 4 ----
+ doc/board/coreboot/coreboot.rst  | 7 +++++++
+ 3 files changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/arch/x86/cpu/coreboot/Kconfig b/arch/x86/cpu/coreboot/Kconfig
+index b97c27790419..178f8ad18162 100644
+--- a/arch/x86/cpu/coreboot/Kconfig
++++ b/arch/x86/cpu/coreboot/Kconfig
+@@ -25,6 +25,7 @@ config SYS_COREBOOT
+ 	imply FS_CBFS
+ 	imply CBMEM_CONSOLE
+ 	imply X86_TSC_READ_BASE
++	imply USE_PREBOOT
+ 	select BINMAN if X86_64
  
-+export PYTHON_ENABLE
-+
-+# This is y if U-Boot should not build any Python tools or libraries. Typically
-+# you would need to set this if those tools/libraries (typically binman and
-+# pylibfdt) cannot be built by your environment and are provided separately.
-+ifeq ($(NO_PYTHON),)
-+PYTHON_ENABLE=y
-+endif
-+
- # ===========================================================================
- # Rules shared between *config targets and build targets
- 
-@@ -646,20 +655,12 @@ export CFLAGS_NON_EFI	# Compiler flags to remove when building EFI app
- export EFI_TARGET	# binutils target if EFI is natively supported
- 
- export LTO_ENABLE
--export PYTHON_ENABLE
- 
- # This is y if LTO is enabled for this build. See NO_LTO=1 to disable LTO
- ifeq ($(NO_LTO),)
- LTO_ENABLE=$(if $(CONFIG_LTO),y)
  endif
+diff --git a/arch/x86/cpu/coreboot/coreboot.c b/arch/x86/cpu/coreboot/coreboot.c
+index da43d66e95d7..82fe4c71cd27 100644
+--- a/arch/x86/cpu/coreboot/coreboot.c
++++ b/arch/x86/cpu/coreboot/coreboot.c
+@@ -86,10 +86,6 @@ static int last_stage_init(void)
+ 	if (IS_ENABLED(CONFIG_SPL_BUILD))
+ 		return 0;
  
--# This is y if U-Boot should not build any Python tools or libraries. Typically
--# you would need to set this if those tools/libraries (typically binman and
--# pylibfdt) cannot be built by your environment and are provided separately.
--ifeq ($(NO_PYTHON),)
--PYTHON_ENABLE=y
--endif
+-	/* start usb so that usb keyboard can be used as input device */
+-	if (IS_ENABLED(CONFIG_USB_KEYBOARD))
+-		usb_init();
 -
- # If board code explicitly specified LDSCRIPT or CONFIG_SYS_LDSCRIPT, use
- # that (or fail if absent).  Otherwise, search for a linker script in a
- # standard location.
+ 	board_final_init();
+ 
+ 	return 0;
+diff --git a/doc/board/coreboot/coreboot.rst b/doc/board/coreboot/coreboot.rst
+index 10ef78bb5ada..10a251c2b64f 100644
+--- a/doc/board/coreboot/coreboot.rst
++++ b/doc/board/coreboot/coreboot.rst
+@@ -85,6 +85,13 @@ build in `$CBDIR`::
+ This allows booting and installing various distros, many of which are
+ 64-bit-only, so cannot work with the 32-bit 'coreboot' build.
+ 
++USB keyboard
++------------
++
++The `CONFIG_USE_PREBOOT` option is enabled by default, meaning that USB starts
++up just before the command-line starts. This allows user interaction on
++non-laptop devices which use a USB keyboard.
++
+ CBFS access
+ -----------
+ 
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
