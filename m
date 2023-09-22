@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 063F6E7D0D6
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 07:12:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C37B3E7D0D2
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 07:12:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8779A86575;
-	Fri, 22 Sep 2023 09:12:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBD9086A24;
+	Fri, 22 Sep 2023 09:12:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Jvsf+01F";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="W6rG8e/S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A54986290; Fri, 22 Sep 2023 09:12:15 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id 9537686925; Fri, 22 Sep 2023 09:12:19 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8E8F86575
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:12:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 833FE869F6
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:12:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-690d9cda925so1632324b3a.3
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:12:12 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-57354433a7dso917802eaf.1
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695366731; x=1695971531; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1695366735; x=1695971535; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hjKdPATu9rX5NFaVLvYNi6a4qNIIeFp4lub4c0M/xVE=;
- b=Jvsf+01FfNCGaaDnmF9k93m4r42MBrHAXHXMgpvbweFv/k/H5HoFALWsesMbZH5ri/
- 7ItFLDkYO0fiqDoPAjgoHPRsRy3Y8jN6Z2QzD/3saMLNp60WgneFt23Ar1n87anxhOsr
- Fsn2levnrdumHgmNJTa8zRektinPl/fToL5mfE5kvnZvlhAy4j62w3GPdXbQ+EiXoZWa
- lwcbn1+HG6BIwl9XAB9r1/rvuwJl82nrxsiJmK6dPyorxtJhbK7eDat7a5f6opqpl34g
- EHmYEVsf+ya86+JvKb2dIjGn189tcAiVOU0pS6ysmJZ4EEMGmlRpq/qUyf5pSLU4tVxS
- nzuA==
+ bh=fwwmmRncDyhEDtzmHsqB9lGW4uFafsxOwt3w7F08tA0=;
+ b=W6rG8e/SIt1X1G3qFhVJk3UBXscu5WGoUz+7BUPUUK0twqneqGN7QVsyz+FleEJq4b
+ R+P0athFnVVZsuLhIg0GTPjQm9dLPTpdEdw9H/5MIIXpEcbl40qBnAiY6OSnkBFSO8tX
+ 7AkBSljjlgribwo07WCn+pvebgPctyxep3KNtjH5U2kREQShMfDvEsANvDXAKo+fGNwM
+ oIpzkmzCTDw5pfBxjPKqSP4o42DiRvxoFRpGPF6IDdrkzljbOGkbi1TJQ5yx+KqSlOGm
+ 4R4hwv8ycaKjWlByc41fuBhcUhharQxhgGtrMaBNVYRbyB38mh28/Z2DBRwZsmB5bJLj
+ ogHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695366731; x=1695971531;
+ d=1e100.net; s=20230601; t=1695366735; x=1695971535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hjKdPATu9rX5NFaVLvYNi6a4qNIIeFp4lub4c0M/xVE=;
- b=sf8/gybcCngRaGhhj4Z/IlOyvPjk1GulvMqLBk2gUJHcuDiKOBVeuWPd6z97sjBHM7
- vFbXbISwPGu+d6up1RSOHimFPiaW0h1MXW10KVKafXtOgJx+hsoFDV5q6MQOcAS3f0d1
- JmQAt6MZvzaQ7NZaacGjOnrqGGu39VX3lzX6pJFnymlNG85xY5XoVc4Q1eIohlvxguj+
- FV8lniZo56IgMZn17OEz99qY11l8hv9doQ8aepv+HcNaG8uhBfq9VhIP9hUwAvUddu6G
- EAS0z/aNZqjxX7YF+bJ8eb2Ei+tOBMc7FKqpNvzlr88Bf08mDSUmWutukcG48NFG8kXH
- RMYA==
-X-Gm-Message-State: AOJu0YwfW6UhGBxPZ8igF3WdEMchCCv1dY16qwp4pGzBrxCobt8Fwt71
- 517A5zG5JXIgeJKCZo+ZLozEQYRzROzafpcGW3w=
-X-Google-Smtp-Source: AGHT+IGNPJF453Z1+wjZbWiQg911lxr1cs8qShKq/hIxL1vkNlZk3gRMpZQxWnfByw5inX6fGwETPQ==
-X-Received: by 2002:a05:6a00:1990:b0:68e:3def:c3cd with SMTP id
- d16-20020a056a00199000b0068e3defc3cdmr7796328pfl.17.1695366730867; 
- Fri, 22 Sep 2023 00:12:10 -0700 (PDT)
+ bh=fwwmmRncDyhEDtzmHsqB9lGW4uFafsxOwt3w7F08tA0=;
+ b=cY5gdHJR56uXoMQzvCRF6WYXn5Qt4Pz1y7xAVMfsmGBI1BM0t/tNqzlUn6ePQhdcYd
+ 4g2nZ0tkQzCqIiecQZnPhI/tlEq0r7I9CLhHXJLjHdcxwHAKyo7u/L/4aVo5aKs7CY9N
+ Id4e74RbLfL0kYZGYYZSuHNGdJ7OIHaS+iA3mj6+F+z154opqhD1WfKyqQOcuzOj17Bt
+ E6CiIWELGvvPoS2WZmZyyMGLeNmgr3jy1OWh0tt8bkOVclDhRurk1xS/ukE0U+bc39Et
+ F6Cgpzd12KtZMJGG9I+cu80QalNF5issoGYk0HDWg3trVwFIIGNYdFPjGP+169ufBOm+
+ QoXw==
+X-Gm-Message-State: AOJu0Yx0Ty6GadT5UI0IeEDv/iO/IobIdKrqkPcwgNmvv6M8h0ktUFJH
+ QViZdPrXLAIoILPr8o0Z+VPWU9kOWocxLqY/FPM=
+X-Google-Smtp-Source: AGHT+IG5g1Xl4DLDulQ/m7gZk7+SyXN9DMSY7RG1jcymvFdmzyWyMwSlgKjKTQOtftch8h7HMH97/w==
+X-Received: by 2002:a05:6870:b4a5:b0:1db:f7f8:ab56 with SMTP id
+ y37-20020a056870b4a500b001dbf7f8ab56mr8335522oap.53.1695366735619; 
+ Fri, 22 Sep 2023 00:12:15 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- do17-20020a056a004a1100b00692b0d413c8sm267414pfb.197.2023.09.22.00.12.09
+ t63-20020a638142000000b0055c178a8df1sm2435858pgd.94.2023.09.22.00.12.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Sep 2023 00:12:10 -0700 (PDT)
+ Fri, 22 Sep 2023 00:12:14 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -70,9 +70,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v4 4/8] efi_loader: support boot from URI device path
-Date: Fri, 22 Sep 2023 16:11:15 +0900
-Message-Id: <20230922071119.1439482-5-masahisa.kojima@linaro.org>
+Subject: [PATCH v4 5/8] efi_loader: set EFI HTTP Boot download buffer as
+ reserved
+Date: Fri, 22 Sep 2023 16:11:16 +0900
+Message-Id: <20230922071119.1439482-6-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230922071119.1439482-1-masahisa.kojima@linaro.org>
 References: <20230922071119.1439482-1-masahisa.kojima@linaro.org>
@@ -94,237 +95,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This supports to boot from the URI device path.
-When user selects the URI device path, bootmgr downloads
-the file using wget into the address specified by loadaddr
-env variable.
-If the file is .iso or .img file, mount the image with blkmap
-then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-If the file is .efi file, load and start the downloaded file.
+The buffer used to download the ISO image file must be
+reserved to avoid the unintended access to the image.
+
+For PE-COFF file case, this memory reservation is done
+in LoadImage Boot Service.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 ---
- lib/efi_loader/efi_bootmgr.c | 189 +++++++++++++++++++++++++++++++++++
- 1 file changed, 189 insertions(+)
+ include/efi_loader.h          | 2 ++
+ lib/efi_loader/efi_bootmgr.c  | 5 +++++
+ lib/efi_loader/efi_dt_fixup.c | 2 +-
+ 3 files changed, 8 insertions(+), 1 deletion(-)
 
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 4a29ddaef4..c4207edc91 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -554,6 +554,8 @@ void efi_runtime_detach(void);
+ /* efi_convert_pointer() - convert pointer to virtual address */
+ efi_status_t EFIAPI efi_convert_pointer(efi_uintn_t debug_disposition,
+ 					void **address);
++/* add reserved memory to memory map */
++void efi_reserve_memory(u64 addr, u64 size, bool nomap);
+ /* Carve out DT reserved memory ranges */
+ void efi_carve_out_dt_rsv(void *fdt);
+ /* Purge unused kaslr-seed */
 diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index a40762c74c..605be5041e 100644
+index 605be5041e..4991056946 100644
 --- a/lib/efi_loader/efi_bootmgr.c
 +++ b/lib/efi_loader/efi_bootmgr.c
-@@ -7,10 +7,14 @@
+@@ -326,6 +326,11 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+ 			return EFI_INVALID_PARAMETER;
  
- #define LOG_CATEGORY LOGC_EFI
- 
-+#include <blk.h>
-+#include <blkmap.h>
- #include <common.h>
- #include <charset.h>
-+#include <dm.h>
- #include <log.h>
- #include <malloc.h>
-+#include <net.h>
- #include <efi_default_filename.h>
- #include <efi_loader.h>
- #include <efi_variable.h>
-@@ -168,6 +172,182 @@ out:
- 	return ret;
- }
- 
-+/**
-+ * mount_image() - mount the image with blkmap
-+ *
-+ * @lo_label	u16 label string of load option
-+ * @image_addr:	image address
-+ * @image_size	image size
-+ * Return:	pointer to the UCLASS_BLK udevice, NULL if failed
-+ */
-+static struct udevice *mount_image(u16 *lo_label, ulong image_addr, int image_size)
-+{
-+	int err;
-+	struct blkmap *bm;
-+	struct udevice *bm_dev;
-+	char *label = NULL, *p;
-+
-+	label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
-+	if (!label)
-+		return NULL;
-+
-+	p = label;
-+	utf16_utf8_strcpy(&p, lo_label);
-+	err = blkmap_create_ramdisk(label, image_addr, image_size, &bm_dev);
-+	if (err) {
-+		efi_free_pool(label);
-+		return NULL;
-+	}
-+	bm = dev_get_plat(bm_dev);
-+
-+	efi_free_pool(label);
-+
-+	return bm->blk;
-+}
-+
-+/**
-+ * try_load_default_file() - try to load the default file
-+ *
-+ * Search the device having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-+ * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
-+ *
-+ * @dev			pointer to the UCLASS_BLK or UCLASS_PARTITION udevice
-+ * @image_handle:	pointer to handle for newly installed image
-+ * Return:		status code
-+ */
-+static efi_status_t try_load_default_file(struct udevice *dev,
-+					  efi_handle_t *image_handle)
-+{
-+	efi_status_t ret;
-+	efi_handle_t handle;
-+	struct efi_handler *handler;
-+	struct efi_device_path *file_path;
-+	struct efi_device_path *device_path;
-+
-+	if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle)) {
-+		log_warning("DM_TAG_EFI not found\n");
-+		return EFI_INVALID_PARAMETER;
-+	}
-+
-+	ret = efi_search_protocol(handle,
-+				  &efi_simple_file_system_protocol_guid, &handler);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	ret = EFI_CALL(bs->open_protocol(handle, &efi_guid_device_path,
-+					 (void **)&device_path, efi_root, NULL,
-+					 EFI_OPEN_PROTOCOL_GET_PROTOCOL));
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	file_path = expand_media_path(device_path);
-+	ret = EFI_CALL(efi_load_image(true, efi_root, file_path, NULL, 0,
-+				      image_handle));
-+
-+	efi_free_pool(file_path);
-+
-+	return ret;
-+}
-+
-+/**
-+ * load_default_file_from_blk_dev() - load the default file
-+ *
-+ * @blk		pointer to the UCLASS_BLK udevice
-+ * @handle:	pointer to handle for newly installed image
-+ * Return:	status code
-+ */
-+static efi_status_t load_default_file_from_blk_dev(struct udevice *blk,
-+						   efi_handle_t *handle)
-+{
-+	efi_status_t ret;
-+	struct udevice *partition;
-+
-+	/* image that has no partition table but a file system */
-+	ret = try_load_default_file(blk, handle);
-+	if (ret == EFI_SUCCESS)
-+		return ret;
-+
-+	/* try the partitions */
-+	device_foreach_child(partition, blk) {
-+		enum uclass_id id;
-+
-+		id = device_get_uclass_id(partition);
-+		if (id != UCLASS_PARTITION)
-+			continue;
-+
-+		ret = try_load_default_file(partition, handle);
-+		if (ret == EFI_SUCCESS)
-+			return ret;
-+	}
-+
-+	return EFI_NOT_FOUND;
-+}
-+
-+/**
-+ * try_load_from_uri_path() - Handle the URI device path
-+ *
-+ * @uridp:	uri device path
-+ * @lo_label	label of load option
-+ * @handle:	pointer to handle for newly installed image
-+ * Return:	status code
-+ */
-+static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
-+					   u16 *lo_label,
-+					   efi_handle_t *handle)
-+{
-+	char *s;
-+	int uri_len;
-+	int image_size;
-+	efi_status_t ret;
-+	ulong image_addr;
-+
-+	s = env_get("loadaddr");
-+	if (!s) {
-+		log_err("Error: loadaddr is not set\n");
-+		return EFI_INVALID_PARAMETER;
-+	}
-+	image_addr = hextoul(s, NULL);
-+	image_size = wget_with_dns(image_addr, uridp->uri);
-+	if (image_size < 0)
-+		return EFI_INVALID_PARAMETER;
-+
-+	/*
-+	 * If the file extension is ".iso" or ".img", mount it and try to load
-+	 * the default file.
-+	 * If the file is PE-COFF image, load the downloaded file.
-+	 */
-+	uri_len = strlen(uridp->uri); /* todo: directly use uridp->uri */
-+	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
-+	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
-+		struct udevice *blk;
-+
-+		blk = mount_image(lo_label, image_addr, image_size);
-+		if (!blk)
-+			return EFI_INVALID_PARAMETER;
-+
-+		ret = load_default_file_from_blk_dev(blk, handle);
-+	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
-+		efi_handle_t mem_handle = NULL;
-+		struct efi_device_path *file_path = NULL;
-+
-+		file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
-+					    (uintptr_t)image_addr, image_size);
-+		ret = efi_install_multiple_protocol_interfaces(
-+			&mem_handle, &efi_guid_device_path, file_path, NULL);
+ 		ret = load_default_file_from_blk_dev(blk, handle);
 +		if (ret != EFI_SUCCESS)
-+			return EFI_INVALID_PARAMETER;
++			return ret;
 +
-+		ret = EFI_CALL(efi_load_image(false, efi_root, file_path,
-+					      (void *)image_addr, image_size,
-+					      handle));
-+	} else {
-+		log_err("Error: file type is not supported\n");
-+		return EFI_INVALID_PARAMETER;
-+	}
-+
-+	return ret;
-+}
-+
- /**
-  * try_load_entry() - try to load image for boot option
-  *
-@@ -211,6 +391,15 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
- 		if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
- 			/* file_path doesn't contain a device path */
- 			ret = try_load_from_short_path(lo.file_path, handle);
-+		} else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
-+			if (IS_ENABLED(CONFIG_BLKMAP) &&
-+			    IS_ENABLED(CONFIG_CMD_WGET) &&
-+			    IS_ENABLED(CONFIG_CMD_DNS)) {
-+				ret = try_load_from_uri_path(
-+					(struct efi_device_path_uri *)
-+						lo.file_path,
-+					lo.label, handle);
-+			}
- 		} else {
- 			file_path = expand_media_path(lo.file_path);
- 			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
++		/* whole ramdisk must be reserved */
++		efi_reserve_memory(image_addr, image_size, true);
+ 	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
+ 		efi_handle_t mem_handle = NULL;
+ 		struct efi_device_path *file_path = NULL;
+diff --git a/lib/efi_loader/efi_dt_fixup.c b/lib/efi_loader/efi_dt_fixup.c
+index 838023c78f..edc515b9ff 100644
+--- a/lib/efi_loader/efi_dt_fixup.c
++++ b/lib/efi_loader/efi_dt_fixup.c
+@@ -22,7 +22,7 @@ const efi_guid_t efi_guid_dt_fixup_protocol = EFI_DT_FIXUP_PROTOCOL_GUID;
+  * @nomap:	indicates that the memory range shall not be accessed by the
+  *		UEFI payload
+  */
+-static void efi_reserve_memory(u64 addr, u64 size, bool nomap)
++void efi_reserve_memory(u64 addr, u64 size, bool nomap)
+ {
+ 	int type;
+ 	efi_uintn_t ret;
 -- 
 2.34.1
 
