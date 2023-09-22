@@ -4,55 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BB7AE7D0D2
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 07:01:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21C1E7D0D2
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 07:02:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1B16863DE;
-	Fri, 22 Sep 2023 09:01:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 40B8186575;
+	Fri, 22 Sep 2023 09:02:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="H7B3NLtU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VBmGPobP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C62385E44; Fri, 22 Sep 2023 09:01:34 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C624F865D0; Fri, 22 Sep 2023 09:02:01 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BCE386501
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:01:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Date: Fri, 22 Sep 2023 09:00:38 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
- t=1695366086;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
- references:references; bh=0BcL+WTgRXAIf16CXfF6OgVTvSjsk8au5GRCzq8Wkkg=;
- b=H7B3NLtUUJi/KVeGiBXepUvThdXC00VTpUP8Or5tdPKbwo4dH1LqX0wvJpIFsMLfLO1B+3
- 6VVRZnb22yyn0TVxXaHWqpLKh9Nte/3y16t3yp2eLb4zWLTatTY3ENQSd6GqY8PiGhnCvy
- 33YP0SdzlffKAVEyjenIL8DOkzDZAGCID6wEJROfpgJIKY0io3ixP0QadF/05wcTVPb4XB
- +BRU4M8XTtVpIxghanRhFgKHel/ObZmgJIqd6qM7gcEb3fQimxdLgCb9HHfeIP79bsh4xW
- PKedjUr4hpPNpi2+spUJB1+CWuwKRYX75C+JZ2vPraT+zE4LfRLzVB8XQOKnMA==
-From: Alexander Dahl <ada@thorsis.com>
-To: Durai Manickam KR <durai.manickamkr@microchip.com>
-Cc: u-boot@lists.denx.de, hari.prasathge@microchip.com,
- varshini.rajendran@microchip.com, cristian.birsan@microchip.com,
- nicolas.ferre@microchip.com, balamanikandan.gunasundar@microchip.com,
- Eugen Hristev <eugen.hristev@collabora.com>
-Subject: Re: [PATCH 0/4] Add support for sam9x60 curiosity
-Message-ID: <20230922-gangrene-evolution-9c087f58f165@ifak-system.com>
-Mail-Followup-To: Durai Manickam KR <durai.manickamkr@microchip.com>,
- u-boot@lists.denx.de, hari.prasathge@microchip.com,
- varshini.rajendran@microchip.com, cristian.birsan@microchip.com,
- nicolas.ferre@microchip.com,
- balamanikandan.gunasundar@microchip.com,
- Eugen Hristev <eugen.hristev@collabora.com>
-References: <20230921170631.45752-1-durai.manickamkr@microchip.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230921170631.45752-1-durai.manickamkr@microchip.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 9499185E44
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:01:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=krzysztof.kozlowski@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-99c3d3c3db9so224349566b.3
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:01:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1695366119; x=1695970919; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=2jMuggZZvKYcFUdy/dK+81rshpboXDd4s3uqzGI3A5Y=;
+ b=VBmGPobPWNDEhNqPhFnIN86IotBCEJnxLF/7hYGIQz/Ykt+xXFtDJYqIVYAsmyeWZh
+ terS8LQH6x+dK4f4kCgwNn+nPfoxjmo/ygMHGXf7v0BEXn5sfMB68lrMkoAjTDjOlrdN
+ TTfRBKXzVV/IHMPDFj0NBv7NW5B0EAM6JObNfi/iLwrWhVOvkAnl8OwOYPCwb/Xwc816
+ EwE28ijhFN8MeMyLKEJwcX8p3Z+zGrTHpZernCkM/HVuTYDgKLjb2ShfIc9SuatT8k/8
+ sJpvr3lezklM48lCQUpeHHPnW9Tdpr3ak7BSPYzG33sJiUnblxAg3/ksGWHIYCaJp1h/
+ +GNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695366119; x=1695970919;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=2jMuggZZvKYcFUdy/dK+81rshpboXDd4s3uqzGI3A5Y=;
+ b=ro9JeKXC2V5IdDYKrddgSdUF2KvpukAF8SAhFhXFFlNMm2+xPSlLmgKZjUjc0BttkI
+ 58FsAkBM8keWG8ooSbhbN4W3EL/aztlaa23cbc/5TumC4WUMpIxPoc8aOTkOxHVABtRT
+ rrmciStUao+UUXXublUYOllcPF5f7I51BFHe7Nz0q4cNMFdF8/rtJmZocpWXhsY/Lbey
+ P6E0jomZ2vHeEs+9ehlw+RvrhfPWz2H4BNT5InewtVK/6hSz5KX1IJDTmmXg7tjfbfh7
+ QuBvr1/dPjIi/tLG7MUlrIlXSlzVVBsi8uzwFMEEZlsfvxcisF/Tk+kFCAwree0qBub/
+ v2vQ==
+X-Gm-Message-State: AOJu0YwtPqovzpUMXwMVva7A+m814q3mK/fRmONBLwz7twAETYCcfpWM
+ 57B4l8c/9pdmwbRje4f8kqhV/g==
+X-Google-Smtp-Source: AGHT+IG0i7UDbq0G1Fggapv+viejE9QTHLY0IXIcvKnvjvzePXoImlcw3a294mo0jaA03y9ttLUk9Q==
+X-Received: by 2002:a17:906:519c:b0:9ae:5be8:ff90 with SMTP id
+ y28-20020a170906519c00b009ae5be8ff90mr3193946ejk.68.1695366119042; 
+ Fri, 22 Sep 2023 00:01:59 -0700 (PDT)
+Received: from [10.41.192.245] ([77.241.232.19])
+ by smtp.gmail.com with ESMTPSA id
+ k20-20020a170906681400b0099bd046170fsm2220195ejr.104.2023.09.22.00.01.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 22 Sep 2023 00:01:58 -0700 (PDT)
+Message-ID: <da77e965-2893-097a-b438-85787c43dcb0@linaro.org>
+Date: Fri, 22 Sep 2023 09:01:41 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>, devicetree@vger.kernel.org
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>,
+ Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Dhruva Gole <d-gole@ti.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?=
+ <rafal@milecki.pl>, Richard Weinberger <richard@nod.at>,
+ Rob Herring <robh+dt@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
+References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
+From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+In-Reply-To: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,43 +102,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Durai,
-
-Am Thu, Sep 21, 2023 at 10:36:27PM +0530 schrieb Durai Manickam KR:
-> This patch series adds boot from NAND support, configs update and 
-> fixes. The changes has been done on top of u-boot version 2023.07.
-
-Well, interesting.  I sent patches for NAND flash support on that very
-board some weeks ago which were already applied to the at91 custodian
-tree:
-
-https://source.denx.de/u-boot/custodians/u-boot-at91/-/tree/next?ref_type=heads
-
-Tom already merged that to the mainline next branch.  I suggest you
-rebase on next.
-
-Add Eugen to Cc, since he still is officially listed as maintainer of
-the at91 stuff.
-
-Greets
-Alex
-
+On 21/09/2023 20:45, Simon Glass wrote:
+> Binman[1] is a tool for creating firmware images. It allows you to
+> combine various binaries and place them in an output file.
 > 
-> Durai Manickam KR (4):
->   configs: at91: sam9x60_curiosity: update
->     sam9x60_curiosity_mmc_defconfig
->   configs: at91: sam9x60_curiosity: Add
->     sam9x60_curiosity_nandflash_defconfig
->   ARM: dts: at91: sam9x60_curiosity: Enable NAND support
->   ARM: dts: at91: sam9x60_curiosity: fix eeprom compatible
+> Binman uses a DT schema to describe an image, in enough detail that
+> it can be automatically built from component parts, disassembled,
+> replaced, listed, etc.
 > 
->  arch/arm/dts/at91-sam9x60_curiosity.dts       | 106 +++++++++++++++++-
->  board/atmel/sam9x60_curiosity/MAINTAINERS     |   1 +
->  configs/sam9x60_curiosity_mmc_defconfig       |  14 +++
->  configs/sam9x60_curiosity_nandflash_defconfig |  92 +++++++++++++++
->  4 files changed, 212 insertions(+), 1 deletion(-)
->  create mode 100644 configs/sam9x60_curiosity_nandflash_defconfig
+> Images are typically stored in flash, which is why this binding is
+> targeted at mtd. Previous discussion is at [2] [3].
 > 
-> -- 
-> 2.25.1
+> [1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
+> [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.org/
+> [3] https://www.spinics.net/lists/devicetree/msg626149.html
 > 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+>  .../bindings/mtd/partitions/binman.yaml       | 50 +++++++++++++++
+>  .../bindings/mtd/partitions/binman/entry.yaml | 61 +++++++++++++++++++
+>  .../bindings/mtd/partitions/partitions.yaml   |  1 +
+>  MAINTAINERS                                   |  5 ++
+>  4 files changed, 117 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> new file mode 100644
+> index 00000000000000..c792d5a37b700a
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> @@ -0,0 +1,50 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> +# Copyright 2023 Google LLC
+> +
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Binman firmware layout
+> +
+> +maintainers:
+> +  - Simon Glass <sjg@chromium.org>
+> +
+> +description: |
+> +  The binman node provides a layout for firmware, used when packaging firmware
+> +  from multiple projects. For now it just supports a very simple set of
+> +  features, as a starting point for discussion.
+> +
+> +  Documentation for Binman is available at:
+> +
+> +  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html
+> +
+> +  with the current image-description format at:
+> +
+> +  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#image-description-format
+> +
+> +properties:
+> +  compatible:
+> +    const: u-boot,binman
+> +
+> +required:
+> +  - compatible
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    firmware {
+> +      binman {
+> +        compatible = "u-boot,binman";
+> +
+> +        u-boot {
+
+It does not look like you tested the bindings, at least after quick
+look. Please run `make dt_binding_check` (see
+Documentation/devicetree/bindings/writing-schema.rst for instructions).
+Maybe you need to update your dtschema and yamllint.
+
+
+> +          size = <0xa0000>;
+> +        };
+> +
+> +        atf-bl31 {
+> +          offset = <0x100000>;
+> +        };
+> +      };
+> +    };
+> diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+> new file mode 100644
+> index 00000000000000..8003eb4f1a994f
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+> @@ -0,0 +1,61 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> +# Copyright 2023 Google LLC
+> +
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/mtd/partitions/binman/entry.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Binman entry
+> +
+> +maintainers:
+> +  - Simon Glass <sjg@chromium.org>
+> +
+> +description: |
+> +  The entry node specifies a single entry in the firmware.
+> +
+> +  Entries have a specific type, such as "u-boot" or "atf-bl31". If the type
+> +  is missing, the name is used as the type.
+> +
+> +  Note: This definition is intended to be hierarchical, so that entries can
+> +  appear in other entries. Schema for that is TBD.
+> +
+> +properties:
+> +  $nodename:
+> +    pattern: "^[-a-z]+(-[0-9]+)?$"
+
+Why do you need this?
+
+> +
+> +  type:
+> +    $ref: /schemas/types.yaml#/definitions/string
+> +
+> +  offset:
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    description: |
+> +      Provides the offset of this entry from the start of its parent section.
+> +      If this is omitted, Binman will determine this by packing the enclosing
+> +      section according to alignment rules, etc.
+> +
+> +  size:
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    description: |
+> +      Provides the size of this entry in bytes. If this is omitted, Binman will
+> +      use the content size, along with any alignment information, to determine
+> +      the size of the entry.
+> +
+
+
+Best regards,
+Krzysztof
+
