@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC8E6CD4854
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 19:28:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26BE1E81A62
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 19:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97A3F86529;
-	Fri, 22 Sep 2023 21:28:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 48000868D1;
+	Fri, 22 Sep 2023 21:34:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mad0xZhM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L7x5FMTu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 216A08640F; Fri, 22 Sep 2023 21:28:56 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 6EF56868D1; Fri, 22 Sep 2023 21:34:31 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38B948652A
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 21:28:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5EE0868D1
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 21:34:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d8195078f69so2983196276.3
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:28:52 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-7928ba24936so104520139f.0
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:34:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695410931; x=1696015731; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RPNh5IKk4OV6xyudUNWgx3IHTWOJZ7VlXRYF5y1pJMQ=;
- b=mad0xZhMqz8phErDIlO828Auslq0+Bsk1FXKvqyJq1itXTcf6/IexTW6QulQTR1r4K
- j2BRz8E97QAu28Lg2w2a6mw20WH4hNg9Hs27/2VGw1MnYxg7o8rgKk7y4XcXR/tHdG2p
- j+6Ot5rhgVIeRgppGc30ycdQOGFj5XUr3WACA=
+ d=chromium.org; s=google; t=1695411267; x=1696016067; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ze0feaJyolx52nnGDHZNRW/aGemuWEpJCRuOORda2U0=;
+ b=L7x5FMTuxqUPi2WLBvWyJiPxplgiXMJEmtFm9pdQAMJTZV6jkxs1aWcJ+LPvcZtG02
+ dGASfd1zl+b/O391mpLCHH6mLb6B4Oefs824Li2ww8u312m+DjTJkqU2m3SfN0Yk4lsE
+ CtB1PdXbMD2zreKBqWXtzXUP9XEc7Y9+CnrGw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695410931; x=1696015731;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RPNh5IKk4OV6xyudUNWgx3IHTWOJZ7VlXRYF5y1pJMQ=;
- b=pvpXVr4zYM7D5sF9kbwtqDdaAYPRCL7dYBWWCit1zqErnxy0SnIlb1IRt02Fkrkr65
- xpCvlwpLRRHaOaQy2qf6OvOVBPgQoa0N+p1Z3qj+4+ZtI11Iefj7S41AKVDB1Irkwwjs
- JK9YEMUt5Rhx8yQzbJNINmxm/MVI/B6KG8er076t6/GQb01VM2EgySTNooew3RLwGgXQ
- XJTpWEIytfsNRgAVq4un+1w57Xi6ttyPQ24rLwa6NYRz+Lc0bIvFkemgoJfbIfxxDO8r
- uu8iz8oBTo9WeIgYYvnGfdvAImO5m4DmtZp/Hq8a/NX/1twkEmNeAj72BJYcDIf91NUd
- iFtQ==
-X-Gm-Message-State: AOJu0YzJiEBsYeARLZycOpSxdaaRdEAMZ+2fclM3dS6A0TWuUJ0yLHm8
- FRy35MbmSpz/Oo9suhNgfVq15w==
-X-Google-Smtp-Source: AGHT+IHbp2zhdi6knTx8GW60pXZqoq/nRTR4h1HghD+iAKmXzridPhGJ2Q5GQtAJIoBlHm5SOTYZgA==
-X-Received: by 2002:a25:38f:0:b0:d81:89e9:9f48 with SMTP id
- 137-20020a25038f000000b00d8189e99f48mr230371ybd.63.1695410930751; 
- Fri, 22 Sep 2023 12:28:50 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-b22c-a20b-ddfe-6409.res6.spectrum.com.
- [2603:6081:7b00:6400:b22c:a20b:ddfe:6409])
+ d=1e100.net; s=20230601; t=1695411267; x=1696016067;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ze0feaJyolx52nnGDHZNRW/aGemuWEpJCRuOORda2U0=;
+ b=WYJcO7curHZMqhPX0GA9J6ZWt2lRXijJBhjQbgnyI3cqvdLb8oM9qjWld7Hb4N/Pwu
+ MnOAVRGnLN41CD+acEjuyp/JSHlIrJ/fpaPqGN3SZo1djXGoo8C3ejuPY7fqh7tr1RHa
+ n6Lc1LuvbLfL+rekBUqW0+z+sXJtsjdVhhHloqAit74b4Uix/+9wfI6QG6or+Pb38/oD
+ A42wHLtO8Dk5Jah5gLkx7LR6U2O3h5z3LVu+9IXhxFMa3b26JFox5GYsdOARKqhnK3v5
+ l/xevlWS9EEUDkVOEs+ecFViKd3sOpiICHZOsXdgBxUlYZYFMx8xq6g0NZUUqkoqSRor
+ yIEw==
+X-Gm-Message-State: AOJu0YyUTC3rt63Gudu6ledkthdkpYPIwMHo/bY3bgGQGtZl4GX1uFNv
+ EZ2wBDfY5JKm1lApudwpBiaObQ==
+X-Google-Smtp-Source: AGHT+IGxZot43frUtwqoFHunoT9jM8YXOXehO/Ug9V1olGsIhmVx1qXPa4/rswQ+JFb2BcqsJkZNgQ==
+X-Received: by 2002:a5d:930b:0:b0:790:f866:d717 with SMTP id
+ l11-20020a5d930b000000b00790f866d717mr342505ion.10.1695411266990; 
+ Fri, 22 Sep 2023 12:34:26 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:9fd8:298f:4748:f9a])
  by smtp.gmail.com with ESMTPSA id
- e141-20020a25e793000000b00d77928cdcf6sm990332ybh.15.2023.09.22.12.28.49
+ b18-20020a029a12000000b0042b1297468esm1149594jal.51.2023.09.22.12.34.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Sep 2023 12:28:49 -0700 (PDT)
-Date: Fri, 22 Sep 2023 15:28:47 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nikhil M Jain <n-jain1@ti.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH 09/32] spl: Avoid an #ifdef when printing gd->malloc_ptr
-Message-ID: <20230922192847.GD305624@bill-the-cat>
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-10-sjg@chromium.org>
- <20230830213916.GL3101304@bill-the-cat>
- <CAPnjgZ165AgX0VTWWbHTiEfwP_R5qdwcUQKWoJ7x3G0PYHT3aw@mail.gmail.com>
- <20230921153557.GR305624@bill-the-cat>
- <CAPnjgZ0ZqySaVa6LKWz7p7h8gjH1yTsLtds_8hF+DEXQGC459g@mail.gmail.com>
+ Fri, 22 Sep 2023 12:34:26 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: devicetree@vger.kernel.org
+Cc: Tom Rini <trini@konsulko.com>, linux-mtd@lists.infradead.org,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Rob Herring <robh@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Conor Dooley <conor+dt@kernel.org>,
+ Dhruva Gole <d-gole@ti.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nick Terrell <terrelln@fb.com>,
+ Pratyush Yadav <ptyadav@amazon.de>,
+ =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>,
+ Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
+Subject: [PATCH v2] dt-bindings: mtd: Add a schema for binman
+Date: Fri, 22 Sep 2023 13:34:15 -0600
+Message-ID: <20230922193417.1697379-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="G2JIrR3shCq0JPw9"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0ZqySaVa6LKWz7p7h8gjH1yTsLtds_8hF+DEXQGC459g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,135 +93,302 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Binman[1] is a tool for creating firmware images. It allows you to
+combine various binaries and place them in an output file.
 
---G2JIrR3shCq0JPw9
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Binman uses a DT schema to describe an image, in enough detail that
+it can be automatically built from component parts, disassembled,
+replaced, listed, etc.
 
-On Fri, Sep 22, 2023 at 12:27:36PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 21 Sept 2023 at 09:36, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Sep 20, 2023 at 07:03:34PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Wed, 30 Aug 2023 at 15:39, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Wed, Aug 30, 2023 at 12:04:40PM -0600, Simon Glass wrote:
-> > > > > Use an accessor in the header file to avoid this.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > >  common/spl/spl.c                  | 9 +++++----
-> > > > >  include/asm-generic/global_data.h | 7 +++++++
-> > > > >  2 files changed, 12 insertions(+), 4 deletions(-)
-> > > > >
-> > > > > diff --git a/common/spl/spl.c b/common/spl/spl.c
-> > > > > index f0a90c280da..f5cef81000c 100644
-> > > > > --- a/common/spl/spl.c
-> > > > > +++ b/common/spl/spl.c
-> > > > > @@ -876,10 +876,11 @@ void board_init_r(gd_t *dummy1, ulong dummy=
-2)
-> > > > >       } else {
-> > > > >               debug("Unsupported OS image.. Jumping nevertheless.=
-=2E\n");
-> > > > >       }
-> > > > > -#if CONFIG_VAL(SYS_MALLOC_F_LEN) && !defined(CONFIG_SPL_SYS_MALL=
-OC_SIZE)
-> > > > > -     debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->mallo=
-c_ptr,
-> > > > > -           gd->malloc_ptr / 1024);
-> > > > > -#endif
-> > > > > +     if (IS_ENABLED(CONFIG_SYS_MALLOC_F) &&
-> > > > > +         !IS_ENABLED(CONFIG_SPL_SYS_MALLOC_SIZE))
-> > > > > +             debug("SPL malloc() used 0x%lx bytes (%ld KB)\n",
-> > > > > +                   gd_malloc_ptr(), gd_malloc_ptr() / 1024);
-> >
-> > This is not more readable.  But I guess my comment was unclear as you're
-> > mixing changes here.  gd_malloc_ptr() rather than gd->malloc_ptr is a
-> > wash, to me.  I think one could argue it's not a helpful abstraction.
-> > but it's so that you can avoid CONFIG_VAL here, and say "if (...)" not
-> > "#if ..." here.
->=20
-> Yes,
->=20
-> >
-> > > > > +
-> > > > >       bootstage_mark_name(get_bootstage_id(false), "end phase");
-> > > > >  #ifdef CONFIG_BOOTSTAGE_STASH
-> > > > >       ret =3D bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
-> > > > > diff --git a/include/asm-generic/global_data.h b/include/asm-gene=
-ric/global_data.h
-> > > > > index 8fc205ded1a..edf9ff6823f 100644
-> > > > > --- a/include/asm-generic/global_data.h
-> > > > > +++ b/include/asm-generic/global_data.h
-> > > > > @@ -573,6 +573,13 @@ static_assert(sizeof(struct global_data) =3D=
-=3D GD_SIZE);
-> > > > >  #define gd_malloc_start()    0
-> > > > >  #define gd_set_malloc_start(val)
-> > > > >  #endif
-> > > > > +
-> > > > > +#if CONFIG_VAL(SYS_MALLOC_F_LEN)
-> > > > > +#define gd_malloc_ptr()              gd->malloc_ptr
-> > > > > +#else
-> > > > > +#define gd_malloc_ptr()              0L
-> > > > > +#endif
-> > > > > +
-> > > > >  /**
-> > > > >   * enum gd_flags - global data flags
-> > > > >   *
-> > > >
-> > > > This is another case where readability is not improved. I also have=
- a
-> > > > bad feeling that changing that exact area had some unintended
-> > > > consequences from the compiler, that totally should not have happen=
-ed.
-> > > > But maybe that was something in a similar code section instead.
-> > >
-> > > The improvement is in the C file...here we have an accessor in the
-> > > header file as has been done elsewhere.
-> > >
-> > > Do you have any more details on the problem you mention? I will align
-> > > the accessor to the struct member which should resolve it.
-> >
-> > It's unfortunately one of those cases to do a global before/after build
-> > and see if anything does or does not get tripped up.  As I believe I did
-> > use CONFIG_VAL there and not a check on CONFIG_SYS_MALLOC_F itself for a
-> > reason, at the time.
->=20
-> But the CONFIG_VAL symbols actually depends on CONFIG_SYS_MALLOC_F, so
-> I can't imagine what it might be. Of course if the value is 0, then
-> the 'if CONFIG_VAL()' test would fail, but to what purpose?
+Images are typically stored in flash, which is why this binding is
+targeted at mtd. Previous discussion is at [2] [3].
 
-Yes, there's been a time or two where I banged my head against the
-figurative wall trying to understand what exactly the compiler could be
-seeing as why to change something.  I don't have a "reasonable"
-explanation.  Readability aside, "tidy things up" changes need to be on
-their own so that their impact can be seen aside from the new
-functionality changes.
+This is only a starting point, an attempt to align on the best way to
+add this to the schema.
 
---=20
-Tom
+[1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
+[2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.org/
+[3] https://www.spinics.net/lists/devicetree/msg626149.html
 
---G2JIrR3shCq0JPw9
-Content-Type: application/pgp-signature; name="signature.asc"
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
------BEGIN PGP SIGNATURE-----
+Changes in v2:
+- Use "binman" for compatible instead of "u-boot,binman"
+- Significantly rework the patch
+- Use make dt_binding_check DT_SCHEMA_FILES=Documentation/../partitions
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUN6ukACgkQFHw5/5Y0
-tyzkFgv/Q8TWEUjm0X54PszpS130jFflH6SoZ0TbVZD7biKPHjEx6mM1rBLKPual
-7cl0dQw3003cR4keIqUGkaOiCvwoEEXIIHUl97Dk6irzyZA4+eo/HPbLs9hcxGz2
-XqbhdrCFOKNL0cXyuR8bb4DWI6XkG+/4MXHQdDMA/i0at/2KJgLtGqgYAoJesc7f
-zJ0zt52UxFe/C/AS7dr+rydTTFVZAtUwsFNn8fsGtrImZ6MqHiWuYAF0MOZ+k7Z5
-zedg2Nu2Tbpf3Q04m3H7ic/pULeymrij50b4ZpHxvVUkzF1hFn6IkQV4M1lGgMpv
-pRAej0SOOL2Q7h88ktwdAayU79TLxsowqiZKZK8z2S1BLyasDQaUeJDCdggu3Hoy
-6WhCKWvDUPY5hkkQXsPqIuGvfs77WSecQCAis5sZHLtib6+9L2LTyVqBL3LkADR/
-yvFQEjzzOvjMkI9BZG8KImdRVSWT0pn1Jbuy5n4w7YdrYBwGPEPZqn9uh+Mn8t76
-ATsrzY+V
-=85q5
------END PGP SIGNATURE-----
+ .../bindings/mtd/partitions/binman.yaml       | 59 ++++++++++++++++++
+ .../mtd/partitions/binman/atf-bl31.yaml       | 43 +++++++++++++
+ .../bindings/mtd/partitions/binman/entry.yaml | 62 +++++++++++++++++++
+ .../mtd/partitions/binman/u-boot.yaml         | 43 +++++++++++++
+ .../bindings/mtd/partitions/partitions.yaml   |  1 +
+ MAINTAINERS                                   |  5 ++
+ 6 files changed, 213 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+ create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml
+ create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+ create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml
 
---G2JIrR3shCq0JPw9--
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+new file mode 100644
+index 000000000000..31accab37055
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+@@ -0,0 +1,59 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++# Copyright 2023 Google LLC
++
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Binman firmware layout
++
++maintainers:
++  - Simon Glass <sjg@chromium.org>
++
++select: false
++
++description: |
++  The binman node provides a layout for firmware, used when packaging firmware
++  from multiple projects. For now it just supports a very simple set of
++  features, as a starting point for discussion.
++
++  Documentation for Binman is available at:
++
++  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html
++
++  with the current image-description format at:
++
++  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#image-description-format
++
++properties:
++  reg:
++    description: partition's offset and size within the flash
++    maxItems: 1
++
++  compatible:
++    const: binman
++
++  "#address-cells":
++    enum: [ 1, 2 ]
++
++  "#size-cells":
++    enum: [ 1, 2 ]
++
++required:
++  - compatible
++
++additionalProperties: false
++
++examples:
++  - |
++    binman {
++        compatible = "binman";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        partition@100000 {
++            compatible = "brcm,bcm4908-firmware";
++            reg = <0x100000 0xf00000>;
++        };
++    };
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml
+new file mode 100644
+index 000000000000..7d28e7e1d01d
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml
+@@ -0,0 +1,43 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++# Copyright 2023 Google LLC
++
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/partitions/binman/atf-bl31.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: ARM Trusted Firmware BL31
++
++maintainers:
++  - Simon Glass <sjg@chromium.org>
++
++description:
++  Holds a BL31 binary file from the ARM Trusted Firmware project.
++
++allOf:
++  - $ref: entry.yaml#
++
++properties:
++  compatible:
++    const: binman,atf-bl31
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    binman {
++        compatible = "binman";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        partition@0 {
++            reg = <0x0 0xa0000>;
++            compatible = "binman,entry";
++        };
++
++        partition@100000 {
++            reg = <0x100000 0x200000>;
++            compatible = "binman,atf-bl31";
++            compression = "lz4";
++        };
++    };
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+new file mode 100644
+index 000000000000..9991c83aa0cf
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+@@ -0,0 +1,62 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++# Copyright 2023 Google LLC
++
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/partitions/binman/entry.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Binman entry
++
++maintainers:
++  - Simon Glass <sjg@chromium.org>
++
++description: |
++  This node specifies a single, generic entry in the firmware.
++
++  Entries have a specific type, indicated by the compatible string.
++
++properties:
++  reg:
++    description: partition's offset and size within the flash
++    maxItems: 1
++
++  compression:
++    $ref: /schemas/types.yaml#/definitions/string
++    description:
++      Compression algorithm to use, chosen from a list of well-known algorithms.
++      The contents are compressed using this algorithm.
++
++    enum:
++      - none
++      - bzip2
++      - gzip
++      - lzop
++      - lz4
++      - lzma
++      - xz
++      - zstd
++
++required:
++  - compatible
++
++additionalProperties: true
++
++examples:
++  - |
++    binman {
++        compatible = "binman";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        partition@0 {
++            reg = <0x0 0xa0000>;
++            compatible = "binman,entry";
++        };
++
++        partition@100000 {
++            reg = <0x100000 0x200000>;
++            compatible = "binman,entry";
++            compression = "lz4";
++        };
++    };
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml
+new file mode 100644
+index 000000000000..e5f3583f746c
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml
+@@ -0,0 +1,43 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++# Copyright 2023 Google LLC
++
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/partitions/binman/u-boot.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: U-Boot
++
++maintainers:
++  - Simon Glass <sjg@chromium.org>
++
++description:
++  Holds a binary file (u-boot.bin) from the U-Boot project.
++
++allOf:
++  - $ref: entry.yaml#
++
++properties:
++  compatible:
++    const: binman,u-boot
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    binman {
++        compatible = "binman";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        partition@0 {
++            reg = <0x0 0xa0000>;
++            compatible = "binman,u-boot";
++        };
++
++        partition@100000 {
++            reg = <0x100000 0x200000>;
++            compatible = "binman,atf-bl31";
++            compression = "lz4";
++        };
++    };
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+index 1dda2c80747b..849fd15d085c 100644
+--- a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
++++ b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+@@ -15,6 +15,7 @@ maintainers:
+ 
+ oneOf:
+   - $ref: arm,arm-firmware-suite.yaml
++  - $ref: binman.yaml
+   - $ref: brcm,bcm4908-partitions.yaml
+   - $ref: brcm,bcm947xx-cfe-partitions.yaml
+   - $ref: fixed-partitions.yaml
+diff --git a/MAINTAINERS b/MAINTAINERS
+index a4c30221eb30..ebcbfb4292e8 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3505,6 +3505,11 @@ F:	Documentation/filesystems/bfs.rst
+ F:	fs/bfs/
+ F:	include/uapi/linux/bfs_fs.h
+ 
++BINMAN
++M:	Simon Glass <sjg@chromium.org>
++S:	Supported
++F:	Documentation/devicetree/bindings/mtd/partitions/binman*
++
+ BITMAP API
+ M:	Yury Norov <yury.norov@gmail.com>
+ R:	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+-- 
+2.42.0.515.g380fc7ccd1-goog
+
