@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02013CD4F49
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 10:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E506CD4F58
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 10:37:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FE2F86B09;
-	Fri, 22 Sep 2023 12:36:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C400686B53;
+	Fri, 22 Sep 2023 12:36:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="i90KL5yf";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="IZCDANjf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1684886ADC; Fri, 22 Sep 2023 12:36:46 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::60d])
+ id 8B77086B4B; Fri, 22 Sep 2023 12:36:50 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eae::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8B3386AE9
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:36:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 500E186AE9
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:36:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Vt0JDVpqFtzqm8Cdwei8uL7E6rsj81RTrZBu1sXvZm0TJ4YS5UWp3S/2+1wQ/ksbZFepZ9YcpUsoE3Qq1I+WOxZ2C6JHz8UtjEnahhFzo73BOfqVz/CE07+jgSsxwnSNQd8EFoadsVfg18AQWOLOzg7BdKJYdXTOkWnQt1/pnJLFTcI1OoGaKMYNENSD02Sx6tnFubj66cDSKGfOQ6/mS6mJv+iRiiKvBuDV9pxwXnoEzFDuZ2IoMT+Yznd2Ibnp+SEKlizXATFo2+ozCK8eYUVnZ+NL6TnPHobbJV7e1/ZIkG+7wognNT8Z0teq5EfCxKb/ckOXsJ6Ah4r5AH6euQ==
+ b=Fe7uhsnkkSZLT4vE+h3XvGvWyPTVhT+1RHEum3eMuO85P9XQUL7qW8ceqJ8jYEqDBeFzjiQUAhY3Zmjd8Z55MIDQMs+qyQV9vKgCwCc71rJV6DHcGyGsh0QxzgMHY38Q+yTeQDqXLbSFV49Esj9+w+Y2JOxEGJc4otZbpBbD0ZZiUAAAz/R8RZ8BmiD+w+aWLSGWHZiv9qYYWfrK29JiSQOZ4xsPq9IdaO1bKS4U75NCAxBhrj0GV+8OARsIGPQuHgDKYMZAOrYAwD9SxDLUpF80qIN0hWRhfq7uXjOO7Begjc49iMzT6J9a2/NUnxvFaPJnDPTeA74ztvkHoHKYXg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=z2AgYH3BsAeNwYYS21NNHAdDz4DY2WD0rcuWuo5Wx2w=;
- b=R3wS9OzwPbek3xG7ymPaqiYRv0oO9P4toFM0U2sjs6yT8bRQNBsaQjisVQyDOCIxtdfcot3r5DzDVIzMHoVjNNK1sFl4E8IGeLvMpcobLedIJuldqUEkAIDLcQVfwNzP00c4vDiVStAuuyiuARsI4idiyyHqzT6viP6UIO1jzaKG4aoFilQIfycRlQ64ELqla6vD3/V0HSYb4U2vn/meAIYd2wGwJGesWNsr4b7iPI4ffMS+8mjglsrOE2Rzcy0V3WL60e2GYIj4k2eH/+Z2ZzBqrzpRt4JhK31APBSVvBW4rvf9WKEQXJcVT+kJSpIlESOVkZz/bI+AQWQ2sU3OgQ==
+ bh=xLceXfEqZaWeKmD2Gypew/A7MhjAcapFOL0Vja/Gopg=;
+ b=QFT1XQJj5toGlhh0Bq4CoRwupab6cFWMb8w7X8wnJAMfTBHrKxCImh9CsaF58HJBYUZA1mlscbsFPI5qGDJDDqQRuGdybMuENHofOS06DBlJuqxJHQCOgwHwlarzI84GoDxG1vchBkJAFd92aOObUIpI130w2RdyNvsnTFazP3qeAXQV4l97GSKcUt8CUXnvrI4LEwZJl4j5jlUpB1n29rxO9jMpriR+/infL8X2XJR+TAJEthhyUsiPCGPuVV6AERj3Gsi+c4WHKCLeHh/KK+Jf3x6QvclVfZzD3PNXIR+Ut/6A1MPKQEy2GZX3IZLSFPHjhOxiXnosKbNIKge8BQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=z2AgYH3BsAeNwYYS21NNHAdDz4DY2WD0rcuWuo5Wx2w=;
- b=i90KL5yfmxbgnl0FkzRXPJshn96yRM8FVrnZL0m91+MdKelyHTV9kd8k/PngYpLl07xNpkXmfpoUERicHUJE6qKhAAuLDTasPr28MVEIajB/muAUftpl7jwchM/Sty166duscW3sXaTdU4uF8A92kLnQR9QI7qtFa0C9u0SbnFI=
-Received: from DM6PR08CA0050.namprd08.prod.outlook.com (2603:10b6:5:1e0::24)
- by DM4PR12MB8452.namprd12.prod.outlook.com (2603:10b6:8:184::18) with
+ bh=xLceXfEqZaWeKmD2Gypew/A7MhjAcapFOL0Vja/Gopg=;
+ b=IZCDANjfUQHcDPTOWjejGDoMluFh3Ya+GqS9ngzIorwl3baN+gXKR4QWx8dhrP94s0qhOw8+j+LwGkmIIU6FQSloGgBdDk7KMpFUN5xlhnQtywDPDaZRQs0mEO5W61EYutxGzSKMEcor5J69ZXZyVetoi/hmv19VhsuunWtu6Zs=
+Received: from DM6PR08CA0064.namprd08.prod.outlook.com (2603:10b6:5:1e0::38)
+ by PH7PR12MB7281.namprd12.prod.outlook.com (2603:10b6:510:208::6) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.20; Fri, 22 Sep
- 2023 10:36:40 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.21; Fri, 22 Sep
+ 2023 10:36:43 +0000
 Received: from DS1PEPF00017098.namprd05.prod.outlook.com
- (2603:10b6:5:1e0:cafe::50) by DM6PR08CA0050.outlook.office365.com
- (2603:10b6:5:1e0::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.32 via Frontend
- Transport; Fri, 22 Sep 2023 10:36:40 +0000
+ (2603:10b6:5:1e0:cafe::61) by DM6PR08CA0064.outlook.office365.com
+ (2603:10b6:5:1e0::38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.34 via Frontend
+ Transport; Fri, 22 Sep 2023 10:36:43 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,25 +61,25 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  DS1PEPF00017098.mail.protection.outlook.com (10.167.18.102) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6792.20 via Frontend Transport; Fri, 22 Sep 2023 10:36:40 +0000
+ 15.20.6792.20 via Frontend Transport; Fri, 22 Sep 2023 10:36:43 +0000
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 22 Sep
- 2023 05:36:38 -0500
+ 2023 05:36:40 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-Subject: [PATCH 06/14] arm64: zynqmp: Fix Siva's email address format
-Date: Fri, 22 Sep 2023 12:35:35 +0200
-Message-ID: <e970cc0dfabe293c2baf6b231d34f3af0386f1eb.1695378830.git.michal.simek@amd.com>
+Subject: [PATCH 07/14] arm64: xilinx: Put ethernet phys to mdio node
+Date: Fri, 22 Sep 2023 12:35:36 +0200
+Message-ID: <ff165281a70a38e2b76fee91e6255ce95ce8021b.1695378830.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <cover.1695378830.git.michal.simek@amd.com>
 References: <cover.1695378830.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8460; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=pw8t+1oJJt5QaDExTBYT5e7eEL5lUaSgtfP+P/kvMJQ=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlTe3Km22WujWByYDp56q1LP0HXto+ikT9GFdu4/XvLzn
- 7E1Fo7siGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABNJl2NY0HtvVeT0Y5p9vPaL
- glZbLrf+vKXwKMP8GquqcAarkzdd3CbLBeUHn1qsnJUNAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8523; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=kc//g/1y0rh9FYVmOCYeZe0YqEABaZasL0RUfsUOPDM=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlTe3KmbRX8mLj1yfPvpk+u8Mg04pp5Xk0pWV7D3anzty
+ +LQwbynI5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAExEUINhDk+f9q3Zf3Za5D38
+ sSYk7WqY4QXXZQwLOie9O1Ci55dluCev1U4yaRvT5pJ+AA==
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -89,26 +89,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017098:EE_|DM4PR12MB8452:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8e16a54a-b1ef-4b2e-c5bb-08dbbb57cebc
+X-MS-TrafficTypeDiagnostic: DS1PEPF00017098:EE_|PH7PR12MB7281:EE_
+X-MS-Office365-Filtering-Correlation-Id: f273ea86-6d31-4e84-efc7-08dbbb57d02b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Gnim5Qmo86Bb6XM7XR53E6UVk/v2JPRFct90BPK4kc8Ch9r+kCsOish3VOLZTnrHRtqWr7AV/Z6H4uGchnb7KPlP3OVcvw913rIpztiC2V6Rmp9EavSxFnp/aXLkihTI3NM1DYTLF4aq1tQfR2bkpstcRPusiN6OhtOswzvS4p+ZbSHADq8Iu8bIojosAU7Of2G6kesxOu/4rCQdvPTXq4G7QYAvnuuCQOSDU9xgGilJB0+Ya3hk42kU03mAksIX9c7vhwmOs9ScrjsTLTxMIQ9QbiPJg++2dUduaBrS1gLsT5R/xTHhhvkLUY6S+/KMwpHZ3TErIS+xJ4uKhajSd2hnURzyaeLiUFzREkeW/KMKF9BLmMSuo/Lkd0GebtlU+aPBiAditvg0XbveJKFNmtmsEfjrbPXoR6pXNKcMwiyFUj8RjR59t9PBBtALBgidGvxQUNxyPKwnYR3fdSM5/76EUW10AA8tEc4b+cybFXAe3NgZ5ncHNsQLzWbQtrh1xaXGaTeGemaCZ2aiSOUJ8LfczWLMWNxEsRIBOu+Dw8W7NrI+VmVdksqHxK7a39JibX0B4z07vEFJyomlXubyw7CX/VnQ7h6IDl8EUCS2CmyRvBFbYngv6TRgFQJnLTr1qRIodHXFCTobipRsBbrBmvNLrVjJq/TfhPksdrNDJSlUxCy+/YhF2MGLEzG33gAXPTwSoYnMfeMUdzxuydmMk3M9a3gtd2fVGPVcHQGsz3CFWQBNGM+NN0HkcIDUUJ2dpa2tuPHE1VcmrPvuzIN7RK6IXUfi/HzvOqR31/Kgzk3z6QO1bUxIrFXXKhtSpux3
+X-Microsoft-Antispam-Message-Info: Io1UCv2WG/dX0H5dRWlmCrz0EyBUYFS4SfMMpfneH4dLhPgvJTv8Aur+GxzuHD8Z5irdwjGohluMWe4oxN/NU/7R1YKVjqxO7TV9dUxnCwao/6e4Q0w5rLvULTL2vsAeo3s7djhx2CgSMecL1DsqMS24qab1rcEIJaSmUkj+AgQgvKI/Ee6CovLMTLEGX805FxN/cr23rUOttThluD3+CdfG/L3VsUZYVMBGeok/T+l+s8Xl51XqkCFX/dsPMl0xoUhlGMj7+lAWr1juRroRHPnfghWhfDzNyJsPzTEMt76V1eS/3xeAS7ShJNDbJeO2xSKm2QUb3q9BZ5niaS1/hEyPtxLFigLmhBesYVF7wUJLStyJJ6jnGRJGkt0WMcnF0bsiVhooh3/QfCLYWRmS37mtUeLGFWBBIysh8jAvoyQtf24PZAaUIXRmAqv1efKiGrnuYXtsr1CkTeWzkNPK0Z8//VLIumN4LKAJnEAlAu+uiLDSoUEGRtTNCgvJ4n3V/4k8PxH4gEl1o5vIjfPmzR3Z5TSv4+fbe030PxKwf8dudgTZrhdNZ1rVZW6CyF+MiHG3QS9x4sGGylpfSxn1m2DWmLmhbg9pr1t2Il58IL2D6lMsSRGi0gqE15s90Aw/+D0eG/zAhJse5OixS2SnMjYpUMXYqI7L2ifBWKnTDloaXnWFgyCr583MZyrb8Pumk6E9Qlq1hT6X9Zua2+tPJLN15Zjq1M6va+WAZYRwomIhmomdnALp8ccY0Nhpd2OHhbhBdMmEwfJfKdwZZ1EWhAoGqo/KDS23qWNDl3+a/1MQqQQ7SgBdSJ6808U61rQV
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(376002)(346002)(136003)(396003)(186009)(82310400011)(451199024)(230921699003)(1800799009)(40470700004)(46966006)(36840700001)(2616005)(336012)(426003)(83380400001)(26005)(16526019)(6666004)(82740400003)(478600001)(81166007)(36860700001)(356005)(47076005)(41300700001)(110136005)(70586007)(8936002)(316002)(8676002)(2906002)(40460700003)(5660300002)(44832011)(36756003)(86362001)(40480700001)(70206006)(36900700001);
+ SFS:(13230031)(4636009)(136003)(39860400002)(396003)(346002)(376002)(1800799009)(186009)(451199024)(230921699003)(82310400011)(40470700004)(46966006)(36840700001)(16526019)(8676002)(8936002)(26005)(6666004)(110136005)(356005)(82740400003)(81166007)(2616005)(83380400001)(5660300002)(44832011)(70586007)(70206006)(316002)(41300700001)(426003)(478600001)(336012)(47076005)(2906002)(36860700001)(40460700003)(86362001)(40480700001)(36756003)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2023 10:36:40.7302 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8e16a54a-b1ef-4b2e-c5bb-08dbbb57cebc
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2023 10:36:43.1365 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f273ea86-6d31-4e84-efc7-08dbbb57d02b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017098.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB8452
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7281
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,239 +125,279 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some patches didn't have his full name and also there was one more ">" at
-the end of email address. That's why correct both of these issues.
+All zynqmp boards have been already described via mdio node that's why also
+convert the rest of the boards. With using mdio node there is an option to
+add reset property for the whole mdio bus which is reflected by
+'s/phy-reset-gpios/reset-gpios/g' for some boards.
 
-Fixes: 174d728471d5 ("arm64: zynqmp: Switch to amd.com emails")
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- arch/arm/dts/versal-mini-emmc0.dts       | 2 +-
- arch/arm/dts/versal-mini-emmc1.dts       | 2 +-
- arch/arm/dts/versal-mini-ospi.dtsi       | 2 +-
- arch/arm/dts/versal-mini-qspi.dtsi       | 2 +-
- arch/arm/dts/versal-mini.dts             | 2 +-
- arch/arm/dts/zynqmp-mini-emmc0.dts       | 2 +-
- arch/arm/dts/zynqmp-mini-emmc1.dts       | 2 +-
- arch/arm/dts/zynqmp-mini-nand.dts        | 2 +-
- arch/arm/dts/zynqmp-mini-qspi.dts        | 2 +-
- arch/arm/dts/zynqmp-zc1254-revA.dts      | 2 +-
- arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts | 2 +-
- arch/arm/dts/zynqmp-zcu1275-revA.dts     | 2 +-
- arch/arm/dts/zynqmp-zcu1275-revB.dts     | 2 +-
- arch/arm/dts/zynqmp-zcu1285-revA.dts     | 2 +-
- arch/arm/mach-versal/mp.c                | 2 +-
- drivers/fpga/zynqmppl.c                  | 2 +-
- 16 files changed, 16 insertions(+), 16 deletions(-)
+we will investigate if we can remove also that xlnx,phy-type if it is
+deprecated now.
+---
+ arch/arm/dts/zynqmp-dlc21-revA.dts       | 10 ++++++---
+ arch/arm/dts/zynqmp-g-a2197-00-revA.dts  | 10 ++++++---
+ arch/arm/dts/zynqmp-m-a2197-01-revA.dts  | 10 ++++++---
+ arch/arm/dts/zynqmp-m-a2197-02-revA.dts  | 10 ++++++---
+ arch/arm/dts/zynqmp-m-a2197-03-revA.dts  | 10 ++++++---
+ arch/arm/dts/zynqmp-p-a2197-00-revA.dts  | 10 ++++++---
+ arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts |  8 ++++++--
+ arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts | 16 +++++++++------
+ arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts |  8 ++++++--
+ arch/arm/dts/zynqmp-zc1751-xm018-dc4.dts | 26 ++++++++++++++----------
+ arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts |  8 ++++++--
+ 11 files changed, 85 insertions(+), 41 deletions(-)
 
-diff --git a/arch/arm/dts/versal-mini-emmc0.dts b/arch/arm/dts/versal-mini-emmc0.dts
-index bd685ddfdb42..60b1c0e1fc44 100644
---- a/arch/arm/dts/versal-mini-emmc0.dts
-+++ b/arch/arm/dts/versal-mini-emmc0.dts
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2018-2019, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  * Michal Simek <michal.simek@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-dlc21-revA.dts b/arch/arm/dts/zynqmp-dlc21-revA.dts
+index 016081ef7b99..f737004d7943 100644
+--- a/arch/arm/dts/zynqmp-dlc21-revA.dts
++++ b/arch/arm/dts/zynqmp-dlc21-revA.dts
+@@ -88,9 +88,13 @@
+ 	phy-handle = <&phy0>;
+ 	phy-mode = "sgmii"; /* DTG generates this properly  1512 */
+ 	is-internal-pcspma;
+-	/* phy-reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>; */
+-	phy0: ethernet-phy@0 {
+-		reg = <0>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		/* reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>; */
++		phy0: ethernet-phy@0 {
++			reg = <0>;
++		};
+ 	};
+ };
  
-diff --git a/arch/arm/dts/versal-mini-emmc1.dts b/arch/arm/dts/versal-mini-emmc1.dts
-index fbdcf5d77f56..751cc38ee5c0 100644
---- a/arch/arm/dts/versal-mini-emmc1.dts
-+++ b/arch/arm/dts/versal-mini-emmc1.dts
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2018-2019, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  * Michal Simek <michal.simek@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-g-a2197-00-revA.dts b/arch/arm/dts/zynqmp-g-a2197-00-revA.dts
+index d5cfc61faf71..36a0db44fd28 100644
+--- a/arch/arm/dts/zynqmp-g-a2197-00-revA.dts
++++ b/arch/arm/dts/zynqmp-g-a2197-00-revA.dts
+@@ -81,10 +81,14 @@
+ 	phy-handle = <&phy0>;
+ 	phy-mode = "sgmii";
+ 	is-internal-pcspma;
+-	phy0: ethernet-phy@0 { /* marwell m88e1512 */
+-		reg = <0>;
+-		reset-gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		phy0: ethernet-phy@0 { /* marwell m88e1512 */
++			reg = <0>;
++			reset-gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
+ /*		xlnx,phy-type = <PHY_TYPE_SGMII>; */
++		};
+ 	};
+ };
  
-diff --git a/arch/arm/dts/versal-mini-ospi.dtsi b/arch/arm/dts/versal-mini-ospi.dtsi
-index 5683a2306bde..1abe44f40426 100644
---- a/arch/arm/dts/versal-mini-ospi.dtsi
-+++ b/arch/arm/dts/versal-mini-ospi.dtsi
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2018-2019, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  * Michal Simek <michal.simek@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
+index 56653ec234ee..24573f7b6c2a 100644
+--- a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
++++ b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
+@@ -110,10 +110,14 @@
+ 	status = "okay";
+ 	phy-handle = <&phy0>;
+ 	phy-mode = "sgmii"; /* DTG generates this properly  1512 */
+-	phy-reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>;
+-	phy0: ethernet-phy@0 { /* marwell m88e1512 - SGMII */
+-		reg = <0>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>;
++		phy0: ethernet-phy@0 { /* marwell m88e1512 - SGMII */
++			reg = <0>;
+ /*		xlnx,phy-type = <PHY_TYPE_SGMII>; */
++		};
+ 	};
+ };
  
-diff --git a/arch/arm/dts/versal-mini-qspi.dtsi b/arch/arm/dts/versal-mini-qspi.dtsi
-index 2fec92ce3ec8..9347ea32c9cb 100644
---- a/arch/arm/dts/versal-mini-qspi.dtsi
-+++ b/arch/arm/dts/versal-mini-qspi.dtsi
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2018-2019, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  * Michal Simek <michal.simek@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
+index 4c8ae80f6f17..58566fbea78e 100644
+--- a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
++++ b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
+@@ -106,9 +106,13 @@
+ 	status = "okay";
+ 	phy-handle = <&phy0>;
+ 	phy-mode = "sgmii";
+-	phy-reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>;
+-	phy0: ethernet-phy@0 { /* marwell m88e1512 - SGMII */
+-		reg = <0>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>;
++		phy0: ethernet-phy@0 { /* marwell m88e1512 - SGMII */
++			reg = <0>;
++		};
+ 	};
+ };
  
-diff --git a/arch/arm/dts/versal-mini.dts b/arch/arm/dts/versal-mini.dts
-index a213b745bc26..844e3840acec 100644
---- a/arch/arm/dts/versal-mini.dts
-+++ b/arch/arm/dts/versal-mini.dts
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2019, Xilinx, Inc.
-  *
-- * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
+index 4bdf58d11e11..529c98cf543d 100644
+--- a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
++++ b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
+@@ -106,9 +106,13 @@
+ 	status = "okay";
+ 	phy-handle = <&phy0>;
+ 	phy-mode = "sgmii";
+-	phy-reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>;
+-	phy0: ethernet-phy@0 { /* marwell m88e1512 - SGMII */
+-		reg = <0>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>;
++		phy0: ethernet-phy@0 { /* marwell m88e1512 - SGMII */
++			reg = <0>;
++		};
+ 	};
+ };
  
- /dts-v1/;
-diff --git a/arch/arm/dts/zynqmp-mini-emmc0.dts b/arch/arm/dts/zynqmp-mini-emmc0.dts
-index 08ec2f7b4a9a..02e80bd85e1a 100644
---- a/arch/arm/dts/zynqmp-mini-emmc0.dts
-+++ b/arch/arm/dts/zynqmp-mini-emmc0.dts
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2018, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-p-a2197-00-revA.dts b/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
+index 64a676c13257..c456c375ac80 100644
+--- a/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
++++ b/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
+@@ -91,9 +91,13 @@
+ 	phy-handle = <&phy0>;
+ 	phy-mode = "sgmii"; /* DTG generates this properly  1512 */
+ 	is-internal-pcspma;
+-	/* phy-reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>; */
+-	phy0: ethernet-phy@0 {
+-		reg = <0>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		/* reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>; */
++		phy0: ethernet-phy@0 {
++			reg = <0>;
++		};
+ 	};
+ };
  
- /dts-v1/;
-diff --git a/arch/arm/dts/zynqmp-mini-emmc1.dts b/arch/arm/dts/zynqmp-mini-emmc1.dts
-index 905de08fdb0b..ce1cdb207538 100644
---- a/arch/arm/dts/zynqmp-mini-emmc1.dts
-+++ b/arch/arm/dts/zynqmp-mini-emmc1.dts
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2018, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts b/arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts
+index cffad447406b..5b592324021a 100644
+--- a/arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts
++++ b/arch/arm/dts/zynqmp-zc1751-xm015-dc1.dts
+@@ -97,8 +97,12 @@
+ 	phy-mode = "rgmii-id";
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_gem3_default>;
+-	phy0: ethernet-phy@0 {
+-		reg = <0>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		phy0: ethernet-phy@0 {
++			reg = <0>;
++		};
+ 	};
+ };
  
- /dts-v1/;
-diff --git a/arch/arm/dts/zynqmp-mini-nand.dts b/arch/arm/dts/zynqmp-mini-nand.dts
-index e5688fd703e6..e0517cf46017 100644
---- a/arch/arm/dts/zynqmp-mini-nand.dts
-+++ b/arch/arm/dts/zynqmp-mini-nand.dts
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2018, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  * Michal Simek <michal.simek@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts b/arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts
+index bb0477825a93..83648c2a1c54 100644
+--- a/arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts
++++ b/arch/arm/dts/zynqmp-zc1751-xm016-dc2.dts
+@@ -90,12 +90,16 @@
+ 	phy-mode = "rgmii-id";
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_gem2_default>;
+-	phy0: ethernet-phy@5 {
+-		reg = <5>;
+-		ti,rx-internal-delay = <0x8>;
+-		ti,tx-internal-delay = <0xa>;
+-		ti,fifo-depth = <0x1>;
+-		ti,dp83867-rxctrl-strap-quirk;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		phy0: ethernet-phy@5 {
++			reg = <5>;
++			ti,rx-internal-delay = <0x8>;
++			ti,tx-internal-delay = <0xa>;
++			ti,fifo-depth = <0x1>;
++			ti,dp83867-rxctrl-strap-quirk;
++		};
+ 	};
+ };
  
-diff --git a/arch/arm/dts/zynqmp-mini-qspi.dts b/arch/arm/dts/zynqmp-mini-qspi.dts
-index fc0a2e801e49..ee8be5360004 100644
---- a/arch/arm/dts/zynqmp-mini-qspi.dts
-+++ b/arch/arm/dts/zynqmp-mini-qspi.dts
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2015 - 2020, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  * Michal Simek <michal.simek@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts b/arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts
+index 69ad58039e79..b97f7ee8d44f 100644
+--- a/arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts
++++ b/arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts
+@@ -88,8 +88,12 @@
+ 	status = "okay";
+ 	phy-handle = <&phy0>;
+ 	phy-mode = "rgmii-id";
+-	phy0: ethernet-phy@0 { /* VSC8211 */
+-		reg = <0>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		phy0: ethernet-phy@0 { /* VSC8211 */
++			reg = <0>;
++		};
+ 	};
+ };
  
-diff --git a/arch/arm/dts/zynqmp-zc1254-revA.dts b/arch/arm/dts/zynqmp-zc1254-revA.dts
-index 5c4acd17cc5d..c6a63201c1c4 100644
---- a/arch/arm/dts/zynqmp-zc1254-revA.dts
-+++ b/arch/arm/dts/zynqmp-zc1254-revA.dts
-@@ -5,7 +5,7 @@
-  * (C) Copyright 2015 - 2020, Xilinx, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-- * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
+diff --git a/arch/arm/dts/zynqmp-zc1751-xm018-dc4.dts b/arch/arm/dts/zynqmp-zc1751-xm018-dc4.dts
+index 3017c9b29a2b..2b66abc9f7e6 100644
+--- a/arch/arm/dts/zynqmp-zc1751-xm018-dc4.dts
++++ b/arch/arm/dts/zynqmp-zc1751-xm018-dc4.dts
+@@ -116,17 +116,21 @@
+ 	status = "okay";
+ 	phy-mode = "rgmii-id";
+ 	phy-handle = <&ethernet_phy0>;
+-	ethernet_phy0: ethernet-phy@0 { /* Marvell 88e1512 */
+-		reg = <0>;
+-	};
+-	ethernet_phy7: ethernet-phy@7 { /* Vitesse VSC8211 */
+-		reg = <7>;
+-	};
+-	ethernet_phy3: ethernet-phy@3 { /* Realtek RTL8211DN */
+-		reg = <3>;
+-	};
+-	ethernet_phy8: ethernet-phy@8 { /* Vitesse VSC8211 */
+-		reg = <8>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		ethernet_phy0: ethernet-phy@0 { /* Marvell 88e1512 */
++			reg = <0>;
++		};
++		ethernet_phy7: ethernet-phy@7 { /* Vitesse VSC8211 */
++			reg = <7>;
++		};
++		ethernet_phy3: ethernet-phy@3 { /* Realtek RTL8211DN */
++			reg = <3>;
++		};
++		ethernet_phy8: ethernet-phy@8 { /* Vitesse VSC8211 */
++			reg = <8>;
++		};
+ 	};
+ };
  
- /dts-v1/;
 diff --git a/arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts b/arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts
-index 74a5b020e863..0d2ea9c09a0a 100644
+index 0d2ea9c09a0a..b1857e17ab7e 100644
 --- a/arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts
 +++ b/arch/arm/dts/zynqmp-zc1751-xm019-dc5.dts
-@@ -4,7 +4,7 @@
-  *
-  * (C) Copyright 2015 - 2021, Xilinx, Inc.
-  *
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  * Michal Simek <michal.simek@amd.com>
-  */
+@@ -77,8 +77,12 @@
+ 	phy-mode = "rgmii-id";
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_gem1_default>;
+-	phy0: ethernet-phy@0 {
+-		reg = <0>;
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++		phy0: ethernet-phy@0 {
++			reg = <0>;
++		};
+ 	};
+ };
  
-diff --git a/arch/arm/dts/zynqmp-zcu1275-revA.dts b/arch/arm/dts/zynqmp-zcu1275-revA.dts
-index 9404c139a24b..095c972f1322 100644
---- a/arch/arm/dts/zynqmp-zcu1275-revA.dts
-+++ b/arch/arm/dts/zynqmp-zcu1275-revA.dts
-@@ -5,7 +5,7 @@
-  * (C) Copyright 2017 - 2021, Xilinx, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-- * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
- 
- /dts-v1/;
-diff --git a/arch/arm/dts/zynqmp-zcu1275-revB.dts b/arch/arm/dts/zynqmp-zcu1275-revB.dts
-index c06d262506d0..4060dc3613a2 100644
---- a/arch/arm/dts/zynqmp-zcu1275-revB.dts
-+++ b/arch/arm/dts/zynqmp-zcu1275-revB.dts
-@@ -5,7 +5,7 @@
-  * (C) Copyright 2018 - 2021, Xilinx, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-- * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
- 
- /dts-v1/;
-diff --git a/arch/arm/dts/zynqmp-zcu1285-revA.dts b/arch/arm/dts/zynqmp-zcu1285-revA.dts
-index 99ea143c02ea..4f85837e64f6 100644
---- a/arch/arm/dts/zynqmp-zcu1285-revA.dts
-+++ b/arch/arm/dts/zynqmp-zcu1285-revA.dts
-@@ -5,7 +5,7 @@
-  * (C) Copyright 2018 - 2021, Xilinx, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-- * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
- 
- /dts-v1/;
-diff --git a/arch/arm/mach-versal/mp.c b/arch/arm/mach-versal/mp.c
-index 7bd39289fac5..2487b482ddb1 100644
---- a/arch/arm/mach-versal/mp.c
-+++ b/arch/arm/mach-versal/mp.c
-@@ -1,7 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-  * (C) Copyright 2019 Xilinx, Inc.
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
- 
- #include <common.h>
-diff --git a/drivers/fpga/zynqmppl.c b/drivers/fpga/zynqmppl.c
-index b1f201fb18ba..2656f5fc5ecf 100644
---- a/drivers/fpga/zynqmppl.c
-+++ b/drivers/fpga/zynqmppl.c
-@@ -2,7 +2,7 @@
- /*
-  * (C) Copyright 2015 - 2016, Xilinx, Inc,
-  * Michal Simek <michal.simek@amd.com>
-- * Siva Durga Prasad <siva.durga.prasad.paladugu@amd.com>>
-+ * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com>
-  */
- 
- #include <console.h>
 -- 
 2.36.1
 
