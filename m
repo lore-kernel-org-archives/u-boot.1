@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EF5ECD484C
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 18:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8BECCD4850
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 18:29:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED29786B0D;
-	Fri, 22 Sep 2023 20:28:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A6EA86B09;
+	Fri, 22 Sep 2023 20:29:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nvRJ6Dhm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZGJnOvLq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B5CA86AFE; Fri, 22 Sep 2023 20:28:50 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id B25ED86AFE; Fri, 22 Sep 2023 20:29:04 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C31686AFB
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 20:28:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B594F86B09
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 20:29:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-59e7fb87f1cso32134597b3.2
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 11:28:47 -0700 (PDT)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-59bebd5bdadso31670037b3.0
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 11:29:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695407326; x=1696012126; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695407341; x=1696012141; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WK7387JaUz7oYouW6uq9RcPkPG1rItb39/SU2l8cVEs=;
- b=nvRJ6DhmGLtQf7hgJRL5E3C7ARGeBHJ95+1AChA6Lh7qPIEIl161XLqUNI1z/UPOBR
- RrQfJDY8V1b03ExKGXMD3fA9/326KyrBtx+HD54C9WNXviIFvDoirAfOMAXNb9OgUNDB
- mK/jtAQVP1euzStQTH4TWqABvEQsAxZQ1cDmI=
+ bh=TRGikZYhacB3jaEu1n7+tovLR7Yf4OcrdNxDZULmfwQ=;
+ b=ZGJnOvLqfV8NQcI26ARDSjaSkcnhXo5iyvBPU5iscfckuW65q7pHx6a8SM2fpJVVvT
+ SwNFrWyWAGqnZbLHsu2iO4NkqHKmZ/aKpTF7hKThRbax3YlUZvbEQDZSA7oOJOaZORRg
+ 0I7XNsAJzKk5Pnxy6gFRWKqpF252pAtP+lo3Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695407326; x=1696012126;
+ d=1e100.net; s=20230601; t=1695407341; x=1696012141;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WK7387JaUz7oYouW6uq9RcPkPG1rItb39/SU2l8cVEs=;
- b=r7KrlSzVh4RC0BDFJnzIjob8XfuU+LtWL5ZDvdQpOgMa9viCSrQHFh9p1etTP1Q/BR
- Mc/5quYXq0YLgFPfmipAQSnH7d6vL0MeGrobqYvxfeJEy7TfzvNXqaCVp/kVjTtsT4Tt
- NNclvQO1Dp51kJuZGGSqoouBe8K3F+skyQuzWRk9VXACe1Uy5xzk+5Ipy+N8LB6tWfkT
- tvCIAjAEAUj+rfBd0Jij/55GQ6v8iW/eYCKlvN/1lq4vzxsx/L996sesv8gtmFe/JlTZ
- qcJETSRESJeYDZLhjA8T/STvfDq/+/p75n8o5sANzgmMKrccatmB6p0DmHHpKo7wL7oF
- 13kQ==
-X-Gm-Message-State: AOJu0YwA9Nwh4l10wK7KlrnXQ8kJXxK96oO5u6I+qPWO5FIf0aF/uue4
- x5ygyVtBgZP5Y7RtYsNal8NuKSc7eK5OM/8apKp48XS6OkiCyILIXiA=
-X-Google-Smtp-Source: AGHT+IEFRXnuwRozInoqj3j8GELnVx3CVjCPjAfQI8p/FuF79OLk0EdQ0y07I7OXXakSLmqbtNHUL8qm0XWXa98YAVs=
-X-Received: by 2002:a0d:d54e:0:b0:56d:2e22:8b31 with SMTP id
- x75-20020a0dd54e000000b0056d2e228b31mr518785ywd.41.1695407325747; Fri, 22 Sep
- 2023 11:28:45 -0700 (PDT)
+ bh=TRGikZYhacB3jaEu1n7+tovLR7Yf4OcrdNxDZULmfwQ=;
+ b=j+h2AZAkVcPeDqj/S0Qt3BwBDA7CwbwGUq5neE2U9K0IFNAZG1VyHoHnsdr/l6uEFk
+ M1H0cjjYjNbrzfZKGWf6eJtGavu3BYqvv0hJF3T+ftqczyFOjt+lrjNsQPGr3ZhMCfo3
+ 0ULPl6lW56DJIK+iUk7/c/Ors6OZFn26/VhR3SL/stk228509iUj89B8htdasOnbIagC
+ BUL6K1Arzm61u2f+IFnqFj4IDh/SRE8HXW/TiruUkNPpOAnSMSiKuP9snQPjCCidjBoY
+ jMuZnEoNj7ms3P/nnTTO6eiXbFUXLiPt5iTk4W3piOyn+BmdImNdsuAynrTdzwhsOAI0
+ 7MTA==
+X-Gm-Message-State: AOJu0YyiW2t1pYkyGXRurKfW1zjXDi7H9LEhNWNuX4TyzKSid6I/ODPC
+ SFRqzv8PsbupuaJERk40sGnJt82TcCpWgHS/h8mahA==
+X-Google-Smtp-Source: AGHT+IHa1vsiaFyOkI+j2LDxAZqovwDG9Pou/NIHb/PaukcQRyquQZ1g2LMORhd52Gap4rWTUqK7tz5m+IAYapXK964=
+X-Received: by 2002:a0d:cc87:0:b0:56c:e70b:b752 with SMTP id
+ o129-20020a0dcc87000000b0056ce70bb752mr542440ywd.13.1695407341306; Fri, 22
+ Sep 2023 11:29:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230920225811.153474-1-marek.vasut+renesas@mailbox.org>
- <20230920225811.153474-2-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20230920225811.153474-2-marek.vasut+renesas@mailbox.org>
+References: <20230917230649.30357-1-mibodhi@gmail.com>
+In-Reply-To: <20230917230649.30357-1-mibodhi@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 22 Sep 2023 12:27:29 -0600
-Message-ID: <CAPnjgZ1Z8y8J3WBqHLbzSYe8hhUGcCpMobAN6W705n448iwZoA@mail.gmail.com>
-Subject: Re: [PATCH 2/9] cmd: bdinfo: Implement support for printing memory
- layout via bdinfo -m
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>, 
- Mario Six <mario.six@gdsys.cc>, Nikhil M Jain <n-jain1@ti.com>
+Date: Fri, 22 Sep 2023 12:27:24 -0600
+Message-ID: <CAPnjgZ0e68fVDvz+TugziET8CS27t-nKpSw81jKLJ3VWymBmGQ@mail.gmail.com>
+Subject: Re: [PATCH v4] bootstd: sata: Add bootstd support for ahci sata
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,19 +81,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Sept 2023 at 16:58, Marek Vasut
-<marek.vasut+renesas@mailbox.org> wrote:
+On Sun, 17 Sept 2023 at 17:07, Tony Dinh <mibodhi@gmail.com> wrote:
 >
-> Add support for printing memory layout only via 'bdinfo -m' .
+> Add ahci sata bootdev and corresponding hunting function.
 >
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 > ---
-> Cc: Bin Meng <bmeng.cn@gmail.com>
-> Cc: Mario Six <mario.six@gdsys.cc>
-> Cc: Nikhil M Jain <n-jain1@ti.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> ---
->  cmd/bdinfo.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> Changes in v4:
+> - Revise logic in bootmeth_script() to set devtype to sata for non-scsi
+> SATA device
+> - Rewrite sata_rescan() logic to properly remove all devices before probing
+> - Add description to sata_rescan() header
+>
+> Changes in v3:
+> - Correct drivers/ata/Makefile to compile sata_bootdev only if
+> ahci sata is enabled.
+>
+> Changes in v2:
+> - set devtype to sata in bootmeth_script for non-scsi SATA device.
+>
+>  boot/bootmeth_script.c     | 14 +++++++--
+>  drivers/ata/Makefile       |  2 +-
+>  drivers/ata/sata.c         | 32 ++++++++++++++++++++
+>  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
+>  include/sata.h             |  6 ++++
+>  5 files changed, 112 insertions(+), 4 deletions(-)
+>  create mode 100644 drivers/ata/sata_bootdev.c
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
