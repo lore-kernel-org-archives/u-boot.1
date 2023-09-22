@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5AF1CD4F2E
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 08:04:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67053CD4F2B
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 08:47:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DD5186504;
-	Fri, 22 Sep 2023 10:04:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 55E92864DD;
+	Fri, 22 Sep 2023 10:47:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="C7E+kBGv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BPwmwKt9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 023DB8652B; Fri, 22 Sep 2023 10:04:35 +0200 (CEST)
+ id 7F105864DD; Fri, 22 Sep 2023 10:47:48 +0200 (CEST)
 Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76EA186575
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 10:04:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DCFF864D8
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 10:47:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38M84OB7040691;
- Fri, 22 Sep 2023 03:04:24 -0500
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38M8lJgG050081;
+ Fri, 22 Sep 2023 03:47:19 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695369864;
- bh=khJbGnVm0xc7GZTPYXvPqa+TcUh7C8cfIBYvFbojgcw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=C7E+kBGvWc+lWYOPZ6AQmWla+mfSIrLpzSdfxYYa5sgMKC8oF97fcGW2+SIeWeuLI
- v9gawvlq2x5n8wWJdBpvBp4MyD5/WYGcyeJHw0apsvgN+zPT7OsnoF57E7eCKNESBU
- COkS2q/KAOdv6Gz11VRzOR+ole6eW1SaDCymQFDY=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38M84Od3025998
+ s=ti-com-17Q1; t=1695372439;
+ bh=dbgxohvwZZ3dB//Otiq+mQA7bX2/9Po51Buanp9uWnc=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=BPwmwKt9Qgdi90PgulN5w7GtkpQ1mIbQEp5ITExvP4CPCKEhUr0v+i8dSIBteaSSw
+ kTu3k5ouc5q0pfcn1Ihtf5LigZfZ4qcKZxwL0eQpzRMkSZVDqpkAGvK+FZ2+2/9GsB
+ qdszP9rMRTuHobOz0PKBepS8LBzmnbQGOXVdtItU=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38M8lJ61016108
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 22 Sep 2023 03:04:24 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 22 Sep 2023 03:47:19 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 22
- Sep 2023 03:04:24 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 03:47:19 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 22 Sep 2023 03:04:24 -0500
-Received: from [10.24.68.114] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38M84LD7010766;
- Fri, 22 Sep 2023 03:04:22 -0500
-Message-ID: <93be618e-b095-32f6-9bc6-e1bb5d8c24e6@ti.com>
-Date: Fri, 22 Sep 2023 13:34:21 +0530
+ Frontend Transport; Fri, 22 Sep 2023 03:47:19 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38M8lIf3013571;
+ Fri, 22 Sep 2023 03:47:19 -0500
+Date: Fri, 22 Sep 2023 14:17:18 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, Udit Kumar
+ <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye
+ <a-limaye@ti.com>
+Subject: Re: [PATCH v2] env: ti: ti_common.env: Fix get_overlaystring for FIT
+ Image
+Message-ID: <20230922084718.ei47zmf5kwwsumxy@ula0497581>
+References: <20230921-b4-upstream-overlaystring-v2-1-22e0b71e3334@ti.com>
+ <7e57d094-6b2d-d535-40d0-84a562889370@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [Question] TI's u-boot.img is built twice
-Content-Language: en-US
-To: Masahiro Yamada <masahiroy@kernel.org>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass
- <sjg@chromium.org>, Nishanth Menon <nm@ti.com>,
- <srk@ti.com>, <s-vadapalli@ti.com>, <m-chawdhry@ti.com>
-References: <CAK7LNASYfwjuCQ70BZ5Gco+rme=H_fArxyT5rFsE334p2viSoA@mail.gmail.com>
- <3cd1e2b4-47b9-a3b3-d8c3-9f6c0481f479@ti.com>
- <CAK7LNAQg-x9L9s3j2d6DYdoW7WuHKfhMq5n=4GfrMLvjO9vQmg@mail.gmail.com>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <CAK7LNAQg-x9L9s3j2d6DYdoW7WuHKfhMq5n=4GfrMLvjO9vQmg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <7e57d094-6b2d-d535-40d0-84a562889370@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,151 +82,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Masahiro
+Hi Andrew,
 
-On 22/09/23 12:48, Masahiro Yamada wrote:
-> On Fri, Sep 22, 2023 at 2:27 PM Neha Malcom Francis <n-francis@ti.com> wrote:
->>
->> Hi Masahiro
->>
->> On 21/09/23 21:06, Masahiro Yamada wrote:
->>> Hi.
->>>
->>> Since the TI platform migrated to binman,
->>> u-boot.img is built twice.
->>>
->>> It is created by "mkimage -E",
->>> then overwritten by binman.
->>>
->>>
->>> So, the data are embedded in the FIT structure
->>> instead of being appended.
->>>
->>> Is this intentional?
->>>
->>> To me, it looks weird.
->>>
->>>
->>
->> I haven't added the fit,external-offset property in the binman.dtsi so it was
->> not appended as external data and I did not find reason to. Is there any benefit
->> in having the data appended than embedded?
+On 12:03-20230921, Andrew Davis wrote:
+> On 9/21/23 5:49 AM, Manorit Chawdhry wrote:
+> > After the refactor with conf- nodes in fitImage, overlaystring wasn't
+> > didn't handle the new conf- nodes in FIT Booting. Fix get_overlaystring
+> > to handle conf- nodes.
+> > 
+> > Fixes: 837833a724b7 ("environment: ti: Add get_fit_config command to get FIT config string")
+> > Reported-by: Aniket Limaye <a-limaye@ti.com>
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> > Test Logs:
+> > => setenv name_overlays ti/k3-dt.dtbo ti/k3-dt1.dtbo
+> > => run get_overlaystring
+> > => printenv overlaystring
+> > overlaystring=#conf-ti_k3-dt.dtbo#conf-ti_k3-dt1.dtbo
+> > ---
+> > Changes in v2:
+> > - Fix tabs
+> > - Link to v1: https://lore.kernel.org/r/20230919-b4-upstream-overlaystring-v1-1-4c56e8d66173@ti.com
+> > ---
+> >   include/env/ti/ti_common.env | 11 ++++++++---
+> >   1 file changed, 8 insertions(+), 3 deletions(-)
+> > 
+> > diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+> > index e87a41a6590b..bc554fe7ca6d 100644
+> > --- a/include/env/ti/ti_common.env
+> > +++ b/include/env/ti/ti_common.env
+> > @@ -16,9 +16,14 @@ addr_fit=0x90000000
+> >   name_fit=fitImage
+> >   update_to_fit=setenv loadaddr ${addr_fit}; setenv bootfile ${name_fit}
+> >   get_overlaystring=
+> > -	for overlay in $name_overlays;
+> > -	do;
+> > -	setenv overlaystring ${overlaystring}'#'${overlay};
+> > +	for overlay in $name_overlays; do;
+> > +		if test ${boot_fit} -eq 1;
+> > +			then
 > 
+> Why is the `then` tabbed out here, you can make it on the end of
+> the above line, same as you changed for `do`. Then untab all this
+> by one.
 > 
+> > +				setexpr name_fit_overlay gsub / _ conf-${overlay};
+> > +				setenv overlaystring ${overlaystring}'#'${name_fit_overlay};
+> > +			else
+> > +				setenv overlaystring ${overlaystring}'#'${overlay};
 > 
-> Placing payload data outside the FIT structure is a U-Boot hack.
-> 
-> 
-> The motivation was explained in the commit log of
-> 722ebc8f84d5bccd2e70fad1079a0dd40cceddec
-> 
-> 
+> If you set `overlay` using setexpr, then this line is common and doesn't need to
+> be out here. Also do we use this overlaystring for anything other than the
+> FIT case? And if not, why do we need this boot_fit == 1 check at all?
 
-Thanks for this! Makes sense, I think we should make it appended again in 
-binman. Can reduce boot time.
+Ah, I see this is only for FIT usecase. I'll refactor the name too to
+get_fit_overlaystring as that makes more sense then.
+
+Regards,
+Manorit
 
 > 
-> Before TI migrated to binman,
-> u-boot.img was the "payload outside" structure
-> but it is not any more.
+> Andrew
 > 
-> I do not mind the implementation details as long as
-> U-Boot is able to boot the Linux kernel.
-> 
-> 
-> I was just suffering from the AM64-SK boot failure
-> (as I asked in another thread) and just noticed
-> something odd when I was poking the SPL code.
-> 
-> 
-> At least, .u-boot.img.cmd is not telling the truth.
-> 
-> Usually, the build command is saved in a *.cmd file
-> but this does not reflect the reality, because
-> it is binman that created the final u-boot.img
-> 
-> 
-> $ cat .u-boot.img.cmd
-> cmd_u-boot.img := ./tools/mkimage -f auto -A arm -T firmware -C none
-> -O u-boot -a 0x80800000 -e 0x80800000 -p 0x0 -n "U-Boot
-> 2023.10-rc4-00047-gb9b83a86f0-dirty for am64x board" -E  -b
-> arch/arm/dts/k3-am642-evm.dtb -b arch/arm/dts/k3-am642-sk.dtb  -d
-> u-boot-nodtb.bin u-boot.img >/dev/null
-> 
-> 
-> I will not track it down any further, though.
-> It is too complicated.
-> 
-> 
-> 
-
-I am not too sure about the .cmd files but looks like its misleading probably 
-because the replacing of the binman generated image takes under cmd_binman and 
-not directly from the Makefile (just a guess).
-> 
-> 
->>>
->>>
->>> To confirm it, apply the following hack.
->>>
->>> Since u-boot.img is overwritten by binman,
->>> copy it to u-boot.img.backup.
->>>
->>>
->>>
->>>
->>> diff --git a/Makefile b/Makefile
->>> index 87f9fc786e..4cffa8a061 100644
->>> --- a/Makefile
->>> +++ b/Makefile
->>> @@ -1112,6 +1112,7 @@ endef
->>>    # Timestamp file to make sure that binman always runs
->>>    .binman_stamp: $(INPUTS-y) FORCE
->>>    ifeq ($(CONFIG_BINMAN),y)
->>> +       cp u-boot.img u-boot.img.backup
->>>           $(call if_changed,binman)
->>>    endif
->>>           @touch $@
->>>
->>>
->>>
->>> Then, build it for the main core.
->>>
->>>
->>> make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu-
->>>      am64x_evm_a53_defconfig all
->>>      TEE=~/ref/OP-TEE/optee_os/out/arm-plat-k3/core/tee-raw.bin
->>>      BL31=~/ref/trusted-firmware-a/build/k3/lite/release/bl31.bin
->>>      BINMAN_INDIRS=~/ref/ti-linux-firmware
->>>
->>>
->>>
->>>
->>> Compare the two files.
->>> Run fdtdump to see what happened to them.
->>>
->>>
->>> $ diff -u u-boot.img  u-boot.img.backup
->>> Binary files u-boot.img and u-boot.img.backup differ
->>>
->>>
->>> $ fdtdump u-boot.img
->>>       => u-boot and dt are embedded.
->>>
->>> $ fdtdump u-boot.img.backup
->>>       => u-boot and dt are appended after the
->>>          FIT structure
->>>
->>>
->>>
->>
->> --
->> Thanking You
->> Neha Malcom Francis
-> 
-> 
-> 
-
--- 
-Thanking You
-Neha Malcom Francis
+> > +		fi;
+> >   	done;
+> >   get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
+> >   run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
+> > 
+> > ---
+> > base-commit: 2fe4b54556ea6271237b35de68dc458bfceab94c
+> > change-id: 20230915-b4-upstream-overlaystring-207e28b8c5fb
+> > 
+> > Best regards,
