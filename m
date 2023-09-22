@@ -4,59 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 719ABE7D0A1
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 00:49:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4BA8E7D0BB
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 01:14:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 175FB85C98;
-	Fri, 22 Sep 2023 02:49:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id DF42985894;
+	Fri, 22 Sep 2023 03:14:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="jW14c4op";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M2vYDx1E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2F378608A; Fri, 22 Sep 2023 02:49:08 +0200 (CEST)
-Received: from mail-m118217.qiye.163.com (mail-m118217.qiye.163.com
- [115.236.118.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CFFD68477A; Fri, 22 Sep 2023 03:14:39 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F44D85894
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 02:49:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id F05D5863DE
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 03:14:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=jW14c4op703nYkgQChJBDV1coVrOOiAl4vFEB0Dyc1YZxBt/6X5gzei8xxfQYGpQ2vAKlx71sLUEQ+GQrpvCB/IkO9kNWqaI+XK+hykK7F0VWfsuiMNwx8cvLQYiqEfq6M3nAPT2bsEtdfbUCeZJk87oXoHo7Ohwxk4/YkLwYqk=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=JKlsKxA3K94Y0McQncX1mBfijgozop6xdi0SPXNaQx0=;
- h=date:mime-version:subject:message-id:from;
-Received: from [192.168.60.65] (unknown [103.29.142.67])
- by mail-m11875.qiye.163.com (Hmail) with ESMTPA id 04EAF2810DD;
- Fri, 22 Sep 2023 08:48:47 +0800 (CST)
-Message-ID: <259c11ad-3957-f6ad-a001-c73d8f91fdac@rock-chips.com>
-Date: Fri, 22 Sep 2023 08:48:46 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5042bfb4fe9so2225350e87.1
+ for <u-boot@lists.denx.de>; Thu, 21 Sep 2023 18:14:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1695345277; x=1695950077; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qfVys3fE+DSPe7FK70Ne4/HSWHePQ8XiYD/BuHDPXxQ=;
+ b=M2vYDx1Ea4dYzy+3xUhy4bfebWr3jeXVkt/X1s1YD67/QDegM78Jmnhj/3X4jAYlbY
+ ZQnnmwShDMS8awuq03LhbMkcSpdM/5iL8YTN7LH1o/ewoB89vjIg0sFpeZFtDy+AdNvS
+ 4r14P2+8z6CEi8wG2I5Q+T5W/pjKXX0Ue4HGO2HRT7HjaylotezvTLBrGtpivKixS6Tn
+ FVS9NkQxulCaclHGzf6SlBNvLVW/GTrwJPnf0Dfm4zVUrikLkYszWSfNMfeOZ9J5meT+
+ 26ilPU8M0P8J+3CYgW6l71+8z17QFDWixY4tyx49/XqIuhx9BfGVsuXk6lElF0MRJ2gu
+ v/kw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695345277; x=1695950077;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qfVys3fE+DSPe7FK70Ne4/HSWHePQ8XiYD/BuHDPXxQ=;
+ b=Dcd3I8OeQtxppveG1aTLgmhk5ZFW3Z8SGVvhBF7lwuqIBswxHZAlgXzLpgXfw2YPWW
+ v8V+zXqP/QO9y98CiKHw0Hcpup/uZbTIZ/sgziYMD3T7uv+/0u7iGAskYy3idza9DlZa
+ SVv3XlKBtfT2aE7/jDP7BIM/2zCd5dJ9XJ17t3UI2sCDPaDltyQL8qGqXUEiXqZ+o5As
+ jTtXOvwgh6KVxT5n8fzXVRibv1jaHcwNq+rhz0wmB3WSOD9wCGLGqmm02xWPdM3Ekpsf
+ HBrMQ0rA9Ty2BxiptnJ1t7ofH3NLXRnHDTyyFmaCnqxhQbaWt1AwA5nOSdLFcnuBQ7RV
+ bZ0g==
+X-Gm-Message-State: AOJu0Yy8TS6F92fblBqo4xDTSpv6B3AvS0ACpPCj/yTaVHcKzwLLsZFu
+ 3A157qkKuFav/y1WD9zj++9m6rukaXdL3+tJ/wA=
+X-Google-Smtp-Source: AGHT+IH1RBvSMlz0bMB1+k23UbiBHxVrCc+HGCPyx3VN2qbbOlhgL13jtS7Apln59JHVYSTzRSJa0YwZTxLuX0SGvVo=
+X-Received: by 2002:a19:651e:0:b0:500:9a67:d40e with SMTP id
+ z30-20020a19651e000000b005009a67d40emr5112240lfb.60.1695345276830; Thu, 21
+ Sep 2023 18:14:36 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.0
-Subject: Re: [PATCH v2 00/10] rockchip: rk3588: add support for DFU in SPL
-Content-Language: en-US
-To: Eugen Hristev <eugen.hristev@collabora.com>, u-boot@lists.denx.de
-Cc: marex@denx.de, jonas@kwiboo.se, jagan@edgeble.ai, kernel@collabora.com
-References: <20230801072811.10354-1-eugen.hristev@collabora.com>
- <1800682c-9c1b-c242-b15e-4cc9126e4619@collabora.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <1800682c-9c1b-c242-b15e-4cc9126e4619@collabora.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZHkMYVhlPHktPT00aQ0xMHlUTARMWGhIXJBQOD1
- lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lMTlVKS0tVSkJLS1kG
-X-HM-Tid: 0a8aba5c56e82eb1kusn04eaf2810dd
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OlE6Fio5TDw6TTlRShUVES1K
- OEpPCjFVSlVKTUJOSE9ITElDQkxOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQU5LS0s3Bg++
+References: <SJ2PR07MB971186693F591659C4758AC381F8A@SJ2PR07MB9711.namprd07.prod.outlook.com>
+In-Reply-To: <SJ2PR07MB971186693F591659C4758AC381F8A@SJ2PR07MB9711.namprd07.prod.outlook.com>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Fri, 22 Sep 2023 09:14:25 +0800
+Message-ID: <CAEUhbmXhNJ4D9wZv6TV1cqB_hyQv9R9Ynad5Dp4YwHG-7Lda=Q@mail.gmail.com>
+Subject: Re: [NEW FEATURE] RFC: Add Intel GMBUS support
+To: Eric Schikschneit <eric.schikschneit@novatechautomation.com>, 
+ Simon Glass <sjg@chromium.org>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,93 +87,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
++Simon
 
-On 2023/9/21 22:47, Eugen Hristev wrote:
-> On 8/1/23 10:28, Eugen Hristev wrote:
->> This series adds support for DFU in SPL for rockchip rk3588 on rock5b
->> board.
->>
->> Namely, when SPL is loaded via rockusb (thus via USB), having the
->> `same-as-spl` boot order item, after having detected that it was loaded
->> from USB, it will lookup the gadget USB node in DT and boot via DFU.
->>
->> Some changes were required namely:
->> - DFU needs environment, hence adding environment variables into DFU
->> - added bootph-all to nodes such that they are available in SPL
->> - insert gadget into boot order
->>
->> I had to port one patch for DWC3 from Linux, and include in this series
->> the patches that are floating from Venkatesh that fixup the DWC3
->> (https://marc.info/?l=u-boot&m=168351919807081&w=2 )
->>
->> I know that Marek NAKed them and I am fine with it, I am not trying to
->> sneak in any patches, they are not to be merged, also this patch
->> `usb: dwc3: Increase DWC3 controller halt timeout` is in the same bucket
->> so Marek you can NAK this one as well, no problem, I am just sending out
->> all the series so maybe the rockchip part for the gadget can be 
->> picked up
->> and if people want to use the DFU SPL gadget can also manually pick the
->> DWC3 patches. The branch with all the patches is available here :
->>
->> https://gitlab.collabora.com/hardware-enablement/rockchip-3588/u-boot
->>
->> Thanks!
->>
->> Changes in v2:
->> - rebased on latest upstream which caused a change in the config patch.
->>
->>
->> Eugen Hristev (7):
->>    rockchip: allow env defines for SPL build
->>    usb: dwc3: Increase DWC3 controller halt timeout
->>    ARM: dts: rockchip: rk3588-rock-5b-u-boot: add bootph-all to gadget
->>      nodes
->>    ARM: mach-rockchip: spl-boot-order: add possibility to DFU
->>    ARM: mach-rockchip: rk3588: add gadget device to the boot order
->>    rockchip: rk3588: prepare env for DFU
->>    configs: rockchip: rock5b-rk3588: enable DFU and related configs
->>
->> Venkatesh Yadav Abbarapu (3):
->>    usb: dwc3: core: improve reset sequence
->>    usb: dwc3: gadget: Don't send unintended link state change
->>    usb: dwc3: core: Only handle soft-reset in DCTL
->>
->>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi |  6 +++++
->>   arch/arm/mach-rockchip/rk3588/rk3588.c  |  1 +
->>   arch/arm/mach-rockchip/spl-boot-order.c |  3 +++
->>   configs/rock5b-rk3588_defconfig         | 18 +++++++++++---
->>   drivers/usb/dwc3/core.c                 | 32 +++++++++++++++----------
->>   drivers/usb/dwc3/gadget.c               | 20 +++++++---------
->>   drivers/usb/dwc3/gadget.h               | 14 +++++++++++
->>   include/configs/rk3588_common.h         |  9 ++++++-
->>   include/configs/rockchip-common.h       |  4 ----
->>   9 files changed, 76 insertions(+), 31 deletions(-)
->>
+Hi Eric,
+
+On Fri, Sep 22, 2023 at 6:10=E2=80=AFAM Eric Schikschneit
+<eric.schikschneit@novatechautomation.com> wrote:
 >
->
-> Hello Kever,
->
-> I see in patchwork this series is marked as 'Changes requested'.
-> Do you wish to tell me which are the changes you requested, as I did 
-> not see anything in your replies.
-> I am interested to see the patches related to rockchip (not the DWC3), 
-> if it's fine for you to merge them.
+> I have begun working on adding support for the Intel Graphics Management =
+bus to U-Boot. Currently the x86 bring up process (as explored on the Baytr=
+ail series of Atom SOCs) relys on the Intel Video BIOS to do all setup and =
+configuration of the GPU. This method of adding video support works on earl=
+ier versions of the silicon. With later versions I have found that the OEM =
+BIOS needs to capture the monitor data over the GMBUS in order to initializ=
+e the GPU properly. I have logic analyzer captures available for anyone who=
+ is curious. My purpose for this patch is a skeleton placeholder that I wil=
+l be working from, and I am asking for community collaboration with this. I=
+ have hardware available for testing as needed, and some details can be pro=
+vided upon request.
 
-Hi Eugen,
+Would you share the documentation that describes the Intel GM bus, if
+publicly available?
 
-     For rockchip platform part is fine to me, but as a patchset, the 
-dwc3 part is NAKed by Marek, so patch set
+Based on the info you provided, did you mean with later new revision
+BayTrail chips, the video bios initialization is not enough in U-Boot?
+AFAIU, the U-Boot BayTrail support relies on Intel FSP to do any
+chipset-specific work, including the video bios setup.
 
-not able to merge.
-
-     If rockchip part can work without dwc3 change, you can send a 
-separate patch set for it, so that I can merge it.
-
-
-Thanks,
-
-- Kever
-
->
-> Thanks,
-> Eugen
+Regards,
+Bin
