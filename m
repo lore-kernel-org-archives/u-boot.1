@@ -4,69 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EB24CD4F49
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 10:40:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E80ECCD4F57
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 10:57:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6FAC86BAA;
-	Fri, 22 Sep 2023 12:40:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 54C758667B;
+	Fri, 22 Sep 2023 12:57:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ieFuTKyH";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=goldsimon@gmx.de header.b="go9ASZ0D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A28F86BAE; Fri, 22 Sep 2023 12:40:32 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4379686741; Fri, 22 Sep 2023 12:57:05 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE88C86B88
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:40:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 049CB86679
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:57:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38MAeRYu124056;
- Fri, 22 Sep 2023 05:40:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695379227;
- bh=5W/uFspdVQThWNz/Tpa3JAkYjB9QIbbPVuTqR2HBh9Y=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ieFuTKyHjjg2FoGKvxuUZUkz8e9/LzmJsYmbLsKI+7QsfXYpj6M1YeEkKffFwGmPS
- oP8NnN2miSPMzrGpXJg68No63VK3Xv0GDULwMJibsDkjqGdxlVCItRkadT335xBfFO
- pBso0E66RkO0xz1YaW002GPQQM3UXLSQyDHYyFBA=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38MAeRdl013959
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 22 Sep 2023 05:40:27 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 22
- Sep 2023 05:40:27 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 22 Sep 2023 05:40:27 -0500
-Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38MAdtBw034669;
- Fri, 22 Sep 2023 05:40:21 -0500
-From: Neha Malcom Francis <n-francis@ti.com>
-To: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <reidt@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>,
- <sinthu.raja@ti.com>, <gadiyar@ti.com>, <a-nandan@ti.com>,
- <vaishnav.a@ti.com>, <n-francis@ti.com>, <b-kapoor@ti.com>,
- <bb@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v3 5/6] arm: dts: k3-j721e-r5: Clean up inclusion hierarchy
-Date: Fri, 22 Sep 2023 16:09:53 +0530
-Message-ID: <20230922103954.3454891-6-n-francis@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230922103954.3454891-1-n-francis@ti.com>
-References: <20230922103954.3454891-1-n-francis@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=goldsimon@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1695380216; x=1695985016; i=goldsimon@gmx.de;
+ bh=kAOITjjGx90C42azeSRYjX7Y/tKhT2KmmKKm4lbSOpc=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=go9ASZ0D0jWuedUbg4uFcKSszcjrToaatGblVC8+aF/tnZctV1s5HMISNvG/Nrc6irVfjU/flS4
+ LR5Dvs8LaH5lICqlfntf6kkhSmmXQwd1KJyYzmgnxN3uTJNyDZ/mfimTxFyrOoaHLHH/1fc5mfR25
+ ttGBsg+p13LcTJSyBuzbl6gEVMwFYQAAW553IGHL5WYHDSLAQywqDDHU6D8KUVykbVbaDExE1Lt3O
+ YjEhjoJ/l0Y3akw7ucxFWv+FNeujBQuZQBRaBL6xrWppT1ld69EJftl9a3gUHZpNDfker9HUweDTH
+ 0tzrzY+SWQpNAafkTVN8rq762g5Wij8bn/Tw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.2.88] ([176.199.209.230]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MGQnP-1qtECz2v5p-00Gswx; Fri, 22
+ Sep 2023 12:56:56 +0200
+Message-ID: <0b714a3e-b46d-b954-e99f-a372d7124780@gmx.de>
+Date: Fri, 22 Sep 2023 12:56:58 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCHv8 00/15] net/lwip: add lwip library for the network stack
+To: Simon Glass <sjg@google.com>, Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de,
+ joe.hershberger@ni.com, rfried.dev@gmail.com
+References: <20230908135320.7066-1-maxim.uvarov@linaro.org>
+ <20230908135922.GC305624@bill-the-cat>
+ <CAD8XO3bWmefyQ7Dx8fn7kc3s8=uCUhG3FcE6J4H6=qFdwa3gmw@mail.gmail.com>
+ <CAPnjgZ2Y6FJELJX7RA3_PehnCQ7zaiCeQd-VKJmtj_8nwnv3_w@mail.gmail.com>
+ <CAD8XO3Ynafpncs42KPX9sDw-5VQHQpwJq=22SzXDi27Dz6rrEg@mail.gmail.com>
+ <CAC_iWjJXHraJ2gEMgUGaRxjQxM1JUwP+jTNUiftngY1ubcEq6Q@mail.gmail.com>
+ <93c9133d-b259-c093-64f4-2acdcedd0dc2@gmx.de>
+ <CALeDE9MBUd2_8TZ87PJXx_jF0D6zqGV9FY2vQCSkxG4P2GJ-JQ@mail.gmail.com>
+ <20230913131423.GI305624@bill-the-cat>
+ <CAD8XO3aq9+KDOUXKtURaL8UwX96RLqqwAhDz=U2924BfUdz9+g@mail.gmail.com>
+ <CAPnjgZ0frgZ=i7ED71ifpvWAtv0PG9DbwbKQ3Hzf6PHkfgnraQ@mail.gmail.com>
+Content-Language: en-US
+From: Simon Goldschmidt <goldsimon@gmx.de>
+In-Reply-To: <CAPnjgZ0frgZ=i7ED71ifpvWAtv0PG9DbwbKQ3Hzf6PHkfgnraQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:6VkBUXcAOcl4N18EPoMtYgQ/P8zgu584Y2jX/1iONGKbE9X31aH
+ jRDXHTVovqboBoc1KnnNi2UW3KE2+e1uAMsm1A9I8vGUN00JFuGqs7gUEHV2kmVPriBuHim
+ GQQp9XRakv4Sfmp2tIZSRUn5fa5Ue/CRkbl3wLNXiiB6/OgtFr67yJWsLNk2Y0553u9RaAe
+ ytKWTz7PcYCGVVEubTKyg==
+UI-OutboundReport: notjunk:1;M01:P0:DLq4rAMYSYM=;U6LQDsyYViWpsCQF+8SOg3zmqJW
+ 4WWDvlfXOAefmtCMH+wHSxNDYhOpZGJgMiuCCYuvzdJXtmc6LrRM5vsF+L0TXs1MmvzTjvDnw
+ CrzaP3rvOsr6+jzbx6LC9Ly2cTHLQQXN/NoihbPfTUU6tcp0iQAlgNSeJzhKWCaERUrDwsQkb
+ AVR8sbGhcaBtnR0Yzmn5lgtB3MWVeJeRFzTh37CMN/UEAf8vswxMqAVOqCHPG5ITqSFOkB7Rg
+ RQai7bwKweDO4vSDy4OJ2hZ/jiPDZzbAws9ymb3rG+PUtx7K4VusJELv10t1/mVkD1p77o6r2
+ gsKmDa0eIOPcHXjr0SVNgfLeK70x4C5IggH4mN1VNXU2aIfXI8bjYQoIO7rRCeSIgrKmlY5mC
+ I8hGRyWoH6LuRzZJHTJwKacmcbkdP2fz0Fmdqgoxeb8z1I4Yw3hevF4emBXMKpbqNsVQSEhAL
+ s31TQ8e08iBXJwh7xACeN8JeNhm6RwafChs3l5n8CirV0/i2QQoO6eyBaSMZl20VTkTGKfGPM
+ 6ZVLRzzzKav/nIwQLFTOAAiiW0ttrwGmweNPKKL4/IAVE0pIvYLzasUZje6zFcNpEHwCLS3DN
+ zgkjmZi1AWOQN9rY2HMHJW7PxZ9p6hS5gTrQa8PPbjwxRex53j7K2Pqr3zZTO9hDaqJxPVvbN
+ g2yFWvK+HUZUEJ0F1LqpqHDoCNNgyPHDfVjyGqt1/zP7Ge2RwGrA+l0H40L3QA7CS7vRSmb2P
+ OtuDBhF6G9EVPbeVpSPSAI9w7Th31tkmwJ/jtCLru52b/aKGZ7F0FrwAXcto+XO8ATfClHtOh
+ cBv5A9+F45ulSApl3VSyjR0IznRUsX5oZinIk/paxkPh2USCY9bhLmONFKTH1SUA+26FsTtYq
+ pTejxNE9HRI//SdV6M4HnDND87CTwjMjUWWw3F6P1sYyd54xHgIkJ6FAPAg9vICkjSM1AX2tM
+ GgyXYdEB44Rxoi9ywPKsrBQZt0k=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,266 +98,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get rid of k3-j721e-r5-*-u-boot.dtsi as it is not
-necessary. Change the inclusion hierarchy to be as follows:
 
-	k3-j721e-<board>.dts---
-			       -
-			        -->k3-j721e-r5-<board>.dts
-			       -
-k3-j721e-<board>-u-boot.dtsi---
 
-Reason for explicitly mentioning the inclusion of -u-boot.dtsi in code
-although it could've been automatically done by U-Boot is to resolve
-some of the dependencies that R5 file requires.
+On 21.09.2023 18:29, Simon Glass wrote:
+> Hi,
+>
+> On Wed, 13 Sept 2023 at 07:35, Maxim Uvarov <maxim.uvarov@linaro.org> wr=
+ote:
+>>
+>>
+>>
+>> On Wed, 13 Sept 2023 at 19:14, Tom Rini <trini@konsulko.com> wrote:
+>>>
+>>> On Wed, Sep 13, 2023 at 11:06:13AM +0100, Peter Robinson wrote:
+>>>>>>> Then if for development you need  to pull he history of lwip, you =
+can do it with:
+>>>>>>> git pull -s subtree lwip  master --allow-unrelated-histories
+>>>>>>> (but I think nobody will need this.)
+>>>>>>>
+>>>>>>> New update of the lwip net/lwip/lwip-external dir will be done wit=
+h:
+>>>>>>> git pull -s subtree lwip  master --allow-unrelated-histories --squ=
+ash
+>>>>>>> Squash commit also has to be git format-patch friendly.
+>>>>>>>
+>>>>>>> If you are ok with that proposal I will send v9 with the first pat=
+ch created with steps above.
+>>>>>>
+>>>>>> We've gone through this before.  The whole purpose of this is not
+>>>>>> having to maintain patches.
+>>>>>> Simon, instead of "I had problems in the past", can you elaborate a=
+ bit more?
+>>>>>>
+>>>>>> Tom said he is fine with subtrees instead of submodules and I know =
+for
+>>>>>> a fact EDK2 doesn't have too many issues with submodules.
+>>>>>> Their documentation is pretty clear on building and requires
+>>>>>>
+>>>>>> git clone https://github.com/tianocore/edk2.git
+>>>>>> cd edk2
+>>>>>> git submodule update --init
+>>>>>>
+>>>>>> Perhaps the situation has improved since you had issues?
+>
+> Nope.
+>
+>>>>>
+>>>>> While I don't really care how you solve this technically, I'd *stron=
+gly*
+>>>>> be interested for U-Boot to use *unmodified* lwIP sources where an
+>>>>> explicit reference to an lwIP commit is used. I'd rather integrate
+>>>>> bugfixes for U-Boot into lwIP than having the sources drift apart.
+>>>>
+>>>> Strongly agree here, we want to use upstream and all the combined
+>>>> development and reviews etc rather than forking off and ending up wit=
+h
+>>>> yet another slightly different IP stack. The whole advantage of
+>>>> adopting LWIP is the advantage of combined security, features and bug=
+s
+>>>> from a wide range of projects :-)
+>>>
+>>> Yes, this is what I want as well, and why I'm perhaps more agreeable
+>>> with the approaches where it's a lot harder for us to start forking
+>>> things unintentionally.  I gather submodule rather than subtree would =
+be
+>>> better for that case?
+>>>
+>>> --
+>>> Tom
+>>
+>>
+>> Yes, submodule will be a much better solution for us. And I also don't =
+think that today
+>> there are any issues with submodules. It works well of OE, RPM and DEB =
+builds,
+>> distributions should not have problems with it.
+>
+> My particular experience is with coreboot. Some problems I have:
+>
+> 1. Updating the modules doesn't work and I need to reset, try the
+> --init thing, fetch things manually, etc. etc.
+> 2. In ChromiumOS coreboot we can't use submodules internally since
+> each package has its own build script. E.g. we need to build coreboot
+> separately from its blobs, fsp, external libraries, etc. At least
+> there we can do this, but if U-Boot adopts a submodule for a core
+> feature, this is going to create no end of problems.
+> 3. It makes it impossible to patch lwip for any fix we need for a releas=
+e
+> 4. We still have to 'fast forward' to a new commit every now and then,
+> which really is no easier than doing a merge commit for the changes
+> since the last sync, is it?
+>
+> Really, we need a maintainer for the lwip piece, if we are to adopt
+> it. Using submodules is not a substitute for that.
 
-Also remove duplicate phandles while making this shift as well as remove
-firmware-loader as it serves no purpose without "phandlepart" property.
+As an lwIP maintainer, I cannot step up as a maintainer of lwIP in
+U-Boot, however, I can assure you I will do my best to work with you on
+integrating fixes into upstream lwIP if required.
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
- .../k3-j721e-r5-common-proc-board-u-boot.dtsi | 29 ------------
- .../arm/dts/k3-j721e-r5-common-proc-board.dts | 38 +++------------
- arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi       | 31 ------------
- arch/arm/dts/k3-j721e-r5-sk.dts               | 47 ++++---------------
- 4 files changed, 16 insertions(+), 129 deletions(-)
- delete mode 100644 arch/arm/dts/k3-j721e-r5-common-proc-board-u-boot.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi
+Without wanting to promote using submodules: all other examples of lwIP
+being copied into another repository have practically never resulted in
+bugfixes being sent back to us (ok, that's not 100% true, but we do get
+them only once in a while) and being like that, those projects are
+facing problems upgrading our stack in turn. I wouldn't want to be a
+maintainer of such code, either.
 
-diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j721e-r5-common-proc-board-u-boot.dtsi
-deleted file mode 100644
-index f9746d33ec..0000000000
---- a/arch/arm/dts/k3-j721e-r5-common-proc-board-u-boot.dtsi
-+++ /dev/null
-@@ -1,29 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright (C) 2020 Texas Instruments Incorporated - http://www.ti.com/
-- */
--
--#include "k3-j721e-common-proc-board-u-boot.dtsi"
--
--/ {
--	chosen {
--		firmware-loader = &fs_loader0;
--	};
--
--	aliases {
--		remoteproc0 = &sysctrler;
--		remoteproc1 = &a72_0;
--	};
--
--	fs_loader0: fs_loader@0 {
--		bootph-all;
--		compatible = "u-boot,fs-loader";
--	};
--};
--
--&tps659413a {
--	esm: esm {
--		compatible = "ti,tps659413-esm";
--		bootph-pre-ram;
--	};
--};
-diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-index 32f71e9b6a..7bb5ce775c 100644
---- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
-@@ -5,10 +5,10 @@
- 
- /dts-v1/;
- 
--#include "k3-j721e-som-p0.dtsi"
-+#include "k3-j721e-common-proc-board.dts"
- #include "k3-j721e-ddr-evm-lp4-4266.dtsi"
- #include "k3-j721e-ddr.dtsi"
--#include "k3-j721e-binman.dtsi"
-+#include "k3-j721e-common-proc-board-u-boot.dtsi"
- #include <dt-bindings/phy/phy-cadence.h>
- 
- / {
-@@ -198,27 +198,6 @@
- 		>;
- 	};
- 
--	main_usbss0_pins_default: main_usbss0_pins_default {
--		pinctrl-single,pins = <
--			J721E_IOPAD(0x290, PIN_OUTPUT, 0) /* (U6) USB0_DRVVBUS */
--			J721E_IOPAD(0x210, PIN_INPUT, 7) /* (W3) MCAN1_RX.GPIO1_3 */
--		>;
--	};
--
--	main_mmc1_pins_default: main_mmc1_pins_default {
--		pinctrl-single,pins = <
--			J721E_IOPAD(0x254, PIN_INPUT, 0) /* (R29) MMC1_CMD */
--			J721E_IOPAD(0x250, PIN_INPUT, 0) /* (P25) MMC1_CLK */
--			J721E_IOPAD(0x2ac, PIN_INPUT, 0) /* (P25) MMC1_CLKLB */
--			J721E_IOPAD(0x24c, PIN_INPUT, 0) /* (R24) MMC1_DAT0 */
--			J721E_IOPAD(0x248, PIN_INPUT, 0) /* (P24) MMC1_DAT1 */
--			J721E_IOPAD(0x244, PIN_INPUT, 0) /* (R25) MMC1_DAT2 */
--			J721E_IOPAD(0x240, PIN_INPUT, 0) /* (R26) MMC1_DAT3 */
--			J721E_IOPAD(0x258, PIN_INPUT, 0) /* (P23) MMC1_SDCD */
--			J721E_IOPAD(0x25c, PIN_INPUT, 0) /* (R28) MMC1_SDWP */
--		>;
--	};
--
- 	main_i2c0_pins_default: main-i2c0-pins-default {
- 		pinctrl-single,pins = <
- 			J721E_IOPAD(0x220, PIN_INPUT_PULLUP, 0) /* (AC5) I2C0_SCL */
-@@ -300,6 +279,11 @@
- 				bootph-pre-ram;
- 			};
- 		};
-+
-+		esm: esm {
-+			compatible = "ti,tps659413-esm";
-+			bootph-pre-ram;
-+		};
- 	};
- };
- 
-@@ -424,14 +408,6 @@
- 	assigned-clocks = <&serdes0 CDNS_SIERRA_PLL_CMNLC>, <&serdes0 CDNS_SIERRA_PLL_CMNLC1>;
- 	assigned-clock-parents = <&wiz0_pll1_refclk>, <&wiz0_pll1_refclk>;
- 
--	serdes0_pcie_link: link@0 {
--		reg = <0>;
--		cdns,num-lanes = <1>;
--		#phy-cells = <0>;
--		cdns,phy-type = <PHY_TYPE_PCIE>;
--		resets = <&serdes_wiz0 1>;
--	};
--
- 	serdes0_qsgmii_link: phy@1 {
- 		reg = <1>;
- 		cdns,num-lanes = <1>;
-diff --git a/arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi b/arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi
-deleted file mode 100644
-index 733d69cd00..0000000000
---- a/arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi
-+++ /dev/null
-@@ -1,31 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--/*
-- * Copyright (C) 2021 Texas Instruments Incorporated - https://www.ti.com/
-- */
--
--#include "k3-j721e-sk-u-boot.dtsi"
--
--/ {
--	chosen {
--		firmware-loader = &fs_loader0;
--	};
--
--	aliases {
--		remoteproc0 = &sysctrler;
--		remoteproc1 = &a72_0;
--		remoteproc2 = &main_r5fss0_core0;
--		remoteproc3 = &main_r5fss0_core1;
--	};
--
--	fs_loader0: fs_loader@0 {
--		bootph-all;
--		compatible = "u-boot,fs-loader";
--	};
--};
--
--&tps659412 {
--	esm: esm {
--		compatible = "ti,tps659413-esm";
--		bootph-pre-ram;
--	};
--};
-diff --git a/arch/arm/dts/k3-j721e-r5-sk.dts b/arch/arm/dts/k3-j721e-r5-sk.dts
-index 6986292e37..1cc64d07f7 100644
---- a/arch/arm/dts/k3-j721e-r5-sk.dts
-+++ b/arch/arm/dts/k3-j721e-r5-sk.dts
-@@ -5,9 +5,10 @@
- 
- /dts-v1/;
- 
--#include "k3-j721e.dtsi"
-+#include "k3-j721e-sk.dts"
- #include "k3-j721e-ddr-sk-lp4-4266.dtsi"
- #include "k3-j721e-ddr.dtsi"
-+#include "k3-j721e-sk-u-boot.dtsi"
- 
- / {
- 	model = "Texas Instruments J721E SK R5";
-@@ -15,6 +16,8 @@
- 	aliases {
- 		remoteproc0 = &sysctrler;
- 		remoteproc1 = &a72_0;
-+		remoteproc2 = &main_r5fss0_core0;
-+		remoteproc3 = &main_r5fss0_core1;
- 	};
- 
- 	chosen {
-@@ -279,52 +282,15 @@
- 			J721E_WKUP_IOPAD(0x8, PIN_INPUT, 0) /* (D21) MCU_OSPI0_DQS */
- 		>;
- 	};
--
--	mcu_i2c0_pins_default: mcu_i2c0_pins_default {
--		pinctrl-single,pins = <
--			J721E_WKUP_IOPAD(0x100, PIN_INPUT, 0) /* (J26) MCU_I2C0_SCL */
--			J721E_WKUP_IOPAD(0x104, PIN_INPUT, 0) /* (H25) MCU_I2C0_SDA */
--		>;
--	};
- };
- 
- &main_pmx0 {
--	main_uart0_pins_default: main_uart0_pins_default {
--		bootph-pre-ram;
--		pinctrl-single,pins = <
--			J721E_IOPAD(0x1f0, PIN_INPUT, 0) /* (AC2) UART0_CTSn */
--			J721E_IOPAD(0x1f4, PIN_OUTPUT, 0) /* (AB1) UART0_RTSn */
--			J721E_IOPAD(0x1e8, PIN_INPUT, 0) /* (AB2) UART0_RXD */
--			J721E_IOPAD(0x1ec, PIN_OUTPUT, 0) /* (AB3) UART0_TXD */
--		>;
--	};
--
--	main_usbss0_pins_default: main_usbss0_pins_default {
--		pinctrl-single,pins = <
--			J721E_IOPAD(0x290, PIN_OUTPUT, 0) /* (U6) USB0_DRVVBUS */
--			J721E_IOPAD(0x210, PIN_INPUT, 7) /* (W3) MCAN1_RX.GPIO1_3 */
--		>;
--	};
--
- 	main_usbss1_pins_default: main-usbss1-pins-default {
- 		pinctrl-single,pins = <
- 			J721E_IOPAD(0x214, PIN_OUTPUT, 4) /* (V4) MCAN1_TX.USB1_DRVVBUS */
- 		>;
- 	};
- 
--	main_mmc1_pins_default: main_mmc1_pins_default {
--		pinctrl-single,pins = <
--			J721E_IOPAD(0x254, PIN_INPUT, 0) /* (R29) MMC1_CMD */
--			J721E_IOPAD(0x250, PIN_INPUT, 0) /* (P25) MMC1_CLK */
--			J721E_IOPAD(0x2ac, PIN_INPUT, 0) /* (P25) MMC1_CLKLB */
--			J721E_IOPAD(0x24c, PIN_INPUT, 0) /* (R24) MMC1_DAT0 */
--			J721E_IOPAD(0x248, PIN_INPUT, 0) /* (P24) MMC1_DAT1 */
--			J721E_IOPAD(0x244, PIN_INPUT, 0) /* (R25) MMC1_DAT2 */
--			J721E_IOPAD(0x240, PIN_INPUT, 0) /* (R26) MMC1_DAT3 */
--			J721E_IOPAD(0x258, PIN_INPUT, 0) /* (P23) MMC1_SDCD */
--		>;
--	};
--
- 	main_i2c0_pins_default: main-i2c0-pins-default {
- 		pinctrl-single,pins = <
- 			J721E_IOPAD(0x220, PIN_INPUT_PULLUP, 0) /* (AC5) I2C0_SCL */
-@@ -423,6 +389,11 @@
- 				bootph-pre-ram;
- 			};
- 		};
-+
-+		esm: esm {
-+			compatible = "ti,tps659413-esm";
-+			bootph-pre-ram;
-+		};
- 	};
- };
- 
--- 
-2.34.1
-
+Regards,
+Simon
