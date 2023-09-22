@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C010FCD484C
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 18:28:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C4E3CD484C
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 18:28:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CF1586538;
-	Fri, 22 Sep 2023 20:28:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9976086AF7;
+	Fri, 22 Sep 2023 20:28:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aCaSILTu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nAe9Qiz+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3976185DFA; Fri, 22 Sep 2023 20:28:41 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 302DF86AF7; Fri, 22 Sep 2023 20:28:49 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2861A868D1
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 20:28:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2DCB586ADC
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 20:28:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-59f4bc88f9fso3039547b3.2
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 11:28:39 -0700 (PDT)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-59c0281d72dso31115287b3.0
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 11:28:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695407318; x=1696012118; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695407326; x=1696012126; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TtZyY18yDErKOniBb/JKrDHOAG4TiHCM6xXQCEfDfko=;
- b=aCaSILTu5iPTY1zaP4FG5MXNPepFNx6/Cip+sW+4d8j07aUVtKmqgDhzPtuB4wKGe0
- tMYBNXefmZf0idueHdtftLhkDvzcTHWyqH/J54SQhSKK/B9JRhIKK9wn3P/6wc89xygC
- B5rSFH6S9MygTLIE/LBEh38GPsoP6+LZWw9jg=
+ bh=ogBvGG4lXtFbVXPuHsOkdOrcXB6usxzfIA2q2n1J3es=;
+ b=nAe9Qiz+pp5RO7OmzhUWTSJ8H0dKCdgHipsOcK71UCZyWAR7oOyJv+nijGm+r6So1o
+ lRNZIHQNt655UvtUMmw2OB2mqOweXhnqozlHql1LeN3HHM/BFs8T3GP/s2s8cp0790re
+ MG44gccU3PmoNlzaOEJkX7N9CWh/bjYcrwbiE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695407318; x=1696012118;
+ d=1e100.net; s=20230601; t=1695407326; x=1696012126;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TtZyY18yDErKOniBb/JKrDHOAG4TiHCM6xXQCEfDfko=;
- b=W/5UOckMJdqalZv3jg9g6r8UCVwNlaHul2AqaG31q2U5ru8xrChJg8tCkTbOCYYRWr
- HOcDL0g0Srm/2qUAT65JIexLupIBl6j8Ih5rknRVlbOwPcVMAw3R9cI5grXcRp2ugG4E
- H8VbwFZRH5sSg8WTSQCOV4CkLBqeAIOAEBoBnpkS4I3Hpj4ioCMBLZu7fTti2Hv4w8YC
- thDlVhc+W0EqYa1UQRZdBx6/K8ogI77Hbu0YZTIPG4kHPdDi4bPMuxxtQo2XSLtc/Pb+
- rrHyZPh62s3DS4FGeAHhZtb7K5hRH1yXgqj0OpcIHVXYmovrb7HmcepqdRpyfdsi2X4z
- 0x/Q==
-X-Gm-Message-State: AOJu0Yyx/r1jSDBpJ5gP8rebmxu9gqO1VkD6ufqHjaTQo8q6f3C91bEo
- JuGl/Kji9/UbQF+xe0j2L6oo15/v9K7n1P51FHSbvA==
-X-Google-Smtp-Source: AGHT+IH+/Y1UfXUO5euCgCjxsDXeWGoxjgNokfAOS0AE7h0273ogvjymo5hFY6ZV3dWLsGMCFJDR4QFMPQuhSbZvj1Y=
-X-Received: by 2002:a81:8485:0:b0:592:b38:9662 with SMTP id
- u127-20020a818485000000b005920b389662mr524167ywf.22.1695407317637; Fri, 22
- Sep 2023 11:28:37 -0700 (PDT)
+ bh=ogBvGG4lXtFbVXPuHsOkdOrcXB6usxzfIA2q2n1J3es=;
+ b=Wt5+7UTb2Yd/mkdvdeWFzORnQTQ78p/x6T4DNjz6MPUFdX0IRwcBVzZx5pXBV0cSEM
+ hOyJDIZJPOfLmX45g67U5X4OJwBaGNRkGcOrVsH3okoz/7rhr3KFh4kk4NSE4rw7vy0S
+ 9eH9DOjScXijvxhzI1+suH4dmnccjAsdvzoY6fM/Qsj4zlRUV3hNG2PjOnoeUiyx3Ie/
+ MV5JqOJk1Rd7+ouMIwxvca7FP/Vuk3snCKGpsdj2SFh2BGWyVQ7CfxeyAqwZctoU3qdm
+ mVsH3keBna7Dyv7ijrpK7LPHo31vqzyXrFeBRabQQGBlxgBE7CpFutVSINZ8mxi3BfA2
+ iHMw==
+X-Gm-Message-State: AOJu0YyfakZwwK4hvYpTT5UH/CQtL0OI5VhIjkn/BnKJw3ViAx/6VPVc
+ rSUEYOwuarDjh8phewO/v1kNiu3cchkoZHeA1iPVVA==
+X-Google-Smtp-Source: AGHT+IHDQoGpo3wyE6GG0qANfGkNgSWJdz6zDo29WPnecTnj2KvIliyZdr3UDfr+022c6OPSbCRBhJyh1yFIQphD6bs=
+X-Received: by 2002:a0d:dd55:0:b0:59c:2d8f:1c33 with SMTP id
+ g82-20020a0ddd55000000b0059c2d8f1c33mr567223ywe.19.1695407325744; Fri, 22 Sep
+ 2023 11:28:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230920225811.153474-1-marek.vasut+renesas@mailbox.org>
- <20230920225811.153474-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20230920225811.153474-3-marek.vasut+renesas@mailbox.org>
+ <20230920225811.153474-9-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20230920225811.153474-9-marek.vasut+renesas@mailbox.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 22 Sep 2023 12:27:30 -0600
-Message-ID: <CAPnjgZ1fovM2_8zpjZS255A3KNrPT4PrxtQOhvuQm9Ua+8qFWw@mail.gmail.com>
-Subject: Re: [PATCH 3/9] cmd: bdinfo: Implement support for printing ethernet
- settings via bdinfo -e
+Date: Fri, 22 Sep 2023 12:27:35 -0600
+Message-ID: <CAPnjgZ0LtGaYh=JG7JrsqWVaoAkLjCp2PLxb9j1CF=o5eq=4nA@mail.gmail.com>
+Subject: Re: [PATCH 9/9] test: bdinfo: Test bdinfo -e
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: u-boot@lists.denx.de, Bin Meng <bmeng.cn@gmail.com>, 
  Mario Six <mario.six@gdsys.cc>, Nikhil M Jain <n-jain1@ti.com>
@@ -86,7 +85,8 @@ X-Virus-Status: Clean
 On Wed, 20 Sept 2023 at 16:58, Marek Vasut
 <marek.vasut+renesas@mailbox.org> wrote:
 >
-> Add support for printing ethernet settings only via 'bdinfo -e' .
+> The bdinfo -e should print only the board ethernet settings.
+> Test the expected output.
 >
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > ---
@@ -95,7 +95,8 @@ On Wed, 20 Sept 2023 at 16:58, Marek Vasut
 > Cc: Nikhil M Jain <n-jain1@ti.com>
 > Cc: Simon Glass <sjg@chromium.org>
 > ---
->  cmd/bdinfo.c | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+>  test/cmd/bdinfo.c | 14 ++++++++++++++
+>  1 file changed, 14 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
