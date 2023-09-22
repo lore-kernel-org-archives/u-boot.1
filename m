@@ -4,81 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E8EE6FE58
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 15:50:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E1FE6FE52
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 16:00:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE1858641B;
-	Fri, 22 Sep 2023 17:50:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 06D4D86538;
+	Fri, 22 Sep 2023 18:00:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ac2uX9uf";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ggzP0E0D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD7FC8655F; Fri, 22 Sep 2023 17:50:33 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EC2DE8684C; Fri, 22 Sep 2023 18:00:55 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D3D78620C
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 17:50:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F3328652B
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 18:00:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-59bbdb435bfso27195657b3.3
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 08:50:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695397830; x=1696002630; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9e0JXKKlEIdAYYLfzjg6JP0yy5hByxVq2F4R00KQCPk=;
- b=Ac2uX9ufDX8+kO6aPF5PdRHfcD20KEOf1EERYIL1dzysDldGfgvSlzosKjGvbKoKa0
- 9eoro1snwRJjek3uh7cMuP7pRoXeKm4NMr8cEePi5ZXs4JiszlUu3BM2xgyqvbIfzJw7
- DN5pxHJEUGT1ZZQZ+cfFuca6OvEoB/bkG3+vs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695397830; x=1696002630;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=9e0JXKKlEIdAYYLfzjg6JP0yy5hByxVq2F4R00KQCPk=;
- b=evNAHipYCMeOZ30wHjvRszD8C0vfJ70+9PUAVOZWxdnOmsHC9sF8kmymywv2UAD6iG
- 4jC5AyHdheUE+UIWoM+IjXSBWez1Axz3ohineIIxxS2hSpFnYIQaWEWiMmqwEJBgowl0
- KS+VL+WKrmKrclxTMJOSq5+ff4AAKHAo+dDosGmj0tcop2E/eyHPIv9S005Rr/0Fp3hb
- WXdVsnB9jDc3m7cd5Xc1VaOToENJuyyV56JnwUkK9KFtuoQ8qLKUZcCY9+jSfAP3Wg4L
- WvnvqukHooZ750PthrSUCeu9IEHCgvABWTT2CvrMVcpyio7/kpi+4AWKEK5xgskR85sc
- 4KUw==
-X-Gm-Message-State: AOJu0YzzlHMSzJzCF1MR93zlTBDIzUXT3NY3h1o178IhpPp8Guwtd0qU
- L4zhiJSKJhUh8ypz0vC+Ip40KQ==
-X-Google-Smtp-Source: AGHT+IEwE2XUDhAW45wA9cH08LFNCirV56CPFeWtlu6v18g/Vv2GX+ccrP/+LrgvPpup7cmRxdlTTQ==
-X-Received: by 2002:a81:a542:0:b0:59b:586c:c65e with SMTP id
- v2-20020a81a542000000b0059b586cc65emr14300ywg.36.1695397830142; 
- Fri, 22 Sep 2023 08:50:30 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-b22c-a20b-ddfe-6409.res6.spectrum.com.
- [2603:6081:7b00:6400:b22c:a20b:ddfe:6409])
- by smtp.gmail.com with ESMTPSA id
- z184-20020a8189c1000000b00594fb0e2db3sm951443ywf.138.2023.09.22.08.50.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Sep 2023 08:50:29 -0700 (PDT)
-Date: Fri, 22 Sep 2023 11:50:27 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Durai Manickam KR <durai.manickamkr@microchip.com>,
- u-boot@lists.denx.de, hari.prasathge@microchip.com,
- varshini.rajendran@microchip.com, cristian.birsan@microchip.com,
- nicolas.ferre@microchip.com, balamanikandan.gunasundar@microchip.com,
- Eugen Hristev <eugen.hristev@collabora.com>
-Subject: Re: [PATCH 0/4] Add support for sam9x60 curiosity
-Message-ID: <20230922155027.GA305624@bill-the-cat>
-References: <20230921170631.45752-1-durai.manickamkr@microchip.com>
- <20230922-gangrene-evolution-9c087f58f165@ifak-system.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id 356C3B822BF
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 16:00:53 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5BD77C43391
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 16:00:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1695398452;
+ bh=xhaA32OBzVOM6nAoPy+gaX1FXQZKalbztmjU2PzXFPQ=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=ggzP0E0DGs0mibxseVl52HMOQX0aJ/KNk9DKc7+M5mWQt6G8GwUN+N8OLddQSnP00
+ mikR3nt6qzuamVj4tB1KHTzXqXbEsUT/Nz515Nxo3qSeT7fKjiTlGV+kk0HNmJFUtn
+ h+W4eEBKX5fqYVPKRizLnCPkmHHPyQtJQ6xKkd3wWuC0bCTDOy3b6JN+vOBXl9CaNg
+ 2YV/3iwkjSnGvmL+BVVAwuWLJK5K/irp+IYCF9eS/5Y5q1UI8irQKKjxh5S5z6MQ0k
+ MYor0XI3CmqlTXmq/gGMHA+94sJ8DMPEG3JOhP7KuaKERhhij7Qm1mRu96NSNFR2EC
+ Q1uK6f7ijoBtw==
+Received: by mail-lf1-f48.google.com with SMTP id
+ 2adb3069b0e04-50308217223so3754652e87.3
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:00:52 -0700 (PDT)
+X-Gm-Message-State: AOJu0Yy0k/iHr8UV52XBMnmHA67bUsBSUOKib5sJ0KdD0yzCsWZIUfmE
+ Ric5K4x2ZpOkxXFBAuqxJ1ewgix5k+EDYqOIcA==
+X-Google-Smtp-Source: AGHT+IEEE/JvcGeQD4KCzLIPPO9coF/0Kd1GNltvU5JvL5xNpex4YSVmnWqzCk9JmegTSZU7ZxtuJs2nrUqxTkVlYi8=
+X-Received: by 2002:ac2:5041:0:b0:503:2623:7cfc with SMTP id
+ a1-20020ac25041000000b0050326237cfcmr6407321lfm.34.1695398450443; Fri, 22 Sep
+ 2023 09:00:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FUIW7A/LSyxob5gs"
-Content-Disposition: inline
-In-Reply-To: <20230922-gangrene-evolution-9c087f58f165@ifak-system.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
+In-Reply-To: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
+From: Rob Herring <robh@kernel.org>
+Date: Fri, 22 Sep 2023 11:00:38 -0500
+X-Gmail-Original-Message-ID: <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
+Message-ID: <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
+Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
+ Conor Dooley <conor+dt@kernel.org>, Dhruva Gole <d-gole@ti.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,54 +83,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Sep 21, 2023 at 1:45=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> Binman[1] is a tool for creating firmware images. It allows you to
+> combine various binaries and place them in an output file.
+>
+> Binman uses a DT schema to describe an image, in enough detail that
+> it can be automatically built from component parts, disassembled,
+> replaced, listed, etc.
+>
+> Images are typically stored in flash, which is why this binding is
+> targeted at mtd. Previous discussion is at [2] [3].
+>
+> [1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
+> [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.=
+org/
+> [3] https://www.spinics.net/lists/devicetree/msg626149.html
 
---FUIW7A/LSyxob5gs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+You missed:
 
-On Fri, Sep 22, 2023 at 09:00:38AM +0200, Alexander Dahl wrote:
-> Hello Durai,
->=20
-> Am Thu, Sep 21, 2023 at 10:36:27PM +0530 schrieb Durai Manickam KR:
-> > This patch series adds boot from NAND support, configs update and=20
-> > fixes. The changes has been done on top of u-boot version 2023.07.
->=20
-> Well, interesting.  I sent patches for NAND flash support on that very
-> board some weeks ago which were already applied to the at91 custodian
-> tree:
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-at91/-/tree/next?ref_type=
-=3Dheads
->=20
-> Tom already merged that to the mainline next branch.  I suggest you
-> rebase on next.
->=20
-> Add Eugen to Cc, since he still is officially listed as maintainer of
-> the at91 stuff.
+https://github.com/devicetree-org/dt-schema/pull/110
 
-And please make sure that the DTS changes are syncing back from the
-kernel and note what release they are part of.
+where I said: We certainly shouldn't duplicate the existing partitions
+bindings. What's missing from them (I assume we're mostly talking
+about "fixed-partitions" which has been around forever I think (before
+me))?
 
---=20
-Tom
+To repeat, unless there is some reason binman partitions conflict with
+fixed-partitions, you need to start there and extend it. From what's
+posted here, it neither conflicts nor needs extending.
 
---FUIW7A/LSyxob5gs
-Content-Type: application/pgp-signature; name="signature.asc"
+I did a bit more research. "fixed-partitions" as a compatible has
+"only" been around since 2015. Prior to that, it was implicit with
+just partition nodes with addresses (i.e. reg) and that dates back to
+2007. Looks like u-boot only supports the newer form and since 2021.
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUNt8AACgkQFHw5/5Y0
-tyxG3wv/dpQDdtC3xnYIFN6SBZw55lyxtttchDYXXGnedn8LOABBZhpiIxKFeDZP
-ggwJGS6TeM7DsDrRxg5YH7qrdaQu2MhsdOSWQo3MMuHMf1x8qF8dvqkqjmY2mFBR
-UGvEZDoikZrqcCIzmY9A7IM5kDNgEyKfKBijEFtY6FGFHraI0VBgX9TfudALTmQo
-DHOgTDxM1cly33Zj3av9I8yYpSNARbmB4Z5NYbiwbbapcW9yjV87BxJ4z7//hqo2
-mv0TuZBr0f7GhTzaI81nLWOziJ64DeZCRy9cA56TWAXI0sQnZ/NurSKr9Sn0DXIZ
-9HG1df+PC5k+X00PMZzf6Bb2W9YgPEsTBDcbPLejKKhvjXr4IKTIG+Vz8t58CbHI
-EJWbISxDAissYvMXzcmgwzK0ojIqXFHKCtLi5S7IhJBpmsSLF1/M1IqfeovdxSYg
-8DfZvgfWyKeia8bRPLPEO+/1yGyfezI2XRVVkwV5lzai5w2D0SSW9O2toRtyxcwI
-qFfC4T6A
-=bSx/
------END PGP SIGNATURE-----
-
---FUIW7A/LSyxob5gs--
+Rob
