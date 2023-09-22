@@ -4,64 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F524CE7AB9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 19:43:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C2AACE7AB7
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 19:51:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5150865D0;
-	Fri, 22 Sep 2023 21:43:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id ACEC386199;
+	Fri, 22 Sep 2023 21:51:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mkhJijmg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bo3bEub5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AEC386529; Fri, 22 Sep 2023 21:43:22 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DBBF38640F; Fri, 22 Sep 2023 21:51:28 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0EC18641B
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 21:43:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BC4885DFA
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 21:51:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 3046CCE2489
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 19:43:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7141DC433CC
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 19:43:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695411796;
- bh=A4YRRXIxZfuP4hSCrSlSbxBU3yaGfiOmZNf7I2N3gEk=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=mkhJijmgNzhzaiyJy0L2fdcWOoEyj7Xb33pKZQ6HWXtj/a62OqvRUfPfk+LozuoHA
- NAgz4bgZL0CeqyJD1vwf5rHLS5s5aIfQ6YwmqelUxJS6M4bK9P7MRK08C/UsZt++C0
- eOwNKWmFQRiA+TRVLMEEKtcomCfNqy6j+zap1dQDSsZjIAOHnkGZJXUdiRw+ryVj4o
- mYfYA7kowAq2XV/5PZ+TxWvb6jMVp1W2e6hYxLK1zdxDnvdXuKO0xIoCq5Wzq8z8kO
- wh/KJvjWxITTbXdDv/xgVvyUw6cFPcjoAJHKTHhT/k7x0INUdX5EskofeFXUMQm4R1
- jHIVHY2r5CQCA==
-Received: by mail-lf1-f53.google.com with SMTP id
- 2adb3069b0e04-50307759b65so4682230e87.0
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:43:16 -0700 (PDT)
-X-Gm-Message-State: AOJu0YyFI6Mk6YopQtkZNM77xP2ISF0IyMh6MfLqCHa/EsTi+DaFDgTY
- DQTK4zjBSnj2E5cUfZTsYsM5ZAxSnssO521XrQ==
-X-Google-Smtp-Source: AGHT+IHykPmoXWd5RfRa0OjFcxDuEZz0rP2JzY8ueouRM4ujoevuhdbvkTcM0rnlltiKoj8kM26YvC0aFr03f+Nlwzs=
-X-Received: by 2002:a05:6512:3e1f:b0:500:daf6:3898 with SMTP id
- i31-20020a0565123e1f00b00500daf63898mr566690lfv.26.1695411794619; Fri, 22 Sep
- 2023 12:43:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-50435ad51bbso2551938e87.2
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:51:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695412286; x=1696017086; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QcpcIFJ61Cgs0SnYetl6zxlaNczsC0YBO5OwWuuMpjg=;
+ b=Bo3bEub5BxuiH2LZgjnrw6Xc1irIWj/kd3WtfdnYQxdeRdHrT3T6pY3IHyDTpCRp37
+ X90aPbfOpAmFUh4NtNfvZW5roym1DjlS2Kz4cgxJuPLIEEQML/P+0/Z0nTQBTQYdO6uG
+ 0WF82tgryTLNjQ+9lp/g0nOa/fFSHxz/8hF5s=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695412286; x=1696017086;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QcpcIFJ61Cgs0SnYetl6zxlaNczsC0YBO5OwWuuMpjg=;
+ b=DRis4C8S9s3+WR57L3UCbTYzcoqeTUNBPMUkzUWlEm77/uJPfLZaXvloRzE/IuPUQu
+ 5c5UJWpk0ziqhgzCjlqsW9cjkid60iM5KbgNyOOILZDNLU8AbPBmiRIR11qNyy8GV7xk
+ U0NeDfhuGw49L6snGjRFdz5F+Z0ljr5RqOktN+0ymCIZUpFdeCyduLa5WTEzzndg5wkD
+ efk/5SVZc3FIFCaAZHvxLc1Mq2DRs/3YhlMANO2+j87Y38hh0kOFxtT0jUd+9wZGdHGE
+ 4zpMS03TLCINZbbX4H+zXD/ttybTA65008oM+bSoH3r5hAHjBs9Qh4TojYDiyVR1LTnj
+ 1uBg==
+X-Gm-Message-State: AOJu0YyDIF6CgBSiEx8PUOTLtDzunEbE11Bv6ETGgEDHesFabA+AnrdW
+ 1xTSopd6WoJ0ihxLKMzHHM4gcsksMoGmKFdmNGQJFQ==
+X-Google-Smtp-Source: AGHT+IGL6fQHrX1AqP0gkgxhmMGrRSypGWx3ZtAcsfH7zlp8ROCDaeJq0vczx5UZ4LzUj+CQKnM3WMIgnpzbaTlIv70=
+X-Received: by 2002:a05:6512:32a2:b0:503:2a53:7480 with SMTP id
+ q2-20020a05651232a200b005032a537480mr431345lfe.49.1695412285461; Fri, 22 Sep
+ 2023 12:51:25 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
  <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
  <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
  <20230922174649.GA3320366-robh@kernel.org>
  <CAPnjgZ3ojfAv=BHqOhM=-NnYqCm81Ny=PsGKiNphKTmw++fk9w@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3ojfAv=BHqOhM=-NnYqCm81Ny=PsGKiNphKTmw++fk9w@mail.gmail.com>
-From: Rob Herring <robh@kernel.org>
-Date: Fri, 22 Sep 2023 14:43:02 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
-Message-ID: <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
+ <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
+In-Reply-To: <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 22 Sep 2023 13:51:14 -0600
+Message-ID: <CAPnjgZ3BnD9aX3cNNPiGRKTOj+YeurHCLv6K0TRFhAtY21Qufw@mail.gmail.com>
 Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-To: Simon Glass <sjg@chromium.org>
+To: Rob Herring <robh@kernel.org>
 Cc: devicetree@vger.kernel.org, U-Boot Mailing List <u-boot@lists.denx.de>, 
  linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
  Conor Dooley <conor+dt@kernel.org>, Dhruva Gole <d-gole@ti.com>, 
@@ -88,126 +94,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 22, 2023 at 1:12=E2=80=AFPM Simon Glass <sjg@chromium.org> wrot=
-e:
+Hi Rob,
+
+On Fri, 22 Sept 2023 at 13:43, Rob Herring <robh@kernel.org> wrote:
 >
-> Hi Rob,
->
-> On Fri, 22 Sept 2023 at 11:46, Rob Herring <robh@kernel.org> wrote:
+> On Fri, Sep 22, 2023 at 1:12=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
+ote:
 > >
-> > On Fri, Sep 22, 2023 at 11:01:18AM -0600, Simon Glass wrote:
-> > > Hi Rob,
+> > Hi Rob,
+> >
+> > On Fri, 22 Sept 2023 at 11:46, Rob Herring <robh@kernel.org> wrote:
 > > >
-> > > On Fri, 22 Sept 2023 at 10:00, Rob Herring <robh@kernel.org> wrote:
+> > > On Fri, Sep 22, 2023 at 11:01:18AM -0600, Simon Glass wrote:
+> > > > Hi Rob,
 > > > >
-> > > > On Thu, Sep 21, 2023 at 1:45=E2=80=AFPM Simon Glass <sjg@chromium.o=
-rg> wrote:
+> > > > On Fri, 22 Sept 2023 at 10:00, Rob Herring <robh@kernel.org> wrote:
 > > > > >
-> > > > > Binman[1] is a tool for creating firmware images. It allows you t=
-o
-> > > > > combine various binaries and place them in an output file.
+> > > > > On Thu, Sep 21, 2023 at 1:45=E2=80=AFPM Simon Glass <sjg@chromium=
+.org> wrote:
+> > > > > >
+> > > > > > Binman[1] is a tool for creating firmware images. It allows you=
+ to
+> > > > > > combine various binaries and place them in an output file.
+> > > > > >
+> > > > > > Binman uses a DT schema to describe an image, in enough detail =
+that
+> > > > > > it can be automatically built from component parts, disassemble=
+d,
+> > > > > > replaced, listed, etc.
+> > > > > >
+> > > > > > Images are typically stored in flash, which is why this binding=
+ is
+> > > > > > targeted at mtd. Previous discussion is at [2] [3].
+> > > > > >
+> > > > > > [1] https://u-boot.readthedocs.io/en/stable/develop/package/bin=
+man.html
+> > > > > > [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg=
+@chromium.org/
+> > > > > > [3] https://www.spinics.net/lists/devicetree/msg626149.html
 > > > > >
-> > > > > Binman uses a DT schema to describe an image, in enough detail th=
-at
-> > > > > it can be automatically built from component parts, disassembled,
-> > > > > replaced, listed, etc.
+> > > > > You missed:
 > > > > >
-> > > > > Images are typically stored in flash, which is why this binding i=
-s
-> > > > > targeted at mtd. Previous discussion is at [2] [3].
+> > > > > https://github.com/devicetree-org/dt-schema/pull/110
 > > > > >
-> > > > > [1] https://u-boot.readthedocs.io/en/stable/develop/package/binma=
-n.html
-> > > > > [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@c=
-hromium.org/
-> > > > > [3] https://www.spinics.net/lists/devicetree/msg626149.html
+> > > > > where I said: We certainly shouldn't duplicate the existing parti=
+tions
+> > > > > bindings. What's missing from them (I assume we're mostly talking
+> > > > > about "fixed-partitions" which has been around forever I think (b=
+efore
+> > > > > me))?
+> > > > >
+> > > > > To repeat, unless there is some reason binman partitions conflict=
+ with
+> > > > > fixed-partitions, you need to start there and extend it. From wha=
+t's
+> > > > > posted here, it neither conflicts nor needs extending.
 > > > >
-> > > > You missed:
-> > > >
-> > > > https://github.com/devicetree-org/dt-schema/pull/110
-> > > >
-> > > > where I said: We certainly shouldn't duplicate the existing partiti=
-ons
-> > > > bindings. What's missing from them (I assume we're mostly talking
-> > > > about "fixed-partitions" which has been around forever I think (bef=
-ore
-> > > > me))?
-> > > >
-> > > > To repeat, unless there is some reason binman partitions conflict w=
-ith
-> > > > fixed-partitions, you need to start there and extend it. From what'=
-s
-> > > > posted here, it neither conflicts nor needs extending.
+> > > > I think at this point I am just hopelessly confused. Have you taken=
+ a
+> > > > look at the binman schema? [1]
 > > >
-> > > I think at this point I am just hopelessly confused. Have you taken a
-> > > look at the binman schema? [1]
+> > > Why do I need to? That's used for some tool and has nothing to do wit=
+h a
+> > > device's DTB. However, I thought somewhere in this discussion you sho=
+wed
+> > > it under a flash device node.
 > >
-> > Why do I need to? That's used for some tool and has nothing to do with =
-a
-> > device's DTB. However, I thought somewhere in this discussion you showe=
-d
-> > it under a flash device node.
+> > Yes, that is the intent (under a flash node).
+> >
+> > > Then I care because then it overlaps with
+> > > what we already have for partitions. If I misunderstood that, then ju=
+st
+> > > put your schema with your tool. Only users of the tool should care ab=
+out
+> > > the tool's schema.
+> >
+> > OK. I believe that binman will fit into both camps, since its input is
+> > not necessarily fully formed. E.g. if you don't specify the offset of
+> > an entry, then it will be packed automatically. But the output is
+> > fully formed, in that Binman now knows the offset so can write it to
+> > the DT.
 >
-> Yes, that is the intent (under a flash node).
+> I suppose it could take its own format as input and then write out
+> something different for the "on the device" format (i.e.
+> fixed-partitions). At least for the dynamic offsets, we may need
+> something allowed for binman input, but not allowed on device. In
+> general, there is support for partitions without addresses/offsets,
+> but only for partitions that have some other way to figure that out
+> (on disk partition info).
 >
-> > Then I care because then it overlaps with
-> > what we already have for partitions. If I misunderstood that, then just
-> > put your schema with your tool. Only users of the tool should care abou=
-t
-> > the tool's schema.
+> There's also the image filename which doesn't really belong in the on
+> device partitions. So maybe the input and output schemas should be
+> separate.
+
+OK, I'll focus on the output schema for now. I suspect this will be a
+grey area though.
+
+As an example, if you replace a binary in the firmware, Binman can
+repack the firmware to make room, respecting the alignment and size
+constraints. So these need to be in the output schema somehow.
+
 >
-> OK. I believe that binman will fit into both camps, since its input is
-> not necessarily fully formed. E.g. if you don't specify the offset of
-> an entry, then it will be packed automatically. But the output is
-> fully formed, in that Binman now knows the offset so can write it to
-> the DT.
-
-I suppose it could take its own format as input and then write out
-something different for the "on the device" format (i.e.
-fixed-partitions). At least for the dynamic offsets, we may need
-something allowed for binman input, but not allowed on device. In
-general, there is support for partitions without addresses/offsets,
-but only for partitions that have some other way to figure that out
-(on disk partition info).
-
-There's also the image filename which doesn't really belong in the on
-device partitions. So maybe the input and output schemas should be
-separate.
-
-> > > I saw this file, which seems to extend a partition.
+> > > > I saw this file, which seems to extend a partition.
+> > > >
+> > > > Documentation/devicetree/bindings/mtd/partitions/brcm,bcm4908-parti=
+tions.yaml
 > > >
-> > > Documentation/devicetree/bindings/mtd/partitions/brcm,bcm4908-partiti=
-ons.yaml
+> > > IIRC, that's a different type where partition locations are stored in
+> > > the flash, so we don't need location and size in DT.
 > >
-> > IIRC, that's a different type where partition locations are stored in
-> > the flash, so we don't need location and size in DT.
->
-> OK.
->
+> > OK.
 > >
 > > >
-> > > I was assuming that I should create a top-level compatible =3D "binma=
-n"
-> > > node, with subnodes like compatible =3D "binman,bl31-atf", for exampl=
-e.
-> > > I should use the compatible string to indicate the contents, right?
+> > > >
+> > > > I was assuming that I should create a top-level compatible =3D "bin=
+man"
+> > > > node, with subnodes like compatible =3D "binman,bl31-atf", for exam=
+ple.
+> > > > I should use the compatible string to indicate the contents, right?
+> > >
+> > > Yes for subnodes, and we already have some somewhat standard ones for
+> > > "u-boot" and "u-boot-env". Though historically, "label" was used.
 > >
-> > Yes for subnodes, and we already have some somewhat standard ones for
-> > "u-boot" and "u-boot-env". Though historically, "label" was used.
+> > Binman has common properties for all entries, including "compress"
+> > which sets the compression algorithm.
 >
-> Binman has common properties for all entries, including "compress"
-> which sets the compression algorithm.
+> I see no issue with adding that. It seems useful and something missing
+> in the existing partition schemas.
 
-I see no issue with adding that. It seems useful and something missing
-in the existing partition schemas.
+OK I sent a patch with that.
 
-> So perhaps I should start by defining a new binman,bl31-atf which has
-> common properties from an "binman,entry" definition?
+>
+> > So perhaps I should start by defining a new binman,bl31-atf which has
+> > common properties from an "binman,entry" definition?
+>
+> I don't understand the binman prefix. The contents are ATF (or TF-A
+> now). Who wrote it to the flash image is not relevant.
 
-I don't understand the binman prefix. The contents are ATF (or TF-A
-now). Who wrote it to the flash image is not relevant.
+Are you suggesting just "atf-bl31", or "arm,atf-bl31" ? Or should we
+change it to "tfa-bl31"?
 
-We already have some compatibles in use. We should reuse them if
-possible. Not sure about TF-A though.
+>
+> We already have some compatibles in use. We should reuse them if
+> possible. Not sure about TF-A though.
 
-Rob
+OK.
+
+Regards,
+Simon
