@@ -4,74 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E411CD4850
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 18:45:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC8E6CD4854
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 19:28:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D876B8654D;
-	Fri, 22 Sep 2023 20:45:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 97A3F86529;
+	Fri, 22 Sep 2023 21:28:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pxDFb4XS";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mad0xZhM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57FD286898; Fri, 22 Sep 2023 20:45:06 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 216A08640F; Fri, 22 Sep 2023 21:28:56 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA74D86538
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 20:45:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38B948652A
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 21:28:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38MIipnj119422;
- Fri, 22 Sep 2023 13:44:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695408291;
- bh=ywrplvSHsjzz4K9+BCzo7gTegrB+5Igk5HC1nHajQbI=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pxDFb4XSJBfFrwdIbt4exYxli59iBy0u8Cbd4886FbJRBCjbmVUM5X6ICx6NVx1bS
- mtx9ir8jyTM9cUvroby9RS8TMTd892fU9xd7Zr8srUXYx+A9aLDDfPT0NEzvrq2SLO
- 2bxLw9FLCcqirH9u0E0pVkAApHJqGKNzGnLok8UY=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38MIiprE129823
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 22 Sep 2023 13:44:51 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 22
- Sep 2023 13:44:51 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 22 Sep 2023 13:44:51 -0500
-Received: from [10.250.38.120] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38MIioAv045274;
- Fri, 22 Sep 2023 13:44:50 -0500
-Message-ID: <a5d0e5dd-f907-09f9-474d-39b361479042@ti.com>
-Date: Fri, 22 Sep 2023 13:44:50 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [Question] TI's u-boot.img is built twice
-Content-Language: en-US
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d8195078f69so2983196276.3
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:28:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695410931; x=1696015731; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RPNh5IKk4OV6xyudUNWgx3IHTWOJZ7VlXRYF5y1pJMQ=;
+ b=mad0xZhMqz8phErDIlO828Auslq0+Bsk1FXKvqyJq1itXTcf6/IexTW6QulQTR1r4K
+ j2BRz8E97QAu28Lg2w2a6mw20WH4hNg9Hs27/2VGw1MnYxg7o8rgKk7y4XcXR/tHdG2p
+ j+6Ot5rhgVIeRgppGc30ycdQOGFj5XUr3WACA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695410931; x=1696015731;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RPNh5IKk4OV6xyudUNWgx3IHTWOJZ7VlXRYF5y1pJMQ=;
+ b=pvpXVr4zYM7D5sF9kbwtqDdaAYPRCL7dYBWWCit1zqErnxy0SnIlb1IRt02Fkrkr65
+ xpCvlwpLRRHaOaQy2qf6OvOVBPgQoa0N+p1Z3qj+4+ZtI11Iefj7S41AKVDB1Irkwwjs
+ JK9YEMUt5Rhx8yQzbJNINmxm/MVI/B6KG8er076t6/GQb01VM2EgySTNooew3RLwGgXQ
+ XJTpWEIytfsNRgAVq4un+1w57Xi6ttyPQ24rLwa6NYRz+Lc0bIvFkemgoJfbIfxxDO8r
+ uu8iz8oBTo9WeIgYYvnGfdvAImO5m4DmtZp/Hq8a/NX/1twkEmNeAj72BJYcDIf91NUd
+ iFtQ==
+X-Gm-Message-State: AOJu0YzJiEBsYeARLZycOpSxdaaRdEAMZ+2fclM3dS6A0TWuUJ0yLHm8
+ FRy35MbmSpz/Oo9suhNgfVq15w==
+X-Google-Smtp-Source: AGHT+IHbp2zhdi6knTx8GW60pXZqoq/nRTR4h1HghD+iAKmXzridPhGJ2Q5GQtAJIoBlHm5SOTYZgA==
+X-Received: by 2002:a25:38f:0:b0:d81:89e9:9f48 with SMTP id
+ 137-20020a25038f000000b00d8189e99f48mr230371ybd.63.1695410930751; 
+ Fri, 22 Sep 2023 12:28:50 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-b22c-a20b-ddfe-6409.res6.spectrum.com.
+ [2603:6081:7b00:6400:b22c:a20b:ddfe:6409])
+ by smtp.gmail.com with ESMTPSA id
+ e141-20020a25e793000000b00d77928cdcf6sm990332ybh.15.2023.09.22.12.28.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Sep 2023 12:28:49 -0700 (PDT)
+Date: Fri, 22 Sep 2023 15:28:47 -0400
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-CC: Masahiro Yamada <masahiroy@kernel.org>, U-Boot Mailing List
- <u-boot@lists.denx.de>,
- Nishanth Menon <nm@ti.com>, <srk@ti.com>, <n-francis@ti.com>,
- <s-vadapalli@ti.com>, <m-chawdhry@ti.com>
-References: <CAK7LNASYfwjuCQ70BZ5Gco+rme=H_fArxyT5rFsE334p2viSoA@mail.gmail.com>
- <CAPnjgZ2W_2d-xhdKPbatR4L3BjE08ZEH4SdBSi6YVDWqs7Swmw@mail.gmail.com>
- <41a5e281-9dcd-9720-380a-ea59566d7dc1@ti.com>
- <CAPnjgZ34hW-61MNEORQU8xofBaoBu_piau4rKd2hdTJgFbSZnA@mail.gmail.com>
- <eaf56065-9f9e-70b4-e901-3e6dc2934cd1@ti.com>
- <CAPnjgZ1vkKq5yc7mq44nN063miJWx0JKztaXLMwFuUbJLtvEEA@mail.gmail.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <CAPnjgZ1vkKq5yc7mq44nN063miJWx0JKztaXLMwFuUbJLtvEEA@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Bin Meng <bmeng@tinylab.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH 09/32] spl: Avoid an #ifdef when printing gd->malloc_ptr
+Message-ID: <20230922192847.GD305624@bill-the-cat>
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-10-sjg@chromium.org>
+ <20230830213916.GL3101304@bill-the-cat>
+ <CAPnjgZ165AgX0VTWWbHTiEfwP_R5qdwcUQKWoJ7x3G0PYHT3aw@mail.gmail.com>
+ <20230921153557.GR305624@bill-the-cat>
+ <CAPnjgZ0ZqySaVa6LKWz7p7h8gjH1yTsLtds_8hF+DEXQGC459g@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="G2JIrR3shCq0JPw9"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ0ZqySaVa6LKWz7p7h8gjH1yTsLtds_8hF+DEXQGC459g@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,156 +100,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/22/23 1:29 PM, Simon Glass wrote:
-> Hi Andrew,
-> 
-> On Fri, 22 Sept 2023 at 12:14, Andrew Davis <afd@ti.com> wrote:
->>
->> On 9/22/23 11:40 AM, Simon Glass wrote:
->>> Hi Andrew,
->>>
->>> On Fri, 22 Sept 2023 at 10:35, Andrew Davis <afd@ti.com> wrote:
->>>>
->>>> On 9/22/23 10:01 AM, Simon Glass wrote:
->>>>> Hi Masahiro,
->>>>>
->>>>> On Thu, 21 Sept 2023 at 09:36, Masahiro Yamada <masahiroy@kernel.org> wrote:
->>>>>>
->>>>>> Hi.
->>>>>>
->>>>>> Since the TI platform migrated to binman,
->>>>>> u-boot.img is built twice.
->>>>>>
->>>>>> It is created by "mkimage -E",
->>>>>> then overwritten by binman.
->>>>>>
->>>>>>
->>>>>> So, the data are embedded in the FIT structure
->>>>>> instead of being appended.
->>>>>>
->>>>>> Is this intentional?
->>>>>>
->>>>>> To me, it looks weird.
->>>>>>
->>>>>>
->>>>>>
->>>>>>
->>>>>> To confirm it, apply the following hack.
->>>>>>
->>>>>> Since u-boot.img is overwritten by binman,
->>>>>> copy it to u-boot.img.backup.
->>>>>>
->>>>>>
->>>>>>
->>>>>>
->>>>>> diff --git a/Makefile b/Makefile
->>>>>> index 87f9fc786e..4cffa8a061 100644
->>>>>> --- a/Makefile
->>>>>> +++ b/Makefile
->>>>>> @@ -1112,6 +1112,7 @@ endef
->>>>>>     # Timestamp file to make sure that binman always runs
->>>>>>     .binman_stamp: $(INPUTS-y) FORCE
->>>>>>     ifeq ($(CONFIG_BINMAN),y)
->>>>>> +       cp u-boot.img u-boot.img.backup
->>>>>>            $(call if_changed,binman)
->>>>>>     endif
->>>>>>            @touch $@
->>>>>>
->>>>>>
->>>>>>
->>>>>> Then, build it for the main core.
->>>>>>
->>>>>>
->>>>>> make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu-
->>>>>>       am64x_evm_a53_defconfig all
->>>>>>       TEE=~/ref/OP-TEE/optee_os/out/arm-plat-k3/core/tee-raw.bin
->>>>>>       BL31=~/ref/trusted-firmware-a/build/k3/lite/release/bl31.bin
->>>>>>       BINMAN_INDIRS=~/ref/ti-linux-firmware
->>>>>>
->>>>>>
->>>>>>
->>>>>>
->>>>>> Compare the two files.
->>>>>> Run fdtdump to see what happened to them.
->>>>>>
->>>>>>
->>>>>> $ diff -u u-boot.img  u-boot.img.backup
->>>>>> Binary files u-boot.img and u-boot.img.backup differ
->>>>>>
->>>>>>
->>>>>> $ fdtdump u-boot.img
->>>>>>        => u-boot and dt are embedded.
->>>>>>
->>>>>> $ fdtdump u-boot.img.backup
->>>>>>        => u-boot and dt are appended after the
->>>>>>           FIT structure
->>>>>
->>>>> That seems like a bug to me...at some point we might consider building
->>>>> u-boot.img with Binman, but for now it is built by the Makefile.
->>>>>
->>>>
->>>> This is not true for K3 as we now use Binman for u-boot.img generation
->>>> (we need this as we have a signing step injected at this point).
->>>
->>> No, no.
->>>
->>> You must not mess with the outputs of Makefile - create a new file
->>> with what you need, e.g. u-boot-ti.img
->>>
->>> While we could use Binman to produce the .img we are quite a way from
->>> doing that as not that many boards have been converted to binman.
->>>
->>
->> Too late, we already use Binman to generate u-boot.img on K3, why
->> would we want to go back to using Makefile?
-> 
-> I don't mean that, I mean give it another name. The u-boot.img file is
-> intended to be a certain format, and it seems this is being changed.
-> 
 
-Well we need u-boot.img, and it needs to be called that, and
-it needs to be the one generated by Binman (the one generated by
-Makefile can only boot on GP devices, but not HS-SE).
+--G2JIrR3shCq0JPw9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The format produced by Makefile and Binman will be identical after
-we fix Binman to put the data at the end. At which point why not
-drop the Makefile made one?
+On Fri, Sep 22, 2023 at 12:27:36PM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 21 Sept 2023 at 09:36, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Wed, Sep 20, 2023 at 07:03:34PM -0600, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Wed, 30 Aug 2023 at 15:39, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Wed, Aug 30, 2023 at 12:04:40PM -0600, Simon Glass wrote:
+> > > > > Use an accessor in the header file to avoid this.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > >  common/spl/spl.c                  | 9 +++++----
+> > > > >  include/asm-generic/global_data.h | 7 +++++++
+> > > > >  2 files changed, 12 insertions(+), 4 deletions(-)
+> > > > >
+> > > > > diff --git a/common/spl/spl.c b/common/spl/spl.c
+> > > > > index f0a90c280da..f5cef81000c 100644
+> > > > > --- a/common/spl/spl.c
+> > > > > +++ b/common/spl/spl.c
+> > > > > @@ -876,10 +876,11 @@ void board_init_r(gd_t *dummy1, ulong dummy=
+2)
+> > > > >       } else {
+> > > > >               debug("Unsupported OS image.. Jumping nevertheless.=
+=2E\n");
+> > > > >       }
+> > > > > -#if CONFIG_VAL(SYS_MALLOC_F_LEN) && !defined(CONFIG_SPL_SYS_MALL=
+OC_SIZE)
+> > > > > -     debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->mallo=
+c_ptr,
+> > > > > -           gd->malloc_ptr / 1024);
+> > > > > -#endif
+> > > > > +     if (IS_ENABLED(CONFIG_SYS_MALLOC_F) &&
+> > > > > +         !IS_ENABLED(CONFIG_SPL_SYS_MALLOC_SIZE))
+> > > > > +             debug("SPL malloc() used 0x%lx bytes (%ld KB)\n",
+> > > > > +                   gd_malloc_ptr(), gd_malloc_ptr() / 1024);
+> >
+> > This is not more readable.  But I guess my comment was unclear as you're
+> > mixing changes here.  gd_malloc_ptr() rather than gd->malloc_ptr is a
+> > wash, to me.  I think one could argue it's not a helpful abstraction.
+> > but it's so that you can avoid CONFIG_VAL here, and say "if (...)" not
+> > "#if ..." here.
+>=20
+> Yes,
+>=20
+> >
+> > > > > +
+> > > > >       bootstage_mark_name(get_bootstage_id(false), "end phase");
+> > > > >  #ifdef CONFIG_BOOTSTAGE_STASH
+> > > > >       ret =3D bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+> > > > > diff --git a/include/asm-generic/global_data.h b/include/asm-gene=
+ric/global_data.h
+> > > > > index 8fc205ded1a..edf9ff6823f 100644
+> > > > > --- a/include/asm-generic/global_data.h
+> > > > > +++ b/include/asm-generic/global_data.h
+> > > > > @@ -573,6 +573,13 @@ static_assert(sizeof(struct global_data) =3D=
+=3D GD_SIZE);
+> > > > >  #define gd_malloc_start()    0
+> > > > >  #define gd_set_malloc_start(val)
+> > > > >  #endif
+> > > > > +
+> > > > > +#if CONFIG_VAL(SYS_MALLOC_F_LEN)
+> > > > > +#define gd_malloc_ptr()              gd->malloc_ptr
+> > > > > +#else
+> > > > > +#define gd_malloc_ptr()              0L
+> > > > > +#endif
+> > > > > +
+> > > > >  /**
+> > > > >   * enum gd_flags - global data flags
+> > > > >   *
+> > > >
+> > > > This is another case where readability is not improved. I also have=
+ a
+> > > > bad feeling that changing that exact area had some unintended
+> > > > consequences from the compiler, that totally should not have happen=
+ed.
+> > > > But maybe that was something in a similar code section instead.
+> > >
+> > > The improvement is in the C file...here we have an accessor in the
+> > > header file as has been done elsewhere.
+> > >
+> > > Do you have any more details on the problem you mention? I will align
+> > > the accessor to the struct member which should resolve it.
+> >
+> > It's unfortunately one of those cases to do a global before/after build
+> > and see if anything does or does not get tripped up.  As I believe I did
+> > use CONFIG_VAL there and not a check on CONFIG_SYS_MALLOC_F itself for a
+> > reason, at the time.
+>=20
+> But the CONFIG_VAL symbols actually depends on CONFIG_SYS_MALLOC_F, so
+> I can't imagine what it might be. Of course if the value is 0, then
+> the 'if CONFIG_VAL()' test would fail, but to what purpose?
 
-Andrew
+Yes, there's been a time or two where I banged my head against the
+figurative wall trying to understand what exactly the compiler could be
+seeing as why to change something.  I don't have a "reasonable"
+explanation.  Readability aside, "tidy things up" changes need to be on
+their own so that their impact can be seen aside from the new
+functionality changes.
 
-> Really, this is a problem with binman, as it should have refused to
-> creating u-boot.img...?
-> 
->>
->> Let's go with what you suggest below and add a Kconfig that can
->> be used for boards that have already switched to binman that disables
->> the Makefile generator for u-boot.img.
->>
->> Once all boards have switched to Binman, then we could refactor
->> the implementations into something more common.
-> 
-> That seems OK to me.
-> 
-> Regards,
-> Simon
-> 
->>
->> Andrew
->>
->>>>
->>>> So as Masahiro suggested in the other branch of this thread, we need
->>>> to disable the Makefile generation of u-boot.img for K3.
->>>>
->>>> Neha,
->>>>
->>>> Can you take this action? I assume you can add it as part of your
->>>> work in making the data external again, which would make the u-boot.img
->>>> identical to before and hence Makefile version could be disabled at
->>>> the same time/series.
->>>
->>> If you are suggesting that we slowly migrate boards away from
->>> generating the .img using Makefile...perhaps that makes sense? I'm not
->>> really sure. But in that case we need another Kconfig option.
->>>
->>> Regards,
->>> Simon
+--=20
+Tom
+
+--G2JIrR3shCq0JPw9
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUN6ukACgkQFHw5/5Y0
+tyzkFgv/Q8TWEUjm0X54PszpS130jFflH6SoZ0TbVZD7biKPHjEx6mM1rBLKPual
+7cl0dQw3003cR4keIqUGkaOiCvwoEEXIIHUl97Dk6irzyZA4+eo/HPbLs9hcxGz2
+XqbhdrCFOKNL0cXyuR8bb4DWI6XkG+/4MXHQdDMA/i0at/2KJgLtGqgYAoJesc7f
+zJ0zt52UxFe/C/AS7dr+rydTTFVZAtUwsFNn8fsGtrImZ6MqHiWuYAF0MOZ+k7Z5
+zedg2Nu2Tbpf3Q04m3H7ic/pULeymrij50b4ZpHxvVUkzF1hFn6IkQV4M1lGgMpv
+pRAej0SOOL2Q7h88ktwdAayU79TLxsowqiZKZK8z2S1BLyasDQaUeJDCdggu3Hoy
+6WhCKWvDUPY5hkkQXsPqIuGvfs77WSecQCAis5sZHLtib6+9L2LTyVqBL3LkADR/
+yvFQEjzzOvjMkI9BZG8KImdRVSWT0pn1Jbuy5n4w7YdrYBwGPEPZqn9uh+Mn8t76
+ATsrzY+V
+=85q5
+-----END PGP SIGNATURE-----
+
+--G2JIrR3shCq0JPw9--
