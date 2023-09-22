@@ -4,87 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E937E6FE2F
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 13:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9200CE6FE41
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 15:01:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C47CF8667B;
-	Fri, 22 Sep 2023 15:57:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 851D886199;
+	Fri, 22 Sep 2023 17:01:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mZjGEW3W";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nsZ32EU/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7C0C86680; Fri, 22 Sep 2023 15:57:01 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 2AC50863DD; Fri, 22 Sep 2023 17:01:32 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AFCF86484
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 15:56:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AF3A84003
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 17:01:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alpernebiyasak@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-403012f27e3so23158355e9.3
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 06:56:59 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-53087f0e18bso2661620a12.3
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 08:01:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695391019; x=1695995819; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=uYmcQp7vI7x84q3XTY7R5Vsp8JpMVN4Mce8y4Mffa3s=;
- b=mZjGEW3WhJWateHDPx++4uso+R/vls3bkA4QVVsJCG1Q5K1LOyh1f20DJQp5Nuts3z
- sLa11p+7OEupmO0bSgB7jRRHUpITwz7alqRYQKu/y20VJd33bqS9WpXHps3W7L6t86Wm
- P9Gnq+vn+9y0yvJpZeJzgKHV7QlADO9kCkki0zoxnHPXrhb7KgR7RCyeGoAY/i1RjqBA
- iJtnd9q+Cyw4E+ed3VCAALmUbmKs8F0gkM8gE1n9o+HEwwy0Bu/jRhgiZAubzDc39ISa
- YcEm5kJhaxXdkcaqCpgYv5sGNiu9VX2MHpaUQ56b9Y8y2oh01vK4SqsX4S6yUAY3pwt5
- f/7Q==
+ d=chromium.org; s=google; t=1695394890; x=1695999690; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IKxzTBMpkJJiYgpwuxDwSPQzGnwAUeiT7sMXOjni010=;
+ b=nsZ32EU/avXL/bnhZnh4DZA6E8yqf3EiMyeuNBi8Al6E1w2o7nQlhCTMADrioV5Uyd
+ K1wlTzvOIRdf+Xdu6XjXzrtzxvg3O1cVT5V7xVzRkTmS5BWBISXIED3psJ58Klc1eNLP
+ rx0XFRJHHZBfavNjJ0SvtB3WVIkKp0cqpSsfA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695391019; x=1695995819;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uYmcQp7vI7x84q3XTY7R5Vsp8JpMVN4Mce8y4Mffa3s=;
- b=v9u9iMhfzeCGO+9NL8LYdhffqQEnXWO3SHPTO6FlXUp8mw7b9gxpMtxM/NKhnxMIsj
- aNUIYTOe/HbY4mzKw1lDAw0kvzWdiqN9IAw+8jKSjIlh0SqTgLHopXahFNdefZ9KRkHh
- StQtsx1p9n2G2yHY1CZlt/Baca3hObAa6asVWmK9S1anAoDPSXM52T291smCZUqUbC5S
- qgRr04p/7Q/MPuaT7TQ5Tq6BKhuumyUtKG/sfAcSKqi3S7K9g/MyMVV9eiOAZZ2gi+E9
- xdGk1MzMw0giCvHGmKUrp27qhfNgVI9NWNrYNLZhafnIjHEbk2FHzfHGp4zhtvexRt1X
- yNqg==
-X-Gm-Message-State: AOJu0YxIVaEv0A+XAFMzPgrp4NQkZC4gfXCroM/OOyFu95MAFqjFlZ6C
- fRbriHHv4cAa/I3fyC4tXSI=
-X-Google-Smtp-Source: AGHT+IHETahtZVL/bYzSY6bMwgQV/TMYomewYLE+hdM2b2wIWq+JY9YvTsNAagOx7mEnUcaGH/8z7w==
-X-Received: by 2002:a05:600c:2304:b0:402:8896:bb7b with SMTP id
- 4-20020a05600c230400b004028896bb7bmr7939578wmo.6.1695391018517; 
- Fri, 22 Sep 2023 06:56:58 -0700 (PDT)
-Received: from [192.168.0.84] ([178.233.24.52])
- by smtp.gmail.com with ESMTPSA id
- b12-20020adff90c000000b0031fb91f23e9sm4498772wrr.43.2023.09.22.06.56.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Sep 2023 06:56:57 -0700 (PDT)
-Message-ID: <e045afaa-bc38-4fed-966e-a034e106c86c@gmail.com>
-Date: Fri, 22 Sep 2023 16:56:55 +0300
+ d=1e100.net; s=20230601; t=1695394890; x=1695999690;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IKxzTBMpkJJiYgpwuxDwSPQzGnwAUeiT7sMXOjni010=;
+ b=pGZV/x5YQaUIigQMSAMD9dxvVMa+QXc6WPXTvVSzumA+mOnB433uMfLDn3qDscdXRb
+ NOpY0Hnw7/9YLYk27biLB7waB0gUhYm2mhKE4V8iC8DUgeO4G2ISLU7w6rkwsEALrX+n
+ O3pSKA4Vw7unk8lnjtcT/Hu/q1vdNPiedq5Ik7psk0UwF6ZLYSKU2bJ/EFniV+1lK182
+ 8erK5TBMQzPDPla6ckCdkZt8xMewfbUpo8YA33vsNcDALOSswRQOTsowOupNHGg661zy
+ spChq/1fTvNu1Fvvnww52kX7zOOV3eg2HTkfHFl/srYGxNFgwHXWwzafyTEJyv7uQxMF
+ auGw==
+X-Gm-Message-State: AOJu0YwvHrk74qLMQ4HoQfztQYjrP94EAbTnjPzXFY4GcpfK+28HVY2w
+ FqtlnokreRQTfsPS61uHwhwTMAcJkMSg+/YxTF7hng==
+X-Google-Smtp-Source: AGHT+IHqmYjd/dCy3ZSKOvDgLL1VPdgGkAf9zLGoDLKfeb3Mv1ImZMuP9aN/pEsxpQYP2hvU9GznJtdx8OZ8tOOp52I=
+X-Received: by 2002:a05:6402:22eb:b0:533:6ef4:9f5b with SMTP id
+ dn11-20020a05640222eb00b005336ef49f5bmr1801839edb.6.1695394889631; Fri, 22
+ Sep 2023 08:01:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-Content-Language: en-US, tr, en-GB
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>,
- Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Dhruva Gole <d-gole@ti.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?=
- <rafal@milecki.pl>, Richard Weinberger <richard@nod.at>,
- Rob Herring <robh+dt@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
-From: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-In-Reply-To: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <CAK7LNASYfwjuCQ70BZ5Gco+rme=H_fArxyT5rFsE334p2viSoA@mail.gmail.com>
+In-Reply-To: <CAK7LNASYfwjuCQ70BZ5Gco+rme=H_fArxyT5rFsE334p2viSoA@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 22 Sep 2023 09:01:18 -0600
+Message-ID: <CAPnjgZ2W_2d-xhdKPbatR4L3BjE08ZEH4SdBSi6YVDWqs7Swmw@mail.gmail.com>
+Subject: Re: [Question] TI's u-boot.img is built twice
+To: Masahiro Yamada <masahiroy@kernel.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>,
+ srk@ti.com, n-francis@ti.com, s-vadapalli@ti.com, m-chawdhry@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,31 +81,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-09-21 21:45 +03:00, Simon Glass wrote:
-> Binman[1] is a tool for creating firmware images. It allows you to
-> combine various binaries and place them in an output file.
-> 
-> Binman uses a DT schema to describe an image, in enough detail that
-> it can be automatically built from component parts, disassembled,
-> replaced, listed, etc.
-> 
-> Images are typically stored in flash, which is why this binding is
-> targeted at mtd. Previous discussion is at [2] [3].
-> 
-> [1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
-> [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.org/
-> [3] https://www.spinics.net/lists/devicetree/msg626149.html
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  .../bindings/mtd/partitions/binman.yaml       | 50 +++++++++++++++
->  .../bindings/mtd/partitions/binman/entry.yaml | 61 +++++++++++++++++++
->  .../bindings/mtd/partitions/partitions.yaml   |  1 +
->  MAINTAINERS                                   |  5 ++
->  4 files changed, 117 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
->  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+Hi Masahiro,
 
-This doesn't match the schema in [2], but seems more like v1 of that. Is
-that intentional?
+On Thu, 21 Sept 2023 at 09:36, Masahiro Yamada <masahiroy@kernel.org> wrote:
+>
+> Hi.
+>
+> Since the TI platform migrated to binman,
+> u-boot.img is built twice.
+>
+> It is created by "mkimage -E",
+> then overwritten by binman.
+>
+>
+> So, the data are embedded in the FIT structure
+> instead of being appended.
+>
+> Is this intentional?
+>
+> To me, it looks weird.
+>
+>
+>
+>
+> To confirm it, apply the following hack.
+>
+> Since u-boot.img is overwritten by binman,
+> copy it to u-boot.img.backup.
+>
+>
+>
+>
+> diff --git a/Makefile b/Makefile
+> index 87f9fc786e..4cffa8a061 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1112,6 +1112,7 @@ endef
+>  # Timestamp file to make sure that binman always runs
+>  .binman_stamp: $(INPUTS-y) FORCE
+>  ifeq ($(CONFIG_BINMAN),y)
+> +       cp u-boot.img u-boot.img.backup
+>         $(call if_changed,binman)
+>  endif
+>         @touch $@
+>
+>
+>
+> Then, build it for the main core.
+>
+>
+> make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu-
+>    am64x_evm_a53_defconfig all
+>    TEE=~/ref/OP-TEE/optee_os/out/arm-plat-k3/core/tee-raw.bin
+>    BL31=~/ref/trusted-firmware-a/build/k3/lite/release/bl31.bin
+>    BINMAN_INDIRS=~/ref/ti-linux-firmware
+>
+>
+>
+>
+> Compare the two files.
+> Run fdtdump to see what happened to them.
+>
+>
+> $ diff -u u-boot.img  u-boot.img.backup
+> Binary files u-boot.img and u-boot.img.backup differ
+>
+>
+> $ fdtdump u-boot.img
+>     => u-boot and dt are embedded.
+>
+> $ fdtdump u-boot.img.backup
+>     => u-boot and dt are appended after the
+>        FIT structure
+
+That seems like a bug to me...at some point we might consider building
+u-boot.img with Binman, but for now it is built by the Makefile.
+
+>
+>
+>
+> --
+> Best Regards
+> Masahiro Yamada
+
+Regards,
+Simon
