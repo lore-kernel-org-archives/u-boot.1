@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6262FE7D0D6
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 07:12:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56056E7D0D2
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 07:13:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3ABD286925;
-	Fri, 22 Sep 2023 09:12:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8EB2786A1D;
+	Fri, 22 Sep 2023 09:12:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZkhDLqMc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gzPIKPHo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9DE886290; Fri, 22 Sep 2023 09:12:25 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 8537A86ADC; Fri, 22 Sep 2023 09:12:33 +0200 (CEST)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A124886996
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:12:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DB7286ACF
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:12:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-690bccb0d8aso1462480b3a.0
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:12:23 -0700 (PDT)
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-573e67cc6eeso1391922a12.2
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:12:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695366742; x=1695971542; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1695366748; x=1695971548; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oaMDGqRnc0d/jvmwKTYWFSifA73Ii6B1GLrcLxcteYI=;
- b=ZkhDLqMcK4w9S1BiGKge44xVGqpnWODV/tmEQ9WaWUpid7rvA8UW/kiABpxZ3CTviT
- fInoQU9EW3SafTALO6/MjaeqzP0Es8do2DC8bsN763bUqk8DzlxhXpopqmzPTP3mtXkM
- YytdFPPTUFzhMGWpXnSYcGf6iLPGHAG0RUSL4TsyrYv63CObtm1TMl1ZOqDlo9QNBgAe
- aanDueUwJ94PM1ghDWccuSm6yod7grhtQbUEWa59UQRjFjhJM9t+9GOrn8c0RZnCMc2F
- I8WT3OYhuHOucegbmJEPLxdo1GbXxnssXkHTV8nq8bqiSFKHYQ2lZ6pS/HQxbK9x3cuX
- rMTA==
+ bh=sP7LVMmuM4MkWBCRUtJbDwtwgSyY4fsCDLvm6USUOR0=;
+ b=gzPIKPHox/0Ap2GqWKcdQHPxe+W59gg1XB9RFtjY3Co7DKZfKmU9gKpJHt2z8MWUng
+ mJhlhWUaacEeIh+sJEkDWO8xk54KkMP0LxW895spGNz+xLhOdWuRmNJyApqDlSqKNBjY
+ k1uM+K3WPnHyREKO5Ht537dwWzj0PcDt6xVG3gYUzukIPdOVYvKNu8pgBVlrfi3GbS2b
+ t0bRgQz4f7ypUzWqoOfej4VpOLYqSxkQDd/vy2eKuL6wn9x1BA3FU1zAJz1xJIlIfeXq
+ 0vUFQ0q78FdF53ekt4FFzJHxF9T/8xn0In1+f0MmUvC5gDsCro7JbGw8Gsq9gUPCVxr6
+ f2uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695366742; x=1695971542;
+ d=1e100.net; s=20230601; t=1695366748; x=1695971548;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oaMDGqRnc0d/jvmwKTYWFSifA73Ii6B1GLrcLxcteYI=;
- b=PHHy8KV7eHprYy0VE4bvPY4LlhSjRhHeRqOFhTWTnPH6grICvpX4Y/LvVsbvtpCGSt
- WUYeNpodYFsrKL3imUGxEx4YZG8EwLCI9Hdk47t3WVwt8uKrghW64kPKAetJSQHh6aRq
- NhKsRzcaVgUEHfWkgF45JAmQVU1viInTqjItAvopEiQZvELHRZkdTFg/xGAVwWl7zUEQ
- qVTt1GkB75EiB3gPruPRALVjrjTK3bzlfr3HEDKR2VQDA+0J+UHxsZzIYxZHgbOW3Pwo
- Jqk/cTkzb+KFGR9qOhrChx+b7Cv9pfVMVc8jyh9qAhha+SZ20eUXU1ocX94iRH45t3uY
- os3Q==
-X-Gm-Message-State: AOJu0YzvtzFT3WlaXU9LpbvQnGDr0FwIAPdL7lpceAdeUOFoVuJeEGnv
- qpU06wWPnr7douPDQUhE2E0YqOaU4k4gy+mh1x4=
-X-Google-Smtp-Source: AGHT+IFQVHlqeoMGesZwNuuHhERYH72UvVugJ2c2iqMzgGD0Rn65/+h0nyz0joGplfnu3jdjVvqMQg==
-X-Received: by 2002:a05:6a20:1585:b0:13e:9dba:ea52 with SMTP id
- h5-20020a056a20158500b0013e9dbaea52mr9141686pzj.13.1695366741750; 
- Fri, 22 Sep 2023 00:12:21 -0700 (PDT)
+ bh=sP7LVMmuM4MkWBCRUtJbDwtwgSyY4fsCDLvm6USUOR0=;
+ b=crfGE7Lxy1S6sK7sN/ossifTviYI9Q1vN+D4SX4Lq5KrXpba18+HIkCBMjTpq/TROR
+ o+VPFfTQ7/1amdjIDqcpOTQNKZdFBybn9EtokgAfhEXeU6NhUjiahgGGVCRSUz3otkYL
+ 9DXFDsJPV3a2iLAqPoMse7uLKuhNhHkLyube693e7WVPZHv3kClnDkbFA7ExEfzCTV3U
+ x5MApKTELuycFHLA+H6LjYRAirWBf8vA1BUnmKcVku8w2qmC6foQYu4o1A9DJsWt+HnG
+ /Q/yOL9dpxZ6zyTdiG07SPAIbD5Hijn5a3YbR12aUw18U970x237fbQn2jawtjYOx6lA
+ dc9w==
+X-Gm-Message-State: AOJu0Yybs1jHNXP/Ax5nbQ/9wZyqF5wfsZTGCQuEhno75GWy3S4tpr2K
+ +s+TjxBfTegecm72yiLQSOAL2+kXYrTiEZlvg2U=
+X-Google-Smtp-Source: AGHT+IHL+Zo5aSlS7++fadF4sIGCQRnkjPpjGpYMosXD2zpqkdsxTROHAsYQaLBNhhL2j2xpcRSXzA==
+X-Received: by 2002:a05:6a21:4994:b0:13a:43e8:3fa6 with SMTP id
+ ax20-20020a056a21499400b0013a43e83fa6mr6994848pzc.23.1695366748226; 
+ Fri, 22 Sep 2023 00:12:28 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- 17-20020a17090a001100b00276a58e37c1sm4545333pja.38.2023.09.22.00.12.20
+ kb14-20020a170903338e00b001bb3beb2bc6sm2730384plb.65.2023.09.22.00.12.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Sep 2023 00:12:21 -0700 (PDT)
+ Fri, 22 Sep 2023 00:12:27 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH v4 6/8] cmd: efidebug: add uri device path
-Date: Fri, 22 Sep 2023 16:11:17 +0900
-Message-Id: <20230922071119.1439482-7-masahisa.kojima@linaro.org>
+ Masahisa Kojima <masahisa.kojima@linaro.org>
+Subject: [PATCH v4 7/8] doc: uefi: add HTTP Boot support
+Date: Fri, 22 Sep 2023 16:11:18 +0900
+Message-Id: <20230922071119.1439482-8-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230922071119.1439482-1-masahisa.kojima@linaro.org>
 References: <20230922071119.1439482-1-masahisa.kojima@linaro.org>
@@ -96,189 +94,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the URI device path option for 'boot add' subcommand.
-User can add the URI load option for downloading ISO image file
-or EFI application through network. Currently HTTP is only supported.
+This adds the description about HTTP Boot.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 ---
- cmd/efidebug.c | 50 +++++++++++++++++++++++++++++++++++
- include/net.h  |  8 ++++++
- net/wget.c     | 72 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 130 insertions(+)
+ doc/develop/uefi/uefi.rst | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index 0be3af3e76..f2fd6ba71d 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -19,6 +19,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <mapmem.h>
-+#include <net.h>
- #include <part.h>
- #include <search.h>
- #include <linux/ctype.h>
-@@ -829,6 +830,52 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
- 			argc -= 1;
- 			argv += 1;
- 			break;
-+#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
-+		case 'u':
-+		{
-+			char *pos;
-+			int uridp_len;
-+			struct efi_device_path_uri *uridp;
-+
-+			if (argc <  3 || lo.label) {
-+				r = CMD_RET_USAGE;
-+				goto out;
-+			}
-+			id = (int)hextoul(argv[1], &endp);
-+			if (*endp != '\0' || id > 0xffff)
-+				return CMD_RET_USAGE;
-+
-+			efi_create_indexed_name(var_name16, sizeof(var_name16),
-+						"Boot", id);
-+
-+			label = efi_convert_string(argv[2]);
-+			if (!label)
-+				return CMD_RET_FAILURE;
-+			lo.label = label;
-+
-+			uridp_len = sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
-+			fp_free = efi_alloc(uridp_len + sizeof(END));
-+			uridp = (struct efi_device_path_uri *)fp_free;
-+			uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-+			uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
-+			uridp->dp.length = uridp_len;
-+			if (!wget_validate_uri(argv[3])) {
-+				printf("ERROR: invalid URI\n");
-+				r = CMD_RET_FAILURE;
-+				goto out;
-+			}
-+
-+			strcpy(uridp->uri, argv[3]);
-+			pos = (char *)uridp + uridp_len;
-+			memcpy(pos, &END, sizeof(END));
-+			fp_size += uridp_len + sizeof(END);
-+			file_path = (struct efi_device_path *)uridp;
-+			argc -= 3;
-+			argv += 3;
-+			break;
-+		}
-+#endif
-+
- 		default:
- 			r = CMD_RET_USAGE;
- 			goto out;
-@@ -1492,6 +1539,9 @@ static char efidebug_help_text[] =
- 	"  -b|-B <bootid> <label> <interface> <devnum>[:<part>] <file path>\n"
- 	"  -i|-I <interface> <devnum>[:<part>] <initrd file path>\n"
- 	"  (-b, -i for short form device path)\n"
-+#if (IS_ENABLED(CONFIG_BLKMAP) && IS_ENABLED(CONFIG_CMD_WGET) && IS_ENABLED(CONFIG_CMD_DNS))
-+	"  -u <bootid> <label> <uri>\n"
-+#endif
- 	"  -s '<optional data>'\n"
- 	"efidebug boot rm <bootid#1> [<bootid#2> [<bootid#3> [...]]]\n"
- 	"  - delete UEFI BootXXXX variables\n"
-diff --git a/include/net.h b/include/net.h
-index 57889d8b7a..c748974573 100644
---- a/include/net.h
-+++ b/include/net.h
-@@ -935,4 +935,12 @@ static inline void eth_set_enable_bootdevs(bool enable) {}
-  */
- int wget_with_dns(ulong dst_addr, char *uri);
+diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+index a7a41f2fac..65eea89265 100644
+--- a/doc/develop/uefi/uefi.rst
++++ b/doc/develop/uefi/uefi.rst
+@@ -594,6 +594,36 @@ UEFI variables. Booting according to these variables is possible via::
+ As of U-Boot v2020.10 UEFI variables cannot be set at runtime. The U-Boot
+ command 'efidebug' can be used to set the variables.
  
-+/**
-+ * wget_validate_uri() - varidate the uri
-+ *
-+ * @uri:	uri string of target file of wget
-+ * Return:	true if uri is valid, false if uri is invalid
-+ */
-+bool wget_validate_uri(char *uri);
++UEFI HTTP Boot
++~~~~~~~~~~~~~~
 +
- #endif /* __NET_H__ */
-diff --git a/net/wget.c b/net/wget.c
-index 4801e28eb9..6a4d22be32 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -558,3 +558,75 @@ out:
- 	return ret;
- }
- #endif
++HTTP Boot provides the capability for system deployment and configuration
++over the network. HTTP Boot can be activated by specifying::
 +
-+/**
-+ * wget_validate_uri() - validate the uri for wget
-+ *
-+ * @uri:	uri string
-+ * Return:	true on success, false on failure
-+ */
-+bool wget_validate_uri(char *uri)
-+{
-+	char c;
-+	bool ret = true;
-+	char *str_copy, *s, *authority;
++    CONFIG_CMD_DNS
++    CONFIG_CMD_WGET
++    CONFIG_BLKMAP
 +
-+	/* TODO: strict uri conformance check */
++Set up the load option specifying the target URI::
 +
-+	/*
-+	 * Uri is expected to be correctly percent encoded.
-+	 * This is the minimum check, control codes(0x1-0x19, 0x7F, except '\0')
-+	 * and space character(0x20) are not allowed.
-+	 */
-+	for (c = 0x1; c < 0x21; c++) {
-+		if (strchr(uri, c)) {
-+			printf("invalid character is used\n");
-+			return false;
-+		}
-+	}
-+	if (strchr(uri, 0x7f)) {
-+		printf("invalid character is used\n");
-+		return false;
-+	}
++    efidebug boot add -u 1 netinst http://foo/bar
 +
-+	/*
-+	 * This follows the current U-Boot wget implementation.
-+	 * scheme: only "http:" is supported
-+	 * authority:
-+	 *   - user information: not supported
-+	 *   - host: supported
-+	 *   - port: not supported(always use the default port)
-+	 */
-+	if (strncmp(uri, "http://", 7)) {
-+		printf("only http:// is supported\n");
-+		return false;
-+	}
-+	str_copy = strdup(uri);
-+	if (!str_copy)
-+		return false;
++When this load option is selected as boot selection, resolve the
++host ip address by dns, then download the file with wget.
++If the downloaded file extension is .iso or .img file, efibootmgr tries to
++mount the image and boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
++If the downloaded file is PE-COFF image, load the downloaded file and
++start it.
 +
-+	s = str_copy + strlen("http://");
-+	authority = strsep(&s, "/");
-+	if (!s) {
-+		printf("invalid uri, no file path\n");
-+		ret = false;
-+		goto out;
-+	}
-+	s = strchr(authority, '@');
-+	if (s) {
-+		printf("user information is not supported\n");
-+		ret = false;
-+		goto out;
-+	}
-+	s = strchr(authority, ':');
-+	if (s) {
-+		printf("user defined port is not supported\n");
-+		ret = false;
-+		goto out;
-+	}
++There is a limitation that current implementation tries to resolve
++the IP address as a host name. If the uri is like "http://192.168.1.1/foobar",
++the dns process tries to resolve the host "192.168.1.1" and it will
++end up with "host not found".
 +
-+out:
-+	free(str_copy);
++We need to preset the "httpserverip" environment variable to proceed the wget::
 +
-+	return ret;
-+}
++    setenv httpserverip 192.168.1.1
++
+ Executing the built in hello world application
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
 -- 
 2.34.1
 
