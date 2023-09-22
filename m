@@ -4,120 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B165E6FE2F
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 13:51:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1DD0E6FE2F
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 13:54:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC161864AA;
-	Fri, 22 Sep 2023 15:51:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arri.de
+	by phobos.denx.de (Postfix) with ESMTP id 4A51E864DD;
+	Fri, 22 Sep 2023 15:54:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arrigroup.onmicrosoft.com header.i=@arrigroup.onmicrosoft.com header.b="Z8SlNsA4";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="XMRxYi40";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31B8E86484; Fri, 22 Sep 2023 15:51:23 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20711.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1b::711])
+ id 48D6D86575; Fri, 22 Sep 2023 15:54:39 +0200 (CEST)
+Received: from JPN01-OS0-obe.outbound.protection.outlook.com
+ (mail-os0jpn01olkn20821.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:700c::821])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FBAF864CB
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 15:51:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C461C86484
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 15:54:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=arri.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=LPolak@arri.de
+ dmarc=pass (p=none dis=none) header.from=outlook.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=wiagn233@outlook.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ioMu9eOFZGKoUfMvVGU5VELeYpH9j2TN9Oy++PYDLI8sW2jYVse1hsPuzG81bAgz8okMKq4Nu1FRoSg47amOdH0E4lcElOAxzOnQqGOgBagTnl+qB1AC+xlz97AF6j0VGL2bAfxbG3PXUYxv5JMDqNGzE92gk2rq1CClkahE4BzCAkoeZFCA1BnOzeQM2SeR6zJbNB23a6TJmaEY520vzBUMddPKGkU4mfyrDNZSyQHUHfCxE6/0hx1uZQJPx6XGXrtSSErOwYMCCCl3K3/Md43unZUZY6GbtX6eP/xz08lQueUc0iozG23xp2ZGt/ktKQE9AbK2PfUA9VYDXSiTpA==
+ b=SfxUdtVxc14JjyrVIjScyuzjUgRlUyIT/edqiyPt/shpSlmyrPE7nyxI8wt+quN44+jHfxNOn0lhRo17UEXJQ6x5XXd18O8/cmAVZCSJjyUg7i0lNnXtXVQP/JDdSG+M45wHA1UVn57v9ono/I9Wf8M3pjr3kDeFIjoXUum5Q6f048c2ffa+fiTcAtJVFa3QZM0DO1RM+HKGEGDaHJM6MyqL4fb0hSNLXkpM3DPxB2EJzsqnAoej44c1+9MH7tstjrh0wT1J+kirPvUsRUmBGRQSnV0Wt+YN29CmKC+h6nqLAcSzqzLMRfBu1gxgqeR8U990Syckb1hE+wBeiF2GBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9G1xRsx1mSCcf1bnEw8DHQABDVSNHKC4vOi/buZi/Yc=;
- b=dPrZRyqQHEumTWEQC7tJNf/XqgYM0btJSqsgskIQx79i1Zetoc6MEuVFwwyzsUmubTW07JiOpNZO/vOkbDTU0OIT1R4AdFWkawvwGGm4wof2nQluONnjjHMmPIDnUEUAAHEmx4VCvWD63Yg4l4cp8PE+2paenE6amSXDBXgNDOEvI+d0yQxavfQtcWAKRiZxMiwiGAwkfcz5RHIQN8fbA15XuuHrOhQWB6UFG+Md7wJj5VCOEYENDTB/d0qVFkJ2wZiQuYlbSeRprAzqSvKFnf1Rq3w6M6NMq1LLTfrcxYXNL1shUNYC12bFTgcdMaeKS548xCDOTkVIV2YTGMjT1w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arri.de; dmarc=pass action=none header.from=arri.de; dkim=pass
- header.d=arri.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
+ bh=Q133JKA1pRwKd1PLjZMjk3Zj1FBsFl6Nf4POcC46av4=;
+ b=i9mKDGpHYabzARkyq6PvIZcgYYh2z9jgpuQVW2C97YjzgUNLI8bilnUIROM72TclQQIsG36ebRaDU/yeZ8ePlcq1XX2S2s09rgPKY7pkrTqe/pr7jCoZCzOIFrq47GYNfd4HFD3n/t8tnx5kU9w+UlgQpziu4q6HHtDUyiIezGIqiuhoR3ueY3jsfIzwe0c4iRR8s1T/3YYab7u+fZiFRTRS4G01MFaNG/vQrAPDXGEthePNrKIbCIridT0QYQho6Y9723CIiZuQq6GZVB3lDYNgPKyHDikN1Jk/HEvnPDRS9BYi6VHLnkAGJ7nkkXblW4vfZQ0rhulrbaaMHGHOKw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9G1xRsx1mSCcf1bnEw8DHQABDVSNHKC4vOi/buZi/Yc=;
- b=Z8SlNsA4E/4ZdAandziTIpJfEzr6JyIMkgDoQIu3scvH55VkRdIIFLruxAjmeQXDHPPWw6Kz64aradGHhVTxfYks2PlLAe7hSFuzkws+FGJemb7gY8bwn39vBdwSqoBqOcALowJQab0w97uYdiIxqu+60eigkSC38OYewG0j/g8=
-Received: from DU0PR07MB8419.eurprd07.prod.outlook.com (2603:10a6:10:353::13)
- by PAVPR07MB9191.eurprd07.prod.outlook.com (2603:10a6:102:317::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.27; Fri, 22 Sep
- 2023 13:51:17 +0000
-Received: from DU0PR07MB8419.eurprd07.prod.outlook.com
- ([fe80::eb54:a70:758:cdfd]) by DU0PR07MB8419.eurprd07.prod.outlook.com
- ([fe80::eb54:a70:758:cdfd%4]) with mapi id 15.20.6792.026; Fri, 22 Sep 2023
- 13:51:17 +0000
-From: "Polak, Leszek" <LPolak@arri.de>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "michal.simek@amd.com" <michal.simek@amd.com>, Stefan Roese <sr@denx.de>
-Subject: [PATCH v2] arm64: versal: Add SelectMAP boot mode identification
-Thread-Topic: [PATCH v2] arm64: versal: Add SelectMAP boot mode identification
-Thread-Index: AQHZ7VtsbFOir4CCh0Ko4bupOA/kEA==
-Date: Fri, 22 Sep 2023 13:51:17 +0000
-Message-ID: <DU0PR07MB8419D03ED9705DEA5FAAD992C8FFA@DU0PR07MB8419.eurprd07.prod.outlook.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arri.de;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DU0PR07MB8419:EE_|PAVPR07MB9191:EE_
-x-ms-office365-filtering-correlation-id: 5a398610-d4a5-4093-a109-08dbbb72fe79
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: i4hzsiYcbK2dkr938ocSLyT+PVfBkAtAwLs1IXxX0jr+xNp2SrZUfJx3hKtjbmYk5fez0rY16PYoaRHw9TzD9jkd1Gy18BNnrkGMaE0JoLF8DffUVU3aoazY90H4Y3XWM4aflY/Phw1J9KlRM1PElN0t1lNDCjS4vZkw71W4xxu+kaZij/B6WL2DCdim52XZJbiGqgNqKoyhpFGeEU7Qfxa9UC0+ITcnCpgywNgWZyjhH9ZjcXeSkAmuWflXbHX5gNmGz9k0rGXZckHNvEbF7AOkShuNUqwfFcS8zbAtRCFdveps2MPDN8SYI1wXFN1xD/a3hMhWqRFINQjXET+IAaZ9HUkLx1Qdo59AsZUhjSiIYJsU+DFJbmUe56UpOJCTkMMCXD0iT/oqRY3WZqDAmpAEU0Rb4bznJkwEg/9WSW11l/Zgs2znD1zYrs9JA89RDE4DSKiaAJrmTiCGR3U9A+W3ThYWmeq51EIeAXpWtF4IRq1m5KCkQA4XZuFtl/shwY4H5lKzwHEjxBo7PzjgB9012R/OGPoHOi0kWS7lwF1oJkOfLOwKudB8EbFf5w+DxEjAcIZZCOMr6iEIo46OG2t9sBB5JUEV6H2wLSb4QaxL2F/FkNkWb/21RCzLP6h3caUmgkFPn9XhnSReoOtrZxoTuRpMIUCbSJmhFicx3dM=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU0PR07MB8419.eurprd07.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(366004)(39860400002)(376002)(396003)(136003)(451199024)(1800799009)(186009)(64756008)(52536014)(6506007)(71200400001)(7696005)(9686003)(55236004)(478600001)(26005)(4326008)(66946007)(6916009)(316002)(2906002)(66446008)(8676002)(54906003)(76116006)(66556008)(8936002)(66476007)(5660300002)(91956017)(55016003)(86362001)(122000001)(38100700002)(33656002)(38070700005)(41300700001);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?8+zYBE8K8NEWEzpdkQ2qM2whmbtMo9zqg0VgdYcldnctliNr/JvvV75CXV?=
- =?iso-8859-1?Q?u1rhkAUlWiQ5sTF+xPozvfoc9nFTXZubGKz3jCR5NKGq3fTD+3Y+raF6F7?=
- =?iso-8859-1?Q?Tg/+z3QYrqk+Jbvm5RwhFe3abHtxlvIZgMyN2CjPNsqnz08j/f8wON0s3k?=
- =?iso-8859-1?Q?EXYKHCHQ0bp7llFAWdXHBCFiSrMpa31L56rNfQ8Bl+GGbnG+f8gdQ0Pz5U?=
- =?iso-8859-1?Q?fqH9u2RMdQpbVFKMHLLunn1RBZkKRhbCtbBZvwQlfcWQuZfQVcRPqSuEhk?=
- =?iso-8859-1?Q?EQunCHTueut3XHLJU3TswUS0seZtPvrSiqDGDJTMVxsel6Lg36STV38yz9?=
- =?iso-8859-1?Q?BgzdJx7mkgnKVpFsblGDDATYH9WdIdWc5MjnXlTJgxWHizUXa4ch49hzwf?=
- =?iso-8859-1?Q?n5500yTFzoJAOJZ98utnbRgZMIkx9wh0vZIVQgmNTmMpeEs35Tj13yPjAO?=
- =?iso-8859-1?Q?sPvSNGrXaSGL1bjREXFzM/vIli+xJnKh1wJ11PlwDNUSUk9oQtXnFZqaAP?=
- =?iso-8859-1?Q?IpKJuGerQ6pRffc0LgMrvDn2axup885o2dk6/EBPovCm59krbwKSMiXPwz?=
- =?iso-8859-1?Q?KfFgbHA/LYH6LFRb451Y82/R+H8dL5NEc2QpYW1tVUNpnd9gtXf2DHeffR?=
- =?iso-8859-1?Q?0CiApu8JGLpsvEUZIB14Uz7p9/qoL3RIXVXUgQgh3mIoHY09NDkMe9bEKF?=
- =?iso-8859-1?Q?quKU1BSzGNKtN0PqK13cX8YFoa5v6q+UWLTWOr/gitgx6GFs/dh6NdZsnM?=
- =?iso-8859-1?Q?Q7ulhhRbeFeR5Fk6CVlMIfAWMirsQlyGkNVLDemyJfLzgKyw4PoXiOhVTK?=
- =?iso-8859-1?Q?0SDehdKEmXSK0rFlwnIXXtD7sTZrROkTYZQbeDF8A+kJw7n5RiND7xibCn?=
- =?iso-8859-1?Q?VQ8678gPdqB0gK3tbIv1wjHVZK2WIkXgJaBS+FhSN1GsgW7pATZHxowtfg?=
- =?iso-8859-1?Q?CVAJSlz0Rbkkmcc2J8Tinlr3VQ0r0CB+i6C4l5sSIc0RRHLO4umf217gjo?=
- =?iso-8859-1?Q?r/18av5HIvu1IcLL62KUf7W9T2aobj7wNf1/JXkK2OKtvW5gn1J6STjozd?=
- =?iso-8859-1?Q?pU2NCcGJ1mSCxqWsOoyg65c7Nz5cYYgjIxr7pzAkISfNJUa2Y2mPTjFJqS?=
- =?iso-8859-1?Q?G5XFB4xPzcTrKeVlj9Y+ZGmBvKnJjNnPoNpqyyR91/59ooQ3ozgBscj+DH?=
- =?iso-8859-1?Q?lshW5zcoZH5dLfYGhCH/kb09GIRu+hPLRQzUS2tPWBUMqlFLJV3XLTnV/R?=
- =?iso-8859-1?Q?iW1ErCRSUFqu/cBGkyWhSsmZdc4ebAZPLv+32NdLYU3kt1qheo5heshYD5?=
- =?iso-8859-1?Q?cW2o5KZ2YRB72XQdHKmZl8PFWv7Hzc5qQXSKIqiYR2DuQ5BzemiZzHrtvm?=
- =?iso-8859-1?Q?/LeQYMjyA+hdeNfrgwMdiuhQ0Zv76G6QDm74suBLVcU0NiRxn0oc8WTR9E?=
- =?iso-8859-1?Q?nKqv4MYr9cPdsYlLFYELPeeFaGyksIW1qjQGicDgpR8aUlhkmyoulO1sSq?=
- =?iso-8859-1?Q?QQ1fZHQ7aou2rqfV7hnKL+jJ01JaBwknJS5nD831l2KErT/KZYhxP1Zpj7?=
- =?iso-8859-1?Q?YB7WXkG4e9Pa/fdEgcLw6Zlp36G7R28Bw87v9eHhZLSxNzaNZtR4mG86+f?=
- =?iso-8859-1?Q?XRi6n9WOHFjoc=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ bh=Q133JKA1pRwKd1PLjZMjk3Zj1FBsFl6Nf4POcC46av4=;
+ b=XMRxYi409LpyGo0DaDGzg+S7zpnTdFMgdRg5qKc9q9VGFpcT11Fd4VkhU90JaXfk7CpstQZn983GzHb9NUj5tabYqOYmXSW4RH9u8nZOjaGJ70fmhl0GJti684tcZzmxLczY3/P55nu+43oO4/zUKXe5ieh5l8cJhIj+pPVkF+7DQ4fFkdIcz3VeEQgYhZJGgYHA68yHR+jA43spGudhRSjTOmbxPXYXWMYv3DU6Pj78W6F2/jpzLqvvb4GKspRigIBlQspLU2CvnAEjbfvASc0qI+lwcxH8InGlTqRyRuD2Pdyrn2R/hwyW4NZm94R3CcGeToBf8hfcGff3rTNfAw==
+Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:23e::10)
+ by TYYP286MB1835.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:f9::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.10; Fri, 22 Sep
+ 2023 13:54:31 +0000
+Received: from TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::f741:44af:3f66:bdd5]) by TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::f741:44af:3f66:bdd5%4]) with mapi id 15.20.6838.013; Fri, 22 Sep 2023
+ 13:54:31 +0000
+Message-ID: <TY3P286MB2611E76FC176D2A629BFF01698FFA@TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM>
+Date: Fri, 22 Sep 2023 21:54:23 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Cc: wiagn233@outlook.com, u-boot@lists.denx.de, mps@arvanta.net
+Subject: Re: [PATCH 1/1] riscv: set fdtfile on VisionFive 2
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>
+References: <20230907112128.342315-1-heinrich.schuchardt@canonical.com>
+From: Shengyu Qu <wiagn233@outlook.com>
+In-Reply-To: <20230907112128.342315-1-heinrich.schuchardt@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-TMN: [f5JKlseMNEfmvbhHqiN4GvohZ2BaiMd5jgd+dJMl+6N476q9UXJI0WQtIh/0ddyo]
+X-ClientProxiedBy: SI2PR01CA0036.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:192::22) To TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:400:23e::10)
+X-Microsoft-Original-Message-ID: <6650153d-14a3-bed1-9a02-2aab427eacca@outlook.com>
 MIME-Version: 1.0
-X-OriginatorOrg: arri.de
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: TY3P286MB2611:EE_|TYYP286MB1835:EE_
+X-MS-Office365-Filtering-Correlation-Id: dce037b1-bafb-4a3d-848a-08dbbb7371cb
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: lBjC8zxvQ73pb74smCY1mnkZORnZLQbkwOQ1v6QZb+CEjsekDOsJoxi13DXWn58hWQatAc6GBtSTDDxNsJFY/pmOW5+OVWqXOAyRF/GVYFjlkT1BzUz/SFq8AIAQs/AaPl7xglqx8NjQvTs0jycbucqLzksYR4bzTfOk4rvICTGy38LZ0CpK2Pzdy6kPVVyPdyauj/96bEYLX1RWbpKf+jWWiYbwcw7gdlmqQ+R8UebcklAhnioaHONA41nJ4McX2DltU1AjeRvyMk9RdHj4h63hOkcfQhfvEazu/vTOcsoibBcuNJsn5a1dM4CdMk8FlO4PURTdFa7973ABGGlMa6wWfheovgCCvBjjJcgsT344yB23FahvqLHFobquwOFh1fFoF2RPH8Gh9sKUXAzE2As7/OMmt+Il1bLSvDCpwod74QCE2zwBkptgrUxqkMb+vnao5ta7rivimwmQgpPj2z/SRgJasL7ZwGciqditDTg+d9SR9CLFbWtXBnLiYAASDGveOx6s1Hfx7xQg9UpnbGP7ySzTDSz7iMiMg41EUYCIte5UyoXSuxOzHdROHH8E+gNvQDcV/w5sV60R9iobMhX13PHbMIxMyt4t/ELXVXi7WH+UA94mn9Hy+oXtrzSY
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Zk4xYzVZRm5wVTdVdjNjMnFuSjM5aHJLeCtsSjViZzZyakU1blhFV3RlRE52?=
+ =?utf-8?B?bFhobWFhNElRMVpBWFhiS2lCQ1hxdmN6Y083SCtUSkNlakswOFp5NSt0ZkdL?=
+ =?utf-8?B?UVdoSzNNSFNqUmFWcXJ0Y29YV2loazhOK2p6ZjU3dUgrVWJzQkdpSGJHWmp4?=
+ =?utf-8?B?WXN4a0o5S2JhZVRLbGxJckFsR3ZTL0NwQXFoZWJUaHp0NkFBN3YwQTdvRXpB?=
+ =?utf-8?B?Q1E3ODF4UUxWN05rd3BYVW9oSkVweTMvajc0Wno2RVArVk16UllrOVNFNmdJ?=
+ =?utf-8?B?alB2VmFRMDZqNDJZL3hvNXp1Z1BXMGFVOUthQ2JLWFZLeFR3elpib3pnL3dh?=
+ =?utf-8?B?WVhFK3p6TmluWCtBWmFhLy91VlpOdlZheDZMSmhNOVZUVHFxOCs4blFGbUdQ?=
+ =?utf-8?B?RjJHNXRpVHFLWWs1dGZkWjlBc1RhMEhDdk1ueE13M295clhma1ZyaXRPMTJJ?=
+ =?utf-8?B?T3hEcll5VWJ4Q3ErNkFsTGd6U25hZEQyQVV6VnIvZy96VDBWVGF4NkhBU1c1?=
+ =?utf-8?B?Nk9pZFprS0kySXptYVQzR0MzdjRzMjMyc1RVUm9tbHFGUngrSG1zWmJTakI2?=
+ =?utf-8?B?Ykd2amEwL2lPTnoyaFJtanYzTWk2SmQ5MW5uQkZ1Nmxibk9pbjBNaElaRHh6?=
+ =?utf-8?B?eVM5Q0RtWDFGQjVkS3ZiSC9wNERUa3pGOTFQVVNZaU91VEZwMGxpak5jcXIy?=
+ =?utf-8?B?VmN4NXZYaHluZ1h5WTd5ZlYxbDMwNzU0bUg5cnlZVzB3aXR0WkxXVERZcFBJ?=
+ =?utf-8?B?QjM1ZWhzdldPS3QxZ0JmeGFucUtiUTdsMHRsRVNFUHYvLzRLb2lsclZsbXRx?=
+ =?utf-8?B?Yk4yNXp0bExjVllzOFFDMXNEMTFVK1VyQitoWkJkSTRXWWY2bkh2RDZxaVVY?=
+ =?utf-8?B?ZlhlU2Y5SDBmWlNla08xbDVYQndTT0VydEJPUyt6QTNvZXVnd3p5U2FPaE1M?=
+ =?utf-8?B?dWNkOU9yQnNyZlcrcTdTYng3NGhreDZ6dXFGL0pOTkVPWlpIWGZ6RVIxUHcv?=
+ =?utf-8?B?aFB4ZXBYWmltY3FIRDdGcEVsdUx5Sm12V2ZiRHd6OW5KSWpvMnd2cSt2SFBy?=
+ =?utf-8?B?S0ZLTHAybnVCN3pXNXFJY0FLRmkzOGxPY0k0cDl1K3hBUFdUQjllZ2tGTHkw?=
+ =?utf-8?B?TC9ZY3FJSHpQeFEwbzQrNG0xU0RKNTlHVDZiNlNHQ2xQRFF2MnJ4TCt3b1VS?=
+ =?utf-8?B?S0pMNUY4Uk1vMjJ5QlFrK1c2UjdpaHNjeGpBaUdEZ043WVlleCsydVkvVU1J?=
+ =?utf-8?B?ZGlhemF2eUQ5WTRkQXpuUlVhM1FpMi9GdzFENHdOOThMTTlXc0Z3K2R1bVVZ?=
+ =?utf-8?B?VEtYVXZpV1RNZW1HNlhFV1NkM1cwczNZNURzZ0RCVWplTVNWOGFsb1ZsRlRp?=
+ =?utf-8?B?RU82OXZud0pxcGdlOVNRN290T1VCSlZEbm1wQkZkZkMrK0pUbkhRLzh3K3RH?=
+ =?utf-8?B?S3Nob1NCRVpsWjNmQ1M5eVpQNFJPVEM5K3FYRlNkWTJ5WHJmZEZuTnZSY2V3?=
+ =?utf-8?B?d3MvTm9uanNLWnJ3MzF2UFl0MmZjUU04d0NMVDNVZEVVODZxTHZWcys4Vml5?=
+ =?utf-8?B?NHhMWGJMSGNublQxQkE3QkxDd2Y0aVc3VmpvUXpjMGdsb0tML1UzcWFCUmRY?=
+ =?utf-8?B?Rzdyd1ZGRFpGaWg5QzZwRVFFWEMxWUZLMzRrcTRHdExkcU1xVVA1VnQ1TUg5?=
+ =?utf-8?B?K1pZb1QycnRnRDAyNzJNV2tSRktJcXZvR1dGdVpRTXJCSm9VRU5aVVh3PT0=?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: dce037b1-bafb-4a3d-848a-08dbbb7371cb
+X-MS-Exchange-CrossTenant-AuthSource: TY3P286MB2611.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DU0PR07MB8419.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a398610-d4a5-4093-a109-08dbbb72fe79
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Sep 2023 13:51:17.2598 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: eRqFw6iVhbkpFElDBBCG/TTH1Vz63mVYa2daM6XaggBWrqhakYuBNwCepapuv5sm
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR07MB9191
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2023 13:54:31.1867 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB1835
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,95 +131,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SelectMAP configuration interface provides an 8-bit, 16-bit or=0A=
-32-bit bidirectional data bus interface to the Versal FPGA=0A=
-configuration logic that can be used for both configuration and=0A=
-readback.=0A=
-=0A=
-A connected microcontoller to the SelectMAP interface can load boot=0A=
-image with bitstream, TF-A (ARM Trusted Firmware) and U-Boot.=0A=
-=0A=
-This commit adds the missing identification of the SelectMAP mode.=0A=
-=0A=
-Signed-off-by: Leszek Polak <lpolak@arri.de>=0A=
-Reviewed-by: Stefan Roese <sr@denx.de>=0A=
-Cc: Michal Simek <michal.simek@amd.com>=0A=
-Cc: Stefan Roese <sr@denx.de>=0A=
----=0A=
-v2:=0A=
-- Drop assignment of 'mode' as selectmap is not be supported=0A=
-  by distro boot=0A=
-=0A=
----=0A=
- arch/arm/mach-versal-net/include/mach/hardware.h | 1 +=0A=
- arch/arm/mach-versal/include/mach/hardware.h     | 1 +=0A=
- board/xilinx/versal-net/board.c                  | 3 +++=0A=
- board/xilinx/versal/board.c                      | 4 ++++=0A=
- 4 files changed, 9 insertions(+)=0A=
-=0A=
-diff --git a/arch/arm/mach-versal-net/include/mach/hardware.h b/arch/arm/ma=
-ch-versal-net/include/mach/hardware.h=0A=
-index 9bddb8b007..767cdd3686 100644=0A=
---- a/arch/arm/mach-versal-net/include/mach/hardware.h=0A=
-+++ b/arch/arm/mach-versal-net/include/mach/hardware.h=0A=
-@@ -66,6 +66,7 @@ struct crp_regs {=0A=
- #define EMMC_MODE	0x00000006=0A=
- #define USB_MODE	0x00000007=0A=
- #define OSPI_MODE	0x00000008=0A=
-+#define SELECTMAP_MODE	0x0000000A=0A=
- #define SD1_LSHFT_MODE	0x0000000E /* SD1 Level shifter */=0A=
- #define JTAG_MODE	0x00000000=0A=
- #define BOOT_MODE_USE_ALT	0x100=0A=
-diff --git a/arch/arm/mach-versal/include/mach/hardware.h b/arch/arm/mach-v=
-ersal/include/mach/hardware.h=0A=
-index 000af974e8..9d1c2f0dcf 100644=0A=
---- a/arch/arm/mach-versal/include/mach/hardware.h=0A=
-+++ b/arch/arm/mach-versal/include/mach/hardware.h=0A=
-@@ -82,6 +82,7 @@ struct crp_regs {=0A=
- #define EMMC_MODE	0x00000006=0A=
- #define USB_MODE	0x00000007=0A=
- #define OSPI_MODE	0x00000008=0A=
-+#define SELECTMAP_MODE	0x0000000A=0A=
- #define SD1_LSHFT_MODE	0x0000000E /* SD1 Level shifter */=0A=
- #define JTAG_MODE	0x00000000=0A=
- #define BOOT_MODE_USE_ALT	0x100=0A=
-diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/boar=
-d.c=0A=
-index f0d2224b33..651b7d24d7 100644=0A=
---- a/board/xilinx/versal-net/board.c=0A=
-+++ b/board/xilinx/versal-net/board.c=0A=
-@@ -260,6 +260,9 @@ int board_late_init(void)=0A=
- 		mode =3D "mmc";=0A=
- 		bootseq =3D dev_seq(dev);=0A=
- 		break;=0A=
-+	case SELECTMAP_MODE:=0A=
-+		puts("SELECTMAP_MODE\n");=0A=
-+		break;=0A=
- 	case SD_MODE:=0A=
- 		puts("SD_MODE\n");=0A=
- 		if (uclass_get_device_by_name(UCLASS_MMC,=0A=
-diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c=0A=
-index 60bf37d3c9..26b4c7bf39 100644=0A=
---- a/board/xilinx/versal/board.c=0A=
-+++ b/board/xilinx/versal/board.c=0A=
-@@ -182,6 +182,9 @@ int board_late_init(void)=0A=
- 		mode =3D "mmc";=0A=
- 		bootseq =3D dev_seq(dev);=0A=
- 		break;=0A=
-+	case SELECTMAP_MODE:=0A=
-+		puts("SELECTMAP_MODE\n");=0A=
-+		break;=0A=
- 	case SD_MODE:=0A=
- 		puts("SD_MODE\n");=0A=
- 		if (uclass_get_device_by_name(UCLASS_MMC,=0A=
-@@ -298,6 +301,7 @@ enum env_location env_get_location(enum env_operation o=
-p, int prio)=0A=
- 			return ENVL_SPI_FLASH;=0A=
- 		return ENVL_NOWHERE;=0A=
- 	case JTAG_MODE:=0A=
-+	case SELECTMAP_MODE:=0A=
- 	default:=0A=
- 		return ENVL_NOWHERE;=0A=
- 	}=0A=
--- =0A=
-2.34.1=0A=
+Hello Leo,
+
+This patch seems only landed in next branch, not master. It is seriously
+
+needed to make visionfive 2 working properly. Could you merge it to
+
+master branch?
+
+Best regards,
+
+Shengyu
+
+> Multiple revisions of the StarFive VisionFive 2 board exist. They can be
+> identified by reading their EEPROM.
+>
+> Linux uses two differently named device-tree files. To load the correct
+> device-tree we need to set $fdtfile to the device-tree file name that
+> matches the board revision.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+> Tested-by: Milan P. Stanić <mps@arvanta.net>
+> ---
+>   arch/riscv/Kconfig                            |  1 +
+>   .../visionfive2/starfive_visionfive2.c        | 43 ++++++++++++++++++-
+>   2 files changed, 42 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+> index 6771d8d919..1c62c2345b 100644
+> --- a/arch/riscv/Kconfig
+> +++ b/arch/riscv/Kconfig
+> @@ -26,6 +26,7 @@ config TARGET_SIFIVE_UNMATCHED
+>   
+>   config TARGET_STARFIVE_VISIONFIVE2
+>   	bool "Support StarFive VisionFive2 Board"
+> +	select BOARD_LATE_INIT
+>   
+>   config TARGET_TH1520_LPI4A
+>   	bool "Support Sipeed's TH1520 Lichee PI 4A Board"
+> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
+> index d609262b67..05d8d2d657 100644
+> --- a/board/starfive/visionfive2/starfive_visionfive2.c
+> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
+> @@ -5,14 +5,20 @@
+>    */
+>   
+>   #include <common.h>
+> -#include <asm/io.h>
+> -#include <asm/sections.h>
+>   #include <cpu_func.h>
+>   #include <dm.h>
+> +#include <env.h>
+> +#include <asm/arch/eeprom.h>
+> +#include <asm/io.h>
+> +#include <asm/sections.h>
+>   #include <linux/bitops.h>
+>   
+>   #define JH7110_L2_PREFETCHER_BASE_ADDR		0x2030000
+>   #define JH7110_L2_PREFETCHER_HART_OFFSET	0x2000
+> +#define FDTFILE_VISIONFIVE2_1_2A \
+> +	"starfive/jh7110-starfive-visionfive-2-v1.2a.dtb"
+> +#define FDTFILE_VISIONFIVE2_1_3B \
+> +	"starfive/jh7110-starfive-visionfive-2-v1.3b.dtb"
+>   
+>   /* enable U74-mc hart1~hart4 prefetcher */
+>   static void enable_prefetcher(void)
+> @@ -33,6 +39,31 @@ static void enable_prefetcher(void)
+>   	}
+>   }
+>   
+> +/**
+> + * set_fdtfile() - set the $fdtfile variable based on the board revision
+> + */
+> +static void set_fdtfile(void)
+> +{
+> +	u8 version;
+> +	const char *fdtfile;
+> +
+> +	version = get_pcb_revision_from_eeprom();
+> +	switch (version) {
+> +	case 'a':
+> +	case 'A':
+> +		fdtfile = FDTFILE_VISIONFIVE2_1_2A;
+> +	        break;
+> +
+> +	case 'b':
+> +	case 'B':
+> +	default:
+> +		fdtfile = FDTFILE_VISIONFIVE2_1_3B;
+> +	        break;
+> +	};
+> +
+> +	env_set("fdtfile", fdtfile);
+> +}
+> +
+>   int board_init(void)
+>   {
+>   	enable_caches();
+> @@ -41,6 +72,14 @@ int board_init(void)
+>   	return 0;
+>   }
+>   
+> +int board_late_init(void)
+> +{
+> +	if (CONFIG_IS_ENABLED(ID_EEPROM))
+> +		set_fdtfile();
+> +
+> +	return 0;
+> +}
+> +
+>   void *board_fdt_blob_setup(int *err)
+>   {
+>   	*err = 0;
