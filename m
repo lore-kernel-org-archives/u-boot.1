@@ -4,66 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB1BCD484A
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 17:46:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D702BCD484A
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 17:58:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2965D864CB;
-	Fri, 22 Sep 2023 19:46:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1ED1285DFA;
+	Fri, 22 Sep 2023 19:58:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="jRLqWf9m";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U/QCE27w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91CA885894; Fri, 22 Sep 2023 19:46:57 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8089C86199; Fri, 22 Sep 2023 19:58:05 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00FB4864CB
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 19:46:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3513A85894
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 19:58:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=kpay=FG=robh_at_kernel.org=rob@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 301E7CE248A;
- Fri, 22 Sep 2023 17:46:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48C83C433C7;
- Fri, 22 Sep 2023 17:46:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695404811;
- bh=fFQxg4Rz4GjFZugxozdndSgNXISpfnkbSpJ11bW+6OA=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=jRLqWf9mSuD59sCEiQszieC9KPYDD/iNV/2RGV4Xdqt0cnH/s/H9SYypt0yo2zgmO
- 54MLtIg6ulX/hGC1S3Xv9FTFWVZghM3zlLb3pj2VrFUF973M24PScMfpZaZX8UwzD5
- 9GSE7xii8ByH5bCW7cuXWGHHeFFj7AyeCtk58Wa2anrTS6sM87Qz9bOsleIEY79qB6
- 0oOTRZORaulf4T/SSst+w+JOaqe7Gt6ikwlqVKwq6mAYs6qP6QSjsu/Bl2X8d1vSES
- MbbWluj4wLah3zEVzS5+WR7tDxrFrm1Y/achLiOkrdBYoDYtWkcqPJX0ZLZFHNFOvk
- 9fBtxjPpFgIBg==
-Received: (nullmailer pid 3342355 invoked by uid 1000);
- Fri, 22 Sep 2023 17:46:49 -0000
-Date: Fri, 22 Sep 2023 12:46:49 -0500
-From: Rob Herring <robh@kernel.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, U-Boot Mailing List <u-boot@lists.denx.de>,
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>,
- Conor Dooley <conor+dt@kernel.org>, Dhruva Gole <d-gole@ti.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-Message-ID: <20230922174649.GA3320366-robh@kernel.org>
-References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
- <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
- <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-59c07cf02ebso30180847b3.1
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 10:58:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695405482; x=1696010282; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+ogebeoaWvRl4PVuzMaIQPKwyY8UoGJTNbaMGqzHVH0=;
+ b=U/QCE27wolk/ukbAfUV4kMDNriFMJTR5ApQUGembElWC0lNG9aAuCHWxxsOGN12Aln
+ 6ArW57nhp/xgXpzJBwMJPEzj9bq0fSpS2SO8CwCahqxWNww7HacNDuYXPSXSr6XXR1GO
+ efsadUK2HrtOznTxpV83tB6sqsIhEwXSAHus8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695405482; x=1696010282;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+ogebeoaWvRl4PVuzMaIQPKwyY8UoGJTNbaMGqzHVH0=;
+ b=fRwbpGOJBDKo+xfUUEPbMOeHru6nEybbenULVHv7YQAeONv0HkwYwJhm0nKz5ibzM0
+ pX1uma7bxUdQQawsBwxGMhlmSjb0JJZJ7BaP+/HoVukWMUJpSelZii3gd02c75DNn5Xf
+ 3z5hbH1k6o92vRZmDGJjDM5x29kTmIWfDfF+oczk+aD5aZp1ou4v5DoDQDmYzuAVBw0Z
+ s9Os6HuLqy9g0PknXc4KubfcNFRNA4smTplj3EDus7yRfgogts4vGO1qe0VZCb6fIhEw
+ 5mf3n64H74f7rdqJ54D+fJ1QNXdIQbpKz7HGGxpzg7PQ0UTEtb9EsaRZdZ/pP5VTWweX
+ cAwQ==
+X-Gm-Message-State: AOJu0Yxj2JKQC62UgHSXPjOQ5JEWqGbK2IF9aS6Yt78csr0qljXZQ7/y
+ WD3nmaUUVTZsI1A2ikDFkdLO+w==
+X-Google-Smtp-Source: AGHT+IFVlKbS9+EsliuPD77uA8zYCQEhkczho4UDC0zn0KWiRvl3d8vlhi2zRAzrrR5ss887PJz2IA==
+X-Received: by 2002:a0d:c084:0:b0:59b:1763:bff9 with SMTP id
+ b126-20020a0dc084000000b0059b1763bff9mr481605ywd.49.1695405481785; 
+ Fri, 22 Sep 2023 10:58:01 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-b22c-a20b-ddfe-6409.res6.spectrum.com.
+ [2603:6081:7b00:6400:b22c:a20b:ddfe:6409])
+ by smtp.gmail.com with ESMTPSA id
+ u4-20020a816004000000b005773babc3cdsm1005972ywb.83.2023.09.22.10.58.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Sep 2023 10:58:01 -0700 (PDT)
+Date: Fri, 22 Sep 2023 13:57:58 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-x86 into -next
+Message-ID: <20230922175758.GC305624@bill-the-cat>
+References: <CAEUhbmUrZp5bgVOb+n28YL7D0FGz6pmVFPt77E3nd2X3rTynsA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ml7YJ0rWQxwICFQ5"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
+In-Reply-To: <CAEUhbmUrZp5bgVOb+n28YL7D0FGz6pmVFPt77E3nd2X3rTynsA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,76 +91,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 22, 2023 at 11:01:18AM -0600, Simon Glass wrote:
-> Hi Rob,
-> 
-> On Fri, 22 Sept 2023 at 10:00, Rob Herring <robh@kernel.org> wrote:
-> >
-> > On Thu, Sep 21, 2023 at 1:45 PM Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Binman[1] is a tool for creating firmware images. It allows you to
-> > > combine various binaries and place them in an output file.
-> > >
-> > > Binman uses a DT schema to describe an image, in enough detail that
-> > > it can be automatically built from component parts, disassembled,
-> > > replaced, listed, etc.
-> > >
-> > > Images are typically stored in flash, which is why this binding is
-> > > targeted at mtd. Previous discussion is at [2] [3].
-> > >
-> > > [1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
-> > > [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.org/
-> > > [3] https://www.spinics.net/lists/devicetree/msg626149.html
-> >
-> > You missed:
-> >
-> > https://github.com/devicetree-org/dt-schema/pull/110
-> >
-> > where I said: We certainly shouldn't duplicate the existing partitions
-> > bindings. What's missing from them (I assume we're mostly talking
-> > about "fixed-partitions" which has been around forever I think (before
-> > me))?
-> >
-> > To repeat, unless there is some reason binman partitions conflict with
-> > fixed-partitions, you need to start there and extend it. From what's
-> > posted here, it neither conflicts nor needs extending.
-> 
-> I think at this point I am just hopelessly confused. Have you taken a
-> look at the binman schema? [1]
 
-Why do I need to? That's used for some tool and has nothing to do with a 
-device's DTB. However, I thought somewhere in this discussion you showed 
-it under a flash device node. Then I care because then it overlaps with 
-what we already have for partitions. If I misunderstood that, then just 
-put your schema with your tool. Only users of the tool should care about 
-the tool's schema.
+--ml7YJ0rWQxwICFQ5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> 
-> I saw this file, which seems to extend a partition.
-> 
-> Documentation/devicetree/bindings/mtd/partitions/brcm,bcm4908-partitions.yaml
+On Fri, Sep 22, 2023 at 11:04:24PM +0800, Bin Meng wrote:
 
-IIRC, that's a different type where partition locations are stored in 
-the flash, so we don't need location and size in DT. 
+> Hi Tom,
+>=20
+> The following changes since commit 5d2fae79c7d60eaf7f50322e4ec125d2f58544=
+e9:
+>=20
+>   Merge tag 'xilinx-for-v2024.01-rc1-v2' of
+> https://source.denx.de/u-boot/custodians/u-boot-microblaze into next
+> (2023-09-21 10:51:58 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-x86.git tags/x86-pull-2=
+0230922
+>=20
+> for you to fetch changes up to 5728246dfa11400d4f7aa8262ea630d8c09a85b9:
+>=20
+>   x86: doc: coreboot: Mention 64-bit Linux distros (2023-09-22 06:05:40 +=
+0800)
+>=20
 
-> 
-> I was assuming that I should create a top-level compatible = "binman"
-> node, with subnodes like compatible = "binman,bl31-atf", for example.
-> I should use the compatible string to indicate the contents, right?
+Applied to u-boot/next, thanks!
 
-Yes for subnodes, and we already have some somewhat standard ones for 
-"u-boot" and "u-boot-env". Though historically, "label" was used. 
+--=20
+Tom
 
-Top-level, meaning the root of the DT? That sound like just something 
-for the tool, so I don't care, but it doesn't belong in the DTB.
+--ml7YJ0rWQxwICFQ5
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> 
-> Re extending, what is the minimum I can do? Are you looking for
-> something like a "compress" property that indicates that the entry is
-> compressed?
-> 
-> I'm really just a bit lost.
+-----BEGIN PGP SIGNATURE-----
 
-Me too.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUN1aMACgkQFHw5/5Y0
+tyzB8wwAl9+Y+EKx4xUGBFwo+Zqg4T0oLb9S7+Lpj/M7uGfdokbzPz2a597pd6Y4
+IB/1CDJgpk90RgB6JuUHEfsxwlCe7BZ9ygBzzeyjt5DeMXPYL+P6nAud9Xb40uvt
+gklFO3x+iTF2YrD81vhD6TsbGCdzH3h5R3C3suVymPmTH2ry6F66rTmHit7nBd/K
+gOL4WM+JA7t6E7+iXQRdLeVcCDJssM/p8B8J/9uQkG+mexaM88ASR4F4wWmwcnFM
+p+WEi15ILxyjakJXoG4cUQiJINOAMvlV38cDL4LqfRUJu6p8VvqR0wIicKL2gqhr
+prwqkn7DmbjI1gvUCyEByC/q3DeZtZLQ2j0IWMSnqSIMtUCjTP8mQ9UmOr1ODjYK
+U4A7DEPmJ7PGLRx1h/R6WaYfq0J6Of6jyn1ag6akwwU9R6ES7V05la1j/Zi8gxpb
+EoJSfgS0Rz/dorltHQlZQuD1MzWh4XoaBwQ+KeS9paDzTKQJSNORUCi/DVBrtZuY
+2anxZ3AJ
+=k0ji
+-----END PGP SIGNATURE-----
 
-Rob
+--ml7YJ0rWQxwICFQ5--
