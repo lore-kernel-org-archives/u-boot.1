@@ -4,88 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D21C1E7D0D2
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 07:02:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4BC4E7D0D6
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 07:11:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40B8186575;
-	Fri, 22 Sep 2023 09:02:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26477863DE;
+	Fri, 22 Sep 2023 09:11:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VBmGPobP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qQGzdfc6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C624F865D0; Fri, 22 Sep 2023 09:02:01 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 089DD864DD; Fri, 22 Sep 2023 09:11:55 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9499185E44
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:01:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FF338634D
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 09:11:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=krzysztof.kozlowski@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-99c3d3c3db9so224349566b.3
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:01:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-68c576d35feso1655285b3a.2
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 00:11:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695366119; x=1695970919; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=2jMuggZZvKYcFUdy/dK+81rshpboXDd4s3uqzGI3A5Y=;
- b=VBmGPobPWNDEhNqPhFnIN86IotBCEJnxLF/7hYGIQz/Ykt+xXFtDJYqIVYAsmyeWZh
- terS8LQH6x+dK4f4kCgwNn+nPfoxjmo/ygMHGXf7v0BEXn5sfMB68lrMkoAjTDjOlrdN
- TTfRBKXzVV/IHMPDFj0NBv7NW5B0EAM6JObNfi/iLwrWhVOvkAnl8OwOYPCwb/Xwc816
- EwE28ijhFN8MeMyLKEJwcX8p3Z+zGrTHpZernCkM/HVuTYDgKLjb2ShfIc9SuatT8k/8
- sJpvr3lezklM48lCQUpeHHPnW9Tdpr3ak7BSPYzG33sJiUnblxAg3/ksGWHIYCaJp1h/
- +GNw==
+ d=linaro.org; s=google; t=1695366710; x=1695971510; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=KEVY7zumXmIbns82dkk+NFbgvnnddL5MmiwKJM4jOqw=;
+ b=qQGzdfc6pyuNj4u5CvlkYgysOJpe1B6BD83PbwbklbRe3Kw3u/BxCNo7iaT+ZHlszC
+ ONJsv/aRnr+SrIpHF2PuP/pbEl6qU1GAneBGnbtDPbzfp2/ukyuF9h6pLvHwRj+BsJ15
+ j6aAuNH1QX4oUJiyTJUt+mLr6KuzwNRcoJ+aF4c5u58vqdDrREZXZTHHNd48Lfm2yavA
+ 4VJvJuKNwUSvQ3D/cWwtm9K/q51J2t1R8m9LSVVSn8AQA6RWlOrbYdi1+QhoWMHDO2ct
+ wcQQpwNc1Xa2Y+CPFzHPUDuY/XirknDr7v4TFhGoTt53tu33mSOUtSY5qz9pm4W8/HTC
+ AUMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695366119; x=1695970919;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=2jMuggZZvKYcFUdy/dK+81rshpboXDd4s3uqzGI3A5Y=;
- b=ro9JeKXC2V5IdDYKrddgSdUF2KvpukAF8SAhFhXFFlNMm2+xPSlLmgKZjUjc0BttkI
- 58FsAkBM8keWG8ooSbhbN4W3EL/aztlaa23cbc/5TumC4WUMpIxPoc8aOTkOxHVABtRT
- rrmciStUao+UUXXublUYOllcPF5f7I51BFHe7Nz0q4cNMFdF8/rtJmZocpWXhsY/Lbey
- P6E0jomZ2vHeEs+9ehlw+RvrhfPWz2H4BNT5InewtVK/6hSz5KX1IJDTmmXg7tjfbfh7
- QuBvr1/dPjIi/tLG7MUlrIlXSlzVVBsi8uzwFMEEZlsfvxcisF/Tk+kFCAwree0qBub/
- v2vQ==
-X-Gm-Message-State: AOJu0YwtPqovzpUMXwMVva7A+m814q3mK/fRmONBLwz7twAETYCcfpWM
- 57B4l8c/9pdmwbRje4f8kqhV/g==
-X-Google-Smtp-Source: AGHT+IG0i7UDbq0G1Fggapv+viejE9QTHLY0IXIcvKnvjvzePXoImlcw3a294mo0jaA03y9ttLUk9Q==
-X-Received: by 2002:a17:906:519c:b0:9ae:5be8:ff90 with SMTP id
- y28-20020a170906519c00b009ae5be8ff90mr3193946ejk.68.1695366119042; 
- Fri, 22 Sep 2023 00:01:59 -0700 (PDT)
-Received: from [10.41.192.245] ([77.241.232.19])
- by smtp.gmail.com with ESMTPSA id
- k20-20020a170906681400b0099bd046170fsm2220195ejr.104.2023.09.22.00.01.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 22 Sep 2023 00:01:58 -0700 (PDT)
-Message-ID: <da77e965-2893-097a-b438-85787c43dcb0@linaro.org>
-Date: Fri, 22 Sep 2023 09:01:41 +0200
+ d=1e100.net; s=20230601; t=1695366710; x=1695971510;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=KEVY7zumXmIbns82dkk+NFbgvnnddL5MmiwKJM4jOqw=;
+ b=XUkeszQ+ISNx8hQu68+tI5p2JiRM0ibUOma2UZuDZxha44NZLa+/PKbHXrC166j+F5
+ C0uEnSaldyG5VlvyuHpzQESE28ZnhLRJ+gzIUx4bXRR1evBU8EJo+9q6NQArZv7arKPA
+ YLEW3spu9sbEF8ssksI22F4pAAxDmwYD6WfzMO0rZFZIyArLih7hcI5ZyniH6blXowC4
+ lkH5Xo6fhQr9VxA2TuYrLQmKh19EsT0jC8lkQtKYVNcIm20y6gXF/xw/S+VrXyvVeIkL
+ 4WtzlWZ6B767JW1Y4OR6wTkRHpLqXRsgbLBRjLwtaVXv8LjbFPXLaicbajYhIBlgiiWy
+ RcPA==
+X-Gm-Message-State: AOJu0YyErAtuHZgy4ALVghi26axMqwgr0ywaeU9n7XOZnJDwe44GPk2A
+ JrJzwUXZqiee1vAFJUELgzV8hoqR6IYEMAeWHe0=
+X-Google-Smtp-Source: AGHT+IGT343oGXGhHCC+JXR8Qw3bn+bXHbQqOXHxZ23At5j9m+Cfk7b0epNNC0+uVbk2fRwXT2vQXQ==
+X-Received: by 2002:a05:6a20:96d7:b0:15d:c1a8:c329 with SMTP id
+ hq23-20020a056a2096d700b0015dc1a8c329mr761937pzc.48.1695366710412; 
+ Fri, 22 Sep 2023 00:11:50 -0700 (PDT)
+Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
+ y10-20020a056a001c8a00b006926e3dc2besm1833323pfw.108.2023.09.22.00.11.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Sep 2023 00:11:49 -0700 (PDT)
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>
+Subject: [PATCH v4 0/8] Add EFI HTTP boot support
+Date: Fri, 22 Sep 2023 16:11:11 +0900
+Message-Id: <20230922071119.1439482-1-masahisa.kojima@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, devicetree@vger.kernel.org
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>,
- Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Dhruva Gole <d-gole@ti.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?=
- <rafal@milecki.pl>, Richard Weinberger <richard@nod.at>,
- Rob Herring <robh+dt@kernel.org>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
-From: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
-In-Reply-To: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,149 +91,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 21/09/2023 20:45, Simon Glass wrote:
-> Binman[1] is a tool for creating firmware images. It allows you to
-> combine various binaries and place them in an output file.
-> 
-> Binman uses a DT schema to describe an image, in enough detail that
-> it can be automatically built from component parts, disassembled,
-> replaced, listed, etc.
-> 
-> Images are typically stored in flash, which is why this binding is
-> targeted at mtd. Previous discussion is at [2] [3].
-> 
-> [1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
-> [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.org/
-> [3] https://www.spinics.net/lists/devicetree/msg626149.html
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  .../bindings/mtd/partitions/binman.yaml       | 50 +++++++++++++++
->  .../bindings/mtd/partitions/binman/entry.yaml | 61 +++++++++++++++++++
->  .../bindings/mtd/partitions/partitions.yaml   |  1 +
->  MAINTAINERS                                   |  5 ++
->  4 files changed, 117 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
->  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
-> 
-> diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> new file mode 100644
-> index 00000000000000..c792d5a37b700a
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-> @@ -0,0 +1,50 @@
-> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> +# Copyright 2023 Google LLC
-> +
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Binman firmware layout
-> +
-> +maintainers:
-> +  - Simon Glass <sjg@chromium.org>
-> +
-> +description: |
-> +  The binman node provides a layout for firmware, used when packaging firmware
-> +  from multiple projects. For now it just supports a very simple set of
-> +  features, as a starting point for discussion.
-> +
-> +  Documentation for Binman is available at:
-> +
-> +  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html
-> +
-> +  with the current image-description format at:
-> +
-> +  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#image-description-format
-> +
-> +properties:
-> +  compatible:
-> +    const: u-boot,binman
-> +
-> +required:
-> +  - compatible
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    firmware {
-> +      binman {
-> +        compatible = "u-boot,binman";
-> +
-> +        u-boot {
+This series adds the EFI HTTP boot support.
+User can add the URI device path with "efidebug boot add" command.
+efibootmgr handles the URI device path, download the
+specified file using wget, mount the downloaded image with
+blkmap, then boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
 
-It does not look like you tested the bindings, at least after quick
-look. Please run `make dt_binding_check` (see
-Documentation/devicetree/bindings/writing-schema.rst for instructions).
-Maybe you need to update your dtschema and yamllint.
+This version still does not include the test.
 
+To enable EFI HTTP boot, we need to enable the following Kconfig options.
+ CONFIG_CMD_DNS
+ CONFIG_CMD_WGET
+ CONFIG_BLKMAP
 
-> +          size = <0xa0000>;
-> +        };
-> +
-> +        atf-bl31 {
-> +          offset = <0x100000>;
-> +        };
-> +      };
-> +    };
-> diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
-> new file mode 100644
-> index 00000000000000..8003eb4f1a994f
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
-> @@ -0,0 +1,61 @@
-> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-> +# Copyright 2023 Google LLC
-> +
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/mtd/partitions/binman/entry.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Binman entry
-> +
-> +maintainers:
-> +  - Simon Glass <sjg@chromium.org>
-> +
-> +description: |
-> +  The entry node specifies a single entry in the firmware.
-> +
-> +  Entries have a specific type, such as "u-boot" or "atf-bl31". If the type
-> +  is missing, the name is used as the type.
-> +
-> +  Note: This definition is intended to be hierarchical, so that entries can
-> +  appear in other entries. Schema for that is TBD.
-> +
-> +properties:
-> +  $nodename:
-> +    pattern: "^[-a-z]+(-[0-9]+)?$"
+On the Socionext Developerbox, enter the following commands then
+debian installer is downloaded into "loadaddr" and installer
+automatically starts.
+ => dhcp
+ => setenv serverip 192.168.1.1
+ => efidebug boot add -u 3 debian-netinst http://ftp.riken.jp/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+ => efidebug boot order 3
+ => bootefi bootmgr
 
-Why do you need this?
+Note that this debian installer can not proceed the installation
+bacause RAM disk of installer image is not recogniged by the kernel.
+I'm still investigating this issue, but drivers/nvdimm/of_pmem.c in linux
+will be one of the solution to recognize RAM disk from kernel.
+(In EDK2, the equivalent solution is called ACPI NFIT.)
 
-> +
-> +  type:
-> +    $ref: /schemas/types.yaml#/definitions/string
-> +
-> +  offset:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description: |
-> +      Provides the offset of this entry from the start of its parent section.
-> +      If this is omitted, Binman will determine this by packing the enclosing
-> +      section according to alignment rules, etc.
-> +
-> +  size:
-> +    $ref: /schemas/types.yaml#/definitions/uint32
-> +    description: |
-> +      Provides the size of this entry in bytes. If this is omitted, Binman will
-> +      use the content size, along with any alignment information, to determine
-> +      the size of the entry.
-> +
+On QEMU, I can not make DNS work from the QEMU guest.
+The following commands work on qemu_arm64(manually set the http server ip in URI).
+  => dhcp
+  => setenv gatewayip 10.0.2.2
+  => setenv httpserverip 134.160.38.1
+  => efidebug boot add -u 3 debian-netinst http://134.160.38.1/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+  => efidebug boot order 3
+  => bootefi bootmgr
 
+[TODO]
+- add test
+- stricter wget uri check
+- omit the dns process if the given uri has ip address
+   -> this will be supported when the lwip migration completes
+- uri device path support in eficonfig
 
-Best regards,
-Krzysztof
+[change log]
+v3 -> v4
+- patch#8 is added to simplify the bootmgr default boot process
+- add function comments
+
+v2 -> v3
+- Patch#6 is added, reserve the whole ramdisk memory region
+- remove .efi file extension check for PE-COFF image
+- use "if IS_ENABLED(..)" as much as possible
+- 1024 should be sizeof(net_boot_file_name)
+- call net_set_state(NETLOOP_FAIL) when wget encounters error
+- describe DNS ip address host name limitation in document
+
+v1 -> v2
+- carve out the network handling(wget and dns code) under net/wget.c
+- carve out ramdisk creation code under drivers/block/blkmap_helper.c
+- wget supports the valid range check to store the received blocks using lmb
+- support when the downloaded image have no partiton table but a file system
+- not start the .efi file in try_load_entry()
+- call efi_check_pe() for .efi file to check the file is PE-COFF image
+- add documentation for EFI HTTP Boot
+
+Masahisa Kojima (8):
+  net: wget: prevent overwriting reserved memory
+  net: wget: add wget with dns utility function
+  blk: blkmap: add ramdisk creation utility function
+  efi_loader: support boot from URI device path
+  efi_loader: set EFI HTTP Boot download buffer as reserved
+  cmd: efidebug: add uri device path
+  doc: uefi: add HTTP Boot support
+  efi_loader: create BlockIo device boot option
+
+ cmd/efidebug.c                   |  50 +++++++
+ doc/develop/uefi/uefi.rst        |  30 ++++
+ drivers/block/Makefile           |   1 +
+ drivers/block/blkmap.c           |  15 --
+ drivers/block/blkmap_helper.c    |  53 +++++++
+ include/blkmap.h                 |  29 ++++
+ include/efi_loader.h             |   3 +
+ include/net.h                    |  17 +++
+ lib/efi_loader/efi_bootmgr.c     | 241 +++++++++++++++++++++++++++++--
+ lib/efi_loader/efi_device_path.c |  20 +++
+ lib/efi_loader/efi_dt_fixup.c    |   2 +-
+ net/wget.c                       | 206 +++++++++++++++++++++++++-
+ 12 files changed, 628 insertions(+), 39 deletions(-)
+ create mode 100644 drivers/block/blkmap_helper.c
+
+-- 
+2.34.1
 
