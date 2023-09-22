@@ -4,76 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6633CD484D
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 17:01:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE0BCD484B
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 17:42:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E66BB86284;
-	Fri, 22 Sep 2023 19:01:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8CBCB864D4;
+	Fri, 22 Sep 2023 19:42:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nod.at
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cK1Ig2xc";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA5F28647E; Fri, 22 Sep 2023 19:01:38 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46C7285E44
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 19:01:36 +0200 (CEST)
+ id B1CF886844; Fri, 22 Sep 2023 19:42:39 +0200 (CEST)
+Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C35DD864D4
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 19:42:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5335d9045b4so1793891a12.3
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 10:01:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695402096; x=1696006896; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=prIJYO4UCCa6Vt94U+NHB8APLB3E/mezXQCP+edywR0=;
- b=cK1Ig2xcSiSOdhnBNlnAiAkOntetqiJ2LXtTzMW/UW7uAeKZm2WfnXNnuPNh71xJKI
- rulZunk2Ga8GMOglC9SxYTuFEV8D3I4VGy4ACL6Fswr6zYrUrYlYHwEp72s24/LUm9GM
- 1S2uxppDMnnBousVH1UrLorb7NJwsSeyUOZLc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695402096; x=1696006896;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=prIJYO4UCCa6Vt94U+NHB8APLB3E/mezXQCP+edywR0=;
- b=by2iSheXT9T9SAKLl6RzuRv3DX90xAnH/o8m3gIpnGzeTpYBV/crup2bRXZaBt/5FL
- KG1Y/+q1y/mfDwePfWwyw2l1toPADFWUfybKok8eSz1n5nIFSECqFWLTzqNxPt/PXu+O
- 1slSwkvrCvUR1Zw7x6T8VXiJQP5PLtjCfflSJXlXAQDszQ8eAxmSu9lx50ey6ZcKH0Ut
- 6JMvMMOHfycsCi7W4VNP0UWS7DIYNSsO9HHAEqqHBGGigvVIpc6L084vheiCRpj6X0Mq
- BLMjxjMkUNE/0cdXVelnqZMnbxG+xFDyPSpgzuhv5vh/P7dZ1g+iwcz6gYVnhhGD7hsE
- N0HA==
-X-Gm-Message-State: AOJu0YwXlzYbVphR2b4w6Bi2WeoGw67JWFjp5z4PcG0FMs2Km0pa2gcL
- Bef4uqd3GCHZLlPx3jYIjwvNdzs+Lh/jRcBhzp4p6w==
-X-Google-Smtp-Source: AGHT+IHHv1gP/4pypmekIUolVP4Bg2MyLQnwNSeSTQqinVXlc3czJqPwmHasOlWBXAyzd5YREZkr1Q8LAEn78+XhqMI=
-X-Received: by 2002:aa7:c7d3:0:b0:523:3fff:5ce2 with SMTP id
- o19-20020aa7c7d3000000b005233fff5ce2mr42790eds.41.1695402095589; Fri, 22 Sep
- 2023 10:01:35 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=nod.at
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=richard@nod.at
+Received: from localhost (localhost [127.0.0.1])
+ by lithops.sigma-star.at (Postfix) with ESMTP id 855B7622F589;
+ Fri, 22 Sep 2023 19:42:37 +0200 (CEST)
+Received: from lithops.sigma-star.at ([127.0.0.1])
+ by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10032)
+ with ESMTP id 99fhpSozQ21w; Fri, 22 Sep 2023 19:42:37 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by lithops.sigma-star.at (Postfix) with ESMTP id 005F662348B5;
+ Fri, 22 Sep 2023 19:42:36 +0200 (CEST)
+Received: from lithops.sigma-star.at ([127.0.0.1])
+ by localhost (lithops.sigma-star.at [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id vDby_DJn3OEM; Fri, 22 Sep 2023 19:42:36 +0200 (CEST)
+Received: from lithops.sigma-star.at (lithops.sigma-star.at [195.201.40.130])
+ by lithops.sigma-star.at (Postfix) with ESMTP id CFB27622F589;
+ Fri, 22 Sep 2023 19:42:36 +0200 (CEST)
+Date: Fri, 22 Sep 2023 19:42:36 +0200 (CEST)
+From: Richard Weinberger <richard@nod.at>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot <u-boot@lists.denx.de>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>
+Message-ID: <1723706501.70227.1695404556783.JavaMail.zimbra@nod.at>
+In-Reply-To: <20230831162703.GL3101304@bill-the-cat>
+References: <20230720125156.31773-1-richard@nod.at>
+ <404816774.38.1693477679941.JavaMail.zimbra@nod.at>
+ <20230831162703.GL3101304@bill-the-cat>
+Subject: Re: [PATCH] net: wget: Avoid packet queue overflow
 MIME-Version: 1.0
-References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
- <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
-In-Reply-To: <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 22 Sep 2023 11:01:18 -0600
-Message-ID: <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-To: Rob Herring <robh@kernel.org>
-Cc: devicetree@vger.kernel.org, U-Boot Mailing List <u-boot@lists.denx.de>, 
- linux-mtd@lists.infradead.org, Tom Rini <trini@konsulko.com>, 
- Conor Dooley <conor+dt@kernel.org>, Dhruva Gole <d-gole@ti.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
+X-Originating-IP: [195.201.40.130]
+X-Mailer: Zimbra 8.8.12_GA_3807 (ZimbraWebClient - FF97 (Linux)/8.8.12_GA_3809)
+Thread-Topic: wget: Avoid packet queue overflow
+Thread-Index: Z/WCR5A2MJbSfv3gq0gI92ElPdLjsA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,69 +70,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob,
+----- Urspr=C3=BCngliche Mail -----
+> Von: "Tom Rini" <trini@konsulko.com>
+> An: "richard" <richard@nod.at>
+> CC: "u-boot" <u-boot@lists.denx.de>, "Joe Hershberger" <joe.hershberger@n=
+i.com>, "Ramon Fried" <rfried.dev@gmail.com>
+> Gesendet: Donnerstag, 31. August 2023 18:27:03
+> Betreff: Re: [PATCH] net: wget: Avoid packet queue overflow
 
-On Fri, 22 Sept 2023 at 10:00, Rob Herring <robh@kernel.org> wrote:
->
-> On Thu, Sep 21, 2023 at 1:45=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Binman[1] is a tool for creating firmware images. It allows you to
-> > combine various binaries and place them in an output file.
-> >
-> > Binman uses a DT schema to describe an image, in enough detail that
-> > it can be automatically built from component parts, disassembled,
-> > replaced, listed, etc.
-> >
-> > Images are typically stored in flash, which is why this binding is
-> > targeted at mtd. Previous discussion is at [2] [3].
-> >
-> > [1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
-> > [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromiu=
-m.org/
-> > [3] https://www.spinics.net/lists/devicetree/msg626149.html
->
-> You missed:
->
-> https://github.com/devicetree-org/dt-schema/pull/110
->
-> where I said: We certainly shouldn't duplicate the existing partitions
-> bindings. What's missing from them (I assume we're mostly talking
-> about "fixed-partitions" which has been around forever I think (before
-> me))?
->
-> To repeat, unless there is some reason binman partitions conflict with
-> fixed-partitions, you need to start there and extend it. From what's
-> posted here, it neither conflicts nor needs extending.
+> On Thu, Aug 31, 2023 at 12:27:59PM +0200, Richard Weinberger wrote:
+>> ----- Urspr=C3=BCngliche Mail -----
+>> > Von: "richard" <richard@nod.at>
+>> > An: u-boot@lists.denx.de
+>> > CC: "richard" <richard@nod.at>, "Joe Hershberger" <joe.hershberger@ni.=
+com>,
+>> > "Ramon Fried" <rfried.dev@gmail.com>
+>> > Gesendet: Donnerstag, 20. Juli 2023 14:51:56
+>> > Betreff: [PATCH] net: wget: Avoid packet queue overflow
+>>=20
+>> > Make sure to stay within bounds, as a misbehaving HTTP server
+>> > can trigger a buffer overflow if not properly handled.
+>> >=20
+>> > Cc: Joe Hershberger <joe.hershberger@ni.com>
+>> > Cc: Ramon Fried <rfried.dev@gmail.com>
+>> > Signed-off-by: Richard Weinberger <richard@nod.at>
+>> > ---
+>> > net/wget.c | 10 +++++++++-
+>> > 1 file changed, 9 insertions(+), 1 deletion(-)
+>> >=20
+>> > diff --git a/net/wget.c b/net/wget.c
+>> > index 2dbfeb1a1d5b..8bb4d72db1ae 100644
+>> > --- a/net/wget.c
+>> > +++ b/net/wget.c
+>> > @@ -35,7 +35,8 @@ struct pkt_qd {
+>> >  * The actual packet bufers are in the kernel space, and are
+>> >  * expected to be overwritten by the downloaded image.
+>> >  */
+>> > -static struct pkt_qd pkt_q[PKTBUFSRX / 4];
+>> > +#define PKTQ_SZ (PKTBUFSRX / 4)
+>> > +static struct pkt_qd pkt_q[PKTQ_SZ];
+>> > static int pkt_q_idx;
+>> > static unsigned long content_length;
+>> > static unsigned int packets;
+>> > @@ -202,6 +203,13 @@ static void wget_connected(uchar *pkt, unsigned i=
+nt
+>> > tcp_seq_num,
+>> > =09=09pkt_q[pkt_q_idx].tcp_seq_num =3D tcp_seq_num;
+>> > =09=09pkt_q[pkt_q_idx].len =3D len;
+>> > =09=09pkt_q_idx++;
+>> > +
+>> > +=09=09if (pkt_q_idx >=3D PKTQ_SZ) {
+>> > +=09=09=09printf("wget: Fatal error, queue overrun!\n");
+>> > +=09=09=09net_set_state(NETLOOP_FAIL);
+>> > +
+>> > +=09=09=09return;
+>> > +=09=09}
+>> > =09} else {
+>> > =09=09debug_cond(DEBUG_WGET, "wget: Connected HTTP Header %p\n", pkt);
+>> > =09=09/* sizeof(http_eom) - 1 is the string length of (http_eom) */
+>=20
+> This seems fine and I'll pick it up soon.  Thanks!
 
-I think at this point I am just hopelessly confused. Have you taken a
-look at the binman schema? [1]
+Is there something I can do to help this merged?
 
-I saw this file, which seems to extend a partition.
-
-Documentation/devicetree/bindings/mtd/partitions/brcm,bcm4908-partitions.ya=
-ml
-
-I was assuming that I should create a top-level compatible =3D "binman"
-node, with subnodes like compatible =3D "binman,bl31-atf", for example.
-I should use the compatible string to indicate the contents, right?
-
-Re extending, what is the minimum I can do? Are you looking for
-something like a "compress" property that indicates that the entry is
-compressed?
-
-I'm really just a bit lost.
-
->
-> I did a bit more research. "fixed-partitions" as a compatible has
-> "only" been around since 2015. Prior to that, it was implicit with
-> just partition nodes with addresses (i.e. reg) and that dates back to
-> 2007. Looks like u-boot only supports the newer form and since 2021.
-
-OK
-
-Regards,
-Simon
-
-[1] https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#ima=
-ge-description-format
+Thanks,
+//richard
