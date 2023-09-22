@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26BE1E81A62
-	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 19:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5C15E81A62
+	for <u-boot@archiver.kernel.org>; Fri, 22 Sep 2023 19:35:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48000868D1;
-	Fri, 22 Sep 2023 21:34:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E30F869F1;
+	Fri, 22 Sep 2023 21:35:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L7x5FMTu";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="huMiOxtg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EF56868D1; Fri, 22 Sep 2023 21:34:31 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id C3D78869F6; Fri, 22 Sep 2023 21:35:38 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5EE0868D1
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 21:34:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4E8B86996
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 21:35:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-7928ba24936so104520139f.0
- for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:34:28 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5334f9a56f6so2545210a12.3
+ for <u-boot@lists.denx.de>; Fri, 22 Sep 2023 12:35:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695411267; x=1696016067; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ze0feaJyolx52nnGDHZNRW/aGemuWEpJCRuOORda2U0=;
- b=L7x5FMTuxqUPi2WLBvWyJiPxplgiXMJEmtFm9pdQAMJTZV6jkxs1aWcJ+LPvcZtG02
- dGASfd1zl+b/O391mpLCHH6mLb6B4Oefs824Li2ww8u312m+DjTJkqU2m3SfN0Yk4lsE
- CtB1PdXbMD2zreKBqWXtzXUP9XEc7Y9+CnrGw=
+ d=chromium.org; s=google; t=1695411336; x=1696016136; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=isBBGGCKpduQ5FkRVuU0y1GQu+sK0xOtxNTWqVV23LI=;
+ b=huMiOxtgEZEb4l1KFGq3c9IT2gXps1SG5fH6MEUu6xU6AvxMHxiaEFHhFDFebzMGBr
+ TG+oMklufUIvNWe19OegQofSHlnltpwNiy9RXFhm8Iqv6UHpSp5PdeEMU+NWk2KF+2Iz
+ G7/SNv/73oZjD8yNGLygriXtMvW+ZnnIWwVF0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695411267; x=1696016067;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1695411336; x=1696016136;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Ze0feaJyolx52nnGDHZNRW/aGemuWEpJCRuOORda2U0=;
- b=WYJcO7curHZMqhPX0GA9J6ZWt2lRXijJBhjQbgnyI3cqvdLb8oM9qjWld7Hb4N/Pwu
- MnOAVRGnLN41CD+acEjuyp/JSHlIrJ/fpaPqGN3SZo1djXGoo8C3ejuPY7fqh7tr1RHa
- n6Lc1LuvbLfL+rekBUqW0+z+sXJtsjdVhhHloqAit74b4Uix/+9wfI6QG6or+Pb38/oD
- A42wHLtO8Dk5Jah5gLkx7LR6U2O3h5z3LVu+9IXhxFMa3b26JFox5GYsdOARKqhnK3v5
- l/xevlWS9EEUDkVOEs+ecFViKd3sOpiICHZOsXdgBxUlYZYFMx8xq6g0NZUUqkoqSRor
- yIEw==
-X-Gm-Message-State: AOJu0YyUTC3rt63Gudu6ledkthdkpYPIwMHo/bY3bgGQGtZl4GX1uFNv
- EZ2wBDfY5JKm1lApudwpBiaObQ==
-X-Google-Smtp-Source: AGHT+IGxZot43frUtwqoFHunoT9jM8YXOXehO/Ug9V1olGsIhmVx1qXPa4/rswQ+JFb2BcqsJkZNgQ==
-X-Received: by 2002:a5d:930b:0:b0:790:f866:d717 with SMTP id
- l11-20020a5d930b000000b00790f866d717mr342505ion.10.1695411266990; 
- Fri, 22 Sep 2023 12:34:26 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:9fd8:298f:4748:f9a])
- by smtp.gmail.com with ESMTPSA id
- b18-20020a029a12000000b0042b1297468esm1149594jal.51.2023.09.22.12.34.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Sep 2023 12:34:26 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: devicetree@vger.kernel.org
-Cc: Tom Rini <trini@konsulko.com>, linux-mtd@lists.infradead.org,
- U-Boot Mailing List <u-boot@lists.denx.de>, Rob Herring <robh@kernel.org>,
- Simon Glass <sjg@chromium.org>, Conor Dooley <conor+dt@kernel.org>,
- Dhruva Gole <d-gole@ti.com>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Nick Terrell <terrelln@fb.com>,
- Pratyush Yadav <ptyadav@amazon.de>,
- =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>,
- Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
- Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
-Subject: [PATCH v2] dt-bindings: mtd: Add a schema for binman
-Date: Fri, 22 Sep 2023 13:34:15 -0600
-Message-ID: <20230922193417.1697379-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
+ bh=isBBGGCKpduQ5FkRVuU0y1GQu+sK0xOtxNTWqVV23LI=;
+ b=jyPoxFJtyE4HANaw/PIO2kXAuGNznMfx4x2TrsRJGu4rfFn3yaKZ+UdwIxwyCeVEFH
+ qzNcc+WhVMKkR+zPFptwL0fo3KSV9Qn0PCfT2yBKPTQcgSjO5h5Ii17as6b4xtsCxSNR
+ s9tR3WZlsL4reVotMcp6k1q/ga8zaMHBcBHnut1vbcSYKdjRBqKTv+SvZJY1KupSemps
+ HKFkp+ls8ywjG3w8ZJqWO+siEiNKRcRbQCUhKlbuMcoCCQNvwFdTIQU5fcKyP8dl74Eh
+ K0IUubxpiVnbPp1Cu24jE/YmqdtpWUQhbHBsaYFx+Gc546URDds6CJuB7uPqCrTdC9JX
+ 8Xug==
+X-Gm-Message-State: AOJu0YwnVo08cCU0shjCIHse2UgGUVXd7rurMg49G9xXRaZ34advabvk
+ 5ICg0uqFwZCSl2KCtbw+o3HikEIxSHQbRPxqvEuAKA==
+X-Google-Smtp-Source: AGHT+IHQOUzdhvWMotL16z7Ig4AHCwphBkf6kKjzl1g3FZBnmTD23+LLZhi4Mw64ypFlFFv6B3BJR2oy72IDzo0yBCI=
+X-Received: by 2002:a05:6402:5148:b0:52f:2a38:1f3 with SMTP id
+ n8-20020a056402514800b0052f2a3801f3mr427913edd.2.1695411336195; Fri, 22 Sep
+ 2023 12:35:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CAK7LNASYfwjuCQ70BZ5Gco+rme=H_fArxyT5rFsE334p2viSoA@mail.gmail.com>
+ <CAPnjgZ2W_2d-xhdKPbatR4L3BjE08ZEH4SdBSi6YVDWqs7Swmw@mail.gmail.com>
+ <41a5e281-9dcd-9720-380a-ea59566d7dc1@ti.com>
+ <CAPnjgZ34hW-61MNEORQU8xofBaoBu_piau4rKd2hdTJgFbSZnA@mail.gmail.com>
+ <eaf56065-9f9e-70b4-e901-3e6dc2934cd1@ti.com>
+ <CAPnjgZ1vkKq5yc7mq44nN063miJWx0JKztaXLMwFuUbJLtvEEA@mail.gmail.com>
+ <a5d0e5dd-f907-09f9-474d-39b361479042@ti.com>
+In-Reply-To: <a5d0e5dd-f907-09f9-474d-39b361479042@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 22 Sep 2023 13:35:19 -0600
+Message-ID: <CAPnjgZ28Shudbz2-=Wh3tyi+o7gnfnzixcEyD8FwUvNG-w3HyA@mail.gmail.com>
+Subject: Re: [Question] TI's u-boot.img is built twice
+To: Andrew Davis <afd@ti.com>
+Cc: Masahiro Yamada <masahiroy@kernel.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Nishanth Menon <nm@ti.com>, srk@ti.com, n-francis@ti.com, s-vadapalli@ti.com, 
+ m-chawdhry@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,302 +89,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Binman[1] is a tool for creating firmware images. It allows you to
-combine various binaries and place them in an output file.
+Hi Andrew,
 
-Binman uses a DT schema to describe an image, in enough detail that
-it can be automatically built from component parts, disassembled,
-replaced, listed, etc.
+On Fri, 22 Sept 2023 at 12:44, Andrew Davis <afd@ti.com> wrote:
+>
+> On 9/22/23 1:29 PM, Simon Glass wrote:
+> > Hi Andrew,
+> >
+> > On Fri, 22 Sept 2023 at 12:14, Andrew Davis <afd@ti.com> wrote:
+> >>
+> >> On 9/22/23 11:40 AM, Simon Glass wrote:
+> >>> Hi Andrew,
+> >>>
+> >>> On Fri, 22 Sept 2023 at 10:35, Andrew Davis <afd@ti.com> wrote:
+> >>>>
+> >>>> On 9/22/23 10:01 AM, Simon Glass wrote:
+> >>>>> Hi Masahiro,
+> >>>>>
+> >>>>> On Thu, 21 Sept 2023 at 09:36, Masahiro Yamada <masahiroy@kernel.org> wrote:
+> >>>>>>
+> >>>>>> Hi.
+> >>>>>>
+> >>>>>> Since the TI platform migrated to binman,
+> >>>>>> u-boot.img is built twice.
+> >>>>>>
+> >>>>>> It is created by "mkimage -E",
+> >>>>>> then overwritten by binman.
+> >>>>>>
+> >>>>>>
+> >>>>>> So, the data are embedded in the FIT structure
+> >>>>>> instead of being appended.
+> >>>>>>
+> >>>>>> Is this intentional?
+> >>>>>>
+> >>>>>> To me, it looks weird.
+> >>>>>>
+> >>>>>>
+> >>>>>>
+> >>>>>>
+> >>>>>> To confirm it, apply the following hack.
+> >>>>>>
+> >>>>>> Since u-boot.img is overwritten by binman,
+> >>>>>> copy it to u-boot.img.backup.
+> >>>>>>
+> >>>>>>
+> >>>>>>
+> >>>>>>
+> >>>>>> diff --git a/Makefile b/Makefile
+> >>>>>> index 87f9fc786e..4cffa8a061 100644
+> >>>>>> --- a/Makefile
+> >>>>>> +++ b/Makefile
+> >>>>>> @@ -1112,6 +1112,7 @@ endef
+> >>>>>>     # Timestamp file to make sure that binman always runs
+> >>>>>>     .binman_stamp: $(INPUTS-y) FORCE
+> >>>>>>     ifeq ($(CONFIG_BINMAN),y)
+> >>>>>> +       cp u-boot.img u-boot.img.backup
+> >>>>>>            $(call if_changed,binman)
+> >>>>>>     endif
+> >>>>>>            @touch $@
+> >>>>>>
+> >>>>>>
+> >>>>>>
+> >>>>>> Then, build it for the main core.
+> >>>>>>
+> >>>>>>
+> >>>>>> make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu-
+> >>>>>>       am64x_evm_a53_defconfig all
+> >>>>>>       TEE=~/ref/OP-TEE/optee_os/out/arm-plat-k3/core/tee-raw.bin
+> >>>>>>       BL31=~/ref/trusted-firmware-a/build/k3/lite/release/bl31.bin
+> >>>>>>       BINMAN_INDIRS=~/ref/ti-linux-firmware
+> >>>>>>
+> >>>>>>
+> >>>>>>
+> >>>>>>
+> >>>>>> Compare the two files.
+> >>>>>> Run fdtdump to see what happened to them.
+> >>>>>>
+> >>>>>>
+> >>>>>> $ diff -u u-boot.img  u-boot.img.backup
+> >>>>>> Binary files u-boot.img and u-boot.img.backup differ
+> >>>>>>
+> >>>>>>
+> >>>>>> $ fdtdump u-boot.img
+> >>>>>>        => u-boot and dt are embedded.
+> >>>>>>
+> >>>>>> $ fdtdump u-boot.img.backup
+> >>>>>>        => u-boot and dt are appended after the
+> >>>>>>           FIT structure
+> >>>>>
+> >>>>> That seems like a bug to me...at some point we might consider building
+> >>>>> u-boot.img with Binman, but for now it is built by the Makefile.
+> >>>>>
+> >>>>
+> >>>> This is not true for K3 as we now use Binman for u-boot.img generation
+> >>>> (we need this as we have a signing step injected at this point).
+> >>>
+> >>> No, no.
+> >>>
+> >>> You must not mess with the outputs of Makefile - create a new file
+> >>> with what you need, e.g. u-boot-ti.img
+> >>>
+> >>> While we could use Binman to produce the .img we are quite a way from
+> >>> doing that as not that many boards have been converted to binman.
+> >>>
+> >>
+> >> Too late, we already use Binman to generate u-boot.img on K3, why
+> >> would we want to go back to using Makefile?
+> >
+> > I don't mean that, I mean give it another name. The u-boot.img file is
+> > intended to be a certain format, and it seems this is being changed.
+> >
+>
+> Well we need u-boot.img, and it needs to be called that, and
+> it needs to be the one generated by Binman (the one generated by
+> Makefile can only boot on GP devices, but not HS-SE).
+>
+> The format produced by Makefile and Binman will be identical after
+> we fix Binman to put the data at the end. At which point why not
+> drop the Makefile made one?
 
-Images are typically stored in flash, which is why this binding is
-targeted at mtd. Previous discussion is at [2] [3].
+I think you understand my concern, which is really around overwriting
+an existing file with Binman. So long as you can resolve that in a
+deterministic way (i.e. Kconfig) then I am happy.
 
-This is only a starting point, an attempt to align on the best way to
-add this to the schema.
+Regards,
+Simon
 
-[1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
-[2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.org/
-[3] https://www.spinics.net/lists/devicetree/msg626149.html
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
-Changes in v2:
-- Use "binman" for compatible instead of "u-boot,binman"
-- Significantly rework the patch
-- Use make dt_binding_check DT_SCHEMA_FILES=Documentation/../partitions
-
- .../bindings/mtd/partitions/binman.yaml       | 59 ++++++++++++++++++
- .../mtd/partitions/binman/atf-bl31.yaml       | 43 +++++++++++++
- .../bindings/mtd/partitions/binman/entry.yaml | 62 +++++++++++++++++++
- .../mtd/partitions/binman/u-boot.yaml         | 43 +++++++++++++
- .../bindings/mtd/partitions/partitions.yaml   |  1 +
- MAINTAINERS                                   |  5 ++
- 6 files changed, 213 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
- create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml
- create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
- create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml
-
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-new file mode 100644
-index 000000000000..31accab37055
---- /dev/null
-+++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-@@ -0,0 +1,59 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+# Copyright 2023 Google LLC
-+
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Binman firmware layout
-+
-+maintainers:
-+  - Simon Glass <sjg@chromium.org>
-+
-+select: false
-+
-+description: |
-+  The binman node provides a layout for firmware, used when packaging firmware
-+  from multiple projects. For now it just supports a very simple set of
-+  features, as a starting point for discussion.
-+
-+  Documentation for Binman is available at:
-+
-+  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html
-+
-+  with the current image-description format at:
-+
-+  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#image-description-format
-+
-+properties:
-+  reg:
-+    description: partition's offset and size within the flash
-+    maxItems: 1
-+
-+  compatible:
-+    const: binman
-+
-+  "#address-cells":
-+    enum: [ 1, 2 ]
-+
-+  "#size-cells":
-+    enum: [ 1, 2 ]
-+
-+required:
-+  - compatible
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    binman {
-+        compatible = "binman";
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+
-+        partition@100000 {
-+            compatible = "brcm,bcm4908-firmware";
-+            reg = <0x100000 0xf00000>;
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml
-new file mode 100644
-index 000000000000..7d28e7e1d01d
---- /dev/null
-+++ b/Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml
-@@ -0,0 +1,43 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+# Copyright 2023 Google LLC
-+
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mtd/partitions/binman/atf-bl31.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: ARM Trusted Firmware BL31
-+
-+maintainers:
-+  - Simon Glass <sjg@chromium.org>
-+
-+description:
-+  Holds a BL31 binary file from the ARM Trusted Firmware project.
-+
-+allOf:
-+  - $ref: entry.yaml#
-+
-+properties:
-+  compatible:
-+    const: binman,atf-bl31
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    binman {
-+        compatible = "binman";
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+
-+        partition@0 {
-+            reg = <0x0 0xa0000>;
-+            compatible = "binman,entry";
-+        };
-+
-+        partition@100000 {
-+            reg = <0x100000 0x200000>;
-+            compatible = "binman,atf-bl31";
-+            compression = "lz4";
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
-new file mode 100644
-index 000000000000..9991c83aa0cf
---- /dev/null
-+++ b/Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
-@@ -0,0 +1,62 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+# Copyright 2023 Google LLC
-+
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mtd/partitions/binman/entry.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Binman entry
-+
-+maintainers:
-+  - Simon Glass <sjg@chromium.org>
-+
-+description: |
-+  This node specifies a single, generic entry in the firmware.
-+
-+  Entries have a specific type, indicated by the compatible string.
-+
-+properties:
-+  reg:
-+    description: partition's offset and size within the flash
-+    maxItems: 1
-+
-+  compression:
-+    $ref: /schemas/types.yaml#/definitions/string
-+    description:
-+      Compression algorithm to use, chosen from a list of well-known algorithms.
-+      The contents are compressed using this algorithm.
-+
-+    enum:
-+      - none
-+      - bzip2
-+      - gzip
-+      - lzop
-+      - lz4
-+      - lzma
-+      - xz
-+      - zstd
-+
-+required:
-+  - compatible
-+
-+additionalProperties: true
-+
-+examples:
-+  - |
-+    binman {
-+        compatible = "binman";
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+
-+        partition@0 {
-+            reg = <0x0 0xa0000>;
-+            compatible = "binman,entry";
-+        };
-+
-+        partition@100000 {
-+            reg = <0x100000 0x200000>;
-+            compatible = "binman,entry";
-+            compression = "lz4";
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml
-new file mode 100644
-index 000000000000..e5f3583f746c
---- /dev/null
-+++ b/Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml
-@@ -0,0 +1,43 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+# Copyright 2023 Google LLC
-+
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mtd/partitions/binman/u-boot.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: U-Boot
-+
-+maintainers:
-+  - Simon Glass <sjg@chromium.org>
-+
-+description:
-+  Holds a binary file (u-boot.bin) from the U-Boot project.
-+
-+allOf:
-+  - $ref: entry.yaml#
-+
-+properties:
-+  compatible:
-+    const: binman,u-boot
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    binman {
-+        compatible = "binman";
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+
-+        partition@0 {
-+            reg = <0x0 0xa0000>;
-+            compatible = "binman,u-boot";
-+        };
-+
-+        partition@100000 {
-+            reg = <0x100000 0x200000>;
-+            compatible = "binman,atf-bl31";
-+            compression = "lz4";
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
-index 1dda2c80747b..849fd15d085c 100644
---- a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
-+++ b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
-@@ -15,6 +15,7 @@ maintainers:
- 
- oneOf:
-   - $ref: arm,arm-firmware-suite.yaml
-+  - $ref: binman.yaml
-   - $ref: brcm,bcm4908-partitions.yaml
-   - $ref: brcm,bcm947xx-cfe-partitions.yaml
-   - $ref: fixed-partitions.yaml
-diff --git a/MAINTAINERS b/MAINTAINERS
-index a4c30221eb30..ebcbfb4292e8 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3505,6 +3505,11 @@ F:	Documentation/filesystems/bfs.rst
- F:	fs/bfs/
- F:	include/uapi/linux/bfs_fs.h
- 
-+BINMAN
-+M:	Simon Glass <sjg@chromium.org>
-+S:	Supported
-+F:	Documentation/devicetree/bindings/mtd/partitions/binman*
-+
- BITMAP API
- M:	Yury Norov <yury.norov@gmail.com>
- R:	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
--- 
-2.42.0.515.g380fc7ccd1-goog
-
+>
+> Andrew
+>
+> > Really, this is a problem with binman, as it should have refused to
+> > creating u-boot.img...?
+> >
+> >>
+> >> Let's go with what you suggest below and add a Kconfig that can
+> >> be used for boards that have already switched to binman that disables
+> >> the Makefile generator for u-boot.img.
+> >>
+> >> Once all boards have switched to Binman, then we could refactor
+> >> the implementations into something more common.
+> >
+> > That seems OK to me.
+> >
+> > Regards,
+> > Simon
+> >
+> >>
+> >> Andrew
+> >>
+> >>>>
+> >>>> So as Masahiro suggested in the other branch of this thread, we need
+> >>>> to disable the Makefile generation of u-boot.img for K3.
+> >>>>
+> >>>> Neha,
+> >>>>
+> >>>> Can you take this action? I assume you can add it as part of your
+> >>>> work in making the data external again, which would make the u-boot.img
+> >>>> identical to before and hence Makefile version could be disabled at
+> >>>> the same time/series.
+> >>>
+> >>> If you are suggesting that we slowly migrate boards away from
+> >>> generating the .img using Makefile...perhaps that makes sense? I'm not
+> >>> really sure. But in that case we need another Kconfig option.
+> >>>
+> >>> Regards,
+> >>> Simon
