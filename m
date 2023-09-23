@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C494CE7A88
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 18:52:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63BB1CE7A89
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 18:52:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF18D869F6;
-	Sat, 23 Sep 2023 20:51:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3484286A43;
+	Sat, 23 Sep 2023 20:52:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1695495116;
-	bh=NT6UhCsQUzFMnnewCPvvZKER99mZzEkbC9t2EQ+FgXs=;
+	s=phobos-20191101; t=1695495121;
+	bh=i4fe/yn0wO+fF45u0m3n4xvqKPoJLunOmnZq1lXRuiE=;
 	h=From:To:Subject:In-reply-to:Date:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:From;
-	b=UJEd6LMfa96JPkPQenpDHafxJps4/or3z1Hj/DXwVzS237ffNaqOLnPkwK/CpetT1
-	 zggKCnGglmdVKBnkBfmfPGW+la1lOSgMJ5sGwF7npZ02cjOakooGrV9kzAlKCF3UYA
-	 9f91Hf6DJPwbyJksxGOCAKBpefZjrddqZWOEJAUi40VxJIlPkbOZobcnHNLSY9ITnG
-	 5vROQNu4fXDyVP5tZn9TssLk5/t9qTwXrY9u/Dpg+PI7qwG1FWLJLdZ8x29u4rjoXx
-	 ysMu7K5/oLC8cWsTqFdySGlPk5W/hIhc9CwettvUz/yxY3eQD/aWyOjCgnC7zQJfou
-	 Jlrzzd1xRNy0w==
+	b=B1W7AIIsuJjWEeyS0F2DNE/wwHL6DhqkxrJqBmp9oRppXfNnt7kUkL7iQxtxXu2QQ
+	 EA27gRczTXns1ddYAzvPadhaACvAj08+UOU+4Bvxyss/CtuPECPPXaNCE+KBq+Oi4C
+	 DI4HhUc9ntL6tQONG5AtvsC7FVqtCXcVvv6cX/bItpAlN8qLI1CM+m2ohmD5SsS+vQ
+	 AWPBkWMurVwznQTkIPij4FpedrAuCzugZio6ZJl+m/JRHuPnoB4ArfoJyWa3Pua1Pw
+	 IzumBXNEzYlAi1yAdAUNiC94INfc78pfQpURQpvuQbLo8JrlzBDxPdMbIWc+Y4mD1v
+	 wwkL/ITc66j0w==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70B2F86A24; Sat, 23 Sep 2023 20:51:55 +0200 (CEST)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ id 5C6AE869EB; Sat, 23 Sep 2023 20:51:59 +0200 (CEST)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABDE186996
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 20:51:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6025986B29
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 20:51:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4RtJCF2WGnz1r2sG;
- Sat, 23 Sep 2023 20:51:53 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 4RtJCK1222z1sBqf;
+ Sat, 23 Sep 2023 20:51:57 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
- by mail.m-online.net (Postfix) with ESMTP id 4RtJCF2N44z1qqlS;
- Sat, 23 Sep 2023 20:51:53 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 4RtJCK0m5qz1qqlS;
+ Sat, 23 Sep 2023 20:51:57 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
- with ESMTP id zxgTjzmJJKMD; Sat, 23 Sep 2023 20:51:52 +0200 (CEST)
+ with ESMTP id MitlohL2cDxi; Sat, 23 Sep 2023 20:51:56 +0200 (CEST)
 Received: from papero (host-88-217-136-221.customer.m-online.net
  [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
- Sat, 23 Sep 2023 20:51:52 +0200 (CEST)
+ Sat, 23 Sep 2023 20:51:56 +0200 (CEST)
 From: sbabic@denx.de
 X-Patchwork-Submitter: Fabio Estevam <festevam@gmail.com>
-X-Patchwork-Id: 1830684
+X-Patchwork-Id: 1830685
 X-Patchwork-Delegate: sbabic@denx.de
 To: Fabio Estevam <festevam@gmail.com>,u-boot@lists.denx.de
-Subject: [PATCH 1/3] imx: hab: Allow hab_auth_img_or_fail to be called without
- ivt_offset
-In-reply-to: <20230907014727.371324-1-festevam@gmail.com>
+Subject: [PATCH 2/3] imx: hab: Improve the hab_auth_img_or_fail usage text
+In-reply-to: <20230907014727.371324-2-festevam@gmail.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-Message-Id: <20230923185155.70B2F86A24@phobos.denx.de>
-Date: Sat, 23 Sep 2023 20:51:53 +0200 (CEST)
+Message-Id: <20230923185159.5C6AE869EB@phobos.denx.de>
+Date: Sat, 23 Sep 2023 20:51:57 +0200 (CEST)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,18 +73,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Eduard Strehlau <eduard@lionizers.com>
-> Since commit ea91031b2232 ("imx: hab: extend hab_auth_img to calculate
-> ivt_offset"), it is possible to call the hab_auth_img command without the 
-> last ivt_offset argument.
-> Currently, calling hab_auth_img_or_fail without the last
-> ivt_offset parameter causes a failure and the command usage text is shown.
-> Fix this problem by adjusting the argc logic to allow
-> calling hab_auth_img_or_fail with only the address and size parameters.
-> This way, both hab_auth_img and hab_auth_img_or_fail have the same
-> behavior with respect to the allowed number of command parameters.
->  
-> Signed-off-by: Eduard Strehlau <eduard@lionizers.com>
+> From: Fabio Estevam <festevam@denx.de>
+> Split the hab_auth_img_or_fail usage text in two sentences to make it
+> clearer.
 > Signed-off-by: Fabio Estevam <festevam@denx.de>
 Applied to u-boot-imx, master, thanks !
 
