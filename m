@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24DB1CE7A88
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:47:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E25CE7A88
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:47:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F9CF86BB4;
+	by phobos.denx.de (Postfix) with ESMTP id F111B86B70;
 	Sat, 23 Sep 2023 21:44:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aQj5XszV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V676cx+W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EFCA86B57; Sat, 23 Sep 2023 21:44:47 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 6566686B74; Sat, 23 Sep 2023 21:44:46 +0200 (CEST)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 290D58477A
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:44:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC45486B3C
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:44:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-7926b7f8636so120182139f.1
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:44:45 -0700 (PDT)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-34deefc2016so12018485ab.2
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:44:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695498282; x=1696103082; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695498281; x=1696103081; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HL3kUgvM8I/DEDkcw8SFc7Ejy+gs4FlC9kT/Dstl9rM=;
- b=aQj5XszVR1ruD32WWe2K+LablA00zhaZOCd43LxCySnKzXORCDDO3Dm6juUaT0bzNP
- zlpRmnMaWueoK9imGVd0HxIX1QNYTe4ymrYVhUKfLM31nP0+6Qm+pu1UhgPecZWJGmt6
- XNeS3/BqUnEO1ZNaGFBDEDqubBUwNObysdnUA=
+ bh=VammdYrXLZ6Ir2JQmINbsQFPB0Cvoj6/JLXkoaV6lfQ=;
+ b=V676cx+W/YmabuHUIB6rsHq5UqQsQ1CfX7hs7TFQWzCIb7b3Qa+NEg2a0uNKWXZ5DJ
+ 4puZ5zbE8EJmh74uK7DaAaw0/JMqibKhbNkrJmMJ1yuKY9G1OHS1eAvFNm7xfT4rnRUE
+ k1tbgZlNHLdbZnLl9HbW4zm9w3ZrAj8nAdC/E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695498282; x=1696103082;
+ d=1e100.net; s=20230601; t=1695498281; x=1696103081;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HL3kUgvM8I/DEDkcw8SFc7Ejy+gs4FlC9kT/Dstl9rM=;
- b=Ih4BO7boqOp2JSswdN4YwVwfLBjndek8a+pO/1YQeeEvjJ5g6/mFj8xk11+cNY5yj6
- YUbum8ELxe1dmY1cwG+ZWP83DL/KCvNWx75tYnIslyGphyOuYtF2i8VOZnFAMa/2kcBT
- t+Zy7te9niJORtIy/nPH9tDKIKxV5YP83s6GADW72QR7qBqBlrCESaPoBj0Ld15EF3KO
- xypjr6E8Wmv+svdg8VYGCcKZACZhCvWeciejyXNpQADHtZoWPVvcXmRcmmz1AjFgDMSs
- 6dNyZnfETiGseDR5bdjdJ2uJax04iITpsqBUm8jQUR8byis6dob3xgiymPGS+7Q+SIKr
- BWHg==
-X-Gm-Message-State: AOJu0Yy9zUJmAtt5IS4iixg0tFCDnf++yygeaUbHifryejlfPR02eFj7
- Fj43UsSS4cBg5R/H7ujje8WIPIZTl91PMBdwsr4=
-X-Google-Smtp-Source: AGHT+IFPqpF/kezp8nnmFpUmHNZgiWKfp//DlUdlVHZ67i4brC1O+cSGl1uFtgyvnfFZbw8xYA6Lsg==
-X-Received: by 2002:a5e:c915:0:b0:79f:95cd:10f6 with SMTP id
- z21-20020a5ec915000000b0079f95cd10f6mr5125828iol.8.1695498282693; 
- Sat, 23 Sep 2023 12:44:42 -0700 (PDT)
+ bh=VammdYrXLZ6Ir2JQmINbsQFPB0Cvoj6/JLXkoaV6lfQ=;
+ b=r3d92icVrec/KqulvJEYdTFwswZ7dd8Tlh2ZVMk3zhec3yoqv6HrFHKrvTqGVFhRF3
+ RySR1ddnLtfUYBzkdwzeho3GeEiuIEwK4jiOU4QVUoZ6/nZftFzJ01bUTg2phi43Sfb7
+ ohjaIhdhSc0oWppF5YbBcQDM8MwdLdUbB3pVJ4f+9qcmSD5nYeISm/BYrysn6XEgV0CT
+ G/AarrbAqC0RyJN0o1ro3RyCWobFj4RByftj4JuJUaXdUBu9hkKbQECm1IMGKTJkxHUZ
+ 5QhVI0oc7prFbTcKh4Po4nCUSkuAE+fgFIW0xqPMbrYXoXb5rKEAvCxNOtikfwfz3qS4
+ aPTg==
+X-Gm-Message-State: AOJu0YxcpALokX/DYbX5d7TmaYJdHrB3wQADvLIVY4LJL1Rc9rylkzXQ
+ pPxd/lB8uT1frTByZ6oZVUSTxaAvNNt7JTlLQP8=
+X-Google-Smtp-Source: AGHT+IEuix12PH2VLrnMpWZ90V57UlYSu59w0yBjWCKKTmgDRTtNeTm6ar91HxR0YvAJReSWio8NLA==
+X-Received: by 2002:a05:6e02:ec5:b0:351:c42:f6a0 with SMTP id
+ i5-20020a056e020ec500b003510c42f6a0mr2852337ilk.20.1695498281484; 
+ Sat, 23 Sep 2023 12:44:41 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.42
+ el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Sep 2023 12:44:42 -0700 (PDT)
+ Sat, 23 Sep 2023 12:44:41 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 14/27] moveconfig: Correct list-comprehension warnings
-Date: Sat, 23 Sep 2023 13:44:03 -0600
-Message-ID: <20230923194424.1739224-15-sjg@chromium.org>
+Subject: [PATCH v3 13/27] moveconfig: Correct use of members not declared in
+ __init__()
+Date: Sat, 23 Sep 2023 13:44:02 -0600
+Message-ID: <20230923194424.1739224-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230923194424.1739224-1-sjg@chromium.org>
 References: <20230923194424.1739224-1-sjg@chromium.org>
@@ -88,50 +89,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Correct some pylint warnings about needing to use list comprehension.
+Fix these pylint warnings.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/moveconfig.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tools/moveconfig.py | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/tools/moveconfig.py b/tools/moveconfig.py
-index 1dff89159312..d46433c6d8f5 100755
+index 2234f28a7724..1dff89159312 100755
 --- a/tools/moveconfig.py
 +++ b/tools/moveconfig.py
-@@ -1422,12 +1422,12 @@ def do_scan_source(path, do_update):
-     print('\nCONFIG options present in Makefiles but not Kconfig (SPL):')
-     not_found = check_not_found(all_uses, MODE_SPL)
-     show_uses(not_found)
--    spl_not_found |= set([is_not_proper(key) or key for key in not_found.keys()])
-+    spl_not_found |= {is_not_proper(key) or key for key in not_found.keys()}
+@@ -410,6 +410,10 @@ class Slot:
+         self.parser = KconfigParser(args, self.build_dir)
+         self.state = STATE_IDLE
+         self.failed_boards = set()
++        self.defconfig = None
++        self.log = ''
++        self.current_src_dir = None
++        self.proc = None
  
-     print('\nCONFIG options used as Proper in Makefiles but without a non-SPL_ variant:')
-     not_found = check_not_found(all_uses, MODE_PROPER)
-     show_uses(not_found)
--    proper_not_found |= set([key for key in not_found.keys()])
-+    proper_not_found |= {not_found.keys()}
- 
-     # Scan the source code
-     all_uses, _ = scan_src_files(src_list)
-@@ -1440,12 +1440,12 @@ def do_scan_source(path, do_update):
-     print('\nCONFIG options present in source but not Kconfig (SPL):')
-     not_found = check_not_found(all_uses, MODE_SPL)
-     show_uses(not_found)
--    spl_not_found |= set([is_not_proper(key) or key for key in not_found.keys()])
-+    spl_not_found |= {is_not_proper(key) or key for key in not_found.keys()}
- 
-     print('\nCONFIG options used as Proper in source but without a non-SPL_ variant:')
-     not_found = check_not_found(all_uses, MODE_PROPER)
-     show_uses(not_found)
--    proper_not_found |= set([key for key in not_found.keys()])
-+    proper_not_found |= {not_found.keys()}
- 
-     print('\nCONFIG options used as SPL but without an SPL_ variant:')
-     for item in sorted(spl_not_found):
+     def __del__(self):
+         """Delete the working directory
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
