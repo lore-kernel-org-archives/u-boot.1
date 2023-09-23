@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 188A5CE7A88
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:46:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B18BCE7A89
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:46:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 603FB868D8;
+	by phobos.denx.de (Postfix) with ESMTP id C3ABE86B6D;
 	Sat, 23 Sep 2023 21:44:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="luSqhOji";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j4ZXDaqg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51888869EB; Sat, 23 Sep 2023 21:44:41 +0200 (CEST)
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
- [IPv6:2607:f8b0:4864:20::129])
+ id BFFF38694A; Sat, 23 Sep 2023 21:44:41 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D6828694A
+ by phobos.denx.de (Postfix) with ESMTPS id 7BAF786B29
  for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:44:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-34fdd6d2dabso12171235ab.0
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-79545e141c7so120881639f.0
  for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:44:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695498277; x=1696103077; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695498278; x=1696103078; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=o7aXT9NMvoxmwI8swO2vf2D5+Bg91nXRiw0cdso4z+o=;
- b=luSqhOji4L3bSkDR8O0tllfL/Rd11sXw3ZG8TFmiLR2JGts2+g2eZsIvLmhRasZunq
- xKoW2VPm+4eInjY92DK8PUygSbR9plXrLcZZwqu2WPpbMO+BPkQrGbfIdM19LgbpkgCd
- jm8qSwQ97ezDdd4znmBZA+eGI9UNzuRc5WCu8=
+ bh=vgCYT4XBf74RWpawUwrZ/2bCz4Wbk+l5ZUE0FaNKvek=;
+ b=j4ZXDaqgtLjsaTVQRoHI3naftLVrqWgSq7VOpGmbDJjN5358YAE8k8Xxd3FnIg+OVS
+ syh63Aurkxmi2bHuBrStAAh8BtnEyvnpWtOjQL8g0ExzGDei4S12w2lZ2jt4jynDTBQe
+ aowjDYqY7YEcA0qwZPee53Kq+mfNMcluDSrxI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695498277; x=1696103077;
+ d=1e100.net; s=20230601; t=1695498278; x=1696103078;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=o7aXT9NMvoxmwI8swO2vf2D5+Bg91nXRiw0cdso4z+o=;
- b=p9BUbaixtrCzGhGuwNCU9sjDDRmDHoXA+sLvyIYB6pHnvyJsYpw8Xfn6sdDHANnLmj
- 731Cne33On5qY0W2gC3JBoTgxH2vDzWmAdEJ7IuKLunFw+lFMVJFYxNPR+gsokMdHW5I
- l/xQSVYkiZuFew3xf/PblfAfUCHGsYPiILbeMl5Rm3bPK9jOHB6SFGdFvX7fhO8xX/QN
- 3/Uzecc3IeUW4exderQUibpSnGPWwg0TrnPTYFvSzqizk+MXyVmeNWTP13jpNdC883hP
- rKol9jykHIM7iPjJxnj5ZrgFke96yFcVcucLzCjY1Il6QbgwRCZwqYmB9sYJOaUH81+R
- aznw==
-X-Gm-Message-State: AOJu0Yy6y1L994hjHCVfImFc4JkNTSd86fHM/L1rpFhgPiqTe85naAm/
- Qs2qtpJg+1MMSP2ELgSVZlyDVcIZEKuWYrR0Z7c=
-X-Google-Smtp-Source: AGHT+IEd+qhQTty/h41uh5AowkPmVftDBS4WQwBYMocHoSGSIYA36ujt4cq/gLuoE8Gf/px+l/mwOQ==
-X-Received: by 2002:a05:6e02:11a2:b0:350:e9c6:e765 with SMTP id
- 2-20020a056e0211a200b00350e9c6e765mr2759739ilj.11.1695498277210; 
+ bh=vgCYT4XBf74RWpawUwrZ/2bCz4Wbk+l5ZUE0FaNKvek=;
+ b=OC6U8xlc5o9qz1fv+LpHR8WLEv40kUw1jf36pOGRgUDVJkoESXDMutCsPMycxZq/jl
+ o7/AoS7QX2XE07q505HV7wGzzbSUDaWQ/bE92T+eFmbYcJxtUVdgGuCLOIy8b8GoIzeN
+ HElAXIEaiuzTpYEQZq4FYlNfDVMcYKLI0DOT43XdLx9B5YGnafGmTL5nghb1EuXn9ILh
+ 3OA5CVY5KvWI3an62JDMkQcphxYmNsIWwDMMdZYhn/hw4SLMS6Dve+7hVtX9wS5tS5aq
+ 8XZmonXqsii86X9huKtxEF8Dsb2oRNNinPsxtUAisEf17vAF8ZmlPnpBnj2I7aCsrUXp
+ wGyA==
+X-Gm-Message-State: AOJu0Yxzs55TtBnXzxZq7mxApaKyaKtJCXCv+WMY10JPoqTQDtNkhtMJ
+ oB+3ahI9aOtL7dA60OtvMLTPLR5raNAOKx//en8=
+X-Google-Smtp-Source: AGHT+IG7k401SamF1Qp5dOowzjKhQBzYyFvYJgeWfgCFJaFJJ0i2Z1kS2yuKFxbaGao/H27n/DoeZA==
+X-Received: by 2002:a05:6602:72d:b0:79f:ba15:6b9c with SMTP id
+ g13-20020a056602072d00b0079fba156b9cmr945755iox.4.1695498277998; 
  Sat, 23 Sep 2023 12:44:37 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.36
+ el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Sep 2023 12:44:36 -0700 (PDT)
+ Sat, 23 Sep 2023 12:44:37 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 08/27] moveconfig: Correct some regular-expression strings
-Date: Sat, 23 Sep 2023 13:43:57 -0600
-Message-ID: <20230923194424.1739224-9-sjg@chromium.org>
+Subject: [PATCH v3 09/27] moveconfig: Correct parameter-type warnings
+Date: Sat, 23 Sep 2023 13:43:58 -0600
+Message-ID: <20230923194424.1739224-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230923194424.1739224-1-sjg@chromium.org>
 References: <20230923194424.1739224-1-sjg@chromium.org>
@@ -88,35 +88,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the 'r' prefix for these strings to avoid pylint warnings.
+Fix pylint warnings related to parameter types.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/moveconfig.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tools/moveconfig.py | 43 ++++++++++++++++++++++---------------------
+ 1 file changed, 22 insertions(+), 21 deletions(-)
 
 diff --git a/tools/moveconfig.py b/tools/moveconfig.py
-index 36202fe5134c..0b0ce64e81fe 100755
+index 0b0ce64e81fe..689018d46d06 100755
 --- a/tools/moveconfig.py
 +++ b/tools/moveconfig.py
-@@ -1153,10 +1153,10 @@ def prefix_config(cfg):
-     return op + cfg
+@@ -218,7 +218,7 @@ def read_file(fname, as_lines=True, skip_unicode=False):
  
+     Args:
+         fname (str): Filename to read from
+-        as_lines: Return file contents as a list of lines
++        as_lines (bool): Return file contents as a list of lines
+         skip_unicode (bool): True to report unicode errors and continue
  
--RE_MK_CONFIGS = re.compile('CONFIG_(\$\(SPL_(?:TPL_)?\))?([A-Za-z0-9_]*)')
--RE_IFDEF = re.compile('(ifdef|ifndef)')
--RE_C_CONFIGS = re.compile('CONFIG_([A-Za-z0-9_]*)')
--RE_CONFIG_IS = re.compile('CONFIG_IS_ENABLED\(([A-Za-z0-9_]*)\)')
-+RE_MK_CONFIGS = re.compile(r'CONFIG_(\$\(SPL_(?:TPL_)?\))?([A-Za-z0-9_]*)')
-+RE_IFDEF = re.compile(r'(ifdef|ifndef)')
-+RE_C_CONFIGS = re.compile(r'CONFIG_([A-Za-z0-9_]*)')
-+RE_CONFIG_IS = re.compile(r'CONFIG_IS_ENABLED\(([A-Za-z0-9_]*)\)')
+     Returns:
+@@ -434,7 +434,7 @@ class Slot:
+         the slot is occupied (i.e. the current subprocess is still running).
  
- class ConfigUse:
-     def __init__(self, cfg, is_spl, fname, rest):
+         Args:
+-          defconfig: defconfig name.
++          defconfig (str): defconfig name.
+ 
+         Returns:
+           Return True on success or False on failure
+@@ -574,7 +574,7 @@ class Slot:
+         """Display log along with progress and go to the idle state.
+ 
+         Args:
+-          success: Should be True when the defconfig was processed
++          success (bool): Should be True when the defconfig was processed
+                    successfully, or False when it fails.
+         """
+         # output at least 30 characters to hide the "* defconfigs out of *".
+@@ -628,7 +628,7 @@ class Slots:
+         """Add a new subprocess if a vacant slot is found.
+ 
+         Args:
+-          defconfig: defconfig name to be put into.
++          defconfig (str): defconfig name to be put into.
+ 
+         Returns:
+           Return True on success or False on failure
+@@ -717,9 +717,9 @@ def move_config(toolchains, args, db_queue):
+     """Build database or sync config options to defconfig files.
+ 
+     Args:
+-      toolchains: Toolchains to use
+-      args: Program arguments
+-      db_queue: Queue for database updates
++      toolchains (Toolchains): Toolchains to use
++      args (Namespace): Program arguments
++      db_queue (Queue): Queue for database updates
+     """
+     if args.force_sync:
+         print('Syncing defconfigs', end=' ')
+@@ -761,10 +761,10 @@ def find_kconfig_rules(kconf, config, imply_config):
+     """Check whether a config has a 'select' or 'imply' keyword
+ 
+     Args:
+-        kconf: Kconfiglib.Kconfig object
+-        config: Name of config to check (without CONFIG_ prefix)
+-        imply_config: Implying config (without CONFIG_ prefix) which may or
+-            may not have an 'imply' for 'config')
++        kconf (Kconfiglib.Kconfig): Kconfig object
++        config (str): Name of config to check (without CONFIG_ prefix)
++        imply_config (str): Implying config (without CONFIG_ prefix) which may
++            or may not have an 'imply' for 'config')
+ 
+     Returns:
+         Symbol object for 'config' if found, else None
+@@ -783,16 +783,17 @@ def check_imply_rule(kconf, config, imply_config):
+     to add an 'imply' for 'config' to that part of the Kconfig.
+ 
+     Args:
+-        kconf: Kconfiglib.Kconfig object
+-        config: Name of config to check (without CONFIG_ prefix)
+-        imply_config: Implying config (without CONFIG_ prefix) which may or
+-            may not have an 'imply' for 'config')
++        kconf (Kconfiglib.Kconfig): Kconfig object
++        config (str): Name of config to check (without CONFIG_ prefix)
++        imply_config (str): Implying config (without CONFIG_ prefix) which may
++            or may not have an 'imply' for 'config')
+ 
+     Returns:
+         tuple:
+-            filename of Kconfig file containing imply_config, or None if none
+-            line number within the Kconfig file, or 0 if none
+-            message indicating the result
++            str: filename of Kconfig file containing imply_config, or None if
++                none
++            int: line number within the Kconfig file, or 0 if none
++            str: message indicating the result
+     """
+     sym = kconf.syms.get(imply_config)
+     if not sym:
+@@ -815,9 +816,9 @@ def add_imply_rule(config, fname, linenum):
+     """Add a new 'imply' option to a Kconfig
+ 
+     Args:
+-        config: config option to add an imply for (without CONFIG_ prefix)
+-        fname: Kconfig filename to update
+-        linenum: Line number to place the 'imply' before
++        config (str): config option to add an imply for (without CONFIG_ prefix)
++        fname (str): Kconfig filename to update
++        linenum (int): Line number to place the 'imply' before
+ 
+     Returns:
+         Message indicating the result
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
