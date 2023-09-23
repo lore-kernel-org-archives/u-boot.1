@@ -4,52 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6618CE7A88
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 18:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36D13CE7A88
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:44:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C2F286996;
-	Sat, 23 Sep 2023 20:56:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E4C5C86996;
+	Sat, 23 Sep 2023 21:44:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1695495376;
-	bh=EHtuytXTDTjAxv5ClkSgPGpP2yymJSHh7C1q9BDaeOg=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=O5UzB36xdpmhCK68Wo1SdAv/I1Wu4a2FkpP9eFnSY005w/4ukMBrvDKV6MIWJbBI9
-	 VPTIX0czqIAjj+jQMMhwYs9qoJ4hUsNtCq85LHc/KuaLCl1v3ptQgHgshMPTXUyD8L
-	 Zq7BIophEHRQxV4ZXzXd/MAj+05d1JgENKS+Ig1OBuO+P5VWqgvvJ5Og1tfduGboJJ
-	 Q+9IAltpFOO6ntWYsVD2tIJ4CvdX+Yfi8yS0cLwd0Ry4RoYjsluterTVXR/IMryLK0
-	 TXehdLX0YbuvgD35xu1pk3MnLQNwe8+QKb4awD1EuF2rxHmdpTcamacOxLvVULUWRu
-	 BCKzmIeFqivOQ==
-Received: from [IPV6:2001:a61:6000:d601:58e7:22eb:9e85:77d2] (unknown
- [IPv6:2001:a61:6000:d601:58e7:22eb:9e85:77d2])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="agm9yIqC";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 163298477A; Sat, 23 Sep 2023 21:44:32 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: sbabic@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4320D8640F;
- Sat, 23 Sep 2023 20:56:15 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1695495375;
- bh=EHtuytXTDTjAxv5ClkSgPGpP2yymJSHh7C1q9BDaeOg=;
- h=Date:To:Cc:From:Subject:From;
- b=GyUrlmkHtBwt4iyR01eX6IqA2TyZaYKZUQ83NTYznw8ejbKxjkhd68dtudK/emyv9
- bRzvR4vpG0xJzFW+jEazD6RCF/uYETy239eUejH03I6hnOTaONg66znaAmb1a+gPne
- bb+ABgkIl7SXQlkIW3aEmx6rRZrKjh/AfBH9mJJYpTw+mwAK0BKv/C7hF4qCB3KMg3
- 7UQFY/M70UB/rXTtEv+xTsI8V3SlKLPnaeHhne5N0CzyC6JmBGE32vVHxrpW2FzbE2
- Mz5uMHzTUv0ZdwM2oa7lKzuKyPsjSQcFi4omv/cIU9YBfp3P3UgQgFw8aoc/BepZSQ
- hHAZs6peEcrbg==
-Message-ID: <d76d7703-2d2d-4479-a15d-0fbedaf9cc6b@denx.de>
-Date: Sat, 23 Sep 2023 20:56:14 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id DB0C98477A
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:44:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-34fc7f51441so12931265ab.0
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:44:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695498268; x=1696103068; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HrIyEQRA0TNpYpOhmEgaftWCZ6mFlh3pxGjY/lFC7xk=;
+ b=agm9yIqCzfnK9M9Zz+GFS87YCRd7O6Um77oGKzISwJyowi4xcjSYi8VOSIzuJZqWea
+ 9ehByS8NQ50xLyz79/lTUxxFX6i7yfo4S++rPT8hBPD35jAy/82pv8JKDhut9O+ju3N4
+ j8ymcEMyYc3cq56O/5ZOqWvL1x/5BYKx14gF4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695498268; x=1696103068;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HrIyEQRA0TNpYpOhmEgaftWCZ6mFlh3pxGjY/lFC7xk=;
+ b=AtHpT24Wyn+VaWeu67KDd8ibtUooaial35TGoZF9Dq7PRHE1hLkXm8RL9hUwqUYxSC
+ 1B0z2mzEdQ6q5tQsv/lW+4s8zFI65jcAlWRkFu9T3Uq0QgjQgrq6hDyw+4ljQTheFvxz
+ S43h0UydaBHG81HQnsPOOafm8IDxl5hZom4p0JoqK5ZzrNvuQM8HnqUB7T49pr31Frbr
+ fm7kXvMW0oSAZ5QYn+A4frU4ofK2XGrYhs7SajNgGlRjmy/s2RfhIcnDaZthEVS0z25u
+ 8Axt92qpqWiquyn/uE3dSHF8U+akmAKRejNQO/At8tnYPfQdJ6xylvh44dbKp4YcmQaU
+ F47Q==
+X-Gm-Message-State: AOJu0YwxqsGOQWjVUFKweKfLKAAp9nJ5fCe0fOYNn7t8oJNJ35kW7MnV
+ 9UOdaN4YEnoZSH5OcUIXNaTT5uiLiT39n+q6K+I=
+X-Google-Smtp-Source: AGHT+IGpW3KSxtfdqwdAbsdTiqvdg54qhICeOXYfdISwBlL4KW7bnYrSxRPLmQOZRBSfGnD7YK6NaQ==
+X-Received: by 2002:a05:6e02:1aa8:b0:351:13a6:c3b0 with SMTP id
+ l8-20020a056e021aa800b0035113a6c3b0mr3672546ilv.32.1695498268388; 
+ Sat, 23 Sep 2023 12:44:28 -0700 (PDT)
+Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 23 Sep 2023 12:44:28 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 00/27] moveconfig: Drop old code and tidy up
+Date: Sat, 23 Sep 2023 13:43:49 -0600
+Message-ID: <20230923194424.1739224-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-To: Tom Rini <trini@konsulko.com>
-Content-Language: en-US
-Cc: U-Boot-Denx <u-boot@lists.denx.de>
-From: Stefano Babic <sbabic@denx.de>
-Subject: Pull request: please pull u-boot-imx-20230905
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,63 +85,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This tool is designed to move CONFIG options to Kconfig. Since this task
+is complete, some of its functionality is no-longer needed.
 
-some fixes for the release, please pull from u-boot-imx, thanks !
+This series drops the old code and tidies up some pylint errors.
 
-The following changes since commit 4cb31a9f3560b293670de95e76c1f3cf2f9e1ca8:
+It also improves the output by only displaying failures and providing a
+summary at the end.
 
-   Merge branch '2023-09-22-assorted-bugfixes' (2023-09-22 18:25:37 -0400)
+Finally, the tool is given a new name.
 
-are available in the Git repository at:
+Future work may provide a way to integrate the search functionality with
+buildman, to permit building boards with a a particular combination of
+CONFIG options.
 
-   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git 
-tags/u-boot-imx-20230923
 
-for you to fetch changes up to 62a3c66a7c1ee733695b46542c4a9034f3a663a4:
+Changes in v3:
+- Fix 'Supress' typo
+- Update based on Heinrich's comments
 
-   smegw01: Use CONFIG_SYS_LOAD_ADDR for loading fitImage (2023-09-23 
-18:45:34 +0200)
+Changes in v2:
+- Reinstate the -C option
 
-----------------------------------------------------------------
-Fixes for 2023.10
------------------
+Simon Glass (27):
+  moveconfig: Drop -H option
+  moveconfig: Avoid deprecation warning for setDaemon
+  moveconfig: Correct ordering of asteval import
+  moveconfig: Drop unused cleanup options
+  moveconfig: Drop CONFIG-moving code
+  moveconfig: Drop check_defconfig() and update_dotconfig()
+  moveconfig: Drop suspicious boards
+  moveconfig: Correct some regular-expression strings
+  moveconfig: Correct parameter-type warnings
+  moveconfig: Use f strings where possible
+  moveconfig: Correct unused variables
+  moveconfig: Correct non-snake variables names
+  moveconfig: Correct use of members not declared in __init__()
+  moveconfig: Correct list-comprehension warnings
+  moveconfig: Use an encoding with open()
+  moveconfig: Fix misc pylint warnings
+  moveconfig: Only show output when there is a reason
+  moveconfig: Reduce the amount of output
+  moveconfig: Avoid showing progress at the end
+  moveconfig: Use u_boot_pylib for terminal colour
+  moveconfig: Show failures in progress
+  moveconfig: Show a summary at the end
+  moveconfig: Drop the initial output
+  moveconfig: Move summaries to the end
+  moveconfig: Rename the tool to qconfig
+  qconfig: Rename the database file
+  qconfig: Update the documentation
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/17831
-
-----------------------------------------------------------------
-Eduard Strehlau (2):
-       imx: hab: Allow hab_auth_img_or_fail to be called without ivt_offset
-       smegw01: Use CONFIG_SYS_LOAD_ADDR for loading fitImage
-
-Fabio Estevam (3):
-       imx: hab: Improve the hab_auth_img_or_fail usage text
-       imx: hab: Explain that ivt_offset is optional
-       imx7: Disable CAAM Job Ring 0
-
-Oleksandr Suvorov (1):
-       mach-imx: bootaux: fix building with disabled bootelf
-
-  arch/arm/dts/imx7d-colibri-eval-v3-u-boot.dtsi |  2 ++
-  arch/arm/dts/imx7d-pico-pi-u-boot.dtsi         |  2 ++
-  arch/arm/dts/imx7d-sdb-qspi-u-boot.dtsi        |  2 ++
-  arch/arm/dts/imx7d-sdb-u-boot.dtsi             |  2 ++
-  arch/arm/dts/imx7d-smegw01-u-boot.dtsi         |  3 +++
-  arch/arm/dts/imx7s-u-boot.dtsi                 |  7 +++++++
-  arch/arm/mach-imx/Kconfig                      |  1 +
-  arch/arm/mach-imx/hab.c                        |  8 ++++----
-  board/storopack/smegw01/smegw01.env            | 14 +++++++-------
-  configs/smegw01_defconfig                      |  3 +++
-  10 files changed, 33 insertions(+), 11 deletions(-)
-  create mode 100644 arch/arm/dts/imx7d-smegw01-u-boot.dtsi
-  create mode 100644 arch/arm/dts/imx7s-u-boot.dtsi
-
-Best regards,
-Stefano
+ .gitignore                                  |   4 +-
+ doc/develop/index.rst                       |   2 +-
+ doc/develop/{moveconfig.rst => qconfig.rst} | 160 +---
+ tools/{moveconfig.py => qconfig.py}         | 894 +++++---------------
+ 4 files changed, 272 insertions(+), 788 deletions(-)
+ rename doc/develop/{moveconfig.rst => qconfig.rst} (59%)
+ rename tools/{moveconfig.py => qconfig.py} (65%)
 
 -- 
-=====================================================================
-DENX Software Engineering GmbH,        Managing Director: Erika Unter
-HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
-Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
-=====================================================================
+2.42.0.515.g380fc7ccd1-goog
+
