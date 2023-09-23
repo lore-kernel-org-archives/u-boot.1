@@ -4,72 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C1ACE7A8A
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 01:38:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECFD0CE7A88
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 02:06:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 176CF864F0;
-	Sat, 23 Sep 2023 03:38:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4155286A1D;
+	Sat, 23 Sep 2023 04:06:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="MHvFs7oI";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KqvuwPYI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D3A386501; Sat, 23 Sep 2023 03:38:15 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 072BA86501; Sat, 23 Sep 2023 04:06:02 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44FDE85DEA
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 03:38:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 653A686A24
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 04:05:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1695433091; x=1696037891; i=xypron.glpk@gmx.de;
- bh=V1vOXbOSxjH/soCDm8O+qDG+vmccnRjbYBdECkZNAKQ=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=MHvFs7oI8jkfczWKQRkVODXu83H+tevUBJYECTOCX98zeTsIpW2WoDehdrxn2phKzMFhNb0d1Xn
- 1CMfkCHAyIv1PzIQa2BTikYtctJFTsYSKmhugN76+ZfVaF0okY4y6Eq+D8V3epnoo2J/kvzHfEaQa
- Nt9NJQBOK7NG9BbicJJgZ4Wa5ycEFz62kS30nDQSme1RVthcYY4HOwS031Z4fJE1RXc3unKLyGWdA
- t5a94hIHVbqUPsbBQEYwwa5n4DJvh4HXl1a9UUVqMSLbnJ4nBuexdZaoZmmAOkR7Es9PHec9G0AVI
- Ikh5q/2KcAEzCobnPyMOZfslLjiUNmuZEdrg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MTAFb-1r6fPw291T-00Ue4f; Sat, 23
- Sep 2023 03:38:11 +0200
-Message-ID: <e43c5b16-e626-4c7a-9bef-44f192d2a703@gmx.de>
-Date: Sat, 23 Sep 2023 03:38:17 +0200
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=z+Qg=FH=robh_at_kernel.org=rob@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 96A8FCE253C;
+ Sat, 23 Sep 2023 02:05:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28A12C433C7;
+ Sat, 23 Sep 2023 02:05:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1695434754;
+ bh=p6evCoFssqFuGsisKlNTxes4uUL1dao28ODNmXXWwJg=;
+ h=From:To:Cc:In-Reply-To:References:Subject:Date:From;
+ b=KqvuwPYIlU0o0FKqDw41Ed2qxZ8lElH59XB+Vi/GW5MuBI5qmAzwM+zZKsqV1gthF
+ 8f7rG1IP5BNrS6RBjH5ki9Gbas0sUFXNCldkOdRZz6nVIxf6TQ76WLxB48UVL7Avwm
+ tlayms+kBx/vf1bNm5XdjOarL+TYkjrV5jQCVdPlv9DgOKiDTsdm6S9rK0Oo2QSMPl
+ d+Nc5MBcszqecggWXWG/4UXJe9u5+wE475gSzr7ZekkkQ2Bkw+aJDQJE6gZGBTw/en
+ 7w87A+xEbuO+FA82VJztyVBH07WzXuYb8Y0Tzbe34K4BOkGISOBYsjUw7i724fyFJO
+ FJ6d6gES9PhXA==
+Received: (nullmailer pid 118963 invoked by uid 1000);
+ Sat, 23 Sep 2023 02:05:52 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Reading from ISO9660 in U-Boot
-Content-Language: en-US, de-DE
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-References: <CAPnjgZ2mhRhOWoObKbw0R+8jmFT0QY4THpXR=f2s1svi6cwEvQ@mail.gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAPnjgZ2mhRhOWoObKbw0R+8jmFT0QY4THpXR=f2s1svi6cwEvQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:yT5/lc5f/mbW5n0B1wmnhXjYXDAPuoW4oYwcW0aEmmq29sBmmix
- T0+xa8fcZGjzZz2HOUdBVc4DU1xo5JQv75GWoW4GvIw2gxN3MtxwpTuIOn5KfHV8d1fs+bl
- AtV2pQ9CZltsaWgIN8tjlwKtvvniDbsxGSHYhliTvip9qR6YnsGpCCvvjydUpFNjeV+osm2
- oKHvK3AacQPJ02MucEIQA==
-UI-OutboundReport: notjunk:1;M01:P0:uw63+5izuBU=;gM4EGgcWAHCLoGmOcKCvl4wsy0t
- A6SXDmZHzHQcUd9Nii4VmacJtSIs0D6l1cfwc7q6CE4FBlHca0/MfgJ5jHou8Ymm2LfpCAVAa
- gmxcVm2cx/pCjSTPagRskXIQr0WZRhzI+5J31uPu40fYHWlh0mX9ETVJEy1YNWCpGSL6fuEpK
- A6detM24BRO8qdkYakiHhSsJ0ga1gWseU62oq6qRorbIsNzjXLPUgthJKDYOz/k7NXskVhd6j
- 99l1uhpCKGahf6wslF0t1zYKy46ZUJqeevGqXX+EJ0phC8cOVxkS6HAjFxLxa2WHdSDpPO3UW
- iAejIw6Kb0OkANrOJ8NSLoljlZ/c4GAA9t/XoxArwNiQK8fWWeejO4nNhu2R+lXPVRkxGnxm/
- iTpf1nohlV8zw0ab4l4h+2K39esn7J8dGoi+CVOiGLrEqRLeK5f8bFlyfRzktfBx5Fbu47C2+
- l+7fkZcCb2kVpSsTmiqkBVjpC0BEx6GxPVaHheCreDSwAXWLUx5QV1CYiZjf7kS/LgiRIvQXN
- TlCaDdtOOFAm8+RFl9jppQtc9hyMp0K1dsPFbM8sQbdnHlsy66/GXwrr3glT6gXjKd5pfND8f
- 0jQWnG4RqTwV70bhYih93aJlkmoK+UYL4FkjtjdD7R38eO7ywsLx1D0xaJHlGQFWfvhJKWY0G
- t7vfVdm2G4IRuR//hQxxn0zwCMB6QFp4xFKC/U2A+gV1qncUZURFOKfWEZty4hqQ0VkX1Schu
- tifbfy/RmqwPmc2wO4c85jbVqH5jgxmVU/APU5QebVdQB9CqWlAjchJFF8Ihunpa4xewSgDO8
- 4kQBnXJX9nG77DJZrH9V0xEriuOP3/fEoLxr4dquCZ07s0okzKbz6fPlodkFJsl6U+68VAHuu
- O0W64S81yx+BxCk1nHzKMhGePRA9qHGWswQfQIJOk+TUldltruGUoFN68yshf3jkgXkW8KSjt
- 7KWAlmbHu3HqymeZPPVDf/5ytSY=
+From: Rob Herring <robh@kernel.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: linux-kernel@vger.kernel.org, Conor Dooley <conor+dt@kernel.org>,
+ Nick Terrell <terrelln@fb.com>, Rob Herring <robh+dt@kernel.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>, devicetree@vger.kernel.org,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Dhruva Gole <d-gole@ti.com>, Pratyush Yadav <ptyadav@amazon.de>,
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ =?utf-8?q?Rafa=C5=82_Mi=C5=82ecki?= <rafal@milecki.pl>,
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ linux-mtd@lists.infradead.org
+In-Reply-To: <20230922193417.1697379-1-sjg@chromium.org>
+References: <20230922193417.1697379-1-sjg@chromium.org>
+Message-Id: <169543475215.118855.13530210565205347052.robh@kernel.org>
+Subject: Re: [PATCH v2] dt-bindings: mtd: Add a schema for binman
+Date: Fri, 22 Sep 2023 21:05:52 -0500
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,43 +77,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/23/23 00:13, Simon Glass wrote:
-> Hi Heinrich & Bin,
->
-> I'd like to be able to figure out in U-Boot what OS is on a USB stick.
-> For example, with the Ubuntu installer, I can boot it (through grub),
-> but I cannot see how to read anything useful from the USB stick that
-> would indicate that it is Ubuntu, what version it is, etc.
->
-> Does U-Boot need an ISO9660-filesystem driver for that? Is there any oth=
-er way?
->
-> With Debian I can see the actual files (linux and initrd) , so it is a
-> bit easier.
->
-> Regards,
-> SImon
 
-U-Boot only needs to support reading the ESP to boot. GRUB comes with a
-9660 driver.
+On Fri, 22 Sep 2023 13:34:15 -0600, Simon Glass wrote:
+> Binman[1] is a tool for creating firmware images. It allows you to
+> combine various binaries and place them in an output file.
+> 
+> Binman uses a DT schema to describe an image, in enough detail that
+> it can be automatically built from component parts, disassembled,
+> replaced, listed, etc.
+> 
+> Images are typically stored in flash, which is why this binding is
+> targeted at mtd. Previous discussion is at [2] [3].
+> 
+> This is only a starting point, an attempt to align on the best way to
+> add this to the schema.
+> 
+> [1] https://u-boot.readthedocs.io/en/stable/develop/package/binman.html
+> [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3-sjg@chromium.org/
+> [3] https://www.spinics.net/lists/devicetree/msg626149.html
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v2:
+> - Use "binman" for compatible instead of "u-boot,binman"
+> - Significantly rework the patch
+> - Use make dt_binding_check DT_SCHEMA_FILES=Documentation/../partitions
+> 
+>  .../bindings/mtd/partitions/binman.yaml       | 59 ++++++++++++++++++
+>  .../mtd/partitions/binman/atf-bl31.yaml       | 43 +++++++++++++
+>  .../bindings/mtd/partitions/binman/entry.yaml | 62 +++++++++++++++++++
+>  .../mtd/partitions/binman/u-boot.yaml         | 43 +++++++++++++
+>  .../bindings/mtd/partitions/partitions.yaml   |  1 +
+>  MAINTAINERS                                   |  5 ++
+>  6 files changed, 213 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.yaml
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/entry.yaml
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman/u-boot.yaml
+> 
 
-On Ubuntu server installer images linux and initrd are in directory
-casper/ in the ISO9660 file-system.
+My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
+on your patch (DT_CHECKER_FLAGS is new in v5.13):
 
-There is also a file dists/mantic/Release
+yamllint warnings/errors:
 
-$ cat dists/mantic/Release
-Origin: Ubuntu
-Label: Ubuntu
-Suite: mantic
-Version: 23.10
-Codename: mantic
-Date: Tue, 19 Sep 2023 23:07:01 UTC
-Architectures: amd64 i386
-Components: main restricted
-Description: Ubuntu Mantic 23.10
-Acquire-By-Hash: yes
+dtschema/dtc warnings/errors:
+Documentation/devicetree/bindings/mtd/partitions/binman/atf-bl31.example.dtb: /example-0/binman/partition@0: failed to match any schema with compatible: ['binman,entry']
+Documentation/devicetree/bindings/mtd/partitions/binman/entry.example.dtb: /example-0/binman/partition@0: failed to match any schema with compatible: ['binman,entry']
+Documentation/devicetree/bindings/mtd/partitions/binman/entry.example.dtb: /example-0/binman/partition@100000: failed to match any schema with compatible: ['binman,entry']
 
-Best regards
+doc reference errors (make refcheckdocs):
 
-Heinrich
+See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20230922193417.1697379-1-sjg@chromium.org
+
+The base for the series is generally the latest rc1. A different dependency
+should be noted in *this* patch.
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure 'yamllint' is installed and dt-schema is up to
+date:
+
+pip3 install dtschema --upgrade
+
+Please check and re-submit after running the above command yourself. Note
+that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+your schema. However, it must be unset to test all examples with your schema.
+
