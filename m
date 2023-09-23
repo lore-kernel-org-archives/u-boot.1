@@ -4,63 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41419CE7A89
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:53:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0224CE7A89
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:53:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C525286A38;
-	Sat, 23 Sep 2023 21:53:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 47DB186A28;
+	Sat, 23 Sep 2023 21:53:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fFfw4DRw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RY+Cbq63";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 423C686A08; Sat, 23 Sep 2023 21:53:10 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 6161D86B09; Sat, 23 Sep 2023 21:53:42 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F4AE869CD
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:53:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F8A086A08
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:53:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-533c5d10dc7so1236065a12.3
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:53:08 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2c02e232c48so67553211fa.1
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:53:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695498787; x=1696103587; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=66QApHK65z4ee1zY/kbo8TlCyzLkbXgpQn7mkCEsVhI=;
- b=fFfw4DRwt8TiTFtBAH9x10dZsQwmL9i4CowUfMjhRsN+bHejNVB+hd6brWVleYG+Tl
- qheWE6p99zgA6BLKJYXdOOkVHJsNefXfuF8uj8pEiPIshZQbOtQHx5fhg3/IHIAES9Uh
- uSyMkQ8FqUaInVqR6Ha7qF6H+itjI7eyLAEhA=
+ d=chromium.org; s=google; t=1695498819; x=1696103619; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NtszwVn3y6stsgCF5+pVd7T47c+gJ39tdRwf7lFPzRw=;
+ b=RY+Cbq639b79NIlrfgrlQeHVtsxt9tPSllw0qARW3F3IT5i7JnjO2Fhcx9VPn1mJBh
+ moA/TvMIAG1V1S4GsTGIhtDv7JNpoRS7auD6zRwTO3XFpRQ91BoLooC1EpT7vAQ/cCPI
+ bsV5I2H6zRxZIl7VZoGqtdvKFD7YUAVf+bHhI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695498787; x=1696103587;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=66QApHK65z4ee1zY/kbo8TlCyzLkbXgpQn7mkCEsVhI=;
- b=p9xTGzi3dGkhXzlEBHFm82iPrtVRfiUJO6cuJ1psLgZb+pEFY+rg54kDx9ctIVW/UI
- +4Cis+8sG1J/7X+Ho+yKyl1NuHsUdzLczuOHtmwxVXjcAjHpRlcEDSaSeBNmcq+G5s4c
- xg1S0u4mK573e94nAx5vdJMrwXUHsCOosxsF2SjjpSBMSg0SJSpjlLP+bTRY0aZEbxjo
- O0bbZ2fRm2gKiVa3FoK5rCIRnjF2UbGS9fd8D+0PGarlQ5tjlrueP36r3uzM+UQ/4BK+
- 58+JDdVsaikYXM8JIxDchQ6CMLUra224Xv9WetkjTX3Gl90HDtferCtJBJuqS9c4rYCt
- 9WUA==
-X-Gm-Message-State: AOJu0Yxec98V4YhRAULLZWBrTGWNPzE9u1sDeu4D6sAORM7nl4dcb0+t
- 7Bei84yvgN93EG+gXB2CvGwLsgIVhAJY7tIKSSZ5FFsDJSwnndusMyxFSw==
-X-Google-Smtp-Source: AGHT+IFATN3tDZmdg0YSmZ5Sd4uv+XrVcGMhiwjTQ9IbqN34NysfazqStNo0CvE5YRl5vYuLAtXC1wQliMkUAdqnezo=
-X-Received: by 2002:a50:ec84:0:b0:527:ab3f:4350 with SMTP id
- e4-20020a50ec84000000b00527ab3f4350mr2422781edr.38.1695498786987; Sat, 23 Sep
- 2023 12:53:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695498819; x=1696103619;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NtszwVn3y6stsgCF5+pVd7T47c+gJ39tdRwf7lFPzRw=;
+ b=ebGxCWQVk4lg1bjd9Imzhx+wP02+7TSGaQIpVAr/Xi8gOfIrvKIeGDA0tWAk4q5JMd
+ u1ADNy2aLzSVwKd4+LY4y7q7YO+g/TzCMLnOAjfPVk6n6IMsKRknbwHEvanWab+FT4/O
+ GQ8xmRdpHxhoK2ZSwoiHavMIF3Usbw6kYAZT2ylZT51JkDeSJxqGTGb9u1vqlJMq1e15
+ 2aQ+R+ZA99jbKJj3N6025dOd3RBgNx3qpIyw6JmpwtJUwinUgdH4k8BYaSMvGx7HbHjn
+ +5C+SoOsNuy30Yxw+5RINlIjwf00wd8/if18fvfw4VjyvuIywnjrxQ1S2Kq/kZC1OpqA
+ /Qvg==
+X-Gm-Message-State: AOJu0Yzw9pImMLLQAx35fnGto2vfFXiTrbP2jKzITedLcsAR4rqyUwRu
+ XQJoW5NJ9IMKaQV7pAyDVECDrPKz6kb3M1jiAUgSUyeYlrftj3Eo2VE=
+X-Google-Smtp-Source: AGHT+IE48Hh8beps8Ug319g2SrYWPr7BOPNd55bA9JBlkDVOPgUFC/3fc84gJLd4JCgx6PMfCDG+go4VBb1AxO8QBpY=
+X-Received: by 2002:a2e:2c12:0:b0:2bf:fae0:5cef with SMTP id
+ s18-20020a2e2c12000000b002bffae05cefmr2300226ljs.21.1695498819209; Sat, 23
+ Sep 2023 12:53:39 -0700 (PDT)
 MIME-Version: 1.0
+References: <20230405150458.890460-1-vincent.stehle@arm.com>
+ <CAPnjgZ1PZJqLdRW691nCgtsTtxcvvQ-EbGpQTHhxRLpyGqeaAQ@mail.gmail.com>
+ <ZC6ZTsF/P9bItCxb@debian>
+ <CAPnjgZ2FkU_wKLd1djMdArvqPaX3-jvA=p-ZHbhnKgSpx+KULw@mail.gmail.com>
+ <ZDVL2Ac7uz19ARzl@debian>
+In-Reply-To: <ZDVL2Ac7uz19ARzl@debian>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 23 Sep 2023 13:52:55 -0600
-Message-ID: <CAPnjgZ32+7B0SVvpE+r_c9ZyCXpkFErRJRf0uCAx-aCMuJc2ow@mail.gmail.com>
-Subject: Please pull u-boot-dm/next
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
+Date: Sat, 23 Sep 2023 13:53:26 -0600
+Message-ID: <CAPnjgZ0oQTuG4qT4ZFfDewzNOJriD0rAmYimJSU9va6GZxASbw@mail.gmail.com>
+Subject: Re: [BUG] issues with new bootflow, uefi and virtio
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,60 +86,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Vincent,
 
-This is for the -next branch
+On Tue, 11 Apr 2023 at 06:00, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
+wrote:
+>
+> On Fri, Apr 07, 2023 at 05:31:06PM +1200, Simon Glass wrote:
+> ..
+> > > When combined with the patch from Mathew[1], it does indeed repair th=
+e case of
+> > > efi boot with two virtio disks, specifically when the first virtio di=
+sk is the
+> > > one we want to boot from.
+> > > FWIW, the system will not boot when I invert the two virtio disks.
+> >
+> > Is this because it only uses the first virtio device? You could check
+> > your boot_targets variable. With standard boot you can use 'virtio'
+> > instead of 'vritio0' and it will find any virtio devices.
+>
+> Hi Simon,
+>
+> Thank you for the tips; I did not know that you could use a generic `virt=
+io' or
+> a more specific `virtio0' specification in boot_targets.
+> By default the boot_targets variable does indeed contain the generic `vir=
+tio' in
+> my case.
+>
+> Quick tests matrix:
+>
+>                 disk image virtio
+>                 (#num) blk index
+>   boot_targets  (#30) 0  (#31) 1
+>   ------------  -------  -------
+>         virtio     ok      FAIL
+>        virtio0     ok     (fail)
+>        virtio1   (fail)     ok
+>
+> This is with both patches, on Qemu.
+> The fails between () are expected.
+>
+> I find it interesting that specifying `virtio1' does work when the bootab=
+le
+> image is on the second virtio disk, while auto-detection with `virtio' do=
+es not
+> seem to:
+>
+>   virtio1
+>   ~~~~~~~
+>
+>   =3D> setenv boot_targets virtio1
+>   =3D> boot
+>   Scanning for bootflows in all bootdevs
+>   Seq Method State Uclass Part Name Filename
+>   --- ------ ----- ------ ---- ---- --------
+>   Scanning global bootmeth 'efi_mgr':
+>   Scanning bootdev 'virtio-blk#31.bootdev':
+>     0 efi    ready virtio    1 virtio-blk#31.bootdev.par efi/boot/bootaa6=
+4.efi
+>   ** Booting bootflow 'virtio-blk#31.bootdev.part_1' with efi
+>   Using prior-stage device tree
+>   Missing TPMv2 device for EFI_TCG_PROTOCOL
+>   Booting /efi\boot\bootaa64.efi
+>
+>   virtio
+>   ~~~~~~
+>
+>   =3D> setenv boot_targets virtio
+>   =3D> boot
+>   Scanning for bootflows in all bootdevs
+>   Seq Method State Uclass Part Name Filename
+>   --- ------ ----- ------ ---- ---- --------
+>   Scanning global bootmeth 'efi_mgr':
+>   Scanning bootdev 'virtio-blk#30.bootdev':
+>   No more bootdevs
+>   --- ------ ----- ------ ---- ---- --------
+>   (0 bootflows, 0 valid)
+>
+> The messages seem to indicate that virtio #31 / 1 was not even considered=
+ when
+> specifying `virtio'.
+> (Note that I have edited the logs a bit to avoid wrapping lines.)
+>
 
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/17836
+Apart from the out-of-memory problem that has been fixed, there is
+another problem that it only looks at the first of the virtio devices
+when boot_targets=3D"virtio", as you have found.
 
+I believe I have a fix for this so will send a patch.
 
-The following changes since commit b05a184379631d13c4a49e423aa1324dc1ae6158:
-
-  Merge tag 'x86-pull-20230922' of
-https://source.denx.de/u-boot/custodians/u-boot-x86 into next
-(2023-09-22 11:16:22 -0400)
-
-are available in the Git repository at:
-
-  git://git.denx.de/u-boot-dm.git tags/dm-next-23sep23
-
-for you to fetch changes up to ae84514feee209091d331a8baaa344ed8d8e905b:
-
-  kontron_sl28: Use u-boot-update.bin instead of u-boot.update
-(2023-09-23 12:31:25 -0600)
-
-----------------------------------------------------------------
-buildman file-keeping and build-progress improvements
-dm tree enhancement
-adjust meaning of bootph-pre-ram/sram
-
-----------------------------------------------------------------
-AKASHI Takahiro (1):
-      cmd: dm: allow for selecting uclass and device
-
-Jonas Karlman (1):
-      dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation
-
-Simon Glass (4):
-      buildman: Keep all common output files
-      buildman: Show progress when regenerating the board.cfg file
-      buildman: Start the clock when the build starts
-      kontron_sl28: Use u-boot-update.bin instead of u-boot.update
-
- arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi |   2 +-
- cmd/dm.c                                          |  48 ++++++++++++---
- doc/board/kontron/sl28.rst                        |   4 +-
- doc/usage/cmd/dm.rst                              |  30 ++++++++-
- drivers/core/dump.c                               | 116
-++++++++++++++++++++++++++---------
- drivers/core/ofnode.c                             |   2 +-
- include/dm/ofnode.h                               |   8 +--
- include/dm/util.h                                 |  15 +++--
- tools/buildman/boards.py                          |  15 ++++-
- tools/buildman/builder.py                         |   3 +-
- tools/buildman/builderthread.py                   |  12 ++--
- tools/buildman/control.py                         |   3 +-
- 12 files changed, 197 insertions(+), 61 deletions(-)
+Thank you for testing this.
 
 Regards,
 Simon
+
+
+
+> Best regards,
+> Vincent.
+>
+> >
+> > >
+> > > Best regards,
+> > > Vincent.
+> > >
+> > > [1]: https://lists.denx.de/pipermail/u-boot/2023-April/514527.html
+> >
+> > Regards,
+> > Simon
