@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60C72CE7A89
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:48:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC28ACE7A88
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:48:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15EF186B93;
+	by phobos.denx.de (Postfix) with ESMTP id A566186BAE;
 	Sat, 23 Sep 2023 21:45:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hoVI7DDn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aSAUGYoW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2DF986BB8; Sat, 23 Sep 2023 21:44:55 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id BA98F863DD; Sat, 23 Sep 2023 21:44:55 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 628CB8477A
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:44:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F04F886B57
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:44:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-34fcd1b9892so12526875ab.3
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:44:47 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-34fc7f51441so12932655ab.0
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:44:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695498286; x=1696103086; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695498290; x=1696103090; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IeKB+5m5jzLtQ0BJZG5PMgTQaJVVZy2fMYtLbIrIs8E=;
- b=hoVI7DDnaarjqHMyPM5q3LoA20tpRCqYD4Ts2GS81wT0XVPEAGD5RnbUyP5CtdKvWj
- U+/7DJUL1D35yJTJ1wxF9ImOjMAvjcvxd+cPVTT98qShtVSOY0bWERIXjKPboXNnZMz/
- RSDfAo5PHS+qof/EpI7eiJ59ENqM2G+2rN9Uk=
+ bh=pJBBneHWxmVTTSQjHLmv6UCKg0rMU+kGLlstRa/JPBg=;
+ b=aSAUGYoWF3v9yFV6Sp23Xv6jFPOu8u5Wqf7Gw5pux135QVr+7+SAdtQdtye/5Ghy8Y
+ gS2VX+tc0084EeoS9MNdc9b1pZxG4+Hi58CBihFJF9lV4/N+aRQZi1Wza3uiLEH5GYUe
+ vQLTnWYa7Ga4/dDyqQNHqH0lNMPp8d3/wubus=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695498286; x=1696103086;
+ d=1e100.net; s=20230601; t=1695498290; x=1696103090;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IeKB+5m5jzLtQ0BJZG5PMgTQaJVVZy2fMYtLbIrIs8E=;
- b=aoyHHLlz1zouK1Xn1ZXH8lKNN2CxWhNrQBzOtX5ndb6DMJJF1/JoRdX3BQjMJEo5lM
- qXe+DRfMUXM7/rgT4PWxq05LW0T6hvPjbaxjKj68rd/AFxIP1jyygc1YrtlR6IKmsz+8
- 6qL6ICJKRHhRe+kNzEePb3JxjdfqYIVmki4xofjnM2LpPZzx/LoYrQDmpZc6Kg4S+Ypn
- cp48Ozt3BAt7HwuJJJjsdz/EiHK4/Han4Z5mANmaNZ3OtKs8fIC7Tnnz6fJNBczn5nWy
- 7gm5NJ78uFuMhdPEI111GN6dg2asrvZrRkiU2tEWWMaPsSdQUWm5bL0qV7YAvFUXLsMW
- mAYA==
-X-Gm-Message-State: AOJu0YzhuSTjn9HrnacSKsMsn2mAA3NyUL6dp0k6JUFnwXP/GnXeU2Ne
- Rep4j7OjXdzkd+LtMKLronrJPfB1117IrPiZuZE=
-X-Google-Smtp-Source: AGHT+IEMqDinE3wwE3ibDGdic+Q9H8llFESlLIS0lyiMiygpW2SUPXgax+lbF8HgN0rfaAoNHJMnnA==
-X-Received: by 2002:a05:6e02:1545:b0:34f:6d6c:79bd with SMTP id
- j5-20020a056e02154500b0034f6d6c79bdmr3941622ilu.28.1695498286018; 
- Sat, 23 Sep 2023 12:44:46 -0700 (PDT)
+ bh=pJBBneHWxmVTTSQjHLmv6UCKg0rMU+kGLlstRa/JPBg=;
+ b=UeDkafKAaTIT6qoiyK8lmyA0CxsVm4WPZN9Za1NYhYGIXVWTRy76F1V/VzwFYvgRAY
+ SL/1eATWkGyTFVo7nA3L3lKLOoZHiVemuvjuHJV6Ku0SiyXMUPdWkke535RtSnqhc8fP
+ 48lxjFNeyzkIkSbOfFBP+V7Etwupix6T5bgW1pxgVOoPsxQjERffw0x3evSeAhsmk5my
+ hTesISR/erOiktBCQLCYMU3WagYvT8ZLKxEv5WnzpZVNFJGrpQaJ2ob40SYCCAjbPJT+
+ efEs71F9WWam9LNEOENmFxkCggiMx1wMKC29ba9Zd+p37RPgYBKQ45G1BTtSLQQfys1C
+ gpKQ==
+X-Gm-Message-State: AOJu0YxfmHVOTcSkUB2+ccwb7ey6d6AbaxAvbf+LYixOXA5Wu3dVpR5P
+ bB229aEpUsQgJtlD/UNWT+iDgnEa9bTLcWKfkMk=
+X-Google-Smtp-Source: AGHT+IEYvmF9t09Sd0BN1cTUXwmD/oEloPRluV5ge8/phyIud+3OKhRCSje3xl75HHXjxuk2w1mLBA==
+X-Received: by 2002:a05:6e02:b47:b0:34f:dfdb:be08 with SMTP id
+ f7-20020a056e020b4700b0034fdfdbbe08mr4085278ilu.23.1695498290373; 
+ Sat, 23 Sep 2023 12:44:50 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.45
+ el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Sep 2023 12:44:45 -0700 (PDT)
+ Sat, 23 Sep 2023 12:44:49 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 17/27] moveconfig: Only show output when there is a reason
-Date: Sat, 23 Sep 2023 13:44:06 -0600
-Message-ID: <20230923194424.1739224-18-sjg@chromium.org>
+Subject: [PATCH v3 21/27] moveconfig: Show failures in progress
+Date: Sat, 23 Sep 2023 13:44:10 -0600
+Message-ID: <20230923194424.1739224-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230923194424.1739224-1-sjg@chromium.org>
 References: <20230923194424.1739224-1-sjg@chromium.org>
@@ -88,54 +88,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is no point in listing a board if everything went well. It makes it
-harder to see the failures, particularly on a fast machine.
+Show the number of accumulated failures when processing. Use a shorter
+format with colour.
 
-Suppress output unless something actually happened.
-
-Drop the 'Syncing by savedefconfig' since this is selected by the -s and
-is the same for all boards in this mode.
+An unwanted space appears before the defconfig name on every item except
+the last. Fix that while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Fix 'Supress' typo
+(no changes since v1)
 
- tools/moveconfig.py | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+ tools/moveconfig.py | 26 +++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
 diff --git a/tools/moveconfig.py b/tools/moveconfig.py
-index 727a5d6df864..568386f7b9d0 100755
+index 9e9cb672a967..2a4badf8649a 100755
 --- a/tools/moveconfig.py
 +++ b/tools/moveconfig.py
-@@ -551,7 +551,6 @@ class Slot:
-         if not self.args.force_sync:
-             self.finish(True)
-             return
--        self.log += 'Syncing by savedefconfig (forced by option)...\n'
+@@ -241,24 +241,36 @@ class Progress:
  
-         cmd = list(self.make_cmd)
-         cmd.append('savedefconfig')
-@@ -581,12 +580,13 @@ class Slot:
-                    successfully, or False when it fails.
+     """Progress Indicator"""
+ 
+-    def __init__(self, total):
++    def __init__(self, col, total):
+         """Create a new progress indicator.
+ 
+         Args:
+-          total: A number of defconfig files to process.
++            color_enabled (bool): True for colour output
++            total (int): A number of defconfig files to process.
          """
-         # output at least 30 characters to hide the "* defconfigs out of *".
--        log = self.defconfig.ljust(30) + '\n'
-+        if self.log:
-+            log = self.defconfig.ljust(30) + '\n'
++        self.col = col
+         self.current = 0
++        self.good = 0
+         self.total = total
  
--        log += '\n'.join([ '    ' + s for s in self.log.split('\n') ])
--        # Some threads are running in parallel.
--        # Print log atomically to not mix up logs from different threads.
--        print(log, file=(sys.stdout if success else sys.stderr))
-+            log += '\n'.join([ '    ' + s for s in self.log.split('\n') ])
-+            # Some threads are running in parallel.
-+            # Print log atomically to not mix up logs from different threads.
-+            print(log, file=(sys.stdout if success else sys.stderr))
+-    def inc(self):
+-        """Increment the number of processed defconfig files."""
++    def inc(self, success):
++        """Increment the number of processed defconfig files.
  
-         if not success:
-             if self.args.exit_on_error:
++        Args:
++            success (bool): True if processing succeeded
++        """
++        self.good += success
+         self.current += 1
+ 
+     def show(self):
+         """Display the progress."""
+         if self.current != self.total:
+-            print(f' {self.current} defconfigs out of {self.total}\r', end=' ')
++            line = self.col.build(self.col.GREEN, f'{self.good:5d}')
++            line += self.col.build(self.col.RED,
++                                   f'{self.current - self.good:5d}')
++            line += self.col.build(self.col.MAGENTA,
++                                   f'/{self.total - self.current}')
++            print(f'{line}  \r', end='')
+         sys.stdout.flush()
+ 
+ 
+@@ -578,7 +590,7 @@ class Slot:
+             # Record the failed board.
+             self.failed_boards.add(self.defconfig)
+ 
+-        self.progress.inc()
++        self.progress.inc(success)
+         self.progress.show()
+         self.state = STATE_IDLE
+ 
+@@ -729,7 +741,7 @@ def move_config(toolchains, args, db_queue, col):
+     else:
+         defconfigs = get_all_defconfigs()
+ 
+-    progress = Progress(len(defconfigs))
++    progress = Progress(col, len(defconfigs))
+     slots = Slots(toolchains, args, progress, reference_src_dir, db_queue, col)
+ 
+     # Main loop to process defconfig files:
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
