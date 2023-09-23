@@ -4,80 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470F8CE7A88
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 16:39:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C57F4CE7A89
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 16:50:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E39D9868D8;
-	Sat, 23 Sep 2023 18:39:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 06B78868D8;
+	Sat, 23 Sep 2023 18:50:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oBpm9G7G";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="SWvJlCSh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C26D8691E; Sat, 23 Sep 2023 18:39:21 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 65C268691E; Sat, 23 Sep 2023 18:50:54 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79811868D8
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 18:39:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5088C8641B
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 18:50:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4051fea48a8so43839215e9.2
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 09:39:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-532bf1943ebso4687412a12.0
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 09:50:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1695487159; x=1696091959;
+ d=amarulasolutions.com; s=google; t=1695487852; x=1696092652;
  darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=17Uj/Vrx9nHbX2YZuepkoyAeoFaiyzwFEicGo5WNUF4=;
- b=oBpm9G7GucbE0Wveg3h27BDbdQmex0Rs/C8XRMpU2GKHVazp/HiwwaYfr9zCmNFLgB
- Dpm/L7BwdAaheUuar7Ds4m92v+jeeb0mNmC2YbiSFo1CqcK87CKFRaIDREFrG+/WQjE8
- rv59x9Pwno/mY3SwOMvbjOy2BIGMfbD0jw+B1Q3iia2ZCxw/Np1CPZeMUfVicM2WMECR
- eqMbplWo9Aj3s4rP8z6IgadPXaUwlKyde66OE5bApamCNNTPbyWldxNU5gwsKZ4rCLPY
- aVm2Bl/vRWY130KMNTcAAyCU6mUYyr0EZj8MwNgA/+9elyJahXwXkCif1oo9MSZpqR/O
- O/wQ==
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UOcSTJubMuAzL2SMa96kYurGjdVHB7MxGaVI+n7Ve1E=;
+ b=SWvJlCSh2U05LlLm49/mdYlWD0N+xsyll0nL5DeK65gS8Vos9msHY5ubZruU6vOUpv
+ HVlHESELdB+1Z+hzGjFtjwvgWOMFc4Nj/C2OcXDpS9/BoUuOHqsiKyeXIIWXFHRkc96Z
+ 02wFpDBYFKWaeNqXdiPNzpo1e60G5a55R/02Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695487159; x=1696091959;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=17Uj/Vrx9nHbX2YZuepkoyAeoFaiyzwFEicGo5WNUF4=;
- b=WU2y+qszxANvli6XTft4X20Y0nfKDBsVS4Gylp4F6mVT1IJZYo5Ub+POdbPnwP6UqF
- Y36f2I/H8aFQ8lFwzbeJmwdOT0yv8e6CZkVfdae15thV2k2DaBikYIBTZ+6189i3vVU2
- kqZZdC/LVB+xluXFKHNC38aySydcl5YIpvL0UiYj2utzgMI+2uA3hbHggcOdKLEXb6AR
- GGUO+eIWKyT4mQzGnmkIfpOGpfxKp1ymUJJ+mvavo0BWDdRybmKTVnnBxKq+nWyfyAMO
- QyX3jrnNWV4VAHAd+6x73Yk1olOWMXYTrk0oBpY3Jli71YwTIgcnjkn0aBGuSmH/RFe5
- 5/8w==
-X-Gm-Message-State: AOJu0YzVad2l/KLCYNwiPni7D4HpKH2qbP3ccg0QZNFRNNukVwh2VSYi
- bS8HdkEc5yO5bKnpJeTgtiMLbw==
-X-Google-Smtp-Source: AGHT+IEXr+0katDVeo9d5hMlxPggy/49vsQpHmyl1GeXIvvKICUtyIe/99s0DDUlBDBNMurZzBAcGQ==
-X-Received: by 2002:adf:f34b:0:b0:320:11f:2d48 with SMTP id
- e11-20020adff34b000000b00320011f2d48mr2361338wrp.54.1695487158874; 
- Sat, 23 Sep 2023 09:39:18 -0700 (PDT)
-Received: from localhost ([2a01:e0a:324:38a0:25d4:3d10:65f9:654e])
- by smtp.gmail.com with ESMTPSA id
- y2-20020adffa42000000b0031423a8f4f7sm7398382wrr.56.2023.09.23.09.39.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Sep 2023 09:39:18 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Fabrice Gasnier
- <fabrice.gasnier@foss.st.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marex@denx.de>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Safae Ouajih <souajih@baylibre.com>
-Subject: Re: [PATCH v2 4/4] usb: Avoid unbinding devices in use by bootflows
-In-Reply-To: <20230922153814.v2.4.If206027372f73ce32480223e5626f4b944e281b7@changeid>
-References: <20230922213819.1886094-1-sjg@chromium.org>
- <20230922153814.v2.4.If206027372f73ce32480223e5626f4b944e281b7@changeid>
-Date: Sat, 23 Sep 2023 18:39:17 +0200
-Message-ID: <8734z4974a.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1695487852; x=1696092652;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UOcSTJubMuAzL2SMa96kYurGjdVHB7MxGaVI+n7Ve1E=;
+ b=NKZth2XK1OLQlwAkfNf3ppK6sdrwEiPmpRKXUCzHtsKEdWsSD8RMhxfFmxWRyI5O4Z
+ WTYh2n3yCoVyi+TL6JaGxNqo7V9hpymOU/jwkLI4V0/aZCXC4Nkip6enXQXUiYQ9LoMQ
+ cI1ij5IsMHnWj/Bm9btoa/YqObzMRkyKdhwrwLUWOeROWRyU9PS1OlvS2+rLQC4MpDvY
+ LAkGPQd0OqhW06XGOWrW8ZR5MkiTxW/tYmGwvFMZDtuYsQGBdReqLlJISc+LEP95He8r
+ x87pXEQVMr9r2fUzbHViT5eTTHIfbqSRvFkuNzrb0ytC50NEtVskcw6ddP1vVpxHg3xi
+ cUvw==
+X-Gm-Message-State: AOJu0YxMDd8rBuSXf6Rhvkz4yEAfMrhul7ECvwO9j7Qaz/fA7zOIu7c3
+ 1RkSPQ7if5XKMWBojVuIGQx+PeJIwaKWY3CIiMlDYKf8k0tNLh427Gw=
+X-Google-Smtp-Source: AGHT+IHF8baZT8Ihv02PO7pkeqJWCGjSIpcTsukk79X2NOu3+EADmTgRrjLTsOkzHun9TqxsAndcxE3xO8V5vM7kNlY=
+X-Received: by 2002:aa7:df89:0:b0:52f:c073:9c77 with SMTP id
+ b9-20020aa7df89000000b0052fc0739c77mr1912469edy.35.1695487851634; Sat, 23 Sep
+ 2023 09:50:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20230922090856.920303-1-ada@thorsis.com>
+ <20230922090856.920303-2-ada@thorsis.com>
+ <b1d83292-c056-8759-aa33-da3e5ddf979b@collabora.com>
+In-Reply-To: <b1d83292-c056-8759-aa33-da3e5ddf979b@collabora.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Sat, 23 Sep 2023 18:50:40 +0200
+Message-ID: <CAOf5uwmTDN4nuNgKkmj_aKWORKAErio3su9cYoA5pH-knNWJYA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] mtd: nand: raw: atmel: Add error handling when
+ rb-gpios missing
+To: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Alexander Dahl <ada@thorsis.com>, u-boot@lists.denx.de, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,156 +88,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-Thank you for your patch.
-
-On ven., sept. 22, 2023 at 15:38, Simon Glass <sjg@chromium.org> wrote:
-
-> When a USB device is unbound, it causes any bootflows attached to it to
-> be removed, via a call to bootdev_clear_bootflows() from
-> bootdev_pre_unbind(). This obviously makes it impossible to boot the
-> bootflow.
+On Fri, Sep 22, 2023 at 11:40=E2=80=AFAM Eugen Hristev
+<eugen.hristev@collabora.com> wrote:
 >
-> However, when booting a bootflow that relies on USB, usb_stop() is
-> called, which unbinds the device. For EFI, this happens in
-> efi_exit_boot_services() which means that the bootflow disappears
-> before it is finished with.
+> On 9/22/23 12:08, Alexander Dahl wrote:
+> > Adapt behaviour to Linux kernel driver.
+> >
+> > The return value of gpio_request_by_name_nodev() was not checked before=
+,
+> > and thus in case 'rb-gpios' was missing in DT, rb.type was set to
+> > ATMEL_NAND_GPIO_RB nevertheless, leading to output like this for
+> > example (on sam9x60-curiosity with the line removed from dts):
+> >
+> >      NAND:  Could not find valid ONFI parameter page; aborting
+> >      device found, Manufacturer ID: 0xc2, Chip ID: 0xdc
+> >      Macronix NAND 512MiB 3,3V 8-bit
+> >      512 MiB, SLC, erase size: 256 KiB, page size: 4096, OOB size: 64
+> >      atmel-nand-controller nand-controller: NAND scan failed: -22
+> >      Failed to probe nand driver (err =3D -22)
+> >      Failed to initialize NAND controller. (error -22)
+> >      0 MiB
+> >
+> > Note: not having that gpio assigned in dts is possible, the driver does
+> > not override nand_chip->dev_ready() then and a generic solution is used=
+.
+> >
+> > Fixes: 6a8dfd57220d ("nand: atmel: Add DM based NAND driver")
+> > Signed-off-by: Alexander Dahl <ada@thorsis.com>
+> > ---
 >
-> There is no need to unbind all the USB devices just to quiesce them.
-> Add a new usb_pause() call which removes them but leaves them bound.
+> Reviewed-by: Eugen Hristev <eugen.hristev@collabora.com>
 >
-> This resolves a hang on x86 when booting a distro from USB. This was
-> found using a device with 4 bootflows, the last of which was USB.
+> >
+> > Notes:
+> >      v1 -> v2:
+> >
+> >      - Only issue error message if error is not ENOENT.  If the node ju=
+st is
+> >        missing, move on without error message.
+> >
+> >   drivers/mtd/nand/raw/atmel/nand-controller.c | 11 +++++++----
+> >   1 file changed, 7 insertions(+), 4 deletions(-)
+> >
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->
-> Changes in v2:
-> - Add new patch to avoid unbinding devices in use by bootflows
->
->  boot/bootm.c                  |  2 +-
->  common/usb.c                  |  7 ++++++-
->  drivers/usb/host/usb-uclass.c | 14 ++++++++++++--
->  include/usb.h                 | 15 ++++++++++++++-
->  4 files changed, 33 insertions(+), 5 deletions(-)
->
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index b1c3afe0a3a..5c9ba083e64 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -501,7 +501,7 @@ ulong bootm_disable_interrupts(void)
->  	 * updated every 1 ms within the HCCA structure in SDRAM! For more
->  	 * details see the OpenHCI specification.
->  	 */
-> -	usb_stop();
-> +	usb_pause();
->  #endif
->  	return iflag;
->  }
-> diff --git a/common/usb.c b/common/usb.c
-> index 836506dcd9e..4d6ac69111e 100644
-> --- a/common/usb.c
-> +++ b/common/usb.c
-> @@ -126,7 +126,7 @@ int usb_init(void)
->  /******************************************************************************
->   * Stop USB this stops the LowLevel Part and deregisters USB devices.
->   */
-> -int usb_stop(void)
-> +int usb_pause(void)
+Acked-by: Michael Trimarchi <michael@amarulasolutions.com>
 
-nit: I know this is the "legacy" (pre-DM) stuff, but isn't renaming the above
-function making the comment wrong?
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-Can't we keep this function usb_stop() and create another one named
-usb_pause() which calls usb_stop() ?
-
->  {
->  	int i;
->  
-> @@ -144,6 +144,11 @@ int usb_stop(void)
->  	return 0;
->  }
->  
-> +int usb_stop(void)
-> +{
-> +	return usb_pause();
-> +}
-> +
->  /******************************************************************************
->   * Detect if a USB device has been plugged or unplugged.
->   */
-> diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
-> index a1cd0ad2d66..c26c65d7986 100644
-> --- a/drivers/usb/host/usb-uclass.c
-> +++ b/drivers/usb/host/usb-uclass.c
-> @@ -173,7 +173,7 @@ int usb_get_max_xfer_size(struct usb_device *udev, size_t *size)
->  	return ops->get_max_xfer_size(bus, size);
->  }
->  
-> -int usb_stop(void)
-> +static int usb_finish(bool unbind_all)
->  {
->  	struct udevice *bus;
->  	struct udevice *rh;
-> @@ -195,7 +195,7 @@ int usb_stop(void)
->  
->  		/* Locate root hub device */
->  		device_find_first_child(bus, &rh);
-> -		if (rh) {
-> +		if (rh && unbind_all) {
->  			/*
->  			 * All USB devices are children of root hub.
->  			 * Unbinding root hub will unbind all of its children.
-> @@ -222,6 +222,16 @@ int usb_stop(void)
->  	return err;
->  }
->  
-> +int usb_stop(void)
-> +{
-> +	return usb_finish(true);
-> +}
-> +
-> +int usb_pause(void)
-> +{
-> +	return usb_finish(false);
-> +}
-
-What happens if someone calls usb_pause() followed by usb_init() on a
-root hub ?
-
-I think it behaves properly because usb_init() calls
-remove_inactive_children().
-
-> +
->  static void usb_scan_bus(struct udevice *bus, bool recurse)
->  {
->  	struct usb_bus_priv *priv;
-> diff --git a/include/usb.h b/include/usb.h
-> index 09e3f0cb309..ad39b09a6e4 100644
-> --- a/include/usb.h
-> +++ b/include/usb.h
-> @@ -265,7 +265,20 @@ int usb_kbd_deregister(int force);
->   */
->  int usb_init(void);
->  
-> -int usb_stop(void); /* stop the USB Controller */
-> +/**
-> + * usb_stop() - stop the USB Controller and unbind all USB controllers/devices
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int usb_stop(void);
-> +
-> +/**
-> + * usb_pause() - stop the USB Controller DMA, etc.
-> + *
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int usb_pause(void);
-> +
->  int usb_detect_change(void); /* detect if a USB device has been (un)plugged */
->  
->  
-> -- 
-> 2.42.0.515.g380fc7ccd1-goog
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
