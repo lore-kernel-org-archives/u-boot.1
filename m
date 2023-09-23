@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE6FCE7A88
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 00:57:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C1ACE7A8A
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 01:38:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 476C98652B;
-	Sat, 23 Sep 2023 02:57:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 176CF864F0;
+	Sat, 23 Sep 2023 03:38:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="WdHuG9h3";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="MHvFs7oI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D65486538; Sat, 23 Sep 2023 02:57:17 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 1D3A386501; Sat, 23 Sep 2023 03:38:15 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53BD38641B
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 02:57:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44FDE85DEA
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 03:38:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1695430634; x=1696035434; i=xypron.glpk@gmx.de;
- bh=IZeEXZMvEFlu2lGmI9pM4ZICQfwGUQCGDh6/WTHrphc=;
+ t=1695433091; x=1696037891; i=xypron.glpk@gmx.de;
+ bh=V1vOXbOSxjH/soCDm8O+qDG+vmccnRjbYBdECkZNAKQ=;
  h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=WdHuG9h3x09T6j6eTqSGOCgZsRgXsF9nuTszRSGwglUEvjM9n0p9fnH7yceFT81m2b3D2lc5Pe2
- Y5eetmPfWvOtjZhpGA4+9TxZfVZ1sT7WRTocm8od5twB/c94we1LlrVKPBsdXi0ppzWMi9dnIpZ4E
- fdkiKRC0HsqUAhr6EBIECdDBObw+2FuyQcx9MRu2xGTCWzd3qKvnxLi/at9Kt4daehYdRhiaYh35l
- NfOs3ptwGu5qLN3K+5SWVhvn4apaJlFNyC2F0M+a7+YxOVvWOcevcL1aCfd+4b4veCcgPk8TrYkHm
- 0c0OJG9BNa5k78ytehx48CZkYxM5tNlyjY+g==
+ b=MHvFs7oI8jkfczWKQRkVODXu83H+tevUBJYECTOCX98zeTsIpW2WoDehdrxn2phKzMFhNb0d1Xn
+ 1CMfkCHAyIv1PzIQa2BTikYtctJFTsYSKmhugN76+ZfVaF0okY4y6Eq+D8V3epnoo2J/kvzHfEaQa
+ Nt9NJQBOK7NG9BbicJJgZ4Wa5ycEFz62kS30nDQSme1RVthcYY4HOwS031Z4fJE1RXc3unKLyGWdA
+ t5a94hIHVbqUPsbBQEYwwa5n4DJvh4HXl1a9UUVqMSLbnJ4nBuexdZaoZmmAOkR7Es9PHec9G0AVI
+ Ikh5q/2KcAEzCobnPyMOZfslLjiUNmuZEdrg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M5wLT-1qllZK45LH-007Xj7; Sat, 23
- Sep 2023 02:57:14 +0200
-Message-ID: <536f587d-4a84-401a-8235-c3e9dff6756b@gmx.de>
-Date: Sat, 23 Sep 2023 02:57:12 +0200
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MTAFb-1r6fPw291T-00Ue4f; Sat, 23
+ Sep 2023 03:38:11 +0200
+Message-ID: <e43c5b16-e626-4c7a-9bef-44f192d2a703@gmx.de>
+Date: Sat, 23 Sep 2023 03:38:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: Reading from ISO9660 in U-Boot
-To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <CAPnjgZ2mhRhOWoObKbw0R+8jmFT0QY4THpXR=f2s1svi6cwEvQ@mail.gmail.com>
 Content-Language: en-US, de-DE
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+References: <CAPnjgZ2mhRhOWoObKbw0R+8jmFT0QY4THpXR=f2s1svi6cwEvQ@mail.gmail.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
 In-Reply-To: <CAPnjgZ2mhRhOWoObKbw0R+8jmFT0QY4THpXR=f2s1svi6cwEvQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:gcgntcsY0IuJDnJPeoMgNGdNMsRzZm64KTHIXQ4vY3/UrKmQeGg
- sWfVDzDEqgUZFq/WZhisg0HA6bDStGzLPwVd0up5F+r+gcJCALxXsE0hGrFV1HtNAFblnh6
- 3VmFEqMabstWJXz2dlUMy9uX7ZZXB0BZm/Ofk2KbcR5rPs345jx9boASJBDmekO0dEXoX2C
- inLx1hq7A6/WpE2vWJ8vw==
-UI-OutboundReport: notjunk:1;M01:P0:/TKEBkwJCCY=;/P1rFtIGji7S/pjLmgVbsLiYSig
- MWgtfRAu1QIs3mKvkJSLUOY6R8RxRkH6uQlgKrRushqz3IfohTQjqfRdGHYOO/VEgKEvpPYXr
- GNYGUtLIblg/iij0ufoju8Bu+Lyvb6n+UmENEnt3j/FbD/1SF1hesahyGew5gWHcd1ajYgEfn
- JdPJnJXzPy8vdL6sKvoFeXPTbvM/CxLtqKxuhXfRlfopJ76eaDzd+UDBSc/yhEtCYy8Cm4MBI
- g39pYwONkISipYAxdUlKdO0xLdLbk184ek2kSnvqDBbLQJDgd1yFWAmIkQC2JvnVaaw/ab4EX
- ZniuoLhZveJRHori0kFs6mTLSfeS2j3BziY4t5LfU+X0pJ1zVDqnQpEoZ7u7793ZpLkMx+uSk
- 7vr+A6Np32UrrdrE/f0lTeJrBMlAtgZz7eRfAOu5Td6mnyS5OX8mAFy+Bixoj+vynen3SlEND
- dEOZWFF5FsDHZSry4XtWTABHL7z69HRyAG8BIIP4UIb95sX2iM63hgRjEV80HlMlnqu6bTAM/
- C66JkebCkwVvbEtoLlLfu89PgxAd6T8AiF9QwyZKiPQaekDeI27U/cTrNb/3m5hyMKPaO+yJZ
- I/sXSlFZfuE5G+P3f+woFGho3uL/ng56ZZBdbIB+kwxJbbpiZUUWr7N3a9a/HOoa1gpni0oHn
- rElpTJAfF8VzVC1p8PqVhobvbuWyh8sufUNZQKXlw559byFPv7YXs/TYIf7JeegIn8rZXjDxq
- O7AEmyE9oCgi5IdbpyqWR9rV6Zuc+IAhI+R0neKb+1O53FApFdkQEmAIpIbsSSHO8cFBNdWSk
- Q263695tSwP1PdXavUT2CCh4GEDFCtbTbO+AfaWc5xPjS5Q9gH5EJs557KVOngCMy3iQ/4cih
- iyf0RMDoAI4ciU+Qqz4SEU48oZXv1LJVln53SotSkSCuynpnca5OGcQiy59LsIs5i77Uw1Nnf
- E9xd3A==
+X-Provags-ID: V03:K1:yT5/lc5f/mbW5n0B1wmnhXjYXDAPuoW4oYwcW0aEmmq29sBmmix
+ T0+xa8fcZGjzZz2HOUdBVc4DU1xo5JQv75GWoW4GvIw2gxN3MtxwpTuIOn5KfHV8d1fs+bl
+ AtV2pQ9CZltsaWgIN8tjlwKtvvniDbsxGSHYhliTvip9qR6YnsGpCCvvjydUpFNjeV+osm2
+ oKHvK3AacQPJ02MucEIQA==
+UI-OutboundReport: notjunk:1;M01:P0:uw63+5izuBU=;gM4EGgcWAHCLoGmOcKCvl4wsy0t
+ A6SXDmZHzHQcUd9Nii4VmacJtSIs0D6l1cfwc7q6CE4FBlHca0/MfgJ5jHou8Ymm2LfpCAVAa
+ gmxcVm2cx/pCjSTPagRskXIQr0WZRhzI+5J31uPu40fYHWlh0mX9ETVJEy1YNWCpGSL6fuEpK
+ A6detM24BRO8qdkYakiHhSsJ0ga1gWseU62oq6qRorbIsNzjXLPUgthJKDYOz/k7NXskVhd6j
+ 99l1uhpCKGahf6wslF0t1zYKy46ZUJqeevGqXX+EJ0phC8cOVxkS6HAjFxLxa2WHdSDpPO3UW
+ iAejIw6Kb0OkANrOJ8NSLoljlZ/c4GAA9t/XoxArwNiQK8fWWeejO4nNhu2R+lXPVRkxGnxm/
+ iTpf1nohlV8zw0ab4l4h+2K39esn7J8dGoi+CVOiGLrEqRLeK5f8bFlyfRzktfBx5Fbu47C2+
+ l+7fkZcCb2kVpSsTmiqkBVjpC0BEx6GxPVaHheCreDSwAXWLUx5QV1CYiZjf7kS/LgiRIvQXN
+ TlCaDdtOOFAm8+RFl9jppQtc9hyMp0K1dsPFbM8sQbdnHlsy66/GXwrr3glT6gXjKd5pfND8f
+ 0jQWnG4RqTwV70bhYih93aJlkmoK+UYL4FkjtjdD7R38eO7ywsLx1D0xaJHlGQFWfvhJKWY0G
+ t7vfVdm2G4IRuR//hQxxn0zwCMB6QFp4xFKC/U2A+gV1qncUZURFOKfWEZty4hqQ0VkX1Schu
+ tifbfy/RmqwPmc2wO4c85jbVqH5jgxmVU/APU5QebVdQB9CqWlAjchJFF8Ihunpa4xewSgDO8
+ 4kQBnXJX9nG77DJZrH9V0xEriuOP3/fEoLxr4dquCZ07s0okzKbz6fPlodkFJsl6U+68VAHuu
+ O0W64S81yx+BxCk1nHzKMhGePRA9qHGWswQfQIJOk+TUldltruGUoFN68yshf3jkgXkW8KSjt
+ 7KWAlmbHu3HqymeZPPVDf/5ytSY=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,7 +87,7 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 9/23/23 00:13, Simon Glass wrote:
-> Hi Heinrick & Bin,
+> Hi Heinrich & Bin,
 >
 > I'd like to be able to figure out in U-Boot what OS is on a USB stick.
 > For example, with the Ubuntu installer, I can boot it (through grub),
@@ -104,81 +103,26 @@ er way?
 > Regards,
 > SImon
 
-The format of the Ubuntu images depends on the architecture. Let's
-assume that you relate to amd64
-(https://cdimage.ubuntu.com/daily-live/current/mantic-desktop-amd64.iso).
+U-Boot only needs to support reading the ESP to boot. GRUB comes with a
+9660 driver.
 
-This is a hybrid image, which can be either read as ISO 9660 or as a GPT
-partitioned image. This is the gdisk output:
+On Ubuntu server installer images linux and initrd are in directory
+casper/ in the ISO9660 file-system.
 
-Number  Start (sector)    End (sector)  Size       Code  Name
-    1              64        10049451   4.8 GiB     0700  ISO9660
-    2        10049452        10059487   4.9 MiB     EF00  Appended2
-    3        10059488        10060087   300.0 KiB   0700  Gap1
+There is also a file dists/mantic/Release
 
-You can mount partition 2 as FAT file system in Linux:
-
-$ sudo kpartx mantic-desktop-amd64.iso -a -v
-[sudo] password for zfsdt:
-add map loop1p1 (252:4): 0 10049388 linear 7:1 64
-add map loop1p2 (252:5): 0 10036 linear 7:1 10049452
-add map loop1p3 (252:6): 0 600 linear 7:1 10059488
-
-$ sudo mount /dev/mapper/loop1p2 /mnt
-
-$ mount
-/dev/mapper/loop1p2 on /mnt type vfat
-(rw,relatime,fmask=3D0022,dmask=3D0022,codepage=3D437,iocharset=3Diso8859-=
-1,shortname=3Dmixed,errors=3Dremount-ro)
-
-The problem is upstream U-Boot is that the partition drivers are scanned
-alphabetically: a_efi, dos, iso
-
-If we change this to a_iso, b_efi, dos, we can read the ISO image:
-
-=3D> host bind 0 /tmp/mantic-desktop-amd64.iso
-=3D> part list host 0
-
-Partition Map for HOST device 0  --   Partition Type: ISO
-
-Part   Start     Sect x Size Type
-   1     3684        4    512 U-Boot
-   2 10049452    10036    512 U-Boot
-
-=3D> ls host 0:2
-             EFI/
-
-=3D> load host 0:2 $kernel_addr_r EFI/boot/bootx64.efi
-960472 bytes read in 0 ms
-
-Unfortunately the sandbox crashes when executing the EFI binary.
-
-So let't try qemu-x86_64_defconfig:
-
-qemu-system-x86_64 -m 3G -nographic -bios u-boot.rom \
--drive if=3Dnone,file=3D/tmp/mantic-desktop-amd64.iso,format=3Draw,id=3DVI=
-RTIO1 \
--device virtio-blk,drive=3DVIRTIO1
-
-And voil=C3=A1 your are in GRUB.
-
-As it does not find the /boot directory let's go to the GRUB console:
-
-grub> root=3D(cd0,gpt1)
-grub> linux /casper/vmlinuz root=3D/dev/vda1 efi=3Ddebug console=3D/dev/tt=
-yS0
-grub> initrd /casper/initrd
-grub> boot
-EFI stub: Loaded initrd from LINUX_EFI_INITRD_MEDIA_GUID device path
-
-I have no clue why it stops here.
+$ cat dists/mantic/Release
+Origin: Ubuntu
+Label: Ubuntu
+Suite: mantic
+Version: 23.10
+Codename: mantic
+Date: Tue, 19 Sep 2023 23:07:01 UTC
+Architectures: amd64 i386
+Components: main restricted
+Description: Ubuntu Mantic 23.10
+Acquire-By-Hash: yes
 
 Best regards
 
 Heinrich
-
-
-
-
-
-
