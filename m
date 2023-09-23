@@ -4,105 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B9DCE7A89
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 13:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E031FCE7A89
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 14:36:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D93A864CB;
-	Sat, 23 Sep 2023 15:24:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
+	by phobos.denx.de (Postfix) with ESMTP id AA20B8667B;
+	Sat, 23 Sep 2023 16:36:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="Xd0ntxSs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fhx8ZxP/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6089486568; Sat, 23 Sep 2023 10:54:24 +0200 (CEST)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12olkn20829.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::829])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id ABEFD86844; Sat, 23 Sep 2023 16:36:11 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66ED586538
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 10:54:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 317178641B
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 16:36:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=outlook.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clbcjt@outlook.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WwbVQ/ENSpbtvoOUQX0iagEikd/SjRrXn4ripgGnZpVlQhSA0igaOAN9UlpHeB9IzMkukrCJtiDSrYGeS3fOOb6VtX2tH4JZ1a8FQPBQQU/qmv28MYpSQ+dmP71GOQErH6N1qVdDvo+wylffJ+7UlXJFBA9bIJsGK/Z+mAUZCsBCMRMYmoyI1WDx7ccPE1wd4/yVIltTu/sayHl2h4QaUm7rwc88SJIThQe9PjbKw5LTEUhTNSFEO6RbH25ZHuz83XvBO5SWB6KSjxlAWC4TsSAMFcvTA7dnC45qmX7FiRVHBxKFGqpPm15ljuiVehSsHnccI9j7eH1zhf2XayiP8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kNFdD1FrK0BOivE3KEawJJO4czHYOEYtzpY+8HzjgGE=;
- b=E92HE5fdMa6P+CLUK+ZWqP5ShIX9jRhEvGheLtR8atlT3Nxn4P3e7v3uJcr7a4zWOntkLedi8Xreb0jfY4vWQp9xBaJkiKnl7uOLXs3Qbsjs2E+4TnVGajvPqW+1VOWCd99SpxDlD3Z6QTR0bfdyI5F9prH0Na/S3yx+dzpKdgYvY85cLdCfYiuW3arzrqbFfNhi0sZgQEV0JBbqQMS36zPhX9BMU/dxak/y36Ovhvx5dIuaN0IY+NPQd7581OBDjf1qDPN271VL9akSCkcCKg0Ex0yGTLTCW8VuKxUCIxUtsF1Xn14xKdErxu3icVXR0no9/0uYcf9UgZEgT6cyBw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kNFdD1FrK0BOivE3KEawJJO4czHYOEYtzpY+8HzjgGE=;
- b=Xd0ntxSs1XefAX6FEl6XEzGbSzoQYU3HmYeK2gaaxcJT5q+f+CYUf64u2W1slztCQJadXxIwRp+YYyOWH8TZ5S0CP2b3hxdXqPiCNt7lGcyxPGtt0AqXWXnEvNeZRx555lOEBfWbYVYYwXG4UEoLZw/vMsTf7DkQ8pACt6l+o3+qVdfvzU3yj7BNXciwEFNeeE7E7AYApiQrzBxHkbDo8hXWcDavogLmybPeBADkL8skElLY6kg82psEMuXhP7lMi25jzaGMo9rMM5fbFaoUrFTsV5m8liwdgdVoYO837/6ADGFmEqq5uK7CEfkt1GdMbhVEnK6/Fx5Zya+PPcjTOA==
-Received: from PH0PR19MB5428.namprd19.prod.outlook.com (2603:10b6:510:fe::21)
- by PH8PR19MB7835.namprd19.prod.outlook.com (2603:10b6:510:251::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.28; Sat, 23 Sep
- 2023 08:54:20 +0000
-Received: from PH0PR19MB5428.namprd19.prod.outlook.com
- ([fe80::42f3:fcc2:b66f:75fb]) by PH0PR19MB5428.namprd19.prod.outlook.com
- ([fe80::42f3:fcc2:b66f:75fb%7]) with mapi id 15.20.6813.017; Sat, 23 Sep 2023
- 08:54:19 +0000
-From: clbcjt@outlook.com
-To: u-boot@lists.denx.de
-Cc: FH0 <clbcjt@outlook.com>
-Subject: [PATCH] board: LicheePi_Zero: add emac support
-Date: Sat, 23 Sep 2023 16:53:49 +0800
-Message-ID: <PH0PR19MB54288958D7F6329111F426BDCCFEA@PH0PR19MB5428.namprd19.prod.outlook.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-TMN: [0fryEn433uALFCT8fvKOfNih/94EWdNtabA+V+Kswoc=]
-X-ClientProxiedBy: SG2PR04CA0194.apcprd04.prod.outlook.com
- (2603:1096:4:14::32) To PH0PR19MB5428.namprd19.prod.outlook.com
- (2603:10b6:510:fe::21)
-X-Microsoft-Original-Message-ID: <20230923085349.19338-1-clbcjt@outlook.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-52bd9ddb741so4353384a12.0
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 07:36:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695479768; x=1696084568; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FDxMmDxwlw86YRfNykq5ly2bvZP3OpzvQaWvXX0F0RQ=;
+ b=fhx8ZxP/jmzq5ycFZBu8YihVzyEBNdEYYoTEt+b02UjqCoyMLipZCVnkVYqpfxhY18
+ ZUn0u9RyA93GLaxoMwVbWETpKWR0qlFCVro1kEyBPY6s92M4Xsa951wHS/ooPqBE++B2
+ P5J29AxLUjmklBDQSh+yAHs/Ben8KqThknTWA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695479768; x=1696084568;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FDxMmDxwlw86YRfNykq5ly2bvZP3OpzvQaWvXX0F0RQ=;
+ b=VX5XgTSc7gmjCaSVb6L+K9e8SxJc4AVVPq5AKNbZn0ahi/sszeMwstr2YiluJqQJZB
+ Vb+OO6LhQlvZiE4/Dqf70+jY4ZlNJyUV26JOuYbLzqXtg+g+OhuecU3qzAFZsqP+Yshh
+ dvBqsACScw6d9bfHCZFmGNbTbgtkiXWUxEMb7agCROY2gaZhgfwb9jKnIPLak5++sAPC
+ UwH5NRSiPeeZAh9e6khKJJhJCZdPYbC0i8I2AjzCzF+TlOsi98Zhoc2iZvyP91c3Rq3/
+ y9tOdiAd/EpVc4k/Xa+VJgxvz8BMDsMiy1O0JplpQbdkqMdkxGi3Ve5ZB+qJrZTBFWNs
+ xJ7g==
+X-Gm-Message-State: AOJu0YwjYPRNixhVPTLA29NNEM9nipQqzN8yOMTnX2zT9Fq4F12w000+
+ ZlOOgIIsWpAsXzsSX7G+w2xDUVm+fO4GcPYA7QTgzw==
+X-Google-Smtp-Source: AGHT+IEszIpjGRf9smT98tZgjBHuOoqiC+sl97AUUt/Iffdrx+/Dr8vpVof0XNIQkL2S8Vc3/k+92YI5RTqxatm2oE0=
+X-Received: by 2002:aa7:d58f:0:b0:532:c81b:99b1 with SMTP id
+ r15-20020aa7d58f000000b00532c81b99b1mr1793566edq.18.1695479768475; Sat, 23
+ Sep 2023 07:36:08 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR19MB5428:EE_|PH8PR19MB7835:EE_
-X-MS-Office365-Filtering-Correlation-Id: fcbe8bdc-ad2c-4d9b-3c98-08dbbc12ac7a
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: BK9r5Xm9WPkGtKNktVSEm5cNThHY8mBZ7hm1zR7p4fHpGITkNKPZytiAoduDWbNLdjMjt8HlFHV0PVqzzXksyrtLVF2s8gSktRdczXVLI3Fhbx2ynRiqKXx45M4oJGXopPcgsXD4kIJekIf/W6qCSvZ1RI70gYmySUy2ZmCxXGjPkO8qRbJcrHoh/FGia2ifT2FLV8FWZHTov1dKqzkGCy09apKEcL5zjeXNsas/bU3MM/BMP7PYjNAz7Sdp6cW8Ss7c7FBB7TA4FDPZQ5FU4YM9Z9LkfkhPmroI2h0RE3QDrYfsUH6GUc+JGnOHE9iYMsGfJy2eIJTRpuT1e892EGb6tOJEGqchszCCTM4SIDfI/ETh/Afsdwve4E3j5dSpb7y8AMxIuvQfs5JolFcQq3eskOBQS0WzVAAEtTYgUdZb/bXxbU6ocUFsK9XwlTn+nDqF/LpzmSE/FBrhkA47MAseciP8XzsMhb6ewOmNGKy1uNKy+TYuRvIJ4sMTFTebyVS3azGsvS8CD/Qpp0hWNFyGtO5evC/h+mNgo+b3WzZ2ooh8hC/6xJFJjWvp8ktmXDw3+w2/O0pb2K0tlC460axD5POiIrKNY6MBm8fo39CGCwByoYRQSxvjkw37BmiH
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?tzY5bIso9uJrFmJB5fpTb1T8Z9MRRicj6NpTwNCzWCr2WOJG8YHxSNysXZrn?=
- =?us-ascii?Q?kStgrM2DZRPKrRgmZ+N5QbTcJD+wjl+bSzoVEP+Vlz5IvZHf9VBMyH8qqsSO?=
- =?us-ascii?Q?aGOcqkRCnmCmYDOAYJqVF85S4+ifdvEuhwmGtpXjBkg2kp1j0awFiQDYNwBM?=
- =?us-ascii?Q?7yhDzWpm/qurRMOdlJUCYssDEG7AV3YvhlV3C+hUUO6Bdzd34MF88XLbf3Rl?=
- =?us-ascii?Q?/9scWuGIrfgJE2GmYmXgzPIEadhe5ZfpfEAqjgctzJrkRKSAI2MH6g5h9aiG?=
- =?us-ascii?Q?6AxM7FiQ/0lQO7tXDEK9H25Omzu0D9Omho84VSGsTUsL9pLBh3/iwcHatG88?=
- =?us-ascii?Q?gG/dk+1jEg7myRLTeOsUqlNksxgXPeEQELWOkWPTPtY1NCgaS6KKgZT8g/lf?=
- =?us-ascii?Q?a0CdTRHh2CngxrU5PB011lCNVg9bl2bdp7oSx9wzrWPYr+UhxdEaycTdOMh0?=
- =?us-ascii?Q?CMOkpSGof02+JKo0/om2pSh54g6hs/RVHJ3uJ+U1014GoBkgo8ql2YcOryuF?=
- =?us-ascii?Q?Kgjtgj2QsqmTSlgyWMMQYYEwpcxdU/tnCujFthR5Y88cyzKc4rTtJGo1UYsr?=
- =?us-ascii?Q?PvpBSaRZuliLF9Eiim2Qf+im/8/7rXScGbWk0px9YQI3I9AKulErkSKJyzTl?=
- =?us-ascii?Q?oFKO/1whlbD58GXvTpw0NvCRYeO1s12Vr2P4Hskps0Gmry3kb1oWpuN+D3LZ?=
- =?us-ascii?Q?mvq6iVqO+SJmNy4WBcVNVn9uCyqns5wFM6pR3En2p5DEj+8r2wNoKZu9gF/7?=
- =?us-ascii?Q?f7unlYgjW0WMLHfi8JOydK5YOGO6vZWAb3YR63Aq9bSl/R7LNWKqlHsPeyLu?=
- =?us-ascii?Q?+a4Qe0xu/rxyltysdP1rTaDnmInS4Ip1Qv29/Bm1K6GzVRRLu0GaDjLLJZ32?=
- =?us-ascii?Q?0fQMTPFcEckViWdxqIU5UH6hwCFPsc9kkQfB5KsneJV9C/7aKM3qeIgPh+4a?=
- =?us-ascii?Q?qM2x9MtBnxOxgopQUMlxl9NAn1oBjoVz2/7vjIyoIsLyzPtXMgqt/dSvDfQX?=
- =?us-ascii?Q?RfYQgzL0tyoBw5Ew8Z3W1LyOIv3t+wUDY7PrBZ6FAsqqnGzqA6FkmtpNwSNb?=
- =?us-ascii?Q?iK9hv5E1Q/e2EQMw28YrTt+/TWEAvZVCgnnsBYKGUzZNNv0VF1q7yp11aNem?=
- =?us-ascii?Q?LLaVPEmkzhkcDhF4u+lo/MkENY+wlRt5Zb5mSI4jpxJOxb/0gNOQYPHhzQzw?=
- =?us-ascii?Q?42s8ohP5U3aqc9WJKvnEL1BdyP3HImDHHlHE+g=3D=3D?=
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fcbe8bdc-ad2c-4d9b-3c98-08dbbc12ac7a
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR19MB5428.namprd19.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2023 08:54:19.9233 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR19MB7835
-X-Mailman-Approved-At: Sat, 23 Sep 2023 15:24:23 +0200
+References: <CAPnjgZ2mhRhOWoObKbw0R+8jmFT0QY4THpXR=f2s1svi6cwEvQ@mail.gmail.com>
+ <536f587d-4a84-401a-8235-c3e9dff6756b@gmx.de>
+In-Reply-To: <536f587d-4a84-401a-8235-c3e9dff6756b@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 23 Sep 2023 08:35:51 -0600
+Message-ID: <CAPnjgZ0YRG1UoaMdk7ncHyebJwAJadPzfsyDHbAOm3KmV3JdQg@mail.gmail.com>
+Subject: Re: Reading from ISO9660 in U-Boot
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,98 +84,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: FH0 <clbcjt@outlook.com>
+Hi Heinrich,
 
-Signed-off-by: FH0 <clbcjt@outlook.com>
----
- arch/arm/dts/sun8i-v3s-licheepi-zero.dts | 6 ++++++
- configs/LicheePi_Zero_defconfig          | 4 +++-
- drivers/clk/sunxi/clk_v3s.c              | 6 ++++++
- drivers/net/sun8i_emac.c                 | 7 +++++++
- 4 files changed, 22 insertions(+), 1 deletion(-)
+On Fri, 22 Sept 2023 at 19:02, Heinrich Schuchardt <xypron.glpk@gmx.de> wro=
+te:
+>
+> On 9/23/23 00:13, Simon Glass wrote:
+> > Hi Heinrick & Bin,
+> >
+> > I'd like to be able to figure out in U-Boot what OS is on a USB stick.
+> > For example, with the Ubuntu installer, I can boot it (through grub),
+> > but I cannot see how to read anything useful from the USB stick that
+> > would indicate that it is Ubuntu, what version it is, etc.
+> >
+> > Does U-Boot need an ISO9660-filesystem driver for that? Is there any ot=
+her way?
+> >
+> > With Debian I can see the actual files (linux and initrd) , so it is a
+> > bit easier.
+> >
+> > Regards,
+> > SImon
+>
+> The format of the Ubuntu images depends on the architecture. Let's
+> assume that you relate to amd64
+> (https://cdimage.ubuntu.com/daily-live/current/mantic-desktop-amd64.iso).
+>
+> This is a hybrid image, which can be either read as ISO 9660 or as a GPT
+> partitioned image. This is the gdisk output:
+>
+> Number  Start (sector)    End (sector)  Size       Code  Name
+>     1              64        10049451   4.8 GiB     0700  ISO9660
+>     2        10049452        10059487   4.9 MiB     EF00  Appended2
+>     3        10059488        10060087   300.0 KiB   0700  Gap1
+>
+> You can mount partition 2 as FAT file system in Linux:
+>
+> $ sudo kpartx mantic-desktop-amd64.iso -a -v
+> [sudo] password for zfsdt:
+> add map loop1p1 (252:4): 0 10049388 linear 7:1 64
+> add map loop1p2 (252:5): 0 10036 linear 7:1 10049452
+> add map loop1p3 (252:6): 0 600 linear 7:1 10059488
+>
+> $ sudo mount /dev/mapper/loop1p2 /mnt
+>
+> $ mount
+> /dev/mapper/loop1p2 on /mnt type vfat
+> (rw,relatime,fmask=3D0022,dmask=3D0022,codepage=3D437,iocharset=3Diso8859=
+-1,shortname=3Dmixed,errors=3Dremount-ro)
+>
+> The problem is upstream U-Boot is that the partition drivers are scanned
+> alphabetically: a_efi, dos, iso
+>
+> If we change this to a_iso, b_efi, dos, we can read the ISO image:
+>
+> =3D> host bind 0 /tmp/mantic-desktop-amd64.iso
+> =3D> part list host 0
+>
+> Partition Map for HOST device 0  --   Partition Type: ISO
+>
+> Part   Start     Sect x Size Type
+>    1     3684        4    512 U-Boot
+>    2 10049452    10036    512 U-Boot
+>
+> =3D> ls host 0:2
+>              EFI/
+>
+> =3D> load host 0:2 $kernel_addr_r EFI/boot/bootx64.efi
+> 960472 bytes read in 0 ms
+>
+> Unfortunately the sandbox crashes when executing the EFI binary.
+>
+> So let't try qemu-x86_64_defconfig:
+>
+> qemu-system-x86_64 -m 3G -nographic -bios u-boot.rom \
+> -drive if=3Dnone,file=3D/tmp/mantic-desktop-amd64.iso,format=3Draw,id=3DV=
+IRTIO1 \
+> -device virtio-blk,drive=3DVIRTIO1
+>
+> And voil=C3=A1 your are in GRUB.
+>
+> As it does not find the /boot directory let's go to the GRUB console:
 
-diff --git a/arch/arm/dts/sun8i-v3s-licheepi-zero.dts b/arch/arm/dts/sun8i-v3s-licheepi-zero.dts
-index 2e4587d2..b3246b94 100644
---- a/arch/arm/dts/sun8i-v3s-licheepi-zero.dts
-+++ b/arch/arm/dts/sun8i-v3s-licheepi-zero.dts
-@@ -49,6 +49,7 @@
- 	compatible = "licheepi,licheepi-zero", "allwinner,sun8i-v3s";
- 
- 	aliases {
-+		ethernet0 = &emac;
- 		serial0 = &uart0;
- 	};
- 
-@@ -99,3 +100,8 @@
- 	usb0_id_det-gpios = <&pio 5 6 GPIO_ACTIVE_HIGH>;
- 	status = "okay";
- };
-+
-+&emac {
-+	allwinner,leds-active-low;
-+	status = "okay";
-+};
-diff --git a/configs/LicheePi_Zero_defconfig b/configs/LicheePi_Zero_defconfig
-index 009384ea..779d5c9d 100644
---- a/configs/LicheePi_Zero_defconfig
-+++ b/configs/LicheePi_Zero_defconfig
-@@ -5,4 +5,6 @@ CONFIG_SPL=y
- CONFIG_MACH_SUN8I_V3S=y
- CONFIG_DRAM_CLK=360
- # CONFIG_HAS_ARMV7_SECURE_BASE is not set
--# CONFIG_NET is not set
-+CONFIG_NET=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SUN8I_EMAC=y
-diff --git a/drivers/clk/sunxi/clk_v3s.c b/drivers/clk/sunxi/clk_v3s.c
-index 6524c135..680a43f2 100644
---- a/drivers/clk/sunxi/clk_v3s.c
-+++ b/drivers/clk/sunxi/clk_v3s.c
-@@ -37,6 +37,9 @@ static struct ccu_clk_gate v3s_gates[] = {
- 
- 	[CLK_DE]		= GATE(0x104, BIT(31)),
- 	[CLK_TCON0]		= GATE(0x118, BIT(31)),
-+
-+	[CLK_BUS_EMAC]  = GATE(0x060, BIT(17)),
-+	[CLK_BUS_EPHY]  = GATE(0x070, BIT(0)),
- };
- 
- static struct ccu_reset v3s_resets[] = {
-@@ -56,6 +59,9 @@ static struct ccu_reset v3s_resets[] = {
- 	[RST_BUS_UART0]		= RESET(0x2d8, BIT(16)),
- 	[RST_BUS_UART1]		= RESET(0x2d8, BIT(17)),
- 	[RST_BUS_UART2]		= RESET(0x2d8, BIT(18)),
-+
-+	[RST_BUS_EMAC]		= RESET(0x2c0, BIT(17)),
-+	[RST_BUS_EPHY]		= RESET(0x2c8, BIT(2)),
- };
- 
- const struct ccu_desc v3s_ccu_desc = {
-diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
-index 04c3274f..57e6857a 100644
---- a/drivers/net/sun8i_emac.c
-+++ b/drivers/net/sun8i_emac.c
-@@ -895,6 +895,11 @@ static const struct emac_variant emac_variant_h3 = {
- 	.support_rmii		= true,
- };
- 
-+static const struct emac_variant emac_variant_v3s = {
-+	.syscon_offset		= 0x30,
-+	.soc_has_internal_phy	= true,
-+};
-+
- static const struct emac_variant emac_variant_r40 = {
- 	.syscon_offset		= 0x164,
- };
-@@ -914,6 +919,8 @@ static const struct udevice_id sun8i_emac_eth_ids[] = {
- 	  .data = (ulong)&emac_variant_a83t },
- 	{ .compatible = "allwinner,sun8i-h3-emac",
- 	  .data = (ulong)&emac_variant_h3 },
-+	{ .compatible = "allwinner,sun8i-v3s-emac",
-+	  .data = (ulong)&emac_variant_v3s },
- 	{ .compatible = "allwinner,sun8i-r40-gmac",
- 	  .data = (ulong)&emac_variant_r40 },
- 	{ .compatible = "allwinner,sun50i-a64-emac",
--- 
-2.34.1
+I'm not sure what is going on there, as for me 'bootflow scan -lb usb'
+boots automaticaly.
 
+>
+> grub> root=3D(cd0,gpt1)
+> grub> linux /casper/vmlinuz root=3D/dev/vda1 efi=3Ddebug console=3D/dev/t=
+tyS0
+> grub> initrd /casper/initrd
+> grub> boot
+> EFI stub: Loaded initrd from LINUX_EFI_INITRD_MEDIA_GUID device path
+>
+> I have no clue why it stops here.
+
+That's the efi_gop graphics bug. I sent a v2 patch for it[1]
+
+Regards,
+Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20230922153814.v2.1.I9=
+f7f373d00947c704aeae0088dfedd8df07fab60@changeid/
