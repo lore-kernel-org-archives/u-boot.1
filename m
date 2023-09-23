@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2082CE7A89
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 18:42:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8973CE7A89
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 18:42:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E89586A38;
-	Sat, 23 Sep 2023 20:42:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 999FF86AE6;
+	Sat, 23 Sep 2023 20:42:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BpMDraIM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DRNU1EWE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6480B86ABC; Sat, 23 Sep 2023 20:42:45 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id C2F2686AF7; Sat, 23 Sep 2023 20:42:50 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72E7F8641B
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 20:42:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02EB486AFB
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 20:42:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-503056c8195so6447563e87.1
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 11:42:43 -0700 (PDT)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-533c8f8f91dso1207332a12.0
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 11:42:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695494563; x=1696099363; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695494568; x=1696099368; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5rb9Udyf3XbHZwCTN6RBhAumhbG52m7jFZVcwitPvrA=;
- b=BpMDraIM/3Gd8ANNIJEOygQuvpTFMIhgNovl8VadKjPDoZxRmS6BHTpCm40rXAI0XN
- g8hpbUiZQop4dSSUexP1RSLRk5qgw75DPFVsKGYa/eKjqf7V3daB2jH1J34KyfxEn9CC
- aAsmiUxWJeXLpknhnkSVgV7btQAylcNu9akQI=
+ bh=6NzajYygC7KpvGBYWIfG+CZ633sWWNWBnZmvA0E4WWI=;
+ b=DRNU1EWEAcdB6D1I+gZ/SBdheaW8XfkenVJWBN3xHoYJEK97XeTRR6qEjna/aNIKzb
+ HdH3jyHBDr1G9KTbO5FpUOT1djcFXLozGSuB1jIqLGsl8Cjm19w6u3ijmWwwQVeVpjsT
+ mZad2eeiS5eJXVZwxQZR8whSpz//SpOgZL13Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695494563; x=1696099363;
+ d=1e100.net; s=20230601; t=1695494568; x=1696099368;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=5rb9Udyf3XbHZwCTN6RBhAumhbG52m7jFZVcwitPvrA=;
- b=ZyNDaGffC/xmjdtoecw1a8bmBC7xGeDZ+HhuBMfdXODT1M1myXqhTFGUlqfFexFrkL
- TrIazv1fHnZi4SDAHxffYXqVgy/xdfqliIb9mGmeQOGolV2x4ZTU065XUl8wXU5hBBOq
- uyoQiG0D/x1PGYabVAn7YOIA5wfHOVCyHaQ6/WZ/a992qQ63UUYAvkay6wwcOF7acauJ
- S3v9u/amWU4gYQdTO2yAZhoO4rb9jBDeZXtZ0SHqi2Y4lEncTJU1Hgbw7Cq9z64eqkZY
- FynTQ5rBq70CpncJ+JdnAM+qQXkM4Jta7Fr/PJf7/cuKFg83gNB4sB/O0kiMDvJvnk7j
- /+rg==
-X-Gm-Message-State: AOJu0Yw1CXH7xx+9NNrpiU/9KsTsA/9r9Yr5k2gwXVj8V6tv+M1C73l7
- C5soNZ4MffJ5D83+hCH2mvkI/CSj7fDO/Ja+7pLEWg==
-X-Google-Smtp-Source: AGHT+IFvCJQdItKNYranRv6zGxM3lyTtSDW8Sh22CZsoigR7Iy9gGgbHOcxD7hwCD15qkxOG81xjjj3CqnmUvRUzP/Y=
-X-Received: by 2002:a05:6512:3ca2:b0:503:1c07:f7f9 with SMTP id
- h34-20020a0565123ca200b005031c07f7f9mr2908181lfv.29.1695494562485; Sat, 23
- Sep 2023 11:42:42 -0700 (PDT)
+ bh=6NzajYygC7KpvGBYWIfG+CZ633sWWNWBnZmvA0E4WWI=;
+ b=Kw280ecFTN2JPAQzf3pu6FIURKTYK+QB1VKCMuSJRdg6qUaMrHND2/3g4FweebgebV
+ vz/PmOuyl3wgmD+FpklZ28WXxezoyIU6qUDE3KyHuiPZohEIHNxNHZcpbpcCd0Uf9ZG+
+ I54uD5e+4g6qmiK4Auh0J9TyTg8hUVnxbqF+8Hcm0xNMYFkbE59HbXEnTWInE/eKqaOv
+ 7xiJ+PgGIlNLOagj+r714HY1680mfnWBvyv3wZyGMEi8T5vkpw7weAlZ3hy1ktxLIzJp
+ fq/i21dTfR5yIfiwmeustweP1jcwhCbGWCqvJGCiltSE28FuaQbY8fesjzJcfGJgcDDi
+ YjuA==
+X-Gm-Message-State: AOJu0YyGVB07/lYXgvpGjcY2ZTYRUHVBZ9J8fdmF24xjubAvrV4dDFSA
+ AQmr76zZepjdH+74/WuXkJVBnTQei3N+frYCTAI61F9EOITwV1oFR3c=
+X-Google-Smtp-Source: AGHT+IFYNbsUK/BH/OpNz06FD12D9L9Yjre08bPAahKGwow6GqibH4PNvtadlp1huUuRE2CnrOWxUBR8Mm5GvLkaG9U=
+X-Received: by 2002:aa7:d705:0:b0:530:a61f:ed1 with SMTP id
+ t5-20020aa7d705000000b00530a61f0ed1mr1995123edq.42.1695494568363; Sat, 23 Sep
+ 2023 11:42:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAPnjgZ2mhRhOWoObKbw0R+8jmFT0QY4THpXR=f2s1svi6cwEvQ@mail.gmail.com>
- <e43c5b16-e626-4c7a-9bef-44f192d2a703@gmx.de>
- <CAPnjgZ1CEBbeQzKNJBYtQx=rVZayJyZVwo1CPW-ZgFiKNbT6hQ@mail.gmail.com>
- <D5CA48E9-78C1-4E92-979A-E9C346A42AAE@gmx.de>
-In-Reply-To: <D5CA48E9-78C1-4E92-979A-E9C346A42AAE@gmx.de>
+References: <MAZP287MB050324B04DDD0AA9C6DD905CE4FEA@MAZP287MB0503.INDP287.PROD.OUTLOOK.COM>
+In-Reply-To: <MAZP287MB050324B04DDD0AA9C6DD905CE4FEA@MAZP287MB0503.INDP287.PROD.OUTLOOK.COM>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 23 Sep 2023 12:42:31 -0600
-Message-ID: <CAPnjgZ3bn8j=EJxHKUJ+_jzMbwWE=_1wa8b-stX4z8HKRhG1=A@mail.gmail.com>
-Subject: Re: Reading from ISO9660 in U-Boot
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
+Date: Sat, 23 Sep 2023 12:42:36 -0600
+Message-ID: <CAPnjgZ2Hg+b50MmiXrgQQdxmjrkeHW+wqHLfyvuJoUYj1mGAgQ@mail.gmail.com>
+Subject: Re: [PATCH] arm: rpi: set boot_targets with correct macro expansion
+To: Date Huang <tjjh89017@hotmail.com>
+Cc: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,78 +81,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Date,
 
-On Sat, 23 Sept 2023 at 12:41, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Sat, 23 Sept 2023 at 12:34, Date Huang <tjjh89017@hotmail.com> wrote:
 >
+> rpi uboot will only try to load mmcnr@7e300000.bootdev
+> which is wlan interface if boot_targets only has `mmc`
+> Change it to `mmc0 mmc1 mmc2 usb0 pxe dhcp`
 >
+> Signed-off-by: Date Huang <tjjh89017@hotmail.com>
+> ---
+>  board/raspberrypi/rpi/rpi.env | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> Am 23. September 2023 16:36:32 MESZ schrieb Simon Glass <sjg@chromium.org>:
-> >Hi Heinrich,
-> >
-> >On Fri, 22 Sept 2023 at 19:38, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >>
-> >> On 9/23/23 00:13, Simon Glass wrote:
-> >> > Hi Heinrich & Bin,
-> >> >
-> >> > I'd like to be able to figure out in U-Boot what OS is on a USB stick.
-> >> > For example, with the Ubuntu installer, I can boot it (through grub),
-> >> > but I cannot see how to read anything useful from the USB stick that
-> >> > would indicate that it is Ubuntu, what version it is, etc.
-> >> >
-> >> > Does U-Boot need an ISO9660-filesystem driver for that? Is there any other way?
-> >> >
-> >> > With Debian I can see the actual files (linux and initrd) , so it is a
-> >> > bit easier.
-> >> >
-> >> > Regards,
-> >> > SImon
-> >>
-> >> U-Boot only needs to support reading the ESP to boot. GRUB comes with a
-> >> 9660 driver.
-> >
-> >Yes, but this is not about booting, it is about visibility into what
-> >is being booted. Perhaps Ubuntu could put some information in
-> >partition 2?
-> >
-> >>
-> >> On Ubuntu server installer images linux and initrd are in directory
-> >> casper/ in the ISO9660 file-system.
-> >>
-> >> There is also a file dists/mantic/Release
-> >>
-> >> $ cat dists/mantic/Release
-> >> Origin: Ubuntu
-> >> Label: Ubuntu
-> >> Suite: mantic
-> >> Version: 23.10
-> >> Codename: mantic
-> >> Date: Tue, 19 Sep 2023 23:07:01 UTC
-> >> Architectures: amd64 i386
-> >> Components: main restricted
-> >> Description: Ubuntu Mantic 23.10
-> >> Acquire-By-Hash: yes
-> >>
-> >
-> >That would be useful info. Ideally we would have a standard format for
-> >this file across all distros, perhaps something that VBE can help
-> >with.
+> diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+> index 30228285ed..08a3648838 100644
+> --- a/board/raspberrypi/rpi/rpi.env
+> +++ b/board/raspberrypi/rpi/rpi.env
+> @@ -74,4 +74,4 @@ pxefile_addr_r=0x02500000
+>  fdt_addr_r=0x02600000
+>  ramdisk_addr_r=0x02700000
 >
-> What problem do you want to solve? During installation you should know what you have downloaded.
->
-> Afterwards UEFI boot options should receive reasonable labels.
+> -boot_targets=mmc usb pxe dhcp
+> +boot_targets=mmc0 mmc1 mmc2 usb0 pxe dhcp
 
-I want to show it in the U-Boot boot menu.
+Yes, this is a 'feature' of standard boot, which I hope to fix.
+
+The order you specify should be the same as the default one, so does
+it work for you if you just remove the boot_targets variable?
 
 Regards,
 Simon
-
->
-> Best regards
->
-> Heinrich
->
->
-> >
-> >Regards,
-> >Simon
