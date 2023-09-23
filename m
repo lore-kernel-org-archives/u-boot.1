@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02E84CE7A88
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:45:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96B6DCE7A88
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:45:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E0B086AE6;
-	Sat, 23 Sep 2023 21:44:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6E43C86ACA;
+	Sat, 23 Sep 2023 21:44:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z6pJoaGD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L9GKbiov";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D14D88684C; Sat, 23 Sep 2023 21:44:35 +0200 (CEST)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 5480886A24; Sat, 23 Sep 2023 21:44:37 +0200 (CEST)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 047FE868D8
+ by phobos.denx.de (Postfix) with ESMTPS id F254786945
  for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:44:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3512740906dso4434795ab.0
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:44:32 -0700 (PDT)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3512614822bso5144105ab.0
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:44:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695498271; x=1696103071; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695498272; x=1696103072; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IdEtMWHL6ImEIXlcWBghJiJSKhqdfFeRRW6MjOyWTSo=;
- b=Z6pJoaGDqt5V2/ImF/1BvVU6GHg9LcLAUPaR9I3+6+sC3SCwViG4DrTWCyVmuStnV5
- qa4Wogq39krErkPtfIvmH7m7AAA77vCUihZqZoLrPVFs4GBS5THiqdF3Jxd1bMXfJ+yn
- WesY/KEQIomnyyJBbXDVO9WAxjTxuEXHNEc9E=
+ bh=e5FSM/z+BEPq4lE0y77huZtHIecaLQmYWFr9jRvCBwM=;
+ b=L9GKbiovz1RBcSYKx5cKp9p+oYqenPN352ixacjr8BNgkidq+k4krJoyrSbOT1kgv6
+ Vk3SaAN7C1C93BxyL6AIFXb31uN/QlfcJQwiZ/hGxDM7LsOR5WLXEf62tg3IZbIEhyhp
+ XUWRrlIQAc3SPfwMFen8PfyypEBnIGY1uBqCs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695498271; x=1696103071;
+ d=1e100.net; s=20230601; t=1695498272; x=1696103072;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IdEtMWHL6ImEIXlcWBghJiJSKhqdfFeRRW6MjOyWTSo=;
- b=l3kOjPFzT333yFZg2o9mAybXxJmcmhLJNvp2L5vOZdMLM2kr+twRopNRoVOFCP5GwE
- 8quNmkFuqZjAjYckKQ2tpUba5ayb+1XhWMuJf6jHHqRZV5rRQdyCfPJcwqLzGvNVsl/Q
- EYU5/EKXYNvWtHINSbL0O2CTzv+ebi2K9x6CGTGTEdxC88RPs6xJ8pVw+UMtOHA6KvyR
- 8/m/LaMymBwqM32AkeEM4a0YlqnqNmM0fps03GjrSQMjoQP0WOli6/PYLLqmt/RnLPQD
- S4hG0cwR2eNzQiASWRyKTk86dqEM4l9GLCOghuol00qBbt+aVxjM0nQAEyC0DRDlUjrE
- 8tQg==
-X-Gm-Message-State: AOJu0Yxnkoq01UgY+qmAMthwg5QMW/zRANvZx2Q3HBPvqJ2L7+OHe+VY
- LREU2yGuHlt4Sh53XKu8cNyEJ6zGvV47KmLLP3s=
-X-Google-Smtp-Source: AGHT+IFryPsBncK0xmIY4itGZT2IwdwM3qeQAHEPxbkNe0coXUj8JQntfRSwoVMO2ol6sCHlWxTkXQ==
-X-Received: by 2002:a05:6e02:1b89:b0:345:3378:4251 with SMTP id
- h9-20020a056e021b8900b0034533784251mr4199687ili.23.1695498271649; 
- Sat, 23 Sep 2023 12:44:31 -0700 (PDT)
+ bh=e5FSM/z+BEPq4lE0y77huZtHIecaLQmYWFr9jRvCBwM=;
+ b=c+x056+ZXqzlB0KhUsx2eiEu9pdHwrjkvaJdR7KV1hoY85Wd6Mkf25xiiaDgjIehip
+ JTdj9IqogdC5zn8H5fVXuq2KgZeMtq6l7k62zB1rktYmOm874liwx232aVpWY9uRkYFH
+ XEZQzPvvmckIJe0JQ/3NPXtINvuIk5aWS8FsH6cA/MhQunZsLcc+iT5pFVLBn8lQJpuW
+ Ugmrj9n04JYbslx7JMPOmfbNaMl2LqeGb97Z2GBPTgX5bylPmF2IvLU61TiP0KW++W7h
+ q5rVAtRQucjkhP+BGNU/WFimGT44ZlDfT8qyK1GCt9GZA3WuUuqoS6+PUiuxepNkqYe0
+ uhLQ==
+X-Gm-Message-State: AOJu0YzZtuzKZ2Nw2ZelsF06pRNBBc34V2nxFyJ+wvQHCeNLMLK+lvvi
+ xXhZhQhfz3JBnkPFZtS/3ySui5hdH8/A8E2zpEI=
+X-Google-Smtp-Source: AGHT+IFQfndI0QLv3ayUTjNkQvcmHvWI0b7EX0eJp+6IXMotC+XjKs8B51i9wTPHOIwA8t/atYP2Dw==
+X-Received: by 2002:a05:6e02:20c5:b0:351:ab2:2621 with SMTP id
+ 5-20020a056e0220c500b003510ab22621mr4622439ilq.15.1695498272587; 
+ Sat, 23 Sep 2023 12:44:32 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.31
+ el9-20020a0566384d8900b00439d4db47b6sm1697786jab.39.2023.09.23.12.44.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 23 Sep 2023 12:44:31 -0700 (PDT)
+ Sat, 23 Sep 2023 12:44:32 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 02/27] moveconfig: Avoid deprecation warning for setDaemon
-Date: Sat, 23 Sep 2023 13:43:51 -0600
-Message-ID: <20230923194424.1739224-3-sjg@chromium.org>
+Subject: [PATCH v3 03/27] moveconfig: Correct ordering of asteval import
+Date: Sat, 23 Sep 2023 13:43:52 -0600
+Message-ID: <20230923194424.1739224-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230923194424.1739224-1-sjg@chromium.org>
 References: <20230923194424.1739224-1-sjg@chromium.org>
@@ -88,12 +88,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the recommended new way of setting a thread to be a daemon.
-
-This avoids a warning:
-
-   DeprecationWarning: setDaemon() is deprecated, set the daemon attribute
-      instead
+This should be after the standard imports. Move it to avoid a lot of
+pylint warnings.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -104,18 +100,25 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/moveconfig.py b/tools/moveconfig.py
-index 880a5594be05..2f7dee88c7ee 100755
+index 2f7dee88c7ee..a6dbda7bd0ea 100755
 --- a/tools/moveconfig.py
 +++ b/tools/moveconfig.py
-@@ -2029,7 +2029,7 @@ doc/develop/moveconfig.rst for documentation.'''
-     config_db = {}
-     db_queue = queue.Queue()
-     t = DatabaseThread(config_db, db_queue)
--    t.setDaemon(True)
-+    t.daemon = True
-     t.start()
+@@ -11,7 +11,6 @@ See doc/develop/moveconfig.rst for documentation.
+ """
  
-     check_clean_directory()
+ from argparse import ArgumentParser
+-import asteval
+ import collections
+ from contextlib import ExitStack
+ import copy
+@@ -32,6 +31,7 @@ import threading
+ import time
+ import unittest
+ 
++import asteval
+ from buildman import bsettings
+ from buildman import kconfiglib
+ from buildman import toolchain
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
