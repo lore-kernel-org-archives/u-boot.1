@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0224CE7A89
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:53:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F4A9CE7A89
+	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 19:53:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 47DB186A28;
-	Sat, 23 Sep 2023 21:53:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id AB65F86B6D;
+	Sat, 23 Sep 2023 21:53:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RY+Cbq63";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="VokJXa0+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6161D86B09; Sat, 23 Sep 2023 21:53:42 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 8CC4386B57; Sat, 23 Sep 2023 21:53:45 +0200 (CEST)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F8A086A08
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:53:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 673C086B38
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 21:53:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2c02e232c48so67553211fa.1
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:53:40 -0700 (PDT)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2c00c0f11b2so63946341fa.1
+ for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 12:53:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695498819; x=1696103619; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1695498823; x=1696103623; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NtszwVn3y6stsgCF5+pVd7T47c+gJ39tdRwf7lFPzRw=;
- b=RY+Cbq639b79NIlrfgrlQeHVtsxt9tPSllw0qARW3F3IT5i7JnjO2Fhcx9VPn1mJBh
- moA/TvMIAG1V1S4GsTGIhtDv7JNpoRS7auD6zRwTO3XFpRQ91BoLooC1EpT7vAQ/cCPI
- bsV5I2H6zRxZIl7VZoGqtdvKFD7YUAVf+bHhI=
+ bh=MMLpOBZQPznv8/wmmTBMbmJ1UHX8i4veNn2NE8XbSso=;
+ b=VokJXa0+275K2Fx0vByheB7UPmT05nrIvysxsWotBW1969dDsDQu7Ejc+eln+yq5dk
+ 61ZxWisWJcW3M18TyPeGG6rFh1xPieGbCZ2wEG2hpDNvs1XIFrQE9JxI1DsnhnFIs+Zk
+ zN+K74Ps6Cudy4ZMRzI1foddxB9x3xd0a1MLeqYVkXXX3uiumKhsOgQBa6OBi4qmGWPy
+ aJMA5NQaRLfN2BHPfSCOAWuzEzzHSZB1uE4FZ53Pw4H7QpH8b0b4ehZNBgjSXKnqMJV4
+ uZ5d5HzP2oBuMYdh8Iof5UTyHxgpebFryXgbp1NT2Ko5k3aLyveNXDmXSjPdr/mQEI/F
+ Zxcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695498819; x=1696103619;
+ d=1e100.net; s=20230601; t=1695498823; x=1696103623;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NtszwVn3y6stsgCF5+pVd7T47c+gJ39tdRwf7lFPzRw=;
- b=ebGxCWQVk4lg1bjd9Imzhx+wP02+7TSGaQIpVAr/Xi8gOfIrvKIeGDA0tWAk4q5JMd
- u1ADNy2aLzSVwKd4+LY4y7q7YO+g/TzCMLnOAjfPVk6n6IMsKRknbwHEvanWab+FT4/O
- GQ8xmRdpHxhoK2ZSwoiHavMIF3Usbw6kYAZT2ylZT51JkDeSJxqGTGb9u1vqlJMq1e15
- 2aQ+R+ZA99jbKJj3N6025dOd3RBgNx3qpIyw6JmpwtJUwinUgdH4k8BYaSMvGx7HbHjn
- +5C+SoOsNuy30Yxw+5RINlIjwf00wd8/if18fvfw4VjyvuIywnjrxQ1S2Kq/kZC1OpqA
- /Qvg==
-X-Gm-Message-State: AOJu0Yzw9pImMLLQAx35fnGto2vfFXiTrbP2jKzITedLcsAR4rqyUwRu
- XQJoW5NJ9IMKaQV7pAyDVECDrPKz6kb3M1jiAUgSUyeYlrftj3Eo2VE=
-X-Google-Smtp-Source: AGHT+IE48Hh8beps8Ug319g2SrYWPr7BOPNd55bA9JBlkDVOPgUFC/3fc84gJLd4JCgx6PMfCDG+go4VBb1AxO8QBpY=
-X-Received: by 2002:a2e:2c12:0:b0:2bf:fae0:5cef with SMTP id
- s18-20020a2e2c12000000b002bffae05cefmr2300226ljs.21.1695498819209; Sat, 23
- Sep 2023 12:53:39 -0700 (PDT)
+ bh=MMLpOBZQPznv8/wmmTBMbmJ1UHX8i4veNn2NE8XbSso=;
+ b=CGkEI3b2432H18XfJRkrRS987kWUpUBWI7Qfc3hNGHrXhqNag4o8nT3p//4wTvke/3
+ byWHcQpjQ7jWHlRjn/9E4y73wRLbb6xbd/3KHO2g7g2sqz1+0bTkpQZLF/FIChyq7Kix
+ S7moPUqZSw17GOslkKjOWt/8N3B1kWlToxf3YV4vKl6t5/2XnYw9rayDsoha+Tk72JC3
+ pWQL3QZrzANwFJjX8gajAhVN/KrOHPEXZT3jMGEqL90fGrUlAj/d+3vjHYXvJadMmwAo
+ PK63XwBqRnlP8rR+euRqsCmNNSsswZ9lxNaoLXdfCcS/2Sb6Pc20TZhEpl1b+46mswM2
+ TIcA==
+X-Gm-Message-State: AOJu0Yzaxpt+i9jg7h3r0NpF4qVg72V7JGJr0OuFrVUu5JIKLq8UaKYe
+ z2C1UgY6lJmkafme4uHCrlzxXzWIIcXDCeBVOCT5RA==
+X-Google-Smtp-Source: AGHT+IETLXlYC0xVDtT8416LXURKNcvReq7zbEGSeU3Vk9RnTkH5O99NySwrCEZgUhQ8hGc5CwXguL20o/80qJZ01cc=
+X-Received: by 2002:a2e:b004:0:b0:2c1:2995:b671 with SMTP id
+ y4-20020a2eb004000000b002c12995b671mr2468335ljk.42.1695498822582; Sat, 23 Sep
+ 2023 12:53:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230405150458.890460-1-vincent.stehle@arm.com>
- <CAPnjgZ1PZJqLdRW691nCgtsTtxcvvQ-EbGpQTHhxRLpyGqeaAQ@mail.gmail.com>
- <ZC6ZTsF/P9bItCxb@debian>
- <CAPnjgZ2FkU_wKLd1djMdArvqPaX3-jvA=p-ZHbhnKgSpx+KULw@mail.gmail.com>
- <ZDVL2Ac7uz19ARzl@debian>
-In-Reply-To: <ZDVL2Ac7uz19ARzl@debian>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 23 Sep 2023 13:53:26 -0600
-Message-ID: <CAPnjgZ0oQTuG4qT4ZFfDewzNOJriD0rAmYimJSU9va6GZxASbw@mail.gmail.com>
-Subject: Re: [BUG] issues with new bootflow, uefi and virtio
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: u-boot@lists.denx.de
+References: <20230918083231.20092-1-mps@arvanta.net>
+ <ZQrpXpdKKbXyuDkY@swlinux02>
+In-Reply-To: <ZQrpXpdKKbXyuDkY@swlinux02>
+From: Simon Glass <sjg@google.com>
+Date: Sat, 23 Sep 2023 13:53:30 -0600
+Message-ID: <CAPnjgZ3AVe51nJqc2z4dds9T_Z3AVOJ503qv5zQJQZnDH5ihYw@mail.gmail.com>
+Subject: Re: [PATCH 1/1] starfive: visionfive2: add mmc0 and nvme boot targets
+To: Leo Liang <ycliang@andestech.com>
+Cc: =?UTF-8?Q?Milan_P=2E_Stani=C4=87?= <mps@arvanta.net>, u-boot@lists.denx.de,
+ Shengyu Qu <wiagn233@outlook.com>, Jami Kettunen <jamipkettunen@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -86,111 +87,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vincent,
+Hi Leo,
 
-On Tue, 11 Apr 2023 at 06:00, Vincent Stehl=C3=A9 <vincent.stehle@arm.com> =
-wrote:
+On Wed, 20 Sept 2023 at 06:46, Leo Liang <ycliang@andestech.com> wrote:
 >
-> On Fri, Apr 07, 2023 at 05:31:06PM +1200, Simon Glass wrote:
-> ..
-> > > When combined with the patch from Mathew[1], it does indeed repair th=
-e case of
-> > > efi boot with two virtio disks, specifically when the first virtio di=
-sk is the
-> > > one we want to boot from.
-> > > FWIW, the system will not boot when I invert the two virtio disks.
+> On Mon, Sep 18, 2023 at 10:32:29AM +0200, Milan P. Stani=C4=87 wrote:
+> > boot from SDIO3.0 (mmc sdcard) first if it is plugged.
+> > If mmc is not plugged try to boot from emmc if it is plugged.
+> > If emmc is not plugged then try to boot from nvme.
 > >
-> > Is this because it only uses the first virtio device? You could check
-> > your boot_targets variable. With standard boot you can use 'virtio'
-> > instead of 'vritio0' and it will find any virtio devices.
+> > Signed-off-by: Milan P. Stani=C4=87 <mps@arvanta.net>
+> > ---
+> >  include/configs/starfive-visionfive2.h | 2 ++
+> >  1 file changed, 2 insertions(+)
 >
-> Hi Simon,
->
-> Thank you for the tips; I did not know that you could use a generic `virt=
-io' or
-> a more specific `virtio0' specification in boot_targets.
-> By default the boot_targets variable does indeed contain the generic `vir=
-tio' in
-> my case.
->
-> Quick tests matrix:
->
->                 disk image virtio
->                 (#num) blk index
->   boot_targets  (#30) 0  (#31) 1
->   ------------  -------  -------
->         virtio     ok      FAIL
->        virtio0     ok     (fail)
->        virtio1   (fail)     ok
->
-> This is with both patches, on Qemu.
-> The fails between () are expected.
->
-> I find it interesting that specifying `virtio1' does work when the bootab=
-le
-> image is on the second virtio disk, while auto-detection with `virtio' do=
-es not
-> seem to:
->
->   virtio1
->   ~~~~~~~
->
->   =3D> setenv boot_targets virtio1
->   =3D> boot
->   Scanning for bootflows in all bootdevs
->   Seq Method State Uclass Part Name Filename
->   --- ------ ----- ------ ---- ---- --------
->   Scanning global bootmeth 'efi_mgr':
->   Scanning bootdev 'virtio-blk#31.bootdev':
->     0 efi    ready virtio    1 virtio-blk#31.bootdev.par efi/boot/bootaa6=
-4.efi
->   ** Booting bootflow 'virtio-blk#31.bootdev.part_1' with efi
->   Using prior-stage device tree
->   Missing TPMv2 device for EFI_TCG_PROTOCOL
->   Booting /efi\boot\bootaa64.efi
->
->   virtio
->   ~~~~~~
->
->   =3D> setenv boot_targets virtio
->   =3D> boot
->   Scanning for bootflows in all bootdevs
->   Seq Method State Uclass Part Name Filename
->   --- ------ ----- ------ ---- ---- --------
->   Scanning global bootmeth 'efi_mgr':
->   Scanning bootdev 'virtio-blk#30.bootdev':
->   No more bootdevs
->   --- ------ ----- ------ ---- ---- --------
->   (0 bootflows, 0 valid)
->
-> The messages seem to indicate that virtio #31 / 1 was not even considered=
- when
-> specifying `virtio'.
-> (Note that I have edited the logs a bit to avoid wrapping lines.)
->
+> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 
-Apart from the out-of-memory problem that has been fixed, there is
-another problem that it only looks at the first of the virtio devices
-when boot_targets=3D"virtio", as you have found.
-
-I believe I have a fix for this so will send a patch.
-
-Thank you for testing this.
+How about converting to standard boot and then this will be automatic?
 
 Regards,
 Simon
-
-
-
-> Best regards,
-> Vincent.
->
-> >
-> > >
-> > > Best regards,
-> > > Vincent.
-> > >
-> > > [1]: https://lists.denx.de/pipermail/u-boot/2023-April/514527.html
-> >
-> > Regards,
-> > Simon
