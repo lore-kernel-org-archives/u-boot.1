@@ -4,88 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AF12CE7A8A
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:31:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16878CE7A8C
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:32:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7ED4586B34;
-	Sun, 24 Sep 2023 21:26:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C71486A38;
+	Sun, 24 Sep 2023 21:29:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cTd4lNHi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FzxG7R3H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED9F886BA9; Sun, 24 Sep 2023 21:26:35 +0200 (CEST)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 06DC08692B; Sun, 24 Sep 2023 21:25:53 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D734C86C04
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 433E7869A0
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-35135f69de2so3718665ab.2
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:23 -0700 (PDT)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-34fcd361e91so16678865ab.3
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:25:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695583582; x=1696188382; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AI1zEaPYvVZxHSxQyzuC92G/7tzTEpseHSQKSvWyCjU=;
- b=cTd4lNHi1HHrPj8d6WdKN4f63sJJjjawIs33QHXybmClLDgo0svXCRvJSLH3tkdKFt
- fS1oOEMtbqTQ3u+qZwrvwm/OZD/kRvFFECzJlPUZ3ichkmrqRffsduX30v02GQtfKquJ
- IzWuCF8p+sxIWZdFeBr+FJmHMh892Ir467zGs=
+ d=chromium.org; s=google; t=1695583546; x=1696188346; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BYG244C2Iv1365hjdqvrRHFax/J7RYQDrcfHLvzgM1I=;
+ b=FzxG7R3HC2hGb+gUVv67QdRWZ8CRFaJ7KHShZfyXKVMlGUE6XJ3faewh0qbgPMozvl
+ LwQVKerfVXvD8thEUwxjWevQEoUvgzy5ra8bPWqAOMA7z0rt+ke5KG8KTbcu/lYhuLiz
+ moWTF1ea8it/04VFqCspfAimeZ+ni3vZYzOcg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695583582; x=1696188382;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AI1zEaPYvVZxHSxQyzuC92G/7tzTEpseHSQKSvWyCjU=;
- b=idLj/j3Wi9qh7KfGHMcCcvV5xf9fD16Fx+QC8V3G921k2QsVXdahyPLbOqbKWMJqLU
- M8OZ0swUeQ5XeedmEZzABvnlcxmzrwJKO+onWfFOufCT6ZqmPUE5To3sX93ymNhkk7Nk
- QOJBf2fpvMdsWlmshIfeR4/xpLwzznmWxJZoKgWLpCz+hdbmbYAVWKjyR8ItlTbIQKWg
- 7tG8Tde80AVtNPpVpFXpKVGCKPK4J0iG9fRGiSqcZxuD11y/peHA2Cs7Vk4OSeA033fc
- 3ET/yz5LVd9locLP0eTG+tOGb8gl6z5W/rFBThaSKeYoPHktH9KrZ6szOJwJnufmeabB
- aKjA==
-X-Gm-Message-State: AOJu0Yw4Z3oDan7/rRChZQzwcdEibIinGAjALR5xCsrHUM9zeAyn1DR4
- 0zoklvFq4WVHjJ1FXLswkhH4UnAq6xYUdm4V0IM=
-X-Google-Smtp-Source: AGHT+IGfhJvOqMIRLblOhTIwt4rVN96XdEKp3Q5Of9Ibj+/3ddeSP7rI8ifkR334N9FVUUzHOCf1tg==
-X-Received: by 2002:a05:6e02:ec5:b0:34c:e84b:4c5e with SMTP id
- i5-20020a056e020ec500b0034ce84b4c5emr5665537ilk.8.1695583582319; 
- Sun, 24 Sep 2023 12:26:22 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695583546; x=1696188346;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BYG244C2Iv1365hjdqvrRHFax/J7RYQDrcfHLvzgM1I=;
+ b=Flb+tpe2CUA6JtorDrCUwZ/i4G8FPf9/CpDUF+JKohgw+/LBRlMQ0vP0kQPfGvu/UI
+ Cgi2yhW+ftXAR86Wa5iL15C6ITqKv6mTWxFJLhZnYsPPSML3wmgzuHC5VIS0UWxmbM09
+ sh3olKLypgjJXbKQqUTUocg4Zt9AGAGDQxIR5fVeeLZybl51L1mCYkBWbjikQweH4qpG
+ SKWyrZrAY48riFKXmMMlIxMPOCWf15BfjHI06hBJGE5Cs0JuAvoBRsJqdUtQIEpm320h
+ 7Zoh9/BYjHUFhCzXLiZRWi7i5e7iQmOG/S99tLB7o9CsWmZoIWRJdAFmPMe9G47vYpuH
+ +lIQ==
+X-Gm-Message-State: AOJu0Yx2Pl5M8h8DxtPJLVIsV6yj0QpROCcNjcQtFgfQtIMz3PzlSkuo
+ sOekQB/P0W+rVV0g6rp7+TuIj2J8RKAt2azTpYc=
+X-Google-Smtp-Source: AGHT+IHMs0Uhlwj36gQvGmZm3tcHX331ZZmsa90uIschj82oGWyjEc/vDR0bHb2cPhpZ4mbCvwHuyA==
+X-Received: by 2002:a05:6e02:1a46:b0:351:211c:fec2 with SMTP id
+ u6-20020a056e021a4600b00351211cfec2mr7217504ilv.15.1695583546334; 
+ Sun, 24 Sep 2023 12:25:46 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.21
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.25.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 12:26:22 -0700 (PDT)
+ Sun, 24 Sep 2023 12:25:45 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Adam Ford <aford173@gmail.com>,
+ Allen Martin <amartin@nvidia.com>,
+ Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Chee Hong Ang <chee.hong.ang@intel.com>, Chin-Liang See <clsee@altera.com>,
  Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>, Michal Suchanek <msuchanek@suse.de>,
- Nikhil M Jain <n-jain1@ti.com>,
+ Dinh Nguyen <dinguyen@kernel.org>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Felix Brack <fb@ltec.ch>,
+ Green Wan <green.wan@sifive.com>, Heiko Thiery <heiko.thiery@gmail.com>,
+ Ian Ray <ian.ray@ge.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
+ =?UTF-8?q?Javier=20Mart=C3=ADnez=20Canillas?= <javier@dowhile0.org>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Lukasz Majewski <lukma@denx.de>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Mike Looijmans <mike.looijmans@topic.nl>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <sr@denx.de>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: [PATCH v3 38/38] pci: serial: Support reading PCI-register size with
- base
-Date: Sun, 24 Sep 2023 13:25:23 -0600
-Message-ID: <20230924192536.1812799-39-sjg@chromium.org>
+ Palmer Dabbelt <palmer@dabbelt.com>,
+ Parthiban Nallathambi <parthiban@linumiz.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Pavel Herrmann <morpheus.ibis@gmail.com>,
+ Philip Oberfichtner <pro@denx.de>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Ramon Fried <rfried.dev@gmail.com>, Shengyu Qu <wiagn233@outlook.com>,
+ Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tianrui Wei <tianrui-wei@outlook.com>, Tim Harvey <tharvey@gateworks.com>,
+ Troy Kisky <troykiskyboundary@gmail.com>,
+ Uri Mashiach <uri.mashiach@compulab.co.il>, Wolfgang Denk <wd@denx.de>
+Subject: [PATCH v3 00/38] spl: Preparation for Universal Payload
+Date: Sun, 24 Sep 2023 13:24:45 -0600
+Message-ID: <20230924192536.1812799-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
-In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
-References: <20230924192536.1812799-1-sjg@chromium.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 24 Sep 2023 21:29:42 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,440 +116,465 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The PCI helpers read only the base address for a PCI region. In some cases
-the size is needed as well, e.g. to pass along to a driver which needs to
-know the size of its register area.
+This series tidies up SPL a little and adds some core ofnode functions
+needed to support Universal Payload. It also includes a few minor fix-ups
+for sandbox.
 
-Update the functions to allow the size to be returned. For serial, record
-the information and provided it with the serial_info() call.
+For SPL the changes include CONFIG naming, removing various #ifdefs and
+tidying up the FIT code.
 
-A limitation still exists in that the size is not available when OF_LIVE
-is enabled, so take account of that in the tests.
+One notable piece of the ofnode improvements is support for flattening
+a livetree. This should be useful in future as we move FDT fixups to use
+the ofnode API.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Changes in v3:
+- Mention testing on qemu-ppce500
+- Add new patch to create a proper symbol for enabling the malloc() pool
+- Add new patch to enable CONFIG_SPL_SYS_MALLOC_F where needed
+- Add new patch to nable CONFIG_TPL_SYS_MALLOC_F where needed
+- Add new patch to use SYS_MALLOC_F instead of SYS_MALLOC_F_LEN
+- Add new patch to tidy up uses of CONFIG_SYS_MALLOC_F_LEN
+- Add new patch to clean up SYS_MALLOC_SIMPLE documentation
+- Add new patch to correct help in TPL_DM and VPL_DM
+- Rebase on the new patch
 
-(no changes since v1)
+Changes in v2:
+- Rename based on Tom's feedback
+- Improve readability by moving the size part to the header file
+- Explicitly copy two maintainers as it seems only Mario was auto-cc'd
+- Change the approach to use the header file
+- Use the same condition for both pieces to avoid possible problems
+- No changes as it still seems unclear what should be done
 
- arch/sandbox/dts/test.dts   |  6 +++---
- drivers/core/fdtaddr.c      |  6 +++---
- drivers/core/ofnode.c       | 11 ++++++++---
- drivers/core/read.c         |  6 ++++--
- drivers/core/util.c         |  2 +-
- drivers/pci/pci-uclass.c    |  2 +-
- drivers/pci/pci_mvebu.c     |  3 ++-
- drivers/pci/pci_tegra.c     |  2 +-
- drivers/pci/pcie_mediatek.c |  4 ++--
- drivers/serial/ns16550.c    | 15 ++++++++++-----
- include/dm/fdtaddr.h        |  3 ++-
- include/dm/ofnode.h         |  4 +++-
- include/dm/read.h           |  8 +++++---
- include/ns16550.h           |  4 +++-
- include/serial.h            |  2 ++
- test/dm/pci.c               | 14 ++++++++++----
- 16 files changed, 60 insertions(+), 32 deletions(-)
+Simon Glass (38):
+  spl: Use CONFIG_SPL... instead of CONFIG_..._SPL_...
+  spl: Rename SYS_SPL_ARGS_ADDR to SPL_PAYLOAD_ARGS_ADDR
+  spl: Avoid #ifdef with CONFIG_SPL_SYS_MALLOC
+  spl: mx6: powerpc: Drop the condition on timer_init()
+  spl: Drop #ifdefs for BOARD_INIT and watchdog
+  spl: Avoid #ifdef with CONFIG_SPL_PAYLOAD_ARGS_ADDR
+  spl: Drop the switch() statement for OS selection
+  spl: Create proper symbols for enabling the malloc() pool
+  spl: Enable CONFIG_SPL_SYS_MALLOC_F where needed
+  tpl: Enable CONFIG_TPL_SYS_MALLOC_F where needed
+  spl: Use SYS_MALLOC_F instead of SYS_MALLOC_F_LEN
+  Tidy up uses of CONFIG_SYS_MALLOC_F_LEN
+  doc: Clean up SYS_MALLOC_SIMPLE
+  dm: core: Correct help in TPL_DM and VPL_DM
+  spl: Avoid an #ifdef when printing gd->malloc_ptr
+  spl: Remove #ifdefs with BOOTSTAGE
+  spl: Rename spl_load_fit_image() to load_simple_fit()
+  spl: Move the full FIT code to spl_fit.c
+  spl: Use the correct FIT_..._PROP constants
+  spl: Move bloblist writing until the image is known
+  dm: core: Reverse the argument order in ofnode_copy_props()
+  dm: core: Ensure we run flattree tests on ofnode
+  dm: core: Tidy up comments in the ofnode tests
+  dm: core: Add a function to create an empty tree
+  dm: core: Add a way to copy a node
+  dm: core: Add a way to delete a node
+  dm: core: Add a way to convert a devicetree to a dtb
+  dm: core: Support writing a boolean
+  dm: core: Support writing a 64-bit value
+  dm: core: Add tests for oftree_path()
+  sandbox: Move reading the RAM buffer into a better place
+  sandbox: Init the EC properly even if no state file is available
+  sandbox: Only read the state if we have a state file
+  sandbox: Move the bloblist down a little in memory
+  bloblist: Support initing from multiple places
+  fdt: Allow the devicetree to come from a bloblist
+  command: Include a required header in command.h
+  pci: serial: Support reading PCI-register size with base
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 9a863ea732ff..e58cb9c08722 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -1123,8 +1123,8 @@
- 		pci@1,0 {
- 			compatible = "pci-generic";
- 			/* reg 0 is at 0x14, using FDT_PCI_SPACE_MEM32 */
--			reg = <0x02000814 0 0 0 0
--			       0x01000810 0 0 0 0>;
-+			reg = <0x02000814 0 0 0x80 0
-+			       0x01000810 0 0 0xc0 0>;
- 			sandbox,emul = <&swap_case_emul0_1>;
- 		};
- 		p2sb-pci@2,0 {
-@@ -1151,7 +1151,7 @@
- 		pci@1f,0 {
- 			compatible = "pci-generic";
- 			/* reg 0 is at 0x10, using FDT_PCI_SPACE_IO */
--			reg = <0x0100f810 0 0 0 0>;
-+			reg = <0x0100f810 0 0 0x100 0>;
- 			sandbox,emul = <&swap_case_emul0_1f>;
- 		};
- 	};
-diff --git a/drivers/core/fdtaddr.c b/drivers/core/fdtaddr.c
-index 546db675aaf6..b79d138c4196 100644
---- a/drivers/core/fdtaddr.c
-+++ b/drivers/core/fdtaddr.c
-@@ -215,7 +215,7 @@ void *devfdt_map_physmem(const struct udevice *dev, unsigned long size)
- 	return map_physmem(addr, size, MAP_NOCACHE);
- }
- 
--fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev)
-+fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_size_t *sizep)
- {
- 	ulong addr;
- 
-@@ -226,12 +226,12 @@ fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev)
- 		int ret;
- 
- 		ret = ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_MEM32,
--					   "reg", &pci_addr);
-+					   "reg", &pci_addr, sizep);
- 		if (ret) {
- 			/* try if there is any i/o-mapped register */
- 			ret = ofnode_read_pci_addr(dev_ofnode(dev),
- 						   FDT_PCI_SPACE_IO, "reg",
--						   &pci_addr);
-+						   &pci_addr, sizep);
- 			if (ret)
- 				return FDT_ADDR_T_NONE;
- 		}
-diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index 7421f22aae99..2c9dc0279ff6 100644
---- a/drivers/core/ofnode.c
-+++ b/drivers/core/ofnode.c
-@@ -1270,7 +1270,8 @@ const uint8_t *ofnode_read_u8_array_ptr(ofnode node, const char *propname,
- }
- 
- int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
--			 const char *propname, struct fdt_pci_addr *addr)
-+			 const char *propname, struct fdt_pci_addr *addr,
-+			 fdt_size_t *size)
- {
- 	const fdt32_t *cell;
- 	int len;
-@@ -1298,14 +1299,18 @@ int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
- 			      (ulong)fdt32_to_cpu(cell[1]),
- 			      (ulong)fdt32_to_cpu(cell[2]));
- 			if ((fdt32_to_cpu(*cell) & type) == type) {
-+				const unaligned_fdt64_t *ptr;
-+
- 				addr->phys_hi = fdt32_to_cpu(cell[0]);
- 				addr->phys_mid = fdt32_to_cpu(cell[1]);
- 				addr->phys_lo = fdt32_to_cpu(cell[2]);
-+				ptr = (const unaligned_fdt64_t *)(cell + 3);
-+				if (size)
-+					*size = fdt64_to_cpu(*ptr);
- 				break;
- 			}
- 
--			cell += (FDT_PCI_ADDR_CELLS +
--				 FDT_PCI_SIZE_CELLS);
-+			cell += FDT_PCI_ADDR_CELLS + FDT_PCI_SIZE_CELLS;
- 		}
- 
- 		if (i == num) {
-diff --git a/drivers/core/read.c b/drivers/core/read.c
-index 49066b59cdaf..419013451f0c 100644
---- a/drivers/core/read.c
-+++ b/drivers/core/read.c
-@@ -405,13 +405,15 @@ int dev_read_alias_highest_id(const char *stem)
- 	return fdtdec_get_alias_highest_id(gd->fdt_blob, stem);
- }
- 
--fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
-+fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_size_t *sizep)
- {
- 	ulong addr;
- 
- 	addr = dev_read_addr(dev);
-+	if (sizep)
-+		*sizep = 0;
- 	if (addr == FDT_ADDR_T_NONE && !of_live_active())
--		addr = devfdt_get_addr_pci(dev);
-+		addr = devfdt_get_addr_pci(dev, sizep);
- 
- 	return addr;
- }
-diff --git a/drivers/core/util.c b/drivers/core/util.c
-index aa60fdd15bc4..81497df85ffd 100644
---- a/drivers/core/util.c
-+++ b/drivers/core/util.c
-@@ -30,7 +30,7 @@ int pci_get_devfn(struct udevice *dev)
- 
- 	/* Extract the devfn from fdt_pci_addr */
- 	ret = ofnode_read_pci_addr(dev_ofnode(dev), FDT_PCI_SPACE_CONFIG,
--				   "reg", &addr);
-+				   "reg", &addr, NULL);
- 	if (ret) {
- 		if (ret != -ENOENT)
- 			return -EINVAL;
-diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
-index 0adcdceb1d34..c670f8754e8c 100644
---- a/drivers/pci/pci-uclass.c
-+++ b/drivers/pci/pci-uclass.c
-@@ -122,7 +122,7 @@ static void pci_dev_find_ofnode(struct udevice *bus, phys_addr_t bdf,
- 
- 	dev_for_each_subnode(node, bus) {
- 		ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg",
--					   &addr);
-+					   &addr, NULL);
- 		if (ret)
- 			continue;
- 
-diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
-index 93a7508d8a2a..25878bde5342 100644
---- a/drivers/pci/pci_mvebu.c
-+++ b/drivers/pci/pci_mvebu.c
-@@ -640,7 +640,8 @@ static int mvebu_pcie_port_parse_dt(ofnode node, ofnode parent, struct mvebu_pci
- 		pcie->is_x4 = true;
- 
- 	/* devfn is in bits [15:8], see PCI_DEV usage */
--	ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg", &pci_addr);
-+	ret = ofnode_read_pci_addr(node, FDT_PCI_SPACE_CONFIG, "reg", &pci_addr,
-+				   NULL);
- 	if (ret < 0) {
- 		printf("%s: property \"reg\" is invalid\n", pcie->name);
- 		goto err;
-diff --git a/drivers/pci/pci_tegra.c b/drivers/pci/pci_tegra.c
-index 29d54117e939..ae90bd2fbf11 100644
---- a/drivers/pci/pci_tegra.c
-+++ b/drivers/pci/pci_tegra.c
-@@ -461,7 +461,7 @@ static int tegra_pcie_parse_port_info(ofnode node, uint *index, uint *lanes)
- 
- 	*lanes = err;
- 
--	err = ofnode_read_pci_addr(node, 0, "reg", &addr);
-+	err = ofnode_read_pci_addr(node, 0, "reg", &addr, NULL);
- 	if (err < 0) {
- 		pr_err("failed to parse \"reg\" property\n");
- 		return err;
-diff --git a/drivers/pci/pcie_mediatek.c b/drivers/pci/pcie_mediatek.c
-index c6e30e246227..e59ebd13ad0b 100644
---- a/drivers/pci/pcie_mediatek.c
-+++ b/drivers/pci/pcie_mediatek.c
-@@ -660,7 +660,7 @@ static int mtk_pcie_probe(struct udevice *dev)
- 		if (!ofnode_is_enabled(subnode))
- 			continue;
- 
--		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr);
-+		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
- 		if (err)
- 			return err;
- 
-@@ -699,7 +699,7 @@ static int mtk_pcie_probe_v2(struct udevice *dev)
- 		if (!ofnode_is_enabled(subnode))
- 			continue;
- 
--		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr);
-+		err = ofnode_read_pci_addr(subnode, 0, "reg", &addr, NULL);
- 		if (err)
- 			return err;
- 
-diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
-index eab9537fbae5..a349e5e132a1 100644
---- a/drivers/serial/ns16550.c
-+++ b/drivers/serial/ns16550.c
-@@ -479,6 +479,7 @@ static int ns16550_serial_getinfo(struct udevice *dev,
- 	info->addr_space = SERIAL_ADDRESS_SPACE_MEMORY;
- #endif
- 	info->addr = plat->base;
-+	info->size = plat->size;
- 	info->reg_width = plat->reg_width;
- 	info->reg_shift = plat->reg_shift;
- 	info->reg_offset = plat->reg_offset;
-@@ -487,7 +488,8 @@ static int ns16550_serial_getinfo(struct udevice *dev,
- 	return 0;
- }
- 
--static int ns16550_serial_assign_base(struct ns16550_plat *plat, fdt_addr_t base)
-+static int ns16550_serial_assign_base(struct ns16550_plat *plat,
-+				      fdt_addr_t base, fdt_size_t size)
- {
- 	if (base == FDT_ADDR_T_NONE)
- 		return -EINVAL;
-@@ -497,6 +499,7 @@ static int ns16550_serial_assign_base(struct ns16550_plat *plat, fdt_addr_t base
- #else
- 	plat->base = (unsigned long)map_physmem(base, 0, MAP_NOCACHE);
- #endif
-+	plat->size = size;
- 
- 	return 0;
- }
-@@ -507,6 +510,7 @@ int ns16550_serial_probe(struct udevice *dev)
- 	struct ns16550 *const com_port = dev_get_priv(dev);
- 	struct reset_ctl_bulk reset_bulk;
- 	fdt_addr_t addr;
-+	fdt_addr_t size;
- 	int ret;
- 
- 	/*
-@@ -514,8 +518,8 @@ int ns16550_serial_probe(struct udevice *dev)
- 	 * or via a PCI bridge, assign plat->base before probing hardware.
- 	 */
- 	if (device_is_on_pci_bus(dev)) {
--		addr = devfdt_get_addr_pci(dev);
--		ret = ns16550_serial_assign_base(plat, addr);
-+		addr = devfdt_get_addr_pci(dev, &size);
-+		ret = ns16550_serial_assign_base(plat, addr, size);
- 		if (ret)
- 			return ret;
- 	}
-@@ -543,11 +547,12 @@ int ns16550_serial_of_to_plat(struct udevice *dev)
- 	struct ns16550_plat *plat = dev_get_plat(dev);
- 	const u32 port_type = dev_get_driver_data(dev);
- 	fdt_addr_t addr;
-+	fdt_size_t size;
- 	struct clk clk;
- 	int err;
- 
--	addr = dev_read_addr(dev);
--	err = ns16550_serial_assign_base(plat, addr);
-+	addr = dev_read_addr_size(dev, &size);
-+	err = ns16550_serial_assign_base(plat, addr, size);
- 	if (err && !device_is_on_pci_bus(dev))
- 		return err;
- 
-diff --git a/include/dm/fdtaddr.h b/include/dm/fdtaddr.h
-index dcdc19137cc9..6d2fa8f1044b 100644
---- a/include/dm/fdtaddr.h
-+++ b/include/dm/fdtaddr.h
-@@ -168,8 +168,9 @@ fdt_addr_t devfdt_get_addr_size_name(const struct udevice *dev,
-  * devfdt_get_addr_pci() - Read an address and handle PCI address translation
-  *
-  * @dev: Device to read from
-+ * @sizep: If non-NULL, returns size of address space
-  * Return: address or FDT_ADDR_T_NONE if not found
-  */
--fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev);
-+fdt_addr_t devfdt_get_addr_pci(const struct udevice *dev, fdt_size_t *sizep);
- 
- #endif
-diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index c2d3337113c7..9f272db1699b 100644
---- a/include/dm/ofnode.h
-+++ b/include/dm/ofnode.h
-@@ -1153,13 +1153,15 @@ const uint8_t *ofnode_read_u8_array_ptr(ofnode node, const char *propname,
-  * @type:	pci address type (FDT_PCI_SPACE_xxx)
-  * @propname:	name of property to find
-  * @addr:	returns pci address in the form of fdt_pci_addr
-+ * @size:	if non-null, returns register-space size
-  * Return:
-  * 0 if ok, -ENOENT if the property did not exist, -EINVAL if the
-  * format of the property was invalid, -ENXIO if the requested
-  * address type was not found
-  */
- int ofnode_read_pci_addr(ofnode node, enum fdt_pci_space type,
--			 const char *propname, struct fdt_pci_addr *addr);
-+			 const char *propname, struct fdt_pci_addr *addr,
-+			 fdt_size_t *size);
- 
- /**
-  * ofnode_read_pci_vendev() - look up PCI vendor and device id
-diff --git a/include/dm/read.h b/include/dm/read.h
-index c2615f72f405..3c2eea6f0c4b 100644
---- a/include/dm/read.h
-+++ b/include/dm/read.h
-@@ -346,9 +346,10 @@ void *dev_read_addr_ptr(const struct udevice *dev);
-  *    fdtdec_get_addr() and friends.
-  *
-  * @dev: Device to read from
-+ * @sizep: If non-NULL, returns size of address space found
-  * Return: address or FDT_ADDR_T_NONE if not found
-  */
--fdt_addr_t dev_read_addr_pci(const struct udevice *dev);
-+fdt_addr_t dev_read_addr_pci(const struct udevice *dev, fdt_size_t *sizep);
- 
- /**
-  * dev_remap_addr() - Get the reg property of a device as a
-@@ -996,9 +997,10 @@ static inline void *dev_read_addr_ptr(const struct udevice *dev)
- 	return devfdt_get_addr_ptr(dev);
- }
- 
--static inline fdt_addr_t dev_read_addr_pci(const struct udevice *dev)
-+static inline fdt_addr_t dev_read_addr_pci(const struct udevice *dev,
-+					   fdt_size_t *sizep)
- {
--	return devfdt_get_addr_pci(dev);
-+	return devfdt_get_addr_pci(dev, sizep);
- }
- 
- static inline void *dev_remap_addr(const struct udevice *dev)
-diff --git a/include/ns16550.h b/include/ns16550.h
-index e7e68663d030..7f481300083a 100644
---- a/include/ns16550.h
-+++ b/include/ns16550.h
-@@ -58,6 +58,7 @@ enum ns16550_flags {
-  * struct ns16550_plat - information about a NS16550 port
-  *
-  * @base:		Base register address
-+ * @size:		Size of register area in bytes
-  * @reg_width:		IO accesses size of registers (in bytes, 1 or 4)
-  * @reg_shift:		Shift size of registers (0=byte, 1=16bit, 2=32bit...)
-  * @reg_offset:		Offset to start of registers (normally 0)
-@@ -67,7 +68,8 @@ enum ns16550_flags {
-  * @bdf:		PCI slot/function (pci_dev_t)
-  */
- struct ns16550_plat {
--	unsigned long base;
-+	ulong base;
-+	ulong size;
- 	int reg_width;
- 	int reg_shift;
- 	int reg_offset;
-diff --git a/include/serial.h b/include/serial.h
-index 42bdf3759c00..205889d28be9 100644
---- a/include/serial.h
-+++ b/include/serial.h
-@@ -137,6 +137,7 @@ enum adr_space_type {
-  * @type:	type of the UART chip
-  * @addr_space:	address space to access the registers
-  * @addr:	physical address of the registers
-+ * @size:	size of the register area in bytes
-  * @reg_width:	size (in bytes) of the IO accesses to the registers
-  * @reg_offset:	offset to apply to the @addr from the start of the registers
-  * @reg_shift:	quantity to shift the register offsets by
-@@ -147,6 +148,7 @@ struct serial_device_info {
- 	enum serial_chip_type type;
- 	enum adr_space_type addr_space;
- 	ulong addr;
-+	ulong size;
- 	u8 reg_width;
- 	u8 reg_offset;
- 	u8 reg_shift;
-diff --git a/test/dm/pci.c b/test/dm/pci.c
-index 70a736cfdb8a..8c5e7da9e629 100644
---- a/test/dm/pci.c
-+++ b/test/dm/pci.c
-@@ -301,10 +301,12 @@ static int dm_test_pci_addr_flat(struct unit_test_state *uts)
- {
- 	struct udevice *swap1f, *swap1;
- 	ulong io_addr, mem_addr;
-+	fdt_addr_t size;
- 
- 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
- 	io_addr = dm_pci_read_bar32(swap1f, 0);
--	ut_asserteq(io_addr, dev_read_addr_pci(swap1f));
-+	ut_asserteq(io_addr, dev_read_addr_pci(swap1f, &size));
-+	ut_asserteq(0, size);
- 
- 	/*
- 	 * This device has both I/O and MEM spaces but the MEM space appears
-@@ -312,7 +314,8 @@ static int dm_test_pci_addr_flat(struct unit_test_state *uts)
- 	 */
- 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
- 	mem_addr = dm_pci_read_bar32(swap1, 1);
--	ut_asserteq(mem_addr, dev_read_addr_pci(swap1));
-+	ut_asserteq(mem_addr, dev_read_addr_pci(swap1, &size));
-+	ut_asserteq(0, size);
- 
- 	return 0;
- }
-@@ -329,12 +332,15 @@ DM_TEST(dm_test_pci_addr_flat, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT |
- static int dm_test_pci_addr_live(struct unit_test_state *uts)
- {
- 	struct udevice *swap1f, *swap1;
-+	fdt_size_t size;
- 
- 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1f, 0), &swap1f));
--	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f));
-+	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1f, &size));
-+	ut_asserteq(0, size);
- 
- 	ut_assertok(dm_pci_bus_find_bdf(PCI_BDF(0, 0x1, 0), &swap1));
--	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1));
-+	ut_asserteq_64(FDT_ADDR_T_NONE, dev_read_addr_pci(swap1, &size));
-+	ut_asserteq(0, size);
- 
- 	return 0;
- }
+ Kconfig                                       |  69 +++--
+ Makefile                                      |   2 +-
+ README                                        |  18 --
+ arch/arm/cpu/armv7/ls102xa/fdt.c              |   2 +-
+ .../armv8/fsl-layerscape/doc/README.falcon    |   2 +-
+ arch/arm/lib/bdinfo.c                         |   2 +-
+ arch/arm/mach-rockchip/rv1126/Kconfig         |   3 +
+ arch/arm/mach-snapdragon/Kconfig              |   3 +
+ arch/arm/mach-socfpga/Kconfig                 |   3 +
+ arch/mips/cpu/start.S                         |   4 +-
+ arch/mips/mach-mtmips/mt7621/spl/start.S      |   4 +-
+ arch/powerpc/cpu/mpc83xx/start.S              |   2 +-
+ arch/powerpc/cpu/mpc85xx/start.S              |   4 +-
+ arch/sandbox/cpu/start.c                      |  29 +-
+ arch/sandbox/cpu/state.c                      |   2 +
+ arch/sandbox/dts/test.dts                     |   6 +-
+ arch/sh/lib/start.S                           |   4 +-
+ boot/vbe_request.c                            |   2 +-
+ boot/vbe_simple_os.c                          |   2 +-
+ common/Kconfig                                |   2 +-
+ common/Makefile                               |   6 +-
+ common/bloblist.c                             |  15 +-
+ common/board_f.c                              |   6 +-
+ common/board_r.c                              |   2 +-
+ common/dlmalloc.c                             |  12 +-
+ common/init/board_init.c                      |   4 +-
+ common/spl/Kconfig                            |  16 +-
+ common/spl/Kconfig.nxp                        |   2 +-
+ common/spl/spl.c                              | 226 ++++-----------
+ common/spl/spl_ext.c                          |   4 +-
+ common/spl/spl_fat.c                          |   4 +-
+ common/spl/spl_fit.c                          | 127 +++++++--
+ common/spl/spl_mmc.c                          |   2 +-
+ common/spl/spl_nand.c                         |  10 +-
+ common/spl/spl_nor.c                          |   8 +-
+ common/spl/spl_spi.c                          |   2 +-
+ common/spl/spl_ubi.c                          |   2 +-
+ common/spl/spl_xip.c                          |   2 +-
+ configs/am335x_baltos_defconfig               |   4 +-
+ configs/am335x_boneblack_vboot_defconfig      |   4 +-
+ configs/am335x_evm_defconfig                  |   4 +-
+ configs/am335x_evm_spiboot_defconfig          |   4 +-
+ configs/am335x_guardian_defconfig             |   4 +-
+ configs/am335x_hs_evm_defconfig               |   4 +-
+ configs/am335x_hs_evm_uart_defconfig          |   4 +-
+ configs/am335x_igep003x_defconfig             |   4 +-
+ configs/am335x_pdu001_defconfig               |   4 +-
+ configs/am335x_shc_defconfig                  |   4 +-
+ configs/am335x_shc_ict_defconfig              |   4 +-
+ configs/am335x_shc_netboot_defconfig          |   4 +-
+ configs/am335x_shc_sdboot_defconfig           |   4 +-
+ configs/am335x_sl50_defconfig                 |   4 +-
+ configs/am3517_evm_defconfig                  |   6 +-
+ configs/am43xx_evm_defconfig                  |   4 +-
+ configs/am43xx_evm_rtconly_defconfig          |   4 +-
+ configs/am43xx_evm_usbhost_boot_defconfig     |   4 +-
+ configs/am43xx_hs_evm_defconfig               |   4 +-
+ configs/am57xx_evm_defconfig                  |   4 +-
+ configs/am57xx_hs_evm_defconfig               |   4 +-
+ configs/am57xx_hs_evm_usb_defconfig           |   4 +-
+ configs/am62ax_evm_r5_defconfig               |   6 +-
+ configs/am62x_evm_r5_defconfig                |   8 +-
+ configs/am64x_evm_a53_defconfig               |   4 +-
+ configs/am64x_evm_r5_defconfig                |   8 +-
+ configs/am65x_evm_a53_defconfig               |   4 +-
+ configs/am65x_evm_r5_defconfig                |   8 +-
+ configs/am65x_evm_r5_usbdfu_defconfig         |   8 +-
+ configs/am65x_evm_r5_usbmsc_defconfig         |   8 +-
+ configs/am65x_hs_evm_a53_defconfig            |   4 +-
+ configs/am65x_hs_evm_r5_defconfig             |   8 +-
+ configs/apalis-tk1_defconfig                  |   8 +-
+ configs/apalis_imx6_defconfig                 |   2 +-
+ configs/apalis_t30_defconfig                  |   8 +-
+ configs/axm_defconfig                         |   8 +-
+ configs/beaver_defconfig                      |   8 +-
+ configs/bitmain_antminer_s9_defconfig         |   4 +-
+ configs/brppt1_mmc_defconfig                  |   4 +-
+ configs/brppt2_defconfig                      |   2 +-
+ configs/brsmarc1_defconfig                    |   4 +-
+ configs/brxre1_defconfig                      |   4 +-
+ configs/cardhu_defconfig                      |   8 +-
+ configs/cei-tk1-som_defconfig                 |   8 +-
+ configs/cgtqmx8_defconfig                     |   8 +-
+ configs/chiliboard_defconfig                  |   4 +-
+ configs/cl-som-imx7_defconfig                 |   2 +-
+ configs/cm_fx6_defconfig                      |   2 +-
+ configs/cm_t43_defconfig                      |   4 +-
+ configs/colibri_imx6_defconfig                |   2 +-
+ configs/colibri_t20_defconfig                 |   8 +-
+ configs/colibri_t30_defconfig                 |   8 +-
+ configs/da850evm_defconfig                    |   8 +-
+ configs/da850evm_nand_defconfig               |   8 +-
+ configs/dalmore_defconfig                     |   8 +-
+ configs/deneb_defconfig                       |   8 +-
+ configs/devkit8000_defconfig                  |   8 +-
+ configs/dh_imx6_defconfig                     |   2 +-
+ configs/display5_defconfig                    |   4 +-
+ configs/display5_factory_defconfig            |   4 +-
+ configs/dra7xx_evm_defconfig                  |   4 +-
+ configs/dra7xx_hs_evm_defconfig               |   4 +-
+ configs/dra7xx_hs_evm_usb_defconfig           |   4 +-
+ configs/draco_defconfig                       |   6 +-
+ configs/endeavoru_defconfig                   |   8 +-
+ configs/etamin_defconfig                      |   6 +-
+ .../gardena-smart-gateway-at91sam_defconfig   |   4 +-
+ configs/ge_b1x5v2_defconfig                   |   2 +-
+ configs/giedi_defconfig                       |   8 +-
+ configs/grouper_common_defconfig              |   8 +-
+ configs/gwventana_emmc_defconfig              |   4 +-
+ configs/gwventana_nand_defconfig              |   4 +-
+ configs/harmony_defconfig                     |   8 +-
+ configs/igep00x0_defconfig                    |   6 +-
+ configs/imx28_xea_defconfig                   |   2 +-
+ configs/imx6dl_icore_nand_defconfig           |   2 +-
+ configs/imx6dl_mamoj_defconfig                |   4 +-
+ configs/imx6q_bosch_acc_defconfig             |   2 +-
+ configs/imx6q_icore_nand_defconfig            |   2 +-
+ configs/imx6q_logic_defconfig                 |   4 +-
+ configs/imx6qdl_icore_mipi_defconfig          |   4 +-
+ configs/imx6qdl_icore_mmc_defconfig           |   4 +-
+ configs/imx6qdl_icore_nand_defconfig          |   2 +-
+ configs/imx6qdl_icore_rqs_defconfig           |   4 +-
+ configs/imx6ul_geam_mmc_defconfig             |   2 +-
+ configs/imx6ul_geam_nand_defconfig            |   2 +-
+ configs/imx6ul_isiot_emmc_defconfig           |   2 +-
+ configs/imx6ul_isiot_nand_defconfig           |   2 +-
+ configs/imx6ulz_smm_m2_defconfig              |   2 +-
+ configs/imx7_cm_defconfig                     |   2 +-
+ configs/imx8mm-cl-iot-gate-optee_defconfig    |   8 +-
+ configs/imx8mm-cl-iot-gate_defconfig          |   8 +-
+ configs/imx8mm-icore-mx8mm-ctouch2_defconfig  |   8 +-
+ configs/imx8mm-icore-mx8mm-edimm2.2_defconfig |   8 +-
+ configs/imx8mm-mx8menlo_defconfig             |   8 +-
+ configs/imx8mm_beacon_defconfig               |   8 +-
+ configs/imx8mm_beacon_fspi_defconfig          |   8 +-
+ configs/imx8mm_data_modul_edm_sbc_defconfig   |   8 +-
+ configs/imx8mm_evk_defconfig                  |   8 +-
+ configs/imx8mm_evk_fspi_defconfig             |   8 +-
+ configs/imx8mm_phg_defconfig                  |   8 +-
+ configs/imx8mm_venice_defconfig               |   6 +-
+ configs/imx8mn_beacon_2g_defconfig            |   8 +-
+ configs/imx8mn_beacon_defconfig               |   8 +-
+ configs/imx8mn_beacon_fspi_defconfig          |   8 +-
+ configs/imx8mn_bsh_smm_s2_defconfig           |   8 +-
+ configs/imx8mn_bsh_smm_s2pro_defconfig        |   8 +-
+ configs/imx8mn_ddr4_evk_defconfig             |   8 +-
+ configs/imx8mn_evk_defconfig                  |   8 +-
+ configs/imx8mn_var_som_defconfig              |   8 +-
+ configs/imx8mn_venice_defconfig               |   8 +-
+ configs/imx8mp-icore-mx8mp-edimm2.2_defconfig |   8 +-
+ configs/imx8mp_beacon_defconfig               |   8 +-
+ configs/imx8mp_data_modul_edm_sbc_defconfig   |   8 +-
+ configs/imx8mp_dhcom_pdk2_defconfig           |   8 +-
+ configs/imx8mp_dhcom_pdk3_defconfig           |   8 +-
+ configs/imx8mp_evk_defconfig                  |   8 +-
+ configs/imx8mp_rsb3720a1_4G_defconfig         |   8 +-
+ configs/imx8mp_rsb3720a1_6G_defconfig         |   8 +-
+ configs/imx8mp_venice_defconfig               |   8 +-
+ configs/imx8mq_cm_defconfig                   |   8 +-
+ configs/imx8mq_evk_defconfig                  |   8 +-
+ configs/imx8mq_phanbell_defconfig             |   8 +-
+ configs/imx8mq_reform2_defconfig              |   8 +-
+ configs/imx8qm_mek_defconfig                  |   8 +-
+ configs/imx8qxp_mek_defconfig                 |   8 +-
+ configs/imx8ulp_evk_defconfig                 |   8 +-
+ configs/imx93_11x11_evk_defconfig             |   8 +-
+ configs/imx93_11x11_evk_ld_defconfig          |   8 +-
+ configs/iot2050_defconfig                     |   4 +-
+ configs/j7200_evm_a72_defconfig               |   4 +-
+ configs/j7200_evm_r5_defconfig                |   8 +-
+ configs/j721e_evm_a72_defconfig               |   4 +-
+ configs/j721e_evm_r5_defconfig                |   8 +-
+ configs/j721s2_evm_a72_defconfig              |   4 +-
+ configs/j721s2_evm_r5_defconfig               |   8 +-
+ configs/jetson-tk1_defconfig                  |   8 +-
+ configs/k2e_evm_defconfig                     |   4 +-
+ configs/k2g_evm_defconfig                     |   4 +-
+ configs/k2hk_evm_defconfig                    |   4 +-
+ configs/k2l_evm_defconfig                     |   4 +-
+ configs/kontron-sl-mx6ul_defconfig            |   2 +-
+ configs/kontron-sl-mx8mm_defconfig            |   8 +-
+ configs/kontron_pitx_imx8m_defconfig          |   8 +-
+ configs/kontron_sl28_defconfig                |   2 +-
+ configs/kp_imx6q_tpc_defconfig                |   2 +-
+ configs/librem5_defconfig                     |   8 +-
+ configs/liteboard_defconfig                   |   2 +-
+ configs/ls1021aiot_sdcard_defconfig           |   6 +-
+ configs/ls1021aqds_nand_defconfig             |   6 +-
+ configs/ls1021aqds_sdcard_ifc_defconfig       |   6 +-
+ configs/ls1021aqds_sdcard_qspi_defconfig      |   6 +-
+ configs/ls1021atsn_sdcard_defconfig           |   6 +-
+ ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |   6 +-
+ configs/ls1021atwr_sdcard_ifc_defconfig       |   6 +-
+ configs/ls1021atwr_sdcard_qspi_defconfig      |   6 +-
+ configs/ls1043aqds_nand_defconfig             |   6 +-
+ configs/ls1043aqds_sdcard_ifc_defconfig       |   2 +-
+ configs/ls1043aqds_sdcard_qspi_defconfig      |   2 +-
+ configs/ls1043ardb_nand_SECURE_BOOT_defconfig |   6 +-
+ configs/ls1043ardb_nand_defconfig             |   6 +-
+ .../ls1043ardb_sdcard_SECURE_BOOT_defconfig   |   2 +-
+ configs/ls1043ardb_sdcard_defconfig           |   2 +-
+ configs/ls1046aqds_nand_defconfig             |   2 +-
+ configs/ls1046aqds_sdcard_ifc_defconfig       |   2 +-
+ configs/ls1046aqds_sdcard_qspi_defconfig      |   2 +-
+ configs/ls1046ardb_emmc_defconfig             |   2 +-
+ configs/ls1046ardb_qspi_spl_defconfig         |   4 +-
+ .../ls1046ardb_sdcard_SECURE_BOOT_defconfig   |   2 +-
+ configs/ls1046ardb_sdcard_defconfig           |   2 +-
+ configs/ls1088aqds_sdcard_ifc_defconfig       |   2 +-
+ configs/ls1088aqds_sdcard_qspi_defconfig      |   2 +-
+ ...1088ardb_sdcard_qspi_SECURE_BOOT_defconfig |   2 +-
+ configs/ls1088ardb_sdcard_qspi_defconfig      |   2 +-
+ configs/ls2080aqds_nand_defconfig             |   2 +-
+ configs/ls2080aqds_sdcard_defconfig           |   2 +-
+ configs/ls2080ardb_nand_defconfig             |   2 +-
+ configs/mccmon6_nor_defconfig                 |   4 +-
+ configs/mccmon6_sd_defconfig                  |   2 +-
+ configs/medcom-wide_defconfig                 |   8 +-
+ configs/msc_sm2s_imx8mp_defconfig             |   8 +-
+ configs/mx6cuboxi_defconfig                   |   2 +-
+ configs/mx6memcal_defconfig                   |   2 +-
+ configs/mx6sabreauto_defconfig                |   2 +-
+ configs/mx6sabresd_defconfig                  |   2 +-
+ configs/mx6slevk_spl_defconfig                |   2 +-
+ configs/mx6ul_14x14_evk_defconfig             |   2 +-
+ configs/mx6ul_9x9_evk_defconfig               |   2 +-
+ configs/myir_mys_6ulx_defconfig               |   2 +-
+ configs/novena_defconfig                      |   2 +-
+ configs/nyan-big_defconfig                    |   8 +-
+ configs/omap35_logic_defconfig                |   6 +-
+ configs/omap35_logic_somlv_defconfig          |   6 +-
+ configs/omap3_beagle_defconfig                |   4 +-
+ configs/omap3_evm_defconfig                   |   4 +-
+ configs/omap3_logic_defconfig                 |   6 +-
+ configs/omap3_logic_somlv_defconfig           |   6 +-
+ configs/omap4_panda_defconfig                 |   4 +-
+ configs/omap4_sdp4430_defconfig               |   4 +-
+ configs/omapl138_lcdk_defconfig               |   8 +-
+ configs/openpiton_riscv64_spl_defconfig       |   2 +-
+ configs/opos6uldev_defconfig                  |   2 +-
+ configs/paz00_defconfig                       |   8 +-
+ configs/pcm058_defconfig                      |   2 +-
+ configs/phycore-am335x-r2-regor_defconfig     |   4 +-
+ configs/phycore-am335x-r2-wega_defconfig      |   4 +-
+ configs/phycore-imx8mm_defconfig              |   8 +-
+ configs/phycore-imx8mp_defconfig              |   8 +-
+ configs/phycore_pcl063_defconfig              |   2 +-
+ configs/phycore_pcl063_ull_defconfig          |   2 +-
+ configs/pico-dwarf-imx6ul_defconfig           |   2 +-
+ configs/pico-dwarf-imx7d_defconfig            |   2 +-
+ configs/pico-hobbit-imx6ul_defconfig          |   2 +-
+ configs/pico-hobbit-imx7d_defconfig           |   2 +-
+ configs/pico-imx6_defconfig                   |   2 +-
+ configs/pico-imx6ul_defconfig                 |   2 +-
+ configs/pico-imx7d_bl33_defconfig             |   2 +-
+ configs/pico-imx7d_defconfig                  |   2 +-
+ configs/pico-imx8mq_defconfig                 |   8 +-
+ configs/pico-nymph-imx7d_defconfig            |   2 +-
+ configs/pico-pi-imx6ul_defconfig              |   2 +-
+ configs/pico-pi-imx7d_defconfig               |   2 +-
+ configs/plutux_defconfig                      |   8 +-
+ configs/pxm2_defconfig                        |   6 +-
+ configs/qemu-riscv32_spl_defconfig            |   2 +-
+ configs/qemu-riscv64_spl_defconfig            |   2 +-
+ configs/rastaban_defconfig                    |   6 +-
+ configs/ringneck-px30_defconfig               |   2 +-
+ configs/riotboard_defconfig                   |   4 +-
+ configs/rut_defconfig                         |   6 +-
+ configs/sama5d27_giantboard_defconfig         |   4 +-
+ configs/sama5d27_som1_ek_mmc1_defconfig       |   4 +-
+ configs/sama5d27_som1_ek_mmc_defconfig        |   4 +-
+ configs/sama5d27_som1_ek_qspiflash_defconfig  |   4 +-
+ configs/sama5d27_wlsom1_ek_mmc_defconfig      |   4 +-
+ .../sama5d27_wlsom1_ek_qspiflash_defconfig    |   4 +-
+ configs/sama5d2_icp_mmc_defconfig             |   4 +-
+ configs/sama5d2_xplained_emmc_defconfig       |   4 +-
+ configs/sama5d2_xplained_mmc_defconfig        |   4 +-
+ configs/sama5d2_xplained_qspiflash_defconfig  |   4 +-
+ configs/sama5d2_xplained_spiflash_defconfig   |   4 +-
+ configs/sama5d3_xplained_mmc_defconfig        |   4 +-
+ configs/sama5d3_xplained_nandflash_defconfig  |   4 +-
+ configs/sama5d3xek_mmc_defconfig              |   4 +-
+ configs/sama5d3xek_nandflash_defconfig        |   4 +-
+ configs/sama5d3xek_spiflash_defconfig         |   4 +-
+ configs/sama5d4_xplained_mmc_defconfig        |   4 +-
+ configs/sama5d4_xplained_nandflash_defconfig  |   4 +-
+ configs/sama5d4_xplained_spiflash_defconfig   |   4 +-
+ configs/sama5d4ek_mmc_defconfig               |   4 +-
+ configs/sama5d4ek_nandflash_defconfig         |   4 +-
+ configs/sama5d4ek_spiflash_defconfig          |   4 +-
+ configs/seaboard_defconfig                    |   8 +-
+ configs/seeed_npi_imx6ull_defconfig           |   2 +-
+ configs/sifive_unleashed_defconfig            |   2 +-
+ configs/sifive_unmatched_defconfig            |   2 +-
+ configs/smartweb_defconfig                    |   4 +-
+ configs/sniper_defconfig                      |   6 +-
+ configs/socfpga_agilex_atf_defconfig          |   8 +-
+ configs/socfpga_agilex_defconfig              |   8 +-
+ configs/socfpga_agilex_vab_defconfig          |   8 +-
+ configs/socfpga_arria10_defconfig             |   8 +-
+ configs/socfpga_chameleonv3_defconfig         |   8 +-
+ configs/socfpga_n5x_atf_defconfig             |   8 +-
+ configs/socfpga_n5x_defconfig                 |   8 +-
+ configs/socfpga_n5x_vab_defconfig             |   8 +-
+ configs/socfpga_stratix10_atf_defconfig       |   8 +-
+ configs/socfpga_stratix10_defconfig           |   8 +-
+ configs/starfive_visionfive2_defconfig        |   8 +-
+ configs/stm32746g-eval_spl_defconfig          |   2 +-
+ configs/stm32f746-disco_spl_defconfig         |   2 +-
+ configs/stm32f769-disco_spl_defconfig         |   2 +-
+ ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |   8 +-
+ ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |   8 +-
+ ...-microgea-stm32mp1-microdev2-of7_defconfig |   8 +-
+ ...mp15-microgea-stm32mp1-microdev2_defconfig |   8 +-
+ configs/stm32mp15_basic_defconfig             |   8 +-
+ configs/stm32mp15_dhcom_basic_defconfig       |   8 +-
+ configs/stm32mp15_dhcor_basic_defconfig       |   8 +-
+ configs/syzygy_hub_defconfig                  |   6 +-
+ configs/taurus_defconfig                      |   8 +-
+ configs/tec-ng_defconfig                      |   8 +-
+ configs/tec_defconfig                         |   8 +-
+ configs/thuban_defconfig                      |   6 +-
+ configs/topic_miami_defconfig                 |   4 +-
+ configs/topic_miamilite_defconfig             |   4 +-
+ configs/topic_miamiplus_defconfig             |   4 +-
+ configs/transformer_t30_defconfig             |   8 +-
+ configs/trimslice_defconfig                   |   8 +-
+ configs/udoo_defconfig                        |   2 +-
+ configs/udoo_neo_defconfig                    |   2 +-
+ configs/variscite_dart6ul_defconfig           |   2 +-
+ configs/venice2_defconfig                     |   8 +-
+ configs/ventana_defconfig                     |   8 +-
+ configs/verdin-am62_r5_defconfig              |   8 +-
+ configs/verdin-imx8mm_defconfig               |   8 +-
+ configs/verdin-imx8mp_defconfig               |   8 +-
+ configs/vining_2000_defconfig                 |   2 +-
+ configs/vyasa-rk3288_defconfig                |   2 +-
+ configs/wandboard_defconfig                   |   2 +-
+ configs/x3_t30_defconfig                      |   8 +-
+ configs/xilinx_zynq_virt_defconfig            |   6 +-
+ configs/xilinx_zynqmp_mini_emmc0_defconfig    |   8 +-
+ configs/xilinx_zynqmp_mini_emmc1_defconfig    |   8 +-
+ configs/xilinx_zynqmp_mini_qspi_defconfig     |   8 +-
+ configs/xilinx_zynqmp_virt_defconfig          |  10 +-
+ configs/zynq_cse_nand_defconfig               |   8 +-
+ configs/zynq_cse_nor_defconfig                |   8 +-
+ configs/zynq_cse_qspi_defconfig               |   8 +-
+ doc/arch/sandbox/sandbox.rst                  |   4 +-
+ doc/develop/devicetree/control.rst            |   3 +
+ doc/develop/falcon.rst                        |   2 +-
+ doc/usage/cmd/bdinfo.rst                      |   2 +-
+ drivers/core/Kconfig                          |  14 +-
+ drivers/core/fdtaddr.c                        |   6 +-
+ drivers/core/of_access.c                      |  65 +++++
+ drivers/core/ofnode.c                         | 183 ++++++++++++-
+ drivers/core/read.c                           |   6 +-
+ drivers/core/util.c                           |   2 +-
+ drivers/misc/cros_ec_sandbox.c                |   9 +-
+ drivers/pci/pci-uclass.c                      |   2 +-
+ drivers/pci/pci_mvebu.c                       |   3 +-
+ drivers/pci/pci_tegra.c                       |   2 +-
+ drivers/pci/pcie_mediatek.c                   |   4 +-
+ drivers/serial/Kconfig                        |   2 +-
+ drivers/serial/ns16550.c                      |  15 +-
+ dts/Kconfig                                   |   8 +
+ include/asm-generic/global_data.h             |  12 +-
+ include/bloblist.h                            |  23 ++
+ include/bootstage.h                           |  26 ++
+ include/command.h                             |   3 +
+ include/configs/socfpga_common.h              |   2 +-
+ include/configs/socfpga_soc64_common.h        |   2 +-
+ include/dm/fdtaddr.h                          |   3 +-
+ include/dm/of_access.h                        |  18 ++
+ include/dm/ofnode.h                           | 102 ++++++-
+ include/dm/read.h                             |   8 +-
+ include/fdtdec.h                              |   3 +-
+ include/ns16550.h                             |   4 +-
+ include/of_live.h                             |  18 ++
+ include/serial.h                              |   2 +
+ include/spl.h                                 |  28 +-
+ include/system-constants.h                    |  20 +-
+ lib/asm-offsets.c                             |   2 +-
+ lib/fdtdec.c                                  |  44 ++-
+ lib/of_live.c                                 | 141 ++++++++++
+ test/dm/ofnode.c                              | 258 ++++++++++++++++--
+ test/dm/pci.c                                 |  14 +-
+ test/lib/kconfig.c                            |   4 +-
+ 387 files changed, 2074 insertions(+), 1204 deletions(-)
+
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
