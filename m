@@ -4,99 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC5CCCE7A91
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 00:53:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 294A1CE7A8B
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 00:54:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4619886B0D;
+	by phobos.denx.de (Postfix) with ESMTP id A9E0586BE5;
 	Mon, 25 Sep 2023 02:53:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UU6pprrD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q9Cv/HWH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 591F986A38; Sun, 24 Sep 2023 22:40:24 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id 0203682BBF; Mon, 25 Sep 2023 00:30:46 +0200 (CEST)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 065BA86A43
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 22:40:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3A9786AE6
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 00:30:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-35140cc9187so853925ab.2
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 13:40:19 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sidharth.prabukumar@gmail.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-77421a47db6so151245785a.0
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 15:30:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695588018; x=1696192818; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1695594642; x=1696199442; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JRbLQkKNVodEaf+rEGPwgM3yWxwi0ZcnnEKENf0uc1Y=;
- b=UU6pprrDpXeqCJfAF3r92U1CxsfPOo/D77D5njvG6Aia3/18bpQWwKYqo7dWkzOI4d
- +XAuqMdis7BR2reABYStVBBgBcsFSeIyWhb6OIAHM5y86NEvl/tqZ/TpiJImO/6rImJq
- LUvKxRZdZyStmpV69OMvNgzBIAq59AvAkgadI=
+ bh=RAKN+Xj6ArB6lr74jApbke7gxvdBN28RKpdAZa/nO84=;
+ b=Q9Cv/HWHj644bXPoGOAvZkuERPCkPRxw1FzJjNeTvUDvtamF3JrRNea5ORkVs+9bn9
+ YFSxFQKRYPti4soxsUcstUaYpsm3hHNHcpfn4MnRaXRPmY5Or+mt4QBSjQ5eJh5Fb6ms
+ Dubr7O0k2uidiS44zfygeSIoGNN+lndm+tb60rUxOTQyzMx3EmWNI6m0+CKWjn6+HI8W
+ 2tlyU03yOvsyaajS0WgyML3TeF9mJv44CiRP4NtLp8STlzb///Nw1SNnfB1HgUJwjH1z
+ J9K1imqNOJ8RN6NBgWgi3zhHmfQB2U7/u0GN6U3kXAdTXCwB6rMUMP/POs9yVLDDarjD
+ Om/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695588018; x=1696192818;
+ d=1e100.net; s=20230601; t=1695594642; x=1696199442;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JRbLQkKNVodEaf+rEGPwgM3yWxwi0ZcnnEKENf0uc1Y=;
- b=BsEgMZRlMcMDzqo6t8+uygVDw5gDjSxNS3j9wezi5EB2thHmdnsZAMTaWuaDUaDB9e
- W5ntvc3FKv6i+pCNc8GC3lvLW2cJhvFcZ+MOjYgFIVJ3619Tca8dBr662TvHW0V9Qhst
- VXrcZmyo4rqV90LSNIBbTtrygFPl1FSjBuoJEm+e3s2eAIDl1Yj39i/PUHcMcZRHC/eW
- 5FRQOrBhtE7ecAa9d8P3vz6GYZ33u3x2kmi3lY14lQIzSfm6N8Zz5k1FZ3bYrFN1X7JW
- /uw1Gl62dwTFJ2hjb3gLrM1st6c5/kNiHRo6g6MOZro1xOBGRB5t6J3rvuiWTcA6ftcY
- gUNg==
-X-Gm-Message-State: AOJu0YwnkTfDgz8lgWm4C6Iey7RB4Nbw/bVwO6EYWZ5v68omk2AS8GOJ
- i0bXo7sE7bKy2ak7jhXhha6skOj2xlgapACmaLw=
-X-Google-Smtp-Source: AGHT+IGSWtDj8QdjL6Im7BYt1omjIV2qnUG5XmlkoabIW5US7/AAvHmrYqsmNuSEMdG6Fd6Im1SL/g==
-X-Received: by 2002:a92:c5cb:0:b0:34d:f0b9:97fd with SMTP id
- s11-20020a92c5cb000000b0034df0b997fdmr5562840ilt.8.1695588018630; 
- Sun, 24 Sep 2023 13:40:18 -0700 (PDT)
-Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- m11-20020a02cdcb000000b0043a1b74a0e3sm2311705jap.90.2023.09.24.13.40.17
+ bh=RAKN+Xj6ArB6lr74jApbke7gxvdBN28RKpdAZa/nO84=;
+ b=HC+nfaw6zVeKDDHbN3g9ixzeydHKZAHmQiu49jghQSZJQde/gZrJ2AnDzKXMyYJHKN
+ zInUu8TMuHH6pgBOTOFMtADZ3PohinwQCbB9wNrFCWGCpY86lMAKi8djB6Z78FYPxuUW
+ LF5bT/sr3iuas885U9pnYzD1zfyr+TRA/e28wbbsCer/p2n1SaMyaPbu3KDpE/S7xE3U
+ zmhgDaObpysN0fu6ZklmZWm81dr133kF1XdwG5b2Vk7v4VYyRzyR+CGiTEExJQ0Tmr1s
+ oRTleJxbV+ULnPeHX0MtbxIFMS0eS7Jdyb9esELIiSSWZbrIHTND2MCUnD0Ky5d8GnMf
+ CbKg==
+X-Gm-Message-State: AOJu0YyGXmrQdjL02a4iema2ccPiHlCqry2uHEJlt4XeLbuHDg0Ln4na
+ 4rFsV9SL/UuhfIHrOnFWYz1nhaSkuaTUKw==
+X-Google-Smtp-Source: AGHT+IEMU7a5nFZkLGHa/GP8o/J4wshUuJOUuKqjTpT0AJIvG2QqEDCj5VZ6/unkCtKSDDxh/6Dw4A==
+X-Received: by 2002:a05:620a:222a:b0:774:15ef:5deb with SMTP id
+ n10-20020a05620a222a00b0077415ef5debmr4053425qkh.35.1695594642147; 
+ Sun, 24 Sep 2023 15:30:42 -0700 (PDT)
+Received: from sid-ThinkPad-L390.lan
+ (2603-7080-c100-c786-533e-9c45-37c6-24c0.res6.spectrum.com.
+ [2603:7080:c100:c786:533e:9c45:37c6:24c0])
+ by smtp.gmail.com with ESMTPSA id
+ 27-20020a05620a071b00b007659935ce64sm3293784qkc.71.2023.09.24.15.30.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 13:40:18 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexey Romanov <avromanov@sberdevices.ru>,
- Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Devarsh Thakkar <devarsht@ti.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>,
- Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Harald Seiler <hws@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerry Van Baren <vanbaren@cideas.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mark Kettenis <kettenis@openbsd.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Suchanek <msuchanek@suse.de>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
- Ramon Fried <rfried.dev@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Rick Chen <rick@andestech.com>, Safae Ouajih <souajih@baylibre.com>,
- Sean Anderson <sean.anderson@seco.com>, Stefano Babic <sbabic@denx.de>,
- Stephen Warren <swarren@wwwdotorg.org>,
- Tobias Waldekranz <tobias@waldekranz.com>, Tom Warren <twarren@nvidia.com>,
- Troy Kisky <troykiskyboundary@gmail.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 00/25] Tidy up use of CONFIG_CMDLINE
-Date: Sun, 24 Sep 2023 14:39:18 -0600
-Message-ID: <20230924203953.1829820-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
+ Sun, 24 Sep 2023 15:30:41 -0700 (PDT)
+From: Sidharth Prabukumar <sidharth.prabukumar@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Sidharth Prabukumar <sidharth.prabukumar@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH] power: mp5416: Fix LDO SVAL for MP5416 PMIC
+Date: Sun, 24 Sep 2023 18:30:22 -0400
+Message-Id: <20230924223022.313107-1-sidharth.prabukumar@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 25 Sep 2023 02:53:48 +0200
@@ -116,105 +92,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It should be possible to disable CONFIG_CMDLINE and have all commands
-and related functionality dropped from U-Boot. This is useful when
-trying to reduce the size of U-Boot.
+The MP5416 PMIC's LDO set-value formula is incorrect. This patch fixes
+it by using the correct formula.
 
-Recent changes have stopped this from working.
+Signed-off-by: Sidharth Prabukumar <sidharth.prabukumar@gmail.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+---
+ include/power/mp5416.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-This series repairs the feature for sandbox and adds a test to stop it
-breaking again.
-
-Note that quite a lot of functionality is lost of CONFIG_CMDLINE is
-disabled, e.g. networking and most booting options. Further work is
-needed to make the option more generally useful.
-
-
-Simon Glass (25):
-  buildman: Use oldconfig when adjusting the config
-  bootstd: Correct dependencies on CMDLINE
-  autoboot: Correct dependencies on CMDLINE
-  cmd: Add a few more dependencies on CMDLINE
-  treewide: Correct use of long help
-  test: Make UNIT_TEST depend on CMDLINE
-  tegra: Change #ifdef for nop
-  fastboot: Avoid depending on CMDLINE
-  cli: Always build cli_getch
-  cmd: Use an #ifdef around run_commandf()
-  Move bootmenu_conv_key() into its own file
-  armffa: Correct command help condition
-  pxe: Depend on CMDLINE
-  env: Split out non-command code into a new file
-  console: Move SYS_PBSIZE into common/
-  bootm: Allow building when cleanup functions are missing
-  fdt: Move working_fdt into fdt_support
-  net: Depend on CONFIG_CMDLINE
-  log: Allow use without CONFIG_CMDLINE
-  video: Allow use without CONFIG_CMDLINE
-  video: Dont require the font command
-  efi: Depend on CMDLINE for efi_loader
-  cmd: Make all commands depend on CMDLINE
-  sandbox: Avoid requiring cmdline
-  sandbox: Add a test for disabling CONFIG_CMDLINE
-
- arch/Kconfig                               |   6 +-
- arch/arm/lib/bootm.c                       |   2 +
- arch/arm/mach-imx/cmd_dek.c                |   3 +-
- arch/arm/mach-imx/cmd_mfgprot.c            |   3 +-
- arch/arm/mach-imx/imx8/snvs_security_sc.c  |  10 ++
- arch/arm/mach-stm32mp/cmd_stm32key.c       |   2 +
- board/freescale/common/cmd_esbc_validate.c |   3 +-
- board/kontron/sl28/cmds.c                  |   2 +
- boot/Kconfig                               |  42 ++++---
- boot/bootm.c                               |  10 +-
- boot/fdt_support.c                         |   5 +
- cmd/Kconfig                                |  25 ++--
- cmd/Makefile                               |   2 +-
- cmd/adc.c                                  |   2 +
- cmd/arm/exception.c                        |   2 +
- cmd/arm/exception64.c                      |   2 +
- cmd/armffa.c                               |   2 +
- cmd/axi.c                                  |   2 +
- cmd/blob.c                                 |   2 +
- cmd/cyclic.c                               |   2 +
- cmd/fdt.c                                  |   5 -
- cmd/mux.c                                  |   2 +
- cmd/nvedit.c                               | 122 +------------------
- cmd/osd.c                                  |   2 +
- cmd/pcap.c                                 |   2 +
- cmd/riscv/exception.c                      |   2 +
- cmd/sandbox/exception.c                    |   2 +
- cmd/scp03.c                                |   2 +
- cmd/wdt.c                                  |   2 +
- cmd/x86/exception.c                        |   2 +
- common/Kconfig                             |   5 +
- common/Makefile                            |   3 +-
- common/cli.c                               |   2 +
- common/cli_getch.c                         |   1 +
- common/log.c                               |   4 +-
- common/menu.c                              |  40 -------
- common/menu_key.c                          |  49 ++++++++
- drivers/fastboot/fb_command.c              |   3 +-
- drivers/fastboot/fb_common.c               |  15 ++-
- drivers/video/Kconfig                      |   2 +-
- drivers/video/console_truetype.c           |   4 +
- env/Makefile                               |   1 +
- env/env_set.c                              | 132 +++++++++++++++++++++
- include/bootm.h                            |  15 ++-
- include/env_internal.h                     |  23 ++++
- include/k210/pll.h                         |   2 +-
- lib/efi_loader/Kconfig                     |   2 +
- net/Kconfig                                |   1 +
- test/Kconfig                               |   1 +
- test/py/tests/test_sandbox_opts.py         |  20 ++++
- tools/buildman/builder.py                  |   2 +-
- tools/buildman/builderthread.py            |   6 +
- tools/buildman/func_test.py                |   4 +-
- 53 files changed, 388 insertions(+), 221 deletions(-)
- create mode 100644 common/menu_key.c
- create mode 100644 env/env_set.c
- create mode 100644 test/py/tests/test_sandbox_opts.py
-
+diff --git a/include/power/mp5416.h b/include/power/mp5416.h
+index dc096fed3f..4326baaa42 100644
+--- a/include/power/mp5416.h
++++ b/include/power/mp5416.h
+@@ -32,7 +32,7 @@ enum {
+ #define MP5416_VSET_SW3_GVAL(x) ((((x) & 0x7f) * 12500) + 600000)
+ #define MP5416_VSET_SW4_GVAL(x) ((((x) & 0x7f) * 25000) + 800000)
+ #define MP5416_VSET_LDO_GVAL(x) ((((x) & 0x7f) * 25000) + 800000)
+-#define MP5416_VSET_LDO_SVAL(x) ((((x) & 0x7f) * 25000) + 800000)
++#define MP5416_VSET_LDO_SVAL(x) (((x) - 800000) / 25000)
+ #define MP5416_VSET_SW1_SVAL(x) (((x) - 600000) / 12500)
+ #define MP5416_VSET_SW2_SVAL(x) (((x) - 800000) / 25000)
+ #define MP5416_VSET_SW3_SVAL(x) (((x) - 600000) / 12500)
 -- 
-2.42.0.515.g380fc7ccd1-goog
+2.34.1
 
