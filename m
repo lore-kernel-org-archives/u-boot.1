@@ -4,106 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78A81CE7A89
-	for <u-boot@archiver.kernel.org>; Sat, 23 Sep 2023 23:07:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D46AACE7A89
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 03:00:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A250863E5;
-	Sun, 24 Sep 2023 01:07:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 289D3863DD;
+	Sun, 24 Sep 2023 05:00:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="FHUBJBHQ";
+	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="ERCgpbMD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C19D86A24; Sat, 23 Sep 2023 20:34:46 +0200 (CEST)
-Received: from IND01-BMX-obe.outbound.protection.outlook.com
- (mail-bmxind01olkn20812.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:7011::812])
+ id 1DF7186844; Sun, 24 Sep 2023 04:59:59 +0200 (CEST)
+Received: from IND01-MAX-obe.outbound.protection.outlook.com
+ (mail-maxind01olkn20812.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:700f::812])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4204686996
- for <u-boot@lists.denx.de>; Sat, 23 Sep 2023 20:34:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3F718620C
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 04:59:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tjjh89017@hotmail.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=j4Nl31qjNtSUzM7WKhbidLQfeawiKc5hi/ez0JE8uW/CgY800tIVIcaHYVwe5k0cWzPFbe+1hknqsNpD5KdJRXbMekOhQ/t3Jp0bQPJTZgmnXjgn3Ymh2AMl9qhq+hIvjGY9nohINYKcej7UAT/ecO2DO26XeyxU8XDVWbfVgON8gGqEXF8Tg+Th/m2yIBy2/68vR42nHIE4RCNVV5wuQuE2HEbxgCUdGU+PDDPSpCBvLVUTEiA7J0gRLZ3yLQNssKqY4cN3JWir7rdRg4Llfiq48kKLzrLSHjF8H9QtwlVDWs6Z+X2i4Ri+T5jd3VcIjYiLXVOO8ZpTLPGOiihyvw==
+ b=LHZ3Nfk4JxcffgbHyETwlZWSmaoG3bhOxo+PAJp4pAtUAprzR/X7xQQI4IJINzYa+BCm45kNpzllZbC9EXxTyFcbSYtIvKW3rC9cmwIDGX4Vr9FF1M7Vlct/7mOv9YzmZe4P8mYiMC25nXtlPzhuZZUzuH4lwaJ+9hxkfNalGEZIVsa3pEvCZDWn0iPDPeDyuZZuiZy65UCEzjVoaVolNIayVK9RAAs/xRaXpXxgJQmgrq+Byog3ILEx2nIcqkL7A5m9j2MIP5+0AGBUBBWHdE+dUKsjGCwHeuAREGFBpPeidTZt4ku/aF1ocyw863YaMayNIuymuQdhta06ib/xPQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=46r2Uh4bEB8BnXtE3LIL9uJfJwQ/aosHNxSPbP4uQ2I=;
- b=ArjFDOA0IqNZhKE0SGjzD7bEB20MQIcfbmidcT3iLMUN/KCG8lWIxbBZjtwRGa9gFUtfbDld3k8gdf/V+fgXG6brv8vHIF0BQ2Dr+7+dkUzu8t68hHu8chlzVOqQVs7hMfVDlnTYfED9LzpNLXwbri8L+189nMHTFGaS/OWVrJug2pgRE/qhxih4+Td2qBvFJLB3sCzAiB609C0NCTtsWyyW86xnfjwneoTSTop5pi+tpr+UmCtd46VXPgEuy4l4SJpkVP8YAYvSj+Ast3zR85yCXn+uUpyuUS4whZ/QXM5bvsLh51fciX2Q4EX7cFl00t1cP/Y/c5HTHZjPpmFDFQ==
+ bh=oLllfYhstVEKRHt8yVn1OcbaO6lRPc34+YkFmmtBWDg=;
+ b=GSdmt6rbBHSY6Nc2AAJEbrMe6IPLUAryp7ztLe7T88PrHv77xCMTtUxl7EXebX/q/H0WNgI7rgvonwEuQIHCgqivZpCq8w8FK1CP6QGRphV782sdYFqn34ukh3sQkdvR7cyAjzSz2Vo4wGJxHIj2WOImxeHHPAsffTitr0WzqYoPQjY6XtSKneKdkjDO7+J70N7/YuC+pXuKuys+TN0GuxmVtxPkXaE8SaMG9ww97mYm1RufzbQEPIJIL7Fii6HT9P89/cl4bDZmE/6TuxwyIBsfJUjJbRH7OxPJAaN5RoQbiKt9blOzKm2OyTdOPacTNfWtBIvrsThxI4mhWeW9Ow==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=46r2Uh4bEB8BnXtE3LIL9uJfJwQ/aosHNxSPbP4uQ2I=;
- b=FHUBJBHQ/1kwWAb7HsyjV2mT2DgZkz8kTj5NlQPXSrhU8MMcxw0aejEbyQAR3+lxVUQ/0d7TtFf5ENbVd8ccZYjrT8NQOpnfvbUPNPyZR5lpr+GekhfvpNvmxwRMIaIfPEZl8vYi/ofNjEKUxkeu7NIPV9QSAotTOKsjGeFT6k/SVxRu/0ZwdN+dsjncaY26gtROT+bhV7cbzLEWbQPYq5NUZ6HVhP9nuZDR8Dmsqoj8WB/qEgoSFI0Vtx3XhV1oE4l/cw0pnC87Ks1RXufASPQ6v3S7PzppMlV05glWGXENf12vcfta2hkxrpEehI64oef3MdTrz3z0/pKUXqr2iA==
+ bh=oLllfYhstVEKRHt8yVn1OcbaO6lRPc34+YkFmmtBWDg=;
+ b=ERCgpbMDhG0YmYc3sgu2xYMgMlnVR9iehZyoI4Ism4C4pJGzMI4ALk6R0/+kg09DowR3qBasAl/uitGNCBWZNCGQj5Yb6vNfWR0lRbFyDWE9dwJNh9bJiVxpus/Rek9+jSvc96ukMiKSKBwnzfN3ipx5H6DMoAInJy5RjOldR78OKaEOLnKkDraqY/lh/NRS2Mcq31SFCI4ftYShxUmCUR678lM5T9WOCjOoKv67MXHMtAoeK/GnmEZlTxPkS3ff8pKMEjqTMdJ4TUIzDOvkoiGYMZo5a6LcK/bJb0F5DVr1slyUEn7yZl1HtYF4uNb6wNv8m5DFkGi26Lsp2IsmCw==
 Received: from MAZP287MB0503.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:d3::8) by
- PN3P287MB0114.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:d9::8) with
+ MA0P287MB0783.INDP287.PROD.OUTLOOK.COM (2603:1096:a01:dd::5) with
  Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6813.25; Sat, 23 Sep 2023 18:34:39 +0000
+ 15.20.6813.27; Sun, 24 Sep 2023 02:59:52 +0000
 Received: from MAZP287MB0503.INDP287.PROD.OUTLOOK.COM
  ([fe80::43b3:9c7e:61b9:5278]) by MAZP287MB0503.INDP287.PROD.OUTLOOK.COM
- ([fe80::43b3:9c7e:61b9:5278%7]) with mapi id 15.20.6813.017; Sat, 23 Sep 2023
- 18:34:39 +0000
+ ([fe80::43b3:9c7e:61b9:5278%7]) with mapi id 15.20.6813.027; Sun, 24 Sep 2023
+ 02:59:52 +0000
 From: Date Huang <tjjh89017@hotmail.com>
 To: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>, tjjh89017@hotmail.com
-Subject: [PATCH] arm: rpi: set boot_targets with correct macro expansion
-Date: Sun, 24 Sep 2023 02:34:22 +0800
-Message-ID: <MAZP287MB050324B04DDD0AA9C6DD905CE4FEA@MAZP287MB0503.INDP287.PROD.OUTLOOK.COM>
+Subject: [PATCH v2] arm: rpi: remove boot_targets for default standard boot
+Date: Sun, 24 Sep 2023 10:59:35 +0800
+Message-ID: <MAZP287MB05034A33FFAAD17F2A43522EE4FDA@MAZP287MB0503.INDP287.PROD.OUTLOOK.COM>
 X-Mailer: git-send-email 2.34.1
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-TMN: [gvxXqNK+ygkBMiV4l4tvc8xN8sI6478BIKCnqZcn+IErgFevjo05sW1lu2LN42yz]
-X-ClientProxiedBy: PU1PR06CA0019.apcprd06.prod.outlook.com
- (2603:1096:803:2a::31) To MAZP287MB0503.INDP287.PROD.OUTLOOK.COM
+X-TMN: [Rc2C6XGu8csPR867lKJ7eVRUZrnX/FKtkeqjJhYGvRQmw8L5bRkdpDErbKTZ7wBZ]
+X-ClientProxiedBy: SG3P274CA0005.SGPP274.PROD.OUTLOOK.COM (2603:1096:4:be::17)
+ To MAZP287MB0503.INDP287.PROD.OUTLOOK.COM
  (2603:1096:a01:d3::8)
-X-Microsoft-Original-Message-ID: <20230923183422.26504-1-tjjh89017@hotmail.com>
+X-Microsoft-Original-Message-ID: <20230924025935.29999-1-tjjh89017@hotmail.com>
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MAZP287MB0503:EE_|PN3P287MB0114:EE_
-X-MS-Office365-Filtering-Correlation-Id: df497bb2-f502-422a-9aea-08dbbc63be87
+X-MS-TrafficTypeDiagnostic: MAZP287MB0503:EE_|MA0P287MB0783:EE_
+X-MS-Office365-Filtering-Correlation-Id: c36a1017-e6b2-40a1-99d7-08dbbcaa51fc
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: v1zEuSjv8m8nSOSc5dimEDU0uzoXN0x8zegvgVzSurIVxrlLRwL7kBvaGOt7/yo1ZlcOGa9rn1DSqamBf3cinj+72HbArD95p/myZW6PzucM3byxCOm7ZenEHlFpglbUOo+4+lSymsyEMgSUcZFH06fLLCEp83F6udcM9OpaFSk/n2B8IjykFY2kJDh0ErqgnqnxjH2I0q5oTQjOEnnZhAlCwjaaml8wCMCsjoHxdKtRYh+tO1FpDjLwiGvSLwOel6dXaLaQhAEERRqO9Hi2DhEUMv1yD7HJ+zQbeNMZGsUP7hdL6jmXXnCOPvmI8FQ5sDW+qw2bdxpGOPCBhfVefSbQMC3sU29FuBtX8Ho+XwF78TwImIXbas2H+QMZWZ6l5LQB4cZfA5NUNbz53RlmU7rs57Upjxjs/7gehekdQlIlq07yQML3MVc5HwYBhi2v3GfkOG6ozNc4+3l97Qlv/xJh8uE+lwvpCLIM6XLQHQc18JRDj+0uiFJNLMo2hgxpVxvkph6P/8CCubexaFgi0ingt+91/2K1CegkPqPWxSRgCAGaKYtFA0IsQ1moS36P1bkrO7LUqEp0rKFpnyfjZ0XA/xb5TpmqMcbcKQP20Mtl0YbszOU6pK01ULq50/2g
+X-Microsoft-Antispam-Message-Info: hmtvNRzPWqXvGAAiH3B6W0ZFj/EokW12nuhOSWExTSjhKOuFXGoKrmkLFh/cv3Zvjh0iaRPaj/Wz77+BWZGaWdT/xV5XwDcCyLBMQelmZA9iENosUZXwdMRF+c4ttve2z2IHsGfqFkIrCDRj8yXLAkCd//DXixikcMKXcMUC9dzz6lpKNKr83TDuVzRISB6xLTzS+2gAMsnK1NkfAI0SPEiAqgqT0g8AlK4acTF9EQZildCIcpef0ssZDVRyIqscrUs07epxgIIqEPun3Ib4xzqLHgeOAZW/C3ICiF0+xsFILPOLJauu0/hcBIqrtYSszjGDEYbBKMh6sv5izGuHD3Y1amLINsrewzG4lvHXMCBlLK4CYvBLYSTRWOTWKeTOGWZ8/Z3AeD/shEDN3izTKYtpbg/9/Uj7dSeuumXFcPtJao2m+lq0flHX8UyVsbxTSO6XE8cufafjasqV3f5aGoBZdHYg/oROPhAO7X8+NIvUIpSyGf0+QSq/bmEwwE2RSMJSgUouweTwRHvjUdyZ+w6+edoCymm2AfKpxzDTTObiRmlhw9LUgnGMwQoVkDWaHBdqBzNwERuV1p71JsuKl5pXoBFf9OLDHyRlvc2TZhgZOxAqV6IWAloKBtuN6zQc
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?151IlDffXjb+6+X8XBMfAx5RnJkiWAdtdJZ2DpUp6VtvTQAKUCxJ1R0wPY5i?=
- =?us-ascii?Q?R/KQebT2jHXGUJ7D17zxRdO6EtfgYW1GrN+/Q8MXLXnWVNXbOO8s3ROGIlVk?=
- =?us-ascii?Q?imXqxpgVGA44ScA97gFkOdrcze6osfrdQaXsPN1XK3iQpywfILCOyI9q9Ykn?=
- =?us-ascii?Q?wakScg3d2oimqMtIfgAN+WmZF/nwgpPe45DfjMuMPyQfdxsxi89fN4Q7kohr?=
- =?us-ascii?Q?C52N05pUh2eFwCVJurMtIBHRgae1ESalrmrZ5LpmF8tcIJXwURQofLQtYoN1?=
- =?us-ascii?Q?KAC4Taoly+EL1OB5+vWwp8UgsxOmdQ4a9hx84uWSZeNHoDmNPPZHjtAfv4Q/?=
- =?us-ascii?Q?wNawldWXUm7NTsEia5HMGI6oLivlMDlL+J/ln2CIXL55uVn19/2Ron8YSBCr?=
- =?us-ascii?Q?Qyh/3Sw/d1OTWTm25q6eXpiv50iixAzC8YQgk8Dh2ftCy5dDlvSIFgiqhwOm?=
- =?us-ascii?Q?61hkUkgUwQbZNgO9oDEuMlMJXmy7tWMCfILxKWr69QfnNFma/o0x0TSA/oBv?=
- =?us-ascii?Q?RZq6SwnhonarFp5+CAkWkNYSQ5bRcrRnADVueTp9Wiz3fW4DFMvHhvnLFdl6?=
- =?us-ascii?Q?R+ywUy879c/3YN02UkAh2GXC+IZHxRlT13Z8slv7k0+zMkJV4zf+JVixuZkc?=
- =?us-ascii?Q?uSNmPFuu1Hrb4rGalKc++RNI2Q24Qo6SvUlw57GDOAVwAZxWazgKevQYTych?=
- =?us-ascii?Q?fr3EprRFQv/8w4PDAptxHmoBmKXZ/vob4FNp1KCeSgx2Dm4ZI2IpcbZNW1Wt?=
- =?us-ascii?Q?P74r6SfeQ2UHJkNdYf6ttmY5jL9jFZ4ryVHtDKxaHjLCaRzfIas/X2KBgS+r?=
- =?us-ascii?Q?c3Z8dqELzEKzxRhYHA7Ur8S/0zD4JjxsNN1yL4yPJIWp0uTu7uExDg893AgT?=
- =?us-ascii?Q?oplKSMMJ/imGHiUnsiFGNx7KeOqD+8VEi6KyOGrHw/wnzXP8i+q/FDlgdSdi?=
- =?us-ascii?Q?aLDc/71JV97+o3FTIwCXCJp44NJ8hXPAUShjcg7w2j6HJgjgRnB+XHywHsem?=
- =?us-ascii?Q?4yemlfzqhVjppPHDbF+PiVAne+VKDXFjfGbiwEDgOC8gErocXTuuElGHcuTP?=
- =?us-ascii?Q?DevY9r5EgJsekUSFZvTVvZQgF7T00Iqky0wnf3/TdXrf6cxOZX9+Aej6oOX+?=
- =?us-ascii?Q?uR2cVSqwiBrhZJv/l/s8Dh9cd8zQCXorXcuVfW8e1sofuZi6q11oUWIiV+s2?=
- =?us-ascii?Q?n8cP6tNX83LBKd4th+mQ3HSQhiJ8dz2CnD0tzUINjcsNL+MH3g2OE15aOxf5?=
- =?us-ascii?Q?K3Mk+inAmyBPWlxp96PU6fY9HSFlaYuCnkofcUwx0w=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?hVrriBGI7YdnxK/dCW3zeEtAputH4cmY4o8blE2MqYY+Xio4bfeomqNClvYg?=
+ =?us-ascii?Q?9jrUrrXQWqGcUHnfemOVPetXzr/vuYw28k3D8H1wsfFz1EDz1+Hxtb2vxcLU?=
+ =?us-ascii?Q?zOKkaWhxQcRWc6ChM7MubSTXuYlRgmZB2U5AdhVwR6HXH4/jcV5Ho6uOPdMO?=
+ =?us-ascii?Q?L8tCNg3nqXnbS6P0JYm/fFgzuibO2H3GTiqWzoQuNhShy1RAoYYaitELIOQg?=
+ =?us-ascii?Q?24TOc8nUPuo8CW5+fD66vCYzosMt02Nk9G2zQnB77ygTwCdhYqrVYgd07gU+?=
+ =?us-ascii?Q?wLTX98cXcywkKOBcJkDs3+ATBbaRgYzK9iHP4wEtuPpC9+YOUiiF9AtoKEbm?=
+ =?us-ascii?Q?aaMIgG+hLaOzJqvdVL7H78sGXpV2ipILm7VIkZlkZZOty46uSBAJPmWCX4wZ?=
+ =?us-ascii?Q?DH42+IxxWr1Oeuo9tsVEwMwFOsk2p/EdW5sev6t/AujrV6/Nhzch+z/p8oLN?=
+ =?us-ascii?Q?q53s7FQJjW9JiZlE2fRkmnUhd7wo5IeOJ5swutmcATMonApl6MdhoNLIGVuJ?=
+ =?us-ascii?Q?FsMxUQcqC8/UOW+y6SRhFCRlxZrup+6s6kNqm0Bl80y3A7Kfy37nQtP85v35?=
+ =?us-ascii?Q?QlTDYrEeBwOMr5ME9Cxtkfqhg3SaeLhte9xHekSYrqsrWKCEgjw9AmRHEv4e?=
+ =?us-ascii?Q?R4iVt5onFpwxNJXXceTmkif0YDwM5ApEuPlOKIMsP/3/BykFFXr2mFt6h2gO?=
+ =?us-ascii?Q?5pRPCVqd6KUG5NqT/nQL1pjT7NWkm0JsAgH9ivKby5H3130aWaE6mP/peTB1?=
+ =?us-ascii?Q?L3zXUCB+QlPxmEH15r0cB0MUNqsYiZ6TcOUPDRQtJega6Nagki49xq7601p6?=
+ =?us-ascii?Q?cdANUG8z3K1UZpo+PBRjCPC3FRkTdpQIh9HXUdzyR/CfdSbAcKKMTAN2H3g+?=
+ =?us-ascii?Q?UnBdFSl+0gyi5nDVBFUlSYsiR86o+XOQGJd329mFtdmoZYoqK6KesCCioOmL?=
+ =?us-ascii?Q?dWJuuQwZ8Z9Jlv6PXhFg68+nHqpTYl3W/PZ/b1F+3WLGraujawXm1sew/rGq?=
+ =?us-ascii?Q?EZPIDmjNHYfsfOTjDXCRnCeq/MbezPMA7XpodkhpOptXDBI8ER5aL+SbeKiV?=
+ =?us-ascii?Q?AQC9fQP63XkfvwV+fI6FFtgS5aP1mi4iudTp8DpqVoY8ndxoH0Gob1+tyQgI?=
+ =?us-ascii?Q?f1Qe/aJNWeEZbrQ8T4ncxyPxXIlWkrg+N25kRvcHeE7MC+z8hWHwKM7rmxcB?=
+ =?us-ascii?Q?FEDY419HRHOMgEfwmuovt++/txCmGkil2NO5GpH15VhrD95bCujXrb8/or2Z?=
+ =?us-ascii?Q?CJ38dW1VXsy+3FQPUDEF9lsw2ZSGs/zqMu8JC8Pxgw=3D=3D?=
 X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-bafef.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: df497bb2-f502-422a-9aea-08dbbc63be87
+X-MS-Exchange-CrossTenant-Network-Message-Id: c36a1017-e6b2-40a1-99d7-08dbbcaa51fc
 X-MS-Exchange-CrossTenant-AuthSource: MAZP287MB0503.INDP287.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2023 18:34:39.2034 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2023 02:59:52.4704 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
 X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN3P287MB0114
-X-Mailman-Approved-At: Sun, 24 Sep 2023 01:07:11 +0200
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA0P287MB0783
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,25 +119,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-rpi uboot will only try to load mmcnr@7e300000.bootdev
-which is wlan interface if boot_targets only has `mmc`
-Change it to `mmc0 mmc1 mmc2 usb0 pxe dhcp`
+Raspberry pi supports standard boot without boot_targets
 
 Signed-off-by: Date Huang <tjjh89017@hotmail.com>
 ---
- board/raspberrypi/rpi/rpi.env | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/raspberrypi/rpi/rpi.env | 2 --
+ 1 file changed, 2 deletions(-)
 
 diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
-index 30228285ed..08a3648838 100644
+index 30228285ed..8fb8d5d5f7 100644
 --- a/board/raspberrypi/rpi/rpi.env
 +++ b/board/raspberrypi/rpi/rpi.env
-@@ -74,4 +74,4 @@ pxefile_addr_r=0x02500000
+@@ -73,5 +73,3 @@ scriptaddr=0x02400000
+ pxefile_addr_r=0x02500000
  fdt_addr_r=0x02600000
  ramdisk_addr_r=0x02700000
- 
+-
 -boot_targets=mmc usb pxe dhcp
-+boot_targets=mmc0 mmc1 mmc2 usb0 pxe dhcp
 -- 
 2.34.1
 
