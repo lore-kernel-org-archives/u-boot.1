@@ -4,80 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44038CE7A8B
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 00:43:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC5CCCE7A91
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 00:53:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3DC886BA6;
-	Mon, 25 Sep 2023 02:43:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4619886B0D;
+	Mon, 25 Sep 2023 02:53:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lYrT2kqI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UU6pprrD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89ED186BA8; Mon, 25 Sep 2023 02:43:52 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 591F986A38; Sun, 24 Sep 2023 22:40:24 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 800D786B03
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 02:43:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 065BA86A43
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 22:40:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d815a5eee40so5944568276.2
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 17:43:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-35140cc9187so853925ab.2
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 13:40:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695602629; x=1696207429; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=5lqgJBCXaS60Y4TITUCCNxwMiCVkAtAODG7gHaJgp2I=;
- b=lYrT2kqIcTY/aWFByB9sS0441hhff5vuSwPWkXtejpeNj8XPVp5tJeMwL/qj07Qph+
- ysfpFkBTbQrqf4nIbZr+8LwvVXfK0DMXqPZ666zEpOuEwG5Pik+0kPMSz7jo+DNqsPsR
- YuGT1AAQrCF+9BbaoeGKxi4mS+zjDWRw94u/E=
+ d=chromium.org; s=google; t=1695588018; x=1696192818; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=JRbLQkKNVodEaf+rEGPwgM3yWxwi0ZcnnEKENf0uc1Y=;
+ b=UU6pprrDpXeqCJfAF3r92U1CxsfPOo/D77D5njvG6Aia3/18bpQWwKYqo7dWkzOI4d
+ +XAuqMdis7BR2reABYStVBBgBcsFSeIyWhb6OIAHM5y86NEvl/tqZ/TpiJImO/6rImJq
+ LUvKxRZdZyStmpV69OMvNgzBIAq59AvAkgadI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695602629; x=1696207429;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5lqgJBCXaS60Y4TITUCCNxwMiCVkAtAODG7gHaJgp2I=;
- b=q5xH9uWWPSSBiuRQugPPFTkjZI5C8AH0grjbac4eYTO3fKUwjXlq2+vE+6AkHK37IM
- uHFcy5PV7wUaj6Abs4lJbyFfOf5g9+8+ukY1ki+lzCh5rj2Y0A+O0nkRyPRNb9M8HLwS
- 6jfAIdHPK5UT6ZI6lPiDKbkfPuQ0m6Jaq6xOsz9/PmBhxopOrNi2MSta+Q8vnjQQ0mXy
- vGeqzW/GC55Bd38oDcf1kK2j7N2zp+8WsvzVxUUZAFnPAZU2lAE+wtZxN4PFZ2BlxhtD
- izCQ9zK+q/RgIt0De8NloqaaV4rDhVyrndVCkmxCL7HUnNJrSaaeDXzDvwBJMoa0mMp0
- TDYw==
-X-Gm-Message-State: AOJu0YyAi9BApXun2dwnrF+2I8/DLNbQJMQQV+qUFgbrOwQne11Y7G33
- BBzBvLRlZzjsXsQz0MiwV9Ozaw==
-X-Google-Smtp-Source: AGHT+IFJ6ooU2YGmUuH6/7COKWCuRO5KFN4VFnbZ0fVcU8E5BSvsNq6Ud/OdtRVOhFjqu4GLHNElGw==
-X-Received: by 2002:a5b:7c8:0:b0:d0f:6f1d:89ec with SMTP id
- t8-20020a5b07c8000000b00d0f6f1d89ecmr5365302ybq.35.1695602629285; 
- Sun, 24 Sep 2023 17:43:49 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
- [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
- by smtp.gmail.com with ESMTPSA id
- m5-20020a258c85000000b00d72176bdc5csm1110365ybl.40.2023.09.24.17.43.48
+ d=1e100.net; s=20230601; t=1695588018; x=1696192818;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JRbLQkKNVodEaf+rEGPwgM3yWxwi0ZcnnEKENf0uc1Y=;
+ b=BsEgMZRlMcMDzqo6t8+uygVDw5gDjSxNS3j9wezi5EB2thHmdnsZAMTaWuaDUaDB9e
+ W5ntvc3FKv6i+pCNc8GC3lvLW2cJhvFcZ+MOjYgFIVJ3619Tca8dBr662TvHW0V9Qhst
+ VXrcZmyo4rqV90LSNIBbTtrygFPl1FSjBuoJEm+e3s2eAIDl1Yj39i/PUHcMcZRHC/eW
+ 5FRQOrBhtE7ecAa9d8P3vz6GYZ33u3x2kmi3lY14lQIzSfm6N8Zz5k1FZ3bYrFN1X7JW
+ /uw1Gl62dwTFJ2hjb3gLrM1st6c5/kNiHRo6g6MOZro1xOBGRB5t6J3rvuiWTcA6ftcY
+ gUNg==
+X-Gm-Message-State: AOJu0YwnkTfDgz8lgWm4C6Iey7RB4Nbw/bVwO6EYWZ5v68omk2AS8GOJ
+ i0bXo7sE7bKy2ak7jhXhha6skOj2xlgapACmaLw=
+X-Google-Smtp-Source: AGHT+IGSWtDj8QdjL6Im7BYt1omjIV2qnUG5XmlkoabIW5US7/AAvHmrYqsmNuSEMdG6Fd6Im1SL/g==
+X-Received: by 2002:a92:c5cb:0:b0:34d:f0b9:97fd with SMTP id
+ s11-20020a92c5cb000000b0034df0b997fdmr5562840ilt.8.1695588018630; 
+ Sun, 24 Sep 2023 13:40:18 -0700 (PDT)
+Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ m11-20020a02cdcb000000b0043a1b74a0e3sm2311705jap.90.2023.09.24.13.40.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 17:43:48 -0700 (PDT)
-Date: Sun, 24 Sep 2023 20:43:46 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sean Anderson <seanga2@gmail.com>, Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>, Tom Warren <twarren@nvidia.com>
-Subject: Re: [PATCH 07/25] tegra: Change #ifdef for nop
-Message-ID: <20230925004346.GP305624@bill-the-cat>
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-8-sjg@chromium.org>
+ Sun, 24 Sep 2023 13:40:18 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexey Romanov <avromanov@sberdevices.ru>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Devarsh Thakkar <devarsht@ti.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Harald Seiler <hws@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mark Kettenis <kettenis@openbsd.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Suchanek <msuchanek@suse.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Peng Fan <peng.fan@nxp.com>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rick Chen <rick@andestech.com>, Safae Ouajih <souajih@baylibre.com>,
+ Sean Anderson <sean.anderson@seco.com>, Stefano Babic <sbabic@denx.de>,
+ Stephen Warren <swarren@wwwdotorg.org>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Tom Warren <twarren@nvidia.com>,
+ Troy Kisky <troykiskyboundary@gmail.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH 00/25] Tidy up use of CONFIG_CMDLINE
+Date: Sun, 24 Sep 2023 14:39:18 -0600
+Message-ID: <20230924203953.1829820-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="O0jP/vtJllrKR2hd"
-Content-Disposition: inline
-In-Reply-To: <20230924203953.1829820-8-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 25 Sep 2023 02:53:48 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,63 +116,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+It should be possible to disable CONFIG_CMDLINE and have all commands
+and related functionality dropped from U-Boot. This is useful when
+trying to reduce the size of U-Boot.
 
---O0jP/vtJllrKR2hd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Recent changes have stopped this from working.
 
-On Sun, Sep 24, 2023 at 02:39:25PM -0600, Simon Glass wrote:
+This series repairs the feature for sandbox and adds a test to stop it
+breaking again.
 
-> This code is normally compiled for Tegra, but sandbox can also compile
-> it. We should not use UNIT_TEST as a synonym for SANDBOX, since it is
-> possible to disable UNIT_TEST for sandbox.
->=20
-> Correct the condition.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  include/k210/pll.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/include/k210/pll.h b/include/k210/pll.h
-> index fd16a89cb203..6dd60b2eb4fc 100644
-> --- a/include/k210/pll.h
-> +++ b/include/k210/pll.h
-> @@ -13,7 +13,7 @@ struct k210_pll_config {
->  	u8 od;
->  };
-> =20
-> -#ifdef CONFIG_UNIT_TEST
-> +#ifdef CONFIG_SANDBOX
->  TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
->  				     struct k210_pll_config *best);
->  #ifndef nop
+Note that quite a lot of functionality is lost of CONFIG_CMDLINE is
+disabled, e.g. networking and most booting options. Further work is
+needed to make the option more generally useful.
 
-Tegra? Do you mean sifive?  That's where CLK_K210 stuff is... but it
-also seems wrong, you can run unit test on real hardware, and this is a
-test that could (should?) be run on that platform.
 
---=20
-Tom
+Simon Glass (25):
+  buildman: Use oldconfig when adjusting the config
+  bootstd: Correct dependencies on CMDLINE
+  autoboot: Correct dependencies on CMDLINE
+  cmd: Add a few more dependencies on CMDLINE
+  treewide: Correct use of long help
+  test: Make UNIT_TEST depend on CMDLINE
+  tegra: Change #ifdef for nop
+  fastboot: Avoid depending on CMDLINE
+  cli: Always build cli_getch
+  cmd: Use an #ifdef around run_commandf()
+  Move bootmenu_conv_key() into its own file
+  armffa: Correct command help condition
+  pxe: Depend on CMDLINE
+  env: Split out non-command code into a new file
+  console: Move SYS_PBSIZE into common/
+  bootm: Allow building when cleanup functions are missing
+  fdt: Move working_fdt into fdt_support
+  net: Depend on CONFIG_CMDLINE
+  log: Allow use without CONFIG_CMDLINE
+  video: Allow use without CONFIG_CMDLINE
+  video: Dont require the font command
+  efi: Depend on CMDLINE for efi_loader
+  cmd: Make all commands depend on CMDLINE
+  sandbox: Avoid requiring cmdline
+  sandbox: Add a test for disabling CONFIG_CMDLINE
 
---O0jP/vtJllrKR2hd
-Content-Type: application/pgp-signature; name="signature.asc"
+ arch/Kconfig                               |   6 +-
+ arch/arm/lib/bootm.c                       |   2 +
+ arch/arm/mach-imx/cmd_dek.c                |   3 +-
+ arch/arm/mach-imx/cmd_mfgprot.c            |   3 +-
+ arch/arm/mach-imx/imx8/snvs_security_sc.c  |  10 ++
+ arch/arm/mach-stm32mp/cmd_stm32key.c       |   2 +
+ board/freescale/common/cmd_esbc_validate.c |   3 +-
+ board/kontron/sl28/cmds.c                  |   2 +
+ boot/Kconfig                               |  42 ++++---
+ boot/bootm.c                               |  10 +-
+ boot/fdt_support.c                         |   5 +
+ cmd/Kconfig                                |  25 ++--
+ cmd/Makefile                               |   2 +-
+ cmd/adc.c                                  |   2 +
+ cmd/arm/exception.c                        |   2 +
+ cmd/arm/exception64.c                      |   2 +
+ cmd/armffa.c                               |   2 +
+ cmd/axi.c                                  |   2 +
+ cmd/blob.c                                 |   2 +
+ cmd/cyclic.c                               |   2 +
+ cmd/fdt.c                                  |   5 -
+ cmd/mux.c                                  |   2 +
+ cmd/nvedit.c                               | 122 +------------------
+ cmd/osd.c                                  |   2 +
+ cmd/pcap.c                                 |   2 +
+ cmd/riscv/exception.c                      |   2 +
+ cmd/sandbox/exception.c                    |   2 +
+ cmd/scp03.c                                |   2 +
+ cmd/wdt.c                                  |   2 +
+ cmd/x86/exception.c                        |   2 +
+ common/Kconfig                             |   5 +
+ common/Makefile                            |   3 +-
+ common/cli.c                               |   2 +
+ common/cli_getch.c                         |   1 +
+ common/log.c                               |   4 +-
+ common/menu.c                              |  40 -------
+ common/menu_key.c                          |  49 ++++++++
+ drivers/fastboot/fb_command.c              |   3 +-
+ drivers/fastboot/fb_common.c               |  15 ++-
+ drivers/video/Kconfig                      |   2 +-
+ drivers/video/console_truetype.c           |   4 +
+ env/Makefile                               |   1 +
+ env/env_set.c                              | 132 +++++++++++++++++++++
+ include/bootm.h                            |  15 ++-
+ include/env_internal.h                     |  23 ++++
+ include/k210/pll.h                         |   2 +-
+ lib/efi_loader/Kconfig                     |   2 +
+ net/Kconfig                                |   1 +
+ test/Kconfig                               |   1 +
+ test/py/tests/test_sandbox_opts.py         |  20 ++++
+ tools/buildman/builder.py                  |   2 +-
+ tools/buildman/builderthread.py            |   6 +
+ tools/buildman/func_test.py                |   4 +-
+ 53 files changed, 388 insertions(+), 221 deletions(-)
+ create mode 100644 common/menu_key.c
+ create mode 100644 env/env_set.c
+ create mode 100644 test/py/tests/test_sandbox_opts.py
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.42.0.515.g380fc7ccd1-goog
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUQ18IACgkQFHw5/5Y0
-tyz8VgwAgFdtOI5CafZNfhuZ384rE1lRtMVgSu4iQ+75ADwO1TD0bpRpPqv4bP0V
-4a5W6J+9587PG8sn1TSuGM1rW2eFQ8UxTUdUWl4GxArRm2mJFmf5llGLuXSmG6gp
-JnxRQ6CDfziVgMaBV4Q05YZ7Dbmbn5Z2II3ApfsSyeoy/iP01wJZM9Ie1Uvejj5J
-idp5ZteVdjmLNggDn7DHdPSVVrTaqLC1SjGYOdcOFT0VcQChDOaB6SQlJCMKW7CF
-u3Rbk3ZamsyNjkTR+yAc6qvNo49kr05wPoyqgWEuYvQ9lz+f6TGwmVkzmUFw1S4p
-NX3WzPnLBHFXjjRSU3pvb7kexFUPRDjggwXBx8gdec1kRqz5C7xWQbhpO3syDbin
-MjfXMDgkUfdeshL3NpkL0ZIch2RQweSQLeVyrdQY02mlu5D0d5XEzNkMCusEuXVW
-6pvkCHfpO6K+9hS6FMIc3cnkXDjdALHPnEh9DdxE18DIEAf3Fnffzql/qPzFm3GE
-lKzGOw0J
-=arI5
------END PGP SIGNATURE-----
-
---O0jP/vtJllrKR2hd--
