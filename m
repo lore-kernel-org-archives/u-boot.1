@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6004CE7A8C
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05FF5CE7A8E
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:30:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C17C86B35;
+	by phobos.denx.de (Postfix) with ESMTP id D105D86BB6;
 	Sun, 24 Sep 2023 21:26:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PoYQHf+f";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kJoPU6gM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17D2B8698D; Sun, 24 Sep 2023 21:26:26 +0200 (CEST)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 82BDC8698D; Sun, 24 Sep 2023 21:26:26 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 558838640F
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B21F86B2C
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-79f989480e0so149037339f.3
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-79f8e4108c3so168746339f.3
  for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695583574; x=1696188374; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K7VWPgXR9UmYksJFPalcDhJYjeGetocytuFaXlw1sOU=;
- b=PoYQHf+fwX6nLcwxRPhIVt4ZV64NhdtXknvTbXEh0iZGGjZbRicAm0idyUPU7bwkt7
- Ej4pVhzhbbB5vuN2T5ALOFsZWdMTMAuN+ggmvKkgFi7Xgy+TbKHq28RwYWuCA+jaJHDW
- 8X46M46Gr9scrqhS/bc7cYOpR1YooJpQnqbSw=
+ bh=a6PWw/YdYnwfMdArY+cSF/qdhNc86DrkULdBAKHV1EM=;
+ b=kJoPU6gMijiN/ARxzJxQiSD4ynU4WzN1hmwIGzScEF32E3KyxwaWHjYAD9LxI6U1bQ
+ 0YXEs15QkQLh75tMeUlQ0z/VJSe/UDXyrStoOJMIfKABoTfxYIaUXmGtj20OoZ/ALfZ+
+ YoB6IhrX6jhVCImG4TPfJvPAuHGwPe10EkUm0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695583574; x=1696188374;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K7VWPgXR9UmYksJFPalcDhJYjeGetocytuFaXlw1sOU=;
- b=tBS3qrRwJei6zNLdjbPjkxGqBDwzF8OmaY/VYQ1D+CObekSleBpMewlK7cISm1NQ43
- sPCrT7wIc3HJ/EWNev6K8YIHZDOtJ78b2+AOqqzUeFLc1QrXcLBWuInvJ8fN0KQP2seA
- J6uESJzOB2rZDJuhwEDxlnmNvty6WFesTaKzhuf2FBQ1KY1rW7PxmuVA0oJTGkjZ5dn0
- Zc5sNsPtKUSETM5oGQc8BvWOaQc6JtOOw/QF9YKIaE8P5MslzqEw91WhS9jUfnd2lCtP
- b8Gell0vQ46O0s+u1GGWjKBeBRjBd+jJLDfbZvgL3gAxQhowYjoI2AVhPXJCcesCfVCL
- lNww==
-X-Gm-Message-State: AOJu0YyoMpLhRFaf6kBjyYzaP5UKv5tYAqSbAKLtTmy4CYkSAJoxcePM
- YbYfJ7PaywCgQdmgxZblPOkVrZTRj8OkyIMlHUU=
-X-Google-Smtp-Source: AGHT+IHfKz/4ca/hrH1HAXhY8M0B+HB5m2iwVgQl3hQcjn+DOdq2hTO+eh/FmxfwqcJkpr1c2RxUoQ==
-X-Received: by 2002:a92:c546:0:b0:34b:ae46:8040 with SMTP id
- a6-20020a92c546000000b0034bae468040mr6855882ilj.5.1695583573925; 
- Sun, 24 Sep 2023 12:26:13 -0700 (PDT)
+ bh=a6PWw/YdYnwfMdArY+cSF/qdhNc86DrkULdBAKHV1EM=;
+ b=uHSPsUnJ2ffCfkX5cyEO5MBsQykq8XRtNftC8ubCQ9+vh7brswRGUbc9bm0lg4yvCf
+ U8l9dqhPK8BR2gn7amaE3L8UQbf7uZvyhgOzlxRRKhX9DreZTTet9fIugKWewsiSlBPB
+ 82kFKXWR/7rTDwg2c8U1io0iko920FbXphn1dAwKJ4uEPoci3xkziWZ0THhTrCB08EIQ
+ jPd22vOOhbMEB/gTdmtQE7lYGLqpjAu0ZdkExH/gYRRRUaIMUGupv06/m4WR686bBl0T
+ +7y8TQ79LUk3LmWXE8rPuVbXZdXLoVABTwyKcH8jDKu1y1lfvXFUl9L2EFlYHzcTilVb
+ gfVA==
+X-Gm-Message-State: AOJu0Yx4Akg0HFjX9WGUhqFjQjrjY56yNhvZfsFl24AFGRfeNXkMzGJa
+ xl0eVixOHMvEPcop2C0A4csVig8E1m0dUtxWi1c=
+X-Google-Smtp-Source: AGHT+IGDKdu5MfJgSf5enFqQ1WDFBoRBMvW+JrNfOhyrMrcVi+K9uzv7j+3JQjhx0Z5DBIOwFvzxAg==
+X-Received: by 2002:a5d:9314:0:b0:791:385c:f8b0 with SMTP id
+ l20-20020a5d9314000000b00791385cf8b0mr4887759ion.3.1695583574679; 
+ Sun, 24 Sep 2023 12:26:14 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.13
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 12:26:13 -0700 (PDT)
+ Sun, 24 Sep 2023 12:26:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH v3 28/38] dm: core: Support writing a boolean
-Date: Sun, 24 Sep 2023 13:25:13 -0600
-Message-ID: <20230924192536.1812799-29-sjg@chromium.org>
+Subject: [PATCH v3 29/38] dm: core: Support writing a 64-bit value
+Date: Sun, 24 Sep 2023 13:25:14 -0600
+Message-ID: <20230924192536.1812799-30-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
 References: <20230924192536.1812799-1-sjg@chromium.org>
@@ -88,173 +88,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add functions to write a boolean property. This involves deleting it if
-the value is false.
+Add support for writing a single 64-bit value into a property.
 
-Add a new ofnode_has_property() as well. Add a comment about the behaviour
-of of_read_property() when the property value is empty.
+Repurpose the existing tests to handle this case too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/core/ofnode.c | 36 ++++++++++++++++++++++++++++++++++--
- include/dm/ofnode.h   | 32 +++++++++++++++++++++++++++++++-
- test/dm/ofnode.c      | 25 +++++++++++++++++++++++++
- 3 files changed, 90 insertions(+), 3 deletions(-)
+ drivers/core/ofnode.c | 17 ++++++++++++++++-
+ include/dm/ofnode.h   | 10 ++++++++++
+ test/dm/ofnode.c      | 15 +++++++++++++--
+ 3 files changed, 39 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index f49edaba07fd..363b9da27575 100644
+index 363b9da27575..7421f22aae99 100644
 --- a/drivers/core/ofnode.c
 +++ b/drivers/core/ofnode.c
-@@ -491,12 +491,12 @@ u64 ofnode_read_u64_default(ofnode node, const char *propname, u64 def)
+@@ -1621,7 +1621,22 @@ int ofnode_write_u32(ofnode node, const char *propname, u32 value)
+ 		return -ENOMEM;
+ 	*val = cpu_to_fdt32(value);
  
- bool ofnode_read_bool(ofnode node, const char *propname)
- {
--	const void *prop;
-+	bool prop;
- 
- 	assert(ofnode_valid(node));
- 	debug("%s: %s: ", __func__, propname);
- 
--	prop = ofnode_get_property(node, propname, NULL);
-+	prop = ofnode_has_property(node, propname);
- 
- 	debug("%s\n", prop ? "true" : "false");
- 
-@@ -1168,6 +1168,14 @@ const void *ofnode_get_property(ofnode node, const char *propname, int *lenp)
- 				   propname, lenp);
+-	return ofnode_write_prop(node, propname, val, sizeof(value), false);
++	return ofnode_write_prop(node, propname, val, sizeof(value), true);
++}
++
++int ofnode_write_u64(ofnode node, const char *propname, u64 value)
++{
++	fdt64_t *val;
++
++	assert(ofnode_valid(node));
++
++	log_debug("%s = %llx", propname, (unsigned long long)value);
++	val = malloc(sizeof(*val));
++	if (!val)
++		return -ENOMEM;
++	*val = cpu_to_fdt64(value);
++
++	return ofnode_write_prop(node, propname, val, sizeof(value), true);
  }
  
-+bool ofnode_has_property(ofnode node, const char *propname)
-+{
-+	if (ofnode_is_np(node))
-+		return of_find_property(ofnode_to_np(node), propname, NULL);
-+	else
-+		return ofnode_get_property(node, propname, NULL);
-+}
-+
- int ofnode_first_property(ofnode node, struct ofprop *prop)
- {
- 	prop->node = node;
-@@ -1616,6 +1624,30 @@ int ofnode_write_u32(ofnode node, const char *propname, u32 value)
- 	return ofnode_write_prop(node, propname, val, sizeof(value), false);
- }
- 
-+int ofnode_write_bool(ofnode node, const char *propname, bool value)
-+{
-+	if (value)
-+		return ofnode_write_prop(node, propname, NULL, 0, false);
-+	else
-+		return ofnode_delete_prop(node, propname);
-+}
-+
-+int ofnode_delete_prop(ofnode node, const char *propname)
-+{
-+	if (ofnode_is_np(node)) {
-+		struct property *prop;
-+		int len;
-+
-+		prop = of_find_property(ofnode_to_np(node), propname, &len);
-+		if (prop)
-+			return of_remove_property(ofnode_to_np(node), prop);
-+		return 0;
-+	} else {
-+		return fdt_delprop(ofnode_to_fdt(node), ofnode_to_offset(node),
-+				   propname);
-+	}
-+}
-+
- int ofnode_set_enabled(ofnode node, bool value)
- {
- 	assert(ofnode_valid(node));
+ int ofnode_write_bool(ofnode node, const char *propname, bool value)
 diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index b6420efb4605..b366830ff915 100644
+index b366830ff915..c2d3337113c7 100644
 --- a/include/dm/ofnode.h
 +++ b/include/dm/ofnode.h
-@@ -1037,10 +1037,19 @@ int ofnode_decode_panel_timing(ofnode node,
-  * @node: node to read
-  * @propname: property to read
-  * @lenp: place to put length on success
-- * Return: pointer to property, or NULL if not found
-+ * Return: pointer to property value, or NULL if not found or empty
-  */
- const void *ofnode_get_property(ofnode node, const char *propname, int *lenp);
- 
-+/**
-+ * ofnode_has_property() - check if a node has a named property
-+ *
-+ * @node: node to read
-+ * @propname: property to read
-+ * Return: true if the property exists in the node, false if not
-+ */
-+bool ofnode_has_property(ofnode node, const char *propname);
-+
- /**
-  * ofnode_first_property()- get the reference of the first property
-  *
-@@ -1452,6 +1461,27 @@ int ofnode_write_string(ofnode node, const char *propname, const char *value);
+@@ -1461,6 +1461,16 @@ int ofnode_write_string(ofnode node, const char *propname, const char *value);
   */
  int ofnode_write_u32(ofnode node, const char *propname, u32 value);
  
 +/**
-+ * ofnode_write_bool() - Set a boolean property of an ofnode
-+ *
-+ * This either adds or deleted a property with a zero-length value
++ * ofnode_write_u64() - Set an integer property of an ofnode
 + *
 + * @node:	The node for whose string property should be set
 + * @propname:	The name of the string property to set
-+ * @value:	The new value of the boolean property
++ * @value:	The new value of the 64-bit integer property
 + * Return: 0 if successful, -ve on error
 + */
-+int ofnode_write_bool(ofnode node, const char *propname, bool value);
-+
-+/**
-+ * ofnode_delete_prop() - Delete a property
-+ *
-+ * @node:	Node containing the property to delete
-+ * @propname:	Name of property to delete
-+ * Return: 0 if successful, -ve on error
-+ */
-+int ofnode_delete_prop(ofnode node, const char *propname);
++int ofnode_write_u64(ofnode node, const char *propname, u64 value);
 +
  /**
-  * ofnode_set_enabled() - Enable or disable a device tree node given by its
-  *			  ofnode
+  * ofnode_write_bool() - Set a boolean property of an ofnode
+  *
 diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index ceeb8e57791e..9477f791d649 100644
+index 9477f791d649..e078a9755a83 100644
 --- a/test/dm/ofnode.c
 +++ b/test/dm/ofnode.c
-@@ -1480,3 +1480,28 @@ static int dm_test_oftree_to_fdt(struct unit_test_state *uts)
+@@ -1009,7 +1009,8 @@ static int dm_test_ofnode_u32_array(struct unit_test_state *uts)
+ }
+ DM_TEST(dm_test_ofnode_u32_array, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
+ 
+-static int dm_test_ofnode_read_u64(struct unit_test_state *uts)
++/* test ofnode_read_u64() and ofnode_write_u64() */
++static int dm_test_ofnode_u64(struct unit_test_state *uts)
+ {
+ 	ofnode node;
+ 	u64 val;
+@@ -1018,6 +1019,10 @@ static int dm_test_ofnode_read_u64(struct unit_test_state *uts)
+ 	ut_assert(ofnode_valid(node));
+ 	ut_assertok(ofnode_read_u64(node, "int64-value", &val));
+ 	ut_asserteq_64(0x1111222233334444, val);
++	ut_assertok(ofnode_write_u64(node, "new-int64-value", 0x9876543210));
++	ut_assertok(ofnode_read_u64(node, "new-int64-value", &val));
++	ut_asserteq_64(0x9876543210, val);
++
+ 	ut_asserteq(-EINVAL, ofnode_read_u64(node, "missing", &val));
+ 
+ 	ut_assertok(ofnode_read_u64_index(node, "int64-array", 0, &val));
+@@ -1028,9 +1033,15 @@ static int dm_test_ofnode_read_u64(struct unit_test_state *uts)
+ 		    ofnode_read_u64_index(node, "int64-array", 2, &val));
+ 	ut_asserteq(-EINVAL, ofnode_read_u64_index(node, "missing", 0, &val));
+ 
++	ut_assertok(ofnode_write_u64(node, "int64-array", 0x9876543210));
++	ut_assertok(ofnode_read_u64_index(node, "int64-array", 0, &val));
++	ut_asserteq_64(0x9876543210, val);
++	ut_asserteq(-EOVERFLOW,
++		    ofnode_read_u64_index(node, "int64-array", 1, &val));
++
  	return 0;
  }
- DM_TEST(dm_test_oftree_to_fdt, UT_TESTF_SCAN_FDT);
-+
-+/* test ofnode_read_bool() and ofnode_write_bool() */
-+static int dm_test_bool(struct unit_test_state *uts)
-+{
-+	const char *propname = "missing-bool-value";
-+	ofnode node;
-+
-+	node = ofnode_path("/a-test");
-+	ut_assert(ofnode_read_bool(node, "bool-value"));
-+	ut_assert(!ofnode_read_bool(node, propname));
-+	ut_assert(!ofnode_has_property(node, propname));
-+
-+	ut_assertok(ofnode_write_bool(node, propname, true));
-+	ut_assert(ofnode_read_bool(node, propname));
-+	ut_assert(ofnode_has_property(node, propname));
-+	ut_assert(ofnode_read_bool(node, "bool-value"));
-+
-+	ut_assertok(ofnode_write_bool(node, propname, false));
-+	ut_assert(!ofnode_read_bool(node, propname));
-+	ut_assert(!ofnode_has_property(node, propname));
-+	ut_assert(ofnode_read_bool(node, "bool-value"));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_bool, UT_TESTF_SCAN_FDT);
+-DM_TEST(dm_test_ofnode_read_u64, UT_TESTF_SCAN_FDT);
++DM_TEST(dm_test_ofnode_u64, UT_TESTF_SCAN_FDT);
+ 
+ static int dm_test_ofnode_add_subnode(struct unit_test_state *uts)
+ {
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
