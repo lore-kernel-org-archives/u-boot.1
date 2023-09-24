@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75203CE7A88
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 13:51:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 170E6CE7A88
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:26:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 205F586199;
-	Sun, 24 Sep 2023 15:51:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id CDAE486B55;
+	Sun, 24 Sep 2023 21:26:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="i/wm59Gm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fMmqwKeU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72C3E8620C; Sun, 24 Sep 2023 15:51:52 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4130E85423; Sun, 24 Sep 2023 21:26:01 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 472F985DFA
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 15:51:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41A8A86A28
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:25:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1695563503; x=1696168303; i=xypron.glpk@gmx.de;
- bh=/54q33m5j76NmAO4tXvd3TJbfEiA23gmoFO4LHlg+ns=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
- b=i/wm59Gmd8L0Z88zKwuzvwIn+CyH4taKkJVCE++fuRyl0t6IFn4OxCvLvMlCTusk+Cu5p3X7lgv
- g8Guy2NJxHN7FxCzfYIdTNIe2qcGIBsI8kYBybYSaJMwsLS19FhWAJrtz07qmCDuaB6/ROwpigqnt
- xQesdU8dAyjECRS7JxOu1/xaCjWm7Gq2LbTIO+6V7VB/5wV4XROzZcQ+sZxF3vy3wb8PttaoK8IIe
- jJ2LFk07D1Qe2bHaiiFDIzR/31CKwZLKETMirGIq8Z+dwKXFiWyGLobm0DUQkTyuIoKjbnv+ie193
- /r5+Sv0XT9QqOUA3ZGayq9bm1ZoTfslOXdKg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mi2O1-1rFbXq0jOD-00e19b; Sun, 24
- Sep 2023 15:51:43 +0200
-Date: Sun, 24 Sep 2023 15:51:41 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Udit Kumar <u-kumar1@ti.com>, nm@ti.com, vigneshr@ti.com,
- patrick.delaunay@foss.st.com, sjoerd@collabora.com
-CC: u-boot@lists.denx.de, michal.simek@amd.com, Suman Anna <s-anna@ti.com>
-Subject: Re: [PATCH] lmb: remove overlapping region with next range
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20230924111832.3741245-1-u-kumar1@ti.com>
-References: <20230924111832.3741245-1-u-kumar1@ti.com>
-Message-ID: <57F0DE54-C8BF-4B48-9075-2D267DBA4924@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-35133097583so5410475ab.1
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:25:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695583552; x=1696188352; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ssy0jUFvmu5+yh6VvKGTwGLodOO/J3W1in21MxGDhzU=;
+ b=fMmqwKeUmRgKcaB7v1S0Rdrro9fwzy+pdxSz3vuFBcgcw/qupZc9BmOAYk6VJVKahe
+ Y4EbGc7SFU5kPty5dJExELdybzBe8OnqSo0m7MnD5TMYdVx83gDSQiLU53BWkT+rtBQi
+ SgZeS2w84bCmaFPy0cR8jEWLNJG0ny5DNwMYY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695583552; x=1696188352;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ssy0jUFvmu5+yh6VvKGTwGLodOO/J3W1in21MxGDhzU=;
+ b=vKqZXniz8ilZGWLFid8UmCN7+e/FcD8OVRu8WgPv2ORfqDhEQH0almh94aTvUwgg/D
+ ic7ggjIfXkJZOOxrpgU3X9YFPcGX7VbIB2DJpZkj6ItdSc8WsU+ehdei1aiNZLr7SstN
+ KSg6+Vd7zoPJh0oT7k0GUIC3OLTOseQg8yh4QTg2A0X7F7Y2vY4nbDh4JuKXuw6FXhVu
+ /K3mTrcw5Amd8cKVT24jOsyT6SaR4D+JwUDkVY5Ne+CUz8AssgfOgLcQF2N3hlZndau5
+ z6AdpQbdt0xmsxzGvcZ38ZDKlOKZMtGdBE704Vadj+0IKt1rT6dtrrxNAPhYkUZggBfI
+ Q4Fg==
+X-Gm-Message-State: AOJu0YwjPf8WulOZCv7ozQa8XfbiAVze66xahT2bk++hKKwcWOQKFC6W
+ MyCPB/uIfhlJraxL+ZjgHtkZPda4xoW6YxlXFxI=
+X-Google-Smtp-Source: AGHT+IFkRaSPHFdMfetDgxQztDOUdcP3MPN4b6C3Xg/UYFjaalT46qRT3jXTY9lxQrJTOq+HBxkmQw==
+X-Received: by 2002:a05:6e02:1c2a:b0:34d:ee49:5114 with SMTP id
+ m10-20020a056e021c2a00b0034dee495114mr7392871ilh.23.1695583551854; 
+ Sun, 24 Sep 2023 12:25:51 -0700 (PDT)
+Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
+ [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.25.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 24 Sep 2023 12:25:51 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH v3 03/38] spl: Avoid #ifdef with CONFIG_SPL_SYS_MALLOC
+Date: Sun, 24 Sep 2023 13:24:48 -0600
+Message-ID: <20230924192536.1812799-4-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
+In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
+References: <20230924192536.1812799-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:nrm60b+cBsUHGEIttNMQKD9AjgNJIHxS6eKK969ij5TUJ6khZQR
- G7sxsZMyGuODfSsb21hRok/ufzJPkjORRnfZjU6urEvArDYqZB8BVl1YcUNykwGR3EQNHmY
- vDnNtfpxjvjfXhka95dHrRUiV5Cfz7ZWzONNoqTnMP83KoNMrLE1otbQivl52wPXdvCSndM
- rseO5K2k/2WAbBR743rJw==
-UI-OutboundReport: notjunk:1;M01:P0:o330aQxnO/Q=;Olqsn778m1mrAEE8lE1zdrcYXkR
- MSOBG0sW81297fo94kTwSeZfZnZeblV7EkoahoVdCV1riH/8anA7G8jICGbOdU/sWDlMJVqKb
- 2wnpjl4yfJNbM/eTRxk0znt+0JgXh90eKHY2WYj5j9Zgy33AdvZkFAgY4K921Hosn5i/ovSsp
- SNQNfYvEnqREulszDhtv1nXJmw7MBnZ2g8BTb2kcfiFzogc2LVx0NexETLwhXKpcolmwj9mgG
- KZxtT5soLrrRHknDJh/ltLaEKj022QPnhvdes7LCUQYKW0TCWj7HDER25q8+kgT6nW0cULkY4
- I4Iz6JY7DVq/Goqkf4RV5j9iHwVFS8N1HciP8CdPlioEi8+V57CGf6eTNQa9WGe5mC6x0cmcy
- SDYCZZGEIkCPRaaovgccNjkaYHZA/zqNT4vM1jnif0MhQaK2NfysD3JwQRa17bmH8PrpW/1W8
- wpNPfesTDNYudDCe3zKLGg1QgJDM37gTWis/HX0fDaNoY6KqiY/BgQknPkI7OQCP+PUXcLoJp
- X5+EI4+ZpOh/GGWvkO+1pro10G3dQaNX+9zcOqtrVL3gkeI7jac8nOqvSCwONjixSjL/LAHUc
- udCEzWkGbe2EhxWKoqgKbSP3QMRMMg9RcACLE2YfZW5frFeir83qGM89hIOF77urB/PIIGRrg
- INeoldd6VSiOiPm7yRHbcxctLy+TIoKeWXQvehKAA6qPYDOwnYS6hMb4dLcomj2tGh1YFd7L4
- p/19v4xLhuWR596vTL1IdkvEhS0Am4KToUsIkAUnCq8conEQmE+pDAgUKaB3rkP/i0BsPMcSz
- Z+SMmEJbD/ji48ECmHJXEgJt82MqFzdan2F1Zbv5sjAKNZ5Ab+2v3GPu4TIbXiUZwHny6gtq+
- TBiJePcy7XDfHQuhMeY4G+k92SEXbOnqb99rmrRCu345FCTjHwtws9ZynZRazZJHZBvpMFOqg
- xj2kxBEC6G8YcgAH+zYxZ7KxUww=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,124 +91,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Use IF_ENABLED_INT() to avoid needing to use the preprocessor.
 
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Am 24=2E September 2023 13:18:32 MESZ schrieb Udit Kumar <u-kumar1@ti=2Eco=
-m>:
->In case of new memory range to be added is coalesced
->with any already added non last lmb region=2E
->
->And there is possibility that, then region in which new memory
->range added is not adjacent to next region=2E But have some
->sections are overlapping=2E
->
->So along with adjacency check with next lmb region,
->check for overlap should be done=2E
->
->In case overlap  is found, adjust and merge these two lmb
->region into one=2E
->
->Reported-by: Suman Anna <s-anna@ti=2Ecom>
->Signed-off-by: Udit Kumar <u-kumar1@ti=2Ecom>
->---
->logs
->https://gist=2Egithub=2Ecom/uditkumarti/5d08c34442235ad270cfa863792ebcdc
->seqeunce : line 1 to 13
->without fix : line 96-100
->with fix : line 199-202
->
-> lib/lmb=2Ec | 37 +++++++++++++++++++++++++++++++++----
-> 1 file changed, 33 insertions(+), 4 deletions(-)
->
->diff --git a/lib/lmb=2Ec b/lib/lmb=2Ec
->index b2c233edb6=2E=2E2580d01d90 100644
->--- a/lib/lmb=2Ec
->+++ b/lib/lmb=2Ec
->@@ -74,6 +74,16 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys=
-_size_t size1,
-> 	return 0;
-> }
->=20
->+static long lmb_regions_overlap(struct lmb_region *rgn, unsigned long r1=
-,
->+				unsigned long r2)
->+{
->+	phys_addr_t base1 =3D rgn->region[r1]=2Ebase;
->+	phys_size_t size1 =3D rgn->region[r1]=2Esize;
->+	phys_addr_t base2 =3D rgn->region[r2]=2Ebase;
->+	phys_size_t size2 =3D rgn->region[r2]=2Esize;
->+
->+	return lmb_addrs_overlap(base1, size1, base2, size2);
->+}
-> static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r=
-1,
-> 				 unsigned long r2)
-> {
->@@ -81,7 +91,6 @@ static long lmb_regions_adjacent(struct lmb_region *rgn=
-, unsigned long r1,
-> 	phys_size_t size1 =3D rgn->region[r1]=2Esize;
-> 	phys_addr_t base2 =3D rgn->region[r2]=2Ebase;
-> 	phys_size_t size2 =3D rgn->region[r2]=2Esize;
->-
-> 	return lmb_addrs_adjacent(base1, size1, base2, size2);
-> }
->=20
->@@ -105,6 +114,23 @@ static void lmb_coalesce_regions(struct lmb_region *=
-rgn, unsigned long r1,
-> 	lmb_remove_region(rgn, r2);
-> }
->=20
->+/*Assmptuon : base addr of region 1 < base addr of region 2*/
+(no changes since v2)
 
-Assumption
+Changes in v2:
+- Improve readability by moving the size part to the header file
 
-Regards Heinrich
+ common/spl/spl.c           | 8 ++++----
+ include/system-constants.h | 7 ++++++-
+ 2 files changed, 10 insertions(+), 5 deletions(-)
 
->+static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned lo=
-ng r1,
->+				     unsigned long r2)
->+{
->+	phys_addr_t base1 =3D rgn->region[r1]=2Ebase;
->+	phys_size_t size1 =3D rgn->region[r1]=2Esize;
->+	phys_addr_t base2 =3D rgn->region[r2]=2Ebase;
->+	phys_size_t size2 =3D rgn->region[r2]=2Esize;
->+
->+	if (base1 + size1 > base2 + size2) {
->+		printf("This will not be a case any time\n");
->+		return;
->+	}
->+	rgn->region[r1]=2Esize =3D base2 + size2 - base1;
->+	lmb_remove_region(rgn, r2);
->+}
->+
-> void lmb_init(struct lmb *lmb)
-> {
-> #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
->@@ -249,7 +275,6 @@ static long lmb_add_region_flags(struct lmb_region *r=
-gn, phys_addr_t base,
-> 		phys_size_t rgnflags =3D rgn->region[i]=2Eflags;
-> 		phys_addr_t end =3D base + size - 1;
-> 		phys_addr_t rgnend =3D rgnbase + rgnsize - 1;
->-
-> 		if (rgnbase <=3D base && end <=3D rgnend) {
-> 			if (flags =3D=3D rgnflags)
-> 				/* Already have this region, so we're done */
->@@ -278,10 +303,14 @@ static long lmb_add_region_flags(struct lmb_region =
-*rgn, phys_addr_t base,
-> 		}
-> 	}
->=20
->-	if ((i < rgn->cnt - 1) && lmb_regions_adjacent(rgn, i, i + 1)) {
->-		if (rgn->region[i]=2Eflags =3D=3D rgn->region[i + 1]=2Eflags) {
->+	if (i < rgn->cnt - 1 && rgn->region[i]=2Eflags =3D=3D rgn->region[i + 1=
-]=2Eflags)  {
->+		if (lmb_regions_adjacent(rgn, i, i + 1)) {
-> 			lmb_coalesce_regions(rgn, i, i + 1);
-> 			coalesced++;
->+		} else if (lmb_regions_overlap(rgn, i, i + 1)) {
->+			/* fix overlapping area */
->+			lmb_fix_over_lap_regions(rgn, i, i + 1);
->+			coalesced++;
-> 		}
-> 	}
->=20
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 657886dfe5b0..5cc86288145b 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -754,10 +754,10 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 
+ 	spl_set_bd();
+ 
+-#if defined(CONFIG_SPL_SYS_MALLOC)
+-	mem_malloc_init(SPL_SYS_MALLOC_START, CONFIG_SPL_SYS_MALLOC_SIZE);
+-	gd->flags |= GD_FLG_FULL_MALLOC_INIT;
+-#endif
++	if (IS_ENABLED(CONFIG_SPL_SYS_MALLOC)) {
++		mem_malloc_init(SPL_SYS_MALLOC_START, SPL_SYS_MALLOC_SIZE);
++		gd->flags |= GD_FLG_FULL_MALLOC_INIT;
++	}
+ 	if (!(gd->flags & GD_FLG_SPL_INIT)) {
+ 		if (spl_init())
+ 			hang();
+diff --git a/include/system-constants.h b/include/system-constants.h
+index f0a191be590e..dca6a86b01f5 100644
+--- a/include/system-constants.h
++++ b/include/system-constants.h
+@@ -24,9 +24,14 @@
+  */
+ #ifdef CONFIG_SPL_HAS_CUSTOM_MALLOC_START
+ #define SPL_SYS_MALLOC_START		CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR
+-#else
++#elif defined(CONFIG_SPL_BSS_START_ADDR)
+ #define SPL_SYS_MALLOC_START		(CONFIG_SPL_BSS_START_ADDR + \
+ 					 CONFIG_SPL_BSS_MAX_SIZE)
++#else
++/* feature not enabled: this value avoids compiler errors but is not used */
++#define SPL_SYS_MALLOC_START	0
+ #endif
++#define SPL_SYS_MALLOC_SIZE	\
++	IF_ENABLED_INT(CONFIG_SPL_SYS_MALLOC, CONFIG_SPL_SYS_MALLOC_SIZE)
+ 
+ #endif
+-- 
+2.42.0.515.g380fc7ccd1-goog
+
