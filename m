@@ -4,100 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16878CE7A8C
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:32:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9AFCE7A8C
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:32:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C71486A38;
+	by phobos.denx.de (Postfix) with ESMTP id 7982D86BF8;
 	Sun, 24 Sep 2023 21:29:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FzxG7R3H";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FVelEXgv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06DC08692B; Sun, 24 Sep 2023 21:25:53 +0200 (CEST)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id 0690A86ACA; Sun, 24 Sep 2023 21:26:00 +0200 (CEST)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 433E7869A0
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:25:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA3E786AE1
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:25:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-34fcd361e91so16678865ab.3
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:25:48 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-79fa7e33573so108468439f.0
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:25:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695583546; x=1696188346; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=BYG244C2Iv1365hjdqvrRHFax/J7RYQDrcfHLvzgM1I=;
- b=FzxG7R3HC2hGb+gUVv67QdRWZ8CRFaJ7KHShZfyXKVMlGUE6XJ3faewh0qbgPMozvl
- LwQVKerfVXvD8thEUwxjWevQEoUvgzy5ra8bPWqAOMA7z0rt+ke5KG8KTbcu/lYhuLiz
- moWTF1ea8it/04VFqCspfAimeZ+ni3vZYzOcg=
+ d=chromium.org; s=google; t=1695583551; x=1696188351; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=f+TAHwcsi0qX9MZ+NV+vu/GDrrXJHnb/MD+UU5uj634=;
+ b=FVelEXgvxHpv1wCJIbaq3q2EQ8czpKE1Sp0IGpbdI9DKSUlwvZTJTb+zNxTCnnjwra
+ pAiZjb4UvH3fPSebvXks4Ru5zlWuPLAJyRVBsMnfQ0I53kmdmqo0Nn3UnZmPWfc+85Gh
+ gKPDdpeLYhcNOV4aHGlhhKdGYkg+Xwh1TW1BE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695583546; x=1696188346;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BYG244C2Iv1365hjdqvrRHFax/J7RYQDrcfHLvzgM1I=;
- b=Flb+tpe2CUA6JtorDrCUwZ/i4G8FPf9/CpDUF+JKohgw+/LBRlMQ0vP0kQPfGvu/UI
- Cgi2yhW+ftXAR86Wa5iL15C6ITqKv6mTWxFJLhZnYsPPSML3wmgzuHC5VIS0UWxmbM09
- sh3olKLypgjJXbKQqUTUocg4Zt9AGAGDQxIR5fVeeLZybl51L1mCYkBWbjikQweH4qpG
- SKWyrZrAY48riFKXmMMlIxMPOCWf15BfjHI06hBJGE5Cs0JuAvoBRsJqdUtQIEpm320h
- 7Zoh9/BYjHUFhCzXLiZRWi7i5e7iQmOG/S99tLB7o9CsWmZoIWRJdAFmPMe9G47vYpuH
- +lIQ==
-X-Gm-Message-State: AOJu0Yx2Pl5M8h8DxtPJLVIsV6yj0QpROCcNjcQtFgfQtIMz3PzlSkuo
- sOekQB/P0W+rVV0g6rp7+TuIj2J8RKAt2azTpYc=
-X-Google-Smtp-Source: AGHT+IHMs0Uhlwj36gQvGmZm3tcHX331ZZmsa90uIschj82oGWyjEc/vDR0bHb2cPhpZ4mbCvwHuyA==
-X-Received: by 2002:a05:6e02:1a46:b0:351:211c:fec2 with SMTP id
- u6-20020a056e021a4600b00351211cfec2mr7217504ilv.15.1695583546334; 
- Sun, 24 Sep 2023 12:25:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695583551; x=1696188351;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=f+TAHwcsi0qX9MZ+NV+vu/GDrrXJHnb/MD+UU5uj634=;
+ b=wKmrfCJ0B7B1dCI7tpN5QDER0xd7gtQ4wIsqh7aCeYy/nNkO3ME2vpHMvXSOHieXSX
+ /dSQE4QfPxU3xTs+XcPkF9KPPqgCh1Oivb8f+coUczkdJx+JJWY+BP3FInHsDQocKS7i
+ C0hq93fYYcp6hklbWcsEVJj4RwLbOVhboIHSMDntRT1NkRYTPM4GEhHhSd3LAbcvsZ5V
+ vL5RY27ZK+nWds80nFqM7dOweXMnIAJ49LVZrM4cpQeW28SzPjDjLTVBJfbUB1CrCdWP
+ oCZ967Z4GmfHSbuM0rr0kE334BfPbzmAi3mCrMBQgK6WyOkrUfBxv78YefzDcYmLxgEX
+ YdLw==
+X-Gm-Message-State: AOJu0Yy9vk0JXuqiDSq4PLV/OjEF/ToDrZCaBUO3JdReC0u1kO6V5MS7
+ RmJgP6nifSsT5kbNi63ucsmdOEdF6zkIlk59pH8=
+X-Google-Smtp-Source: AGHT+IHgP4VwKP+HOY6mBMDkoowV7OlArxKbMhrO+j+Dh/JfJRWN44lR3DrG/1ETETof1LNHkk8saQ==
+X-Received: by 2002:a6b:6402:0:b0:794:eddf:daae with SMTP id
+ t2-20020a6b6402000000b00794eddfdaaemr5444079iog.12.1695583550969; 
+ Sun, 24 Sep 2023 12:25:50 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.25.44
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.25.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 12:25:45 -0700 (PDT)
+ Sun, 24 Sep 2023 12:25:50 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Glass <sjg@chromium.org>, Adam Ford <aford173@gmail.com>,
- Allen Martin <amartin@nvidia.com>,
- Ariel D'Alessandro <ariel.dalessandro@collabora.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Chee Hong Ang <chee.hong.ang@intel.com>, Chin-Liang See <clsee@altera.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Dinh Nguyen <dinguyen@kernel.org>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Felix Brack <fb@ltec.ch>,
- Green Wan <green.wan@sifive.com>, Heiko Thiery <heiko.thiery@gmail.com>,
- Ian Ray <ian.ray@ge.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jan Kiszka <jan.kiszka@siemens.com>,
- =?UTF-8?q?Javier=20Mart=C3=ADnez=20Canillas?= <javier@dowhile0.org>,
- Jerry Van Baren <vanbaren@cideas.com>,
+ Andre Przywara <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>,
+ Elena Popa <elena.popa@nxp.com>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>,
+ =?UTF-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
  Leo Yu-Chi Liang <ycliang@andestech.com>, Lukasz Majewski <lukma@denx.de>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mike Looijmans <mike.looijmans@topic.nl>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali@kernel.org>,
- Palmer Dabbelt <palmer@dabbelt.com>,
- Parthiban Nallathambi <parthiban@linumiz.com>,
+ Mario Kicherer <dev@kicherer.org>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Michal Simek <michal.simek@amd.com>, Mingkai Hu <mingkai.hu@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Nikhil M Jain <n-jain1@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
- Pavel Herrmann <morpheus.ibis@gmail.com>,
- Philip Oberfichtner <pro@denx.de>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Ramon Fried <rfried.dev@gmail.com>, Shengyu Qu <wiagn233@outlook.com>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tianrui Wei <tianrui-wei@outlook.com>, Tim Harvey <tharvey@gateworks.com>,
- Troy Kisky <troykiskyboundary@gmail.com>,
- Uri Mashiach <uri.mashiach@compulab.co.il>, Wolfgang Denk <wd@denx.de>
-Subject: [PATCH v3 00/38] spl: Preparation for Universal Payload
-Date: Sun, 24 Sep 2023 13:24:45 -0600
-Message-ID: <20230924192536.1812799-1-sjg@chromium.org>
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Qu Wenruo <wqu@suse.com>,
+ Raffaele RECALCATI <raffaele.recalcati@bticino.it>,
+ Roger Quadros <rogerq@kernel.org>,
+ Simone CIANNI <simone.cianni@bticino.it>,
+ Thomas Weber <weber@corscience.de>, Tim Harvey <tharvey@gateworks.com>,
+ Tom McLeod <tom.mcleod@opalkelly.com>,
+ Vikas Manocha <vikas.manocha@st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v3 02/38] spl: Rename SYS_SPL_ARGS_ADDR to
+ SPL_PAYLOAD_ARGS_ADDR
+Date: Sun, 24 Sep 2023 13:24:47 -0600
+Message-ID: <20230924192536.1812799-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
+In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
+References: <20230924192536.1812799-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 24 Sep 2023 21:29:42 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -116,465 +111,618 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series tidies up SPL a little and adds some core ofnode functions
-needed to support Universal Payload. It also includes a few minor fix-ups
-for sandbox.
+Rename this so that SPL is first, as per U-Boot convention. Also add
+PAYLOAD_ since this is where in memory the parameters for the payload
+have been stored.
 
-For SPL the changes include CONFIG naming, removing various #ifdefs and
-tidying up the FIT code.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-One notable piece of the ofnode improvements is support for flattening
-a livetree. This should be useful in future as we move FDT fixups to use
-the ofnode API.
-
-Changes in v3:
-- Mention testing on qemu-ppce500
-- Add new patch to create a proper symbol for enabling the malloc() pool
-- Add new patch to enable CONFIG_SPL_SYS_MALLOC_F where needed
-- Add new patch to nable CONFIG_TPL_SYS_MALLOC_F where needed
-- Add new patch to use SYS_MALLOC_F instead of SYS_MALLOC_F_LEN
-- Add new patch to tidy up uses of CONFIG_SYS_MALLOC_F_LEN
-- Add new patch to clean up SYS_MALLOC_SIMPLE documentation
-- Add new patch to correct help in TPL_DM and VPL_DM
-- Rebase on the new patch
+(no changes since v2)
 
 Changes in v2:
 - Rename based on Tom's feedback
-- Improve readability by moving the size part to the header file
-- Explicitly copy two maintainers as it seems only Mario was auto-cc'd
-- Change the approach to use the header file
-- Use the same condition for both pieces to avoid possible problems
-- No changes as it still seems unclear what should be done
 
-Simon Glass (38):
-  spl: Use CONFIG_SPL... instead of CONFIG_..._SPL_...
-  spl: Rename SYS_SPL_ARGS_ADDR to SPL_PAYLOAD_ARGS_ADDR
-  spl: Avoid #ifdef with CONFIG_SPL_SYS_MALLOC
-  spl: mx6: powerpc: Drop the condition on timer_init()
-  spl: Drop #ifdefs for BOARD_INIT and watchdog
-  spl: Avoid #ifdef with CONFIG_SPL_PAYLOAD_ARGS_ADDR
-  spl: Drop the switch() statement for OS selection
-  spl: Create proper symbols for enabling the malloc() pool
-  spl: Enable CONFIG_SPL_SYS_MALLOC_F where needed
-  tpl: Enable CONFIG_TPL_SYS_MALLOC_F where needed
-  spl: Use SYS_MALLOC_F instead of SYS_MALLOC_F_LEN
-  Tidy up uses of CONFIG_SYS_MALLOC_F_LEN
-  doc: Clean up SYS_MALLOC_SIMPLE
-  dm: core: Correct help in TPL_DM and VPL_DM
-  spl: Avoid an #ifdef when printing gd->malloc_ptr
-  spl: Remove #ifdefs with BOOTSTAGE
-  spl: Rename spl_load_fit_image() to load_simple_fit()
-  spl: Move the full FIT code to spl_fit.c
-  spl: Use the correct FIT_..._PROP constants
-  spl: Move bloblist writing until the image is known
-  dm: core: Reverse the argument order in ofnode_copy_props()
-  dm: core: Ensure we run flattree tests on ofnode
-  dm: core: Tidy up comments in the ofnode tests
-  dm: core: Add a function to create an empty tree
-  dm: core: Add a way to copy a node
-  dm: core: Add a way to delete a node
-  dm: core: Add a way to convert a devicetree to a dtb
-  dm: core: Support writing a boolean
-  dm: core: Support writing a 64-bit value
-  dm: core: Add tests for oftree_path()
-  sandbox: Move reading the RAM buffer into a better place
-  sandbox: Init the EC properly even if no state file is available
-  sandbox: Only read the state if we have a state file
-  sandbox: Move the bloblist down a little in memory
-  bloblist: Support initing from multiple places
-  fdt: Allow the devicetree to come from a bloblist
-  command: Include a required header in command.h
-  pci: serial: Support reading PCI-register size with base
+ arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon |  2 +-
+ common/spl/Kconfig                                  |  2 +-
+ common/spl/spl.c                                    |  8 ++++----
+ common/spl/spl_ext.c                                |  4 ++--
+ common/spl/spl_fat.c                                |  4 ++--
+ common/spl/spl_mmc.c                                |  2 +-
+ common/spl/spl_nand.c                               | 10 +++++-----
+ common/spl/spl_nor.c                                |  8 ++++----
+ common/spl/spl_spi.c                                |  2 +-
+ common/spl/spl_ubi.c                                |  2 +-
+ common/spl/spl_xip.c                                |  2 +-
+ configs/am3517_evm_defconfig                        |  2 +-
+ configs/devkit8000_defconfig                        |  2 +-
+ configs/display5_defconfig                          |  2 +-
+ configs/display5_factory_defconfig                  |  2 +-
+ configs/gwventana_emmc_defconfig                    |  2 +-
+ configs/gwventana_nand_defconfig                    |  2 +-
+ configs/igep00x0_defconfig                          |  2 +-
+ configs/imx28_xea_defconfig                         |  2 +-
+ configs/imx6dl_mamoj_defconfig                      |  2 +-
+ configs/imx6q_logic_defconfig                       |  2 +-
+ configs/imx6qdl_icore_mipi_defconfig                |  2 +-
+ configs/imx6qdl_icore_mmc_defconfig                 |  2 +-
+ configs/imx6qdl_icore_rqs_defconfig                 |  2 +-
+ configs/ls1046ardb_qspi_spl_defconfig               |  2 +-
+ configs/mccmon6_nor_defconfig                       |  2 +-
+ configs/omap35_logic_defconfig                      |  2 +-
+ configs/omap35_logic_somlv_defconfig                |  2 +-
+ configs/omap3_logic_defconfig                       |  2 +-
+ configs/omap3_logic_somlv_defconfig                 |  2 +-
+ configs/riotboard_defconfig                         |  2 +-
+ configs/stm32746g-eval_spl_defconfig                |  2 +-
+ configs/stm32f746-disco_spl_defconfig               |  2 +-
+ configs/stm32f769-disco_spl_defconfig               |  2 +-
+ configs/syzygy_hub_defconfig                        |  2 +-
+ configs/vyasa-rk3288_defconfig                      |  2 +-
+ configs/xilinx_zynq_virt_defconfig                  |  2 +-
+ configs/xilinx_zynqmp_virt_defconfig                |  2 +-
+ doc/develop/falcon.rst                              |  2 +-
+ 39 files changed, 51 insertions(+), 51 deletions(-)
 
- Kconfig                                       |  69 +++--
- Makefile                                      |   2 +-
- README                                        |  18 --
- arch/arm/cpu/armv7/ls102xa/fdt.c              |   2 +-
- .../armv8/fsl-layerscape/doc/README.falcon    |   2 +-
- arch/arm/lib/bdinfo.c                         |   2 +-
- arch/arm/mach-rockchip/rv1126/Kconfig         |   3 +
- arch/arm/mach-snapdragon/Kconfig              |   3 +
- arch/arm/mach-socfpga/Kconfig                 |   3 +
- arch/mips/cpu/start.S                         |   4 +-
- arch/mips/mach-mtmips/mt7621/spl/start.S      |   4 +-
- arch/powerpc/cpu/mpc83xx/start.S              |   2 +-
- arch/powerpc/cpu/mpc85xx/start.S              |   4 +-
- arch/sandbox/cpu/start.c                      |  29 +-
- arch/sandbox/cpu/state.c                      |   2 +
- arch/sandbox/dts/test.dts                     |   6 +-
- arch/sh/lib/start.S                           |   4 +-
- boot/vbe_request.c                            |   2 +-
- boot/vbe_simple_os.c                          |   2 +-
- common/Kconfig                                |   2 +-
- common/Makefile                               |   6 +-
- common/bloblist.c                             |  15 +-
- common/board_f.c                              |   6 +-
- common/board_r.c                              |   2 +-
- common/dlmalloc.c                             |  12 +-
- common/init/board_init.c                      |   4 +-
- common/spl/Kconfig                            |  16 +-
- common/spl/Kconfig.nxp                        |   2 +-
- common/spl/spl.c                              | 226 ++++-----------
- common/spl/spl_ext.c                          |   4 +-
- common/spl/spl_fat.c                          |   4 +-
- common/spl/spl_fit.c                          | 127 +++++++--
- common/spl/spl_mmc.c                          |   2 +-
- common/spl/spl_nand.c                         |  10 +-
- common/spl/spl_nor.c                          |   8 +-
- common/spl/spl_spi.c                          |   2 +-
- common/spl/spl_ubi.c                          |   2 +-
- common/spl/spl_xip.c                          |   2 +-
- configs/am335x_baltos_defconfig               |   4 +-
- configs/am335x_boneblack_vboot_defconfig      |   4 +-
- configs/am335x_evm_defconfig                  |   4 +-
- configs/am335x_evm_spiboot_defconfig          |   4 +-
- configs/am335x_guardian_defconfig             |   4 +-
- configs/am335x_hs_evm_defconfig               |   4 +-
- configs/am335x_hs_evm_uart_defconfig          |   4 +-
- configs/am335x_igep003x_defconfig             |   4 +-
- configs/am335x_pdu001_defconfig               |   4 +-
- configs/am335x_shc_defconfig                  |   4 +-
- configs/am335x_shc_ict_defconfig              |   4 +-
- configs/am335x_shc_netboot_defconfig          |   4 +-
- configs/am335x_shc_sdboot_defconfig           |   4 +-
- configs/am335x_sl50_defconfig                 |   4 +-
- configs/am3517_evm_defconfig                  |   6 +-
- configs/am43xx_evm_defconfig                  |   4 +-
- configs/am43xx_evm_rtconly_defconfig          |   4 +-
- configs/am43xx_evm_usbhost_boot_defconfig     |   4 +-
- configs/am43xx_hs_evm_defconfig               |   4 +-
- configs/am57xx_evm_defconfig                  |   4 +-
- configs/am57xx_hs_evm_defconfig               |   4 +-
- configs/am57xx_hs_evm_usb_defconfig           |   4 +-
- configs/am62ax_evm_r5_defconfig               |   6 +-
- configs/am62x_evm_r5_defconfig                |   8 +-
- configs/am64x_evm_a53_defconfig               |   4 +-
- configs/am64x_evm_r5_defconfig                |   8 +-
- configs/am65x_evm_a53_defconfig               |   4 +-
- configs/am65x_evm_r5_defconfig                |   8 +-
- configs/am65x_evm_r5_usbdfu_defconfig         |   8 +-
- configs/am65x_evm_r5_usbmsc_defconfig         |   8 +-
- configs/am65x_hs_evm_a53_defconfig            |   4 +-
- configs/am65x_hs_evm_r5_defconfig             |   8 +-
- configs/apalis-tk1_defconfig                  |   8 +-
- configs/apalis_imx6_defconfig                 |   2 +-
- configs/apalis_t30_defconfig                  |   8 +-
- configs/axm_defconfig                         |   8 +-
- configs/beaver_defconfig                      |   8 +-
- configs/bitmain_antminer_s9_defconfig         |   4 +-
- configs/brppt1_mmc_defconfig                  |   4 +-
- configs/brppt2_defconfig                      |   2 +-
- configs/brsmarc1_defconfig                    |   4 +-
- configs/brxre1_defconfig                      |   4 +-
- configs/cardhu_defconfig                      |   8 +-
- configs/cei-tk1-som_defconfig                 |   8 +-
- configs/cgtqmx8_defconfig                     |   8 +-
- configs/chiliboard_defconfig                  |   4 +-
- configs/cl-som-imx7_defconfig                 |   2 +-
- configs/cm_fx6_defconfig                      |   2 +-
- configs/cm_t43_defconfig                      |   4 +-
- configs/colibri_imx6_defconfig                |   2 +-
- configs/colibri_t20_defconfig                 |   8 +-
- configs/colibri_t30_defconfig                 |   8 +-
- configs/da850evm_defconfig                    |   8 +-
- configs/da850evm_nand_defconfig               |   8 +-
- configs/dalmore_defconfig                     |   8 +-
- configs/deneb_defconfig                       |   8 +-
- configs/devkit8000_defconfig                  |   8 +-
- configs/dh_imx6_defconfig                     |   2 +-
- configs/display5_defconfig                    |   4 +-
- configs/display5_factory_defconfig            |   4 +-
- configs/dra7xx_evm_defconfig                  |   4 +-
- configs/dra7xx_hs_evm_defconfig               |   4 +-
- configs/dra7xx_hs_evm_usb_defconfig           |   4 +-
- configs/draco_defconfig                       |   6 +-
- configs/endeavoru_defconfig                   |   8 +-
- configs/etamin_defconfig                      |   6 +-
- .../gardena-smart-gateway-at91sam_defconfig   |   4 +-
- configs/ge_b1x5v2_defconfig                   |   2 +-
- configs/giedi_defconfig                       |   8 +-
- configs/grouper_common_defconfig              |   8 +-
- configs/gwventana_emmc_defconfig              |   4 +-
- configs/gwventana_nand_defconfig              |   4 +-
- configs/harmony_defconfig                     |   8 +-
- configs/igep00x0_defconfig                    |   6 +-
- configs/imx28_xea_defconfig                   |   2 +-
- configs/imx6dl_icore_nand_defconfig           |   2 +-
- configs/imx6dl_mamoj_defconfig                |   4 +-
- configs/imx6q_bosch_acc_defconfig             |   2 +-
- configs/imx6q_icore_nand_defconfig            |   2 +-
- configs/imx6q_logic_defconfig                 |   4 +-
- configs/imx6qdl_icore_mipi_defconfig          |   4 +-
- configs/imx6qdl_icore_mmc_defconfig           |   4 +-
- configs/imx6qdl_icore_nand_defconfig          |   2 +-
- configs/imx6qdl_icore_rqs_defconfig           |   4 +-
- configs/imx6ul_geam_mmc_defconfig             |   2 +-
- configs/imx6ul_geam_nand_defconfig            |   2 +-
- configs/imx6ul_isiot_emmc_defconfig           |   2 +-
- configs/imx6ul_isiot_nand_defconfig           |   2 +-
- configs/imx6ulz_smm_m2_defconfig              |   2 +-
- configs/imx7_cm_defconfig                     |   2 +-
- configs/imx8mm-cl-iot-gate-optee_defconfig    |   8 +-
- configs/imx8mm-cl-iot-gate_defconfig          |   8 +-
- configs/imx8mm-icore-mx8mm-ctouch2_defconfig  |   8 +-
- configs/imx8mm-icore-mx8mm-edimm2.2_defconfig |   8 +-
- configs/imx8mm-mx8menlo_defconfig             |   8 +-
- configs/imx8mm_beacon_defconfig               |   8 +-
- configs/imx8mm_beacon_fspi_defconfig          |   8 +-
- configs/imx8mm_data_modul_edm_sbc_defconfig   |   8 +-
- configs/imx8mm_evk_defconfig                  |   8 +-
- configs/imx8mm_evk_fspi_defconfig             |   8 +-
- configs/imx8mm_phg_defconfig                  |   8 +-
- configs/imx8mm_venice_defconfig               |   6 +-
- configs/imx8mn_beacon_2g_defconfig            |   8 +-
- configs/imx8mn_beacon_defconfig               |   8 +-
- configs/imx8mn_beacon_fspi_defconfig          |   8 +-
- configs/imx8mn_bsh_smm_s2_defconfig           |   8 +-
- configs/imx8mn_bsh_smm_s2pro_defconfig        |   8 +-
- configs/imx8mn_ddr4_evk_defconfig             |   8 +-
- configs/imx8mn_evk_defconfig                  |   8 +-
- configs/imx8mn_var_som_defconfig              |   8 +-
- configs/imx8mn_venice_defconfig               |   8 +-
- configs/imx8mp-icore-mx8mp-edimm2.2_defconfig |   8 +-
- configs/imx8mp_beacon_defconfig               |   8 +-
- configs/imx8mp_data_modul_edm_sbc_defconfig   |   8 +-
- configs/imx8mp_dhcom_pdk2_defconfig           |   8 +-
- configs/imx8mp_dhcom_pdk3_defconfig           |   8 +-
- configs/imx8mp_evk_defconfig                  |   8 +-
- configs/imx8mp_rsb3720a1_4G_defconfig         |   8 +-
- configs/imx8mp_rsb3720a1_6G_defconfig         |   8 +-
- configs/imx8mp_venice_defconfig               |   8 +-
- configs/imx8mq_cm_defconfig                   |   8 +-
- configs/imx8mq_evk_defconfig                  |   8 +-
- configs/imx8mq_phanbell_defconfig             |   8 +-
- configs/imx8mq_reform2_defconfig              |   8 +-
- configs/imx8qm_mek_defconfig                  |   8 +-
- configs/imx8qxp_mek_defconfig                 |   8 +-
- configs/imx8ulp_evk_defconfig                 |   8 +-
- configs/imx93_11x11_evk_defconfig             |   8 +-
- configs/imx93_11x11_evk_ld_defconfig          |   8 +-
- configs/iot2050_defconfig                     |   4 +-
- configs/j7200_evm_a72_defconfig               |   4 +-
- configs/j7200_evm_r5_defconfig                |   8 +-
- configs/j721e_evm_a72_defconfig               |   4 +-
- configs/j721e_evm_r5_defconfig                |   8 +-
- configs/j721s2_evm_a72_defconfig              |   4 +-
- configs/j721s2_evm_r5_defconfig               |   8 +-
- configs/jetson-tk1_defconfig                  |   8 +-
- configs/k2e_evm_defconfig                     |   4 +-
- configs/k2g_evm_defconfig                     |   4 +-
- configs/k2hk_evm_defconfig                    |   4 +-
- configs/k2l_evm_defconfig                     |   4 +-
- configs/kontron-sl-mx6ul_defconfig            |   2 +-
- configs/kontron-sl-mx8mm_defconfig            |   8 +-
- configs/kontron_pitx_imx8m_defconfig          |   8 +-
- configs/kontron_sl28_defconfig                |   2 +-
- configs/kp_imx6q_tpc_defconfig                |   2 +-
- configs/librem5_defconfig                     |   8 +-
- configs/liteboard_defconfig                   |   2 +-
- configs/ls1021aiot_sdcard_defconfig           |   6 +-
- configs/ls1021aqds_nand_defconfig             |   6 +-
- configs/ls1021aqds_sdcard_ifc_defconfig       |   6 +-
- configs/ls1021aqds_sdcard_qspi_defconfig      |   6 +-
- configs/ls1021atsn_sdcard_defconfig           |   6 +-
- ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |   6 +-
- configs/ls1021atwr_sdcard_ifc_defconfig       |   6 +-
- configs/ls1021atwr_sdcard_qspi_defconfig      |   6 +-
- configs/ls1043aqds_nand_defconfig             |   6 +-
- configs/ls1043aqds_sdcard_ifc_defconfig       |   2 +-
- configs/ls1043aqds_sdcard_qspi_defconfig      |   2 +-
- configs/ls1043ardb_nand_SECURE_BOOT_defconfig |   6 +-
- configs/ls1043ardb_nand_defconfig             |   6 +-
- .../ls1043ardb_sdcard_SECURE_BOOT_defconfig   |   2 +-
- configs/ls1043ardb_sdcard_defconfig           |   2 +-
- configs/ls1046aqds_nand_defconfig             |   2 +-
- configs/ls1046aqds_sdcard_ifc_defconfig       |   2 +-
- configs/ls1046aqds_sdcard_qspi_defconfig      |   2 +-
- configs/ls1046ardb_emmc_defconfig             |   2 +-
- configs/ls1046ardb_qspi_spl_defconfig         |   4 +-
- .../ls1046ardb_sdcard_SECURE_BOOT_defconfig   |   2 +-
- configs/ls1046ardb_sdcard_defconfig           |   2 +-
- configs/ls1088aqds_sdcard_ifc_defconfig       |   2 +-
- configs/ls1088aqds_sdcard_qspi_defconfig      |   2 +-
- ...1088ardb_sdcard_qspi_SECURE_BOOT_defconfig |   2 +-
- configs/ls1088ardb_sdcard_qspi_defconfig      |   2 +-
- configs/ls2080aqds_nand_defconfig             |   2 +-
- configs/ls2080aqds_sdcard_defconfig           |   2 +-
- configs/ls2080ardb_nand_defconfig             |   2 +-
- configs/mccmon6_nor_defconfig                 |   4 +-
- configs/mccmon6_sd_defconfig                  |   2 +-
- configs/medcom-wide_defconfig                 |   8 +-
- configs/msc_sm2s_imx8mp_defconfig             |   8 +-
- configs/mx6cuboxi_defconfig                   |   2 +-
- configs/mx6memcal_defconfig                   |   2 +-
- configs/mx6sabreauto_defconfig                |   2 +-
- configs/mx6sabresd_defconfig                  |   2 +-
- configs/mx6slevk_spl_defconfig                |   2 +-
- configs/mx6ul_14x14_evk_defconfig             |   2 +-
- configs/mx6ul_9x9_evk_defconfig               |   2 +-
- configs/myir_mys_6ulx_defconfig               |   2 +-
- configs/novena_defconfig                      |   2 +-
- configs/nyan-big_defconfig                    |   8 +-
- configs/omap35_logic_defconfig                |   6 +-
- configs/omap35_logic_somlv_defconfig          |   6 +-
- configs/omap3_beagle_defconfig                |   4 +-
- configs/omap3_evm_defconfig                   |   4 +-
- configs/omap3_logic_defconfig                 |   6 +-
- configs/omap3_logic_somlv_defconfig           |   6 +-
- configs/omap4_panda_defconfig                 |   4 +-
- configs/omap4_sdp4430_defconfig               |   4 +-
- configs/omapl138_lcdk_defconfig               |   8 +-
- configs/openpiton_riscv64_spl_defconfig       |   2 +-
- configs/opos6uldev_defconfig                  |   2 +-
- configs/paz00_defconfig                       |   8 +-
- configs/pcm058_defconfig                      |   2 +-
- configs/phycore-am335x-r2-regor_defconfig     |   4 +-
- configs/phycore-am335x-r2-wega_defconfig      |   4 +-
- configs/phycore-imx8mm_defconfig              |   8 +-
- configs/phycore-imx8mp_defconfig              |   8 +-
- configs/phycore_pcl063_defconfig              |   2 +-
- configs/phycore_pcl063_ull_defconfig          |   2 +-
- configs/pico-dwarf-imx6ul_defconfig           |   2 +-
- configs/pico-dwarf-imx7d_defconfig            |   2 +-
- configs/pico-hobbit-imx6ul_defconfig          |   2 +-
- configs/pico-hobbit-imx7d_defconfig           |   2 +-
- configs/pico-imx6_defconfig                   |   2 +-
- configs/pico-imx6ul_defconfig                 |   2 +-
- configs/pico-imx7d_bl33_defconfig             |   2 +-
- configs/pico-imx7d_defconfig                  |   2 +-
- configs/pico-imx8mq_defconfig                 |   8 +-
- configs/pico-nymph-imx7d_defconfig            |   2 +-
- configs/pico-pi-imx6ul_defconfig              |   2 +-
- configs/pico-pi-imx7d_defconfig               |   2 +-
- configs/plutux_defconfig                      |   8 +-
- configs/pxm2_defconfig                        |   6 +-
- configs/qemu-riscv32_spl_defconfig            |   2 +-
- configs/qemu-riscv64_spl_defconfig            |   2 +-
- configs/rastaban_defconfig                    |   6 +-
- configs/ringneck-px30_defconfig               |   2 +-
- configs/riotboard_defconfig                   |   4 +-
- configs/rut_defconfig                         |   6 +-
- configs/sama5d27_giantboard_defconfig         |   4 +-
- configs/sama5d27_som1_ek_mmc1_defconfig       |   4 +-
- configs/sama5d27_som1_ek_mmc_defconfig        |   4 +-
- configs/sama5d27_som1_ek_qspiflash_defconfig  |   4 +-
- configs/sama5d27_wlsom1_ek_mmc_defconfig      |   4 +-
- .../sama5d27_wlsom1_ek_qspiflash_defconfig    |   4 +-
- configs/sama5d2_icp_mmc_defconfig             |   4 +-
- configs/sama5d2_xplained_emmc_defconfig       |   4 +-
- configs/sama5d2_xplained_mmc_defconfig        |   4 +-
- configs/sama5d2_xplained_qspiflash_defconfig  |   4 +-
- configs/sama5d2_xplained_spiflash_defconfig   |   4 +-
- configs/sama5d3_xplained_mmc_defconfig        |   4 +-
- configs/sama5d3_xplained_nandflash_defconfig  |   4 +-
- configs/sama5d3xek_mmc_defconfig              |   4 +-
- configs/sama5d3xek_nandflash_defconfig        |   4 +-
- configs/sama5d3xek_spiflash_defconfig         |   4 +-
- configs/sama5d4_xplained_mmc_defconfig        |   4 +-
- configs/sama5d4_xplained_nandflash_defconfig  |   4 +-
- configs/sama5d4_xplained_spiflash_defconfig   |   4 +-
- configs/sama5d4ek_mmc_defconfig               |   4 +-
- configs/sama5d4ek_nandflash_defconfig         |   4 +-
- configs/sama5d4ek_spiflash_defconfig          |   4 +-
- configs/seaboard_defconfig                    |   8 +-
- configs/seeed_npi_imx6ull_defconfig           |   2 +-
- configs/sifive_unleashed_defconfig            |   2 +-
- configs/sifive_unmatched_defconfig            |   2 +-
- configs/smartweb_defconfig                    |   4 +-
- configs/sniper_defconfig                      |   6 +-
- configs/socfpga_agilex_atf_defconfig          |   8 +-
- configs/socfpga_agilex_defconfig              |   8 +-
- configs/socfpga_agilex_vab_defconfig          |   8 +-
- configs/socfpga_arria10_defconfig             |   8 +-
- configs/socfpga_chameleonv3_defconfig         |   8 +-
- configs/socfpga_n5x_atf_defconfig             |   8 +-
- configs/socfpga_n5x_defconfig                 |   8 +-
- configs/socfpga_n5x_vab_defconfig             |   8 +-
- configs/socfpga_stratix10_atf_defconfig       |   8 +-
- configs/socfpga_stratix10_defconfig           |   8 +-
- configs/starfive_visionfive2_defconfig        |   8 +-
- configs/stm32746g-eval_spl_defconfig          |   2 +-
- configs/stm32f746-disco_spl_defconfig         |   2 +-
- configs/stm32f769-disco_spl_defconfig         |   2 +-
- ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |   8 +-
- ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |   8 +-
- ...-microgea-stm32mp1-microdev2-of7_defconfig |   8 +-
- ...mp15-microgea-stm32mp1-microdev2_defconfig |   8 +-
- configs/stm32mp15_basic_defconfig             |   8 +-
- configs/stm32mp15_dhcom_basic_defconfig       |   8 +-
- configs/stm32mp15_dhcor_basic_defconfig       |   8 +-
- configs/syzygy_hub_defconfig                  |   6 +-
- configs/taurus_defconfig                      |   8 +-
- configs/tec-ng_defconfig                      |   8 +-
- configs/tec_defconfig                         |   8 +-
- configs/thuban_defconfig                      |   6 +-
- configs/topic_miami_defconfig                 |   4 +-
- configs/topic_miamilite_defconfig             |   4 +-
- configs/topic_miamiplus_defconfig             |   4 +-
- configs/transformer_t30_defconfig             |   8 +-
- configs/trimslice_defconfig                   |   8 +-
- configs/udoo_defconfig                        |   2 +-
- configs/udoo_neo_defconfig                    |   2 +-
- configs/variscite_dart6ul_defconfig           |   2 +-
- configs/venice2_defconfig                     |   8 +-
- configs/ventana_defconfig                     |   8 +-
- configs/verdin-am62_r5_defconfig              |   8 +-
- configs/verdin-imx8mm_defconfig               |   8 +-
- configs/verdin-imx8mp_defconfig               |   8 +-
- configs/vining_2000_defconfig                 |   2 +-
- configs/vyasa-rk3288_defconfig                |   2 +-
- configs/wandboard_defconfig                   |   2 +-
- configs/x3_t30_defconfig                      |   8 +-
- configs/xilinx_zynq_virt_defconfig            |   6 +-
- configs/xilinx_zynqmp_mini_emmc0_defconfig    |   8 +-
- configs/xilinx_zynqmp_mini_emmc1_defconfig    |   8 +-
- configs/xilinx_zynqmp_mini_qspi_defconfig     |   8 +-
- configs/xilinx_zynqmp_virt_defconfig          |  10 +-
- configs/zynq_cse_nand_defconfig               |   8 +-
- configs/zynq_cse_nor_defconfig                |   8 +-
- configs/zynq_cse_qspi_defconfig               |   8 +-
- doc/arch/sandbox/sandbox.rst                  |   4 +-
- doc/develop/devicetree/control.rst            |   3 +
- doc/develop/falcon.rst                        |   2 +-
- doc/usage/cmd/bdinfo.rst                      |   2 +-
- drivers/core/Kconfig                          |  14 +-
- drivers/core/fdtaddr.c                        |   6 +-
- drivers/core/of_access.c                      |  65 +++++
- drivers/core/ofnode.c                         | 183 ++++++++++++-
- drivers/core/read.c                           |   6 +-
- drivers/core/util.c                           |   2 +-
- drivers/misc/cros_ec_sandbox.c                |   9 +-
- drivers/pci/pci-uclass.c                      |   2 +-
- drivers/pci/pci_mvebu.c                       |   3 +-
- drivers/pci/pci_tegra.c                       |   2 +-
- drivers/pci/pcie_mediatek.c                   |   4 +-
- drivers/serial/Kconfig                        |   2 +-
- drivers/serial/ns16550.c                      |  15 +-
- dts/Kconfig                                   |   8 +
- include/asm-generic/global_data.h             |  12 +-
- include/bloblist.h                            |  23 ++
- include/bootstage.h                           |  26 ++
- include/command.h                             |   3 +
- include/configs/socfpga_common.h              |   2 +-
- include/configs/socfpga_soc64_common.h        |   2 +-
- include/dm/fdtaddr.h                          |   3 +-
- include/dm/of_access.h                        |  18 ++
- include/dm/ofnode.h                           | 102 ++++++-
- include/dm/read.h                             |   8 +-
- include/fdtdec.h                              |   3 +-
- include/ns16550.h                             |   4 +-
- include/of_live.h                             |  18 ++
- include/serial.h                              |   2 +
- include/spl.h                                 |  28 +-
- include/system-constants.h                    |  20 +-
- lib/asm-offsets.c                             |   2 +-
- lib/fdtdec.c                                  |  44 ++-
- lib/of_live.c                                 | 141 ++++++++++
- test/dm/ofnode.c                              | 258 ++++++++++++++++--
- test/dm/pci.c                                 |  14 +-
- test/lib/kconfig.c                            |   4 +-
- 387 files changed, 2074 insertions(+), 1204 deletions(-)
-
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon b/arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon
+index b3c6693a42c2..2bbe4e2d1235 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon
++++ b/arch/arm/cpu/armv8/fsl-layerscape/doc/README.falcon
+@@ -30,7 +30,7 @@ to understand the device tree in FIT image should be the one actually used, or
+ leave it absent to favor the stored sectors. It is easier to deploy the FIT
+ image with embedded static device tree to multiple boards.
+ 
+-Macro CONFIG_SYS_SPL_ARGS_ADDR serves two purposes. One is the pointer to load
++Macro CONFIG_SPL_PAYLOAD_ARGS_ADDR serves two purposes. One is the pointer to load
+ the stored sectors to. Normally this is the static device tree. The second
+ purpose is the memory location of signature header for secure boot. After the
+ FIT image is loaded into memory, it is validated against the signature header
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index b9d96fbe1355..463235979427 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -1063,7 +1063,7 @@ config SPL_OS_BOOT
+ 	  Enable booting directly to an OS from SPL.
+ 	  for more info read doc/README.falcon
+ 
+-config SYS_SPL_ARGS_ADDR
++config SPL_PAYLOAD_ARGS_ADDR
+ 	hex "Address in memory to load 'args' file for Falcon Mode to"
+ 	depends on SPL_OS_BOOT
+ 	default 0x88000000 if ARCH_OMAP2PLUS
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 171dfbcf703c..657886dfe5b0 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -818,8 +818,8 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	}
+ 
+ 	memset(&spl_image, '\0', sizeof(spl_image));
+-#ifdef CONFIG_SYS_SPL_ARGS_ADDR
+-	spl_image.arg = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
++#ifdef CONFIG_SPL_PAYLOAD_ARGS_ADDR
++	spl_image.arg = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
+ #endif
+ 	spl_image.boot_device = BOOT_DEVICE_NONE;
+ 	board_boot_order(spl_boot_list);
+@@ -877,8 +877,8 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ #if CONFIG_IS_ENABLED(OS_BOOT)
+ 	case IH_OS_LINUX:
+ 		debug("Jumping to Linux\n");
+-#if defined(CONFIG_SYS_SPL_ARGS_ADDR)
+-		spl_fixup_fdt((void *)CONFIG_SYS_SPL_ARGS_ADDR);
++#if defined(CONFIG_SPL_PAYLOAD_ARGS_ADDR)
++		spl_fixup_fdt((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
+ #endif
+ 		spl_board_prepare_for_linux();
+ 		jump_to_image_linux(&spl_image);
+diff --git a/common/spl/spl_ext.c b/common/spl/spl_ext.c
+index 2bf34344391c..902564a60776 100644
+--- a/common/spl/spl_ext.c
++++ b/common/spl/spl_ext.c
+@@ -97,7 +97,7 @@ int spl_load_image_ext_os(struct spl_image_info *spl_image,
+ 			puts("spl: ext4fs_open failed\n");
+ 			goto defaults;
+ 		}
+-		err = ext4fs_read((void *)CONFIG_SYS_SPL_ARGS_ADDR, 0, filelen, &actlen);
++		err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0, filelen, &actlen);
+ 		if (err < 0) {
+ 			printf("spl: error reading image %s, err - %d, falling back to default\n",
+ 			       file, err);
+@@ -127,7 +127,7 @@ defaults:
+ 	if (err < 0)
+ 		puts("spl: ext4fs_open failed\n");
+ 
+-	err = ext4fs_read((void *)CONFIG_SYS_SPL_ARGS_ADDR, 0, filelen, &actlen);
++	err = ext4fs_read((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0, filelen, &actlen);
+ 	if (err < 0) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 		printf("%s: error reading image %s, err - %d\n",
+diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+index f8a5b80a3bd2..c6e2526ade12 100644
+--- a/common/spl/spl_fat.c
++++ b/common/spl/spl_fat.c
+@@ -128,7 +128,7 @@ int spl_load_image_fat_os(struct spl_image_info *spl_image,
+ #if defined(CONFIG_SPL_ENV_SUPPORT) && defined(CONFIG_SPL_OS_BOOT)
+ 	file = env_get("falcon_args_file");
+ 	if (file) {
+-		err = file_fat_read(file, (void *)CONFIG_SYS_SPL_ARGS_ADDR, 0);
++		err = file_fat_read(file, (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
+ 		if (err <= 0) {
+ 			printf("spl: error reading image %s, err - %d, falling back to default\n",
+ 			       file, err);
+@@ -153,7 +153,7 @@ defaults:
+ #endif
+ 
+ 	err = file_fat_read(CONFIG_SPL_FS_LOAD_ARGS_NAME,
+-			    (void *)CONFIG_SYS_SPL_ARGS_ADDR, 0);
++			    (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR, 0);
+ 	if (err <= 0) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 		printf("%s: error reading image %s, err - %d\n",
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index 20f687e13891..0ab85d2168c1 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -235,7 +235,7 @@ static int mmc_load_image_raw_os(struct spl_image_info *spl_image,
+ 	count = blk_dread(mmc_get_blk_desc(mmc),
+ 		CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR,
+ 		CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS,
+-		(void *) CONFIG_SYS_SPL_ARGS_ADDR);
++		(void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
+ 	if (count != CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTORS) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+ 		puts("mmc_load_image_raw_os: mmc block read error\n");
+diff --git a/common/spl/spl_nand.c b/common/spl/spl_nand.c
+index dc45204fc0e6..6cc34004f49d 100644
+--- a/common/spl/spl_nand.c
++++ b/common/spl/spl_nand.c
+@@ -159,11 +159,11 @@ static int spl_nand_load_image(struct spl_image_info *spl_image,
+ 			CONFIG_CMD_SPL_WRITE_SIZE,
+ 			(void *)CONFIG_TEXT_BASE);
+ 		/* copy to destintion */
+-		for (dst = (int *)CONFIG_SYS_SPL_ARGS_ADDR,
+-				src = (int *)CONFIG_TEXT_BASE;
+-				src < (int *)(CONFIG_TEXT_BASE +
+-				CONFIG_CMD_SPL_WRITE_SIZE);
+-				src++, dst++) {
++		for (dst = (int *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
++		     src = (int *)CONFIG_TEXT_BASE;
++			src < (int *)(CONFIG_TEXT_BASE +
++				      CONFIG_CMD_SPL_WRITE_SIZE);
++		     src++, dst++) {
+ 			writel(readl(src), dst);
+ 		}
+ 
+diff --git a/common/spl/spl_nor.c b/common/spl/spl_nor.c
+index 5b65b96a77db..79d4f1d7aa87 100644
+--- a/common/spl/spl_nor.c
++++ b/common/spl/spl_nor.c
+@@ -54,8 +54,8 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
+ 						  CONFIG_SYS_OS_BASE,
+ 						  (void *)header);
+ 
+-#if defined CONFIG_SYS_SPL_ARGS_ADDR && defined CONFIG_CMD_SPL_NOR_OFS
+-			memcpy((void *)CONFIG_SYS_SPL_ARGS_ADDR,
++#if defined CONFIG_SPL_PAYLOAD_ARGS_ADDR && defined CONFIG_CMD_SPL_NOR_OFS
++			memcpy((void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR,
+ 			       (void *)CONFIG_CMD_SPL_NOR_OFS,
+ 			       CONFIG_CMD_SPL_WRITE_SIZE);
+ #endif
+@@ -74,8 +74,8 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
+ 			       (void *)(CONFIG_SYS_OS_BASE +
+ 					sizeof(struct legacy_img_hdr)),
+ 			       spl_image->size);
+-#ifdef CONFIG_SYS_SPL_ARGS_ADDR
+-			spl_image->arg = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
++#ifdef CONFIG_SPL_PAYLOAD_ARGS_ADDR
++			spl_image->arg = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
+ #endif
+ 
+ 			return 0;
+diff --git a/common/spl/spl_spi.c b/common/spl/spl_spi.c
+index 2aff025f76ee..d69069a75bfe 100644
+--- a/common/spl/spl_spi.c
++++ b/common/spl/spl_spi.c
+@@ -47,7 +47,7 @@ static int spi_load_image_os(struct spl_image_info *spl_image,
+ 	/* Read device tree. */
+ 	spi_flash_read(flash, CFG_SYS_SPI_ARGS_OFFS,
+ 		       CFG_SYS_SPI_ARGS_SIZE,
+-		       (void *)CONFIG_SYS_SPL_ARGS_ADDR);
++		       (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR);
+ 
+ 	return 0;
+ }
+diff --git a/common/spl/spl_ubi.c b/common/spl/spl_ubi.c
+index bcac25cd021c..d7ab9efd1108 100644
+--- a/common/spl/spl_ubi.c
++++ b/common/spl/spl_ubi.c
+@@ -50,7 +50,7 @@ int spl_ubi_load_image(struct spl_image_info *spl_image,
+ 		volumes[0].vol_id = CONFIG_SPL_UBI_LOAD_KERNEL_ID;
+ 		volumes[0].load_addr = (void *)CONFIG_SYS_LOAD_ADDR;
+ 		volumes[1].vol_id = CONFIG_SPL_UBI_LOAD_ARGS_ID;
+-		volumes[1].load_addr = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
++		volumes[1].load_addr = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
+ 
+ 		ret = ubispl_load_volumes(&info, volumes, 2);
+ 		if (!ret) {
+diff --git a/common/spl/spl_xip.c b/common/spl/spl_xip.c
+index 77c23ba05978..959915ffa610 100644
+--- a/common/spl/spl_xip.c
++++ b/common/spl/spl_xip.c
+@@ -14,7 +14,7 @@ static int spl_xip(struct spl_image_info *spl_image,
+ {
+ #if CONFIG_IS_ENABLED(OS_BOOT)
+ 	if (!spl_start_uboot()) {
+-		spl_image->arg = (void *)CONFIG_SYS_SPL_ARGS_ADDR;
++		spl_image->arg = (void *)CONFIG_SPL_PAYLOAD_ARGS_ADDR;
+ 		spl_image->name = "Linux";
+ 		spl_image->os = IH_OS_LINUX;
+ 		spl_image->load_addr = CONFIG_SYS_LOAD_ADDR;
+diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconfig
+index dda235492784..7b449c703b6c 100644
+--- a/configs/am3517_evm_defconfig
++++ b/configs/am3517_evm_defconfig
+@@ -33,7 +33,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x2a0000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/devkit8000_defconfig b/configs/devkit8000_defconfig
+index 1431e54dc95e..ef16da176a91 100644
+--- a/configs/devkit8000_defconfig
++++ b/configs/devkit8000_defconfig
+@@ -28,7 +28,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x80000100
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x80000100
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x500
+diff --git a/configs/display5_defconfig b/configs/display5_defconfig
+index 9c4334af15c5..00b6f692e3d9 100644
+--- a/configs/display5_defconfig
++++ b/configs/display5_defconfig
+@@ -46,7 +46,7 @@ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_SAVEENV=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x100
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x3F00
+diff --git a/configs/display5_factory_defconfig b/configs/display5_factory_defconfig
+index 7622035a588a..6e6143cb2e0f 100644
+--- a/configs/display5_factory_defconfig
++++ b/configs/display5_factory_defconfig
+@@ -41,7 +41,7 @@ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_DMA=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x100
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x3F00
+diff --git a/configs/gwventana_emmc_defconfig b/configs/gwventana_emmc_defconfig
+index 021c87a9ce18..300eb3cc75a4 100644
+--- a/configs/gwventana_emmc_defconfig
++++ b/configs/gwventana_emmc_defconfig
+@@ -50,7 +50,7 @@ CONFIG_SPL_FIT_IMAGE_TINY=y
+ CONFIG_SPL_DMA=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/gwventana_nand_defconfig b/configs/gwventana_nand_defconfig
+index 28893d843851..83aa1ae2cb83 100644
+--- a/configs/gwventana_nand_defconfig
++++ b/configs/gwventana_nand_defconfig
+@@ -51,7 +51,7 @@ CONFIG_SPL_DMA=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_NAND_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x1200000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+diff --git a/configs/igep00x0_defconfig b/configs/igep00x0_defconfig
+index a6dce15c3a08..993bbe29c6b8 100644
+--- a/configs/igep00x0_defconfig
++++ b/configs/igep00x0_defconfig
+@@ -43,7 +43,7 @@ CONFIG_SPL_UBI_LOAD_KERNEL_ID=3
+ CONFIG_SPL_UBI_LOAD_ARGS_ID=4
+ CONFIG_SPL_ONENAND_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
+index cef7352ad88f..c1b0487f7ea7 100644
+--- a/configs/imx28_xea_defconfig
++++ b/configs/imx28_xea_defconfig
+@@ -51,7 +51,7 @@ CONFIG_SPL_DMA=y
+ CONFIG_SPL_MMC_TINY=y
+ CONFIG_SPL_DM_SPI_FLASH=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x44000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x44000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x800
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x400
+diff --git a/configs/imx6dl_mamoj_defconfig b/configs/imx6dl_mamoj_defconfig
+index 933a9d83f344..35ded27c8355 100644
+--- a/configs/imx6dl_mamoj_defconfig
++++ b/configs/imx6dl_mamoj_defconfig
+@@ -20,7 +20,7 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=3
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x13000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x13000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/imx6q_logic_defconfig b/configs/imx6q_logic_defconfig
+index b307fea5f25c..71d6bf0e114c 100644
+--- a/configs/imx6q_logic_defconfig
++++ b/configs/imx6q_logic_defconfig
+@@ -36,7 +36,7 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot-dtb.img"
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_NAND_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x500000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+diff --git a/configs/imx6qdl_icore_mipi_defconfig b/configs/imx6qdl_icore_mipi_defconfig
+index ecb8fb2ba57b..59c3da32dce4 100644
+--- a/configs/imx6qdl_icore_mipi_defconfig
++++ b/configs/imx6qdl_icore_mipi_defconfig
+@@ -36,7 +36,7 @@ CONFIG_BOOTCOMMAND="run $modeboot"
+ CONFIG_SPL_RAW_IMAGE_SUPPORT=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/imx6qdl_icore_mmc_defconfig b/configs/imx6qdl_icore_mmc_defconfig
+index 42889188cc30..836b3d1814d1 100644
+--- a/configs/imx6qdl_icore_mmc_defconfig
++++ b/configs/imx6qdl_icore_mmc_defconfig
+@@ -39,7 +39,7 @@ CONFIG_BOOTCOMMAND="run $modeboot"
+ CONFIG_SPL_RAW_IMAGE_SUPPORT=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/imx6qdl_icore_rqs_defconfig b/configs/imx6qdl_icore_rqs_defconfig
+index 2ab42979fa60..aa44cdc52d9e 100644
+--- a/configs/imx6qdl_icore_rqs_defconfig
++++ b/configs/imx6qdl_icore_rqs_defconfig
+@@ -33,7 +33,7 @@ CONFIG_BOOTCOMMAND="run $modeboot"
+ CONFIG_SPL_RAW_IMAGE_SUPPORT=y
+ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1000
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x800
+diff --git a/configs/ls1046ardb_qspi_spl_defconfig b/configs/ls1046ardb_qspi_spl_defconfig
+index 78f1185ec68b..84bd1b1d0f49 100644
+--- a/configs/ls1046ardb_qspi_spl_defconfig
++++ b/configs/ls1046ardb_qspi_spl_defconfig
+@@ -61,7 +61,7 @@ CONFIG_SPL_I2C=y
+ CONFIG_SPL_MPC8XXX_INIT_DDR=y
+ CONFIG_SPL_NOR_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x90000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x90000000
+ CONFIG_SYS_OS_BASE=0x40980000
+ CONFIG_SPL_WATCHDOG=y
+ CONFIG_SPL_TARGET="spl/u-boot-spl.pbl"
+diff --git a/configs/mccmon6_nor_defconfig b/configs/mccmon6_nor_defconfig
+index 88a72b392993..5e8fbd01bf9e 100644
+--- a/configs/mccmon6_nor_defconfig
++++ b/configs/mccmon6_nor_defconfig
+@@ -29,7 +29,7 @@ CONFIG_SPL_FIT_IMAGE_TINY=y
+ CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_NOR_SUPPORT=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x18000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x18000000
+ CONFIG_SYS_OS_BASE=0x8180000
+ CONFIG_SYS_MAXARGS=32
+ CONFIG_SYS_PBSIZE=532
+diff --git a/configs/omap35_logic_defconfig b/configs/omap35_logic_defconfig
+index 3534753dd3e1..990f05c72e50 100644
+--- a/configs/omap35_logic_defconfig
++++ b/configs/omap35_logic_defconfig
+@@ -37,7 +37,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/omap35_logic_somlv_defconfig b/configs/omap35_logic_somlv_defconfig
+index a88fd5550287..bf139e7fde4e 100644
+--- a/configs/omap35_logic_somlv_defconfig
++++ b/configs/omap35_logic_somlv_defconfig
+@@ -38,7 +38,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/omap3_logic_defconfig b/configs/omap3_logic_defconfig
+index e747a0c1e932..48a87722d5ea 100644
+--- a/configs/omap3_logic_defconfig
++++ b/configs/omap3_logic_defconfig
+@@ -36,7 +36,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/omap3_logic_somlv_defconfig b/configs/omap3_logic_somlv_defconfig
+index aaac431615ce..12bfe5b1c1da 100644
+--- a/configs/omap3_logic_somlv_defconfig
++++ b/configs/omap3_logic_somlv_defconfig
+@@ -38,7 +38,7 @@ CONFIG_SPL_NAND_ECC=y
+ CONFIG_SPL_NAND_SIMPLE=y
+ CONFIG_SPL_NAND_BASE=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x84000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x84000000
+ CONFIG_SYS_NAND_SPL_KERNEL_OFFS=0x280000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x1700
+diff --git a/configs/riotboard_defconfig b/configs/riotboard_defconfig
+index f8bc8c639692..6ab405d7f98d 100644
+--- a/configs/riotboard_defconfig
++++ b/configs/riotboard_defconfig
+@@ -35,7 +35,7 @@ CONFIG_SPL_FS_EXT4=y
+ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot-dtb.img"
+ CONFIG_SPL_FS_LOAD_ARGS_NAME="imx6dl-riotboard.dtb"
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x13000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x13000000
+ CONFIG_SYS_MAXARGS=32
+ CONFIG_SYS_PBSIZE=532
+ CONFIG_CMD_GPIO=y
+diff --git a/configs/stm32746g-eval_spl_defconfig b/configs/stm32746g-eval_spl_defconfig
+index 03e123e44a2e..8b60365cc24e 100644
+--- a/configs/stm32746g-eval_spl_defconfig
++++ b/configs/stm32746g-eval_spl_defconfig
+@@ -37,7 +37,7 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_MTD_SUPPORT=y
+ CONFIG_SPL_XIP_SUPPORT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x80c0000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x80c0000
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_CMD_GPT=y
+diff --git a/configs/stm32f746-disco_spl_defconfig b/configs/stm32f746-disco_spl_defconfig
+index 84aaec1e3390..0a3042b3279a 100644
+--- a/configs/stm32f746-disco_spl_defconfig
++++ b/configs/stm32f746-disco_spl_defconfig
+@@ -37,7 +37,7 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_MTD_SUPPORT=y
+ CONFIG_SPL_XIP_SUPPORT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x80c0000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x80c0000
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_CMD_GPT=y
+diff --git a/configs/stm32f769-disco_spl_defconfig b/configs/stm32f769-disco_spl_defconfig
+index dd17cad73622..f570cbbe73aa 100644
+--- a/configs/stm32f769-disco_spl_defconfig
++++ b/configs/stm32f769-disco_spl_defconfig
+@@ -36,7 +36,7 @@ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_MTD_SUPPORT=y
+ CONFIG_SPL_XIP_SUPPORT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x81c0000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x81c0000
+ CONFIG_SPL_DM_RESET=y
+ CONFIG_SYS_PBSIZE=1050
+ CONFIG_CMD_GPT=y
+diff --git a/configs/syzygy_hub_defconfig b/configs/syzygy_hub_defconfig
+index 7bcb3191000e..78cbaa7a0b83 100644
+--- a/configs/syzygy_hub_defconfig
++++ b/configs/syzygy_hub_defconfig
+@@ -32,7 +32,7 @@ CONFIG_SPL_SYS_MALLOC=y
+ CONFIG_SPL_SYS_MALLOC_SIZE=0x2000000
+ CONFIG_SPL_FS_LOAD_ARGS_NAME="system.dtb"
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x10000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x10000000
+ CONFIG_SYS_MAXARGS=32
+ CONFIG_SYS_PBSIZE=2071
+ CONFIG_SYS_BOOTM_LEN=0x3c00000
+diff --git a/configs/vyasa-rk3288_defconfig b/configs/vyasa-rk3288_defconfig
+index 9bca6fe2eeaa..0ae901a72391 100644
+--- a/configs/vyasa-rk3288_defconfig
++++ b/configs/vyasa-rk3288_defconfig
+@@ -32,7 +32,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
+ CONFIG_SPL_STACK_R=y
+ CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x2000
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0xffe5000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0xffe5000
+ CONFIG_SPL_FALCON_BOOT_MMCSD=y
+ CONFIG_SYS_MMCSD_RAW_MODE_KERNEL_SECTOR=0x8800
+ CONFIG_SYS_MMCSD_RAW_MODE_ARGS_SECTOR=0x8000
+diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
+index 16c127b7400b..817fb4142d18 100644
+--- a/configs/xilinx_zynq_virt_defconfig
++++ b/configs/xilinx_zynq_virt_defconfig
+@@ -43,7 +43,7 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+ CONFIG_SPL_FS_LOAD_ARGS_NAME="system.dtb"
+ CONFIG_SPL_FPGA=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x10000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x10000000
+ CONFIG_SPL_SPI_LOAD=y
+ CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
+ CONFIG_SYS_MAXARGS=32
+diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
+index 51e0d254f4ac..b284494092ac 100644
+--- a/configs/xilinx_zynqmp_virt_defconfig
++++ b/configs/xilinx_zynqmp_virt_defconfig
+@@ -43,7 +43,7 @@ CONFIG_SPL_FS_LOAD_KERNEL_NAME="atf-uboot.ub"
+ CONFIG_SPL_FS_LOAD_ARGS_NAME="u-boot.bin"
+ CONFIG_SPL_FPGA=y
+ CONFIG_SPL_OS_BOOT=y
+-CONFIG_SYS_SPL_ARGS_ADDR=0x8000000
++CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x8000000
+ CONFIG_SPL_RAM_SUPPORT=y
+ CONFIG_SPL_RAM_DEVICE=y
+ CONFIG_SPL_SPI_LOAD=y
+diff --git a/doc/develop/falcon.rst b/doc/develop/falcon.rst
+index a569d1a29517..2f25fc8532f5 100644
+--- a/doc/develop/falcon.rst
++++ b/doc/develop/falcon.rst
+@@ -63,7 +63,7 @@ CONFIG_CMD_SPL
+     Enable the "spl export" command.
+     The command "spl export" is then available in U-Boot mode.
+ 
+-CONFIG_SYS_SPL_ARGS_ADDR
++CONFIG_SPL_PAYLOAD_ARGS_ADDR
+     Address in RAM where the parameters must be copied by SPL.
+     In most cases, it is <start_of_ram> + 0x100.
+ 
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
