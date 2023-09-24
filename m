@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08554CE7A91
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 23:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3444CE7A8B
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 23:38:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D919F86C5D;
-	Mon, 25 Sep 2023 01:27:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C66886A7D;
+	Mon, 25 Sep 2023 01:38:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lOeFmEvd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N3HvGRSG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C724186C2C; Mon, 25 Sep 2023 01:27:05 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 1EB5086A7D; Mon, 25 Sep 2023 01:38:24 +0200 (CEST)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9E1D86A63
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 01:27:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F03098642A
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 01:38:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-59e88a28b98so79379907b3.1
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 16:27:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-277191ba647so766554a91.1
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 16:38:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695598022; x=1696202822; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TknaoYgouHCQEv+KfujJYjrCF5n7UUeHwfKd1f+mMW0=;
- b=lOeFmEvdRAD3AQTByxeJf/mhp0+gzs9XLPCMVD1IvSmEsMVOOmaE4VImpSJLyYGkwz
- 1IQKABotDFCz5+U/Bl0w80K4kxskEY1nCue1AWrWEAqZ4OdYqi6+U3KyUsIVJVqSxnh3
- 6SkgqO0j9u5XTyO8daKzZ5Fha6uYuPZiKZVKw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695598022; x=1696202822;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1695598700; x=1696203500; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TknaoYgouHCQEv+KfujJYjrCF5n7UUeHwfKd1f+mMW0=;
- b=QN6xNABUy7f+gQp0x35kh8rKNqv9aIcnYHNUB3d/skXNyaMTkESdLQN54uyB3K/REq
- jZ18LATI8SyidlHjmSx4WnROcU8LQKIWJ2G0/eR5XkxUoUb/xjHhxsYljCRXcB4JQSEc
- LU+v5te3lGe1gTyT5FWMXn7vgv8M7saCvkLkZAddSQE/OwxdE0r/9FijZSzHTWywBa0z
- tAHs+JkhQ2EUt4BrdAknFqbb6sj8bo3aEOW9ioR4yIlFoedfKG8wBKpaBlkqBZWNug6c
- +CavGNOt086XXLwB0e/FavCn5oloqsm2ACMCO+dcB0Joo9Juf48GnWA959myjMwobzfA
- WeAA==
-X-Gm-Message-State: AOJu0YwKAl2UDGZ9rfGaPZp9c0RZ8P25qxeiyAtog1tGbsdS6Vt/26H5
- qTo5LiAR6VgTBK6vOPnSKYs04T6umpJwenMb+ho1/A==
-X-Google-Smtp-Source: AGHT+IFxHqLn3G502xdW+feoG0rVmBXV4QJdKO8QUltIhqSS3nxV4EtG0VDY50rVaw3xlMiHiX+1Ug==
-X-Received: by 2002:a0d:df86:0:b0:589:f9c3:8b2e with SMTP id
- i128-20020a0ddf86000000b00589f9c38b2emr3381679ywe.20.1695598022501; 
- Sun, 24 Sep 2023 16:27:02 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
- [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
- by smtp.gmail.com with ESMTPSA id
- n185-20020a8172c2000000b0059c01bcc363sm2121992ywc.49.2023.09.24.16.27.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 16:27:00 -0700 (PDT)
-Date: Sun, 24 Sep 2023 19:26:58 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Fabio Estevam <festevam@gmail.com>, Leo <ycliang@andestech.com>,
- Michael Walle <michael@walle.cc>, Michal Suchanek <msuchanek@suse.de>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Rick Chen <rick@andestech.com>,
- Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 05/25] treewide: Correct use of long help
-Message-ID: <20230924232658.GM305624@bill-the-cat>
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-6-sjg@chromium.org>
+ bh=OeL4IVmaurnpH7Vxuxn3tiOn/Zw6p3FYUYWVd1lswEQ=;
+ b=N3HvGRSGWQbnO7IwF0dB+lseAac7LAs4faIrR4hI3grgTZaWWKa4JU0OykZB3OFAkr
+ Sa9ktUMroYOLG9PzD9ncRMGsEhectdZca4g15OZfRyqm4eqz05cMIfiVKFdpzdRWmYQc
+ xKXK7f3coLRJjeLVV0NPMwgTR5hhFkDDk0Rl39jdjxTxA10ayAcidhKW1bAfszpst/JC
+ JRz5hPWZw0Ci+v+cko4KggzYUu8oSUfPgfHr+UQlOKDzQkrsLrzlS+8G4sphjy63/iWe
+ R9AVeyu33k9xEkqL0XWz/sktbDeN8aNqgs3yh7LYB2V9j9skuwtAnoUUkUPhka5E73yk
+ aARw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695598700; x=1696203500;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OeL4IVmaurnpH7Vxuxn3tiOn/Zw6p3FYUYWVd1lswEQ=;
+ b=oz0cEMwoUfzSHHA0bZzmpqrgERLvEjWWdKoLCkrFzH96pAap9wNZql3rChdpXLLrs6
+ sxS/YOzDG6nC9QrfdjqwTaYRsrWzwZe7FeSXQ/Y2pOjuNVRUEF2jhK6aAyfnST12hoFk
+ GBdgadVets/lAlpospwFqN4fika5chNSjXJzfXzcpNkcV1r3A0HOz8LDqeg2K9L8WWl/
+ nPWDj+aApTm4ntffLvHPdv6IwgFCnNwwiX4r3E/Gh5rVDTYbJnSNuKDWksNIotlQ656w
+ 94531GbXQUMFwXdu1UtpTp9sV/2XsNRtzxGp48Z7WAjFRBzQY9YOePsb9D9eZENa/dNH
+ bwyQ==
+X-Gm-Message-State: AOJu0YxBEawSM4NOVK4d4ULuOdPcaw+VI6LmITIbSr+a5yTZBBgYi5s0
+ NG28JLt8fL0O1hci23kWO5LGO4neqT0b5RvarYPAdv7Lk+M=
+X-Google-Smtp-Source: AGHT+IFlgfeC+VIx27gTPT4TFpqZaNe+8yysMHOsM4RKgjvUBllUtj1tmiAhmAyZIQ6CZEMmm7IHFaF0dJzUWNzClTk=
+X-Received: by 2002:a17:90a:3d84:b0:26b:27f6:9027 with SMTP id
+ i4-20020a17090a3d8400b0026b27f69027mr4616554pjc.1.1695598699786; Sun, 24 Sep
+ 2023 16:38:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fi7JdFpR8IKyXWTs"
-Content-Disposition: inline
-In-Reply-To: <20230924203953.1829820-6-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
+ <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
+ <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
+ <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
+ <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
+ <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
+ <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
+ <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
+ <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
+ <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
+ <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
+ <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
+ <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
+In-Reply-To: <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 24 Sep 2023 20:38:05 -0300
+Message-ID: <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
+Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
+To: Rogan Dawes <rogan@dawes.za.net>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,64 +98,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rogan,
 
---fi7JdFpR8IKyXWTs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Sun, Sep 24, 2023 at 5:16=E2=80=AFPM Rogan Dawes <rogan@dawes.za.net> wr=
+ote:
+>
+> Hi folks,
+>
+> I eventually decided that I did need to figure out the DRAM timings for t=
+he Micron chip on my board, but I found an easier way than actually "unders=
+tanding what I'm doing"! :-)
+>
+> I pulled the vendor U-Boot image off the flash, skipped the appropriate n=
+umber of bytes until I was actually dealing with a u-boot.sb formatted imag=
+e (looking for the STMP signature I found in the compiled mainline u-boot),=
+ then used the Rockbox project's sbtoelf tool to convert the SB back to two=
+ ELF files, the SPL.elf and the u-boot.elf. From there I loaded the SPL.elf=
+ into ghidra, then went looking for byte sequences found in arch/arm/cpu/ar=
+m926ejs/mxs/spl_mem_init.c to see if I could locate them in the vendor blob=
+. I did, right at the end of the binary, then converted bytes into uint32 s=
+equences so that I could compare with the mxs_dram_vals for CONFIG_MX28.
+>
+> Did the compare and found a single bit that is different between the two =
+sequences of initialisation values. Literally a 1 to a 0, and that is all. =
+So I built mainline with that change, and an updated iomux_setup because th=
+e Wink Hub v1 uses MX28_PAD_I2C0_SCL__DUART_RX and MX28_PAD_I2C0_SDA__DUART=
+_TX for its console pins. i was hoping to see it boot via mxsldr, but unfor=
+tunately, I got nothing.
 
-On Sun, Sep 24, 2023 at 02:39:23PM -0600, Simon Glass wrote:
-> Some commands assume that CONFIG_SYS_LONGHELP is always defined.
-> Declaration of long help should be bracketed by an #ifdef to avoid an
-> 'unused variable' warning.
->=20
-> Fix this treewide.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-[snip]
-> diff --git a/arch/arm/mach-imx/cmd_dek.c b/arch/arm/mach-imx/cmd_dek.c
-> index 6fa5b41fcd38..25ea7d3b37da 100644
-> --- a/arch/arm/mach-imx/cmd_dek.c
-> +++ b/arch/arm/mach-imx/cmd_dek.c
-> @@ -393,11 +393,12 @@ static int do_dek_blob(struct cmd_tbl *cmdtp, int f=
-lag, int argc,
->  	return blob_encap_dek(src_addr, dst_addr, len);
->  }
-> =20
-> -/***************************************************/
-> +#if IS_ENABLED(CONFIG_SYS_LONGHELP)
->  static char dek_blob_help_text[] =3D
->  	"src dst len            - Encapsulate and create blob of data\n"
->  	"                         $len bits long at address $src and\n"
->  	"                         store the result at address $dst.\n";
-> +#endif
-> =20
->  U_BOOT_CMD(
->  	dek_blob, 4, 1, do_dek_blob,
+Ideally, you should create a new imx28-wink_defconfig.
 
-This really doesn't read nicely.  I would rather (globally and fix
-existing users) __maybe_unused this instead.  I think there's just one
-example today that isn't "foo_help_text".
+For a quick test, besides changing iomux_setup, please make sure that
+arch/arm/dts/imx28-evk.dts also has the duart pins changed.
 
---=20
-Tom
+> How can I get the SPL to emit something on the console to confirm it is r=
+unning? i.e. before the DRAM initialisation?
 
---fi7JdFpR8IKyXWTs
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUQxboACgkQFHw5/5Y0
-tywk7QwAshUBGIrDpRCBKN6vKDzJ1EzZkEZlJS1B702ViUn8nq8bTW9BZUaC6h1Y
-zRXHi4IRRy0zPpUW1lO/3oonc+yyBV32spYIRv685JgRrgMn07cNC+C8qw2+OJtl
-XXaBFsfbBOQ0CbEgonFNcMi/CbuoZMq7CTok0HtYpqUTpoe/tCJwVaXwlFZQ8IqZ
-sG/Eum+HpF3XMrkTaqtSIE+c94aLiIe4+r/8BUXQukgkO65HCiZtw1zWOIGs97Vl
-eTh0Y7pVePMMEQGu1ibO6mC0t1P9winiGYpx0AAysrKN9RnnDf/LuJ5yjKGWFVpj
-3dk/OxpmR2RluZ9UNj70Y30JUqOTL3NUgP6QZ6pmW7HAiAlrd4q5oaTq96fBf6vY
-10bgEMoxOtRPpLaHwK/RrAJrbwgyArmu3w/strZ77CtDmHSLCfoJA9fOHoP9rzC4
-ZMj9gGzGkmwJ0ExvBcpdKph3VEY2a1qk/203XifwnUl809/OerroSc0coa4xYC+y
-l7hQ+me4
-=sRIo
------END PGP SIGNATURE-----
-
---fi7JdFpR8IKyXWTs--
+SPL runs from the internal RAM, and should print something to the
+console prior to the DRAM init.
