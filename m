@@ -4,55 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22EB9CE7A8A
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 21:23:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 135D5CE7A8B
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 22:59:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FDE98694A;
-	Sun, 24 Sep 2023 23:23:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id B4CB282BBF;
+	Mon, 25 Sep 2023 00:59:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="V96A79X7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E/0jsvr6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F1548694A; Sun, 24 Sep 2023 23:23:10 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 717C286AFB; Mon, 25 Sep 2023 00:59:43 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 255E681FA8
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 23:23:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 61E1881420
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 00:59:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
- [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8B5A73F941; 
- Sun, 24 Sep 2023 21:23:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1695590587;
- bh=5+VYFmS7G3av5WpDbiRkELDo1ZPbnQ9sLuGwjBPQbs8=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=V96A79X76Xiypp4W3i6YPr5kfFnWCFn+KNmrOLgLA1IP8AneKlBtB62iZYZ+jI5wo
- CMpqA/unCFgzBChdPybiQ7+XPdubjiHvXwGgWQdH+RG3ulEIbCfH5WINR0vGyRc0Ez
- RgRpdwVsyG5kkMJLEXr4Iz2+kin/AgrNXI4nZPj1SSLWGnrIJloZ2D+Ffp8Qm2fr8Y
- DwL1FpEKdt5PgLHkPO5+SufQLboWG+NoOIgGWUdbGkUytZzcsrYeEfL2yYNVl9NCLq
- 5/X+1gytBXUKmVxaV8xcrgjrw9e5GYwZ03RzRfclyYjAvxJZMKR3zeonqzAGCcoh9a
- UuvCzZ/92GEsw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_selftest: BitBlt test
-Date: Sun, 24 Sep 2023 23:23:06 +0200
-Message-Id: <20230924212306.134568-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-59c215f2f4aso66114607b3.1
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 15:59:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695596380; x=1696201180; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=iOfNYyV69StCDcfKd2yPpxcY8eO2Q8ozqHm/dvegZJk=;
+ b=E/0jsvr6aOsUmwttG2wpExKrxtQ0w+SIOBQp9AwY9M72YfSTwjo1dfktmHy8BEjJ8b
+ ZOR5Nx12iDZz0FNeq/JK1aBmod4I/YnuBW3/EyyXG0c04sHYhz+BlHabcG+K4f5DbVLv
+ 81k8Cifq6Q0dwk3LViuKdkejbKGscvEhVtT3o=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695596380; x=1696201180;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iOfNYyV69StCDcfKd2yPpxcY8eO2Q8ozqHm/dvegZJk=;
+ b=eWtW4Q7D1PyD3Gd9qrSxdHfEDKf5s41jgGdz1DKpi/Hc8SQA+CkX70+yC3crif83s+
+ P9aNO+mQWk3WgZOKQyQfNqvg9DANxGwgTa/RxI3EmM4GNSLKoZUOzA3vymSmbODkyoGc
+ zjiusNTbLqvVy86l3DETtejt9ioZpQivye4QD5K7Jvq0wYX67bQtaibGsqDA+cN5YoP7
+ PBVMoUTmWkkzcSXGER+CH4R5bPIaKjIiyZhnbaM0zfXQ4Op5EU2d/Jk370KqTPkHw11v
+ CghdF7twFzssLQVoqvdLtVOXPWXkSCfI8ECC/VueuVYQfNR7LnU6qKiV+fYDkCJeFSAS
+ mACw==
+X-Gm-Message-State: AOJu0YxKmbNJRuSGAl4ob/WjgQh21ppD/wxyXZFU42M7fAiMGv3OsmAP
+ 9dPccgdxB1j3Mff15aHqk0rQEQ==
+X-Google-Smtp-Source: AGHT+IGQKoOsJoTWLIZxJydmwOd3BO5Oi5vK14Eyxgxc7p6MPBVBadezEekcelfVS8FDk4SQx0uCcA==
+X-Received: by 2002:a81:ad49:0:b0:59f:7860:f451 with SMTP id
+ l9-20020a81ad49000000b0059f7860f451mr1478553ywk.21.1695596380078; 
+ Sun, 24 Sep 2023 15:59:40 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
+ [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
+ by smtp.gmail.com with ESMTPSA id
+ a7-20020a81bb47000000b0057a44e20fb8sm2072852ywl.73.2023.09.24.15.59.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 24 Sep 2023 15:59:39 -0700 (PDT)
+Date: Sun, 24 Sep 2023 18:59:37 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Dmitrii Merkurev <dimorinny@google.com>, Heiko Schocher <hs@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Sean Anderson <sean.anderson@seco.com>
+Subject: Re: [PATCH 08/25] fastboot: Avoid depending on CMDLINE
+Message-ID: <20230924225937.GL305624@bill-the-cat>
+References: <20230924203953.1829820-1-sjg@chromium.org>
+ <20230924203953.1829820-9-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5MHL10sHReXZGGcx"
+Content-Disposition: inline
+In-Reply-To: <20230924203953.1829820-9-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,177 +97,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The BitBlt test leaves the serial console output in disarray.
 
-* Call ClearScreen() where needed.
-* Test CheckEvent() for EFI_SIMPLE_TEXT_INPUT_PROTOCOL.WaitForKey
-  via adding navigation keys
-* Correct timer comment
+--5MHL10sHReXZGGcx
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-For testing on the sandbox:
+On Sun, Sep 24, 2023 at 02:39:26PM -0600, Simon Glass wrote:
 
-    CONFIG_CMD_BOOTEFI_SELFTEST=y
-    CONFIG_CONSOLE_TRUETYPE=n
-    $ ./u-boot -T -l
-    => setenv efi_selftest block image transfer
-    => bootefi selftest
+> When CMDLINE is not enabled, this code fails to build. Correct this by
+> adding conditions.
+>=20
+> Note that this should not happen in normal use, since the use of
+> 'select CMDLINE' will cause a visible warning. But it is needed for the
+> sandbox build to pass without CMDLINE.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  drivers/fastboot/fb_command.c |  3 ++-
+>  drivers/fastboot/fb_common.c  | 15 +++++++++++++--
+>  2 files changed, 15 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+> index 71cfaec6e9dc..4e52e6f0f8bf 100644
+> --- a/drivers/fastboot/fb_command.c
+> +++ b/drivers/fastboot/fb_command.c
+> @@ -346,7 +346,8 @@ static char g_a_cmd_buff[64];
+> =20
+>  void fastboot_acmd_complete(void)
+>  {
+> -	run_command(g_a_cmd_buff, 0);
+> +	if (IS_ENABLED(CONFIG_CMDLINE))
+> +		run_command(g_a_cmd_buff, 0);
+>  }
+> =20
+>  /**
+> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+> index 4e9d9b719c6f..35b7aafe5af3 100644
+> --- a/drivers/fastboot/fb_common.c
+> +++ b/drivers/fastboot/fb_common.c
+> @@ -132,6 +132,13 @@ void fastboot_boot(void)
+>  {
+>  	char *s;
+> =20
+> +	/*
+> +	 * Avoid a build error; this will always have generated a Kconfig
+> +	 * warning about CMDLINE not being enabled
+> +	 */
+> +	if (!IS_ENABLED(CONFIG_CMDLINE))
+> +		return;
+> +
+>  	s =3D env_get("fastboot_bootcmd");
+>  	if (s) {
+>  		run_command(s, CMD_FLAG_ENV);
+> @@ -170,8 +177,12 @@ void fastboot_handle_boot(int command, bool success)
+> =20
+>  	switch (command) {
+>  	case FASTBOOT_COMMAND_BOOT:
+> -		fastboot_boot();
+> -		net_set_state(NETLOOP_SUCCESS);
+> +		if (IS_ENABLED(CONFIG_CMDLINE)) {
+> +			fastboot_boot();
+> +			net_set_state(NETLOOP_SUCCESS);
+> +		} else {
+> +			net_set_state(NETLOOP_FAIL);
+> +		}
+>  		break;
+> =20
+>  	case FASTBOOT_COMMAND_CONTINUE:
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_selftest/efi_selftest_bitblt.c | 83 +++++++++++++++++++-------
- 1 file changed, 63 insertions(+), 20 deletions(-)
+All of this just means it now fails to work, yes?
 
-diff --git a/lib/efi_selftest/efi_selftest_bitblt.c b/lib/efi_selftest/efi_selftest_bitblt.c
-index 1def843505..605078b722 100644
---- a/lib/efi_selftest/efi_selftest_bitblt.c
-+++ b/lib/efi_selftest/efi_selftest_bitblt.c
-@@ -14,6 +14,12 @@
- #define HEIGHT	120
- #define DEPTH	 60
- 
-+struct pos {
-+	efi_uintn_t x;
-+	efi_uintn_t y;
-+	int redrawn;
-+};
-+
- static const struct efi_gop_pixel BLACK =	{  0,   0,   0, 0};
- static const struct efi_gop_pixel RED =		{  0,   0, 255, 0};
- static const struct efi_gop_pixel ORANGE =	{  0, 128, 255, 0};
-@@ -27,7 +33,7 @@ static efi_guid_t efi_gop_guid = EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID;
- static struct efi_gop *gop;
- static struct efi_gop_pixel *bitmap;
- static struct efi_event *event;
--static efi_uintn_t xpos;
-+static struct pos pos;
- 
- static void ellipse(efi_uintn_t x, efi_uintn_t y,
- 		    efi_uintn_t x0, efi_uintn_t y0,
-@@ -62,31 +68,33 @@ static void rectangle(efi_uintn_t x, efi_uintn_t y,
-  */
- static void EFIAPI notify(struct efi_event *event, void *context)
- {
--	efi_uintn_t *pos = context;
-+	struct pos *pos = context;
- 	efi_uintn_t dx, sx, width;
- 
- 	if (!pos)
- 		return;
- 
- 	/* Increment position */
--	*pos += 5;
--	if (*pos >= WIDTH + gop->mode->info->width)
--		*pos = 0;
-+	pos->x += 5;
-+	if (pos->x >= WIDTH + gop->mode->info->width)
-+		pos->x = 0;
- 
- 	width = WIDTH;
--	dx = *pos - WIDTH;
-+	dx = pos->x - WIDTH;
- 	sx = 0;
--	if (*pos >= gop->mode->info->width) {
--		width = WIDTH +  gop->mode->info->width - *pos;
--	} else if (*pos < WIDTH) {
-+	if (pos->x >= gop->mode->info->width) {
-+		width = WIDTH +  gop->mode->info->width - pos->x;
-+	} else if (pos->x < WIDTH) {
- 		dx = 0;
--		sx = WIDTH - *pos;
--		width = *pos;
-+		sx = WIDTH - pos->x;
-+		width = pos->x;
- 	}
- 
- 	/* Copy image to video */
--	gop->blt(gop, bitmap, EFI_BLT_BUFFER_TO_VIDEO, sx, 0, dx, DEPTH,
-+	gop->blt(gop, bitmap, EFI_BLT_BUFFER_TO_VIDEO, sx, 0, dx, pos->y,
- 		 width, HEIGHT, WIDTH * sizeof(struct efi_gop_pixel));
-+
-+	pos->redrawn = 1;
- }
- 
- /*
-@@ -107,7 +115,7 @@ static int setup(const efi_handle_t handle,
- 
- 	/* Create event */
- 	ret = boottime->create_event(EVT_TIMER | EVT_NOTIFY_SIGNAL,
--				     TPL_CALLBACK, notify, (void *)&xpos,
-+				     TPL_CALLBACK, notify, (void *)&pos,
- 				     &event);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("could not create event\n");
-@@ -247,6 +255,9 @@ static int execute(void)
- 		return EFI_ST_FAILURE;
- 	}
- 
-+	con_out->set_attribute(con_out, EFI_WHITE | EFI_BACKGROUND_BLUE);
-+	con_out->clear_screen(con_out);
-+
- 	/* Fill background */
- 	ret = gop->blt(gop, bitmap, EFI_BLT_VIDEO_FILL, 0, 0, 0, 0,
- 		       info->width, info->height, 0);
-@@ -281,21 +292,53 @@ static int execute(void)
- 		return EFI_ST_FAILURE;
- 	}
- 
--	/* Set 250ms timer */
--	xpos = WIDTH;
-+	/* Set 25ms timer */
-+	pos.x = WIDTH;
-+	pos.y = DEPTH;
- 	ret = boottime->set_timer(event, EFI_TIMER_PERIODIC, 250000);
- 	if (ret != EFI_SUCCESS) {
- 		efi_st_error("Could not set timer\n");
- 		return EFI_ST_FAILURE;
- 	}
- 
--	con_out->set_cursor_position(con_out, 0, 0);
--	con_out->set_attribute(con_out, EFI_WHITE | EFI_BACKGROUND_BLUE);
- 	efi_st_printf("The submarine should have three yellow port holes.\n");
--	efi_st_printf("Press any key to continue");
--	efi_st_get_key();
-+	efi_st_printf("UP, DOWN to navigate, any other key to quit");
-+	for (;;) {
-+		struct efi_input_key input_key;
-+
-+		ret = boottime->check_event(con_in->wait_for_key);
-+		if (ret == EFI_NOT_READY)
-+			continue;
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("CheckEvent failed %x\n",
-+				     (unsigned int)ret);
-+			return EFI_ST_FAILURE;
-+		}
-+		ret = con_in->read_key_stroke(con_in, &input_key);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("Key not available %x\n",
-+				     (unsigned int)ret);
-+			return EFI_ST_FAILURE;
-+		}
-+		switch (input_key.scan_code) {
-+		case 0x01: /* UP */
-+			if (pos.redrawn && pos.y >= 5) {
-+				pos.y -= 5;
-+				pos.redrawn = 0;
-+			}
-+			continue;
-+		case 0x02: /* DOWN */
-+			if (pos.redrawn &&
-+			    pos.y + HEIGHT + 5 < gop->mode->info->height) {
-+				pos.y += 5;
-+				pos.redrawn = 0;
-+			}
-+			continue;
-+		}
-+		break;
-+	}
- 	con_out->set_attribute(con_out, EFI_LIGHTGRAY);
--	efi_st_printf("\n");
-+	con_out->clear_screen(con_out);
- 
- 	return EFI_ST_SUCCESS;
- }
--- 
-2.40.1
+--=20
+Tom
 
+--5MHL10sHReXZGGcx
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUQv1UACgkQFHw5/5Y0
+tyzPrQv/fKovnW8IasCExxSoY+kC3itJ3n7GwleW68Z76+I7wCCfMkF4EvrkQXs4
+yFeIgvMRXbi1dOYLlz0LSCZAbQNfzR2kZ+vkGOhtvDvCWJ5hFN+ziyGOqiJCZ9+O
+GfzHMTwDsQlq9JNS1dKxmSFcYI0cfTKZNV7cQhL+2VEaqEM0h1oobO6MbIgZ7jRN
+qtYKiznp5DVgsK/hLD37zDW8K/y/v//VIBJ22W/SiqqxLIJV3P68WwwXTWSepSYy
+WyYvsngoSkrBtGNqSq9wWGppMmPcpL5WbIyFuDktcOUq8DKwXAzqJ6xVP6s//KVy
+i7NhdYMdEdi2OczuSilflILnfF/+LUgEK5hiGzqo2siNMmFbgAp7AUaazp+gM8R9
+9S/r5oBgl/DcVLF0UG/T/k7ZdvfvHQvffzT3G8KFMq6BzftvJigXQ++AvExMrmQI
+mGZfSOg5JnSYR1r5TMf2c3adnuEHssGah55UYtTMsRsnA5BKMcE2rfdF8/MYBqzQ
+pW/QWeV1
+=w1H/
+-----END PGP SIGNATURE-----
+
+--5MHL10sHReXZGGcx--
