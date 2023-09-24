@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73BECCE7A8C
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 20:44:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02FC5CE7A8C
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 20:44:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C5DE86C42;
+	by phobos.denx.de (Postfix) with ESMTP id 763FD86C4B;
 	Sun, 24 Sep 2023 22:40:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lj4i2726";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="axFyFU13";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4415D86BE1; Sun, 24 Sep 2023 22:40:43 +0200 (CEST)
-Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
- [IPv6:2607:f8b0:4864:20::d2b])
+ id 6753586AE6; Sun, 24 Sep 2023 22:40:44 +0200 (CEST)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 209B286BF4
+ by phobos.denx.de (Postfix) with ESMTPS id DCBA286C28
  for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 22:40:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2b.google.com with SMTP id
- ca18e2360f4ac-79fa425855cso126022539f.2
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-79fd120eaaeso2746039f.1
  for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 13:40:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695588039; x=1696192839; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695588040; x=1696192840; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FSrQGh2DXmOLXUWEJ1Qj1lNXc4xtDY4JgWswuDSfCvk=;
- b=lj4i27263oQ0Uv9ZPg+gDWPwsuDgqOYRU4O4AK4s4zgGPtH2w+feaNd0t48dA9RXXg
- 1PH7TSoSI8p6ml5usrqhiXELo3EN2zVtea197fYVl1JAFvCrbkgPb2iw1AzOZetKIkzK
- 2tNjHh2d2dr+n/SfZpQICvGyU3O7aKXhy/fzk=
+ bh=mAvLSqTedZIkl+52nwwF/BRXNpHvi6y9PaiyfxqZlmQ=;
+ b=axFyFU13kGKSyz7IHVRRe+yUZu1APvkfpXyQ81iopeMRHdgTJFgjf37gC07sl9N/+r
+ Zwa+Nb/UTBKapHg4zZVQuYqOqlUvZIu/9NvNDTt2b07SFT0xNXIByR0sLPT0yJKL3yOl
+ oPUJRtv2FDNjJ9Vy3DA8YOpK0x+A3jDqhjVLU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695588039; x=1696192839;
+ d=1e100.net; s=20230601; t=1695588040; x=1696192840;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FSrQGh2DXmOLXUWEJ1Qj1lNXc4xtDY4JgWswuDSfCvk=;
- b=drFa2BLPBVmnZLzR/WEIeDK2JN4N+0L+2RXF+lS4es8VEY2l65QAMm7uLmNx73BnM7
- Q7Muxel7MQf8zhijJoSQ1N7djZufr2rAcewxuSVziSPftSQqZF8IMTCfTkfNaMeiaFoS
- U3AyjqZ5inYmX+OjOmErZ8gLFhz57Nj8eAj1FfXdJBTvrplzAvFCR7+vy+G585ZZMj7t
- uHUS8AuavjoCEE13SlRJ0gIFjZAZjDMSZ7ydQa4zBc65knu32eSLJovGfTVcQMM80Goh
- p4olUNd7hM3oyn9GNr1cy+/4zh38TfyELfDgX6Clr878SlgHopEuay2ijS+i4cAeG/M4
- VEvQ==
-X-Gm-Message-State: AOJu0Yxv6ZCV3ZumVNE1GcW3P4B+x4zsrz4iz9ypICLCfwefvgo6COZm
- Kzyb0dnLxiG+BNPdiren65Amrjr+gI9jKFNPf7M=
-X-Google-Smtp-Source: AGHT+IHhhHjjwRXKnjkzrUb7WjwVcqLdNh3or8A1BjFpra+QXSqwqRXQWUGK+YYecEgDXh3TB5ORKQ==
-X-Received: by 2002:a5d:8051:0:b0:792:82f8:749d with SMTP id
- b17-20020a5d8051000000b0079282f8749dmr5551661ior.10.1695588039666; 
- Sun, 24 Sep 2023 13:40:39 -0700 (PDT)
+ bh=mAvLSqTedZIkl+52nwwF/BRXNpHvi6y9PaiyfxqZlmQ=;
+ b=tYLCb2g9NZM6Oc5L20L0GCi3Rt72hUgY3camRdiHPah7vdMOMJMWlxuYtpqf6+SsWQ
+ xU4bp/QK1kU7jkAYxgCvhe/maPP6W26qjX5j0PAFKOisPvl8xTUE60bxbPkP+9dd8Q/0
+ 8VzTUiqfajdIidBXyKunmf+FaVNYRP0D1lzbP1Wl7hnMbIou1tGKopEZAIT0URIqU+1k
+ 0oTJxdTNOBaPb2DevZRTDBDrrvMFrg0X0oINntK+bxugqvAZiIBhpdQUJbYAkFqXz79J
+ TVly4gYdaP+NoKiAOW5yGgQ95h4enCZeE5Auxp/IHsRvGgMmUHj/aMmQB6tw7PMQ0MeV
+ wwAg==
+X-Gm-Message-State: AOJu0YwvySsG2uOr1Xk1UYvWf1Jl00RnaBYbfqtFqBX5DShzqfGEHfkn
+ BrhfPbSENNv79aWjVO3nvkUyq1GGwRNdgQsF8y4=
+X-Google-Smtp-Source: AGHT+IEiQSGr2cU9YT1OOwTTURwXN8yT2Rvo+t9MPKpaFNL0FUkZ7w8sT5uJZImgy7Jz+X7G/MW/fg==
+X-Received: by 2002:a05:6602:4242:b0:79f:a25b:51c with SMTP id
+ cc2-20020a056602424200b0079fa25b051cmr5380916iob.11.1695588040536; 
+ Sun, 24 Sep 2023 13:40:40 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- m11-20020a02cdcb000000b0043a1b74a0e3sm2311705jap.90.2023.09.24.13.40.39
+ m11-20020a02cdcb000000b0043a1b74a0e3sm2311705jap.90.2023.09.24.13.40.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 13:40:39 -0700 (PDT)
+ Sun, 24 Sep 2023 13:40:40 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Fabio Estevam <festevam@denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH 23/25] cmd: Make all commands depend on CMDLINE
-Date: Sun, 24 Sep 2023 14:39:41 -0600
-Message-ID: <20230924203953.1829820-24-sjg@chromium.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rick Chen <rick@andestech.com>, Zong Li <zong.li@sifive.com>
+Subject: [PATCH 24/25] sandbox: Avoid requiring cmdline
+Date: Sun, 24 Sep 2023 14:39:42 -0600
+Message-ID: <20230924203953.1829820-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230924203953.1829820-1-sjg@chromium.org>
 References: <20230924203953.1829820-1-sjg@chromium.org>
@@ -92,155 +91,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If this option is disabled, commands should not be available. Convert
-the CMDLINE option into a menuconfig and make every command in
-cmd/Kconfig depend on it.
+Use 'imply' rather than 'select' for command-related options, so that
+it is possible to build sandbox without CONFIG_CMDLINE enabled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/Kconfig | 29 ++++++++---------------------
- 1 file changed, 8 insertions(+), 21 deletions(-)
+ arch/Kconfig | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index c3428d19f31d..7aa689e91f6f 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1,7 +1,5 @@
--menu "Command line interface"
--
--config CMDLINE
--	bool "Support U-Boot commands"
-+menuconfig CMDLINE
-+	bool "Command line interface"
- 	default y
- 	help
- 	  Enable U-Boot's command-line functions. This provides a means
-@@ -11,9 +9,10 @@ config CMDLINE
- 	  Depending on the number of commands enabled, this can add
- 	  substantially to the size of U-Boot.
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 19f2891ba1c5..789be7a9f1e8 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -134,7 +134,6 @@ config SANDBOX
+ 	select ARCH_SUPPORTS_LTO
+ 	select BOARD_LATE_INIT
+ 	select BZIP2
+-	select CMD_POWEROFF
+ 	select DM
+ 	select DM_EVENT
+ 	select DM_FUZZING_ENGINE
+@@ -152,10 +151,8 @@ config SANDBOX
+ 	select PCI_ENDPOINT
+ 	select SPI
+ 	select SUPPORT_OF_CONTROL
+-	select SYSRESET_CMD_POWEROFF
+ 	select SYS_CACHE_SHIFT_4
+ 	select IRQ
+-	select SUPPORT_EXTENSION_SCAN
+ 	select SUPPORT_ACPI
+ 	imply BITREVERSE
+ 	select BLOBLIST
+@@ -167,6 +164,7 @@ config SANDBOX
+ 	imply CMD_IO
+ 	imply CMD_IOTRACE
+ 	imply CMD_LZMADEC
++	imply CMD_POWEROFF
+ 	imply CMD_SF
+ 	imply CMD_SF_TEST
+ 	imply CRC32_VERIFY
+@@ -208,6 +206,8 @@ config SANDBOX
+ 	imply PHYSMEM
+ 	imply GENERATE_ACPI_TABLE
+ 	imply BINMAN
++	imply SYSRESET_CMD_POWEROFF
++	imply SUPPORT_EXTENSION_SCAN
  
-+if CMDLINE
-+
- config HUSH_PARSER
- 	bool "Use hush shell"
--	depends on CMDLINE
- 	help
- 	  This option enables the "hush" shell (from Busybox) as command line
- 	  interpreter, thus enabling powerful command line syntax like
-@@ -25,7 +24,6 @@ config HUSH_PARSER
- 
- config CMDLINE_EDITING
- 	bool "Enable command line editing"
--	depends on CMDLINE
- 	default y
- 	help
- 	  Enable editing and History functions for interactive command line
-@@ -40,15 +38,13 @@ config CMDLINE_PS_SUPPORT
- 
- config AUTO_COMPLETE
- 	bool "Enable auto complete using TAB"
--	depends on CMDLINE
- 	default y
- 	help
- 	  Enable auto completion of commands using TAB.
- 
- config SYS_LONGHELP
- 	bool "Enable long help messages"
--	depends on CMDLINE
--	default y if CMDLINE
-+	default y
- 	help
- 	  Defined when you want long help messages included
- 	  Do not set this option when short of memory.
-@@ -86,8 +82,7 @@ config SYS_CBSIZE
- 
- config SYS_XTRACE
- 	bool "Command execution tracer"
--	depends on CMDLINE
--	default y if CMDLINE
-+	default y
- 	help
- 	  This option enables the possiblity to print all commands before
- 	  executing them and after all variables are evaluated (similar
-@@ -219,7 +214,6 @@ menu "Boot commands"
- 
- config CMD_BOOTD
- 	bool "bootd"
--	depends on CMDLINE
- 	default y
- 	help
- 	  Run the command stored in the environment "bootcmd", i.e.
-@@ -409,7 +403,6 @@ source lib/efi_selftest/Kconfig
- 
- config CMD_BOOTMENU
- 	bool "bootmenu"
--	depends on CMDLINE
- 	select MENU
- 	select CHARSET
- 	help
-@@ -476,7 +469,6 @@ config CMD_GO
- 
- config CMD_RUN
- 	bool "run"
--	depends on CMDLINE
- 	default y
- 	help
- 	  Run the command in the given environment variable.
-@@ -572,7 +564,6 @@ menu "Environment commands"
- 
- config CMD_ASKENV
- 	bool "ask for env variable"
--	depends on CMDLINE
- 	help
- 	  Ask for environment variable
- 
-@@ -1687,7 +1678,6 @@ if NET
- 
- menuconfig CMD_NET
- 	bool "Network commands"
--	depends on CMDLINE
- 	default y
- 	imply NETDEVICES
- 
-@@ -1991,7 +1981,6 @@ config CMD_ETHSW
- 
- config CMD_PXE
- 	bool "pxe"
--	depends on CMDLINE
- 	select PXE_UTILS
- 	help
- 	  Boot image via network using PXE protocol
-@@ -2126,7 +2115,6 @@ config CMD_EFICONFIG
- 
- config CMD_EXCEPTION
- 	bool "exception - raise exception"
--	depends on CMDLINE
- 	depends on ARM || RISCV || SANDBOX || X86
- 	help
- 	  Enable the 'exception' command which allows to raise an exception.
-@@ -2227,14 +2215,12 @@ config CMD_SOUND
- 
- config CMD_SYSBOOT
- 	bool "sysboot"
--	depends on CMDLINE
- 	select PXE_UTILS
- 	help
- 	  Boot image via local extlinux.conf file
- 
- config CMD_QFW
- 	bool "qfw"
--	depends on CMDLINE
- 	select QFW
- 	help
- 	  This provides access to the QEMU firmware interface.  The main
-@@ -2883,4 +2869,5 @@ config CMD_MESON
- 	default y
- 	help
- 	  Enable useful commands for the Meson Soc family developed by Amlogic Inc.
--endmenu
-+
-+endif # CMDLINE
+ config SH
+ 	bool "SuperH architecture"
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
