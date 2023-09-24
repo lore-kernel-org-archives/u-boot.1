@@ -4,65 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DBB2CE7A88
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 11:19:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0894BCE7A8A
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 13:26:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94E9C8656B;
-	Sun, 24 Sep 2023 13:19:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E24E6863DD;
+	Sun, 24 Sep 2023 15:26:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=outlook.fr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EBi/kBmp";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 009FA86823; Sun, 24 Sep 2023 13:19:22 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id E2F35857AF; Sun, 24 Sep 2023 11:59:07 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02olkn20830.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe13::830])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70EBB86386
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 13:19:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20063864D7
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 11:59:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38OBIo6Y118818;
- Sun, 24 Sep 2023 06:18:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695554330;
- bh=VMoQwJko1lrMcayRiW/TkhEWEnDdylfwgZ4gmxO6/aM=;
- h=From:To:CC:Subject:Date;
- b=EBi/kBmpvIHmpzRfQibRCXV32u8nEOdFFsVUnBJLqx+Y7POeJwh/eZ78NntKGJooL
- 7zHSUTSylf5xUansfrudCz6yuvL2upZyt6Q2UYamZEHTdpayFQNs95aSly+YDn/RET
- eQBE9UcY0eMaJPJJXna08pUZMNUMkcDLAr9YrxCA=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38OBIoLO096569
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 24 Sep 2023 06:18:50 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 24
- Sep 2023 06:18:49 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 24 Sep 2023 06:18:49 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38OBIkrn013199;
- Sun, 24 Sep 2023 06:18:47 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <nm@ti.com>, <vigneshr@ti.com>, <patrick.delaunay@foss.st.com>,
- <sjoerd@collabora.com>
-CC: <u-boot@lists.denx.de>, <xypron.glpk@gmx.de>, <michal.simek@amd.com>, Udit
- Kumar <u-kumar1@ti.com>, Suman Anna <s-anna@ti.com>
-Subject: [PATCH] lmb: remove overlapping region with next range
-Date: Sun, 24 Sep 2023 16:48:32 +0530
-Message-ID: <20230924111832.3741245-1-u-kumar1@ti.com>
+ dmarc=pass (p=none dis=none) header.from=outlook.fr
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=fberder@outlook.fr
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Xo7ba9nX8QRsysdyWZgDLXPldWZ5Q5du+bZ1SVq++JyojGtwwV0A4wwD+bFU6cSmOkxMtMz40N970z284b2iboc7i0hkWfGAOBBxNxfj+RzyPEdBbRwWtlb3P+MQQvtDknGpGDJBcboqVfx9E5Ie04q8qUNl6jbAuSVghPTbs4Mp8JrqfvrYQNavRZmy/Gi90aKtpqHHXpZt4MyRT40mLPjPmZ0hcc3536lyQYuHmmOsdIbGIIAq1Jzl30D629tXbP8eF/c/3f5cXL1Mct5WGHmLmmtDh4Rxou3PodzjwHZ/budAP6u2sHbhibH9s2UOfOUK4+sGV+UY5agDGNBkNg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/LPW5tme/2ULj21lS8ZDJjzbrRcuy3AJKc1ZXifoF4c=;
+ b=Hw0fb7PgtwVowdk868ZAb+W4wfME+1PWg6um3RbAephzd4RROZXpNKPvLz9DaL/Deq4FNuZZ692rL5/A1SsjHlF66B3oYq8nXimSu2YkCVJ7lBgVzpTsjsTb+wJdawaRXPzQLvLoBqBlYTAcwanNWa8Pi0oNFgq9Jg4VF8AxUdc8y66CNfVa25BaOd3Rv5VKbwUQ2lon988V+x03NYGpNvcYwJFRaZx6f5j8m6sGJZqahSy5ApQURJyr3ca/1s62zOyRtUZITAFYk+RcZrhP1iY1RZYvPtjpYQSyvqSPDroGa5Wsj6IfmxLS1U76mSo6NEijp5vWxOh0munpsjYtlw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+Received: from AM0P191MB0689.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:159::13)
+ by AM0P191MB0753.EURP191.PROD.OUTLOOK.COM (2603:10a6:20b:15c::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.27; Sun, 24 Sep
+ 2023 09:59:05 +0000
+Received: from AM0P191MB0689.EURP191.PROD.OUTLOOK.COM
+ ([fe80::2014:b5d4:9539:9e21]) by AM0P191MB0689.EURP191.PROD.OUTLOOK.COM
+ ([fe80::2014:b5d4:9539:9e21%3]) with mapi id 15.20.6813.027; Sun, 24 Sep 2023
+ 09:59:05 +0000
+From: Francois Berder <fberder@outlook.fr>
+To: u-boot@lists.denx.de
+Cc: lukma@denx.de,
+	seanga2@gmail.com,
+	Francois Berder <fberder@outlook.fr>
+Subject: [PATCH] clk: at91: Fix initializing arrays
+Date: Sun, 24 Sep 2023 11:58:54 +0200
+Message-ID: <AM0P191MB0689B51E17C13F50F658C4D5DAFDA@AM0P191MB0689.EURP191.PROD.OUTLOOK.COM>
 X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-TMN: [6MD3VtADAswTEk0QlfSTmDft35RwdJyGpbv3rVNkOLE=]
+X-ClientProxiedBy: DB8PR04CA0025.eurprd04.prod.outlook.com
+ (2603:10a6:10:110::35) To AM0P191MB0689.EURP191.PROD.OUTLOOK.COM
+ (2603:10a6:20b:159::13)
+X-Microsoft-Original-Message-ID: <20230924095854.87047-1-fberder@outlook.fr>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM0P191MB0689:EE_|AM0P191MB0753:EE_
+X-MS-Office365-Filtering-Correlation-Id: d71d421e-b338-4561-ed16-08dbbce4e2b4
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: gi/OqQ+o3K4gQOkICgfwyKrKavuyyFaKpXsoGIXN+z5eO3tuQZqM9xb3GKXOVnMTw0p2dfcZ7zQyorWjw1ZJxcN+ETIg9D5Fv1PKJDQ5mBiNJIpMiupxqHOuJeRjbq0wfx8p25Hg/2iz4vTMH3pcCKkFnI/Ud89o0qsUu/qDA+YFod2t1O+nh2bWmrgkW+5sE9wvS9xFGj+6B43QtclKKAwPjeYgQMHo7jHUwfCUHiFPxDUCCyvRJRXohfnY3YY4i4jHbL72iywb6dwuuTG+fx9jEcxY92u2+T3r1YxbMP+AIQJyBtu0TWeTtjRXMIcwAW392JkvNVYOsyfI/f0HQSHowwT54LdB4OaKhCRyJRsaMIPDopfM7z2nk0XDZ4MfsI8oi2CC0YkSPWRQFPPsHCE2JGrZhjRRuWO4Tds8bXcdHLsqhYiHsiamdkd/QVOmHZqA+P65suxrcxZCLq8ALOzvmhDOt3AZbXzuv9AiydABQ8MVlngGMVEdwXTjPT3O554YUUnwlqGDhaCV1P2jBmuqd8NDvq9g26dI3hu8BsUqI95uOzHGNxfc29C252Rsns4YQ78GF/FxROjHW7j+jarZnW6TUPuZPaI4jVxzNSy/lX2IgRXmo0ltDnCrbAbM
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?IsFHiQ9xukBfhLIliNb0T9pq79omNIlOXDuTLNDTGLUzCSpMwuy3lE2wvnd8?=
+ =?us-ascii?Q?eSd1CHty+qNIaNBMhDu1ZxumKw4BUj30sbBuLatpN3+9lhbvMKxyEbv0CyoF?=
+ =?us-ascii?Q?PH7mEgb9nKSee4o48XMdglcW+AmIS6IAyTcp3jS83uvOXDBNVCBA6+j8hsn8?=
+ =?us-ascii?Q?zOdJ4claY1goKHsK53PXR+ElZTaVPwmUM8fVuY23ijm1lYTINBUGC5+bULBr?=
+ =?us-ascii?Q?Te4GtKaRJCm2glecrKoJarm1gURJQnmn5KsWbJF7Qq+GiCqW2pDokIIAqoW4?=
+ =?us-ascii?Q?VIZdBT4NcFtfuoi8NdTpV+uI2+bd15L2ZXNVwBsqXM/IOC+fl8PMfu/eXihZ?=
+ =?us-ascii?Q?TQ4LeUphjxarb5nc1MM+qJlOIGXCAhmW2M5WDZ4I+CtSNgrpJYbFIU2aOr+V?=
+ =?us-ascii?Q?ajIbz2mHjM+II7azUYWurVVu/AQfPKIHOGLz5BzSKOEhZIBDOZU4H/Ws7pNS?=
+ =?us-ascii?Q?9s38sBnbR3dEq0pHmCsVPrNXEHAz4bSAy6RPwZ7dlGQj79BhsM35L+BTcjCq?=
+ =?us-ascii?Q?FU9zRdK4VgVN3S739lklxnHiF80N2Wo6k2U6jGlpDbQYgfSeeHzEP+f6dpI5?=
+ =?us-ascii?Q?8pnfP4mnt8L3pDQQyYe3TRv4n0ztKRMDN0bxEKRTa9Tpt6wso4Xm5inI1bIg?=
+ =?us-ascii?Q?zYgCOpegJi5far1iYBJbnHG14vfb4nNht4C/VjRwrG455gU59G49Ph9Xhwsr?=
+ =?us-ascii?Q?bcHaMPYn/yfLpWWTSVniZDH4e4N6SYpFejJIEml4ZvUHD5jZ9e6hwF+T34ZA?=
+ =?us-ascii?Q?lQxyMPOzass+xNetQCQ+gyqA5rM7MRbLKSsXJXQ6Rz6E6hBnUAaXKIAXXsF1?=
+ =?us-ascii?Q?1Q3zWXVP3Gn/TLa7S7Jma+vYfdSz0LsVmSENI4fsKpMmlDTn5ssv95TbZDnj?=
+ =?us-ascii?Q?Ja/Mk1TBOSEkQ/fbw+iSa0pUVKjXmQNH9HEGUt9jmJMcpyKyD+SXkxLFYwbY?=
+ =?us-ascii?Q?GGmAchunzMNEnJkgXbQkpSr67bUMNcebXK8mVyHKxLn2f/+8/vMAdnITF04e?=
+ =?us-ascii?Q?I2zIQRHF0oUzAFddRb1A6/zd6PiuEmJNwcHYea4BdVWfQMV/TT7aPedCViHu?=
+ =?us-ascii?Q?gwMqFqMbG9DmmrfcF2Q0keKdFKAb3mE/zWlsEl35/zA+OKBgamAmjaW7q3PU?=
+ =?us-ascii?Q?UdmS0+Dzst6/2sqNBXRFeQ+bSiEv0wjooJTzv+q/diDrx5p/G5eirA3NTLKm?=
+ =?us-ascii?Q?twkbqs0wIJ2DkWKqesUET8NxGeaLmmMCL4llVw=3D=3D?=
+X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-50200.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: d71d421e-b338-4561-ed16-08dbbce4e2b4
+X-MS-Exchange-CrossTenant-AuthSource: AM0P191MB0689.EURP191.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2023 09:59:05.0345 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0P191MB0753
+X-Mailman-Approved-At: Sun, 24 Sep 2023 15:26:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,109 +113,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case of new memory range to be added is coalesced
-with any already added non last lmb region.
+Arrays are not cleared entirely because ARRAY_SIZE
+returns the number of elements in an array, not the size
+in bytes.
+This commit fixes the calls to memset by providing the
+array size in bytes instead of the number of elements
+in the array.
 
-And there is possibility that, then region in which new memory
-range added is not adjacent to next region. But have some
-sections are overlapping.
-
-So along with adjacency check with next lmb region,
-check for overlap should be done.
-
-In case overlap  is found, adjust and merge these two lmb
-region into one.
-
-Reported-by: Suman Anna <s-anna@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+Signed-off-by: Francois Berder <fberder@outlook.fr>
 ---
-logs
-https://gist.github.com/uditkumarti/5d08c34442235ad270cfa863792ebcdc
-seqeunce : line 1 to 13
-without fix : line 96-100
-with fix : line 199-202
+ drivers/clk/at91/sam9x60.c | 4 ++--
+ drivers/clk/at91/sama7g5.c | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
- lib/lmb.c | 37 +++++++++++++++++++++++++++++++++----
- 1 file changed, 33 insertions(+), 4 deletions(-)
-
-diff --git a/lib/lmb.c b/lib/lmb.c
-index b2c233edb6..2580d01d90 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -74,6 +74,16 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
- 	return 0;
- }
+diff --git a/drivers/clk/at91/sam9x60.c b/drivers/clk/at91/sam9x60.c
+index e2f72446d5..d858c860f6 100644
+--- a/drivers/clk/at91/sam9x60.c
++++ b/drivers/clk/at91/sam9x60.c
+@@ -429,8 +429,8 @@ static int sam9x60_clk_probe(struct udevice *dev)
+ 	if (!base)
+ 		return -EINVAL;
  
-+static long lmb_regions_overlap(struct lmb_region *rgn, unsigned long r1,
-+				unsigned long r2)
-+{
-+	phys_addr_t base1 = rgn->region[r1].base;
-+	phys_size_t size1 = rgn->region[r1].size;
-+	phys_addr_t base2 = rgn->region[r2].base;
-+	phys_size_t size2 = rgn->region[r2].size;
-+
-+	return lmb_addrs_overlap(base1, size1, base2, size2);
-+}
- static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
- 				 unsigned long r2)
- {
-@@ -81,7 +91,6 @@ static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
- 	phys_size_t size1 = rgn->region[r1].size;
- 	phys_addr_t base2 = rgn->region[r2].base;
- 	phys_size_t size2 = rgn->region[r2].size;
--
- 	return lmb_addrs_adjacent(base1, size1, base2, size2);
- }
+-	memset(muxallocs,    0, ARRAY_SIZE(muxallocs));
+-	memset(clkmuxallocs, 0, ARRAY_SIZE(clkmuxallocs));
++	memset(muxallocs,    0, sizeof(muxallocs));
++	memset(clkmuxallocs, 0, sizeof(clkmuxallocs));
  
-@@ -105,6 +114,23 @@ static void lmb_coalesce_regions(struct lmb_region *rgn, unsigned long r1,
- 	lmb_remove_region(rgn, r2);
- }
+ 	ret = clk_get_by_index(dev, 0, &clk);
+ 	if (ret)
+diff --git a/drivers/clk/at91/sama7g5.c b/drivers/clk/at91/sama7g5.c
+index 3abd220803..3e62fb1f58 100644
+--- a/drivers/clk/at91/sama7g5.c
++++ b/drivers/clk/at91/sama7g5.c
+@@ -1115,8 +1115,8 @@ static int sama7g5_clk_probe(struct udevice *dev)
+ 	if (IS_ERR(base))
+ 		return PTR_ERR(base);
  
-+/*Assmptuon : base addr of region 1 < base addr of region 2*/
-+static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
-+				     unsigned long r2)
-+{
-+	phys_addr_t base1 = rgn->region[r1].base;
-+	phys_size_t size1 = rgn->region[r1].size;
-+	phys_addr_t base2 = rgn->region[r2].base;
-+	phys_size_t size2 = rgn->region[r2].size;
-+
-+	if (base1 + size1 > base2 + size2) {
-+		printf("This will not be a case any time\n");
-+		return;
-+	}
-+	rgn->region[r1].size = base2 + size2 - base1;
-+	lmb_remove_region(rgn, r2);
-+}
-+
- void lmb_init(struct lmb *lmb)
- {
- #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-@@ -249,7 +275,6 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
- 		phys_size_t rgnflags = rgn->region[i].flags;
- 		phys_addr_t end = base + size - 1;
- 		phys_addr_t rgnend = rgnbase + rgnsize - 1;
--
- 		if (rgnbase <= base && end <= rgnend) {
- 			if (flags == rgnflags)
- 				/* Already have this region, so we're done */
-@@ -278,10 +303,14 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
- 		}
- 	}
+-	memset(muxallocs,    0, ARRAY_SIZE(muxallocs));
+-	memset(clkmuxallocs, 0, ARRAY_SIZE(clkmuxallocs));
++	memset(muxallocs,    0, sizeof(muxallocs));
++	memset(clkmuxallocs, 0, sizeof(clkmuxallocs));
  
--	if ((i < rgn->cnt - 1) && lmb_regions_adjacent(rgn, i, i + 1)) {
--		if (rgn->region[i].flags == rgn->region[i + 1].flags) {
-+	if (i < rgn->cnt - 1 && rgn->region[i].flags == rgn->region[i + 1].flags)  {
-+		if (lmb_regions_adjacent(rgn, i, i + 1)) {
- 			lmb_coalesce_regions(rgn, i, i + 1);
- 			coalesced++;
-+		} else if (lmb_regions_overlap(rgn, i, i + 1)) {
-+			/* fix overlapping area */
-+			lmb_fix_over_lap_regions(rgn, i, i + 1);
-+			coalesced++;
- 		}
- 	}
- 
+ 	ret = clk_get_by_index(dev, 0, &clk);
+ 	if (ret)
 -- 
 2.34.1
 
