@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72F20CE7A8C
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63993CE7A8A
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:31:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D29586C2C;
-	Sun, 24 Sep 2023 21:26:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79CA486A43;
+	Sun, 24 Sep 2023 21:26:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NNrMlBI5";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ESXuNcMR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D67486ACF; Sun, 24 Sep 2023 21:26:28 +0200 (CEST)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id 06C3186B1D; Sun, 24 Sep 2023 21:26:30 +0200 (CEST)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3342386A28
+ by phobos.denx.de (Postfix) with ESMTPS id E838F86A38
  for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-79f989480e0so149039139f.3
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-79f915e5b47so170416039f.2
  for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695583577; x=1696188377; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Gjqr+IHoH+2TTmmlT8IdF9+k9qLmuk1S8WHSzj9sWko=;
- b=NNrMlBI59F4NxPysB9CQeLErbrZnSrkuVbwDJa+a/IDrmNZe0V3ClMji1xtwBkrma4
- WJ1rASxf9zdiLp2LRmx1bxiaH/eDrarMe2AmpcYFgvnZXX/13Paum6qIQ4e2wY6t3C2b
- BtfphiQcRBU3/kVYN4/HPSZUxDWRlsc9TsCQc=
+ bh=S5Yk4L1KH6RfHc1snqaOqpHJIctWxMdKxur2KvHM/EI=;
+ b=ESXuNcMROEtqH/Mpp3gMCcF7RJm8kZxbcLXRxWIFbcu7sOr0T1+Veq0BSIHIu8mDOw
+ CF6hjUxJPXtCCFY/oVnq6GzAAnJOeU8m82RziCfV3kDPwS3GgpD6DN+uZrvXDbMwR5i/
+ sYP8kWOYRE6hnluFcKxfUHb3MaMezKrOKZH7M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695583577; x=1696188377;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Gjqr+IHoH+2TTmmlT8IdF9+k9qLmuk1S8WHSzj9sWko=;
- b=BybkMxwoLJyo2zvpy720K44KH4fvTKemtQfaSl5NjrgdoahWPqtueYOga9YARpxo1S
- aV+o1rns7qqcJg7Z32Gt+USBpj7+zlzTEMuGXVmuZ3xYMEmb2uXLsgEjIwLzQTFVHrxD
- OHI4feIgEKaHCLDGZu9FPnlbZNvK9eLd9TF9dCD9k02fWN4EjkV58nk6S85W5tCLDtWb
- OdBanVMIpX24wprmqtYsa4+yw2mogTN+rL99be8V7eqVXKGiuvtX1aL3KMLf2Xa4x7yf
- DPY77IAWT1uIlmvsobo2An81zCeMMiaBv5LMG126YVMKFnB2SqHsbomKn3R2xiy8Zc5B
- 287A==
-X-Gm-Message-State: AOJu0YxI6NNm/BLDPgVWsFRAUCL8fDLIoJx3o9iKmNpcxd0UsIe1UL/9
- ZfwnkG6QzzEGtcplFTOgypT261JQja41AzGAgUM=
-X-Google-Smtp-Source: AGHT+IGXcdnHlFTgBf220P5W/Ih+iWwLnRi4GvyDEhSzsb0bfQ5N87HjpTYH69qrrTOfQqGhPj3aeQ==
-X-Received: by 2002:a05:6602:19d1:b0:794:e96f:b87d with SMTP id
- ba17-20020a05660219d100b00794e96fb87dmr5149105iob.0.1695583576863; 
- Sun, 24 Sep 2023 12:26:16 -0700 (PDT)
+ bh=S5Yk4L1KH6RfHc1snqaOqpHJIctWxMdKxur2KvHM/EI=;
+ b=o6h6gL3ERPGfKV49/xFkHb2tV3h88BfDSt69lXTAtpX+Wp/cXS/tJL0NVCDkghymKL
+ Xg28uWipCUHfUtm4PXrr6c+uTYswTP3oHq7SDVBFUYK3cetLudVAlq4igewLw40vd7ie
+ zcMFgWJin47p0PwUnUW+5i2MlJd6Nu3rBQx8tD4FIg7MENVLAZB272iVKYIvg6n148ZU
+ fuzF4hWp3/x09/ozUJ2tC+7NoHV35k26AJq0UivPwcfYhnHNf+ZdfP8Gfjx27vJeZ4PA
+ Q+lbpJPFO/BVPxKPq3DT+NontTcoX6WWCUeLgLDpMBrBaysqJTWK1E4XYvWocHzM1n2E
+ dy8g==
+X-Gm-Message-State: AOJu0Yxt+/xJHBwxeQZ+yP5xpR9w7bAAkTAVSAA5410jV04fa0mDUWvV
+ H491BKTY3FbDu2KHdpeHUZBBkCAb0ss5k7DVMLg=
+X-Google-Smtp-Source: AGHT+IG7uDaOIjpvDUeugNkltWG/joWnZuywEzuVZIe5HIrpj0Uv7FYBL8zuZ1IA5EC7YleJ9fHJEg==
+X-Received: by 2002:a5d:9c17:0:b0:79f:9eb4:3ea1 with SMTP id
+ 23-20020a5d9c17000000b0079f9eb43ea1mr5720962ioe.3.1695583577637; 
+ Sun, 24 Sep 2023 12:26:17 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.16
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 12:26:16 -0700 (PDT)
+ Sun, 24 Sep 2023 12:26:17 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 32/38] sandbox: Init the EC properly even if no state file
- is available
-Date: Sun, 24 Sep 2023 13:25:17 -0600
-Message-ID: <20230924192536.1812799-33-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Pavel Skripkin <paskripkin@gmail.com>
+Subject: [PATCH v3 33/38] sandbox: Only read the state if we have a state file
+Date: Sun, 24 Sep 2023 13:25:18 -0600
+Message-ID: <20230924192536.1812799-34-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
 References: <20230924192536.1812799-1-sjg@chromium.org>
@@ -89,69 +89,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This currently relies on sandbox attempting to read a state file. At
-present it always does, even when there is no state file, in which case it
-fails, but still inits the EC.
+We should not read this unless requested. Make it conditional on the
+option being provided.
 
-That is a bug, so update this driver to set the current image always, even
-if no state is read.
+Add some debugging to show the state being written.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/misc/cros_ec_sandbox.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ arch/sandbox/cpu/start.c | 8 +++++---
+ arch/sandbox/cpu/state.c | 1 +
+ 2 files changed, 6 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/misc/cros_ec_sandbox.c b/drivers/misc/cros_ec_sandbox.c
-index 8dbe0b188a48..1201535f4af4 100644
---- a/drivers/misc/cros_ec_sandbox.c
-+++ b/drivers/misc/cros_ec_sandbox.c
-@@ -81,6 +81,7 @@ struct ec_pwm_channel {
- /**
-  * struct ec_state - Information about the EC state
-  *
-+ * @valid: true if this struct contains valid state data
-  * @vbnv_context: Vboot context data stored by EC
-  * @ec_config: FDT config information about the EC (e.g. flashmap)
-  * @flash_data: Contents of flash memory
-@@ -95,6 +96,7 @@ struct ec_pwm_channel {
-  * @pwm: Information per PWM channel
-  */
- struct ec_state {
-+	bool valid;
- 	u8 vbnv_context[EC_VBNV_BLOCK_SIZE_V2];
- 	struct fdt_cros_ec ec_config;
- 	uint8_t *flash_data;
-@@ -145,6 +147,7 @@ static int cros_ec_read_state(const void *blob, int node)
- 		memcpy(ec->flash_data, prop, len);
- 		debug("%s: Loaded EC flash data size %#x\n", __func__, len);
+diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
+index 8582f05162fa..2c8a72590b55 100644
+--- a/arch/sandbox/cpu/start.c
++++ b/arch/sandbox/cpu/start.c
+@@ -522,9 +522,11 @@ int sandbox_main(int argc, char *argv[])
+ 		state->ram_buf_fname = NULL;
  	}
-+	ec->valid = true;
  
- 	return 0;
- }
-@@ -589,6 +592,7 @@ static int process_cmd(struct ec_state *ec,
- 		printf("   ** Unknown EC command %#02x\n", req_hdr->command);
- 		return -1;
+-	ret = sandbox_read_state(state, state->state_fname);
+-	if (ret)
+-		goto err;
++	if (state->read_state && state->state_fname) {
++		ret = sandbox_read_state(state, state->state_fname);
++		if (ret)
++			goto err;
++	}
+ 
+ 	if (state->handle_signals) {
+ 		ret = os_setup_signal_handlers();
+diff --git a/arch/sandbox/cpu/state.c b/arch/sandbox/cpu/state.c
+index fcc0028ff4a2..e38bb248b7ff 100644
+--- a/arch/sandbox/cpu/state.c
++++ b/arch/sandbox/cpu/state.c
+@@ -521,6 +521,7 @@ int state_uninit(void)
+ 			printf("Failed to write sandbox state\n");
+ 			return -1;
+ 		}
++		log_debug("Wrote state to file '%s'\n", state->ram_buf_fname);
  	}
-+	debug(" - EC command %#0x, result %d\n", req_hdr->command, len);
  
- 	return len;
- }
-@@ -675,7 +679,10 @@ int cros_ec_probe(struct udevice *dev)
- 	ofnode node;
- 	int err;
- 
--	memcpy(ec, &s_state, sizeof(*ec));
-+	if (s_state.valid)
-+		memcpy(ec, &s_state, sizeof(*ec));
-+	else
-+		ec->current_image = EC_IMAGE_RO;
- 	err = cros_ec_decode_ec_flash(dev, &ec->ec_config);
- 	if (err) {
- 		debug("%s: Cannot device EC flash\n", __func__);
+ 	/* Delete this at the last moment so as not to upset gdb too much */
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
