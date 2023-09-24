@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FF88CE7A8A
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:30:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6004CE7A8C
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:30:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BD2D86B26;
+	by phobos.denx.de (Postfix) with ESMTP id 6C17C86B35;
 	Sun, 24 Sep 2023 21:26:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MBLTT/Td";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PoYQHf+f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B34B86C18; Sun, 24 Sep 2023 21:26:24 +0200 (CEST)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 17D2B8698D; Sun, 24 Sep 2023 21:26:26 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B70086AF7
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 558838640F
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-34fe2814b0dso17833835ab.3
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:14 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-79f989480e0so149037339f.3
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695583573; x=1696188373; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695583574; x=1696188374; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vGYki7cG1jZOTr2ufQB8q6pTGzF3tiScLGW+Tp2Hc1g=;
- b=MBLTT/Td0/rOJWuk/71+JceEO+CagDMwlYW++OAfFFrMS5gpv23SuTHSdzTBe39SQh
- iY8NTAciqir9MjKwXcv6GZVX6wJN0+wFYOwG0suPOoxsyXcdyjA3HFhf9B0tYrSHBjfi
- 8/41h27vUHnGZyADXVPb2PXN01eyiGH/gRMk4=
+ bh=K7VWPgXR9UmYksJFPalcDhJYjeGetocytuFaXlw1sOU=;
+ b=PoYQHf+fwX6nLcwxRPhIVt4ZV64NhdtXknvTbXEh0iZGGjZbRicAm0idyUPU7bwkt7
+ Ej4pVhzhbbB5vuN2T5ALOFsZWdMTMAuN+ggmvKkgFi7Xgy+TbKHq28RwYWuCA+jaJHDW
+ 8X46M46Gr9scrqhS/bc7cYOpR1YooJpQnqbSw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695583573; x=1696188373;
+ d=1e100.net; s=20230601; t=1695583574; x=1696188374;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vGYki7cG1jZOTr2ufQB8q6pTGzF3tiScLGW+Tp2Hc1g=;
- b=L9Sq11/LAqg58srspKZm6JUyc6cdkqztESYkLAS7Kk2m4tnDXV67J+G4vSqH6zl8UF
- 0ErMWFqhFm4GQHIyK7UkvsPIrdhOJ6vCrwEI6Di0Z65A1t49sbaayy0SBLyj1YqXwk/d
- QJaXl2EmCHlkG93dH9wyFbC2R4iGHgyAzxhaXmghYppI82wvKzOnxgswC9uVikIq4Fc0
- DYCUmSqJ639z6TD2JjDCqpMG6fJ8xdR3w64v/id8XmZX6hxzYW9FKmbayBGltjO67tr8
- xQZ0M+O5bIEIGyyaDmiaptMQJTihtpM6sQPyNGaj0pSigGQ472LDSHJTT8yhZ0FcsUmi
- u8Lg==
-X-Gm-Message-State: AOJu0Yw8GOmPHk6z4CYwmB3T/RfuD9pcSVdDOu6NzZiveMteBC/e3Nxr
- 875pihPT3RKnSCdiniOJHJP8PcyHtvTJvAZr520=
-X-Google-Smtp-Source: AGHT+IFmkK3Gsm1SCiP2AKlsqsbEJYM7OsDFZYM5Zu4JkVtLJascsPjt/rjojIKLre0mCBdizhHs9w==
-X-Received: by 2002:a05:6e02:2161:b0:350:f0bb:6a3b with SMTP id
- s1-20020a056e02216100b00350f0bb6a3bmr7255514ilv.17.1695583573180; 
+ bh=K7VWPgXR9UmYksJFPalcDhJYjeGetocytuFaXlw1sOU=;
+ b=tBS3qrRwJei6zNLdjbPjkxGqBDwzF8OmaY/VYQ1D+CObekSleBpMewlK7cISm1NQ43
+ sPCrT7wIc3HJ/EWNev6K8YIHZDOtJ78b2+AOqqzUeFLc1QrXcLBWuInvJ8fN0KQP2seA
+ J6uESJzOB2rZDJuhwEDxlnmNvty6WFesTaKzhuf2FBQ1KY1rW7PxmuVA0oJTGkjZ5dn0
+ Zc5sNsPtKUSETM5oGQc8BvWOaQc6JtOOw/QF9YKIaE8P5MslzqEw91WhS9jUfnd2lCtP
+ b8Gell0vQ46O0s+u1GGWjKBeBRjBd+jJLDfbZvgL3gAxQhowYjoI2AVhPXJCcesCfVCL
+ lNww==
+X-Gm-Message-State: AOJu0YyoMpLhRFaf6kBjyYzaP5UKv5tYAqSbAKLtTmy4CYkSAJoxcePM
+ YbYfJ7PaywCgQdmgxZblPOkVrZTRj8OkyIMlHUU=
+X-Google-Smtp-Source: AGHT+IHfKz/4ca/hrH1HAXhY8M0B+HB5m2iwVgQl3hQcjn+DOdq2hTO+eh/FmxfwqcJkpr1c2RxUoQ==
+X-Received: by 2002:a92:c546:0:b0:34b:ae46:8040 with SMTP id
+ a6-20020a92c546000000b0034bae468040mr6855882ilj.5.1695583573925; 
  Sun, 24 Sep 2023 12:26:13 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.12
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 12:26:12 -0700 (PDT)
+ Sun, 24 Sep 2023 12:26:13 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH v3 27/38] dm: core: Add a way to convert a devicetree to a dtb
-Date: Sun, 24 Sep 2023 13:25:12 -0600
-Message-ID: <20230924192536.1812799-28-sjg@chromium.org>
+Subject: [PATCH v3 28/38] dm: core: Support writing a boolean
+Date: Sun, 24 Sep 2023 13:25:13 -0600
+Message-ID: <20230924192536.1812799-29-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
 References: <20230924192536.1812799-1-sjg@chromium.org>
@@ -88,298 +88,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a way to flatten a devicetree into binary form. For livetree this
-involves generating the devicetree using fdt_property() and other calls.
-For flattree it simply involves providing the buffer containing the tree.
+Add functions to write a boolean property. This involves deleting it if
+the value is false.
+
+Add a new ofnode_has_property() as well. Add a comment about the behaviour
+of of_read_property() when the property value is empty.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- drivers/core/ofnode.c |  18 +++++++
- include/dm/ofnode.h   |  13 +++++
- include/of_live.h     |  10 ++++
- lib/of_live.c         | 122 ++++++++++++++++++++++++++++++++++++++++++
- test/dm/ofnode.c      |  24 +++++++++
- 5 files changed, 187 insertions(+)
+ drivers/core/ofnode.c | 36 ++++++++++++++++++++++++++++++++++--
+ include/dm/ofnode.h   | 32 +++++++++++++++++++++++++++++++-
+ test/dm/ofnode.c      | 25 +++++++++++++++++++++++++
+ 3 files changed, 90 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-index fb8bc82a929a..f49edaba07fd 100644
+index f49edaba07fd..363b9da27575 100644
 --- a/drivers/core/ofnode.c
 +++ b/drivers/core/ofnode.c
-@@ -243,6 +243,24 @@ int oftree_new(oftree *treep)
+@@ -491,12 +491,12 @@ u64 ofnode_read_u64_default(ofnode node, const char *propname, u64 def)
  
- #endif /* OFNODE_MULTI_TREE */
+ bool ofnode_read_bool(ofnode node, const char *propname)
+ {
+-	const void *prop;
++	bool prop;
  
-+int oftree_to_fdt(oftree tree, struct abuf *buf)
+ 	assert(ofnode_valid(node));
+ 	debug("%s: %s: ", __func__, propname);
+ 
+-	prop = ofnode_get_property(node, propname, NULL);
++	prop = ofnode_has_property(node, propname);
+ 
+ 	debug("%s\n", prop ? "true" : "false");
+ 
+@@ -1168,6 +1168,14 @@ const void *ofnode_get_property(ofnode node, const char *propname, int *lenp)
+ 				   propname, lenp);
+ }
+ 
++bool ofnode_has_property(ofnode node, const char *propname)
 +{
-+	int ret;
-+
-+	if (of_live_active()) {
-+		ret = of_live_flatten(ofnode_to_np(oftree_root(tree)), buf);
-+		if (ret)
-+			return log_msg_ret("flt", ret);
-+	} else {
-+		void *fdt = oftree_lookup_fdt(tree);
-+
-+		abuf_init(buf);
-+		abuf_set(buf, fdt, fdt_totalsize(fdt));
-+	}
-+
-+	return 0;
++	if (ofnode_is_np(node))
++		return of_find_property(ofnode_to_np(node), propname, NULL);
++	else
++		return ofnode_get_property(node, propname, NULL);
 +}
 +
- /**
-  * ofnode_from_tree_offset() - get an ofnode from a tree offset (flat tree)
-  *
+ int ofnode_first_property(ofnode node, struct ofprop *prop)
+ {
+ 	prop->node = node;
+@@ -1616,6 +1624,30 @@ int ofnode_write_u32(ofnode node, const char *propname, u32 value)
+ 	return ofnode_write_prop(node, propname, val, sizeof(value), false);
+ }
+ 
++int ofnode_write_bool(ofnode node, const char *propname, bool value)
++{
++	if (value)
++		return ofnode_write_prop(node, propname, NULL, 0, false);
++	else
++		return ofnode_delete_prop(node, propname);
++}
++
++int ofnode_delete_prop(ofnode node, const char *propname)
++{
++	if (ofnode_is_np(node)) {
++		struct property *prop;
++		int len;
++
++		prop = of_find_property(ofnode_to_np(node), propname, &len);
++		if (prop)
++			return of_remove_property(ofnode_to_np(node), prop);
++		return 0;
++	} else {
++		return fdt_delprop(ofnode_to_fdt(node), ofnode_to_offset(node),
++				   propname);
++	}
++}
++
+ int ofnode_set_enabled(ofnode node, bool value)
+ {
+ 	assert(ofnode_valid(node));
 diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-index f0a7d2a2f9d7..b6420efb4605 100644
+index b6420efb4605..b366830ff915 100644
 --- a/include/dm/ofnode.h
 +++ b/include/dm/ofnode.h
-@@ -17,6 +17,7 @@
- /* Enable checks to protect against invalid calls */
- #undef OF_CHECKS
- 
-+struct abuf;
- struct resource;
- 
- #include <dm/ofnode_decl.h>
-@@ -136,6 +137,18 @@ static inline ofnode noffset_to_ofnode(ofnode other_node, int of_offset)
+@@ -1037,10 +1037,19 @@ int ofnode_decode_panel_timing(ofnode node,
+  * @node: node to read
+  * @propname: property to read
+  * @lenp: place to put length on success
+- * Return: pointer to property, or NULL if not found
++ * Return: pointer to property value, or NULL if not found or empty
   */
- int oftree_new(oftree *treep);
+ const void *ofnode_get_property(ofnode node, const char *propname, int *lenp);
  
 +/**
-+ * oftree_to_fdt() - Convert an oftree to a flat FDT
++ * ofnode_has_property() - check if a node has a named property
 + *
-+ * @tree: tree to flatten (if livetree) or copy (if not)
-+ * @buf: Returns inited buffer containing the newly created flat tree. Note
-+ * that for flat tree the buffer is not allocated. In either case the caller
-+ * must call abut_uninit() to free any memory used by @buf
-+ * Return: 0 on success, -ENOMEM if out of memory, other -ve value for any other
-+ * error
++ * @node: node to read
++ * @propname: property to read
++ * Return: true if the property exists in the node, false if not
 + */
-+int oftree_to_fdt(oftree tree, struct abuf *buf);
++bool ofnode_has_property(ofnode node, const char *propname);
 +
  /**
-  * ofnode_to_np() - convert an ofnode to a live DT node pointer
+  * ofnode_first_property()- get the reference of the first property
   *
-diff --git a/include/of_live.h b/include/of_live.h
-index 81cb9bd13e2c..67bd5f02c744 100644
---- a/include/of_live.h
-+++ b/include/of_live.h
-@@ -9,6 +9,7 @@
- #ifndef _OF_LIVE_H
- #define _OF_LIVE_H
- 
-+struct abuf;
- struct device_node;
- 
- /**
-@@ -54,4 +55,13 @@ void of_live_free(struct device_node *root);
+@@ -1452,6 +1461,27 @@ int ofnode_write_string(ofnode node, const char *propname, const char *value);
   */
- int of_live_create_empty(struct device_node **rootp);
+ int ofnode_write_u32(ofnode node, const char *propname, u32 value);
  
 +/**
-+ * of_live_flatten() - Create an FDT from a hierarchical tree
++ * ofnode_write_bool() - Set a boolean property of an ofnode
 + *
-+ * @root: Root node of tree to convert
-+ * @buf: Buffer to return the tree (inited by this function)
-+ * Return: 0 if OK, -ENOMEM if out of memory
++ * This either adds or deleted a property with a zero-length value
++ *
++ * @node:	The node for whose string property should be set
++ * @propname:	The name of the string property to set
++ * @value:	The new value of the boolean property
++ * Return: 0 if successful, -ve on error
 + */
-+int of_live_flatten(const struct device_node *root, struct abuf *buf);
-+
- #endif
-diff --git a/lib/of_live.c b/lib/of_live.c
-index e4eee3855476..812c488f6067 100644
---- a/lib/of_live.c
-+++ b/lib/of_live.c
-@@ -8,13 +8,21 @@
-  * Copyright (c) 2017 Google, Inc
-  */
- 
-+#define LOG_CATEGORY	LOGC_DT
-+
- #include <common.h>
-+#include <abuf.h>
- #include <log.h>
- #include <linux/libfdt.h>
- #include <of_live.h>
- #include <malloc.h>
- #include <dm/of_access.h>
- #include <linux/err.h>
-+#include <linux/sizes.h>
-+
-+enum {
-+	BUF_STEP	= SZ_64K,
-+};
- 
- static void *unflatten_dt_alloc(void **mem, unsigned long size,
- 				unsigned long align)
-@@ -355,3 +363,117 @@ int of_live_create_empty(struct device_node **rootp)
- 
- 	return 0;
- }
-+
-+static int check_space(int ret, struct abuf *buf)
-+{
-+	if (ret == -FDT_ERR_NOSPACE) {
-+		if (!abuf_realloc_inc(buf, BUF_STEP))
-+			return log_msg_ret("spc", -ENOMEM);
-+		ret = fdt_resize(abuf_data(buf), abuf_data(buf),
-+				 abuf_size(buf));
-+		if (ret)
-+			return log_msg_ret("res", -EFAULT);
-+
-+		return -EAGAIN;
-+	}
-+
-+	return 0;
-+}
++int ofnode_write_bool(ofnode node, const char *propname, bool value);
 +
 +/**
-+ * flatten_node() - Write out the node and its properties into a flat tree
++ * ofnode_delete_prop() - Delete a property
++ *
++ * @node:	Node containing the property to delete
++ * @propname:	Name of property to delete
++ * Return: 0 if successful, -ve on error
 + */
-+static int flatten_node(struct abuf *buf, const struct device_node *node)
-+{
-+	const struct device_node *np;
-+	const struct property *pp;
-+	int ret;
++int ofnode_delete_prop(ofnode node, const char *propname);
 +
-+	ret = fdt_begin_node(abuf_data(buf), node->name);
-+	ret = check_space(ret, buf);
-+	if (ret == -EAGAIN) {
-+		ret = fdt_begin_node(abuf_data(buf), node->name);
-+		if (ret) {
-+			log_debug("Internal error a %d\n", ret);
-+			return -EFAULT;
-+		}
-+	}
-+	if (ret)
-+		return log_msg_ret("beg", ret);
-+
-+	/* First write out the properties */
-+	for (pp = node->properties; !ret && pp; pp = pp->next) {
-+		ret = fdt_property(abuf_data(buf), pp->name, pp->value,
-+				   pp->length);
-+		ret = check_space(ret, buf);
-+		if (ret == -EAGAIN) {
-+			ret = fdt_property(abuf_data(buf), pp->name, pp->value,
-+					   pp->length);
-+		}
-+	}
-+
-+	/* Next write out the subnodes */
-+	for (np = node->child; np; np = np->sibling) {
-+		ret = flatten_node(buf, np);
-+		if (ret)
-+			return log_msg_ret("sub", ret);
-+	}
-+
-+	ret = fdt_end_node(abuf_data(buf));
-+	ret = check_space(ret, buf);
-+	if (ret == -EAGAIN) {
-+		ret = fdt_end_node(abuf_data(buf));
-+		if (ret) {
-+			log_debug("Internal error b %d\n", ret);
-+			return -EFAULT;
-+		}
-+	}
-+	if (ret)
-+		return log_msg_ret("end", ret);
-+
-+	return 0;
-+}
-+
-+int of_live_flatten(const struct device_node *root, struct abuf *buf)
-+{
-+	int ret;
-+
-+	abuf_init(buf);
-+	if (!abuf_realloc(buf, BUF_STEP))
-+		return log_msg_ret("ini", -ENOMEM);
-+
-+	ret = fdt_create(abuf_data(buf), abuf_size(buf));
-+	if (!ret)
-+		ret = fdt_finish_reservemap(abuf_data(buf));
-+	if (ret) {
-+		log_debug("Failed to start FDT (err=%d)\n", ret);
-+		return log_msg_ret("sta", -EINVAL);
-+	}
-+
-+	ret = flatten_node(buf, root);
-+	if (ret)
-+		return log_msg_ret("flt", ret);
-+
-+	ret = fdt_finish(abuf_data(buf));
-+	ret = check_space(ret, buf);
-+	if (ret == -EAGAIN) {
-+		ret = fdt_finish(abuf_data(buf));
-+		if (ret) {
-+			log_debug("Internal error c %d\n", ret);
-+			return -EFAULT;
-+		}
-+	}
-+	if (ret)
-+		return log_msg_ret("fin", ret);
-+
-+	ret = fdt_pack(abuf_data(buf));
-+	if (ret) {
-+		log_debug("Failed to pack (err=%d)\n", ret);
-+		return log_msg_ret("pac", -EFAULT);
-+	}
-+
-+	if (!abuf_realloc(buf, fdt_totalsize(abuf_data(buf))))
-+		return log_msg_ret("abu", -EFAULT);
-+
-+	return 0;
-+}
+ /**
+  * ofnode_set_enabled() - Enable or disable a device tree node given by its
+  *			  ofnode
 diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index 845cded449ab..ceeb8e57791e 100644
+index ceeb8e57791e..9477f791d649 100644
 --- a/test/dm/ofnode.c
 +++ b/test/dm/ofnode.c
-@@ -17,6 +17,7 @@
-  */
- 
- #include <common.h>
-+#include <abuf.h>
- #include <dm.h>
- #include <log.h>
- #include <of_live.h>
-@@ -26,6 +27,7 @@
- #include <dm/root.h>
- #include <dm/test.h>
- #include <dm/uclass-internal.h>
-+#include <linux/sizes.h>
- #include <test/test.h>
- #include <test/ut.h>
- 
-@@ -1456,3 +1458,25 @@ static int dm_test_ofnode_delete(struct unit_test_state *uts)
+@@ -1480,3 +1480,28 @@ static int dm_test_oftree_to_fdt(struct unit_test_state *uts)
  	return 0;
  }
- DM_TEST(dm_test_ofnode_delete, UT_TESTF_SCAN_FDT);
+ DM_TEST(dm_test_oftree_to_fdt, UT_TESTF_SCAN_FDT);
 +
-+static int dm_test_oftree_to_fdt(struct unit_test_state *uts)
++/* test ofnode_read_bool() and ofnode_write_bool() */
++static int dm_test_bool(struct unit_test_state *uts)
 +{
-+	oftree tree, check;
-+	struct abuf buf, buf2;
++	const char *propname = "missing-bool-value";
++	ofnode node;
 +
-+	tree = oftree_default();
-+	ut_assertok(oftree_to_fdt(tree, &buf));
-+	ut_assert(abuf_size(&buf) > SZ_16K);
++	node = ofnode_path("/a-test");
++	ut_assert(ofnode_read_bool(node, "bool-value"));
++	ut_assert(!ofnode_read_bool(node, propname));
++	ut_assert(!ofnode_has_property(node, propname));
 +
-+	/* convert it back to a tree and see if it looks OK */
-+	check = oftree_from_fdt(abuf_data(&buf));
-+	ut_assert(oftree_valid(check));
++	ut_assertok(ofnode_write_bool(node, propname, true));
++	ut_assert(ofnode_read_bool(node, propname));
++	ut_assert(ofnode_has_property(node, propname));
++	ut_assert(ofnode_read_bool(node, "bool-value"));
 +
-+	ut_assertok(oftree_to_fdt(check, &buf2));
-+	ut_assert(abuf_size(&buf2) > SZ_16K);
-+	ut_asserteq(abuf_size(&buf), abuf_size(&buf2));
-+	ut_asserteq_mem(abuf_data(&buf), abuf_data(&buf2), abuf_size(&buf));
++	ut_assertok(ofnode_write_bool(node, propname, false));
++	ut_assert(!ofnode_read_bool(node, propname));
++	ut_assert(!ofnode_has_property(node, propname));
++	ut_assert(ofnode_read_bool(node, "bool-value"));
 +
 +	return 0;
 +}
-+DM_TEST(dm_test_oftree_to_fdt, UT_TESTF_SCAN_FDT);
++DM_TEST(dm_test_bool, UT_TESTF_SCAN_FDT);
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
