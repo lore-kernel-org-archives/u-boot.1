@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5671BCE7A8C
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3BD4CE7A8C
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:27:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FBD886BB9;
-	Sun, 24 Sep 2023 21:26:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8502686B29;
+	Sun, 24 Sep 2023 21:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HD2XqcRk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wwx+EI2a";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F95086B03; Sun, 24 Sep 2023 21:26:11 +0200 (CEST)
-Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
- [IPv6:2607:f8b0:4864:20::131])
+ id 3B01886BBE; Sun, 24 Sep 2023 21:26:14 +0200 (CEST)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6717886AE6
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 208CA86B5E
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x131.google.com with SMTP id
- e9e14a558f8ab-34961362f67so17452045ab.0
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:02 -0700 (PDT)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-351208d0d6cso10534345ab.1
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695583561; x=1696188361; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695583562; x=1696188362; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zEUcbFO0gEs/R8FSkOv/egTTUhgj7/NUGWAgX9VrMfE=;
- b=HD2XqcRkEARJlMBj935aHycez2XSl4X/U0JHW4YIw990TCMX04+N1g4FZFTfDi6UpB
- f5WZmXaM8Id1929CR+vcmiGZiyV28EQCsfwIGW0xXQfKgwX7AbASrFkb5SoNYQXnQsCJ
- eHx45zF4e00u1KwjFKWf+2Np+wOj68k6YWMIU=
+ bh=mitZQpcs1Cii52O+06Upwy9qIOcZBlbAPCXyCQte5jI=;
+ b=Wwx+EI2a1D8zME7dFX5s/jSAlyazLUmycUka5BxzAc+lUAHcyL8cmnN/kOFM0dnfej
+ yOq5eWh7Emsa9ZT5ah6yhma6PP7nAzqhxt2YGJo6ZIgMBr9M2e3YJe/MmmmkEoLNw0cS
+ kKUuCJYif80E3RbFRcV1nCdjBenE0zeRRL6b4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695583561; x=1696188361;
+ d=1e100.net; s=20230601; t=1695583562; x=1696188362;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zEUcbFO0gEs/R8FSkOv/egTTUhgj7/NUGWAgX9VrMfE=;
- b=NHgLlZZUcxgmM24oqxQXzgYCKr6fhcCoaOzFLQIexuYa6dsqsyHWMUHH19+zc2XsNc
- ajVr9zFZLv95DiLivRe8JPIEyTMeM2oIqsOLfdNE3EGjLNY7dAErgpgr+rP19ozjM6y5
- wXgYiFPBBjK2vE4ixCzKTR9IVBvHFhuoz92HiLk5gw8Zx9HDoSCAnk1RUIetoTzTyVEm
- ZsMqqFyVkCBegCF6ISSGEdtIXssjV9MTykLL+HDLnv9QSKjREHDIY8YPlkddPwbvXoUR
- Boy4BY2XpU6aFDjbjvDpGMvDmE2K6c7TkGNd17+Tov+0SFcAtysjptbS4430Fvcx0lw5
- h5zw==
-X-Gm-Message-State: AOJu0YyYkb1wctAF4QYLVhgNZRtRtu3yCJWBVUXfmRBI6tlNYPi2nOwf
- nekZ+pUKvPEV1Y6FMwM+WY7ydh0t1uVcB4KplbM=
-X-Google-Smtp-Source: AGHT+IF3eauOszQOk/vCBuKGifg87YkqlHZszasJnJw6DLRrfGP0KdnH6tFvryNgf3rFERTVmI0vig==
-X-Received: by 2002:a05:6e02:1b0a:b0:34f:dfb5:8e8 with SMTP id
- i10-20020a056e021b0a00b0034fdfb508e8mr7406821ilv.14.1695583561041; 
- Sun, 24 Sep 2023 12:26:01 -0700 (PDT)
+ bh=mitZQpcs1Cii52O+06Upwy9qIOcZBlbAPCXyCQte5jI=;
+ b=hxj8Ei9GqH0HJAKeIxYGwDSpuio2z1D3fTCqEeg6SyaBtFj0u1oP1iyq/m81N7AeCl
+ 3r80HtqF+2+x9SPqwx3kt621poAR+7OzoeUK2RLNqNLIeJVIS5yBg+aZRhhDj+E416nS
+ EDTPxVMyj0coew5mP70/jsWc7z9gO4/Q2C5y2+Ux7xCbfdCsQsj6wgGQJfE3YGeQbkIb
+ x8b/fCSKwSRW2u5vmZ/Qyay5t5pU7c46UJNCTt9yDyTmM6KtANv0djVV5xnmj3lZKc9Z
+ ViyrwjU3wiUD9a3bk3r74Lhjk5H9N6yeLtZ0rq2cnPTqiwwWxo0IN+5qmKGCbkJpqAZ2
+ V2VQ==
+X-Gm-Message-State: AOJu0YxyKfDOr6AHEU3pLre50i04W1OutvhW6iHKuZYpIDjXVvGrcRHi
+ ruZkgeGZVPz3QAXBZYySPebo0H5wOlrB5eN3e/0=
+X-Google-Smtp-Source: AGHT+IEkXvHDBRwKPVO0VehhpNiio0mjbt/YW9bO2PnT9AfnAFivArMnfRV30MwLar5ZulTO+jkBvQ==
+X-Received: by 2002:a92:b0f:0:b0:34f:ce12:a3c2 with SMTP id
+ b15-20020a920b0f000000b0034fce12a3c2mr5935696ilf.25.1695583562775; 
+ Sun, 24 Sep 2023 12:26:02 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.00
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 12:26:00 -0700 (PDT)
+ Sun, 24 Sep 2023 12:26:02 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Andre Przywara <andre.przywara@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH v3 13/38] doc: Clean up SYS_MALLOC_SIMPLE
-Date: Sun, 24 Sep 2023 13:24:58 -0600
-Message-ID: <20230924192536.1812799-14-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Troy Kisky <troykiskyboundary@gmail.com>
+Subject: [PATCH v3 15/38] spl: Avoid an #ifdef when printing gd->malloc_ptr
+Date: Sun, 24 Sep 2023 13:25:00 -0600
+Message-ID: <20230924192536.1812799-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
 References: <20230924192536.1812799-1-sjg@chromium.org>
@@ -91,91 +91,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move the useful help to Kconfig.
-
-Drop mention of CONFIG_SYS_MALLOC_SIMPLE since it doesn't exist.
-
-Correct a 'CONFIGSYS_MALLOC_F_LEN' typo
+Use an accessor in the header file to avoid this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v3:
-- Add new patch to clean up SYS_MALLOC_SIMPLE documentation
+- Rebase on the new patch
 
- Kconfig                  | 15 +++++++++++----
- README                   | 18 ------------------
- doc/usage/cmd/bdinfo.rst |  2 +-
- 3 files changed, 12 insertions(+), 23 deletions(-)
+Changes in v2:
+- Use the same condition for both pieces to avoid possible problems
 
-diff --git a/Kconfig b/Kconfig
-index 57afe597b0c8..a3061c86124e 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -277,10 +277,17 @@ config SYS_MALLOC_F_LEN
- 	default 0x10000 if ARCH_IMX8 || ARCH_IMX8M
- 	default 0x2000
- 	help
--	  Before relocation, memory is very limited on many platforms. Still,
--	  we can provide a small malloc() pool if needed. Driver model in
--	  particular needs this to operate, so that it can allocate the
--	  initial serial device and any others that are needed.
-+		Size of the malloc() pool for use before relocation. If
-+		this is defined, then a very simple malloc() implementation
-+		will become available before relocation. The address is just
-+		below the global data, and the stack is moved down to make
-+		space.
+ common/spl/spl.c                  | 9 +++++----
+ include/asm-generic/global_data.h | 6 ++++++
+ 2 files changed, 11 insertions(+), 4 deletions(-)
+
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 8967a140041b..2c36caa856fa 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -864,10 +864,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	} else {
+ 		debug("Unsupported OS image.. Jumping nevertheless..\n");
+ 	}
+-#if CONFIG_IS_ENABLED(SYS_MALLOC_F) && !defined(CONFIG_SPL_SYS_MALLOC_SIZE)
+-	debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->malloc_ptr,
+-	      gd->malloc_ptr / 1024);
+-#endif
++	if (CONFIG_IS_ENABLED(SYS_MALLOC_F) &&
++	    !IS_ENABLED(CONFIG_SPL_SYS_MALLOC_SIZE))
++		debug("SPL malloc() used 0x%lx bytes (%ld KB)\n",
++		      gd_malloc_ptr(), gd_malloc_ptr() / 1024);
 +
-+		This feature allocates regions with increasing addresses
-+		within the region. calloc() is supported, but realloc()
-+		is not available. free() is supported but does nothing.
-+		The memory will be freed (or in fact just forgotten) when
-+		U-Boot relocates itself.
+ 	bootstage_mark_name(get_bootstage_id(false), "end phase");
+ #ifdef CONFIG_BOOTSTAGE_STASH
+ 	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index f8fc87f1e46e..937fb12516c1 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -588,6 +588,12 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
+ #define gd_set_pci_ram_top(val)
+ #endif
  
- config SYS_MALLOC_LEN
- 	hex "Define memory for Dynamic allocation"
-diff --git a/README b/README
-index a1f90642274d..60c6b8a19db1 100644
---- a/README
-+++ b/README
-@@ -1281,24 +1281,6 @@ Configuration Settings:
- - CONFIG_SYS_MALLOC_LEN:
- 		Size of DRAM reserved for malloc() use.
- 
--- CONFIG_SYS_MALLOC_F_LEN
--		Size of the malloc() pool for use before relocation. If
--		this is defined, then a very simple malloc() implementation
--		will become available before relocation. The address is just
--		below the global data, and the stack is moved down to make
--		space.
--
--		This feature allocates regions with increasing addresses
--		within the region. calloc() is supported, but realloc()
--		is not available. free() is supported but does nothing.
--		The memory will be freed (or in fact just forgotten) when
--		U-Boot relocates itself.
--
--- CONFIG_SYS_MALLOC_SIMPLE
--		Provides a simple and small malloc() and calloc() for those
--		boards which do not use the full malloc in SPL (which is
--		enabled with CONFIG_SPL_SYS_MALLOC).
--
- - CFG_SYS_BOOTMAPSZ:
- 		Maximum size of memory mapped by the startup code of
- 		the Linux kernel; all data that must be processed by
-diff --git a/doc/usage/cmd/bdinfo.rst b/doc/usage/cmd/bdinfo.rst
-index b287d0ff7369..5261085a068d 100644
---- a/doc/usage/cmd/bdinfo.rst
-+++ b/doc/usage/cmd/bdinfo.rst
-@@ -106,7 +106,7 @@ sp start
- 
- Early malloc usage
-     amount of memory used in the early malloc memory and its maximum size
--    as defined by CONFIGSYS_MALLOC_F_LEN
-+    as defined by CONFIG_SYS_MALLOC_F_LEN
- 
- Configuration
- -------------
++#if CONFIG_VAL(SYS_MALLOC_F_LEN)
++#define gd_malloc_ptr()		gd->malloc_ptr
++#else
++#define gd_malloc_ptr()		0L
++#endif
++
+ /**
+  * enum gd_flags - global data flags
+  *
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
