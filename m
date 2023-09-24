@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B6E8CE7A8C
-	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:29:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB91CE7A8A
+	for <u-boot@archiver.kernel.org>; Sun, 24 Sep 2023 19:29:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49DD986C16;
+	by phobos.denx.de (Postfix) with ESMTP id B638286C1E;
 	Sun, 24 Sep 2023 21:26:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KejvL/PJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GiW2XYIa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB53986C02; Sun, 24 Sep 2023 21:26:21 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id 4150C86C03; Sun, 24 Sep 2023 21:26:22 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73FEE86B03
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3153286B8F
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 21:26:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-79fa4ff8220so121474439f.3
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:11 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-79f9acc857cso139629239f.2
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 12:26:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695583570; x=1696188370; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695583571; x=1696188371; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pjxxRrsyO9RXtZgkSofP3sq4lBbxmzzvhqNdKiznt5Y=;
- b=KejvL/PJQ4si9ENXllZO7Z4OChNTQzEHY3tlgvLJFz8/Xpp4aQkG+LsKx9X7H6Ddpk
- anRnZ729RQMjbI1BH59Vf4//wN+7il2gVn03zkmLErEn0fadrE4SkSr6249nfKg/PYOG
- HMDqd3SQss0+5P6sIL+AkX4xAwXAuMTCWvanw=
+ bh=Wd0FoVDYBNdvfSUqFfDZHh3ywde1wLMVQ5FdGFbNYzQ=;
+ b=GiW2XYIasgu/IgOEl1Dg54Vm1QqfIQeSmhJFcNTFtqQU3eFjtHNBOQ6WmhvyuxIFVZ
+ YgrKBredZ+HquKm6sWe+MYGC8ZEeYfkSt1Nf2KYdIiekCgBDvSF8cG1MRd7coP7Imahp
+ IkPsFz/xmGGZqvHcx6aEMkupSrPkW5BnMhRcM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695583570; x=1696188370;
+ d=1e100.net; s=20230601; t=1695583571; x=1696188371;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pjxxRrsyO9RXtZgkSofP3sq4lBbxmzzvhqNdKiznt5Y=;
- b=VMa2tEzTleF8d+RIN6Pj1lRUF0RYp/RxLfaF1L4xJe9OCJ5ExS30G5d1pT5B5lRnPe
- i0yJsG5Heky8iUmc4Y6jx6V4UtGleEwodz69sgKSbAK6c+KQfVp5ou/yKfOyOAfGqufx
- 92dRJRpYg9PDcd4ghl43q7K3QPVa6GvBR6sN7cPSYOBJJ0T3Oh3Pm11IZanLfk74FPv1
- mMWdarwq6vsQ4NFtrFcx8W0tNQ+sw2f9oA1FnWbp9GO2ZcalO+2ZHOAavPbJZ1l8Y4z/
- ypchIp4aGw0134Hn4Sno9oRJ3jKZxyshNn1LHqfm/Ni7ei8wYaLapff744XBrfjKWa6L
- AFIg==
-X-Gm-Message-State: AOJu0YxOz/Rb3GJp5C2+y1QGvJUTJSZIvM2GGVfgflkSlBW2+qZARg5/
- glxJnTnfzqUBfZ5neTV6oMA4+mSXYR/8n/aPfco=
-X-Google-Smtp-Source: AGHT+IH1N15ZXgUOXq8YbDPG2K3s/Hi5qjimo/gkI0McAvOxUVzv/jCPSePlSKlnrYyCiFhHlzp/Ug==
-X-Received: by 2002:a6b:6614:0:b0:780:d031:bc42 with SMTP id
- a20-20020a6b6614000000b00780d031bc42mr6974941ioc.16.1695583570020; 
+ bh=Wd0FoVDYBNdvfSUqFfDZHh3ywde1wLMVQ5FdGFbNYzQ=;
+ b=mXNTYC5mrk/7JIxhLpg6vv2Dnh9HwR4NH9UCWgW0GFHbyTKYhtWxfW0yBM67xSmfui
+ HE+anwzrfUhGfuqa77iCPsWi3dBfGtUAmlNkvRP22iZFzezPXD86PEwzg830l3z9ePdX
+ Oqeoqq733Gcm/CMTVG2GSMF9Vt5SjPaUmssSrlSaJQMN0xzsXoz4nIB8TQqB0HzINHuM
+ aCc1ZClxZnIFmN9QK/Ej0/ASzNZvapPvQ199VAu1S0jeD5Dl8GiAjy270nkrVrrn7+IJ
+ CZDlGqj96ARqBBkbxTmnjGvfV/UH1+U0fKpTnRtXuThMgFAhMrmHr7ym5QNWlPmSPuSH
+ DmYQ==
+X-Gm-Message-State: AOJu0YzgK2rxvT46Pk09tIiZGBeo2bihaIoi/SZ0UjqsomuVPFaY0XXf
+ E1sAphnK77+MCKqIfGEFB8Jpa3nMwWkq6T4FFho=
+X-Google-Smtp-Source: AGHT+IEf7jzAalIGyT9J0Mgav1OZ5hF/Uc8so8bfrNh/dVeU2m/7Vm/1I5vXQNDgk5cU+uqcb4c7tw==
+X-Received: by 2002:a6b:3ed4:0:b0:79f:cf6a:cc55 with SMTP id
+ l203-20020a6b3ed4000000b0079fcf6acc55mr324320ioa.20.1695583570799; 
  Sun, 24 Sep 2023 12:26:10 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.09
+ do25-20020a0566384c9900b0043a11ec6517sm2321702jab.171.2023.09.24.12.26.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 12:26:09 -0700 (PDT)
+ Sun, 24 Sep 2023 12:26:10 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
  Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH v3 23/38] dm: core: Tidy up comments in the ofnode tests
-Date: Sun, 24 Sep 2023 13:25:08 -0600
-Message-ID: <20230924192536.1812799-24-sjg@chromium.org>
+Subject: [PATCH v3 24/38] dm: core: Add a function to create an empty tree
+Date: Sun, 24 Sep 2023 13:25:09 -0600
+Message-ID: <20230924192536.1812799-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230924192536.1812799-1-sjg@chromium.org>
 References: <20230924192536.1812799-1-sjg@chromium.org>
@@ -88,289 +88,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add comments to the functions where the test name does not indicate what
-is being tested. Rename functions in a few cases, so that a search for the
-function will also file its test.
+Provide a function to create a new, empty tree.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- test/dm/ofnode.c | 46 +++++++++++++++++++++++++++++++++++++++-------
- 1 file changed, 39 insertions(+), 7 deletions(-)
+ drivers/core/ofnode.c | 56 +++++++++++++++++++++++++++++++++++++++----
+ include/dm/ofnode.h   |  9 +++++++
+ include/of_live.h     |  8 +++++++
+ lib/of_live.c         | 19 +++++++++++++++
+ test/dm/ofnode.c      | 16 +++++++++++++
+ 5 files changed, 104 insertions(+), 4 deletions(-)
 
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index 6f21d66a95ef..3bf97761d1ee 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -91,6 +91,7 @@ void free_oftree(oftree tree)
- 		free(tree.np);
+diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+index d978f8e392e6..e39cbd946dd9 100644
+--- a/drivers/core/ofnode.c
++++ b/drivers/core/ofnode.c
+@@ -47,6 +47,17 @@ static int oftree_find(const void *fdt)
+ 	return -1;
  }
  
-+/* test ofnode_device_is_compatible() */
- static int dm_test_ofnode_compatible(struct unit_test_state *uts)
++static int check_tree_count(void)
++{
++	if (oftree_count == CONFIG_OFNODE_MULTI_TREE_MAX) {
++		log_warning("Too many registered device trees (max %d)\n",
++			    CONFIG_OFNODE_MULTI_TREE_MAX);
++		return -E2BIG;
++	}
++
++	return 0;
++}
++
+ static oftree oftree_ensure(void *fdt)
  {
- 	ofnode root_node = ofnode_path("/");
-@@ -134,6 +135,7 @@ static int dm_test_ofnode_get_by_phandle(struct unit_test_state *uts)
+ 	oftree tree;
+@@ -69,11 +80,8 @@ static oftree oftree_ensure(void *fdt)
+ 	if (gd->flags & GD_FLG_RELOC) {
+ 		i = oftree_find(fdt);
+ 		if (i == -1) {
+-			if (oftree_count == CONFIG_OFNODE_MULTI_TREE_MAX) {
+-				log_warning("Too many registered device trees (max %d)\n",
+-					    CONFIG_OFNODE_MULTI_TREE_MAX);
++			if (check_tree_count())
+ 				return oftree_null();
+-			}
+ 
+ 			/* register the new tree */
+ 			i = oftree_count++;
+@@ -92,6 +100,41 @@ static oftree oftree_ensure(void *fdt)
+ 	return tree;
  }
- DM_TEST(dm_test_ofnode_get_by_phandle, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
  
-+/* test oftree_get_by_phandle() with a the 'other' oftree */
- static int dm_test_ofnode_get_by_phandle_ot(struct unit_test_state *uts)
++int oftree_new(oftree *treep)
++{
++	oftree tree = oftree_null();
++	int ret;
++
++	if (of_live_active()) {
++		struct device_node *root;
++
++		ret = of_live_create_empty(&root);
++		if (ret)
++			return log_msg_ret("liv", ret);
++		tree = oftree_from_np(root);
++	} else {
++		const int size = 1024;
++		void *fdt;
++
++		ret = check_tree_count();
++		if (ret)
++			return log_msg_ret("fla", ret);
++
++		/* register the new tree with a small size */
++		fdt = malloc(size);
++		if (!fdt)
++			return log_msg_ret("fla", -ENOMEM);
++		ret = fdt_create_empty_tree(fdt, size);
++		if (ret)
++			return log_msg_ret("fla", -EINVAL);
++		oftree_list[oftree_count++] = fdt;
++		tree.fdt = fdt;
++	}
++	*treep = tree;
++
++	return 0;
++}
++
+ void oftree_dispose(oftree tree)
  {
- 	oftree otree = get_other_oftree(uts);
-@@ -188,6 +190,7 @@ static int dm_test_ofnode_by_prop_value(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_by_prop_value, UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_by_prop_value() with a the 'other' oftree */
- static int dm_test_ofnode_by_prop_value_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -200,6 +203,7 @@ static int dm_test_ofnode_by_prop_value_ot(struct unit_test_state *uts)
- DM_TEST(dm_test_ofnode_by_prop_value_ot,
- 	UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
-+/* test ofnode_read_fmap_entry() */
- static int dm_test_ofnode_fmap(struct unit_test_state *uts)
- {
- 	struct fmap_entry entry;
-@@ -215,6 +219,7 @@ static int dm_test_ofnode_fmap(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_fmap, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_read_prop() */
- static int dm_test_ofnode_read(struct unit_test_state *uts)
- {
- 	const u32 *val;
-@@ -241,6 +246,7 @@ static int dm_test_ofnode_read(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_read, UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_read_prop() with the 'other' tree */
- static int dm_test_ofnode_read_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -260,6 +266,7 @@ static int dm_test_ofnode_read_ot(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_read_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
-+/* test ofnode_count_/parse_phandle_with_args() */
- static int dm_test_ofnode_phandle(struct unit_test_state *uts)
- {
- 	struct ofnode_phandle_args args;
-@@ -335,6 +342,7 @@ static int dm_test_ofnode_phandle(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_phandle, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_count_/parse_phandle_with_args() with 'other' tree */
- static int dm_test_ofnode_phandle_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -363,6 +371,7 @@ static int dm_test_ofnode_phandle_ot(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_phandle_ot, UT_TESTF_OTHER_FDT);
- 
-+/* test ofnode_read_chosen_string/node/prop() */
- static int dm_test_ofnode_read_chosen(struct unit_test_state *uts)
- {
- 	const char *str;
-@@ -392,6 +401,7 @@ static int dm_test_ofnode_read_chosen(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_read_chosen, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_get_aliases_node/prop() */
- static int dm_test_ofnode_read_aliases(struct unit_test_state *uts)
- {
- 	const void *val;
-@@ -435,6 +445,7 @@ static int dm_test_ofnode_get_child_count(struct unit_test_state *uts)
- DM_TEST(dm_test_ofnode_get_child_count,
- 	UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_get_child_count() with 'other' tree */
- static int dm_test_ofnode_get_child_count_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -469,6 +480,7 @@ static int dm_test_ofnode_is_enabled(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_is_enabled, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_is_enabled() with 'other' tree */
- static int dm_test_ofnode_is_enabled_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -482,6 +494,7 @@ static int dm_test_ofnode_is_enabled_ot(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_is_enabled_ot, UT_TESTF_OTHER_FDT);
- 
-+/* test ofnode_get_addr/size() */
- static int dm_test_ofnode_get_reg(struct unit_test_state *uts)
- {
- 	ofnode node;
-@@ -518,6 +531,7 @@ static int dm_test_ofnode_get_reg(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_get_reg, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_get_addr() with 'other' tree */
- static int dm_test_ofnode_get_reg_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -552,6 +566,7 @@ static int dm_test_ofnode_get_path(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_get_path, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_get_path() with 'other' tree */
- static int dm_test_ofnode_get_path_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -571,6 +586,7 @@ static int dm_test_ofnode_get_path_ot(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_get_path_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
-+/* test ofnode_conf_read_bool/int/str() */
- static int dm_test_ofnode_conf(struct unit_test_state *uts)
- {
- 	ut_assert(!ofnode_conf_read_bool("missing"));
-@@ -623,6 +639,7 @@ static int dm_test_ofnode_for_each_compatible_node(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_for_each_compatible_node, UT_TESTF_SCAN_FDT);
- 
-+/* test dm_test_ofnode_string_count/index/list() */
- static int dm_test_ofnode_string(struct unit_test_state *uts)
- {
- 	const char **val;
-@@ -670,6 +687,7 @@ static int dm_test_ofnode_string(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_string, UT_TESTF_SCAN_FDT);
- 
-+/* test error returns from ofnode_read_string_count/index/list() */
- static int dm_test_ofnode_string_err(struct unit_test_state *uts)
- {
- 	const char **val;
-@@ -719,7 +737,7 @@ static int dm_test_ofnode_string_err(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_string_err, UT_TESTF_LIVE_TREE);
- 
--static int dm_test_ofnode_get_phy(struct unit_test_state *uts)
-+static int dm_test_ofnode_read_phy_mode(struct unit_test_state *uts)
- {
- 	ofnode eth_node, phy_node;
- 	phy_interface_t mode;
-@@ -739,7 +757,7 @@ static int dm_test_ofnode_get_phy(struct unit_test_state *uts)
- 
+ 	if (of_live_active())
+@@ -193,6 +236,11 @@ static inline int oftree_find(const void *fdt)
  	return 0;
  }
--DM_TEST(dm_test_ofnode_get_phy, UT_TESTF_SCAN_FDT);
-+DM_TEST(dm_test_ofnode_read_phy_mode, UT_TESTF_SCAN_FDT);
+ 
++int oftree_new(oftree *treep)
++{
++	return -ENOSYS;
++}
++
+ #endif /* OFNODE_MULTI_TREE */
  
  /**
-  * make_ofnode_fdt() - Create an FDT for testing with ofnode
-@@ -773,11 +791,11 @@ static int make_ofnode_fdt(struct unit_test_state *uts, void *fdt, int size,
- 	return 0;
- }
+diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+index 8418dd459df8..b6010f7f9c9a 100644
+--- a/include/dm/ofnode.h
++++ b/include/dm/ofnode.h
+@@ -127,6 +127,15 @@ static inline ofnode noffset_to_ofnode(ofnode other_node, int of_offset)
  
--static int dm_test_ofnode_root(struct unit_test_state *uts)
-+/* Check that aliases work on the control FDT */
-+static int dm_test_ofnode_aliases(struct unit_test_state *uts)
- {
- 	ofnode node;
- 
--	/* Check that aliases work on the control FDT */
- 	node = ofnode_get_aliases_node("ethernet3");
- 	ut_assert(ofnode_valid(node));
- 	ut_asserteq_str("sbe5", ofnode_get_name(node));
-@@ -786,8 +804,15 @@ static int dm_test_ofnode_root(struct unit_test_state *uts)
- 
- 	return 0;
- }
--DM_TEST(dm_test_ofnode_root, UT_TESTF_SCAN_FDT);
-+DM_TEST(dm_test_ofnode_aliases, UT_TESTF_SCAN_FDT);
+ #endif /* OFNODE_MULTI_TREE */
  
 +/**
-+ * dm_test_ofnode_root_mult() - Check aliaes on control and 'other' tree
++ * oftree_new() - Create a new, empty tree
 + *
-+ * Check that aliases work only with the control FDT, not with 'other' tree.
-+ * This is not actually the desired behaviour. If aliases are implemented for
-+ * any tree, then this test should be changed.
++ * @treep: Returns a pointer to the tree, on success
++ * Returns: 0 on success, -ENOMEM if out of memory, -E2BIG if !OF_LIVE and
++ * there are too many (flattrees) already
 + */
- static int dm_test_ofnode_root_mult(struct unit_test_state *uts)
- {
- 	char fdt[256];
-@@ -820,6 +845,7 @@ static int dm_test_ofnode_root_mult(struct unit_test_state *uts)
++int oftree_new(oftree *treep);
++
+ /**
+  * ofnode_to_np() - convert an ofnode to a live DT node pointer
+  *
+diff --git a/include/of_live.h b/include/of_live.h
+index 05e86ac06b1a..81cb9bd13e2c 100644
+--- a/include/of_live.h
++++ b/include/of_live.h
+@@ -46,4 +46,12 @@ int unflatten_device_tree(const void *blob, struct device_node **mynodes);
+  */
+ void of_live_free(struct device_node *root);
+ 
++/**
++ * of_live_create_empty() - Create a new, empty tree
++ *
++ * @rootp: Returns the root node of the created tree
++ * Return: 0 if OK, -ENOMEM if out of memory
++ */
++int of_live_create_empty(struct device_node **rootp);
++
+ #endif
+diff --git a/lib/of_live.c b/lib/of_live.c
+index 25f7af61061e..e4eee3855476 100644
+--- a/lib/of_live.c
++++ b/lib/of_live.c
+@@ -336,3 +336,22 @@ void of_live_free(struct device_node *root)
+ 	/* the tree is stored as a contiguous block of memory */
+ 	free(root);
  }
- DM_TEST(dm_test_ofnode_root_mult, UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_set_enabled(), ofnode_write_prop() on a livetree */
- static int dm_test_ofnode_livetree_writing(struct unit_test_state *uts)
- {
- 	struct udevice *dev;
-@@ -909,6 +935,7 @@ static int dm_test_ofnode_write_copy(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_write_copy, UT_TESTF_SCAN_FDT);
- 
-+/* test writing a property to the 'other' tree */
- static int dm_test_ofnode_write_copy_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -925,6 +952,7 @@ static int dm_test_ofnode_write_copy_ot(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_write_copy_ot, UT_TESTF_SCAN_FDT | UT_TESTF_OTHER_FDT);
- 
-+/* test ofnode_read_u32_index/default() */
- static int dm_test_ofnode_u32(struct unit_test_state *uts)
- {
- 	ofnode node;
-@@ -952,6 +980,7 @@ static int dm_test_ofnode_u32(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_u32, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_read_u32_array() */
- static int dm_test_ofnode_u32_array(struct unit_test_state *uts)
- {
- 	ofnode node;
-@@ -978,7 +1007,7 @@ static int dm_test_ofnode_u32_array(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_u32_array, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
- 
--static int dm_test_ofnode_u64(struct unit_test_state *uts)
-+static int dm_test_ofnode_read_u64(struct unit_test_state *uts)
- {
- 	ofnode node;
- 	u64 val;
-@@ -999,7 +1028,7 @@ static int dm_test_ofnode_u64(struct unit_test_state *uts)
- 
++
++int of_live_create_empty(struct device_node **rootp)
++{
++	struct device_node *root;
++
++	root = calloc(1, sizeof(struct device_node));
++	if (!root)
++		return -ENOMEM;
++	root->name = strdup("");
++	if (!root->name) {
++		free(root);
++		return -ENOMEM;
++	}
++	root->type = "<NULL>";
++	root->full_name = "";
++	*rootp = root;
++
++	return 0;
++}
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index 3bf97761d1ee..594116e3c045 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -1346,3 +1346,19 @@ static int dm_test_livetree_ensure(struct unit_test_state *uts)
  	return 0;
  }
--DM_TEST(dm_test_ofnode_u64, UT_TESTF_SCAN_FDT);
-+DM_TEST(dm_test_ofnode_read_u64, UT_TESTF_SCAN_FDT);
- 
- static int dm_test_ofnode_add_subnode(struct unit_test_state *uts)
- {
-@@ -1110,6 +1139,7 @@ static int dm_test_ofnode_by_compatible(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_by_compatible, UT_TESTF_SCAN_FDT);
- 
-+/* check ofnode_by_compatible() on the 'other' tree */
- static int dm_test_ofnode_by_compatible_ot(struct unit_test_state *uts)
- {
- 	const char *compat = "sandbox-other2";
-@@ -1144,6 +1174,7 @@ static int dm_test_ofnode_find_subnode(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_find_subnode, UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_find_subnode() on the 'other' tree */
- static int dm_test_ofnode_find_subnode_ot(struct unit_test_state *uts)
- {
- 	oftree otree = get_other_oftree(uts);
-@@ -1257,6 +1288,7 @@ static int dm_test_ofnode_copy_props(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_ofnode_copy_props, UT_TESTF_SCAN_FDT);
- 
-+/* test ofnode_copy_props() with the 'other' tree */
- static int dm_test_ofnode_copy_props_ot(struct unit_test_state *uts)
- {
- 	ofnode src, dst;
+ DM_TEST(dm_test_livetree_ensure, UT_TESTF_SCAN_FDT);
++
++static int dm_test_oftree_new(struct unit_test_state *uts)
++{
++	ofnode node, subnode, check;
++	oftree tree;
++
++	ut_assertok(oftree_new(&tree));
++	node = oftree_root(tree);
++	ut_assert(ofnode_valid(node));
++	ut_assertok(ofnode_add_subnode(node, "edmund", &subnode));
++	check = ofnode_find_subnode(node, "edmund");
++	ut_asserteq(check.of_offset, subnode.of_offset);
++
++	return 0;
++}
++DM_TEST(dm_test_oftree_new, UT_TESTF_SCAN_FDT);
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
