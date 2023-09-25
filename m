@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC088CE7AA5
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 17:07:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63B0ECE7AA8
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 17:11:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4D2E86C37;
-	Mon, 25 Sep 2023 19:07:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8775786AEA;
+	Mon, 25 Sep 2023 19:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ReFGFtx0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xYEd6yrN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B70F86CAD; Mon, 25 Sep 2023 19:07:46 +0200 (CEST)
+ id 7B9D986BE8; Mon, 25 Sep 2023 19:11:10 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2060486B3F
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 19:07:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 910F4805CD
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 19:11:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38PH7V2v081664;
- Mon, 25 Sep 2023 12:07:31 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38PHAvh9082765;
+ Mon, 25 Sep 2023 12:10:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695661651;
- bh=wjmUgW4PMDeUqopNndrgdIzSD4YTZIQMlGFVz00y4i8=;
+ s=ti-com-17Q1; t=1695661857;
+ bh=7weN2BwNmL8SozhnEn9Rkq5FUA2E/veCIfCzo/kWaYI=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ReFGFtx0msua469udnEtYU7DYe9Sn+nASkzr6jDmNxCjue+DENleKexRcXOanlnVB
- BGvHDsqQhG+yX+oPkydHzcuNij80YnGQl9JkqYehdWDBvSAwhYRf/Jo8/bsKzEJzt0
- sVjbD0RBWniU47SG2a96mdObiAdWQUAcMVqWIkbc=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38PH7VGM116820
+ b=xYEd6yrNZf7bmbJbo4MP+gmv0rlnQo/6DQzqgEVWMlWgCHeXRHYKRIZkOU/0ARypo
+ X6C5akmwv6C3cXW2QFqzwvAbk/4BLwqV+senJBbMQfRNmGFuJnjzi7pbXVnuXP0ANA
+ 0OJX4OAlzntXI+OeN2lMZIvRu3dq1N7l7CxSJTEs=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38PHAvdk015562
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 25 Sep 2023 12:07:31 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 25 Sep 2023 12:10:57 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
- Sep 2023 12:07:30 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 12:10:56 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 25 Sep 2023 12:07:29 -0500
-Received: from [10.249.141.75] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38PH7PUQ003659;
- Mon, 25 Sep 2023 12:07:26 -0500
-Message-ID: <a8bdf338-9e9f-db6e-4b77-838791b081b3@ti.com>
-Date: Mon, 25 Sep 2023 22:37:24 +0530
+ Frontend Transport; Mon, 25 Sep 2023 12:10:56 -0500
+Received: from [10.249.141.75] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38PHAr97037080;
+ Mon, 25 Sep 2023 12:10:54 -0500
+Message-ID: <968d8b5f-4f36-a3eb-5a0a-ec2a59aa8af3@ti.com>
+Date: Mon, 25 Sep 2023 22:40:53 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
 Subject: Re: [PATCH] lmb: remove overlapping region with next range
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Mark Kettenis <mark.kettenis@xs4all.nl>
-CC: <nm@ti.com>, <vigneshr@ti.com>, <patrick.delaunay@foss.st.com>,
- <sjoerd@collabora.com>, <u-boot@lists.denx.de>, <xypron.glpk@gmx.de>,
- <michal.simek@amd.com>, <s-anna@ti.com>, <dsankouski@gmail.com>,
- <kettenis@openbsd.org>, <sumit.garg@linaro.org>, <sam.shih@mediatek.com>
+To: Simon Glass <sjg@google.com>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, <nm@ti.com>, <vigneshr@ti.com>, 
+ <patrick.delaunay@foss.st.com>, <sjoerd@collabora.com>,
+ <u-boot@lists.denx.de>, <michal.simek@amd.com>, Suman Anna <s-anna@ti.com>
 References: <20230924111832.3741245-1-u-kumar1@ti.com>
- <20230925152126.GC305624@bill-the-cat>
- <87ttricly9.fsf@bloch.sibelius.xs4all.nl>
- <20230925153114.GD305624@bill-the-cat>
+ <57F0DE54-C8BF-4B48-9075-2D267DBA4924@gmx.de>
+ <7edb7998-66a4-293e-9cfb-ebc142387684@ti.com>
+ <CAPnjgZ1K8=UKaTf2WTeOY+58uoRrH=AiL6UNyM7v_Q1gpOvwuA@mail.gmail.com>
 From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20230925153114.GD305624@bill-the-cat>
+In-Reply-To: <CAPnjgZ1K8=UKaTf2WTeOY+58uoRrH=AiL6UNyM7v_Q1gpOvwuA@mail.gmail.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -86,49 +85,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark/Tom
+Thanks Simon
 
-On 9/25/2023 9:01 PM, Tom Rini wrote:
-> On Mon, Sep 25, 2023 at 05:27:26PM +0200, Mark Kettenis wrote:
->>> Date: Mon, 25 Sep 2023 11:21:26 -0400
->>> From: Tom Rini <trini@konsulko.com>
->>>
->>> On Sun, Sep 24, 2023 at 04:48:32PM +0530, Udit Kumar wrote:
->>>
->>>> In case of new memory range to be added is coalesced
->>>> with any already added non last lmb region.
->>>>
->>>> And there is possibility that, then region in which new memory
->>>> range added is not adjacent to next region. But have some
->>>> sections are overlapping.
->>>>
->>>> So along with adjacency check with next lmb region,
->>>> check for overlap should be done.
->>>>
->>>> In case overlap  is found, adjust and merge these two lmb
->>>> region into one.
->>>>
->>>> Reported-by: Suman Anna <s-anna@ti.com>
->>>> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
->>> This is good!  I wonder if this addresses the issue that has caused
->>> other platforms to need to set CONFIG_LMB_MAX_REGIONS=64 and I'm
->>> wondering if any of the other maintainers I've cc'd here can drop back
->>> to the default number of regions and then re-test their failure case?
->>> Thanks!
->> Hi Tom,
+On 9/25/2023 9:39 PM, Simon Glass wrote:
+> Hi Udit,
+>
+> On Sun, 24 Sept 2023 at 22:10, Kumar, Udit <u-kumar1@ti.com> wrote:
+>> On 9/24/2023 7:21 PM, Heinrich Schuchardt wrote:
+>>> Am 24. September 2023 13:18:32 MESZ schrieb Udit Kumar <u-kumar1@ti.com>:
+>>>> [..]
+>>> Assumption
 >>
->> For the Apple M1 systems I don't think it makes sense to reduce the
->> number of regions.  These systems don't have TPL or SPL, have plenty
->> of memory (at least 8GB) and are really fast.  And we anticipate that
->> the number of memory regions will only grow in the future.
-> This partly gets at what I see as part of the problem.  It's been
-> unclear to me if it's reasonable to just bump the default to 64 for
-> aarch64 (and riscv?) because the problem is that 16 is truly too small,
-> or given what we're doing we still don't need a ton of LMB regions as at
-> the end of the day things should be coalesced in to just a few and it's
-> been an underlying bug in an area everyone assumed wasn't buggy.
+>> Thanks Heinrich  will fix this typo in v2.
+>>
+>> Let me wait for other review feedback as well before proceeding for v2.
+>>
+>>
+>>> Regards Heinrich
+>>>
+>>>> [..]
+> Can you please add a test to test/lib which fails before your change
+> and passes after?
 
-Did we observed overlapped memory regions added in lmb region ?
+Sure, will add test case.
 
-which leads to increase in default number of regions.
 
+> Regards,
+> Simon
