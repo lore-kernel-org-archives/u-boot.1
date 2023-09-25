@@ -4,77 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81EB9CE7A81
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 13:56:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D370CE7A94
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 14:00:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6C1386C06;
-	Mon, 25 Sep 2023 15:56:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7938186C71;
+	Mon, 25 Sep 2023 16:00:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dawes.za.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SA/FPbzr";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail-com.20230601.gappssmtp.com header.i=@gmail-com.20230601.gappssmtp.com header.b="klDOrNVA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E922C86C28; Mon, 25 Sep 2023 15:56:21 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id D9DCE86CC9; Mon, 25 Sep 2023 16:00:42 +0200 (CEST)
+Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
+ [IPv6:2607:f8b0:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9BA186B89
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 15:56:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EAC986C67
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 16:00:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=dawes.za.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linus.walleij@linaro.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-59f57ad6126so39019447b3.3
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 06:56:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=rogan.dawes@gmail.com
+Received: by mail-ot1-x330.google.com with SMTP id
+ 46e09a7af769-6c4b9e09521so3148850a34.3
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 07:00:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695650178; x=1696254978; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Nsx7zCsnc4Y82Mese57/Z4wPkjXhp6bJOUv8C1RJZZ0=;
- b=SA/FPbzrgc0Aj8ZJg2RtNXQRNfYHwX8KWV2F8/EBexJHbP9i8tWbexjGWVelnMB1hY
- JBfY/n5hvtYDCnJ5KBWicJnZK9pmiMJUCViB2CZw2LxekM0TNISbcVV6iuJVrXnn3crF
- Ze443+0NmkOvwyrsFb/xGOiUu7xxF5HWz8g10YEzOtU9uBdYDo3te/PMIZrVjFYVWXq0
- bTEgzwlTxkgKr1aS76HoZWSkuXqzZUx730ZdpWKB/DrBNSzmXQ4pkUNNQRfFfgZTsjud
- +RpKHc6tGj8fd03XZI/QRMbQ4DpvvxNqf7qabA9Wv5r1WIVG0l94i9LDuFB13sJQIYAC
- rqEw==
+ d=gmail-com.20230601.gappssmtp.com; s=20230601; t=1695650438; x=1696255238;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=x07Nwl8WzTcJPQMf9zX6Xqn8qM01C8ThcWTQ4qvyn4s=;
+ b=klDOrNVAZkyq0Scpy9JouOkucD71yxWKAMc+1BllyxHoGqPUbSkfal9HPFis+MkxyA
+ zNu4fG7d8LxmzGBg4XZhrE5fBb5r4wi08bVtfp8fNGrKkNupvO7pbf8ltnuPetXXXgUC
+ mVVKRbLGdMhgKa97Ev3Ma9abVZZQW2v1gTMo+xI7usxzV91pel7AmvA/0M7odVJunP+E
+ sn5M+n95oNDC+w+JWgoY39+pM02COzaJ5VvbWWmPIl1fG3s3xt7QEbQimuIwGWQ5kyC0
+ bPbklCpXj8Btonp70lhsmddKKUpp2uathWxqMMhpcAjDEDX/vkDhTJz7perD9nlgCrUt
+ /syQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695650178; x=1696254978;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Nsx7zCsnc4Y82Mese57/Z4wPkjXhp6bJOUv8C1RJZZ0=;
- b=bf9GX016U/5cSTUSqFyCYIpA03TsSW1nX8VA6LimM/YUWH653qhioBNBrVBhZU/5Q3
- QZP8+3ZFdLVHGEiMdVekvEQh0+M6KEjCSx+3jdxXY/Q6qcTj1v/rfkMPCmn/HHVoPIVv
- XaWOLI1FtSzOOD64bFwWgqIlzcdoJkqcdTg2Pe3zM6Do6mcK1SXjhwmn4u/Ow6yIA8MS
- a498UwLNZEKmr1C2UBslnYdityJ40EHN5wHtwuXoLJQzjXGxWBFgyIGUjpC8Zu+QgRnt
- MMz68BuF9OzMSSha8Hi6YElI4pK2drBbXejlWY83laB9jqa0lcTg7MMRnQ3KxVA5UodD
- A5JA==
-X-Gm-Message-State: AOJu0YzYSjzp/pmXjmdnRdED4C6kqgFJa1CCpcG2eX/k9rmmjgNuQ5Tv
- /pHsJx/pc84ndqIdPUZi+0JBUd0RUlRKnU5NgOv0rQ==
-X-Google-Smtp-Source: AGHT+IH6D2qt/oUR6AU6cFVbhJ81x3/C7n6XQtfZXruK/1W/iIZNZnLE00/yq98Fm1ipv37WgrCoqMHS7oAcJaWrTXU=
-X-Received: by 2002:a0d:ce85:0:b0:589:e4aa:7b67 with SMTP id
- q127-20020a0dce85000000b00589e4aa7b67mr6382833ywd.41.1695650178543; Mon, 25
- Sep 2023 06:56:18 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695650438; x=1696255238;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=x07Nwl8WzTcJPQMf9zX6Xqn8qM01C8ThcWTQ4qvyn4s=;
+ b=MM9JAePMBbhmYH87pbqvk+liga3VDOEFi0LuzyIBAoc8rOxunD3bne9lSqr9XMYLDl
+ qZ4hkjkFE0oyY9Dfak0PMp8rimE7dwXWMFdUzWYrLPcWRNwYrAuSuOFiFINoV6WMa7aN
+ lSx+AaPmnjAXgPzWogOGiQ1bl1FjlEs/1XFQ9Drg+KBQqDemjt9XzuDw5ORL5TcCDY7H
+ mcT0hxXu9rEMu3ydTdazqq6D6d5dV4YrpBm2Yjq0sbDZ2FcirpT94MRZATTctf0KJ1MO
+ IU3I++n+Wm2p3egvjxiEOv5o/sZZPdDeJjzLPSVRdHcWV5jzK13AsNNUcZqk8TkYjPU3
+ x9Rg==
+X-Gm-Message-State: AOJu0Yx/UPZ1EPEfcDon/iw11x7eyf2mJ4ZS7dfEvkgnJFBRP+crKFj/
+ mm3gRh+Enh2CzyRM8+azkABkBbbUVdEJP5r2fJkcwHzK
+X-Google-Smtp-Source: AGHT+IFmG7g+39RVau/TMb0X834T0W6WZbDadGb7q4uE8KH/1cberNPL/5cXdSr+LntmBA8Bo5mSPxzDkRY7pt5G4ns=
+X-Received: by 2002:a9d:6d89:0:b0:6b8:7584:3aa4 with SMTP id
+ x9-20020a9d6d89000000b006b875843aa4mr6957297otp.4.1695650437840; Mon, 25 Sep
+ 2023 07:00:37 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230920074225.1130769-1-linus.walleij@linaro.org>
- <20230920142252.GO305624@bill-the-cat>
- <CACRpkdYqO1nH51VxjbpnPjaPy7eHaMDCSP5tWBDB1SB3R0cCcQ@mail.gmail.com>
- <20230920185547.GP305624@bill-the-cat>
- <ea1b9ef4-0cf5-ed92-2b70-6d8f70be17ac@gmail.com>
- <20230921172506.GV305624@bill-the-cat>
-In-Reply-To: <20230921172506.GV305624@bill-the-cat>
-From: Linus Walleij <linus.walleij@linaro.org>
-Date: Mon, 25 Sep 2023 15:56:07 +0200
-Message-ID: <CACRpkdYWK15i=KEFc_VM+xqgmmnT6AQX3OgnznFrmPhkjCfOiQ@mail.gmail.com>
-Subject: Re: [PATCH] bmips: Add Inteno XG6846 board
-To: Tom Rini <trini@konsulko.com>
-Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, u-boot@lists.denx.de
+References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
+ <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
+ <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
+ <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
+ <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
+ <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
+ <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
+ <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
+ <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
+ <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
+ <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
+ <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
+ <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
+ <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
+ <CAOYdKdjALruh9v6HBO-MSjzZM0whYhbA5YLJxbKk7yQk7cznGw@mail.gmail.com>
+ <CAOMZO5AVuBxGFF_itcxvdG=W9JoRtyzzeeC+wji__uUOQirwZg@mail.gmail.com>
+In-Reply-To: <CAOMZO5AVuBxGFF_itcxvdG=W9JoRtyzzeeC+wji__uUOQirwZg@mail.gmail.com>
+From: Rogan Dawes <rogan@dawes.za.net>
+Date: Mon, 25 Sep 2023 16:00:26 +0200
+Message-ID: <CAOYdKdingLtAvEnth8mSnazQ2fZ_kCsM_2P_dX7tbL2xe9wyVw@mail.gmail.com>
+Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,23 +102,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 21, 2023 at 7:25=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
-> On Thu, Sep 21, 2023 at 04:00:24PM +0200, Daniel Schwierzeck wrote:
->
-> [snip]
-> > I just tested it, you can simply add an empty board/inteno/xg6846/Makef=
-ile and
-> > remove board/inteno/xg6846/xg6846.c. But you can also remove the Makefi=
-le.
-> > Just the Kconfig and MAINTAINERS file are needed.
->
-> An empty Makefile is OK, but no Makefile requires a bit more as we first
-> try and include it unconditionally and then try and link in built-in.o.
-> I'm poking at this now.
+Hi Fabio,
 
-Did you get anywhere with this? If it's on the master I'll just rebase and
-be done with it, else I can go with an empty Makefile simply.
+On Mon, 25 Sep 2023 at 15:04, Fabio Estevam <festevam@gmail.com> wrote:
 
-Yours,
-Linus Walleij
+> Hi Rogan,
+>
+> On Mon, Sep 25, 2023 at 6:52=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net> =
+wrote:
+> >
+> > Hi Fabio,
+> >
+> > I used the following diff with "make mx28evk_defconfig", but
+> unfortunately still get absolutely nothing on the DUART when running
+> "mxsloader u-boot.sb". In fact, mxsloader returns immediately on trying
+> to load my own u-boot.sb, whereas it hangs when running the vendor
+> u-boot.sb, I assume because the CALL never returns. Additionally, there
+> is no need to reset the board between attempting a custom u-boot and the
+> vendor u-boot, indicating that the ROM-based SDP protocol handler is stil=
+l
+> running. This suggests that there is something wrong with the format of t=
+he
+> u-boot.sb file which the ROM-based SDP protocol handler is rejecting, I
+> would think?
+>
+> I just tested loading u-boot.sb via mxsldr on my imx28-evk.
+>
+> I configured the boot jumpers to USB boot, turned on the board and
+> then saw that it gets recognized by the host PC:
+>
+> $ dmesg
+> ....
+> [1710347.828895] usb 1-1: new high-speed USB device number 96 using
+> xhci_hcd
+> [1710347.977657] usb 1-1: New USB device found, idVendor=3D15a2,
+> idProduct=3D004f, bcdDevice=3D 0.01
+> [1710347.977672] usb 1-1: New USB device strings: Mfr=3D1, Product=3D2,
+> SerialNumber=3D0
+> [1710347.977678] usb 1-1: Product: ROM Recovery
+> [1710347.977682] usb 1-1: Manufacturer: Freescale,Inc.
+> [1710347.979708] hid-generic 0003:15A2:004F.0014: hiddev0,hidraw1: USB
+> HID v1.10 Device [Freescale,Inc. ROM Recovery] on
+> usb-0000:00:14.0-1/input0
+>
+> After that, I loaded the u-boot.sb via mxsldr:
+>
+> $ sudo ./mxsldr u-boot.sb
+> Detected: i.MX28
+> Chip ID:          0x2800
+> Chip Revision:    0x0001
+> ROM Version:      0x0101
+> Protocol Version: 0x0100
+>
+> Do you get these messages above (both the dmesg as well the messages
+> after running mxsldr)?
+
+
+Yes, I get both the dmesg output showing the usb device, and the output
+from mxsldr.
+
+>
+>
+> And in the console, I do see the U-Boot messages coming up:
+>
+
+I see absolutely nothing in the console.
+
+I=E2=80=99m wondering whether I can possibly execute the vendor SPL with a =
+modern
+u-boot?
+
+And if that works, try and narrow down the differences.
+
+Rogan
