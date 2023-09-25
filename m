@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D93DCD54BE
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 19:18:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34EC2CD54BF
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 19:19:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F01E886C22;
-	Mon, 25 Sep 2023 21:18:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DEA286B4E;
+	Mon, 25 Sep 2023 21:19:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U80926Xr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LR0+QEVv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8612D86BF7; Mon, 25 Sep 2023 21:18:06 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id DB47086B2E; Mon, 25 Sep 2023 21:19:55 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C7A186B4E
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 21:18:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C9A086C10
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 21:19:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-530bc7c5bc3so8590260a12.1
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 12:18:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d81b42a3108so8198896276.1
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 12:19:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695669484; x=1696274284; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5Fg98r9WcChLuBKncK0+9pM3MmyCfnDgT4N4UJEGztg=;
- b=U80926Xr1HT+1bL8mqdcDeg1f/gVVXis+mCIwVKplkVfz1woG3G4vGI72qxU912rG3
- tAApmrNo/xQf5JA4NDeTqG3N0/tRXCoTQnkglgl3WzAlTYLbLuoAy+x87HSQHGYIzVxg
- 659GQyxVWbU4qqgANSu0fiHcCNKhZmVkqzZbBegPR+6lwMN+g6pxhcIkgt8XkmsAgvGM
- j2koVub+qjzkzM42xCoifzR5iY1vZTnr0WhWebIdtHyp+MhHm5J+Sb59Wk+U2v+w+d+n
- UzchRl9nvfMYAl7C2tkIU4BauUME8E9fcbJvvM1YsRYFkUlySQNKKepWyk5XlAFSauC1
- aMLA==
+ d=konsulko.com; s=google; t=1695669591; x=1696274391; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1t23GtF/wbb06GukAzVhYjtdsDs5mtU0kjpweUMnaAA=;
+ b=LR0+QEVvDi5MMPRz5/uukLqbt9k9pLiEULgiCjQ+leUR07TmBJFaisC1P55iRlZiYI
+ HuZ3W9M8M6IdDVibfmvq5b9SKledFl4VMH6dADViNmBdFDBGTJdOE3/CmmSNUAKB3Eku
+ xOXVyc+hAp8RPOq/O617maVj1g0/aUfK4f844=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695669484; x=1696274284;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5Fg98r9WcChLuBKncK0+9pM3MmyCfnDgT4N4UJEGztg=;
- b=K8vHm+ggTcprP2Rjh+Sz/WJa0YJBstcoBJwG2+v/hPCLR64IROyblonW2MuhV3tVT8
- xyHc01dLuZjss03qoN4fzQh0aaw64GenkS4a52krpjufgf7gQLcbYt8HKmT5dhJ0pkpD
- sz9Y2GtkJuLJDJoWhHDQTvQJXSpOV5O4MVRrdbAU0WIvHi/V/9bhpLQczy5Lf88Oftci
- oqX1uGKEpN2Pb+3zOC2y4lMmtfGnIAXAAKYegeps9cbSYPIP3kMDkzjkZ/OaJ1gxWYlv
- s5sIaAvofxh4RMXeiIciPGZLY2uFtpajxam3vcxTQqSMc7xBD3PUeYKqv2BsLo3VJfep
- WXow==
-X-Gm-Message-State: AOJu0YyTd6QNNpqARjS2cKnp9qCDz8DSPgjn5z8oyhdp9ROpJORq8hNG
- 96+5fPhpoMHrb2EvxZ1d6CLzIRMFd859iaPaTZo=
-X-Google-Smtp-Source: AGHT+IFmOGegFXQ+7nq+2oQnWCCRj7tGMsLwCk/ELCItMzui1NOKBRuQevsQOZEP9E7+FFEBfyNov41MU3ZB+bZOQlU=
-X-Received: by 2002:aa7:d1c3:0:b0:530:7ceb:334 with SMTP id
- g3-20020aa7d1c3000000b005307ceb0334mr6852853edp.3.1695669483927; Mon, 25 Sep
- 2023 12:18:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695669591; x=1696274391;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1t23GtF/wbb06GukAzVhYjtdsDs5mtU0kjpweUMnaAA=;
+ b=pjwYMkHWnG8Q0CTbW+VIHcVaXCDZmLBbA2ikfz++IQXjtmJOxCDyap0A2IFryHsJ0V
+ X9AEpcvWRBFLoGv1nnQb+fKA81yjSqx7eIY/vvw5g+8mh2tmJMoTT/trPouNrXErN/GU
+ JfXcCPMkE0MnMYVBlwvwjf2rfmGp1LIccSU8wKrh03u96sLBzmhBDMZZZJoV3ivOpPdr
+ bkPJRp6sJUi2DC5trEwmQrKv2r2t5si5ONSg77vOR5IbFIc3uHXmS6Rfa8XWxQePI+rI
+ QYso2hoOGD3RoLobBnfszw/dahliuDgG4jLzwMeSokhgHUZdUdyQu1oRJZsnTV+nhxqu
+ +Z6A==
+X-Gm-Message-State: AOJu0Ywb9dvGz0yeGvTjpySQyEYq/yQR4Fp0Xbyk8zlGoF/AIvknndmV
+ rrOIjClO8DI9XAuqOOCTWBV+bA==
+X-Google-Smtp-Source: AGHT+IFqEkD/kzHTm1e/AJeNI49hruOG5TpNhbUOXMGCZcnYocqzpZCeHaI9DQSpVT5kZXhb/va3kw==
+X-Received: by 2002:a25:828f:0:b0:d3f:208:b8ea with SMTP id
+ r15-20020a25828f000000b00d3f0208b8eamr6568777ybk.11.1695669591031; 
+ Mon, 25 Sep 2023 12:19:51 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
+ [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
+ by smtp.gmail.com with ESMTPSA id
+ t7-20020a255f07000000b00d86694cec9bsm1200362ybb.15.2023.09.25.12.19.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 12:19:50 -0700 (PDT)
+Date: Mon, 25 Sep 2023 15:19:48 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, eduard@lionizers.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: Re: [PATCH] smegw01: Fix inverted CONFIG_SYS_BOOT_LOCKED logic
+Message-ID: <20230925191948.GJ305624@bill-the-cat>
+References: <20230925163259.9442-1-festevam@gmail.com>
 MIME-Version: 1.0
-References: <20230906052242.21568-1-mibodhi@gmail.com>
- <e5f5a68d-9f2f-9c39-b969-508275da454f@denx.de>
-In-Reply-To: <e5f5a68d-9f2f-9c39-b969-508275da454f@denx.de>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Mon, 25 Sep 2023 12:17:52 -0700
-Message-ID: <CAJaLiFxcO906KyJNgUKUrsWbsdvu903Q95s=ph5Y6vxvh+FBVA@mail.gmail.com>
-Subject: Re: [PATCH] arm: mvebu: sata_mv: Add bootstd hook to enable
- sata_bootdev
-To: Stefan Roese <sr@denx.de>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Yk0kX1TyuElpsgot"
+Content-Disposition: inline
+In-Reply-To: <20230925163259.9442-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,71 +92,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Stefan!
 
-All the best,
-Tony
+--Yk0kX1TyuElpsgot
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 25, 2023 at 1:14=E2=80=AFAM Stefan Roese <sr@denx.de> wrote:
->
-> On 9/6/23 07:22, Tony Dinh wrote:
-> > Add hook in sata_mv probe to enable bootstd bootdev.
-> >
-> > Note: bootdev_setup_for_sibling_blk() invocation is a noop if bootsd is
-> > not enabled for ahci sata yet.
-> >
-> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
->
-> Reviewed-by: Stefan Roese <sr@denx.de>
->
-> Thanks,
-> Stefan
->
-> > ---
-> >
-> >   drivers/ata/sata_mv.c | 8 +++++++-
-> >   1 file changed, 7 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/ata/sata_mv.c b/drivers/ata/sata_mv.c
-> > index 18c7a66db1..55a5365b5a 100644
-> > --- a/drivers/ata/sata_mv.c
-> > +++ b/drivers/ata/sata_mv.c
-> > @@ -34,6 +34,7 @@
-> >   #include <common.h>
-> >   #include <ahci.h>
-> >   #include <blk.h>
-> > +#include <bootdev.h>
-> >   #include <cpu_func.h>
-> >   #include <dm.h>
-> >   #include <log.h>
-> > @@ -1104,6 +1105,12 @@ static int sata_mv_probe(struct udevice *dev)
-> >                       /* TODO: undo create */
-> >                       continue;
-> >
-> > +             ret =3D bootdev_setup_for_sibling_blk(blk, "sata_bootdev"=
-);
-> > +             if (ret) {
-> > +                     printf("%s: Failed to create bootdev\n", __func__=
-);
-> > +                     continue;
-> > +             }
-> > +
-> >               /* If we got here, the current SATA port was probed
-> >                * successfully, so set the probe status to successful.
-> >                */
-> > @@ -1116,7 +1123,6 @@ static int sata_mv_probe(struct udevice *dev)
-> >   static int sata_mv_scan(struct udevice *dev)
-> >   {
-> >       /* Nothing to do here */
-> > -
-> >       return 0;
-> >   }
-> >
->
-> Viele Gr=C3=BC=C3=9Fe,
-> Stefan Roese
->
-> --
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+On Mon, Sep 25, 2023 at 01:32:59PM -0300, Fabio Estevam wrote:
+
+> From: Eduard Strehlau <eduard@lionizers.com>
+>=20
+> CONFIG_SYS_BOOT_LOCKED means that a restricted boot environment will
+> be used. In this case, hab_auth_img_or_fail should be called to prevent
+> U-Boot to continue running when the fitImage authentication fails.
+>=20
+> Fix the logic accordingly.
+>=20
+> Additionally, select CONFIG_SYS_BOOT_LOCKED by default.
+>=20
+> Signed-off-by: Eduard Strehlau <eduard@lionizers.com>
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+> Hi Tom,
+>=20
+> We have just identified this bug.
+>=20
+> Could you please pick this one directly for U-Boot 2023.10?
+
+OK.
+
+--=20
+Tom
+
+--Yk0kX1TyuElpsgot
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUR3U4ACgkQFHw5/5Y0
+tyzioQv+JJNd1ER9g/qi8yOWz38p4bwzKo6hso/Y7wciC96u0SUaCUMFXIBlvvt/
+2Gb1EXUhu+NXtdgSrdRB4+8vj2Mev9Q7BDrpPfqlfUuaX+GnEqLHk6zOIP8JWSLu
+fFmQHFcbwyS1Bpr0mtxoHuYC0dJrQU4UY8i50cEh5lVYLSZOD9u7KzMbU0Y0CGuR
+3uW8hfSLIbvJ/lZgfToezE1ONgE57N0YcBxyW24l+4qCpWvIzR/bDjxy1nAE4mYl
+JnI0erLYTe525yLbFQSOTVl2MPvR+Dl17Dv12+r/obr21RqUMSHx/0hk0WjgQmUh
+NhSkCjfq2r5oSHEixoznUdjGxPCheMgpoRkSCFP8X7gyc+a7ZWGrG3z7cfAxdALE
+MqIj8H8vtO2paaax22YFyIXDpRq3eAimmahhddckMQA5/s04fbW59Y4yaa3PF+9Y
+fJqlya8+wUo255bP6zm2A6pteKkurw9n9rRrvnHLXCn4t/Cceqbq+so1J2PysXyg
+NFPAlNen
+=j1Vr
+-----END PGP SIGNATURE-----
+
+--Yk0kX1TyuElpsgot--
