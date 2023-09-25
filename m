@@ -4,64 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E3D5CE7A8C
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:27:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A01BCE7A8C
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:31:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1442C86C37;
-	Mon, 25 Sep 2023 17:27:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 51FEE86C06;
+	Mon, 25 Sep 2023 17:31:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="hmCLNGuJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i5R8pkcS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9431586C67; Mon, 25 Sep 2023 17:27:30 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A0E1686C5D; Mon, 25 Sep 2023 17:31:20 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3896286C06
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:27:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8590786B58
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:31:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: f2974c59-5bb7-11ee-b453-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id f2974c59-5bb7-11ee-b453-005056994fde;
- Mon, 25 Sep 2023 17:26:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=hMZ99ParijB8L7hl3AkfylIq/n1TjjbPptWsigoEUSw=;
- b=hmCLNGuJD7CqcjZfyvs6Z6wlLWIwc4gfJ0CS3+cC7zBV8jNHy4KRR3l5raMmnc172Ywn9opQb33J+
- xRiP2VsUrSBx62FE8W+mTn6U3v6nSOgNSy+//V68R31z72Mnqa2INdsjutp4egm+QngN9U8+YK917t
- LEOiAW49L+4yCnAoNkaIbgw33WlkurdL+d417Q2/+E/Tfa7m9lC3MLEWDQm3an9N91THKOuKUsu+jo
- MFMtv2ca0ka7+S46o0pAYny4JqgcoTTLekJ+QVDod2wm7bU/sbLZ3y1JUoncplzvalC9CjebW9lQY+
- kotS7R8jTb0mcCsYVc6wPHD/X2JR8Bw==
-X-KPN-MID: 33|jWdReFEsBoDhEZtN8HvDPLLb3TmNWXQRG4DXKW5lbsR3RBeMPlmbLouUONdaCWe
- NEiUGo/Z4r9J4EvD8w1rqExfq9qAQHoXC9aBeKw1xpIc=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|EzjgluTHO1qVi9ApBoZC9K24gwf3apdF7wkxk2lMII2780qrWEzP0FpyyYHqlAg
- fJS9T+fXs4pn/RQg1L0V69w==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 07fb085c-5bb8-11ee-9dc8-00505699772e;
- Mon, 25 Sep 2023 17:27:26 +0200 (CEST)
-Date: Mon, 25 Sep 2023 17:27:26 +0200
-Message-Id: <87ttricly9.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-59c0b9ad491so79417757b3.1
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:31:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695655877; x=1696260677; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=fw5YWns8qOhGLE/TOO9pUkzrtbS9805nELezQDb3Pk8=;
+ b=i5R8pkcS3QrypSc62iHXAMT1jzaU1d5vrALIg1sKO82pBPt8U3uLK0zGgcnztB+qGV
+ qJFdJnRIbqZ/A/kXivXepZxH9C9sqr5EXJxjubrIFF9vColJV21TYxgG/cAPv5jJ1udL
+ NZX4+9KVVMxfvZz+d2Opi9QNHUjTt8N5Hi1Fs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695655877; x=1696260677;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fw5YWns8qOhGLE/TOO9pUkzrtbS9805nELezQDb3Pk8=;
+ b=jpfpkDfqvd+hMZ5/Bmo0hFBxGuvKeU4fz56LMgF6PT7iIW3Ub52cftaCgR5PdYSYzl
+ plulUVkc8WM+pp1s2eUeuHlVyhOpLo0mfxELvvSQLalcQ3bP1/q5bDU7j2I/Xj0FiF8J
+ mbA+HCZ6YHFE/3A+8PD9a+P0HxDu22dZXGB4QI7zhiMOlqecmlaj0q718JIp8cPCIwid
+ kUFiXh3zoGiiP86dfyuGdVGHWuL1ayAdJ8fhVAiSM//eEZs57G8P1KIGebmIZBuWNuV3
+ Y662Mu5j/YwUfY9fWVvDLUBf8FbwBG+jzHIpA5XiCx93w5JkzAtpXDQLwSqO+W8d+KyH
+ 53Ug==
+X-Gm-Message-State: AOJu0YxTczMcz1R6UONrR1EXo9YUB9RUBdU5zgoCAk1SFHvk9fOLJ2s4
+ tQJ6jvhtJwVUugzGXBJOmznkOQ==
+X-Google-Smtp-Source: AGHT+IHV1X2tQOPKHpAMS/xITeiZadC1hV444kA5Mvgh1tt50FnWqGP/qXIYK+cEDj5yiojsOXgygQ==
+X-Received: by 2002:a25:a2cb:0:b0:d7a:c0b8:f171 with SMTP id
+ c11-20020a25a2cb000000b00d7ac0b8f171mr5956024ybn.37.1695655877262; 
+ Mon, 25 Sep 2023 08:31:17 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
+ [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
+ by smtp.gmail.com with ESMTPSA id
+ n62-20020a252741000000b00d7360e0b240sm2245226ybn.31.2023.09.25.08.31.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 08:31:16 -0700 (PDT)
+Date: Mon, 25 Sep 2023 11:31:14 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Mark Kettenis <mark.kettenis@xs4all.nl>
 Cc: u-kumar1@ti.com, nm@ti.com, vigneshr@ti.com,
  patrick.delaunay@foss.st.com, sjoerd@collabora.com,
- u-boot@lists.denx.de, xypron.glpk@gmx.de,
- michal.simek@amd.com, s-anna@ti.com, dsankouski@gmail.com,
- kettenis@openbsd.org, sumit.garg@linaro.org, sam.shih@mediatek.com
-In-Reply-To: <20230925152126.GC305624@bill-the-cat> (message from Tom Rini on
- Mon, 25 Sep 2023 11:21:26 -0400)
+ u-boot@lists.denx.de, xypron.glpk@gmx.de, michal.simek@amd.com,
+ s-anna@ti.com, dsankouski@gmail.com, kettenis@openbsd.org,
+ sumit.garg@linaro.org, sam.shih@mediatek.com
 Subject: Re: [PATCH] lmb: remove overlapping region with next range
+Message-ID: <20230925153114.GD305624@bill-the-cat>
 References: <20230924111832.3741245-1-u-kumar1@ti.com>
  <20230925152126.GC305624@bill-the-cat>
+ <87ttricly9.fsf@bloch.sibelius.xs4all.nl>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="d+gehQCzZBTPo54U"
+Content-Disposition: inline
+In-Reply-To: <87ttricly9.fsf@bloch.sibelius.xs4all.nl>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,138 +97,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Mon, 25 Sep 2023 11:21:26 -0400
-> From: Tom Rini <trini@konsulko.com>
-> 
-> On Sun, Sep 24, 2023 at 04:48:32PM +0530, Udit Kumar wrote:
-> 
-> > In case of new memory range to be added is coalesced
-> > with any already added non last lmb region.
-> > 
-> > And there is possibility that, then region in which new memory
-> > range added is not adjacent to next region. But have some
-> > sections are overlapping.
-> > 
-> > So along with adjacency check with next lmb region,
-> > check for overlap should be done.
-> > 
-> > In case overlap  is found, adjust and merge these two lmb
-> > region into one.
-> > 
-> > Reported-by: Suman Anna <s-anna@ti.com>
-> > Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-> 
-> This is good!  I wonder if this addresses the issue that has caused
-> other platforms to need to set CONFIG_LMB_MAX_REGIONS=64 and I'm
-> wondering if any of the other maintainers I've cc'd here can drop back
-> to the default number of regions and then re-test their failure case?
-> Thanks!
 
-Hi Tom,
+--d+gehQCzZBTPo54U
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-For the Apple M1 systems I don't think it makes sense to reduce the
-number of regions.  These systems don't have TPL or SPL, have plenty
-of memory (at least 8GB) and are really fast.  And we anticipate that
-the number of memory regions will only grow in the future.
+On Mon, Sep 25, 2023 at 05:27:26PM +0200, Mark Kettenis wrote:
+> > Date: Mon, 25 Sep 2023 11:21:26 -0400
+> > From: Tom Rini <trini@konsulko.com>
+> >=20
+> > On Sun, Sep 24, 2023 at 04:48:32PM +0530, Udit Kumar wrote:
+> >=20
+> > > In case of new memory range to be added is coalesced
+> > > with any already added non last lmb region.
+> > >=20
+> > > And there is possibility that, then region in which new memory
+> > > range added is not adjacent to next region. But have some
+> > > sections are overlapping.
+> > >=20
+> > > So along with adjacency check with next lmb region,
+> > > check for overlap should be done.
+> > >=20
+> > > In case overlap  is found, adjust and merge these two lmb
+> > > region into one.
+> > >=20
+> > > Reported-by: Suman Anna <s-anna@ti.com>
+> > > Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> >=20
+> > This is good!  I wonder if this addresses the issue that has caused
+> > other platforms to need to set CONFIG_LMB_MAX_REGIONS=3D64 and I'm
+> > wondering if any of the other maintainers I've cc'd here can drop back
+> > to the default number of regions and then re-test their failure case?
+> > Thanks!
+>=20
+> Hi Tom,
+>=20
+> For the Apple M1 systems I don't think it makes sense to reduce the
+> number of regions.  These systems don't have TPL or SPL, have plenty
+> of memory (at least 8GB) and are really fast.  And we anticipate that
+> the number of memory regions will only grow in the future.
 
-Cheers,
+This partly gets at what I see as part of the problem.  It's been
+unclear to me if it's reasonable to just bump the default to 64 for
+aarch64 (and riscv?) because the problem is that 16 is truly too small,
+or given what we're doing we still don't need a ton of LMB regions as at
+the end of the day things should be coalesced in to just a few and it's
+been an underlying bug in an area everyone assumed wasn't buggy.
 
-Mark
+--=20
+Tom
 
-> > ---
-> > logs
-> > https://gist.github.com/uditkumarti/5d08c34442235ad270cfa863792ebcdc
-> > seqeunce : line 1 to 13
-> > without fix : line 96-100
-> > with fix : line 199-202
-> > 
-> >  lib/lmb.c | 37 +++++++++++++++++++++++++++++++++----
-> >  1 file changed, 33 insertions(+), 4 deletions(-)
-> > 
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index b2c233edb6..2580d01d90 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -74,6 +74,16 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
-> >  	return 0;
-> >  }
-> >  
-> > +static long lmb_regions_overlap(struct lmb_region *rgn, unsigned long r1,
-> > +				unsigned long r2)
-> > +{
-> > +	phys_addr_t base1 = rgn->region[r1].base;
-> > +	phys_size_t size1 = rgn->region[r1].size;
-> > +	phys_addr_t base2 = rgn->region[r2].base;
-> > +	phys_size_t size2 = rgn->region[r2].size;
-> > +
-> > +	return lmb_addrs_overlap(base1, size1, base2, size2);
-> > +}
-> >  static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
-> >  				 unsigned long r2)
-> >  {
-> > @@ -81,7 +91,6 @@ static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
-> >  	phys_size_t size1 = rgn->region[r1].size;
-> >  	phys_addr_t base2 = rgn->region[r2].base;
-> >  	phys_size_t size2 = rgn->region[r2].size;
-> > -
-> >  	return lmb_addrs_adjacent(base1, size1, base2, size2);
-> >  }
-> >  
-> > @@ -105,6 +114,23 @@ static void lmb_coalesce_regions(struct lmb_region *rgn, unsigned long r1,
-> >  	lmb_remove_region(rgn, r2);
-> >  }
-> >  
-> > +/*Assmptuon : base addr of region 1 < base addr of region 2*/
-> > +static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
-> > +				     unsigned long r2)
-> > +{
-> > +	phys_addr_t base1 = rgn->region[r1].base;
-> > +	phys_size_t size1 = rgn->region[r1].size;
-> > +	phys_addr_t base2 = rgn->region[r2].base;
-> > +	phys_size_t size2 = rgn->region[r2].size;
-> > +
-> > +	if (base1 + size1 > base2 + size2) {
-> > +		printf("This will not be a case any time\n");
-> > +		return;
-> > +	}
-> > +	rgn->region[r1].size = base2 + size2 - base1;
-> > +	lmb_remove_region(rgn, r2);
-> > +}
-> > +
-> >  void lmb_init(struct lmb *lmb)
-> >  {
-> >  #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-> > @@ -249,7 +275,6 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
-> >  		phys_size_t rgnflags = rgn->region[i].flags;
-> >  		phys_addr_t end = base + size - 1;
-> >  		phys_addr_t rgnend = rgnbase + rgnsize - 1;
-> > -
-> >  		if (rgnbase <= base && end <= rgnend) {
-> >  			if (flags == rgnflags)
-> >  				/* Already have this region, so we're done */
-> > @@ -278,10 +303,14 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
-> >  		}
-> >  	}
-> >  
-> > -	if ((i < rgn->cnt - 1) && lmb_regions_adjacent(rgn, i, i + 1)) {
-> > -		if (rgn->region[i].flags == rgn->region[i + 1].flags) {
-> > +	if (i < rgn->cnt - 1 && rgn->region[i].flags == rgn->region[i + 1].flags)  {
-> > +		if (lmb_regions_adjacent(rgn, i, i + 1)) {
-> >  			lmb_coalesce_regions(rgn, i, i + 1);
-> >  			coalesced++;
-> > +		} else if (lmb_regions_overlap(rgn, i, i + 1)) {
-> > +			/* fix overlapping area */
-> > +			lmb_fix_over_lap_regions(rgn, i, i + 1);
-> > +			coalesced++;
-> >  		}
-> >  	}
-> >  
-> > -- 
-> > 2.34.1
-> > 
-> 
-> -- 
-> Tom
-> 
-> [2:application/pgp-signature Show Save:signature.asc (659B)]
-> 
+--d+gehQCzZBTPo54U
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmURp8IACgkQFHw5/5Y0
+tyylIAv/dLZKZaD0z4JqFc5iVVBUWi7tVBAM+ZWWz3Kmuc3tnV2KHhSxBwdA/l09
+tugrPXlc9Zjiy3LCRoGB7FWS/b4blE/jUTdeArfTaGRESGYPt7lAvFKb9Xqs6P1I
+xdQG7Hi5E9XPNVd9IpnAbOHh1i4wYN0F/jxs7NFTh59I7HV14dNpWQkg279GnLhL
+vFMxvKPLCdD92nf9LSgLIObvcjK6rSvYW6REvu6z+vrGMdeF1RdXn1+Hc8L5qjQX
+jD1bZdbrKAzl1sG3xQWp5dMaZ2XGzOMZHrGXkzjksVZzhlefUAGepNAtO8LxsAk1
+/lIeaBoxggAFHOtKAlvxYA39SAPC1FRtIY2o2NWP0CRig2ZlYvDsxwOKL9Tm/wlY
+qKcYMoh3jUcOiv0Q/TmZv9dFmUTS3CvLbV2PV6C0KxF1YaBSROs3RdkIpIstD00e
+b2B1YlmUGUPqIIwDERorpDCcwqcbUdw5WYfjKyy6qqDxNRiYWXfS/rgc33ucmzGk
+aHdXu85j
+=74wr
+-----END PGP SIGNATURE-----
+
+--d+gehQCzZBTPo54U--
