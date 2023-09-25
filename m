@@ -4,64 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C1EECE7A81
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 13:42:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81EB9CE7A81
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 13:56:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88DDB86C56;
-	Mon, 25 Sep 2023 15:42:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B6C1386C06;
+	Mon, 25 Sep 2023 15:56:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="e80wACHb";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SA/FPbzr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B941386C71; Mon, 25 Sep 2023 15:42:31 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E922C86C28; Mon, 25 Sep 2023 15:56:21 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8194F86B2E
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 15:42:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9BA186B89
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 15:56:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38PDgRTW047828;
- Mon, 25 Sep 2023 08:42:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695649347;
- bh=usP2L26LDjn3EzDLImlDi67QkIKdTG9joJZrgErCIAg=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=e80wACHbLTgtaAj2jlV3nd66YV2BhQ830aT1JKajR7SM4mxBkOj3oNUcDzYUOywmz
- SSuUGd65K5+InDvFfrzFp8yqPCOXXeBrSXd7urv6l16t2odjMenFApUw6YiOrtbdtq
- NO5iTXQ0LOkCk8dc4sRJAW2pcNxH8zyy4xi0uAfs=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38PDgRMl000780
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 25 Sep 2023 08:42:27 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
- Sep 2023 08:42:27 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 25 Sep 2023 08:42:26 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38PDgQBO006893;
- Mon, 25 Sep 2023 08:42:26 -0500
-Date: Mon, 25 Sep 2023 08:42:26 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Keerthy <j-keerthy@ti.com>
-CC: <trini@konsulko.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>,
- <vigneshr@ti.com>
-Subject: Re: [PATCH 0/2] arm64: ti: k3-j7: Add the ESM nodes
-Message-ID: <20230925134226.3kx5eco6vmmn542n@palace>
-References: <20230925132614.3747-1-j-keerthy@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-59f57ad6126so39019447b3.3
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 06:56:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1695650178; x=1696254978; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Nsx7zCsnc4Y82Mese57/Z4wPkjXhp6bJOUv8C1RJZZ0=;
+ b=SA/FPbzrgc0Aj8ZJg2RtNXQRNfYHwX8KWV2F8/EBexJHbP9i8tWbexjGWVelnMB1hY
+ JBfY/n5hvtYDCnJ5KBWicJnZK9pmiMJUCViB2CZw2LxekM0TNISbcVV6iuJVrXnn3crF
+ Ze443+0NmkOvwyrsFb/xGOiUu7xxF5HWz8g10YEzOtU9uBdYDo3te/PMIZrVjFYVWXq0
+ bTEgzwlTxkgKr1aS76HoZWSkuXqzZUx730ZdpWKB/DrBNSzmXQ4pkUNNQRfFfgZTsjud
+ +RpKHc6tGj8fd03XZI/QRMbQ4DpvvxNqf7qabA9Wv5r1WIVG0l94i9LDuFB13sJQIYAC
+ rqEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695650178; x=1696254978;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Nsx7zCsnc4Y82Mese57/Z4wPkjXhp6bJOUv8C1RJZZ0=;
+ b=bf9GX016U/5cSTUSqFyCYIpA03TsSW1nX8VA6LimM/YUWH653qhioBNBrVBhZU/5Q3
+ QZP8+3ZFdLVHGEiMdVekvEQh0+M6KEjCSx+3jdxXY/Q6qcTj1v/rfkMPCmn/HHVoPIVv
+ XaWOLI1FtSzOOD64bFwWgqIlzcdoJkqcdTg2Pe3zM6Do6mcK1SXjhwmn4u/Ow6yIA8MS
+ a498UwLNZEKmr1C2UBslnYdityJ40EHN5wHtwuXoLJQzjXGxWBFgyIGUjpC8Zu+QgRnt
+ MMz68BuF9OzMSSha8Hi6YElI4pK2drBbXejlWY83laB9jqa0lcTg7MMRnQ3KxVA5UodD
+ A5JA==
+X-Gm-Message-State: AOJu0YzYSjzp/pmXjmdnRdED4C6kqgFJa1CCpcG2eX/k9rmmjgNuQ5Tv
+ /pHsJx/pc84ndqIdPUZi+0JBUd0RUlRKnU5NgOv0rQ==
+X-Google-Smtp-Source: AGHT+IH6D2qt/oUR6AU6cFVbhJ81x3/C7n6XQtfZXruK/1W/iIZNZnLE00/yq98Fm1ipv37WgrCoqMHS7oAcJaWrTXU=
+X-Received: by 2002:a0d:ce85:0:b0:589:e4aa:7b67 with SMTP id
+ q127-20020a0dce85000000b00589e4aa7b67mr6382833ywd.41.1695650178543; Mon, 25
+ Sep 2023 06:56:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230925132614.3747-1-j-keerthy@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230920074225.1130769-1-linus.walleij@linaro.org>
+ <20230920142252.GO305624@bill-the-cat>
+ <CACRpkdYqO1nH51VxjbpnPjaPy7eHaMDCSP5tWBDB1SB3R0cCcQ@mail.gmail.com>
+ <20230920185547.GP305624@bill-the-cat>
+ <ea1b9ef4-0cf5-ed92-2b70-6d8f70be17ac@gmail.com>
+ <20230921172506.GV305624@bill-the-cat>
+In-Reply-To: <20230921172506.GV305624@bill-the-cat>
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Mon, 25 Sep 2023 15:56:07 +0200
+Message-ID: <CACRpkdYWK15i=KEFc_VM+xqgmmnT6AQX3OgnznFrmPhkjCfOiQ@mail.gmail.com>
+Subject: Re: [PATCH] bmips: Add Inteno XG6846 board
+To: Tom Rini <trini@konsulko.com>
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,27 +91,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 18:56-20230925, Keerthy wrote:
-> Hi Tom,
-> 
-> https://lore.kernel.org/linux-arm-kernel/5187c590-ee9a-4c46-b326-655f4c371aaf@linaro.org/T/#me178708007a6b3b9695ae0ff84475fa4f49f283c
-> 
-> I have posted the ESM patches to the linux kernel device tree mailing
-> list. These are neeeded in R5 SPL to enable watchdog support.
-> 
-> 
-> Keerthy (2):
->   arm64: dts: ti: k3-j721s2: Add ESM instances
->   arm64: dts: ti: k3-j7200: Add MCU domain ESM instance
-> 
->  arch/arm/dts/k3-j7200-mcu-wakeup.dtsi  |  7 +++++++
->  arch/arm/dts/k3-j721s2-main.dtsi       |  7 +++++++
->  arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi | 14 ++++++++++++++
->  3 files changed, 28 insertions(+)
+On Thu, Sep 21, 2023 at 7:25=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+> On Thu, Sep 21, 2023 at 04:00:24PM +0200, Daniel Schwierzeck wrote:
+>
+> [snip]
+> > I just tested it, you can simply add an empty board/inteno/xg6846/Makef=
+ile and
+> > remove board/inteno/xg6846/xg6846.c. But you can also remove the Makefi=
+le.
+> > Just the Kconfig and MAINTAINERS file are needed.
+>
+> An empty Makefile is OK, but no Makefile requires a bit more as we first
+> try and include it unconditionally and then try and link in built-in.o.
+> I'm poking at this now.
 
-Get this as part of kernel dt sync.
+Did you get anywhere with this? If it's on the master I'll just rebase and
+be done with it, else I can go with an empty Makefile simply.
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Yours,
+Linus Walleij
