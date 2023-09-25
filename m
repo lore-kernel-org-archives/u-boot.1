@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46274CE7A94
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 12:33:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12F32CE7A94
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 12:37:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8472586B93;
-	Mon, 25 Sep 2023 14:33:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 375F286B8B;
+	Mon, 25 Sep 2023 14:37:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e+tIn7Qg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fEhb2bjW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DD7886BA8; Mon, 25 Sep 2023 14:33:35 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 0BF7986BE6; Mon, 25 Sep 2023 14:37:52 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37EE786B89
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 14:33:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 012A386B89
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 14:37:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-50305abe5f0so9816269e87.2
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 05:33:33 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-3215f19a13aso6202839f8f.3
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 05:37:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695645212; x=1696250012; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uOrEG4tfl75vIbxlTDfOPlF5gglTowT9ubBWOy0wGIE=;
- b=e+tIn7Qgc6/+CPFJHXKN1Ezqa1LUipTR+z+4bULdDpOblOXt4pyUPeNroNsrvPdRJN
- W7Et83PX3SaBgJqLASGW8G1nObdnVneLF5IcZ5V8v73xzUDuz2o091nsHTipAPnW9qBs
- zC/WRVcWja5TS1x65lPl5vkOVB0zXYdLvBQ5E=
+ d=linaro.org; s=google; t=1695645469; x=1696250269; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=efXBsXXZEGTGTAmRwoweoFAUBoL1Hiw7PFka4kj0rIo=;
+ b=fEhb2bjWYAL0eBorrfaOVPR3yP52YOw1+N6QQ/6TaANKXmim6KADiBJFu0GSavG3By
+ g/BO/JXYHbrDCG9yFvZUBR+mpMR7Sc+MBzPauiXBHmnLr4VzAz+TCv7CSn6CdiGcuvVy
+ dYg5Pfnn+5cyDox0AspusSs7BCgIasj0lazNIsOpf9algQMH661mJzJDW3FIo/M0VHtK
+ NfpdRV1DM+1pvxD1h50iNoy4ofMaVbBX9gCcveZz0sdbxuyIxS/ZtwGpltubcny+Qx3D
+ 7scfPRqQXMd7OYHxPAB2rurkPF0sR0w3xDNEXQmly0Qj9yLPiC5aw6wZ7edK9NccPZNW
+ NEGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695645212; x=1696250012;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uOrEG4tfl75vIbxlTDfOPlF5gglTowT9ubBWOy0wGIE=;
- b=aBOhOongAc893+qlntBiqapGB6RWDEarFfesnt4q8T2vdLfaUJRJ9LbfKQEMLL01vC
- etjHjOR2BbTywMsGtitoyXfoXjBvrciuAuW5QdP3quMEw9XPhygmy6+K6qcSg7ev66z4
- AzGAOO3Ulf3SeKXHqWGtoiJcowMF/g1rtS2sXALpr7Sb5cN/8mkgIpVnd//9ZvnZCvea
- sGeufOHKUUnEAjVJKGKO7yvX9gbcTsUmqD4gHGN0KPOfqLBqv29FKd04u6NUWyohQxkE
- TMSB+ntLzJ8pA0fNebC3rX1BY+DAQPr6V8ueP+BSiKboL1HbbkDaZH+fDeh2WgFX2qCg
- ldiA==
-X-Gm-Message-State: AOJu0Yy6kwzz4jqB3bbedqrklM4nZTKDxeNiIUPu9tPyz5uPQ3/N3ePn
- Ir+eo6n7N5wORoDfZA4n6QIBpM2WoYPdJFODTRvpRw==
-X-Google-Smtp-Source: AGHT+IHQ2mVoYf0gISCrXjW928D9kOOj+nnB4kchHzakcfJ5+nTvY6NHkpDiRDXDUhEg1TfER0INKlLUgGq8Jiet7Nw=
-X-Received: by 2002:ac2:4c9c:0:b0:503:18c3:d87a with SMTP id
- d28-20020ac24c9c000000b0050318c3d87amr5120311lfl.21.1695645212082; Mon, 25
- Sep 2023 05:33:32 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695645469; x=1696250269;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=efXBsXXZEGTGTAmRwoweoFAUBoL1Hiw7PFka4kj0rIo=;
+ b=gt1dFjVMVKq3P/7CYl+5FljCbASnmq2YQSm/hikEyNX/21BYYpRorItANRVXNRv74Q
+ Zj7VOl4OhMJTbegu/n8dSqUjhx90AftHZcOlUdk8QJf5kYlMlbfwzguYbU9lQV4vGl5I
+ 60S6jdLexSTPLVqCjZF4WLVEv5w+7CRW/e/bvbFXFU3aAV1nD2FeH3vtd2XuQsMZHkPx
+ f4kqCd2PHJTYrMNuujt0hPodfXpFO0uNM9pWHdilPQU7b4jmEskrhbizJTpgRhpdUp/v
+ njDKbLNHl0pbrWr4NkHxTWvPvpkZzkmX5i+1YvTZ63PsXm3pq8xYZKLYz17gb3NYUT+6
+ qQaA==
+X-Gm-Message-State: AOJu0Yy4rJdZfgf5xH91AtdkUvEEmGM/K6a26QpeUdKe1pbeQWXnsbqE
+ cmE2aBgIMM9fXqj2CTDpRzCo5A==
+X-Google-Smtp-Source: AGHT+IEiw/hhCbut3k4E1Oxqx8igYYV/ZvUXpQeaJJ37OQ8mlAMp3KxUPy02TXFxm3BXqkjQZZ8QbQ==
+X-Received: by 2002:a5d:4802:0:b0:314:3fc0:ba82 with SMTP id
+ l2-20020a5d4802000000b003143fc0ba82mr5936492wrq.37.1695645469366; 
+ Mon, 25 Sep 2023 05:37:49 -0700 (PDT)
+Received: from hera (ppp046103219117.access.hol.gr. [46.103.219.117])
+ by smtp.gmail.com with ESMTPSA id
+ n14-20020a5d400e000000b00321773bb933sm11833790wrp.77.2023.09.25.05.37.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 05:37:49 -0700 (PDT)
+Date: Mon, 25 Sep 2023 15:37:47 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>
+Subject: Re: [PATCH v4 4/8] efi_loader: support boot from URI device path
+Message-ID: <ZRF/G1+qSllqoNYL@hera>
+References: <20230922071119.1439482-1-masahisa.kojima@linaro.org>
+ <20230922071119.1439482-5-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
-References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
- <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
- <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
- <20230922174649.GA3320366-robh@kernel.org>
- <CAPnjgZ3ojfAv=BHqOhM=-NnYqCm81Ny=PsGKiNphKTmw++fk9w@mail.gmail.com>
- <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
- <CAPnjgZ3BnD9aX3cNNPiGRKTOj+YeurHCLv6K0TRFhAtY21Qufw@mail.gmail.com>
- <20230925092122.0b615f25@xps-13>
-In-Reply-To: <20230925092122.0b615f25@xps-13>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Sep 2023 06:33:14 -0600
-Message-ID: <CAPnjgZ0Z5J_33HuQF-5XgDFmZim0nHHzvZJOOZobWw_cOJd=9g@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>, linux-mtd@lists.infradead.org, 
- Tom Rini <trini@konsulko.com>, Conor Dooley <conor+dt@kernel.org>,
- Dhruva Gole <d-gole@ti.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230922071119.1439482-5-masahisa.kojima@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,195 +93,252 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel,
-
-On Mon, 25 Sept 2023 at 01:21, Miquel Raynal <miquel.raynal@bootlin.com> wr=
-ote:
+On Fri, Sep 22, 2023 at 04:11:15PM +0900, Masahisa Kojima wrote:
+> This supports to boot from the URI device path.
+> When user selects the URI device path, bootmgr downloads
+> the file using wget into the address specified by loadaddr
+> env variable.
+> If the file is .iso or .img file, mount the image with blkmap
+> then try to boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> If the file is .efi file, load and start the downloaded file.
 >
-> Hi Simon,
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>  lib/efi_loader/efi_bootmgr.c | 189 +++++++++++++++++++++++++++++++++++
+>  1 file changed, 189 insertions(+)
 >
-> sjg@chromium.org wrote on Fri, 22 Sep 2023 13:51:14 -0600:
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index a40762c74c..605be5041e 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -7,10 +7,14 @@
 >
-> > Hi Rob,
-> >
-> > On Fri, 22 Sept 2023 at 13:43, Rob Herring <robh@kernel.org> wrote:
-> > >
-> > > On Fri, Sep 22, 2023 at 1:12=E2=80=AFPM Simon Glass <sjg@chromium.org=
-> wrote:
-> > > >
-> > > > Hi Rob,
-> > > >
-> > > > On Fri, 22 Sept 2023 at 11:46, Rob Herring <robh@kernel.org> wrote:
-> > > > >
-> > > > > On Fri, Sep 22, 2023 at 11:01:18AM -0600, Simon Glass wrote:
-> > > > > > Hi Rob,
-> > > > > >
-> > > > > > On Fri, 22 Sept 2023 at 10:00, Rob Herring <robh@kernel.org> wr=
-ote:
-> > > > > > >
-> > > > > > > On Thu, Sep 21, 2023 at 1:45=E2=80=AFPM Simon Glass <sjg@chro=
-mium.org> wrote:
-> > > > > > > >
-> > > > > > > > Binman[1] is a tool for creating firmware images. It allows=
- you to
-> > > > > > > > combine various binaries and place them in an output file.
-> > > > > > > >
-> > > > > > > > Binman uses a DT schema to describe an image, in enough det=
-ail that
-> > > > > > > > it can be automatically built from component parts, disasse=
-mbled,
-> > > > > > > > replaced, listed, etc.
-> > > > > > > >
-> > > > > > > > Images are typically stored in flash, which is why this bin=
-ding is
-> > > > > > > > targeted at mtd. Previous discussion is at [2] [3].
-> > > > > > > >
-> > > > > > > > [1] https://u-boot.readthedocs.io/en/stable/develop/package=
-/binman.html
-> > > > > > > > [2] https://lore.kernel.org/u-boot/20230821180220.2724080-3=
--sjg@chromium.org/
-> > > > > > > > [3] https://www.spinics.net/lists/devicetree/msg626149.html
-> > > > > > >
-> > > > > > > You missed:
-> > > > > > >
-> > > > > > > https://github.com/devicetree-org/dt-schema/pull/110
-> > > > > > >
-> > > > > > > where I said: We certainly shouldn't duplicate the existing p=
-artitions
-> > > > > > > bindings. What's missing from them (I assume we're mostly tal=
-king
-> > > > > > > about "fixed-partitions" which has been around forever I thin=
-k (before
-> > > > > > > me))?
-> > > > > > >
-> > > > > > > To repeat, unless there is some reason binman partitions conf=
-lict with
-> > > > > > > fixed-partitions, you need to start there and extend it. From=
- what's
-> > > > > > > posted here, it neither conflicts nor needs extending.
-> > > > > >
-> > > > > > I think at this point I am just hopelessly confused. Have you t=
-aken a
-> > > > > > look at the binman schema? [1]
-> > > > >
-> > > > > Why do I need to? That's used for some tool and has nothing to do=
- with a
-> > > > > device's DTB. However, I thought somewhere in this discussion you=
- showed
-> > > > > it under a flash device node.
-> > > >
-> > > > Yes, that is the intent (under a flash node).
-> > > >
-> > > > > Then I care because then it overlaps with
-> > > > > what we already have for partitions. If I misunderstood that, the=
-n just
-> > > > > put your schema with your tool. Only users of the tool should car=
-e about
-> > > > > the tool's schema.
-> > > >
-> > > > OK. I believe that binman will fit into both camps, since its input=
- is
-> > > > not necessarily fully formed. E.g. if you don't specify the offset =
-of
-> > > > an entry, then it will be packed automatically. But the output is
-> > > > fully formed, in that Binman now knows the offset so can write it t=
-o
-> > > > the DT.
-> > >
-> > > I suppose it could take its own format as input and then write out
-> > > something different for the "on the device" format (i.e.
-> > > fixed-partitions). At least for the dynamic offsets, we may need
-> > > something allowed for binman input, but not allowed on device. In
-> > > general, there is support for partitions without addresses/offsets,
-> > > but only for partitions that have some other way to figure that out
-> > > (on disk partition info).
-> > >
-> > > There's also the image filename which doesn't really belong in the on
-> > > device partitions. So maybe the input and output schemas should be
-> > > separate.
-> >
-> > OK, I'll focus on the output schema for now. I suspect this will be a
-> > grey area though.
-> >
-> > As an example, if you replace a binary in the firmware, Binman can
-> > repack the firmware to make room, respecting the alignment and size
-> > constraints. So these need to be in the output schema somehow.
-> >
-> > >
-> > > > > > I saw this file, which seems to extend a partition.
-> > > > > >
-> > > > > > Documentation/devicetree/bindings/mtd/partitions/brcm,bcm4908-p=
-artitions.yaml
-> > > > >
-> > > > > IIRC, that's a different type where partition locations are store=
-d in
-> > > > > the flash, so we don't need location and size in DT.
-> > > >
-> > > > OK.
-> > > >
-> > > > >
-> > > > > >
-> > > > > > I was assuming that I should create a top-level compatible =3D =
-"binman"
-> > > > > > node, with subnodes like compatible =3D "binman,bl31-atf", for =
-example.
-> > > > > > I should use the compatible string to indicate the contents, ri=
-ght?
-> > > > >
-> > > > > Yes for subnodes, and we already have some somewhat standard ones=
- for
-> > > > > "u-boot" and "u-boot-env". Though historically, "label" was used.
-> > > >
-> > > > Binman has common properties for all entries, including "compress"
-> > > > which sets the compression algorithm.
-> > >
-> > > I see no issue with adding that. It seems useful and something missin=
-g
-> > > in the existing partition schemas.
-> >
-> > OK I sent a patch with that.
-> >
-> > >
-> > > > So perhaps I should start by defining a new binman,bl31-atf which h=
-as
-> > > > common properties from an "binman,entry" definition?
-> > >
-> > > I don't understand the binman prefix. The contents are ATF (or TF-A
-> > > now). Who wrote it to the flash image is not relevant.
-> >
-> > Are you suggesting just "atf-bl31", or "arm,atf-bl31" ? Or should we
-> > change it to "tfa-bl31"?
+>  #define LOG_CATEGORY LOGC_EFI
 >
-> I don't really understand the relationship with TF-A here. Can't we
-> just have a kind of fixed-partitions with additional properties like
-> the compression?
-
-Binman needs to know what to put in there, which is the purpose of the
-compatible string.
-
+> +#include <blk.h>
+> +#include <blkmap.h>
+>  #include <common.h>
+>  #include <charset.h>
+> +#include <dm.h>
+>  #include <log.h>
+>  #include <malloc.h>
+> +#include <net.h>
+>  #include <efi_default_filename.h>
+>  #include <efi_loader.h>
+>  #include <efi_variable.h>
+> @@ -168,6 +172,182 @@ out:
+>  	return ret;
+>  }
 >
-> > > We already have some compatibles in use. We should reuse them if
-> > > possible. Not sure about TF-A though.
-> >
-> > OK.
-> >
+> +/**
+> + * mount_image() - mount the image with blkmap
+> + *
+> + * @lo_label	u16 label string of load option
+> + * @image_addr:	image address
+> + * @image_size	image size
+> + * Return:	pointer to the UCLASS_BLK udevice, NULL if failed
+> + */
+> +static struct udevice *mount_image(u16 *lo_label, ulong image_addr, int image_size)
+> +{
+> +	int err;
+> +	struct blkmap *bm;
+> +	struct udevice *bm_dev;
+> +	char *label = NULL, *p;
+> +
+> +	label = efi_alloc(utf16_utf8_strlen(lo_label) + 1);
+> +	if (!label)
+> +		return NULL;
+> +
+> +	p = label;
+> +	utf16_utf8_strcpy(&p, lo_label);
+> +	err = blkmap_create_ramdisk(label, image_addr, image_size, &bm_dev);
+> +	if (err) {
+> +		efi_free_pool(label);
+> +		return NULL;
+> +	}
+> +	bm = dev_get_plat(bm_dev);
+> +
+> +	efi_free_pool(label);
+> +
+> +	return bm->blk;
+> +}
+> +
+> +/**
+> + * try_load_default_file() - try to load the default file
+> + *
+> + * Search the device having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
+> + * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> + *
+> + * @dev			pointer to the UCLASS_BLK or UCLASS_PARTITION udevice
+> + * @image_handle:	pointer to handle for newly installed image
+> + * Return:		status code
+> + */
+> +static efi_status_t try_load_default_file(struct udevice *dev,
+> +					  efi_handle_t *image_handle)
+> +{
+
+Maybe I misunderstood you on the previous series.  Wasn't the plan to merge
+the patch that adds boot options automatically when a disk is scanned? This
+code could only look for a boot option with '1234567' in its load options
+instead of rescanning all devices with the EFI_SIMPLE_FILE_SYSTEM_PROTOCO
+installed
+
+> +	efi_status_t ret;
+> +	efi_handle_t handle;
+> +	struct efi_handler *handler;
+> +	struct efi_device_path *file_path;
+> +	struct efi_device_path *device_path;
+> +
+> +	if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle)) {
+> +		log_warning("DM_TAG_EFI not found\n");
+> +		return EFI_INVALID_PARAMETER;
+> +	}
+> +
+> +	ret = efi_search_protocol(handle,
+> +				  &efi_simple_file_system_protocol_guid, &handler);
+> +	if (ret != EFI_SUCCESS)
+> +		return ret;
+> +
+> +	ret = EFI_CALL(bs->open_protocol(handle, &efi_guid_device_path,
+> +					 (void **)&device_path, efi_root, NULL,
+> +					 EFI_OPEN_PROTOCOL_GET_PROTOCOL));
+> +	if (ret != EFI_SUCCESS)
+> +		return ret;
+> +
+> +	file_path = expand_media_path(device_path);
+> +	ret = EFI_CALL(efi_load_image(true, efi_root, file_path, NULL, 0,
+> +				      image_handle));
+> +
+> +	efi_free_pool(file_path);
+> +
+> +	return ret;
+> +}
+> +
+> +/**
+> + * load_default_file_from_blk_dev() - load the default file
+> + *
+> + * @blk		pointer to the UCLASS_BLK udevice
+> + * @handle:	pointer to handle for newly installed image
+> + * Return:	status code
+> + */
+> +static efi_status_t load_default_file_from_blk_dev(struct udevice *blk,
+> +						   efi_handle_t *handle)
+> +{
+> +	efi_status_t ret;
+> +	struct udevice *partition;
+> +
+> +	/* image that has no partition table but a file system */
+> +	ret = try_load_default_file(blk, handle);
+> +	if (ret == EFI_SUCCESS)
+> +		return ret;
+> +
+> +	/* try the partitions */
+> +	device_foreach_child(partition, blk) {
+> +		enum uclass_id id;
+> +
+> +		id = device_get_uclass_id(partition);
+> +		if (id != UCLASS_PARTITION)
+> +			continue;
+> +
+> +		ret = try_load_default_file(partition, handle);
+> +		if (ret == EFI_SUCCESS)
+> +			return ret;
+> +	}
+> +
+> +	return EFI_NOT_FOUND;
+> +}
+> +
+> +/**
+> + * try_load_from_uri_path() - Handle the URI device path
+> + *
+> + * @uridp:	uri device path
+> + * @lo_label	label of load option
+> + * @handle:	pointer to handle for newly installed image
+> + * Return:	status code
+> + */
+> +static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
+> +					   u16 *lo_label,
+> +					   efi_handle_t *handle)
+> +{
+> +	char *s;
+> +	int uri_len;
+> +	int image_size;
+> +	efi_status_t ret;
+> +	ulong image_addr;
+> +
+> +	s = env_get("loadaddr");
+> +	if (!s) {
+> +		log_err("Error: loadaddr is not set\n");
+> +		return EFI_INVALID_PARAMETER;
+> +	}
+> +	image_addr = hextoul(s, NULL);
+> +	image_size = wget_with_dns(image_addr, uridp->uri);
+> +	if (image_size < 0)
+> +		return EFI_INVALID_PARAMETER;
+> +
+> +	/*
+> +	 * If the file extension is ".iso" or ".img", mount it and try to load
+> +	 * the default file.
+> +	 * If the file is PE-COFF image, load the downloaded file.
+> +	 */
+> +	uri_len = strlen(uridp->uri); /* todo: directly use uridp->uri */
+> +	if (!strncmp(&uridp->uri[uri_len - 4], ".iso", 4) ||
+> +	    !strncmp(&uridp->uri[uri_len - 4], ".img", 4)) {
+> +		struct udevice *blk;
+> +
+> +		blk = mount_image(lo_label, image_addr, image_size);
+> +		if (!blk)
+> +			return EFI_INVALID_PARAMETER;
+> +
+> +		ret = load_default_file_from_blk_dev(blk, handle);
+> +	} else if (efi_check_pe((void *)image_addr, image_size, NULL) == EFI_SUCCESS) {
+> +		efi_handle_t mem_handle = NULL;
+> +		struct efi_device_path *file_path = NULL;
+> +
+> +		file_path = efi_dp_from_mem(EFI_RESERVED_MEMORY_TYPE,
+> +					    (uintptr_t)image_addr, image_size);
+> +		ret = efi_install_multiple_protocol_interfaces(
+> +			&mem_handle, &efi_guid_device_path, file_path, NULL);
+> +		if (ret != EFI_SUCCESS)
+> +			return EFI_INVALID_PARAMETER;
+> +
+> +		ret = EFI_CALL(efi_load_image(false, efi_root, file_path,
+> +					      (void *)image_addr, image_size,
+> +					      handle));
+> +	} else {
+> +		log_err("Error: file type is not supported\n");
+> +		return EFI_INVALID_PARAMETER;
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+>  /**
+>   * try_load_entry() - try to load image for boot option
+>   *
+> @@ -211,6 +391,15 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
+>  		if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
+>  			/* file_path doesn't contain a device path */
+>  			ret = try_load_from_short_path(lo.file_path, handle);
+> +		} else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
+> +			if (IS_ENABLED(CONFIG_BLKMAP) &&
+> +			    IS_ENABLED(CONFIG_CMD_WGET) &&
+> +			    IS_ENABLED(CONFIG_CMD_DNS)) {
+> +				ret = try_load_from_uri_path(
+> +					(struct efi_device_path_uri *)
+> +						lo.file_path,
+> +					lo.label, handle);
+> +			}
+
+is ret initialized in this function?  Otherwise we need to initialize it if
+one of the Kconfig options are disabled
+
+>  		} else {
+>  			file_path = expand_media_path(lo.file_path);
+>  			ret = EFI_CALL(efi_load_image(true, efi_root, file_path,
+> --
+> 2.34.1
 >
-> Also, I still don't understand the purpose of this schema. So binman
-> generates an image, you want to flash this image and you would like the
-> tool to generate the corresponding (partition) DT snippet automatically.
-> Do I get this right? I don't get why you would need new compatibles for
-> that.
 
-It is actually the other way around. The schema tells Binman how to
-build the image (what goes in there and where). Then outputs an
-updated DT which describes where everything ended up, for use by other
-tools, e.g. firmware update. It is a closed loop in that sense. See
-the references for more information.
-
-Regards,
-Simon
-
-[1] https://u-boot.readthedocs.io/en/latest/develop/package/index.html
-[2] https://pretalx.com/media/osfc2019/submissions/Y7EN9V/resources/Binman_=
--_A_data-controlled_firmware_packer_for_U-B_pFU3n2K.pdf
-[3] https://www.youtube.com/watch?v=3DL84ujgUXBOQ
+Thanks
+/Ilias
