@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E24CE7A9B
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 16:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CF20CE7A9E
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 16:19:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14F4486BE7;
-	Mon, 25 Sep 2023 18:10:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F72986B58;
+	Mon, 25 Sep 2023 18:19:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="cFxoL+GJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QVRhQ5dx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A6B686BE7; Mon, 25 Sep 2023 18:10:19 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 00D6C86B91; Mon, 25 Sep 2023 18:19:16 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 079F086B3A
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 18:10:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1427886A88
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 18:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-59f4db9e11eso50988077b3.0
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 09:10:16 -0700 (PDT)
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-533c5d10dc7so4522496a12.3
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 09:19:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1695658216; x=1696263016; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695658753; x=1696263553; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/SCkfTV9otbtwMcKwb1FwUtTtWc2I114wnGM+o4z14I=;
- b=cFxoL+GJk2lRlfetjV32xtjHCL+AYDZuDikcKA9WQuIdijl4dYy6IkKWt88HfeyOs0
- 9R9CTvilsu/nNLW9EQggkFY6kD4HJ+97ZNYdBWzc0s+gzkl9kzb2jnKPYt01EIBabQ/0
- daDNhKslpHN77X2j4hbwFZlRGM78JFp+zoELNu9lGbThC31ZDHV/c+O2OPVjYiTkDLjx
- p95LZYvyf1IYatrtfV595i5JV6kVPnv7KZSx6DBxr0tLasAnP/QgnH9doHV6XKqiCtNP
- YtvkUDyhXW7L+C1fXSLIRh+B+g3GKpL2aaUgS89bY6p/FoN7bD1lN/mi8UhpA+nKz538
- /AcA==
+ bh=OKuWoraEK3yATTYuqAS+es5gLvarj+bC1XQMUfMHE0U=;
+ b=QVRhQ5dxic9PpDJ3ys0b8IHHbDf3xWL+d3vcG1v+EyAe6XlAOWDEwZ0IgMmibO8yYV
+ uWZj54rjk3BTMO1GWWQH1GrL3kHmQO/XYDo6PvYCscXtF2u9XPnxXMqtpnMD1zQt9EMK
+ XMVvQSD2fG7ChKOT5m50Sk8mzschqlYiaNrjk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695658216; x=1696263016;
+ d=1e100.net; s=20230601; t=1695658753; x=1696263553;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/SCkfTV9otbtwMcKwb1FwUtTtWc2I114wnGM+o4z14I=;
- b=PtuUERXiVg/uWkBCUDBa44jbEXpFHy3kQ52gt9fYHK8amUPrcOp3+rLEVrFrvc91YH
- SIKXcTFUBlxPwq7nvfMYiH5/ozmnq/0AcTX/PObh51dI4JsEOYrR4w9kz+B3AKcqzwZy
- tjuSVVlZjfqns4dZIH9JNkW/A4qnFEkqE995kjdwUDz8x/QNUTc8VJ5bUXf5xM1wmTeN
- DY6GApljsfIH9o6a6VKVi3vaHyipECYMqU4JximOoDiobqswI9HgysC6zyZvpFVOOXoa
- KB26zuLiDmZDrPTir1v7/tF4aAmY6PjpvhsQo3JpjBlBTDvBKrSnJhiZcBQbOvN4xQRi
- uB+Q==
-X-Gm-Message-State: AOJu0Yz1Mqexzd+slvm6Un+L7y3sVtKULJZOQTkKVZxJXBL5oFkMedXt
- qeV0vXZUIX9kQTiwNqii4X8rX1tX+ZU70ZRlC0qi3A==
-X-Google-Smtp-Source: AGHT+IGvNlqIxrsbBiYwvDWc9BVyRGYxiOZldV8OBGQmbMPF9nWX2zIZ/ZnL5giHrYMer09JAeK78XGsZcIycvAWXcs=
-X-Received: by 2002:a81:8486:0:b0:586:9f6c:41a0 with SMTP id
- u128-20020a818486000000b005869f6c41a0mr5801618ywf.14.1695658215484; Mon, 25
- Sep 2023 09:10:15 -0700 (PDT)
+ bh=OKuWoraEK3yATTYuqAS+es5gLvarj+bC1XQMUfMHE0U=;
+ b=IxSDDVl2vdwnj6mo7FQwGyYzxsvdbGVpZHAhKWnK2WqQAwjaAzoKCLZTkm6VZ8GJOs
+ MuNtJOTmQWKrG5iF4H9w7UQ/yoD6t45gpws0rEx3zSGSPcsvthHnFquLRUgbkKupc8Bl
+ 1LNtqnZtAjOwovQGTfWHAb0rHNKwoaGu9gAB/7v1rsFQ3t3SoiOUgn2Ub/OPx0wcmsmS
+ 7BFbKaRjhHUPYJhzXSa5+KatG6IeUHqB75uQbgena3EluIrPBX/hpzjEcHwK+TgwZwZX
+ wS4ge+eAPH3B3hGDKGUeCsx+Ql8wB4e0uBTe/+J0GlTh4/SyraG5Us3NZnRhfMoJXJF4
+ /e2A==
+X-Gm-Message-State: AOJu0YwtXIZI9WfSZ/UQGPc8a2yeX6g/07nBBRxvk9m8ZQBi+yt7+599
+ DCPjmBSuFtdECNhY8IHqcB29IByKgZPPYhfYTEKsM3yV/VqlscMcIv0=
+X-Google-Smtp-Source: AGHT+IEfT7LfiD64vXNO3P28H0s1G0rTdF+J3NK/VzJodxIGF7L1rUymoy+oIHqSOw4bicqohVFyHyjqj7JLIbA4tT0=
+X-Received: by 2002:aa7:c0c6:0:b0:530:4bcd:626c with SMTP id
+ j6-20020aa7c0c6000000b005304bcd626cmr6294318edp.23.1695658753307; Mon, 25 Sep
+ 2023 09:19:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230924111832.3741245-1-u-kumar1@ti.com>
- <57F0DE54-C8BF-4B48-9075-2D267DBA4924@gmx.de>
- <7edb7998-66a4-293e-9cfb-ebc142387684@ti.com>
-In-Reply-To: <7edb7998-66a4-293e-9cfb-ebc142387684@ti.com>
-From: Simon Glass <sjg@google.com>
-Date: Mon, 25 Sep 2023 10:09:57 -0600
-Message-ID: <CAPnjgZ1K8=UKaTf2WTeOY+58uoRrH=AiL6UNyM7v_Q1gpOvwuA@mail.gmail.com>
-Subject: Re: [PATCH] lmb: remove overlapping region with next range
-To: "Kumar, Udit" <u-kumar1@ti.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, nm@ti.com, vigneshr@ti.com, 
- patrick.delaunay@foss.st.com, sjoerd@collabora.com, u-boot@lists.denx.de, 
- michal.simek@amd.com, Suman Anna <s-anna@ti.com>
+References: <20230925023958.1913268-1-sjg@chromium.org>
+ <20230925140838.GV305624@bill-the-cat>
+ <CAPnjgZ2gBRWt6v1i21Mq+bnqScnHYKATCURMtJ6E7DGspOdpnw@mail.gmail.com>
+ <20230925151340.GB305624@bill-the-cat>
+In-Reply-To: <20230925151340.GB305624@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 25 Sep 2023 10:18:55 -0600
+Message-ID: <CAPnjgZ3-AAE11afQx12iqCH6gTeGo-XTBL5ZQn-b-CgOwry7=Q@mail.gmail.com>
+Subject: Re: [PATCH 0/3] common: Remove a few more header files
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,129 +83,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit,
+Hi Tom,
 
-On Sun, 24 Sept 2023 at 22:10, Kumar, Udit <u-kumar1@ti.com> wrote:
+On Mon, 25 Sept 2023 at 09:13, Tom Rini <trini@konsulko.com> wrote:
 >
-> On 9/24/2023 7:21 PM, Heinrich Schuchardt wrote:
+> On Mon, Sep 25, 2023 at 08:35:44AM -0600, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > Am 24. September 2023 13:18:32 MESZ schrieb Udit Kumar <u-kumar1@ti.com>:
-> >> In case of new memory range to be added is coalesced
-> >> with any already added non last lmb region.
-> >>
-> >> And there is possibility that, then region in which new memory
-> >> range added is not adjacent to next region. But have some
-> >> sections are overlapping.
-> >>
-> >> So along with adjacency check with next lmb region,
-> >> check for overlap should be done.
-> >>
-> >> In case overlap  is found, adjust and merge these two lmb
-> >> region into one.
-> >>
-> >> Reported-by: Suman Anna <s-anna@ti.com>
-> >> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-> >> ---
-> >> logs
-> >> https://gist.github.com/uditkumarti/5d08c34442235ad270cfa863792ebcdc
-> >> seqeunce : line 1 to 13
-> >> without fix : line 96-100
-> >> with fix : line 199-202
-> >>
-> >> lib/lmb.c | 37 +++++++++++++++++++++++++++++++++----
-> >> 1 file changed, 33 insertions(+), 4 deletions(-)
-> >>
-> >> diff --git a/lib/lmb.c b/lib/lmb.c
-> >> index b2c233edb6..2580d01d90 100644
-> >> --- a/lib/lmb.c
-> >> +++ b/lib/lmb.c
-> >> @@ -74,6 +74,16 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
-> >>      return 0;
-> >> }
-> >>
-> >> +static long lmb_regions_overlap(struct lmb_region *rgn, unsigned long r1,
-> >> +                            unsigned long r2)
-> >> +{
-> >> +    phys_addr_t base1 = rgn->region[r1].base;
-> >> +    phys_size_t size1 = rgn->region[r1].size;
-> >> +    phys_addr_t base2 = rgn->region[r2].base;
-> >> +    phys_size_t size2 = rgn->region[r2].size;
-> >> +
-> >> +    return lmb_addrs_overlap(base1, size1, base2, size2);
-> >> +}
-> >> static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
-> >>                               unsigned long r2)
-> >> {
-> >> @@ -81,7 +91,6 @@ static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
-> >>      phys_size_t size1 = rgn->region[r1].size;
-> >>      phys_addr_t base2 = rgn->region[r2].base;
-> >>      phys_size_t size2 = rgn->region[r2].size;
-> >> -
-> >>      return lmb_addrs_adjacent(base1, size1, base2, size2);
-> >> }
-> >>
-> >> @@ -105,6 +114,23 @@ static void lmb_coalesce_regions(struct lmb_region *rgn, unsigned long r1,
-> >>      lmb_remove_region(rgn, r2);
-> >> }
-> >>
-> >> +/*Assmptuon : base addr of region 1 < base addr of region 2*/
-> > Assumption
->
->
-> Thanks Heinrich  will fix this typo in v2.
->
-> Let me wait for other review feedback as well before proceeding for v2.
->
->
-> > Regards Heinrich
+> > On Mon, 25 Sept 2023 at 08:08, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Sun, Sep 24, 2023 at 08:39:49PM -0600, Simon Glass wrote:
+> > >
+> > > > This series removes two more header files from the common.h header. It
+> > > > also tidies up code style for time.h functions, to simplify similar
+> > > > maintenance in future.
+> > > >
+> > > >
+> > > > Simon Glass (3):
+> > > >   Fix code style for time functions
+> > > >   common: Drop time.h from common header
+> > > >   common: Drop linux/string.h from common header
+> > > [snip]
+> > > >  1709 files changed, 1854 insertions(+), 34 deletions(-)
+> > >
+> > > This is where I start to get worried we're possibly taking the wrong
+> > > approach to the problem.  Perhaps it would be better to:
+> > > 1. Start finding headers which include <common.h>, remove and fixup the
+> > > breakage directly.
+> > > 2. Move on to removing <common.h> from files, a directory at a time.
+> > >
 > >
-> >> +static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
-> >> +                                 unsigned long r2)
-> >> +{
-> >> +    phys_addr_t base1 = rgn->region[r1].base;
-> >> +    phys_size_t size1 = rgn->region[r1].size;
-> >> +    phys_addr_t base2 = rgn->region[r2].base;
-> >> +    phys_size_t size2 = rgn->region[r2].size;
-> >> +
-> >> +    if (base1 + size1 > base2 + size2) {
-> >> +            printf("This will not be a case any time\n");
-> >> +            return;
-> >> +    }
-> >> +    rgn->region[r1].size = base2 + size2 - base1;
-> >> +    lmb_remove_region(rgn, r2);
-> >> +}
-> >> +
-> >> void lmb_init(struct lmb *lmb)
-> >> {
-> >> #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-> >> @@ -249,7 +275,6 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
-> >>              phys_size_t rgnflags = rgn->region[i].flags;
-> >>              phys_addr_t end = base + size - 1;
-> >>              phys_addr_t rgnend = rgnbase + rgnsize - 1;
-> >> -
-> >>              if (rgnbase <= base && end <= rgnend) {
-> >>                      if (flags == rgnflags)
-> >>                              /* Already have this region, so we're done */
-> >> @@ -278,10 +303,14 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
-> >>              }
-> >>      }
-> >>
-> >> -    if ((i < rgn->cnt - 1) && lmb_regions_adjacent(rgn, i, i + 1)) {
-> >> -            if (rgn->region[i].flags == rgn->region[i + 1].flags) {
-> >> +    if (i < rgn->cnt - 1 && rgn->region[i].flags == rgn->region[i + 1].flags)  {
-> >> +            if (lmb_regions_adjacent(rgn, i, i + 1)) {
-> >>                      lmb_coalesce_regions(rgn, i, i + 1);
-> >>                      coalesced++;
-> >> +            } else if (lmb_regions_overlap(rgn, i, i + 1)) {
-> >> +                    /* fix overlapping area */
-> >> +                    lmb_fix_over_lap_regions(rgn, i, i + 1);
-> >> +                    coalesced++;
-> >>              }
-> >>      }
-> >>
+> > The bigger question is whether you want common.h gone or not?
+>
+> Yes, I'd like it gone.
+>
+> > I shared my script with you so you can see what it is doing. But if a
+> > board uses memcmp(), for example, then it needs linux/string.h
+> > included. We can discuss why so many files use string functions, or
+> > whether the script is not perfect, but ultimately that is the
+> > question.
+> >
+> > Just these simple queries give you a sense of the scale:
+> >
+> >  git grep -l strcat |wc
+> >      45      45    1134
+> > git grep -l memcpy |wc
+> >     834     834   21643
+> >
+> > If you are suggesting that we add fewer includes for now, relying on
+> > transitive includes in header files, then I don't think that is very
+> > useful in the end. I had a series a few years back which removed
+> > common.h entirely and it foundered on this same issue.
+>
+> The problem I see with the approach you're taking now is that it's quite
+> hard to provide meaningful review.  Looking at the time.h patch here, I
+> assume you agree it would be better to just remove
+> arch/arm/include/asm/arch-tegra/timer.h as it's just a single prototype
+> already found in include/time.h.  And the example where time.h was
+> included inside a comment block is a tooling issue.  But then looking at
+> the printk.h patch I did just apply, I had to drop a few files because
+> they introduced seemingly random changes to the resulting build on some
+> platforms.
 
-Can you please add a test to test/lib which fails before your change
-and passes after?
+That is very strange. But I think with the Kconfig thing we
+established that the build size can vary slightly for all sorts of
+reasons, nothing to do with actual functional changes, particularly
+with LTO. So as things standard, a build-size change isn't a good
+signal.
+
+>  And something like that is much easier to deal with and
+> explain _why_ it's happening if we're removing the header file by file,
+> rather than world-wide move-a-header.
+
+With the Kconfig series I was unable to explain the minor 4-8 byte
+changes, despite quite a bit of effort, as you know.
+
+My suggestion is that we press ahead with the migration. If some
+maintainers want to do clean-up afterwards, then that would be great.
 
 Regards,
 Simon
