@@ -4,81 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB3F1CE7A94
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 12:09:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5AA6CE7A94
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 12:10:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A069D86B69;
-	Mon, 25 Sep 2023 14:09:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1F26B86BE7;
+	Mon, 25 Sep 2023 14:10:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KQQUElGE";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="0lqbHccm";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="TQ55iuor";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF20986B82; Mon, 25 Sep 2023 14:09:43 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AB85386C06; Mon, 25 Sep 2023 14:10:43 +0200 (CEST)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F034C86B4E
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 14:09:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CFD9886BE7
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 14:10:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4053c6f0d55so58057065e9.0
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 05:09:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695643781; x=1696248581; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+5M+3OR3Z5Fu38IDYAKp0fcmUqN97xv2nuZO++jQSww=;
- b=KQQUElGEW/ellAs7pOPR93aMlqVbVIuxEuibfhjb8bUJpsr8FMoG5lcZXiHI1uEmmH
- qGLpSqfTgQv57dxkcGE+5ld7Psd6231xTuVC9VW2MOal4Wwwu1tc7cGUmtQ3KPuFgHpB
- 9TBHtZTROVR9ts5t8rgXtvMqle931m+aVAiF5iRdeP8Hr3Y1O3eVss6GFh7bWT/lGPuX
- uGpRM0S6nEmsfPstqob5srJGPn3P3c2a5xrmQPU3KglMAzIVcEz6Z0x03FUCaYubQYpN
- RV7yTna9hTczxmVC5K9ZKGcBkLVtLO3PdhNMrjYkKZUVxOGGo/0lQnm42Ujqim+YScaF
- qLMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695643781; x=1696248581;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+5M+3OR3Z5Fu38IDYAKp0fcmUqN97xv2nuZO++jQSww=;
- b=ClbExo/NV0K3SfdPXeaf892nUPa/OJC94qA4csILx57ktgw4l61bEpi9mo7SGl4d5c
- 2Fle184SEOMoqeQZTJMPdeTuraOG1T7CjmVTPxVBRdtwajSp89W6/13EUNeDSf9vc4F7
- yrs26OHEOWd9YBD4dZw3sIuIvg54jm563ZTaNBL2OYX64tfvYUs0T/pHhvfRp9Uj7JjD
- fnr2mCbJ13TkUkbLhdYAalX3cB6bGCOOHzbh98WTWSNlPgNzPLB/8/eo1LyjrbsrW4e4
- x965W+I4ecevbJpIs+l/lACkaA5VbW03MXgWE6WzCG1+FcZ0Q8+oyArdAAaaZyc1+Rye
- 4kww==
-X-Gm-Message-State: AOJu0YzUESl5ezWXdDEmDRgnzoohlOo4N8y71j/n2AoJwNCU90Vx74tN
- BO86ZfUcWmM9VOigovU6mJMLxt45DUF2a62VjgU=
-X-Google-Smtp-Source: AGHT+IGQLjQgYC06nbPPO1yDUVg6NCWR6p6RHExshtxMJQLFFqPC9xjlAYslyQNN4O046XhL8Y0+LA==
-X-Received: by 2002:a7b:c417:0:b0:3ff:ca80:eda3 with SMTP id
- k23-20020a7bc417000000b003ffca80eda3mr5270180wmi.10.1695643781361; 
- Mon, 25 Sep 2023 05:09:41 -0700 (PDT)
-Received: from hera (ppp046103219117.access.hol.gr. [46.103.219.117])
- by smtp.gmail.com with ESMTPSA id
- k3-20020a05600c0b4300b003fe1fe56202sm12188408wmr.33.2023.09.25.05.09.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 05:09:41 -0700 (PDT)
-Date: Mon, 25 Sep 2023 15:09:38 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Tobias Waldekranz <tobias@waldekranz.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Subject: Re: [PATCH v4 3/8] blk: blkmap: add ramdisk creation utility function
-Message-ID: <ZRF4gguigfY6Hnev@hera>
-References: <20230922071119.1439482-1-masahisa.kojima@linaro.org>
- <20230922071119.1439482-4-masahisa.kojima@linaro.org>
+ spf=pass smtp.mailfrom=msuchanek@suse.de
+Received: from relay2.suse.de (relay2.suse.de [149.44.160.134])
+ by smtp-out2.suse.de (Postfix) with ESMTP id 945851F459;
+ Mon, 25 Sep 2023 12:10:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1695643841; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=9oWAPkhFkiQkYgSTqg3XL4q3EVJcdwxMKXpdFEkdcVk=;
+ b=0lqbHccmeRmOgMAcIKvk2I5rJVYI33QGEPTOEt0yk09eOZePA8s7aLmp91FqumXHg12D0e
+ g6p6DMkUyuFt2pCzI5+CfgPi2Y5ZUDlF4QHhNFaKhYMSHUjLMzQFhh2etIhE6ZFCP8QLkn
+ Ug4aVMh/9bmwSdzeMDWdl5jhBzhwMAo=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1695643841;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=9oWAPkhFkiQkYgSTqg3XL4q3EVJcdwxMKXpdFEkdcVk=;
+ b=TQ55iuorktdmKs8sKFAMnvgkHnB3QXd+vpWdy/tVt8LHCENaMLPWvuW2CjZjEtl8naL69b
+ HdHYlnDQ0d013tBw==
+Received: from kitsune.suse.cz (kitsune.suse.cz [10.100.12.127])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by relay2.suse.de (Postfix) with ESMTPS id 5B5902C145;
+ Mon, 25 Sep 2023 12:10:41 +0000 (UTC)
+Date: Mon, 25 Sep 2023 14:10:40 +0200
+From: Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 2/2] serial: introduce CONFIG_CONSOLE_FLUSH_ON_NEWLINE
+Message-ID: <20230925121040.GC6241@kitsune.suse.cz>
+References: <20230925110101.376878-1-rasmus.villemoes@prevas.dk>
+ <20230925110101.376878-3-rasmus.villemoes@prevas.dk>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230922071119.1439482-4-masahisa.kojima@linaro.org>
+In-Reply-To: <20230925110101.376878-3-rasmus.villemoes@prevas.dk>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,167 +80,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Sep 22, 2023 at 04:11:14PM +0900, Masahisa Kojima wrote:
-> User needs to call several functions to create the ramdisk
-> with blkmap.
-> This adds the utility function to create blkmap device and
-> mount the ramdisk.
->
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+Hello,
+
+On Mon, Sep 25, 2023 at 01:01:01PM +0200, Rasmus Villemoes wrote:
+> When debugging, one sometimes only gets partial output lines or
+> nothing at all from the last printf, because the uart has a largish
+> buffer, and the code after the printf() may cause the CPU to hang
+> before the uart IP has time to actually emit all the characters. That
+> can be very confusing, because one doesn't then know exactly where the
+> hang happens.
+> 
+> Introduce a config knob allowing one to wait for the uart fifo to
+> drain whenever a newline character is printed, roughly corresponding
+> to the effect of setvbuf(..., _IOLBF, ...) in ordinary C programs.
+> 
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 > ---
->  drivers/block/Makefile        |  1 +
->  drivers/block/blkmap.c        | 15 ----------
->  drivers/block/blkmap_helper.c | 53 +++++++++++++++++++++++++++++++++++
->  include/blkmap.h              | 29 +++++++++++++++++++
->  4 files changed, 83 insertions(+), 15 deletions(-)
->  create mode 100644 drivers/block/blkmap_helper.c
->
-> diff --git a/drivers/block/Makefile b/drivers/block/Makefile
-> index a161d145fd..c3ccfc03e5 100644
-> --- a/drivers/block/Makefile
-> +++ b/drivers/block/Makefile
-> @@ -15,6 +15,7 @@ endif
->  obj-$(CONFIG_SANDBOX) += sandbox.o host-uclass.o host_dev.o
->  obj-$(CONFIG_$(SPL_TPL_)BLOCK_CACHE) += blkcache.o
->  obj-$(CONFIG_BLKMAP) += blkmap.o
-> +obj-$(CONFIG_BLKMAP) += blkmap_helper.o
->
->  obj-$(CONFIG_EFI_MEDIA) += efi-media-uclass.o
->  obj-$(CONFIG_EFI_MEDIA_SANDBOX) += sb_efi_media.o
-> diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-> index 2bb0acc20f..4e95997f61 100644
-> --- a/drivers/block/blkmap.c
-> +++ b/drivers/block/blkmap.c
-> @@ -66,21 +66,6 @@ struct blkmap_slice {
->  	void (*destroy)(struct blkmap *bm, struct blkmap_slice *bms);
->  };
->
-> -/**
-> - * struct blkmap - Block map
-> - *
-> - * Data associated with a blkmap.
-> - *
-> - * @label: Human readable name of this blkmap
-> - * @blk: Underlying block device
-> - * @slices: List of slices associated with this blkmap
-> - */
-> -struct blkmap {
-> -	char *label;
-> -	struct udevice *blk;
-> -	struct list_head slices;
-> -};
-> -
->  static bool blkmap_slice_contains(struct blkmap_slice *bms, lbaint_t blknr)
+>  common/Kconfig                 | 11 +++++++++++
+>  drivers/serial/serial-uclass.c |  8 ++++++--
+>  2 files changed, 17 insertions(+), 2 deletions(-)
+> 
+> diff --git a/common/Kconfig b/common/Kconfig
+> index cdb77a6a7d..49130f2a2b 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -224,6 +224,17 @@ config CONSOLE_FLUSH_SUPPORT
+>  	help
+>  	  This enables compilation of flush() function for console flush support.
+>  
+> +config CONSOLE_FLUSH_ON_NEWLINE
+> +	bool "Flush console buffer on every newline character"
+> +	depends on CONSOLE_FLUSH_SUPPORT
+
+Maybe selects would be more appropriate here if it can be arbitrarily
+enabled on any console
+
+> +	depends on DM_SERIAL
+> +	help
+> +	  This makes the serial core code flush the console device
+> +	  whenever a newline (\n) character has been emitted. This can
+> +	  be especially useful when "printf debugging", as otherwise
+> +	  lots of output could still be in the UART's FIFO by the time
+> +	  one hits the code which causes the CPU to hang or reset.
+> +
+>  config CONSOLE_MUX
+>  	bool "Enable console multiplexing"
+>  	default y if VIDEO || LCD
+> diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
+> index 2f75ff878c..b41e3ebe7f 100644
+> --- a/drivers/serial/serial-uclass.c
+> +++ b/drivers/serial/serial-uclass.c
+> @@ -181,7 +181,6 @@ int serial_initialize(void)
+>  	return serial_init();
+>  }
+>  
+> -#ifdef CONFIG_CONSOLE_FLUSH_SUPPORT
+
+This should not be removed. CONSOLE_FLUSH_ON_NEWLINE will only ever be
+configured when CONFIG_CONSOLE_FLUSH_SUPPORT is also enabled so there is
+no need to remove, either.
+
+Thanks
+
+Michal
+
+>  static void _serial_flush(struct udevice *dev)
 >  {
->  	return (blknr >= bms->blknr) && (blknr < (bms->blknr + bms->blkcnt));
-> diff --git a/drivers/block/blkmap_helper.c b/drivers/block/blkmap_helper.c
-> new file mode 100644
-> index 0000000000..0f80035f57
-> --- /dev/null
-> +++ b/drivers/block/blkmap_helper.c
-> @@ -0,0 +1,53 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * blkmap helper function
-> + *
-> + * Copyright (c) 2023, Linaro Limited
-> + */
+>  	struct dm_serial_ops *ops = serial_get_ops(dev);
+> @@ -191,7 +190,6 @@ static void _serial_flush(struct udevice *dev)
+>  	while (ops->pending(dev, false) > 0)
+>  		;
+>  }
+> -#endif
+>  
+>  static void _serial_putc(struct udevice *dev, char ch)
+>  {
+> @@ -204,6 +202,9 @@ static void _serial_putc(struct udevice *dev, char ch)
+>  	do {
+>  		err = ops->putc(dev, ch);
+>  	} while (err == -EAGAIN);
 > +
-> +#include <blk.h>
-> +#include <blkmap.h>
-> +#include <dm/device.h>
-> +#include <dm/device-internal.h>
+> +	if (IS_ENABLED(CONSOLE_FLUSH_ON_NEWLINE) && ch == '\n')
+> +		_serial_flush(dev);
+>  }
+>  
+>  static int __serial_puts(struct udevice *dev, const char *str, size_t len)
+> @@ -242,6 +243,9 @@ static void _serial_puts(struct udevice *dev, const char *str)
+>  		if (*newline && __serial_puts(dev, "\r\n", 2))
+>  			return;
+>  
+> +		if (IS_ENABLED(CONSOLE_FLUSH_ON_NEWLINE) && *newline)
+> +			_serial_flush(dev);
 > +
-> +int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
-> +			  struct udevice **devp)
-> +{
-> +	int ret;
-> +	lbaint_t blknum;
-> +	struct blkmap *bm;
-> +	struct blk_desc *desc;
-> +	struct udevice *bm_dev;
-> +
-> +	ret = blkmap_create(label, &bm_dev);
-> +	if (ret) {
-> +		log_err("failed to create blkmap\n");
-> +		return ret;
-> +	}
-> +
-> +	bm = dev_get_plat(bm_dev);
-> +	desc = dev_get_uclass_plat(bm->blk);
-> +	blknum = image_size >> desc->log2blksz;
-> +	ret = blkmap_map_pmem(bm_dev, 0, blknum, image_addr);
-> +	if (ret) {
-> +		log_err("Unable to map %#llx at block %d : %d\n",
-> +			(unsigned long long)image_addr, 0, ret);
-> +		goto err;
-> +	}
-> +	log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
-> +		 (unsigned long long)image_addr);
-> +
-> +	ret = device_probe(bm->blk);
-> +	if (ret)
-> +		goto err;
-> +
-> +	if (devp)
-> +		*devp = bm_dev;
-> +
-> +	return 0;
-> +
-> +err:
-> +	blkmap_destroy(bm_dev);
-> +
-> +	return ret;
-> +}
-> diff --git a/include/blkmap.h b/include/blkmap.h
-> index af54583c7d..0d87e6db6b 100644
-> --- a/include/blkmap.h
-> +++ b/include/blkmap.h
-> @@ -7,6 +7,23 @@
->  #ifndef _BLKMAP_H
->  #define _BLKMAP_H
->
-> +#include <dm/lists.h>
-> +
-> +/**
-> + * struct blkmap - Block map
-> + *
-> + * Data associated with a blkmap.
-> + *
-> + * @label: Human readable name of this blkmap
-> + * @blk: Underlying block device
-> + * @slices: List of slices associated with this blkmap
-> + */
-> +struct blkmap {
-> +	char *label;
-> +	struct udevice *blk;
-> +	struct list_head slices;
-> +};
-> +
->  /**
->   * blkmap_map_linear() - Map region of other block device
->   *
-> @@ -74,4 +91,16 @@ int blkmap_create(const char *label, struct udevice **devp);
->   */
->  int blkmap_destroy(struct udevice *dev);
->
-> +/**
-> + * blkmap_create_ramdisk() - Create new ramdisk with blkmap
-> + *
-> + * @label: Label of the new blkmap
-> + * @image_addr: Target memory start address of this mapping
-> + * @image_size: Target memory size of this mapping
-> + * @devp: Updated with the address of the created blkmap device
-> + * Returns: 0 on success, negative error code on failure
-> + */
-> +int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
-> +			  struct udevice **devp);
-> +
->  #endif	/* _BLKMAP_H */
-> --
-> 2.34.1
->
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
+>  		str += len + !!*newline;
+>  	} while (*str);
+>  }
+> -- 
+> 2.37.2
+> 
