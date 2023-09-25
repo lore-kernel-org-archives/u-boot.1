@@ -4,48 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C6F1CE7A89
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:26:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4E81CE7A89
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:27:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8F7886BE7;
-	Mon, 25 Sep 2023 11:26:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5FF5C86C04;
+	Mon, 25 Sep 2023 11:27:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A07486BF7; Mon, 25 Sep 2023 11:26:33 +0200 (CEST)
+ id 8359B86B3A; Mon, 25 Sep 2023 11:27:19 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A58EA86C23
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:26:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 458B086B3A
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:27:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 38P9QLMK060907;
- Mon, 25 Sep 2023 17:26:21 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 38P9R6iw061077;
+ Mon, 25 Sep 2023 17:27:06 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Mon, 25 Sep 2023 17:26:18 +0800
+ Mon, 25 Sep 2023 17:27:03 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
- Randolph <randolph@andestech.com>
-Subject: [PATCH V3 2/2] configs: andes: rearrange SPL mode memory layout
-Date: Mon, 25 Sep 2023 17:24:52 +0800
-Message-ID: <20230925092452.1402614-3-randolph@andestech.com>
+ <peterlin@andestech.com>, Randolph <randolph@andestech.com>
+Subject: [PATCH 0/7] riscv: spl: OpenSBI OS boot mode
+Date: Mon, 25 Sep 2023 17:25:36 +0800
+Message-ID: <20230925092543.1408725-1-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230925092452.1402614-1-randolph@andestech.com>
-References: <20230925092452.1402614-1-randolph@andestech.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 38P9QLMK060907
+X-MAIL: Atcsqr.andestech.com 38P9R6iw061077
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,134 +60,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Unify the memory layout for u-boot SPL mode
-Add "CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS"
+Introduce a shortcut boot mode for RISC-V. 
 
-Signed-off-by: Randolph <randolph@andestech.com>
----
- configs/ae350_rv32_spl_defconfig     | 7 ++++---
- configs/ae350_rv32_spl_xip_defconfig | 5 +++--
- configs/ae350_rv64_spl_defconfig     | 7 ++++---
- configs/ae350_rv64_spl_xip_defconfig | 5 +++--
- 4 files changed, 14 insertions(+), 10 deletions(-)
+As we know, in ARM architecture has the Falcon mode to do the shortcut
+boot to the Linux kernel. (by enabling CONFIG_SPL_OS_BOOT)
+ARM Falcon mode boot flow would be as follows:
+u-boot SPL -> Linux kernel
 
-diff --git a/configs/ae350_rv32_spl_defconfig b/configs/ae350_rv32_spl_defconfig
-index 4adc1134ba..b28a0a84fb 100644
---- a/configs/ae350_rv32_spl_defconfig
-+++ b/configs/ae350_rv32_spl_defconfig
-@@ -8,14 +8,14 @@ CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
- CONFIG_SYS_PROMPT="RISC-V # "
- CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_TARGET_ANDES_AE350=y
- CONFIG_RISCV_SMODE=y
- # CONFIG_AVAILABLE_HARTS is not set
- CONFIG_FIT=y
--CONFIG_SPL_LOAD_FIT_ADDRESS=0x00200000
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
- CONFIG_SYS_MONITOR_BASE=0x88000000
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=3
-@@ -23,9 +23,10 @@ CONFIG_DISPLAY_CPUINFO=y
- CONFIG_DISPLAY_BOARDINFO=y
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_MAX_SIZE=0x100000
--CONFIG_SPL_BSS_START_ADDR=0x4000000
-+CONFIG_SPL_BSS_START_ADDR=0x400000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_CACHE=y
-+CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
- CONFIG_SYS_PBSIZE=1050
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
-diff --git a/configs/ae350_rv32_spl_xip_defconfig b/configs/ae350_rv32_spl_xip_defconfig
-index e19eb546a6..5e8f1b3631 100644
---- a/configs/ae350_rv32_spl_xip_defconfig
-+++ b/configs/ae350_rv32_spl_xip_defconfig
-@@ -9,7 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SYS_PROMPT="RISC-V # "
- CONFIG_SYS_MONITOR_LEN=786432
--CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_TARGET_ANDES_AE350=y
-@@ -24,9 +24,10 @@ CONFIG_DISPLAY_CPUINFO=y
- CONFIG_DISPLAY_BOARDINFO=y
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_MAX_SIZE=0x100000
--CONFIG_SPL_BSS_START_ADDR=0x4000000
-+CONFIG_SPL_BSS_START_ADDR=0x400000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_CACHE=y
-+CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
- CONFIG_SYS_PBSIZE=1050
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
-diff --git a/configs/ae350_rv64_spl_defconfig b/configs/ae350_rv64_spl_defconfig
-index 629c5bab77..1592ec811a 100644
---- a/configs/ae350_rv64_spl_defconfig
-+++ b/configs/ae350_rv64_spl_defconfig
-@@ -7,7 +7,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
- CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
- CONFIG_SYS_PROMPT="RISC-V # "
--CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_TARGET_ANDES_AE350=y
-@@ -15,7 +15,7 @@ CONFIG_ARCH_RV64I=y
- CONFIG_RISCV_SMODE=y
- # CONFIG_AVAILABLE_HARTS is not set
- CONFIG_FIT=y
--CONFIG_SPL_LOAD_FIT_ADDRESS=0x00200000
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
- CONFIG_SYS_MONITOR_BASE=0x88000000
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=3
-@@ -23,9 +23,10 @@ CONFIG_DISPLAY_CPUINFO=y
- CONFIG_DISPLAY_BOARDINFO=y
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_MAX_SIZE=0x100000
--CONFIG_SPL_BSS_START_ADDR=0x4000000
-+CONFIG_SPL_BSS_START_ADDR=0x400000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_CACHE=y
-+CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
- CONFIG_SYS_PBSIZE=1050
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
-diff --git a/configs/ae350_rv64_spl_xip_defconfig b/configs/ae350_rv64_spl_xip_defconfig
-index 4557e05445..97f961b6c9 100644
---- a/configs/ae350_rv64_spl_xip_defconfig
-+++ b/configs/ae350_rv64_spl_xip_defconfig
-@@ -8,7 +8,7 @@ CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SYS_PROMPT="RISC-V # "
--CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
- CONFIG_SPL=y
- CONFIG_SYS_LOAD_ADDR=0x100000
- CONFIG_TARGET_ANDES_AE350=y
-@@ -24,9 +24,10 @@ CONFIG_DISPLAY_CPUINFO=y
- CONFIG_DISPLAY_BOARDINFO=y
- CONFIG_BOARD_EARLY_INIT_F=y
- CONFIG_SPL_MAX_SIZE=0x100000
--CONFIG_SPL_BSS_START_ADDR=0x4000000
-+CONFIG_SPL_BSS_START_ADDR=0x400000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_CACHE=y
-+CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
- CONFIG_SYS_PBSIZE=1050
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_CMD_IMLS=y
+But for RISC-V, OpenSBI is required to allows the supervisor to execute
+some privileged operations.
+The RISC-V Normal boot flow as follows:
+u-boot SPL -> OpenSBI -> u-boot proper -> Linux kernel
+
+Quoting the same ideas as ARM's Falcon mode,
+OpenSBI OS boot flow as follows:
+u-boot SPL -> OpenSBI -> Linux kernel
+
+An important part of OpenSBI OS boot mode is to prepare the device tree. 
+A normal U-Boot does FDT fixups when booting Linux. 
+For OpenSBI OS boot mode, Linux boots directly from SPL, 
+skipping the normal U-Boot. 
+The device tree has to be prepared in advance.
+The device tree in memory is the one needed for OpenSBI OS boot mode.
+
+The Linux kernel image will also need to be provided for the generation
+of the FIT file.
+
+Randolph (7):
+  riscv: dts: Introduce SPL_LOAD_FIT_CONFIG symbol
+  riscv: dts: add binman_linux.dtsi for opensbi os boot mode
+  spl: riscv: opensbi: change the default os_type as varible
+  riscv: dts: introduce SPL_LOAD_FIT_OPENSBI_OS_BOOT symbol
+  spl: riscv: add os type for next booting stage
+  andes: config: add riscv falcon mode for ae350 platform
+  riscv: spl: andes: Move the DTB in front of kernel
+
+ arch/riscv/Kconfig                      | 16 +++++
+ arch/riscv/dts/ae350-u-boot.dtsi        |  1 +
+ arch/riscv/dts/ae350_32.dts             |  1 -
+ arch/riscv/dts/ae350_64.dts             |  1 -
+ arch/riscv/dts/binman_linux.dtsi        | 79 +++++++++++++++++++++++++
+ board/AndesTech/ae350/ae350.c           | 25 ++++++++
+ common/spl/spl_fit.c                    |  4 ++
+ common/spl/spl_opensbi.c                | 31 ++++++----
+ configs/ae350_rv32_falcon_defconfig     | 60 +++++++++++++++++++
+ configs/ae350_rv32_falcon_xip_defconfig | 61 +++++++++++++++++++
+ configs/ae350_rv64_falcon_defconfig     | 60 +++++++++++++++++++
+ configs/ae350_rv64_falcon_xip_defconfig | 61 +++++++++++++++++++
+ 12 files changed, 388 insertions(+), 12 deletions(-)
+ create mode 100644 arch/riscv/dts/binman_linux.dtsi
+ create mode 100644 configs/ae350_rv32_falcon_defconfig
+ create mode 100644 configs/ae350_rv32_falcon_xip_defconfig
+ create mode 100644 configs/ae350_rv64_falcon_defconfig
+ create mode 100644 configs/ae350_rv64_falcon_xip_defconfig
+
 -- 
 2.34.1
 
