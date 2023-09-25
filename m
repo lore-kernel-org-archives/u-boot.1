@@ -4,66 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FBB9CE79A1
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 21:31:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14DEACE79A4
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 21:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C2ED86BA6;
-	Mon, 25 Sep 2023 23:31:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 474F086B53;
+	Mon, 25 Sep 2023 23:55:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="Pb49L1bb";
+	dkim=pass (2048-bit key; unprotected) header.d=kwiboo.se header.i=@kwiboo.se header.b="mF3G8A8/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB64D86BB2; Mon, 25 Sep 2023 23:31:02 +0200 (CEST)
-Received: from s.wrqvtbkv.outbound-mail.sendgrid.net
- (s.wrqvtbkv.outbound-mail.sendgrid.net [149.72.123.24])
+ id E35F986BE0; Mon, 25 Sep 2023 23:55:23 +0200 (CEST)
+Received: from s.wfbtzhsv.outbound-mail.sendgrid.net
+ (s.wfbtzhsv.outbound-mail.sendgrid.net [159.183.224.104])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 613A186B8F
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 23:30:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5942286B09
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 23:55:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=bounces+31435339-7456-u-boot=lists.denx.de@em2124.kwiboo.se
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=mime-version:subject:references:from:in-reply-to:to:cc:content-type:
- content-transfer-encoding:cc:content-type:from:subject:to;
- s=s1; bh=G/PWuisN9Vc8XwJoi0u4afw20ET42g7eb0y9pYc8zuw=;
- b=Pb49L1bbD7INxq1VPeNxtMvPjnF9gIsPDyKqNT4+29iof72wsvS751P1oETNvosDcyKN
- LIs2kKtYb8UgEQ3lPhzLfKWwVD6Wyoyv23RM3JbmE5jcHmEWUD+gRrYOcewnHDmYBDONSO
- Q+FBFp77iiudaJzLYvgWXI+2vlk1/7XPrCN523o0C9Re46RvMTi4jGqw43QhHDbJYtlYAX
- aKNSnET4Gl3SGgONCE4yUR3TwwhR2GkfxHBsFkfyNASu54l0SJZzqQJIeTeoix47K1Lvs5
- FVkpFnISAYNLKpCpH3WJu6BvRxBqkF1VVNxvBu8s1Vpxtd53meACLZnHMUCWrQ7w==
-Received: by filterdrecv-84b96456cb-hq7z7 with SMTP id
- filterdrecv-84b96456cb-hq7z7-1-6511FC0F-7A
- 2023-09-25 21:30:56.08298353 +0000 UTC m=+11915544.337525000
-Received: from [192.168.1.50] (unknown) by geopod-ismtpd-6 (SG) with ESMTP
- id p33lwBGMRIK1q6MhicBCkw Mon, 25 Sep 2023 21:30:55.675 +0000 (UTC)
-Message-ID: <21678211-14b2-ce5c-820a-c69426725d65@kwiboo.se>
-Date: Mon, 25 Sep 2023 21:30:56 +0000 (UTC)
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH v2 0/7] rockchip: rk3568: Fix use of PCIe bifurcation
-Content-Language: en-US
-References: <20230802190424.2963185-1-jonas@kwiboo.se>
+ h=from:subject:mime-version:to:cc:content-transfer-encoding:
+ content-type:cc:content-type:from:subject:to;
+ s=s1; bh=zMsGuIfJvgsb3hYh3zub+/OtyK8e4FVprM0ct46kaZw=;
+ b=mF3G8A8/X0v0b4dg3+tN2qT9ypZ1sqQjJ3r49wJxFA8APRRD9l6QymzsfUPOwlga4gr6
+ xdpvta4mr3JPH1jMqwsRsdckmLi6nUGrOnsKXamzfNt6kIbuJZ0iPkln6G9ffB2wBP4N4P
+ zMOi/VBWPvNFj9SL32Vsem7RmeH7SoPWuqAqF1PWkOpDAnZlv4ltdJd+11yd+Ji1Ur3+F2
+ QjCdSQbHXrcoXGqpicWgSfiNc6tN5s84g11cyFm7nnPM/LoblKZWkijovHgTRV9maqipDL
+ X2SD550PsRjNiwGG/Cymqtj+i9OE4YAsaxJA7YVGo8Ocsxt4UXoFrw15nGgPZzNw==
+Received: by filterdrecv-8684c58db7-zm958 with SMTP id
+ filterdrecv-8684c58db7-zm958-1-651201C6-1B
+ 2023-09-25 21:55:19.119150496 +0000 UTC m=+11916993.486316992
+Received: from bionic.localdomain (unknown) by geopod-ismtpd-1 (SG) with ESMTP
+ id PFVJ7ut-Tsq3YcbL1iKugg Mon, 25 Sep 2023 21:55:18.554 +0000 (UTC)
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20230802190424.2963185-1-jonas@kwiboo.se>
+Subject: [PATCH] mmc: Add SPL_MMC_PWRSEQ to fix link issue when building SPL
+Date: Mon, 25 Sep 2023 21:55:19 +0000 (UTC)
+Message-ID: <20230925215516.1528643-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.42.0
+MIME-Version: 1.0
 X-SG-EID: =?us-ascii?Q?TdbjyGynYnRZWhH+7lKUQJL+ZxmxpowvO2O9SQF5CwCVrYgcwUXgU5DKUU3QxA?=
- =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0h3wyWKWgjmsC317k7?=
- =?us-ascii?Q?MU00J1rXdaHJfSvE+mx5HMdgzYNAf5Yc+udEdqB?=
- =?us-ascii?Q?dklxMCrnpcsAEO6NFH7LJrGDzhmaBgCBEEf4=2F6W?=
- =?us-ascii?Q?Dn9soQaKASaSoBkLZWPdc28OOfuZ82+L7KFSk43?=
- =?us-ascii?Q?qDvsFWJhhsanWnqjo99GpJpzEgT4r4lwn9Zfaf?=
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>, Jon Lin
- <jon.lin@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>, John Clark
- <inindev@gmail.com>, u-boot@lists.denx.de
+ =?us-ascii?Q?fZekEeQsTe+RrMu3cja6a0hwC=2F458dt=2FGmaoBnY?=
+ =?us-ascii?Q?HF3mRHnV5N3LxfsK1AKG+Zyx=2FTLzdb7sdVlefPX?=
+ =?us-ascii?Q?Ll56Id1T5NeHyym4cxt35fQN=2F2eOIrLNhEJP5yM?=
+ =?us-ascii?Q?zfTM141RosqX8DfVEl1DodS4zLWH4JSYh=2FUjZOm?=
+ =?us-ascii?Q?ZXeEUz8yLAhTUSbTbYtwx3NS3hafqx=2FyUElECE?=
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
+ <kever.yang@rock-chips.com>
+Cc: Ferass El Hafidi <vitali64pmemail@protonmail.com>, Jonas Karlman
+ <jonas@kwiboo.se>, u-boot@lists.denx.de, u-boot-amlogic@groups.io
 X-Entity-ID: P7KYpSJvGCELWjBME/J5tg==
-Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,71 +77,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+With MMC_PWRSEQ enabled the following link issue may happen when
+building SPL and SPL_PWRSEQ is not enabled.
 
-It would be nice to get some feedback and plans for this and the
-following series :-)
+  aarch64-linux-gnu-ld.bfd: drivers/mmc/meson_gx_mmc.o: in function `meson_mmc_probe':
+  drivers/mmc/meson_gx_mmc.c:295: undefined reference to `pwrseq_set_power'
 
-rockchip: rk3568: Fix use of PCIe bifurcation (this series)
-https://patchwork.ozlabs.org/cover/1816140/
+Fix this by adding a SPL_MMC_PWRSEQ Kconfig option used to enable mmc
+pwrseq support in SPL.
 
-rockchip: rk3568-nanopi-r5: Add missing PCIe options
-https://patchwork.ozlabs.org/cover/1816147/
+Also add depends on DM_GPIO to fix following link issue:
 
-rockchip: Port IO-domain driver for RK3568 from linux
-https://patchwork.ozlabs.org/cover/1823769/
+  aarch64-linux-gnu-ld.bfd: drivers/mmc/mmc-pwrseq.o: in function `mmc_pwrseq_set_power':
+  drivers/mmc/mmc-pwrseq.c:26: undefined reference to `gpio_request_by_name'
+  aarch64-linux-gnu-ld.bfd: drivers/mmc/mmc-pwrseq.c:29: undefined reference to `dm_gpio_set_value'
+  aarch64-linux-gnu-ld.bfd: drivers/mmc/mmc-pwrseq.c:31: undefined reference to `dm_gpio_set_value'
 
-I also plan to send a v2 with small update based on the little feedback
-I got on the following:
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ drivers/mmc/Kconfig           | 10 +++++++++-
+ drivers/mmc/Makefile          |  2 +-
+ drivers/mmc/meson_gx_mmc.c    |  2 +-
+ drivers/mmc/rockchip_dw_mmc.c |  2 +-
+ include/mmc.h                 |  4 ++--
+ 5 files changed, 14 insertions(+), 6 deletions(-)
 
-rockchip: Add GMAC support for RK3568 and RK3588
-https://patchwork.ozlabs.org/cover/1817469/
-
-Regards,
-Jonas
-
-On 2023-08-02 21:04, Jonas Karlman wrote:
-> This series add support for use of PCIe bifurcation on RK3568, and as a
-> bonus support for the RK3588 PHY is also included. With PCIe bifurcation
-> supported it is possible to enable PCIe on more RK3568 boards, e.g. on
-> NanoPi R5C and NanoPi R5S. This series only include fixing the mini PCIe
-> slot on Radxa E25.
-> 
-> Most parts of this series was imported almost 1:1 from mainline linux.
-> 
-> Patch 1 fixes configuration of number of lanes in pcie_dw_rockchip.
-> Patch 2-3 refactor the snps-pcie3 phy driver.
-> Patch 4 add bifurcation support for RK3568.
-> Patch 5 add support for RK3588 to snps-pcie3 driver.
-> Patch 6 fixes use of pcie2x1l0 on ROCK 5B.
-> Patch 7 enables the mini PCIe slot on Radxa E25.
-> 
-> Changes in v2:
-> - Fix use of signal from comb PHY on RK3588
-> - Add fixes tag
-> 
-> The RK3588 PHY part was tested on a ROCK 5B together with device tree
-> files picked from Sebastian Reichel's rk3588 branch at [1].
-> 
-> Patches in this series is also aviliable at [2].
-> 
-> [1] https://git.kernel.org/pub/scm/linux/kernel/git/sre/linux-misc.git/tree/?h=rk3588
-> [2] https://github.com/Kwiboo/u-boot-rockchip/commits/rk35xx-pcie-bifurcation-v2
-> 
-> Jonas Karlman (7):
->   pci: pcie_dw_rockchip: Configure number of lanes and link width speed
->   phy: rockchip: snps-pcie3: Refactor to use clk_bulk API
->   phy: rockchip: snps-pcie3: Refactor to use a phy_init ops
->   phy: rockchip: snps-pcie3: Add bifurcation support for RK3568
->   phy: rockchip: snps-pcie3: Add support for RK3588
->   phy: rockchip: naneng-combphy: Use signal from comb PHY on RK3588
->   rockchip: rk3568-radxa-e25: Enable pcie3x1 node
-> 
->  arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi     |  11 +-
->  configs/radxa-e25-rk3568_defconfig            |   1 -
->  drivers/pci/pcie_dw_rockchip.c                |  58 ++++-
->  .../rockchip/phy-rockchip-naneng-combphy.c    |   6 +
->  .../phy/rockchip/phy-rockchip-snps-pcie3.c    | 230 ++++++++++++++----
->  5 files changed, 241 insertions(+), 65 deletions(-)
-> 
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index de01b9687bad..a9931d39412d 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -20,11 +20,19 @@ config MMC_WRITE
+ 
+ config MMC_PWRSEQ
+ 	bool "HW reset support for eMMC"
+-	depends on PWRSEQ
++	depends on PWRSEQ && DM_GPIO
+ 	help
+ 	  Ths select Hardware reset support aka pwrseq-emmc for eMMC
+ 	  devices.
+ 
++config SPL_MMC_PWRSEQ
++	bool "HW reset support for eMMC in SPL"
++	depends on SPL_PWRSEQ && SPL_DM_GPIO
++	default y if MMC_PWRSEQ
++	help
++	  Ths select Hardware reset support aka pwrseq-emmc for eMMC
++	  devices in SPL.
++
+ config MMC_BROKEN_CD
+ 	bool "Poll for broken card detection case"
+ 	help
+diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
+index 2c65c4765ab2..0a79dd058bef 100644
+--- a/drivers/mmc/Makefile
++++ b/drivers/mmc/Makefile
+@@ -11,7 +11,7 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += mmc_bootdev.o
+ endif
+ 
+ obj-$(CONFIG_$(SPL_TPL_)MMC_WRITE) += mmc_write.o
+-obj-$(CONFIG_MMC_PWRSEQ) += mmc-pwrseq.o
++obj-$(CONFIG_$(SPL_)MMC_PWRSEQ) += mmc-pwrseq.o
+ obj-$(CONFIG_MMC_SDHCI_ADMA_HELPERS) += sdhci-adma.o
+ 
+ ifndef CONFIG_$(SPL_)BLK
+diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
+index fcf4f03d1e24..0825c0a2a838 100644
+--- a/drivers/mmc/meson_gx_mmc.c
++++ b/drivers/mmc/meson_gx_mmc.c
+@@ -288,7 +288,7 @@ static int meson_mmc_probe(struct udevice *dev)
+ 
+ 	mmc_set_clock(mmc, cfg->f_min, MMC_CLK_ENABLE);
+ 
+-#ifdef CONFIG_MMC_PWRSEQ
++#if CONFIG_IS_ENABLED(MMC_PWRSEQ)
+ 	/* Enable power if needed */
+ 	ret = mmc_pwrseq_get_power(dev, cfg);
+ 	if (!ret) {
+diff --git a/drivers/mmc/rockchip_dw_mmc.c b/drivers/mmc/rockchip_dw_mmc.c
+index 72c820ee6330..ad4529d6afa8 100644
+--- a/drivers/mmc/rockchip_dw_mmc.c
++++ b/drivers/mmc/rockchip_dw_mmc.c
+@@ -145,7 +145,7 @@ static int rockchip_dwmmc_probe(struct udevice *dev)
+ 
+ 	host->fifo_mode = priv->fifo_mode;
+ 
+-#ifdef CONFIG_MMC_PWRSEQ
++#if CONFIG_IS_ENABLED(MMC_PWRSEQ)
+ 	/* Enable power if needed */
+ 	ret = mmc_pwrseq_get_power(dev, &plat->cfg);
+ 	if (!ret) {
+diff --git a/include/mmc.h b/include/mmc.h
+index 1022db3ffa7c..9aef31ea5deb 100644
+--- a/include/mmc.h
++++ b/include/mmc.h
+@@ -590,7 +590,7 @@ struct mmc_config {
+ 	uint f_max;
+ 	uint b_max;
+ 	unsigned char part_type;
+-#ifdef CONFIG_MMC_PWRSEQ
++#if CONFIG_IS_ENABLED(MMC_PWRSEQ)
+ 	struct udevice *pwr_dev;
+ #endif
+ };
+@@ -808,7 +808,7 @@ int mmc_deinit(struct mmc *mmc);
+  */
+ int mmc_of_parse(struct udevice *dev, struct mmc_config *cfg);
+ 
+-#ifdef CONFIG_MMC_PWRSEQ
++#if CONFIG_IS_ENABLED(MMC_PWRSEQ)
+ /**
+  * mmc_pwrseq_get_power() - get a power device from device tree
+  *
+-- 
+2.42.0
 
