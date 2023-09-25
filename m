@@ -4,80 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01635CE7A94
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 12:46:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76EEFCE7A94
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 13:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CFE486B93;
-	Mon, 25 Sep 2023 14:46:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A506486ACC;
+	Mon, 25 Sep 2023 15:04:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aw6/hU6C";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HGpd4FR3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DD7C86BBC; Mon, 25 Sep 2023 14:46:16 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 2ADA186AEE; Mon, 25 Sep 2023 15:04:43 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8192786B09
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 14:46:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 002BD805CD
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 15:04:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-32320381a07so2237061f8f.0
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 05:46:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-56f8334f15eso754439a12.1
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 06:04:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695645974; x=1696250774; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=0DgQ7bUSU5K4BmD9Fvddv8j1xInesxiIjzYAJCDjrw0=;
- b=aw6/hU6CetFmKOW7mQY7FpewVKs1eLhfpEogcUAGveM/2DjH/nqBfTWlHjhfHG3/d6
- Z28tWze6rWc45/31X/VPFHa2l8gkAhLMSq7SVbe8VVBOAL1joxCJcabCRVW3EhtiqjVF
- rxR8bGZ6MtxCDGy9wJaDnLbowpREHw82X8+Biib1HWCltZh/F3c8SEO9p23N/fO19hLA
- d6iFSgA/XWuUxB+hkeSToWe7LAewT46zCJtmRIimqqwgRqFGdKhlWRB6QogROXQhGLi4
- lBG/7A8HYVKOrtP8a995ce4tjNO+Lkc2h9DZ6eA3msQVyQJyg52mU7ETf+WV7GCEFNTJ
- 3uXw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695645974; x=1696250774;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1695647079; x=1696251879; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0DgQ7bUSU5K4BmD9Fvddv8j1xInesxiIjzYAJCDjrw0=;
- b=R1Mywsi0SQSZQlBbRs+FMW83u3/Uhwp3aRsrLht0e/iJqMJ/5HM0Is4JEL1cveuHTz
- pbfnqI0hsUNRbpNxVpUZOnpDbzDMttbo99jRETQl+GwxLCRuRPAnvQlkWWFIX8dO+13m
- yANfUZAY1dVudx/4Giv1S9Mvua8tu1lDmPLtLWFrrw0TGWYuTsOOwciMTVjAmRdPIgBA
- qyQ6uzsDvL0qV+zznUikWiVF4d5HCbAdfxjAmcY+wH6azTIiljSxNW6Bzd6snUtCeI7z
- /jEc9j5P67SE2eCX+gH62KeudLdNWENPBKgjxcGp/k2PfbjIGemdaXdSOWKmc1IAhycR
- RxwA==
-X-Gm-Message-State: AOJu0YwNWu4EMpdYIUY4KkUzDuy4FmwHQC3S+8Ejgwc8+kWSBddVBdG1
- cC12eJEfABpPmPs6dUXB2fMTrQ==
-X-Google-Smtp-Source: AGHT+IFNuYW5S+BjLDUV6QI8ZhHJOwMmqNk6wOqU0BJxUFsf76hlvmtuCj3hAb8IMNDsPew7oZ3N5w==
-X-Received: by 2002:adf:ef83:0:b0:317:f714:3be6 with SMTP id
- d3-20020adfef83000000b00317f7143be6mr6117338wro.61.1695645973794; 
- Mon, 25 Sep 2023 05:46:13 -0700 (PDT)
-Received: from hera (ppp046103219117.access.hol.gr. [46.103.219.117])
- by smtp.gmail.com with ESMTPSA id
- y23-20020a05600c365700b004052093a8f6sm12176287wmq.25.2023.09.25.05.46.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 05:46:13 -0700 (PDT)
-Date: Mon, 25 Sep 2023 15:46:11 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>
-Subject: Re: [PATCH v4 5/8] efi_loader: set EFI HTTP Boot download buffer as
- reserved
-Message-ID: <ZRGBE9HUjLB8f7lS@hera>
-References: <20230922071119.1439482-1-masahisa.kojima@linaro.org>
- <20230922071119.1439482-6-masahisa.kojima@linaro.org>
+ bh=vrAWZ16ghIu7RX3HIjHYw4fqTRVw0IaYQSgQYjXWUJY=;
+ b=HGpd4FR3WvkLZ6MlBEIEnbxovOVNLUrHW4jhjSnixdyE5hTcuJw79RgiVhwjxjcuB1
+ SD+008jd5lo9cq4ErTS1109vDS9usT67JVsQNu7grxWoDL1NkZiJogFj/Wq48FDkWKUW
+ 6hJXY3NUqL54CuZsi512fgaEXeiv+tqimBKsWv1zAW9TXUkGNV10Ps4breN0Br1yOv8s
+ 43oPj5FgYLhIsJ16UpAmdx+Wn2BvRbnsP6nQuZpwhk03YUSha0xzvenugqxi7bPe5P5W
+ JoCm7Oh7qHtKFlQwMOw7xIiuVrMVEEwIcO1VU2Sf7D9EvQubK5qogAEEZ5o8obmQL5GU
+ Mruw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695647079; x=1696251879;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vrAWZ16ghIu7RX3HIjHYw4fqTRVw0IaYQSgQYjXWUJY=;
+ b=W0Tr1mU3yPeiv4hwi6nhtGRrJhlFVO3BPQTXw4eFF6qXVtrNTsZX1pocCyiiSg2dr7
+ pKvKZrgwJpIhYYi811dOyXMOZk3POu44WsIf7yj5hSZ0ZvY9FoRwuOvunHSHT8gwqLRq
+ cwxD+4ZSpeCizw1N/h2Tt3KBCLwdf+0t/ctUnwEipfAlTEHzMGs8mPgMRyBcR4HJ5Uow
+ pzyHrMIef5C+g1lfAnb1AsSg2gkKdaTHTGh6oiqw1oTJHK3tMKLhsvUinFAMQUB2SyX1
+ Ds6K7Xm8FwuB0zHF0jcxsG7/W0xSjHX8NSmqKkdOX7wh6Wf3ITN1TWXS4uvQGqMiJjPY
+ QNWQ==
+X-Gm-Message-State: AOJu0YzrMX32JJ8feraSqgKCp0P8AZIZGRZ4TaqhNjlWXvJUzUBNruuT
+ frjmMWo5t/SCWow1agZZjpz2p5E7V+ibVjatSyG+9snsmlw=
+X-Google-Smtp-Source: AGHT+IE3x85UFGA4GyRz3DBJFqVRCPH5zFLSpprEn69PpHv+mzoseiWZw0oESiP8cuyKXnAxgg1chsGoGVYdYQ9pFj8=
+X-Received: by 2002:a17:90a:51a2:b0:269:34a6:d4ca with SMTP id
+ u31-20020a17090a51a200b0026934a6d4camr6141638pjh.0.1695647079140; Mon, 25 Sep
+ 2023 06:04:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230922071119.1439482-6-masahisa.kojima@linaro.org>
+References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
+ <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
+ <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
+ <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
+ <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
+ <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
+ <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
+ <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
+ <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
+ <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
+ <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
+ <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
+ <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
+ <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
+ <CAOYdKdjALruh9v6HBO-MSjzZM0whYhbA5YLJxbKk7yQk7cznGw@mail.gmail.com>
+In-Reply-To: <CAOYdKdjALruh9v6HBO-MSjzZM0whYhbA5YLJxbKk7yQk7cznGw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 25 Sep 2023 10:04:27 -0300
+Message-ID: <CAOMZO5AVuBxGFF_itcxvdG=W9JoRtyzzeeC+wji__uUOQirwZg@mail.gmail.com>
+Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
+To: Rogan Dawes <rogan@dawes.za.net>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,32 +100,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Kojima-san,
+Hi Rogan,
 
-[...]
->  /* Carve out DT reserved memory ranges */
->  void efi_carve_out_dt_rsv(void *fdt);
->  /* Purge unused kaslr-seed */
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 605be5041e..4991056946 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -326,6 +326,11 @@ static efi_status_t try_load_from_uri_path(struct efi_device_path_uri *uridp,
->  			return EFI_INVALID_PARAMETER;
+On Mon, Sep 25, 2023 at 6:52=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net> wr=
+ote:
 >
->  		ret = load_default_file_from_blk_dev(blk, handle);
-> +		if (ret != EFI_SUCCESS)
-> +			return ret;
-> +
-> +		/* whole ramdisk must be reserved */
-> +		efi_reserve_memory(image_addr, image_size, true);
+> Hi Fabio,
+>
+> I used the following diff with "make mx28evk_defconfig", but unfortunatel=
+y still get absolutely nothing on the DUART when running "mxsloader u-boot.=
+sb". In fact, mxsloader returns immediately on trying to load my own u-boot=
+.sb, whereas it hangs when running the vendor u-boot.sb, I assume because t=
+he CALL never returns. Additionally, there is no need to reset the board be=
+tween attempting a custom u-boot and the vendor u-boot, indicating that the=
+ ROM-based SDP protocol handler is still running. This suggests that there =
+is something wrong with the format of the u-boot.sb file which the ROM-base=
+d SDP protocol handler is rejecting, I would think?
 
-Why is this a different patch though?
-My concern is code duplication when we add similar functionality in
-eficonfig.  Isn't there a better place to handle the memory reservation?
+I just tested loading u-boot.sb via mxsldr on my imx28-evk.
 
-[...]
+I configured the boot jumpers to USB boot, turned on the board and
+then saw that it gets recognized by the host PC:
 
-Thanks
-/Ilias
+$ dmesg
+....
+[1710347.828895] usb 1-1: new high-speed USB device number 96 using xhci_hc=
+d
+[1710347.977657] usb 1-1: New USB device found, idVendor=3D15a2,
+idProduct=3D004f, bcdDevice=3D 0.01
+[1710347.977672] usb 1-1: New USB device strings: Mfr=3D1, Product=3D2,
+SerialNumber=3D0
+[1710347.977678] usb 1-1: Product: ROM Recovery
+[1710347.977682] usb 1-1: Manufacturer: Freescale,Inc.
+[1710347.979708] hid-generic 0003:15A2:004F.0014: hiddev0,hidraw1: USB
+HID v1.10 Device [Freescale,Inc. ROM Recovery] on
+usb-0000:00:14.0-1/input0
 
+After that, I loaded the u-boot.sb via mxsldr:
+
+$ sudo ./mxsldr u-boot.sb
+Detected: i.MX28
+Chip ID:          0x2800
+Chip Revision:    0x0001
+ROM Version:      0x0101
+Protocol Version: 0x0100
+
+Do you get these messages above (both the dmesg as well the messages
+after running mxsldr)?
+
+And in the console, I do see the U-Boot messages coming up:
+
+HTLLCLLC
+
+U-Boot 2023.10-rc4-00057-g4cb31a9f3560 (Sep 25 2023 - 09:49:04 -0300)
+
+CPU:   Freescale i.MX28 rev1.2 at 454 MHz
+BOOT:  USB #0
+DRAM:  128 MiB
+Core:  89 devices, 12 uclasses, devicetree: separate
+NAND:  0 MiB
+MMC:   MXS MMC: 0
+Loading Environment from MMC... *** Warning - No block device, using
+default environment
+
+In:    serial
+Out:   serial
+Err:   serial
+Hit any key to stop autoboot:  0
