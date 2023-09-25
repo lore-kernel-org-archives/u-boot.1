@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4477DCE7A9F
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 16:25:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E17FECE7A9D
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 16:33:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 779E286BE7;
-	Mon, 25 Sep 2023 18:25:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 59EFD86B4E;
+	Mon, 25 Sep 2023 18:33:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K4vBHNMR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HYdQsDzH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDCFA86C37; Mon, 25 Sep 2023 18:25:47 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 63F8E86ADA; Mon, 25 Sep 2023 18:33:26 +0200 (CEST)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BD4D86B4E
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 18:25:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EC0A86BCF
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 18:33:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-532784c8770so8182596a12.1
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 09:25:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1c5faa2af60so6856045ad.0
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 09:33:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695659145; x=1696263945; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I7B0RUifDFieWMfWXnkwhXX401TR2vA2nTDQCCR8Y30=;
- b=K4vBHNMRGJK5pXyxen61X8e2kmodWrRFTunAMQ/aE+QOfKdR64Yz5+t+rURKV92CLJ
- MWoUu3+Y3iVVR0JQG8kYhFbaDquHCBz5bCNpMVa1WJuvPbMg/XcCk2aU+qsf5/loxnpn
- phicTK0inLTUrDm6nKEF06L89eTGiwyblyfTY=
+ d=gmail.com; s=20230601; t=1695659600; x=1696264400; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QpH1SCA3IQGuACjlnZVeqMEb2LF9+aowfuzNVXi7BRc=;
+ b=HYdQsDzHdSaYd6yVlBICoYyYaxLhQu6lIp4uEDUMmJEzxd98Ql4QBdRWEfCFtQbSxs
+ Cqo4qGSm7KtxWnqSi5At2Lz7ffmsZR7XQFDVDb9zso4l5QOjngA9BGQc0/ZPcRYMx/l9
+ 69PcXDKxhfPim1Ol+p4fxcAIHmDsasOZI/y0hPdVd+JGLLGuSb/NkTa8fSvNIJ86zmJK
+ aqbTq0jYeWN5KazXgugr7zAo4aLjA9miN04gF0gdhmFk5nmJjfF5oYRCd7vIvAcs/X7+
+ pheebIrqPDHMWbNVeBzM4uHaOeya+UY08KflCUQIhAJtrhpE3pO6FIs27AYINchmQTc+
+ EYwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695659145; x=1696263945;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1695659600; x=1696264400;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=I7B0RUifDFieWMfWXnkwhXX401TR2vA2nTDQCCR8Y30=;
- b=o4BxJm5laJrU82poGKyKA/tR7cyMRKGUOCB29yG2R/v4baNX7tg40N5QLVtb3msT7p
- 8TY47VIyNY8y3I+eViSiAXqrs0WYYoTXlxp4buIlwPUxl3jcUXQKLSQP3s9cTK/MvLr9
- J1X00pGmfbGDU2eTUUmjBkKN+bXzhA8q9h8//qIvxkZanBWRSlGcX9gwtl5h5oeTw4Bc
- M0qWuIaXjcvzwiU5v7QLVr+7wdBa5Ztx6hqrl8sQAGOBSo42x5XRNCieFJf2AbwsMR0j
- Mw9n0odrYB+o/wnoOkWwd1kKoqyyShaRBKRiHgf+Dr36ppfyKpWkXmoR67S7h6eThwJM
- QGxA==
-X-Gm-Message-State: AOJu0YyyhOFLC8Ef4rBdIAsqrkQTgpqT4pK39iugwWQkYkfzmRizUN8L
- zHub8vEO8bKXT3b1HikzCnOeJTh1n9xyhAVTRPqa/w==
-X-Google-Smtp-Source: AGHT+IFpDPy47xvBsLVS3qz0xwzjWQQKDNvGB22OhGv49Ye4weixbW/ojGlV0Tkpm1x70z/zgeZpESgzUMe3S9sc8UQ=
-X-Received: by 2002:aa7:c543:0:b0:530:c363:449c with SMTP id
- s3-20020aa7c543000000b00530c363449cmr5877025edr.40.1695659144735; Mon, 25 Sep
- 2023 09:25:44 -0700 (PDT)
+ bh=QpH1SCA3IQGuACjlnZVeqMEb2LF9+aowfuzNVXi7BRc=;
+ b=ETGWgjwTOGKZ1FYdwdwoiOQywiD78Brp4L1Khok/7Zal+vhp3acvn6I6/NLjDrg+Tl
+ IwKynbJLtamvEyOfRWS3LRZOg/t5QbB+SX9U95Qt5fO6hvhzIbNYM+hnIKZS0jGNw63R
+ mG3DVPbXQC9j036uBG5ZQFwfX1to7qhJ8+0QEY8tTOeBd8mfzDhONDcZbwV2VoMrgAeY
+ gFkjPSDjJuwqcR2nQHlh2RQHMqhq8ZRDF1lpXtUUYg7MFGyvbdEn11McNMx8k5ubVE67
+ y8bbbVzKSKeu3EkzwLOVky4a76F3uI8Ldh+xxIGDgQUsTUMti9hYxY/G17tMbvuHDTYx
+ QOvw==
+X-Gm-Message-State: AOJu0YzSEvtvfc66IVInbestxUpMHVs2ptMYS9MRr4uNmBuOhBVJVRCk
+ cOXHofcV28J0qQyaUdRTcasdEVf8CJ0=
+X-Google-Smtp-Source: AGHT+IFv7Yo2AV9mUPl6XEUOwTForB8msJAX1Pt6DZ5fX2wDRGUT3FjI5P3lD26B5ILDfdYMAHDBxg==
+X-Received: by 2002:a17:902:d2ce:b0:1c3:8dbe:aecb with SMTP id
+ n14-20020a170902d2ce00b001c38dbeaecbmr9263023plc.2.1695659600335; 
+ Mon, 25 Sep 2023 09:33:20 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:5f5a:749e:ff1d:22f3])
+ by smtp.gmail.com with ESMTPSA id
+ jb22-20020a170903259600b001bd41b70b60sm9102217plb.45.2023.09.25.09.33.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 09:33:19 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: sbabic@denx.de, eduard@lionizers.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] smegw01: Fix inverted CONFIG_SYS_BOOT_LOCKED logic
+Date: Mon, 25 Sep 2023 13:32:59 -0300
+Message-Id: <20230925163259.9442-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
- <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
- <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
- <20230922174649.GA3320366-robh@kernel.org>
- <CAPnjgZ3ojfAv=BHqOhM=-NnYqCm81Ny=PsGKiNphKTmw++fk9w@mail.gmail.com>
- <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
- <CAPnjgZ3BnD9aX3cNNPiGRKTOj+YeurHCLv6K0TRFhAtY21Qufw@mail.gmail.com>
- <20230925092122.0b615f25@xps-13>
- <CAPnjgZ0Z5J_33HuQF-5XgDFmZim0nHHzvZJOOZobWw_cOJd=9g@mail.gmail.com>
- <20230925164736.5efbf4c0@xps-13>
- <CAPnjgZ3YCQHJ-eXuX8rYx2Qb6QEL+XviFmXYTON6M-sGPWSBBg@mail.gmail.com>
- <20230925172447.43dcef88@xps-13>
-In-Reply-To: <20230925172447.43dcef88@xps-13>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Sep 2023 10:25:33 -0600
-Message-ID: <CAPnjgZ20c9FsYVjSrQ9qbFy9Y67BqDP2zxMyATx===PFhO69Ew@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>, linux-mtd@lists.infradead.org, 
- Tom Rini <trini@konsulko.com>, Conor Dooley <conor+dt@kernel.org>,
- Dhruva Gole <d-gole@ti.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,116 +89,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Miquel,
+From: Eduard Strehlau <eduard@lionizers.com>
 
-On Mon, 25 Sept 2023 at 09:24, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
->
-> Hi Simon,
->
-> > > > > > > > > > I was assuming that I should create a top-level compatible = "binman"
-> > > > > > > > > > node, with subnodes like compatible = "binman,bl31-atf", for example.
-> > > > > > > > > > I should use the compatible string to indicate the contents, right?
-> > > > > > > > >
-> > > > > > > > > Yes for subnodes, and we already have some somewhat standard ones for
-> > > > > > > > > "u-boot" and "u-boot-env". Though historically, "label" was used.
-> > > > > > > >
-> > > > > > > > Binman has common properties for all entries, including "compress"
-> > > > > > > > which sets the compression algorithm.
-> > > > > > >
-> > > > > > > I see no issue with adding that. It seems useful and something missing
-> > > > > > > in the existing partition schemas.
-> > > > > >
-> > > > > > OK I sent a patch with that.
-> > > > > >
-> > > > > > >
-> > > > > > > > So perhaps I should start by defining a new binman,bl31-atf which has
-> > > > > > > > common properties from an "binman,entry" definition?
-> > > > > > >
-> > > > > > > I don't understand the binman prefix. The contents are ATF (or TF-A
-> > > > > > > now). Who wrote it to the flash image is not relevant.
-> > > > > >
-> > > > > > Are you suggesting just "atf-bl31", or "arm,atf-bl31" ? Or should we
-> > > > > > change it to "tfa-bl31"?
-> > > > >
-> > > > > I don't really understand the relationship with TF-A here. Can't we
-> > > > > just have a kind of fixed-partitions with additional properties like
-> > > > > the compression?
-> > > >
-> > > > Binman needs to know what to put in there, which is the purpose of the
-> > > > compatible string.
-> > >
-> > > But "what" should be put inside the partition is part of the input
-> > > argument, not the output. You said (maybe I got this wrong) that the
-> > > schema would apply to the output of binman. If you want to let user
-> > > know what's inside, maybe it is worth adding a label, but otherwise I
-> > > don't like the idea of a compatible for that, which for me would mean:
-> > > "here is how to handle that specific portion of the flash/here is how
-> > > the flash is organized".
-> >
-> > But I thought that the compatible string was for that purpose? See for
-> > example "brcm,bcm4908-firmware" and "brcm,bcm963xx-imagetag" and
-> > "linksys,ns-firmware".
->
-> These three examples apparently need specific handling, the partitions
-> contain meta-data that a parser needs to check or something like that.
-> And finally it looks like partition names are set depending on the
-> content that was discovered, so yes, the partition name is likely the
-> good location to tell users/OSes what's inside.
->
-> > > > > Also, I still don't understand the purpose of this schema. So binman
-> > > > > generates an image, you want to flash this image and you would like the
-> > > > > tool to generate the corresponding (partition) DT snippet automatically.
-> > > > > Do I get this right? I don't get why you would need new compatibles for
-> > > > > that.
-> > > >
-> > > > It is actually the other way around. The schema tells Binman how to
-> > > > build the image (what goes in there and where). Then outputs an
-> > > > updated DT which describes where everything ended up, for use by other
-> > > > tools, e.g. firmware update. It is a closed loop in that sense. See
-> > > > the references for more information.
-> > >
-> > > Maybe I fail to see why you would want these description to be
-> > > introduced here, if they are not useful to the OS.
-> >
-> > Well I was asked to send them to Linux since they apparently don't
-> > belong in dt-schema. These are firmware bindings, as indicated, but I
-> > took them out of the /firmware node since that is for a different
-> > purpose. Rob suggested that partitions was a good place. We have fwupd
-> > using DT to hold the firmware-update information, so I expect it will
-> > move to use these bindings too.
->
-> I would definitely use fixed partitions as that's what you need then:
-> registering where everything starts and ends. If you have "in-band"
-> meta data you might require a compatible, but I don't think you
-> do, in this case you should probably carry the content through a label
-> (which will become the partition name) and we can discuss additional
-> properties if needed.
+CONFIG_SYS_BOOT_LOCKED means that a restricted boot environment will
+be used. In this case, hab_auth_img_or_fail should be called to prevent
+U-Boot to continue running when the fitImage authentication fails.
 
-I believe I am going to need a compatible string at the 'partitions'
-level to indicate that this is the binman scheme. But we can leave
-that until later.
+Fix the logic accordingly.
 
-So you are suggesting 'label' for the contents. Rob suggested
-'compatible' [1], so what should I do?
+Additionally, select CONFIG_SYS_BOOT_LOCKED by default.
 
-With this schema, would every node be called 'partition@...' or is
-there flexibility to use other names?
+Signed-off-by: Eduard Strehlau <eduard@lionizers.com>
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+Hi Tom,
 
-One other point to note is that some entry types will eventually need
-other properties, which vary depending on the type. For example a
-signature entry will need to hold the algorithm name used to generate
-(and therefore at runtime check) the signature.
+We have just identified this bug.
 
->
-> > > > [1] https://u-boot.readthedocs.io/en/latest/develop/package/index.html
-> > > > [2] https://pretalx.com/media/osfc2019/submissions/Y7EN9V/resources/Binman_-_A_data-controlled_firmware_packer_for_U-B_pFU3n2K.pdf
-> > > > [3] https://www.youtube.com/watch?v=L84ujgUXBOQ
-> > >
-> >
-> > Regards,
-> > Simon
+Could you please pick this one directly for U-Boot 2023.10?
 
-Regards,
-Simon
+Thanks
 
-[1] https://github.com/devicetree-org/dt-schema/pull/110
+ board/storopack/smegw01/smegw01.env | 4 ++--
+ configs/smegw01_defconfig           | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/board/storopack/smegw01/smegw01.env b/board/storopack/smegw01/smegw01.env
+index 528310dd81..93de866910 100644
+--- a/board/storopack/smegw01/smegw01.env
++++ b/board/storopack/smegw01/smegw01.env
+@@ -67,9 +67,9 @@ mmcboot=
+ 		run altbootcmd;
+ 	fi;
+ #ifdef CONFIG_SYS_BOOT_LOCKED
+-	hab_auth_img ${fileaddr} ${filesize};
+-#else
+ 	hab_auth_img_or_fail ${fileaddr} ${filesize};
++#else
++	hab_auth_img ${fileaddr} ${filesize};
+ #endif
+ 	run mmcargs;
+ 	if bootm; then
+diff --git a/configs/smegw01_defconfig b/configs/smegw01_defconfig
+index 616038387e..03d403ddc8 100644
+--- a/configs/smegw01_defconfig
++++ b/configs/smegw01_defconfig
+@@ -7,7 +7,7 @@ CONFIG_ENV_OFFSET=0x100000
+ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="imx7d-smegw01"
+ CONFIG_TARGET_SMEGW01=y
+-# CONFIG_SYS_BOOT_LOCKED is not set
++CONFIG_SYS_BOOT_LOCKED=y
+ CONFIG_ENV_OFFSET_REDUND=0x110000
+ CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+ # CONFIG_ARMV7_VIRT is not set
+-- 
+2.41.0
+
