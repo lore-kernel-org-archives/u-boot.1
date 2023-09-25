@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79CB5CE7A89
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07B7ACE7A81
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:28:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66C3F86C96;
-	Mon, 25 Sep 2023 11:27:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C58E286D36;
+	Mon, 25 Sep 2023 11:27:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26CD786B3A; Mon, 25 Sep 2023 11:27:45 +0200 (CEST)
+ id A4A5D86D25; Mon, 25 Sep 2023 11:27:49 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F368386D24
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:27:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F57186D20
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:27:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 38P9RWGG061455;
- Mon, 25 Sep 2023 17:27:32 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 38P9RbNU061478;
+ Mon, 25 Sep 2023 17:27:37 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Mon, 25 Sep 2023 17:27:29 +0800
+ Mon, 25 Sep 2023 17:27:34 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
  <peterlin@andestech.com>, Randolph <randolph@andestech.com>
-Subject: [PATCH 5/7] spl: riscv: add os type for next booting stage
-Date: Mon, 25 Sep 2023 17:25:41 +0800
-Message-ID: <20230925092543.1408725-6-randolph@andestech.com>
+Subject: [PATCH 6/7] andes: config: add riscv falcon mode for ae350 platform
+Date: Mon, 25 Sep 2023 17:25:42 +0800
+Message-ID: <20230925092543.1408725-7-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230925092543.1408725-1-randolph@andestech.com>
 References: <20230925092543.1408725-1-randolph@andestech.com>
@@ -45,7 +45,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 38P9RWGG061455
+X-MAIL: Atcsqr.andestech.com 38P9RbNU061478
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,54 +62,291 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If SPL_LOAD_FIT_OPENSBI_OS_BOOT is enabled, the function
-spl_invoke_opensbi should change the target OS type to IH_OS_LINUX.
-OpenSBI will load the Linux image as the next boot stage.
-The os_takes_devicetree function returns a value of true or false
-depending on whether or not SPL_LOAD_FIT_OPENSBI_OS_BOOT is enabled.
+Fork from ae350_rv[32/64]_spl_[xip]_defconfig and
+append CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
 
 Signed-off-by: Randolph <randolph@andestech.com>
 ---
- common/spl/spl_fit.c     | 4 ++++
- common/spl/spl_opensbi.c | 7 ++++++-
- 2 files changed, 10 insertions(+), 1 deletion(-)
+ configs/ae350_rv32_falcon_defconfig     | 60 ++++++++++++++++++++++++
+ configs/ae350_rv32_falcon_xip_defconfig | 61 +++++++++++++++++++++++++
+ configs/ae350_rv64_falcon_defconfig     | 60 ++++++++++++++++++++++++
+ configs/ae350_rv64_falcon_xip_defconfig | 61 +++++++++++++++++++++++++
+ 4 files changed, 242 insertions(+)
+ create mode 100644 configs/ae350_rv32_falcon_defconfig
+ create mode 100644 configs/ae350_rv32_falcon_xip_defconfig
+ create mode 100644 configs/ae350_rv64_falcon_defconfig
+ create mode 100644 configs/ae350_rv64_falcon_xip_defconfig
 
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index 730639f756..750562721a 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -351,7 +351,11 @@ static bool os_takes_devicetree(uint8_t os)
- 	case IH_OS_U_BOOT:
- 		return true;
- 	case IH_OS_LINUX:
-+#ifdef CONFIG_RISCV
-+		return IS_ENABLED(CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT);
-+#else
- 		return IS_ENABLED(CONFIG_SPL_OS_BOOT);
-+#endif
- 	default:
- 		return false;
- 	}
-diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
-index a0c5f35dab..708869ad48 100644
---- a/common/spl/spl_opensbi.c
-+++ b/common/spl/spl_opensbi.c
-@@ -58,9 +58,14 @@ void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
- 
- 	/*
- 	 * Find next os image in /fit-images
--	 * The next os image default is u-boot proper
-+	 * The next os image default is u-boot proper, once enable
-+	 * OpenSBI OS boot mode, the OS image should be linux.
- 	 */
-+#if CONFIG_IS_ENABLED(LOAD_FIT_OPENSBI_OS_BOOT)
-+	os_type = IH_OS_LINUX;
-+#else
- 	os_type = IH_OS_U_BOOT;
-+#endif
- 	ret = spl_opensbi_find_os_node(spl_image->fdt_addr, &os_node, os_type);
- 	if (ret) {
- 		pr_err("Can't find %s node for opensbi, %d\n",
+diff --git a/configs/ae350_rv32_falcon_defconfig b/configs/ae350_rv32_falcon_defconfig
+new file mode 100644
+index 0000000000..8f796d88e3
+--- /dev/null
++++ b/configs/ae350_rv32_falcon_defconfig
+@@ -0,0 +1,60 @@
++CONFIG_RISCV=y
++CONFIG_TEXT_BASE=0x01800000
++CONFIG_SYS_MALLOC_LEN=0x80000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
++CONFIG_SYS_PROMPT="RISC-V # "
++CONFIG_SYS_MONITOR_LEN=786432
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
++CONFIG_SPL=y
++CONFIG_SYS_LOAD_ADDR=0x100000
++CONFIG_TARGET_ANDES_AE350=y
++CONFIG_RISCV_SMODE=y
++# CONFIG_AVAILABLE_HARTS is not set
++CONFIG_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
++CONFIG_SYS_MONITOR_BASE=0x88000000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTDELAY=3
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_SPL_MAX_SIZE=0x100000
++CONFIG_SPL_BSS_START_ADDR=0x400000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_CACHE=y
++CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
++CONFIG_SYS_PBSIZE=1050
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_CMD_IMLS=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SF_TEST=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_BOOTP_PREFER_SERVERIP=y
++CONFIG_CMD_CACHE=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_BOOTP_SEND_HOSTNAME=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_MMC=y
++CONFIG_FTSDC010=y
++CONFIG_FTSDC010_SDIO=y
++CONFIG_MTD_NOR_FLASH=y
++CONFIG_FLASH_CFI_DRIVER=y
++CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
++CONFIG_SYS_FLASH_CFI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_FTMAC100=y
++CONFIG_BAUDRATE=38400
++CONFIG_SYS_NS16550=y
++CONFIG_SPI=y
++CONFIG_ATCSPI200_SPI=y
++# CONFIG_BINMAN_FDT is not set
++CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
+\ No newline at end of file
+diff --git a/configs/ae350_rv32_falcon_xip_defconfig b/configs/ae350_rv32_falcon_xip_defconfig
+new file mode 100644
+index 0000000000..e01dd6fc51
+--- /dev/null
++++ b/configs/ae350_rv32_falcon_xip_defconfig
+@@ -0,0 +1,61 @@
++CONFIG_RISCV=y
++CONFIG_TEXT_BASE=0x01800000
++CONFIG_SYS_MALLOC_LEN=0x80000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
++CONFIG_SPL_TEXT_BASE=0x80000000
++CONFIG_SYS_PROMPT="RISC-V # "
++CONFIG_SYS_MONITOR_LEN=786432
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
++CONFIG_SPL=y
++CONFIG_SYS_LOAD_ADDR=0x100000
++CONFIG_TARGET_ANDES_AE350=y
++CONFIG_RISCV_SMODE=y
++CONFIG_SPL_XIP=y
++CONFIG_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80010000
++CONFIG_SYS_MONITOR_BASE=0x88000000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTDELAY=3
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_SPL_MAX_SIZE=0x100000
++CONFIG_SPL_BSS_START_ADDR=0x400000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_CACHE=y
++CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
++CONFIG_SYS_PBSIZE=1050
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_CMD_IMLS=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SF_TEST=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_BOOTP_PREFER_SERVERIP=y
++CONFIG_CMD_CACHE=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_BOOTP_SEND_HOSTNAME=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_MMC=y
++CONFIG_FTSDC010=y
++CONFIG_FTSDC010_SDIO=y
++CONFIG_MTD_NOR_FLASH=y
++CONFIG_FLASH_CFI_DRIVER=y
++CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
++CONFIG_SYS_FLASH_CFI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_FTMAC100=y
++CONFIG_BAUDRATE=38400
++CONFIG_SYS_NS16550=y
++CONFIG_SPI=y
++CONFIG_ATCSPI200_SPI=y
++# CONFIG_BINMAN_FDT is not set
++CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
+\ No newline at end of file
+diff --git a/configs/ae350_rv64_falcon_defconfig b/configs/ae350_rv64_falcon_defconfig
+new file mode 100644
+index 0000000000..d11be976de
+--- /dev/null
++++ b/configs/ae350_rv64_falcon_defconfig
+@@ -0,0 +1,60 @@
++CONFIG_RISCV=y
++CONFIG_TEXT_BASE=0x01800000
++CONFIG_SYS_MALLOC_LEN=0x80000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
++CONFIG_SYS_PROMPT="RISC-V # "
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
++CONFIG_SPL=y
++CONFIG_SYS_LOAD_ADDR=0x100000
++CONFIG_TARGET_ANDES_AE350=y
++CONFIG_ARCH_RV64I=y
++CONFIG_RISCV_SMODE=y
++# CONFIG_AVAILABLE_HARTS is not set
++CONFIG_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
++CONFIG_SYS_MONITOR_BASE=0x88000000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTDELAY=3
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_SPL_MAX_SIZE=0x100000
++CONFIG_SPL_BSS_START_ADDR=0x400000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_CACHE=y
++CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
++CONFIG_SYS_PBSIZE=1050
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_CMD_IMLS=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SF_TEST=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_BOOTP_PREFER_SERVERIP=y
++CONFIG_CMD_CACHE=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_BOOTP_SEND_HOSTNAME=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_MMC=y
++CONFIG_FTSDC010=y
++CONFIG_FTSDC010_SDIO=y
++CONFIG_MTD_NOR_FLASH=y
++CONFIG_FLASH_CFI_DRIVER=y
++CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
++CONFIG_SYS_FLASH_CFI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_FTMAC100=y
++CONFIG_BAUDRATE=38400
++CONFIG_SYS_NS16550=y
++CONFIG_SPI=y
++CONFIG_ATCSPI200_SPI=y
++# CONFIG_BINMAN_FDT is not set
++CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
+\ No newline at end of file
+diff --git a/configs/ae350_rv64_falcon_xip_defconfig b/configs/ae350_rv64_falcon_xip_defconfig
+new file mode 100644
+index 0000000000..492451ecf1
+--- /dev/null
++++ b/configs/ae350_rv64_falcon_xip_defconfig
+@@ -0,0 +1,61 @@
++CONFIG_RISCV=y
++CONFIG_TEXT_BASE=0x01800000
++CONFIG_SYS_MALLOC_LEN=0x80000
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
++CONFIG_ENV_SECT_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
++CONFIG_SPL_TEXT_BASE=0x80000000
++CONFIG_SYS_PROMPT="RISC-V # "
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
++CONFIG_SPL=y
++CONFIG_SYS_LOAD_ADDR=0x100000
++CONFIG_TARGET_ANDES_AE350=y
++CONFIG_ARCH_RV64I=y
++CONFIG_RISCV_SMODE=y
++CONFIG_SPL_XIP=y
++CONFIG_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80010000
++CONFIG_SYS_MONITOR_BASE=0x88000000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTDELAY=3
++CONFIG_DISPLAY_CPUINFO=y
++CONFIG_DISPLAY_BOARDINFO=y
++CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_SPL_MAX_SIZE=0x100000
++CONFIG_SPL_BSS_START_ADDR=0x400000
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_CACHE=y
++CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
++CONFIG_SYS_PBSIZE=1050
++CONFIG_SYS_BOOTM_LEN=0x4000000
++CONFIG_CMD_IMLS=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SF_TEST=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_BOOTP_PREFER_SERVERIP=y
++CONFIG_CMD_CACHE=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_SPI_FLASH=y
++CONFIG_NET_RETRY_COUNT=50
++CONFIG_BOOTP_SEND_HOSTNAME=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_MMC=y
++CONFIG_FTSDC010=y
++CONFIG_FTSDC010_SDIO=y
++CONFIG_MTD_NOR_FLASH=y
++CONFIG_FLASH_CFI_DRIVER=y
++CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
++CONFIG_FLASH_SHOW_PROGRESS=0
++CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
++CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
++CONFIG_SYS_FLASH_CFI=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_FTMAC100=y
++CONFIG_BAUDRATE=38400
++CONFIG_SYS_NS16550=y
++CONFIG_SPI=y
++CONFIG_ATCSPI200_SPI=y
++# CONFIG_BINMAN_FDT is not set
++CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
+\ No newline at end of file
 -- 
 2.34.1
 
