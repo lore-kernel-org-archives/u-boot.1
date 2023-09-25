@@ -4,92 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9467CD54BE
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 20:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88DF0CD54BE
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 20:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A689086C32;
-	Mon, 25 Sep 2023 22:17:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E07E86BB2;
+	Mon, 25 Sep 2023 22:29:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Tf9sHxBs";
+	dkim=pass (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="lHYca3ZG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D1BE86C1D; Mon, 25 Sep 2023 22:17:15 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 717C286C5D
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 22:17:13 +0200 (CEST)
+ id E430B86D3A; Mon, 25 Sep 2023 22:29:39 +0200 (CEST)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id E01EF86B53
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 22:29:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-59f6767a15dso43110047b3.0
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 13:17:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695673032; x=1696277832; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PGvXiyegDovUyn6u8q7q9R8Wph+cmBI2ghbEcP4sbw0=;
- b=Tf9sHxBstiKgCl0Hp9Cv+n7tHg/Ito2uShMb474Q4bTZe7rqYS5VVYWA904vFLkSoV
- 0wBlXuXjlGY+NznUUGY0mW2j2cfCW0Al18x/9luUTRXZkGwLExEgf+yX9X6flokTMPIt
- EfzQNRgHzh3TM6q3j449ql8IshsviJl9UAdXY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695673032; x=1696277832;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PGvXiyegDovUyn6u8q7q9R8Wph+cmBI2ghbEcP4sbw0=;
- b=cVV7xeJiGzMZhiK7kPHiU5Xy77HdhMV6YYjUMgGPJP4pujLFhHoF4NsFiLk5iqi9w+
- szZH1rTM6O7hs68sngUdiId9DqzyBKE9NWQcRrwgDxB0tU3B23KCbFwWvdVYcPwD+lJb
- Xup+v9lwclEzsltWAHTdjoslqDf1eBqDnLHRJnHWgumTSkaohXXdDPHqBzE0l0ZJFpfn
- au0kjuPoQvqriVD9tCli2SwqOKPjuO980PXbdlgPMUHI5FyZA7DhcVs/iDHCarWAtgeO
- 8QKsUJI6r9xdmzovQgPcnsOmX76g7dOtyDmybXzB94B1istcCm7l9NCJvvfSiqHKBrc4
- zy+Q==
-X-Gm-Message-State: AOJu0YxnCrXrXVT4mPOxmY3LAvhi/mvBtoL0g3CmNR7zbuLArKPkvrou
- T/cZhNS7w4qNQCJtGBg4wH1j6w==
-X-Google-Smtp-Source: AGHT+IFqCltfmVStOmKene8CIX/udQuZhPh4MFrkoAY6jlb71B8ChlyPW5QF4uuLD6cksdrs62uIQQ==
-X-Received: by 2002:a81:4f01:0:b0:59f:66a1:bfca with SMTP id
- d1-20020a814f01000000b0059f66a1bfcamr469752ywb.26.1695673032159; 
- Mon, 25 Sep 2023 13:17:12 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
- [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
- by smtp.gmail.com with ESMTPSA id
- x124-20020a817c82000000b005773ca61111sm2608717ywc.42.2023.09.25.13.17.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 13:17:11 -0700 (PDT)
-Date: Mon, 25 Sep 2023 16:17:09 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
- Chunfeng Yun <chunfeng.yun@mediatek.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
- Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
- Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <sr@denx.de>,
- Weijie Gao <weijie.gao@mediatek.com>
-Subject: Re: [PATCH v3 38/38] pci: serial: Support reading PCI-register size
- with base
-Message-ID: <20230925201709.GP305624@bill-the-cat>
-References: <20230924192536.1812799-1-sjg@chromium.org>
- <20230924192536.1812799-39-sjg@chromium.org>
+ spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
+Received: from ovlvm106.redmond.corp.microsoft.com (unknown [131.107.147.185])
+ by linux.microsoft.com (Postfix) with ESMTPSA id A2AE1212C815;
+ Mon, 25 Sep 2023 13:29:36 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com A2AE1212C815
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1695673776;
+ bh=Gjne0qaCxwS4PR0NpQyy7IWnAC281xuKCuzBTtNG2iM=;
+ h=From:To:Cc:Subject:Date:From;
+ b=lHYca3ZG1Cviy2ZJxc5eVoTfv825GiNi/gNqeZ2sBrJQnlqKDJWeioxIzfO+XEIHR
+ pXEn7tSHrScMX/hKPk5+hdoGhbo8AdUyZRHin8N4VXCtk12aWaFxgWf1PQL01MZqMM
+ D5qWQ1D95tNalt2obdmyKPkfxKlowfQ/2iuVq0b0=
+From: seanedmond@linux.microsoft.com
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com,
+	rfried.dev@gmail.com
+Subject: [PATCH 0/3] BOOTP/DHCPv4 enhancements
+Date: Mon, 25 Sep 2023 13:29:32 -0700
+Message-Id: <20230925202935.118652-1-seanedmond@linux.microsoft.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="gSi++YYNmcC/FXCR"
-Content-Disposition: inline
-In-Reply-To: <20230924192536.1812799-39-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,91 +61,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Sean Edmond <seanedmond@microsoft.com>
 
---gSi++YYNmcC/FXCR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In our datacenter application, a single DHCP server is servicing 36000+ clients.
+Improvements are required to the DHCPv4 retransmission behavior to align with
+RFC and ensure less pressure is exerted on the server:
+- retransmission backoff interval maximum is configurable 
+  (environment variable bootpretransmitperiodmax)
+- initial retransmission backoff interval is configurable 
+  (environment variable bootpretransmitperiodinit)
+- transaction ID is kept the same for each BOOTP/DHCPv4 request 
+  (not recreated on each retry)
 
-On Sun, Sep 24, 2023 at 01:25:23PM -0600, Simon Glass wrote:
+For our application we'll use:
+- bootpretransmitperiodmax=16000
+- bootpretransmitperiodinit=2000
 
-> The PCI helpers read only the base address for a PCI region. In some cases
-> the size is needed as well, e.g. to pass along to a driver which needs to
-> know the size of its register area.
->=20
-> Update the functions to allow the size to be returned. For serial, record
-> the information and provided it with the serial_info() call.
->=20
-> A limitation still exists in that the size is not available when OF_LIVE
-> is enabled, so take account of that in the tests.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+A new configuration BOOTP_RANDOM_XID has been added to enable a randomized
+BOOTP/DHCPv4 transaction ID.
 
-So on platforms that end up here, we see consistently:
-            eaidk-610-rk3399: all +224 spl/u-boot-spl:all +224 spl/u-boot-s=
-pl:text +224 text +224 tpl/u-boot-tpl:all +224 tpl/u-boot-tpl:text +224
-               u-boot: add: 2/0, grow: 3/0 bytes: 224/0 (224)
-                 function                                   old     new   d=
-elta
-                 fdtdec_get_addr_size_auto_noparent           -     124    =
-+124
-                 devfdt_get_addr_size_index                   -      72    =
- +72
-                 ns16550_serial_of_to_plat                  316     328    =
- +12
-                 ns16550_serial_probe                       132     140    =
-  +8
-                 ns16550_serial_getinfo                      84      92    =
-  +8
-               tpl-u-boot-tpl: add: 2/0, grow: 3/0 bytes: 224/0 (224)
-                 function                                   old     new   d=
-elta
-                 fdtdec_get_addr_size_auto_noparent           -     124    =
-+124
-                 devfdt_get_addr_size_index                   -      72    =
- +72
-                 ns16550_serial_of_to_plat                  316     328    =
- +12
-                 ns16550_serial_probe                       132     140    =
-  +8
-                 ns16550_serial_getinfo                      84      92    =
-  +8
-               spl-u-boot-spl: add: 2/0, grow: 3/0 bytes: 224/0 (224)
-                 function                                   old     new   d=
-elta
-                 fdtdec_get_addr_size_auto_noparent           -     124    =
-+124
-                 devfdt_get_addr_size_index                   -      72    =
- +72
-                 ns16550_serial_of_to_plat                  316     328    =
- +12
-                 ns16550_serial_probe                       132     140    =
-  +8
-                 ns16550_serial_getinfo                      84      92    =
-  +8
+Add functionality for DHCPv4 sending/parsing option 209 (PXE config file).
+Enabled with Kconfig BOOTP_PXE_DHCP_OPTION.  Note, this patch was
+submitted previously but this latest version has been enhanced to
+avoid a possible double free().
 
-Can we optimize this in any way? I'm less concerned with full U-Boot
-growing by 224 bytes than I am by TPL growing by that much too.
+Sean Edmond (3):
+  net: Get pxe config file from dhcp option 209
+  net: bootp: BOOTP/DHCPv4 retransmission improvements
+  net: bootp: add config option BOOTP_RANDOM_XID
 
---=20
-Tom
+ cmd/Kconfig | 11 +++++++
+ cmd/pxe.c   | 10 +++++++
+ net/bootp.c | 85 +++++++++++++++++++++++++++++++++++++++++++----------
+ 3 files changed, 91 insertions(+), 15 deletions(-)
 
---gSi++YYNmcC/FXCR
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+2.40.0
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUR6r4ACgkQFHw5/5Y0
-tyxYPgv+JAiOV1PM2hSj/YPWpqFm8p1Bvp/DJMKJ0ijeidbPugBj9zUZTYO+UlWx
-/qTMGnZ7vi98Q6SREsChENtyOZXuX088FPxV/Hx2LfWrLMsPURFmZJFWb2Zi9O9L
-Zf96hb13rB89K93yfQxeiMx1ayEtGTm3pHMHRTvbhbctUjHfM2SvURnSCBt+uHua
-SRuHawYVbmFHljoNL2WIpiA6FQklj0CsM0l5UElH+WUuIADK34rPpXvKbLcJhRWy
-u0kd44vRHVg1CVibdggjEBi6zUzEf245BEnRXoHOw1chmIiezjk13XY1j4hC9NnJ
-57FVezl6LkohumPTHtwx9Il0UzueqpprbRlujre4qH2G/AZNoEXM8DELocDDzsOt
-KjwV0V8MtRK61hcX9YcP7KQ1z1r1rkn5Gzlm6c4nWg1ud6MBxQY2/ZlsgpnCFpyP
-OCQrcFjKqxWjSPZ1g/nQnKf1yWO3ou8ItCF7ioD1JsMmRf/H8deB4Ydmit1pMbdu
-jAzsPfSI
-=6qBr
------END PGP SIGNATURE-----
-
---gSi++YYNmcC/FXCR--
