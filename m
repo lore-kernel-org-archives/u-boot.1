@@ -4,80 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC301CE7AB1
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 17:55:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 736F7CE7AB9
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 18:19:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B09A786A94;
-	Mon, 25 Sep 2023 19:55:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE1FA86A94;
+	Mon, 25 Sep 2023 20:19:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZupuO4M8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mlhrJ2nG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBD0B86ADA; Mon, 25 Sep 2023 19:55:41 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 4C71486AF7; Mon, 25 Sep 2023 20:19:46 +0200 (CEST)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C04A98074B
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 19:55:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EDC7886A50
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 20:19:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-59c0442a359so83813707b3.0
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 10:55:39 -0700 (PDT)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-d89491dab33so1310151276.0
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:19:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695664538; x=1696269338; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1695665982; x=1696270782; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AdijjKGl3rhMRuMY/M8E+hRVOTUi3A/RFd6mofUOupo=;
- b=ZupuO4M8HCMdoBP9jNvq5D14xEglseJJ7GpfOO7fr4+Pd5+G0tu74S40lDaXACSAdm
- lg2mdH0kbaBpM9wiEwU/GRbdzrGwG579KM7famjzpBz8Q7Rav/fNuEkAtiGd/z/yZ0VL
- fC0w0ewz6vVjkFGaKniO6Assn/02Y0exXg6gQ=
+ bh=d5VR0fohfPx5tCpVs46mi/R0e+XpRwWRYJdF3tTTpCA=;
+ b=mlhrJ2nGh+Ix7iR4bGvmiYIbsGzdGRa/Q+ErgOkeaV1cOCbXW0ps9r0PvaVP4e3Kj4
+ H7O7DRc4aO8n4XrKn/YYTz+/uWFhQGRT7523ayT2/7axaJcVL5Ooqbx+DTQv+L79IkUs
+ VrVcH/+11unJVdkW89hUt/sfhCiihVx8Ksavk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695664538; x=1696269338;
+ d=1e100.net; s=20230601; t=1695665982; x=1696270782;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AdijjKGl3rhMRuMY/M8E+hRVOTUi3A/RFd6mofUOupo=;
- b=ln6NqMzllwNl/sMwJt3ipWtkmLBqOscP6V0kIUX5SQisivc0lWu6iosSSUhVUnC96d
- Cq5Ub/zrtEDf1i25ecp2nI2OBQW55lUOLIbq1Jy7C/QR4ezlllG37os+EyYsKsMMOxuG
- mjWfu6lenZlsPsw1KZ/VmpzN/KkwbJHuYwPgMgHUpKI0oWHaLP8KQ94haPoLfaQgV2Es
- eGIaZAkOjrjoMhyTp0SJffoL06g1PdxwJotO+c4DRtjIWvDl5+bXW9vHrgsMaIZC3IZ7
- l16Ya5uSy0FigvPDxX/eYZSIi8XIRcsv8MIgmkPDAjBWK2Zd7wwt7blVoSgYk3vfbU3s
- 55yA==
-X-Gm-Message-State: AOJu0YyjttGOSXiEEtCGQ+fBxPjwh/YPOdT4s1dxTqSQX8RKkpO4A7q/
- 8RNnnwVCjDp5AQ+V7VD7Q9j3nQ==
-X-Google-Smtp-Source: AGHT+IHjEKw4guYmyLlYUji4dYZx2vOQP8vlv4FrakrjZCBk+GyqOI0dn1mjRLQ4ZMN7qoc54DmKDA==
-X-Received: by 2002:a81:5e05:0:b0:589:8b55:fe09 with SMTP id
- s5-20020a815e05000000b005898b55fe09mr6900166ywb.50.1695664538464; 
- Mon, 25 Sep 2023 10:55:38 -0700 (PDT)
+ bh=d5VR0fohfPx5tCpVs46mi/R0e+XpRwWRYJdF3tTTpCA=;
+ b=GPWPWBBmaFOdZ8Q/l6X4KXzWaHXkX9S0IEOtDJD7Aec/Xt2gjbkRAvZ05QmjClsYD8
+ looBnyCLkB6ebjWz9vQUC+mBewYdIFqCIS1bnHvwVzBJNXbc+Xnd5mIaeh/AN/J/1mhr
+ XBgASXGD+o0hqeBaCghHNHguqzCXBhNRKC4QPwhtKV98Q0OL3U8woGnay5goEAmsR9Kv
+ Pxw+piS7E4fXGOc15/uTeFZ0Q+2gu+wwnh4P5tSt7aBXs2Se7CkfPhZ9n96/hVF+q1XT
+ szUbPJwEvXVp8c8T+4PvuB0mqxjjKCJj0aB/bSrC1dzNQ6cY/S1r1oMXD2Cfn5HbkBIY
+ bOWg==
+X-Gm-Message-State: AOJu0YwG+mBshvc9ViYXOljK2UJrFn8eDmoDioXmAkB6PS7r/frlTl99
+ mW6kHGZ3o4NV1ulvDQI98gnZ4w==
+X-Google-Smtp-Source: AGHT+IG9Gzouy+XboxiREa440RQKCIja66d1wmvMmsmvRqmfyO2Ys3WojQfmjfeXzDXgCXzmfqsCMA==
+X-Received: by 2002:a25:cacd:0:b0:d12:ab1:d88a with SMTP id
+ a196-20020a25cacd000000b00d120ab1d88amr7767265ybg.40.1695665982636; 
+ Mon, 25 Sep 2023 11:19:42 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
  [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
  by smtp.gmail.com with ESMTPSA id
- p199-20020a8198d0000000b0059f5d686479sm1243602ywg.16.2023.09.25.10.55.37
+ j134-20020a25238c000000b00c64533e4e20sm2333775ybj.33.2023.09.25.11.19.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 10:55:37 -0700 (PDT)
-Date: Mon, 25 Sep 2023 13:55:36 -0400
+ Mon, 25 Sep 2023 11:19:42 -0700 (PDT)
+Date: Mon, 25 Sep 2023 14:19:40 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH 0/3] common: Remove a few more header files
-Message-ID: <20230925175536.GG305624@bill-the-cat>
-References: <20230925023958.1913268-1-sjg@chromium.org>
- <20230925140838.GV305624@bill-the-cat>
- <CAPnjgZ2gBRWt6v1i21Mq+bnqScnHYKATCURMtJ6E7DGspOdpnw@mail.gmail.com>
- <20230925151340.GB305624@bill-the-cat>
- <CAPnjgZ3-AAE11afQx12iqCH6gTeGo-XTBL5ZQn-b-CgOwry7=Q@mail.gmail.com>
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] scripts/Makefile.lib: also consider
+ $(CONFIG_SYS_BOARD)-u-boot.dtsi
+Message-ID: <20230925181940.GH305624@bill-the-cat>
+References: <9658c219-1de8-3bdf-3beb-0c1e2a128569@prevas.dk>
+ <20230425200932.GM1134230@bill-the-cat>
+ <c3c94614-9916-7316-e009-04ddbdc205bc@prevas.dk>
+ <20230427162100.GE1134230@bill-the-cat>
+ <20230427173113.GG1134230@bill-the-cat>
+ <40c79f7b-205d-0b48-7ee2-e052eaa1317f@prevas.dk>
+ <20230503135158.GY1134230@bill-the-cat>
+ <20230503145438.GB1134230@bill-the-cat>
+ <0f2df366-65ca-664f-1f90-0c2aeafce8f1@prevas.dk>
+ <68f445de-c903-c3a1-906f-2cf7b5675d08@prevas.dk>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FJwfZYkBgXsxUujX"
+ protocol="application/pgp-signature"; boundary="XOn40xIhvbYYoQNS"
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3-AAE11afQx12iqCH6gTeGo-XTBL5ZQn-b-CgOwry7=Q@mail.gmail.com>
+In-Reply-To: <68f445de-c903-c3a1-906f-2cf7b5675d08@prevas.dk>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,122 +103,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---FJwfZYkBgXsxUujX
+--XOn40xIhvbYYoQNS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 25, 2023 at 10:18:55AM -0600, Simon Glass wrote:
-> Hi Tom,
+On Mon, Sep 25, 2023 at 10:27:43AM +0200, Rasmus Villemoes wrote:
+> On 04/05/2023 14.35, Rasmus Villemoes wrote:
+> > On 03/05/2023 16.54, Tom Rini wrote:
 >=20
-> On Mon, 25 Sept 2023 at 09:13, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Sep 25, 2023 at 08:35:44AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 25 Sept 2023 at 08:08, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sun, Sep 24, 2023 at 08:39:49PM -0600, Simon Glass wrote:
-> > > >
-> > > > > This series removes two more header files from the common.h heade=
-r. It
-> > > > > also tidies up code style for time.h functions, to simplify simil=
-ar
-> > > > > maintenance in future.
-> > > > >
-> > > > >
-> > > > > Simon Glass (3):
-> > > > >   Fix code style for time functions
-> > > > >   common: Drop time.h from common header
-> > > > >   common: Drop linux/string.h from common header
-> > > > [snip]
-> > > > >  1709 files changed, 1854 insertions(+), 34 deletions(-)
-> > > >
-> > > > This is where I start to get worried we're possibly taking the wrong
-> > > > approach to the problem.  Perhaps it would be better to:
-> > > > 1. Start finding headers which include <common.h>, remove and fixup=
- the
-> > > > breakage directly.
-> > > > 2. Move on to removing <common.h> from files, a directory at a time.
-> > > >
-> > >
-> > > The bigger question is whether you want common.h gone or not?
-> >
-> > Yes, I'd like it gone.
-> >
-> > > I shared my script with you so you can see what it is doing. But if a
-> > > board uses memcmp(), for example, then it needs linux/string.h
-> > > included. We can discuss why so many files use string functions, or
-> > > whether the script is not perfect, but ultimately that is the
-> > > question.
-> > >
-> > > Just these simple queries give you a sense of the scale:
-> > >
-> > >  git grep -l strcat |wc
-> > >      45      45    1134
-> > > git grep -l memcpy |wc
-> > >     834     834   21643
-> > >
-> > > If you are suggesting that we add fewer includes for now, relying on
-> > > transitive includes in header files, then I don't think that is very
-> > > useful in the end. I had a series a few years back which removed
-> > > common.h entirely and it foundered on this same issue.
-> >
-> > The problem I see with the approach you're taking now is that it's quite
-> > hard to provide meaningful review.  Looking at the time.h patch here, I
-> > assume you agree it would be better to just remove
-> > arch/arm/include/asm/arch-tegra/timer.h as it's just a single prototype
-> > already found in include/time.h.  And the example where time.h was
-> > included inside a comment block is a tooling issue.  But then looking at
-> > the printk.h patch I did just apply, I had to drop a few files because
-> > they introduced seemingly random changes to the resulting build on some
-> > platforms.
+> >> The one last problem now is on stm32mp15_dhcor_basic which is a
+> >> defconfig missing one from OF_LIST but including it in the its file, so
+> >> the above is the patch we need.
+> >>
+> >=20
+> > Hm, well, for now I think at least all .dtbo targets need to be left in
+> > the Makefiles, since nothing in the defconfig tells us to build those.
 >=20
-> That is very strange. But I think with the Kconfig thing we
-> established that the build size can vary slightly for all sorts of
-> reasons, nothing to do with actual functional changes, particularly
-> with LTO. So as things standard, a build-size change isn't a good
-> signal.
+> Hi Tom
+>=20
+> Can I persuade you to try something like
+> https://source.denx.de/u-boot/u-boot/-/commit/a05e0d0e6b9103542a1076f9cab=
+0005f400fa072
+> again, but leaving the .dtbo targets in there?
+>=20
+> I could send a patch, but it's entirely mechanical, and not really meant
+> for being applied until we know if there's more to be cleaned up.
 
-I think, LTO platforms aside, it's extremely important and correct.  If
-you aren't intending a functional change, there shouldn't be a
-functional change.  We need to be able to explain why a change is
-happening if we're "just" changing headers.
-
-> >  And something like that is much easier to deal with and
-> > explain _why_ it's happening if we're removing the header file by file,
-> > rather than world-wide move-a-header.
->=20
-> With the Kconfig series I was unable to explain the minor 4-8 byte
-> changes, despite quite a bit of effort, as you know.
->=20
-> My suggestion is that we press ahead with the migration. If some
-> maintainers want to do clean-up afterwards, then that would be great.
-
-I'd rather go with what I said about removing common.h from files and
-fixing them up as needed, and make any new code not include <common.h>
-since it's long just been "add headers X/Y/Z" and no prototypes itself.
-And it's exceedingly hard to review patches like this series has.
+So what ended up being the problem I think is the case Simon pointed out
+where we do take the output from "make all" and concatenate one of the
+dtbs that was generated with u-boot.img or so, and it works.  But maybe
+that should just list all of the valid DTBs that it needs in the
+defconfig to start with? I don't quite know, it was a case I hadn't
+considered at the time.
 
 --=20
 Tom
 
---FJwfZYkBgXsxUujX
+--XOn40xIhvbYYoQNS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmURyZQACgkQFHw5/5Y0
-tywBGAwAieCUsP6faLIfRfcTPD8V6OnhzTsGO5O9th/JGik5Xn5TSyR/1oe3hQz7
-V6U+yhPmTBnaRrAiz0qs0UofcrOh1S9NnwFhnwePPemzUaUv679Dzk+axe24KC+V
-M0OfVK5TjWaGMokQS0cSFSIoaYeyxqmn1e5o3b4N+peTFV2XkfXp5YtYa5KDbp8E
-EgPr+MtfKZ02jECLZbS6VjP9/g3OYwjj/uQFJgQAEARUeDs2A25XRKOHpLM39Yib
-C1s/OVGlgHxhl4/epvcV6Hxrh6CZzP+7T2X2Xwpt3pF+/Yd/FD1ZIhJLjvEDveHh
-9uVIPGI3L8N9tVKx8oJeJDxVVZpicxm8M8FwCGKx+THiGoz33TOKWI/JOmbg3Rpk
-5I7gzoDI1tnHKm0H2+qxkIM4GFBgsWy/dxBo3DFVpGLgVvyUmX9nALBtlUqaPWrn
-5PQxO5kSMAURXKYybq7ZLNAmhJbtTd2pTdrgXOZ1h6pag/rMJKDdwt4Zr5jW6kgq
-nFMiMvvT
-=Hz4y
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmURzzkACgkQFHw5/5Y0
+tyy7Swv/YxgkqZHkBBuUj22YRyJFZKPRUOhT2Ata6VGk5mwYN8gMyiiKumTDxzPP
+jPlsAhtCAE72zwMl6KQgsn9Pz2xmUeiQ1QWwiI5b9hTci31r+gBd38783yzD17TK
+PAzEFHKsMFqqWfjaFza1JjgrepmcXTbbN3v3o0LZ0BwRQDgEiQ5BA01XnmGw5xCu
+WsnjQLLK/E/x07lv5Fu/11+EHvBD+RCw8tsuKnvKmF9iGIbzB+TYieFowgRt3UpW
+8BOIplK9wPd+SwboxqDGghYT7e/BuFUb9aYP1qugOM402ODxZ/8RN47Xm+KpCZCh
+qqp34zE2xPOscwq1IXvKxXieqGy465yhV2K9EYZc1R8BqV40Oo4yPUr2ieN/yDqz
+0IJDEoXobQjc7KixvpHMrlLLauv46Wq73JwijY95y6KuD8E31RRY3F4sQcaND5dx
+8VZle3+pPluwlSprrkRiDsuDw28j11Em40tCNmO5ChjHjLHSSP8enDO0PrrZwWkn
+9E9P8R2m
+=Qldv
 -----END PGP SIGNATURE-----
 
---FJwfZYkBgXsxUujX--
+--XOn40xIhvbYYoQNS--
