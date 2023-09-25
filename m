@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F25CE7A89
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 236C6CE7A81
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:27:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 951E686BEC;
-	Mon, 25 Sep 2023 11:27:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F1EC786B89;
+	Mon, 25 Sep 2023 11:27:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 507B686B3A; Mon, 25 Sep 2023 11:27:35 +0200 (CEST)
+ id 86E1186B3A; Mon, 25 Sep 2023 11:27:39 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1091A86B89
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:27:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FAA786C96
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:27:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 38P9RMS5061388;
- Mon, 25 Sep 2023 17:27:22 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 38P9RRQ8061419;
+ Mon, 25 Sep 2023 17:27:27 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Mon, 25 Sep 2023 17:27:19 +0800
+ Mon, 25 Sep 2023 17:27:24 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
  <peterlin@andestech.com>, Randolph <randolph@andestech.com>
-Subject: [PATCH 3/7] spl: riscv: opensbi: change the default os_type as varible
-Date: Mon, 25 Sep 2023 17:25:39 +0800
-Message-ID: <20230925092543.1408725-4-randolph@andestech.com>
+Subject: [PATCH 4/7] riscv: dts: introduce SPL_LOAD_FIT_OPENSBI_OS_BOOT symbol
+Date: Mon, 25 Sep 2023 17:25:40 +0800
+Message-ID: <20230925092543.1408725-5-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230925092543.1408725-1-randolph@andestech.com>
 References: <20230925092543.1408725-1-randolph@andestech.com>
@@ -45,7 +45,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 38P9RMS5061388
+X-MAIL: Atcsqr.andestech.com 38P9RRQ8061419
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,82 +62,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to introduce the Opensbi OS boot mode, the next stage boot
-image of OpenSBI should be configurable.
+Introduce common Kconfig symbol for riscv architecture.
+This symbol SPL_LOAD_FIT_OPENSBI_OS_BOOT is like falcon mode on ARM,
+the Falcon boot is a shortcut boot method for SD/eMMC targets. It
+skips the loading the RAM version U-Boot. Instead, it will loads
+the FIT image and boots directly to Linux.
+
+When SPL_OPENSBI_OS_BOOT is enabled, linux.itb is created after
+compilation instead of the default u-boot.itb. It initialises memory
+with the U-Boot SPL at the first stage, just as a normal boot process
+does at the beginning. Instead of jumping to the U-Boot proper from
+OpenSBI before booting the Linux kernel, the RISC-V falcon mode
+process jumps directly to the Linux kernel to gain shorter booting time.
+
+When SPL_OPENSBI_OS_BOOT is enabled, it will change the default FIT
+configure file "binman.dtsi" to "binman_linux.dtsi"
+Default is not enabled.
 
 Signed-off-by: Randolph <randolph@andestech.com>
 ---
- common/spl/spl_opensbi.c | 26 ++++++++++++++++----------
- 1 file changed, 16 insertions(+), 10 deletions(-)
+ arch/riscv/Kconfig | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
-index e2aaa46046..a0c5f35dab 100644
---- a/common/spl/spl_opensbi.c
-+++ b/common/spl/spl_opensbi.c
-@@ -20,7 +20,7 @@ DECLARE_GLOBAL_DATA_PTR;
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index ec1cfcaaa7..4f104789a7 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -422,8 +422,17 @@ config TPL_USE_ARCH_MEMSET
  
- struct fw_dynamic_info opensbi_info;
+ endmenu
  
--static int spl_opensbi_find_uboot_node(void *blob, int *uboot_node)
-+static int spl_opensbi_find_os_node(void *blob, int *uboot_node, int os_type)
- {
- 	int fit_images_node, node;
- 	const char *fit_os;
-@@ -34,7 +34,7 @@ static int spl_opensbi_find_uboot_node(void *blob, int *uboot_node)
- 		if (!fit_os)
- 			continue;
- 
--		if (genimg_get_os_id(fit_os) == IH_OS_U_BOOT) {
-+		if (genimg_get_os_id(fit_os) == os_type) {
- 			*uboot_node = node;
- 			return 0;
- 		}
-@@ -45,8 +45,9 @@ static int spl_opensbi_find_uboot_node(void *blob, int *uboot_node)
- 
- void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
- {
--	int ret, uboot_node;
--	ulong uboot_entry;
-+	int ret, os_node;
-+	ulong os_entry;
-+	int os_type;
- 	typedef void __noreturn (*opensbi_entry_t)(ulong hartid, ulong dtb, ulong info);
- 	opensbi_entry_t opensbi_entry;
- 
-@@ -55,22 +56,27 @@ void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
- 		hang();
- 	}
- 
--	/* Find U-Boot image in /fit-images */
--	ret = spl_opensbi_find_uboot_node(spl_image->fdt_addr, &uboot_node);
-+	/*
-+	 * Find next os image in /fit-images
-+	 * The next os image default is u-boot proper
-+	 */
-+	os_type = IH_OS_U_BOOT;
-+	ret = spl_opensbi_find_os_node(spl_image->fdt_addr, &os_node, os_type);
- 	if (ret) {
--		pr_err("Can't find U-Boot node, %d\n", ret);
-+		pr_err("Can't find %s node for opensbi, %d\n",
-+		       genimg_get_os_name(os_type), ret);
- 		hang();
- 	}
- 
- 	/* Get U-Boot entry point */
--	ret = fit_image_get_entry(spl_image->fdt_addr, uboot_node, &uboot_entry);
-+	ret = fit_image_get_entry(spl_image->fdt_addr, os_node, &os_entry);
- 	if (ret)
--		ret = fit_image_get_load(spl_image->fdt_addr, uboot_node, &uboot_entry);
-+		ret = fit_image_get_load(spl_image->fdt_addr, os_node, &os_entry);
- 
- 	/* Prepare opensbi_info object */
- 	opensbi_info.magic = FW_DYNAMIC_INFO_MAGIC_VALUE;
- 	opensbi_info.version = FW_DYNAMIC_INFO_VERSION;
--	opensbi_info.next_addr = uboot_entry;
-+	opensbi_info.next_addr = os_entry;
- 	opensbi_info.next_mode = FW_DYNAMIC_INFO_NEXT_MODE_S;
- 	opensbi_info.options = CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS;
- 	opensbi_info.boot_hart = gd->arch.boot_hart;
++config SPL_LOAD_FIT_OPENSBI_OS_BOOT
++	bool "Enable SPL (OpenSBI OS boot mode) applying linux from FIT"
++	depends on SPL_LOAD_FIT
++	help
++	  Use fw_dynamic from the FIT image, and u-boot SPL will invoke it directly.
++	  This is a shortcut boot flow, from u-boot SPL -> OpenSBI -> u-boot proper
++	  -> linux to u-boot SPL -> OpenSBI -> linux.
++
+ config SPL_LOAD_FIT_CONFIG
+ 	string "Default FIT configuration for SPL"
++	default "binman_linux.dtsi" if SPL_LOAD_FIT_OPENSBI_OS_BOOT
+ 	default "binman.dtsi"
+ 	depends on SPL_LOAD_FIT
+ 	help
 -- 
 2.34.1
 
