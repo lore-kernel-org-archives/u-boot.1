@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCA1CE7A94
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 14:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A64FCE7A81
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 14:07:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4514786D57;
-	Mon, 25 Sep 2023 16:06:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B1A4A86D53;
+	Mon, 25 Sep 2023 16:07:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cPW0qGi4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X0o/2uT/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E1C286D56; Mon, 25 Sep 2023 16:06:32 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 7A9E186D5B; Mon, 25 Sep 2023 16:07:17 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4857F86D27
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 16:06:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 68AB086D27
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 16:07:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38PE6Puo016227;
- Mon, 25 Sep 2023 09:06:25 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38PE7DtY095165;
+ Mon, 25 Sep 2023 09:07:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695650785;
- bh=c+D/z3rV/mVtuXJ4dPLSFws3zxpORDQx3qza73suAxQ=;
+ s=ti-com-17Q1; t=1695650833;
+ bh=OgNyVb+KiWu/IA0zwz3Kr2GqAdfYGd2++DuetBoSLfA=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=cPW0qGi4rdYUohAvj8QeKFESvX9/PkoqZZGf4BAwK62RusKsOQ2ylMref4yyGVu/b
- qZrr/PdETlgvVdgNRnW+vP3MfhHMNp/MZIVGZVzRbunas9g4rrYtBL2rgmyWsBW7Zx
- VKJLxtF7ubFwaZR1HxRRh1G9isW5h5Lj490B7zmQ=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38PE6Pfh060932
+ b=X0o/2uT/nrvoD35yv5V9McUQYqIdyPI1qKCdjrXpkDqRJR4GbO20mklEF2RJPMEC3
+ E4CuB03HB4PrKw4FpGe/59hSUTUZMJyd2+Hzd5bkugfE0JgdNg3VRRlKITh7CWvtVO
+ 1EayWk1ep5RePHwgGDxvuB0FavgeTwkImvzkiqQ4=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38PE7DET018092
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 25 Sep 2023 09:06:25 -0500
-Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 25 Sep 2023 09:07:13 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
- Sep 2023 09:06:25 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 09:07:12 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 25 Sep 2023 09:06:25 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38PE6PpC032236;
- Mon, 25 Sep 2023 09:06:25 -0500
-Date: Mon, 25 Sep 2023 09:06:25 -0500
+ Frontend Transport; Mon, 25 Sep 2023 09:07:12 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38PE7CJN113433;
+ Mon, 25 Sep 2023 09:07:12 -0500
+Date: Mon, 25 Sep 2023 09:07:12 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Neha Malcom Francis <n-francis@ti.com>
 CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
@@ -57,15 +57,15 @@ CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
  <m-chawdhry@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>,
  <gadiyar@ti.com>, <a-nandan@ti.com>, <vaishnav.a@ti.com>,
  <b-kapoor@ti.com>, <bb@ti.com>, <s-vadapalli@ti.com>
-Subject: Re: [PATCH v3 3/6] drivers: firmware: ti_sci: Get SCI revision only
- if TIFS/SYSFW is up
-Message-ID: <20230925140625.pwl6dlm4s25fl7at@grimace>
+Subject: Re: [PATCH v3 2/6] arm: mach-k3: j721e_init: Move clk_k3 probe
+ before loading TIFS
+Message-ID: <20230925140712.jg63oxq2nrxaqvl5@drowsily>
 References: <20230922103954.3454891-1-n-francis@ti.com>
- <20230922103954.3454891-4-n-francis@ti.com>
+ <20230922103954.3454891-3-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20230922103954.3454891-4-n-francis@ti.com>
+In-Reply-To: <20230922103954.3454891-3-n-francis@ti.com>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,71 +84,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 16:09-20230922, Neha Malcom Francis wrote:
-> When setting up boot media to load the TIFS binary in legacy boot flow
-> (followed by J721E), get_timer() is called which calls dm_timer_init()
-> which then gets the tick-timer: mcu_timer0. mcu_timer0 uses k3_clks
-> (clock controller) and k3_pds (power controller) from the dmsc node that
-> forces probe of the ti_sci driver of TIFS that hasn't been loaded yet!
-> Running ti_sci_cmd_get_revision from the probe leads to panic since no
-> TIFS and board config binaries have been loaded yet. Resolve this by
-> moving ti_sci_cmd_get_revision to ti_sci_get_handle_from_sysfw as a
-> common point of invocation for both legacy and combined boot flows.
-> 
-> Before doing this, it is important to go through whether any sync points
-> exist where revision is needed before ti_sci_get_handle_from_sysfw is
-> invoked. Going through the code along with boot tests on both flows
-> ensures that there are none.
-
-Please provide bootlogs for one board of the following SoCs in the
-diffstat for us to be sure.
-
-* AM65 (sysfw gen1), J721e(tifs gen1), AM64(sysfw gen2-Sitara), J7200(tifs
-  gen2-Jacinto), J721s2(tifs-dm/Jacinto), AM62x(tifs-dm/Sitara)
-
+> When setting boot media to load the TIFS binary in legacy boot flow
+> (followed by J721E), get_timer() is called which eventually calls
+> dm_timer_init() to grab the tick-timer, which is mcu_timer0. Since we
+> need to set up the clocks before using the timer, move clk_k3 driver
+> probe before k3_sysfw_loader to ensure we have all necessary clocks set
+> up before.
 > 
 > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+Reviewed-by: Nishanth Menon <nm@ti.com>
+
 > ---
->  drivers/firmware/ti_sci.c | 11 ++++++++---
->  1 file changed, 8 insertions(+), 3 deletions(-)
+>  arch/arm/mach-k3/j721e_init.c | 24 ++++++++++++------------
+>  1 file changed, 12 insertions(+), 12 deletions(-)
 > 
-> diff --git a/drivers/firmware/ti_sci.c b/drivers/firmware/ti_sci.c
-> index 72f572d824..45406e24d2 100644
-> --- a/drivers/firmware/ti_sci.c
-> +++ b/drivers/firmware/ti_sci.c
-> @@ -2690,6 +2690,8 @@ static void ti_sci_setup_ops(struct ti_sci_info *info)
->  const
->  struct ti_sci_handle *ti_sci_get_handle_from_sysfw(struct udevice *sci_dev)
->  {
-> +	int ret;
+> diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
+> index b6164575b7..b1f7e25ed0 100644
+> --- a/arch/arm/mach-k3/j721e_init.c
+> +++ b/arch/arm/mach-k3/j721e_init.c
+> @@ -228,6 +228,18 @@ void board_init_f(ulong dummy)
+>  	if (!ret)
+>  		pinctrl_select_state(dev, "default");
+>  
+> +	/*
+> +	 * Force probe of clk_k3 driver here to ensure basic default clock
+> +	 * configuration is always done.
+> +	 */
+> +	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
+> +		ret = uclass_get_device_by_driver(UCLASS_CLK,
+> +						  DM_DRIVER_GET(ti_clk),
+> +						  &dev);
+> +		if (ret)
+> +			panic("Failed to initialize clk-k3!\n");
+> +	}
 > +
->  	if (!sci_dev)
->  		return ERR_PTR(-EINVAL);
+>  	/*
+>  	 * Load, start up, and configure system controller firmware. Provide
+>  	 * the U-Boot console init function to the SYSFW post-PM configuration
+> @@ -241,18 +253,6 @@ void board_init_f(ulong dummy)
+>  	do_dt_magic();
+>  #endif
 >  
-> @@ -2703,6 +2705,11 @@ struct ti_sci_handle *ti_sci_get_handle_from_sysfw(struct udevice *sci_dev)
->  	if (!handle)
->  		return ERR_PTR(-EINVAL);
->  
-> +	ret = ti_sci_cmd_get_revision(handle);
-> +
-> +	if (ret)
-> +		return ret;
-> +
->  	return handle;
->  }
->  
-> @@ -2825,11 +2832,9 @@ static int ti_sci_probe(struct udevice *dev)
->  	list_add_tail(&info->list, &ti_sci_list);
->  	ti_sci_setup_ops(info);
->  
-> -	ret = ti_sci_cmd_get_revision(&info->handle);
+> -	/*
+> -	 * Force probe of clk_k3 driver here to ensure basic default clock
+> -	 * configuration is always done.
+> -	 */
+> -	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
+> -		ret = uclass_get_device_by_driver(UCLASS_CLK,
+> -						  DM_DRIVER_GET(ti_clk),
+> -						  &dev);
+> -		if (ret)
+> -			panic("Failed to initialize clk-k3!\n");
+> -	}
 > -
->  	INIT_LIST_HEAD(&info->dev_list);
+>  	/* Prepare console output */
+>  	preloader_console_init();
 >  
-> -	return ret;
-> +	return 0;
->  }
->  
->  /**
 > -- 
 > 2.34.1
 > 
