@@ -4,90 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F98CD54BF
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 19:27:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2631CCD54BF
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 19:46:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71CEE86CAD;
-	Mon, 25 Sep 2023 21:27:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dawes.za.net
+	by phobos.denx.de (Postfix) with ESMTP id 2452E86B53;
+	Mon, 25 Sep 2023 21:46:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail-com.20230601.gappssmtp.com header.i=@gmail-com.20230601.gappssmtp.com header.b="ZMqYgb0I";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o2dQ8MEZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46E9E86D3B; Mon, 25 Sep 2023 21:27:31 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id 90B8186BD4; Mon, 25 Sep 2023 21:46:17 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDAAC86B2E
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 21:27:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7810F86A88
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 21:46:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dawes.za.net
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogan.dawes@gmail.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-6c4d625da40so2990483a34.1
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 12:27:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-59f7cc71e2eso33069027b3.0
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 12:46:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail-com.20230601.gappssmtp.com; s=20230601; t=1695670047; x=1696274847;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cEJbJqraLgnkbkn3Itpi2cw2y020R7Dup6xakbJ5OKk=;
- b=ZMqYgb0IHn3uOj5eGfmcSN4oZXYdlzCgHW4RwlpwsTPib3OCXAu0VD7+iq2HYFccE0
- 5S4kfR+iX9JUaDe4okLlqrv1XDdGI/6gqC6fG/LWtLRXUfeDgTnjtzY/f+3yd7y5mvIM
- llCFVdainN375W2NbsgJyBDznxCaDM0gggzkJwufld5i7sbpUgldni5kw0y98ipyyl51
- Ww9Q3xtBrRt6Bo2x6KszNJ9ylPoIyBv0Jl1y/QHPPddXc4WX9bNLnYd47co38G1cUajx
- v3VRvLud2+Dvj0jqy+UJByM9ipo121X6rb5DVlYYJ56nmqKx1mitOZTMXutFa6iv46SN
- 5hhg==
+ d=konsulko.com; s=google; t=1695671174; x=1696275974; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YwLpC0W5KFW4VSSduqjOCcL0VPrRUWrmZPy83U2aTcQ=;
+ b=o2dQ8MEZz0ce3it/pQ6v1JQeTbJsWDF8z6wwRjlAovPIH8qSSoVjrsF+IbeJE7NJb2
+ 3m0eTpEjl+SCp9uhoqCzhw7fQujwI9f2MQPPjMDJgpsEFvmxXgKVjAyLAedIdHrHS4mK
+ hCEVDCKtpMce4z1hCU01W2qy0CIYM/yu4iDI8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695670047; x=1696274847;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cEJbJqraLgnkbkn3Itpi2cw2y020R7Dup6xakbJ5OKk=;
- b=Zt2simb4UWyAVIdwEU9DUVuxv37XHY9h916P/lKsB9wOm4a/xX1xpz2fUds/ZWT9L6
- LaD/6s44uLW5I7HIJ4DAdPSf4bT1mGfUTTEfv3wD4K/LW/CkoRQrD6TPbCSxZbiXmEw8
- NKWn4J+4urOxSpHCnpZIwXLkAcJ5qycikOBNfkl4K5JD2ykAGOJeYgpmA+BdyllQpdyn
- 04ajs/7TvroL8TCuYx8T4ZIiV6LL8yU6ip3Qhaj/ECZVk7wP5MKvWIOEGJaeTHNUKfsz
- 3qeWPbl9AGXnM2EO0/Ootoc/sh4coI0XrL+Mtx7/MYlojCuJ9X6dCD4pOutk7I2fvjN1
- ZBow==
-X-Gm-Message-State: AOJu0YyZcishvETAUa9LvKRj8gK2gID+hZp/9GsmAtCwwDowT18gqNoE
- lVeVgBwd1pRcbG+j4gvx5sGZ+LUAnR1tvXFnO14=
-X-Google-Smtp-Source: AGHT+IFVMIB20yZqgxmpTHl1tIOefX44e/67ZuNNS3IQs4AFhACDbPgTp1V2Eul8781FlvtEK5QyK2J+ag9j5hpHfWg=
-X-Received: by 2002:a05:6830:14ce:b0:6bd:7252:9db1 with SMTP id
- t14-20020a05683014ce00b006bd72529db1mr9449664otq.11.1695670047257; Mon, 25
- Sep 2023 12:27:27 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695671174; x=1696275974;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YwLpC0W5KFW4VSSduqjOCcL0VPrRUWrmZPy83U2aTcQ=;
+ b=Fx+Yc/tAiZ3pcAbbHyYcXAfTR7TthLKu5mfeE3fNFNaugtE7nJ7ehQghuztnRWay/V
+ vsOZ3TqjDJ3JTBeRDC+lSredjZC2JubdGn7myrUfwC2/3sqqsH3mdEN47a+lRXdg2tUU
+ jLy2KIbGvoq1HQgSZXf4wTUNZgWSQlb0lMVhzXj4AFn/rGtV0YOH/TtUwxRh/NP7LQaf
+ 376EW4U84wK5xIPVZaNhg80pQhvD9JqJ+1mw/Bfj4vos5W7eA/nBjVVUlos7XJZAbC/G
+ NhBXQo9xf2oaoO7ZMxo1Lc3dIOK4saQgQWWLpnOIv+QmjJ0xKp3GNB16y79qF7zv3ym+
+ v/Nw==
+X-Gm-Message-State: AOJu0YxwsJjuVmtnGLcBUQMKvLjkxDSpvtQYK6Wg+xyIPYi/3wMpZHMV
+ asttUwnRglgxP/u43AyTjEHXvA==
+X-Google-Smtp-Source: AGHT+IH5m7ATmezJCdWb1J7xhHpn2Gt9EVsT6K/gmX6YquXP0XPvUWQejXMWgRNZJA+3Pqt7HwazLQ==
+X-Received: by 2002:a05:690c:2c8d:b0:59f:b0d9:5df2 with SMTP id
+ ep13-20020a05690c2c8d00b0059fb0d95df2mr2210516ywb.0.1695671174202; 
+ Mon, 25 Sep 2023 12:46:14 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
+ [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
+ by smtp.gmail.com with ESMTPSA id
+ w17-20020a81a211000000b0058c8b1ddcc1sm2550099ywg.15.2023.09.25.12.46.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 12:46:13 -0700 (PDT)
+Date: Mon, 25 Sep 2023 15:46:11 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH v3 08/38] spl: Create proper symbols for enabling the
+ malloc() pool
+Message-ID: <20230925194611.GN305624@bill-the-cat>
+References: <20230924192536.1812799-1-sjg@chromium.org>
+ <20230924192536.1812799-9-sjg@chromium.org>
 MIME-Version: 1.0
-References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
- <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
- <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
- <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
- <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
- <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
- <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
- <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
- <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
- <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
- <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
- <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
- <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
- <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
- <CAOYdKdjALruh9v6HBO-MSjzZM0whYhbA5YLJxbKk7yQk7cznGw@mail.gmail.com>
- <CAOMZO5AVuBxGFF_itcxvdG=W9JoRtyzzeeC+wji__uUOQirwZg@mail.gmail.com>
- <CAOYdKdingLtAvEnth8mSnazQ2fZ_kCsM_2P_dX7tbL2xe9wyVw@mail.gmail.com>
- <CAOMZO5ALK_O-648FaHFrjJc9EiU3J=nvv1rYDiLOGqhjt3mmkA@mail.gmail.com>
-In-Reply-To: <CAOMZO5ALK_O-648FaHFrjJc9EiU3J=nvv1rYDiLOGqhjt3mmkA@mail.gmail.com>
-From: Rogan Dawes <rogan@dawes.za.net>
-Date: Mon, 25 Sep 2023 21:27:15 +0200
-Message-ID: <CAOYdKdjEOsLmkoJdxk1CmLk6_AJFZhuS_7fWxWOm14Av1n7gHA@mail.gmail.com>
-Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gx38HXrKf5hV++Ky"
+Content-Disposition: inline
+In-Reply-To: <20230924192536.1812799-9-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,66 +97,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-That outputs LLC about a second after the mxsldr terminates (kinda slowly,
-the individual characters can be seen being emitted one at a time), and
-then about 5 seconds later, "Pref". But nothing after that point.
 
-At least it looks like there is something happening, which is excellent!
+--gx38HXrKf5hV++Ky
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thank you!
+On Sun, Sep 24, 2023 at 01:24:53PM -0600, Simon Glass wrote:
 
-Without CONFIG_SPL_MXS_PMU_ENABLE_4P2_LINEAR_REGULATOR=3Dy, (i.e. all 3 PMU
-options not set) I still get the LLC\nPref as previously.
+> For U-Boot proper we have CONFIG_SYS_MALLOC_F which indicates that a
+> malloc() pool is available before relocation.
+>=20
+> For SPL we only have CONFIG_SPL_SYS_MALLOC_F_LEN which indicates the
+> size of the pool.
+>=20
+> In various places we use CONFIG_SPL_SYS_MALLOC_F_LEN =3D=3D 0 to indicate
+> that there is no pool.
+>=20
+> This differing approach is confusing. Add a new CONFIG_SPL_SYS_MALLOC_F
+> symbol for SPL (and similarly for TPL and VPL). Tidy up the Kconfig
+> help for clarity.
+>=20
+> For now these symbols are not used. That is cleaned up in the following
+> patches.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-With only CONFIG_SPL_MXS_PMU_MINIMAL_VDD5V_CURRENT=3Dy, I get LLC\nPref
-With only CONFIG_SPL_MXS_PMU_DISABLE_BATT_CHARGE=3Dy, I get LLC\nPref
-With only CONFIG_SPL_MXS_PMU_ENABLE_4P2_LINEAR_REGULATOR=3Dy, I get LLC\nPr=
-ef
+This introduces:
 
-With CONFIG_SPL_MXS_PMU_ENABLE_4P2_LINEAR_REGULATOR=3Dy, AND:
-- CONFIG_SPL_MXS_PMU_MINIMAL_VDD5V_CURRENT=3Dy, I just get a single L.
-- CONFIG_SPL_MXS_PMU_DISABLE_BATT_CHARGE=3Dy, I get the LLC\nPref as
-previously.
+WARNING: unmet direct dependencies detected for SPL_SYS_MALLOC_F
+  Depends on [n]: ARM [=3Dy] && ARCH_SNAPDRAGON [=3Dn] || ARM [=3Dy] && ARC=
+H_SOCFPGA [=3Dn] || SPL_FRAMEWORK [=3Dn] && SYS_MALLOC_F [=3Dy] && SPL [=3D=
+y]
+  Selected by [y]:
+  - SPL_DM_SERIAL [=3Dy] && SERIAL [=3Dy] && DM_SERIAL [=3Dy] && SPL_DM [=
+=3Dy]
 
-With CONFIG_SPL_MXS_PMU_MINIMAL_VDD5V_CURRENT=3Dy AND
-CONFIG_SPL_MXS_PMU_DISABLE_BATT_CHARGE=3Dy, I get LLC\nPref
+WARNING: unmet direct dependencies detected for SPL_SYS_MALLOC_F
+  Depends on [n]: ARM [=3Dy] && ARCH_SNAPDRAGON [=3Dn] || ARM [=3Dy] && ARC=
+H_SOCFPGA [=3Dn] || SPL_FRAMEWORK [=3Dn] && SYS_MALLOC_F [=3Dy] && SPL [=3D=
+y]
+  Selected by [y]:
+  - SPL_DM_SERIAL [=3Dy] && SERIAL [=3Dy] && DM_SERIAL [=3Dy] && SPL_DM [=
+=3Dy]
 
-With all three =3Dy, I just get L
+On mx28evk and imx28_xea_sb.
 
-Rogan
+--=20
+Tom
 
-On Mon, 25 Sept 2023 at 17:50, Fabio Estevam <festevam@gmail.com> wrote:
->
-> On Mon, Sep 25, 2023 at 11:00=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net>=
- wrote:
->
-> > I see absolutely nothing in the console.
-> >
-> > I=E2=80=99m wondering whether I can possibly execute the vendor SPL wit=
-h a
-modern u-boot?
->
-> The old U-Boot vendor does not use SPL. It uses an old mechanism
-> called bootlets.
->
-> I suggest that we start from scratch with this imx28-wink-hub support
-> that I have just added:
-> https://github.com/fabioestevam/u-boot/commits/wink
->
-> To build it:
->
-> make imx28-wink-hub_defconfig
-> make u-boot.sb
->
-> Then try to load u-boot.sb via mxsldr.
->
-> If it still fails, then I suspect that the power management unit (PMU)
-> may be incorrectly configured causing the board to not power up.
->
-> Try playing with the CONFIG_SPL_MXS_PMU_ options.
->
-> From configs/imx28_xea_defconfig, for example:
->
-> CONFIG_SPL_MXS_PMU_MINIMAL_VDD5V_CURRENT=3Dy
-> CONFIG_SPL_MXS_PMU_DISABLE_BATT_CHARGE=3Dy
-> # CONFIG_SPL_MXS_PMU_ENABLE_4P2_LINEAR_REGULATOR is not set
+--gx38HXrKf5hV++Ky
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUR44AACgkQFHw5/5Y0
+tyylZQv/YT+ekfprZucPebixH7ND7+KprRQ60NNUVZJO254eH5QJU1RgZMLyCY82
+OWuOvrqhj3yoD2gXNUmkAQiNhjgUxr2/gtDkUNHhXSFUWfm0rcsWZbkHpiP4MQIH
+jmN5d2sCFVUbiFj2KgyV3XuCzEelZk71A7AN80HAIqBt6E8cDh48/uqjtMf/wuMl
+7obOCvuLR61xlDOT2bNRROupTZagnZ6WdRIvoDHTWONstR8d+ci6xgZ4vgnLjk+q
+99jhSANeXkSFBaHsBD7B2Yt4rhSv9j79160pcwU9VaN/cBSYe5XDeHp6HypR1auR
+LlKqY76AL/15BQ1yBpgb2Yfx2Czo8mrYMR+FJ/bMpE/6tuVsavKSm1Z6BCIuUYEA
+fqjjhUReAc637tHuowslDoJYjdS+9tx89+8iWfHlmevob1cCnMV0EUhVlQBOH6Cq
+ax/uMFyRgcJssmMd83oi9yDs+fqUrkYupy0CgJfuBaeE7g1J1PIBzD/DT1kke62E
+0Pic40/S
+=k3a1
+-----END PGP SIGNATURE-----
+
+--gx38HXrKf5hV++Ky--
