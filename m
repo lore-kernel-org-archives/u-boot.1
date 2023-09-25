@@ -4,100 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED46CE7AA5
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 16:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC22ECE7AA8
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 17:01:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49E6C86B4E;
-	Mon, 25 Sep 2023 18:58:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id F3DDD86BBC;
+	Mon, 25 Sep 2023 19:01:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NpOZU/f4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="E6eNi9Oq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5752B86D4E; Mon, 25 Sep 2023 18:08:45 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 11C6386BC4; Mon, 25 Sep 2023 19:01:00 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6772786B09
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 18:08:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA87086B3F
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 19:00:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-5042bfb4fe9so10525792e87.1
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 09:08:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695658122; x=1696262922; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IybnYXd156HSmumk6fJUDh8F/Z9ax94GJf50euhTh9Y=;
- b=NpOZU/f4SjaNlK70y/mKQ3jwfLa29JfpNLzt7MLlg8PptzoQbiQsqF37lH8vo/PLnr
- jRTg+vXZchLR6HDzOiYrwxrX2QcBC7FL1O09p5cy0gQzDWY2YbUURXabtWUMa+iYEJ9R
- u0hlV3oBSA2+w1yZdd0R5HiG5/NhEQ7tDoXl8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695658122; x=1696262922;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IybnYXd156HSmumk6fJUDh8F/Z9ax94GJf50euhTh9Y=;
- b=P2Kk01/dwnoaJpBFpp6pRgSC1fKZE1NcNo9eZSwcrHNJdJYW7Y6DEqbHFpySFHJ4Ir
- YQfa9ZKcU3mpOLWl1HrEOxogdfGyDNpfbTFYDVIKI68tgjJ0HGWw65l/p7sjsuKdVJX6
- OoUSdKgF30Nll0TP0cw199/j5U+P7W0hI4kFNHoQrf27l3Lfmd/E4HRjmK2iewSrvput
- k84yZKPNDzA3q5gEqTBNo4lFNwHAMe2tu89pC0b5cuTnsPgdUz5YqUhNBmLt/kes4Qk+
- s7U/EemvgaUKuc/Y7c+j7sk1Oj7uaKwJIswedAAz5UFJloC7IxRbrK2nNrumLooJYPDc
- DrWQ==
-X-Gm-Message-State: AOJu0YwSyVQznzLr+AoWAHe6BLsbNKbRYEACh9keO6cay3k/3I6v0Ngf
- SNSIU8WnQuNZmmw4PliuN85bXwG86QGu0fyj1JWCG+8+E5yypAr0F4w=
-X-Google-Smtp-Source: AGHT+IF6XZJBX48ZIm0R0B+9MvNN82mcPjnwofy8MNsD0guNG5ReBnBhNa6TEyTNsXT0OUd/J8sX/uwNqoAEMxijcPs=
-X-Received: by 2002:a05:6512:488e:b0:502:ffff:feff with SMTP id
- eq14-20020a056512488e00b00502fffffeffmr5267062lfb.58.1695658122258; Mon, 25
- Sep 2023 09:08:42 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38PH0pwJ122204;
+ Mon, 25 Sep 2023 12:00:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695661251;
+ bh=5nVBa/n+WS/BB1xB1KwPv9cjqrmstWccnvEl3+obKcU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=E6eNi9OqfRmX/vJcZlssbElky4oFP1WFITfzhXh6+siKc5RHw6YM0D8iNYuvOR4U5
+ Soo1UuhZPGVbiDFstc3XfPPWshriewnrWDkJhbkgbexopJKh86FWvcR28/E51wrk1T
+ A+NviKRUDb85H7TB+pQGD6Ze8NL6Hezv38GCPtkc=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38PH0pK2038831
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 25 Sep 2023 12:00:51 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
+ Sep 2023 12:00:52 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 25 Sep 2023 12:00:51 -0500
+Received: from [10.249.141.75] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38PH0mcF127508;
+ Mon, 25 Sep 2023 12:00:49 -0500
+Message-ID: <ee635678-1248-ace7-e7ed-0f135419fded@ti.com>
+Date: Mon, 25 Sep 2023 22:30:47 +0530
 MIME-Version: 1.0
-References: <20230924192536.1812799-1-sjg@chromium.org>
- <20230924192536.1812799-2-sjg@chromium.org>
- <2a727cd4-bbda-409e-8d0e-1aafba182873@ltec.ch>
-In-Reply-To: <2a727cd4-bbda-409e-8d0e-1aafba182873@ltec.ch>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Sep 2023 10:08:30 -0600
-Message-ID: <CAPnjgZ1a9hjodoEuYFuM9x+tiSZkL05_daJA4Rd5fzdwJ5KPMQ@mail.gmail.com>
-Subject: Re: [PATCH v3 01/38] spl: Use CONFIG_SPL... instead of
- CONFIG_..._SPL_...
-To: Felix Brack <fb@ltec.ch>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Martyn Welch <martyn.welch@collabora.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Adam Ford <aford173@gmail.com>, Alison Wang <alison.wang@nxp.com>, 
- Allen Martin <amartin@nvidia.com>,
- "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>, 
- Chee Hong Ang <chee.hong.ang@intel.com>, Chin-Liang See <clsee@altera.com>, 
- Dave Gerlach <d-gerlach@ti.com>, Dinh Nguyen <dinguyen@kernel.org>,
- Fabio Estevam <festevam@denx.de>, 
- Green Wan <green.wan@sifive.com>, Heiko Thiery <heiko.thiery@gmail.com>,
- Ian Ray <ian.ray@ge.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
- =?UTF-8?Q?Javier_Mart=C3=ADnez_Canillas?= <javier@dowhile0.org>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Michal Simek <michal.simek@amd.com>, 
- Mike Looijmans <mike.looijmans@topic.nl>,
- Nicolas Ferre <nicolas.ferre@microchip.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Oliver Graute <oliver.graute@kococonnector.com>,
- Palmer Dabbelt <palmer@dabbelt.com>, 
- Parthiban Nallathambi <parthiban@linumiz.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, 
- Peter.Chubb@data61.csiro.au, Philip Oberfichtner <pro@denx.de>, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- Raffaele RECALCATI <raffaele.recalcati@bticino.it>,
- Roger Quadros <rogerq@kernel.org>, 
- Stefan Roese <sr@denx.de>, Teresa Remmet <t.remmet@phytec.de>,
- Tianrui Wei <tianrui-wei@outlook.com>, 
- Tim Harvey <tharvey@gateworks.com>, Uri Mashiach <uri.mashiach@compulab.co.il>,
- Yanhong Wang <yanhong.wang@starfivetech.com>, kernel@puri.sm, 
- uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Mon, 25 Sep 2023 18:58:17 +0200
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v3 0/3] enable power and clock Kconfig conditionally
+To: <nm@ti.com>, <vigneshr@ti.com>, <jh80.chung@samsung.com>, <lukma@denx.de>, 
+ <seanga2@gmail.com>, <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <a-nandan@ti.com>
+References: <20230913043930.1316130-1-u-kumar1@ti.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20230913043930.1316130-1-u-kumar1@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,46 +81,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Felix,
+Hi Tom,
 
-On Mon, 25 Sept 2023 at 08:56, Felix Brack <fb@ltec.ch> wrote:
+On 9/13/2023 10:09 AM, Udit Kumar wrote:
+> This series, updates enabling mutually exclusive power and clock configs
+> for TI SOCs.
 >
-> Hi Simon,
 >
-> On 24.09.23 21:24, Simon Glass wrote:
-> > We like to put the SPL first so it is clear that it relates to SPL. Rename
-> > various malloc-related options which have crept in, to stick to this
-> > convention.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Reviewed-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> > Reviewed-by: Martyn Welch <martyn.welch@collabora.com>
-> > Reviewed-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > ---
-> >
-> > (no changes since v1)
-> > .....
+> Sorry to push clock and power changes in one series,
+> managed by two maintainers. But In my quick grep,
+> I am not able to active PR raise from both trees.
+> So copying maintainers of clock and power for review.
 >
-> I just tried to apply the patch to master for testing and got the
-> following result:
+> Change log
+> Changes in v3:
+> - Patch 1 and 2: Added reviewed by
+> - Patch 3: Corrected Fixes in commit message
+> link to v2:
+> https://lore.kernel.org/all/20230912130645.1202325-1-u-kumar1@ti.com/
 >
-> error: patch failed: configs/am335x_baltos_defconfig:18
-> error: configs/am335x_baltos_defconfig: patch does not apply
-> error: patch failed: configs/am335x_igep003x_defconfig:20
-> error: configs/am335x_igep003x_defconfig: patch does not apply
-> error: patch failed: configs/dh_imx6_defconfig:39
-> error: configs/dh_imx6_defconfig: patch does not apply
-> error: patch failed: configs/starfive_visionfive2_defconfig:47
-> error: configs/starfive_visionfive2_defconfig: patch does not apply
+> Changes in v2:
+> - Patch 1 and 2) Added conditional support to enable Kconfig
+> - Patch 3 No change
+> link to v1:
+> https://lore.kernel.org/all/20230911111946.749270-1-u-kumar1@ti.com/
 >
-> For what I want to test (changes for PDU001 board) this doesn't matter
-> however. I'm just not sure: should I go ahead with testing or wait for
-> an updated patch?
+> Udit Kumar (3):
+>    power: domain: ti: Enable single config for power domain
+>    clk: ti: Add support to enable configs conditionally
+>    config: j7200: remove not needed power config
 
-I had to resync the defconfigs before this patch, to avoid conflicts
-when applied.
+NAK,
 
-So you can use './tools/moveconfig -Cy' and then the series should apply OK.
+One of boot mode (OSPI) is not working with this series on J7200,
 
-Regards,
-Simon
+Please don't merge this series,  Let me fix OSPI boot and re-roll this 
+series
+
+Thanks
+
+Udit
+
+>   configs/j7200_evm_r5_defconfig | 1 -
+>   drivers/clk/ti/Kconfig         | 8 ++++----
+>   drivers/power/domain/Kconfig   | 2 +-
+>   3 files changed, 5 insertions(+), 6 deletions(-)
+>
