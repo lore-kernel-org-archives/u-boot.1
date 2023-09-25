@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15C74CE7A91
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 02:40:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DA42CE7A8B
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 02:40:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0071B86A38;
-	Mon, 25 Sep 2023 04:40:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6E6E1866EC;
+	Mon, 25 Sep 2023 04:40:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m3T3GEWy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GeIfojbO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3D1C86A38; Mon, 25 Sep 2023 04:40:08 +0200 (CEST)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id 4E7748469B; Mon, 25 Sep 2023 04:40:10 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5517F800D2
+ by phobos.denx.de (Postfix) with ESMTPS id 62E348469B
  for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 04:40:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-79fa7e33573so121755339f.0
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-79f8e4108c3so182443139f.3
  for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 19:40:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1695609605; x=1696214405; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=o29E6D9p/sL2FkjffwO2rw9CTShRy+Mexchz0smJTmw=;
- b=m3T3GEWymtB1voBbz2skueV7JX1h3ZaM3Og1rxuFpfZkq5y+p0JuVlaW4HSrUQEC7T
- qYbqDo2ZIEYkaJfDcSf0WqGalxU5EqpIkB0yBqB3J3QbpPxSCoct7kRLNk/T0G0YZauD
- uX1UXc4GYQ4jKK/vq9crAkPFNweeHPk3zIK0o=
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2T3SFjNKCVzRKPwQBY0+OmKBp9WaVyeBDukP4Qz7Bys=;
+ b=GeIfojbOpVoZE0b2w2TCBSLVhIhUQAS8umDpiqsak0pfNmWfiKZGSuQ3sFq/wKJFdM
+ bUPVhslKO5mggAnjI1p6s0msQnKyTwumDOLYrvrudvdRM9GwfKwfUqadDYOeOXXqinwU
+ F/c4ue4hgJrRKqSCyKe+AfURmVjey6aC825/Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695609605; x=1696214405;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=o29E6D9p/sL2FkjffwO2rw9CTShRy+Mexchz0smJTmw=;
- b=ZZbY00wZ17lQgKOK02SB/6rfk3a/sr1IjzPtTnu1Eqj6PVH5odLwIbymN7ALWZxIyJ
- Cfbb5owYDxUXLgjWwD6vI083wikpyx6wEwt46mKL8nUOicl3U1I5p/c4/BNmOKRuJMXS
- XaP9QSESZwI7R2XTNIVJI5yRYbXBqD0SCm8KsMG0oFfmP41N17M/2Yu0skCFObicH02w
- R0XslyFiIKyfqkPpB9iYS0C4Nn5RcGas9kh6FyvN8viCcr+xVY+xyyacB9svYnHtJYaQ
- NxVTJxM8OdBZcJ+60A0BOQw6MnFW2tHWH90K5SNKGWnNW6ql62Gv51iZJ8FiZAhxNXeP
- A2DQ==
-X-Gm-Message-State: AOJu0Yze6ccaG3g+sA+EQLdVaiPvmE2L4Q0ge1NVAujKC+lhhQrXWV7h
- yjrIFwOnfAocTWIwLYTBM/GuQAXCbSniWkoeh3I=
-X-Google-Smtp-Source: AGHT+IHiHnMlKfn7TColfdl1kWU/TCon8Ti10QuhjXlcXEOVTuzIluykuWKDvwlZHsVhOmiBuYgRzw==
-X-Received: by 2002:a6b:6402:0:b0:794:eddf:daae with SMTP id
- t2-20020a6b6402000000b00794eddfdaaemr6188004iog.12.1695609604656; 
- Sun, 24 Sep 2023 19:40:04 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2T3SFjNKCVzRKPwQBY0+OmKBp9WaVyeBDukP4Qz7Bys=;
+ b=pt/Lhu88W7TMZq6U9uzdrjElsT7w/Feb5pnmQJgjp2muh4zTYGyTwzyWPwvnyLWwBH
+ ChuU6de4u/2m/yFG4kNCAdHB2hTEoPKcxdcFhE4k1pr/gtFsg30PJDnOTuuJZj53japB
+ CS0rU8KnMkVsgIzvl/+LE+HJkU70gi6AYSi/s9tdh4exEryqmoCQyTTpdwV7NWBO4Vh6
+ Bn0unvN6OwAUphrLh+AqLSroAACY9vN/8AP1L8soF+CSP8ntFmbB3U/I9Yqhd+LeIa+h
+ u5rTWCSo9bboNshPSAonDqPSzjjfJmPJqGTxaOrgLGtCv2RTbx4oVCuqQkmSyNbnWh7C
+ gpkg==
+X-Gm-Message-State: AOJu0Yyv1Aoyx4cAn7b7UValeHAoQhp/vqpleIETUZIq9lcYyIOYGIpo
+ HPPsA3kd81wLVpA6iPa3xHd64xiW6WRj2Y6tLv4=
+X-Google-Smtp-Source: AGHT+IHKp6Uwubnt9lVpykb/+i+vuCOKZscW/eoMLnxPDGUv1DqD0LOEYpm8iDLj1IUGClyA6dK7gQ==
+X-Received: by 2002:a05:6e02:1c2c:b0:351:e70:2cec with SMTP id
+ m12-20020a056e021c2c00b003510e702cecmr7143742ilh.20.1695609603926; 
+ Sun, 24 Sep 2023 19:40:03 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- q8-20020a0566380ec800b00439e3c9f958sm2477252jas.129.2023.09.24.19.40.04
+ q8-20020a0566380ec800b00439e3c9f958sm2477252jas.129.2023.09.24.19.40.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 19:40:04 -0700 (PDT)
+ Sun, 24 Sep 2023 19:40:03 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 1/3] Fix code style for time functions
-Date: Sun, 24 Sep 2023 20:39:50 -0600
-Message-ID: <20230925023958.1913268-2-sjg@chromium.org>
+Subject: [PATCH 0/3] common: Remove a few more header files
+Date: Sun, 24 Sep 2023 20:39:49 -0600
+Message-ID: <20230925023958.1913268-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
-In-Reply-To: <20230925023958.1913268-1-sjg@chromium.org>
-References: <20230925023958.1913268-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,295 +85,1727 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix the code style used for some time functions.
+This series removes two more header files from the common.h header. It
+also tidies up code style for time.h functions, to simplify similar
+maintenance in future.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
 
- arch/powerpc/lib/interrupts.c   |  2 +-
- arch/powerpc/lib/time.c         |  5 +++--
- board/armltd/integrator/timer.c |  2 +-
- drivers/fpga/ACEX1K.c           |  4 ++--
- drivers/fpga/spartan2.c         | 24 ++++++++++++------------
- drivers/fpga/spartan3.c         | 24 ++++++++++++------------
- post/drivers/rtc.c              |  4 ++--
- 7 files changed, 33 insertions(+), 32 deletions(-)
+Simon Glass (3):
+  Fix code style for time functions
+  common: Drop time.h from common header
+  common: Drop linux/string.h from common header
 
-diff --git a/arch/powerpc/lib/interrupts.c b/arch/powerpc/lib/interrupts.c
-index df312dfa28ef..2add2ff95405 100644
---- a/arch/powerpc/lib/interrupts.c
-+++ b/arch/powerpc/lib/interrupts.c
-@@ -89,7 +89,7 @@ void timer_interrupt(struct pt_regs *regs)
- #endif /* CONFIG_LED_STATUS */
- }
- 
--ulong get_timer (ulong base)
-+ulong get_timer(ulong base)
- {
- 	return (timestamp - base);
- }
-diff --git a/arch/powerpc/lib/time.c b/arch/powerpc/lib/time.c
-index 8d6babfb83d6..d27432c23af8 100644
---- a/arch/powerpc/lib/time.c
-+++ b/arch/powerpc/lib/time.c
-@@ -39,8 +39,9 @@ unsigned long usec2ticks(unsigned long usec)
-  */
- void __udelay(unsigned long usec)
- {
--	ulong ticks = usec2ticks (usec);
--	wait_ticks (ticks);
-+	ulong ticks = usec2ticks(usec);
-+
-+	wait_ticks(ticks);
- }
- 
- /* ------------------------------------------------------------------------- */
-diff --git a/board/armltd/integrator/timer.c b/board/armltd/integrator/timer.c
-index 9db5135a8ffa..a2abfbfc7f3a 100644
---- a/board/armltd/integrator/timer.c
-+++ b/board/armltd/integrator/timer.c
-@@ -119,7 +119,7 @@ static ulong get_timer_masked (void)
- 	return timestamp;
- }
- 
--ulong get_timer (ulong base_ticks)
-+ulong get_timer(ulong base_ticks)
- {
- 	return get_timer_masked () - base_ticks;
- }
-diff --git a/drivers/fpga/ACEX1K.c b/drivers/fpga/ACEX1K.c
-index 4c00cdf0b57d..2e788c7a8ef5 100644
---- a/drivers/fpga/ACEX1K.c
-+++ b/drivers/fpga/ACEX1K.c
-@@ -135,10 +135,10 @@ static int ACEX1K_ps_load(Altera_desc *desc, const void *buf, size_t bsize)
- 		udelay(2);		/* T_cf2st1 < 4us	*/
- 
- 		/* Wait for nSTATUS to be released (i.e. deasserted) */
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		do {
- 			CFG_FPGA_DELAY ();
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for STATUS to go high.\n");
- 				(*fn->abort) (cookie);
- 				return FPGA_FAIL;
-diff --git a/drivers/fpga/spartan2.c b/drivers/fpga/spartan2.c
-index 6eef87b78e16..dd84e2e8cbb9 100644
---- a/drivers/fpga/spartan2.c
-+++ b/drivers/fpga/spartan2.c
-@@ -143,11 +143,11 @@ static int spartan2_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 		CFG_FPGA_DELAY ();
- 		(*fn->pgm) (false, true, cookie);	/* Deassert the program, commit */
- 
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		/* Now wait for INIT and BUSY to go high */
- 		do {
- 			CFG_FPGA_DELAY ();
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for INIT to clear.\n");
- 				(*fn->abort) (cookie);	/* abort the burn */
- 				return FPGA_FAIL;
-@@ -170,7 +170,7 @@ static int spartan2_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 			(*fn->clk) (true, true, cookie);	/* Assert the clock pin */
- 
- #ifdef CONFIG_SYS_FPGA_CHECK_BUSY
--			ts = get_timer (0);	/* get current time */
-+			ts = get_timer(0);	/* get current time */
- 			while ((*fn->busy) (cookie)) {
- 				/* XXX - we should have a check in here somewhere to
- 				 * make sure we aren't busy forever... */
-@@ -180,7 +180,7 @@ static int spartan2_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 				CFG_FPGA_DELAY ();
- 				(*fn->clk) (true, true, cookie);	/* Assert the clock pin */
- 
--				if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+				if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 					puts ("** Timeout waiting for BUSY to clear.\n");
- 					(*fn->abort) (cookie);	/* abort the burn */
- 					return FPGA_FAIL;
-@@ -203,7 +203,7 @@ static int spartan2_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- #endif
- 
- 		/* now check for done signal */
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		ret_val = FPGA_SUCCESS;
- 		while ((*fn->done) (cookie) == FPGA_FAIL) {
- 
-@@ -212,7 +212,7 @@ static int spartan2_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 			CFG_FPGA_DELAY ();
- 			(*fn->clk) (true, true, cookie);	/* Assert the clock pin */
- 
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for DONE to clear.\n");
- 				(*fn->abort) (cookie);	/* abort the burn */
- 				ret_val = FPGA_FAIL;
-@@ -328,10 +328,10 @@ static int spartan2_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 		(*fn->pgm) (true, true, cookie);	/* Assert the program, commit */
- 
- 		/* Wait for INIT state (init low)                            */
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		do {
- 			CFG_FPGA_DELAY ();
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for INIT to start.\n");
- 				return FPGA_FAIL;
- 			}
-@@ -341,11 +341,11 @@ static int spartan2_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 		CFG_FPGA_DELAY ();
- 		(*fn->pgm) (false, true, cookie);	/* Deassert the program, commit */
- 
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		/* Now wait for INIT to go high */
- 		do {
- 			CFG_FPGA_DELAY ();
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for INIT to clear.\n");
- 				return FPGA_FAIL;
- 			}
-@@ -389,7 +389,7 @@ static int spartan2_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
- #endif
- 
- 		/* now check for done signal */
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		ret_val = FPGA_SUCCESS;
- 		(*fn->wr) (true, true, cookie);
- 
-@@ -402,7 +402,7 @@ static int spartan2_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 
- 			putc ('*');
- 
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for DONE to clear.\n");
- 				ret_val = FPGA_FAIL;
- 				break;
-diff --git a/drivers/fpga/spartan3.c b/drivers/fpga/spartan3.c
-index e892fa571f19..95d4dd7d78b5 100644
---- a/drivers/fpga/spartan3.c
-+++ b/drivers/fpga/spartan3.c
-@@ -148,11 +148,11 @@ static int spartan3_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 		CFG_FPGA_DELAY ();
- 		(*fn->pgm) (false, true, cookie);	/* Deassert the program, commit */
- 
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		/* Now wait for INIT and BUSY to go high */
- 		do {
- 			CFG_FPGA_DELAY ();
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for INIT to clear.\n");
- 				(*fn->abort) (cookie);	/* abort the burn */
- 				return FPGA_FAIL;
-@@ -175,7 +175,7 @@ static int spartan3_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 			(*fn->clk) (true, true, cookie);	/* Assert the clock pin */
- 
- #ifdef CONFIG_SYS_FPGA_CHECK_BUSY
--			ts = get_timer (0);	/* get current time */
-+			ts = get_timer(0);	/* get current time */
- 			while ((*fn->busy) (cookie)) {
- 				/* XXX - we should have a check in here somewhere to
- 				 * make sure we aren't busy forever... */
-@@ -185,7 +185,7 @@ static int spartan3_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 				CFG_FPGA_DELAY ();
- 				(*fn->clk) (true, true, cookie);	/* Assert the clock pin */
- 
--				if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+				if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 					puts ("** Timeout waiting for BUSY to clear.\n");
- 					(*fn->abort) (cookie);	/* abort the burn */
- 					return FPGA_FAIL;
-@@ -208,7 +208,7 @@ static int spartan3_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- #endif
- 
- 		/* now check for done signal */
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		ret_val = FPGA_SUCCESS;
- 		while ((*fn->done) (cookie) == FPGA_FAIL) {
- 			/* XXX - we should have a check in here somewhere to
-@@ -219,7 +219,7 @@ static int spartan3_sp_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 			CFG_FPGA_DELAY ();
- 			(*fn->clk) (true, true, cookie);	/* Assert the clock pin */
- 
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for DONE to clear.\n");
- 				(*fn->abort) (cookie);	/* abort the burn */
- 				ret_val = FPGA_FAIL;
-@@ -335,10 +335,10 @@ static int spartan3_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 		(*fn->pgm) (true, true, cookie);	/* Assert the program, commit */
- 
- 		/* Wait for INIT state (init low)                            */
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		do {
- 			CFG_FPGA_DELAY ();
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for INIT to start.\n");
- 				if (*fn->abort)
- 					(*fn->abort) (cookie);
-@@ -350,11 +350,11 @@ static int spartan3_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 		CFG_FPGA_DELAY ();
- 		(*fn->pgm) (false, true, cookie);	/* Deassert the program, commit */
- 
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		/* Now wait for INIT to go high */
- 		do {
- 			CFG_FPGA_DELAY ();
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for INIT to clear.\n");
- 				if (*fn->abort)
- 					(*fn->abort) (cookie);
-@@ -406,7 +406,7 @@ static int spartan3_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
- #endif
- 
- 		/* now check for done signal */
--		ts = get_timer (0);		/* get current time */
-+		ts = get_timer(0);		/* get current time */
- 		ret_val = FPGA_SUCCESS;
- 		(*fn->wr) (true, true, cookie);
- 
-@@ -421,7 +421,7 @@ static int spartan3_ss_load(xilinx_desc *desc, const void *buf, size_t bsize)
- 
- 			putc ('*');
- 
--			if (get_timer (ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
-+			if (get_timer(ts) > CFG_SYS_FPGA_WAIT) {	/* check the time */
- 				puts ("** Timeout waiting for DONE to clear.\n");
- 				ret_val = FPGA_FAIL;
- 				break;
-diff --git a/post/drivers/rtc.c b/post/drivers/rtc.c
-index cc7a49847ccd..9eeb02794715 100644
---- a/post/drivers/rtc.c
-+++ b/post/drivers/rtc.c
-@@ -36,11 +36,11 @@ static int rtc_post_skip (ulong * diff)
- 	ulong start2;
- 
- 	rtc_get (&tm1);
--	start1 = get_timer (0);
-+	start1 = get_timer(0);
- 
- 	while (1) {
- 		rtc_get (&tm2);
--		start2 = get_timer (0);
-+		start2 = get_timer(0);
- 		if (tm1.tm_sec != tm2.tm_sec)
- 			break;
- 		if (start2 - start1 > 1500)
+ api/api.c                                     |  2 ++
+ api/api_net.c                                 |  1 +
+ arch/arc/lib/relocate.c                       |  1 +
+ arch/arm/cpu/arm926ejs/mxs/mxs.c              |  1 +
+ arch/arm/cpu/arm926ejs/mxs/spl_boot.c         |  1 +
+ arch/arm/cpu/armv7/bcm235xx/clk-bcm235xx.c    |  1 +
+ arch/arm/cpu/armv7/bcm235xx/clk-core.c        |  1 +
+ arch/arm/cpu/armv7/bcm281xx/clk-bcm281xx.c    |  1 +
+ arch/arm/cpu/armv7/bcm281xx/clk-core.c        |  1 +
+ arch/arm/cpu/armv7/ls102xa/fdt.c              |  1 +
+ arch/arm/cpu/armv7/vf610/generic.c            |  1 +
+ arch/arm/cpu/armv7/virt-v7.c                  |  1 +
+ arch/arm/cpu/armv8/cache_v8.c                 |  1 +
+ arch/arm/cpu/armv8/cpu.c                      |  1 +
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c       |  1 +
+ arch/arm/cpu/armv8/fsl-layerscape/fdt.c       |  1 +
+ .../armv8/fsl-layerscape/fsl_lsch2_serdes.c   |  1 +
+ .../armv8/fsl-layerscape/fsl_lsch3_serdes.c   |  1 +
+ .../arm/cpu/armv8/fsl-layerscape/ls1028_ids.c |  1 +
+ arch/arm/cpu/armv8/fsl-layerscape/mp.c        |  1 +
+ arch/arm/cpu/armv8/fsl-layerscape/spl.c       |  1 +
+ arch/arm/cpu/armv8/sec_firmware.c             |  1 +
+ arch/arm/cpu/armv8/spin_table.c               |  1 +
+ arch/arm/cpu/armv8/spl_data.c                 |  1 +
+ arch/arm/include/asm/arch-octeontx/soc.h      |  2 ++
+ arch/arm/include/asm/arch-octeontx2/soc.h     |  2 ++
+ arch/arm/include/asm/arch-tegra/timer.h       |  1 +
+ arch/arm/include/asm/io.h                     |  1 +
+ arch/arm/include/asm/string.h                 |  2 --
+ arch/arm/lib/bootm.c                          |  1 +
+ arch/arm/lib/cache.c                          |  1 +
+ arch/arm/lib/eabi_compat.c                    |  1 +
+ arch/arm/lib/gic-v3-its.c                     |  1 +
+ arch/arm/lib/psci-dt.c                        |  1 +
+ arch/arm/mach-apple/board.c                   |  1 +
+ arch/arm/mach-at91/arm920t/clock.c            |  1 +
+ arch/arm/mach-at91/arm926ejs/clock.c          |  1 +
+ arch/arm/mach-at91/clock.c                    |  1 +
+ arch/arm/mach-at91/phy.c                      |  1 +
+ arch/arm/mach-bcm283x/include/mach/mbox.h     |  1 +
+ arch/arm/mach-bcm283x/mbox.c                  |  1 +
+ arch/arm/mach-bcmstb/include/mach/timer.h     |  1 +
+ arch/arm/mach-exynos/clock.c                  |  1 +
+ arch/arm/mach-imx/cmd_bmode.c                 |  1 +
+ arch/arm/mach-imx/cmd_dek.c                   |  1 +
+ arch/arm/mach-imx/cmd_mfgprot.c               |  1 +
+ arch/arm/mach-imx/cmd_nandbcb.c               |  1 +
+ arch/arm/mach-imx/ele_ahab.c                  |  1 +
+ arch/arm/mach-imx/hab.c                       |  1 +
+ arch/arm/mach-imx/i2c-mxv7.c                  |  1 +
+ arch/arm/mach-imx/image-container.c           |  1 +
+ arch/arm/mach-imx/imx8/ahab.c                 |  1 +
+ arch/arm/mach-imx/imx8/cpu.c                  |  1 +
+ arch/arm/mach-imx/imx8/fdt.c                  |  1 +
+ arch/arm/mach-imx/imx8m/soc.c                 |  1 +
+ arch/arm/mach-imx/imx8ulp/soc.c               |  1 +
+ arch/arm/mach-imx/imx8ulp/upower/upower_api.c |  1 +
+ arch/arm/mach-imx/imx9/soc.c                  |  1 +
+ arch/arm/mach-imx/imx_bootaux.c               |  1 +
+ arch/arm/mach-imx/mx5/clock.c                 |  1 +
+ arch/arm/mach-imx/mx6/clock.c                 |  1 +
+ arch/arm/mach-imx/mx6/module_fuse.c           |  1 +
+ arch/arm/mach-imx/mx7/clock.c                 |  1 +
+ arch/arm/mach-imx/spl_imx_romapi.c            |  1 +
+ arch/arm/mach-imx/video.c                     |  1 +
+ arch/arm/mach-k3/am625_init.c                 |  1 +
+ arch/arm/mach-k3/am62a7_init.c                |  1 +
+ arch/arm/mach-k3/am642_init.c                 |  1 +
+ arch/arm/mach-k3/common.c                     |  1 +
+ arch/arm/mach-k3/j721e_init.c                 |  1 +
+ arch/arm/mach-k3/j721s2_init.c                |  1 +
+ arch/arm/mach-k3/sysfw-loader.c               |  1 +
+ arch/arm/mach-keystone/cmd_clock.c            |  1 +
+ arch/arm/mach-keystone/cmd_mon.c              |  1 +
+ arch/arm/mach-keystone/ddr3_spd.c             |  1 +
+ .../arm/mach-keystone/include/mach/hardware.h |  2 ++
+ arch/arm/mach-keystone/mon.c                  |  1 +
+ arch/arm/mach-meson/sm.c                      |  1 +
+ arch/arm/mach-mvebu/armada3700/cpu.c          |  1 +
+ .../serdes/axp/high_speed_env_lib.c           |  1 +
+ arch/arm/mach-nexell/clock.c                  |  1 +
+ arch/arm/mach-nexell/timer.c                  |  1 +
+ arch/arm/mach-omap2/emif-common.c             |  1 +
+ arch/arm/mach-omap2/omap3/am35x_musb.c        |  1 +
+ arch/arm/mach-omap2/omap3/board.c             |  1 +
+ arch/arm/mach-omap2/sec-common.c              |  1 +
+ arch/arm/mach-rockchip/board.c                |  1 +
+ arch/arm/mach-rockchip/boot_mode.c            |  1 +
+ arch/arm/mach-rockchip/misc.c                 |  1 +
+ arch/arm/mach-rockchip/spl-boot-order.c       |  1 +
+ arch/arm/mach-snapdragon/init_sdm845.c        |  1 +
+ arch/arm/mach-socfpga/clock_manager_arria10.c |  1 +
+ arch/arm/mach-socfpga/misc_arria10.c          |  1 +
+ arch/arm/mach-socfpga/pinmux_arria10.c        |  1 +
+ arch/arm/mach-socfpga/secure_vab.c            |  1 +
+ arch/arm/mach-socfpga/smc_api.c               |  1 +
+ arch/arm/mach-stm32mp/bsec.c                  |  1 +
+ arch/arm/mach-stm32mp/cmd_stm32key.c          |  1 +
+ .../cmd_stm32prog/cmd_stm32prog.c             |  1 +
+ .../mach-stm32mp/cmd_stm32prog/stm32prog.c    |  1 +
+ .../cmd_stm32prog/stm32prog_serial.c          |  2 ++
+ .../cmd_stm32prog/stm32prog_usb.c             |  1 +
+ arch/arm/mach-stm32mp/ecdsa_romapi.c          |  1 +
+ arch/arm/mach-stm32mp/fdt.c                   |  1 +
+ arch/arm/mach-stm32mp/pwr_regulator.c         |  1 +
+ arch/arm/mach-sunxi/board.c                   |  1 +
+ arch/arm/mach-tegra/cboot.c                   |  1 +
+ arch/arm/mach-tegra/dt-setup.c                |  1 +
+ arch/arm/mach-tegra/powergate.c               |  1 +
+ arch/arm/mach-tegra/tegra124/xusb-padctl.c    |  1 +
+ arch/arm/mach-tegra/tegra20/bct.c             |  1 +
+ arch/arm/mach-tegra/tegra20/emc.c             |  1 +
+ arch/arm/mach-tegra/tegra20/warmboot.c        |  1 +
+ arch/arm/mach-tegra/tegra210/clock.c          |  1 +
+ arch/arm/mach-tegra/tegra210/xusb-padctl.c    |  1 +
+ arch/arm/mach-tegra/tegra30/bct.c             |  1 +
+ arch/arm/mach-tegra/xusb-padctl-common.c      |  1 +
+ arch/arm/mach-uniphier/base-address.c         |  1 +
+ arch/arm/mach-uniphier/board_late_init.c      |  1 +
+ arch/arm/mach-uniphier/dram/cmd_ddrmphy.c     |  1 +
+ arch/arm/mach-uniphier/dram/cmd_ddrphy.c      |  1 +
+ arch/arm/mach-versal/mp.c                     |  1 +
+ arch/arm/mach-zynq/ddrc.c                     |  1 +
+ arch/arm/mach-zynq/slcr.c                     |  1 +
+ arch/arm/mach-zynqmp/cpu.c                    |  1 +
+ arch/arm/mach-zynqmp/mp.c                     |  1 +
+ arch/microblaze/cpu/cpuinfo.c                 |  1 +
+ arch/microblaze/include/asm/io.h              |  1 +
+ arch/mips/include/asm/io.h                    |  1 +
+ arch/mips/lib/bootm.c                         |  1 +
+ arch/mips/lib/reloc.c                         |  1 +
+ arch/mips/lib/traps.c                         |  1 +
+ arch/mips/mach-jz47xx/jz4780/jz4780.c         |  1 +
+ arch/mips/mach-mtmips/cpu.c                   |  1 +
+ arch/mips/mach-mtmips/mt7620/init.c           |  1 +
+ arch/mips/mach-mtmips/mt7621/init.c           |  1 +
+ arch/mips/mach-mtmips/mt7621/spl/launch.c     |  1 +
+ arch/mips/mach-mtmips/mt7628/init.c           |  1 +
+ arch/mips/mach-octeon/bootoctlinux.c          |  1 +
+ arch/mips/mach-octeon/clock.c                 |  1 +
+ arch/mips/mach-octeon/cpu.c                   |  1 +
+ arch/mips/mach-octeon/cvmx-bootmem.c          |  1 +
+ arch/mips/mach-octeon/cvmx-cmd-queue.c        |  1 +
+ arch/mips/mach-octeon/cvmx-coremask.c         |  1 +
+ arch/mips/mach-octeon/cvmx-fau-compat.c       |  1 +
+ arch/mips/mach-octeon/cvmx-fpa.c              |  1 +
+ arch/mips/mach-octeon/cvmx-helper-bgx.c       |  1 +
+ arch/mips/mach-octeon/cvmx-helper-board.c     |  1 +
+ arch/mips/mach-octeon/cvmx-helper-cfg.c       |  1 +
+ arch/mips/mach-octeon/cvmx-helper-ilk.c       |  1 +
+ arch/mips/mach-octeon/cvmx-helper-pki.c       |  1 +
+ arch/mips/mach-octeon/cvmx-helper-rgmii.c     |  1 +
+ arch/mips/mach-octeon/cvmx-helper-sfp.c       |  1 +
+ arch/mips/mach-octeon/cvmx-helper-util.c      |  1 +
+ arch/mips/mach-octeon/cvmx-pcie.c             |  2 ++
+ arch/mips/mach-octeon/cvmx-pko3-compat.c      |  1 +
+ arch/mips/mach-octeon/cvmx-pko3-queue.c       |  1 +
+ arch/mips/mach-octeon/cvmx-pko3.c             |  1 +
+ arch/mips/mach-octeon/cvmx-qlm.c              |  1 +
+ .../mach-octeon/include/mach/cvmx-coremask.h  |  1 +
+ .../mips/mach-octeon/include/mach/cvmx-mdio.h |  1 +
+ .../mips/mach-octeon/include/mach/cvmx-pko3.h |  1 +
+ .../mips/mach-octeon/include/mach/cvmx-regs.h |  1 +
+ arch/mips/mach-octeon/include/mach/cvmx-wqe.h |  1 +
+ arch/mips/mach-octeon/octeon_fdt.c            |  1 +
+ arch/mips/mach-octeon/octeon_qlm.c            |  1 +
+ arch/nios2/cpu/cpu.c                          |  1 +
+ arch/nios2/include/asm/io.h                   |  1 +
+ arch/powerpc/cpu/mpc83xx/ecc.c                |  1 +
+ arch/powerpc/cpu/mpc85xx/cpu_init.c           |  1 +
+ arch/powerpc/cpu/mpc85xx/fdt.c                |  1 +
+ .../powerpc/cpu/mpc85xx/fsl_corenet2_serdes.c |  1 +
+ arch/powerpc/cpu/mpc85xx/liodn.c              |  1 +
+ arch/powerpc/cpu/mpc85xx/mp.c                 |  1 +
+ arch/powerpc/cpu/mpc85xx/portals.c            |  1 +
+ arch/powerpc/cpu/mpc8xxx/fsl_pamu.c           |  1 +
+ arch/powerpc/include/asm/io.h                 |  1 +
+ arch/powerpc/lib/interrupts.c                 |  3 ++-
+ arch/powerpc/lib/time.c                       |  5 ++--
+ arch/riscv/include/asm/io.h                   |  1 +
+ arch/riscv/include/asm/posix_types.h          |  2 ++
+ arch/riscv/lib/andes_plicsw.c                 |  1 +
+ arch/riscv/lib/fdt_fixup.c                    |  1 +
+ arch/sandbox/cpu/cpu.c                        |  1 +
+ arch/sandbox/cpu/eth-raw-os.c                 |  1 +
+ arch/sandbox/cpu/os.c                         |  1 +
+ arch/sandbox/cpu/sdl.c                        |  1 +
+ arch/sandbox/cpu/spl.c                        |  1 +
+ arch/sandbox/cpu/start.c                      |  1 +
+ arch/sandbox/cpu/state.c                      |  1 +
+ arch/sandbox/lib/bootm.c                      |  1 +
+ arch/sh/lib/board.c                           |  1 +
+ arch/sh/lib/bootm.c                           |  1 +
+ arch/sh/lib/zimageboot.c                      |  1 +
+ arch/x86/cpu/acpi_gpe.c                       |  2 ++
+ arch/x86/cpu/apollolake/acpi.c                |  1 +
+ arch/x86/cpu/apollolake/fsp_bindings.c        |  1 +
+ arch/x86/cpu/apollolake/pmc.c                 |  1 +
+ arch/x86/cpu/apollolake/punit.c               |  1 +
+ arch/x86/cpu/apollolake/spl.c                 |  1 +
+ arch/x86/cpu/apollolake/uart.c                |  1 +
+ arch/x86/cpu/baytrail/acpi.c                  |  1 +
+ arch/x86/cpu/broadwell/me.c                   |  1 +
+ arch/x86/cpu/broadwell/northbridge.c          |  1 +
+ arch/x86/cpu/broadwell/pinctrl_broadwell.c    |  1 +
+ arch/x86/cpu/broadwell/refcode.c              |  1 +
+ arch/x86/cpu/broadwell/sdram.c                |  1 +
+ arch/x86/cpu/cpu_x86.c                        |  1 +
+ arch/x86/cpu/efi/payload.c                    |  1 +
+ arch/x86/cpu/i386/cpu.c                       |  1 +
+ arch/x86/cpu/intel_common/intel_opregion.c    |  1 +
+ arch/x86/cpu/intel_common/itss.c              |  1 +
+ arch/x86/cpu/intel_common/mrc.c               |  1 +
+ arch/x86/cpu/intel_common/report_platform.c   |  1 +
+ arch/x86/cpu/ivybridge/sata.c                 |  1 +
+ arch/x86/cpu/ivybridge/sdram.c                |  1 +
+ arch/x86/cpu/mp_init.c                        |  2 ++
+ arch/x86/cpu/mtrr.c                           |  1 +
+ arch/x86/cpu/qfw_cpu.c                        |  1 +
+ arch/x86/cpu/quark/acpi.c                     |  1 +
+ arch/x86/cpu/quark/dram.c                     |  1 +
+ arch/x86/cpu/quark/smc.c                      |  1 +
+ arch/x86/cpu/tangier/acpi.c                   |  1 +
+ arch/x86/cpu/tangier/sdram.c                  |  1 +
+ arch/x86/include/asm/io.h                     |  1 +
+ arch/x86/include/asm/me_common.h              |  1 +
+ arch/x86/lib/acpi.c                           |  1 +
+ arch/x86/lib/acpi_nhlt.c                      |  1 +
+ arch/x86/lib/acpi_s3.c                        |  1 +
+ arch/x86/lib/acpi_table.c                     |  1 +
+ arch/x86/lib/bios.c                           |  1 +
+ arch/x86/lib/cmd_boot.c                       |  1 +
+ arch/x86/lib/coreboot_table.c                 |  1 +
+ arch/x86/lib/fsp1/fsp_support.c               |  1 +
+ arch/x86/lib/fsp2/fsp_meminit.c               |  1 +
+ arch/x86/lib/fsp2/fsp_silicon_init.c          |  1 +
+ arch/x86/lib/fsp2/fsp_support.c               |  1 +
+ arch/x86/lib/mpspec.c                         |  1 +
+ arch/x86/lib/mrccache.c                       |  1 +
+ arch/x86/lib/physmem.c                        |  1 +
+ arch/x86/lib/pirq_routing.c                   |  1 +
+ arch/x86/lib/relocate.c                       |  1 +
+ arch/x86/lib/scu.c                            |  1 +
+ arch/x86/lib/sfi.c                            |  1 +
+ arch/x86/lib/spl.c                            |  1 +
+ arch/x86/lib/string.c                         |  1 +
+ arch/x86/lib/tables.c                         |  1 +
+ arch/x86/lib/zimage.c                         |  1 +
+ arch/xtensa/include/asm/io.h                  |  1 +
+ arch/xtensa/include/asm/posix_types.h         |  2 ++
+ arch/xtensa/lib/bootm.c                       |  1 +
+ arch/xtensa/lib/relocate.c                    |  1 +
+ board/BuR/common/common.c                     |  1 +
+ board/BuS/eb_cpu5282/eb_cpu5282.c             |  1 +
+ board/CZ.NIC/turris_atsha_otp.c               |  1 +
+ board/CZ.NIC/turris_omnia/turris_omnia.c      |  1 +
+ board/Marvell/mvebu_armada-37xx/board.c       |  1 +
+ board/Marvell/octeon_ebb7304/board.c          |  1 +
+ board/Marvell/octeontx/board-fdt.c            |  1 +
+ board/Marvell/octeontx/board.c                |  1 +
+ board/Marvell/octeontx/soc-utils.c            |  1 +
+ board/Marvell/octeontx2/board-fdt.c           |  1 +
+ board/Marvell/octeontx2/board.c               |  1 +
+ board/Marvell/octeontx2/soc-utils.c           |  1 +
+ board/Synology/common/legacy.c                |  1 +
+ board/Synology/ds414/cmd_syno.c               |  1 +
+ board/advantech/imx8qm_dmsse20_a1/spl.c       |  1 +
+ board/advantech/imx8qm_rom7720_a1/spl.c       |  1 +
+ board/amlogic/vim3/vim3.c                     |  1 +
+ board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c    |  1 +
+ board/aristainetos/aristainetos.c             |  1 +
+ board/armltd/integrator/timer.c               |  2 +-
+ board/armltd/vexpress64/vexpress64.c          |  1 +
+ board/astro/mcf5373l/mcf5373l.c               |  1 +
+ board/atmel/common/mac-spi-nor.c              |  1 +
+ board/atmel/common/video_display.c            |  1 +
+ board/atmel/sama5d3xek/sama5d3xek.c           |  1 +
+ board/beacon/beacon-rzg2m/beacon-rzg2m.c      |  1 +
+ board/beacon/imx8mm/spl.c                     |  1 +
+ board/beacon/imx8mn/spl.c                     |  1 +
+ board/beckhoff/mx53cx9020/mx53cx9020.c        |  1 +
+ board/bluewater/gurnard/gurnard.c             |  1 +
+ board/bosch/acc/acc.c                         |  1 +
+ board/boundary/nitrogen6x/nitrogen6x.c        |  1 +
+ board/bsh/imx8mn_smm_s2/spl.c                 |  1 +
+ board/cavium/thunderx/atf.c                   |  1 +
+ board/cloos/imx8mm_phg/spl.c                  |  1 +
+ board/cobra5272/flash.c                       |  1 +
+ board/compulab/cl-som-imx7/spl.c              |  1 +
+ board/compulab/cm_fx6/cm_fx6.c                |  1 +
+ board/compulab/common/eeprom.c                |  1 +
+ board/compulab/imx8mm-cl-iot-gate/spl.c       |  1 +
+ board/congatec/cgtqmx8/cgtqmx8.c              |  1 +
+ board/congatec/cgtqmx8/spl.c                  |  1 +
+ board/congatec/common/mmc.c                   |  1 +
+ board/cssi/cmpc885/cmpc885.c                  |  1 +
+ board/cssi/cmpcpro/cmpcpro.c                  |  1 +
+ board/data_modul/common/common.c              |  1 +
+ board/davinci/da8xxevm/da850evm.c             |  1 +
+ board/davinci/da8xxevm/omapl138_lcdk.c        |  1 +
+ board/dhelectronics/dh_imx6/dh_imx6.c         |  1 +
+ board/dhelectronics/dh_imx6/dh_imx6_spl.c     |  1 +
+ .../dh_imx8mp/imx8mp_dhcom_pdk2.c             |  1 +
+ board/dhelectronics/dh_imx8mp/spl.c           |  1 +
+ board/dhelectronics/dh_stm32mp1/board.c       |  1 +
+ board/ea/mx7ulp_com/mx7ulp_com.c              |  1 +
+ board/egnite/ethernut5/ethernut5_pwrman.c     |  1 +
+ board/emulation/common/qemu_dfu.c             |  1 +
+ board/emulation/qemu-ppce500/qemu-ppce500.c   |  1 +
+ board/engicam/common/board.c                  |  1 +
+ board/engicam/common/spl.c                    |  1 +
+ board/engicam/imx8mm/spl.c                    |  1 +
+ board/esd/meesc/meesc.c                       |  1 +
+ board/firefly/roc-pc-rk3399/roc-pc-rk3399.c   |  1 +
+ board/freescale/common/fsl_validate.c         |  1 +
+ board/freescale/common/mmc.c                  |  1 +
+ board/freescale/common/ngpixis.c              |  1 +
+ board/freescale/common/qixis.c                |  1 +
+ board/freescale/common/sys_eeprom.c           |  1 +
+ board/freescale/imx8mm_evk/spl.c              |  1 +
+ board/freescale/imx8mn_evk/spl.c              |  1 +
+ board/freescale/imx8mq_evk/spl.c              |  1 +
+ board/freescale/imx8qm_mek/imx8qm_mek.c       |  1 +
+ board/freescale/imx8qm_mek/spl.c              |  1 +
+ board/freescale/imx8qxp_mek/imx8qxp_mek.c     |  1 +
+ board/freescale/imx8qxp_mek/spl.c             |  1 +
+ board/freescale/imx8ulp_evk/imx8ulp_evk.c     |  1 +
+ board/freescale/imx8ulp_evk/spl.c             |  1 +
+ board/freescale/imx93_evk/spl.c               |  1 +
+ board/freescale/ls1012aqds/ls1012aqds.c       |  1 +
+ board/freescale/ls1012ardb/ls1012ardb.c       |  1 +
+ board/freescale/ls1021aiot/ls1021aiot.c       |  1 +
+ board/freescale/ls1021aqds/ddr.c              |  1 +
+ board/freescale/ls1021aqds/ls1021aqds.c       |  1 +
+ board/freescale/ls1021atsn/ls1021atsn.c       |  1 +
+ board/freescale/ls1021atwr/ls1021atwr.c       |  1 +
+ board/freescale/ls1043aqds/eth.c              |  1 +
+ board/freescale/ls1043ardb/cpld.c             |  1 +
+ board/freescale/ls1043ardb/ddr.c              |  1 +
+ board/freescale/ls1046afrwy/eth.c             |  1 +
+ board/freescale/ls1046ardb/cpld.c             |  1 +
+ board/freescale/ls1046ardb/eth.c              |  1 +
+ board/freescale/ls1088a/eth_ls1088aqds.c      |  1 +
+ board/freescale/ls1088a/ls1088a.c             |  1 +
+ board/freescale/ls2080aqds/eth.c              |  1 +
+ board/freescale/ls2080aqds/ls2080aqds.c       |  1 +
+ board/freescale/lx2160a/eth_lx2160aqds.c      |  1 +
+ board/freescale/lx2160a/eth_lx2162aqds.c      |  1 +
+ board/freescale/lx2160a/lx2160a.c             |  1 +
+ board/freescale/m5253demo/flash.c             |  1 +
+ board/freescale/mx6memcal/spl.c               |  1 +
+ board/freescale/mx6sabreauto/mx6sabreauto.c   |  1 +
+ board/freescale/mx6sabresd/mx6sabresd.c       |  1 +
+ board/freescale/mx6slevk/mx6slevk.c           |  1 +
+ .../mx6ul_14x14_evk/mx6ul_14x14_evk.c         |  1 +
+ board/freescale/p1010rdb/ddr.c                |  1 +
+ board/freescale/p1010rdb/p1010rdb.c           |  1 +
+ board/freescale/p1010rdb/spl.c                |  1 +
+ board/freescale/p1_p2_rdb_pc/ddr.c            |  1 +
+ board/freescale/p1_p2_rdb_pc/spl.c            |  1 +
+ board/freescale/p2041rdb/cpld.c               |  1 +
+ board/freescale/t102xrdb/cpld.c               |  1 +
+ board/freescale/t102xrdb/ddr.c                |  1 +
+ board/freescale/t102xrdb/spl.c                |  1 +
+ board/freescale/t102xrdb/t102xrdb.c           |  1 +
+ board/freescale/t104xrdb/cpld.c               |  1 +
+ board/freescale/t104xrdb/spl.c                |  1 +
+ board/freescale/t208xqds/eth_t208xqds.c       |  1 +
+ board/freescale/t208xqds/spl.c                |  1 +
+ board/freescale/t208xrdb/cpld.c               |  1 +
+ board/freescale/t208xrdb/spl.c                |  1 +
+ board/freescale/t4rdb/cpld.c                  |  1 +
+ board/freescale/t4rdb/spl.c                   |  1 +
+ board/friendlyarm/nanopi2/board.c             |  1 +
+ board/friendlyarm/nanopi2/lcds.c              |  1 +
+ board/gardena/smart-gateway-mt7688/board.c    |  1 +
+ board/gateworks/gw_ventana/eeprom.c           |  1 +
+ board/gateworks/gw_ventana/gw_ventana.c       |  1 +
+ board/gateworks/venice/eeprom.c               |  1 +
+ board/gateworks/venice/spl.c                  |  1 +
+ board/gateworks/venice/venice.c               |  1 +
+ board/gdsys/a38x/hre.c                        |  1 +
+ board/gdsys/a38x/ihs_phys.c                   |  1 +
+ board/gdsys/a38x/keyprogram.c                 |  1 +
+ board/gdsys/common/cmd_ioloop.c               |  1 +
+ board/gdsys/common/ihs_mdio.c                 |  1 +
+ board/gdsys/common/ioep-fpga.c                |  1 +
+ board/gdsys/common/osd.c                      |  1 +
+ board/gdsys/common/osd_cmd.c                  |  1 +
+ board/ge/b1x5v2/b1x5v2.c                      |  1 +
+ board/ge/b1x5v2/spl.c                         |  1 +
+ board/ge/bx50v3/bx50v3.c                      |  1 +
+ board/ge/mx53ppd/mx53ppd.c                    |  1 +
+ board/google/chameleonv3/mercury_aa1.c        |  1 +
+ board/google/imx8mq_phanbell/spl.c            |  1 +
+ board/grinn/liteboard/board.c                 |  1 +
+ board/hoperun/hihope-rzg2/hihope-rzg2.c       |  1 +
+ board/imgtec/malta/malta.c                    |  1 +
+ board/isee/igep00x0/igep00x0.c                |  1 +
+ board/k+p/kp_imx53/kp_id_rev.c                |  1 +
+ board/k+p/kp_imx6q_tpc/kp_imx6q_tpc_spl.c     |  1 +
+ board/keymile/common/common.c                 |  1 +
+ board/keymile/common/ivm.c                    |  1 +
+ board/keymile/kmcent2/kmcent2.c               |  1 +
+ board/kontron/pitx_imx8m/spl.c                |  1 +
+ board/kontron/sl-mx6ul/spl.c                  |  1 +
+ board/kontron/sl-mx8mm/spl.c                  |  1 +
+ board/kontron/sl28/spl.c                      |  1 +
+ board/kosagi/novena/novena.c                  |  1 +
+ board/liebherr/display5/display5.c            |  1 +
+ board/liebherr/display5/spl.c                 |  1 +
+ board/liebherr/mccmon6/spl.c                  |  1 +
+ board/mediatek/mt7623/mt7623_rfb.c            |  1 +
+ board/menlo/m53menlo/m53menlo.c               |  1 +
+ board/mntre/imx8mq_reform2/spl.c              |  1 +
+ board/mscc/jr2/jr2.c                          |  1 +
+ board/mscc/luton/luton.c                      |  1 +
+ board/mscc/ocelot/ocelot.c                    |  1 +
+ board/mscc/serval/serval.c                    |  1 +
+ board/mscc/servalt/servalt.c                  |  1 +
+ board/nokia/rx51/rx51.c                       |  2 ++
+ board/phytec/pcm058/pcm058.c                  |  1 +
+ board/phytec/phycore_imx8mm/spl.c             |  1 +
+ board/phytium/pomelo/pcie.c                   |  1 +
+ board/phytium/pomelo/pll.c                    |  1 +
+ board/phytium/pomelo/sec.c                    |  1 +
+ .../dragonboard410c/dragonboard410c.c         |  1 +
+ board/renesas/salvator-x/salvator-x.c         |  1 +
+ board/renesas/stout/cpld.c                    |  1 +
+ board/renesas/ulcb/cpld.c                     |  1 +
+ board/renesas/ulcb/ulcb.c                     |  1 +
+ board/renesas/v3hsk/cpld.c                    |  1 +
+ board/renesas/v3msk/cpld.c                    |  1 +
+ board/ronetix/imx7-cm/spl.c                   |  1 +
+ board/ronetix/imx8mq-cm/spl.c                 |  1 +
+ board/samsung/common/gadget.c                 |  1 +
+ board/samsung/origen/tools/mkorigenspl.c      |  1 +
+ board/samsung/smdkv310/tools/mksmdkv310spl.c  |  1 +
+ board/sandbox/sandbox.c                       |  1 +
+ board/siemens/capricorn/board.c               |  1 +
+ board/siemens/capricorn/spl.c                 |  1 +
+ board/siemens/common/board.c                  |  1 +
+ board/siemens/common/factoryset.c             |  1 +
+ board/siemens/iot2050/board.c                 |  1 +
+ board/siemens/pxm2/board.c                    |  1 +
+ board/siemens/rut/board.c                     |  1 +
+ .../unmatched/hifive-platform-i2c-eeprom.c    |  1 +
+ board/socionext/developerbox/fwu_plat.c       |  1 +
+ board/softing/vining_2000/vining_2000.c       |  1 +
+ board/softing/vining_fpga/socfpga.c           |  1 +
+ board/solidrun/clearfog/clearfog.c            |  1 +
+ board/solidrun/common/tlv_data.c              |  1 +
+ board/solidrun/mx6cuboxi/mx6cuboxi.c          |  1 +
+ board/st/common/cmd_stboard.c                 |  1 +
+ board/st/common/stm32mp_dfu.c                 |  1 +
+ board/st/stm32mp1/stm32mp1.c                  |  1 +
+ .../visionfive2/visionfive2-i2c-eeprom.c      |  1 +
+ board/ste/stemmy/stemmy.c                     |  1 +
+ board/sunxi/board.c                           |  1 +
+ board/sunxi/chip.c                            |  1 +
+ board/synopsys/emsdp/emsdp.c                  |  1 +
+ board/synopsys/hsdk/hsdk.c                    |  1 +
+ board/technexion/pico-imx6/spl.c              |  1 +
+ board/technexion/pico-imx6ul/spl.c            |  1 +
+ board/technexion/pico-imx7d/spl.c             |  1 +
+ board/technexion/pico-imx8mq/spl.c            |  1 +
+ board/theadorable/fpga.c                      |  2 ++
+ board/theadorable/theadorable.c               |  1 +
+ .../puma_rk3399/puma-rk3399.c                 |  1 +
+ .../ringneck_px30/ringneck-px30.c             |  1 +
+ board/ti/am335x/board.c                       |  1 +
+ board/ti/am335x/board.h                       |  1 +
+ board/ti/am43xx/board.c                       |  1 +
+ board/ti/am43xx/board.h                       |  1 +
+ board/ti/am57xx/board.c                       |  1 +
+ board/ti/am64x/evm.c                          |  1 +
+ board/ti/am65x/evm.c                          |  1 +
+ board/ti/beagle/beagle.c                      |  1 +
+ board/ti/common/board_detect.c                |  1 +
+ board/ti/common/cape_detect.c                 |  1 +
+ board/ti/j721e/evm.c                          |  1 +
+ board/ti/j721s2/evm.c                         |  1 +
+ board/ti/ks2_evm/board.c                      |  1 +
+ board/ti/ks2_evm/board_k2e.c                  |  1 +
+ board/ti/ks2_evm/board_k2g.c                  |  1 +
+ board/ti/ks2_evm/board_k2hk.c                 |  1 +
+ board/ti/ks2_evm/board_k2l.c                  |  1 +
+ board/ti/sdp4430/cmd_bat.c                    |  1 +
+ board/toradex/apalis-tk1/apalis-tk1.c         |  1 +
+ board/toradex/apalis_imx6/apalis_imx6.c       |  1 +
+ board/toradex/apalis_imx6/do_fuse.c           |  1 +
+ board/toradex/colibri_imx6/colibri_imx6.c     |  1 +
+ board/toradex/colibri_imx6/do_fuse.c          |  1 +
+ board/toradex/common/tdx-cfg-block.c          |  1 +
+ board/toradex/common/tdx-common.c             |  1 +
+ board/toradex/verdin-am62/verdin-am62.c       |  1 +
+ board/toradex/verdin-imx8mm/spl.c             |  1 +
+ board/toradex/verdin-imx8mm/verdin-imx8mm.c   |  1 +
+ board/toradex/verdin-imx8mp/verdin-imx8mp.c   |  1 +
+ board/traverse/common/ten64_controller.c      |  1 +
+ board/traverse/ten64/ten64.c                  |  1 +
+ board/udoo/neo/neo.c                          |  1 +
+ board/variscite/dart_6ul/spl.c                |  1 +
+ .../variscite/imx8mn_var_som/imx8mn_var_som.c |  1 +
+ board/variscite/imx8mn_var_som/spl.c          |  1 +
+ board/vscom/baltos/board.c                    |  1 +
+ board/wandboard/wandboard.c                   |  1 +
+ .../work_92105/work_92105_display.c           |  1 +
+ board/xilinx/common/board.c                   |  1 +
+ board/xilinx/common/fru_ops.c                 |  1 +
+ board/xilinx/versal-net/board.c               |  1 +
+ board/xilinx/versal-net/cmds.c                |  1 +
+ board/xilinx/versal/board.c                   |  1 +
+ board/xilinx/versal/cmds.c                    |  1 +
+ board/xilinx/zynq/board.c                     |  1 +
+ board/xilinx/zynq/bootimg.c                   |  1 +
+ board/xilinx/zynq/cmds.c                      |  1 +
+ board/xilinx/zynqmp/cmds.c                    |  1 +
+ board/xilinx/zynqmp/zynqmp.c                  |  1 +
+ boot/android_ab.c                             |  1 +
+ boot/bootdev-uclass.c                         |  1 +
+ boot/bootflow.c                               |  1 +
+ boot/bootflow_menu.c                          |  1 +
+ boot/bootm.c                                  |  1 +
+ boot/bootm_os.c                               |  1 +
+ boot/bootmeth-uclass.c                        |  1 +
+ boot/bootmeth_cros.c                          |  1 +
+ boot/bootmeth_efi.c                           |  1 +
+ boot/bootmeth_extlinux.c                      |  1 +
+ boot/bootmeth_pxe.c                           |  1 +
+ boot/bootmeth_qfw.c                           |  1 +
+ boot/bootmeth_script.c                        |  1 +
+ boot/bootstd-uclass.c                         |  1 +
+ boot/common_fit.c                             |  1 +
+ boot/expo.c                                   |  1 +
+ boot/expo_build.c                             |  1 +
+ boot/fdt_region.c                             |  1 +
+ boot/fdt_support.c                            |  1 +
+ boot/image-android.c                          |  1 +
+ boot/image-board.c                            |  1 +
+ boot/image-cipher.c                           |  1 +
+ boot/image-fdt.c                              |  1 +
+ boot/image-fit-sig.c                          |  1 +
+ boot/image-fit.c                              |  1 +
+ boot/image-host.c                             |  1 +
+ boot/image-pre-load.c                         |  1 +
+ boot/image-sig.c                              |  1 +
+ boot/image.c                                  |  1 +
+ boot/scene.c                                  |  1 +
+ boot/scene_menu.c                             |  1 +
+ boot/vbe.c                                    |  1 +
+ boot/vbe_request.c                            |  1 +
+ boot/vbe_simple.c                             |  1 +
+ boot/vbe_simple_fw.c                          |  1 +
+ boot/vbe_simple_os.c                          |  1 +
+ cmd/2048.c                                    |  1 +
+ cmd/ab_select.c                               |  1 +
+ cmd/abootimg.c                                |  1 +
+ cmd/acpi.c                                    |  1 +
+ cmd/adtimg.c                                  |  1 +
+ cmd/aes.c                                     |  1 +
+ cmd/armflash.c                                |  1 +
+ cmd/avb.c                                     |  1 +
+ cmd/bcb.c                                     |  1 +
+ cmd/bdinfo.c                                  |  1 +
+ cmd/binop.c                                   |  1 +
+ cmd/blk_common.c                              |  1 +
+ cmd/blkmap.c                                  |  1 +
+ cmd/blob.c                                    |  1 +
+ cmd/bmp.c                                     |  1 +
+ cmd/bootdev.c                                 |  1 +
+ cmd/bootefi.c                                 |  1 +
+ cmd/bootflow.c                                |  1 +
+ cmd/booti.c                                   |  1 +
+ cmd/bootmeth.c                                |  1 +
+ cmd/bootstage.c                               |  1 +
+ cmd/button.c                                  |  1 +
+ cmd/cache.c                                   |  1 +
+ cmd/cedit.c                                   |  1 +
+ cmd/clone.c                                   |  1 +
+ cmd/cros_ec.c                                 |  1 +
+ cmd/cyclic.c                                  |  1 +
+ cmd/date.c                                    |  1 +
+ cmd/dfu.c                                     |  1 +
+ cmd/dm.c                                      |  1 +
+ cmd/echo.c                                    |  1 +
+ cmd/eeprom.c                                  |  1 +
+ cmd/efi.c                                     |  1 +
+ cmd/eficonfig.c                               |  1 +
+ cmd/eficonfig_sbkey.c                         |  1 +
+ cmd/efidebug.c                                |  1 +
+ cmd/elf.c                                     |  1 +
+ cmd/ethsw.c                                   |  1 +
+ cmd/extension_board.c                         |  1 +
+ cmd/fastboot.c                                |  1 +
+ cmd/fdt.c                                     |  1 +
+ cmd/flash.c                                   |  1 +
+ cmd/fpga.c                                    |  1 +
+ cmd/fuse.c                                    |  1 +
+ cmd/gettime.c                                 |  1 +
+ cmd/gpio.c                                    |  1 +
+ cmd/gpt.c                                     |  1 +
+ cmd/hash.c                                    |  1 +
+ cmd/host.c                                    |  1 +
+ cmd/i2c.c                                     |  1 +
+ cmd/ide.c                                     |  1 +
+ cmd/irq.c                                     |  1 +
+ cmd/itest.c                                   |  1 +
+ cmd/jffs2.c                                   |  1 +
+ cmd/led.c                                     |  1 +
+ cmd/legacy_led.c                              |  1 +
+ cmd/load.c                                    |  1 +
+ cmd/log.c                                     |  1 +
+ cmd/mbr.c                                     |  1 +
+ cmd/md5sum.c                                  |  1 +
+ cmd/mdio.c                                    |  1 +
+ cmd/mem.c                                     |  2 ++
+ cmd/mii.c                                     |  1 +
+ cmd/mmc.c                                     |  1 +
+ cmd/mp.c                                      |  1 +
+ cmd/mtd.c                                     |  1 +
+ cmd/mtdparts.c                                |  1 +
+ cmd/mvebu/bubt.c                              |  1 +
+ cmd/mvebu/comphy_rx_training.c                |  1 +
+ cmd/nand.c                                    |  1 +
+ cmd/net.c                                     |  1 +
+ cmd/nvedit.c                                  |  1 +
+ cmd/nvedit_efi.c                              |  1 +
+ cmd/nvme.c                                    |  1 +
+ cmd/onenand.c                                 |  1 +
+ cmd/optee_rpmb.c                              |  1 +
+ cmd/osd.c                                     |  1 +
+ cmd/part.c                                    |  1 +
+ cmd/pci.c                                     |  1 +
+ cmd/pinmux.c                                  |  1 +
+ cmd/printf.c                                  |  1 +
+ cmd/pstore.c                                  |  1 +
+ cmd/pxe.c                                     |  1 +
+ cmd/read.c                                    |  1 +
+ cmd/regulator.c                               |  1 +
+ cmd/remoteproc.c                              |  1 +
+ cmd/rtc.c                                     |  1 +
+ cmd/sata.c                                    |  1 +
+ cmd/scsi.c                                    |  1 +
+ cmd/setexpr.c                                 |  1 +
+ cmd/sf.c                                      |  2 ++
+ cmd/sha1sum.c                                 |  1 +
+ cmd/sleep.c                                   |  2 ++
+ cmd/smccc.c                                   |  1 +
+ cmd/spi.c                                     |  1 +
+ cmd/stackprot_test.c                          |  1 +
+ cmd/strings.c                                 |  1 +
+ cmd/sysboot.c                                 |  1 +
+ cmd/test.c                                    |  1 +
+ cmd/ti/ddr3.c                                 |  1 +
+ cmd/timer.c                                   |  2 ++
+ cmd/tlv_eeprom.c                              |  1 +
+ cmd/tpm-v1.c                                  |  1 +
+ cmd/tpm-v2.c                                  |  1 +
+ cmd/tpm_test.c                                |  1 +
+ cmd/tsi148.c                                  |  1 +
+ cmd/ubi.c                                     |  1 +
+ cmd/ufs.c                                     |  1 +
+ cmd/universe.c                                |  1 +
+ cmd/usb.c                                     |  1 +
+ cmd/usb_mass_storage.c                        |  1 +
+ cmd/vbe.c                                     |  1 +
+ cmd/virtio.c                                  |  1 +
+ cmd/w1.c                                      |  1 +
+ cmd/x86/cbsysinfo.c                           |  1 +
+ cmd/x86/hob.c                                 |  1 +
+ cmd/x86/mtrr.c                                |  1 +
+ cmd/ximg.c                                    |  1 +
+ cmd/yaffs2.c                                  |  1 +
+ cmd/zfs.c                                     |  1 +
+ common/autoboot.c                             |  1 +
+ common/avb_verify.c                           |  1 +
+ common/bloblist.c                             |  1 +
+ common/board_f.c                              |  1 +
+ common/bootstage.c                            |  1 +
+ common/bouncebuf.c                            |  1 +
+ common/cli.c                                  |  1 +
+ common/cli_getch.c                            |  1 +
+ common/cli_hush.c                             |  1 +
+ common/cli_readline.c                         |  1 +
+ common/cli_simple.c                           |  1 +
+ common/command.c                              |  2 ++
+ common/console.c                              |  1 +
+ common/cyclic.c                               |  1 +
+ common/dfu.c                                  |  1 +
+ common/dlmalloc.c                             |  1 +
+ common/eeprom/eeprom_layout.c                 |  1 +
+ common/event.c                                |  1 +
+ common/flash.c                                |  1 +
+ common/hash.c                                 |  1 +
+ common/init/board_init.c                      |  1 +
+ common/iomux.c                                |  1 +
+ common/kallsyms.c                             |  1 +
+ common/kgdb.c                                 |  1 +
+ common/log.c                                  |  1 +
+ common/log_syslog.c                           |  1 +
+ common/malloc_simple.c                        |  1 +
+ common/menu.c                                 |  1 +
+ common/miiphyutil.c                           |  1 +
+ common/qfw.c                                  |  1 +
+ common/scp03.c                                |  1 +
+ common/spl/spl.c                              |  1 +
+ common/spl/spl_atf.c                          |  1 +
+ common/spl/spl_fit.c                          |  1 +
+ common/spl/spl_mmc.c                          |  1 +
+ common/spl/spl_net.c                          |  1 +
+ common/spl/spl_nor.c                          |  1 +
+ common/spl/spl_ram.c                          |  1 +
+ common/spl/spl_sata.c                         |  1 +
+ common/spl/spl_ubi.c                          |  1 +
+ common/spl/spl_ymodem.c                       |  1 +
+ common/splash.c                               |  1 +
+ common/splash_source.c                        |  1 +
+ common/stdio.c                                |  1 +
+ common/update.c                               |  1 +
+ common/usb.c                                  |  1 +
+ common/usb_hub.c                              |  2 ++
+ common/usb_kbd.c                              |  2 ++
+ common/usb_storage.c                          |  1 +
+ common/xyzModem.c                             |  1 +
+ disk/part.c                                   |  1 +
+ disk/part_amiga.c                             |  1 +
+ disk/part_dos.c                               |  1 +
+ disk/part_efi.c                               |  1 +
+ disk/part_iso.c                               |  1 +
+ drivers/ata/ahci.c                            |  2 ++
+ drivers/ata/dwc_ahsata.c                      |  1 +
+ drivers/ata/fsl_sata.c                        |  1 +
+ drivers/ata/libata.c                          |  1 +
+ drivers/ata/sata.c                            |  1 +
+ drivers/ata/sata_mv.c                         |  2 ++
+ drivers/ata/sata_sil.c                        |  1 +
+ drivers/bios_emulator/atibios.c               |  1 +
+ drivers/bios_emulator/biosemu.c               |  1 +
+ drivers/bios_emulator/x86emu/debug.c          |  1 +
+ drivers/block/blk-uclass.c                    |  1 +
+ drivers/block/blk_legacy.c                    |  1 +
+ drivers/block/blkcache.c                      |  1 +
+ drivers/block/blkmap.c                        |  1 +
+ drivers/block/host-uclass.c                   |  1 +
+ drivers/block/host_dev.c                      |  1 +
+ drivers/block/ide.c                           |  1 +
+ drivers/bootcount/spi-flash.c                 |  1 +
+ drivers/button/button-uclass.c                |  1 +
+ drivers/clk/altera/clk-arria10.c              |  1 +
+ drivers/clk/at91/sam9x60.c                    |  1 +
+ drivers/clk/at91/sama7g5.c                    |  1 +
+ drivers/clk/at91/sckc.c                       |  1 +
+ drivers/clk/clk-mux.c                         |  1 +
+ drivers/clk/clk_scmi.c                        |  1 +
+ drivers/clk/clk_versal.c                      |  1 +
+ drivers/clk/mvebu/armada-37xx-periph.c        |  1 +
+ drivers/clk/renesas/clk-rcar-gen2.c           |  1 +
+ drivers/clk/rockchip/clk_rk322x.c             |  1 +
+ drivers/clk/rockchip/clk_rk3288.c             |  1 +
+ drivers/clk/rockchip/clk_rk3328.c             |  1 +
+ drivers/clk/rockchip/clk_rk3368.c             |  1 +
+ drivers/clk/rockchip/clk_rk3399.c             |  1 +
+ drivers/clk/rockchip/clk_rk3588.c             |  1 +
+ drivers/clk/sifive/sifive-prci.c              |  1 +
+ drivers/clk/stm32/clk-stm32f.c                |  1 +
+ drivers/clk/ti/clk-k3.c                       |  1 +
+ drivers/clk/ti/clk.c                          |  1 +
+ drivers/core/acpi.c                           |  1 +
+ drivers/core/device.c                         |  1 +
+ drivers/core/dump.c                           |  1 +
+ drivers/core/lists.c                          |  1 +
+ drivers/core/of_access.c                      |  1 +
+ drivers/core/of_addr.c                        |  1 +
+ drivers/core/of_extra.c                       |  1 +
+ drivers/core/ofnode.c                         |  1 +
+ drivers/core/root.c                           |  1 +
+ drivers/core/uclass.c                         |  1 +
+ drivers/cpu/cpu-uclass.c                      |  1 +
+ drivers/cpu/cpu_sandbox.c                     |  1 +
+ drivers/cpu/imx8_cpu.c                        |  1 +
+ drivers/cpu/imx9_cpu.c                        |  1 +
+ drivers/cpu/riscv_cpu.c                       |  1 +
+ drivers/crypto/ace_sha.c                      |  1 +
+ drivers/crypto/aspeed/aspeed_acry.c           |  1 +
+ drivers/crypto/aspeed/aspeed_hace.c           |  1 +
+ drivers/crypto/fsl/dcp_rng.c                  |  1 +
+ drivers/crypto/fsl/desc_constr.h              |  1 +
+ drivers/crypto/fsl/error.c                    |  1 +
+ drivers/crypto/fsl/fsl_blob.c                 |  1 +
+ drivers/crypto/fsl/fsl_hash.c                 |  1 +
+ drivers/crypto/fsl/jobdesc.c                  |  1 +
+ drivers/crypto/fsl/jr.c                       |  1 +
+ drivers/crypto/fsl/rng.c                      |  1 +
+ drivers/crypto/hash/hash-uclass.c             |  1 +
+ drivers/crypto/nuvoton/npcm_aes.c             |  2 ++
+ drivers/crypto/nuvoton/npcm_sha.c             |  1 +
+ drivers/ddr/altera/sdram_arria10.c            |  1 +
+ drivers/ddr/altera/sdram_gen5.c               |  1 +
+ drivers/ddr/altera/sdram_n5x.c                |  2 ++
+ drivers/ddr/altera/sdram_soc64.c              |  2 ++
+ drivers/ddr/altera/sequencer.c                |  1 +
+ drivers/ddr/fsl/ctrl_regs.c                   |  1 +
+ drivers/ddr/fsl/ddr1_dimm_params.c            |  1 +
+ drivers/ddr/fsl/ddr2_dimm_params.c            |  1 +
+ drivers/ddr/fsl/ddr3_dimm_params.c            |  1 +
+ drivers/ddr/fsl/ddr4_dimm_params.c            |  1 +
+ drivers/ddr/fsl/interactive.c                 |  1 +
+ drivers/ddr/fsl/main.c                        |  1 +
+ drivers/ddr/imx/imx9/ddr_init.c               |  1 +
+ drivers/ddr/marvell/a38x/mv_ddr4_mpr_pda_if.c |  2 ++
+ .../a38x/mv_ddr4_training_calibration.c       |  1 +
+ drivers/ddr/marvell/axp/ddr3_hw_training.c    |  1 +
+ drivers/ddr/marvell/axp/ddr3_pbs.c            |  1 +
+ drivers/ddr/marvell/axp/ddr3_spd.c            |  1 +
+ drivers/ddr/marvell/axp/ddr3_write_leveling.c |  1 +
+ drivers/dfu/dfu.c                             |  1 +
+ drivers/dfu/dfu_alt.c                         |  1 +
+ drivers/dfu/dfu_mmc.c                         |  1 +
+ drivers/dfu/dfu_mtd.c                         |  1 +
+ drivers/dfu/dfu_nand.c                        |  1 +
+ drivers/dfu/dfu_ram.c                         |  1 +
+ drivers/dfu/dfu_sf.c                          |  1 +
+ drivers/dma/apbh_dma.c                        |  1 +
+ drivers/dma/keystone_nav.c                    |  1 +
+ drivers/dma/lpc32xx_dma.c                     |  1 +
+ drivers/dma/sandbox-dma-test.c                |  1 +
+ drivers/dma/ti-edma3.c                        |  1 +
+ drivers/dma/ti/k3-udma.c                      |  1 +
+ drivers/fastboot/fb_command.c                 |  1 +
+ drivers/fastboot/fb_common.c                  |  1 +
+ drivers/fastboot/fb_getvar.c                  |  1 +
+ drivers/fastboot/fb_mmc.c                     |  1 +
+ drivers/fastboot/fb_nand.c                    |  1 +
+ drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  1 +
+ drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  1 +
+ drivers/firmware/psci.c                       |  1 +
+ drivers/firmware/scmi/optee_agent.c           |  1 +
+ drivers/firmware/scmi/sandbox-scmi_agent.c    |  1 +
+ drivers/firmware/scmi/smt.c                   |  1 +
+ drivers/firmware/ti_sci.c                     |  1 +
+ drivers/fpga/ACEX1K.c                         |  5 ++--
+ drivers/fpga/cyclon2.c                        |  1 +
+ drivers/fpga/fpga.c                           |  1 +
+ drivers/fpga/intel_sdm_mb.c                   |  2 ++
+ drivers/fpga/socfpga_arria10.c                |  2 ++
+ drivers/fpga/spartan2.c                       | 25 ++++++++++---------
+ drivers/fpga/spartan3.c                       | 25 ++++++++++---------
+ drivers/fpga/versalpl.c                       |  1 +
+ drivers/fpga/virtex2.c                        |  1 +
+ drivers/fpga/xilinx.c                         |  1 +
+ drivers/fpga/zynqmppl.c                       |  1 +
+ drivers/fpga/zynqpl.c                         |  1 +
+ drivers/fwu-mdata/gpt_blk.c                   |  1 +
+ drivers/fwu-mdata/raw_mtd.c                   |  1 +
+ drivers/gpio/74x164_gpio.c                    |  1 +
+ drivers/gpio/axp_gpio.c                       |  1 +
+ drivers/gpio/da8xx_gpio.c                     |  1 +
+ drivers/gpio/dwapb_gpio.c                     |  1 +
+ drivers/gpio/gpio-fxl6408.c                   |  1 +
+ drivers/gpio/gpio-uclass.c                    |  1 +
+ drivers/gpio/gpio_slg7xl45106.c               |  1 +
+ drivers/gpio/hi6220_gpio.c                    |  1 +
+ drivers/gpio/imx_rgpio2p.c                    |  1 +
+ drivers/gpio/intel_gpio.c                     |  1 +
+ drivers/gpio/iproc_gpio.c                     |  1 +
+ drivers/gpio/lpc32xx_gpio.c                   |  1 +
+ drivers/gpio/mcp230xx_gpio.c                  |  1 +
+ drivers/gpio/mpc83xx_spisel_boot.c            |  1 +
+ drivers/gpio/mpc8xx_gpio.c                    |  1 +
+ drivers/gpio/mpc8xxx_gpio.c                   |  1 +
+ drivers/gpio/mxc_gpio.c                       |  1 +
+ drivers/gpio/mxs_gpio.c                       |  1 +
+ drivers/gpio/nmk_gpio.c                       |  1 +
+ drivers/gpio/nx_gpio.c                        |  1 +
+ drivers/gpio/octeon_gpio.c                    |  1 +
+ drivers/gpio/omap_gpio.c                      |  1 +
+ drivers/gpio/pca953x_gpio.c                   |  1 +
+ drivers/gpio/pic32_gpio.c                     |  1 +
+ drivers/gpio/qe_gpio.c                        |  1 +
+ drivers/gpio/rk_gpio.c                        |  1 +
+ drivers/gpio/sifive-gpio.c                    |  1 +
+ drivers/gpio/sunxi_gpio.c                     |  1 +
+ drivers/gpio/xilinx_gpio.c                    |  1 +
+ drivers/gpio/zynq_gpio.c                      |  1 +
+ drivers/gpio/zynqmp_gpio_modepin.c            |  1 +
+ drivers/hwspinlock/hwspinlock-uclass.c        |  1 +
+ drivers/i2c/at91_i2c.c                        |  1 +
+ drivers/i2c/designware_i2c.c                  |  1 +
+ drivers/i2c/fsl_i2c.c                         |  1 +
+ drivers/i2c/i2c-cortina.c                     |  1 +
+ drivers/i2c/i2c-uclass.c                      |  1 +
+ drivers/i2c/ihs_i2c.c                         |  1 +
+ drivers/i2c/imx_lpi2c.c                       |  1 +
+ drivers/i2c/intel_i2c.c                       |  2 ++
+ drivers/i2c/lpc32xx_i2c.c                     |  1 +
+ drivers/i2c/meson_i2c.c                       |  1 +
+ drivers/i2c/muxes/i2c-arb-gpio-challenge.c    |  1 +
+ drivers/i2c/muxes/i2c-mux-uclass.c            |  1 +
+ drivers/i2c/mv_i2c.c                          |  1 +
+ drivers/i2c/mvtwsi.c                          |  1 +
+ drivers/i2c/mxc_i2c.c                         |  1 +
+ drivers/i2c/npcm_i2c.c                        |  1 +
+ drivers/i2c/nx_i2c.c                          |  1 +
+ drivers/i2c/rk_i2c.c                          |  1 +
+ drivers/i2c/s3c24x0_i2c.c                     |  1 +
+ drivers/i2c/stm32f7_i2c.c                     |  2 ++
+ drivers/i2c/tegra186_bpmp_i2c.c               |  1 +
+ drivers/i2c/tegra_i2c.c                       |  1 +
+ drivers/input/apple_spi_kbd.c                 |  1 +
+ drivers/input/button_kbd.c                    |  1 +
+ drivers/input/cros_ec_keyb.c                  |  1 +
+ drivers/input/i8042.c                         |  1 +
+ drivers/input/input.c                         |  2 ++
+ drivers/input/key_matrix.c                    |  1 +
+ drivers/input/keyboard-uclass.c               |  1 +
+ drivers/input/tegra-kbc.c                     |  2 ++
+ drivers/iommu/apple_dart.c                    |  1 +
+ drivers/led/led-uclass.c                      |  1 +
+ drivers/memory/ti-gpmc.c                      |  1 +
+ drivers/misc/atsha204a-i2c.c                  |  1 +
+ drivers/misc/cbmem_console.c                  |  1 +
+ drivers/misc/cros_ec.c                        |  2 ++
+ drivers/misc/cros_ec_i2c.c                    |  1 +
+ drivers/misc/cros_ec_lpc.c                    |  1 +
+ drivers/misc/cros_ec_sandbox.c                |  2 ++
+ drivers/misc/cros_ec_spi.c                    |  2 ++
+ drivers/misc/ds4510.c                         |  1 +
+ drivers/misc/fsl_portals.c                    |  1 +
+ drivers/misc/gdsys_ioep.c                     |  1 +
+ drivers/misc/gsc.c                            |  1 +
+ drivers/misc/i2c_eeprom_emul.c                |  1 +
+ drivers/misc/ihs_fpga.c                       |  1 +
+ drivers/misc/misc_sandbox.c                   |  1 +
+ drivers/misc/mpc83xx_serdes.c                 |  1 +
+ drivers/misc/npcm_host_intf.c                 |  1 +
+ drivers/misc/qfw.c                            |  1 +
+ drivers/misc/qfw_sandbox.c                    |  1 +
+ drivers/misc/rockchip-efuse.c                 |  1 +
+ drivers/misc/rockchip-otp.c                   |  1 +
+ drivers/misc/sifive-otp.c                     |  1 +
+ drivers/misc/tegra186_bpmp.c                  |  1 +
+ drivers/misc/usb251xb.c                       |  1 +
+ drivers/misc/vexpress_config.c                |  1 +
+ drivers/mmc/am654_sdhci.c                     |  1 +
+ drivers/mmc/bcm2835_sdhost.c                  |  1 +
+ drivers/mmc/ca_dw_mmc.c                       |  1 +
+ drivers/mmc/davinci_mmc.c                     |  1 +
+ drivers/mmc/dw_mmc.c                          |  1 +
+ drivers/mmc/f_sdh30.c                         |  1 +
+ drivers/mmc/fsl_esdhc.c                       |  1 +
+ drivers/mmc/fsl_esdhc_imx.c                   |  2 ++
+ drivers/mmc/fsl_esdhc_spl.c                   |  1 +
+ drivers/mmc/ftsdc010_mci.c                    |  2 ++
+ drivers/mmc/iproc_sdhci.c                     |  1 +
+ drivers/mmc/meson_gx_mmc.c                    |  2 ++
+ drivers/mmc/mmc.c                             |  2 ++
+ drivers/mmc/mmc_spi.c                         |  1 +
+ drivers/mmc/msm_sdhci.c                       |  1 +
+ drivers/mmc/mvebu_mmc.c                       |  1 +
+ drivers/mmc/mxcmmc.c                          |  1 +
+ drivers/mmc/mxsmmc.c                          |  1 +
+ drivers/mmc/octeontx_hsmmc.c                  |  1 +
+ drivers/mmc/omap_hsmmc.c                      |  1 +
+ drivers/mmc/rpmb.c                            |  1 +
+ drivers/mmc/sandbox_mmc.c                     |  1 +
+ drivers/mmc/sdhci.c                           |  2 ++
+ drivers/mmc/sh_mmcif.c                        |  1 +
+ drivers/mmc/snps_dw_mmc.c                     |  1 +
+ drivers/mmc/sti_sdhci.c                       |  1 +
+ drivers/mmc/sunxi_mmc.c                       |  2 ++
+ drivers/mmc/tegra_mmc.c                       |  1 +
+ drivers/mmc/xenon_sdhci.c                     |  1 +
+ drivers/mtd/altera_qspi.c                     |  1 +
+ drivers/mtd/cfi_flash.c                       |  2 ++
+ drivers/mtd/cfi_mtd.c                         |  1 +
+ drivers/mtd/mtd_uboot.c                       |  1 +
+ drivers/mtd/mtdpart.c                         |  1 +
+ drivers/mtd/nand/raw/atmel/nand-controller.c  |  1 +
+ drivers/mtd/nand/raw/atmel/pmecc.c            |  1 +
+ drivers/mtd/nand/raw/atmel_nand.c             |  1 +
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c      |  2 ++
+ drivers/mtd/nand/raw/cortina_nand.c           |  1 +
+ drivers/mtd/nand/raw/denali.c                 |  1 +
+ drivers/mtd/nand/raw/denali_spl.c             |  1 +
+ drivers/mtd/nand/raw/fsl_elbc_nand.c          |  1 +
+ drivers/mtd/nand/raw/fsl_ifc_nand.c           |  1 +
+ drivers/mtd/nand/raw/lpc32xx_nand_mlc.c       |  1 +
+ drivers/mtd/nand/raw/mt7621_nand.c            |  1 +
+ drivers/mtd/nand/raw/mt7621_nand_spl.c        |  1 +
+ drivers/mtd/nand/raw/mxic_nand.c              |  1 +
+ drivers/mtd/nand/raw/mxs_nand.c               |  1 +
+ drivers/mtd/nand/raw/mxs_nand_spl.c           |  2 ++
+ drivers/mtd/nand/raw/nand_base.c              |  2 ++
+ drivers/mtd/nand/raw/nand_bch.c               |  1 +
+ drivers/mtd/nand/raw/nand_spl_loaders.c       |  1 +
+ drivers/mtd/nand/raw/nand_util.c              |  1 +
+ drivers/mtd/nand/raw/octeontx_bch.c           |  1 +
+ drivers/mtd/nand/raw/octeontx_nand.c          |  1 +
+ drivers/mtd/nand/raw/omap_gpmc.c              |  1 +
+ drivers/mtd/nand/raw/pxa3xx_nand.c            |  2 ++
+ drivers/mtd/nand/raw/rockchip_nfc.c           |  2 ++
+ drivers/mtd/nand/raw/sunxi_nand.c             |  2 ++
+ drivers/mtd/nand/raw/sunxi_nand_spl.c         |  1 +
+ drivers/mtd/nand/raw/tegra_nand.c             |  1 +
+ drivers/mtd/nand/raw/vf610_nfc.c              |  2 ++
+ drivers/mtd/nand/spi/core.c                   |  2 ++
+ drivers/mtd/onenand/onenand_base.c            |  2 ++
+ drivers/mtd/onenand/onenand_bbt.c             |  1 +
+ drivers/mtd/onenand/onenand_spl.c             |  1 +
+ drivers/mtd/onenand/onenand_uboot.c           |  1 +
+ drivers/mtd/onenand/samsung.c                 |  1 +
+ drivers/mtd/spi/fsl_espi_spl.c                |  1 +
+ drivers/mtd/spi/sandbox.c                     |  1 +
+ drivers/mtd/spi/sf-uclass.c                   |  1 +
+ drivers/mtd/spi/sf_dataflash.c                |  2 ++
+ drivers/mtd/spi/sf_mtd.c                      |  1 +
+ drivers/mtd/spi/sf_probe.c                    |  1 +
+ drivers/mtd/spi/spi-nor-core.c                |  2 ++
+ drivers/mtd/spi/spi-nor-tiny.c                |  2 ++
+ drivers/mtd/ubi/attach.c                      |  1 +
+ drivers/mtd/ubi/build.c                       |  1 +
+ drivers/mtd/ubi/debug.c                       |  1 +
+ drivers/mtd/ubi/eba.c                         |  1 +
+ drivers/mtd/ubi/fastmap.c                     |  1 +
+ drivers/mtd/ubi/io.c                          |  1 +
+ drivers/mtd/ubi/kapi.c                        |  1 +
+ drivers/mtd/ubi/upd.c                         |  1 +
+ drivers/mtd/ubi/vmt.c                         |  1 +
+ drivers/mtd/ubi/vtbl.c                        |  1 +
+ drivers/mtd/ubispl/ubispl.c                   |  1 +
+ drivers/net/ag7xxx.c                          |  2 ++
+ drivers/net/altera_tse.c                      |  2 ++
+ drivers/net/bcm-sf2-eth-gmac.c                |  1 +
+ drivers/net/bcm-sf2-eth.c                     |  1 +
+ drivers/net/bcm6368-eth.c                     |  1 +
+ drivers/net/bnxt/bnxt.c                       |  1 +
+ drivers/net/calxedaxgmac.c                    |  1 +
+ drivers/net/cortina_ni.c                      |  2 ++
+ drivers/net/dc2114x.c                         |  1 +
+ drivers/net/designware.c                      |  2 ++
+ drivers/net/dm9000x.c                         |  1 +
+ drivers/net/dsa_sandbox.c                     |  1 +
+ drivers/net/dwc_eth_qos.c                     |  1 +
+ drivers/net/e1000.c                           |  1 +
+ drivers/net/e1000_spi.c                       |  1 +
+ drivers/net/eepro100.c                        |  1 +
+ drivers/net/eth-phy-uclass.c                  |  1 +
+ drivers/net/ethoc.c                           |  2 ++
+ drivers/net/fec_mxc.c                         |  2 ++
+ drivers/net/fm/eth.c                          |  1 +
+ drivers/net/fm/fm.c                           |  1 +
+ drivers/net/fm/tgec_phy.c                     |  1 +
+ drivers/net/fsl-mc/dpio/qbman_portal.c        |  1 +
+ drivers/net/fsl-mc/dpio/qbman_sys.h           |  1 +
+ drivers/net/fsl-mc/mc.c                       |  1 +
+ drivers/net/fsl_enetc.c                       |  1 +
+ drivers/net/fsl_mcdmafec.c                    |  1 +
+ drivers/net/fsl_mdio.c                        |  1 +
+ drivers/net/ftmac100.c                        |  2 ++
+ drivers/net/gmac_rockchip.c                   |  1 +
+ drivers/net/higmacv300.c                      |  1 +
+ drivers/net/ldpaa_eth/ldpaa_eth.c             |  2 ++
+ drivers/net/macb.c                            |  1 +
+ drivers/net/mcffec.c                          |  1 +
+ drivers/net/mcfmii.c                          |  1 +
+ drivers/net/mpc8xx_fec.c                      |  1 +
+ drivers/net/mscc_eswitch/felix_switch.c       |  1 +
+ drivers/net/mscc_eswitch/jr2_switch.c         |  1 +
+ drivers/net/mscc_eswitch/luton_switch.c       |  1 +
+ drivers/net/mscc_eswitch/ocelot_switch.c      |  1 +
+ drivers/net/mscc_eswitch/serval_switch.c      |  1 +
+ drivers/net/mscc_eswitch/servalt_switch.c     |  1 +
+ drivers/net/mt7620-eth.c                      |  1 +
+ drivers/net/mt7628-eth.c                      |  1 +
+ drivers/net/mtk_eth.c                         |  2 ++
+ drivers/net/mvgbe.c                           |  1 +
+ drivers/net/mvneta.c                          |  1 +
+ drivers/net/mvpp2.c                           |  1 +
+ drivers/net/netconsole.c                      |  1 +
+ drivers/net/npcm750_eth.c                     |  2 ++
+ drivers/net/octeon/octeon_eth.c               |  1 +
+ drivers/net/octeontx/bgx.c                    |  1 +
+ drivers/net/octeontx/nic_main.c               |  1 +
+ drivers/net/octeontx/nicvf_main.c             |  1 +
+ drivers/net/octeontx/nicvf_queues.c           |  1 +
+ drivers/net/octeontx/smi.c                    |  1 +
+ drivers/net/octeontx2/cgx.c                   |  1 +
+ drivers/net/octeontx2/cgx_intf.c              |  1 +
+ drivers/net/octeontx2/nix.c                   |  1 +
+ drivers/net/octeontx2/nix_af.c                |  2 ++
+ drivers/net/octeontx2/rvu_af.c                |  1 +
+ drivers/net/octeontx2/rvu_common.c            |  1 +
+ drivers/net/octeontx2/rvu_pf.c                |  1 +
+ drivers/net/pch_gbe.c                         |  2 ++
+ drivers/net/pcnet.c                           |  1 +
+ drivers/net/pfe_eth/pfe_cmd.c                 |  1 +
+ drivers/net/pfe_eth/pfe_driver.c              |  1 +
+ drivers/net/pfe_eth/pfe_firmware.c            |  1 +
+ drivers/net/pfe_eth/pfe_hw.c                  |  1 +
+ drivers/net/phy/adin.c                        |  1 +
+ drivers/net/phy/aquantia.c                    |  1 +
+ drivers/net/phy/atheros.c                     |  1 +
+ drivers/net/phy/b53.c                         |  1 +
+ drivers/net/phy/fixed.c                       |  1 +
+ drivers/net/phy/miiphybb.c                    |  1 +
+ drivers/net/phy/mv88e61xx.c                   |  1 +
+ drivers/net/phy/mv88e6352.c                   |  1 +
+ drivers/net/phy/ncsi.c                        |  1 +
+ drivers/net/phy/phy.c                         |  1 +
+ drivers/net/pic32_mdio.c                      |  1 +
+ drivers/net/qe/dm_qe_uec.c                    |  1 +
+ drivers/net/qe/uccf.c                         |  1 +
+ drivers/net/ravb.c                            |  2 ++
+ drivers/net/rswitch.c                         |  2 ++
+ drivers/net/rtl8139.c                         |  1 +
+ drivers/net/rtl8169.c                         |  2 ++
+ drivers/net/sandbox-raw-bus.c                 |  1 +
+ drivers/net/sandbox-raw.c                     |  1 +
+ drivers/net/sandbox.c                         |  2 ++
+ drivers/net/sja1105.c                         |  1 +
+ drivers/net/smc911x.c                         |  1 +
+ drivers/net/sni_ave.c                         |  1 +
+ drivers/net/sun8i_emac.c                      |  1 +
+ drivers/net/sunxi_emac.c                      |  1 +
+ drivers/net/ti/cpsw-common.c                  |  1 +
+ drivers/net/ti/cpsw.c                         |  1 +
+ drivers/net/ti/davinci_emac.c                 |  1 +
+ drivers/net/tsec.c                            |  1 +
+ drivers/net/xilinx_axi_emac.c                 |  1 +
+ drivers/net/xilinx_axi_mrmac.c                |  1 +
+ drivers/net/xilinx_emaclite.c                 |  1 +
+ drivers/net/zynq_gem.c                        |  1 +
+ drivers/nvme/nvme.c                           |  1 +
+ drivers/nvme/nvme_apple.c                     |  1 +
+ drivers/pci/pci-uclass.c                      |  1 +
+ drivers/pci/pci_rom.c                         |  2 ++
+ drivers/pci/pci_tegra.c                       |  2 ++
+ drivers/pci/pcie_dw_mvebu.c                   |  1 +
+ drivers/pci/pcie_dw_ti.c                      |  1 +
+ drivers/pci/pcie_layerscape_fixup.c           |  1 +
+ drivers/pci/pcie_layerscape_fixup_common.c    |  1 +
+ drivers/pci/pcie_uniphier.c                   |  1 +
+ drivers/pci_endpoint/sandbox-pci_ep.c         |  1 +
+ drivers/phy/allwinner/phy-sun4i-usb.c         |  1 +
+ drivers/phy/marvell/comphy_a3700.c            |  1 +
+ drivers/phy/meson-axg-mipi-dphy.c             |  1 +
+ drivers/phy/meson-axg-mipi-pcie-analog.c      |  1 +
+ drivers/phy/phy-da8xx-usb.c                   |  1 +
+ .../phy/rockchip/phy-rockchip-inno-dsidphy.c  |  1 +
+ drivers/phy/rockchip/phy-rockchip-inno-usb2.c |  1 +
+ drivers/phy/rockchip/phy-rockchip-typec.c     |  1 +
+ drivers/phy/rockchip/phy-rockchip-usbdp.c     |  1 +
+ drivers/phy/ti/phy-j721e-wiz.c                |  1 +
+ drivers/pinctrl/exynos/pinctrl-exynos.c       |  1 +
+ .../pinctrl/mtmips/pinctrl-mtmips-common.c    |  1 +
+ drivers/pinctrl/mvebu/pinctrl-armada-37xx.c   |  1 +
+ drivers/pinctrl/mvebu/pinctrl-armada-38x.c    |  1 +
+ drivers/pinctrl/nexell/pinctrl-nexell.c       |  1 +
+ drivers/pinctrl/nexell/pinctrl-s5pxx18.c      |  1 +
+ drivers/pinctrl/pinctrl-apple.c               |  1 +
+ drivers/pinctrl/pinctrl-generic.c             |  1 +
+ drivers/pinctrl/pinctrl-k210.c                |  1 +
+ drivers/pinctrl/pinctrl-sandbox.c             |  1 +
+ drivers/pinctrl/pinctrl-stmfx.c               |  1 +
+ drivers/pinctrl/pinctrl-zynqmp.c              |  1 +
+ drivers/pinctrl/pinctrl_stm32.c               |  1 +
+ drivers/pinctrl/renesas/pfc.c                 |  1 +
+ .../pinctrl/rockchip/pinctrl-rockchip-core.c  |  1 +
+ drivers/pinctrl/sunxi/pinctrl-sunxi.c         |  1 +
+ .../power/domain/imx8-power-domain-legacy.c   |  1 +
+ drivers/power/domain/imx8m-power-domain.c     |  1 +
+ drivers/power/exynos-tmu.c                    |  1 +
+ drivers/power/pmic/i2c_pmic_emul.c            |  1 +
+ drivers/power/pmic/palmas.c                   |  1 +
+ drivers/power/pmic/pmic-uclass.c              |  1 +
+ drivers/power/power_core.c                    |  1 +
+ drivers/power/power_i2c.c                     |  1 +
+ drivers/power/regulator/axp_regulator.c       |  1 +
+ drivers/power/regulator/bd71837.c             |  1 +
+ drivers/power/regulator/da9063.c              |  1 +
+ drivers/power/regulator/npcm8xx_regulator.c   |  1 +
+ drivers/power/regulator/palmas_regulator.c    |  1 +
+ drivers/power/regulator/pca9450.c             |  1 +
+ drivers/power/regulator/pfuze100.c            |  1 +
+ drivers/power/regulator/regulator-uclass.c    |  1 +
+ drivers/power/regulator/tps65090_regulator.c  |  1 +
+ drivers/pwm/pwm-meson.c                       |  1 +
+ drivers/qe/qe.c                               |  1 +
+ drivers/ram/imxrt_sdram.c                     |  1 +
+ drivers/ram/octeon/octeon3_lmc.c              |  1 +
+ drivers/ram/renesas/rzn1/ddr_async.c          |  1 +
+ drivers/ram/rockchip/dmc-rk3368.c             |  1 +
+ drivers/ram/rockchip/sdram_rk3066.c           |  1 +
+ drivers/ram/rockchip/sdram_rk3188.c           |  1 +
+ drivers/ram/rockchip/sdram_rk322x.c           |  1 +
+ drivers/ram/rockchip/sdram_rk3288.c           |  1 +
+ drivers/ram/rockchip/sdram_rk3328.c           |  1 +
+ drivers/ram/rockchip/sdram_rv1126.c           |  1 +
+ drivers/ram/stm32_sdram.c                     |  1 +
+ drivers/ram/stm32mp1/stm32mp1_ddr.c           |  1 +
+ drivers/ram/stm32mp1/stm32mp1_interactive.c   |  2 ++
+ drivers/ram/stm32mp1/stm32mp1_tests.c         |  1 +
+ drivers/reboot-mode/reboot-mode-uclass.c      |  1 +
+ drivers/remoteproc/ipu_rproc.c                |  1 +
+ drivers/remoteproc/k3_system_controller.c     |  1 +
+ drivers/remoteproc/pru_rproc.c                |  1 +
+ drivers/remoteproc/rproc-elf-loader.c         |  1 +
+ drivers/remoteproc/rproc-uclass.c             |  1 +
+ drivers/remoteproc/ti_k3_dsp_rproc.c          |  1 +
+ drivers/remoteproc/ti_k3_r5f_rproc.c          |  1 +
+ drivers/remoteproc/ti_power_proc.c            |  1 +
+ drivers/reset/reset-jh7110.c                  |  1 +
+ drivers/rng/iproc_rng200.c                    |  1 +
+ drivers/rng/meson-rng.c                       |  1 +
+ drivers/rng/optee_rng.c                       |  1 +
+ drivers/rng/sandbox_rng.c                     |  1 +
+ drivers/rng/smccc_trng.c                      |  1 +
+ drivers/rng/stm32mp1_rng.c                    |  1 +
+ drivers/rtc/abx80x.c                          |  1 +
+ drivers/rtc/emul_rtc.c                        |  1 +
+ drivers/rtc/i2c_rtc_emul.c                    |  1 +
+ drivers/rtc/rv3029.c                          |  1 +
+ drivers/scsi/scsi.c                           |  1 +
+ drivers/scsi/scsi_emul.c                      |  1 +
+ drivers/serial/sandbox.c                      |  1 +
+ drivers/serial/serial-uclass.c                |  1 +
+ drivers/serial/serial.c                       |  1 +
+ drivers/serial/serial_mtk.c                   |  1 +
+ drivers/serial/serial_octeon_bootcmd.c        |  1 +
+ drivers/serial/serial_octeon_pcie_console.c   |  1 +
+ drivers/serial/serial_semihosting.c           |  1 +
+ drivers/serial/usbtty.c                       |  1 +
+ drivers/smem/msm_smem.c                       |  1 +
+ drivers/soc/soc-uclass.c                      |  1 +
+ drivers/soc/ti/k3-navss-ringacc.c             |  1 +
+ drivers/sound/samsung-i2s.c                   |  1 +
+ drivers/sound/sound.c                         |  1 +
+ drivers/sound/tegra_ahub.c                    |  1 +
+ drivers/spi/altera_spi.c                      |  1 +
+ drivers/spi/apple_spi.c                       |  1 +
+ drivers/spi/atcspi200_spi.c                   |  1 +
+ drivers/spi/bcm63xx_hsspi.c                   |  1 +
+ drivers/spi/bcmstb_spi.c                      |  1 +
+ drivers/spi/ca_sflash.c                       |  1 +
+ drivers/spi/cadence_ospi_versal.c             |  1 +
+ drivers/spi/cadence_qspi_apb.c                |  2 ++
+ drivers/spi/cf_spi.c                          |  1 +
+ drivers/spi/designware_spi.c                  |  1 +
+ drivers/spi/fsl_espi.c                        |  1 +
+ drivers/spi/fsl_qspi.c                        |  1 +
+ drivers/spi/gxp_spi.c                         |  1 +
+ drivers/spi/ich.c                             |  2 ++
+ drivers/spi/meson_spifc.c                     |  1 +
+ drivers/spi/mpc8xxx_spi.c                     |  1 +
+ drivers/spi/mtk_snfi_spi.c                    |  1 +
+ drivers/spi/mtk_snor.c                        |  1 +
+ drivers/spi/mtk_spim.c                        |  1 +
+ drivers/spi/mxc_spi.c                         |  2 ++
+ drivers/spi/mxs_spi.c                         |  1 +
+ drivers/spi/npcm_fiu_spi.c                    |  1 +
+ drivers/spi/nxp_fspi.c                        |  1 +
+ drivers/spi/octeon_spi.c                      |  1 +
+ drivers/spi/omap3_spi.c                       |  1 +
+ drivers/spi/pic32_spi.c                       |  1 +
+ drivers/spi/rockchip_sfc.c                    |  2 ++
+ drivers/spi/spi-aspeed-smc.c                  |  1 +
+ drivers/spi/spi-mem-nodm.c                    |  1 +
+ drivers/spi/spi-mem.c                         |  1 +
+ drivers/spi/spi-mxic.c                        |  1 +
+ drivers/spi/spi-sifive.c                      |  1 +
+ drivers/spi/spi.c                             |  1 +
+ drivers/spi/tegra210_qspi.c                   |  1 +
+ drivers/spi/zynq_qspi.c                       |  2 ++
+ drivers/spi/zynqmp_gqspi.c                    |  1 +
+ drivers/sysinfo/gpio.c                        |  1 +
+ drivers/sysinfo/rcar3.c                       |  1 +
+ drivers/sysreset/sysreset_sandbox.c           |  1 +
+ drivers/tee/broadcom/chimp_optee.c            |  1 +
+ drivers/tee/optee/core.c                      |  1 +
+ drivers/tee/sandbox.c                         |  1 +
+ drivers/tee/tee-uclass.c                      |  1 +
+ drivers/thermal/imx_scu_thermal.c             |  1 +
+ drivers/thermal/imx_tmu.c                     |  1 +
+ drivers/timer/sandbox_timer.c                 |  1 +
+ drivers/tpm/cr50_i2c.c                        |  2 ++
+ drivers/tpm/sandbox_common.c                  |  1 +
+ drivers/tpm/tpm-uclass.c                      |  2 ++
+ drivers/tpm/tpm2_ftpm_tee.c                   |  1 +
+ drivers/tpm/tpm2_tis_core.c                   |  1 +
+ drivers/tpm/tpm2_tis_sandbox.c                |  1 +
+ drivers/tpm/tpm2_tis_spi.c                    |  2 ++
+ drivers/tpm/tpm_atmel_twi.c                   |  2 ++
+ drivers/tpm/tpm_tis_infineon.c                |  2 ++
+ drivers/tpm/tpm_tis_lpc.c                     |  1 +
+ drivers/tpm/tpm_tis_sandbox.c                 |  1 +
+ drivers/tpm/tpm_tis_st33zp24_i2c.c            |  2 ++
+ drivers/tpm/tpm_tis_st33zp24_spi.c            |  2 ++
+ drivers/ufs/ufs.c                             |  2 ++
+ drivers/usb/cdns3/gadget.c                    |  1 +
+ drivers/usb/common/common.c                   |  1 +
+ drivers/usb/common/fsl-dt-fixup.c             |  1 +
+ drivers/usb/common/usb_urb.c                  |  1 +
+ drivers/usb/dwc3/dwc3-generic.c               |  1 +
+ drivers/usb/dwc3/dwc3-uniphier.c              |  1 +
+ drivers/usb/dwc3/ep0.c                        |  1 +
+ drivers/usb/dwc3/gadget.c                     |  1 +
+ drivers/usb/emul/sandbox_flash.c              |  1 +
+ drivers/usb/emul/sandbox_keyb.c               |  1 +
+ drivers/usb/emul/usb-emul-uclass.c            |  1 +
+ drivers/usb/eth/asix.c                        |  1 +
+ drivers/usb/eth/asix88179.c                   |  1 +
+ drivers/usb/eth/lan75xx.c                     |  1 +
+ drivers/usb/eth/lan78xx.c                     |  1 +
+ drivers/usb/eth/lan7x.c                       |  1 +
+ drivers/usb/eth/mcs7830.c                     |  1 +
+ drivers/usb/eth/r8152.c                       |  1 +
+ drivers/usb/eth/smsc95xx.c                    |  2 ++
+ drivers/usb/gadget/at91_udc.c                 |  1 +
+ drivers/usb/gadget/atmel_usba_udc.c           |  1 +
+ drivers/usb/gadget/ci_udc.c                   |  1 +
+ drivers/usb/gadget/composite.c                |  1 +
+ drivers/usb/gadget/dwc2_udc_otg.c             |  1 +
+ drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c    |  1 +
+ drivers/usb/gadget/epautoconf.c               |  1 +
+ drivers/usb/gadget/ether.c                    |  2 ++
+ drivers/usb/gadget/f_acm.c                    |  1 +
+ drivers/usb/gadget/f_dfu.c                    |  1 +
+ drivers/usb/gadget/f_fastboot.c               |  1 +
+ drivers/usb/gadget/f_mass_storage.c           |  1 +
+ drivers/usb/gadget/f_rockusb.c                |  1 +
+ drivers/usb/gadget/f_sdp.c                    |  1 +
+ drivers/usb/gadget/f_thor.c                   |  1 +
+ drivers/usb/gadget/g_dnl.c                    |  1 +
+ drivers/usb/gadget/gadget_chips.h             |  1 +
+ drivers/usb/gadget/rndis.c                    |  1 +
+ drivers/usb/gadget/u_os_desc.h                |  1 +
+ drivers/usb/gadget/usbstring.c                |  1 +
+ drivers/usb/host/dwc2.c                       |  2 ++
+ drivers/usb/host/dwc3-octeon-glue.c           |  1 +
+ drivers/usb/host/ehci-fsl.c                   |  1 +
+ drivers/usb/host/ehci-hcd.c                   |  2 ++
+ drivers/usb/host/ehci-mx5.c                   |  1 +
+ drivers/usb/host/ehci-mxs.c                   |  1 +
+ drivers/usb/host/ehci-omap.c                  |  2 ++
+ drivers/usb/host/ehci-tegra.c                 |  1 +
+ drivers/usb/host/ehci-vf.c                    |  1 +
+ drivers/usb/host/ohci-da8xx.c                 |  1 +
+ drivers/usb/host/ohci-hcd.c                   |  1 +
+ drivers/usb/host/r8a66597-hcd.c               |  1 +
+ drivers/usb/host/r8a66597.h                   |  1 +
+ drivers/usb/host/usb-uclass.c                 |  1 +
+ drivers/usb/host/xhci-dwc3.c                  |  1 +
+ drivers/usb/host/xhci-mem.c                   |  1 +
+ drivers/usb/host/xhci-ring.c                  |  1 +
+ drivers/usb/host/xhci.c                       |  1 +
+ drivers/usb/isp1760/isp1760-hcd.c             |  2 ++
+ drivers/usb/mtu3/mtu3_gadget_ep0.c            |  1 +
+ drivers/usb/mtu3/mtu3_qmu.c                   |  1 +
+ drivers/usb/musb-new/am35x.c                  |  2 ++
+ drivers/usb/musb-new/mt85xx.c                 |  1 +
+ drivers/usb/musb-new/musb_core.c              |  1 +
+ drivers/usb/musb-new/musb_dsps.c              |  1 +
+ drivers/usb/musb-new/musb_gadget.c            |  1 +
+ drivers/usb/musb-new/musb_uboot.c             |  2 ++
+ drivers/usb/musb-new/omap2430.c               |  1 +
+ drivers/usb/musb-new/pic32.c                  |  1 +
+ drivers/usb/musb-new/sunxi.c                  |  1 +
+ drivers/usb/musb-new/ti-musb.c                |  1 +
+ drivers/usb/musb-new/ux500.c                  |  1 +
+ drivers/usb/musb/am35x.c                      |  1 +
+ drivers/usb/musb/musb_hcd.c                   |  1 +
+ drivers/video/bridge/anx6345.c                |  1 +
+ drivers/video/bridge/ssd2825.c                |  1 +
+ drivers/video/broadwell_igd.c                 |  1 +
+ drivers/video/console_core.c                  |  1 +
+ drivers/video/console_truetype.c              |  1 +
+ drivers/video/dw_hdmi.c                       |  2 ++
+ drivers/video/dw_mipi_dsi.c                   |  1 +
+ drivers/video/endeavoru-panel.c               |  1 +
+ drivers/video/exynos/exynos_dp.c              |  1 +
+ drivers/video/exynos/exynos_mipi_dsi.c        |  1 +
+ drivers/video/himax-hx8394.c                  |  1 +
+ drivers/video/ihs_video_out.c                 |  1 +
+ drivers/video/imx/ipu_common.c                |  1 +
+ drivers/video/logicore_dp_tx.c                |  1 +
+ drivers/video/mali_dp.c                       |  1 +
+ drivers/video/meson/meson_venc.c              |  1 +
+ drivers/video/mipi_dsi.c                      |  1 +
+ drivers/video/mxsfb.c                         |  1 +
+ drivers/video/nexell_display.c                |  1 +
+ drivers/video/orisetech_otm8009a.c            |  1 +
+ drivers/video/raydium-rm68200.c               |  1 +
+ drivers/video/renesas-r61307.c                |  1 +
+ drivers/video/renesas-r69328.c                |  1 +
+ drivers/video/rockchip/rk_edp.c               |  2 ++
+ drivers/video/rockchip/rk_vop.c               |  1 +
+ drivers/video/sandbox_osd.c                   |  1 +
+ drivers/video/simple_panel.c                  |  1 +
+ drivers/video/simplefb.c                      |  1 +
+ drivers/video/stb_truetype.h                  |  1 +
+ drivers/video/sunxi/sunxi_de2.c               |  1 +
+ drivers/video/sunxi/sunxi_display.c           |  1 +
+ drivers/video/sunxi/sunxi_lcd.c               |  1 +
+ drivers/video/tdo-tl070wsh30.c                |  1 +
+ drivers/video/tegra124/display.c              |  1 +
+ drivers/video/tegra124/dp.c                   |  2 ++
+ drivers/video/tegra124/sor.c                  |  1 +
+ drivers/video/tegra20/tegra-dc.c              |  1 +
+ drivers/video/tegra20/tegra-dsi.c             |  1 +
+ drivers/video/ti/tilcdc-panel.c               |  1 +
+ drivers/video/ti/tilcdc.c                     |  1 +
+ drivers/video/tidss/tidss_drv.c               |  1 +
+ drivers/video/vidconsole-uclass.c             |  1 +
+ drivers/video/video-uclass.c                  |  2 ++
+ drivers/video/videomodes.c                    |  1 +
+ drivers/video/zynqmp/zynqmp_dpsub.c           |  1 +
+ drivers/virtio/virtio-uclass.c                |  1 +
+ drivers/virtio/virtio_mmio.c                  |  1 +
+ drivers/virtio/virtio_net.c                   |  1 +
+ drivers/virtio/virtio_pci_modern.c            |  1 +
+ drivers/virtio/virtio_ring.c                  |  1 +
+ drivers/virtio/virtio_rng.c                   |  1 +
+ drivers/w1-eeprom/ds2502.c                    |  1 +
+ drivers/w1-eeprom/eep_sandbox.c               |  1 +
+ drivers/watchdog/booke_wdt.c                  |  1 +
+ drivers/watchdog/gpio_wdt.c                   |  1 +
+ drivers/watchdog/mpc8xxx_wdt.c                |  1 +
+ drivers/watchdog/sandbox_alarm-wdt.c          |  1 +
+ drivers/watchdog/sbsa_gwdt.c                  |  1 +
+ drivers/watchdog/wdt-uclass.c                 |  1 +
+ drivers/xen/pvblock.c                         |  1 +
+ drivers/xen/xenbus.c                          |  1 +
+ env/callback.c                                |  1 +
+ env/common.c                                  |  1 +
+ env/env.c                                     |  1 +
+ env/ext4.c                                    |  1 +
+ env/fat.c                                     |  1 +
+ env/flash.c                                   |  1 +
+ env/mmc.c                                     |  1 +
+ env/nvram.c                                   |  1 +
+ env/sf.c                                      |  1 +
+ env/ubi.c                                     |  1 +
+ examples/api/demo.c                           |  1 +
+ examples/api/glue.c                           |  1 +
+ examples/standalone/atmel_df_pow2.c           |  1 +
+ fs/btrfs/ctree.c                              |  1 +
+ fs/btrfs/ctree.h                              |  1 +
+ fs/btrfs/disk-io.c                            |  1 +
+ fs/btrfs/extent-io.c                          |  1 +
+ fs/btrfs/inode.c                              |  1 +
+ fs/btrfs/subvolume.c                          |  1 +
+ fs/btrfs/volumes.c                            |  1 +
+ fs/cbfs/cbfs.c                                |  1 +
+ fs/cramfs/cramfs.c                            |  1 +
+ fs/ext4/ext4_common.c                         |  1 +
+ fs/ext4/ext4_common.h                         |  1 +
+ fs/ext4/ext4_journal.c                        |  1 +
+ fs/ext4/ext4_write.c                          |  1 +
+ fs/ext4/ext4fs.c                              |  1 +
+ fs/fat/fat.c                                  |  1 +
+ fs/fat/fat_write.c                            |  1 +
+ fs/fs.c                                       |  2 ++
+ fs/fs_internal.c                              |  1 +
+ fs/jffs2/jffs2_1pass.c                        |  1 +
+ fs/jffs2/mini_inflate.c                       |  1 +
+ fs/reiserfs/reiserfs.c                        |  1 +
+ fs/sandbox/host_bootdev.c                     |  1 +
+ fs/squashfs/sqfs.c                            |  1 +
+ fs/ubifs/debug.c                              |  2 ++
+ fs/ubifs/io.c                                 |  1 +
+ fs/ubifs/key.h                                |  1 +
+ fs/ubifs/log.c                                |  1 +
+ fs/ubifs/lprops.c                             |  1 +
+ fs/ubifs/lpt_commit.c                         |  1 +
+ fs/ubifs/recovery.c                           |  1 +
+ fs/ubifs/replay.c                             |  1 +
+ fs/ubifs/super.c                              |  1 +
+ fs/ubifs/tnc.c                                |  1 +
+ fs/ubifs/ubifs.c                              |  1 +
+ fs/yaffs2/yaffs_mtdif2.c                      |  1 +
+ fs/yaffs2/yaffs_uboot_glue.c                  |  1 +
+ fs/yaffs2/yaffsfs.c                           |  1 +
+ fs/yaffs2/ydirectenv.h                        |  1 +
+ fs/zfs/zfs.c                                  |  1 +
+ include/cli.h                                 |  1 +
+ include/dm/of.h                               |  1 +
+ include/efi_loader.h                          |  1 +
+ include/exception.h                           |  1 +
+ include/exports.h                             |  2 ++
+ include/fdt_support.h                         |  1 +
+ include/imx8image.h                           |  1 +
+ include/linux/string.h                        |  1 +
+ include/net.h                                 |  1 +
+ include/net6.h                                |  1 +
+ include/part.h                                |  1 +
+ include/phy_interface.h                       |  1 +
+ include/regmap.h                              |  1 +
+ include/spi_flash.h                           |  1 +
+ include/test/ut.h                             |  1 +
+ include/time.h                                |  1 +
+ include/tlv_eeprom.h                          |  1 +
+ include/video_console.h                       |  1 +
+ include/xen/interface/io/ring.h               |  1 +
+ lib/abuf.c                                    |  1 +
+ lib/acpi/acpi.c                               |  1 +
+ lib/acpi/acpi_device.c                        |  1 +
+ lib/acpi/acpi_dp.c                            |  1 +
+ lib/acpi/acpi_table.c                         |  1 +
+ lib/acpi/acpi_writer.c                        |  1 +
+ lib/acpi/acpigen.c                            |  1 +
+ lib/acpi/base.c                               |  1 +
+ lib/acpi/csrt.c                               |  1 +
+ lib/acpi/dsdt.c                               |  1 +
+ lib/acpi/facs.c                               |  1 +
+ lib/acpi/mcfg.c                               |  1 +
+ lib/acpi/ssdt.c                               |  1 +
+ lib/aes.c                                     |  1 +
+ lib/aes/aes-decrypt.c                         |  1 +
+ lib/bch.c                                     |  1 +
+ lib/blake2/blake2-impl.h                      |  1 +
+ lib/blake2/blake2b.c                          |  1 +
+ lib/bzip2/bzlib.c                             |  1 +
+ lib/charset.c                                 |  1 +
+ lib/crc16-ccitt.c                             |  1 +
+ lib/crc32.c                                   |  1 +
+ lib/crypt/crypt.c                             |  1 +
+ lib/crypto/pkcs7_verify.c                     |  1 +
+ lib/crypto/public_key.c                       |  1 +
+ lib/crypto/x509_public_key.c                  |  1 +
+ lib/dhry/cmd_dhry.c                           |  1 +
+ lib/dhry/dhry.h                               |  1 +
+ lib/ecdsa/ecdsa-libcrypto.c                   |  1 +
+ lib/ecdsa/ecdsa-verify.c                      |  1 +
+ lib/efi/efi_app.c                             |  1 +
+ lib/efi/efi_stub.c                            |  1 +
+ lib/efi_loader/dtbdump.c                      |  1 +
+ lib/efi_loader/efi_bootmgr.c                  |  1 +
+ lib/efi_loader/efi_boottime.c                 |  1 +
+ lib/efi_loader/efi_capsule.c                  |  1 +
+ lib/efi_loader/efi_console.c                  |  1 +
+ lib/efi_loader/efi_device_path.c              |  1 +
+ lib/efi_loader/efi_device_path_to_text.c      |  1 +
+ lib/efi_loader/efi_disk.c                     |  1 +
+ lib/efi_loader/efi_file.c                     |  1 +
+ lib/efi_loader/efi_freestanding.c             |  1 +
+ lib/efi_loader/efi_gop.c                      |  1 +
+ lib/efi_loader/efi_helper.c                   |  1 +
+ lib/efi_loader/efi_hii.c                      |  1 +
+ lib/efi_loader/efi_image_loader.c             |  1 +
+ lib/efi_loader/efi_load_options.c             |  1 +
+ lib/efi_loader/efi_memory.c                   |  1 +
+ lib/efi_loader/efi_net.c                      |  1 +
+ lib/efi_loader/efi_runtime.c                  |  1 +
+ lib/efi_loader/efi_setup.c                    |  1 +
+ lib/efi_loader/efi_signature.c                |  1 +
+ lib/efi_loader/efi_tcg2.c                     |  1 +
+ lib/efi_loader/efi_unicode_collation.c        |  1 +
+ lib/efi_loader/efi_var_file.c                 |  1 +
+ lib/efi_loader/efi_var_mem.c                  |  1 +
+ lib/efi_loader/efi_variable.c                 |  1 +
+ lib/efi_loader/efi_variable_tee.c             |  1 +
+ lib/efi_loader/helloworld.c                   |  1 +
+ lib/efi_selftest/efi_selftest_block_device.c  |  1 +
+ lib/efi_selftest/efi_selftest_config_table.c  |  1 +
+ lib/efi_selftest/efi_selftest_ecpt.c          |  1 +
+ lib/efi_selftest/efi_selftest_load_file.c     |  1 +
+ lib/efi_selftest/efi_selftest_loaded_image.c  |  1 +
+ lib/efi_selftest/efi_selftest_loadimage.c     |  1 +
+ .../efi_selftest_manageprotocols.c            |  1 +
+ lib/efi_selftest/efi_selftest_mem.c           |  1 +
+ lib/efi_selftest/efi_selftest_memory.c        |  1 +
+ lib/efi_selftest/efi_selftest_rng.c           |  1 +
+ .../efi_selftest_set_virtual_address_map.c    |  1 +
+ lib/efi_selftest/efi_selftest_snp.c           |  1 +
+ .../efi_selftest_startimage_exit.c            |  1 +
+ lib/efi_selftest/efi_selftest_tcg2.c          |  1 +
+ lib/efi_selftest/efi_selftest_variables.c     |  1 +
+ .../efi_selftest_variables_runtime.c          |  1 +
+ lib/elf.c                                     |  1 +
+ lib/fdtdec.c                                  |  1 +
+ lib/fdtdec_test.c                             |  1 +
+ lib/fwu_updates/fwu.c                         |  1 +
+ lib/fwu_updates/fwu_mtd.c                     |  1 +
+ lib/getopt.c                                  |  1 +
+ lib/gunzip.c                                  |  1 +
+ lib/hashtable.c                               |  1 +
+ lib/image-sparse.c                            |  1 +
+ lib/libavb/avb_sysdeps_posix.c                |  1 +
+ lib/linux_compat.c                            |  1 +
+ lib/list_sort.c                               |  1 +
+ lib/lz4.c                                     |  1 +
+ lib/lz4_wrapper.c                             |  1 +
+ lib/lzo/lzo1x_decompress.c                    |  1 +
+ lib/md5.c                                     |  1 +
+ lib/membuff.c                                 |  1 +
+ lib/net_utils.c                               |  1 +
+ lib/of_live.c                                 |  1 +
+ lib/optee/optee.c                             |  1 +
+ lib/physmem.c                                 |  1 +
+ lib/qsort.c                                   |  1 +
+ lib/rsa/rsa-keyprop.c                         |  1 +
+ lib/rsa/rsa-mod-exp.c                         |  1 +
+ lib/rsa/rsa-verify.c                          |  1 +
+ lib/semihosting.c                             |  1 +
+ lib/slre.c                                    |  1 +
+ lib/smbios-parser.c                           |  1 +
+ lib/smbios.c                                  |  1 +
+ lib/strto.c                                   |  1 +
+ lib/tpm-common.c                              |  1 +
+ lib/tpm-v1.c                                  |  1 +
+ lib/tpm-v2.c                                  |  1 +
+ lib/trace.c                                   |  1 +
+ lib/uuid.c                                    |  1 +
+ net/arp.c                                     |  2 ++
+ net/bootp.c                                   |  2 ++
+ net/cdp.c                                     |  1 +
+ net/dhcpv6.c                                  |  2 ++
+ net/dns.c                                     |  2 ++
+ net/dsa-uclass.c                              |  1 +
+ net/eth-uclass.c                              |  1 +
+ net/eth_bootdev.c                             |  1 +
+ net/eth_common.c                              |  1 +
+ net/fastboot_tcp.c                            |  1 +
+ net/fastboot_udp.c                            |  2 ++
+ net/link_local.c                              |  2 ++
+ net/mdio-uclass.c                             |  1 +
+ net/ndisc.c                                   |  2 ++
+ net/net.c                                     |  2 ++
+ net/net6.c                                    |  2 ++
+ net/net_rand.h                                |  1 +
+ net/nfs.c                                     |  1 +
+ net/pcap.c                                    |  1 +
+ net/ping6.c                                   |  2 ++
+ net/rarp.c                                    |  1 +
+ net/sntp.c                                    |  2 ++
+ net/tcp.c                                     |  1 +
+ net/tftp.c                                    |  2 ++
+ net/wget.c                                    |  2 ++
+ net/wol.c                                     |  1 +
+ post/drivers/flash.c                          |  1 +
+ post/drivers/rtc.c                            |  5 ++--
+ post/lib_powerpc/multi.c                      |  1 +
+ post/lib_powerpc/string.c                     |  1 +
+ post/post.c                                   |  1 +
+ test/bloblist.c                               |  1 +
+ test/boot/bootdev.c                           |  1 +
+ test/boot/bootflow.c                          |  1 +
+ test/boot/bootstd_common.c                    |  1 +
+ test/boot/expo.c                              |  1 +
+ test/bootm.c                                  |  1 +
+ test/cmd/bdinfo.c                             |  1 +
+ test/cmd/fdt.c                                |  1 +
+ test/cmd/loadm.c                              |  1 +
+ test/cmd/mem_search.c                         |  1 +
+ test/cmd/rw.c                                 |  1 +
+ test/cmd/setexpr.c                            |  1 +
+ test/cmd/wget.c                               |  1 +
+ test/command_ut.c                             |  1 +
+ test/common/cread.c                           |  1 +
+ test/compression.c                            |  1 +
+ test/dm/acpi_dp.c                             |  1 +
+ test/dm/axi.c                                 |  1 +
+ test/dm/blkmap.c                              |  1 +
+ test/dm/clk_ccf.c                             |  1 +
+ test/dm/core.c                                |  1 +
+ test/dm/cpu.c                                 |  1 +
+ test/dm/devres.c                              |  1 +
+ test/dm/dma.c                                 |  1 +
+ test/dm/eth.c                                 |  1 +
+ test/dm/fwu_mdata.c                           |  1 +
+ test/dm/gpio.c                                |  1 +
+ test/dm/mmc.c                                 |  1 +
+ test/dm/mux-cmd.c                             |  2 ++
+ test/dm/nop.c                                 |  1 +
+ test/dm/of_platdata.c                         |  1 +
+ test/dm/ofnode.c                              |  1 +
+ test/dm/part.c                                |  1 +
+ test/dm/pci.c                                 |  1 +
+ test/dm/regmap.c                              |  2 ++
+ test/dm/remoteproc.c                          |  1 +
+ test/dm/rtc.c                                 |  1 +
+ test/dm/soc.c                                 |  1 +
+ test/dm/sysinfo.c                             |  1 +
+ test/dm/tee.c                                 |  1 +
+ test/dm/usb.c                                 |  1 +
+ test/dm/video.c                               |  1 +
+ test/dm/wdt.c                                 |  1 +
+ test/env/hashtable.c                          |  1 +
+ test/fuzz/cmd_fuzz.c                          |  1 +
+ test/fuzz/virtio.c                            |  1 +
+ test/image/spl_load.c                         |  1 +
+ test/lib/abuf.c                               |  1 +
+ test/lib/asn1.c                               |  1 +
+ test/lib/rsa.c                                |  1 +
+ test/lib/sscanf.c                             |  1 +
+ test/lib/string.c                             |  1 +
+ test/lib/strlcat.c                            |  1 +
+ test/lib/test_aes.c                           |  1 +
+ test/log/log_test.c                           |  1 +
+ test/log/nolog_ndebug.c                       |  1 +
+ test/log/nolog_test.c                         |  1 +
+ test/log/syslog_test.c                        |  1 +
+ test/optee/cmd_ut_optee.c                     |  1 +
+ test/print_ut.c                               |  1 +
+ test/str_ut.c                                 |  1 +
+ test/test-main.c                              |  1 +
+ test/unicode_ut.c                             |  1 +
+ test/ut.c                                     |  1 +
+ 1709 files changed, 1854 insertions(+), 34 deletions(-)
+
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
