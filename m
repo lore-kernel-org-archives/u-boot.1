@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DA42CE7A8B
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 02:40:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA2CCE7A91
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 02:40:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E6E1866EC;
-	Mon, 25 Sep 2023 04:40:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E514286B73;
+	Mon, 25 Sep 2023 04:40:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GeIfojbO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cgOKezP4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E7748469B; Mon, 25 Sep 2023 04:40:10 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id E5C5A86B5A; Mon, 25 Sep 2023 04:40:12 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62E348469B
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 04:40:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 832178692B
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 04:40:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-79f8e4108c3so182443139f.3
- for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 19:40:06 -0700 (PDT)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-79f9acc857cso153659039f.2
+ for <u-boot@lists.denx.de>; Sun, 24 Sep 2023 19:40:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695609605; x=1696214405; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=2T3SFjNKCVzRKPwQBY0+OmKBp9WaVyeBDukP4Qz7Bys=;
- b=GeIfojbOpVoZE0b2w2TCBSLVhIhUQAS8umDpiqsak0pfNmWfiKZGSuQ3sFq/wKJFdM
- bUPVhslKO5mggAnjI1p6s0msQnKyTwumDOLYrvrudvdRM9GwfKwfUqadDYOeOXXqinwU
- F/c4ue4hgJrRKqSCyKe+AfURmVjey6aC825/Q=
+ d=chromium.org; s=google; t=1695609606; x=1696214406; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7a5SO60XYiQEoepIyynWpCbYenJ52qWeIPCTtvubNxw=;
+ b=cgOKezP4ttUfxyN6wJNi+1G/e3Ue5ug/xP7jSVJBCTaLMzogWYY2PZDF5WaIfdgxJo
+ 1loHbHGX28GRnZq4F4AXXYdDmvI2cCzB3iCXQFP/qEaJCWryJJvT4JCQYGdREEuDUwsl
+ FY53Lo1mez8+uuhBZBgFDtiXI5fOeTkq/6Ckc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695609605; x=1696214405;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2T3SFjNKCVzRKPwQBY0+OmKBp9WaVyeBDukP4Qz7Bys=;
- b=pt/Lhu88W7TMZq6U9uzdrjElsT7w/Feb5pnmQJgjp2muh4zTYGyTwzyWPwvnyLWwBH
- ChuU6de4u/2m/yFG4kNCAdHB2hTEoPKcxdcFhE4k1pr/gtFsg30PJDnOTuuJZj53japB
- CS0rU8KnMkVsgIzvl/+LE+HJkU70gi6AYSi/s9tdh4exEryqmoCQyTTpdwV7NWBO4Vh6
- Bn0unvN6OwAUphrLh+AqLSroAACY9vN/8AP1L8soF+CSP8ntFmbB3U/I9Yqhd+LeIa+h
- u5rTWCSo9bboNshPSAonDqPSzjjfJmPJqGTxaOrgLGtCv2RTbx4oVCuqQkmSyNbnWh7C
- gpkg==
-X-Gm-Message-State: AOJu0Yyv1Aoyx4cAn7b7UValeHAoQhp/vqpleIETUZIq9lcYyIOYGIpo
- HPPsA3kd81wLVpA6iPa3xHd64xiW6WRj2Y6tLv4=
-X-Google-Smtp-Source: AGHT+IHKp6Uwubnt9lVpykb/+i+vuCOKZscW/eoMLnxPDGUv1DqD0LOEYpm8iDLj1IUGClyA6dK7gQ==
-X-Received: by 2002:a05:6e02:1c2c:b0:351:e70:2cec with SMTP id
- m12-20020a056e021c2c00b003510e702cecmr7143742ilh.20.1695609603926; 
- Sun, 24 Sep 2023 19:40:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695609606; x=1696214406;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7a5SO60XYiQEoepIyynWpCbYenJ52qWeIPCTtvubNxw=;
+ b=kiCeqxn9OUSODKNcb0Y9VOrvEq7TlCukZt4fsB8yf5uG4UJsVsLzjcPZsMB5hh0dRt
+ 1nH/b9cmKJ9L8mDaqgXVlHAgXJmuckli15lCFuJY8XnyhM984AHhxYWThum1+gj1gvOC
+ 1mQwHZjfA2M9StozlclJ7oExDLO1sOOSSqA6ySlSWqIByVNVKQVy+ZUBitOWhZjEu4Rg
+ SuWUSLMS1v3EmWVSUSVuF8//HSdu8djTvxIi9el9WkjaFM5TboFG4eXikyyVzsisuJON
+ 6tStQEX1KPExMAp9F4pkmxEzbnQ1n8sq75fZm+jH5EsXQ2XmDV4fDH13W1+YVy65q/5V
+ DLOw==
+X-Gm-Message-State: AOJu0YyMaQSRpQl10/cJNxRE4AYprC5CDxAusS717E6MpAVhnjZErgRc
+ MrUnjOZgeUVX9fpYdOPz252x8WTa7j4V/dIn2DA=
+X-Google-Smtp-Source: AGHT+IFBxTuAcWEpRQjcNMEidb2aiyvgJFezzw2xLjrT/FIcHtUB5rBsLJ6FurWAHVmxmq12q+UizQ==
+X-Received: by 2002:a05:6e02:1288:b0:351:80c:bc29 with SMTP id
+ y8-20020a056e02128800b00351080cbc29mr6214364ilq.17.1695609605824; 
+ Sun, 24 Sep 2023 19:40:05 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- q8-20020a0566380ec800b00439e3c9f958sm2477252jas.129.2023.09.24.19.40.03
+ q8-20020a0566380ec800b00439e3c9f958sm2477252jas.129.2023.09.24.19.40.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Sep 2023 19:40:03 -0700 (PDT)
+ Sun, 24 Sep 2023 19:40:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH 0/3] common: Remove a few more header files
-Date: Sun, 24 Sep 2023 20:39:49 -0600
-Message-ID: <20230925023958.1913268-1-sjg@chromium.org>
+Subject: [PATCH 2/3] common: Drop time.h from common header
+Date: Sun, 24 Sep 2023 20:39:51 -0600
+Message-ID: <20230925023958.1913268-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
+In-Reply-To: <20230925023958.1913268-1-sjg@chromium.org>
+References: <20230925023958.1913268-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,1727 +88,2820 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series removes two more header files from the common.h header. It
-also tidies up code style for time.h functions, to simplify similar
-maintenance in future.
+Move this out of the common header and include it only where needed.
 
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Simon Glass (3):
-  Fix code style for time functions
-  common: Drop time.h from common header
-  common: Drop linux/string.h from common header
+ api/api.c                                              | 1 +
+ arch/arm/include/asm/arch-tegra/timer.h                | 1 +
+ arch/arm/mach-at91/arm920t/clock.c                     | 1 +
+ arch/arm/mach-at91/arm926ejs/clock.c                   | 1 +
+ arch/arm/mach-at91/clock.c                             | 1 +
+ arch/arm/mach-at91/phy.c                               | 1 +
+ arch/arm/mach-bcm283x/mbox.c                           | 1 +
+ arch/arm/mach-bcmstb/include/mach/timer.h              | 1 +
+ arch/arm/mach-exynos/clock.c                           | 1 +
+ arch/arm/mach-imx/i2c-mxv7.c                           | 1 +
+ arch/arm/mach-imx/mx6/clock.c                          | 1 +
+ arch/arm/mach-imx/mx7/clock.c                          | 1 +
+ arch/arm/mach-nexell/timer.c                           | 1 +
+ arch/arm/mach-omap2/omap3/am35x_musb.c                 | 1 +
+ arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c | 1 +
+ arch/arm/mach-stm32mp/pwr_regulator.c                  | 1 +
+ arch/arm/mach-tegra/powergate.c                        | 1 +
+ arch/arm/mach-tegra/tegra124/xusb-padctl.c             | 1 +
+ arch/arm/mach-tegra/tegra210/clock.c                   | 1 +
+ arch/arm/mach-tegra/tegra210/xusb-padctl.c             | 1 +
+ arch/mips/mach-mtmips/mt7620/init.c                    | 1 +
+ arch/mips/mach-mtmips/mt7621/init.c                    | 1 +
+ arch/mips/mach-mtmips/mt7628/init.c                    | 1 +
+ arch/mips/mach-octeon/clock.c                          | 1 +
+ arch/mips/mach-octeon/cvmx-helper-bgx.c                | 1 +
+ arch/mips/mach-octeon/cvmx-pcie.c                      | 1 +
+ arch/mips/mach-octeon/include/mach/cvmx-mdio.h         | 1 +
+ arch/mips/mach-octeon/include/mach/cvmx-regs.h         | 1 +
+ arch/powerpc/lib/interrupts.c                          | 1 +
+ arch/x86/cpu/acpi_gpe.c                                | 1 +
+ arch/x86/cpu/apollolake/punit.c                        | 1 +
+ arch/x86/cpu/intel_common/mrc.c                        | 1 +
+ arch/x86/cpu/mp_init.c                                 | 1 +
+ board/astro/mcf5373l/mcf5373l.c                        | 1 +
+ board/cobra5272/flash.c                                | 1 +
+ board/freescale/m5253demo/flash.c                      | 1 +
+ board/nokia/rx51/rx51.c                                | 1 +
+ board/sandbox/sandbox.c                                | 1 +
+ board/theadorable/fpga.c                               | 1 +
+ board/theadorable/theadorable.c                        | 1 +
+ cmd/clone.c                                            | 1 +
+ cmd/cyclic.c                                           | 1 +
+ cmd/gettime.c                                          | 1 +
+ cmd/mem.c                                              | 1 +
+ cmd/sf.c                                               | 1 +
+ cmd/sleep.c                                            | 1 +
+ cmd/timer.c                                            | 1 +
+ cmd/tpm_test.c                                         | 1 +
+ common/command.c                                       | 1 +
+ common/dfu.c                                           | 1 +
+ common/usb_hub.c                                       | 1 +
+ common/usb_kbd.c                                       | 1 +
+ common/xyzModem.c                                      | 1 +
+ drivers/ata/ahci.c                                     | 1 +
+ drivers/ata/sata_mv.c                                  | 1 +
+ drivers/crypto/nuvoton/npcm_aes.c                      | 1 +
+ drivers/ddr/altera/sdram_n5x.c                         | 1 +
+ drivers/ddr/altera/sdram_soc64.c                       | 1 +
+ drivers/dma/lpc32xx_dma.c                              | 1 +
+ drivers/fpga/ACEX1K.c                                  | 1 +
+ drivers/fpga/cyclon2.c                                 | 1 +
+ drivers/fpga/intel_sdm_mb.c                            | 1 +
+ drivers/fpga/socfpga_arria10.c                         | 1 +
+ drivers/fpga/spartan2.c                                | 1 +
+ drivers/fpga/spartan3.c                                | 1 +
+ drivers/fpga/virtex2.c                                 | 1 +
+ drivers/fpga/zynqpl.c                                  | 1 +
+ drivers/hwspinlock/hwspinlock-uclass.c                 | 1 +
+ drivers/i2c/at91_i2c.c                                 | 1 +
+ drivers/i2c/designware_i2c.c                           | 1 +
+ drivers/i2c/i2c-cortina.c                              | 1 +
+ drivers/i2c/imx_lpi2c.c                                | 1 +
+ drivers/i2c/intel_i2c.c                                | 1 +
+ drivers/i2c/meson_i2c.c                                | 1 +
+ drivers/i2c/muxes/i2c-arb-gpio-challenge.c             | 1 +
+ drivers/i2c/mxc_i2c.c                                  | 1 +
+ drivers/i2c/npcm_i2c.c                                 | 1 +
+ drivers/i2c/nx_i2c.c                                   | 1 +
+ drivers/i2c/rk_i2c.c                                   | 1 +
+ drivers/i2c/s3c24x0_i2c.c                              | 1 +
+ drivers/i2c/stm32f7_i2c.c                              | 1 +
+ drivers/input/input.c                                  | 1 +
+ drivers/input/tegra-kbc.c                              | 1 +
+ drivers/misc/cros_ec.c                                 | 1 +
+ drivers/misc/cros_ec_lpc.c                             | 1 +
+ drivers/misc/cros_ec_sandbox.c                         | 1 +
+ drivers/misc/cros_ec_spi.c                             | 1 +
+ drivers/mmc/am654_sdhci.c                              | 1 +
+ drivers/mmc/bcm2835_sdhost.c                           | 1 +
+ drivers/mmc/dw_mmc.c                                   | 1 +
+ drivers/mmc/fsl_esdhc.c                                | 1 +
+ drivers/mmc/fsl_esdhc_imx.c                            | 1 +
+ drivers/mmc/ftsdc010_mci.c                             | 1 +
+ drivers/mmc/meson_gx_mmc.c                             | 1 +
+ drivers/mmc/mmc.c                                      | 1 +
+ drivers/mmc/mvebu_mmc.c                                | 1 +
+ drivers/mmc/omap_hsmmc.c                               | 1 +
+ drivers/mmc/sdhci.c                                    | 1 +
+ drivers/mmc/sunxi_mmc.c                                | 1 +
+ drivers/mmc/tegra_mmc.c                                | 1 +
+ drivers/mtd/cfi_flash.c                                | 1 +
+ drivers/mtd/nand/raw/brcmnand/brcmnand.c               | 1 +
+ drivers/mtd/nand/raw/fsl_elbc_nand.c                   | 1 +
+ drivers/mtd/nand/raw/fsl_ifc_nand.c                    | 1 +
+ drivers/mtd/nand/raw/mxs_nand_spl.c                    | 1 +
+ drivers/mtd/nand/raw/nand_base.c                       | 1 +
+ drivers/mtd/nand/raw/pxa3xx_nand.c                     | 1 +
+ drivers/mtd/nand/raw/rockchip_nfc.c                    | 1 +
+ drivers/mtd/nand/raw/sunxi_nand.c                      | 1 +
+ drivers/mtd/nand/raw/vf610_nfc.c                       | 1 +
+ drivers/mtd/nand/spi/core.c                            | 1 +
+ drivers/mtd/onenand/onenand_base.c                     | 1 +
+ drivers/mtd/spi/sf_dataflash.c                         | 1 +
+ drivers/mtd/spi/spi-nor-core.c                         | 1 +
+ drivers/mtd/spi/spi-nor-tiny.c                         | 1 +
+ drivers/net/ag7xxx.c                                   | 1 +
+ drivers/net/altera_tse.c                               | 1 +
+ drivers/net/cortina_ni.c                               | 1 +
+ drivers/net/designware.c                               | 1 +
+ drivers/net/dm9000x.c                                  | 1 +
+ drivers/net/ethoc.c                                    | 1 +
+ drivers/net/fec_mxc.c                                  | 1 +
+ drivers/net/ftmac100.c                                 | 1 +
+ drivers/net/ldpaa_eth/ldpaa_eth.c                      | 1 +
+ drivers/net/mtk_eth.c                                  | 1 +
+ drivers/net/npcm750_eth.c                              | 1 +
+ drivers/net/octeontx/smi.c                             | 1 +
+ drivers/net/octeontx2/nix_af.c                         | 1 +
+ drivers/net/pch_gbe.c                                  | 1 +
+ drivers/net/ravb.c                                     | 1 +
+ drivers/net/rswitch.c                                  | 1 +
+ drivers/net/rtl8169.c                                  | 1 +
+ drivers/net/sandbox.c                                  | 1 +
+ drivers/net/xilinx_emaclite.c                          | 1 +
+ drivers/pci/pci_rom.c                                  | 1 +
+ drivers/pci/pci_tegra.c                                | 1 +
+ drivers/pci/pcie_dw_mvebu.c                            | 1 +
+ drivers/pci/pcie_dw_ti.c                               | 1 +
+ drivers/pci/pcie_uniphier.c                            | 1 +
+ drivers/phy/phy-da8xx-usb.c                            | 1 +
+ drivers/power/exynos-tmu.c                             | 1 +
+ drivers/power/regulator/tps65090_regulator.c           | 1 +
+ drivers/ram/rockchip/dmc-rk3368.c                      | 1 +
+ drivers/ram/stm32mp1/stm32mp1_interactive.c            | 1 +
+ drivers/rng/sandbox_rng.c                              | 1 +
+ drivers/rtc/emul_rtc.c                                 | 1 +
+ drivers/rtc/rv3029.c                                   | 1 +
+ drivers/sound/samsung-i2s.c                            | 1 +
+ drivers/sound/tegra_ahub.c                             | 1 +
+ drivers/spi/altera_spi.c                               | 1 +
+ drivers/spi/apple_spi.c                                | 1 +
+ drivers/spi/cadence_qspi_apb.c                         | 1 +
+ drivers/spi/ich.c                                      | 1 +
+ drivers/spi/mpc8xxx_spi.c                              | 1 +
+ drivers/spi/mxc_spi.c                                  | 1 +
+ drivers/spi/omap3_spi.c                                | 1 +
+ drivers/spi/pic32_spi.c                                | 1 +
+ drivers/spi/rockchip_sfc.c                             | 1 +
+ drivers/spi/zynq_qspi.c                                | 1 +
+ drivers/timer/sandbox_timer.c                          | 1 +
+ drivers/tpm/cr50_i2c.c                                 | 1 +
+ drivers/tpm/tpm-uclass.c                               | 1 +
+ drivers/tpm/tpm2_tis_core.c                            | 1 +
+ drivers/tpm/tpm2_tis_spi.c                             | 1 +
+ drivers/tpm/tpm_atmel_twi.c                            | 1 +
+ drivers/tpm/tpm_tis_infineon.c                         | 1 +
+ drivers/tpm/tpm_tis_st33zp24_i2c.c                     | 1 +
+ drivers/tpm/tpm_tis_st33zp24_spi.c                     | 1 +
+ drivers/ufs/ufs.c                                      | 1 +
+ drivers/usb/eth/smsc95xx.c                             | 1 +
+ drivers/usb/gadget/ether.c                             | 1 +
+ drivers/usb/host/dwc2.c                                | 1 +
+ drivers/usb/host/ehci-hcd.c                            | 1 +
+ drivers/usb/host/ehci-omap.c                           | 1 +
+ drivers/usb/host/ohci-da8xx.c                          | 1 +
+ drivers/usb/host/xhci-ring.c                           | 1 +
+ drivers/usb/isp1760/isp1760-hcd.c                      | 1 +
+ drivers/usb/musb-new/am35x.c                           | 1 +
+ drivers/usb/musb-new/musb_dsps.c                       | 1 +
+ drivers/usb/musb-new/musb_uboot.c                      | 1 +
+ drivers/usb/musb-new/omap2430.c                        | 1 +
+ drivers/video/broadwell_igd.c                          | 1 +
+ drivers/video/dw_hdmi.c                                | 1 +
+ drivers/video/rockchip/rk_edp.c                        | 1 +
+ drivers/video/tegra124/display.c                       | 1 +
+ drivers/video/tegra124/dp.c                            | 1 +
+ drivers/video/tegra124/sor.c                           | 1 +
+ drivers/video/video-uclass.c                           | 1 +
+ drivers/watchdog/booke_wdt.c                           | 1 +
+ drivers/watchdog/sbsa_gwdt.c                           | 1 +
+ fs/fs.c                                                | 1 +
+ fs/ubifs/debug.c                                       | 1 +
+ include/cli.h                                          | 1 +
+ include/exports.h                                      | 1 +
+ include/regmap.h                                       | 1 +
+ include/time.h                                         | 1 +
+ lib/dhry/cmd_dhry.c                                    | 1 +
+ net/arp.c                                              | 1 +
+ net/bootp.c                                            | 1 +
+ net/dhcpv6.c                                           | 1 +
+ net/dns.c                                              | 1 +
+ net/fastboot_udp.c                                     | 1 +
+ net/link_local.c                                       | 1 +
+ net/ndisc.c                                            | 1 +
+ net/net.c                                              | 1 +
+ net/net6.c                                             | 1 +
+ net/ping6.c                                            | 1 +
+ net/sntp.c                                             | 1 +
+ net/tcp.c                                              | 1 +
+ net/tftp.c                                             | 1 +
+ net/wget.c                                             | 1 +
+ post/drivers/rtc.c                                     | 1 +
+ test/common/cread.c                                    | 1 +
+ test/dm/mux-cmd.c                                      | 1 +
+ test/dm/regmap.c                                       | 1 +
+ test/dm/wdt.c                                          | 1 +
+ 216 files changed, 216 insertions(+)
 
- api/api.c                                     |  2 ++
- api/api_net.c                                 |  1 +
- arch/arc/lib/relocate.c                       |  1 +
- arch/arm/cpu/arm926ejs/mxs/mxs.c              |  1 +
- arch/arm/cpu/arm926ejs/mxs/spl_boot.c         |  1 +
- arch/arm/cpu/armv7/bcm235xx/clk-bcm235xx.c    |  1 +
- arch/arm/cpu/armv7/bcm235xx/clk-core.c        |  1 +
- arch/arm/cpu/armv7/bcm281xx/clk-bcm281xx.c    |  1 +
- arch/arm/cpu/armv7/bcm281xx/clk-core.c        |  1 +
- arch/arm/cpu/armv7/ls102xa/fdt.c              |  1 +
- arch/arm/cpu/armv7/vf610/generic.c            |  1 +
- arch/arm/cpu/armv7/virt-v7.c                  |  1 +
- arch/arm/cpu/armv8/cache_v8.c                 |  1 +
- arch/arm/cpu/armv8/cpu.c                      |  1 +
- arch/arm/cpu/armv8/fsl-layerscape/cpu.c       |  1 +
- arch/arm/cpu/armv8/fsl-layerscape/fdt.c       |  1 +
- .../armv8/fsl-layerscape/fsl_lsch2_serdes.c   |  1 +
- .../armv8/fsl-layerscape/fsl_lsch3_serdes.c   |  1 +
- .../arm/cpu/armv8/fsl-layerscape/ls1028_ids.c |  1 +
- arch/arm/cpu/armv8/fsl-layerscape/mp.c        |  1 +
- arch/arm/cpu/armv8/fsl-layerscape/spl.c       |  1 +
- arch/arm/cpu/armv8/sec_firmware.c             |  1 +
- arch/arm/cpu/armv8/spin_table.c               |  1 +
- arch/arm/cpu/armv8/spl_data.c                 |  1 +
- arch/arm/include/asm/arch-octeontx/soc.h      |  2 ++
- arch/arm/include/asm/arch-octeontx2/soc.h     |  2 ++
- arch/arm/include/asm/arch-tegra/timer.h       |  1 +
- arch/arm/include/asm/io.h                     |  1 +
- arch/arm/include/asm/string.h                 |  2 --
- arch/arm/lib/bootm.c                          |  1 +
- arch/arm/lib/cache.c                          |  1 +
- arch/arm/lib/eabi_compat.c                    |  1 +
- arch/arm/lib/gic-v3-its.c                     |  1 +
- arch/arm/lib/psci-dt.c                        |  1 +
- arch/arm/mach-apple/board.c                   |  1 +
- arch/arm/mach-at91/arm920t/clock.c            |  1 +
- arch/arm/mach-at91/arm926ejs/clock.c          |  1 +
- arch/arm/mach-at91/clock.c                    |  1 +
- arch/arm/mach-at91/phy.c                      |  1 +
- arch/arm/mach-bcm283x/include/mach/mbox.h     |  1 +
- arch/arm/mach-bcm283x/mbox.c                  |  1 +
- arch/arm/mach-bcmstb/include/mach/timer.h     |  1 +
- arch/arm/mach-exynos/clock.c                  |  1 +
- arch/arm/mach-imx/cmd_bmode.c                 |  1 +
- arch/arm/mach-imx/cmd_dek.c                   |  1 +
- arch/arm/mach-imx/cmd_mfgprot.c               |  1 +
- arch/arm/mach-imx/cmd_nandbcb.c               |  1 +
- arch/arm/mach-imx/ele_ahab.c                  |  1 +
- arch/arm/mach-imx/hab.c                       |  1 +
- arch/arm/mach-imx/i2c-mxv7.c                  |  1 +
- arch/arm/mach-imx/image-container.c           |  1 +
- arch/arm/mach-imx/imx8/ahab.c                 |  1 +
- arch/arm/mach-imx/imx8/cpu.c                  |  1 +
- arch/arm/mach-imx/imx8/fdt.c                  |  1 +
- arch/arm/mach-imx/imx8m/soc.c                 |  1 +
- arch/arm/mach-imx/imx8ulp/soc.c               |  1 +
- arch/arm/mach-imx/imx8ulp/upower/upower_api.c |  1 +
- arch/arm/mach-imx/imx9/soc.c                  |  1 +
- arch/arm/mach-imx/imx_bootaux.c               |  1 +
- arch/arm/mach-imx/mx5/clock.c                 |  1 +
- arch/arm/mach-imx/mx6/clock.c                 |  1 +
- arch/arm/mach-imx/mx6/module_fuse.c           |  1 +
- arch/arm/mach-imx/mx7/clock.c                 |  1 +
- arch/arm/mach-imx/spl_imx_romapi.c            |  1 +
- arch/arm/mach-imx/video.c                     |  1 +
- arch/arm/mach-k3/am625_init.c                 |  1 +
- arch/arm/mach-k3/am62a7_init.c                |  1 +
- arch/arm/mach-k3/am642_init.c                 |  1 +
- arch/arm/mach-k3/common.c                     |  1 +
- arch/arm/mach-k3/j721e_init.c                 |  1 +
- arch/arm/mach-k3/j721s2_init.c                |  1 +
- arch/arm/mach-k3/sysfw-loader.c               |  1 +
- arch/arm/mach-keystone/cmd_clock.c            |  1 +
- arch/arm/mach-keystone/cmd_mon.c              |  1 +
- arch/arm/mach-keystone/ddr3_spd.c             |  1 +
- .../arm/mach-keystone/include/mach/hardware.h |  2 ++
- arch/arm/mach-keystone/mon.c                  |  1 +
- arch/arm/mach-meson/sm.c                      |  1 +
- arch/arm/mach-mvebu/armada3700/cpu.c          |  1 +
- .../serdes/axp/high_speed_env_lib.c           |  1 +
- arch/arm/mach-nexell/clock.c                  |  1 +
- arch/arm/mach-nexell/timer.c                  |  1 +
- arch/arm/mach-omap2/emif-common.c             |  1 +
- arch/arm/mach-omap2/omap3/am35x_musb.c        |  1 +
- arch/arm/mach-omap2/omap3/board.c             |  1 +
- arch/arm/mach-omap2/sec-common.c              |  1 +
- arch/arm/mach-rockchip/board.c                |  1 +
- arch/arm/mach-rockchip/boot_mode.c            |  1 +
- arch/arm/mach-rockchip/misc.c                 |  1 +
- arch/arm/mach-rockchip/spl-boot-order.c       |  1 +
- arch/arm/mach-snapdragon/init_sdm845.c        |  1 +
- arch/arm/mach-socfpga/clock_manager_arria10.c |  1 +
- arch/arm/mach-socfpga/misc_arria10.c          |  1 +
- arch/arm/mach-socfpga/pinmux_arria10.c        |  1 +
- arch/arm/mach-socfpga/secure_vab.c            |  1 +
- arch/arm/mach-socfpga/smc_api.c               |  1 +
- arch/arm/mach-stm32mp/bsec.c                  |  1 +
- arch/arm/mach-stm32mp/cmd_stm32key.c          |  1 +
- .../cmd_stm32prog/cmd_stm32prog.c             |  1 +
- .../mach-stm32mp/cmd_stm32prog/stm32prog.c    |  1 +
- .../cmd_stm32prog/stm32prog_serial.c          |  2 ++
- .../cmd_stm32prog/stm32prog_usb.c             |  1 +
- arch/arm/mach-stm32mp/ecdsa_romapi.c          |  1 +
- arch/arm/mach-stm32mp/fdt.c                   |  1 +
- arch/arm/mach-stm32mp/pwr_regulator.c         |  1 +
- arch/arm/mach-sunxi/board.c                   |  1 +
- arch/arm/mach-tegra/cboot.c                   |  1 +
- arch/arm/mach-tegra/dt-setup.c                |  1 +
- arch/arm/mach-tegra/powergate.c               |  1 +
- arch/arm/mach-tegra/tegra124/xusb-padctl.c    |  1 +
- arch/arm/mach-tegra/tegra20/bct.c             |  1 +
- arch/arm/mach-tegra/tegra20/emc.c             |  1 +
- arch/arm/mach-tegra/tegra20/warmboot.c        |  1 +
- arch/arm/mach-tegra/tegra210/clock.c          |  1 +
- arch/arm/mach-tegra/tegra210/xusb-padctl.c    |  1 +
- arch/arm/mach-tegra/tegra30/bct.c             |  1 +
- arch/arm/mach-tegra/xusb-padctl-common.c      |  1 +
- arch/arm/mach-uniphier/base-address.c         |  1 +
- arch/arm/mach-uniphier/board_late_init.c      |  1 +
- arch/arm/mach-uniphier/dram/cmd_ddrmphy.c     |  1 +
- arch/arm/mach-uniphier/dram/cmd_ddrphy.c      |  1 +
- arch/arm/mach-versal/mp.c                     |  1 +
- arch/arm/mach-zynq/ddrc.c                     |  1 +
- arch/arm/mach-zynq/slcr.c                     |  1 +
- arch/arm/mach-zynqmp/cpu.c                    |  1 +
- arch/arm/mach-zynqmp/mp.c                     |  1 +
- arch/microblaze/cpu/cpuinfo.c                 |  1 +
- arch/microblaze/include/asm/io.h              |  1 +
- arch/mips/include/asm/io.h                    |  1 +
- arch/mips/lib/bootm.c                         |  1 +
- arch/mips/lib/reloc.c                         |  1 +
- arch/mips/lib/traps.c                         |  1 +
- arch/mips/mach-jz47xx/jz4780/jz4780.c         |  1 +
- arch/mips/mach-mtmips/cpu.c                   |  1 +
- arch/mips/mach-mtmips/mt7620/init.c           |  1 +
- arch/mips/mach-mtmips/mt7621/init.c           |  1 +
- arch/mips/mach-mtmips/mt7621/spl/launch.c     |  1 +
- arch/mips/mach-mtmips/mt7628/init.c           |  1 +
- arch/mips/mach-octeon/bootoctlinux.c          |  1 +
- arch/mips/mach-octeon/clock.c                 |  1 +
- arch/mips/mach-octeon/cpu.c                   |  1 +
- arch/mips/mach-octeon/cvmx-bootmem.c          |  1 +
- arch/mips/mach-octeon/cvmx-cmd-queue.c        |  1 +
- arch/mips/mach-octeon/cvmx-coremask.c         |  1 +
- arch/mips/mach-octeon/cvmx-fau-compat.c       |  1 +
- arch/mips/mach-octeon/cvmx-fpa.c              |  1 +
- arch/mips/mach-octeon/cvmx-helper-bgx.c       |  1 +
- arch/mips/mach-octeon/cvmx-helper-board.c     |  1 +
- arch/mips/mach-octeon/cvmx-helper-cfg.c       |  1 +
- arch/mips/mach-octeon/cvmx-helper-ilk.c       |  1 +
- arch/mips/mach-octeon/cvmx-helper-pki.c       |  1 +
- arch/mips/mach-octeon/cvmx-helper-rgmii.c     |  1 +
- arch/mips/mach-octeon/cvmx-helper-sfp.c       |  1 +
- arch/mips/mach-octeon/cvmx-helper-util.c      |  1 +
- arch/mips/mach-octeon/cvmx-pcie.c             |  2 ++
- arch/mips/mach-octeon/cvmx-pko3-compat.c      |  1 +
- arch/mips/mach-octeon/cvmx-pko3-queue.c       |  1 +
- arch/mips/mach-octeon/cvmx-pko3.c             |  1 +
- arch/mips/mach-octeon/cvmx-qlm.c              |  1 +
- .../mach-octeon/include/mach/cvmx-coremask.h  |  1 +
- .../mips/mach-octeon/include/mach/cvmx-mdio.h |  1 +
- .../mips/mach-octeon/include/mach/cvmx-pko3.h |  1 +
- .../mips/mach-octeon/include/mach/cvmx-regs.h |  1 +
- arch/mips/mach-octeon/include/mach/cvmx-wqe.h |  1 +
- arch/mips/mach-octeon/octeon_fdt.c            |  1 +
- arch/mips/mach-octeon/octeon_qlm.c            |  1 +
- arch/nios2/cpu/cpu.c                          |  1 +
- arch/nios2/include/asm/io.h                   |  1 +
- arch/powerpc/cpu/mpc83xx/ecc.c                |  1 +
- arch/powerpc/cpu/mpc85xx/cpu_init.c           |  1 +
- arch/powerpc/cpu/mpc85xx/fdt.c                |  1 +
- .../powerpc/cpu/mpc85xx/fsl_corenet2_serdes.c |  1 +
- arch/powerpc/cpu/mpc85xx/liodn.c              |  1 +
- arch/powerpc/cpu/mpc85xx/mp.c                 |  1 +
- arch/powerpc/cpu/mpc85xx/portals.c            |  1 +
- arch/powerpc/cpu/mpc8xxx/fsl_pamu.c           |  1 +
- arch/powerpc/include/asm/io.h                 |  1 +
- arch/powerpc/lib/interrupts.c                 |  3 ++-
- arch/powerpc/lib/time.c                       |  5 ++--
- arch/riscv/include/asm/io.h                   |  1 +
- arch/riscv/include/asm/posix_types.h          |  2 ++
- arch/riscv/lib/andes_plicsw.c                 |  1 +
- arch/riscv/lib/fdt_fixup.c                    |  1 +
- arch/sandbox/cpu/cpu.c                        |  1 +
- arch/sandbox/cpu/eth-raw-os.c                 |  1 +
- arch/sandbox/cpu/os.c                         |  1 +
- arch/sandbox/cpu/sdl.c                        |  1 +
- arch/sandbox/cpu/spl.c                        |  1 +
- arch/sandbox/cpu/start.c                      |  1 +
- arch/sandbox/cpu/state.c                      |  1 +
- arch/sandbox/lib/bootm.c                      |  1 +
- arch/sh/lib/board.c                           |  1 +
- arch/sh/lib/bootm.c                           |  1 +
- arch/sh/lib/zimageboot.c                      |  1 +
- arch/x86/cpu/acpi_gpe.c                       |  2 ++
- arch/x86/cpu/apollolake/acpi.c                |  1 +
- arch/x86/cpu/apollolake/fsp_bindings.c        |  1 +
- arch/x86/cpu/apollolake/pmc.c                 |  1 +
- arch/x86/cpu/apollolake/punit.c               |  1 +
- arch/x86/cpu/apollolake/spl.c                 |  1 +
- arch/x86/cpu/apollolake/uart.c                |  1 +
- arch/x86/cpu/baytrail/acpi.c                  |  1 +
- arch/x86/cpu/broadwell/me.c                   |  1 +
- arch/x86/cpu/broadwell/northbridge.c          |  1 +
- arch/x86/cpu/broadwell/pinctrl_broadwell.c    |  1 +
- arch/x86/cpu/broadwell/refcode.c              |  1 +
- arch/x86/cpu/broadwell/sdram.c                |  1 +
- arch/x86/cpu/cpu_x86.c                        |  1 +
- arch/x86/cpu/efi/payload.c                    |  1 +
- arch/x86/cpu/i386/cpu.c                       |  1 +
- arch/x86/cpu/intel_common/intel_opregion.c    |  1 +
- arch/x86/cpu/intel_common/itss.c              |  1 +
- arch/x86/cpu/intel_common/mrc.c               |  1 +
- arch/x86/cpu/intel_common/report_platform.c   |  1 +
- arch/x86/cpu/ivybridge/sata.c                 |  1 +
- arch/x86/cpu/ivybridge/sdram.c                |  1 +
- arch/x86/cpu/mp_init.c                        |  2 ++
- arch/x86/cpu/mtrr.c                           |  1 +
- arch/x86/cpu/qfw_cpu.c                        |  1 +
- arch/x86/cpu/quark/acpi.c                     |  1 +
- arch/x86/cpu/quark/dram.c                     |  1 +
- arch/x86/cpu/quark/smc.c                      |  1 +
- arch/x86/cpu/tangier/acpi.c                   |  1 +
- arch/x86/cpu/tangier/sdram.c                  |  1 +
- arch/x86/include/asm/io.h                     |  1 +
- arch/x86/include/asm/me_common.h              |  1 +
- arch/x86/lib/acpi.c                           |  1 +
- arch/x86/lib/acpi_nhlt.c                      |  1 +
- arch/x86/lib/acpi_s3.c                        |  1 +
- arch/x86/lib/acpi_table.c                     |  1 +
- arch/x86/lib/bios.c                           |  1 +
- arch/x86/lib/cmd_boot.c                       |  1 +
- arch/x86/lib/coreboot_table.c                 |  1 +
- arch/x86/lib/fsp1/fsp_support.c               |  1 +
- arch/x86/lib/fsp2/fsp_meminit.c               |  1 +
- arch/x86/lib/fsp2/fsp_silicon_init.c          |  1 +
- arch/x86/lib/fsp2/fsp_support.c               |  1 +
- arch/x86/lib/mpspec.c                         |  1 +
- arch/x86/lib/mrccache.c                       |  1 +
- arch/x86/lib/physmem.c                        |  1 +
- arch/x86/lib/pirq_routing.c                   |  1 +
- arch/x86/lib/relocate.c                       |  1 +
- arch/x86/lib/scu.c                            |  1 +
- arch/x86/lib/sfi.c                            |  1 +
- arch/x86/lib/spl.c                            |  1 +
- arch/x86/lib/string.c                         |  1 +
- arch/x86/lib/tables.c                         |  1 +
- arch/x86/lib/zimage.c                         |  1 +
- arch/xtensa/include/asm/io.h                  |  1 +
- arch/xtensa/include/asm/posix_types.h         |  2 ++
- arch/xtensa/lib/bootm.c                       |  1 +
- arch/xtensa/lib/relocate.c                    |  1 +
- board/BuR/common/common.c                     |  1 +
- board/BuS/eb_cpu5282/eb_cpu5282.c             |  1 +
- board/CZ.NIC/turris_atsha_otp.c               |  1 +
- board/CZ.NIC/turris_omnia/turris_omnia.c      |  1 +
- board/Marvell/mvebu_armada-37xx/board.c       |  1 +
- board/Marvell/octeon_ebb7304/board.c          |  1 +
- board/Marvell/octeontx/board-fdt.c            |  1 +
- board/Marvell/octeontx/board.c                |  1 +
- board/Marvell/octeontx/soc-utils.c            |  1 +
- board/Marvell/octeontx2/board-fdt.c           |  1 +
- board/Marvell/octeontx2/board.c               |  1 +
- board/Marvell/octeontx2/soc-utils.c           |  1 +
- board/Synology/common/legacy.c                |  1 +
- board/Synology/ds414/cmd_syno.c               |  1 +
- board/advantech/imx8qm_dmsse20_a1/spl.c       |  1 +
- board/advantech/imx8qm_rom7720_a1/spl.c       |  1 +
- board/amlogic/vim3/vim3.c                     |  1 +
- board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c    |  1 +
- board/aristainetos/aristainetos.c             |  1 +
- board/armltd/integrator/timer.c               |  2 +-
- board/armltd/vexpress64/vexpress64.c          |  1 +
- board/astro/mcf5373l/mcf5373l.c               |  1 +
- board/atmel/common/mac-spi-nor.c              |  1 +
- board/atmel/common/video_display.c            |  1 +
- board/atmel/sama5d3xek/sama5d3xek.c           |  1 +
- board/beacon/beacon-rzg2m/beacon-rzg2m.c      |  1 +
- board/beacon/imx8mm/spl.c                     |  1 +
- board/beacon/imx8mn/spl.c                     |  1 +
- board/beckhoff/mx53cx9020/mx53cx9020.c        |  1 +
- board/bluewater/gurnard/gurnard.c             |  1 +
- board/bosch/acc/acc.c                         |  1 +
- board/boundary/nitrogen6x/nitrogen6x.c        |  1 +
- board/bsh/imx8mn_smm_s2/spl.c                 |  1 +
- board/cavium/thunderx/atf.c                   |  1 +
- board/cloos/imx8mm_phg/spl.c                  |  1 +
- board/cobra5272/flash.c                       |  1 +
- board/compulab/cl-som-imx7/spl.c              |  1 +
- board/compulab/cm_fx6/cm_fx6.c                |  1 +
- board/compulab/common/eeprom.c                |  1 +
- board/compulab/imx8mm-cl-iot-gate/spl.c       |  1 +
- board/congatec/cgtqmx8/cgtqmx8.c              |  1 +
- board/congatec/cgtqmx8/spl.c                  |  1 +
- board/congatec/common/mmc.c                   |  1 +
- board/cssi/cmpc885/cmpc885.c                  |  1 +
- board/cssi/cmpcpro/cmpcpro.c                  |  1 +
- board/data_modul/common/common.c              |  1 +
- board/davinci/da8xxevm/da850evm.c             |  1 +
- board/davinci/da8xxevm/omapl138_lcdk.c        |  1 +
- board/dhelectronics/dh_imx6/dh_imx6.c         |  1 +
- board/dhelectronics/dh_imx6/dh_imx6_spl.c     |  1 +
- .../dh_imx8mp/imx8mp_dhcom_pdk2.c             |  1 +
- board/dhelectronics/dh_imx8mp/spl.c           |  1 +
- board/dhelectronics/dh_stm32mp1/board.c       |  1 +
- board/ea/mx7ulp_com/mx7ulp_com.c              |  1 +
- board/egnite/ethernut5/ethernut5_pwrman.c     |  1 +
- board/emulation/common/qemu_dfu.c             |  1 +
- board/emulation/qemu-ppce500/qemu-ppce500.c   |  1 +
- board/engicam/common/board.c                  |  1 +
- board/engicam/common/spl.c                    |  1 +
- board/engicam/imx8mm/spl.c                    |  1 +
- board/esd/meesc/meesc.c                       |  1 +
- board/firefly/roc-pc-rk3399/roc-pc-rk3399.c   |  1 +
- board/freescale/common/fsl_validate.c         |  1 +
- board/freescale/common/mmc.c                  |  1 +
- board/freescale/common/ngpixis.c              |  1 +
- board/freescale/common/qixis.c                |  1 +
- board/freescale/common/sys_eeprom.c           |  1 +
- board/freescale/imx8mm_evk/spl.c              |  1 +
- board/freescale/imx8mn_evk/spl.c              |  1 +
- board/freescale/imx8mq_evk/spl.c              |  1 +
- board/freescale/imx8qm_mek/imx8qm_mek.c       |  1 +
- board/freescale/imx8qm_mek/spl.c              |  1 +
- board/freescale/imx8qxp_mek/imx8qxp_mek.c     |  1 +
- board/freescale/imx8qxp_mek/spl.c             |  1 +
- board/freescale/imx8ulp_evk/imx8ulp_evk.c     |  1 +
- board/freescale/imx8ulp_evk/spl.c             |  1 +
- board/freescale/imx93_evk/spl.c               |  1 +
- board/freescale/ls1012aqds/ls1012aqds.c       |  1 +
- board/freescale/ls1012ardb/ls1012ardb.c       |  1 +
- board/freescale/ls1021aiot/ls1021aiot.c       |  1 +
- board/freescale/ls1021aqds/ddr.c              |  1 +
- board/freescale/ls1021aqds/ls1021aqds.c       |  1 +
- board/freescale/ls1021atsn/ls1021atsn.c       |  1 +
- board/freescale/ls1021atwr/ls1021atwr.c       |  1 +
- board/freescale/ls1043aqds/eth.c              |  1 +
- board/freescale/ls1043ardb/cpld.c             |  1 +
- board/freescale/ls1043ardb/ddr.c              |  1 +
- board/freescale/ls1046afrwy/eth.c             |  1 +
- board/freescale/ls1046ardb/cpld.c             |  1 +
- board/freescale/ls1046ardb/eth.c              |  1 +
- board/freescale/ls1088a/eth_ls1088aqds.c      |  1 +
- board/freescale/ls1088a/ls1088a.c             |  1 +
- board/freescale/ls2080aqds/eth.c              |  1 +
- board/freescale/ls2080aqds/ls2080aqds.c       |  1 +
- board/freescale/lx2160a/eth_lx2160aqds.c      |  1 +
- board/freescale/lx2160a/eth_lx2162aqds.c      |  1 +
- board/freescale/lx2160a/lx2160a.c             |  1 +
- board/freescale/m5253demo/flash.c             |  1 +
- board/freescale/mx6memcal/spl.c               |  1 +
- board/freescale/mx6sabreauto/mx6sabreauto.c   |  1 +
- board/freescale/mx6sabresd/mx6sabresd.c       |  1 +
- board/freescale/mx6slevk/mx6slevk.c           |  1 +
- .../mx6ul_14x14_evk/mx6ul_14x14_evk.c         |  1 +
- board/freescale/p1010rdb/ddr.c                |  1 +
- board/freescale/p1010rdb/p1010rdb.c           |  1 +
- board/freescale/p1010rdb/spl.c                |  1 +
- board/freescale/p1_p2_rdb_pc/ddr.c            |  1 +
- board/freescale/p1_p2_rdb_pc/spl.c            |  1 +
- board/freescale/p2041rdb/cpld.c               |  1 +
- board/freescale/t102xrdb/cpld.c               |  1 +
- board/freescale/t102xrdb/ddr.c                |  1 +
- board/freescale/t102xrdb/spl.c                |  1 +
- board/freescale/t102xrdb/t102xrdb.c           |  1 +
- board/freescale/t104xrdb/cpld.c               |  1 +
- board/freescale/t104xrdb/spl.c                |  1 +
- board/freescale/t208xqds/eth_t208xqds.c       |  1 +
- board/freescale/t208xqds/spl.c                |  1 +
- board/freescale/t208xrdb/cpld.c               |  1 +
- board/freescale/t208xrdb/spl.c                |  1 +
- board/freescale/t4rdb/cpld.c                  |  1 +
- board/freescale/t4rdb/spl.c                   |  1 +
- board/friendlyarm/nanopi2/board.c             |  1 +
- board/friendlyarm/nanopi2/lcds.c              |  1 +
- board/gardena/smart-gateway-mt7688/board.c    |  1 +
- board/gateworks/gw_ventana/eeprom.c           |  1 +
- board/gateworks/gw_ventana/gw_ventana.c       |  1 +
- board/gateworks/venice/eeprom.c               |  1 +
- board/gateworks/venice/spl.c                  |  1 +
- board/gateworks/venice/venice.c               |  1 +
- board/gdsys/a38x/hre.c                        |  1 +
- board/gdsys/a38x/ihs_phys.c                   |  1 +
- board/gdsys/a38x/keyprogram.c                 |  1 +
- board/gdsys/common/cmd_ioloop.c               |  1 +
- board/gdsys/common/ihs_mdio.c                 |  1 +
- board/gdsys/common/ioep-fpga.c                |  1 +
- board/gdsys/common/osd.c                      |  1 +
- board/gdsys/common/osd_cmd.c                  |  1 +
- board/ge/b1x5v2/b1x5v2.c                      |  1 +
- board/ge/b1x5v2/spl.c                         |  1 +
- board/ge/bx50v3/bx50v3.c                      |  1 +
- board/ge/mx53ppd/mx53ppd.c                    |  1 +
- board/google/chameleonv3/mercury_aa1.c        |  1 +
- board/google/imx8mq_phanbell/spl.c            |  1 +
- board/grinn/liteboard/board.c                 |  1 +
- board/hoperun/hihope-rzg2/hihope-rzg2.c       |  1 +
- board/imgtec/malta/malta.c                    |  1 +
- board/isee/igep00x0/igep00x0.c                |  1 +
- board/k+p/kp_imx53/kp_id_rev.c                |  1 +
- board/k+p/kp_imx6q_tpc/kp_imx6q_tpc_spl.c     |  1 +
- board/keymile/common/common.c                 |  1 +
- board/keymile/common/ivm.c                    |  1 +
- board/keymile/kmcent2/kmcent2.c               |  1 +
- board/kontron/pitx_imx8m/spl.c                |  1 +
- board/kontron/sl-mx6ul/spl.c                  |  1 +
- board/kontron/sl-mx8mm/spl.c                  |  1 +
- board/kontron/sl28/spl.c                      |  1 +
- board/kosagi/novena/novena.c                  |  1 +
- board/liebherr/display5/display5.c            |  1 +
- board/liebherr/display5/spl.c                 |  1 +
- board/liebherr/mccmon6/spl.c                  |  1 +
- board/mediatek/mt7623/mt7623_rfb.c            |  1 +
- board/menlo/m53menlo/m53menlo.c               |  1 +
- board/mntre/imx8mq_reform2/spl.c              |  1 +
- board/mscc/jr2/jr2.c                          |  1 +
- board/mscc/luton/luton.c                      |  1 +
- board/mscc/ocelot/ocelot.c                    |  1 +
- board/mscc/serval/serval.c                    |  1 +
- board/mscc/servalt/servalt.c                  |  1 +
- board/nokia/rx51/rx51.c                       |  2 ++
- board/phytec/pcm058/pcm058.c                  |  1 +
- board/phytec/phycore_imx8mm/spl.c             |  1 +
- board/phytium/pomelo/pcie.c                   |  1 +
- board/phytium/pomelo/pll.c                    |  1 +
- board/phytium/pomelo/sec.c                    |  1 +
- .../dragonboard410c/dragonboard410c.c         |  1 +
- board/renesas/salvator-x/salvator-x.c         |  1 +
- board/renesas/stout/cpld.c                    |  1 +
- board/renesas/ulcb/cpld.c                     |  1 +
- board/renesas/ulcb/ulcb.c                     |  1 +
- board/renesas/v3hsk/cpld.c                    |  1 +
- board/renesas/v3msk/cpld.c                    |  1 +
- board/ronetix/imx7-cm/spl.c                   |  1 +
- board/ronetix/imx8mq-cm/spl.c                 |  1 +
- board/samsung/common/gadget.c                 |  1 +
- board/samsung/origen/tools/mkorigenspl.c      |  1 +
- board/samsung/smdkv310/tools/mksmdkv310spl.c  |  1 +
- board/sandbox/sandbox.c                       |  1 +
- board/siemens/capricorn/board.c               |  1 +
- board/siemens/capricorn/spl.c                 |  1 +
- board/siemens/common/board.c                  |  1 +
- board/siemens/common/factoryset.c             |  1 +
- board/siemens/iot2050/board.c                 |  1 +
- board/siemens/pxm2/board.c                    |  1 +
- board/siemens/rut/board.c                     |  1 +
- .../unmatched/hifive-platform-i2c-eeprom.c    |  1 +
- board/socionext/developerbox/fwu_plat.c       |  1 +
- board/softing/vining_2000/vining_2000.c       |  1 +
- board/softing/vining_fpga/socfpga.c           |  1 +
- board/solidrun/clearfog/clearfog.c            |  1 +
- board/solidrun/common/tlv_data.c              |  1 +
- board/solidrun/mx6cuboxi/mx6cuboxi.c          |  1 +
- board/st/common/cmd_stboard.c                 |  1 +
- board/st/common/stm32mp_dfu.c                 |  1 +
- board/st/stm32mp1/stm32mp1.c                  |  1 +
- .../visionfive2/visionfive2-i2c-eeprom.c      |  1 +
- board/ste/stemmy/stemmy.c                     |  1 +
- board/sunxi/board.c                           |  1 +
- board/sunxi/chip.c                            |  1 +
- board/synopsys/emsdp/emsdp.c                  |  1 +
- board/synopsys/hsdk/hsdk.c                    |  1 +
- board/technexion/pico-imx6/spl.c              |  1 +
- board/technexion/pico-imx6ul/spl.c            |  1 +
- board/technexion/pico-imx7d/spl.c             |  1 +
- board/technexion/pico-imx8mq/spl.c            |  1 +
- board/theadorable/fpga.c                      |  2 ++
- board/theadorable/theadorable.c               |  1 +
- .../puma_rk3399/puma-rk3399.c                 |  1 +
- .../ringneck_px30/ringneck-px30.c             |  1 +
- board/ti/am335x/board.c                       |  1 +
- board/ti/am335x/board.h                       |  1 +
- board/ti/am43xx/board.c                       |  1 +
- board/ti/am43xx/board.h                       |  1 +
- board/ti/am57xx/board.c                       |  1 +
- board/ti/am64x/evm.c                          |  1 +
- board/ti/am65x/evm.c                          |  1 +
- board/ti/beagle/beagle.c                      |  1 +
- board/ti/common/board_detect.c                |  1 +
- board/ti/common/cape_detect.c                 |  1 +
- board/ti/j721e/evm.c                          |  1 +
- board/ti/j721s2/evm.c                         |  1 +
- board/ti/ks2_evm/board.c                      |  1 +
- board/ti/ks2_evm/board_k2e.c                  |  1 +
- board/ti/ks2_evm/board_k2g.c                  |  1 +
- board/ti/ks2_evm/board_k2hk.c                 |  1 +
- board/ti/ks2_evm/board_k2l.c                  |  1 +
- board/ti/sdp4430/cmd_bat.c                    |  1 +
- board/toradex/apalis-tk1/apalis-tk1.c         |  1 +
- board/toradex/apalis_imx6/apalis_imx6.c       |  1 +
- board/toradex/apalis_imx6/do_fuse.c           |  1 +
- board/toradex/colibri_imx6/colibri_imx6.c     |  1 +
- board/toradex/colibri_imx6/do_fuse.c          |  1 +
- board/toradex/common/tdx-cfg-block.c          |  1 +
- board/toradex/common/tdx-common.c             |  1 +
- board/toradex/verdin-am62/verdin-am62.c       |  1 +
- board/toradex/verdin-imx8mm/spl.c             |  1 +
- board/toradex/verdin-imx8mm/verdin-imx8mm.c   |  1 +
- board/toradex/verdin-imx8mp/verdin-imx8mp.c   |  1 +
- board/traverse/common/ten64_controller.c      |  1 +
- board/traverse/ten64/ten64.c                  |  1 +
- board/udoo/neo/neo.c                          |  1 +
- board/variscite/dart_6ul/spl.c                |  1 +
- .../variscite/imx8mn_var_som/imx8mn_var_som.c |  1 +
- board/variscite/imx8mn_var_som/spl.c          |  1 +
- board/vscom/baltos/board.c                    |  1 +
- board/wandboard/wandboard.c                   |  1 +
- .../work_92105/work_92105_display.c           |  1 +
- board/xilinx/common/board.c                   |  1 +
- board/xilinx/common/fru_ops.c                 |  1 +
- board/xilinx/versal-net/board.c               |  1 +
- board/xilinx/versal-net/cmds.c                |  1 +
- board/xilinx/versal/board.c                   |  1 +
- board/xilinx/versal/cmds.c                    |  1 +
- board/xilinx/zynq/board.c                     |  1 +
- board/xilinx/zynq/bootimg.c                   |  1 +
- board/xilinx/zynq/cmds.c                      |  1 +
- board/xilinx/zynqmp/cmds.c                    |  1 +
- board/xilinx/zynqmp/zynqmp.c                  |  1 +
- boot/android_ab.c                             |  1 +
- boot/bootdev-uclass.c                         |  1 +
- boot/bootflow.c                               |  1 +
- boot/bootflow_menu.c                          |  1 +
- boot/bootm.c                                  |  1 +
- boot/bootm_os.c                               |  1 +
- boot/bootmeth-uclass.c                        |  1 +
- boot/bootmeth_cros.c                          |  1 +
- boot/bootmeth_efi.c                           |  1 +
- boot/bootmeth_extlinux.c                      |  1 +
- boot/bootmeth_pxe.c                           |  1 +
- boot/bootmeth_qfw.c                           |  1 +
- boot/bootmeth_script.c                        |  1 +
- boot/bootstd-uclass.c                         |  1 +
- boot/common_fit.c                             |  1 +
- boot/expo.c                                   |  1 +
- boot/expo_build.c                             |  1 +
- boot/fdt_region.c                             |  1 +
- boot/fdt_support.c                            |  1 +
- boot/image-android.c                          |  1 +
- boot/image-board.c                            |  1 +
- boot/image-cipher.c                           |  1 +
- boot/image-fdt.c                              |  1 +
- boot/image-fit-sig.c                          |  1 +
- boot/image-fit.c                              |  1 +
- boot/image-host.c                             |  1 +
- boot/image-pre-load.c                         |  1 +
- boot/image-sig.c                              |  1 +
- boot/image.c                                  |  1 +
- boot/scene.c                                  |  1 +
- boot/scene_menu.c                             |  1 +
- boot/vbe.c                                    |  1 +
- boot/vbe_request.c                            |  1 +
- boot/vbe_simple.c                             |  1 +
- boot/vbe_simple_fw.c                          |  1 +
- boot/vbe_simple_os.c                          |  1 +
- cmd/2048.c                                    |  1 +
- cmd/ab_select.c                               |  1 +
- cmd/abootimg.c                                |  1 +
- cmd/acpi.c                                    |  1 +
- cmd/adtimg.c                                  |  1 +
- cmd/aes.c                                     |  1 +
- cmd/armflash.c                                |  1 +
- cmd/avb.c                                     |  1 +
- cmd/bcb.c                                     |  1 +
- cmd/bdinfo.c                                  |  1 +
- cmd/binop.c                                   |  1 +
- cmd/blk_common.c                              |  1 +
- cmd/blkmap.c                                  |  1 +
- cmd/blob.c                                    |  1 +
- cmd/bmp.c                                     |  1 +
- cmd/bootdev.c                                 |  1 +
- cmd/bootefi.c                                 |  1 +
- cmd/bootflow.c                                |  1 +
- cmd/booti.c                                   |  1 +
- cmd/bootmeth.c                                |  1 +
- cmd/bootstage.c                               |  1 +
- cmd/button.c                                  |  1 +
- cmd/cache.c                                   |  1 +
- cmd/cedit.c                                   |  1 +
- cmd/clone.c                                   |  1 +
- cmd/cros_ec.c                                 |  1 +
- cmd/cyclic.c                                  |  1 +
- cmd/date.c                                    |  1 +
- cmd/dfu.c                                     |  1 +
- cmd/dm.c                                      |  1 +
- cmd/echo.c                                    |  1 +
- cmd/eeprom.c                                  |  1 +
- cmd/efi.c                                     |  1 +
- cmd/eficonfig.c                               |  1 +
- cmd/eficonfig_sbkey.c                         |  1 +
- cmd/efidebug.c                                |  1 +
- cmd/elf.c                                     |  1 +
- cmd/ethsw.c                                   |  1 +
- cmd/extension_board.c                         |  1 +
- cmd/fastboot.c                                |  1 +
- cmd/fdt.c                                     |  1 +
- cmd/flash.c                                   |  1 +
- cmd/fpga.c                                    |  1 +
- cmd/fuse.c                                    |  1 +
- cmd/gettime.c                                 |  1 +
- cmd/gpio.c                                    |  1 +
- cmd/gpt.c                                     |  1 +
- cmd/hash.c                                    |  1 +
- cmd/host.c                                    |  1 +
- cmd/i2c.c                                     |  1 +
- cmd/ide.c                                     |  1 +
- cmd/irq.c                                     |  1 +
- cmd/itest.c                                   |  1 +
- cmd/jffs2.c                                   |  1 +
- cmd/led.c                                     |  1 +
- cmd/legacy_led.c                              |  1 +
- cmd/load.c                                    |  1 +
- cmd/log.c                                     |  1 +
- cmd/mbr.c                                     |  1 +
- cmd/md5sum.c                                  |  1 +
- cmd/mdio.c                                    |  1 +
- cmd/mem.c                                     |  2 ++
- cmd/mii.c                                     |  1 +
- cmd/mmc.c                                     |  1 +
- cmd/mp.c                                      |  1 +
- cmd/mtd.c                                     |  1 +
- cmd/mtdparts.c                                |  1 +
- cmd/mvebu/bubt.c                              |  1 +
- cmd/mvebu/comphy_rx_training.c                |  1 +
- cmd/nand.c                                    |  1 +
- cmd/net.c                                     |  1 +
- cmd/nvedit.c                                  |  1 +
- cmd/nvedit_efi.c                              |  1 +
- cmd/nvme.c                                    |  1 +
- cmd/onenand.c                                 |  1 +
- cmd/optee_rpmb.c                              |  1 +
- cmd/osd.c                                     |  1 +
- cmd/part.c                                    |  1 +
- cmd/pci.c                                     |  1 +
- cmd/pinmux.c                                  |  1 +
- cmd/printf.c                                  |  1 +
- cmd/pstore.c                                  |  1 +
- cmd/pxe.c                                     |  1 +
- cmd/read.c                                    |  1 +
- cmd/regulator.c                               |  1 +
- cmd/remoteproc.c                              |  1 +
- cmd/rtc.c                                     |  1 +
- cmd/sata.c                                    |  1 +
- cmd/scsi.c                                    |  1 +
- cmd/setexpr.c                                 |  1 +
- cmd/sf.c                                      |  2 ++
- cmd/sha1sum.c                                 |  1 +
- cmd/sleep.c                                   |  2 ++
- cmd/smccc.c                                   |  1 +
- cmd/spi.c                                     |  1 +
- cmd/stackprot_test.c                          |  1 +
- cmd/strings.c                                 |  1 +
- cmd/sysboot.c                                 |  1 +
- cmd/test.c                                    |  1 +
- cmd/ti/ddr3.c                                 |  1 +
- cmd/timer.c                                   |  2 ++
- cmd/tlv_eeprom.c                              |  1 +
- cmd/tpm-v1.c                                  |  1 +
- cmd/tpm-v2.c                                  |  1 +
- cmd/tpm_test.c                                |  1 +
- cmd/tsi148.c                                  |  1 +
- cmd/ubi.c                                     |  1 +
- cmd/ufs.c                                     |  1 +
- cmd/universe.c                                |  1 +
- cmd/usb.c                                     |  1 +
- cmd/usb_mass_storage.c                        |  1 +
- cmd/vbe.c                                     |  1 +
- cmd/virtio.c                                  |  1 +
- cmd/w1.c                                      |  1 +
- cmd/x86/cbsysinfo.c                           |  1 +
- cmd/x86/hob.c                                 |  1 +
- cmd/x86/mtrr.c                                |  1 +
- cmd/ximg.c                                    |  1 +
- cmd/yaffs2.c                                  |  1 +
- cmd/zfs.c                                     |  1 +
- common/autoboot.c                             |  1 +
- common/avb_verify.c                           |  1 +
- common/bloblist.c                             |  1 +
- common/board_f.c                              |  1 +
- common/bootstage.c                            |  1 +
- common/bouncebuf.c                            |  1 +
- common/cli.c                                  |  1 +
- common/cli_getch.c                            |  1 +
- common/cli_hush.c                             |  1 +
- common/cli_readline.c                         |  1 +
- common/cli_simple.c                           |  1 +
- common/command.c                              |  2 ++
- common/console.c                              |  1 +
- common/cyclic.c                               |  1 +
- common/dfu.c                                  |  1 +
- common/dlmalloc.c                             |  1 +
- common/eeprom/eeprom_layout.c                 |  1 +
- common/event.c                                |  1 +
- common/flash.c                                |  1 +
- common/hash.c                                 |  1 +
- common/init/board_init.c                      |  1 +
- common/iomux.c                                |  1 +
- common/kallsyms.c                             |  1 +
- common/kgdb.c                                 |  1 +
- common/log.c                                  |  1 +
- common/log_syslog.c                           |  1 +
- common/malloc_simple.c                        |  1 +
- common/menu.c                                 |  1 +
- common/miiphyutil.c                           |  1 +
- common/qfw.c                                  |  1 +
- common/scp03.c                                |  1 +
- common/spl/spl.c                              |  1 +
- common/spl/spl_atf.c                          |  1 +
- common/spl/spl_fit.c                          |  1 +
- common/spl/spl_mmc.c                          |  1 +
- common/spl/spl_net.c                          |  1 +
- common/spl/spl_nor.c                          |  1 +
- common/spl/spl_ram.c                          |  1 +
- common/spl/spl_sata.c                         |  1 +
- common/spl/spl_ubi.c                          |  1 +
- common/spl/spl_ymodem.c                       |  1 +
- common/splash.c                               |  1 +
- common/splash_source.c                        |  1 +
- common/stdio.c                                |  1 +
- common/update.c                               |  1 +
- common/usb.c                                  |  1 +
- common/usb_hub.c                              |  2 ++
- common/usb_kbd.c                              |  2 ++
- common/usb_storage.c                          |  1 +
- common/xyzModem.c                             |  1 +
- disk/part.c                                   |  1 +
- disk/part_amiga.c                             |  1 +
- disk/part_dos.c                               |  1 +
- disk/part_efi.c                               |  1 +
- disk/part_iso.c                               |  1 +
- drivers/ata/ahci.c                            |  2 ++
- drivers/ata/dwc_ahsata.c                      |  1 +
- drivers/ata/fsl_sata.c                        |  1 +
- drivers/ata/libata.c                          |  1 +
- drivers/ata/sata.c                            |  1 +
- drivers/ata/sata_mv.c                         |  2 ++
- drivers/ata/sata_sil.c                        |  1 +
- drivers/bios_emulator/atibios.c               |  1 +
- drivers/bios_emulator/biosemu.c               |  1 +
- drivers/bios_emulator/x86emu/debug.c          |  1 +
- drivers/block/blk-uclass.c                    |  1 +
- drivers/block/blk_legacy.c                    |  1 +
- drivers/block/blkcache.c                      |  1 +
- drivers/block/blkmap.c                        |  1 +
- drivers/block/host-uclass.c                   |  1 +
- drivers/block/host_dev.c                      |  1 +
- drivers/block/ide.c                           |  1 +
- drivers/bootcount/spi-flash.c                 |  1 +
- drivers/button/button-uclass.c                |  1 +
- drivers/clk/altera/clk-arria10.c              |  1 +
- drivers/clk/at91/sam9x60.c                    |  1 +
- drivers/clk/at91/sama7g5.c                    |  1 +
- drivers/clk/at91/sckc.c                       |  1 +
- drivers/clk/clk-mux.c                         |  1 +
- drivers/clk/clk_scmi.c                        |  1 +
- drivers/clk/clk_versal.c                      |  1 +
- drivers/clk/mvebu/armada-37xx-periph.c        |  1 +
- drivers/clk/renesas/clk-rcar-gen2.c           |  1 +
- drivers/clk/rockchip/clk_rk322x.c             |  1 +
- drivers/clk/rockchip/clk_rk3288.c             |  1 +
- drivers/clk/rockchip/clk_rk3328.c             |  1 +
- drivers/clk/rockchip/clk_rk3368.c             |  1 +
- drivers/clk/rockchip/clk_rk3399.c             |  1 +
- drivers/clk/rockchip/clk_rk3588.c             |  1 +
- drivers/clk/sifive/sifive-prci.c              |  1 +
- drivers/clk/stm32/clk-stm32f.c                |  1 +
- drivers/clk/ti/clk-k3.c                       |  1 +
- drivers/clk/ti/clk.c                          |  1 +
- drivers/core/acpi.c                           |  1 +
- drivers/core/device.c                         |  1 +
- drivers/core/dump.c                           |  1 +
- drivers/core/lists.c                          |  1 +
- drivers/core/of_access.c                      |  1 +
- drivers/core/of_addr.c                        |  1 +
- drivers/core/of_extra.c                       |  1 +
- drivers/core/ofnode.c                         |  1 +
- drivers/core/root.c                           |  1 +
- drivers/core/uclass.c                         |  1 +
- drivers/cpu/cpu-uclass.c                      |  1 +
- drivers/cpu/cpu_sandbox.c                     |  1 +
- drivers/cpu/imx8_cpu.c                        |  1 +
- drivers/cpu/imx9_cpu.c                        |  1 +
- drivers/cpu/riscv_cpu.c                       |  1 +
- drivers/crypto/ace_sha.c                      |  1 +
- drivers/crypto/aspeed/aspeed_acry.c           |  1 +
- drivers/crypto/aspeed/aspeed_hace.c           |  1 +
- drivers/crypto/fsl/dcp_rng.c                  |  1 +
- drivers/crypto/fsl/desc_constr.h              |  1 +
- drivers/crypto/fsl/error.c                    |  1 +
- drivers/crypto/fsl/fsl_blob.c                 |  1 +
- drivers/crypto/fsl/fsl_hash.c                 |  1 +
- drivers/crypto/fsl/jobdesc.c                  |  1 +
- drivers/crypto/fsl/jr.c                       |  1 +
- drivers/crypto/fsl/rng.c                      |  1 +
- drivers/crypto/hash/hash-uclass.c             |  1 +
- drivers/crypto/nuvoton/npcm_aes.c             |  2 ++
- drivers/crypto/nuvoton/npcm_sha.c             |  1 +
- drivers/ddr/altera/sdram_arria10.c            |  1 +
- drivers/ddr/altera/sdram_gen5.c               |  1 +
- drivers/ddr/altera/sdram_n5x.c                |  2 ++
- drivers/ddr/altera/sdram_soc64.c              |  2 ++
- drivers/ddr/altera/sequencer.c                |  1 +
- drivers/ddr/fsl/ctrl_regs.c                   |  1 +
- drivers/ddr/fsl/ddr1_dimm_params.c            |  1 +
- drivers/ddr/fsl/ddr2_dimm_params.c            |  1 +
- drivers/ddr/fsl/ddr3_dimm_params.c            |  1 +
- drivers/ddr/fsl/ddr4_dimm_params.c            |  1 +
- drivers/ddr/fsl/interactive.c                 |  1 +
- drivers/ddr/fsl/main.c                        |  1 +
- drivers/ddr/imx/imx9/ddr_init.c               |  1 +
- drivers/ddr/marvell/a38x/mv_ddr4_mpr_pda_if.c |  2 ++
- .../a38x/mv_ddr4_training_calibration.c       |  1 +
- drivers/ddr/marvell/axp/ddr3_hw_training.c    |  1 +
- drivers/ddr/marvell/axp/ddr3_pbs.c            |  1 +
- drivers/ddr/marvell/axp/ddr3_spd.c            |  1 +
- drivers/ddr/marvell/axp/ddr3_write_leveling.c |  1 +
- drivers/dfu/dfu.c                             |  1 +
- drivers/dfu/dfu_alt.c                         |  1 +
- drivers/dfu/dfu_mmc.c                         |  1 +
- drivers/dfu/dfu_mtd.c                         |  1 +
- drivers/dfu/dfu_nand.c                        |  1 +
- drivers/dfu/dfu_ram.c                         |  1 +
- drivers/dfu/dfu_sf.c                          |  1 +
- drivers/dma/apbh_dma.c                        |  1 +
- drivers/dma/keystone_nav.c                    |  1 +
- drivers/dma/lpc32xx_dma.c                     |  1 +
- drivers/dma/sandbox-dma-test.c                |  1 +
- drivers/dma/ti-edma3.c                        |  1 +
- drivers/dma/ti/k3-udma.c                      |  1 +
- drivers/fastboot/fb_command.c                 |  1 +
- drivers/fastboot/fb_common.c                  |  1 +
- drivers/fastboot/fb_getvar.c                  |  1 +
- drivers/fastboot/fb_mmc.c                     |  1 +
- drivers/fastboot/fb_nand.c                    |  1 +
- drivers/firmware/arm-ffa/arm-ffa-uclass.c     |  1 +
- drivers/firmware/arm-ffa/ffa-emul-uclass.c    |  1 +
- drivers/firmware/psci.c                       |  1 +
- drivers/firmware/scmi/optee_agent.c           |  1 +
- drivers/firmware/scmi/sandbox-scmi_agent.c    |  1 +
- drivers/firmware/scmi/smt.c                   |  1 +
- drivers/firmware/ti_sci.c                     |  1 +
- drivers/fpga/ACEX1K.c                         |  5 ++--
- drivers/fpga/cyclon2.c                        |  1 +
- drivers/fpga/fpga.c                           |  1 +
- drivers/fpga/intel_sdm_mb.c                   |  2 ++
- drivers/fpga/socfpga_arria10.c                |  2 ++
- drivers/fpga/spartan2.c                       | 25 ++++++++++---------
- drivers/fpga/spartan3.c                       | 25 ++++++++++---------
- drivers/fpga/versalpl.c                       |  1 +
- drivers/fpga/virtex2.c                        |  1 +
- drivers/fpga/xilinx.c                         |  1 +
- drivers/fpga/zynqmppl.c                       |  1 +
- drivers/fpga/zynqpl.c                         |  1 +
- drivers/fwu-mdata/gpt_blk.c                   |  1 +
- drivers/fwu-mdata/raw_mtd.c                   |  1 +
- drivers/gpio/74x164_gpio.c                    |  1 +
- drivers/gpio/axp_gpio.c                       |  1 +
- drivers/gpio/da8xx_gpio.c                     |  1 +
- drivers/gpio/dwapb_gpio.c                     |  1 +
- drivers/gpio/gpio-fxl6408.c                   |  1 +
- drivers/gpio/gpio-uclass.c                    |  1 +
- drivers/gpio/gpio_slg7xl45106.c               |  1 +
- drivers/gpio/hi6220_gpio.c                    |  1 +
- drivers/gpio/imx_rgpio2p.c                    |  1 +
- drivers/gpio/intel_gpio.c                     |  1 +
- drivers/gpio/iproc_gpio.c                     |  1 +
- drivers/gpio/lpc32xx_gpio.c                   |  1 +
- drivers/gpio/mcp230xx_gpio.c                  |  1 +
- drivers/gpio/mpc83xx_spisel_boot.c            |  1 +
- drivers/gpio/mpc8xx_gpio.c                    |  1 +
- drivers/gpio/mpc8xxx_gpio.c                   |  1 +
- drivers/gpio/mxc_gpio.c                       |  1 +
- drivers/gpio/mxs_gpio.c                       |  1 +
- drivers/gpio/nmk_gpio.c                       |  1 +
- drivers/gpio/nx_gpio.c                        |  1 +
- drivers/gpio/octeon_gpio.c                    |  1 +
- drivers/gpio/omap_gpio.c                      |  1 +
- drivers/gpio/pca953x_gpio.c                   |  1 +
- drivers/gpio/pic32_gpio.c                     |  1 +
- drivers/gpio/qe_gpio.c                        |  1 +
- drivers/gpio/rk_gpio.c                        |  1 +
- drivers/gpio/sifive-gpio.c                    |  1 +
- drivers/gpio/sunxi_gpio.c                     |  1 +
- drivers/gpio/xilinx_gpio.c                    |  1 +
- drivers/gpio/zynq_gpio.c                      |  1 +
- drivers/gpio/zynqmp_gpio_modepin.c            |  1 +
- drivers/hwspinlock/hwspinlock-uclass.c        |  1 +
- drivers/i2c/at91_i2c.c                        |  1 +
- drivers/i2c/designware_i2c.c                  |  1 +
- drivers/i2c/fsl_i2c.c                         |  1 +
- drivers/i2c/i2c-cortina.c                     |  1 +
- drivers/i2c/i2c-uclass.c                      |  1 +
- drivers/i2c/ihs_i2c.c                         |  1 +
- drivers/i2c/imx_lpi2c.c                       |  1 +
- drivers/i2c/intel_i2c.c                       |  2 ++
- drivers/i2c/lpc32xx_i2c.c                     |  1 +
- drivers/i2c/meson_i2c.c                       |  1 +
- drivers/i2c/muxes/i2c-arb-gpio-challenge.c    |  1 +
- drivers/i2c/muxes/i2c-mux-uclass.c            |  1 +
- drivers/i2c/mv_i2c.c                          |  1 +
- drivers/i2c/mvtwsi.c                          |  1 +
- drivers/i2c/mxc_i2c.c                         |  1 +
- drivers/i2c/npcm_i2c.c                        |  1 +
- drivers/i2c/nx_i2c.c                          |  1 +
- drivers/i2c/rk_i2c.c                          |  1 +
- drivers/i2c/s3c24x0_i2c.c                     |  1 +
- drivers/i2c/stm32f7_i2c.c                     |  2 ++
- drivers/i2c/tegra186_bpmp_i2c.c               |  1 +
- drivers/i2c/tegra_i2c.c                       |  1 +
- drivers/input/apple_spi_kbd.c                 |  1 +
- drivers/input/button_kbd.c                    |  1 +
- drivers/input/cros_ec_keyb.c                  |  1 +
- drivers/input/i8042.c                         |  1 +
- drivers/input/input.c                         |  2 ++
- drivers/input/key_matrix.c                    |  1 +
- drivers/input/keyboard-uclass.c               |  1 +
- drivers/input/tegra-kbc.c                     |  2 ++
- drivers/iommu/apple_dart.c                    |  1 +
- drivers/led/led-uclass.c                      |  1 +
- drivers/memory/ti-gpmc.c                      |  1 +
- drivers/misc/atsha204a-i2c.c                  |  1 +
- drivers/misc/cbmem_console.c                  |  1 +
- drivers/misc/cros_ec.c                        |  2 ++
- drivers/misc/cros_ec_i2c.c                    |  1 +
- drivers/misc/cros_ec_lpc.c                    |  1 +
- drivers/misc/cros_ec_sandbox.c                |  2 ++
- drivers/misc/cros_ec_spi.c                    |  2 ++
- drivers/misc/ds4510.c                         |  1 +
- drivers/misc/fsl_portals.c                    |  1 +
- drivers/misc/gdsys_ioep.c                     |  1 +
- drivers/misc/gsc.c                            |  1 +
- drivers/misc/i2c_eeprom_emul.c                |  1 +
- drivers/misc/ihs_fpga.c                       |  1 +
- drivers/misc/misc_sandbox.c                   |  1 +
- drivers/misc/mpc83xx_serdes.c                 |  1 +
- drivers/misc/npcm_host_intf.c                 |  1 +
- drivers/misc/qfw.c                            |  1 +
- drivers/misc/qfw_sandbox.c                    |  1 +
- drivers/misc/rockchip-efuse.c                 |  1 +
- drivers/misc/rockchip-otp.c                   |  1 +
- drivers/misc/sifive-otp.c                     |  1 +
- drivers/misc/tegra186_bpmp.c                  |  1 +
- drivers/misc/usb251xb.c                       |  1 +
- drivers/misc/vexpress_config.c                |  1 +
- drivers/mmc/am654_sdhci.c                     |  1 +
- drivers/mmc/bcm2835_sdhost.c                  |  1 +
- drivers/mmc/ca_dw_mmc.c                       |  1 +
- drivers/mmc/davinci_mmc.c                     |  1 +
- drivers/mmc/dw_mmc.c                          |  1 +
- drivers/mmc/f_sdh30.c                         |  1 +
- drivers/mmc/fsl_esdhc.c                       |  1 +
- drivers/mmc/fsl_esdhc_imx.c                   |  2 ++
- drivers/mmc/fsl_esdhc_spl.c                   |  1 +
- drivers/mmc/ftsdc010_mci.c                    |  2 ++
- drivers/mmc/iproc_sdhci.c                     |  1 +
- drivers/mmc/meson_gx_mmc.c                    |  2 ++
- drivers/mmc/mmc.c                             |  2 ++
- drivers/mmc/mmc_spi.c                         |  1 +
- drivers/mmc/msm_sdhci.c                       |  1 +
- drivers/mmc/mvebu_mmc.c                       |  1 +
- drivers/mmc/mxcmmc.c                          |  1 +
- drivers/mmc/mxsmmc.c                          |  1 +
- drivers/mmc/octeontx_hsmmc.c                  |  1 +
- drivers/mmc/omap_hsmmc.c                      |  1 +
- drivers/mmc/rpmb.c                            |  1 +
- drivers/mmc/sandbox_mmc.c                     |  1 +
- drivers/mmc/sdhci.c                           |  2 ++
- drivers/mmc/sh_mmcif.c                        |  1 +
- drivers/mmc/snps_dw_mmc.c                     |  1 +
- drivers/mmc/sti_sdhci.c                       |  1 +
- drivers/mmc/sunxi_mmc.c                       |  2 ++
- drivers/mmc/tegra_mmc.c                       |  1 +
- drivers/mmc/xenon_sdhci.c                     |  1 +
- drivers/mtd/altera_qspi.c                     |  1 +
- drivers/mtd/cfi_flash.c                       |  2 ++
- drivers/mtd/cfi_mtd.c                         |  1 +
- drivers/mtd/mtd_uboot.c                       |  1 +
- drivers/mtd/mtdpart.c                         |  1 +
- drivers/mtd/nand/raw/atmel/nand-controller.c  |  1 +
- drivers/mtd/nand/raw/atmel/pmecc.c            |  1 +
- drivers/mtd/nand/raw/atmel_nand.c             |  1 +
- drivers/mtd/nand/raw/brcmnand/brcmnand.c      |  2 ++
- drivers/mtd/nand/raw/cortina_nand.c           |  1 +
- drivers/mtd/nand/raw/denali.c                 |  1 +
- drivers/mtd/nand/raw/denali_spl.c             |  1 +
- drivers/mtd/nand/raw/fsl_elbc_nand.c          |  1 +
- drivers/mtd/nand/raw/fsl_ifc_nand.c           |  1 +
- drivers/mtd/nand/raw/lpc32xx_nand_mlc.c       |  1 +
- drivers/mtd/nand/raw/mt7621_nand.c            |  1 +
- drivers/mtd/nand/raw/mt7621_nand_spl.c        |  1 +
- drivers/mtd/nand/raw/mxic_nand.c              |  1 +
- drivers/mtd/nand/raw/mxs_nand.c               |  1 +
- drivers/mtd/nand/raw/mxs_nand_spl.c           |  2 ++
- drivers/mtd/nand/raw/nand_base.c              |  2 ++
- drivers/mtd/nand/raw/nand_bch.c               |  1 +
- drivers/mtd/nand/raw/nand_spl_loaders.c       |  1 +
- drivers/mtd/nand/raw/nand_util.c              |  1 +
- drivers/mtd/nand/raw/octeontx_bch.c           |  1 +
- drivers/mtd/nand/raw/octeontx_nand.c          |  1 +
- drivers/mtd/nand/raw/omap_gpmc.c              |  1 +
- drivers/mtd/nand/raw/pxa3xx_nand.c            |  2 ++
- drivers/mtd/nand/raw/rockchip_nfc.c           |  2 ++
- drivers/mtd/nand/raw/sunxi_nand.c             |  2 ++
- drivers/mtd/nand/raw/sunxi_nand_spl.c         |  1 +
- drivers/mtd/nand/raw/tegra_nand.c             |  1 +
- drivers/mtd/nand/raw/vf610_nfc.c              |  2 ++
- drivers/mtd/nand/spi/core.c                   |  2 ++
- drivers/mtd/onenand/onenand_base.c            |  2 ++
- drivers/mtd/onenand/onenand_bbt.c             |  1 +
- drivers/mtd/onenand/onenand_spl.c             |  1 +
- drivers/mtd/onenand/onenand_uboot.c           |  1 +
- drivers/mtd/onenand/samsung.c                 |  1 +
- drivers/mtd/spi/fsl_espi_spl.c                |  1 +
- drivers/mtd/spi/sandbox.c                     |  1 +
- drivers/mtd/spi/sf-uclass.c                   |  1 +
- drivers/mtd/spi/sf_dataflash.c                |  2 ++
- drivers/mtd/spi/sf_mtd.c                      |  1 +
- drivers/mtd/spi/sf_probe.c                    |  1 +
- drivers/mtd/spi/spi-nor-core.c                |  2 ++
- drivers/mtd/spi/spi-nor-tiny.c                |  2 ++
- drivers/mtd/ubi/attach.c                      |  1 +
- drivers/mtd/ubi/build.c                       |  1 +
- drivers/mtd/ubi/debug.c                       |  1 +
- drivers/mtd/ubi/eba.c                         |  1 +
- drivers/mtd/ubi/fastmap.c                     |  1 +
- drivers/mtd/ubi/io.c                          |  1 +
- drivers/mtd/ubi/kapi.c                        |  1 +
- drivers/mtd/ubi/upd.c                         |  1 +
- drivers/mtd/ubi/vmt.c                         |  1 +
- drivers/mtd/ubi/vtbl.c                        |  1 +
- drivers/mtd/ubispl/ubispl.c                   |  1 +
- drivers/net/ag7xxx.c                          |  2 ++
- drivers/net/altera_tse.c                      |  2 ++
- drivers/net/bcm-sf2-eth-gmac.c                |  1 +
- drivers/net/bcm-sf2-eth.c                     |  1 +
- drivers/net/bcm6368-eth.c                     |  1 +
- drivers/net/bnxt/bnxt.c                       |  1 +
- drivers/net/calxedaxgmac.c                    |  1 +
- drivers/net/cortina_ni.c                      |  2 ++
- drivers/net/dc2114x.c                         |  1 +
- drivers/net/designware.c                      |  2 ++
- drivers/net/dm9000x.c                         |  1 +
- drivers/net/dsa_sandbox.c                     |  1 +
- drivers/net/dwc_eth_qos.c                     |  1 +
- drivers/net/e1000.c                           |  1 +
- drivers/net/e1000_spi.c                       |  1 +
- drivers/net/eepro100.c                        |  1 +
- drivers/net/eth-phy-uclass.c                  |  1 +
- drivers/net/ethoc.c                           |  2 ++
- drivers/net/fec_mxc.c                         |  2 ++
- drivers/net/fm/eth.c                          |  1 +
- drivers/net/fm/fm.c                           |  1 +
- drivers/net/fm/tgec_phy.c                     |  1 +
- drivers/net/fsl-mc/dpio/qbman_portal.c        |  1 +
- drivers/net/fsl-mc/dpio/qbman_sys.h           |  1 +
- drivers/net/fsl-mc/mc.c                       |  1 +
- drivers/net/fsl_enetc.c                       |  1 +
- drivers/net/fsl_mcdmafec.c                    |  1 +
- drivers/net/fsl_mdio.c                        |  1 +
- drivers/net/ftmac100.c                        |  2 ++
- drivers/net/gmac_rockchip.c                   |  1 +
- drivers/net/higmacv300.c                      |  1 +
- drivers/net/ldpaa_eth/ldpaa_eth.c             |  2 ++
- drivers/net/macb.c                            |  1 +
- drivers/net/mcffec.c                          |  1 +
- drivers/net/mcfmii.c                          |  1 +
- drivers/net/mpc8xx_fec.c                      |  1 +
- drivers/net/mscc_eswitch/felix_switch.c       |  1 +
- drivers/net/mscc_eswitch/jr2_switch.c         |  1 +
- drivers/net/mscc_eswitch/luton_switch.c       |  1 +
- drivers/net/mscc_eswitch/ocelot_switch.c      |  1 +
- drivers/net/mscc_eswitch/serval_switch.c      |  1 +
- drivers/net/mscc_eswitch/servalt_switch.c     |  1 +
- drivers/net/mt7620-eth.c                      |  1 +
- drivers/net/mt7628-eth.c                      |  1 +
- drivers/net/mtk_eth.c                         |  2 ++
- drivers/net/mvgbe.c                           |  1 +
- drivers/net/mvneta.c                          |  1 +
- drivers/net/mvpp2.c                           |  1 +
- drivers/net/netconsole.c                      |  1 +
- drivers/net/npcm750_eth.c                     |  2 ++
- drivers/net/octeon/octeon_eth.c               |  1 +
- drivers/net/octeontx/bgx.c                    |  1 +
- drivers/net/octeontx/nic_main.c               |  1 +
- drivers/net/octeontx/nicvf_main.c             |  1 +
- drivers/net/octeontx/nicvf_queues.c           |  1 +
- drivers/net/octeontx/smi.c                    |  1 +
- drivers/net/octeontx2/cgx.c                   |  1 +
- drivers/net/octeontx2/cgx_intf.c              |  1 +
- drivers/net/octeontx2/nix.c                   |  1 +
- drivers/net/octeontx2/nix_af.c                |  2 ++
- drivers/net/octeontx2/rvu_af.c                |  1 +
- drivers/net/octeontx2/rvu_common.c            |  1 +
- drivers/net/octeontx2/rvu_pf.c                |  1 +
- drivers/net/pch_gbe.c                         |  2 ++
- drivers/net/pcnet.c                           |  1 +
- drivers/net/pfe_eth/pfe_cmd.c                 |  1 +
- drivers/net/pfe_eth/pfe_driver.c              |  1 +
- drivers/net/pfe_eth/pfe_firmware.c            |  1 +
- drivers/net/pfe_eth/pfe_hw.c                  |  1 +
- drivers/net/phy/adin.c                        |  1 +
- drivers/net/phy/aquantia.c                    |  1 +
- drivers/net/phy/atheros.c                     |  1 +
- drivers/net/phy/b53.c                         |  1 +
- drivers/net/phy/fixed.c                       |  1 +
- drivers/net/phy/miiphybb.c                    |  1 +
- drivers/net/phy/mv88e61xx.c                   |  1 +
- drivers/net/phy/mv88e6352.c                   |  1 +
- drivers/net/phy/ncsi.c                        |  1 +
- drivers/net/phy/phy.c                         |  1 +
- drivers/net/pic32_mdio.c                      |  1 +
- drivers/net/qe/dm_qe_uec.c                    |  1 +
- drivers/net/qe/uccf.c                         |  1 +
- drivers/net/ravb.c                            |  2 ++
- drivers/net/rswitch.c                         |  2 ++
- drivers/net/rtl8139.c                         |  1 +
- drivers/net/rtl8169.c                         |  2 ++
- drivers/net/sandbox-raw-bus.c                 |  1 +
- drivers/net/sandbox-raw.c                     |  1 +
- drivers/net/sandbox.c                         |  2 ++
- drivers/net/sja1105.c                         |  1 +
- drivers/net/smc911x.c                         |  1 +
- drivers/net/sni_ave.c                         |  1 +
- drivers/net/sun8i_emac.c                      |  1 +
- drivers/net/sunxi_emac.c                      |  1 +
- drivers/net/ti/cpsw-common.c                  |  1 +
- drivers/net/ti/cpsw.c                         |  1 +
- drivers/net/ti/davinci_emac.c                 |  1 +
- drivers/net/tsec.c                            |  1 +
- drivers/net/xilinx_axi_emac.c                 |  1 +
- drivers/net/xilinx_axi_mrmac.c                |  1 +
- drivers/net/xilinx_emaclite.c                 |  1 +
- drivers/net/zynq_gem.c                        |  1 +
- drivers/nvme/nvme.c                           |  1 +
- drivers/nvme/nvme_apple.c                     |  1 +
- drivers/pci/pci-uclass.c                      |  1 +
- drivers/pci/pci_rom.c                         |  2 ++
- drivers/pci/pci_tegra.c                       |  2 ++
- drivers/pci/pcie_dw_mvebu.c                   |  1 +
- drivers/pci/pcie_dw_ti.c                      |  1 +
- drivers/pci/pcie_layerscape_fixup.c           |  1 +
- drivers/pci/pcie_layerscape_fixup_common.c    |  1 +
- drivers/pci/pcie_uniphier.c                   |  1 +
- drivers/pci_endpoint/sandbox-pci_ep.c         |  1 +
- drivers/phy/allwinner/phy-sun4i-usb.c         |  1 +
- drivers/phy/marvell/comphy_a3700.c            |  1 +
- drivers/phy/meson-axg-mipi-dphy.c             |  1 +
- drivers/phy/meson-axg-mipi-pcie-analog.c      |  1 +
- drivers/phy/phy-da8xx-usb.c                   |  1 +
- .../phy/rockchip/phy-rockchip-inno-dsidphy.c  |  1 +
- drivers/phy/rockchip/phy-rockchip-inno-usb2.c |  1 +
- drivers/phy/rockchip/phy-rockchip-typec.c     |  1 +
- drivers/phy/rockchip/phy-rockchip-usbdp.c     |  1 +
- drivers/phy/ti/phy-j721e-wiz.c                |  1 +
- drivers/pinctrl/exynos/pinctrl-exynos.c       |  1 +
- .../pinctrl/mtmips/pinctrl-mtmips-common.c    |  1 +
- drivers/pinctrl/mvebu/pinctrl-armada-37xx.c   |  1 +
- drivers/pinctrl/mvebu/pinctrl-armada-38x.c    |  1 +
- drivers/pinctrl/nexell/pinctrl-nexell.c       |  1 +
- drivers/pinctrl/nexell/pinctrl-s5pxx18.c      |  1 +
- drivers/pinctrl/pinctrl-apple.c               |  1 +
- drivers/pinctrl/pinctrl-generic.c             |  1 +
- drivers/pinctrl/pinctrl-k210.c                |  1 +
- drivers/pinctrl/pinctrl-sandbox.c             |  1 +
- drivers/pinctrl/pinctrl-stmfx.c               |  1 +
- drivers/pinctrl/pinctrl-zynqmp.c              |  1 +
- drivers/pinctrl/pinctrl_stm32.c               |  1 +
- drivers/pinctrl/renesas/pfc.c                 |  1 +
- .../pinctrl/rockchip/pinctrl-rockchip-core.c  |  1 +
- drivers/pinctrl/sunxi/pinctrl-sunxi.c         |  1 +
- .../power/domain/imx8-power-domain-legacy.c   |  1 +
- drivers/power/domain/imx8m-power-domain.c     |  1 +
- drivers/power/exynos-tmu.c                    |  1 +
- drivers/power/pmic/i2c_pmic_emul.c            |  1 +
- drivers/power/pmic/palmas.c                   |  1 +
- drivers/power/pmic/pmic-uclass.c              |  1 +
- drivers/power/power_core.c                    |  1 +
- drivers/power/power_i2c.c                     |  1 +
- drivers/power/regulator/axp_regulator.c       |  1 +
- drivers/power/regulator/bd71837.c             |  1 +
- drivers/power/regulator/da9063.c              |  1 +
- drivers/power/regulator/npcm8xx_regulator.c   |  1 +
- drivers/power/regulator/palmas_regulator.c    |  1 +
- drivers/power/regulator/pca9450.c             |  1 +
- drivers/power/regulator/pfuze100.c            |  1 +
- drivers/power/regulator/regulator-uclass.c    |  1 +
- drivers/power/regulator/tps65090_regulator.c  |  1 +
- drivers/pwm/pwm-meson.c                       |  1 +
- drivers/qe/qe.c                               |  1 +
- drivers/ram/imxrt_sdram.c                     |  1 +
- drivers/ram/octeon/octeon3_lmc.c              |  1 +
- drivers/ram/renesas/rzn1/ddr_async.c          |  1 +
- drivers/ram/rockchip/dmc-rk3368.c             |  1 +
- drivers/ram/rockchip/sdram_rk3066.c           |  1 +
- drivers/ram/rockchip/sdram_rk3188.c           |  1 +
- drivers/ram/rockchip/sdram_rk322x.c           |  1 +
- drivers/ram/rockchip/sdram_rk3288.c           |  1 +
- drivers/ram/rockchip/sdram_rk3328.c           |  1 +
- drivers/ram/rockchip/sdram_rv1126.c           |  1 +
- drivers/ram/stm32_sdram.c                     |  1 +
- drivers/ram/stm32mp1/stm32mp1_ddr.c           |  1 +
- drivers/ram/stm32mp1/stm32mp1_interactive.c   |  2 ++
- drivers/ram/stm32mp1/stm32mp1_tests.c         |  1 +
- drivers/reboot-mode/reboot-mode-uclass.c      |  1 +
- drivers/remoteproc/ipu_rproc.c                |  1 +
- drivers/remoteproc/k3_system_controller.c     |  1 +
- drivers/remoteproc/pru_rproc.c                |  1 +
- drivers/remoteproc/rproc-elf-loader.c         |  1 +
- drivers/remoteproc/rproc-uclass.c             |  1 +
- drivers/remoteproc/ti_k3_dsp_rproc.c          |  1 +
- drivers/remoteproc/ti_k3_r5f_rproc.c          |  1 +
- drivers/remoteproc/ti_power_proc.c            |  1 +
- drivers/reset/reset-jh7110.c                  |  1 +
- drivers/rng/iproc_rng200.c                    |  1 +
- drivers/rng/meson-rng.c                       |  1 +
- drivers/rng/optee_rng.c                       |  1 +
- drivers/rng/sandbox_rng.c                     |  1 +
- drivers/rng/smccc_trng.c                      |  1 +
- drivers/rng/stm32mp1_rng.c                    |  1 +
- drivers/rtc/abx80x.c                          |  1 +
- drivers/rtc/emul_rtc.c                        |  1 +
- drivers/rtc/i2c_rtc_emul.c                    |  1 +
- drivers/rtc/rv3029.c                          |  1 +
- drivers/scsi/scsi.c                           |  1 +
- drivers/scsi/scsi_emul.c                      |  1 +
- drivers/serial/sandbox.c                      |  1 +
- drivers/serial/serial-uclass.c                |  1 +
- drivers/serial/serial.c                       |  1 +
- drivers/serial/serial_mtk.c                   |  1 +
- drivers/serial/serial_octeon_bootcmd.c        |  1 +
- drivers/serial/serial_octeon_pcie_console.c   |  1 +
- drivers/serial/serial_semihosting.c           |  1 +
- drivers/serial/usbtty.c                       |  1 +
- drivers/smem/msm_smem.c                       |  1 +
- drivers/soc/soc-uclass.c                      |  1 +
- drivers/soc/ti/k3-navss-ringacc.c             |  1 +
- drivers/sound/samsung-i2s.c                   |  1 +
- drivers/sound/sound.c                         |  1 +
- drivers/sound/tegra_ahub.c                    |  1 +
- drivers/spi/altera_spi.c                      |  1 +
- drivers/spi/apple_spi.c                       |  1 +
- drivers/spi/atcspi200_spi.c                   |  1 +
- drivers/spi/bcm63xx_hsspi.c                   |  1 +
- drivers/spi/bcmstb_spi.c                      |  1 +
- drivers/spi/ca_sflash.c                       |  1 +
- drivers/spi/cadence_ospi_versal.c             |  1 +
- drivers/spi/cadence_qspi_apb.c                |  2 ++
- drivers/spi/cf_spi.c                          |  1 +
- drivers/spi/designware_spi.c                  |  1 +
- drivers/spi/fsl_espi.c                        |  1 +
- drivers/spi/fsl_qspi.c                        |  1 +
- drivers/spi/gxp_spi.c                         |  1 +
- drivers/spi/ich.c                             |  2 ++
- drivers/spi/meson_spifc.c                     |  1 +
- drivers/spi/mpc8xxx_spi.c                     |  1 +
- drivers/spi/mtk_snfi_spi.c                    |  1 +
- drivers/spi/mtk_snor.c                        |  1 +
- drivers/spi/mtk_spim.c                        |  1 +
- drivers/spi/mxc_spi.c                         |  2 ++
- drivers/spi/mxs_spi.c                         |  1 +
- drivers/spi/npcm_fiu_spi.c                    |  1 +
- drivers/spi/nxp_fspi.c                        |  1 +
- drivers/spi/octeon_spi.c                      |  1 +
- drivers/spi/omap3_spi.c                       |  1 +
- drivers/spi/pic32_spi.c                       |  1 +
- drivers/spi/rockchip_sfc.c                    |  2 ++
- drivers/spi/spi-aspeed-smc.c                  |  1 +
- drivers/spi/spi-mem-nodm.c                    |  1 +
- drivers/spi/spi-mem.c                         |  1 +
- drivers/spi/spi-mxic.c                        |  1 +
- drivers/spi/spi-sifive.c                      |  1 +
- drivers/spi/spi.c                             |  1 +
- drivers/spi/tegra210_qspi.c                   |  1 +
- drivers/spi/zynq_qspi.c                       |  2 ++
- drivers/spi/zynqmp_gqspi.c                    |  1 +
- drivers/sysinfo/gpio.c                        |  1 +
- drivers/sysinfo/rcar3.c                       |  1 +
- drivers/sysreset/sysreset_sandbox.c           |  1 +
- drivers/tee/broadcom/chimp_optee.c            |  1 +
- drivers/tee/optee/core.c                      |  1 +
- drivers/tee/sandbox.c                         |  1 +
- drivers/tee/tee-uclass.c                      |  1 +
- drivers/thermal/imx_scu_thermal.c             |  1 +
- drivers/thermal/imx_tmu.c                     |  1 +
- drivers/timer/sandbox_timer.c                 |  1 +
- drivers/tpm/cr50_i2c.c                        |  2 ++
- drivers/tpm/sandbox_common.c                  |  1 +
- drivers/tpm/tpm-uclass.c                      |  2 ++
- drivers/tpm/tpm2_ftpm_tee.c                   |  1 +
- drivers/tpm/tpm2_tis_core.c                   |  1 +
- drivers/tpm/tpm2_tis_sandbox.c                |  1 +
- drivers/tpm/tpm2_tis_spi.c                    |  2 ++
- drivers/tpm/tpm_atmel_twi.c                   |  2 ++
- drivers/tpm/tpm_tis_infineon.c                |  2 ++
- drivers/tpm/tpm_tis_lpc.c                     |  1 +
- drivers/tpm/tpm_tis_sandbox.c                 |  1 +
- drivers/tpm/tpm_tis_st33zp24_i2c.c            |  2 ++
- drivers/tpm/tpm_tis_st33zp24_spi.c            |  2 ++
- drivers/ufs/ufs.c                             |  2 ++
- drivers/usb/cdns3/gadget.c                    |  1 +
- drivers/usb/common/common.c                   |  1 +
- drivers/usb/common/fsl-dt-fixup.c             |  1 +
- drivers/usb/common/usb_urb.c                  |  1 +
- drivers/usb/dwc3/dwc3-generic.c               |  1 +
- drivers/usb/dwc3/dwc3-uniphier.c              |  1 +
- drivers/usb/dwc3/ep0.c                        |  1 +
- drivers/usb/dwc3/gadget.c                     |  1 +
- drivers/usb/emul/sandbox_flash.c              |  1 +
- drivers/usb/emul/sandbox_keyb.c               |  1 +
- drivers/usb/emul/usb-emul-uclass.c            |  1 +
- drivers/usb/eth/asix.c                        |  1 +
- drivers/usb/eth/asix88179.c                   |  1 +
- drivers/usb/eth/lan75xx.c                     |  1 +
- drivers/usb/eth/lan78xx.c                     |  1 +
- drivers/usb/eth/lan7x.c                       |  1 +
- drivers/usb/eth/mcs7830.c                     |  1 +
- drivers/usb/eth/r8152.c                       |  1 +
- drivers/usb/eth/smsc95xx.c                    |  2 ++
- drivers/usb/gadget/at91_udc.c                 |  1 +
- drivers/usb/gadget/atmel_usba_udc.c           |  1 +
- drivers/usb/gadget/ci_udc.c                   |  1 +
- drivers/usb/gadget/composite.c                |  1 +
- drivers/usb/gadget/dwc2_udc_otg.c             |  1 +
- drivers/usb/gadget/dwc2_udc_otg_xfer_dma.c    |  1 +
- drivers/usb/gadget/epautoconf.c               |  1 +
- drivers/usb/gadget/ether.c                    |  2 ++
- drivers/usb/gadget/f_acm.c                    |  1 +
- drivers/usb/gadget/f_dfu.c                    |  1 +
- drivers/usb/gadget/f_fastboot.c               |  1 +
- drivers/usb/gadget/f_mass_storage.c           |  1 +
- drivers/usb/gadget/f_rockusb.c                |  1 +
- drivers/usb/gadget/f_sdp.c                    |  1 +
- drivers/usb/gadget/f_thor.c                   |  1 +
- drivers/usb/gadget/g_dnl.c                    |  1 +
- drivers/usb/gadget/gadget_chips.h             |  1 +
- drivers/usb/gadget/rndis.c                    |  1 +
- drivers/usb/gadget/u_os_desc.h                |  1 +
- drivers/usb/gadget/usbstring.c                |  1 +
- drivers/usb/host/dwc2.c                       |  2 ++
- drivers/usb/host/dwc3-octeon-glue.c           |  1 +
- drivers/usb/host/ehci-fsl.c                   |  1 +
- drivers/usb/host/ehci-hcd.c                   |  2 ++
- drivers/usb/host/ehci-mx5.c                   |  1 +
- drivers/usb/host/ehci-mxs.c                   |  1 +
- drivers/usb/host/ehci-omap.c                  |  2 ++
- drivers/usb/host/ehci-tegra.c                 |  1 +
- drivers/usb/host/ehci-vf.c                    |  1 +
- drivers/usb/host/ohci-da8xx.c                 |  1 +
- drivers/usb/host/ohci-hcd.c                   |  1 +
- drivers/usb/host/r8a66597-hcd.c               |  1 +
- drivers/usb/host/r8a66597.h                   |  1 +
- drivers/usb/host/usb-uclass.c                 |  1 +
- drivers/usb/host/xhci-dwc3.c                  |  1 +
- drivers/usb/host/xhci-mem.c                   |  1 +
- drivers/usb/host/xhci-ring.c                  |  1 +
- drivers/usb/host/xhci.c                       |  1 +
- drivers/usb/isp1760/isp1760-hcd.c             |  2 ++
- drivers/usb/mtu3/mtu3_gadget_ep0.c            |  1 +
- drivers/usb/mtu3/mtu3_qmu.c                   |  1 +
- drivers/usb/musb-new/am35x.c                  |  2 ++
- drivers/usb/musb-new/mt85xx.c                 |  1 +
- drivers/usb/musb-new/musb_core.c              |  1 +
- drivers/usb/musb-new/musb_dsps.c              |  1 +
- drivers/usb/musb-new/musb_gadget.c            |  1 +
- drivers/usb/musb-new/musb_uboot.c             |  2 ++
- drivers/usb/musb-new/omap2430.c               |  1 +
- drivers/usb/musb-new/pic32.c                  |  1 +
- drivers/usb/musb-new/sunxi.c                  |  1 +
- drivers/usb/musb-new/ti-musb.c                |  1 +
- drivers/usb/musb-new/ux500.c                  |  1 +
- drivers/usb/musb/am35x.c                      |  1 +
- drivers/usb/musb/musb_hcd.c                   |  1 +
- drivers/video/bridge/anx6345.c                |  1 +
- drivers/video/bridge/ssd2825.c                |  1 +
- drivers/video/broadwell_igd.c                 |  1 +
- drivers/video/console_core.c                  |  1 +
- drivers/video/console_truetype.c              |  1 +
- drivers/video/dw_hdmi.c                       |  2 ++
- drivers/video/dw_mipi_dsi.c                   |  1 +
- drivers/video/endeavoru-panel.c               |  1 +
- drivers/video/exynos/exynos_dp.c              |  1 +
- drivers/video/exynos/exynos_mipi_dsi.c        |  1 +
- drivers/video/himax-hx8394.c                  |  1 +
- drivers/video/ihs_video_out.c                 |  1 +
- drivers/video/imx/ipu_common.c                |  1 +
- drivers/video/logicore_dp_tx.c                |  1 +
- drivers/video/mali_dp.c                       |  1 +
- drivers/video/meson/meson_venc.c              |  1 +
- drivers/video/mipi_dsi.c                      |  1 +
- drivers/video/mxsfb.c                         |  1 +
- drivers/video/nexell_display.c                |  1 +
- drivers/video/orisetech_otm8009a.c            |  1 +
- drivers/video/raydium-rm68200.c               |  1 +
- drivers/video/renesas-r61307.c                |  1 +
- drivers/video/renesas-r69328.c                |  1 +
- drivers/video/rockchip/rk_edp.c               |  2 ++
- drivers/video/rockchip/rk_vop.c               |  1 +
- drivers/video/sandbox_osd.c                   |  1 +
- drivers/video/simple_panel.c                  |  1 +
- drivers/video/simplefb.c                      |  1 +
- drivers/video/stb_truetype.h                  |  1 +
- drivers/video/sunxi/sunxi_de2.c               |  1 +
- drivers/video/sunxi/sunxi_display.c           |  1 +
- drivers/video/sunxi/sunxi_lcd.c               |  1 +
- drivers/video/tdo-tl070wsh30.c                |  1 +
- drivers/video/tegra124/display.c              |  1 +
- drivers/video/tegra124/dp.c                   |  2 ++
- drivers/video/tegra124/sor.c                  |  1 +
- drivers/video/tegra20/tegra-dc.c              |  1 +
- drivers/video/tegra20/tegra-dsi.c             |  1 +
- drivers/video/ti/tilcdc-panel.c               |  1 +
- drivers/video/ti/tilcdc.c                     |  1 +
- drivers/video/tidss/tidss_drv.c               |  1 +
- drivers/video/vidconsole-uclass.c             |  1 +
- drivers/video/video-uclass.c                  |  2 ++
- drivers/video/videomodes.c                    |  1 +
- drivers/video/zynqmp/zynqmp_dpsub.c           |  1 +
- drivers/virtio/virtio-uclass.c                |  1 +
- drivers/virtio/virtio_mmio.c                  |  1 +
- drivers/virtio/virtio_net.c                   |  1 +
- drivers/virtio/virtio_pci_modern.c            |  1 +
- drivers/virtio/virtio_ring.c                  |  1 +
- drivers/virtio/virtio_rng.c                   |  1 +
- drivers/w1-eeprom/ds2502.c                    |  1 +
- drivers/w1-eeprom/eep_sandbox.c               |  1 +
- drivers/watchdog/booke_wdt.c                  |  1 +
- drivers/watchdog/gpio_wdt.c                   |  1 +
- drivers/watchdog/mpc8xxx_wdt.c                |  1 +
- drivers/watchdog/sandbox_alarm-wdt.c          |  1 +
- drivers/watchdog/sbsa_gwdt.c                  |  1 +
- drivers/watchdog/wdt-uclass.c                 |  1 +
- drivers/xen/pvblock.c                         |  1 +
- drivers/xen/xenbus.c                          |  1 +
- env/callback.c                                |  1 +
- env/common.c                                  |  1 +
- env/env.c                                     |  1 +
- env/ext4.c                                    |  1 +
- env/fat.c                                     |  1 +
- env/flash.c                                   |  1 +
- env/mmc.c                                     |  1 +
- env/nvram.c                                   |  1 +
- env/sf.c                                      |  1 +
- env/ubi.c                                     |  1 +
- examples/api/demo.c                           |  1 +
- examples/api/glue.c                           |  1 +
- examples/standalone/atmel_df_pow2.c           |  1 +
- fs/btrfs/ctree.c                              |  1 +
- fs/btrfs/ctree.h                              |  1 +
- fs/btrfs/disk-io.c                            |  1 +
- fs/btrfs/extent-io.c                          |  1 +
- fs/btrfs/inode.c                              |  1 +
- fs/btrfs/subvolume.c                          |  1 +
- fs/btrfs/volumes.c                            |  1 +
- fs/cbfs/cbfs.c                                |  1 +
- fs/cramfs/cramfs.c                            |  1 +
- fs/ext4/ext4_common.c                         |  1 +
- fs/ext4/ext4_common.h                         |  1 +
- fs/ext4/ext4_journal.c                        |  1 +
- fs/ext4/ext4_write.c                          |  1 +
- fs/ext4/ext4fs.c                              |  1 +
- fs/fat/fat.c                                  |  1 +
- fs/fat/fat_write.c                            |  1 +
- fs/fs.c                                       |  2 ++
- fs/fs_internal.c                              |  1 +
- fs/jffs2/jffs2_1pass.c                        |  1 +
- fs/jffs2/mini_inflate.c                       |  1 +
- fs/reiserfs/reiserfs.c                        |  1 +
- fs/sandbox/host_bootdev.c                     |  1 +
- fs/squashfs/sqfs.c                            |  1 +
- fs/ubifs/debug.c                              |  2 ++
- fs/ubifs/io.c                                 |  1 +
- fs/ubifs/key.h                                |  1 +
- fs/ubifs/log.c                                |  1 +
- fs/ubifs/lprops.c                             |  1 +
- fs/ubifs/lpt_commit.c                         |  1 +
- fs/ubifs/recovery.c                           |  1 +
- fs/ubifs/replay.c                             |  1 +
- fs/ubifs/super.c                              |  1 +
- fs/ubifs/tnc.c                                |  1 +
- fs/ubifs/ubifs.c                              |  1 +
- fs/yaffs2/yaffs_mtdif2.c                      |  1 +
- fs/yaffs2/yaffs_uboot_glue.c                  |  1 +
- fs/yaffs2/yaffsfs.c                           |  1 +
- fs/yaffs2/ydirectenv.h                        |  1 +
- fs/zfs/zfs.c                                  |  1 +
- include/cli.h                                 |  1 +
- include/dm/of.h                               |  1 +
- include/efi_loader.h                          |  1 +
- include/exception.h                           |  1 +
- include/exports.h                             |  2 ++
- include/fdt_support.h                         |  1 +
- include/imx8image.h                           |  1 +
- include/linux/string.h                        |  1 +
- include/net.h                                 |  1 +
- include/net6.h                                |  1 +
- include/part.h                                |  1 +
- include/phy_interface.h                       |  1 +
- include/regmap.h                              |  1 +
- include/spi_flash.h                           |  1 +
- include/test/ut.h                             |  1 +
- include/time.h                                |  1 +
- include/tlv_eeprom.h                          |  1 +
- include/video_console.h                       |  1 +
- include/xen/interface/io/ring.h               |  1 +
- lib/abuf.c                                    |  1 +
- lib/acpi/acpi.c                               |  1 +
- lib/acpi/acpi_device.c                        |  1 +
- lib/acpi/acpi_dp.c                            |  1 +
- lib/acpi/acpi_table.c                         |  1 +
- lib/acpi/acpi_writer.c                        |  1 +
- lib/acpi/acpigen.c                            |  1 +
- lib/acpi/base.c                               |  1 +
- lib/acpi/csrt.c                               |  1 +
- lib/acpi/dsdt.c                               |  1 +
- lib/acpi/facs.c                               |  1 +
- lib/acpi/mcfg.c                               |  1 +
- lib/acpi/ssdt.c                               |  1 +
- lib/aes.c                                     |  1 +
- lib/aes/aes-decrypt.c                         |  1 +
- lib/bch.c                                     |  1 +
- lib/blake2/blake2-impl.h                      |  1 +
- lib/blake2/blake2b.c                          |  1 +
- lib/bzip2/bzlib.c                             |  1 +
- lib/charset.c                                 |  1 +
- lib/crc16-ccitt.c                             |  1 +
- lib/crc32.c                                   |  1 +
- lib/crypt/crypt.c                             |  1 +
- lib/crypto/pkcs7_verify.c                     |  1 +
- lib/crypto/public_key.c                       |  1 +
- lib/crypto/x509_public_key.c                  |  1 +
- lib/dhry/cmd_dhry.c                           |  1 +
- lib/dhry/dhry.h                               |  1 +
- lib/ecdsa/ecdsa-libcrypto.c                   |  1 +
- lib/ecdsa/ecdsa-verify.c                      |  1 +
- lib/efi/efi_app.c                             |  1 +
- lib/efi/efi_stub.c                            |  1 +
- lib/efi_loader/dtbdump.c                      |  1 +
- lib/efi_loader/efi_bootmgr.c                  |  1 +
- lib/efi_loader/efi_boottime.c                 |  1 +
- lib/efi_loader/efi_capsule.c                  |  1 +
- lib/efi_loader/efi_console.c                  |  1 +
- lib/efi_loader/efi_device_path.c              |  1 +
- lib/efi_loader/efi_device_path_to_text.c      |  1 +
- lib/efi_loader/efi_disk.c                     |  1 +
- lib/efi_loader/efi_file.c                     |  1 +
- lib/efi_loader/efi_freestanding.c             |  1 +
- lib/efi_loader/efi_gop.c                      |  1 +
- lib/efi_loader/efi_helper.c                   |  1 +
- lib/efi_loader/efi_hii.c                      |  1 +
- lib/efi_loader/efi_image_loader.c             |  1 +
- lib/efi_loader/efi_load_options.c             |  1 +
- lib/efi_loader/efi_memory.c                   |  1 +
- lib/efi_loader/efi_net.c                      |  1 +
- lib/efi_loader/efi_runtime.c                  |  1 +
- lib/efi_loader/efi_setup.c                    |  1 +
- lib/efi_loader/efi_signature.c                |  1 +
- lib/efi_loader/efi_tcg2.c                     |  1 +
- lib/efi_loader/efi_unicode_collation.c        |  1 +
- lib/efi_loader/efi_var_file.c                 |  1 +
- lib/efi_loader/efi_var_mem.c                  |  1 +
- lib/efi_loader/efi_variable.c                 |  1 +
- lib/efi_loader/efi_variable_tee.c             |  1 +
- lib/efi_loader/helloworld.c                   |  1 +
- lib/efi_selftest/efi_selftest_block_device.c  |  1 +
- lib/efi_selftest/efi_selftest_config_table.c  |  1 +
- lib/efi_selftest/efi_selftest_ecpt.c          |  1 +
- lib/efi_selftest/efi_selftest_load_file.c     |  1 +
- lib/efi_selftest/efi_selftest_loaded_image.c  |  1 +
- lib/efi_selftest/efi_selftest_loadimage.c     |  1 +
- .../efi_selftest_manageprotocols.c            |  1 +
- lib/efi_selftest/efi_selftest_mem.c           |  1 +
- lib/efi_selftest/efi_selftest_memory.c        |  1 +
- lib/efi_selftest/efi_selftest_rng.c           |  1 +
- .../efi_selftest_set_virtual_address_map.c    |  1 +
- lib/efi_selftest/efi_selftest_snp.c           |  1 +
- .../efi_selftest_startimage_exit.c            |  1 +
- lib/efi_selftest/efi_selftest_tcg2.c          |  1 +
- lib/efi_selftest/efi_selftest_variables.c     |  1 +
- .../efi_selftest_variables_runtime.c          |  1 +
- lib/elf.c                                     |  1 +
- lib/fdtdec.c                                  |  1 +
- lib/fdtdec_test.c                             |  1 +
- lib/fwu_updates/fwu.c                         |  1 +
- lib/fwu_updates/fwu_mtd.c                     |  1 +
- lib/getopt.c                                  |  1 +
- lib/gunzip.c                                  |  1 +
- lib/hashtable.c                               |  1 +
- lib/image-sparse.c                            |  1 +
- lib/libavb/avb_sysdeps_posix.c                |  1 +
- lib/linux_compat.c                            |  1 +
- lib/list_sort.c                               |  1 +
- lib/lz4.c                                     |  1 +
- lib/lz4_wrapper.c                             |  1 +
- lib/lzo/lzo1x_decompress.c                    |  1 +
- lib/md5.c                                     |  1 +
- lib/membuff.c                                 |  1 +
- lib/net_utils.c                               |  1 +
- lib/of_live.c                                 |  1 +
- lib/optee/optee.c                             |  1 +
- lib/physmem.c                                 |  1 +
- lib/qsort.c                                   |  1 +
- lib/rsa/rsa-keyprop.c                         |  1 +
- lib/rsa/rsa-mod-exp.c                         |  1 +
- lib/rsa/rsa-verify.c                          |  1 +
- lib/semihosting.c                             |  1 +
- lib/slre.c                                    |  1 +
- lib/smbios-parser.c                           |  1 +
- lib/smbios.c                                  |  1 +
- lib/strto.c                                   |  1 +
- lib/tpm-common.c                              |  1 +
- lib/tpm-v1.c                                  |  1 +
- lib/tpm-v2.c                                  |  1 +
- lib/trace.c                                   |  1 +
- lib/uuid.c                                    |  1 +
- net/arp.c                                     |  2 ++
- net/bootp.c                                   |  2 ++
- net/cdp.c                                     |  1 +
- net/dhcpv6.c                                  |  2 ++
- net/dns.c                                     |  2 ++
- net/dsa-uclass.c                              |  1 +
- net/eth-uclass.c                              |  1 +
- net/eth_bootdev.c                             |  1 +
- net/eth_common.c                              |  1 +
- net/fastboot_tcp.c                            |  1 +
- net/fastboot_udp.c                            |  2 ++
- net/link_local.c                              |  2 ++
- net/mdio-uclass.c                             |  1 +
- net/ndisc.c                                   |  2 ++
- net/net.c                                     |  2 ++
- net/net6.c                                    |  2 ++
- net/net_rand.h                                |  1 +
- net/nfs.c                                     |  1 +
- net/pcap.c                                    |  1 +
- net/ping6.c                                   |  2 ++
- net/rarp.c                                    |  1 +
- net/sntp.c                                    |  2 ++
- net/tcp.c                                     |  1 +
- net/tftp.c                                    |  2 ++
- net/wget.c                                    |  2 ++
- net/wol.c                                     |  1 +
- post/drivers/flash.c                          |  1 +
- post/drivers/rtc.c                            |  5 ++--
- post/lib_powerpc/multi.c                      |  1 +
- post/lib_powerpc/string.c                     |  1 +
- post/post.c                                   |  1 +
- test/bloblist.c                               |  1 +
- test/boot/bootdev.c                           |  1 +
- test/boot/bootflow.c                          |  1 +
- test/boot/bootstd_common.c                    |  1 +
- test/boot/expo.c                              |  1 +
- test/bootm.c                                  |  1 +
- test/cmd/bdinfo.c                             |  1 +
- test/cmd/fdt.c                                |  1 +
- test/cmd/loadm.c                              |  1 +
- test/cmd/mem_search.c                         |  1 +
- test/cmd/rw.c                                 |  1 +
- test/cmd/setexpr.c                            |  1 +
- test/cmd/wget.c                               |  1 +
- test/command_ut.c                             |  1 +
- test/common/cread.c                           |  1 +
- test/compression.c                            |  1 +
- test/dm/acpi_dp.c                             |  1 +
- test/dm/axi.c                                 |  1 +
- test/dm/blkmap.c                              |  1 +
- test/dm/clk_ccf.c                             |  1 +
- test/dm/core.c                                |  1 +
- test/dm/cpu.c                                 |  1 +
- test/dm/devres.c                              |  1 +
- test/dm/dma.c                                 |  1 +
- test/dm/eth.c                                 |  1 +
- test/dm/fwu_mdata.c                           |  1 +
- test/dm/gpio.c                                |  1 +
- test/dm/mmc.c                                 |  1 +
- test/dm/mux-cmd.c                             |  2 ++
- test/dm/nop.c                                 |  1 +
- test/dm/of_platdata.c                         |  1 +
- test/dm/ofnode.c                              |  1 +
- test/dm/part.c                                |  1 +
- test/dm/pci.c                                 |  1 +
- test/dm/regmap.c                              |  2 ++
- test/dm/remoteproc.c                          |  1 +
- test/dm/rtc.c                                 |  1 +
- test/dm/soc.c                                 |  1 +
- test/dm/sysinfo.c                             |  1 +
- test/dm/tee.c                                 |  1 +
- test/dm/usb.c                                 |  1 +
- test/dm/video.c                               |  1 +
- test/dm/wdt.c                                 |  1 +
- test/env/hashtable.c                          |  1 +
- test/fuzz/cmd_fuzz.c                          |  1 +
- test/fuzz/virtio.c                            |  1 +
- test/image/spl_load.c                         |  1 +
- test/lib/abuf.c                               |  1 +
- test/lib/asn1.c                               |  1 +
- test/lib/rsa.c                                |  1 +
- test/lib/sscanf.c                             |  1 +
- test/lib/string.c                             |  1 +
- test/lib/strlcat.c                            |  1 +
- test/lib/test_aes.c                           |  1 +
- test/log/log_test.c                           |  1 +
- test/log/nolog_ndebug.c                       |  1 +
- test/log/nolog_test.c                         |  1 +
- test/log/syslog_test.c                        |  1 +
- test/optee/cmd_ut_optee.c                     |  1 +
- test/print_ut.c                               |  1 +
- test/str_ut.c                                 |  1 +
- test/test-main.c                              |  1 +
- test/unicode_ut.c                             |  1 +
- test/ut.c                                     |  1 +
- 1709 files changed, 1854 insertions(+), 34 deletions(-)
-
+diff --git a/api/api.c b/api/api.c
+index 89003c161c2f..0bd93759f7be 100644
+--- a/api/api.c
++++ b/api/api.c
+@@ -11,6 +11,7 @@
+ #include <env.h>
+ #include <malloc.h>
+ #include <env_internal.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include <linux/types.h>
+ #include <api_public.h>
+diff --git a/arch/arm/include/asm/arch-tegra/timer.h b/arch/arm/include/asm/arch-tegra/timer.h
+index 1c4decacd338..c5e9d841031a 100644
+--- a/arch/arm/include/asm/arch-tegra/timer.h
++++ b/arch/arm/include/asm/arch-tegra/timer.h
+@@ -9,6 +9,7 @@
+ #define _TEGRA_TIMER_H
+ 
+ /* returns the current monotonic timer value in microseconds */
++#include <time.h>
+ unsigned long timer_get_us(void);
+ 
+ #endif
+diff --git a/arch/arm/mach-at91/arm920t/clock.c b/arch/arm/mach-at91/arm920t/clock.c
+index 09ac66d619d2..5312798356b7 100644
+--- a/arch/arm/mach-at91/arm920t/clock.c
++++ b/arch/arm/mach-at91/arm920t/clock.c
+@@ -8,6 +8,7 @@
+  * Copyright (C) 2009 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
+  */
+ #include <common.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm/arch/hardware.h>
+diff --git a/arch/arm/mach-at91/arm926ejs/clock.c b/arch/arm/mach-at91/arm926ejs/clock.c
+index 013daf43b742..90de2153dd48 100644
+--- a/arch/arm/mach-at91/arm926ejs/clock.c
++++ b/arch/arm/mach-at91/arm926ejs/clock.c
+@@ -8,6 +8,7 @@
+  */
+ 
+ #include <common.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm/arch/hardware.h>
+diff --git a/arch/arm/mach-at91/clock.c b/arch/arm/mach-at91/clock.c
+index 8344daeb39a2..5b8ce52f5c1e 100644
+--- a/arch/arm/mach-at91/clock.c
++++ b/arch/arm/mach-at91/clock.c
+@@ -6,6 +6,7 @@
+ 
+ #include <common.h>
+ #include <dm.h>
++#include <time.h>
+ #include <wdt.h>
+ #include <asm/io.h>
+ #include <asm/arch/hardware.h>
+diff --git a/arch/arm/mach-at91/phy.c b/arch/arm/mach-at91/phy.c
+index f4484a77c7de..3b6901bc9f76 100644
+--- a/arch/arm/mach-at91/phy.c
++++ b/arch/arm/mach-at91/phy.c
+@@ -12,6 +12,7 @@
+  */
+ 
+ #include <common.h>
++#include <time.h>
+ #include <asm/hardware.h>
+ #include <asm/io.h>
+ #include <linux/delay.h>
+diff --git a/arch/arm/mach-bcm283x/mbox.c b/arch/arm/mach-bcm283x/mbox.c
+index da9faafe1ddc..940699337f1e 100644
+--- a/arch/arm/mach-bcm283x/mbox.c
++++ b/arch/arm/mach-bcm283x/mbox.c
+@@ -6,6 +6,7 @@
+ #include <common.h>
+ #include <cpu_func.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/io.h>
+ #include <asm/arch/base.h>
+diff --git a/arch/arm/mach-bcmstb/include/mach/timer.h b/arch/arm/mach-bcmstb/include/mach/timer.h
+index 039dd664c2c0..8505d2c4b537 100644
+--- a/arch/arm/mach-bcmstb/include/mach/timer.h
++++ b/arch/arm/mach-bcmstb/include/mach/timer.h
+@@ -8,6 +8,7 @@
+ #ifndef _BCMSTB_TIMER_H
+ #define _BCMSTB_TIMER_H
+ 
++#include <time.h>
+ uint64_t get_ticks(void);
+ 
+ #endif /* _BCMSTB_TIMER_H */
+diff --git a/arch/arm/mach-exynos/clock.c b/arch/arm/mach-exynos/clock.c
+index f91f2ee862de..2e5aac4ecf38 100644
+--- a/arch/arm/mach-exynos/clock.c
++++ b/arch/arm/mach-exynos/clock.c
+@@ -7,6 +7,7 @@
+ #include <common.h>
+ #include <clock_legacy.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/clk.h>
+diff --git a/arch/arm/mach-imx/i2c-mxv7.c b/arch/arm/mach-imx/i2c-mxv7.c
+index a5866cf9f703..94b30823cca8 100644
+--- a/arch/arm/mach-imx/i2c-mxv7.c
++++ b/arch/arm/mach-imx/i2c-mxv7.c
+@@ -4,6 +4,7 @@
+  */
+ #include <common.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/imx-regs.h>
+ #include <linux/delay.h>
+diff --git a/arch/arm/mach-imx/mx6/clock.c b/arch/arm/mach-imx/mx6/clock.c
+index 1bdc568f9b14..a51be6189311 100644
+--- a/arch/arm/mach-imx/mx6/clock.c
++++ b/arch/arm/mach-imx/mx6/clock.c
+@@ -7,6 +7,7 @@
+ #include <command.h>
+ #include <div64.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <linux/errno.h>
+ #include <asm/arch/imx-regs.h>
+diff --git a/arch/arm/mach-imx/mx7/clock.c b/arch/arm/mach-imx/mx7/clock.c
+index 4e232385afc3..460eabc3ade3 100644
+--- a/arch/arm/mach-imx/mx7/clock.c
++++ b/arch/arm/mach-imx/mx7/clock.c
+@@ -11,6 +11,7 @@
+ #include <command.h>
+ #include <div64.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <linux/errno.h>
+diff --git a/arch/arm/mach-nexell/timer.c b/arch/arm/mach-nexell/timer.c
+index 3b311fd22a56..437697329220 100644
+--- a/arch/arm/mach-nexell/timer.c
++++ b/arch/arm/mach-nexell/timer.c
+@@ -6,6 +6,7 @@
+ 
+ #include <common.h>
+ #include <log.h>
++#include <time.h>
+ 
+ #include <asm/io.h>
+ #include <asm/arch/nexell.h>
+diff --git a/arch/arm/mach-omap2/omap3/am35x_musb.c b/arch/arm/mach-omap2/omap3/am35x_musb.c
+index 1121acc00589..1c3f78a42101 100644
+--- a/arch/arm/mach-omap2/omap3/am35x_musb.c
++++ b/arch/arm/mach-omap2/omap3/am35x_musb.c
+@@ -10,6 +10,7 @@
+ 
+ #include <common.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/device.h>
+ #include <asm/io.h>
+ #include <asm/arch/am35x_def.h>
+diff --git a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
+index 35bed3199422..31decc413d1e 100644
+--- a/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
++++ b/arch/arm/mach-stm32mp/cmd_stm32prog/stm32prog_serial.c
+@@ -9,6 +9,7 @@
+ #include <dfu.h>
+ #include <malloc.h>
+ #include <serial.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <asm/arch/sys_proto.h>
+ #include <dm/lists.h>
+diff --git a/arch/arm/mach-stm32mp/pwr_regulator.c b/arch/arm/mach-stm32mp/pwr_regulator.c
+index 846637ab162e..90401018adcc 100644
+--- a/arch/arm/mach-stm32mp/pwr_regulator.c
++++ b/arch/arm/mach-stm32mp/pwr_regulator.c
+@@ -9,6 +9,7 @@
+ #include <dm.h>
+ #include <errno.h>
+ #include <syscon.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <dm/device_compat.h>
+ #include <dm/device-internal.h>
+diff --git a/arch/arm/mach-tegra/powergate.c b/arch/arm/mach-tegra/powergate.c
+index 631bc04e9506..c5ced7e3f389 100644
+--- a/arch/arm/mach-tegra/powergate.c
++++ b/arch/arm/mach-tegra/powergate.c
+@@ -5,6 +5,7 @@
+ 
+ #include <common.h>
+ #include <errno.h>
++#include <time.h>
+ #include <linux/delay.h>
+ 
+ #include <asm/io.h>
+diff --git a/arch/arm/mach-tegra/tegra124/xusb-padctl.c b/arch/arm/mach-tegra/tegra124/xusb-padctl.c
+index 69736aa39255..a27ccfb260e0 100644
+--- a/arch/arm/mach-tegra/tegra124/xusb-padctl.c
++++ b/arch/arm/mach-tegra/tegra124/xusb-padctl.c
+@@ -8,6 +8,7 @@
+ #include <common.h>
+ #include <errno.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/of_access.h>
+ #include <dm/ofnode.h>
+ #include <linux/delay.h>
+diff --git a/arch/arm/mach-tegra/tegra210/clock.c b/arch/arm/mach-tegra/tegra210/clock.c
+index 900537afbe50..73d9f9dd592e 100644
+--- a/arch/arm/mach-tegra/tegra210/clock.c
++++ b/arch/arm/mach-tegra/tegra210/clock.c
+@@ -10,6 +10,7 @@
+ #include <errno.h>
+ #include <init.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+diff --git a/arch/arm/mach-tegra/tegra210/xusb-padctl.c b/arch/arm/mach-tegra/tegra210/xusb-padctl.c
+index 30d0395bb0e5..0af6e256ad18 100644
+--- a/arch/arm/mach-tegra/tegra210/xusb-padctl.c
++++ b/arch/arm/mach-tegra/tegra210/xusb-padctl.c
+@@ -8,6 +8,7 @@
+ #include <common.h>
+ #include <errno.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <dm/of_access.h>
+ #include <dm/ofnode.h>
+diff --git a/arch/mips/mach-mtmips/mt7620/init.c b/arch/mips/mach-mtmips/mt7620/init.c
+index 93abf9228d68..b2e8e2882e22 100644
+--- a/arch/mips/mach-mtmips/mt7620/init.c
++++ b/arch/mips/mach-mtmips/mt7620/init.c
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include <config.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <linux/io.h>
+ #include "mt7620.h"
+diff --git a/arch/mips/mach-mtmips/mt7621/init.c b/arch/mips/mach-mtmips/mt7621/init.c
+index d21848ad23ba..a768cadce3d7 100644
+--- a/arch/mips/mach-mtmips/mt7621/init.c
++++ b/arch/mips/mach-mtmips/mt7621/init.c
+@@ -7,6 +7,7 @@
+ 
+ #include <clk.h>
+ #include <dm.h>
++#include <time.h>
+ #include <dm/uclass.h>
+ #include <dt-bindings/clock/mt7621-clk.h>
+ #include <asm/global_data.h>
+diff --git a/arch/mips/mach-mtmips/mt7628/init.c b/arch/mips/mach-mtmips/mt7628/init.c
+index 6b535129df12..df93b4343848 100644
+--- a/arch/mips/mach-mtmips/mt7628/init.c
++++ b/arch/mips/mach-mtmips/mt7628/init.c
+@@ -8,6 +8,7 @@
+ #include <common.h>
+ #include <clk.h>
+ #include <dm.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <dm/uclass.h>
+ #include <dt-bindings/clock/mt7628-clk.h>
+diff --git a/arch/mips/mach-octeon/clock.c b/arch/mips/mach-octeon/clock.c
+index 119b3ac50b42..8984bfd74458 100644
+--- a/arch/mips/mach-octeon/clock.c
++++ b/arch/mips/mach-octeon/clock.c
+@@ -3,6 +3,7 @@
+  * Copyright (C) 2018, 2019 Marvell International Ltd.
+  */
+ 
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <mach/clock.h>
+ 
+diff --git a/arch/mips/mach-octeon/cvmx-helper-bgx.c b/arch/mips/mach-octeon/cvmx-helper-bgx.c
+index 7d6e178a447a..f6e5a929a327 100644
+--- a/arch/mips/mach-octeon/cvmx-helper-bgx.c
++++ b/arch/mips/mach-octeon/cvmx-helper-bgx.c
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include <log.h>
++#include <time.h>
+ #include <linux/delay.h>
+ 
+ #include <mach/cvmx-regs.h>
+diff --git a/arch/mips/mach-octeon/cvmx-pcie.c b/arch/mips/mach-octeon/cvmx-pcie.c
+index c2a2018a1f70..e46bb609af7c 100644
+--- a/arch/mips/mach-octeon/cvmx-pcie.c
++++ b/arch/mips/mach-octeon/cvmx-pcie.c
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include <log.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include <linux/libfdt.h>
+ 
+diff --git a/arch/mips/mach-octeon/include/mach/cvmx-mdio.h b/arch/mips/mach-octeon/include/mach/cvmx-mdio.h
+index 9bc138fa2770..8cd7d9df88cb 100644
+--- a/arch/mips/mach-octeon/include/mach/cvmx-mdio.h
++++ b/arch/mips/mach-octeon/include/mach/cvmx-mdio.h
+@@ -12,6 +12,7 @@
+ /**
+  * PHY register 0 from the 802.3 spec
+  */
++#include <time.h>
+ #define CVMX_MDIO_PHY_REG_CONTROL 0
+ 
+ typedef union {
+diff --git a/arch/mips/mach-octeon/include/mach/cvmx-regs.h b/arch/mips/mach-octeon/include/mach/cvmx-regs.h
+index f97c1e907f0b..21e65985cd0e 100644
+--- a/arch/mips/mach-octeon/include/mach/cvmx-regs.h
++++ b/arch/mips/mach-octeon/include/mach/cvmx-regs.h
+@@ -7,6 +7,7 @@
+ #define __CVMX_REGS_H__
+ 
+ #include <log.h>
++#include <time.h>
+ #include <linux/bitfield.h>
+ #include <linux/bitops.h>
+ #include <linux/io.h>
+diff --git a/arch/powerpc/lib/interrupts.c b/arch/powerpc/lib/interrupts.c
+index 2add2ff95405..70bd4a0f0f58 100644
+--- a/arch/powerpc/lib/interrupts.c
++++ b/arch/powerpc/lib/interrupts.c
+@@ -9,6 +9,7 @@
+ 
+ #include <common.h>
+ #include <irq_func.h>
++#include <time.h>
+ #include <asm/processor.h>
+ #include <watchdog.h>
+ #ifdef CONFIG_LED_STATUS
+diff --git a/arch/x86/cpu/acpi_gpe.c b/arch/x86/cpu/acpi_gpe.c
+index da01e71335f1..f44f0e4c2b24 100644
+--- a/arch/x86/cpu/acpi_gpe.c
++++ b/arch/x86/cpu/acpi_gpe.c
+@@ -10,6 +10,7 @@
+ #include <dm.h>
+ #include <irq.h>
+ #include <log.h>
++#include <time.h>
+ #include <acpi/acpi_device.h>
+ #include <asm/io.h>
+ #include <dt-bindings/interrupt-controller/irq.h>
+diff --git a/arch/x86/cpu/apollolake/punit.c b/arch/x86/cpu/apollolake/punit.c
+index 5ed7963579ea..8320d81b5630 100644
+--- a/arch/x86/cpu/apollolake/punit.c
++++ b/arch/x86/cpu/apollolake/punit.c
+@@ -7,6 +7,7 @@
+ #include <dm.h>
+ #include <log.h>
+ #include <spl.h>
++#include <time.h>
+ #include <asm/cpu.h>
+ #include <asm/cpu_common.h>
+ #include <asm/intel_regs.h>
+diff --git a/arch/x86/cpu/intel_common/mrc.c b/arch/x86/cpu/intel_common/mrc.c
+index ff959d1bd8d8..615ba64df715 100644
+--- a/arch/x86/cpu/intel_common/mrc.c
++++ b/arch/x86/cpu/intel_common/mrc.c
+@@ -11,6 +11,7 @@
+ #include <log.h>
+ #include <spl.h>
+ #include <syscon.h>
++#include <time.h>
+ #include <asm/cpu.h>
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
+diff --git a/arch/x86/cpu/mp_init.c b/arch/x86/cpu/mp_init.c
+index a133a5d81161..9f0f6372dd56 100644
+--- a/arch/x86/cpu/mp_init.c
++++ b/arch/x86/cpu/mp_init.c
+@@ -12,6 +12,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <qfw.h>
++#include <time.h>
+ #include <asm/atomic.h>
+ #include <asm/cpu.h>
+ #include <asm/global_data.h>
+diff --git a/board/astro/mcf5373l/mcf5373l.c b/board/astro/mcf5373l/mcf5373l.c
+index 43563c412793..8c5185b62322 100644
+--- a/board/astro/mcf5373l/mcf5373l.c
++++ b/board/astro/mcf5373l/mcf5373l.c
+@@ -8,6 +8,7 @@
+ #include <common.h>
+ #include <init.h>
+ #include <serial.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <command.h>
+ #include <asm/global_data.h>
+diff --git a/board/cobra5272/flash.c b/board/cobra5272/flash.c
+index 8416af163ad1..04b0738bff6d 100644
+--- a/board/cobra5272/flash.c
++++ b/board/cobra5272/flash.c
+@@ -9,6 +9,7 @@
+ #include <cpu_func.h>
+ #include <flash.h>
+ #include <irq_func.h>
++#include <time.h>
+ #include <uuid.h>
+ #include <linux/delay.h>
+ 
+diff --git a/board/freescale/m5253demo/flash.c b/board/freescale/m5253demo/flash.c
+index eeb9cfd31259..dd269c3c65db 100644
+--- a/board/freescale/m5253demo/flash.c
++++ b/board/freescale/m5253demo/flash.c
+@@ -11,6 +11,7 @@
+ #include <flash.h>
+ #include <init.h>
+ #include <irq_func.h>
++#include <time.h>
+ 
+ #include <asm/immap.h>
+ 
+diff --git a/board/nokia/rx51/rx51.c b/board/nokia/rx51/rx51.c
+index 238b9637badd..ca3bc5133d45 100644
+--- a/board/nokia/rx51/rx51.c
++++ b/board/nokia/rx51/rx51.c
+@@ -25,6 +25,7 @@
+ #include <dm.h>
+ #include <env.h>
+ #include <init.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <wdt.h>
+ #include <malloc.h>
+diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
+index 9d58860451c5..867515837ee0 100644
+--- a/board/sandbox/sandbox.c
++++ b/board/sandbox/sandbox.c
+@@ -17,6 +17,7 @@
+ #include <malloc.h>
+ #include <mapmem.h>
+ #include <os.h>
++#include <time.h>
+ #include <acpi/acpi_table.h>
+ #include <asm/global_data.h>
+ #include <asm/test.h>
+diff --git a/board/theadorable/fpga.c b/board/theadorable/fpga.c
+index bc8379cccf6d..3a33e15eacc6 100644
+--- a/board/theadorable/fpga.c
++++ b/board/theadorable/fpga.c
+@@ -7,6 +7,7 @@
+ #include <altera.h>
+ #include <errno.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <asm/arch/cpu.h>
+diff --git a/board/theadorable/theadorable.c b/board/theadorable/theadorable.c
+index 144f122bb206..6f35a43e4e0d 100644
+--- a/board/theadorable/theadorable.c
++++ b/board/theadorable/theadorable.c
+@@ -14,6 +14,7 @@
+ #if !defined(CONFIG_SPL_BUILD)
+ #include <bootcount.h>
+ #endif
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+diff --git a/cmd/clone.c b/cmd/clone.c
+index a90620775712..4c7e6d2e8281 100644
+--- a/cmd/clone.c
++++ b/cmd/clone.c
+@@ -9,6 +9,7 @@
+ #include <malloc.h>
+ #include <part.h>
+ #include <blk.h>
++#include <time.h>
+ #include <vsprintf.h>
+ 
+ #define BUFSIZE (1 * 1024 * 1024)
+diff --git a/cmd/cyclic.c b/cmd/cyclic.c
+index 946f1d78184d..f12edfa6b727 100644
+--- a/cmd/cyclic.c
++++ b/cmd/cyclic.c
+@@ -1,5 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /*
++#include <time.h>
+  * A general-purpose cyclic execution infrastructure, to allow "small"
+  * (run-time wise) functions to be executed at a specified frequency.
+  * Things like LED blinking or watchdog triggering are examples for such
+diff --git a/cmd/gettime.c b/cmd/gettime.c
+index 2e74e02b4998..ebaa45812a68 100644
+--- a/cmd/gettime.c
++++ b/cmd/gettime.c
+@@ -13,6 +13,7 @@
+  */
+ #include <common.h>
+ #include <command.h>
++#include <time.h>
+ 
+ static int do_gettime(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		      char *const argv[])
+diff --git a/cmd/mem.c b/cmd/mem.c
+index 66c2d36a1480..d0abf71f2333 100644
+--- a/cmd/mem.c
++++ b/cmd/mem.c
+@@ -24,6 +24,7 @@
+ #include <log.h>
+ #include <mapmem.h>
+ #include <rand.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+diff --git a/cmd/sf.c b/cmd/sf.c
+index 977ffcb63c10..e1a42d21518f 100644
+--- a/cmd/sf.c
++++ b/cmd/sf.c
+@@ -15,6 +15,7 @@
+ #include <mapmem.h>
+ #include <spi.h>
+ #include <spi_flash.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <jffs2/jffs2.h>
+ #include <linux/mtd/mtd.h>
+diff --git a/cmd/sleep.c b/cmd/sleep.c
+index c741b4aa029b..0cbbceccc313 100644
+--- a/cmd/sleep.c
++++ b/cmd/sleep.c
+@@ -7,6 +7,7 @@
+ #include <common.h>
+ #include <command.h>
+ #include <console.h>
++#include <time.h>
+ #include <linux/delay.h>
+ 
+ static int do_sleep(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/cmd/timer.c b/cmd/timer.c
+index 551be5dd54ee..507a99562635 100644
+--- a/cmd/timer.c
++++ b/cmd/timer.c
+@@ -6,6 +6,7 @@
+ 
+ #include <common.h>
+ #include <command.h>
++#include <time.h>
+ 
+ static int do_timer(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		    char *const argv[])
+diff --git a/cmd/tpm_test.c b/cmd/tpm_test.c
+index c7fa6e775f55..3aca3fddba04 100644
+--- a/cmd/tpm_test.c
++++ b/cmd/tpm_test.c
+@@ -7,6 +7,7 @@
+ #include <command.h>
+ #include <cpu_func.h>
+ #include <log.h>
++#include <time.h>
+ #include <tpm-v1.h>
+ #include <linux/printk.h>
+ #include "tpm-user-utils.h"
+diff --git a/common/command.c b/common/command.c
+index 846e16e2ada2..efe825e82250 100644
+--- a/common/command.c
++++ b/common/command.c
+@@ -16,6 +16,7 @@
+ #include <image.h>
+ #include <log.h>
+ #include <mapmem.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <linux/ctype.h>
+ 
+diff --git a/common/dfu.c b/common/dfu.c
+index 0d154e8d4c48..6d33cb32babe 100644
+--- a/common/dfu.c
++++ b/common/dfu.c
+@@ -13,6 +13,7 @@
+ #include <common.h>
+ #include <command.h>
+ #include <log.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <dfu.h>
+ #include <console.h>
+diff --git a/common/usb_hub.c b/common/usb_hub.c
+index 85c0822d8b7b..bcc332693a45 100644
+--- a/common/usb_hub.c
++++ b/common/usb_hub.c
+@@ -29,6 +29,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <memalign.h>
++#include <time.h>
+ #include <asm/processor.h>
+ #include <asm/unaligned.h>
+ #include <linux/ctype.h>
+diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+index 4cbc9acb7380..e7d2aa9cf090 100644
+--- a/common/usb_kbd.c
++++ b/common/usb_kbd.c
+@@ -15,6 +15,7 @@
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <stdio_dev.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <asm/byteorder.h>
+ #ifdef CONFIG_SANDBOX
+diff --git a/common/xyzModem.c b/common/xyzModem.c
+index fb319f711907..cb9d3036b063 100644
+--- a/common/xyzModem.c
++++ b/common/xyzModem.c
+@@ -22,6 +22,7 @@
+  *==========================================================================
+  */
+ #include <common.h>
++#include <time.h>
+ #include <xyzModem.h>
+ #include <stdarg.h>
+ #include <u-boot/crc.h>
+diff --git a/drivers/ata/ahci.c b/drivers/ata/ahci.c
+index cb2c648a91fd..725bd2f16816 100644
+--- a/drivers/ata/ahci.c
++++ b/drivers/ata/ahci.c
+@@ -12,6 +12,7 @@
+ #include <blk.h>
+ #include <cpu_func.h>
+ #include <log.h>
++#include <time.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ 
+diff --git a/drivers/ata/sata_mv.c b/drivers/ata/sata_mv.c
+index 18c7a66db1bf..78395b173c0f 100644
+--- a/drivers/ata/sata_mv.c
++++ b/drivers/ata/sata_mv.c
+@@ -37,6 +37,7 @@
+ #include <cpu_func.h>
+ #include <dm.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+ #include <dm/device-internal.h>
+diff --git a/drivers/crypto/nuvoton/npcm_aes.c b/drivers/crypto/nuvoton/npcm_aes.c
+index 6493ea108ec7..b01292a19362 100644
+--- a/drivers/crypto/nuvoton/npcm_aes.c
++++ b/drivers/crypto/nuvoton/npcm_aes.c
+@@ -5,6 +5,7 @@
+ 
+ #include <common.h>
+ #include <dm.h>
++#include <time.h>
+ #include <uboot_aes.h>
+ #include <asm/io.h>
+ #include <asm/arch/aes.h>
+diff --git a/drivers/ddr/altera/sdram_n5x.c b/drivers/ddr/altera/sdram_n5x.c
+index d9039443b91c..cb8ab1118295 100644
+--- a/drivers/ddr/altera/sdram_n5x.c
++++ b/drivers/ddr/altera/sdram_n5x.c
+@@ -13,6 +13,7 @@
+ #include <hang.h>
+ #include <ram.h>
+ #include <reset.h>
++#include <time.h>
+ #include "sdram_soc64.h"
+ #include <wait_bit.h>
+ #include <asm/arch/firewall.h>
+diff --git a/drivers/ddr/altera/sdram_soc64.c b/drivers/ddr/altera/sdram_soc64.c
+index 4716abfc9a8b..f2cd16628c4b 100644
+--- a/drivers/ddr/altera/sdram_soc64.c
++++ b/drivers/ddr/altera/sdram_soc64.c
+@@ -15,6 +15,7 @@
+ #include <log.h>
+ #include <ram.h>
+ #include <reset.h>
++#include <time.h>
+ #include "sdram_soc64.h"
+ #include <wait_bit.h>
+ #include <asm/arch/firewall.h>
+diff --git a/drivers/dma/lpc32xx_dma.c b/drivers/dma/lpc32xx_dma.c
+index 0efdfd028cfd..3fd56053faee 100644
+--- a/drivers/dma/lpc32xx_dma.c
++++ b/drivers/dma/lpc32xx_dma.c
+@@ -10,6 +10,7 @@
+ #include <common.h>
+ #include <errno.h>
+ #include <init.h>
++#include <time.h>
+ #include <asm/arch/dma.h>
+ #include <asm/arch/cpu.h>
+ #include <asm/arch/clk.h>
+diff --git a/drivers/fpga/ACEX1K.c b/drivers/fpga/ACEX1K.c
+index 2e788c7a8ef5..bd31609818f2 100644
+--- a/drivers/fpga/ACEX1K.c
++++ b/drivers/fpga/ACEX1K.c
+@@ -13,6 +13,7 @@
+ #include <console.h>
+ #include <log.h>
+ #include <ACEX1K.h>		/* ACEX device family */
++#include <time.h>
+ #include <linux/delay.h>
+ 
+ /* Note: The assumption is that we cannot possibly run fast enough to
+diff --git a/drivers/fpga/cyclon2.c b/drivers/fpga/cyclon2.c
+index 6e8a313db35b..ca64af67c556 100644
+--- a/drivers/fpga/cyclon2.c
++++ b/drivers/fpga/cyclon2.c
+@@ -11,6 +11,7 @@
+ #include <log.h>
+ #include <altera.h>
+ #include <ACEX1K.h>		/* ACEX device family */
++#include <time.h>
+ #include <linux/delay.h>
+ 
+ /* Note: The assumption is that we cannot possibly run fast enough to
+diff --git a/drivers/fpga/intel_sdm_mb.c b/drivers/fpga/intel_sdm_mb.c
+index 903d143a361c..fbb4ea70914a 100644
+--- a/drivers/fpga/intel_sdm_mb.c
++++ b/drivers/fpga/intel_sdm_mb.c
+@@ -6,6 +6,7 @@
+ #include <common.h>
+ #include <altera.h>
+ #include <log.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <asm/arch/mailbox_s10.h>
+ #include <asm/arch/smc_api.h>
+diff --git a/drivers/fpga/socfpga_arria10.c b/drivers/fpga/socfpga_arria10.c
+index 96b195063e08..33adbd215293 100644
+--- a/drivers/fpga/socfpga_arria10.c
++++ b/drivers/fpga/socfpga_arria10.c
+@@ -4,6 +4,7 @@
+  */
+ #include <image.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm/arch/fpga_manager.h>
+diff --git a/drivers/fpga/spartan2.c b/drivers/fpga/spartan2.c
+index dd84e2e8cbb9..e9be356458bd 100644
+--- a/drivers/fpga/spartan2.c
++++ b/drivers/fpga/spartan2.c
+@@ -9,6 +9,7 @@
+ #include <common.h>		/* core U-Boot definitions */
+ #include <log.h>
+ #include <spartan2.h>		/* Spartan-II device family */
++#include <time.h>
+ 
+ /* Note: The assumption is that we cannot possibly run fast enough to
+  * overrun the device (the Slave Parallel mode can free run at 50MHz).
+diff --git a/drivers/fpga/spartan3.c b/drivers/fpga/spartan3.c
+index 95d4dd7d78b5..401f12f6d4c3 100644
+--- a/drivers/fpga/spartan3.c
++++ b/drivers/fpga/spartan3.c
+@@ -14,6 +14,7 @@
+ #include <common.h>		/* core U-Boot definitions */
+ #include <log.h>
+ #include <spartan3.h>		/* Spartan-II device family */
++#include <time.h>
+ 
+ /* Note: The assumption is that we cannot possibly run fast enough to
+  * overrun the device (the Slave Parallel mode can free run at 50MHz).
+diff --git a/drivers/fpga/virtex2.c b/drivers/fpga/virtex2.c
+index 3ded27f9b3ff..ca2026ad03e1 100644
+--- a/drivers/fpga/virtex2.c
++++ b/drivers/fpga/virtex2.c
+@@ -17,6 +17,7 @@
+ #include <common.h>
+ #include <console.h>
+ #include <log.h>
++#include <time.h>
+ #include <virtex2.h>
+ #include <linux/delay.h>
+ 
+diff --git a/drivers/fpga/zynqpl.c b/drivers/fpga/zynqpl.c
+index a2e3b305fa41..a6b3d413d703 100644
+--- a/drivers/fpga/zynqpl.c
++++ b/drivers/fpga/zynqpl.c
+@@ -10,6 +10,7 @@
+ #include <console.h>
+ #include <cpu_func.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/io.h>
+ #include <fs.h>
+diff --git a/drivers/hwspinlock/hwspinlock-uclass.c b/drivers/hwspinlock/hwspinlock-uclass.c
+index e9a4d7f9fbbd..116bd6a00072 100644
+--- a/drivers/hwspinlock/hwspinlock-uclass.c
++++ b/drivers/hwspinlock/hwspinlock-uclass.c
+@@ -10,6 +10,7 @@
+ #include <errno.h>
+ #include <hwspinlock.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/device-internal.h>
+ #include <dm/device_compat.h>
+ #include <linux/compat.h>
+diff --git a/drivers/i2c/at91_i2c.c b/drivers/i2c/at91_i2c.c
+index e743d2a849a3..ab6878031271 100644
+--- a/drivers/i2c/at91_i2c.c
++++ b/drivers/i2c/at91_i2c.c
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include <malloc.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <common.h>
+diff --git a/drivers/i2c/designware_i2c.c b/drivers/i2c/designware_i2c.c
+index e54de42abc39..594d5b298c86 100644
+--- a/drivers/i2c/designware_i2c.c
++++ b/drivers/i2c/designware_i2c.c
+@@ -12,6 +12,7 @@
+ #include <malloc.h>
+ #include <pci.h>
+ #include <reset.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <linux/delay.h>
+ #include "designware_i2c.h"
+diff --git a/drivers/i2c/i2c-cortina.c b/drivers/i2c/i2c-cortina.c
+index 960ae8c700f9..bda600fb8414 100644
+--- a/drivers/i2c/i2c-cortina.c
++++ b/drivers/i2c/i2c-cortina.c
+@@ -7,6 +7,7 @@
+ #include <common.h>
+ #include <i2c.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <dm.h>
+ #include <mapmem.h>
+diff --git a/drivers/i2c/imx_lpi2c.c b/drivers/i2c/imx_lpi2c.c
+index ad9293c92e1a..5746b93ed65d 100644
+--- a/drivers/i2c/imx_lpi2c.c
++++ b/drivers/i2c/imx_lpi2c.c
+@@ -6,6 +6,7 @@
+ #include <common.h>
+ #include <errno.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/imx-regs.h>
+diff --git a/drivers/i2c/intel_i2c.c b/drivers/i2c/intel_i2c.c
+index 4fc6f1a11a75..bbc527ffddc8 100644
+--- a/drivers/i2c/intel_i2c.c
++++ b/drivers/i2c/intel_i2c.c
+@@ -12,6 +12,7 @@
+ #include <i2c.h>
+ #include <log.h>
+ #include <pci.h>
++#include <time.h>
+ #include <asm/io.h>
+ 
+ /* PCI Configuration Space (D31:F3): SMBus */
+diff --git a/drivers/i2c/meson_i2c.c b/drivers/i2c/meson_i2c.c
+index 434e3461b1dd..34e6fefee3cd 100644
+--- a/drivers/i2c/meson_i2c.c
++++ b/drivers/i2c/meson_i2c.c
+@@ -4,6 +4,7 @@
+  */
+ #include <common.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <clk.h>
+ #include <dm.h>
+diff --git a/drivers/i2c/muxes/i2c-arb-gpio-challenge.c b/drivers/i2c/muxes/i2c-arb-gpio-challenge.c
+index ad730e0e79ff..9ad70f19bd2d 100644
+--- a/drivers/i2c/muxes/i2c-arb-gpio-challenge.c
++++ b/drivers/i2c/muxes/i2c-arb-gpio-challenge.c
+@@ -10,6 +10,7 @@
+ #include <i2c.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/gpio.h>
+ #include <linux/delay.h>
+diff --git a/drivers/i2c/mxc_i2c.c b/drivers/i2c/mxc_i2c.c
+index d501133a0c8f..52110ad8d295 100644
+--- a/drivers/i2c/mxc_i2c.c
++++ b/drivers/i2c/mxc_i2c.c
+@@ -16,6 +16,7 @@
+ 
+ #include <common.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/imx-regs.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/i2c/npcm_i2c.c b/drivers/i2c/npcm_i2c.c
+index ea4ef532565a..4f97263ca81c 100644
+--- a/drivers/i2c/npcm_i2c.c
++++ b/drivers/i2c/npcm_i2c.c
+@@ -6,6 +6,7 @@
+ #include <clk.h>
+ #include <dm.h>
+ #include <i2c.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <linux/iopoll.h>
+ #include <asm/arch/gcr.h>
+diff --git a/drivers/i2c/nx_i2c.c b/drivers/i2c/nx_i2c.c
+index 07cda0fa6793..adaa7988132c 100644
+--- a/drivers/i2c/nx_i2c.c
++++ b/drivers/i2c/nx_i2c.c
+@@ -3,6 +3,7 @@
+ #include <dm.h>
+ #include <i2c.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/arch/nexell.h>
+ #include <asm/arch/reset.h>
+ #include <asm/arch/clk.h>
+diff --git a/drivers/i2c/rk_i2c.c b/drivers/i2c/rk_i2c.c
+index 9927af94a80b..e55b08cc04b1 100644
+--- a/drivers/i2c/rk_i2c.c
++++ b/drivers/i2c/rk_i2c.c
+@@ -12,6 +12,7 @@
+ #include <errno.h>
+ #include <i2c.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/arch-rockchip/clock.h>
+ #include <asm/arch-rockchip/i2c.h>
+diff --git a/drivers/i2c/s3c24x0_i2c.c b/drivers/i2c/s3c24x0_i2c.c
+index 505e20bc61c8..746ee86f65ce 100644
+--- a/drivers/i2c/s3c24x0_i2c.c
++++ b/drivers/i2c/s3c24x0_i2c.c
+@@ -16,6 +16,7 @@
+ #else
+ #include <asm/arch/s3c24x0_cpu.h>
+ #endif
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <i2c.h>
+diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
+index b6c71789eec0..914ea2c06487 100644
+--- a/drivers/i2c/stm32f7_i2c.c
++++ b/drivers/i2c/stm32f7_i2c.c
+@@ -13,6 +13,7 @@
+ #include <regmap.h>
+ #include <reset.h>
+ #include <syscon.h>
++#include <time.h>
+ #include <dm/device.h>
+ #include <dm/device_compat.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/input/input.c b/drivers/input/input.c
+index a4341e8c7ce9..d5ed5ac65019 100644
+--- a/drivers/input/input.c
++++ b/drivers/input/input.c
+@@ -17,6 +17,7 @@
+ #ifdef CONFIG_DM_KEYBOARD
+ #include <keyboard.h>
+ #endif
++#include <time.h>
+ #include <linux/input.h>
+ 
+ enum {
+diff --git a/drivers/input/tegra-kbc.c b/drivers/input/tegra-kbc.c
+index d4741a76663e..cf11d57fdeff 100644
+--- a/drivers/input/tegra-kbc.c
++++ b/drivers/input/tegra-kbc.c
+@@ -13,6 +13,7 @@
+ #include <log.h>
+ #include <stdio_dev.h>
+ #include <tegra-kbc.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/funcmux.h>
+diff --git a/drivers/misc/cros_ec.c b/drivers/misc/cros_ec.c
+index 9c1e6a5e3e70..060cb5124da9 100644
+--- a/drivers/misc/cros_ec.c
++++ b/drivers/misc/cros_ec.c
+@@ -24,6 +24,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <spi.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+ #include <asm/io.h>
+diff --git a/drivers/misc/cros_ec_lpc.c b/drivers/misc/cros_ec_lpc.c
+index 1a8a81349c3a..21cd24de901d 100644
+--- a/drivers/misc/cros_ec_lpc.c
++++ b/drivers/misc/cros_ec_lpc.c
+@@ -17,6 +17,7 @@
+ #include <command.h>
+ #include <cros_ec.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ 
+ #ifdef DEBUG_TRACE
+diff --git a/drivers/misc/cros_ec_sandbox.c b/drivers/misc/cros_ec_sandbox.c
+index 8dbe0b188a48..0a9ede73c855 100644
+--- a/drivers/misc/cros_ec_sandbox.c
++++ b/drivers/misc/cros_ec_sandbox.c
+@@ -15,6 +15,7 @@
+ #include <hash.h>
+ #include <log.h>
+ #include <os.h>
++#include <time.h>
+ #include <u-boot/sha256.h>
+ #include <spi.h>
+ #include <asm/malloc.h>
+diff --git a/drivers/misc/cros_ec_spi.c b/drivers/misc/cros_ec_spi.c
+index 001f0a85ca98..d78890162571 100644
+--- a/drivers/misc/cros_ec_spi.c
++++ b/drivers/misc/cros_ec_spi.c
+@@ -18,6 +18,7 @@
+ #include <errno.h>
+ #include <log.h>
+ #include <spi.h>
++#include <time.h>
+ 
+ int cros_ec_spi_packet(struct udevice *udev, int out_bytes, int in_bytes)
+ {
+diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
+index fd667aeafdaa..71f6811e583f 100644
+--- a/drivers/mmc/am654_sdhci.c
++++ b/drivers/mmc/am654_sdhci.c
+@@ -14,6 +14,7 @@
+ #include <regmap.h>
+ #include <sdhci.h>
+ #include <soc.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <linux/bitops.h>
+ #include <linux/err.h>
+diff --git a/drivers/mmc/bcm2835_sdhost.c b/drivers/mmc/bcm2835_sdhost.c
+index 5c23c03d10d7..1bb445fcd6ee 100644
+--- a/drivers/mmc/bcm2835_sdhost.c
++++ b/drivers/mmc/bcm2835_sdhost.c
+@@ -33,6 +33,7 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <mmc.h>
++#include <time.h>
+ #include <asm/arch/msg.h>
+ #include <asm/arch/mbox.h>
+ #include <asm/unaligned.h>
+diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+index 400066fa99a2..c8180761854d 100644
+--- a/drivers/mmc/dw_mmc.c
++++ b/drivers/mmc/dw_mmc.c
+@@ -14,6 +14,7 @@
+ #include <memalign.h>
+ #include <mmc.h>
+ #include <dwmmc.h>
++#include <time.h>
+ #include <wait_bit.h>
+ #include <asm/cache.h>
+ #include <linux/delay.h>
+diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
+index d5066666698c..e087ba9795eb 100644
+--- a/drivers/mmc/fsl_esdhc.c
++++ b/drivers/mmc/fsl_esdhc.c
+@@ -20,6 +20,7 @@
+ #include <malloc.h>
+ #include <fsl_esdhc.h>
+ #include <fdt_support.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+diff --git a/drivers/mmc/fsl_esdhc_imx.c b/drivers/mmc/fsl_esdhc_imx.c
+index 7c39c86c5e9c..57cfa2b31a99 100644
+--- a/drivers/mmc/fsl_esdhc_imx.c
++++ b/drivers/mmc/fsl_esdhc_imx.c
+@@ -20,6 +20,7 @@
+ #include <log.h>
+ #include <mmc.h>
+ #include <part.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+ #include <dm/device_compat.h>
+diff --git a/drivers/mmc/ftsdc010_mci.c b/drivers/mmc/ftsdc010_mci.c
+index cabb747fbbdb..8d60687dbd34 100644
+--- a/drivers/mmc/ftsdc010_mci.c
++++ b/drivers/mmc/ftsdc010_mci.c
+@@ -15,6 +15,7 @@
+ #include <malloc.h>
+ #include <part.h>
+ #include <mmc.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <linux/bitops.h>
+ #include <linux/io.h>
+diff --git a/drivers/mmc/meson_gx_mmc.c b/drivers/mmc/meson_gx_mmc.c
+index fcf4f03d1e24..ca6e2bd01b29 100644
+--- a/drivers/mmc/meson_gx_mmc.c
++++ b/drivers/mmc/meson_gx_mmc.c
+@@ -11,6 +11,7 @@
+ #include <malloc.h>
+ #include <pwrseq.h>
+ #include <mmc.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/gpio.h>
+ #include <linux/delay.h>
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index d96db7a0f836..ee9339152c10 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -13,6 +13,7 @@
+ #include <command.h>
+ #include <dm.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/device-internal.h>
+ #include <errno.h>
+ #include <mmc.h>
+diff --git a/drivers/mmc/mvebu_mmc.c b/drivers/mmc/mvebu_mmc.c
+index fea55c61ed7d..7ac11ec34c2a 100644
+--- a/drivers/mmc/mvebu_mmc.c
++++ b/drivers/mmc/mvebu_mmc.c
+@@ -15,6 +15,7 @@
+ #include <fdtdec.h>
+ #include <part.h>
+ #include <mmc.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/arch/cpu.h>
+ #include <asm/arch/soc.h>
+diff --git a/drivers/mmc/omap_hsmmc.c b/drivers/mmc/omap_hsmmc.c
+index a2595d19e7f6..fb7c4ed23b8d 100644
+--- a/drivers/mmc/omap_hsmmc.c
++++ b/drivers/mmc/omap_hsmmc.c
+@@ -34,6 +34,7 @@
+ #if defined(CONFIG_OMAP54XX) || defined(CONFIG_OMAP44XX)
+ #include <palmas.h>
+ #endif
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+index fc9c6c379964..b30ea6149939 100644
+--- a/drivers/mmc/sdhci.c
++++ b/drivers/mmc/sdhci.c
+@@ -15,6 +15,7 @@
+ #include <malloc.h>
+ #include <mmc.h>
+ #include <sdhci.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+diff --git a/drivers/mmc/sunxi_mmc.c b/drivers/mmc/sunxi_mmc.c
+index 23bc7da917a9..628727aa7087 100644
+--- a/drivers/mmc/sunxi_mmc.c
++++ b/drivers/mmc/sunxi_mmc.c
+@@ -21,6 +21,7 @@
+ #include <mmc.h>
+ #include <clk.h>
+ #include <reset.h>
++#include <time.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+diff --git a/drivers/mmc/tegra_mmc.c b/drivers/mmc/tegra_mmc.c
+index f76fee3ea0f5..bdb8f2063fec 100644
+--- a/drivers/mmc/tegra_mmc.c
++++ b/drivers/mmc/tegra_mmc.c
+@@ -12,6 +12,7 @@
+ #include <errno.h>
+ #include <log.h>
+ #include <mmc.h>
++#include <time.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <asm/arch-tegra/tegra_mmc.h>
+diff --git a/drivers/mtd/cfi_flash.c b/drivers/mtd/cfi_flash.c
+index 8ade7949a68e..c14d8cd98c62 100644
+--- a/drivers/mtd/cfi_flash.c
++++ b/drivers/mtd/cfi_flash.c
+@@ -26,6 +26,7 @@
+ #include <init.h>
+ #include <irq_func.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/processor.h>
+ #include <asm/io.h>
+diff --git a/drivers/mtd/nand/raw/brcmnand/brcmnand.c b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+index efbf9a3120a4..6c4ccc2607b3 100644
+--- a/drivers/mtd/nand/raw/brcmnand/brcmnand.c
++++ b/drivers/mtd/nand/raw/brcmnand/brcmnand.c
+@@ -13,6 +13,7 @@
+  */
+ 
+ #include <common.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <memalign.h>
+ #include <nand.h>
+diff --git a/drivers/mtd/nand/raw/fsl_elbc_nand.c b/drivers/mtd/nand/raw/fsl_elbc_nand.c
+index 7853c3f74e2a..6d131dafaa18 100644
+--- a/drivers/mtd/nand/raw/fsl_elbc_nand.c
++++ b/drivers/mtd/nand/raw/fsl_elbc_nand.c
+@@ -11,6 +11,7 @@
+ #include <command.h>
+ #include <malloc.h>
+ #include <nand.h>
++#include <time.h>
+ #include <dm/devres.h>
+ 
+ #include <linux/mtd/mtd.h>
+diff --git a/drivers/mtd/nand/raw/fsl_ifc_nand.c b/drivers/mtd/nand/raw/fsl_ifc_nand.c
+index 1d7c1fddd3f6..0524f29754e6 100644
+--- a/drivers/mtd/nand/raw/fsl_ifc_nand.c
++++ b/drivers/mtd/nand/raw/fsl_ifc_nand.c
+@@ -10,6 +10,7 @@
+ #include <command.h>
+ #include <malloc.h>
+ #include <nand.h>
++#include <time.h>
+ #include <dm/devres.h>
+ 
+ #include <linux/mtd/mtd.h>
+diff --git a/drivers/mtd/nand/raw/mxs_nand_spl.c b/drivers/mtd/nand/raw/mxs_nand_spl.c
+index 300662994cf2..65680f740169 100644
+--- a/drivers/mtd/nand/raw/mxs_nand_spl.c
++++ b/drivers/mtd/nand/raw/mxs_nand_spl.c
+@@ -9,6 +9,7 @@
+ #include <nand.h>
+ #include <malloc.h>
+ #include <mxs_nand.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
+index 6b4adcf6bdc9..2dbbb40b49c0 100644
+--- a/drivers/mtd/nand/raw/nand_base.c
++++ b/drivers/mtd/nand/raw/nand_base.c
+@@ -31,6 +31,7 @@
+ #include <common.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <dm/devres.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/mtd/nand/raw/pxa3xx_nand.c b/drivers/mtd/nand/raw/pxa3xx_nand.c
+index 1d9a6d107b17..5f92dd8e7415 100644
+--- a/drivers/mtd/nand/raw/pxa3xx_nand.c
++++ b/drivers/mtd/nand/raw/pxa3xx_nand.c
+@@ -10,6 +10,7 @@
+ #include <malloc.h>
+ #include <fdtdec.h>
+ #include <nand.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <dm/device_compat.h>
+ #include <dm/devres.h>
+diff --git a/drivers/mtd/nand/raw/rockchip_nfc.c b/drivers/mtd/nand/raw/rockchip_nfc.c
+index 274489ecbc65..0c8b0e8c6901 100644
+--- a/drivers/mtd/nand/raw/rockchip_nfc.c
++++ b/drivers/mtd/nand/raw/rockchip_nfc.c
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include <common.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <clk.h>
+ #include <dm.h>
+diff --git a/drivers/mtd/nand/raw/sunxi_nand.c b/drivers/mtd/nand/raw/sunxi_nand.c
+index 0b5b74dc242d..bcd03f0a5473 100644
+--- a/drivers/mtd/nand/raw/sunxi_nand.c
++++ b/drivers/mtd/nand/raw/sunxi_nand.c
+@@ -31,6 +31,7 @@
+ #include <memalign.h>
+ #include <nand.h>
+ #include <reset.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <dm/devres.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/mtd/nand/raw/vf610_nfc.c b/drivers/mtd/nand/raw/vf610_nfc.c
+index d2363a0662e2..8736dd289b48 100644
+--- a/drivers/mtd/nand/raw/vf610_nfc.c
++++ b/drivers/mtd/nand/raw/vf610_nfc.c
+@@ -23,6 +23,7 @@
+ 
+ #include <common.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <linux/printk.h>
+ 
+diff --git a/drivers/mtd/nand/spi/core.c b/drivers/mtd/nand/spi/core.c
+index 4ee11e812d84..b8326df0598d 100644
+--- a/drivers/mtd/nand/spi/core.c
++++ b/drivers/mtd/nand/spi/core.c
+@@ -22,6 +22,7 @@
+ #else
+ #include <common.h>
+ #include <errno.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <spi.h>
+ #include <spi-mem.h>
+diff --git a/drivers/mtd/onenand/onenand_base.c b/drivers/mtd/onenand/onenand_base.c
+index 762b01c1b0f0..8f11472ee23d 100644
+--- a/drivers/mtd/onenand/onenand_base.c
++++ b/drivers/mtd/onenand/onenand_base.c
+@@ -21,6 +21,7 @@
+ 
+ #include <common.h>
+ #include <log.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <dm/devres.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/mtd/spi/sf_dataflash.c b/drivers/mtd/spi/sf_dataflash.c
+index 6a0d953a7290..7960e4247711 100644
+--- a/drivers/mtd/spi/sf_dataflash.c
++++ b/drivers/mtd/spi/sf_dataflash.c
+@@ -15,6 +15,7 @@
+ #include <spi.h>
+ #include <spi_flash.h>
+ #include <div64.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+ #include <linux/math64.h>
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index db20feb4daed..a8d7cc9c7beb 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -12,6 +12,7 @@
+ #include <common.h>
+ #include <display_options.h>
+ #include <log.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
+diff --git a/drivers/mtd/spi/spi-nor-tiny.c b/drivers/mtd/spi/spi-nor-tiny.c
+index 0719fe845ca9..ffc0074d50cb 100644
+--- a/drivers/mtd/spi/spi-nor-tiny.c
++++ b/drivers/mtd/spi/spi-nor-tiny.c
+@@ -11,6 +11,7 @@
+ 
+ #include <common.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <linux/err.h>
+ #include <linux/errno.h>
+diff --git a/drivers/net/ag7xxx.c b/drivers/net/ag7xxx.c
+index da1f3f458080..92d50591fcfb 100644
+--- a/drivers/net/ag7xxx.c
++++ b/drivers/net/ag7xxx.c
+@@ -15,6 +15,7 @@
+ #include <miiphy.h>
+ #include <malloc.h>
+ #include <net.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/net/altera_tse.c b/drivers/net/altera_tse.c
+index e2340936fa62..c46040156ab9 100644
+--- a/drivers/net/altera_tse.c
++++ b/drivers/net/altera_tse.c
+@@ -17,6 +17,7 @@
+ #include <memalign.h>
+ #include <miiphy.h>
+ #include <net.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+ #include <linux/dma-mapping.h>
+diff --git a/drivers/net/cortina_ni.c b/drivers/net/cortina_ni.c
+index ef6ecd88b0ce..8d1a7bf44306 100644
+--- a/drivers/net/cortina_ni.c
++++ b/drivers/net/cortina_ni.c
+@@ -13,6 +13,7 @@
+ #include <net.h>
+ #include <miiphy.h>
+ #include <env.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include <linux/bitops.h>
+ #include <u-boot/crc.h>
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index 20b86e74cecf..90ddda5edc6d 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -19,6 +19,7 @@
+ #include <net.h>
+ #include <pci.h>
+ #include <reset.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <dm/device_compat.h>
+ #include <dm/device-internal.h>
+diff --git a/drivers/net/dm9000x.c b/drivers/net/dm9000x.c
+index bec8d67dad0f..2add9a29770b 100644
+--- a/drivers/net/dm9000x.c
++++ b/drivers/net/dm9000x.c
+@@ -54,6 +54,7 @@
+ #include <dm.h>
+ #include <malloc.h>
+ #include <net.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <linux/delay.h>
+ 
+diff --git a/drivers/net/ethoc.c b/drivers/net/ethoc.c
+index 13fad8119bb5..15b9d38a6d1d 100644
+--- a/drivers/net/ethoc.c
++++ b/drivers/net/ethoc.c
+@@ -13,6 +13,7 @@
+ #include <cpu_func.h>
+ #include <dm.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/platform_data/net_ethoc.h>
+ #include <linux/io.h>
+ #include <malloc.h>
+diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
+index ac937676f9c1..471eb2ef4fdf 100644
+--- a/drivers/net/fec_mxc.c
++++ b/drivers/net/fec_mxc.c
+@@ -17,6 +17,7 @@
+ #include <miiphy.h>
+ #include <net.h>
+ #include <netdev.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/global_data.h>
+ #include <linux/delay.h>
+diff --git a/drivers/net/ftmac100.c b/drivers/net/ftmac100.c
+index fae3adc3de34..a66d8041f9c6 100644
+--- a/drivers/net/ftmac100.c
++++ b/drivers/net/ftmac100.c
+@@ -14,6 +14,7 @@
+ #include <net.h>
+ #include <phy.h>
+ #include <miiphy.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <asm/global_data.h>
+ #include <linux/delay.h>
+diff --git a/drivers/net/ldpaa_eth/ldpaa_eth.c b/drivers/net/ldpaa_eth/ldpaa_eth.c
+index 87fbada06ba2..1f60a70aac70 100644
+--- a/drivers/net/ldpaa_eth/ldpaa_eth.c
++++ b/drivers/net/ldpaa_eth/ldpaa_eth.c
+@@ -6,6 +6,7 @@
+ 
+ #include <common.h>
+ #include <cpu_func.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <fsl-mc/fsl_dpmac.h>
+ #include <fsl-mc/ldpaa_wriop.h>
+diff --git a/drivers/net/mtk_eth.c b/drivers/net/mtk_eth.c
+index 3cfce058451d..52a8fb9c9391 100644
+--- a/drivers/net/mtk_eth.c
++++ b/drivers/net/mtk_eth.c
+@@ -16,6 +16,7 @@
+ #include <regmap.h>
+ #include <reset.h>
+ #include <syscon.h>
++#include <time.h>
+ #include <wait_bit.h>
+ #include <asm/cache.h>
+ #include <asm/gpio.h>
+diff --git a/drivers/net/npcm750_eth.c b/drivers/net/npcm750_eth.c
+index 2028f4ae286e..8354626efae9 100644
+--- a/drivers/net/npcm750_eth.c
++++ b/drivers/net/npcm750_eth.c
+@@ -13,6 +13,7 @@
+ #include <regmap.h>
+ #include <serial.h>
+ #include <syscon.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <linux/err.h>
+ #include <linux/iopoll.h>
+diff --git a/drivers/net/octeontx/smi.c b/drivers/net/octeontx/smi.c
+index 233c26f7319a..7e247c96f43b 100644
+--- a/drivers/net/octeontx/smi.c
++++ b/drivers/net/octeontx/smi.c
+@@ -10,6 +10,7 @@
+ #include <pci.h>
+ #include <pci_ids.h>
+ #include <phy.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <linux/ctype.h>
+diff --git a/drivers/net/octeontx2/nix_af.c b/drivers/net/octeontx2/nix_af.c
+index c945ea0f5f22..c755dad55b7b 100644
+--- a/drivers/net/octeontx2/nix_af.c
++++ b/drivers/net/octeontx2/nix_af.c
+@@ -10,6 +10,7 @@
+ #include <misc.h>
+ #include <net.h>
+ #include <pci.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <linux/types.h>
+ #include <linux/list.h>
+diff --git a/drivers/net/pch_gbe.c b/drivers/net/pch_gbe.c
+index ecf8c28fe41b..1efc40911487 100644
+--- a/drivers/net/pch_gbe.c
++++ b/drivers/net/pch_gbe.c
+@@ -11,6 +11,7 @@
+ #include <errno.h>
+ #include <log.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <pci.h>
+ #include <miiphy.h>
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 0bcd6cfd3f35..ca66c7ba699b 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -16,6 +16,7 @@
+ #include <log.h>
+ #include <miiphy.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+diff --git a/drivers/net/rswitch.c b/drivers/net/rswitch.c
+index 5a69ca1a0f9e..fd9f9797658b 100644
+--- a/drivers/net/rswitch.c
++++ b/drivers/net/rswitch.c
+@@ -7,6 +7,7 @@
+  * Based on the Renesas Ethernet AVB driver.
+  */
+ 
++#include <time.h>
+ #include <asm/io.h>
+ #include <clk.h>
+ #include <common.h>
+diff --git a/drivers/net/rtl8169.c b/drivers/net/rtl8169.c
+index 93e83661cec4..270fe08be991 100644
+--- a/drivers/net/rtl8169.c
++++ b/drivers/net/rtl8169.c
+@@ -47,6 +47,7 @@
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <net.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <asm/io.h>
+ #include <pci.h>
+diff --git a/drivers/net/sandbox.c b/drivers/net/sandbox.c
+index 13022addb6a3..bf2ee3cc869c 100644
+--- a/drivers/net/sandbox.c
++++ b/drivers/net/sandbox.c
+@@ -11,6 +11,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <net.h>
++#include <time.h>
+ #include <asm/eth.h>
+ #include <asm/global_data.h>
+ #include <asm/test.h>
+diff --git a/drivers/net/xilinx_emaclite.c b/drivers/net/xilinx_emaclite.c
+index 16ba915fbaaf..2bb6fa8a45dd 100644
+--- a/drivers/net/xilinx_emaclite.c
++++ b/drivers/net/xilinx_emaclite.c
+@@ -13,6 +13,7 @@
+ #include <dm.h>
+ #include <console.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <phy.h>
+ #include <miiphy.h>
+diff --git a/drivers/pci/pci_rom.c b/drivers/pci/pci_rom.c
+index 438583aa0179..15302164aa63 100644
+--- a/drivers/pci/pci_rom.c
++++ b/drivers/pci/pci_rom.c
+@@ -36,6 +36,7 @@
+ #include <pci.h>
+ #include <pci_rom.h>
+ #include <spl.h>
++#include <time.h>
+ #include <vesa.h>
+ #include <video.h>
+ #include <acpi/acpi_s3.h>
+diff --git a/drivers/pci/pci_tegra.c b/drivers/pci/pci_tegra.c
+index 131c21b7684e..2fb1fe8dea4d 100644
+--- a/drivers/pci/pci_tegra.c
++++ b/drivers/pci/pci_tegra.c
+@@ -21,6 +21,7 @@
+ #include <pci_tegra.h>
+ #include <power-domain.h>
+ #include <reset.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include <linux/printk.h>
+ 
+diff --git a/drivers/pci/pcie_dw_mvebu.c b/drivers/pci/pcie_dw_mvebu.c
+index c41f3f153044..9451f5a58ef4 100644
+--- a/drivers/pci/pcie_dw_mvebu.c
++++ b/drivers/pci/pcie_dw_mvebu.c
+@@ -14,6 +14,7 @@
+ #include <dm.h>
+ #include <log.h>
+ #include <pci.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm-generic/gpio.h>
+diff --git a/drivers/pci/pcie_dw_ti.c b/drivers/pci/pcie_dw_ti.c
+index 4195a02de390..2166af1fa071 100644
+--- a/drivers/pci/pcie_dw_ti.c
++++ b/drivers/pci/pcie_dw_ti.c
+@@ -11,6 +11,7 @@
+ #include <power-domain.h>
+ #include <regmap.h>
+ #include <syscon.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm-generic/gpio.h>
+diff --git a/drivers/pci/pcie_uniphier.c b/drivers/pci/pcie_uniphier.c
+index f2edea9899a4..e73c573404c3 100644
+--- a/drivers/pci/pcie_uniphier.c
++++ b/drivers/pci/pcie_uniphier.c
+@@ -7,6 +7,7 @@
+ #include <clk.h>
+ #include <common.h>
+ #include <dm.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <generic-phy.h>
+ #include <linux/bitfield.h>
+diff --git a/drivers/phy/phy-da8xx-usb.c b/drivers/phy/phy-da8xx-usb.c
+index d025188eae98..ec87d3fea2d0 100644
+--- a/drivers/phy/phy-da8xx-usb.c
++++ b/drivers/phy/phy-da8xx-usb.c
+@@ -9,6 +9,7 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <asm/arch/hardware.h>
+diff --git a/drivers/power/exynos-tmu.c b/drivers/power/exynos-tmu.c
+index 6d62f6cae40d..4f1f1f112429 100644
+--- a/drivers/power/exynos-tmu.c
++++ b/drivers/power/exynos-tmu.c
+@@ -21,6 +21,7 @@
+ #include <errno.h>
+ #include <fdtdec.h>
+ #include <log.h>
++#include <time.h>
+ #include <tmu.h>
+ #include <asm/arch/tmu.h>
+ #include <asm/arch/power.h>
+diff --git a/drivers/power/regulator/tps65090_regulator.c b/drivers/power/regulator/tps65090_regulator.c
+index fa15e61a10e0..c253811e9d64 100644
+--- a/drivers/power/regulator/tps65090_regulator.c
++++ b/drivers/power/regulator/tps65090_regulator.c
+@@ -7,6 +7,7 @@
+ #include <dm.h>
+ #include <errno.h>
+ #include <log.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include <power/pmic.h>
+ #include <power/regulator.h>
+diff --git a/drivers/ram/rockchip/dmc-rk3368.c b/drivers/ram/rockchip/dmc-rk3368.c
+index f36be941a38c..e8fb668ce2b0 100644
+--- a/drivers/ram/rockchip/dmc-rk3368.c
++++ b/drivers/ram/rockchip/dmc-rk3368.c
+@@ -8,6 +8,7 @@
+ #include <dm.h>
+ #include <hang.h>
+ #include <log.h>
++#include <time.h>
+ #include <dt-bindings/memory/rk3368-dmc.h>
+ #include <dt-structs.h>
+ #include <ram.h>
+diff --git a/drivers/ram/stm32mp1/stm32mp1_interactive.c b/drivers/ram/stm32mp1/stm32mp1_interactive.c
+index 2c19847c6633..a64867178df6 100644
+--- a/drivers/ram/stm32mp1/stm32mp1_interactive.c
++++ b/drivers/ram/stm32mp1/stm32mp1_interactive.c
+@@ -14,6 +14,7 @@
+ #include <malloc.h>
+ #include <ram.h>
+ #include <reset.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include "stm32mp1_ddr.h"
+ #include "stm32mp1_tests.h"
+diff --git a/drivers/rng/sandbox_rng.c b/drivers/rng/sandbox_rng.c
+index cc5e1f6e25b6..a55e552177a6 100644
+--- a/drivers/rng/sandbox_rng.c
++++ b/drivers/rng/sandbox_rng.c
+@@ -7,6 +7,7 @@
+ #include <dm.h>
+ #include <rand.h>
+ #include <rng.h>
++#include <time.h>
+ 
+ #include <linux/string.h>
+ 
+diff --git a/drivers/rtc/emul_rtc.c b/drivers/rtc/emul_rtc.c
+index 6f47d82522ba..2ac067f2ffcd 100644
+--- a/drivers/rtc/emul_rtc.c
++++ b/drivers/rtc/emul_rtc.c
+@@ -10,6 +10,7 @@
+ #include <dm.h>
+ #include <env.h>
+ #include <rtc.h>
++#include <time.h>
+ #include <timestamp.h>
+ 
+ /**
+diff --git a/drivers/rtc/rv3029.c b/drivers/rtc/rv3029.c
+index 3afe5b2fdd67..188560d3d459 100644
+--- a/drivers/rtc/rv3029.c
++++ b/drivers/rtc/rv3029.c
+@@ -14,6 +14,7 @@
+ #include <i2c.h>
+ #include <log.h>
+ #include <rtc.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+diff --git a/drivers/sound/samsung-i2s.c b/drivers/sound/samsung-i2s.c
+index dc5a2789aeed..001afc4ed738 100644
+--- a/drivers/sound/samsung-i2s.c
++++ b/drivers/sound/samsung-i2s.c
+@@ -9,6 +9,7 @@
+ #include <i2s.h>
+ #include <log.h>
+ #include <sound.h>
++#include <time.h>
+ #include <asm/arch/clk.h>
+ #include <asm/arch/pinmux.h>
+ #include <asm/arch/i2s-regs.h>
+diff --git a/drivers/sound/tegra_ahub.c b/drivers/sound/tegra_ahub.c
+index 495a29c5137c..99d2dcded0b3 100644
+--- a/drivers/sound/tegra_ahub.c
++++ b/drivers/sound/tegra_ahub.c
+@@ -12,6 +12,7 @@
+ #include <i2s.h>
+ #include <log.h>
+ #include <misc.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/arch-tegra/tegra_ahub.h>
+ #include <asm/arch-tegra/tegra_i2s.h>
+diff --git a/drivers/spi/altera_spi.c b/drivers/spi/altera_spi.c
+index 989679e881b5..115efea9c2ef 100644
+--- a/drivers/spi/altera_spi.c
++++ b/drivers/spi/altera_spi.c
+@@ -13,6 +13,7 @@
+ #include <malloc.h>
+ #include <fdtdec.h>
+ #include <spi.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+ 
+diff --git a/drivers/spi/apple_spi.c b/drivers/spi/apple_spi.c
+index f35f5af1f6f8..032aeec714cc 100644
+--- a/drivers/spi/apple_spi.c
++++ b/drivers/spi/apple_spi.c
+@@ -8,6 +8,7 @@
+ #include <dm.h>
+ #include <clk.h>
+ #include <spi.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <linux/bitfield.h>
+ #include <linux/delay.h>
+diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
+index 9ce2c0f254f3..895f57981b4d 100644
+--- a/drivers/spi/cadence_qspi_apb.c
++++ b/drivers/spi/cadence_qspi_apb.c
+@@ -27,6 +27,7 @@
+ 
+ #include <common.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <dma.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/spi/ich.c b/drivers/spi/ich.c
+index 9142ffd23870..705abc9cd9b3 100644
+--- a/drivers/spi/ich.c
++++ b/drivers/spi/ich.c
+@@ -22,6 +22,7 @@
+ #include <spi_flash.h>
+ #include <spi-mem.h>
+ #include <spl.h>
++#include <time.h>
+ #include <asm/fast_spi.h>
+ #include <asm/io.h>
+ #include <dm/uclass-internal.h>
+diff --git a/drivers/spi/mpc8xxx_spi.c b/drivers/spi/mpc8xxx_spi.c
+index 7d15390c56b3..aeb2d1080cb8 100644
+--- a/drivers/spi/mpc8xxx_spi.c
++++ b/drivers/spi/mpc8xxx_spi.c
+@@ -11,6 +11,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <spi.h>
++#include <time.h>
+ #include <asm/mpc8xxx_spi.h>
+ #include <asm-generic/gpio.h>
+ #include <dm/device_compat.h>
+diff --git a/drivers/spi/mxc_spi.c b/drivers/spi/mxc_spi.c
+index 33360a183294..9125acafe836 100644
+--- a/drivers/spi/mxc_spi.c
++++ b/drivers/spi/mxc_spi.c
+@@ -9,6 +9,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <spi.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <dm/device_compat.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/spi/omap3_spi.c b/drivers/spi/omap3_spi.c
+index ff7b55f8707e..e9a597d4e128 100644
+--- a/drivers/spi/omap3_spi.c
++++ b/drivers/spi/omap3_spi.c
+@@ -20,6 +20,7 @@
+ #include <dm.h>
+ #include <spi.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/spi/pic32_spi.c b/drivers/spi/pic32_spi.c
+index 45f07f083da8..4fe40dd39ea2 100644
+--- a/drivers/spi/pic32_spi.c
++++ b/drivers/spi/pic32_spi.c
+@@ -10,6 +10,7 @@
+ #include <clk.h>
+ #include <dm.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <linux/bitops.h>
+ #include <linux/compat.h>
+diff --git a/drivers/spi/rockchip_sfc.c b/drivers/spi/rockchip_sfc.c
+index 596c22aa0108..914eadad9273 100644
+--- a/drivers/spi/rockchip_sfc.c
++++ b/drivers/spi/rockchip_sfc.c
+@@ -8,6 +8,7 @@
+  *	   Jon Lin <Jon.lin@rock-chips.com>
+  */
+ 
++#include <time.h>
+ #include <asm/io.h>
+ #include <bouncebuf.h>
+ #include <clk.h>
+diff --git a/drivers/spi/zynq_qspi.c b/drivers/spi/zynq_qspi.c
+index cb52c0f30721..a987a4f79560 100644
+--- a/drivers/spi/zynq_qspi.c
++++ b/drivers/spi/zynq_qspi.c
+@@ -9,6 +9,7 @@
+ #include <clk.h>
+ #include <common.h>
+ #include <dm.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <log.h>
+ #include <malloc.h>
+diff --git a/drivers/timer/sandbox_timer.c b/drivers/timer/sandbox_timer.c
+index 1da7e0c3a768..113d58b4cb14 100644
+--- a/drivers/timer/sandbox_timer.c
++++ b/drivers/timer/sandbox_timer.c
+@@ -6,6 +6,7 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <errno.h>
++#include <time.h>
+ #include <timer.h>
+ #include <os.h>
+ 
+diff --git a/drivers/tpm/cr50_i2c.c b/drivers/tpm/cr50_i2c.c
+index acf4c7859a9f..35d8067c384c 100644
+--- a/drivers/tpm/cr50_i2c.c
++++ b/drivers/tpm/cr50_i2c.c
+@@ -13,6 +13,7 @@
+ #include <irq.h>
+ #include <log.h>
+ #include <spl.h>
++#include <time.h>
+ #include <tpm-common.h>
+ #include <tpm-v2.h>
+ #include <acpi/acpigen.h>
+diff --git a/drivers/tpm/tpm-uclass.c b/drivers/tpm/tpm-uclass.c
+index b2286f7e7edc..fcd5c3668eea 100644
+--- a/drivers/tpm/tpm-uclass.c
++++ b/drivers/tpm/tpm-uclass.c
+@@ -9,6 +9,7 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <log.h>
++#include <time.h>
+ #include <tpm_api.h>
+ #include <tpm-v1.h>
+ #include <tpm-v2.h>
+diff --git a/drivers/tpm/tpm2_tis_core.c b/drivers/tpm/tpm2_tis_core.c
+index 985a81621986..517fbf0f0c09 100644
+--- a/drivers/tpm/tpm2_tis_core.c
++++ b/drivers/tpm/tpm2_tis_core.c
+@@ -7,6 +7,7 @@
+ 
+ #include <common.h>
+ #include <dm.h>
++#include <time.h>
+ #include <tpm-v2.h>
+ #include <linux/delay.h>
+ #include <linux/unaligned/be_byteshift.h>
+diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
+index de9cf8f21e07..06c761d15d40 100644
+--- a/drivers/tpm/tpm2_tis_spi.c
++++ b/drivers/tpm/tpm2_tis_spi.c
+@@ -18,6 +18,7 @@
+ #include <fdtdec.h>
+ #include <log.h>
+ #include <spi.h>
++#include <time.h>
+ #include <tpm-v2.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+diff --git a/drivers/tpm/tpm_atmel_twi.c b/drivers/tpm/tpm_atmel_twi.c
+index fd2a45d34b03..106a48fea1cf 100644
+--- a/drivers/tpm/tpm_atmel_twi.c
++++ b/drivers/tpm/tpm_atmel_twi.c
+@@ -8,6 +8,7 @@
+ #include <common.h>
+ #include <display_options.h>
+ #include <dm.h>
++#include <time.h>
+ #include <tpm-v1.h>
+ #include <i2c.h>
+ #include <asm/unaligned.h>
+diff --git a/drivers/tpm/tpm_tis_infineon.c b/drivers/tpm/tpm_tis_infineon.c
+index 16f4af0e331e..a7d780a8bac5 100644
+--- a/drivers/tpm/tpm_tis_infineon.c
++++ b/drivers/tpm/tpm_tis_infineon.c
+@@ -24,6 +24,7 @@
+ #include <fdtdec.h>
+ #include <i2c.h>
+ #include <log.h>
++#include <time.h>
+ #include <tpm-v1.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+diff --git a/drivers/tpm/tpm_tis_st33zp24_i2c.c b/drivers/tpm/tpm_tis_st33zp24_i2c.c
+index e0eeabb93371..5deae5f47c4e 100644
+--- a/drivers/tpm/tpm_tis_st33zp24_i2c.c
++++ b/drivers/tpm/tpm_tis_st33zp24_i2c.c
+@@ -17,6 +17,7 @@
+ #include <fdtdec.h>
+ #include <i2c.h>
+ #include <log.h>
++#include <time.h>
+ #include <tpm-v1.h>
+ #include <errno.h>
+ #include <linux/delay.h>
+diff --git a/drivers/tpm/tpm_tis_st33zp24_spi.c b/drivers/tpm/tpm_tis_st33zp24_spi.c
+index f0de8a65b093..4aec9200cb75 100644
+--- a/drivers/tpm/tpm_tis_st33zp24_spi.c
++++ b/drivers/tpm/tpm_tis_st33zp24_spi.c
+@@ -17,6 +17,7 @@
+ #include <fdtdec.h>
+ #include <log.h>
+ #include <spi.h>
++#include <time.h>
+ #include <tpm-v1.h>
+ #include <errno.h>
+ #include <linux/delay.h>
+diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+index 7c48d57f99d6..ad5dc1ac7952 100644
+--- a/drivers/ufs/ufs.c
++++ b/drivers/ufs/ufs.c
+@@ -13,6 +13,7 @@
+ #include <common.h>
+ #include <dm.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <dm/devres.h>
+ #include <dm/lists.h>
+diff --git a/drivers/usb/eth/smsc95xx.c b/drivers/usb/eth/smsc95xx.c
+index de6586e62639..7a686cc3b72f 100644
+--- a/drivers/usb/eth/smsc95xx.c
++++ b/drivers/usb/eth/smsc95xx.c
+@@ -13,6 +13,7 @@
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <net.h>
++#include <time.h>
+ #include <usb.h>
+ #include <asm/unaligned.h>
+ #include <linux/delay.h>
+diff --git a/drivers/usb/gadget/ether.c b/drivers/usb/gadget/ether.c
+index 36618f0bdf36..6616aef9b7bf 100644
+--- a/drivers/usb/gadget/ether.c
++++ b/drivers/usb/gadget/ether.c
+@@ -12,6 +12,7 @@
+ #include <env.h>
+ #include <log.h>
+ #include <part.h>
++#include <time.h>
+ #include <linux/errno.h>
+ #include <linux/netdevice.h>
+ #include <linux/printk.h>
+diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
+index 637eb2dd06f5..59172e529ac9 100644
+--- a/drivers/usb/host/dwc2.c
++++ b/drivers/usb/host/dwc2.c
+@@ -14,6 +14,7 @@
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <phys2bus.h>
++#include <time.h>
+ #include <usb.h>
+ #include <usbroothubdes.h>
+ #include <wait_bit.h>
+diff --git a/drivers/usb/host/ehci-hcd.c b/drivers/usb/host/ehci-hcd.c
+index 9839aa17492d..d5dcfbbfa7ed 100644
+--- a/drivers/usb/host/ehci-hcd.c
++++ b/drivers/usb/host/ehci-hcd.c
+@@ -11,6 +11,7 @@
+ #include <dm.h>
+ #include <errno.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/byteorder.h>
+ #include <asm/cache.h>
+ #include <asm/unaligned.h>
+diff --git a/drivers/usb/host/ehci-omap.c b/drivers/usb/host/ehci-omap.c
+index 765336a3c42b..d0edabcf39e6 100644
+--- a/drivers/usb/host/ehci-omap.c
++++ b/drivers/usb/host/ehci-omap.c
+@@ -12,6 +12,7 @@
+ 
+ #include <common.h>
+ #include <log.h>
++#include <time.h>
+ #include <usb.h>
+ #include <linux/delay.h>
+ #include <usb/ulpi.h>
+diff --git a/drivers/usb/host/ohci-da8xx.c b/drivers/usb/host/ohci-da8xx.c
+index 33c4a911a090..faea8c185e6b 100644
+--- a/drivers/usb/host/ohci-da8xx.c
++++ b/drivers/usb/host/ohci-da8xx.c
+@@ -5,6 +5,7 @@
+ 
+ #include <common.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <clk.h>
+ #include <dm.h>
+diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+index c8260cbdf94b..52b24b8204b9 100644
+--- a/drivers/usb/host/xhci-ring.c
++++ b/drivers/usb/host/xhci-ring.c
+@@ -16,6 +16,7 @@
+ #include <common.h>
+ #include <cpu_func.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/byteorder.h>
+ #include <usb.h>
+ #include <asm/unaligned.h>
+diff --git a/drivers/usb/isp1760/isp1760-hcd.c b/drivers/usb/isp1760/isp1760-hcd.c
+index a6c4d97aee3f..efacca8485fa 100644
+--- a/drivers/usb/isp1760/isp1760-hcd.c
++++ b/drivers/usb/isp1760/isp1760-hcd.c
+@@ -8,6 +8,7 @@
+ 
+ #include <hexdump.h>
+ #include <common.h>
++#include <time.h>
+ #include <asm/cache.h>
+ #include <cpu_func.h>
+ #include <dm.h>
+diff --git a/drivers/usb/musb-new/am35x.c b/drivers/usb/musb-new/am35x.c
+index 0a52e09e19f1..ea0a944a87bb 100644
+--- a/drivers/usb/musb-new/am35x.c
++++ b/drivers/usb/musb-new/am35x.c
+@@ -25,6 +25,7 @@
+ #include <plat/usb.h>
+ #else
+ #include <common.h>
++#include <time.h>
+ #include <asm/omap_musb.h>
+ #include <linux/bug.h>
+ #include <linux/delay.h>
+diff --git a/drivers/usb/musb-new/musb_dsps.c b/drivers/usb/musb-new/musb_dsps.c
+index a8ff7434c9f7..2facd168ec4f 100644
+--- a/drivers/usb/musb-new/musb_dsps.c
++++ b/drivers/usb/musb-new/musb_dsps.c
+@@ -33,6 +33,7 @@
+ #else
+ #include <common.h>
+ #include <dm.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <asm/omap_musb.h>
+ #include <linux/printk.h>
+diff --git a/drivers/usb/musb-new/musb_uboot.c b/drivers/usb/musb-new/musb_uboot.c
+index 7cea9a2ed65c..303284622707 100644
+--- a/drivers/usb/musb-new/musb_uboot.c
++++ b/drivers/usb/musb-new/musb_uboot.c
+@@ -2,6 +2,7 @@
+ #include <console.h>
+ #include <dm.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <watchdog.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+diff --git a/drivers/usb/musb-new/omap2430.c b/drivers/usb/musb-new/omap2430.c
+index 308eff832c9e..cc6f03c3a377 100644
+--- a/drivers/usb/musb-new/omap2430.c
++++ b/drivers/usb/musb-new/omap2430.c
+@@ -12,6 +12,7 @@
+ #include <dm.h>
+ #include <log.h>
+ #include <serial.h>
++#include <time.h>
+ #include <dm/device-internal.h>
+ #include <dm/device_compat.h>
+ #include <dm/lists.h>
+diff --git a/drivers/video/broadwell_igd.c b/drivers/video/broadwell_igd.c
+index 83b6c908a8db..71fc79d6bc67 100644
+--- a/drivers/video/broadwell_igd.c
++++ b/drivers/video/broadwell_igd.c
+@@ -11,6 +11,7 @@
+ #include <dm.h>
+ #include <init.h>
+ #include <log.h>
++#include <time.h>
+ #include <vesa.h>
+ #include <video.h>
+ #include <asm/cpu.h>
+diff --git a/drivers/video/dw_hdmi.c b/drivers/video/dw_hdmi.c
+index c4fbb1829446..16db3d38a2c2 100644
+--- a/drivers/video/dw_hdmi.c
++++ b/drivers/video/dw_hdmi.c
+@@ -8,6 +8,7 @@
+ #include <common.h>
+ #include <fdtdec.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <i2c.h>
+ #include <media_bus_format.h>
+diff --git a/drivers/video/rockchip/rk_edp.c b/drivers/video/rockchip/rk_edp.c
+index 3697d582510a..8208f0ead4a9 100644
+--- a/drivers/video/rockchip/rk_edp.c
++++ b/drivers/video/rockchip/rk_edp.c
+@@ -8,6 +8,7 @@
+ #include <clk.h>
+ #include <display.h>
+ #include <dm.h>
++#include <time.h>
+ #include <dm/device_compat.h>
+ #include <edid.h>
+ #include <log.h>
+diff --git a/drivers/video/tegra124/display.c b/drivers/video/tegra124/display.c
+index 9261cc9384a2..5691364849b7 100644
+--- a/drivers/video/tegra124/display.c
++++ b/drivers/video/tegra124/display.c
+@@ -14,6 +14,7 @@
+ #include <edid.h>
+ #include <log.h>
+ #include <part.h>
++#include <time.h>
+ #include <video.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+diff --git a/drivers/video/tegra124/dp.c b/drivers/video/tegra124/dp.c
+index b27b1633bab5..5f14d41bb688 100644
+--- a/drivers/video/tegra124/dp.c
++++ b/drivers/video/tegra124/dp.c
+@@ -10,6 +10,7 @@
+ #include <div64.h>
+ #include <errno.h>
+ #include <log.h>
++#include <time.h>
+ #include <video_bridge.h>
+ #include <asm/io.h>
+ #include <asm/arch-tegra/dc.h>
+diff --git a/drivers/video/tegra124/sor.c b/drivers/video/tegra124/sor.c
+index 258685182c7d..415324366282 100644
+--- a/drivers/video/tegra124/sor.c
++++ b/drivers/video/tegra124/sor.c
+@@ -10,6 +10,7 @@
+ #include <malloc.h>
+ #include <panel.h>
+ #include <syscon.h>
++#include <time.h>
+ #include <video_bridge.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+diff --git a/drivers/video/video-uclass.c b/drivers/video/video-uclass.c
+index f743ed74c818..bd1bcd6f66c4 100644
+--- a/drivers/video/video-uclass.c
++++ b/drivers/video/video-uclass.c
+@@ -15,6 +15,7 @@
+ #include <mapmem.h>
+ #include <spl.h>
+ #include <stdio_dev.h>
++#include <time.h>
+ #include <video.h>
+ #include <video_console.h>
+ #include <asm/cache.h>
+diff --git a/drivers/watchdog/booke_wdt.c b/drivers/watchdog/booke_wdt.c
+index 50c091956e73..b0050e7c386d 100644
+--- a/drivers/watchdog/booke_wdt.c
++++ b/drivers/watchdog/booke_wdt.c
+@@ -5,6 +5,7 @@
+ 
+ #include <div64.h>
+ #include <dm.h>
++#include <time.h>
+ #include <wdt.h>
+ #include <asm/processor.h>
+ 
+diff --git a/drivers/watchdog/sbsa_gwdt.c b/drivers/watchdog/sbsa_gwdt.c
+index 96d04665d52c..b9debdedd36c 100644
+--- a/drivers/watchdog/sbsa_gwdt.c
++++ b/drivers/watchdog/sbsa_gwdt.c
+@@ -5,6 +5,7 @@
+  * Copyright 2020 NXP
+  */
+ 
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <common.h>
+diff --git a/fs/fs.c b/fs/fs.c
+index cfc781bbb8d8..5351c560e721 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -21,6 +21,7 @@
+ #include <fs.h>
+ #include <sandboxfs.h>
+ #include <semihostingfs.h>
++#include <time.h>
+ #include <ubifs_uboot.h>
+ #include <btrfs.h>
+ #include <asm/global_data.h>
+diff --git a/fs/ubifs/debug.c b/fs/ubifs/debug.c
+index ff2a5719c3eb..de9c644a952e 100644
+--- a/fs/ubifs/debug.c
++++ b/fs/ubifs/debug.c
+@@ -17,6 +17,7 @@
+ 
+ #include <hexdump.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/devres.h>
+ #include <linux/printk.h>
+ 
+diff --git a/include/cli.h b/include/cli.h
+index 094a6602d70e..9ac9f80a86b5 100644
+--- a/include/cli.h
++++ b/include/cli.h
+@@ -8,6 +8,7 @@
+ #define __CLI_H
+ 
+ #include <stdbool.h>
++#include <time.h>
+ 
+ /**
+  * struct cli_ch_state - state information for reading cmdline characters
+diff --git a/include/exports.h b/include/exports.h
+index 6f8c9cf4517e..0452de735b9c 100644
+--- a/include/exports.h
++++ b/include/exports.h
+@@ -12,6 +12,7 @@
+ #endif
+ 
+ #include <irq_func.h>
++#include <time.h>
+ 
+ struct cmd_tbl;
+ struct spi_slave;
+diff --git a/include/regmap.h b/include/regmap.h
+index 22b043408acb..135cb7fcbcdf 100644
+--- a/include/regmap.h
++++ b/include/regmap.h
+@@ -7,6 +7,7 @@
+ #ifndef __REGMAP_H
+ #define __REGMAP_H
+ 
++#include <time.h>
+ #include <linux/delay.h>
+ 
+ /**
+diff --git a/include/time.h b/include/time.h
+index 3b2ba0912470..0b357df1e268 100644
+--- a/include/time.h
++++ b/include/time.h
+@@ -3,6 +3,7 @@
+ #ifndef _TIME_H
+ #define _TIME_H
+ 
++#include <time.h>
+ #include <linux/typecheck.h>
+ #include <linux/types.h>
+ 
+diff --git a/lib/dhry/cmd_dhry.c b/lib/dhry/cmd_dhry.c
+index 77b52a23003c..3101235058e3 100644
+--- a/lib/dhry/cmd_dhry.c
++++ b/lib/dhry/cmd_dhry.c
+@@ -6,6 +6,7 @@
+ #include <common.h>
+ #include <command.h>
+ #include <div64.h>
++#include <time.h>
+ #include "dhry.h"
+ 
+ static int do_dhry(struct cmd_tbl *cmdtp, int flag, int argc,
+diff --git a/net/arp.c b/net/arp.c
+index 37848ad32fbd..742e0438130b 100644
+--- a/net/arp.c
++++ b/net/arp.c
+@@ -13,6 +13,7 @@
+ #include <env.h>
+ #include <log.h>
+ #include <net.h>
++#include <time.h>
+ #include <linux/delay.h>
+ 
+ #include "arp.h"
+diff --git a/net/bootp.c b/net/bootp.c
+index 8b1a4ae2ef8a..594eeb196dc9 100644
+--- a/net/bootp.c
++++ b/net/bootp.c
+@@ -16,6 +16,7 @@
+ #include <log.h>
+ #include <net.h>
+ #include <rand.h>
++#include <time.h>
+ #include <uuid.h>
+ #include <linux/delay.h>
+ #include <net/tftp.h>
+diff --git a/net/dhcpv6.c b/net/dhcpv6.c
+index 73a1067877cf..34ac66b40254 100644
+--- a/net/dhcpv6.c
++++ b/net/dhcpv6.c
+@@ -10,6 +10,7 @@
+ #include <common.h>
+ #include <net6.h>
+ #include <malloc.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include "net_rand.h"
+ #include "dhcpv6.h"
+diff --git a/net/dns.c b/net/dns.c
+index 5b1fe5b01037..677e39dd0318 100644
+--- a/net/dns.c
++++ b/net/dns.c
+@@ -27,6 +27,7 @@
+ #include <env.h>
+ #include <log.h>
+ #include <net.h>
++#include <time.h>
+ #include <asm/unaligned.h>
+ 
+ #include "dns.h"
+diff --git a/net/fastboot_udp.c b/net/fastboot_udp.c
+index d6907874787e..58cd3c7ae1c2 100644
+--- a/net/fastboot_udp.c
++++ b/net/fastboot_udp.c
+@@ -7,6 +7,7 @@
+ #include <command.h>
+ #include <fastboot.h>
+ #include <net.h>
++#include <time.h>
+ #include <net/fastboot_udp.h>
+ #include <linux/printk.h>
+ 
+diff --git a/net/link_local.c b/net/link_local.c
+index 8aec3c79969b..16bc5c8b90ad 100644
+--- a/net/link_local.c
++++ b/net/link_local.c
+@@ -16,6 +16,7 @@
+ #include <log.h>
+ #include <net.h>
+ #include <rand.h>
++#include <time.h>
+ #include "arp.h"
+ #include "net_rand.h"
+ 
+diff --git a/net/ndisc.c b/net/ndisc.c
+index d1cec0601c83..4518f34b2078 100644
+--- a/net/ndisc.c
++++ b/net/ndisc.c
+@@ -14,6 +14,7 @@
+ #include <net6.h>
+ #include <ndisc.h>
+ #include <stdlib.h>
++#include <time.h>
+ #include <linux/delay.h>
+ 
+ /* IPv6 destination address of packet waiting for ND */
+diff --git a/net/net.c b/net/net.c
+index e6f61f0f8f6a..ee10fb61d6f9 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -93,6 +93,7 @@
+ #include <net.h>
+ #include <net6.h>
+ #include <ndisc.h>
++#include <time.h>
+ #include <net/fastboot_udp.h>
+ #include <net/fastboot_tcp.h>
+ #include <net/tftp.h>
+diff --git a/net/net6.c b/net/net6.c
+index 2dd64c0e1618..cb47b79109da 100644
+--- a/net/net6.c
++++ b/net/net6.c
+@@ -15,6 +15,7 @@
+ #include <net.h>
+ #include <net6.h>
+ #include <ndisc.h>
++#include <time.h>
+ 
+ /* NULL IPv6 address */
+ struct in6_addr const net_null_addr_ip6 = ZERO_IPV6_ADDR;
+diff --git a/net/ping6.c b/net/ping6.c
+index 4882a17f510b..1707da21c3d6 100644
+--- a/net/ping6.c
++++ b/net/ping6.c
+@@ -12,6 +12,7 @@
+ #include <common.h>
+ #include <net.h>
+ #include <net6.h>
++#include <time.h>
+ #include "ndisc.h"
+ 
+ static ushort seq_no;
+diff --git a/net/sntp.c b/net/sntp.c
+index dac0f8ceea1b..81c85e3c2f93 100644
+--- a/net/sntp.c
++++ b/net/sntp.c
+@@ -11,6 +11,7 @@
+ #include <log.h>
+ #include <net.h>
+ #include <rtc.h>
++#include <time.h>
+ 
+ #include <net/sntp.h>
+ 
+diff --git a/net/tcp.c b/net/tcp.c
+index a713e1dd6096..6c56a38f0830 100644
+--- a/net/tcp.c
++++ b/net/tcp.c
+@@ -23,6 +23,7 @@
+ #include <env_internal.h>
+ #include <errno.h>
+ #include <net.h>
++#include <time.h>
+ #include <net/tcp.h>
+ 
+ /*
+diff --git a/net/tftp.c b/net/tftp.c
+index 88e71e67de35..e1e5925aabf8 100644
+--- a/net/tftp.c
++++ b/net/tftp.c
+@@ -16,6 +16,7 @@
+ #include <mapmem.h>
+ #include <net.h>
+ #include <net6.h>
++#include <time.h>
+ #include <asm/global_data.h>
+ #include <net/tftp.h>
+ #include "bootp.h"
+diff --git a/net/wget.c b/net/wget.c
+index 2dbfeb1a1d5b..07b274bf0f21 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -11,6 +11,7 @@
+ #include <image.h>
+ #include <mapmem.h>
+ #include <net.h>
++#include <time.h>
+ #include <net/tcp.h>
+ #include <net/wget.h>
+ 
+diff --git a/post/drivers/rtc.c b/post/drivers/rtc.c
+index 9eeb02794715..45303c48f435 100644
+--- a/post/drivers/rtc.c
++++ b/post/drivers/rtc.c
+@@ -5,6 +5,7 @@
+  */
+ 
+ #include <common.h>
++#include <time.h>
+ 
+ /*
+  * RTC test
+diff --git a/test/common/cread.c b/test/common/cread.c
+index 2fdd29a265f7..a6ce72f1386f 100644
+--- a/test/common/cread.c
++++ b/test/common/cread.c
+@@ -5,6 +5,7 @@
+ 
+ #include <common.h>
+ #include <cli.h>
++#include <time.h>
+ #include <test/common.h>
+ #include <test/test.h>
+ #include <test/ut.h>
+diff --git a/test/dm/mux-cmd.c b/test/dm/mux-cmd.c
+index 11c237b5da90..a14bfa8e3fbd 100644
+--- a/test/dm/mux-cmd.c
++++ b/test/dm/mux-cmd.c
+@@ -7,6 +7,7 @@
+ #include <dm.h>
+ #include <mux.h>
+ #include <mux-internal.h>
++#include <time.h>
+ #include <dt-bindings/mux/mux.h>
+ #include <asm/test.h>
+ #include <dm/test.h>
+diff --git a/test/dm/regmap.c b/test/dm/regmap.c
+index 8560f2afc2d1..ea71d795ca7e 100644
+--- a/test/dm/regmap.c
++++ b/test/dm/regmap.c
+@@ -10,6 +10,7 @@
+ #include <regmap.h>
+ #include <syscon.h>
+ #include <rand.h>
++#include <time.h>
+ #include <asm/test.h>
+ #include <dm/test.h>
+ #include <dm/devres.h>
+diff --git a/test/dm/wdt.c b/test/dm/wdt.c
+index 653d7b1c8b36..3d7adb169dae 100644
+--- a/test/dm/wdt.c
++++ b/test/dm/wdt.c
+@@ -6,6 +6,7 @@
+ #include <common.h>
+ #include <cyclic.h>
+ #include <dm.h>
++#include <time.h>
+ #include <wdt.h>
+ #include <asm/gpio.h>
+ #include <asm/state.h>
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
