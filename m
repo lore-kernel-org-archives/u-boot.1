@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BEB8CE7A9B
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 16:08:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7E24CE7A9B
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 16:10:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70C5986B58;
-	Mon, 25 Sep 2023 18:08:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 14F4486BE7;
+	Mon, 25 Sep 2023 18:10:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oaKt/O/R";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="cFxoL+GJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B0A186B3A; Mon, 25 Sep 2023 18:08:43 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 7A6B686BE7; Mon, 25 Sep 2023 18:10:19 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B07A486BCF
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 18:08:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 079F086B3A
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 18:10:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-533c5d10dc7so4493732a12.3
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 09:08:40 -0700 (PDT)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-59f4db9e11eso50988077b3.0
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 09:10:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695658120; x=1696262920; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nORrwcFZlLLoALoQ9jSYBln7sXRv177RGL5wU1AwEIw=;
- b=oaKt/O/RZqx1efmQaeFF9MtGAREiMhB3fbbH243fN4W6NOfH8VE5+wVrSB4GGW2jbO
- AE65xKWrsz56+7kDNiUAcEvFdD0UVwoMcRcLdj/4fUf1eRmeq3xqMR4xvqkSMcz3LPhS
- lqqqo0N1FRIMcNHxkbJyaKMaln6gNbtj7n22I=
+ d=google.com; s=20230601; t=1695658216; x=1696263016; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/SCkfTV9otbtwMcKwb1FwUtTtWc2I114wnGM+o4z14I=;
+ b=cFxoL+GJk2lRlfetjV32xtjHCL+AYDZuDikcKA9WQuIdijl4dYy6IkKWt88HfeyOs0
+ 9R9CTvilsu/nNLW9EQggkFY6kD4HJ+97ZNYdBWzc0s+gzkl9kzb2jnKPYt01EIBabQ/0
+ daDNhKslpHN77X2j4hbwFZlRGM78JFp+zoELNu9lGbThC31ZDHV/c+O2OPVjYiTkDLjx
+ p95LZYvyf1IYatrtfV595i5JV6kVPnv7KZSx6DBxr0tLasAnP/QgnH9doHV6XKqiCtNP
+ YtvkUDyhXW7L+C1fXSLIRh+B+g3GKpL2aaUgS89bY6p/FoN7bD1lN/mi8UhpA+nKz538
+ /AcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695658120; x=1696262920;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nORrwcFZlLLoALoQ9jSYBln7sXRv177RGL5wU1AwEIw=;
- b=TFWGL2rmZCbDh3G6fzBpSDUASMgDp6Khzt0/oUwoLMpd0s56qU8ga5WTKUUORTQbkn
- sWKqhs/5MTdG3TtpgS0K3K6kpr31NXyQ9i0hIYUWUn7tOGa36eWZJ3Ruvi/UQvo7vYve
- GAY3zy7kRZsTSJOkCptFRtuhYQuF1D7xpgn/bXmGWeuQuGebJCQ1jEgM0cpCTMwPgn/m
- 04g/UjFte6IeaXr0JRipdbY9NaULB7onEi5jBcyb5eV1LLaGbpCnGQt1sIf5ELBn+UhQ
- P0AbX4sInkppbIUDzwLJjZMb2bURGkxRZp+9gTNggrjze/72Up15WQA5X0Z1prWL3ji9
- Qwbg==
-X-Gm-Message-State: AOJu0YyoZqyomXSxLcjxxCQarr2nXU/u3PY0K34PgtoJvMefTM02m9Ym
- 44sIw/PRmqfMIyIsTgasYhDBNo5vQkITIw7Ivmn/bVWByV+JiT/qWDj1Jw==
-X-Google-Smtp-Source: AGHT+IF64fg+z3qdGyPGNA5JDJIwT0GV+18ho9cujM+kW1xV07Rr++qE8YhOJh6cGbwb8wtjQjmc08YrI4Uw2AaNc5U=
-X-Received: by 2002:a05:6402:5148:b0:532:e24d:34f4 with SMTP id
- n8-20020a056402514800b00532e24d34f4mr5952774edd.39.1695658119943; Mon, 25 Sep
- 2023 09:08:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695658216; x=1696263016;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/SCkfTV9otbtwMcKwb1FwUtTtWc2I114wnGM+o4z14I=;
+ b=PtuUERXiVg/uWkBCUDBa44jbEXpFHy3kQ52gt9fYHK8amUPrcOp3+rLEVrFrvc91YH
+ SIKXcTFUBlxPwq7nvfMYiH5/ozmnq/0AcTX/PObh51dI4JsEOYrR4w9kz+B3AKcqzwZy
+ tjuSVVlZjfqns4dZIH9JNkW/A4qnFEkqE995kjdwUDz8x/QNUTc8VJ5bUXf5xM1wmTeN
+ DY6GApljsfIH9o6a6VKVi3vaHyipECYMqU4JximOoDiobqswI9HgysC6zyZvpFVOOXoa
+ KB26zuLiDmZDrPTir1v7/tF4aAmY6PjpvhsQo3JpjBlBTDvBKrSnJhiZcBQbOvN4xQRi
+ uB+Q==
+X-Gm-Message-State: AOJu0Yz1Mqexzd+slvm6Un+L7y3sVtKULJZOQTkKVZxJXBL5oFkMedXt
+ qeV0vXZUIX9kQTiwNqii4X8rX1tX+ZU70ZRlC0qi3A==
+X-Google-Smtp-Source: AGHT+IGvNlqIxrsbBiYwvDWc9BVyRGYxiOZldV8OBGQmbMPF9nWX2zIZ/ZnL5giHrYMer09JAeK78XGsZcIycvAWXcs=
+X-Received: by 2002:a81:8486:0:b0:586:9f6c:41a0 with SMTP id
+ u128-20020a818486000000b005869f6c41a0mr5801618ywf.14.1695658215484; Mon, 25
+ Sep 2023 09:10:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
- <20230823155558.GM3953269@bill-the-cat>
- <C098A4DC-CE20-4516-8971-B52041120BCD@gmail.com>
- <20230925150534.GA305624@bill-the-cat>
- <CAPVz0n1F7c7m0=CfLTF8n1Qx2B83nv73VJrUWNHoZJeoeAe_eQ@mail.gmail.com>
-In-Reply-To: <CAPVz0n1F7c7m0=CfLTF8n1Qx2B83nv73VJrUWNHoZJeoeAe_eQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Sep 2023 10:08:23 -0600
-Message-ID: <CAPnjgZ14Rusf5J0VUvcXpiT=i8wpk8_o2ZqamwQhbtsw4vNJNQ@mail.gmail.com>
-Subject: Re: Config fragments
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Neha Francis <n-francis@ti.com>, Bryan <bb@ti.com>,
- Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>, 
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+References: <20230924111832.3741245-1-u-kumar1@ti.com>
+ <57F0DE54-C8BF-4B48-9075-2D267DBA4924@gmx.de>
+ <7edb7998-66a4-293e-9cfb-ebc142387684@ti.com>
+In-Reply-To: <7edb7998-66a4-293e-9cfb-ebc142387684@ti.com>
+From: Simon Glass <sjg@google.com>
+Date: Mon, 25 Sep 2023 10:09:57 -0600
+Message-ID: <CAPnjgZ1K8=UKaTf2WTeOY+58uoRrH=AiL6UNyM7v_Q1gpOvwuA@mail.gmail.com>
+Subject: Re: [PATCH] lmb: remove overlapping region with next range
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, nm@ti.com, vigneshr@ti.com, 
+ patrick.delaunay@foss.st.com, sjoerd@collabora.com, u-boot@lists.denx.de, 
+ michal.simek@amd.com, Suman Anna <s-anna@ti.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,145 +87,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Udit,
 
-On Mon, 25 Sept 2023 at 09:12, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+On Sun, 24 Sept 2023 at 22:10, Kumar, Udit <u-kumar1@ti.com> wrote:
 >
-> =D0=BF=D0=BD, 25 =D0=B2=D0=B5=D1=80. 2023=E2=80=AF=D1=80. =D0=BE 18:05 To=
-m Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> On 9/24/2023 7:21 PM, Heinrich Schuchardt wrote:
 > >
-> > On Mon, Sep 25, 2023 at 04:18:45PM +0300, Svyatoslav Ryhel wrote:
-> > >
-> > >
-> > > 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 18:55:58 GMT+03:=
-00, Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=
-=B2(-=D0=BB=D0=B0):
-> > > >On Wed, Aug 23, 2023 at 09:30:31AM -0600, Simon Glass wrote:
-> > > >
-> > > >> Hi,
-> > > >>
-> > > >> Up until 2023.04 it has been possible to build all the defconfigs =
-but
-> > > >> with 2023.07 that changed. Tom mentioned this to me recently.
-> > > >
-> > > >I'm adding Svyatoslav who is the person that brought in all of the
-> > > >config fragments that are going to be in v2023.07.
-> > > >
-> > > >> Up until 2023.04 we can enumerate all the board configs that can b=
-e
-> > > >> built. We can build any of them using a single name and a single
-> > > >> defconfig. The boards.cfg file which buildman creates contains a f=
-ull
-> > > >> list of things that can be built.
-> > > >>
-> > > >> From 2023.07 this changes and we now have random .config files
-> > > >> sprinkled about the place. I say random because they are not conne=
-cted
-> > > >> to anything. For example, here is
-> > > >
-> > > >They aren't random.  They're, just for v2023.07, in configs/ and the=
-n
-> > > >moving forward, they're in the board directory.  I would like to see
-> > > >them in more places possibly, but that's not something I'm sure enou=
-gh
-> > > >on right now.
-> > > >
-> > > >> board/ti/am62x/MAINTAINERS:
-> > > >>
-> > > >> AM62x BOARD
-> > > >> M: Dave Gerlach <d-gerlach@ti.com>
-> > > >> M: Tom Rini <trini@konsulko.com>
-> > > >> S: Maintained
-> > > >> F: board/ti/am62x/
-> > > >> F: include/configs/am62x_evm.h
-> > > >> F: configs/am62x_evm_r5_defconfig
-> > > >> F: configs/am62x_evm_a53_defconfig
-> > > >>
-> > > >> BEAGLEPLAY BOARD
-> > > >> M:     Nishanth Menon <nm@ti.com>
-> > > >> M:     Robert Nelson <robertcnelson@gmail.com>
-> > > >> M:     Tom Rini <trini@konsulko.com>
-> > > >> S:     Maintained
-> > > >> N:     beagleplay
-> > > >>
-> > > >> In most cases the MAINTAINERS file tells us about each board and u=
-ntil
-> > > >> [1] I had assumed that was the case. With that patch reverted, the=
-se
-> > > >> are the only 'orphaned' MAINTAINERS entries (buildman
-> > > >> --maintainer-check):
-> > > >>
-> > > >> WARNING: orphaned defconfig in board/armltd/vexpress64/MAINTAINERS
-> > > >> ending at line 8
-> > > >> WARNING: orphaned defconfig in board/google/veyron/MAINTAINERS end=
-ing at line 44
-> > > >> WARNING: orphaned defconfig in
-> > > >> board/mikrotik/crs3xx-98dx3236/MAINTAINERS ending at line 7
-> > > >> WARNING: orphaned defconfig in board/st/common/MAINTAINERS ending =
-at line 6
-> > > >> WARNING: orphaned defconfig in board/ti/am62x/MAINTAINERS ending a=
-t line 15
-> > > >>
-> > > >> But Tom advised me that MAINTAINERS is not intended for this purpo=
-se,
-> > > >> so the check has been dropped. I am not suggesting we bring it bac=
-k,
-> > > >> necessarily, but if we did, we could use it to specify the .config=
- and
-> > > >> defconfig files which are used by each board.
-> > > >
-> > > >Note that the "N" syntax has been in use, for defconfigs for a lot
-> > > >longer, and is why the CI check for unmaintained / orphaned boards
-> > > >stopped working.
-> > > >
-> > > >> *Failing that*, I suggest a new 'name.brd' file in the board direc=
-tory
-> > > >> to contain this information, e.g.
-> > > >>
-> > > >> # Contents of board/ti/am62x/beagleplay.brd:
-> > > >> beagleplay-r5: am62x_evm_r5_defconfig beagleplay_r5.config
-> > > >> beagleplay-a53: am62x_evm_a53_defconfig beagleplay_a53.config
-> > > >>
-> > > >> This could be parsed by buildman and other tools, to produce a lis=
-t of
-> > > >> available boards and to build each using a single name (e.g. make
-> > > >> beagleplay-r5_defconfig)
-> > > >>
-> > > >> What do people think?
-> > > >
-> > > >I'm not sure I like this direction honestly.  Do we want CI to cover
-> > > >these configurations?  Maybe.  But it's just for CI.  Using the TI
-> > > >examples, I don't know that you can use buildman today to generate a
-> > > >functional binary (and if you can, if --keep will retain the right
-> > > >files).
-> > > >
-> > > >Maybe we just need to make it clear that if you use config fragments
-> > > >then you're opting out of CI for that specific platform.  That shoul=
-d be
-> > > >fine for example for the TI ones that will be built in OE a bunch
-> > > >anyhow so accidental failure to builds will be caught.  I don't know
-> > > >about the Tegra platforms.
-> > > >
-> > >
-> > > Greetings! Are there any progress regards fragments move or this will
-> > > hang in mailing list indefinitely?
-> >
-> > I don't follow, sorry.  Yes, please send a patch on top of next to move
-> > the fragments for Tegra platforms to match how they're done for TI
-> > platforms now.
-> >
-> > --
-> > Tom
+> > Am 24. September 2023 13:18:32 MESZ schrieb Udit Kumar <u-kumar1@ti.com>:
+> >> In case of new memory range to be added is coalesced
+> >> with any already added non last lmb region.
+> >>
+> >> And there is possibility that, then region in which new memory
+> >> range added is not adjacent to next region. But have some
+> >> sections are overlapping.
+> >>
+> >> So along with adjacency check with next lmb region,
+> >> check for overlap should be done.
+> >>
+> >> In case overlap  is found, adjust and merge these two lmb
+> >> region into one.
+> >>
+> >> Reported-by: Suman Anna <s-anna@ti.com>
+> >> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> >> ---
+> >> logs
+> >> https://gist.github.com/uditkumarti/5d08c34442235ad270cfa863792ebcdc
+> >> seqeunce : line 1 to 13
+> >> without fix : line 96-100
+> >> with fix : line 199-202
+> >>
+> >> lib/lmb.c | 37 +++++++++++++++++++++++++++++++++----
+> >> 1 file changed, 33 insertions(+), 4 deletions(-)
+> >>
+> >> diff --git a/lib/lmb.c b/lib/lmb.c
+> >> index b2c233edb6..2580d01d90 100644
+> >> --- a/lib/lmb.c
+> >> +++ b/lib/lmb.c
+> >> @@ -74,6 +74,16 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
+> >>      return 0;
+> >> }
+> >>
+> >> +static long lmb_regions_overlap(struct lmb_region *rgn, unsigned long r1,
+> >> +                            unsigned long r2)
+> >> +{
+> >> +    phys_addr_t base1 = rgn->region[r1].base;
+> >> +    phys_size_t size1 = rgn->region[r1].size;
+> >> +    phys_addr_t base2 = rgn->region[r2].base;
+> >> +    phys_size_t size2 = rgn->region[r2].size;
+> >> +
+> >> +    return lmb_addrs_overlap(base1, size1, base2, size2);
+> >> +}
+> >> static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
+> >>                               unsigned long r2)
+> >> {
+> >> @@ -81,7 +91,6 @@ static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
+> >>      phys_size_t size1 = rgn->region[r1].size;
+> >>      phys_addr_t base2 = rgn->region[r2].base;
+> >>      phys_size_t size2 = rgn->region[r2].size;
+> >> -
+> >>      return lmb_addrs_adjacent(base1, size1, base2, size2);
+> >> }
+> >>
+> >> @@ -105,6 +114,23 @@ static void lmb_coalesce_regions(struct lmb_region *rgn, unsigned long r1,
+> >>      lmb_remove_region(rgn, r2);
+> >> }
+> >>
+> >> +/*Assmptuon : base addr of region 1 < base addr of region 2*/
+> > Assumption
 >
-> Oh, so it was merged already into next, sorry did not check the next bran=
-ch.
-> Tegra fragments move patch was already sent a month ago alongside
-> other board improvements, waiting for Thierry now. Thanks!
+>
+> Thanks Heinrich  will fix this typo in v2.
+>
+> Let me wait for other review feedback as well before proceeding for v2.
+>
+>
+> > Regards Heinrich
+> >
+> >> +static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
+> >> +                                 unsigned long r2)
+> >> +{
+> >> +    phys_addr_t base1 = rgn->region[r1].base;
+> >> +    phys_size_t size1 = rgn->region[r1].size;
+> >> +    phys_addr_t base2 = rgn->region[r2].base;
+> >> +    phys_size_t size2 = rgn->region[r2].size;
+> >> +
+> >> +    if (base1 + size1 > base2 + size2) {
+> >> +            printf("This will not be a case any time\n");
+> >> +            return;
+> >> +    }
+> >> +    rgn->region[r1].size = base2 + size2 - base1;
+> >> +    lmb_remove_region(rgn, r2);
+> >> +}
+> >> +
+> >> void lmb_init(struct lmb *lmb)
+> >> {
+> >> #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+> >> @@ -249,7 +275,6 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> >>              phys_size_t rgnflags = rgn->region[i].flags;
+> >>              phys_addr_t end = base + size - 1;
+> >>              phys_addr_t rgnend = rgnbase + rgnsize - 1;
+> >> -
+> >>              if (rgnbase <= base && end <= rgnend) {
+> >>                      if (flags == rgnflags)
+> >>                              /* Already have this region, so we're done */
+> >> @@ -278,10 +303,14 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> >>              }
+> >>      }
+> >>
+> >> -    if ((i < rgn->cnt - 1) && lmb_regions_adjacent(rgn, i, i + 1)) {
+> >> -            if (rgn->region[i].flags == rgn->region[i + 1].flags) {
+> >> +    if (i < rgn->cnt - 1 && rgn->region[i].flags == rgn->region[i + 1].flags)  {
+> >> +            if (lmb_regions_adjacent(rgn, i, i + 1)) {
+> >>                      lmb_coalesce_regions(rgn, i, i + 1);
+> >>                      coalesced++;
+> >> +            } else if (lmb_regions_overlap(rgn, i, i + 1)) {
+> >> +                    /* fix overlapping area */
+> >> +                    lmb_fix_over_lap_regions(rgn, i, i + 1);
+> >> +                    coalesced++;
+> >>              }
+> >>      }
+> >>
 
-Re dealing with fragments, we have a proposal as above, but I have not
-seen any other comments.
-
-I believe this needs to be figured out soon.
+Can you please add a test to test/lib which fails before your change
+and passes after?
 
 Regards,
 Simon
