@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEE49CE7A81
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:12:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 416C8CE7A81
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:13:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 230B686D41;
-	Mon, 25 Sep 2023 17:12:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 92F5B86B58;
+	Mon, 25 Sep 2023 17:13:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UFdNXbM5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aqgKa4+3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0EC8C86D4A; Mon, 25 Sep 2023 17:12:40 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 4B97486C06; Mon, 25 Sep 2023 17:13:46 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 181CA86C67
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:12:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2AE6186ADA
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:13:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-32003aae100so5346348f8f.0
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:12:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-59c0d002081so80006707b3.2
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:13:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695654757; x=1696259557; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=p0AwP1UC7uS8QqyE4+y2OkfHIhiI0Zc45IGVZHK6Zs4=;
- b=UFdNXbM5WI6NQDYWHCTo0slqp3W6ElT5R/ZhlnPd6ORXP2887yXJ5mGbawPJJT2kyr
- /PMSS0AaqQxM2Sm5QZMZUaBK/7BgIwQ+RjG+27xgxgoTRwcdY0tSlHn+QHIRjLFQA9Gs
- 1b9C/YEIKpjo3Hbt/ooARfTcsG8PFSIbsQzRdriNQe9ezWnbRCHBWW8AQlQOdR4BP8ph
- 4r3rbq7/W684QQ09plt9j+gLbCtuepvUBkSQ59L8oXe+gQvS9WNiEz1KmA3UAoAEUPC7
- itP6rWThuOQOKPjyQ4M+yEBxt8alIgm5S+CEshHB5usdZGCxdePwhG/W6+hO1Q26It3u
- yFTQ==
+ d=konsulko.com; s=google; t=1695654823; x=1696259623; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=t4I5nuprwZKxjzk98u4ihpqEhN4arfxjski9csSW4DU=;
+ b=aqgKa4+3Hmpwrw25kWhYgTsaFsWdV8vgPYQ0oR+J8xpblpxaNiWe8KpRNhjtmDhngc
+ DHaVufW4nltewD+D60fvlni7UL3MRckiBwk0BHcM8LgRBENj6DMKNGO4A58IMHHAipHZ
+ YA9c78itRTQgtOQnV7d3Hz4Zs89/JkpHLyGFY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695654757; x=1696259557;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=p0AwP1UC7uS8QqyE4+y2OkfHIhiI0Zc45IGVZHK6Zs4=;
- b=bHVum6mH7gQivMO/w/UGrJgnbylQMc1LVpz99sgxyqIGsCJDpKRPn2s4hyrYy/9Ele
- NgAY0DR8s4F16TqxJJlXdJHiOdAtqPGecgFMI3FQ58wIk6LU4FxBaAw0MRhv5JBmkH0g
- VkYYEv4iMqAIou7zHmsqKqyuaIxuQ9/S4br5sPL0BPta+JjVDLTgOEdNVI8JUPHh2LwA
- 5b2OJ+avHthsOT9un5pZ+nmKzqn4GJOTAP/Q7JHK81UsrgFi+NM3jZG7WNFJOXeqaJdU
- 7fX9uHuPl9KEbjqR5pEDgq11FLG3tmO8BVcZBC9fdFUceF1QZSZDcBYRYOA5SyvD7lJp
- N0GQ==
-X-Gm-Message-State: AOJu0YwKSmjm+3unLNnH/c8iNGU8dEeqneSf40zJ8zbhe3DulOvH4C8z
- b5fAMDfYPlpsSVGP5j1DBnK3QpHBwoGt6DWv8yc=
-X-Google-Smtp-Source: AGHT+IEdDgM0FVco0sI/x88axF5fW4gHg6Z5HfsE4tYn9hpoTbFRFgUDH4hrW0f1wvRKDE4ybdLofTh9wQ6uzaRxqDM=
-X-Received: by 2002:adf:f485:0:b0:313:e391:e492 with SMTP id
- l5-20020adff485000000b00313e391e492mr5962113wro.17.1695654757331; Mon, 25 Sep
- 2023 08:12:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695654823; x=1696259623;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=t4I5nuprwZKxjzk98u4ihpqEhN4arfxjski9csSW4DU=;
+ b=K0csLCzLRbZXGNSGsbPHpwAs+Q8vtPMr1O3tBsiwcOANnpoIbB5mDL/HngVr4M0hNV
+ chgUWQ1ZRPItIewNlChrFuz5ol6rGg4ywHV5VKIdsG6VZq+Z6tu1w8mrqEA5PRYOs0ku
+ JMA1AZEA6uacX1LCGiWFFO4ioYR3Dxy0AbwSnfwEkeZRbh2pGhPYqFcfue1rLzmMuYuX
+ DmoRJ+2a5RfOgTWgVgdWsjzmGaJqIDCe3dJAaTd56QLQsf9vkcrr3D7knZvLx3BInEsL
+ waOOGXL3fwNnNZyL8NeLOjWRvvmZPnK9gNwjsXb58TZEuDLGb3em16T4WLeSBZ3PWWHf
+ y78A==
+X-Gm-Message-State: AOJu0Yz38f157w3ZiWjawaDrN7kwt7Cci3uJ37/ic9f7Nvrg4XZO7ThZ
+ 45Emesg7dF7+wmOBe5DRneIwDQ==
+X-Google-Smtp-Source: AGHT+IHHi9NO9PEcJtBJ/Em7d+ZrPLCT47FTfXL1pO91UrvdsQJBHojM/1KxHic6fvBc2MC/7miivA==
+X-Received: by 2002:a05:690c:360d:b0:59c:682:78e5 with SMTP id
+ ft13-20020a05690c360d00b0059c068278e5mr6737087ywb.18.1695654822772; 
+ Mon, 25 Sep 2023 08:13:42 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
+ [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
+ by smtp.gmail.com with ESMTPSA id
+ o4-20020a0de504000000b0054bfc94a10dsm2454753ywe.47.2023.09.25.08.13.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 08:13:42 -0700 (PDT)
+Date: Mon, 25 Sep 2023 11:13:40 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 0/3] common: Remove a few more header files
+Message-ID: <20230925151340.GB305624@bill-the-cat>
+References: <20230925023958.1913268-1-sjg@chromium.org>
+ <20230925140838.GV305624@bill-the-cat>
+ <CAPnjgZ2gBRWt6v1i21Mq+bnqScnHYKATCURMtJ6E7DGspOdpnw@mail.gmail.com>
 MIME-Version: 1.0
-References: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
- <20230823155558.GM3953269@bill-the-cat>
- <C098A4DC-CE20-4516-8971-B52041120BCD@gmail.com>
- <20230925150534.GA305624@bill-the-cat>
-In-Reply-To: <20230925150534.GA305624@bill-the-cat>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 25 Sep 2023 18:12:26 +0300
-Message-ID: <CAPVz0n1F7c7m0=CfLTF8n1Qx2B83nv73VJrUWNHoZJeoeAe_eQ@mail.gmail.com>
-Subject: Re: Config fragments
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Neha Francis <n-francis@ti.com>, Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>,
- Andrew <afd@ti.com>, 
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Zy+o5aPHmm5TUv0R"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ2gBRWt6v1i21Mq+bnqScnHYKATCURMtJ6E7DGspOdpnw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,128 +93,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 25 =D0=B2=D0=B5=D1=80. 2023=E2=80=AF=D1=80. =D0=BE 18:05 Tom =
-Rini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Mon, Sep 25, 2023 at 04:18:45PM +0300, Svyatoslav Ryhel wrote:
-> >
-> >
-> > 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 18:55:58 GMT+03:00=
-, Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(=
--=D0=BB=D0=B0):
-> > >On Wed, Aug 23, 2023 at 09:30:31AM -0600, Simon Glass wrote:
-> > >
-> > >> Hi,
-> > >>
-> > >> Up until 2023.04 it has been possible to build all the defconfigs bu=
-t
-> > >> with 2023.07 that changed. Tom mentioned this to me recently.
-> > >
-> > >I'm adding Svyatoslav who is the person that brought in all of the
-> > >config fragments that are going to be in v2023.07.
-> > >
-> > >> Up until 2023.04 we can enumerate all the board configs that can be
-> > >> built. We can build any of them using a single name and a single
-> > >> defconfig. The boards.cfg file which buildman creates contains a ful=
-l
-> > >> list of things that can be built.
-> > >>
-> > >> From 2023.07 this changes and we now have random .config files
-> > >> sprinkled about the place. I say random because they are not connect=
-ed
-> > >> to anything. For example, here is
-> > >
-> > >They aren't random.  They're, just for v2023.07, in configs/ and then
-> > >moving forward, they're in the board directory.  I would like to see
-> > >them in more places possibly, but that's not something I'm sure enough
-> > >on right now.
-> > >
-> > >> board/ti/am62x/MAINTAINERS:
-> > >>
-> > >> AM62x BOARD
-> > >> M: Dave Gerlach <d-gerlach@ti.com>
-> > >> M: Tom Rini <trini@konsulko.com>
-> > >> S: Maintained
-> > >> F: board/ti/am62x/
-> > >> F: include/configs/am62x_evm.h
-> > >> F: configs/am62x_evm_r5_defconfig
-> > >> F: configs/am62x_evm_a53_defconfig
-> > >>
-> > >> BEAGLEPLAY BOARD
-> > >> M:     Nishanth Menon <nm@ti.com>
-> > >> M:     Robert Nelson <robertcnelson@gmail.com>
-> > >> M:     Tom Rini <trini@konsulko.com>
-> > >> S:     Maintained
-> > >> N:     beagleplay
-> > >>
-> > >> In most cases the MAINTAINERS file tells us about each board and unt=
-il
-> > >> [1] I had assumed that was the case. With that patch reverted, these
-> > >> are the only 'orphaned' MAINTAINERS entries (buildman
-> > >> --maintainer-check):
-> > >>
-> > >> WARNING: orphaned defconfig in board/armltd/vexpress64/MAINTAINERS
-> > >> ending at line 8
-> > >> WARNING: orphaned defconfig in board/google/veyron/MAINTAINERS endin=
-g at line 44
-> > >> WARNING: orphaned defconfig in
-> > >> board/mikrotik/crs3xx-98dx3236/MAINTAINERS ending at line 7
-> > >> WARNING: orphaned defconfig in board/st/common/MAINTAINERS ending at=
- line 6
-> > >> WARNING: orphaned defconfig in board/ti/am62x/MAINTAINERS ending at =
-line 15
-> > >>
-> > >> But Tom advised me that MAINTAINERS is not intended for this purpose=
-,
-> > >> so the check has been dropped. I am not suggesting we bring it back,
-> > >> necessarily, but if we did, we could use it to specify the .config a=
-nd
-> > >> defconfig files which are used by each board.
-> > >
-> > >Note that the "N" syntax has been in use, for defconfigs for a lot
-> > >longer, and is why the CI check for unmaintained / orphaned boards
-> > >stopped working.
-> > >
-> > >> *Failing that*, I suggest a new 'name.brd' file in the board directo=
-ry
-> > >> to contain this information, e.g.
-> > >>
-> > >> # Contents of board/ti/am62x/beagleplay.brd:
-> > >> beagleplay-r5: am62x_evm_r5_defconfig beagleplay_r5.config
-> > >> beagleplay-a53: am62x_evm_a53_defconfig beagleplay_a53.config
-> > >>
-> > >> This could be parsed by buildman and other tools, to produce a list =
-of
-> > >> available boards and to build each using a single name (e.g. make
-> > >> beagleplay-r5_defconfig)
-> > >>
-> > >> What do people think?
-> > >
-> > >I'm not sure I like this direction honestly.  Do we want CI to cover
-> > >these configurations?  Maybe.  But it's just for CI.  Using the TI
-> > >examples, I don't know that you can use buildman today to generate a
-> > >functional binary (and if you can, if --keep will retain the right
-> > >files).
-> > >
-> > >Maybe we just need to make it clear that if you use config fragments
-> > >then you're opting out of CI for that specific platform.  That should =
-be
-> > >fine for example for the TI ones that will be built in OE a bunch
-> > >anyhow so accidental failure to builds will be caught.  I don't know
-> > >about the Tegra platforms.
-> > >
-> >
-> > Greetings! Are there any progress regards fragments move or this will
-> > hang in mailing list indefinitely?
->
-> I don't follow, sorry.  Yes, please send a patch on top of next to move
-> the fragments for Tegra platforms to match how they're done for TI
-> platforms now.
->
-> --
-> Tom
 
-Oh, so it was merged already into next, sorry did not check the next branch=
-.
-Tegra fragments move patch was already sent a month ago alongside
-other board improvements, waiting for Thierry now. Thanks!
+--Zy+o5aPHmm5TUv0R
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, Sep 25, 2023 at 08:35:44AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Mon, 25 Sept 2023 at 08:08, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sun, Sep 24, 2023 at 08:39:49PM -0600, Simon Glass wrote:
+> >
+> > > This series removes two more header files from the common.h header. It
+> > > also tidies up code style for time.h functions, to simplify similar
+> > > maintenance in future.
+> > >
+> > >
+> > > Simon Glass (3):
+> > >   Fix code style for time functions
+> > >   common: Drop time.h from common header
+> > >   common: Drop linux/string.h from common header
+> > [snip]
+> > >  1709 files changed, 1854 insertions(+), 34 deletions(-)
+> >
+> > This is where I start to get worried we're possibly taking the wrong
+> > approach to the problem.  Perhaps it would be better to:
+> > 1. Start finding headers which include <common.h>, remove and fixup the
+> > breakage directly.
+> > 2. Move on to removing <common.h> from files, a directory at a time.
+> >
+>=20
+> The bigger question is whether you want common.h gone or not?
+
+Yes, I'd like it gone.
+
+> I shared my script with you so you can see what it is doing. But if a
+> board uses memcmp(), for example, then it needs linux/string.h
+> included. We can discuss why so many files use string functions, or
+> whether the script is not perfect, but ultimately that is the
+> question.
+>=20
+> Just these simple queries give you a sense of the scale:
+>=20
+>  git grep -l strcat |wc
+>      45      45    1134
+> git grep -l memcpy |wc
+>     834     834   21643
+>=20
+> If you are suggesting that we add fewer includes for now, relying on
+> transitive includes in header files, then I don't think that is very
+> useful in the end. I had a series a few years back which removed
+> common.h entirely and it foundered on this same issue.
+
+The problem I see with the approach you're taking now is that it's quite
+hard to provide meaningful review.  Looking at the time.h patch here, I
+assume you agree it would be better to just remove=20
+arch/arm/include/asm/arch-tegra/timer.h as it's just a single prototype
+already found in include/time.h.  And the example where time.h was
+included inside a comment block is a tooling issue.  But then looking at
+the printk.h patch I did just apply, I had to drop a few files because
+they introduced seemingly random changes to the resulting build on some
+platforms.  And something like that is much easier to deal with and
+explain _why_ it's happening if we're removing the header file by file,
+rather than world-wide move-a-header.
+
+--=20
+Tom
+
+--Zy+o5aPHmm5TUv0R
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmURo6QACgkQFHw5/5Y0
+tyxJ7gwAmEfACa74Z99AlGJcIdPB2tUi6eWazHzIgQoqgahKOiCQMXWpL32B/9Ms
+OuStsSZaRZho7sDJuFq7GWBp3wTd73SVAhpHUciM2eCsRpf5VpPVNrswmvyXKVre
+FadMqMrztGpMcdUd7bm4uqodqFZuOtvMhdK+KMy/u/jrnFE3W0+LZTr2umuJsipd
+8i/VIvxn+h1HZQR09HOqdEd4a5MrEsB61j56FKc2ZiH/IENrH9HZSbnkCF8Z8LLP
+LwPK1O8e2CYdlCxdQF+XvybaAWgRH0cxZRVIHtxXq8b0krcsdqN4PHGZE7fKuIaC
+V+RUqBriwieMqz+r52cdcn4V0xt4yqu9zLoSRkLWJnDJd3kBybArBeinGzT42iqy
+wjbqqrrNa4mgGv+0bbIwjbMuKHXzdCNAaJjwlDscI5c0piOuoHrK7MJVykVFLRR1
+rZki5+cuHSFNwx6Oij5vQO7+ZttmRZzG/JtB1uJLEiPk5x3da8JEOaMYKcRRrNw8
+4eg/9QKv
+=q52K
+-----END PGP SIGNATURE-----
+
+--Zy+o5aPHmm5TUv0R--
