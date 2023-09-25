@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A01BCE7A8C
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:31:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1834CE7A95
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:50:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51FEE86C06;
-	Mon, 25 Sep 2023 17:31:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B7EB86B58;
+	Mon, 25 Sep 2023 17:50:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i5R8pkcS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Pkb58qDa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0E1686C5D; Mon, 25 Sep 2023 17:31:20 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id D87F886B82; Mon, 25 Sep 2023 17:50:34 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8590786B58
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:31:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D44D86B3A
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:50:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-59c0b9ad491so79417757b3.1
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:31:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-27755cfa666so521014a91.0
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:50:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695655877; x=1696260677; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fw5YWns8qOhGLE/TOO9pUkzrtbS9805nELezQDb3Pk8=;
- b=i5R8pkcS3QrypSc62iHXAMT1jzaU1d5vrALIg1sKO82pBPt8U3uLK0zGgcnztB+qGV
- qJFdJnRIbqZ/A/kXivXepZxH9C9sqr5EXJxjubrIFF9vColJV21TYxgG/cAPv5jJ1udL
- NZX4+9KVVMxfvZz+d2Opi9QNHUjTt8N5Hi1Fs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695655877; x=1696260677;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1695657031; x=1696261831; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fw5YWns8qOhGLE/TOO9pUkzrtbS9805nELezQDb3Pk8=;
- b=jpfpkDfqvd+hMZ5/Bmo0hFBxGuvKeU4fz56LMgF6PT7iIW3Ub52cftaCgR5PdYSYzl
- plulUVkc8WM+pp1s2eUeuHlVyhOpLo0mfxELvvSQLalcQ3bP1/q5bDU7j2I/Xj0FiF8J
- mbA+HCZ6YHFE/3A+8PD9a+P0HxDu22dZXGB4QI7zhiMOlqecmlaj0q718JIp8cPCIwid
- kUFiXh3zoGiiP86dfyuGdVGHWuL1ayAdJ8fhVAiSM//eEZs57G8P1KIGebmIZBuWNuV3
- Y662Mu5j/YwUfY9fWVvDLUBf8FbwBG+jzHIpA5XiCx93w5JkzAtpXDQLwSqO+W8d+KyH
- 53Ug==
-X-Gm-Message-State: AOJu0YxTczMcz1R6UONrR1EXo9YUB9RUBdU5zgoCAk1SFHvk9fOLJ2s4
- tQJ6jvhtJwVUugzGXBJOmznkOQ==
-X-Google-Smtp-Source: AGHT+IHV1X2tQOPKHpAMS/xITeiZadC1hV444kA5Mvgh1tt50FnWqGP/qXIYK+cEDj5yiojsOXgygQ==
-X-Received: by 2002:a25:a2cb:0:b0:d7a:c0b8:f171 with SMTP id
- c11-20020a25a2cb000000b00d7ac0b8f171mr5956024ybn.37.1695655877262; 
- Mon, 25 Sep 2023 08:31:17 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
- [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
- by smtp.gmail.com with ESMTPSA id
- n62-20020a252741000000b00d7360e0b240sm2245226ybn.31.2023.09.25.08.31.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 08:31:16 -0700 (PDT)
-Date: Mon, 25 Sep 2023 11:31:14 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: u-kumar1@ti.com, nm@ti.com, vigneshr@ti.com,
- patrick.delaunay@foss.st.com, sjoerd@collabora.com,
- u-boot@lists.denx.de, xypron.glpk@gmx.de, michal.simek@amd.com,
- s-anna@ti.com, dsankouski@gmail.com, kettenis@openbsd.org,
- sumit.garg@linaro.org, sam.shih@mediatek.com
-Subject: Re: [PATCH] lmb: remove overlapping region with next range
-Message-ID: <20230925153114.GD305624@bill-the-cat>
-References: <20230924111832.3741245-1-u-kumar1@ti.com>
- <20230925152126.GC305624@bill-the-cat>
- <87ttricly9.fsf@bloch.sibelius.xs4all.nl>
+ bh=lD6Z4ol59P8+COgkQJZw2O/dPkYkBzFhwn7siM8dG+o=;
+ b=Pkb58qDaMwqpdanbrqBNgLa/vFCdmcVpEo9tYZVrGvGmZ/IAlKPOITPfb9WUV32ezU
+ dgX8ahX2hr36KST282C3b2VY5VIXx9RnXXSVpT7zr5Em9rcuxPpkxU9eU1U0EHZQAjaA
+ 45WGCGg6SES3TvXkhb8dFzyLBbMbb+xtQw1cJUIQegVQfDe4yo+ETu9NOU2dblitvfHA
+ 73Bx8PpUkG60EKhO5s9ES3fAObfrBG+EEwG2g+UB0KIGziOFd/S1JtfOzFMYmistkRmL
+ goiPWJ8lkRT+bOHscquk2LhG4Vhy2ZbEuJjyygDjvZo2iqGoMupyPZGbb0Zm9okWAg2O
+ AHuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695657031; x=1696261831;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lD6Z4ol59P8+COgkQJZw2O/dPkYkBzFhwn7siM8dG+o=;
+ b=nEUUJOyDJrN0XBK+yNR94FNmQ128yAGvLm9SDahSdA1ALQ6xh+K7xGWPizN+kA3oCE
+ UPi+OxGcNlSvszAixyLW+JlM9btAwQIBhs5Q/059iMFmNSVx+zgR+knTZ1t+gHxuXHwW
+ 2/4RyL72Ena39ThTfJN0XKq96PSkNxVaiohfMa2tHQSh2ifONQRlRrtOpYz2pYK+W74F
+ 8FoRp7ehM5JGtTGiiHVwinDOu8aiMN3uJr2tnkMAX8BDcBB9FPBe9y+zktiwSWtBFo1U
+ NOaizA6ZzegTQc7/5PLqh1fWRJNdH1KakXST9UXwQjimyc/QxzW16jEyXW++1JAejIM2
+ 8vCg==
+X-Gm-Message-State: AOJu0YxQ/CkdGTw4dgKH+jH7hpIXfgABM+DpWTyGcX8mhb47uFlym0Ap
+ 9sujj7dhSBLHSck2CbCz8QHXTuTM0HB6oOeEQbX8H+A5CN0=
+X-Google-Smtp-Source: AGHT+IFM+eNaI6ALyA8o7cfidgmG0uWZwSAE6optyptkBZtxLbNJ+oaPJ8RVf1/ysFq2XEzoDnIc1KFlmUxG6ssB8Is=
+X-Received: by 2002:a17:90a:6fc2:b0:273:e4a7:ce72 with SMTP id
+ e60-20020a17090a6fc200b00273e4a7ce72mr6106440pjk.3.1695657030512; Mon, 25 Sep
+ 2023 08:50:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="d+gehQCzZBTPo54U"
-Content-Disposition: inline
-In-Reply-To: <87ttricly9.fsf@bloch.sibelius.xs4all.nl>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
+ <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
+ <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
+ <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
+ <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
+ <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
+ <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
+ <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
+ <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
+ <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
+ <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
+ <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
+ <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
+ <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
+ <CAOYdKdjALruh9v6HBO-MSjzZM0whYhbA5YLJxbKk7yQk7cznGw@mail.gmail.com>
+ <CAOMZO5AVuBxGFF_itcxvdG=W9JoRtyzzeeC+wji__uUOQirwZg@mail.gmail.com>
+ <CAOYdKdingLtAvEnth8mSnazQ2fZ_kCsM_2P_dX7tbL2xe9wyVw@mail.gmail.com>
+In-Reply-To: <CAOYdKdingLtAvEnth8mSnazQ2fZ_kCsM_2P_dX7tbL2xe9wyVw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 25 Sep 2023 12:50:18 -0300
+Message-ID: <CAOMZO5ALK_O-648FaHFrjJc9EiU3J=nvv1rYDiLOGqhjt3mmkA@mail.gmail.com>
+Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
+To: Rogan Dawes <rogan@dawes.za.net>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,73 +102,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, Sep 25, 2023 at 11:00=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net> w=
+rote:
 
---d+gehQCzZBTPo54U
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> I see absolutely nothing in the console.
+>
+> I=E2=80=99m wondering whether I can possibly execute the vendor SPL with =
+a modern u-boot?
 
-On Mon, Sep 25, 2023 at 05:27:26PM +0200, Mark Kettenis wrote:
-> > Date: Mon, 25 Sep 2023 11:21:26 -0400
-> > From: Tom Rini <trini@konsulko.com>
-> >=20
-> > On Sun, Sep 24, 2023 at 04:48:32PM +0530, Udit Kumar wrote:
-> >=20
-> > > In case of new memory range to be added is coalesced
-> > > with any already added non last lmb region.
-> > >=20
-> > > And there is possibility that, then region in which new memory
-> > > range added is not adjacent to next region. But have some
-> > > sections are overlapping.
-> > >=20
-> > > So along with adjacency check with next lmb region,
-> > > check for overlap should be done.
-> > >=20
-> > > In case overlap  is found, adjust and merge these two lmb
-> > > region into one.
-> > >=20
-> > > Reported-by: Suman Anna <s-anna@ti.com>
-> > > Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-> >=20
-> > This is good!  I wonder if this addresses the issue that has caused
-> > other platforms to need to set CONFIG_LMB_MAX_REGIONS=3D64 and I'm
-> > wondering if any of the other maintainers I've cc'd here can drop back
-> > to the default number of regions and then re-test their failure case?
-> > Thanks!
->=20
-> Hi Tom,
->=20
-> For the Apple M1 systems I don't think it makes sense to reduce the
-> number of regions.  These systems don't have TPL or SPL, have plenty
-> of memory (at least 8GB) and are really fast.  And we anticipate that
-> the number of memory regions will only grow in the future.
+The old U-Boot vendor does not use SPL. It uses an old mechanism
+called bootlets.
 
-This partly gets at what I see as part of the problem.  It's been
-unclear to me if it's reasonable to just bump the default to 64 for
-aarch64 (and riscv?) because the problem is that 16 is truly too small,
-or given what we're doing we still don't need a ton of LMB regions as at
-the end of the day things should be coalesced in to just a few and it's
-been an underlying bug in an area everyone assumed wasn't buggy.
+I suggest that we start from scratch with this imx28-wink-hub support
+that I have just added:
+https://github.com/fabioestevam/u-boot/commits/wink
 
---=20
-Tom
+To build it:
 
---d+gehQCzZBTPo54U
-Content-Type: application/pgp-signature; name="signature.asc"
+make imx28-wink-hub_defconfig
+make u-boot.sb
 
------BEGIN PGP SIGNATURE-----
+Then try to load u-boot.sb via mxsldr.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmURp8IACgkQFHw5/5Y0
-tyylIAv/dLZKZaD0z4JqFc5iVVBUWi7tVBAM+ZWWz3Kmuc3tnV2KHhSxBwdA/l09
-tugrPXlc9Zjiy3LCRoGB7FWS/b4blE/jUTdeArfTaGRESGYPt7lAvFKb9Xqs6P1I
-xdQG7Hi5E9XPNVd9IpnAbOHh1i4wYN0F/jxs7NFTh59I7HV14dNpWQkg279GnLhL
-vFMxvKPLCdD92nf9LSgLIObvcjK6rSvYW6REvu6z+vrGMdeF1RdXn1+Hc8L5qjQX
-jD1bZdbrKAzl1sG3xQWp5dMaZ2XGzOMZHrGXkzjksVZzhlefUAGepNAtO8LxsAk1
-/lIeaBoxggAFHOtKAlvxYA39SAPC1FRtIY2o2NWP0CRig2ZlYvDsxwOKL9Tm/wlY
-qKcYMoh3jUcOiv0Q/TmZv9dFmUTS3CvLbV2PV6C0KxF1YaBSROs3RdkIpIstD00e
-b2B1YlmUGUPqIIwDERorpDCcwqcbUdw5WYfjKyy6qqDxNRiYWXfS/rgc33ucmzGk
-aHdXu85j
-=74wr
------END PGP SIGNATURE-----
+If it still fails, then I suspect that the power management unit (PMU)
+may be incorrectly configured causing the board to not power up.
 
---d+gehQCzZBTPo54U--
+Try playing with the CONFIG_SPL_MXS_PMU_ options.
+
+From configs/imx28_xea_defconfig, for example:
+
+CONFIG_SPL_MXS_PMU_MINIMAL_VDD5V_CURRENT=3Dy
+CONFIG_SPL_MXS_PMU_DISABLE_BATT_CHARGE=3Dy
+# CONFIG_SPL_MXS_PMU_ENABLE_4P2_LINEAR_REGULATOR is not set
