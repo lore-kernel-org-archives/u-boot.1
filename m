@@ -4,88 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D370CE7A94
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 14:00:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773C8CE7A94
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 14:02:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7938186C71;
-	Mon, 25 Sep 2023 16:00:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dawes.za.net
+	by phobos.denx.de (Postfix) with ESMTP id EC02086D25;
+	Mon, 25 Sep 2023 16:02:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail-com.20230601.gappssmtp.com header.i=@gmail-com.20230601.gappssmtp.com header.b="klDOrNVA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Nc9Fe7cu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9DCE86CC9; Mon, 25 Sep 2023 16:00:42 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
+ id D949286D27; Mon, 25 Sep 2023 16:02:04 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EAC986C67
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 16:00:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62DCA86C67
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 16:02:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dawes.za.net
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogan.dawes@gmail.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-6c4b9e09521so3148850a34.3
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 07:00:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-59f6041395dso39731637b3.1
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 07:02:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail-com.20230601.gappssmtp.com; s=20230601; t=1695650438; x=1696255238;
- darn=lists.denx.de; 
+ d=chromium.org; s=google; t=1695650521; x=1696255321; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=x07Nwl8WzTcJPQMf9zX6Xqn8qM01C8ThcWTQ4qvyn4s=;
- b=klDOrNVAZkyq0Scpy9JouOkucD71yxWKAMc+1BllyxHoGqPUbSkfal9HPFis+MkxyA
- zNu4fG7d8LxmzGBg4XZhrE5fBb5r4wi08bVtfp8fNGrKkNupvO7pbf8ltnuPetXXXgUC
- mVVKRbLGdMhgKa97Ev3Ma9abVZZQW2v1gTMo+xI7usxzV91pel7AmvA/0M7odVJunP+E
- sn5M+n95oNDC+w+JWgoY39+pM02COzaJ5VvbWWmPIl1fG3s3xt7QEbQimuIwGWQ5kyC0
- bPbklCpXj8Btonp70lhsmddKKUpp2uathWxqMMhpcAjDEDX/vkDhTJz7perD9nlgCrUt
- /syQ==
+ bh=PDMpxSKY/ymI4GKkFJJF0TvRMYgsYZaZ18JWkJsVifc=;
+ b=Nc9Fe7cuFQdThF67FcDdUYSj03wR68NKdl3gcb6A1XWtUYpDQfbHaAPupmync07hS6
+ JRI14hZ+zL8t9Y8Yhpl6MWHiDx+c+GwYqXGY9YmfYNWJbD6WS+AH+r+YKRA031lmx4g8
+ 0wMX56HeMhTu7hQh6J7QAabWI/hIDZ0rQRsRw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695650438; x=1696255238;
+ d=1e100.net; s=20230601; t=1695650521; x=1696255321;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=x07Nwl8WzTcJPQMf9zX6Xqn8qM01C8ThcWTQ4qvyn4s=;
- b=MM9JAePMBbhmYH87pbqvk+liga3VDOEFi0LuzyIBAoc8rOxunD3bne9lSqr9XMYLDl
- qZ4hkjkFE0oyY9Dfak0PMp8rimE7dwXWMFdUzWYrLPcWRNwYrAuSuOFiFINoV6WMa7aN
- lSx+AaPmnjAXgPzWogOGiQ1bl1FjlEs/1XFQ9Drg+KBQqDemjt9XzuDw5ORL5TcCDY7H
- mcT0hxXu9rEMu3ydTdazqq6D6d5dV4YrpBm2Yjq0sbDZ2FcirpT94MRZATTctf0KJ1MO
- IU3I++n+Wm2p3egvjxiEOv5o/sZZPdDeJjzLPSVRdHcWV5jzK13AsNNUcZqk8TkYjPU3
- x9Rg==
-X-Gm-Message-State: AOJu0Yx/UPZ1EPEfcDon/iw11x7eyf2mJ4ZS7dfEvkgnJFBRP+crKFj/
- mm3gRh+Enh2CzyRM8+azkABkBbbUVdEJP5r2fJkcwHzK
-X-Google-Smtp-Source: AGHT+IFmG7g+39RVau/TMb0X834T0W6WZbDadGb7q4uE8KH/1cberNPL/5cXdSr+LntmBA8Bo5mSPxzDkRY7pt5G4ns=
-X-Received: by 2002:a9d:6d89:0:b0:6b8:7584:3aa4 with SMTP id
- x9-20020a9d6d89000000b006b875843aa4mr6957297otp.4.1695650437840; Mon, 25 Sep
- 2023 07:00:37 -0700 (PDT)
+ bh=PDMpxSKY/ymI4GKkFJJF0TvRMYgsYZaZ18JWkJsVifc=;
+ b=psHM+LDoJER9v7ptZ35qzXz3JvbW2XNJY9etzAxsweodymUoxoyGyCOxDoIJHhkMP/
+ BhO/4oU5GMSJs737v8sJhm1diH7DWRBidzCl0l4bj+cuYNg4lPGyJIbk29XEq4x24QKa
+ fCLP19Du8bXLaA4THbqSKaEUcoVV/dQyNirDC6lX4OWpe540Ke9/P4Q3yLnjCCYXG69J
+ 4bkB3QUEBEmOxJ+CJZ2cJ2SLVmt1AUYLGsjXyX3MdYa/YMJPMIXmZ64qvp4HpXv90e7R
+ jvVY7kjpBX3RFn+hSFvq6qNczltUZT+zMK31pC2jZh/+5+wTR57NygM0UvKTkpQ+tcEO
+ opvQ==
+X-Gm-Message-State: AOJu0YyQ2Sbnz2W6Oeyy1BrnFwwIwQQF9LX9MLd46gVr8AIZzOnE2dYW
+ ROYxjLZRqVcN69lNEa3EmCY3YxgXbdnbXTlBOvgbyUHqiv8DO4Wxfno=
+X-Google-Smtp-Source: AGHT+IFvyImr94lpb7yN++wRCODPuHDtWVZ7p+wxC0wESVHP9rrKzWP1Ze0VPTzvR+LHyxH1SM1x6NK611H4LSXKo9Q=
+X-Received: by 2002:a81:4ed1:0:b0:59c:a68:d36b with SMTP id
+ c200-20020a814ed1000000b0059c0a68d36bmr7190961ywb.20.1695650520818; Mon, 25
+ Sep 2023 07:02:00 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
- <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
- <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
- <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
- <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
- <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
- <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
- <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
- <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
- <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
- <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
- <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
- <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
- <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
- <CAOYdKdjALruh9v6HBO-MSjzZM0whYhbA5YLJxbKk7yQk7cznGw@mail.gmail.com>
- <CAOMZO5AVuBxGFF_itcxvdG=W9JoRtyzzeeC+wji__uUOQirwZg@mail.gmail.com>
-In-Reply-To: <CAOMZO5AVuBxGFF_itcxvdG=W9JoRtyzzeeC+wji__uUOQirwZg@mail.gmail.com>
-From: Rogan Dawes <rogan@dawes.za.net>
-Date: Mon, 25 Sep 2023 16:00:26 +0200
-Message-ID: <CAOYdKdingLtAvEnth8mSnazQ2fZ_kCsM_2P_dX7tbL2xe9wyVw@mail.gmail.com>
-Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
+References: <691dad64df80993ca4cfb6d0e33964ed26f50bee.1694779918.git.michal.simek@amd.com>
+ <cover.1694779918.git.michal.simek@amd.com>
+ <CAPnjgZ1hf68F3YKTp1p3ruTG2vhgg+F=rn3=2DTZCTTTWnQeUg@mail.gmail.com>
+ <463b713f-97f2-492e-a87b-e71b6d2020ea@amd.com>
+ <CAPnjgZ0OeLASkZM81NqcgpafBrt5Edv1y-MezPCx1utA0L_NZw@mail.gmail.com>
+ <6360851b-aa4f-4ba3-b00b-2a69eeddd349@amd.com>
+In-Reply-To: <6360851b-aa4f-4ba3-b00b-2a69eeddd349@amd.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 25 Sep 2023 08:01:41 -0600
+Message-ID: <CAPnjgZ2fVYJ61HcAh_tv1VcWjiVvkqmnmda4-g13q6Sp+gQA4A@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] trace: Fix alignment logic in flyrecord header
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,76 +85,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
+Hi Michal,
 
-On Mon, 25 Sep 2023 at 15:04, Fabio Estevam <festevam@gmail.com> wrote:
-
-> Hi Rogan,
+On Mon, 25 Sept 2023 at 07:38, Michal Simek <michal.simek@amd.com> wrote:
 >
-> On Mon, Sep 25, 2023 at 6:52=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net> =
-wrote:
+>
+>
+> On 9/25/23 15:10, Simon Glass wrote:
+> > Hi Michal,
 > >
-> > Hi Fabio,
+> > On Mon, 25 Sept 2023 at 00:06, Michal Simek <michal.simek@amd.com> wrote:
+> >>
+> >> Hi Simon,
+> >>
+> >>
+> >> On 9/23/23 20:13, Simon Glass wrote:
+> >>> Current alignment which is using 16 bytes is not correct in connection to
+> >>> trace_clocks description and it's length.
+> >>> That's why use start_addr variable and record proper size based on used
+> >>> entries.
+> >>>
+> >>> Fixes: be16fc81b2ed ("trace: Update proftool to use new binary format").
+> >>> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> >>> Reviewed-by: Simon Glass <sjg@chromium.org>
+> >>> ---
+> >>>
+> >>> Changes in v2:
+> >>> - s/start_addr/start_ofs/g'
+> >>>
+> >>>    tools/proftool.c | 31 +++++++++++++++++++++++++++++--
+> >>>    1 file changed, 29 insertions(+), 2 deletions(-)
+> >>>
+> >>> Applied to u-boot-dm, thanks!
+> >>
+> >> FYI: I have merged it to my tree and already sent pull request to Tom.
+> >> Without it I couldn't pass CI loop to get all reviewed features in.
+> >>
+> >> https://lore.kernel.org/all/ab72c480-e9f8-416e-adf5-726f7d40c4f5@amd.com/
 > >
-> > I used the following diff with "make mx28evk_defconfig", but
-> unfortunately still get absolutely nothing on the DUART when running
-> "mxsloader u-boot.sb". In fact, mxsloader returns immediately on trying
-> to load my own u-boot.sb, whereas it hangs when running the vendor
-> u-boot.sb, I assume because the CALL never returns. Additionally, there
-> is no need to reset the board between attempting a custom u-boot and the
-> vendor u-boot, indicating that the ROM-based SDP protocol handler is stil=
-l
-> running. This suggests that there is something wrong with the format of t=
-he
-> u-boot.sb file which the ROM-based SDP protocol handler is rejecting, I
-> would think?
+> > Ah OK, well that's fine. It was in my patchwork queue still, which
+> > suggests that the patches were not set to 'applied'?
 >
-> I just tested loading u-boot.sb via mxsldr on my imx28-evk.
->
-> I configured the boot jumpers to USB boot, turned on the board and
-> then saw that it gets recognized by the host PC:
->
-> $ dmesg
-> ....
-> [1710347.828895] usb 1-1: new high-speed USB device number 96 using
-> xhci_hcd
-> [1710347.977657] usb 1-1: New USB device found, idVendor=3D15a2,
-> idProduct=3D004f, bcdDevice=3D 0.01
-> [1710347.977672] usb 1-1: New USB device strings: Mfr=3D1, Product=3D2,
-> SerialNumber=3D0
-> [1710347.977678] usb 1-1: Product: ROM Recovery
-> [1710347.977682] usb 1-1: Manufacturer: Freescale,Inc.
-> [1710347.979708] hid-generic 0003:15A2:004F.0014: hiddev0,hidraw1: USB
-> HID v1.10 Device [Freescale,Inc. ROM Recovery] on
-> usb-0000:00:14.0-1/input0
->
-> After that, I loaded the u-boot.sb via mxsldr:
->
-> $ sudo ./mxsldr u-boot.sb
-> Detected: i.MX28
-> Chip ID:          0x2800
-> Chip Revision:    0x0001
-> ROM Version:      0x0101
-> Protocol Version: 0x0100
->
-> Do you get these messages above (both the dmesg as well the messages
-> after running mxsldr)?
+> I am not using patchwork. But I expect my reply to cover letter was recorded there.
 
+Probably. If you reply to each patch, it shows up in the patch, but
+the cover letter is hidden somewhere else.
 
-Yes, I get both the dmesg output showing the usb device, and the output
-from mxsldr.
+If you are not using patchwork, how come you are a custodian? Is
+someone else dealing with patchwork for you?
 
->
->
-> And in the console, I do see the U-Boot messages coming up:
->
-
-I see absolutely nothing in the console.
-
-I=E2=80=99m wondering whether I can possibly execute the vendor SPL with a =
-modern
-u-boot?
-
-And if that works, try and narrow down the differences.
-
-Rogan
+Regards,
+Simon
