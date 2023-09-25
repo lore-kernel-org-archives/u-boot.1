@@ -4,67 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A803CD54BE
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 20:02:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9467CD54BE
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 20:17:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62BA886C5D;
-	Mon, 25 Sep 2023 22:02:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A689086C32;
+	Mon, 25 Sep 2023 22:17:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gq9Oc8Wb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Tf9sHxBs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2826386C1D; Mon, 25 Sep 2023 22:02:24 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 8D1BE86C1D; Mon, 25 Sep 2023 22:17:15 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F30486A51
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 22:02:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 717C286C5D
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 22:17:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-5046bf37ec1so2003804e87.1
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 13:02:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-59f6767a15dso43110047b3.0
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 13:17:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695672141; x=1696276941; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=V/3SXMkwPu0cvcZdBkfZ5jyozfH6LHx6yRZCokE657A=;
- b=gq9Oc8Wbg0CDYhzTS2s/d6L9t1lQDFhIoopPifH3sO174VUZX1iVnPzD7vcIarF8zC
- zjI9+ZU1vvU1USWEqEQ3EUSm1rXK42kxiQK7gJoJlZCQXHmA18BWOYW73FG6WzwrDihh
- Tjw9xFPwlGbGYWC3C+dDvNPkELsZJNIUEoxJZcwUsATBUpdDryEXLA3rdENo3gpTce/L
- lTsXoZoK2rLFXjzqItq+l4aIRngzgx8iYlbLntmg4nQxNHaeP36zQt0fa3HVdDT9YtOZ
- 4qOtSrHaI5m6rCi5LL1ME9hCLQEN1AWRMoJi0e5Kc3Q0fpmeVWiOlkGitZDqWGImtKcO
- 87+w==
+ d=konsulko.com; s=google; t=1695673032; x=1696277832; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=PGvXiyegDovUyn6u8q7q9R8Wph+cmBI2ghbEcP4sbw0=;
+ b=Tf9sHxBstiKgCl0Hp9Cv+n7tHg/Ito2uShMb474Q4bTZe7rqYS5VVYWA904vFLkSoV
+ 0wBlXuXjlGY+NznUUGY0mW2j2cfCW0Al18x/9luUTRXZkGwLExEgf+yX9X6flokTMPIt
+ EfzQNRgHzh3TM6q3j449ql8IshsviJl9UAdXY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695672141; x=1696276941;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=V/3SXMkwPu0cvcZdBkfZ5jyozfH6LHx6yRZCokE657A=;
- b=esY6yhLu7nq55CDpDOR1TQaUOgZQLnVbcdA61ja24Glw9WbEQ7U11ApLZBMx5XJDrV
- 56prKsb8T/qdjQivigeTJcJkPTQbGeRWHWgoXnytWVUnXbaOf+2HUJqOKoK0+T9lQz81
- 64DXdDmjnFBl3YxyLRgi4kEdgnIFFLZw1v45nPec8bTXrna/wmxXaMqWpTPiKm0kaCgY
- sX+KRgBu41aYfed+nksodmVzkWLusxuvC8zbzGrjO41rotdpoTFNdVFHCu5nqQ4BhzqV
- ECDTJjCOwm56TSHybRWZ3eTTUIk9D1Vd+M4HeljzsVILSNKBlkRQ/a4GDzTiYk/akGcu
- XGzA==
-X-Gm-Message-State: AOJu0YxPfwK/wa4KDC3ggBW36z882jzktZtYIFKW/BiFMRtJDtj7arnW
- 8SvR7LfmITsWuIGbsxQXiPSP/KZx3/pPhKBXReM=
-X-Google-Smtp-Source: AGHT+IHqkvDHlbcxqTmiF19yRl07lYmqLChrLrKpXw2o2fCOjJ7L0miO6010Se9eCkp5Ritj0y4LdAAhjYPQl2Tu1NI=
-X-Received: by 2002:a19:9141:0:b0:503:1aae:eca0 with SMTP id
- y1-20020a199141000000b005031aaeeca0mr5485143lfj.44.1695672141260; Mon, 25 Sep
- 2023 13:02:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695673032; x=1696277832;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PGvXiyegDovUyn6u8q7q9R8Wph+cmBI2ghbEcP4sbw0=;
+ b=cVV7xeJiGzMZhiK7kPHiU5Xy77HdhMV6YYjUMgGPJP4pujLFhHoF4NsFiLk5iqi9w+
+ szZH1rTM6O7hs68sngUdiId9DqzyBKE9NWQcRrwgDxB0tU3B23KCbFwWvdVYcPwD+lJb
+ Xup+v9lwclEzsltWAHTdjoslqDf1eBqDnLHRJnHWgumTSkaohXXdDPHqBzE0l0ZJFpfn
+ au0kjuPoQvqriVD9tCli2SwqOKPjuO980PXbdlgPMUHI5FyZA7DhcVs/iDHCarWAtgeO
+ 8QKsUJI6r9xdmzovQgPcnsOmX76g7dOtyDmybXzB94B1istcCm7l9NCJvvfSiqHKBrc4
+ zy+Q==
+X-Gm-Message-State: AOJu0YxnCrXrXVT4mPOxmY3LAvhi/mvBtoL0g3CmNR7zbuLArKPkvrou
+ T/cZhNS7w4qNQCJtGBg4wH1j6w==
+X-Google-Smtp-Source: AGHT+IFqCltfmVStOmKene8CIX/udQuZhPh4MFrkoAY6jlb71B8ChlyPW5QF4uuLD6cksdrs62uIQQ==
+X-Received: by 2002:a81:4f01:0:b0:59f:66a1:bfca with SMTP id
+ d1-20020a814f01000000b0059f66a1bfcamr469752ywb.26.1695673032159; 
+ Mon, 25 Sep 2023 13:17:12 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
+ [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
+ by smtp.gmail.com with ESMTPSA id
+ x124-20020a817c82000000b005773ca61111sm2608717ywc.42.2023.09.25.13.17.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 13:17:11 -0700 (PDT)
+Date: Mon, 25 Sep 2023 16:17:09 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Chunfeng Yun <chunfeng.yun@mediatek.com>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Michal Suchanek <msuchanek@suse.de>, Nikhil M Jain <n-jain1@ti.com>,
+ Pali =?iso-8859-1?Q?Roh=E1r?= <pali@kernel.org>,
+ Ryder Lee <ryder.lee@mediatek.com>, Stefan Roese <sr@denx.de>,
+ Weijie Gao <weijie.gao@mediatek.com>
+Subject: Re: [PATCH v3 38/38] pci: serial: Support reading PCI-register size
+ with base
+Message-ID: <20230925201709.GP305624@bill-the-cat>
+References: <20230924192536.1812799-1-sjg@chromium.org>
+ <20230924192536.1812799-39-sjg@chromium.org>
 MIME-Version: 1.0
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Mon, 25 Sep 2023 13:02:09 -0700
-Message-ID: <CAJaLiFw67ztCo5TY=TPQneYgE5q6RHnj_XbnukQD=qhec3oRdg@mail.gmail.com>
-Subject: bootstd: Scanning for USB bootflow will remove existing SCSI bootflow
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="gSi++YYNmcC/FXCR"
+Content-Disposition: inline
+In-Reply-To: <20230924192536.1812799-39-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,95 +106,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
 
-Here is an observation during testing the bootflow command.
+--gSi++YYNmcC/FXCR
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-If there is a SCSI bootflow, scanning for USB bootflow will remove that existing
-SCSI bootflow. To bring it back, I scanned for SCSI bootflow again, and it was
-back to normal. Perhaps there is some kind of indexing problem?
+On Sun, Sep 24, 2023 at 01:25:23PM -0600, Simon Glass wrote:
 
-Please see the log below after the break.
+> The PCI helpers read only the base address for a PCI region. In some cases
+> the size is needed as well, e.g. to pass along to a driver which needs to
+> know the size of its register area.
+>=20
+> Update the functions to allow the size to be returned. For serial, record
+> the information and provided it with the serial_info() call.
+>=20
+> A limitation still exists in that the size is not available when OF_LIVE
+> is enabled, so take account of that in the tests.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
 
-All the best,
-Tony
+So on platforms that end up here, we see consistently:
+            eaidk-610-rk3399: all +224 spl/u-boot-spl:all +224 spl/u-boot-s=
+pl:text +224 text +224 tpl/u-boot-tpl:all +224 tpl/u-boot-tpl:text +224
+               u-boot: add: 2/0, grow: 3/0 bytes: 224/0 (224)
+                 function                                   old     new   d=
+elta
+                 fdtdec_get_addr_size_auto_noparent           -     124    =
++124
+                 devfdt_get_addr_size_index                   -      72    =
+ +72
+                 ns16550_serial_of_to_plat                  316     328    =
+ +12
+                 ns16550_serial_probe                       132     140    =
+  +8
+                 ns16550_serial_getinfo                      84      92    =
+  +8
+               tpl-u-boot-tpl: add: 2/0, grow: 3/0 bytes: 224/0 (224)
+                 function                                   old     new   d=
+elta
+                 fdtdec_get_addr_size_auto_noparent           -     124    =
++124
+                 devfdt_get_addr_size_index                   -      72    =
+ +72
+                 ns16550_serial_of_to_plat                  316     328    =
+ +12
+                 ns16550_serial_probe                       132     140    =
+  +8
+                 ns16550_serial_getinfo                      84      92    =
+  +8
+               spl-u-boot-spl: add: 2/0, grow: 3/0 bytes: 224/0 (224)
+                 function                                   old     new   d=
+elta
+                 fdtdec_get_addr_size_auto_noparent           -     124    =
++124
+                 devfdt_get_addr_size_index                   -      72    =
+ +72
+                 ns16550_serial_of_to_plat                  316     328    =
+ +12
+                 ns16550_serial_probe                       132     140    =
+  +8
+                 ns16550_serial_getinfo                      84      92    =
+  +8
 
-===============
-<BEGIN LOG>
+Can we optimize this in any way? I'm less concerned with full U-Boot
+growing by 224 bytes than I am by TPL growing by that much too.
 
-U-Boot 2023.10-rc4-tld-1-00044-g9c21b2a350-dirty (Sep 18 2023 - 12:16:59 -0700)
-Thecus N2350
+--=20
+Tom
 
-<snip>
+--gSi++YYNmcC/FXCR
+Content-Type: application/pgp-signature; name="signature.asc"
 
-N2350 > env def -a
-## Resetting to default environment
+-----BEGIN PGP SIGNATURE-----
 
-N2350 > bootflow scan scsi
-pcie0.0: Link down
-pcie1.0: Link down
-scanning bus for devices...
-SATA link 0 timeout.
-Target spinup took 0 ms.
-AHCI 0001.0000 32 slots 2 ports 6 Gbps 0x3 impl SATA mode
-flags: 64bit ncq led only pmp fbss pio slum part sxs
-  Device 0: (1:0) Vendor: ATA Prod.: ST750LX003-1AC15 Rev: SM12
-            Type: Hard Disk
-            Capacity: 715404.8 MB = 698.6 GB (1465149168 x 512)
-** File not found /boot/boot.bmp **
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUR6r4ACgkQFHw5/5Y0
+tyxYPgv+JAiOV1PM2hSj/YPWpqFm8p1Bvp/DJMKJ0ijeidbPugBj9zUZTYO+UlWx
+/qTMGnZ7vi98Q6SREsChENtyOZXuX088FPxV/Hx2LfWrLMsPURFmZJFWb2Zi9O9L
+Zf96hb13rB89K93yfQxeiMx1ayEtGTm3pHMHRTvbhbctUjHfM2SvURnSCBt+uHua
+SRuHawYVbmFHljoNL2WIpiA6FQklj0CsM0l5UElH+WUuIADK34rPpXvKbLcJhRWy
+u0kd44vRHVg1CVibdggjEBi6zUzEf245BEnRXoHOw1chmIiezjk13XY1j4hC9NnJ
+57FVezl6LkohumPTHtwx9Il0UzueqpprbRlujre4qH2G/AZNoEXM8DELocDDzsOt
+KjwV0V8MtRK61hcX9YcP7KQ1z1r1rkn5Gzlm6c4nWg1ud6MBxQY2/ZlsgpnCFpyP
+OCQrcFjKqxWjSPZ1g/nQnKf1yWO3ou8ItCF7ioD1JsMmRf/H8deB4Ydmit1pMbdu
+jAzsPfSI
+=6qBr
+-----END PGP SIGNATURE-----
 
-N2350 > bootflow l
-Showing all bootflows
-Seq  Method       State   Uclass    Part  Name                      Filename
----  -----------  ------  --------  ----  ------------------------
-----------------
-  0  script       ready   scsi         1  ahci_scsi.id1lun0.bootdev
-/boot/boot.scr
----  -----------  ------  --------  ----  ------------------------
-----------------
-(1 bootflow, 1 valid)
-
-N2350 > bootflow scan usb
-Bus usb@58000: USB EHCI 1.00
-Bus usb3@f0000: MVEBU XHCI INIT controller @ 0xf10f4000
-Register 2000120 NbrPorts 2
-Starting the controller
-USB XHCI 1.00
-Bus usb3@f8000: MVEBU XHCI INIT controller @ 0xf10fc000
-Register 2000120 NbrPorts 2
-Starting the controller
-USB XHCI 1.00
-scanning bus usb@58000 for devices... 1 USB Device(s) found
-scanning bus usb3@f0000 for devices... 1 USB Device(s) found
-scanning bus usb3@f8000 for devices... 2 USB Device(s) found
-** File not found /boot/boot.bmp **
-
-N2350 > bootflow l
-Showing all bootflows
-Seq  Method       State   Uclass    Part  Name                      Filename
----  -----------  ------  --------  ----  ------------------------
-----------------
-  0  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
-/boot/boot.scr
----  -----------  ------  --------  ----  ------------------------
-----------------
-(1 bootflow, 1 valid)
-
-N2350 > bootflow scan scsi
-** File not found /boot/boot.bmp **
-** File not found /boot/boot.bmp **
-
-N2350 > bootflow l
-Showing all bootflows
-Seq  Method       State   Uclass    Part  Name                      Filename
----  -----------  ------  --------  ----  ------------------------
-----------------
-  0  script       ready   scsi         1  ahci_scsi.id1lun0.bootdev
-/boot/boot.scr
-  1  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
-/boot/boot.scr
----  -----------  ------  --------  ----  ------------------------
-----------------
-(2 bootflows, 2 valid)
-
-<END LOG>
+--gSi++YYNmcC/FXCR--
