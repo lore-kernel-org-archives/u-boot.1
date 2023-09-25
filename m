@@ -4,79 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6528DCE7A95
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:04:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E471DCE7A95
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:05:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7C1186B4E;
-	Mon, 25 Sep 2023 17:04:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 432CF86D44;
+	Mon, 25 Sep 2023 17:05:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="einn/ldK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S/3dCHwA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0115686C28; Mon, 25 Sep 2023 17:04:16 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 6842C86D45; Mon, 25 Sep 2023 17:05:40 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4486F86C71
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:04:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AD6B86C28
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:05:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5041d6d8b10so11027940e87.2
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:04:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d7f0a60a159so7666258276.0
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:05:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695654252; x=1696259052; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7Txl9Ul5ppPZWo20VjtGmmKq+FIdSbk7aHQLdyBIM4I=;
- b=einn/ldKJWKE8mYd4ElJihe1T/brFh1uv3xbn8Bf0YFXqRLe3adpAl4y03MBrhaJq5
- rENu9mcL6hFrI6kEfzalY5mSJEd2/H6soa8qMA24+/xUaW+uOR//Np9VAWcZzNml0zDt
- VTno8TJhthJ/QGRfJIO5qizfHw95QNXIlX6zg=
+ d=konsulko.com; s=google; t=1695654337; x=1696259137; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=7YR0Suh8wVa+xvkGUacfTAcvBFbfD8wgRtt+PYqDSjU=;
+ b=S/3dCHwAtAnaJWeMMMFqfsC+tsx5t8gSUHMRAj/Z7zqIzr1MZSNCgLW5J6aM3QL0de
+ Gb2zCcFdYV7L59gxwRPL4AoAvqIqxrL02ydDr1J20dx2LcwKSUuCPxcQfPd7BgKGW4ST
+ 1z3SoJUKyvK+WOIM0qIfWe0wWbo0Ky5BgINto=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695654252; x=1696259052;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7Txl9Ul5ppPZWo20VjtGmmKq+FIdSbk7aHQLdyBIM4I=;
- b=ngaIVJiTogTmrwwFmAvWlhHk6KEY5bVNFZYy1PnGn4sVQrYWXYcovzcL0pwKasT33f
- Q7av1idrinDw4f14K2uBo5Nk2pcH8qWutAlSzkWH0jvG8aMw/bcbTF4bg9SdrSsLGkmQ
- Z1DC4diL/wcTSiShBnTXTktXap4BimjxUpAVtgR+FL2ces8SDOxyV/pOxPdlJhrrl604
- XvGSCvn9//x3Cu8mb6XHEE6kJM6h0zUlFEqam4HydV3M3gbw5FGe1+dZYAAYqTw59+b8
- x5sTVlMKeeC6wGGspcD3sTDOmz9qO2TdiHA0kcveKMat0WzruJYv7HV4DiZdWrMv05LB
- RC2A==
-X-Gm-Message-State: AOJu0YzE+1T062VZkqiNqpkJi5xpJcDz2tG1gpwesBwBRbg17abuJZTl
- /qNX4dpT9uwfCIFoaTiy6ofZ57yY4eVi/J8wBExnCQ==
-X-Google-Smtp-Source: AGHT+IE5AhtMP6qEM9yWMqRJ3+7rXd9hu34InnVnapcgdPnz9dWwim+voHnX9Y2fhT6EBxN6ptIT7YU/xt9iAOQjDSg=
-X-Received: by 2002:a05:6512:1044:b0:500:a0a3:80ff with SMTP id
- c4-20020a056512104400b00500a0a380ffmr5994543lfb.58.1695654252173; Mon, 25 Sep
- 2023 08:04:12 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695654337; x=1696259137;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7YR0Suh8wVa+xvkGUacfTAcvBFbfD8wgRtt+PYqDSjU=;
+ b=R8fv47u/lofiLkz0vbQxYwYylurU9mvbqJjtF3H4XLwM+r7PZVyo/yDWnPjtWHXr+w
+ TbkEUeT6nZw1ZqX5ihAqEsXm3wuA742GRt51uEqJg6Y9gyoFlc4yppFAHsIRtoUkJwcM
+ voahNNA+iXMgx0LrVcpV7z/1/0+MQo3VIDtSeXYnNPpzfO/tBlvbIbeAAiN2YIXY7efn
+ prZgs5rdOz8MzImn6YB4bgdLeVXZQvE1Mq9xSCEizOn5cdzBUjhFvctpbjSjZi28iVRm
+ J8R7Ym5bdvXb1xMBQYIVtMFN888fjDOxMfKOGiN16yEcSf10F1agRf03OY7C4Eu/Vr17
+ nT1A==
+X-Gm-Message-State: AOJu0Yxx4pQKEdefVt7usWDKr7IFgwFCosyPLQ16Zm5nnaYR1i29Rh5U
+ shkIv72WgTDuoYTsu4JKzmq8Ow==
+X-Google-Smtp-Source: AGHT+IHC68GW3uoLMwwWXRgmCzJM81cSFQSOU2NNyukiyhUFgiX4ipFPND4TxPxTpu56LN8tpFaThg==
+X-Received: by 2002:a25:903:0:b0:bc9:92c9:7fd1 with SMTP id
+ 3-20020a250903000000b00bc992c97fd1mr6131724ybj.3.1695654336681; 
+ Mon, 25 Sep 2023 08:05:36 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
+ [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
+ by smtp.gmail.com with ESMTPSA id
+ v16-20020a056902029000b00d746487d6f7sm2135333ybh.35.2023.09.25.08.05.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Sep 2023 08:05:36 -0700 (PDT)
+Date: Mon, 25 Sep 2023 11:05:34 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Neha Francis <n-francis@ti.com>, Bryan <bb@ti.com>,
+ Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: Re: Config fragments
+Message-ID: <20230925150534.GA305624@bill-the-cat>
+References: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
+ <20230823155558.GM3953269@bill-the-cat>
+ <C098A4DC-CE20-4516-8971-B52041120BCD@gmail.com>
 MIME-Version: 1.0
-References: <20230907214012.74978-1-sjg@chromium.org>
- <CAL_Jsq+WfWrZErmz4u3_-CoVAuxL21UndcRekfJ1e61ZMMBqRw@mail.gmail.com>
- <CAPnjgZ3ALq9Hr+t4CywO113mKr83xCgFhfz+6=jav3T3R1_TGA@mail.gmail.com>
- <CAL_JsqJdTR9morobxty1egHFmTwL1-Kh3-sQ5CY7xit80fE2jw@mail.gmail.com>
- <CAPnjgZ37MmqinWHcWWToVsMwn+3TY=bzyXAqLFgz6kZN=tZ54g@mail.gmail.com>
-In-Reply-To: <CAPnjgZ37MmqinWHcWWToVsMwn+3TY=bzyXAqLFgz6kZN=tZ54g@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Sep 2023 09:04:00 -0600
-Message-ID: <CAPnjgZ2tZBY-Mq3ncGEBDd9nhVP5NJbqVFzZe7=UmWtN7kELtQ@mail.gmail.com>
-Subject: Re: [PATCH v6 1/2] schemas: Add some common reserved-memory usages
-To: Rob Herring <robh@kernel.org>
-Cc: devicetree@vger.kernel.org, Dhaval Sharma <dhaval@rivosinc.com>, 
- Guo Dong <guo.dong@intel.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Yunhui Cui <cuiyunhui@bytedance.com>, Chiu Chasel <chasel.chiu@intel.com>, 
- Mark Rutland <mark.rutland@arm.com>, linux-acpi@vger.kernel.org, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Ard Biesheuvel <ardb@kernel.org>, 
- Tom Rini <trini@konsulko.com>, Lean Sheng Tan <sheng.tan@9elements.com>, 
- Gua Guo <gua.guo@intel.com>, ron minnich <rminnich@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="zyH6NyMDncZ2YU3c"
+Content-Disposition: inline
+In-Reply-To: <C098A4DC-CE20-4516-8971-B52041120BCD@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,255 +99,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob,
 
-On Thu, 21 Sept 2023 at 10:45, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Rob,
->
-> On Thu, 21 Sept 2023 at 09:20, Rob Herring <robh@kernel.org> wrote:
-> >
-> > On Thu, Sep 21, 2023 at 9:38=E2=80=AFAM Simon Glass <sjg@chromium.org> =
-wrote:
-> > >
-> > > Hi Rob,
-> > >
-> > > On Thu, 21 Sept 2023 at 08:25, Rob Herring <robh@kernel.org> wrote:
-> > > >
-> > > > On Thu, Sep 7, 2023 at 4:40=E2=80=AFPM Simon Glass <sjg@chromium.or=
-g> wrote:
-> > > > >
-> > > > > It is common to split firmware into 'Platform Init', which does t=
-he
-> > > > > initial hardware setup and a "Payload" which selects the OS to be=
- booted.
-> > > > > Thus an handover interface is required between these two pieces.
-> > > > >
-> > > > > This aims to provide an small schema addition for the memory mapp=
-ing
-> > > > > needed to keep these two pieces working together well.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > > Changes in v6:
-> > > > > - Drop mention of UEFI
-> > > > > - Use compatible strings instead of node names
-> > > > >
-> > > > > Changes in v5:
-> > > > > - Drop the memory-map node (should have done that in v4)
-> > > > > - Tidy up schema a bit
-> > > > >
-> > > > > Changes in v4:
-> > > > > - Make use of the reserved-memory node instead of creating a new =
-one
-> > > > >
-> > > > > Changes in v3:
-> > > > > - Reword commit message again
-> > > > > - cc a lot more people, from the FFI patch
-> > > > > - Split out the attributes into the /memory nodes
-> > > > >
-> > > > > Changes in v2:
-> > > > > - Reword commit message
-> > > > >
-> > > > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++=
-++++++
-> > > > >  1 file changed, 71 insertions(+)
-> > > > >  create mode 100644 dtschema/schemas/reserved-memory/common-reser=
-ved.yaml
-> > > > >
-> > > > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yam=
-l b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > > > new file mode 100644
-> > > > > index 0000000..4889f59
-> > > > > --- /dev/null
-> > > > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > > > @@ -0,0 +1,71 @@
-> > > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> > > > > +%YAML 1.2
-> > > > > +---
-> > > > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserv=
-ed.yaml#
-> > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > > +
-> > > > > +title: Common memory reservations
-> > > > > +
-> > > > > +description: |
-> > > > > +  Specifies that the reserved memory region can be used for the =
-purpose
-> > > > > +  indicated by its compatible string.
-> > > > > +
-> > > > > +  Clients may reuse this reserved memory if they understand what=
- it is for,
-> > > > > +  subject to the notes below.
-> > > > > +
-> > > > > +maintainers:
-> > > > > +  - Simon Glass <sjg@chromium.org>
-> > > > > +
-> > > > > +allOf:
-> > > > > +  - $ref: reserved-memory.yaml
-> > > > > +
-> > > > > +properties:
-> > > > > +  compatible:
-> > > > > +    description: |
-> > > > > +      This describes some common memory reservations:
-> > > > > +
-> > > > > +         acpi-reclaim: Contains ACPI tables; memory may be recla=
-imed when the
-> > > > > +           tables are no-longer needed
-> > > >
-> > > > I think you are mixing 2 things with the name here. What the memory
-> > > > contains and what to do with it. You don't need the latter. The
-> > > > consumer of the region will know what to do with it if anything bas=
-ed
-> > > > on knowing what is in the region. For example, The DTB passed to th=
-e
-> > > > OS is typically in a reserved region (probably still /mem-reserve/
-> > > > though). The DTB may remain there forever or the OS could copy it
-> > > > somewhere else and free the reserved region. The Linux kernel does
-> > > > both depending on the arch. (Of course there is no "dtb" compatible
-> > > > because we have to pass the location of the dtb to even find the
-> > > > reserved regions in the first place.)
-> > > >
-> > > > So the question here is whether just "acpi" (or "acpi-tables"?) wou=
-ld
-> > > > be explicit enough?
-> > >
-> > > Yes acpi-tables would be enough.
-> > >
-> > > >
-> > > > > +         acpi-nvs: Contains ACPI Non-volatile-storage data; memo=
-ry may be
-> > > > > +           reclaimed when the tables are no-longer needed
-> > > >
-> > > > No need to say anything about reclaiming.
-> > >
-> > > OK...so what about all that discussion about being able to reclaim th=
-e
-> > > memory if you know what it is for? Where should that be written? Or i=
-s
-> > > it somewhere else already?
-> >
-> > Reclaiming is a policy of the consumer of the data. It belongs in the
-> > documentation of the consumer if you are going to document it.
-> >
-> > The global policy is you can't use reserved regions and you can't
-> > reclaim them if you don't know what they are. If you want to add
-> > something to that effect in reserved-memory.yaml or the spec, that's
-> > fine, but that's not a per compatible thing.
->
-> OK I will do that.
->
-> >
-> > > > I know some ACPIisms (e.g. DSDT), but I don't know what NVS or
-> > > > "Non-volatile-storage data" is in an ACPI context.
-> > > >
-> > > > > +         boot-code: Contains code used for booting; memory may b=
-e reclaimed by
-> > > > > +           the OS when it is running
-> > > > > +         boot-code: Contains data used for booting; memory may b=
-e reclaimed by
-> > > >
-> > > > boot-data?
-> > >
-> > > Yes
-> > >
-> > > >
-> > > > > +           the OS when it is running
-> > > >
-> > > > I thought these were for stages before we get to OS?
-> > >
-> > > Yes...but of course these will be passed on to the OS in some form.
-> > > See above re reclaiming.
-> > >
-> > > >
-> > > > > +         runtime-code: Contains code used for interacting with t=
-he system when
-> > > > > +           running; memory may be reclaimed if this code is not =
-called
-> > > > > +         runtime-data: Contains data used for interacting with t=
-he system when
-> > > > > +           running; memory may be reclaimed if the runtime code =
-is not used
-> > > >
-> > > > "boot" vs. "runtime" seem too vague. However, if these mean EFI boo=
-t
-> > > > time services and runtime services, then I understand exactly what
-> > > > they are. In that case dropping 'uefi,' was a mistake. But EFI has =
-its
-> > > > own way to define these regions, right?
-> > >
-> > > I really don't want to do another round of that circle. I was asked t=
-o
-> > > drop mention of EFI which I did. If these are too vague, what should =
-I
-> > > do instead? Perhaps:
-> > >
-> > > boot-code / data
-> > > os-code / data
-> >
-> > The kernel is boot code (and os code and runtime code). Can I use
->
-> What do you mean by that? The kernel is an OS. It might have an EFI
-> stub or other stuff, but it is not a boot loader. We have to have some
-> generally accepted terms for what is the OS and what is the firmware.
->
-> > these for the kernel image? Certainly not. But they are too vague to
-> > understand when to use them and when not to. Are they specific to EDK2
-> > implementation? Then perhaps they need an 'edk2' prefix.
-> >
-> > Either these are related to EFI boot time services and runtime
-> > services or they aren't. Which is it? If they are related, then EFI
-> > should certainly be mentioned. Review comments are wrong all the time
-> > when the reasoning is missing or misunderstood. Please back up and
-> > explain why these are needed. Maybe it's buried in prior threads
-> > somewhere, but I'm not going back to re-read all that. This patch has
-> > to stand on its own.
->
-> For my email client it is buried in this thread, see the ~20 messages
-> above, or [1]. I took all the EFI stuff out of here because it was
-> going nowhere.
->
-> The text I removed in this version is:
->
-> >>>
-> It is common to split firmware into 'Platform Init', which does the
-> initial hardware setup and a "Payload" which selects the OS to be booted.
-> Thus an handover interface is required between these two pieces.
->
-> Where UEFI boot-time services are not available, but UEFI firmware is
-> present on either side of this interface, information about memory usage
-> and attributes must be presented to the "Payload" in some form.
-> <<<
->
-> Then I tried to explain it in terms of Tianocore being split into two
-> parts, one of which does Platform Init (e.g. silicon setup) and the
-> other which boots the OS. But that got lost is discussion about DXEs,
-> etc. There is no other communication mechanism between these two
-> pieces, nor does either piece know (at runtime or build time) whether
-> the other is there, or whether it is something else (e.g. coreboot or
-> U-Boot). This allows supporting Platform Init / Payload combinations
-> like coreboot->Tianocore, Tianocore->Tianocore. coreboot->U-Boot,
-> etc., i.e. universal compatibility.
->
-> IMhO this binding doesn't need to be about EFI. The concept of code
-> which is used during boot and code which is used by the OS doesn't
-> seem specific to EFI. After all, ARM has PSCI code which presumably
-> lives somewhere.
->
-> So do you really want it to mention EFI?
->
-> I have volunteered to take this on on behalf of the EDK2 people, who
-> are copied on this thread and hoping / relying on something being
-> resolved.
+--zyH6NyMDncZ2YU3c
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Do you have any thoughts on the above? I'd really like to understand
-what needs to be done here. We have a meeting tomorrow on the handoff
-format and I don't have a lot to show for my efforts of the last 5
-weeks.
+On Mon, Sep 25, 2023 at 04:18:45PM +0300, Svyatoslav Ryhel wrote:
+>=20
+>=20
+> 23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80. 18:55:58 GMT+03:00, =
+Tom Rini <trini@konsulko.com> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2(-=
+=D0=BB=D0=B0):
+> >On Wed, Aug 23, 2023 at 09:30:31AM -0600, Simon Glass wrote:
+> >
+> >> Hi,
+> >>=20
+> >> Up until 2023.04 it has been possible to build all the defconfigs but
+> >> with 2023.07 that changed. Tom mentioned this to me recently.
+> >
+> >I'm adding Svyatoslav who is the person that brought in all of the
+> >config fragments that are going to be in v2023.07.
+> >
+> >> Up until 2023.04 we can enumerate all the board configs that can be
+> >> built. We can build any of them using a single name and a single
+> >> defconfig. The boards.cfg file which buildman creates contains a full
+> >> list of things that can be built.
+> >>=20
+> >> From 2023.07 this changes and we now have random .config files
+> >> sprinkled about the place. I say random because they are not connected
+> >> to anything. For example, here is
+> >
+> >They aren't random.  They're, just for v2023.07, in configs/ and then
+> >moving forward, they're in the board directory.  I would like to see
+> >them in more places possibly, but that's not something I'm sure enough
+> >on right now.
+> >
+> >> board/ti/am62x/MAINTAINERS:
+> >>
+> >> AM62x BOARD
+> >> M: Dave Gerlach <d-gerlach@ti.com>
+> >> M: Tom Rini <trini@konsulko.com>
+> >> S: Maintained
+> >> F: board/ti/am62x/
+> >> F: include/configs/am62x_evm.h
+> >> F: configs/am62x_evm_r5_defconfig
+> >> F: configs/am62x_evm_a53_defconfig
+> >>=20
+> >> BEAGLEPLAY BOARD
+> >> M:     Nishanth Menon <nm@ti.com>
+> >> M:     Robert Nelson <robertcnelson@gmail.com>
+> >> M:     Tom Rini <trini@konsulko.com>
+> >> S:     Maintained
+> >> N:     beagleplay
+> >>=20
+> >> In most cases the MAINTAINERS file tells us about each board and until
+> >> [1] I had assumed that was the case. With that patch reverted, these
+> >> are the only 'orphaned' MAINTAINERS entries (buildman
+> >> --maintainer-check):
+> >>=20
+> >> WARNING: orphaned defconfig in board/armltd/vexpress64/MAINTAINERS
+> >> ending at line 8
+> >> WARNING: orphaned defconfig in board/google/veyron/MAINTAINERS ending =
+at line 44
+> >> WARNING: orphaned defconfig in
+> >> board/mikrotik/crs3xx-98dx3236/MAINTAINERS ending at line 7
+> >> WARNING: orphaned defconfig in board/st/common/MAINTAINERS ending at l=
+ine 6
+> >> WARNING: orphaned defconfig in board/ti/am62x/MAINTAINERS ending at li=
+ne 15
+> >>=20
+> >> But Tom advised me that MAINTAINERS is not intended for this purpose,
+> >> so the check has been dropped. I am not suggesting we bring it back,
+> >> necessarily, but if we did, we could use it to specify the .config and
+> >> defconfig files which are used by each board.
+> >
+> >Note that the "N" syntax has been in use, for defconfigs for a lot
+> >longer, and is why the CI check for unmaintained / orphaned boards
+> >stopped working.
+> >
+> >> *Failing that*, I suggest a new 'name.brd' file in the board directory
+> >> to contain this information, e.g.
+> >>=20
+> >> # Contents of board/ti/am62x/beagleplay.brd:
+> >> beagleplay-r5: am62x_evm_r5_defconfig beagleplay_r5.config
+> >> beagleplay-a53: am62x_evm_a53_defconfig beagleplay_a53.config
+> >>=20
+> >> This could be parsed by buildman and other tools, to produce a list of
+> >> available boards and to build each using a single name (e.g. make
+> >> beagleplay-r5_defconfig)
+> >>=20
+> >> What do people think?
+> >
+> >I'm not sure I like this direction honestly.  Do we want CI to cover
+> >these configurations?  Maybe.  But it's just for CI.  Using the TI
+> >examples, I don't know that you can use buildman today to generate a
+> >functional binary (and if you can, if --keep will retain the right
+> >files).
+> >
+> >Maybe we just need to make it clear that if you use config fragments
+> >then you're opting out of CI for that specific platform.  That should be
+> >fine for example for the TI ones that will be built in OE a bunch
+> >anyhow so accidental failure to builds will be caught.  I don't know
+> >about the Tegra platforms.
+> >
+>=20
+> Greetings! Are there any progress regards fragments move or this will
+> hang in mailing list indefinitely?
 
-Regards,
-SImon
+I don't follow, sorry.  Yes, please send a patch on top of next to move
+the fragments for Tegra platforms to match how they're done for TI
+platforms now.
 
-> [1] https://lore.kernel.org/lkml/CAMj1kXHGpCt8qkd6XYQF8mMdivQkTnEWjv6NzsF=
-K=3D+N72LAn=3DQ@mail.gmail.com/
+--=20
+Tom
+
+--zyH6NyMDncZ2YU3c
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmURobcACgkQFHw5/5Y0
+tyyUdAwAnoOvmbLEGqQyqIQzegcjlDB6aW31N5cfuL+X6upLVBF3vkjxgUHUyXXz
+4bSc3bCA5vG+AkgfWNGFHviisx2785SgNak9aFqT6mWpyqgTwN8pGIsFfzue/9vp
+yuLZtGiC1rNfRH0aZyGOcMVwRyNrBRz4+c0DOFALyvmHvadJ/9uaTwrpyjNQgHg0
+y6BIu9AIIfF2dNs7aPmOpu/wEcI+ChA9g6TzyDlwfl5JIiU82VrOGJizyRUfIB9V
+SmLkZeEOrN3IwKAFgtTdj4c25q5xhWa53RRVowswukYLaTlqTYwlBodvHsBe6PFo
+wv8bIUdZWjiT4fO6BGshwHFsEKb8uYw7Nn3J8O67WpiJj3oR2dPC3JN9ZGyzyI3g
+PVNGAF6l4DUqqNEcy8IckQPOeB4I+YtppaZeM9UAUtSl7JUszkpF9dCCWx6nXncK
+DpnjQ1KfpApVDUOlqVWCG/ba3HfM8peO6qu2zbd0PmoAWgEL6HwGTr5QtUvs7zLE
+cfAMLrPh
+=C5ai
+-----END PGP SIGNATURE-----
+
+--zyH6NyMDncZ2YU3c--
