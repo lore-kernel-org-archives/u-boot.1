@@ -4,72 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AE7ACE7A96
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:24:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E3D5CE7A8C
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 15:27:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 792E986D4B;
-	Mon, 25 Sep 2023 17:24:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 1442C86C37;
+	Mon, 25 Sep 2023 17:27:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="If4ToL4J";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="hmCLNGuJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B595C86D41; Mon, 25 Sep 2023 17:24:53 +0200 (CEST)
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::224])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9431586C67; Mon, 25 Sep 2023 17:27:30 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61EF786BEC
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:24:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3896286C06
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 17:27:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 663B2E000D;
- Mon, 25 Sep 2023 15:24:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1695655491;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=8FBXEqtw7DtSRFjTe9aE3nB/Na/ZFvYNCCbHQx6230o=;
- b=If4ToL4JciFWlhP8QB7i+HGNSQ5PjcAOqXalI0QhDdwFmD9BgkOWXyqN7Hy81uKwoPVKXs
- imuh8ohuDBbA0kcCFlNI0xLlVk5LycsG2WRP3R+2CNd2Gtw0eacRVNIvVDD2ApbaEV7ryo
- Hsl7TpFluI+3ww7z1C37hmr0AYtvWDXPuycrfnkhoIB4RQd1+WLC2egYWWhxTluCHzEgxR
- 1lsJcbGFxGq8nWKbFRsHOCWpJMFYp8rU9u4IbPdmzrxWvUpXm1du4Qt5hB0QIp+SZMsAj5
- YzideTKlcCvf34tYWU/LfWdvvmGj1P7UfPY4H916H/cNJEp2t+HosA/1whxyWA==
-Date: Mon, 25 Sep 2023 17:24:47 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rob Herring <robh@kernel.org>, devicetree@vger.kernel.org, U-Boot
- Mailing List <u-boot@lists.denx.de>, linux-mtd@lists.infradead.org, Tom
- Rini <trini@konsulko.com>, Conor Dooley <conor+dt@kernel.org>, Dhruva Gole
- <d-gole@ti.com>, Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, Richard Weinberger
- <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-Message-ID: <20230925172447.43dcef88@xps-13>
-In-Reply-To: <CAPnjgZ3YCQHJ-eXuX8rYx2Qb6QEL+XviFmXYTON6M-sGPWSBBg@mail.gmail.com>
-References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
- <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
- <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
- <20230922174649.GA3320366-robh@kernel.org>
- <CAPnjgZ3ojfAv=BHqOhM=-NnYqCm81Ny=PsGKiNphKTmw++fk9w@mail.gmail.com>
- <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
- <CAPnjgZ3BnD9aX3cNNPiGRKTOj+YeurHCLv6K0TRFhAtY21Qufw@mail.gmail.com>
- <20230925092122.0b615f25@xps-13>
- <CAPnjgZ0Z5J_33HuQF-5XgDFmZim0nHHzvZJOOZobWw_cOJd=9g@mail.gmail.com>
- <20230925164736.5efbf4c0@xps-13>
- <CAPnjgZ3YCQHJ-eXuX8rYx2Qb6QEL+XviFmXYTON6M-sGPWSBBg@mail.gmail.com>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: f2974c59-5bb7-11ee-b453-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id f2974c59-5bb7-11ee-b453-005056994fde;
+ Mon, 25 Sep 2023 17:26:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=hMZ99ParijB8L7hl3AkfylIq/n1TjjbPptWsigoEUSw=;
+ b=hmCLNGuJD7CqcjZfyvs6Z6wlLWIwc4gfJ0CS3+cC7zBV8jNHy4KRR3l5raMmnc172Ywn9opQb33J+
+ xRiP2VsUrSBx62FE8W+mTn6U3v6nSOgNSy+//V68R31z72Mnqa2INdsjutp4egm+QngN9U8+YK917t
+ LEOiAW49L+4yCnAoNkaIbgw33WlkurdL+d417Q2/+E/Tfa7m9lC3MLEWDQm3an9N91THKOuKUsu+jo
+ MFMtv2ca0ka7+S46o0pAYny4JqgcoTTLekJ+QVDod2wm7bU/sbLZ3y1JUoncplzvalC9CjebW9lQY+
+ kotS7R8jTb0mcCsYVc6wPHD/X2JR8Bw==
+X-KPN-MID: 33|jWdReFEsBoDhEZtN8HvDPLLb3TmNWXQRG4DXKW5lbsR3RBeMPlmbLouUONdaCWe
+ NEiUGo/Z4r9J4EvD8w1rqExfq9qAQHoXC9aBeKw1xpIc=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|EzjgluTHO1qVi9ApBoZC9K24gwf3apdF7wkxk2lMII2780qrWEzP0FpyyYHqlAg
+ fJS9T+fXs4pn/RQg1L0V69w==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 07fb085c-5bb8-11ee-9dc8-00505699772e;
+ Mon, 25 Sep 2023 17:27:26 +0200 (CEST)
+Date: Mon, 25 Sep 2023 17:27:26 +0200
+Message-Id: <87ttricly9.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-kumar1@ti.com, nm@ti.com, vigneshr@ti.com,
+ patrick.delaunay@foss.st.com, sjoerd@collabora.com,
+ u-boot@lists.denx.de, xypron.glpk@gmx.de,
+ michal.simek@amd.com, s-anna@ti.com, dsankouski@gmail.com,
+ kettenis@openbsd.org, sumit.garg@linaro.org, sam.shih@mediatek.com
+In-Reply-To: <20230925152126.GC305624@bill-the-cat> (message from Tom Rini on
+ Mon, 25 Sep 2023 11:21:26 -0400)
+Subject: Re: [PATCH] lmb: remove overlapping region with next range
+References: <20230924111832.3741245-1-u-kumar1@ti.com>
+ <20230925152126.GC305624@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,109 +78,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+> Date: Mon, 25 Sep 2023 11:21:26 -0400
+> From: Tom Rini <trini@konsulko.com>
+> 
+> On Sun, Sep 24, 2023 at 04:48:32PM +0530, Udit Kumar wrote:
+> 
+> > In case of new memory range to be added is coalesced
+> > with any already added non last lmb region.
+> > 
+> > And there is possibility that, then region in which new memory
+> > range added is not adjacent to next region. But have some
+> > sections are overlapping.
+> > 
+> > So along with adjacency check with next lmb region,
+> > check for overlap should be done.
+> > 
+> > In case overlap  is found, adjust and merge these two lmb
+> > region into one.
+> > 
+> > Reported-by: Suman Anna <s-anna@ti.com>
+> > Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> 
+> This is good!  I wonder if this addresses the issue that has caused
+> other platforms to need to set CONFIG_LMB_MAX_REGIONS=64 and I'm
+> wondering if any of the other maintainers I've cc'd here can drop back
+> to the default number of regions and then re-test their failure case?
+> Thanks!
 
-> > > > > > > > > I was assuming that I should create a top-level compatibl=
-e =3D "binman"
-> > > > > > > > > node, with subnodes like compatible =3D "binman,bl31-atf"=
-, for example.
-> > > > > > > > > I should use the compatible string to indicate the conten=
-ts, right? =20
-> > > > > > > >
-> > > > > > > > Yes for subnodes, and we already have some somewhat standar=
-d ones for
-> > > > > > > > "u-boot" and "u-boot-env". Though historically, "label" was=
- used. =20
-> > > > > > >
-> > > > > > > Binman has common properties for all entries, including "comp=
-ress"
-> > > > > > > which sets the compression algorithm. =20
-> > > > > >
-> > > > > > I see no issue with adding that. It seems useful and something =
-missing
-> > > > > > in the existing partition schemas. =20
-> > > > >
-> > > > > OK I sent a patch with that.
-> > > > > =20
-> > > > > > =20
-> > > > > > > So perhaps I should start by defining a new binman,bl31-atf w=
-hich has
-> > > > > > > common properties from an "binman,entry" definition? =20
-> > > > > >
-> > > > > > I don't understand the binman prefix. The contents are ATF (or =
-TF-A
-> > > > > > now). Who wrote it to the flash image is not relevant. =20
-> > > > >
-> > > > > Are you suggesting just "atf-bl31", or "arm,atf-bl31" ? Or should=
- we
-> > > > > change it to "tfa-bl31"? =20
-> > > >
-> > > > I don't really understand the relationship with TF-A here. Can't we
-> > > > just have a kind of fixed-partitions with additional properties like
-> > > > the compression? =20
-> > >
-> > > Binman needs to know what to put in there, which is the purpose of the
-> > > compatible string. =20
-> >
-> > But "what" should be put inside the partition is part of the input
-> > argument, not the output. You said (maybe I got this wrong) that the
-> > schema would apply to the output of binman. If you want to let user
-> > know what's inside, maybe it is worth adding a label, but otherwise I
-> > don't like the idea of a compatible for that, which for me would mean:
-> > "here is how to handle that specific portion of the flash/here is how
-> > the flash is organized". =20
->=20
-> But I thought that the compatible string was for that purpose? See for
-> example "brcm,bcm4908-firmware" and "brcm,bcm963xx-imagetag" and
-> "linksys,ns-firmware".
+Hi Tom,
 
-These three examples apparently need specific handling, the partitions
-contain meta-data that a parser needs to check or something like that.
-And finally it looks like partition names are set depending on the
-content that was discovered, so yes, the partition name is likely the
-good location to tell users/OSes what's inside.
+For the Apple M1 systems I don't think it makes sense to reduce the
+number of regions.  These systems don't have TPL or SPL, have plenty
+of memory (at least 8GB) and are really fast.  And we anticipate that
+the number of memory regions will only grow in the future.
 
-> > > > Also, I still don't understand the purpose of this schema. So binman
-> > > > generates an image, you want to flash this image and you would like=
- the
-> > > > tool to generate the corresponding (partition) DT snippet automatic=
-ally.
-> > > > Do I get this right? I don't get why you would need new compatibles=
- for
-> > > > that. =20
-> > >
-> > > It is actually the other way around. The schema tells Binman how to
-> > > build the image (what goes in there and where). Then outputs an
-> > > updated DT which describes where everything ended up, for use by other
-> > > tools, e.g. firmware update. It is a closed loop in that sense. See
-> > > the references for more information. =20
-> >
-> > Maybe I fail to see why you would want these description to be
-> > introduced here, if they are not useful to the OS. =20
->=20
-> Well I was asked to send them to Linux since they apparently don't
-> belong in dt-schema. These are firmware bindings, as indicated, but I
-> took them out of the /firmware node since that is for a different
-> purpose. Rob suggested that partitions was a good place. We have fwupd
-> using DT to hold the firmware-update information, so I expect it will
-> move to use these bindings too.
+Cheers,
 
-I would definitely use fixed partitions as that's what you need then:
-registering where everything starts and ends. If you have "in-band"
-meta data you might require a compatible, but I don't think you
-do, in this case you should probably carry the content through a label
-(which will become the partition name) and we can discuss additional
-properties if needed.
+Mark
 
-> > > [1] https://u-boot.readthedocs.io/en/latest/develop/package/index.html
-> > > [2] https://pretalx.com/media/osfc2019/submissions/Y7EN9V/resources/B=
-inman_-_A_data-controlled_firmware_packer_for_U-B_pFU3n2K.pdf
-> > > [3] https://www.youtube.com/watch?v=3DL84ujgUXBOQ =20
-> > =20
->=20
-> Regards,
-> Simon
-
-
-Thanks,
-Miqu=C3=A8l
+> > ---
+> > logs
+> > https://gist.github.com/uditkumarti/5d08c34442235ad270cfa863792ebcdc
+> > seqeunce : line 1 to 13
+> > without fix : line 96-100
+> > with fix : line 199-202
+> > 
+> >  lib/lmb.c | 37 +++++++++++++++++++++++++++++++++----
+> >  1 file changed, 33 insertions(+), 4 deletions(-)
+> > 
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index b2c233edb6..2580d01d90 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -74,6 +74,16 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
+> >  	return 0;
+> >  }
+> >  
+> > +static long lmb_regions_overlap(struct lmb_region *rgn, unsigned long r1,
+> > +				unsigned long r2)
+> > +{
+> > +	phys_addr_t base1 = rgn->region[r1].base;
+> > +	phys_size_t size1 = rgn->region[r1].size;
+> > +	phys_addr_t base2 = rgn->region[r2].base;
+> > +	phys_size_t size2 = rgn->region[r2].size;
+> > +
+> > +	return lmb_addrs_overlap(base1, size1, base2, size2);
+> > +}
+> >  static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
+> >  				 unsigned long r2)
+> >  {
+> > @@ -81,7 +91,6 @@ static long lmb_regions_adjacent(struct lmb_region *rgn, unsigned long r1,
+> >  	phys_size_t size1 = rgn->region[r1].size;
+> >  	phys_addr_t base2 = rgn->region[r2].base;
+> >  	phys_size_t size2 = rgn->region[r2].size;
+> > -
+> >  	return lmb_addrs_adjacent(base1, size1, base2, size2);
+> >  }
+> >  
+> > @@ -105,6 +114,23 @@ static void lmb_coalesce_regions(struct lmb_region *rgn, unsigned long r1,
+> >  	lmb_remove_region(rgn, r2);
+> >  }
+> >  
+> > +/*Assmptuon : base addr of region 1 < base addr of region 2*/
+> > +static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
+> > +				     unsigned long r2)
+> > +{
+> > +	phys_addr_t base1 = rgn->region[r1].base;
+> > +	phys_size_t size1 = rgn->region[r1].size;
+> > +	phys_addr_t base2 = rgn->region[r2].base;
+> > +	phys_size_t size2 = rgn->region[r2].size;
+> > +
+> > +	if (base1 + size1 > base2 + size2) {
+> > +		printf("This will not be a case any time\n");
+> > +		return;
+> > +	}
+> > +	rgn->region[r1].size = base2 + size2 - base1;
+> > +	lmb_remove_region(rgn, r2);
+> > +}
+> > +
+> >  void lmb_init(struct lmb *lmb)
+> >  {
+> >  #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
+> > @@ -249,7 +275,6 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> >  		phys_size_t rgnflags = rgn->region[i].flags;
+> >  		phys_addr_t end = base + size - 1;
+> >  		phys_addr_t rgnend = rgnbase + rgnsize - 1;
+> > -
+> >  		if (rgnbase <= base && end <= rgnend) {
+> >  			if (flags == rgnflags)
+> >  				/* Already have this region, so we're done */
+> > @@ -278,10 +303,14 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+> >  		}
+> >  	}
+> >  
+> > -	if ((i < rgn->cnt - 1) && lmb_regions_adjacent(rgn, i, i + 1)) {
+> > -		if (rgn->region[i].flags == rgn->region[i + 1].flags) {
+> > +	if (i < rgn->cnt - 1 && rgn->region[i].flags == rgn->region[i + 1].flags)  {
+> > +		if (lmb_regions_adjacent(rgn, i, i + 1)) {
+> >  			lmb_coalesce_regions(rgn, i, i + 1);
+> >  			coalesced++;
+> > +		} else if (lmb_regions_overlap(rgn, i, i + 1)) {
+> > +			/* fix overlapping area */
+> > +			lmb_fix_over_lap_regions(rgn, i, i + 1);
+> > +			coalesced++;
+> >  		}
+> >  	}
+> >  
+> > -- 
+> > 2.34.1
+> > 
+> 
+> -- 
+> Tom
+> 
+> [2:application/pgp-signature Show Save:signature.asc (659B)]
+> 
