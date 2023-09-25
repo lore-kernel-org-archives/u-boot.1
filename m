@@ -4,152 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E96ACE7A81
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 06:06:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 370BCCE7A89
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 06:23:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3CBC8692B;
-	Mon, 25 Sep 2023 08:06:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 961F486B26;
+	Mon, 25 Sep 2023 08:23:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zF+ZYTEf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iidVH9DJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABF7586AE1; Mon, 25 Sep 2023 08:06:35 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20604.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::604])
+ id 9F07886B1D; Mon, 25 Sep 2023 08:23:51 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ABAE82BBF
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:06:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38AC486B10
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 08:23:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=McJUM4/C9rvuFhvjATgXGeiruQIPZVgr63lVfJBchHS5OHGMG44NtUAG9rnLgXw9hz10PNbgZ5S7kueXtXqfaaTM7xKsJmc575RKxiSuxSm7CnlJS2i+mOdhRzeHtkz67a5nOdC1Djmt3pNZ/NEgINSLp9yEA3fqdTqagshP0kjnnoHUERR9dkBtW0zk+XsV04OhTGwnGBw3eqlOeZSmrDrFzVwoC+e68G3/t9MaK/kAl5T927z5DA1zrHczDeZ6PS/keBwh1IJM+X6Wq7KMPCetJwXH1KBAnur3rWcbXPzQeqC/8VOEbrzGlfAN4nl87T/PuWBZjLgIma57UBqrMA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OVRqvv4Ohx2MyBIeR/q1y99MERwk2R5IFNKY+vYurJI=;
- b=JtPspckp15e32FKx1jGImySOmD4OVMc+YJv1cNFEMI9DGJwU88sX7mKBYMxWxBUo9M8LXy2j7Aah073+paPP3OkZS1cZ7F7IJbbmMKmpMICI0S25pmcN+Pu474SdU9h3zyUvSix8aXHHEZa76yeBLbY5wtm4yYDXxb5gjlIEZokOJEoGPdSLR9GsM2rsXS9i6yrJ/d5mS3kX8rl/UdSlgf0PjltOPM6zxqdQE22zqdNrsYa1RYX31C0cPEuH+D3fDLyWLsF1edgVE9+2887daUKppFcBoJAsMx1UnL5FMbpQWrAreAseZY6DKP2ZpL4P2CaNYnu+Rovd/07w4DcbLw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=chromium.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OVRqvv4Ohx2MyBIeR/q1y99MERwk2R5IFNKY+vYurJI=;
- b=zF+ZYTEfvPMet0XOXnwvhOMusUBA32LNvhuTmALXbpf3DyrrJIBdac9QB+7HK7Gf1tpPNIzQREEN2Qz5OrmQ1GYas5Fxm/OYZNJkbxOk2hZf7X+rOUGEOo1xHZoXjHf8vC+5QrZ5NfTuTdoPtaP2GmKbQ0MnNZ87XbYUl/leUlE=
-Received: from BL1PR13CA0078.namprd13.prod.outlook.com (2603:10b6:208:2b8::23)
- by IA0PR12MB8696.namprd12.prod.outlook.com (2603:10b6:208:48f::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.24; Mon, 25 Sep
- 2023 06:06:29 +0000
-Received: from MN1PEPF0000ECD6.namprd02.prod.outlook.com
- (2603:10b6:208:2b8:cafe::50) by BL1PR13CA0078.outlook.office365.com
- (2603:10b6:208:2b8::23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.18 via Frontend
- Transport; Mon, 25 Sep 2023 06:06:29 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MN1PEPF0000ECD6.mail.protection.outlook.com (10.167.242.135) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Mon, 25 Sep 2023 06:06:29 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 25 Sep
- 2023 01:06:15 -0500
-Message-ID: <463b713f-97f2-492e-a87b-e71b6d2020ea@amd.com>
-Date: Mon, 25 Sep 2023 08:05:51 +0200
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38P6NkBF113704;
+ Mon, 25 Sep 2023 01:23:46 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695623026;
+ bh=zg3cFsOVh3rCdZPHJAPreHG4dcaJ07Aki2WqLZESR80=;
+ h=From:Date:Subject:To:CC;
+ b=iidVH9DJ6qdfmLK9hAAavFyEFe9GHuCpVX6PQqU0lHDHVfLDTE8zZL+HJSWigLCH2
+ C9/pddRHZ4UcxSFwuLoM4iW6oGMcugFge9HoK55NN/ndSLT38M4w2iWv7uGqu4gaUN
+ X/zS39gPF6uErrOiQG7uYE8MAqMXtLt2Ho0JVygw=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38P6NksP110102
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 25 Sep 2023 01:23:46 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
+ Sep 2023 01:23:45 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 25 Sep 2023 01:23:45 -0500
+Received: from [127.0.1.1] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38P6NhEo022757;
+ Mon, 25 Sep 2023 01:23:43 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Date: Mon, 25 Sep 2023 11:53:42 +0530
+Subject: [PATCH v3] env: ti: ti_common.env: Fix get_overlaystring for FIT Image
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] trace: Fix alignment logic in flyrecord header
-To: Simon Glass <sjg@chromium.org>
-CC: <u-boot@lists.denx.de>, <git@xilinx.com>, Tom Rini <trini@konsulko.com>
-References: <691dad64df80993ca4cfb6d0e33964ed26f50bee.1694779918.git.michal.simek@amd.com>
- <cover.1694779918.git.michal.simek@amd.com>
- <CAPnjgZ1hf68F3YKTp1p3ruTG2vhgg+F=rn3=2DTZCTTTWnQeUg@mail.gmail.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <CAPnjgZ1hf68F3YKTp1p3ruTG2vhgg+F=rn3=2DTZCTTTWnQeUg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD6:EE_|IA0PR12MB8696:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4fef8a5-6c59-425c-326f-08dbbd8d8f38
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: AY+LtdN5IBRYmTajI/gGwLHaD9pdMofVtnDP08z6Vk0DbvLXpBaHlz+tCsJsqRYMUS8qj2i9W8ycnYa6lch5Pc8ltt+WhtySdieTNJ+QqgPE9jd3lPNKwq29yfifVKXnbYN51WO9DpoZF3vaXRnM3N4Smtc4BNzRvhJQktdoCziZLOzo7RXycf6Yzqf7p1SUqAHrn2IqLN65c7hXNfOV2IIxoeSZ7PfrzRZnirLd1O3uc8tcB0JZf8OfP3/aLS7XFPFRBtaHstqc4prp8Y97ZIRboDs1quqnIBHL3PYGfLBQFJWEhlC6xh4YpzQI8oYiejMKMVnwaxh2uB8gEE2mDOmzly6OkU3fma+bV8m2+zbp+jOq2nYNE/vLdZ/1bB7sbQJLKu81yiQHQI9yO+yaGfoTZF1WK7TYqTKsJaPMoHeZPOridUvQQAj7jHtgpxeFKCd3OgllpkY/LqkXEKWNa03wD98ExcWWobYNBFXe09qcU6qKdfrjSnkHQzSQ1VakZlGFhtpi15GZ9Kr9JaTcBQ2pO4dzPfxxXKPdTpSqe1wfJt37Cy9vvEVGY3NIaYoD5x0mejUttqZ5KxHkXFg1etR9rYgqxDHOLiaQJyMK6QA1Wd8RP2ZnGx9gf5o02RvWhuz5psvqUBNsFUfdNXFNBrQxl6FL0tmck+6YnCSrTlfhqUaMlo4eYvzpv8LOOvwGHG4y4MzNGeW7C7tTEWcRT21pqlEIPr2esUTBcCeI6E/6yAU8KpnbgOJCvyOGbjFpqA56e8Y4+VJ7DM7b+vq0aVrJfCXtf1ONWJn49mj95hU=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(396003)(346002)(136003)(376002)(230922051799003)(186009)(1800799009)(451199024)(82310400011)(36840700001)(46966006)(40470700004)(70206006)(8676002)(40460700003)(8936002)(6666004)(54906003)(2906002)(4326008)(53546011)(16576012)(83380400001)(40480700001)(478600001)(41300700001)(47076005)(426003)(2616005)(36860700001)(336012)(44832011)(316002)(26005)(6916009)(4744005)(70586007)(5660300002)(16526019)(966005)(86362001)(81166007)(82740400003)(36756003)(356005)(31686004)(31696002)(36900700001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2023 06:06:29.3607 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4fef8a5-6c59-425c-326f-08dbbd8d8f38
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD6.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8696
+Message-ID: <20230925-b4-upstream-overlaystring-v3-1-47bd6b973cfd@ti.com>
+X-B4-Tracking: v=1; b=H4sIAG0nEWUC/33NTQqDMBCG4auUrJuSTPztqvcoXZg46kA1kthQE
+ e/eKLR05fL9YJ5ZmEdH6Nn1tDCHgTzZIYY6n5jpqqFFTnVsBgKUKGXKdcJfo58cVj23Ad2zmmP
+ R0HIQOUKhC5M2msX70WFD792+P2J35Cfr5v1VkNv6VcsDNUgueWLSDIs6y2SubhNdjO3ZRgb4Y
+ 0AeMRAZABQ6l6iUSn7Muq4fUs5n/QYBAAA=
+To: Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Aniket Limaye
+ <a-limaye@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1695623023; l=2231;
+ i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
+ bh=AaB78HGUdSkmx7xq2EwhrQ05GPh7x46AiTtC6txxmr8=;
+ b=ca6fwDHpxWM3KWMUeUtECr/Z4Ks2ribqoZgp4ESW8yJxlxmE8lD/ekSxK9gklGCEFiLMlv3LP
+ 5+x9xbuDGQyCI3wVaZxsng5ZDGuSIZhz+AXCqPjch01ypgxoaXi8oCN
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,32 +90,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+After the refactor with conf- nodes in fitImage, overlaystring wasn't
+didn't handle the new conf- nodes in FIT Booting. Fix get_overlaystring
+to handle conf- nodes.
 
+Fixes: 837833a724b7 ("environment: ti: Add get_fit_config command to get FIT config string")
+Reported-by: Aniket Limaye <a-limaye@ti.com>
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Test Logs:
+=> setenv name_overlays ti/k3-dt.dtbo ti/k3-dt1.dtbo
+=> run get_overlaystring
+=> printenv overlaystring
+overlaystring=#conf-ti_k3-dt.dtbo#conf-ti_k3-dt1.dtbo
+---
+Changes in v3:
+- Refactor to remove dependency on boot_fit ( Andrew )
+- Rename it to get_fit_overlaystring as it is not used anywhere else
+- Link to v2: https://lore.kernel.org/r/20230921-b4-upstream-overlaystring-v2-1-22e0b71e3334@ti.com
+---
+ include/env/ti/ti_common.env | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-On 9/23/23 20:13, Simon Glass wrote:
-> Current alignment which is using 16 bytes is not correct in connection to
-> trace_clocks description and it's length.
-> That's why use start_addr variable and record proper size based on used
-> entries.
-> 
-> Fixes: be16fc81b2ed ("trace: Update proftool to use new binary format").
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> Changes in v2:
-> - s/start_addr/start_ofs/g'
-> 
->   tools/proftool.c | 31 +++++++++++++++++++++++++++++--
->   1 file changed, 29 insertions(+), 2 deletions(-)
-> 
-> Applied to u-boot-dm, thanks!
+diff --git a/include/env/ti/ti_common.env b/include/env/ti/ti_common.env
+index e87a41a6590b..f5d84216e3ce 100644
+--- a/include/env/ti/ti_common.env
++++ b/include/env/ti/ti_common.env
+@@ -15,10 +15,10 @@ boot_fit=0
+ addr_fit=0x90000000
+ name_fit=fitImage
+ update_to_fit=setenv loadaddr ${addr_fit}; setenv bootfile ${name_fit}
+-get_overlaystring=
+-	for overlay in $name_overlays;
+-	do;
+-	setenv overlaystring ${overlaystring}'#'${overlay};
++get_fit_overlaystring=
++	for overlay in $name_overlays; do;
++		setexpr name_fit_overlay gsub / _ conf-${overlay};
++		setenv overlaystring ${overlaystring}'#'${name_fit_overlay};
+ 	done;
+ get_fit_config=setexpr name_fit_config gsub / _ conf-${fdtfile}
+ run_fit=run get_fit_config; bootm ${addr_fit}#${name_fit_config}${overlaystring}
+@@ -28,7 +28,7 @@ bootcmd_ti_mmc=
+ 	run main_cpsw0_qsgmii_phyinit; run boot_rprocs;
+ #endif
+ 	if test ${boot_fit} -eq 1;
+-		then run get_fit_${boot}; run get_overlaystring; run run_fit;
++		then run get_fit_${boot}; run get_fit_overlaystring; run run_fit;
+ 	else;
+ 		run get_kern_${boot}; run get_fdt_${boot}; run get_overlay_${boot}; run run_kern;
+ 	fi;
 
-FYI: I have merged it to my tree and already sent pull request to Tom.
-Without it I couldn't pass CI loop to get all reviewed features in.
+---
+base-commit: 2fe4b54556ea6271237b35de68dc458bfceab94c
+change-id: 20230915-b4-upstream-overlaystring-207e28b8c5fb
 
-https://lore.kernel.org/all/ab72c480-e9f8-416e-adf5-726f7d40c4f5@amd.com/
+Best regards,
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
 
-Thanks,
-Michal
