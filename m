@@ -4,86 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B8A0CE7A81
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:52:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8529ECE7A94
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 10:19:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F7BA86BBC;
-	Mon, 25 Sep 2023 11:52:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dawes.za.net
+	by phobos.denx.de (Postfix) with ESMTP id 9A41C86BD3;
+	Mon, 25 Sep 2023 12:19:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail-com.20230601.gappssmtp.com header.i=@gmail-com.20230601.gappssmtp.com header.b="KpFti4qm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u5RjdHRx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A09886BB4; Mon, 25 Sep 2023 11:52:45 +0200 (CEST)
-Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
- [IPv6:2607:f8b0:4864:20::336])
+ id 95FB186B18; Mon, 25 Sep 2023 12:19:37 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A559286BE7
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:52:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1468386BD3
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 12:19:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=dawes.za.net
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogan.dawes@gmail.com
-Received: by mail-ot1-x336.google.com with SMTP id
- 46e09a7af769-6bf2427b947so2984550a34.3
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 02:52:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-50435a9f800so8183451e87.2
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 03:19:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail-com.20230601.gappssmtp.com; s=20230601; t=1695635560; x=1696240360;
- darn=lists.denx.de; 
+ d=linaro.org; s=google; t=1695637171; x=1696241971; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=dv8q3jVwIIP5vfwkQs7r5rT7S1n9E7GG383KbXZSDbI=;
- b=KpFti4qm+emL3vXiyLgTAylSiiegwsezsfUZCDviLYK14fK1vx7yfw8oQxJlGgLq2o
- SHXuxnc18hL0wKIuQmQllFUuMZOCCGiJhPEM5+dQlY3yma+SzGYAOjrqgd8AU210h4mO
- NrliRfzZqPv8PcO51DhQzunH3bUckie81qPjRvuiXtAwC41WJNn8gHDIa9ytCTWEhVUV
- HpuHZEYaKPFYab6CDRjLQBEkLEZKghUUtuLObH7abl3JJ0t+Gv8F5cNRGgv71H10RbwD
- TP4C2aSz23llQlcfmNPMYx2/QjuPPiDDMV8y+IWgjO1qznzU05zjtx5ymt977HUFKlWg
- TFsg==
+ bh=cbbnTUHczSMoyG4uWiyzgRbqw/7qAig+pW7PzyyqUlk=;
+ b=u5RjdHRxihJrOgCRhJhX8Xs4D/dALOZfnARJqNNSDtYWw4hKRcEy88EoaaABkW6j3Q
+ 5nm5o1odfvSIypf2iMxjn7RRHGD5P0d6BcR4Q1HOQPQ+m91iJv7SmJUED6yQRkRMfN7F
+ uPyY0Aubtr9nqm+TJCRx+zaSG2RlRDwgD63cK9Ek2FWFs0yhkt43UR3lq7X+d/M0BRSr
+ Ke5jvkQIj4CYAKcCw1iXiaElidXOe9diyul2SCPwV+qdstbkre3LspMvhFNDKoHnkFmX
+ xRh9StycfEqFfLrf3NaEIgRlqM//6sYU20yrvX0EizSfPaoMbMc9TWP5xXbcMdzS1gBF
+ tHGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695635560; x=1696240360;
+ d=1e100.net; s=20230601; t=1695637171; x=1696241971;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=dv8q3jVwIIP5vfwkQs7r5rT7S1n9E7GG383KbXZSDbI=;
- b=ZEptWf+Bt6WTF6m21exHag0j+LXBBwJpopQiA6sn8PTLALkWNMcCrJsrXXEfrzIJZQ
- ONu+TcDWpD7kOsKadEOodYCdiWNzFEE6kOkJ+Go3MwZHHhSEdBvPHuUPoMMOHvfoTwQo
- SyW/k1+84kkePZMikXri+sQqhluaGPH0+vnyZblEBBw9/fRfn+EytEVPJplsuesfFBqz
- po6oF9gmvgciD/oKUjgN0qUNJy1luGQCF7VMHkqz2D9xlWlv9Wj81fxfTQlsZ9n8yUlE
- 0ylchCMx8VUbSQyZUn+kCj9luJTeu3lMSEBdYKlbeRVb8Sk/BDrE67UWF5gVMa1qsNYb
- hiXg==
-X-Gm-Message-State: AOJu0Yyl+TXLHM0klvqfOc1iT4EHeLv4gTqbbpPmzcr7B/4ICPZqFSmf
- 6bm/tXAoxrvdP6njY/ce5tgGX1R90/HEHLTBu8PfB0c20U0=
-X-Google-Smtp-Source: AGHT+IFro+bN2prM+MjlLzJUyaD4Fvld7NIg+XqMuvUGyrDHsgVDIdxQzEt8L1Zv3xQV/VC3e+78DIU1HQcchiD2/zU=
-X-Received: by 2002:a9d:6d85:0:b0:6bd:a47:7bb6 with SMTP id
- x5-20020a9d6d85000000b006bd0a477bb6mr5857620otp.14.1695635560038; Mon, 25 Sep
- 2023 02:52:40 -0700 (PDT)
+ bh=cbbnTUHczSMoyG4uWiyzgRbqw/7qAig+pW7PzyyqUlk=;
+ b=i5QBpcJIg/Y/XGY5kDTrrsvLdgnwcTLnPDkt3VZjpwXsqIkkq8ihoQXzIx1JOiS8XZ
+ DCfamwNni86G+q1wClb3sn4cCj8OeB9nN1jRPWDQfwI17Jxkwby+a4b6uG+O4T2YgyJ1
+ VZBzfML4zUKraR3dWxhjkE6qwDlc317O8f1tZQJ7hnmjlYwu5KG3N1VzQdbGJmEzHhQ+
+ GriehLRaFI/i7VXb07yV/zv2OCxwkEwhX6CmFpJaIXhw1bO2fEQX4nCIW2GK6Y2N3jSM
+ nkPsOxmKK9gAWAeWa1qz30rt5UhcvJfdcYef2R9mOCCUDG+O3yH9tJhEJ4V11m/deKpi
+ nhUQ==
+X-Gm-Message-State: AOJu0Yx6ijeS7BSU1IpaPMcuVjqGich4DdM/L9rnYwBVyBS/4bmKnSBE
+ Ccs04+OM05yQOd7pPQ3CAqDHprgDuwFju2lF3MQnOQ==
+X-Google-Smtp-Source: AGHT+IHMVQo4e8nZhp2K5D10q6mLhncOfjS9uX305Wzs0WxEOnp/mu9QhK8L68bnwKeYozQiE0Mi9qfMm6ySiEJn5Ps=
+X-Received: by 2002:a05:6512:3582:b0:4fb:7675:1c16 with SMTP id
+ m2-20020a056512358200b004fb76751c16mr4520007lfr.49.1695637171142; Mon, 25 Sep
+ 2023 03:19:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
- <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
- <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
- <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
- <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
- <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
- <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
- <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
- <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
- <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
- <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
- <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
- <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
- <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
-In-Reply-To: <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
-From: Rogan Dawes <rogan@dawes.za.net>
-Date: Mon, 25 Sep 2023 11:52:28 +0200
-Message-ID: <CAOYdKdjALruh9v6HBO-MSjzZM0whYhbA5YLJxbKk7yQk7cznGw@mail.gmail.com>
-Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
+References: <20230830180524.315916-1-sjg@chromium.org>
+ <20230830180524.315916-31-sjg@chromium.org>
+ <ZPA8AtGOel8pko6y@hades>
+ <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
+ <CAC_iWj+HQSGfntZV_5ccUXfi8w6AGp3ETxUUORtm+bhXBuX3gQ@mail.gmail.com>
+ <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
+ <CAC_iWjL-F7Vo+oL0aJG=A4a3es__8S-krt7dBs77Snh1pFkPHQ@mail.gmail.com>
+ <CAPnjgZ2QV3t9FnY_7VBJ4NAYW8zPL9p1bktfcEP86AnXrFoA1w@mail.gmail.com>
+ <CAC_iWjKd60b2pPdQf195ef+a8_3jEHtXh085Sd7uPAik1mCu+Q@mail.gmail.com>
+ <700c3677-6fc1-40b0-9ca2-9f9e2cc824b0@amd.com>
+ <CAC_iWjJUbads2Trqxm_chnhypyZ+tTT2mXUw56z0Py9bgyBhZg@mail.gmail.com>
+ <8528ca89-16a7-48ba-95d3-72e7f3b107eb@amd.com>
+ <CAC_iWj+-Om7Aqh7YQf1LhSZOSETeZgtBMRZKp4_AaixA5RfbHA@mail.gmail.com>
+ <CAPnjgZ1ydE7y4UZPmvyaDTBVZdeQr=ftCnR1QtXB9TtewFkbxw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1ydE7y4UZPmvyaDTBVZdeQr=ftCnR1QtXB9TtewFkbxw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 25 Sep 2023 13:18:55 +0300
+Message-ID: <CAC_iWjLyupx5XUUm99qJg2Zt-G4KeZpTBoxWKOeXZ9nNw8roeg@mail.gmail.com>
+Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: Michal Simek <michal.simek@amd.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Baruch Siach <baruch@tkos.co.il>, 
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nikhil M Jain <n-jain1@ti.com>, 
+ Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,374 +103,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio,
+Hi Simon,
 
-I used the following diff with "make mx28evk_defconfig", but unfortunately
-still get absolutely nothing on the DUART when running "mxsloader u-boot.sb=
-".
-In fact, mxsloader returns immediately on trying to load my own u-boot.sb,
-whereas it hangs when running the vendor u-boot.sb, I assume because the
-CALL never returns. Additionally, there is no need to reset the board
-between attempting a custom u-boot and the vendor u-boot, indicating that
-the ROM-based SDP protocol handler is still running. This suggests that
-there is something wrong with the format of the u-boot.sb file which the
-ROM-based SDP protocol handler is rejecting, I would think?
+[...]
 
-I did confirm that the correct DTB file is being used, as the dts/dt.dtb
-file is identical to arch/arm/dts/imx28-wink-hub-v1.dtb.
-$ diff dts/dt.dtb arch/arm/dts/imx28-wink-hub-v1.dtb
-$ grep -i wink .config
-CONFIG_DEFAULT_DEVICE_TREE=3D"imx28-wink-hub-v1"
-CONFIG_OF_LIST=3D"imx28-wink-hub-v1"
-
-diff --git a/arch/arm/cpu/arm926ejs/mxs/spl_mem_init.c
-b/arch/arm/cpu/arm926ejs/mxs/spl_mem_init.c
-index a94803ee93..f4d6cac878 100644
---- a/arch/arm/cpu/arm926ejs/mxs/spl_mem_init.c
-+++ b/arch/arm/cpu/arm926ejs/mxs/spl_mem_init.c
-@@ -29,7 +29,7 @@ __weak uint32_t mxs_dram_vals[] =3D {
-  0x00000000, 0x00000100, 0x00000000, 0x00000000,
-  0x00000000, 0x00000000, 0x00000000, 0x00000000,
-  0x00000000, 0x00000000, 0x00010101, 0x01010101,
-- 0x000f0f01, 0x0f02020a, 0x00000000, 0x00010101,
-+ 0x000f0f01, 0x0f02020a, 0x00000000, 0x00000101,
-  0x00000100, 0x00000100, 0x00000000, 0x00000002,
-  0x01010000, 0x07080403, 0x06005003, 0x0a0000c8,
-  0x02009c40, 0x0002030c, 0x0036a609, 0x031a0612,
-diff --git a/arch/arm/dts/imx28-wink-hub-v1.dts
-b/arch/arm/dts/imx28-wink-hub-v1.dts
-new file mode 100644
-index 0000000000..b0bddebce8
---- /dev/null
-+++ b/arch/arm/dts/imx28-wink-hub-v1.dts
-@@ -0,0 +1,206 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+// Copyright (C) 2023 Fabio Estevam <festevam@gmail.com>
-+
-+/dts-v1/;
-+#include <dt-bindings/gpio/gpio.h>
-+#include "imx28.dtsi"
-+/ {
-+ model =3D "i.MX28 Wink Hub v1";
-+ compatible =3D "wink,imx28-wink-hub-v1", "fsl,imx28";
-+
-+ memory@40000000 {
-+ device_type =3D "memory";
-+ reg =3D <0x40000000 0>; /* will be filled in by U-Boot */
-+ };
-+
-+ reg_wifi: regulator-wifi {
-+ compatible =3D "regulator-fixed";
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&wifi_enable>;
-+ regulator-name =3D "wifi";
-+ regulator-min-microvolt =3D <3300000>;
-+ regulator-max-microvolt =3D <3300000>;
-+ gpio =3D <&gpio1 13 GPIO_ACTIVE_HIGH>;
-+ enable-active-high;
-+ };
-+
-+ pwmleds {
-+ compatible =3D "pwm-leds";
-+
-+ led-red {
-+ label =3D "red";
-+ max-brightness =3D <255>;
-+ pwms =3D <&pwm 0 500000>;
-+ };
-+
-+ led-green {
-+ label =3D "green";
-+ max-brightness =3D <255>;
-+ pwms =3D <&pwm 1 500000>;
-+ };
-+
-+ led-blue {
-+ label =3D "blue";
-+ max-brightness =3D <255>;
-+ pwms =3D <&pwm 3 500000>;
-+ };
-+ };
-+};
-+
-+&auart0 {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&auart0_pins_a>;
-+ uart-has-rtscts;
-+ status =3D "okay";
-+};
-+
-+&auart1 {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&auart1_2pins_a>;
-+ status =3D "okay";
-+};
-+
-+&auart2 {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&auart2_2pins_a>;
-+ status =3D "okay";
-+};
-+
-+&auart3 {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&auart3_2pins_a>;
-+ status =3D "okay";
-+};
-+
-+&auart4 {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&auart4_pins_a>;
-+ uart-has-rtscts;
-+ status =3D "okay";
-+};
-+
-+&duart {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&duart_pins_c>;
-+ status =3D "okay";
-+};
-+
-+&gpmi {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&gpmi_pins_a &gpmi_pins_extra>;
-+ status =3D "okay";
-+
-+ partition@0 {
-+ label =3D "gpmi-nfc-0-boot";
-+ reg =3D <0x0000000 0x300000>;
-+ read-only;
-+        };
-+
-+ partition@300000 {
-+ label =3D "updater-kernel";
-+ reg =3D <0x0300000 0x400000>;
-+ };
-+
-+ partition@700000 {
-+ label =3D "updater-rootfs";
-+ reg =3D <0x0700000 0x1c00000>;
-+        };
-+
-+ partition@2300000 {
-+ label =3D "database";
-+ reg =3D <0x2300000 0x0800000>;
-+ };
-+
-+ partition@2b00000 {
-+ label =3D "app-kernel";
-+ reg =3D <0x2b00000 0x0800000>;
-+        };
-+
-+ partition@3300000 {
-+ label =3D "gpmi-nfc-general-use";
-+ reg =3D <0x3300000 0x4d00000>;
-+        };
-+};
-+
-+&pwm {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&pwm0_pins_a &pwm1_pins_a &pwm3_pins_a>;
-+ status =3D "okay";
-+};
-+
-+&ssp0 {
-+ compatible =3D "fsl,imx28-mmc";
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&mmc0_4bit_pins_a &mmc0_sck_cfg>;
-+ vmmc-supply =3D <&reg_wifi>;
-+ bus-width =3D <4>;
-+ status =3D "okay";
-+};
-+
-+&ssp3 {
-+ compatible =3D "fsl,imx28-spi";
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&spi3_pins_b>;
-+ status =3D "okay";
-+
-+ spidev@0 {
-+ /* Generic compatible to make spidev happy */
-+ compatible =3D "rohm,dh2228fv";
-+ reg =3D <0>;
-+ spi-max-frequency =3D <24000000>;
-+ };
-+};
-+
-+&usb0 {
-+ dr_mode =3D "peripheral";
-+ status =3D "okay";
-+};
-+
-+&usbphy0  {
-+ status =3D "okay";
-+};
-+
-+&pinctrl {
-+ pinctrl-names =3D "default";
-+ pinctrl-0 =3D <&hog_pins_a>;
-+
-+ hog_pins_a: hog@0 {
-+ reg =3D <0>;
-+ fsl,pinmux-ids =3D <
-+ MX28_PAD_LCD_D07__GPIO_1_7 /*  Z-Wave reset connection high output */
-+ MX28_PAD_LCD_D08__GPIO_1_8 /* Lutron Clear-Connect button  */
-+ MX28_PAD_LCD_D09__GPIO_1_9 /*  Zigbee reset */
-+ MX28_PAD_LCD_D10__GPIO_1_10 /* Lutron reset */
-+ MX28_PAD_LCD_D12__GPIO_1_12 /* Input Zigbee interrupt */
-+ MX28_PAD_LCD_D14__GPIO_1_14 /*  BT  power down */
-+ MX28_PAD_LCD_D15__GPIO_1_15 /* Kidde Reset */
-+ MX28_PAD_LCD_D16__GPIO_1_16 /* Kidde Data */
-+ MX28_PAD_LCD_D19__GPIO_1_19 /* Kidde RF Clock */
-+ MX28_PAD_LCD_D20__GPIO_1_20 /* Kidde GPIO */
-+ >;
-+ fsl,drive-strength =3D <MXS_DRIVE_4mA>;
-+ fsl,voltage =3D <MXS_VOLTAGE_HIGH>;
-+ fsl,pull-up =3D <MXS_PULL_DISABLE>;
-+ };
-+
-+ gpmi_pins_extra: gpmi-pins-extra@0 {
-+ reg =3D <0>;
-+ fsl,pinmux-ids =3D <
-+ MX28_PAD_GPMI_CE1N__GPMI_CE1N
-+ MX28_PAD_GPMI_RDY1__GPMI_READY1
-+ >;
-+ fsl,drive-strength =3D <MXS_DRIVE_4mA>;
-+ fsl,voltage =3D <MXS_VOLTAGE_HIGH>;
-+ fsl,pull-up =3D <MXS_PULL_DISABLE>;
-+ };
-+
-+ wifi_enable: wifi-enable@1 {
-+ reg =3D <1>;
-+ fsl,pinmux-ids =3D <
-+ MX28_PAD_LCD_D13__GPIO_1_13
-+ >;
-+ fsl,drive-strength =3D <MXS_DRIVE_4mA>;
-+ fsl,voltage =3D <MXS_VOLTAGE_HIGH>;
-+ fsl,pull-up =3D <MXS_PULL_DISABLE>;
-+ };
-+};
-diff --git a/arch/arm/dts/imx28.dtsi b/arch/arm/dts/imx28.dtsi
-index 130b4145af..b4e2c8ec05 100644
---- a/arch/arm/dts/imx28.dtsi
-+++ b/arch/arm/dts/imx28.dtsi
-@@ -239,6 +239,17 @@
-  fsl,pull-up =3D <MXS_PULL_DISABLE>;
-  };
-
-+ duart_pins_c: duart@2 {
-+ reg =3D <2>;
-+ fsl,pinmux-ids =3D <
-+ MX28_PAD_I2C0_SCL__DUART_RX
-+ MX28_PAD_I2C0_SDA__DUART_TX
-+ >;
-+ fsl,drive-strength =3D <MXS_DRIVE_8mA>;
-+ fsl,voltage =3D <MXS_VOLTAGE_HIGH>;
-+ fsl,pull-up =3D <MXS_PULL_DISABLE>;
-+ };
-+
-  duart_4pins_a: duart-4pins@0 {
-  reg =3D <0>;
-  fsl,pinmux-ids =3D <
-@@ -404,6 +415,20 @@
-  fsl,pull-up =3D <MXS_PULL_DISABLE>;
-  };
-
-+ auart4_pins_a: auart4-4pins@0 {
-+ reg =3D <0>;
-+ fsl,pinmux-ids =3D <
-+ MX28_PAD_SAIF0_BITCLK__AUART4_RX
-+ MX28_PAD_SAIF0_SDATA0__AUART4_TX
-+ MX28_PAD_SAIF0_MCLK__AUART4_CTS
-+ MX28_PAD_SAIF0_LRCLK__AUART4_RTS
-+ >;
-+ fsl,drive-strength =3D <MXS_DRIVE_4mA>;
-+ fsl,voltage =3D <MXS_VOLTAGE_HIGH>;
-+ fsl,pull-up =3D <MXS_PULL_DISABLE>;
-+ };
-+
-+
-  auart4_2pins_a: auart4@0 {
-  reg =3D <0>;
-  fsl,pinmux-ids =3D <
-@@ -719,6 +744,16 @@
-  fsl,pull-up =3D <MXS_PULL_DISABLE>;
-  };
-
-+ pwm1_pins_a: pwm1@0 {
-+ reg =3D <0>;
-+ fsl,pinmux-ids =3D <
-+ MX28_PAD_PWM1__PWM_1
-+ >;
-+ fsl,drive-strength =3D <MXS_DRIVE_4mA>;
-+ fsl,voltage =3D <MXS_VOLTAGE_HIGH>;
-+ fsl,pull-up =3D <MXS_PULL_DISABLE>;
-+ };
-+
-  pwm2_pins_a: pwm2@0 {
-  reg =3D <0>;
-  fsl,pinmux-ids =3D <
-diff --git a/board/freescale/mx28evk/iomux.c
-b/board/freescale/mx28evk/iomux.c
-index cc0c858854..1e9ba07f8f 100644
---- a/board/freescale/mx28evk/iomux.c
-+++ b/board/freescale/mx28evk/iomux.c
-@@ -22,8 +22,8 @@
-
- const iomux_cfg_t iomux_setup[] =3D {
-  /* DUART */
-- MX28_PAD_PWM0__DUART_RX,
-- MX28_PAD_PWM1__DUART_TX,
-+ MX28_PAD_I2C0_SCL__DUART_RX,
-+ MX28_PAD_I2C0_SDA__DUART_TX,
-
-  /* MMC0 */
-  MX28_PAD_SSP0_DATA0__SSP0_D0 | MUX_CONFIG_SSP0,
-
-On Mon, 25 Sept 2023 at 01:38, Fabio Estevam <festevam@gmail.com> wrote:
-
-> Hi Rogan,
->
-> On Sun, Sep 24, 2023 at 5:16=E2=80=AFPM Rogan Dawes <rogan@dawes.za.net> =
-wrote:
+> > > >>>>>>>>>> +config OF_BLOBLIST
+> > > >>>>>>>>>> +     bool "DTB is provided by a bloblist"
+> > > >>>>>>>>>> +     help
+> > > >>>>>>>>>> +       Select this to read the devicetree from the bloblist. This allows
+> > > >>>>>>>>>> +       using a bloblist to transfer the devicetree between  U-Boot phases.
+> > > >>>>>>>>>> +       The devicetree is stored in the bloblist by an early phase so that
+> > > >>>>>>>>>> +       U-Boot can read it.
+> > > >>>>>>>>>> +
+> > > >>>>>>>>>
+> > > >>>>>>>>> I dont think this is a good idea.  We used to have 4-5 different options
+> > > >>>>>>>>> here, which we tried to clean up and ended up with two very discrete
+> > > >>>>>>>>> options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
+> > > >>>>>>>>> have a header of some sort?  The bloblist literally comes from a previous
+> > > >>>>>>>>> stage bootloader which is what OF_BOARD is here for. So why can't we just
+> > > >>>>>>>>> read the header and figure out if the magic of the bloblist matches?
+> > > >>>>>>>>
+> > > >>>>>>>> No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
+> > > >>>>>>>>
+> > > >>>>>>>> This patch is a standard mechanism to pass the DT from one firmware
+> > > >>>>>>>> phase to the next. We have spent quite a bit of time creating a spec
+> > > >>>>>>>> for it, and we should use it.
+> > > >>>>>>>
+> > > >>>>>>> Where exactly am I objecting using the spec?   Can you please re-read my email?
+> > > >>>>>>> I am actually pointing out we should use the spec *properly*.  So
+> > > >>>>>>> instead of having a Kconfig option for the DT, which is pretty
+> > > >>>>>>> pointless,  we should parse the bloblist.  If the header defined by
+> > > >>>>>>> the *spec* is found, we should just search for the DT in there.
+> > > >>>>>>> What you are doing here, is take the spec, pick a very specific item
+> > > >>>>>>> that the list contains, and create a Kconfig option out of it.  Which
+> > > >>>>>>> basically ignores the discoverable options of the bloblist.  For
+> > > >>>>>>> example, that bloblist can also contain an entry to a TPM eventlog.
+> > > >>>>>>> Should we start creating Kconfig options for all the firmware handoff
+> > > >>>>>>> entries that are defined on that spec?
+> > > >>>>>>
+> > > >>>>>> OK so that is a different thing. What should it do if it expects to find a bloblist but cannot? I want it to throw an error, because I am trying to make the boot deterministic. What do you think?
+> > > >>>>>
+> > > >>>>> That's fine by me.  You can even put that under IS_ENABLED for the
+> > > >>>>> bloblist inside the existing OF_BOARD check.  So I was thinking
+> > > >>>>> - If no bloblist is required in Kconfig options we do the hacks we used to
+> > > >>>>> - if bloblist is selected and the config option is OF_BOARD, throw an
+> > > >>>>> error and mention that the previous stage loader should hand over a DT
+> > > >>>>>
+> > > >>>>> Is that what you had in mind?
+> > > >>>>
+> > > >>>> Yes, that sounds good to me.
+> > > >>>>
+> > > >>>> But I still think we need an OF_BLOBLIST option to control whether the
+> > > >>>> devicetree comes from there.
+> > > >>>>    Otherwise we will end up with people
+> > > >>>> using OF_BOARD to work around it. We also have the SPL case which does
+> > > >>>> not pass the DT in a bloblist...in fact SPL typically doesn't even
+> > > >>>> have the full DT.
+> > > >>>
+> > > >>> Wouldn't IS_ENABLED(BLOBLIST) || IS_ENABLED(SPL_BLOBLIST) be enough?
+> > > >>> Inside the OF_BOARD portion of the function, search for a bloblist if
+> > > >>> the option is enabled.  If you can't find a bloblist and the DT within
+> > > >>> that bloblist, then error out
+> > > >>
+> > > >> Just my 2c here.
+> > > >> I think all options should be possible to disable. It means I can imagine to
+> > > >> disable u-boot not to take care about DT provided from previous stage. The same
+> > > >> is for TPM event log. IMHO every stage should have an option to simply ignore
+> > > >> data pass from previous stage. I don't really mind how it is done but there
+> > > >> should be an option to by purpose say to ignore the part of pass data.
+> > > >
+> > > > That would be done by disabling BLOBLIST.  I don't think having a Kconfig to say
+> > > > "I want a bloblist, but I only want the DT from there" is reasonable
+> > > > (or for any other item the bloblist can carry).   OF_BOARD means the
+> > > > DT will come from a previous stage loader. If bloblist is enabled then
+> > > > the DT must come from there.
+> > >
+> > > I don't agree on this. If bloblist is enabled and DT is passed SW should have a
+> > > freedom to ignore it.
+> > >
+> > > At start everything is likely in sync but later stages before U-Boot can stay at
+> > > certain version but there could be a need to update u-boot where DT from
+> > > previous stage could be broken.
 > >
-> > Hi folks,
-> >
-> > I eventually decided that I did need to figure out the DRAM timings for
-> the Micron chip on my board, but I found an easier way than actually
-> "understanding what I'm doing"! :-)
-> >
-> > I pulled the vendor U-Boot image off the flash, skipped the appropriate
-> number of bytes until I was actually dealing with a u-boot.sb formatted
-> image (looking for the STMP signature I found in the compiled mainline
-> u-boot), then used the Rockbox project's sbtoelf tool to convert the SB
-> back to two ELF files, the SPL.elf and the u-boot.elf. From there I loade=
-d
-> the SPL.elf into ghidra, then went looking for byte sequences found in
-> arch/arm/cpu/arm926ejs/mxs/spl_mem_init.c to see if I could locate them i=
-n
-> the vendor blob. I did, right at the end of the binary, then converted
-> bytes into uint32 sequences so that I could compare with the mxs_dram_val=
-s
-> for CONFIG_MX28.
-> >
-> > Did the compare and found a single bit that is different between the tw=
-o
-> sequences of initialisation values. Literally a 1 to a 0, and that is all=
-.
-> So I built mainline with that change, and an updated iomux_setup because
-> the Wink Hub v1 uses MX28_PAD_I2C0_SCL__DUART_RX and
-> MX28_PAD_I2C0_SDA__DUART_TX for its console pins. i was hoping to see it
-> boot via mxsldr, but unfortunately, I got nothing.
+> > But you *can* ignore it and load a different one later.  The only
+> > restriction is that if you compile u-boot with the assumption an early
+> > stage bootloader provides a DT you *must* find it.  But we will still
+> > just keep 2 options in U-Boot of how you get a DT.
+> > A previous loader provided it or U-Boot provided it.  Whether that
+> > comes from a bloblist or a register is irrelevant no ?
 >
-> Ideally, you should create a new imx28-wink_defconfig.
+> I'm not sure what is being requested here, so I'll leave this as is for v2.
+
+Please don't.   A few mails above there's a discussion of how I'd
+prefer things to look like, please have a look and let me know if
+something isn't clear.
+tl;dr
+ "That's fine by me.  You can even put that under IS_ENABLED for the
+ bloblist inside the existing OF_BOARD check.  So I was thinking
+ - If no bloblist is required in Kconfig options we do the hacks we used to
+ - if bloblist is selected and the config option is OF_BOARD, throw an
+error and mention that the previous stage loader should hand over a DT"
+
 >
-> For a quick test, besides changing iomux_setup, please make sure that
-> arch/arm/dts/imx28-evk.dts also has the duart pins changed.
+> The main struggle I have is how to tell whether you expect to
+> *receive* the DT in the bloblist, or expect it to be attached to the
+> image and be *sent* to the next phase.
+
+bloblist
+
 >
-> > How can I get the SPL to emit something on the console to confirm it is
-> running? i.e. before the DRAM initialisation?
+> SPL - attached to image, send in bloblist
+> U-Boot proper - not attached to image, receive it from bloblist
 >
-> SPL runs from the internal RAM, and should print something to the
-> console prior to the DRAM init.
+> This is exactly the problem that is solved by the 'standard passage'
+> stuff [1] but that depends on Firmware Handoff and [2] which are not
+> ready yet...
 >
+> So I think what I have is the best we can do for now.
+
+We can avoid the extra complication in Kconfigs.  The DT either comes
+from u-boot itself or from a previous stage loader. we don't need the
+extra "it comes from a bloblist".
+If they come from a previous stage loader and BLOBLIST *is* enabled,
+then just scan for the DT, if you don't find it error out.
+
+Thanks
+/Ilias
+>
+> Regards,
+> Simon
+>
+> [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
+> [2] https://patchwork.ozlabs.org/project/uboot/list/?series=365719
