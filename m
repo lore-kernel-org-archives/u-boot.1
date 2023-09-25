@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A78CE7A96
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 11:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF96FCE7A94
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 11:01:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 656ED86BB2;
-	Mon, 25 Sep 2023 13:01:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C9CC786C16;
+	Mon, 25 Sep 2023 13:01:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="Y+TVZhnf";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="BG0p7Wxv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 331C986C27; Mon, 25 Sep 2023 13:01:13 +0200 (CEST)
+ id 139C586BE6; Mon, 25 Sep 2023 13:01:15 +0200 (CEST)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
  (mail-vi1eur05on20713.outbound.protection.outlook.com
  [IPv6:2a01:111:f400:7d00::713])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AE2B86B8B
+ by phobos.denx.de (Postfix) with ESMTPS id 7652A86BD3
  for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 13:01:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GG2te0sLAZyJv/d0w6lBRD7PRmldUGQCzq9x7J2p3F3YTSe6/GqSPqGyIqYHi/tsJAVhbme6R0oefDi9uIVRWpSoUAqRYtMsrV+AW75Da9Rze3t6/vpMNqPfrrOAfiS9RUeuKxrPv2yS0Q4apgXFtU84GXIY2DhJ+KE6RQRBOutdH0cXhd8zUdaSxt1kNYy+o+oqAmpLqDFhmEL0xOCl5ncwnmEprYojoX8MNddS94sTaErnH154Z4mw8StVJhLp0EteiWciewJMKEpkLkdgXdTfGRaCyAAv90SOHg0rSeup+KHkfobVF0Al3HyxP3m5jS8krl6k0fIEcf0XckeivQ==
+ b=Gm52xD6wUH5XBh9g2THnBl1M+moMcmljfbmZoNGCzlkeVpaf7ppRCOgR+mXSUCS7oXbUd1RKu3ogokUonM+0yOtO+UaCMZmHdQQAWcx1/CGfjq4BzSM6MNzpHviCUxxXe6BhrO1j7L3PqnAybJMncLd8c318xm6Km64dNyqBZTPmf+tDEPGHdOkE7pb/GMdXB63tRAFLk3mWvv89pZ3oROxDNrsrZzXEPC5fhSHLwfQlGOMLSmOwzroVvp73v3UfUuAx3O4RUK0iyT+eFbqdUHBWk0PCObwQPRkmVYLiG0t7pZT6DrrdrQakHZSv3IiTKWrkunwIEQxyB4d+reBeGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=c32eKaz9cEJJA/I469nOCXr4wk7Coee9+z7oyvCj9RQ=;
- b=W6DRRmYM7837mksbzEXk6Pq99ybbmTWrYwqyyFa8pcPmfF2Zp4a7YwX8nClO4JvQQj49SlU4LxeeXnDh+IXXdg8v4opa/TZkbrl3BtGqoZ8HpbqtTj8lwjLZXrKQkjZSPCvg8fsm38TKHbwQiJ7llge+htsyXJ/TwbJ26HvkisGzksmVNgkfkXAv41P0fMOs9d2uBRZ93hflmebHihKlhzCsMwd4k/GDJd6kkPlxvONbF8cTOgVkx7JUvCOl3gcZ0cxJ3ASFvfPyCCiied1DpoRCz3tBzgy6njJ6uxPWJJDBksnBa9GdJBjzEi4KbqtCsIbAh5f3dwxb0DvOhvimDg==
+ bh=0nIAJ6UzG1YmMhmDkBgBOK4FPePEHqhNB6YHvhJ761I=;
+ b=gxetNyjj087or6nXhWLIebBPId3rkgPg0SZ6cG/N/tN0afPFd9NtMGKfGMlqPUf0ViRrAdsNGfVL4IujXjugwMwKwQPpxNFnNNOImfHTjtauLh4AwLO7HxA4GIOnEeF7UJumBLZet2qib8n5/mrAjdlti27iQJuXhvywlg1cQhZj0VfAXslkQar+j1Iu864QaNB0pkQnQY17JelMJrFpi6BsMNAkepoeAszjEg+pFMvKC94yd56lYX89jMaiYSsFp3FN5dNTmYh0racpRb02LHgQERbPG7WVGllCagMDGM8+Zdc3OerkJGRuhii23ORrLyaQ/b3kiYmDYHGaQcbYeg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
  dkim=pass header.d=prevas.dk; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=c32eKaz9cEJJA/I469nOCXr4wk7Coee9+z7oyvCj9RQ=;
- b=Y+TVZhnfQxS6h3WB3Ma7yKkUZlR3C98Jwiu1P3yolJxdoGrdUUn0p/ioWyuN0wsN8okVcgFavP2eLmZwb9ROK4YLPB1l1fIdrgGpKSeu8qLrk56V5iFgeF+J+DcdvBa5Vfmzm/y1LzooAbbUvHefs3iDpx4hTGoQAhCSLtY1WCg=
+ bh=0nIAJ6UzG1YmMhmDkBgBOK4FPePEHqhNB6YHvhJ761I=;
+ b=BG0p7Wxvt+PE61URB1JGzR568PwWwuNPgNy45CExtLU2tYvFW29RARBWHEdLd/ilYX0PAR11PU4UPvifjKKTsHZ8/CeJh8/ARU06IEyLnzyn0peXu+QcEMqTIUgsCvqTXVS2CBPkgcLRuTFo7WZw8Q/zwBkhZh47/FXS7FqCaOI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=prevas.dk;
 Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
@@ -57,10 +57,13 @@ To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Michal Suchanek <msuchanek@suse.de>,
  Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [PATCH 0/2] serial: introduce CONFIG_CONSOLE_FLUSH_ON_NEWLINE
-Date: Mon, 25 Sep 2023 13:00:59 +0200
-Message-Id: <20230925110101.376878-1-rasmus.villemoes@prevas.dk>
+Subject: [PATCH 1/2] serial: serial-uclass.c: move definition of _serial_flush
+ up a bit
+Date: Mon, 25 Sep 2023 13:01:00 +0200
+Message-Id: <20230925110101.376878-2-rasmus.villemoes@prevas.dk>
 X-Mailer: git-send-email 2.37.2
+In-Reply-To: <20230925110101.376878-1-rasmus.villemoes@prevas.dk>
+References: <20230925110101.376878-1-rasmus.villemoes@prevas.dk>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-ClientProxiedBy: AS4PR09CA0011.eurprd09.prod.outlook.com
@@ -69,53 +72,53 @@ X-ClientProxiedBy: AS4PR09CA0011.eurprd09.prod.outlook.com
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DU0PR10MB6060:EE_
-X-MS-Office365-Filtering-Correlation-Id: fe7d32d6-a747-49c4-5b6e-08dbbdb6b903
+X-MS-Office365-Filtering-Correlation-Id: 8be5be39-99b1-43e8-cfa2-08dbbdb6b975
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: q2vua1WqlKgk4IZtFNHEtbiJq1I2As9PTZfVG9GWXt+msJbiKoCj9C+IiUVUzLoUQ7/jkbjqMRKPu5dbnw7RW66b7bOsRAWCLb8oNJD3I8zQgyz7ZGWm02ZrlaUqzihWVon7/ulcNxCOE8lpGqK1w72UlD3D6Ufwoio4z6WSrPY1r5nZKA7QwyGLbyF6Xw7uwAUs2rHf6RgRXjQrsqRt70WBnv1qY43Eh0AbqsYeZaUEARwW47wCLvtNCPyLOnztwGAdDuu5LWW4PcS2SSOnOkBXKeNDOA4V+UACqIsVqtPaOQictmQF9PV2/iJ5T9tiV+E/VMkkalVNAS3lWjTBSkmxqMPLPjnayo2+niGLvB9YMnMmnarfGJM692M8jUVX/msNQSI9Jzw57p012R9X7DKlHJF7NoICis9yPoOzJgB8Z3qnmIHYKHImwg2yks0EJP+19ePtiju/0OpmVRGB4L8HWQ+DARlRWBhAK3/Rfw81cXED8KfCFKzdFQmVrypo6Yk6WJxI5h7mehKDn6tz0Me6yihrEjXVkmJ+iQrk1AwNN2oem/ORvKNsaV+eppTw853M4Sp14OST21W0hzhkL9c7zjaeqWzfNKMgPDadCyjTYRfmxN8i7wvm7tFZ+oH5
+X-Microsoft-Antispam-Message-Info: QfhM9OYa4zdrmmWUvuuLHdRIr7rbwjLSO8xSkRfjRsh56u5CtHSKXfao66HwjZlbwF9IgQqqe+y1gz/oSqqPnAlwglXIWjfy9IcLaXYcnxHVu0e08yqBP7DYfdzJFcJq0mf4LQM6JyIEHHOAKdp8sUa1TlvQzU3YgPkbTinp7u4Onnk8ajcCvQ5WyVuWW3CKPJy8uJNZVFv+ZKsmgKDvi0cnMvNWJEExJK5yGEKSprWQNcJticWJUwPbDbvZs4OGdGKkH2y4UrqNxzckC5VCW/UKhs6GPZrvd6WANza0I+bPM+otei2ji3hlMML08YSZaiTemGdJKTKktPKoz26/e7KnFcNAh5rhjSN+TnPEsK4z/DaQXcJ55PfTXwmYok6bvK6umdea2syPjCkRE9AUNvIdaei18Mj6tx432i7rFi8CPQvlspq2e09EpFSdxJNv+Iu2or2yNvxNKREMFJ5iQewHQhJ4q+gNONtxky8SOELYr9roPa/44te2wAQ8FLlQEx2JOQNA1es6HxpqncLJNY5SSX867FiWcPTGbUw90eOKAiVXhJDQX5OmcdDa0KDitMwi4FeeDpc2ALtDvKNEHBWUzvp+/118/XJ4PoVGgCTFl9XNVcdwjL6KMFqG+gvk
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(396003)(136003)(376002)(39850400004)(346002)(230922051799003)(1800799009)(186009)(451199024)(26005)(6666004)(478600001)(2616005)(107886003)(1076003)(36756003)(86362001)(83380400001)(5660300002)(6486002)(52116002)(38350700002)(38100700002)(6506007)(6512007)(4326008)(2906002)(8936002)(8676002)(41300700001)(316002)(54906003)(6916009)(66946007)(66476007)(66556008)(8976002)(4744005)(44832011);
+ SFS:(13230031)(366004)(396003)(136003)(376002)(39850400004)(346002)(230922051799003)(1800799009)(186009)(451199024)(26005)(6666004)(478600001)(2616005)(107886003)(1076003)(36756003)(86362001)(83380400001)(5660300002)(6486002)(52116002)(38350700002)(38100700002)(6506007)(6512007)(4326008)(2906002)(8936002)(8676002)(41300700001)(316002)(54906003)(6916009)(66946007)(66476007)(66556008)(8976002)(44832011);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ee7aWkggH3v/ZTogMPfXYTGANeyYkpvGIsfsVFXR97bte7LP7F1SDX0qudnx?=
- =?us-ascii?Q?u2+ZHWVb8lGXj2lBeRzTa8iowNSTLofBLaMtHZxXC5zYtx8tTG2AXO/632zC?=
- =?us-ascii?Q?20Vz+4z+W3XCKcKGfjTmeULlkUK92INbajN6p3hdWaRgoIT/AY66yRjiqQNX?=
- =?us-ascii?Q?ifTkLlmb0GAhZ10iL2twxi5NZS2++3SMTf+3l0Jjiyr8gHfSYyva+CkmFVeR?=
- =?us-ascii?Q?KeM+Tu3la8b19qljrwPAG6MwF27FoXL4xKYnyN5V8a0zfoeZZSqB11u2L6bz?=
- =?us-ascii?Q?zOGjQo2RzLP4mh7y8ufkOh/2qt1JrtPFFNH2Ixy7hf8/dg/MHuGfu8WM00kf?=
- =?us-ascii?Q?SWLQS3nYhygLfoc41rgj/cL7HzJ6g9n0NIIL/aC9EYZH/95ctn8AEsy0+8KH?=
- =?us-ascii?Q?J0fBpeTSXBshPVvQMww1YjuXx6yxql+OBr8Gdo+o99M5P5jcNRCyu9iTlELL?=
- =?us-ascii?Q?UM21yiqvvl4Chk5VXoegvKqnBS5IKkws6vDHd6lNzR+vM3hTO8X97JATT/zZ?=
- =?us-ascii?Q?NBwYOEhCzsmp0V5CqQAXlMpr5aMQ15WDgN26hOHDiqFPNdVrcszjwgm1FTU6?=
- =?us-ascii?Q?hn4xXrKYOrYmqPJQC9Yw/+9Pq46vAYXQNObEhX2G5563UxMxVC+r4b4TApQU?=
- =?us-ascii?Q?8U/174VYK4C1Ozku0Q6mYYHZxYgvQpnkb4rTkswkjQARj3/qyNpyEaf+yN/k?=
- =?us-ascii?Q?wqCJv7A5fpb91kCtEfL8bOlqT8bNxooNvuSVK0Rzrz+6kgM4tPT0417H1hZf?=
- =?us-ascii?Q?4x6jcl9Lv6MUtGGEH+WooWbcd09n3pNN6Al7vtJekUQTTUyF44XUjh3sirIz?=
- =?us-ascii?Q?DsoNOl2dEMyZs+uBtnG8A7NWwUvdZxCR3IKfMnbI+JHeZAWDWuax377I/vHd?=
- =?us-ascii?Q?uGgKZzSApWKXvZEN92Z3bLiXEZvpxXYtDh2ZAtf+36hvNx8k3qSh9CImkLgz?=
- =?us-ascii?Q?DoEzIWHZqIWDjRHJ4OU2Ol2heSfwaugsDFlLE3DHvSuxz/IJEXnpFTyEAYFw?=
- =?us-ascii?Q?k1KUdyLYN0epUnlTXHFrLJEVMus8INEXGXR7dRK2fJydy120ttQEikuumlKj?=
- =?us-ascii?Q?GooqpGmOpKOlFKWFUFgALCFEbwDLhb5chw01vnZCyuUQ9icB2pMo75Yig/iJ?=
- =?us-ascii?Q?GbR4RSR3E2PGGC155aG5cdO4qG/g6chzbv6UT1fBAYt6dPunAOEu80D4vG9o?=
- =?us-ascii?Q?JC934NWxNnci0Voyt2QJNY9X6+nVIY/EOJ3xgI6Cx5OFeF7ttLaHxG3iYSl4?=
- =?us-ascii?Q?IPwpWpB67DgONjNCiQS29LjP1GJIB47oQxo2Z9tKfiBr3f7kJ8XIw9z/r0h5?=
- =?us-ascii?Q?O5E1U9Lpa43Mvf2K5vXxmexof6bgfjNw5nT7NePFOrsu/rNiZE/3VeF/Le5B?=
- =?us-ascii?Q?VrxpEZM0PKedDgLMKlClyE2x/bm39mvjSm7S+DSk5REm+KiigWF/xmB4iT8m?=
- =?us-ascii?Q?hbK7ANVRYaoN1/B4tVFW5Io7cGllkjzsIBk4W3qQgT9JRkpg23mHEXwX61yw?=
- =?us-ascii?Q?jz2+EeTbMnJQlJvMr7KGfOoQjepKYo8d99d+rt6LVDW81KXfq1OMdCWvTjMj?=
- =?us-ascii?Q?CAtbOqyLifsnPDFiT9fAkiUV2YyfwaXkDkU2/GPyoTtji14Eu+hHJK2d4JiP?=
- =?us-ascii?Q?jA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?2P51dqv/bYnhGV4CssLyc2PJmIRJzHrHQKzblLJvp9Mh6l23uoMds+jbpjN3?=
+ =?us-ascii?Q?sOunCfaMLgixZu6zKB8WnKsfZ8+P2y/gzK1R4ZR3slt6WpmTHVA8P4ficJt8?=
+ =?us-ascii?Q?Ic6RDDSgva/EXvxwXHYOaWeaE8SI18VotWnVGRileA/0jSYdkQxqS8yiwhWn?=
+ =?us-ascii?Q?AfFhdTBICoh8m28r0gi91IPkXSMmGJ8qvdmtYhEaSHad3mimEDXEwzIc7k27?=
+ =?us-ascii?Q?aAIQgcKZ3IDzRn0nypxd6g+9PbKqAFHIJUEM8YHeKAoeWl4GFV+w7fM7Lavd?=
+ =?us-ascii?Q?21qFrqRcwdTOOXQvAtlOdnU7N+Rb0tvcFdkpbJ+owFQ4qHB14q56LZsuXn88?=
+ =?us-ascii?Q?ExkcqHLRse86juQbRfwVt4+81/qt6vt0grvEkOCnD2qIufUsgINv0SsiQl4E?=
+ =?us-ascii?Q?Gfd+IUSKRSowlYK7OwlzQOBftDqXN76bVGEoewY3SDDmVRl+tKpzdZpPimlU?=
+ =?us-ascii?Q?r04Nf3+gRNHUY8SzUsefajMZ0TKJirrNFiLg5icIbtbi7B4PbVQGqt12qzMJ?=
+ =?us-ascii?Q?1yaiGjBtC8KBq+dp6atlZDHsxjGqA5wxBDftaezucjsEH138Olth4Z+D6eR1?=
+ =?us-ascii?Q?1yoh88WAnm5hQjOY5f34tP8qM/U8puvhxSXrkKN48dQZuHivkR2ymIIEinKg?=
+ =?us-ascii?Q?P08nFekL3whjKE4p+4DETaHBfb1lE531AJGpbJ324sklhVSK0p6KKQ6cSlHA?=
+ =?us-ascii?Q?ZtGAgEakMJk3ixzHNelxeHJo6AKK5FxOzlnF8QIm0h/145nhm98bYNxxdt23?=
+ =?us-ascii?Q?90on27TjeCfRZDYHHhoTv6A2Wz2IUzoKgRapR2r5rsjAi5814Id8bc3V5bwi?=
+ =?us-ascii?Q?jNG72F+uBzPR1JGfm+iYhm8/q21ZvZoZWifegWO+PTC0T1x1J+RqJ+kW+kzt?=
+ =?us-ascii?Q?Vi5LxJhZ4wYBL7hdX0BziVAPVCPkJVD5aLs5TAbOMShlZ/d+rsjueyIlI4PP?=
+ =?us-ascii?Q?ANEmVVCX5uoDIhLmvMApjIPAWSWWfNzOc3FZIOqaj+eMhIE3Ctxf5TCF6v94?=
+ =?us-ascii?Q?+LAzuh9tECR1g/dDlXQ/JAgOdCvE4ft2cl59QP5yLinbrA+sbpTbRXHwhPm1?=
+ =?us-ascii?Q?N7SB9yIfBZQrhVwWAZksTAZlQjgUP/gheU4+Xai6aYFG5CGhKYMr8bZor4+N?=
+ =?us-ascii?Q?K8Sug8A11p9fNPmGPJf28wx7iU4Td43AkeahVGwLMs5I1WTni9CnwxSJMpql?=
+ =?us-ascii?Q?LSIn9oZZx/4MYgnUfTZy/06fYrg1NqjTmi5qGEsEzMPB1hGaZPegWW9q+tD7?=
+ =?us-ascii?Q?1D2XlraxxAIfL06YRkzukBaD6h58q+na7bTdrVJ461gpWhy1k+7qCJxIhJWj?=
+ =?us-ascii?Q?Z3TJENDH74LwcM3X1ylmJv41yozMBFjoRNufYAHxg+6sbCEjvC5JNc1wR/JM?=
+ =?us-ascii?Q?jqMiWM3ghifFXjAhrKhMwCRWkmor0zV3BB0UYlI2D3TkdJ/+sUU5yYhtOyYP?=
+ =?us-ascii?Q?r7uTkBz8Y5AVQW+hjtjY3tGtd7o6ed0sy74A4BamNG/zUg5lT+I4HEAlzxDv?=
+ =?us-ascii?Q?PH9TGVnwhmdcF6LruSzP0ni8vyNdNbDdD9QE+7F+SZ0Q6P8HcWX3RECDdPZ+?=
+ =?us-ascii?Q?Z6l5LcgE4OaLVEaiPL3iDwoFkMWCmmf2Nd6tmITrEqfEKiF31RdC5BZBmwGw?=
+ =?us-ascii?Q?qg=3D=3D?=
 X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: fe7d32d6-a747-49c4-5b6e-08dbbdb6b903
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8be5be39-99b1-43e8-cfa2-08dbbdb6b975
 X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2023 11:01:09.0316 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2023 11:01:09.7556 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: i+DHHzaUnb4IX+6glqiZohoFrRbqeLV9+N+F1xIhEG+jS9e14NT5xb8Gr3ypwgS1pO8/cKbdsTBs/DzgXUGr7wCyzVkWWe1fhHlH6iDS6w4=
+X-MS-Exchange-CrossTenant-UserPrincipalName: t+v9fQx1cvmvP6uebc5cmVpSqzYiBrM1169rn+Gm2EUu2Z2roU1wgz05sS9X/7hksmrx+l0WAd4GarA810MqeQ4DYhbypOO3wqVWHo5XCTA=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6060
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -133,27 +136,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-1/2 is trivial prep. Commit log from that 2/2:
+Preparation for next patch.
 
-When debugging, one sometimes only gets partial output lines or
-nothing at all from the last printf, because the uart has a largish
-buffer, and the code after the printf() may cause the CPU to hang
-before the uart IP has time to actually emit all the characters. That
-can be very confusing, because one doesn't then know exactly where the
-hang happens.
+Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+---
+ drivers/serial/serial-uclass.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-Introduce a config knob allowing one to wait for the uart fifo to
-drain whenever a newline character is printed, roughly corresponding
-to the effect of setvbuf(..., _IOLBF, ...) in ordinary C programs.
-
-Rasmus Villemoes (2):
-  serial: serial-uclass.c: move definition of _serial_flush up a bit
-  serial: introduce CONFIG_CONSOLE_FLUSH_ON_NEWLINE
-
- common/Kconfig                 | 11 +++++++++++
- drivers/serial/serial-uclass.c | 28 ++++++++++++++++------------
- 2 files changed, 27 insertions(+), 12 deletions(-)
-
+diff --git a/drivers/serial/serial-uclass.c b/drivers/serial/serial-uclass.c
+index 067fae2614..2f75ff878c 100644
+--- a/drivers/serial/serial-uclass.c
++++ b/drivers/serial/serial-uclass.c
+@@ -181,6 +181,18 @@ int serial_initialize(void)
+ 	return serial_init();
+ }
+ 
++#ifdef CONFIG_CONSOLE_FLUSH_SUPPORT
++static void _serial_flush(struct udevice *dev)
++{
++	struct dm_serial_ops *ops = serial_get_ops(dev);
++
++	if (!ops->pending)
++		return;
++	while (ops->pending(dev, false) > 0)
++		;
++}
++#endif
++
+ static void _serial_putc(struct udevice *dev, char ch)
+ {
+ 	struct dm_serial_ops *ops = serial_get_ops(dev);
+@@ -234,18 +246,6 @@ static void _serial_puts(struct udevice *dev, const char *str)
+ 	} while (*str);
+ }
+ 
+-#ifdef CONFIG_CONSOLE_FLUSH_SUPPORT
+-static void _serial_flush(struct udevice *dev)
+-{
+-	struct dm_serial_ops *ops = serial_get_ops(dev);
+-
+-	if (!ops->pending)
+-		return;
+-	while (ops->pending(dev, false) > 0)
+-		;
+-}
+-#endif
+-
+ static int __serial_getc(struct udevice *dev)
+ {
+ 	struct dm_serial_ops *ops = serial_get_ops(dev);
 -- 
 2.37.2
 
