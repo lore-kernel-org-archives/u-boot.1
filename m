@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F28EBCE7A94
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 14:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B54F8CE7A94
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 14:05:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98A4786D49;
-	Mon, 25 Sep 2023 16:02:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2418086D3B;
+	Mon, 25 Sep 2023 16:05:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IsZga1Dw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="leJi3aCy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98D0C86D4A; Mon, 25 Sep 2023 16:02:45 +0200 (CEST)
-Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
- [IPv6:2607:f8b0:4864:20::b33])
+ id 1F81586D3F; Mon, 25 Sep 2023 16:05:10 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FAEC86D49
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 16:02:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 174C886D27
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 16:05:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb33.google.com with SMTP id
- 3f1490d57ef6-d865c441a54so4637234276.1
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 07:02:43 -0700 (PDT)
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-d77ad095f13so7309886276.2
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 07:05:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695650562; x=1696255362; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1695650707; x=1696255507; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=cU9XPwemDcP7TI80eU/1BM1jxfagSsecU6zkcKSC/nc=;
- b=IsZga1DwiTCc2qJgB8iD2k5ZuYSKK54ojh2P0wNfcOX9a2KOrJqs5WOpGKeKQVTdwJ
- 5MMCX+IsjZXRqwLR7oqQIKL0kM2eHBfyb6nKB9ivR4ImFDVTjdUQnvebtFeB/+Qg5gvD
- tDY5qSqRnd9i8uSwirMqHKzCg7LPuKykyQsgU=
+ bh=xXMjhNWPArnzwPX3N50nV8aFadS+S1ISHEdz/D8pJKE=;
+ b=leJi3aCyQGbwH28mcZ8DTAEqq9bSekXwoAI8ra2uJxcNlemuovNt8BvGqheY4j4EPF
+ GVxqshoobIo0Z5ZUrgxpId5fFQR4aAm+n/JY8wVffOIla9N0dYTOAxq0IaOdgS55aY1e
+ hMUTnIV8Brm8+ZG6qUxNM3vpyvHPc4zglx9Os=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695650562; x=1696255362;
+ d=1e100.net; s=20230601; t=1695650707; x=1696255507;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cU9XPwemDcP7TI80eU/1BM1jxfagSsecU6zkcKSC/nc=;
- b=eywC4+3l6HjQ3YcUuDq39fXuSDUl1BhRp95znQ9+f+BmQg+VbVDO33n3MHLjCRAFqY
- 8k8lzPnpbfAMXYS3ky3M49n+RLHbFrhiNhZf3IbY5VEUlTfxl7QIZcuhGHKVISo8JFjq
- JCDaG4ixr+dV9KSA34IbyMS3sVifOvNLMmCN8+LugSkSWpmDemAKYTPBJZ9Lkd75H1V5
- 9f9KS7VVZWC7hmu8FhuXnf/K+Cgrp5Dja4s8DXYDxOl3HutVuxnAI87ctDgqU2WgD5ej
- pKfnimHNIwJv5r/wY8p0RYGSJld4juIDQCh7Q2xuQqZgjPg9ZSrhBBg+DHLLCMLGY1Yw
- MwPA==
-X-Gm-Message-State: AOJu0Yzxn+tVax1Y9RYLrq8Aud3LZ15bR2xGg9DQmlbHr3IkZq46MVWv
- PNSzP7iWu+ui0ngyjJ94HB8BBPDKu2eIl5KPp6GM/A==
-X-Google-Smtp-Source: AGHT+IE6R0o199Ag4GXjdj7GaqhvQ3T5Ra/pKT+4RO0lGQG/Pt0WaJUwZ4oQjQawD1D8v+t3ijqwNw==
-X-Received: by 2002:a25:68d3:0:b0:d81:6a54:48f0 with SMTP id
- d202-20020a2568d3000000b00d816a5448f0mr5945829ybc.22.1695650561859; 
- Mon, 25 Sep 2023 07:02:41 -0700 (PDT)
+ bh=xXMjhNWPArnzwPX3N50nV8aFadS+S1ISHEdz/D8pJKE=;
+ b=PS3bf42xphJwi4JnxRzzLUafdAdzkz9j1bRJ2f1mnMC0da4ltCI+3nqZChBeuJQ0CY
+ DjVuTHsgUQwBBeoxz7lnmcEExvAcvyG9KYaIDHRU9zVO1RbLF7otJ0LRj5p4YxH6/Si0
+ afUe+dC7vIpMuHXN7t4w2+xk6XwR2V1J/XxL4FgJ3tFNX6OjAEsfvpiHGoxYuQKJLoz0
+ rVnm+IZ9DEbY3bIpr+w0YXiUn82N4oY4KOEjO1rwFnZAsWzZPBTQFs/2U/4nppV4c3s3
+ RiWTDoVgPv5amI061B+Q85vAN55meDsDdD5r6e0GIWog1Ze7BPu2Dl8RlvB2nPiv1eeo
+ du/g==
+X-Gm-Message-State: AOJu0YyAZPfxyi8sJ45ksQoH0TYcqssHz/I3mB4UvUay6vhKuWyk9GFt
+ AZiCTISxr1J69p7ujByBe9eAKdeZRxN38GaBnBMkrw==
+X-Google-Smtp-Source: AGHT+IFvbC0qWGwk977235TWbUdIX7YLsMFBGN59IPcaUlrkNFiUpyUQ25UfZ/7x7oq2h0CHSOECEg==
+X-Received: by 2002:a25:ccd6:0:b0:d7e:a15b:58b with SMTP id
+ l205-20020a25ccd6000000b00d7ea15b058bmr5499980ybf.8.1695650706836; 
+ Mon, 25 Sep 2023 07:05:06 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-d32b-b307-decd-cdc4.res6.spectrum.com.
  [2603:6081:7b00:6400:d32b:b307:decd:cdc4])
  by smtp.gmail.com with ESMTPSA id
- l26-20020a25b31a000000b00d7745e2bb19sm2201624ybj.29.2023.09.25.07.02.41
+ t3-20020a056902018300b00d1b86efc0ffsm2121918ybh.6.2023.09.25.07.05.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 07:02:41 -0700 (PDT)
-Date: Mon, 25 Sep 2023 10:02:39 -0400
+ Mon, 25 Sep 2023 07:05:06 -0700 (PDT)
+Date: Mon, 25 Sep 2023 10:05:04 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Stefano Babic <sbabic@denx.de>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>
-Subject: Re: Pull request: please pull u-boot-imx-20230905
-Message-ID: <20230925140239.GS305624@bill-the-cat>
-References: <d76d7703-2d2d-4479-a15d-0fbedaf9cc6b@denx.de>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 2/3] common: Drop time.h from common header
+Message-ID: <20230925140504.GT305624@bill-the-cat>
+References: <20230925023958.1913268-1-sjg@chromium.org>
+ <20230925023958.1913268-3-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ylWwDYEhWLGYPD/c"
+ protocol="application/pgp-signature"; boundary="01CO37HgTdULZZ0R"
 Content-Disposition: inline
-In-Reply-To: <d76d7703-2d2d-4479-a15d-0fbedaf9cc6b@denx.de>
+In-Reply-To: <20230925023958.1913268-3-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,54 +93,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ylWwDYEhWLGYPD/c
+--01CO37HgTdULZZ0R
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 23, 2023 at 08:56:14PM +0200, Stefano Babic wrote:
+On Sun, Sep 24, 2023 at 08:39:51PM -0600, Simon Glass wrote:
 
-> Hi Tom,
+> Move this out of the common header and include it only where needed.
 >=20
-> some fixes for the release, please pull from u-boot-imx, thanks !
->=20
-> The following changes since commit 4cb31a9f3560b293670de95e76c1f3cf2f9e1c=
-a8:
->=20
->   Merge branch '2023-09-22-assorted-bugfixes' (2023-09-22 18:25:37 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git
-> tags/u-boot-imx-20230923
->=20
-> for you to fetch changes up to 62a3c66a7c1ee733695b46542c4a9034f3a663a4:
->=20
->   smegw01: Use CONFIG_SYS_LOAD_ADDR for loading fitImage (2023-09-23
-> 18:45:34 +0200)
->=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+[snip]
+> diff --git a/arch/arm/include/asm/arch-tegra/timer.h b/arch/arm/include/a=
+sm/arch-tegra/timer.h
+> index 1c4decacd338..c5e9d841031a 100644
+> --- a/arch/arm/include/asm/arch-tegra/timer.h
+> +++ b/arch/arm/include/asm/arch-tegra/timer.h
+> @@ -9,6 +9,7 @@
+>  #define _TEGRA_TIMER_H
+> =20
+>  /* returns the current monotonic timer value in microseconds */
+> +#include <time.h>
+>  unsigned long timer_get_us(void);
+> =20
+>  #endif
 
-Applied to u-boot/master, thanks!
+This should be replaced with timer.h being used directly.
 
 --=20
 Tom
 
---ylWwDYEhWLGYPD/c
+--01CO37HgTdULZZ0R
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmURkv8ACgkQFHw5/5Y0
-tywDNQv9Hn+lWoDkKWoxBNbfDDawfmCjSvchQzUBW7S1edK0b7JehenrLLHaGv4C
-RtvkGSiiZdjlcl7gbL9hsjp0orBWsmeaeT+hNcIzzmnTWmT48sQxbLwZC4ty0qcO
-E5Y1vFaoGfVJk7faquE6nijfCq7WAKR2mg/i2WMzAGdtUoO0auBtEjmIGqdbHw/g
-rP5piqR01644vaZxf/vjMp6OSQV7Rtj270NT4ofU3VBQfKf8p6o054aCULwnuXdl
-Oi62l8R4Zhsn67cMJTKoHwKNP8EGnqGTuEXivap02wE+uCMcLHWjPmHsEBJ6Nw5P
-H1ddRoPEFlwugrYeg0Xkbl9dOmvt6fkm4A3eSDry9FBCHUqtPBxTr6K/USSDTE8h
-7geadz4uCoWBJKmMEVlkaT3SVm7NnbRxuGWqgiTwduc0fiFbylt2uXTKQzyLB68N
-6MomYSNU+wRQ6DLOMUzewE/u9wJ6E+/fwUzFSlyBgm5tQHpzKJQrjo/uEDTIc44r
-UaJvZaq2
-=kUSU
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmURk5AACgkQFHw5/5Y0
+tyzwHAv/X0MGCQ0rVYOQaNZXmUJmYGQuB7xyqZ2OZiohWLY/5ltYwif3qtbm+Kdk
+OaqKBkG7oM7JoShGbW9lcevPecaa+/pEufdZ0Zdu8qaLTSDJDWABgNcYt+KuSAhr
+i3wntqUe6I5b4ZcfM0biCHK4H66MF4eunc2U8DqBudS9VAftJ6H6eCESahR/6X9C
++Dfb6VkyVl2u1vc5WeiLe7/+hGa6Rcv4r3ZXI+V3J1TkH7xAcde1JRTwqfFDhhYs
+TkWzFDlkrFiwmJ/KMmgZTPoNm5S44EJRvcYySNLfbazpfEZrMeAv3lqTvhoqVfkx
+5mXL9SVDMdljmPpzMJ6nZzYsNnSd55XYrU3akqNMenj9x+5ywvW1dVnZmrF5UhYe
+6ftVedYbcJDDSsPmZXHpx6Jk24dnJTgHrtGKF1tlnWbC52gvpl39Wh6c8AcpFESI
+8V8ktNz6tnAcMO05E6fbXbejBJZkqlOGfUQ2yzvEm3e+GaOA9Bl7nsT8aAS4ymQq
+zvw2+2Y8
+=aywT
 -----END PGP SIGNATURE-----
 
---ylWwDYEhWLGYPD/c--
+--01CO37HgTdULZZ0R--
