@@ -4,84 +4,137 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E69CE7A94
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 13:18:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75383CE7A95
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 13:25:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E677586AEE;
-	Mon, 25 Sep 2023 15:18:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C78E386BFF;
+	Mon, 25 Sep 2023 15:25:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PzLA4G93";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="ZV4cbkr0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 752A786BE8; Mon, 25 Sep 2023 15:18:51 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AE34886BE8; Mon, 25 Sep 2023 15:25:40 +0200 (CEST)
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur01on070e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe1e::70e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8945986ACC
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 15:18:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82DD986C28
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 15:25:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9aa2c6f0806so781931166b.3
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 06:18:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695647929; x=1696252729; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:from:to:cc:subject
- :date:message-id:reply-to;
- bh=d9/yI5lV4j0fp0Y9KlDfib1+ICnLpyS61Ovb1NZwCMI=;
- b=PzLA4G93L100HgRAOFsq4mumVgFOhbkfKbjPdpz2c1tBlNGZIkHwpa7lab7W6r47Fi
- ppxTU69k4s90nrl2Z6028fCVCuZtGSXezPmf5DnOZsMYXIK4RCp3slwnXTKc9jwId4I4
- qnYfXjKwnCzTQz0RW6Cu4Vd5pyRdKL0Unu9Zpn6ed+YEnvRTi7dPa9xfvaVXjH89Zp+6
- rODUBM1mXZMRqoiUcmY0YD6aF6TqeQ3ggHfV9k16HiwftLe+OMaH8GYiDBunRzitYSqK
- W0yqg6Nb4YMqJf0Wk6nVW46SiFNv1mNrRegzbhOSIfHmQbyQlYjtq0fizXHkuUBMw+Wt
- BH3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695647929; x=1696252729;
- h=content-transfer-encoding:mime-version:message-id:references
- :in-reply-to:user-agent:subject:cc:to:from:date:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=d9/yI5lV4j0fp0Y9KlDfib1+ICnLpyS61Ovb1NZwCMI=;
- b=uSSSOyEUQkD3SfgdTMopz9NMmuIQeA335kNS3uMxkoNCxf6cinQ3/CCsBQ/o19mdkB
- /F8rNJMHAiav8M0djJMGM1SjJ782z94wHoIX3INUoa1AiA8Nvr8sfm4GwrWLuBxjEoTc
- w6JbzJSGKzO59RgrAXPMLi+NGHIVhqoUGQVFm7MVcEomozFB2LuUWYO7tNmzznYkFufq
- z7fMdkbqxAFHAjIadh537FltSKWXgjJxRT6Ytk7E7caMoiXaH3UPDiKGCjSPE0+ya1zr
- KF+y8cdiL7Iy3HeD4QCN5A3vE5D2kGPbB24yNs6F6BYKZK5+POZ23fJbUMIgnQsnFcnV
- ARyw==
-X-Gm-Message-State: AOJu0Yz6hQDSf4WA+nxBl6OP+R6ls3hjntQURAKd8yCj9KhtdXYfrP3z
- qsKp+WawU+w+WzCUnqch9rmUjcFnzUU=
-X-Google-Smtp-Source: AGHT+IFx22m6/OJOMH6rpW6jf4QnVMcv9FS3q66JmNtwj6azRMKJB+ytXC2LJI/AdzOv3Ou7mB4QvA==
-X-Received: by 2002:a17:906:31d9:b0:9ae:57b8:ad11 with SMTP id
- f25-20020a17090631d900b009ae57b8ad11mr6304683ejf.38.1695647928703; 
- Mon, 25 Sep 2023 06:18:48 -0700 (PDT)
-Received: from [127.0.0.1] ([46.211.155.168]) by smtp.gmail.com with ESMTPSA id
- dx26-20020a170906a85a00b0099bcd1fa5b0sm6258101ejb.192.2023.09.25.06.18.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 25 Sep 2023 06:18:48 -0700 (PDT)
-Date: Mon, 25 Sep 2023 16:18:45 +0300
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-CC: U-Boot Mailing List <u-boot@lists.denx.de>, Neha Francis <n-francis@ti.com>,
- Bryan <bb@ti.com>, Praneeth <praneeth@ti.com>, Andrew <afd@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Vignesh <vigneshr@ti.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Nishanth Menon <nm@ti.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: Re: Config fragments
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20230823155558.GM3953269@bill-the-cat>
-References: <CAPnjgZ14CUVt=rM943hh9PQUhK9LJDgZYPxUsATYQe3wwOUYqQ@mail.gmail.com>
- <20230823155558.GM3953269@bill-the-cat>
-Message-ID: <C098A4DC-CE20-4516-8971-B52041120BCD@gmail.com>
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=IrDw494DDBWfW/SdB/M204+8ssin19w0Pz7KEN0X0b2YHkpkqNEGtx4Su7S9/v549zwQB7RHwgXpNu9hcf47ET3l3Wm+kI2r0um/REf0PZlZX2v4Umf4Usi4kyoHq/doKVvr0GZbLRMNKaSALb6Wgok3Gm2QupdY3S1BW/G3XHXJVsR0QZCjPCwjLIkuJlHhMe8ZZGX2urGUu5RyU11bzrrFlJSlFtwjg5FUedmN6Q3VBUVlMwZx+IMa5jcv0PSPQ6MAY0ComGLsvWdqafeMCZK+y3GkElw+Ul1/rc9i6ZlrK4WCYju49q5SadQ0DDfgjDDJ0w3PdyMeUxW+HdU0zQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Mtk7DKOhS6PEnoLA+KunacHiaYnoTskN1Tnsu+DcXKc=;
+ b=eUlG+CGXXNh4ali5xXRyuyI6QmjKKKAlUolbY41jRGXYUWbyQ96PLUN0kUSav04gAvsBtsGcBnlgWFQGN0Ll6HNKXN4xTwRMmC8uxfvIz9KCIg8xMn+g2T/dbWk+QORElTjZCzEPy1Q9DVhZO16GDTRJuLNkaD7oBngL33CVUKs4dpXL4u1oajYDeYGcrDVR/tQ5yOQlSJaQ7uEpA2aLxWVl76XFJcGaO6Vqsb0yBKgEXYyVmBIc4fzEP1gc5pHNzkk0gjDZctWXtoMBIrpB1zXWxTrMtGD8IiwQMASAj+EwZpidMiirp7hACWejcrA1eelgrMLcYVmHq+CKREj1LQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Mtk7DKOhS6PEnoLA+KunacHiaYnoTskN1Tnsu+DcXKc=;
+ b=ZV4cbkr0hltr5A6k/VUNr8XYHL/1YA7VMwUG9bSXxdS7AhKYoX/jak8eeZdCsAX4OlvREZJVRTK+r+iy4xnAf6ko8gTk7+8mntRbve25LVqv9Q8pwMW541D6kZUFzxz5dnE04DzSIwRyT1TaCuaxEyj9u/+w8Pt6T2ewGTmJPH4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by DU0PR10MB6317.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:3b2::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.28; Mon, 25 Sep
+ 2023 13:25:36 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6813.027; Mon, 25 Sep 2023
+ 13:25:36 +0000
+Message-ID: <b95ee217-05d5-32dc-94bb-aaa0e85bb5d7@prevas.dk>
+Date: Mon, 25 Sep 2023 15:25:34 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 1/4] mkimage: also honour -B even without external data
+Content-Language: en-US, da
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>
+References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
+ <20230919113705.109639-2-rasmus.villemoes@prevas.dk>
+ <CAPnjgZ2=Yx=rqWwi9_N+dzKQq0EViGohYd0QrJYxrUERpZwXyA@mail.gmail.com>
+ <e52f81a9-1006-ca4f-8501-7c6c1f6087e5@prevas.dk>
+ <CAPnjgZ09St0710SRLzubphauTYMtE1PyxAFWEKsupA2dAhXRbw@mail.gmail.com>
+ <b655aee9-ebc6-044a-cc7f-9e28d850b671@prevas.dk>
+ <CAPnjgZ2CMYOpchV0Q3qkdRinaMp8atpW+QE0FJ_VOJfV8YRKJg@mail.gmail.com>
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <CAPnjgZ2CMYOpchV0Q3qkdRinaMp8atpW+QE0FJ_VOJfV8YRKJg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MM0P280CA0097.SWEP280.PROD.OUTLOOK.COM (2603:10a6:190:9::6)
+ To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DU0PR10MB6317:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6fa4a029-f650-4f14-f83f-08dbbdcae702
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: P/MIE0p8TcLbIH+bhiIfRIHO2wS5nnsGb4+FhEu9JzlWti3iqRNhL5URF+H60LnvYpCezzDgu+BDmbmv1hOLDqLqLjxyo6V28uOl1GYQhJ08ZUzUF4up+bVRaABz9O2PP9rRpuRQfOIv/JE3yTXPS/7TXeYI/q52V5LR+LA8o4eN9gJK/msmZjGHVhB/JVKqKtGjzZHrjiLn0e/2A9L4eeYt8tHH4COdNHXcha+8pEwd2iRdDxmI6PsvuOxsHle8l06kIJcKo3P1Gse3CUJcajGBZ+MkOdptHepUR9VkT0SD5qZLGxwpFT1RuLz1a6qFTsxd/VvjF1dgccRThx0kqcwDijkuHvmFil/rxI3JHKE+/x1B0ngOtON7R4OyDCCaEoMjt34L5dMBZBG70VrSSLparPTPosMS+G4XOcW9esXJNZz9NfFod7kbOlj5uoBSE9tDkOokS65j58mp3rDSbKZzFej1zr7HG7HdHNPDpqpmWA0/aQ6Q2xpQxU2XguEDfFgni1kzylOh6D2Nnp3c8aIyS442L3fIHho39LWs8h4JVtZ7a8QrbuZJ77mAManq+Xrrf88PuHSoLmkfi6U770QJHn/TJv3G4rOXWMq1DuXUvjJWOZb3OjMzzLQFr0uxo35XmsJsU932sZBAORJ3UCvTEAVG27o1w2Dx2UoDNHSVPUHiCQODjS8zR0n0pFV1
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(376002)(346002)(136003)(396003)(39850400004)(366004)(230922051799003)(1800799009)(186009)(451199024)(38350700002)(2906002)(4744005)(38100700002)(6512007)(66946007)(66556008)(66476007)(54906003)(52116002)(6486002)(6506007)(5660300002)(26005)(44832011)(316002)(41300700001)(6916009)(478600001)(8976002)(8936002)(8676002)(4326008)(2616005)(31696002)(86362001)(36756003)(31686004)(45980500001)(43740500002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?akRTMG0vRHNEV0plRVBBSTN3RW9CNWhKamhXRHoyam9wdDkrUVp5SWtzN3FT?=
+ =?utf-8?B?YzBHZHVabkNKR09SN29DYU0rZEJ2Tjl4UlVoZzZ1YVFnRStWM0VVeDJUbDFP?=
+ =?utf-8?B?TDdHcjlpMmFTYjNPZlF3SmlzcVhITmllbUh4WmpMUVI0ZE5ZaHk4cnNJdGVm?=
+ =?utf-8?B?ajlTK1BRS1BQZzRRVUl0ZC9MTk5jenRyd3RVMDBZYmNyRld3UkZSd05rdlg1?=
+ =?utf-8?B?TzdMMGxsRkNZQXUyOFZHTk9qajN2UmEvVDQ0ZHNPbnhMOUFzWXIzTkVqQ2JB?=
+ =?utf-8?B?bFBZNWdMWGVkM1RXZHpsWHRma2ZqQm9JbEJORVAwYmJjMG1lTXFvazJtbmxJ?=
+ =?utf-8?B?TW95bnUxRjZEYzJ6b2hUYWR1NVhlL0psZlIvZnN5Q1lGWUdWN0xNQkIrUGxw?=
+ =?utf-8?B?eUlJVWxGaWhiZjJXN29IejRWdDFDR0lZc1dGVVB4UTlheWI5MCtuT0JCbjBD?=
+ =?utf-8?B?T0pjNEkxMUkzMTl5Ni9nTnI0ZFQzM1l3NWlqQVNCZ3lvNDU5ZC91Skk2MFB6?=
+ =?utf-8?B?QVhsTXN5TTE4Qzlkd3huVmo3K2Q0L3ZPbXVUZmRKWUdtV3hyd0lFUkxXK29W?=
+ =?utf-8?B?V2pKK0laSEdidkNjQ09zSDFycXJLRTVscUkvazFXK3ZKNHM1dENDc2psY0U0?=
+ =?utf-8?B?RUduWHExVHVnYU52cDBKeFZKMUhJUFhnUHFBa1BTRHFIL3EvQVp1L3VXOG1G?=
+ =?utf-8?B?Rk5vdnkrWllsUTh5ZlhSdGNsYk1vZVZ5eE5HLzZWN1FYeTBobUl1YnRCSHJv?=
+ =?utf-8?B?d1pJVFBvQnZ1V0tITUdwMXBaL0FybTBLR1lpQS9zSWxnSnNiVzdiZnRaWklB?=
+ =?utf-8?B?L2Ixc2pxajBnUmtoYktpdzhHM2ZxK1BQZ3dwTjg3Z0JBdEJ0VGtWbXNBa0ZE?=
+ =?utf-8?B?VGI4SmxTWkZZK04xc3gvQjJqaDBKc2syK3Z1WFhVSWo3Y3ZNNU4xTnArTEh6?=
+ =?utf-8?B?c2lOTmRtNmtIM3JNTjJXTmxxVE0vZFV6Q0VHdnBDcWlvTjBJU1J4dmNUUDYw?=
+ =?utf-8?B?d1dBb2w0eWJyUndCVlg5Z21qOEZjd08va1dQR3QrelpBb0RreWJOVWNTblAw?=
+ =?utf-8?B?dFpGVmVXWjRpRnp2YWg3aktyWGx4cW9yY0lXbnludmlIRlVxYm9jTmJ4Tk9l?=
+ =?utf-8?B?anR4cVhjcWk0TDI1WUxFSktRSE9pUnBSZ1ROREFxSm5GK1RKMTQvWGozZG5R?=
+ =?utf-8?B?bzVwaGViOU9McFkvZ1B1T25IR0NBc3pvcEVkYXdJWi9wTXFnMWE2SlRWQS9I?=
+ =?utf-8?B?azI2T1JOS1Q4SUdtODBqWVJKSEdSQmZmR0RyVnZwaXliLzl4YUp5SnQyZlFw?=
+ =?utf-8?B?Sk1Pc0RoRVFzSkpVanJYRkZFQ1Q3TXIwMkZDTTJxSVVzWUtZaURwcStISkZY?=
+ =?utf-8?B?YWJoSmlaYnAyL2tNRHFtVVRiMXFGWVY3RS9yR0dya21YbWY2YUsxb3JmbW9Y?=
+ =?utf-8?B?MFJOenRhVklRc3lrQVBMK3dma21sSUcrYVd4YVlTT2hseHJLdUdPaHB3cEwx?=
+ =?utf-8?B?TDNOOURCdk92UDVBK25waDljMUNTeXlPZUJqQ2NTbU5aTFhEMjNkSnNvM0dz?=
+ =?utf-8?B?M2ZPb1ZkMCs0SDUxcFB3OXByUVVuVFl2LzVqNHF5dCtobWlqdmlHTTBSWFlx?=
+ =?utf-8?B?bWRYYkxFanNxWmcrTVFzVTI1amF3SUVZUzY2S3gzUlJIS1pwQXdycE5GVkxI?=
+ =?utf-8?B?eUNHN1JUaTRkL0JsQ0xNK1pLRWMyMlVOTmVHZDZESXJScjgrdGRLSDRsY3RE?=
+ =?utf-8?B?dGFGS0JTUkM5YUkxaThKL0VNT3Zad0tYUHl3MUltMFc2T2ZpdEJ4RkdvL2xT?=
+ =?utf-8?B?QnUzTjhTc3VRalBWSURNSkp6azhZYVBsUjFXcGpiRUs3MkdQWVBPd2c2aHlG?=
+ =?utf-8?B?M1dXYWp3SmZrWEdaWHNmbEE4RDdqeWNTRkZRVzc5UmtRazJRbjBUTDZFZENu?=
+ =?utf-8?B?SkVLaHZQUVNQZDhXeElPMHI1VTJ5Vy84dmJrVmJGcE5DcHNmQlh1WThEQlR2?=
+ =?utf-8?B?aUlDVjBxNXIxYlM3bTZ0bEdLeFNMelNhZ3lPK09Zbnltam05M251NHNTRFB4?=
+ =?utf-8?B?OTVYMi95cEx6TmpFbmFTb0FkSXRWV2xkNzRtWHVYY0x5ZjgxZW9CWlJ1dDRs?=
+ =?utf-8?B?b0UyWUg3Z1I1Q2VKWmw1bkRpeldQakkwbWR0VkhFdjRtdVNtWit0Q0RPODRv?=
+ =?utf-8?B?Wnc9PQ==?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6fa4a029-f650-4f14-f83f-08dbbdcae702
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2023 13:25:36.2896 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: mRkLvpCDuAfRaL9ObxC4zN0HT4Q2CCR4MyQYEhlghnUYV/adg3BQyVoFf8ICceSrk8C04dhKfXtDCXjudVgTm0TKGM5LDKHR3fhE0ds6eos=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6317
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,111 +151,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 25/09/2023 15.10, Simon Glass wrote:
+> Hi Rasmus,
+> 
+> On Mon, 25 Sept 2023 at 02:47, Rasmus Villemoes
+> <rasmus.villemoes@prevas.dk> wrote:
 
+>> Since patches 2,3,4 touch binman code, could you take all four?
+> 
+> Yes, will do. I didn't pick them up in the most recent PR as I try to
+> have things sit for a week before applying.
 
-23 =D1=81=D0=B5=D1=80=D0=BF=D0=BD=D1=8F 2023 =D1=80=2E 18:55:58 GMT+03:00,=
- Tom Rini <trini@konsulko=2Ecom> =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=B2=
-(-=D0=BB=D0=B0):
->On Wed, Aug 23, 2023 at 09:30:31AM -0600, Simon Glass wrote:
->
->> Hi,
->>=20
->> Up until 2023=2E04 it has been possible to build all the defconfigs but
->> with 2023=2E07 that changed=2E Tom mentioned this to me recently=2E
->
->I'm adding Svyatoslav who is the person that brought in all of the
->config fragments that are going to be in v2023=2E07=2E
->
->> Up until 2023=2E04 we can enumerate all the board configs that can be
->> built=2E We can build any of them using a single name and a single
->> defconfig=2E The boards=2Ecfg file which buildman creates contains a fu=
-ll
->> list of things that can be built=2E
->>=20
->> From 2023=2E07 this changes and we now have random =2Econfig files
->> sprinkled about the place=2E I say random because they are not connecte=
-d
->> to anything=2E For example, here is
->
->They aren't random=2E  They're, just for v2023=2E07, in configs/ and then
->moving forward, they're in the board directory=2E  I would like to see
->them in more places possibly, but that's not something I'm sure enough
->on right now=2E
->
->> board/ti/am62x/MAINTAINERS:
->>
->> AM62x BOARD
->> M: Dave Gerlach <d-gerlach@ti=2Ecom>
->> M: Tom Rini <trini@konsulko=2Ecom>
->> S: Maintained
->> F: board/ti/am62x/
->> F: include/configs/am62x_evm=2Eh
->> F: configs/am62x_evm_r5_defconfig
->> F: configs/am62x_evm_a53_defconfig
->>=20
->> BEAGLEPLAY BOARD
->> M:     Nishanth Menon <nm@ti=2Ecom>
->> M:     Robert Nelson <robertcnelson@gmail=2Ecom>
->> M:     Tom Rini <trini@konsulko=2Ecom>
->> S:     Maintained
->> N:     beagleplay
->>=20
->> In most cases the MAINTAINERS file tells us about each board and until
->> [1] I had assumed that was the case=2E With that patch reverted, these
->> are the only 'orphaned' MAINTAINERS entries (buildman
->> --maintainer-check):
->>=20
->> WARNING: orphaned defconfig in board/armltd/vexpress64/MAINTAINERS
->> ending at line 8
->> WARNING: orphaned defconfig in board/google/veyron/MAINTAINERS ending a=
-t line 44
->> WARNING: orphaned defconfig in
->> board/mikrotik/crs3xx-98dx3236/MAINTAINERS ending at line 7
->> WARNING: orphaned defconfig in board/st/common/MAINTAINERS ending at li=
-ne 6
->> WARNING: orphaned defconfig in board/ti/am62x/MAINTAINERS ending at lin=
-e 15
->>=20
->> But Tom advised me that MAINTAINERS is not intended for this purpose,
->> so the check has been dropped=2E I am not suggesting we bring it back,
->> necessarily, but if we did, we could use it to specify the =2Econfig an=
-d
->> defconfig files which are used by each board=2E
->
->Note that the "N" syntax has been in use, for defconfigs for a lot
->longer, and is why the CI check for unmaintained / orphaned boards
->stopped working=2E
->
->> *Failing that*, I suggest a new 'name=2Ebrd' file in the board director=
-y
->> to contain this information, e=2Eg=2E
->>=20
->> # Contents of board/ti/am62x/beagleplay=2Ebrd:
->> beagleplay-r5: am62x_evm_r5_defconfig beagleplay_r5=2Econfig
->> beagleplay-a53: am62x_evm_a53_defconfig beagleplay_a53=2Econfig
->>=20
->> This could be parsed by buildman and other tools, to produce a list of
->> available boards and to build each using a single name (e=2Eg=2E make
->> beagleplay-r5_defconfig)
->>=20
->> What do people think?
->
->I'm not sure I like this direction honestly=2E  Do we want CI to cover
->these configurations?  Maybe=2E  But it's just for CI=2E  Using the TI
->examples, I don't know that you can use buildman today to generate a
->functional binary (and if you can, if --keep will retain the right
->files)=2E
->
->Maybe we just need to make it clear that if you use config fragments
->then you're opting out of CI for that specific platform=2E  That should b=
-e
->fine for example for the TI ones that will be built in OE a bunch
->anyhow so accidental failure to builds will be caught=2E  I don't know
->about the Tegra platforms=2E
->
+Oh, absolutely, no rush :)
 
-Greetings! Are there any progress regards fragments move or this will hang=
- in mailing list indefinitely?
+Rasmus
 
-Best regards,
-Svyatoslav R=2E
