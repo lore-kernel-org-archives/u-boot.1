@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E6A5CE7A94
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 13:11:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E248ECE7A81
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 13:12:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2351786B93;
+	by phobos.denx.de (Postfix) with ESMTP id 803CA86C45;
 	Mon, 25 Sep 2023 15:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a74U3P1n";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mjWvS08y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E78E286D25; Mon, 25 Sep 2023 15:11:18 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 9838986C35; Mon, 25 Sep 2023 15:11:21 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1456886C45
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 15:11:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB22186B3A
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 15:11:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2bff7d81b5eso107377831fa.0
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 06:11:17 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-503056c8195so10542700e87.1
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 06:11:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695647476; x=1696252276; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695647479; x=1696252279; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1mvBJ2+FJf2qVaj94GRyiBIn2gBsG6T+rp/EYFyj+qU=;
- b=a74U3P1neM9v4wYtcoWswzIxBaE1HA9+uPPj6RL4FISzGo3NT82YQRZeaiJ0IaNhws
- 4Reisy2wKnxl8/3U5Tv/7gXBgAA5osRrLpVkTU+PpLZN02JtIUe57Q0HAXeZEGXl9xM6
- iFARufoKTNLW4euRe7YZlLPVf4t+IpGSHEr4A=
+ bh=juuArm+UoaQ+DwdgM+ZUBI5VJ2O1cof9EQwV79x4K0U=;
+ b=mjWvS08yneyX6ve9AjejE1LCfX/vT6Efw82981q30vo7n8CvC5qp6XTptM2N8/30oA
+ 1o1l+QyF9Br1YMqZeE6cY+hTCi2XJBa9XVuO4HI6V9WJwCwKl2TOv74IqEneVnk+uFWj
+ rwg89TWDfyKeVrEem4/yvXNNck6qEjA+rgfQw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695647476; x=1696252276;
+ d=1e100.net; s=20230601; t=1695647479; x=1696252279;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1mvBJ2+FJf2qVaj94GRyiBIn2gBsG6T+rp/EYFyj+qU=;
- b=dvTm4FiXQfWop2VyBroC55C8ClW15TZZDpTz+f9AH83YWAfeo62fnss/4PWIuCF5QK
- PHxlu6eMjILJis627kO3FJ7FZXRMb4/Bg2W1xz3EzVQtEoIELIXmFWVYlz0f5U0UFwxi
- J9/4KD8knwM3SfKThjpuEjUargXhe//KBMl0iE8ecE4epMhH1MRwomhYfKmocrF82c6k
- i81IuGJxTNus9JZkuC1qhk/myplq20JXwCtsPlLicQH3Zr+lsF8xMYCK8EB9FY5xRABv
- x4UNske23Ekj3l4BHRdJF/aEm5S7WCNzJxHLLMjmS9sLZOHvasw3mkfB91c7C8ZrjrYA
- z5cA==
-X-Gm-Message-State: AOJu0Yybp8cvSf95boq9FaqtkWp5MgQ23XoPD++petCji7llL4Ptcg+Z
- idnx4iIfCKQUIhhBmb+DVLzIQyqZYR9tCKiHHcvhifq5fRM1uayrUwY=
-X-Google-Smtp-Source: AGHT+IEVTQWeJfr1Rqm6fbNo8vv6I0rlw/BAVZnZh1Af/MDQp/PN7P8mD01UfOo8wd5DmRm5Aut5T18OgTM6bcrb+sI=
-X-Received: by 2002:a05:6512:10d6:b0:504:3424:2157 with SMTP id
- k22-20020a05651210d600b0050434242157mr6389089lfg.42.1695647476093; Mon, 25
- Sep 2023 06:11:16 -0700 (PDT)
+ bh=juuArm+UoaQ+DwdgM+ZUBI5VJ2O1cof9EQwV79x4K0U=;
+ b=wqkXvlJ85A8wStA4TR2jaNUHrllqW1RGKZRA/FPkFuQin7p4jY/a+GNXx+hsMdGw7b
+ sYel9r64S2DDbOUhVc2wMCZbE/cBn2rR6MTmrIDshYeriKFqUZcjBFEb3RLGnw5rP0qY
+ /PQlpqWtfQuneClk1Vkcyn3ZtLJHM4jyJVSN1PmYSu8bpw4aJx8G/h6AXqaeZm/jp1lW
+ ze0b/LIYOaMn3DKGZVlkiBWFiPvq/00fdT6e2TuJCU9ufateUlq9HmuD+ayyDml2axKK
+ Ysnkfl2X6+IoJVtkUCWonsIZzYa776nIop0i/vavzka+rk6nx8qP83FTH9+WgGhE+DSh
+ GDRA==
+X-Gm-Message-State: AOJu0YyNBXwJIEgtucDd2qumkbhqKMu2JcaSMllqJolxDCa3b6eyrrYE
+ J3oEa4doT7oFQ6lE2cp7k15LbYfO9SohAqjcri+QYg==
+X-Google-Smtp-Source: AGHT+IFZeCokwFrTbjlYmxgafEuyT95ewqWpt/uvtTY/NAtOM2sJ1vw2bIWkZbvjl5wfdqZd/ErggkUH7bQjHFEMNTM=
+X-Received: by 2002:a05:6512:3d9e:b0:504:3424:215c with SMTP id
+ k30-20020a0565123d9e00b005043424215cmr7119613lfv.51.1695647478812; Mon, 25
+ Sep 2023 06:11:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230925080909.365098-1-rasmus.villemoes@prevas.dk>
- <20230925080909.365098-5-rasmus.villemoes@prevas.dk>
-In-Reply-To: <20230925080909.365098-5-rasmus.villemoes@prevas.dk>
+References: <MAZP287MB05034A33FFAAD17F2A43522EE4FDA@MAZP287MB0503.INDP287.PROD.OUTLOOK.COM>
+In-Reply-To: <MAZP287MB05034A33FFAAD17F2A43522EE4FDA@MAZP287MB0503.INDP287.PROD.OUTLOOK.COM>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 25 Sep 2023 07:10:36 -0600
-Message-ID: <CAPnjgZ3VTDxm32my1PLU8rjQFpZ_HaejLAN06jRxgNVxzhpGMA@mail.gmail.com>
-Subject: Re: [PATCH 4/5] sandbox: rename overlay sources to .dtso
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, uboot-imx@nxp.com, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jan Kiszka <jan.kiszka@siemens.com>, Tom Rini <trini@konsulko.com>
+Date: Mon, 25 Sep 2023 07:10:37 -0600
+Message-ID: <CAPnjgZ33Wa-ExT-uzU1UBhZrtb0T9u6MOSf2MAJf=rMKgzRFkw@mail.gmail.com>
+Subject: Re: [PATCH v2] arm: rpi: remove boot_targets for default standard boot
+To: Date Huang <tjjh89017@hotmail.com>
+Cc: Matthias Brugger <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,25 +81,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 25 Sept 2023 at 02:10, Rasmus Villemoes
-<rasmus.villemoes@prevas.dk> wrote:
+On Sat, 23 Sept 2023 at 20:59, Date Huang <tjjh89017@hotmail.com> wrote:
 >
-> Distinguish more clearly between source files meant for producing .dtb
-> from those meant for producing .dtbo. No functional change, as we
-> currently have rules for producing a foo.dtbo from either foo.dts or
-> foo.dtso.
+> Raspberry pi supports standard boot without boot_targets
 >
-> Note that in the linux tree, all device tree overlay sources have been
-> renamed to .dtso, and the .dts->.dtbo rule is gone since v6.5 (commit
-> 81d362732bac). So this is also a step towards staying closer to linux
-> with respect to both Kbuild and device tree sources.
->
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Signed-off-by: Date Huang <tjjh89017@hotmail.com>
 > ---
->  arch/sandbox/dts/{overlay0.dts => overlay0.dtso} | 0
->  arch/sandbox/dts/{overlay1.dts => overlay1.dtso} | 0
->  2 files changed, 0 insertions(+), 0 deletions(-)
->  rename arch/sandbox/dts/{overlay0.dts => overlay0.dtso} (100%)
->  rename arch/sandbox/dts/{overlay1.dts => overlay1.dtso} (100%)
+>  board/raspberrypi/rpi/rpi.env | 2 --
+>  1 file changed, 2 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+
+>
+> diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+> index 30228285ed..8fb8d5d5f7 100644
+> --- a/board/raspberrypi/rpi/rpi.env
+> +++ b/board/raspberrypi/rpi/rpi.env
+> @@ -73,5 +73,3 @@ scriptaddr=0x02400000
+>  pxefile_addr_r=0x02500000
+>  fdt_addr_r=0x02600000
+>  ramdisk_addr_r=0x02700000
+> -
+> -boot_targets=mmc usb pxe dhcp
+> --
+> 2.34.1
+>
