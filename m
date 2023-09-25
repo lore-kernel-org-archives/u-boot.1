@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB2A8CE7A89
-	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C77FCE7A81
+	for <u-boot@archiver.kernel.org>; Mon, 25 Sep 2023 09:27:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3D6986C23;
-	Mon, 25 Sep 2023 11:27:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AD5386C06;
+	Mon, 25 Sep 2023 11:27:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 564D486C56; Mon, 25 Sep 2023 11:27:24 +0200 (CEST)
+ id 54B7186BB4; Mon, 25 Sep 2023 11:27:30 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F3D486C32
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:27:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2216A86B3A
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 11:27:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 38P9RBwD061103;
- Mon, 25 Sep 2023 17:27:11 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 38P9RGV2061120;
+ Mon, 25 Sep 2023 17:27:16 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Mon, 25 Sep 2023 17:27:09 +0800
+ Mon, 25 Sep 2023 17:27:14 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
  <peterlin@andestech.com>, Randolph <randolph@andestech.com>
-Subject: [PATCH 1/7] riscv: dts: Introduce SPL_LOAD_FIT_CONFIG symbol
-Date: Mon, 25 Sep 2023 17:25:37 +0800
-Message-ID: <20230925092543.1408725-2-randolph@andestech.com>
+Subject: [PATCH 2/7] riscv: dts: add binman_linux.dtsi for opensbi os boot mode
+Date: Mon, 25 Sep 2023 17:25:38 +0800
+Message-ID: <20230925092543.1408725-3-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230925092543.1408725-1-randolph@andestech.com>
 References: <20230925092543.1408725-1-randolph@andestech.com>
@@ -45,7 +45,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 38P9RBwD061103
+X-MAIL: Atcsqr.andestech.com 38P9RGV2061120
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,68 +62,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce common Kconfig symbol for riscv architecture
-This symbol SPL_LOAD_FIT_CONFIG for binman itb layout selection
-Default is using binman.dtsi
+The binman_linux.dtsi is a fork of binman.dtsi, just change the first
+section image from the "u-boot" to "linux". Note that the filename
+is also changed. In binman.dtsi, the filename of u-boot section filename
+is called "u-boot-nodtb.bin". In binman_linux.dtsi, the filename should
+be called "Image", which is located in linux/arch/riscv/boot.
 
 Signed-off-by: Randolph <randolph@andestech.com>
 ---
- arch/riscv/Kconfig               | 7 +++++++
- arch/riscv/dts/ae350-u-boot.dtsi | 1 +
- arch/riscv/dts/ae350_32.dts      | 1 -
- arch/riscv/dts/ae350_64.dts      | 1 -
- 4 files changed, 8 insertions(+), 2 deletions(-)
+ arch/riscv/dts/binman_linux.dtsi | 79 ++++++++++++++++++++++++++++++++
+ 1 file changed, 79 insertions(+)
+ create mode 100644 arch/riscv/dts/binman_linux.dtsi
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index aff1f33665..ec1cfcaaa7 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -422,4 +422,11 @@ config TPL_USE_ARCH_MEMSET
- 
- endmenu
- 
-+config SPL_LOAD_FIT_CONFIG
-+	string "Default FIT configuration for SPL"
-+	default "binman.dtsi"
-+	depends on SPL_LOAD_FIT
-+	help
-+	  Specify corresponding FIT configuration for SPL modes.
+diff --git a/arch/riscv/dts/binman_linux.dtsi b/arch/riscv/dts/binman_linux.dtsi
+new file mode 100644
+index 0000000000..334d64bc40
+--- /dev/null
++++ b/arch/riscv/dts/binman_linux.dtsi
+@@ -0,0 +1,79 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2021, Bin Meng <bmeng.cn@gmail.com>
++ */
 +
- endmenu
-diff --git a/arch/riscv/dts/ae350-u-boot.dtsi b/arch/riscv/dts/ae350-u-boot.dtsi
-index aef9159b7a..ff5725501f 100644
---- a/arch/riscv/dts/ae350-u-boot.dtsi
-+++ b/arch/riscv/dts/ae350-u-boot.dtsi
-@@ -1,4 +1,5 @@
- // SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+#include CONFIG_SPL_LOAD_FIT_CONFIG
- 
- / {
- 	cpus {
-diff --git a/arch/riscv/dts/ae350_32.dts b/arch/riscv/dts/ae350_32.dts
-index 61af6d5465..2caabad888 100644
---- a/arch/riscv/dts/ae350_32.dts
-+++ b/arch/riscv/dts/ae350_32.dts
-@@ -2,7 +2,6 @@
- 
- /dts-v1/;
- 
--#include "binman.dtsi"
- #include "ae350-u-boot.dtsi"
- 
- / {
-diff --git a/arch/riscv/dts/ae350_64.dts b/arch/riscv/dts/ae350_64.dts
-index 8c7db29b4f..9d5f6c743c 100644
---- a/arch/riscv/dts/ae350_64.dts
-+++ b/arch/riscv/dts/ae350_64.dts
-@@ -2,7 +2,6 @@
- 
- /dts-v1/;
- 
--#include "binman.dtsi"
- #include "ae350-u-boot.dtsi"
- 
- / {
++#include <config.h>
++
++/ {
++	binman: binman {
++		multiple-images;
++	};
++};
++
++&binman {
++	itb {
++		filename = "linux.itb";
++
++		fit {
++			description = "Configuration to load OpenSBI before Linux";
++			#address-cells = <1>;
++			fit,fdt-list = "of-list";
++
++			images {
++				linux {
++					description = "Linux";
++					type = "standalone";
++					os = "Linux";
++					arch = "riscv";
++					compression = "none";
++					load = <CONFIG_TEXT_BASE>;
++
++					linux_blob: blob-ext {
++						filename = "Image";
++					};
++				};
++
++				opensbi {
++					description = "OpenSBI fw_dynamic Firmware";
++					type = "firmware";
++					os = "opensbi";
++					arch = "riscv";
++					compression = "none";
++					load = <CONFIG_SPL_OPENSBI_LOAD_ADDR>;
++					entry = <CONFIG_SPL_OPENSBI_LOAD_ADDR>;
++
++					opensbi_blob: opensbi {
++						filename = "fw_dynamic.bin";
++						missing-msg = "opensbi";
++					};
++				};
++
++#ifndef CONFIG_OF_BOARD
++				@fdt-SEQ {
++					description = "NAME";
++					type = "flat_dt";
++					compression = "none";
++				};
++#endif
++			};
++
++			configurations {
++				default = "conf-1";
++
++#ifndef CONFIG_OF_BOARD
++				@conf-SEQ {
++#else
++				conf-1 {
++#endif
++					description = "NAME";
++					firmware = "opensbi";
++					loadables = "linux";
++#ifndef CONFIG_OF_BOARD
++					fdt = "fdt-SEQ";
++#endif
++				};
++			};
++		};
++	};
++};
 -- 
 2.34.1
 
