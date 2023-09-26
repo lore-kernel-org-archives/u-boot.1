@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 003D7E7E638
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:24:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 418A1E7E638
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:24:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 052F586EAC;
-	Tue, 26 Sep 2023 16:16:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 68B3386E3B;
+	Tue, 26 Sep 2023 16:17:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="rb9/z2l/";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Rkibns+B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A57E086E3A; Tue, 26 Sep 2023 16:16:55 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 39C5586E3A; Tue, 26 Sep 2023 16:17:00 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA4CC86DEB
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:16:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57BED86DEB
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:16:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-503397ee920so14174079e87.1
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:16:53 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-5046bf37daeso4898651e87.1
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:16:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1695737813; x=1696342613; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1695737817; x=1696342617; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mzpore9V7sZeoWXUXRUgr/wobOj5DJMOXKcTTQuevyM=;
- b=rb9/z2l/fu838FlK4iEtY7X0gUHQdNeygXijReatij6IULLzroqPWMwz8mGP92OjuZ
- GPEXrgswe+qpny/t6YaWjS0I+Qe38LIlZatuUxHfJfEmMcRHgiDufDu6f12mxpAMJ4bQ
- v7fS081SsQzVegudoHj66sFkNOimQ1kJ5FR95pIfF/orW4Nz8Mtg7BpjVditwZEWyNKm
- x6jYHGv8bzZfntWnuRwNBcOSOU2KIGzmAJOy+ncn52h/PCo1Spj7gfUMb8TBSMYpxI/o
- det7WpHooXx0BNDhbvASKEDrUIrlX6AA9rI6Y9Fi7wjwnZosu7qsZWjKfrZXPqPALD5r
- Qhsw==
+ bh=gHLahIhVy+gr/E2nvBddjRdhSDpQjh4VUz630IdjNrk=;
+ b=Rkibns+BKU8WVlewra6eKYz8ca3lmQ8tigsGpqLJqiA2Fy27gDe/PzKhnGeF+0ZuRf
+ rLfqOZ3g5YslP89bVuj0D+OxW9OSyMPlFD4UwfEr8/hDeR14LfVsDgPrRvLqiz3Tm2zW
+ o20s9LbV6/PwkKsU6D2KMcVk21iFpp3iOmVK+alql5mt0MftDioXi268OPS3oMXg3X4+
+ R5Mlgh00za6bcNSnKBGflQnYNQnSVlxghpY4uWph6WxGkNPdwhDFDSoHJn+8lxUaZlpa
+ qPttDROBK8WnGvCBiPwGAXmzEBUmnOKINbw6C+E5x4+hVwDFz6K9Tu1sI+OTga3dh8y7
+ m/dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695737813; x=1696342613;
+ d=1e100.net; s=20230601; t=1695737817; x=1696342617;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mzpore9V7sZeoWXUXRUgr/wobOj5DJMOXKcTTQuevyM=;
- b=GoCznQg0CKimHp5xkUlJhgZabQFOB3y1Ot4T7h+nzxlI4juWc7B8mVo33YYjSHxExO
- gLXmq2380TDm8SMJ2kemFEEGjjYznWK2jrxBC0OHreLhYO526TqnMoIJzAy9SQ6ssprO
- BTniNQLztiK/dENY9EPd+6GjVD1jSgCMlkdH22Xx2ng12HRi9gH0v3r3LaJCbiQfn/jM
- IOhrh5qLYo6L0HdyspxTIyiZPfpJBTGCjhP2XiKxhBkCy4hSpWOsSa8dYuZRbg2W8q9q
- 18XN/LpZsiEB1km4ypqUVrVMLl7YO0glGne3jjmFKrUpyl87GGtW7eWPxTA2kroqgKcE
- iTWA==
-X-Gm-Message-State: AOJu0YzUyh8HkOvbLtSuZmogXtN6WEhLoobTB75D15fxqCVJOuoWxNJK
- z6BBH58RwRXIsbx/Cx4YMt4MZ35/hj9hQpcjU51NEMtB76B599XIBI4=
-X-Google-Smtp-Source: AGHT+IGUEE669mzkRPcN7Hc7RsVlhMOhkRywOE/vZzBC4dvH8qglHF7Dg6g1CBlH7b0JsRRp5weGN6TnyPC3472XNYg=
-X-Received: by 2002:ac2:5f74:0:b0:4fd:fc36:68a2 with SMTP id
- c20-20020ac25f74000000b004fdfc3668a2mr7412510lfc.1.1695737812687; Tue, 26 Sep
- 2023 07:16:52 -0700 (PDT)
+ bh=gHLahIhVy+gr/E2nvBddjRdhSDpQjh4VUz630IdjNrk=;
+ b=kLo3m0iAN6Yi1yykmr0w3MfcLJO1tMdaX81NXifaNaClrCEMMqLzDe8zsYWdiXPBga
+ bTFeAq1pGSgT476xtwqrVf52t6Q5MPjinGksGZbjIeDBVRs7D4j1wKCs2+im+Cuab2G1
+ PiWRyqP3A9grNTbBCCGeokYeFFfT3g2Urd+4Jca9RCP2m1/hENSzapMZ4siSocjZ1BSH
+ rY7Q2fhPSFAwql/flYgitnhkToVDcJeiL3ccNhpP2SQVLBKxFvxsadlE8UQl/pOaoX9H
+ aHhoa7zvgtavHM91MXIKIcZP/I/p1+KmzZ72F2j8CUCJ3aO3tfOS1+6WY3IzKnc5YM41
+ 7ARA==
+X-Gm-Message-State: AOJu0Yx8aq8whePGBfEBjmAshMuf5Yz45JrniOU0C+GM6Llz9I8KpPzs
+ ZmmDDUZPEMoGdD1Q7rwi9rYwY7KtKU+2QpaakSRpAA==
+X-Google-Smtp-Source: AGHT+IF+D2E1N4l82io4RUACmOL6uIbSjUeGEhLct/0ARuPi/dwj7jlR4NJEIHcuE5vT+1I20x4GRcw6K0i4SJ/FCCI=
+X-Received: by 2002:a05:6512:39d2:b0:500:7f51:d129 with SMTP id
+ k18-20020a05651239d200b005007f51d129mr9159263lfu.34.1695737817342; Tue, 26
+ Sep 2023 07:16:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
- <20230926094124.7024-2-maxim.uvarov@linaro.org>
- <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
- <20230926134149.GS305624@bill-the-cat>
-In-Reply-To: <20230926134149.GS305624@bill-the-cat>
+References: <20230926112443.4190471-1-u-kumar1@ti.com>
+ <20230926112443.4190471-3-u-kumar1@ti.com>
+In-Reply-To: <20230926112443.4190471-3-u-kumar1@ti.com>
 From: Simon Glass <sjg@google.com>
-Date: Tue, 26 Sep 2023 08:16:35 -0600
-Message-ID: <CAPnjgZ1iAG8Rw3jVZvFs16AvnGkO=gCsCM3dF1c30biFk4t2xw@mail.gmail.com>
-Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
-To: Tom Rini <trini@konsulko.com>
-Cc: Maxim Uvarov <maxim.uvarov@linaro.org>, u-boot@lists.denx.de,
- pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- goldsimon@gmx.de
+Date: Tue, 26 Sep 2023 08:16:46 -0600
+Message-ID: <CAPnjgZ3gGZORPUg1xnvRJtgnUfU7yxXgnepUWF02JQr8U1aCZQ@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] test: lmb: Add test for coalescing and overlap
+ range
+To: Udit Kumar <u-kumar1@ti.com>
+Cc: nm@ti.com, vigneshr@ti.com, patrick.delaunay@foss.st.com, 
+ sjoerd@collabora.com, trini@konsulko.com, u-boot@lists.denx.de, 
+ xypron.glpk@gmx.de, michal.simek@amd.com, dsankouski@gmail.com, 
+ kettenis@openbsd.org, sumit.garg@linaro.org, sam.shih@mediatek.com, 
+ mark.kettenis@xs4all.nl
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,30 +89,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Tue, 26 Sept 2023 at 07:41, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 26 Sept 2023 at 05:25, Udit Kumar <u-kumar1@ti.com> wrote:
 >
-> On Tue, Sep 26, 2023 at 05:37:25AM -0600, Simon Glass wrote:
-> > Hi Maxim,
-> >
-> > On Tue, 26 Sept 2023 at 03:43, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
-> > >
-> > > add external lwIP library as a git submodule.
-> > > Use STABLE-2_2_0_RELEASE tag.
-> > >
-> > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > > ---
-> > >  .gitmodules            | 3 +++
-> > >  net/lwip/lwip-external | 1 +
-> > >  2 files changed, 4 insertions(+)
-> > >  create mode 100644 .gitmodules
-> > >  create mode 160000 net/lwip/lwip-external
+> Add test case for an address range which is coalescing with one of
+> range and overlapping with next range
 >
-> Do you have comments on the rest of the series?
+> Cc: Simon Glass <sjg@google.com>
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> ---
+>  test/lib/lmb.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
+>
 
-Not yet, but I should be able to review the rest in a few days. My
-main comments before were minor - return codes, tests, error checking.
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
