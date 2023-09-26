@@ -4,50 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88398E7D268
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:51:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C5DE7D267
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:52:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E357586C10;
-	Tue, 26 Sep 2023 10:51:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
+	by phobos.denx.de (Postfix) with ESMTP id 63E3586D60;
+	Tue, 26 Sep 2023 10:51:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="1/QsaqHX";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 386BB86D55; Tue, 26 Sep 2023 10:51:30 +0200 (CEST)
-Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.154.221.58])
+ id 7045C86D61; Tue, 26 Sep 2023 10:51:57 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6D9E86A14
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:51:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 38E6C86A14
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:51:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=tinylab.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng@tinylab.org
-X-QQ-mid: bizesmtp69t1695718277tqmarv2u
-Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 26 Sep 2023 16:51:15 +0800 (CST)
-X-QQ-SSF: 01200000000000F0I000000A0000000
-X-QQ-FEAT: CR3LFp2JE4lexoh8Hm0IIKb+8xWMGuZQR/zrpj+nqTdn4DxtA3VsX6bvtIftL
- lS3Rtp7uyLqlAu4OtlfETnzdNHfU1nxgMi5YqktMyt28DbIapkuEevGJuARZHT5e27BYW/z
- Ox0GJFb0kYZkWbRDlmo9GGckhQEBGd/+3SZXvv12xAcRKo8Dggd+pJeX+QNTElORBZeCmb4
- fb+4XeClqqrEkmgaz6BNV4BZ26ePgvd+BGzL/ICkNyHTrP2dGi66T9AgNoW0WAh0+yfz2gx
- u6iP0aTzLhJK+lO4kjymPswaFcQDFd3eKrPkmidSETgGqJ66V9sHYoPX9rENKjIp4AvMX9m
- cdflyHKn7eAuxqn5G3MprdqVV6bA61820QKuLri
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 5866926699007388632
-From: Bin Meng <bmeng@tinylab.org>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH 07/15] blk: blkmap: Make bind/unbind routines static
-Date: Tue, 26 Sep 2023 16:43:37 +0800
-Message-Id: <20230926084346.2237483-8-bmeng@tinylab.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230926084346.2237483-1-bmeng@tinylab.org>
-References: <20230926084346.2237483-1-bmeng@tinylab.org>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7633ac7092=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 38Q6T8bi024820; Tue, 26 Sep 2023 10:51:49 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=Zw8o5j/2dfnN+0A64Sae4jLptM/EZl4BRLl+pRBeLLc=; b=1/
+ QsaqHXZPsFIHfKIhPtQbv9z+aae3sUTBiE+wrAs7Gx/FXPUSJTaHUDVqwy9ssw8j
+ nezVdMhXYACHTZgz1pEsW62NHuwWhtd6BffvX22v6vH1quYKNtBTojBoehlfjDSz
+ oHwNpGL1mIxrM+QDT05txkecgqjF/mVhP2GB0Z4g+HV58Us5tRxlWCzssj1Q1UzQ
+ ME8UKYldkCDV9oWLz5unp81HYbEe/+iFgSN6/X157KksmQ/NeW+baafHuPooLZkM
+ GLu+P9K7FJYwJPRqCFwMNKfmd49naaiJB1hV8TNSjYBfGQHMbZZg26B1r3nSGRrr
+ /ehpbmb3SoiyfVxp54lg==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3taayhhm5s-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 26 Sep 2023 10:51:49 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1576F10005A;
+ Tue, 26 Sep 2023 10:51:49 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0992B22A6C4;
+ Tue, 26 Sep 2023 10:51:49 +0200 (CEST)
+Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
+ 2023 10:51:48 +0200
+Message-ID: <4c85b005-6f51-8a7d-4a96-4c34c28e337b@foss.st.com>
+Date: Tue, 26 Sep 2023 10:51:48 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:tinylab.org:qybglogicsvrgz:qybglogicsvrgz7a-0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 01/10] dt-bindings: mfd: stm32f7: Add binding definition
+ for CAN3
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>
+CC: <linux-amarula@amarulasolutions.com>, Lee Jones <lee@kernel.org>, Patrick
+ Delaunay <patrick.delaunay@foss.st.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
+ <20230903204849.660722-2-dario.binacchi@amarulasolutions.com>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20230903204849.660722-2-dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-09-26_07,2023-09-25_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,36 +94,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These 2 are only used in drivers/block/blkmap.c.
+Hi Dario
 
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
----
+On 9/3/23 22:48, Dario Binacchi wrote:
+> commit 8f3ef556f8e1a670895f59ef3f01e4e26edd63e3 Linux upstream.
+> 
+> Add binding definition for CAN3 peripheral.
+> 
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> Link: https://lore.kernel.org/r/20230423172528.1398158-2-dario.binacchi@amarulasolutions.com
+> Signed-off-by: Lee Jones <lee@kernel.org>
+> ---
+> 
+>  include/dt-bindings/mfd/stm32f7-rcc.h | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/include/dt-bindings/mfd/stm32f7-rcc.h b/include/dt-bindings/mfd/stm32f7-rcc.h
+> index ba5cb7456ee4..a4e4f9271395 100644
+> --- a/include/dt-bindings/mfd/stm32f7-rcc.h
+> +++ b/include/dt-bindings/mfd/stm32f7-rcc.h
+> @@ -64,6 +64,7 @@
+>  #define STM32F7_RCC_APB1_TIM14		8
+>  #define STM32F7_RCC_APB1_LPTIM1		9
+>  #define STM32F7_RCC_APB1_WWDG		11
+> +#define STM32F7_RCC_APB1_CAN3		13
+>  #define STM32F7_RCC_APB1_SPI2		14
+>  #define STM32F7_RCC_APB1_SPI3		15
+>  #define STM32F7_RCC_APB1_SPDIFRX	16
 
- drivers/block/blkmap.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-index 409aa46de2..f6acfa8927 100644
---- a/drivers/block/blkmap.c
-+++ b/drivers/block/blkmap.c
-@@ -383,7 +383,7 @@ U_BOOT_DRIVER(blkmap_blk) = {
- 	.ops		= &blkmap_blk_ops,
- };
- 
--int blkmap_dev_bind(struct udevice *dev)
-+static int blkmap_dev_bind(struct udevice *dev)
- {
- 	struct blkmap *bm = dev_get_plat(dev);
- 	struct blk_desc *bd;
-@@ -410,7 +410,7 @@ int blkmap_dev_bind(struct udevice *dev)
- 	return 0;
- }
- 
--int blkmap_dev_unbind(struct udevice *dev)
-+static int blkmap_dev_unbind(struct udevice *dev)
- {
- 	struct blkmap *bm = dev_get_plat(dev);
- 	struct blkmap_slice *bms, *tmp;
--- 
-2.25.1
-
+Thanks
+Patrice
