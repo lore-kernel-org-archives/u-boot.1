@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1D8EE7E63C
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:18:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C14A6E7E63C
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:18:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16A5986E33;
+	by phobos.denx.de (Postfix) with ESMTP id 7B66E86E12;
 	Tue, 26 Sep 2023 16:15:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DcNmDMXR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VzZtTjaS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 259A786DEB; Tue, 26 Sep 2023 16:15:49 +0200 (CEST)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 804D186BA6; Tue, 26 Sep 2023 16:15:49 +0200 (CEST)
+Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
+ [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA68186DFE
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:15:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0E2886D87
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:15:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-79fe6da0049so19317939f.1
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:15:40 -0700 (PDT)
+Received: by mail-il1-x129.google.com with SMTP id
+ e9e14a558f8ab-3514bf96fd2so9291025ab.0
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:15:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695737739; x=1696342539; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695737740; x=1696342540; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=r9tD08a7Va6oCs87yzlcGSo0etHLz8x5nJ2AVM6mTwc=;
- b=DcNmDMXRznAXrJjKR/Vnte/w5y+usWY1B39FwOhjzmMVH00qiD6fsARGLkxV1i9n3s
- BPg28OTFznakIPYvhZb8O/xYemsS5SJyotxE5/3N1UtYKBcO8xWgbh7kJqCtQfWAZjFw
- tjxB+wgdCLC7nvH2J0zckyZ+dVUC4N7v3JEfI=
+ bh=fAT6POS982jMqRObPAFlcNVGm14d6IVPGmxTG2Mo/sA=;
+ b=VzZtTjaS+aECAX27Agg9w/4+9I6Q+JT4bG/+gM31KSnyZWhJCfUVe+XYkOwyoVXcUa
+ Q76c2a0oY4lRfJ7kLIIljRmG+skaOvRsCV+pkJjwnStrh9k2cYr4YxBf6orgtISCVBzp
+ 0XeEwvIj1gk/8uPmduVATnE7jubuy+rWNQEWg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695737739; x=1696342539;
+ d=1e100.net; s=20230601; t=1695737740; x=1696342540;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=r9tD08a7Va6oCs87yzlcGSo0etHLz8x5nJ2AVM6mTwc=;
- b=Plm2YeZtjweZD9yVpx9sP7J5QwBKMavXhbCwak987AVvV67+OCkc3S0w2YcAfG/Ggh
- QBnin67k1V/En+cWaw8UyASlvCDgYT91CqVU57KTA0FT2GMhwP9wAlalsxelOxSNQO9y
- 656uE/5VFUETBZ2Z2S4Zr8z8gJ/LjdFI5+uwXJ6wgcYlo4ZsJ6ml4mGR0adIRsx3NEWP
- SjlVvH7h/y3yqj2oqTIpKgKVBAMFVM/FGd8ucTpGOHyiZsJEMvaQiauF4qdTehp+z7DL
- psBuZV9DkWGl3MCacEInQ+2iGCHC7atiIGCNRfLdJIntZxr8jVBwOd57I1X0TPS1nvh0
- hxMA==
-X-Gm-Message-State: AOJu0Yz1z7sCE0JsFfRKXlVJDgBAysNviuCZhOJReB3/yndnydEiLCzW
- irMxlZQ05dDuCvu44XuupgPPefWPU4w2BSNPWT0=
-X-Google-Smtp-Source: AGHT+IG0HwuN6HWMuqVqyf2c14FoNwDnDUsB37yu2wAKGYL32/ItpfshaC+C6QTigSbi8wmI0YpHHA==
-X-Received: by 2002:a05:6602:2155:b0:791:3791:527b with SMTP id
- y21-20020a056602215500b007913791527bmr10681518ioy.14.1695737739520; 
- Tue, 26 Sep 2023 07:15:39 -0700 (PDT)
+ bh=fAT6POS982jMqRObPAFlcNVGm14d6IVPGmxTG2Mo/sA=;
+ b=idH85w10NrTdCTNWu4ijABau6Yn7ODxP+Q8uY7MAsDGxWNcb7ZjKRahFR5+uL7qeQ4
+ nr2FDztk9m/Got1AcfGVQk3SIfmVF7X2S25HxRF4Frdw+FHSRnLtGFsBFsXOV9W9kKrB
+ D5G9PaiHcuxEd87S6Y0RmlTApC9PJuMCq6YIOBipE8K8AVzsjZW4504sGTsZcex7aZmg
+ O8Oe4XGXyNCp84krtMGn8KHFtX903wV4YEKdfRqxQnnPImoNjIaUsMtYm1GOtNaGbp6R
+ 3BT7zFHf46PuWozXBA2qbAmB98wUvFMdjHDhfrPi+QHnZYcRz6YKalyuPfSzry55fEVn
+ yAMA==
+X-Gm-Message-State: AOJu0YxzKR0Fy8UX+BZnoQEjPbNJk2COwcAP8Fed5tOsff8Dt45fbqQs
+ 3uguFPBn5PYTP00EAs1QNGNILYlFn1LzvTucEWk=
+X-Google-Smtp-Source: AGHT+IHGdHqMtKddwlg4F8QRnX6Ss/rMFmAILjuMP/pCIaSgaYPJ1Rv7J9wZAz3KLkKLDwPV2qzuTg==
+X-Received: by 2002:a05:6e02:1288:b0:351:111d:9cfc with SMTP id
+ y8-20020a056e02128800b00351111d9cfcmr10707831ilq.21.1695737740404; 
+ Tue, 26 Sep 2023 07:15:40 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- dp1-20020a0566381c8100b0043193e32c78sm3256764jab.152.2023.09.26.07.15.38
+ dp1-20020a0566381c8100b0043193e32c78sm3256764jab.152.2023.09.26.07.15.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Sep 2023 07:15:39 -0700 (PDT)
+ Tue, 26 Sep 2023 07:15:40 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Pavel Herrmann <morpheus.ibis@gmail.com>
-Subject: [PATCH v4 16/44] dm: core: Correct help in TPL_DM and VPL_DM
-Date: Tue, 26 Sep 2023 08:14:30 -0600
-Message-ID: <20230926141514.2101787-17-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 17/44] spl: Avoid an #ifdef when printing gd->malloc_ptr
+Date: Tue, 26 Sep 2023 08:14:31 -0600
+Message-ID: <20230926141514.2101787-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230926141514.2101787-1-sjg@chromium.org>
 References: <20230926141514.2101787-1-sjg@chromium.org>
@@ -88,7 +88,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are copying errors in the help. Fix these.
+Use an accessor in the header file to avoid this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -96,43 +96,52 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 (no changes since v3)
 
 Changes in v3:
-- Add new patch to correct help in TPL_DM and VPL_DM
+- Rebase on the new patch
 
- drivers/core/Kconfig | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+Changes in v2:
+- Use the same condition for both pieces to avoid possible problems
 
-diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
-index 4c5a00f6f9c2..fe5c41d57ecd 100644
---- a/drivers/core/Kconfig
-+++ b/drivers/core/Kconfig
-@@ -27,12 +27,12 @@ config TPL_DM
- 	help
- 	  Enable driver model in TPL. You will need to provide a
- 	  suitable malloc() implementation. If you are not using the
--	  full malloc() enabled by CFG_SPL_SYS_MALLOC_START,
-+	  full malloc() enabled by CFG_TPL_SYS_MALLOC_START,
- 	  consider using CONFIG_TPL_SYS_MALLOC_SIMPLE. In that case you
--	  must provide CONFIG_SPL_SYS_MALLOC_F_LEN to set the size.
-+	  must provide CONFIG_TPL_SYS_MALLOC_F_LEN to set the size.
- 	  In most cases driver model will only allocate a few uclasses
--	  and devices in SPL, so 1KB should be enough. See
--	  CONFIG_SPL_SYS_MALLOC_F_LEN for more details on how to enable it.
-+	  and devices in TPL, so 1KB should be enough. See
-+	  CONFIG_TPL_SYS_MALLOC_F_LEN for more details on how to enable it.
- 	  Disable this for very small implementations.
+ common/spl/spl.c                  | 9 +++++----
+ include/asm-generic/global_data.h | 6 ++++++
+ 2 files changed, 11 insertions(+), 4 deletions(-)
+
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index 8967a140041b..2c36caa856fa 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -864,10 +864,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 	} else {
+ 		debug("Unsupported OS image.. Jumping nevertheless..\n");
+ 	}
+-#if CONFIG_IS_ENABLED(SYS_MALLOC_F) && !defined(CONFIG_SPL_SYS_MALLOC_SIZE)
+-	debug("SPL malloc() used 0x%lx bytes (%ld KB)\n", gd->malloc_ptr,
+-	      gd->malloc_ptr / 1024);
+-#endif
++	if (CONFIG_IS_ENABLED(SYS_MALLOC_F) &&
++	    !IS_ENABLED(CONFIG_SPL_SYS_MALLOC_SIZE))
++		debug("SPL malloc() used 0x%lx bytes (%ld KB)\n",
++		      gd_malloc_ptr(), gd_malloc_ptr() / 1024);
++
+ 	bootstage_mark_name(get_bootstage_id(false), "end phase");
+ #ifdef CONFIG_BOOTSTAGE_STASH
+ 	ret = bootstage_stash((void *)CONFIG_BOOTSTAGE_STASH_ADDR,
+diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
+index f8fc87f1e46e..937fb12516c1 100644
+--- a/include/asm-generic/global_data.h
++++ b/include/asm-generic/global_data.h
+@@ -588,6 +588,12 @@ static_assert(sizeof(struct global_data) == GD_SIZE);
+ #define gd_set_pci_ram_top(val)
+ #endif
  
- config VPL_DM
-@@ -42,8 +42,8 @@ config VPL_DM
- 	help
- 	  Enable driver model in VPL. You will need to provide a
- 	  suitable malloc() implementation. If you are not using the
--	  full malloc() enabled by CFG_SPL_SYS_MALLOC_START,
--	  consider using CONFIG_SPL_SYS_MALLOC_SIMPLE.
-+	  full malloc() enabled by CFG_TPL_SYS_MALLOC_START,
-+	  consider using CONFIG_TPL_SYS_MALLOC_SIMPLE.
- 
- config DM_WARN
- 	bool "Enable warnings in driver model"
++#if CONFIG_VAL(SYS_MALLOC_F_LEN)
++#define gd_malloc_ptr()		gd->malloc_ptr
++#else
++#define gd_malloc_ptr()		0L
++#endif
++
+ /**
+  * enum gd_flags - global data flags
+  *
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
