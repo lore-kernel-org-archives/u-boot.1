@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DA9BE7E635
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:05:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46A56E7E637
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:11:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FD6E86BA6;
-	Tue, 26 Sep 2023 16:05:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 54D5986CBC;
+	Tue, 26 Sep 2023 16:11:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y1KkK5za";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lnIrmuxZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 785BE86B93; Tue, 26 Sep 2023 16:05:47 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id B3E9286B93; Tue, 26 Sep 2023 16:11:34 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3153C86D47
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:05:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12E3986D90
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:11:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-59f1dff5298so98420647b3.3
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:05:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=bmeng.cn@gmail.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-534659061afso1495160a12.3
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:11:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695737144; x=1696341944; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=s8LfSD14UgM+TWYOvjTVwryZqmghpAfmbE0ngv9CA3U=;
- b=Y1KkK5zaFUzqVZ40UEjqdQyp9feyLJ7RGp9WAFvcGId51Fb/5wYeNCRvf6CLhi/U+w
- UamWLr+CUIrtHt8mw1+WZC7IpGl4q6UCHMHozkyMaLiXUkDN6KyLiGTIvFwCWgJUpFM2
- Baa4GSfqkBrxUhNgwNlMuqk4ILFpVF4mE5wVY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695737144; x=1696341944;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1695737491; x=1696342291; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s8LfSD14UgM+TWYOvjTVwryZqmghpAfmbE0ngv9CA3U=;
- b=ZMAUqE6afWPGE4rdIJw7ksTU/vvxbBtEfwwAQsxYGWLR4wrQwxee8HPT/TYTgiBzAl
- 0+g46/6W7omyKUjF2HeVGT3MebnoIosXgJupScN2/FyL8rCfcrsBL37AqQawU1wCFETS
- ZTdJPWo7m6Cskk+IC3Ossj15Epv7CrUih9qzqzvgPpOBtXsBZTFt30DjcoqxG3XBFerB
- XAGgfoGI/HYs8TonAejBEvpjqEMSsyQADZ0bNFoG8haPK7XPF4BOZ3+jbg49DloSRZA2
- LNBVqF4QKdQPFW/qIce+CWxWxoWihr8jMnePYvoT6mNe0wvQAF4YgdaPD8CjUrB5n+ys
- rF6g==
-X-Gm-Message-State: AOJu0YxUZ7XXseDccDHAvaqqTZek68yvW5XWhdIv8l0yn+twQBWVzWKI
- lnB1I45w5jhINVgDiuAIRsruMmejkvOsd9tKdRGVrQ==
-X-Google-Smtp-Source: AGHT+IFeMHNJrPhzZA9/UGLVwiz5KDAFZVl/Ik10IBhMY2CVlwxf+ZqQpBwlkfW/W1ycyUS7Xtkt8g==
-X-Received: by 2002:a81:b3ca:0:b0:59f:7650:8fdb with SMTP id
- r193-20020a81b3ca000000b0059f76508fdbmr5356239ywh.33.1695737143792; 
- Tue, 26 Sep 2023 07:05:43 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a080-e51b-f064-cf67.res6.spectrum.com.
- [2603:6081:7b00:6400:a080:e51b:f064:cf67])
- by smtp.gmail.com with ESMTPSA id
- p188-20020a0dcdc5000000b0058038e6609csm3025299ywd.74.2023.09.26.07.05.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Sep 2023 07:05:43 -0700 (PDT)
-Date: Tue, 26 Sep 2023 10:05:41 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com
-Subject: Re: [PULL] u-boot-riscv/master
-Message-ID: <20230926140541.GV305624@bill-the-cat>
-References: <ZRJqblFTuKuSI1hS@swlinux02>
+ bh=FllAq6xerH8N17+hgJuMEbpVOEn5MFpwP7sclAC39Ms=;
+ b=lnIrmuxZIJ6dJjYk1V0LRl/gWrDx2RcQ2T/Y6IJ0MoWw/Qa4EORV/aFVpFSIKeI0O7
+ UOO3ZOqVCujY0QvNF2zE0W7fjJfkFJV0Wsx2ttHgy6YAABzHKoCP4TTFXp1eNWwhyBTx
+ ZpupGvg6aSAb97+ozUFs7wR/2ivLZHE6t2jZE61K6tdcMhAKwFuTOTcFTj9MEyr3umoG
+ WDSIFEzn3Kx0WAVzsruwC11nQ7VZzNDDo9dp8w7iLb3vV4V9jvfS+qTjEZ8BdoT1f7No
+ tuNUyYx+fsqnK2IVVGrZjbkw2Cac/M8W8rAwuYFm8/VRR2+JZYqsO/5/Y4zNmFQ9UeB4
+ x/PA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695737491; x=1696342291;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FllAq6xerH8N17+hgJuMEbpVOEn5MFpwP7sclAC39Ms=;
+ b=lzDmS65QHNSgeGighW6hKnhedyaqQKgpPzOH0pNXWHJpB6dYbwom279l/gcnwCBZl0
+ TC9edtIK9fNfSi/0yQ/FUaCAiMSY21jNbbB/M692ba78WX+rpvssCXiKhyx3cvRYR+M6
+ GhiWSJBIlzpMJ0FGPA0rfikGN8CGDbAo8TvI35DICYhEDLcZjhUyeFHbKS/1/KMepV5j
+ C0Dg9Kp4DPWzI9z3P8crfhIm9cMhIkM4VpNcECoeC68AEQzxjpT1UeM6blvwWa5PYwFI
+ H40dwp8+v6cJpHvND0WTiULoY9Xt62pv3W1X/Fw8vaA+yBh4PKX0o3HMEhED14AFV3wJ
+ ljzg==
+X-Gm-Message-State: AOJu0YyBQLrIayYcOBMfNT4kpg+dI0Ewmn6Lx/W/Bdd6pSb3Wh0gOQnc
+ uE8L7bRkro8om2yqc/Kyw8f9GMolh8ukb9IT320=
+X-Google-Smtp-Source: AGHT+IF8hSdDAc0bjVLbMA6bRASuCMRnvXq8bKpxMJaDkukdmLpdkKrOZD0Y3Cj973PMHjCAKxLETxByjCRRqvC+i1A=
+X-Received: by 2002:aa7:d0c2:0:b0:51d:f5bd:5a88 with SMTP id
+ u2-20020aa7d0c2000000b0051df5bd5a88mr9807284edo.38.1695737491366; Tue, 26 Sep
+ 2023 07:11:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="E3u2pVc45Yf88wn0"
-Content-Disposition: inline
-In-Reply-To: <ZRJqblFTuKuSI1hS@swlinux02>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230926084346.2237483-1-bmeng@tinylab.org>
+ <2487902a-1b98-42be-9d7c-16c98fd56815@gmx.de>
+In-Reply-To: <2487902a-1b98-42be-9d7c-16c98fd56815@gmx.de>
+From: Bin Meng <bmeng.cn@gmail.com>
+Date: Tue, 26 Sep 2023 22:11:19 +0800
+Message-ID: <CAEUhbmWGQ9F5XineJa-gM1yof0bf2rGZBgX+7=1R4s5=BCQ+3g@mail.gmail.com>
+Subject: Re: [PATCH 00/15] blk: sandbox: Support binding a device with a given
+ logical block size
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Bin Meng <bmeng@tinylab.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Heiko Schocher <hs@denx.de>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Johan Jonker <jbx6244@gmail.com>, 
+ Joshua Watt <jpewhacker@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Suchanek <msuchanek@suse.de>, 
+ Peng Fan <peng.fan@nxp.com>, Tobias Waldekranz <tobias@waldekranz.com>,
+ Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,58 +96,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heinrich,
 
---E3u2pVc45Yf88wn0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Tue, Sep 26, 2023 at 4:58=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
+x.de> wrote:
+>
+> On 9/26/23 10:43, Bin Meng wrote:
+> > At present on Sandbox when binding to a host backing file, the host
+> > block device is created with a hard-coded 512 bytes block size.
+> >
+> > Such assumption works for most cases, but for situation that with a raw
+> > image file dump from a pre-formatted GPT partitioned disk image from a
+> > 4KiB block size device, when binding this file to a host device and map=
+ping
+> > this device to a blkmap, "blkmap" command like "blkmap part" won't work
+> > correctly, due to block size mismatch during parsing the partition tabl=
+e.
+> >
+> > This series updates Sandbox block driver, as well as the blkmap driver,
+> > to get rid of the hard-coded 512 bytes block size assumption.
+> >
+> > This series is available at u-boot-x86/blk for testing.
+>
+> It is really good to have an easy way to test other block sizes.
+>
+> We can also use QEMU for alternative block sizes:
+>
+> $ qemu-system-riscv64 -device nvme,help
+> logical_block_size=3D<size>
+> physical_block_size=3D<size>
 
-On Tue, Sep 26, 2023 at 01:21:50PM +0800, Leo Liang wrote:
+Yeah, please report any issue you find.
 
-> Hi Tom,
->=20
-> The following changes since commit 15155ab0a3d1f839509bcac620bfb38f950bea=
-d6:
->=20
->   Merge tag 'u-boot-imx-20230923' of https://source.denx.de/u-boot/custod=
-ians/u-boot-imx (2023-09-24 17:15:31 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git
->=20
-> for you to fetch changes up to 16dbe3d9d45527f67d479535a22dc4054ae93e99:
->=20
->   riscv: set fdtfile on VisionFive 2 (2023-09-26 10:43:02 +0800)
->=20
-> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
--riscv/-/pipelines/17879
->=20
-> However, this patch has landed in the "next" branch.
-> Could we cherry-pick this commit to have this patch on master branch ?
-> =20
+>
+> In the commit messages, please, make it clear that you refer to logical
+> block sizes and not to the physical block size.
 
-Applied to u-boot/master, thanks!
+For drivers we rarely care about physical_block_size as they always
+operate on LBA. But I can write it down clearly that logical block
+size is used.
 
---=20
-Tom
-
---E3u2pVc45Yf88wn0
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUS5TUACgkQFHw5/5Y0
-tyy6uwv+LkACuq5shgIK0mGYyCEGtZ/re13yjj5/i7Jq/ks0sHtIgUNlJdj3cWjS
-du7ed4bRRPsKBARNbvDHj9cCBdfGcTGGGsTPzoefgdGbEvGQwjXJcmXSkORKUpBF
-NYgMf+Gpbna5UxAIAJUfUbTWCcXpH6CAOPNgjUSMCvQtH1NmtWcT5t1S44C4+K3r
-Fn+RrvCf1Trrjf2hhfuWdYzgMQDik01jqZIe7oRqKlZqxblSmSuIWbsdZEPc1OKP
-Vrn8fsRAdbnKmhEnsVjLo0tXapeLecJj63WdkGM5bwx/rq7PiGK+6jyQc3mCXKuk
-I/WCulHaQSKEK44+kGCbpmH2auvs4Zi+0GbAmgTFEkWyiJ5TMsJX02yOSYQFPuko
-h8KMYXJ2hkwOuA0noW4qOgMZJ35dXYM73GLDgx5fEeU3337YECWc56SeWAcpsNHP
-1MIMFXob6yCieKYWwIYPV9Z4B+Cpn3k/MhYOUQFzqVCIiOydNZhs/PXGOrYQ+Vy+
-s4IS2X6q
-=AyAK
------END PGP SIGNATURE-----
-
---E3u2pVc45Yf88wn0--
+Regards,
+Bin
