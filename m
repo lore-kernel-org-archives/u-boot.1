@@ -4,108 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D773E7E633
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 13:08:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8311E7E635
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 13:13:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 535F786D90;
-	Tue, 26 Sep 2023 15:07:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F0DE86B70;
+	Tue, 26 Sep 2023 15:13:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kvoctNs8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="khUUbFAL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7A2586A33; Tue, 26 Sep 2023 13:38:46 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::62e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6FFE186D61; Tue, 26 Sep 2023 15:13:30 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A71E786BE5
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 13:38:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 642E586A24
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 15:13:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=love.kumar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=L9fMGsmt6mgo5EPY0EgH7mszzAS6U1ZpkaIX38UnPEY8hhIaXgSL0JvvCxCJMOrkmKu4QBUfUXsxS+Ew/w08w8cV6doK+vQz4dDQIYm6VPHrUuNh3MDM2JaHpYgwvh9vv58wKLah6l2PsxGg86Dyr8iX3f2YtkrXp5VSQ6k/0Bzz6jZ9dwyFSOub5vTmGbVYhEbKw1k7+7Olt0HNnq8Y2mzwyHA8jLwd+Rd85A+tpmW30yY28F/7mtbfqTd0DAvGLe6xoZk3UQKK8Hs1YROK+gwmN4gVi+RZxBWtmZtDYDsIsFVhhUuhn+WTi0JoKl3NhqlOjztpuBvniWpq6Z4/VA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gy73PfS/3l8VMnG/vBEt17qgPWbEaqV9zkqQlncrWv0=;
- b=YlEaFrx8YF+0Se7TJaJH0452UC5hQc5BwUkXT3CYvcqZNTjKczUZ8O2lKzfyGVDgnm214zK7REilTF3Iu6A8ug0mRjaFSc8ZnO6ji2B9UruchRQm07mkcbR3KiLLiEHIRGbtK07En0qkIvPNkT+a848K5om6V6EHz87QlHqZbKRbsz5bxNaMtDWHAh2YriBa9SI5oLRmxEHKT5zY/ubBLiF+QRHrJ1NMfx2RheA1b4cxij2K8p3JEz5cBMDTvVQEKg4w5d3KBrlsHl+bdzh7ACwVLqS1mdN57BGbvi4dYXkIVkcBwtpBz/SJdaGBemQ1F2nkNBSe5Vk0UV5Ju+skdA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gy73PfS/3l8VMnG/vBEt17qgPWbEaqV9zkqQlncrWv0=;
- b=kvoctNs8tn4ipd//3R8ukGVCJpDBxc3kXdLPpxAHLCjJYuHF93SAld7e/h8VDPrkdqbA2YGlkmVPqdHSr/3ZhChgC1kjNLwI6LPvJf/+EARryDBFTXmEgPn4YIsBtSX4NIuX/0p9ZHU8CUQS6CKKxJHPDeW+ikMjw4smiKMAaVw=
-Received: from MN2PR14CA0024.namprd14.prod.outlook.com (2603:10b6:208:23e::29)
- by DM4PR12MB7672.namprd12.prod.outlook.com (2603:10b6:8:103::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.28; Tue, 26 Sep
- 2023 11:38:39 +0000
-Received: from BL02EPF0001A0FC.namprd03.prod.outlook.com
- (2603:10b6:208:23e:cafe::43) by MN2PR14CA0024.outlook.office365.com
- (2603:10b6:208:23e::29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.35 via Frontend
- Transport; Tue, 26 Sep 2023 11:38:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF0001A0FC.mail.protection.outlook.com (10.167.242.103) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Tue, 26 Sep 2023 11:38:38 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
- 2023 06:38:38 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
- 2023 06:38:37 -0500
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
- Transport; Tue, 26 Sep 2023 06:38:36 -0500
-From: Love Kumar <love.kumar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH] test/py: sleep: Add a test for the time command
-Date: Tue, 26 Sep 2023 17:08:35 +0530
-Message-ID: <acb9a1175427a1a7fba80f9dfe9d90278850ae90.1695728179.git.love.kumar@amd.com>
-X-Mailer: git-send-email 2.25.1
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-50308217223so13911245e87.3
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 06:13:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1695734007; x=1696338807; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=E4L0uGrPNnh9O42gTehiwUOiklqj7+vjNuSNpV6kzo8=;
+ b=khUUbFALvFIadM2GJQHaFhsiHgeTp3C7gayQcPhNObSxkBgsX6HBfseBSlGpo6wY9x
+ Pt4UtGaF9iYodP4c5zyPgLdHZlzj9ziKMRa2eWvphQD+Wi8dZzbhRP/LcKawzkcq3h+H
+ 8ShVyKklokxxD051O+s739F09zWEy9LGNW/PvlXLX24rly04NlMv7PcFmwZacpNpP9ou
+ yyCwTe7ZsYyehaKUwq4Zp9EwYzDeKp6Vy4GsTKx+6/dxZw0aFYTpKugFE/0ItVUGPVFY
+ NWn/f3DLSLGo54kknCLb9EtA/e9onn6rPcRBOr7iyEz2IXcUr6K+bL5aCP2AgZeuD6tT
+ PsIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695734007; x=1696338807;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E4L0uGrPNnh9O42gTehiwUOiklqj7+vjNuSNpV6kzo8=;
+ b=aUXRZ+ikQhl37euei6TwC94Qkp43pHMzfJyYeV7B0njfMuweDE7KTvbEveISIkaYkK
+ VX3JGWFFrP6V4dmpWFVy18o7X/1c7Ix4YHTEad1p8pjqyBnyJf53R118nK7Kl6RyYOZ/
+ Nc1P4e+D+eQ5Kjy8fA2tf+4orLLKfY2iBLVnxdKN5YvhtiT2vlkxR/FpR6H/B5k/zE84
+ vx1XdCSK576TgKlUX79CQMiaywRL/7UvqaWOmHrXdIRnX4qirPFXujtn6kxwbUhplDk2
+ TXNzssDSIHbtwduvKhDFLUODH8kuDfLHLn9m2Z3EZGjrCePuM9iP73A/HjF92ZNn30Y/
+ o3xw==
+X-Gm-Message-State: AOJu0YzfRaukKUTgglm39DCNrGxh6Fag0vAnr5oAmF1t8Ufu2j0CFCKy
+ KFOh6KjqjyUn8X040OYPX2Z3+PUukLj5zoqZOeHybQ==
+X-Google-Smtp-Source: AGHT+IGlrk6peb06nmTmXGpGUKjASLRE4Qjbr0N4NQrLno7ovMxgHgSphX7rSeJ3EQcilYil/w7BQEOJYUH8flokmzc=
+X-Received: by 2002:a05:6512:4890:b0:503:102c:7a05 with SMTP id
+ eq16-20020a056512489000b00503102c7a05mr7337636lfb.58.1695734007579; Tue, 26
+ Sep 2023 06:13:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FC:EE_|DM4PR12MB7672:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6bd59566-fd39-4d83-eaf5-08dbbe85207b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Pt+5YJgFhXtPJCnXTE/CLOnVl2mjljBQdus53e8p0otAg39ilIkFXXDL0F4ZNCXyUpFHQ9mdJzddK+TSTiqinL55vnxwe8BY5yDBozspW0ekWJefJcQGDaCchg3gdik7GDy89UqK5yzE851ToUzORfSK2S2xQRP/xuVpQP81zw7PgHint1ODIgYSa3y14OYuhT/IY29ZT7erRpxuksjODG/SzVsxcCuP8EuQm2NMRIr80izp/G6qWEsmvtf300pMLi+in9G81H/uZg5o9spIfBcs7lN7KbsaUKpZrwSjozQciLi55NlI3WW7UKaUbk63+RQdKyj7Wa2o0o2zRq5VLj5fH9Roz/RbVrTDP7uA9uRlQ7XUt/I7EGIHPDlNBdvliPbPZwA05FwrqzutUXWoXT/z9BSNso0sTKP2Db0Ai6+Tep5KMbH5xr/NkdoRRJ+w4XQSxhmp45wY4DD53Bm050KvDkkxnaCbnkoYo9YWkeLUjNT+FN9Gnp5SvsXas9RKkxUQgvFmjGXxBzImr1Yv5BlOK0rSLUE4oy+IH14aRpcGWPbPJJR0Zp9XbCqVLG8qQv0HLdU86qveZyRRLeXpHlwVtFPhHN9fettlVuI74wxCtyp9igzA7u83hGiCHfdeq4LuqcmqZYVe6hbkZJ4wzB83Y4cY5z8zGDKusQwzMUxyhkic+oBfrq57MxTa2XrGZpZYdHpVmuBLd+sjosZvYqXKG3NhkMvcXDfjvBLWtPBsCJOcqSYw1lCYAkAweSzQYD7ePLUtzUKyaukv2fDHTQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(396003)(39860400002)(346002)(136003)(376002)(230922051799003)(451199024)(186009)(1800799009)(82310400011)(40470700004)(46966006)(36840700001)(40460700003)(2906002)(2616005)(86362001)(40480700001)(36756003)(478600001)(8936002)(47076005)(4326008)(8676002)(83380400001)(82740400003)(41300700001)(356005)(81166007)(5660300002)(44832011)(36860700001)(316002)(26005)(6916009)(336012)(426003)(107886003)(70586007)(70206006)(54906003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2023 11:38:38.7508 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6bd59566-fd39-4d83-eaf5-08dbbe85207b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FC.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7672
-X-Mailman-Approved-At: Tue, 26 Sep 2023 15:07:17 +0200
+References: <20230921015730.1511373-1-sjg@chromium.org>
+ <20230921015730.1511373-31-sjg@chromium.org>
+ <CAC_iWjJ=-MvO5rPwmnGTbjyaqTv+VzXNq2mXmP+Az3FKaQ_Jyg@mail.gmail.com>
+ <CAPnjgZ3yAYQ7V=n-4MyPiaB_JU7_wre9xOHg5K0L22a4gYBenA@mail.gmail.com>
+ <CAC_iWjJBsNXguALKFKVDOnTWFH4YB6PMevt43fOyQWonitwS7w@mail.gmail.com>
+ <CAPnjgZ2DFvGz6NvS5JORBLXcCk0HMLYM-HGaRhqWDzuz4ZF1Xw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2DFvGz6NvS5JORBLXcCk0HMLYM-HGaRhqWDzuz4ZF1Xw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 26 Sep 2023 16:12:51 +0300
+Message-ID: <CAC_iWjLS62kkMOYT6UiGoL66o-CaFst1nYWv7xgH+GNyeuaz9A@mail.gmail.com>
+Subject: Re: [PATCH v2 30/32] fdt: Allow the devicetree to come from a bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>,
+ Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -122,42 +94,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Execute "time <sleep cmd>", and validate that it gives the approximately
-the correct amount of command execution time.
+Hi Simon,
 
-Signed-off-by: Love Kumar <love.kumar@amd.com>
----
- test/py/tests/test_sleep.py | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+[...]
 
-diff --git a/test/py/tests/test_sleep.py b/test/py/tests/test_sleep.py
-index 392af29db224..388f544d07df 100644
---- a/test/py/tests/test_sleep.py
-+++ b/test/py/tests/test_sleep.py
-@@ -41,3 +41,23 @@ def test_sleep(u_boot_console):
-     if not u_boot_console.config.gdbserver:
-         # margin is hopefully enough to account for any system overhead.
-         assert elapsed < (sleep_time + sleep_margin)
-+
-+def test_time(u_boot_console):
-+    """Test the time command, and validate that it gives approximately the
-+    correct amount of command execution time."""
-+
-+    sleep_skip = u_boot_console.config.env.get("env__sleep_accurate", True)
-+    if not sleep_skip:
-+        pytest.skip("sleep is not accurate")
-+
-+    if u_boot_console.config.buildconfig.get("config_cmd_misc", "n") != "y":
-+        pytest.skip("sleep command not supported")
-+
-+    sleep_time = u_boot_console.config.env.get("env__sleep_time", 10)
-+    sleep_margin = u_boot_console.config.env.get("env__sleep_margin", 0.25)
-+    output = u_boot_console.run_command("time sleep %d" % sleep_time)
-+    execute_time = float(output.split()[1])
-+    assert sleep_time >= (execute_time - 0.01)
-+    if not u_boot_console.config.gdbserver:
-+        # margin is hopefully enough to account for any system overhead.
-+        assert sleep_time < (execute_time + sleep_margin)
--- 
-2.25.1
+> > > >
+> > > > So, instead of adding OF_BLOBLIST, just move this code under OF_BOARD,
+> > > > inside an IS_ENABLED(BLOBLIST) check. If a bloblist is required and
+> > > > the previous stage loader is supposed to provide a DT we can just
+> > > > throw an error and stop booting
+> > >
+> > > This is the bit I don't get.
+> > >
+> > > The OF_BOARD thing is a hack, in that the board can do what it likes.
+> > > It is our way of handling board-specific mechanisms.
+> > >
+> > > But I am wanting a standard mechanism, i.e. like 'standard passage', a
+> > > way of passing the DT through the phases.
+> > >
+> > > If I put this under OF_BOARD, then the board gets to override the
+> > > mechanism, so which is it?
+> >
+> > No, it's the other way around in my head.  OF_BOARD description is 'a
+> > previous stage loader hands me over the DT', which is a superset of
+> > the bloblist.
+> > Whether it comes in a firmware handoff format, or a hacky register the
+> > previous bootloader filled in is a detail we have to deal with and we
+> > need to keep backwards compatibility.
+> >
+> > Maybe adding a coding snip would help
+> > if (IS_ENABLED(CONFIG_OF_BOARD)) {
+> >     if (CONFIG_IS_ENABLED(BLOBLIST)) { <- This instead of OF_BLOBLIST
+> >         ret = bloblist_maybe_init();
+> >         if (ret)
+> >             return ret;
+> >         /* Dynamically scan for a DT in the bloblist. */
+> >         gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+> >         if (!gd->fdt_blob) {
+> >             printf("Not FDT found in bloblist\n");
+> >             bloblist_show_list();
+> >            // We can choose to not return an error here and keep
+> > scanning in case the DT is in a register, but I am fine with both
+> >             return -ENOENT;
+> >         }
+> >        gd->fdt_src = FDTSRC_BLOBLIST;
+> >        bloblist_show_list();
+> >        log_debug("Devicetree is in bloblist at %p\n", gd->fdt_blob);
+> >       // We can also bail out of this entirely if we do find a DT via
+> > a bloblist.
+> >      } else {
+> >          gd->fdt_blob = board_fdt_blob_setup(&ret);
+> >          if (ret)
+> >              return ret;
+> >          gd->fdt_src = FDTSRC_BOARD;
+> >     }
+> > }
+> >
+> > I haven't even compiled the code above, but it should give you a
+> > better idea of what I am suggesting
+>
+> OK I see...yes that is along the lines of what I thought you meant.
+>
+> But OF_BOARD does not mean 'previous stage loader hands me over the
+> DT'. I means call board_fdt_blob_setup() which could do anything. If
+> some boards use that function to implement getting a DT from the prior
+> stage, that's fine, but it isn't limited to that.
 
+I think it is limited. The help message says 'Provider of DTB for DT
+control' and OF_BOARD help message is 'Provided by the board (e.g a
+previous loader) at runtime '.
+In fact, that's exactly what I tried to clean up with commit
+e7fb789612e39.  Sandbox had its special OF_HOSTFILE for the DT.  We
+cleaned that up and then reintroduced it with a different name in
+commit 275b4832f6bf91c.
+
+In any case, if people want to do 'more' we have
+CONFIG_OF_BOARD_SETUP/FIXUP which should be used instead for other
+platform-specific stuff.  While at it OF_PRIOR_STAGE is a much better
+name that OF_BOARD.  So we could get rid of OF_PRIOR_STAGE and rename
+OF_BOARD to that.
+
+The function name that is called in the setup phase is
+board_fdt_blob_setup(), so it's explicitly targeting the fdt setup, or
+at least that's what the name suggets. Grepping for CONFIG_OF_BOARD
+matches in
+board/AndesTech/ae350/ae350.c
+board/armltd/vexpress64/vexpress64.c
+board/raspberrypi/rpi/rpi.c
+board/sifive/unleashed/unleashed.c
+board/sifive/unmatched/unmatched.c
+board/starfive/visionfive2/starfive_visionfive2.c
+board/xilinx/common/board.c:
+All these just use it to setup the DT, apart from the rpi which
+additionally sets up some memory for the DT.
+
+Apart from that it's used on a few platform drivers to setup so DM
+flags (most of them set DM_FLAG_PRE_RELOC), but we can easily change
+that and use The only affected files are
+drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+drivers/serial/serial_bcm283x_mu.c
+drivers/serial/serial_bcm283x_pl011.c
+
+So making OF_BOARD do the right thing is trivial and I can work with
+you on that.  I don't think it's too much effort anyway
+
+>
+> There is an HAS_PRIOR_STAGE option which sets OF_BOARD at present. But
+> that doesn't seem right in the long term.
+>
+> The goal here is to standardise the passing of DT from a prior stage,
+> so that all boards (except perhaps the dark child rpi) use standard
+> passage (bloblist) to do so. That should not depend on OF_BOARD and in
+> fact I would like to make OF_BOARD the exception, used when
+> OF_BLOBLIST doesn't suit.
+
+We are on the same page regarding the standardization.  But I think
+shoehorning an OF_BLOBLIST just papers over the problem.
+The board should ideally have 2 options
+1. a previous loader gives me the DT in X random ways (one of them is
+the bloblist)
+2. U-Boot provides it because it was built with it
+A user can always load his own special DT if he wants to, but that's
+done at a later stage.
+
+But if we clean it up properly we can
+1. Do Not allow people to sneak in random options in OF_BOARD or
+whatever and keep the options sane and clean
+2. enable BLOBLIST by default in all supported platforms and push to
+make it the default.  We can even be stricter and crash on boot if
+BLOBLIST is selected and we can't find the DT in there.  That would
+have a similar effect to selecting it as a Kconfig option
+
+Thanks
+/Ilias
+
+
+>
+> >
+> > Hope that helps
+> > /Ilias
+> > >
+> > > You say 'we can just throw and error' but what is the error? If the DT
+> > > is provided via the bloblist, there is no error. If it is not, I
+> > > already show an error and halt as you can see in the code below.
+> > >
+> > > I guess I'm just confused about what you are saying here.
+> > >
+> > > >
+> > > >
+> > > > > +               gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+> > > > > +               if (!gd->fdt_blob) {
+> > > > > +                       printf("Not FDT found in bloblist\n");
+> > > > > +                       bloblist_show_list();
+> > > > > +                       return -ENOENT;
+> > > > > +               }
+> > > >
+> > > > [...]
+> > > >
+>
+> Regards,
+> Simon
