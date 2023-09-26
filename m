@@ -4,54 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED701E7D26B
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:56:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71D06E7D26A
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:57:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E4D086DA7;
-	Tue, 26 Sep 2023 10:56:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
+	by phobos.denx.de (Postfix) with ESMTP id E15F486DC6;
+	Tue, 26 Sep 2023 10:57:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D+2LjdQa";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44BF686D93; Tue, 26 Sep 2023 10:56:16 +0200 (CEST)
-Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.155.67.158])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DB9F186DC6; Tue, 26 Sep 2023 10:57:05 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2782786DA7
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:56:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C949086D93
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:57:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=tinylab.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=bmeng@tinylab.org
-X-QQ-mid: bizesmtp79t1695718534t8g941ol
-Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 26 Sep 2023 16:55:32 +0800 (CST)
-X-QQ-SSF: 01200000000000F0I000000A0000000
-X-QQ-FEAT: I8hG9CuxGDJqKuZxo5u3u2Wc3HOLo1PDTZs5DZe33NKoNqmxphrA8lz7bD+B/
- EwK3C2iCFXtnZCyxJ9luQNPOUXD7Rx53YAB4ZdCbvX+o06sexV/WX7b7JS7LFx2+Y5WwbJp
- 8MUa1FMv0OL6e4qn9MjR/OTPuf38tXbb4zZe/y99Rx2vwTeYqsUYxiSr07rwkEHHbGVWSuS
- eM0EzsY9/ufKl5LNtxd4ro3F9KUAO9ndgbea7qAIZMvVaCfjw37Ua1Ir8fDGrKd1NwiIIwG
- qaN1LmkE95E2nPBXKyVNsIA6hCVplFEB9gVytnxplm9L3y9XAEjP5gXhbETu3zbuix2rk8R
- MmgZqLDLNwe1VYYYxGyTZIltJ4q/TmcGeY9rDCQ
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 13712936604460321818
-From: Bin Meng <bmeng@tinylab.org>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Suchanek <msuchanek@suse.de>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH 11/15] dm: blk: Rename get_desc() and make it externally
- visible
-Date: Tue, 26 Sep 2023 16:43:41 +0800
-Message-Id: <20230926084346.2237483-12-bmeng@tinylab.org>
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-690bf8fdd1aso6364965b3a.2
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 01:57:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1695718622; x=1696323422; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=piYAvzt8j9cXEf4+py1ciQiaAP/Gj+1aCKFp7Uo4Cec=;
+ b=D+2LjdQazBoYD4Wnw+PPGGkeFL+16giWRVc3g3iGBY/nPsLoDmfVUNJZcOnsHEfh/y
+ Qa+ixunZBfUQ3dTcAr7/uTOhf9eQnd5J31Un18gFx2SSCEQYVdRZyGj4/ykxCTq+5z1K
+ YDikZYBNAem+qMLduBjg/0Sgw5vDKBUvV6BXnkV33WafrQwtQz0Q9l51lUucnQQ5Y/sz
+ e0yrBZRY1FG1PMQU0F8U+PTCMFvne7WBDDepXU/JWxxHr4otWHZkEEn4uadxICxpA1O9
+ kyBEoh1lGmuui+JLfyHynt1ga3NIv58lwuqco0IjEzzulTcsiwuyHxkU+CQkXFr82cZo
+ vc4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695718622; x=1696323422;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=piYAvzt8j9cXEf4+py1ciQiaAP/Gj+1aCKFp7Uo4Cec=;
+ b=ILjI07V0dQ//lt8rd2Q2w30mysDaesSDNWBo7H6UG8KIFBksKETeEIjkuXx0/3kPdj
+ ZbrQZg/fp/8ovvxggG74rsqpYZ/lrzearqrUYrfp2d36WjT/x1yoWEzGle30JRaX69IC
+ n80I2nHi3IrM7LvpLmaEqPE8ezAvin+ZQXE/Zl8ByrJr4jUqoa6eswH9iOO9LDbXNP74
+ 88OzJhSweA07jTiL6IQ4ZvDeHSlWxEWJ3l7IzB24CDkTNKibQ9RQrfoKfBYc85Jyae4w
+ FL6YuptWNpysoMAsZctHdJSVhMF+8vacdzXulqJ75nw6bZ7Bn8+kvBXGqXLONTvcqTgv
+ h1pg==
+X-Gm-Message-State: AOJu0YzLPAzy73WszaVs3VCXP+4gPlzFl5vAv4GMJu5BeLfm1EonkFzO
+ DI4W2vI9g93BdodYg1u1C7I=
+X-Google-Smtp-Source: AGHT+IHTrxv7KH/K4EQ9KSeya/sRcTf7+1xZVHCuSrN1YUbGl/AyMuUJmC9KfJ68xZe0tN0SJZZSDQ==
+X-Received: by 2002:a05:6a20:729e:b0:13f:1622:29de with SMTP id
+ o30-20020a056a20729e00b0013f162229demr7787012pzk.7.1695718622166; 
+ Tue, 26 Sep 2023 01:57:02 -0700 (PDT)
+Received: from cs20-buildserver.lan ([2403:c300:c707:b24b:e4c0:3696:f2d7:f673])
+ by smtp.gmail.com with ESMTPSA id
+ je20-20020a170903265400b001c5fc291f02sm6515863plb.216.2023.09.26.01.57.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Sep 2023 01:57:01 -0700 (PDT)
+From: Jim Liu <jim.t90615@gmail.com>
+X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
+To: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, jim.t90615@gmail.com,
+ trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/3] arm: NPCM: fix npcm bmc error
+Date: Tue, 26 Sep 2023 16:56:47 +0800
+Message-Id: <20230926085651.395069-1-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230926084346.2237483-1-bmeng@tinylab.org>
-References: <20230926084346.2237483-1-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtp:tinylab.org:qybglogicsvrgz:qybglogicsvrgz7a-0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,125 +90,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-get_desc() can be useful outside blk-uclass.c. Let's change it to
-an API and make it externally visible.
+1. fix incorrect ram size with ecc enabld
 
-Signed-off-by: Bin Meng <bmeng@tinylab.org>
----
+2. add name for gpio function
 
- drivers/block/blk-uclass.c | 26 ++++++++------------------
- include/blk.h              | 12 ++++++++++++
- 2 files changed, 20 insertions(+), 18 deletions(-)
+3. add baud rate table
 
-diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-index 614b975e25..9407621fb2 100644
---- a/drivers/block/blk-uclass.c
-+++ b/drivers/block/blk-uclass.c
-@@ -176,17 +176,7 @@ struct blk_desc *blk_get_by_device(struct udevice *dev)
- 	return NULL;
- }
- 
--/**
-- * get_desc() - Get the block device descriptor for the given device number
-- *
-- * @uclass_id:	Interface type
-- * @devnum:	Device number (0 = first)
-- * @descp:	Returns block device descriptor on success
-- * Return: 0 on success, -ENODEV if there is no such device and no device
-- * with a higher device number, -ENOENT if there is no such device but there
-- * is one with a higher number, or other -ve on other error.
-- */
--static int get_desc(enum uclass_id uclass_id, int devnum, struct blk_desc **descp)
-+int blk_get_desc(enum uclass_id uclass_id, int devnum, struct blk_desc **descp)
- {
- 	bool found_more = false;
- 	struct udevice *dev;
-@@ -238,7 +228,7 @@ int blk_list_part(enum uclass_id uclass_id)
- 	int ret;
- 
- 	for (ok = 0, devnum = 0;; ++devnum) {
--		ret = get_desc(uclass_id, devnum, &desc);
-+		ret = blk_get_desc(uclass_id, devnum, &desc);
- 		if (ret == -ENODEV)
- 			break;
- 		else if (ret)
-@@ -261,7 +251,7 @@ int blk_print_part_devnum(enum uclass_id uclass_id, int devnum)
- 	struct blk_desc *desc;
- 	int ret;
- 
--	ret = get_desc(uclass_id, devnum, &desc);
-+	ret = blk_get_desc(uclass_id, devnum, &desc);
- 	if (ret)
- 		return ret;
- 	if (desc->type == DEV_TYPE_UNKNOWN)
-@@ -278,7 +268,7 @@ void blk_list_devices(enum uclass_id uclass_id)
- 	int i;
- 
- 	for (i = 0;; ++i) {
--		ret = get_desc(uclass_id, i, &desc);
-+		ret = blk_get_desc(uclass_id, i, &desc);
- 		if (ret == -ENODEV)
- 			break;
- 		else if (ret)
-@@ -295,7 +285,7 @@ int blk_print_device_num(enum uclass_id uclass_id, int devnum)
- 	struct blk_desc *desc;
- 	int ret;
- 
--	ret = get_desc(uclass_id, devnum, &desc);
-+	ret = blk_get_desc(uclass_id, devnum, &desc);
- 	if (ret)
- 		return ret;
- 	printf("\nIDE device %d: ", devnum);
-@@ -310,7 +300,7 @@ int blk_show_device(enum uclass_id uclass_id, int devnum)
- 	int ret;
- 
- 	printf("\nDevice %d: ", devnum);
--	ret = get_desc(uclass_id, devnum, &desc);
-+	ret = blk_get_desc(uclass_id, devnum, &desc);
- 	if (ret == -ENODEV || ret == -ENOENT) {
- 		printf("unknown device\n");
- 		return -ENODEV;
-@@ -332,7 +322,7 @@ ulong blk_read_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
- 	ulong n;
- 	int ret;
- 
--	ret = get_desc(uclass_id, devnum, &desc);
-+	ret = blk_get_desc(uclass_id, devnum, &desc);
- 	if (ret)
- 		return ret;
- 	n = blk_dread(desc, start, blkcnt, buffer);
-@@ -348,7 +338,7 @@ ulong blk_write_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
- 	struct blk_desc *desc;
- 	int ret;
- 
--	ret = get_desc(uclass_id, devnum, &desc);
-+	ret = blk_get_desc(uclass_id, devnum, &desc);
- 	if (ret)
- 		return ret;
- 	return blk_dwrite(desc, start, blkcnt, buffer);
-diff --git a/include/blk.h b/include/blk.h
-index 4a4365fbbf..0cd758d6f7 100644
---- a/include/blk.h
-+++ b/include/blk.h
-@@ -504,6 +504,18 @@ const char *blk_get_devtype(struct udevice *dev);
-  */
- struct blk_desc *blk_get_by_device(struct udevice *dev);
- 
-+/**
-+ * blk_get_desc() - Get the block device descriptor for the given device number
-+ *
-+ * @uclass_id:	Interface type
-+ * @devnum:	Device number (0 = first)
-+ * @descp:	Returns block device descriptor on success
-+ * Return: 0 on success, -ENODEV if there is no such device and no device
-+ * with a higher device number, -ENOENT if there is no such device but there
-+ * is one with a higher number, or other -ve on other error.
-+ */
-+int blk_get_desc(enum uclass_id uclass_id, int devnum, struct blk_desc **descp);
-+
- #else
- #include <errno.h>
- /*
+Jim Liu (3):
+  pinctrl: npcm8xx: add name for gpio function
+  arm: NPCM: modify baud rate table and dram setting
+  arm: npcm8xx: support dcache off
+
+ arch/arm/mach-npcm/npcm8xx/Kconfig        |  4 ++++
+ arch/arm/mach-npcm/npcm8xx/cpu.c          | 12 +++++++++++-
+ board/nuvoton/arbel_evb/arbel_evb.c       | 16 ++++++++--------
+ configs/arbel_evb_defconfig               |  1 +
+ drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c |  1 +
+ include/configs/arbel.h                   |  4 +++-
+ include/configs/poleg.h                   |  1 +
+ 7 files changed, 29 insertions(+), 10 deletions(-)
+
 -- 
 2.25.1
 
