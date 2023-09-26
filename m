@@ -4,81 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8615CE7D26A
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED701E7D26B
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0415B86DC0;
-	Tue, 26 Sep 2023 10:55:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E4D086DA7;
+	Tue, 26 Sep 2023 10:56:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="iK8hDaGH";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1E2AB86DC4; Tue, 26 Sep 2023 10:55:24 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 44BF686D93; Tue, 26 Sep 2023 10:56:16 +0200 (CEST)
+Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.155.67.158])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D8DC86DC2
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:55:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2782786DA7
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:56:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7633ac7092=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 38Q8QVNA002682; Tue, 26 Sep 2023 10:55:19 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=N9HQ+DBWjPVAo3lMs1Lx0XxBB7mUf8ptGawnUzKz8wk=; b=iK
- 8hDaGHZ/xXs5i8N7mxtxjBv6RpjGHCozAtwzOzW1zBMBInfizkl52eyaR/DSHtq5
- 1ioBqdiNY/cILKclwSeWdjHC4Lmy9MW+as909rjgsoRlsS208j1xr+6saNyOmMuV
- 4wPkvuJBft3M4e06DRUgnRVOjzDSDiEKi7jp1B4c8E8yol7CseNLJzTAM0D+uJDS
- l8pr7QGnrHDG+HHnWZxCsuIVs+gM5sSt6yCJ9kzM7GsknChwZwGJDhsQCRV2IfXZ
- FhJeA03AwhsiIz0Sqij5EbZCHl1qGunDwxpI1l2A1/HwvwWW38kx56oY+tAfuD+h
- q3B/or4gyJy6IFWcGQGw==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t9qbwuawp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Sep 2023 10:55:19 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B653110005A;
- Tue, 26 Sep 2023 10:55:18 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id AD85922A6D5;
- Tue, 26 Sep 2023 10:55:18 +0200 (CEST)
-Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
- 2023 10:55:18 +0200
-Message-ID: <1742a775-d3d5-a418-54ba-eaf0a7704217@foss.st.com>
-Date: Tue, 26 Sep 2023 10:55:17 +0200
+ dmarc=none (p=none dis=none) header.from=tinylab.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng@tinylab.org
+X-QQ-mid: bizesmtp79t1695718534t8g941ol
+Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 26 Sep 2023 16:55:32 +0800 (CST)
+X-QQ-SSF: 01200000000000F0I000000A0000000
+X-QQ-FEAT: I8hG9CuxGDJqKuZxo5u3u2Wc3HOLo1PDTZs5DZe33NKoNqmxphrA8lz7bD+B/
+ EwK3C2iCFXtnZCyxJ9luQNPOUXD7Rx53YAB4ZdCbvX+o06sexV/WX7b7JS7LFx2+Y5WwbJp
+ 8MUa1FMv0OL6e4qn9MjR/OTPuf38tXbb4zZe/y99Rx2vwTeYqsUYxiSr07rwkEHHbGVWSuS
+ eM0EzsY9/ufKl5LNtxd4ro3F9KUAO9ndgbea7qAIZMvVaCfjw37Ua1Ir8fDGrKd1NwiIIwG
+ qaN1LmkE95E2nPBXKyVNsIA6hCVplFEB9gVytnxplm9L3y9XAEjP5gXhbETu3zbuix2rk8R
+ MmgZqLDLNwe1VYYYxGyTZIltJ4q/TmcGeY9rDCQ
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 13712936604460321818
+From: Bin Meng <bmeng@tinylab.org>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Suchanek <msuchanek@suse.de>,
+ Tobias Waldekranz <tobias@waldekranz.com>
+Subject: [PATCH 11/15] dm: blk: Rename get_desc() and make it externally
+ visible
+Date: Tue, 26 Sep 2023 16:43:41 +0800
+Message-Id: <20230926084346.2237483-12-bmeng@tinylab.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230926084346.2237483-1-bmeng@tinylab.org>
+References: <20230926084346.2237483-1-bmeng@tinylab.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 10/10] ARM: dts: stm32: support display on stm32f746-disco
- board
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: <linux-amarula@amarulasolutions.com>, Alexandre Torgue
- <alexandre.torgue@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
- <20230903204849.660722-11-dario.binacchi@amarulasolutions.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230903204849.660722-11-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-09-26_07,2023-09-25_01,2023-05-22_02
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:tinylab.org:qybglogicsvrgz:qybglogicsvrgz7a-0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,217 +68,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+get_desc() can be useful outside blk-uclass.c. Let's change it to
+an API and make it externally visible.
 
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
+---
 
-On 9/3/23 22:48, Dario Binacchi wrote:
-> The patch applies the changes from Linux commit 10a970bc3ebfa ("ARM: dts:
-> stm32: support display on stm32f746-disco board") and removes the same
-> settings from stm32f746-disco-u-boot.dtsi.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> 
-> ---
-> 
->  arch/arm/dts/stm32f746-disco-u-boot.dtsi | 89 ++++++------------------
->  arch/arm/dts/stm32f746-disco.dts         | 44 ++++++++++++
->  2 files changed, 66 insertions(+), 67 deletions(-)
-> 
-> diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> index 3c2b9fc59512..1b42d6cbbc19 100644
-> --- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> @@ -23,12 +23,6 @@
->  		spi0 = &qspi;
->  	};
->  
-> -	backlight: backlight {
-> -		compatible = "gpio-backlight";
-> -		gpios = <&gpiok 3 0>;
-> -		status = "okay";
-> -	};
-> -
->  	button1 {
->  		compatible = "st,button1";
->  		button-gpio = <&gpioi 11 0>;
-> @@ -38,37 +32,10 @@
->  		compatible = "st,led1";
->  		led-gpio = <&gpioi 1 0>;
->  	};
-> -
-> -	panel-rgb@0 {
-> -		compatible = "simple-panel";
-> -		backlight = <&backlight>;
-> -		enable-gpios = <&gpioi 12 0>;
-> -		status = "okay";
-> -
-> -		display-timings {
-> -			timing@0 {
-> -				clock-frequency = <9000000>;
-> -				hactive = <480>;
-> -				vactive = <272>;
-> -				hfront-porch = <2>;
-> -				hback-porch = <2>;
-> -				hsync-len = <41>;
-> -				vfront-porch = <2>;
-> -				vback-porch = <2>;
-> -				vsync-len = <10>;
-> -				hsync-active = <0>;
-> -				vsync-active = <0>;
-> -				de-active = <1>;
-> -				pixelclk-active = <1>;
-> -			};
-> -		};
-> -	};
->  };
->  
->  &ltdc {
->  	clocks = <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>;
-> -	pinctrl-0 = <&ltdc_pins>;
-> -	status = "okay";
->  	bootph-all;
->  };
->  
-> @@ -96,6 +63,28 @@
->  	};
->  };
->  
-> +&panel_rgb {
-> +	compatible = "simple-panel";
-> +
-> +	display-timings {
-> +		timing@0 {
-> +			clock-frequency = <9000000>;
-> +			hactive = <480>;
-> +			vactive = <272>;
-> +			hfront-porch = <2>;
-> +			hback-porch = <2>;
-> +			hsync-len = <41>;
-> +			vfront-porch = <2>;
-> +			vback-porch = <2>;
-> +			vsync-len = <10>;
-> +			hsync-active = <0>;
-> +			vsync-active = <0>;
-> +			de-active = <1>;
-> +			pixelclk-active = <1>;
-> +		};
-> +	};
-> +};
-> +
->  &pinctrl {
->  	ethernet_mii: mii@0 {
->  		pins {
-> @@ -160,40 +149,6 @@
->  		};
->  	};
->  
-> -	ltdc_pins: ltdc@0 {
-> -		pins {
-> -			pinmux = <STM32_PINMUX('E', 4, AF14)>, /* B0 */
-> -				 <STM32_PINMUX('G',12, AF9)>,  /* B4 */
-> -				 <STM32_PINMUX('I', 9, AF14)>, /* VSYNC */
-> -				 <STM32_PINMUX('I',10, AF14)>, /* HSYNC */
-> -				 <STM32_PINMUX('I',14, AF14)>, /* CLK */
-> -				 <STM32_PINMUX('I',15, AF14)>, /* R0 */
-> -				 <STM32_PINMUX('J', 0, AF14)>, /* R1 */
-> -				 <STM32_PINMUX('J', 1, AF14)>, /* R2 */
-> -				 <STM32_PINMUX('J', 2, AF14)>, /* R3 */
-> -				 <STM32_PINMUX('J', 3, AF14)>, /* R4 */
-> -				 <STM32_PINMUX('J', 4, AF14)>, /* R5 */
-> -				 <STM32_PINMUX('J', 5, AF14)>, /* R6 */
-> -				 <STM32_PINMUX('J', 6, AF14)>, /* R7 */
-> -				 <STM32_PINMUX('J', 7, AF14)>, /* G0 */
-> -				 <STM32_PINMUX('J', 8, AF14)>, /* G1 */
-> -				 <STM32_PINMUX('J', 9, AF14)>, /* G2 */
-> -				 <STM32_PINMUX('J',10, AF14)>, /* G3 */
-> -				 <STM32_PINMUX('J',11, AF14)>, /* G4 */
-> -				 <STM32_PINMUX('J',13, AF14)>, /* B1 */
-> -				 <STM32_PINMUX('J',14, AF14)>, /* B2 */
-> -				 <STM32_PINMUX('J',15, AF14)>, /* B3 */
-> -				 <STM32_PINMUX('K', 0, AF14)>, /* G5 */
-> -				 <STM32_PINMUX('K', 1, AF14)>, /* G6 */
-> -				 <STM32_PINMUX('K', 2, AF14)>, /* G7 */
-> -				 <STM32_PINMUX('K', 4, AF14)>, /* B5 */
-> -				 <STM32_PINMUX('K', 5, AF14)>, /* B6 */
-> -				 <STM32_PINMUX('K', 6, AF14)>, /* B7 */
-> -				 <STM32_PINMUX('K', 7, AF14)>; /* DE */
-> -			slew-rate = <2>;
-> -		};
-> -	};
-> -
->  	qspi_pins: qspi@0 {
->  		pins {
->  			pinmux = <STM32_PINMUX('B', 2, AF9)>, /* CLK */
-> diff --git a/arch/arm/dts/stm32f746-disco.dts b/arch/arm/dts/stm32f746-disco.dts
-> index e1564d69f9f6..431275134033 100644
-> --- a/arch/arm/dts/stm32f746-disco.dts
-> +++ b/arch/arm/dts/stm32f746-disco.dts
-> @@ -25,6 +25,19 @@
->  		reg = <0xC0000000 0x800000>;
->  	};
->  
-> +	reserved-memory {
-> +		#address-cells = <1>;
-> +		#size-cells = <1>;
-> +		ranges;
-> +
-> +		linux,cma {
-> +			compatible = "shared-dma-pool";
-> +			no-map;
-> +			size = <0x80000>;
-> +			linux,dma-default;
-> +		};
-> +	};
-> +
->  	aliases {
->  		serial0 = &usart1;
->  	};
-> @@ -50,6 +63,25 @@
->  		regulator-min-microvolt = <3300000>;
->  		regulator-max-microvolt = <3300000>;
->  	};
-> +
-> +	backlight: backlight {
-> +		compatible = "gpio-backlight";
-> +		gpios = <&gpiok 3 GPIO_ACTIVE_HIGH>;
-> +		status = "okay";
-> +	};
-> +
-> +	panel_rgb: panel-rgb {
-> +		compatible = "rocktech,rk043fn48h";
-> +		power-supply = <&vcc_3v3>;
-> +		backlight = <&backlight>;
-> +		enable-gpios = <&gpioi 12 GPIO_ACTIVE_HIGH>;
-> +		status = "okay";
-> +		port {
-> +			panel_in_rgb: endpoint {
-> +				remote-endpoint = <&ltdc_out_rgb>;
-> +			};
-> +		};
-> +	};
->  };
->  
->  &clk_hse {
-> @@ -80,6 +112,18 @@
->  	};
->  };
->  
-> +&ltdc {
-> +	pinctrl-0 = <&ltdc_pins_a>;
-> +	pinctrl-names = "default";
-> +	status = "okay";
-> +
-> +	port {
-> +		ltdc_out_rgb: endpoint {
-> +			remote-endpoint = <&panel_in_rgb>;
-> +		};
-> +	};
-> +};
-> +
->  &sdio1 {
->  	status = "okay";
->  	vmmc-supply = <&vcc_3v3>;
+ drivers/block/blk-uclass.c | 26 ++++++++------------------
+ include/blk.h              | 12 ++++++++++++
+ 2 files changed, 20 insertions(+), 18 deletions(-)
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+index 614b975e25..9407621fb2 100644
+--- a/drivers/block/blk-uclass.c
++++ b/drivers/block/blk-uclass.c
+@@ -176,17 +176,7 @@ struct blk_desc *blk_get_by_device(struct udevice *dev)
+ 	return NULL;
+ }
+ 
+-/**
+- * get_desc() - Get the block device descriptor for the given device number
+- *
+- * @uclass_id:	Interface type
+- * @devnum:	Device number (0 = first)
+- * @descp:	Returns block device descriptor on success
+- * Return: 0 on success, -ENODEV if there is no such device and no device
+- * with a higher device number, -ENOENT if there is no such device but there
+- * is one with a higher number, or other -ve on other error.
+- */
+-static int get_desc(enum uclass_id uclass_id, int devnum, struct blk_desc **descp)
++int blk_get_desc(enum uclass_id uclass_id, int devnum, struct blk_desc **descp)
+ {
+ 	bool found_more = false;
+ 	struct udevice *dev;
+@@ -238,7 +228,7 @@ int blk_list_part(enum uclass_id uclass_id)
+ 	int ret;
+ 
+ 	for (ok = 0, devnum = 0;; ++devnum) {
+-		ret = get_desc(uclass_id, devnum, &desc);
++		ret = blk_get_desc(uclass_id, devnum, &desc);
+ 		if (ret == -ENODEV)
+ 			break;
+ 		else if (ret)
+@@ -261,7 +251,7 @@ int blk_print_part_devnum(enum uclass_id uclass_id, int devnum)
+ 	struct blk_desc *desc;
+ 	int ret;
+ 
+-	ret = get_desc(uclass_id, devnum, &desc);
++	ret = blk_get_desc(uclass_id, devnum, &desc);
+ 	if (ret)
+ 		return ret;
+ 	if (desc->type == DEV_TYPE_UNKNOWN)
+@@ -278,7 +268,7 @@ void blk_list_devices(enum uclass_id uclass_id)
+ 	int i;
+ 
+ 	for (i = 0;; ++i) {
+-		ret = get_desc(uclass_id, i, &desc);
++		ret = blk_get_desc(uclass_id, i, &desc);
+ 		if (ret == -ENODEV)
+ 			break;
+ 		else if (ret)
+@@ -295,7 +285,7 @@ int blk_print_device_num(enum uclass_id uclass_id, int devnum)
+ 	struct blk_desc *desc;
+ 	int ret;
+ 
+-	ret = get_desc(uclass_id, devnum, &desc);
++	ret = blk_get_desc(uclass_id, devnum, &desc);
+ 	if (ret)
+ 		return ret;
+ 	printf("\nIDE device %d: ", devnum);
+@@ -310,7 +300,7 @@ int blk_show_device(enum uclass_id uclass_id, int devnum)
+ 	int ret;
+ 
+ 	printf("\nDevice %d: ", devnum);
+-	ret = get_desc(uclass_id, devnum, &desc);
++	ret = blk_get_desc(uclass_id, devnum, &desc);
+ 	if (ret == -ENODEV || ret == -ENOENT) {
+ 		printf("unknown device\n");
+ 		return -ENODEV;
+@@ -332,7 +322,7 @@ ulong blk_read_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
+ 	ulong n;
+ 	int ret;
+ 
+-	ret = get_desc(uclass_id, devnum, &desc);
++	ret = blk_get_desc(uclass_id, devnum, &desc);
+ 	if (ret)
+ 		return ret;
+ 	n = blk_dread(desc, start, blkcnt, buffer);
+@@ -348,7 +338,7 @@ ulong blk_write_devnum(enum uclass_id uclass_id, int devnum, lbaint_t start,
+ 	struct blk_desc *desc;
+ 	int ret;
+ 
+-	ret = get_desc(uclass_id, devnum, &desc);
++	ret = blk_get_desc(uclass_id, devnum, &desc);
+ 	if (ret)
+ 		return ret;
+ 	return blk_dwrite(desc, start, blkcnt, buffer);
+diff --git a/include/blk.h b/include/blk.h
+index 4a4365fbbf..0cd758d6f7 100644
+--- a/include/blk.h
++++ b/include/blk.h
+@@ -504,6 +504,18 @@ const char *blk_get_devtype(struct udevice *dev);
+  */
+ struct blk_desc *blk_get_by_device(struct udevice *dev);
+ 
++/**
++ * blk_get_desc() - Get the block device descriptor for the given device number
++ *
++ * @uclass_id:	Interface type
++ * @devnum:	Device number (0 = first)
++ * @descp:	Returns block device descriptor on success
++ * Return: 0 on success, -ENODEV if there is no such device and no device
++ * with a higher device number, -ENOENT if there is no such device but there
++ * is one with a higher number, or other -ve on other error.
++ */
++int blk_get_desc(enum uclass_id uclass_id, int devnum, struct blk_desc **descp);
++
+ #else
+ #include <errno.h>
+ /*
+-- 
+2.25.1
 
-Thanks
-Patrice
