@@ -4,73 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51475E7E65D
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 18:52:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16386E7E65A
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 19:06:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CA1386B93;
-	Tue, 26 Sep 2023 20:52:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5377B86BE2;
+	Tue, 26 Sep 2023 21:06:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=dawes.za.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RGunJ6Kq";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail-com.20230601.gappssmtp.com header.i=@gmail-com.20230601.gappssmtp.com header.b="mWOp/Zhp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 00F4C86B95; Tue, 26 Sep 2023 20:52:03 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 9DE3486BF5; Tue, 26 Sep 2023 21:06:43 +0200 (CEST)
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C81BB86B76
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 20:52:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A30286B93
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 21:06:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=dawes.za.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-50437f39c9dso12975209e87.3
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 11:52:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=rogan.dawes@gmail.com
+Received: by mail-ot1-x336.google.com with SMTP id
+ 46e09a7af769-6bf298ef1f5so5889511a34.0
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 12:06:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695754320; x=1696359120; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=7UPGhsYQ3veNfZHRAE2/j34To6qr7qb7SuSOTdAOnO4=;
- b=RGunJ6Kqo/scwdiCk+86R8wd6gKHAJSC2cNsrXb39vnnXNjtCYBLTt8e/NzIFYrIz3
- Ekk95PVSzEUkBhX1YTerwVF0yljB54JlcpXugbYd9tzmC7rguA6bMMqpcQDVcdvLZTtH
- hw0qUSvcKwu2QB/TrhoI8s/YUgPG4LkJw4nAVmpGJw7e7sQI8AKtyp01DbkOhyjnJffM
- B61+MnrBgIQukLjtVqAVoxhwTa5A1Ti9nj7+QrgDUASAPfnRLExKsu/yzeey53On8H84
- v9WZCYk07TO5ZTqhElRKe4wMq6faRBu7V64Fp6ORK8PzfxvYVu5r9sTiOvQpaFwC3g8R
- I6XQ==
+ d=gmail-com.20230601.gappssmtp.com; s=20230601; t=1695755199; x=1696359999;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=QbRfR2JYhZrcc21ikfKgvOJDYp/gMxup0NLv5tkGVvc=;
+ b=mWOp/ZhpZftW8Rh/0rY6/yF6V4vonaXGnT6xXrQkg9lkb+0pkwNxvyJXPsi0m7/Iq+
+ 2HHO5S2/hk/YVq0REkOFwuT7ks1psnjaS10oMEEu5lMKEa3oFIqqT+y2z3fWzDrtwYgK
+ TjwIIzE2gJCBB1FPWlM1EhelDC/IPwnFou/42rNxRy9IBBW8SWyHn5ma9tX4vfZ19Mkl
+ +/5WxMHwu9or1y7ouSFq6HjyjWyS9G8hh2zhOCRovai8xgWBvBH8GS2kgx5AzCiBatI6
+ 95MSVFi2VUOWJl8NtzA93dGpYe74CUBWVh6kBiFukELA6Iak2c3RudYctQrZh1+/LG9V
+ YU+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695754320; x=1696359120;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=7UPGhsYQ3veNfZHRAE2/j34To6qr7qb7SuSOTdAOnO4=;
- b=okdk8acplCpNp3G93rVXsVolqZ8zsCsdoVOD9ClXnLI7zGV2NFMcpURp4vuXDJ2C8N
- peneJNLTHRCf69fEf0SdEpuLKwWqeY0hJNLIpeD4tyBzeaotDoKfBHe0Z4Lb1Qh16DnY
- /QGV9lQzy8Oug4oxwNIxeF4aFGOUtXtu/WtUYebjIHSqJ93GfJAZdb2YWmW6TlAtEHJG
- xQDPZTKKj+O4NxguYLAooAMW6adRTHZa4KkbX8ARI3fnYYD6zQOI1Ulf5gP9eOgBqIXm
- IurY7jM/eaXTA5K+sf5kZnOcFH+TMgOFAs58vL8ow3z5XiDtU7qGCnLPz6c1hf7ZueQ0
- Hvbg==
-X-Gm-Message-State: AOJu0YzOfd61VmIg5ji1bM3tUZ/YRTUFJIPbDjwXE85hUJV61w9YcjNV
- +xwDqZgEeBIzSQAKoR/WYm2gxq6MPkM1e+aAa1iVQg==
-X-Google-Smtp-Source: AGHT+IHaEe1FirhbrCLL3JOF5RR8EvyltcCwc55EoxmDVEIhEFFZiUvBye5In7kcoamTwZF9be/HPB268wQ14beyjjw=
-X-Received: by 2002:a05:6512:2103:b0:503:26bc:b08f with SMTP id
- q3-20020a056512210300b0050326bcb08fmr8043814lfr.24.1695754319951; Tue, 26 Sep
- 2023 11:51:59 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695755199; x=1696359999;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QbRfR2JYhZrcc21ikfKgvOJDYp/gMxup0NLv5tkGVvc=;
+ b=jsuLJsvkB50pGppiOepQwCtFbDPWcf6w74Uq8TOojqk9NmnTyxRFW+AKW3wp/qrY/M
+ 8+L2LSSqiA5CUbDYGQC+dA5gn4vhz5x99xMopnGh1S0mAzKbpt+/iolP3R294OJlrlfe
+ v4VRIvMpSrvOVqIx748vhbulbDp7VymJjpKDFcpDp9qcVNHEYJGIvd4WUa5vIc87Xmek
+ nYoWvQGpF7e1xQWuu/tt3ajQmUsxBuJjZqFnrn0ZQTqDlsTUk90CJzRD3UKa3CuxM+cH
+ FGMvoDEu2NuVcaemeZTx2mh0WEk95smIoYN2EHv+nSwLgRDdQCqjGX9DOurao0B0qTjB
+ oaxQ==
+X-Gm-Message-State: AOJu0Yx3erbmHCYJobgncgdK5YWrzCO7pzRLeXxRGXCMHfhVhSy2WaqI
+ Xp1zrgsnmY/XzD7M+wBI3zg6opdsMGj+3xAY6gw=
+X-Google-Smtp-Source: AGHT+IGJHcVx0w2/9C1WWtGSNSx+6FLmcCgiS6Km7CQ5+ncjIZmxo7ZCOEQO18mDim4bJ66V9TizY3m/QnEgiB08wfQ=
+X-Received: by 2002:a9d:6e0e:0:b0:6b9:b1a7:1f92 with SMTP id
+ e14-20020a9d6e0e000000b006b9b1a71f92mr11993647otr.8.1695755199659; Tue, 26
+ Sep 2023 12:06:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230920084121.1248590-1-masahisa.kojima@linaro.org>
-In-Reply-To: <20230920084121.1248590-1-masahisa.kojima@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 26 Sep 2023 21:51:23 +0300
-Message-ID: <CAC_iWjLsF1hK=aroC9+GfY0_3hQVwKScYJzprH6jcNTbsxw4rQ@mail.gmail.com>
-Subject: Re: [PATCH v11] Boot var automatic management for removable medias
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>
+References: <CAOYdKdjW6Ut3QCMWpu8W7TKuuv9OfehC7tdW7-vkdcN8ZbK3Jg@mail.gmail.com>
+ <CAOMZO5BtN6xQJ9j35Wz4wH9p5Q=JoC2Ffb1aN-yrTzUeb0AvYQ@mail.gmail.com>
+ <CAOYdKdjnVpt=YOrAzjKiaAZomB7=hgAHe1TE+7MM8PK3g+WjRQ@mail.gmail.com>
+ <CAOYdKdirq-H+ZaBmy0sT05sL=C=cJWLixgJLsA5ES9PcwZrXyw@mail.gmail.com>
+ <CAOMZO5CTG8bqNoP2XO=6VXXquutg-MFqBTbi9Y2q4Dcg0Mfftw@mail.gmail.com>
+ <CAOMZO5ArFiQO=BWvDbR91XhADJ0ks4JTe45zOb+z3aaiED2gkg@mail.gmail.com>
+ <CAOMZO5CYnkCC5pmG35+8qHqeCaEJwM3Z3eyoJaTrOMMWj5AWWg@mail.gmail.com>
+ <CAOYdKdgLaAx8krbBZV=yaUGTwtf6cbgaTU3=+pRKJ4-w_V3_Sg@mail.gmail.com>
+ <CAOMZO5DqKS2w1G3iKKGPS_piXx8JcGoWCFOqCQOoB524O9KyOQ@mail.gmail.com>
+ <CAOYdKdjPrRT7F_LFf8YeafX1MWep_p91CFdwc-SH8+diCu+2sw@mail.gmail.com>
+ <CAOMZO5BzrfvLDrtqBk1dmLqb9-GxzZs8nRVY7GxqCRY34pKg4w@mail.gmail.com>
+ <CAOYdKdgyXi5g9zPNOCBtsrA8KV0L1O0Oyh4Ne-Q79Z=EgGs=zw@mail.gmail.com>
+ <CAOYdKdhvKEaeyv5zhXiswuF-Kd6ee8FmdN8MoMS9=5VTWVgMXA@mail.gmail.com>
+ <CAOMZO5DS2VHPKvVioSW=7fWfnrP63A6wdga6pFmFuSK2QF8gSA@mail.gmail.com>
+ <CAOYdKdjALruh9v6HBO-MSjzZM0whYhbA5YLJxbKk7yQk7cznGw@mail.gmail.com>
+ <CAOMZO5AVuBxGFF_itcxvdG=W9JoRtyzzeeC+wji__uUOQirwZg@mail.gmail.com>
+ <CAOYdKdingLtAvEnth8mSnazQ2fZ_kCsM_2P_dX7tbL2xe9wyVw@mail.gmail.com>
+ <CAOMZO5ALK_O-648FaHFrjJc9EiU3J=nvv1rYDiLOGqhjt3mmkA@mail.gmail.com>
+ <CAOYdKdjEOsLmkoJdxk1CmLk6_AJFZhuS_7fWxWOm14Av1n7gHA@mail.gmail.com>
+ <CAOMZO5BEqwT+t7hw=neAfww_edg61cC6eggr9NNL3OS3jXOY8g@mail.gmail.com>
+ <CAOYdKdjn39rV-z3wRf8tORvxP4riZaY0=POhaVjeGh2i3C-yUg@mail.gmail.com>
+ <CAOMZO5CQrr8QzU2QArS7fTf3beNDxgLRNHNRJSL81gMUJ6NvBg@mail.gmail.com>
+In-Reply-To: <CAOMZO5CQrr8QzU2QArS7fTf3beNDxgLRNHNRJSL81gMUJ6NvBg@mail.gmail.com>
+From: Rogan Dawes <rogan@dawes.za.net>
+Date: Tue, 26 Sep 2023 21:06:28 +0200
+Message-ID: <CAOYdKdg0v6vshLY90MC2=m=HLm86e8ed8jgcWGja_w2bJMKmZQ@mail.gmail.com>
+Subject: Re: Trying to boot custom kernel on Wink Hub (i.MX28)
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,249 +108,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Sept 2023 at 11:41, Masahisa Kojima
-<masahisa.kojima@linaro.org> wrote:
->
-> From: Raymond Mao <raymond.mao@linaro.org>
->
-> Changes for complying to EFI spec =C2=A73.5.1.1
-> 'Removable Media Boot Behavior'.
-> Boot variables can be automatically generated during a removable
-> media is probed. At the same time, unused boot variables will be
-> detected and removed.
->
-> Please note that currently the function 'efi_disk_remove' has no
-> ability to distinguish below two scenarios
-> a) Unplugging of a removable media under U-Boot
-> b) U-Boot exiting and booting an OS
-> Thus currently the boot variables management is not added into
-> 'efi_disk_remove' to avoid boot options being added/erased
-> repeatedly under scenario b) during power cycles
-> See TODO comments under function 'efi_disk_remove' for more details
->
-> The original efi_secboot tests expect that BootOrder EFI variable
-> is not defined. With this commit, the BootOrder EFI variable is
-> automatically added when the disk is detected. The original efi_secboot
-> tests end up with unexpected failure.
-> The efi_secboot tests need to be modified to clear the BootOrder
-> EFI variable at the beginning of each test.
->
-> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->  lib/efi_loader/efi_disk.c                      | 18 ++++++++++++++++++
->  lib/efi_loader/efi_setup.c                     |  7 +++++++
->  test/py/tests/test_efi_secboot/test_signed.py  |  9 +++++++++
->  .../test_efi_secboot/test_signed_intca.py      |  3 +++
->  .../py/tests/test_efi_secboot/test_unsigned.py |  3 +++
->  5 files changed, 40 insertions(+)
->
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index f0d76113b0..b808a7fe62 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -690,6 +690,13 @@ int efi_disk_probe(void *ctx, struct event *event)
->                         return -1;
->         }
->
-> +       /* only do the boot option management when UEFI sub-system is ini=
-tialized */
-> +       if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) && efi_obj_list_initia=
-lized =3D=3D EFI_SUCCESS) {
-> +               ret =3D efi_bootmgr_update_media_device_boot_option();
-> +               if (ret !=3D EFI_SUCCESS)
-> +                       return -1;
-> +       }
-> +
->         return 0;
->  }
->
-> @@ -742,6 +749,17 @@ int efi_disk_remove(void *ctx, struct event *event)
->         dev_tag_del(dev, DM_TAG_EFI);
->
->         return 0;
-> +
-> +       /*
-> +        * TODO A flag to distinguish below 2 different scenarios of this
-> +        * function call is needed:
-> +        * a) Unplugging of a removable media under U-Boot
-> +        * b) U-Boot exiting and booting an OS
-> +        * In case of scenario a), efi_bootmgr_update_media_device_boot_o=
-ption()
-> +        * needs to be invoked here to update the boot options and remove=
- the
-> +        * unnecessary ones.
-> +        */
-> +
->  }
->
->  /**
-> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> index 58d4e13402..69c8b27730 100644
-> --- a/lib/efi_loader/efi_setup.c
-> +++ b/lib/efi_loader/efi_setup.c
-> @@ -245,6 +245,13 @@ efi_status_t efi_init_obj_list(void)
->         if (ret !=3D EFI_SUCCESS)
->                 goto out;
->
-> +       if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR)) {
-> +               /* update boot option after variable service initialized =
-*/
-> +               ret =3D efi_bootmgr_update_media_device_boot_option();
-> +               if (ret !=3D EFI_SUCCESS)
-> +                       goto out;
-> +       }
-> +
->         /* Define supported languages */
->         ret =3D efi_init_platform_lang();
->         if (ret !=3D EFI_SUCCESS)
-> diff --git a/test/py/tests/test_efi_secboot/test_signed.py b/test/py/test=
-s/test_efi_secboot/test_signed.py
-> index ca52e853d8..b77b60e223 100644
-> --- a/test/py/tests/test_efi_secboot/test_signed.py
-> +++ b/test/py/tests/test_efi_secboot/test_signed.py
-> @@ -28,6 +28,7 @@ class TestEfiSignedImage(object):
->              # Test Case 1a, run signed image if no PK
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'efidebug boot add -b 1 HELLO1 host 0:1 /helloworld.efi.=
-signed -s ""',
->                  'efidebug boot next 1',
->                  'bootefi bootmgr'])
-> @@ -52,6 +53,7 @@ class TestEfiSignedImage(object):
->              # Test Case 2a, db is not yet installed
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 KEK.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
->                  'fatload host 0:1 4000000 PK.auth',
-> @@ -96,6 +98,7 @@ class TestEfiSignedImage(object):
->              # Test Case 3a, rejected by dbx
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 db.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
->                  'fatload host 0:1 4000000 KEK.auth',
-> @@ -132,6 +135,7 @@ class TestEfiSignedImage(object):
->              # Test Case 4, rejected by dbx
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 dbx_hash.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
->                  'fatload host 0:1 4000000 db.auth',
-> @@ -161,6 +165,7 @@ class TestEfiSignedImage(object):
->              # is verified
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 db.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
->                  'fatload host 0:1 4000000 KEK.auth',
-> @@ -217,6 +222,7 @@ class TestEfiSignedImage(object):
->              # is verified. Same as before but reject dbx_hash1.auth only
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 db.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
->                  'fatload host 0:1 4000000 KEK.auth',
-> @@ -294,6 +300,7 @@ class TestEfiSignedImage(object):
->          with u_boot_console.log.section('Test Case 7a'):
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 db.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
->                  'fatload host 0:1 4000000 KEK.auth',
-> @@ -317,6 +324,7 @@ class TestEfiSignedImage(object):
->          with u_boot_console.log.section('Test Case 7b'):
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 db.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
->                  'fatload host 0:1 4000000 KEK.auth',
-> @@ -348,6 +356,7 @@ class TestEfiSignedImage(object):
->              # Test Case 8a, Secure boot is not yet forced
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'efidebug boot add -b 1 HELLO1 host 0:1 /helloworld_forg=
-ed.efi.signed -s ""',
->                  'efidebug boot next 1',
->                  'efidebug test bootmgr'])
-> diff --git a/test/py/tests/test_efi_secboot/test_signed_intca.py b/test/p=
-y/tests/test_efi_secboot/test_signed_intca.py
-> index d8d599d22f..318715fa08 100644
-> --- a/test/py/tests/test_efi_secboot/test_signed_intca.py
-> +++ b/test/py/tests/test_efi_secboot/test_signed_intca.py
-> @@ -30,6 +30,7 @@ class TestEfiSignedImageIntca(object):
->              # Test Case 1a, with no Int CA and not authenticated by root=
- CA
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 db_c.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
->                  'fatload host 0:1 4000000 KEK.auth',
-> @@ -63,6 +64,7 @@ class TestEfiSignedImageIntca(object):
->              # Test Case 2a, unsigned and not authenticated by root CA
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 KEK.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
->                  'fatload host 0:1 4000000 PK.auth',
-> @@ -105,6 +107,7 @@ class TestEfiSignedImageIntca(object):
->              # Test Case 3a, revoked by int CA in dbx
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 dbx_b.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
->                  'fatload host 0:1 4000000 db_c.auth',
-> diff --git a/test/py/tests/test_efi_secboot/test_unsigned.py b/test/py/te=
-sts/test_efi_secboot/test_unsigned.py
-> index df63f0df08..9042a46ccc 100644
-> --- a/test/py/tests/test_efi_secboot/test_unsigned.py
-> +++ b/test/py/tests/test_efi_secboot/test_unsigned.py
-> @@ -28,6 +28,7 @@ class TestEfiUnsignedImage(object):
->              # Test Case 1
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 KEK.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
->                  'fatload host 0:1 4000000 PK.auth',
-> @@ -55,6 +56,7 @@ class TestEfiUnsignedImage(object):
->              # Test Case 2
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 db_hello.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
->                  'fatload host 0:1 4000000 KEK.auth',
-> @@ -79,6 +81,7 @@ class TestEfiUnsignedImage(object):
->              # Test Case 3a, rejected by dbx
->              output =3D u_boot_console.run_command_list([
->                  'host bind 0 %s' % disk_img,
-> +                'setenv -e -nv -bs -rt BootOrder',
->                  'fatload host 0:1 4000000 db_hello.auth',
->                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
->                  'fatload host 0:1 4000000 KEK.auth',
->
-> base-commit: 8bd7d08407f986fe3c69f3e198f6f7152e12dea8
-> --
-> 2.34.1
->
+WARNING: unmet direct dependencies detected for PL01X_SERIAL
+  Depends on [n]: SERIAL [=3Dy] && DM_SERIAL [=3Dn]
+  Selected by [y]:
+  - TARGET_IMX28WINKHUB [=3Dy] && <choice>
 
-I think you should add your co-developped-by tag now since you fixed
-the CI issues,
+WARNING: unmet direct dependencies detected for PL01X_SERIAL
+  Depends on [n]: SERIAL [=3Dy] && DM_SERIAL [=3Dn]
+  Selected by [y]:
+  - TARGET_IMX28WINKHUB [=3Dy] && <choice>
 
-With that
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+I also tried building and booting your latest version, but just got "LLC".
+
+I'll try putting a logic analyser on the UART pins to see if anything else
+shows up, but I didn't see anything else on the USB-UART at 115200.
+
+Where are the LLC characters coming from? It's a little tricky to grep the
+source for a single character :-(
+
+Rogan
+
+
+
+On Tue, 26 Sept 2023 at 18:47, Fabio Estevam <festevam@gmail.com> wrote:
+>
+> Hi Rogan,
+>
+> On Tue, Sep 26, 2023 at 1:01=E2=80=AFAM Rogan Dawes <rogan@dawes.za.net> =
+wrote:
+> >
+> > Hi Fabio,
+> >
+> > That prints "LLC", but does not print "Pref".
+>
+> What happens if you unselect DM_SERIAL like this:
+>
+> --- a/configs/imx28-wink-hub_defconfig
+> +++ b/configs/imx28-wink-hub_defconfig
+> @@ -58,4 +58,3 @@ CONFIG_DM_REGULATOR=3Dy
+>  CONFIG_DM_REGULATOR_FIXED=3Dy
+>  CONFIG_DM_REGULATOR_GPIO=3Dy
+>  CONFIG_RTC_MXS=3Dy
+> -CONFIG_DM_SERIAL=3Dy
