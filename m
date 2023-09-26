@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5684E7D240
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 06:58:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E61EE7D241
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 06:58:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 81A9986C11;
-	Tue, 26 Sep 2023 08:58:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E31B686C32;
+	Tue, 26 Sep 2023 08:58:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZS4rY1Dz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Kbiyq2+b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63A0686C0D; Tue, 26 Sep 2023 08:58:16 +0200 (CEST)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
+ id 2790286C32; Tue, 26 Sep 2023 08:58:18 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8370886C11
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 08:58:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D257B86B95
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 08:58:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-690d935dbc2so1879788b3a.1
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 23:58:13 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-690d935dbc2so1879797b3a.1
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 23:58:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695711492; x=1696316292; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1695711494; x=1696316294; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=n6VDMasliyXa+AMSCtxy5ac1148B+v+ipn/6wlLQKy0=;
- b=ZS4rY1DzyutEYP9pmripDd4+pKjKIepeRU/Bnd8lIfftwdc5oAwGVLmmKPGG6WnCFd
- H6TFVpRXRcBzHojcFN9zNUyMEHl8hf1thb6k5JJSZBoN59FMzqo4nWkA/04d+lv62hTO
- /X8r2CG+h646XdTf2gjwz5J2ZuNMoh0IdQyNNvLwpeaWtXcsB6nif4thZ/PYj9xrGCE+
- PZlOS+7lT7/22L0BSbRtSs8RtNTHaccoOz2ccZu3TN576HAUePrm0OkAoAghUI1cNDA1
- gID/s3TQ45ho0dHAlFZRKLsg1TxDNAgDJ6ZlEEPJwRixzt9WzRC3tQul+8OGDC19wSa/
- gYQQ==
+ bh=5WXeaDc5fixDobj9hHcc7iI7eRYEh2B18lEtPO1VmOU=;
+ b=Kbiyq2+by/O7XdDhen/Gs1UdMQNFOKLTIiKFSa6oBSmXIG0yTVThYAbLbcpxz30ZH5
+ LaEMaAZe8huN8xTi2rIVUvLv1e19ULroMWQ9XylvJSkWQFNh97jr0Gp0Xop4xmyaK5o2
+ YWHcN3YHrfg9HjlxyKU8vuo6x6HjczJu8G/9L82ZMEiNPxyTpnJdOzNz7oTmG6bCL3GV
+ wUSYuHt+Pjx+U4Poq5xloA2QOe/OevV7lCK/3a3aKFsLY/YsxdB/SdnJucNFYFP6McEg
+ N3SxEqGjlxnZU53X9wrcQZ13s/nfhME15CoHgl9RKaqC0o3g3FNBe0rvm+Rt1BBEThd2
+ 6Rng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695711492; x=1696316292;
+ d=1e100.net; s=20230601; t=1695711494; x=1696316294;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=n6VDMasliyXa+AMSCtxy5ac1148B+v+ipn/6wlLQKy0=;
- b=m9UudwA1OyJ8Ao8fEoFStxoZ+g+YsZ2egC2iweBJkmAClfx0amWv01xnflA84WEGpR
- 37vKOtZVPJ0b8NVyi/vihJTzWdWTraME5tuVmIUwJ1NWLJr+EetVMAEQ911loF3abCqN
- KrWZO5LVrLnsFxClWGpdV6t3lGtobR110Va2kWD7Eac1FvFva1BOesLN1B8dzqmCjvoh
- FgwTSHUtIuUyHdRNA4wZDH0KqENExlqm/32YQJ0bXyecRLjI+vYDTVcJ04wkzOERAV6U
- /a7c9RtMpV3vhkSBWnbInoHSGrqWEzkUdfcDIJihrS4OSU9VIgUOJJm1ZCpWgSFEWqzX
- /7Fg==
-X-Gm-Message-State: AOJu0YyyaUKo6CGFzF8j1B3qkDoIeaHONbxlv8ANGVL4/fvMAeFI5K4o
- plFj/d3TW/go14PSFlEJ6OwzgSEhm49+tYNnbnZfAQ==
-X-Google-Smtp-Source: AGHT+IGDmZNgknzNOrW4kUGdREg5MG056qkz5ia3k88Gpb3b9Tnbr6Hh9XeZzy8dFKzQj000O036hg==
-X-Received: by 2002:a05:6a00:1d20:b0:68f:c309:9736 with SMTP id
- a32-20020a056a001d2000b0068fc3099736mr9138378pfx.3.1695711491709; 
- Mon, 25 Sep 2023 23:58:11 -0700 (PDT)
+ bh=5WXeaDc5fixDobj9hHcc7iI7eRYEh2B18lEtPO1VmOU=;
+ b=KwEmvLUbVoq/S5Ldci6nX7CIQS7/MceqXYy3ltZOMuv7Z5d5e0LXeaT6jgS6Vab0pv
+ GPZN4PtVX86VOZCB6CocPWCQaVOBYty2vmmup38s49QoX+gIfhxC1ZrSFpMztKZewU6l
+ IlrchSPBcQmWd74XEgD5xxbW5yWmI5gKOffbVp44yFwZ45LJsZtA8rwEpEavgq+gVfmv
+ SB0jlZWT9RUk4H3I65cODqStZ9O0DCNjaKfa3JG8wsP28yNxa9Dfi94gEsTrI9aas8B0
+ Qa247bq/72Vv7zScrKIeBAVJ83vhv38/j6KW2WSQQEJzNmtuJ45spvRTA7+ATEIDDlFn
+ RRbA==
+X-Gm-Message-State: AOJu0YzcLxK6kJ6AfeHJc4COqwr4RJJscVqQY0uxbXOjBebeEAxvtmVk
+ VrCvYTeeFr7peAyLyj7UULxKwg==
+X-Google-Smtp-Source: AGHT+IER59vYv0uYNQ+5oddjd4fh6O3jb9/BCyE2ZvDUcoMdymqUx8kbgdy4bQPoW3hm+7XTn+du6A==
+X-Received: by 2002:a05:6a21:6d86:b0:15d:6fd3:8e74 with SMTP id
+ wl6-20020a056a216d8600b0015d6fd38e74mr11942934pzb.3.1695711494049; 
+ Mon, 25 Sep 2023 23:58:14 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:6585:aea6:5002:a825])
  by smtp.gmail.com with ESMTPSA id
- s2-20020a639242000000b0057825bd3448sm8758874pgn.51.2023.09.25.23.58.09
+ s2-20020a639242000000b0057825bd3448sm8758874pgn.51.2023.09.25.23.58.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 23:58:11 -0700 (PDT)
+ Mon, 25 Sep 2023 23:58:13 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH v5 01/16] scmi: refactor the code to hide a channel from
- devices
-Date: Tue, 26 Sep 2023 15:57:35 +0900
-Message-Id: <20230926065750.734440-2-takahiro.akashi@linaro.org>
+Subject: [PATCH v5 02/16] firmware: scmi: use a protocol's own channel if
+ assigned
+Date: Tue, 26 Sep 2023 15:57:36 +0900
+Message-Id: <20230926065750.734440-3-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230926065750.734440-1-takahiro.akashi@linaro.org>
 References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
@@ -94,535 +94,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commit 85dc58289238 ("firmware: scmi: prepare uclass to pass channel
-reference") added an explicit parameter, channel, but it seems to make
-the code complex.
+SCMI specification allows any protocol to have its own channel for
+the transport. While the current SCMI driver may assign its channel
+from a device tree, the core function, devm_scmi_process_msg(), doesn't
+use a protocol's channel, but always use an agent's channel.
 
-Hiding this parameter will allow for adding a generic (protocol-agnostic)
-helper function, i.e. for PROTOCOL_VERSION, in a later patch.
+With this commit, devm_scmi_process_msg() tries to find and use
+a protocol's channel. If it doesn't exist, use an agent's.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
 v5
-* correct the size for per_child_auto
-v4
-* revive scmi_bind_protocols which was accidentally removed
-* remove .per_child_auto from the driver declaration as it is not needed
-v3
-* fix an issue on ST board (reported by Etienne)
-  by taking care of cases where probed devices are children of
-  SCMI protocol device (i.e. clock devices under CCF)
-  See find_scmi_protocol_device().
-* move "per_device_plato_auto" to a succeeding right patch
-v2
-* new patch
+* new commit (fixing a potential bug)
 ---
- drivers/clk/clk_scmi.c                    |  27 ++----
- drivers/firmware/scmi/scmi_agent-uclass.c | 105 ++++++++++++++++------
- drivers/power/regulator/scmi_regulator.c  |  26 ++----
- drivers/reset/reset-scmi.c                |  19 +---
- include/scmi_agent.h                      |  15 ++--
- 5 files changed, 104 insertions(+), 88 deletions(-)
+ drivers/firmware/scmi/mailbox_agent.c     | 5 +++--
+ drivers/firmware/scmi/optee_agent.c       | 5 +++--
+ drivers/firmware/scmi/scmi_agent-uclass.c | 7 ++++---
+ drivers/firmware/scmi/smccc_agent.c       | 5 +++--
+ include/scmi_agent-uclass.h               | 8 +++++---
+ 5 files changed, 18 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/clk/clk_scmi.c b/drivers/clk/clk_scmi.c
-index d172fed24c9d..34a49363a51a 100644
---- a/drivers/clk/clk_scmi.c
-+++ b/drivers/clk/clk_scmi.c
-@@ -13,17 +13,8 @@
- #include <asm/types.h>
- #include <linux/clk-provider.h>
+diff --git a/drivers/firmware/scmi/mailbox_agent.c b/drivers/firmware/scmi/mailbox_agent.c
+index 8277c1860606..7ad3e8da9f08 100644
+--- a/drivers/firmware/scmi/mailbox_agent.c
++++ b/drivers/firmware/scmi/mailbox_agent.c
+@@ -94,13 +94,14 @@ static int setup_channel(struct udevice *dev, struct scmi_mbox_channel *chan)
+ }
  
--/**
-- * struct scmi_clk_priv - Private data for SCMI clocks
-- * @channel: Reference to the SCMI channel to use
-- */
--struct scmi_clk_priv {
--	struct scmi_channel *channel;
--};
--
- static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
+ static int scmi_mbox_get_channel(struct udevice *dev,
++				 struct udevice *protocol,
+ 				 struct scmi_channel **channel)
  {
--	struct scmi_clk_priv *priv = dev_get_priv(dev);
- 	struct scmi_clk_protocol_attr_out out;
- 	struct scmi_msg msg = {
- 		.protocol_id = SCMI_PROTOCOL_ID_CLOCK,
-@@ -33,7 +24,7 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
- 	};
+ 	struct scmi_mbox_channel *base_chan = dev_get_plat(dev);
+ 	struct scmi_mbox_channel *chan;
  	int ret;
  
--	ret = devm_scmi_process_msg(dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(dev, &msg);
- 	if (ret)
+-	if (!dev_read_prop(dev, "shmem", NULL)) {
++	if (!dev_read_prop(protocol, "shmem", NULL)) {
+ 		/* Uses agent base channel */
+ 		*channel = container_of(base_chan, struct scmi_channel, ref);
+ 
+@@ -112,7 +113,7 @@ static int scmi_mbox_get_channel(struct udevice *dev,
+ 		return -ENOMEM;
+ 
+ 	/* Setup a dedicated channel for the protocol */
+-	ret = setup_channel(dev, chan);
++	ret = setup_channel(protocol, chan);
+ 	if (ret) {
+ 		free(chan);
  		return ret;
+diff --git a/drivers/firmware/scmi/optee_agent.c b/drivers/firmware/scmi/optee_agent.c
+index db927fb21405..e3e462774045 100644
+--- a/drivers/firmware/scmi/optee_agent.c
++++ b/drivers/firmware/scmi/optee_agent.c
+@@ -324,6 +324,7 @@ static int setup_channel(struct udevice *dev, struct scmi_optee_channel *chan)
+ }
  
-@@ -44,7 +35,6 @@ static int scmi_clk_get_num_clock(struct udevice *dev, size_t *num_clocks)
- 
- static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name)
+ static int scmi_optee_get_channel(struct udevice *dev,
++				  struct udevice *protocol,
+ 				  struct scmi_channel **channel)
  {
--	struct scmi_clk_priv *priv = dev_get_priv(dev);
- 	struct scmi_clk_attribute_in in = {
- 		.clock_id = clkid,
- 	};
-@@ -59,7 +49,7 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name)
- 	};
+ 	struct scmi_optee_channel *base_chan = dev_get_plat(dev);
+@@ -331,7 +332,7 @@ static int scmi_optee_get_channel(struct udevice *dev,
+ 	u32 channel_id;
  	int ret;
  
--	ret = devm_scmi_process_msg(dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(dev, &msg);
- 	if (ret)
+-	if (dev_read_u32(dev, "linaro,optee-channel-id", &channel_id)) {
++	if (dev_read_u32(protocol, "linaro,optee-channel-id", &channel_id)) {
+ 		/* Uses agent base channel */
+ 		*channel = container_of(base_chan, struct scmi_channel, ref);
+ 
+@@ -343,7 +344,7 @@ static int scmi_optee_get_channel(struct udevice *dev,
+ 	if (!chan)
+ 		return -ENOMEM;
+ 
+-	ret = setup_channel(dev, chan);
++	ret = setup_channel(protocol, chan);
+ 	if (ret) {
+ 		free(chan);
  		return ret;
- 
-@@ -70,7 +60,6 @@ static int scmi_clk_get_attibute(struct udevice *dev, int clkid, char **name)
- 
- static int scmi_clk_gate(struct clk *clk, int enable)
- {
--	struct scmi_clk_priv *priv = dev_get_priv(clk->dev);
- 	struct scmi_clk_state_in in = {
- 		.clock_id = clk->id,
- 		.attributes = enable,
-@@ -81,7 +70,7 @@ static int scmi_clk_gate(struct clk *clk, int enable)
- 					  in, out);
- 	int ret;
- 
--	ret = devm_scmi_process_msg(clk->dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(clk->dev, &msg);
- 	if (ret)
- 		return ret;
- 
-@@ -100,7 +89,6 @@ static int scmi_clk_disable(struct clk *clk)
- 
- static ulong scmi_clk_get_rate(struct clk *clk)
- {
--	struct scmi_clk_priv *priv = dev_get_priv(clk->dev);
- 	struct scmi_clk_rate_get_in in = {
- 		.clock_id = clk->id,
- 	};
-@@ -110,7 +98,7 @@ static ulong scmi_clk_get_rate(struct clk *clk)
- 					  in, out);
- 	int ret;
- 
--	ret = devm_scmi_process_msg(clk->dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(clk->dev, &msg);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -123,7 +111,6 @@ static ulong scmi_clk_get_rate(struct clk *clk)
- 
- static ulong scmi_clk_set_rate(struct clk *clk, ulong rate)
- {
--	struct scmi_clk_priv *priv = dev_get_priv(clk->dev);
- 	struct scmi_clk_rate_set_in in = {
- 		.clock_id = clk->id,
- 		.flags = SCMI_CLK_RATE_ROUND_CLOSEST,
-@@ -136,7 +123,7 @@ static ulong scmi_clk_set_rate(struct clk *clk, ulong rate)
- 					  in, out);
- 	int ret;
- 
--	ret = devm_scmi_process_msg(clk->dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(clk->dev, &msg);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -149,12 +136,11 @@ static ulong scmi_clk_set_rate(struct clk *clk, ulong rate)
- 
- static int scmi_clk_probe(struct udevice *dev)
- {
--	struct scmi_clk_priv *priv = dev_get_priv(dev);
- 	struct clk *clk;
- 	size_t num_clocks, i;
- 	int ret;
- 
--	ret = devm_scmi_of_get_channel(dev, &priv->channel);
-+	ret = devm_scmi_of_get_channel(dev);
- 	if (ret)
- 		return ret;
- 
-@@ -205,5 +191,4 @@ U_BOOT_DRIVER(scmi_clock) = {
- 	.id = UCLASS_CLK,
- 	.ops = &scmi_clk_ops,
- 	.probe = scmi_clk_probe,
--	.priv_auto = sizeof(struct scmi_clk_priv *),
- };
 diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
-index 02de692d66f3..ec58ccd2bc5d 100644
+index ec58ccd2bc5d..a28692f39f4d 100644
 --- a/drivers/firmware/scmi/scmi_agent-uclass.c
 +++ b/drivers/firmware/scmi/scmi_agent-uclass.c
-@@ -8,6 +8,7 @@
- #include <common.h>
- #include <dm.h>
- #include <errno.h>
-+#include <scmi_agent.h>
- #include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
- #include <dm/device_compat.h>
-@@ -110,18 +111,23 @@ static int scmi_bind_protocols(struct udevice *dev)
- 	return ret;
- }
- 
--static struct udevice *find_scmi_transport_device(struct udevice *dev)
-+static struct udevice *find_scmi_protocol_device(struct udevice *dev)
- {
--	struct udevice *parent = dev;
-+	struct udevice *parent = NULL, *protocol;
- 
--	do {
--		parent = dev_get_parent(parent);
--	} while (parent && device_get_uclass_id(parent) != UCLASS_SCMI_AGENT);
-+	for (protocol = dev; protocol; protocol = parent) {
-+		parent = dev_get_parent(protocol);
-+		if (!parent ||
-+		    device_get_uclass_id(parent) == UCLASS_SCMI_AGENT)
-+			break;
-+	}
- 
--	if (!parent)
-+	if (!parent) {
- 		dev_err(dev, "Invalid SCMI device, agent not found\n");
-+		return NULL;
-+	}
- 
--	return parent;
-+	return protocol;
- }
- 
- static const struct scmi_agent_ops *transport_dev_ops(struct udevice *dev)
-@@ -129,43 +135,90 @@ static const struct scmi_agent_ops *transport_dev_ops(struct udevice *dev)
- 	return (const struct scmi_agent_ops *)dev->driver->ops;
- }
- 
--int devm_scmi_of_get_channel(struct udevice *dev, struct scmi_channel **channel)
-+/**
-+ * scmi_of_get_channel() - Get SCMI channel handle
-+ *
-+ * @dev:	SCMI agent device
-+ * @channel:	Output reference to the SCMI channel upon success
-+ *
-+ * On return, @channel will be set.
-+ * Return	0 on success and a negative errno on failure
-+ */
-+static int scmi_of_get_channel(struct udevice *dev, struct scmi_channel **channel)
- {
--	struct udevice *parent;
-+	const struct scmi_agent_ops *ops;
- 
--	parent = find_scmi_transport_device(dev);
--	if (!parent)
-+	ops = transport_dev_ops(dev);
-+	if (ops->of_get_channel)
-+		return ops->of_get_channel(dev, channel);
-+	else
-+		return -EPROTONOSUPPORT;
-+}
-+
-+int devm_scmi_of_get_channel(struct udevice *dev)
-+{
-+	struct udevice *protocol;
-+	struct scmi_agent_proto_priv *priv;
-+	int ret;
-+
-+	protocol = find_scmi_protocol_device(dev);
-+	if (!protocol)
- 		return -ENODEV;
- 
--	if (transport_dev_ops(parent)->of_get_channel)
--		return transport_dev_ops(parent)->of_get_channel(parent, channel);
-+	priv = dev_get_parent_priv(protocol);
-+	ret = scmi_of_get_channel(protocol->parent, &priv->channel);
-+	if (ret == -EPROTONOSUPPORT) {
-+		/* Drivers without a get_channel operator don't need a channel ref */
-+		priv->channel = NULL;
- 
--	/* Drivers without a get_channel operator don't need a channel ref */
--	*channel = NULL;
-+		return 0;
-+	}
- 
--	return 0;
-+	return ret;
- }
- 
--int devm_scmi_process_msg(struct udevice *dev, struct scmi_channel *channel,
--			  struct scmi_msg *msg)
-+/**
-+ * scmi_process_msg() - Send and process an SCMI message
-+ *
-+ * Send a message to an SCMI server.
-+ * Caller sets scmi_msg::out_msg_sz to the output message buffer size.
-+ *
-+ * @dev:	SCMI agent device
-+ * @channel:	Communication channel for the device
-+ * @msg:	Message structure reference
-+ *
-+ * On return, scmi_msg::out_msg_sz stores the response payload size.
-+ * Return:	0 on success and a negative errno on failure
-+ */
-+static int scmi_process_msg(struct udevice *dev, struct scmi_channel *channel,
-+			    struct scmi_msg *msg)
+@@ -144,13 +144,14 @@ static const struct scmi_agent_ops *transport_dev_ops(struct udevice *dev)
+  * On return, @channel will be set.
+  * Return	0 on success and a negative errno on failure
+  */
+-static int scmi_of_get_channel(struct udevice *dev, struct scmi_channel **channel)
++static int scmi_of_get_channel(struct udevice *dev, struct udevice *protocol,
++			       struct scmi_channel **channel)
  {
  	const struct scmi_agent_ops *ops;
--	struct udevice *parent;
  
--	parent = find_scmi_transport_device(dev);
--	if (!parent)
--		return -ENODEV;
-+	ops = transport_dev_ops(dev);
-+	if (ops->process_msg)
-+		return ops->process_msg(dev, channel, msg);
-+	else
-+		return -EPROTONOSUPPORT;
-+}
+ 	ops = transport_dev_ops(dev);
+ 	if (ops->of_get_channel)
+-		return ops->of_get_channel(dev, channel);
++		return ops->of_get_channel(dev, protocol, channel);
+ 	else
+ 		return -EPROTONOSUPPORT;
+ }
+@@ -166,7 +167,7 @@ int devm_scmi_of_get_channel(struct udevice *dev)
+ 		return -ENODEV;
  
--	ops = transport_dev_ops(parent);
-+int devm_scmi_process_msg(struct udevice *dev, struct scmi_msg *msg)
-+{
-+	struct udevice *protocol;
-+	struct scmi_agent_proto_priv *priv;
- 
--	if (ops->process_msg)
--		return ops->process_msg(parent, channel, msg);
-+	protocol = find_scmi_protocol_device(dev);
-+	if (!protocol)
-+		return -ENODEV;
-+
-+	priv = dev_get_parent_priv(protocol);
- 
--	return -EPROTONOSUPPORT;
-+	return scmi_process_msg(protocol->parent, priv->channel, msg);
+ 	priv = dev_get_parent_priv(protocol);
+-	ret = scmi_of_get_channel(protocol->parent, &priv->channel);
++	ret = scmi_of_get_channel(protocol->parent, protocol, &priv->channel);
+ 	if (ret == -EPROTONOSUPPORT) {
+ 		/* Drivers without a get_channel operator don't need a channel ref */
+ 		priv->channel = NULL;
+diff --git a/drivers/firmware/scmi/smccc_agent.c b/drivers/firmware/scmi/smccc_agent.c
+index 6a52cd75d67b..972c6addde21 100644
+--- a/drivers/firmware/scmi/smccc_agent.c
++++ b/drivers/firmware/scmi/smccc_agent.c
+@@ -81,6 +81,7 @@ static int setup_channel(struct udevice *dev, struct scmi_smccc_channel *chan)
  }
  
- UCLASS_DRIVER(scmi_agent) = {
- 	.id		= UCLASS_SCMI_AGENT,
- 	.name		= "scmi_agent",
- 	.post_bind	= scmi_bind_protocols,
-+	.per_child_auto	= sizeof(struct scmi_agent_proto_priv),
- };
-diff --git a/drivers/power/regulator/scmi_regulator.c b/drivers/power/regulator/scmi_regulator.c
-index 801148036ff6..9c72c35d039e 100644
---- a/drivers/power/regulator/scmi_regulator.c
-+++ b/drivers/power/regulator/scmi_regulator.c
-@@ -25,18 +25,9 @@ struct scmi_regulator_platdata {
- 	u32 domain_id;
- };
- 
--/**
-- * struct scmi_regulator_priv - Private data for SCMI voltage regulator
-- * @channel: Reference to the SCMI channel to use
-- */
--struct scmi_regulator_priv {
--	struct scmi_channel *channel;
--};
--
- static int scmi_voltd_set_enable(struct udevice *dev, bool enable)
+ static int scmi_smccc_get_channel(struct udevice *dev,
++				  struct udevice *protocol,
+ 				  struct scmi_channel **channel)
  {
- 	struct scmi_regulator_platdata *pdata = dev_get_plat(dev);
--	struct scmi_regulator_priv *priv = dev_get_priv(dev);
- 	struct scmi_voltd_config_set_in in = {
- 		.domain_id = pdata->domain_id,
- 		.config = enable ? SCMI_VOLTD_CONFIG_ON : SCMI_VOLTD_CONFIG_OFF,
-@@ -47,7 +38,7 @@ static int scmi_voltd_set_enable(struct udevice *dev, bool enable)
- 					  in, out);
+ 	struct scmi_smccc_channel *base_chan = dev_get_plat(dev);
+@@ -88,7 +89,7 @@ static int scmi_smccc_get_channel(struct udevice *dev,
+ 	u32 func_id;
  	int ret;
  
--	ret = devm_scmi_process_msg(dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(dev, &msg);
- 	if (ret)
- 		return ret;
+-	if (dev_read_u32(dev, "arm,smc-id", &func_id)) {
++	if (dev_read_u32(protocol, "arm,smc-id", &func_id)) {
+ 		/* Uses agent base channel */
+ 		*channel = container_of(base_chan, struct scmi_channel, ref);
  
-@@ -57,7 +48,6 @@ static int scmi_voltd_set_enable(struct udevice *dev, bool enable)
- static int scmi_voltd_get_enable(struct udevice *dev)
- {
- 	struct scmi_regulator_platdata *pdata = dev_get_plat(dev);
--	struct scmi_regulator_priv *priv = dev_get_priv(dev);
- 	struct scmi_voltd_config_get_in in = {
- 		.domain_id = pdata->domain_id,
- 	};
-@@ -67,7 +57,7 @@ static int scmi_voltd_get_enable(struct udevice *dev)
- 					  in, out);
- 	int ret;
+@@ -100,7 +101,7 @@ static int scmi_smccc_get_channel(struct udevice *dev,
+ 	if (!chan)
+ 		return -ENOMEM;
  
--	ret = devm_scmi_process_msg(dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(dev, &msg);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -80,7 +70,6 @@ static int scmi_voltd_get_enable(struct udevice *dev)
- 
- static int scmi_voltd_set_voltage_level(struct udevice *dev, int uV)
- {
--	struct scmi_regulator_priv *priv = dev_get_priv(dev);
- 	struct scmi_regulator_platdata *pdata = dev_get_plat(dev);
- 	struct scmi_voltd_level_set_in in = {
- 		.domain_id = pdata->domain_id,
-@@ -92,7 +81,7 @@ static int scmi_voltd_set_voltage_level(struct udevice *dev, int uV)
- 					  in, out);
- 	int ret;
- 
--	ret = devm_scmi_process_msg(dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(dev, &msg);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -101,7 +90,6 @@ static int scmi_voltd_set_voltage_level(struct udevice *dev, int uV)
- 
- static int scmi_voltd_get_voltage_level(struct udevice *dev)
- {
--	struct scmi_regulator_priv *priv = dev_get_priv(dev);
- 	struct scmi_regulator_platdata *pdata = dev_get_plat(dev);
- 	struct scmi_voltd_level_get_in in = {
- 		.domain_id = pdata->domain_id,
-@@ -112,7 +100,7 @@ static int scmi_voltd_get_voltage_level(struct udevice *dev)
- 					  in, out);
- 	int ret;
- 
--	ret = devm_scmi_process_msg(dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(dev, &msg);
- 	if (ret < 0)
- 		return ret;
- 
-@@ -140,7 +128,6 @@ static int scmi_regulator_of_to_plat(struct udevice *dev)
- static int scmi_regulator_probe(struct udevice *dev)
- {
- 	struct scmi_regulator_platdata *pdata = dev_get_plat(dev);
--	struct scmi_regulator_priv *priv = dev_get_priv(dev);
- 	struct scmi_voltd_attr_in in = { 0 };
- 	struct scmi_voltd_attr_out out = { 0 };
- 	struct scmi_msg scmi_msg = {
-@@ -153,14 +140,14 @@ static int scmi_regulator_probe(struct udevice *dev)
- 	};
- 	int ret;
- 
--	ret = devm_scmi_of_get_channel(dev->parent, &priv->channel);
-+	ret = devm_scmi_of_get_channel(dev);
- 	if (ret)
- 		return ret;
- 
- 	/* Check voltage domain is known from SCMI server */
- 	in.domain_id = pdata->domain_id;
- 
--	ret = devm_scmi_process_msg(dev, priv->channel, &scmi_msg);
-+	ret = devm_scmi_process_msg(dev, &scmi_msg);
+-	ret = setup_channel(dev, chan);
++	ret = setup_channel(protocol, chan);
  	if (ret) {
- 		dev_err(dev, "Failed to query voltage domain %u: %d\n",
- 			pdata->domain_id, ret);
-@@ -184,7 +171,6 @@ U_BOOT_DRIVER(scmi_regulator) = {
- 	.probe = scmi_regulator_probe,
- 	.of_to_plat = scmi_regulator_of_to_plat,
- 	.plat_auto = sizeof(struct scmi_regulator_platdata),
--	.priv_auto = sizeof(struct scmi_regulator_priv *),
- };
- 
- static int scmi_regulator_bind(struct udevice *dev)
-diff --git a/drivers/reset/reset-scmi.c b/drivers/reset/reset-scmi.c
-index 122556162ec3..b76711f0a8fb 100644
---- a/drivers/reset/reset-scmi.c
-+++ b/drivers/reset/reset-scmi.c
-@@ -13,17 +13,8 @@
- #include <scmi_protocols.h>
- #include <asm/types.h>
- 
--/**
-- * struct scmi_reset_priv - Private data for SCMI reset controller
-- * @channel: Reference to the SCMI channel to use
-- */
--struct scmi_reset_priv {
--	struct scmi_channel *channel;
--};
--
- static int scmi_reset_set_level(struct reset_ctl *rst, bool assert_not_deassert)
- {
--	struct scmi_reset_priv *priv = dev_get_priv(rst->dev);
- 	struct scmi_rd_reset_in in = {
- 		.domain_id = rst->id,
- 		.flags = assert_not_deassert ? SCMI_RD_RESET_FLAG_ASSERT : 0,
-@@ -35,7 +26,7 @@ static int scmi_reset_set_level(struct reset_ctl *rst, bool assert_not_deassert)
- 					  in, out);
- 	int ret;
- 
--	ret = devm_scmi_process_msg(rst->dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(rst->dev, &msg);
- 	if (ret)
+ 		free(chan);
  		return ret;
- 
-@@ -54,7 +45,6 @@ static int scmi_reset_deassert(struct reset_ctl *rst)
- 
- static int scmi_reset_request(struct reset_ctl *rst)
- {
--	struct scmi_reset_priv *priv = dev_get_priv(rst->dev);
- 	struct scmi_rd_attr_in in = {
- 		.domain_id = rst->id,
- 	};
-@@ -68,7 +58,7 @@ static int scmi_reset_request(struct reset_ctl *rst)
- 	 * We don't really care about the attribute, just check
- 	 * the reset domain exists.
+diff --git a/include/scmi_agent-uclass.h b/include/scmi_agent-uclass.h
+index b1c93532c0ea..eee46c880a56 100644
+--- a/include/scmi_agent-uclass.h
++++ b/include/scmi_agent-uclass.h
+@@ -16,16 +16,18 @@ struct scmi_agent_ops {
+ 	/*
+ 	 * of_get_channel - Get SCMI channel from SCMI agent device tree node
+ 	 *
+-	 * @dev:		SCMI protocol device using the transport
++	 * @dev:		SCMI agent device using the transport
++	 * @protocol:		SCMI protocol device using the transport
+ 	 * @channel:		Output reference to SCMI channel upon success
+ 	 * Return 0 upon success and a negative errno on failure
  	 */
--	ret = devm_scmi_process_msg(rst->dev, priv->channel, &msg);
-+	ret = devm_scmi_process_msg(rst->dev, &msg);
- 	if (ret)
- 		return ret;
+-	int (*of_get_channel)(struct udevice *dev, struct scmi_channel **channel);
++	int (*of_get_channel)(struct udevice *dev, struct udevice *protocol,
++			      struct scmi_channel **channel);
  
-@@ -83,9 +73,7 @@ static const struct reset_ops scmi_reset_domain_ops = {
- 
- static int scmi_reset_probe(struct udevice *dev)
- {
--	struct scmi_reset_priv *priv = dev_get_priv(dev);
--
--	return devm_scmi_of_get_channel(dev, &priv->channel);
-+	return devm_scmi_of_get_channel(dev);
- }
- 
- U_BOOT_DRIVER(scmi_reset_domain) = {
-@@ -93,5 +81,4 @@ U_BOOT_DRIVER(scmi_reset_domain) = {
- 	.id = UCLASS_RESET,
- 	.ops = &scmi_reset_domain_ops,
- 	.probe = scmi_reset_probe,
--	.priv_auto = sizeof(struct scmi_reset_priv *),
- };
-diff --git a/include/scmi_agent.h b/include/scmi_agent.h
-index ee6286366df7..577892029ff8 100644
---- a/include/scmi_agent.h
-+++ b/include/scmi_agent.h
-@@ -15,6 +15,14 @@
- struct udevice;
- struct scmi_channel;
- 
-+/**
-+ * struct scmi_agent_proto_priv - Private data in device for SCMI agent
-+ * @channel: Reference to the SCMI channel to use
-+ */
-+struct scmi_agent_proto_priv {
-+	struct scmi_channel *channel;
-+};
-+
- /*
-  * struct scmi_msg - Context of a SCMI message sent and the response received
-  *
-@@ -49,10 +57,9 @@ struct scmi_msg {
-  * devm_scmi_of_get_channel() - Get SCMI channel handle from SCMI agent DT node
-  *
-  * @dev:	Device requesting a channel
-- * @channel:	Output reference to the SCMI channel upon success
-  * @return 0 on success and a negative errno on failure
-  */
--int devm_scmi_of_get_channel(struct udevice *dev, struct scmi_channel **channel);
-+int devm_scmi_of_get_channel(struct udevice *dev);
- 
- /**
-  * devm_scmi_process_msg() - Send and process an SCMI message
-@@ -62,12 +69,10 @@ int devm_scmi_of_get_channel(struct udevice *dev, struct scmi_channel **channel)
-  * On return, scmi_msg::out_msg_sz stores the response payload size.
-  *
-  * @dev:	SCMI device
-- * @channel:	Communication channel for the device
-  * @msg:	Message structure reference
-  * Return: 0 on success and a negative errno on failure
-  */
--int devm_scmi_process_msg(struct udevice *dev, struct scmi_channel *channel,
--			  struct scmi_msg *msg);
-+int devm_scmi_process_msg(struct udevice *dev, struct scmi_msg *msg);
- 
- /**
-  * scmi_to_linux_errno() - Convert an SCMI error code into a Linux errno code
+ 	/*
+ 	 * process_msg - Request transport to get the SCMI message processed
+ 	 *
+-	 * @dev:		SCMI protocol device using the transport
++	 * @dev:		SCMI agent device using the transport
+ 	 * @msg:		SCMI message to be transmitted
+ 	 */
+ 	int (*process_msg)(struct udevice *dev, struct scmi_channel *channel,
 -- 
 2.34.1
 
