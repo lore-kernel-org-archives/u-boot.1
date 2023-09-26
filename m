@@ -4,47 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A76E7D24B
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 07:54:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF31CE7D24B
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 07:58:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87D4486C13;
-	Tue, 26 Sep 2023 09:54:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 35C0B86B93;
+	Tue, 26 Sep 2023 09:58:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="m0jXES/y";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C47286D42; Tue, 26 Sep 2023 09:54:36 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7B5A386BCE; Tue, 26 Sep 2023 09:58:46 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AC0786A94
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 09:54:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DFA3F86B4E
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 09:58:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=andestech.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 38Q7sODw009673;
- Tue, 26 Sep 2023 15:54:24 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Tue, 26 Sep 2023 15:54:19 +0800
-Date: Tue, 26 Sep 2023 15:53:17 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-CC: Rick Chen <rick@andestech.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/1] riscv: enable CONFIG_DEBUG_UART by default
-Message-ID: <ZRKN7VB6MNttakKv@swlinux02>
-References: <20230922233526.62642-1-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38Q7wfbL056821;
+ Tue, 26 Sep 2023 02:58:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695715121;
+ bh=lAuUUxEbtRVFyfc/Z0z0R9Wzr9tOZe2DB/mLn/TQm9I=;
+ h=From:Subject:Date:To:CC;
+ b=m0jXES/yLV37WNXTDrJGKbthNsxrHS4kI4KfMR2j11MnyaMK77bVCLY3W5ifGNFYa
+ bNMUOKYY/YlAh2jvvqNPBGJ1kC4v6UrHGjbuvP3eNmvWxFPKdLtgMHQO/l7Af8pL1E
+ eKyMHRnvGfoQAztb8LStzk+TMsQm/T5GXuqbJxRo=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38Q7wfXx002725
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 26 Sep 2023 02:58:41 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
+ Sep 2023 02:58:41 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 26 Sep 2023 02:58:41 -0500
+Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38Q7wauI019632;
+ Tue, 26 Sep 2023 02:58:37 -0500
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+Subject: [RFC PATCH v2 0/8] ATF and OP-TEE Firewalling for K3 devices.
+Date: Tue, 26 Sep 2023 13:28:28 +0530
+Message-ID: <20230926-binman-firewalling-v2-0-b1a084ec634d@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230922233526.62642-1-heinrich.schuchardt@canonical.com>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 38Q7sODw009673
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACSPEmUC/22OQQ6CMBREr0L+2ppaQMGViYkHcGtYtOUDP4FC2
+ ooYwt0tXbucmby8WcGhJXRwTVawOJOj0YQgDgnoTpoWGdUhg+Ai5ReRMUVmkIY1ZPEj+55My84
+ 56lqJFDWXEEAlHTJlpdHdjr4n5y3KgRlc/L5PFhtaovQFz8cdqlB25Pxov/HIfIpTdJY8/+ecT
+ 4yztCizXHDVNIW8eTrqcYBq27YfzKLFQNYAAAA=
+To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Andrew
+ Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
+CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
+ <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon
+ <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+X-Mailer: b4 0.13-dev
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1695715116; l=2581;
+ i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
+ bh=QjuoQGz5KAcTvNmIN6t5jBZsNOqDsHrd7sxMFpXmtFI=;
+ b=h/UO37cAJT6llJFuMxDV2ZEhLp0SA9ZQTS/oFCOsi/ZNXz4DgVVrcNPH0lRlIzBLoakGKyojG
+ g5ONTgb2wDRDDDnLtxkzu6A6UfHwCrAL4H+FxcsVv3IC+N5JZiSndT+
+X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
+ pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,60 +92,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+K3 devices have firewalls that are used to prevent illegal accesses to
+memory regions that are deemed secure. The series prevents the illegal
+accesses to ATF and OP-TEE regions that are present in different K3
+devices. 
 
-On Sat, Sep 23, 2023 at 01:35:26AM +0200, Heinrich Schuchardt wrote:
-> Most boards don't enable the pre-console buffer. So we will not see any
-> early messages. OpenSBI 1.3 provides us with the debug console extension
-> that can fill this gap.
-> 
-> For S-Mode U-Boot enable CONFIG_DEBUG_UART by default.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  arch/riscv/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> index 1c62c2345b..06fae7ebe8 100644
-> --- a/arch/riscv/Kconfig
-> +++ b/arch/riscv/Kconfig
-> @@ -141,6 +141,7 @@ config RISCV_MMODE
->  
->  config RISCV_SMODE
->  	bool "Supervisor"
-> +	imply DEBUG_UART
+AM62AX and AM64X are currently in hold due to some firewall
+configurations that our System Controller (TIFS) needs to handle. 
 
-This patch will cause the following compilation warnings.
-Could you take a look at them ?
+Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+---
+Changes in v2:
 
-It seems that some configuration values will not be set
-if we imply DEBUG_UART.
+Andrew:
+    - Make the firewall DTS more readable with CONSTANTS
 
-u-boot$ make qemu-riscv64_spl_defconfig
-  HOSTCC  scripts/basic/fixdep
-  HOSTCC  scripts/kconfig/conf.o
-  YACC    scripts/kconfig/zconf.tab.c
-  LEX     scripts/kconfig/zconf.lex.c
-  HOSTCC  scripts/kconfig/zconf.tab.o
-  HOSTLD  scripts/kconfig/conf
-#
-# configuration written to .config
-#
+Neha:
+    - Move GetHexOctet to dtoc for common usage
+    - Update the documentation in ti-secure
+    - s/indentifier/identifier/
+    - Add firewall binman test
 
-u-boot$ make ARCH_FLAGS="-march=rv64imafdc" -j`nproc`
-scripts/kconfig/conf  --syncconfig Kconfig
-.config:78:warning: symbol value '' invalid for DEBUG_UART_BASE
-.config:79:warning: symbol value '' invalid for DEBUG_UART_CLOCK
-.config:1347:warning: symbol value '' invalid for SPL_DEBUG_UART_BASE
-...
+- Remove slave firewall multiple background regions
+  ( Single firewall region works fine )
+- Add a check in the subnodes to check for the node.name 'firewall'
+- Change firewall indexing with id and region number so that it is easy
+  to purge out firewalls and we don't need to redo the numbering.
+- Add information for all the firewalls.
+- Link to v1: https://lore.kernel.org/u-boot/20230905-binman-firewalling-v1-0-3894520bff8a@ti.com/
+
+---
+Manorit Chawdhry (8):
+      dtoc: openssl: Add GetHexOctet method
+      binman: ti-secure: Add support for firewalling entities
+      binman: ftest: Add test for ti-secure firewall node
+      binman: k3: add k3-security.h and include it in k3-binman.dtsi
+      binman: j721e: Add firewall configurations for atf
+      binman: am62x: Add firewalling configurations
+      binman: j721s2: Add firewall configurations
+      binman: j7200: Add firewall configurations
+
+ arch/arm/dts/k3-am625-sk-binman.dtsi         |  49 +++++++
+ arch/arm/dts/k3-binman.dtsi                  |   2 +
+ arch/arm/dts/k3-j7200-binman.dtsi            | 137 ++++++++++++++++++
+ arch/arm/dts/k3-j721e-binman.dtsi            | 183 ++++++++++++++++++++++++
+ arch/arm/dts/k3-j721s2-binman.dtsi           | 206 +++++++++++++++++++++++++++
+ arch/arm/dts/k3-security.h                   |  58 ++++++++
+ tools/binman/btool/openssl.py                |  16 ++-
+ tools/binman/etype/ti_secure.py              |  85 +++++++++++
+ tools/binman/etype/x509_cert.py              |   3 +-
+ tools/binman/ftest.py                        |  12 ++
+ tools/binman/test/311_ti_secure_firewall.dts |  28 ++++
+ tools/dtoc/fdt_util.py                       |  20 +++
+ 12 files changed, 796 insertions(+), 3 deletions(-)
+---
+base-commit: 2fe4b54556ea6271237b35de68dc458bfceab94c
+change-id: 20230724-binman-firewalling-65ecdb23ec0a
 
 Best regards,
-Leo
+-- 
+Manorit Chawdhry <m-chawdhry@ti.com>
 
->  	help
->  	  Choose this option to build U-Boot for RISC-V S-Mode.
->  
-> -- 
-> 2.40.1
-> 
