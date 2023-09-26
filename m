@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ED61E7E63C
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:16:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5D39E7E638
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:16:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CCCC86DF9;
-	Tue, 26 Sep 2023 16:15:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0344986E02;
+	Tue, 26 Sep 2023 16:15:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lpeR7A9X";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g4at2FaK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACC7B86DCE; Tue, 26 Sep 2023 16:15:38 +0200 (CEST)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 8448B86E01; Tue, 26 Sep 2023 16:15:41 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46D5B86DD2
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:15:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 613B086DDB
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:15:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-79f82b26abfso309314739f.1
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:15:29 -0700 (PDT)
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-79fa7e33573so229074739f.0
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:15:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695737728; x=1696342528; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695737729; x=1696342529; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=geYaUv4VmenRR2WsCe/YeSsWmS604ImD8Ds2Dz74OJc=;
- b=lpeR7A9XTQWdZHSRcxCx9OI2byY/8Ec9ux+dCbZHb0kF6kbVnVHcdGTKZH+RJ9AIcU
- rKljLshg8o9n4sd4COF+OKijLPBu811hQABHqE8nM8TbLJhq89arU0vgKW3pYVhi5DTn
- a1qRiLu+5dejpLh/i7Z1KjxoKw3fxsd6HdH5U=
+ bh=aICVyKvuU5JfSIhsWdF89BOR56H3cGACEkieKv3Acq0=;
+ b=g4at2FaKNTqOGID9djeSSRN7N4xassDVQ/iPD2zvJeL8NJE7BoD2btl5IBgHmNDs52
+ uA98hyvrnQqKw08N9B7ReQPdNx3tNGVOnztxbweYIRVkSjE3YSz/FW7TkG5ZQj7DKn9h
+ GaLUdF6ID+QSbhvx3g4LxetCLn668sUF2aQzo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695737728; x=1696342528;
+ d=1e100.net; s=20230601; t=1695737729; x=1696342529;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=geYaUv4VmenRR2WsCe/YeSsWmS604ImD8Ds2Dz74OJc=;
- b=Fnqn7DIyQt6G/O/2k/DMqQtWLhM26M4MeX7ZACd18peck0JhJMcebKgPxqAEHIZS+z
- fozwgtJ8RUr1RHYbiI4RxNGW/QIz/12WYvqYQrTCbKQcSJrP8J+to5dvrZfzX6n5y+Y0
- LN4TZEn8jEqBpUnhEsJkP0xHGlfMMpxt6h8eTlJCrrOyYYYxPv7niq2czx8BuKVkhTTr
- YdVk/FjDnnibb8lM1AxtvgUhZzujddAOe3oOZuyFhmBB+97JH3u48PMxlOvX0chOZJSP
- tXqqropslvAb93MJHAIdHTTRcYEuNUsa1/TBjp6yplzydbcd0v2cs2DX1IrvotqZi1v2
- adQw==
-X-Gm-Message-State: AOJu0Yy9MWPgDOAzS97FmK0Qs54Mvunc24ZFhBMjYE4hSbSIOZCGl4iw
- dqBU19XkPF/OfIROGkPQC9sXbbBQpN2jfcMkxCA=
-X-Google-Smtp-Source: AGHT+IEB71qguEj+5h0ng7BX5tNBjYwiB+NKfxHNmWGutdHQJeWydXMmdpO99P3EzR3U/ut/bgYYxw==
-X-Received: by 2002:a6b:6f01:0:b0:794:d7e8:d239 with SMTP id
- k1-20020a6b6f01000000b00794d7e8d239mr10846224ioc.17.1695737727836; 
- Tue, 26 Sep 2023 07:15:27 -0700 (PDT)
+ bh=aICVyKvuU5JfSIhsWdF89BOR56H3cGACEkieKv3Acq0=;
+ b=bBw/3vpfHQ61F8ekD9iVJ2OFx+aGIKqQ/9pgko9bUItDxJhqn9bSwlcHjy//ABmGq2
+ 8GB6sXAy4SGC+gNKy+uQo0BgimqbWEZYJZgxUZRpyQaJ6AJKN9RduZu/jDOJgR0OOy88
+ WBFVkLGabL071tb2tmjttnGg44SNTjSDaAmhBppxHx+PNqMyIUxc3XqIE0guSyAzCjKC
+ 7tnaemBartfPijTS0VN0nb+2/Z9C0XY1rf2tlkPj/hYinT9l7gV9p0RcL2TTm7hVd/eY
+ RUXGdNoIodYpeynOvsnryZHhAvvbgwzvHj6rwOmQRm+h5MTkxuIQ5KIhNctNyhbGt/QI
+ ZOHw==
+X-Gm-Message-State: AOJu0YyDg7z5i7ElsGkgrd/g4LZVuH+mBDuv8M+CbMUsX8/7Zn8F7jum
+ vraR2NiU+1EU6BzNVO7GmFXpQdXun2m+4UJW02A=
+X-Google-Smtp-Source: AGHT+IFCS6DmYZj40gjb15qz76cjYFbIO03xO0/S5aorpRIp6KjQ/LtNuH4dESgsQv1OB9WmCe4FeQ==
+X-Received: by 2002:a05:6602:19d4:b0:787:8cf:fe8a with SMTP id
+ ba20-20020a05660219d400b0078708cffe8amr11400820iob.2.1695737729033; 
+ Tue, 26 Sep 2023 07:15:29 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- dp1-20020a0566381c8100b0043193e32c78sm3256764jab.152.2023.09.26.07.15.27
+ dp1-20020a0566381c8100b0043193e32c78sm3256764jab.152.2023.09.26.07.15.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Sep 2023 07:15:27 -0700 (PDT)
+ Tue, 26 Sep 2023 07:15:28 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>, Andy Fleming <afleming@gmail.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Mario Six <mario.six@gdsys.cc>, Priyanka Jain <priyanka.jain@nxp.com>,
- Stefan Roese <sr@denx.de>, Wolfgang Denk <wd@denx.de>
-Subject: [PATCH v4 05/44] spl: mx6: powerpc: Drop the condition on timer_init()
-Date: Tue, 26 Sep 2023 08:14:19 -0600
-Message-ID: <20230926141514.2101787-6-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v4 06/44] spl: Drop #ifdefs for BOARD_INIT and watchdog
+Date: Tue, 26 Sep 2023 08:14:20 -0600
+Message-ID: <20230926141514.2101787-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 In-Reply-To: <20230926141514.2101787-1-sjg@chromium.org>
 References: <20230926141514.2101787-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,45 +88,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It doesn't make sense to have some boards do this differently. Drop the
-condition in the hope that the maintainers can figure out any run-time
-problems.
-
-This has been tested on qemu-ppce500
-
+Avoid using the preprocessor for these checks.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Mention testing on qemu-ppce500
-
-Changes in v2:
-- Explicitly copy two maintainers as it seems only Mario was auto-cc'd
-
- common/spl/spl.c | 6 ------
- 1 file changed, 6 deletions(-)
+ common/spl/spl.c | 10 ++++------
+ include/spl.h    |  8 ++++++--
+ 2 files changed, 10 insertions(+), 8 deletions(-)
 
 diff --git a/common/spl/spl.c b/common/spl/spl.c
-index 5cc86288145b..4233390d7de2 100644
+index 4233390d7de2..68e58c930c28 100644
 --- a/common/spl/spl.c
 +++ b/common/spl/spl.c
-@@ -762,13 +762,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 		if (spl_init())
- 			hang();
+@@ -782,13 +782,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 		}
  	}
--#if !defined(CONFIG_PPC) && !defined(CONFIG_ARCH_MX6)
--	/*
--	 * timer_init() does not exist on PPC systems. The timer is initialized
--	 * and enabled (decrementer) in interrupt_init() here.
--	 */
- 	timer_init();
+ 
+-#if CONFIG_IS_ENABLED(BOARD_INIT)
+-	spl_board_init();
 -#endif
- 	if (CONFIG_IS_ENABLED(BLOBLIST)) {
- 		ret = bloblist_init();
- 		if (ret) {
++	if (CONFIG_IS_ENABLED(BOARD_INIT))
++		spl_board_init();
+ 
+-#if defined(CONFIG_SPL_WATCHDOG) && CONFIG_IS_ENABLED(WDT)
+-	initr_watchdog();
+-#endif
++	if (IS_ENABLED(CONFIG_SPL_WATCHDOG) && CONFIG_IS_ENABLED(WDT))
++		initr_watchdog();
+ 
+ 	if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
+ 	    IS_ENABLED(CONFIG_SPL_ATF))
+diff --git a/include/spl.h b/include/spl.h
+index 92bcaa90a4af..d16cea3ea50b 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -707,9 +707,13 @@ int spl_early_init(void);
+  */
+ int spl_init(void);
+ 
+-#ifdef CONFIG_SPL_BOARD_INIT
++/*
++ * spl_board_init() - Do board-specific init in SPL
++ *
++ * If xPL_BOARD_INIT is enabled, this is called from board_init_r() before
++ * jumping to the next phase.
++ */
+ void spl_board_init(void);
+-#endif
+ 
+ /**
+  * spl_was_boot_source() - check if U-Boot booted from SPL
 -- 
 2.42.0.515.g380fc7ccd1-goog
 
