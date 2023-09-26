@@ -4,71 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14DFE7E626
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 11:37:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65125E7E627
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 11:38:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7736686D47;
+	by phobos.denx.de (Postfix) with ESMTP id D890586D5A;
 	Tue, 26 Sep 2023 13:37:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="D9+JK2JM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RdtDIpDI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5503C86BEB; Tue, 26 Sep 2023 13:37:47 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 6479B86C2D; Tue, 26 Sep 2023 13:37:47 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A289B86D3E
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 13:37:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E78E886C35
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 13:37:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5334f9a56f6so9532374a12.3
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 04:37:44 -0700 (PDT)
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-50336768615so14714844e87.0
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 04:37:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1695728263; x=1696333063; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1695728263; x=1696333063; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=R95ARRG8a/rSE+6bNgFXj3DkpCYQEZH8VYTLPTbk9Ck=;
- b=D9+JK2JMRNiasEA2pGRIPMGmlFeHA3YlJrypaRatOlm3LFS3eJAMYM99Lv7PBXYd42
- XBJAPPaDcrCo3qr5D/RS5MzwMXjfW1diIMo4RfEab8nfM4oQLsncSKs+H6KSyHlFvtwa
- ttmsxP2FInlbfyEQ+ZnAvIlpEm0e3Vwm2qT7lw3oUM/5YI2eK/VOLKVH7td/ZD2uXXcU
- 2b2efkwwM1+0eUKT4/pxJwJ8zbnXhcYGvRYxKU8aKJOmapcS/2EDudZO6O5UcGylizve
- 7LVNqa5XsvL/VNu668+JN9Sipqz0kBtIZqpbqF65HTeKIuBjDKnXecohf6JCbo51Kzq5
- Yw/w==
+ bh=tHfdStaCxgcCTLUHEA9xv82WjxY9DBMtP9lOeCCBa9Q=;
+ b=RdtDIpDI7vuEKCGteB3Amm2cpRiWTzN+iuRo9TABkj3HDFxa0IZwaXLyQBt1n+Rq9e
+ PG+SCms9jWzJDz6+etOXAAnbu6msEdAghscLcK05hFtosAJ5a+b5Wr1AYNWEWFLS1VZq
+ /G2JlZSsyZosJjofh87sfRwJ04Pz4NK6kCD94=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695728263; x=1696333063;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=R95ARRG8a/rSE+6bNgFXj3DkpCYQEZH8VYTLPTbk9Ck=;
- b=NM937rqn3eWUL4ehE1H52hDrXGJnsG7Rl9GsSHlXmn7FG4SliAst0kjIZ4CYSnjv6j
- DMAa1LDw2hzZuJG08CxMwv40wrREECJehO7Xta9Ag4btcaMVy4ugFQpuY9jjT31WEMP8
- GNJ4GY99CVTVx7DakQEtZwXKOf57pZhxgu5/ZtbdHyleq5oYb3aRVXfyvA+pi2E4zmHJ
- gnuziV2Wnynsp+Ci44Cb73fMpFrw7KO67ToY4I8H/gT6roU3fNiTlXNLxVh8yMVKqt9m
- DLhyhyid1TEv0dSJNkvmXyuvXiWPw8tSbcnw7XPBQucjaDwh3n7PyVfzrqP20WF+m3B0
- ihAg==
-X-Gm-Message-State: AOJu0YyyDiCYBJ6LUiyEq63Gp4Ejq18n7YSZ3+727t4LCHrNBZo9eCFQ
- O+Qc05vygzhlYxCf7RF3b4E15TFGUkkrARgrNyyTMUAadPqOYrYRZAw=
-X-Google-Smtp-Source: AGHT+IGHxj2s9/A6L/gTgasRsTxBYiszQ3JAzwmMy7InJ/zCm3HgzPUsU70ZLl95tpNz3DQ6QoqvREbMjmP+kvM5jkk=
-X-Received: by 2002:aa7:d618:0:b0:530:d8df:afaa with SMTP id
- c24-20020aa7d618000000b00530d8dfafaamr7690204edr.41.1695728262877; Tue, 26
+ bh=tHfdStaCxgcCTLUHEA9xv82WjxY9DBMtP9lOeCCBa9Q=;
+ b=vKqmJ807mHGKfFhxXfacL9yg8cUng72MhNf97ZhxFd3GKoy6fNrp0f29Cwws7plnK0
+ /M8U4vNErLiR44G1oI0IKNUhn6VnQsbThm0Cj3S3QQ/lRm9/hUym7alkTtH8YgG29c+h
+ qPkNBWOPxRRuKnKCNpW6QMbs3D1g3kooA7NdIOTN+peEZewse4jmUkMZO28dFABBVQFR
+ qeTQJ3UNgnRftd3XXeV110x6zSE0Be1vTf0bQVuwiyWUUg29Xz5HIN0r4pgndgH4tVtn
+ UaLJnSnizwWBTH00+lmioDsNvZBZGdksVknWzWfyWQ6xFtkIPINMvSK32LKeBjoTBlD2
+ YHXw==
+X-Gm-Message-State: AOJu0YzDf8KozBaQgzK/4tFubLXEkBhZiuLROad+cnnPZ2zgx8ovQDOg
+ RLTvf68WafYUuB2WHYphzLeSCM/OWSlnfkMYlZ5pvyVQc4dl5tvY+Os=
+X-Google-Smtp-Source: AGHT+IG8E+VnVAaKUZFrHCsMwHRnTnqHmy54P2KfH31P1nWP3fwe4p71cUvxXz6v/TD3Uu/zdV2a2U5Ampuq/ei+iTM=
+X-Received: by 2002:a05:6512:ea1:b0:500:ce5f:7635 with SMTP id
+ bi33-20020a0565120ea100b00500ce5f7635mr9683718lfb.54.1695728262899; Tue, 26
  Sep 2023 04:37:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
- <20230926094124.7024-2-maxim.uvarov@linaro.org>
-In-Reply-To: <20230926094124.7024-2-maxim.uvarov@linaro.org>
-From: Simon Glass <sjg@google.com>
-Date: Tue, 26 Sep 2023 05:37:25 -0600
-Message-ID: <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
-Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
-To: Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
- joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com, 
- goldsimon@gmx.de
+References: <CAJaLiFw67ztCo5TY=TPQneYgE5q6RHnj_XbnukQD=qhec3oRdg@mail.gmail.com>
+In-Reply-To: <CAJaLiFw67ztCo5TY=TPQneYgE5q6RHnj_XbnukQD=qhec3oRdg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 26 Sep 2023 05:37:31 -0600
+Message-ID: <CAPnjgZ3T8TOQbQKuy3wwfgb2K3sG5RDQdZ2zOxYT62XgGmVezg@mail.gmail.com>
+Subject: Re: bootstd: Scanning for USB bootflow will remove existing SCSI
+ bootflow
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,34 +81,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Maxim,
+Hi Tony,
 
-On Tue, 26 Sept 2023 at 03:43, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
+On Mon, 25 Sept 2023 at 14:02, Tony Dinh <mibodhi@gmail.com> wrote:
 >
-> add external lwIP library as a git submodule.
-> Use STABLE-2_2_0_RELEASE tag.
+> Hi Simon,
 >
-> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> ---
->  .gitmodules            | 3 +++
->  net/lwip/lwip-external | 1 +
->  2 files changed, 4 insertions(+)
->  create mode 100644 .gitmodules
->  create mode 160000 net/lwip/lwip-external
+> Here is an observation during testing the bootflow command.
+>
+> If there is a SCSI bootflow, scanning for USB bootflow will remove that existing
+> SCSI bootflow. To bring it back, I scanned for SCSI bootflow again, and it was
+> back to normal. Perhaps there is some kind of indexing problem?
 
-I really don't agree with having submodules in U-Boot. It's just a
-huge hassle that we don't need. We still haven't figured out how to
-deal with config fragments.
+Yes that's right. The 'botflow scan' command is not additive. The
+first thing it does is removing existing bootflows.
 
-If no one else is interested in maintaining this stack within U-Boot
-and syncing up every now and then, perhaps we should reconsider
-bringing this into U-Boot? We would never normally accept such a large
-body of code without even a MAINTAINERS entry. Without a network
-maintainer, even the integration layer will struggle to keep up and
-up-revving won't be possible anyway.
-
-In any case, if we go with lwip, we should copy in just the code that
-is needed, unchanged,
+>
+> Please see the log below after the break.
+>
+> All the best,
+> Tony
+>
+> ===============
+> <BEGIN LOG>
+>
+> U-Boot 2023.10-rc4-tld-1-00044-g9c21b2a350-dirty (Sep 18 2023 - 12:16:59 -0700)
+> Thecus N2350
+>
+> <snip>
+>
+> N2350 > env def -a
+> ## Resetting to default environment
+>
+> N2350 > bootflow scan scsi
+> pcie0.0: Link down
+> pcie1.0: Link down
+> scanning bus for devices...
+> SATA link 0 timeout.
+> Target spinup took 0 ms.
+> AHCI 0001.0000 32 slots 2 ports 6 Gbps 0x3 impl SATA mode
+> flags: 64bit ncq led only pmp fbss pio slum part sxs
+>   Device 0: (1:0) Vendor: ATA Prod.: ST750LX003-1AC15 Rev: SM12
+>             Type: Hard Disk
+>             Capacity: 715404.8 MB = 698.6 GB (1465149168 x 512)
+> ** File not found /boot/boot.bmp **
+>
+> N2350 > bootflow l
+> Showing all bootflows
+> Seq  Method       State   Uclass    Part  Name                      Filename
+> ---  -----------  ------  --------  ----  ------------------------
+> ----------------
+>   0  script       ready   scsi         1  ahci_scsi.id1lun0.bootdev
+> /boot/boot.scr
+> ---  -----------  ------  --------  ----  ------------------------
+> ----------------
+> (1 bootflow, 1 valid)
+>
+> N2350 > bootflow scan usb
+> Bus usb@58000: USB EHCI 1.00
+> Bus usb3@f0000: MVEBU XHCI INIT controller @ 0xf10f4000
+> Register 2000120 NbrPorts 2
+> Starting the controller
+> USB XHCI 1.00
+> Bus usb3@f8000: MVEBU XHCI INIT controller @ 0xf10fc000
+> Register 2000120 NbrPorts 2
+> Starting the controller
+> USB XHCI 1.00
+> scanning bus usb@58000 for devices... 1 USB Device(s) found
+> scanning bus usb3@f0000 for devices... 1 USB Device(s) found
+> scanning bus usb3@f8000 for devices... 2 USB Device(s) found
+> ** File not found /boot/boot.bmp **
+>
+> N2350 > bootflow l
+> Showing all bootflows
+> Seq  Method       State   Uclass    Part  Name                      Filename
+> ---  -----------  ------  --------  ----  ------------------------
+> ----------------
+>   0  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
+> /boot/boot.scr
+> ---  -----------  ------  --------  ----  ------------------------
+> ----------------
+> (1 bootflow, 1 valid)
+>
+> N2350 > bootflow scan scsi
+> ** File not found /boot/boot.bmp **
+> ** File not found /boot/boot.bmp **
+>
+> N2350 > bootflow l
+> Showing all bootflows
+> Seq  Method       State   Uclass    Part  Name                      Filename
+> ---  -----------  ------  --------  ----  ------------------------
+> ----------------
+>   0  script       ready   scsi         1  ahci_scsi.id1lun0.bootdev
+> /boot/boot.scr
+>   1  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
+> /boot/boot.scr
+> ---  -----------  ------  --------  ----  ------------------------
+> ----------------
+> (2 bootflows, 2 valid)
+>
+> <END LOG>
 
 Regards,
 Simon
