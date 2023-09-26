@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA5DCE7E63C
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:24:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 003D7E7E638
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 14:24:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90B6A86E73;
-	Tue, 26 Sep 2023 16:16:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 052F586EAC;
+	Tue, 26 Sep 2023 16:16:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iBZKg6mw";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="rb9/z2l/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B54786E8D; Tue, 26 Sep 2023 16:16:22 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id A57E086E3A; Tue, 26 Sep 2023 16:16:55 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DC6186DC4
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:16:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA4CC86DEB
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 16:16:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3512b425662so19463715ab.0
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:16:10 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-503397ee920so14174079e87.1
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:16:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695737764; x=1696342564; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qq2hnOHWvcRvzIiBKnGIasA/FBXg9O00dibXm8Tivgo=;
- b=iBZKg6mwXCVmq/tMIWwULi/uELQBXnd5lmE+DVmgHBKACOPXeHW06adIGKUJGjwQbx
- cv9SWM4mSmUy9wzMRfN+DGXxBLQgXpUAagUb01OR4GyvCt2bLo1qRiHG7XrYGEKTyY7V
- 7kjHNDWBDIu5rGw8QD881xGPm8MXc8K/mMwzs=
+ d=google.com; s=20230601; t=1695737813; x=1696342613; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mzpore9V7sZeoWXUXRUgr/wobOj5DJMOXKcTTQuevyM=;
+ b=rb9/z2l/fu838FlK4iEtY7X0gUHQdNeygXijReatij6IULLzroqPWMwz8mGP92OjuZ
+ GPEXrgswe+qpny/t6YaWjS0I+Qe38LIlZatuUxHfJfEmMcRHgiDufDu6f12mxpAMJ4bQ
+ v7fS081SsQzVegudoHj66sFkNOimQ1kJ5FR95pIfF/orW4Nz8Mtg7BpjVditwZEWyNKm
+ x6jYHGv8bzZfntWnuRwNBcOSOU2KIGzmAJOy+ncn52h/PCo1Spj7gfUMb8TBSMYpxI/o
+ det7WpHooXx0BNDhbvASKEDrUIrlX6AA9rI6Y9Fi7wjwnZosu7qsZWjKfrZXPqPALD5r
+ Qhsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695737764; x=1696342564;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qq2hnOHWvcRvzIiBKnGIasA/FBXg9O00dibXm8Tivgo=;
- b=iRA/3CWrOriLcDHNuOnSjwRgxEu3OZRHQ9ssT0nRYgjviEX9tuDb7U6Wo793zuVlL0
- U2iUBeEkVBjp/MbqMpc4lX+JlFzoMPU8oLtQ8+vqR5AkzSAv5C3Qz11pP3xt8c3fK2gJ
- e83lpLmv84F62qpZ6HE4+HoTEacUH2692T/rpuspOe+o6Wj3KxQhSOzbYuy7LbY8dB+2
- wdYOR1jhXMwczegGbh9wrBRPNir1a6rlKBoP5ho9drXIEA9hTh7FtJRHiioQt5JLxfqF
- 2vQIVAM6NDTQw1v7IyJRc2jA33iOAj1r4LH17u3O6hmZLn/Cc9vjLhTgBqXC3BBGap0y
- /gUQ==
-X-Gm-Message-State: AOJu0Ywf8jXfZzB7lkaTxJf0K6aTi42R6+/KTgycGx/pHBVSrQ6hQq6Q
- BUwqt2s9Do07AKAw6vHH38bzOL645WwM/iUZi8Y=
-X-Google-Smtp-Source: AGHT+IFox+Kw19HIjEG7h+pVfdz3wOW/q/FfSHwZUXcw4G1xSE0cwQnR/ibEfW/ISj446QP/tKXEmw==
-X-Received: by 2002:a05:6e02:1d05:b0:351:5137:e89d with SMTP id
- i5-20020a056e021d0500b003515137e89dmr2994648ila.27.1695737764169; 
- Tue, 26 Sep 2023 07:16:04 -0700 (PDT)
-Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- dp1-20020a0566381c8100b0043193e32c78sm3256764jab.152.2023.09.26.07.16.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Sep 2023 07:16:03 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v4 41/44] spl: Add C-based runtime detection of SPL
-Date: Tue, 26 Sep 2023 08:14:55 -0600
-Message-ID: <20230926141514.2101787-42-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
-In-Reply-To: <20230926141514.2101787-1-sjg@chromium.org>
-References: <20230926141514.2101787-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1695737813; x=1696342613;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mzpore9V7sZeoWXUXRUgr/wobOj5DJMOXKcTTQuevyM=;
+ b=GoCznQg0CKimHp5xkUlJhgZabQFOB3y1Ot4T7h+nzxlI4juWc7B8mVo33YYjSHxExO
+ gLXmq2380TDm8SMJ2kemFEEGjjYznWK2jrxBC0OHreLhYO526TqnMoIJzAy9SQ6ssprO
+ BTniNQLztiK/dENY9EPd+6GjVD1jSgCMlkdH22Xx2ng12HRi9gH0v3r3LaJCbiQfn/jM
+ IOhrh5qLYo6L0HdyspxTIyiZPfpJBTGCjhP2XiKxhBkCy4hSpWOsSa8dYuZRbg2W8q9q
+ 18XN/LpZsiEB1km4ypqUVrVMLl7YO0glGne3jjmFKrUpyl87GGtW7eWPxTA2kroqgKcE
+ iTWA==
+X-Gm-Message-State: AOJu0YzUyh8HkOvbLtSuZmogXtN6WEhLoobTB75D15fxqCVJOuoWxNJK
+ z6BBH58RwRXIsbx/Cx4YMt4MZ35/hj9hQpcjU51NEMtB76B599XIBI4=
+X-Google-Smtp-Source: AGHT+IGUEE669mzkRPcN7Hc7RsVlhMOhkRywOE/vZzBC4dvH8qglHF7Dg6g1CBlH7b0JsRRp5weGN6TnyPC3472XNYg=
+X-Received: by 2002:ac2:5f74:0:b0:4fd:fc36:68a2 with SMTP id
+ c20-20020ac25f74000000b004fdfc3668a2mr7412510lfc.1.1695737812687; Tue, 26 Sep
+ 2023 07:16:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
+ <20230926094124.7024-2-maxim.uvarov@linaro.org>
+ <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
+ <20230926134149.GS305624@bill-the-cat>
+In-Reply-To: <20230926134149.GS305624@bill-the-cat>
+From: Simon Glass <sjg@google.com>
+Date: Tue, 26 Sep 2023 08:16:35 -0600
+Message-ID: <CAPnjgZ1iAG8Rw3jVZvFs16AvnGkO=gCsCM3dF1c30biFk4t2xw@mail.gmail.com>
+Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
+To: Tom Rini <trini@konsulko.com>
+Cc: Maxim Uvarov <maxim.uvarov@linaro.org>, u-boot@lists.denx.de,
+ pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ goldsimon@gmx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,44 +89,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The spl_phase() function indicates whether U-Boot is in SPL and before
-or after relocation. But sometimes it is useful to check for SPL with
-zero code-size impact. Since spl_phase() checks the global_data flags,
-it does add a few bytes.
+Hi Tom,
 
-Add a new spl_in_proper() function to check if U-Boot proper is
-running, regardless of the relocation status.
+On Tue, 26 Sept 2023 at 07:41, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Sep 26, 2023 at 05:37:25AM -0600, Simon Glass wrote:
+> > Hi Maxim,
+> >
+> > On Tue, 26 Sept 2023 at 03:43, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
+> > >
+> > > add external lwIP library as a git submodule.
+> > > Use STABLE-2_2_0_RELEASE tag.
+> > >
+> > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> > > ---
+> > >  .gitmodules            | 3 +++
+> > >  net/lwip/lwip-external | 1 +
+> > >  2 files changed, 4 insertions(+)
+> > >  create mode 100644 .gitmodules
+> > >  create mode 160000 net/lwip/lwip-external
+>
+> Do you have comments on the rest of the series?
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Not yet, but I should be able to review the rest in a few days. My
+main comments before were minor - return codes, tests, error checking.
 
-Changes in v4:
-- Add new patch with C-based runtime detection of SPL
-
- include/spl.h | 10 ++++++++++
- 1 file changed, 10 insertions(+)
-
-diff --git a/include/spl.h b/include/spl.h
-index e958ace2cc62..a3510edecf24 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -132,6 +132,16 @@ static inline enum u_boot_phase spl_phase(void)
- #endif
- }
- 
-+/* returns true if in U-Boot proper, false if in SPL */
-+static inline bool spl_in_proper(void)
-+{
-+#ifdef CONFIG_SPL_BUILD
-+	return false;
-+#endif
-+
-+	return true;
-+}
-+
- /**
-  * spl_prev_phase() - Figure out the previous U-Boot phase
-  *
--- 
-2.42.0.515.g380fc7ccd1-goog
-
+Regards,
+Simon
