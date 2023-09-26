@@ -4,81 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C546E7D26A
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:54:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD574E7D26A
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:54:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC7EE86D9A;
-	Tue, 26 Sep 2023 10:54:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 58FEF86DA6;
+	Tue, 26 Sep 2023 10:54:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="7D3TEaSZ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABB8A86D9C; Tue, 26 Sep 2023 10:54:08 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 089D886DA6; Tue, 26 Sep 2023 10:54:43 +0200 (CEST)
+Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.154.221.58])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C83B686D8F
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:54:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07DFE86D93
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:54:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7633ac7092=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 38Q6ogRY017300; Tue, 26 Sep 2023 10:54:04 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=+AwnxToXN4/Hfq4JIwXG74pJ3YNVOx8o1VwZ/Bm4nGg=; b=7D
- 3TEaSZwonX0/9Wr120ikZcpTUq/1ISzNU/cXvzK187GHe4GWexzY/ksWPgoJTtpV
- kZO3/5VshLzsc0ZV7/Qx+aJaoo6MXt+oFpRNWv43tMPL8JolwzzlpobXg+V/K9ij
- WsKTahczDx0e6U1RonnLf4OGbVA1KlzfJBR13ulzT8JW8ze/rmjXwPbzZnhnoHIO
- L2qFQJ3+17zOBdHsed2erLEH89oNsOXGXV986QJOHEzQ5kka4VadBEe2UEcmcW6A
- EQoNzl5ZCBzuCXYKEwJbwN5LsReDBozjlSLlCo46DV88RS6EXzAlziDmayYf4Nrq
- 9Yp8cyMBJkTc7oxgUPnw==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t9nefkmhm-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Sep 2023 10:54:04 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id B30E510005C;
- Tue, 26 Sep 2023 10:54:03 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id ABFC122A6C6;
- Tue, 26 Sep 2023 10:54:03 +0200 (CEST)
-Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
- 2023 10:54:03 +0200
-Message-ID: <98c26606-e835-e127-996a-410625de5b93@foss.st.com>
-Date: Tue, 26 Sep 2023 10:54:02 +0200
+ dmarc=none (p=none dis=none) header.from=tinylab.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=bmeng@tinylab.org
+X-QQ-mid: bizesmtp66t1695718470tk1c9fys
+Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 26 Sep 2023 16:54:28 +0800 (CST)
+X-QQ-SSF: 01200000000000F0I000000A0000000
+X-QQ-FEAT: kUim6XnhvqV8FbEZO4aNq+pMdqoaTSg53pXciQntSMuKpmwS4ByH5b7YyeEyp
+ r78+hikKTV5t3kotHCiPtYRwJLs5YemfH6rgE2DQAcJPnEqBnYlYtlYSB2m0VGfJKph/oT8
+ ZTzwWEOg9sN94d331048Td3OHgWopfahoz8qP3ryW0X0Uf4Yfb587EJBS28TYC8MpQk1ptI
+ 8mg8rTzxW2Ezly95+8xmCP+2mGvNECZ1QCLa5SQy6T65Gt7UNiSSbz0/9oUEQBjKEuMOneL
+ xX/v8cwFpzhbIDGwVvf56p1ZS125FFa6cNIkz4Mun3M56wGEn3lYdACGib+DPPdlhpfQfUl
+ nNDYa5iQFUIAurq7+OXki4cWgh0DFdIoGejtLGL
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 3349316448869738313
+From: Bin Meng <bmeng@tinylab.org>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tobias Waldekranz <tobias@waldekranz.com>
+Subject: [PATCH 10/15] cmd: blk_common: Use macros for the return values
+Date: Tue, 26 Sep 2023 16:43:40 +0800
+Message-Id: <20230926084346.2237483-11-bmeng@tinylab.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230926084346.2237483-1-bmeng@tinylab.org>
+References: <20230926084346.2237483-1-bmeng@tinylab.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 06/10] ARM: dts: stm32: add touchscreen on stm32f746-disco
- board
-Content-Language: en-US
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: <linux-amarula@amarulasolutions.com>, Alexandre Torgue
- <alexandre.torgue@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Tom Rini <trini@konsulko.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
- <20230903204849.660722-7-dario.binacchi@amarulasolutions.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230903204849.660722-7-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-09-26_07,2023-09-25_01,2023-05-22_02
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:tinylab.org:qybglogicsvrgz:qybglogicsvrgz7a-0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,59 +64,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Avoid using magic number 0/1 for the command result.
 
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
+---
 
-On 9/3/23 22:48, Dario Binacchi wrote:
-> commit f0215440069c4fb12958d2d321e05faa2708a11d Linux upstream.
-> 
-> The patch adds support for touchscreen on the stm32f746-disco board.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
-> ---
-> 
->  arch/arm/dts/stm32f746-disco.dts | 19 ++++++++++++++++++-
->  1 file changed, 18 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/dts/stm32f746-disco.dts b/arch/arm/dts/stm32f746-disco.dts
-> index 1ed58f236149..9541f449fd0e 100644
-> --- a/arch/arm/dts/stm32f746-disco.dts
-> +++ b/arch/arm/dts/stm32f746-disco.dts
-> @@ -7,8 +7,9 @@
->  /dts-v1/;
->  #include "stm32f746.dtsi"
->  #include "stm32f746-pinctrl.dtsi"
-> -#include <dt-bindings/input/input.h>
->  #include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/input/input.h>
-> +#include <dt-bindings/interrupt-controller/irq.h>
->  
->  / {
->  	model = "STMicroelectronics STM32F746-DISCO board";
-> @@ -63,6 +64,22 @@
->  	status = "okay";
->  };
->  
-> +&i2c3 {
-> +	pinctrl-0 = <&i2c3_pins_a>;
-> +	pinctrl-names = "default";
-> +	clock-frequency = <400000>;
-> +	status = "okay";
-> +
-> +	touchscreen@38 {
-> +		compatible = "edt,edt-ft5306";
-> +		reg = <0x38>;
-> +		interrupt-parent = <&gpioi>;
-> +		interrupts = <13 IRQ_TYPE_EDGE_FALLING>;
-> +		touchscreen-size-x = <480>;
-> +		touchscreen-size-y = <272>;
-> +	};
-> +};
-> +
->  &sdio1 {
->  	status = "okay";
->  	vmmc-supply = <&mmc_vcard>;
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+ cmd/blk_common.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-Thanks
-Patrice
+diff --git a/cmd/blk_common.c b/cmd/blk_common.c
+index 9f9d4327a9..ad9b16dc09 100644
+--- a/cmd/blk_common.c
++++ b/cmd/blk_common.c
+@@ -25,18 +25,18 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
+ 	case 2:
+ 		if (strncmp(argv[1], "inf", 3) == 0) {
+ 			blk_list_devices(uclass_id);
+-			return 0;
++			return CMD_RET_SUCCESS;
+ 		} else if (strncmp(argv[1], "dev", 3) == 0) {
+ 			if (blk_print_device_num(uclass_id, *cur_devnump)) {
+ 				printf("\nno %s devices available\n", if_name);
+ 				return CMD_RET_FAILURE;
+ 			}
+-			return 0;
++			return CMD_RET_SUCCESS;
+ 		} else if (strncmp(argv[1], "part", 4) == 0) {
+ 			if (blk_list_part(uclass_id))
+ 				printf("\nno %s partition table available\n",
+ 				       if_name);
+-			return 0;
++			return CMD_RET_SUCCESS;
+ 		}
+ 		return CMD_RET_USAGE;
+ 	case 3:
+@@ -49,7 +49,7 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
+ 			} else {
+ 				return CMD_RET_FAILURE;
+ 			}
+-			return 0;
++			return CMD_RET_SUCCESS;
+ 		} else if (strncmp(argv[1], "part", 4) == 0) {
+ 			int dev = (int)dectoul(argv[2], NULL);
+ 
+@@ -58,7 +58,7 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
+ 				       if_name, dev);
+ 				return CMD_RET_FAILURE;
+ 			}
+-			return 0;
++			return CMD_RET_SUCCESS;
+ 		}
+ 		return CMD_RET_USAGE;
+ 
+@@ -80,7 +80,7 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
+ 
+ 			printf("%ld blocks read: %s\n", n,
+ 			       n == cnt ? "OK" : "ERROR");
+-			return n == cnt ? 0 : 1;
++			return n == cnt ? CMD_RET_SUCCESS : CMD_RET_FAILURE;
+ 		} else if (strcmp(argv[1], "write") == 0) {
+ 			phys_addr_t paddr = hextoul(argv[2], NULL);
+ 			lbaint_t blk = hextoul(argv[3], NULL);
+@@ -98,7 +98,7 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
+ 
+ 			printf("%ld blocks written: %s\n", n,
+ 			       n == cnt ? "OK" : "ERROR");
+-			return n == cnt ? 0 : 1;
++			return n == cnt ? CMD_RET_SUCCESS : CMD_RET_FAILURE;
+ 		} else {
+ 			return CMD_RET_USAGE;
+ 		}
+-- 
+2.25.1
+
