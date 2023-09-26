@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BA68E7D26A
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:54:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47210E7D267
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 08:55:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCD0686DA4;
-	Tue, 26 Sep 2023 10:54:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D35186DA3;
+	Tue, 26 Sep 2023 10:54:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="W3n7JJAZ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="vx0xtBIK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C817686DAE; Tue, 26 Sep 2023 10:54:44 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id CB7D186DA3; Tue, 26 Sep 2023 10:54:50 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E99A086DA4
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:54:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18A6086DB9
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 10:54:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=7633ac7092=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 38Q6IhTO024821; Tue, 26 Sep 2023 10:54:41 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 38Q75ZaO012495; Tue, 26 Sep 2023 10:54:46 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=qv34NZ2I6PomAX8rXn/idI2eM8+eH0U3ZdKd8mRypu4=; b=W3
- n7JJAZ+PasO2c1B1UwooFlk2wf9MvmV4WkLiBwwWfT79viphGR1LEdSmI6/dzML/
- i9SXkF0yUt6gssawSbEIVdTYKgdH/BpkBoQ02qvcyYW7pimggGTB5KVhv7rTrj+a
- zMvCYMOprKcOKQXn8gBLgCaR68NDOUeqsrXM2IN74POR1qFfnz+f3n847PS7hcz5
- nN8xheHzYWXwXlL4jny8IOs5Ff1gX8nmqS95LfJxBpyArU5Lh0TmLD/96TXOgRjq
- G15/5BbQ3P8Q+zvOtlg9XaRKECzG66SbO7+dI2C7EqG+iVdaCFzAwirnYHWIgZbE
- WqfMN7NrwHGM9Gonre1Q==
+ selector1; bh=riAp4p5kbpCUt5pdp91OFS9QH58mWQiyGHZkUed/GXU=; b=vx
+ 0xtBIKtxl1uDT+AY5cxMq+QjldmBH1wUthrWCBip1ZhD7NDCBnkbamwwNOjDcUga
+ uGTlEmP34JW5/QL57SLgthWKIYAoVU9IofEoVsCbMC2Wop6RmyDc8zpC64XeNMHu
+ mzPCb7TD1+kSVasBxYZFEZccC0rXh0Dhn6xJBg6Z0F0jT9OzIk2aqrItDFpK4xW5
+ GW429qZFfklItzjjL5kbcJ14gTtBv8+Y+tEobe3XrlTJxsAY5LFYdG8aIzKbf9rL
+ jDE9HFwrwpZzXhRbOa/Aafnx4lqhtPpxJmWlGRW85Kf7Ymsl1dv/I2FtEos2XTq/
+ w62I4o+DWOEjHzGwkvWw==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t9qbwuasd-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t9n54c4qj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Sep 2023 10:54:41 +0200 (MEST)
+ Tue, 26 Sep 2023 10:54:46 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 95CA2100064;
- Tue, 26 Sep 2023 10:54:32 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E2C8A10005A;
+ Tue, 26 Sep 2023 10:54:45 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8ED6122A6C9;
- Tue, 26 Sep 2023 10:54:32 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DBFD422A6CB;
+ Tue, 26 Sep 2023 10:54:45 +0200 (CEST)
 Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
- 2023 10:54:31 +0200
-Message-ID: <1cf4b4c9-227e-b250-dffa-d2d91df21f02@foss.st.com>
-Date: Tue, 26 Sep 2023 10:54:31 +0200
+ 2023 10:54:45 +0200
+Message-ID: <a614f281-0b1f-eab7-a82c-4e9d2502f265@foss.st.com>
+Date: Tue, 26 Sep 2023 10:54:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 07/10] ARM: dts: stm32: add ltdc support on stm32f746 MCU
+Subject: Re: [PATCH 08/10] ARM: dts: stm32: add pin map for LTDC on stm32f7
 Content-Language: en-US
 To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  <u-boot@lists.denx.de>
-CC: <linux-amarula@amarulasolutions.com>, Alexandre Torgue
+CC: <linux-amarula@amarulasolutions.com>, =?UTF-8?Q?Rapha=c3=abl_Gallais-Pou?=
+ <raphael.gallais-pou@foss.st.com>, Alexandre Torgue
  <alexandre.torgue@foss.st.com>, Marc Kleine-Budde <mkl@pengutronix.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20230903204849.660722-1-dario.binacchi@amarulasolutions.com>
- <20230903204849.660722-8-dario.binacchi@amarulasolutions.com>
+ <20230903204849.660722-9-dario.binacchi@amarulasolutions.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20230903204849.660722-8-dario.binacchi@amarulasolutions.com>
+In-Reply-To: <20230903204849.660722-9-dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.201.20.38]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -98,68 +98,64 @@ X-Virus-Status: Clean
 
 
 On 9/3/23 22:48, Dario Binacchi wrote:
-> The patch applies the changes from Linux commit 008ef8b3a1a00 ("Add LTDC
-> (Lcd-tft Display Controller) support") and removes the same settings
-> from stm32f746-disco-u-boot.dtsi.
+> commit ba287d1a0137702a224b1f48673d529257b3c4bf Linux upstream.
+> 
+> Add pin configurations for using LTDC (LCD-tft Display Controller) on
+> stm32f746-disco board.
 > 
 > Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> Reviewed-by: Raphaël Gallais-Pou <raphael.gallais-pou@foss.st.com>
+> Signed-off-by: Alexandre Torgue <alexandre.torgue@foss.st.com>
 > ---
 > 
->  arch/arm/dts/stm32f746-disco-u-boot.dtsi | 18 ++++++------------
->  arch/arm/dts/stm32f746.dtsi              | 10 ++++++++++
->  2 files changed, 16 insertions(+), 12 deletions(-)
+>  arch/arm/dts/stm32f7-pinctrl.dtsi | 34 +++++++++++++++++++++++++++++++
+>  1 file changed, 34 insertions(+)
 > 
-> diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> index 522cffb1ac9f..3c2b9fc59512 100644
-> --- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> @@ -63,19 +63,13 @@
+> diff --git a/arch/arm/dts/stm32f7-pinctrl.dtsi b/arch/arm/dts/stm32f7-pinctrl.dtsi
+> index 607fe42f4f46..d3706ee33b5f 100644
+> --- a/arch/arm/dts/stm32f7-pinctrl.dtsi
+> +++ b/arch/arm/dts/stm32f7-pinctrl.dtsi
+> @@ -376,6 +376,40 @@
+>  					bias-pull-up;
+>  				};
 >  			};
+> +
+> +			ltdc_pins_a: ltdc-0 {
+> +				pins {
+> +					pinmux = <STM32_PINMUX('E', 4, AF14)>, /* LCD_B0 */
+> +						 <STM32_PINMUX('G',12, AF9)>,  /* LCD_B4 */
+> +						 <STM32_PINMUX('I', 9, AF14)>, /* LCD_VSYNC */
+> +						 <STM32_PINMUX('I',10, AF14)>, /* LCD_HSYNC */
+> +						 <STM32_PINMUX('I',14, AF14)>, /* LCD_CLK */
+> +						 <STM32_PINMUX('I',15, AF14)>, /* LCD_R0 */
+> +						 <STM32_PINMUX('J', 0, AF14)>, /* LCD_R1 */
+> +						 <STM32_PINMUX('J', 1, AF14)>, /* LCD_R2 */
+> +						 <STM32_PINMUX('J', 2, AF14)>, /* LCD_R3 */
+> +						 <STM32_PINMUX('J', 3, AF14)>, /* LCD_R4 */
+> +						 <STM32_PINMUX('J', 4, AF14)>, /* LCD_R5 */
+> +						 <STM32_PINMUX('J', 5, AF14)>, /* LCD_R6 */
+> +						 <STM32_PINMUX('J', 6, AF14)>, /* LCD_R7 */
+> +						 <STM32_PINMUX('J', 7, AF14)>, /* LCD_G0 */
+> +						 <STM32_PINMUX('J', 8, AF14)>, /* LCD_G1 */
+> +						 <STM32_PINMUX('J', 9, AF14)>, /* LCD_G2 */
+> +						 <STM32_PINMUX('J',10, AF14)>, /* LCD_G3 */
+> +						 <STM32_PINMUX('J',11, AF14)>, /* LCD_G4 */
+> +						 <STM32_PINMUX('J',13, AF14)>, /* LCD_B1 */
+> +						 <STM32_PINMUX('J',14, AF14)>, /* LCD_B2 */
+> +						 <STM32_PINMUX('J',15, AF14)>, /* LCD_B3 */
+> +						 <STM32_PINMUX('K', 0, AF14)>, /* LCD_G5 */
+> +						 <STM32_PINMUX('K', 1, AF14)>, /* LCD_G6 */
+> +						 <STM32_PINMUX('K', 2, AF14)>, /* LCD_G7 */
+> +						 <STM32_PINMUX('K', 4, AF14)>, /* LCD_B5 */
+> +						 <STM32_PINMUX('K', 5, AF14)>, /* LCD_B6 */
+> +						 <STM32_PINMUX('K', 6, AF14)>, /* LCD_B7 */
+> +						 <STM32_PINMUX('K', 7, AF14)>; /* LCD_DE */
+> +					slew-rate = <2>;
+> +				};
+> +			};
 >  		};
 >  	};
-> +};
->  
-> -	soc {
-> -		ltdc: display-controller@40016800 {
-> -			compatible = "st,stm32-ltdc";
-> -			reg = <0x40016800 0x200>;
-> -			resets = <&rcc STM32F7_APB2_RESET(LTDC)>;
-> -			clocks = <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>;
-> -			pinctrl-0 = <&ltdc_pins>;
-> -
-> -			status = "okay";
-> -			bootph-all;
-> -		};
-> -	};
-> +&ltdc {
-> +	clocks = <&rcc 0 STM32F7_APB2_CLOCK(LTDC)>;
-> +	pinctrl-0 = <&ltdc_pins>;
-> +	status = "okay";
-> +	bootph-all;
 >  };
->  
->  &fmc {
-> diff --git a/arch/arm/dts/stm32f746.dtsi b/arch/arm/dts/stm32f746.dtsi
-> index 7b4bd805c998..79dad3192e15 100644
-> --- a/arch/arm/dts/stm32f746.dtsi
-> +++ b/arch/arm/dts/stm32f746.dtsi
-> @@ -518,6 +518,16 @@
->  			};
->  		};
->  
-> +		ltdc: display-controller@40016800 {
-> +			compatible = "st,stm32-ltdc";
-> +			reg = <0x40016800 0x200>;
-> +			interrupts = <88>, <89>;
-> +			resets = <&rcc STM32F7_APB2_RESET(LTDC)>;
-> +			clocks = <&rcc 1 CLK_LCD>;
-> +			clock-names = "lcd";
-> +			status = "disabled";
-> +		};
-> +
->  		pwrcfg: power-config@40007000 {
->  			compatible = "st,stm32-power-config", "syscon";
->  			reg = <0x40007000 0x400>;
 Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 Thanks
