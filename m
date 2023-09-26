@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D91E7D270
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 09:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3A1DE7D270
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 09:45:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CF4E86DC5;
-	Tue, 26 Sep 2023 11:44:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 08C0A86DDF;
+	Tue, 26 Sep 2023 11:44:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vi2NYnhG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tGoFxcYJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFA2886DC9; Tue, 26 Sep 2023 11:44:01 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id C4A5B86DD6; Tue, 26 Sep 2023 11:44:04 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEB5E86AF7
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 11:43:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DB2D86AF7
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 11:44:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-503f39d3236so13532828e87.0
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 02:43:59 -0700 (PDT)
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2c15463ddd4so76407751fa.3
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 02:44:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695721439; x=1696326239; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1695721441; x=1696326241; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V218Z5cIEqbBmV6mdyr4s9oHBggfZPoBshAZy5wwtmY=;
- b=Vi2NYnhG/8kCu3+C47/cyctUpnhXXG4c5DZWKlYcqzXGsn2GcClBMomZU2OEJdpj4K
- fyDuy5YQ+hGetDB9l/Mlb4J2U6GlftvUqGD4Y60C7CzW5Ub+G2H5lCjpE2+L1lNd1lLZ
- A9CIxJhV0iGrMuap5vZzK3qc0v4rJ73RvgHFdaEs1KnkvRZUKMCCwwyO94XyCbAEl6gh
- QuKgONtVULq8utWvwU+y2cpFMtG0uPRUsyuBRr6C+NDzpYUoE4RAxH0gkRlKkoNhJpTp
- jO30rHM7jMoqWpZoA8WOUpBL+KOkgrH9OMddzfn7OHE1XjECugRTDS3Rb0pCM3ddNa1n
- cTdA==
+ bh=pH9eugOd8aFs3gNXR1JStyjAyyg8COenbqgCMOQgxEo=;
+ b=tGoFxcYJsfMH3ZGBsYqsh0d0TjpBD8fE359eoDOY7ueFFo/iqLb/SOU5XKmnQmRIlC
+ D7duHa/bWA+kYZ5akVPA7NL00JwIA0CuVexqPSwUxyXkHHQ8EYz9Y/SOVPyeSb+w3axZ
+ 4tV6J7ZQnwMZ98pZEJB7fV6tVxyHiqqMEqnSrLvwyPqPNmgmGPGHCAkiV9OYAAtoWpbq
+ E+ug+MYUbu+naAbwrAdmUmLYGUrRwyu6fyE+/NDCfVXpAtzfZKTOPsDCzLU8xWi48Vpe
+ q5s7WiWEpXBd7dnoezF4IqxiLYtjTPrxZzfT7JSDvquuUIo2fOJH/gDfqVG3EFcJjVAK
+ 2COA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695721439; x=1696326239;
+ d=1e100.net; s=20230601; t=1695721441; x=1696326241;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V218Z5cIEqbBmV6mdyr4s9oHBggfZPoBshAZy5wwtmY=;
- b=xJFjNLueWz0mC2QY669EVL1LjVvnf0NY8CD9NJizPtv0xUluOzz3W5xmybs2AUo4x2
- +R9z3gch3qduncu+YlSk+QmlFngFWZ6zbvSirxd6oZCo1MEiYZNkfD8BStRSB9PkdDjB
- WAo5HVrqv3jD1SY4BlSpvY+UAz9rzyCy35x+rNrdhZgY+ehNWyEhBoaLBKLOtOoLN6at
- G8g2B6MOlGzyKPTGmjme9w2Z38VjTk7jKXDHW0ESnq4BCfBRG8LwaeGdvglg9bFfI139
- h5KA91Cow8xzI3qZUP5bRfI1Arc7NUMAafd/DZEu7pdSIprMMWKlQtaWTdDI7Dx5eEMX
- 1SqQ==
-X-Gm-Message-State: AOJu0YwleMkN6ZHCsABrO2FYSfqV0e7TxYkdf7RJqFRW44mTpQOeVky7
- bMOX9RxSisKmuMw55MTAK63LOpJcT9UjM2uADgdCcg==
-X-Google-Smtp-Source: AGHT+IHqylnBdkBpd3EpIU/Wuzv3I155C9J/LOsAg5z5NRnRfsEi5wNxxf2glccXZVippXhlV8hX/A==
-X-Received: by 2002:a19:4f56:0:b0:503:3278:3225 with SMTP id
- a22-20020a194f56000000b0050332783225mr7180584lfk.63.1695721438897; 
- Tue, 26 Sep 2023 02:43:58 -0700 (PDT)
+ bh=pH9eugOd8aFs3gNXR1JStyjAyyg8COenbqgCMOQgxEo=;
+ b=MQybvS3BRY4uwtLZ+TauWYP/mmfD5Lj+Nd73H/Q81pTY4RWOvtuBgjUq0X28m6at22
+ IrnLu7NmzV07nSL+ny3KFbWRLxXwZ14qaKPASMBpt6QsFvu8pXaITE6H0nOasrhab5nt
+ IyDZU3pmwtHAlnqjVmK/wr50Ci3RzZjjf60eh/OdnzF7lmAxhGHkDRD8adU6mxq7hUSU
+ KHntuTiNoQkV4yM9vkcA/Xb14qb2SYjy7jkWD7uBEtSNkpGmejFXnFVMutGNciYMQ4is
+ fGDoOMaUzZtB94oJa8luHx03JlBTmc5jKxfgP+jK+3kEYt8BmEO9HFyeKvCG0Llbt1bc
+ 03Mg==
+X-Gm-Message-State: AOJu0YzbkPleAx3ISDQcWmZ/fuJCSY98KKy7RGh5PqwyzA8LstV5F2rh
+ 7zWT87Pp2v+hsAXo5FXVD7QoCfp5cK6YnanOL3Bu8w==
+X-Google-Smtp-Source: AGHT+IGG0Cv4c6dv1PO58HwigqpjJpRVnjvCfvDIWVxhkaJcfXWmvNSTPI7EvzaKsD6C0ssg2JCPzQ==
+X-Received: by 2002:a05:6512:3ca2:b0:503:985:92c9 with SMTP id
+ h34-20020a0565123ca200b00503098592c9mr9644492lfv.22.1695721441541; 
+ Tue, 26 Sep 2023 02:44:01 -0700 (PDT)
 Received: from localhost.localdomain ([45.82.14.220])
  by smtp.gmail.com with ESMTPSA id
- x6-20020ac25dc6000000b004fe09e6d1e7sm2131131lfq.110.2023.09.26.02.43.56
+ x6-20020ac25dc6000000b004fe09e6d1e7sm2131131lfq.110.2023.09.26.02.43.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Sep 2023 02:43:58 -0700 (PDT)
+ Tue, 26 Sep 2023 02:44:01 -0700 (PDT)
 From: Maxim Uvarov <maxim.uvarov@linaro.org>
 To: u-boot@lists.denx.de
 Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
  rfried.dev@gmail.com, trini@konsulko.com, goldsimon@gmx.de,
  Maxim Uvarov <maxim.uvarov@linaro.org>
-Subject: [PATCHv10 08/15] net/lwip: implement wget cmd
-Date: Tue, 26 Sep 2023 15:41:17 +0600
-Message-Id: <20230926094124.7024-9-maxim.uvarov@linaro.org>
+Subject: [PATCHv10 09/15] net/lwip: implement ping cmd
+Date: Tue, 26 Sep 2023 15:41:18 +0600
+Message-Id: <20230926094124.7024-10-maxim.uvarov@linaro.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20230926094124.7024-1-maxim.uvarov@linaro.org>
 References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
@@ -94,173 +94,191 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 U-Boot recently got support for an alternative network stack using LWIP.
-Replace wget command with the LWIP variant while keeping the output and
-error messages identical.
+Replace ping command with the LWIP variant while keeping the output and
+error messages identical. ping uses lwIP contrib/apps/ping/ping.c code.
+Custom timeout is used to get an error message on not modified example.
+
+There is pending lwip patch:
+	https://lists.nongnu.org/archive/html/lwip-devel/2023-09/msg00004.html
+	https://savannah.nongnu.org/bugs/?64697
+Once applied, more clean way can be used, to unset pending timers and exit
+from the ping application:
+	net/lwip/apps/ping/ping.h:
+ #define PING_RESULT(cond) { \
+..
+-               raw_remove(pcb); \
++               ping_destroy(); \
 
 Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
 ---
- include/net/lwip.h             |  14 +++++
- net/lwip/Makefile              |   1 +
- net/lwip/apps/http/Makefile    |   6 ++
- net/lwip/apps/http/lwip-wget.c | 105 +++++++++++++++++++++++++++++++++
- 4 files changed, 126 insertions(+)
- create mode 100644 net/lwip/apps/http/Makefile
- create mode 100644 net/lwip/apps/http/lwip-wget.c
+ include/net/lwip.h             | 15 +++++++++++++
+ net/lwip/Makefile              |  1 +
+ net/lwip/apps/ping/Makefile    | 12 +++++++++++
+ net/lwip/apps/ping/lwip_ping.c | 39 ++++++++++++++++++++++++++++++++++
+ net/lwip/apps/ping/lwip_ping.h | 15 +++++++++++++
+ net/lwip/apps/ping/ping.h      | 27 +++++++++++++++++++++++
+ 6 files changed, 109 insertions(+)
+ create mode 100644 net/lwip/apps/ping/Makefile
+ create mode 100644 net/lwip/apps/ping/lwip_ping.c
+ create mode 100644 net/lwip/apps/ping/lwip_ping.h
+ create mode 100644 net/lwip/apps/ping/ping.h
 
 diff --git a/include/net/lwip.h b/include/net/lwip.h
-index 11389bb038..85f08343fd 100644
+index 85f08343fd..1e92f9871c 100644
 --- a/include/net/lwip.h
 +++ b/include/net/lwip.h
-@@ -42,3 +42,17 @@ int ulwip_dhcp(void);
-  * Returns:  0 if success, !0 if error
+@@ -2,6 +2,8 @@
+ 
+ int do_lwip_dns(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		char *const argv[]);
++int do_lwip_ping(struct cmd_tbl *cmdtp, int flag, int argc,
++		 char *const argv[]);
+ 
+ /**
+  * ulwip_dns() - creates the DNS request to resolve a domain host name
+@@ -56,3 +58,16 @@ int ulwip_tftp(ulong addr, const char *filename);
+  * Returns: 0 for success, !0 if error
   */
- int ulwip_tftp(ulong addr, const char *filename);
+ int ulwip_wget(ulong addr, char *url);
 +
 +/**
-+ * ulwip_wget() - creates the HTTP request to download file
++ * ulwip_ping - create the ping request
 + *
-+ * This function creates the HTTP request to download file from url to the address
-+ * specified in parameters. After this function you need to invoke the polling
++ * This function creates the ping for  address provided in parameters.
++ * After this function you need to invoke the polling
 + * loop to process network communication.
 + *
 + *
-+ * @addr:  start address to download result
-+ * @url:   url in format http://host/url
++ * @ping_addr: IP address to ping
 + * Returns: 0 for success, !0 if error
-+ */
-+int ulwip_wget(ulong addr, char *url);
++*/
++int ulwip_ping(char *ping_addr);
 diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index b348e5ca31..61042862e1 100644
+index 61042862e1..5839d125c2 100644
 --- a/net/lwip/Makefile
 +++ b/net/lwip/Makefile
-@@ -66,3 +66,4 @@ obj-$(CONFIG_NET) += port/sys-arch.o
- obj-y += apps/dhcp/lwip-dhcp.o
+@@ -67,3 +67,4 @@ obj-y += apps/dhcp/lwip-dhcp.o
  obj-y += apps/dns/lwip-dns.o
  obj-y += apps/tftp/
-+obj-y += apps/http/
-diff --git a/net/lwip/apps/http/Makefile b/net/lwip/apps/http/Makefile
+ obj-y += apps/http/
++obj-y += apps/ping/
+diff --git a/net/lwip/apps/ping/Makefile b/net/lwip/apps/ping/Makefile
 new file mode 100644
-index 0000000000..ac0b3ede0d
+index 0000000000..e567c0dc3e
 --- /dev/null
-+++ b/net/lwip/apps/http/Makefile
-@@ -0,0 +1,6 @@
++++ b/net/lwip/apps/ping/Makefile
+@@ -0,0 +1,12 @@
 +ccflags-y += -I$(srctree)/net/lwip/port/include
 +ccflags-y += -I$(srctree)/net/lwip/lwip-external/src/include -I$(srctree)/net/lwip
-+ccflags-y += -I$(srctree)/net/lwip/lwip-external/src/include/lwip/apps
++ccflags-y += -I$(obj)
 +
-+obj-$(CONFIG_CMD_WGET) += ../../lwip-external/src/apps/http/http_client.o
-+obj-$(CONFIG_CMD_WGET) += lwip-wget.o
-diff --git a/net/lwip/apps/http/lwip-wget.c b/net/lwip/apps/http/lwip-wget.c
++# ping.c includes "ping.h", copy it to local directory, to override ping.h
++.PHONY: $(obj)/ping.c
++$(obj)/ping.o: $(obj)/ping.c
++$(obj)/ping.c:
++	cp $(srctree)/net/lwip/lwip-external/contrib/apps/ping/ping.c $(obj)/ping.c
++
++obj-y += ping.o
++obj-y += lwip_ping.o
+diff --git a/net/lwip/apps/ping/lwip_ping.c b/net/lwip/apps/ping/lwip_ping.c
 new file mode 100644
-index 0000000000..7a7cc3273d
+index 0000000000..ba02e7ed47
 --- /dev/null
-+++ b/net/lwip/apps/http/lwip-wget.c
-@@ -0,0 +1,105 @@
++++ b/net/lwip/apps/ping/lwip_ping.c
+@@ -0,0 +1,39 @@
 +// SPDX-License-Identifier: GPL-2.0
 +
 +/*
 + * (C) Copyright 2023 Linaro Ltd. <maxim.uvarov@linaro.org>
 + */
 +
-+#include <common.h>
-+#include <command.h>
-+#include <console.h>
-+#include <vsprintf.h>
++#include "lwip/opt.h"
++#include "lwip/ip_addr.h"
++#include "lwip/timeouts.h"
++#include <linux/errno.h>
++#include "ping.h"
++#include "lwip_ping.h"
 +
-+#include "http_client.h"
++#define PING_WAIT_MS 5000
++
++static ip_addr_t ip_target;
++
++void ping_tmo(void *arg)
++{
++	log_err("ping_tmo: ping failed; host %s is not alive\n",
++		ipaddr_ntoa(&ip_target));
++	ulwip_exit(1);
++}
++
++int ulwip_ping(char *ping_addr)
++{
++	int err;
++
++	err = ipaddr_aton(ping_addr, &ip_target);
++	if (!err)
++		return -ENOENT;
++
++	sys_timeout(PING_WAIT_MS, ping_tmo, NULL);
++
++	ping_init(&ip_target);
++	ping_send_now();
++
++	return 0;
++}
+diff --git a/net/lwip/apps/ping/lwip_ping.h b/net/lwip/apps/ping/lwip_ping.h
+new file mode 100644
+index 0000000000..0374f07d9e
+--- /dev/null
++++ b/net/lwip/apps/ping/lwip_ping.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++/*
++ * (C) Copyright 2023 Linaro Ltd. <maxim.uvarov@linaro.org>
++ */
++
++#ifndef LWIP_PING_H
++#define LWIP_PING_H
++
++#include <lwip/ip_addr.h>
++
++void ping_raw_init(void);
++void ping_send_now(void);
++
++#endif /* LWIP_PING_H */
+diff --git a/net/lwip/apps/ping/ping.h b/net/lwip/apps/ping/ping.h
+new file mode 100644
+index 0000000000..5dd631f2f7
+--- /dev/null
++++ b/net/lwip/apps/ping/ping.h
+@@ -0,0 +1,27 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++
 +#include <net/ulwip.h>
++#include "lwip/ip_addr.h"
 +
-+static ulong daddr;
-+static httpc_connection_t settings;
++void ping_tmo(void *arg);
 +
-+#define SERVER_NAME_SIZE 200
-+#define HTTP_PORT_DEFAULT 80
++#define LWIP_DEBUG 1 /* ping_time is under ifdef*/
++#define PING_RESULT(cond) { \
++	if (cond == 1) { \
++		printf("host %s a alive\n", ipaddr_ntoa(addr)); \
++		printf(" %"U32_F" ms\n", (sys_now() - ping_time)); \
++		raw_remove(pcb); \
++		sys_untimeout(ping_tmo, NULL); \
++		sys_check_timeouts(); \
++		ulwip_exit(0); \
++	} else { \
++		printf("ping failed; host %s in not alive\n",\
++		       ipaddr_ntoa(addr)); \
++		raw_remove(pcb); \
++		sys_untimeout(ping_tmo, NULL); \
++		sys_check_timeouts(); \
++		ulwip_exit(-1); \
++	} \
++     } while (0);
 +
-+static err_t httpc_recv(void *arg, struct altcp_pcb *pcb, struct pbuf *pbuf,
-+			err_t unused_err)
-+{
-+	struct pbuf *buf;
-+
-+	if (!pbuf)
-+		return ERR_BUF;
-+
-+	for (buf = pbuf; buf != NULL; buf = buf->next) {
-+		memcpy((void *)daddr, buf->payload, buf->len);
-+		log_debug("downloaded chunk size %d, to addr 0x%lx\n",
-+			  buf->len, daddr);
-+		daddr += buf->len;
-+	}
-+
-+	altcp_recved(pcb, pbuf->tot_len);
-+	pbuf_free(pbuf);
-+	return ERR_OK;
-+}
-+
-+static void httpc_result(void *arg, httpc_result_t httpc_result, u32_t rx_content_len,
-+			 u32_t srv_res, err_t err)
-+{
-+	if (httpc_result == HTTPC_RESULT_OK) {
-+		log_info("\n%d bytes successfully downloaded.\n", rx_content_len);
-+		env_set_hex("filesize", rx_content_len);
-+		ulwip_exit(0);
-+	} else {
-+		log_err("\nhttp eroror: %d\n", httpc_result);
-+		ulwip_exit(-1);
-+	}
-+}
-+
-+/* http://hostname/url */
-+static int parse_url(char *url, char *host, u16 *port)
-+{
-+	char *p, *pp;
-+
-+	p = strstr(url, "http://");
-+	if (!p)
-+		return -ENOENT;
-+
-+	p += strlen("http://");
-+
-+	/* parse hostname */
-+	pp = strchr(p, '/');
-+	if (!pp)
-+		return -ENOENT;
-+
-+	if (p + SERVER_NAME_SIZE <= pp)
-+		return -ENOENT;
-+
-+	memcpy(host, p, pp - p);
-+	host[pp - p + 1] = '\0';
-+	*port = HTTP_PORT_DEFAULT;
-+
-+	return 0;
-+}
-+
-+int ulwip_wget(ulong addr, char *url)
-+{
-+	err_t err;
-+	u16 port;
-+	char server_name[SERVER_NAME_SIZE];
-+	httpc_state_t *connection;
-+
-+	daddr = addr;
-+
-+	err = parse_url(url, server_name, &port);
-+	if (err)
-+		return -ENOENT;
-+
-+	log_info("downloading %s to addr 0x%lx\n", url, addr);
-+	memset(&settings, 0, sizeof(settings));
-+	settings.result_fn = httpc_result;
-+	err = httpc_get_file_dns(server_name, port, url, &settings,
-+				 httpc_recv, NULL,  &connection);
-+	if (err != ERR_OK)
-+		return -EPERM;
-+
-+	if (env_set_hex("fileaddr", addr))
-+		return -EACCES;
-+
-+	return 0;
-+}
++void ping_init(const ip_addr_t *ping_addr);
 -- 
 2.30.2
 
