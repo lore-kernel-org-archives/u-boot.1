@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8456E7E644
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 15:10:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83C86E7E649
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 15:53:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A819686E0E;
-	Tue, 26 Sep 2023 17:10:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 6CFE486D5F;
+	Tue, 26 Sep 2023 17:53:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="SDLEgmhk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Tsp65KX7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4E4E86D75; Tue, 26 Sep 2023 17:10:47 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 769B486D73; Tue, 26 Sep 2023 17:53:37 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCB0286DC7
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 17:10:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6718686D75
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 17:53:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=7633ac7092=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 38QCGET0011037; Tue, 26 Sep 2023 17:10:45 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=4MOQYMlmQyjmyclULoKph8Qddrd1vY4Y59+xdFCTmJo=; b=SD
- LEgmhksVNDgu6us5MgWbG1hx7N1gs4bJTOKBjn7E/2VBmCSk3mjoG+acX7MbAGRe
- D7ZB3anv8A1oqEb24Qb4sVBpgGw9SLsocGrgRpdBvqUECtgv0Xf1thpzZutaf9/L
- kLtxFE9vIy89AkBUidIUuYExGHeOEA6JShHzZDfYkFEqUFwgO6aQC8faRiK1YRmY
- s6GUUj34SHQMS8SzNV+7AnrLzxTxDKEYCfpI5JBIbPpdsTcMS2ibG/VPWew/1Czv
- DmZp6nrOue775wnEp0BMcYs/3lwiS8kjPRuDO9DbWM8I2InvImWAZdp7zEYerTMn
- Y9jGsC1WZeEdEhwaEUpA==
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t9n54dv3h-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 26 Sep 2023 17:10:45 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 19CC210005C;
- Tue, 26 Sep 2023 17:10:33 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1301B2405B0;
- Tue, 26 Sep 2023 17:10:33 +0200 (CEST)
-Received: from localhost (10.201.20.38) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
- 2023 17:10:32 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v1 6/6] board: st: common: cleanup dfu support
-Date: Tue, 26 Sep 2023 17:09:23 +0200
-Message-ID: <20230926150924.1150082-7-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230926150924.1150082-1-patrice.chotard@foss.st.com>
-References: <20230926150924.1150082-1-patrice.chotard@foss.st.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-59bf1dde73fso116161347b3.3
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 08:53:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695743614; x=1696348414; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YqOMWpRpbjXUMMMmWIiw/a5vfCCl63TAx2FSwodo7UA=;
+ b=Tsp65KX7/0ZdaEUBpvtWD+SxY8rApVmc+awNDiyt1riMeuYZk4Hmc5cDzc/VbwmNWg
+ 6SAgqFq7WpnALYRj8p4/q5+ofoFhHhSNHlW/GTCcW5lDFhrxANk8QrucMHpO0duz4L6w
+ CHsFTRWcOmSHnZfDjIqn6MVLpRsnc6JVtiXTo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695743614; x=1696348414;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YqOMWpRpbjXUMMMmWIiw/a5vfCCl63TAx2FSwodo7UA=;
+ b=ixqQH4P92IWlyGrIMLYDPlPjHryRML9mAdcV4GdMARroQ5GlU+2wYrCTFPFvKEq4bC
+ qv2B5HVAzoQWTD3azizA/MB8YwSMyMM6U8ea+EjIxR7LHOgOR76uQZlHJ9X/85gsia0q
+ APKMz3ZXKlbwy+Gp7ek3Hiq6vkWSrQW3F7b/i99xVY0GSGAYJm6AUkup5Ke+j3Lg0amQ
+ WcLWgElaI89tdq8vD+vb5CfQ+FUMSPbq8KF/k+fYqebn7ITluun8QhSaCnQUwHDEjofu
+ cagYpcK8kUKgkS608KZTqaIIGHjwrMAllXkH+EdhJAmNsBa3nZ2cIZFoU2kOu/Hm4jdn
+ WhAQ==
+X-Gm-Message-State: AOJu0Yz+Hcg48p56BlCgdpwicgdoMreeFFoW6WwY41PJ4I885Xecldmp
+ Vpysx+/W4Y0j+IFuu/MaXE8kzw==
+X-Google-Smtp-Source: AGHT+IHY8fxEvhDRCYEp5VjvPMJhpQmpCvSUlG7bwqaxS7agPKB8AmsLmlmKnJJ6kDj6vgM7qDD/Rw==
+X-Received: by 2002:a81:5245:0:b0:595:733b:387 with SMTP id
+ g66-20020a815245000000b00595733b0387mr10741715ywb.2.1695743614023; 
+ Tue, 26 Sep 2023 08:53:34 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a080-e51b-f064-cf67.res6.spectrum.com.
+ [2603:6081:7b00:6400:a080:e51b:f064:cf67])
+ by smtp.gmail.com with ESMTPSA id
+ t8-20020a818308000000b0058ddb62f99bsm3061194ywf.38.2023.09.26.08.53.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Sep 2023 08:53:33 -0700 (PDT)
+Date: Tue, 26 Sep 2023 11:53:31 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com
+Subject: Re: [PATCH] test/py: sleep: Add a test for the time command
+Message-ID: <20230926155331.GX305624@bill-the-cat>
+References: <acb9a1175427a1a7fba80f9dfe9d90278850ae90.1695728179.git.love.kumar@amd.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-09-26_12,2023-09-26_01,2023-05-22_02
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qhLChMwmZgbD+f1T"
+Content-Disposition: inline
+In-Reply-To: <acb9a1175427a1a7fba80f9dfe9d90278850ae90.1695728179.git.love.kumar@amd.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,269 +91,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-split the file stm32mp_dfu.c in two files to simplify the Makefile
-- stm32mp_dfu.c: required by CONFIG_SET_DFU_ALT_INFO
-- stm32mp_dfu_virt.c: required by CONFIG_DFU_VIRT for stm32prog
-  command or VIRT device for PMIC for CONFIG_SET_DFU_ALT_INFO.
+--qhLChMwmZgbD+f1T
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This patch also remove some remaining #ifdef CONFIG
-and avoid compilation error when CONFIG_SET_DFU_ALT_INFO is not
-activated.
+On Tue, Sep 26, 2023 at 05:08:35PM +0530, Love Kumar wrote:
+> Execute "time <sleep cmd>", and validate that it gives the approximately
+> the correct amount of command execution time.
+>=20
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> ---
+>  test/py/tests/test_sleep.py | 20 ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+>=20
+> diff --git a/test/py/tests/test_sleep.py b/test/py/tests/test_sleep.py
+> index 392af29db224..388f544d07df 100644
+> --- a/test/py/tests/test_sleep.py
+> +++ b/test/py/tests/test_sleep.py
+> @@ -41,3 +41,23 @@ def test_sleep(u_boot_console):
+>      if not u_boot_console.config.gdbserver:
+>          # margin is hopefully enough to account for any system overhead.
+>          assert elapsed < (sleep_time + sleep_margin)
+> +
+> +def test_time(u_boot_console):
+> +    """Test the time command, and validate that it gives approximately t=
+he
+> +    correct amount of command execution time."""
+> +
+> +    sleep_skip =3D u_boot_console.config.env.get("env__sleep_accurate", =
+True)
+> +    if not sleep_skip:
+> +        pytest.skip("sleep is not accurate")
+> +
+> +    if u_boot_console.config.buildconfig.get("config_cmd_misc", "n") !=
+=3D "y":
 
-Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
+We should use @pytest.mark.buildconfigspec('cmd_misc') on the function
+def itself.
 
- board/st/common/Makefile           |   1 +
- board/st/common/stm32mp_dfu.c      | 103 ++---------------------------
- board/st/common/stm32mp_dfu_virt.c |  99 +++++++++++++++++++++++++++
- 3 files changed, 104 insertions(+), 99 deletions(-)
- create mode 100644 board/st/common/stm32mp_dfu_virt.c
+--=20
+Tom
 
-diff --git a/board/st/common/Makefile b/board/st/common/Makefile
-index c9608297261..b01245e4b48 100644
---- a/board/st/common/Makefile
-+++ b/board/st/common/Makefile
-@@ -8,6 +8,7 @@ obj-$(CONFIG_PMIC_STPMIC1) += stpmic1.o
- 
- ifeq ($(CONFIG_ARCH_STM32MP),y)
- obj-$(CONFIG_SET_DFU_ALT_INFO) += stm32mp_dfu.o
-+obj-$(CONFIG_$(SPL_)DFU_VIRT) += stm32mp_dfu_virt.o
- endif
- 
- obj-$(CONFIG_TYPEC_STUSB160X) += stusb160x.o
-diff --git a/board/st/common/stm32mp_dfu.c b/board/st/common/stm32mp_dfu.c
-index 1cf4a3d5fa1..1ab27a91544 100644
---- a/board/st/common/stm32mp_dfu.c
-+++ b/board/st/common/stm32mp_dfu.c
-@@ -13,7 +13,6 @@
- #include <misc.h>
- #include <mtd.h>
- #include <mtd_node.h>
--#include <asm/arch/stm32prog.h>
- 
- #define DFU_ALT_BUF_LEN SZ_1K
- 
-@@ -147,108 +146,14 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 			board_get_alt_info_mtd(mtd, buf);
- 	}
- 
--	if (IS_ENABLED(CONFIG_DFU_VIRT) &&
--	    IS_ENABLED(CMD_STM32PROG_USB)) {
--		strncat(buf, "&virt 0=OTP", DFU_ALT_BUF_LEN);
-+	if (IS_ENABLED(CONFIG_DFU_VIRT)) {
-+		/* virtual device id 0 is aligned with stm32mp_dfu_virt.c */
-+		strlcat(buf, "&virt 0=OTP", DFU_ALT_BUF_LEN);
- 
- 		if (IS_ENABLED(CONFIG_PMIC_STPMIC1))
--			strncat(buf, "&virt 1=PMIC", DFU_ALT_BUF_LEN);
-+			strlcat(buf, "&virt 1=PMIC", DFU_ALT_BUF_LEN);
- 	}
- 
- 	env_set("dfu_alt_info", buf);
- 	puts("DFU alt info setting: done\n");
- }
--
--#if CONFIG_IS_ENABLED(DFU_VIRT)
--#include <dfu.h>
--#include <power/stpmic1.h>
--
--static int dfu_otp_read(u64 offset, u8 *buffer, long *size)
--{
--	struct udevice *dev;
--	int ret;
--
--	ret = uclass_get_device_by_driver(UCLASS_MISC,
--					  DM_DRIVER_GET(stm32mp_bsec),
--					  &dev);
--	if (ret)
--		return ret;
--
--	ret = misc_read(dev, offset + STM32_BSEC_OTP_OFFSET, buffer, *size);
--	if (ret >= 0) {
--		*size = ret;
--		ret = 0;
--	}
--
--	return 0;
--}
--
--static int dfu_pmic_read(u64 offset, u8 *buffer, long *size)
--{
--	int ret;
--#ifdef CONFIG_PMIC_STPMIC1
--	struct udevice *dev;
--
--	ret = uclass_get_device_by_driver(UCLASS_MISC,
--					  DM_DRIVER_GET(stpmic1_nvm),
--					  &dev);
--	if (ret)
--		return ret;
--
--	ret = misc_read(dev, 0xF8 + offset, buffer, *size);
--	if (ret >= 0) {
--		*size = ret;
--		ret = 0;
--	}
--	if (ret == -EACCES) {
--		*size = 0;
--		ret = 0;
--	}
--#else
--	log_err("PMIC update not supported");
--	ret = -EOPNOTSUPP;
--#endif
--
--	return ret;
--}
--
--int dfu_read_medium_virt(struct dfu_entity *dfu, u64 offset,
--			 void *buf, long *len)
--{
--	switch (dfu->data.virt.dev_num) {
--	case 0x0:
--		return dfu_otp_read(offset, buf, len);
--	case 0x1:
--		return dfu_pmic_read(offset, buf, len);
--	}
--
--	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
--	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
--		return stm32prog_read_medium_virt(dfu, offset, buf, len);
--
--	*len = 0;
--	return 0;
--}
--
--int dfu_write_medium_virt(struct dfu_entity *dfu, u64 offset,
--			  void *buf, long *len)
--{
--	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
--	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
--		return stm32prog_write_medium_virt(dfu, offset, buf, len);
--
--	return -EOPNOTSUPP;
--}
--
--int __weak dfu_get_medium_size_virt(struct dfu_entity *dfu, u64 *size)
--{
--	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
--	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
--		return stm32prog_get_medium_size_virt(dfu, size);
--
--	*size = SZ_1K;
--
--	return 0;
--}
--
--#endif
-diff --git a/board/st/common/stm32mp_dfu_virt.c b/board/st/common/stm32mp_dfu_virt.c
-new file mode 100644
-index 00000000000..f0f99605796
---- /dev/null
-+++ b/board/st/common/stm32mp_dfu_virt.c
-@@ -0,0 +1,99 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
-+/*
-+ * Copyright (C) 2023, STMicroelectronics - All Rights Reserved
-+ */
-+
-+#include <common.h>
-+#include <dfu.h>
-+#include <dm.h>
-+#include <misc.h>
-+#include <asm/arch/stm32prog.h>
-+#include <power/stpmic1.h>
-+
-+static int dfu_otp_read(u64 offset, u8 *buffer, long *size)
-+{
-+	struct udevice *dev;
-+	int ret;
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(stm32mp_bsec),
-+					  &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = misc_read(dev, offset + STM32_BSEC_OTP_OFFSET, buffer, *size);
-+	if (ret >= 0) {
-+		*size = ret;
-+		ret = 0;
-+	}
-+
-+	return 0;
-+}
-+
-+static int dfu_pmic_read(u64 offset, u8 *buffer, long *size)
-+{
-+	int ret;
-+	struct udevice *dev;
-+
-+	if (!IS_ENABLED(CONFIG_PMIC_STPMIC1)) {
-+		log_err("PMIC update not supported");
-+		return -EOPNOTSUPP;
-+	}
-+
-+	ret = uclass_get_device_by_driver(UCLASS_MISC,
-+					  DM_DRIVER_GET(stpmic1_nvm),
-+					  &dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = misc_read(dev, 0xF8 + offset, buffer, *size);
-+	if (ret >= 0) {
-+		*size = ret;
-+		ret = 0;
-+	}
-+	if (ret == -EACCES) {
-+		*size = 0;
-+		ret = 0;
-+	}
-+
-+	return ret;
-+}
-+
-+int dfu_read_medium_virt(struct dfu_entity *dfu, u64 offset,
-+			 void *buf, long *len)
-+{
-+	switch (dfu->data.virt.dev_num) {
-+	case 0x0:
-+		return dfu_otp_read(offset, buf, len);
-+	case 0x1:
-+		return dfu_pmic_read(offset, buf, len);
-+	}
-+
-+	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
-+	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
-+		return stm32prog_read_medium_virt(dfu, offset, buf, len);
-+
-+	*len = 0;
-+	return 0;
-+}
-+
-+int dfu_write_medium_virt(struct dfu_entity *dfu, u64 offset,
-+			  void *buf, long *len)
-+{
-+	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
-+	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
-+		return stm32prog_write_medium_virt(dfu, offset, buf, len);
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+int dfu_get_medium_size_virt(struct dfu_entity *dfu, u64 *size)
-+{
-+	if (IS_ENABLED(CONFIG_CMD_STM32PROG_USB) &&
-+	    dfu->data.virt.dev_num >= STM32PROG_VIRT_FIRST_DEV_NUM)
-+		return stm32prog_get_medium_size_virt(dfu, size);
-+
-+	*size = SZ_1K;
-+
-+	return 0;
-+}
--- 
-2.25.1
+--qhLChMwmZgbD+f1T
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUS/ngACgkQFHw5/5Y0
+tyy0DQv+PHkfvkSlmTepLNF+DuIguYydVAZpvpkpqrtseuHZ2Bqz3eb13LvtiaI/
+zqzFBpZXBWwLre+g2idpU8HKq8MZjiWjSNb6vKBW4GKHetQ/HJbUzycC/I/e84v6
+GyhLrjY97avSyRy7R4oDBRZY7W+7ewwjxY07295bTqz1UmFLoRZRpw1foNoj9yHb
+SnIPNWoAy0iqkUeGdjt1nljq1Lk/vNnKdfZJzOfnCnAyqx1xrGL0HOLC8+SSqUYm
+ir6ga81RD1ltyU/CbOMehcrglUJPK5IrtqOs3O5mzXYxf4ZUyDdsaW9PXjDm3V8T
+Fiw0Dw9yj0lPi2+dcuoVo+KJgk3jOLufswP5gYhhIUTAwxWlnlUo7L8bPBVAVmOK
+o2MZJ/tnr2jamzik/dS5LgiIwxMU/zLcONoRnE6z/p6GzKS7GBNPXE9kZfld08FP
+aW+7/98puhKL6xHafHFM9pqmXhrD0yv/+og/gaXXGroRudnjOckV854gOMWxopEG
+7MS/U76Q
+=QKzN
+-----END PGP SIGNATURE-----
+
+--qhLChMwmZgbD+f1T--
