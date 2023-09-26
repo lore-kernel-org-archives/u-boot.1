@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F24E7D24B
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 07:59:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2EAFE7D24B
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 07:59:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9310086D56;
-	Tue, 26 Sep 2023 09:58:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 06D1986D73;
+	Tue, 26 Sep 2023 09:59:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uCP2x1dW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jV48xcUB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 622A686C1D; Tue, 26 Sep 2023 09:58:58 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 54F9F86C1D; Tue, 26 Sep 2023 09:59:03 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4FC7986D52
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 09:58:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B346F86D67
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 09:59:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38Q7wsEk056875;
- Tue, 26 Sep 2023 02:58:54 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38Q7ww9G113040;
+ Tue, 26 Sep 2023 02:58:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695715134;
- bh=/ZCPtksPBHupie3n8LL+8YckosAntDAwB7do9FFk1Tc=;
+ s=ti-com-17Q1; t=1695715138;
+ bh=5S0tYScmQdaAqoMSOTmLreY83mNdBZ94UCYQR8Gg7Jo=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=uCP2x1dWmQ1/XNShWNSo2C3UOWU3uHtcV+FzwPSNH/X3M46OYbmLSRUuMXoEvpGBf
- v0HaBlKTRmYv7p5qSlYif1N7fZ7w+r6de6WI07mO2djVgIIF7hm5D4VESzQnCWIqkm
- vzmTKTgdbDEvmHrhz74KP+DcTwk03PhAqbCGchMU=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38Q7wsEv002791
+ b=jV48xcUBZTTLlzR9F20qMIUjla07WHY4mIoYIZllJq9gaMrf/ut+DGUUJwO36aEol
+ WIhbkQ0kXQMwBIU44MV7bX166ROvuAUCIbhG5fXqyx3N7ticflKjQiaGKaN1i+HoJD
+ /oKJU89hY9GBKuFkNJi3ly5rnRoCtnvj2FuaDJW8=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38Q7wwr1043426
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 26 Sep 2023 02:58:54 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 26 Sep 2023 02:58:58 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
- Sep 2023 02:58:54 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 02:58:58 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 26 Sep 2023 02:58:54 -0500
+ Frontend Transport; Tue, 26 Sep 2023 02:58:58 -0500
 Received: from [127.0.1.1] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38Q7wauL019632;
- Tue, 26 Sep 2023 02:58:50 -0500
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38Q7wauM019632;
+ Tue, 26 Sep 2023 02:58:54 -0500
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Tue, 26 Sep 2023 13:28:31 +0530
-Subject: [RFC PATCH v2 3/8] binman: ftest: Add test for ti-secure firewall node
+Date: Tue, 26 Sep 2023 13:28:32 +0530
+Subject: [RFC PATCH v2 4/8] binman: k3: add k3-security.h and include it in
+ k3-binman.dtsi
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20230926-binman-firewalling-v2-3-b1a084ec634d@ti.com>
+Message-ID: <20230926-binman-firewalling-v2-4-b1a084ec634d@ti.com>
 References: <20230926-binman-firewalling-v2-0-b1a084ec634d@ti.com>
 In-Reply-To: <20230926-binman-firewalling-v2-0-b1a084ec634d@ti.com>
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
@@ -66,11 +67,11 @@ CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
  <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon
  <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
 X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1695715116; l=2296;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1695715116; l=3408;
  i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
- bh=VabdBFBRuntk6uEAplpXGU9kKFo2hvKwEQamvFO3rP8=;
- b=N+2F9ahJJd/0m64gm+6egXD2r/vNBddW8X49LMdvj9zRsLhwSj1mAYnJbKf6KBPUFFNAARocW
- 7r6hvycMhEcDCLA7a3oAEgM26fjnX51TJluL6dRLQNJtIdyzPjPFMug
+ bh=hE0d2H+eEoc52PT7EaawJ98A3/HgVw8zUn5+B3zmrlA=;
+ b=Kbe3+ZUeLYlPkBChXmmNh29NYSChsadIUQHJKTTdPEYPbT9i5f7ZrFOCq+sjFIpRByTvxXOZz
+ JslaGDr9408A8bbCqGQylbWoBvj1cG2abKhhbm1dk0TcLuW1WCLpVWB
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
@@ -90,71 +91,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add test for TI firewalling node in ti-secure.
+For readability during configuring firewalls, adding k3-security.h file
+and including it in k3-binman.dtsi to be accessible across K3 SoCs
 
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- tools/binman/ftest.py                        | 12 ++++++++++++
- tools/binman/test/311_ti_secure_firewall.dts | 28 ++++++++++++++++++++++++++++
- 2 files changed, 40 insertions(+)
+ arch/arm/dts/k3-binman.dtsi |  2 ++
+ arch/arm/dts/k3-security.h  | 58 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 60 insertions(+)
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 8e419645a6d5..a3e49149d0d7 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -7030,6 +7030,18 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-                                    entry_args=entry_args)[0]
-         self.assertGreater(len(data), len(TI_UNSECURE_DATA))
+diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
+index 2ea2dd18a12b..71ffa998a59f 100644
+--- a/arch/arm/dts/k3-binman.dtsi
++++ b/arch/arm/dts/k3-binman.dtsi
+@@ -3,6 +3,8 @@
+  * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
+  */
  
-+    def testPackTiSecureFirewall(self):
-+        """Test that an image with a TI secured binary can be created"""
-+        keyfile = self.TestFile('key.key')
-+        entry_args = {
-+            'keyfile': keyfile,
-+        }
-+        data_no_firewall = self._DoReadFileDtb('296_ti_secure.dts',
-+                                   entry_args=entry_args)[0]
-+        data_firewall = self._DoReadFileDtb('311_ti_secure_firewall.dts',
-+                                   entry_args=entry_args)[0]
-+        self.assertGreater(len(data_firewall),len(data_no_firewall))
++#include "k3-security.h"
 +
-     def testPackTiSecureMissingTool(self):
-         """Test that an image with a TI secured binary (non-functional) can be created
-         when openssl is missing"""
-diff --git a/tools/binman/test/311_ti_secure_firewall.dts b/tools/binman/test/311_ti_secure_firewall.dts
+ / {
+ 	binman: binman {
+ 		multiple-images;
+diff --git a/arch/arm/dts/k3-security.h b/arch/arm/dts/k3-security.h
 new file mode 100644
-index 000000000000..b392d9ad4cbc
+index 000000000000..e012b7afaf94
 --- /dev/null
-+++ b/tools/binman/test/311_ti_secure_firewall.dts
-@@ -0,0 +1,28 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/arm/dts/k3-security.h
+@@ -0,0 +1,58 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++ */
 +
-+/dts-v1/;
++#ifndef DTS_ARM64_TI_K3_FIREWALL_H
++#define DTS_ARM64_TI_K3_FIREWALL_H
 +
-+/ {
-+	#address-cells = <1>;
-+	#size-cells = <1>;
++#define FWPRIVID_ALL    (0xc3)
++#define FWPRIVID_ARMV8  (1)
++#define FWPRIVID_SHIFT  (16)
 +
-+	binman {
-+		ti-secure {
-+			content = <&unsecure_binary>;
-+            auth_in_place = <0xa02>;
++#define FWCTRL_EN     (0xA)
++#define FWCTRL_LOCK   (1 << 4)
++#define FWCTRL_BG     (1 << 8)
++#define FWCTRL_CACHE  (1 << 9)
 +
-+            firewall-0-2 {
-+                id = <0>;
-+                region = <2>;
-+                control = <0x31a>;
-+                permissions = <0xc3ffff>;
-+                start_address = <0x0 0x9e800000>;
-+                end_address = <0x0 0x9fffffff>;
-+            };
++#define FWPERM_SECURE_PRIV_WRITE      (1 << 0)
++#define FWPERM_SECURE_PRIV_READ       (1 << 1)
++#define FWPERM_SECURE_PRIV_CACHEABLE  (1 << 2)
++#define FWPERM_SECURE_PRIV_DEBUG      (1 << 3)
 +
-+		};
-+		unsecure_binary: blob-ext {
-+			filename = "ti_unsecure.bin";
-+		};
-+	};
-+};
++#define FWPERM_SECURE_PRIV_RWCD       (FWPERM_SECURE_PRIV_READ | \
++                                       FWPERM_SECURE_PRIV_WRITE | \
++                                       FWPERM_SECURE_PRIV_CACHEABLE | \
++                                       FWPERM_SECURE_PRIV_DEBUG)
++
++#define FWPERM_SECURE_USER_WRITE      (1 << 4)
++#define FWPERM_SECURE_USER_READ       (1 << 5)
++#define FWPERM_SECURE_USER_CACHEABLE  (1 << 6)
++#define FWPERM_SECURE_USER_DEBUG      (1 << 7)
++
++#define FWPERM_SECURE_USER_RWCD       (FWPERM_SECURE_USER_READ | \
++                                       FWPERM_SECURE_USER_WRITE | \
++                                       FWPERM_SECURE_USER_CACHEABLE | \
++                                       FWPERM_SECURE_USER_DEBUG)
++
++#define FWPERM_NON_SECURE_PRIV_WRITE      (1 << 8)
++#define FWPERM_NON_SECURE_PRIV_READ       (1 << 9)
++#define FWPERM_NON_SECURE_PRIV_CACHEABLE  (1 << 10)
++#define FWPERM_NON_SECURE_PRIV_DEBUG      (1 << 11)
++
++#define FWPERM_NON_SECURE_PRIV_RWCD       (FWPERM_NON_SECURE_PRIV_READ | \
++                                           FWPERM_NON_SECURE_PRIV_WRITE | \
++                                           FWPERM_NON_SECURE_PRIV_CACHEABLE | \
++                                           FWPERM_NON_SECURE_PRIV_DEBUG)
++
++#define FWPERM_NON_SECURE_USER_WRITE      (1 << 12)
++#define FWPERM_NON_SECURE_USER_READ       (1 << 13)
++#define FWPERM_NON_SECURE_USER_CACHEABLE  (1 << 14)
++#define FWPERM_NON_SECURE_USER_DEBUG      (1 << 15)
++
++#define FWPERM_NON_SECURE_USER_RWCD       (FWPERM_NON_SECURE_USER_READ | \
++                                           FWPERM_NON_SECURE_USER_WRITE | \
++                                           FWPERM_NON_SECURE_USER_CACHEABLE | \
++                                           FWPERM_NON_SECURE_USER_DEBUG)
++
++#endif
 
 -- 
 2.41.0
