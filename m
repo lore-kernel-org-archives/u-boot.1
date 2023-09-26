@@ -4,78 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA835E7D241
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 07:02:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA47CE7D241
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 07:04:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9139986D91;
-	Tue, 26 Sep 2023 09:01:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 27BB686D84;
+	Tue, 26 Sep 2023 09:03:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FJUfO+LJ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="t/FZRAVl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3267A86D9D; Tue, 26 Sep 2023 09:01:15 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7EB9B86D85; Tue, 26 Sep 2023 09:03:57 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED7E486D88
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 09:01:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6E3A386BCE
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 09:03:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-277317a0528so931534a91.0
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 00:01:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695711671; x=1696316471; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mwSwJEm2Sraaao7ArVGRtZyaqBvdJEcgFr5He7VTZEY=;
- b=FJUfO+LJoXMd9S9/BugPTixuObU5CuzztPPUg5as8lNgGv4h5dzAMNOuumXF3RB71t
- AcTh4QD04DoR8HKQMFqKrm+xoCPip9YB5MjNC4IEUKoH2ASvGWdK7bjT43Y1SQqyML+Q
- cc5MxrZM/x26/k0kZtZegsS32oa7KRb+MjXkCKiBAxd9fgbrqq0JmJ3mYEBUMOzX66XR
- yAMktLhFGpYrILpUUL6p97kL50y+po4OeLB6S4DzA9gAkGQLbNMxFiTgUUhtA1x8sJ0c
- Ikc7/kBmPn2Nad5ByYIJGfR5taEiRhBhpSLpezswm/ZgBFONGb6W/EoIVIDFN3z20R+q
- 2KJA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E95BA3F67E
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:03:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1695711834;
+ bh=z0jyshB52iXWUR1S4h6K5cqXt21fsDxBhvLE/ilTZrM=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=t/FZRAVltZM/ya7Od7FJ2FjNW/uWG1BX8IphyBTjuJ4hpNQ1f5iYlMQXDdiZL9/Je
+ rnR2SW4T3KzWCmlFGaCYc1ph3vVL+FY6QQOarEPlsbkzZDkb+SDw5+fVJvDAPVFoD+
+ BlYbwXB+ZjajErjvrGgv9y3EmloM7VlzoK9RXr97ln0GiO4Sv3DaWquLKVcV29I5ph
+ DdmNEARBdsSaSIbVsKexIYWx3Imk1Tk8S5WZzJd6Q5YaCardW3XRXRP5DH5eS+3Y/M
+ s5vVN3G+DcKKRDYIiEvBCdUM/nex+Y6YrNnmfkAJ5Gsk+JIGrjaXYGrET5H8Za5vYV
+ Jz4xRvico+XVA==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-3fd0fa4d08cso67572935e9.1
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 00:03:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695711671; x=1696316471;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mwSwJEm2Sraaao7ArVGRtZyaqBvdJEcgFr5He7VTZEY=;
- b=jPeFHlMKaMewafXgDuM+IEe/odkGO5PzjN6R/gfFT7nDp+qiKY2XXDA1NZ/zb6GCeq
- uG8JaAthLYKUrkI3VZFNLPjNttNdbLTMpBHdl1sxZ0kq9tOF+AAnC7FAvOVYUTaIsPVf
- LdcZLuNrvdgZxHWcttyYklD+hHdCAVklUqi0BEVQOahIc+j4cWJhCP36iLLbLrttzkqh
- b26drOIVhCVxSmt8s6CB5s4/uAQKE4DB6HspwWJ4nYI19JuzJeOe5/vYJOW41M7fAczt
- XXftRxsCfoOv3emMN5JD1+6pIR5+s90byXmu6GDm6JeY/046nzRclqpdSnzcZz1W96+3
- h4mQ==
-X-Gm-Message-State: AOJu0YzJ939FuFtz062395wpqUmZG6jOreXIMRg2WOKyAlDY1Q39Hf+d
- MDcUFtwpwC7fLSUkk0iP0E/xTQ==
-X-Google-Smtp-Source: AGHT+IHxkHUPfw/UDDBxEZFJgaKSUWO2LfpTB6aQFVNxk7/jCMjTkahRof89vyIdeLJYbiivfVehzA==
-X-Received: by 2002:a17:90a:d503:b0:277:2566:7ad7 with SMTP id
- t3-20020a17090ad50300b0027725667ad7mr7379180pju.0.1695711671242; 
- Tue, 26 Sep 2023 00:01:11 -0700 (PDT)
-Received: from octopus.. ([2400:4050:c3e1:100:6585:aea6:5002:a825])
- by smtp.gmail.com with ESMTPSA id
- ge13-20020a17090b0e0d00b0027758c7f585sm3178480pjb.52.2023.09.26.00.01.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Sep 2023 00:01:10 -0700 (PDT)
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: trini@konsulko.com,
-	sjg@chromium.org
-Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH 4/4] test: dm: add SCMI power domain protocol test
-Date: Tue, 26 Sep 2023 16:00:43 +0900
-Message-Id: <20230926070043.738340-5-takahiro.akashi@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230926070043.738340-1-takahiro.akashi@linaro.org>
-References: <20230926070043.738340-1-takahiro.akashi@linaro.org>
+ d=1e100.net; s=20230601; t=1695711834; x=1696316634;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=z0jyshB52iXWUR1S4h6K5cqXt21fsDxBhvLE/ilTZrM=;
+ b=vCIaRDMzweTe0NHFLXl/+XZhQxHOZ0w7wll/G93ynNlhqn2kYszxkraCqPTTx7pmK7
+ 7d/qHN2UDAeQDhkpc3gbLxKyX16f16KdkVwTThNCwuiLqB2S0u3cpuc2/zBSLr8f77eO
+ GOL5SfvpHOF7wR+NwR1exMS8MeG7WI+m1PwmIzCT9m5xV+UMo6UisYoXGB710u0h6jnr
+ 8ESrvGoMB8oSwbIQglhd0le+jjpYY+EKog05uEtySoosKw0IdnwOPchSmmnMdoDR8Upu
+ WU24hRI0/++TjejhOFU/PD4UUrytPkfLvtzuOxb6FfDecPUfpfrey+m+qR7LMYA2dxGj
+ 4Psw==
+X-Gm-Message-State: AOJu0YxTXM9x1o16qyNtIXHvhZjxtJB+iiFKY5lkHktcze1FWFm9h/kO
+ 51Z1ohW9vSTyDTzhA1V4dcl72kHL8u2tN+iX4TCu21pXFzm4NS0mxgrdmckdX8Suxb1Cuxs/v7r
+ ACSfriDp175LaASle3G4AsBnQHaWW/uQ=
+X-Received: by 2002:a7b:c3cb:0:b0:402:bbe3:827c with SMTP id
+ t11-20020a7bc3cb000000b00402bbe3827cmr7172724wmj.31.1695711834475; 
+ Tue, 26 Sep 2023 00:03:54 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF4xRA0zNgmm1qcHwnfCkJnisX5sQjuz0I1hX3XoW5WWILBRNQO6SGaQLvp0WSOe4DN+8ITag==
+X-Received: by 2002:a7b:c3cb:0:b0:402:bbe3:827c with SMTP id
+ t11-20020a7bc3cb000000b00402bbe3827cmr7172648wmj.31.1695711834079; 
+ Tue, 26 Sep 2023 00:03:54 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ p20-20020a05600c205400b00403b63e87f2sm1421569wmg.32.2023.09.26.00.03.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 26 Sep 2023 00:03:53 -0700 (PDT)
+Message-ID: <545fe813-cb1e-469c-a131-0025c77aeaa2@canonical.com>
+Date: Tue, 26 Sep 2023 09:04:01 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] riscv: enable multi-range memory layout
+To: Anup Patel <apatel@ventanamicro.com>
+Cc: "Wu, Fei" <fei2.wu@intel.com>, rick@andestech.com, ycliang@andestech.com, 
+ bmeng.cn@gmail.com, sjg@chromium.org, u-boot@lists.denx.de, pali@kernel.org,
+ andrei.warkentin@intel.com, sunilvl@ventanamicro.com
+References: <20230914053055.745507-1-fei2.wu@intel.com>
+ <5D4FDDF5-5DEB-4A02-A423-C54662CCBFF0@gmx.de>
+ <c23a28ff-475d-0921-502f-f475b0e51ebd@intel.com>
+ <967f8765-67ac-48ff-970b-da8e431b5009@gmx.de>
+ <CAK9=C2WzoyTr15PrR+TZ+KAq+RGVxJk7yrbUX9nR+kUWq0qGug@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <CAK9=C2WzoyTr15PrR+TZ+KAq+RGVxJk7yrbUX9nR+kUWq0qGug@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,146 +109,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This ut has tests for the SCMI power domain protocol as well as DM
-interfaces for power domain devices.
+On 9/26/23 07:07, Anup Patel wrote:
+> On Thu, Sep 14, 2023 at 12:49 PM Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>>
+>> On 9/14/23 08:48, Wu, Fei wrote:
+>>> On 9/14/2023 2:05 PM, Heinrich Schuchardt wrote:
+>>>>
+>>>>
+>>>> Am 14. September 2023 07:30:55 MESZ schrieb Fei Wu <fei2.wu@intel.com>:
+>>>>> In order to enable PCIe passthrough on qemu riscv, the physical memory
+>>>>> range between 3GB and 4GB is reserved. Therefore if guest has 4GB ram,
+>>>>> two ranges are created as [2G, 3G) and [4G, 7G), currently u-boot sets
+>>>>> ram_top to 4G - 1 if the gd->ram_top is above 4G in
+>>>>
+>>>> This should move to 7GiB - 1 in your example on riscv64.
+>>>>
+>>> I'm describing the current implementation of board_get_usable_ram_top()
+>>> in ./arch/riscv/cpu/generic/dram.c. Do you mean this function should be
+>>> changed? Is the comment about 32bit DMA device still valid?
+>>>
+>>> phys_size_t board_get_usable_ram_top(phys_size_t total_size)
+>>> {
+>>>           /*
+>>>            * Ensure that we run from first 4GB so that all
+>>>            * addresses used by U-Boot are 32bit addresses.
+>>>            *
+>>>            * This in-turn ensures that 32bit DMA capable
+>>>            * devices work fine because DMA mapping APIs will
+>>>            * provide 32bit DMA addresses only.
+>>>            */
+>>>           if (gd->ram_top >= SZ_4G)
+>>>                   return SZ_4G - 1;
+>>>
+>>>           return gd->ram_top;
+>>> }
+>>
+>> The comment above says 32bit DMA is board specific and not architecture
+>> specific. So it is wrong to have this board_get_usable_ram_top()
+>> function on architecture level. It makes usage of devices with all
+>> memory above 4 GiB impossible.
+>>
+>> It tried to pass through a SATA controller but received an error:
+>>
+>> # modprobe vfio-pci
+>> # echo 0000:06:00.0 > /sys/bus/pci/drivers/ahci/unbind
+>> # echo 1022 7091 > /sys/bus/pci/drivers/vfio-pci/new_id
+>> # qemu-system-riscv64 -kernel u-boot.bin -nographic -M virt -m 4G
+>> -device vfio-pci,host=0000:06:00.0
+>> qemu-system-riscv64: -device vfio-pci,host=0000:06:00.0: VFIO_MAP_DMA
+>> failed: Invalid argument
+>> qemu-system-riscv64: -device vfio-pci,host=0000:06:00.0: vfio
+>> 0000:06:00.0: failed to setup container for group 5: memory listener
+>> initialization failed: Region riscv_virt_board.ram:
+>> vfio_dma_map(0x55adbde66f70, 0x80000000, 0x100000000, 0x7fcd6fe00000) =
+>> -22 (Invalid argument)
+>>
+>> With which version of QEMU were you able to use PCI pass through?
+> 
+> The original S-mode SiFive unleashed board support was using the
+> generic CPU under arch/riscv. We have Cadance MACB ethernet
+> device on this board which is a 32-bit device and can't access memory
+> beyond 4GB.
+> 
+> For more details, refer "git show 26f4fd1cb4f2"
+> 
+> I think we can wrap the board_get_usable_ram_top() implementation
+> in generic RISC-V CPU with a #ifdef Kconfig option which allows
+> certain boards (such as QEMU-virt) to implement their own
+> board_get_usable_ram_top().
+> 
+> Regards,
+> Anup
 
-Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
----
- test/dm/scmi.c | 107 ++++++++++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 106 insertions(+), 1 deletion(-)
+Thanks Anup for clarification.
 
-diff --git a/test/dm/scmi.c b/test/dm/scmi.c
-index 949e49bd2c35..c2625373d84e 100644
---- a/test/dm/scmi.c
-+++ b/test/dm/scmi.c
-@@ -15,6 +15,7 @@
- #include <common.h>
- #include <clk.h>
- #include <dm.h>
-+#include <malloc.h>
- #include <reset.h>
- #include <scmi_agent.h>
- #include <scmi_agent-uclass.h>
-@@ -223,7 +224,8 @@ static int dm_test_scmi_cmd(struct unit_test_state *uts)
- 	ut_assert_nextline("  # of agents: 2");
- 	ut_assert_nextline("      0: platform");
- 	ut_assert_nextline("    > 1: OSPM");
--	ut_assert_nextline("  # of protocols: 3");
-+	ut_assert_nextline("  # of protocols: 4");
-+	ut_assert_nextline("      Power domain management");
- 	ut_assert_nextline("      Clock management");
- 	ut_assert_nextline("      Reset domain management");
- 	ut_assert_nextline("      Voltage domain management");
-@@ -259,6 +261,109 @@ static int dm_test_scmi_cmd(struct unit_test_state *uts)
- 
- DM_TEST(dm_test_scmi_cmd, UT_TESTF_SCAN_FDT);
- 
-+static int dm_test_scmi_power_domains(struct unit_test_state *uts)
-+{
-+	struct sandbox_scmi_agent *agent;
-+	struct sandbox_scmi_devices *scmi_devices;
-+	struct udevice *agent_dev, *pwd, *dev;
-+	u32 version, count, attributes, pstate;
-+	u64 stats_addr;
-+	size_t stats_len;
-+	u8 *name;
-+	int ret;
-+
-+	/* preparation */
-+	ut_assertok(load_sandbox_scmi_test_devices(uts, &agent, &dev));
-+	ut_assertnonnull(agent);
-+	scmi_devices = sandbox_scmi_devices_ctx(dev);
-+	ut_assertnonnull(scmi_devices);
-+	ut_asserteq(2, scmi_devices->pwdom->id); /* in test.dts */
-+
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-+					      &agent_dev));
-+	ut_assertnonnull(agent_dev);
-+	pwd = scmi_get_protocol(agent_dev, SCMI_PROTOCOL_ID_POWER_DOMAIN);
-+	ut_assertnonnull(pwd);
-+
-+	/*
-+	 * SCMI Power domain management protocol interfaces
-+	 */
-+	/* version */
-+	ret = scmi_generic_protocol_version(pwd, SCMI_PROTOCOL_ID_POWER_DOMAIN,
-+					    &version);
-+	ut_assertok(ret);
-+	ut_asserteq(agent->pwdom_version, version);
-+
-+	/* protocol attributes */
-+	ret = scmi_pwd_protocol_attrs(pwd, &count, &stats_addr, &stats_len);
-+	ut_assertok(ret);
-+	ut_asserteq(agent->pwdom_count, count);
-+	ut_asserteq(0, stats_len);
-+
-+	/* protocol message attributes */
-+	ret = scmi_pwd_protocol_message_attrs(pwd, SCMI_PWD_STATE_SET,
-+					      &attributes);
-+	ut_assertok(ret);
-+	ret = scmi_pwd_protocol_message_attrs(pwd, SCMI_PWD_STATE_NOTIFY,
-+					      &attributes);
-+	ut_asserteq(-ENOENT, ret); /* the protocol not supported */
-+
-+	/* power domain attributes */
-+	ret = scmi_pwd_attrs(pwd, 0, &attributes, &name);
-+	ut_assertok(ret);
-+	ut_asserteq_str("power-domain--0", name);
-+	free(name);
-+
-+	ret = scmi_pwd_attrs(pwd, 10, &attributes, &name);
-+	ut_asserteq(-ENOENT, ret); /* domain-10 doesn't exist */
-+
-+	/* power domain state set/get */
-+	ret = scmi_pwd_state_set(pwd, 0, 0, 0);
-+	ut_assertok(ret);
-+	ret = scmi_pwd_state_get(pwd, 0, &pstate);
-+	ut_assertok(ret);
-+	ut_asserteq(0, pstate); /* ON */
-+
-+	ret = scmi_pwd_state_set(pwd, 0, 0, SCMI_PWD_PSTATE_TYPE_LOST);
-+	ut_assertok(ret);
-+	ret = scmi_pwd_state_get(pwd, 0, &pstate);
-+	ut_assertok(ret);
-+	ut_asserteq(SCMI_PWD_PSTATE_TYPE_LOST, pstate); /* OFF */
-+
-+	ret = scmi_pwd_state_set(pwd, 0, 10, 0);
-+	ut_asserteq(-ENOENT, ret);
-+
-+	/* power domain name get */
-+	ret = scmi_pwd_name_get(pwd, 0, &name);
-+	ut_assertok(ret);
-+	ut_asserteq_str("power-domain--0-extended", name);
-+	free(name);
-+
-+	ret = scmi_pwd_name_get(pwd, 10, &name);
-+	ut_asserteq(-ENOENT, ret); /* domain-10 doesn't exist */
-+
-+	/*
-+	 * U-Boot driver model interfaces
-+	 */
-+	/* power_domain_on */
-+	ret = power_domain_on(scmi_devices->pwdom);
-+	ut_assertok(ret);
-+	ret = scmi_pwd_state_get(pwd, scmi_devices->pwdom->id, &pstate);
-+	ut_assertok(ret);
-+	ut_asserteq(0, pstate); /* ON */
-+
-+	/* power_domain_off */
-+	ret = power_domain_off(scmi_devices->pwdom);
-+	ut_assertok(ret);
-+	ret = scmi_pwd_state_get(pwd, scmi_devices->pwdom->id, &pstate);
-+	ut_assertok(ret);
-+	ut_asserteq(SCMI_PWD_PSTATE_TYPE_LOST, pstate); /* OFF */
-+
-+	return release_sandbox_scmi_test_devices(uts, dev);
-+}
-+
-+DM_TEST(dm_test_scmi_power_domains, UT_TESTF_SCAN_FDT);
-+
- static int dm_test_scmi_clocks(struct unit_test_state *uts)
- {
- 	struct sandbox_scmi_agent *agent;
--- 
-2.34.1
+As of today sifive_unleashed_defconfig builds 
+arch/riscv/cpu/fu540/dram.c which contains the cpu specific 
+implementation of board_get_usable_ram_top().
 
+We already have a weak implementation
+
+common/board_f.c:327:
+__weak phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+
+So we don't need a Kconfig option. We just can drop the implementation 
+in arch/riscv/cpu/generic/dram.c.
+
+QEMU should not need an implementation of the function but provide the 
+implemented RAM banks via its device-tree.
+
+Best regards
+
+Heinrich
