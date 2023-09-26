@@ -4,78 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1311E7E628
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 11:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14DFE7E626
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 11:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0390886C1D;
+	by phobos.denx.de (Postfix) with ESMTP id 7736686D47;
 	Tue, 26 Sep 2023 13:37:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DM554Lv8";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="D9+JK2JM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D92D86D58; Tue, 26 Sep 2023 13:37:47 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 5503C86BEB; Tue, 26 Sep 2023 13:37:47 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9184F86BEB
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 13:37:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A289B86D3E
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 13:37:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-533c5d10dc7so6583570a12.3
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 04:37:43 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5334f9a56f6so9532374a12.3
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 04:37:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695728263; x=1696333063; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=devcw+zP6YA5NMnclH4tyMKdsPJY3yekMwXp5me0cgs=;
- b=DM554Lv83XT1qjB5YTQ1w6Z5KcmgJ0A5/3g4ijiSvS57eqTwFsi6YgaW/1+aJ8rwwW
- f/Wt+aUhgL1KlRx/NBzKfLdQ+8aEAzDwe1ZcB8+pk6caAr8/Ywc2qvj2eBfyBEkitxVS
- 2d6WWVfdPeYfx+thA+uG4mUkUUkDgenlmO3PQ=
+ d=google.com; s=20230601; t=1695728263; x=1696333063; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=R95ARRG8a/rSE+6bNgFXj3DkpCYQEZH8VYTLPTbk9Ck=;
+ b=D9+JK2JMRNiasEA2pGRIPMGmlFeHA3YlJrypaRatOlm3LFS3eJAMYM99Lv7PBXYd42
+ XBJAPPaDcrCo3qr5D/RS5MzwMXjfW1diIMo4RfEab8nfM4oQLsncSKs+H6KSyHlFvtwa
+ ttmsxP2FInlbfyEQ+ZnAvIlpEm0e3Vwm2qT7lw3oUM/5YI2eK/VOLKVH7td/ZD2uXXcU
+ 2b2efkwwM1+0eUKT4/pxJwJ8zbnXhcYGvRYxKU8aKJOmapcS/2EDudZO6O5UcGylizve
+ 7LVNqa5XsvL/VNu668+JN9Sipqz0kBtIZqpbqF65HTeKIuBjDKnXecohf6JCbo51Kzq5
+ Yw/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1695728263; x=1696333063;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=devcw+zP6YA5NMnclH4tyMKdsPJY3yekMwXp5me0cgs=;
- b=IZ6QMW3JrCtYRhuhSwNGTmFF9OioHV6Wf5a6LIfY7zh/uzQ7ClznzsOslkdo2RzDPh
- UMV5nNHAczneeZh2vHALcjY8vhILIosKT4RLwCecYmDEHQTkEst9kK5IPdaQU7ffL4Om
- foJEzB71lGatxxH6enzRwkm22PJRxgvm3huX8XsD+uKFWgZPQund2VdJd+PKAc2zk/n2
- MxMHZ1XnNMRc8ZkfyJ6996ZPyVMLool+TaIMD07pNCKouV/1QPqdGjMyrsie00ky5x6u
- KQ2zDpp8VFdAFK18iAmDyx3eEEktXt4+Us4UXeNbUotFP5+qPNMYhUZbKSnF/lGDMj4Y
- 2XHQ==
-X-Gm-Message-State: AOJu0Yz4oN20RqfN2a0fpB2cRcAMsr4UbndklCVlPcdjY8oRbrTJhy/n
- DnOvhKy5tZH+DgZII3DGdLqDNfg723yS4p+0MwfDsp15H7AuQ9MGFeI=
-X-Google-Smtp-Source: AGHT+IGP0eAxMW8ZaGPDlgR+RObvrGKJyBeUkMzgzU4h1pxltdDIvx0rXHAhgdwdOnkaVDm0puIg42bZuk4Gpgp2OoE=
-X-Received: by 2002:aa7:d3d5:0:b0:532:e4b0:557e with SMTP id
- o21-20020aa7d3d5000000b00532e4b0557emr8453609edr.36.1695728262878; Tue, 26
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R95ARRG8a/rSE+6bNgFXj3DkpCYQEZH8VYTLPTbk9Ck=;
+ b=NM937rqn3eWUL4ehE1H52hDrXGJnsG7Rl9GsSHlXmn7FG4SliAst0kjIZ4CYSnjv6j
+ DMAa1LDw2hzZuJG08CxMwv40wrREECJehO7Xta9Ag4btcaMVy4ugFQpuY9jjT31WEMP8
+ GNJ4GY99CVTVx7DakQEtZwXKOf57pZhxgu5/ZtbdHyleq5oYb3aRVXfyvA+pi2E4zmHJ
+ gnuziV2Wnynsp+Ci44Cb73fMpFrw7KO67ToY4I8H/gT6roU3fNiTlXNLxVh8yMVKqt9m
+ DLhyhyid1TEv0dSJNkvmXyuvXiWPw8tSbcnw7XPBQucjaDwh3n7PyVfzrqP20WF+m3B0
+ ihAg==
+X-Gm-Message-State: AOJu0YyyDiCYBJ6LUiyEq63Gp4Ejq18n7YSZ3+727t4LCHrNBZo9eCFQ
+ O+Qc05vygzhlYxCf7RF3b4E15TFGUkkrARgrNyyTMUAadPqOYrYRZAw=
+X-Google-Smtp-Source: AGHT+IGHxj2s9/A6L/gTgasRsTxBYiszQ3JAzwmMy7InJ/zCm3HgzPUsU70ZLl95tpNz3DQ6QoqvREbMjmP+kvM5jkk=
+X-Received: by 2002:aa7:d618:0:b0:530:d8df:afaa with SMTP id
+ c24-20020aa7d618000000b00530d8dfafaamr7690204edr.41.1695728262877; Tue, 26
  Sep 2023 04:37:42 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-6-sjg@chromium.org>
- <20230831175055.GN3101304@bill-the-cat>
- <CAPnjgZ3FNvR3JGrSFHwMGqny5JHtA7qoX5g13ZBO8Rib67EUmg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3FNvR3JGrSFHwMGqny5JHtA7qoX5g13ZBO8Rib67EUmg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Sep 2023 05:37:29 -0600
-Message-ID: <CAPnjgZ0vw2ROHAGeat3Pvzn0LGqh6Y-8TFuQ0xzVgM8atUVDpQ@mail.gmail.com>
-Subject: Re: [PATCH 05/32] spl: mx6: powerpc: Drop the condition on
- timer_init()
-To: Tom Rini <trini@konsulko.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>, 
- Andy Fleming <afleming@gmail.com>, Mario Six <mario.six@gdsys.cc>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Nikhil M Jain <n-jain1@ti.com>, 
- Priyanka Jain <priyanka.jain@nxp.com>, Stefan Roese <sr@denx.de>
+References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
+ <20230926094124.7024-2-maxim.uvarov@linaro.org>
+In-Reply-To: <20230926094124.7024-2-maxim.uvarov@linaro.org>
+From: Simon Glass <sjg@google.com>
+Date: Tue, 26 Sep 2023 05:37:25 -0600
+Message-ID: <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
+Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: u-boot@lists.denx.de, pbrobinson@gmail.com, ilias.apalodimas@linaro.org, 
+ joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com, 
+ goldsimon@gmx.de
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,59 +86,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Maxim,
 
-On Wed, 20 Sept 2023 at 19:03, Simon Glass <sjg@chromium.org> wrote:
+On Tue, 26 Sept 2023 at 03:43, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
 >
-> Hi Tom,
+> add external lwIP library as a git submodule.
+> Use STABLE-2_2_0_RELEASE tag.
 >
-> On Thu, 31 Aug 2023 at 11:51, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Wed, Aug 30, 2023 at 12:04:36PM -0600, Simon Glass wrote:
-> >
-> > > It doesn't make sense to have some boards do this differently. Drop t=
-he
-> > > condition in the hope that the maintainers can figure out any run-tim=
-e
-> > > problems.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > >  common/spl/spl.c | 6 ------
-> > >  1 file changed, 6 deletions(-)
-> > >
-> > > diff --git a/common/spl/spl.c b/common/spl/spl.c
-> > > index 78db9ef5318..3f513b0563a 100644
-> > > --- a/common/spl/spl.c
-> > > +++ b/common/spl/spl.c
-> > > @@ -766,13 +766,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
-> > >               if (spl_init())
-> > >                       hang();
-> > >       }
-> > > -#if !defined(CONFIG_PPC) && !defined(CONFIG_ARCH_MX6)
-> > > -     /*
-> > > -      * timer_init() does not exist on PPC systems. The timer is ini=
-tialized
-> > > -      * and enabled (decrementer) in interrupt_init() here.
-> > > -      */
-> > >       timer_init();
-> > > -#endif
-> >
-> > PowerPC might be a little tricky, did qemu-ppce500 run?  And please
-> > reach out to some of the iMX folks instead of just dropping this and
-> > hoping it works.
->
-> Yes, CI passes.
->
-> +Christophe Leroy
-> +Marek Beh=C3=BAn
->
-> PowerPC people, does this look OK?
+> Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> ---
+>  .gitmodules            | 3 +++
+>  net/lwip/lwip-external | 1 +
+>  2 files changed, 4 insertions(+)
+>  create mode 100644 .gitmodules
+>  create mode 160000 net/lwip/lwip-external
 
-Are there any active maintainers for PowerPC?
+I really don't agree with having submodules in U-Boot. It's just a
+huge hassle that we don't need. We still haven't figured out how to
+deal with config fragments.
 
-Apart from this patch, is there any word on the DM_SERIAL migration?
+If no one else is interested in maintaining this stack within U-Boot
+and syncing up every now and then, perhaps we should reconsider
+bringing this into U-Boot? We would never normally accept such a large
+body of code without even a MAINTAINERS entry. Without a network
+maintainer, even the integration layer will struggle to keep up and
+up-revving won't be possible anyway.
+
+In any case, if we go with lwip, we should copy in just the code that
+is needed, unchanged,
 
 Regards,
 Simon
