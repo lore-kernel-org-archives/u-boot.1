@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F4EE7E629
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 11:57:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FBDDE7E626
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 12:02:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE7B686A24;
-	Tue, 26 Sep 2023 13:57:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A162786C1D;
+	Tue, 26 Sep 2023 14:02:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Rixl6Wei";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="r7WgvDfk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C70C86A94; Tue, 26 Sep 2023 13:57:16 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2060a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eaa::60a])
+ id 46BE686A7D; Tue, 26 Sep 2023 14:02:34 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e89::610])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99E1A801B6
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 13:57:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3188C86C1D
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 14:02:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=S6DiPQvnsZD++65shG/k1eIpCsBTzQXDwVo58l1Yui/toGHEMZxus8aPLVENtTORXhLAXyG6p5IrUjgviJ+6PgWwnPC1mkdeTcaozuSUqAXNf55zr2QID1KtqTJj19sRtt17FtANHGaxcUfiIdjwyadLlyxS8k/7HBxbEZMr3+kSxE5IYXJ3dlngBfKMzrkrGPp2WgIP9O1Lls20h9wpT30RoQhqISLwwcF6gVI1YOP6fK9oxHgIMSgncW0n5zpN4RU39FB3Hces96Q2TEaNhX3jEWe6MC8OVaWn+LPjt75aW4rUMCdGIIasKl0IATx7NjdjNLExtJucbLpr2N3Cyg==
+ b=kciE1siz6f1Tg7L0Dqzqiof31U8qr1+jrsd9eJS5+7NZ4cYlj7aaj89nvIq/VrehINNQoe/EUj5KaJwrwvCmUFzA7GdOvzHp6ObztxfRCroYHi5u5H3FMrYhsBNR5gjAEzfIPFqZrZgepE97Rs1atFFutJNCFf/rtExB8mS/ItMsq/27e214L1lQgEas3SLK+kCTiv3Ri9p1BUoGM0DpuFKkPZsdnqokSrjIWoR0bIZ6Bz44/bmK34HOVwUBVP5tqfQ/rglW5+Rk05JUb4kB9yzwoyg/qKxYN8CHw95y0H74eZGEIhG98w0HT79udhDHm57lcZ7do28qxF4ytW+7qw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=T2iwKO/aihJvHul5MUbANFmhpeF3P6VqmYTL+tseymU=;
- b=n3HEplY4i+FNC7FlBXQFmB9cCYsxHieGmVRtK91WtDC7Sk4rzqFnqCptqPRrlr8syQYYT4hbAE8dpTBpOoFns04ty1dZhNiHEK2/UusMzo5t+Nwu6pW5pT5KrYKheVZdFQKy1IgquaMMveoHkE15M1mQ+HYb403OWFrO9sZWLGYzq175WjSM/VyYt7dhX73wvn/D/SRZCdlJ0mGfnQcX2OR0dkJky9NVj89w4zQV/6SpGPvHjlXBzZyCm73Xcr6+IDCoHqMoy1M5dpsYO3jgp19IauQnTP26axPHdLJThJP6m3NQuMVEmCsEARy56koZO6W7FX+bEjH171rwi+IRiA==
+ bh=xyA/CvMcsjTzD1bh9ZKmLzZv6UUli8ElHpIwmX5kLWI=;
+ b=ZRTWnWOUJ72dnt99wxbkEu7JTFRI6DbyDPPFvYHf7aAhbOPz/K9A8xl1/ss0wVdTWgHjqLCHSyEfd0NjWRulDmfNK07zWft5dhB4hOCGCFKOcP0rJjDhdJJMEdcts6y3V0Ypk352v6+P0Lv37+TTjbcY54ax8GzNdVyCn5306ibX5Q2cYCdmKIeRZwso8jx8PFhs67GavGBHXNplO05JPChliDM5qBDBoQCh/gWWwUO+GeTztGsQnupJiQJb6AJslJtzHF0R9QJdg67Zs91OczARcmdjgnS0m7lJQbU9fIeJX8gcmutYEolvDtR42UIigN9LAqVOcuURhHCsQjPzIg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
+ 165.204.84.17) smtp.rcpttodomain=arri.de smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=T2iwKO/aihJvHul5MUbANFmhpeF3P6VqmYTL+tseymU=;
- b=Rixl6Wei+cim3r8+0PQZQFhD5gJ1AUNF/RzmFxxYNo0Jf9QWgBtTAvf86KMqJkG7CQkUvW91q50gg0WNmPiFEveW3jeqlv02u+kVgxAkRfsplMmuPt6KP3zfWkHVKVqvECQ4zxEgGTazPRBsAGSOY1lKYnPye3omNNsP3oJMfcQ=
-Received: from DS7PR03CA0072.namprd03.prod.outlook.com (2603:10b6:5:3bb::17)
- by MW4PR12MB7031.namprd12.prod.outlook.com (2603:10b6:303:1ef::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.19; Tue, 26 Sep
- 2023 11:57:08 +0000
-Received: from DS1PEPF00017095.namprd03.prod.outlook.com
- (2603:10b6:5:3bb:cafe::e0) by DS7PR03CA0072.outlook.office365.com
- (2603:10b6:5:3bb::17) with Microsoft SMTP Server (version=TLS1_2,
+ bh=xyA/CvMcsjTzD1bh9ZKmLzZv6UUli8ElHpIwmX5kLWI=;
+ b=r7WgvDfkIDLKyCwUfppiCGCzOsiL/cOZrnlwixM8gUmt6oaOvDcgfk02viJMQBWdyckWx16hPXPhySaFiLthN21qU9RpbElrQaefyLk41S8oJt3+befiqCxHn0ao8febi5uLm6FIIZIgY3dEf6FEftJodnLx7bJhh5Jhok5ciqc=
+Received: from PA7P264CA0313.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:395::27)
+ by IA1PR12MB8238.namprd12.prod.outlook.com (2603:10b6:208:3f9::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.28; Tue, 26 Sep
+ 2023 12:02:27 +0000
+Received: from SA2PEPF000015CA.namprd03.prod.outlook.com
+ (2603:10a6:102:395:cafe::84) by PA7P264CA0313.outlook.office365.com
+ (2603:10a6:102:395::27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.35 via Frontend
- Transport; Tue, 26 Sep 2023 11:57:08 +0000
+ Transport; Tue, 26 Sep 2023 12:02:27 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,24 +59,23 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS1PEPF00017095.mail.protection.outlook.com (10.167.17.138) with Microsoft
+ SA2PEPF000015CA.mail.protection.outlook.com (10.167.241.200) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Tue, 26 Sep 2023 11:57:08 +0000
+ 15.20.6838.14 via Frontend Transport; Tue, 26 Sep 2023 12:02:25 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
- 2023 06:56:52 -0500
-Message-ID: <c66bed88-f993-4b13-99ab-3162e3b6b982@amd.com>
-Date: Tue, 26 Sep 2023 13:56:52 +0200
+ 2023 07:02:21 -0500
+Message-ID: <4c88642b-f8f8-4d83-9210-eb553ee24e6a@amd.com>
+Date: Tue, 26 Sep 2023 14:02:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: zynq_gem: Update the MDC clock divisor in the probe
- function
+Subject: Re: [PATCH v2] arm64: versal: Add SelectMAP boot mode identification
 Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+To: "Polak, Leszek" <LPolak@arri.de>, "u-boot@lists.denx.de"
  <u-boot@lists.denx.de>
-CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <git@xilinx.com>
-References: <20230922045010.22852-1-venkatesh.abbarapu@amd.com>
+CC: Stefan Roese <sr@denx.de>
+References: <DU0PR07MB8419D03ED9705DEA5FAAD992C8FFA@DU0PR07MB8419.eurprd07.prod.outlook.com>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -122,7 +121,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20230922045010.22852-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <DU0PR07MB8419D03ED9705DEA5FAAD992C8FFA@DU0PR07MB8419.eurprd07.prod.outlook.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -130,26 +129,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017095:EE_|MW4PR12MB7031:EE_
-X-MS-Office365-Filtering-Correlation-Id: 35c074f5-64a2-4d54-7426-08dbbe87b5b7
+X-MS-TrafficTypeDiagnostic: SA2PEPF000015CA:EE_|IA1PR12MB8238:EE_
+X-MS-Office365-Filtering-Correlation-Id: 83a10f48-75ed-426d-3bf9-08dbbe8872d6
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: IsOiK7Y47hCN5RTuq4s7+5rB80TyUvitHRhX0FlYxtPbpXWhpzgd3kI3h1MEJXoWTTDEgX1sEaVWTWEcUDTpmOL9yCA2h/3bkBjv07lE4HNL/25oG/5LV+xgtv8vapk6N+U9H+9ntrvSraigy7ugoOU+EK/6Iy10o8kqEFKYsyEd6Cf3Cto/JllD0U6la4dOr7hICuYuNdWzYDOMo+RN8yoVM2gdITev9v3q3REnOCFOBm9lyP0O6CXWnd5ZvT0I3hfWAYN6Ua+x8/D5FIR1nzjfao90IuW7N8KUQTPGOzP39CWkkRNOJiOCpku0dHj1faRS04gxUu3ovgE5m/AY5SBjAw2v5XDssFO51uYvzGlUbPXczukqXnCsVoo7cHacYtG0YKK3wHPpMA90OtNfHUaXEYBw2l7rdJIOkJyhcEeHxvyIl/z9a/GEc6NNkxjZ7szpCU2xiV7j/UPoDepaWxiLoMOPQoEBbmbqea4jMvX86+vJ/TfX6ts71juvTBbmrMlaIUuTMkPflggcWdIH4O907WNZETOdtuVsN45RPE+YPyO56rHJQzxzS3LNSgbCaQUAttSO3yFTcFAlEWMn42CIt3aUN/Fa2iI/JrZ5TH5dGBeKPCOxGpag+q9uFxZ1L84A/FMkeV13Uic0n/MnAtjWekJkvfgpoODz5BjfbExnUStQZoz86YxHPVHOXxvmgG5/dg0NEYuL/O3uH5AYX2oQPFweRrmqVQmovBBP6Gy4RRSGkDrIrzsPKkDG3hGf4A4WZeSYCdPGpwdJWW8Bv7UxDoo2Znk/J61TxqwpSo3dhV0wJgnKssV8KI/JuB03
+X-Microsoft-Antispam-Message-Info: h1YThIXhBjaSyog4ET5wV8Z26duvSF0SDCyZnH/bvRfIb0jGS3rCYaRH7DIUBrYbwMrHpP9G6V42OWlYNiAVmy/eIXcSgfkDUIOQHCvW1zCYDORymRD8WbTqVbi7iWaKnuJWASU0lJ9J1Yuq0rJYDZEs+8PDoPUEaf9/BKF9+CTT+R2gkWXlwgp0T6WChRdfScn3YtGOLpYNj+h62hrjEWhMDZDNgpbwtL2os3Wh6iTKv+N0PV78oMtnkOho7xZXI3mzoRd3p9zMJ7XOp754LD/733JpP18TVfDwovEKMHY9dF3Ba9fcHE4VXwlfk0xO+6836ojr4hBXPUZPT4gOSptAgo2hrCiBTBn+j37p/Wcj3tYYZx4Y+m2KBkLllL5LWwzuEtsuitlJb6QkTNA1Tq+AQFhLiVHetdolRhcf8ab8HeR/XRKnxhq1/gwg4HHydZ0+jmI/5+PFCGWM7Vo8t5LazIi1kJdLwWCd1UznOarIcgpWf275bTIWoKkCbqG5muCIukrtlDcfZR82QS9ujSa9ft24kX7+KL0DuOaS9FVFBIe14Y4afx95IWB4sl4gYaCYn6E5/WLftgpLe+N5szPvPQnGl7poq+kRUkEcWxaOKsOYAU0f7h3aC1YeZOrIQMQkVw4SrR6XjHav1s1A65skhq2pkT26EVII3440go4X3OqH/Xnc3+GjMSmFBFlypiQL63T/Kh2GnDiadZucabRFnKcluqn/mYtSNdsSRU+EYTCdpIhSOjdjsd4BSGZGj88DObY4Hi1zNdK9gjBgH7Y2bOqK2yEZPET3Cnwe8LbzFSPZ9PeeZm7mrHk2+bCh
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(39860400002)(396003)(376002)(346002)(230922051799003)(82310400011)(186009)(1800799009)(451199024)(36840700001)(40470700004)(46966006)(53546011)(8936002)(44832011)(336012)(478600001)(70206006)(70586007)(31686004)(110136005)(54906003)(8676002)(316002)(83380400001)(16576012)(36860700001)(107886003)(40460700003)(16526019)(5660300002)(82740400003)(31696002)(40480700001)(4326008)(86362001)(2906002)(81166007)(41300700001)(26005)(2616005)(426003)(47076005)(36756003)(356005)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(39860400002)(346002)(376002)(136003)(396003)(230922051799003)(186009)(451199024)(1800799009)(82310400011)(36840700001)(46966006)(40470700004)(40480700001)(53546011)(40460700003)(478600001)(5660300002)(36756003)(81166007)(41300700001)(426003)(336012)(26005)(356005)(16526019)(316002)(70586007)(16576012)(70206006)(110136005)(31696002)(2616005)(86362001)(82740400003)(36860700001)(4744005)(2906002)(47076005)(8936002)(8676002)(4326008)(44832011)(31686004)(43740500002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2023 11:57:08.0837 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 35c074f5-64a2-4d54-7426-08dbbe87b5b7
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Sep 2023 12:02:25.3904 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 83a10f48-75ed-426d-3bf9-08dbbe8872d6
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017095.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SA2PEPF000015CA.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7031
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8238
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,144 +167,26 @@ X-Virus-Status: Clean
 
 
 
-On 9/22/23 06:50, Venkatesh Yadav Abbarapu wrote:
-> MDC clock change needs to be done when the driver probe function
-> is called as mdio is enabled at probe and not when the ethernet starts.
-> Setup the MDC clock at the probe itself.
+On 9/22/23 15:51, Polak, Leszek wrote:
+> The SelectMAP configuration interface provides an 8-bit, 16-bit or
+> 32-bit bidirectional data bus interface to the Versal FPGA
+> configuration logic that can be used for both configuration and
+> readback.
 > 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->   drivers/net/zynq_gem.c | 73 +++++++++++++++++++++++-------------------
->   1 file changed, 40 insertions(+), 33 deletions(-)
+> A connected microcontoller to the SelectMAP interface can load boot
+> image with bitstream, TF-A (ARM Trusted Firmware) and U-Boot.
 > 
-> diff --git a/drivers/net/zynq_gem.c b/drivers/net/zynq_gem.c
-> index f3cdfb0275..f7a7897d9c 100644
-> --- a/drivers/net/zynq_gem.c
-> +++ b/drivers/net/zynq_gem.c
-> @@ -321,11 +321,38 @@ static int zynq_gem_setup_mac(struct udevice *dev)
->   	return 0;
->   }
->   
-> +static u32 gem_mdc_clk_div(struct zynq_gem_priv *priv)
-> +{
-> +	u32 config;
-> +	unsigned long pclk_hz;
-> +
-> +	pclk_hz = clk_get_rate(&priv->pclk);
-> +	if (pclk_hz <= 20000000)
-> +		config = GEM_MDC_SET(GEM_CLK_DIV8);
-> +	else if (pclk_hz <= 40000000)
-> +		config = GEM_MDC_SET(GEM_CLK_DIV16);
-> +	else if (pclk_hz <= 80000000)
-> +		config = GEM_MDC_SET(GEM_CLK_DIV32);
-> +	else if (pclk_hz <= 120000000)
-> +		config = GEM_MDC_SET(GEM_CLK_DIV48);
-> +	else if (pclk_hz <= 160000000)
-> +		config = GEM_MDC_SET(GEM_CLK_DIV64);
-> +	else if (pclk_hz <= 240000000)
-> +		config = GEM_MDC_SET(GEM_CLK_DIV96);
-> +	else if (pclk_hz <= 320000000)
-> +		config = GEM_MDC_SET(GEM_CLK_DIV128);
-> +	else
-> +		config = GEM_MDC_SET(GEM_CLK_DIV224);
-> +
-> +	return config;
-> +}
-> +
->   static int zynq_phy_init(struct udevice *dev)
->   {
-> -	int ret;
-> +	int ret, val;
->   	struct zynq_gem_priv *priv = dev_get_priv(dev);
->   	struct zynq_gem_regs *regs_mdio = priv->mdiobase;
-> +	struct zynq_gem_regs *regs = priv->iobase;
->   	const u32 supported = SUPPORTED_10baseT_Half |
->   			SUPPORTED_10baseT_Full |
->   			SUPPORTED_100baseT_Half |
-> @@ -333,6 +360,10 @@ static int zynq_phy_init(struct udevice *dev)
->   			SUPPORTED_1000baseT_Half |
->   			SUPPORTED_1000baseT_Full;
->   
-> +	val = gem_mdc_clk_div(priv);
-> +	if (val)
-> +		writel(val, &regs->nwcfg);
-> +
->   	/* Enable only MDIO bus */
->   	writel(ZYNQ_GEM_NWCTRL_MDEN_MASK, &regs_mdio->nwctrl);
->   
-> @@ -360,35 +391,10 @@ static int zynq_phy_init(struct udevice *dev)
->   	return phy_config(priv->phydev);
->   }
->   
-> -static u32 gem_mdc_clk_div(struct zynq_gem_priv *priv)
-> -{
-> -	u32 config;
-> -	unsigned long pclk_hz;
-> -
-> -	pclk_hz = clk_get_rate(&priv->pclk);
-> -	if (pclk_hz <= 20000000)
-> -		config = GEM_MDC_SET(GEM_CLK_DIV8);
-> -	else if (pclk_hz <= 40000000)
-> -		config = GEM_MDC_SET(GEM_CLK_DIV16);
-> -	else if (pclk_hz <= 80000000)
-> -		config = GEM_MDC_SET(GEM_CLK_DIV32);
-> -	else if (pclk_hz <= 120000000)
-> -		config = GEM_MDC_SET(GEM_CLK_DIV48);
-> -	else if (pclk_hz <= 160000000)
-> -		config = GEM_MDC_SET(GEM_CLK_DIV64);
-> -	else if (pclk_hz <= 240000000)
-> -		config = GEM_MDC_SET(GEM_CLK_DIV96);
-> -	else if (pclk_hz <= 320000000)
-> -		config = GEM_MDC_SET(GEM_CLK_DIV128);
-> -	else
-> -		config = GEM_MDC_SET(GEM_CLK_DIV224);
-> -
-> -	return config;
-> -}
->   
->   static int zynq_gem_init(struct udevice *dev)
->   {
-> -	u32 i, nwconfig;
-> +	u32 i, nwconfig, nwcfg;
->   	int ret;
->   	unsigned long clk_rate = 0;
->   	struct zynq_gem_priv *priv = dev_get_priv(dev);
-> @@ -494,8 +500,7 @@ static int zynq_gem_init(struct udevice *dev)
->   		return -1;
->   	}
->   
-> -	nwconfig = gem_mdc_clk_div(priv);
-> -	nwconfig |= ZYNQ_GEM_NWCFG_INIT;
-> +	nwconfig = ZYNQ_GEM_NWCFG_INIT;
->   
->   	/*
->   	 * Set SGMII enable PCS selection only if internal PCS/PMA
-> @@ -509,19 +514,21 @@ static int zynq_gem_init(struct udevice *dev)
->   
->   	switch (priv->phydev->speed) {
->   	case SPEED_1000:
-> -		writel(nwconfig | ZYNQ_GEM_NWCFG_SPEED1000,
-> -		       &regs->nwcfg);
-> +		nwconfig |= ZYNQ_GEM_NWCFG_SPEED1000;
->   		clk_rate = ZYNQ_GEM_FREQUENCY_1000;
->   		break;
->   	case SPEED_100:
-> -		writel(nwconfig | ZYNQ_GEM_NWCFG_SPEED100,
-> -		       &regs->nwcfg);
-> +		nwconfig |= ZYNQ_GEM_NWCFG_SPEED100;
->   		clk_rate = ZYNQ_GEM_FREQUENCY_100;
->   		break;
->   	case SPEED_10:
->   		clk_rate = ZYNQ_GEM_FREQUENCY_10;
->   		break;
->   	}
-> +	nwcfg = readl(&regs->nwcfg);
-> +	nwcfg |= nwconfig;
-> +	if (nwcfg)
-> +		writel(nwcfg, &regs->nwcfg);
->   
->   #ifdef CONFIG_ARM64
->   	if (priv->interface == PHY_INTERFACE_MODE_SGMII &&
+> This commit adds the missing identification of the SelectMAP mode.
+> 
+> Signed-off-by: Leszek Polak <lpolak@arri.de>
+> Reviewed-by: Stefan Roese <sr@denx.de>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Stefan Roese <sr@denx.de>
 
-Applied.
-M
+The patch itself looks good but your git setup is not correct.
+Email address you use for sending is not matching one in SOB line.
+
+Can you please use lower case in email and send v3?
+
+Thanks,
+Michal
