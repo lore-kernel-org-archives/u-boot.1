@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13B5CE7E65A
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 19:41:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 774C7E7E65A
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 19:42:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AD3886BE7;
-	Tue, 26 Sep 2023 21:41:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D23AA86C71;
+	Tue, 26 Sep 2023 21:42:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DYQjLtd8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IU955moj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F57A86BE2; Tue, 26 Sep 2023 21:40:59 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id C1F2086C71; Tue, 26 Sep 2023 21:42:50 +0200 (CEST)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2580086C26
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 21:40:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BC5A86BE2
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 21:42:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-530bc7c5bc3so11555200a12.1
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 12:40:57 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-34deefc2016so28183285ab.2
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 12:42:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695757256; x=1696362056; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hCBwF/Vh/qaz5iCp1c/qoDg7paabbS7CBAuV/bBUsPI=;
- b=DYQjLtd8J5Rpm2/R3AVuNq9I0fkqsEtly9Aeg+f8Pr4YiIpiN+lgCk1b3CD0KWvC8l
- PDCLZxKoS2Ggl9t4wW6iuTNf0BbxFLdmLAU0/EfhKeYEO63lrnPyE9noO+jmyWFf2GEm
- mKkU6x1Q70gQVCTlB7xjv+adbl4odbrsZvyUQOCleDs8qC1qG6xO54Izo1naHsb2elwE
- z/r+WqKMgDAAmvJGbmzqZJLK2W8+XF4y3R+anPDqMFwetqofx3FHX1rYUA8jMzBJdJ9S
- qTKzU5Y0bzeu3P+iv+hvBMhaFAHJDe3Xd+JbE5MJG0PzSmmLgW7Juw5D/SGrtTvtwrKP
- j9Qg==
+ d=chromium.org; s=google; t=1695757367; x=1696362167; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ylRB+o0Qkrun1yi4fSnYM174Q1wG3Ph+hurLuy8H7Hg=;
+ b=IU955mojU+7y9DDIcv/iQJ9EKOnbJNcVIl7detI6o5KYxJ53sFALqKdDDI0eC+0KvU
+ sO7xJibbCpYRoeIi41Un/dAnl+6LsT1U6MYEXyXnAhq9oFDHQtwLfoqTYC1y9FM0kL63
+ cbkovJ8z1Sj/ROYwQ+bIq14Duzm+N2HAvWZ3g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695757256; x=1696362056;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hCBwF/Vh/qaz5iCp1c/qoDg7paabbS7CBAuV/bBUsPI=;
- b=VGKzqOL5Xo2ZMtAyk5pfhyx8YNXoCPnT/YREsUkkHwL86O1p7zCXp1W/JV8A3yMWTF
- HM/aTC4Ai2jhKIzu76Lcpks/efVRsoHDbKzBoQHbmpdLYX5uLsVyWLEodyY7A8b70U4K
- AnncTfO+Kq6LbH/m9KYbT/yRme714YnrvPC3i4eHZ7oeujVhbcJfLNy2+rfs/LYXW6UL
- WgNLFx/2Sl3cdEzAyjW+OR4fAIDwn6OjxDS9RFOl1zTU/uzlf0eyco2l05guTyaJTRCK
- ErSCxkxxNUA1meJCN5ZlujyaPo0OoPvSYVpZLwharjd9NANV+/uOvFVqQ8PmqsLxY1+w
- ilJA==
-X-Gm-Message-State: AOJu0YzNps0bbI0VrtZ0a43/43z3nz1evHyqzoHe15FlT7iObHLYvoae
- jOjNqMOrhBTwTpUq75kIEf5FCc7ysgyBVQA2BsM=
-X-Google-Smtp-Source: AGHT+IHJWwAXxoXdxAzvV5vWOdr67TSzfQfJsMhQWD2I7E8ppmqlgn6KgqN3Vm2kkhIIF9DT+dK67MPH4xJGAJcJCK0=
-X-Received: by 2002:a05:6402:1347:b0:530:9e59:5795 with SMTP id
- y7-20020a056402134700b005309e595795mr51220edw.4.1695757256359; Tue, 26 Sep
- 2023 12:40:56 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695757367; x=1696362167;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ylRB+o0Qkrun1yi4fSnYM174Q1wG3Ph+hurLuy8H7Hg=;
+ b=C2T456YTGTlOBgqsri3Agon0lSs4lYTpdblYdzVSCDN+q5afHggN36VYYYVjIA1iQh
+ 9XhWf8uydGl4VGgmJDzDCbXiZVeGlKQn6jojpZksH9dlv+O3q5cG/Nlolk3vrOPWBR0v
+ IhrhyecOr9GecSxHURclCt92ROPekSCrf+EhhaKJWeR32WpDmCgRjOKXqTAinIct3Q+N
+ G69ki6PqA1iqwaikGZB++RUJ6DeArJMp3N9g8W66JdPwsMbeLYpXOsqzd2qcr5ZZR8p7
+ 1p6s/bJyMemTXD6yST7Uv5aV5DdJ00DvoMb59l62aBOGuGtN0YtLpWcPL8supTcAr8Ti
+ /gFg==
+X-Gm-Message-State: AOJu0YyCNUEFDTxUKFToDRscu+2QGllpcRQDJCIC5eVX/iqaFHxUztdS
+ 1L/DPzXf8IxQf/6siCvJJeIT4g==
+X-Google-Smtp-Source: AGHT+IFzCUeJ4+/f6cMQn/wpsFZyt5uO+MfysuCHFTtVfIOOSW4N6mcQ3ugSwBAMbKLYPMLI3Tso2g==
+X-Received: by 2002:a05:6e02:1d0c:b0:351:50f1:1f98 with SMTP id
+ i12-20020a056e021d0c00b0035150f11f98mr3806231ila.32.1695757367326; 
+ Tue, 26 Sep 2023 12:42:47 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:1da0:a3ce:7aae:e9fa])
+ by smtp.gmail.com with ESMTPSA id
+ g6-20020a056e02130600b0035134f1a240sm1961451ilr.86.2023.09.26.12.42.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 26 Sep 2023 12:42:47 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: devicetree@vger.kernel.org
+Cc: Mark Rutland <mark.rutland@arm.com>, Rob Herring <robh@kernel.org>,
+ Lean Sheng Tan <sheng.tan@9elements.com>,
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, Guo Dong <guo.dong@intel.com>,
+ Tom Rini <trini@konsulko.com>, ron minnich <rminnich@gmail.com>,
+ Gua Guo <gua.guo@intel.com>, Chiu Chasel <chasel.chiu@intel.com>,
+ linux-acpi@vger.kernel.org, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ard Biesheuvel <ardb@kernel.org>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v7 1/2] schemas: memory: Add ECC properties
+Date: Tue, 26 Sep 2023 13:42:38 -0600
+Message-ID: <20230926194242.2732127-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 MIME-Version: 1.0
-References: <CAJaLiFw67ztCo5TY=TPQneYgE5q6RHnj_XbnukQD=qhec3oRdg@mail.gmail.com>
- <CAPnjgZ3T8TOQbQKuy3wwfgb2K3sG5RDQdZ2zOxYT62XgGmVezg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3T8TOQbQKuy3wwfgb2K3sG5RDQdZ2zOxYT62XgGmVezg@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Tue, 26 Sep 2023 12:40:44 -0700
-Message-ID: <CAJaLiFwx0j6Knthtgdy-wGDxaHYDuYEUws2LAkt05stc3f3ZBw@mail.gmail.com>
-Subject: Re: bootstd: Scanning for USB bootflow will remove existing SCSI
- bootflow
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,125 +92,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Some memories provide ECC detection and/or correction. For software which
+wants to check memory, it is helpful to see which regions provide this
+feature.
 
-On Tue, Sep 26, 2023 at 4:37=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
->
-> Hi Tony,
->
-> On Mon, 25 Sept 2023 at 14:02, Tony Dinh <mibodhi@gmail.com> wrote:
-> >
-> > Hi Simon,
-> >
-> > Here is an observation during testing the bootflow command.
-> >
-> > If there is a SCSI bootflow, scanning for USB bootflow will remove that=
- existing
-> > SCSI bootflow. To bring it back, I scanned for SCSI bootflow again, and=
- it was
-> > back to normal. Perhaps there is some kind of indexing problem?
->
-> Yes that's right. The 'botflow scan' command is not additive. The
-> first thing it does is removing existing bootflows.
+Add this as a property of the /memory nodes, since it presumably follows
+the hardware-level memory system.
 
-Thanks for clarifying that. I assumed it is additive, because the
-existing USB bootflow was not removed when I did a "bootflow scan
-scsi" immediately after (see the end of the log).
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Thanks,
-Tony
+Changes in v7:
+- Drop unnecessary |
+- Add a blank line between properties
 
->
-> >
-> > Please see the log below after the break.
-> >
-> > All the best,
-> > Tony
-> >
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > <BEGIN LOG>
-> >
-> > U-Boot 2023.10-rc4-tld-1-00044-g9c21b2a350-dirty (Sep 18 2023 - 12:16:5=
-9 -0700)
-> > Thecus N2350
-> >
-> > <snip>
-> >
-> > N2350 > env def -a
-> > ## Resetting to default environment
-> >
-> > N2350 > bootflow scan scsi
-> > pcie0.0: Link down
-> > pcie1.0: Link down
-> > scanning bus for devices...
-> > SATA link 0 timeout.
-> > Target spinup took 0 ms.
-> > AHCI 0001.0000 32 slots 2 ports 6 Gbps 0x3 impl SATA mode
-> > flags: 64bit ncq led only pmp fbss pio slum part sxs
-> >   Device 0: (1:0) Vendor: ATA Prod.: ST750LX003-1AC15 Rev: SM12
-> >             Type: Hard Disk
-> >             Capacity: 715404.8 MB =3D 698.6 GB (1465149168 x 512)
-> > ** File not found /boot/boot.bmp **
-> >
-> > N2350 > bootflow l
-> > Showing all bootflows
-> > Seq  Method       State   Uclass    Part  Name                      Fil=
-ename
-> > ---  -----------  ------  --------  ----  ------------------------
-> > ----------------
-> >   0  script       ready   scsi         1  ahci_scsi.id1lun0.bootdev
-> > /boot/boot.scr
-> > ---  -----------  ------  --------  ----  ------------------------
-> > ----------------
-> > (1 bootflow, 1 valid)
-> >
-> > N2350 > bootflow scan usb
-> > Bus usb@58000: USB EHCI 1.00
-> > Bus usb3@f0000: MVEBU XHCI INIT controller @ 0xf10f4000
-> > Register 2000120 NbrPorts 2
-> > Starting the controller
-> > USB XHCI 1.00
-> > Bus usb3@f8000: MVEBU XHCI INIT controller @ 0xf10fc000
-> > Register 2000120 NbrPorts 2
-> > Starting the controller
-> > USB XHCI 1.00
-> > scanning bus usb@58000 for devices... 1 USB Device(s) found
-> > scanning bus usb3@f0000 for devices... 1 USB Device(s) found
-> > scanning bus usb3@f8000 for devices... 2 USB Device(s) found
-> > ** File not found /boot/boot.bmp **
-> >
-> > N2350 > bootflow l
-> > Showing all bootflows
-> > Seq  Method       State   Uclass    Part  Name                      Fil=
-ename
-> > ---  -----------  ------  --------  ----  ------------------------
-> > ----------------
-> >   0  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
-> > /boot/boot.scr
-> > ---  -----------  ------  --------  ----  ------------------------
-> > ----------------
-> > (1 bootflow, 1 valid)
-> >
-> > N2350 > bootflow scan scsi
-> > ** File not found /boot/boot.bmp **
-> > ** File not found /boot/boot.bmp **
-> >
-> > N2350 > bootflow l
-> > Showing all bootflows
-> > Seq  Method       State   Uclass    Part  Name                      Fil=
-ename
-> > ---  -----------  ------  --------  ----  ------------------------
-> > ----------------
-> >   0  script       ready   scsi         1  ahci_scsi.id1lun0.bootdev
-> > /boot/boot.scr
-> >   1  script       ready   usb_mass_    1  usb_mass_storage.lun0.boo
-> > /boot/boot.scr
-> > ---  -----------  ------  --------  ----  ------------------------
-> > ----------------
-> > (2 bootflows, 2 valid)
-> >
-> > <END LOG>
->
-> Regards,
-> Simon
+Changes in v6:
+- Use a number of bits instead of a string property
+- Fix inidcates typo
+
+Changes in v5:
+- Redo to make this property specific to ECC
+- Provide properties both for detection and correction
+
+Changes in v3:
+- Add new patch to update the /memory nodes
+
+ dtschema/schemas/memory.yaml | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
+index 1d74410..b3bf3c9 100644
+--- a/dtschema/schemas/memory.yaml
++++ b/dtschema/schemas/memory.yaml
+@@ -35,6 +35,19 @@ patternProperties:
+           For the purpose of identification, each NUMA node is associated with
+           a unique token known as a node id.
+ 
++      ecc-detection-bits:
++        default: 0
++        description: |
++          If present, this indicates the number of bits of memory error which
++          can be detected and reported by the Error-Correction Code (ECC) memory
++          subsystem (typically 0, 1 or 2).
++
++      ecc-correction-bits:
++        default: 0
++        description: |
++          If present, this indicates the number of bits of memory error which
++          can be corrected by the Error-Correction Code (ECC) memory subsystem
++          (typically 0, 1 or 2).
+ 
+     required:
+       - device_type
+-- 
+2.42.0.515.g380fc7ccd1-goog
+
