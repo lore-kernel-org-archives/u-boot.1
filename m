@@ -4,45 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B10E8181E
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 05:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F56AE8181D
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 06:03:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18EF786B05;
-	Tue, 26 Sep 2023 07:23:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E78B86B95;
+	Tue, 26 Sep 2023 08:03:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZTBWoDic";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB5D786A7D; Tue, 26 Sep 2023 07:23:23 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EE49F86BB9; Tue, 26 Sep 2023 08:03:44 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5827486A7D
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 07:23:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD74286AF7
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 08:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=andestech.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 38Q5N8Fv014162;
- Tue, 26 Sep 2023 13:23:08 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Tue, 26 Sep 2023 13:23:05 +0800
-Date: Tue, 26 Sep 2023 13:21:50 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
-Subject: [PULL] u-boot-riscv/master
-Message-ID: <ZRJqblFTuKuSI1hS@swlinux02>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38Q63eVH018921;
+ Tue, 26 Sep 2023 01:03:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695708220;
+ bh=HpwTFCplinyoVmRn3QHNwnwbxQq5UBdiOpORD1Yc0mY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ZTBWoDicao/lCAjtIQM8XKEiDH+3XndLs104Ktd4XJKKtG4u7fyX/QtHkxXz+sn+A
+ +xvPf0Z/F0tI+05d+hP5SlvrrPK6qUnzsF4g2cAXaXTNd2MMieofh8oKL+Ny1Ltc4n
+ w6rjaQUPTP91lDfuK8bPEED3v0++afL/X9/HBWDk=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38Q63eaA106880
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 26 Sep 2023 01:03:40 -0500
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
+ Sep 2023 01:03:40 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 26 Sep 2023 01:03:40 -0500
+Received: from [10.249.141.75] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38Q63bDV054109;
+ Tue, 26 Sep 2023 01:03:38 -0500
+Message-ID: <8bff7122-fb81-1a60-350e-6ff23b7ea0df@ti.com>
+Date: Tue, 26 Sep 2023 11:33:37 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 38Q5N8Fv014162
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 0/2] arm64: ti: k3-j7: Add the ESM nodes
+To: Nishanth Menon <nm@ti.com>, Keerthy <j-keerthy@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>,
+ <u-kumar1@ti.com>
+References: <20230925132614.3747-1-j-keerthy@ti.com>
+ <20230925134226.3kx5eco6vmmn542n@palace>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20230925134226.3kx5eco6vmmn542n@palace>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,36 +82,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Keerthy
 
-The following changes since commit 15155ab0a3d1f839509bcac620bfb38f950bead6:
+On 9/25/2023 7:12 PM, Nishanth Menon wrote:
+> On 18:56-20230925, Keerthy wrote:
+>> Hi Tom,
+>>
+>> https://lore.kernel.org/linux-arm-kernel/5187c590-ee9a-4c46-b326-655f4c371aaf@linaro.org/T/#me178708007a6b3b9695ae0ff84475fa4f49f283c
+>>
+>> I have posted the ESM patches to the linux kernel device tree mailing
+>> list. These are neeeded in R5 SPL to enable watchdog support.
+>>
+>>
+>> Keerthy (2):
+>>    arm64: dts: ti: k3-j721s2: Add ESM instances
+>>    arm64: dts: ti: k3-j7200: Add MCU domain ESM instance
+>>
+>>   arch/arm/dts/k3-j7200-mcu-wakeup.dtsi  |  7 +++++++
+>>   arch/arm/dts/k3-j721s2-main.dtsi       |  7 +++++++
+>>   arch/arm/dts/k3-j721s2-mcu-wakeup.dtsi | 14 ++++++++++++++
+>>   3 files changed, 28 insertions(+)
+> Get this as part of kernel dt sync.
 
-  Merge tag 'u-boot-imx-20230923' of https://source.denx.de/u-boot/custodians/u-boot-imx (2023-09-24 17:15:31 -0400)
+Meanwhile, can i request you to post changes needed in u-boot source, 
+May as RFC or so.
 
-are available in the Git repository at:
+Thanks
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git
-
-for you to fetch changes up to 16dbe3d9d45527f67d479535a22dc4054ae93e99:
-
-  riscv: set fdtfile on VisionFive 2 (2023-09-26 10:43:02 +0800)
-
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/17879
-
-However, this patch has landed in the "next" branch.
-Could we cherry-pick this commit to have this patch on master branch ?
- 
-----------------------------------------------------------------
-
-+ Fix VisionFive2 booting issue by providing the correct FDT.
-
-----------------------------------------------------------------
-Heinrich Schuchardt (1):
-      riscv: set fdtfile on VisionFive 2
-
- arch/riscv/Kconfig                                |  1 +
- board/starfive/visionfive2/starfive_visionfive2.c | 43 +++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 42 insertions(+), 2 deletions(-)
-
-Best regards,
-Leo
