@@ -4,80 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8311E7E635
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 13:13:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93F2CE7E635
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 13:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F0DE86B70;
-	Tue, 26 Sep 2023 15:13:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E7E1E86B93;
+	Tue, 26 Sep 2023 15:33:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="khUUbFAL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="VRurpiUM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FFE186D61; Tue, 26 Sep 2023 15:13:30 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7A24186D5D; Tue, 26 Sep 2023 15:33:21 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 642E586A24
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 15:13:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E568786B76
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 15:33:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-50308217223so13911245e87.3
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 06:13:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695734007; x=1696338807; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E4L0uGrPNnh9O42gTehiwUOiklqj7+vjNuSNpV6kzo8=;
- b=khUUbFALvFIadM2GJQHaFhsiHgeTp3C7gayQcPhNObSxkBgsX6HBfseBSlGpo6wY9x
- Pt4UtGaF9iYodP4c5zyPgLdHZlzj9ziKMRa2eWvphQD+Wi8dZzbhRP/LcKawzkcq3h+H
- 8ShVyKklokxxD051O+s739F09zWEy9LGNW/PvlXLX24rly04NlMv7PcFmwZacpNpP9ou
- yyCwTe7ZsYyehaKUwq4Zp9EwYzDeKp6Vy4GsTKx+6/dxZw0aFYTpKugFE/0ItVUGPVFY
- NWn/f3DLSLGo54kknCLb9EtA/e9onn6rPcRBOr7iyEz2IXcUr6K+bL5aCP2AgZeuD6tT
- PsIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695734007; x=1696338807;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=E4L0uGrPNnh9O42gTehiwUOiklqj7+vjNuSNpV6kzo8=;
- b=aUXRZ+ikQhl37euei6TwC94Qkp43pHMzfJyYeV7B0njfMuweDE7KTvbEveISIkaYkK
- VX3JGWFFrP6V4dmpWFVy18o7X/1c7Ix4YHTEad1p8pjqyBnyJf53R118nK7Kl6RyYOZ/
- Nc1P4e+D+eQ5Kjy8fA2tf+4orLLKfY2iBLVnxdKN5YvhtiT2vlkxR/FpR6H/B5k/zE84
- vx1XdCSK576TgKlUX79CQMiaywRL/7UvqaWOmHrXdIRnX4qirPFXujtn6kxwbUhplDk2
- TXNzssDSIHbtwduvKhDFLUODH8kuDfLHLn9m2Z3EZGjrCePuM9iP73A/HjF92ZNn30Y/
- o3xw==
-X-Gm-Message-State: AOJu0YzfRaukKUTgglm39DCNrGxh6Fag0vAnr5oAmF1t8Ufu2j0CFCKy
- KFOh6KjqjyUn8X040OYPX2Z3+PUukLj5zoqZOeHybQ==
-X-Google-Smtp-Source: AGHT+IGlrk6peb06nmTmXGpGUKjASLRE4Qjbr0N4NQrLno7ovMxgHgSphX7rSeJ3EQcilYil/w7BQEOJYUH8flokmzc=
-X-Received: by 2002:a05:6512:4890:b0:503:102c:7a05 with SMTP id
- eq16-20020a056512489000b00503102c7a05mr7337636lfb.58.1695734007579; Tue, 26
- Sep 2023 06:13:27 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38QDXGFn061102;
+ Tue, 26 Sep 2023 08:33:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695735196;
+ bh=EK367VqfBPsrcgQvbN9zBVsBNcWLIIMH6vbDcjy74pA=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=VRurpiUMZYl62IPV83p994ABpFqfaFRlPrEnfpIKyZ8H9Q06i85KRV137Q5YncL3t
+ +J4rGrLeaHrn+PD23MEd9vA+nqKRglwH5aZzHNNEYQ9x8MyCOGzp9v6wBbqEE9gVII
+ 4V+JOr2S7uQXP/zjlkJODaQ64+z4Ns2uzKMvroMI=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38QDXGCb060937
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 26 Sep 2023 08:33:16 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
+ Sep 2023 08:33:15 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 26 Sep 2023 08:33:15 -0500
+Received: from [10.249.139.5] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38QDXAhd009668;
+ Tue, 26 Sep 2023 08:33:11 -0500
+Message-ID: <1973a1e4-a22b-4010-af68-b7513135a3eb@ti.com>
+Date: Tue, 26 Sep 2023 19:03:09 +0530
 MIME-Version: 1.0
-References: <20230921015730.1511373-1-sjg@chromium.org>
- <20230921015730.1511373-31-sjg@chromium.org>
- <CAC_iWjJ=-MvO5rPwmnGTbjyaqTv+VzXNq2mXmP+Az3FKaQ_Jyg@mail.gmail.com>
- <CAPnjgZ3yAYQ7V=n-4MyPiaB_JU7_wre9xOHg5K0L22a4gYBenA@mail.gmail.com>
- <CAC_iWjJBsNXguALKFKVDOnTWFH4YB6PMevt43fOyQWonitwS7w@mail.gmail.com>
- <CAPnjgZ2DFvGz6NvS5JORBLXcCk0HMLYM-HGaRhqWDzuz4ZF1Xw@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2DFvGz6NvS5JORBLXcCk0HMLYM-HGaRhqWDzuz4ZF1Xw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 26 Sep 2023 16:12:51 +0300
-Message-ID: <CAC_iWjLS62kkMOYT6UiGoL66o-CaFst1nYWv7xgH+GNyeuaz9A@mail.gmail.com>
-Subject: Re: [PATCH v2 30/32] fdt: Allow the devicetree to come from a bloblist
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>,
- Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 6/6] arm: dts: k3-j721e: Sync with v6.6-rc1
+To: Nishanth Menon <nm@ti.com>
+CC: <trini@konsulko.com>, <sjg@chromium.org>, <u-boot@lists.denx.de>,
+ <vigneshr@ti.com>, <u-kumar1@ti.com>, <reidt@ti.com>,
+ <m-chawdhry@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>,
+ <gadiyar@ti.com>, <a-nandan@ti.com>, <vaishnav.a@ti.com>,
+ <b-kapoor@ti.com>, <bb@ti.com>, <s-vadapalli@ti.com>
+References: <20230922103954.3454891-1-n-francis@ti.com>
+ <20230922103954.3454891-7-n-francis@ti.com>
+ <20230925140230.c6pr7hxjhxyalh2z@carpentry>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20230925140230.c6pr7hxjhxyalh2z@carpentry>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,163 +85,250 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Nishanth
 
-[...]
+On 25-Sep-23 7:32 PM, Nishanth Menon wrote:
+> On 16:09-20230922, Neha Malcom Francis wrote:
+>> Sync k3-j721e DTS with kernel.org v6.6-rc1.
+> 
+> Give a summary of changes here - for example hbmc was disabled.
+> 
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   .../k3-j721e-common-proc-board-u-boot.dtsi    |  153 +--
+>>   arch/arm/dts/k3-j721e-common-proc-board.dts   |  513 ++++++---
+>>   arch/arm/dts/k3-j721e-main.dtsi               | 1018 +++++++++++++++--
+>>   arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  305 ++++-
+>>   .../arm/dts/k3-j721e-r5-common-proc-board.dts |  325 +-----
+>>   arch/arm/dts/k3-j721e-r5-sk.dts               |  529 +--------
+>>   arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  184 +--
+>>   arch/arm/dts/k3-j721e-sk.dts                  |  673 +++++++----
+>>   arch/arm/dts/k3-j721e-som-p0.dtsi             |  217 ++--
+>>   arch/arm/dts/k3-j721e-thermal.dtsi            |   75 ++
+>>   arch/arm/dts/k3-j721e.dtsi                    |   32 +-
+>>   11 files changed, 2380 insertions(+), 1644 deletions(-)
+>>   create mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
+>>
+>> diff --git a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
+>> index 540c847eb3..64908c2056 100644
+>> --- a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
+>> @@ -3,83 +3,42 @@
+>>    * Copyright (C) 2018 Texas Instruments Incorporated - http://www.ti.com/
+>>    */
+> 
+> [...]
+> 
+>> +&wkup_uart0_pins_default {
+>> +	bootph-pre-ram;
+>> +};
+>> +
+>> +&mcu_uart0_pins_default {
+>> +	bootph-pre-ram;
+>> +};
+> 
+> You need this only for R5, correct? then, why not move those two to R5
+> dts?
+> 
+>> +
+>> +&main_uart0_pins_default {
+>> +	bootph-pre-ram;
+>>   };
+>>   
+>>   &main_usbss0_pins_default {
+>> @@ -148,19 +114,6 @@
+>>   	bootph-pre-ram;
+>>   };
+>>   
+>> -&mcu_cpsw {
+>> -	reg = <0x0 0x46000000 0x0 0x200000>,
+>> -	      <0x0 0x40f00200 0x0 0x2>;
+>> -	reg-names = "cpsw_nuss", "mac_efuse";
+>> -	/delete-property/ ranges;
+>> -
+>> -	cpsw-phy-sel@40f04040 {
+>> -		compatible = "ti,am654-cpsw-phy-sel";
+>> -		reg= <0x0 0x40f04040 0x0 0x4>;
+>> -		reg-names = "gmii-sel";
+>> -	};
+>> -};
+>> -
+>>   &main_mmc1_pins_default {
+>>   	bootph-pre-ram;
+>>   };
+>> @@ -169,8 +122,14 @@
+>>   	bootph-pre-ram;
+>>   };
+>>   
+>> +&wkup_uart0 {
+>> +	bootph-pre-ram;
+>> +	status = "okay";
+>> +};
+>> +
+>>   &wkup_i2c0 {
+>>   	bootph-pre-ram;
+>> +	status = "okay";
+>>   };
+>>   
+>>   &main_i2c0 {
+>> @@ -181,6 +140,10 @@
+>>   	bootph-pre-ram;
+>>   };
+>>   
+>> +&main_esm {
+>> +	bootph-pre-ram;
+>> +};
+>> +
+>>   &exp2 {
+>>   	bootph-pre-ram;
+>>   };
+>> @@ -194,11 +157,7 @@
+>>   };
+>>   
+>>   &hbmc {
+>> -	bootph-pre-ram;
+>> -
+>> -	flash@0,0 {
+>> -		bootph-pre-ram;
+>> -	};
+>> +	status = "disabled";
+> OK - but then why have the node? or &hbmc_mux or the mux?
+>>   };
+>>   
+>>   &hbmc_mux {
+>> @@ -244,31 +203,3 @@
+>>   &main_r5fss1 {
+>>   	ti,cluster-mode = <0>;
+> 
+> I don't understand the override here.
+> 
+> 
+> [...]
+> 
+>> diff --git a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+>> index 7bb5ce775c..950264ee16 100644
+>> --- a/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+>> +++ b/arch/arm/dts/k3-j721e-r5-common-proc-board.dts
+>> @@ -9,19 +9,17 @@
+>>   #include "k3-j721e-ddr-evm-lp4-4266.dtsi"
+>>   #include "k3-j721e-ddr.dtsi"
+>>   #include "k3-j721e-common-proc-board-u-boot.dtsi"
+>> -#include <dt-bindings/phy/phy-cadence.h>
+>>   
+> [...]
+>>   
+>> -&cbass_main {
+>> -	main_esm: esm@700000 {
+>> -		compatible = "ti,j721e-esm";
+>> -		reg = <0x0 0x700000 0x0 0x1000>;
+>> -		ti,esm-pins = <344>, <345>;
+>> -		bootph-pre-ram;
+>> -	};
+>> +&mcu_timer0 {
+>> +	status = "okay";
+>> +	clock-frequency = <250000000>;
+> Document why clock-frequency
+> 
+>> +	bootph-pre-ram;
+>>   };
+>>   
+>>   
+> 
+> [...]
+> 
+>>   &mcu_uart0 {
+>> -	/delete-property/ power-domains;
+>> -	/delete-property/ clocks;
+>> -	/delete-property/ clock-names;
+>> -	pinctrl-names = "default";
+>> -	pinctrl-0 = <&mcu_uart0_pins_default>;
+>> -	status = "okay";
+>>   	clock-frequency = <48000000>;
+> 
+> I have'nt seen us needing this elsewhere.
+> 
+>>   };
+>>   
+>> -&main_uart0 {
+>> -	pinctrl-names = "default";
+>> -	pinctrl-0 = <&main_uart0_pins_default>;
+>> -	status = "okay";
+>> -	power-domains = <&k3_pds 146 TI_SCI_PD_SHARED>;
+>> -};
+>> -
+>>   &main_sdhci0 {
+>> -	/delete-property/ power-domains;
+>> -	/delete-property/ assigned-clocks;
+>> -	/delete-property/ assigned-clock-parents;
+>> -	clock-names = "clk_xin";
+>> -	clocks = <&clk_200mhz>;
+>> -	ti,driver-strength-ohm = <50>;
+>> -	non-removable;
+>> -	bus-width = <8>;
+>> +	clock-frequency = <200000000>;
+> 
+> I have'nt seen us needing this elsewhere.
+> 
+>>   };
+>>   
+>>   &main_sdhci1 {
+>> -	/delete-property/ power-domains;
+>> -	/delete-property/ assigned-clocks;
+>> -	/delete-property/ assigned-clock-parents;
+>> -	pinctrl-names = "default";
+>> -	pinctrl-0 = <&main_mmc1_pins_default>;
+>> -	clock-names = "clk_xin";
+>> -	clocks = <&clk_200mhz>;
+>> -	ti,driver-strength-ohm = <50>;
+>> +	clock-frequency = <19200000>;
+> 
+> I have'nt seen us needing this elsewhere.
+> 
+>>   };
+>>   
+>>   &wkup_i2c0 {
+>> @@ -293,97 +122,19 @@
+> 
+> I dont like the inclusion of tps659413a which is not in upstream
+> - document that in commit message.
+> 
+>>   };
+>>   
+>>   };
+> 
+> [...]
+> 
+>>   
+>>   &mcu_ringacc {
+>> @@ -393,31 +144,3 @@
+>>   &mcu_udmap {
+>>   	ti,sci = <&dm_tifs>;
+>>   };
+> 
+> Move the ra and udmap nodes ahead of the peripherals.
+> 
+> 	[...]
+> 
+>> diff --git a/arch/arm/dts/k3-j721e-r5-sk.dts b/arch/arm/dts/k3-j721e-r5-sk.dts
+>> index 1cc64d07f7..0274465fa4 100644
+>> --- a/arch/arm/dts/k3-j721e-r5-sk.dts
+>> +++ b/arch/arm/dts/k3-j721e-r5-sk.dts
+> 
+> Unrelated to this patch: I noticed also that the DDR configuration for
+> J721e-sk is stale (0.6 rev of DDR tool Vs 0.10 for EVM)
+> 
+> 
+> For SK's R5 dts and u-boot.dtsi:
+> The above pattern of comments from EVM repeat on SK as well, I will skip
+> repeating the comments.
+> 
+> [...]
+> 
 
-> > > >
-> > > > So, instead of adding OF_BLOBLIST, just move this code under OF_BOARD,
-> > > > inside an IS_ENABLED(BLOBLIST) check. If a bloblist is required and
-> > > > the previous stage loader is supposed to provide a DT we can just
-> > > > throw an error and stop booting
-> > >
-> > > This is the bit I don't get.
-> > >
-> > > The OF_BOARD thing is a hack, in that the board can do what it likes.
-> > > It is our way of handling board-specific mechanisms.
-> > >
-> > > But I am wanting a standard mechanism, i.e. like 'standard passage', a
-> > > way of passing the DT through the phases.
-> > >
-> > > If I put this under OF_BOARD, then the board gets to override the
-> > > mechanism, so which is it?
-> >
-> > No, it's the other way around in my head.  OF_BOARD description is 'a
-> > previous stage loader hands me over the DT', which is a superset of
-> > the bloblist.
-> > Whether it comes in a firmware handoff format, or a hacky register the
-> > previous bootloader filled in is a detail we have to deal with and we
-> > need to keep backwards compatibility.
-> >
-> > Maybe adding a coding snip would help
-> > if (IS_ENABLED(CONFIG_OF_BOARD)) {
-> >     if (CONFIG_IS_ENABLED(BLOBLIST)) { <- This instead of OF_BLOBLIST
-> >         ret = bloblist_maybe_init();
-> >         if (ret)
-> >             return ret;
-> >         /* Dynamically scan for a DT in the bloblist. */
-> >         gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> >         if (!gd->fdt_blob) {
-> >             printf("Not FDT found in bloblist\n");
-> >             bloblist_show_list();
-> >            // We can choose to not return an error here and keep
-> > scanning in case the DT is in a register, but I am fine with both
-> >             return -ENOENT;
-> >         }
-> >        gd->fdt_src = FDTSRC_BLOBLIST;
-> >        bloblist_show_list();
-> >        log_debug("Devicetree is in bloblist at %p\n", gd->fdt_blob);
-> >       // We can also bail out of this entirely if we do find a DT via
-> > a bloblist.
-> >      } else {
-> >          gd->fdt_blob = board_fdt_blob_setup(&ret);
-> >          if (ret)
-> >              return ret;
-> >          gd->fdt_src = FDTSRC_BOARD;
-> >     }
-> > }
-> >
-> > I haven't even compiled the code above, but it should give you a
-> > better idea of what I am suggesting
->
-> OK I see...yes that is along the lines of what I thought you meant.
->
-> But OF_BOARD does not mean 'previous stage loader hands me over the
-> DT'. I means call board_fdt_blob_setup() which could do anything. If
-> some boards use that function to implement getting a DT from the prior
-> stage, that's fine, but it isn't limited to that.
+Thanks for reviewing, all are valid points. Regarding why 
+clock-frequency is mentioned for a bunch of peripherals, I will be 
+looking into it and accordingly posting v4.
 
-I think it is limited. The help message says 'Provider of DTB for DT
-control' and OF_BOARD help message is 'Provided by the board (e.g a
-previous loader) at runtime '.
-In fact, that's exactly what I tried to clean up with commit
-e7fb789612e39.  Sandbox had its special OF_HOSTFILE for the DT.  We
-cleaned that up and then reintroduced it with a different name in
-commit 275b4832f6bf91c.
-
-In any case, if people want to do 'more' we have
-CONFIG_OF_BOARD_SETUP/FIXUP which should be used instead for other
-platform-specific stuff.  While at it OF_PRIOR_STAGE is a much better
-name that OF_BOARD.  So we could get rid of OF_PRIOR_STAGE and rename
-OF_BOARD to that.
-
-The function name that is called in the setup phase is
-board_fdt_blob_setup(), so it's explicitly targeting the fdt setup, or
-at least that's what the name suggets. Grepping for CONFIG_OF_BOARD
-matches in
-board/AndesTech/ae350/ae350.c
-board/armltd/vexpress64/vexpress64.c
-board/raspberrypi/rpi/rpi.c
-board/sifive/unleashed/unleashed.c
-board/sifive/unmatched/unmatched.c
-board/starfive/visionfive2/starfive_visionfive2.c
-board/xilinx/common/board.c:
-All these just use it to setup the DT, apart from the rpi which
-additionally sets up some memory for the DT.
-
-Apart from that it's used on a few platform drivers to setup so DM
-flags (most of them set DM_FLAG_PRE_RELOC), but we can easily change
-that and use The only affected files are
-drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-drivers/serial/serial_bcm283x_mu.c
-drivers/serial/serial_bcm283x_pl011.c
-
-So making OF_BOARD do the right thing is trivial and I can work with
-you on that.  I don't think it's too much effort anyway
-
->
-> There is an HAS_PRIOR_STAGE option which sets OF_BOARD at present. But
-> that doesn't seem right in the long term.
->
-> The goal here is to standardise the passing of DT from a prior stage,
-> so that all boards (except perhaps the dark child rpi) use standard
-> passage (bloblist) to do so. That should not depend on OF_BOARD and in
-> fact I would like to make OF_BOARD the exception, used when
-> OF_BLOBLIST doesn't suit.
-
-We are on the same page regarding the standardization.  But I think
-shoehorning an OF_BLOBLIST just papers over the problem.
-The board should ideally have 2 options
-1. a previous loader gives me the DT in X random ways (one of them is
-the bloblist)
-2. U-Boot provides it because it was built with it
-A user can always load his own special DT if he wants to, but that's
-done at a later stage.
-
-But if we clean it up properly we can
-1. Do Not allow people to sneak in random options in OF_BOARD or
-whatever and keep the options sane and clean
-2. enable BLOBLIST by default in all supported platforms and push to
-make it the default.  We can even be stricter and crash on boot if
-BLOBLIST is selected and we can't find the DT in there.  That would
-have a similar effect to selecting it as a Kconfig option
-
-Thanks
-/Ilias
-
-
->
-> >
-> > Hope that helps
-> > /Ilias
-> > >
-> > > You say 'we can just throw and error' but what is the error? If the DT
-> > > is provided via the bloblist, there is no error. If it is not, I
-> > > already show an error and halt as you can see in the code below.
-> > >
-> > > I guess I'm just confused about what you are saying here.
-> > >
-> > > >
-> > > >
-> > > > > +               gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> > > > > +               if (!gd->fdt_blob) {
-> > > > > +                       printf("Not FDT found in bloblist\n");
-> > > > > +                       bloblist_show_list();
-> > > > > +                       return -ENOENT;
-> > > > > +               }
-> > > >
-> > > > [...]
-> > > >
->
-> Regards,
-> Simon
+Thanking You
+Neha Malcom Francis
