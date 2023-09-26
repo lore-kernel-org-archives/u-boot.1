@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F067E7D240
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 06:59:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F56EE7D240
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 06:59:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D67EB86D09;
-	Tue, 26 Sep 2023 08:58:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 468EB86D4F;
+	Tue, 26 Sep 2023 08:58:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SAvaK/tp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bF65pAk9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7847986D42; Tue, 26 Sep 2023 08:58:34 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 744E686D4A; Tue, 26 Sep 2023 08:58:36 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE56F86D47
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 08:58:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31BCE86D53
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 08:58:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3ae473c0bd6so399743b6e.0
- for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 23:58:31 -0700 (PDT)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-d849df4f20fso2093554276.1
+ for <u-boot@lists.denx.de>; Mon, 25 Sep 2023 23:58:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695711510; x=1696316310; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1695711513; x=1696316313; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2rkVWVPg//wDy6E/QDf0dDFeyFNwMuQ2Qpw4+CUtJYE=;
- b=SAvaK/tpTDfQKj8yghXrn0WV6o7olZ0HhvvYOwTVC0N0lTChCQNavxCKIBjKgjNybM
- l443OUzsOW6Mlzv+ZpqIuStqG1QG0t6PAbwTUrLCERDR4XtHA3UZ819KsP1vz2v/RCwC
- ouzPhJiYMbvcfiSA9vaHsVG2q2bfleu7wD9NeglsbkgxKgz8Oh7Gxw2Crpe923WOZLGe
- FFmuto276xpvBmf0r7hATUBbeQJCBdY5nrK19GmP4PFU3N7NUgiP36t1bOv3NYxNIRuT
- MD0nzh/l0hdBCAxr37TPaRPM9bRhzC6OOYI3kP+l6vbSsGMVpNUKbv1Yw1TbckuMc5qg
- IWNw==
+ bh=yTq0+4rs1fOEBlwVehGWVMd6VipT0yIG14Yr57pn63k=;
+ b=bF65pAk9NIr5w3abZ467g+K1SwMj7yFqeZp1ruWPLdclL1HnnoRuYxWn4jkv/jX+8+
+ dTE+ODUciT/oV/5nBi1J5cI1tXqzDpURagH8tNOkM+H3ldy8jaceOAKa7qrvhD0xGaV0
+ EnTQz+r0jDPb7kp2kiQx2kuyw0VMOEsbbSWjnEnqFw1x8HvhiBBClX4zB+/QgdkMQ8Wm
+ Dv3aAaDyvQ0jjim9cZ7lnvbGfGeqi5+hC4u20mqNlmB4YUICwtxK+tPC//CN+mRyldQs
+ 0KO5ixZuIINDSGys00e76Unw67PDRiGA+dMMzwSGQXqyhPgjc4QTqY06JfLTJZYS/GsE
+ SuEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695711510; x=1696316310;
+ d=1e100.net; s=20230601; t=1695711513; x=1696316313;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2rkVWVPg//wDy6E/QDf0dDFeyFNwMuQ2Qpw4+CUtJYE=;
- b=ewe0eV6HQksy0Pqghs+mryAbXHOijb9NeHEj33kz/ys3YU39l8OP4crZgp7/aBtIQr
- AYFuCo+EYwDFVZ92SXmckaG5Om6Sve8Ex0wqUWL6txmo79TEXTekiTUAZ3KH1tQjib7D
- X2UMll9pRixDHx3oy/2dP5wshlw6TC0tEXatk19YQavGkYGC/2BBydqVToQkJdEwYbiD
- CNAIFSmBoaYz8UArDmqy+z5Q3t8rMGasV6C4FhUnfnW7m9zAj/QfHu2Xs9Pfiv05wbEb
- 36K+Rbjd8/cVB1eMYV1yQBQu5fEMkBO7m+zrER8IS+wMLTkYaQQeQErXUmqiCreRIp/Z
- yqTA==
-X-Gm-Message-State: AOJu0YygrKpqdtDOO5kgS0wLGZ2BNIHi+gYKxiKwsccEO73Vr3sBLiSG
- NH4vziJrdSVfyqYxfLOj5EJdTQ==
-X-Google-Smtp-Source: AGHT+IHmAz9chuPgkS5znFuTXsy9aS7OSOSAqnzKtaG23WkgT8IcRbh3rzdyze8/n+WNjKGNimolww==
-X-Received: by 2002:a9d:7f83:0:b0:6b9:d3bd:3985 with SMTP id
- t3-20020a9d7f83000000b006b9d3bd3985mr8840578otp.1.1695711510530; 
- Mon, 25 Sep 2023 23:58:30 -0700 (PDT)
+ bh=yTq0+4rs1fOEBlwVehGWVMd6VipT0yIG14Yr57pn63k=;
+ b=qg/slTYMOojbVqXyytimBT2c9zvuoI2w/Wsbv8nOw1xy801Jc8wen8W09VFN7F5mFE
+ X0rRTXO/qpuddQOYUreObA47CwcfpRZRt/a/1mtxXh5gpd+ZuzgtyLYyTMflpim5h7Ne
+ f/f6OBt3pfIzr2lJbZqgHYJA5Zw7caBykhqBHa0QW4mcviZMDbPQC/P67dERBoweFee+
+ fDwuwpHIWlj2k0UkUyMbbJa9verEGlMZS7kBSFrQCsX6OeKDGBd7/S85x3L+1plINAbO
+ SmYmwPE+g6UGKz7nHNDjpU//TstOphoRbPey93zO+YmagyTClRYv0S9pmZQ/EFQsOgfa
+ ad4w==
+X-Gm-Message-State: AOJu0Yx+FqEWAcQCCEqwVmsg4Ugt8uPbBKfq0VHe0WLOT3XQLNlMDXA4
+ aOagIXRSH85hd/CXHkG6d2ie9g==
+X-Google-Smtp-Source: AGHT+IHaQetkIlzFZmWC00k+Ovb2wClRT4RA8mXDz6rMcuFAAYUUIYinQgjKDi7phbEAkwfMWTHYAA==
+X-Received: by 2002:a25:ce54:0:b0:d78:228f:1068 with SMTP id
+ x81-20020a25ce54000000b00d78228f1068mr5596118ybe.3.1695711512822; 
+ Mon, 25 Sep 2023 23:58:32 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:6585:aea6:5002:a825])
  by smtp.gmail.com with ESMTPSA id
- s2-20020a639242000000b0057825bd3448sm8758874pgn.51.2023.09.25.23.58.28
+ s2-20020a639242000000b0057825bd3448sm8758874pgn.51.2023.09.25.23.58.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Sep 2023 23:58:30 -0700 (PDT)
+ Mon, 25 Sep 2023 23:58:32 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v5 09/16] test: dm: simplify SCMI unit test on sandbox
-Date: Tue, 26 Sep 2023 15:57:43 +0900
-Message-Id: <20230926065750.734440-10-takahiro.akashi@linaro.org>
+Subject: [PATCH v5 10/16] firmware: scmi: install base protocol to SCMI agent
+Date: Tue, 26 Sep 2023 15:57:44 +0900
+Message-Id: <20230926065750.734440-11-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230926065750.734440-1-takahiro.akashi@linaro.org>
 References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
@@ -94,271 +94,299 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adding SCMI base protocol makes it inconvenient to hold the agent instance
-(udevice) locally since the agent device will be re-created per each test.
-Just remove it and simplify the test flows.
-The test scenario is not changed at all.
+SCMI base protocol is mandatory, and once SCMI node is found in a device
+tree, the protocol handle (udevice) is unconditionally installed to
+the agent. Then basic information will be retrieved from SCMI server via
+the protocol and saved into the agent instance's local storage.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
 v4
-* move this patch forward in this series before installing base
-  protocol to avoid collapsing existing SCMI test.
+* remove 'scmi_agent' global variable as it is never utilized
+* add 'agent' variable in scmi_bind_protocols()
+* return an appropriate error (EPROTO) when
+  scmi_base_discover_list_protocols() fails
+* fix misc typos
+v3
+* typo fix: add '@' for argument name in function description
+* eliminate dev_get_uclass_plat()'s repeated in inline
+* modify the code for dynamically allocated sub-vendor/agent names
+v2
+* use helper functions, removing direct uses of ops
 ---
- arch/sandbox/include/asm/scmi_test.h       |  6 +-
- drivers/firmware/scmi/sandbox-scmi_agent.c | 20 +------
- test/dm/scmi.c                             | 64 +++++++---------------
- 3 files changed, 26 insertions(+), 64 deletions(-)
+ drivers/firmware/scmi/scmi_agent-uclass.c | 127 ++++++++++++++++++++--
+ include/scmi_agent-uclass.h               |  66 +++++++++++
+ 2 files changed, 183 insertions(+), 10 deletions(-)
 
-diff --git a/arch/sandbox/include/asm/scmi_test.h b/arch/sandbox/include/asm/scmi_test.h
-index 75cb462a5584..ccb0df6c148f 100644
---- a/arch/sandbox/include/asm/scmi_test.h
-+++ b/arch/sandbox/include/asm/scmi_test.h
-@@ -98,9 +98,11 @@ unsigned int sandbox_scmi_channel_id(struct udevice *dev);
- 
- /**
-  * sandbox_scmi_service_ctx - Get the simulated SCMI services context
-+ * sandbox_scmi_agent_ctx - Get the simulated SCMI agent context
-+ * @dev:	Reference to the test agent
-  * @return:	Reference to backend simulated resources state
-  */
--struct sandbox_scmi_service *sandbox_scmi_service_ctx(void);
-+struct sandbox_scmi_agent *sandbox_scmi_agent_ctx(struct udevice *dev);
- 
- /**
-  * sandbox_scmi_devices_ctx - Get references to devices accessed through SCMI
-@@ -114,7 +116,7 @@ inline unsigned int sandbox_scmi_channel_id(struct udevice *dev);
- 	return 0;
- }
- 
--static inline struct sandbox_scmi_service *sandbox_scmi_service_ctx(void)
-+static struct sandbox_scmi_agent *sandbox_scmi_agent_ctx(struct udevice *dev)
- {
- 	return NULL;
- }
-diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
-index 716bbf97d5c9..eb567dd900d7 100644
---- a/drivers/firmware/scmi/sandbox-scmi_agent.c
-+++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
-@@ -86,11 +86,9 @@ static struct sandbox_scmi_voltd scmi_voltd[] = {
- 	{ .id = 1, .voltage_uv = 1800000 },
+diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
+index 482cdaf0c6db..b1a9c36310c1 100644
+--- a/drivers/firmware/scmi/scmi_agent-uclass.c
++++ b/drivers/firmware/scmi/scmi_agent-uclass.c
+@@ -38,12 +38,6 @@ static const struct error_code scmi_linux_errmap[] = {
+ 	{ .scmi = SCMI_PROTOCOL_ERROR, .errno = -EPROTO, },
  };
  
--static struct sandbox_scmi_service sandbox_scmi_service_state;
+-/*
+- * NOTE: The only one instance should exist according to
+- * the current specification and device tree bindings.
+- */
+-struct udevice *scmi_agent;
 -
--struct sandbox_scmi_service *sandbox_scmi_service_ctx(void)
-+struct sandbox_scmi_agent *sandbox_scmi_agent_ctx(struct udevice *dev)
+ struct udevice *scmi_get_protocol(struct udevice *dev,
+ 				  enum scmi_std_protocol id)
  {
--	return &sandbox_scmi_service_state;
-+	return dev_get_priv(dev);
+@@ -57,6 +51,9 @@ struct udevice *scmi_get_protocol(struct udevice *dev,
+ 	}
+ 
+ 	switch (id) {
++	case SCMI_PROTOCOL_ID_BASE:
++		proto = priv->base_dev;
++		break;
+ 	case SCMI_PROTOCOL_ID_CLOCK:
+ 		proto = priv->clock_dev;
+ 		break;
+@@ -101,6 +98,9 @@ static int scmi_add_protocol(struct udevice *dev,
+ 	}
+ 
+ 	switch (proto_id) {
++	case SCMI_PROTOCOL_ID_BASE:
++		priv->base_dev = proto;
++		break;
+ 	case SCMI_PROTOCOL_ID_CLOCK:
+ 		priv->clock_dev = proto;
+ 		break;
+@@ -238,6 +238,83 @@ int devm_scmi_process_msg(struct udevice *dev, struct scmi_msg *msg)
+ 	return scmi_process_msg(protocol->parent, priv->channel, msg);
  }
  
- static void debug_print_agent_state(struct udevice *dev, char *str)
-@@ -985,16 +983,8 @@ static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 
- static int sandbox_scmi_test_remove(struct udevice *dev)
- {
--	struct sandbox_scmi_agent *agent = dev_get_priv(dev);
--
--	if (agent != sandbox_scmi_service_ctx()->agent)
--		return -EINVAL;
--
- 	debug_print_agent_state(dev, "removed");
- 
--	/* We only need to dereference the agent in the context */
--	sandbox_scmi_service_ctx()->agent = NULL;
--
- 	return 0;
- }
- 
-@@ -1002,9 +992,6 @@ static int sandbox_scmi_test_probe(struct udevice *dev)
- {
- 	struct sandbox_scmi_agent *agent = dev_get_priv(dev);
- 
--	if (sandbox_scmi_service_ctx()->agent)
--		return -EINVAL;
--
- 	*agent = (struct sandbox_scmi_agent){
- 		.clk = scmi_clk,
- 		.clk_count = ARRAY_SIZE(scmi_clk),
-@@ -1016,9 +1003,6 @@ static int sandbox_scmi_test_probe(struct udevice *dev)
- 
- 	debug_print_agent_state(dev, "probed");
- 
--	/* Save reference for tests purpose */
--	sandbox_scmi_service_ctx()->agent = agent;
--
- 	return 0;
- };
- 
-diff --git a/test/dm/scmi.c b/test/dm/scmi.c
-index e4fb1bc635cb..913b6aba96ba 100644
---- a/test/dm/scmi.c
-+++ b/test/dm/scmi.c
-@@ -23,22 +23,11 @@
- #include <power/regulator.h>
- #include <test/ut.h>
- 
--static int ut_assert_scmi_state_preprobe(struct unit_test_state *uts)
--{
--	struct sandbox_scmi_service *scmi_ctx = sandbox_scmi_service_ctx();
--
--	ut_assertnonnull(scmi_ctx);
--	ut_assertnull(scmi_ctx->agent);
--
--	return 0;
--}
--
- static int ut_assert_scmi_state_postprobe(struct unit_test_state *uts,
-+					  struct sandbox_scmi_agent *agent,
- 					  struct udevice *dev)
- {
- 	struct sandbox_scmi_devices *scmi_devices;
--	struct sandbox_scmi_service *scmi_ctx;
--	struct sandbox_scmi_agent *agent;
- 
- 	/* Device references to check context against test sequence */
- 	scmi_devices = sandbox_scmi_devices_ctx(dev);
-@@ -48,10 +37,6 @@ static int ut_assert_scmi_state_postprobe(struct unit_test_state *uts,
- 	ut_asserteq(2, scmi_devices->regul_count);
- 
- 	/* State of the simulated SCMI server exposed */
--	scmi_ctx = sandbox_scmi_service_ctx();
--	ut_assertnonnull(scmi_ctx);
--	agent = scmi_ctx->agent;
--	ut_assertnonnull(agent);
- 	ut_asserteq(3, agent->clk_count);
- 	ut_assertnonnull(agent->clk);
- 	ut_asserteq(1, agent->reset_count);
-@@ -63,27 +48,32 @@ static int ut_assert_scmi_state_postprobe(struct unit_test_state *uts,
- }
- 
- static int load_sandbox_scmi_test_devices(struct unit_test_state *uts,
-+					  struct sandbox_scmi_agent **ctx,
- 					  struct udevice **dev)
- {
--	int ret;
-+	struct udevice *agent_dev;
- 
--	ret = ut_assert_scmi_state_preprobe(uts);
--	if (ret)
--		return ret;
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-+					      &agent_dev));
-+	ut_assertnonnull(agent_dev);
- 
-+	*ctx = sandbox_scmi_agent_ctx(agent_dev);
-+	ut_assertnonnull(*ctx);
++/**
++ * scmi_fill_base_info - get base information about SCMI server
++ * @agent:	SCMI agent device
++ * @dev:	SCMI protocol device
++ *
++ * By using Base protocol commands, collect the base information
++ * about SCMI server.
++ *
++ * Return: 0 on success, error code on failure
++ */
++static int scmi_fill_base_info(struct udevice *agent, struct udevice *dev)
++{
++	struct scmi_agent_priv *priv = dev_get_uclass_plat(agent);
++	int ret;
 +
-+	/* probe */
- 	ut_assertok(uclass_get_device_by_name(UCLASS_MISC, "sandbox_scmi",
- 					      dev));
- 	ut_assertnonnull(*dev);
++	ret = scmi_base_protocol_version(dev, &priv->version);
++	if (ret) {
++		dev_err(dev, "protocol_version() failed (%d)\n", ret);
++		return ret;
++	}
++	/* check for required version */
++	if (priv->version < SCMI_BASE_PROTOCOL_VERSION) {
++		dev_err(dev, "base protocol version (%d) lower than expected\n",
++			priv->version);
++		return -EPROTO;
++	}
++
++	ret = scmi_base_protocol_attrs(dev, &priv->num_agents,
++				       &priv->num_protocols);
++	if (ret) {
++		dev_err(dev, "protocol_attrs() failed (%d)\n", ret);
++		return ret;
++	}
++	ret = scmi_base_discover_vendor(dev, &priv->vendor);
++	if (ret) {
++		dev_err(dev, "base_discover_vendor() failed (%d)\n", ret);
++		return ret;
++	}
++	ret = scmi_base_discover_sub_vendor(dev, &priv->sub_vendor);
++	if (ret) {
++		if (ret != -EOPNOTSUPP) {
++			dev_err(dev, "base_discover_sub_vendor() failed (%d)\n",
++				ret);
++			return ret;
++		}
++		priv->sub_vendor = "NA";
++	}
++	ret = scmi_base_discover_impl_version(dev, &priv->impl_version);
++	if (ret) {
++		dev_err(dev, "base_discover_impl_version() failed (%d)\n",
++			ret);
++		return ret;
++	}
++
++	ret = scmi_base_discover_agent(dev, 0xffffffff,
++				       &priv->agent_id, &priv->agent_name);
++	if (ret) {
++		if (ret != -EOPNOTSUPP) {
++			dev_err(dev,
++				"base_discover_agent() failed for myself (%d)\n",
++				ret);
++			return ret;
++		}
++		priv->agent_id = 0xffffffff;
++		priv->agent_name = "NA";
++	}
++
++	ret = scmi_base_discover_list_protocols(dev, &priv->protocols);
++	if (ret != priv->num_protocols) {
++		dev_err(dev, "base_discover_list_protocols() failed (%d)\n",
++			ret);
++		return -EPROTO;
++	}
++
++	return 0;
++}
++
+ /*
+  * SCMI agent devices binds devices of various uclasses depending on
+  * the FDT description. scmi_bind_protocol() is a generic bind sequence
+@@ -249,7 +326,40 @@ static int scmi_bind_protocols(struct udevice *dev)
+ 	ofnode node;
+ 	const char *name;
+ 	struct driver *drv;
+-	struct udevice *proto;
++	struct udevice *agent, *proto;
++
++	if (!uclass_get_device(UCLASS_SCMI_AGENT, 1, &agent)) {
++		/* This is a second SCMI agent */
++		dev_err(dev, "Cannot have more than one SCMI agent\n");
++		return -EEXIST;
++	}
++
++	/* initialize the device from device tree */
++	drv = DM_DRIVER_GET(scmi_base_drv);
++	name = "scmi-base.0";
++	ret = device_bind(dev, drv, name, NULL, ofnode_null(), &proto);
++	if (ret) {
++		dev_err(dev, "failed to bind base protocol\n");
++		return ret;
++	}
++	ret = scmi_add_protocol(dev, SCMI_PROTOCOL_ID_BASE, proto);
++	if (ret) {
++		dev_err(dev, "failed to add protocol: %s, ret: %d\n",
++			proto->name, ret);
++		return ret;
++	}
++
++	ret = device_probe(proto);
++	if (ret) {
++		dev_err(dev, "failed to probe base protocol\n");
++		return ret;
++	}
++
++	ret = scmi_fill_base_info(dev, proto);
++	if (ret) {
++		dev_err(dev, "failed to get base information\n");
++		return ret;
++	}
  
--	return ut_assert_scmi_state_postprobe(uts, *dev);
-+	return ut_assert_scmi_state_postprobe(uts, *ctx, *dev);
+ 	dev_for_each_subnode(node, dev) {
+ 		u32 protocol_id;
+@@ -304,9 +414,6 @@ static int scmi_bind_protocols(struct udevice *dev)
+ 		}
+ 	}
+ 
+-	if (!ret)
+-		scmi_agent = dev;
+-
+ 	return ret;
  }
  
- static int release_sandbox_scmi_test_devices(struct unit_test_state *uts,
- 					     struct udevice *dev)
- {
-+	/* un-probe */
- 	ut_assertok(device_remove(dev, DM_REMOVE_NORMAL));
+diff --git a/include/scmi_agent-uclass.h b/include/scmi_agent-uclass.h
+index 258aa0f37596..35d96069645e 100644
+--- a/include/scmi_agent-uclass.h
++++ b/include/scmi_agent-uclass.h
+@@ -5,6 +5,7 @@
+ #ifndef _SCMI_AGENT_UCLASS_H
+ #define _SCMI_AGENT_UCLASS_H
  
--	/* Not sure test devices are fully removed, agent may not be visible */
- 	return 0;
- }
++#include <scmi_protocols.h>
+ #include <dm/device.h>
  
-@@ -93,10 +83,11 @@ static int release_sandbox_scmi_test_devices(struct unit_test_state *uts,
+ struct scmi_msg;
+@@ -12,16 +13,81 @@ struct scmi_channel;
+ 
+ /**
+  * struct scmi_agent_priv - private data maintained by agent instance
++ * @version:		Version
++ * @num_agents:		Number of agents
++ * @num_protocols:	Number of protocols
++ * @impl_version:	Implementation version
++ * @protocols:		Array of protocol IDs
++ * @vendor:		Vendor name
++ * @sub_vendor:		Sub-vendor name
++ * @agent_name:		Agent name
++ * @agent_id:		Identifier of agent
++ * @base_dev:		SCMI base protocol device
+  * @clock_dev:		SCMI clock protocol device
+  * @resetdom_dev:	SCMI reset domain protocol device
+  * @voltagedom_dev:	SCMI voltage domain protocol device
   */
- static int dm_test_scmi_sandbox_agent(struct unit_test_state *uts)
- {
-+	struct sandbox_scmi_agent *ctx;
- 	struct udevice *dev = NULL;
- 	int ret;
+ struct scmi_agent_priv {
++	u32 version;
++	u32 num_agents;
++	u32 num_protocols;
++	u32 impl_version;
++	u8 *protocols;
++	u8 *vendor;
++	u8 *sub_vendor;
++	u8 *agent_name;
++	u32 agent_id;
++	struct udevice *base_dev;
+ 	struct udevice *clock_dev;
+ 	struct udevice *resetdom_dev;
+ 	struct udevice *voltagedom_dev;
+ };
  
--	ret = load_sandbox_scmi_test_devices(uts, &dev);
-+	ret = load_sandbox_scmi_test_devices(uts, &ctx, &dev);
- 	if (!ret)
- 		ret = release_sandbox_scmi_test_devices(uts, dev);
- 
-@@ -106,23 +97,18 @@ DM_TEST(dm_test_scmi_sandbox_agent, UT_TESTF_SCAN_FDT);
- 
- static int dm_test_scmi_clocks(struct unit_test_state *uts)
- {
--	struct sandbox_scmi_devices *scmi_devices;
--	struct sandbox_scmi_service *scmi_ctx;
- 	struct sandbox_scmi_agent *agent;
-+	struct sandbox_scmi_devices *scmi_devices;
- 	struct udevice *agent_dev, *clock_dev, *dev;
- 	int ret_dev;
- 	int ret;
- 
--	ret = load_sandbox_scmi_test_devices(uts, &dev);
-+	ret = load_sandbox_scmi_test_devices(uts, &agent, &dev);
- 	if (ret)
- 		return ret;
- 
- 	scmi_devices = sandbox_scmi_devices_ctx(dev);
- 	ut_assertnonnull(scmi_devices);
--	scmi_ctx = sandbox_scmi_service_ctx();
--	ut_assertnonnull(scmi_ctx);
--	agent = scmi_ctx->agent;
--	ut_assertnonnull(agent);
- 
- 	/* Sandbox SCMI clock protocol has its own channel */
- 	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-@@ -177,22 +163,17 @@ DM_TEST(dm_test_scmi_clocks, UT_TESTF_SCAN_FDT);
- 
- static int dm_test_scmi_resets(struct unit_test_state *uts)
- {
--	struct sandbox_scmi_devices *scmi_devices;
--	struct sandbox_scmi_service *scmi_ctx;
- 	struct sandbox_scmi_agent *agent;
-+	struct sandbox_scmi_devices *scmi_devices;
- 	struct udevice *agent_dev, *reset_dev, *dev = NULL;
- 	int ret;
- 
--	ret = load_sandbox_scmi_test_devices(uts, &dev);
-+	ret = load_sandbox_scmi_test_devices(uts, &agent, &dev);
- 	if (ret)
- 		return ret;
- 
- 	scmi_devices = sandbox_scmi_devices_ctx(dev);
- 	ut_assertnonnull(scmi_devices);
--	scmi_ctx = sandbox_scmi_service_ctx();
--	ut_assertnonnull(scmi_ctx);
--	agent = scmi_ctx->agent;
--	ut_assertnonnull(agent);
- 
- 	/* Sandbox SCMI reset protocol doesn't have its own channel */
- 	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-@@ -217,21 +198,16 @@ DM_TEST(dm_test_scmi_resets, UT_TESTF_SCAN_FDT);
- 
- static int dm_test_scmi_voltage_domains(struct unit_test_state *uts)
- {
--	struct sandbox_scmi_devices *scmi_devices;
--	struct sandbox_scmi_service *scmi_ctx;
- 	struct sandbox_scmi_agent *agent;
-+	struct sandbox_scmi_devices *scmi_devices;
- 	struct dm_regulator_uclass_plat *uc_pdata;
- 	struct udevice *dev;
- 	struct udevice *regul0_dev;
- 
--	ut_assertok(load_sandbox_scmi_test_devices(uts, &dev));
-+	ut_assertok(load_sandbox_scmi_test_devices(uts, &agent, &dev));
- 
- 	scmi_devices = sandbox_scmi_devices_ctx(dev);
- 	ut_assertnonnull(scmi_devices);
--	scmi_ctx = sandbox_scmi_service_ctx();
--	ut_assertnonnull(scmi_ctx);
--	agent = scmi_ctx->agent;
--	ut_assertnonnull(agent);
- 
- 	/* Set/Get an SCMI voltage domain level */
- 	regul0_dev = scmi_devices->regul[0];
++static inline u32 scmi_version(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->version;
++}
++
++static inline u32 scmi_num_agents(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->num_agents;
++}
++
++static inline u32 scmi_num_protocols(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->num_protocols;
++}
++
++static inline u32 scmi_impl_version(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->impl_version;
++}
++
++static inline u8 *scmi_protocols(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->protocols;
++}
++
++static inline u8 *scmi_vendor(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->vendor;
++}
++
++static inline u8 *scmi_sub_vendor(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->sub_vendor;
++}
++
++static inline u8 *scmi_agent_name(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->agent_name;
++}
++
++static inline u32 scmi_agent_id(struct udevice *dev)
++{
++	return ((struct scmi_agent_priv *)dev_get_uclass_plat(dev))->agent_id;
++}
++
+ /**
+  * struct scmi_transport_ops - The functions that a SCMI transport layer must implement.
+  */
 -- 
 2.34.1
 
