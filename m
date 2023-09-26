@@ -4,73 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8AD6E7E627
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 11:38:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63510E7E626
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 11:43:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B545486D7C;
-	Tue, 26 Sep 2023 13:37:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C5C5386A94;
+	Tue, 26 Sep 2023 13:42:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NW2yu5P3";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="zIYWa2NV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1C8886D73; Tue, 26 Sep 2023 13:37:50 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9833286D6E; Tue, 26 Sep 2023 13:42:57 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2E3786A33
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 13:37:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F42286A24
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 13:42:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-5041cc983f9so13927130e87.3
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 04:37:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695728268; x=1696333068; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OMrqPIBdD4b6IgCPDh/yBmcicGIHHURwwlMC6uMAtN4=;
- b=NW2yu5P3XiHHm7qFePSQV+WQUfE5FuhyHsFBQCLXsLARWwSDo5fU1uTRlbUdFN53Xw
- jlGWwml4iYQDAWw11EwVMXntN2/V3700tFKBHvQqC4CYpHVWOo3r8UtjvnBoKpj2R6EE
- UbxICAFgSioSyADwfPTR2j+zgK7o6momChHFg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695728268; x=1696333068;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=OMrqPIBdD4b6IgCPDh/yBmcicGIHHURwwlMC6uMAtN4=;
- b=NxVeCUkz+IlC9bpc2oTt9ZRa4ccbffNyeFUirrDUMN6eLlrgwadrXzKmDe8PU2ST4d
- HoKeOYeWGGin6y00rPe/Yarr2sOi3UZO16/4v69vvFz3a2NfH+KRafgaCrvGP1u15vrw
- VKY7Ws1dRU6ZX8TwqopMdQRhaPsN/eIJxGFa2n2adQRnI5bxsYKkXSxW2xlWfpsLtN2Q
- kpd+Flxes8wJWKhlLN+w3jmca3KQFIoJ1YbDgVdpKzUpgYGCM6cYtAsBpgcimfiRPZ4Z
- f/CfeCuBbhX3m3UkjwxBM7eL1TNvgzHrvLVj2uGrzrxcdDtTS65P1qeK2a582lxf8YF3
- +Swg==
-X-Gm-Message-State: AOJu0Ywb1zqf/QnfQA6p/egQI7FwEQWE2w3sQgH5STh5vP8F4D6ErSI8
- ZJtSN3WXD4718+zEHWPwdkJMDlSF50HIGIJHx4Ro8Q==
-X-Google-Smtp-Source: AGHT+IFIIr9UsluXd/u4U1Cx2ogoqQxTaybfM180BL3GK52LEyIV2Rn0O0DZ6klXMtBX226LbPLR2XTa2k5QTjEvfp0=
-X-Received: by 2002:a19:6756:0:b0:500:b88c:ea79 with SMTP id
- e22-20020a196756000000b00500b88cea79mr8080942lfj.54.1695728268069; Tue, 26
- Sep 2023 04:37:48 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=7633ac7092=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 38Q7mwtO021156; Tue, 26 Sep 2023 13:42:53 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=WxN0wYDLLNPweRFbwVmgzEqGF7hmg1o6GrIiJ0L4+G4=; b=zI
+ YWa2NVqTktW2NWVgkBpgeAcjTROg334PEAzo3cA4DyU0sVQNwY000ZKHRgryYuzc
+ TFQ5NRtdxihXhecmk6EAzff/rxWfkpZLWzBSFinSL+a77KqXSONVdHokn3VF0Ohg
+ 3pcbC+XH7f3rwFlGwekL4L3j5quefC6zGqib2KtRLEzAt0ZwZx2y5jDq2etRHpPb
+ 55q7cShlX8Ui8gi25aBe9/ISpcTK21h5Uyk+6nSwpPhSQYEbJ83Ax7ERZRD4nygu
+ FTMgDCvt5plv2tVzluGGZZc1D3rCi2mKXwKOaojGh1dB++8ZZO9oVvIgiQ22yCOl
+ WV4ZhYbKpuiMnO8FSVGg==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3t9nefme3n-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 26 Sep 2023 13:42:53 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id D75F010005A;
+ Tue, 26 Sep 2023 13:42:52 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CC6D924B8B6;
+ Tue, 26 Sep 2023 13:42:52 +0200 (CEST)
+Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 26 Sep
+ 2023 13:42:52 +0200
+Message-ID: <7a9275c2-c62a-1ba2-2810-187c09660a76@foss.st.com>
+Date: Tue, 26 Sep 2023 13:42:51 +0200
 MIME-Version: 1.0
-References: <20230921015730.1511373-1-sjg@chromium.org>
- <20230921015730.1511373-31-sjg@chromium.org>
- <CAC_iWjJ=-MvO5rPwmnGTbjyaqTv+VzXNq2mXmP+Az3FKaQ_Jyg@mail.gmail.com>
-In-Reply-To: <CAC_iWjJ=-MvO5rPwmnGTbjyaqTv+VzXNq2mXmP+Az3FKaQ_Jyg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 26 Sep 2023 05:37:36 -0600
-Message-ID: <CAPnjgZ3yAYQ7V=n-4MyPiaB_JU7_wre9xOHg5K0L22a4gYBenA@mail.gmail.com>
-Subject: Re: [PATCH v2 30/32] fdt: Allow the devicetree to come from a bloblist
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>,
- Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [RFC PATCH 2/5] ARM: dts: stm32: make the LTDC clock usable by
+ the clock driver
+Content-Language: en-US
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ <u-boot@lists.denx.de>
+CC: <linux-amarula@amarulasolutions.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20230903205703.662080-1-dario.binacchi@amarulasolutions.com>
+ <20230903205703.662080-3-dario.binacchi@amarulasolutions.com>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20230903205703.662080-3-dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-09-26_08,2023-09-25_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,132 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
 
-On Mon, 25 Sept 2023 at 13:48, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> I commented on the v1 thread, but let's continue the discussion here
->
-> On Thu, 21 Sept 2023 at 04:58, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Standard passage provides for a bloblist to be passed from one firmware
-> > phase to the next. That can be used to pass the devicetree along as well.
-> > Add an option to support this.
-> >
-> > Tests for this will be added as part of the Universal Payload work.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v2:
-> > - No changes as it still seems unclear what should be done
-> >
->
-> [...]
->
-> >
-> >         /* BLOBLISTT_VENDOR_AREA */
-> > diff --git a/doc/develop/devicetree/control.rst b/doc/develop/devicetree/control.rst
-> > index cbb65c9b177f..56e00090166f 100644
-> > --- a/doc/develop/devicetree/control.rst
-> > +++ b/doc/develop/devicetree/control.rst
-> > @@ -108,6 +108,9 @@ If CONFIG_OF_BOARD is defined, a board-specific routine will provide the
-> >  devicetree at runtime, for example if an earlier bootloader stage creates
-> >  it and passes it to U-Boot.
-> >
-> > +If CONFIG_OF_BLOBLIST is defined, the devicetree comes from a bloblist passed
-> > +from a previous stage.
->
-> What I argued before is that we don't need to be this explicit.
-> The bloblist can carry a bunch of options that might be used by
-> U-Boot.  It would be better if we had a more generic approach instead
-> of adding Kconfig options per bloblist entry
 
-Yes, fair enough. It would really get out of hand if we had a lot of
-Kconfig options for everything that could be in a bloblist.
+On 9/3/23 22:57, Dario Binacchi wrote:
+> As described in [1], the "clocks" property contains "a phandle to the
+> clock device node, an index selecting between gated clocks (0) and other
+> clocks (1), and an index specifying the clock to use." The current version
+> of the clock driver, unlike the kernel, is currently able to properly
+> handle nodes with "clocks" properties with an index set to 0.
+> 
+> This patch is preparatory for future developments that require the use
+> of the LTDC clock.
+> 
+> [1] Documentation/devicetree/bindings/clock/st,stm32-rcc.txt
+> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+> ---
+> 
+>  arch/arm/dts/stm32f469-disco-u-boot.dtsi | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/arch/arm/dts/stm32f469-disco-u-boot.dtsi b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+> index c07e2022e4a8..dcc70369cd0d 100644
+> --- a/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
+> @@ -134,6 +134,10 @@
+>  	bootph-all;
+>  };
+>  
+> +&ltdc {
+> +	clocks = <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>;
+> +};
+> +
+>  &pinctrl {
+>  	bootph-all;
+>  
 
-I believe someone objected to this in the other thread, so there may
-be board-specific issues to resolve.
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
->
-> [...]
->
-> >  #ifndef USE_HOSTCC
-> > +
-> > +#define LOG_CATEGORY   LOGC_DT
-> > +
-> >  #include <common.h>
-> > +#include <bloblist.h>
-> >  #include <boot_fit.h>
-> >  #include <display_options.h>
-> >  #include <dm.h>
-> > @@ -87,6 +91,7 @@ static const char *const fdt_src_name[] = {
-> >         [FDTSRC_BOARD] = "board",
-> >         [FDTSRC_EMBED] = "embed",
-> >         [FDTSRC_ENV] = "env",
-> > +       [FDTSRC_BLOBLIST] = "bloblist",
-> >  };
-> >
-> >  const char *fdtdec_get_srcname(void)
-> > @@ -1666,20 +1671,35 @@ int fdtdec_setup(void)
-> >         int ret;
-> >
-> >         /* The devicetree is typically appended to U-Boot */
-> > -       if (IS_ENABLED(CONFIG_OF_SEPARATE)) {
-> > -               gd->fdt_blob = fdt_find_separate();
-> > -               gd->fdt_src = FDTSRC_SEPARATE;
-> > -       } else { /* embed dtb in ELF file for testing / development */
-> > -               gd->fdt_blob = dtb_dt_embedded();
-> > -               gd->fdt_src = FDTSRC_EMBED;
-> > -       }
-> > -
-> > -       /* Allow the board to override the fdt address. */
-> > -       if (IS_ENABLED(CONFIG_OF_BOARD)) {
-> > -               gd->fdt_blob = board_fdt_blob_setup(&ret);
-> > +       if (CONFIG_IS_ENABLED(OF_BLOBLIST)) {
-> > +               ret = bloblist_maybe_init();
-> >                 if (ret)
-> >                         return ret;
-> > -               gd->fdt_src = FDTSRC_BOARD;
->
-> So, instead of adding OF_BLOBLIST, just move this code under OF_BOARD,
-> inside an IS_ENABLED(BLOBLIST) check. If a bloblist is required and
-> the previous stage loader is supposed to provide a DT we can just
-> throw an error and stop booting
-
-This is the bit I don't get.
-
-The OF_BOARD thing is a hack, in that the board can do what it likes.
-It is our way of handling board-specific mechanisms.
-
-But I am wanting a standard mechanism, i.e. like 'standard passage', a
-way of passing the DT through the phases.
-
-If I put this under OF_BOARD, then the board gets to override the
-mechanism, so which is it?
-
-You say 'we can just throw and error' but what is the error? If the DT
-is provided via the bloblist, there is no error. If it is not, I
-already show an error and halt as you can see in the code below.
-
-I guess I'm just confused about what you are saying here.
-
->
->
-> > +               gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> > +               if (!gd->fdt_blob) {
-> > +                       printf("Not FDT found in bloblist\n");
-> > +                       bloblist_show_list();
-> > +                       return -ENOENT;
-> > +               }
->
-> [...]
->
-> Regards
-> /Ilias
-
-Regards,
-Simon
+Thanks
+Patrice
