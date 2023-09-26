@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7331E7D273
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 10:10:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B157E7D271
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 10:10:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D96D986C35;
-	Tue, 26 Sep 2023 12:10:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FF7286D7C;
+	Tue, 26 Sep 2023 12:10:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE53186D5D; Tue, 26 Sep 2023 12:09:59 +0200 (CEST)
-Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.155.67.158])
+ id 6989E86BCE; Tue, 26 Sep 2023 12:10:14 +0200 (CEST)
+Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.154.221.58])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32B0E86BCE
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 12:09:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF9FB86DA4
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 12:10:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng@tinylab.org
 X-QQ-Spam: true
-X-QQ-mid: bizesmtp77t1695718725tab1ix31
+X-QQ-mid: bizesmtp68t1695718788tqli3mop
 Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
  by bizesmtp.qq.com (ESMTP) with 
- id ; Tue, 26 Sep 2023 16:58:43 +0800 (CST)
+ id ; Tue, 26 Sep 2023 16:59:46 +0800 (CST)
 X-QQ-SSF: 01200000000000F0I000000A0000000
 From: Bin Meng <bmeng@tinylab.org>
 To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heiko Schocher <hs@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Joshua Watt <jpewhacker@gmail.com>,
  Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH 14/15] disk: part: Print out the unknown device uclass id
-Date: Tue, 26 Sep 2023 16:43:44 +0800
-Message-Id: <20230926084346.2237483-15-bmeng@tinylab.org>
+Subject: [PATCH 15/15] disk: part: Handle blkmap device in print_part_header()
+Date: Tue, 26 Sep 2023 16:43:45 +0800
+Message-Id: <20230926084346.2237483-16-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230926084346.2237483-1-bmeng@tinylab.org>
 References: <20230926084346.2237483-1-bmeng@tinylab.org>
@@ -59,28 +59,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It's helpful to output the device uclass id for unknown devices
-during the debugging process.
+Print out the blkmap device type when showing partition header for
+a blkmap device.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
+
 ---
 
- disk/part.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ disk/part.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/disk/part.c b/disk/part.c
-index eec02f5898..493e04943b 100644
+index 493e04943b..6997a89775 100644
 --- a/disk/part.c
 +++ b/disk/part.c
-@@ -310,7 +310,7 @@ static void print_part_header(const char *type, struct blk_desc *dev_desc)
+@@ -309,6 +309,9 @@ static void print_part_header(const char *type, struct blk_desc *dev_desc)
+ 	case UCLASS_EFI_MEDIA:
  		puts("EFI");
  		break;
++	case UCLASS_BLKMAP:
++		puts("BLKMAP");
++		break;
  	default:
--		puts("UNKNOWN");
-+		printf("UNKNOWN(%d)", dev_desc->uclass_id);
+ 		printf("UNKNOWN(%d)", dev_desc->uclass_id);
  		break;
- 	}
- 	printf (" device %d  --   Partition Type: %s\n\n",
 -- 
 2.25.1
 
