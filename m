@@ -4,66 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB34E7D271
-	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 09:49:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E898EE7D271
+	for <u-boot@archiver.kernel.org>; Tue, 26 Sep 2023 10:09:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1604786DC0;
-	Tue, 26 Sep 2023 11:49:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 0BAF186C2D;
+	Tue, 26 Sep 2023 12:09:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="tZXrl89a";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAFCB86DF6; Tue, 26 Sep 2023 11:49:03 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4242E86C2D; Tue, 26 Sep 2023 12:09:16 +0200 (CEST)
+Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.154.221.58])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7EB786DA8
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 11:49:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 157FF86C37
+ for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 12:09:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahiroy@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 60186B81061
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 09:49:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BC0CDC433C8
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 09:49:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695721740;
- bh=GZc7OL2isfuEm/HBxU4VBu0sFJflPLu9HaJlWO8VvUA=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=tZXrl89a7RiAkb32K8gTcTJDjn3b0p28P8vWxxOPzR9Prqwgd/SgoBAK/C8sA9F1e
- jMrq9xh8vQwEVM6SYYbtXNMc+VZwJBwoXxGBPiz/pcTeuFIV/yujXeBGgcsLe+HL/d
- iFQUkuUWG5ynB65bnKmzgKud06VS56/cPDpFUtGCzNvUgmCksLsT5cBlapGn/IEp6S
- DTcP8ttH38QMPFGa+cP5vTPl3YdQjgsPGTVG/rTRuJdlIGRZMJ7SMHaswhKsdsF4VT
- fc5Uh08qUzQG1fE44FXd/O6MOtRU7Eha+yv4rWrkBXsLtfGhUAzl+wgEzyJdcA5L+6
- TSRZGszFsv0fQ==
-Received: by mail-oa1-f41.google.com with SMTP id
- 586e51a60fabf-1dd2e65ed59so1715007fac.1
- for <u-boot@lists.denx.de>; Tue, 26 Sep 2023 02:49:00 -0700 (PDT)
-X-Gm-Message-State: AOJu0YxRngZlEciBobEhvTzwN6TZSgz83sYjVwUeSvE0nvSFdzq2v6at
- p4hJKM4wJQvFW8/7i9dTqzuHDnxjVzuFgVapSaA=
-X-Google-Smtp-Source: AGHT+IHL/awp/5fKWVzSKpcvU4cQC9Oqbn0nNLZ67O9RWyfw+zW4SXc6NRTGgXxhVj5D7W6mwYBmvueI3xhjHKPvgCA=
-X-Received: by 2002:a05:6870:786:b0:1bf:5b4:4a51 with SMTP id
- en6-20020a056870078600b001bf05b44a51mr8650208oab.58.1695721740120; Tue, 26
- Sep 2023 02:49:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=bmeng@tinylab.org
+X-QQ-Spam: true
+X-QQ-mid: bizesmtp81t1695718598tgca81o9
+Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
+ by bizesmtp.qq.com (ESMTP) with 
+ id ; Tue, 26 Sep 2023 16:56:36 +0800 (CST)
+X-QQ-SSF: 01200000000000F0I000000A0000000
+From: Bin Meng <bmeng@tinylab.org>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tobias Waldekranz <tobias@waldekranz.com>
+Subject: [PATCH 12/15] cmd: blk_common: Stop using hard-coded block size for
+ Sandbox operations
+Date: Tue, 26 Sep 2023 16:43:42 +0800
+Message-Id: <20230926084346.2237483-13-bmeng@tinylab.org>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20230926084346.2237483-1-bmeng@tinylab.org>
+References: <20230926084346.2237483-1-bmeng@tinylab.org>
 MIME-Version: 1.0
-References: <CAK7LNASMF-E96ShdukjdBEyKhxByve7NwW21xJmWRC8i8eYC0A@mail.gmail.com>
- <c7c31d97-0bb1-0c87-e22d-d268f682e607@ti.com>
-In-Reply-To: <c7c31d97-0bb1-0c87-e22d-d268f682e607@ti.com>
-From: Masahiro Yamada <masahiroy@kernel.org>
-Date: Tue, 26 Sep 2023 18:48:23 +0900
-X-Gmail-Original-Message-ID: <CAK7LNASrwdo98q0Rx4DuqG1ZMU1N4X5eKqqG7U80=HXqK3cV+w@mail.gmail.com>
-Message-ID: <CAK7LNASrwdo98q0Rx4DuqG1ZMU1N4X5eKqqG7U80=HXqK3cV+w@mail.gmail.com>
-Subject: Re: Question about boot failure of AM64-SK
-To: Vignesh Raghavendra <vigneshr@ti.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>,
- srk@ti.com, s-vadapalli@ti.com, n-francis@ti.com, m-chawdhry@ti.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: bizesmtp:tinylab.org:qybglogicsvrgz:qybglogicsvrgz6a-0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,52 +58,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Sep 25, 2023 at 1:24=E2=80=AFPM Vignesh Raghavendra <vigneshr@ti.co=
-m> wrote:
->
-> Hi Masahiro,
->
-> On 21/09/23 20:33, Masahiro Yamada wrote:
-> > Hi.
-> [...]
->
-> > spl: mmc boot mode: fs
-> > Found FIT
-> > Error reading cluster
-> > fit read sector 0, sectors=3D985528, dst=3D, count=3D184467440737095516=
-15,
-> > size=3D0xf09b8
-> > SPL: failed to boot from all boot devices
-> > ### ERROR ### Please RESET the board ###
-> >
->
-> Looks like SD card incompatibility to me. Could you try couple of things:
->
-> a) Different brand SD card
+commit 3d2fc7971454 ("cmd: blk: Allow generic read/write operations to work in sandbox")
+used the hard-coded block size (512) for accessing the sandbox host
+device. Now that we have added support for non-512 block size for both
+Sandbox host device and blkmap driver, let's stop using the hard-coded
+block size.
 
-Hi Vignesh.
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
+---
 
-I tried Transcend and Lexar,
-but both failed in the same way.
+ cmd/blk_common.c | 20 ++++++++++++++------
+ 1 file changed, 14 insertions(+), 6 deletions(-)
 
+diff --git a/cmd/blk_common.c b/cmd/blk_common.c
+index ad9b16dc09..02ac92837b 100644
+--- a/cmd/blk_common.c
++++ b/cmd/blk_common.c
+@@ -67,15 +67,19 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
+ 			phys_addr_t paddr = hextoul(argv[2], NULL);
+ 			lbaint_t blk = hextoul(argv[3], NULL);
+ 			ulong cnt = hextoul(argv[4], NULL);
++			struct blk_desc *desc;
+ 			void *vaddr;
+ 			ulong n;
++			int ret;
+ 
+ 			printf("\n%s read: device %d block # "LBAFU", count %lu ... ",
+ 			       if_name, *cur_devnump, blk, cnt);
+ 
+-			vaddr = map_sysmem(paddr, 512 * cnt);
+-			n = blk_read_devnum(uclass_id, *cur_devnump, blk, cnt,
+-					    vaddr);
++			ret = blk_get_desc(uclass_id, *cur_devnump, &desc);
++			if (ret)
++				return CMD_RET_FAILURE;
++			vaddr = map_sysmem(paddr, desc->blksz * cnt);
++			n = blk_dread(desc, blk, cnt, vaddr);
+ 			unmap_sysmem(vaddr);
+ 
+ 			printf("%ld blocks read: %s\n", n,
+@@ -85,15 +89,19 @@ int blk_common_cmd(int argc, char *const argv[], enum uclass_id uclass_id,
+ 			phys_addr_t paddr = hextoul(argv[2], NULL);
+ 			lbaint_t blk = hextoul(argv[3], NULL);
+ 			ulong cnt = hextoul(argv[4], NULL);
++			struct blk_desc *desc;
+ 			void *vaddr;
+ 			ulong n;
++			int ret;
+ 
+ 			printf("\n%s write: device %d block # "LBAFU", count %lu ... ",
+ 			       if_name, *cur_devnump, blk, cnt);
+ 
+-			vaddr = map_sysmem(paddr, 512 * cnt);
+-			n = blk_write_devnum(uclass_id, *cur_devnump, blk, cnt,
+-					     vaddr);
++			ret = blk_get_desc(uclass_id, *cur_devnump, &desc);
++			if (ret)
++				return CMD_RET_FAILURE;
++			vaddr = map_sysmem(paddr, desc->blksz * cnt);
++			n = blk_dwrite(desc, blk, cnt, vaddr);
+ 			unmap_sysmem(vaddr);
+ 
+ 			printf("%ld blocks written: %s\n", n,
+-- 
+2.25.1
 
-> b) Degrade speeds to non UHS mode:
-
-
-I added no-1-8-v, but no luck either.
-
-
-
-
-BTW, due to project shifting within my company,
-this board is no longer a priority for me.
-
-I will put AM64-SK on my shelf.  :)
-
-
-
-
-
---=20
-Best Regards
-Masahiro Yamada
