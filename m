@@ -4,65 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2911BE80AAB
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 13:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C9BBE80AAD
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 14:19:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C79186DD6;
-	Wed, 27 Sep 2023 15:59:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id 43E4186D59;
+	Wed, 27 Sep 2023 16:19:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="jhOX10KI";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JsuOl2A8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 16AEE86DB9; Wed, 27 Sep 2023 15:59:11 +0200 (CEST)
-Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
- [217.70.183.197])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A267C86B95; Wed, 27 Sep 2023 16:19:42 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82B9C86DD6
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 15:59:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A99386D91
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 16:19:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 090681C000C;
- Wed, 27 Sep 2023 13:59:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1695823147;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TlqrE/+3UrYSu7aXS2SFlilWNCOVPTsKaVE+2WiGRm8=;
- b=jhOX10KIRQJnx0g72JCy4duidIIHNFwqfPNMq8klZZbHKmuXKB4x8j7In/eNUntNB5ceLt
- kBHh/Zv6iXQVs2TsDdh7LM/amwsa6jAC7EzPbLsxbRmQos7IUs7k2b7esYvt1i11yzPe/A
- /vdPxi209/v1YC+smvjHf2SLGRhOM/pXhe72xE1Wf6mzU1VH7mx+oQVkeaQx8aowgklYDL
- qUrwqFct/pKgsjV5oUILmLXYno36iI6wATIzXKdT5Nd7pylGoKWyK1IKPZmn1jin4g3w2w
- uQtNSTwhVxBPgK5cwvB0KdDKacUjcvbpLeFO38HYofdzIv9ZnZeykvFLu1tU7w==
-Date: Wed, 27 Sep 2023 15:59:01 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Angus Ainslie <angus@akkea.ca>, Dmitrii Merkurev <dimorinny@google.com>,
- Eddie Cai <eddie.cai.linux@gmail.com>, Kever Yang
- <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
- Menon <nm@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, Patrick
- Delaunay <patrick.delaunay@foss.st.com>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Stefan Roese
- <sr@denx.de>, kernel@puri.sm
-Subject: Re: [PATCH v2 01/17] dm: usb: udc: Factor out plain udevice handler
- functions
-Message-ID: <20230927155901.10c5d520@xps-13>
-In-Reply-To: <20230922120012.6e24645f@xps-13>
-References: <20230901095003.352930-1-marex@denx.de>
- <20230922120012.6e24645f@xps-13>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-534848725e8so2928328a12.0
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 07:19:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695824380; x=1696429180; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VekqCMLKs9Q5kHVCbDmXUrIfxykJ5lvToZpw/hMzDxU=;
+ b=JsuOl2A8kKfruG0ftfO68r/hCXySwC++2oAX5RISqRH+klcLvpmgfYL3CclA2l4nOx
+ mkhx1C7ahJ8roN+4YoQqrM7/KhmZlUvwEOMAYfkAhEOTgh/NXa39xp6M0I0fbV9mchvI
+ R6HjflbmCbJIS6uFfsQNXxA9Yax/6mNxG3gBI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695824380; x=1696429180;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VekqCMLKs9Q5kHVCbDmXUrIfxykJ5lvToZpw/hMzDxU=;
+ b=OAKLRtTdarcdvGyigj0d01B243Q5r6ukOLowNrKbJ/8Wq1YisVQXgoFMHwCgDRsCAN
+ Pk0mOgjZ4noHIuZn8lU8ZKUB5DQUUcX+dQrq778aYj+9YeNjZKjq/zeJCHL3xvdT2eqY
+ u/zynIJlLbAb9RspdrKMtSUtzUmpxHdLWBv/2llYySxy+6INHC1j6CHx7+IOVoC/alqR
+ TWaD0gbF+UMi+U+Fq11syAvJzAlc1Ww9x2lx3/fDVKf1IZNsEzz6jD3j8TuQFEIjx4lm
+ egQTzersEuK6yA4CHV6LILqqnE7LzGAj4c9tiL9MRDdrtUNEoDIxIUhciTkYCWDPOMfn
+ 7euQ==
+X-Gm-Message-State: AOJu0YzSdvfFJ4FgXuJWE01bM3HL6b9aGCpJ3d+1f+1y6l8FW2eqbynK
+ ih6E1OXzVI5JmRPaQas+LDRMAaUWh/PuALsY5KXTrQ==
+X-Google-Smtp-Source: AGHT+IHbT9rATopFb7nn8GByEZCeRunOvWfU3270Nf1qohFHF97YAiTrONdhoV4pGx/nRYjrrv/sXpeUzriUb9tviO0=
+X-Received: by 2002:aa7:da19:0:b0:525:442b:6068 with SMTP id
+ r25-20020aa7da19000000b00525442b6068mr2157722eds.13.1695824379696; Wed, 27
+ Sep 2023 07:19:39 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
+ <20230919113705.109639-5-rasmus.villemoes@prevas.dk>
+ <30f28625-865f-8342-95cb-5017c0db4277@kwiboo.se>
+ <9f8ea578-1b32-f0f5-02be-ffb267cb6197@prevas.dk>
+In-Reply-To: <9f8ea578-1b32-f0f5-02be-ffb267cb6197@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 27 Sep 2023 08:19:28 -0600
+Message-ID: <CAPnjgZ1Uhb=+jdKen4tKrFPhXuiJEhZkKzDi1JwVh_21gP3y1A@mail.gmail.com>
+Subject: Re: [PATCH 4/4] binman: update documentation for fit,align property
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Kever Yang <kever.yang@rock-chips.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,30 +85,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+Hi Rasmus,
 
-miquel.raynal@bootlin.com wrote on Fri, 22 Sep 2023 12:00:12 +0200:
+On Tue, 26 Sept 2023 at 00:25, Rasmus Villemoes
+<rasmus.villemoes@prevas.dk> wrote:
+>
+> On 25/09/2023 17.14, Jonas Karlman wrote:
+>
+> >>      fit,align
+> >> -        Indicates what alignment to use for the FIT and its external data,
+> >> -        and provides the alignment to use. This is passed to mkimage via
+> >> -        the -B flag.
+> >> +        Indicates what alignment to use for the FIT and, if applicable,
+> >> +        its external data. This is passed to mkimage via the -B flag.
+> >
+> > This only updates entries.rst, please update tools/binman/etype/fit.py
+> > and re-generate entries.rst from output of running binman entry-docs.
+>
+> Ah, I didn't know the .rst was generated.
+>
+> Simon, want me to resend (this one or the whole series?), or can you
+> fold in this when applying:
 
-> Hi Marek,
->=20
-> I'm answering here as there is no cover letter. Just to let you know
-> I'm still concerned by the series and want to test it but did not had
-> the time to do so recently. Hopefully next week.
+I can fold it in, so long as I remember.
 
-The series looks good to me and works as well on a Beagle Bone Black
-with no visible functional changes regarding the use of the UDC. The
-whole series is:
+>
+> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> index 2c14b15b03..97d3cedaf5 100644
+> --- a/tools/binman/etype/fit.py
+> +++ b/tools/binman/etype/fit.py
+> @@ -71,9 +71,8 @@ class Entry_fit(Entry_section):
+>              external offset. This is passed to mkimage via the -E and
+> -p flags.
+>
+>          fit,align
+> -            Indicates what alignment to use for the FIT and its
+> external data,
+> -            and provides the alignment to use. This is passed to
+> mkimage via
+> -            the -B flag.
+> +            Indicates what alignment to use for the FIT and, if applicable,
+> +            its external data. This is passed to mkimage via the -B flag.
+>
+>          fit,fdt-list
+>              Indicates the entry argument which provides the list of
+> device tree
+>
+> Rasmus
+>
 
-Tested-by: Miquel Raynal <miquel.raynal@bootlin.com>
-
-By the way, following your initial series there have been three
-followup patches trying to improve a little bit the doc, one got merged
-and two others were delegated to you:
-https://patchwork.ozlabs.org/project/uboot/list/?series=3D367635
-
-They are almost 2 months old now, would you mind acking or merging
-them so both your initial USB gadget rework and the additional
-(related) doc can be in the same release please?
-
-Thanks,
-Miqu=C3=A8l
+Regards,
+Simon
