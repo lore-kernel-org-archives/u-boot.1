@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 708B8E810B1
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 09:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE675E810B1
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 09:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7CF486DD5;
-	Wed, 27 Sep 2023 11:54:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1100786DDF;
+	Wed, 27 Sep 2023 11:54:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wfKQP6Qy";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="I3Zgdxuj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E4B686DDC; Wed, 27 Sep 2023 11:54:16 +0200 (CEST)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on20606.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eb2::606])
+ id 1DB6286DD3; Wed, 27 Sep 2023 11:54:17 +0200 (CEST)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on20605.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e83::605])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D419F86DD5
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 11:54:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95ECE86DD8
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 11:54:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OIh5wq7QiBCrMVgkSnqiKXWqYBw2L3gxe+FIXMkkCnXXd79WPn9YfBAGhf8tzB5wj3hr/8JnJrB+RwEUsW1jkY9g3gVvJObm3Yc8+RBZ8g+Mx+H+v8lxquXFfIf0RVlSS2KFZw13JMxSSA2vlabXiyu/LO9Uwm0vT7cEuAnIu4YuNsMulz5O1zLHBF7pR3Ym+0NYpqyuvgXetJ5BdAvsvHJvFMEfX5NjvuGyiMXpcYztROoNLzS/4irvdnRw2ZjUVGGx/8wq9Qk9119Jv5Wos1AEWvv8r3OOYgBYv/hObmiToESbk2zSz7+mrCEo5HUNwjZzHlcdhQzJnWs/kCpZ9A==
+ b=hkGAI18t5CZV9yhj42LV/Iub39AHJbKB27fMQuqmvouwaB/WbWPVqTRpWipQWZURgyFtCg/YOVnA1iiEh1WohMr255t/Z4iyFA91r0X6tyUW/n6GcXn/OZ1kx1QbIodhT1G7N8/Upf6ttS4a8Hb81eY4IaXjCNkezIEW5Og8tMMJ1UE/P23TIlDL8jRw2VNS6e2Xn5HBJZd9LTh24Co8tz7IYWU6J6PPOr97C/t3a7BpFjzSRmpRwa5/gKUmOBdRC2CL5Zi+rrGCjh85wglEUNIP3SKyeaud4zIvoXudTpuJJYt47KmQTnx8xV6SjcqyIOVWe3FIV/1ClZMchVANqQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DxAtX4VwVys0mq+7jZVk6fg7kZnzstxu3XDEW+cn8Xc=;
- b=TGurn3e/ueK2juz8HUk7WtjOZECT8tvSr//nc7NIZbI+w9YHEg1UwD1ZGcFhiBBdymWpyFGTeO/+gYHGsacERrxbnS10C+Kw0xWNwcB5d/YiDuRo/PJZhx3QbCijV+8jUhAt07uSXHXkqkZHu92wsrDOhu+95/2C84yyRSILUnad7D0++8spWFtPz68k2oSxf7kmCocHzVn6btGInAmR7I+b9CjgmYnmlJsLRgcSCL8ux+Ougj2OBLq9x3QQvT9AsjG1vGaGgu4LH6NYlq18aoBX+cIYQ+GdqBCFy8QqkVaIU0dGkYSA3EtKNXMrnYHHC6yfBDugz5NyVWcnCmLdzw==
+ bh=bFKhh8hAlOVW183U7xM0rVgYlSuYNxUVo9MHXqoxcsY=;
+ b=L10XR6vHuFoYRoAREqnIbyoKySJeDSDtR9+1ujMAoNjFT/NwykKu5JGrYJYl09STzgkYeue8Kjkb6W4rL+swrvd5TV57JTkbXw6bbuzeEfPg5/KrjP0BktcPBdrFXUqZF5LYiruFWu57xF3BPRCwnngLC2FsNmfZiDXTiyuVxSkqb6QVLNRawpaqNLLwBykPq25JzFPayZtn9cxwjqzJKO1YuuT+01ddGZpEQokLN0fewlU/76+dMKM+ns645YNDhBot3CsyIMXWMUVZPuJM+l/1FdGJFqegOeGC57JT49aXe5bTxoNwmmyZ68+rP79OeAMrDpXIIM8oKbSSAYClkw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DxAtX4VwVys0mq+7jZVk6fg7kZnzstxu3XDEW+cn8Xc=;
- b=wfKQP6QyyZIZt8CNyX6dsKh5hyGkMOf5nkGOZ5+rPHan/U9wKgoK/grTITDbeWcyIrWgiy91IbsyOsIU1pYfwSLrp2laAYyKH6XbdeIljGuNfiRyn0FwYhM3zqESNIC9sJtztfgkWIX32Bsn8eTDL+OMcxVqrgas1mRSAhEx2os=
-Received: from BLAPR03CA0157.namprd03.prod.outlook.com (2603:10b6:208:32f::27)
- by LV3PR12MB9267.namprd12.prod.outlook.com (2603:10b6:408:211::9)
+ bh=bFKhh8hAlOVW183U7xM0rVgYlSuYNxUVo9MHXqoxcsY=;
+ b=I3ZgdxujGGOmsoa5U8/nK5k+lJ+FD/3LtIt6XmZ1yE6JFJ06t2BAz9Fm4YPyaf7mK4+l6uEa5YadOc248R5x+DkIdzOfXEIdGQWuzCxgkRFOQwTa1aZPY/36FWxr0tuKsQvijDeUKqqAgaI50uwBI+Ku0SHQMHCO7lsZ+TJ1agg=
+Received: from BL0PR02CA0114.namprd02.prod.outlook.com (2603:10b6:208:35::19)
+ by SA1PR12MB8163.namprd12.prod.outlook.com (2603:10b6:806:332::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.23; Wed, 27 Sep
- 2023 09:54:08 +0000
-Received: from MN1PEPF0000ECD9.namprd02.prod.outlook.com
- (2603:10b6:208:32f:cafe::ba) by BLAPR03CA0157.outlook.office365.com
- (2603:10b6:208:32f::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.20; Wed, 27 Sep
+ 2023 09:54:11 +0000
+Received: from MN1PEPF0000ECD6.namprd02.prod.outlook.com
+ (2603:10b6:208:35:cafe::fd) by BL0PR02CA0114.outlook.office365.com
+ (2603:10b6:208:35::19) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.35 via Frontend
- Transport; Wed, 27 Sep 2023 09:54:08 +0000
+ Transport; Wed, 27 Sep 2023 09:54:10 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,27 +59,28 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MN1PEPF0000ECD9.mail.protection.outlook.com (10.167.242.138) with Microsoft
+ MN1PEPF0000ECD6.mail.protection.outlook.com (10.167.242.135) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Wed, 27 Sep 2023 09:54:08 +0000
+ 15.20.6838.14 via Frontend Transport; Wed, 27 Sep 2023 09:54:10 +0000
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 27 Sep
- 2023 04:54:07 -0500
+ 2023 04:54:09 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-Subject: [PATCH 05/11] arm64: zynqmp: Add support for vpk120-revA
-Date: Wed, 27 Sep 2023 11:53:31 +0200
-Message-ID: <bd8b79d7c6693e90e12bce422f8ed00f2f43c9ae.1695808407.git.michal.simek@amd.com>
+Subject: [PATCH 06/11] arm64: zynqmp: Create description for generic SC
+ (vpk120-revB)
+Date: Wed, 27 Sep 2023 11:53:32 +0200
+Message-ID: <c8092340f92144f0cc9096194198f227015bc013.1695808407.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.36.1
 In-Reply-To: <cover.1695808407.git.michal.simek@amd.com>
 References: <cover.1695808407.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=16839; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=9jOCuQT0RsqCJo/oLytuflyeqJOvFtyAxCpQl77rzAQ=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlTh33Mn+fium/Fif/C5lTbCN2/e/Pnu1bSjt/0m84WcP
- Lf9zcp4hY5YFgZBJgZZMUUWaZsrZ/ZWzpgifPGwHMwcViaQIQxcnAIwkaUHGBZ0/EhQO6ao0K+Q
- ob8ydods4+qzUU8Z5oc2CzvxV7AYRs61195foMd+WM55MgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=12842; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=uwdgtWNOn4Yc2PclGHrpJPhDZ9BeNCrFQ2Qrg9qblmY=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlTh3/OmBlyvS9/pqFh+kOfsmZIbpkmXBJLMX1jxK99Q8
+ 4g9f2V3RywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZhIrhPDPD2RtVM/iZhJM7Z/
+ k8x51vVNYf37IIYFTcfzJ08zcO5+KjK94Jmogo3D/fi3AA==
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -89,26 +90,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD9:EE_|LV3PR12MB9267:EE_
-X-MS-Office365-Filtering-Correlation-Id: dab9decf-dc7b-4e13-14e5-08dbbf3fb183
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD6:EE_|SA1PR12MB8163:EE_
+X-MS-Office365-Filtering-Correlation-Id: ed71c97f-2ace-49d4-a3ce-08dbbf3fb2fc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 2I6DSHh81RFdgo4qoo0IgjgD2VOp01UaG/Ep3JWRSG4K5Gl9BfoYgzAuDLrHdS5RsDiabzthqA7kf7LC5adEB77lyMqPS/nDNHtqIMfD6/RhNTvKYvDBnvTOWhxJZLVJLP7vbYjvGyWq+AWgp8HjoNqXcJgr+5D3yXzkGfX2us5WMu5x+30/zBKHOqI/a/GSYyRNJEDmynRvX6+YmPVhBWGk6DLwWAQXt9cG1TG8run5JS9FM4tcZr6Z5/RJL6vdHcCCPEHoWL8orFHcMDYyd293kfKejqhcqX0Br4BZSN848fmmlvIkv6mjT86MHEMQNxblB+zQKAno9K8YK3Gl72IGDgn/6WYzEiFFBp3xUADGEa6rDxbpKWEx/a0uz23BPCXMBEwBuMvsvwQ6Lu6IsOHCuxMJaTNwwAw0e83P4H5c76A2FRyEagAzcjfo370IOBaSn0a0aGOcMERYWZr0AroaolMFBsylbaepfhwhsAgnfglG68EqmLgjMV8b8SlkRWdoWWdDYXaeJdHbRsQqCRTXmIIH1GgjSG5wWOJv6MdbGhKJg7VKftDH5VGmWTL5NOSGDmbmHGfQ7fd/ELFgphHWC304j91CW84bzwcYyrTRt3OgsZXRD8OsmtVEovKV6U4CIB/+2+5HXuNd0OiVEBFQ3GGV4RKYgq+w+UVh8BAbp8q/aoRj2CeqTEHHozxCeeiWz9onZHfKxMr5+O5y6aVP9ic1vAfBYighQ1OJoCWYSu2rGDUQA2X9OJkbyFR6hlScGeAws8fuYiVjzpRyZQ==
+X-Microsoft-Antispam-Message-Info: 2m39kfMnE3jto4tbD0KXBvnxT/RyIffJ86S+KHzYh3zR7Plr19+l9Xco/4lRxnJV/z3zIOMzQhQtF/eH4pwuKa5Q0ItTnY9Jm8UW5J8c3X58Yg5uJ9hZ/qTX3GnYGV7EnZ55AX+YuSN9vVphIm7K/6gpSDDU++cP0EBYy9yEcQfYnC9AiQKQPt5YeLrxl0PkaD75wavhEBcHaPPJNWh+SONTpBkGn8q+B7XLG2Tzm/H6QdVwSVDFinX47Qh93/pA/QWCKHiDMmdyIHJqy+S8uf/6jt2RoKdrRBvPxasEfV2msZgmityu3/S6/MBouiapVxzt/XYA6eRTO09J7WIqWq7PFAAis6hMBXYBGjtJqGH1mItU0T1dmfbLVabsi/iDiIqzpi/Wo2yapJlVvtwIDT3skiHJLm58K4exT6VqIFSkLLNyPxm9UabFB/tgAYd7vYbpnZ6aTW35B4Biv4DNg9tInTzKpsnSLofCpRwbrNK0cYwRpvI0+dxt8rl5fneouJnTNkivpd0dbdaAwUyl9D3xnrtfgvV7NKuEvfgr+wSAsUAvZy4qf9wK2i197ei+U2ZEA4uWkz8L5HZWnyWz3bSDeLx8yrD9IA8qlZjKdnIrxaviBg3yKxbsfEfWnrP6Ic2icYrUhx1w9iTe5iqdn9RC4WggsKn/ABgzOWr4zscD4swkV2txfHgHcKzxVV+ZZ/jDgwO1Fkh1hoN/an8XuiasFE9ZOTJNEoy3QJAPAr4bMLk0EHtHUP2QyqmKy2FD52uSfq5yvme6g2uPSj/rcK8bFPXh6eDxkS6MUIzq/6M=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(346002)(39860400002)(376002)(396003)(230922051799003)(1800799009)(451199024)(82310400011)(186009)(36840700001)(46966006)(40470700004)(8676002)(70586007)(44832011)(8936002)(316002)(5660300002)(110136005)(6666004)(70206006)(41300700001)(478600001)(30864003)(2616005)(16526019)(426003)(26005)(336012)(36860700001)(47076005)(83380400001)(36756003)(81166007)(356005)(40480700001)(2906002)(40460700003)(82740400003)(86362001)(36900700001);
+ SFS:(13230031)(4636009)(346002)(396003)(376002)(136003)(39860400002)(230922051799003)(186009)(1800799009)(451199024)(82310400011)(36840700001)(46966006)(40470700004)(47076005)(110136005)(36756003)(41300700001)(36860700001)(8676002)(5660300002)(44832011)(70586007)(86362001)(83380400001)(70206006)(2906002)(8936002)(316002)(30864003)(26005)(478600001)(40480700001)(16526019)(426003)(2616005)(40460700003)(336012)(6666004)(356005)(81166007)(82740400003)(41533002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2023 09:54:08.3653 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dab9decf-dc7b-4e13-14e5-08dbbf3fb183
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2023 09:54:10.9334 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ed71c97f-2ace-49d4-a3ce-08dbbf3fb2fc
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD9.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD6.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9267
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8163
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -125,39 +126,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Board contains two systems. The primary is Versal VP1202 ACAP device and
-the secondary is ZynqMP zu4 which acts as system controller. The patch is
-describing only ZynqMP system controller part.
+System controllers are pretty much the same on the all boards that's why
+use autodetection based on i2c eeprom. This should end up with having only
+one BSP for all SCs with only DT overlays to cover different i2c
+structures.
+
+All MIOs are fixed by the spec that's why not a problem to description
+pinctrl setting.
+
+Apart from eth phy reset, it also set proper phy delays.
+The TI DP83867 PHY datasheet says:
+T1: Post RESET stabilization time == 195us
+T3: Hardware configuration pins transition to output drivers == 64us
+T4: RESET pulse width == 1us
+So with a little overhead set 'reset-assert-us' to 100us (T4) and
+'reset-deassert-us' to 280us (T1+T3).
+
+NOTE: The tuning of TI DP83867 phy reset delay is derived from linux
+upstream commit: 5dbadc848259(arm64: dts: fsl: add support for Kontron
+pitx-imx8m board).
+
+i2c structure on Xilinx Versal evaluation platforms contain a lot of
+devices but also connection to connectors like SFP. Because of this
+complicated structure with also all level shifters, i2c muxes, etc. not all
+devices are able to reliably work on 400kHz even if they are compatible
+with this speed. That's why set i2c frequency to 100KHz to increase
+reliability of the i2c bus.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- arch/arm/dts/Makefile               |   1 +
- arch/arm/dts/zynqmp-vpk120-revA.dts | 574 ++++++++++++++++++++++++++++
- 2 files changed, 575 insertions(+)
- create mode 100644 arch/arm/dts/zynqmp-vpk120-revA.dts
+ arch/arm/dts/Makefile           |   1 +
+ arch/arm/dts/zynqmp-sc-revB.dts | 430 ++++++++++++++++++++++++++++++++
+ 2 files changed, 431 insertions(+)
+ create mode 100644 arch/arm/dts/zynqmp-sc-revB.dts
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index d1b28a6d02ed..fbce328acafe 100644
+index fbce328acafe..29c40d1c3b66 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
-@@ -421,6 +421,7 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
- 	zynqmp-sck-kv-g-revA.dtbo		\
- 	zynqmp-sck-kv-g-revB.dtbo		\
- 	zynqmp-topic-miamimp-xilinx-xdp-v1r1.dtb	\
-+	zynqmp-vpk120-revA.dtb			\
- 	zynqmp-zcu100-revC.dtb			\
- 	zynqmp-zcu102-revA.dtb			\
- 	zynqmp-zcu102-revB.dtb			\
-diff --git a/arch/arm/dts/zynqmp-vpk120-revA.dts b/arch/arm/dts/zynqmp-vpk120-revA.dts
+@@ -411,6 +411,7 @@ dtb-$(CONFIG_ARCH_ZYNQMP) += \
+ 	zynqmp-mini-emmc1.dtb			\
+ 	zynqmp-mini-nand.dtb			\
+ 	zynqmp-mini-qspi.dtb			\
++	zynqmp-sc-revB.dtb			\
+ 	zynqmp-sm-k24-revA.dtb			\
+ 	zynqmp-smk-k24-revA.dtb			\
+ 	zynqmp-sm-k26-revA.dtb			\
+diff --git a/arch/arm/dts/zynqmp-sc-revB.dts b/arch/arm/dts/zynqmp-sc-revB.dts
 new file mode 100644
-index 000000000000..66919f578e02
+index 000000000000..e0b554c9c545
 --- /dev/null
-+++ b/arch/arm/dts/zynqmp-vpk120-revA.dts
-@@ -0,0 +1,574 @@
++++ b/arch/arm/dts/zynqmp-sc-revB.dts
+@@ -0,0 +1,430 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * dts file for Xilinx ZynqMP VPK120 RevA System Controller
++ * dts file for Xilinx ZynqMP Generic System Controller
 + *
 + * (C) Copyright 2021 - 2022, Xilinx, Inc.
 + * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
@@ -170,30 +194,32 @@ index 000000000000..66919f578e02
 +#include "zynqmp-clk-ccf.dtsi"
 +#include <dt-bindings/input/input.h>
 +#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/net/ti-dp83867.h>
 +#include <dt-bindings/pinctrl/pinctrl-zynqmp.h>
 +#include <dt-bindings/phy/phy.h>
 +
 +/ {
-+	model = "ZynqMP System Controller on VPK120 board RevA";
-+	compatible = "xlnx,zynqmp-vpk120-revA",
-+		     "xlnx,zynqmp-vpk120", "xlnx,zynqmp";
++	model = "ZynqMP Generic System Controller";
++	compatible = "xlnx,zynqmp-sc-revB", "xlnx,zynqmp-sc", "xlnx,zynqmp";
 +
 +	aliases {
-+		ethernet0 = &gem0;
 +		i2c0 = &i2c0;
 +		i2c1 = &i2c1;
 +		mmc0 = &sdhci0;
-+		serial0 = &uart0;
-+		serial1 = &dcc;
-+		spi0 = &qspi;
-+		usb0 = &usb0;
-+		usb1 = &usb1;
++		mmc1 = &sdhci1;
 +		nvmem0 = &eeprom;
++		rtc0 = &rtc;
++		serial0 = &uart0;
++		serial1 = &uart1;
++		serial2 = &dcc;
++		spi0 = &qspi;
++		spi1 = &spi0;
++		spi2 = &spi1;
 +	};
 +
 +	chosen {
 +		bootargs = "earlycon";
-+		stdout-path = "serial0:115200n8";
++		stdout-path = "serial1:115200n8";
 +	};
 +
 +	memory@0 {
@@ -204,9 +230,9 @@ index 000000000000..66919f578e02
 +	gpio-keys {
 +		compatible = "gpio-keys";
 +		autorepeat;
-+		sw16 {
++		fwuen {
 +			label = "sw16";
-+			gpios = <&gpio 10 GPIO_ACTIVE_HIGH>;
++			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 +			linux,code = <BTN_MISC>;
 +			wakeup-source;
 +			autorepeat;
@@ -215,45 +241,226 @@ index 000000000000..66919f578e02
 +
 +	leds {
 +		compatible = "gpio-leds";
-+		heartbeat-led { /* ds40 */
++		ds40-led {
 +			label = "heartbeat";
-+			gpios = <&gpio 9 GPIO_ACTIVE_HIGH>;
++			gpios = <&gpio 7 GPIO_ACTIVE_HIGH>;
 +			linux,default-trigger = "heartbeat";
++		};
++		ds44-led {
++			label = "status";
++			gpios = <&gpio 8 GPIO_ACTIVE_HIGH>;
 +		};
 +	};
 +
-+	si5332_0: si5332_0 { /* ps_ref_clk */
++	si5332_2: si5332_2 { /* u42 */
 +		compatible = "fixed-clock";
 +		#clock-cells = <0>;
-+		clock-frequency = <33333333>;
++		clock-frequency = <26000000>;
 +	};
 +
-+	si5332_1: si5332_1 { /* clk0_sgmii */
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <33333333>; /* FIXME */
++	pwm-fan {
++		compatible = "pwm-fan";
++		status = "okay";
++		pwms = <&ttc0 2 40000 1>;
 +	};
++};
 +
-+	si5332_2: si5332_2 { /* clk1_usb */
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <27000000>;
++&gpio {
++	status = "okay";
++	gpio-line-names = "QSPI_CLK", "QSPI_DQ1", "QSPI_DQ2", "QSPI_DQ3", "QSPI_DQ0", /* 0 - 4 */
++		"QSPI_CS_B", "", "LED1", "LED2", "", /* 5 - 9 */
++		"", "ZU4_TRIGGER", "FWUEN", "EMMC_DAT0", "EMMC_DAT1", /* 10 - 14 */
++		"EMMC_DAT2", "EMMC_DAT3", "EMMC_DAT4", "EMMC_DAT5", "EMMC_DAT6", /* 15 - 19 */
++		"EMMC_DAT7", "EMMC_CMD", "EMMC_CLK", "EMMC_RST_B", "I2C1_SCL", /* 20 - 24 */
++		"I2C1_SDA", "UART0_RXD", "UART0_TXD", "", "", /* 25 - 29 */
++		"", "", "", "", "I2C0_SCL", /* 30 - 34 */
++		"I2C0_SDA", "UART1_TXD", "UART1_RXD", "GEM_TX_CLK", "GEM_TX_D0", /* 35 - 39 */
++		"GEM_TX_D1", "GEM_TX_D2", "GEM_TX_D3", "GEM_TX_CTL", "GEM_RX_CLK", /* 40 - 44 */
++		"GEM_RX_D0", "GEM_RX_D1", "GEM_RX_D2", "GEM_RX_D3", "GEM_RX_CTL", /* 45 - 49 */
++		"GEM_MDC", "GEM_MDIO", "USB0_CLK", "USB0_DIR", "USB0_DATA2", /* 50 - 54 */
++		"USB0_NXT", "USB0_DATA0", "USB0_DATA1", "USB0_STP", "USB0_DATA3", /* 55 - 59 */
++		"USB0_DATA4", "USB0_DATA5", "USB0_DATA6", "USB0_DATA7", "", /* 60 - 64 */
++		"", "", "", "", "", /* 65 - 69 */
++		"", "", "", "", "", /* 70 - 74 */
++		"", "", "ETH_RESET_B", /* 75 - 77, MIO end and EMIO start */
++		"", "", /* 78 - 79 */
++		"", "", "", "", "", /* 80 - 84 */
++		"", "", "", "", "", /* 85 -89 */
++		"", "", "", "", "", /* 90 - 94 */
++		"", "", "", "", "", /* 95 - 99 */
++		"", "", "", "", "", /* 100 - 104 */
++		"", "", "", "", "", /* 105 - 109 */
++		"", "", "", "", "", /* 110 - 114 */
++		"", "", "", "", "", /* 115 - 119 */
++		"", "", "", "", "", /* 120 - 124 */
++		"", "", "", "", "", /* 125 - 129 */
++		"", "", "", "", "", /* 130 - 134 */
++		"", "", "", "", "", /* 135 - 139 */
++		"", "", "", "", "", /* 140 - 144 */
++		"", "", "", "", "", /* 145 - 149 */
++		"", "", "", "", "", /* 150 - 154 */
++		"", "", "", "", "", /* 155 - 159 */
++		"", "", "", "", "", /* 160 - 164 */
++		"", "", "", "", "", /* 165 - 169 */
++		"", "", "", ""; /* 170 - 173 */
++};
++
++&gem1 { /* gem1 MIO38-49, MDIO MIO50/51 */
++	status = "okay";
++	phy-mode = "rgmii-id";
++	phy-handle = <&phy0>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_gem1_default>;
++
++	mdio: mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		phy0: ethernet-phy@1 {
++			#phy-cells = <1>;
++			compatible = "ethernet-phy-id2000.a231";
++			reg = <1>;
++			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_25_NS>;
++			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_75_NS>;
++			ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
++			ti,dp83867-rxctrl-strap-quirk;
++			reset-gpios = <&gpio 77 GPIO_ACTIVE_LOW>;
++			reset-assert-us = <100>;
++			reset-deassert-us = <280>;
++		};
 +	};
++};
++
++&i2c0 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	status = "okay";
++	clock-frequency = <100000>;
++	pinctrl-names = "default", "gpio";
++	pinctrl-0 = <&pinctrl_i2c0_default>;
++	pinctrl-1 = <&pinctrl_i2c0_gpio>;
++	scl-gpios = <&gpio 34 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
++	sda-gpios = <&gpio 35 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
++};
++
++&i2c1 { /* i2c1 MIO 24-25 */
++	status = "okay";
++	bootph-all;
++	clock-frequency = <100000>;
++	pinctrl-names = "default", "gpio";
++	pinctrl-0 = <&pinctrl_i2c1_default>;
++	pinctrl-1 = <&pinctrl_i2c1_gpio>;
++	scl-gpios = <&gpio 24 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
++	sda-gpios = <&gpio 25 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
++
++	/* Use for storing information about SC board */
++	eeprom: eeprom@54 { /* u34 - m24128 16kB */
++		compatible = "st,24c128", "atmel,24c128";
++		reg = <0x54>; /* & 0x5c */
++		bootph-all;
++	};
++};
++
++/* USB 3.0 only */
++&psgtr {
++	status = "okay";
++	/* nc, nc, usb3 */
++	clocks = <&si5332_2>;
++	clock-names = "ref2";
 +};
 +
 +&qspi { /* MIO 0-5 */
 +	status = "okay";
++	/* QSPI should also have PINCTRL setup */
 +	flash@0 {
-+		compatible = "m25p80", "jedec,spi-nor"; /* mt25qu512abb8e12 512Mib */
++		compatible = "mt25qu512a", "m25p80", "jedec,spi-nor"; /* mt25qu512abb8e12 512Mib */
 +		#address-cells = <1>;
 +		#size-cells = <1>;
 +		reg = <0>;
 +		spi-tx-bus-width = <4>;
 +		spi-rx-bus-width = <4>;
-+		spi-max-frequency = <108000000>;
-+		partition@0 { /* for testing purpose */
-+			label = "qspi";
-+			reg = <0 0x4000000>;
++		spi-max-frequency = <40000000>; /* 40MHz */
++		partition@0 {
++			label = "Image Selector";
++			reg = <0x0 0x80000>; /* 512KB */
++			read-only;
++			lock;
++		};
++		partition@80000 {
++			label = "Image Selector Golden";
++			reg = <0x80000 0x80000>; /* 512KB */
++			read-only;
++			lock;
++		};
++		partition@100000 {
++			label = "Persistent Register";
++			reg = <0x100000 0x20000>; /* 128KB */
++		};
++		partition@120000 {
++			label = "Persistent Register Backup";
++			reg = <0x120000 0x20000>; /* 128KB */
++		};
++		partition@140000 {
++			label = "Open_1";
++			reg = <0x140000 0xC0000>; /* 768KB */
++		};
++		partition@200000 {
++			label = "Image A (FSBL, PMU, ATF, U-Boot)";
++			reg = <0x200000 0xD00000>; /* 13MB */
++		};
++		partition@f00000 {
++			label = "ImgSel Image A Catch";
++			reg = <0xF00000 0x80000>; /* 512KB */
++			read-only;
++			lock;
++		};
++		partition@f80000 {
++			label = "Image B (FSBL, PMU, ATF, U-Boot)";
++			reg = <0xF80000 0xD00000>; /* 13MB */
++		};
++		partition@1c80000 {
++			label = "ImgSel Image B Catch";
++			reg = <0x1C80000 0x80000>; /* 512KB */
++			read-only;
++			lock;
++		};
++		partition@1d00000 {
++			label = "Open_2";
++			reg = <0x1D00000 0x100000>; /* 1MB */
++		};
++		partition@1e00000 {
++			label = "Recovery Image";
++			reg = <0x1E00000 0x200000>; /* 2MB */
++			read-only;
++			lock;
++		};
++		partition@2000000 {
++			label = "Recovery Image Backup";
++			reg = <0x2000000 0x200000>; /* 2MB */
++			read-only;
++			lock;
++		};
++		partition@2200000 {
++			label = "U-Boot storage variables";
++			reg = <0x2200000 0x20000>; /* 128KB */
++		};
++		partition@2220000 {
++			label = "U-Boot storage variables backup";
++			reg = <0x2220000 0x20000>; /* 128KB */
++		};
++		partition@2240000 {
++			label = "SHA256";
++			reg = <0x2240000 0x40000>; /* 256B but 256KB sector */
++			read-only;
++			lock;
++		};
++		partition@2280000 {
++			label = "Secure OS Storage";
++			reg = <0x2280000 0x20000>; /* 128KB */
++		};
++		partition@22A0000 {
++			label = "User";
++			reg = <0x22A0000 0x1d60000>; /* 29.375 MB */
 +		};
 +	};
 +};
@@ -266,415 +473,44 @@ index 000000000000..66919f578e02
 +	xlnx,mio-bank = <0>;
 +};
 +
-+&uart0 { /* uart0 MIO38-39 */
++&ttc0 {
 +	status = "okay";
-+	bootph-all;
++	#pwm-cells = <3>;
 +};
 +
-+&gem0 {
++&uart1 { /* uart0 MIO36-37 */
 +	status = "okay";
-+	phy-handle = <&phy0>;
-+	phy-mode = "sgmii"; /* DTG generates this properly 1512 */
-+	is-internal-pcspma;
-+	/* phys = <&psgtr 0 PHY_TYPE_SGMII 0 0>; */
-+	/* phy-reset-gpios = <&gpio 142 GPIO_ACTIVE_LOW>; */
-+	phy0: ethernet-phy@0 {
-+		reg = <0>;
-+	};
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart1_default>;
 +};
 +
-+&gpio {
++&pinctrl0 { /* required by spec */
 +	status = "okay";
-+	gpio-line-names = "QSPI_CLK", "QSPI_DQ1", "QSPI_DQ2", "QSPI_DQ3", "QSPI_DQ0", /* 0 - 4 */
-+		  "QSPI_CS_B", "", "", "SYSCTLR_GPIO", "SYSCTLR_LED", /* 5 - 9 */
-+		  "SYSCTLR_PB", "PMC_ZU4_TRIGGER", "", "EMMC_DAT0", "EMMC_DAT1", /* 10 - 14 */
-+		  "EMMC_DAT2", "EMMC_DAT3", "EMMC_DAT4", "EMMC_DAT5", "EMMC_DAT6", /* 15 - 19 */
-+		  "EMMC_DAT7", "EMMC_CMD", "EMMC_CLK", "EMMC_RST_B", "", /* 20 - 24 */
-+		  "", "", "", "", "", /* 25 - 29 */
-+		  "", "", "", "", "LP_I2C0_PMC_SCL", /* 30 - 34 */
-+		  "LP_I2C0_PMC_SDA", "LP_I2C1_SCL", "LP_I2C1_SDA", "UART0_RXD_IN", "UART0_TXD_OUT", /* 35 - 39 */
-+		  "", "", "ETH_RESET_B", "", "", /* 40 - 44 */
-+		  "", "", "", "", "", /* 45 - 49 */
-+		  "", "", "USB0_CLK", "USB0_DIR", "USB0_DATA2", /* 50 - 54 */
-+		  "USB0_NXT", "USB0_DATA0", "USB0_DATA1", "USB0_STP", "USB0_DATA3", /* 55 - 59 */
-+		  "USB0_DATA4", "USB0_DATA5", "USB0_DATA6", "USB0_DATA7", "", /* 60 - 64 */
-+		  "", "", "", "", "", /* 65 - 69 */
-+		  "", "", "", "", "", /* 70 - 74 */
-+		  "", "ETH_MDC", "ETH_MDIO", /* 75 - 77, MIO end and EMIO start */
-+		  "SYSCTLR_VERSAL_MODE0", "SYSCTLR_VERSAL_MODE1", /* 78 - 79 */
-+		  "SYSCTLR_VERSAL_MODE2", "SYSCTLR_VERSAL_MODE3", "SYSCTLR_POR_B_LS", "", "", /* 80 - 84 */
-+		  "SYSCTLR_JTAG_S0", "SYSCTLR_JTAG_S1", "SYSCTLR_IIC_MUX0_RESET_B", "SYSCTLR_IIC_MUX1_RESET_B", "", /* 85 - 89 */
-+		  "SYSCTLR_GPIO0", "SYSCTLR_GPIO1", "SYSCTLR_GPIO2", "SYSCTLR_GPIO3", "SYSCTLR_GPIO4", /* 90 - 94 */
-+		  "SYSCTLR_GPIO5", "", "", "", "", /* 95 - 99 */
-+		  "", "", "", "", "", /* 100 - 104 */
-+		  "", "", "", "", "", /* 105 - 109 */
-+		  "", "", "", "", "", /* 110 - 114 */
-+		  "", "", "", "", "", /* 115 - 119 */
-+		  "", "", "", "", "", /* 120 - 124 */
-+		  "", "", "", "", "", /* 125 - 129 */
-+		  "", "", "", "", "", /* 130 - 134 */
-+		  "", "", "", "", "", /* 135 - 139 */
-+		  "", "", "", "", "", /* 140 - 144 */
-+		  "", "", "", "", "", /* 145 - 149 */
-+		  "", "", "", "", "", /* 150 - 154 */
-+		  "", "", "", "", "", /* 155 - 159 */
-+		  "", "", "", "", "", /* 160 - 164 */
-+		  "", "", "", "", "", /* 165 - 169 */
-+		  "", "", "", ""; /* 170 - 173 */
-+};
 +
-+&i2c0 { /* MIO 34-35 - can't stay here */
-+	status = "okay";
-+	clock-frequency = <400000>;
-+	pinctrl-names = "default", "gpio";
-+	pinctrl-0 = <&pinctrl_i2c0_default>;
-+	pinctrl-1 = <&pinctrl_i2c0_gpio>;
-+	scl-gpios = <&gpio 34 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
-+	sda-gpios = <&gpio 35 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
++	pinctrl_uart1_default: uart1-default {
++		conf {
++			groups = "uart1_9_grp";
++			slew-rate = <SLEW_RATE_SLOW>;
++			power-source = <IO_STANDARD_LVCMOS18>;
++			drive-strength = <12>;
++		};
 +
-+	tca6416_u233: gpio@20 { /* u233 */ /* FIXME - address maybe wrong */
-+		compatible = "ti,tca6416";
-+		reg = <0x20>;
-+		gpio-controller; /* interrupt not connected */
-+		#gpio-cells = <2>;
-+		gpio-line-names = "MAX6643_OT_B", "MAX6643_FANFAIL_B", "QSFPDD1_MODSELL", "QSFPDD1_MODSELL", /* 0 - 3 */
-+				  "PMBUS2_INA226_ALERT", "", "", "MAX6643_FULL_SPEED", /* 4 - 7 */
-+				  "FMCP1_FMC_PRSNT_M2C_B", "", "FMCP1_FMCP_PRSNT_M2C_B", "", /* 10 - 13 */
-+				  "VCCINT_VRHOT_B", "8A34001_EXP_RST_B", "PMBUS_ALERT", "PMBUS1_INA226_ALERT"; /* 14 - 17 */
++		conf-rx {
++			pins = "MIO37";
++			bias-high-impedance;
++		};
++
++		conf-tx {
++			pins = "MIO36";
++			bias-disable;
++		};
++
++		mux {
++			groups = "uart1_9_grp";
++			function = "uart1";
++		};
 +	};
 +
-+	i2c-mux@74 { /* u33 */
-+		compatible = "nxp,pca9548";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		reg = <0x74>;
-+		/* reset-gpios = <&gpio SYSCTLR_IIC_MUX0_RESET_B GPIO_ACTIVE_HIGH>; */
-+		pmbus_i2c: i2c@0 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <0>;
-+			/* On connector J325 */
-+			ir38060_41: regulator@41 { /* IR38060 - u259 */
-+				compatible = "infineon,ir38060", "infineon,ir38064";
-+				reg = <0x41>; /* i2c addr 0x11 */
-+			};
-+			ir38164_43: regulator@43 { /* IR38164 - u13 */
-+				compatible = "infineon,ir38164";
-+				reg = <0x43>; /* i2c addr 0x13 */
-+			};
-+			ir35221_45: pmic@46 { /* IR35221 - u152 */
-+				compatible = "infineon,ir35221";
-+				reg = <0x46>; /* PMBUS - 0x16 */
-+			};
-+			irps5401_47: pmic5401@47 { /* IRPS5401 - u160 */
-+				compatible = "infineon,irps5401";
-+				reg = <0x47>; /* i2c addr 0x17 */
-+			};
-+			ir38164_49: regulator@49 { /* IR38164 - u189 */
-+				compatible = "infineon,ir38164";
-+				reg = <0x49>; /* i2c addr 0x19 */
-+			};
-+			irps5401_4c: pmic@4c { /* IRPS5401 - u167 */
-+				compatible = "infineon,irps5401";
-+				reg = <0x4c>; /* i2c addr 0x1c */
-+			};
-+			irps5401_4d: pmic@4d { /* IRPS5401 - u175 */
-+				compatible = "infineon,irps5401";
-+				reg = <0x4d>; /* i2c addr 0x1c */
-+			};
-+			ir38164_4e: regulator@4e { /* IR38164 - u184 */
-+				compatible = "infineon,ir38164";
-+				reg = <0x4e>; /* i2c addr 0x1e */
-+			};
-+			ir38164_4f: regulator@4f { /* IR38164 - u187 */
-+				compatible = "infineon,ir38164";
-+				reg = <0x4f>; /* i2c addr 0x1f */
-+			};
-+		};
-+		pmbus1_ina226_i2c: i2c@1 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <1>;
-+			/* FIXME check alerts coming to SC */
-+			vccint: ina226@40 { /* u65 */
-+				compatible = "ti,ina226";
-+				reg = <0x40>;
-+				shunt-resistor = <5000>;
-+			};
-+			vcc_soc: ina226@41 { /* u161 */
-+				compatible = "ti,ina226";
-+				reg = <0x41>;
-+				shunt-resistor = <5000>;
-+			};
-+			vcc_pmc: ina226@42 { /* u163 */
-+				compatible = "ti,ina226";
-+				reg = <0x42>;
-+				shunt-resistor = <5000>;
-+			};
-+			vcc_ram: ina226@43 { /* u5 */
-+				compatible = "ti,ina226";
-+				reg = <0x43>;
-+				shunt-resistor = <5000>;
-+			};
-+			vcc_pslp: ina226@44 { /* u165 */
-+				compatible = "ti,ina226";
-+				reg = <0x44>;
-+				shunt-resistor = <5000>;
-+			};
-+			vcc_psfp: ina226@45 { /* u164 */
-+				compatible = "ti,ina226";
-+				reg = <0x45>;
-+				shunt-resistor = <5000>;
-+			};
-+		};
-+		i2c@2 { /* NC */ /* FIXME maybe remove */
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <2>;
-+		};
-+		pmbus2_ina226_i2c: i2c@3 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <3>;
-+			/* FIXME check alerts coming to SC */
-+			vccaux: ina226@40 { /* u166 */
-+				compatible = "ti,ina226";
-+				reg = <0x40>;
-+				shunt-resistor = <5000>;
-+			};
-+			vccaux_pmc: ina226@41 { /* u168 */
-+				compatible = "ti,ina226";
-+				reg = <0x41>;
-+				shunt-resistor = <5000>;
-+			};
-+			mgtavcc: ina226@42 { /* u265 */
-+				compatible = "ti,ina226";
-+				reg = <0x42>;
-+				shunt-resistor = <5000>;
-+			};
-+			vcc1v5: ina226@43 { /* u264 */
-+				compatible = "ti,ina226";
-+				reg = <0x43>;
-+				shunt-resistor = <5000>;
-+			};
-+			vcco_mio: ina226@45 { /* u172 */
-+				compatible = "ti,ina226";
-+				reg = <0x45>;
-+				shunt-resistor = <5000>;
-+			};
-+			mgtavtt: ina226@46 { /* u188 */
-+				compatible = "ti,ina226";
-+				reg = <0x46>;
-+				shunt-resistor = <2000>;
-+			};
-+			vcco_502: ina226@47 { /* u174 */
-+				compatible = "ti,ina226";
-+				reg = <0x47>;
-+				shunt-resistor = <5000>;
-+			};
-+			mgtvccaux: ina226@48 { /* u176 */
-+				compatible = "ti,ina226";
-+				reg = <0x48>;
-+				shunt-resistor = <5000>;
-+			};
-+			vcc1v1_lp4: ina226@49 { /* u186 */
-+				compatible = "ti,ina226";
-+				reg = <0x49>;
-+				shunt-resistor = <2000>;
-+			};
-+			vadj_fmc: ina226@4a { /* u184 */
-+				compatible = "ti,ina226";
-+				reg = <0x4a>;
-+				shunt-resistor = <2000>;
-+			};
-+			lpdmgtyavcc: ina226@4b { /* u177 */
-+				compatible = "ti,ina226";
-+				reg = <0x4b>;
-+				shunt-resistor = <5000>;
-+			};
-+			lpdmgtyavtt: ina226@4c { /* u260 */
-+				compatible = "ti,ina226";
-+				reg = <0x4c>;
-+				shunt-resistor = <2000>;
-+			};
-+			lpdmgtyvccaux: ina226@4d { /* u234 */
-+				compatible = "ti,ina226";
-+				reg = <0x4d>;
-+				shunt-resistor = <5000>;
-+			};
-+		};
-+		i2c@4 { /* NC */
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <4>;
-+		};
-+		i2c@5 { /* NC */
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <5>;
-+		};
-+		user_si570: i2c@6 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <6>;
-+			user_si570_1: clock-generator@5f { /* USER C0 SI570 - u205 */
-+				#clock-cells = <0>;
-+				compatible = "silabs,si570";
-+				reg = <0x5f>;
-+				temperature-stability = <50>;
-+				factory-fout = <100000000>;
-+				clock-frequency = <100000000>;
-+				clock-output-names = "fmc_si570";
-+			};
-+
-+		};
-+		/* 7 unused */
-+	};
-+};
-+
-+&i2c1 { /* i2c1 MIO 36-37 */
-+	status = "okay";
-+	clock-frequency = <400000>;
-+	pinctrl-names = "default", "gpio";
-+	pinctrl-0 = <&pinctrl_i2c1_default>;
-+	pinctrl-1 = <&pinctrl_i2c1_gpio>;
-+	scl-gpios = <&gpio 36 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
-+	sda-gpios = <&gpio 37 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
-+
-+	i2c-mux@74 { /* u35 */
-+		compatible = "nxp,pca9548";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+		reg = <0x74>;
-+		/* reset-gpios = <&gpio SYSCTLR_IIC_MUX1_RESET_B GPIO_ACTIVE_HIGH>; */
-+		ref_clk_i2c: i2c@0 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <0>;
-+			/* Use for storing information about SC board */
-+			eeprom: eeprom@54 { /* u34 - m24128 16kB */
-+				compatible = "st,24c128", "atmel,24c128";
-+				reg = <0x54>; /* & 0x5c */
-+			};
-+			ref_clk: clock-generator@5d { /* u32 */
-+				#clock-cells = <0>;
-+				compatible = "silabs,si570";
-+				reg = <0x5d>;
-+				temperature-stability = <50>;
-+				factory-fout = <33333333>;
-+				clock-frequency = <33333333>;
-+				clock-output-names = "ref_clk";
-+				silabs,skip-recall;
-+			};
-+		};
-+		fmcp1_i2c: i2c@1 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <1>;
-+			/* FIXME connection to Samtec J51C */
-+			/* expected eeprom 0x50 SE cards */
-+		};
-+		i2c@2 { /* NC - FIXME */
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <2>;
-+		};
-+		lpddr4_si570_clk3_i2c: i2c@3 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <3>;
-+			lpddr4_clk3: clock-generator@60 { /* u4 */
-+				#clock-cells = <0>;
-+				compatible = "silabs,si570";
-+				reg = <0x60>;
-+				temperature-stability = <50>;
-+				factory-fout = <200000000>;
-+				clock-frequency = <200000000>;
-+				clock-output-names = "lpddr4_clk3";
-+			};
-+		};
-+		lpddr4_si570_clk2_i2c: i2c@4 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <4>;
-+			lpddr4_clk2: clock-generator@60 { /* u3 */
-+				#clock-cells = <0>;
-+				compatible = "silabs,si570";
-+				reg = <0x60>;
-+				temperature-stability = <50>;
-+				factory-fout = <200000000>;
-+				clock-frequency = <200000000>;
-+				clock-output-names = "lpddr4_clk2";
-+			};
-+		};
-+		lpddr4_si570_clk1_i2c: i2c@5 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <5>;
-+			lpddr4_clk1: clock-generator@60 { /* u248 */
-+				#clock-cells = <0>;
-+				compatible = "silabs,si570";
-+				reg = <0x60>;
-+				temperature-stability = <50>;
-+				factory-fout = <200000000>;
-+				clock-frequency = <200000000>;
-+				clock-output-names = "lpddr4_clk1";
-+			};
-+		};
-+		qsfpdd_i2c: i2c@6 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <6>;
-+			/* J1/J2 connectors */
-+		};
-+		idt8a34001_i2c: i2c@7 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			reg = <7>;
-+			/* Via J310 connector */
-+			idt_8a34001: phc@5b {
-+				compatible = "idt,8a34001"; /* u219B */
-+				reg = <0x5b>; /* FIXME not in schematics */
-+			};
-+		};
-+	};
-+};
-+
-+&usb0 { /* MIO52 - MIO63 */
-+	status = "okay";
-+	phy-names = "usb3-phy";
-+	phys = <&psgtr 1 PHY_TYPE_USB3 0 1>;
-+};
-+
-+&psgtr {
-+	status = "okay";
-+	/* sgmii, usb3 */
-+	clocks = <&si5332_1>, <&si5332_2>;
-+	clock-names = "ref0", "ref1";
-+};
-+
-+&dwc3_0 {
-+	status = "okay";
-+	dr_mode = "peripheral";
-+	snps,dis_u2_susphy_quirk;
-+	snps,dis_u3_susphy_quirk;
-+	maximum-speed = "super-speed";
-+};
-+
-+&xilinx_ams {
-+	status = "okay";
-+};
-+
-+&ams_ps {
-+	status = "okay";
-+};
-+
-+&ams_pl {
-+	status = "okay";
-+};
-+
-+&pinctrl0 {
-+	status = "okay";
 +	pinctrl_i2c0_default: i2c0-default {
 +		mux {
 +			groups = "i2c0_8_grp";
@@ -703,29 +539,73 @@ index 000000000000..66919f578e02
 +	};
 +
 +	pinctrl_i2c1_default: i2c1-default {
-+		mux {
-+			groups = "i2c1_9_grp";
-+			function = "i2c1";
-+		};
-+
 +		conf {
-+			groups = "i2c1_9_grp";
++			groups = "i2c1_6_grp";
 +			bias-pull-up;
 +			slew-rate = <SLEW_RATE_SLOW>;
 +			power-source = <IO_STANDARD_LVCMOS18>;
 +		};
++
++		mux {
++			groups = "i2c1_6_grp";
++			function = "i2c1";
++		};
 +	};
 +
 +	pinctrl_i2c1_gpio: i2c1-gpio {
-+		mux {
-+			groups = "gpio0_36_grp", "gpio0_37_grp";
-+			function = "gpio0";
-+		};
-+
 +		conf {
-+			groups = "gpio0_36_grp", "gpio0_37_grp";
++			groups = "gpio0_24_grp", "gpio0_25_grp";
 +			slew-rate = <SLEW_RATE_SLOW>;
 +			power-source = <IO_STANDARD_LVCMOS18>;
++		};
++
++		mux {
++			groups = "gpio0_24_grp", "gpio0_25_grp";
++			function = "gpio0";
++		};
++	};
++
++	pinctrl_gem1_default: gem1-default {
++		conf {
++			groups = "ethernet1_0_grp";
++			slew-rate = <SLEW_RATE_SLOW>;
++			power-source = <IO_STANDARD_LVCMOS18>;
++		};
++
++		conf-rx {
++			pins = "MIO44", "MIO46", "MIO48";
++			bias-high-impedance;
++			low-power-disable;
++		};
++
++		conf-bootstrap {
++			pins = "MIO45", "MIO47", "MIO49";
++			bias-disable;
++			low-power-disable;
++		};
++
++		conf-tx {
++			pins = "MIO38", "MIO39", "MIO40",
++				"MIO41", "MIO42", "MIO43";
++			bias-disable;
++			low-power-enable;
++		};
++
++		conf-mdio {
++			groups = "mdio1_0_grp";
++			slew-rate = <SLEW_RATE_SLOW>;
++			power-source = <IO_STANDARD_LVCMOS18>;
++			bias-disable;
++		};
++
++		mux-mdio {
++			function = "mdio1";
++			groups = "mdio1_0_grp";
++		};
++
++		mux {
++			function = "ethernet1";
++			groups = "ethernet1_0_grp";
 +		};
 +	};
 +};
