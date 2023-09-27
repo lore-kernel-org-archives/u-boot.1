@@ -4,53 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA54E810D0
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 12:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FC1FE810D6
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 12:02:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DC8C86DCD;
-	Wed, 27 Sep 2023 14:01:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7782386DE7;
+	Wed, 27 Sep 2023 14:02:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Lwil2X1P";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="FSJjK/V6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20E2286DDC; Wed, 27 Sep 2023 14:01:58 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
+ id 610F286DE7; Wed, 27 Sep 2023 14:02:04 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44BE086DC5
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 14:01:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BD8A86DC5
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 14:02:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id BEFE0B81261;
+ by sin.source.kernel.org (Postfix) with ESMTP id B1ECFCE19BE;
+ Wed, 27 Sep 2023 12:01:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9D7DFC433C8;
  Wed, 27 Sep 2023 12:01:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5956C433C7;
- Wed, 27 Sep 2023 12:01:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695816115;
- bh=ioUgXD0sVXvp7bSmMYPzQNyTwHTX+miXhZku63q8sh4=;
- h=From:To:Cc:Subject:Date:From;
- b=Lwil2X1PjU5r9OXwL4S+BvtrJoVhQn+87araH6+1rzQHiVH+yUwpG+ApsM1kWoXvn
- rjvRHjoExnJveuU1mixN8qZOiz5coDGh+HJ+ZPg2OSJUmQzzJ9e/jMCp3QyaxntOKc
- vjXFv44sZbD9SAtRZB2OtpF5kocs514+0HOsnbVf11PmFF55sqGg3dhsvAni5iuG35
- 551+Y0vm0qfBWU7EYgcVJMxbcSEWr5qqccw04qXhJOYzGleLsSrNAQoWDPcWVwTahl
- XrMsKVht8lRRBN7olcsFB1ktgQS0czRw9r+Yt5BaT2hU3q39ERqT5ah0nAGCKXBUCZ
- Zv1Yr4w0XTNtg==
+ s=k20201202; t=1695816118;
+ bh=Sqc+EtmlWFlFWeu+PV0RKyLPsSEajw+hiinKkSUlpbI=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=FSJjK/V6nhSfinfv9Nls05YI18C6KCsfuzZIEAHKsPq1HCFcfom/SmsPlAgRS4q4H
+ ZBvjDFYP2WuSW8r1bgmFTvthvHB6pn0Z1eqV0O+rHbaeiEOtN6o4kOJ8igY400WVk6
+ GG+xBNnwr4eG7E3Jxdu/FkFtO0DwYL+w8K7z/TlkIUAHKN83s/zNmJt3pm7Hfm/gip
+ X1v9iit8aMkh/7szoOa7bu9EJAaEhkzUCnttMuNZvi6UooRIeqCP4BNAWCPqeYxUrE
+ Wx0Q4ZLLCl/GiVgPDF1F0PVxZLv+zN/1LP5COLZhNnycmZn0Dl59EcQKAERFFjpd5v
+ sOOObHuh5tq4Q==
 From: Roger Quadros <rogerq@kernel.org>
 To: nm@ti.com,
 	trini@konsulko.com,
 	u-boot@lists.denx.de
 Cc: vigneshr@ti.com, bb@ti.com, afd@ti.com, srk@ti.com, r-gunasekaran@ti.com,
  praneeth@ti.com, Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 0/2] arm: dts: k3-am64: Sync dts from Linux v6.6-rc1
-Date: Wed, 27 Sep 2023 15:01:46 +0300
-Message-Id: <20230927120148.75088-1-rogerq@kernel.org>
+Subject: [PATCH 1/2] Revert "ARM: dts: k3-am642-sk-u-boot: add PMIC node"
+Date: Wed, 27 Sep 2023 15:01:47 +0300
+Message-Id: <20230927120148.75088-2-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230927120148.75088-1-rogerq@kernel.org>
+References: <20230927120148.75088-1-rogerq@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,35 +71,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+This reverts commit 28a4c3113445d4400639f357fae0def007a41093.
 
-This series aligns the dts files for AM64 platform from Linux v6.6-rc1.
+The PMIC should come from the k3-am642-sk.dts file.
 
-cheers,
--roger
+There are 2 variants of the AM642-SK board and each has a different PMIC.
+i.e. SK-AM64 [1] has TPS6521855 and SK-AM64B [2] has TPS6522053.
 
-Roger Quadros (2):
-  Revert "ARM: dts: k3-am642-sk-u-boot: add PMIC node"
-  arm: dts: k3-am64: Bump dts from Linux v6.6-rc1
+[1] - https://www.ti.com/tool/SK-AM64
+[2] - https://www.ti.com/tool/SK-AM64B
 
- arch/arm/dts/k3-am64-main.dtsi        | 209 ++++++++++++++++++++++----
- arch/arm/dts/k3-am64-mcu.dtsi         |  53 ++++++-
- arch/arm/dts/k3-am64-thermal.dtsi     |  33 ++++
- arch/arm/dts/k3-am64.dtsi             |  22 +--
- arch/arm/dts/k3-am642-evm-u-boot.dtsi |  70 +++++----
- arch/arm/dts/k3-am642-evm.dts         | 177 +++++++++++++++++-----
- arch/arm/dts/k3-am642-r5-evm.dts      | 194 ++----------------------
- arch/arm/dts/k3-am642-r5-sk.dts       | 194 +-----------------------
- arch/arm/dts/k3-am642-sk-u-boot.dtsi  | 122 ++++-----------
- arch/arm/dts/k3-am642-sk.dts          | 174 +++++++++++++++------
- arch/arm/dts/k3-am642.dtsi            |   1 +
- arch/arm/dts/k3-serdes.h              | 204 +++++++++++++++++++++++++
- 12 files changed, 815 insertions(+), 638 deletions(-)
- create mode 100644 arch/arm/dts/k3-am64-thermal.dtsi
- create mode 100644 arch/arm/dts/k3-serdes.h
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
+---
+ arch/arm/dts/k3-am642-sk-u-boot.dtsi | 61 ----------------------------
+ 1 file changed, 61 deletions(-)
 
-
-base-commit: 4cb31a9f3560b293670de95e76c1f3cf2f9e1ca8
+diff --git a/arch/arm/dts/k3-am642-sk-u-boot.dtsi b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
+index 3d6be025bd..4431750dc6 100644
+--- a/arch/arm/dts/k3-am642-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
+@@ -54,67 +54,6 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&main_i2c0_pins_default>;
+ 	clock-frequency = <400000>;
+-
+-	tps65219: pmic@30 {
+-		compatible = "ti,tps65219";
+-		reg = <0x30>;
+-
+-		regulators {
+-			buck1_reg: buck1 {
+-				regulator-name = "VDD_CORE";
+-				regulator-min-microvolt = <750000>;
+-				regulator-max-microvolt = <750000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			buck2_reg: buck2 {
+-				regulator-name = "VCC1V8";
+-				regulator-min-microvolt = <1800000>;
+-				regulator-max-microvolt = <1800000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			buck3_reg: buck3 {
+-				regulator-name = "VDD_LPDDR4";
+-				regulator-min-microvolt = <1100000>;
+-				regulator-max-microvolt = <1100000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			ldo1_reg: ldo1 {
+-				regulator-name = "VDDSHV_SD_IO_PMIC";
+-				regulator-min-microvolt = <33000000>;
+-				regulator-max-microvolt = <33000000>;
+-			};
+-
+-			ldo2_reg: ldo2 {
+-				regulator-name = "VDDAR_CORE";
+-				regulator-min-microvolt = <850000>;
+-				regulator-max-microvolt = <850000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			ldo3_reg: ldo3 {
+-				regulator-name = "VDDA_1V8";
+-				regulator-min-microvolt = <18000000>;
+-				regulator-max-microvolt = <18000000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-
+-			ldo4_reg: ldo4 {
+-				regulator-name = "VDD_PHY_2V5";
+-				regulator-min-microvolt = <25000000>;
+-				regulator-max-microvolt = <25000000>;
+-				regulator-boot-on;
+-				regulator-always-on;
+-			};
+-		};
+-	};
+ };
+ 
+ &main_uart0 {
 -- 
 2.34.1
 
