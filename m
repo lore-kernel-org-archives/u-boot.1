@@ -4,109 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98437E810B9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 10:06:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64569E810B9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 10:11:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9B7486DA7;
-	Wed, 27 Sep 2023 12:06:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 48A6B864A7;
+	Wed, 27 Sep 2023 12:11:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="buS7JNRu";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="LHiqW6D+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52EE786DBC; Wed, 27 Sep 2023 12:06:12 +0200 (CEST)
-Received: from NAM02-BN1-obe.outbound.protection.outlook.com
- (mail-bn1nam02on2062b.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eb2::62b])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2647686B94; Wed, 27 Sep 2023 12:11:07 +0200 (CEST)
+Received: from mail-m11873.qiye.163.com (mail-m11873.qiye.163.com
+ [115.236.118.73])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F90E86413
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 12:06:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD5A786413
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 12:11:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PlB5Ynorq/9ieB2Zap8VV7z04hzIx60b89cPN7Y/QENwjr0W1MP4pLGsaCnD/LkuShJ1PzZP29iFV0LWmC8eTfYagCuMZQCBRMIDW53kTHdhR69woherftFrIGzdWEvsqXtTKHHJ9M+PRsypVTULSGtUqeHVCVOTaAAkh838SjWLJXAH9+l4xxwfmBpr6l+J1T8nezV+8w34clcpVcjw7Z43mbSKedQT+ICi02rDxIgmucbe5ODheZon6hWumvhXf0ToCItLW/57bxeB50l96WBh0fPDCZCBpKiHBoHDi6ya3gM5Wu73Ruy+XTsQXvm1+rHg/pmB6OJFmHX7mIoJ8g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HbXwR0v8VcY7RgXNJOjG939vLPuFZ+H68l2ULpZRuvc=;
- b=h2zzkmv4GY9cMSk0wghQE8Y3fykACY3E9pAH8wBK/xtOkY1yzr1ygMTY1HpJNZSU7viXdMPw6VaQncB9ieZaY9wQRM/eTrflAURB+aPBICSas2FEEGMOQzbzkXRzt3HvZVcY4QbCrs99HZBmuDrS6IFq3qpArQTCzVmvP2y4iFgRmOj9pj9PRXP6RnsRapH7FMSRVrI7etPAnbjz4qDEl1EGwFpCGDwifpnz8rHAGJ5sRVW6qut5Zxv5fJofTjmXtXj4XOO6g8LJ+hUEmhfnB6kLWm/sZzukkliWwExKDL3ww+U+WRa0bbuorqAvgQrXa0UxbDYEeR+UAgdhNJV7iA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HbXwR0v8VcY7RgXNJOjG939vLPuFZ+H68l2ULpZRuvc=;
- b=buS7JNRubfBIIchn7FamioPptmG04qps4H5i99KB0ltzJsqklwiuy7sGH8s4y63WlnSG2LiGVbW9ug/7hw7lA/u047NmJAR0A/wSP6CtIO2QtzSBbodVJautgjTo4SIYLaa/tu6XlYVQse1teLukbFbmwyfZltrwtq9cSHhIatE=
-Received: from BL1PR13CA0226.namprd13.prod.outlook.com (2603:10b6:208:2bf::21)
- by MN0PR12MB6002.namprd12.prod.outlook.com (2603:10b6:208:37e::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.20; Wed, 27 Sep
- 2023 10:06:07 +0000
-Received: from BL02EPF0001A103.namprd05.prod.outlook.com
- (2603:10b6:208:2bf:cafe::38) by BL1PR13CA0226.outlook.office365.com
- (2603:10b6:208:2bf::21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.20 via Frontend
- Transport; Wed, 27 Sep 2023 10:06:07 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL02EPF0001A103.mail.protection.outlook.com (10.167.241.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Wed, 27 Sep 2023 10:06:07 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 27 Sep
- 2023 05:05:33 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-Subject: [PATCH] arm64: xilinx: Do not use '_' in si5335 DT node names
-Date: Wed, 27 Sep 2023 12:05:32 +0200
-Message-ID: <ac752b1e27f02efb32608188992bb7ae50e4b1b0.1695809130.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.36.1
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=LHiqW6D+U89C2n8+WwRWJLKHe8Hp82WyZqOCf+u6Nt7jn11OfYjj/FVdqcko3KY+GGXtnlfR3QxEAMcb0uURjmhkaVMicNrjlztUKoYWVdnf/XcOaz6faoNFH/Xe1OFZpmnFShpENmBzw8EjCKmVXuxfzKTImxmUPIgIRBqiDps=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=tUt8eWlbPlf5PKhQ0LnmvhQFLumU/QJ/Ql30tiR8O7w=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 31A65400309;
+ Wed, 27 Sep 2023 18:09:53 +0800 (CST)
+Message-ID: <d3c19219-ef66-fbcc-9a64-adaaae2b13dc@rock-chips.com>
+Date: Wed, 27 Sep 2023 18:09:52 +0800
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1434; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=B7CZzDHgMBS4PoECzQaMXirv4pCkYMNOMA3qvUsTQiE=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhlThf1negtUtd17yvO+2KN5z7HpbYMWLPSvVJt5ma7nxN
- LHI6YxkRywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZhIVzfDPDULjg0Tm8tK5C50
- 7OgVjnv+JFXpIsN8B/Wynte3Xt7v8LR7vDxm/VImi87lAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A103:EE_|MN0PR12MB6002:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0f1bddde-9993-4c67-5ca1-08dbbf415e2d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: FZM7mqJMotTofx8Amx2G5K/VRRKj0XwbrYCSw+OvsjZblUyWTcsTLPCA+7zA6NkEWte8yBXE0h3dWg0VUr7a9zeinM8EyUhsjCxBxRB3pONDXiP/FsGvNPge+A2LFdklRTmv3xbe73ZG759oDdf9HunHHQ/FPLILo6X21x7IApsuSmOthX+KvqayVGmB4zssMvqJHRigtIBy+a2P0PYmpIwkPKUDW6RwkhC1GaHvhPo+we3rS60Fmbw/SYEnR1xBojaDkYrL94rFvmV2sq2hkMVscWx5MthtectUHlV+ePvAhUo1v5Pg96Gs9gGIN153ljy7g7oaCnB7i/MS1ylgOheDrKzXW6tm7lyV0fGywXRW7xaZUm7sgvLaHMoJznPEvMOzP+nRnfEyp3hkiibFH1TZmqBrhJOeJNAsU2rCneelwmO+Of6mlZpgj9eQN4BBgw5CsCjxwe/nVj96n/+XJ8A5cDhDuqP2MfE9fJ4RmodVKgTsWfNoZJt4hWd5g0NJZQkZn4zzecg7NSpHEdmHVhqcpP2MlCSaCyxVNmvrer0ilnPrfJhA/8N+JXY1cHpE8x8WUJf1VLRpY445a394dEmczmWpbv/ye0vuMyMOSod6M4gzXEoDCld94LFApChagcRqQYdMzYUCWIKyhDSFVhwenSOhJz0JKr9vfwcA7CivHknpeR1g6C/QnO/R6/UPDERhQOM8MeOb9TOOaoF6JM9iwQSMrR7tU0SEVdkL9aRruPWqGk4wMTshepT27DpR/F2l1dmqjtN/B+SOvpynmQ==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(39860400002)(376002)(136003)(396003)(230922051799003)(82310400011)(451199024)(186009)(1800799009)(40470700004)(46966006)(36840700001)(86362001)(2616005)(356005)(316002)(82740400003)(110136005)(81166007)(70206006)(16526019)(478600001)(70586007)(426003)(36860700001)(26005)(47076005)(40460700003)(8676002)(44832011)(8936002)(2906002)(5660300002)(36756003)(336012)(40480700001)(41300700001)(83380400001)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2023 10:06:07.6399 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f1bddde-9993-4c67-5ca1-08dbbf415e2d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A103.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6002
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [RESEND PATCH v2] rockchip: include: asm: fix entering download
+ mode rk3066
+Content-Language: en-US
+To: Johan Jonker <jbx6244@gmail.com>
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
+References: <decbd275-3171-89a3-abf5-cb0caae0f2b7@gmail.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <decbd275-3171-89a3-abf5-cb0caae0f2b7@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR9LSVYfQ00YQ01LQ08YSU5VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8ad61dd28c2eb3kusn31a65400309
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PRQ6Lio*CDw5EDUhQj4oES8*
+ MUkaCklVSlVKTUJOQ0tCSEJIQ0lIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDSE5CNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,50 +74,200 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Character '_' not recommended in node name. Use '-' instead.
-Pretty much run sed below for node names.
-s/si5335_/si5335-/
+Hi Johan,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+On 2023/9/19 23:28, Johan Jonker wrote:
+> Keep track of the re-entries with help of the lr register.
+> This binary can be re-used and called from various BROM functions.
+> Only when it's called from the part that handles SPI, NAND or EMMC
+> hardware it needs to early return to BROM ones.
+> In download mode when it handles data on USB OTG and UART0
+> this section must be skipped.
+>
+> Unlike newer Rockchip SoC models the rk3066 BROM code does not have built-in
+> support to enter download mode on return to BROM. This binary must check
+> the boot mode register for the BOOT_BROM_DOWNLOAD flag and reset if it's set.
+> It then returns to BROM to the end of the function that reads boot blocks.
+> >From there the BROM code goes into a download mode and waits for data
+> on USB OTG and UART0.
+>
+> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+> ---
+>
+> Note:
+>    Normal boot flow is OK.
+>    In download mode this binary hangs after return to BROM for unknown reasons.
 
-Till now I didn't heard back that different style should be used that's why
-also sending this patch and separately from other similar change recently
-sent.
----
- arch/arm/dts/zynqmp-zcu100-revC.dts | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+Basically do not touch the stack area of Bootrom and no more other 
+requirement.
 
-diff --git a/arch/arm/dts/zynqmp-zcu100-revC.dts b/arch/arm/dts/zynqmp-zcu100-revC.dts
-index a84cd86694e2..44d1b24677d1 100644
---- a/arch/arm/dts/zynqmp-zcu100-revC.dts
-+++ b/arch/arm/dts/zynqmp-zcu100-revC.dts
-@@ -2,7 +2,8 @@
- /*
-  * dts file for Xilinx ZynqMP ZCU100 revC
-  *
-- * (C) Copyright 2016 - 2021, Xilinx, Inc.
-+ * (C) Copyright 2016 - 2022, Xilinx, Inc.
-+ * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
-  *
-  * Michal Simek <michal.simek@amd.com>
-  * Nathalie Chan King Choy
-@@ -131,13 +132,13 @@
- 		io-channels = <&u35 0>, <&u35 1>, <&u35 2>, <&u35 3>;
- 	};
- 
--	si5335_0: si5335_0 { /* clk0_usb - u23 */
-+	si5335_0: si5335-0 { /* clk0_usb - u23 */
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
- 		clock-frequency = <26000000>;
- 	};
- 
--	si5335_1: si5335_1 { /* clk1_dp - u23 */
-+	si5335_1: si5335-1 { /* clk1_dp - u23 */
- 		compatible = "fixed-clock";
- 		#clock-cells = <0>;
- 		clock-frequency = <27000000>;
--- 
-2.36.1
+The bootrom download mode is usually used for boards without any 
+available firmware.
 
+If there is available firmware, it'd be better to enable download 
+feature in U-Boot.
+
+
+Thanks,
+
+- Kever
+
+>    Replace CODE471_OPTION with 30_LPDDR2_300MHz_DD.bin for now.
+>
+>    Could Rockchip disclose what further conditions must be met
+>    in rk3066 download mode?
+>
+> Changed V2:
+>    Move file to rk3066 specific location
+>    Replace retry_counter by LR check
+>    Add DNL mode return address
+>    Restyle
+>    Reword
+> ---
+>   arch/arm/include/asm/arch-rk3066/boot0.h | 77 +++++++++++++++++++++++-
+>   arch/arm/mach-rockchip/Kconfig           | 17 +++++-
+>   arch/arm/mach-rockchip/rk3066/Kconfig    |  6 ++
+>   3 files changed, 98 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm/include/asm/arch-rk3066/boot0.h b/arch/arm/include/asm/arch-rk3066/boot0.h
+> index 28c0fb9a4c6b..1af4b9c1d7ba 100644
+> --- a/arch/arm/include/asm/arch-rk3066/boot0.h
+> +++ b/arch/arm/include/asm/arch-rk3066/boot0.h
+> @@ -3,6 +3,81 @@
+>   #ifndef __ASM_ARCH_BOOT0_H__
+>   #define __ASM_ARCH_BOOT0_H__
+>
+> -#include <asm/arch-rockchip/boot0.h>
+> +#include <asm/arch-rockchip/boot_mode.h>
+>
+> +/*
+> + * Execution starts on the instruction following this 4-byte header
+> + * (containing the magic 'RK30'). This magic constant will be written into
+> + * the final image by the rkimage tool, but we need to reserve space for it here.
+> + */
+> +#ifdef CONFIG_SPL_BUILD
+> +	b	1f  /* if overwritten, entry-address is at the next word */
+> +1:
+> +#endif
+> +
+> +#if CONFIG_IS_ENABLED(ROCKCHIP_EARLYRETURN_TO_BROM)
+> +/*
+> + * Keep track of the re-entries with help of the lr register.
+> + * This binary can be re-used and called from various BROM functions.
+> + * Only when it's called from the part that handles SPI, NAND or EMMC
+> + * hardware it needs to early return to BROM ones.
+> + * In download mode when it handles data on USB OTG and UART0
+> + * this section must be skipped.
+> + */
+> +	ldr	r3, =CONFIG_ROCKCHIP_BOOT_LR_REG
+> +	cmp	lr, r3          /* if (LR != CONFIG_ROCKCHIP_BOOT_LR_REG)        */
+> +	bne	reset           /*     goto reset;                               */
+> +/*
+> + * Unlike newer Rockchip SoC models the rk3066 BROM code does not have built-in
+> + * support to enter download mode on return to BROM. This binary must check
+> + * the boot mode register for the BOOT_BROM_DOWNLOAD flag and reset if it's set.
+> + * It then returns to BROM to the end of the function that reads boot blocks.
+> + * From there the BROM code goes into a download mode and waits for data
+> + * on USB OTG and UART0.
+> + */
+> +	ldr	r2, =BOOT_BROM_DOWNLOAD
+> +	ldr	r3, =CONFIG_ROCKCHIP_BOOT_MODE_REG
+> +	ldr	r0, [r3]        /* if (readl(CONFIG_ROCKCHIP_BOOT_MODE_REG) !=   */
+> +	cmp	r0, r2          /*     BOOT_BROM_DOWNLOAD) {                     */
+> +	bne	early_return    /*     goto early_return;                        */
+> +				/* } else {                                      */
+> +	mov	r0, #0
+> +	str	r0, [r3]        /*     writel(0, CONFIG_ROCKCHIP_BOOT_MODE_REG); */
+> +
+> +	ldr	r3, =CONFIG_ROCKCHIP_BOOT_RETURN_REG
+> +	bx	r3              /*     return to CONFIG_ROCKCHIP_BOOT_RETURN_REG;*/
+> +
+> +early_return:
+> +	bx	lr              /*  return to LR in BROM                         */
+> +
+> +SAVE_SP_ADDR:
+> +	.word 0
+> +
+> +	.globl save_boot_params
+> +save_boot_params:
+> +	push	{r1-r12, lr}
+> +	ldr	r0, =SAVE_SP_ADDR
+> +	str	sp, [r0]
+> +	b	save_boot_params_ret
+> +
+> +	.globl back_to_bootrom
+> +back_to_bootrom:
+> +	ldr	r0, =SAVE_SP_ADDR
+> +	ldr	sp, [r0]
+> +	mov	r0, #0
+> +	pop	{r1-r12, pc}
+> +#endif
+> +
+> +#if (defined(CONFIG_SPL_BUILD))
+> +/* U-Boot proper of armv7 does not need this */
+> +	b reset
+> +#endif
+> +
+> +/*
+> + * For armv7, the addr '_start' will be used as vector start address
+> + * and is written to the VBAR register, which needs to aligned to 0x20.
+> + */
+> +	.align(5), 0x0
+> +_start:
+> +	ARM_VECTORS
+>   #endif
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index 07b5595dac8c..84a2f0d5ff48 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -402,7 +402,7 @@ config SPL_ROCKCHIP_BACK_TO_BROM
+>   config TPL_ROCKCHIP_BACK_TO_BROM
+>   	bool "TPL returns to bootrom"
+>   	default y
+> -	select ROCKCHIP_BROM_HELPER
+> +	select ROCKCHIP_BROM_HELPER if !ROCKCHIP_RK3066
+>   	select TPL_BOOTROM_SUPPORT
+>   	depends on TPL
+>   	help
+> @@ -448,6 +448,21 @@ config ROCKCHIP_BOOT_MODE_REG
+>   	  The Soc will enter to different boot mode(defined in asm/arch-rockchip/boot_mode.h)
+>   	  according to the value from this register.
+>
+> +config ROCKCHIP_BOOT_LR_REG
+> +	hex "Rockchip boot early return LR address"
+> +	depends on TPL_ROCKCHIP_EARLYRETURN_TO_BROM || SPL_ROCKCHIP_EARLYRETURN_TO_BROM
+> +	help
+> +	  With ROCKCHIP_EARLYRETURN_TO_BROM enabled this LR address is
+> +	  used to keep track of the re-entries.
+> +
+> +config ROCKCHIP_BOOT_RETURN_REG
+> +	hex "Rockchip download mode return address"
+> +	depends on TPL_ROCKCHIP_EARLYRETURN_TO_BROM || SPL_ROCKCHIP_EARLYRETURN_TO_BROM
+> +	help
+> +	  Rockchip SoC models without built-in support to enter
+> +	  download mode after early return to BROM code use a SoC
+> +	  specific return address in BROM.
+> +
+>   config ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON
+>   	bool "Disable device boot on power plug-in"
+>   	depends on PMIC_RK8XX
+> diff --git a/arch/arm/mach-rockchip/rk3066/Kconfig b/arch/arm/mach-rockchip/rk3066/Kconfig
+> index 95d7fc8a2917..3721f7469a9e 100644
+> --- a/arch/arm/mach-rockchip/rk3066/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3066/Kconfig
+> @@ -10,6 +10,12 @@ config TARGET_MK808
+>   config ROCKCHIP_BOOT_MODE_REG
+>   	default 0x20004040
+>
+> +config ROCKCHIP_BOOT_LR_REG
+> +	default 0x00001058
+> +
+> +config ROCKCHIP_BOOT_RETURN_REG
+> +	default 0x00001100
+> +
+>   config SYS_SOC
+>   	default "rk3066"
+>
+> --
+> 2.39.2
+>
