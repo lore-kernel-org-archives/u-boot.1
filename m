@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9591E810DA
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 12:44:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75477E810DC
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 12:46:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 026D086DC3;
-	Wed, 27 Sep 2023 14:44:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DCC1486D93;
+	Wed, 27 Sep 2023 14:46:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1695818692;
-	bh=bU3GTze++gST0wdvHMclEVODFjEn76nk82xtA++toEA=;
+	s=phobos-20191101; t=1695818807;
+	bh=FvD66zdZNTnLz/Oia9Tt6/38K4QCX9PStrkbt4XStjA=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=puo0gDHtaMAZKnnZJU2OKosY8W8hT/M+e85KT7TvKI0XpIeM0uHeH9YmlvPd73VRO
-	 FEVC8/gMFkJsNxuJZYm7kmrpVSdmn6SzuyRgsfViy/kNLRYudJDKJOvLI3GR7orQnW
-	 2b9V8Ku0m8ohUWT4Rp35EU846YDtbyjvyiRzoerrfpphVJb4iKGbumq3xap9glQE+L
-	 /SldLpYdl/qkQm7OUnQyow2fKE9b66N29R78wJc56SeHPDmhJqayXGqKwkX+7PgbVa
-	 AuVUeUGXDKaK2lQ05ps7XHaC0tjbJhnB5rP0HgAwC13zLtIgFL5zxthHXv7wMiD5O3
-	 GVzPThmAQeyAw==
+	b=ho1xw1ChK1GZD37hNdgzE+ObI7h3UkNmFZplHS8wVWmOd6u2i1WT25XYVPaDbWfPa
+	 QcHozRYfebt7BvpGjUsB/zfmBLL/U/yoaYiHYqyYFBHeaIbSYh4l8gmCtbq5mcCf9t
+	 Snln0JZVg3fUYImLCjic8m3r7u09PYzzEZQObIfnyW8/ZwvOha1WLKeudVHZAsb3jc
+	 BMa3QfS2Yyxvr+ma68YxtO+X97Q/DoGH2oZStGh09+ocYbBhNHvYg97vYPmfIWNFaW
+	 yeM29MN4i4gJWJKlWe+VnxDYFKfUbelxEPLgNHH3qLNeNjDNwJ2epvz+EjALH1z23o
+	 IZDfVmJSDT6EQ==
 Received: from maia.denx.de (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested) (Authenticated sender: hws@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2E42C86D59;
- Wed, 27 Sep 2023 14:44:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id D12B986D59;
+ Wed, 27 Sep 2023 14:46:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1695818690;
- bh=bU3GTze++gST0wdvHMclEVODFjEn76nk82xtA++toEA=;
+ s=phobos-20191101; t=1695818806;
+ bh=FvD66zdZNTnLz/Oia9Tt6/38K4QCX9PStrkbt4XStjA=;
  h=From:To:Cc:Subject:Date:From;
- b=gNSlkDtWL8+tZBC+j0X/ggB2we8l3i0WUItAapyNqwn6A1Oaoy9FSXqy3IcXVAzfj
- QIRy5Y4Qkp4oK29cYJl54ispK/1AQkC3boSPBSEWa79pd51NWwbeb8Si6aWZA0vXzj
- NM+4FeJPfl42S4VjOG8RaTrq9guxzN9J9/wHGDIYrYiprvFk1Gwb21HbfvbJg/2uKS
- QCeVLG+lhQ/h6M07gdiWMRGrmvBX4g95SVKGRRvnCrJdKXAQuRLqa598bU6P2pHRZo
- PBOVJfUsbh7+QezqxljF2XF+N61JBMIY4dVQJuqzH3WST0z+GK735rsJYImwCdS4Wy
- 4tXwcqByEzC4A==
+ b=g+HZ878BE8GV0+c2pP8GolBHYTMjHZfsKxoxIGBPdyLnachJAaPhviTSKrIcccaIe
+ 4zrf6DBPzr0NfV9bOqASkmN7Xyk+WmjfvmvJQ5lCSIu4t0IpoesRWj75jD0wEbHyF1
+ kDriHp3itQ1IqK9VJqYFZx7/3lt3mkRV3bl0vxOyveFRcqvIq8BLd/xrPD/dDkroUj
+ Svs1st+cAifp9DMdN5XXJLoNaFEUM380Lnm9+VE9sYW5kfpD97QeQ6No/q07UrgOim
+ 8bssfFsw1Ov9tZQRIvS3QJmJv2GPU9Czs/4ljkoqgi25pLeQKHPdOjNSCjpEXML9T4
+ AmgO5H4mGiJBA==
 From: Harald Seiler <hws@denx.de>
-To: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com,
+To: u-boot@lists.denx.de,
+	Marek Vasut <marex@denx.de>
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Harald Seiler <hws@denx.de>
-Subject: [PATCH 1/2] ram: stm32mp1: Only print RAM config with
+Subject: [PATCH 2/2] board: dh_stm32mp1: Only print board code with
  CONFIG_SPL_DISPLAY_PRINT
-Date: Wed, 27 Sep 2023 14:44:40 +0200
-Message-ID: <20230927124440.247726-1-hws@denx.de>
+Date: Wed, 27 Sep 2023 14:46:25 +0200
+Message-ID: <20230927124625.247858-1-hws@denx.de>
 X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -66,28 +67,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ensure that the RAM configuration line is only printed when
+Ensure that the SoM and board code information is only printed when
 CONFIG_SPL_DISPLAY_PRINT is set.
 
 Signed-off-by: Harald Seiler <hws@denx.de>
 ---
- drivers/ram/stm32mp1/stm32mp1_ram.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ board/dhelectronics/dh_stm32mp1/board.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/ram/stm32mp1/stm32mp1_ram.c b/drivers/ram/stm32mp1/stm32mp1_ram.c
-index a6c19af9722..2808d07c3ae 100644
---- a/drivers/ram/stm32mp1/stm32mp1_ram.c
-+++ b/drivers/ram/stm32mp1/stm32mp1_ram.c
-@@ -126,7 +126,8 @@ static int stm32mp1_ddr_setup(struct udevice *dev)
- 		dev_dbg(dev, "no st,mem-name\n");
- 		return -EINVAL;
- 	}
--	printf("RAM: %s\n", config.info.name);
-+	if (CONFIG_IS_ENABLED(DISPLAY_PRINT))
-+		printf("RAM: %s\n", config.info.name);
+diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
+index f9cfabe2420..b933761d0de 100644
+--- a/board/dhelectronics/dh_stm32mp1/board.c
++++ b/board/dhelectronics/dh_stm32mp1/board.c
+@@ -229,8 +229,9 @@ static void board_get_coding_straps(void)
  
- 	for (idx = 0; idx < ARRAY_SIZE(param); idx++) {
- 		ret = ofnode_read_u32_array(node, param[idx].name,
+ 	gpio_free_list_nodev(gpio, ret);
+ 
+-	printf("Code:  SoM:rev=%d,ddr3=%d Board:rev=%d\n",
+-		somcode, ddr3code, brdcode);
++	if (CONFIG_IS_ENABLED(DISPLAY_PRINT))
++		printf("Code:  SoM:rev=%d,ddr3=%d Board:rev=%d\n",
++		       somcode, ddr3code, brdcode);
+ }
+ 
+ int board_stm32mp1_ddr_config_name_match(struct udevice *dev,
 -- 
 2.41.0
 
