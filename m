@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44A21E7F14E
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 13:10:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9EF7E7F14F
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 13:10:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 177F186DEB;
-	Wed, 27 Sep 2023 15:10:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8089086DF1;
+	Wed, 27 Sep 2023 15:10:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Yq4jNULM";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="O9TF5eT+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A637886DEB; Wed, 27 Sep 2023 15:10:12 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 2832886D5A; Wed, 27 Sep 2023 15:10:17 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B75C686DDE
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 15:10:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86AF386E02
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 15:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38RDA7S9054670;
- Wed, 27 Sep 2023 08:10:07 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38RDACgC075166;
+ Wed, 27 Sep 2023 08:10:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695820207;
- bh=6D1c0Tbytn4+TuIbz/7szwNYQEgo/bCR3NStOIBPeWY=;
+ s=ti-com-17Q1; t=1695820212;
+ bh=NdKaXvohG5Up4zrKW+S8FMysqZpek1onA2iiZLKhrqA=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Yq4jNULMNy1CcY7jVuBcL6Bjk5SF+g2M/Xq/tqFAaDPX+oysjzpBV0a1rL9qcCBn1
- KWdnrIlW6sjm1ItKoP6PloaGXtYGTLbeIDilxoNAv6X8l8EQ4Y+tJVVVykb0CNf3/R
- WTcAfD4Q5m7nsE0iTbjibCE9jBq2BXZy9mHWHgiE=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38RDA7XF003546
+ b=O9TF5eT+V/nYvEpkVaudQngqpELrFZEmhBEDM12W6hNl4ec4XKaZnT0ivkcBjHPU4
+ AncVUA9xGK8G/DulTvpm1rG3yGyC4Z8Tnukgptc5Ht97/DDvuFiNJxzaOOz/MjlCBi
+ ZVcdqO/4oyX94nDVHUCchGV0WCvuJp3ZFIf4OuvI=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38RDACqN008284
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Sep 2023 08:10:07 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 27 Sep 2023 08:10:12 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Sep 2023 08:10:07 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 08:10:11 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Sep 2023 08:10:07 -0500
+ Frontend Transport; Wed, 27 Sep 2023 08:10:11 -0500
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38RD9uKb025731;
- Wed, 27 Sep 2023 08:10:02 -0500
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38RD9uKc025731;
+ Wed, 27 Sep 2023 08:10:07 -0500
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>
 CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
@@ -57,9 +57,10 @@ CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
  <sinthu.raja@ti.com>, <gadiyar@ti.com>, <a-nandan@ti.com>,
  <vaishnav.a@ti.com>, <n-francis@ti.com>, <b-kapoor@ti.com>,
  <bb@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v4 1/6] arm: mach-k3: j721e: dev-data: Add mcu_timer0 ID
-Date: Wed, 27 Sep 2023 18:39:51 +0530
-Message-ID: <20230927130956.910988-2-n-francis@ti.com>
+Subject: [PATCH v4 2/6] arm: mach-k3: j721e_init: Move clk_k3 probe before
+ loading TIFS
+Date: Wed, 27 Sep 2023 18:39:52 +0530
+Message-ID: <20230927130956.910988-3-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230927130956.910988-1-n-francis@ti.com>
 References: <20230927130956.910988-1-n-francis@ti.com>
@@ -83,27 +84,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot uses mcu_timer0 as the tick-timer, so add it to device list.
+When setting boot media to load the TIFS binary in legacy boot flow
+(followed by J721E), get_timer() is called which eventually calls
+dm_timer_init() to grab the tick-timer, which is mcu_timer0. Since we
+need to set up the clocks before using the timer, move clk_k3 driver
+probe before k3_sysfw_loader to ensure we have all necessary clocks set
+up before.
 
 Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
 Reviewed-by: Nishanth Menon <nm@ti.com>
 ---
- arch/arm/mach-k3/j721e/dev-data.c | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/mach-k3/j721e_init.c | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/arch/arm/mach-k3/j721e/dev-data.c b/arch/arm/mach-k3/j721e/dev-data.c
-index 97f017f8af..b0adb1857b 100644
---- a/arch/arm/mach-k3/j721e/dev-data.c
-+++ b/arch/arm/mach-k3/j721e/dev-data.c
-@@ -56,6 +56,7 @@ static struct ti_dev soc_dev_list[] = {
- 	PSC_DEV(4, &soc_lpsc_list[8]),
- 	PSC_DEV(202, &soc_lpsc_list[9]),
- 	PSC_DEV(203, &soc_lpsc_list[10]),
-+	PSC_DEV(35, &soc_lpsc_list[11]),
- 	PSC_DEV(102, &soc_lpsc_list[11]),
- 	PSC_DEV(103, &soc_lpsc_list[11]),
- 	PSC_DEV(104, &soc_lpsc_list[11]),
+diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
+index b6164575b7..b1f7e25ed0 100644
+--- a/arch/arm/mach-k3/j721e_init.c
++++ b/arch/arm/mach-k3/j721e_init.c
+@@ -228,6 +228,18 @@ void board_init_f(ulong dummy)
+ 	if (!ret)
+ 		pinctrl_select_state(dev, "default");
+ 
++	/*
++	 * Force probe of clk_k3 driver here to ensure basic default clock
++	 * configuration is always done.
++	 */
++	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
++		ret = uclass_get_device_by_driver(UCLASS_CLK,
++						  DM_DRIVER_GET(ti_clk),
++						  &dev);
++		if (ret)
++			panic("Failed to initialize clk-k3!\n");
++	}
++
+ 	/*
+ 	 * Load, start up, and configure system controller firmware. Provide
+ 	 * the U-Boot console init function to the SYSFW post-PM configuration
+@@ -241,18 +253,6 @@ void board_init_f(ulong dummy)
+ 	do_dt_magic();
+ #endif
+ 
+-	/*
+-	 * Force probe of clk_k3 driver here to ensure basic default clock
+-	 * configuration is always done.
+-	 */
+-	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
+-		ret = uclass_get_device_by_driver(UCLASS_CLK,
+-						  DM_DRIVER_GET(ti_clk),
+-						  &dev);
+-		if (ret)
+-			panic("Failed to initialize clk-k3!\n");
+-	}
+-
+ 	/* Prepare console output */
+ 	preloader_console_init();
+ 
 -- 
 2.34.1
 
