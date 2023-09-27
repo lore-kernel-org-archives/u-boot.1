@@ -4,65 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97164E810A2
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 08:22:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43324E810B3
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 09:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F76686DAF;
-	Wed, 27 Sep 2023 10:21:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 36A91864C3;
+	Wed, 27 Sep 2023 11:37:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZTikc7dT";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lIHRwm+E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5BFC86D43; Wed, 27 Sep 2023 10:21:17 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 43B7C86BFA; Wed, 27 Sep 2023 11:37:24 +0200 (CEST)
+Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
+ [IPv6:2607:f8b0:4864:20::92c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EFDC86D73
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 10:21:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EC9585C98
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 11:37:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-yadav@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38R8LDI4046042;
- Wed, 27 Sep 2023 03:21:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695802873;
- bh=TeMqMFlvmDkqp+1MaH3oez8Vfk84656udxaeiX1nAzM=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ZTikc7dTDv6WDO+e2eDjx/zVIrrbbe6nrAk9kIHoz7Pt+RhS49875Ot2SfgbzCgoG
- R+zq2DHsidoPfUB7tNFBSiJOeSGEPfRaD/P5h/VPoT+spoTtbtl7nmY7fATEpmPtRn
- 9waNJWfmBIEXv5jOkBXwmuiG58kJmMniD5uRYQyk=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38R8LDEH093965
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Sep 2023 03:21:13 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Sep 2023 03:21:13 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Sep 2023 03:21:13 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38R8LCHa021323;
- Wed, 27 Sep 2023 03:21:13 -0500
-From: Nitin Yadav <n-yadav@ti.com>
-To: <nm@ti.com>, <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH 4/4] board: ti: am62x: add am62x_lpsk_* defconfigs and env
- files
-Date: Wed, 27 Sep 2023 13:51:05 +0530
-Message-ID: <20230927082105.3729470-5-n-yadav@ti.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230927082105.3729470-1-n-yadav@ti.com>
-References: <20230927082105.3729470-1-n-yadav@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-ua1-x92c.google.com with SMTP id
+ a1e0cc1a2514c-7ae0da3a692so1111326241.2
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 02:37:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1695807439; x=1696412239; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AeWkQFhq6KpJu5GxycgQlX22xr7zK0BT9fuQ3gseGWY=;
+ b=lIHRwm+El7h5vu+W4B0XnBnGFue4HLuZycbvA/lk9IGUGoJamnhTDhv1jrl0YRYUGb
+ 58etbZEZ/wzdd2HMhJr+8R/4OVlX95nm0NlJMn0TyDBA/TYLdkwvTpDjESdBP90lrOhV
+ 0qpcLLvu0cjfJs4VMlK3HARo5xavLB4hp+eivV2mWwDiaqwAGMg9aRhLadTB3khbQT6c
+ E1O4VeX9snWlFaeRQbGg6sD3GeeppxVctsM7O6nhDFNK0jywH6Fkivy3u6bX8S7xq9eL
+ RvY80vpRmP+JtAiWa0zj82Rs+JoUruNgIhDgBXK9bXhWPcF6JqbN/Pnn+5ufWHRomYSQ
+ Jb/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695807439; x=1696412239;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AeWkQFhq6KpJu5GxycgQlX22xr7zK0BT9fuQ3gseGWY=;
+ b=Ko6ZbPV5l0mCT6/hG1Gr8t7ZHEizDEeAMjBjm6kIRH0TYtp9w8c8TCv6k6Al0BLe+s
+ mCmpX0ckA/rhQtQXxr4fbkg3hdBi/axW0B5Y0Z0hx4gcIzW/atHh+/G9P7w6/XPLoq2D
+ uPQbBVZsPNSeq3+ualnA1tlwEGxn6hEnJCpgVJ970XuJGPIpI6MaMQEtiHmNbzd9ffUL
+ vc10hoxGDG1CQ0acuvaRXFzCV3xC1MAiGLFnXF5+xI8webwJOm1q+uspoqxjrk0wRiwQ
+ H+3KBnkijx3E385E6xrVwwvCTktTS7kmd8uUGyLNiTkgGY2JyRak04HTtYlU9Scw9TSe
+ KZWQ==
+X-Gm-Message-State: AOJu0YwOoopeqOSRMbUNP6lwcz7+IQgNNCeoUqWy2a6di08RGqHR1Pe1
+ ajdKHipZK/l8AyeKPfBtKV81Fc6sQRBVG7c9osY=
+X-Google-Smtp-Source: AGHT+IGiRdZldT7HAgsH0OvnRWNcbqNka4+5MMkH51rfaAwpfrKyZt5u4tQMsmxk0PqTNlCKqvT9RQ==
+X-Received: by 2002:a05:6102:44c:b0:452:4eb4:8314 with SMTP id
+ e12-20020a056102044c00b004524eb48314mr1172427vsq.2.1695807439604; 
+ Wed, 27 Sep 2023 02:37:19 -0700 (PDT)
+Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
+ d190-20020a6336c7000000b005657495b03bsm9459535pga.38.2023.09.27.02.37.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Sep 2023 02:37:18 -0700 (PDT)
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>
+Subject: [PATCH v5 0/7] Add EFI HTTP boot support
+Date: Wed, 27 Sep 2023 18:36:24 +0900
+Message-Id: <20230927093631.1595494-1-masahisa.kojima@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,68 +91,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add defconfig fragments for AM62x LP SK and corresponding
-customized environment file for AM62x LP SK.
+This series adds the EFI HTTP boot support.
+User can add the URI device path with "efidebug boot add" command.
+efibootmgr handles the URI device path, download the
+specified file using wget, mount the downloaded image with
+blkmap, then boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
 
-Signed-off-by: Nitin Yadav <n-yadav@ti.com>
----
- board/ti/am62x/am62x_lpsk_a53.config |  5 +++++
- board/ti/am62x/am62x_lpsk_r5.config  |  5 +++++
- board/ti/am62x/am62xlpsk.env         | 21 +++++++++++++++++++++
- 3 files changed, 31 insertions(+)
- create mode 100644 board/ti/am62x/am62x_lpsk_a53.config
- create mode 100644 board/ti/am62x/am62x_lpsk_r5.config
- create mode 100644 board/ti/am62x/am62xlpsk.env
+This version still does not include the test.
 
-diff --git a/board/ti/am62x/am62x_lpsk_a53.config b/board/ti/am62x/am62x_lpsk_a53.config
-new file mode 100644
-index 0000000000..a568324997
---- /dev/null
-+++ b/board/ti/am62x/am62x_lpsk_a53.config
-@@ -0,0 +1,5 @@
-+# Defconfig fragment to apply on top of am62x_evm_a53_defconfig
-+
-+CONFIG_DEFAULT_DEVICE_TREE="k3-am62-lp-sk"
-+CONFIG_SPL_OF_LIST="k3-am62-lp-sk"
-+CONFIG_OF_LIST="k3-am62-lp-sk"
-diff --git a/board/ti/am62x/am62x_lpsk_r5.config b/board/ti/am62x/am62x_lpsk_r5.config
-new file mode 100644
-index 0000000000..1532f4e336
---- /dev/null
-+++ b/board/ti/am62x/am62x_lpsk_r5.config
-@@ -0,0 +1,5 @@
-+# Defconfig fragment to apply on top of am62x_evm_r5_defconfig
-+
-+CONFIG_DEFAULT_DEVICE_TREE="k3-am62-r5-lp-sk"
-+CONFIG_SPL_OF_LIST="k3-am62-r5-lp-sk"
-+CONFIG_OF_LIST="k3-am62-r5-lp-sk"
-diff --git a/board/ti/am62x/am62xlpsk.env b/board/ti/am62x/am62xlpsk.env
-new file mode 100644
-index 0000000000..3b79ae1b3f
---- /dev/null
-+++ b/board/ti/am62x/am62xlpsk.env
-@@ -0,0 +1,21 @@
-+#include <env/ti/ti_common.env>
-+#include <env/ti/default_findfdt.env>
-+#include <env/ti/mmc.env>
-+
-+name_kern=Image
-+console=ttyS2,115200n8
-+args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
-+	${mtdparts}
-+run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
-+
-+boot_targets=ti_mmc mmc0 mmc1 usb pxe dhcp
-+boot=mmc
-+mmcdev=1
-+bootpart=1:2
-+bootdir=/boot
-+rd_spec=-
-+
-+splashfile=ti.gz
-+splashimage=0x80200000
-+splashpos=m,m
-+splashsource=sf
+To enable EFI HTTP boot, we need to enable the following Kconfig options.
+ CONFIG_CMD_DNS
+ CONFIG_CMD_WGET
+ CONFIG_BLKMAP
+
+On the Socionext Developerbox, enter the following commands then
+debian installer is downloaded into "loadaddr" and installer
+automatically starts.
+ => dhcp
+ => setenv serverip 192.168.1.1
+ => efidebug boot add -u 3 debian-netinst http://ftp.riken.jp/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+ => efidebug boot order 3
+ => bootefi bootmgr
+
+Note that this debian installer can not proceed the installation
+bacause RAM disk of installer image is not recogniged by the kernel.
+I'm still investigating this issue, but drivers/nvdimm/of_pmem.c in linux
+will be one of the solution to recognize RAM disk from kernel.
+(In EDK2, the equivalent solution is called ACPI NFIT.)
+
+On QEMU, I can not make DNS work from the QEMU guest.
+The following commands work on qemu_arm64(manually set the http server ip in URI).
+  => dhcp
+  => setenv gatewayip 10.0.2.2
+  => setenv httpserverip 134.160.38.1
+  => efidebug boot add -u 3 debian-netinst http://134.160.38.1/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+  => efidebug boot order 3
+  => bootefi bootmgr
+
+[TODO]
+- add test
+- stricter wget uri check
+- omit the dns process if the given uri has ip address
+   -> this will be supported when the lwip migration completes
+- uri device path support in eficonfig
+
+[change log]
+v4 -> v5
+- add missing else statement
+- add NULL check of efi_dp_find_obj() call
+- update document to remove "limitation"
+
+v3 -> v4
+- patch#8 is added to simplify the bootmgr default boot process
+- add function comments
+
+v2 -> v3
+- Patch#6 is added, reserve the whole ramdisk memory region
+- remove .efi file extension check for PE-COFF image
+- use "if IS_ENABLED(..)" as much as possible
+- 1024 should be sizeof(net_boot_file_name)
+- call net_set_state(NETLOOP_FAIL) when wget encounters error
+- describe DNS ip address host name limitation in document
+
+v1 -> v2
+- carve out the network handling(wget and dns code) under net/wget.c
+- carve out ramdisk creation code under drivers/block/blkmap_helper.c
+- wget supports the valid range check to store the received blocks using lmb
+- support when the downloaded image have no partiton table but a file system
+- not start the .efi file in try_load_entry()
+- call efi_check_pe() for .efi file to check the file is PE-COFF image
+- add documentation for EFI HTTP Boot
+
+Masahisa Kojima (7):
+  net: wget: prevent overwriting reserved memory
+  net: wget: add wget with dns utility function
+  blk: blkmap: add ramdisk creation utility function
+  efi_loader: support boot from URI device path
+  cmd: efidebug: add uri device path
+  doc: uefi: add HTTP Boot support
+  efi_loader: create BlockIo device boot option
+
+ cmd/efidebug.c                   |  50 +++++++
+ doc/develop/uefi/uefi.rst        |  30 ++++
+ drivers/block/Makefile           |   1 +
+ drivers/block/blkmap.c           |  15 --
+ drivers/block/blkmap_helper.c    |  53 +++++++
+ include/blkmap.h                 |  29 ++++
+ include/efi_loader.h             |   3 +
+ include/net.h                    |  17 +++
+ lib/efi_loader/efi_bootmgr.c     | 248 ++++++++++++++++++++++++++++---
+ lib/efi_loader/efi_device_path.c |  20 +++
+ lib/efi_loader/efi_dt_fixup.c    |   2 +-
+ net/wget.c                       | 206 ++++++++++++++++++++++++-
+ 12 files changed, 634 insertions(+), 40 deletions(-)
+ create mode 100644 drivers/block/blkmap_helper.c
+
 -- 
-2.25.1
+2.34.1
 
