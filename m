@@ -4,95 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED575E82CC0
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 21:32:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01559E7F14F
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 23:28:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEC7F86D8F;
-	Wed, 27 Sep 2023 23:32:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=sholland.org
+	by phobos.denx.de (Postfix) with ESMTP id E6E5686BE7;
+	Thu, 28 Sep 2023 01:28:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=sholland.org header.i=@sholland.org header.b="ViZwNQxy";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="b5evfzzq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="S5rZAaW6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 532B586D94; Wed, 27 Sep 2023 23:32:38 +0200 (CEST)
-Received: from out2-smtp.messagingengine.com (out2-smtp.messagingengine.com
- [66.111.4.26])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9DD6786C37; Thu, 28 Sep 2023 01:28:56 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65D1086BE2
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 23:32:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E7B486A24
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 01:28:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sholland.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=samuel@sholland.org
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailout.nyi.internal (Postfix) with ESMTP id 106EB5C2808;
- Wed, 27 Sep 2023 17:32:33 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute4.internal (MEProxy); Wed, 27 Sep 2023 17:32:33 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
- cc:cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to; s=fm3; t=
- 1695850353; x=1695936753; bh=4JrHx8aYO4+57H9tjVhmfHPx6wKflMQ9AEQ
- SFDY5WYk=; b=ViZwNQxySOiCxcL9IoFYPhgcokxFAFAKh9FmnkNuZbUYZAwp5YP
- 71nir4I8NWfi9PvNWiedkGZF9gpChmGgXLJc7TnTLrn/hC0lMg2sqFKaxK6vBCpB
- C4hLmhZbtoEVxQEOTXiat0BqFGWHS2uiyEa25Dar/lqnkJ9EMezQdJxTetyD+6Ix
- YsJjoXDFfZIHi6YiJO7ULrhtksEJwnX/igLtW3+1HwnjuGtm0fbCqlMNO5xFCD25
- ZQBHRq6KJxsgEhTkRRmHdSbWeX5k1iylJjRQo4KlVHcAMRqMaVUti4JkZi4iQCQT
- tNX8knJHHc6znj351EnuW3vnTxW/R/e6n/Q==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:sender:subject:subject:to:to:x-me-proxy
- :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
- 1695850353; x=1695936753; bh=4JrHx8aYO4+57H9tjVhmfHPx6wKflMQ9AEQ
- SFDY5WYk=; b=b5evfzzqYQPzibaC7qs3BiCSTr0kd4RFh7qGeD1ITWGrhqNI98C
- D5EYgchf7yZwZZRxr6e6orIxATCUq73Xc4oYL9zN/8b5yfbYndUFo8bvZd5ELyTG
- rKHpPxpt8OdY9OFran64DLAIezCa6Xr29ZUUmthdZP0nMrq1ZEsY5++ib8RABjuW
- OX3Xd4wz1fVOwTjq3IsTrynDIocb2gIGQHaIxXKdzK068xnAUxm/gZnMEjEwNq61
- jXmuIRoYPhXPcnqDvJ9a3zFsfenzkHtvbLyFfVZ0OT4nrVYtyT6+Krpk8sgPr8Ez
- th1nZZlnA9GLlFmjI/QltRlT57bp/B8D1Pg==
-X-ME-Sender: <xms:b58UZVN51au-HUSzH65lN6f26pBXHbHrk5xj-cYkLC3xQMcuQZIFbg>
- <xme:b58UZX9WXw-BVzJxOKHUKeAND6aE-KDFtihkHbOD8u6KDs0WN5KD-kHmAGJxBjPIU
- 8rT8HfPdDK_fT7aVg>
-X-ME-Received: <xmr:b58UZURGwgmBW21CgXbNBK6EjrGd8ufME-Odt9FXP6ZKeSqEkzwZk6qy8B46Szs5swL7dHqkdUMQP2bWHDyMe4YG5XEE7u0CpKP2-Ft1lsQMNrHvmA6CybCUHw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvjedrtdeggdellecutefuodetggdotefrodftvf
- curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
- uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
- fjughrpefkffggfgfuvfevfhfhjggtgfesthejredttdefjeenucfhrhhomhepufgrmhhu
- vghlucfjohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecugg
- ftrfgrthhtvghrnhepkeejleelfeeitdfhtdfgkeeghedufeduueegffdvhfdukeelleef
- tdetjeehuddtnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrh
- homhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:b58UZRtvbLb5AiQwvmvCMPxOwq8LIt9SaG3pDaLpH6M6l-WyjuA5Kg>
- <xmx:b58UZddUJSvDKJ9seRMEd52-TTdGljWoA5C4xeUIdAD-FF3-0PFEDg>
- <xmx:b58UZd3lOBJ9feHCPzWUHVRNuA9h3b5iyr5QT2J3AoVYc1KVQV7yAw>
- <xmx:cZ8UZb3kzP0wBW_WEZr0pfEdupAdf7n_G8AnrbEg80M6TctGXJTodA>
-Feedback-ID: i0ad843c9:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 27 Sep 2023 17:32:30 -0400 (EDT)
-Message-ID: <17e57370-754e-3954-db16-58ab013c92d4@sholland.org>
-Date: Wed, 27 Sep 2023 16:32:30 -0500
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-79fa416b7ffso377302239f.2
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 16:28:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1695857333; x=1696462133; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DDKdRL2dzuR+VBAPhrewl8Bmsfc6TVB5eSHZARgNO9s=;
+ b=S5rZAaW61OZmPRGDggHvxXJGrIPjMnSVG3DeTorz8O00DwPn3yaUJzu8XlBV/ma+n2
+ GMg5pwNY1LJfJD91PKLLqvKM/Mg1kwggwMd6n04KW8PWA01TO5k9Btxzbnkf/jobp7AG
+ QBGXDYGOJUq73DXWIm4b1WeFezN7RwPX3Fksrj5tDfqWOP29uAxwo5TkFXaLqyRRQSzk
+ IfoX7m4J20u1Ss23h0F/CwSMtBV1AEI2TRpWgkHu3fC9XbiQIfqxGOvpR+zgLcJOZz8E
+ Vo++72t+jkzt1eYQHSBL4Fat/ARqsDc7/J9+/8HLdJn/2G0W6jsrtZq/WdVuu6fNWdXk
+ L+LA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695857333; x=1696462133;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DDKdRL2dzuR+VBAPhrewl8Bmsfc6TVB5eSHZARgNO9s=;
+ b=MvX0uFHNJGG9fav1layJ6jUmxZRfv4Q/feIAfAyXmvq8Ep3/qMv7drhopaLlkrt4VL
+ OQZQJcF0mu1ijtHEUChPUZpxn4L1K17p1vGD5DsQwIG0k6S8qmAb0QRgdorwcpVxIuZH
+ 3zFgyO3nB36maaTO8vw1Hq5Lz25BohzWPyoJyeJFAIbYKr/3tUXULsOSYCfiSjLGfR8s
+ ypt261bP2bDKUTF3ZzTelRGo/l7h8xQJZlGPoQ2sD4dfU8NNvy/MjoPPKDgbc6O5ISSL
+ QhAYgkfV2dnDnys9QtcSQhCHs/aLWLI6O4WmrIkMyszCyEWpiG7058bmMJyWSFs5uWQP
+ 5xHg==
+X-Gm-Message-State: AOJu0Yy4W4NKSoEc9rwQU93OUXn6Tc2RDX79nkAaFemMRAWP85ICvM9A
+ Lcs3C4DjaHy9ktWmf0okx/4=
+X-Google-Smtp-Source: AGHT+IFb6YjQXVjWxjZYFWYoWujgpUEJiSb8jMBdwZIiIIE2LNOuYSDkDmU/NFO5hmEj/76cOoiQjQ==
+X-Received: by 2002:a5e:c818:0:b0:783:5209:c01 with SMTP id
+ y24-20020a5ec818000000b0078352090c01mr3934192iol.17.1695857332893; 
+ Wed, 27 Sep 2023 16:28:52 -0700 (PDT)
+Received: from ?IPV6:2001:470:42c4:101:e9f:af6b:c19f:be24?
+ ([2001:470:42c4:101:e9f:af6b:c19f:be24])
+ by smtp.gmail.com with ESMTPSA id
+ d26-20020a02a49a000000b004290fd3a68dsm4097552jam.1.2023.09.27.16.28.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 27 Sep 2023 16:28:52 -0700 (PDT)
+Message-ID: <123596d6-f7c8-f7f1-9a0a-07f68a5ed1b8@gmail.com>
+Date: Wed, 27 Sep 2023 17:28:51 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux ppc64le; rv:102.0) Gecko/20100101
- Thunderbird/102.14.0
-Subject: Re: [PATCH] riscv: andesv5: Prefer using the generic RISC-V timer
- driver in S-mode
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v2 5/5] HACK: sunxi: psci: be compatible with v1 of R528
+ patchset
 Content-Language: en-US
-To: Yu Chien Peter Lin <peterlin@andestech.com>
-Cc: twarren@nvidia.com, sjg@chromium.org, saproj@gmail.com,
- william.zhang@broadcom.com, andre.przywara@arm.com, clamor95@gmail.com,
- patrice.chotard@foss.st.com, jonasschwoebel@yahoo.de, bmeng@tinylab.org,
- u-boot@lists.denx.de, rick@andestech.com, ycliang@andestech.com,
- randolph@andestech.com
-References: <20230927072500.1018499-1-peterlin@andestech.com>
-From: Samuel Holland <samuel@sholland.org>
-In-Reply-To: <20230927072500.1018499-1-peterlin@andestech.com>
-Content-Type: text/plain; charset=UTF-8
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <uwu@icenowy.me>,
+ Maksim Kiselev <bigunclemax@gmail.com>
+References: <20230816173420.83232-1-CFSworks@gmail.com>
+ <20230816173420.83232-6-CFSworks@gmail.com>
+ <20230927173221.122c8de2@donnerap.manchester.arm.com>
+From: Sam Edwards <cfsworks@gmail.com>
+In-Reply-To: <20230927173221.122c8de2@donnerap.manchester.arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,78 +101,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/27/23 02:25, Yu Chien Peter Lin wrote:
-> The Andes PLMT driver directly accesses the mtime MMIO region,
-> indicating its intended use in the M-mode boot stage. However,
-> since U-Boot proper (S-mode) also uses the PLMT driver, we need
-> to specifically mark the region as readable through PMPCFGx (or
-> S/U-mode read-only shared data region for Smepmp) in OpenSBI.
+On 9/27/23 10:32, Andre Przywara wrote:
+> On Wed, 16 Aug 2023 10:34:20 -0700
+> Sam Edwards <cfsworks@gmail.com> wrote:
 > 
-> Granting permission for this case doesn't make sense. Instead,
-> we should use the generic RISC-V timer driver to read the mtime
-> through the TIME CSR.  Therefore, we add SPL_ANDES_PLMT_TIMER
-> config, the PLMT driver will be compiled only against M-mode
-> U-Boot or U-Boot SPL.
+> Hi Sam,
+
+Hi Andre,
+
+> Mmh, I didn't find a better solution than keeping this in.
+
+I'll keep it if your R528 v2 doesn't find some other way to address it.
+
+>> +#endif
+>> +#if defined(SUNXI_CPUX_BASE) && defined(SUNXI_CPUCFG_BASE)
+>> +#undef SUNXI_CPUCFG_BASE
+>> +#define SUNXI_CPUCFG_BASE SUNXI_CPUX_BASE
 > 
-> Signed-off-by: Yu Chien Peter Lin <peterlin@andestech.com>
-> ---
->  arch/riscv/cpu/andesv5/Kconfig | 3 ++-
->  drivers/timer/Kconfig          | 9 ++++++++-
->  drivers/timer/Makefile         | 2 +-
->  3 files changed, 11 insertions(+), 3 deletions(-)
+> So what's the story with this? Do we name this differently
+> (SUNXI_CPUX_BASE) because the IP block is different from the other SoCs?
+> Or is there another SUNXI_CPUCFG IP block on the R528/T113s SoCs?
 > 
-> diff --git a/arch/riscv/cpu/andesv5/Kconfig b/arch/riscv/cpu/andesv5/Kconfig
-> index 82bb5a2a53..eba576af2f 100644
-> --- a/arch/riscv/cpu/andesv5/Kconfig
-> +++ b/arch/riscv/cpu/andesv5/Kconfig
-> @@ -4,8 +4,9 @@ config RISCV_NDS
->  	imply CPU
->  	imply CPU_RISCV
->  	imply RISCV_TIMER if (RISCV_SMODE || SPL_RISCV_SMODE)
-> +	imply ANDES_PLMT_TIMER if RISCV_MMODE
-> +	imply SPL_ANDES_PLMT_TIMER if SPL_RISCV_MMODE
+> If not, I think we should use the SUNXI_CPUCFG_BASE name directly in
+> cpu_sunxi_ncat2.h, as we never claimed that same names for some MMIO
+> address blocks means they are compatible.
+> 
+> Please let me know if I miss something.
 
-You don't need the "if RISCV_MMODE" condition since the imply statement
-will be ignored if the dependency is not met. Either way:
+That's just for compatibility with R528 series v1. It's expected that 
+you'll rename it to SUNXI_CPUCFG_BASE for v2. The preprocessor trickery 
+looks for *both* being defined and applies the update. The rest of the 
+code proceeds using SUNXI_CPUCFG_BASE. (Keep in mind this is particular 
+patch is a hack patch, it's not considered for inclusion.)
 
-Reviewed-by: Samuel Holland <samuel@sholland.org>
-
->  	imply ANDES_PLICSW if (RISCV_MMODE || SPL_RISCV_MMODE)
-> -	imply ANDES_PLMT_TIMER if (RISCV_MMODE || SPL_RISCV_MMODE)
->  	imply V5L2_CACHE
->  	imply SPL_CPU
->  	imply SPL_OPENSBI
-> diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig
-> index 915b2af160..157298a941 100644
-> --- a/drivers/timer/Kconfig
-> +++ b/drivers/timer/Kconfig
-> @@ -59,7 +59,14 @@ config ALTERA_TIMER
->  
->  config ANDES_PLMT_TIMER
->  	bool
-> -	depends on RISCV_MMODE || SPL_RISCV_MMODE
-> +	depends on RISCV_MMODE
-> +	help
-> +	  The Andes PLMT block holds memory-mapped mtime register
-> +	  associated with timer tick.
-> +
-> +config SPL_ANDES_PLMT_TIMER
-> +	bool
-> +	depends on SPL_RISCV_MMODE
->  	help
->  	  The Andes PLMT block holds memory-mapped mtime register
->  	  associated with timer tick.
-> diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile
-> index 1ca74805fd..1f5c16fdf3 100644
-> --- a/drivers/timer/Makefile
-> +++ b/drivers/timer/Makefile
-> @@ -4,7 +4,7 @@
->  
->  obj-y += timer-uclass.o
->  obj-$(CONFIG_ALTERA_TIMER)	+= altera_timer.o
-> -obj-$(CONFIG_ANDES_PLMT_TIMER) += andes_plmt_timer.o
-> +obj-$(CONFIG_$(SPL_)ANDES_PLMT_TIMER) += andes_plmt_timer.o
->  obj-$(CONFIG_ARC_TIMER)	+= arc_timer.o
->  obj-$(CONFIG_ARM_TWD_TIMER)	+= arm_twd_timer.o
->  obj-$(CONFIG_AST_TIMER)	+= ast_timer.o
-
+Warm regards,
+Sam
