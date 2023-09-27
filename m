@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44227E80AAF
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 14:20:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41D60E80AB0
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 14:24:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B139C86E02;
-	Wed, 27 Sep 2023 16:19:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7461A801B6;
+	Wed, 27 Sep 2023 16:24:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bh0rhfLc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H5Fv3b4w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29A1E86B95; Wed, 27 Sep 2023 16:19:58 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
+ id 6617486E1B; Wed, 27 Sep 2023 16:24:43 +0200 (CEST)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A66986E16
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 16:19:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A0CB801B6
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 16:24:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-503056c8195so18657465e87.1
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 07:19:56 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-79f989480e0so352093139f.3
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 07:24:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695824395; x=1696429195; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q+ow6kwoI09ftEx1dC2A/iDV4qYubW8Ho6D2RmU746o=;
- b=Bh0rhfLcs1fHrZuYyttODpsK4mWJYYPgucxFw3s2gau1aSonGQ5XOwN5Pxeg+Ie2Kz
- 1E6F/IT8WAMleCgj8UlzC3uKhx4EW4v63kK62XqVkC5gHXnXfGWk6vM8j3s/eCyIxuOm
- EZiGsIA4wrb5vSy14zT93LogJOTk87MnntPCs=
+ d=chromium.org; s=google; t=1695824680; x=1696429480; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7yrPC60cOl+7g9HqiTDEqb2gZe4FQJu7rxyBR/PHPeo=;
+ b=H5Fv3b4wEFTzQZv1wtg9DMFIa7Q6WqVj5aAxR87OduKnQAfw7bOzTX7KS355U3ZImM
+ 8L8jta+FZ+qkQyqCMliWHEE3cem5t4lxfvVsv8wBrc+NKl1SWxfg6Ylthui0as1bVWSy
+ gtYgKMTS9ud478T8mtfxfySOSzHlNMuZsRyMg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695824395; x=1696429195;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Q+ow6kwoI09ftEx1dC2A/iDV4qYubW8Ho6D2RmU746o=;
- b=Y9TRjK87FAcqVNAJOldyqC6eL1ChBKpa2+v9QmAVndDTZD246RE5jg3tkQIMe4V8KG
- AB0+GDLJokT/d8p5Se0x55SNQjsvF4fnN79SH6WvWbvK2g1y0LiuKwJIu8ya+RMXo8s3
- aCkpvzU3r5t1SVMSZiozpgsLi7VPZQNjrkVXxmxNYOV0RZppmB8qfYEu+odRVX+cO8o3
- Sf3JXgeIVQlxdyqX2IK/SIQbHFpjtf2oauZwGtYGMfY14ld3/YBXI04WPO7tJH2oMrMv
- mcc+H4p793Hi9TBvGY3Z8k7UgDnTN5DPDVbI2bz1KFgh0AuztPpZSE+e7BMhFrX2YvmC
- y2qQ==
-X-Gm-Message-State: AOJu0Ywl7OXEYO15EkjJzMaQHFoNSgGX6iuw0RzRPdT1SaVNw4eG3ozt
- W7gbDWP588PJjOItIf+f6YBIgTcGDUalcR7ufryS6Q==
-X-Google-Smtp-Source: AGHT+IH9uIKNdRG4O18/sbGysB5zbTVPtGTvdMESVTvCbJLlcN2nudDeBBtEAd5+GsCDv1v8RTu2xqWyp7UIMO5GIh0=
-X-Received: by 2002:ac2:455a:0:b0:500:7f71:e46b with SMTP id
- j26-20020ac2455a000000b005007f71e46bmr1755472lfm.1.1695824395128; Wed, 27 Sep
- 2023 07:19:55 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230924192536.1812799-1-sjg@chromium.org>
- <20230924192536.1812799-5-sjg@chromium.org>
- <19d0cda7-1943-74f2-03aa-f5be970fff26@csgroup.eu>
-In-Reply-To: <19d0cda7-1943-74f2-03aa-f5be970fff26@csgroup.eu>
+ d=1e100.net; s=20230601; t=1695824680; x=1696429480;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7yrPC60cOl+7g9HqiTDEqb2gZe4FQJu7rxyBR/PHPeo=;
+ b=OcWTEMNqc9fRy8Xc9a28aa7patptoFTAtKuWx9tme0Yv+oX7HN5v02ohKmpsXiwOfU
+ +3jAht3PdMfKxVBkCsrVtyjXLncs3+L9NELzkAeJn/X883w0RgL77o+kB6JDMdvTLSoD
+ /5Uv01uSXx5mj7KvSPQzTfbA3wbT8WLCWA7h0De4FuvAaaCO62WxQnKB4RnUQ/siD8xC
+ gw6ET759Sk/ZEmbcK/a17mMLLl/zK6KiVQ3AaX1SbPwJKPng+dFEmbs3av6yC8lic5Yf
+ wdWHvfOmCbmWESC0iChNXJwIilx37tyFcY9SOULqWXvGeC29jod8ZEqV1furcaZuCCa/
+ YFwg==
+X-Gm-Message-State: AOJu0Yz0+KzmubkW1ye10kSijr/81vcurf6cstC2IXJ0IqRSaKeH3J0E
+ hJLBy8hr1wWA/1j9IpBu9oBVDioB7WmQYpThS9w=
+X-Google-Smtp-Source: AGHT+IFGkC3Q+BABUUc3jt11NZSXh0R4gcboRujM7BpqdeiiTPuOR6S0niOTpp564V9IEKjPcFZNnQ==
+X-Received: by 2002:a6b:d801:0:b0:787:1555:efca with SMTP id
+ y1-20020a6bd801000000b007871555efcamr2107078iob.5.1695824679911; 
+ Wed, 27 Sep 2023 07:24:39 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:1da0:a3ce:7aae:e9fa])
+ by smtp.gmail.com with ESMTPSA id
+ f20-20020a02b794000000b0043a0d66a80csm4097091jam.24.2023.09.27.07.24.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Sep 2023 07:24:39 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Sep 2023 08:19:43 -0600
-Message-ID: <CAPnjgZ3-uHC-cJxDyUgAsrLdZLUzcobJkr6bPjzko+7+GRWGMA@mail.gmail.com>
-Subject: Re: [PATCH v3 04/38] spl: mx6: powerpc: Drop the condition on
- timer_init()
-To: Christophe Leroy <christophe.leroy@csgroup.eu>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>, Andy Fleming <afleming@gmail.com>,
- Bin Meng <bmeng@tinylab.org>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Mario Six <mario.six@gdsys.cc>, Nikhil M Jain <n-jain1@ti.com>, 
- Priyanka Jain <priyanka.jain@nxp.com>, Stefan Roese <sr@denx.de>,
- Wolfgang Denk <wd@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: [PATCH v5 39/43] command: Include a required header in command.h
+Date: Wed, 27 Sep 2023 08:22:37 -0600
+Message-ID: <20230927142359.2965941-40-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,69 +90,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Christophe,
+This uses ARRAY_SIZE() but does not include the header file which declares
+it. Fix this, so that command.h can be included without common.h
 
-On Tue, 26 Sept 2023 at 00:46, Christophe Leroy
-<christophe.leroy@csgroup.eu> wrote:
->
->
->
-> Le 24/09/2023 =C3=A0 21:24, Simon Glass a =C3=A9crit :
-> > It doesn't make sense to have some boards do this differently. Drop the
-> > condition in the hope that the maintainers can figure out any run-time
-> > problems.
->
-> This was added by commit ea8256f072 ("SPL: Port SPL framework to
-> powerpc"), and the commit log explains why.
->
-> Then commit 70e2aaf380 ("board_f: powerpc: Use timer_init() instead of
-> init_timebase()") brought timer_init() to powerpc.
->
-> All timer_init() does it reset the timebase register to 0 instead of
-> leaving a potentially random value. That should just be fine.
->
-> Therefore this change should be ok for powerpc.
->
-> Acked-by: Christophe Leroy <christophe.leroy@csgroup.eu>
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-OK thank you.
+Changes in v5:
+- Adjust so this builds on azure
 
->
-> >
-> > This has been tested on qemu-ppce500
-> >
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v3:
-> > - Mention testing on qemu-ppce500
-> >
-> > Changes in v2:
-> > - Explicitly copy two maintainers as it seems only Mario was auto-cc'd
-> >
-> >   common/spl/spl.c | 6 ------
-> >   1 file changed, 6 deletions(-)
-> >
-> > diff --git a/common/spl/spl.c b/common/spl/spl.c
-> > index 5cc86288145b..4233390d7de2 100644
-> > --- a/common/spl/spl.c
-> > +++ b/common/spl/spl.c
-> > @@ -762,13 +762,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
-> >               if (spl_init())
-> >                       hang();
-> >       }
-> > -#if !defined(CONFIG_PPC) && !defined(CONFIG_ARCH_MX6)
-> > -     /*
-> > -      * timer_init() does not exist on PPC systems. The timer is initi=
-alized
-> > -      * and enabled (decrementer) in interrupt_init() here.
-> > -      */
-> >       timer_init();
-> > -#endif
-> >       if (CONFIG_IS_ENABLED(BLOBLIST)) {
-> >               ret =3D bloblist_init();
-> >               if (ret) {
+ boot/bootm.c      | 2 +-
+ include/command.h | 4 ++++
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
-Regards,
-Simon
+diff --git a/boot/bootm.c b/boot/bootm.c
+index b1c3afe0a3a..8f96a80d425 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -8,6 +8,7 @@
+ #include <common.h>
+ #include <bootstage.h>
+ #include <cli.h>
++#include <command.h>
+ #include <cpu_func.h>
+ #include <env.h>
+ #include <errno.h>
+@@ -29,7 +30,6 @@
+ #include "mkimage.h"
+ #endif
+ 
+-#include <command.h>
+ #include <bootm.h>
+ #include <image.h>
+ 
+diff --git a/include/command.h b/include/command.h
+index ae7bb4a30b0..34ea989b39b 100644
+--- a/include/command.h
++++ b/include/command.h
+@@ -25,6 +25,10 @@
+ #endif
+ 
+ #ifndef	__ASSEMBLY__
++
++/* For ARRAY_SIZE() */
++#include <linux/kernel.h>
++
+ /*
+  * Monitor Command Table
+  */
+-- 
+2.42.0.515.g380fc7ccd1-goog
+
