@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F6A7E7F154
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 03:00:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B32ABE7F153
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 03:00:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7EAB86D8D;
-	Wed, 27 Sep 2023 05:00:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F16986DB8;
+	Wed, 27 Sep 2023 05:00:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="jchCAVfc";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="e5rrawgV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8F4286D9A; Wed, 27 Sep 2023 05:00:40 +0200 (CEST)
-Received: from mail-m49220.qiye.163.com (mail-m49220.qiye.163.com
- [45.254.49.220])
+ id C364186DB1; Wed, 27 Sep 2023 05:00:49 +0200 (CEST)
+Received: from mail-m127162.xmail.ntesmail.com
+ (mail-m127162.xmail.ntesmail.com [115.236.127.162])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 857BB86D8F
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 05:00:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4006C86DB8
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 05:00:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=jchCAVfcu/c//cJg7/D4Gz/9QRG3/uHdDYb6VOWhQfnuON+Ys08TrDZeD2N3xUO5SR9jo4XITneEk/vcVzxPak4GJM3VN9TJ43yypfTBIjiKOWmZVmXPjS2Hqdj7VuHbL2DD5zMUtn4vWzwBIw4nq6x7sYegk77eBkJnb9scPa8=;
+ b=e5rrawgV/o9R2ZZtbtHXxV55Fpl9q55wfWwkxirGh6sCtrUr1s0DwlFpkjIbc1sTn/Xu0KUAUmi7oq3buwtmBUCfqJvm2rbEcAiI2HfMCnma3jUwoYKm/kEsn9WTPVYSGbrulyRxSaqNITr3BVU065wCUz6qV5nT749v8KyGa+g=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=+W2AHC9L4zcr40DdYWVSw42JfPu2lNZ38cfMTb11PMc=;
+ bh=OW+vdjmdZ8KQdpx3wYJ+i3lHdid8a0jv2ERYA3ueSW0=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 473ED4002D3;
- Wed, 27 Sep 2023 11:00:32 +0800 (CST)
-Message-ID: <12fc93a7-b8db-bf87-46bd-7aeb5b2e2571@rock-chips.com>
-Date: Wed, 27 Sep 2023 11:00:32 +0800
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 475B44002DA;
+ Wed, 27 Sep 2023 11:00:40 +0800 (CST)
+Message-ID: <67a43531-a3e0-dd8c-06f5-8510a47f6ad3@rock-chips.com>
+Date: Wed, 27 Sep 2023 11:00:40 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 2/7] net: dwc_eth_qos: Return error code when start fails
+Subject: Re: [PATCH 3/7] net: dwc_eth_qos: Stop spam of RX packet not
+ available message
 Content-Language: en-US
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
@@ -48,20 +49,20 @@ Cc: Eugen Hristev <eugen.hristev@collabora.com>,
  Frank Wunderlich <frank-w@public-files.de>,
  Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, u-boot@lists.denx.de
 References: <20230807000817.1701012-1-jonas@kwiboo.se>
- <20230807000817.1701012-3-jonas@kwiboo.se>
+ <20230807000817.1701012-4-jonas@kwiboo.se>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20230807000817.1701012-3-jonas@kwiboo.se>
+In-Reply-To: <20230807000817.1701012-4-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkpOQ1ZKTUtJTkMdTB5CTBpVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQk1NH1YYGU8aSEtOTEtDQ0tVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8ad494bee12eb3kusn473ed4002d3
+X-HM-Tid: 0a8ad494de662eb3kusn475b44002da
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MEk6NSo5Mzw#CDY3IwwXKAst
- NzcwCy5VSlVKTUJOTENITUhISk9MVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUNJNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ND46LSo4STw9TTY0MwxWKBI8
+ Th8aCzBVSlVKTUJOTENITU9KSUtLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFIS0pLNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,7 +81,8 @@ X-Virus-Status: Clean
 
 
 On 2023/8/7 08:08, Jonas Karlman wrote:
-> Return error code when phy_connect fails or no link can be established.
+> Remove spam of RX packet not available debug messages when waiting to
+> receive a packet.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -88,26 +90,28 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   drivers/net/dwc_eth_qos.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   drivers/net/dwc_eth_qos.c | 8 +++-----
+>   1 file changed, 3 insertions(+), 5 deletions(-)
 >
 > diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-> index 555eaee3bbc3..7565e716823a 100644
+> index 7565e716823a..24fb3fac1f12 100644
 > --- a/drivers/net/dwc_eth_qos.c
 > +++ b/drivers/net/dwc_eth_qos.c
-> @@ -811,6 +811,7 @@ static int eqos_start(struct udevice *dev)
+> @@ -1193,14 +1193,12 @@ static int eqos_recv(struct udevice *dev, int flags, uchar **packetp)
+>   	struct eqos_desc *rx_desc;
+>   	int length;
 >   
->   		if (!eqos->phy) {
->   			pr_err("phy_connect() failed");
-> +			ret = -ENODEV;
->   			goto err_stop_resets;
->   		}
+> -	debug("%s(dev=%p, flags=%x):\n", __func__, dev, flags);
+> -
+>   	rx_desc = eqos_get_desc(eqos, eqos->rx_desc_idx, true);
+>   	eqos->config->ops->eqos_inval_desc(rx_desc);
+> -	if (rx_desc->des3 & EQOS_DESC3_OWN) {
+> -		debug("%s: RX packet not available\n", __func__);
+> +	if (rx_desc->des3 & EQOS_DESC3_OWN)
+>   		return -EAGAIN;
+> -	}
+> +
+> +	debug("%s(dev=%p, flags=%x):\n", __func__, dev, flags);
 >   
-> @@ -838,6 +839,7 @@ static int eqos_start(struct udevice *dev)
->   
->   	if (!eqos->phy->link) {
->   		pr_err("No link");
-> +		ret = -EAGAIN;
->   		goto err_shutdown_phy;
->   	}
->   
+>   	*packetp = eqos->rx_dma_buf +
+>   		(eqos->rx_desc_idx * EQOS_MAX_PACKET_SIZE);
