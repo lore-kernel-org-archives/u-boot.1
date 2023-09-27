@@ -4,91 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4113EE82CAE
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 16:44:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 137C0E82CB0
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 16:47:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6A0486BE2;
-	Wed, 27 Sep 2023 18:44:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6398C86E02;
+	Wed, 27 Sep 2023 18:47:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Un/ZEG+v";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DD2y5a3w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 900FD86D38; Wed, 27 Sep 2023 18:44:06 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 8900886E05; Wed, 27 Sep 2023 18:47:29 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8949886BD7
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 18:44:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7060586BD7
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 18:47:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-9936b3d0286so1479210266b.0
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 09:44:04 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-35133097583so26361795ab.1
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 09:47:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695833044; x=1696437844; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=OcujhrU25HQKsgbtffe4PcFl3+JaEKqz22NSzbLOb4g=;
- b=Un/ZEG+v5BVpw3J4LX79jxfNYIz7OLJfTtNjYQ2RPmsX2I6lhYuePF3WjU2rHB2tGH
- lguoKGtFJEhbu6+Gb7BsBBgHyqTJFAJo8QOigEB+GotdhH2r663VgUlzFMp7E5GDxUgF
- 4+xiFID3rYmdra5cQY4uU1obdDC3i2AAGYsMA=
+ d=chromium.org; s=google; t=1695833246; x=1696438046; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=xi0NPAXOKB2g4KhPtyHEVHOc+BFF5U0uejfT8FKn0j4=;
+ b=DD2y5a3wtB/ob71q2OlZN6UOSQHqrbHwrofT8SVwx5NhwBiYbejLhO4mDaWhZetz+Z
+ 9RDDvw2xGseAV3sGedvuTtbua/RUz7bsUnR7pcOSISavRbaAE4wLA5Yn1b7f+j1Xki7y
+ qCHKqiI8T4h09RpwAQ2AjU5OirhlZ8YPaiAEc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695833044; x=1696437844;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=OcujhrU25HQKsgbtffe4PcFl3+JaEKqz22NSzbLOb4g=;
- b=Z+87e4GXDJupIhzyW9WK9IkycSb94xModDIyKCuOgGY6kad+EHdJjQLuBKfNj4/OKE
- 5KulHJDsLa1ObkRvJLwIOW0ZwEUPDxQ4hsxVTtp7KVMaMC9FihaCh0dhajQatrngdEQ9
- cgJGx80vu4plPc7f0lauK7Sp0WJLEN6ux4K1iBJKebs7XrFpzbCmmq/B6GnY1ThceOUT
- uLZjxgsbx84z8zuKnqv7rOLs84EfVtwPmefbkg30kYqUkAWBaj42MRUiXucUcLznW+RT
- QWDOVwtOepiBgFtsBA6NvkIIvuMqa63Q1WpEC06FAh9IIG6O9hJyly/Sf206J6enFoWh
- XESQ==
-X-Gm-Message-State: AOJu0Yy/HZ0AMSOhtb+voCwAw6q+FDdtI1MKpgDZHeosiuLxyASX8wFa
- 9MaiYUFxTUNynGEt0GxyK8HPUUwFD5EUA+pYVumSfkvwRvLmtV8wrDE=
-X-Google-Smtp-Source: AGHT+IGjSTTn0TUpQ1DCRB1+f6e4rbY/7N18XVnUUcFUhIo/5Tr3gMG3e0hk0zOQ7YAOaa3AfsMHDj5Vbcx4NnL4Z3k=
-X-Received: by 2002:a50:ee0b:0:b0:52e:86b3:a4a6 with SMTP id
- g11-20020a50ee0b000000b0052e86b3a4a6mr2384623eds.29.1695833043736; Wed, 27
- Sep 2023 09:44:03 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
- <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
- <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
- <20230922174649.GA3320366-robh@kernel.org>
- <CAPnjgZ3ojfAv=BHqOhM=-NnYqCm81Ny=PsGKiNphKTmw++fk9w@mail.gmail.com>
- <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
- <CAPnjgZ3BnD9aX3cNNPiGRKTOj+YeurHCLv6K0TRFhAtY21Qufw@mail.gmail.com>
- <20230925092122.0b615f25@xps-13>
- <CAPnjgZ0Z5J_33HuQF-5XgDFmZim0nHHzvZJOOZobWw_cOJd=9g@mail.gmail.com>
- <20230925164736.5efbf4c0@xps-13>
- <CAPnjgZ3YCQHJ-eXuX8rYx2Qb6QEL+XviFmXYTON6M-sGPWSBBg@mail.gmail.com>
- <20230925172447.43dcef88@xps-13>
- <CAPnjgZ20c9FsYVjSrQ9qbFy9Y67BqDP2zxMyATx===PFhO69Ew@mail.gmail.com>
- <CAL_JsqJfjHqtTB2qfLmNxmQtn1rZewNyNe+Knu_Z4UCdPoPhSQ@mail.gmail.com>
- <CAPnjgZ1npHPpwPmw2f4=E3U5=RH0m4R+W_MZ7+oXdmDF=EeUjg@mail.gmail.com>
- <20230926094815.5802e184@xps-13>
- <CAL_JsqL_8bhHkHOFL8a8=g1dYL4OY8hGuNDyc0Jz22rEuJzXtQ@mail.gmail.com>
-In-Reply-To: <CAL_JsqL_8bhHkHOFL8a8=g1dYL4OY8hGuNDyc0Jz22rEuJzXtQ@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1695833246; x=1696438046;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xi0NPAXOKB2g4KhPtyHEVHOc+BFF5U0uejfT8FKn0j4=;
+ b=Sp8uzvP96RfNTbap9YxwAFaXVzP/FTJ6Gpzp1aX1DWOVRrgpFBIxuNJvrrRH5WlSgR
+ QREmCDjXeGBBNjooApYaVUhL5rK+W2Ee0NKCxl0tVnZHCCkmtfjsVauo03jFJoUC5bNM
+ GDRJJr22Vmu3z6ENkKU22Dc4M8fFvmRNdtw4OcpxNCdAHolkpVtsf3YUUvhwGMCNaBVU
+ EeKjnpWjKloQdtMqrooTe6vB+ybL7dBNB/5LA8CmUM771c7wac9ooRI9PIF2Ph0Y9xbP
+ UsC2KtmbwWOCZCDlOBdwIdSIC18yS7tLcoC4e1r08ogr/aSQebR5kEOlgbQo26h3faB9
+ dQLw==
+X-Gm-Message-State: AOJu0YxBRmBg/ak9UFBrtPHeOGSgUKnA2bfeQVJz0YHZwM62pJ8W/Xq+
+ ix+U0w7Yl9LD0XoLYVslkzxPEQ==
+X-Google-Smtp-Source: AGHT+IH+JcaNhVNz7FfFGoWF8iw2OSTtskunRegjjj1eGuC9QOYwU8eTORJoA1lvodxfPDArPEpPZw==
+X-Received: by 2002:a05:6e02:12c5:b0:34c:ecc8:98e7 with SMTP id
+ i5-20020a056e0212c500b0034cecc898e7mr3216823ilm.9.1695833246163; 
+ Wed, 27 Sep 2023 09:47:26 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:5d4f:fe51:5575:6f76])
+ by smtp.gmail.com with ESMTPSA id
+ ei25-20020a05663829b900b00439eda8c1c1sm3980500jab.111.2023.09.27.09.47.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Sep 2023 09:47:25 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 27 Sep 2023 10:43:45 -0600
-Message-ID: <CAPnjgZ3TJLaRzv_cXyLdpRBtc2-FBYQ=gk-_MhEDH47HvO71FQ@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
-To: Rob Herring <robh@kernel.org>
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>, devicetree@vger.kernel.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>, linux-mtd@lists.infradead.org, 
- Tom Rini <trini@konsulko.com>, Conor Dooley <conor+dt@kernel.org>,
- Dhruva Gole <d-gole@ti.com>, 
+To: devicetree@vger.kernel.org
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
+ Rob Herring <robh@kernel.org>, linux-mtd@lists.infradead.org,
+ Simon Glass <sjg@chromium.org>, Conor Dooley <conor+dt@kernel.org>,
  Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ Miquel Raynal <miquel.raynal@bootlin.com>, Nick Terrell <terrelln@fb.com>,
+ =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>,
+ Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
+Subject: [PATCH v3] dt-bindings: mtd: fixed-partitions: Add compression
+ property
+Date: Wed, 27 Sep 2023 10:46:51 -0600
+Message-ID: <20230927164654.3397353-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,156 +92,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob,
+Sometimes the contents of a partition are compressed. Add a property to
+express this and define the algorithm used.
 
-On Tue, 26 Sept 2023 at 11:29, Rob Herring <robh@kernel.org> wrote:
->
-> On Tue, Sep 26, 2023 at 2:48=E2=80=AFAM Miquel Raynal <miquel.raynal@boot=
-lin.com> wrote:
-> >
-> > Hello,
-> >
-> > > > > > > These are firmware bindings, as indicated, but I
-> > > > > > > took them out of the /firmware node since that is for a diffe=
-rent
-> > > > > > > purpose. Rob suggested that partitions was a good place. We h=
-ave fwupd
-> > > > > > > using DT to hold the firmware-update information, so I expect=
- it will
-> > > > > > > move to use these bindings too.
-> > > > > >
-> > > > > > I would definitely use fixed partitions as that's what you need=
- then:
-> > > > > > registering where everything starts and ends. If you have "in-b=
-and"
-> > > > > > meta data you might require a compatible, but I don't think you
-> > > > > > do, in this case you should probably carry the content through =
-a label
-> > > > > > (which will become the partition name) and we can discuss addit=
-ional
-> > > > > > properties if needed.
-> > > > >
-> > > > > I believe I am going to need a compatible string at the 'partitio=
-ns'
-> > > > > level to indicate that this is the binman scheme. But we can leav=
-e
-> > > > > that until later.
-> > > >
-> > > > Perhaps:
-> > > >
-> > > > compatible =3D "binman", "fixed-partitions";
-> > > >
-> > > > Though I don't understand why binman couldn't just understand what
-> > > > "fixed-partitions" means rather than "binman".
-> > >
-> > > Well so long as we don't add any binman things in here, you are right=
-.
-> > >
-> > > But the eventual goal is parity with current Binman functionality,
-> > > which writes the entire (augmented) description to the DT, allowing
-> > > tools to rebuild / repack / replace pieces later, maintaining the sam=
-e
-> > > alignment constraints, etc. I am assuming that properties like 'align
-> > > =3D <16>' would not fit with fixed-partitions.
-> >
-> > I am personally not bothered by this kind of properties. But if we plan
-> > on adding too much properties, I will advise to indeed use another name
-> > than fixed-partitions (or add the "binman" secondary compatible)
-> > otherwise it's gonna be hard to support in the code while still
-> > restraining as much as we can the other partition schema.
->
-> Agreed. It's a trade off. I think we need enough to understand the
-> problem (not just presented with a solution), agree on the general
-> solution/direction, and then discuss specific additions.
->
-> > > But if we don't preserve
-> > > these properties then Binman cannot do repacking reliably. Perhaps fo=
-r
-> > > now I could put the augmented DT in its own section somewhere, but I
-> > > am just not sure if that will work in a real system. E.g. with VBE th=
-e
-> > > goal is to use the DT to figure out how to access the firmware, updat=
-e
-> > > it, etc.
->
-> VBE?
->
-> > > Is it not possible to have my own node with whatever things Binman
-> > > needs in it (subject to review of course)? i.e. could we discuss how
-> > > to encode it, but argue less about whether things are needed? I
-> > > kind-of feel I know what is needed, since I wrote the tool.
->
-> What we don't need is the same information in 2 places for the DTB
-> used at runtime. If the binman node is removed, do whatever you want.
-> If you want to keep it at runtime, then it's got to extend what we
-> already have.
->
-> I don't think anyone is disagreeing about whether specific information
-> is needed or not.
->
-> > > > > So you are suggesting 'label' for the contents. Rob suggested
-> > > > > 'compatible' [1], so what should I do?
-> > > >
-> > > > "label" is for consumption by humans, not tools/software. Compatibl=
-e
-> > > > values are documented, label values are not. Though the partition
-> > > > stuff started out using label long ago and it's evolved to preferri=
-ng
-> > > > compatible.
-> > >
-> > > OK so we are agreed that we are going with 'compatible'.
-> >
-> > Still strongly disagree here.
->
-> Miquel is right. I was confused here. "label" is still pretty much
-> used for what the image is. Though we do have "u-boot,env" for both it
-> seems.
->
-> My position on "label" stands. To the extent we have images for common
-> components, I think we should standardize the names. Certainly if
-> tools rely on the names, then they should be documented.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-OK thanks for clearing that up.
+Changes in v3:
+- Just add a compression property for now
 
-But at present 'label' is free-form text. If I change it to an enum,
-won't that break things? If not, how do I actually do it?
+Changes in v2:
+- Use "binman" for compatible instead of "u-boot,binman"
+- Significantly rework the patch
+- Use make dt_binding_check DT_SCHEMA_FILES=Documentation/../partitions
 
-There is a u-boot.yaml but it doesn't actually have a "u-boot" label
-in the schema. In fact it seems that the label is not validated at
-all?
+ .../mtd/partitions/fixed-partitions.yaml       | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
->
->
-> > My understanding is that a compatible carries how the content is
-> > organized, and how this maybe specific (like you have in-band meta data
-> > data that needs to be parsed in a specific way or in your case
-> > additional specific properties in the DT which give more context about
-> > how the data is stored). But the real content of the partition, ie. if
-> > it contains a firmware, the kernel or some user data does not belong to
-> > the compatible.
-> >
-> > I.e:
-> > - The first byte of my partition gives the compression algorithm:
-> >   -> compatible =3D "compressed-partition-foo";
-> >      or
-> >   -> compatible =3D "fixed-partitions" + compression-algorithm =3D "foo=
-";
-> > - The partition contains a picture of my dog:
-> >   -> label =3D "my dog is beautiful"
-> >   but certainly not
-> >   -> compatible =3D "my-dog";
->
-> IMO, compatible in this case should convey "JPEG image" or similar.
->
-> > I don't see why, for the binman schema, we could not constrain the
-> > labels?
->
-> Yes, but those should follow what we already have. "u-boot" for
-> example rather than "data,u-boot" which I think Simon had in some
-> version of this.
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/fixed-partitions.yaml b/Documentation/devicetree/bindings/mtd/partitions/fixed-partitions.yaml
+index 331e564f29dc..13ff313cabda 100644
+--- a/Documentation/devicetree/bindings/mtd/partitions/fixed-partitions.yaml
++++ b/Documentation/devicetree/bindings/mtd/partitions/fixed-partitions.yaml
+@@ -29,6 +29,24 @@ properties:
+ 
+   "#size-cells": true
+ 
++  compression:
++    $ref: /schemas/types.yaml#/definitions/string
++    description: |
++      Compression algorithm used to store the data in this partition, chosen
++      from a list of well-known algorithms.
++
++      The contents are compressed using this algorithm.
++
++    enum:
++      - none
++      - bzip2
++      - gzip
++      - lzop
++      - lz4
++      - lzma
++      - xz
++      - zstd
++
+ patternProperties:
+   "@[0-9a-f]+$":
+     $ref: partition.yaml#
+-- 
+2.42.0.515.g380fc7ccd1-goog
 
-Yes, don't worry, I had some feedback from Alper but have given up on
-that approach.
-
-Regards,
-Simon
