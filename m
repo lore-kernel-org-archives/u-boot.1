@@ -4,43 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBBF9E7F14E
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 13:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D50E7F14F
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 13:10:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05C0786D8D;
-	Wed, 27 Sep 2023 15:06:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 9EBFD86D62;
+	Wed, 27 Sep 2023 15:10:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 19A1D86DB5; Wed, 27 Sep 2023 15:06:44 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 7B9F386D59
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 15:06:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,181,1694703600"; 
- d="asc'?scan'208";a="177437314"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 27 Sep 2023 22:06:37 +0900
-Received: from [10.226.92.216] (unknown [10.226.92.216])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 6318B425CDC3;
- Wed, 27 Sep 2023 22:06:36 +0900 (JST)
-Message-ID: <c8dc29d9-0b9c-96fc-95be-e85bfe98c38f@bp.renesas.com>
-Date: Wed, 27 Sep 2023 14:06:34 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jy7AFhBH";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BF06486D93; Wed, 27 Sep 2023 15:10:07 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F16D86D5A
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 15:10:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38RDA2hZ075130;
+ Wed, 27 Sep 2023 08:10:02 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695820202;
+ bh=Nc1kejBn69fMr7BtWkEVIyYPokEf+K4ZlQ3rPkp79Ss=;
+ h=From:To:CC:Subject:Date;
+ b=jy7AFhBHoBH6djTuzdb4O50CfmeNmlV0mpHk6vxR5pBEPLlk/GhriRuWA960333Av
+ TQ1/qgXt3S92Iq38dFMR9wAJm93a1KrdUlaHSLauSyyrUyDxioK4DDu/cEx26viU80
+ hK9vLqHMFFQS+JIsLv3FrtEusf4P5rGqrN2Y57C8=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38RDA2PU003259
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Sep 2023 08:10:02 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Sep 2023 08:10:02 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Sep 2023 08:10:02 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38RD9uKa025731;
+ Wed, 27 Sep 2023 08:09:57 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <reidt@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>,
+ <sinthu.raja@ti.com>, <gadiyar@ti.com>, <a-nandan@ti.com>,
+ <vaishnav.a@ti.com>, <n-francis@ti.com>, <b-kapoor@ti.com>,
+ <bb@ti.com>, <s-vadapalli@ti.com>
+Subject: [PATCH v4 0/6] J721E DTS Sync with Kernel v6.6-rc1
+Date: Wed, 27 Sep 2023 18:39:50 +0530
+Message-ID: <20230927130956.910988-1-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: image-host: small improvements and fixes.
-To: Hugo Cornelis <hugo.cornelis@essensium.com>, u-boot@lists.denx.de
-References: <20230927115920.2471498-1-hugo.cornelis@essensium.com>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20230927115920.2471498-1-hugo.cornelis@essensium.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------DTQcIH8Fr07eU4I2wh4N0zgO"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,121 +81,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------DTQcIH8Fr07eU4I2wh4N0zgO
-Content-Type: multipart/mixed; boundary="------------E8Hye0MWTNwTl7epQtjjTIHj";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Hugo Cornelis <hugo.cornelis@essensium.com>, u-boot@lists.denx.de
-Message-ID: <c8dc29d9-0b9c-96fc-95be-e85bfe98c38f@bp.renesas.com>
-Subject: Re: image-host: small improvements and fixes.
-References: <20230927115920.2471498-1-hugo.cornelis@essensium.com>
-In-Reply-To: <20230927115920.2471498-1-hugo.cornelis@essensium.com>
+This series aims to sync kernel.org v6.6-rc1 DTS with that of U-Boot. It
+also includes cleanups where necessary along with certain changes to
+ensure boot is unaffected.
 
---------------E8Hye0MWTNwTl7epQtjjTIHj
-Content-Type: multipart/mixed; boundary="------------ZTD0W91UG8edF2b5DP6B4jkT"
+Same as with other board series that have taken up this effort, cleanup
+of mcu_ringacc and mcu_udmap are dependent on MCU DMA [1] fixes. Also
+adding TPS6594 PMIC support is still under review [2] in the Kernel.
+These will be taken up after their merge to Linux.
 
---------------ZTD0W91UG8edF2b5DP6B4jkT
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+[1] https://lore.kernel.org/all/20230810174356.3322583-1-vigneshr@ti.com/
+[2] https://lore.kernel.org/all/20230810-tps6594-v6-0-2b2e2399e2ef@ti.com/
 
-On 27/09/2023 12:59, Hugo Cornelis wrote:
-> Yocto build can involve very long filenames.  These two patches protect=
+Boot logs:
+https://gist.github.com/nehamalcom/ca67dd714027a76cc711f41c25d33dfe
 
-> the Yocto build from failing without a sensible error message and
-> increase the path length for the cipher key for the kernel from 128 to
-> 256 characters.
->=20
->=20
+Changes in v4:
+	- return PTR_ERR instead of int in ti_sci_get_handle_sysfw for
+	  error handling
+	- Nishanth:
+		- Modify commit message to include summary of changes
+		- Move wkup_uart0_pins_default and
+		  mcu_uart0_pins_default to R5 DTS
+		- Remove hbmc node completely
+		- Remove ti,cluster-mode override
+		- Remove clock-frequency properties that are already
+		  accounted for by clk-data
+		- Document reason for retaining tps node in commit
+		  message
+		- Move mcu_ringacc and mcu_udmap before peripherals
+		- add bootlogs for patch (3/7) for different boot flows
 
-For both patches: see the documentation on sending patches [1],
-particularly the section on commit message conventions. Your patches are
-missing 'Signed-off-by' lines at least.
+Changes in v3:
+	- Nishanth:
+		- synced to v6.6-rc1 from v6.5-rc1
+		- reworded commit messages
+		- removed patch adding k3_avs compatible since it has
+		  been merged to -next separately
+		- removed unnecessary #includes
+		- added extra comments for OSPI reg overrides
+		- removed hbmc node from R5 DTS
+		- changed ti_sci_get_cmd_revision to be at a common
+		  point for all boot flows
+	- Manorit:
+		- added Reviewed-by tag for mcu_timer0 ID patch (2/7)
+		- removed all aliases
+		- removed unnecessary properties
 
-[1]: https://u-boot.readthedocs.io/en/latest/develop/sending_patches.html=
+Changes in v2:
+	- Nishanth:
+		- synced k3-j721e-som-0.dtsi 6.5-rc1
+		- delete tick-timer from -u-boot.dtsi
+		- remove unnecessary aliases
+		- remove SERDES overrides in U-Boot
+		- formatting changes
+		- drop repeated nodes and properties in U-Boot dts
+		- drop nodes and properties not related to U-Boot from
+		  U-Boot dts
+		- drop all /delete
 
+Neha Malcom Francis (6):
+  arm: mach-k3: j721e: dev-data: Add mcu_timer0 ID
+  arm: mach-k3: j721e_init: Move clk_k3 probe before loading TIFS
+  drivers: firmware: ti_sci: Get SCI revision only if TIFS/SYSFW is up
+  configs: j721e: Remove HBMC_AM654 config
+  arm: dts: k3-j721e-r5: Clean up inclusion hierarchy
+  arm: dts: k3-j721e: Sync with v6.6-rc1
 
-Thanks,
-Paul
---------------ZTD0W91UG8edF2b5DP6B4jkT
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+ .../k3-j721e-common-proc-board-u-boot.dtsi    |  159 +--
+ arch/arm/dts/k3-j721e-common-proc-board.dts   |  513 ++++++---
+ arch/arm/dts/k3-j721e-main.dtsi               | 1018 +++++++++++++++--
+ arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  305 ++++-
+ .../k3-j721e-r5-common-proc-board-u-boot.dtsi |   29 -
+ .../arm/dts/k3-j721e-r5-common-proc-board.dts |  384 +------
+ arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi       |   31 -
+ arch/arm/dts/k3-j721e-r5-sk.dts               |  587 +---------
+ arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  180 +--
+ arch/arm/dts/k3-j721e-sk.dts                  |  673 +++++++----
+ arch/arm/dts/k3-j721e-som-p0.dtsi             |  217 ++--
+ arch/arm/dts/k3-j721e-thermal.dtsi            |   75 ++
+ arch/arm/dts/k3-j721e.dtsi                    |   32 +-
+ arch/arm/mach-k3/j721e/dev-data.c             |    1 +
+ arch/arm/mach-k3/j721e_init.c                 |   24 +-
+ configs/j721e_evm_a72_defconfig               |    1 -
+ configs/j721e_evm_r5_defconfig                |    1 -
+ drivers/firmware/ti_sci.c                     |   11 +-
+ 18 files changed, 2407 insertions(+), 1834 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-j721e-r5-common-proc-board-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-r5-sk-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+-- 
+2.34.1
 
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------ZTD0W91UG8edF2b5DP6B4jkT--
-
---------------E8Hye0MWTNwTl7epQtjjTIHj--
-
---------------DTQcIH8Fr07eU4I2wh4N0zgO
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZRQo2gUDAAAAAAAKCRDbaV4Vf/JGvYHY
-AQDm8j3LhbPQzEeet2YnFbq7lZWvgUrvpLBW4LWJB/akfAD/VZm9OA+aCYKmv+HxOxvBxkcpI1FC
-LtCkpFUDhrLtDQ0=
-=9Wj8
------END PGP SIGNATURE-----
-
---------------DTQcIH8Fr07eU4I2wh4N0zgO--
