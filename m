@@ -4,65 +4,108 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF2FFE810D9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 12:21:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A9AE810D9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 12:24:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1226C86BE2;
-	Wed, 27 Sep 2023 14:21:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C659386DC3;
+	Wed, 27 Sep 2023 14:24:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tAd4B72s";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="YlwI1Fsz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2566486C96; Wed, 27 Sep 2023 14:21:41 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 1E3E686BFA; Wed, 27 Sep 2023 07:04:38 +0200 (CEST)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eae::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB70E86A0A
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 14:21:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC92586AEA
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 07:04:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38RCLXfw043902;
- Wed, 27 Sep 2023 07:21:33 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695817293;
- bh=YZ/9n7rYyp+IiXda6JdAjieaKTZ2+yrTSxn+R/TRrJs=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=tAd4B72sOZ8CRmUfwcZexUb1PCMOPagZtsXL7XOwv8fItI2bRL/yC4y8cuH9yoVTx
- xmamTznjSSTTES3e93Fp6El/QGIHR2S9yPyOgSfEvsOEv9TBPI8Ersoc/umO8PEash
- bYph+Ulu25C2Tg6qLj3hUj7+y3Q/ePUHeZY7WdQI=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38RCLXHD102743
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Sep 2023 07:21:33 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Sep 2023 07:21:32 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Sep 2023 07:21:33 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38RCLWhc047344;
- Wed, 27 Sep 2023 07:21:32 -0500
-Date: Wed, 27 Sep 2023 07:21:32 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Roger Quadros <rogerq@kernel.org>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>,
- <bb@ti.com>, <afd@ti.com>, <srk@ti.com>, <r-gunasekaran@ti.com>,
- <praneeth@ti.com>
-Subject: Re: [PATCH 0/2] arm: dts: k3-am64: Sync dts from Linux v6.6-rc1
-Message-ID: <20230927122132.ybtwmpqo3mch6ti3@fountain>
-References: <20230927120148.75088-1-rogerq@kernel.org>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=love.kumar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=iEiBY4kxm/oIJ86MG5vqI+xYfKJ3TroONhWtgjqDvav0wS1/7VT7hikBXOzi/7o9vCNseQWnRv4ko8Y0q31vMYq2Qd5Mo3tTzPV1pYRgVFMGiQcjPC0UCNbFXOSAUyKKUGKXSPU6v/aRCGWmaDwl+ehgm44KCvUwGmPrPgWIfiojnICZhd8dA1HIBmoWMREK0LNvtzfBjDIdd8E5LhX3X6+oY7n2AjqCSjiNy2NflhPKx/Bq9qbYzqR4VsZHXSFelwDEz0ohbUnvkjkY6W6nR7JWihHfshyydTjrjODGhfgcv/yWZvF1OBOGFHSN0qnZIOKhAjoPil8nLXXD62wYdg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gxLzpZQ2MtclFDjyzHAE68cp5+MK7UenUliKMsOxIhE=;
+ b=KNldzjGbxcpfKoEnUZnze7d/pF9kUCcEVdexJ7N90I8HJhBDJr6l8VdNrSbucMPdibh1/EgSJWXJilXlKdilNrIkMRsl1uoAWMbDVOziGox6Gm8Y/tjT4LiYDS3YuV58z/7xtVBrg1Kc7F7Qaz5nxyU3rB9E8owskurriLjljStoZ0WQV6soCFcqjMXqXo5vw09YQ/VlYjmh2PZe5wQKXIlOnEl/gXCtb2RxrJ6kpceme/1dOzTl5IqtH2zKaiorEhy83+XYcjmc1yC1JQehnkLeaw9eQiwmdFhjT32Dqzod1Is6RUnXwF3PZvWbSi+m/2cZn7P4P/RnPAYAUhiYwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=gxLzpZQ2MtclFDjyzHAE68cp5+MK7UenUliKMsOxIhE=;
+ b=YlwI1FsziZhrXZKPWSGpIgKhy6LbVSvGQRRgz8pDg7ATAtXeq+kXf+kzvOXdzY876iVKpAYe0Uysqzf0OYvarLDx+UGantowvrvd5/UpBaTMYCUBPUT1PL1XsK0x2mYio04ew40kBtCqN2Re80vzYTMmiKE0Xy05YD3vUJbwyds=
+Received: from SA0PR11CA0070.namprd11.prod.outlook.com (2603:10b6:806:d2::15)
+ by SN7PR12MB8129.namprd12.prod.outlook.com (2603:10b6:806:323::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.28; Wed, 27 Sep
+ 2023 05:04:32 +0000
+Received: from SN1PEPF0002BA4E.namprd03.prod.outlook.com
+ (2603:10b6:806:d2:cafe::64) by SA0PR11CA0070.outlook.office365.com
+ (2603:10b6:806:d2::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.35 via Frontend
+ Transport; Wed, 27 Sep 2023 05:04:32 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF0002BA4E.mail.protection.outlook.com (10.167.242.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6838.14 via Frontend Transport; Wed, 27 Sep 2023 05:04:31 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 27 Sep
+ 2023 00:04:30 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 27 Sep
+ 2023 00:04:30 -0500
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
+ Transport; Wed, 27 Sep 2023 00:04:29 -0500
+From: Love Kumar <love.kumar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>
+Subject: [PATCH v2] test/py: sleep: Add a test for the time command
+Date: Wed, 27 Sep 2023 10:33:55 +0530
+Message-ID: <cf9865c45df7acb15759dc88698b63cd1b8b7f32.1695790713.git.love.kumar@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230927120148.75088-1-rogerq@kernel.org>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4E:EE_|SN7PR12MB8129:EE_
+X-MS-Office365-Filtering-Correlation-Id: 02a02fbc-cc84-42dd-44db-08dbbf173c2d
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: scOmdYDoDq1kMElggZ5tMbmlpuPvc2gY2yEvBlY9XvoomhE1+dPbrh2gzBWyIPH3QMasz95L4LnQDa9//kwzFhQYm/b+zZUAZxO7b+P4B/Mq0v/k2iSYWdGRTERCyZ6sRtBlgwijU9agwvf0yYyyliHju0GbCQIuud1FfXpZLCVJrJR9lBq3ogfvikrAPU8N/wyAfHVC6UygzPZmEyPMaxseLr+oVN4bRC794itxD9iRSNGtlObZiJfqxoQ5Oz96hD6r8MBhaW1Y4vhuE/Iu0felKl8jVBCfJxyRe8LY0gS3WPvLPUmQqOVgC8zRb9UcmiztjttflizhcsVjCc7n0Pd7+qhtG/rVr3NWbQtP7j+8/aDT0hpRf8KcRTEJBodaBL3RDKmUHfyA+G6SnbI55Hz3rp75kflInaTHw9RZe+qYrb7iZUjmEMSxBJlq+hVlzW9WQN2AaJxKJ1Jd9C2kX0Pv2wWFoJTWGgq1WOsHmgntnFgnn2kVni5oSbGUmB9s/s/QpwcjdZ6nq54XXIIWUqDbY8VtuqA47eF4T50OVB3Lyx5z6zOlccSpTgSYWziVY5YWGT7n9h4TGSq7bZPDecYdDLOIjeqc2zhB5CUseBqKRnqp/ghv6nDjWd3m+S6jZrtK7YwwoKyVbEQhPVw6IFu5I4bkxzNlbSeLekHeDf9q+9FFEBqVHbhVmwqle22KFxyZA2gtdLXYLwE94JDnylrnvzi/HJp1DqtRT8bu9DJ0hW9tqB1twl19M7CNMlib+5lBqlNkFnCnRn+HyEXDfQ==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(346002)(396003)(376002)(39860400002)(136003)(230922051799003)(186009)(1800799009)(451199024)(82310400011)(46966006)(40470700004)(36840700001)(426003)(316002)(70586007)(6916009)(54906003)(8676002)(107886003)(41300700001)(40460700003)(356005)(336012)(47076005)(83380400001)(36756003)(478600001)(81166007)(86362001)(40480700001)(82740400003)(2616005)(6666004)(8936002)(70206006)(26005)(4326008)(36860700001)(2906002)(5660300002)(44832011)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2023 05:04:31.7184 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 02a02fbc-cc84-42dd-44db-08dbbf173c2d
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002BA4E.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8129
+X-Mailman-Approved-At: Wed, 27 Sep 2023 14:24:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,46 +122,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 15:01-20230927, Roger Quadros wrote:
-> Hi,
-> 
-> This series aligns the dts files for AM64 platform from Linux v6.6-rc1.
-> 
-> cheers,
-> -roger
-> 
-> Roger Quadros (2):
->   Revert "ARM: dts: k3-am642-sk-u-boot: add PMIC node"
->   arm: dts: k3-am64: Bump dts from Linux v6.6-rc1
-> 
->  arch/arm/dts/k3-am64-main.dtsi        | 209 ++++++++++++++++++++++----
->  arch/arm/dts/k3-am64-mcu.dtsi         |  53 ++++++-
->  arch/arm/dts/k3-am64-thermal.dtsi     |  33 ++++
->  arch/arm/dts/k3-am64.dtsi             |  22 +--
->  arch/arm/dts/k3-am642-evm-u-boot.dtsi |  70 +++++----
->  arch/arm/dts/k3-am642-evm.dts         | 177 +++++++++++++++++-----
->  arch/arm/dts/k3-am642-r5-evm.dts      | 194 ++----------------------
->  arch/arm/dts/k3-am642-r5-sk.dts       | 194 +-----------------------
->  arch/arm/dts/k3-am642-sk-u-boot.dtsi  | 122 ++++-----------
->  arch/arm/dts/k3-am642-sk.dts          | 174 +++++++++++++++------
->  arch/arm/dts/k3-am642.dtsi            |   1 +
->  arch/arm/dts/k3-serdes.h              | 204 +++++++++++++++++++++++++
->  12 files changed, 815 insertions(+), 638 deletions(-)
->  create mode 100644 arch/arm/dts/k3-am64-thermal.dtsi
->  create mode 100644 arch/arm/dts/k3-serdes.h
-> 
-> 
-> base-commit: 4cb31a9f3560b293670de95e76c1f3cf2f9e1ca8
-> -- 
-> 2.34.1
-> 
+Execute "time <sleep cmd>", and validate that it gives the approximately
+the correct amount of command execution time.
 
-https://lore.kernel.org/u-boot/20230911144401.1011354-1-nm@ti.com/
-https://github.com/u-boot/u-boot/commits/next?after=90c81f407dd4a7747385b10f9b8f732202c45cde+104&branch=next&qualified_name=refs%2Fheads%2Fnext
+Signed-off-by: Love Kumar <love.kumar@amd.com>
+---
 
-Can you send delta patches based off u-boot next?
+Changes in v2:
+- Used @pytest.mark.buildconfigspec('')
+---
+ test/py/tests/test_sleep.py | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
+diff --git a/test/py/tests/test_sleep.py b/test/py/tests/test_sleep.py
+index 392af29db224..66a57434bff7 100644
+--- a/test/py/tests/test_sleep.py
++++ b/test/py/tests/test_sleep.py
+@@ -41,3 +41,21 @@ def test_sleep(u_boot_console):
+     if not u_boot_console.config.gdbserver:
+         # margin is hopefully enough to account for any system overhead.
+         assert elapsed < (sleep_time + sleep_margin)
++
++@pytest.mark.buildconfigspec("cmd_misc")
++def test_time(u_boot_console):
++    """Test the time command, and validate that it gives approximately the
++    correct amount of command execution time."""
++
++    sleep_skip = u_boot_console.config.env.get("env__sleep_accurate", True)
++    if not sleep_skip:
++        pytest.skip("sleep is not accurate")
++
++    sleep_time = u_boot_console.config.env.get("env__sleep_time", 10)
++    sleep_margin = u_boot_console.config.env.get("env__sleep_margin", 0.25)
++    output = u_boot_console.run_command("time sleep %d" % sleep_time)
++    execute_time = float(output.split()[1])
++    assert sleep_time >= (execute_time - 0.01)
++    if not u_boot_console.config.gdbserver:
++        # margin is hopefully enough to account for any system overhead.
++        assert sleep_time < (execute_time + sleep_margin)
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.25.1
+
