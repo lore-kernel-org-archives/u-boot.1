@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B599DE82CBB
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 19:02:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E6EBE82CCF
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 20:21:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0662869AC;
-	Wed, 27 Sep 2023 21:02:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7ED2986DD6;
+	Wed, 27 Sep 2023 22:21:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hVUEzpTd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gK2p5It2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D42F186A0A; Wed, 27 Sep 2023 21:02:20 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 3572586DDF; Wed, 27 Sep 2023 22:21:12 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B02918692B
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 21:02:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7EC3A86484
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 22:21:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-77575233636so115556085a.2
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 12:02:18 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-79fe6da0049so127134739f.1
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 13:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695841337; x=1696446137; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Qn6c+LodsPHEj9iofhmdpQLofqBfjKlEN9DTJlPT44A=;
- b=hVUEzpTdKt645jioE9rRqITV8PNd1KkliAHqlNe5WrS8+EPXgUKQmAobrTvw9kD68r
- XQqZdGSL4+OKjCwbEhDDRg9NFo70PUBr9DHJnTrcdctM2ajsvtLFl1/DUL7vCCZii0dQ
- y1EG3VtjvNOucbV2lb8QTl1AXOV5J/Es1LzhI3TGYoTwddOJi6igx0ty9blrx2UD2NGc
- 0jmCgAH4MB0Czc9LYSfarXX0HXCBAKsZa1rggattFVkui+0lueq0QbBY64ZV+pKGrcDM
- iduc9MT8WbhILozJpPduXpb4dNaXrLksQNU+bW+Aqg9nzXkMEBJwOF0QCMnj1zktp8Xu
- rkaA==
+ d=chromium.org; s=google; t=1695846068; x=1696450868; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=IIjs+rwErzRuI8OpZgfCnKlE1NGemok/NR/4pjhGmqU=;
+ b=gK2p5It2BLcUJGHfre/i25p+T4HYfxJ9PDchuyoNxZHnslBmYvGVuqeZmRydpkgpOJ
+ kexkJo7r8PtW2YPo9kEM6fP1hF/EPOrEwkkcAOhNFOIppTM/Zp0pqThRtlaZwsnHsyQE
+ BeEzXs3j3+Snt6SC7g2lo8ohOOjrLsYoel7ms=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695841337; x=1696446137;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Qn6c+LodsPHEj9iofhmdpQLofqBfjKlEN9DTJlPT44A=;
- b=KUq63t4bt2hRsHlnjfr74bCzg0P2Usjek21mYfwT8yBjzGT5jhaY72Zf9qupCR5lMe
- KefQKcGNQi7q0PJnYc2fgv1ktoUFsphFnjvgX8I7le+4MhjChU03HOpbTXDRVLDcwi/x
- cUYoC9j7/CQHiXSEhw+0Nj/LpFAbWf0jINHwvMQYik7VS9Uz5LedkRK5yiXroWRj032x
- I4cvolDpQrrmTC/MRrMoVUIJSUa03R3lZ4/LHfgnpyo5niX8XlsM3aZqtwS5MrG13a0P
- /RXn+miW7MbhQa/ZGJdlfZk248SwppujIv5EY22YqzGyAf4ouTxGi3BJILBEpF73eml4
- WWNA==
-X-Gm-Message-State: AOJu0Yy2Bq9ynBGMb6ki2i0rGPbIaylAEz3zND6Nq+EJl0Dinb5SVNM3
- gZMDdR8ND/Gn4iNOj+PviJw=
-X-Google-Smtp-Source: AGHT+IEG2dPB4BnZ5JAQFcJVazKY9IAIMvdIsfT8GxNFSkBXo7cWQcg3yWuQdxucezhXDCTCMxNROw==
-X-Received: by 2002:a05:620a:2491:b0:76f:27af:2798 with SMTP id
- i17-20020a05620a249100b0076f27af2798mr3622953qkn.61.1695841337415; 
- Wed, 27 Sep 2023 12:02:17 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- j28-20020a05620a147c00b007743671a41fsm2249520qkl.72.2023.09.27.12.02.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 27 Sep 2023 12:02:16 -0700 (PDT)
-Message-ID: <6ac71b7e-d84e-10d5-e500-0d54e5d6c191@gmail.com>
-Date: Wed, 27 Sep 2023 15:02:15 -0400
+ d=1e100.net; s=20230601; t=1695846068; x=1696450868;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IIjs+rwErzRuI8OpZgfCnKlE1NGemok/NR/4pjhGmqU=;
+ b=ZnKhifqUi7se7PmeIvAhKJle7FkH7k+1Q7GMfmFPgoezm1Lhm1K/H1oEDcG/zcTV2H
+ VrvS6mRgrFOzaJU/Gj//JG/xpuX8YSfBHq8+3CWg8Qli2Xwyg5CWN59U5gbavKoDAR3u
+ pEhTc7LI9qCA6jeBU4pSje/IBqo2v2IHgOGmuFzIax0xDfA4HPuB0teDBEV18uvHET+6
+ +SA38RP47i8kXEDbkDa2mSKBWRyc4WLKFCULSRtNt9I43XimWxh8hwSGor58aC8s9r+a
+ WqSL+FtGv2NMnkG69Ebu2QiA49SZcvvEP9Hhz2yjhEG+DuoR2WUQLRft3ewtzuvw5GES
+ 8/dg==
+X-Gm-Message-State: AOJu0YzCTVLEu+Bb6o0El19hppBa27qthHo2SQ6yM/daSOGTCKe5CuDZ
+ XXD5umUIDhb+SiZihewmP6QjXw==
+X-Google-Smtp-Source: AGHT+IE/xm+sDlsbj5TMwcIX6s89wG1zzgEzTIKDltB0ZdFPBg7kOF1N3Y/GeFEAB8keQ7aPZmfbKQ==
+X-Received: by 2002:a5e:dd02:0:b0:79a:b526:2f1c with SMTP id
+ t2-20020a5edd02000000b0079ab5262f1cmr3230494iop.21.1695846067982; 
+ Wed, 27 Sep 2023 13:21:07 -0700 (PDT)
+Received: from kea.bld.corp.google.com ([2620:15c:183:200:5d4f:fe51:5575:6f76])
+ by smtp.gmail.com with ESMTPSA id
+ ei15-20020a05663829af00b0042fec8620e4sm4113299jab.57.2023.09.27.13.21.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Sep 2023 13:21:07 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: devicetree@vger.kernel.org
+Cc: linux-mtd@lists.infradead.org, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Tom Rini <trini@konsulko.com>, Rob Herring <robh@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Conor Dooley <conor+dt@kernel.org>,
+ Dhruva Gole <d-gole@ti.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Pratyush Yadav <ptyadav@amazon.de>,
+ =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>,
+ Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
+Subject: [PATCH 1/3] dt-bindings: mtd: fixed-partitions: Add binman compatible
+Date: Wed, 27 Sep 2023 14:20:51 -0600
+Message-ID: <20230927202057.3676497-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.515.g380fc7ccd1-goog
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH 1/4] mkimage: also honour -B even without external data
-Content-Language: en-US
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>
-References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
- <20230919113705.109639-2-rasmus.villemoes@prevas.dk>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20230919113705.109639-2-rasmus.villemoes@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,65 +94,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gOS8xOS8yMyAwNzozNywgUmFzbXVzIFZpbGxlbW9lcyB3cm90ZToNCj4gSW4gc29tZSBj
-YXNlcywgdXNpbmcgdGhlICJleHRlcm5hbCBkYXRhIiBmZWF0dXJlIGlzIGltcG9zc2libGUg
-b3INCj4gdW5kZXNpcmFibGUsIGJ1dCBvbmUgbWF5IHN0aWxsIHdhbnQgKG9yIG5lZWQpIHRo
-ZSBGSVQgaW1hZ2UgdG8gaGF2ZSBhDQo+IGNlcnRhaW4gYWxpZ25tZW50LiBBbHNvLCBnaXZl
-biB0aGUgY3VycmVudCAnbWtpbWFnZSAtaCcgb3V0cHV0LA0KPiANCj4gICAgLUIgPT4gYWxp
-Z24gc2l6ZSBpbiBoZXggZm9yIEZJVCBzdHJ1Y3R1cmUgYW5kIGhlYWRlcg0KPiANCj4gaXQg
-aXMgcXVpdGUgdW5leHBlY3RlZCBmb3IgLUIgdG8gYmUgZWZmZWN0aXZlbHkgaWdub3JlZCB3
-aXRob3V0IC1FLg0KDQpGV0lXLCB0aGlzIGJlaGF2aW9yIGlzIGRvY3VtZW50ZWQgaW4gZG9j
-L21raW1hZ2UuMSAod2hpY2ggc2hvdWxkIGFsc28gYmUNCnVwZGF0ZWQgaWYgdGhpcyBiZWhh
-dmlvciBpcyBpbXBsZW1lbnRlZCk6DQoNCnwgVGhlIGFsaWdubWVudCwgaW4gaGV4YWRlY2lt
-YWwsIHRoYXQgZXh0ZXJuYWwgZGF0YSB3aWxsIGJlIGFsaWduZWQgdG8uDQp8IFRoaXMgb3B0
-aW9uIG9ubHkgaGFzIGFuIGVmZmVjdCB3aGVuIC1FIGlzIHNwZWNpZmllZC4NCg0KQW5kLCBm
-b3IgYWRkaXRpb25hbCBjb250ZXh0LCB0aGUgZG9jdW1lbnRhdGlvbiBmb3IgLUUgaXMNCg0K
-fCBBZnRlciBwcm9jZXNzaW5nLCBtb3ZlIHRoZSBpbWFnZSBkYXRhIG91dHNpZGUgdGhlIEZJ
-VCBhbmQgc3RvcmUgYSBkYXRhDQp8IG9mZnNldCBpbiB0aGUgRklULiBJbWFnZXMgd2lsbCBi
-ZSBwbGFjZWQgb25lIGFmdGVyIHRoZSBvdGhlcg0KfCBpbW1lZGlhdGVseSBhZnRlciB0aGUg
-RklULCB3aXRoIGVhY2ggb25lIGFsaWduZWQgdG8gYSA0LWJ5dGUgYm91bmRhcnkuDQp8IFRo
-ZSBleGlzdGluZyDigJhkYXRh4oCZIHByb3BlcnR5IGluIGVhY2ggaW1hZ2Ugd2lsbCBiZSBy
-ZXBsYWNlZCB3aXRoDQp8IOKAmGRhdGEtb2Zmc2V04oCZIGFuZCDigJhkYXRhLXNpemXigJkg
-cHJvcGVydGllcy4gQSDigJhkYXRhLW9mZnNldOKAmSBvZiAwDQp8IGluZGljYXRlcyB0aGF0
-IGl0IHN0YXJ0cyBpbiB0aGUgZmlyc3QgKDQtYnl0ZS1hbGlnbmVkKSBieXRlIGFmdGVyIHRo
-ZQ0KfCBGSVQuDQoNCkJhc2VkIG9uIHRoaXMgZG9jdW1lbnRhdGlvbiBhbmQgbXkgdW5kZXJz
-dGFuZGluZyBvZiB0aGUgY29kZSBhcy1pcywgLUINCmNvbnRyb2xzIHRoZSBhbGlnbm1lbnQg
-b2YgdGhlIGltYWdlcyB0aGVtc2VsdmVzLCBub3QgdGhlIHNpemUgbXVsdGlwbGUNCm9mIHRo
-ZSBGSVQuIEhvd2V2ZXIsIGZyb20gd2hhdCBJIGNhbiB0ZWxsLCB0aGlzIHBhdGNoIGRvZXMg
-bm90IGFjdHVhbGx5DQphZmZlY3QgdGhlIGFsaWdubWVudCBvZiB0aGUgaW1hZ2VzLCBidXQg
-cmF0aGVyIGFkanVzdHMgdGhlIHNpemUgb2YgdGhlDQpvdmVyYWxsIEZJVCB0byBhIGNlcnRh
-aW4gYWxpZ25tZW50LiBJIGZpbmQgdGhpcyByYXRoZXIgdW5leHBlY3RlZC4NCg0KLS1TZWFu
-DQoNCj4gU2lnbmVkLW9mZi1ieTogUmFzbXVzIFZpbGxlbW9lcyA8cmFzbXVzLnZpbGxlbW9l
-c0BwcmV2YXMuZGs+DQo+IC0tLQ0KPiAgIHRvb2xzL2ZpdF9pbWFnZS5jIHwgNDAgKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KPiAgIDEgZmlsZSBjaGFuZ2Vk
-LCA0MCBpbnNlcnRpb25zKCspDQo+IA0KPiBkaWZmIC0tZ2l0IGEvdG9vbHMvZml0X2ltYWdl
-LmMgYi90b29scy9maXRfaW1hZ2UuYw0KPiBpbmRleCA5ZmU2OWVhMGQ5Li4yZjViMjUwOThh
-IDEwMDY0NA0KPiAtLS0gYS90b29scy9maXRfaW1hZ2UuYw0KPiArKysgYi90b29scy9maXRf
-aW1hZ2UuYw0KPiBAQCAtNzEyLDYgKzcxMiw0MiBAQCBlcnI6DQo+ICAgCXJldHVybiByZXQ7
-DQo+ICAgfQ0KPiAgIA0KPiArLyoqDQo+ICsgKiBmaXRfYWxpZ24oKSAtIEVuc3VyZSBGSVQg
-aW1hZ2UgaGFzIGNlcnRhaW4gYWxpZ25tZW50DQo+ICsgKg0KPiArICogVGhpcyB0YWtlcyBh
-IG5vcm1hbCBGSVQgZmlsZSAod2l0aCBlbWJlZGRlZCBkYXRhKSBhbmQgaW5jcmVhc2VzIGl0
-cw0KPiArICogc2l6ZSBzbyB0aGF0IGl0IGlzIGEgbXVsdGlwbGUgb2YgcGFyYW1zLT5ibF9s
-ZW4uDQo+ICsgKi8NCj4gK3N0YXRpYyBpbnQgZml0X2FsaWduKHN0cnVjdCBpbWFnZV90b29s
-X3BhcmFtcyAqcGFyYW1zLCBjb25zdCBjaGFyICpmbmFtZSkNCj4gK3sNCj4gKwlpbnQgZml0
-X3NpemUsIG5ld19zaXplOw0KPiArCWludCBmZDsNCj4gKwlzdHJ1Y3Qgc3RhdCBzYnVmOw0K
-PiArCXZvaWQgKmZkdDsNCj4gKwlpbnQgcmV0ID0gMDsNCj4gKwlpbnQgYWxpZ25fc2l6ZTsN
-Cj4gKw0KPiArCWFsaWduX3NpemUgPSBwYXJhbXMtPmJsX2xlbjsNCj4gKwlmZCA9IG1tYXBf
-ZmR0KHBhcmFtcy0+Y21kbmFtZSwgZm5hbWUsIDAsICZmZHQsICZzYnVmLCBmYWxzZSwgZmFs
-c2UpOw0KPiArCWlmIChmZCA8IDApDQo+ICsJCXJldHVybiAtRUlPOw0KPiArDQo+ICsJZml0
-X3NpemUgPSBmZHRfdG90YWxzaXplKGZkdCk7DQo+ICsJbmV3X3NpemUgPSBBTElHTihmaXRf
-c2l6ZSwgYWxpZ25fc2l6ZSk7DQo+ICsJZmR0X3NldF90b3RhbHNpemUoZmR0LCBuZXdfc2l6
-ZSk7DQo+ICsJZGVidWcoIlNpemUgZXh0ZW5kZWQgZnJvbSBmcm9tICV4IHRvICV4XG4iLCBm
-aXRfc2l6ZSwgbmV3X3NpemUpOw0KPiArCW11bm1hcChmZHQsIHNidWYuc3Rfc2l6ZSk7DQo+
-ICsNCj4gKwlpZiAoZnRydW5jYXRlKGZkLCBuZXdfc2l6ZSkpIHsNCj4gKwkJZGVidWcoIiVz
-OiBGYWlsZWQgdG8gdHJ1bmNhdGUgZmlsZTogJXNcbiIsIF9fZnVuY19fLA0KPiArCQkgICAg
-ICBzdHJlcnJvcihlcnJubykpOw0KPiArCQlyZXQgPSAtRUlPOw0KPiArCX0NCj4gKw0KPiAr
-CWNsb3NlKGZkKTsNCj4gKwlyZXR1cm4gcmV0Ow0KPiArfQ0KPiArDQo+ICAgLyoqDQo+ICAg
-ICogZml0X2hhbmRsZV9maWxlIC0gbWFpbiBGSVQgZmlsZSBwcm9jZXNzaW5nIGZ1bmN0aW9u
-DQo+ICAgICoNCj4gQEAgLTgxNyw2ICs4NTMsMTAgQEAgc3RhdGljIGludCBmaXRfaGFuZGxl
-X2ZpbGUoc3RydWN0IGltYWdlX3Rvb2xfcGFyYW1zICpwYXJhbXMpDQo+ICAgCQlyZXQgPSBm
-aXRfZXh0cmFjdF9kYXRhKHBhcmFtcywgdG1wZmlsZSk7DQo+ICAgCQlpZiAocmV0KQ0KPiAg
-IAkJCWdvdG8gZXJyX3N5c3RlbTsNCj4gKwl9IGVsc2UgaWYgKHBhcmFtcy0+YmxfbGVuKSB7
-DQo+ICsJCXJldCA9IGZpdF9hbGlnbihwYXJhbXMsIHRtcGZpbGUpOw0KPiArCQlpZiAocmV0
-KQ0KPiArCQkJZ290byBlcnJfc3lzdGVtOw0KPiAgIAl9DQo+ICAgDQo+ICAgCWlmIChyZW5h
-bWUgKHRtcGZpbGUsIHBhcmFtcy0+aW1hZ2VmaWxlKSA9PSAtMSkgew0KDQo=
+Add a compatible string for binman, so we can extend fixed-partitions
+in various ways.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+ .../bindings/mtd/partitions/binman.yaml       | 49 +++++++++++++++++++
+ .../mtd/partitions/fixed-partitions.yaml      |  6 +++
+ .../bindings/mtd/partitions/partitions.yaml   |  1 +
+ MAINTAINERS                                   |  5 ++
+ 4 files changed, 61 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+new file mode 100644
+index 000000000000..34fd10c1a318
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+@@ -0,0 +1,49 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++# Copyright 2023 Google LLC
++
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Binman firmware layout
++
++maintainers:
++  - Simon Glass <sjg@chromium.org>
++
++select: false
++
++description: |
++  The binman node provides a layout for firmware, used when packaging firmware
++  from multiple projects. It is based on fixed-partitions, with some
++  extensions.
++
++  Documentation for Binman is available at:
++
++  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html
++
++  with the current image-description format at:
++
++  https://u-boot.readthedocs.io/en/latest/develop/package/binman.html#image-description-format
++
++allOf:
++  - $ref: /schemas/mtd/partitions/fixed-partitions.yaml#
++
++properties:
++  compatible:
++    const: binman
++
++additionalProperties: false
++
++examples:
++  - |
++    partitions {
++        compatible = "binman", "fixed-partitions";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        partition-u-boot@100000 {
++            label = "u-boot";
++            reg = <0x100000 0xf00000>;
++        };
++    };
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/fixed-partitions.yaml b/Documentation/devicetree/bindings/mtd/partitions/fixed-partitions.yaml
+index 331e564f29dc..1c04bc2b95af 100644
+--- a/Documentation/devicetree/bindings/mtd/partitions/fixed-partitions.yaml
++++ b/Documentation/devicetree/bindings/mtd/partitions/fixed-partitions.yaml
+@@ -14,6 +14,9 @@ description: |
+   The partition table should be a node named "partitions". Partitions are then
+   defined as subnodes.
+ 
++  The Binman tool provides some enhanced features, so provides a compatible
++  string to indicate that these are permitted.
++
+ maintainers:
+   - Rafał Miłecki <rafal@milecki.pl>
+ 
+@@ -24,6 +27,9 @@ properties:
+       - items:
+           - const: sercomm,sc-partitions
+           - const: fixed-partitions
++      - items:
++          - const: binman
++          - const: fixed-partitions
+ 
+   "#address-cells": true
+ 
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+index 1dda2c80747b..849fd15d085c 100644
+--- a/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
++++ b/Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+@@ -15,6 +15,7 @@ maintainers:
+ 
+ oneOf:
+   - $ref: arm,arm-firmware-suite.yaml
++  - $ref: binman.yaml
+   - $ref: brcm,bcm4908-partitions.yaml
+   - $ref: brcm,bcm947xx-cfe-partitions.yaml
+   - $ref: fixed-partitions.yaml
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 5f18c6ba3c3c..367c843ec348 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3517,6 +3517,11 @@ F:	Documentation/filesystems/bfs.rst
+ F:	fs/bfs/
+ F:	include/uapi/linux/bfs_fs.h
+ 
++BINMAN
++M:	Simon Glass <sjg@chromium.org>
++S:	Supported
++F:	Documentation/devicetree/bindings/mtd/partitions/binman*
++
+ BITMAP API
+ M:	Yury Norov <yury.norov@gmail.com>
+ R:	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+-- 
+2.42.0.515.g380fc7ccd1-goog
+
