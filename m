@@ -4,63 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58138E810D6
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 11:56:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA54E810D0
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 12:02:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C850586DC3;
-	Wed, 27 Sep 2023 13:56:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DC8C86DCD;
+	Wed, 27 Sep 2023 14:01:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uoPBi8zQ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Lwil2X1P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2575B86DC2; Wed, 27 Sep 2023 13:56:25 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 20E2286DDC; Wed, 27 Sep 2023 14:01:58 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A0DF86DDB
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 13:56:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44BE086DC5
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 14:01:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38RBuKJV104678;
- Wed, 27 Sep 2023 06:56:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695815780;
- bh=Dn09HMpPU2iZ/nyySIL0kxBlL6vKLW05WCgIWSVaNFU=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=uoPBi8zQmzYvMNlSedmgMeFj28JcYU5exnRWH9LgVP7tnbgpm0zPGef3F+cdrLDgF
- VyeTQ8w2OKsWKeNWHZ6sQdczhBAHz8mZURmkWcrNxTR+7CCG+js7V30+cZTvLq0dmi
- Kv3tTtHDxwCh7ZkVB+NUIB6oZi6TFIW4Sg1o4rDs=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38RBuKsZ031630
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Sep 2023 06:56:20 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Sep 2023 06:56:19 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Sep 2023 06:56:20 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38RBuKEJ085730;
- Wed, 27 Sep 2023 06:56:20 -0500
-Date: Wed, 27 Sep 2023 06:56:19 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Nitin Yadav <n-yadav@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 0/4] Add AM62x LP SK support
-Message-ID: <20230927115619.7os7ixn3fef2p3r4@faculty>
-References: <20230927082105.3729470-1-n-yadav@ti.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id BEFE0B81261;
+ Wed, 27 Sep 2023 12:01:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B5956C433C7;
+ Wed, 27 Sep 2023 12:01:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1695816115;
+ bh=ioUgXD0sVXvp7bSmMYPzQNyTwHTX+miXhZku63q8sh4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Lwil2X1PjU5r9OXwL4S+BvtrJoVhQn+87araH6+1rzQHiVH+yUwpG+ApsM1kWoXvn
+ rjvRHjoExnJveuU1mixN8qZOiz5coDGh+HJ+ZPg2OSJUmQzzJ9e/jMCp3QyaxntOKc
+ vjXFv44sZbD9SAtRZB2OtpF5kocs514+0HOsnbVf11PmFF55sqGg3dhsvAni5iuG35
+ 551+Y0vm0qfBWU7EYgcVJMxbcSEWr5qqccw04qXhJOYzGleLsSrNAQoWDPcWVwTahl
+ XrMsKVht8lRRBN7olcsFB1ktgQS0czRw9r+Yt5BaT2hU3q39ERqT5ah0nAGCKXBUCZ
+ Zv1Yr4w0XTNtg==
+From: Roger Quadros <rogerq@kernel.org>
+To: nm@ti.com,
+	trini@konsulko.com,
+	u-boot@lists.denx.de
+Cc: vigneshr@ti.com, bb@ti.com, afd@ti.com, srk@ti.com, r-gunasekaran@ti.com,
+ praneeth@ti.com, Roger Quadros <rogerq@kernel.org>
+Subject: [PATCH 0/2] arm: dts: k3-am64: Sync dts from Linux v6.6-rc1
+Date: Wed, 27 Sep 2023 15:01:46 +0300
+Message-Id: <20230927120148.75088-1-rogerq@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230927082105.3729470-1-n-yadav@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,50 +69,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 13:51-20230927, Nitin Yadav wrote:
-> This series adds support of AM62x LP SK. The AM62x LP SK board
-> is similar to AM62x SK but has some significant changes that
-> requires different set of device tree at each stage of bootloader.
-> Also refactors to have common nodes at k3-am62x-r5-sk-common.dtsi
-> and k3-am62x-sk-common-u-boot.dtsi for all am62x SoC varients.
-> 
-> Nitin Yadav (4):
->   arm: dts: Refactor common dtsi file for R5 and A53 SPL
->   arm: dts: Add support for AM62x LP SK
->   arm: dts: k3-am62-lp-sk-binman: Add binman support
->   board: ti: am62x: add am62x_lpsk_* defconfigs and env files
-> 
->  arch/arm/dts/Makefile                         |    2 +
->  arch/arm/dts/k3-am62-lp-sk-binman.dtsi        |   29 +
->  arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi        |    9 +
->  arch/arm/dts/k3-am62-lp-sk.dts                |  231 ++
->  arch/arm/dts/k3-am62-r5-lp-sk.dts             |   21 +
->  arch/arm/dts/k3-am625-r5-sk.dts               |   94 +-
->  arch/arm/dts/k3-am625-sk-u-boot.dtsi          |  110 +-
->  arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi | 2190 +++++++++++++++++
->  arch/arm/dts/k3-am62x-r5-sk-common.dtsi       |   96 +
->  arch/arm/dts/k3-am62x-sk-common-u-boot.dtsi   |  109 +
->  board/ti/am62x/am62x_lpsk_a53.config          |    5 +
->  board/ti/am62x/am62x_lpsk_r5.config           |    5 +
->  board/ti/am62x/am62xlpsk.env                  |   21 +
->  13 files changed, 2724 insertions(+), 198 deletions(-)
->  create mode 100644 arch/arm/dts/k3-am62-lp-sk-binman.dtsi
->  create mode 100644 arch/arm/dts/k3-am62-lp-sk-u-boot.dtsi
->  create mode 100644 arch/arm/dts/k3-am62-lp-sk.dts
->  create mode 100644 arch/arm/dts/k3-am62-r5-lp-sk.dts
->  create mode 100644 arch/arm/dts/k3-am62x-ddr-lp4-50-800-800.dtsi
->  create mode 100644 arch/arm/dts/k3-am62x-r5-sk-common.dtsi
->  create mode 100644 arch/arm/dts/k3-am62x-sk-common-u-boot.dtsi
->  create mode 100644 board/ti/am62x/am62x_lpsk_a53.config
->  create mode 100644 board/ti/am62x/am62x_lpsk_r5.config
->  create mode 100644 board/ti/am62x/am62xlpsk.env
-> 
+Hi,
+
+This series aligns the dts files for AM64 platform from Linux v6.6-rc1.
+
+cheers,
+-roger
+
+Roger Quadros (2):
+  Revert "ARM: dts: k3-am642-sk-u-boot: add PMIC node"
+  arm: dts: k3-am64: Bump dts from Linux v6.6-rc1
+
+ arch/arm/dts/k3-am64-main.dtsi        | 209 ++++++++++++++++++++++----
+ arch/arm/dts/k3-am64-mcu.dtsi         |  53 ++++++-
+ arch/arm/dts/k3-am64-thermal.dtsi     |  33 ++++
+ arch/arm/dts/k3-am64.dtsi             |  22 +--
+ arch/arm/dts/k3-am642-evm-u-boot.dtsi |  70 +++++----
+ arch/arm/dts/k3-am642-evm.dts         | 177 +++++++++++++++++-----
+ arch/arm/dts/k3-am642-r5-evm.dts      | 194 ++----------------------
+ arch/arm/dts/k3-am642-r5-sk.dts       | 194 +-----------------------
+ arch/arm/dts/k3-am642-sk-u-boot.dtsi  | 122 ++++-----------
+ arch/arm/dts/k3-am642-sk.dts          | 174 +++++++++++++++------
+ arch/arm/dts/k3-am642.dtsi            |   1 +
+ arch/arm/dts/k3-serdes.h              | 204 +++++++++++++++++++++++++
+ 12 files changed, 815 insertions(+), 638 deletions(-)
+ create mode 100644 arch/arm/dts/k3-am64-thermal.dtsi
+ create mode 100644 arch/arm/dts/k3-serdes.h
 
 
-Board documentation missing!
-
-
+base-commit: 4cb31a9f3560b293670de95e76c1f3cf2f9e1ca8
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.34.1
+
