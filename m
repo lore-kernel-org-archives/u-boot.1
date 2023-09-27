@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64569E810B9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 10:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17FDEE810CC
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 10:55:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48A6B864A7;
-	Wed, 27 Sep 2023 12:11:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id D285686D7A;
+	Wed, 27 Sep 2023 12:55:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="LHiqW6D+";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="OGOeXlFP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2647686B94; Wed, 27 Sep 2023 12:11:07 +0200 (CEST)
-Received: from mail-m11873.qiye.163.com (mail-m11873.qiye.163.com
- [115.236.118.73])
+ id 6EEFB86D80; Wed, 27 Sep 2023 12:55:00 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk
+ [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD5A786413
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 12:11:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9D54B86CC9
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 12:54:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=LHiqW6D+U89C2n8+WwRWJLKHe8Hp82WyZqOCf+u6Nt7jn11OfYjj/FVdqcko3KY+GGXtnlfR3QxEAMcb0uURjmhkaVMicNrjlztUKoYWVdnf/XcOaz6faoNFH/Xe1OFZpmnFShpENmBzw8EjCKmVXuxfzKTImxmUPIgIRBqiDps=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=tUt8eWlbPlf5PKhQ0LnmvhQFLumU/QJ/Ql30tiR8O7w=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 31A65400309;
- Wed, 27 Sep 2023 18:09:53 +0800 (CST)
-Message-ID: <d3c19219-ef66-fbcc-9a64-adaaae2b13dc@rock-chips.com>
-Date: Wed, 27 Sep 2023 18:09:52 +0800
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+Received: from [192.168.0.125] (unknown [82.76.24.202])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id C0E7A6603102;
+ Wed, 27 Sep 2023 11:54:57 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1695812098;
+ bh=ZW33GXAUpDCHzVYY5MvwUzHtz58VxDbRRoLgfR+V730=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=OGOeXlFP0XE1AS+SES5bxlN5qQlhqjbgXnRZ/ZWi9XUZa+ui6FriT7EvERhxEGBXt
+ NZHMn19P4JEdDLg3gGIuZ6f9Xxiu6Ylu2TiDDv65Kz9+iTidPKfrZ35Zx7MbOepdiX
+ JyMUA+FB/yguk3EEKiDkUvkNl+XSq2fjqfSO1Fm/a60CaD86DOJlBpaupwmtZLjwdN
+ I477kOxpgPtRKgARioCWTK+lJvzXZ22iYJgz5cT3mL+GJYgTmwYiU3o5UL6rMw8tQf
+ dHJB+SEeJFrZU8xiJzXFBa0GkG84jX+QL/424cIuqMpaNJ/ZSB28BCdz3e12ufqWM7
+ t7kGfyeN+nnag==
+Message-ID: <d29c79cd-2551-9674-24ac-858b2de94851@collabora.com>
+Date: Wed, 27 Sep 2023 13:54:54 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [RESEND PATCH v2] rockchip: include: asm: fix entering download
- mode rk3066
+ Thunderbird/102.13.0
+Subject: Re: Enable thumb on AT91?
 Content-Language: en-US
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
-References: <decbd275-3171-89a3-abf5-cb0caae0f2b7@gmail.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <decbd275-3171-89a3-abf5-cb0caae0f2b7@gmail.com>
+To: Sean Anderson <sean.anderson@seco.com>,
+ Eugen Hristev <eugen.hristev@microchip.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Nicolas Ferre <nicolas.ferre@microchip.com>, Aubin.Constans@microchip.com
+References: <4c2dec59-dd2b-049b-9a4b-71c437234ed6@seco.com>
+From: Eugen Hristev <eugen.hristev@collabora.com>
+In-Reply-To: <4c2dec59-dd2b-049b-9a4b-71c437234ed6@seco.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR9LSVYfQ00YQ01LQ08YSU5VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8ad61dd28c2eb3kusn31a65400309
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PRQ6Lio*CDw5EDUhQj4oES8*
- MUkaCklVSlVKTUJOQ0tCSEJIQ0lIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDSE5CNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,200 +74,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+On 9/27/23 01:15, Sean Anderson wrote:
+> Hi Eugen,
+> 
+> I noticed that several AT91 boards are quite close to their SPL size
+> limit. For example, sama5d27_wlsom1_ek_mmc is just 173 bytes short of
+> its limit and doesn't even git with older GCCs. I looked at the
+> datasheet for that processor, and noticed that it has thumb support.
+> Have you considered enabling SYS_THUMB_BUILD? This shrinks SPL by around
+> 30%. I don't have a board to test with, so I don't know if there are any
+> technical reasons blocking this.
+> 
+> --Sean
 
-On 2023/9/19 23:28, Johan Jonker wrote:
-> Keep track of the re-entries with help of the lr register.
-> This binary can be re-used and called from various BROM functions.
-> Only when it's called from the part that handles SPI, NAND or EMMC
-> hardware it needs to early return to BROM ones.
-> In download mode when it handles data on USB OTG and UART0
-> this section must be skipped.
->
-> Unlike newer Rockchip SoC models the rk3066 BROM code does not have built-in
-> support to enter download mode on return to BROM. This binary must check
-> the boot mode register for the BOOT_BROM_DOWNLOAD flag and reset if it's set.
-> It then returns to BROM to the end of the function that reads boot blocks.
-> >From there the BROM code goes into a download mode and waits for data
-> on USB OTG and UART0.
->
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> ---
->
-> Note:
->    Normal boot flow is OK.
->    In download mode this binary hangs after return to BROM for unknown reasons.
+Hello Sean,
 
-Basically do not touch the stack area of Bootrom and no more other 
-requirement.
+Thumb should be fine for the AT91 architecture.
++ Nicolas and Aubin in CC.
+The change would require testing.
 
-The bootrom download mode is usually used for boards without any 
-available firmware.
-
-If there is available firmware, it'd be better to enable download 
-feature in U-Boot.
-
-
-Thanks,
-
-- Kever
-
->    Replace CODE471_OPTION with 30_LPDDR2_300MHz_DD.bin for now.
->
->    Could Rockchip disclose what further conditions must be met
->    in rk3066 download mode?
->
-> Changed V2:
->    Move file to rk3066 specific location
->    Replace retry_counter by LR check
->    Add DNL mode return address
->    Restyle
->    Reword
-> ---
->   arch/arm/include/asm/arch-rk3066/boot0.h | 77 +++++++++++++++++++++++-
->   arch/arm/mach-rockchip/Kconfig           | 17 +++++-
->   arch/arm/mach-rockchip/rk3066/Kconfig    |  6 ++
->   3 files changed, 98 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/arm/include/asm/arch-rk3066/boot0.h b/arch/arm/include/asm/arch-rk3066/boot0.h
-> index 28c0fb9a4c6b..1af4b9c1d7ba 100644
-> --- a/arch/arm/include/asm/arch-rk3066/boot0.h
-> +++ b/arch/arm/include/asm/arch-rk3066/boot0.h
-> @@ -3,6 +3,81 @@
->   #ifndef __ASM_ARCH_BOOT0_H__
->   #define __ASM_ARCH_BOOT0_H__
->
-> -#include <asm/arch-rockchip/boot0.h>
-> +#include <asm/arch-rockchip/boot_mode.h>
->
-> +/*
-> + * Execution starts on the instruction following this 4-byte header
-> + * (containing the magic 'RK30'). This magic constant will be written into
-> + * the final image by the rkimage tool, but we need to reserve space for it here.
-> + */
-> +#ifdef CONFIG_SPL_BUILD
-> +	b	1f  /* if overwritten, entry-address is at the next word */
-> +1:
-> +#endif
-> +
-> +#if CONFIG_IS_ENABLED(ROCKCHIP_EARLYRETURN_TO_BROM)
-> +/*
-> + * Keep track of the re-entries with help of the lr register.
-> + * This binary can be re-used and called from various BROM functions.
-> + * Only when it's called from the part that handles SPI, NAND or EMMC
-> + * hardware it needs to early return to BROM ones.
-> + * In download mode when it handles data on USB OTG and UART0
-> + * this section must be skipped.
-> + */
-> +	ldr	r3, =CONFIG_ROCKCHIP_BOOT_LR_REG
-> +	cmp	lr, r3          /* if (LR != CONFIG_ROCKCHIP_BOOT_LR_REG)        */
-> +	bne	reset           /*     goto reset;                               */
-> +/*
-> + * Unlike newer Rockchip SoC models the rk3066 BROM code does not have built-in
-> + * support to enter download mode on return to BROM. This binary must check
-> + * the boot mode register for the BOOT_BROM_DOWNLOAD flag and reset if it's set.
-> + * It then returns to BROM to the end of the function that reads boot blocks.
-> + * From there the BROM code goes into a download mode and waits for data
-> + * on USB OTG and UART0.
-> + */
-> +	ldr	r2, =BOOT_BROM_DOWNLOAD
-> +	ldr	r3, =CONFIG_ROCKCHIP_BOOT_MODE_REG
-> +	ldr	r0, [r3]        /* if (readl(CONFIG_ROCKCHIP_BOOT_MODE_REG) !=   */
-> +	cmp	r0, r2          /*     BOOT_BROM_DOWNLOAD) {                     */
-> +	bne	early_return    /*     goto early_return;                        */
-> +				/* } else {                                      */
-> +	mov	r0, #0
-> +	str	r0, [r3]        /*     writel(0, CONFIG_ROCKCHIP_BOOT_MODE_REG); */
-> +
-> +	ldr	r3, =CONFIG_ROCKCHIP_BOOT_RETURN_REG
-> +	bx	r3              /*     return to CONFIG_ROCKCHIP_BOOT_RETURN_REG;*/
-> +
-> +early_return:
-> +	bx	lr              /*  return to LR in BROM                         */
-> +
-> +SAVE_SP_ADDR:
-> +	.word 0
-> +
-> +	.globl save_boot_params
-> +save_boot_params:
-> +	push	{r1-r12, lr}
-> +	ldr	r0, =SAVE_SP_ADDR
-> +	str	sp, [r0]
-> +	b	save_boot_params_ret
-> +
-> +	.globl back_to_bootrom
-> +back_to_bootrom:
-> +	ldr	r0, =SAVE_SP_ADDR
-> +	ldr	sp, [r0]
-> +	mov	r0, #0
-> +	pop	{r1-r12, pc}
-> +#endif
-> +
-> +#if (defined(CONFIG_SPL_BUILD))
-> +/* U-Boot proper of armv7 does not need this */
-> +	b reset
-> +#endif
-> +
-> +/*
-> + * For armv7, the addr '_start' will be used as vector start address
-> + * and is written to the VBAR register, which needs to aligned to 0x20.
-> + */
-> +	.align(5), 0x0
-> +_start:
-> +	ARM_VECTORS
->   #endif
-> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> index 07b5595dac8c..84a2f0d5ff48 100644
-> --- a/arch/arm/mach-rockchip/Kconfig
-> +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -402,7 +402,7 @@ config SPL_ROCKCHIP_BACK_TO_BROM
->   config TPL_ROCKCHIP_BACK_TO_BROM
->   	bool "TPL returns to bootrom"
->   	default y
-> -	select ROCKCHIP_BROM_HELPER
-> +	select ROCKCHIP_BROM_HELPER if !ROCKCHIP_RK3066
->   	select TPL_BOOTROM_SUPPORT
->   	depends on TPL
->   	help
-> @@ -448,6 +448,21 @@ config ROCKCHIP_BOOT_MODE_REG
->   	  The Soc will enter to different boot mode(defined in asm/arch-rockchip/boot_mode.h)
->   	  according to the value from this register.
->
-> +config ROCKCHIP_BOOT_LR_REG
-> +	hex "Rockchip boot early return LR address"
-> +	depends on TPL_ROCKCHIP_EARLYRETURN_TO_BROM || SPL_ROCKCHIP_EARLYRETURN_TO_BROM
-> +	help
-> +	  With ROCKCHIP_EARLYRETURN_TO_BROM enabled this LR address is
-> +	  used to keep track of the re-entries.
-> +
-> +config ROCKCHIP_BOOT_RETURN_REG
-> +	hex "Rockchip download mode return address"
-> +	depends on TPL_ROCKCHIP_EARLYRETURN_TO_BROM || SPL_ROCKCHIP_EARLYRETURN_TO_BROM
-> +	help
-> +	  Rockchip SoC models without built-in support to enter
-> +	  download mode after early return to BROM code use a SoC
-> +	  specific return address in BROM.
-> +
->   config ROCKCHIP_RK8XX_DISABLE_BOOT_ON_POWERON
->   	bool "Disable device boot on power plug-in"
->   	depends on PMIC_RK8XX
-> diff --git a/arch/arm/mach-rockchip/rk3066/Kconfig b/arch/arm/mach-rockchip/rk3066/Kconfig
-> index 95d7fc8a2917..3721f7469a9e 100644
-> --- a/arch/arm/mach-rockchip/rk3066/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3066/Kconfig
-> @@ -10,6 +10,12 @@ config TARGET_MK808
->   config ROCKCHIP_BOOT_MODE_REG
->   	default 0x20004040
->
-> +config ROCKCHIP_BOOT_LR_REG
-> +	default 0x00001058
-> +
-> +config ROCKCHIP_BOOT_RETURN_REG
-> +	default 0x00001100
-> +
->   config SYS_SOC
->   	default "rk3066"
->
-> --
-> 2.39.2
->
+Eugen
