@@ -4,67 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EA60E7F154
-	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 03:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD0FE7F154
+	for <u-boot@archiver.kernel.org>; Wed, 27 Sep 2023 03:02:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8098386DD2;
-	Wed, 27 Sep 2023 05:01:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0787386DDD;
+	Wed, 27 Sep 2023 05:02:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="V7rU5FgW";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="KM/l4bEd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CCA786DC6; Wed, 27 Sep 2023 05:01:57 +0200 (CEST)
-Received: from mail-m12793.qiye.163.com (mail-m12793.qiye.163.com
- [115.236.127.93])
+ id 1E6BD86DA3; Wed, 27 Sep 2023 05:02:03 +0200 (CEST)
+Received: from mail-m12749.qiye.163.com (mail-m12749.qiye.163.com
+ [115.236.127.49])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B7CC86DA3
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 05:01:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDC7886DDD
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 05:02:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=V7rU5FgWUd+8yNnllz5ZGULB1meUtBVq/vkZvYDNiEI89fqJ+cD+wbynRXrsPvqUCCjv2kQtsT+EWsnn+YLRr556Mhj/kKdA+K0WAJm1QK7fu7BIPL543XoAT1Zr15v3WLMRyC9QPdnKz8Nw1ZuBZHXrw1unIoxDC9mXDLsw1x0=;
+ b=KM/l4bEdtSp7++w3ZHnhV98/JFgIesz8N2n/YaGeUkNZ1Q8i+nEA4+uDcDm575FZOmXUFOyC+5sRBQ8/R+xDoDxVq4NSQmE3vaMcBSHDk4c6AHfhtO6lyPV1Wv3WB+sb8AsDG5PBqmENvRL9UsO1Huw8JHTerea5+k3BrTZBYhg=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=tSn2qf+xlP1Rns5szmQBFs7G9FmA7bVcx7tmjzq44e4=;
+ bh=cFnZAqDiPWh8SKIy/q0K2eOPUDaF6t13hHy9XjzNKRM=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 4D4164002A4;
- Wed, 27 Sep 2023 11:01:48 +0800 (CST)
-Message-ID: <eda786c1-bf09-d657-d0d0-d45316700931@rock-chips.com>
-Date: Wed, 27 Sep 2023 11:01:48 +0800
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 64BC84002DA;
+ Wed, 27 Sep 2023 11:01:54 +0800 (CST)
+Message-ID: <e143ae5c-5bd1-ab1a-7240-9d4d6c3d2244@rock-chips.com>
+Date: Wed, 27 Sep 2023 11:01:54 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 6/7] configs: rockchip: Enable ethernet driver on RK356x
+Subject: Re: [PATCH 7/7] configs: rockchip: Enable ethernet driver on RK3588
  boards
 Content-Language: en-US
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Joseph Chen <chenjh@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Akash Gajjar <gajjar04akash@gmail.com>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>,
- Frank Wunderlich <frank-w@public-files.de>, u-boot@lists.denx.de
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Jagan Teki <jagan@edgeble.ai>,
+ Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Frank Wunderlich <frank-w@public-files.de>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, u-boot@lists.denx.de
 References: <20230807000817.1701012-1-jonas@kwiboo.se>
- <20230807000817.1701012-7-jonas@kwiboo.se>
+ <20230807000817.1701012-8-jonas@kwiboo.se>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20230807000817.1701012-7-jonas@kwiboo.se>
+In-Reply-To: <20230807000817.1701012-8-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkkdGVYdGkxDHxpMGk9OTkNVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0gYSlZNTk0dQ0NOHkxISR1VEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8ad495e7cd2eb3kusn4d4164002a4
+X-HM-Tid: 0a8ad495ffb22eb3kusn64bc84002da
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NlE6Dgw4ODwxUTZPM0oVFB05
- QlZPCi9VSlVKTUJOTENITEtCSEtCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDTUJJNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mzo6Tyo4Kzw9EDZLM0spFC4N
+ Qg9PFA5VSlVKTUJOTENITEpOSEpMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPTU5CNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,8 +80,9 @@ X-Virus-Status: Clean
 
 
 On 2023/8/7 08:08, Jonas Karlman wrote:
-> Enable DWC_ETH_QOS_ROCKCHIP and related PHY driver on RK356x boards that
-> have an enabled gmac node.
+> Enable DWC_ETH_QOS_ROCKCHIP and related PHY driver on RK3588 boards that
+> have an enabled gmac node and drop ETH_DESIGNWARE and GMAC_ROCKCHIP for
+> remaining RK3588 boards.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -92,22 +90,16 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   configs/evb-rk3568_defconfig              | 5 +++--
->   configs/nanopi-r5s-rk3568_defconfig       | 3 +++
->   configs/odroid-m1-rk3568_defconfig        | 3 +++
->   configs/quartz64-a-rk3566_defconfig       | 3 +++
->   configs/quartz64-b-rk3566_defconfig       | 3 +++
->   configs/radxa-cm3-io-rk3566_defconfig     | 6 ++++--
->   configs/rock-3a-rk3568_defconfig          | 5 +++--
->   configs/soquartz-blade-rk3566_defconfig   | 3 +++
->   configs/soquartz-cm4-rk3566_defconfig     | 3 +++
->   configs/soquartz-model-a-rk3566_defconfig | 3 +++
->   10 files changed, 31 insertions(+), 6 deletions(-)
+>   configs/evb-rk3588_defconfig      | 5 +++--
+>   configs/neu6a-io-rk3588_defconfig | 2 --
+>   configs/neu6b-io-rk3588_defconfig | 2 --
+>   configs/rock5a-rk3588s_defconfig  | 6 +++---
+>   4 files changed, 6 insertions(+), 9 deletions(-)
 >
-> diff --git a/configs/evb-rk3568_defconfig b/configs/evb-rk3568_defconfig
-> index 5f3fab7304c2..43431ecdfed6 100644
-> --- a/configs/evb-rk3568_defconfig
-> +++ b/configs/evb-rk3568_defconfig
+> diff --git a/configs/evb-rk3588_defconfig b/configs/evb-rk3588_defconfig
+> index f49c2ca686a8..0b7b4f2f627a 100644
+> --- a/configs/evb-rk3588_defconfig
+> +++ b/configs/evb-rk3588_defconfig
 > @@ -58,8 +58,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
 >   CONFIG_MMC_SDHCI=y
 >   CONFIG_MMC_SDHCI_SDMA=y
@@ -117,78 +109,48 @@ Thanks,
 > +CONFIG_PHY_REALTEK=y
 > +CONFIG_DWC_ETH_QOS=y
 > +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_DM_PMIC=y
->   CONFIG_PMIC_RK8XX=y
->   CONFIG_REGULATOR_RK8XX=y
-> diff --git a/configs/nanopi-r5s-rk3568_defconfig b/configs/nanopi-r5s-rk3568_defconfig
-> index c278ce083d9a..2736d382a352 100644
-> --- a/configs/nanopi-r5s-rk3568_defconfig
-> +++ b/configs/nanopi-r5s-rk3568_defconfig
-> @@ -65,6 +65,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_REGULATOR_PWM=y
+>   CONFIG_PWM_ROCKCHIP=y
+>   CONFIG_SPL_RAM=y
+> diff --git a/configs/neu6a-io-rk3588_defconfig b/configs/neu6a-io-rk3588_defconfig
+> index 09729a0ea429..d5301c630b2a 100644
+> --- a/configs/neu6a-io-rk3588_defconfig
+> +++ b/configs/neu6a-io-rk3588_defconfig
+> @@ -53,8 +53,6 @@ CONFIG_MMC_DW_ROCKCHIP=y
 >   CONFIG_MMC_SDHCI=y
 >   CONFIG_MMC_SDHCI_SDMA=y
 >   CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_RTL8169=y
->   CONFIG_NVME_PCI=y
->   CONFIG_PCIE_DW_ROCKCHIP=y
-> diff --git a/configs/odroid-m1-rk3568_defconfig b/configs/odroid-m1-rk3568_defconfig
-> index 3dda5c1f9170..96b4e9ecdaff 100644
-> --- a/configs/odroid-m1-rk3568_defconfig
-> +++ b/configs/odroid-m1-rk3568_defconfig
-> @@ -82,6 +82,9 @@ CONFIG_SF_DEFAULT_BUS=4
->   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->   CONFIG_SPI_FLASH_MACRONIX=y
->   CONFIG_SPI_FLASH_MTD=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_NVME_PCI=y
->   CONFIG_PCIE_DW_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3566_defconfig
-> index 6853cd6c44b4..bf4d4cd2b8ed 100644
-> --- a/configs/quartz64-a-rk3566_defconfig
-> +++ b/configs/quartz64-a-rk3566_defconfig
-> @@ -81,6 +81,9 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->   CONFIG_SPI_FLASH_GIGADEVICE=y
->   CONFIG_SPI_FLASH_MACRONIX=y
->   CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_PHY_MOTORCOMM=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_NVME_PCI=y
->   CONFIG_PCIE_DW_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3566_defconfig
-> index aa29fff14643..358687ab5d7f 100644
-> --- a/configs/quartz64-b-rk3566_defconfig
-> +++ b/configs/quartz64-b-rk3566_defconfig
-> @@ -79,6 +79,9 @@ CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->   CONFIG_SPI_FLASH_GIGADEVICE=y
->   CONFIG_SPI_FLASH_MACRONIX=y
->   CONFIG_SPI_FLASH_WINBOND=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_NVME_PCI=y
->   CONFIG_PCIE_DW_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> diff --git a/configs/radxa-cm3-io-rk3566_defconfig b/configs/radxa-cm3-io-rk3566_defconfig
-> index f89777184ceb..4b606dcb8e94 100644
-> --- a/configs/radxa-cm3-io-rk3566_defconfig
-> +++ b/configs/radxa-cm3-io-rk3566_defconfig
-> @@ -47,6 +47,7 @@ CONFIG_CMD_REGULATOR=y
->   CONFIG_SPL_OF_CONTROL=y
->   CONFIG_OF_LIVE=y
->   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
->   CONFIG_SPL_REGMAP=y
->   CONFIG_SPL_SYSCON=y
->   CONFIG_SPL_CLK=y
-> @@ -59,8 +60,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
+> -CONFIG_ETH_DESIGNWARE=y
+> -CONFIG_GMAC_ROCKCHIP=y
+>   CONFIG_REGULATOR_PWM=y
+>   CONFIG_PWM_ROCKCHIP=y
+>   CONFIG_SPL_RAM=y
+> diff --git a/configs/neu6b-io-rk3588_defconfig b/configs/neu6b-io-rk3588_defconfig
+> index c7bc3b1965f0..b13c9b5db1b0 100644
+> --- a/configs/neu6b-io-rk3588_defconfig
+> +++ b/configs/neu6b-io-rk3588_defconfig
+> @@ -53,8 +53,6 @@ CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_SDMA=y
+>   CONFIG_MMC_SDHCI_ROCKCHIP=y
+> -CONFIG_ETH_DESIGNWARE=y
+> -CONFIG_GMAC_ROCKCHIP=y
+>   CONFIG_REGULATOR_PWM=y
+>   CONFIG_PWM_ROCKCHIP=y
+>   CONFIG_SPL_RAM=y
+> diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
+> index 6cbd9817c528..bccdb1e3ecd6 100644
+> --- a/configs/rock5a-rk3588s_defconfig
+> +++ b/configs/rock5a-rk3588s_defconfig
+> @@ -11,7 +11,6 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
+> -CONFIG_SPL_MMC=y
+>   CONFIG_SPL_SERIAL=y
+>   CONFIG_SPL_STACK_R_ADDR=0x1000000
+>   CONFIG_TARGET_ROCK5A_RK3588=y
+> @@ -59,8 +58,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
 >   CONFIG_MMC_SDHCI=y
 >   CONFIG_MMC_SDHCI_SDMA=y
 >   CONFIG_MMC_SDHCI_ROCKCHIP=y
@@ -197,64 +159,6 @@ Thanks,
 > +CONFIG_PHY_REALTEK=y
 > +CONFIG_DWC_ETH_QOS=y
 > +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->   CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
 >   CONFIG_SPL_PINCTRL=y
-> diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
-> index 409aa95acf06..28d157dbd7a7 100644
-> --- a/configs/rock-3a-rk3568_defconfig
-> +++ b/configs/rock-3a-rk3568_defconfig
-> @@ -77,8 +77,9 @@ CONFIG_SF_DEFAULT_BUS=4
->   CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->   CONFIG_SPI_FLASH_MACRONIX=y
->   CONFIG_SPI_FLASH_XTX=y
-> -CONFIG_ETH_DESIGNWARE=y
-> -CONFIG_GMAC_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_NVME_PCI=y
->   CONFIG_PCIE_DW_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> diff --git a/configs/soquartz-blade-rk3566_defconfig b/configs/soquartz-blade-rk3566_defconfig
-> index 181c284e73e9..1d993a5b71b0 100644
-> --- a/configs/soquartz-blade-rk3566_defconfig
-> +++ b/configs/soquartz-blade-rk3566_defconfig
-> @@ -67,6 +67,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_SDMA=y
->   CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_MOTORCOMM=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_NVME_PCI=y
->   CONFIG_PCIE_DW_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> diff --git a/configs/soquartz-cm4-rk3566_defconfig b/configs/soquartz-cm4-rk3566_defconfig
-> index 7e290351477e..f01aa7269a1c 100644
-> --- a/configs/soquartz-cm4-rk3566_defconfig
-> +++ b/configs/soquartz-cm4-rk3566_defconfig
-> @@ -67,6 +67,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_SDMA=y
->   CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_MOTORCOMM=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_NVME_PCI=y
->   CONFIG_PCIE_DW_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> diff --git a/configs/soquartz-model-a-rk3566_defconfig b/configs/soquartz-model-a-rk3566_defconfig
-> index a0884a797d58..2f3145745d58 100644
-> --- a/configs/soquartz-model-a-rk3566_defconfig
-> +++ b/configs/soquartz-model-a-rk3566_defconfig
-> @@ -68,6 +68,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_SDMA=y
->   CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +CONFIG_PHY_MOTORCOMM=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->   CONFIG_NVME_PCI=y
->   CONFIG_PCIE_DW_ROCKCHIP=y
->   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>   CONFIG_REGULATOR_PWM=y
+>   CONFIG_PWM_ROCKCHIP=y
