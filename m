@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1990DCE7B10
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 10:05:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D506CE7B19
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 10:33:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B57A86DDF;
-	Thu, 28 Sep 2023 12:05:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4792786DDF;
+	Thu, 28 Sep 2023 12:33:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="F0jUN3x+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="v3BYOVB4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B6D286E02; Thu, 28 Sep 2023 12:05:44 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 6ACC886E12; Thu, 28 Sep 2023 12:33:33 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA48E868BB
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 12:05:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1EB586D43
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 12:33:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38SA5U2Y114241;
- Thu, 28 Sep 2023 05:05:30 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38SAXKKS034002;
+ Thu, 28 Sep 2023 05:33:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695895530;
- bh=+H//pyDUsJVuTcIap5DByD/tO8VOHQuq6smbSd3L8jE=;
+ s=ti-com-17Q1; t=1695897200;
+ bh=Tn1FMbVfmJUdZYJeEux9ORDL0CxaI43gL5tQrhprGLs=;
  h=Date:Subject:To:References:From:In-Reply-To;
- b=F0jUN3x+lKufILsdUn4+L0Pxs8d/vsmrD+l48adEpfQwwvkUCq1p48WU4N2dL0pz/
- ra0ecFiwmLgvhDmWM/YNl4cohdS/FXpJfn68OJMGm1JeWVbKmOl4YdWU5JSRRRbCKm
- Zrla2lHJfW+XsDyFa06Xa/ptlY+TY17bWU8GsDdY=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38SA5U4c036022
+ b=v3BYOVB4KVHHsPMNP/U/epFNe1Wb1bB1Jpe08r1QG8CjVkvAd+Lce/RmvaCWMIjO9
+ eBAFM7nkkZifwipg2bDPe6ou9Jj4MGyA2tw9UWWsBDQ/ezSWrsFabtOl0HWSt6DG8D
+ KxAB7K2cOFl6XTqkKQEamdI9znkQJsd8B5nzSTxI=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38SAXKmd046918
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 28 Sep 2023 05:05:30 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 28 Sep 2023 05:33:20 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 28
- Sep 2023 05:05:30 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Sep 2023 05:33:19 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 28 Sep 2023 05:05:30 -0500
+ Frontend Transport; Thu, 28 Sep 2023 05:33:19 -0500
 Received: from [10.24.69.34] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38SA5MKr056134;
- Thu, 28 Sep 2023 05:05:23 -0500
-Message-ID: <574616b9-1b1b-5eac-65c3-0162ee7b07ed@ti.com>
-Date: Thu, 28 Sep 2023 15:35:21 +0530
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38SAXCLn079152;
+ Thu, 28 Sep 2023 05:33:13 -0500
+Message-ID: <9ec784e3-b908-ad9c-cbe3-d81e401d536e@ti.com>
+Date: Thu, 28 Sep 2023 16:03:11 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
 Subject: Re: [PATCH v3 02/16] arm: mach-k3: Add basic support for J784S4 SoC
  definition
 Content-Language: en-US
-To: Roger Quadros <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, "Lukasz
- Majewski" <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+To: Roger Quadros <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
  <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
  Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
  Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
@@ -66,9 +66,9 @@ To: Roger Quadros <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, "Lukasz
  Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
  Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon
  <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Jason Kacines <j-kacines@ti.com>, "Jayesh
- Choudhary" <j-choudhary@ti.com>, Ralph Siemsen <ralph.siemsen@linaro.org>,
- Yanhong Wang <yanhong.wang@starfivetech.com>, Marek Vasut
+ <marcel.ziswiler@toradex.com>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph
+ Siemsen <ralph.siemsen@linaro.org>, Yanhong Wang
+ <yanhong.wang@starfivetech.com>, Marek Vasut
  <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
  <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
 References: <20230908110551.861575-1-a-nandan@ti.com>
@@ -181,8 +181,7 @@ On 09/09/23 16:18, Roger Quadros wrote:
 >> -	default 0x41cfdbfc if SOC_K3_J721S2
 >> +	default 0x41cfdbfc if SOC_K3_J721S2 || SOC_K3_J784S4
 > Pleas move this to one line along with SOC_K3_J721E
-Can't move to one line with J721E because the values are different for 
-J784S4 from J721E
+>
 >>   	default 0x701bebfc if SOC_K3_AM642
 >>   	default 0x43c3f290 if SOC_K3_AM625
 >>   	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
@@ -465,7 +464,9 @@ J784S4 from J721E
 > This file is exactly same as j721e_fdt.c and j721s2_fdt.c.
 >
 > Can we please consolidate the 3 files into 1 and reuse among all J7 variants?
->
+Currently all K3 platforms follow this scheme. In this series, I want to add
+J784S4 support within current implementation. I will address this issue in a
+separate series, moving all fdt.c in a common place.
 >> diff --git a/arch/arm/mach-k3/j784s4_init.c b/arch/arm/mach-k3/j784s4_init.c
 > <snip>
 >
