@@ -4,75 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 144B4E82CB7
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 00:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FC6EE810DF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 02:41:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B63586A3A;
-	Thu, 28 Sep 2023 02:58:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 219D386B95;
+	Thu, 28 Sep 2023 04:41:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SrKiqIMr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k649as27";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18F5986C5D; Thu, 28 Sep 2023 02:58:07 +0200 (CEST)
+ id 02F5C86BE7; Thu, 28 Sep 2023 04:41:26 +0200 (CEST)
 Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
  [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AB06868BB
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 02:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1566386B3B
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 04:41:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jim.t90615@gmail.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-5041cc983f9so20032202e87.3
- for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 17:58:04 -0700 (PDT)
+ 2adb3069b0e04-503056c8195so20657708e87.1
+ for <u-boot@lists.denx.de>; Wed, 27 Sep 2023 19:41:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1695862684; x=1696467484; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=IClRjSJhvfTZm5j6M3HULjIyIHiGCzJQxLKhpJbGk0I=;
- b=SrKiqIMrI/XUEemrW+X9N72QHM9CPVa4QgH2SmP0wLKPOIwfN8/4bky0fXmys1Lz4j
- Yg2E3XYQ78JXTYmRogk5QvC9FB+Z5Ch4Ro+iWrGceq78++7ZjXeLtuEqQNUO2868Y7VS
- FwfHHTbuddNQDFBJd9G5dIfUKIBvfUobedt3GT/+05Dff4WaUB66oUV220yksLAYiKhI
- xcyLHsp26VFP0HwUGBnvetaOBWXDDQpnaNmo/VvgDDlWEY2vS19SYGqI9xrydmxtdpbJ
- 2WXOJKBitsf25QQoG0UbqlyPABRFXjNL6Pe9n9E208m0nMA4q/2UJE1PgO18n3+wDY6X
- uWeg==
+ d=chromium.org; s=google; t=1695868883; x=1696473683; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=BbPwaxG84lzpsPxFo8xub7ibu0dOqWI4eirfkdgPFAk=;
+ b=k649as27zE5lBVvJ4Vuwrso0Z8ZRFP0Oq6zMSODCll/7ArMctTeTPVuRSNOqRq16vd
+ 8zavj6v58YAiAjVG4eIypJWFxZYJPzRaiTuWhrS3i8yqK8k0oc11zzqERCtJwkZxbPMD
+ UYeRDgO9Saa1sNJIyLu+HvGjgKfdLF9TiZc38=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695862684; x=1696467484;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=IClRjSJhvfTZm5j6M3HULjIyIHiGCzJQxLKhpJbGk0I=;
- b=h+4FYuHtkb0ArXCfhNfxzXcawFPpDRUaFl1OoEvpk4c2OhGob9gGyoXPdtsHyfTcH0
- olcii9rMQW9oiDAyC00vLQjCYMYoR5UydiW5E13M6/Bc2/d3ABlJzXOWTPk1Fw7p0jFh
- qtMIBy9XOzm5QueHcNw9tn7LPFzAgurrukYQXXR8GXeKGel/buAiKoy76TcwtycJE+H5
- IUULaBCKZ1GcDf3aV2SpNOHmA4k61Les9qqL77XrLb0QtZYZonc8jpDZT1+PKzpOkFDB
- wvnqK+8TeBt44EJTSTGl8JJyxKE6Y2SQJVlkPW+1PBNck0YL30TLFhdOcoq/gt0n2m5A
- CTQw==
-X-Gm-Message-State: AOJu0Yy2qqYghDYWwB0mzQvmzICx0ad8LM4vMVOiN68tugx5CFU8wy8l
- eatoZLetFzltqbq88aWsmsU+TXknwl0Fd/Te5x+FBjUjAQU=
-X-Google-Smtp-Source: AGHT+IG/jrZlBFStlbuii0kjW6wh49LO757Cntg5E5AbTFuSqZwoTviTf8yYCYygE1UHAl5L67frKDGgV7rPZMaqq9M=
-X-Received: by 2002:a05:6512:314e:b0:503:eae:4896 with SMTP id
- s14-20020a056512314e00b005030eae4896mr2722034lfi.39.1695862683612; Wed, 27
- Sep 2023 17:58:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695868883; x=1696473683;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BbPwaxG84lzpsPxFo8xub7ibu0dOqWI4eirfkdgPFAk=;
+ b=p7kLRg/7mWgll/8xOysOQTDuANGurLP2n/zfSinUIXOluJ2BXc8GK93CNYL9JyryeZ
+ ntnzSdsYzaYodEiEctF8yczWp/kGjrq/x+dIR8Cs+YwKyaH+xBjJ204S6jdH/V7TcmE0
+ q9yGGLueXwEkPp1/DaL/g8yqaYg4hMkvza7TuW3JLaUlW9k3XFbWBkQxtS914H1Ofgx0
+ loGCns0T7GBKvdx/z6C94QI5Py5wmkWXuJJUPjxMvZzqV2aOgAP1VTfz3KQASuWA9cSd
+ 2EMUGq1kWr+K9ZmKQd9rptuDKkGek6b2oZAwZkiWbWVWTI4FQThZ42KJqoqAh/hZVoLz
+ P8rQ==
+X-Gm-Message-State: AOJu0Yx7TbymkBhnkFKBtTfFN2qhG+6h9BFlL37q+6drANII5dG08T+b
+ 7MY5smmMjPcKVMY2x7l28IpERbOE2u0+LiLMEcdTW8NKkt2jE34bMN/E2w==
+X-Google-Smtp-Source: AGHT+IHBuq3eBzD8QLLoOYb1RscpyCzalhJA6wB5JyKGQaHaFDRFkitD6RnBK+x5k/5k2rQzn/nhOntwP+2/rQpuwgg=
+X-Received: by 2002:a05:6512:224d:b0:500:b74b:e53 with SMTP id
+ i13-20020a056512224d00b00500b74b0e53mr4201181lfu.46.1695868882594; Wed, 27
+ Sep 2023 19:41:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230926090407.407769-1-JJLIU0@nuvoton.com>
- <79d9b3ac-2ec9-df94-312d-065fd9792f3e@denx.de>
-In-Reply-To: <79d9b3ac-2ec9-df94-312d-065fd9792f3e@denx.de>
-From: Jim Liu <jim.t90615@gmail.com>
-Date: Thu, 28 Sep 2023 08:57:52 +0800
-Message-ID: <CAKUZ0+H4gE5E31N8n55jZagj-XZTgt1peJu7p=-zKTyetH98pg@mail.gmail.com>
-Subject: Re: [PATCH v1] wdt: nuvoton: fix reset/expire function error and add
- dts
-To: Stefan Roese <sr@denx.de>
-Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, trini@konsulko.com, 
- u-boot@lists.denx.de
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 27 Sep 2023 20:41:10 -0600
+Message-ID: <CAPnjgZ0vKO0YYpQyr_C35bY41un59AdZcY45OT3+ydxkCr7BOA@mail.gmail.com>
+Subject: SSE instructions
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,106 +77,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Stefan
+Hi Bin,
 
-Thanks for your quick review.
+U-Boot 64-bit on x86 disables sse, but when enabling Truetype I get a
+compiler error:
 
-i will followed your suggestions to update V2
+drivers/video/console_truetype.c: In function 'frac':
+drivers/video/console_truetype.c:30:15: error: SSE register return
+with SSE disabled
+30 | static double frac(double val)
 
+Do you know how to enable SSE for 64-bit?
 
-Best regards,
-Jim
-
-On Tue, Sep 26, 2023 at 5:30=E2=80=AFPM Stefan Roese <sr@denx.de> wrote:
->
-> Hi Jim,
->
-> On 9/26/23 11:04, Jim Liu wrote:
-> > Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
->
-> Please provide a short commit summary, explaining what this patch
-> does. Starting with a reasoning for this change and a short dscription
-> of what was changed.
->
-> More comments below...
->
-> > ---
-> >   arch/arm/dts/nuvoton-common-npcm8xx.dtsi | 24 +++++++++++++++++++++++=
-+
-> >   drivers/watchdog/npcm_wdt.c              | 12 ++++++++----
-> >   2 files changed, 32 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/arch/arm/dts/nuvoton-common-npcm8xx.dtsi b/arch/arm/dts/nu=
-voton-common-npcm8xx.dtsi
-> > index fabe5925b7..87c77dcb2c 100644
-> > --- a/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
-> > +++ b/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
-> > @@ -154,6 +154,30 @@
-> >                               clock-names =3D "refclk";
-> >                       };
-> >
-> > +                     watchdog0: watchdog@801c {
-> > +                             compatible =3D "nuvoton,npcm750-wdt";
-> > +                             reg =3D <0x801c 0x4>;
-> > +                             clocks =3D <&clk NPCM8XX_CLK_REFCLK>;
-> > +                             interrupts =3D <GIC_SPI 47 IRQ_TYPE_LEVEL=
-_HIGH>;
-> > +                             status =3D "disabled";
-> > +                     };
-> > +
-> > +                     watchdog1: watchdog@901c {
-> > +                             compatible =3D "nuvoton,npcm750-wdt";
-> > +                             reg =3D <0x901c 0x4>;
-> > +                             clocks =3D <&clk NPCM8XX_CLK_REFCLK>;
-> > +                             interrupts =3D <GIC_SPI 48 IRQ_TYPE_LEVEL=
-_HIGH>;
-> > +                             status =3D "disabled";
-> > +                     };
-> > +
-> > +                     watchdog2: watchdog@a01c {
-> > +                             compatible =3D "nuvoton,npcm750-wdt";
-> > +                             reg =3D <0xa01c 0x4>;
-> > +                             clocks =3D <&clk NPCM8XX_CLK_REFCLK>;
-> > +                             interrupts =3D <GIC_SPI 49 IRQ_TYPE_LEVEL=
-_HIGH>;
-> > +                             status =3D "disabled";
-> > +                     };
-> > +
-> >                       serial0: serial@0 {
-> >                               compatible =3D "nuvoton,npcm845-uart", "n=
-uvoton,npcm750-uart";
-> >                               reg =3D <0x0 0x1000>;
-> > diff --git a/drivers/watchdog/npcm_wdt.c b/drivers/watchdog/npcm_wdt.c
-> > index e56aa0ebe1..d6792bab35 100644
-> > --- a/drivers/watchdog/npcm_wdt.c
-> > +++ b/drivers/watchdog/npcm_wdt.c
-> > @@ -69,17 +69,21 @@ static int npcm_wdt_stop(struct udevice *dev)
-> >   static int npcm_wdt_reset(struct udevice *dev)
-> >   {
-> >       struct npcm_wdt_priv *priv =3D dev_get_priv(dev);
-> > +     u32 val;
-> >
-> > -     writel(NPCM_WTR | NPCM_WTRE | NPCM_WTE, priv->regs);
-> > +     val =3D readl(priv->regs);
-> > +     writel(val | NPCM_WTR, priv->regs);
-> >
-> >       return 0;
-> >   }
-> > -
-> >   static int npcm_wdt_expire_now(struct udevice *dev, ulong flags)
-> >   {
-> > -     return npcm_wdt_reset(dev);
-> > -}
-> > +     struct npcm_wdt_priv *priv =3D dev_get_priv(dev);
-> >
-> > +     writel(NPCM_WTR | NPCM_WTRE | NPCM_WTE, priv->regs);
-> > +
-> > +     return 0;
-> > +}
-> >   static int npcm_wdt_of_to_plat(struct udevice *dev)
->
-> Hmmm. This will result in npcm_wdt_of_to_plat() not having an empty line
-> before its declaration. Please fix.
->
-> Thanks,
-> Stefan
+Regards,
+Simon
