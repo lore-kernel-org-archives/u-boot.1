@@ -4,70 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3798CE7AFB
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 04:46:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 827DECE7AFF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 06:22:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86EEF8692B;
-	Thu, 28 Sep 2023 06:46:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8773286B3B;
+	Thu, 28 Sep 2023 08:22:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="q8j8prZI";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="GVSIcl4o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1F6486DD5; Thu, 28 Sep 2023 06:46:06 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9C39786C5D; Thu, 28 Sep 2023 08:22:29 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk
+ [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84CD9868BB
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 06:46:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29E1D86D09
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 08:22:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38S4jxZ7124910;
- Wed, 27 Sep 2023 23:45:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695876359;
- bh=djLFkCDRiA2dATWU4EjBXsMFg/gpN3T0cdsVydeOhCY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=q8j8prZIG9ufQaUdH2S0xPwgxtJp1CRY6wpELN3MhZmX/T1ztMeJzk1hhBT+me9r3
- yAYONC8WBSx7bBRfYNoCupXAv5ulFa9mKMQSUQ/vVPyR62OJmFkYadDshlUMXT1L8l
- bdgkdKfJOLTZk6WHDgST3JTACD5ZQ5J5S717WhRg=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38S4jxro020959
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Sep 2023 23:45:59 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Sep 2023 23:45:59 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Sep 2023 23:45:59 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38S4jwqJ120554;
- Wed, 27 Sep 2023 23:45:58 -0500
-Date: Thu, 28 Sep 2023 10:15:57 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <nm@ti.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <reidt@ti.com>, <afd@ti.com>, <sinthu.raja@ti.com>, <gadiyar@ti.com>,
- <a-nandan@ti.com>, <vaishnav.a@ti.com>, <b-kapoor@ti.com>, <bb@ti.com>,
- <s-vadapalli@ti.com>
-Subject: Re: [PATCH v4 2/6] arm: mach-k3: j721e_init: Move clk_k3 probe
- before loading TIFS
-Message-ID: <20230928044557.22wjidbkp3obo4ej@ula0497581>
-References: <20230927130956.910988-1-n-francis@ti.com>
- <20230927130956.910988-3-n-francis@ti.com>
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+Received: from [192.168.0.125] (unknown [82.76.24.202])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 53CF6660731C;
+ Thu, 28 Sep 2023 07:22:26 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1695882146;
+ bh=1UojAp0AbhaNy3MedjYSbZ7lMjvzbmtuEoM6GcuoNxo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=GVSIcl4o2+NVSJn7tjsyDFUWzI23PkTloTnTK4n29gu431IXlpX7NHlxVAwHVwgLJ
+ Lm2xSyMkxhnGN4HNytdZkmK0nKV0JCWbHI6O3TSP8/+Ms4qiZDbDTTkQbqx/MbzFJu
+ NIwqgC7N1xoej37uDnHqc4aZFSJCOUv914/j8RM48oR6En6b+IaiwzBq6HaG5shZlX
+ xpw6rlZe0eFCCINmCQRCC0HNjL0vdDzc7d7u8RWrrbNhub6jwjVQnjBObFA49lKsji
+ kEQz9vXAztKLzaLW4bFZXuvKzybKPUorH9eNKEuS7XJKzwIMtHbKTh07SFu7X+52BO
+ DVR56eT4cqp9A==
+Message-ID: <06ce1abf-610e-d48a-096c-c9147e370ffc@collabora.com>
+Date: Thu, 28 Sep 2023 09:22:23 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20230927130956.910988-3-n-francis@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v2 1/1] mtd: nand: raw: atmel: Add error handling when
+ rb-gpios missing
+Content-Language: en-US
+To: Alexander Dahl <ada@thorsis.com>
+Cc: u-boot@lists.denx.de, Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+References: <20230922090856.920303-1-ada@thorsis.com>
+ <20230922090856.920303-2-ada@thorsis.com>
+ <b1d83292-c056-8759-aa33-da3e5ddf979b@collabora.com>
+ <CAOf5uwmTDN4nuNgKkmj_aKWORKAErio3su9cYoA5pH-knNWJYA@mail.gmail.com>
+From: Eugen Hristev <eugen.hristev@collabora.com>
+In-Reply-To: <CAOf5uwmTDN4nuNgKkmj_aKWORKAErio3su9cYoA5pH-knNWJYA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,70 +77,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
-
-On 18:39-20230927, Neha Malcom Francis wrote:
-> When setting boot media to load the TIFS binary in legacy boot flow
-> (followed by J721E), get_timer() is called which eventually calls
-> dm_timer_init() to grab the tick-timer, which is mcu_timer0. Since we
-> need to set up the clocks before using the timer, move clk_k3 driver
-> probe before k3_sysfw_loader to ensure we have all necessary clocks set
-> up before.
+On 9/23/23 19:50, Michael Nazzareno Trimarchi wrote:
+> On Fri, Sep 22, 2023 at 11:40 AM Eugen Hristev
+> <eugen.hristev@collabora.com> wrote:
+>>
+>> On 9/22/23 12:08, Alexander Dahl wrote:
+>>> Adapt behaviour to Linux kernel driver.
+>>>
+>>> The return value of gpio_request_by_name_nodev() was not checked before,
+>>> and thus in case 'rb-gpios' was missing in DT, rb.type was set to
+>>> ATMEL_NAND_GPIO_RB nevertheless, leading to output like this for
+>>> example (on sam9x60-curiosity with the line removed from dts):
+>>>
+>>>       NAND:  Could not find valid ONFI parameter page; aborting
+>>>       device found, Manufacturer ID: 0xc2, Chip ID: 0xdc
+>>>       Macronix NAND 512MiB 3,3V 8-bit
+>>>       512 MiB, SLC, erase size: 256 KiB, page size: 4096, OOB size: 64
+>>>       atmel-nand-controller nand-controller: NAND scan failed: -22
+>>>       Failed to probe nand driver (err = -22)
+>>>       Failed to initialize NAND controller. (error -22)
+>>>       0 MiB
+>>>
+>>> Note: not having that gpio assigned in dts is possible, the driver does
+>>> not override nand_chip->dev_ready() then and a generic solution is used.
+>>>
+>>> Fixes: 6a8dfd57220d ("nand: atmel: Add DM based NAND driver")
+>>> Signed-off-by: Alexander Dahl <ada@thorsis.com>
+>>> ---
+>>
+>> Reviewed-by: Eugen Hristev <eugen.hristev@collabora.com>
+>>
+>>>
+>>> Notes:
+>>>       v1 -> v2:
+>>>
+>>>       - Only issue error message if error is not ENOENT.  If the node just is
+>>>         missing, move on without error message.
+>>>
+>>>    drivers/mtd/nand/raw/atmel/nand-controller.c | 11 +++++++----
+>>>    1 file changed, 7 insertions(+), 4 deletions(-)
+>>>
+>>
+> Acked-by: Michael Trimarchi <michael@amarulasolutions.com>
 > 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> Reviewed-by: Nishanth Menon <nm@ti.com>
-> ---
->  arch/arm/mach-k3/j721e_init.c | 24 ++++++++++++------------
->  1 file changed, 12 insertions(+), 12 deletions(-)
-> 
-> index b6164575b7..b1f7e25ed0 100644
-> --- a/arch/arm/mach-k3/j721e_init.c
-> +++ b/arch/arm/mach-k3/j721e_init.c
-> @@ -228,6 +228,18 @@ void board_init_f(ulong dummy)
->  	if (!ret)
->  		pinctrl_select_state(dev, "default");
->  
-> +	/*
-> +	 * Force probe of clk_k3 driver here to ensure basic default clock
-> +	 * configuration is always done.
-> +	 */
-> +	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
-> +		ret = uclass_get_device_by_driver(UCLASS_CLK,
-> +						  DM_DRIVER_GET(ti_clk),
-> +						  &dev);
-> +		if (ret)
-> +			panic("Failed to initialize clk-k3!\n");
-> +	}
-> +
->  	/*
->  	 * Load, start up, and configure system controller firmware. Provide
->  	 * the U-Boot console init function to the SYSFW post-PM configuration
-> @@ -241,18 +253,6 @@ void board_init_f(ulong dummy)
->  	do_dt_magic();
->  #endif
->  
-> -	/*
-> -	 * Force probe of clk_k3 driver here to ensure basic default clock
-> -	 * configuration is always done.
-> -	 */
-> -	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
-> -		ret = uclass_get_device_by_driver(UCLASS_CLK,
-> -						  DM_DRIVER_GET(ti_clk),
-> -						  &dev);
-> -		if (ret)
-> -			panic("Failed to initialize clk-k3!\n");
-> -	}
-> -
->  	/* Prepare console output */
->  	preloader_console_init();
->  
 
-Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
 
-Regards,
-Manorit
-
-> diff --git a/arch/arm/mach-k3/j721e_init.c b/arch/arm/mach-k3/j721e_init.c
-> -- 
-> 2.34.1
-> 
+Applied to u-boot-at91/master, thanks !
