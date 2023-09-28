@@ -4,134 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9647CE7B04
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 07:10:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCAADCE7B08
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 07:54:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B877486D43;
-	Thu, 28 Sep 2023 09:10:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 0364586844;
+	Thu, 28 Sep 2023 09:54:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="GsPqj7zZ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fvc6luaw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 78CBC86583; Thu, 28 Sep 2023 09:10:39 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::700])
+ id 4D2B986A26; Thu, 28 Sep 2023 09:54:43 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8509586DDB
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 09:10:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16A1286784
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 09:54:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bHDpU8qJt2woDJeAG96zX+8oCSF5JKXD8X96hZhMe4QpAXYgsDeuKgcJ0FuQV5ktuDXDLPV/+GSkWYkOpGVoReL3oaT+Jqa4NGhNEZg5JrcjipDSRBRSfyFRsv1wjLlLwujciKlWzQ/EWVy8dHa1RNFCRFGAJlBXIIuTRhDgyP8ttzNS9w1wjLwLHMNdSDy0lIrF+zGTPZOGbaO7KeXWIIUziJwB9e116katRYihI1rT3LgCZfCxePQR4JEptYgPU+YfXHa/r+yg1p9MiyNL2kxL0o1JSLuvd9YZQM2qS6L3BgDJvkATnhqj5VEJDsTykcZyE23ZZ36CyVWfitZq8Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6mE4LEGMv0AzSpxaahnpJvXMVCWxgegxh+jamN3K7CY=;
- b=nzAjh699u9OK2jByShnzN4LSHq0e7bodQUC1WYFJ+kfAvgAPJjTIIXQP3iNdUNB8VsLXkGabmZiPSFxg5dOYEd4pHCKYGEmfQtuUDoIjR3Y4qwWf1ofVBUWFdLIVVxwpi0gOhqVRWchG9DnexCEVrvhE9iDyi1qPfzqDmHLjnkyQetlRHNTBmfvqLx0ZSRNACCv9U9Upx5NTczbhdoLwASdw4w2dEfgMMRMX9PFRypQ2+e7wcxoLsrMCQjBJNf8Q9kTK9zt2VL/lLR/+CvQAzEIvcgAZZpqdMudBiEgCM2HRPBqneNMA8f5lShpaCehWJf6h2lnmO+lkMcaSUDEC5Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6mE4LEGMv0AzSpxaahnpJvXMVCWxgegxh+jamN3K7CY=;
- b=GsPqj7zZQwFx4vunhptWpCFE/Wse2QDHMDPiJ6nLAcHKb+6c2Gw4OgQIwK6Z6HfZpsNc83RPTqmWiIu6BHSM2jzxSTehmsUbVyObwlpd+GaO3PX6iJ30Za/4iln4loXeVj5xpkS+g3BAEYt0uKN33F7m6kL8ReIZGxpJ8tBJAn8=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by AS8PR10MB7302.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:616::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.21; Thu, 28 Sep
- 2023 07:10:32 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6813.027; Thu, 28 Sep 2023
- 07:10:32 +0000
-Message-ID: <3fd4d611-891a-fc3d-7385-c2d621cf2eac@prevas.dk>
-Date: Thu, 28 Sep 2023 09:10:29 +0200
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38S7sb6w122686;
+ Thu, 28 Sep 2023 02:54:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1695887677;
+ bh=mhOS6VQjo81BeADWqHbxgo4HYDIpD7HsCGJVMrfk8Gk=;
+ h=Date:Subject:From:To:CC:References:In-Reply-To;
+ b=fvc6luaw6uf0B7UxWc6qDEe7tQ/aYCS5ZgpOEQKeHGmChtdBnT7khzigAZXxNqk1z
+ 37Ewn97bnbEKVUo8QspLpI5WSGhKwKXeAkBnMMOYWLRpwOK0RK/3KdMAJics7/+Tbh
+ aP/eDj3blEd94JbtgkdZ/GaKWpdAV/se4PM7CR0c=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38S7sbfO076482
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 28 Sep 2023 02:54:37 -0500
+Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 28
+ Sep 2023 02:54:36 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 28 Sep 2023 02:54:36 -0500
+Received: from [10.24.68.216] (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38S7sYFj034199;
+ Thu, 28 Sep 2023 02:54:35 -0500
+Message-ID: <b420800e-1584-75ca-7375-5e44cdbce8ce@ti.com>
+Date: Thu, 28 Sep 2023 13:24:33 +0530
+MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 1/4] mkimage: also honour -B even without external data
-Content-Language: en-US, da
-To: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>
-References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
- <20230919113705.109639-2-rasmus.villemoes@prevas.dk>
- <6ac71b7e-d84e-10d5-e500-0d54e5d6c191@gmail.com>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <6ac71b7e-d84e-10d5-e500-0d54e5d6c191@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM0PR03CA0059.eurprd03.prod.outlook.com (2603:10a6:208::36)
- To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|AS8PR10MB7302:EE_
-X-MS-Office365-Filtering-Correlation-Id: 19256b8d-9f64-4220-c9d2-08dbbff200dd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: h152le/lV9OeCkvOshbpCtnOnYyI8Wak1tHypjNHXv2Pd3VdRMpj4pMyHg/ms9+lmmQdLoU+M0U2tM8LYTujXQgjrhCdkY4GOorsYTYrAzsrTMSs6WZcoyxr41wwOb0ReOxF2lAoeYyYKH9Hr3JnFkow23eZmj4LLrtkVYRn8Kmd4UlzKVcdmhEVHfANrFDcxIpBoQqhuMDMN63U27WKOPdSN/ofx/OqrpaeSlK5Eor2flkzz+su1Y4yH7wrMq9p6XRok4ZEA/KdYf1rhQ5K1OfvkGR3FFmqpjqoDwu7xuNHqZ5chtRgvexCl5Yb8oeFd/7KnTcUWuLp4xuL+lf+J3FaV0eRQ58Lu447BWv1po43IkqmVXI8lxJlNYfvGawaH1Qg61ALJ6QnD8VnVMf7a08XYLfTNfwuInDExRYI+4zUIsTm6ys+Mgegw+ZFCda5+fT8yYipcSW3YdlHsrDZwHu9P6lJf9XFtxq1cNcyQvZhwOzw/q4Zyv4sWarP3jz72MSLC5TMwKJ5pKJ0KGoCkcqzjvbAxyxJZ15eeh+ZmZcbZuOsFb/k9k3wEQUgGWX3YiX2RcJI4MOIAe0Ow/0+pC1jkF5PuFUp+MJT9OS4XX04mo/ArO04CX+kS/2QG8NnkXS9HyRnJ28sYGm8UcLSeOB+xN9jhzxTjFJDejrjylDLNBmOXKH5/CW0VP7PZPsB
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(136003)(366004)(346002)(376002)(39850400004)(230922051799003)(64100799003)(1800799009)(186009)(451199024)(52116002)(41300700001)(83380400001)(2616005)(53546011)(6512007)(44832011)(54906003)(66476007)(26005)(66556008)(316002)(8676002)(5660300002)(8936002)(6666004)(6486002)(6506007)(4326008)(478600001)(2906002)(66946007)(8976002)(36756003)(31696002)(86362001)(38350700002)(38100700002)(31686004)(45980500001)(43740500002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U0pBM05oRGk0K0xCbjZqNmhzdXdVQUYvTFNtRjBnek93LzF0a0FWc0E2YVlr?=
- =?utf-8?B?K2tMWk5rU0dTQWRIMUxONmJuZXZvRFpWMjFaUSs5cFljRUM5WjArVmpVRWRk?=
- =?utf-8?B?bW90eUtsRGYyK2tQTHNScnBxdU9LVklSU0RPN2NXbDgrUnRtajhoK3RvUHNp?=
- =?utf-8?B?VUw4UVRBREVzL0ZGenNiWExlTWRWK3dOYlN1YTBYVjVqTmsySUtBc1JCUU5i?=
- =?utf-8?B?RU1RNmQ1SkpEZ3RzQVYzNDRnbEViU1o2K0dONW9BSUtrd2JjY1c1SUpnQU1i?=
- =?utf-8?B?YWFSVHNhNWFJaGhjRjN4NGVKL1Y2QkprbUFkbWpCQ2Jxd0pRTng0L3Q4a1pO?=
- =?utf-8?B?RVN2RGwzYVZOOUM0ZzdSeS9EYUd4ZnN4WWU0ZHoraG43T25jUGlyall2NnBw?=
- =?utf-8?B?Q1dNM0tIRHFtV01rby9ZTWs0TXo0Wm9NY0ViMWIyYUlRblBLV0grbXh2MXlu?=
- =?utf-8?B?NTJhK2t2QUhaZDZQZy9RVC9Wa1ovYUFyWjlhRU52WFlGblJ1V1RMenA4SURU?=
- =?utf-8?B?T1RlSEk2UjMxUFlSdE5NNXI2MXFZWFZoUGZ4WExPV1N3ZGR6cnpJMUZ6KzVY?=
- =?utf-8?B?RXVWTFI0S3JkazdON1phdXA0QTQxUld5ckw5V2hqWmgyMEFLc1I2azZORXoz?=
- =?utf-8?B?OGdvckdBV2djOEIxdEVwY3oyNEZwcm0yVGxHejN1R3FJeE1GejZ6UDhiT1Bm?=
- =?utf-8?B?OGE1Nkw0VHlIby9DNWJQMHFDRDZpdXJWQ25jbmtPVEJhUlJYdWl5YTllZnBo?=
- =?utf-8?B?bkdxK2VGZDdtWERiNWVMa09BdVNlUWdOemhZMkpDclhLWVMvM3BZWUtGb1M0?=
- =?utf-8?B?QUkvck0vdllOVGJsblZQbWE5b0hJM2ZHSWttaStEazM4bmQzWXFKOHVvRHhP?=
- =?utf-8?B?WEZuSUp5R2JtTm5mT0FVUmU5RWdka3h5QVJ0Q3FaRVlIaEd5YzFGU0IxZXo1?=
- =?utf-8?B?d3VsVitQOFJRNjMyVm5CN2taK001d3MzSWFGQWdqRnIxTXd4d2kvVFY4ZVhn?=
- =?utf-8?B?TDUrRTRtVW9QSGhnd0QyaWFZZDVHcW5vYUxvd05Ya3MvOFZ0WlkrN3VqYVNn?=
- =?utf-8?B?NGVMTm9ISTc1Y3hlZ3c5c1NDUWk2ekVoU1JNblBxWWNTVkh2cFNEcFordVN0?=
- =?utf-8?B?U2RWYjZaT0tpSnVScERFOU82NGRKcGp6SlFLclhhK3VQRU5TOEdrcFF1RU1u?=
- =?utf-8?B?M25oeUVRNUt6bW5IK1luem1OaUtjQTVYYjR0QTBRaDNaVDhkNDA1bXUvVGZN?=
- =?utf-8?B?bUF3Q3dWTmxNczZyM2hEYmRGOW1wbWxZVjJzZ01kNlNTdEtmK2hKaDhnTlFJ?=
- =?utf-8?B?TCt2Q3Q1QUNTZkkxQ0JKbTlOS0Fxc2QrSmcxM2NIZXduNmUxVitvVzlsYUFR?=
- =?utf-8?B?QmYycGdKVWRjQi9pZmFVS1JKY2RzUURoa1BWUXFMci9EeW5od3BrM0tETm84?=
- =?utf-8?B?eEc4dTVhVlFuUVNVby8wZnRuV2pJNFpIWEc2eUczdTQ0ZU9TTDViM0VjaTFF?=
- =?utf-8?B?SnljelJuZzZpSUZySmd2VnMxNnZkb2hxdXZRR0xiSlFXYUlXbExOT3ZZWDFL?=
- =?utf-8?B?cDduZkE3TFFVNmxGeXkvOTI3OFlDeWFoV2xDNkpnWkMyVk9UVTd4UWxkSCt5?=
- =?utf-8?B?bHFjNStYa3FjK0hXMXZOS0J4aDJ3YXBNanRPcDliK3pLckt6NWhSR2FiUnhv?=
- =?utf-8?B?RlhaMGxEeUhlM1ZPSVc1c2V4L3RSd2p0TkFpM3RLSE5QbzZ1c2dOdllWQWU1?=
- =?utf-8?B?ZkdUOWMwNW8vRFZkaDFBOE54NXI5alNrSFdScjVYdWxzbHU3NmJqT0tUM2pB?=
- =?utf-8?B?aUFFT3VzMmNZRnFNblppTzg4cmRjYjZhTHFWTFo2N0RFSFhrakNxMkt4QUl2?=
- =?utf-8?B?NEc1akdmRThVd0Zzbm1VbHZXcS8vUkJ1Y2Q4aktzdDhGdUNYT2hFU2UzWStl?=
- =?utf-8?B?YXJYTngycGU2NzFjVFJKZGVmMHg0M0dHdXFQWGxDOGJyYjZKOHpkQ1ZFRWlX?=
- =?utf-8?B?d0lkZC9CcmdZQTBqS2ZLT3ZWT1pIN2kyVjhPdU5oV1J4MUJSQkVjbm1Fd3F2?=
- =?utf-8?B?Z2F5YlRPTDFyOXQwcWE4c3dOeFFwVnRJY21NTWNYZWsvZEQvdmxid3hSRm5O?=
- =?utf-8?B?U1poRlJrQmNxek5HcVpHblF2QjR3ZWlpanNwVGRzTUZQWDZBS2xsOFg4S1ZT?=
- =?utf-8?B?YWc9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19256b8d-9f64-4220-c9d2-08dbbff200dd
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2023 07:10:32.1895 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VZ5EtUeqzm8rNAEUxN1giNbUAAY1bKz4TRw+HlLfE342Pq1/l21OpF+TNgOu1/Yz4TDEoCTp8XLqGK5pzm7pAnapDqOX3aWqiFD6lJNy9Io=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB7302
+Subject: Re: [PATCH 1/2] configs: am65x: Merge the HS and non-HS defconfigs
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Jan Kiszka <jan.kiszka@siemens.com>, Tom Rini <trini@konsulko.com>,
+ Nishanth Menon <nm@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20230803145441.315515-1-afd@ti.com>
+ <20230804050511.maw7b63rjafucrnh@ula0497581>
+Content-Language: en-US
+In-Reply-To: <20230804050511.maw7b63rjafucrnh@ula0497581>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,75 +84,430 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27/09/2023 21.02, Sean Anderson wrote:
-> On 9/19/23 07:37, Rasmus Villemoes wrote:
->> In some cases, using the "external data" feature is impossible or
->> undesirable, but one may still want (or need) the FIT image to have a
->> certain alignment. Also, given the current 'mkimage -h' output,
+Hi Andrew,
+
+On 04/08/23 10:35, Manorit Chawdhry wrote:
+> Hi Andrew,
+>
+> On 09:54-20230803, Andrew Davis wrote:
+>> K3 devices have runtime type board detection. Make the default defconfig
+>> include the secure configuration. Then remove the HS specific config.
 >>
->>    -B => align size in hex for FIT structure and header
+>> Non-HS devices will continue to boot due to runtime device type detection.
 >>
->> it is quite unexpected for -B to be effectively ignored without -E.
-> 
-> FWIW, this behavior is documented in doc/mkimage.1 (which should also be
-> updated if this behavior is implemented):
-> 
-> | The alignment, in hexadecimal, that external data will be aligned to.
-> | This option only has an effect when -E is specified.
+>> Signed-off-by: Andrew Davis <afd@ti.com>
+>> ---
+>>  MAINTAINERS                           |   2 -
+>>  configs/am65x_evm_a53_defconfig       |   3 +-
+>>  configs/am65x_evm_r5_defconfig        |   1 +
+>>  configs/am65x_evm_r5_usbdfu_defconfig |   1 +
+>>  configs/am65x_evm_r5_usbmsc_defconfig |   1 +
+>>  configs/am65x_hs_evm_a53_defconfig    | 158 --------------------------
+>>  configs/am65x_hs_evm_r5_defconfig     | 135 ----------------------
+>>  7 files changed, 5 insertions(+), 296 deletions(-)
+>>  delete mode 100644 configs/am65x_hs_evm_a53_defconfig
+>>  delete mode 100644 configs/am65x_hs_evm_r5_defconfig
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index 47581cf6fbb..d3b9f4cc6c4 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -1506,8 +1506,6 @@ F:	configs/k2hk_hs_evm_defconfig
+>>  F:	configs/k2e_hs_evm_defconfig
+>>  F:	configs/k2g_hs_evm_defconfig
+>>  F:	configs/k2l_hs_evm_defconfig
+>> -F:	configs/am65x_hs_evm_r5_defconfig
+>> -F:	configs/am65x_hs_evm_a53_defconfig
+> While merging these defconfigs for other boards I had faced an issue
+> where the multi DTB detection wasn't working for HS devices and we were
+> hitting a firewall exception while trying to access the EEPROM
+> Scratchpad before the firewalls were opened. I see that AM65x still uses
+> the old Scratchpad address in the Kconfig which had triggered exceptions
+> for other K3 devices.
+>
+> config SYS_K3_MCU_SCRATCHPAD_BASE
+> 	hex
+> 	default 0x40280000 if SOC_K3_AM654
+> 	default 0x41cff9fc if SOC_K3_J721S2
+> 	default 0x41cff9fc if SOC_K3_J721E
+>
+> Can you double check if this also needs a change along with the merged
+> defconfigs?
+>
+> Regards,
+> Manorit
 
-I'll send a follow-up to fix that, thanks.
+I just noticed that the multi fit configs were already enabled in HS defconfig
+before the merge
+so ig merging the configs shouldn't bring the problem I was suspecting.
 
-> And, for additional context, the documentation for -E is
-> 
-> | After processing, move the image data outside the FIT and store a data
-> | offset in the FIT. Images will be placed one after the other
-> | immediately after the FIT, with each one aligned to a 4-byte boundary.
-> | The existing ‘data’ property in each image will be replaced with
-> | ‘data-offset’ and ‘data-size’ properties. A ‘data-offset’ of 0
-> | indicates that it starts in the first (4-byte-aligned) byte after the
-> | FIT.
-> 
-> Based on this documentation and my understanding of the code as-is, -B
-> controls the alignment of the images themselves, 
+Reviewed-by: Manorit Chawdhry <m-chawdhry@ti.com>
 
-Yes, when -E is in effect. My patch does not affect the case where -E is
-present.
+Regards,
+Manorit
 
-> not the size multiple of the FIT.
-
-It is _also_ that, but mostly as a "necessary side effect" of getting
-the first image aligned. In order to achieve the desired alignment of
-the first external image, the FIT structure itself is aligned to the -B
-value, and each image's size similarly aligned up to that value so the
-next image ends on a -B multiple again. So with both -E and -B, the FIT
-structure itself is indeed also padded to the -B value, as the `mkimage
--h` output suggests.
-
-What I want, and expected from `mkimage -h`, is to make the whole FIT
-have a certain size multiple, without using -E, so in that case the
-alignment of the FIT is the primary goal.
-
-> However, from what I can tell, this patch does not actually
-> affect the alignment of the images,
-
-No, because the images are (still) embedded within the FIT as ordinary
-values of the data= properties, and it's a basic property of the DTB
-format that those are always 4-byte aligned, and you can't (easily)
-change that [1]. Which, I suppose, is one of the reasons U-Boot invented
-the "external data" mechanism - so for example the .dtbs embedded in the
-FIT can all be guaranteed to be on an 8-byte boundary, and thus the
-selected one can be used in-place when passed to linux.
-
-> but rather adjusts the size of the
-> overall FIT to a certain alignment. I find this rather unexpected.
-
-Well, as I said, _I_ was surprised by -B having no effect based on the
-`mkimage -h` output, so the two sources of documentation were not in
-sync. The man page was/is correct wrt. the actual code.
-
-Rasmus
-
-[1] There's a nop tag one can insert, and I think I saw somebody
-actually suggesting to do that to align the embedded data= properties,
-but it's quite error-prone and inflexible, as any subsequent
-modification of the .dtb before that property will ruin the alignment.
+>>  
+>>  TPM DRIVERS
+>>  M:	Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>> diff --git a/configs/am65x_evm_a53_defconfig b/configs/am65x_evm_a53_defconfig
+>> index 4301553af8d..55c1b23c8db 100644
+>> --- a/configs/am65x_evm_a53_defconfig
+>> +++ b/configs/am65x_evm_a53_defconfig
+>> @@ -1,6 +1,7 @@
+>>  CONFIG_ARM=y
+>>  CONFIG_SKIP_LOWLEVEL_INIT=y
+>>  CONFIG_ARCH_K3=y
+>> +CONFIG_TI_SECURE_DEVICE=y
+>>  CONFIG_SYS_MALLOC_LEN=0x2000000
+>>  CONFIG_SYS_MALLOC_F_LEN=0x8000
+>>  CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>> @@ -34,7 +35,7 @@ CONFIG_SPL_LOAD_FIT=y
+>>  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+>>  CONFIG_OF_SYSTEM_SETUP=y
+>>  CONFIG_DISTRO_DEFAULTS=y
+>> -CONFIG_BOOTCOMMAND="run findfdt; run distro_bootcmd; run init_${boot}; run boot_rprocs; run get_kern_${boot}; run get_fdt_${boot}; run get_overlay_${boot}; run run_kern"
+>> +CONFIG_BOOTCOMMAND="run findfdt; run distro_bootcmd; run init_${boot}; run boot_rprocs; if test ${boot_fit} -eq 1; then run get_fit_${boot}; run get_overlaystring; run run_fit; else; run get_kern_${boot}; run get_fdt_${boot}; run get_overlay_${boot}; run run_kern; fi;"
+>>  CONFIG_LOGLEVEL=7
+>>  CONFIG_CONSOLE_MUX=y
+>>  CONFIG_SPL_MAX_SIZE=0x58000
+>> diff --git a/configs/am65x_evm_r5_defconfig b/configs/am65x_evm_r5_defconfig
+>> index d5196c2024e..b9b69b921be 100644
+>> --- a/configs/am65x_evm_r5_defconfig
+>> +++ b/configs/am65x_evm_r5_defconfig
+>> @@ -1,5 +1,6 @@
+>>  CONFIG_ARM=y
+>>  CONFIG_ARCH_K3=y
+>> +CONFIG_TI_SECURE_DEVICE=y
+>>  CONFIG_SYS_MALLOC_LEN=0x2000000
+>>  CONFIG_SYS_MALLOC_F_LEN=0x55000
+>>  CONFIG_SPL_GPIO=y
+>> diff --git a/configs/am65x_evm_r5_usbdfu_defconfig b/configs/am65x_evm_r5_usbdfu_defconfig
+>> index 88f68aa70e4..fb93024bda9 100644
+>> --- a/configs/am65x_evm_r5_usbdfu_defconfig
+>> +++ b/configs/am65x_evm_r5_usbdfu_defconfig
+>> @@ -1,5 +1,6 @@
+>>  CONFIG_ARM=y
+>>  CONFIG_ARCH_K3=y
+>> +CONFIG_TI_SECURE_DEVICE=y
+>>  CONFIG_SYS_MALLOC_LEN=0x2000000
+>>  CONFIG_SYS_MALLOC_F_LEN=0x55000
+>>  CONFIG_SPL_GPIO=y
+>> diff --git a/configs/am65x_evm_r5_usbmsc_defconfig b/configs/am65x_evm_r5_usbmsc_defconfig
+>> index 8da49c78c82..931b756ab52 100644
+>> --- a/configs/am65x_evm_r5_usbmsc_defconfig
+>> +++ b/configs/am65x_evm_r5_usbmsc_defconfig
+>> @@ -1,5 +1,6 @@
+>>  CONFIG_ARM=y
+>>  CONFIG_ARCH_K3=y
+>> +CONFIG_TI_SECURE_DEVICE=y
+>>  CONFIG_SYS_MALLOC_LEN=0x2000000
+>>  CONFIG_SYS_MALLOC_F_LEN=0x55000
+>>  CONFIG_SPL_GPIO=y
+>> diff --git a/configs/am65x_hs_evm_a53_defconfig b/configs/am65x_hs_evm_a53_defconfig
+>> deleted file mode 100644
+>> index 3f9626e4550..00000000000
+>> --- a/configs/am65x_hs_evm_a53_defconfig
+>> +++ /dev/null
+>> @@ -1,158 +0,0 @@
+>> -CONFIG_ARM=y
+>> -CONFIG_SKIP_LOWLEVEL_INIT=y
+>> -CONFIG_ARCH_K3=y
+>> -CONFIG_TI_SECURE_DEVICE=y
+>> -CONFIG_SYS_MALLOC_LEN=0x2000000
+>> -CONFIG_SYS_MALLOC_F_LEN=0x8000
+>> -CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>> -CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>> -CONFIG_NR_DRAM_BANKS=2
+>> -CONFIG_SOC_K3_AM654=y
+>> -CONFIG_TARGET_AM654_A53_EVM=y
+>> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
+>> -CONFIG_ENV_SIZE=0x20000
+>> -CONFIG_ENV_OFFSET=0x680000
+>> -CONFIG_DM_GPIO=y
+>> -CONFIG_SPL_DM_SPI=y
+>> -CONFIG_DEFAULT_DEVICE_TREE="k3-am654-base-board"
+>> -CONFIG_SPL_TEXT_BASE=0x80080000
+>> -CONFIG_OF_LIBFDT_OVERLAY=y
+>> -CONFIG_DM_RESET=y
+>> -CONFIG_SPL_MMC=y
+>> -CONFIG_SPL_SERIAL=y
+>> -CONFIG_SPL_DRIVERS_MISC=y
+>> -CONFIG_SPL_STACK_R_ADDR=0x82000000
+>> -CONFIG_ENV_OFFSET_REDUND=0x6A0000
+>> -CONFIG_SPL_FS_FAT=y
+>> -CONFIG_SPL_LIBDISK_SUPPORT=y
+>> -CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>> -CONFIG_SPL_SPI=y
+>> -# CONFIG_PSCI_RESET is not set
+>> -CONFIG_PCI=y
+>> -# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>> -CONFIG_SPL_LOAD_FIT=y
+>> -CONFIG_OF_SYSTEM_SETUP=y
+>> -CONFIG_DISTRO_DEFAULTS=y
+>> -CONFIG_BOOTCOMMAND="run findfdt; run envboot; run init_${boot}; run get_fit_${boot}; run get_overlaystring; run run_fit"
+>> -CONFIG_LOGLEVEL=7
+>> -CONFIG_CONSOLE_MUX=y
+>> -CONFIG_SPL_MAX_SIZE=0x58000
+>> -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>> -CONFIG_SPL_BSS_START_ADDR=0x80a00000
+>> -CONFIG_SPL_BSS_MAX_SIZE=0x80000
+>> -CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+>> -CONFIG_SPL_STACK_R=y
+>> -CONFIG_SYS_SPL_MALLOC=y
+>> -CONFIG_SYS_SPL_MALLOC_SIZE=0x800000
+>> -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+>> -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
+>> -CONFIG_SPL_DMA=y
+>> -CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+>> -CONFIG_SPL_I2C=y
+>> -CONFIG_SPL_DM_MAILBOX=y
+>> -CONFIG_SPL_MTD_SUPPORT=y
+>> -CONFIG_SPL_DM_SPI_FLASH=y
+>> -CONFIG_SPL_DM_RESET=y
+>> -CONFIG_SPL_POWER_DOMAIN=y
+>> -# CONFIG_SPL_SPI_FLASH_TINY is not set
+>> -CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+>> -CONFIG_SPL_SPI_LOAD=y
+>> -CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
+>> -CONFIG_SPL_YMODEM_SUPPORT=y
+>> -CONFIG_SYS_MAXARGS=64
+>> -CONFIG_CMD_ASKENV=y
+>> -CONFIG_CMD_DFU=y
+>> -CONFIG_CMD_GPT=y
+>> -CONFIG_CMD_I2C=y
+>> -CONFIG_CMD_MMC=y
+>> -CONFIG_CMD_PCI=y
+>> -CONFIG_CMD_REMOTEPROC=y
+>> -CONFIG_CMD_USB=y
+>> -CONFIG_CMD_TIME=y
+>> -CONFIG_MTDIDS_DEFAULT="nor0=47040000.spi.0"
+>> -CONFIG_MTDPARTS_DEFAULT="mtdparts=47040000.spi.0:512k(ospi.tiboot3),2m(ospi.tispl),4m(ospi.u-boot),128k(ospi.env),128k(ospi.env.backup),1m(ospi.sysfw),-@8m(ospi.rootfs)"
+>> -CONFIG_CMD_UBI=y
+>> -# CONFIG_ISO_PARTITION is not set
+>> -CONFIG_OF_CONTROL=y
+>> -CONFIG_SPL_OF_CONTROL=y
+>> -CONFIG_SPL_MULTI_DTB_FIT=y
+>> -CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+>> -CONFIG_ENV_OVERWRITE=y
+>> -CONFIG_ENV_IS_IN_MMC=y
+>> -CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>> -CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>> -CONFIG_SYS_MMC_ENV_PART=1
+>> -CONFIG_NET_RANDOM_ETHADDR=y
+>> -CONFIG_SPL_DM=y
+>> -CONFIG_SPL_DM_SEQ_ALIAS=y
+>> -CONFIG_SPL_REGMAP=y
+>> -CONFIG_SPL_OF_TRANSLATE=y
+>> -CONFIG_CLK=y
+>> -CONFIG_SPL_CLK=y
+>> -CONFIG_CLK_TI_SCI=y
+>> -CONFIG_DFU_MMC=y
+>> -CONFIG_DFU_RAM=y
+>> -CONFIG_DFU_SF=y
+>> -CONFIG_SYS_DFU_DATA_BUF_SIZE=0x20000
+>> -CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
+>> -CONFIG_DMA_CHANNELS=y
+>> -CONFIG_TI_K3_NAVSS_UDMA=y
+>> -CONFIG_TI_SCI_PROTOCOL=y
+>> -CONFIG_DM_PCA953X=y
+>> -CONFIG_DM_I2C=y
+>> -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+>> -CONFIG_SYS_I2C_OMAP24XX=y
+>> -CONFIG_DM_MAILBOX=y
+>> -CONFIG_K3_SEC_PROXY=y
+>> -CONFIG_MMC_SDHCI=y
+>> -CONFIG_MMC_SDHCI_ADMA=y
+>> -CONFIG_SPL_MMC_SDHCI_ADMA=y
+>> -CONFIG_MMC_SDHCI_AM654=y
+>> -CONFIG_MTD=y
+>> -CONFIG_DM_MTD=y
+>> -CONFIG_DM_SPI_FLASH=y
+>> -CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>> -CONFIG_SPI_FLASH_STMICRO=y
+>> -# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+>> -CONFIG_SPI_FLASH_MTD=y
+>> -CONFIG_PHY_TI_DP83867=y
+>> -CONFIG_PHY_FIXED=y
+>> -CONFIG_E1000=y
+>> -CONFIG_CMD_E1000=y
+>> -CONFIG_TI_AM65_CPSW_NUSS=y
+>> -CONFIG_PCI_KEYSTONE=y
+>> -CONFIG_PHY=y
+>> -CONFIG_AM654_PHY=y
+>> -CONFIG_OMAP_USB2_PHY=y
+>> -CONFIG_PINCTRL=y
+>> -# CONFIG_PINCTRL_GENERIC is not set
+>> -CONFIG_SPL_PINCTRL=y
+>> -# CONFIG_SPL_PINCTRL_GENERIC is not set
+>> -CONFIG_PINCTRL_SINGLE=y
+>> -CONFIG_POWER_DOMAIN=y
+>> -CONFIG_TI_SCI_POWER_DOMAIN=y
+>> -CONFIG_REMOTEPROC_TI_K3_R5F=y
+>> -CONFIG_RESET_TI_SCI=y
+>> -CONFIG_DM_SERIAL=y
+>> -CONFIG_SOC_DEVICE=y
+>> -CONFIG_SOC_DEVICE_TI_K3=y
+>> -CONFIG_SOC_TI=y
+>> -CONFIG_SPI=y
+>> -CONFIG_DM_SPI=y
+>> -CONFIG_CADENCE_QSPI=y
+>> -CONFIG_SYSRESET=y
+>> -CONFIG_SPL_SYSRESET=y
+>> -CONFIG_SYSRESET_TI_SCI=y
+>> -CONFIG_USB=y
+>> -CONFIG_DM_USB_GADGET=y
+>> -CONFIG_USB_XHCI_HCD=y
+>> -CONFIG_USB_XHCI_DWC3=y
+>> -CONFIG_USB_DWC3=y
+>> -CONFIG_USB_DWC3_GENERIC=y
+>> -CONFIG_USB_KEYBOARD=y
+>> -CONFIG_USB_GADGET=y
+>> -CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
+>> -CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+>> -CONFIG_USB_GADGET_PRODUCT_NUM=0x6162
+>> -CONFIG_USB_GADGET_DOWNLOAD=y
+>> diff --git a/configs/am65x_hs_evm_r5_defconfig b/configs/am65x_hs_evm_r5_defconfig
+>> deleted file mode 100644
+>> index 0c7b53ca2c0..00000000000
+>> --- a/configs/am65x_hs_evm_r5_defconfig
+>> +++ /dev/null
+>> @@ -1,135 +0,0 @@
+>> -CONFIG_ARM=y
+>> -CONFIG_ARCH_K3=y
+>> -CONFIG_TI_SECURE_DEVICE=y
+>> -CONFIG_SYS_MALLOC_LEN=0x2000000
+>> -CONFIG_SYS_MALLOC_F_LEN=0x55000
+>> -CONFIG_SPL_GPIO=y
+>> -CONFIG_SPL_LIBCOMMON_SUPPORT=y
+>> -CONFIG_SPL_LIBGENERIC_SUPPORT=y
+>> -CONFIG_NR_DRAM_BANKS=2
+>> -CONFIG_SOC_K3_AM654=y
+>> -CONFIG_K3_EARLY_CONS=y
+>> -CONFIG_TARGET_AM654_R5_EVM=y
+>> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+>> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x41c7effc
+>> -CONFIG_ENV_SIZE=0x20000
+>> -CONFIG_DM_GPIO=y
+>> -CONFIG_SPL_DM_SPI=y
+>> -CONFIG_DEFAULT_DEVICE_TREE="k3-am654-r5-base-board"
+>> -CONFIG_SPL_TEXT_BASE=0x41c00000
+>> -CONFIG_DM_RESET=y
+>> -CONFIG_SPL_MMC=y
+>> -CONFIG_SPL_SERIAL=y
+>> -CONFIG_SPL_DRIVERS_MISC=y
+>> -CONFIG_SPL_STACK_R_ADDR=0x82000000
+>> -CONFIG_SPL_FS_FAT=y
+>> -CONFIG_SPL_LIBDISK_SUPPORT=y
+>> -CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>> -CONFIG_SPL_SPI=y
+>> -# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>> -CONFIG_SPL_LOAD_FIT=y
+>> -CONFIG_USE_BOOTCOMMAND=y
+>> -# CONFIG_DISPLAY_CPUINFO is not set
+>> -CONFIG_SPL_MAX_SIZE=0x58000
+>> -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>> -CONFIG_SPL_BSS_START_ADDR=0x41c7effc
+>> -CONFIG_SPL_BSS_MAX_SIZE=0xc00
+>> -CONFIG_SPL_STACK_R=y
+>> -CONFIG_SPL_SEPARATE_BSS=y
+>> -CONFIG_SYS_SPL_MALLOC=y
+>> -CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
+>> -CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x84000000
+>> -CONFIG_SYS_SPL_MALLOC_SIZE=0x1000000
+>> -CONFIG_SPL_EARLY_BSS=y
+>> -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+>> -CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
+>> -CONFIG_SPL_DMA=y
+>> -CONFIG_SPL_I2C=y
+>> -CONFIG_SPL_DM_MAILBOX=y
+>> -CONFIG_SPL_DM_SPI_FLASH=y
+>> -CONFIG_SPL_DM_RESET=y
+>> -CONFIG_SPL_POWER_DOMAIN=y
+>> -CONFIG_SPL_RAM_SUPPORT=y
+>> -CONFIG_SPL_RAM_DEVICE=y
+>> -CONFIG_SPL_REMOTEPROC=y
+>> -# CONFIG_SPL_SPI_FLASH_TINY is not set
+>> -CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+>> -CONFIG_SPL_SPI_LOAD=y
+>> -CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
+>> -CONFIG_SPL_YMODEM_SUPPORT=y
+>> -CONFIG_HUSH_PARSER=y
+>> -CONFIG_SYS_MAXARGS=64
+>> -CONFIG_CMD_BOOTZ=y
+>> -CONFIG_SYS_BOOTM_LEN=0x4000000
+>> -CONFIG_CMD_ASKENV=y
+>> -CONFIG_CMD_GPT=y
+>> -CONFIG_CMD_I2C=y
+>> -CONFIG_CMD_MMC=y
+>> -CONFIG_CMD_REMOTEPROC=y
+>> -# CONFIG_CMD_SETEXPR is not set
+>> -CONFIG_CMD_TIME=y
+>> -CONFIG_CMD_FAT=y
+>> -CONFIG_OF_CONTROL=y
+>> -CONFIG_SPL_OF_CONTROL=y
+>> -CONFIG_SPL_MULTI_DTB_FIT=y
+>> -CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+>> -CONFIG_ENV_OVERWRITE=y
+>> -CONFIG_ENV_IS_IN_FAT=y
+>> -CONFIG_ENV_FAT_DEVICE_AND_PART="1:1"
+>> -CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>> -CONFIG_SPL_DM=y
+>> -CONFIG_SPL_DM_SEQ_ALIAS=y
+>> -CONFIG_REGMAP=y
+>> -CONFIG_SPL_REGMAP=y
+>> -CONFIG_SPL_OF_TRANSLATE=y
+>> -CONFIG_CLK=y
+>> -CONFIG_SPL_CLK=y
+>> -CONFIG_CLK_TI_SCI=y
+>> -CONFIG_DMA_CHANNELS=y
+>> -CONFIG_TI_K3_NAVSS_UDMA=y
+>> -CONFIG_TI_SCI_PROTOCOL=y
+>> -CONFIG_DA8XX_GPIO=y
+>> -CONFIG_DM_I2C=y
+>> -CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
+>> -CONFIG_SYS_I2C_OMAP24XX=y
+>> -CONFIG_DM_MAILBOX=y
+>> -CONFIG_K3_SEC_PROXY=y
+>> -CONFIG_K3_AVS0=y
+>> -CONFIG_MMC_SDHCI=y
+>> -CONFIG_SPL_MMC_SDHCI_ADMA=y
+>> -CONFIG_MMC_SDHCI_AM654=y
+>> -CONFIG_DM_SPI_FLASH=y
+>> -CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>> -CONFIG_SPI_FLASH_STMICRO=y
+>> -# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+>> -CONFIG_PINCTRL=y
+>> -# CONFIG_PINCTRL_GENERIC is not set
+>> -CONFIG_SPL_PINCTRL=y
+>> -# CONFIG_SPL_PINCTRL_GENERIC is not set
+>> -CONFIG_PINCTRL_SINGLE=y
+>> -CONFIG_POWER_DOMAIN=y
+>> -CONFIG_TI_SCI_POWER_DOMAIN=y
+>> -CONFIG_DM_REGULATOR=y
+>> -CONFIG_SPL_DM_REGULATOR=y
+>> -CONFIG_DM_REGULATOR_GPIO=y
+>> -CONFIG_SPL_DM_REGULATOR_GPIO=y
+>> -CONFIG_DM_REGULATOR_TPS62360=y
+>> -CONFIG_RAM=y
+>> -CONFIG_SPL_RAM=y
+>> -CONFIG_K3_SYSTEM_CONTROLLER=y
+>> -CONFIG_REMOTEPROC_TI_K3_ARM64=y
+>> -CONFIG_RESET_TI_SCI=y
+>> -CONFIG_DM_SERIAL=y
+>> -CONFIG_SOC_DEVICE=y
+>> -CONFIG_SOC_DEVICE_TI_K3=y
+>> -CONFIG_SOC_TI=y
+>> -CONFIG_SPI=y
+>> -CONFIG_DM_SPI=y
+>> -CONFIG_CADENCE_QSPI=y
+>> -CONFIG_SYSRESET=y
+>> -CONFIG_SPL_SYSRESET=y
+>> -CONFIG_SYSRESET_TI_SCI=y
+>> -CONFIG_TIMER=y
+>> -CONFIG_SPL_TIMER=y
+>> -CONFIG_OMAP_TIMER=y
+>> -CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+>> -- 
+>> 2.39.2
+>>
