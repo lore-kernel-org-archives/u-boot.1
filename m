@@ -4,135 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4055E732DF
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 14:55:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5000FE732E4
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 15:20:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2649386E59;
-	Thu, 28 Sep 2023 16:55:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id 37AFD86B95;
+	Thu, 28 Sep 2023 17:20:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="TIjsnJ0S";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gM02yUO3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7251586E5A; Thu, 28 Sep 2023 16:55:26 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1FCC586E3D; Thu, 28 Sep 2023 17:20:19 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F2E386548
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 16:55:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id 18367864D4
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 17:20:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1695912923;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bjCORnax1o/ovoKeqApIT5Rok74EXY3guWukAMp0kII=;
- b=TIjsnJ0SHN9sm7gX0MnLXT32w9CpH0vL5k9kWhtYk1HxfUa8vTkTLYbjZhGFEFqu1QNvBr
- z97qw2fncfHCNl6jXUA6oHT2aDLJGF4bchylXi/2BhAZMXncAq0jxQ/XkQ73Uv9zVUvAmx
- TVOmDDtP9ZBz/6OcnZoZL94tmLKay/0=
-Received: from CHE01-ZR0-obe.outbound.protection.outlook.com
- (mail-zr0che01lp2105.outbound.protection.outlook.com [104.47.22.105]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-50-Yir9akFCMrKAqTH5kIVGPA-2; Thu, 28 Sep 2023 16:55:22 +0200
-X-MC-Unique: Yir9akFCMrKAqTH5kIVGPA-2
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- ZR0P278MB0012.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:19::10) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6813.28; Thu, 28 Sep 2023 14:55:20 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::ccb1:8f1e:69ef:d622]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::ccb1:8f1e:69ef:d622%4]) with mapi id 15.20.6813.027; Thu, 28 Sep 2023
- 14:55:20 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "andrejs.cainikovs@gmail.com" <andrejs.cainikovs@gmail.com>
-CC: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Subject: Re: [PATCH v1] board: toradex: verdin-imx8mm: set fixed LPDDR4
- refresh rate as per errata ERR050805
-Thread-Topic: [PATCH v1] board: toradex: verdin-imx8mm: set fixed LPDDR4
- refresh rate as per errata ERR050805
-Thread-Index: AQHZ8hmhkQeS42w1JUGUZeROmoxblLAwU2QA
-Date: Thu, 28 Sep 2023 14:55:19 +0000
-Message-ID: <83be30119d350f0dce52595d21e9c582b0340faf.camel@toradex.com>
-References: <20230928143933.11510-1-andrejs.cainikovs@gmail.com>
-In-Reply-To: <20230928143933.11510-1-andrejs.cainikovs@gmail.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR0P278MB0012:EE_
-x-ms-office365-filtering-correlation-id: 81151650-7b72-403b-a1e7-08dbc032ef5f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: gd7GpbNoQpn1Twgi5YO+KNZ2PTEu4P87T+J+GeLAQhhQLCb7K9YgR56vrptcn7qR7XZKo0vzEg09BJEKyQwAgihubSsG1tZ/hFFUXoaJWa8Rd8PL01j3chJOzy1fEEnh89l51JZiAjPb+6c2xMirZZT97ZiC5s4pNLKQLs+Etpj0CQMwR3hwNYQmk6D1U0ajLjUsAK4jdFYDgHL6izhdlmqt9LGo0F/CuEhwi8SzOBhwahF421LrDDePuTx/DMR15lu5Lyd0KPKxutfgRKnhNa5K4qUY/O5Dyu9Z1dTxng23/MMba6ijlHU3GMzEphoBM+rDlXNfFCqxH1rzcwF4ROtZDaukvBCpwg0cxYtEGnfNUngtLTUNrz/bomVH172jHDQI+zS99VIsdcibcS9OndcQPLAGUYetqngYFHbhMLbT7HyJ1wHQoVrhwtGxD/EVTfiXj1dtypYErLRBgoPSxIN4cjrjRgYPL1o7tp305ceH4wPF9PKyBa21d8CuAx7Sh8KxTS4IfhmluCsz8Xla1IdNKfmA+/PHDVQIuY2hsh1W83AKisAJxSGehnfYQirU9GEhB2uis7l5+XZnVqSaMjhvp4h1/xLaJLBqMON0/glmfI/U3CKTQgaD0oZd4PvI
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(346002)(136003)(366004)(39840400004)(396003)(230922051799003)(64100799003)(451199024)(186009)(1800799009)(8676002)(76116006)(8936002)(26005)(4326008)(2906002)(110136005)(44832011)(66946007)(41300700001)(66476007)(478600001)(316002)(66556008)(64756008)(66446008)(966005)(5660300002)(6506007)(71200400001)(6486002)(107886003)(6512007)(2616005)(86362001)(38100700002)(122000001)(36756003)(83380400001)(38070700005)(460985005);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?a3pVbFd4aUx1akI0R3NsQ0M0ajJvLy8rMER4OUJMWDNxbTc4cFpVTkxoaUg4?=
- =?utf-8?B?VlJudnZhSEVZMnRLL2wySlEwQ1ZKdGlXdkJSVnBaSmRKV0xIVWFxajZTODBL?=
- =?utf-8?B?d3lTN0xSbURsNVZla0hXRy9lZTIwUi9iMHV2UVZRanBRbFFWM2JPdnJzM3lz?=
- =?utf-8?B?dDRNc2Q5RUpKQ1JuSGh5aGs1VzV2OTRiUmtMaGkzM2tqOHRhYndqazRiai84?=
- =?utf-8?B?QjA4S2IxNXN2NFZVOFZ3bWRPQXhETXB1MTE0Z291MFFYbEdBemw4T2NxWlRT?=
- =?utf-8?B?ZjlUZmw1M0JwK3YyQ3FPK1dHWGt0OXZ4YTlRb1pwWjl0VkxNSGhOdHkyaWlI?=
- =?utf-8?B?aGNBOFA5TTQrOGthby9BVG9seXJFSktDNlFtcGFVZ09yemQ3ejhVQTNHSExM?=
- =?utf-8?B?dndyampGT2pNRXV2YSs5cW9LN09oNUlQbFd1eDErMVZ3M1c0ZnY5eUxYMDhK?=
- =?utf-8?B?akV1d082NzhaUVhLZklROE9FRStTVzgybHZsV0Q4T09CMGp0SmphekxNcXJy?=
- =?utf-8?B?SG1ybFFSeWZvWmRHSmhubW1hNFpoR21nVTJmeFJma0JVYmZxMSs1cnpWWGFw?=
- =?utf-8?B?NHo3YysyWlJNWGFqT1I0VlNyRS90OFNCbkNmTlJRckxNRVN4ZHVuV2NMUlI1?=
- =?utf-8?B?S09IczJaU2lWdm5SNjR0NCtDVk50T3ZYc09FMDRpbkJXZEphY1FWVmc4V2py?=
- =?utf-8?B?THNlVTFuMlo5TEQwZnU2Y1M1dVB4RDRTb1lUY0N1YTVGUmk0TmsvREZIenJq?=
- =?utf-8?B?cUQwTDEwYjROWEpMTnh3Yy95NmNwbkxTSUFaTlJyY0xGSkQ0T3dmMHgwU2tI?=
- =?utf-8?B?RGoxbDAvQXh4VG1CeHVuY1Z4QnRLRHp2M3V1eTRWQzN2T3YxQjhudTZ5WHgr?=
- =?utf-8?B?MmFKV1NxUDJBWCtLOTQwTlBwbzRGbVZlNGttOHV5UzQyc2VHV3BySTVMaVM5?=
- =?utf-8?B?MWtIT3haSm95MDZrMDRZVUtETVk3Qm1LcnI1cmlqSTU2YUphUG81VHZMc1l2?=
- =?utf-8?B?MFVsclFPUkFSOHZhSTUyY05yVDJmL2ZieTE1ejhzWm9sdXR6Ym9rbDllTmc5?=
- =?utf-8?B?L2JyZHJma29CdnVRc25Sc3FJYlBQUzNUT3FYM1NmMWdBa01FZm1mZnY0YjE0?=
- =?utf-8?B?SDlyaVVROXpRbGlUMVBLTVA1NHM1L0xqcGVTWTVmRlZyYUxCdzY3VHRESFBn?=
- =?utf-8?B?Z25UVld4ei9xMExDYzFGZERaOFJadERDcktGcjh0NTl0NHVrV05SQ2FZL2hB?=
- =?utf-8?B?N2xqeldwcmF3azk3bjIxdGxQMDI5ZXBnc1RGd2RoN2VXMTNuRXlWWmdIVHBG?=
- =?utf-8?B?cFA2TzVxUmx4TTZKOEY3TXc5VnFsTUxmTjdrbkFYUy8wVVcxZnB1VFZsTWRW?=
- =?utf-8?B?dlgrM0dXeGFzYnhKWDRRQTZSWE5EdDhNUjdqRFM2Nll6VDVKd2ZuMnFTOXdI?=
- =?utf-8?B?TWxISFdiOE8zUVNrcGE3bXY2amRlTlcwa0YwQ2g1YXJHZ0JRSjlBVWhxVzlL?=
- =?utf-8?B?cFAzWUE1N1BFK0FsTnhzVGhPRjhPcWY1V09LNTEvQkQwdE9NMHZQMWNOcWJu?=
- =?utf-8?B?KzdoNTFqd2VvWllGcHZ4YUNucThrVGpFTkFicVNXeUdJd1BpK0kwUjI3Z1ZV?=
- =?utf-8?B?V09iZERuRllscTF1ZkpmSWlhckNKQTZpbkZrYXlPcGgzRStQNi8rOVpHQ0Zj?=
- =?utf-8?B?ejhvQjlnMk5BTHpUajFsOTloa1poOVh6ZTVzYnR4L3o5TU5iclhwYVlvM09H?=
- =?utf-8?B?bzUwQmFQelplYnVsbDVoTXJ1bUl2aTQvYUJ2NkpQMzRCWXkxWmJMV0MvZk5V?=
- =?utf-8?B?V1Zna3EwcTA5ZG11VHZydlY1Mzh6YzBsZzZxeVhkODVOVjZscDEvL0Z6bGFw?=
- =?utf-8?B?USszTWhMOUFmby9Yb1dMV2U4SG5Ud2Y3ZEtxcytVUkJhT0ozcy9FRHYwUnpk?=
- =?utf-8?B?Z0R4TlFOMkgrWlFyU1pRdDR2ZjJua0d1NHVuTGRIUWpNT1FNKzJSTUtzaU0w?=
- =?utf-8?B?OWxCWGlCVDc4SWhMcWtOWUZtR0JzaVZmZG53T0x0ZHRCRE1jSHZwT3l4MDdo?=
- =?utf-8?B?OUJiaVZCOGUyL0VSVHpSaERLYWJuWWNuTEdGSUUzd1F1aHY1WWRzTWJONjE3?=
- =?utf-8?B?ci9oMWo0OHBTaTlnaGZTb3FHR3BlODZXUFpDbklQTXRnbHdqTjIvRnZ2VU5K?=
- =?utf-8?Q?TFMl1obwnbLtfbnKmUO5Lro=3D?=
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5334d78c5f6so15994756a12.2
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 08:20:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1695914416; x=1696519216; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NhGCCrTPz3qD815DrUTz3QFvoilWcLj84jeEgBAbn4g=;
+ b=gM02yUO3cKsTx8jhTA9XCZNYmp4aUHoHZlzsv+furkUkCXwxY9DGBZOmndyC6sINlU
+ og/CxysYO1HBLAUu8Z6I6/eKNCs24qXcqcSs5rS4JSm2T+4FRyrIMjF9dr+wH79vmsgU
+ pm3yi0qzb6vBh5A4K6kFfjLGzpZ4IudfF+ppA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695914416; x=1696519216;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NhGCCrTPz3qD815DrUTz3QFvoilWcLj84jeEgBAbn4g=;
+ b=vVV1mnLf4FV7HiZnAwafY1hu4KO/smkVRQwdMmV/rYMZuG8lWxIoUc8X7OIvIm10fs
+ Q9IMf9zeSpCgYvUOrlevE9+vMMvrBBo/QJfgR1jOlTNbjUYMX29rczA8O4DO1M3KuSQY
+ vl4OBmgIAGaaf9pczXDyMXYTzyjNiiY1pzlJMcFrem95CrUf5+hU4rAACXlTm1R77Y1F
+ +y8FnBDTWGV0EvBE7pFznZ/nisP9B6QbMFg52cHhTCX03jDgORGvHWnscFuCyfUHU7QF
+ qiNyRb/uuQc2PmGWdDwi6gkFwumg3N6ISpcSZlywByF+udymuBGH+HFlWm0l1vyvB4vN
+ rArw==
+X-Gm-Message-State: AOJu0YwYRjBCD4VWomlP56Ocg09eJcxHRecmcVQbLoZt9B6IA5o1n+oY
+ Hmkberivydn7Ck8rdTUG+4eZVEx2WZFSnjeZOACbCQ==
+X-Google-Smtp-Source: AGHT+IGCrTzWYKPGz8+625kDs0eQi51Ow82elgipH2Qu5W+6QmLi6g4eOr361Yni2q+KJAEShzSViau1oDvFTplMmIU=
+X-Received: by 2002:aa7:c1ca:0:b0:533:926:da9d with SMTP id
+ d10-20020aa7c1ca000000b005330926da9dmr1505968edp.18.1695914416372; Thu, 28
+ Sep 2023 08:20:16 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 81151650-7b72-403b-a1e7-08dbc032ef5f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Sep 2023 14:55:19.9516 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: h/xXxGM1thLORuhtmOpfAX6tghSeI48YOllXM5y+G5CrXi5rO5exmTb9pgtm8ztVg7LmULgiAjlkLC2oOvD13nhJcvdm4G2X45TYfb1CrO4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0012
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-ID: <0BF00B4469C3AD4B855B5160CEF804B9@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+References: <20230921124459.1.I91ddcfacf9b234af5cc3eabea4b62edb31153317@changeid>
+ <CAL_Jsq+WuYDU+yY98opTHr1PT-J9mFYJQBjVMnk+FSWLDUO33w@mail.gmail.com>
+ <CAPnjgZ1pfxaMG1n5yOBhiOhsNrRjck1K92U7Ga=+VTY_jjjrVg@mail.gmail.com>
+ <20230922174649.GA3320366-robh@kernel.org>
+ <CAPnjgZ3ojfAv=BHqOhM=-NnYqCm81Ny=PsGKiNphKTmw++fk9w@mail.gmail.com>
+ <CAL_JsqJqvyP=c93DHDO8A5RXv7Lz_Z7eEHSbJQ=JCo+qPVhSfg@mail.gmail.com>
+ <CAPnjgZ3BnD9aX3cNNPiGRKTOj+YeurHCLv6K0TRFhAtY21Qufw@mail.gmail.com>
+ <20230925092122.0b615f25@xps-13>
+ <CAPnjgZ0Z5J_33HuQF-5XgDFmZim0nHHzvZJOOZobWw_cOJd=9g@mail.gmail.com>
+ <20230925164736.5efbf4c0@xps-13>
+ <CAPnjgZ3YCQHJ-eXuX8rYx2Qb6QEL+XviFmXYTON6M-sGPWSBBg@mail.gmail.com>
+ <20230925172447.43dcef88@xps-13>
+ <CAPnjgZ20c9FsYVjSrQ9qbFy9Y67BqDP2zxMyATx===PFhO69Ew@mail.gmail.com>
+ <CAL_JsqJfjHqtTB2qfLmNxmQtn1rZewNyNe+Knu_Z4UCdPoPhSQ@mail.gmail.com>
+ <CAPnjgZ1npHPpwPmw2f4=E3U5=RH0m4R+W_MZ7+oXdmDF=EeUjg@mail.gmail.com>
+ <20230926094815.5802e184@xps-13>
+ <CAL_JsqL_8bhHkHOFL8a8=g1dYL4OY8hGuNDyc0Jz22rEuJzXtQ@mail.gmail.com>
+ <CAPnjgZ3TJLaRzv_cXyLdpRBtc2-FBYQ=gk-_MhEDH47HvO71FQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3TJLaRzv_cXyLdpRBtc2-FBYQ=gk-_MhEDH47HvO71FQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 28 Sep 2023 09:20:05 -0600
+Message-ID: <CAPnjgZ2eUcgevpS7Ak5p=7bhm0aHW3taLO8Fq_EcpDDQidJFVA@mail.gmail.com>
+Subject: Re: [PATCH] dt-bindings: mtd: Add a schema for binman
+To: Rob Herring <robh@kernel.org>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>, devicetree@vger.kernel.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, linux-mtd@lists.infradead.org, 
+ Tom Rini <trini@konsulko.com>, Conor Dooley <conor+dt@kernel.org>,
+ Dhruva Gole <d-gole@ti.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,151 +106,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gVGh1LCAyMDIzLTA5LTI4IGF0IDE2OjM5ICswMjAwLCBBbmRyZWpzIENhaW5pa292cyB3cm90
-ZToNCj4gRnJvbTogQW5kcmVqcyBDYWluaWtvdnMgPGFuZHJlanMuY2Fpbmlrb3ZzQHRvcmFkZXgu
-Y29tPg0KPiANCj4gVXBkYXRlIGxwZGRyNCBjb25maWd1cmF0aW9uIGFuZCB0cmFpbmluZyB1c2lu
-ZyB1cGRhdGVkIHNwcmVhZHNoZWV0IGFuZA0KPiB0b29scyBmcm9tIE5YUCB1c2luZyBkYXRhIGZy
-b20gcHJldmlvdXMgc3ByZWFkc2hlZXQgYW5kIHZlcmlmaWVkDQo+IHRvd2FyZCBkYXRhc2hlZXQ6
-DQo+IA0KPiAtIE1YOE1fTWluaV9MUEREUjRfUlBBX3YyMi54bHN4DQo+IC0gbXNjYWxlX2Rkcl90
-b29sX3YzLjMxX3NldHVwLmV4ZQ0KPiANCj4gVGhlIG1vc3QgcmVsZXZhbnQgdXBkYXRlIGlzIHJl
-bGF0ZWQgdG8gZXJyYXRhIEVSUjA1MDgwNToNCj4gIkRSQU06IENvbnRyb2xsZXIgYXV0b21hdGlj
-IGRlcmF0aW5nIGxvZ2ljIG1heSBub3Qgd29yayB3aGVuDQo+IHRoZSBMUEREUjQgbWVtb3J5IHRl
-bXBlcmF0dXJlIGlzIGFib3ZlIDg1IMKwQyBhdCBpbml0aWFsaXphdGlvbiINCj4gDQo+IE90aGVy
-IHJlbGV2YW50IGZpeGVzOg0KPiAtIERSQU1UTUc3IHJlZ2lzdGVyOiBjb3JyZWN0ZWQgY2FsY3Vs
-YXRpb24gb2YgVF9DS1BEWCBwYXJhbWV0ZXINCj4gwqAgKGVxdWFsIHRvIHRDS0NLRUggZm9yIExQ
-RERSNCkNCj4gLSBSQU5LQ1RMIHJlZ2lzdGVyOiBjb3JyZWN0ZWQgY2FsY3VsYXRpb25zIGZvciBP
-RFRMb24gYW5kIE9EVExvZmYNCj4gwqAgdG8gZm9sbG93IHRoZSBKRURFQyBzcGVjaWZpY2F0aW9u
-DQo+IC0gQUREUk1BUDcgcmVnaXN0ZXI6IGFkZGVkIHN1cHBvcnQgZm9yIDE3LXJvdyBkZXZpY2Vz
-DQo+IA0KPiBBcyBwZXIgZXJyYXRhIEVSUjA1MDgwNToNCj4gDQo+IEFuIGlzc3VlIGV4aXN0cyB3
-aXRoIHRoZSBhdXRvbWF0aWMgZGVyYXRpbmcgbG9naWMgb2YgdGhlIEREUg0KPiBjb250cm9sbGVy
-IHRoYXQgb25seSBzYW1wbGVzIHRoZSBMUEREUjQgTVI0IHJlZ2lzdGVyIHdoZW4gdGhlDQo+IFRl
-bXBlcmF0dXJlIFVwZGF0ZSBGbGFnIChUVUYpIGZpZWxkIChNUjRbN10gKSBpcyAx4oCZYjEuIElm
-IHRoZQ0KPiBMUEREUjQgbWVtb3J5IGlzIGluaXRpYWxpemVkIGFuZCBzdGFydHMgb3BlcmF0aW9u
-IGFib3ZlIDg1IMKwQw0KPiAoTVI0WzI6MF0gPiAz4oCZYjAxMSksIHRoZSBNUjQgVGVtcGVyYXR1
-cmUgVXBkYXRlIEZsYWcgKFRVRikgd2lsbA0KPiBub3QgYmUgc2V0LiBUaGUgRERSIENvbnRyb2xs
-ZXIgd2lsbCB0aGVyZWZvcmUgbm90IGF1dG9tYXRpY2FsbHkNCj4gYWRqdXN0IHRoZSBtZW1vcnkg
-cmVmcmVzaCByYXRlIG9yIGRlLXJhdGUgbWVtb3J5IHRpbWluZ3MgYmFzZWQNCj4gb24gdGhlIExQ
-RERSNCBtZW1vcnkgdGVtcGVyYXR1cmUuIFRoaXMgbWF5IGNhdXNlIHRoZSBjb250cm9sbGVyDQo+
-IGluY29ycmVjdGx5IHNldHRpbmcgdGhlIHJlZnJlc2ggcGVyaW9kLCBwb3RlbnRpYWxseSBjYXVz
-ZSB0aGUNCj4gTFBERFI0IG1lbW9yeSBsb3NpbmcgZGF0YSBjb250ZW50cyBhbmQgbGVhZCB0byBw
-b3NzaWJsZSBkYXRhDQo+IGludGVncml0eSBpc3N1ZXMgYWJvdmUgODUgwrBDLg0KPiANCj4gRXJy
-YXRhIHByb3ZpZGVzIHRocmVlIHBvc3NpYmxlIHdvcmthcm91bmQgb3B0aW9ucywgd2hpbGUgb3B0
-aW9uIDINCj4gaXMgdGhlIG1vc3QgcmVhc29uYWJsZToNCj4gDQo+IERpc2FibGUgdGhlIGF1dG9t
-YXRpYyBkZXJhdGluZyBsb2dpYyBvZiB0aGUgRERSIGNvbnRyb2xsZXIgYW5kDQo+IGFwcGx5IGZp
-eGVkIHgyIHJlZnJlc2ggcmF0ZSAoMC41eCByZWZyZXNoKS4gVGhpcyBvcHRpb24gaXMNCj4gc3Vp
-dGFibGUgZm9yIGRlc2lnbnMgdGhhdCBhcmUgZXhwZWN0ZWQgdG8gYm9vdCBhdCBvciBhYm92ZSA4
-NSDCsEMNCj4gYW5kIG1lbW9yeeKAmXMgTVI0WzI6MF0gKFJlZnJlc2ggUmF0ZSkgRE9FUyBOT1Qg
-cmVwb3J0IHRoZSBmb2xsb3dpbmcNCj4gY29uZGl0aW9uczoNCj4gM2IxMDE6IDAuMjV4IHJlZnJl
-c2gsIG5vIGRlLXJhdGluZw0KPiAzYjExMDogMC4yNXggcmVmcmVzaCwgd2l0aCBkZS1yYXRpbmcN
-Cj4gM2IxMTE6IFNEUkFNIEhpZ2ggdGVtcGVyYXR1cmUgb3BlcmF0aW5nIGxpbWl0IGV4Y2VlZGVk
-DQo+IA0KPiBbMV06IGh0dHBzOi8vd3d3Lm54cC5jb20vZG9jcy9lbi9lcnJhdGEvSU1YOE1NXzBO
-ODdXLnBkZg0KPiANCj4gU2lnbmVkLW9mZi1ieTogQW5kcmVqcyBDYWluaWtvdnMgPGFuZHJlanMu
-Y2Fpbmlrb3ZzQHRvcmFkZXguY29tPg0KDQpBY2tlZC1ieTogTWFyY2VsIFppc3dpbGVyIDxtYXJj
-ZWwuemlzd2lsZXJAdG9yYWRleC5jb20+DQoNCj4gLS0tDQo+IMKgYm9hcmQvdG9yYWRleC92ZXJk
-aW4taW14OG1tL2xwZGRyNF90aW1pbmcuYyB8IDUxICsrKysrKysrKystLS0tLS0tLS0tLQ0KPiDC
-oDEgZmlsZSBjaGFuZ2VkLCAyNCBpbnNlcnRpb25zKCspLCAyNyBkZWxldGlvbnMoLSkNCj4gDQo+
-IGRpZmYgLS1naXQgYS9ib2FyZC90b3JhZGV4L3ZlcmRpbi1pbXg4bW0vbHBkZHI0X3RpbWluZy5j
-IGIvYm9hcmQvdG9yYWRleC92ZXJkaW4taW14OG1tL2xwZGRyNF90aW1pbmcuYw0KPiBpbmRleCBk
-MTE0YWJmOWQ2Ny4uNGRmZWM2NzliMTEgMTAwNjQ0DQo+IC0tLSBhL2JvYXJkL3RvcmFkZXgvdmVy
-ZGluLWlteDhtbS9scGRkcjRfdGltaW5nLmMNCj4gKysrIGIvYm9hcmQvdG9yYWRleC92ZXJkaW4t
-aW14OG1tL2xwZGRyNF90aW1pbmcuYw0KPiBAQCAtMSwxMiArMSwxMSBAQA0KPiDCoC8vIFNQRFgt
-TGljZW5zZS1JZGVudGlmaWVyOsKgwqDCoMKgIEdQTC0yLjArDQo+IMKgLyoNCj4gLSAqIENvcHly
-aWdodCAyMDIwIFRvcmFkZXgNCj4gKyAqIENvcHlyaWdodCAyMDIzIFRvcmFkZXgNCj4gwqAgKg0K
-PiDCoCAqIEdlbmVyYXRlZCBjb2RlIGZyb20gTVg4TV9ERFJfdG9vbA0KPiAtICogQWxpZ24gd2l0
-aCB1Ym9vdC1pbXhfdjIwMTguMDNfNC4xNC43OF8xLjAuMF9nYQ0KPiDCoCAqDQo+IC0gKiBERFIg
-Y2FsaWJyYXRpb24gY3JlYXRlZCB3aXRoIG1zY2FsZV9kZHJfdG9vbF92MjEwX3NldHVwLmV4ZSB1
-c2luZw0KPiAtICogTVg4TV9NaW5pX0xQRERSNF9SUEFfdjE0IFZlcmRpbiBpTVg4TU0gVjEuMC54
-bHN4IGFzIG9mIDEuIE5vdi4gMjAxOS4NCj4gKyAqIEREUiBjYWxpYnJhdGlvbiBjcmVhdGVkIHdp
-dGggbXNjYWxlX2Rkcl90b29sX3YzLjMxX3NldHVwLmV4ZSB1c2luZw0KPiArICogTVg4TV9NaW5p
-X0xQRERSNF9SUEFfdjIyIFZlcmRpbiBpTVg4TU0gVjEuMC54bHN4IGFzIG9mIDcuIEF1Zy4gMjAy
-My4NCj4gwqAgKi8NCj4gwqANCj4gwqAjaW5jbHVkZSA8bGludXgva2VybmVsLmg+DQo+IEBAIC0x
-NywyMiArMTYsMjIgQEAgc3RydWN0IGRyYW1fY2ZnX3BhcmFtIGRkcl9kZHJjX2NmZ1tdID0gew0K
-PiDCoAl7MHgzZDQwMDMwNCwgMHgxfSwNCj4gwqAJezB4M2Q0MDAwMzAsIDB4MX0sDQo+IMKgCXsw
-eDNkNDAwMDAwLCAweGExMDgwMDIwfSwNCj4gLQl7MHgzZDQwMDAyMCwgMHgyMDN9LA0KPiArCXsw
-eDNkNDAwMDIwLCAweDIwMn0sDQo+IMKgCXsweDNkNDAwMDI0LCAweDNhOTgwfSwNCj4gLQl7MHgz
-ZDQwMDA2NCwgMHg1YjAwZDJ9LA0KPiArCXsweDNkNDAwMDY0LCAweDJkMDBkMn0sDQo+IMKgCXsw
-eDNkNDAwMGQwLCAweGMwMDMwNWJhfSwNCj4gwqAJezB4M2Q0MDAwZDQsIDB4OTQwMDAwfSwNCj4g
-wqAJezB4M2Q0MDAwZGMsIDB4ZDQwMDJkfSwNCj4gwqAJezB4M2Q0MDAwZTAsIDB4MzEwMDAwfSwN
-Cj4gwqAJezB4M2Q0MDAwZTgsIDB4NjYwMDRkfSwNCj4gwqAJezB4M2Q0MDAwZWMsIDB4MTYwMDRk
-fSwNCj4gLQl7MHgzZDQwMDEwMCwgMHgxOTFlMTkyMH0sDQo+ICsJezB4M2Q0MDAxMDAsIDB4MTkx
-ZTBjMjB9LA0KPiDCoAl7MHgzZDQwMDEwNCwgMHg2MDYzMH0sDQo+IMKgCXsweDNkNDAwMTBjLCAw
-eGIwYjAwMH0sDQo+IMKgCXsweDNkNDAwMTEwLCAweGUwNDA4MGV9LA0KPiDCoAl7MHgzZDQwMDEx
-NCwgMHgyMDQwYzBjfSwNCj4gwqAJezB4M2Q0MDAxMTgsIDB4MTAxMDAwN30sDQo+IC0JezB4M2Q0
-MDAxMWMsIDB4NDAxfSwNCj4gKwl7MHgzZDQwMDExYywgMHg0MDJ9LA0KPiDCoAl7MHgzZDQwMDEz
-MCwgMHgyMDYwMH0sDQo+IMKgCXsweDNkNDAwMTM0LCAweGMxMDAwMDJ9LA0KPiDCoAl7MHgzZDQw
-MDEzOCwgMHhkOH0sDQo+IEBAIC00OSw3ICs0OCw3IEBAIHN0cnVjdCBkcmFtX2NmZ19wYXJhbSBk
-ZHJfZGRyY19jZmdbXSA9IHsNCj4gwqAJezB4M2Q0MDAxYjAsIDB4MTF9LA0KPiDCoAl7MHgzZDQw
-MDFjMCwgMHgxfSwNCj4gwqAJezB4M2Q0MDAxYzQsIDB4MX0sDQo+IC0JezB4M2Q0MDAwZjQsIDB4
-Yzk5fSwNCj4gKwl7MHgzZDQwMDBmNCwgMHg2OTl9LA0KPiDCoAl7MHgzZDQwMDEwOCwgMHg3MGUx
-NjE3fSwNCj4gwqAJezB4M2Q0MDAyMDAsIDB4MWZ9LA0KPiDCoAl7MHgzZDQwMDIwYywgMHgwfSwN
-Cj4gQEAgLTU3LDYgKzU2LDcgQEAgc3RydWN0IGRyYW1fY2ZnX3BhcmFtIGRkcl9kZHJjX2NmZ1td
-ID0gew0KPiDCoAl7MHgzZDQwMDIwNCwgMHg4MDgwOH0sDQo+IMKgCXsweDNkNDAwMjE0LCAweDcw
-NzA3MDd9LA0KPiDCoAl7MHgzZDQwMDIxOCwgMHg3MDcwNzA3fSwNCj4gKwl7MHgzZDQwMDIxYywg
-MHhmMGZ9LA0KPiDCoAl7MHgzZDQwMDI1MCwgMHgyOTAwMTcwMX0sDQo+IMKgCXsweDNkNDAwMjU0
-LCAweDJjfSwNCj4gwqAJezB4M2Q0MDAyNWMsIDB4NDAwMDAzMH0sDQo+IEBAIC02OCwyMiArNjgs
-MjIgQEAgc3RydWN0IGRyYW1fY2ZnX3BhcmFtIGRkcl9kZHJjX2NmZ1tdID0gew0KPiDCoAl7MHgz
-ZDQwMDQ5OCwgMHg2MjAwOTZ9LA0KPiDCoAl7MHgzZDQwMDQ5YywgMHgxMTAwZTA3fSwNCj4gwqAJ
-ezB4M2Q0MDA0YTAsIDB4YzgwMTJjfSwNCj4gLQl7MHgzZDQwMjAyMCwgMHgxfSwNCj4gKwl7MHgz
-ZDQwMjAyMCwgMHgwfSwNCj4gwqAJezB4M2Q0MDIwMjQsIDB4N2QwMH0sDQo+IMKgCXsweDNkNDAy
-MDUwLCAweDIwZDA0MH0sDQo+IC0JezB4M2Q0MDIwNjQsIDB4YzAwMWN9LA0KPiArCXsweDNkNDAy
-MDY0LCAweDYwMDFjfSwNCj4gwqAJezB4M2Q0MDIwZGMsIDB4ODQwMDAwfSwNCj4gwqAJezB4M2Q0
-MDIwZTAsIDB4MzEwMDAwfSwNCj4gwqAJezB4M2Q0MDIwZTgsIDB4NjYwMDRkfSwNCj4gwqAJezB4
-M2Q0MDIwZWMsIDB4MTYwMDRkfSwNCj4gLQl7MHgzZDQwMjEwMCwgMHhhMDQwMzA1fSwNCj4gKwl7
-MHgzZDQwMjEwMCwgMHhhMDQwMTA1fSwNCj4gwqAJezB4M2Q0MDIxMDQsIDB4MzA0MDd9LA0KPiDC
-oAl7MHgzZDQwMjEwOCwgMHgyMDMwNjBifSwNCj4gwqAJezB4M2Q0MDIxMGMsIDB4NTA1MDAwfSwN
-Cj4gwqAJezB4M2Q0MDIxMTAsIDB4MjA0MDIwMn0sDQo+IMKgCXsweDNkNDAyMTE0LCAweDIwMzAy
-MDJ9LA0KPiDCoAl7MHgzZDQwMjExOCwgMHgxMDEwMDA0fSwNCj4gLQl7MHgzZDQwMjExYywgMHgz
-MDF9LA0KPiArCXsweDNkNDAyMTFjLCAweDMwMn0sDQo+IMKgCXsweDNkNDAyMTMwLCAweDIwMzAw
-fSwNCj4gwqAJezB4M2Q0MDIxMzQsIDB4YTEwMDAwMn0sDQo+IMKgCXsweDNkNDAyMTM4LCAweDFk
-fSwNCj4gQEAgLTkyLDggKzkyLDggQEAgc3RydWN0IGRyYW1fY2ZnX3BhcmFtIGRkcl9kZHJjX2Nm
-Z1tdID0gew0KPiDCoAl7MHgzZDQwMjE5MCwgMHgzODE4MjAwfSwNCj4gwqAJezB4M2Q0MDIxOTQs
-IDB4ODAzMDN9LA0KPiDCoAl7MHgzZDQwMjFiNCwgMHgxMDB9LA0KPiAtCXsweDNkNDAyMGY0LCAw
-eGM5OX0sDQo+IC0JezB4M2Q0MDMwMjAsIDB4MX0sDQo+ICsJezB4M2Q0MDIwZjQsIDB4NTk5fSwN
-Cj4gKwl7MHgzZDQwMzAyMCwgMHgwfSwNCj4gwqAJezB4M2Q0MDMwMjQsIDB4MWY0MH0sDQo+IMKg
-CXsweDNkNDAzMDUwLCAweDIwZDA0MH0sDQo+IMKgCXsweDNkNDAzMDY0LCAweDMwMDA3fSwNCj4g
-QEAgLTEwOCw3ICsxMDgsNyBAQCBzdHJ1Y3QgZHJhbV9jZmdfcGFyYW0gZGRyX2RkcmNfY2ZnW10g
-PSB7DQo+IMKgCXsweDNkNDAzMTEwLCAweDIwNDAyMDJ9LA0KPiDCoAl7MHgzZDQwMzExNCwgMHgy
-MDMwMjAyfSwNCj4gwqAJezB4M2Q0MDMxMTgsIDB4MTAxMDAwNH0sDQo+IC0JezB4M2Q0MDMxMWMs
-IDB4MzAxfSwNCj4gKwl7MHgzZDQwMzExYywgMHgzMDJ9LA0KPiDCoAl7MHgzZDQwMzEzMCwgMHgy
-MDMwMH0sDQo+IMKgCXsweDNkNDAzMTM0LCAweGExMDAwMDJ9LA0KPiDCoAl7MHgzZDQwMzEzOCwg
-MHg4fSwNCj4gQEAgLTExNyw3ICsxMTcsNyBAQCBzdHJ1Y3QgZHJhbV9jZmdfcGFyYW0gZGRyX2Rk
-cmNfY2ZnW10gPSB7DQo+IMKgCXsweDNkNDAzMTkwLCAweDM4MTgyMDB9LA0KPiDCoAl7MHgzZDQw
-MzE5NCwgMHg4MDMwM30sDQo+IMKgCXsweDNkNDAzMWI0LCAweDEwMH0sDQo+IC0JezB4M2Q0MDMw
-ZjQsIDB4Yzk5fSwNCj4gKwl7MHgzZDQwMzBmNCwgMHg1OTl9LA0KPiDCoAl7MHgzZDQwMDAyOCwg
-MHgwfSwNCj4gwqB9Ow0KPiDCoA0KPiBAQCAtMjA1LDggKzIwNSw4IEBAIHN0cnVjdCBkcmFtX2Nm
-Z19wYXJhbSBkZHJfZGRycGh5X2NmZ1tdID0gew0KPiDCoAl7MHgyMjAwMjQsIDB4MWFifSwNCj4g
-wqAJezB4MjAwM2EsIDB4MH0sDQo+IMKgCXsweDIwMDU2LCAweDN9LA0KPiAtCXsweDEyMDA1Niwg
-MHhhfSwNCj4gLQl7MHgyMjAwNTYsIDB4YX0sDQo+ICsJezB4MTIwMDU2LCAweDN9LA0KPiArCXsw
-eDIyMDA1NiwgMHgzfSwNCj4gwqAJezB4MTAwNGQsIDB4ZTAwfSwNCj4gwqAJezB4MTAxNGQsIDB4
-ZTAwfSwNCj4gwqAJezB4MTEwNGQsIDB4ZTAwfSwNCj4gQEAgLTEwNTgsNyArMTA1OCw2IEBAIHN0
-cnVjdCBkcmFtX2NmZ19wYXJhbSBkZHJfZnNwMF9jZmdbXSA9IHsNCj4gwqAJezB4NTQwMDgsIDB4
-MTMxZn0sDQo+IMKgCXsweDU0MDA5LCAweGM4fSwNCj4gwqAJezB4NTQwMGIsIDB4Mn0sDQo+IC0J
-ezB4NTQwMGQsIDB4MTAwfSwNCj4gwqAJezB4NTQwMTIsIDB4MTEwfSwNCj4gwqAJezB4NTQwMTks
-IDB4MmRkNH0sDQo+IMKgCXsweDU0MDFhLCAweDMxfSwNCj4gQEAgLTEwOTgsNyArMTA5Nyw2IEBA
-IHN0cnVjdCBkcmFtX2NmZ19wYXJhbSBkZHJfZnNwMV9jZmdbXSA9IHsNCj4gwqAJezB4NTQwMDgs
-IDB4MTIxZn0sDQo+IMKgCXsweDU0MDA5LCAweGM4fSwNCj4gwqAJezB4NTQwMGIsIDB4Mn0sDQo+
-IC0JezB4NTQwMGQsIDB4MTAwfSwNCj4gwqAJezB4NTQwMTIsIDB4MTEwfSwNCj4gwqAJezB4NTQw
-MTksIDB4ODR9LA0KPiDCoAl7MHg1NDAxYSwgMHgzMX0sDQo+IEBAIC0xMTM4LDcgKzExMzYsNiBA
-QCBzdHJ1Y3QgZHJhbV9jZmdfcGFyYW0gZGRyX2ZzcDJfY2ZnW10gPSB7DQo+IMKgCXsweDU0MDA4
-LCAweDEyMWZ9LA0KPiDCoAl7MHg1NDAwOSwgMHhjOH0sDQo+IMKgCXsweDU0MDBiLCAweDJ9LA0K
-PiAtCXsweDU0MDBkLCAweDEwMH0sDQo+IMKgCXsweDU0MDEyLCAweDExMH0sDQo+IMKgCXsweDU0
-MDE5LCAweDg0fSwNCj4gwqAJezB4NTQwMWEsIDB4MzF9LA0KPiBAQCAtMTIwNCw3ICsxMjAxLDcg
-QEAgc3RydWN0IGRyYW1fY2ZnX3BhcmFtIGRkcl9mc3AwXzJkX2NmZ1tdID0gew0KPiDCoAl7MHg1
-NDAzYiwgMHg0ZH0sDQo+IMKgCXsweDU0MDNjLCAweDRkfSwNCj4gwqAJezB4NTQwM2QsIDB4MTYw
-MH0sDQo+IC0JeyAweGQwMDAwLCAweDEgfSwNCj4gKwl7MHhkMDAwMCwgMHgxfSwNCj4gwqB9Ow0K
-PiDCoA0KPiDCoC8qIERSQU0gUEhZIGluaXQgZW5naW5lIGltYWdlICovDQo+IEBAIC0xNjk3LDE1
-ICsxNjk0LDE1IEBAIHN0cnVjdCBkcmFtX2NmZ19wYXJhbSBkZHJfcGh5X3BpZVtdID0gew0KPiDC
-oAl7MHg0MDBkNiwgMHgyMGF9LA0KPiDCoAl7MHg0MDBkNywgMHgyMGJ9LA0KPiDCoAl7MHgyMDAz
-YSwgMHgyfSwNCj4gLQl7MHgyMDAwYiwgMHg1ZH0sDQo+ICsJezB4MjAwMGIsIDB4MzRifSwNCj4g
-wqAJezB4MjAwMGMsIDB4YmJ9LA0KPiDCoAl7MHgyMDAwZCwgMHg3NTN9LA0KPiDCoAl7MHgyMDAw
-ZSwgMHgyY30sDQo+IC0JezB4MTIwMDBiLCAweGN9LA0KPiArCXsweDEyMDAwYiwgMHg3MH0sDQo+
-IMKgCXsweDEyMDAwYywgMHgxOX0sDQo+IMKgCXsweDEyMDAwZCwgMHhmYX0sDQo+IMKgCXsweDEy
-MDAwZSwgMHgxMH0sDQo+IC0JezB4MjIwMDBiLCAweDN9LA0KPiArCXsweDIyMDAwYiwgMHgxY30s
-DQo+IMKgCXsweDIyMDAwYywgMHg2fSwNCj4gwqAJezB4MjIwMDBkLCAweDNlfSwNCj4gwqAJezB4
-MjIwMDBlLCAweDEwfSwNCj4gQEAgLTE4NDYsNSArMTg0Myw1IEBAIHN0cnVjdCBkcmFtX3RpbWlu
-Z19pbmZvIGRyYW1fdGltaW5nID0gew0KPiDCoAkuZGRycGh5X3RyYWluZWRfY3NyX251bSA9IEFS
-UkFZX1NJWkUoZGRyX2RkcnBoeV90cmFpbmVkX2NzciksDQo+IMKgCS5kZHJwaHlfcGllID0gZGRy
-X3BoeV9waWUsDQo+IMKgCS5kZHJwaHlfcGllX251bSA9IEFSUkFZX1NJWkUoZGRyX3BoeV9waWUp
-LA0KPiAtCS5mc3BfdGFibGUgPSB7IDMwMDAsIDQwMCwgMTAwLCB9LA0KPiArCS5mc3BfdGFibGUg
-PSB7MzAwMCwgNDAwLCAxMDAsfSwNCj4gwqB9Ow0K
+Hi again Rob,
 
+On Wed, 27 Sept 2023 at 10:43, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Rob,
+>
+> On Tue, 26 Sept 2023 at 11:29, Rob Herring <robh@kernel.org> wrote:
+> >
+> > On Tue, Sep 26, 2023 at 2:48=E2=80=AFAM Miquel Raynal <miquel.raynal@bo=
+otlin.com> wrote:
+> > >
+> > > Hello,
+> > >
+> > > > > > > > These are firmware bindings, as indicated, but I
+> > > > > > > > took them out of the /firmware node since that is for a dif=
+ferent
+> > > > > > > > purpose. Rob suggested that partitions was a good place. We=
+ have fwupd
+> > > > > > > > using DT to hold the firmware-update information, so I expe=
+ct it will
+> > > > > > > > move to use these bindings too.
+> > > > > > >
+> > > > > > > I would definitely use fixed partitions as that's what you ne=
+ed then:
+> > > > > > > registering where everything starts and ends. If you have "in=
+-band"
+> > > > > > > meta data you might require a compatible, but I don't think y=
+ou
+> > > > > > > do, in this case you should probably carry the content throug=
+h a label
+> > > > > > > (which will become the partition name) and we can discuss add=
+itional
+> > > > > > > properties if needed.
+> > > > > >
+> > > > > > I believe I am going to need a compatible string at the 'partit=
+ions'
+> > > > > > level to indicate that this is the binman scheme. But we can le=
+ave
+> > > > > > that until later.
+> > > > >
+> > > > > Perhaps:
+> > > > >
+> > > > > compatible =3D "binman", "fixed-partitions";
+> > > > >
+> > > > > Though I don't understand why binman couldn't just understand wha=
+t
+> > > > > "fixed-partitions" means rather than "binman".
+> > > >
+> > > > Well so long as we don't add any binman things in here, you are rig=
+ht.
+> > > >
+> > > > But the eventual goal is parity with current Binman functionality,
+> > > > which writes the entire (augmented) description to the DT, allowing
+> > > > tools to rebuild / repack / replace pieces later, maintaining the s=
+ame
+> > > > alignment constraints, etc. I am assuming that properties like 'ali=
+gn
+> > > > =3D <16>' would not fit with fixed-partitions.
+> > >
+> > > I am personally not bothered by this kind of properties. But if we pl=
+an
+> > > on adding too much properties, I will advise to indeed use another na=
+me
+> > > than fixed-partitions (or add the "binman" secondary compatible)
+> > > otherwise it's gonna be hard to support in the code while still
+> > > restraining as much as we can the other partition schema.
+> >
+> > Agreed. It's a trade off. I think we need enough to understand the
+> > problem (not just presented with a solution), agree on the general
+> > solution/direction, and then discuss specific additions.
+> >
+> > > > But if we don't preserve
+> > > > these properties then Binman cannot do repacking reliably. Perhaps =
+for
+> > > > now I could put the augmented DT in its own section somewhere, but =
+I
+> > > > am just not sure if that will work in a real system. E.g. with VBE =
+the
+> > > > goal is to use the DT to figure out how to access the firmware, upd=
+ate
+> > > > it, etc.
+> >
+> > VBE?
+
+Verified Boot for Embedded, an EFI alternative with no callbacks.
+
+> >
+> > > > Is it not possible to have my own node with whatever things Binman
+> > > > needs in it (subject to review of course)? i.e. could we discuss ho=
+w
+> > > > to encode it, but argue less about whether things are needed? I
+> > > > kind-of feel I know what is needed, since I wrote the tool.
+> >
+> > What we don't need is the same information in 2 places for the DTB
+> > used at runtime. If the binman node is removed, do whatever you want.
+> > If you want to keep it at runtime, then it's got to extend what we
+> > already have.
+> >
+> > I don't think anyone is disagreeing about whether specific information
+> > is needed or not.
+> >
+> > > > > > So you are suggesting 'label' for the contents. Rob suggested
+> > > > > > 'compatible' [1], so what should I do?
+> > > > >
+> > > > > "label" is for consumption by humans, not tools/software. Compati=
+ble
+> > > > > values are documented, label values are not. Though the partition
+> > > > > stuff started out using label long ago and it's evolved to prefer=
+ring
+> > > > > compatible.
+> > > >
+> > > > OK so we are agreed that we are going with 'compatible'.
+> > >
+> > > Still strongly disagree here.
+> >
+> > Miquel is right. I was confused here. "label" is still pretty much
+> > used for what the image is. Though we do have "u-boot,env" for both it
+> > seems.
+> >
+> > My position on "label" stands. To the extent we have images for common
+> > components, I think we should standardize the names. Certainly if
+> > tools rely on the names, then they should be documented.
+>
+> OK thanks for clearing that up.
+>
+> But at present 'label' is free-form text. If I change it to an enum,
+> won't that break things? If not, how do I actually do it?
+>
+> There is a u-boot.yaml but it doesn't actually have a "u-boot" label
+> in the schema. In fact it seems that the label is not validated at
+> all?
+
+It looks like I can just add it to a separate schema file, which is
+what I did in the latest version.
+
+>
+> >
+> >
+> > > My understanding is that a compatible carries how the content is
+> > > organized, and how this maybe specific (like you have in-band meta da=
+ta
+> > > data that needs to be parsed in a specific way or in your case
+> > > additional specific properties in the DT which give more context abou=
+t
+> > > how the data is stored). But the real content of the partition, ie. i=
+f
+> > > it contains a firmware, the kernel or some user data does not belong =
+to
+> > > the compatible.
+> > >
+> > > I.e:
+> > > - The first byte of my partition gives the compression algorithm:
+> > >   -> compatible =3D "compressed-partition-foo";
+> > >      or
+> > >   -> compatible =3D "fixed-partitions" + compression-algorithm =3D "f=
+oo";
+> > > - The partition contains a picture of my dog:
+> > >   -> label =3D "my dog is beautiful"
+> > >   but certainly not
+> > >   -> compatible =3D "my-dog";
+> >
+> > IMO, compatible in this case should convey "JPEG image" or similar.
+> >
+> > > I don't see why, for the binman schema, we could not constrain the
+> > > labels?
+> >
+> > Yes, but those should follow what we already have. "u-boot" for
+> > example rather than "data,u-boot" which I think Simon had in some
+> > version of this.
+>
+> Yes, don't worry, I had some feedback from Alper but have given up on
+> that approach.
+
+Regards,
+Simon
