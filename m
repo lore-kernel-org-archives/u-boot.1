@@ -4,83 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBF59E732E7
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 16:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3262EE732FE
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 17:18:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D155686AB9;
-	Thu, 28 Sep 2023 18:17:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3FA5F86545;
+	Thu, 28 Sep 2023 19:18:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YFwX8U50";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 541B686AD8; Thu, 28 Sep 2023 18:17:04 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B11AD86587
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 18:17:01 +0200 (CEST)
+ id B1B498654D; Thu, 28 Sep 2023 19:18:49 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 6D1E186529
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 19:18:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-59f6e6b206fso111807147b3.3
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 09:17:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695917820; x=1696522620; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=2yu/qXnfjdWI8PFnNPtpcngZFkx9cDFOjPEepR7yX0I=;
- b=YFwX8U50/Jn8u0auSTxRRwPeZOx9meJxsCHHx+1etvA33ptx7wfcuLKk6v/Eyv1dne
- v2thO1RmGathgE+LAeINRfOyi+doKce6W0L/LWk+NyMk3ba1zdjVkq4OeT3P+NOvOoBX
- 17dP4jF3m60uIuV+v2x8pK/JdLrWErFPPckcE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695917820; x=1696522620;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2yu/qXnfjdWI8PFnNPtpcngZFkx9cDFOjPEepR7yX0I=;
- b=SjejbPFxi7kwWXE1OndLAUuLh6jjgPLgnKulRchMTEYnJH4GGNjnHee1iu5yzye/Ml
- EAbCuzoYdh6/LYAyckcFcQ/uOFXeY4bnzlWjSgFh2sYaQNxUs+KU7EOrJuMFpGqa1R0y
- 0IeoFuzjp41FEA+ppQc52gaXpSFtPW5r0MgdP0nDuWjw8iXrckLRSPQXwFv+xcBvtEWw
- 1v/lwbIsWstlnK0d/mkRKrkgRfbZfFguxOPE+JnDICArc7MjKR9voCJHHw7+Ektao6DD
- 2D+gNWLDYRfQhAcesvvoM4UTwM4tXGLqq4ckyZMS6MX/lHyegxL23SuTliXozmTyhif3
- dQXg==
-X-Gm-Message-State: AOJu0Yyf8YbDdWXUwqrVZY5LiUIM5bIvtO7RhTAovTZpv4/AiTz99toA
- 7Do/8jctjy9PeG64YwWk/Uq9kw==
-X-Google-Smtp-Source: AGHT+IFn8UG6kK/ptBhCEZMhMzkAm5gBUxnlr1uXGaMDPOfr+q3G/V270Mq7ZVH4GlqfaNNjjp5bEA==
-X-Received: by 2002:a81:a54c:0:b0:59b:e449:2d51 with SMTP id
- v12-20020a81a54c000000b0059be4492d51mr1589789ywg.49.1695917820392; 
- Thu, 28 Sep 2023 09:17:00 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-e373-86d8-7506-01bc.res6.spectrum.com.
- [2603:6081:7b00:6400:e373:86d8:7506:1bc])
- by smtp.gmail.com with ESMTPSA id
- n185-20020a0dfdc2000000b00589a999038asm4677242ywf.77.2023.09.28.09.16.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Sep 2023 09:16:59 -0700 (PDT)
-Date: Thu, 28 Sep 2023 12:16:57 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Jim Liu <jim.t90615@gmail.com>
-Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, u-boot@lists.denx.de,
- Bhupesh Sharma <bhupesh.sharma@linaro.org>
-Subject: Re: [PATCH v1 3/3] arm: npcm8xx: support dcache off
-Message-ID: <20230928161657.GE305624@bill-the-cat>
-References: <20230926085651.395069-1-JJLIU0@nuvoton.com>
- <20230926085651.395069-4-JJLIU0@nuvoton.com>
- <20230926134807.GT305624@bill-the-cat>
- <CAKUZ0+FRnrEuyGpNMeqD_Tbi8VXTgtV=8A1ZoQPU=ZaMJRT3TQ@mail.gmail.com>
- <20230928122317.GD305624@bill-the-cat>
- <CAKUZ0+Fr+2mYYK8naK6gxLdzSDtQ=MW2Yp12ipXE5D3-pq-y1w@mail.gmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D9E5C1FB;
+ Thu, 28 Sep 2023 10:19:24 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D24003F5A1;
+ Thu, 28 Sep 2023 10:18:45 -0700 (PDT)
+Date: Thu, 28 Sep 2023 18:18:41 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: clbcjt@outlook.com
+Cc: u-boot@lists.denx.de, Icenowy Zheng <icenowy@aosc.io>,
+ "linux-sunxi@lists.linux.dev" <linux-sunxi@lists.linux.dev>
+Subject: Re: [PATCH] board: LicheePi_Zero: add emac support
+Message-ID: <20230928181841.567fde31@donnerap.manchester.arm.com>
+In-Reply-To: <PH0PR19MB54288958D7F6329111F426BDCCFEA@PH0PR19MB5428.namprd19.prod.outlook.com>
+References: <PH0PR19MB54288958D7F6329111F426BDCCFEA@PH0PR19MB5428.namprd19.prod.outlook.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NUuHOKFufukCUbmz"
-Content-Disposition: inline
-In-Reply-To: <CAKUZ0+Fr+2mYYK8naK6gxLdzSDtQ=MW2Yp12ipXE5D3-pq-y1w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,127 +57,143 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, 23 Sep 2023 16:53:49 +0800
+clbcjt@outlook.com wrote:
 
---NUuHOKFufukCUbmz
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-On Thu, Sep 28, 2023 at 10:32:51PM +0800, Jim Liu wrote:
-> Hi  Tom
->=20
-> Thanks for your understanding.
-> but  this patch  is an incomplete patch.
-> After I applied this patch  I had another error.
->=20
-> arch/arm/cpu/armv8/cache_v8.c:773:2: error: #error Please describe
-> your MMU layout in CONFIG_SYS_MEM_MAP and enable dcache.
->   773 | #error Please describe your MMU layout in CONFIG_SYS_MEM_MAP
-> and enable dcache.
->=20
-> This error is the same as that link.
+thanks for sending a patch. Please make sure to CC: the respective
+maintainers, as listed by scripts/get_maintainer.pl.
 
-Please use that patch as a starting point (and also possibly needing to
-grab
-https://patchwork.ozlabs.org/project/uboot/patch/20230822075112.717992-2-bh=
-upesh.sharma@linaro.org/
-as that's how I'd like to proceed with addressing this generic armv8
-issue, thanks!
+First this needs some commit message, stating why this change is needed.
 
->=20
-> Best regards,
-> Jim
->=20
-> On Thu, Sep 28, 2023 at 8:23=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Thu, Sep 28, 2023 at 08:49:23AM +0800, Jim Liu wrote:
-> > > Hi Tom
-> > >
-> > > Thanks for the quick review.
-> > >
-> > > if we set the CONFIG_SYS_DCACHE_OFF the  armv8 will build error.
-> > > So we added a workaround for our bmc uboot.
-> > >
-> > > the error message as below:
-> > >
-> > > CONFIG_SYS_DCACHE_OFF can't be enabled on armv8, or the following
-> > > build error would happen.
-> > >
-> > > arch/arm/cpu/armv8/cpu.o: in function `cleanup_before_linux':
-> > > arch/arm/cpu/armv8/cpu.c:60: undefined reference to `icache_disable'
-> > > arch/arm/cpu/armv8/cpu.c:68: undefined reference to `dcache_disable'
-> > > arch/arm/cpu/armv8/cpu.c:69: undefined reference to `invalidate_dcach=
-e_all'
-> >
-> > OK, so you need
-> > https://patchwork.ozlabs.org/project/uboot/patch/20230811054228.3721455=
--1-bhupesh.sharma@linaro.org/
-> > to be applied, as-is, yes? Thanks!
-> >
-> > >
-> > > Best regards,
-> > > Jim
-> > >
-> > > On Tue, Sep 26, 2023 at 9:48=E2=80=AFPM Tom Rini <trini@konsulko.com>=
- wrote:
-> > > >
-> > > > On Tue, Sep 26, 2023 at 04:56:50PM +0800, Jim Liu wrote:
-> > > >
-> > > > > do not enable dcache by setting CONFIG_SYS_NPCM_DCACHE_OFF=3Dy
-> > > > >
-> > > > > Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
-> > > > > ---
-> > > > >  arch/arm/mach-npcm/npcm8xx/Kconfig |  4 ++++
-> > > > >  arch/arm/mach-npcm/npcm8xx/cpu.c   | 12 +++++++++++-
-> > > > >  2 files changed, 15 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > diff --git a/arch/arm/mach-npcm/npcm8xx/Kconfig b/arch/arm/mach-n=
-pcm/npcm8xx/Kconfig
-> > > > > index 5f4a0506dc..163e7e7d48 100644
-> > > > > --- a/arch/arm/mach-npcm/npcm8xx/Kconfig
-> > > > > +++ b/arch/arm/mach-npcm/npcm8xx/Kconfig
-> > > > > @@ -6,6 +6,10 @@ config SYS_CPU
-> > > > >  config SYS_SOC
-> > > > >       default "npcm8xx"
-> > > > >
-> > > > > +config SYS_NPCM_DCACHE_OFF
-> > > > > +     bool "Do not enable dcache"
-> > > > > +     default n
-> > > > > +
-> > > > >  config TARGET_ARBEL_EVB
-> > > > >       bool "Arbel Evaluation Board"
-> > > > >       help
-> > > >
-> > > > Why do we need a new Kconfig option here on top of the existing gen=
-eric
-> > > > ones to control cache?
-> > > >
-> > > > --
-> > > > Tom
-> >
-> > --
-> > Tom
+Looking down, this actually looks like several patches:
+- one to add the clock gates and resets
+- one to add the compatible string to the sun8i-emac driver
+- one to introduce a defconfig for the LicheePi Zero docking board
+I dimly remember Icenowy once sending something for this before?
 
---=20
-Tom
 
---NUuHOKFufukCUbmz
-Content-Type: application/pgp-signature; name="signature.asc"
+> From: FH0 <clbcjt@outlook.com>
 
------BEGIN PGP SIGNATURE-----
+Please use your real name here ...
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUVpvYACgkQFHw5/5Y0
-tyykFwwAqEPD5Xm+chou2SMwQAkKqpffA4VAQZxNWvMpexu4qMkKEHKbd2qOGh7g
-1gAYG3TLkLrADV7yqvC6muTeCp6QIBkJbdJTlUMU0XkVrf3T1ayRTlE+BDGLUMs4
-AsLAbVt4m/Ih9NYThMcmzsIVxvXilUqYNXd93bnpzSHnQGuft/m561MkUyiMsei7
-viXbMkrmfDBDcMZVOILDObpU28MAkrU+Py3TB786V/ywwnVlz3uwx7fj2xY92V2L
-+OhUb16Uo12LhY5uO2Vnb8HhNKjvCyu3vuO3/E1/zpgLkWRVEK7gtdP9nnGAOGun
-K8oEEVdULvu64O5IXC3VzDeRt2NY2Yn8odx/L6lJdtmQpDbykT/bBC/0WV4oYgF0
-AhwF4tQ/ce1nnkj+q+0zIIDpMHV1XfI6R6oG97JTEBDkenx0zcj+qwLoDF/HH6Tx
-4/RTLXFFTSSD7BvKQwZBDIGAVzohpfwvGyn83wtt3Avo/bFN6gkdmKjLizZB8r3q
-45NI74OI
-=T6LA
------END PGP SIGNATURE-----
+> Signed-off-by: FH0 <clbcjt@outlook.com>
 
---NUuHOKFufukCUbmz--
+and in particular here.
+
+> ---
+>  arch/arm/dts/sun8i-v3s-licheepi-zero.dts | 6 ++++++
+>  configs/LicheePi_Zero_defconfig          | 4 +++-
+>  drivers/clk/sunxi/clk_v3s.c              | 6 ++++++
+>  drivers/net/sun8i_emac.c                 | 7 +++++++
+>  4 files changed, 22 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/dts/sun8i-v3s-licheepi-zero.dts b/arch/arm/dts/sun8i-v3s-licheepi-zero.dts
+> index 2e4587d2..b3246b94 100644
+> --- a/arch/arm/dts/sun8i-v3s-licheepi-zero.dts
+> +++ b/arch/arm/dts/sun8i-v3s-licheepi-zero.dts
+> @@ -49,6 +49,7 @@
+>  	compatible = "licheepi,licheepi-zero", "allwinner,sun8i-v3s";
+>  
+>  	aliases {
+> +		ethernet0 = &emac;
+>  		serial0 = &uart0;
+>  	};
+>  
+> @@ -99,3 +100,8 @@
+>  	usb0_id_det-gpios = <&pio 5 6 GPIO_ACTIVE_HIGH>;
+>  	status = "okay";
+>  };
+> +
+> +&emac {
+> +	allwinner,leds-active-low;
+> +	status = "okay";
+> +};
+
+But the normal LicheePi Zero does not have an Ethernet jack, right? That's
+only on the "docking" board? And Ethernet is already described there, in
+sun8i-v3s-licheepi-zero-dock.dts.
+
+Also, in general: devicetree changes need to go through the Linux tree
+first - though this shouldn't be needed in this case.
+
+> diff --git a/configs/LicheePi_Zero_defconfig b/configs/LicheePi_Zero_defconfig
+> index 009384ea..779d5c9d 100644
+> --- a/configs/LicheePi_Zero_defconfig
+> +++ b/configs/LicheePi_Zero_defconfig
+> @@ -5,4 +5,6 @@ CONFIG_SPL=y
+>  CONFIG_MACH_SUN8I_V3S=y
+>  CONFIG_DRAM_CLK=360
+>  # CONFIG_HAS_ARMV7_SECURE_BASE is not set
+> -# CONFIG_NET is not set
+> +CONFIG_NET=y
+> +CONFIG_NET_RANDOM_ETHADDR=y
+
+Why is this? Is it that the V3s does not have a SID, so we don't have the
+ID registers to derive a MAC address? That would be a good thing to
+mention in the commit message.
+
+> +CONFIG_SUN8I_EMAC=y
+> diff --git a/drivers/clk/sunxi/clk_v3s.c b/drivers/clk/sunxi/clk_v3s.c
+> index 6524c135..680a43f2 100644
+> --- a/drivers/clk/sunxi/clk_v3s.c
+> +++ b/drivers/clk/sunxi/clk_v3s.c
+> @@ -37,6 +37,9 @@ static struct ccu_clk_gate v3s_gates[] = {
+>  
+>  	[CLK_DE]		= GATE(0x104, BIT(31)),
+>  	[CLK_TCON0]		= GATE(0x118, BIT(31)),
+> +
+> +	[CLK_BUS_EMAC]  = GATE(0x060, BIT(17)),
+> +	[CLK_BUS_EPHY]  = GATE(0x070, BIT(0)),
+
+Please align this with the rest of the definitions.
+
+>  };
+>  
+>  static struct ccu_reset v3s_resets[] = {
+> @@ -56,6 +59,9 @@ static struct ccu_reset v3s_resets[] = {
+>  	[RST_BUS_UART0]		= RESET(0x2d8, BIT(16)),
+>  	[RST_BUS_UART1]		= RESET(0x2d8, BIT(17)),
+>  	[RST_BUS_UART2]		= RESET(0x2d8, BIT(18)),
+> +
+> +	[RST_BUS_EMAC]		= RESET(0x2c0, BIT(17)),
+> +	[RST_BUS_EPHY]		= RESET(0x2c8, BIT(2)),
+
+Those two hunks (CLK + RST) should go into a separate patch.
+
+>  };
+>  
+>  const struct ccu_desc v3s_ccu_desc = {
+> diff --git a/drivers/net/sun8i_emac.c b/drivers/net/sun8i_emac.c
+> index 04c3274f..57e6857a 100644
+> --- a/drivers/net/sun8i_emac.c
+> +++ b/drivers/net/sun8i_emac.c
+> @@ -895,6 +895,11 @@ static const struct emac_variant emac_variant_h3 = {
+>  	.support_rmii		= true,
+>  };
+>  
+> +static const struct emac_variant emac_variant_v3s = {
+> +	.syscon_offset		= 0x30,
+> +	.soc_has_internal_phy	= true,
+> +};
+> +
+>  static const struct emac_variant emac_variant_r40 = {
+>  	.syscon_offset		= 0x164,
+>  };
+> @@ -914,6 +919,8 @@ static const struct udevice_id sun8i_emac_eth_ids[] = {
+>  	  .data = (ulong)&emac_variant_a83t },
+>  	{ .compatible = "allwinner,sun8i-h3-emac",
+>  	  .data = (ulong)&emac_variant_h3 },
+> +	{ .compatible = "allwinner,sun8i-v3s-emac",
+> +	  .data = (ulong)&emac_variant_v3s },
+
+The changes to this file would be another separate patch.
+
+Cheers,
+Andre
+
+>  	{ .compatible = "allwinner,sun8i-r40-gmac",
+>  	  .data = (ulong)&emac_variant_r40 },
+>  	{ .compatible = "allwinner,sun50i-a64-emac",
+
