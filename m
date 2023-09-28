@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA33BE732D0
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 14:19:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADD92E732D8
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 14:20:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38BDE86537;
-	Thu, 28 Sep 2023 16:19:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CA7ED86E52;
+	Thu, 28 Sep 2023 16:20:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dJhNUJC2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ln6mKc0T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD795866AA; Thu, 28 Sep 2023 16:19:24 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 29E5F86E55; Thu, 28 Sep 2023 16:20:08 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5079786504
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 16:19:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 31C8086504
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 16:20:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-533edb5ac54so11343381a12.0
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 07:19:22 -0700 (PDT)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-532c81b9adbso16390470a12.1
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 07:20:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695910762; x=1696515562; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=niTDR4a+vEmTJJy0QhCtfJFVDAeucnOr1W3vdTU/8dk=;
- b=dJhNUJC2QGMMUEqlWSfp2R94fOzbmLQlR39kxT9nlIlmOyMc0mp/qX0un/hqQZ1A83
- h45AqjXkbf0pFe0bI6y6GKkxWXElaME8FKdDwRPitiWLQ0iaLO497Gg6wIImUn/Bbhka
- u1szqqsLMJj8HA/6TcmOI4ibRu0KzYNhF2FLQ=
+ d=chromium.org; s=google; t=1695910806; x=1696515606; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cjzfE8cXBAi5sTJNjwiJYkhs9/kk1LJW8/2vRsyoKjI=;
+ b=Ln6mKc0TsLmPC5QryDdoWKkdhlEI4mGrvQpX5P3dlQ+2Sm8sKYuiYL5T/FTvYIOSsT
+ 1hZ7+RflkBdGWo5MiwGhDZfRzZwM/uYrDPDjqSVaktWs6vnkNJfrzsIOUetA5+zxtzXr
+ +JFx7NifT9tlmLZdjSdIY7t43Rc86uRxZP0G0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695910762; x=1696515562;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=niTDR4a+vEmTJJy0QhCtfJFVDAeucnOr1W3vdTU/8dk=;
- b=TsCSTVJj56e/p4WVPauXGpmuH6BHgq5Dl+r+hfBoJwuiN6yC260kpc093HPvzc/qCs
- PzNrVScvK+9jK151On2OdaUyh1pvlMeFz0bKNR4iU0m6tsUSXCtoDqkxGefrEyxqbAdB
- wohF5AQ7g+Z7nF2KlTNz+GMxB90OP9OmDmrdQvaGLTYHw9kGJqoTchhlHshHftQtefQY
- m9SFqcBB7N6ZBJ8G1gI9TOBkf+1PtjTRqi6OnkN7RoWKprysB8FxXao98raUyd04DKPk
- Z6f1cbqyMInJOnYkvZ3vqjCtFhVddY6ihBhupBLnTvLLYs+ukfs8Cu9muzssaMsKxuh1
- xWZA==
-X-Gm-Message-State: AOJu0YzOX+AR0ELhmfW++iS+AG6xSUUjz0bw8eqdkd3cmTQsLeZCupK/
- VWWeA0N4nBHiEXWY5xWUxkpYi2h6q6kO483me5p2og==
-X-Google-Smtp-Source: AGHT+IHzgwcWMugumJjQHXlQQP4cOI/zbUY+KwyFoe3IUBCcscym9UUu3K9HWFvsxywapvuGg1EUCt5IlnQYQXhR7d4=
-X-Received: by 2002:aa7:d046:0:b0:533:193d:da5e with SMTP id
- n6-20020aa7d046000000b00533193dda5emr1315048edo.29.1695910761505; Thu, 28 Sep
- 2023 07:19:21 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695910806; x=1696515606;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cjzfE8cXBAi5sTJNjwiJYkhs9/kk1LJW8/2vRsyoKjI=;
+ b=VQeeA8HYj1RgVyyk/8qETgaXBCIj7N+o7+vY1sHbizoMWMFKbwiK3qiR1fxszO1CCU
+ i10NHtkGGyaNPZZHZ9B0HPHe3GizlCd0LKB6OM/I5Oqaf9DIL5aLKh3ActMpUiWHEMAp
+ zphGrhFfiDcOlw0zeaQ8IP/S2V4p70Le5qiaSirGVaQ/yQGjzZjdnIcuwWJwlRRBkSEh
+ LjYmF4yiBtV1ke8yqpOmaduU7hxXhQT45DAuJ15AL1Adz456KEznXi+Q4941WkuuNVJJ
+ xYIqt9yWoI9PInQDKgpb9C9rar83eBHCJq/b6tVZ121+Z/CyLSFfrQoEnESGji6fTAci
+ gf4g==
+X-Gm-Message-State: AOJu0YzvXbaTsiZPwoJvy1xSKes+WiA00QolIDJq0tgklBRRZjfTfl/+
+ 0WMrb2TCv5KaeIAfMoAfaDMD+r2KJYnEBL8bKq7wjg==
+X-Google-Smtp-Source: AGHT+IF3WsC6P0I5gZY4cymYMplSU+aVP5KIGqXm8D66xFofbVxXmhY4A7pl16Wyrrnq9e8Qw11Iz3X9IVHKTy3eD04=
+X-Received: by 2002:aa7:ca41:0:b0:534:78a6:36cb with SMTP id
+ j1-20020aa7ca41000000b0053478a636cbmr1087107edt.39.1695910805380; Thu, 28 Sep
+ 2023 07:20:05 -0700 (PDT)
 MIME-Version: 1.0
 References: <CAPnjgZ0vKO0YYpQyr_C35bY41un59AdZcY45OT3+ydxkCr7BOA@mail.gmail.com>
- <14f689af-b727-4f5b-b2cf-73676f14167c@canonical.com>
-In-Reply-To: <14f689af-b727-4f5b-b2cf-73676f14167c@canonical.com>
+ <CAEUhbmU0t0LE2M+9L-heY3UZBgNsgDuPN-JheFsUwMfBndE+Dw@mail.gmail.com>
+In-Reply-To: <CAEUhbmU0t0LE2M+9L-heY3UZBgNsgDuPN-JheFsUwMfBndE+Dw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Sep 2023 08:19:03 -0600
-Message-ID: <CAPnjgZ2yh+z4JwAwt9sQCzKpdNb7Sdb+SVRmt7zGyWqMAzGbFQ@mail.gmail.com>
+Date: Thu, 28 Sep 2023 08:19:54 -0600
+Message-ID: <CAPnjgZ3JnvcoQ1Vi-AXnW6-wC0H_FNqoQJp31Kdyp+TBOL6Dnw@mail.gmail.com>
 Subject: Re: SSE instructions
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
+To: Bin Meng <bmeng.cn@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,12 +84,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Bin,
 
-On Thu, 28 Sept 2023 at 00:26, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Thu, 28 Sept 2023 at 08:15, Bin Meng <bmeng.cn@gmail.com> wrote:
 >
-> On 9/28/23 04:41, Simon Glass wrote:
+> Hi Simon,
+>
+> On Thu, Sep 28, 2023 at 10:41=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
+rote:
+> >
 > > Hi Bin,
 > >
 > > U-Boot 64-bit on x86 disables sse, but when enabling Truetype I get a
@@ -100,30 +104,33 @@ On Thu, 28 Sept 2023 at 00:26, Heinrich Schuchardt
 > > 30 | static double frac(double val)
 > >
 > > Do you know how to enable SSE for 64-bit?
+> >
 >
-> How could this occur if x86 disables SSE? There must be some
-> inconsistency in how this module is built.
-
-We disable SSE on 64-bit x86, even though the CPU always supports it.
-The compiler assumes it is available, so presumably emits SSE things.
-
-I suspect there is some CPU init missing after U-Boot changes to
-64-bit long mode.
-
+> The following patch could enable SSE for 64-bit:
 >
-> We a need a clarification of the used ABI per architecture and write
-> this into our documentation.
+> diff --git a/arch/x86/config.mk b/arch/x86/config.mk
+> index 26ec1af2f0..250d7c9948 100644
+> --- a/arch/x86/config.mk
+> +++ b/arch/x86/config.mk
+> @@ -27,7 +27,7 @@ ifeq ($(IS_32BIT),y)
+>  PLATFORM_CPPFLAGS +=3D -march=3Di386 -m32
+>  else
+>  PLATFORM_CPPFLAGS +=3D $(if $(CONFIG_SPL_BUILD),,-fpic) -fno-common
+> -march=3Dcore2 -m64
+> -PLATFORM_CPPFLAGS +=3D -mno-mmx -mno-sse
+> +PLATFORM_CPPFLAGS +=3D -mno-mmx
+>  endif
 >
-> The RISC-V profile specification does not foresee float and double in
-> S-mode (see RVA20S64 and RVAS22S64 profiles in
-> https://github.com/riscv/riscv-profiles/blob/main/profiles.adoc#52-rva20s64-profile).
+> However as Heinrich mentioned, U-Boot codes should be written in a
+> "floating point free" way.
 >
-> We should convert drivers/video/console_truetype.c to use integers
-> (where low bits are used for the fractional part) instead of float and
-> double to make the driver compatible to non-x86 platforms.
+> The fix should really be updating console_truetype.c to use integers
+> instead of using float/double.
 
-Good luck with that :-) It uses STB for Truetype...probably there is
-an integer implementation somewhere but I'm not sure.
+Yes, I can do that, but it hangs going into 64-bit mode, which is
+presumably why the flag was added. In fact it was your commit!
+
+Is there some missing init somewhere?
 
 Regards,
 Simon
