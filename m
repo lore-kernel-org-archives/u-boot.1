@@ -4,123 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19506CE7B05
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 08:03:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF290CE7B0C
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 09:01:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FAC0869CA;
-	Thu, 28 Sep 2023 10:03:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id B3D6286D43;
+	Thu, 28 Sep 2023 11:01:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="g9eS7gMa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ce8n5PKJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AF1386E13; Thu, 28 Sep 2023 10:03:13 +0200 (CEST)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on070c.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0e::70c])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1B32086E10; Thu, 28 Sep 2023 11:01:10 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9785086844
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 10:03:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75252869CA
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 11:01:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=PkXie1bWpKaOCKhU/KRK7W7RvyL29BNabEvWdYAshkDU6ATtF/y0vi8OIfFm7fO8kR4zWNiTpGwmtcp95IcMkBEU9mkeH+Wzow+h/F5UYKgxBEEqAVo/q6y++GfrQhSW67U8barcGrEdqwEuHQdp5yMyBxFfWUeJ94dztEtypjiPbX1BIr/Ih6Mnnk2tlxAucSwWVforj3aZ2w1eBewE/5bLGhSvI4st/jaKKfseQVkCbAHK9eaBKOZyHASptOxxRA9MHPrBS5JSNiV3eOSMW5QK39EJxAaJtvilhG+Gnl3LukuPmQJcbzRt6IZbXaLiAdxWFnpFjS0QMT/3ZfcYjg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FxBkGPHo7hlTNbXNFyAjy+e0A2ee7RBM7+7cgU59w08=;
- b=lo3zpx89AsG4KMJ6ewgJP/6DeHoShnpkBclQIoy+CyASM7TPF7+VN6x5w9PbTrVV4kWB1TpHy6071Pc32gAdPjZw3/JZRcC+0ICc0AlJDu+jdM5EWdlk76wtNl2Fs63hIqY6DTjwo6udsPx00DtZJ4QKuJVFgSMKjOmw3qyYXBwLz6lKFZwG9iXhmWQwDXwwExUHLLibZyKwEnXvEYDRzvpe28l/XJe4uOn+L1TWrEtqFJJ+TUybsneIQcZf8e8FDrn2nwTX0J3vwYjlQzsP8Abuc829+696XX8U99L4vM1Sh0MF900Zm8C9PTisg3dMhjAwyDbYKeJIPa2Pd1+xIg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FxBkGPHo7hlTNbXNFyAjy+e0A2ee7RBM7+7cgU59w08=;
- b=g9eS7gMaSqxjrsGie6NK19NUXQxD6t/2FzEQHX+Wd1Mdkzzpuw070hlg97WKPEJ1nMBRFtlvz6R3QkpHuUgnK5ScdpN8nmCSplhs1x961QUZwVu4yV7hVOJ0FqMh1/myoGdCGjDyO1eweNkqgvcZ4A6QoIm5+UpLUsl0tg30wAA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by DU0PR10MB6851.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:47e::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.25; Thu, 28 Sep
- 2023 08:03:07 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6813.027; Thu, 28 Sep 2023
- 08:03:07 +0000
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 5/4] mkimage: update man page and -h output
-Date: Thu, 28 Sep 2023 10:02:57 +0200
-Message-Id: <20230928080257.2650461-1-rasmus.villemoes@prevas.dk>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
-References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0062.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:8::16) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4064867903cso23570325e9.2
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 02:01:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1695891667; x=1696496467; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=NcYm25a/EilSoFwSGe3SbRfK+UBHFB6MWlJ2lOpQFwM=;
+ b=Ce8n5PKJBa6ILyAviL6mJtbUWPXPf2vZp+NplO7fcaEe9FKljUc7Ho3wkNMdAcJSku
+ +m2NrBtkSNq5hDP8aYkCTKZ2dyS+ZIrPyXSIkRXGCUGXMFoWMFn5RyIQSazKEa5/MrUp
+ yHyNux3M/1K8FlejS22C74X6RnVeXCaXg5V2w3cl2q6C8VDMx7Lo29AgB6KNePPNs/K7
+ IN4NwfhIEXG88kWQfs9s89jUv4Ip+fyVmO6vt0m5eLPZDywWRyZCAK249MqSiCAOjcy0
+ hm9/6RhuSVXa0cG+n8KuShCXjo8wAcdhsg4s/N0QhhW94i+SUJsaZcOGzJ+xzpgYSrkO
+ K5dw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695891667; x=1696496467;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=NcYm25a/EilSoFwSGe3SbRfK+UBHFB6MWlJ2lOpQFwM=;
+ b=hXcvi8t1jtbTvy/OIxvq/KaQ80HHMghpDb8NH3uzdlaJ8kpKOy3JgUKwrf2lBklxmg
+ 3r9JzMDDfPtC2obdeXgPpD/yfqFjch1iaV7IBuqVEDeIHhnjXiA74PNY9MISOYkg0oT9
+ Lw6HiKFcr9o3egfZ1ndhKKOEhny8+b0gVF32PRKJi6Ps2PcvQmGl5oh3K+K0deBSWdTE
+ gLu6QR0+oxZocarfT3E+t3JX6X2iDPWdvC55AEN53PpyVNjVqpw1TFh5u3E4SWgkP1KJ
+ +pioCWzOanlcn8ayg+zDnl6VjhzUmT6Hah2VEQS2WO+CZyha482Tdy82uipDLStaW5lO
+ gaxw==
+X-Gm-Message-State: AOJu0YzNwNyIvwIobR51Y/vI2cvFDX7ONEYRZfvZhilY9d7SyP56H53y
+ WSLUiJCD0OUNMW1RgvWzWAB6lg==
+X-Google-Smtp-Source: AGHT+IGvqc+FHMFfviD4rzP2sae3SzRwr8GVQVtd5axE5DdZeoDnSkZnnCom5WmYw/yPjih0c/fg3g==
+X-Received: by 2002:a05:600c:3657:b0:404:2dbb:8943 with SMTP id
+ y23-20020a05600c365700b004042dbb8943mr745404wmq.2.1695891666710; 
+ Thu, 28 Sep 2023 02:01:06 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:17b1:9dda:a3d1:a0b6?
+ ([2a01:e0a:982:cbb0:17b1:9dda:a3d1:a0b6])
+ by smtp.gmail.com with ESMTPSA id
+ x5-20020adfdcc5000000b0031c6581d55esm19176915wrm.91.2023.09.28.02.01.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 Sep 2023 02:01:06 -0700 (PDT)
+Message-ID: <88840967-5f39-4f21-ad0b-6b356398ec77@linaro.org>
+Date: Thu, 28 Sep 2023 11:01:05 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|DU0PR10MB6851:EE_
-X-MS-Office365-Filtering-Correlation-Id: ac6b0716-87cf-4ad7-8d30-08dbbff95943
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: t2ITcE8Oe6fw9jDYaZDWgXOD0dphtOLV+EVAa1jDxkOufMA44OeOA+oF5uyBc/G1BeCzRS+cdAEi5NPvV2p1dB8AiUYWravkiIdP+/ONSLf4RDGC414pCRG6xdLz4bdnFdW8WPiqQ4CUTcW4ich+Qwje+d546cEQobyclx2xzfJEu4iCW9oQorOTEzLOmFiDtvlY8lnhtebxTYcNC4IoSTJQthuh9lV4Rkbg68WK09FLK9BMBLuz2xxGoDGQ00dsPq9L5wSFzyyGJ1eXUkpNyeEscXxrXFaB/R5lBHX+PKOV16eA9vJknMmBeEu8F9gTq+P1TxpIX4MjryTLCfEM2vfbRrmzctslVghJZMoIK02uKwGjClPFb0KX0jAiydjo+WBuE31D4OWc/oCG5b8i38oGdun78qUBnjg3erUGGdmEUCzfzNJa5yRNHdHK2Rp4b/U7VBl0Pv7ArYE6/L1k3B32aE8ZXMM3qlky2z+epaASsSvzVeUsoi5P7utL70boudzRTGFYRls5CSyWsMxjuhk4bvwiQK9nbVx3kKqj4/pPcVDb1T86leA6178KkoBpDYobQ8S4/nvzCJTpU/35ijd+GBjyrakfScnvXPM02uvXglyPcw0XHyAjM5C/34UE
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(39850400004)(136003)(346002)(376002)(396003)(230922051799003)(64100799003)(1800799009)(451199024)(186009)(2906002)(15650500001)(44832011)(54906003)(8976002)(6916009)(66556008)(316002)(66476007)(5660300002)(8676002)(66946007)(4326008)(41300700001)(8936002)(6506007)(478600001)(6666004)(6486002)(6512007)(2616005)(26005)(1076003)(52116002)(83380400001)(38350700002)(38100700002)(36756003)(86362001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?w5NHiKBWsN+9GDcGtDwOnB/B2cMdk4SxuljGl3qRpnLkVmEE2/Zr4sg1IFBb?=
- =?us-ascii?Q?zpDVo5CrRZQQDHfalUbqnIyLiXSeo2NFw0EntVWWbUIG7A7dnGFESVDrdWRx?=
- =?us-ascii?Q?GyL03oaX4dZ0xWeOKp+SSfSHJ33TLoMmn3lqFpc+wf42yMjeI/7kxf/kPHEQ?=
- =?us-ascii?Q?U/fflGhaKYx9+10FlS3WhVsYoOmCr7iUCmQhMjq+Qxxt7HEeG1RmwslshoBq?=
- =?us-ascii?Q?PfJb7GL2AaWS3+r+HypslWmwVq3d+O6FY3PykhmblIxEk+BcjQ2fQ8u9n052?=
- =?us-ascii?Q?NtPwW6zsRngGJp3rIlZsp4nKaSjKcABIp/AVKXMIYN9XvnUlnTEXNlmfQAPW?=
- =?us-ascii?Q?OVO4ceHUgObp/rrmThar7sxu3Og3A5uiBeTz+BGewbE+1LR10H84+IAXd6hJ?=
- =?us-ascii?Q?nt4LefTj/WJgoVEY5xoVw0waPbuZiCvz9h2n/KqE+qBcqb8n1xOvQhNJiqAU?=
- =?us-ascii?Q?QFLtG+iLzP9vNch8iRioxJ2TSI5fWUfvLbuy3SIZ/a1LPmGDpSJ1g5wLf6QH?=
- =?us-ascii?Q?j1nfbNNeCORoC1ZUlY4Ww5KnpzSzaAP/0ol+UrwXWfDToJ0FquHQimAyKTN9?=
- =?us-ascii?Q?U2xbiru7RIl41WsklzZNFVIIXXX0eJsNefhj2qft+u3NPGJYFnicOUSL1ZhF?=
- =?us-ascii?Q?HkydzkLCcT+ip6ql6fx9L8ixRAYXkWVq9GJfVdqgZBJ6vIiWAPHbZjQUuWb6?=
- =?us-ascii?Q?Y2w/+M7UtIMesn9SvUr8CaDC/vzgTqG8IZFcoJ2NvhbGNckFBXuVCQnkvytA?=
- =?us-ascii?Q?0eOqS4pP2s/QHRXjFkBpcDXgFKJhe5xrCkWcJAFTA997b7sjzcj3c6lCXH7Z?=
- =?us-ascii?Q?S4sfF0Agy0+4EOUrwlbId52IwxSa6NMmfGuKYNdHWzTDB4c7WZ7yYp+fKF50?=
- =?us-ascii?Q?/CLcUl1O3c6zyzWC/sljlFHjUOGgtAGPqoGj8mumzWBApHO+s8BCXj9ZkFdR?=
- =?us-ascii?Q?sPsAfFoiI3aAf2U07pbbNTmKr133VPwm5VEyOVF4zhxRuuZj6rx2eG3F4xGf?=
- =?us-ascii?Q?niXL1BR5ElW8DGVI8ZyeFcgw3ZDxT5JgDBn1GHssEQkHc1x582cCP//1rlbg?=
- =?us-ascii?Q?WxtBh0//RB9srvd/Tsli/vrxJM8B8/bOYPgZZzI4+1b0sfkPaufLVW+Mmwef?=
- =?us-ascii?Q?MHhB0wfdkzdU+9sbT7QjBlEld/bcAkJroWjjpH+hLYidCYdiSbanoSEaHke5?=
- =?us-ascii?Q?muh8o22yrZFI9+BqSvz672bTj2hBa6HgzI398ZeRcbWYz+5wGQ7Q8buDxZ+7?=
- =?us-ascii?Q?xxY2p7ppasmWHmdc0kiUYab/TfUKZdHS5w+MyRB3IpD7oA/07uc6X5le8bBl?=
- =?us-ascii?Q?rAPOQ53qrXBJag20opiDeUDZkg92n7/94YSA8iXvhpfz6EWLQzCy+N0Niw0t?=
- =?us-ascii?Q?fEcUpMINT9+VXzXauHqiT86oEEqdMkz4gG5jGuT12Bejw718kdb+WbnH8fBO?=
- =?us-ascii?Q?uz3MrDkjG5pZUIeeD13Yy1nHyxdHIZdhq3H84yrW0t89shVUBxHSnUn9A21M?=
- =?us-ascii?Q?RZ8/PswSXOyeuMFbnGGCx/Pq2xn3Wu6r6mEm1ylL83W0DTOK4pF1P5l/iG7m?=
- =?us-ascii?Q?R669dzD3UkQvziS1eoXtzG9Mm9JvZOsc3mXziTDE0rbBbp4QJWqNYbbFIjeE?=
- =?us-ascii?Q?Qg=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: ac6b0716-87cf-4ad7-8d30-08dbbff95943
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2023 08:03:06.9950 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: a0aUKaBt17Kn7WU3/VptxxXz7ogJoWVBmHI/yddJvn14jDjmYLq1wqiAu+HPGswLeK5ZQziuebPu7qL/NjzpwVgDsnCe/QxIeMvWEJN1mtE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6851
+User-Agent: Mozilla Thunderbird
+From: neil.armstrong@linaro.org
+Subject: Re: [PATCH v3 0/8] Add SM uclass and Meson SM driver
+Content-Language: en-US, fr
+To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com,
+ sjg@google.com, takahiro.akashi@linaro.org, ilias.apalodimas@linaro.org,
+ post@lespocky.de, marex@denx.de, msuchanek@suse.de, sughosh.ganu@linaro.org,
+ jh80.chung@samsung.com, paul.barker@sancloud.com
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
+References: <20230921081346.22157-1-avromanov@salutedevices.com>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20230921081346.22157-1-avromanov@salutedevices.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -132,61 +118,95 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The man page correctly said that -B was ignored without -E, while the
-`mkimage -h` output suggested otherwise. Now that -B can actually be
-used by itself, update the man page.
+On 21/09/2023 10:13, Alexey Romanov wrote:
+> Hello!
+> 
+> At the moment, there is no single general approach to using
+> secure monitor in U-Boot, there is only the smc_call() function,
+> over which everyone builds their own add-ons. This patchset
+> is designed to solve this problem by adding a new uclass -
+> SM_UCLASS. This UCLASS export following generic API:
+> 
+> 1. sm_call() - generic SMC call to the secure-monitor
+> 2. sm_call_read() - retrieve data from secure-monitor
+> 3. sm_call_write() - send data to secure-monitor
+> 
+> In the future, it is necessary to completely get rid of raw
+> smc_call() calls, replacing them with the use of SM_UCLASS
+> based drivers.
+> 
+> V2:
+> 
+> - Add SM UCLASS
+> - Add SM sandbox driver
+> - Add test for sandbox driver
+> - Meson Secure Monitor driver now based on SM_UCLASS
+> - Fix include order in arch/arm/mach-meson/sm.c
+> 
+> Also, during the discussion in V1 of this patchset, it was
+> discussed to create MESON_SM_UCLASS, but I considered such
+> a uclass to be too arch-specific. That's why I suggest
+> SM_UCLASS, which is not so arch-specific: secure monitor can
+> used for whole ARM devices, not only for Amlogic SoC's.
+> 
+> V3:
+> 
+> - Fix typos in commit messages
+> - Use uclass_first_device_err() instead of uclass_get_device_by_name()
+> - Return -ENOSYS instead of -EPROTONOSUPPORT if SM_UCLASS option not
+> implemented
+> 
+> Alexey Romanov (8):
+>    drivers: introduce Secure Monitor uclass
+>    sandbox: add sandbox sm uclass driver
+>    sandbox: dts: add meson secure monitor node
+>    sandbox: add tests for UCLASS_SM
+>    sandbox: defconfig: enable CONFIG_SM option
+>    drivers: introduce Meson Secure Monitor driver
+>    arch: meson: sm: set correct order of the includes
+>    arch: meson: use secure monitor driver
+> 
+>   MAINTAINERS                 |   1 +
+>   arch/arm/mach-meson/Kconfig |   1 +
+>   arch/arm/mach-meson/sm.c    | 116 +++++++++++----------
+>   arch/sandbox/dts/test.dts   |   4 +
+>   configs/sandbox_defconfig   |   1 +
+>   drivers/Kconfig             |   2 +
+>   drivers/Makefile            |   1 +
+>   drivers/sm/Kconfig          |   9 ++
+>   drivers/sm/Makefile         |   5 +
+>   drivers/sm/meson-sm.c       | 198 ++++++++++++++++++++++++++++++++++++
+>   drivers/sm/sandbox-sm.c     |  76 ++++++++++++++
+>   drivers/sm/sm-uclass.c      |  55 ++++++++++
+>   include/dm/uclass-id.h      |   1 +
+>   include/meson/sm.h          |  19 ++++
+>   include/sandbox-sm.h        |  18 ++++
+>   include/sm-uclass.h         |  72 +++++++++++++
+>   include/sm.h                |  67 ++++++++++++
+>   test/dm/Makefile            |   1 +
+>   test/dm/sm.c                |  65 ++++++++++++
+>   19 files changed, 656 insertions(+), 56 deletions(-)
+>   create mode 100644 drivers/sm/Kconfig
+>   create mode 100644 drivers/sm/Makefile
+>   create mode 100644 drivers/sm/meson-sm.c
+>   create mode 100644 drivers/sm/sandbox-sm.c
+>   create mode 100644 drivers/sm/sm-uclass.c
+>   create mode 100644 include/meson/sm.h
+>   create mode 100644 include/sandbox-sm.h
+>   create mode 100644 include/sm-uclass.h
+>   create mode 100644 include/sm.h
+>   create mode 100644 test/dm/sm.c
+> 
 
-While at it, also amend the `mkimage -h` line to mention the
-connection with -E.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 
-The FDT header is a fixed 40 bytes, so its size cannot (and is not)
-modified, while its alignment is a property of the address in RAM one
-loads the FIT to, so not something mkimage can affect in any way. (In
-the file itself, the header is of course at offset 0, which has all
-possible alignments already.)
+I'll apply it for next u-boot release,
 
-Reported-by: Sean Anderson <seanga2@gmail.com>
-Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
----
- doc/mkimage.1   | 6 ++++--
- tools/mkimage.c | 2 +-
- 2 files changed, 5 insertions(+), 3 deletions(-)
-
-diff --git a/doc/mkimage.1 b/doc/mkimage.1
-index 76c7859bb0..1a4bc25936 100644
---- a/doc/mkimage.1
-+++ b/doc/mkimage.1
-@@ -281,8 +281,10 @@ properties.  A \(oqdata-offset\(cq of 0 indicates that it starts in the first
- .BI \-B " alignment"
- .TQ
- .BI \-\-alignment " alignment"
--The alignment, in hexadecimal, that external data will be aligned to. This
--option only has an effect when \-E is specified.
-+The alignment, in hexadecimal, that the FDT structure will be aligned
-+to. With
-+.BR \-E ,
-+also specifies the alignment for the external data.
- .
- .TP
- .BI \-p " external-position"
-diff --git a/tools/mkimage.c b/tools/mkimage.c
-index 6dfe3e1d42..a5979fa6fd 100644
---- a/tools/mkimage.c
-+++ b/tools/mkimage.c
-@@ -112,7 +112,7 @@ static void usage(const char *msg)
- 		"          -f => input filename for FIT source\n"
- 		"          -i => input filename for ramdisk file\n"
- 		"          -E => place data outside of the FIT structure\n"
--		"          -B => align size in hex for FIT structure and header\n"
-+		"          -B => align size in hex for FIT structure and, with -E, for the external data\n"
- 		"          -b => append the device tree binary to the FIT\n"
- 		"          -t => update the timestamp in the FIT\n");
- #ifdef CONFIG_FIT_SIGNATURE
--- 
-2.37.2
-
+Thanks,
+Neil
