@@ -4,81 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50358E732C7
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 12:23:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F46BE732C8
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 12:50:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F56F866AA;
-	Thu, 28 Sep 2023 14:23:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 500C986537;
+	Thu, 28 Sep 2023 14:50:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ePrchA+i";
+	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="bGuOov+q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D4B586E31; Thu, 28 Sep 2023 14:23:24 +0200 (CEST)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 411D286504; Thu, 28 Sep 2023 14:50:14 +0200 (CEST)
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur01on0718.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe1e::718])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04DA48646A
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 14:23:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4E5286504
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 14:50:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=prevas.dk
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-59f6441215dso116829027b3.2
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 05:23:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695903800; x=1696508600; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=uBHvLPIhXuOkGgaTHV1S4vSYOjK30CTZK8UOUXz3x4w=;
- b=ePrchA+iZ5sropBBRskV6Yyq34T+7EpeiY5/Iy86Ml5DNEB9k8+sp8kXX2fi4Y5/Sw
- DfBdp/dCU8ZG9k1A979jAvz97fo6DK01sSB5uqRZQyBeV5K8MLdftTJjh/fE0yyeAXGl
- op0JLyPuJjabFLvjDHiSSsP+OevgrTYmsKlb8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695903800; x=1696508600;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uBHvLPIhXuOkGgaTHV1S4vSYOjK30CTZK8UOUXz3x4w=;
- b=ItVvAIywrpLO1XTS+8JWC6jduqcxmNziMBTxdxCqE6yz8zsB4Z4UG8g55vQ1exxu7Z
- S6I/BcqBvwa8q+gEMZFIkW1WrNgzOo+tdfAnvPTHTW5O+0MHlETSOZ+Qc4zpef3B+5aT
- L+9/l0x4kYE/11ZLBM1e+fyBj7g3eZY8YoSoLHxgprHnynCJVCTr6Jm0KmZyiZC0KL4A
- o8mBxA8WhUxz/eiGl21HKr9+Ldydw/sRawejWB8GZp7GzPVxknYZgVVWdg+fJcGwgWF8
- 4ptJDblED7vD3svB9yHakL2yf38UxB60wP2zxHRnA6ldgNt4BYuzi2CAypvuLKshnlF+
- VRlw==
-X-Gm-Message-State: AOJu0YyVHSrc1oPYS1MbQiLJFYUqVJcG04zMLSbOvpHO4R6AUTQuCBaD
- NFRFkD5jyyUQdQZF33e9QCBfdw==
-X-Google-Smtp-Source: AGHT+IFColJHj+YLD58nTG49C4kXpO1cuVHbUbKbMoz2FGqaGmvShUfRTouPvFQX8J4JHEaGoW0uPg==
-X-Received: by 2002:a81:df01:0:b0:59b:cfe1:bcf1 with SMTP id
- c1-20020a81df01000000b0059bcfe1bcf1mr841132ywn.44.1695903800572; 
- Thu, 28 Sep 2023 05:23:20 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-e373-86d8-7506-01bc.res6.spectrum.com.
- [2603:6081:7b00:6400:e373:86d8:7506:1bc])
- by smtp.gmail.com with ESMTPSA id
- f184-20020a0dc3c1000000b0059af121d0b8sm4537074ywd.52.2023.09.28.05.23.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Sep 2023 05:23:19 -0700 (PDT)
-Date: Thu, 28 Sep 2023 08:23:17 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Jim Liu <jim.t90615@gmail.com>
-Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, u-boot@lists.denx.de,
- Bhupesh Sharma <bhupesh.sharma@linaro.org>
-Subject: Re: [PATCH v1 3/3] arm: npcm8xx: support dcache off
-Message-ID: <20230928122317.GD305624@bill-the-cat>
-References: <20230926085651.395069-1-JJLIU0@nuvoton.com>
- <20230926085651.395069-4-JJLIU0@nuvoton.com>
- <20230926134807.GT305624@bill-the-cat>
- <CAKUZ0+FRnrEuyGpNMeqD_Tbi8VXTgtV=8A1ZoQPU=ZaMJRT3TQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Pg2orrLkEn/p5x25UoRpXri/5cZ+qUFsCA70u51gx7CphoQ+ORTxc5QRzG39hd9RwD72C/TFU21wvn4CnB2mZS8Pn0rAY2D6Ycr2hT64xP4+mImHXo14yh71NgL4ElVJpEdRBuIe3XLp24/0BmGQmy/+O54VdwxRd5644GiMRvT0B7Jqg5OnGN92GAWk5ySEdyEx6J1EHlehaGCRM1uck21QGVMTPVWwgeuvFNYzguFAD3zPuoJ6hY6mMd7Q5etzHatfqTCC1mu0K3tq/7+cdCOScx3L2jtpRvgcnsz/o27RtZqoQlSXUD30wXdlYZz7baLoB8WHbIYEOVvJpyychQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=P+kBmEQjFAzUnd6otMl5LiERVKs7sITbOhEv+GXwhtY=;
+ b=HnLmYQqUFlNY5UkN0FpS7WjpH89WsJnOEwo+JO6vjI3GcXnREkZvL4D+RTrwHDhkcNoitk3s8UgA8R8mfMVprihTjmYTCzgSiO0CXJ18n57Z6SGhUEbLvAeX3UaJmsRXfhAmkYezsI8jFsNE0Xwivd2mwk8l/gfG97rohudr6lsPnMExLiM5FWvtfqYWIXEJ8BkXg5C3ZTFQmPvt/6KLQkjrH3lFabtycMKnNon+d9au8AHwntbNUJA2clIRfeLqzDx6+8XcTd7d9qLXWlnRCpLDOYfDTHzLtaNizzKaeE3+2Wr7jttYim8+xPpLJcfsO3e5rhJqoK9Vw9vYJ2CQ6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
+ dkim=pass header.d=prevas.dk; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=P+kBmEQjFAzUnd6otMl5LiERVKs7sITbOhEv+GXwhtY=;
+ b=bGuOov+qs37XpNDg381msRJrszUsTs8RGq0tq2k81hVS19XYDIqSLc+O1lr9ZXGmajSxPVx3aQiCha3zErwhyotveKJ5bVVx8mdjyx7EvXgaSeenXsLZWHTTvNQcRn0ehSUQUmoY2cM6Bq+cNhH1+wOj5tgdw8p2dxLCydhWF+4=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=prevas.dk;
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
+ by VI1PR10MB3487.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:132::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.28; Thu, 28 Sep
+ 2023 12:50:08 +0000
+Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6813.027; Thu, 28 Sep 2023
+ 12:50:08 +0000
+Message-ID: <5cd68a37-2e26-06ef-47a8-581f04d48053@prevas.dk>
+Date: Thu, 28 Sep 2023 14:50:06 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v2 1/6] Kbuild: Fix cleanup of generated sources in tools
+Content-Language: en-US, da
+To: Tobias Deiminger <tdmg@linutronix.de>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, emkan@prevas.dk
+References: <20230619224107.284372-1-tdmg@linutronix.de>
+ <20230619224107.284372-2-tdmg@linutronix.de>
+From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+In-Reply-To: <20230619224107.284372-2-tdmg@linutronix.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MM0P280CA0031.SWEP280.PROD.OUTLOOK.COM
+ (2603:10a6:190:b::19) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:10:45a::14)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Vc42YH9mojTetQW9"
-Content-Disposition: inline
-In-Reply-To: <CAKUZ0+FRnrEuyGpNMeqD_Tbi8VXTgtV=8A1ZoQPU=ZaMJRT3TQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|VI1PR10MB3487:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4379889d-e285-4617-d930-08dbc0217201
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: vdXRC9FGMQ/RDvsgjsOikHERJR5TBGT06H6bzIf22KL1urdaMUcSQmVDiRLSL0BtxmzjdPaQVQiZmPiURvW3NNc8Tn+rdzal6ugaBHv9rBA5dD54hXCZwjULMIFuAyu0plPwMdh+tJqmNNBVxkF1f2iVZ65Lm9OgPmEhrczmkr2OAOJEb7Px5jodAqZahKwfeZ2DDHn6eTglrJWO4dKkWKMtLrJprBAbnynFXW/WqIfkA0HpQ8IuIx+Qahhu952FcvRtmzcd60a+PglPtWMyN4D50v7ea63AqcYtBXoEobwTITN2dvQDlrAZEDxgAxvVNet/JngvNFYsL0tNhVGQiZpqPpJbBe3X2EkpRSzzKGpIJ/nXNQ/P6shW5xO+kJT/aiH+mYmBPm4KqYp0deG6eWnS/PHtkAqb9AC0Ra1d5tHV3p2yuZZAEOa59q9fsdCKuKucDcQJi1Gj04eZIV0lmZlSEjYuBle+/GKpCEBhh9FCQ1OuJ3xhhUAElGCI1M0cTOI/lB6+DeJQu0hF6Y6sRkhayRUfw7/m9FVFrcSGGyHWZ8gR3y8E7Pl2exen2LHJYoUsZgMHxzzU+/bSvhZ9hcxfKxzmX2sqXrLx24FpKXRW2hCaK4XIVbc0IwAKaUjpWTvNn6T+mehUhCoITjeGOJywYvReRtr3o8o+yMpyZ3s=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(366004)(376002)(39840400004)(396003)(136003)(230922051799003)(64100799003)(451199024)(1800799009)(186009)(31686004)(66946007)(5660300002)(2906002)(41300700001)(316002)(8936002)(44832011)(6506007)(8976002)(8676002)(36756003)(66556008)(86362001)(2616005)(478600001)(26005)(966005)(6486002)(6512007)(38100700002)(4326008)(31696002)(52116002)(83380400001)(66476007)(38350700002)(107886003)(43740500002)(45980500001);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Njd4RlpMNWY3dHYzWElTWlo2Y1pEenVKWGc0VHpxZ3g0eEtqVC9Cdk1NQkF1?=
+ =?utf-8?B?SHg1VlhzWDlmaHVZTmN2TXNSbWNOUFg1ZlVHN0k5UitKOG9GSCtmYTh3RWFU?=
+ =?utf-8?B?WGY1NzBQZ0JKWm1vbjdDdVdtYURTd0wyOVBDeGp5bDZBb2JQcEdLVHF5OTRt?=
+ =?utf-8?B?akR4dWRJaVRqdWN4QWh4Y0JXSlJZZk1wdXZOb083anhCUFBScWFYcExkMXFa?=
+ =?utf-8?B?UlBFOGNVbmszb1VyMElkRGhObDl3ZEpTem1wYXJib0luK2VxY0FET3lpMkZD?=
+ =?utf-8?B?dk01YVlRYTl5dEFvaDczbnFab3pZUzFjRmVXeXBVemVzTUJVcHBLUXhwbFI4?=
+ =?utf-8?B?RERsTUpKSkZ5Sms4azFpQUxXNW5aSGxsbkx4d21CZ2pPS3dqKzhhbjB3dVRq?=
+ =?utf-8?B?bm1NSmVxZmpURzc1QzkxcXZPc1F5L3dQSTltM3RtZDh2YlFvNGdNMERmemU0?=
+ =?utf-8?B?WUNOaWdBa2t5ZnRxWTRwcGRFQVpkNjFvVmpHRWpjWGNHaE1HY2c0WGhUdTBj?=
+ =?utf-8?B?QmpmcVRHbC80RVRKbjdtaXpDZmpWRlQ4UDUwaGovenVkdzQ1YnRHUEhUZkJC?=
+ =?utf-8?B?WVdyRnJ4S2VRZTJ3WmZCdjVTNkZzdW1Ra0lOVjFZSDZCYXVSRFpFU25hT2dR?=
+ =?utf-8?B?eGZYNXNON1RzQzFMZUVUVVdsdWRuQ2I3aVEyanQ4NStobjhFTDNodm84bjZh?=
+ =?utf-8?B?ZmNPdk9hYnlzaVVjdGVhRDdrYWJpcDkvUVRwVVZDYWUvY0wzNTFHL2lFNkFs?=
+ =?utf-8?B?QUhML0FZMUp0T0dtbk13UzlUaHdoUDFMbHFSclF3aEhIdUdJdUVJUVUvd0RJ?=
+ =?utf-8?B?dW1naHlXaTdSZDNZSmZqN0dyLzdGNDdsd0Y3Z0UzNXJFRmxFa2NQQXVMVUJW?=
+ =?utf-8?B?M09wZmZDSE5mQWNwU1BsTWI4RTNjNmdOcjg5czJhemllVis2d0tTSUJCN2Ro?=
+ =?utf-8?B?UjBWaXVHanJkaE9QNmk4Wm15NUJ6cXlwcDBabXpyR1JuN3pUNEtRRDBhRFZU?=
+ =?utf-8?B?b2ZUNDFNUzlIaERHdWRINzBjT1pZek1qNGFPWGR0Qk5Md2o1NjNManF4QTlQ?=
+ =?utf-8?B?M3duYVIxS01UY0NmVWxWM2pqM1dDZUxqZG5NWXhHNmpGazdPZHJIRUVEb0la?=
+ =?utf-8?B?NytqeXh1dEFtdzlHaEh2MWpMV2pUMFhUQTNVU1lDUG5teUxlajJZQnBHSzN1?=
+ =?utf-8?B?RlpHUm11MDdaaDFZV1VTa1BEMXlNNkZTVmdmb0RpdWs0dExXeG95WWp4OG5a?=
+ =?utf-8?B?UUF1Vk4vZE5yelY5b09aZ3NIWGZyVzZYQ0pXY3ptWFR3Y04vRFdkRDNOVlFz?=
+ =?utf-8?B?YW1QZ1AxMFVKQ2I5bmJ3V0lKWVZXeC9FemdOeTRmVHBDNVZSLzJkd0V5Y0d0?=
+ =?utf-8?B?TW1BeUppOWc1ZytGaTFCSnM5NUlDTEtKMkl5NVY0SWJTZDFzWlE4WFNxRUwy?=
+ =?utf-8?B?KzdUN0tVa3FGZldWaS9vNUpKYmEzeGJBbkhLdWNLTHJ4dU1MSnJ2VHJndzR0?=
+ =?utf-8?B?SXFiMk52RXRodzZ6Z29lWWV0ZUFqUm9nTmorRHdEc1p6WlZ4NnJuN2RyRTZ2?=
+ =?utf-8?B?cVh6alRFc2ZGTk1VOTJUSkZqUi9KUG1aSDF3a2s2Vkx2RDVoeFlxTUU1clRN?=
+ =?utf-8?B?QjkrbmtjakxpRWdYOE04NnVBdTdXTlVHb0RQUUVHTGNZNzBSblZZdXV0MGUx?=
+ =?utf-8?B?bGFBVytDY0xIVmJkd1ZYSHNqZkt1NFR2NzNlcXFGTWpGZnRKVEd3Y2l4TUdy?=
+ =?utf-8?B?OU9obGUxRVJGWkRiYWhJSU8xMitDQjExSGY3SFRDbVRDN2hyZVNpTjViK1gr?=
+ =?utf-8?B?V1cwcU9nZjFRSGpvZ2VMVHE2MjA5RzkxdjZ2dTV4VzhsTnN0NDZpTEwrSGxU?=
+ =?utf-8?B?YlM1SkdlanZ3ZU9wbTU5Vlo0N01pVGtyN0dOU0t3Nm52cmtHRXQ4aUk2Q1c5?=
+ =?utf-8?B?Q3gwSTM3MHYvOGNxRUIyc3hvUnQ2MStJMFVXTU0vZVRWOWNNeDNKS3pHQXhI?=
+ =?utf-8?B?Vm9aMGxNTmNKSkdEZFZFc09DOHp5cVVpckVxeWdka3dNR0NlVUM2M2cvcy9L?=
+ =?utf-8?B?WUpuUGlYRzJ6aW1vQ21BOElHOU41NlhCRHBsNkEwWW9pSWZlemVQU0EwM2da?=
+ =?utf-8?B?SEtKdmQrYU85TVFBdjNwYWJydFhqMjYrdUFlWERMb25zRmxkckYwNHA3d2lI?=
+ =?utf-8?B?Smc9PQ==?=
+X-OriginatorOrg: prevas.dk
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4379889d-e285-4617-d930-08dbc0217201
+X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2023 12:50:08.3682 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Dc0QJxagrR2XkjPg8w6F/uuycDHnOmCF8aeTkBTEIBEYSxG5uWQWo8NSUnv9Ee7c9ZHbJTSX9EhykyH32L4XCbMFjE2z/afiHRP2CBsWg/U=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3487
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,95 +145,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 20/06/2023 00.41, Tobias Deiminger wrote:
 
---Vc42YH9mojTetQW9
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+>  quiet_cmd_wrap = WRAP    $@
+> -cmd_wrap = echo "\#include <../$(patsubst $(obj)/%,%,$@)>" >$@
+> +cmd_wrap = echo "\#include <../$(patsubst $(obj)/generated/%,%,$@)>" >$@
+>  
+> -$(obj)/boot/%.c $(obj)/common/%.c $(obj)/env/%.c $(obj)/lib/%.c:
+> +$(obj)/generated/%.c:
+>  	$(call cmd,wrap)
 
-On Thu, Sep 28, 2023 at 08:49:23AM +0800, Jim Liu wrote:
-> Hi Tom
->=20
-> Thanks for the quick review.
->=20
-> if we set the CONFIG_SYS_DCACHE_OFF the  armv8 will build error.
-> So we added a workaround for our bmc uboot.
->=20
-> the error message as below:
->=20
-> CONFIG_SYS_DCACHE_OFF can't be enabled on armv8, or the following
-> build error would happen.
->=20
-> arch/arm/cpu/armv8/cpu.o: in function `cleanup_before_linux':
-> arch/arm/cpu/armv8/cpu.c:60: undefined reference to `icache_disable'
-> arch/arm/cpu/armv8/cpu.c:68: undefined reference to `dcache_disable'
-> arch/arm/cpu/armv8/cpu.c:69: undefined reference to `invalidate_dcache_al=
-l'
+FWIW, this change incidentally also fixes a warning (and future error!)
+from GNU Make. Building v2023.04 with GNU Make 4.4 produces
 
-OK, so you need
-https://patchwork.ozlabs.org/project/uboot/patch/20230811054228.3721455-1-b=
-hupesh.sharma@linaro.org/
-to be applied, as-is, yes? Thanks!
+WRAP    tools/env/embedded.c
+tools/Makefile:264: warning: pattern recipe did not update peer target
+'tools/common/crc32.c'.
+tools/Makefile:264: warning: pattern recipe did not update peer target
+'tools/boot/crc32.c'.
+tools/Makefile:264: warning: pattern recipe did not update peer target
+'tools/lib/embedded.c'.
+tools/Makefile:264: warning: pattern recipe did not update peer target
+'tools/common/embedded.c'.
+tools/Makefile:264: warning: pattern recipe did not update peer target
+'tools/boot/embedded.c'.
+  WRAP    tools/lib/sha1.c
+  HOSTCC  tools/img2srec
+tools/Makefile:264: warning: pattern recipe did not update peer target
+'tools/env/sha1.c'.
+tools/Makefile:264: warning: pattern recipe did not update peer target
+'tools/common/sha1.c'.
+tools/Makefile:264: warning: pattern recipe did not update peer target
+'tools/boot/sha1.c'.
 
->=20
-> Best regards,
-> Jim
->=20
-> On Tue, Sep 26, 2023 at 9:48=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
-te:
-> >
-> > On Tue, Sep 26, 2023 at 04:56:50PM +0800, Jim Liu wrote:
-> >
-> > > do not enable dcache by setting CONFIG_SYS_NPCM_DCACHE_OFF=3Dy
-> > >
-> > > Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
-> > > ---
-> > >  arch/arm/mach-npcm/npcm8xx/Kconfig |  4 ++++
-> > >  arch/arm/mach-npcm/npcm8xx/cpu.c   | 12 +++++++++++-
-> > >  2 files changed, 15 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/arch/arm/mach-npcm/npcm8xx/Kconfig b/arch/arm/mach-npcm/=
-npcm8xx/Kconfig
-> > > index 5f4a0506dc..163e7e7d48 100644
-> > > --- a/arch/arm/mach-npcm/npcm8xx/Kconfig
-> > > +++ b/arch/arm/mach-npcm/npcm8xx/Kconfig
-> > > @@ -6,6 +6,10 @@ config SYS_CPU
-> > >  config SYS_SOC
-> > >       default "npcm8xx"
-> > >
-> > > +config SYS_NPCM_DCACHE_OFF
-> > > +     bool "Do not enable dcache"
-> > > +     default n
-> > > +
-> > >  config TARGET_ARBEL_EVB
-> > >       bool "Arbel Evaluation Board"
-> > >       help
-> >
-> > Why do we need a new Kconfig option here on top of the existing generic
-> > ones to control cache?
-> >
-> > --
-> > Tom
+etc. See the first "WARNING: Future backward-incompatibility!" bullet in
+https://lists.gnu.org/archive/html/help-make/2022-10/msg00020.html .
 
---=20
-Tom
+Rasmus
 
---Vc42YH9mojTetQW9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUVcCsACgkQFHw5/5Y0
-tyw2UQv7B99jMJfgBDoyruTXsSob/LhKNlquVttx5jJ8uWiHLv6ppUbBxcBe1MSF
-6T8zqDYnHt8kYgE6FT4aKK8t+nSDo757E97FNbflCAGGxhcCGMnpQo3PAeq183iL
-W6jdkAWS9UKNvrcpE+eUnuX37BhWZAwTYiBWdwv/SNyTnxRVC2QE3TBqqSZl9AqQ
-zVCIODMSrKkkgSCKAL84l5trqJ1TZTki4JFnZALVFXF2MQlYMcB2eKO9FSGs0IE3
-ueNsRXCF3Tlo8ye0+yrNE+fXSizB448yrU7OnJvgO//x83mMIFQpvmlMQTmoxVI/
-opGB7lgWzKLDRfP3sZhQTEjkgeN97yetGruWqhfqmck097/nhQ0BCO+weatHKniI
-ewHFek+92Kqml3jsz3the6Y3+lL+vpBHTtc4s6HrEAny0QuvH3cQVtTKphASGih4
-ZI+F5BPz5Qluq7vf/8f+/Ua4Jm8JXqSr66WN0YcxeoeUjQjVRS5SjSlRTG2Z4YTo
-L8WKse5D
-=oKjL
------END PGP SIGNATURE-----
-
---Vc42YH9mojTetQW9--
