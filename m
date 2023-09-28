@@ -4,81 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D506CE7B19
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 10:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71416E732C2
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 11:08:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4792786DDF;
-	Thu, 28 Sep 2023 12:33:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6DB8586568;
+	Thu, 28 Sep 2023 13:08:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="v3BYOVB4";
+	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="CQqCi57D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6ACC886E12; Thu, 28 Sep 2023 12:33:33 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6F56F86538; Thu, 28 Sep 2023 13:08:23 +0200 (CEST)
+Received: from mail-40137.protonmail.ch (mail-40137.protonmail.ch
+ [185.70.40.137])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1EB586D43
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 12:33:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A4BA86568
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 13:08:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38SAXKKS034002;
- Thu, 28 Sep 2023 05:33:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1695897200;
- bh=Tn1FMbVfmJUdZYJeEux9ORDL0CxaI43gL5tQrhprGLs=;
- h=Date:Subject:To:References:From:In-Reply-To;
- b=v3BYOVB4KVHHsPMNP/U/epFNe1Wb1bB1Jpe08r1QG8CjVkvAd+Lce/RmvaCWMIjO9
- eBAFM7nkkZifwipg2bDPe6ou9Jj4MGyA2tw9UWWsBDQ/ezSWrsFabtOl0HWSt6DG8D
- KxAB7K2cOFl6XTqkKQEamdI9znkQJsd8B5nzSTxI=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38SAXKmd046918
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 28 Sep 2023 05:33:20 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 28
- Sep 2023 05:33:19 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 28 Sep 2023 05:33:19 -0500
-Received: from [10.24.69.34] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38SAXCLn079152;
- Thu, 28 Sep 2023 05:33:13 -0500
-Message-ID: <9ec784e3-b908-ad9c-cbe3-d81e401d536e@ti.com>
-Date: Thu, 28 Sep 2023 16:03:11 +0530
+ spf=pass smtp.mailfrom=vitali64pmemail@protonmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+ s=protonmail3; t=1695899299; x=1696158499;
+ bh=jSDOgdU52fjwuwNmZN7XJFZsRYTVdapfUrqf2bS1K7o=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=CQqCi57DfgMYC5aqMqDSaohc3jT7NjlcHttnhGwaYlQeFu6NBKP3fwTMxCKw0V1Js
+ 1jz8Gd7sdsSalIfR4gogmhoV5uKiUeKJZCWzwFhpilVjBo7m+2kwgYj302GcRrZzc4
+ ByIrrzNTxlYHgpJqgjvk9oLT8LetxHYKyYeSedOut2hV3shr9LfiMYMnJxfKcPCTH6
+ lfPSiVkxrG30IDOaoUVdPg/L8LPwCGB7XmoEddm0oj6+ffInVRB8o2fVCkGKSOc80T
+ +RNs1KZppwUMn4S6m3Hua6DJdNaRT7uGCYh3yJahvGgtya944sowWJyTPywjjGMCBG
+ LU8Flf4beGGKQ==
+Date: Thu, 28 Sep 2023 11:08:11 +0000
+To: Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>
+From: Ferass El Hafidi <vitali64pmemail@protonmail.com>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io
+Subject: Re: [PATCH] mmc: Add SPL_MMC_PWRSEQ to fix link issue when building
+ SPL
+Message-ID: <CVUI3MZ0E9QQ.3RDSILF3MHWN8@flaptop>
+In-Reply-To: <20230925215516.1528643-1-jonas@kwiboo.se>
+References: <20230925215516.1528643-1-jonas@kwiboo.se>
+Feedback-ID: 37421466:user:proton
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH v3 02/16] arm: mach-k3: Add basic support for J784S4 SoC
- definition
-Content-Language: en-US
-To: Roger Quadros <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Nishanth Menon
- <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, Marcel Ziswiler
- <marcel.ziswiler@toradex.com>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph
- Siemsen <ralph.siemsen@linaro.org>, Yanhong Wang
- <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>
-References: <20230908110551.861575-1-a-nandan@ti.com>
- <20230908110551.861575-3-a-nandan@ti.com>
- <958213c7-eefe-9d47-5979-876aadc1d044@kernel.org>
-From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <958213c7-eefe-9d47-5979-876aadc1d044@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,378 +71,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon Sep 25, 2023 at 11:55 PM CEST, Jonas Karlman wrote:
+> With MMC_PWRSEQ enabled the following link issue may happen when
+> building SPL and SPL_PWRSEQ is not enabled.
+>
+>   aarch64-linux-gnu-ld.bfd: drivers/mmc/meson_gx_mmc.o: in function `meso=
+n_mmc_probe':
+>   drivers/mmc/meson_gx_mmc.c:295: undefined reference to `pwrseq_set_powe=
+r'
+>
+> Fix this by adding a SPL_MMC_PWRSEQ Kconfig option used to enable mmc
+> pwrseq support in SPL.
+>
+> Also add depends on DM_GPIO to fix following link issue:
+>
+>   aarch64-linux-gnu-ld.bfd: drivers/mmc/mmc-pwrseq.o: in function `mmc_pw=
+rseq_set_power':
+>   drivers/mmc/mmc-pwrseq.c:26: undefined reference to `gpio_request_by_na=
+me'
+>   aarch64-linux-gnu-ld.bfd: drivers/mmc/mmc-pwrseq.c:29: undefined refere=
+nce to `dm_gpio_set_value'
+>   aarch64-linux-gnu-ld.bfd: drivers/mmc/mmc-pwrseq.c:31: undefined refere=
+nce to `dm_gpio_set_value'
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-On 09/09/23 16:18, Roger Quadros wrote:
-> Hi,
->
-> On 08/09/2023 14:05, Apurva Nandan wrote:
->> Add j784s4 initialization files for initial SPL boot.
-> Please be consistent in naming. J784S4 ?
->
->> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
->> [ add firewall configurations and change the R5 MCU scratchpad ]
->> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
->> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
->> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
->> ---
->>   arch/arm/mach-k3/Kconfig                      |  16 +-
->>   arch/arm/mach-k3/Makefile                     |   3 +
->>   arch/arm/mach-k3/arm64-mmu.c                  |  52 +++
->>   arch/arm/mach-k3/include/mach/hardware.h      |   4 +
->>   .../mach-k3/include/mach/j784s4_hardware.h    |  60 ++++
->>   arch/arm/mach-k3/include/mach/j784s4_spl.h    |  46 +++
->>   arch/arm/mach-k3/include/mach/spl.h           |   6 +-
->>   arch/arm/mach-k3/j784s4_fdt.c                 |  15 +
->>   arch/arm/mach-k3/j784s4_init.c                | 332 ++++++++++++++++++
->>   9 files changed, 526 insertions(+), 8 deletions(-)
->>   create mode 100644 arch/arm/mach-k3/include/mach/j784s4_hardware.h
->>   create mode 100644 arch/arm/mach-k3/include/mach/j784s4_spl.h
->>   create mode 100644 arch/arm/mach-k3/j784s4_fdt.c
->>   create mode 100644 arch/arm/mach-k3/j784s4_init.c
->>
->> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
->> index 9168bf842d..0af2ec6ddb 100644
->> --- a/arch/arm/mach-k3/Kconfig
->> +++ b/arch/arm/mach-k3/Kconfig
->> @@ -22,6 +22,9 @@ config SOC_K3_AM625
->>   config SOC_K3_AM62A7
->>   	bool "TI's K3 based AM62A7 SoC Family Support"
->>   
->> +config SOC_K3_J784S4
->> +	bool "TI's K3 based J784S4 SoC Family Support"
->> +
->>   endchoice
->>   
->>   config SYS_SOC
->> @@ -30,7 +33,7 @@ config SYS_SOC
->>   config SYS_K3_NON_SECURE_MSRAM_SIZE
->>   	hex
->>   	default 0x80000 if SOC_K3_AM654
->> -	default 0x100000 if SOC_K3_J721E || SOC_K3_J721S2
->> +	default 0x100000 if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
->>   	default 0x1c0000 if SOC_K3_AM642
->>   	default 0x3c000 if SOC_K3_AM625 || SOC_K3_AM62A7
->>   	help
->> @@ -42,7 +45,7 @@ config SYS_K3_NON_SECURE_MSRAM_SIZE
->>   config SYS_K3_MAX_DOWNLODABLE_IMAGE_SIZE
->>   	hex
->>   	default 0x58000 if SOC_K3_AM654
->> -	default 0xc0000 if SOC_K3_J721E || SOC_K3_J721S2
->> +	default 0xc0000 if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
->>   	default 0x180000 if SOC_K3_AM642
->>   	default 0x38000 if SOC_K3_AM625 || SOC_K3_AM62A7
->>   	help
->> @@ -52,15 +55,14 @@ config SYS_K3_MAX_DOWNLODABLE_IMAGE_SIZE
->>   config SYS_K3_MCU_SCRATCHPAD_BASE
->>   	hex
->>   	default 0x40280000 if SOC_K3_AM654
->> -	default 0x41cff9fc if SOC_K3_J721S2
->> -	default 0x41cff9fc if SOC_K3_J721E
->> +	default 0x41cff9fc if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
->>   	help
->>   	  Describes the base address of MCU Scratchpad RAM.
->>   
->>   config SYS_K3_MCU_SCRATCHPAD_SIZE
->>   	hex
->>   	default 0x200 if SOC_K3_AM654
->> -	default 0x200 if SOC_K3_J721E || SOC_K3_J721S2
->> +	default 0x200 if SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_J784S4
->>   	help
->>   	  Describes the size of MCU Scratchpad RAM.
->>   
->> @@ -68,7 +70,7 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
->>   	hex
->>   	default 0x41c7fbfc if SOC_K3_AM654
->>   	default 0x41cffbfc if SOC_K3_J721E
->> -	default 0x41cfdbfc if SOC_K3_J721S2
->> +	default 0x41cfdbfc if SOC_K3_J721S2 || SOC_K3_J784S4
-> Pleas move this to one line along with SOC_K3_J721E
->
->>   	default 0x701bebfc if SOC_K3_AM642
->>   	default 0x43c3f290 if SOC_K3_AM625
->>   	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
->> @@ -172,7 +174,7 @@ config K3_ATF_LOAD_ADDR
->>   
->>   config K3_DM_FW
->>   	bool "Separate DM firmware image"
->> -	depends on SPL && CPU_V7R && (SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_AM625 || SOC_K3_AM62A7) && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
->> +	depends on SPL && CPU_V7R && (SOC_K3_J721E || SOC_K3_J721S2 || SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_J784S4) && !CLK_TI_SCI && !TI_SCI_POWER_DOMAIN
->>   	default y
->>   	help
->>   	  Enabling this will indicate that the system has separate DM
->> diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
->> index fd77b8bbba..6fe36c265c 100644
->> --- a/arch/arm/mach-k3/Makefile
->> +++ b/arch/arm/mach-k3/Makefile
->> @@ -7,6 +7,7 @@ obj-$(CONFIG_SOC_K3_J721E) += j721e/ j7200/
->>   obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
->>   obj-$(CONFIG_SOC_K3_AM625) += am62x/
->>   obj-$(CONFIG_SOC_K3_AM62A7) += am62ax/
->> +obj-$(CONFIG_SOC_K3_J784S4) += j784s4/
->>   obj-$(CONFIG_ARM64) += arm64-mmu.o
->>   obj-$(CONFIG_CPU_V7R) += r5_mpu.o lowlevel_init.o
->>   obj-$(CONFIG_ARM64) += cache.o
->> @@ -16,6 +17,7 @@ obj-$(CONFIG_SOC_K3_AM654) += am654_fdt.o
->>   obj-$(CONFIG_SOC_K3_J721E) += j721e_fdt.o
->>   obj-$(CONFIG_SOC_K3_J721S2) += j721s2_fdt.o
->>   obj-$(CONFIG_SOC_K3_AM625) += am625_fdt.o
->> +obj-$(CONFIG_SOC_K3_J784S4) += j784s4_fdt.o
->>   endif
->>   ifeq ($(CONFIG_SPL_BUILD),y)
->>   obj-$(CONFIG_SOC_K3_AM654) += am654_init.o
->> @@ -24,6 +26,7 @@ obj-$(CONFIG_SOC_K3_J721S2) += j721s2_init.o
->>   obj-$(CONFIG_SOC_K3_AM642) += am642_init.o
->>   obj-$(CONFIG_SOC_K3_AM625) += am625_init.o
->>   obj-$(CONFIG_SOC_K3_AM62A7) += am62a7_init.o
->> +obj-$(CONFIG_SOC_K3_J784S4) += j784s4_init.o
->>   obj-$(CONFIG_K3_LOAD_SYSFW) += sysfw-loader.o
->>   endif
->>   obj-y += common.o security.o
->> diff --git a/arch/arm/mach-k3/arm64-mmu.c b/arch/arm/mach-k3/arm64-mmu.c
->> index f8087d2421..c060920d7c 100644
->> --- a/arch/arm/mach-k3/arm64-mmu.c
->> +++ b/arch/arm/mach-k3/arm64-mmu.c
->> @@ -318,3 +318,55 @@ struct mm_region am64_mem_map[NR_MMU_REGIONS] = {
->>   
->>   struct mm_region *mem_map = am64_mem_map;
->>   #endif /* CONFIG_SOC_K3_AM642 */
->> +
->> +#if defined(CONFIG_SOC_K3_J784S4)
->> +#define NR_MMU_REGIONS	(CONFIG_NR_DRAM_BANKS + 5)
->> +
->> +struct mm_region j784s4_mem_map[NR_MMU_REGIONS] = {
->> +	{
->> +		.virt = 0x0UL,
->> +		.phys = 0x0UL,
->> +		.size = 0x80000000UL,
->> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
->> +			 PTE_BLOCK_NON_SHARE |
->> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
->> +	}, {
->> +		.virt = 0x80000000UL,
->> +		.phys = 0x80000000UL,
->> +		.size = 0x20000000UL,
->> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->> +			 PTE_BLOCK_INNER_SHARE
->> +	}, {
->> +		.virt = 0xa0000000UL,
->> +		.phys = 0xa0000000UL,
->> +		.size = 0x21000000UL,
->> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL_NC) |
->> +			 PTE_BLOCK_NON_SHARE
->> +	}, {
->> +		.virt = 0xc1000000UL,
->> +		.phys = 0xc1000000UL,
->> +		.size = 0x3f000000UL,
->> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->> +			 PTE_BLOCK_INNER_SHARE
->> +	}, {
->> +		.virt = 0x880000000UL,
->> +		.phys = 0x880000000UL,
->> +		.size = 0x80000000UL,
->> +		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
->> +			 PTE_BLOCK_INNER_SHARE
->> +	}, {
->> +		.virt = 0x500000000UL,
->> +		.phys = 0x500000000UL,
->> +		.size = 0x400000000UL,
->> +		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
->> +			 PTE_BLOCK_NON_SHARE |
->> +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
->> +	}, {
->> +		/* List terminator */
->> +		0,
->> +	}
->> +};
->> +
->> +struct mm_region *mem_map = j784s4_mem_map;
->> +
->> +#endif /* CONFIG_SOC_K3_J784S4 */
->> diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
->> index 65742c4b7c..03b18f6bad 100644
->> --- a/arch/arm/mach-k3/include/mach/hardware.h
->> +++ b/arch/arm/mach-k3/include/mach/hardware.h
->> @@ -33,6 +33,10 @@
->>   #include "am62a_qos.h"
->>   #endif
->>   
->> +#ifdef CONFIG_SOC_K3_J784S4
->> +#include "j784s4_hardware.h"
->> +#endif
->> +
->>   /* Assuming these addresses and definitions stay common across K3 devices */
->>   #define CTRLMMR_WKUP_JTAG_ID	(WKUP_CTRL_MMR0_BASE + 0x14)
->>   #define JTAG_ID_VARIANT_SHIFT	28
->> diff --git a/arch/arm/mach-k3/include/mach/j784s4_hardware.h b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
->> new file mode 100644
->> index 0000000000..b5fd91c038
->> --- /dev/null
->> +++ b/arch/arm/mach-k3/include/mach/j784s4_hardware.h
->> @@ -0,0 +1,60 @@
->> +/* SPDX-License-Identifier: GPL-2.0+ */
->> +/*
->> + * K3: J784S4 SoC definitions, structures etc.
->> + *
->> + * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
-> 2023 here and elsewhere in this series.
->
->> + */
->> +#ifndef __ASM_ARCH_J784S4_HARDWARE_H
->> +#define __ASM_ARCH_J784S4_HARDWARE_H
->> +
->> +#include <config.h>
->> +#ifndef __ASSEMBLY__
->> +#include <linux/bitops.h>
->> +#endif
->> +
->> +#define WKUP_CTRL_MMR0_BASE				0x43000000
->> +#define MCU_CTRL_MMR0_BASE				0x40f00000
->> +#define CTRL_MMR0_BASE					0x00100000
->> +
->> +#define CTRLMMR_MAIN_DEVSTAT				(CTRL_MMR0_BASE + 0x30)
->> +#define MAIN_DEVSTAT_BOOT_MODE_B_MASK			BIT(0)
->> +#define MAIN_DEVSTAT_BOOT_MODE_B_SHIFT			0
->> +#define MAIN_DEVSTAT_BKUP_BOOTMODE_MASK			GENMASK(3, 1)
->> +#define MAIN_DEVSTAT_BKUP_BOOTMODE_SHIFT		1
->> +#define MAIN_DEVSTAT_PRIM_BOOTMODE_MMC_PORT_MASK	BIT(6)
->> +#define MAIN_DEVSTAT_PRIM_BOOTMODE_PORT_SHIFT		6
->> +#define MAIN_DEVSTAT_BKUP_MMC_PORT_MASK			BIT(7)
->> +#define MAIN_DEVSTAT_BKUP_MMC_PORT_SHIFT		7
->> +
->> +#define CTRLMMR_WKUP_DEVSTAT				(WKUP_CTRL_MMR0_BASE + 0x30)
->> +#define WKUP_DEVSTAT_PRIMARY_BOOTMODE_MASK		GENMASK(5, 3)
->> +#define WKUP_DEVSTAT_PRIMARY_BOOTMODE_SHIFT		3
->> +#define WKUP_DEVSTAT_MCU_OMLY_MASK			BIT(6)
->> +#define WKUP_DEVSTAT_MCU_ONLY_SHIFT			6
->> +
->> +/* ROM HANDOFF Structure location */
->> +#define ROM_EXTENDED_BOOT_DATA_INFO			0x41cfdb00
->> +
->> +/* MCU SCRATCHPAD usage */
->> +#define TI_SRAM_SCRATCH_BOARD_EEPROM_START	CONFIG_SYS_K3_MCU_SCRATCHPAD_BASE
->> +
->> +#if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
->> +
->> +#define J784S4_DEV_MCU_RTI0			367
->> +#define J784S4_DEV_MCU_RTI1			368
->> +#define J784S4_DEV_MCU_ARMSS0_CPU0		346
->> +#define J784S4_DEV_MCU_ARMSS0_CPU1		347
->> +
->> +static const u32 put_device_ids[] = {
->> +	J784S4_DEV_MCU_RTI0,
->> +	J784S4_DEV_MCU_RTI1,
->> +};
->> +
->> +static const u32 put_core_ids[] = {
->> +	J784S4_DEV_MCU_ARMSS0_CPU1,
->> +	J784S4_DEV_MCU_ARMSS0_CPU0,     /* Handle CPU0 after CPU1 */
->> +};
->> +
->> +#endif
->> +
->> +#endif /* __ASM_ARCH_J784S4_HARDWARE_H */
->> diff --git a/arch/arm/mach-k3/include/mach/j784s4_spl.h b/arch/arm/mach-k3/include/mach/j784s4_spl.h
->> new file mode 100644
->> index 0000000000..7f6293e628
->> --- /dev/null
->> +++ b/arch/arm/mach-k3/include/mach/j784s4_spl.h
->> @@ -0,0 +1,46 @@
->> +/* SPDX-License-Identifier: GPL-2.0+ */
->> +/*
->> + * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
->> + *	David Huang <d-huang@ti.com>
->> + */
->> +#ifndef _ASM_ARCH_J784S4_SPL_H_
->> +#define _ASM_ARCH_J784S4_SPL_H_
->> +
->> +/* With BootMode B = 0 */
->> +#include <linux/bitops.h>
-> Please add blank line here.
->
->> +#define BOOT_DEVICE_HYPERFLASH		0x00
->> +#define BOOT_DEVICE_OSPI		0x01
->> +#define BOOT_DEVICE_QSPI		0x02
->> +#define BOOT_DEVICE_SPI			0x03
->> +#define BOOT_DEVICE_ETHERNET		0x04
->> +#define BOOT_DEVICE_I2C			0x06
->> +#define BOOT_DEVICE_UART		0x07
->> +#define BOOT_DEVICE_NOR			BOOT_DEVICE_HYPERFLASH
->> +
->> +/* With BootMode B = 1 */
->> +#define BOOT_DEVICE_MMC2		0x10
->> +#define BOOT_DEVICE_MMC1		0x11
->> +#define BOOT_DEVICE_DFU			0x12
->> +#define BOOT_DEVICE_UFS			0x13
->> +#define BOOT_DEVIE_GPMC			0x14
->> +#define BOOT_DEVICE_PCIE		0x15
->> +#define BOOT_DEVICE_XSPI		0x16
->> +#define BOOT_DEVICE_RAM			0x17
->> +#define BOOT_DEVICE_MMC2_2		0xFF /* Invalid value */
->> +
->> +/* Backup boot modes with MCU Only = 0 */
->> +#define BACKUP_BOOT_DEVICE_RAM		0x0
->> +#define BACKUP_BOOT_DEVICE_USB		0x1
->> +#define BACKUP_BOOT_DEVICE_UART		0x3
->> +#define BACKUP_BOOT_DEVICE_ETHERNET	0x4
->> +#define BACKUP_BOOT_DEVICE_MMC2		0x5
->> +#define BACKUP_BOOT_DEVICE_SPI		0x6
->> +#define BACKUP_BOOT_DEVICE_I2C		0x7
->> +
->> +#define BOOT_MODE_B_SHIFT		4
->> +#define BOOT_MODE_B_MASK		BIT(4)
->> +
->> +#define K3_PRIMARY_BOOTMODE		0x0
->> +#define K3_BACKUP_BOOTMODE		0x1
->> +
->> +#endif
->> diff --git a/arch/arm/mach-k3/include/mach/spl.h b/arch/arm/mach-k3/include/mach/spl.h
->> index 356cd89210..82f57347e6 100644
->> --- a/arch/arm/mach-k3/include/mach/spl.h
->> +++ b/arch/arm/mach-k3/include/mach/spl.h
->> @@ -1,6 +1,6 @@
->>   /* SPDX-License-Identifier: GPL-2.0+ */
->>   /*
->> - * Copyright (C) 2018 Texas Instruments Incorporated - http://www.ti.com/
->> + * Copyright (C) 2018-2022 Texas Instruments Incorporated - https://www.ti.com/
->>    *	Lokesh Vutla <lokeshvutla@ti.com>
->>    */
->>   #ifndef _ASM_ARCH_SPL_H_
->> @@ -30,4 +30,8 @@
->>   #include "am62a_spl.h"
->>   #endif
->>   
->> +#ifdef CONFIG_SOC_K3_J784S4
->> +#include "j784s4_spl.h"
->> +#endif
->> +
->>   #endif /* _ASM_ARCH_SPL_H_ */
->> diff --git a/arch/arm/mach-k3/j784s4_fdt.c b/arch/arm/mach-k3/j784s4_fdt.c
->> new file mode 100644
->> index 0000000000..86f33f2d8c
->> --- /dev/null
->> +++ b/arch/arm/mach-k3/j784s4_fdt.c
->> @@ -0,0 +1,15 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +/*
->> + * J784S4: SoC specific initialization
->> + *
->> + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
->> + *	Apurva Nandan <a-nandan@ti.com>
->> + */
->> +
->> +#include "common_fdt.h"
->> +#include <fdt_support.h>
->> +
->> +int ft_system_setup(void *blob, struct bd_info *bd)
->> +{
->> +	return fdt_fixup_msmc_ram_k3(blob);
->> +}
-> This file is exactly same as j721e_fdt.c and j721s2_fdt.c.
->
-> Can we please consolidate the 3 files into 1 and reuse among all J7 variants?
-Currently all K3 platforms follow this scheme. In this series, I want to add
-J784S4 support within current implementation. I will address this issue in a
-separate series, moving all fdt.c in a common place.
->> diff --git a/arch/arm/mach-k3/j784s4_init.c b/arch/arm/mach-k3/j784s4_init.c
-> <snip>
->
+This issue was discovered while working on SPL support for Amlogic
+devices (not upstream yet), which is why the errors are related to
+the `meson_gx_mmc.c` file. It doesn't seem to be an issue specific to
+meson_gx_mmc though.
+
+Cheers.
+
