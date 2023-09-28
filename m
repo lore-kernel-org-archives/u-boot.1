@@ -4,107 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB185CE7B0C
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 09:04:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E0BECE7B0E
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 09:08:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 393268652A;
-	Thu, 28 Sep 2023 11:04:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 073EE86D43;
+	Thu, 28 Sep 2023 11:08:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JU/mDcfd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ubV0SfmP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C805D869CA; Thu, 28 Sep 2023 11:04:41 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 4F57F86D43; Thu, 28 Sep 2023 11:08:11 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A22A3864CD
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 11:04:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F73586784
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 11:08:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-32167a4adaaso12109966f8f.1
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 02:04:39 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-503065c4b25so20232998e87.1
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 02:08:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695891879; x=1696496679; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=C560Nh+KV3R8eIM8i9TQVF4mEeqUj4ionnt9HrBHDDo=;
- b=JU/mDcfdBVKHMD4nr/ZSfUFDVvAk51FPKC9GyEuO+nHn+9hfSw/tv/UOj9q/hHBB4b
- Sdmbx/33y5wabavJSWod7nmT4zkEX5xcDsY48VtCkvN5+LZ2FNVWLScDzOorSfAVygnY
- 3jitrjqAw9aYj+L54yccknXhwOGXHcftgephPur5i6JF7Wau0b1RK2bSoH2qvoVQQ08t
- 3STq3fEwiVaRBBULqEwUev5236rFhdu+TimDwFocal0wLuqCfWKk7dc9pus4tvAVtDBT
- 5lQJB5tZKNB6BdOkwmmNjsIUYGuU3WPlMM3DInVZSVWc1T4jEHnzNdYGf6y6aA6GUZdg
- pO2A==
+ d=linaro.org; s=google; t=1695892087; x=1696496887; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=48oe697wjuP71+52tb7vf8tr+xTvdyJJinslg3eV4H4=;
+ b=ubV0SfmPv2e0ph/h/FzErwx5vYtw/zyl1+6zGtiwL1sg00zDFQACQ6QgZbA/3ZZ+z5
+ wjO0UHWddiJQYWu+wfnHSJewXUvIjMO1L1xcc53Yb9/uCjt6YYBklBsJWc5JY5FOv808
+ V6jtImZePNDiW01Q7VzvliJXTXwgLZebPfYMdGuKd3wEjolYnKXgY/1PZYv1MEfDvunO
+ w/ynikSj6a60M4OnnWpi2v1/neJYhIcFWsy3QLW4kEmDC02Xpvh2rR1X6B31qJlw8/U0
+ Qp7zmn6X2rvt4em6VURRJVNqmr0mrjenDy+p2bX8Ls/6jPA+BK4bhNpEQmOOFbtdxnVG
+ QZCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695891879; x=1696496679;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=C560Nh+KV3R8eIM8i9TQVF4mEeqUj4ionnt9HrBHDDo=;
- b=BHhXNCx59R3zOrVQOmdES05Yh+hjp3nF6W+HWnflJkSjfLEwjWN8s5iQT0LtGy3FWI
- vB/xWLJfBnuqjphMfLbXbgHMsW95PzosWGjaxkZ7TUoe4z2zJtUHjGUSOPvu63yzMTN4
- N9ilYCSuE5WrQetng0i75IrpmyT2i5z6UaoOU8DWi8VxduhD0fe21wBgz5srBnCMG17I
- cYu5bCHa4OgdMNl3X+L35HRicPPGYe0yWvQMNPaHwf98apK3CtnMoTnNOvr8IKV2a2db
- ekLJzG8T86ihxQZ6t+DP/Y5+EoTcQeOAufvbVlPRxlcM+WWOHTbow2jHZOme0pJDA4C5
- 2I0w==
-X-Gm-Message-State: AOJu0YyqZVXtLJQgFZE2IUzoVcJ0jmP9Hiqp5dxfwlrax+LRoi/Dc8Hy
- e0qKLFKrrxHI1jde9kyUTc7ZZQ==
-X-Google-Smtp-Source: AGHT+IEtvwmHMYQNKHk0sPd9zMH7JZrX5jZX9y6BHkELPSkuzZFuyqQ/DMQqExMRTVaFQ4RLXONYwg==
-X-Received: by 2002:adf:f3d2:0:b0:317:6ef1:7939 with SMTP id
- g18-20020adff3d2000000b003176ef17939mr612667wrp.23.1695891879078; 
- Thu, 28 Sep 2023 02:04:39 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:17b1:9dda:a3d1:a0b6?
- ([2a01:e0a:982:cbb0:17b1:9dda:a3d1:a0b6])
+ d=1e100.net; s=20230601; t=1695892087; x=1696496887;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=48oe697wjuP71+52tb7vf8tr+xTvdyJJinslg3eV4H4=;
+ b=K663uqcK/HZ2foYUECVIgtS1JaXAfRuKDYOhNVWALLVl9VUShZP94SuznxYayj/9h6
+ yzvImfTFUEznlfSK6jQIOOWhSRzdTOOBo+MG7RfvNMMHE+zSKW6sE3aV2mQYDOHwmDWn
+ 6s0E33Vzv0aXMjjsKYBnMD9NAEks+srPrMX3bKs4jpSrXGVMFsHPZKurzGVVEyowtNsF
+ YZ6Sn19Zywn9m3t65tGeyWHfAimT16GmrOC8cspXaTp2DUkGHRYtC8hCtMm1+6IDVL1o
+ zVI4VrdRoZZuXIDj5LAB1+dtfjSEQc+XqxQySeO8LePZHfXWfWE+LtA/2NWKjKLlCgpr
+ NHLg==
+X-Gm-Message-State: AOJu0Yy7sZmG9NE8Ch4DP1j3l81MdlvhlUM0ATA3gwmGSBBC0QFpPRgH
+ mQXO8X+vpf3ZPIEuhStOQoUDwQ==
+X-Google-Smtp-Source: AGHT+IHLsTnQ5mV+ZGzrbA1t2Cuc1Pc+IGmSPnQ6zVWBMO/ClpaeafvzQNOj/K0GfAe5kt36kpU0pA==
+X-Received: by 2002:a05:6512:238f:b0:500:a002:292a with SMTP id
+ c15-20020a056512238f00b00500a002292amr910116lfv.29.1695892086599; 
+ Thu, 28 Sep 2023 02:08:06 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- bo12-20020a056000068c00b00323287186b2sm10034504wrb.29.2023.09.28.02.04.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 28 Sep 2023 02:04:38 -0700 (PDT)
-Message-ID: <f61de215-b962-452b-b72d-ba4cf354d6f1@linaro.org>
-Date: Thu, 28 Sep 2023 11:04:37 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ l17-20020a1c7911000000b00406408dc788sm4394846wme.44.2023.09.28.02.08.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Sep 2023 02:08:06 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [RFT PATCH 0/2] mmc: meson-gx: improve MMC reliabilty
-Content-Language: en-US, fr
-To: Jerome Brunet <jbrunet@baylibre.com>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-References: <20230915160130.352099-1-jbrunet@baylibre.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20230915160130.352099-1-jbrunet@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: sjg@google.com, takahiro.akashi@linaro.org, ilias.apalodimas@linaro.org, 
+ post@lespocky.de, marex@denx.de, msuchanek@suse.de, sughosh.ganu@linaro.org,
+ jh80.chung@samsung.com, paul.barker@sancloud.com, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Alexey Romanov <avromanov@salutedevices.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
+In-Reply-To: <20230921081346.22157-1-avromanov@salutedevices.com>
+References: <20230921081346.22157-1-avromanov@salutedevices.com>
+Subject: Re: [PATCH v3 0/8] Add SM uclass and Meson SM driver
+Message-Id: <169589208560.3562382.4777414752510341666.b4-ty@linaro.org>
+Date: Thu, 28 Sep 2023 11:08:05 +0200
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,7 +91,6 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
@@ -124,39 +98,38 @@ X-Virus-Status: Clean
 
 Hi,
 
-On 15/09/2023 18:01, Jerome Brunet wrote:
-> Amlogic MMC on the GX (and later) SoCs has been problematic for years,
-> especially with u-boot.
+On Thu, 21 Sep 2023 11:13:33 +0300, Alexey Romanov wrote:
+> At the moment, there is no single general approach to using
+> secure monitor in U-Boot, there is only the smc_call() function,
+> over which everyone builds their own add-ons. This patchset
+> is designed to solve this problem by adding a new uclass -
+> SM_UCLASS. This UCLASS export following generic API:
 > 
-> Linux has been fairly stable for a few years. It is using a fixed phase
-> setting with Core = 180, Tx = 0 and Rx = 0 (the latter cannot be set
-> starting from the v3 MMC IPs)
+> 1. sm_call() - generic SMC call to the secure-monitor
+> 2. sm_call_read() - retrieve data from secure-monitor
+> 3. sm_call_write() - send data to secure-monitor
 > 
-> Still the results were not good with those settings with u-boot, on some
-> sm1 based platforms. U-boot then started using a 270 core phase for sm1
-> only.  This worked for most sm1 platforms but problems persist on others.
-> 
-> The proposal with this patchset is to use 270 for the ID phase, 180
-> otherwise.  This works well on the platforms I have tested (Libretech's
-> boards and VIM3L)
-> 
-> It would be great if others could test this and report whether this work
-> for them or not.
-> 
-> If the results are good, this might be ported to Linux as well (... but the
-> situation is less critical there)
-> 
-> Jerome Brunet (2):
->    mmc: meson-gx: clean up and align on Linux settings
->    mmc: meson-gx: set 270 core phase during the identification
-> 
->   drivers/mmc/meson_gx_mmc.c | 50 ++++++++++++++++++--------------------
->   drivers/mmc/meson_gx_mmc.h |  9 +++++--
->   2 files changed, 31 insertions(+), 28 deletions(-)
-> 
+> [...]
 
-I'll apply on my test branch which triggers my autobuilder providing ready-to-boot
-binaries for most of the supported platforms:
-https://gitlab.com/superna9999/amlogic-u-boot-autotest/-/pipelines
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
 
+[1/8] drivers: introduce Secure Monitor uclass
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/126fbbefd89e0baa7e1a8ecdc4e00b9ff9e776ea
+[2/8] sandbox: add sandbox sm uclass driver
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/ac830089c0075d1f6ee51e22d51244f7f1a2554f
+[3/8] sandbox: dts: add meson secure monitor node
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/0b488d719015c3b77685dd116a0095b4677e84a3
+[4/8] sandbox: add tests for UCLASS_SM
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/80da22b9e45d2cd7d1eaed4e94724def7d4c7970
+[5/8] sandbox: defconfig: enable CONFIG_SM option
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/b655672dabcf4f6f5ffe2fb92abd447ea0a20101
+[6/8] drivers: introduce Meson Secure Monitor driver
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/e7c31d9ee0606dc52a15eb6e8ef5e46978608681
+[7/8] arch: meson: sm: set correct order of the includes
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/a0fe285b1f625ff872b1cb8c79abb072cc154ece
+[8/8] arch: meson: use secure monitor driver
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/4908461153e8b194703c5ae757a5032df3af2c50
+
+-- 
 Neil
+
