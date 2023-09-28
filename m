@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F575E743C4
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 21:56:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F773E743C6
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 21:56:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3853386E37;
-	Thu, 28 Sep 2023 23:56:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9239B86E59;
+	Thu, 28 Sep 2023 23:56:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C419486E43; Thu, 28 Sep 2023 23:56:08 +0200 (CEST)
+ id 3E22386E65; Thu, 28 Sep 2023 23:56:10 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id CDAED864EE
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 23:56:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 7F98686E59
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 23:56:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 704611FB;
- Thu, 28 Sep 2023 14:56:42 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5415CDA7;
+ Thu, 28 Sep 2023 14:56:44 -0700 (PDT)
 Received: from localhost.localdomain (unknown [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6A1133F59C;
- Thu, 28 Sep 2023 14:56:02 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4FB383F59C;
+ Thu, 28 Sep 2023 14:56:04 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
 To: Jagan Teki <jagan@amarulasolutions.com>,
 	u-boot@lists.denx.de
@@ -34,10 +34,12 @@ Cc: Samuel Holland <samuel@sholland.org>,
  Maxim Kiselev <bigunclemax@gmail.com>, Sam Edwards <cfsworks@gmail.com>,
  Okhunjon Sobirjonov <okhunjon72@gmail.com>, linux-sunxi@lists.linux.dev,
  andre.przywara@arm.com, andre.przywara@foss.arm.com
-Subject: [PATCH v2 00/22] sunxi: Allwinner T113s support
-Date: Thu, 28 Sep 2023 22:54:33 +0100
-Message-Id: <20230928215455.28094-1-andre.przywara@arm.com>
+Subject: [PATCH v2 01/22] sunxi: remove CONFIG_SATAPWR
+Date: Thu, 28 Sep 2023 22:54:34 +0100
+Message-Id: <20230928215455.28094-2-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.35.8
+In-Reply-To: <20230928215455.28094-1-andre.przywara@arm.com>
+References: <20230928215455.28094-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -56,242 +58,369 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+The CONFIG_SATAPWR Kconfig symbol was used to point to a GPIO that
+enables the power for a SATA harddisk.
+In the DT this is described with the target-supply property in the AHCI
+DT node, pointing to a (GPIO controlled) regulator. Since we need SATA
+only in U-Boot proper, and use a DM driver for AHCI there, we should use
+the DT instead of hardcoding this.
 
-this is an update to the Allwinner T113s support series. It addresses
-some comments I got (many thanks to the reviewers!). Samuel had a mishap
-where his email client ate his draft responses, so the put the gist of
-his review comments in an IRC query. Most of the GPIO changes in this
-series were triggered by his comments, many thanks!
-The biggest change is that all low-level GPIO/pinctrl routines now live
-in the GPIO driver file under drivers/gpio, that's a better place than
-under board/sunxi. Also the GPIO header file saw some cleanup, many
-definition are not (longer) needed outside of sunxi_gpio.c.
-Based on origin/next. For a detailed changelog, see below.
+Add code to the sunxi AHCI driver to check the DT for that regulator and
+enable it, at probe time. Then drop the current code from board.c, which
+was doing that job before.
+This allows us to remove the SATAPWR Kconfig definition and the
+respective values from the defconfigs.
+We also select the generic fixed regulator driver, which handles those
+GPIO controlled regulators.
 
-===================
-This series adds support for the new SoC series that covers the Allwinner
-D1 siblings R528 and T113s (a version with co-packaged DRAM). They all
-share the same die, although the D1 and D1s use RISC-V cores, which
-requires more plumbing, to use the sunxi code across two architectures.
-Getting the R528 support in should help a bit in sorting out what's new
-peripheral code and what is architecture dependent. IIUC, Samuel has that
-running, although with some hacks, the number of which this series tries
-to reduce.
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+Reviewed-by: Sam Edwards <CFSworks@gmail.com>
+---
+ arch/arm/Kconfig                             |  2 ++
+ arch/arm/mach-sunxi/Kconfig                  |  8 --------
+ board/sunxi/board.c                          | 16 +---------------
+ configs/A10-OLinuXino-Lime_defconfig         |  1 -
+ configs/A20-OLinuXino-Lime2-eMMC_defconfig   |  1 -
+ configs/A20-OLinuXino-Lime2_defconfig        |  1 -
+ configs/A20-OLinuXino-Lime_defconfig         |  1 -
+ configs/A20-OLinuXino_MICRO-eMMC_defconfig   |  1 -
+ configs/A20-OLinuXino_MICRO_defconfig        |  1 -
+ configs/A20-Olimex-SOM-EVB_defconfig         |  1 -
+ configs/A20-Olimex-SOM204-EVB-eMMC_defconfig |  1 -
+ configs/A20-Olimex-SOM204-EVB_defconfig      |  1 -
+ configs/Cubieboard2_defconfig                |  1 -
+ configs/Cubieboard_defconfig                 |  1 -
+ configs/Cubietruck_defconfig                 |  1 -
+ configs/Itead_Ibox_A20_defconfig             |  1 -
+ configs/Lamobo_R1_defconfig                  |  1 -
+ configs/Linksprite_pcDuino3_Nano_defconfig   |  1 -
+ configs/Linksprite_pcDuino3_defconfig        |  1 -
+ configs/Sinovoip_BPI_M3_defconfig            |  1 -
+ configs/orangepi_plus_defconfig              |  2 +-
+ drivers/ata/ahci_sunxi.c                     |  9 +++++++++
+ 22 files changed, 13 insertions(+), 41 deletions(-)
 
-The most interesting part of this is the pincontroller rework, this
-tackles two issues:
-- For the first time in the history of mainline Allwinner support the
-  pincontroller changed the register layout. The code here tries to
-  abstract the differences away, so both variants can share the code
-  peacefully.
-- For the above mentioned reason, the pincontroller code is quite old,
-  and is mostly spread out across arch/arm, in a pre-DM style, even
-  though we have real DM support in U-Boot proper. We need the non-DM
-  version for the (ARM-only?) legacy SPL, so can't get rid of that
-  completely. This series also tries to modernise that code, and moves
-  it into drivers/gpio, where it can be more easily shared with RISC-V.
-
-The main feature is then of course the T113s support, of which the new
-pinctroller is only one part. Apart from the new pincontroller and the
-usual new SoC bits (like clock and pinmux support), this includes the
-DRAM controller code.
-With the basics in, we add support for the MangoPi MQ-R board, which
-uses the T113s and seems to be a popular board. This should also serve
-as a blueprint for supporting similar boards. The DTs are copied from
-the kernel (as usual).
-
-There are some bits missing, prominently PSCI support. There is a series
-out there, which just needs some smaller fixes in some places. I expect
-the PSCI support to go back-to-back with this series.
-
-This series is based on top of current origin/next, so that should cover
-some chunks of the v2024.01 merge window already.
-
-A branch is available at:
-https://source.denx.de/u-boot/custodians/u-boot-sunxi.git t113s-v2
-
-Please have a look, review and test.
-
-Cheers,
-Andre
-
-Changelog v2 .. v1:
-- add review and test tags
-- reorder pinctrl rework patches: first move shared code, then add in/out,
-  then remove struct, then move headers
-- move all GPIO routines into drivers/gpio/sunxi_gpio.c
-- move private GPIO definitions from GPIO header file to sunxi_gpio.c
-- use GPIO_NUM() instead of "% 32" directly
-- define more MMIO addresses (PRCM, CPUCFG, R_PIO)
-- do not enable 8-bit eMMC mode (Okhunjon)
-- add eMMC pins to SPL pinmux setup (Okhunjon)
-- drop patch [PATCH 13/20] sunxi: clock: h6: prepare for PRCM less SoCs
-- update DT files from latest Linux kernel tree
-- fix pin numbers for the UART pinmux setup
-- let DRAM driver depend on ARCH_SUNXI
-
-Andre Przywara (19):
-  sunxi: remove CONFIG_SATAPWR
-  net: sunxi_emac: chase DT nodes to find PHY regulator
-  sunxi: remove CONFIG_MACPWR
-  pinctrl: sunxi: move pinctrl code
-  pinctrl: sunxi: add GPIO in/out wrappers
-  pinctrl: sunxi: remove struct sunxi_gpio
-  pinctrl: sunxi: remove GPIO_EXTRA_HEADER
-  pinctrl: sunxi: move PIO_BASE into sunxi_gpio.h
-  pinctrl: sunxi: add new D1 pinctrl support
-  sunxi: introduce NCAT2 generation model
-  pinctrl: sunxi: add Allwinner D1 pinctrl description
-  sunxi: clock: D1/R528: Enable PLL LDO during PLL1 setup
-  sunxi: clock: support D1/R528 PLL6 clock
-  Kconfig: sunxi: prepare for using drivers/ram/sunxi
-  sunxi: add R528/T113-s3/D1(s) DRAM initialisation code
-  sunxi: add Allwinner R528/T113 SoC support
-  sunxi: refactor serial base addresses to avoid asm/arch/cpu.h
-  ARM: dts: sunxi: add Allwinner T113-s SoC .dtsi
-  sunxi: add MangoPi MQ-R board support
-
-Okhunjon Sobirjonov (1):
-  sunxi: R528: add SMHC2 pin pull ups support
-
-Samuel Holland (2):
-  clk: sunxi: Add support for the D1 CCU
-  riscv: dts: allwinner: Add the D1/D1s SoC devicetree
-
- arch/arm/Kconfig                              |    3 +-
- arch/arm/cpu/armv7/sunxi/sram.c               |    1 +
- arch/arm/cpu/armv8/fel_utils.S                |    1 +
- arch/arm/dts/Makefile                         |    2 +
- .../arm/dts/sun8i-t113s-mangopi-mq-r-t113.dts |   35 +
- arch/arm/dts/sun8i-t113s.dtsi                 |   59 +
- arch/arm/dts/sunxi-d1s-t113-mangopi-mq-r.dtsi |  126 ++
- arch/arm/dts/sunxi-u-boot.dtsi                |    7 +
- arch/arm/include/asm/arch-sunxi/boot0.h       |    2 +
- arch/arm/include/asm/arch-sunxi/clock.h       |    3 +-
- .../include/asm/arch-sunxi/clock_sun50i_h6.h  |   12 +-
- arch/arm/include/asm/arch-sunxi/cpu.h         |    2 +
- arch/arm/include/asm/arch-sunxi/cpu_sun4i.h   |   17 -
- .../include/asm/arch-sunxi/cpu_sun50i_h6.h    |    7 -
- arch/arm/include/asm/arch-sunxi/cpu_sun9i.h   |    9 -
- .../include/asm/arch-sunxi/cpu_sunxi_ncat2.h  |   39 +
- arch/arm/include/asm/arch-sunxi/mmc.h         |    2 +-
- arch/arm/include/asm/arch-sunxi/prcm.h        |    2 +-
- arch/arm/include/asm/arch-sunxi/serial.h      |   32 +
- arch/arm/include/asm/arch-sunxi/timer.h       |    2 +-
- arch/arm/mach-sunxi/Kconfig                   |   44 +-
- arch/arm/mach-sunxi/Makefile                  |    2 +-
- arch/arm/mach-sunxi/board.c                   |   31 +-
- arch/arm/mach-sunxi/clock_sun50i_h6.c         |   45 +-
- arch/arm/mach-sunxi/cpu_info.c                |    2 +
- arch/arm/mach-sunxi/dram_suniv.c              |    2 +-
- arch/arm/mach-sunxi/gtbus_sun9i.c             |    1 +
- arch/arm/mach-sunxi/pinmux.c                  |   78 -
- arch/arm/mach-sunxi/spl_spi_sunxi.c           |    1 +
- arch/arm/mach-sunxi/timer.c                   |    1 +
- arch/riscv/dts/sun20i-common-regulators.dtsi  |   28 +
- arch/riscv/dts/sun20i-d1.dtsi                 |   66 +
- arch/riscv/dts/sun20i-d1s.dtsi                |   76 +
- arch/riscv/dts/sunxi-d1-t113.dtsi             |   15 +
- arch/riscv/dts/sunxi-d1s-t113.dtsi            |  927 +++++++++++
- board/sunxi/board.c                           |   34 +-
- board/sunxi/chip.c                            |    2 +-
- common/spl/Kconfig                            |    3 +-
- configs/A10-OLinuXino-Lime_defconfig          |    1 -
- configs/A20-OLinuXino-Lime2-eMMC_defconfig    |    1 -
- configs/A20-OLinuXino-Lime2_defconfig         |    1 -
- configs/A20-OLinuXino-Lime_defconfig          |    1 -
- configs/A20-OLinuXino_MICRO-eMMC_defconfig    |    1 -
- configs/A20-OLinuXino_MICRO_defconfig         |    1 -
- configs/A20-Olimex-SOM-EVB_defconfig          |    1 -
- configs/A20-Olimex-SOM204-EVB-eMMC_defconfig  |    1 -
- configs/A20-Olimex-SOM204-EVB_defconfig       |    1 -
- configs/Bananapi_M2_Ultra_defconfig           |    1 -
- configs/Bananapi_defconfig                    |    1 -
- configs/Bananapro_defconfig                   |    1 -
- configs/Cubieboard2_defconfig                 |    1 -
- configs/Cubieboard_defconfig                  |    1 -
- configs/Cubietruck_defconfig                  |    1 -
- configs/Itead_Ibox_A20_defconfig              |    1 -
- configs/Lamobo_R1_defconfig                   |    2 -
- configs/Linksprite_pcDuino3_Nano_defconfig    |    1 -
- configs/Linksprite_pcDuino3_defconfig         |    1 -
- configs/Mele_A1000_defconfig                  |    1 -
- configs/Orangepi_defconfig                    |    1 -
- configs/Orangepi_mini_defconfig               |    1 -
- configs/Sinovoip_BPI_M3_defconfig             |    1 -
- configs/bananapi_m1_plus_defconfig            |    1 -
- configs/bananapi_m2_plus_h3_defconfig         |    1 -
- configs/bananapi_m2_plus_h5_defconfig         |    1 -
- configs/i12-tvbox_defconfig                   |    1 -
- configs/jesurun_q5_defconfig                  |    1 -
- configs/mangopi_mq_r_defconfig                |   15 +
- configs/mixtile_loftq_defconfig               |    1 -
- configs/nanopi_m1_plus_defconfig              |    1 -
- configs/nanopi_neo_plus2_defconfig            |    1 -
- configs/nanopi_r1s_h5_defconfig               |    1 -
- configs/orangepi_pc2_defconfig                |    1 -
- configs/orangepi_plus2e_defconfig             |    1 -
- configs/orangepi_plus_defconfig               |    3 +-
- configs/orangepi_win_defconfig                |    1 -
- configs/pine_h64_defconfig                    |    1 -
- configs/zeropi_defconfig                      |    1 -
- drivers/Makefile                              |    1 +
- drivers/ata/ahci_sunxi.c                      |    9 +
- drivers/clk/sunxi/Kconfig                     |    7 +
- drivers/clk/sunxi/Makefile                    |    1 +
- drivers/clk/sunxi/clk_d1.c                    |   84 +
- drivers/clk/sunxi/clk_sunxi.c                 |    5 +
- drivers/gpio/axp_gpio.c                       |    1 +
- drivers/gpio/sunxi_gpio.c                     |  189 ++-
- drivers/i2c/mvtwsi.c                          |    3 +-
- drivers/i2c/sun6i_p2wi.c                      |    2 +-
- drivers/i2c/sun8i_rsb.c                       |    2 +-
- drivers/mmc/sunxi_mmc.c                       |    9 +-
- drivers/net/sun8i_emac.c                      |    9 +-
- drivers/net/sunxi_emac.c                      |   39 +
- drivers/pinctrl/sunxi/Kconfig                 |    5 +
- drivers/pinctrl/sunxi/pinctrl-sunxi.c         |   43 +-
- drivers/ram/Kconfig                           |    3 +-
- drivers/ram/Makefile                          |    3 +
- drivers/ram/sunxi/Kconfig                     |   73 +
- drivers/ram/sunxi/Makefile                    |    4 +
- drivers/ram/sunxi/dram_sun20i_d1.c            | 1432 +++++++++++++++++
- drivers/ram/sunxi/dram_sun20i_d1.h            |   73 +
- drivers/video/hitachi_tx18d42vm_lcd.c         |    1 +
- drivers/video/ssd2828.c                       |    1 -
- drivers/video/sunxi/sunxi_display.c           |    1 +
- drivers/video/sunxi/sunxi_lcd.c               |    1 +
- include/configs/sunxi-common.h                |    2 +-
- include/dt-bindings/clock/sun20i-d1-ccu.h     |  158 ++
- include/dt-bindings/clock/sun20i-d1-r-ccu.h   |   19 +
- include/dt-bindings/reset/sun20i-d1-ccu.h     |   79 +
- include/dt-bindings/reset/sun20i-d1-r-ccu.h   |   16 +
- .../arch-sunxi/gpio.h => include/sunxi_gpio.h |   83 +-
- 109 files changed, 3809 insertions(+), 326 deletions(-)
- create mode 100644 arch/arm/dts/sun8i-t113s-mangopi-mq-r-t113.dts
- create mode 100644 arch/arm/dts/sun8i-t113s.dtsi
- create mode 100644 arch/arm/dts/sunxi-d1s-t113-mangopi-mq-r.dtsi
- create mode 100644 arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h
- create mode 100644 arch/arm/include/asm/arch-sunxi/serial.h
- delete mode 100644 arch/arm/mach-sunxi/pinmux.c
- create mode 100644 arch/riscv/dts/sun20i-common-regulators.dtsi
- create mode 100644 arch/riscv/dts/sun20i-d1.dtsi
- create mode 100644 arch/riscv/dts/sun20i-d1s.dtsi
- create mode 100644 arch/riscv/dts/sunxi-d1-t113.dtsi
- create mode 100644 arch/riscv/dts/sunxi-d1s-t113.dtsi
- create mode 100644 configs/mangopi_mq_r_defconfig
- create mode 100644 drivers/clk/sunxi/clk_d1.c
- create mode 100644 drivers/ram/sunxi/Kconfig
- create mode 100644 drivers/ram/sunxi/Makefile
- create mode 100644 drivers/ram/sunxi/dram_sun20i_d1.c
- create mode 100644 drivers/ram/sunxi/dram_sun20i_d1.h
- create mode 100644 include/dt-bindings/clock/sun20i-d1-ccu.h
- create mode 100644 include/dt-bindings/clock/sun20i-d1-r-ccu.h
- create mode 100644 include/dt-bindings/reset/sun20i-d1-ccu.h
- create mode 100644 include/dt-bindings/reset/sun20i-d1-r-ccu.h
- rename arch/arm/include/asm/arch-sunxi/gpio.h => include/sunxi_gpio.h (75%)
-
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 71f820e443b..3fac92ebfcc 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1158,6 +1158,8 @@ config ARCH_SUNXI
+ 	imply CMD_GPT
+ 	imply CMD_UBI if MTD_RAW_NAND
+ 	imply DISTRO_DEFAULTS
++	imply DM_REGULATOR
++	imply DM_REGULATOR_FIXED
+ 	imply FAT_WRITE
+ 	imply FIT
+ 	imply OF_LIBFDT_OVERLAY
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index 9d5df2c1027..1b24dfe4dd1 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -1008,14 +1008,6 @@ config VIDEO_LCD_TL059WV5C0
+ 
+ endchoice
+ 
+-config SATAPWR
+-	string "SATA power pin"
+-	default ""
+-	help
+-	  Set the pins used to power the SATA. This takes a string in the
+-	  format understood by sunxi_name_to_gpio, e.g. PH1 for pin 1 of
+-	  port H.
+-
+ config GMAC_TX_DELAY
+ 	int "GMAC Transmit Clock Delay Chain"
+ 	default 0
+diff --git a/board/sunxi/board.c b/board/sunxi/board.c
+index ebaa9431984..50a60e760d4 100644
+--- a/board/sunxi/board.c
++++ b/board/sunxi/board.c
+@@ -187,7 +187,7 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ /* add board specific code here */
+ int board_init(void)
+ {
+-	__maybe_unused int id_pfr1, ret, satapwr_pin, macpwr_pin;
++	__maybe_unused int id_pfr1, ret, macpwr_pin;
+ 
+ 	gd->bd->bi_boot_params = (PHYS_SDRAM_0 + 0x100);
+ 
+@@ -225,20 +225,6 @@ int board_init(void)
+ 		return ret;
+ 
+ 	/* strcmp() would look better, but doesn't get optimised away. */
+-	if (CONFIG_SATAPWR[0]) {
+-		satapwr_pin = sunxi_name_to_gpio(CONFIG_SATAPWR);
+-		if (satapwr_pin >= 0) {
+-			gpio_request(satapwr_pin, "satapwr");
+-			gpio_direction_output(satapwr_pin, 1);
+-
+-			/*
+-			 * Give the attached SATA device time to power-up
+-			 * to avoid link timeouts
+-			 */
+-			mdelay(500);
+-		}
+-	}
+-
+ 	if (CONFIG_MACPWR[0]) {
+ 		macpwr_pin = sunxi_name_to_gpio(CONFIG_MACPWR);
+ 		if (macpwr_pin >= 0) {
+diff --git a/configs/A10-OLinuXino-Lime_defconfig b/configs/A10-OLinuXino-Lime_defconfig
+index df4fdfaba41..57e91d0f017 100644
+--- a/configs/A10-OLinuXino-Lime_defconfig
++++ b/configs/A10-OLinuXino-Lime_defconfig
+@@ -7,7 +7,6 @@ CONFIG_DRAM_CLK=480
+ CONFIG_DRAM_EMR1=4
+ CONFIG_SYS_CLK_FREQ=912000000
+ CONFIG_I2C1_ENABLE=y
+-CONFIG_SATAPWR="PC3"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/A20-OLinuXino-Lime2-eMMC_defconfig b/configs/A20-OLinuXino-Lime2-eMMC_defconfig
+index be49e9323a1..44770ffb048 100644
+--- a/configs/A20-OLinuXino-Lime2-eMMC_defconfig
++++ b/configs/A20-OLinuXino-Lime2-eMMC_defconfig
+@@ -8,7 +8,6 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+ CONFIG_USB0_VBUS_PIN="PC17"
+ CONFIG_USB0_VBUS_DET="PH5"
+ CONFIG_I2C1_ENABLE=y
+-CONFIG_SATAPWR="PC3"
+ CONFIG_SPL_SPI_SUNXI=y
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+diff --git a/configs/A20-OLinuXino-Lime2_defconfig b/configs/A20-OLinuXino-Lime2_defconfig
+index 43cd28c3dd0..e10660c933c 100644
+--- a/configs/A20-OLinuXino-Lime2_defconfig
++++ b/configs/A20-OLinuXino-Lime2_defconfig
+@@ -7,7 +7,6 @@ CONFIG_DRAM_CLK=384
+ CONFIG_USB0_VBUS_PIN="PC17"
+ CONFIG_USB0_VBUS_DET="PH5"
+ CONFIG_I2C1_ENABLE=y
+-CONFIG_SATAPWR="PC3"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/A20-OLinuXino-Lime_defconfig b/configs/A20-OLinuXino-Lime_defconfig
+index 7c77f38fba6..4ed666a034a 100644
+--- a/configs/A20-OLinuXino-Lime_defconfig
++++ b/configs/A20-OLinuXino-Lime_defconfig
+@@ -5,7 +5,6 @@ CONFIG_SPL=y
+ CONFIG_MACH_SUN7I=y
+ CONFIG_DRAM_CLK=384
+ CONFIG_I2C1_ENABLE=y
+-CONFIG_SATAPWR="PC3"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/A20-OLinuXino_MICRO-eMMC_defconfig b/configs/A20-OLinuXino_MICRO-eMMC_defconfig
+index 02116995a3e..ca5869f43d9 100644
+--- a/configs/A20-OLinuXino_MICRO-eMMC_defconfig
++++ b/configs/A20-OLinuXino_MICRO-eMMC_defconfig
+@@ -7,7 +7,6 @@ CONFIG_DRAM_CLK=384
+ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+ CONFIG_I2C1_ENABLE=y
+ CONFIG_VIDEO_VGA=y
+-CONFIG_SATAPWR="PB8"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/A20-OLinuXino_MICRO_defconfig b/configs/A20-OLinuXino_MICRO_defconfig
+index 895e8dbcbd2..db4270f9b27 100644
+--- a/configs/A20-OLinuXino_MICRO_defconfig
++++ b/configs/A20-OLinuXino_MICRO_defconfig
+@@ -7,7 +7,6 @@ CONFIG_DRAM_CLK=384
+ CONFIG_MMC_SUNXI_SLOT_EXTRA=3
+ CONFIG_I2C1_ENABLE=y
+ CONFIG_VIDEO_VGA=y
+-CONFIG_SATAPWR="PB8"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/A20-Olimex-SOM-EVB_defconfig b/configs/A20-Olimex-SOM-EVB_defconfig
+index 5bcc9f9f3c0..ac900477d1e 100644
+--- a/configs/A20-Olimex-SOM-EVB_defconfig
++++ b/configs/A20-Olimex-SOM-EVB_defconfig
+@@ -7,7 +7,6 @@ CONFIG_DRAM_CLK=384
+ CONFIG_MMC_SUNXI_SLOT_EXTRA=3
+ CONFIG_USB0_VBUS_PIN="PB9"
+ CONFIG_USB0_VBUS_DET="PH5"
+-CONFIG_SATAPWR="PC3"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/A20-Olimex-SOM204-EVB-eMMC_defconfig b/configs/A20-Olimex-SOM204-EVB-eMMC_defconfig
+index e5881090dda..00a98140b37 100644
+--- a/configs/A20-Olimex-SOM204-EVB-eMMC_defconfig
++++ b/configs/A20-Olimex-SOM204-EVB-eMMC_defconfig
+@@ -8,7 +8,6 @@ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+ CONFIG_USB0_VBUS_PIN="PC17"
+ CONFIG_USB0_VBUS_DET="PH5"
+ CONFIG_I2C1_ENABLE=y
+-CONFIG_SATAPWR="PC3"
+ CONFIG_GMAC_TX_DELAY=4
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+diff --git a/configs/A20-Olimex-SOM204-EVB_defconfig b/configs/A20-Olimex-SOM204-EVB_defconfig
+index 592a79a6c7e..f4ae3ae6d8b 100644
+--- a/configs/A20-Olimex-SOM204-EVB_defconfig
++++ b/configs/A20-Olimex-SOM204-EVB_defconfig
+@@ -7,7 +7,6 @@ CONFIG_DRAM_CLK=384
+ CONFIG_USB0_VBUS_PIN="PC17"
+ CONFIG_USB0_VBUS_DET="PH5"
+ CONFIG_I2C1_ENABLE=y
+-CONFIG_SATAPWR="PC3"
+ CONFIG_GMAC_TX_DELAY=4
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+diff --git a/configs/Cubieboard2_defconfig b/configs/Cubieboard2_defconfig
+index 0c233687413..ef4f11b7c62 100644
+--- a/configs/Cubieboard2_defconfig
++++ b/configs/Cubieboard2_defconfig
+@@ -4,7 +4,6 @@ CONFIG_DEFAULT_DEVICE_TREE="sun7i-a20-cubieboard2"
+ CONFIG_SPL=y
+ CONFIG_MACH_SUN7I=y
+ CONFIG_DRAM_CLK=480
+-CONFIG_SATAPWR="PB8"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/Cubieboard_defconfig b/configs/Cubieboard_defconfig
+index 71743f7b8a1..ab3f65ad667 100644
+--- a/configs/Cubieboard_defconfig
++++ b/configs/Cubieboard_defconfig
+@@ -4,7 +4,6 @@ CONFIG_DEFAULT_DEVICE_TREE="sun4i-a10-cubieboard"
+ CONFIG_SPL=y
+ CONFIG_MACH_SUN4I=y
+ CONFIG_DRAM_CLK=480
+-CONFIG_SATAPWR="PB8"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/Cubietruck_defconfig b/configs/Cubietruck_defconfig
+index 184f305b19d..184143d7086 100644
+--- a/configs/Cubietruck_defconfig
++++ b/configs/Cubietruck_defconfig
+@@ -8,7 +8,6 @@ CONFIG_USB0_VBUS_PIN="PH17"
+ CONFIG_USB0_VBUS_DET="PH22"
+ CONFIG_USB0_ID_DET="PH19"
+ CONFIG_VIDEO_VGA=y
+-CONFIG_SATAPWR="PH12"
+ CONFIG_GMAC_TX_DELAY=1
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+diff --git a/configs/Itead_Ibox_A20_defconfig b/configs/Itead_Ibox_A20_defconfig
+index 5d05f337982..d03fa62196b 100644
+--- a/configs/Itead_Ibox_A20_defconfig
++++ b/configs/Itead_Ibox_A20_defconfig
+@@ -4,7 +4,6 @@ CONFIG_DEFAULT_DEVICE_TREE="sun7i-a20-itead-ibox"
+ CONFIG_SPL=y
+ CONFIG_MACH_SUN7I=y
+ CONFIG_DRAM_CLK=480
+-CONFIG_SATAPWR="PB8"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/Lamobo_R1_defconfig b/configs/Lamobo_R1_defconfig
+index 5294608459b..9639cb6aad9 100644
+--- a/configs/Lamobo_R1_defconfig
++++ b/configs/Lamobo_R1_defconfig
+@@ -5,7 +5,6 @@ CONFIG_SPL=y
+ CONFIG_MACH_SUN7I=y
+ CONFIG_DRAM_CLK=432
+ CONFIG_MACPWR="PH23"
+-CONFIG_SATAPWR="PB3"
+ CONFIG_GMAC_TX_DELAY=4
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+diff --git a/configs/Linksprite_pcDuino3_Nano_defconfig b/configs/Linksprite_pcDuino3_Nano_defconfig
+index e3e30a49490..9eb9a918aee 100644
+--- a/configs/Linksprite_pcDuino3_Nano_defconfig
++++ b/configs/Linksprite_pcDuino3_Nano_defconfig
+@@ -6,7 +6,6 @@ CONFIG_MACH_SUN7I=y
+ CONFIG_DRAM_CLK=408
+ CONFIG_DRAM_ZQ=122
+ CONFIG_USB1_VBUS_PIN="PH11"
+-CONFIG_SATAPWR="PH2"
+ CONFIG_GMAC_TX_DELAY=3
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+diff --git a/configs/Linksprite_pcDuino3_defconfig b/configs/Linksprite_pcDuino3_defconfig
+index 1fda0db4c9d..7db10e685bc 100644
+--- a/configs/Linksprite_pcDuino3_defconfig
++++ b/configs/Linksprite_pcDuino3_defconfig
+@@ -5,7 +5,6 @@ CONFIG_SPL=y
+ CONFIG_MACH_SUN7I=y
+ CONFIG_DRAM_CLK=480
+ CONFIG_DRAM_ZQ=122
+-CONFIG_SATAPWR="PH2"
+ CONFIG_AHCI=y
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+diff --git a/configs/Sinovoip_BPI_M3_defconfig b/configs/Sinovoip_BPI_M3_defconfig
+index 5642e52ec50..ad41dbd26a1 100644
+--- a/configs/Sinovoip_BPI_M3_defconfig
++++ b/configs/Sinovoip_BPI_M3_defconfig
+@@ -12,7 +12,6 @@ CONFIG_USB0_VBUS_PIN="AXP0-VBUS-ENABLE"
+ CONFIG_USB0_ID_DET="PH11"
+ CONFIG_USB1_VBUS_PIN="PD24"
+ CONFIG_AXP_GPIO=y
+-CONFIG_SATAPWR="PD25"
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_CONSOLE_MUX=y
+ CONFIG_PHY_REALTEK=y
+diff --git a/configs/orangepi_plus_defconfig b/configs/orangepi_plus_defconfig
+index 76de72aa228..ed585881d49 100644
+--- a/configs/orangepi_plus_defconfig
++++ b/configs/orangepi_plus_defconfig
+@@ -7,7 +7,6 @@ CONFIG_DRAM_CLK=672
+ CONFIG_MACPWR="PD6"
+ CONFIG_MMC_SUNXI_SLOT_EXTRA=2
+ CONFIG_USB1_VBUS_PIN="PG13"
+-CONFIG_SATAPWR="PG11"
+ # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_SYS_I2C_LEGACY=y
+@@ -16,3 +15,4 @@ CONFIG_SUN8I_EMAC=y
+ CONFIG_SY8106A_POWER=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_OHCI_HCD=y
++CONFIG_USB3_VBUS_PIN="PG11"
+diff --git a/drivers/ata/ahci_sunxi.c b/drivers/ata/ahci_sunxi.c
+index 94a3379c532..9064774e661 100644
+--- a/drivers/ata/ahci_sunxi.c
++++ b/drivers/ata/ahci_sunxi.c
+@@ -7,6 +7,7 @@
+ #include <asm/io.h>
+ #include <asm/gpio.h>
+ #include <linux/delay.h>
++#include <power/regulator.h>
+ 
+ #define AHCI_PHYCS0R 0x00c0
+ #define AHCI_PHYCS1R 0x00c4
+@@ -74,6 +75,7 @@ static int sunxi_ahci_phy_init(u8 *reg_base)
+ 
+ static int sunxi_sata_probe(struct udevice *dev)
+ {
++	struct udevice *reg_dev;
+ 	ulong base;
+ 	u8 *reg;
+ 	int ret;
+@@ -89,6 +91,13 @@ static int sunxi_sata_probe(struct udevice *dev)
+ 		debug("%s: Failed to init phy (err=%d)\n", __func__, ret);
+ 		return ret;
+ 	}
++
++	ret = device_get_supply_regulator(dev, "target-supply", &reg_dev);
++	if (ret == 0) {
++		regulator_set_enable(reg_dev, true);
++		mdelay(500);
++	}
++
+ 	ret = ahci_probe_scsi(dev, base);
+ 	if (ret) {
+ 		debug("%s: Failed to probe (err=%d)\n", __func__, ret);
 -- 
 2.35.8
 
