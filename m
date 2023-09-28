@@ -4,131 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F46BE732C8
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 12:50:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F538E732C8
+	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 12:59:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 500C986537;
-	Thu, 28 Sep 2023 14:50:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 3DF3D8656E;
+	Thu, 28 Sep 2023 14:59:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="bGuOov+q";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="IS4iHn4P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 411D286504; Thu, 28 Sep 2023 14:50:14 +0200 (CEST)
-Received: from EUR01-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur01on0718.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe1e::718])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F1F8786611; Thu, 28 Sep 2023 14:59:09 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4E5286504
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 14:50:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79DC38654D
+ for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 14:59:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Pg2orrLkEn/p5x25UoRpXri/5cZ+qUFsCA70u51gx7CphoQ+ORTxc5QRzG39hd9RwD72C/TFU21wvn4CnB2mZS8Pn0rAY2D6Ycr2hT64xP4+mImHXo14yh71NgL4ElVJpEdRBuIe3XLp24/0BmGQmy/+O54VdwxRd5644GiMRvT0B7Jqg5OnGN92GAWk5ySEdyEx6J1EHlehaGCRM1uck21QGVMTPVWwgeuvFNYzguFAD3zPuoJ6hY6mMd7Q5etzHatfqTCC1mu0K3tq/7+cdCOScx3L2jtpRvgcnsz/o27RtZqoQlSXUD30wXdlYZz7baLoB8WHbIYEOVvJpyychQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=P+kBmEQjFAzUnd6otMl5LiERVKs7sITbOhEv+GXwhtY=;
- b=HnLmYQqUFlNY5UkN0FpS7WjpH89WsJnOEwo+JO6vjI3GcXnREkZvL4D+RTrwHDhkcNoitk3s8UgA8R8mfMVprihTjmYTCzgSiO0CXJ18n57Z6SGhUEbLvAeX3UaJmsRXfhAmkYezsI8jFsNE0Xwivd2mwk8l/gfG97rohudr6lsPnMExLiM5FWvtfqYWIXEJ8BkXg5C3ZTFQmPvt/6KLQkjrH3lFabtycMKnNon+d9au8AHwntbNUJA2clIRfeLqzDx6+8XcTd7d9qLXWlnRCpLDOYfDTHzLtaNizzKaeE3+2Wr7jttYim8+xPpLJcfsO3e5rhJqoK9Vw9vYJ2CQ6w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=P+kBmEQjFAzUnd6otMl5LiERVKs7sITbOhEv+GXwhtY=;
- b=bGuOov+qs37XpNDg381msRJrszUsTs8RGq0tq2k81hVS19XYDIqSLc+O1lr9ZXGmajSxPVx3aQiCha3zErwhyotveKJ5bVVx8mdjyx7EvXgaSeenXsLZWHTTvNQcRn0ehSUQUmoY2cM6Bq+cNhH1+wOj5tgdw8p2dxLCydhWF+4=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by VI1PR10MB3487.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:800:132::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.28; Thu, 28 Sep
- 2023 12:50:08 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6813.027; Thu, 28 Sep 2023
- 12:50:08 +0000
-Message-ID: <5cd68a37-2e26-06ef-47a8-581f04d48053@prevas.dk>
-Date: Thu, 28 Sep 2023 14:50:06 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH v2 1/6] Kbuild: Fix cleanup of generated sources in tools
-Content-Language: en-US, da
-To: Tobias Deiminger <tdmg@linutronix.de>, u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, emkan@prevas.dk
-References: <20230619224107.284372-1-tdmg@linutronix.de>
- <20230619224107.284372-2-tdmg@linutronix.de>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <20230619224107.284372-2-tdmg@linutronix.de>
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 6E60261BA3;
+ Thu, 28 Sep 2023 12:59:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72941C433C8;
+ Thu, 28 Sep 2023 12:59:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1695905945;
+ bh=5PJs7RmR/nOSfo5zzPw2F0nX2h+3wqs2UY0QIEyg5sY=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=IS4iHn4Pq0jxvxn5XXlJAi/F35ZI2rCioLO2sKxPLcIVLdZXX7AeSwPSZDXFwEf1g
+ W2sxlk6xBly5Tf53AFA1+tzt9VZ1vMbzR351RYb+1Txd8wqr9vQifXuP8Ss55L/dkz
+ Ics18W/dkqXIH0ZuMZK+2QT9KmTTbhNWC1ojg9DAKKeYfMfGtdTb00Ryq+LR7v4ekB
+ AMlH7jndXIfcyO/pIaGDao+kXKGrnXlWjH5GTtjxC7ErBB98aKnEeAf2erDNHJ8E0B
+ N4hB2I9mKdd4F5gFnY1/o4tMpOBq2kdCVykdgtB7bxFSCHxYyGeKliZzWwcXg1iFic
+ l2qupZfDIzsjA==
+Message-ID: <05a3d9d4-cdcd-4145-aece-727f14a7efb3@kernel.org>
+Date: Thu, 28 Sep 2023 15:59:00 +0300
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] dm: core: Report bootph-pre-ram/sram node as pre-reloc
+ after relocation : regression
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>,
+ "Andrew F. Davis" <afd@ti.com>, "Berard, Brian" <bberard@ti.com>
+References: <20230820220316.3517102-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20230820220316.3517102-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: MM0P280CA0031.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::19) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|VI1PR10MB3487:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4379889d-e285-4617-d930-08dbc0217201
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: vdXRC9FGMQ/RDvsgjsOikHERJR5TBGT06H6bzIf22KL1urdaMUcSQmVDiRLSL0BtxmzjdPaQVQiZmPiURvW3NNc8Tn+rdzal6ugaBHv9rBA5dD54hXCZwjULMIFuAyu0plPwMdh+tJqmNNBVxkF1f2iVZ65Lm9OgPmEhrczmkr2OAOJEb7Px5jodAqZahKwfeZ2DDHn6eTglrJWO4dKkWKMtLrJprBAbnynFXW/WqIfkA0HpQ8IuIx+Qahhu952FcvRtmzcd60a+PglPtWMyN4D50v7ea63AqcYtBXoEobwTITN2dvQDlrAZEDxgAxvVNet/JngvNFYsL0tNhVGQiZpqPpJbBe3X2EkpRSzzKGpIJ/nXNQ/P6shW5xO+kJT/aiH+mYmBPm4KqYp0deG6eWnS/PHtkAqb9AC0Ra1d5tHV3p2yuZZAEOa59q9fsdCKuKucDcQJi1Gj04eZIV0lmZlSEjYuBle+/GKpCEBhh9FCQ1OuJ3xhhUAElGCI1M0cTOI/lB6+DeJQu0hF6Y6sRkhayRUfw7/m9FVFrcSGGyHWZ8gR3y8E7Pl2exen2LHJYoUsZgMHxzzU+/bSvhZ9hcxfKxzmX2sqXrLx24FpKXRW2hCaK4XIVbc0IwAKaUjpWTvNn6T+mehUhCoITjeGOJywYvReRtr3o8o+yMpyZ3s=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(366004)(376002)(39840400004)(396003)(136003)(230922051799003)(64100799003)(451199024)(1800799009)(186009)(31686004)(66946007)(5660300002)(2906002)(41300700001)(316002)(8936002)(44832011)(6506007)(8976002)(8676002)(36756003)(66556008)(86362001)(2616005)(478600001)(26005)(966005)(6486002)(6512007)(38100700002)(4326008)(31696002)(52116002)(83380400001)(66476007)(38350700002)(107886003)(43740500002)(45980500001);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Njd4RlpMNWY3dHYzWElTWlo2Y1pEenVKWGc0VHpxZ3g0eEtqVC9Cdk1NQkF1?=
- =?utf-8?B?SHg1VlhzWDlmaHVZTmN2TXNSbWNOUFg1ZlVHN0k5UitKOG9GSCtmYTh3RWFU?=
- =?utf-8?B?WGY1NzBQZ0JKWm1vbjdDdVdtYURTd0wyOVBDeGp5bDZBb2JQcEdLVHF5OTRt?=
- =?utf-8?B?akR4dWRJaVRqdWN4QWh4Y0JXSlJZZk1wdXZOb083anhCUFBScWFYcExkMXFa?=
- =?utf-8?B?UlBFOGNVbmszb1VyMElkRGhObDl3ZEpTem1wYXJib0luK2VxY0FET3lpMkZD?=
- =?utf-8?B?dk01YVlRYTl5dEFvaDczbnFab3pZUzFjRmVXeXBVemVzTUJVcHBLUXhwbFI4?=
- =?utf-8?B?RERsTUpKSkZ5Sms4azFpQUxXNW5aSGxsbkx4d21CZ2pPS3dqKzhhbjB3dVRq?=
- =?utf-8?B?bm1NSmVxZmpURzc1QzkxcXZPc1F5L3dQSTltM3RtZDh2YlFvNGdNMERmemU0?=
- =?utf-8?B?WUNOaWdBa2t5ZnRxWTRwcGRFQVpkNjFvVmpHRWpjWGNHaE1HY2c0WGhUdTBj?=
- =?utf-8?B?QmpmcVRHbC80RVRKbjdtaXpDZmpWRlQ4UDUwaGovenVkdzQ1YnRHUEhUZkJC?=
- =?utf-8?B?WVdyRnJ4S2VRZTJ3WmZCdjVTNkZzdW1Ra0lOVjFZSDZCYXVSRFpFU25hT2dR?=
- =?utf-8?B?eGZYNXNON1RzQzFMZUVUVVdsdWRuQ2I3aVEyanQ4NStobjhFTDNodm84bjZh?=
- =?utf-8?B?ZmNPdk9hYnlzaVVjdGVhRDdrYWJpcDkvUVRwVVZDYWUvY0wzNTFHL2lFNkFs?=
- =?utf-8?B?QUhML0FZMUp0T0dtbk13UzlUaHdoUDFMbHFSclF3aEhIdUdJdUVJUVUvd0RJ?=
- =?utf-8?B?dW1naHlXaTdSZDNZSmZqN0dyLzdGNDdsd0Y3Z0UzNXJFRmxFa2NQQXVMVUJW?=
- =?utf-8?B?M09wZmZDSE5mQWNwU1BsTWI4RTNjNmdOcjg5czJhemllVis2d0tTSUJCN2Ro?=
- =?utf-8?B?UjBWaXVHanJkaE9QNmk4Wm15NUJ6cXlwcDBabXpyR1JuN3pUNEtRRDBhRFZU?=
- =?utf-8?B?b2ZUNDFNUzlIaERHdWRINzBjT1pZek1qNGFPWGR0Qk5Md2o1NjNManF4QTlQ?=
- =?utf-8?B?M3duYVIxS01UY0NmVWxWM2pqM1dDZUxqZG5NWXhHNmpGazdPZHJIRUVEb0la?=
- =?utf-8?B?NytqeXh1dEFtdzlHaEh2MWpMV2pUMFhUQTNVU1lDUG5teUxlajJZQnBHSzN1?=
- =?utf-8?B?RlpHUm11MDdaaDFZV1VTa1BEMXlNNkZTVmdmb0RpdWs0dExXeG95WWp4OG5a?=
- =?utf-8?B?UUF1Vk4vZE5yelY5b09aZ3NIWGZyVzZYQ0pXY3ptWFR3Y04vRFdkRDNOVlFz?=
- =?utf-8?B?YW1QZ1AxMFVKQ2I5bmJ3V0lKWVZXeC9FemdOeTRmVHBDNVZSLzJkd0V5Y0d0?=
- =?utf-8?B?TW1BeUppOWc1ZytGaTFCSnM5NUlDTEtKMkl5NVY0SWJTZDFzWlE4WFNxRUwy?=
- =?utf-8?B?KzdUN0tVa3FGZldWaS9vNUpKYmEzeGJBbkhLdWNLTHJ4dU1MSnJ2VHJndzR0?=
- =?utf-8?B?SXFiMk52RXRodzZ6Z29lWWV0ZUFqUm9nTmorRHdEc1p6WlZ4NnJuN2RyRTZ2?=
- =?utf-8?B?cVh6alRFc2ZGTk1VOTJUSkZqUi9KUG1aSDF3a2s2Vkx2RDVoeFlxTUU1clRN?=
- =?utf-8?B?QjkrbmtjakxpRWdYOE04NnVBdTdXTlVHb0RQUUVHTGNZNzBSblZZdXV0MGUx?=
- =?utf-8?B?bGFBVytDY0xIVmJkd1ZYSHNqZkt1NFR2NzNlcXFGTWpGZnRKVEd3Y2l4TUdy?=
- =?utf-8?B?OU9obGUxRVJGWkRiYWhJSU8xMitDQjExSGY3SFRDbVRDN2hyZVNpTjViK1gr?=
- =?utf-8?B?V1cwcU9nZjFRSGpvZ2VMVHE2MjA5RzkxdjZ2dTV4VzhsTnN0NDZpTEwrSGxU?=
- =?utf-8?B?YlM1SkdlanZ3ZU9wbTU5Vlo0N01pVGtyN0dOU0t3Nm52cmtHRXQ4aUk2Q1c5?=
- =?utf-8?B?Q3gwSTM3MHYvOGNxRUIyc3hvUnQ2MStJMFVXTU0vZVRWOWNNeDNKS3pHQXhI?=
- =?utf-8?B?Vm9aMGxNTmNKSkdEZFZFc09DOHp5cVVpckVxeWdka3dNR0NlVUM2M2cvcy9L?=
- =?utf-8?B?WUpuUGlYRzJ6aW1vQ21BOElHOU41NlhCRHBsNkEwWW9pSWZlemVQU0EwM2da?=
- =?utf-8?B?SEtKdmQrYU85TVFBdjNwYWJydFhqMjYrdUFlWERMb25zRmxkckYwNHA3d2lI?=
- =?utf-8?B?Smc9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4379889d-e285-4617-d930-08dbc0217201
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2023 12:50:08.3682 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Dc0QJxagrR2XkjPg8w6F/uuycDHnOmCF8aeTkBTEIBEYSxG5uWQWo8NSUnv9Ee7c9ZHbJTSX9EhykyH32L4XCbMFjE2z/afiHRP2CBsWg/U=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR10MB3487
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,41 +73,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 20/06/2023 00.41, Tobias Deiminger wrote:
+Hi,
 
->  quiet_cmd_wrap = WRAP    $@
-> -cmd_wrap = echo "\#include <../$(patsubst $(obj)/%,%,$@)>" >$@
-> +cmd_wrap = echo "\#include <../$(patsubst $(obj)/generated/%,%,$@)>" >$@
+On 21/08/2023 01:03, Jonas Karlman wrote:
+> Nodes with bootph-pre-sram/ram props are bound in multiple phases:
+> 1. At TPL (bootph-pre-sram) or SPL (bootph-pre-ram) phase
+> 2. At U-Boot proper pre-relocation phase
+> 3. At U-Boot proper normal phase
+> 
+> However the binding and U-Boot Driver Model documentation indicate that
+> only nodes marked with bootph-all or bootph-some-ram should be bound in
+> the U-Boot proper pre-relocation phase.
+> 
+> Change ofnode_pre_reloc to report a node with bootph-pre-ram/sram prop
+> with a pre-reloc status only after U-Boot proper pre-relocation phase.
+> Also update the ofnode_pre_reloc documentation to closer reflect the
+> binding and driver model documentation.
+> 
+> This changes behavior of what nodes are bound in the U-Boot proper
+> pre-relocation phase. Change to bootph-all or add bootph-some-ram prop
+> to restore prior behavior.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> ---
+> Changes in v2:
+> - Drop use of !! to convert into bool
+> - Update documentation for ofnode_pre_reloc
+> - Rewrite commit message
+> - Collect r-b tag
+
+This patch breaks boot on AM642-EVM. Boot log at the end.
+
+> 
+>  drivers/core/ofnode.c | 2 +-
+>  include/dm/ofnode.h   | 8 ++++----
+>  2 files changed, 5 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
+> index 8df16e56af5c..b1e94b2d60df 100644
+> --- a/drivers/core/ofnode.c
+> +++ b/drivers/core/ofnode.c
+> @@ -1353,7 +1353,7 @@ bool ofnode_pre_reloc(ofnode node)
+>  	 */
+>  	if (ofnode_read_bool(node, "bootph-pre-ram") ||
+>  	    ofnode_read_bool(node, "bootph-pre-sram"))
+> -		return true;
+> +		return gd->flags & GD_FLG_RELOC;
 >  
-> -$(obj)/boot/%.c $(obj)/common/%.c $(obj)/env/%.c $(obj)/lib/%.c:
-> +$(obj)/generated/%.c:
->  	$(call cmd,wrap)
+>  	if (IS_ENABLED(CONFIG_OF_TAG_MIGRATE)) {
+>  		/* detect and handle old tags */
+> diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
+> index 0f38b3e736de..13700f8266d7 100644
+> --- a/include/dm/ofnode.h
+> +++ b/include/dm/ofnode.h
+> @@ -1198,15 +1198,15 @@ int ofnode_read_simple_size_cells(ofnode node);
+>   * determine if a node was bound in one of SPL/TPL stages.
+>   *
+>   * There are 4 settings currently in use
+> - * - bootph-some-ram: U-Boot proper pre-relocation only
+> + * - bootph-some-ram: U-Boot proper pre-relocation phase
+>   * - bootph-all: all phases
+>   * Existing platforms only use it to indicate nodes needed in
+>   * SPL. Should probably be replaced by bootph-pre-ram for new platforms.
+> - * - bootph-pre-ram: SPL and U-Boot pre-relocation
+> - * - bootph-pre-sram: TPL and U-Boot pre-relocation
+> + * - bootph-pre-ram: SPL phase
+> + * - bootph-pre-sram: TPL phase
+>   *
+>   * @node: node to check
+> - * Return: true if node is needed in SPL/TL, false otherwise
+> + * Return: true if node should be or was bound, false otherwise
+>   */
+>  bool ofnode_pre_reloc(ofnode node);
+>  
 
-FWIW, this change incidentally also fixes a warning (and future error!)
-from GNU Make. Building v2023.04 with GNU Make 4.4 produces
+---boot log---
 
-WRAP    tools/env/embedded.c
-tools/Makefile:264: warning: pattern recipe did not update peer target
-'tools/common/crc32.c'.
-tools/Makefile:264: warning: pattern recipe did not update peer target
-'tools/boot/crc32.c'.
-tools/Makefile:264: warning: pattern recipe did not update peer target
-'tools/lib/embedded.c'.
-tools/Makefile:264: warning: pattern recipe did not update peer target
-'tools/common/embedded.c'.
-tools/Makefile:264: warning: pattern recipe did not update peer target
-'tools/boot/embedded.c'.
-  WRAP    tools/lib/sha1.c
-  HOSTCC  tools/img2srec
-tools/Makefile:264: warning: pattern recipe did not update peer target
-'tools/env/sha1.c'.
-tools/Makefile:264: warning: pattern recipe did not update peer target
-'tools/common/sha1.c'.
-tools/Makefile:264: warning: pattern recipe did not update peer target
-'tools/boot/sha1.c'.
+U-Boot SPL 2023.10-rc4-00480-g9e644284ab (Sep 28 2023 - 15:53:09 +0300)
+Resetting on cold boot to workaround ErrataID:i2331
+Please resend tiboot3.bin in case of UART/DFU boot
+resetting ...
 
-etc. See the first "WARNING: Future backward-incompatibility!" bullet in
-https://lists.gnu.org/archive/html/help-make/2022-10/msg00020.html .
+U-Boot SPL 2023.10-rc4-00480-g9e644284ab (Sep 28 2023 - 15:53:09 +0300)
+SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.5--v09.00.05 (Kool Koala)')
+SPL initial stack usage: 13408 bytes
+Trying to boot from MMC2
+Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
+Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
+Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
+Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
+Loading Environment from MMC... *** Warning - No MMC card found, using default environment
 
-Rasmus
+Starting ATF on ARM64 core...
 
+NOTICE:  BL31: v2.8(release):v2.8-226-g2fcd408bb3-dirty
+NOTICE:  BL31: Built : 00:42:57, Jan 13 2023
+I/TC: 
+I/TC: OP-TEE version: 3.20.0 (gcc version 11.3.0 (GCC)) #1 Fri Jan 20 15:42:54 UTC 2023 aarch64
+I/TC: WARNING: This OP-TEE configuration might be insecure!
+I/TC: WARNING: Please check https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
+I/TC: Primary CPU initializing
+I/TC: SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.5--v09.00.05 (Kool Koala)')
+I/TC: HUK Initialized
+I/TC: Activated SA2UL device
+I/TC: Fixing SA2UL firewall owner for GP device
+I/TC: Enabled firewalls for SA2UL TRNG device
+I/TC: SA2UL TRNG initialized
+I/TC: SA2UL Drivers initialized
+I/TC: Primary CPU switching to normal world boot
+
+U-Boot SPL 2023.10-rc4-00480-g9e644284ab (Sep 28 2023 - 15:54:37 +0300)
+SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.5--v09.00.05 (Kool Koala)')
+Trying to boot from MMC2
+Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
+Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
+
+---boot log end---
+
+we expect U-Boot banner to be printed next but nothing is printed.
+
+-- 
+cheers,
+-roger
