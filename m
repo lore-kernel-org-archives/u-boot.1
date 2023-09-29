@@ -4,87 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA70E728C4
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 16:02:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32A5CE728C4
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 16:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64C4486EC1;
-	Fri, 29 Sep 2023 18:02:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A54A86EF4;
+	Fri, 29 Sep 2023 18:07:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=seco.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YcqPnfFr";
+	dkim=pass (2048-bit key; unprotected) header.d=seco.com header.i=@seco.com header.b="mVwAb1N4";
+	dkim=pass (2048-bit key) header.d=seco.com header.i=@seco.com header.b="mVwAb1N4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5E2586EE1; Fri, 29 Sep 2023 18:02:36 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AD69F86EF6; Fri, 29 Sep 2023 18:07:30 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05hn2231.outbound.protection.outlook.com [52.100.175.231])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CEFD86E8D
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 18:02:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE16486EF2
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 18:07:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=seco.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d8198ca891fso15897355276.1
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 09:02:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696003353; x=1696608153; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Zd/zJnyaE5BfER+Xs0SfYOvbMRiIJYnLPVblvj5jauk=;
- b=YcqPnfFrR838uNZwQiIrrOs1ozWIGZAKY8BE1zbsl8pstzVE504LhG7ecEHGOJFBzp
- eEftZpE1zu0QQ0RHqJ/dz4nnmr/b4SUGN86+77g2Mri/Fd++5aCw9UKp1G5Ses3XCy8x
- ByetXQpA0Ji0D1o+9gbZ7jYzhdcCy3xjkLdes=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696003353; x=1696608153;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Zd/zJnyaE5BfER+Xs0SfYOvbMRiIJYnLPVblvj5jauk=;
- b=L9WaCc7KxJNvdIiBnX1XR3j61oGWYj05IHtFQ2Sssy1zLztL8WFiUHzFHBAYib9u/s
- RT+zAsv7F59gIXBc/TWLG3vq7fkV+rdV4wsE93vN1BcgqB3B9qlE65s/hbzqJhQZkkUV
- SEcPu306k0P51F7Mzc5kDz2+YWkBKV2AqbcgQGkemCuPvNZLNcBR5WNmC64ytzcdi3bu
- O7z8QeCknqpYyW8jA5b9SLddnOlcrYeCHdh4dTzOl6I5LeBD0fng1zaGOE7W+LxHhgql
- 7yXiVCnh8xk+OoDRFk9tGn05a/J3N3xRH51zRvly34obCZiq3EQj5UVPFOS6/9hFglVz
- /Zzw==
-X-Gm-Message-State: AOJu0YwrtmgUoL+YeyE5zjJ92Mgki3/lMer2qlcJmlLTAThnfXA9jfMk
- rNsSiyUr0lhkk5n/HqDj2AW5bg==
-X-Google-Smtp-Source: AGHT+IG+ZuqimujPOenKgpfyQl5KLDzadq1BaRsjboZYNfDk9LzFFb2hNUJ6ud8sZcRL3YwdS+NXtw==
-X-Received: by 2002:a25:ab21:0:b0:d29:3f14:9d96 with SMTP id
- u30-20020a25ab21000000b00d293f149d96mr5067481ybi.56.1696003352847; 
- Fri, 29 Sep 2023 09:02:32 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a39b-08c7-b2a8-b94f.res6.spectrum.com.
- [2603:6081:7b00:6400:a39b:8c7:b2a8:b94f])
- by smtp.gmail.com with ESMTPSA id
- n13-20020a259f0d000000b00d748501d9b4sm4922913ybq.21.2023.09.29.09.02.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Sep 2023 09:02:32 -0700 (PDT)
-Date: Fri, 29 Sep 2023 12:02:30 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Subject: Re: [PATCH] scripts/Makefile.lib: also consider
- $(CONFIG_SYS_BOARD)-u-boot.dtsi
-Message-ID: <20230929160230.GP305624@bill-the-cat>
-References: <20230427162100.GE1134230@bill-the-cat>
- <20230427173113.GG1134230@bill-the-cat>
- <40c79f7b-205d-0b48-7ee2-e052eaa1317f@prevas.dk>
- <20230503135158.GY1134230@bill-the-cat>
- <20230503145438.GB1134230@bill-the-cat>
- <0f2df366-65ca-664f-1f90-0c2aeafce8f1@prevas.dk>
- <68f445de-c903-c3a1-906f-2cf7b5675d08@prevas.dk>
- <20230925181940.GH305624@bill-the-cat>
- <08e35aab-309c-a8e1-931e-7ab142beb593@prevas.dk>
- <CAPnjgZ3jO5s3HZRjXdG-dVLNmGYnyCWnpvzRKpKhBCRQqWH33Q@mail.gmail.com>
+ spf=pass smtp.mailfrom=sean.anderson@seco.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vvGzbUoM+XAvVrz6Oa3lntSiHbpV4ZrHDYPASEG8BLg=;
+ b=mVwAb1N43Z7O/qFmbKD9+NziFj8DLck9F/izwKFRRTcI/Gwe4rOVRWD8aNYI+khZUthI/wL2M8+WeZr7LJXcGNp9McKmCuny/v70sqHLbwnGFnVgKC5I0hGhzBbM+bBtxDzXm5a+9uZDPlRRn0feCTMIp9LS9SetJJrLgbl8a0IUENGmcoUYozAwRc08UWG7SXVJxMoyJurGWxRrz0S0k6i/UE78Qe1Adr6mNdFWXsLB9XgUut8rc/n2/rUwiWfLkPEwAEttKH9q3jcOrZ3tsFxLCO3cmnvWjzp4YC1ObZ1NQowPDNYGNGOI5/fQjJSFgZIrmr9HH9KoLQ4JQkVL5w==
+Received: from AM6P194CA0024.EURP194.PROD.OUTLOOK.COM (2603:10a6:209:90::37)
+ by AS4PR03MB8180.eurprd03.prod.outlook.com (2603:10a6:20b:4e3::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.21; Fri, 29 Sep
+ 2023 16:07:25 +0000
+Received: from AM6EUR05FT055.eop-eur05.prod.protection.outlook.com
+ (2603:10a6:209:90:cafe::73) by AM6P194CA0024.outlook.office365.com
+ (2603:10a6:209:90::37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.23 via Frontend
+ Transport; Fri, 29 Sep 2023 16:07:25 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.160.56.80)
+ smtp.mailfrom=seco.com; dkim=pass (signature was verified)
+ header.d=seco.com;dmarc=pass action=none header.from=seco.com;
+Received-SPF: Pass (protection.outlook.com: domain of seco.com designates
+ 20.160.56.80 as permitted sender) receiver=protection.outlook.com;
+ client-ip=20.160.56.80; helo=inpost-eu.tmcas.trendmicro.com; pr=C
+Received: from inpost-eu.tmcas.trendmicro.com (20.160.56.80) by
+ AM6EUR05FT055.mail.protection.outlook.com (10.233.240.217) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6863.17 via Frontend Transport; Fri, 29 Sep 2023 16:07:24 +0000
+Received: from outmta (unknown [192.168.82.140])
+ by inpost-eu.tmcas.trendmicro.com (Trend Micro CAS) with ESMTP id
+ 3A3EF20086FCA; Fri, 29 Sep 2023 16:07:24 +0000 (UTC)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com (unknown
+ [104.47.17.169])
+ by repre.tmcas.trendmicro.com (Trend Micro CAS) with ESMTPS id A460E2008006D; 
+ Fri, 29 Sep 2023 16:07:21 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=oZhWpuLtFNL6EuNEpOHBMZ+dhIErcAoZbpEvqrZiv6iX7JzRER7tPpE5bqMp91kasDC11rGYuyMssTxnBdNlYTjaz/YFanW4gEq0vtwNEd1ba2sEy1/lXlfbsO4O2GZ8mrY9uprkhAYxbrtkYgqah4iHhf0Mhm8Iv95Q9dmit1QR/iyi0WfjSp35J01WROjH5suEtPRkVQmd3yvokSvBeBFxOyew4Jw+9z8jYxh+xcQqkOXSQKLAwptMVZxzKkz49oCvWfAlzxe88iARd6EX2kGEvIDHe6vLLe5KcXitXZI0jT7UOgkDDsNSAByFc+CrT8RWlHXJJBcZHHyQz75vDA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=vvGzbUoM+XAvVrz6Oa3lntSiHbpV4ZrHDYPASEG8BLg=;
+ b=fol09JrD8WYU9oj4KFpWfi15d+StaO6Xope5+uSLl9qRaPOtiqehZ5SCvmyTwDYRnCT6S7Sy2/u2xcovsgRvnwNKYgH4E04sKTjHGC/m93MAIi+WHN5Df3lQU5Tn6Ly8yT1dYhPI4OIv0qL1Pcz1hBLIcE7HqhJVJxS1IravWnNhJUfAQhjscEHI3XPSWHiEs5fY30aupznhiyrXbQAXmV6ltSR07Ic5hohXY7k/au6BNmdFnTDElQww8gkbSrbNQJfm+r5sXNGPUmpM9FK+I5W8BDSUtR/Zob3w7SfQbqBNOd2w60iP3TGBh0H+JaKaEq4RWLvQg5Mz7Oo6IfK+eA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=seco.com; dmarc=pass action=none header.from=seco.com;
+ dkim=pass header.d=seco.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=vvGzbUoM+XAvVrz6Oa3lntSiHbpV4ZrHDYPASEG8BLg=;
+ b=mVwAb1N43Z7O/qFmbKD9+NziFj8DLck9F/izwKFRRTcI/Gwe4rOVRWD8aNYI+khZUthI/wL2M8+WeZr7LJXcGNp9McKmCuny/v70sqHLbwnGFnVgKC5I0hGhzBbM+bBtxDzXm5a+9uZDPlRRn0feCTMIp9LS9SetJJrLgbl8a0IUENGmcoUYozAwRc08UWG7SXVJxMoyJurGWxRrz0S0k6i/UE78Qe1Adr6mNdFWXsLB9XgUut8rc/n2/rUwiWfLkPEwAEttKH9q3jcOrZ3tsFxLCO3cmnvWjzp4YC1ObZ1NQowPDNYGNGOI5/fQjJSFgZIrmr9HH9KoLQ4JQkVL5w==
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=seco.com;
+Received: from DB9PR03MB8847.eurprd03.prod.outlook.com (2603:10a6:10:3dd::13)
+ by PA4PR03MB6896.eurprd03.prod.outlook.com (2603:10a6:102:f0::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.26; Fri, 29 Sep
+ 2023 16:07:20 +0000
+Received: from DB9PR03MB8847.eurprd03.prod.outlook.com
+ ([fe80::bf95:eda3:be0f:a340]) by DB9PR03MB8847.eurprd03.prod.outlook.com
+ ([fe80::bf95:eda3:be0f:a340%5]) with mapi id 15.20.6792.026; Fri, 29 Sep 2023
+ 16:07:19 +0000
+From: Sean Anderson <sean.anderson@seco.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Sean Anderson <sean.anderson@seco.com>
+Subject: [PATCH] test: Fix SPL tests not being run
+Date: Fri, 29 Sep 2023 12:06:54 -0400
+Message-Id: <20230929160654.3475279-1-sean.anderson@seco.com>
+X-Mailer: git-send-email 2.35.1.1320.gc452695387.dirty
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BYAPR07CA0088.namprd07.prod.outlook.com
+ (2603:10b6:a03:12b::29) To DB9PR03MB8847.eurprd03.prod.outlook.com
+ (2603:10a6:10:3dd::13)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="MxuxS9Nwfu0bd6uq"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3jO5s3HZRjXdG-dVLNmGYnyCWnpvzRKpKhBCRQqWH33Q@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-TrafficTypeDiagnostic: DB9PR03MB8847:EE_|PA4PR03MB6896:EE_|AM6EUR05FT055:EE_|AS4PR03MB8180:EE_
+X-MS-Office365-Filtering-Correlation-Id: eb25111d-7798-4247-e696-08dbc1062b4b
+X-TrendMicro-CAS-OUT-LOOP-IDENTIFIER: 656f966764b7fb185830381c646b41a1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: CWv05qpUPQbytGyolhZXI0PBHtuzpjcs/KqVMbwcroP3CnMXkmyctS6J2R5VHiGadjzf5pWayUDyCt0m0USsnKdgH2HGhHHaj2PGlqqhXoYixZK/vwg4eZH2zK9SyKq1wNqbpiehnYqNau3h1O1BycSMjz/R0FhCEo9waNLSKmNkh1wloLkPTb8dEmpQEmeY+QHf1oQC/SlbUiNNtfMtLVnFhBrOgXv+T7OUtobiEIKdVP1frWS8pTvxGLcbE4C9esx6qCy+58e64fOZTR+M5qwtWQrrdRIiD45N9ocPsgLjYzdCr48qB2z5rXWVtsYfw4zhyFYguCmde1M0WC288e51CnVgWzXurRLGYb/eTecrig4dyQCooQBUB5nEGOAE/XOZixVBe8RoT+ltsiSKqNzLC4dligdbTz0WqjvVz0gi2g5Re1VJTmpKdvjpuA7poeHuCzZfrpYqY9t845M1SvIF82NzrKzJLlu5dvJx5ZGq9ODfVlEMroxbGc4mw4hVWFRZ3fhvN2EvWxKwg/kZph0zWLZNtVjQPAEGtyLSIY/gT1MESuZZSxuJzJRG1iLTnOhHYVCyFqRXdx3QHqOQ57pQeke5sn82H1T+n1vfRWaWDDw8vTVerZrO8CSz4i5y
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DB9PR03MB8847.eurprd03.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230031)(39850400004)(396003)(376002)(346002)(136003)(366004)(230922051799003)(186009)(64100799003)(1800799009)(451199024)(4744005)(2906002)(44832011)(5660300002)(8936002)(4326008)(8676002)(26005)(36756003)(1076003)(2616005)(107886003)(41300700001)(66946007)(66556008)(66476007)(316002)(54906003)(6916009)(52116002)(6506007)(83380400001)(6486002)(478600001)(6666004)(38100700002)(38350700002)(6512007)(86362001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB6896
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AM6EUR05FT055.eop-eur05.prod.protection.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 685ca04b-0d50-4453-3dda-08dbc106284c
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: yvQzSmbOEUm0VGX/V0KtXMnC1xOBn41g0gtkKt6hHDhdrUKBvxpTJOPl/ipov8/Fy1dnT4fBAPCVW4RtgPyzDCKeG8tnT95a/UpCZqkepUXdezyVMQgKUyCjDZ6CHFoSYi6kLDuUmJcQAQN2JEKUeahSnLb6xhXyIq+JSDf1hA0uiHnHuWoU39P2we3OWTzNZqYnUv1Xm0dBbFnJgiU7iA3jnrQ9AU+SDN3N6xT6QAuX5NLCnfbsyaHxCnQgm3J5m+Ugn6s9m4NHFWNnsdO15J88Bztn5hfmdU7KoCTMdNzgMVYe7LO2Jc6Z7LpK9/+VvuC878HQrP7HoS+N4rPV465c+54mvJMV07PH5LyhknHbhJWIi84sAQQBfgrSOUJAXk/wd0CE50hPyAS6eEIZrvVy8MtQF2UCpc05THAau21gheVPufCLJBFo57zPo0YwKKxtpkgHSudoeUFxFIDjRg0nTnsTWNFrKkeZGTTeqJ6jODayJA63qEmdKyTP5k6Mpfo/+X17J6wo/Ld1iL5q0mUyDmu+E+Ookx4YUDuKTLzt2b2MlfV1SmReFwEnuUpRiZyEqnm+AdVUfKV3CfdeF9czceLFTpSQhTeMu23B8/qMgICzuKIMrnIXyhoYgLj/WQJKe7JDZpOfPVnLg5rbXgza3cdGsC/EhY7A3JkJGHWP7fvQvK1p8zLYMIZE+tkQsGiSJj2c169Ovf3vq92mhUUamZwmZ3c+ULa0W4U4gJS2+QGYvJoSPnXNmzKilq1fBeRDZJ9rBqxMh+FR+UDV1mekrKAwjhmrzinFkYUP6BYsxajrAs3ONXJEGACsnCvL
+X-Forefront-Antispam-Report: CIP:20.160.56.80; CTRY:NL; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:inpost-eu.tmcas.trendmicro.com;
+ PTR:inpost-eu.tmcas.trendmicro.com; CAT:NONE;
+ SFS:(13230031)(396003)(376002)(346002)(136003)(39850400004)(230922051799003)(451199024)(186009)(5400799018)(64100799003)(1800799009)(82310400011)(36840700001)(40470700004)(46966006)(8936002)(6916009)(316002)(2906002)(41300700001)(478600001)(70206006)(70586007)(6486002)(54906003)(6506007)(6512007)(8676002)(1076003)(107886003)(2616005)(4326008)(44832011)(83380400001)(336012)(6666004)(4744005)(47076005)(36860700001)(26005)(5660300002)(34070700002)(7636003)(7596003)(40460700003)(82740400003)(356005)(86362001)(40480700001)(36756003)(12100799045);
+ DIR:OUT; SFP:1501; 
+X-OriginatorOrg: seco.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2023 16:07:24.2947 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: eb25111d-7798-4247-e696-08dbc1062b4b
+X-MS-Exchange-CrossTenant-Id: bebe97c3-6438-442e-ade3-ff17aa50e733
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bebe97c3-6438-442e-ade3-ff17aa50e733; Ip=[20.160.56.80];
+ Helo=[inpost-eu.tmcas.trendmicro.com]
+X-MS-Exchange-CrossTenant-AuthSource: AM6EUR05FT055.eop-eur05.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR03MB8180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,95 +148,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+SPL doesn't have OF_LIVE enabled, so we can only run tests with a flat
+tree. Don't skip them even if they don't use the devicetree.
 
---MxuxS9Nwfu0bd6uq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 6ec5178c0ef ("test: Skip flat-tree tests if devicetree is not used")
+Signed-off-by: Sean Anderson <sean.anderson@seco.com>
+---
 
-On Fri, Sep 29, 2023 at 09:15:00AM -0600, Simon Glass wrote:
-> Hi Rasmus,
->=20
-> On Mon, 25 Sept 2023 at 13:05, Rasmus Villemoes
-> <rasmus.villemoes@prevas.dk> wrote:
-> >
-> > On 25/09/2023 20.19, Tom Rini wrote:
-> > > On Mon, Sep 25, 2023 at 10:27:43AM +0200, Rasmus Villemoes wrote:
-> > >> On 04/05/2023 14.35, Rasmus Villemoes wrote:
-> > >>> On 03/05/2023 16.54, Tom Rini wrote:
-> > >>
-> > >>>> The one last problem now is on stm32mp15_dhcor_basic which is a
-> > >>>> defconfig missing one from OF_LIST but including it in the its fil=
-e, so
-> > >>>> the above is the patch we need.
-> > >>>>
-> > >>
-> > >> Hi Tom
-> > >>
-> > >> Can I persuade you to try something like
-> > >> https://source.denx.de/u-boot/u-boot/-/commit/a05e0d0e6b9103542a1076=
-f9cab0005f400fa072
-> > >> again, but leaving the .dtbo targets in there?
-> > >>
-> > >> I could send a patch, but it's entirely mechanical, and not really m=
-eant
-> > >> for being applied until we know if there's more to be cleaned up.
-> > >
-> > > So what ended up being the problem I think is the case Simon pointed =
-out
-> > > where we do take the output from "make all" and concatenate one of the
-> > > dtbs that was generated with u-boot.img or so, and it works.  But may=
-be
-> > > that should just list all of the valid DTBs that it needs in the
-> > > defconfig to start with? I don't quite know, it was a case I hadn't
-> > > considered at the time.
-> > >
-> >
-> > Re-reading the thread, I can't see where that was mentioned.
-> >
-> > But yes, if some boards (still) need that, and have more than one
-> > possible .dtb, the board can't set an OF_LIST different from the default
-> > consisting of DEFAULT_DEVICE_TREE because changing OF_LIST requires
-> > SPL_LOAD_FIT || MULTI_DTB_FIT.
-> >
-> > How do we figure out if such boards even exist?
->=20
-> Honestly at this point I've forgotten what this is all about.
->=20
-> Perhaps the easiest approach is to create a new Kconfig to control
-> whether a board-level .dtsi is included in the list of wildcard
-> searches. Then you can enable it for your board without affecting
-> others.
+ test/test-main.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-That's getting things backwards, from what this cleanup does.  Today we
-have messy lists of "build these device trees" and then don't use most
-of them, and some of the list is just Wrong (listing dts files as an
-output).  With the series to handle dtbo files, we could remove
-virtually all of that, and the only use cases that don't Just Work still
-are the ones I forget which board you mentioned (I think it was Samsung
-tho?) where the defconfig doesn't list all of the device trees, just one
-of them, and the other 5 that we build can also be easily used.  Does
-that ring a bell?
+diff --git a/test/test-main.c b/test/test-main.c
+index 778bf0a18a0..edb20bc4b9c 100644
+--- a/test/test-main.c
++++ b/test/test-main.c
+@@ -476,7 +476,8 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
+ 	 *   (for sandbox we handle this by copying the tree, but not for other
+ 	 *    boards)
+ 	 */
+-	if ((test->flags & UT_TESTF_SCAN_FDT) &&
++	if ((!CONFIG_IS_ENABLED(OF_LIVE) ||
++	     (test->flags & UT_TESTF_SCAN_FDT)) &&
+ 	    !(test->flags & UT_TESTF_LIVE_TREE) &&
+ 	    (CONFIG_IS_ENABLED(OFNODE_MULTI_TREE) ||
+ 	     !(test->flags & UT_TESTF_OTHER_FDT)) &&
+-- 
+2.35.1.1320.gc452695387.dirty
 
---=20
-Tom
-
---MxuxS9Nwfu0bd6uq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUW9Q0ACgkQFHw5/5Y0
-tyyqiQv/eUf3vgg3tfOZopyS/XbTcmB1OPzYJZYcgHufgsK1m6QL4UuyvWT/qJ7P
-J6QbcWdfbcNDmDChD/1pDdJyiQhcjwWjnzRfdTTgJ9Tmn5SiSvlZmZuVu3QBjM7Y
-8XWOMXXnq0a8gEkAPGXsr3D0WHGQq9cJKG4DPbc1iyfJoOoFGcBfe5chKe29+JUu
-P1f28Hphf4aSbcQHY1yTQzDGYHIiherNpYEakrTG+vN+uzdAAhAEqhqpoIDlPzqL
-z9snj3e9Lf52n17ARXfEZrmsbq6/TnCJfS6mNPL4lWMdrNCx247yileNDU7011TU
-Y1xTsAB1mTSRnOTPWS5LdIxVP4IBTRbHXMSHmezMGlpgqgmT1cNa5khnlzJl0E1j
-gzCiLlbXGSmAmL5+35mdDzRA9nhun/zUsYnzaGRHuZjgajuYcBbtrwtJafLhShL4
-ugSbd11TIwSkZPyHLlNz8dV4q6jbLT2nnVx1dBk8mumMaT1q7r5ec0K+TxtfMhrV
-BRrqsG3y
-=BBWN
------END PGP SIGNATURE-----
-
---MxuxS9Nwfu0bd6uq--
