@@ -4,49 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABA15E80ABE
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 11:34:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 180A7E80ABE
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 11:44:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C5886E6B;
-	Fri, 29 Sep 2023 13:34:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7729586EA4;
+	Fri, 29 Sep 2023 13:44:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1695987280;
-	bh=5jCc3vyeeGFcUgfJHdd6MzvWY9u2M05i95aA3O971tk=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ndzlQ2QWGmWoKnsP0IMTFv/HOZKevzyHjL2lnW0iHlXJzM2nyKUjH6s/+ISoK/YHc
-	 NmRgEGZRDGegEBV8gdubbT+Z0SxgM4UxcuWoxDwN76raKWbx0hZc8I50YGQ/pbKR5m
-	 Pnx8Lnfqc87/wio1ruNbt2PHDytQgnENtEdGk+fWCvbaxwLgbQYhCQTswsZF27iUXY
-	 km84g8LxRcqpv8KU1A3mVKiLesNi8jJxkPlQ23ZU951yPKQsDSt/D2c7GxBU8SbN4y
-	 nhEXVFKW4+m61g5BEeHkDD5Mkq49x9nRePeTDeofYYh0RehUiep6QrnVwTjjskzGzD
-	 020+HYGbCseGw==
-Received: from crub.agik.hopto.org (pd95f1e86.dip0.t-ipconnect.de
- [217.95.30.134])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PSxiXu4S";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8FCF686EB9; Fri, 29 Sep 2023 13:44:43 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3F58D86488;
- Fri, 29 Sep 2023 13:34:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1695987278;
- bh=5jCc3vyeeGFcUgfJHdd6MzvWY9u2M05i95aA3O971tk=;
- h=From:To:Cc:Subject:Date:From;
- b=aXCItqUW6/DrP6UwhaH5TeuadKRt5DbDSedmY/0lOAtefe1Zt/B0giEcGqdLvzp82
- x9FHSyW4HXiq9LceEqXjEGTBqsgcY9Y6tUDg1etj4NLWKJPVB8MMdNVfDIW5eBGYvT
- SGKtEzGHH4a5sYGqnpkOOJqINsEB3+u02wF6kd63QKLdBiVqWnv7W4MeQoUH1IYL8R
- 3yZ4sjVKvG3EXPDowzLHFNzAeqO/KK/HgeMoX1u5lyRSEZt/gb5jni4WomahDdPtPr
- tv6Z0ls9ddTXbRMhg3KN8nKkLYjrUTHHqtG1P+lAdwMEs4sfD/4rIKWdoPxOevBsUx
- FK11fjKrAsYjA==
-From: Anatolij Gustschin <agust@denx.de>
-To: u-boot@lists.denx.de
-Cc: lukma@denx.de, seanga2@gmail.com, patrick.delaunay@foss.st.com,
- patrice.chotard@foss.st.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] clk: stm32mp1: Add support for USART1 clock
-Date: Fri, 29 Sep 2023 13:34:37 +0200
-Message-Id: <20230929113437.26081-1-agust@denx.de>
-X-Mailer: git-send-email 2.17.1
+ by phobos.denx.de (Postfix) with ESMTPS id 2D69086E6B
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 13:44:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-59f6e6b206fso120640457b3.3
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 04:44:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1695987880; x=1696592680; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FygbQ0ksbuSCoM25ZIYdVHw9KEqbOMcYFrqPwPtrBIk=;
+ b=PSxiXu4SGkLMa7eBCUUtuLs8ZJiQPwDrz5vx3MDKs1nqreT3nmURe6+MbkJsBfTeSj
+ n7caiRkpfdfgob6rbVGSAm8iHEpSRKQ2dd9ILIOZBtVBZ9A0Ib/0bEG6Ri5QkiKKZG7L
+ daM4FOYEasuGnfdxDH3dfmUHlDvBfQ1UBSbMc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1695987880; x=1696592680;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FygbQ0ksbuSCoM25ZIYdVHw9KEqbOMcYFrqPwPtrBIk=;
+ b=W75AJwIuJzevVIMciLyyMqIjKG3wNk6gmFflKwfmQa1JXS6f5YqZWhH74aE/RDVSg+
+ 8wa5wvkJc28qHfB98wz2NmEj4bvVIpvOKwpDGacqt7uL9gvbXaK3Tb2oGgQFQIE9/P1f
+ U+Kt/Sb2FtyhpfLIVTt3XrtUkUHzg9GCad/ILbY0eVA5I9SRFKX3U72zycSiN2b0kmOp
+ I1OZyKE8ZbuCN6O/7hkzc1P108+J7Pwhr8K2OhBto9ksK7D+OGyWXqHPuByNNCDMASSE
+ 5FTpRlSnPwZCdK4JW0s9gn73YSo7cgqo7YaJ9SICX+afr+4Ah2j8ACA/37fn0A5pARUr
+ EnJA==
+X-Gm-Message-State: AOJu0YyysmhdcimF5vuE9ib6/Vj41+k96UZX7jvZUCQIPnPJRDiBPNf2
+ WvSFjjlqTaj8pTL/e/XC6NrH8A==
+X-Google-Smtp-Source: AGHT+IFmwCpvQMTz+oXVOt4WpwtE2lkHqgz8dszSBvmeEFWoff3h1HkgEIhGXA1v2Yy4eiAEaxJzww==
+X-Received: by 2002:a0d:ca08:0:b0:58c:9651:8f with SMTP id
+ m8-20020a0dca08000000b0058c9651008fmr4221897ywd.10.1695987879890; 
+ Fri, 29 Sep 2023 04:44:39 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a39b-08c7-b2a8-b94f.res6.spectrum.com.
+ [2603:6081:7b00:6400:a39b:8c7:b2a8:b94f])
+ by smtp.gmail.com with ESMTPSA id
+ x9-20020a81af49000000b0059f802fad40sm3433279ywj.22.2023.09.29.04.44.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 29 Sep 2023 04:44:39 -0700 (PDT)
+Date: Fri, 29 Sep 2023 07:44:37 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Roger Quadros <rogerq@kernel.org>
+Subject: Re: Please pull u-boot-dm/next
+Message-ID: <20230929114437.GG305624@bill-the-cat>
+References: <CAPnjgZ32+7B0SVvpE+r_c9ZyCXpkFErRJRf0uCAx-aCMuJc2ow@mail.gmail.com>
+ <20230924211451.GK305624@bill-the-cat>
+ <20230929092345.7h3wevfzyqwaznvt@ula0497581>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="J/S2s0HHUQ/9X+nd"
+Content-Disposition: inline
+In-Reply-To: <20230929092345.7h3wevfzyqwaznvt@ula0497581>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,70 +95,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add USART1 clock parents and mux configuration. This allows
-support for configuring the USART1 as the serial console in
-SPL and U-Boot via device tree. Without this patch the SPL
-with usart1 serial console enabled crashes because it can
-not find the clock specified in the device tree for usart1.
 
-Signed-off-by: Anatolij Gustschin <agust@denx.de>
----
- drivers/clk/stm32/clk-stm32mp1.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+--J/S2s0HHUQ/9X+nd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/clk/stm32/clk-stm32mp1.c b/drivers/clk/stm32/clk-stm32mp1.c
-index 6150287694..f3ac8c7583 100644
---- a/drivers/clk/stm32/clk-stm32mp1.c
-+++ b/drivers/clk/stm32/clk-stm32mp1.c
-@@ -72,6 +72,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #define RCC_PLL2CSGR		0xA4
- #define RCC_I2C46CKSELR		0xC0
- #define RCC_SPI6CKSELR		0xC4
-+#define RCC_UART1CKSELR		0xC8
- #define RCC_CPERCKSELR		0xD0
- #define RCC_STGENCKSELR		0xD4
- #define RCC_DDRITFCR		0xD8
-@@ -317,6 +318,7 @@ enum stm32mp1_parent_sel {
- 	_SPI45_SEL,
- 	_SPI6_SEL,
- 	_RTC_SEL,
-+	_UART1_SEL,
- 	_PARENT_SEL_NB,
- 	_UNKNOWN_SEL = 0xff,
- };
-@@ -557,6 +559,7 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 0, SPI6_K, _SPI6_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 2, I2C4_K, _I2C46_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 3, I2C6_K, _I2C46_SEL),
-+	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 4, USART1_K, _UART1_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 8, RTCAPB, _PCLK5),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 16, BSEC, _UNKNOWN_SEL),
- 	STM32MP1_CLK_SET_CLR(RCC_MP_APB5ENSETR, 20, STGEN_K, _STGEN_SEL),
-@@ -602,6 +605,8 @@ static const struct stm32mp1_clk_gate stm32mp1_clk_gate[] = {
- static const u8 i2c12_parents[] = {_PCLK1, _PLL4_R, _HSI_KER, _CSI_KER};
- static const u8 i2c35_parents[] = {_PCLK1, _PLL4_R, _HSI_KER, _CSI_KER};
- static const u8 i2c46_parents[] = {_PCLK5, _PLL3_Q, _HSI_KER, _CSI_KER};
-+static const u8 uart1_parents[] = {_PCLK5, _PLL3_Q, _HSI_KER, _CSI_KER,
-+					_PLL4_Q, _HSE_KER};
- static const u8 uart6_parents[] = {_PCLK2, _PLL4_Q, _HSI_KER, _CSI_KER,
- 					_HSE_KER};
- static const u8 uart24_parents[] = {_PCLK1, _PLL4_Q, _HSI_KER, _CSI_KER,
-@@ -659,6 +664,7 @@ static const struct stm32mp1_clk_sel stm32mp1_clk_sel[_PARENT_SEL_NB] = {
- 	STM32MP1_CLK_PARENT(_RTC_SEL, RCC_BDCR, RCC_BDCR_RTCSRC_SHIFT,
- 			    (RCC_BDCR_RTCSRC_MASK >> RCC_BDCR_RTCSRC_SHIFT),
- 			    rtc_parents),
-+	STM32MP1_CLK_PARENT(_UART1_SEL, RCC_UART1CKSELR, 0, 0x7, uart1_parents),
- };
- 
- #ifdef STM32MP1_CLOCK_TREE_INIT
-@@ -786,6 +792,7 @@ char * const stm32mp1_clk_parent_sel_name[_PARENT_SEL_NB] = {
- 	[_SPI1_SEL] = "SPI1",
- 	[_SPI45_SEL] = "SPI45",
- 	[_RTC_SEL] = "RTC",
-+	[_UART1_SEL] = "UART1",
- };
- 
- static const struct stm32mp1_clk_data stm32mp1_data = {
--- 
-2.17.1
+On Fri, Sep 29, 2023 at 02:53:45PM +0530, Manorit Chawdhry wrote:
+> Hi Tom, Simon
+>=20
+> On 17:14-20230924, Tom Rini wrote:
+> > On Sat, Sep 23, 2023 at 01:52:55PM -0600, Simon Glass wrote:
+> >=20
+> > > Hi Tom,
+> > >=20
+> > > This is for the -next branch
+> > >=20
+> > > https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/17836
+> > >=20
+> > >=20
+> > > The following changes since commit b05a184379631d13c4a49e423aa1324dc1=
+ae6158:
+> > >=20
+> > >   Merge tag 'x86-pull-20230922' of
+> > > https://source.denx.de/u-boot/custodians/u-boot-x86 into next
+> > > (2023-09-22 11:16:22 -0400)
+> > >=20
+> > > are available in the Git repository at:
+> > >=20
+> > >   git://git.denx.de/u-boot-dm.git tags/dm-next-23sep23
+> > >=20
+> > > for you to fetch changes up to ae84514feee209091d331a8baaa344ed8d8e90=
+5b:
+> > >=20
+> > >   kontron_sl28: Use u-boot-update.bin instead of u-boot.update
+> > > (2023-09-23 12:31:25 -0600)
+> > >=20
+> >=20
+> > Applied to u-boot/next, thanks!
+>=20
+> The following merge breaks K3 boards somehow, All have the same failure
+> signature, putting the logs here of J721e for your reference.
 
+This is what Roger has figured out here:
+https://lore.kernel.org/u-boot/20230820220316.3517102-1-jonas@kwiboo.se/T/#t
+
+And please note that both j721e_evm and am65x_evm are working fine which
+is why I merged the series.
+
+--=20
+Tom
+
+--J/S2s0HHUQ/9X+nd
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUWuKIACgkQFHw5/5Y0
+tyysYwwArn9F79qPipIAVPxwPttcbuXrU3y4uDR0EUZ1o2PMmbkswQsr4NEyuamU
+QOZqBr/C2PP3OJwFppRyeb0rKehhqWZSIBjNBAdwW0nplvVNFHJf70zRJZU5vmZ/
+m4kzmvt4rfpnytWkuDIkXZVX1JXBFrw8IpdRub4HQ9Qlxx8vxYgrd3TXZB8LNpxe
+Dh4iPe6E9lXLdwaf0Ufd+Hvu8pWXNiYGpKVp5KSyBF19D1QCsBIATUIYyXeMYVth
+IBSAGR/yiPcQ3j8niyGVDjjAcunih+T84Zc1yuV7cT6zGqXWftnjj77TAM93vkE1
+bsgYyy6p3VOh52PCQTZ9LvZ04j/rGs3q9gF90WTSxHcmLkW1WwwjUg9TmgLbqOuU
+nWjeN93wXJniaa8AGq1OUb4X7buuq1gvftUGfKXc/+MRvARoSfTkY4ULhDBz4emQ
+ZzTJvYh6PKqxDttkBeTorvqlP8s5wrxXwR1Znkgw69CPcPYRg5+LiZ74Uo94X2D0
+m9+exC5s
+=u8nr
+-----END PGP SIGNATURE-----
+
+--J/S2s0HHUQ/9X+nd--
