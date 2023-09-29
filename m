@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB90AE7F154
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 11:48:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6921AE80ABE
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 11:56:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FA0E86EBF;
-	Fri, 29 Sep 2023 13:48:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0563486EBC;
+	Fri, 29 Sep 2023 13:56:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rt6Ogd4c";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LI7q/af9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1AF8D86EC0; Fri, 29 Sep 2023 13:48:16 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 6A69386EBE; Fri, 29 Sep 2023 13:56:56 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E3DB86E6B
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 13:48:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E99EC86EA4
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 13:56:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-533cbbd0153so14572304a12.0
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 04:48:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-d86574d9bcaso13009407276.2
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 04:56:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1695988094; x=1696592894; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1695988612; x=1696593412; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FFIuqFuDe1iQX20nzjyCxqtbCDdNNZQ4LNoin0ve7Ts=;
- b=rt6Ogd4cIzUbHTq17KYAijtzuxE7nRv+YEpxpzrLE23FcaJ5ntPqv6WmrDqrwIeYTn
- v1CoEfyloBagsmpl0G9CmtB4YhGz+lQ82HGp6KLzbJQ5itLpJAojD0yrVChTCXeQ+00t
- xpnTrWCpHRAQHZj5yc9366qwxoSH2qDkYZ8hFTcmydYKS/rlLBH1SQcJCu56rNMxU6Az
- sEyfMQ9dm4DLbBBb5qsHctBE2C293PhJ/UUeGyVEA1k8+cD82a7Cwy1G1C7oGoBL+NeT
- +KYTEceG524u8cjOWn3EihXAHrg6dKF/9fYhimFStBnbCnvO6uMtlBGhugU7vw5PYEAj
- KC4A==
+ bh=p25RXEvWTUZwakaPTazkCGR2m5fHlUeM3CtZnuybxYg=;
+ b=LI7q/af98K7MMujA27RCmWWeS+Vwx1+qTgkOklsmPvsx9z86ApP0nXf+Tj05mhqLhU
+ RN+mgms+LZiTWlSpLCOeO8jvi/cYXbJuM/3MTYIHB5r7dqZ6zXg1PH/DFSNelYxtovHU
+ z9pWcxxhozTmCSorreIfRW0B+OfsI6KRsVQCs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695988094; x=1696592894;
+ d=1e100.net; s=20230601; t=1695988612; x=1696593412;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FFIuqFuDe1iQX20nzjyCxqtbCDdNNZQ4LNoin0ve7Ts=;
- b=xGjCpeKqUZIWL2RCdZZMzVtX5i1hGi0wDgmSEndDOvrjkzfjt7P0ohBmH//0v67iDA
- RHU4xRiWGeeJ0jSFTxvjJTPwFsLjZiKz2b1yy3jCSN/CxURpmgPQiUaSP38JusAdK1hZ
- 8N2+GorXrHDJIW6NfxRr6/y4N7I2APZoRKGjGsCMs350wubneTvYh5fPD/Wp/SXDL+9y
- 558OpAYc2pP1RDqNO9i+a1GTlN/mItwf843Zfl5G88OC4nl1irwZAVR8k5/pfeMV8IqY
- eujXFC4cNyToYmF5qccery1udFezvFD7hRhDMWBQ55ceXxxDoYVPb3DScKcgWvLuYRHX
- hcHw==
-X-Gm-Message-State: AOJu0YzvC7Ac+6wpEUSqkeApn3vYEqLNDAL0g2yZRpKqAI8wPz+B4KvP
- PkmBCHLuriXh4HZA4scckoaVxA==
-X-Google-Smtp-Source: AGHT+IHpXBHzFIA8rGlqHDaQR/twpc/q1vka2mOoh/Pgct8T1bI461T9mZPZbzaJ0Uc+40ptrDY+Qw==
-X-Received: by 2002:a05:6402:558:b0:51d:9399:4707 with SMTP id
- i24-20020a056402055800b0051d93994707mr3539686edx.26.1695988093745; 
- Fri, 29 Sep 2023 04:48:13 -0700 (PDT)
-Received: from hades (ppp046103219117.access.hol.gr. [46.103.219.117])
+ bh=p25RXEvWTUZwakaPTazkCGR2m5fHlUeM3CtZnuybxYg=;
+ b=MMXfYBeLmLFzlXMu9Iu8Uz7TE47ud3ZPmcTzSKsI+F5FzUA6enpnNc6XF6Bm4rHWIS
+ /wXhHv7827TrFxD0wte6Pacs8hW0iZAs5fMsPo5PyXIIIYob9J7DiWJ+VYHUAMRIPJRH
+ J/i9ZZsEt+4GIjjrazyMARzNjH+s4pPtxPgqbgUJlt2gPewo5CXLt3IvhwhRN+tYLUlR
+ rmeZ+cIu8My+ZlQb8KQpTeUgWG0JhQUzbLYVWyELwE6chNKWZHENQrq/TO5fMBYYeQ/Z
+ WKnMyz/RV/8MiIpOQ2NXoeydVRO7LDMchbm2mDRjQimU6hsdq6OT37JwEoUEV7T1YySE
+ vuTQ==
+X-Gm-Message-State: AOJu0YzxwmeT6REPWpq3DU9ZZPMntw3BWb7IovrZs5dRJFDc9a5GT9Fw
+ u8wJrQ9XhNOT/PRX6QJceZBGKw==
+X-Google-Smtp-Source: AGHT+IEfKfqdcLLndc/6dOF0TSe4Ks0cODssKLu/XvSNbUvYB2WY1l6+fQDscx2S8AcakwVnNnqxjA==
+X-Received: by 2002:a25:320e:0:b0:d86:5938:ac41 with SMTP id
+ y14-20020a25320e000000b00d865938ac41mr3831597yby.5.1695988612494; 
+ Fri, 29 Sep 2023 04:56:52 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a39b-08c7-b2a8-b94f.res6.spectrum.com.
+ [2603:6081:7b00:6400:a39b:8c7:b2a8:b94f])
  by smtp.gmail.com with ESMTPSA id
- f5-20020aa7d845000000b005364b54a4basm1296438eds.80.2023.09.29.04.48.12
+ b23-20020a253417000000b00d13b72fae3esm4989737yba.2.2023.09.29.04.56.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Sep 2023 04:48:13 -0700 (PDT)
-Date: Fri, 29 Sep 2023 14:48:10 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>
-Subject: Re: [PATCH v5 4/7] efi_loader: support boot from URI device path
-Message-ID: <ZRa5eiRu+SHvglrp@hades>
-References: <20230927093631.1595494-1-masahisa.kojima@linaro.org>
- <20230927093631.1595494-5-masahisa.kojima@linaro.org>
+ Fri, 29 Sep 2023 04:56:51 -0700 (PDT)
+Date: Fri, 29 Sep 2023 07:56:49 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Chanho Park <chanho61.park@samsung.com>,
+ Ferass El Hafidi <vitali64pmemail@protonmail.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] spl: Jump to image at end of board_init_r
+Message-ID: <20230929115649.GH305624@bill-the-cat>
+References: <20230927214415.2224768-1-jonas@kwiboo.se>
+ <b99750c4-973f-48f4-9c3b-166f0e5e832c@gmx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="C4htM0N0wb3QYvMH"
 Content-Disposition: inline
-In-Reply-To: <20230927093631.1595494-5-masahisa.kojima@linaro.org>
+In-Reply-To: <b99750c4-973f-48f4-9c3b-166f0e5e832c@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,68 +94,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kojima-san,
 
+--C4htM0N0wb3QYvMH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[...]
+On Fri, Sep 29, 2023 at 02:57:42AM +0200, Heinrich Schuchardt wrote:
+> On 9/27/23 23:44, Jonas Karlman wrote:
+> > spl_board_prepare_for_boot() is not called before jumping/invoking atf,
+> > optee, opensbi or linux images.
+> >=20
+> > Jump to image at the end of board_init_r() to fix this.
+> >=20
+> > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> > ---
+> > This patch have dependencies on the following patches:
+> >=20
+> > spl: add __noreturn attribute to spl_invoke_opensbi function
+> > https://patchwork.ozlabs.org/patch/1827057/
+> >=20
+> > spl: add __noreturn attribute to spl_invoke_atf function
+> > https://patchwork.ozlabs.org/patch/1831366/
+> >=20
+> > spl: Drop the switch() statement for OS selection
+> > from the "spl: Preparation for Universal Payload" series
+> > https://patchwork.ozlabs.org/patch/1839731/
+> > ---
+> >   common/spl/spl.c | 12 +++++++-----
+> >   1 file changed, 7 insertions(+), 5 deletions(-)
+> >=20
+> > diff --git a/common/spl/spl.c b/common/spl/spl.c
+> > index f7608f14e365..79c39820262a 100644
+> > --- a/common/spl/spl.c
+> > +++ b/common/spl/spl.c
+> > @@ -647,6 +647,8 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+> >   		BOOT_DEVICE_NONE,
+> >   		BOOT_DEVICE_NONE,
+> >   	};
+> > +	typedef void __noreturn (*jump_to_image_t)(struct spl_image_info *);
+> > +	jump_to_image_t jump_to_image =3D &jump_to_image_no_args;
+> >   	struct spl_image_info spl_image;
+> >   	int ret, os;
+> >=20
+> > @@ -735,20 +737,20 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+> >   	} else if (CONFIG_IS_ENABLED(ATF) && os =3D=3D IH_OS_ARM_TRUSTED_FIR=
+MWARE) {
+> >   		debug("Jumping to U-Boot via ARM Trusted Firmware\n");
+> >   		spl_fixup_fdt(spl_image_fdt_addr(&spl_image));
+> > -		spl_invoke_atf(&spl_image);
+> > +		jump_to_image =3D &spl_invoke_atf;
+> >   	} else if (CONFIG_IS_ENABLED(OPTEE_IMAGE) && os =3D=3D IH_OS_TEE) {
+> >   		debug("Jumping to U-Boot via OP-TEE\n");
+> >   		spl_board_prepare_for_optee(spl_image_fdt_addr(&spl_image));
+> > -		jump_to_image_optee(&spl_image);
+> > +		jump_to_image =3D &jump_to_image_optee;
+> >   	} else if (CONFIG_IS_ENABLED(OPENSBI) && os =3D=3D IH_OS_OPENSBI) {
+> >   		debug("Jumping to U-Boot via RISC-V OpenSBI\n");
+> > -		spl_invoke_opensbi(&spl_image);
+> > +		jump_to_image =3D &spl_invoke_opensbi;
+> >   	} else if (CONFIG_IS_ENABLED(OS_BOOT) && os =3D=3D IH_OS_LINUX) {
+> >   		debug("Jumping to Linux\n");
+> >   		if (IS_ENABLED(CONFIG_SPL_OS_BOOT))
+> >   			spl_fixup_fdt((void *)SPL_PAYLOAD_ARGS_ADDR);
+> >   		spl_board_prepare_for_linux();
+> > -		jump_to_image_linux(&spl_image);
+> > +		jump_to_image =3D &jump_to_image_linux;
+> >   	} else {
+> >   		debug("Unsupported OS image.. Jumping nevertheless..\n");
+> >   	}
+> > @@ -788,7 +790,7 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+> >   	}
+> >=20
+> >   	spl_board_prepare_for_boot();
+> > -	jump_to_image_no_args(&spl_image);
+> > +	jump_to_image(&spl_image);
+> >   }
+> >=20
+> >   /*
+>=20
+> In SPL we are fighting for every byte of binary size.
+>=20
+> What is the impact of this change on the code size?
+>=20
+> I would expect that your increasing it; especially if only one of the
+> CONFIG_OPTIONS is enabled.
+>=20
+> If so, NAK to this patch despite all elegance.
 
-> +
-> +/**
-> + * try_load_default_file() - try to load the default file
-> + *
-> + * Search the device having EFI_SIMPLE_FILE_SYSTEM_PROTOCOL,
-> + * then try to load with the default boot file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> + *
-> + * @dev			pointer to the UCLASS_BLK or UCLASS_PARTITION udevice
-> + * @image_handle:	pointer to handle for newly installed image
-> + * Return:		status code
-> + */
-> +static efi_status_t try_load_default_file(struct udevice *dev,
-> +					  efi_handle_t *image_handle)
-> +{
-> +	efi_status_t ret;
-> +	efi_handle_t handle;
-> +	struct efi_handler *handler;
-> +	struct efi_device_path *file_path;
-> +	struct efi_device_path *device_path;
-> +
-> +	if (dev_tag_get_ptr(dev, DM_TAG_EFI, (void **)&handle)) {
-> +		log_warning("DM_TAG_EFI not found\n");
-> +		return EFI_INVALID_PARAMETER;
-> +	}
-> +
-> +	ret = efi_search_protocol(handle,
-> +				  &efi_simple_file_system_protocol_guid, &handler);
-> +	if (ret != EFI_SUCCESS)
-> +		return ret;
-> +
-> +	ret = EFI_CALL(bs->open_protocol(handle, &efi_guid_device_path,
-> +					 (void **)&device_path, efi_root, NULL,
-> +					 EFI_OPEN_PROTOCOL_GET_PROTOCOL));
-> +	if (ret != EFI_SUCCESS)
-> +		return ret;
-> +
-> +	file_path = expand_media_path(device_path);
-> +	ret = EFI_CALL(efi_load_image(true, efi_root, file_path, NULL, 0,
-> +				      image_handle));
-> +
-> +	efi_free_pool(file_path);
-> +
-> +	return ret;
-> +}
+We aren't _that_ strict, no.  And a very quick peek shows that this
+seems fine overall.  Since you raised the question I'll do a quick
+world build but socfpga_agilex_vab (as a config I had size change
+results for in front of me for something else) shrank by 4 bytes with
+just the prerequsites and this patch applied.
 
-We've discussed this on v4, but I am replying here, since you sent a v5 in
-the meantime. 
-What I ideally wanted to do here is 
-- Add the boot option automatically once the disk gets mount (you've
-already sent a patch for that)
-- Since the boot option is automatically added we could instead of
-  searching for BOOTAA64.EFI search for matches with a load option of
-  '1234567'.
-Is there some timing issue that I am missing which doesnt allow us to do
-that ?
- 
-[...]
+--=20
+Tom
 
-Cheers
-/Ilias
+--C4htM0N0wb3QYvMH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUWu3cACgkQFHw5/5Y0
+tywQ2gwAp1iNOLs5JLBma3jJQFsBZ/J5xDu/PIrm9usDXM8EDlGf+12ihBtnXGke
+3LKhrmv33YhTQKBAV3dUtETvyJJ9qr7N7c9k0cFISjoyqHGYf0DM8jOFa1P2deMZ
+tM+0V2k4Bve8eR6Cs8wv8i1fUgC/1NwAOMWga7vZ15BBOHAaZA5DCEQWsGyM6yjN
+uJRjKnTdEKeH1v1jfGJVtVdgDsAXWre+DXwuuakAV+Mu4O4mERPl9p6Ri1o1LiZ2
+b4Qy8gJ/jGPKypoaUDWIUdVWdoG1Nvn7wcFNNgdzCz9MQlJ/Ei7b9fl7PHMQUP7a
+OJaXTAJGdh2jpelRdCD+8av1fyAmXELr3IEzmdBDBUSvL3ILZPqzCcNBYULKht0F
+G4P2S1wRuKyvh+MMqzWpWMGTAFWGrUbKKfN607MEYgPodoCNZrUY4mdkuUUUNn/o
+nLX8oTttlRsKbe+zDrWZN3SIde/PceaDYbHBX38+lGau/sk6rmD42GMKZrPVKhca
+xW9Yd8X7
+=45q0
+-----END PGP SIGNATURE-----
+
+--C4htM0N0wb3QYvMH--
