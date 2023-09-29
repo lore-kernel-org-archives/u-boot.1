@@ -4,57 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EB2AE71D38
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 13:48:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6109E71D3D
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 13:56:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C87F386EFA;
-	Fri, 29 Sep 2023 15:47:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2A7D386EE1;
+	Fri, 29 Sep 2023 15:56:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AGDEwlow";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="OvWZgS40";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F05E86F02; Fri, 29 Sep 2023 15:47:17 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ id 4048386EE0; Fri, 29 Sep 2023 15:56:11 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk
+ [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F12586EFA
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 15:47:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B86D86EE1
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 15:56:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id C358DB81E9D;
- Fri, 29 Sep 2023 13:47:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 532CDC433C9;
- Fri, 29 Sep 2023 13:47:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695995234;
- bh=LeVOgDGH4KSM7JfgS5+fYlJSi6TsrOQVGXaspM8nd4k=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=AGDEwlowz5WX4Hiv0HXI6YZGN1kBTnqN4/RGUpYTFdM2m7jBf4cowYOdTYtfixqkP
- rlov8cfYbIFrlYMFa5CEHgJsXtuyCF0WSw2mrqs0mlHV7zO+xOJWjhH3XdAQxviNHC
- tM9mPFMo+CYYQZ5RZbWSsGEPLfUysSnkV4bjVUAyRTvHSpoMAbFuDQk78/rCWMQ9UV
- ml24qP058xJ9iQ7xFMUs/k2407SWK2zgsHE4JOjavMRyEDUUdVTjdYndnjTai5al0W
- Ua9NzYRogfOyNKfQO0v5kawYJJqCteS6Xrr8rmjcR7mX9RzIugKovk8o+dlIYE+psN
- k4HKdey0n3P2Q==
-From: Roger Quadros <rogerq@kernel.org>
-To: trini@konsulko.com,
-	nm@ti.com
-Cc: vigneshr@ti.com, m-chawdhry@ti.com, sjg@chromium.org, jonas@kwiboo.se,
- srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de,
- Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 6/6] arm: dts: k3-am625-sk: Mark dependent nodes for
- pre-relocation phase
-Date: Fri, 29 Sep 2023 16:46:46 +0300
-Message-Id: <20230929134646.214781-7-rogerq@kernel.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230929134646.214781-1-rogerq@kernel.org>
-References: <20230929134646.214781-1-rogerq@kernel.org>
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+Received: from [192.168.0.125] (unknown [82.76.24.202])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id BF29066071B8;
+ Fri, 29 Sep 2023 14:56:06 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1695995767;
+ bh=CPKp9Gl1EOQC30G7sj/8nMXtC5jQJ2O7TbttzWR37fs=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=OvWZgS40bY12UGfHu29tk9UM0IoWKhGAS1qllYVOh0IeVkkowPglBecahSynfBbDv
+ PvulWvZZkttSpnLqQ91kn2i6NMw/kJvXTMWT6CwMR964DYZzxqTJykXJcxEHauhqNN
+ HUe4oigzlrFDDxIAMfwanX32/r6fczF70KMvobO/X8cMvH4InLDoHA1PF/YQBLYFVE
+ ea2mZUgTHjbkl6zKTiMykb4z4tPq2FZ2o2IKmuHp2vYwxQvzA1qzs6aLDC8X22IYRR
+ XaBrrd3yfG3Zh+3jGrTIVEnw1QczukoqnGOUuA1HZ3ySXnkQqE8d+7CDtUlDr4QtbM
+ bUTCei0UjALYw==
+Message-ID: <85119667-0e1f-78fd-6439-d7f41cbd2a56@collabora.com>
+Date: Fri, 29 Sep 2023 16:56:03 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH] clk: at91: Fix initializing arrays
+Content-Language: en-US
+To: Francois Berder <fberder@outlook.fr>, u-boot@lists.denx.de
+Cc: lukma@denx.de, seanga2@gmail.com
+References: <AM0P191MB0689B51E17C13F50F658C4D5DAFDA@AM0P191MB0689.EURP191.PROD.OUTLOOK.COM>
+From: Eugen Hristev <eugen.hristev@collabora.com>
+In-Reply-To: <AM0P191MB0689B51E17C13F50F658C4D5DAFDA@AM0P191MB0689.EURP191.PROD.OUTLOOK.COM>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,92 +72,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CPSW node needs PHY, MDIO, pinmux, DMA and INTC nodes.
-main_conf is required for phy_gmii_sel.
-Mark them as 'bootph-all' so they are available in all
-pre-relocation phases.
+On 9/24/23 12:58, Francois Berder wrote:
+> Arrays are not cleared entirely because ARRAY_SIZE
+> returns the number of elements in an array, not the size
+> in bytes.
+> This commit fixes the calls to memset by providing the
+> array size in bytes instead of the number of elements
+> in the array.
+> 
+> Signed-off-by: Francois Berder <fberder@outlook.fr>
+> ---
 
-Fixes the below dts warnings:
-
-<stdout>: Warning (reg_format): /bus@f0000/syscon@100000/phy@4044:reg: property has invalid length (8 bytes) (#address-cells == 2, #size-cells == 1)
-<stdout>: Warning (reg_format): /bus@f0000/ethernet@8000000/ethernet-ports/port@1:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
-<stdout>: Warning (unit_address_vs_reg): /bus@f0000/syscon@100000: node has a unit name, but no reg or ranges property
-<stdout>: Warning (pci_device_reg): Failed prerequisite 'reg_format'
-<stdout>: Warning (pci_device_bus_num): Failed prerequisite 'reg_format'
-<stdout>: Warning (simple_bus_reg): Failed prerequisite 'reg_format'
-<stdout>: Warning (i2c_bus_reg): Failed prerequisite 'reg_format'
-<stdout>: Warning (spi_bus_reg): Failed prerequisite 'reg_format'
-<stdout>: Warning (avoid_default_addr_size): /bus@f0000/syscon@100000/phy@4044: Relying on default #address-cells value
-<stdout>: Warning (avoid_default_addr_size): /bus@f0000/syscon@100000/phy@4044: Relying on default #size-cells value
-<stdout>: Warning (avoid_default_addr_size): /bus@f0000/ethernet@8000000/ethernet-ports/port@1: Relying on default #address-cells value
-<stdout>: Warning (avoid_default_addr_size): /bus@f0000/ethernet@8000000/ethernet-ports/port@1: Relying on default #size-cells value
-<stdout>: Warning (avoid_unnecessary_addr_size): Failed prerequisite 'avoid_default_addr_size'
-<stdout>: Warning (unique_unit_address): Failed prerequisite 'avoid_default_addr_size'
-
-Signed-off-by: Roger Quadros <rogerq@kernel.org>
----
- arch/arm/dts/k3-am625-sk-u-boot.dtsi | 39 ++++++++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
-
-diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-index c658506256..b78d34b459 100644
---- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-@@ -21,6 +21,10 @@
- 	};
- };
- 
-+&main_conf {
-+	bootph-all;
-+};
-+
- &cbass_main {
- 	bootph-all;
- };
-@@ -118,8 +122,43 @@
- 	};
- };
- 
-+&inta_main_dmss {
-+	bootph-all;
-+};
-+
-+&main_pktdma {
-+	bootph-all;
-+};
-+
-+&cpsw3g_mdio {
-+	bootph-all;
-+};
-+
-+&cpsw3g_phy0 {
-+	bootph-all;
-+};
-+
-+&cpsw3g_phy1 {
-+	bootph-all;
-+};
-+
-+&main_rgmii1_pins_default {
-+	bootph-all;
-+};
-+
-+&main_rgmii2_pins_default {
-+	bootph-all;
-+};
-+
-+&phy_gmii_sel {
-+	bootph-all;
-+};
-+
- &cpsw3g {
- 	bootph-all;
-+	ethernet-ports {
-+		bootph-all;
-+	};
- };
- 
- &cpsw_port1 {
--- 
-2.34.1
+Applied to u-boot-at91/ master, thanks !
 
