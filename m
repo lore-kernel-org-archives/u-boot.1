@@ -4,49 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7EC0E743F2
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 07:55:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00865E743F2
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 07:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D854186813;
-	Fri, 29 Sep 2023 09:55:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4801886E9C;
+	Fri, 29 Sep 2023 09:56:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="quJNNO9i";
+	dkim=pass (2048-bit key; secure) header.d=protonmail.com header.i=@protonmail.com header.b="NiTYgayF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3216186E9C; Fri, 29 Sep 2023 09:55:44 +0200 (CEST)
-Received: from mail-4027.protonmail.ch (mail-4027.protonmail.ch [185.70.40.27])
+ id 76E9586E9E; Fri, 29 Sep 2023 09:56:05 +0200 (CEST)
+Received: from mail-4319.protonmail.ch (mail-4319.protonmail.ch [185.70.43.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D5438652B
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 09:55:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 692F88652B
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 09:56:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=protonmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=vitali64pmemail@protonmail.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
- s=protonmail3; t=1695974141; x=1696233341;
- bh=+2s90DB22TXsktshPUkJegWDHYvsgs69BGl2w/FVnEI=;
+ s=protonmail3; t=1695974162; x=1696233362;
+ bh=u1DreufG8B3KRen1XkY7ofdFbAW0Q+5NvuOu4DFyDyc=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=quJNNO9iXyWs8WINAM5wZGnINzDopfmI4XWQrYYYyks1YozS3/pHJqBiLslfM/zci
- AVY8hueJzlstBlA/631exO6dbCyGBd9KbmrPzXuDcR3a9/DpRzLSRKlqKcJWN7A87Y
- aZHFNzxKyoqaxC5C0cBD+sOY9rBeeYidH7wgCyng1s/6aut9WcMWFNJEUQvJlDLi2u
- nrfHhdfzdr3RSskgpzDdZDYb5yquX3Rj2pwf01tqUuLU1UYHAQ3c+PolK6i0LrAbeB
- uJmnI38rzRItTKj9UzFE1Bx/xDo9skxEXneRf05iTTVf2A/u/nZ+nvWRaqfcF1D/Aj
- APziXlgo1kwgg==
-Date: Fri, 29 Sep 2023 07:55:31 +0000
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>
+ b=NiTYgayFpIwnUG/U+dC7/jpaSe9bvSs583wya6DAlA32qLQ3fGb570+NXJNr9BBy9
+ 8OHtN9h1XriHkseWIgY4pdAcJeFxttCFVjDnndDGvANztCFBXqT1wba52SyoESMbLW
+ MNEmuZwe6BlsbNt+gTKElGl+sQb6d3JT5dfQgveC8UPXFWN8RFQ1K6F6L4RQd1q1uE
+ VTwzPV214LDWIqFKPPSXheKSKHy2UXjlxfCvjtmannpyGkuSFiudlfF4QYH5EFidqX
+ Hqa3BzkXM3Hk2UYf9lQdO71fAD/f2RXjiyqW530oe7xneSnO8qqvpyBQ7VTzwGzVXw
+ wnMHShUYaJHWQ==
+Date: Fri, 29 Sep 2023 07:55:57 +0000
+To: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>
 From: Ferass El Hafidi <vitali64pmemail@protonmail.com>
-Cc: Chanho Park <chanho61.park@samsung.com>, u-boot@lists.denx.de,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Chanho Park <chanho61.park@samsung.com>
 Subject: Re: [PATCH] spl: Jump to image at end of board_init_r
-Message-ID: <CVV8MYJATGY1.17IBLLQ28R1YF@flaptop>
-In-Reply-To: <b99750c4-973f-48f4-9c3b-166f0e5e832c@gmx.de>
+Message-ID: <CVV8NAVG276M.59MVJQCUQRZQ@flaptop>
+In-Reply-To: <CAPnjgZ3ThwoeEiiei53ZdCb1MvkDA8yaZTStpZ6LWauE7q+88w@mail.gmail.com>
 References: <20230927214415.2224768-1-jonas@kwiboo.se>
- <b99750c4-973f-48f4-9c3b-166f0e5e832c@gmx.de>
+ <CAPnjgZ3ThwoeEiiei53ZdCb1MvkDA8yaZTStpZ6LWauE7q+88w@mail.gmail.com>
 Feedback-ID: 37421466:user:proton
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
@@ -67,28 +66,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Fri Sep 29, 2023 at 2:57 AM CEST, Heinrich Schuchardt wrote:
-> In SPL we are fighting for every byte of binary size.
+On Fri Sep 29, 2023 at 1:42 AM CEST, Simon Glass wrote:
+> On Wed, 27 Sept 2023 at 15:44, Jonas Karlman <jonas@kwiboo.se> wrote:
+> >
+> > spl_board_prepare_for_boot() is not called before jumping/invoking atf,
+> > optee, opensbi or linux images.
+> >
+> > Jump to image at the end of board_init_r() to fix this.
+> >
+> > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> > ---
+> > This patch have dependencies on the following patches:
+> >
+> > spl: add __noreturn attribute to spl_invoke_opensbi function
+> > https://patchwork.ozlabs.org/patch/1827057/
+> >
+> > spl: add __noreturn attribute to spl_invoke_atf function
+> > https://patchwork.ozlabs.org/patch/1831366/
+> >
+> > spl: Drop the switch() statement for OS selection
+> > from the "spl: Preparation for Universal Payload" series
+> > https://patchwork.ozlabs.org/patch/1839731/
+> > ---
+> >  common/spl/spl.c | 12 +++++++-----
+> >  1 file changed, 7 insertions(+), 5 deletions(-)
+> >
 >
-> What is the impact of this change on the code size?
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >
-> I would expect that your increasing it; especially if only one of the
-> CONFIG_OPTIONS is enabled.
->
-> If so, NAK to this patch despite all elegance.
+> Very nice to see this!
 
-Would you prefer removing `spl_board_prepare_for_boot()` instead?
-A handful of boards make use for it so I'd say this is a bug if it never
-gets ran on those.
-
-Or would it be better if it was enabled with a CONFIG_ option?
-
-Cheers.
->
-> Best regards
->
-> Heinrich
-
+Nice indeed!
 
