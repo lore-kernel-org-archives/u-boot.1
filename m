@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92A8CE71D38
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 13:47:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74D69E71D3A
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 13:47:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4165D86EE1;
-	Fri, 29 Sep 2023 15:47:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A3A9D86EF0;
+	Fri, 29 Sep 2023 15:47:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Au+hnima";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Fm0oM74t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA10286EAA; Fri, 29 Sep 2023 15:47:05 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ id 234F686EF8; Fri, 29 Sep 2023 15:47:09 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9580186EF1
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 15:47:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D579C86EF0
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 15:47:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 94A05CE2398;
+ by sin.source.kernel.org (Postfix) with ESMTP id BDFA7CE2398;
+ Fri, 29 Sep 2023 13:47:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5DE11C433C8;
  Fri, 29 Sep 2023 13:47:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 10BB3C433CA;
- Fri, 29 Sep 2023 13:46:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695995220;
- bh=x+UcJrS7jDvCCTz7n4bL/O3Hzn+BlWmzHSk9UF+7nQk=;
+ s=k20201202; t=1695995224;
+ bh=WLpGeqb65OLkqIq4YyOTyJ64mHLi3LNQE6KQzzj1EeY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Au+hnimaShEj9E7A6giJklJF06tgYn48/RnaAgFhOiL0FodxfdohBHofX57MLDxkD
- KRScjJn2wUBC68c2oGYHcAmu4hIosYEil3yCag/ZJCzmDQxPBIE60QKj0/5CwmQgtG
- kBjbFFsnU8vG+oQULj1AqaYiD9MtGlltqj89NbVuZyoadqfg+6Vap/EVLLfhddbNg8
- agnI6QUrkULPCHYSAV9InoPsroS6wFIAfP/oZ7MZy22bpxhcYa66oWnCFljTT8UJUw
- tUFj1BgDk9rYOaV/65/bh0khqtbbeAG17+BgFuPCWMqOzTKSNjxUENRGOUvpHsgN2I
- 59e/6BXjENI6g==
+ b=Fm0oM74tk+2P4oNXCnBRUE9ukgVPbnvHNs/wvzsz9kKaPmMurjz8IGKdEbN1U3atj
+ vI4chGu/QTXMbm3KfkeS93uZzDbW8cWYYd4LT5q8/nkNHBEY+DsAeuwJxrQzHWku7n
+ JtKTHuyalrq8PBEqzhybmgJ+l5q+9Q6u/dnfVF6Z9iLE7Msrlmvqigw73+bStV4q2F
+ qYeKyPz0TmC7UAMgKW6OIS/Lg4bcraeKxDZuvnVYG+ZYnfg2TcbkcI71CLZhpR4Lpe
+ Q+W9YVe+6ARrdczNUIJTCELx5JL4X1L66XtYvFXVg6IhawgeuCzFMgOCInTpJb9rvO
+ LlbCuUIrUeXZA==
 From: Roger Quadros <rogerq@kernel.org>
 To: trini@konsulko.com,
 	nm@ti.com
 Cc: vigneshr@ti.com, m-chawdhry@ti.com, sjg@chromium.org, jonas@kwiboo.se,
  srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de,
  Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 2/6] arm: dts: k3-am64-evm: Mark dependent nodes for
- pre-relocation phase
-Date: Fri, 29 Sep 2023 16:46:42 +0300
-Message-Id: <20230929134646.214781-3-rogerq@kernel.org>
+Subject: [PATCH 3/6] arm: dts: k3-am642-sk: Fix boot
+Date: Fri, 29 Sep 2023 16:46:43 +0300
+Message-Id: <20230929134646.214781-4-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230929134646.214781-1-rogerq@kernel.org>
 References: <20230929134646.214781-1-rogerq@kernel.org>
@@ -71,113 +71,236 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CPSW node needs PHY, MDIO, pinmux, DMA and INTC nodes.
-USB and MMC nodes need pinmux.
+Since commit [1] A53 u-boot proper is broken.
+This is because nodes marked as 'bootph-pre-ram' are
+not available at u-boot proper before relocation.
 
-Mark them as 'bootph-all' so they are available in all
-pre-relocation phases.
+To fix this we mark all nodes in sk-u-boot.dtsi as
+'bootph-all'.
 
-Fixes below dts warning:
+Move cbass_mcu node to -r5-sk.dts as it is only required
+for R5 SPL.
 
-<stdout>: Warning (dmas_property): /bus@f4000/ethernet@8000000:dmas: Could not get phandle node for (cell 0)
+[1]
+9e644284ab812 ("dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation")
 
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
- arch/arm/dts/k3-am642-evm-u-boot.dtsi | 48 +++++++++++++++++++++++++++
- arch/arm/dts/k3-am642-r5-evm.dts      |  8 +++++
- 2 files changed, 56 insertions(+)
+ arch/arm/dts/k3-am642-r5-sk.dts      |  4 ++
+ arch/arm/dts/k3-am642-sk-u-boot.dtsi | 76 +++++++++++++---------------
+ 2 files changed, 40 insertions(+), 40 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-index d06955dfbc..953bbe9aaf 100644
---- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-@@ -51,6 +51,10 @@
- 	bootph-all;
+diff --git a/arch/arm/dts/k3-am642-r5-sk.dts b/arch/arm/dts/k3-am642-r5-sk.dts
+index def4622ff1..daa483a781 100644
+--- a/arch/arm/dts/k3-am642-r5-sk.dts
++++ b/arch/arm/dts/k3-am642-r5-sk.dts
+@@ -53,6 +53,10 @@
+ 	bootph-pre-ram;
  };
  
-+&main_usb0_pins_default {
-+	bootph-all;
-+};
-+
- &usb0 {
- 	dr_mode="peripheral";
- 	bootph-all;
-@@ -100,12 +104,56 @@
- 	bootph-all;
- };
- 
-+&main_mmc1_pins_default {
-+	bootph-all;
-+};
-+
- &sdhci1 {
- 	bootph-all;
- };
- 
-+&inta_main_dmss {
-+	bootph-all;
-+};
-+
-+&main_pktdma {
-+	bootph-all;
-+};
-+
-+&mdio1_pins_default {
-+	bootph-all;
-+};
-+
-+&cpsw3g_mdio {
-+	bootph-all;
-+};
-+
-+&cpsw3g_phy0 {
-+	bootph-all;
-+};
-+
-+&rgmii1_pins_default {
-+	bootph-all;
-+};
-+
-+&rgmii2_pins_default {
-+	bootph-all;
-+};
-+
- &cpsw3g {
- 	bootph-all;
-+
-+	ethernet-ports {
-+		bootph-all;
-+	};
-+};
-+
-+&phy_gmii_sel {
-+	bootph-all;
-+};
-+
-+&cpsw_port1 {
-+	bootph-all;
- };
- 
- &cpsw_port2 {
-diff --git a/arch/arm/dts/k3-am642-r5-evm.dts b/arch/arm/dts/k3-am642-r5-evm.dts
-index 696735d8e2..64b3c3af63 100644
---- a/arch/arm/dts/k3-am642-r5-evm.dts
-+++ b/arch/arm/dts/k3-am642-r5-evm.dts
-@@ -74,6 +74,14 @@
- 	ti,secure-host;
- };
- 
-+&vtt_supply {
++&cbass_mcu {
 +	bootph-pre-ram;
 +};
 +
-+&memorycontroller {
-+	vtt-supply = <&vtt_supply>;
-+};
-+
+ &mcu_esm {
+ 	bootph-pre-ram;
+ };
+diff --git a/arch/arm/dts/k3-am642-sk-u-boot.dtsi b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
+index c277ef8aba..5599977f6c 100644
+--- a/arch/arm/dts/k3-am642-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
+@@ -11,129 +11,125 @@
+ 	};
+ 
+ 	memory@80000000 {
+-		bootph-pre-ram;
++		bootph-all;
+ 	};
+ };
+ 
+ &cbass_main{
+-	bootph-pre-ram;
+-};
+-
+-&cbass_mcu {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_timer0 {
+-	bootph-pre-ram;
++	bootph-all;
+ 	clock-frequency = <200000000>;
+ };
+ 
+ &main_conf {
+-	bootph-pre-ram;
++	bootph-all;
+ 	chipid@14 {
+-		bootph-pre-ram;
++		bootph-all;
+ 	};
+ };
+ 
+ &main_pmx0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_i2c0_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_i2c0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_uart0_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_uart0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &dmss {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &secure_proxy_main {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &dmsc {
+-	bootph-pre-ram;
++	bootph-all;
+ 	k3_sysreset: sysreset-controller {
+ 		compatible = "ti,sci-sysreset";
+-		bootph-pre-ram;
++		bootph-all;
+ 	};
+ };
+ 
+ &k3_pds {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &k3_clks {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &k3_reset {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
  &sdhci0 {
- 	clocks = <&clk_200mhz>;
- 	clock-names = "clk_xin";
+ 	status = "disabled";
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &sdhci1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_mmc1_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &cpsw3g {
+-	bootph-pre-ram;
++	bootph-all;
+ 
+ 	ethernet-ports {
+-		bootph-pre-ram;
++		bootph-all;
+ 	};
+ };
+ 
+ &cpsw_port2 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_bcdma {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_pktdma {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &rgmii1_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &rgmii2_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &mdio1_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &cpsw3g_phy1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_usb0_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &serdes_ln_ctrl {
+@@ -141,25 +137,25 @@
+ };
+ 
+ &usbss0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &usb0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &serdes_wiz0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &serdes0_usb_link {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &serdes0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &serdes_refclk {
+-	bootph-pre-ram;
++	bootph-all;
+ };
 -- 
 2.34.1
 
