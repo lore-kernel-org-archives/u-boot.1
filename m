@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B84D6E71D43
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 15:02:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02671E71D4F
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 15:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FD958684C;
-	Fri, 29 Sep 2023 17:01:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2470686EAA;
+	Fri, 29 Sep 2023 17:15:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Tg7S9efl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dl9DYfmm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79BDC86E50; Fri, 29 Sep 2023 17:01:57 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 875EA86EC3; Fri, 29 Sep 2023 17:15:21 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3F7786308
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 17:01:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 452F78684C
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 17:15:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-59f7cc71e2eso118013767b3.0
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 08:01:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-53639fb0ba4so2766861a12.0
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 08:15:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1695999713; x=1696604513; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V0cjtFeBqG41n6lbWTvHrBrFXTISyqkslKAWMSp2sHA=;
- b=Tg7S9efl5G0rTwuUL6J0BJ5Kzcs8utqeA+8IA1+Hl3zHYodguW6/2m1Y6WWHc6b1CD
- ahFeTzSj69f3E5xGLG7C8TwyY2Ybkq9QP/Z1gE7B7p4reApVdIVk9dnFcX7WjXxWpJnV
- ZGaZxvu2mGRQBi4xwjM/BdMK1cy/qpN9xF+jI=
+ d=chromium.org; s=google; t=1696000519; x=1696605319; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=pfnus9xpd+X/eHfXpcevoJhsazoei1Vt6hEiAg4AnMc=;
+ b=Dl9DYfmmHYQKLZOlZYxABNt6MOT9g64m0X4SgEtWcoXyX8xSb0gfyKtLTiIiMcPVjM
+ xf36X0gq/zjZBbNnBasXU8t1RojVpfHy1BCWhGLHHRelzlyu440PkuUqgl/q+PK/sg/j
+ c4dY32Uqr2Ees/pXJJvuGMK4lswbYgWfGVkZQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695999713; x=1696604513;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V0cjtFeBqG41n6lbWTvHrBrFXTISyqkslKAWMSp2sHA=;
- b=CUp/B+P38+Xsu/UNpj1Uz7arnb5HSdZSC4hXv54MbO5wnqyemPV/lNh9ENfPDg3GhB
- E9jJTvl08l/Ud9MEhPxQqctj33zLB+HCaaFnnVOXcTkcCq0lUh8b7rUEBDrF1u7/ah/6
- gLLGNk9vnU32GvooCE37qPCyxoL006w09UDQ7dsraYClVdEX9xu8cjsfng1K8M4P/2pQ
- LY35gCdBQ2NxdDoJmxrCo6nhoT32olMiwbzDPIJyVnOQQqNVHyJCZe+Al2MGflvdxkmY
- w5u7yup+ekWK++8vcFgRdGe3WoC5VTARiybNF3PlEEULt0uZUIc2Q66ycSR+8vhLK0sf
- fTxQ==
-X-Gm-Message-State: AOJu0YxULef+ADdp6qnxglYN8hFVpxVgAtNVBcZ+X16VEf2kuA5r5O+1
- fMcKbJR69ggKbky5Y2ehCUhidA==
-X-Google-Smtp-Source: AGHT+IFtyZPgkpNT9xszkLC6R96zYnM8YscPHiokMdmVSGL43qMxgAIssA1stiT+30+n7iFjETxHtg==
-X-Received: by 2002:a0d:eb16:0:b0:59f:67f5:66cf with SMTP id
- u22-20020a0deb16000000b0059f67f566cfmr4740347ywe.11.1695999713452; 
- Fri, 29 Sep 2023 08:01:53 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a39b-08c7-b2a8-b94f.res6.spectrum.com.
- [2603:6081:7b00:6400:a39b:8c7:b2a8:b94f])
- by smtp.gmail.com with ESMTPSA id
- a14-20020a81bb4e000000b00579e5c4982fsm5466075ywl.36.2023.09.29.08.01.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 29 Sep 2023 08:01:52 -0700 (PDT)
-Date: Fri, 29 Sep 2023 11:01:51 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PULL] u-boot-at91-fixes-2023.10-b
-Message-ID: <20230929150151.GO305624@bill-the-cat>
-References: <f223ce83-55be-aa17-e003-69627d71e948@collabora.com>
+ d=1e100.net; s=20230601; t=1696000519; x=1696605319;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pfnus9xpd+X/eHfXpcevoJhsazoei1Vt6hEiAg4AnMc=;
+ b=Rbn0J6jeBQk3/xaqeqFcr4WiTMtJGv/eSOZ7WwGPMBuBlNAg4bp8rTJys+FvWO41Cp
+ YqGBpphSsb5xEKCxOPnUjLk8K5EO/rTqJk4wPBqn5+o/wN22HrVsX/OrWkhQ2gfpe3jx
+ pa7Ol1wbFXvMVgib1Lq9RVg6LmLjTIQ0S/3pNWwmmvoKAf6eU6A3kpyajwYwYNneWcFu
+ l1KAfOhdW97LItsfVRORWoqDWB56S5YspmD8KeYJt7EVj2y2s75OdPZE8s3RIkkhR3K5
+ P4hsK2KLorEi/5UcxDgIJnw471cjaF6pUDUzf0G8bMUvZMOGrfvr1L+YFdfAxCxKMSbf
+ AVlQ==
+X-Gm-Message-State: AOJu0YyDMRSyxI6oX4OZA1bcIxLvRa1ogskOEmSLyE3DlZGJ42yyYmJc
+ SxpoXlbQxdV3zKObn//YwlxL1BMIfPWQA3vYheBVr4xDCs3tUhLXlWc=
+X-Google-Smtp-Source: AGHT+IELV2GDB0n37XflEalrUzmG5xgaS6sktHLqdGyAQaSjpeMwstbswL31evo+EQeBQQFTnXy6s7SA5wm82CUJHA4=
+X-Received: by 2002:a05:6402:1851:b0:522:c1b1:8cb0 with SMTP id
+ v17-20020a056402185100b00522c1b18cb0mr4041093edy.33.1696000518470; Fri, 29
+ Sep 2023 08:15:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="d+Ddwls5VYKDmWGz"
-Content-Disposition: inline
-In-Reply-To: <f223ce83-55be-aa17-e003-69627d71e948@collabora.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <9658c219-1de8-3bdf-3beb-0c1e2a128569@prevas.dk>
+ <20230425200932.GM1134230@bill-the-cat>
+ <c3c94614-9916-7316-e009-04ddbdc205bc@prevas.dk>
+ <20230427162100.GE1134230@bill-the-cat>
+ <20230427173113.GG1134230@bill-the-cat>
+ <40c79f7b-205d-0b48-7ee2-e052eaa1317f@prevas.dk>
+ <20230503135158.GY1134230@bill-the-cat>
+ <20230503145438.GB1134230@bill-the-cat>
+ <0f2df366-65ca-664f-1f90-0c2aeafce8f1@prevas.dk>
+ <68f445de-c903-c3a1-906f-2cf7b5675d08@prevas.dk>
+ <20230925181940.GH305624@bill-the-cat>
+ <08e35aab-309c-a8e1-931e-7ab142beb593@prevas.dk>
+In-Reply-To: <08e35aab-309c-a8e1-931e-7ab142beb593@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 29 Sep 2023 09:15:00 -0600
+Message-ID: <CAPnjgZ3jO5s3HZRjXdG-dVLNmGYnyCWnpvzRKpKhBCRQqWH33Q@mail.gmail.com>
+Subject: Re: [PATCH] scripts/Makefile.lib: also consider
+ $(CONFIG_SYS_BOARD)-u-boot.dtsi
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,67 +92,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rasmus,
 
---d+Ddwls5VYKDmWGz
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 25 Sept 2023 at 13:05, Rasmus Villemoes
+<rasmus.villemoes@prevas.dk> wrote:
+>
+> On 25/09/2023 20.19, Tom Rini wrote:
+> > On Mon, Sep 25, 2023 at 10:27:43AM +0200, Rasmus Villemoes wrote:
+> >> On 04/05/2023 14.35, Rasmus Villemoes wrote:
+> >>> On 03/05/2023 16.54, Tom Rini wrote:
+> >>
+> >>>> The one last problem now is on stm32mp15_dhcor_basic which is a
+> >>>> defconfig missing one from OF_LIST but including it in the its file, so
+> >>>> the above is the patch we need.
+> >>>>
+> >>
+> >> Hi Tom
+> >>
+> >> Can I persuade you to try something like
+> >> https://source.denx.de/u-boot/u-boot/-/commit/a05e0d0e6b9103542a1076f9cab0005f400fa072
+> >> again, but leaving the .dtbo targets in there?
+> >>
+> >> I could send a patch, but it's entirely mechanical, and not really meant
+> >> for being applied until we know if there's more to be cleaned up.
+> >
+> > So what ended up being the problem I think is the case Simon pointed out
+> > where we do take the output from "make all" and concatenate one of the
+> > dtbs that was generated with u-boot.img or so, and it works.  But maybe
+> > that should just list all of the valid DTBs that it needs in the
+> > defconfig to start with? I don't quite know, it was a case I hadn't
+> > considered at the time.
+> >
+>
+> Re-reading the thread, I can't see where that was mentioned.
+>
+> But yes, if some boards (still) need that, and have more than one
+> possible .dtb, the board can't set an OF_LIST different from the default
+> consisting of DEFAULT_DEVICE_TREE because changing OF_LIST requires
+> SPL_LOAD_FIT || MULTI_DTB_FIT.
+>
+> How do we figure out if such boards even exist?
 
-On Fri, Sep 29, 2023 at 05:36:38PM +0300, Eugen Hristev wrote:
+Honestly at this point I've forgotten what this is all about.
 
->=20
-> Hello Tom,
->=20
-> Please pull tag u-boot-at91-fixes-2023.10-b , the second set of fixes for
-> 2023.10 cycle.
->=20
-> This comes late, but I hope you can merge it before the release, it's only
-> two small fixes , one for an array not initialized and the second one fix=
-es
-> an error case when a DT property is missing for the atmel NAND driver.
->=20
-> Thanks,
-> Eugen
->=20
->=20
-> The following changes since commit 15155ab0a3d1f839509bcac620bfb38f950bea=
-d6:
->=20
->   Merge tag 'u-boot-imx-20230923' of
-> https://source.denx.de/u-boot/custodians/u-boot-imx (2023-09-24 17:15:31
-> -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-at91.git
-> tags/u-boot-at91-fixes-2023.10-b
->=20
-> for you to fetch changes up to 7b4ffe8c32db284e25d3a2636904def8e093da9e:
->=20
->   clk: at91: Fix initializing arrays (2023-09-29 16:45:40 +0300)
->=20
+Perhaps the easiest approach is to create a new Kconfig to control
+whether a board-level .dtsi is included in the list of wildcard
+searches. Then you can enable it for your board without affecting
+others.
 
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---d+Ddwls5VYKDmWGz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUW5tYACgkQFHw5/5Y0
-tyxlYAv+O1BmKai4dloa5c+iMY/qw8lU/vjsmbLtWG1NHnPHyaOYCqJkY2d1yehJ
-FNqlA19eFCmlzzvgPj26w8YhN9beI6hXA0ur0eups0rrGcI0GTIlqn4nQblsix88
-VEYwTX+L3ncFZj4HJIsdX4aPYGLdDfpAlG2a3Cn0xs6FtTdhvE+pI2w6ibfDsL/S
-PZxJNbXYY/10PRxSoxBOKAj/N5KmhjrHMW+c8jkS3C8mmDuzVvmd2XJaSK7BBpDw
-AvUffR+Cu/X9PTDjvyUaXZHs4WVZA0EyPFj5nOaxOqTW6HkfvRBQvTRts4396Cu4
-7Ca3FKkr0RuPQvpNO4aluwqcgnNJr+K63dEwwA6v7BXPKUT7k/aUp7o4SKD+EX2C
-nDWHYVch4JUERNTbrwxaK66TiYacRn1IQfePh5/dXhS7Re5/aUp4e8kKj7Fjyz7p
-Hoo+q33TG6EkmKI0A/rIarS/R+NjVkBsjYehYuEv00mT/0Js2GuEKxnfFJUcVpFy
-+pKoI4Pc
-=CBtG
------END PGP SIGNATURE-----
-
---d+Ddwls5VYKDmWGz--
+Regards,
+Simon
