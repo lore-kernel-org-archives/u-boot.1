@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60F4EE71D37
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 13:47:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55374E71D37
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 13:47:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0801186EFC;
-	Fri, 29 Sep 2023 15:47:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6349186EF2;
+	Fri, 29 Sep 2023 15:47:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="m63EsLIa";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Dp58cYz7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A1AE86EE4; Fri, 29 Sep 2023 15:47:10 +0200 (CEST)
+ id 94CEC86EF2; Fri, 29 Sep 2023 15:47:13 +0200 (CEST)
 Received: from ams.source.kernel.org (ams.source.kernel.org
  [IPv6:2604:1380:4601:e00::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B95086EAA
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 15:47:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3BEE86EF2
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 15:47:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id 290EFB81F4D;
- Fri, 29 Sep 2023 13:47:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC5ACC433C9;
- Fri, 29 Sep 2023 13:47:04 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTP id 75CF6B81F4D;
+ Fri, 29 Sep 2023 13:47:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04AB3C433CB;
+ Fri, 29 Sep 2023 13:47:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1695995227;
- bh=IANGHrRCDp4bAoRs2uNm+XvOeahqiM2ZvI/ZgLrmipU=;
+ s=k20201202; t=1695995230;
+ bh=M/cVzD9aqMSSrvfYNhTxqYUz5smOIKB5t6q94aSKemA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=m63EsLIav73SMertLEqWPl8MjnzS+utrukWZEVVbhOLw03q6oLERsqhSJGS6IOmnc
- QVFjt3cF9kcRdVc04uEmn2LCEl8DJg6glqhzXI9PXWuckrBx4BbxxhpPBX0fAs6Qhg
- 1hdgx8uao38JQjvv6x7RVefTXyheiXuCVkVUFpqfZ87Umcb+hII7EvIQoawF4r11YA
- 7xluoEb0HMMjnEhnOjY4IL6eqMMzC9IRythR5meov3I7mQpDlawYIoW7uDi9wgSH7k
- 2OZg24/v3ZvVQX4X4tN785qNE6VOz2U6HUyjU3vgCq9hMZTIADPkTqvIkVENHyeNmP
- dBsAGfrHLx1iQ==
+ b=Dp58cYz7O79XXBO383GrVfEmXg6SqU/c7oC9TY8Ub/Bk1JwmOpGorZ1UMoc8KE7K/
+ FiMyg0dMPigxiOevijQqYXjiNADrz1I+dkRcOCcFJPsg/o4NlKkpdLaYuBlFtpNU6T
+ 2kXNzQlDh0zq9hRepmrxcpa4gGqzylD8V1QjwVmw5NHZD5ibJuBF8izqnKm4F0u6EN
+ S8r+tXwKhixgVci8rlOwbvy42v1rEWz6pIN6xn3JoMz7lIGb7sA+rKgSLxGzkzktRx
+ A+n4sxWReZ5Uwg1oDvliHMbNk06QfFUl2/QB5bKvp/vYKuoanmYKl8/dYDjSV3bWEQ
+ OlDxJcBfwh5ZQ==
 From: Roger Quadros <rogerq@kernel.org>
 To: trini@konsulko.com,
 	nm@ti.com
 Cc: vigneshr@ti.com, m-chawdhry@ti.com, sjg@chromium.org, jonas@kwiboo.se,
  srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de,
  Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 4/6] arm: dts: k3-am642-sk: Mark dependent nodes for
- pre-relocation phase
-Date: Fri, 29 Sep 2023 16:46:44 +0300
-Message-Id: <20230929134646.214781-5-rogerq@kernel.org>
+Subject: [PATCH 5/6] arm: dts: k3-am625-sk: Fix boot
+Date: Fri, 29 Sep 2023 16:46:45 +0300
+Message-Id: <20230929134646.214781-6-rogerq@kernel.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230929134646.214781-1-rogerq@kernel.org>
 References: <20230929134646.214781-1-rogerq@kernel.org>
@@ -72,86 +71,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CPSW node needs PHY, MDIO, pinmux, DMA and INTC nodes.
-Mark them as 'bootph-all' so they are available in all
-pre-relocation phases.
+Since commit [1] A53 u-boot proper is broken.
+This is because nodes marked as 'bootph-pre-ram' are
+not available at u-boot proper before relocation.
 
-Fixes below dts warnings:
+To fix this we mark all nodes in sk-u-boot.dtsi as
+'bootph-all'.
 
-<stdout>: Warning (reg_format): /bus@f4000/ethernet@8000000/mdio@f00/ethernet-phy@1:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
-<stdout>: Warning (unit_address_vs_reg): /bus@f4000/ethernet@8000000/mdio@f00: node has a unit name, but no reg or ranges property
-<stdout>: Warning (pci_device_reg): Failed prerequisite 'reg_format'
-<stdout>: Warning (pci_device_bus_num): Failed prerequisite 'reg_format'
-<stdout>: Warning (simple_bus_reg): Failed prerequisite 'reg_format'
-<stdout>: Warning (i2c_bus_reg): Failed prerequisite 'reg_format'
-<stdout>: Warning (spi_bus_reg): Failed prerequisite 'reg_format'
-<stdout>: Warning (avoid_default_addr_size): /bus@f4000/ethernet@8000000/mdio@f00/ethernet-phy@1: Relying on default #address-cells value
-<stdout>: Warning (avoid_default_addr_size): /bus@f4000/ethernet@8000000/mdio@f00/ethernet-phy@1: Relying on default #size-cells value
-<stdout>: Warning (avoid_unnecessary_addr_size): Failed prerequisite 'avoid_default_addr_size'
-<stdout>: Warning (unique_unit_address): Failed prerequisite 'avoid_default_addr_size'
-<stdout>: Warning (msi_parent_property): /bus@f4000/bus@48000000/dma-controller@485c0100:msi-parent: Could not get phandle node for (cell 0)
-<stdout>: Warning (msi_parent_property): /bus@f4000/bus@48000000/dma-controller@485c0000:msi-parent: Could not get phandle node for (cell 0)
-<stdout>: Warning (phys_property): /bus@f4000/ethernet@8000000/ethernet-ports/port@2:phys: Could not get phandle node for (cell 0)
+[1]
+9e644284ab812 ("dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation")
 
 Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
- arch/arm/dts/k3-am642-sk-u-boot.dtsi | 36 ++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+ arch/arm/dts/k3-am625-sk-u-boot.dtsi | 54 ++++++++++++++--------------
+ 1 file changed, 27 insertions(+), 27 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am642-sk-u-boot.dtsi b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
-index 5599977f6c..40a53df0b0 100644
---- a/arch/arm/dts/k3-am642-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
-@@ -92,6 +92,38 @@
- 	bootph-all;
- };
+diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+index c1685bc9ca..c658506256 100644
+--- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+@@ -17,113 +17,113 @@
+ 	};
  
-+&inta_main_dmss {
-+	bootph-all;
-+};
-+
-+&main_pktdma {
-+	bootph-all;
-+};
-+
-+&mdio1_pins_default {
-+	bootph-all;
-+};
-+
-+&cpsw3g_mdio {
-+	bootph-all;
-+};
-+
-+&cpsw3g_phy0 {
-+	bootph-all;
-+};
-+
-+&cpsw3g_phy1 {
-+	bootph-all;
-+};
-+
-+&rgmii1_pins_default {
-+	bootph-all;
-+};
-+
-+&rgmii2_pins_default {
-+	bootph-all;
-+};
-+
- &cpsw3g {
- 	bootph-all;
- 
-@@ -100,6 +132,10 @@
+ 	memory@80000000 {
+-		bootph-pre-ram;
++		bootph-all;
  	};
  };
  
-+&phy_gmii_sel {
+ &cbass_main {
+-	bootph-pre-ram;
 +	bootph-all;
-+};
-+
- &cpsw_port2 {
- 	bootph-all;
  };
+ 
+ &main_timer0 {
+ 	clock-frequency = <25000000>;
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &dmss {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &secure_proxy_main {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &dmsc {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &k3_pds {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &k3_clks {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &k3_reset {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &wkup_conf {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &chipid {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_pmx0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_uart0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_uart0_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &cbass_mcu {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &cbass_wakeup {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &mcu_pmx0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &sdhci1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_mmc1_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &fss {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &ospi0_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &ospi0 {
+-	bootph-pre-ram;
++	bootph-all;
+ 
+ 	flash@0 {
+-		bootph-pre-ram;
++		bootph-all;
+ 
+ 		partitions {
+-			bootph-pre-ram;
++			bootph-all;
+ 
+ 			partition@3fc0000 {
+-				bootph-pre-ram;
++				bootph-all;
+ 			};
+ 		};
+ 	};
+ };
+ 
+ &cpsw3g {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &cpsw_port1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &cpsw_port2 {
 -- 
 2.34.1
 
