@@ -4,67 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EF91E743CE
-	for <u-boot@archiver.kernel.org>; Thu, 28 Sep 2023 23:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B2BFE743D5
+	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 00:47:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3563886E65;
-	Fri, 29 Sep 2023 01:43:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0927E86E33;
+	Fri, 29 Sep 2023 02:47:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UG7bE/U2";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="jR4nKS6b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A508A86E6C; Fri, 29 Sep 2023 01:42:58 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C4A9C86E74; Fri, 29 Sep 2023 02:47:24 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9348186898
- for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 01:42:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4269A86E30
+ for <u-boot@lists.denx.de>; Fri, 29 Sep 2023 02:47:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-53406799540so11522591a12.1
- for <u-boot@lists.denx.de>; Thu, 28 Sep 2023 16:42:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695944576; x=1696549376; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PKWFDXbnqddhmtC8riN8PSqReLFCrVDfLWWM1ny8vd4=;
- b=UG7bE/U2shdYq0NDJ+/5Hb+QB+DVKO2KauK61dhqgIDreD0LIq4U6DVtHBYw1gHOwM
- twetgSQ3/iBhI3gtTLw2iYWQBxcN87VsIkxZnl0M1hkrdjewiDCkHHGX2NLb+LTkpUlV
- rTrFAHuzCIb6e1U8pa2ktiAI07JgMQBLg4UsA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695944576; x=1696549376;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PKWFDXbnqddhmtC8riN8PSqReLFCrVDfLWWM1ny8vd4=;
- b=SBMkU/mBgMW/VqRmoGdIY7ujvU/+ZgJOaV63DV6/KDGRwVJtVswkVbg1pGQXSld+8O
- MyB3xovud5T9UGL8+klaP+VmNZbeGEq7s32MixHcqRSd7hxRZZHfe2Jepv+wTsoXNDjH
- mJVAyRBVE3ysqJ5qMK1DBSIiru9Y9j9uJO+Xl+0SUFnQw0nHHkDjsY8AQLe0lHXHQ+ov
- eo92m9uF+ni42Vtx4w9pWb3iKGTpg30GUBvQleWRMWE9MQ3UzpU57rDQRQpmK1rg9Np1
- eUqkjFfh4puFKmXwqx4tjnzM7u5FiYSLAPD7rM3mqH8lab3M96kkAOIo97mOXhhB2K8x
- fsUg==
-X-Gm-Message-State: AOJu0YzLy0iEg70w8tP4xtbFZEkjTLA4eEG2DgbdOITn9nnQHtS33zCi
- 7mf6K+GYDBaKaDeJ2YNGN61OB+hxVeZYFriNe29RRQ==
-X-Google-Smtp-Source: AGHT+IFJ6n5x45QoUiKMXlHGJLUqNk9CFZacIjW4hljIHqkgdhCSKums5Q+aiyDmYIPIeyjurHNxoa5MgpXCJsZjbKo=
-X-Received: by 2002:a05:6402:398:b0:530:db58:61c8 with SMTP id
- o24-20020a056402039800b00530db5861c8mr2523757edv.23.1695944575865; Thu, 28
- Sep 2023 16:42:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id ED0DB3F6F0; 
+ Fri, 29 Sep 2023 00:47:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1695948440;
+ bh=MWaobMqtGUBBVpf3jvZLMYwQ2LLAG2nb1FbYWUxv87U=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=jR4nKS6baglMzzg1QcDJvuD4/9VY9kzStVkM0vFa2rMJW9zhwDXOEhpNfEUVP8UXO
+ DYnbf9nL1ZkE/K4H9i1g9R/8NGBRx/6cIMbLVib3k7ApqrlwEC2o0+3xbVpF466R+j
+ whHfI/nNRXQ4tWLwJg4z4AuZJQZxAwskMtxUT/te5UOjNEZm4NRL6nIJ2BxrEwNYGq
+ IQZqQYqJyiOS6rxbuVwkaI0CEykEUcMcpY0R8pPakdlMoBf+tV1UVduRaNuOsquktq
+ h+6PANO4/LkhdncaJ4lI2itue8UOEJkJfoENK356Bbasl2UiXMsEG45YeSCXbtVTQg
+ LCAJ9EINU7mYQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Michal Suchanek <msuchanek@suse.de>,
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/2] stdio: fix stdio_deregister_dev()
+Date: Fri, 29 Sep 2023 02:47:15 +0200
+Message-Id: <20230929004717.37413-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20230927214415.2224768-1-jonas@kwiboo.se>
-In-Reply-To: <20230927214415.2224768-1-jonas@kwiboo.se>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 28 Sep 2023 17:42:37 -0600
-Message-ID: <CAPnjgZ3ThwoeEiiei53ZdCb1MvkDA8yaZTStpZ6LWauE7q+88w@mail.gmail.com>
-Subject: Re: [PATCH] spl: Jump to image at end of board_init_r
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de, Chanho Park <chanho61.park@samsung.com>, 
- Ferass El Hafidi <vitali64pmemail@protonmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,31 +70,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 27 Sept 2023 at 15:44, Jonas Karlman <jonas@kwiboo.se> wrote:
->
-> spl_board_prepare_for_boot() is not called before jumping/invoking atf,
-> optee, opensbi or linux images.
->
-> Jump to image at the end of board_init_r() to fix this.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> This patch have dependencies on the following patches:
->
-> spl: add __noreturn attribute to spl_invoke_opensbi function
-> https://patchwork.ozlabs.org/patch/1827057/
->
-> spl: add __noreturn attribute to spl_invoke_atf function
-> https://patchwork.ozlabs.org/patch/1831366/
->
-> spl: Drop the switch() statement for OS selection
-> from the "spl: Preparation for Universal Payload" series
-> https://patchwork.ozlabs.org/patch/1839731/
-> ---
->  common/spl/spl.c | 12 +++++++-----
->  1 file changed, 7 insertions(+), 5 deletions(-)
->
+When setting or copying the name field of a stdio device we must ensure
+that the target field is NUL terminated.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Avoid truncation in stdio_deregister_dev().
 
-Very nice to see this!
+Heinrich Schuchardt (2):
+  dm: serial: fix serial_post_probe()
+  stdio: fix stdio_deregister_dev()
+
+ common/stdio.c                 | 6 +++---
+ drivers/serial/serial-uclass.c | 2 +-
+ include/stdio_dev.h            | 3 ++-
+ 3 files changed, 6 insertions(+), 5 deletions(-)
+
+-- 
+2.40.1
+
