@@ -4,69 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C5AEE77373
-	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 13:13:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74E98E77376
+	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 14:36:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 029BF86FD3;
-	Sat, 30 Sep 2023 15:13:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id 6914786F6F;
+	Sat, 30 Sep 2023 16:36:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="GEScnC4w";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fXYdLOnh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A0B9F87019; Sat, 30 Sep 2023 15:13:34 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 54A8086F6F; Sat, 30 Sep 2023 16:36:29 +0200 (CEST)
+Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
+ [IPv6:2607:f8b0:4864:20::834])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32B3F86FC7
- for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 15:13:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id 5519E86D63
+ for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 16:36:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=public-files.de;
- s=s31663417; t=1696079611; x=1696684411; i=frank-w@public-files.de;
- bh=SQlqkZ0SeeXLQLn5xpSLU5VB7QBCeuflgwKgmjyRFg0=;
- h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
- b=GEScnC4w4mb5t05/Un8iB23ygRl2R1C0A5e1v8gdFBA+aTpIyC/tAZ2lZLD1eVLROQus8YlKveO
- X0IzivuJIzNNiqdiHIwb4nIBLTdzgF8QCfEVB2aL8o9HbXIGutltAVo1x3yOyPkhrCuP5c9Gk/9V1
- /qu0rTRYr2q9nOq2vU3qMZ81G5yEzjDCVSGKiQVnSlgy7LNKvMCyCtgoe4zvEtDJT86U1wJfhGSw5
- T5rrioUyHo5O0uopGFgjCBtBzW/oGKRp17WSH+KGF8SP7Mp5b1bkcsGWWKTEkTTahgnan9P+HaWG7
- SvF43u7teyzufoX/iPAeLULmxJUZjKo26ZPw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [217.61.152.33] ([217.61.152.33]) by web-mail.gmx.net
- (3c-app-gmx-bs36.server.lan [172.19.170.88]) (via HTTP); Sat, 30 Sep 2023
- 15:13:30 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qt1-x834.google.com with SMTP id
+ d75a77b69052e-417f1eac78dso94591761cf.2
+ for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 07:36:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696084586; x=1696689386; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pSMr+YwqdzdhcgVOfdWF0oH0uKtywk6481h3jc5VlS0=;
+ b=fXYdLOnhXn8g26CrBnnQDfvmnVFwMKHtGlml/AxlZKiu8U2/lzle4RpCfZbJRvhBUb
+ 71sNS7Ef5g0BFYRw+7C/Q55Q3Kbc3qBMKDoOMN54z23SQqNOj/q0e7Y9xryF2Ei1PzLZ
+ Pm3GQqKmvtXe4owo8hNZ8jSe2wqiC/+HKEC9yQQNRtRMCaAXgo7uHWM+mr5MYerkIo71
+ 6NA4otIfMFkZpp0z/fDCGF5NFTaG7zSNG0jsSq34sUP8XZY1olV97NJp3IuhX0CpZZRN
+ qjnTFBb40eUp7hNGCfJXl+sVBf++tP7+ahitgW2M1VUrxuo0hYQRy70K11102DuYqUj5
+ 5Agw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696084586; x=1696689386;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pSMr+YwqdzdhcgVOfdWF0oH0uKtywk6481h3jc5VlS0=;
+ b=OpRZd6cuBNidKnFGmLndfz8eExbsjw3h6AdZse+IYe1/ypOA6BYlR7InhKO0MowQnc
+ lwNQWqyhYq96MZsPZujoAVTT4+vHJElihBfW7U/5tvQYzcnvS8zOD9TNXOh58uGJwxQF
+ gds802PUrZd5/vk9EQ2NQGTYNJXoUDb5QfSanVRUPA5Bc3ADojTEqcO7ly2oPV4GHB4U
+ aSPR390Z86Q0NeFbzhmmNVTg9jKzo+Pgp0fLER3akYwkzglbjPhuEHv1nMXrAkHQHIJN
+ UXGnoSkUbro26CdaZlSaQ9SBBULAl0kYZQm1cV0wWV0bfAEpvOSGfCecMHblRMirWGwM
+ G8IA==
+X-Gm-Message-State: AOJu0Yzmf3xLd/gR7TIoacr+uwZyTm90JbUnjYhcScQ/zGG51vBjO4l8
+ 2scFHvIZt1Lhw3exnI/v3Svdldmax3E=
+X-Google-Smtp-Source: AGHT+IHYXXTRKw10zaAInWpSgVZOuMVN+C0/5ldPHo013mDHVzXCsZczHoQIKLeO6VQDvpPloxxWDQ==
+X-Received: by 2002:a05:622a:1a15:b0:418:ff8:3833 with SMTP id
+ f21-20020a05622a1a1500b004180ff83833mr9455820qtb.52.1696084585694; 
+ Sat, 30 Sep 2023 07:36:25 -0700 (PDT)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ z15-20020ac8710f000000b00418142e802bsm4900329qto.6.2023.09.30.07.36.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 30 Sep 2023 07:36:25 -0700 (PDT)
+From: Sean Anderson <seanga2@gmail.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>,
+	Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH] linker_list: Fix ll_entry_get alignment
+Date: Sat, 30 Sep 2023 10:36:23 -0400
+Message-Id: <20230930143623.318903-1-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
-Message-ID: <trinity-bf8ba9b5-b264-497a-b0b2-6af0ff5c1a7f-1696079610910@3c-app-gmx-bs36>
-From: Frank Wunderlich <frank-w@public-files.de>
-To: Tom Rini <trini@konsulko.com>
-Cc: "u-bootlists.denx.de" <u-boot@lists.denx.de>
-Subject: github dependabot alert on py / pytest
-Content-Type: text/plain; charset=UTF-8
-Date: Sat, 30 Sep 2023 15:13:30 +0200
-Importance: normal
-Sensitivity: Normal
-X-Priority: 3
-X-Provags-ID: V03:K1:WtbqZfJ5kkOA0Kfhk5TozzoKLBLP2Rb7zUoCZ4w3aYaKZyMu0CbGBJHAUK7lsG26zYpZe
- rT3V3n1kaq7oIJ1+mwQVWsDUnxxDpyy/5i8/aNX6CHrHXCn7wQbWHC4HanL82aI3FLjNZLPBsLZ/
- irU9VYd9qhJXDxNm96kJof73KtZn8/VmY1tVN+9BVeTA3mqv3XiH8MeY+kcowcAMGgCL1zIrgWuw
- wgohYWxUOjbY5JVv4oQm4yGN3lDuDqSLEv2tScq0bFU0+xpoWI3V4aGQkC3wGoJsW2PG95cvZ09d
- Bk=
-UI-OutboundReport: notjunk:1;M01:P0:z5GhfHAU0l4=;dWr7aiyWzb8kNsjkuCXhxwD8Ozp
- tB0v332bVjf5orps4mdz3j9lfq5PWQQemJ2zWDDemK+0zF/BDfjSwnuyyeblw/eT+/MgjcW0i
- M1HP/rBrUIMW89gEDNg/Xi8ihoKXnW3IpQcWiwwd9wiCPbO8h9uoTSR00xzUKvtRfVOyIBNkz
- DFJUYYK2Q9GFi4lynxwXnJJNUJ/C3XQ4lk/jfQHshF0cc7yQXfMAQLurPkhf8ZxHiNBSTCNJu
- SrR62iVT5mgwWrLnpw5zMJO1ZrL82j6YSdBk5tgVbodiPomrStLucS4oj9lDWIuGXMu7kG+Il
- vqFtrybiYi5Tmrztgy6uXeLLZgYL7vEgi1hW+K2Gg1lptB/5dntIJsZnYf8b9zByoPBasoIsC
- 8Q1cWq7Aee4wSytIgNiI2GGGROYO38sNh8wsMtgs3hBKdEproO7SYSN+0ELu5XnnZMD1Ceb10
- QRn852I7R3zRhWadcOhQvu5lJLzImvyIKUqi8/xKc5PZA6aVpazPMT44Hi5aSg4Ili7UHrIyD
- xMBO/hAMdmQWio8JO3/u8HIDP4vb3Q7YCfoXiE6BPg4q6tgHV7WtrMxmbppQvimTmuImyfMsd
- z08yLfcEbIanui3OgL2Tw/lD7iy9SDtuV5Vn9f5tiPWbFEfSHC9XYVrlNqoXWrsXraEZccUUn
- VOM2azU0i0+L/iX/kSIUudnlq0KEWW2pSIWy8cAlwhDYEcjX2FTc0kXdwUHzv9UhybJVGntzz
- nItuDo8COfgt50x9i8Z03IfPkIlcQRO3uqFFi4ukoxAuANks2je9peyiHOS1kydsDsmi1tuuI
- 0LvMTmax+O0Qgkcu80Fp4BSpJ0gKX8Ubhcw0P6euw5+rU=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,16 +90,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+When ll_entry_get is used on a list entry ll_entry_declare'd in the same
+file, the lack of alignment on the access will override the
+ll_entry_declare alignment. This causes GCC to use the default section
+alignment of 32 bytes. As list entries are not necessarily 32-byte aligned,
+this will cause a gap in the linker list, corrupting further entries.
 
-dependabot reports a high security issue
+As a specific example, get_fs_loader uses DM_DRIVER_GET(fs_loader) in the
+same file where U_BOOT_DRIVER(fs_loader) is present. This causes a crash
+when walking the driver list.
 
-https://github.com/frank-w/u-boot/security/dependabot/1
+Fix this by adding appropriate alignment to all accesses.
 
-it seems it is not yet fixed in master and next as there py is still in and pytest==6.2.5
+Fixes: 42ebaae3a33 ("common: Implement support for linker-generated arrays")
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
+---
 
-I have not yet seen any topics for this...are you aware of this? I know tests are run in
-isolated environment through gitlab-pipeline, but maybe this can have still a risk.
+ include/linker_lists.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-regards Frank
+diff --git a/include/linker_lists.h b/include/linker_lists.h
+index f9a2ee0c762..e0c8a01b9ba 100644
+--- a/include/linker_lists.h
++++ b/include/linker_lists.h
+@@ -209,7 +209,8 @@
+  */
+ #define ll_entry_get(_type, _name, _list)				\
+ 	({								\
+-		extern _type _u_boot_list_2_##_list##_2_##_name;	\
++		extern _type __aligned(4)				\
++			_u_boot_list_2_##_list##_2_##_name;		\
+ 		_type *_ll_result =					\
+ 			&_u_boot_list_2_##_list##_2_##_name;		\
+ 		_ll_result;						\
+@@ -229,7 +230,7 @@
+  * @_list: name of the list
+  */
+ #define ll_entry_ref(_type, _name, _list)				\
+-	((_type *)&_u_boot_list_2_##_list##_2_##_name)
++	((_type __aligned(4) *)&_u_boot_list_2_##_list##_2_##_name)
+ 
+ /**
+  * ll_start() - Point to first entry of first linker-generated array
+-- 
+2.37.1
 
