@@ -4,75 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64C83E77365
-	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 10:25:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE987E77371
+	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 12:02:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6DB1386BB6;
-	Sat, 30 Sep 2023 12:25:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BF2CE87021;
+	Sat, 30 Sep 2023 14:02:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aG3aWAqQ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="lAT/Dapv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DB1B86568; Sat, 30 Sep 2023 12:25:18 +0200 (CEST)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 412328702C; Sat, 30 Sep 2023 14:02:19 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2465D86BB6
- for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 12:25:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A109F86C0B
+ for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 14:02:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-d89491dab33so9973040276.0
- for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 03:25:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696069515; x=1696674315; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=nFV3qE0BM6gu7WxJmH1gqGDR6G4fWSsw0CYR3CXeQS0=;
- b=aG3aWAqQJRXcIEsSgImXbsKA324aYpklQZQMd06DWzGUX0oNOaFifbk892IBEMXA/A
- gbx79Pqaio8dzipcxIBpm2wkOrBB7m74V+Jj0XTL/BwqRMPTjeVQQi4H2X+4A2tDz2dk
- 4Tzlx0etSFNMn06lTXFo1FkiAmBV4qqY6eKm9ucSjK+A3QtvC+86HSz0I8YpyYpzpG69
- ip28SS3Fb6mlUxfYpzfy0x6kcETfovD2Xs3W2nUjXUh2g8S0Yqx725WhKsAF3ZdQRdV4
- nVBDbISUjCG0qx1zZMGyhFY76OXdBg/OIE1BUuwd2V/bpN3lzTi3wrDoIl9zPYBMtxhX
- 2MiA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696069515; x=1696674315;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=nFV3qE0BM6gu7WxJmH1gqGDR6G4fWSsw0CYR3CXeQS0=;
- b=neRA2RgvyolNXPgdKeXTIdRSOvjR69DrQSmlhWrhXWSvMu7yHlcVikSPtmIwJVXgya
- czya2GYlOjadwPEGetWzjX++EzVGwl02TqfNBxfoC7opDc30GLzDzASt5BXaSqA1CJky
- O3NdH9B20B0/bf3qzwaoUqYNUwoDl/pv1U43ivfQTluYg/0E1JscOHphmBD4Mf/LyP5W
- jxye2XnXOFEZkNyp8vZNECRVafU/CyRSxa62aTZ+B+h/aNAsBcpFc7f3/3TbfsnSQZDE
- RzEt8Sk+rS5NlcOeo/bMKjLnljaQZP/qVnDPc5/ZZ51NpYWcFBhGAdkkJYlFV9QXJPLL
- cHTg==
-X-Gm-Message-State: AOJu0Yz/eGYk82zT74lhZenaiQPFqLQZy/3YZ0eXgaQKFB+9CL2PbCDs
- facluBFwKVg+lIbKaWWDU5VOj0aGI/TiHOmLVHs=
-X-Google-Smtp-Source: AGHT+IFu/NjSM0XhcbyC8sjAoNUCuEWom6f+krlkEqNari6IwG5ntBxyTNcjt6GU4HLL0C08DvC3TDleNp5fW8l/Z2U=
-X-Received: by 2002:a25:9d87:0:b0:d0a:a1fa:b8e4 with SMTP id
- v7-20020a259d87000000b00d0aa1fab8e4mr5478351ybp.38.1696069514709; Sat, 30 Sep
- 2023 03:25:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 7E3F23F6F3; 
+ Sat, 30 Sep 2023 12:02:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1696075335;
+ bh=eG4MLTrR1h9SoIXF13TxiqvlGh2wYHRCSxo8q0qcE+M=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=lAT/DapvuHn0lisnUxVkhOz1/+u8IVhNVECcqD12ZkjzT1QZvrx3oRBrWPzvXdcFW
+ 1ZhJtHtak3zW7GVuEzM5i29k8EjX+6IdapxS2IeKHV3ZMcv1msIRN1PUgU5rCjykt6
+ A66/j4sC5js0PWCMfwZ39D/4mQY7cUZA6OLQQOcy/hctxKIwz0M7fp4XsLipuCACHj
+ 32iZrMuk6G2fb+m0ltYQ+96WvkzZuL8vIuTZ1LdfY5sMPOP+Up6ymCE7ififJTM3O5
+ w4wrDikXOf9T1OFJugGoyIddrEKWJRX6XaXGZaZHehPgOaPiqHok+wi3Jh6/2lKWlA
+ nfAu5d/x6fXQQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>,
+ Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>
+Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Roger Knecht <rknecht@pm.me>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Alexey Romanov <avromanov@sberdevices.ru>,
+ Dzmitry Sankouski <dsankouski@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/6] cmd mac: separate implementations
+Date: Sat, 30 Sep 2023 14:01:41 +0200
+Message-Id: <20230930120147.59482-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-References: <20230805111041.750550-1-jonas@kwiboo.se>
- <CAC928HZ=ZiLwDMDF9yc2H=mH3On-P2HmNnQZ_2B-B_w5CZ9cNQ@mail.gmail.com>
- <85b5d5c2-7039-73f6-9a8e-1a3d19a100c4@kwiboo.se>
- <CAPnjgZ0nuv7QRxR+qQUNXEOOMhMrOZmDbF7GyCDzbJ=ZOAxD7g@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0nuv7QRxR+qQUNXEOOMhMrOZmDbF7GyCDzbJ=ZOAxD7g@mail.gmail.com>
-From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Sat, 30 Sep 2023 12:25:03 +0200
-Message-ID: <CAC928HabiL5BO6X2NoAztiLrLR=xa88U2nXGEKh9LqccxV0pTw@mail.gmail.com>
-Subject: Re: [PATCH] pinctrl: Check pinconfig nodes pre-reloc status
- recursively
-To: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Marek Vasut <marex@denx.de>, Stefan Roese <sr@denx.de>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,65 +79,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+There are three implementations of the 'mac' command:
 
-Il giorno ven 11 ago 2023 alle ore 02:29 Simon Glass
-<sjg@chromium.org> ha scritto:
->
-> Hi Jonas,
->
-> On Sat, 5 Aug 2023 at 08:29, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >
-> > Hi Massimo,
-> >
-> > On 2023-08-05 16:06, Massimo Pegorer wrote:
-> > > Hi Jonas,
-> > >
-> > > Il giorno sab 5 ago 2023 alle ore 13:11 Jonas Karlman <jonas@kwiboo.se> ha
-> > > scritto:
-> > >
-> > >> Pinconfig nodes normally bind recursively with PINCTRL_FULL and
-> > >> PINCONF_RECURSIVE enabled. However, during U-Boot proper pre-relocation
-> > >> any node marked with e.g. bootph-all will not bind unless its parent is
-> > >> also marked for pre-reloc.
-> > >>
-> > >>   group1 {
-> > >>       pinconf1 {
-> > >>           bootph-all;
-> > >>       };
-> > >>   };
-> > >>
-> > >> This cause the following warning message to be shown during U-Boot
-> > >> proper pre-reloc stage on Rockchip RK3568 devices.
-> > >>
-> > >>   ns16550_serial serial@fe660000: pinctrl_select_state_full:
-> > >> uclass_get_device_by_phandle_id: err=-19
-> > >>
-> > >> Check pinconfig nodes pre-reloc status recursively to fix this and to
-> > >> make pinconfig_post_bind work same at both U-Boot proper pre-reloc and
-> > >> at TPL/SPL stage.
-> > >>
-> > >> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> > >> ---
-> > >>  drivers/pinctrl/pinctrl-uclass.c | 18 +++++++++++++++++-
-> > >>  1 file changed, 17 insertions(+), 1 deletion(-)
->
-> This is actually something we want to change about fdtgrep. I believe
-> we should try to adjust that tool rather than loading this ontoU-Boot,
-> not least because it controls what properties are visible in SPL.
+* Freescale (NXP)
+* SiFive Unmatched
+* StarFive VisionFive 2
 
-So IIUC your idea is that fdtgrep tool will automatically add
-bootph-xxx property to any ancestor of a node with that property? Or
-to log a warning, or exit with an error, during build?
+They all use different sets of sub-commands and hence should display
+a different long text help.
 
-BTW, fdtgrep is applied to DT only for xPL builds, not for U-Boot
-proper build. Therefore, Jonas approach could be used at least during
-U-Boot proper pre-relocation phase to manage "bootph-some-ram" and
-"bootph-all".
+This series moves the command definition to the three implementations.
 
-Side note: I've noticed that quiet_cmd_fdtgrep in Makefile.lib does
-not strip bootph-some-sram. I think it should, doesn't it?
+The following fixes are added for the StarFive implementation:
 
->
-> Regards,
-> Simon
+* Provide a hexdump if the data format is unknown.
+* Provide a raw sub-command to force a hexdump.
+
+Heinrich Schuchardt (6):
+  cmd: move mac command
+  freescale: fix long help handling in mac command
+  eeprom: SiFive Unmatched: re-implement mac command
+  eeprom: starfive: re-implement mac command
+  eeprom: starfive: raw dump if unsupported data version
+  eeprom: starfive: add 'mac raw' command
+
+ board/freescale/common/sys_eeprom.c           | 30 +++++++-
+ .../unmatched/hifive-platform-i2c-eeprom.c    | 30 +++++++-
+ .../visionfive2/visionfive2-i2c-eeprom.c      | 68 ++++++++++++-------
+ cmd/Makefile                                  |  1 -
+ cmd/mac.c                                     | 33 ---------
+ 5 files changed, 98 insertions(+), 64 deletions(-)
+ delete mode 100644 cmd/mac.c
+
+-- 
+2.40.1
+
