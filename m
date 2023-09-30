@@ -4,53 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C590BE7734B
-	for <u-boot@archiver.kernel.org>; Fri, 29 Sep 2023 23:07:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8957E7735A
+	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 06:41:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DE9F86C43;
-	Sat, 30 Sep 2023 01:07:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 87F7A86963;
+	Sat, 30 Sep 2023 08:41:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="EFt86sJI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x9+fSEWy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E708286E45; Sat, 30 Sep 2023 01:07:14 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A5D7A869B6; Sat, 30 Sep 2023 08:41:23 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A11EA863DD
- for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 01:07:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FA8386568
+ for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 08:41:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=f3c4=FO=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1696028821;
- bh=JTpfqmU5nPvli26kCgcPKgJ9jpzLik1HU+POLUSsL44=;
- b=EFt86sJI/OqfiPKTG1KEuyZu7acNcE8qsQaUiex1RJE9ta8/sgBePYe1Kw+QHwuxXAZhtHk7g
- TjjgKqvYUsZCo5pPIcE7S5OcbUWPTB5rJaoiMumlsRRWNvLmcju4YK4nEvl1UcbID+jkHSH6wJy
- 2rB5cV1sBJmHOVdBO5A8X5wAxjf8vgIfeXf70UwdbJthc2qjclktNTSaqSemEezwbH7Lle9Gv1c
- 6ar9eLCRWu8ltC290M58zmwgKCetn0sUdK8fq1TH1goNxZwu0jxg3e3CqDAuuYU+C2NnC6kXzGV
- yE2rSefzd9Im/pplO0oHiiHLksc+xUUrXbNTbj9oixQA==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: u-boot@lists.denx.de
-Cc: Ferass El Hafidi <vitali64pmemail@protonmail.com>, Jonas Karlman
- <jonas@kwiboo.se>
-Subject: [RFC] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
-Date: Fri, 29 Sep 2023 23:06:53 +0000
-Message-ID: <20230929230655.2932698-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.42.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 38U6fEZu072329;
+ Sat, 30 Sep 2023 01:41:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696056074;
+ bh=IxtLEM2pViBRw6n6fOE+3iCrmPGe4NW45da++lDVJs8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=x9+fSEWyxrmI+MQE8coCUdnnXwYJ+jN5Xi2Lv/4SBTKpT1lnsCn++2OjcoV+xSNRJ
+ uyhLkub6REWinawTFn7uCulVzsie9w+SfjTA469kEQnmZA1jIkTFxK43ezc+NeKjbe
+ uqeP7JBmUjK4yK3WUe5nggb2uMffIUMEJMSjUa4M=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 38U6fEKZ024636
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sat, 30 Sep 2023 01:41:14 -0500
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sat, 30
+ Sep 2023 01:41:14 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sat, 30 Sep 2023 01:41:14 -0500
+Received: from [10.249.141.75] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 38U6fBRK044124;
+ Sat, 30 Sep 2023 01:41:11 -0500
+Message-ID: <ab073b0d-5913-9157-e9ef-bf0f0f0f16af@ti.com>
+Date: Sat, 30 Sep 2023 12:11:10 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 65175894d819bc962047949c
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [RFC PATCH v2 0/3] thermal: Integrate VTM and AVS driver
+Content-Language: en-US
+To: <nm@ti.com>, <vigneshr@ti.com>, <bb@ti.com>, <sjg@chromium.org>
+CC: <peng.fan@nxp.com>, <ye.li@nxp.com>, <robimarko@gmail.com>,
+ <u-boot@lists.denx.de>, <n-francis@ti.com>
+References: <20230908172914.436194-1-u-kumar1@ti.com>
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20230908172914.436194-1-u-kumar1@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,76 +81,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The alignment hole caused by cmdidx in struct mmc_cmd cause strange
-issues together with the peephole2 optimization on Amlogic SoCs.
-Following was observed while working on SPL support for Amlogic SoCs.
+Dear All,
 
-sd_get_capabilities() normally issue a CMD55 followed by a CMD51.
-However, on at least Amlogic S905 (Cortex-A53) and S905X3 (Cortex-A55),
-CMD55 was instead followed by CMD8 (and a few reties) in SPL.
+On 9/8/2023 10:59 PM, Udit Kumar wrote:
+> VTM (Voltage and Thermal Manager) IP is used for following purpose
+> 1) AVS class 0
+> 2) Thermal management (setting thermal shutdown TSHUT) temperature.
+> 3) SoC temperature reporting.
+>
+> In origin boot flow, R5/SPL sets the AVS voltage using
+> by AVS driver, residing under UCLASS_MISC.
+>
+> In this series At top level, following changes are done
+> - Moved avs driver to Thermal class
+> - Ported kernel driver (drivers/thermal/k3_j72xx_bandgap.c) which
+> supports TSHUT and temperature reporting
+> - Merged these two driver as one under UCLASS_THERMAL.
+>
+> This series aims to
+> - set avs and thermal shutdown at R5/SPL stage
+> - At main u-boot stage, support thermal shutdown and temperature reporting
+>
+>
+> Also, j72xx_bandgap does complex math to get ADC value to temperature
+> conversion, This table is pretty static.
+> So at R5 SPL stage, instead of calculation, fixed values is used
+> for TSHUT values.
+> and #ifdef is used skip non needed code for SPL/R5 to reduce code size.
 
-Code from the call site:
+Kindly review and provide feedback, if this approach looks ok.
 
-  cmd.cmdidx = SD_CMD_APP_SEND_SCR; // 51
-  ...
-  data.blocksize = 8;
-  ...
-  err = mmc_send_cmd_retry(mmc, &cmd, &data, 3);
+Thanks
 
-Running the code with MMC_TRACE enabled shows:
+Udit
 
-CMD_SEND:55
-                ARG                      0x50480000
-                MMC_RSP_R1,5,6,7         0x00000920
-CMD_SEND:8
-                ARG                      0x00000000
-                RET                      -110
 
-Removing the alignment hole by changing cmdidx from ushort to uint or
-building with -fno-peephole2 flag seem to resolve this issue.
-
-CMD_SEND:55
-                ARG                      0x50480000
-                MMC_RSP_R1,5,6,7         0x00000920
-CMD_SEND:51
-                ARG                      0x00000000
-                MMC_RSP_R1,5,6,7         0x00000920
-
-Same issue was observed building U-Boot with gcc 8-13. Please advise on
-how to best work around this possible gcc optimization bug.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/cpu/armv8/config.mk | 2 ++
- include/mmc.h                | 2 +-
- 2 files changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm/cpu/armv8/config.mk b/arch/arm/cpu/armv8/config.mk
-index 4d74b2a533e0..7177dcd7c73b 100644
---- a/arch/arm/cpu/armv8/config.mk
-+++ b/arch/arm/cpu/armv8/config.mk
-@@ -7,6 +7,8 @@ PLATFORM_RELFLAGS += $(call cc-option,-mbranch-protection=none)
- PF_NO_UNALIGNED := $(call cc-option, -mstrict-align)
- PLATFORM_CPPFLAGS += $(PF_NO_UNALIGNED)
- 
-+PLATFORM_CPPFLAGS += $(call cc-option,-fno-peephole2)
-+
- EFI_LDS := elf_aarch64_efi.lds
- EFI_CRT0 := crt0_aarch64_efi.o
- EFI_RELOC := reloc_aarch64_efi.o
-diff --git a/include/mmc.h b/include/mmc.h
-index 9aef31ea5deb..7b3868bb5664 100644
---- a/include/mmc.h
-+++ b/include/mmc.h
-@@ -413,7 +413,7 @@ struct mmc_cid {
- };
- 
- struct mmc_cmd {
--	ushort cmdidx;
-+	uint cmdidx;
- 	uint resp_type;
- 	uint cmdarg;
- 	uint response[4];
--- 
-2.42.0
-
+> Change log
+> Changes in v2:
+> v1 : https://lore.kernel.org/all/20230901061500.2342452-1-u-kumar1@ti.com/
+> - Trying to merge AVS and kernel driver into 1
+> - Mark as RFC
+>
+>
+> Udit Kumar (3):
+>    thermal: k3: Add support for thermal in vtm
+>    arm: mach-k3: update board file to use thermal device
+>    arm: dts: k3: update device tree for vtm node
+>
+>   arch/arm/dts/k3-j7200-mcu-wakeup.dtsi         |   9 +
+>   .../arm/dts/k3-j7200-r5-common-proc-board.dts |   6 -
+>   arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  10 +
+>   .../arm/dts/k3-j721e-r5-common-proc-board.dts |   7 -
+>   arch/arm/dts/k3-j721e-r5-sk.dts               |   7 -
+>   arch/arm/mach-k3/am654_init.c                 |   2 +-
+>   arch/arm/mach-k3/j721e_init.c                 |   2 +-
+>   configs/am65x_evm_r5_defconfig                |   3 +
+>   configs/am65x_evm_r5_usbdfu_defconfig         |   3 +
+>   configs/am65x_evm_r5_usbmsc_defconfig         |   3 +
+>   configs/am65x_hs_evm_r5_defconfig             |   3 +
+>   configs/j7200_evm_a72_defconfig               |   3 +
+>   configs/j7200_evm_r5_defconfig                |   3 +
+>   configs/j721e_evm_a72_defconfig               |   3 +
+>   configs/j721e_evm_r5_defconfig                |   3 +
+>   drivers/misc/Makefile                         |   1 -
+>   drivers/misc/k3_avs.c                         | 394 --------
+>   drivers/thermal/Kconfig                       |   7 +
+>   drivers/thermal/Makefile                      |   1 +
+>   drivers/thermal/k3_thermal.c                  | 928 ++++++++++++++++++
+>   20 files changed, 981 insertions(+), 417 deletions(-)
+>   delete mode 100644 drivers/misc/k3_avs.c
+>   create mode 100644 drivers/thermal/k3_thermal.c
+>
