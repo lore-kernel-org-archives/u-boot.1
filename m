@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8EE1E77372
-	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 12:03:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9485EE77371
+	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 12:03:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D22E87019;
+	by phobos.denx.de (Postfix) with ESMTP id CBB2387037;
 	Sat, 30 Sep 2023 14:02:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="h2Uwop0v";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Sfg1Itar";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C43578702C; Sat, 30 Sep 2023 14:02:24 +0200 (CEST)
+ id 398BA86FC4; Sat, 30 Sep 2023 14:02:25 +0200 (CEST)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A32A486FD3
- for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 14:02:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB0F087037
+ for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 14:02:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from workstation5.fritz.box
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 8351B440AA; 
- Sat, 30 Sep 2023 12:02:19 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id DA9C0440A9; 
+ Sat, 30 Sep 2023 12:02:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1696075340;
- bh=9hrCWFhS+DQT72CYzcY7UANA/8KwkJFkLWnc857HsUQ=;
+ s=20210705; t=1696075339;
+ bh=OFQmueqMEEPSBCWtv2OAuyRnbpeut7Xq7GXo6q42mWo=;
  h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
  MIME-Version;
- b=h2Uwop0vSODb42/1kZiDN7+odVsyrOwNhBuz+zM6DgCYiQzmBXai8FU1RNdFORaug
- O/b+DsaW6OT8fN5boGa+dhugDQqFnCm/8GT4R7VL9/HCUdIYJIWRsZbvIrNRlRMmJT
- Ej5ksYD+xXjGsVEiZYnzRAzQfl1Jc/GGxicljGbyXR13sljtqxelS4AMySL5jlRwoN
- +z06+52UiQc7PMGM+BWkYpczbPIHVwy1GCpWoz+WcfuFQex0Q4jmNJcLO00nxU3tDp
- P3btnfiVp54sgvh8CZPn5MDMocOasjl6mumMjXcVBZIiezs01A/nbKoxWcDycQmhhN
- rkzsvJ4kBYm0A==
+ b=Sfg1ItarUn4pNDrjAgHdggji30JGNaD9nzuR8BMDfXV1yyH4dwXqYQ/gP06l9YAGM
+ l+G2QobEkKJOr1/OQrwrfW3nvNXRGgdQngEx5skg8cmxFsM7rVcp5tiXow6dagqzLa
+ pYWsoH56NxpHRZhtSNt4gNU4jP9MJXQ68rdbAPn0UN/FoxaD0otyhhDWDRvpM84Ggq
+ LRTazPveYe2GKgvatjw9ETPtPFIrrA79jxzCDe1xV59hLBcIP3Ziwmz2TWqep0wuP+
+ clNKYIIsQtcqI1smkX2ZhltppmZzNLZFrOjFFNYKFgJhRCPVO4ES8hLFoAOep+9J0Q
+ lryLtY+XwjxMQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>,
  Fabio Estevam <festevam@gmail.com>,
@@ -58,9 +58,9 @@ Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Alexey Romanov <avromanov@sberdevices.ru>,
  Dzmitry Sankouski <dsankouski@gmail.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 5/6] eeprom: starfive: raw dump if unsupported data version
-Date: Sat, 30 Sep 2023 14:01:46 +0200
-Message-Id: <20230930120147.59482-6-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 4/6] eeprom: starfive: re-implement mac command
+Date: Sat, 30 Sep 2023 14:01:45 +0200
+Message-Id: <20230930120147.59482-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.40.1
 In-Reply-To: <20230930120147.59482-1-heinrich.schuchardt@canonical.com>
 References: <20230930120147.59482-1-heinrich.schuchardt@canonical.com>
@@ -82,26 +82,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the data version field of the EEPROM is not supported, provide a hexdump
-of the data.
+The different implementations of the mac command have board or vendor
+specific sub-commands.
+
+Add the command definition specific to the VisionFive 2 board.
+
+Don't call cmd_usage() directly but return CMD_RET_USAGE instead.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- board/starfive/visionfive2/visionfive2-i2c-eeprom.c | 1 +
- 1 file changed, 1 insertion(+)
+ .../visionfive2/visionfive2-i2c-eeprom.c      | 62 +++++++++++--------
+ 1 file changed, 36 insertions(+), 26 deletions(-)
 
 diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-index 8d99249279..329fbf6644 100644
+index befe7888c4..8d99249279 100644
 --- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
 +++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-@@ -190,6 +190,7 @@ static void show_eeprom(void)
- 		       pbuf.eeprom.atom4.data.mac1_addr[4], pbuf.eeprom.atom4.data.mac1_addr[5]);
- 	} else {
- 		printf("Custom data v%d is not Supported\n", pbuf.eeprom.atom4.data.version);
-+		dump_raw_eeprom();
- 	}
- 	printf("--------EEPROM INFO--------\n\n");
+@@ -404,29 +404,6 @@ static void set_product_id(char *string)
+ 	update_crc();
  }
+ 
+-static int print_usage(void)
+-{
+-	printf("display and program the system ID and MAC addresses in EEPROM\n"
+-	"[read_eeprom|initialize|write_eeprom|mac_address|pcb_revision|bom_revision|product_id]\n"
+-	"mac read_eeprom\n"
+-	"    - read EEPROM content into memory data structure\n"
+-	"mac write_eeprom\n"
+-	"    - save memory data structure to the EEPROM\n"
+-	"mac initialize\n"
+-	"    - initialize the in-memory EEPROM copy with default data\n"
+-	"mac mac0_address <xx:xx:xx:xx:xx:xx>\n"
+-	"    - stores a MAC0 address into the local EEPROM copy\n"
+-	"mac mac1_address <xx:xx:xx:xx:xx:xx>\n"
+-	"    - stores a MAC1 address into the local EEPROM copy\n"
+-	"mac pcb_revision <?>\n"
+-	"    - stores a StarFive PCB revision into the local EEPROM copy\n"
+-	"mac bom_revision <A>\n"
+-	"    - stores a StarFive BOM revision into the local EEPROM copy\n"
+-	"mac product_id <VF7110A1-2228-D008E000-xxxxxxxx>\n"
+-	"    - stores a StarFive product ID into the local EEPROM copy\n");
+-	return 0;
+-}
+-
+ int do_mac(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+ 	char *cmd;
+@@ -437,7 +414,7 @@ int do_mac(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	}
+ 
+ 	if (argc > 3)
+-		return print_usage();
++		return CMD_RET_USAGE;
+ 
+ 	cmd = argv[1];
+ 
+@@ -453,7 +430,7 @@ int do_mac(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	}
+ 
+ 	if (argc != 3)
+-		return print_usage();
++		return CMD_RET_USAGE;
+ 
+ 	if (is_match_magic()) {
+ 		printf("Please read the EEPROM ('read_eeprom') and/or initialize the EEPROM ('initialize') first.\n");
+@@ -477,7 +454,7 @@ int do_mac(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		return 0;
+ 	}
+ 
+-	return print_usage();
++	return CMD_RET_USAGE;
+ }
+ 
+ /**
+@@ -559,3 +536,36 @@ u32 get_ddr_size_from_eeprom(void)
+ 
+ 	return hextoul(&pbuf.eeprom.atom1.data.pstr[14], NULL);
+ }
++
++#ifndef CONFIG_SPL_BUILD
++
++#ifdef CONFIG_SYS_LONGHELP
++static char booti_help_text[] =
++	"\n"
++	"    - display EEPROM content\n"
++	"mac read_eeprom\n"
++	"    - read EEPROM content into memory data structure\n"
++	"mac write_eeprom\n"
++	"    - save memory data structure to the EEPROM\n"
++	"mac initialize\n"
++	"    - initialize the in-memory EEPROM copy with default data\n"
++	"mac mac0_address <xx:xx:xx:xx:xx:xx>\n"
++	"    - stores a MAC0 address into the local EEPROM copy\n"
++	"mac mac1_address <xx:xx:xx:xx:xx:xx>\n"
++	"    - stores a MAC1 address into the local EEPROM copy\n"
++	"mac pcb_revision <?>\n"
++	"    - stores a StarFive PCB revision into the local EEPROM copy\n"
++	"mac bom_revision <A>\n"
++	"    - stores a StarFive BOM revision into the local EEPROM copy\n"
++	"mac product_id <VF7110A1-2228-D008E000-xxxxxxxx>\n"
++	"    - stores a StarFive product ID into the local EEPROM copy\n";
++#else
++	"";
++#endif
++
++U_BOOT_CMD(
++	mac, 3, 1,  do_mac,
++	"display and program the board revision and MAC address in EEPROM",
++	booti_help_text);
++
++#endif /* CONFIG_SPL_BUILD */
 -- 
 2.40.1
 
