@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD73FE77372
-	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 12:03:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C5AEE77373
+	for <u-boot@archiver.kernel.org>; Sat, 30 Sep 2023 13:13:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 425098706B;
-	Sat, 30 Sep 2023 14:02:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 029BF86FD3;
+	Sat, 30 Sep 2023 15:13:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MON6ZeoD";
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="GEScnC4w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1973C86F96; Sat, 30 Sep 2023 14:02:26 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id A0B9F87019; Sat, 30 Sep 2023 15:13:34 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E2868701F
- for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 14:02:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32B3F86FC7
+ for <u-boot@lists.denx.de>; Sat, 30 Sep 2023 15:13:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 45BD4440AB; 
- Sat, 30 Sep 2023 12:02:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1696075340;
- bh=TkTdSZq9kDadojQGkrZZ6Cptma3RecLqYKmd4dH+xmE=;
- h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
- MIME-Version;
- b=MON6ZeoDcX8hGsazh8B0jf1nhR6Me8gx/hHVOZPb6D23VX22mz0yzgOud4RTlWD7/
- WCBpnm/CcRGepYMsY/1ZyXIM1YvBnjUn3aLZkbYjqop9mWqs10v89Qefmagqky4yzD
- tEujsgEX50zWIjGdQ/UHGOGAJxMUST4DR9SJH2hDXCRW2euME3aBfAhRk+xO6nFtve
- WUEuVu+9xV0V9HFRnLkFQAELA1Xjb+OFq8sEDnIlf6yaVlpBc7eOue+3UEoAdnt/sn
- FIed083Ru3RnXaXPw5H261vXwFD1I2Yrp2I7F91eDj0W+Pasd3y7F48fKlYUalnqsm
- m3GArzQ7zT0xg==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>
-Cc: "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Roger Knecht <rknecht@pm.me>, Neil Armstrong <neil.armstrong@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Alexey Romanov <avromanov@sberdevices.ru>,
- Dzmitry Sankouski <dsankouski@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 6/6] eeprom: starfive: add 'mac raw' command
-Date: Sat, 30 Sep 2023 14:01:47 +0200
-Message-Id: <20230930120147.59482-7-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20230930120147.59482-1-heinrich.schuchardt@canonical.com>
-References: <20230930120147.59482-1-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=public-files.de;
+ s=s31663417; t=1696079611; x=1696684411; i=frank-w@public-files.de;
+ bh=SQlqkZ0SeeXLQLn5xpSLU5VB7QBCeuflgwKgmjyRFg0=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+ b=GEScnC4w4mb5t05/Un8iB23ygRl2R1C0A5e1v8gdFBA+aTpIyC/tAZ2lZLD1eVLROQus8YlKveO
+ X0IzivuJIzNNiqdiHIwb4nIBLTdzgF8QCfEVB2aL8o9HbXIGutltAVo1x3yOyPkhrCuP5c9Gk/9V1
+ /qu0rTRYr2q9nOq2vU3qMZ81G5yEzjDCVSGKiQVnSlgy7LNKvMCyCtgoe4zvEtDJT86U1wJfhGSw5
+ T5rrioUyHo5O0uopGFgjCBtBzW/oGKRp17WSH+KGF8SP7Mp5b1bkcsGWWKTEkTTahgnan9P+HaWG7
+ SvF43u7teyzufoX/iPAeLULmxJUZjKo26ZPw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [217.61.152.33] ([217.61.152.33]) by web-mail.gmx.net
+ (3c-app-gmx-bs36.server.lan [172.19.170.88]) (via HTTP); Sat, 30 Sep 2023
+ 15:13:30 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Message-ID: <trinity-bf8ba9b5-b264-497a-b0b2-6af0ff5c1a7f-1696079610910@3c-app-gmx-bs36>
+From: Frank Wunderlich <frank-w@public-files.de>
+To: Tom Rini <trini@konsulko.com>
+Cc: "u-bootlists.denx.de" <u-boot@lists.denx.de>
+Subject: github dependabot alert on py / pytest
+Content-Type: text/plain; charset=UTF-8
+Date: Sat, 30 Sep 2023 15:13:30 +0200
+Importance: normal
+Sensitivity: Normal
+X-Priority: 3
+X-Provags-ID: V03:K1:WtbqZfJ5kkOA0Kfhk5TozzoKLBLP2Rb7zUoCZ4w3aYaKZyMu0CbGBJHAUK7lsG26zYpZe
+ rT3V3n1kaq7oIJ1+mwQVWsDUnxxDpyy/5i8/aNX6CHrHXCn7wQbWHC4HanL82aI3FLjNZLPBsLZ/
+ irU9VYd9qhJXDxNm96kJof73KtZn8/VmY1tVN+9BVeTA3mqv3XiH8MeY+kcowcAMGgCL1zIrgWuw
+ wgohYWxUOjbY5JVv4oQm4yGN3lDuDqSLEv2tScq0bFU0+xpoWI3V4aGQkC3wGoJsW2PG95cvZ09d
+ Bk=
+UI-OutboundReport: notjunk:1;M01:P0:z5GhfHAU0l4=;dWr7aiyWzb8kNsjkuCXhxwD8Ozp
+ tB0v332bVjf5orps4mdz3j9lfq5PWQQemJ2zWDDemK+0zF/BDfjSwnuyyeblw/eT+/MgjcW0i
+ M1HP/rBrUIMW89gEDNg/Xi8ihoKXnW3IpQcWiwwd9wiCPbO8h9uoTSR00xzUKvtRfVOyIBNkz
+ DFJUYYK2Q9GFi4lynxwXnJJNUJ/C3XQ4lk/jfQHshF0cc7yQXfMAQLurPkhf8ZxHiNBSTCNJu
+ SrR62iVT5mgwWrLnpw5zMJO1ZrL82j6YSdBk5tgVbodiPomrStLucS4oj9lDWIuGXMu7kG+Il
+ vqFtrybiYi5Tmrztgy6uXeLLZgYL7vEgi1hW+K2Gg1lptB/5dntIJsZnYf8b9zByoPBasoIsC
+ 8Q1cWq7Aee4wSytIgNiI2GGGROYO38sNh8wsMtgs3hBKdEproO7SYSN+0ELu5XnnZMD1Ceb10
+ QRn852I7R3zRhWadcOhQvu5lJLzImvyIKUqi8/xKc5PZA6aVpazPMT44Hi5aSg4Ili7UHrIyD
+ xMBO/hAMdmQWio8JO3/u8HIDP4vb3Q7YCfoXiE6BPg4q6tgHV7WtrMxmbppQvimTmuImyfMsd
+ z08yLfcEbIanui3OgL2Tw/lD7iy9SDtuV5Vn9f5tiPWbFEfSHC9XYVrlNqoXWrsXraEZccUUn
+ VOM2azU0i0+L/iX/kSIUudnlq0KEWW2pSIWy8cAlwhDYEcjX2FTc0kXdwUHzv9UhybJVGntzz
+ nItuDo8COfgt50x9i8Z03IfPkIlcQRO3uqFFi4ukoxAuANks2je9peyiHOS1kydsDsmi1tuuI
+ 0LvMTmax+O0Qgkcu80Fp4BSpJ0gKX8Ubhcw0P6euw5+rU=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,36 +83,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a sub-command to print a hexdump of the EEPROM content.
+Hi,
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- board/starfive/visionfive2/visionfive2-i2c-eeprom.c | 5 +++++
- 1 file changed, 5 insertions(+)
+dependabot reports a high security issue
 
-diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-index 329fbf6644..710044a235 100644
---- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-+++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
-@@ -428,6 +428,9 @@ int do_mac(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		return 0;
- 	} else if (!strcmp(cmd, "write_eeprom")) {
- 		return prog_eeprom(STARFIVE_EEPROM_HATS_SIZE_MAX);
-+	} else if (!strcmp(cmd, "raw")) {
-+		dump_raw_eeprom();
-+		return 0;
- 	}
- 
- 	if (argc != 3)
-@@ -550,6 +553,8 @@ static char booti_help_text[] =
- 	"    - save memory data structure to the EEPROM\n"
- 	"mac initialize\n"
- 	"    - initialize the in-memory EEPROM copy with default data\n"
-+	"mac raw\n"
-+	"    - hexdump memory data structure\n"
- 	"mac mac0_address <xx:xx:xx:xx:xx:xx>\n"
- 	"    - stores a MAC0 address into the local EEPROM copy\n"
- 	"mac mac1_address <xx:xx:xx:xx:xx:xx>\n"
--- 
-2.40.1
+https://github.com/frank-w/u-boot/security/dependabot/1
+
+it seems it is not yet fixed in master and next as there py is still in and pytest==6.2.5
+
+I have not yet seen any topics for this...are you aware of this? I know tests are run in
+isolated environment through gitlab-pipeline, but maybe this can have still a risk.
+
+regards Frank
 
