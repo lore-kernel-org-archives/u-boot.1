@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81F3EE748ED
-	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 15:55:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00ADEE748ED
+	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 15:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 143A686DCA;
-	Sun,  1 Oct 2023 17:55:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7B64886EC6;
+	Sun,  1 Oct 2023 17:55:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cixoMvrM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rc/MfJSg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE2348646E; Sun,  1 Oct 2023 17:55:12 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 265308646E; Sun,  1 Oct 2023 17:55:18 +0200 (CEST)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E83D786DA8
- for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 17:55:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E945586EC6
+ for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 17:55:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5a21ea6baccso43703697b3.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 08:55:10 -0700 (PDT)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-d862533ea85so15943346276.0
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 08:55:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696175709; x=1696780509; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1696175714; x=1696780514; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=y3gvu27dtSUaTE8nDX6OjbLA/wyLqgMvGRtmb/e/fNI=;
- b=cixoMvrMNx6dQryAF0j0w4IwBK5olVTjsG2ziL5eA8CyWLO/TIYs4ouT2vjJE8uibU
- +RomN6BPGHxFtUqB93oYSEoa4o0fb/3x1mS2cP+R2HuEUaVSBdveAnAf4fLXDd6k/U4k
- e1TFJdKiv5VcD8OJyHaQY6QBq8KD0C5/Ef0e0=
+ bh=L5fMVNKDHS7PFK/f5Rwn5wqtoqk2hAoqn2hYR/uEzUs=;
+ b=rc/MfJSg6NV9qcrfzC7Ik3iyqQnnzXJ95whPYEprlG38rTFHeYXfGvR9CyHFs/Xy7F
+ k+bAA++ftvie/j5J025S3UEvQAnLVag3Vtcc/AIq9qpf+rNk6P2kWH2ExJ6T0wbEXpzL
+ 9kbT+aRTVyxD5/Yp7km86VTWYCH50T/+rkUjE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696175709; x=1696780509;
+ d=1e100.net; s=20230601; t=1696175714; x=1696780514;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y3gvu27dtSUaTE8nDX6OjbLA/wyLqgMvGRtmb/e/fNI=;
- b=thf3Jp1IJkyAZDV1EnWqPfcNPmDdfeh0PMPo1jJfvDDi1rNh+VlpyLmnfi8RhdKWAG
- 99F53e5Km6J1ND7laG5Q16JX+7yonn8x3xyxKf9oLm0SGcFJAiIT9u3iZV/wqkb21hQc
- uCeYZnFFonpP92h6PxN1wGYq1VG3TB/+F3wE6BfZS8Neo08fvaKOQcAXsmHU0f3S73Rt
- lhgBBTZQ+RacsWP2sDTocGo3PP0+A0Y6MD80rw7UlIfy9uIdFHpAahthqC4RkEv62AN8
- f+BFh0wzl8F1e5jyV42SvLREobgfUuG1H1bukeYQ8Wl9b7C1npPJNTp6+dVu9/uWaFSr
- OCnA==
-X-Gm-Message-State: AOJu0YxRc7yi4utBm7e60k1k/UOZcUijQV3xLtmf7YuYNjJPG+QFj0AO
- T8FgqQ7CcsEsKGx6EWUEKnnE9Q==
-X-Google-Smtp-Source: AGHT+IFjeomkfxh68y6od3frqUIGBsyannO2bluVIgPRLfi2BZu9N5XS6xE3JWhSnUV8JvghzT+Nug==
-X-Received: by 2002:a81:a24e:0:b0:59b:5170:a0f3 with SMTP id
- z14-20020a81a24e000000b0059b5170a0f3mr9214819ywg.36.1696175709377; 
- Sun, 01 Oct 2023 08:55:09 -0700 (PDT)
+ bh=L5fMVNKDHS7PFK/f5Rwn5wqtoqk2hAoqn2hYR/uEzUs=;
+ b=gHpWUZ9BQe8K3vmJfqLj1+vtd117wjy/L+4146Sc1joc63m5mzXdWre+gP8FvJ2rIR
+ X2R++z8oBitMA6lIBUlGJ46fceSVErXv9rwq0+xT4wQ5gFRh5W0J+/1rrQOLtTlkvs0Z
+ vlnyXhMrf9K0sRlfkV/quhqHZ9yDD1E+jdwFLIqV3Dd/YgxthvYtPCpW4IahYnh7iHBX
+ mybJTRoPLPEe9PEUz7RyTPAn4dcoSy2Rikzt2wdXZsifRZ1BOXAN8cpsMkZzJtL9wcJv
+ 1jVqgsTvA7W5OMM2EBaLWyDY7Q9GUax8FHPcupdaAUFUuMhuBQKkzfUHkMSbsdK55c2D
+ 7fkQ==
+X-Gm-Message-State: AOJu0YwzymPPwWgj49mcbP8HE9Q8xEdSvZEZLYLkAURU7ROGoVZM3amM
+ 45sHAW+0BcRbMTtJ3veJ6kfJ7Q==
+X-Google-Smtp-Source: AGHT+IFi/aIFadL8m+CTfugkIPvcfJYPajW8Gv6obbSBYwOE7a7v7vSfNGBgxLQwAG/OjH7Q26zHhw==
+X-Received: by 2002:a25:e6c2:0:b0:d81:504f:f886 with SMTP id
+ d185-20020a25e6c2000000b00d81504ff886mr8524225ybh.13.1696175714667; 
+ Sun, 01 Oct 2023 08:55:14 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-13fb-ab5b-9ebe-9b3a.res6.spectrum.com.
  [2603:6081:7b00:6400:13fb:ab5b:9ebe:9b3a])
  by smtp.gmail.com with ESMTPSA id
- t8-20020a818308000000b0058ddb62f99bsm7122759ywf.38.2023.10.01.08.55.07
+ b15-20020a25ae8f000000b00d7481ed7e45sm6396315ybj.56.2023.10.01.08.55.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 08:55:08 -0700 (PDT)
-Date: Sun, 1 Oct 2023 11:55:06 -0400
+ Sun, 01 Oct 2023 08:55:14 -0700 (PDT)
+Date: Sun, 1 Oct 2023 11:55:12 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH] test: fix comment indentation  on tpm tests
-Message-ID: <20231001155506.GA2763665@bill-the-cat>
-References: <20230601061844.492923-1-ilias.apalodimas@linaro.org>
+To: Rong Tao <rtoax@foxmail.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Maxim Cournoyer <maxim.cournoyer@gmail.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Rong Tao <rongtao@cestc.cn>, open list <u-boot@lists.denx.de>
+Subject: Re: [PATCH] Adjust gitignore for /build
+Message-ID: <20231001155512.GB2763665@bill-the-cat>
+References: <tencent_055CBAA884BC568E56211618940881653D0A@qq.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="BQynD1lsZ8yIh/GN"
+ protocol="application/pgp-signature"; boundary="qx/AAgUxknvap8Du"
 Content-Disposition: inline
-In-Reply-To: <20230601061844.492923-1-ilias.apalodimas@linaro.org>
+In-Reply-To: <tencent_055CBAA884BC568E56211618940881653D0A@qq.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,16 +95,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---BQynD1lsZ8yIh/GN
+--qx/AAgUxknvap8Du
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jun 01, 2023 at 09:18:44AM +0300, Ilias Apalodimas wrote:
+On Mon, Sep 04, 2023 at 10:50:04AM +0800, Rong Tao wrote:
 
-> One out comments is off by one, adjust it
+> From: Rong Tao <rongtao@cestc.cn>
 >=20
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> /build-* can't ignore /build.
+>=20
+> Signed-off-by: Rong Tao <rongtao@cestc.cn>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/next, thanks!
@@ -109,22 +114,22 @@ Applied to u-boot/next, thanks!
 --=20
 Tom
 
---BQynD1lsZ8yIh/GN
+--qx/AAgUxknvap8Du
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUZllMACgkQFHw5/5Y0
-tyxTuAv+KaT4izuzBzIcrRjHzT5c5C2To3wwIfbDx6aCq6evX3gQ89QTZ3tYtYKs
-fS3OF6usWZooYla+1n9KYvK1uwvfSmeND0RYGVgtJZ8U8Uq+4iDLAKuFImaFfcKo
-JLA6GePav/C8HYLzLZTtoX4mVj09SO2pjyfHPSCNVa0YzetkKbz+wInfb+Al9Y3d
-Ngv4J8SPpNhKgIkjuwp6dp12ISw8VbQFIlMTw8ca+anBqiKoiAHoY/HHnwplMNh9
-hkK5BlbqfIaQYh09SSP+b9CkiEt6NOWiW/y74PUa5GPCJlLuHNFi96EwvcRPNEhe
-Dd46exGYwqBHc4r3s2+0oyg7E1Dpyi4iqKDyg5S4gFapYY+PqynaA1s2BDVgMAMh
-+cgccxLA2N8dDPZO7i3RQWbgWwp0NrqlhHvWYPho9Utk3tVwervteDXm/pI6cA+U
-QpkmhqL4fcqjnXI24EnqydWNrbOwaOn2joSas+fBacSO3OmIfUR57g4qQOaMIRsN
-nTE6Nj32
-=hKcn
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUZlmAACgkQFHw5/5Y0
+tyyB9Av/Yh+7LWK3GTvGUWErKcOQj65Ukcf0Bpp+dKqxie3IyY7CT8ZuARJtWkMl
+RiXscJWFm1UXu3PL4PgIvcEYTCUd1bLRMEl4KOkxlFzGEnlPXdgZX1JR/wjhLWtV
+MK3JIra1Khu7mDl8NH4U8VsD+nUM6CsFTBD/QXbEMm3GiSn8B66Ew6BMqEA1StQA
+J7ipPzhwfPMz00iGu0ZyEKrHQ+Os1NjAfyg/omKfK7VVfYuNekUBKyehiL48leoz
+vnxVug7GvCK5sfhhg4Q0mNnBTyXFGtg5OszqaxdYqbVSi4YvJXUEbpv8wrlhDjIK
+TNI8tBSGUqGgnzkJGYJlEPPxT7CwFpRo2OCX0XkP5SsuAv7+Um2XK0QakgP0g8sG
+6wj/B8cVl75+hKrLuVmq/zRGkXwi0d6eg+sS+keUP1EeoOgkcbDw9oFoxmPj9pSf
+MsfOq6mUuWFEqh/edXVDtM359To1OBapR+eyECtWDGKy/wGS9fT+sbqdTaHoEuoW
+coDGkAoN
+=KO8A
 -----END PGP SIGNATURE-----
 
---BQynD1lsZ8yIh/GN--
+--qx/AAgUxknvap8Du--
