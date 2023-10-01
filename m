@@ -4,77 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A7F7E748ED
-	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 15:55:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B960E748EE
+	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 15:55:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 549EB870B4;
-	Sun,  1 Oct 2023 17:55:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B5E508691E;
+	Sun,  1 Oct 2023 17:55:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XHdYpaQJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GdyNcAOg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4AA38646E; Sun,  1 Oct 2023 17:55:29 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id EB5F0870B9; Sun,  1 Oct 2023 17:55:38 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2FB886DA8
- for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 17:55:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 905E48646E
+ for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 17:55:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a200028437so64603997b3.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 08:55:27 -0700 (PDT)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-d8162698f0dso17559780276.0
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 08:55:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696175726; x=1696780526; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1696175734; x=1696780534; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Q+XvMF9CHtw1W1iW5FjHm2EM1j10i3MlPIQanmJZJn8=;
- b=XHdYpaQJd5wEmilIrGGUAB6Pqdks+n7o0elBJftZ2IFDMMVAonRWsBSw8xYcL3u7r7
- 1Gmbz4027LXRdfVmkODb8NDKmYkS3K2WqlEwCd4fCHQJuAcNxOlPc6WO90AZG58XhBQz
- Xky4aSjcMOcNF7k+bSTxK6WHZLm+PCChEDg08=
+ bh=IX9Y70tYWaNnXMCZn6h0hoL7MLzgiCUgipNgXp8396I=;
+ b=GdyNcAOg0b5BxpJ83j25omELm25MjLA2cuqQh8rGhU30WJ5o9/SntddM/6GgfRO8SX
+ Q3JD4/JxvLp1VCLRYAEtj6kL7tZRWKL+apdfoAmqBbxNBpiJ7/m9HekTY9PNauz2HWao
+ wdmAUJkhgFH1qJrhAAQlBlKBPou2f8Gkiv6Zg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696175726; x=1696780526;
+ d=1e100.net; s=20230601; t=1696175734; x=1696780534;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q+XvMF9CHtw1W1iW5FjHm2EM1j10i3MlPIQanmJZJn8=;
- b=lnJG3MwkMTqs/XDqKA9RY3BHWHgW1hZ4fUkUwt53ZqDaFsxZ0TlI112tYURSCCKPcj
- FGIoW+uLhnzpAzA8QcIASOx5RkzEQt3GthQRsUMLd/nR5/zsWUi5gRkA3A/VV3Wq9axV
- 3/TBjwoQOjlX9I5F2FciV1198YE4+IzakT7dP3ppwqgfLxFioQDFQH5BT+RK7jTdF5Fp
- LS0W2m1+L/wfpX5xI4ifDt4npWhLLZGy5Y2nCGCeV2VHfJL7+Ix6Z2rnghcqwaufiB1e
- CuA/09pGnP/EFXTnGJ64aljI3gUeW4r6wPu2pN+3D/FDRwYeq5/8lkn3RN4pK6lzqwfl
- BxKw==
-X-Gm-Message-State: AOJu0YycW0djU/Vhb3QhFDOjvyVWnvX9w8JgFNWAozNU+MXvdvYY3rYN
- clanVNM/QOwIkWuGPqasCKj6KA==
-X-Google-Smtp-Source: AGHT+IGe6FsNWbfnvfeqV96R5kwONfHcUPbb/8DmtpY1Tec8YId3fLAzo9wYOKPLZkPPLifB0JjiVw==
-X-Received: by 2002:a0d:dc47:0:b0:59b:c0a8:2882 with SMTP id
- f68-20020a0ddc47000000b0059bc0a82882mr8271222ywe.46.1696175726489; 
- Sun, 01 Oct 2023 08:55:26 -0700 (PDT)
+ bh=IX9Y70tYWaNnXMCZn6h0hoL7MLzgiCUgipNgXp8396I=;
+ b=Kag+4IgLImlJYi7uVZjDT5vLy3oQ1173ua3AtH6Cx78xhlyytY/00UKVHvlol0fYAA
+ 7A7JVmiaomnyAlHAygBXWAWNH1vKeOA0GeuC9KPxU1/4fYOowT/0pwneHwXj/cJI2iiY
+ 3+Iz0vT7S/OB4jtSlq97QoCALpp6Wl6DhiEPIUjmXn63iSeFr+IoIN5+A82iIUWIilWI
+ W0gZK9uCf8EQA2+iKI5pjaF3a6PWW5l1UG2KRcjGpE8JMPYf7VkZaAGtpWQNySftC75U
+ l9KiGxpDggfCkCFoNlDPSFK7nM+IsmpbaLt9hXBFg9V4lon1Uf/F//kl3h9ubhnuGpiJ
+ oSXA==
+X-Gm-Message-State: AOJu0YyIlhQK4Cqw1YNKPbJ5WZ3VcqeyRvvZUK6r0z7WOzXKm+KIjjrY
+ 3H0KF2/0+VP3O8ZHRWH1IVDuGw==
+X-Google-Smtp-Source: AGHT+IHgy+J+vWlb/N8MdxW+SMkrkTfXP/0hYuPSnUBfPgaeqp3313PEPWqqXKX4nJt//6NBEe7uYw==
+X-Received: by 2002:a25:6893:0:b0:d12:25d:fd60 with SMTP id
+ d141-20020a256893000000b00d12025dfd60mr8431588ybc.9.1696175734338; 
+ Sun, 01 Oct 2023 08:55:34 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-13fb-ab5b-9ebe-9b3a.res6.spectrum.com.
  [2603:6081:7b00:6400:13fb:ab5b:9ebe:9b3a])
  by smtp.gmail.com with ESMTPSA id
- hd10-20020a05690c488a00b0056d51c39c1fsm5428976ywb.23.2023.10.01.08.55.25
+ m17-20020a258011000000b00d85abbdc93esm6186721ybk.12.2023.10.01.08.55.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 08:55:25 -0700 (PDT)
-Date: Sun, 1 Oct 2023 11:55:23 -0400
+ Sun, 01 Oct 2023 08:55:33 -0700 (PDT)
+Date: Sun, 1 Oct 2023 11:55:31 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-Subject: Re: [PATCH v2] CI: allow jobs to be run in merge requests
-Message-ID: <20231001155523.GD2763665@bill-the-cat>
-References: <20230913141536.109844-1-andrejs.cainikovs@gmail.com>
+To: Jesse Taube <mr.bossman075@gmail.com>
+Cc: u-boot@lists.denx.de, "Andrew F . Davis" <afd@ti.com>,
+ Giulio Benetti <giulio.benetti@benettiengineering.com>,
+ Stefan Roese <sr@denx.de>, Weijie Gao <weijie.gao@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Mauro Condarelli <mc5686@mclink.it>, Simon Glass <sjg@chromium.org>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Michal Simek <michal.simek@amd.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Marek Vasut <marex@denx.de>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Roger Quadros <rogerq@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@gmail.com>
+Subject: Re: [PATCH v2] Convert CFG_SYS_UBOOT_START to Kconfig
+Message-ID: <20231001155531.GA2767539@bill-the-cat>
+References: <20230825015948.780662-1-Mr.Bossman075@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RlW3OGgpyHAqBuiZ"
+ protocol="application/pgp-signature"; boundary="fnHSK/A/uV+k2z0J"
 Content-Disposition: inline
-In-Reply-To: <20230913141536.109844-1-andrejs.cainikovs@gmail.com>
+In-Reply-To: <20230825015948.780662-1-Mr.Bossman075@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,46 +109,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RlW3OGgpyHAqBuiZ
+--fnHSK/A/uV+k2z0J
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 13, 2023 at 04:15:36PM +0200, Andrejs Cainikovs wrote:
+On Thu, Aug 24, 2023 at 09:59:48PM -0400, Jesse Taube wrote:
 
-> From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+> Commit 65cc0e2a65d2 ("global: Move remaining CONFIG_SYS_* to CFG_SYS_*")
+> renamed CONFIG_SYS_UBOOT_START to CFG_SYS_UBOOT_START. Unfortunately,
+> this meant that the value was no longer available to the Makefile. This
+> caused imxrt to fail to boot. All the other boards that used this
+> variable were unaffected because they were using the default value
+> which is CONFIG_TEXT_BASE.
 >=20
-> Out-of-tree users could run an out-of-tree CI with limited coverage,
-> however it is convenient to be able to run the upstream CI from time
-> to time. To enable that we would need to change job rules to be able
-> to run on any GitLab event. Excerpt from GitLab documentation:
+> This commit converts CFG_SYS_UBOOT_START to Kconfig and sets the default
+> value to CONFIG_TEXT_BASE.
 >=20
-> > Jobs with no rules default to except: merge_requests
->=20
-> Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+> Suggested-by: Marek Vasut <marek.vasut+renesas@gmail.com>
+> Suggested-by: Tom Rini <trini@konsulko.com>
+> Signed-off-by: Jesse Taube <Mr.Bossman075@gmail.com>
 > Reviewed-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---RlW3OGgpyHAqBuiZ
+--fnHSK/A/uV+k2z0J
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUZlmsACgkQFHw5/5Y0
-tyxdSQwApjlLqMwlAn9LawyyKuG5iHQGhiaSgs+3Jbjl5h0AKpiaGomMTn61G8LC
-7HwZohlkDBptTHLVUP545ukoCpLwklZmMMKSW2H10zP5foxvnC5lSEot+Uz6Lwqm
-krGEK05mJDvOwfUEM9SbB4eZgdGuIUzsIXgRP4FenFqAWqTXBdKk2e/Zg0AhvHM8
-d4Fc59f9eyfJvuc6H0UdD4gS1TWB+j9WMvbVJDwE/ptbZWECMwLTwvbE+L/fxz1g
-Ci7YlyRE/fr1RGPy9jhCL4qAMJ0wPHt4kWOrcN6jrDNrNyKw5uKYtYpkpfS+9lr4
-V+R4w2PpiW3uBfuShro/7h9pi/nwj9rNf1xDS6HllhropTNtu0DR5ZmaLlQ6eX0r
-1WZFzLckEToe/xJoypenPz5uVc2HSIqTRHaHgnW16J+9rj8zJIN0HuvDjhcNAlPf
-5d8YcILGiy08c2N6dKCdnib+JrCQtlAZ3MHykH7PgubXoxfZMLraUcIB1N9JDyD4
-vkqMJOXj
-=FO/1
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUZlnMACgkQFHw5/5Y0
+tywNQAwAoNh1zn/EC0SjA5KL6kYSn3O8vpGUFpCWnU+OjFE/rlteZHEgjwPSD8a0
+j9GekfiJ5BE6/J/0/Pb9XNxICFXVDYn1RGFeD0o+pnwlUpZaIRMzT4xH/sVluNld
+DG7oSTfD4HBnbPXF1UXi5dvA8qBvs42Wca/HE+fnTbIzfKLZ+MBrueOBwF4/Uiqs
+WExVENzfp3CScTQhNfRpFiah6zrvazQ+6AI5niT7tKN+nEHYUELcQ4a5S38a05wA
+hBFwD67ydavVGDo2XlSPGyHXhbgAybprpBiaAmHzG1ESKBOgYVIXixm7eLHChi7m
+ozyBEre8kr85QuwE5dDHeyITbNMCsHwoCFa62JqdBzJj/6qcyVuN1VOVwa8M7KUL
+O+MpJ/IpMjKu4rO2Oztvz2GBaqK7wt1ny02NuTyXVxnr/f7NP5Av6vPyxrolUk5p
+l50QDJgxxlzZ/BqhFTTFV5qQyv8vkMROOTFheMofepWnKNfCVklAqFbFRW5eSm5k
+OetUqQar
+=fKMU
 -----END PGP SIGNATURE-----
 
---RlW3OGgpyHAqBuiZ--
+--fnHSK/A/uV+k2z0J--
