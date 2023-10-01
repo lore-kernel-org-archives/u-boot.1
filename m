@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8EC6EE78480
-	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 19:18:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4775BE78482
+	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 19:18:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 119B6870C1;
-	Sun,  1 Oct 2023 21:18:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 74CAE870FA;
+	Sun,  1 Oct 2023 21:18:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="EzWaUnpm";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tskVGJ+6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 261ED870F1; Sun,  1 Oct 2023 21:18:11 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 22E0D870F0; Sun,  1 Oct 2023 21:18:14 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6707870E5
- for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 21:18:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A37A6870F7
+ for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 21:18:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,24 +28,25 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1696187882; bh=0BIsu3F8LHHVfoel640m6D1NetaISz9T6aZG0/L/4Rg=;
- b=EzWaUnpmTsNCOJ/+3jK2kFk8VERU+QbuQMfcI6xfny91nlrslnkPBRxfmFkv6qSgUzuF7jIf7
- lyPYWrmp+ACpivHGz8TXCnmSCWExpNSzznTP3LqiYNgC7GwbunsT64RuI1vW96lTEsOgI0EDETt
- AEpm56SWZUd03seUKD417FZcZuqYtrbuBcmdGSMwo2OB5FFWpNRj62rNdGVDGy/WAvwkS0C1CwW
- xeSOi0PdboZXwdpV3tCixPcMKNUZRSE3kO7OdbM1B7AI0yRhY/1qKl+bnRdoTMhSYbbmdsgAaXU
- 0FkdG+8HycoIMOWtayz9J8VhIZbl4hcARXbiZwcx1YjQ==
+ t=1696187874; bh=IDwyihgUAY8PmLl13KuFUAJmUCmFZ2kV9XKu17waHVY=;
+ b=tskVGJ+65NfqP6fUKC9AI7WcZ/yikg/vvNxCxWmWWgoGC39yFJaNbTTS8gWY3XqmU0codcUHz
+ iBD0y6HRGRakNu0aj+xaNxh82vtJ5/AuYB5SagAMZzgU+lDYQIvVRg8g49lrYW8bSfL2/01C4J8
+ 5CIIQY0iYzVLxqTeIoRjUE1fV9mxaBeXFziabZEL9SRTUglgzkfwQ94qZJrpc015/5nQXNaHpFX
+ 3XZPwOEqMsVsiR/5v9Ju1NXL1oHfPJ949UFkmUf7XLn70DTPvHEOxVQk9x2iao9CXT8UG4H/ANU
+ l0lhM1EIfB8AnEuWe2Asg6ojVrm/ZLtU9nQhqbOJX29A==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Jagan Teki <jagan@edgeble.ai>,
- Eugen Hristev <eugen.hristev@collabora.com>, Jonas Karlman
- <jonas@kwiboo.se>
-Cc: David Wu <david.wu@rock-chips.com>, Frank Wunderlich
- <frank-w@public-files.de>, Nicolas Frattaroli
- <frattaroli.nicolas@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 7/7] configs: rockchip: Enable ethernet driver on RK3588
- boards
-Date: Sun,  1 Oct 2023 19:17:22 +0000
-Message-ID: <20231001191730.4167035-8-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Joe Hershberger
+ <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Cc: David Wu <david.wu@rock-chips.com>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Frank Wunderlich <frank-w@public-files.de>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, u-boot@lists.denx.de,
+ Jonas Karlman <jonas@kwiboo.se>, Sebastian Reichel
+ <sebastian.reichel@collabora.com>, Benjamin Gaignard
+ <benjamin.gaignard@collabora.com>
+Subject: [PATCH v2 5/7] net: dwc_eth_qos_rockchip: Add support for RK3588
+Date: Sun,  1 Oct 2023 19:17:20 +0000
+Message-ID: <20231001191730.4167035-6-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231001191730.4167035-1-jonas@kwiboo.se>
 References: <20231001191730.4167035-1-jonas@kwiboo.se>
@@ -56,8 +57,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6519c5e925909c3c56c79dd7
+ 167.172.40.54
+X-ForwardEmail-ID: 6519c5e125909c3c56c79dbd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,98 +75,294 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable DWC_ETH_QOS_ROCKCHIP and related PHY driver on RK3588 boards that
-have an enabled gmac node and drop ETH_DESIGNWARE and GMAC_ROCKCHIP for
-remaining RK3588 boards.
+Add rk_gmac_ops and other special handling that is needed for GMAC to
+work on RK3588.
+
+rk_gmac_ops was ported from linux commits:
+2f2b60a0ec28 ("net: ethernet: stmmac: dwmac-rk: Add gmac support for rk3588")
+88619e77b33d ("net: stmmac: rk3588: Allow multiple gmac controller")
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
+Cc: David Wu <david.wu@rock-chips.com>
+Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Benjamin Gaignard <benjamin.gaignard@collabora.com>
+---
 v2:
 - Collect r-b tag
-- Remove already meged rock5a-rk3588s_defconfig change
-- Add rock5b-rk3588_defconfig changes
 
- configs/evb-rk3588_defconfig      | 5 +++--
- configs/neu6a-io-rk3588_defconfig | 2 --
- configs/neu6b-io-rk3588_defconfig | 2 --
- configs/rock5a-rk3588s_defconfig  | 5 +++--
- configs/rock5b-rk3588_defconfig   | 3 +--
- 5 files changed, 7 insertions(+), 10 deletions(-)
+ drivers/net/dwc_eth_qos.c          |   4 +
+ drivers/net/dwc_eth_qos_rockchip.c | 182 ++++++++++++++++++++++++++++-
+ 2 files changed, 182 insertions(+), 4 deletions(-)
 
-diff --git a/configs/evb-rk3588_defconfig b/configs/evb-rk3588_defconfig
-index f49c2ca686a8..0b7b4f2f627a 100644
---- a/configs/evb-rk3588_defconfig
-+++ b/configs/evb-rk3588_defconfig
-@@ -58,8 +58,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
--CONFIG_ETH_DESIGNWARE=y
--CONFIG_GMAC_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_SPL_RAM=y
-diff --git a/configs/neu6a-io-rk3588_defconfig b/configs/neu6a-io-rk3588_defconfig
-index 09729a0ea429..d5301c630b2a 100644
---- a/configs/neu6a-io-rk3588_defconfig
-+++ b/configs/neu6a-io-rk3588_defconfig
-@@ -53,8 +53,6 @@ CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
--CONFIG_ETH_DESIGNWARE=y
--CONFIG_GMAC_ROCKCHIP=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_SPL_RAM=y
-diff --git a/configs/neu6b-io-rk3588_defconfig b/configs/neu6b-io-rk3588_defconfig
-index c7bc3b1965f0..b13c9b5db1b0 100644
---- a/configs/neu6b-io-rk3588_defconfig
-+++ b/configs/neu6b-io-rk3588_defconfig
-@@ -53,8 +53,6 @@ CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
--CONFIG_ETH_DESIGNWARE=y
--CONFIG_GMAC_ROCKCHIP=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_SPL_RAM=y
-diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
-index 39e352509a5c..bccdb1e3ecd6 100644
---- a/configs/rock5a-rk3588s_defconfig
-+++ b/configs/rock5a-rk3588s_defconfig
-@@ -58,8 +58,9 @@ CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
--CONFIG_ETH_DESIGNWARE=y
--CONFIG_GMAC_ROCKCHIP=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_ROCKCHIP=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_PWM_ROCKCHIP=y
-diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-index 3fa65cbf9b07..6428aab42033 100644
---- a/configs/rock5b-rk3588_defconfig
-+++ b/configs/rock5b-rk3588_defconfig
-@@ -78,9 +78,8 @@ CONFIG_SF_DEFAULT_BUS=5
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPI_FLASH_MACRONIX=y
- CONFIG_SPI_FLASH_XTX=y
--CONFIG_ETH_DESIGNWARE=y
-+CONFIG_PHYLIB=y
- CONFIG_RTL8169=y
--CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PCIE_DW_ROCKCHIP=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 9fb98a2c3c74..dc04416865dd 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1712,6 +1712,10 @@ static const struct udevice_id eqos_ids[] = {
+ 		.compatible = "rockchip,rk3568-gmac",
+ 		.data = (ulong)&eqos_rockchip_config
+ 	},
++	{
++		.compatible = "rockchip,rk3588-gmac",
++		.data = (ulong)&eqos_rockchip_config
++	},
+ #endif
+ #if IS_ENABLED(CONFIG_DWC_ETH_QOS_QCOM)
+ 	{
+diff --git a/drivers/net/dwc_eth_qos_rockchip.c b/drivers/net/dwc_eth_qos_rockchip.c
+index 05edc098f50d..20fd3a25c3dd 100644
+--- a/drivers/net/dwc_eth_qos_rockchip.c
++++ b/drivers/net/dwc_eth_qos_rockchip.c
+@@ -28,6 +28,7 @@ struct rk_gmac_ops {
+ 			    int tx_delay, int rx_delay);
+ 	int (*set_to_rmii)(struct udevice *dev);
+ 	int (*set_gmac_speed)(struct udevice *dev);
++	void (*set_clock_selection)(struct udevice *dev, bool enable);
+ 	u32 regs[3];
+ };
+ 
+@@ -35,7 +36,9 @@ struct rockchip_platform_data {
+ 	struct reset_ctl_bulk resets;
+ 	const struct rk_gmac_ops *ops;
+ 	int id;
++	bool clock_input;
+ 	struct regmap *grf;
++	struct regmap *php_grf;
+ };
+ 
+ #define HIWORD_UPDATE(val, mask, shift) \
+@@ -129,6 +132,137 @@ static int rk3568_set_gmac_speed(struct udevice *dev)
+ 	return 0;
+ }
+ 
++/* sys_grf */
++#define RK3588_GRF_GMAC_CON7			0x031c
++#define RK3588_GRF_GMAC_CON8			0x0320
++#define RK3588_GRF_GMAC_CON9			0x0324
++
++#define RK3588_GMAC_RXCLK_DLY_ENABLE(id)	GRF_BIT(2 * (id) + 3)
++#define RK3588_GMAC_RXCLK_DLY_DISABLE(id)	GRF_CLR_BIT(2 * (id) + 3)
++#define RK3588_GMAC_TXCLK_DLY_ENABLE(id)	GRF_BIT(2 * (id) + 2)
++#define RK3588_GMAC_TXCLK_DLY_DISABLE(id)	GRF_CLR_BIT(2 * (id) + 2)
++
++#define RK3588_GMAC_CLK_RX_DL_CFG(val)		HIWORD_UPDATE(val, 0xFF, 8)
++#define RK3588_GMAC_CLK_TX_DL_CFG(val)		HIWORD_UPDATE(val, 0xFF, 0)
++
++/* php_grf */
++#define RK3588_GRF_GMAC_CON0			0x0008
++#define RK3588_GRF_CLK_CON1			0x0070
++
++#define RK3588_GMAC_PHY_INTF_SEL_RGMII(id)	\
++	(GRF_BIT(3 + (id) * 6) | GRF_CLR_BIT(4 + (id) * 6) | GRF_CLR_BIT(5 + (id) * 6))
++#define RK3588_GMAC_PHY_INTF_SEL_RMII(id)	\
++	(GRF_CLR_BIT(3 + (id) * 6) | GRF_CLR_BIT(4 + (id) * 6) | GRF_BIT(5 + (id) * 6))
++
++#define RK3588_GMAC_CLK_RMII_MODE(id)		GRF_BIT(5 * (id))
++#define RK3588_GMAC_CLK_RGMII_MODE(id)		GRF_CLR_BIT(5 * (id))
++
++#define RK3588_GMAC_CLK_SELET_CRU(id)		GRF_BIT(5 * (id) + 4)
++#define RK3588_GMAC_CLK_SELET_IO(id)		GRF_CLR_BIT(5 * (id) + 4)
++
++#define RK3588_GMAC_CLK_RMII_DIV2(id)		GRF_BIT(5 * (id) + 2)
++#define RK3588_GMAC_CLK_RMII_DIV20(id)		GRF_CLR_BIT(5 * (id) + 2)
++
++#define RK3588_GMAC_CLK_RGMII_DIV1(id)		\
++			(GRF_CLR_BIT(5 * (id) + 2) | GRF_CLR_BIT(5 * (id) + 3))
++#define RK3588_GMAC_CLK_RGMII_DIV5(id)		\
++			(GRF_BIT(5 * (id) + 2) | GRF_BIT(5 * (id) + 3))
++#define RK3588_GMAC_CLK_RGMII_DIV50(id)		\
++			(GRF_CLR_BIT(5 * (id) + 2) | GRF_BIT(5 * (id) + 3))
++
++#define RK3588_GMAC_CLK_RMII_GATE(id)		GRF_BIT(5 * (id) + 1)
++#define RK3588_GMAC_CLK_RMII_NOGATE(id)		GRF_CLR_BIT(5 * (id) + 1)
++
++static int rk3588_set_to_rgmii(struct udevice *dev,
++			       int tx_delay, int rx_delay)
++{
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct rockchip_platform_data *data = pdata->priv_pdata;
++	u32 offset_con, id = data->id;
++
++	offset_con = data->id == 1 ? RK3588_GRF_GMAC_CON9 :
++				     RK3588_GRF_GMAC_CON8;
++
++	regmap_write(data->php_grf, RK3588_GRF_GMAC_CON0,
++		     RK3588_GMAC_PHY_INTF_SEL_RGMII(id));
++
++	regmap_write(data->php_grf, RK3588_GRF_CLK_CON1,
++		     RK3588_GMAC_CLK_RGMII_MODE(id));
++
++	regmap_write(data->grf, RK3588_GRF_GMAC_CON7,
++		     RK3588_GMAC_RXCLK_DLY_ENABLE(id) |
++		     RK3588_GMAC_TXCLK_DLY_ENABLE(id));
++
++	regmap_write(data->grf, offset_con,
++		     RK3588_GMAC_CLK_RX_DL_CFG(rx_delay) |
++		     RK3588_GMAC_CLK_TX_DL_CFG(tx_delay));
++
++	return 0;
++}
++
++static int rk3588_set_to_rmii(struct udevice *dev)
++{
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct rockchip_platform_data *data = pdata->priv_pdata;
++
++	regmap_write(data->php_grf, RK3588_GRF_GMAC_CON0,
++		     RK3588_GMAC_PHY_INTF_SEL_RMII(data->id));
++
++	regmap_write(data->php_grf, RK3588_GRF_CLK_CON1,
++		     RK3588_GMAC_CLK_RMII_MODE(data->id));
++
++	return 0;
++}
++
++static int rk3588_set_gmac_speed(struct udevice *dev)
++{
++	struct eqos_priv *eqos = dev_get_priv(dev);
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct rockchip_platform_data *data = pdata->priv_pdata;
++	u32 val = 0, id = data->id;
++
++	switch (eqos->phy->speed) {
++	case SPEED_10:
++		if (pdata->phy_interface == PHY_INTERFACE_MODE_RMII)
++			val = RK3588_GMAC_CLK_RMII_DIV20(id);
++		else
++			val = RK3588_GMAC_CLK_RGMII_DIV50(id);
++		break;
++	case SPEED_100:
++		if (pdata->phy_interface == PHY_INTERFACE_MODE_RMII)
++			val = RK3588_GMAC_CLK_RMII_DIV2(id);
++		else
++			val = RK3588_GMAC_CLK_RGMII_DIV5(id);
++		break;
++	case SPEED_1000:
++		if (pdata->phy_interface != PHY_INTERFACE_MODE_RMII)
++			val = RK3588_GMAC_CLK_RGMII_DIV1(id);
++		else
++			return -EINVAL;
++		break;
++	default:
++		return -EINVAL;
++	}
++
++	regmap_write(data->php_grf, RK3588_GRF_CLK_CON1, val);
++
++	return 0;
++}
++
++static void rk3588_set_clock_selection(struct udevice *dev, bool enable)
++{
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct rockchip_platform_data *data = pdata->priv_pdata;
++
++	u32 val = data->clock_input ? RK3588_GMAC_CLK_SELET_IO(data->id) :
++				      RK3588_GMAC_CLK_SELET_CRU(data->id);
++
++	val |= enable ? RK3588_GMAC_CLK_RMII_NOGATE(data->id) :
++			RK3588_GMAC_CLK_RMII_GATE(data->id);
++
++	regmap_write(data->php_grf, RK3588_GRF_CLK_CON1, val);
++}
++
+ static const struct rk_gmac_ops rk_gmac_ops[] = {
+ 	{
+ 		.compatible = "rockchip,rk3568-gmac",
+@@ -141,6 +275,18 @@ static const struct rk_gmac_ops rk_gmac_ops[] = {
+ 			0x0, /* sentinel */
+ 		},
+ 	},
++	{
++		.compatible = "rockchip,rk3588-gmac",
++		.set_to_rgmii = rk3588_set_to_rgmii,
++		.set_to_rmii = rk3588_set_to_rmii,
++		.set_gmac_speed = rk3588_set_gmac_speed,
++		.set_clock_selection = rk3588_set_clock_selection,
++		.regs = {
++			0xfe1b0000, /* gmac0 */
++			0xfe1c0000, /* gmac1 */
++			0x0, /* sentinel */
++		},
++	},
+ 	{ }
+ };
+ 
+@@ -162,6 +308,7 @@ static int eqos_probe_resources_rk(struct udevice *dev)
+ 	struct eqos_priv *eqos = dev_get_priv(dev);
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+ 	struct rockchip_platform_data *data;
++	const char *clock_in_out;
+ 	int reset_flags = GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE;
+ 	int ret;
+ 
+@@ -199,6 +346,16 @@ static int eqos_probe_resources_rk(struct udevice *dev)
+ 		goto err_free;
+ 	}
+ 
++	if (device_is_compatible(dev, "rockchip,rk3588-gmac")) {
++		data->php_grf =
++			syscon_regmap_lookup_by_phandle(dev, "rockchip,php-grf");
++		if (IS_ERR(data->php_grf)) {
++			dev_err(dev, "Missing rockchip,php-grf property\n");
++			ret = -EINVAL;
++			goto err_free;
++		}
++	}
++
+ 	ret = reset_get_bulk(dev, &data->resets);
+ 	if (ret < 0)
+ 		goto err_free;
+@@ -211,12 +368,20 @@ static int eqos_probe_resources_rk(struct udevice *dev)
+ 		goto err_release_resets;
+ 	}
+ 
+-	ret = clk_get_by_name(dev, "clk_mac_speed", &eqos->clk_tx);
+-	if (ret) {
+-		dev_dbg(dev, "clk_get_by_name(clk_mac_speed) failed: %d", ret);
+-		goto err_free_clk_master_bus;
++	if (device_is_compatible(dev, "rockchip,rk3568-gmac")) {
++		ret = clk_get_by_name(dev, "clk_mac_speed", &eqos->clk_tx);
++		if (ret) {
++			dev_dbg(dev, "clk_get_by_name(clk_mac_speed) failed: %d", ret);
++			goto err_free_clk_master_bus;
++		}
+ 	}
+ 
++	clock_in_out = dev_read_string(dev, "clock_in_out");
++	if (clock_in_out && !strcmp(clock_in_out, "input"))
++		data->clock_input = true;
++	else
++		data->clock_input = false;
++
+ 	/* snps,reset props are deprecated, do bare minimum to support them */
+ 	if (dev_read_bool(dev, "snps,reset-active-low"))
+ 		reset_flags |= GPIOD_ACTIVE_LOW;
+@@ -273,6 +438,12 @@ static int eqos_start_resets_rk(struct udevice *dev)
+ 
+ static int eqos_stop_clks_rk(struct udevice *dev)
+ {
++	struct eth_pdata *pdata = dev_get_plat(dev);
++	struct rockchip_platform_data *data = pdata->priv_pdata;
++
++	if (data->ops->set_clock_selection)
++		data->ops->set_clock_selection(dev, false);
++
+ 	return 0;
+ }
+ 
+@@ -293,6 +464,9 @@ static int eqos_start_clks_rk(struct udevice *dev)
+ 		udelay(eqos->reset_delays[2]);
+ 	}
+ 
++	if (data->ops->set_clock_selection)
++		data->ops->set_clock_selection(dev, true);
++
+ 	tx_delay = dev_read_u32_default(dev, "tx_delay", 0x30);
+ 	rx_delay = dev_read_u32_default(dev, "rx_delay", 0x10);
+ 
 -- 
 2.42.0
 
