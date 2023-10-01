@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A38BE748ED
-	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 13:29:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ABBBE748E9
+	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 13:50:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2115486EF1;
-	Sun,  1 Oct 2023 15:29:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A4AF186A94;
+	Sun,  1 Oct 2023 15:50:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VM6TIzHB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M4kmxmqz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA09B870A6; Sun,  1 Oct 2023 15:29:04 +0200 (CEST)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id 619D186A94; Sun,  1 Oct 2023 15:50:47 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C3B786DFF
- for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 15:29:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4026386A88
+ for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 15:50:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-d8164e661abso17380981276.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 06:29:02 -0700 (PDT)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-59bf1dde73fso195296537b3.3
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 06:50:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696166941; x=1696771741; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696168244; x=1696773044; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=mNpiMl/CUZvZKkI14tIvWy/MkH7szYQdXIF95nICbJM=;
- b=VM6TIzHBaWFmpZfGyK7lUxtYJfzwwHO8fknzKUfjpm+ylpyEQpE+YA6HIydLWDDE4s
- llXzUazLCvzGy8AE9YJEMttzmxMXW4eYyseLOVtpuJ7CPjvk94hihjkzi4OOMFOoIsm4
- nQReO5SEUxwwTu0iHlMYanU9Bh2ZqC1njQ64cq0JGQICuA/zDQNASUvwo3N49Vczg2Ba
- yqoSAe1IDUbZmkqkvbqwM1ohoaKNq1bqdlMdWzuHoOLkdfjx5w4KfntJcplZ5EWFzfs+
- a8I/QRLOfKj4rP/iQr0FugKdixDLAvREm8YsXWsvQfiyeS+uCjqvzE0Ms+XMXDFeP4b+
- 490g==
+ bh=StVc46aKGYrA0NuQ2dGnkm5uANxlWZ5P7yPK595+afw=;
+ b=M4kmxmqzmnKm8ELGNV2MytRBUrnYyRfjsIvClyaunuHOh3WmgiKDdhdVzrStjb9c4z
+ 5ed8TriDmkPm4XPocMwbaI3RaE4XXcNVaklpkAtuYx0u46XVm2GufIy+aG5Zm6mNmDYO
+ MNo3QY8TtsISxpJmZEo+7s5qAlBG9kxDOnROjvgw31NQa9pFTzHihDHX4GFiIUb/W7LC
+ J0TYFSpinfNb6Er34yIkje0T6DzCoHgEayQ1GoHymLJZYMiOold+b0S8btvLNspFqy7Q
+ Mjhs4K8QlolfY2k5JQ5NTp95GqJf6huksAT+WYK6pcmZ1u4CjhhM1IZ5Do0yEnkbzoLe
+ dRkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696166941; x=1696771741;
+ d=1e100.net; s=20230601; t=1696168244; x=1696773044;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=mNpiMl/CUZvZKkI14tIvWy/MkH7szYQdXIF95nICbJM=;
- b=o2pR1G8yzMKEtQz7hXCn4LEtL6vqEZ7jfZXZQWOlscT9mGrzQgA6gwtVrwCImHZWWr
- aWGP1fJ8XqzY4ZZsplg4CfcXbap4MDyLBc3m1Ws/cUeb6hf1JeRzm3Iv/6iZ+AUX52gg
- Xn7GXwkq7Z1KV/NbL0kdebIQxsI1P54EyLocXkd+mU6G98ldS5dZZ/WnIgilk3V0fG7u
- tjsBtgaWVFCP8bwMR3teG/FUId6xAQdKfNEAsAOUELeK2ruFEz1xRCB3ddMoHPYdRBGm
- 7EIf6uxNSK9cN4Lcy88zAB+9dJfXDNBBUcvZpyX97Sdy5P5Jq4HZSunt3eKcrL9Wgbwo
- vh5Q==
-X-Gm-Message-State: AOJu0YwbOxqJ3MZgnwHYzWBbMdue3nE6YqEY97vmQ6P6CG9bxGBfD6WZ
- 1Z1ZN25SLd648p10n3RkaTltlqkeTJJsL5itxO0=
-X-Google-Smtp-Source: AGHT+IHi6rM4OL4thcJriHpv+com1FaHdoySK8qUPvU3m78teh8qkg0up5uQeVcTClvyNTq8VXZnEFajEHUq1CKs9q8=
-X-Received: by 2002:a25:403:0:b0:d7f:cdc8:e184 with SMTP id
- 3-20020a250403000000b00d7fcdc8e184mr9040745ybe.49.1696166940965; Sun, 01 Oct
- 2023 06:29:00 -0700 (PDT)
+ bh=StVc46aKGYrA0NuQ2dGnkm5uANxlWZ5P7yPK595+afw=;
+ b=myJN/e7yl1clIgYU8cFK5EPody0gT26BkcqzAoJvFhKrysPIeDXHxy11PzY0Lwu2ht
+ lAItqFV0nmmoF9k2L43nFzmx+oXPlOwg/BDrhSkvgPrs1RZ2HaS0+NRQjPmIqFjHjoLT
+ eAzR47wPft72uwJMsVfUZArI+gWAtDUqIsxyeaQEnhuveW1bxRQzy8Vj1rQTjbLLxKqr
+ aGP6V6drbzxf/QF3KP9gVfcgb/Q4vNCHWXtHG8Vbh5a4rAAQPepQKIerUXem8p8jr4et
+ m7bVJqQkHYdwBsDVwVJBXyyPvxk6jzK/cDgKaCoISC6Eu6XmhD6JZF5VV9shH6AgMc2+
+ mhUw==
+X-Gm-Message-State: AOJu0YzFEj7IOig8nlCnlkSAQ+SLdmbBpkeyk8l9a8cI+r6Wknxm+/O8
+ n1z9/f+SqQ/XoH/w3v5uEUGa62PpXEszoQmiCsA=
+X-Google-Smtp-Source: AGHT+IGe+lVqWtTvKrhjDTQJE3MPf4poapIeLgXMH69GICwkSaxcUSI9A9XRYvBT1oTIyNKmOa4QMXdaAAHotoCGPeA=
+X-Received: by 2002:a25:eb11:0:b0:d90:a7a4:7093 with SMTP id
+ d17-20020a25eb11000000b00d90a7a47093mr1789994ybs.55.1696168243890; Sun, 01
+ Oct 2023 06:50:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230820220316.3517102-1-jonas@kwiboo.se>
- <05a3d9d4-cdcd-4145-aece-727f14a7efb3@kernel.org>
- <6087c770-4802-5c2f-322a-18eab9940a1e@kwiboo.se>
- <b258db08-c49b-4381-8265-7d49b41e0d00@kernel.org>
-In-Reply-To: <b258db08-c49b-4381-8265-7d49b41e0d00@kernel.org>
+References: <20230902171507.351774-1-massimo.pegorer+oss@gmail.com>
+ <bf49eebf-6a7e-555b-cf84-d96d9df8a32e@rock-chips.com>
+In-Reply-To: <bf49eebf-6a7e-555b-cf84-d96d9df8a32e@rock-chips.com>
 From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
-Date: Sun, 1 Oct 2023 15:28:47 +0200
-Message-ID: <CAC928HY2rZoz6L8za+L20GAsbJCBYOe+k75L_N3aE-78smnLfg@mail.gmail.com>
-Subject: Re: [PATCH v2] dm: core: Report bootph-pre-ram/sram node as pre-reloc
- after relocation : regression
-To: Roger Quadros <rogerq@kernel.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, 
- Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de,
- "Andrew F. Davis" <afd@ti.com>, 
- "Berard, Brian" <bberard@ti.com>, "Bajjuri, Praneeth" <praneeth@ti.com>
+Date: Sun, 1 Oct 2023 15:50:31 +0200
+Message-ID: <CAC928HZEY0jO+n60D5FizUU+C0FeyKWVGRn1Rav2TAm-1Od6VA@mail.gmail.com>
+Subject: Re: [PATCH 2/2] configs: rockchip: add DOS_PARTITION to RK3308 boards
+ defconfig
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de, Akash Gajjar <gajjar04akash@gmail.com>, 
+ Andy Yan <andy.yan@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>, 
+ Jayantajit Gogoi <jayanta.gogoi525@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,171 +88,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Il giorno ven 29 set 2023 alle ore 13:23 Roger Quadros
-<rogerq@kernel.org> ha scritto:
->
->
->
-> On 28/09/2023 22:18, Jonas Karlman wrote:
-> > Hi Roger,
-> >
-> > On 2023-09-28 14:59, Roger Quadros wrote:
-> >> Hi,
-> >>
-> >> On 21/08/2023 01:03, Jonas Karlman wrote:
-> >>> Nodes with bootph-pre-sram/ram props are bound in multiple phases:
-> >>> 1. At TPL (bootph-pre-sram) or SPL (bootph-pre-ram) phase
-> >>> 2. At U-Boot proper pre-relocation phase
-> >>> 3. At U-Boot proper normal phase
-> >>>
-> >>> However the binding and U-Boot Driver Model documentation indicate that
-> >>> only nodes marked with bootph-all or bootph-some-ram should be bound in
-> >>> the U-Boot proper pre-relocation phase.
-> >>>
-> >>> Change ofnode_pre_reloc to report a node with bootph-pre-ram/sram prop
-> >>> with a pre-reloc status only after U-Boot proper pre-relocation phase.
-> >>> Also update the ofnode_pre_reloc documentation to closer reflect the
-> >>> binding and driver model documentation.
-> >>>
-> >>> This changes behavior of what nodes are bound in the U-Boot proper
-> >>> pre-relocation phase. Change to bootph-all or add bootph-some-ram prop
-> >>> to restore prior behavior.
-> >>>
-> >>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> >>> Reviewed-by: Simon Glass <sjg@chromium.org>
-> >>> ---
-> >>> Changes in v2:
-> >>> - Drop use of !! to convert into bool
-> >>> - Update documentation for ofnode_pre_reloc
-> >>> - Rewrite commit message
-> >>> - Collect r-b tag
-> >>
-> >> This patch breaks boot on AM642-EVM. Boot log at the end.
-> >
-> > From what I can tell your board use a lot of bootph-pre-ram.
-> > https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-> >
-> > What happens if you change to bootph-all or add bootph-some-ram next to
-> > bootph-pre-ram on devices that is also needed in U-Boot proper
-> > pre-relocation phase in addition to SPL phase?
->
-> Then it works.
->
-> BTW, AM62-SK is broken as well and I suppose most K3 TI boards would be broken.
->
-> Nishanth / Tom,
->
-> What approach to take here?
-> Replacing bootph-pre-ram to bootph-all in *-u-boot.dtsi would be a quick fix.
+Hi Kever,
 
-An exact quick fix is to add bootph-some-ram next to bootph-pre-ram:
-this will have the same effects of bootph-pre-ram before the patch.
-Instead, replacing bootph-pre-ram with bootph-all will affect also
-other boot phases (e.g. TPL) if any.
+Il giorno mer 27 set 2023 alle ore 05:10 Kever Yang
+<kever.yang@rock-chips.com> ha scritto:
+>
+> Hi Massimo,
+>
+>      This patch is fine to me, but you can merge these two patch into
+> one, because they
+>
+> are all rk3308 boards.
+
+OK, I will merge them in a single v2 patch. Thanks.
+
+I had split them because I had chance to test it only on rock-pi-s, so
+I was not sure everybody would have agreed to change also evb and
+firefly boards defconfigs.
 
 Regards,
 Massimo
 
-> Then we need to mark nodes required only for SPL as bootph-pre-ram.
 >
-> Meanwhile I will suggest to revert the $subject patch till this is sorted out
-> and gets a Ack from board maintainers.
+>      And if you have more than one patch, it'd better to use
+> --in-reply-to for follow up patches
 >
-> cheers,
-> -roger
+> so that the mail system know this is a patch set and grab them together.
 >
+>
+> Thanks,
+>
+> - Kever
+>
+> On 2023/9/3 01:15, Massimo Pegorer wrote:
+> > Without DOS_PARTITION support U-Boot is not able to boot an OS stored
+> > into an SD card with MBR partitions table. This is still a quite common
+> > case, so add DOS_PARTITION (only for U-Boot proper build) to Rockchip
+> > RK3308 EVB and Firefly roc-rk3308-cc board: they are the only RK boards
+> > missing of DOS_PARTITION.
 > >
-> > Regards,
-> > Jonas
+> > Signed-off-by: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+> > ---
+> >   configs/evb-rk3308_defconfig    | 2 +-
+> >   configs/roc-cc-rk3308_defconfig | 2 +-
+> >   2 files changed, 2 insertions(+), 2 deletions(-)
 > >
-> >>
-> >>>
-> >>>  drivers/core/ofnode.c | 2 +-
-> >>>  include/dm/ofnode.h   | 8 ++++----
-> >>>  2 files changed, 5 insertions(+), 5 deletions(-)
-> >>>
-> >>> diff --git a/drivers/core/ofnode.c b/drivers/core/ofnode.c
-> >>> index 8df16e56af5c..b1e94b2d60df 100644
-> >>> --- a/drivers/core/ofnode.c
-> >>> +++ b/drivers/core/ofnode.c
-> >>> @@ -1353,7 +1353,7 @@ bool ofnode_pre_reloc(ofnode node)
-> >>>      */
-> >>>     if (ofnode_read_bool(node, "bootph-pre-ram") ||
-> >>>         ofnode_read_bool(node, "bootph-pre-sram"))
-> >>> -           return true;
-> >>> +           return gd->flags & GD_FLG_RELOC;
-> >>>
-> >>>     if (IS_ENABLED(CONFIG_OF_TAG_MIGRATE)) {
-> >>>             /* detect and handle old tags */
-> >>> diff --git a/include/dm/ofnode.h b/include/dm/ofnode.h
-> >>> index 0f38b3e736de..13700f8266d7 100644
-> >>> --- a/include/dm/ofnode.h
-> >>> +++ b/include/dm/ofnode.h
-> >>> @@ -1198,15 +1198,15 @@ int ofnode_read_simple_size_cells(ofnode node);
-> >>>   * determine if a node was bound in one of SPL/TPL stages.
-> >>>   *
-> >>>   * There are 4 settings currently in use
-> >>> - * - bootph-some-ram: U-Boot proper pre-relocation only
-> >>> + * - bootph-some-ram: U-Boot proper pre-relocation phase
-> >>>   * - bootph-all: all phases
-> >>>   * Existing platforms only use it to indicate nodes needed in
-> >>>   * SPL. Should probably be replaced by bootph-pre-ram for new platforms.
-> >>> - * - bootph-pre-ram: SPL and U-Boot pre-relocation
-> >>> - * - bootph-pre-sram: TPL and U-Boot pre-relocation
-> >>> + * - bootph-pre-ram: SPL phase
-> >>> + * - bootph-pre-sram: TPL phase
-> >>>   *
-> >>>   * @node: node to check
-> >>> - * Return: true if node is needed in SPL/TL, false otherwise
-> >>> + * Return: true if node should be or was bound, false otherwise
-> >>>   */
-> >>>  bool ofnode_pre_reloc(ofnode node);
-> >>>
-> >>
-> >> ---boot log---
-> >>
-> >> U-Boot SPL 2023.10-rc4-00480-g9e644284ab (Sep 28 2023 - 15:53:09 +0300)
-> >> Resetting on cold boot to workaround ErrataID:i2331
-> >> Please resend tiboot3.bin in case of UART/DFU boot
-> >> resetting ...
-> >>
-> >> U-Boot SPL 2023.10-rc4-00480-g9e644284ab (Sep 28 2023 - 15:53:09 +0300)
-> >> SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.5--v09.00.05 (Kool Koala)')
-> >> SPL initial stack usage: 13408 bytes
-> >> Trying to boot from MMC2
-> >> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> >> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> >> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> >> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> >> Loading Environment from MMC... *** Warning - No MMC card found, using default environment
-> >>
-> >> Starting ATF on ARM64 core...
-> >>
-> >> NOTICE:  BL31: v2.8(release):v2.8-226-g2fcd408bb3-dirty
-> >> NOTICE:  BL31: Built : 00:42:57, Jan 13 2023
-> >> I/TC:
-> >> I/TC: OP-TEE version: 3.20.0 (gcc version 11.3.0 (GCC)) #1 Fri Jan 20 15:42:54 UTC 2023 aarch64
-> >> I/TC: WARNING: This OP-TEE configuration might be insecure!
-> >> I/TC: WARNING: Please check https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
-> >> I/TC: Primary CPU initializing
-> >> I/TC: SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.5--v09.00.05 (Kool Koala)')
-> >> I/TC: HUK Initialized
-> >> I/TC: Activated SA2UL device
-> >> I/TC: Fixing SA2UL firewall owner for GP device
-> >> I/TC: Enabled firewalls for SA2UL TRNG device
-> >> I/TC: SA2UL TRNG initialized
-> >> I/TC: SA2UL Drivers initialized
-> >> I/TC: Primary CPU switching to normal world boot
-> >>
-> >> U-Boot SPL 2023.10-rc4-00480-g9e644284ab (Sep 28 2023 - 15:54:37 +0300)
-> >> SYSFW ABI: 3.1 (firmware rev 0x0009 '9.0.5--v09.00.05 (Kool Koala)')
-> >> Trying to boot from MMC2
-> >> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> >> Warning: Detected image signing certificate on GP device. Skipping certificate to prevent boot failure. This will fail if the image was also encrypted
-> >>
-> >> ---boot log end---
-> >>
-> >> we expect U-Boot banner to be printed next but nothing is printed.
-> >>
-> >
->
+> > diff --git a/configs/evb-rk3308_defconfig b/configs/evb-rk3308_defconfig
+> > index a13a809c1e..c6472a2c9c 100644
+> > --- a/configs/evb-rk3308_defconfig
+> > +++ b/configs/evb-rk3308_defconfig
+> > @@ -47,7 +47,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
+> >   # CONFIG_CMD_ITEST is not set
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   # CONFIG_CMD_SLEEP is not set
+> > -# CONFIG_DOS_PARTITION is not set
+> > +# CONFIG_SPL_DOS_PARTITION is not set
+> >   # CONFIG_ISO_PARTITION is not set
+> >   CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+> >   CONFIG_SPL_OF_CONTROL=y
+> > diff --git a/configs/roc-cc-rk3308_defconfig b/configs/roc-cc-rk3308_defconfig
+> > index 9a789b212f..ca92b8f744 100644
+> > --- a/configs/roc-cc-rk3308_defconfig
+> > +++ b/configs/roc-cc-rk3308_defconfig
+> > @@ -47,7 +47,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
+> >   # CONFIG_CMD_ITEST is not set
+> >   # CONFIG_CMD_SETEXPR is not set
+> >   # CONFIG_CMD_SLEEP is not set
+> > -# CONFIG_DOS_PARTITION is not set
+> > +# CONFIG_SPL_DOS_PARTITION is not set
+> >   # CONFIG_ISO_PARTITION is not set
+> >   CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+> >   CONFIG_SPL_OF_CONTROL=y
