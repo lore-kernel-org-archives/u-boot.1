@@ -4,67 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3F26E78482
-	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 19:04:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91DAAE78480
+	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 19:11:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E7468556F;
-	Sun,  1 Oct 2023 21:04:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EE31286D18;
+	Sun,  1 Oct 2023 21:11:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="0EViWewK";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="ng+2dnlw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4897D870D0; Sun,  1 Oct 2023 21:04:47 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 7D0E4870BD; Sun,  1 Oct 2023 21:11:56 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9858801B6
- for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 21:04:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC83786D14
+ for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 21:11:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=4bc4=FQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1696187076;
- bh=YQ/4EZEzE9bBkjcl59AJL/aMS+tgYx3kQhvnGJH7HEo=;
- b=0EViWewKmoVidvKSUTM4w4FVUnRnLq8Dcd5tRlJl2/3h/2KJ3OcwGWT7pcBnD/aBgEaofWmQe
- cgw0LY+v4wWVE9cynO95a8A87vaJpXvUK8Ey/0/MC10xBvd4wviLZfyE/s8jgprqqHEirxqfuS8
- +vGuMOgxPYNITGUN3Crd7ZTZw1sHcwdPIsJcrHS7U4iWdup1u0VZh7IxSwOer6LKfr934Iz9nE9
- SQKfejvLRTdd4b66weiWFhu+QujO8CM3bRZzLtgCFetvAc0i0SaT7Ym7JodzSGx3RXdMQE1iJPf
- 0de+HjjxCyUUzDTP9X+XfsDhkrB3EC3Cm2BTsZ1vGiZQ==
-Message-ID: <fbb9ee2f-7c5b-631e-fee4-296f11e3db9a@kwiboo.se>
-Date: Sun, 1 Oct 2023 21:04:30 +0200
+ spf=pass smtp.mailfrom=sebastian.reichel@collabora.com
+Received: from mercury (unknown [185.254.75.45])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (No client certificate requested) (Authenticated sender: sre)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 1BFB266071DC;
+ Sun,  1 Oct 2023 20:11:54 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1696187514;
+ bh=gzyh7a6jQteLLeyK3NstcNtdeUFvOiFmGpnP2+QV5Hw=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ng+2dnlwK3SpPos+o6Y4PXeyinzx2Bc8ZKVYTDE9NO+UQSAk4ibdwDGhVoAlFf2eq
+ sHQCQzCb6temlDP+RZQAm4dtNmDpYGcQ3k1dmbujL06k3jMevX5YElEiq1xZqoMeeQ
+ trv2yWh5dVR3AC35nOxBVKXGvSEHq1JnJQn8ZiKzhAfJG51Mp9nSdAFOO4kV0vdK80
+ DgbRTdlRDHRoMd5sZBT5qGxE4q2rF7AxlDafqqeeTcBAIEz+JvFDst3ZnmMGZ+GQ57
+ QIUv+Vnb7vunqwvSkTyYVc+ynxz+WnYfwSeaaxcpd1+oYw1CN+vlM+L9IFxrHFN9GI
+ E2o36DU9MUMAg==
+Received: by mercury (Postfix, from userid 1000)
+ id B49DB10603F9; Sun,  1 Oct 2023 21:11:50 +0200 (CEST)
+Date: Sun, 1 Oct 2023 21:11:50 +0200
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Jon Lin <jon.lin@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ John Clark <inindev@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/7] rockchip: rk3568: Fix use of PCIe bifurcation
+Message-ID: <20231001191150.pydmtyqg4wtbri5k@mercury.elektranox.org>
+References: <20230802190424.2963185-1-jonas@kwiboo.se>
+ <21678211-14b2-ce5c-820a-c69426725d65@kwiboo.se>
+ <29f01214-04f4-8a38-96f3-75df13bda7fa@rock-chips.com>
+ <2a605926-3d85-12fa-76db-2fa8d18b03dd@kwiboo.se>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 4/7] net: dwc_eth_qos: Add glue driver for GMAC on
- Rockchip RK3568
-To: David Wu <david.wu@rock-chips.com>, Kever Yang
- <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, Philipp
- Tomsich <philipp.tomsich@vrull.eu>, Joe Hershberger
- <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>, Frank Wunderlich
- <frank-w@public-files.de>, Nicolas Frattaroli
- <frattaroli.nicolas@gmail.com>, u-boot@lists.denx.de, Ezequiel Garcia
- <ezequiel@collabora.com>
-References: <20230807000817.1701012-1-jonas@kwiboo.se>
- <20230807000817.1701012-5-jonas@kwiboo.se>
- <6f2bd59d-bd06-1b70-2b9a-be3c1e8bb199@rock-chips.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <6f2bd59d-bd06-1b70-2b9a-be3c1e8bb199@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6519c2c4b09c5e14c6e43085
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="lglhaq2xvckjll7b"
+Content-Disposition: inline
+In-Reply-To: <2a605926-3d85-12fa-76db-2fa8d18b03dd@kwiboo.se>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,477 +78,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi David,
 
-On 2023-08-15 15:12, David Wu wrote:
-> Hi Jonas,
-> 
-> Thank you for your help.
-> 
-> 在 2023/8/7 08:08, Jonas Karlman 写道:
->> Add a new glue driver for Rockchip SoCs, i.e RK3568, with a GMAC based
->> on Synopsys DWC Ethernet QoS IP.
->>
->> rk_gmac_ops was ported from linux commit:
->> 3bb3d6b1c195 ("net: stmmac: Add RK3566/RK3568 SoC support")
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> Cc: David Wu <david.wu@rock-chips.com>
->> Cc: Ezequiel Garcia <ezequiel@collabora.com>
->> ---
->>   drivers/net/Kconfig                |   8 +
->>   drivers/net/Makefile               |   1 +
->>   drivers/net/dwc_eth_qos.c          |   8 +-
->>   drivers/net/dwc_eth_qos.h          |   2 +
->>   drivers/net/dwc_eth_qos_rockchip.c | 348 +++++++++++++++++++++++++++++
->>   5 files changed, 365 insertions(+), 2 deletions(-)
->>   create mode 100644 drivers/net/dwc_eth_qos_rockchip.c
->>
->> diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
->> index 0ed39a61e4de..29304fd77759 100644
->> --- a/drivers/net/Kconfig
->> +++ b/drivers/net/Kconfig
->> @@ -225,6 +225,14 @@ config DWC_ETH_QOS_IMX
->>   	  The Synopsys Designware Ethernet QOS IP block with the specific
->>   	  configuration used in IMX soc.
->>   
->> +config DWC_ETH_QOS_ROCKCHIP
->> +	bool "Synopsys DWC Ethernet QOS device support for Rockchip SoCs"
->> +	depends on DWC_ETH_QOS
->> +	select DM_ETH_PHY
->> +	help
->> +	  The Synopsys Designware Ethernet QOS IP block with specific
->> +	  configuration used in Rockchip SoCs.
->> +
->>   config DWC_ETH_QOS_STM32
->>   	bool "Synopsys DWC Ethernet QOS device support for STM32"
->>   	depends on DWC_ETH_QOS
->> diff --git a/drivers/net/Makefile b/drivers/net/Makefile
->> index d4af253b6f28..1d444f5b4a69 100644
->> --- a/drivers/net/Makefile
->> +++ b/drivers/net/Makefile
->> @@ -20,6 +20,7 @@ obj-$(CONFIG_DRIVER_DM9000) += dm9000x.o
->>   obj-$(CONFIG_DSA_SANDBOX) += dsa_sandbox.o
->>   obj-$(CONFIG_DWC_ETH_QOS) += dwc_eth_qos.o
->>   obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
->> +obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
->>   obj-$(CONFIG_DWC_ETH_QOS_QCOM) += dwc_eth_qos_qcom.o
->>   obj-$(CONFIG_DWC_ETH_QOS_STARFIVE) += dwc_eth_qos_starfive.o
->>   obj-$(CONFIG_E1000) += e1000.o
->> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
->> index 24fb3fac1f12..9fb98a2c3c74 100644
->> --- a/drivers/net/dwc_eth_qos.c
->> +++ b/drivers/net/dwc_eth_qos.c
->> @@ -1707,7 +1707,12 @@ static const struct udevice_id eqos_ids[] = {
->>   		.data = (ulong)&eqos_imx_config
->>   	},
->>   #endif
->> -
->> +#if IS_ENABLED(CONFIG_DWC_ETH_QOS_ROCKCHIP)
->> +	{
->> +		.compatible = "rockchip,rk3568-gmac",
->> +		.data = (ulong)&eqos_rockchip_config
->> +	},
->> +#endif
-> 
-> If this compatible could move to dwc_eth_qos_rockchip.c, it is better,
-> we have other SoCs  that also use this driver in the feature,  and it 
-> must increase
-> this array all the time for new SoCs later, it will be better only change
-> dwc_eth_qos_rockchip.c, we don't need to change the current file.
+--lglhaq2xvckjll7b
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Agree that this could be improved, not sure how we should/could do it,
-and is something that can be done in a follow-up series.
+Hi,
 
-Will leave as-is for v2.
+On Wed, Sep 27, 2023 at 06:07:59PM +0000, Jonas Karlman wrote:
+> Above works with this series in U-Boot and also in mainline linux. Not
+> sure the RK3588 bifurcation part of driver have been verified on real HW,
+> rk3588 boards available for testing have typicality not used bifurcation.
 
-Regards,
-Jonas
+Upstream kernel bifurcation code looks ok to me. It's quite different
+=66rom Rockchip vendor implementation, which might have confused Kever.
+I also missed this when having a quick look initially. As you said
+Rock 5A, Rock 5B and EVB1 do not use bifurcation, so no testing happened
+on our side.
 
-> 
->>   #if IS_ENABLED(CONFIG_DWC_ETH_QOS_QCOM)
->>   	{
->>   		.compatible = "qcom,qcs404-ethqos",
->> @@ -1720,7 +1725,6 @@ static const struct udevice_id eqos_ids[] = {
->>   		.data = (ulong)&eqos_jh7110_config
->>   	},
->>   #endif
->> -
->>   	{ }
->>   };
->>   
->> diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h
->> index 06a082da72ef..e3222e1e17e5 100644
->> --- a/drivers/net/dwc_eth_qos.h
->> +++ b/drivers/net/dwc_eth_qos.h
->> @@ -82,6 +82,7 @@ struct eqos_mac_regs {
->>   #define EQOS_MAC_MDIO_ADDRESS_PA_SHIFT			21
->>   #define EQOS_MAC_MDIO_ADDRESS_RDA_SHIFT			16
->>   #define EQOS_MAC_MDIO_ADDRESS_CR_SHIFT			8
->> +#define EQOS_MAC_MDIO_ADDRESS_CR_100_150		1
->>   #define EQOS_MAC_MDIO_ADDRESS_CR_20_35			2
->>   #define EQOS_MAC_MDIO_ADDRESS_CR_250_300		5
->>   #define EQOS_MAC_MDIO_ADDRESS_SKAP			BIT(4)
->> @@ -287,5 +288,6 @@ void eqos_flush_buffer_generic(void *buf, size_t size);
->>   int eqos_null_ops(struct udevice *dev);
->>   
->>   extern struct eqos_config eqos_imx_config;
->> +extern struct eqos_config eqos_rockchip_config;
->>   extern struct eqos_config eqos_qcom_config;
->>   extern struct eqos_config eqos_jh7110_config;
->> diff --git a/drivers/net/dwc_eth_qos_rockchip.c b/drivers/net/dwc_eth_qos_rockchip.c
->> new file mode 100644
->> index 000000000000..c8abe351fc3e
->> --- /dev/null
->> +++ b/drivers/net/dwc_eth_qos_rockchip.c
->> @@ -0,0 +1,348 @@
->> +// SPDX-License-Identifier: GPL-2.0+
->> +
->> +#include <common.h>
->> +#include <clk.h>
->> +#include <dm.h>
->> +#include <dm/device_compat.h>
->> +#include <net.h>
->> +#include <phy.h>
->> +#include <regmap.h>
->> +#include <reset.h>
->> +#include <syscon.h>
->> +#include <asm/gpio.h>
->> +#include <linux/delay.h>
->> +
->> +#include "dwc_eth_qos.h"
->> +
->> +struct rk_gmac_ops {
->> +	const char *compatible;
->> +	int (*set_to_rgmii)(struct udevice *dev,
->> +			    int tx_delay, int rx_delay);
->> +	int (*set_to_rmii)(struct udevice *dev);
->> +	int (*set_gmac_speed)(struct udevice *dev);
->> +	u32 regs[3];
->> +};
->> +
->> +struct rockchip_platform_data {
->> +	struct reset_ctl_bulk resets;
->> +	const struct rk_gmac_ops *ops;
->> +	int id;
->> +	struct regmap *grf;
->> +};
->> +
->> +#define HIWORD_UPDATE(val, mask, shift) \
->> +		((val) << (shift) | (mask) << ((shift) + 16))
->> +
->> +#define GRF_BIT(nr)	(BIT(nr) | BIT((nr) + 16))
->> +#define GRF_CLR_BIT(nr)	(BIT((nr) + 16))
->> +
->> +#define RK3568_GRF_GMAC0_CON0		0x0380
->> +#define RK3568_GRF_GMAC0_CON1		0x0384
->> +#define RK3568_GRF_GMAC1_CON0		0x0388
->> +#define RK3568_GRF_GMAC1_CON1		0x038c
->> +
->> +/* RK3568_GRF_GMAC0_CON1 && RK3568_GRF_GMAC1_CON1 */
->> +#define RK3568_GMAC_PHY_INTF_SEL_RGMII	\
->> +		(GRF_BIT(4) | GRF_CLR_BIT(5) | GRF_CLR_BIT(6))
->> +#define RK3568_GMAC_PHY_INTF_SEL_RMII	\
->> +		(GRF_CLR_BIT(4) | GRF_CLR_BIT(5) | GRF_BIT(6))
->> +#define RK3568_GMAC_FLOW_CTRL			GRF_BIT(3)
->> +#define RK3568_GMAC_FLOW_CTRL_CLR		GRF_CLR_BIT(3)
->> +#define RK3568_GMAC_RXCLK_DLY_ENABLE		GRF_BIT(1)
->> +#define RK3568_GMAC_RXCLK_DLY_DISABLE		GRF_CLR_BIT(1)
->> +#define RK3568_GMAC_TXCLK_DLY_ENABLE		GRF_BIT(0)
->> +#define RK3568_GMAC_TXCLK_DLY_DISABLE		GRF_CLR_BIT(0)
->> +
->> +/* RK3568_GRF_GMAC0_CON0 && RK3568_GRF_GMAC1_CON0 */
->> +#define RK3568_GMAC_CLK_RX_DL_CFG(val)	HIWORD_UPDATE(val, 0x7F, 8)
->> +#define RK3568_GMAC_CLK_TX_DL_CFG(val)	HIWORD_UPDATE(val, 0x7F, 0)
->> +
->> +static int rk3568_set_to_rgmii(struct udevice *dev,
->> +			       int tx_delay, int rx_delay)
->> +{
->> +	struct eth_pdata *pdata = dev_get_plat(dev);
->> +	struct rockchip_platform_data *data = pdata->priv_pdata;
->> +	u32 con0, con1;
->> +
->> +	con0 = (data->id == 1) ? RK3568_GRF_GMAC1_CON0 :
->> +				 RK3568_GRF_GMAC0_CON0;
->> +	con1 = (data->id == 1) ? RK3568_GRF_GMAC1_CON1 :
->> +				 RK3568_GRF_GMAC0_CON1;
->> +
->> +	regmap_write(data->grf, con0,
->> +		     RK3568_GMAC_CLK_RX_DL_CFG(rx_delay) |
->> +		     RK3568_GMAC_CLK_TX_DL_CFG(tx_delay));
->> +
->> +	regmap_write(data->grf, con1,
->> +		     RK3568_GMAC_PHY_INTF_SEL_RGMII |
->> +		     RK3568_GMAC_RXCLK_DLY_ENABLE |
->> +		     RK3568_GMAC_TXCLK_DLY_ENABLE);
->> +
->> +	return 0;
->> +}
->> +
->> +static int rk3568_set_to_rmii(struct udevice *dev)
->> +{
->> +	struct eth_pdata *pdata = dev_get_plat(dev);
->> +	struct rockchip_platform_data *data = pdata->priv_pdata;
->> +	u32 con1;
->> +
->> +	con1 = (data->id == 1) ? RK3568_GRF_GMAC1_CON1 :
->> +				 RK3568_GRF_GMAC0_CON1;
->> +	regmap_write(data->grf, con1, RK3568_GMAC_PHY_INTF_SEL_RMII);
->> +
->> +	return 0;
->> +}
->> +
->> +static int rk3568_set_gmac_speed(struct udevice *dev)
->> +{
->> +	struct eqos_priv *eqos = dev_get_priv(dev);
->> +	ulong rate;
->> +	int ret;
->> +
->> +	switch (eqos->phy->speed) {
->> +	case SPEED_10:
->> +		rate = 2500000;
->> +		break;
->> +	case SPEED_100:
->> +		rate = 25000000;
->> +		break;
->> +	case SPEED_1000:
->> +		rate = 125000000;
->> +		break;
->> +	default:
->> +		return -EINVAL;
->> +	}
->> +
->> +	ret = clk_set_rate(&eqos->clk_tx, rate);
->> +	if (ret < 0)
->> +		return ret;
->> +
->> +	return 0;
->> +}
->> +
->> +static const struct rk_gmac_ops rk_gmac_ops[] = {
->> +	{
->> +		.compatible = "rockchip,rk3568-gmac",
->> +		.set_to_rgmii = rk3568_set_to_rgmii,
->> +		.set_to_rmii = rk3568_set_to_rmii,
->> +		.set_gmac_speed = rk3568_set_gmac_speed,
->> +		.regs = {
->> +			0xfe2a0000, /* gmac0 */
->> +			0xfe010000, /* gmac1 */
->> +			0x0, /* sentinel */
->> +		},
->> +	},
->> +	{ }
->> +};
->> +
->> +static const struct rk_gmac_ops *get_rk_gmac_ops(struct udevice *dev)
->> +{
->> +	const struct rk_gmac_ops *ops = rk_gmac_ops;
->> +
->> +	while (ops->compatible) {
->> +		if (device_is_compatible(dev, ops->compatible))
->> +			return ops;
->> +		ops++;
->> +	}
->> +
->> +	return NULL;
->> +}
->> +
->> +static int eqos_probe_resources_rk(struct udevice *dev)
->> +{
->> +	struct eqos_priv *eqos = dev_get_priv(dev);
->> +	struct eth_pdata *pdata = dev_get_plat(dev);
->> +	struct rockchip_platform_data *data;
->> +	int reset_flags = GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE;
->> +	int ret;
->> +
->> +	data = calloc(1, sizeof(struct rockchip_platform_data));
->> +	if (!data)
->> +		return -ENOMEM;
->> +
->> +	data->ops = get_rk_gmac_ops(dev);
->> +	if (!data->ops) {
->> +		ret = -EINVAL;
->> +		goto err_free;
->> +	}
->> +
->> +	for (int i = 0; data->ops->regs[i]; i++) {
->> +		if (data->ops->regs[i] == (u32)eqos->regs) {
->> +			data->id = i;
->> +			break;
->> +		}
->> +	}
->> +
->> +	pdata->priv_pdata = data;
->> +	pdata->phy_interface = eqos->config->interface(dev);
->> +	pdata->max_speed = eqos->max_speed;
->> +
->> +	if (pdata->phy_interface == PHY_INTERFACE_MODE_NA) {
->> +		pr_err("Invalid PHY interface\n");
->> +		ret = -EINVAL;
->> +		goto err_free;
->> +	}
->> +
->> +	data->grf = syscon_regmap_lookup_by_phandle(dev, "rockchip,grf");
->> +	if (IS_ERR(data->grf)) {
->> +		dev_err(dev, "Missing rockchip,grf property\n");
->> +		ret = -EINVAL;
->> +		goto err_free;
->> +	}
->> +
->> +	ret = reset_get_bulk(dev, &data->resets);
->> +	if (ret < 0)
->> +		goto err_free;
->> +
->> +	reset_assert_bulk(&data->resets);
->> +
->> +	ret = clk_get_by_name(dev, "stmmaceth", &eqos->clk_master_bus);
->> +	if (ret) {
->> +		dev_dbg(dev, "clk_get_by_name(stmmaceth) failed: %d", ret);
->> +		goto err_release_resets;
->> +	}
->> +
->> +	ret = clk_get_by_name(dev, "clk_mac_speed", &eqos->clk_tx);
->> +	if (ret) {
->> +		dev_dbg(dev, "clk_get_by_name(clk_mac_speed) failed: %d", ret);
->> +		goto err_free_clk_master_bus;
->> +	}
->> +
->> +	if (dev_read_bool(dev, "snps,reset-active-low"))
->> +		reset_flags |= GPIOD_ACTIVE_LOW;
->> +
->> +	dev_read_u32_array(dev, "snps,reset-delays-us", eqos->reset_delays, 3);
->> +
->> +	gpio_request_by_name(dev, "snps,reset-gpio", 0,
->> +			     &eqos->phy_reset_gpio, reset_flags);
->> +
->> +	return 0;
->> +
->> +err_free_clk_master_bus:
->> +	clk_free(&eqos->clk_master_bus);
->> +err_release_resets:
->> +	reset_release_bulk(&data->resets);
->> +err_free:
->> +	free(data);
->> +
->> +	return ret;
->> +}
->> +
->> +static int eqos_remove_resources_rk(struct udevice *dev)
->> +{
->> +	struct eqos_priv *eqos = dev_get_priv(dev);
->> +	struct eth_pdata *pdata = dev_get_plat(dev);
->> +	struct rockchip_platform_data *data = pdata->priv_pdata;
->> +
->> +	if (dm_gpio_is_valid(&eqos->phy_reset_gpio))
->> +		dm_gpio_free(dev, &eqos->phy_reset_gpio);
->> +
->> +	clk_free(&eqos->clk_tx);
->> +	clk_free(&eqos->clk_master_bus);
->> +	reset_release_bulk(&data->resets);
->> +	free(data);
->> +
->> +	return 0;
->> +}
->> +
->> +static int eqos_stop_resets_rk(struct udevice *dev)
->> +{
->> +	struct eth_pdata *pdata = dev_get_plat(dev);
->> +	struct rockchip_platform_data *data = pdata->priv_pdata;
->> +
->> +	return reset_assert_bulk(&data->resets);
->> +}
->> +
->> +static int eqos_start_resets_rk(struct udevice *dev)
->> +{
->> +	struct eth_pdata *pdata = dev_get_plat(dev);
->> +	struct rockchip_platform_data *data = pdata->priv_pdata;
->> +
->> +	return reset_deassert_bulk(&data->resets);
->> +}
->> +
->> +static int eqos_stop_clks_rk(struct udevice *dev)
->> +{
->> +	return 0;
->> +}
->> +
->> +static int eqos_start_clks_rk(struct udevice *dev)
->> +{
->> +	struct eqos_priv *eqos = dev_get_priv(dev);
->> +	struct eth_pdata *pdata = dev_get_plat(dev);
->> +	struct rockchip_platform_data *data = pdata->priv_pdata;
->> +	int tx_delay, rx_delay, ret;
->> +
->> +	if (dm_gpio_is_valid(&eqos->phy_reset_gpio)) {
->> +		udelay(eqos->reset_delays[1]);
->> +
->> +		ret = dm_gpio_set_value(&eqos->phy_reset_gpio, 0);
->> +		if (ret < 0)
->> +			return ret;
->> +
->> +		udelay(eqos->reset_delays[2]);
->> +	}
->> +
->> +	tx_delay = dev_read_u32_default(dev, "tx_delay", 0x30);
->> +	rx_delay = dev_read_u32_default(dev, "rx_delay", 0x10);
->> +
->> +	switch (pdata->phy_interface) {
->> +	case PHY_INTERFACE_MODE_RGMII:
->> +		return data->ops->set_to_rgmii(dev, tx_delay, rx_delay);
->> +	case PHY_INTERFACE_MODE_RGMII_ID:
->> +		return data->ops->set_to_rgmii(dev, 0, 0);
->> +	case PHY_INTERFACE_MODE_RGMII_RXID:
->> +		return data->ops->set_to_rgmii(dev, tx_delay, 0);
->> +	case PHY_INTERFACE_MODE_RGMII_TXID:
->> +		return data->ops->set_to_rgmii(dev, 0, rx_delay);
->> +	case PHY_INTERFACE_MODE_RMII:
->> +		return data->ops->set_to_rmii(dev);
->> +	}
->> +
->> +	return -EINVAL;
->> +}
->> +
->> +static int eqos_set_tx_clk_speed_rk(struct udevice *dev)
->> +{
->> +	struct eth_pdata *pdata = dev_get_plat(dev);
->> +	struct rockchip_platform_data *data = pdata->priv_pdata;
->> +
->> +	return data->ops->set_gmac_speed(dev);
->> +}
->> +
->> +static ulong eqos_get_tick_clk_rate_rk(struct udevice *dev)
->> +{
->> +	struct eqos_priv *eqos = dev_get_priv(dev);
->> +
->> +	return clk_get_rate(&eqos->clk_master_bus);
->> +}
->> +
->> +static struct eqos_ops eqos_rockchip_ops = {
->> +	.eqos_inval_desc = eqos_inval_desc_generic,
->> +	.eqos_flush_desc = eqos_flush_desc_generic,
->> +	.eqos_inval_buffer = eqos_inval_buffer_generic,
->> +	.eqos_flush_buffer = eqos_flush_buffer_generic,
->> +	.eqos_probe_resources = eqos_probe_resources_rk,
->> +	.eqos_remove_resources = eqos_remove_resources_rk,
->> +	.eqos_stop_resets = eqos_stop_resets_rk,
->> +	.eqos_start_resets = eqos_start_resets_rk,
->> +	.eqos_stop_clks = eqos_stop_clks_rk,
->> +	.eqos_start_clks = eqos_start_clks_rk,
->> +	.eqos_calibrate_pads = eqos_null_ops,
->> +	.eqos_disable_calibration = eqos_null_ops,
->> +	.eqos_set_tx_clk_speed = eqos_set_tx_clk_speed_rk,
->> +	.eqos_get_enetaddr = eqos_null_ops,
->> +	.eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_rk,
->> +};
->> +
->> +struct eqos_config eqos_rockchip_config = {
->> +	.reg_access_always_ok = false,
->> +	.mdio_wait = 10,
->> +	.swr_wait = 50,
->> +	.config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
->> +	.config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_100_150,
->> +	.axi_bus_width = EQOS_AXI_WIDTH_64,
->> +	.interface = dev_read_phy_mode,
->> +	.ops = &eqos_rockchip_ops,
->> +};
+Greetings,
 
+-- Sebastian
+
+--lglhaq2xvckjll7b
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmUZxGsACgkQ2O7X88g7
++ppREA//esC53hqO1OD4hxp/SHRVxQIJ4k5UHnp5PASqw9rLW/PTcIiyZs9Dtgpm
+vKDEt6lKkxIKLMqz1XsJpIpP+jyljLsKogTCHAEb1mQhOja3l1RgaZvMZDaFJTG4
+xtSCvN3dYaMgOvM2H7II4BO21o3fG8TqHI7NwpNvYijojmj3GNmSbLjrA0WdkX1E
+KIZkfNasBOM+0eZYHJBPXjuKm9BMJRfa4+HGwIU/uPVw6K8fjlkxv3m2iUM57+we
+/8tiKr4VqSRKRGAuvuPzG3nzDFyrTD7NGaeOkuyiCiRQTRMq7Ao8IuCZbgb91gYA
+qxZ6YKESg5RWz8849yE+ldgGl4CBqhuFYZ2ZHZcgx4VRQaZzASvcPaCIyJ1fE4yV
+serBpEFZZSqh8aYoDb9drgn0ptiVMjeNWJ1T+K0UMKDj4Gxy8X/tHJ0t4EJq1M3l
+OWKJ/dUg9ijP1yQhUq2M8+ROLGBpXTX5nhpgbFkO6jWV4Y/gw5YIokEIiRkTclry
+BfOoZH7b2dAr0JgCxG07TJIXi65VtqnJSFx09z+r9EEthegH7s+6bw4jTk0lQyie
+uMX9Uqo6uqRgjSr8e+9HTn/aFpso1HYEklrOm0LaNb7fGapE0QrkZ90+HClH0FoM
+V+b1FTtOfp5zAhcdWbTt74bFOwr2PanZSkRDuWZvwb3Bm6svbcM=
+=B742
+-----END PGP SIGNATURE-----
+
+--lglhaq2xvckjll7b--
