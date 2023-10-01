@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C7EE748ED
-	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 10:02:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14292E748ED
+	for <u-boot@archiver.kernel.org>; Sun,  1 Oct 2023 10:02:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D1F7870C5;
+	by phobos.denx.de (Postfix) with ESMTP id 75E4F870C6;
 	Sun,  1 Oct 2023 12:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T1WRRfg3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E+ZOT1aC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F113D870C6; Sun,  1 Oct 2023 12:00:52 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 39988870B7; Sun,  1 Oct 2023 12:00:53 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FAD8870B6
+ by phobos.denx.de (Postfix) with ESMTPS id 60B0C870BC
  for <u-boot@lists.denx.de>; Sun,  1 Oct 2023 12:00:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jmcosta944@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-3231df68584so11383580f8f.1
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-40572aeb6d0so122337805e9.1
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 03:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1696154450; x=1696759250; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UPo8gLq6xXDg/aiaGtn38iTgCitr6s5cc9aGJghK5Gk=;
- b=T1WRRfg3jI0FXuuwnkYp/69BnKBKgFe3QfgA2Vm6pgs1iw1LgX3OZAPwRN9fnoT+Gx
- 3qeRI3Sopw6xRCz8SNpiGFVHX0SfCaBcB4XMGcr1DEt9J5nP3LTpfbfj++uY6QJyY0AY
- d9epJHjq89VaTO5asf14J26kS276BIZSD/2Xm9CrYVzVZi+/Qq6QW3++0KnLFzrTEDeL
- VpbzVIRy9GXHq43uCXfyCItYbpf1gI5VyXYAwcxb7Lv3ggIkNBUQeN7o8wxyefysIt6e
- tC6muEfX27+rUzUzUMFjOx3qdlbxLNMiR+rTTkxEm6xZTaL9mF5RAzNKia2A5LJQ9OcG
- 5g5w==
+ bh=/1Zp1492jG7c7BEWQV1tYh/VpdeLbdjJOPPrKGl/hcM=;
+ b=E+ZOT1aCCQs5/qaHhfoqvmelHqNJ6OuCxP3AfNJNY0yTsQjEGcgaGqp6aVJ95gUq0X
+ G8ySiO1TJrpXYZd9nQcKEbJsAqVcGWL5XIVBDKoLZN4j9V/A3zTHVTAI7CG2dJUdU6io
+ /jKsV0d9t+03gEmJxRZLQVZ5G7E6lRtfZZnfa3QKRIUKFeGs9yeNXXDUVl3MnsccHvtc
+ RkloPMyDNn5D/6gYPkHMlGWk5ZaokIoKxfivcvxC6OpD5wYrP+ZGjIoDAF2Fcoelxqia
+ yvsMNz/Qbm83CMD9NLRIm1fArxDzJ+O1ic6KOEC/05F4AZSXDysMROcK9+6/84EfJ8sX
+ GqsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1696154450; x=1696759250;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UPo8gLq6xXDg/aiaGtn38iTgCitr6s5cc9aGJghK5Gk=;
- b=ZPzPZ41tD1BBScAHuUNKq+YV7WtA3bXmIYfWRbUjonvXAg4UaWE5Gsl348P5N9UcfF
- omgU0T8GmCIIjEK7jFwuwinHvN8ryATrtSxTwtCbbHVpNnT/gu8CrbYKvYfKGKNVZYhb
- lskOqHWYOSWuwaC/M7qGoTzu3LnglEmfGq1YCngfUdwQBZl6rt+pmR2dz7mfTCAVCn+F
- Djjy4hq1cHdJXXeSgR1hDMMw665tm0Tu8AjSLItT0/FhetPnEfpi00ECsu9hrnoipiQk
- H4sSJuWymuwoUyIVxSbFft7efUMjEIUWMD9MOZxzWVE5XFyWj3LouA/WDAIEVF/IAJns
- x71w==
-X-Gm-Message-State: AOJu0YwaNyVxV5cP0gqBsLAMInjHesGULmOYQN7KrFTo99cYbm1pRSK5
- /BauCp3QvxhNJXBokGdMupK2rKPedz2LbMXM
-X-Google-Smtp-Source: AGHT+IElBKu0jeapomOW6Pa0F1JGFpsDyIjZdpJTK2xAWMOuKTfpcHousXts4p7ZpWnoShjuHTUCVQ==
-X-Received: by 2002:a5d:4e8a:0:b0:324:885f:f806 with SMTP id
- e10-20020a5d4e8a000000b00324885ff806mr8633595wru.56.1696154450024; 
+ bh=/1Zp1492jG7c7BEWQV1tYh/VpdeLbdjJOPPrKGl/hcM=;
+ b=gzjVONssHl7GKncyjPE0ZDtZ7MLWDiY+mTmbYO5rO+zIKry1A7OODy/YV42BSGsnRR
+ ItqlBnqdh8wJuBGFRVBvGuwiwtd7fmu6+Lc+b/uyFjsNDlQMItKU0wXL0EtLOlQiAudm
+ SCwNFSFK9ivCW3ZXprj1yGPhuKmihLMIHx86oIf0T5ydfR970z6qJlPw4bhh+R6VrsLW
+ xa+vVi0sjmnddqI+AKVVFxWCpxgX458cI0AqDiOJ+efjB3vybhNJrn8k6rmaWfFNnWjO
+ qSf2ge3IVYjHJVWmsCIO3B2PGQkNufzdgPY6UxJEG0WJ7Ks0vOPZqzFCEV9QrY76mS1w
+ B/IA==
+X-Gm-Message-State: AOJu0YxsWvPJbt7gL1v0aSnLd/0FxcjlqvywjOd5lhOy+9GnvY4yC5II
+ UBjzze5k9PGqtirXFU+iO/dacxIN1IMZ6IrL
+X-Google-Smtp-Source: AGHT+IHd1ukdEFmIcAaUM8aGQeEDiyu7Y3MGYjCB27OyT8Ecm2rnw4vLuqCxnhmEDbte7iEscbd6oQ==
+X-Received: by 2002:a5d:4f8e:0:b0:320:aea6:abb9 with SMTP id
+ d14-20020a5d4f8e000000b00320aea6abb9mr7719609wru.6.1696154450637; 
  Sun, 01 Oct 2023 03:00:50 -0700 (PDT)
 Received: from fedora.. (cust-west-par-46-193-56-152.cust.wifirst.net.
  [46.193.56.152]) by smtp.gmail.com with ESMTPSA id
- g18-20020a5d5552000000b00326f5d0ce0asm3087135wrw.21.2023.10.01.03.00.49
+ g18-20020a5d5552000000b00326f5d0ce0asm3087135wrw.21.2023.10.01.03.00.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 03:00:49 -0700 (PDT)
+ Sun, 01 Oct 2023 03:00:50 -0700 (PDT)
 From: Joao Marcos Costa <jmcosta944@gmail.com>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, sjg@chromium.org, xypron.glpk@gmx.de, Y.Moog@phytec.de,
  Joao Marcos Costa <jmcosta944@gmail.com>
-Subject: [PATCH v4 7/8] doc: add ide_integration.rst to doc/develop
-Date: Sun,  1 Oct 2023 12:00:35 +0200
-Message-ID: <20231001100036.34936-8-jmcosta944@gmail.com>
+Subject: [PATCH v4 8/8] scripts/gen_compile_commands: fix usage message
+Date: Sun,  1 Oct 2023 12:00:36 +0200
+Message-ID: <20231001100036.34936-9-jmcosta944@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231001100036.34936-1-jmcosta944@gmail.com>
 References: <20231001100036.34936-1-jmcosta944@gmail.com>
@@ -92,49 +92,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add 'Integration with IDEs' chapter.
-
-For now, this chapter is mostly a reference to the documentation of
-gen_compile_commands, in doc/build, but it can be futurely used as
-a guide for other IDE-friendly features.
+Replace mentions to 'kernel' by 'U-Boot' to avoid confusion.
 
 Signed-off-by: Joao Marcos Costa <jmcosta944@gmail.com>
 ---
- doc/develop/ide_integration.rst | 12 ++++++++++++
- doc/develop/index.rst           |  1 +
- 2 files changed, 13 insertions(+)
- create mode 100644 doc/develop/ide_integration.rst
+ scripts/gen_compile_commands.py | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/doc/develop/ide_integration.rst b/doc/develop/ide_integration.rst
-new file mode 100644
-index 0000000000..455e09959c
---- /dev/null
-+++ b/doc/develop/ide_integration.rst
-@@ -0,0 +1,12 @@
-+Integration with IDEs
-+=====================
-+
-+IDEs and text editors (e.g., VSCode, Emacs, Vim, Neovim) typically offer
-+plugins to enhance the development experience, such as Clangd LSP. These
-+plugins provide features like code navigation (i.e., jumping to definitions
-+and declarations), code completion, and code formatting.
-+
-+U-Boot provides a script (i.e., scripts/gen_compile_commands.py) that
-+generates a compilation database to be utilized by Clangd LSP for code
-+navigation. For detailed usage instructions, please refer to the script's
-+documentation: :doc:`../build/gen_compile_commands`.
-diff --git a/doc/develop/index.rst b/doc/develop/index.rst
-index 5b230d0321..272bdef84d 100644
---- a/doc/develop/index.rst
-+++ b/doc/develop/index.rst
-@@ -19,6 +19,7 @@ General
-    security
-    sending_patches
-    system_configuration
-+   ide_integration
+diff --git a/scripts/gen_compile_commands.py b/scripts/gen_compile_commands.py
+index aa52e88e18..cdca85e6b0 100755
+--- a/scripts/gen_compile_commands.py
++++ b/scripts/gen_compile_commands.py
+@@ -37,10 +37,10 @@ def parse_arguments():
+         output: Where to write the compile-commands JSON file.
+         paths: The list of files/directories to handle to find .cmd files.
+     """
+-    usage = 'Creates a compile_commands.json database from kernel .cmd files'
++    usage = 'Creates a compile_commands.json database from U-Boot .cmd files'
+     parser = argparse.ArgumentParser(description=usage)
  
- Implementation
- --------------
+-    directory_help = ('specify the output directory used for the kernel build '
++    directory_help = ('specify the output directory used for the U-Boot build '
+                       '(defaults to the working directory)')
+     parser.add_argument('-d', '--directory', type=str, default='.',
+                         help=directory_help)
 -- 
 2.41.0
 
