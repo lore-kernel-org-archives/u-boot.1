@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AAB1E784A4
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 07:17:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 602C4E784A4
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 07:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27BC787133;
-	Mon,  2 Oct 2023 09:17:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=public-files.de
+	by phobos.denx.de (Postfix) with ESMTP id 4E0FF87126;
+	Mon,  2 Oct 2023 09:33:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="tf/oe9kr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p83t9Y15";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D7CB87136; Mon,  2 Oct 2023 09:17:34 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AFB688712C; Mon,  2 Oct 2023 09:33:50 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 112168712C
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 09:17:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=public-files.de
+ by phobos.denx.de (Postfix) with ESMTPS id 90311870A4
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 09:33:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=frank-w@public-files.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=public-files.de;
- s=s31663417; t=1696231041; x=1696835841; i=frank-w@public-files.de;
- bh=rIq6xYiyLGPyLFM0KFpx36P1bC1i9t6O6NTGOMiZ19U=;
- h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
- b=tf/oe9krsPZ6KreSRrcNXKiTqVJUTignefTowT7BTHToL7bhYw+99epVA+O9sRHdDabcVuk1voT
- UflGYoW5WMXIACePuuaHfc5rPq8oi+ArdNcKXa68P11SDcplVdETfegNIHcOgpaPZ5rwKoohzI/kr
- MrOx3rJ9OSEdi2CeRXjYMo4E93+u2nhw+g7zOrtLlNUkzrpYLZ5sCmEnIicOqt1sERaV3H6K/ss7G
- 4jP7u68UpgZBwQE97U8z6BKvfu4x5NYV3UCOCVxkYpUfIjSacgnieQe9TwzZF4BIlS+HrvHiVahYh
- WU8OqibKGxvxa++DaB0tof5dFqjwLMscaxWg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [217.61.157.132] ([217.61.157.132]) by web-mail.gmx.net
- (3c-app-gmx-bap51.server.lan [172.19.172.121]) (via HTTP); Mon, 2 Oct 2023
- 09:17:21 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5031ccf004cso24834829e87.2
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 00:33:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1696232028; x=1696836828; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sKP6pVtDyKu4pCxpdJFiT0mgv9Iy8Mc9d3Wmtg0JdyI=;
+ b=p83t9Y15atEU3FEKYD69S42PzA8RIRC4T4DRq0OJEehet85GjMbhuRSN387Rw+DDuw
+ Y8CWRU2kpsVv/1hpimGV+0+e92vZTiK0mWLbgYLWTDNSKv6gq5VH4Yjy4Sop7l00vMDV
+ mENrIA6Z3i9wPas5Oiw5zRBBoNYc24j81qcRNxZgFcFcWFlZp6MgKp/uGVF2WjptxATY
+ Aevas+c8cZmOnyvQEEcVxYGQruYuGpymxsQDhCFbAoj20aUUxK+Snf4L5Duh1wzENiSm
+ gbhdcwFGRcik4DB4nlG/w7X9s65xk2z7+xnvkprRl1y+Csh5Li57Wom2qx7lGKLhIMrz
+ Z19Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696232028; x=1696836828;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sKP6pVtDyKu4pCxpdJFiT0mgv9Iy8Mc9d3Wmtg0JdyI=;
+ b=JhzFgMVeHE5m7n5Qn//+Pbgz22j7e8NWL25xRgv1NesPrAn7n5jhSTdcMLY+99byHS
+ ZhbpsTcItzBZ7uqktCJbUDYCicRMClh90qS4PR/TKtxsDqS1H0/nNzjpkTQlmuRITCSG
+ /9ltucr3nOd7ZSCGm0S+Q5Sr9r8F3wDNKfXsrERLxmxefwWboKCMCDr1aFQnQ/ezldtY
+ 25LDRjiQ0YgWTbL2uXyudlPysptczWwJ/v4oSf0AuognWVfnJrNCfQ3MTANnJQCHwxY8
+ Pq+BA3ij9tkhuoSBhNngSJjA5JlnbhgLISciat9TUCGnZGJCzUoUwvVe2893ts9NrY5b
+ MttA==
+X-Gm-Message-State: AOJu0Yxq/yeRwyH1uuUUGGqUlmU3PDQPzosGjWhxk5I7NKspgF0U9UFb
+ eCBHL4GjaFZObhvstyQCfL8sI4hFxBjAx5Ia4BdzPA==
+X-Google-Smtp-Source: AGHT+IGUsw6uwxrQxNGVySP6+tbopsaxdhqBPrA2UnhJMikevFIbFboZNr7SmsAmfZ+QaAocAzwOxj16lSP983mQnqw=
+X-Received: by 2002:a05:6512:3295:b0:503:5d8:da2e with SMTP id
+ p21-20020a056512329500b0050305d8da2emr7556488lfe.13.1696232027762; Mon, 02
+ Oct 2023 00:33:47 -0700 (PDT)
 MIME-Version: 1.0
-Message-ID: <trinity-b84ddad3-528c-4117-8726-f211e21a42f6-1696231041552@3c-app-gmx-bap51>
-From: Frank Wunderlich <frank-w@public-files.de>
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Eugen Hristev <eugen.hristev@collabora.com>, Jon Lin
- <jon.lin@rock-chips.com>, FUKAUMI Naoki <naoki@radxa.com>, John Clark
- <inindev@gmail.com>, u-boot@lists.denx.de
-Subject: Aw: Re: [PATCH v2 0/7] rockchip: rk3568: Fix use of PCIe bifurcation
-Content-Type: text/plain; charset=UTF-8
-Date: Mon, 2 Oct 2023 09:17:21 +0200
-Importance: normal
-Sensitivity: Normal
-In-Reply-To: <20231001191150.pydmtyqg4wtbri5k@mercury.elektranox.org>
-References: <20230802190424.2963185-1-jonas@kwiboo.se>
- <21678211-14b2-ce5c-820a-c69426725d65@kwiboo.se>
- <29f01214-04f4-8a38-96f3-75df13bda7fa@rock-chips.com>
- <2a605926-3d85-12fa-76db-2fa8d18b03dd@kwiboo.se>
- <20231001191150.pydmtyqg4wtbri5k@mercury.elektranox.org>
-X-UI-Message-Type: mail
-X-Priority: 3
-X-Provags-ID: V03:K1:jOOIdHVM5jGyalPypcGW/AEhtAYk5JL5kd3ukav3r+yrZB8h199eIXoUP5XFs0A62LkJB
- 0YtQC5Q1ZemLBdahmbHco8jluOSK9nJ4ue6Yc7tmNYh0hoxT0Iht7qAtkIrEJV1oGwz8sA9640Se
- 1lgn1o99sHf2IkeF1Luvj/mkEunaHLCQfP67SL07tEPspYCLQkoJrBsHsCIHt6RXKTd45NCiHs9h
- XUlliD8OO/kkAhXZGynvjivqF4PDPnSkDzxCVoRKNxUyYtHFpitgWGx5XkByY5j2LeFAk34FSksF
- vw=
-UI-OutboundReport: notjunk:1;M01:P0:Wc98hQ+o65Y=;5wBvyAgTYEryPOtpvcYuwvdmog+
- mCpwRZv3g6T/XGK/8dtgPARp7P/1iP49U2k/E418XaGaVxRnDHeQhZ+Py2430/qIxBWm0ZfQj
- LazIUrhQwKI4wzrQ+F/jG8eUaKYMDxn1wNqG1LjUeo4jJyRxjfh1VyscoGuot3KkW5VJfNnYn
- cLNXoAW8sBHkWFQzjEVrROFcXSSzJtXuhbF2JCnJbsuJE2cz1D6Xj1k2xkMYYtx5VDclUaYHw
- BQRdJaYJTCaGuOcGTV/n2EYEbS2CGNVl469MkNZ80Rd9ZDlBmhqD0wBLDijTYHTgRW+EAAaEW
- Nf5zBw5/nWCgyE87DbIPtLDzmsHMKOaNdyfiaDpiqj/6otuFRD7kQQnn8/S/9lvVzvzlfn1qu
- jdAsqqsQfd3SGUqH89WGHnSFH5mBN99Zd8Y7AYSSv3Jmrb6pIzyfjjekZwDtikdJFXLzcJCd4
- xXF11pFBUjhM+//kKJVm7xQB1YSsTPpLSmf8TiN7JdhChYRtfKXVTqsPl0Pk16Ee9y1wEhFLC
- h+MUONE1kTlgrHG5pj1obrQ0KeMNdZlaBMBPJSot8cy0niEzf/Kwzp12Vwdv1cMjVCnRrvpXj
- PgL8lTCe/VanoRGkwMrhfmHlrAUqeJHR3PjwnqLpto2SGvn6Gz3MHWYSaaSdsotzG+cXaW+sH
- iUoz3FD9gqbzFoJDqVTHVUGTQ04exNtYc1MD8/I0hm6OSlFxFNF7loQo63CXm4yTB2Zvotif2
- DdDajoKWZ5LuboOUDJygAgmChepS4YfbehFWz3mOBrCWkHAgnj6RgffMESjI6KeatPUH2fWxP
- XdBb9ugQZ//sW0Oowfumi8Jg==
-Content-Transfer-Encoding: quoted-printable
+References: <20230921015730.1511373-1-sjg@chromium.org>
+ <20230921015730.1511373-31-sjg@chromium.org>
+ <CAC_iWjJ=-MvO5rPwmnGTbjyaqTv+VzXNq2mXmP+Az3FKaQ_Jyg@mail.gmail.com>
+ <CAPnjgZ3yAYQ7V=n-4MyPiaB_JU7_wre9xOHg5K0L22a4gYBenA@mail.gmail.com>
+ <CAC_iWjJBsNXguALKFKVDOnTWFH4YB6PMevt43fOyQWonitwS7w@mail.gmail.com>
+ <CAPnjgZ2DFvGz6NvS5JORBLXcCk0HMLYM-HGaRhqWDzuz4ZF1Xw@mail.gmail.com>
+ <CAC_iWjLS62kkMOYT6UiGoL66o-CaFst1nYWv7xgH+GNyeuaz9A@mail.gmail.com>
+ <CAPnjgZ0Vo1iPhGRW6bcROfa6Q56ZNV=Kw_z4hD4jiJdAJ3kqXw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0Vo1iPhGRW6bcROfa6Q56ZNV=Kw_z4hD4jiJdAJ3kqXw@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 2 Oct 2023 10:33:11 +0300
+Message-ID: <CAC_iWj+hkVjftjfVfRFd27uF59=cpsJ0r+6jCg++EYFqZjBZyQ@mail.gmail.com>
+Subject: Re: [PATCH v2 30/32] fdt: Allow the devicetree to come from a bloblist
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Tom Rini <trini@konsulko.com>, 
+ Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>,
+ Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,41 +96,211 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon
 
-> Gesendet: Sonntag, 01. Oktober 2023 um 21:11 Uhr
-> Von: "Sebastian Reichel" <sebastian.reichel@collabora.com>
-> An: "Jonas Karlman" <jonas@kwiboo.se>
-> Cc: "Kever Yang" <kever.yang@rock-chips.com>, "Simon Glass" <sjg@chromiu=
-m.org>, "Philipp Tomsich" <philipp.tomsich@vrull.eu>, "Eugen Hristev" <eug=
-en.hristev@collabora.com>, "Jon Lin" <jon.lin@rock-chips.com>, "FUKAUMI Na=
-oki" <naoki@radxa.com>, "John Clark" <inindev@gmail.com>, u-boot@lists.den=
-x.de
-> Betreff: Re: [PATCH v2 0/7] rockchip: rk3568: Fix use of PCIe bifurcatio=
-n
+On Mon, 2 Oct 2023 at 04:23, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi,
+> Hi Ilias,
 >
-> On Wed, Sep 27, 2023 at 06:07:59PM +0000, Jonas Karlman wrote:
-> > Above works with this series in U-Boot and also in mainline linux. Not
-> > sure the RK3588 bifurcation part of driver have been verified on real =
-HW,
-> > rk3588 boards available for testing have typicality not used bifurcati=
-on.
+> On Tue, 26 Sept 2023 at 07:13, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > [...]
+> >
+> > > > > >
+> > > > > > So, instead of adding OF_BLOBLIST, just move this code under OF_BOARD,
+> > > > > > inside an IS_ENABLED(BLOBLIST) check. If a bloblist is required and
+> > > > > > the previous stage loader is supposed to provide a DT we can just
+> > > > > > throw an error and stop booting
+> > > > >
+> > > > > This is the bit I don't get.
+> > > > >
+> > > > > The OF_BOARD thing is a hack, in that the board can do what it likes.
+> > > > > It is our way of handling board-specific mechanisms.
+> > > > >
+> > > > > But I am wanting a standard mechanism, i.e. like 'standard passage', a
+> > > > > way of passing the DT through the phases.
+> > > > >
+> > > > > If I put this under OF_BOARD, then the board gets to override the
+> > > > > mechanism, so which is it?
+> > > >
+> > > > No, it's the other way around in my head.  OF_BOARD description is 'a
+> > > > previous stage loader hands me over the DT', which is a superset of
+> > > > the bloblist.
+> > > > Whether it comes in a firmware handoff format, or a hacky register the
+> > > > previous bootloader filled in is a detail we have to deal with and we
+> > > > need to keep backwards compatibility.
+> > > >
+> > > > Maybe adding a coding snip would help
+> > > > if (IS_ENABLED(CONFIG_OF_BOARD)) {
+> > > >     if (CONFIG_IS_ENABLED(BLOBLIST)) { <- This instead of OF_BLOBLIST
+> > > >         ret = bloblist_maybe_init();
+> > > >         if (ret)
+> > > >             return ret;
+> > > >         /* Dynamically scan for a DT in the bloblist. */
+> > > >         gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+> > > >         if (!gd->fdt_blob) {
+> > > >             printf("Not FDT found in bloblist\n");
+> > > >             bloblist_show_list();
+> > > >            // We can choose to not return an error here and keep
+> > > > scanning in case the DT is in a register, but I am fine with both
+> > > >             return -ENOENT;
+> > > >         }
+> > > >        gd->fdt_src = FDTSRC_BLOBLIST;
+> > > >        bloblist_show_list();
+> > > >        log_debug("Devicetree is in bloblist at %p\n", gd->fdt_blob);
+> > > >       // We can also bail out of this entirely if we do find a DT via
+> > > > a bloblist.
+> > > >      } else {
+> > > >          gd->fdt_blob = board_fdt_blob_setup(&ret);
+> > > >          if (ret)
+> > > >              return ret;
+> > > >          gd->fdt_src = FDTSRC_BOARD;
+> > > >     }
+> > > > }
+> > > >
+> > > > I haven't even compiled the code above, but it should give you a
+> > > > better idea of what I am suggesting
+> > >
+> > > OK I see...yes that is along the lines of what I thought you meant.
+> > >
+> > > But OF_BOARD does not mean 'previous stage loader hands me over the
+> > > DT'. I means call board_fdt_blob_setup() which could do anything. If
+> > > some boards use that function to implement getting a DT from the prior
+> > > stage, that's fine, but it isn't limited to that.
+> >
+> > I think it is limited. The help message says 'Provider of DTB for DT
+> > control' and OF_BOARD help message is 'Provided by the board (e.g a
+> > previous loader) at runtime '.
+> > In fact, that's exactly what I tried to clean up with commit
+> > e7fb789612e39.  Sandbox had its special OF_HOSTFILE for the DT.  We
+> > cleaned that up and then reintroduced it with a different name in
+> > commit 275b4832f6bf91c.
 >
-> Upstream kernel bifurcation code looks ok to me. It's quite different
-> from Rockchip vendor implementation, which might have confused Kever.
-> I also missed this when having a quick look initially. As you said
-> Rock 5A, Rock 5B and EVB1 do not use bifurcation, so no testing happened
-> on our side.
+> That commit adds HAS_PRIOR_STATE, though, not anything to do with sandbox.
+>
+> OK. Perhaps it is just the OF_BOARD name that I object to?
+>
+> >
+> > In any case, if people want to do 'more' we have
+> > CONFIG_OF_BOARD_SETUP/FIXUP which should be used instead for other
+> > platform-specific stuff.  While at it OF_PRIOR_STAGE is a much better
+> > name that OF_BOARD.  So we could get rid of OF_PRIOR_STAGE and rename
+> > OF_BOARD to that.
+>
+> To do that, we have to work out what to do with board-specific setup.
+>
+> >
+> > The function name that is called in the setup phase is
+> > board_fdt_blob_setup(), so it's explicitly targeting the fdt setup, or
+> > at least that's what the name suggets. Grepping for CONFIG_OF_BOARD
+> > matches in
+> > board/AndesTech/ae350/ae350.c
+> > board/armltd/vexpress64/vexpress64.c
+> > board/raspberrypi/rpi/rpi.c
+> > board/sifive/unleashed/unleashed.c
+> > board/sifive/unmatched/unmatched.c
+> > board/starfive/visionfive2/starfive_visionfive2.c
+> > board/xilinx/common/board.c:
+> > All these just use it to setup the DT, apart from the rpi which
+> > additionally sets up some memory for the DT.
+> >
+> > Apart from that it's used on a few platform drivers to setup so DM
+> > flags (most of them set DM_FLAG_PRE_RELOC), but we can easily change
+> > that and use The only affected files are
+> > drivers/pinctrl/broadcom/pinctrl-bcm283x.c
+> > drivers/serial/serial_bcm283x_mu.c
+> > drivers/serial/serial_bcm283x_pl011.c
+> >
+> > So making OF_BOARD do the right thing is trivial and I can work with
+> > you on that.  I don't think it's too much effort anyway
+>
+> What is the right thing you refer to here?
+>
+> >
+> > >
+> > > There is an HAS_PRIOR_STAGE option which sets OF_BOARD at present. But
+> > > that doesn't seem right in the long term.
+> > >
+> > > The goal here is to standardise the passing of DT from a prior stage,
+> > > so that all boards (except perhaps the dark child rpi) use standard
+> > > passage (bloblist) to do so. That should not depend on OF_BOARD and in
+> > > fact I would like to make OF_BOARD the exception, used when
+> > > OF_BLOBLIST doesn't suit.
+> >
+> > We are on the same page regarding the standardization.  But I think
+> > shoehorning an OF_BLOBLIST just papers over the problem.
+> > The board should ideally have 2 options
+> > 1. a previous loader gives me the DT in X random ways (one of them is
+> > the bloblist)
+> > 2. U-Boot provides it because it was built with it
+> > A user can always load his own special DT if he wants to, but that's
+> > done at a later stage.
+>
+> OK
+>
+> >
+> > But if we clean it up properly we can
+> > 1. Do Not allow people to sneak in random options in OF_BOARD or
+> > whatever and keep the options sane and clean
+>
+> I am certainly keen to remove OF_BOARD, or print a warning when it is used.
+>
+> > 2. enable BLOBLIST by default in all supported platforms and push to
+> > make it the default.  We can even be stricter and crash on boot if
+> > BLOBLIST is selected and we can't find the DT in there.  That would
+> > have a similar effect to selecting it as a Kconfig option
+>
+> Yes, that's what I am doing with this patch. So we end up with:
+>
+> OF_SEPARATE - packed with U-Boot
+> OF_BLOBLIST - comes in a bloblist
+> OF_BOARD - escape hatch, please don't use
 
-my Bananapi R2Pro (rk3568) uses bifurcation and it is working in mainline =
-Linux, but not yet in uboot.
+That's not what I am suggesting though.  Let me try and sum it up in
+case it helps
 
-posted my test-results here:
-https://patchwork.ozlabs.org/project/uboot/patch/20230918173624.31464-1-li=
-nux@fw-web.de/#3183519
+- Remove OF_PRIOR_STAGE
+- Rename OF_BOARD -> OF_PRIOR_STAGE
+- Add the bloblist scanning code for DT under the OF_PRIOR_STAGE
 
-regards Frank
-
-
+Thanks
+/Ilias
+>
+> Regards,
+> Simon
+>
+>
+>
+> >
+> > Thanks
+> > /Ilias
+> >
+> >
+> > >
+> > > >
+> > > > Hope that helps
+> > > > /Ilias
+> > > > >
+> > > > > You say 'we can just throw and error' but what is the error? If the DT
+> > > > > is provided via the bloblist, there is no error. If it is not, I
+> > > > > already show an error and halt as you can see in the code below.
+> > > > >
+> > > > > I guess I'm just confused about what you are saying here.
+> > > > >
+> > > > > >
+> > > > > >
+> > > > > > > +               gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+> > > > > > > +               if (!gd->fdt_blob) {
+> > > > > > > +                       printf("Not FDT found in bloblist\n");
+> > > > > > > +                       bloblist_show_list();
+> > > > > > > +                       return -ENOENT;
+> > > > > > > +               }
+> > > > > >
+> > > > > > [...]
+> > > > > >
+> > >
+> > > Regards,
+> > > Simon
