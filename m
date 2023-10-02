@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DE24E784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:25:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D98FAE784A6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:25:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 369E78717C;
-	Mon,  2 Oct 2023 03:15:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1221A87126;
+	Mon,  2 Oct 2023 03:15:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="niJd9y8e";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bt33rclW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F876870F7; Mon,  2 Oct 2023 03:14:29 +0200 (CEST)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id B4C5387100; Mon,  2 Oct 2023 03:14:29 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05EC187117
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D92D870E3
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-7a25040faffso216485339f.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:09 -0700 (PDT)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-77acb04309dso576019939f.2
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209248; x=1696814048; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209251; x=1696814051; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x9yUGqv1Qp3iVmNX9i8zM3dBiIA9zR28y3uY7/hIwUE=;
- b=niJd9y8ex2U2we3Ae+jpSPiA877MGK1CUkO18RSokvooK4r+Txpw7rF2ok1DbSdiaZ
- u+ER3txTZrQCaqI4dTzLzBYrKDnLr1Nwmr9te7vz1pkwMlud1KYztHlq+jPy+skrFWXV
- ZSMaD9O+EnAjyh+T1JamdcbAgH6mLtGxZmzyk=
+ bh=myG+gM+lnJljGmOjDNFrLvwHPNhCs2X7pFqQwDCDaT4=;
+ b=Bt33rclW1YrTQDoLAU7khU8P7L1wRQyrXsrapUJcFwptVagHvr9tmt4OuDz26h/Yw5
+ Kxtg58A3hZl0ZDqPJ+hT8a7ABaFYU/VXV1/E0DILuC1CDxRv0Sm86181z0szNOJ7IHZ1
+ NQ56Jc1KHAIjUefzJNqA4R2V0Z2n+uDE436as=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209248; x=1696814048;
+ d=1e100.net; s=20230601; t=1696209251; x=1696814051;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=x9yUGqv1Qp3iVmNX9i8zM3dBiIA9zR28y3uY7/hIwUE=;
- b=cGaXcfbJf1U33YRYXxCo6/xSdDR2Au8G+N6TVVK90JOnfzmsKYa9XjcNtxOvgbRuxn
- hqiLaQDs/9yFgmmr/OgxaiUd9/cVOJOYL4ucsUoVTjpbXlWSwDZN+V/M6m8hgFhiV0u/
- xjIIWr1yngsD9/NxI1BWunRilQcwC08z7lbE/wjEjdohy1TR/sHHdAe8s9oWRJ9GVl4X
- Cm0DZLlyTxFa8631BX+HcwhvxXHh0tgGcnB/dm1MiYfY+FZKpEAHSoBHjcU6sIzRRyo3
- 9tYLrMvvA7PQ4W7ylGRPuu60Voc3o5XAUHPvhhJCrshNTh8HkID2wCSYqUsYM5/P4tsA
- VQOw==
-X-Gm-Message-State: AOJu0YwABIP5OFKQg5O0QqChCPpyYzolTRnKdtRRzdkDj0y3TB8wMgDf
- 4b7duQAdCx18OqQ5wnF3HFGVoOuQBDk0Fhz0a6c=
-X-Google-Smtp-Source: AGHT+IFW4RxsoA3IszXqtxnicBT+VQ4MyNC5toyjomk3RTYYzey8eImY8qixkDmmHFMw4cyMqkCVjQ==
-X-Received: by 2002:a05:6602:86:b0:787:1d0a:ce81 with SMTP id
- h6-20020a056602008600b007871d0ace81mr11632018iob.13.1696209248591; 
- Sun, 01 Oct 2023 18:14:08 -0700 (PDT)
+ bh=myG+gM+lnJljGmOjDNFrLvwHPNhCs2X7pFqQwDCDaT4=;
+ b=vBMAybmaWC3OOnK7EixbT+qj+AcusGEf4FFNScsZMExj1esgEo6ypRM5aEM7pJjsoE
+ XbwrX+Bz/ONs4/EJoKWwBw/MGIFmIdi5pqYvxHExiDaW5ymV2Ql4ozfTfsgOaUMAluVI
+ fmDZ2s27Kcq7fb/2eLjAlO4cPfG74WrJujkxEVN42xVgh2rbJMpiOyK31auhJwV0DFjK
+ FLv1/YGN6+sK2AEQLhAoxH8xNGj8zuBsT9Qrypybt/IJs/Rzfip+lB8ltb3jw897595P
+ gEoMo6QRPD8FnqrJWjD/mLR3gOyQmPt0STj0BU7JJc0BFn1RoJbzmKtCQw/fgiFNRTKB
+ oBLw==
+X-Gm-Message-State: AOJu0Yw7AwRij8elcpQ1j0Apaw2/WySiMM3SdeuJ9+Pa55hiZY4L73WL
+ G6Q70rpUFbkuRvKJlzaQSDwN74ad9EqqtnoHua8=
+X-Google-Smtp-Source: AGHT+IHWwsJekPZ5H7oO5pSCjNVNGQjtUz/JX4PBax5pC4blARfkDjIhpic9VlL3EsET6CZKVSo6oA==
+X-Received: by 2002:a6b:dc10:0:b0:790:9728:4014 with SMTP id
+ s16-20020a6bdc10000000b0079097284014mr11696339ioc.11.1696209251157; 
+ Sun, 01 Oct 2023 18:14:11 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.08
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:14:08 -0700 (PDT)
+ Sun, 01 Oct 2023 18:14:10 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 18/36] expo: Add better error reporting
-Date: Sun,  1 Oct 2023 19:13:22 -0600
-Message-ID: <20231002011349.461284-19-sjg@chromium.org>
+Subject: [PATCH v2 21/36] expo: Correct some swallowed errors in scene
+Date: Sun,  1 Oct 2023 19:13:25 -0600
+Message-ID: <20231002011349.461284-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
 References: <20231002011349.461284-1-sjg@chromium.org>
@@ -88,180 +88,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building an expo fails, show some information about which node
-caused the problem. Use -ENOENT consistently when the ID is missing.
-This makes it easier for the user to debug things.
+Return the reported error, rather than assuming it is -ENOMEM
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Drop trailing ;
+(no changes since v1)
 
- boot/expo_build.c | 57 +++++++++++++++++++++++++++++++++++++----------
- 1 file changed, 45 insertions(+), 12 deletions(-)
+ boot/scene.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/boot/expo_build.c b/boot/expo_build.c
-index bb33cc2a33f4..66a4e5e67d6d 100644
---- a/boot/expo_build.c
-+++ b/boot/expo_build.c
-@@ -23,10 +23,14 @@
-  *	if there is nothing for this ID. Since ID 0 is never used, the first
-  *	element of this array is always NULL
-  * @str_count: Number of entries in @str_for_id
-+ * @err_node: Node being processed (for error reporting)
-+ * @err_prop: Property being processed (for error reporting)
-  */
- struct build_info {
- 	const char **str_for_id;
- 	int str_count;
-+	ofnode err_node;
-+	const char *err_prop;
- };
- 
- /**
-@@ -46,6 +50,7 @@ int add_txt_str(struct build_info *info, ofnode node, struct scene *scn,
- 	uint str_id;
- 	int ret;
- 
-+	info->err_prop = find_name;
- 	text = ofnode_read_string(node, find_name);
- 	if (!text) {
- 		char name[40];
-@@ -54,7 +59,7 @@ int add_txt_str(struct build_info *info, ofnode node, struct scene *scn,
- 		snprintf(name, sizeof(name), "%s-id", find_name);
- 		ret = ofnode_read_u32(node, name, &id);
- 		if (ret)
--			return log_msg_ret("id", -EINVAL);
-+			return log_msg_ret("id", -ENOENT);
- 
- 		if (id >= info->str_count)
- 			return log_msg_ret("id", -E2BIG);
-@@ -164,9 +169,10 @@ static int read_strings(struct build_info *info, ofnode root)
- 		int ret;
- 		u32 id;
- 
-+		info->err_node = node;
- 		ret = ofnode_read_u32(node, "id", &id);
- 		if (ret)
--			return log_msg_ret("id", -EINVAL);
-+			return log_msg_ret("id", -ENOENT);
- 		val = ofnode_read_string(node, "value");
- 		if (!val)
- 			return log_msg_ret("val", -EINVAL);
-@@ -241,6 +247,8 @@ static int menu_build(struct build_info *info, ofnode node, struct scene *scn,
- 		return log_msg_ret("tit", ret);
- 	title_id = ret;
- 	ret = scene_menu_set_title(scn, menu_id, title_id);
-+	if (ret)
-+		return log_msg_ret("set", ret);
- 
- 	item_ids = ofnode_read_prop(node, "item-id", &size);
- 	if (!item_ids)
-@@ -300,7 +308,7 @@ static int obj_build(struct build_info *info, ofnode node, struct scene *scn)
- 	log_debug("- object %s\n", ofnode_get_name(node));
- 	ret = ofnode_read_u32(node, "id", &id);
- 	if (ret)
--		return log_msg_ret("id", -EINVAL);
-+		return log_msg_ret("id", -ENOENT);
- 
- 	type = ofnode_read_string(node, "type");
- 	if (!type)
-@@ -308,8 +316,8 @@ static int obj_build(struct build_info *info, ofnode node, struct scene *scn)
- 
- 	if (!strcmp("menu", type))
- 		ret = menu_build(info, node, scn, id, &obj);
--	 else
--		ret = -EINVAL;
-+	else
-+		ret = -EOPNOTSUPP;
- 	if (ret)
- 		return log_msg_ret("bld", ret);
- 
-@@ -341,11 +349,12 @@ static int scene_build(struct build_info *info, ofnode scn_node,
- 	ofnode node;
- 	int ret;
- 
-+	info->err_node = scn_node;
- 	name = ofnode_get_name(scn_node);
- 	log_debug("Building scene %s\n", name);
- 	ret = ofnode_read_u32(scn_node, "id", &id);
- 	if (ret)
--		return log_msg_ret("id", -EINVAL);
-+		return log_msg_ret("id", -ENOENT);
- 
- 	ret = scene_new(exp, name, id, &scn);
+diff --git a/boot/scene.c b/boot/scene.c
+index 08ed85e9188c..9c4466c1a47a 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -137,7 +137,7 @@ int scene_img(struct scene *scn, const char *name, uint id, char *data,
+ 			    sizeof(struct scene_obj_img),
+ 			    (struct scene_obj **)&img);
  	if (ret < 0)
-@@ -362,6 +371,7 @@ static int scene_build(struct build_info *info, ofnode scn_node,
- 		return log_msg_ret("pr", ret);
+-		return log_msg_ret("obj", -ENOMEM);
++		return log_msg_ret("obj", ret);
  
- 	ofnode_for_each_subnode(node, scn_node) {
-+		info->err_node = node;
- 		ret = obj_build(info, node, scn);
- 		if (ret < 0)
- 			return log_msg_ret("mit", ret);
-@@ -370,20 +380,19 @@ static int scene_build(struct build_info *info, ofnode scn_node,
- 	return 0;
- }
+ 	img->data = data;
  
--int expo_build(ofnode root, struct expo **expp)
-+int build_it(struct build_info *info, ofnode root, struct expo **expp)
- {
--	struct build_info info;
- 	ofnode scenes, node;
- 	struct expo *exp;
- 	u32 dyn_start;
- 	int ret;
+@@ -157,7 +157,7 @@ int scene_txt(struct scene *scn, const char *name, uint id, uint str_id,
+ 			    sizeof(struct scene_obj_txt),
+ 			    (struct scene_obj **)&txt);
+ 	if (ret < 0)
+-		return log_msg_ret("obj", -ENOMEM);
++		return log_msg_ret("obj", ret);
  
--	memset(&info, '\0', sizeof(info));
--	ret = read_strings(&info, root);
-+	ret = read_strings(info, root);
- 	if (ret)
- 		return log_msg_ret("str", ret);
- 	if (_DEBUG)
--		list_strings(&info);
-+		list_strings(info);
-+	info->err_node = root;
+ 	txt->str_id = str_id;
  
- 	ret = expo_new("name", NULL, &exp);
- 	if (ret)
-@@ -397,7 +406,7 @@ int expo_build(ofnode root, struct expo **expp)
- 		return log_msg_ret("sno", -EINVAL);
+@@ -183,7 +183,7 @@ int scene_txt_str(struct scene *scn, const char *name, uint id, uint str_id,
+ 			    sizeof(struct scene_obj_txt),
+ 			    (struct scene_obj **)&txt);
+ 	if (ret < 0)
+-		return log_msg_ret("obj", -ENOMEM);
++		return log_msg_ret("obj", ret);
  
- 	ofnode_for_each_subnode(node, scenes) {
--		ret = scene_build(&info, node, exp);
-+		ret = scene_build(info, node, exp);
- 		if (ret < 0)
- 			return log_msg_ret("scn", ret);
- 	}
-@@ -405,3 +414,27 @@ int expo_build(ofnode root, struct expo **expp)
+ 	txt->str_id = str_id;
  
- 	return 0;
- }
-+
-+int expo_build(ofnode root, struct expo **expp)
-+{
-+	struct build_info info;
-+	struct expo *exp;
-+	int ret;
-+
-+	memset(&info, '\0', sizeof(info));
-+	ret = build_it(&info, root, &exp);
-+	if (ret) {
-+		char buf[120];
-+		int node_ret;
-+
-+		node_ret = ofnode_get_path(info.err_node, buf, sizeof(buf));
-+		log_warning("Build failed at node %s, property %s\n",
-+			    node_ret ? ofnode_get_name(info.err_node) : buf,
-+			    info.err_prop);
-+
-+		return log_msg_ret("bui", ret);
-+	}
-+	*expp = exp;
-+
-+	return 0;
-+}
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
