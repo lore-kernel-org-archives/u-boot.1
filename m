@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B5F3E784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C87BE784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:20:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7B8187100;
-	Mon,  2 Oct 2023 03:14:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3F50C8711B;
+	Mon,  2 Oct 2023 03:14:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eZfsIQ+e";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kEyliEX2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46F80870EA; Mon,  2 Oct 2023 03:14:00 +0200 (CEST)
-Received: from mail-oi1-x22f.google.com (mail-oi1-x22f.google.com
- [IPv6:2607:f8b0:4864:20::22f])
+ id 34E53870FB; Mon,  2 Oct 2023 03:14:03 +0200 (CEST)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40B328709C
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:13:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 343D1870E3
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:13:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22f.google.com with SMTP id
- 5614622812f47-3ae5ee80c0dso4487109b6e.3
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:13:56 -0700 (PDT)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3528bc102adso1068735ab.2
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:13:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209234; x=1696814034; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209236; x=1696814036; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=v0w+6qq8nGPiSZ61SwLEiqEkdG1esVt3wAEafXcxkIY=;
- b=eZfsIQ+efpQOyT9kSfKHVHNQeT8xrF/GodBw1uEqx37xp7D/Z/mrXg+x7LeqdnmwjV
- aw6GirqkDAZDAhUg0l8qRp4cswto3vTYhjZUlMJSY1hRfDU7w7og8eWxSDUY0Ln6oq0m
- suW9H9L2sf8+eoN2eu55MbfcZkZyiKGZg1O2U=
+ bh=5r9t/dfRBm7/j24vPYG+ageHetDnzJZcBKTKJylmdCA=;
+ b=kEyliEX2P47fav+/TO1WX0KEMfdRnp2QaqYjqf+WjrJlJs6Ag3rbNmB6H4+Yu84wbr
+ 9o1iucmqDnoBHuak8DaxrH+wn7znRdWUAzEYPmBd6lrS6yWrFLFRcrbQnTg2jrayIRqk
+ 9ukHJtwdpe8TVWDlRAi4Il6N9PrZfAzS/0S9A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209234; x=1696814034;
+ d=1e100.net; s=20230601; t=1696209236; x=1696814036;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=v0w+6qq8nGPiSZ61SwLEiqEkdG1esVt3wAEafXcxkIY=;
- b=oQyQw+etjrHw2SEx+ZGD1JTNLS6vXY3lljRweAwswhSe5SGd0SGUBRvxKCJs0D/I5F
- c6Ss4cmATGEcCV7yZcI1w9pvBJqwT2Rr5bVmRX03NxHm8RDXju1NRMYvrxMPfhArwc8g
- 44T/LIY351nPfLbnRUtd1BQUCjsEJZyK3Q3hJAv/fqvEQZckahSwvC50ER/cDoM5Z/lZ
- VwCfft9kJ51zs8s1n6WK1qMC17GnfTqlNlWu8mr+8SQCEDKHpCtmdH2n1Ia8asNtlaG2
- IctGNbzCOJHDlARC0BLxJMzBdnDyJME2OxJtzp59rLvBPggBbYWsGgl9oR3cEB8ur29l
- Vg5w==
-X-Gm-Message-State: AOJu0YxQoUuIraYQh9532UaNPqBepT3e4Cc2vYHH1/RaPhLVUGQOdzo2
- hrdaaGboNtMR34rbI7DBlleBdzme4aANDqrkyY8=
-X-Google-Smtp-Source: AGHT+IHLy92YibtY1NJ77+yay9+GWLkXJijDOQoqyy0vBXx+fOYNTjhhgWRmaSkygo4i+O9aa6TWVg==
-X-Received: by 2002:a05:6808:1413:b0:3ae:13fd:fa93 with SMTP id
- w19-20020a056808141300b003ae13fdfa93mr13267895oiv.15.1696209234643; 
- Sun, 01 Oct 2023 18:13:54 -0700 (PDT)
+ bh=5r9t/dfRBm7/j24vPYG+ageHetDnzJZcBKTKJylmdCA=;
+ b=NG/3iGfs6hPMOIutSUs0QINYzmBX3k2jwqcercrCJOrBSEbiW5r6OT0LJib44spW+c
+ 5U6957taQBCiCgHoG6mqX/y/03FRO1dg/t1QN7dMAeGg6l+3Pu0pifqSosHpfA+y1vJk
+ myWQn6Ak6MP4AoAq7BQuK9u10fi25BVS8aE0eTxaP7AprAqqvpNcajciWUL0h+UKyhPG
+ jbkzE1sILNlqa1+0Op79PG3FSIvP5Eeugc0DrnlWP8oPTVQl7+zLv+rBaa7EkmZBzZO6
+ 3Ci+88wnCRG45N60ihELRmwv6lfqPT+n6+sTjwc2nwfMr+ci7wlPmNRYdp3u454cJRZN
+ UJfw==
+X-Gm-Message-State: AOJu0YwIkpS3ttqtEi/ZpVm577rWAJEaNiEh9Pxjt19JgVHallYcJ44L
+ rO5oqEwGJWRZYxAfY6kmViUkA1X78CrMKRCJcYk=
+X-Google-Smtp-Source: AGHT+IERX3+k/HRs46pXoXBgsLKWZyukrwYfDJ3V9YECC83bNla2L238bTnM47fRkacPVSDDsc4/Jg==
+X-Received: by 2002:a92:cd8a:0:b0:352:620b:f8b with SMTP id
+ r10-20020a92cd8a000000b00352620b0f8bmr10065238ilb.9.1696209236748; 
+ Sun, 01 Oct 2023 18:13:56 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.13.54
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.13.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:13:54 -0700 (PDT)
+ Sun, 01 Oct 2023 18:13:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 01/36] cli: Move simple readline into a function
-Date: Sun,  1 Oct 2023 19:13:05 -0600
-Message-ID: <20231002011349.461284-2-sjg@chromium.org>
+Subject: [PATCH v2 04/36] cli: Drop #ifdefs for CONFIG_AUTO_COMPLETE in
+ cli_readline
+Date: Sun,  1 Oct 2023 19:13:08 -0600
+Message-ID: <20231002011349.461284-5-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
 References: <20231002011349.461284-1-sjg@chromium.org>
@@ -88,116 +89,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this code into its own function since it is a separate
-implementation from the full version.
+Use a static inline and adjust the logic to avoid the need for #ifdefs in
+cli_readline_into_buffer()
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/cli_readline.c | 79 +++++++++++++++++++++++++------------------
- 1 file changed, 46 insertions(+), 33 deletions(-)
+ common/cli_readline.c | 85 +++++++++++++++++++++----------------------
+ include/command.h     |  6 +++
+ 2 files changed, 48 insertions(+), 43 deletions(-)
 
 diff --git a/common/cli_readline.c b/common/cli_readline.c
-index e83743e90c92..9a7c268719da 100644
+index 61f9ba99068a..458e927e4922 100644
 --- a/common/cli_readline.c
 +++ b/common/cli_readline.c
-@@ -440,41 +440,22 @@ int cli_readline(const char *const prompt)
- 	return cli_readline_into_buffer(prompt, console_buffer, 0);
- }
+@@ -386,27 +386,27 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
+ 			REFRESH_TO_EOL();
+ 			continue;
+ 		}
+-#ifdef CONFIG_AUTO_COMPLETE
+-		case '\t': {
+-			int num2, col;
++		case '\t':
++			if (IS_ENABLED(CONFIG_AUTO_COMPLETE)) {
++				int num2, col;
++
++				/* do not autocomplete when in the middle */
++				if (num < eol_num) {
++					getcmd_cbeep();
++					break;
++				}
  
--
--int cli_readline_into_buffer(const char *const prompt, char *buffer,
--			     int timeout)
-+/**
-+ * cread_line_simple() - Simple (small) command-line reader
-+ *
-+ * This supports only basic editing, with no cursor movement
-+ *
-+ * @prompt: Prompt to display
-+ * @p: Text buffer to edit
-+ * Return: length of text buffer, or -1 if input was cannncelled (Ctrl-C)
-+ */
-+static int cread_line_simple(const char *const prompt, char *p)
- {
--	char *p = buffer;
--#ifdef CONFIG_CMDLINE_EDITING
--	unsigned int len = CONFIG_SYS_CBSIZE;
--	int rc;
--	static int initted;
--
--	/*
--	 * History uses a global array which is not
--	 * writable until after relocation to RAM.
--	 * Revert to non-history version if still
--	 * running from flash.
--	 */
--	if (gd->flags & GD_FLG_RELOC) {
--		if (!initted) {
--			hist_init();
--			initted = 1;
--		}
--
--		if (prompt)
--			puts(prompt);
--
--		rc = cread_line(prompt, p, &len, timeout);
--		return rc < 0 ? rc : len;
--
--	} else {
--#endif	/* CONFIG_CMDLINE_EDITING */
- 	char *p_buf = p;
--	int	n = 0;				/* buffer index		*/
--	int	plen = 0;			/* prompt length	*/
--	int	col;				/* output column cnt	*/
--	char	c;
-+	int n = 0;		/* buffer index */
-+	int plen = 0;		/* prompt length */
-+	int col;		/* output column cnt */
-+	char c;
- 
- 	/* print prompt */
- 	if (prompt) {
-@@ -567,6 +548,38 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
+-			/* do not autocomplete when in the middle */
+-			if (num < eol_num) {
+-				getcmd_cbeep();
++				buf[num] = '\0';
++				col = strlen(prompt) + eol_num;
++				num2 = num;
++				if (cmd_auto_complete(prompt, buf, &num2, &col)) {
++					col = num2 - num;
++					num += col;
++					eol_num += col;
++				}
+ 				break;
  			}
+-
+-			buf[num] = '\0';
+-			col = strlen(prompt) + eol_num;
+-			num2 = num;
+-			if (cmd_auto_complete(prompt, buf, &num2, &col)) {
+-				col = num2 - num;
+-				num += col;
+-				eol_num += col;
+-			}
+-			break;
+-		}
+-#endif
++			fallthrough;
+ 		default:
+ 			cread_add_char(ichar, insert, &num, &eol_num, buf,
+ 				       *len);
+@@ -519,14 +519,15 @@ static int cread_line_simple(const char *const prompt, char *p)
+ 			continue;
+ 
+ 		default:
+-			/*
+-			 * Must be a normal character then
+-			 */
+-			if (n < CONFIG_SYS_CBSIZE-2) {
+-				if (c == '\t') {	/* expand TABs */
+-#ifdef CONFIG_AUTO_COMPLETE
++			/* Must be a normal character then */
++			if (n >= CONFIG_SYS_CBSIZE - 2) { /* Buffer full */
++				putc('\a');
++				break;
++			}
++			if (c == '\t') {	/* expand TABs */
++				if (IS_ENABLED(CONFIG_AUTO_COMPLETE)) {
+ 					/*
+-					 * if auto completion triggered just
++					 * if auto-completion triggered just
+ 					 * continue
+ 					 */
+ 					*p = '\0';
+@@ -536,26 +537,24 @@ static int cread_line_simple(const char *const prompt, char *p)
+ 						p = p_buf + n;	/* reset */
+ 						continue;
+ 					}
+-#endif
+-					puts(tab_seq + (col & 07));
+-					col += 8 - (col & 07);
+-				} else {
+-					char __maybe_unused buf[2];
+-
+-					/*
+-					 * Echo input using puts() to force an
+-					 * LCD flush if we are using an LCD
+-					 */
+-					++col;
+-					buf[0] = c;
+-					buf[1] = '\0';
+-					puts(buf);
+ 				}
+-				*p++ = c;
+-				++n;
+-			} else {			/* Buffer full */
+-				putc('\a');
++				puts(tab_seq + (col & 07));
++				col += 8 - (col & 07);
++			} else {
++				char __maybe_unused buf[2];
++
++				/*
++				 * Echo input using puts() to force an LCD
++				 * flush if we are using an LCD
++				 */
++				++col;
++				buf[0] = c;
++				buf[1] = '\0';
++				puts(buf);
+ 			}
++			*p++ = c;
++			++n;
++			break;
  		}
  	}
-+}
-+
-+int cli_readline_into_buffer(const char *const prompt, char *buffer,
-+			     int timeout)
+ }
+diff --git a/include/command.h b/include/command.h
+index ae7bb4a30b05..44636fbfc562 100644
+--- a/include/command.h
++++ b/include/command.h
+@@ -91,6 +91,12 @@ int var_complete(int argc, char *const argv[], char last_char, int maxv,
+ 		 char *cmdv[]);
+ int cmd_auto_complete(const char *const prompt, char *buf, int *np,
+ 		      int *colp);
++#else
++static inline int cmd_auto_complete(const char *const prompt, char *buf,
++				    int *np, int *colp)
 +{
-+	char *p = buffer;
-+#ifdef CONFIG_CMDLINE_EDITING
-+	unsigned int len = CONFIG_SYS_CBSIZE;
-+	int rc;
-+	static int initted;
-+
-+	/*
-+	 * History uses a global array which is not
-+	 * writable until after relocation to RAM.
-+	 * Revert to non-history version if still
-+	 * running from flash.
-+	 */
-+	if (gd->flags & GD_FLG_RELOC) {
-+		if (!initted) {
-+			hist_init();
-+			initted = 1;
-+		}
-+
-+		if (prompt)
-+			puts(prompt);
-+
-+		rc = cread_line(prompt, p, &len, timeout);
-+		return rc < 0 ? rc : len;
-+
-+	} else {
-+#endif	/* CONFIG_CMDLINE_EDITING */
-+		return cread_line_simple(prompt, p);
- #ifdef CONFIG_CMDLINE_EDITING
- 	}
++	return 0;
++}
  #endif
+ 
+ /**
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
