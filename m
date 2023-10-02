@@ -4,73 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF524E784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:29:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06532E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:29:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2437E870DC;
-	Mon,  2 Oct 2023 03:16:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8CCF5871EE;
+	Mon,  2 Oct 2023 03:15:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VnKMASNr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CvWXp89x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F097D8718A; Mon,  2 Oct 2023 03:15:46 +0200 (CEST)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id 827C98713B; Mon,  2 Oct 2023 03:15:42 +0200 (CEST)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2737787149
+ by phobos.denx.de (Postfix) with ESMTPS id 278868714A
  for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:15:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3af8b498d30so371809b6e.0
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3af8b498d31so591615b6e.1
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:15:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209299; x=1696814099; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209297; x=1696814097; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lkpZ9oUfgZh3UaTnz/YyWn8jHOnR6HGZhUB2AG/EoBU=;
- b=VnKMASNrPxQaVhiUzJX6rj4XFXsKqqAXOYECzY0ErhJrzOYAgX8gZvY8BRCNOdTTqJ
- v1pVmmqzxdUrtYqRYCwgwua4gy6QSsN6YufSn8ohqYXgtcErCfGm9Imf2lHQC3Hxn9Yh
- TWGpybECt/gbIutgfpx5rV/+lSBNCeTHuqp4E=
+ bh=T63e+csyAHuwUMalC0DxLLMlxLayO8CUgJZYFlzlegg=;
+ b=CvWXp89xXilixOpkuWH+lAuE8OdSj67ztO8tN9VQ2CKCm7RkIP4M7X2vDanfgSY5UX
+ BYHsDfw6IxlwKVQH7xEE6ipI+7q78IM02bO4HSiqKIliKv84MpieP6+29BQGQbCfUIKd
+ jXOOqQ+JmWK9TkGwWxCXZRwiUv0DyjJJkWjrA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209299; x=1696814099;
+ d=1e100.net; s=20230601; t=1696209297; x=1696814097;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lkpZ9oUfgZh3UaTnz/YyWn8jHOnR6HGZhUB2AG/EoBU=;
- b=CfEcM6lFDMx6wnCejyA8wrQPfhoRnLExQvEJcfv8EeKPjpSObPu9yr2+yRDZ1B9grk
- n0hKb4Z6ifuFIIaYjLezQDXrvpCVGzAE8W2lUqiWhDUaRvDjV8Sqm92mTRkCB7C6iU4D
- b6to7U1JKlRLXosMxLI8JsStH4DHVj3DAG8Etgbed6Tou8Rr1aBQx91GcgGX6/ANfNel
- k/YvcHefc6v9sb9gtTgQh+OaqgPNvX3lBZzbvp5mQKM9lVRXbW4nC7SKYxgDkUyupfX7
- k1CPpiNKUVNsM978J7OCFsXDoVjSMLpcIFuZqSEXwovdHUnySfQqe4NK1bIKUCMv2p6d
- Kdjg==
-X-Gm-Message-State: AOJu0Yza2v+aj6faScuohOHGo5xXxO1xs04j5G6tDOvg6ckcrkOqSaZQ
- bz55SFHfrKi4ZMIzFOeAdExYyOKEX5O100OZjoA=
-X-Google-Smtp-Source: AGHT+IFhRUuG4R7tsOpwESGQUea5wI0xxBOtyGzacmb5oGetVqqGQ/YpmxdxZb8wYc4pBHIAyfMKBg==
-X-Received: by 2002:a05:6808:1803:b0:3ae:e0d:1548 with SMTP id
- bh3-20020a056808180300b003ae0e0d1548mr11691332oib.15.1696209298837; 
- Sun, 01 Oct 2023 18:14:58 -0700 (PDT)
+ bh=T63e+csyAHuwUMalC0DxLLMlxLayO8CUgJZYFlzlegg=;
+ b=AG7EYToByZ/v4WRKzyF7YSaeSTyONdcQAhgb8VIMPmusya0497Ut5NnUmkOC2lzLd5
+ 4MvWVpYrqcSg4svyObrcCPN5JpCeSz4nMi+gDfWgpwpuVTD650G26vZv2uYD0dQXZ30k
+ hA7+EhdpuIpT8t2Tfz0G2jRdahjM2hmLOMFJfFpHhY1Gmzd0qvJ7T2R+axyQCfOIT0UR
+ eB83g65DFa/SJ+XpqO8zKwqr2mXYZWwZpobnXb4Rv6pJ2EqhhXGIycYQ21/v8gH82DMY
+ NiGj5zEg0XK+A7GmNazkq1GWCiTV2hJo3/VBQJe1dkKqtWlVkhxDebu8xIXzO4vznUhs
+ NQTg==
+X-Gm-Message-State: AOJu0YwW+UEN4mfwiZBm7GHBG5jSdWQSWk5qBr8eVmpU//y1HBZ9yday
+ KtkRc4fDnIOy4N6YDmH5sswOj77/MQB4Y7+bIMM=
+X-Google-Smtp-Source: AGHT+IHFXYL8jdLXNjkVsF+l0lqHM0lN4mWlfdA3xWYquwwFOUVkiCFnSP3lYxUFPjZ5ykgXPJ8mag==
+X-Received: by 2002:aca:91a:0:b0:3ab:8295:f2f1 with SMTP id
+ 26-20020aca091a000000b003ab8295f2f1mr11745637oij.45.1696209297189; 
+ Sun, 01 Oct 2023 18:14:57 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- s23-20020a02c517000000b0042b2e309f97sm6522951jam.177.2023.10.01.18.14.58
+ s23-20020a02c517000000b0042b2e309f97sm6522951jam.177.2023.10.01.18.14.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:14:58 -0700 (PDT)
+ Sun, 01 Oct 2023 18:14:56 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Safae Ouajih <souajih@baylibre.com>
-Subject: [PATCH v3 05/12] usb: Avoid unbinding devices in use by bootflows
-Date: Sun,  1 Oct 2023 19:14:40 -0600
-Message-ID: <20231001191444.v3.5.If206027372f73ce32480223e5626f4b944e281b7@changeid>
+Cc: Simon Glass <sjg@chromium.org>,
+	Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v3 03/12] bootstd: Add a return code to bootflow menu
+Date: Sun,  1 Oct 2023 19:14:38 -0600
+Message-ID: <20231001191444.v3.3.Iaa9b5bbab0f25012cfc68a803a9da83e71b19aaf@changeid>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011450.462468-1-sjg@chromium.org>
 References: <20231002011450.462468-1-sjg@chromium.org>
@@ -92,139 +88,242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a USB device is unbound, it causes any bootflows attached to it to
-be removed, via a call to bootdev_clear_bootflows() from
-bootdev_pre_unbind(). This obviously makes it impossible to boot the
-bootflow.
+Return an error when the user does not select an OS, so we know whether
+to boot or not.
 
-However, when booting a bootflow that relies on USB, usb_stop() is
-called, which unbinds the device. For EFI, this happens in
-efi_exit_boot_services() which means that the bootflow disappears
-before it is finished with.
+Move calling of bootflow_menu_run() into a separate function so we can
+call it from other places.
 
-There is no need to unbind all the USB devices just to quiesce them.
-Add a new usb_pause() call which removes them but leaves them bound.
+Expand the test to cover these cases.
 
-This resolves a hang on x86 when booting a distro from USB. This was
-found using a device with 4 bootflows, the last of which was USB.
+Add some documentation also, while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Add missing word 'function' in the commit message
 
 Changes in v2:
-- Add new patch to avoid unbinding devices in use by bootflows
+- Add new patch to add a return code to bootflow menu
 
- boot/bootm.c                  |  2 +-
- common/usb.c                  |  7 ++++++-
- drivers/usb/host/usb-uclass.c | 14 ++++++++++++--
- include/usb.h                 | 15 ++++++++++++++-
- 4 files changed, 33 insertions(+), 5 deletions(-)
+ cmd/bootflow.c             | 53 +++++++++++++++++++++++-------
+ doc/usage/cmd/bootflow.rst | 67 ++++++++++++++++++++++++++++++++++++++
+ test/boot/bootflow.c       | 15 +++++++++
+ 3 files changed, 123 insertions(+), 12 deletions(-)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index b1c3afe0a3ad..5c9ba083e64c 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -501,7 +501,7 @@ ulong bootm_disable_interrupts(void)
- 	 * updated every 1 ms within the HCCA structure in SDRAM! For more
- 	 * details see the OpenHCI specification.
- 	 */
--	usb_stop();
-+	usb_pause();
- #endif
- 	return iflag;
+diff --git a/cmd/bootflow.c b/cmd/bootflow.c
+index 300ad3aaa760..1516f8a4193b 100644
+--- a/cmd/bootflow.c
++++ b/cmd/bootflow.c
+@@ -89,6 +89,44 @@ static void show_footer(int count, int num_valid)
+ 	       num_valid);
  }
-diff --git a/common/usb.c b/common/usb.c
-index 836506dcd9e9..4d6ac69111e7 100644
---- a/common/usb.c
-+++ b/common/usb.c
-@@ -126,7 +126,7 @@ int usb_init(void)
- /******************************************************************************
-  * Stop USB this stops the LowLevel Part and deregisters USB devices.
-  */
--int usb_stop(void)
-+int usb_pause(void)
- {
- 	int i;
  
-@@ -144,6 +144,11 @@ int usb_stop(void)
++/**
++ * bootflow_handle_menu() - Handle running the menu and updating cur bootflow
++ *
++ * This shows the menu, allows the user to select something and then prints
++ * what happened
++ *
++ * @std: bootstd information
++ * @text_mode: true to run the menu in text mode
++ * @bflowp: Returns selected bootflow, on success
++ * Return: 0 on success (a bootflow was selected), -EAGAIN if nothing was
++ *	chosen, other -ve value on other error
++ */
++__maybe_unused static int bootflow_handle_menu(struct bootstd_priv *std,
++					       bool text_mode,
++					       struct bootflow **bflowp)
++{
++	struct bootflow *bflow;
++	int ret;
++
++	ret = bootflow_menu_run(std, text_mode, &bflow);
++	if (ret) {
++		if (ret == -EAGAIN) {
++			printf("Nothing chosen\n");
++			std->cur_bootflow = NULL;
++		} else {
++			printf("Menu failed (err=%d)\n", ret);
++		}
++
++		return ret;
++	}
++
++	printf("Selected: %s\n", bflow->os_name ? bflow->os_name : bflow->name);
++	std->cur_bootflow = bflow;
++	*bflowp = bflow;
++
++	return 0;
++}
++
+ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			    char *const argv[])
+ {
+@@ -455,18 +493,9 @@ static int do_bootflow_menu(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (ret)
+ 		return CMD_RET_FAILURE;
+ 
+-	ret = bootflow_menu_run(std, text_mode, &bflow);
+-	if (ret) {
+-		if (ret == -EAGAIN)
+-			printf("Nothing chosen\n");
+-		else {
+-			printf("Menu failed (err=%d)\n", ret);
+-			return CMD_RET_FAILURE;
+-		}
+-	}
+-
+-	printf("Selected: %s\n", bflow->os_name ? bflow->os_name : bflow->name);
+-	std->cur_bootflow = bflow;
++	ret = bootflow_handle_menu(std, text_mode, &bflow);
++	if (ret)
++		return CMD_RET_FAILURE;
+ 
  	return 0;
  }
+diff --git a/doc/usage/cmd/bootflow.rst b/doc/usage/cmd/bootflow.rst
+index ead493d0aaf8..6a0645c28d07 100644
+--- a/doc/usage/cmd/bootflow.rst
++++ b/doc/usage/cmd/bootflow.rst
+@@ -15,6 +15,7 @@ Synopis
+     bootflow read
+     bootflow boot
+     bootflow cmdline [set|get|clear|delete|auto] <param> [<value>]
++    bootfloe menu [-t]
  
-+int usb_stop(void)
-+{
-+	return usb_pause();
-+}
+ Description
+ -----------
+@@ -24,6 +25,9 @@ locate bootflows, list them and boot them.
+ 
+ See :doc:`../../develop/bootstd` for more information.
+ 
++Note that `CONFIG_BOOTSTD_FULL` (which enables `CONFIG_CMD_BOOTFLOW_FULL) must
++be enabled to obtain full functionality with this command. Otherwise, it only
++supports `bootflow scan` which scans and boots the first available bootflow.
+ 
+ bootflow scan
+ ~~~~~~~~~~~~~
+@@ -247,6 +251,16 @@ can be used to set the early console (or console) to a suitable value so that
+ output appears on the serial port. This is only supported by the 16550 serial
+ driver so far.
+ 
++bootflow menu
++~~~~~~~~~~~~~
 +
- /******************************************************************************
-  * Detect if a USB device has been plugged or unplugged.
-  */
-diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
-index a1cd0ad2d669..c26c65d7986b 100644
---- a/drivers/usb/host/usb-uclass.c
-+++ b/drivers/usb/host/usb-uclass.c
-@@ -173,7 +173,7 @@ int usb_get_max_xfer_size(struct usb_device *udev, size_t *size)
- 	return ops->get_max_xfer_size(bus, size);
- }
++This shows a menu with available bootflows. The user can select a particular
++bootflow, which then becomes the current one.
++
++The `-t` flag requests a text menu. Otherwise, if a display is available, a
++graphical menu is shown.
++
++
+ Example
+ -------
  
--int usb_stop(void)
-+static int usb_finish(bool unbind_all)
+@@ -658,6 +672,56 @@ Now the buffer can be accessed::
+     77b7e4e0: 320fc000 08e8ba0f c031300f b8d0000f  ...2.....01.....
+     77b7e4f0: 00000020 6ad8000f 00858d10 50000002   ......j.......P
+ 
++This shows using a text menu to boot an OS::
++
++    => bootflow scan
++    => bootfl list
++    => bootfl menu -t
++    U-Boot    :    Boot Menu
++
++    UP and DOWN to choose, ENTER to select
++
++      >    0  mmc1        mmc1.bootdev.whole
++           1  mmc1        Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++           2  mmc1        mmc1.bootdev.part_1
++           3  mmc4        mmc4.bootdev.whole
++           4  mmc4        Armbian
++           5  mmc4        mmc4.bootdev.part_1
++           6  mmc5        mmc5.bootdev.whole
++           7  mmc5        ChromeOS
++           8  mmc5        ChromeOS
++    U-Boot    :    Boot Menu
++
++    UP and DOWN to choose, ENTER to select
++
++           0  mmc1        mmc1.bootdev.whole
++      >    1  mmc1        Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++           2  mmc1        mmc1.bootdev.part_1
++           3  mmc4        mmc4.bootdev.whole
++           4  mmc4        Armbian
++           5  mmc4        mmc4.bootdev.part_1
++           6  mmc5        mmc5.bootdev.whole
++           7  mmc5        ChromeOS
++           8  mmc5        ChromeOS
++    U-Boot    :    Boot Menu
++
++    Selected: Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++    => bootfl boot
++    ** Booting bootflow 'mmc1.bootdev.part_1' with extlinux
++    Ignoring unknown command: ui
++    Ignoring malformed menu command:  autoboot
++    Ignoring malformed menu command:  hidden
++    Ignoring unknown command: totaltimeout
++    Fedora-Workstation-armhfp-31-1.9 Boot Options.
++    1:	Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++    Enter choice: 1
++    1:	Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
++    Retrieving file: /vmlinuz-5.3.7-301.fc31.armv7hl
++    Retrieving file: /initramfs-5.3.7-301.fc31.armv7hl.img
++    append: ro root=UUID=9732b35b-4cd5-458b-9b91-80f7047e0b8a rhgb quiet LANG=en_US.UTF-8 cma=192MB cma=256MB
++    Retrieving file: /dtb-5.3.7-301.fc31.armv7hl/sandbox.dtb
++    ...
++
+ 
+ Return value
+ ------------
+@@ -667,6 +731,9 @@ return to U-Boot. If something about the U-Boot processing fails, then the
+ return value $? is 1. If the boot succeeds but for some reason the Operating
+ System returns, then $? is 0, indicating success.
+ 
++For `bootflow menu` the return value is $? is 0 (true) if an option was choses,
++else 1.
++
+ For other subcommands, the return value $? is always 0 (true).
+ 
+ 
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index 0a992e2bcc14..04a5bd5d7a80 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -604,8 +604,12 @@ static int scan_mmc4_bootdev(struct unit_test_state *uts)
+ /* Check 'bootflow menu' to select a bootflow */
+ static int bootflow_cmd_menu(struct unit_test_state *uts)
  {
- 	struct udevice *bus;
- 	struct udevice *rh;
-@@ -195,7 +195,7 @@ int usb_stop(void)
++	struct bootstd_priv *std;
+ 	char prev[3];
  
- 		/* Locate root hub device */
- 		device_find_first_child(bus, &rh);
--		if (rh) {
-+		if (rh && unbind_all) {
- 			/*
- 			 * All USB devices are children of root hub.
- 			 * Unbinding root hub will unbind all of its children.
-@@ -222,6 +222,16 @@ int usb_stop(void)
- 	return err;
- }
- 
-+int usb_stop(void)
-+{
-+	return usb_finish(true);
-+}
++	/* get access to the current bootflow */
++	ut_assertok(bootstd_get_priv(&std));
 +
-+int usb_pause(void)
-+{
-+	return usb_finish(false);
-+}
-+
- static void usb_scan_bus(struct udevice *bus, bool recurse)
- {
- 	struct usb_bus_priv *priv;
-diff --git a/include/usb.h b/include/usb.h
-index 09e3f0cb309c..ad39b09a6e45 100644
---- a/include/usb.h
-+++ b/include/usb.h
-@@ -265,7 +265,20 @@ int usb_kbd_deregister(int force);
-  */
- int usb_init(void);
+ 	ut_assertok(scan_mmc4_bootdev(uts));
  
--int usb_stop(void); /* stop the USB Controller */
-+/**
-+ * usb_stop() - stop the USB Controller and unbind all USB controllers/devices
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int usb_stop(void);
-+
-+/**
-+ * usb_pause() - stop the USB Controller DMA, etc.
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int usb_pause(void);
-+
- int usb_detect_change(void); /* detect if a USB device has been (un)plugged */
+ 	/* Add keypresses to move to and select the second one in the list */
+@@ -616,6 +620,17 @@ static int bootflow_cmd_menu(struct unit_test_state *uts)
  
+ 	ut_assertok(run_command("bootflow menu", 0));
+ 	ut_assert_nextline("Selected: Armbian");
++	ut_assertnonnull(std->cur_bootflow);
++	ut_assert_console_end();
++
++	/* Check not selecting anything */
++	prev[0] = '\e';
++	prev[1] = '\0';
++	ut_asserteq(1, console_in_puts(prev));
++
++	ut_asserteq(1, run_command("bootflow menu", 0));
++	ut_assertnull(std->cur_bootflow);
++	ut_assert_nextline("Nothing chosen");
+ 	ut_assert_console_end();
  
+ 	return 0;
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
