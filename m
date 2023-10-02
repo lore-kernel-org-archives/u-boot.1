@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E386E784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:26:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F04E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:27:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 886BA87128;
-	Mon,  2 Oct 2023 03:15:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4A3A98719D;
+	Mon,  2 Oct 2023 03:15:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IRc0zUeq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N8E0/DPe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87C0E870BD; Mon,  2 Oct 2023 03:14:42 +0200 (CEST)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id 48D4A870BD; Mon,  2 Oct 2023 03:14:48 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36BBB870BD
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09F258711F
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-35135f69de2so39685255ab.2
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-79faf4210b2so458058739f.2
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1696209254; x=1696814054; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WEuq2Fe4/y/arvdW0c1D1t/g2XDmr8Qpk/aV8dn4gJI=;
- b=IRc0zUeqr8uffH/2OeN3/h0ThNs1uIFPDvrZ7sV9/6gOx3X6rSfxwGnPmJgmssSrC3
- UnSPjMpyrIgjFoGGE3Mvdp2KgGwKIpEJmZnIQWm4pMvNpC3wy0um9zEIdzKFmCLwJXpb
- z0Z5dCyjKxO4hC0OfnJGy8G8rM8YapyCUxyFI=
+ bh=ZYDy6poK1DzXplELVjcZ2pZNZBn7n8EPBTYpzpnWKQY=;
+ b=N8E0/DPe8H/eT1pMyc9NIqEMnhG8EqnnwM8nMhxv+jjLqWFJ4+l+CVcz8/77cu3Ui8
+ nN1JRkJlBUq12cgFUl0X9RazbLSOjuO41BwwkQF8XPlvrPQJma8j2m/FJ9/W9+g6Awxo
+ csTMQsv/MHOW+KHvYfTSCmq8rqCAvN456+Dcc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1696209254; x=1696814054;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WEuq2Fe4/y/arvdW0c1D1t/g2XDmr8Qpk/aV8dn4gJI=;
- b=PNzht1cbzLmcmbdPQ1AZE+TY5fg/shCNyzGijoHmeYODAlCISmt42G3drPHUUS9IOv
- Abge2O5vxEIA+JV0llgXQPa/wxxrARWQFi2BoCeutZ9q8zQMOKDOtkMj3pEiiQs1KahV
- s/RW23CLym/Cm+sHiFyXE92w7Eq5jXpEE0/Pt5F1+Hhfx6ZaJILAGBVK9jvuf4/Z6lFv
- FEyh5Jk5dx4MsxIphPb/USWxxM5yo7rR5AnlNqyC1gY5NOrp4REh+wFJyQoSZQAo/ZvP
- x5J4zOJd2kLgDkID+pypf//Mn0Mwg1YQqwgXhSJcxwkMHWJwHNibzpLYOVPJip43sFOM
- /VbA==
-X-Gm-Message-State: AOJu0Yz9mB8vXa7TH3EFZP9KZVAyX1olxBDPaDfR34b9/IFC1Z+9o7IZ
- OPZpo1FCrKfQsS7rvxdvKFdxNDCp4AaCZsQmAVo=
-X-Google-Smtp-Source: AGHT+IEvKtJPjwCLEjzTwviM7vIyGIQ72rnG6StZVrqmhj5HNl7M1OsMkKJWegd3fJHfO677YaA45A==
-X-Received: by 2002:a05:6e02:13c7:b0:34b:ae9b:d039 with SMTP id
- v7-20020a056e0213c700b0034bae9bd039mr10107004ilj.18.1696209253828; 
- Sun, 01 Oct 2023 18:14:13 -0700 (PDT)
+ bh=ZYDy6poK1DzXplELVjcZ2pZNZBn7n8EPBTYpzpnWKQY=;
+ b=tPUq8jAY4x0sJcE14c3sKOSYGGby45IbmUa2143lXLSO21zyO88BA3wTvuq8RZya3p
+ NnIIPMoHo/W3LXxWMFVOynQG/qaImlDZb4sanj2WdtEwO3WqOE7Dsx9sKJKMx9BiXEVO
+ 4dIqNxX4LlKG6IML9Mf4MlP4wsP39bYo1C10tCbTtv/4ljHAVWMqmSkU1aZ+EC23yopB
+ NhapE8UuuzVq0NlYIHDpF9VW3sGIsE0qk1KNm0puxoOKKMcyCw9+ggICobuYb08tndnL
+ j0qV1AVNW0maQvEFtKt95TvJi64Zfx28qb76pT54I4P9slzCUAZ4w+JXWBTTEMbYvZvF
+ qWmg==
+X-Gm-Message-State: AOJu0Yx/p0dgsBuIltqeuHcA8MbdL+oYR8Dcq8QM0ihbqbLRgVPcqSGy
+ w+l4hX86+BUWhjac1qMqDE1oHmxs5VFD66eKmJY=
+X-Google-Smtp-Source: AGHT+IEuoh0sJefwy9FQuKWAvLTwT/GqDURZJg4z+HRbUv8yb1F3+MfL4ywSiSMxrTV13t52IsZpGA==
+X-Received: by 2002:a6b:4405:0:b0:792:4cfc:178f with SMTP id
+ r5-20020a6b4405000000b007924cfc178fmr12109851ioa.16.1696209254601; 
+ Sun, 01 Oct 2023 18:14:14 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.13
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:14:13 -0700 (PDT)
+ Sun, 01 Oct 2023 18:14:14 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 24/36] expo: Add a function to write a property to a
- devicetree
-Date: Sun,  1 Oct 2023 19:13:28 -0600
-Message-ID: <20231002011349.461284-25-sjg@chromium.org>
+Subject: [PATCH v2 25/36] expo: Make calculation of an object bounding box
+ generic
+Date: Sun,  1 Oct 2023 19:13:29 -0600
+Message-ID: <20231002011349.461284-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
 References: <20231002011349.461284-1-sjg@chromium.org>
@@ -89,84 +89,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When the devicetree is too small for the property being written, we need
-to expand the devicetree and retry the write.
-
-Put this logic into a function so it can be reused.
+We want to support this for any object, not just menus. Move the code
+around to allow this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/cedit.c | 38 ++++++++++++++++++++++++++------------
- 1 file changed, 26 insertions(+), 12 deletions(-)
+ boot/scene.c          | 45 +++++++++++++++++++++++++++++++++++++++++++
+ boot/scene_internal.h | 39 +++++++++++++++++++++++++++++++++++++
+ boot/scene_menu.c     | 39 +++----------------------------------
+ 3 files changed, 87 insertions(+), 36 deletions(-)
 
-diff --git a/boot/cedit.c b/boot/cedit.c
-index b7329c3245ee..bb194af77bdc 100644
---- a/boot/cedit.c
-+++ b/boot/cedit.c
-@@ -269,6 +269,28 @@ static int get_cur_menuitem_text(const struct scene_obj_menu *menu,
+diff --git a/boot/scene.c b/boot/scene.c
+index 4d7cabd75f4f..e98676b9387a 100644
+--- a/boot/scene.c
++++ b/boot/scene.c
+@@ -608,6 +608,25 @@ int scene_send_key(struct scene *scn, int key, struct expo_action *event)
  	return 0;
  }
  
-+static int write_dt_string(struct abuf *buf, const char *name, const char *str)
++int scene_obj_calc_bbox(struct scene_obj *obj, struct vidconsole_bbox *bbox,
++			struct vidconsole_bbox *label_bbox)
 +{
-+	int ret, i;
++	switch (obj->type) {
++	case SCENEOBJT_NONE:
++	case SCENEOBJT_IMAGE:
++	case SCENEOBJT_TEXT:
++		return -ENOSYS;
++	case SCENEOBJT_MENU: {
++		struct scene_obj_menu *menu = (struct scene_obj_menu *)obj;
 +
-+	/* write the text of the current item */
-+	ret = -EAGAIN;
-+	for (i = 0; ret && i < 2; i++) {
-+		ret = fdt_property_string(abuf_data(buf), name, str);
-+		if (!i) {
-+			ret = check_space(ret, buf);
-+			if (ret)
-+				return log_msg_ret("rs2", -ENOMEM);
-+		}
++		scene_menu_calc_bbox(menu, bbox, label_bbox);
++		break;
 +	}
-+
-+	/* this should not happen */
-+	if (ret)
-+		return log_msg_ret("str", -EFAULT);
++	}
 +
 +	return 0;
 +}
 +
- static int h_write_settings(struct scene_obj *obj, void *vpriv)
+ int scene_calc_dims(struct scene *scn, bool do_menus)
  {
- 	struct cedit_iter_priv *priv = vpriv;
-@@ -285,6 +307,7 @@ static int h_write_settings(struct scene_obj *obj, void *vpriv)
- 		char name[80];
- 		int ret, i;
+ 	struct scene_obj *obj;
+@@ -719,3 +738,29 @@ int scene_iter_objs(struct scene *scn, expo_scene_obj_iterator iter,
  
-+		/* write the ID of the current item */
- 		menu = (struct scene_obj_menu *)obj;
- 		ret = -EAGAIN;
- 		for (i = 0; ret && i < 2; i++) {
-@@ -304,20 +327,11 @@ static int h_write_settings(struct scene_obj *obj, void *vpriv)
- 		if (ret)
- 			return log_msg_ret("mis", ret);
+ 	return 0;
+ }
++
++int scene_bbox_union(struct scene *scn, uint id, int inset,
++		     struct vidconsole_bbox *bbox)
++{
++	struct scene_obj *obj;
++
++	if (!id)
++		return 0;
++	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
++	if (!obj)
++		return log_msg_ret("obj", -ENOENT);
++	if (bbox->valid) {
++		bbox->x0 = min(bbox->x0, obj->dim.x - inset);
++		bbox->y0 = min(bbox->y0, obj->dim.y);
++		bbox->x1 = max(bbox->x1, obj->dim.x + obj->dim.w + inset);
++		bbox->y1 = max(bbox->y1, obj->dim.y + obj->dim.h);
++	} else {
++		bbox->x0 = obj->dim.x - inset;
++		bbox->y0 = obj->dim.y;
++		bbox->x1 = obj->dim.x + obj->dim.w + inset;
++		bbox->y1 = obj->dim.y + obj->dim.h;
++		bbox->valid = true;
++	}
++
++	return 0;
++}
+diff --git a/boot/scene_internal.h b/boot/scene_internal.h
+index 42efcee092f3..326508874e6a 100644
+--- a/boot/scene_internal.h
++++ b/boot/scene_internal.h
+@@ -9,6 +9,8 @@
+ #ifndef __SCENE_INTERNAL_H
+ #define __SCENE_INTERNAL_H
  
-+		/* write the text of the current item */
- 		snprintf(name, sizeof(name), "%s-str", obj->name);
--		ret = -EAGAIN;
--		for (i = 0; ret && i < 2; i++) {
--			ret = fdt_property_string(abuf_data(buf), name, str);
--			if (!i) {
--				ret = check_space(ret, buf);
--				if (ret)
--					return log_msg_ret("rs2", -ENOMEM);
--			}
--		}
++struct vidconsole_bbox;
++
+ typedef int (*expo_scene_obj_iterator)(struct scene_obj *obj, void *priv);
+ 
+ /**
+@@ -246,4 +248,41 @@ struct scene_menitem *scene_menuitem_find(const struct scene_obj_menu *menu,
+ struct scene_menitem *scene_menuitem_find_seq(const struct scene_obj_menu *menu,
+ 					      uint seq);
+ 
++/**
++ * scene_bbox_union() - update bouding box with the demensions of an object
++ *
++ * Updates @bbox so that it encompasses the bounding box of object @id
++ *
++ * @snd: Scene containing object
++ * @id: Object id
++ * @inset: Amount of inset to use for width
++ * @bbox: Bounding box to update
++ * Return: 0 if OK, -ve on error
++ */
++int scene_bbox_union(struct scene *scn, uint id, int inset,
++		     struct vidconsole_bbox *bbox);
++
++/**
++ * scene_menu_calc_bbox() - Calculate bounding boxes for the menu
++ *
++ * @menu: Menu to process
++ * @bbox: Returns bounding box of menu including prompts
++ * @label_bbox: Returns bounding box of labels
++ * Return: 0 if OK, -ve on error
++ */
++void scene_menu_calc_bbox(struct scene_obj_menu *menu,
++			  struct vidconsole_bbox *bbox,
++			  struct vidconsole_bbox *label_bbox);
++
++/**
++ * scene_obj_calc_bbox() - Calculate bounding boxes for an object
++ *
++ * @obj: Object to process
++ * @bbox: Returns bounding box of object including prompts
++ * @label_bbox: Returns bounding box of labels (active area)
++ * Return: 0 if OK, -ve on error
++ */
++int scene_obj_calc_bbox(struct scene_obj *obj, struct vidconsole_bbox *bbox,
++			struct vidconsole_bbox *label_bbox);
++
+ #endif /* __SCENE_INTERNAL_H */
+diff --git a/boot/scene_menu.c b/boot/scene_menu.c
+index e0dcd0a4e041..95c283af4b08 100644
+--- a/boot/scene_menu.c
++++ b/boot/scene_menu.c
+@@ -114,42 +114,9 @@ static void menu_point_to_item(struct scene_obj_menu *menu, uint item_id)
+ 	update_pointers(menu, item_id, true);
+ }
+ 
+-static int scene_bbox_union(struct scene *scn, uint id, int inset,
+-			    struct vidconsole_bbox *bbox)
+-{
+-	struct scene_obj *obj;
 -
--		/* this should not happen */
-+		ret = write_dt_string(buf, name, str);
- 		if (ret)
--			return log_msg_ret("wr2", -EFAULT);
-+			return log_msg_ret("wr2", ret);
- 
- 		break;
- 	}
+-	if (!id)
+-		return 0;
+-	obj = scene_obj_find(scn, id, SCENEOBJT_NONE);
+-	if (!obj)
+-		return log_msg_ret("obj", -ENOENT);
+-	if (bbox->valid) {
+-		bbox->x0 = min(bbox->x0, obj->dim.x - inset);
+-		bbox->y0 = min(bbox->y0, obj->dim.y);
+-		bbox->x1 = max(bbox->x1, obj->dim.x + obj->dim.w + inset);
+-		bbox->y1 = max(bbox->y1, obj->dim.y + obj->dim.h);
+-	} else {
+-		bbox->x0 = obj->dim.x - inset;
+-		bbox->y0 = obj->dim.y;
+-		bbox->x1 = obj->dim.x + obj->dim.w + inset;
+-		bbox->y1 = obj->dim.y + obj->dim.h;
+-		bbox->valid = true;
+-	}
+-
+-	return 0;
+-}
+-
+-/**
+- * scene_menu_calc_bbox() - Calculate bounding boxes for the menu
+- *
+- * @menu: Menu to process
+- * @bbox: Returns bounding box of menu including prompts
+- * @label_bbox: Returns bounding box of labels
+- */
+-static void scene_menu_calc_bbox(struct scene_obj_menu *menu,
+-				 struct vidconsole_bbox *bbox,
+-				 struct vidconsole_bbox *label_bbox)
++void scene_menu_calc_bbox(struct scene_obj_menu *menu,
++			  struct vidconsole_bbox *bbox,
++			  struct vidconsole_bbox *label_bbox)
+ {
+ 	const struct expo_theme *theme = &menu->obj.scene->expo->theme;
+ 	const struct scene_menitem *item;
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
