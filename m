@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34CBCE784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:32:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68A6DE784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:32:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BD7D87112;
-	Mon,  2 Oct 2023 03:17:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D5598871A0;
+	Mon,  2 Oct 2023 03:17:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lAobuaT4";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JN7iq1JW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50CD6871B9; Mon,  2 Oct 2023 03:17:18 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
+ id 463E987107; Mon,  2 Oct 2023 03:17:24 +0200 (CEST)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 420DC87216
+ by phobos.denx.de (Postfix) with ESMTPS id 3578E87215
  for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:17:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3ae2f8bf865so8345290b6e.2
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-79fa387fb96so506234539f.1
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:17:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209371; x=1696814171; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209369; x=1696814169; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hzWoLU82ZBP++/p5qoxT3KLuipt2x8gX6kAgSIZ6vZ8=;
- b=lAobuaT44n+Odtf6qc/z+sNdVSjBM1o0dYoNndjZry1v0NU5OnUN13FfZZWS8h9GcI
- HshqUYQEj1w3LW1B7nFf52XPGujxjaDrk6ZUQSHXYy1borDnmIVhJD2TsIs78GJYmjHv
- vUMrm2+6oWMumiXWOPd1JGRVpsMM9o/rafmhk=
+ bh=h1CZ4oNuHFyI4faPd7cDlzaEevH4Mv+IwSEcZwYcgyM=;
+ b=JN7iq1JWo/G8t+LWIVxen0vwhr0MVPv7BHYUNrflPY5Q96kBOKhmT4JA5aYRVqSJf3
+ hiXoFF0WdyRNT2FprcEbr7J/yaJAK5ZGdbyTtUx6mtrc40bwAlhqtmBh4kyNrkNI3c2z
+ vpEPbVdZ6Euh1vfLhSDAZfX61tQefvVS6ntHg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209371; x=1696814171;
+ d=1e100.net; s=20230601; t=1696209369; x=1696814169;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hzWoLU82ZBP++/p5qoxT3KLuipt2x8gX6kAgSIZ6vZ8=;
- b=qvGhnuxYZsrDWJrpkNsn/Q/BpDamwa4pBZtSfPhtAjVlATCaFaoe5ioZm4hb8x53XT
- 7oFn7li4ttpApuFl26Qf4MOjIK4p80rFCP/peSBxz9JeCNQ/sW8D6J+0xJpVN8PxOTAV
- qxyvg5Z0Y1onXgy+w7wNH6l8gZzdMqbTodTpWO22xrOXYO8fgxiF5ISh0g1vWcghSc7A
- 6/R9iQJf30TjlzfB8Vuaxl0cSnNHjkm72B8qjPm2RijZQhyJcZuYEBxjOWTYGH+UzAkS
- NlB5GV38plSFy7rFjtaWPzBGZsDWV0m9uVn7fOlRe3bBAtXciCarV3NqtG8cBM+S78Lj
- Y4VA==
-X-Gm-Message-State: AOJu0YzTvZ77qpbS1n7/N+CiinmVxe6ZquvVA9aaTtIPp0GNdWMu8xuF
- ZBgAde/kL2Y/1LEx7NVr0JDwELPqIiC1I3i5RlY=
-X-Google-Smtp-Source: AGHT+IH7TPzhy5rdQB0v1fBySB+2I5kTgeR+k2UVPkdxMWBsFXabz1Jo4/X+xdHin5WTlI/vnAG6Tg==
-X-Received: by 2002:a05:6808:d4d:b0:3a7:c2e8:5e7c with SMTP id
- w13-20020a0568080d4d00b003a7c2e85e7cmr13855666oik.43.1696209371317; 
- Sun, 01 Oct 2023 18:16:11 -0700 (PDT)
+ bh=h1CZ4oNuHFyI4faPd7cDlzaEevH4Mv+IwSEcZwYcgyM=;
+ b=aLseCA3mPE8Fl6eECCVRY2tsF/QzHjctm8uqOxeqLXDNVyRvy8wu5/uSbhDVb/VZMO
+ dkFFb9cP72v3mSJM4ef/Ow0QW4OTF6bC4niFUnDlYrOCVIzV4RHfV5OpvJ8usEhGIclz
+ TH+LvjxF1Q8VM7cBArM+hUN8uo99pwOu7tgfJRMhnaZEZt2y30TLrkpEBOQ6/NNkfMvr
+ SN2DP0s6TEf7dOsqHlGoZqS4l++aQ8kYBEM86A7X8qpm+zkZAjwDTqa2oChEyy/jKhwC
+ FtylK3Eie4UnTTaIVtP60gZZO8m2nF2mQeoU4lJOF7QfwIOYfmj4/xoqhSDdorj77IW7
+ m/cA==
+X-Gm-Message-State: AOJu0Yxyhv1H9UiIiDKp/AKLS3mkg8sBs7FJlzZtXXFwzFwrXRdHvha3
+ /OPe8kLwBf8toHc+mfHbPhBp/+MUWbEQ1KeRDKw=
+X-Google-Smtp-Source: AGHT+IGzIBHt7x+w0tEc8nu0non7gxyP6wQJ5Jowzj/FJN+FUoF/VL+HdPGao1Hm/WrgIfTC4qGgkg==
+X-Received: by 2002:a5e:a71a:0:b0:77e:249e:d84 with SMTP id
+ b26-20020a5ea71a000000b0077e249e0d84mr11789333iod.5.1696209369331; 
+ Sun, 01 Oct 2023 18:16:09 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- l26-20020a02a89a000000b0041d859c5721sm6819619jam.64.2023.10.01.18.16.10
+ l26-20020a02a89a000000b0041d859c5721sm6819619jam.64.2023.10.01.18.16.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:16:11 -0700 (PDT)
+ Sun, 01 Oct 2023 18:16:08 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>,
- Jerry Van Baren <vanbaren@cideas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 08/34] test: fdt: Add a special case for real boards
-Date: Sun,  1 Oct 2023 19:15:18 -0600
-Message-ID: <20231002011553.463514-9-sjg@chromium.org>
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nikhil M Jain <n-jain1@ti.com>
+Subject: [PATCH 06/34] test: Handle use of stack pointer in bdinfo
+Date: Sun,  1 Oct 2023 19:15:16 -0600
+Message-ID: <20231002011553.463514-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011553.463514-1-sjg@chromium.org>
 References: <20231002011553.463514-1-sjg@chromium.org>
@@ -91,34 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The error that this test checks for is only shown on sandbox. For real
-boards, there is normally no error. Add a special case to handle this.
+This test assumes that the stack pointer is the same across two calls
+to lmb_init_and_reserve() but this is not the case on x86, for example.
+
+Add a special case to handle this, along with a detailed comment.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/cmd/fdt.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ test/cmd/bdinfo.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/test/cmd/fdt.c b/test/cmd/fdt.c
-index 1f103a1d7eb4..547085521758 100644
---- a/test/cmd/fdt.c
-+++ b/test/cmd/fdt.c
-@@ -160,7 +160,13 @@ static int fdt_test_addr(struct unit_test_state *uts)
- 	set_working_fdt_addr(0);
- 	ut_assert_nextline("Working FDT set to 0");
- 	ut_asserteq(CMD_RET_FAILURE, run_command("fdt addr", 0));
--	ut_assert_nextline("libfdt fdt_check_header(): FDT_ERR_BADMAGIC");
-+
-+	/*
-+	 * sandbox fails the check for !blob since the 0 pointer is mapped to
-+	 * memory somewhere other than at 0x0
-+	 */
-+	if (IS_ENABLED(CONFIG_SANDBOX))
-+		ut_assert_nextline("libfdt fdt_check_header(): FDT_ERR_BADMAGIC");
- 	ut_assertok(ut_check_console_end(uts));
+diff --git a/test/cmd/bdinfo.c b/test/cmd/bdinfo.c
+index 8c09281cac0d..0f09a5a3e1db 100644
+--- a/test/cmd/bdinfo.c
++++ b/test/cmd/bdinfo.c
+@@ -114,6 +114,18 @@ static int lmb_test_dump_region(struct unit_test_state *uts,
+ 		end = base + size - 1;
+ 		flags = rgn->region[i].flags;
  
- 	/* Set up a working FDT and try again */
++		/*
++		 * this entry includes the stack (get_sp()) on many platforms
++		 * so will different each time lmb_init_and_reserve() is called.
++		 * We could instead have the bdinfo command put its lmb region
++		 * in a known location, so we can check it directly, rather than
++		 * calling lmb_init_and_reserve() to create a new (and hopefully
++		 * identical one). But for now this seems good enough.
++		 */
++		if (!IS_ENABLED(CONFIG_SANDBOX) && i == 3) {
++			ut_assert_nextlinen(" %s[%d]\t[", name, i);
++			continue;
++		}
+ 		ut_assert_nextline(" %s[%d]\t[0x%llx-0x%llx], 0x%08llx bytes flags: %x",
+ 				   name, i, base, end, size, flags);
+ 	}
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
