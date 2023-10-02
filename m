@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB46DE784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:24:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3684E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:24:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE7FE8716E;
-	Mon,  2 Oct 2023 03:15:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AABD387173;
+	Mon,  2 Oct 2023 03:15:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cF/1/hqe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gDW/KllJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 351BD87108; Mon,  2 Oct 2023 03:14:22 +0200 (CEST)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id B0A8C87107; Mon,  2 Oct 2023 03:14:23 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6E2587107
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82F1E87109
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-79f8e4108c3so557276039f.3
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:04 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-79f915e5b47so569120339f.2
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209243; x=1696814043; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209246; x=1696814046; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J50oeUHgdYQNK8+xDZwr+JsHiqqUIgib6Nqsd+WbRfI=;
- b=cF/1/hqeXA5I17KeEHNuP2Ixuz+pLsKvQ7CfZV8+eSgsjdL8tD26cdJB2muvt59qoT
- BIIE03d+MPDIbeeMqMLod41fJz0KWhtWWK0UwN/gBGkZKzt+a+3jsh1/7SOoiUhotFgn
- Itt9o/C+tw3OmlOhPkF02v4zEmqZ+tXblpxNo=
+ bh=px9+RU9h351PB3PF1do8ism248NIwzuis7dv5lQQrI4=;
+ b=gDW/KllJVofn6IjWdehEq2fWWMusGT4R9q+l5ZD+gp76HiK2DONg4uaLh1xZV+cJTB
+ sZzXBCbX2GUw2Iq+DG4NqWP5/IJ+ZH+Zl7MNSQ+vfIGQIM+ZaT2hK/hBlC9XXhKVw7R8
+ Ynyfp2qt2YrR9mNiGEd9x2JQtDg7DqqM28j4I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209243; x=1696814043;
+ d=1e100.net; s=20230601; t=1696209246; x=1696814046;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=J50oeUHgdYQNK8+xDZwr+JsHiqqUIgib6Nqsd+WbRfI=;
- b=tfjn2Mg8Z6nvglQeCLKF5UWVrWG1Al7aHtMwLPrg5ZFt0aPZNeijkoB1VkkklU0glv
- Ez0drV0u/QdM0AkCeLZfsYmzpFTduFf2+yRcccLgbIvr3LE08S7ejAAG+Ah8/dcU1aDB
- BT1PBx+K/NmpD1/zqJrL8B0QCO20/JAjQMx8l/2RChgrj6XRyFQVHluq2bTofK2ojjNa
- VBs9HnvmPnoKhyME0F7qClVivDUvtWADt9hBz80oSoqVRaeybS4aPTJcVNYQjPe1rToy
- W9+6dZz960Q9hVq1vJ5fGUiBdlOpYlwV92PVhO+s1Ur4bPkxiKakD7XHRltSiDV18RNM
- UfuA==
-X-Gm-Message-State: AOJu0YwCYoDZ7adQ3qyJ12eAD8ijfIl91iBCXQODIu8yEuSrx+psQpTE
- QfY+adiVGLrFWR/U2RHxBU6inGtdXyyY6ugcfRA=
-X-Google-Smtp-Source: AGHT+IEWvAiZwBRPvrA1dGo2Bo5ya6lbO/7QABPkabNVFN3JfIFShdvWk4wIguZ+qvmHwXpSjj7FbA==
-X-Received: by 2002:a05:6602:86:b0:787:1d0a:ce81 with SMTP id
- h6-20020a056602008600b007871d0ace81mr11631832iob.13.1696209243194; 
- Sun, 01 Oct 2023 18:14:03 -0700 (PDT)
+ bh=px9+RU9h351PB3PF1do8ism248NIwzuis7dv5lQQrI4=;
+ b=Na4Arm7sCo1lsaRJ8muqp6iKdPEClnacBP711JwcdZ16FPLuTv9KBhmCWVl8GXLGjQ
+ /UNdHRuFb30wKKa0Yu4hc7txWq8Z43jT8b6zZSBON6YFCoKrPC9ov5UKOLaHtLcgj3i3
+ KyyJ8eKl3bNEvL/y7AVyhIjQLJv6KLYhQUCgxQbRKzrUu7KV96M6mY58fEHGHOjWGk02
+ bcnhgsXdnQMrdrG0ivKMjCFrAA1QQK+Y0ZEWCW3nPPQpkMUuj5XPlFvxJBp7oZUTIeN1
+ z73tIeOhtkVPSNzqAcIStWd2vcHL2pILj15h/0vJAzKXLjteMGHK7APOydD37KSKyeKu
+ 6yVw==
+X-Gm-Message-State: AOJu0Yy+3p+VjeXNJFomocDA91XB23ZKyOiqlPWlb3wntQ9Kgn/UxAVV
+ faLf9G2GhZ93VAsTYLOmKxrEGgQdfv5WwHKNcH8=
+X-Google-Smtp-Source: AGHT+IE3lcIugJnzODIT1fLyEYR9bQ6TkQzN+ZWkH90ubAiuZFQHsoV9TZtoW80WsRW32iFAqN9ylA==
+X-Received: by 2002:a6b:3b4d:0:b0:7a2:9fd3:5684 with SMTP id
+ i74-20020a6b3b4d000000b007a29fd35684mr2398791ioa.18.1696209245952; 
+ Sun, 01 Oct 2023 18:14:05 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.02
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:14:03 -0700 (PDT)
+ Sun, 01 Oct 2023 18:14:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 12/36] cli: Allow command completion to be disabled
-Date: Sun,  1 Oct 2023 19:13:16 -0600
-Message-ID: <20231002011349.461284-13-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH v2 15/36] video: Allow saving and restoring text-entry state
+Date: Sun,  1 Oct 2023 19:13:19 -0600
+Message-ID: <20231002011349.461284-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
 References: <20231002011349.461284-1-sjg@chromium.org>
@@ -88,59 +88,242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When inputting text outside the command line we don't want to use tab
-for command completion. Add an option to control this.
+Text entry operates within a context which includes quite a bit of
+information. For example, with Truetype fonts, each character in the
+text string has a position stored, so that it is possible to
+backspace to that character. This information is built up as strings
+are drawn on the display.
+
+For the command line, there is just a single context. It is created
+when command-line entry starts and it is destroyed (or at least not
+needed anymore) when the user presses <enter> to enter the command.
+
+By contrast, expo needs to be able to switch in and out of a text-entry
+context, since it is also displaying other objects in the scene.
+
+Add a way to save and restore the entry context for a vidconsole. This
+is only needed for the truetype vidconsole, so add a method for that,
+storing the information in an abuf struct.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/cli_readline.c | 3 ++-
- include/cli.h         | 2 ++
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ drivers/video/console_truetype.c  | 53 +++++++++++++++++++++++++++++++
+ drivers/video/vidconsole-uclass.c | 32 +++++++++++++++++++
+ include/video_console.h           | 49 ++++++++++++++++++++++++++++
+ 3 files changed, 134 insertions(+)
 
-diff --git a/common/cli_readline.c b/common/cli_readline.c
-index fa8f525d3a41..23913a857a99 100644
---- a/common/cli_readline.c
-+++ b/common/cli_readline.c
-@@ -389,7 +389,7 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
- 		}
- 		break;
- 	case '\t':
--		if (IS_ENABLED(CONFIG_AUTO_COMPLETE)) {
-+		if (IS_ENABLED(CONFIG_AUTO_COMPLETE) && cls->cmd_complete) {
- 			int num2, col;
- 
- 			/* do not autocomplete when in the middle */
-@@ -440,6 +440,7 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 	cls->prompt = prompt;
- 	cls->buf = buf;
- 	cls->history = true;
-+	cls->cmd_complete = true;
- 
- 	if (init_len)
- 		cread_add_str(buf, init_len, 1, &cls->num, &cls->eol_num, buf,
-diff --git a/include/cli.h b/include/cli.h
-index 252bdb70ab0d..ad3cb4499fe1 100644
---- a/include/cli.h
-+++ b/include/cli.h
-@@ -32,6 +32,7 @@ struct cli_ch_state {
-  * @eol_num: Number of characters in the buffer
-  * @insert: true if in 'insert' mode
-  * @history: true if history should be accessible
-+ * @cmd_complete: true if tab completion should be enabled
-  * @buf: Buffer containing line
-  * @prompt: Prompt for the line
+diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
+index 8ed79c37676c..1ce01a96bb6c 100644
+--- a/drivers/video/console_truetype.c
++++ b/drivers/video/console_truetype.c
+@@ -4,6 +4,7 @@
   */
-@@ -41,6 +42,7 @@ struct cli_line_state {
- 	uint len;
- 	bool insert;
- 	bool history;
-+	bool cmd_complete;
- 	char *buf;
- 	const char *prompt;
+ 
+ #include <common.h>
++#include <abuf.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <malloc.h>
+@@ -175,6 +176,17 @@ struct console_tt_priv {
+ 	int pos_ptr;
  };
+ 
++/**
++ * struct console_tt_store - Format used for save/restore of entry information
++ *
++ * @priv: Private data
++ * @cur: Current cursor position
++ */
++struct console_tt_store {
++	struct console_tt_priv priv;
++	struct pos_info cur;
++};
++
+ static int console_truetype_set_row(struct udevice *dev, uint row, int clr)
+ {
+ 	struct video_priv *vid_priv = dev_get_uclass_priv(dev->parent);
+@@ -780,6 +792,45 @@ static int truetype_nominal(struct udevice *dev, const char *name, uint size,
+ 	return 0;
+ }
+ 
++static int truetype_entry_save(struct udevice *dev, struct abuf *buf)
++{
++	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
++	struct console_tt_priv *priv = dev_get_priv(dev);
++	struct console_tt_store store;
++	const uint size = sizeof(store);
++
++	/*
++	 * store the whole priv structure as it is simpler that picking out
++	 * what we need
++	 */
++	if (!abuf_realloc(buf, size))
++		return log_msg_ret("sav", -ENOMEM);
++
++	store.priv = *priv;
++	store.cur.xpos_frac = vc_priv->xcur_frac;
++	store.cur.ypos  = vc_priv->ycur;
++	memcpy(abuf_data(buf), &store, size);
++
++	return 0;
++}
++
++static int truetype_entry_restore(struct udevice *dev, struct abuf *buf)
++{
++	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
++	struct console_tt_priv *priv = dev_get_priv(dev);
++	struct console_tt_store store;
++
++	memcpy(&store, abuf_data(buf), sizeof(store));
++
++	vc_priv->xcur_frac = store.cur.xpos_frac;
++	vc_priv->ycur = store.cur.ypos;
++	priv->pos_ptr = store.priv.pos_ptr;
++	memcpy(priv->pos, store.priv.pos,
++	       store.priv.pos_ptr * sizeof(struct pos_info));
++
++	return 0;
++}
++
+ const char *console_truetype_get_font_size(struct udevice *dev, uint *sizep)
+ {
+ 	struct console_tt_priv *priv = dev_get_priv(dev);
+@@ -833,6 +884,8 @@ struct vidconsole_ops console_truetype_ops = {
+ 	.select_font	= truetype_select_font,
+ 	.measure	= truetype_measure,
+ 	.nominal	= truetype_nominal,
++	.entry_save	= truetype_entry_save,
++	.entry_restore	= truetype_entry_restore,
+ };
+ 
+ U_BOOT_DRIVER(vidconsole_truetype) = {
+diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
+index 23b1b81731bc..07427ba346b0 100644
+--- a/drivers/video/vidconsole-uclass.c
++++ b/drivers/video/vidconsole-uclass.c
+@@ -10,6 +10,7 @@
+ #define LOG_CATEGORY UCLASS_VIDEO_CONSOLE
+ 
+ #include <common.h>
++#include <abuf.h>
+ #include <command.h>
+ #include <console.h>
+ #include <log.h>
+@@ -640,6 +641,37 @@ int vidconsole_nominal(struct udevice *dev, const char *name, uint size,
+ 	return 0;
+ }
+ 
++int vidconsole_entry_save(struct udevice *dev, struct abuf *buf)
++{
++	struct vidconsole_ops *ops = vidconsole_get_ops(dev);
++	int ret;
++
++	if (ops->measure) {
++		ret = ops->entry_save(dev, buf);
++		if (ret != -ENOSYS)
++			return ret;
++	}
++
++	/* no data so make sure the buffer is empty */
++	abuf_realloc(buf, 0);
++
++	return 0;
++}
++
++int vidconsole_entry_restore(struct udevice *dev, struct abuf *buf)
++{
++	struct vidconsole_ops *ops = vidconsole_get_ops(dev);
++	int ret;
++
++	if (ops->measure) {
++		ret = ops->entry_restore(dev, buf);
++		if (ret != -ENOSYS)
++			return ret;
++	}
++
++	return 0;
++}
++
+ void vidconsole_push_colour(struct udevice *dev, enum colour_idx fg,
+ 			    enum colour_idx bg, struct vidconsole_colour *old)
+ {
+diff --git a/include/video_console.h b/include/video_console.h
+index 5234c85efd6f..28d65451889a 100644
+--- a/include/video_console.h
++++ b/include/video_console.h
+@@ -8,6 +8,7 @@
+ 
+ #include <video.h>
+ 
++struct abuf;
+ struct video_priv;
+ 
+ #define VID_FRAC_DIV	256
+@@ -239,6 +240,30 @@ struct vidconsole_ops {
+ 	 */
+ 	int (*nominal)(struct udevice *dev, const char *name, uint size,
+ 		       uint num_chars, struct vidconsole_bbox *bbox);
++
++	/**
++	 * entry_save() - Save any text-entry information for later use
++	 *
++	 * Saves text-entry context such as a list of positions for each
++	 * character in the string.
++	 *
++	 * @dev: Console device to use
++	 * @buf: Buffer to hold saved data
++	 * Return: 0 if OK, -ENOMEM if out of memory
++	 */
++	int (*entry_save)(struct udevice *dev, struct abuf *buf);
++
++	/**
++	 * entry_restore() - Restore text-entry information for current use
++	 *
++	 * Restores text-entry context such as a list of positions for each
++	 * character in the string.
++	 *
++	 * @dev: Console device to use
++	 * @buf: Buffer containing data to restore
++	 * Return: 0 if OK, -ve on error
++	 */
++	int (*entry_restore)(struct udevice *dev, struct abuf *buf);
+ };
+ 
+ /* Get a pointer to the driver operations for a video console device */
+@@ -293,6 +318,30 @@ int vidconsole_measure(struct udevice *dev, const char *name, uint size,
+ int vidconsole_nominal(struct udevice *dev, const char *name, uint size,
+ 		       uint num_chars, struct vidconsole_bbox *bbox);
+ 
++/**
++ * vidconsole_entry_save() - Save any text-entry information for later use
++ *
++ * Saves text-entry context such as a list of positions for each
++ * character in the string.
++ *
++ * @dev: Console device to use
++ * @buf: Buffer to hold saved data
++ * Return: 0 if OK, -ENOMEM if out of memory
++ */
++int vidconsole_entry_save(struct udevice *dev, struct abuf *buf);
++
++/**
++ * entry_restore() - Restore text-entry information for current use
++ *
++ * Restores text-entry context such as a list of positions for each
++ * character in the string.
++ *
++ * @dev: Console device to use
++ * @buf: Buffer containing data to restore
++ * Return: 0 if OK, -ve on error
++ */
++int vidconsole_entry_restore(struct udevice *dev, struct abuf *buf);
++
+ /**
+  * vidconsole_push_colour() - Temporarily change the font colour
+  *
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
