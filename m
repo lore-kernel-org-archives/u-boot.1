@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BEEEE784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7998E784A6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:29:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FD0A871B3;
-	Mon,  2 Oct 2023 03:15:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 132DE871F3;
+	Mon,  2 Oct 2023 03:15:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KVeQNQxq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cW6kflt0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBAD2871AB; Mon,  2 Oct 2023 03:15:39 +0200 (CEST)
-Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
- [IPv6:2607:f8b0:4864:20::12b])
+ id 75EE3871B3; Mon,  2 Oct 2023 03:15:45 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E01CE8711C
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2637C87148
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:15:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12b.google.com with SMTP id
- e9e14a558f8ab-3512fae02ecso43936975ab.2
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:59 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-3512fae02ecso43937125ab.2
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:15:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209295; x=1696814095; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209298; x=1696814098; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=15khfOyWCnPx5cZwBxgG7ukLKeoqdUpDS5jW0HyZUK8=;
- b=KVeQNQxqZSTTpHw30V22L/hodOsFwLUmGaiCZuWhzj1wJJC3MXqXkF41aquiRid7UK
- r5Kb3UxSDhG9gxEFyuSKIO6ax+d84cH2JsL/0IgBOFO1ppYc45PrSRdr8Li/UMbjnonw
- ij2fnItZs9joW5fnXNwUfg/YBB8XwWBeO0csQ=
+ bh=WM1qvo9LeyEACs4J6mVN0OpwyJcFcOWB5mXSNpgP+PQ=;
+ b=cW6kflt0Hw0r2ZJeEgyib9ZnxvLcwLbb9wpZo6nvG638N1I5muS1KTaDJNCXDle73o
+ wcqF4E164KNAw3x0inCVqI9CskhMD+MhjmMRV7EFyK6+rrJwKq4RDc0qgVfgWQlJ62cg
+ wJf5OwnARMswZA8J7H24oEMDvCWOcIDWb4FFY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209295; x=1696814095;
+ d=1e100.net; s=20230601; t=1696209298; x=1696814098;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=15khfOyWCnPx5cZwBxgG7ukLKeoqdUpDS5jW0HyZUK8=;
- b=kQciVDCiQ5bSoARexU3jNtEMVghGSqzh204RRZKcQe5tqZtmd1P2W3qAocDBGTbNLm
- FnQCqvdQ/SL7MaZ2sM/fLbqeam24Tq6XoJBX75axzbsU82M36HNK7p2NafhweZcEnRqG
- h27XYdrG0CjjcQo/uaamEpoPVyWvjLMcT7733A7Vu2aiVHJfJlhwRiKm4s2fXSjIPOCh
- YsIGsh9+ePDei0n8PyoLYpHKgZu4yn++aglX0g8pVZlNC5FUNa1eouprcSK1Qh6JqLNs
- Ba9/XYp+il94tdmsB01hHQXpAhzseeku6vkGzRrWcs0hsBxEkD40X1XbqZbEdUAevj8R
- owHw==
-X-Gm-Message-State: AOJu0YwJ0RigPEcASDnvn9gLZEa/uSkxkd3aXaW8+6Dh7o9wDqa9AEIG
- c4hf5MyJ5SELDDTkGN+kOBGBvTe+V0UFmaLAqLE=
-X-Google-Smtp-Source: AGHT+IGKWWoIgwClTxJY2OHhmyH7/eUGBjr1BIW5ii9wrSE6lIGK4LxDhtB7cqRd4xccTQGpP9l7yg==
-X-Received: by 2002:a05:6e02:104c:b0:34f:d39d:7a1 with SMTP id
- p12-20020a056e02104c00b0034fd39d07a1mr9457693ilj.6.1696209295433; 
- Sun, 01 Oct 2023 18:14:55 -0700 (PDT)
+ bh=WM1qvo9LeyEACs4J6mVN0OpwyJcFcOWB5mXSNpgP+PQ=;
+ b=FtShYffhVVH1pnxsodfO8TtZC9as0hgAs1ntCvqDdTJNbnTc8qewcyfL835RBf2R8+
+ P8BxD6+Z4jotHMv17+4FOkSXuwpH3FRQTKC3s58E+KVfNpuTPQhHj/On39VQgF40lFuU
+ osSuRrezYIYmsOnmkRU1CtyYQ9RujSzADLGLeK1yx7ElR6VHlI0BOBpCBdZJTlhSHkpG
+ t1bldDlIs6yODzsoc1BCaHY1DJTEIqgQEftyiEry4SEvF+ijqkk5W4lVEE9PrUObPefG
+ cnQhsYEHwgApbRpWFQV+wlRfGOjI2rsQ9tQJkHDC5nxUTgpaogo6jjiWooAFiKa+/ob+
+ 2tLw==
+X-Gm-Message-State: AOJu0YyGKhqVlNl+rXa+E30J6pz2K2CuAR90EL2ZEeoK/Rhur7e6a0mD
+ pH96IXMln+08CbGsvMjHM0ITdl/LNhekAP9oPfM=
+X-Google-Smtp-Source: AGHT+IHOPWI4JmjklYQ/N0Avfn61XrqJKvTgY5wEjVxz1mvSdf2/AUv5KzcgaUX2NN9Ql7r02Bg8zA==
+X-Received: by 2002:a05:6e02:b29:b0:34c:e16d:6793 with SMTP id
+ e9-20020a056e020b2900b0034ce16d6793mr12911794ilu.14.1696209297943; 
+ Sun, 01 Oct 2023 18:14:57 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- s23-20020a02c517000000b0042b2e309f97sm6522951jam.177.2023.10.01.18.14.54
+ s23-20020a02c517000000b0042b2e309f97sm6522951jam.177.2023.10.01.18.14.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:14:55 -0700 (PDT)
+ Sun, 01 Oct 2023 18:14:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Alexander Graf <agraf@csgraf.de>,
- Anatolij Gustschin <agust@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH v3 01/12] efi: Correct handling of frame buffer
-Date: Sun,  1 Oct 2023 19:14:36 -0600
-Message-ID: <20231001191444.v3.1.I9f7f373d00947c704aeae0088dfedd8df07fab60@changeid>
+Cc: Simon Glass <sjg@chromium.org>,
+	Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v3 04/12] x86: coreboot: Add a boot script
+Date: Sun,  1 Oct 2023 19:14:39 -0600
+Message-ID: <20231001191444.v3.4.I134d949e881ebcd532e927119703b28747fe4c53@changeid>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011450.462468-1-sjg@chromium.org>
 References: <20231002011450.462468-1-sjg@chromium.org>
@@ -90,102 +88,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The efi_gop driver uses private fields from the video uclass to obtain a
-pointer to the frame buffer. Use the platform data instead.
-
-Check the VIDEO_COPY setting to determine which frame buffer to use. Once
-the next stage is running (and making use of U-Boot's EFI boot services)
-U-Boot does not handle copying from priv->fb to the hardware framebuffer,
-so we must allow EFI to write directly to the hardware framebuffer.
-
-We could provide a function to read this, but it seems better to just
-document how it works. The original change ignored an explicit comment
-in the video.h file ("Things that are private to the uclass: don't use
-these in the driver") which is why this was missed when the VIDEO_COPY
-feature was added.
+Provide the user with a list of available boot options. Selecting one
+causes it to be booted. Pressing <ESC> causes U-Boot to return to the
+command-line prompt.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: 8f661a5b662 ("efi_loader: gop: Expose fb when 32bpp")
 ---
 
-(no changes since v2)
+Changes in v3:
+- Clear the screen before booting
 
 Changes in v2:
-- Rebase to -next
-- Add some more comments to the header file
-- Add fixes tag
+- Add new patch to add a coreboot boot script
 
- include/video.h          |  9 ++++++---
- lib/efi_loader/efi_gop.c | 12 +++++++-----
- 2 files changed, 13 insertions(+), 8 deletions(-)
+ configs/coreboot64_defconfig | 1 +
+ configs/coreboot_defconfig   | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/include/video.h b/include/video.h
-index 5048116a3d57..4d8df9baaada 100644
---- a/include/video.h
-+++ b/include/video.h
-@@ -21,9 +21,12 @@ struct udevice;
-  * @align: Frame-buffer alignment, indicating the memory boundary the frame
-  *	buffer should start on. If 0, 1MB is assumed
-  * @size: Frame-buffer size, in bytes
-- * @base: Base address of frame buffer, 0 if not yet known
-- * @copy_base: Base address of a hardware copy of the frame buffer. See
-- *	CONFIG_VIDEO_COPY.
-+ * @base: Base address of frame buffer, 0 if not yet known. If CONFIG_VIDEO_COPY
-+ *	is enabled, this is the software copy, so writes to this will not be
-+ *	visible until vidconsole_sync_copy() is called. If CONFIG_VIDEO_COPY is
-+ *	disabled, this is the hardware framebuffer.
-+ * @copy_base: Base address of a hardware copy of the frame buffer. If
-+ *	CONFIG_VIDEO_COPY is disabled, this is not used.
-  * @copy_size: Size of copy framebuffer, used if @size is 0
-  * @hide_logo: Hide the logo (used for testing)
-  */
-diff --git a/lib/efi_loader/efi_gop.c b/lib/efi_loader/efi_gop.c
-index 778b693f983a..a09db31eb465 100644
---- a/lib/efi_loader/efi_gop.c
-+++ b/lib/efi_loader/efi_gop.c
-@@ -10,6 +10,7 @@
- #include <efi_loader.h>
- #include <log.h>
- #include <malloc.h>
-+#include <mapmem.h>
- #include <video.h>
- #include <asm/global_data.h>
- 
-@@ -467,10 +468,10 @@ efi_status_t efi_gop_register(void)
- 	struct efi_gop_obj *gopobj;
- 	u32 bpix, format, col, row;
- 	u64 fb_base, fb_size;
--	void *fb;
- 	efi_status_t ret;
- 	struct udevice *vdev;
- 	struct video_priv *priv;
-+	struct video_uc_plat *plat;
- 
- 	/* We only support a single video output device for now */
- 	if (uclass_first_device_err(UCLASS_VIDEO, &vdev)) {
-@@ -483,9 +484,10 @@ efi_status_t efi_gop_register(void)
- 	format = priv->format;
- 	col = video_get_xsize(vdev);
- 	row = video_get_ysize(vdev);
--	fb_base = (uintptr_t)priv->fb;
--	fb_size = priv->fb_size;
--	fb = priv->fb;
-+
-+	plat = dev_get_uclass_plat(vdev);
-+	fb_base = IS_ENABLED(CONFIG_VIDEO_COPY) ? plat->copy_base : plat->base;
-+	fb_size = plat->size;
- 
- 	switch (bpix) {
- 	case VIDEO_BPP16:
-@@ -547,7 +549,7 @@ efi_status_t efi_gop_register(void)
- 	}
- 	gopobj->info.pixels_per_scanline = col;
- 	gopobj->bpix = bpix;
--	gopobj->fb = fb;
-+	gopobj->fb = map_sysmem(fb_base, fb_size);
- 
- 	return EFI_SUCCESS;
- }
+diff --git a/configs/coreboot64_defconfig b/configs/coreboot64_defconfig
+index 555d281ef3cf..1865f623f6e6 100644
+--- a/configs/coreboot64_defconfig
++++ b/configs/coreboot64_defconfig
+@@ -17,6 +17,7 @@ CONFIG_SYS_MONITOR_BASE=0x01120000
+ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
++CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then cls; bootflow boot; fi"
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
+ CONFIG_LOG=y
+diff --git a/configs/coreboot_defconfig b/configs/coreboot_defconfig
+index edc38f1f5923..f1728dbfb5c9 100644
+--- a/configs/coreboot_defconfig
++++ b/configs/coreboot_defconfig
+@@ -15,6 +15,7 @@ CONFIG_SYS_MONITOR_BASE=0x01110000
+ CONFIG_SHOW_BOOT_PROGRESS=y
+ CONFIG_USE_BOOTARGS=y
+ CONFIG_BOOTARGS="root=/dev/sdb3 init=/sbin/init rootwait ro"
++CONFIG_BOOTCOMMAND="bootflow scan -l; if bootflow menu; then cls; bootflow boot; fi"
+ CONFIG_PRE_CONSOLE_BUFFER=y
+ CONFIG_SYS_CONSOLE_INFO_QUIET=y
+ CONFIG_LOG=y
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
