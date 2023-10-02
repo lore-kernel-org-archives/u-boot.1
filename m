@@ -4,67 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10B74E7490C
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 18:57:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20A40E7490C
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 18:57:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8040D871AD;
-	Mon,  2 Oct 2023 20:56:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E2556871DB;
+	Mon,  2 Oct 2023 20:57:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Oe1bL1Uc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NxPqoQFa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A899F87171; Mon,  2 Oct 2023 20:56:54 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 239B5871C7; Mon,  2 Oct 2023 20:56:59 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBFF48718A
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 20:56:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D209869C8
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 20:56:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-9b2f73e3af3so6124366b.3
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 11:56:50 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9ad8a822508so9962966b.0
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 11:56:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696273010; x=1696877810; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696273017; x=1696877817; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0jQzTqI0U6mDbme8c4xN7kzsxqGhMuTGFKiqNDZWRuI=;
- b=Oe1bL1Uc5H5enkRqxvSQGyhzeNT8lc9RQKm5kKcSBsE6RjNm5jRoMG2ZlC03WBz5rf
- 4Js9G/JEQd/V3TZvGyf0SiOmn93ZfUG1sqkeuHUTblvoeU+0nnsA8OK16IWaBjttvhGQ
- m0VSqW+HnPMO+2pNCSU/0Ftv1So5AjyU2q4uE=
+ bh=atuDs1R48W9XzsoI/J2MUYTDzCK8/i5+G8f95WLc9cI=;
+ b=NxPqoQFar135VV6t08qpjmv3ErqOWOFJ3mD31BWfmp50JuxO1rFR5rMGeCzM1yMSt/
+ Fy3TEtj2WZolb1CSDb7sxa7OyBY+SNFE5K9ddMdOWhIosH4yrVnBW8ZUV7xASzZJ1Zrw
+ EDqdi1oXPliQRez3TWBLq3OIN6z6uBR4JHYmo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696273010; x=1696877810;
+ d=1e100.net; s=20230601; t=1696273017; x=1696877817;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=0jQzTqI0U6mDbme8c4xN7kzsxqGhMuTGFKiqNDZWRuI=;
- b=XznZBVFIBYE4We31vecQKYFQCsSqZg33CLDG2QphM2tcMfemvsUt7S78Scps8lo/gJ
- dYPUh50saq12YACZ67Ia8elJwTXJv6qjFPKxqk/aRQZTKNggxtaS3e7fbykOpmYudNlY
- Bvvbn3UlfrzgppS0IRI5noXQb2ibTFNOqv6ukkQob7tsXUb19/eTa9rphjABGsm+eiyu
- Nt0jXghjn2wgIJTEXdfi4u0I3Sa7Eoxd6nhkIoihoNXpt1WiqR727EbdJmI5m8gGOT5k
- i35y6JdCflKQ5qUnoKI+8YIJ1YnfmhX3w5pRcOJiDAIR5KwKao2XYiMYZzln1fqp3c+3
- JlMQ==
-X-Gm-Message-State: AOJu0YzvLE1c9GbfmH2j39kXchV7LusvmnAun/lxbo2QoZF1tc6bLY4P
- znScAAiAz0qci5yRPeZDgsRFjp5VEtu0ObvWm2XINg==
-X-Google-Smtp-Source: AGHT+IHcDSAuraVUzXoUTOPMA/9g1Ij3IasRAVb9CS76U7uy8G81ALD7HteMElYzlvHMFLhGrAWU7XplRTYzjP2+cTo=
-X-Received: by 2002:a17:906:31da:b0:9b2:ba66:bbb0 with SMTP id
- f26-20020a17090631da00b009b2ba66bbb0mr11154755ejf.28.1696273010250; Mon, 02
- Oct 2023 11:56:50 -0700 (PDT)
+ bh=atuDs1R48W9XzsoI/J2MUYTDzCK8/i5+G8f95WLc9cI=;
+ b=a3s0zM6/vVQhEsR1nNW8NVpr0H+Zyk+ubDP4BVGuaFheUqInUl+5CauOzsUw1Z6DqX
+ EtqIeQcAjxBC5j0JRfAPNa7LzFe7N/PImZGcS5R2/FgjUefiB4j9lW4CFNLp8SvJ0MYc
+ 8uA5Q/m89EtBiAmLA7EEh/lnITJ3WP1Ix4l9o//OsXRr0e6F6x80nAwxWv1QIlIiUSH8
+ aP9FHLGp+oO18WQSQYV25BbhYYn029cLkF/0yD5CYRUX7kePUgQmO+aK1v6Eo4iInUML
+ munP9RlUAfyZ/IJXOHEaO8eONM6HgmlBZ/elPkawwLM4aYbbDzMuA2OwyAJUD0gGu25R
+ u1JA==
+X-Gm-Message-State: AOJu0YyOK4LxpWox8A3Su974p0HuiN80VmuVQh1IX62dfWlkJEU8Sq7N
+ zlo9RsnWWmlBNbZDYVUii0QGCuxWYX+ZGUqKXTCmwg==
+X-Google-Smtp-Source: AGHT+IEk8k4QE0p3wUmtNQbAtynasqoEbCiOmjMevhoKEqy19wA6u5+GdojfA+pVuf5URjrXojXodKtbhPTiTj0xn8A=
+X-Received: by 2002:a17:907:2711:b0:9b2:6b4f:d5ab with SMTP id
+ w17-20020a170907271100b009b26b4fd5abmr10865051ejk.29.1696273016752; Mon, 02
+ Oct 2023 11:56:56 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231002152142.76516-1-detlev.casanova@collabora.com>
- <20231002152142.76516-4-detlev.casanova@collabora.com>
-In-Reply-To: <20231002152142.76516-4-detlev.casanova@collabora.com>
+References: <20231002124217.68220-1-artur@conclusive.pl>
+ <20231002124217.68220-2-artur@conclusive.pl>
+In-Reply-To: <20231002124217.68220-2-artur@conclusive.pl>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Oct 2023 12:56:29 -0600
-Message-ID: <CAPnjgZ1abN-ckwPikKORDakxceg52WHzRd484WtcsneLcp07fw@mail.gmail.com>
-Subject: Re: [PATCH v5 3/6] sysinfo: Add a test
-To: Detlev Casanova <detlev.casanova@collabora.com>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Hai Pham <hai.pham.ud@renesas.com>, Tam Nguyen <tam.nguyen.xa@renesas.com>
+Date: Mon, 2 Oct 2023 12:56:36 -0600
+Message-ID: <CAPnjgZ2E7LgCovBqKv4eWrPcYPNS9JfYYfBpaQ+fLV1MFs+EWA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/4] common: Add generic function for reading serial
+ number
+To: Artur Rojek <artur@conclusive.pl>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>,
+ Jakub Klama <jakub@conclusive.pl>, 
+ Marcin Jabrzyk <marcin@conclusive.pl>, Wojciech Kloska <wojciech@conclusive.pl>,
+ =?UTF-8?Q?Rados=C5=82aw_Adamczyk?= <radoslaw.adamczyk@conclusive.pl>, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,171 +86,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Detlev,
+Hi Artur,
 
-On Mon, 2 Oct 2023 at 09:22, Detlev Casanova
-<detlev.casanova@collabora.com> wrote:
+On Mon, 2 Oct 2023 at 06:42, Artur Rojek <artur@conclusive.pl> wrote:
 >
-> The test runs one of each subcommand and checks that the output matches
-> the values in the sandbox sysinfo driver.
+> Provide a generic way for boards to read their serial number from EEPROM
+> at init.
 >
-> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
+> If CONFIG_ID_EEPROM is set, the new serial_read_from_eeprom() function
+> will now be called during the post-relocation part of the board init.
+>
+> Provided is the tlv eeprom implementation of the above function, making
+> use of the existing, yet never utilized, populate_serial_number().
+> Boards which use custom logic for interaction with their EEPROMs need to
+> supply their own implementation.
+>
+> Signed-off-by: Artur Rojek <artur@conclusive.pl>
 > ---
->  configs/sandbox_defconfig |  1 +
->  drivers/sysinfo/sandbox.c | 17 +++++++++++++
->  test/cmd/Makefile         |  1 +
->  test/cmd/test_sysinfo.c   | 51 +++++++++++++++++++++++++++++++++++++++
->  4 files changed, 70 insertions(+)
->  create mode 100644 test/cmd/test_sysinfo.c
 >
-
-Reviewed-by: Simon Glass <sjg@chromium.org>
-
-nits below
-
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index 62bc182ca16..409e3d88012 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -129,6 +129,7 @@ CONFIG_CMD_EROFS=y
->  CONFIG_CMD_EXT4_WRITE=y
->  CONFIG_CMD_SQUASHFS=y
->  CONFIG_CMD_MTDPARTS=y
-> +CONFIG_CMD_SYSINFO=y
->  CONFIG_CMD_STACKPROTECTOR_TEST=y
->  CONFIG_MAC_PARTITION=y
->  CONFIG_AMIGA_PARTITION=y
-> diff --git a/drivers/sysinfo/sandbox.c b/drivers/sysinfo/sandbox.c
-> index d270a26aa43..cc7783907a9 100644
-> --- a/drivers/sysinfo/sandbox.c
-> +++ b/drivers/sysinfo/sandbox.c
-> @@ -7,9 +7,14 @@
->  #include <common.h>
->  #include <dm.h>
->  #include <sysinfo.h>
-> +#include <version.h>
+> v3: - restore original function name and make it static
+>     - provide a generic function for reading EEPROM serial number and
+>       wrap it around the existing tlv logic
+>     - move the env var check out of populate_serial_number() and into
+>       the new serial_read_from_eeprom() in order to stay consistent with
+>       the documentation
 >
->  #include "sandbox.h"
+> v2: - rename the function
+>     - move function documentation from .c file to the prototype location
 >
-> +#define SANDBOX_BOARD_ID       0x42
-> +#define SANDBOX_BOARD_REV_MAJOR        U_BOOT_VERSION_NUM
-> +#define SANDBOX_BOARD_REV_MINOR        U_BOOT_VERSION_NUM_PATCH
-> +
->  struct sysinfo_sandbox_priv {
->         bool called_detect;
->         int test_i1;
-> @@ -48,6 +53,15 @@ int sysinfo_sandbox_get_int(struct udevice *dev, int id, int *val)
->         struct sysinfo_sandbox_priv *priv = dev_get_priv(dev);
->
->         switch (id) {
-> +       case SYSINFO_ID_BOARD_ID:
-> +               *val = SANDBOX_BOARD_ID;
-> +               return 0;
-> +       case SYSINFO_ID_BOARD_REV_MAJOR:
-> +               *val = SANDBOX_BOARD_REV_MAJOR;
-> +               return 0;
-> +       case SYSINFO_ID_BOARD_REV_MINOR:
-> +               *val = SANDBOX_BOARD_REV_MINOR;
-> +               return 0;
->         case INT_TEST1:
->                 *val = priv->test_i1;
->                 /* Increments with every call */
-> @@ -71,6 +85,9 @@ int sysinfo_sandbox_get_str(struct udevice *dev, int id, size_t size, char *val)
->         int index = (i1 * i2) % ARRAY_SIZE(vacation_spots);
->
->         switch (id) {
-> +       case SYSINFO_ID_BOARD_MODEL:
-> +               snprintf(val, size, "sandbox");
-> +               return 0;
->         case STR_VACATIONSPOT:
->                 /* Picks a vacation spot depending on i1 and i2 */
->                 snprintf(val, size, vacation_spots[index]);
-> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-> index 6e3d7e919ef..dc8f59d87f2 100644
-> --- a/test/cmd/Makefile
-> +++ b/test/cmd/Makefile
-> @@ -26,6 +26,7 @@ ifdef CONFIG_SANDBOX
->  obj-$(CONFIG_CMD_READ) += rw.o
->  obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
->  obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
-> +obj-$(CONFIG_CMD_SYSINFO) += test_sysinfo.o
->  endif
->  obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
->  obj-$(CONFIG_CMD_WGET) += wget.o
-> diff --git a/test/cmd/test_sysinfo.c b/test/cmd/test_sysinfo.c
-> new file mode 100644
-> index 00000000000..7ba6dd0df89
-> --- /dev/null
-> +++ b/test/cmd/test_sysinfo.c
-> @@ -0,0 +1,51 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Tests for sysinfo command
-> + *
-> + * Copyright 2023, Detlev Casanova <detlev.casanova@collabora.com>
-> + */
-> +
-> +#include <common.h>
-> +#include <command.h>
-> +#include <asm/global_data.h>
-> +#include <display_options.h>
-> +#include <test/lib.h>
-> +#include <test/test.h>
-> +#include <test/ut.h>
-> +#include <version.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +#define REV_(x, y) #x "." #y
-> +#define REV(x, y) REV_(x, y)
-> +
-> +struct test_data {
-> +       char *cmd;
-> +       char *expected;
-> +};
-> +
-> +static struct test_data sysinfo_data[] = {
-> +       {"sysinfo model", "sandbox"},
-> +       {"sysinfo id", "0x42"},
-> +       {"sysinfo revision", REV(U_BOOT_VERSION_NUM, U_BOOT_VERSION_NUM_PATCH)},
+>  cmd/tlv_eeprom.c | 25 +++++++++----------------
+>  common/board_r.c |  8 ++++++++
+>  include/init.h   | 14 ++++++++++++++
+>  3 files changed, 31 insertions(+), 16 deletions(-)
 
-I would prefer that write out the lines in code. I don't think it
-helps much to put these in a table.
+Can you please use events for this? Something like EVT_SETTINGS_R ?
 
-> +};
-> +
-> +static int lib_test_sysinfo(struct unit_test_state *uts)
-> +{
-> +       int i;
-> +
-> +       for (i = 0; i < ARRAY_SIZE(sysinfo_data); ++i) {
-> +               ut_silence_console(uts);
-> +               console_record_reset_enable();
+See the one recently added for how to do this:
 
-drop those two lines
-
-> +               ut_assertok(run_command(sysinfo_data[i].cmd, 0));
-> +               ut_unsilence_console(uts);
-> +               console_record_readline(uts->actual_str,
-> +                                       sizeof(uts->actual_str));
-> +               ut_asserteq_str(sysinfo_data[i].expected, uts->actual_str);
-
-ut_assert_nextline(sysinfo_data[i].expected, uts->actual_str);
-
-> +               ut_assertok(ut_check_console_end(uts));
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +LIB_TEST(lib_test_sysinfo, 0);
-
-Add UT_TESTF_CONSOLE_REC
-
-> --
-> 2.41.0
->
+INITCALL_EVENT(EVT_LAST_STAGE_INIT),
 
 Regards,
 Simon
