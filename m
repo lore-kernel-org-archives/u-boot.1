@@ -4,76 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51CBCE7490C
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 18:58:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EDD2E7490C
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 18:58:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F3F9B871CF;
-	Mon,  2 Oct 2023 20:57:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 605DE871F3;
+	Mon,  2 Oct 2023 20:57:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Slal89Y2";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="FjKrKbRo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85050871B3; Mon,  2 Oct 2023 20:57:25 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 4DE1A871F0; Mon,  2 Oct 2023 20:57:26 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 160F0871F3
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 20:57:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 43FD687183
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 20:57:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-5a1f00b75aaso1301137b3.2
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 11:57:21 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-59f7cc71e2eso1620617b3.0
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 11:57:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696273040; x=1696877840; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1696273043; x=1696877843; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FEqNB4t383yM5ODg6zEr/xdVgOxtcJG/XEUyaw0XqOQ=;
- b=Slal89Y201mqIU3fn/MvG1p411KEI6MvOHTLxVA3VLuEqKy/SFfcNzW2Q1FOIsmFMH
- +k/zXnItFGwdxSlEXR4mKqVdaHM/v9B+ylKfk2eWGPwT6LxXWYNyLl4KF1cxOQ/xIs8O
- 4uSBoF2u0b9dPfUJug/+fw2GPlwshCjlvjMig=
+ bh=9Uczj2JJRIgTnM6v/UbZkxAaq1i53o8Ql5aFayzHPLA=;
+ b=FjKrKbRomDKvrJkTqkRwdlpu7/GYvBa7AVoy3My2V7QhMRLKbdsDfffs4EMchn6iZL
+ cJyqMxktuXY9fFLQRNDwmbLn0mt+LEfmLb1lWlo38JKefu7968TRa2MutVYvsa84+c9U
+ DLHrATaqBvSoBsK+hi/KaZuQJJskf7ruMuv/NwVfCXvke70nxzvFftODSReNirfY3Bdz
+ d31DDeSR0aQb77BegR18eDqxWRi+/Q981FjZ+atNJ6iFsAc4Ldgecc/bDJOhKof9r8lx
+ IGa3zDAXVA7qBrtP3nKzCRUVURb6CSn0L4UcSTY6s4/y3lMGCkx7awgumC0PT5b88tnp
+ 63Jw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696273040; x=1696877840;
+ d=1e100.net; s=20230601; t=1696273043; x=1696877843;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FEqNB4t383yM5ODg6zEr/xdVgOxtcJG/XEUyaw0XqOQ=;
- b=r3FENNwJeFTbFIpyZ5EZCe6hBUiCFpczyKZaE5hqUW5T6fi6+4YrKTvCny3C8cK35f
- 3KWksyQX5AKIZ6+4JdgZwCvi+AYUsHsiliHM+4qbqoPZJYqrvc8YLR2PVILUorJ9n4ao
- ae6KN6gJzo2YOn2n+TTP80Y+0vumWhnblWuRvQIPuZg/SwpwZxCLQaytOGr5fbUoXSjE
- LBfeQW19ZEPSss/8l2W53Uhvn6UMQEuz7wfNJpkAa9t+2xbY9mK7XFtV+2rkPqbyPH9c
- IkCYjscDLySyGqc+1gEdiV1cRRhRKnLrzOOQpLyYVBL7nLnxd2xYZiPqiInXKiCW7k6Z
- F2tQ==
-X-Gm-Message-State: AOJu0YwXSm2Qx4nOGuQfNsZ6z5keKL/IXOmGCBOCgNQ8U0HD8LcrH/H8
- upsSJZfeOOTFhhylMoe1squWoUUzqtNqku1yjR/57D3WZQ1HpkCXzl8=
-X-Google-Smtp-Source: AGHT+IHjtCn2xzJfOS3xEwdlQLR+WkuU5ZGhPgWskJwehqDbjd0KbfSjleGtjZicZce2eZ/D68x48+9DAFtPSZVXOqM=
-X-Received: by 2002:a81:df11:0:b0:59b:dbb7:5c74 with SMTP id
- c17-20020a81df11000000b0059bdbb75c74mr10928925ywn.32.1696273039370; Mon, 02
- Oct 2023 11:57:19 -0700 (PDT)
+ bh=9Uczj2JJRIgTnM6v/UbZkxAaq1i53o8Ql5aFayzHPLA=;
+ b=IsFMIsr7JiFK3UF1D/RH5cKKVSylE7K13tyIm0ZcOX0R5XeFKNkyxBbaKcTBSO2g/E
+ EeVT8PQD+ZX0ZtxeZwBYTUjvnShdLrF3H1MAADO7pS0zIC+lrVR7vj1lgMyGQNAyWgZe
+ myusw3CY9jJbbpi5CvgFVpjmXNJSzETV4ydDpJBCgPJxNUeyeKeQhIHWVzNTSwwHwYsN
+ A9GE5k4il8L26Y3HQ4ZSiCLY+nmWGO5f8ohlYybrFN6HrX0A7iSnDExOLxB9sgJf5B+E
+ OPKgktCfbBrN9Ypg+CbEtcAHMBr/JWEDdAj59LiSUjBqq2mgTPCSH4A8UzXXLOEEfa0U
+ 9nQw==
+X-Gm-Message-State: AOJu0Yx9Rn8U2qet+pibWta+b0aCFEeC+uc3I7X0nTBrZz/P4QJkblV0
+ +1YHZWUCWr3ex+H/cU6aZ+gbyLYd/GrCcR0YWV3ELA==
+X-Google-Smtp-Source: AGHT+IG9Nlyyygvn9eujWkHxfrN7S0dlKnrNMJZISYdv5bh3atiY8VOLtFMxC2RWUz3AlP4Fdyr+ZVF5+apdVtJwovE=
+X-Received: by 2002:a0d:d203:0:b0:59f:5361:d18c with SMTP id
+ u3-20020a0dd203000000b0059f5361d18cmr11542277ywd.41.1696273042804; Mon, 02
+ Oct 2023 11:57:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <68f445de-c903-c3a1-906f-2cf7b5675d08@prevas.dk>
- <20230925181940.GH305624@bill-the-cat>
- <08e35aab-309c-a8e1-931e-7ab142beb593@prevas.dk>
- <CAPnjgZ3jO5s3HZRjXdG-dVLNmGYnyCWnpvzRKpKhBCRQqWH33Q@mail.gmail.com>
- <20230929160230.GP305624@bill-the-cat>
- <CAPnjgZ29hTMrzey1eZreTKhEVXWvi50JWBw-kUKC2VUYgXLYsw@mail.gmail.com>
- <20231002140854.GU305624@bill-the-cat>
- <CAPnjgZ0TTNCEUHfHDr7tALx+Po9PDoD-R7zYeN2gc4wnkWqSzw@mail.gmail.com>
- <20231002151212.GY305624@bill-the-cat>
- <CAPnjgZ1fZjxTi8ryiVZC=Js1MDfP+PdGbJK87BA_kJe52d038w@mail.gmail.com>
- <20231002162203.GZ305624@bill-the-cat>
-In-Reply-To: <20231002162203.GZ305624@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Oct 2023 12:56:38 -0600
-Message-ID: <CAPnjgZ0K-pP9FUxn-k+XeWZTdt+Z4XafpgJRJ5eUM7izZ8==PA@mail.gmail.com>
-Subject: Re: [PATCH] scripts/Makefile.lib: also consider
- $(CONFIG_SYS_BOARD)-u-boot.dtsi
-To: Tom Rini <trini@konsulko.com>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
+References: <20231002172614.11162-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231002172614.11162-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@google.com>
+Date: Mon, 2 Oct 2023 12:56:39 -0600
+Message-ID: <CAPnjgZ31sLZVkR5H6hxnr=UFq6hqNda0E3ciYUDDz4E_rQ2ZGQ@mail.gmail.com>
+Subject: Re: [PATCH] input: avoid NULL dereference
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,184 +83,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Mon, 2 Oct 2023 at 10:22, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 2 Oct 2023 at 11:26, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Mon, Oct 02, 2023 at 09:39:18AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Mon, 2 Oct 2023 at 09:12, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Oct 02, 2023 at 08:43:41AM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 2 Oct 2023 at 08:09, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sun, Oct 01, 2023 at 07:17:27PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Fri, 29 Sept 2023 at 10:02, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Sep 29, 2023 at 09:15:00AM -0600, Simon Glass wrote:
-> > > > > > > > Hi Rasmus,
-> > > > > > > >
-> > > > > > > > On Mon, 25 Sept 2023 at 13:05, Rasmus Villemoes
-> > > > > > > > <rasmus.villemoes@prevas.dk> wrote:
-> > > > > > > > >
-> > > > > > > > > On 25/09/2023 20.19, Tom Rini wrote:
-> > > > > > > > > > On Mon, Sep 25, 2023 at 10:27:43AM +0200, Rasmus Villemoes wrote:
-> > > > > > > > > >> On 04/05/2023 14.35, Rasmus Villemoes wrote:
-> > > > > > > > > >>> On 03/05/2023 16.54, Tom Rini wrote:
-> > > > > > > > > >>
-> > > > > > > > > >>>> The one last problem now is on stm32mp15_dhcor_basic which is a
-> > > > > > > > > >>>> defconfig missing one from OF_LIST but including it in the its file, so
-> > > > > > > > > >>>> the above is the patch we need.
-> > > > > > > > > >>>>
-> > > > > > > > > >>
-> > > > > > > > > >> Hi Tom
-> > > > > > > > > >>
-> > > > > > > > > >> Can I persuade you to try something like
-> > > > > > > > > >> https://source.denx.de/u-boot/u-boot/-/commit/a05e0d0e6b9103542a1076f9cab0005f400fa072
-> > > > > > > > > >> again, but leaving the .dtbo targets in there?
-> > > > > > > > > >>
-> > > > > > > > > >> I could send a patch, but it's entirely mechanical, and not really meant
-> > > > > > > > > >> for being applied until we know if there's more to be cleaned up.
-> > > > > > > > > >
-> > > > > > > > > > So what ended up being the problem I think is the case Simon pointed out
-> > > > > > > > > > where we do take the output from "make all" and concatenate one of the
-> > > > > > > > > > dtbs that was generated with u-boot.img or so, and it works.  But maybe
-> > > > > > > > > > that should just list all of the valid DTBs that it needs in the
-> > > > > > > > > > defconfig to start with? I don't quite know, it was a case I hadn't
-> > > > > > > > > > considered at the time.
-> > > > > > > > > >
-> > > > > > > > >
-> > > > > > > > > Re-reading the thread, I can't see where that was mentioned.
-> > > > > > > > >
-> > > > > > > > > But yes, if some boards (still) need that, and have more than one
-> > > > > > > > > possible .dtb, the board can't set an OF_LIST different from the default
-> > > > > > > > > consisting of DEFAULT_DEVICE_TREE because changing OF_LIST requires
-> > > > > > > > > SPL_LOAD_FIT || MULTI_DTB_FIT.
-> > > > > > > > >
-> > > > > > > > > How do we figure out if such boards even exist?
-> > > > > > > >
-> > > > > > > > Honestly at this point I've forgotten what this is all about.
-> > > > > > > >
-> > > > > > > > Perhaps the easiest approach is to create a new Kconfig to control
-> > > > > > > > whether a board-level .dtsi is included in the list of wildcard
-> > > > > > > > searches. Then you can enable it for your board without affecting
-> > > > > > > > others.
-> > > > > > >
-> > > > > > > That's getting things backwards, from what this cleanup does.  Today we
-> > > > > > > have messy lists of "build these device trees" and then don't use most
-> > > > > > > of them, and some of the list is just Wrong (listing dts files as an
-> > > > > > > output).  With the series to handle dtbo files, we could remove
-> > > > > > > virtually all of that, and the only use cases that don't Just Work still
-> > > > > > > are the ones I forget which board you mentioned (I think it was Samsung
-> > > > > > > tho?) where the defconfig doesn't list all of the device trees, just one
-> > > > > > > of them, and the other 5 that we build can also be easily used.  Does
-> > > > > > > that ring a bell?
-> > > > > >
-> > > > > > Yes it does...but what is the problem here?
-> > > > >
-> > > > > Messy and unused and incorrect Makefile content.
-> > > >
-> > > > The problem I see there is people using TARGET in
-> > > > arch/arm/dts/Makefile for example. There are 80 instances of that. The
-> > > > rules should depend on SoC (e.g. use ARCH_EXYNOS5), as Linux does it.
-> > >
-> > > It shouldn't be there at all since there's almost no cases where we
-> > > "just" take an arbitrary dtb file and u-boot.img and then the system
-> > > boot.  That's what this series is about fixing.
-> >
-> > I'm really not sure that replacing build rules with a board CONFIG is
-> > a good idea. I suppose part of my confusion is why the Makefile is
-> > considered a problem?
+> Before using the result of env_get("stdin") we must check if it is NULL.
 >
-> Because it's duplicative and as Rasmus points out, often wrong.
-
-To me, that is under the control of the board maintainers. They should
-not put CONFIG_SYS_BOARD in the DT...it obviously goes against what DT
-is for and I'm not sure what binding would allow it anyway.
-
-If it helps, I could do a little series to remove those? I think it is
-just arch/arm/dts/rockchip-optee.dtsi ?
-
-This seems like a case of throwing the baby out with the bathwater.
-
+> Use attribute __maybe unused instead of dummy assignment.
 >
-> > > > > > The DT files for an SoC are supposed to be buildable without needing
-> > > > > > to have the context of a particular board.
-> > > > >
-> > > > > They're still buildable, without an explicit rule, they just need to
-> > > > > (like they can now) be built explicitly.
-> > > >
-> > > > But isn't that creating dead code? It will rot.
-> > >
-> > > No, that's the problem we have today, people list something in the
-> > > Makefile, since they think they need to list something, and then put the
-> > > device trees they use in the defconfig.
-> >
-> > If they don't list something, it won't build, right?
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  drivers/input/input.c | 21 ++++++++++++---------
+>  1 file changed, 12 insertions(+), 9 deletions(-)
 >
-> No, everyone builds fine since CONFIG_DEFAULT_DEVICE_TREE is pretty much
-> always set.  And for run time, if we need more, *OF_LIST gets set.
 
-OK, makes sense. So what DT does u-boot.bin contain in that case? Just
-the default? And u-boot.img contains a FIT with all of them?
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
+But is it not possible to use if() instead of #if ?
+
+> diff --git a/drivers/input/input.c b/drivers/input/input.c
+> index a4341e8c7c..2330b21f71 100644
+> --- a/drivers/input/input.c
+> +++ b/drivers/input/input.c
+> @@ -666,19 +666,22 @@ int input_init(struct input_config *config, int leds)
 >
-> > > [snip]
-> > > > > > I am find with making the boards list the DTs that they can run with,
-> > > > > > if there is an easy way of doing that. CONFIG_SPL_OF_LIST is just for
-> > > > > > SPL, I think.
-> > > > >
-> > > > > Yes, every board except for some use case you've described before as far
-> > > > > as I know lists the device trees that they use in the defconfig.  Which
-> > > > > is why there's an impetus to clean up arch/*/dts/Makefile as 95% of
-> > > > > those lines can just be removed.
-> > > >
-> > > > It seems like you are wanting a board-level CONFIG which lists the DTs
-> > > > which need to be built for that board. Is that right? You are
-> > > > suggesting that this already exists, but I am not aware of it. Do you
-> > > > mean SPL_OF_LIST, perhaps?
-> > >
-> > > I mean today CONFIG_DEFAULT_DEVICE_TREE + CONFIG_OF_LIST +
-> > > CONFIG_SPL_OF_LIST is set and correct for everyone board except some use
-> > > case you have, which I think is something about exynos?  And so we only
-> > > need scripts/Makefile.dts in arch/*/dts/Makefile
-> >
-> > Yes exynos5 boards (the original reason for DT) have / had the same
-> > u-boot-nodtb.bin and you can add the DT you want to boot it on
-> > particular hardware. That is one of the goals of DT.
+>  int input_stdio_register(struct stdio_dev *dev)
+>  {
+> -       int error;
+> +       __maybe_unused int error;
 >
-> Yes, but "and you concat the two files" isn't common.  We _can_ keep the
-> EXYNOS list, if that's actually being used.  But most of that list is
-> not, as far as I can tell, because the flow is "U-Boot binarie(s) + DTB
-> files + stuff" to get the correctly formatted blob for the firmware.
-
-I believe rockchip allows just the DT to be changed, to work on a
-board with the same SoC. In principle it would be possible to build a
-common u-boot-nodtb.bin too, e.g. for 32-bit.
-
-We are trying to use DT (and not custom C code) to deal with the
-differences between boards. So long as that is preserved, I am happy
-enough.
-
+>         error = stdio_register(dev);
+>  #if !defined(CONFIG_SPL_BUILD) || CONFIG_IS_ENABLED(ENV_SUPPORT)
+> -       /* check if this is the standard input device */
+> -       if (!error && strcmp(env_get("stdin"), dev->name) == 0) {
+> -               /* reassign the console */
+> -               if (OVERWRITE_CONSOLE ||
+> -                               console_assign(stdin, dev->name))
+> -                       return -1;
+> +       if (!error) {
+> +               const char *cstdin;
+> +
+> +               /* check if this is the standard input device */
+> +               cstdin = env_get("stdin");
+> +               if (cstdin && !strcmp(cstdin, dev->name)) {
+> +                       /* reassign the console */
+> +                       if (OVERWRITE_CONSOLE ||
+> +                           console_assign(stdin, dev->name))
+> +                               return -1;
+> +               }
+>         }
+> -#else
+> -       error = error;
+>  #endif
 >
-> > The OF_LIST option is a little vague but I think it means that the DTs
-> > are packaged into a FIT in u-boot.img - is that right? But they
-> > presumably have to be built first.
+>         return 0;
+> --
+> 2.40.1
 >
-> No, they don't have to be built first because scripts/Makefile.dts
-> ensures that we build everything in *OF_LIST.
-
-That is from this commit:
-
-3609e1dc5f4 dts: automatically build necessary .dtb files
-
-which was for use by custom boards using a private branch. Did it have
-a wider purpose that I didn't understand?
 
 Regards,
 Simon
