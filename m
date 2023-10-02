@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC15E784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:23:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B5D4E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:24:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A90EC87155;
-	Mon,  2 Oct 2023 03:15:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 71BFF8716C;
+	Mon,  2 Oct 2023 03:15:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fUpq5rhK";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IYvvcDVY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBD7287116; Mon,  2 Oct 2023 03:14:16 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 5E64B86D7C; Mon,  2 Oct 2023 03:14:17 +0200 (CEST)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9747D870EB
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60B87870EC
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-79fd60f40ebso59557339f.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:05 -0700 (PDT)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-35255c1a448so13499965ab.3
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209244; x=1696814044; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209245; x=1696814045; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Bld7zdrqSwYHdTRhD0N77M9IPwAIVQ4waUtS0TKtPow=;
- b=fUpq5rhKaO9E8pZDrdk9/QXT2pllisrfSfh4m2hpNL/LfTYBati/vR2+Exa8H+dYHB
- W31L6Cdv7I8UR8dNdWpcIwskJoFRY5IXMXZ8Wt4zg3SdSUQW/FNODdrp4LULE0q31OW8
- 3exyXF0PZmWjl9PKiGak6NCBCXBsg+1CB2veA=
+ bh=XVSdwn+6p01yq6KTrn82FyZczhGxyFfV3PUsIFiTs7E=;
+ b=IYvvcDVYXvS42IpDDb83e+2um7vu+h7rHPlZtl+BVgHNSsRfPyYrvyoKu7HGVlZDa4
+ CCt2uTUH3BKvX1rp0J0CsMz07J3H5x2D8DlkAZpYkQH/d1LFQMER6+hSnJi/MBd8DxEf
+ muRIveEsQYEEvirHkD9C4Q4lyt+NvUg6KxXrY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209244; x=1696814044;
+ d=1e100.net; s=20230601; t=1696209245; x=1696814045;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Bld7zdrqSwYHdTRhD0N77M9IPwAIVQ4waUtS0TKtPow=;
- b=s1GHVKwymjLeqACzt/HfVzoeNdXfXv63qaKr+zrHjP7/wGpIB4ONm/nHBbrPgR4asc
- r/f1sr6snt17r8eBERHxLL/e6X+bP3igxZ3fQIKfdrQrU2S/ITWeycHSVAi37eUzqwzH
- v7t6GLDv1gBgN6YjJ053jrKNoOgOmbizt3md40EziEAty3+xcsAp2JeefElC4uN3PMBF
- SqANTfeJ3p1tnFimYOsUyDfu+Jud7EB7ldWt6UwuUvbYISNcyYT+ieaLN60UsH8m9Git
- iiKzUGoa9260tOrjSM2sMdl1a5GWjO2dOaLI59l8vKyGwd46XHc2ygVPh6Xuvt2Ro6U1
- FtMw==
-X-Gm-Message-State: AOJu0YxRtjAVpdX1YuNeo1eSbZ2mEA+X46l5mQ2hRaIrDii2PpZitbNr
- JHXfpHumk8yxneX/iqpHZdWgbnHm8KuPX9Pgmhk=
-X-Google-Smtp-Source: AGHT+IHZEH6zV4Sb0/I5X0kTaGChFm1/YgilE+r7vkRK8AYCNvzwUKR11ThSWJm0IxNTQAghaizyRw==
-X-Received: by 2002:a6b:5805:0:b0:795:d33:861f with SMTP id
- m5-20020a6b5805000000b007950d33861fmr8773611iob.6.1696209244213; 
+ bh=XVSdwn+6p01yq6KTrn82FyZczhGxyFfV3PUsIFiTs7E=;
+ b=QEwJE5QX0DXk4GGGdG8jgyYWm6h9ygIQKVRPQ7+87SNT/1ETxhbYvY3bu7wOKbKFfl
+ jtNnBvk4ZndkDuXrZLmkExzwQz95cZckode1BvUQFX/9/pnATntEJqkQvSMXyKg2rnLO
+ zSChFjddGO0jmR6HIcEn/BgmEoWbp3qeHjIBYgyTds6p2vnBxxyb1KJ/hdofp8VAEqsc
+ rZgZ3qJFBLLgIk/JgxaAsFCGPiYx+Fbsy4mEA9xOGB/IJAOLqq80wSgzaIdLxFyHPqHJ
+ yEmxrUW4syQlB8jZI2APBxzMGtTv6k9M9EGMD7zVloMd91bTSPMiS64OjGaRqa6TFF+F
+ flog==
+X-Gm-Message-State: AOJu0YweewmhHQKMYye/B2GYo0GNEU1oq/aAFLQJUvMJAQUii/hNKNaE
+ WZ2okdo/i+oyE9NonPe+WVFBMhyw8JlMBMFXGwA=
+X-Google-Smtp-Source: AGHT+IFiDoEykPN6N6Xha8kuoiVlmcSN6JYE7gkY4YeLsvB3C9gPwAqm119x856itn+NBnieBV1BYw==
+X-Received: by 2002:a92:c56b:0:b0:351:2104:64f6 with SMTP id
+ b11-20020a92c56b000000b00351210464f6mr13013373ilj.1.1696209244947; 
  Sun, 01 Oct 2023 18:14:04 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.03
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Sun, 01 Oct 2023 18:14:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 13/36] cli: Add a function to set up a new cread
-Date: Sun,  1 Oct 2023 19:13:17 -0600
-Message-ID: <20231002011349.461284-14-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH v2 14/36] video: Allow obtaining the nominal size of a string
+ size
+Date: Sun,  1 Oct 2023 19:13:18 -0600
+Message-ID: <20231002011349.461284-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
 References: <20231002011349.461284-1-sjg@chromium.org>
@@ -88,100 +89,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Create a init function so that it is easy to use command-line reading.
+At present there is a method for measuring text, but if the actual text
+string is not known, it cannot be used.
+
+For text editor we want to set the size of the entry box to cover the
+expected text size. Add the concept of a 'norminal' size with a method
+to calculate that for the vidconsole.
+
+If the method is not implemented, fall back to using the font size,
+which is sufficient for fixed-width fonts.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/cli_readline.c | 24 +++++++++++++++---------
- include/cli.h         | 17 ++++++++++++++++-
- 2 files changed, 31 insertions(+), 10 deletions(-)
+ drivers/video/console_truetype.c  | 31 +++++++++++++++++++++++++++++++
+ drivers/video/vidconsole-uclass.c | 22 ++++++++++++++++++++++
+ include/video_console.h           | 30 ++++++++++++++++++++++++++++++
+ 3 files changed, 83 insertions(+)
 
-diff --git a/common/cli_readline.c b/common/cli_readline.c
-index 23913a857a99..06b8d4650447 100644
---- a/common/cli_readline.c
-+++ b/common/cli_readline.c
-@@ -424,28 +424,34 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
- 	return -EAGAIN;
+diff --git a/drivers/video/console_truetype.c b/drivers/video/console_truetype.c
+index 0f9bb49e44f7..8ed79c37676c 100644
+--- a/drivers/video/console_truetype.c
++++ b/drivers/video/console_truetype.c
+@@ -750,6 +750,36 @@ int truetype_measure(struct udevice *dev, const char *name, uint size,
+ 	return 0;
  }
  
-+void cli_cread_init(struct cli_line_state *cls, char *buf, uint buf_size)
++static int truetype_nominal(struct udevice *dev, const char *name, uint size,
++			    uint num_chars, struct vidconsole_bbox *bbox)
 +{
-+	int init_len = strlen(buf);
++	struct console_tt_metrics *met;
++	stbtt_fontinfo *font;
++	int lsb, advance;
++	int width;
++	int ret;
 +
-+	memset(cls, '\0', sizeof(struct cli_line_state));
-+	cls->insert = true;
-+	cls->buf = buf;
-+	cls->len = buf_size;
++	ret = get_metrics(dev, name, size, &met);
++	if (ret)
++		return log_msg_ret("sel", ret);
 +
-+	if (init_len)
-+		cread_add_str(buf, init_len, 0, &cls->num, &cls->eol_num, buf,
-+			      buf_size);
++	font = &met->font;
++	width = 0;
++
++	/* First get some basic metrics about this character */
++	stbtt_GetCodepointHMetrics(font, 'W', &advance, &lsb);
++
++	width = advance;
++
++	bbox->valid = true;
++	bbox->x0 = 0;
++	bbox->y0 = 0;
++	bbox->x1 = tt_ceil((double)width * num_chars * met->scale);
++	bbox->y1 = met->font_size;
++
++	return 0;
 +}
 +
- static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 		      int timeout)
+ const char *console_truetype_get_font_size(struct udevice *dev, uint *sizep)
  {
- 	struct cli_ch_state s_cch, *cch = &s_cch;
- 	struct cli_line_state s_cls, *cls = &s_cls;
- 	char ichar;
--	int init_len = strlen(buf);
- 	int first = 1;
+ 	struct console_tt_priv *priv = dev_get_priv(dev);
+@@ -802,6 +832,7 @@ struct vidconsole_ops console_truetype_ops = {
+ 	.get_font_size	= console_truetype_get_font_size,
+ 	.select_font	= truetype_select_font,
+ 	.measure	= truetype_measure,
++	.nominal	= truetype_nominal,
+ };
  
- 	cli_ch_init(cch);
--	memset(cls, '\0', sizeof(struct cli_line_state));
--	cls->insert = true;
--	cls->len = *len;
-+	cli_cread_init(cls, buf, *len);
- 	cls->prompt = prompt;
--	cls->buf = buf;
- 	cls->history = true;
- 	cls->cmd_complete = true;
+ U_BOOT_DRIVER(vidconsole_truetype) = {
+diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
+index b5b3b6625902..23b1b81731bc 100644
+--- a/drivers/video/vidconsole-uclass.c
++++ b/drivers/video/vidconsole-uclass.c
+@@ -618,6 +618,28 @@ int vidconsole_measure(struct udevice *dev, const char *name, uint size,
+ 	return 0;
+ }
  
--	if (init_len)
--		cread_add_str(buf, init_len, 1, &cls->num, &cls->eol_num, buf,
--			      *len);
--
- 	while (1) {
- 		int ret;
++int vidconsole_nominal(struct udevice *dev, const char *name, uint size,
++		       uint num_chars, struct vidconsole_bbox *bbox)
++{
++	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
++	struct vidconsole_ops *ops = vidconsole_get_ops(dev);
++	int ret;
++
++	if (ops->measure) {
++		ret = ops->nominal(dev, name, size, num_chars, bbox);
++		if (ret != -ENOSYS)
++			return ret;
++	}
++
++	bbox->valid = true;
++	bbox->x0 = 0;
++	bbox->y0 = 0;
++	bbox->x1 = priv->x_charsize * num_chars;
++	bbox->y1 = priv->y_charsize;
++
++	return 0;
++}
++
+ void vidconsole_push_colour(struct udevice *dev, enum colour_idx fg,
+ 			    enum colour_idx bg, struct vidconsole_colour *old)
+ {
+diff --git a/include/video_console.h b/include/video_console.h
+index 2694e44f6ecf..5234c85efd6f 100644
+--- a/include/video_console.h
++++ b/include/video_console.h
+@@ -224,6 +224,21 @@ struct vidconsole_ops {
+ 	 */
+ 	int (*measure)(struct udevice *dev, const char *name, uint size,
+ 		       const char *text, struct vidconsole_bbox *bbox);
++
++	/**
++	 * nominal() - Measure the expected width of a line of text
++	 *
++	 * Uses an average font width and nominal height
++	 *
++	 * @dev: Console device to use
++	 * @name: Font name, NULL for default
++	 * @size: Font size, ignored if @name is NULL
++	 * @num_chars: Number of characters to use
++	 * @bbox: Returns nounding box of @num_chars characters
++	 * Returns: 0 if OK, -ve on error
++	 */
++	int (*nominal)(struct udevice *dev, const char *name, uint size,
++		       uint num_chars, struct vidconsole_bbox *bbox);
+ };
  
-diff --git a/include/cli.h b/include/cli.h
-index ad3cb4499fe1..e183d5613697 100644
---- a/include/cli.h
-+++ b/include/cli.h
-@@ -32,7 +32,8 @@ struct cli_ch_state {
-  * @eol_num: Number of characters in the buffer
-  * @insert: true if in 'insert' mode
-  * @history: true if history should be accessible
-- * @cmd_complete: true if tab completion should be enabled
-+ * @cmd_complete: true if tab completion should be enabled (requires @prompt to
-+ *	be set)
-  * @buf: Buffer containing line
-  * @prompt: Prompt for the line
-  */
-@@ -262,6 +263,20 @@ int cli_ch_process(struct cli_ch_state *cch, int ichar);
-  */
- int cread_line_process_ch(struct cli_line_state *cls, char ichar);
+ /* Get a pointer to the driver operations for a video console device */
+@@ -263,6 +278,21 @@ int vidconsole_select_font(struct udevice *dev, const char *name, uint size);
+ int vidconsole_measure(struct udevice *dev, const char *name, uint size,
+ 		       const char *text, struct vidconsole_bbox *bbox);
  
 +/**
-+ * cli_cread_init() - Set up a new cread struct
++ * vidconsole_nominal() - Measure the expected width of a line of text
 + *
-+ * Sets up a new cread state, with history and cmd_complete set to false
++ * Uses an average font width and nominal height
 + *
-+ * After calling this, you can use cread_line_process_ch() to process characters
-+ * received from the user.
-+ *
-+ * @cls: CLI line state
-+ * @buf: Text buffer containing the initial text
-+ * @buf_size: Buffer size, including nul terminator
++ * @dev: Console device to use
++ * @name: Font name, NULL for default
++ * @size: Font size, ignored if @name is NULL
++ * @num_chars: Number of characters to use
++ * @bbox: Returns nounding box of @num_chars characters
++ * Returns: 0 if OK, -ve on error
 + */
-+void cli_cread_init(struct cli_line_state *cls, char *buf, uint buf_size);
++int vidconsole_nominal(struct udevice *dev, const char *name, uint size,
++		       uint num_chars, struct vidconsole_bbox *bbox);
 +
- /** cread_print_hist_list() - Print the command-line history list */
- void cread_print_hist_list(void);
- 
+ /**
+  * vidconsole_push_colour() - Temporarily change the font colour
+  *
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
