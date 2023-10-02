@@ -4,58 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E717E784BD
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 15:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D39E784BD
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 15:27:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 792C0871A3;
-	Mon,  2 Oct 2023 17:22:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id E8E6E8711E;
+	Mon,  2 Oct 2023 17:27:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="iwnC3Sts";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ByRRwTtk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73749871CA; Mon,  2 Oct 2023 17:22:02 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk
- [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C0F7E86DFD; Mon,  2 Oct 2023 17:27:07 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E30787166
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 17:22:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 6FA31854BD
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 17:27:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=detlev.casanova@collabora.com
-Received: from arisu.mtl.collabora.ca (mtl.collabora.ca [66.171.169.34])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: detlev)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 7E7FF6607318;
- Mon,  2 Oct 2023 16:21:59 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1696260120;
- bh=QyHZHwvDP9K83XLblyhWJsu58mT0ptFONTlOIi2CI60=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=iwnC3StsUoZQ9zlv9g9DoWPY5A1FO02Kj8v576GNjMkjLjTJzlEVYE4anO9NLUed7
- dLQapl8KAK0lR9kUQ0J51zq1MHWneJSQawL1E5st5/dgt1Na/cEnpr5GAJ72YU054R
- jr9M5iBcGklE61uoMDVoB9zGOymLE+/m5CB/4luSeKjEnf68WmLhoSKI88viZlD8uZ
- hk2/6LWxaA+Lgen7O+RXn+LRpm/6IMgnuL2JizoXYZbO+Y/pQGY9RoK2ow70NjYFVO
- e+N3dC5JTG+DFIB2re6otpbaYGFCcTazFzn+S4R7Zutc4njWZSsp1Tx80w0bACkNtA
- HPLSn+K7XtFQQ==
-From: Detlev Casanova <detlev.casanova@collabora.com>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>, Tam Nguyen <tam.nguyen.xa@renesas.com>,
- Simon Glass <sjg@chromium.org>,
- Detlev Casanova <detlev.casanova@collabora.com>
-Subject: [PATCH v5 6/6] sysinfo: rcar3: Implement BOARD_ID and BOARD_REV_*
-Date: Mon,  2 Oct 2023 11:20:10 -0400
-Message-ID: <20231002152142.76516-7-detlev.casanova@collabora.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231002152142.76516-1-detlev.casanova@collabora.com>
-References: <20231002152142.76516-1-detlev.casanova@collabora.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 392FQuBB049098;
+ Mon, 2 Oct 2023 10:26:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696260416;
+ bh=hu7CJEjoOLzc9CQXwFCjTnGfnWPuUkR7TEf0iOur4SM=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=ByRRwTtkG4nty6kLj00BvM+b1Iaa2jBZutsnY8mAUTYxq/7D4YcJ3h8Mj8XRzUlb6
+ 8bII7fAv0Krw5eZc9i30Gs0JkPBeMnoj8lYIT5gQrjjXkEyMSTqREjxFH/KnADrni5
+ oyQZmC26Xo/LbPDTZS1tMwEIH6cER+0cCUaQD0tI=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 392FQu8l119784
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 2 Oct 2023 10:26:56 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
+ Oct 2023 10:26:56 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 2 Oct 2023 10:26:55 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 392FQtTS119818;
+ Mon, 2 Oct 2023 10:26:55 -0500
+Date: Mon, 2 Oct 2023 10:26:55 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Apurva Nandan <a-nandan@ti.com>
+CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
+ Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
+ <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
+ <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
+ <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v4 16/16] doc: board: ti: k3: Add J784S4 EVM and AM69 SK
+ documentation
+Message-ID: <20231002152655.h6ayeal4olvycylt@munchkin>
+References: <20231001165545.494212-1-a-nandan@ti.com>
+ <20231001165545.494212-17-a-nandan@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231001165545.494212-17-a-nandan@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,184 +91,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Expose that information to the sysinfo command to let scripts make
-decisions based on the board id and revision.
+On 22:25-20231001, Apurva Nandan wrote:
+[...]
 
-Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
----
- drivers/sysinfo/rcar3.c | 89 +++++++++++++++++++++++++++++------------
- 1 file changed, 63 insertions(+), 26 deletions(-)
+> +Debugging U-Boot
+> +----------------
+> +
+> +See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+> +detailed setup information.
+> +
+> +.. warning::
+> +
+> +  **OpenOCD support since**: v0.12.0
 
-diff --git a/drivers/sysinfo/rcar3.c b/drivers/sysinfo/rcar3.c
-index 633e80bc19b..a554323506a 100644
---- a/drivers/sysinfo/rcar3.c
-+++ b/drivers/sysinfo/rcar3.c
-@@ -32,6 +32,10 @@
-  */
- struct sysinfo_rcar_priv {
- 	char	boardmodel[64];
-+	u8	id;
-+	u8	rev_major;
-+	u8	rev_minor;
-+	bool	has_rev;
- 	u8	val;
- };
- 
-@@ -56,9 +60,33 @@ static int sysinfo_rcar_get_str(struct udevice *dev, int id, size_t size, char *
- 	};
- }
- 
-+static int sysinfo_rcar_get_int(struct udevice *dev, int id, int *val)
-+{
-+	struct sysinfo_rcar_priv *priv = dev_get_priv(dev);
-+
-+	switch (id) {
-+	case SYSINFO_ID_BOARD_ID:
-+		*val = priv->id;
-+		return 0;
-+	case SYSINFO_ID_BOARD_REV_MAJOR:
-+		if (!priv->has_rev)
-+			return -EINVAL;
-+		*val = priv->rev_major;
-+		return 0;
-+	case SYSINFO_ID_BOARD_REV_MINOR:
-+		if (!priv->has_rev)
-+			return -EINVAL;
-+		*val = priv->rev_minor;
-+		return 0;
-+	default:
-+		return -EINVAL;
-+	};
-+}
-+
- static const struct sysinfo_ops sysinfo_rcar_ops = {
- 	.detect = sysinfo_rcar_detect,
- 	.get_str = sysinfo_rcar_get_str,
-+	.get_int = sysinfo_rcar_get_int,
- };
- 
- static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
-@@ -69,8 +97,9 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
- 	bool ebisu_4d = false;
- 	bool condor_i = false;
- 	char rev[4] = "?.?";
--	u8 rev_major = 0;
--	u8 rev_minor = 0;
-+
-+	priv->id = board_id;
-+	priv->has_rev = false;
- 
- 	switch (board_id) {
- 	case BOARD_SALVATOR_XS:
-@@ -78,9 +107,10 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
- 		fallthrough;
- 	case BOARD_SALVATOR_X:
- 		if (!(board_rev & ~1)) { /* Only rev 0 and 1 is valid */
--			rev_major = 1;
--			rev_minor = board_rev & BIT(0);
--			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
-+			priv->rev_major = 1;
-+			priv->rev_minor = board_rev & BIT(0);
-+			priv->has_rev = true;
-+			snprintf(rev, sizeof(rev), "%u.%u", priv->rev_major, priv->rev_minor);
- 		}
- 		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
- 			 "Renesas Salvator-X%s board rev %s",
-@@ -89,27 +119,30 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
- 		return;
- 	case BOARD_STARTER_KIT:
- 		if (!(board_rev & ~1)) { /* Only rev 0 and 1 is valid */
--			rev_major = (board_rev & BIT(0)) ? 3 : 1;
--			rev_minor = 0;
--			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
-+			priv->rev_major = (board_rev & BIT(0)) ? 3 : 1;
-+			priv->rev_minor = 0;
-+			snprintf(rev, sizeof(rev), "%u.%u", priv->rev_major, priv->rev_minor);
-+			priv->has_rev = true;
- 		}
- 		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
- 			 "Renesas Starter Kit board rev %s", rev);
- 		return;
- 	case BOARD_STARTER_KIT_PRE:
- 		if (!(board_rev & ~3)) { /* Only rev 0..3 is valid */
--			rev_major = (board_rev & BIT(1)) ? 2 : 1;
--			rev_minor = (board_rev == 3) ? 1 : 0;
--			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
-+			priv->rev_major = (board_rev & BIT(1)) ? 2 : 1;
-+			priv->rev_minor = (board_rev == 3) ? 1 : 0;
-+			snprintf(rev, sizeof(rev), "%u.%u", priv->rev_major, priv->rev_minor);
-+			priv->has_rev = true;
- 		}
- 		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
- 			 "Renesas Starter Kit Premier board rev %s", rev);
- 		return;
- 	case BOARD_EAGLE:
- 		if (!board_rev) { /* Only rev 0 is valid */
--			rev_major = 1;
--			rev_minor = 0;
--			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
-+			priv->rev_major = 1;
-+			priv->rev_minor = 0;
-+			snprintf(rev, sizeof(rev), "%u.%u", priv->rev_major, priv->rev_minor);
-+			priv->has_rev = true;
- 		}
- 		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
- 			 "Renesas Eagle board rev %s", rev);
-@@ -119,9 +152,10 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
- 		fallthrough;
- 	case BOARD_EBISU:
- 		if (!board_rev) { /* Only rev 0 is valid */
--			rev_major = 1;
--			rev_minor = 0;
--			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
-+			priv->rev_major = 1;
-+			priv->rev_minor = 0;
-+			snprintf(rev, sizeof(rev), "%u.%u", priv->rev_major, priv->rev_minor);
-+			priv->has_rev = true;
- 		}
- 		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
- 			 "Renesas Ebisu%s board rev %s",
-@@ -129,18 +163,20 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
- 		return;
- 	case BOARD_DRAAK:
- 		if (!board_rev) { /* Only rev 0 is valid */
--			rev_major = 1;
--			rev_minor = 0;
--			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
-+			priv->rev_major = 1;
-+			priv->rev_minor = 0;
-+			snprintf(rev, sizeof(rev), "%u.%u", priv->rev_major, priv->rev_minor);
-+			priv->has_rev = true;
- 		}
- 		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
- 			 "Renesas Draak board rev %s", rev);
- 		return;
- 	case BOARD_KRIEK:
- 		if (!board_rev) { /* Only rev 0 is valid */
--			rev_major = 1;
--			rev_minor = 0;
--			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
-+			priv->rev_major = 1;
-+			priv->rev_minor = 0;
-+			snprintf(rev, sizeof(rev), "%u.%u", priv->rev_major, priv->rev_minor);
-+			priv->has_rev = true;
- 		}
- 		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
- 			 "Renesas Kriek board rev %s", rev);
-@@ -150,9 +186,10 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
- 		fallthrough;
- 	case BOARD_CONDOR:
- 		if (!board_rev) { /* Only rev 0 is valid */
--			rev_major = 1;
--			rev_minor = 0;
--			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
-+			priv->rev_major = 1;
-+			priv->rev_minor = 0;
-+			snprintf(rev, sizeof(rev), "%u.%u", priv->rev_major, priv->rev_minor);
-+			priv->has_rev = true;
- 		}
- 		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
- 			 "Renesas Condor%s board rev %s",
+Did you check or just copy pasted?
+
+> +
+> +  If the default package version of OpenOCD in your development
+> +  environment's distribution needs to be updated, it might be necessary to
+> +  build OpenOCD from the source.
+> +
+> +Debugging U-Boot on J784S4-EVM
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+> +    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+> +
+> +To start OpenOCD and connect to the board
+> +
+> +.. code-block:: bash
+> +
+> +  openocd -f board/ti_j784s4evm.cfg
+> +
+> +Debugging U-Boot on SK-AM69
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_connect_cti20
+> +    :end-before: .. k3_rst_include_end_openocd_connect_cti20
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
+> +    :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
+> +
+> +For SK-AM69, the openocd_connect.cfg is as follows:
+
+Did you check or just copy pasted am68?
+
+> +
+> +.. code-block:: tcl
+> +
+> +  # TUMPA example:
+> +  # http://www.tiaowiki.com/w/TIAO_USB_Multi_Protocol_Adapter_User's_Manual
+> +  source [find interface/ftdi/tumpa.cfg]
+
+Why do you need TUMPA when you have xds110?
+
+https://github.com/openocd-org/openocd/blob/master/tcl/board/ti_j784s4evm.cfg
+> +
+> +  transport select jtag
+> +
+> +  # default JTAG configuration has only SRST and no TRST
+> +  reset_config srst_only srst_push_pull
+> +
+> +  # delay after SRST goes inactive
+> +  adapter srst delay 20
+> +
+> +  if { ![info exists SOC] } {
+> +    # Set the SoC of interest
+> +    set SOC j784s4
+> +  }
+> +
+> +  source [find target/ti_k3.cfg]
+> +
+> +  ftdi tdo_sample_edge falling
+> +
+> +  # Speeds for FT2232H are in multiples of 2, and 32MHz is tops
+> +  # max speed we seem to achieve is ~20MHz.. so we pick 16MHz
+> +  adapter speed 16000
+> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> index ec447358ac..60aacdac99 100644
+> --- a/doc/board/ti/k3.rst
+> +++ b/doc/board/ti/k3.rst
+> @@ -35,6 +35,7 @@ K3 Based SoCs
+>     am65x_evm
+>     j7200_evm
+>     j721e_evm
+> +   j784s4_evm
+>  
+>  Boot Flow Overview
+>  ------------------
+> -- 
+> 2.34.1
+> 
+
 -- 
-2.41.0
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
