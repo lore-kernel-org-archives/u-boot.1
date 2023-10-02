@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0413E748F8
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 16:31:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2704E748F8
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 16:58:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACB8E870DE;
-	Mon,  2 Oct 2023 18:31:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 34179869C8;
+	Mon,  2 Oct 2023 18:58:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oeyj+pC7";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bzs5yySO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2927587138; Mon,  2 Oct 2023 18:22:10 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 30C9F86940; Mon,  2 Oct 2023 18:58:41 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E9C386B71
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 18:22:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A620886A0B
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 18:58:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-5a1f00b75aaso86913887b3.2
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 09:22:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696263726; x=1696868526; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DG32DpV5oHYowxmuBtrUy3SbMM4H73bSrJ7NRWzwxSM=;
- b=oeyj+pC7QSqqHJ8Z0rTEDta3rNb1y2/Lo4oQ2tJL3eidX8W/K75Xg+KRIZx/HizOLc
- /2md6WO7e7XAVWEjuqoPrNvdD8tTUpruPxjCd8PuQKG9P31VoDZORAlxD4NLYzREMc/5
- OqpSjzP4uBxr1KoOSXnTVxUVEwvK2ilyVSrWc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696263726; x=1696868526;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DG32DpV5oHYowxmuBtrUy3SbMM4H73bSrJ7NRWzwxSM=;
- b=JgvsngL9HxYiqYVwYJRcRqvYylivhqPERE1epU2/Uxuvu5eLv3wL/p3/ClIIX2GFuT
- RFwJXp2bggVwAGdGiPcxiYGyrnPEqyVgh+VLAXCwjTy7XtUh3Du4JOdTrPLFMYCvOrrG
- +EUsDqg/ddbZaFIl9PCVY3Ctnp/gnIGdGS4gN+c3jKmgzw2bvrUiSgWMQp/z+5nGIt71
- TfPf51ccHqyjVNA6KA0okw5YHtsr0BOYfrpGorcmX0l+gVyhpPVmlk75F2u9KmcO0VRZ
- 4Bvewo1xKYYG4BInI0q75Yhtni7yAerHu8F5BE5JprwjQzs7jHu9A45EjkpKH7TrP3Fz
- g3zw==
-X-Gm-Message-State: AOJu0YxblCNYQzb+7mhxjcp/npkRpwCr4aWdPSrh9pq1prozPP/zopno
- uPpKcJiFMJjur/q9P/GYLIvxmg==
-X-Google-Smtp-Source: AGHT+IGWJjs3xFQcht7MC2YdAgywV3DqgjYnD4/q/S9SkaOjN//iFgrCUZRey6PKLUWOOXI+4JV0Zw==
-X-Received: by 2002:a81:df11:0:b0:59b:dbb7:5c74 with SMTP id
- c17-20020a81df11000000b0059bdbb75c74mr10531475ywn.32.1696263726267; 
- Mon, 02 Oct 2023 09:22:06 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-92a5-a961-a832-88f6.res6.spectrum.com.
- [2603:6081:7b00:6400:92a5:a961:a832:88f6])
- by smtp.gmail.com with ESMTPSA id
- v134-20020a81488c000000b00570253fc3e5sm7758124ywa.105.2023.10.02.09.22.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 09:22:05 -0700 (PDT)
-Date: Mon, 2 Oct 2023 12:22:03 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Subject: Re: [PATCH] scripts/Makefile.lib: also consider
- $(CONFIG_SYS_BOARD)-u-boot.dtsi
-Message-ID: <20231002162203.GZ305624@bill-the-cat>
-References: <68f445de-c903-c3a1-906f-2cf7b5675d08@prevas.dk>
- <20230925181940.GH305624@bill-the-cat>
- <08e35aab-309c-a8e1-931e-7ab142beb593@prevas.dk>
- <CAPnjgZ3jO5s3HZRjXdG-dVLNmGYnyCWnpvzRKpKhBCRQqWH33Q@mail.gmail.com>
- <20230929160230.GP305624@bill-the-cat>
- <CAPnjgZ29hTMrzey1eZreTKhEVXWvi50JWBw-kUKC2VUYgXLYsw@mail.gmail.com>
- <20231002140854.GU305624@bill-the-cat>
- <CAPnjgZ0TTNCEUHfHDr7tALx+Po9PDoD-R7zYeN2gc4wnkWqSzw@mail.gmail.com>
- <20231002151212.GY305624@bill-the-cat>
- <CAPnjgZ1fZjxTi8ryiVZC=Js1MDfP+PdGbJK87BA_kJe52d038w@mail.gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 392GwJv3100885;
+ Mon, 2 Oct 2023 11:58:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696265899;
+ bh=Ak8C1BSTDLMJTyXUAPVUxHh5juBvfTx9VOrDRmmbFZ0=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=bzs5yySOzcNGVYMfkSbAefVzr1CIzOEWBCAj70NbNAIxsgXTz7l6vxx94h4+GPbLC
+ 2Y1dEacDJZvL1DoBh+gyEgP+7vsLGMr5LrXvj+F+A8sh5b3zZA+/T4dPii2XqssyHr
+ Wqu+YcEr02sOnx9tz8+nydAatrS+GUVHxJygWBVY=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 392GwJEr038025
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 2 Oct 2023 11:58:19 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
+ Oct 2023 11:58:19 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 2 Oct 2023 11:58:19 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 392GwJTb023217;
+ Mon, 2 Oct 2023 11:58:19 -0500
+Date: Mon, 2 Oct 2023 11:58:19 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Apurva Nandan <a-nandan@ti.com>
+CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
+ Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
+ <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
+ <a-bhatia1@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v4 16/16] doc: board: ti: k3: Add J784S4 EVM and AM69 SK
+ documentation
+Message-ID: <20231002165819.42yde4zsgl235c2u@bryanbrattlof.com>
+X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
+References: <20231001165545.494212-1-a-nandan@ti.com>
+ <20231001165545.494212-17-a-nandan@ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="UNgvQx8Ld3LqhcgK"
+Content-Type: text/plain; charset="utf-8"
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1fZjxTi8ryiVZC=Js1MDfP+PdGbJK87BA_kJe52d038w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <20231001165545.494212-17-a-nandan@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,206 +93,401 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Apurva!
 
---UNgvQx8Ld3LqhcgK
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Sorry for the late review. Just some updates I noticed when reading over 
+the docs.
 
-On Mon, Oct 02, 2023 at 09:39:18AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 2 Oct 2023 at 09:12, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 02, 2023 at 08:43:41AM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 2 Oct 2023 at 08:09, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sun, Oct 01, 2023 at 07:17:27PM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Fri, 29 Sept 2023 at 10:02, Tom Rini <trini@konsulko.com> wrot=
-e:
-> > > > > >
-> > > > > > On Fri, Sep 29, 2023 at 09:15:00AM -0600, Simon Glass wrote:
-> > > > > > > Hi Rasmus,
-> > > > > > >
-> > > > > > > On Mon, 25 Sept 2023 at 13:05, Rasmus Villemoes
-> > > > > > > <rasmus.villemoes@prevas.dk> wrote:
-> > > > > > > >
-> > > > > > > > On 25/09/2023 20.19, Tom Rini wrote:
-> > > > > > > > > On Mon, Sep 25, 2023 at 10:27:43AM +0200, Rasmus Villemoe=
-s wrote:
-> > > > > > > > >> On 04/05/2023 14.35, Rasmus Villemoes wrote:
-> > > > > > > > >>> On 03/05/2023 16.54, Tom Rini wrote:
-> > > > > > > > >>
-> > > > > > > > >>>> The one last problem now is on stm32mp15_dhcor_basic w=
-hich is a
-> > > > > > > > >>>> defconfig missing one from OF_LIST but including it in=
- the its file, so
-> > > > > > > > >>>> the above is the patch we need.
-> > > > > > > > >>>>
-> > > > > > > > >>
-> > > > > > > > >> Hi Tom
-> > > > > > > > >>
-> > > > > > > > >> Can I persuade you to try something like
-> > > > > > > > >> https://source.denx.de/u-boot/u-boot/-/commit/a05e0d0e6b=
-9103542a1076f9cab0005f400fa072
-> > > > > > > > >> again, but leaving the .dtbo targets in there?
-> > > > > > > > >>
-> > > > > > > > >> I could send a patch, but it's entirely mechanical, and =
-not really meant
-> > > > > > > > >> for being applied until we know if there's more to be cl=
-eaned up.
-> > > > > > > > >
-> > > > > > > > > So what ended up being the problem I think is the case Si=
-mon pointed out
-> > > > > > > > > where we do take the output from "make all" and concatena=
-te one of the
-> > > > > > > > > dtbs that was generated with u-boot.img or so, and it wor=
-ks.  But maybe
-> > > > > > > > > that should just list all of the valid DTBs that it needs=
- in the
-> > > > > > > > > defconfig to start with? I don't quite know, it was a cas=
-e I hadn't
-> > > > > > > > > considered at the time.
-> > > > > > > > >
-> > > > > > > >
-> > > > > > > > Re-reading the thread, I can't see where that was mentioned.
-> > > > > > > >
-> > > > > > > > But yes, if some boards (still) need that, and have more th=
-an one
-> > > > > > > > possible .dtb, the board can't set an OF_LIST different fro=
-m the default
-> > > > > > > > consisting of DEFAULT_DEVICE_TREE because changing OF_LIST =
-requires
-> > > > > > > > SPL_LOAD_FIT || MULTI_DTB_FIT.
-> > > > > > > >
-> > > > > > > > How do we figure out if such boards even exist?
-> > > > > > >
-> > > > > > > Honestly at this point I've forgotten what this is all about.
-> > > > > > >
-> > > > > > > Perhaps the easiest approach is to create a new Kconfig to co=
-ntrol
-> > > > > > > whether a board-level .dtsi is included in the list of wildca=
-rd
-> > > > > > > searches. Then you can enable it for your board without affec=
-ting
-> > > > > > > others.
-> > > > > >
-> > > > > > That's getting things backwards, from what this cleanup does.  =
-Today we
-> > > > > > have messy lists of "build these device trees" and then don't u=
-se most
-> > > > > > of them, and some of the list is just Wrong (listing dts files =
-as an
-> > > > > > output).  With the series to handle dtbo files, we could remove
-> > > > > > virtually all of that, and the only use cases that don't Just W=
-ork still
-> > > > > > are the ones I forget which board you mentioned (I think it was=
- Samsung
-> > > > > > tho?) where the defconfig doesn't list all of the device trees,=
- just one
-> > > > > > of them, and the other 5 that we build can also be easily used.=
-  Does
-> > > > > > that ring a bell?
-> > > > >
-> > > > > Yes it does...but what is the problem here?
-> > > >
-> > > > Messy and unused and incorrect Makefile content.
-> > >
-> > > The problem I see there is people using TARGET in
-> > > arch/arm/dts/Makefile for example. There are 80 instances of that. The
-> > > rules should depend on SoC (e.g. use ARCH_EXYNOS5), as Linux does it.
-> >
-> > It shouldn't be there at all since there's almost no cases where we
-> > "just" take an arbitrary dtb file and u-boot.img and then the system
-> > boot.  That's what this series is about fixing.
->=20
-> I'm really not sure that replacing build rules with a board CONFIG is
-> a good idea. I suppose part of my confusion is why the Makefile is
-> considered a problem?
+On October  1, 2023 thus sayeth Apurva Nandan:
+> TI K3 J784S4 and AM69 are new additions to the K3 SoC family.
+> Add documentation about the J784S4 EVM and AM69 SK.
+> 
+> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
+> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+> ---
+>  board/ti/j784s4/MAINTAINERS |   1 +
+>  doc/board/ti/j784s4_evm.rst | 339 ++++++++++++++++++++++++++++++++++++
+>  doc/board/ti/k3.rst         |   1 +
+>  3 files changed, 341 insertions(+)
+>  create mode 100644 doc/board/ti/j784s4_evm.rst
+> 
+> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
+> index 5b5ef8b109..24db43f09b 100644
+> --- a/board/ti/j784s4/MAINTAINERS
+> +++ b/board/ti/j784s4/MAINTAINERS
+> @@ -15,6 +15,7 @@ F:	arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
+>  F:	arch/arm/dts/k3-j784s4-r5-evm.dts
+>  F:	arch/arm/dts/k3-j784s4-ddr.dtsi
+>  F:	arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
+> +F:	doc/board/ti/j784s4_evm.rst
+>  
+>  AM69 BOARD
+>  F:	arch/arm/dts/k3-am69-sk.dts
+> diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
+> new file mode 100644
+> index 0000000000..c04894b47a
+> --- /dev/null
+> +++ b/doc/board/ti/j784s4_evm.rst
+> @@ -0,0 +1,339 @@
+> +.. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
+> +.. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
+> +
+> +J784S4 and AM69 Platforms
+> +=========================
+> +
+> +Introduction
+> +------------
+> +The J784S4 SoC belongs to the K3 Multicore SoC architecture
+> +platform, providing advanced system integration in automotive,
+> +ADAS and industrial applications requiring AI at the network edge.
+> +This SoC extends the K3 Jacinto 7 family of SoCs with focus on
+> +raising performance and integration while providing interfaces,
+> +memory architecture and compute performance for multi-sensor, high
+> +concurrency applications.
+> +
+> +The device is partitioned into three functional domains, each containing
+> +specific processing cores and peripherals:
+> +
+> +1. Wake-up (WKUP) domain
+> +    * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
+> +
+> +2. Microcontroller (MCU) domain
+> +    * Dual core ARM Cortex-R5F processor, runs device management
+> +      and SoC early boot
+> +
+> +3. MAIN domain
+> +    * Dual core 64-bit ARM Cortex-A72, runs HLOS
 
-Because it's duplicative and as Rasmus points out, often wrong.
+You have much more than this on these SoCs ;)
 
-> > > > > The DT files for an SoC are supposed to be buildable without need=
-ing
-> > > > > to have the context of a particular board.
-> > > >
-> > > > They're still buildable, without an explicit rule, they just need to
-> > > > (like they can now) be built explicitly.
-> > >
-> > > But isn't that creating dead code? It will rot.
-> >
-> > No, that's the problem we have today, people list something in the
-> > Makefile, since they think they need to list something, and then put the
-> > device trees they use in the defconfig.
->=20
-> If they don't list something, it won't build, right?
+> +
+> +More info can be found in TRM: http://www.ti.com/lit/zip/spruj52
+> +
+> +Platform information:
+> +
+> +* https://www.ti.com/tool/J784S4XEVM
+> +* https://www.ti.com/tool/SK-AM69
+> +
+> +Boot Flow
+> +---------
+> +Below is the pictorial representation of boot flow:
+> +
+> +.. image:: img/boot_diagram_k3_current.svg
+> +
+> +- On this platform, "TI Foundational Security (TIFS)" functions as the
+> +  security enclave master. While "Device Manager (DM)", also known as the
+> +  "TISCI server" in TI terminology, offers all the essential services.
+> +
+> +- As illustrated in the diagram above, R5 SPL manages power and clock
+> +  services independently before handing over control to DM. The A72 or
+> +  the C7x (Aux core) software components request TIFS/DM to handle
+> +  security or device management services.
+> +
+> +Sources
+> +-------
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_boot_sources
+> +    :end-before: .. k3_rst_include_end_boot_sources
+> +
+> +Build procedure
+> +---------------
+> +0. Setup the environment variables:
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_common_env_vars_desc
+> +    :end-before: .. k3_rst_include_end_common_env_vars_desc
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_board_env_vars_desc
+> +    :end-before: .. k3_rst_include_end_board_env_vars_desc
+> +
+> +Set the variables corresponding to this platform:
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_common_env_vars_defn
+> +    :end-before: .. k3_rst_include_end_common_env_vars_defn
+> +.. code-block:: bash
+> +
+> + $ export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
+> + $ export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
+> + $ export TFA_BOARD=generic
 
-No, everyone builds fine since CONFIG_DEFAULT_DEVICE_TREE is pretty much
-always set.  And for run time, if we need more, *OF_LIST gets set.
+sadly the j784s4 breaks from the lite vs generic platform norm
 
-> > [snip]
-> > > > > I am find with making the boards list the DTs that they can run w=
-ith,
-> > > > > if there is an easy way of doing that. CONFIG_SPL_OF_LIST is just=
- for
-> > > > > SPL, I think.
-> > > >
-> > > > Yes, every board except for some use case you've described before a=
-s far
-> > > > as I know lists the device trees that they use in the defconfig.  W=
-hich
-> > > > is why there's an impetus to clean up arch/*/dts/Makefile as 95% of
-> > > > those lines can just be removed.
-> > >
-> > > It seems like you are wanting a board-level CONFIG which lists the DTs
-> > > which need to be built for that board. Is that right? You are
-> > > suggesting that this already exists, but I am not aware of it. Do you
-> > > mean SPL_OF_LIST, perhaps?
-> >
-> > I mean today CONFIG_DEFAULT_DEVICE_TREE + CONFIG_OF_LIST +
-> > CONFIG_SPL_OF_LIST is set and correct for everyone board except some use
-> > case you have, which I think is something about exynos?  And so we only
-> > need scripts/Makefile.dts in arch/*/dts/Makefile
->=20
-> Yes exynos5 boards (the original reason for DT) have / had the same
-> u-boot-nodtb.bin and you can add the DT you want to boot it on
-> particular hardware. That is one of the goals of DT.
+> + $ export TFA_EXTRA_ARGS="K3_USART=0x8"
+> + $ export OPTEE_PLATFORM=k3-j784s4
+> + $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
+> +
+> +.. j784s4_evm_rst_include_start_build_steps
+> +
+> +1. Trusted Firmware-A
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_build_steps_tfa
+> +
+> +2. OP-TEE
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_build_steps_optee
+> +    :end-before: .. k3_rst_include_end_build_steps_optee
+> +
+> +3. U-Boot
+> +
+> +.. _j784s4_evm_rst_u_boot_r5:
+> +
+> +* 3.1 R5
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
+> +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
+> +
+> +.. _j784s4_evm_rst_u_boot_a72:
+> +
+> +* 3.2 A72
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_build_steps_uboot
+> +    :end-before: .. k3_rst_include_end_build_steps_uboot
+> +.. j784s4_evm_rst_include_end_build_steps
+> +
+> +Target Images
+> +-------------
+> +In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. Each SoC
+> +variant (GP, HS-FS, HS-SE) requires a different source for these files.
+> +
+> + - GP
+> +
+> +    * tiboot3-j784s4-gp-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
+> +    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
+> +
+> + - HS-FS
+> +
+> +    * tiboot3-j784s4-hs-fs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
+> +    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
+> +
+> + - HS-SE
+> +
+> +    * tiboot3-j784s4-hs-evm.bin from :ref:`step 3.1 <j784s4_evm_rst_u_boot_r5>`
+> +    * tispl.bin, u-boot.img from :ref:`step 3.2 <j784s4_evm_rst_u_boot_a72>`
+> +
+> +Image formats
+> +-------------
+> +
+> +- tiboot3.bin
+> +
+> +.. image:: img/multi_cert_tiboot3.bin.svg
+> +
+> +- tispl.bin
+> +
+> +.. image:: img/dm_tispl.bin.svg
+> +
+> +R5 Memory Map
+> +-------------
+> +
+> +.. list-table::
+> +   :widths: 16 16 16
+> +   :header-rows: 1
+> +
+> +   * - Region
+> +     - Start Address
+> +     - End Address
+> +
+> +   * - SPL
+> +     - 0x41c00000
+> +     - 0x41c40000
+> +
+> +   * - EMPTY
+> +     - 0x41c40000
+> +     - 0x41c61f20
+> +
+> +   * - STACK
+> +     - 0x41c65f20
+> +     - 0x41c61f20
+> +
+> +   * - Global data
+> +     - 0x41c65f20
+> +     - 0x41c66000
+> +
+> +   * - Heap
+> +     - 0x41c66000
+> +     - 0x41c76000
+> +
+> +   * - BSS
+> +     - 0x41c76000
+> +     - 0x41c80000
+> +
+> +   * - DM DATA
+> +     - 0x41c80000
+> +     - 0x41c84130
+> +
+> +   * - EMPTY
+> +     - 0x41c84130
+> +     - 0x41cff9fc
+> +
+> +   * - MCU Scratchpad
+> +     - 0x41cff9fc
+> +     - 0x41cffbfc
+> +
+> +   * - ROM DATA
+> +     - 0x41cffbfc
+> +     - 0x41cfffff
+> +
+> +Switch Setting for Boot Mode
+> +----------------------------
+> +
+> +Boot Mode pins provide means to select the boot mode and options before the
+> +device is powered up. After every POR, they are the main source to populate
+> +the Boot Parameter Tables.
+> +
+> +Boot Mode Pins for J784S4-EVM
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +The following tables show some common boot modes used on J784S4 SoC platform.
+> +More details can be found in the Technical Reference Manual:
+> +http://www.ti.com/lit/zip/spruj52 under the `Boot Mode Pins` section.
+> +
+> +.. list-table:: J784S4 EVM Boot Modes
+> +   :widths: 16 16 16
+> +   :header-rows: 1
+> +
+> +   * - Switch Label
+> +     - SW9: 12345678
+> +     - SW8: 12345678
+> +
+> +   * - SD
+> +     - 00000000
+> +     - 10000010
+> +
+> +   * - EMMC
+> +     - 01000000
+> +     - 10000000
+> +
+> +   * - OSPI
+> +     - 01000000
+> +     - 00000110
+> +
+> +   * - UART
+> +     - 01110000
+> +     - 00000000
+> +
+> +   * - USB DFU
+> +     - 00100000
+> +     - 10000000
+> +
+> +For SW8 and SW9, the switch state in the "ON" position = 1.
+> +
+> +Boot Mode Pins for AM69-SK
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +The following table show some common boot modes used on AM69-SK platform.
+> +More details can be found in the User Guide for AM69-SK:
+> +https://www.ti.com/lit/ug/spruj70/spruj70.pdf under the `Bootmode Settings`
+> +section.
+> +
+> +.. list-table:: AM69 SK Boot Modes
+> +   :widths: 16 16
+> +   :header-rows: 1
+> +
+> +   * - Switch Label
+> +     - SW2: 1234
+> +
+> +   * - SD
+> +     - 0000
+> +
+> +   * - EMMC
+> +     - 0110
+> +
+> +   * - OSPI
+> +     - 1110
+> +
+> +   * - UART
+> +     - 1010
+> +
+> +For SW2, the switch state in the "ON" position = 1.
+> +
+> +Debugging U-Boot
+> +----------------
+> +
+> +See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
+> +detailed setup information.
+> +
+> +.. warning::
+> +
+> +  **OpenOCD support since**: v0.12.0
 
-Yes, but "and you concat the two files" isn't common.  We _can_ keep the
-EXYNOS list, if that's actually being used.  But most of that list is
-not, as far as I can tell, because the flow is "U-Boot binarie(s) + DTB
-files + stuff" to get the correctly formatted blob for the firmware.
+I could be wrong here, are we talking tcl scripts? or just the K3 
+platform in general?
 
-> The OF_LIST option is a little vague but I think it means that the DTs
-> are packaged into a FIT in u-boot.img - is that right? But they
-> presumably have to be built first.
-
-No, they don't have to be built first because scripts/Makefile.dts
-ensures that we build everything in *OF_LIST.
-
---=20
-Tom
-
---UNgvQx8Ld3LqhcgK
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUa7iUACgkQFHw5/5Y0
-tyzEuwwAtN5pr9oTYOKjBTnLimFcMhj3h0Rb4j4+eoX/t9r2zLp5/DEJ4VpoM+fO
-HTQgT/tp1SZp7YCN9lgiWGe+gNOyDDeNX9/z8jokfK/LlG28FSdSVWt8ndpEkk/0
-ODrmkuWBQ5aOeYuGGc360SOFW2M1XYT1CXaY1qiKjuA8sfnBvjs9Tgde6nCbWt43
-vFaIQsYYr9yS/QyAQP8dzWg8mgal6CnqNWutDqGZl0envTv2OPmpMdKRoPYzsJCL
-nhrVzpBcpx1JDJXhFotW4jvvJYYyyy79VzL1hpqSzWAZfqeeJZtlEbMJ1YoP+S10
-CsCM9YeEgo6gt8PgGGHWfJ11F6SOnZc4RZqERdVoh/tv7J06v75/5vO64o5OgXmF
-qmAV8FFQdzbVKnDB2gpzDBUr8BfGias5Z6+tDekiPpaUJcqcg74G88f2nZC5oftN
-gTvayvQhkhsq3kgARKmo/+UvQ/YCGhqkXkmYr19cSwzh7USGmZ4leHulV7s8kxtp
-1J9Awk/5
-=CM9D
------END PGP SIGNATURE-----
-
---UNgvQx8Ld3LqhcgK--
+> +
+> +  If the default package version of OpenOCD in your development
+> +  environment's distribution needs to be updated, it might be necessary to
+> +  build OpenOCD from the source.
+> +
+> +Debugging U-Boot on J784S4-EVM
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
+> +    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
+> +
+> +To start OpenOCD and connect to the board
+> +
+> +.. code-block:: bash
+> +
+> +  openocd -f board/ti_j784s4evm.cfg
+> +
+> +Debugging U-Boot on SK-AM69
+> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_connect_cti20
+> +    :end-before: .. k3_rst_include_end_openocd_connect_cti20
+> +
+> +.. include::  k3.rst
+> +    :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
+> +    :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
+> +
+> +For SK-AM69, the openocd_connect.cfg is as follows:
+> +
+> +.. code-block:: tcl
+> +
+> +  # TUMPA example:
+> +  # http://www.tiaowiki.com/w/TIAO_USB_Multi_Protocol_Adapter_User's_Manual
+> +  source [find interface/ftdi/tumpa.cfg]
+> +
+> +  transport select jtag
+> +
+> +  # default JTAG configuration has only SRST and no TRST
+> +  reset_config srst_only srst_push_pull
+> +
+> +  # delay after SRST goes inactive
+> +  adapter srst delay 20
+> +
+> +  if { ![info exists SOC] } {
+> +    # Set the SoC of interest
+> +    set SOC j784s4
+> +  }
+> +
+> +  source [find target/ti_k3.cfg]
+> +
+> +  ftdi tdo_sample_edge falling
+> +
+> +  # Speeds for FT2232H are in multiples of 2, and 32MHz is tops
+> +  # max speed we seem to achieve is ~20MHz.. so we pick 16MHz
+> +  adapter speed 16000
+> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+> index ec447358ac..60aacdac99 100644
+> --- a/doc/board/ti/k3.rst
+> +++ b/doc/board/ti/k3.rst
+> @@ -35,6 +35,7 @@ K3 Based SoCs
+>     am65x_evm
+>     j7200_evm
+>     j721e_evm
+> +   j784s4_evm
+>  
+>  Boot Flow Overview
+>  ------------------
+> -- 
+> 2.34.1
+> 
