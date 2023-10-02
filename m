@@ -4,76 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF5A4E7490C
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 19:26:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31D66E7490C
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 19:29:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C36D786EFF;
-	Mon,  2 Oct 2023 21:26:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 80DFD86DBC;
+	Mon,  2 Oct 2023 21:29:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SnM+JUtv";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="husae6c5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFECC8718A; Mon,  2 Oct 2023 21:26:07 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A15586D59; Mon,  2 Oct 2023 21:29:06 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01DA586DD3
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 21:26:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A29286DD3
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 21:29:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-532c81b9adbso82337a12.1
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 12:26:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696274765; x=1696879565; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Nd3hlDEUkq+L7PACzLuv6fwfMQY5sb9fI/ufXSK8Qqw=;
- b=SnM+JUtv3yIQWGCaE95H1ZQbF7RAY9+hzEH6kN3xqzUYnzl3bR5wzEi7p27BtMYmNX
- jFv5K4zcAYIVk3elCI+pLeiwGrpCZNPHYFPH4JnXuTX8XX+ykHR/+7g5SvupScuIk0Y5
- G5EjwKGiO1aBJhKgEJqg2aXwh2eoXNdTnIyhtCeNjIOE1FPbNwwhqYUetcRIBEX8CUzs
- XabM9KSKBjNpW074+CnN0Zv0wEI/wQbe4waobh0QsOdl3Ak8RCIgAfTNRfcMMcWTmSRK
- TkGaob2IcltArSfOL2uo+HXGC3zCrFbCG6tAXHnTAcTaF7eNmxPb5OSyeSOG2FiAzL5R
- C/wA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696274765; x=1696879565;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Nd3hlDEUkq+L7PACzLuv6fwfMQY5sb9fI/ufXSK8Qqw=;
- b=P7jskH1eFXQA7wKkIqsBbiVBwsrS0Qruj8yMXIA+j5GuUXtTdlGYrldXO/H8RuofXj
- J2ijEBKo96Po5w+pC7XOz/bvlCfPv9TL1SoUPfS6LwtihPxRztQv81bbOpXTSD7C7WKM
- nblrgszHAluu2CUKs2v4QhYbm+7D6pYIwY8MHQTt86rx6gb9p5IUtdlJn4to9sV5WGm/
- DvTVsNX8J02nGZIqiABfjX2cx0bfkinhRp0Gi2MP6qSy96qpqaUp/f5VqKoPhChaTSHc
- USCfclRCtJwb9x5eRIqIohQ4s5SAU7u2/0jmZvQ6Hsi1cRBPT4eaE8Dd4CLYI0i8F5ZI
- VjQw==
-X-Gm-Message-State: AOJu0YznQzaYFUazOIHOJGFVStEwUhFujCUmV4dqR8oYhgV+rN2Aqhcv
- ziw+7KTIFfan0V8dLz1yWMS+xWfMqXNb57MU+xSWXmp5
-X-Google-Smtp-Source: AGHT+IH5K21gIE1TzypsaK7waa4EM9VmIb/P3AbbstFwkw4aU95H5iTMYfzf8+/e79YoYKbhDb7gJEgGtNoLEWef8Mk=
-X-Received: by 2002:aa7:d3da:0:b0:532:cae2:8dfc with SMTP id
- o26-20020aa7d3da000000b00532cae28dfcmr10947272edr.5.1696274765286; Mon, 02
- Oct 2023 12:26:05 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=bc9a=FR=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1696274938;
+ bh=Rl3pa15kIxuKdcUR2Plz7qwWT0uhAmKM5/zWIAhxIb8=;
+ b=husae6c5/nJB1UM0lKodJHFmUx7QbK6NeYgBzvWB6KQjJDIcrI/As+0Sufz8Qr5PeZqnBnyKw
+ CIq4X+UTFu2ezkgMGiKRX5XTl4AaoSSQcU8+6fxVijM+LauDiF9sdvhEdDcBM5mxqAd6GvZSHsd
+ ldtyEKQRxXQY9XQj81Bm8S/XKTbWRxCQgkNwr26yyah+fJNisoiMlEk4dgYStptYbFCBQkjuy/9
+ vQhsgK1nB18Kf1MN3shxZhPPbeGafDx+5l+sHWLP9HcE3pYxbI17QVohSPPKFI9FbbXg/NCNYZb
+ /YuoZVmfLSlP5BDRQskAfGFJJE0Pn6JAaPBwBwyfI61g==
+Message-ID: <550d1f16-b788-d2b5-c2d9-fe5d199e63e1@kwiboo.se>
+Date: Mon, 2 Oct 2023 21:28:53 +0200
 MIME-Version: 1.0
-References: <CAJaLiFw67ztCo5TY=TPQneYgE5q6RHnj_XbnukQD=qhec3oRdg@mail.gmail.com>
- <CAPnjgZ3T8TOQbQKuy3wwfgb2K3sG5RDQdZ2zOxYT62XgGmVezg@mail.gmail.com>
- <CAJaLiFwx0j6Knthtgdy-wGDxaHYDuYEUws2LAkt05stc3f3ZBw@mail.gmail.com>
- <CAPnjgZ1FAEDs-f01Q-RCAV=sMWq40cD5UDo9O6SbqTRazS9gQA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ1FAEDs-f01Q-RCAV=sMWq40cD5UDo9O6SbqTRazS9gQA@mail.gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Mon, 2 Oct 2023 12:25:53 -0700
-Message-ID: <CAJaLiFzsJP5u5ziHW7U5_0uqeGdr4uxHRG7kso2K-jahqLKBsg@mail.gmail.com>
-Subject: Re: bootstd: Scanning for USB bootflow will remove existing SCSI
- bootflow
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [RFC] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
+Content-Language: en-US
+To: Simon Glass <sjg@google.com>
+Cc: u-boot@lists.denx.de, Ferass El Hafidi <vitali64pmemail@protonmail.com>
+References: <20230929230655.2932698-1-jonas@kwiboo.se>
+ <CAPnjgZ2O7kxiRt9j3forPPjm=R5EgmLdZKVrwVbyR156YhNDpw@mail.gmail.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAPnjgZ2O7kxiRt9j3forPPjm=R5EgmLdZKVrwVbyR156YhNDpw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 651b19f9bc08fefbb6f1b9de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,51 +73,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 2023-10-02 20:56, Simon Glass wrote:
+> On Fri, 29 Sept 2023 at 17:07, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> The alignment hole caused by cmdidx in struct mmc_cmd cause strange
+>> issues together with the peephole2 optimization on Amlogic SoCs.
+>> Following was observed while working on SPL support for Amlogic SoCs.
+>>
+>> sd_get_capabilities() normally issue a CMD55 followed by a CMD51.
+>> However, on at least Amlogic S905 (Cortex-A53) and S905X3 (Cortex-A55),
+>> CMD55 was instead followed by CMD8 (and a few reties) in SPL.
+>>
+>> Code from the call site:
+>>
+>>   cmd.cmdidx = SD_CMD_APP_SEND_SCR; // 51
+>>   ...
+>>   data.blocksize = 8;
+>>   ...
+>>   err = mmc_send_cmd_retry(mmc, &cmd, &data, 3);
+>>
+>> Running the code with MMC_TRACE enabled shows:
+>>
+>> CMD_SEND:55
+>>                 ARG                      0x50480000
+>>                 MMC_RSP_R1,5,6,7         0x00000920
+>> CMD_SEND:8
+>>                 ARG                      0x00000000
+>>                 RET                      -110
+>>
+>> Removing the alignment hole by changing cmdidx from ushort to uint or
+>> building with -fno-peephole2 flag seem to resolve this issue.
+>>
+>> CMD_SEND:55
+>>                 ARG                      0x50480000
+>>                 MMC_RSP_R1,5,6,7         0x00000920
+>> CMD_SEND:51
+>>                 ARG                      0x00000000
+>>                 MMC_RSP_R1,5,6,7         0x00000920
+>>
+>> Same issue was observed building U-Boot with gcc 8-13. Please advise on
+>> how to best work around this possible gcc optimization bug.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>  arch/arm/cpu/armv8/config.mk | 2 ++
+>>  include/mmc.h                | 2 +-
+>>  2 files changed, 3 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/cpu/armv8/config.mk b/arch/arm/cpu/armv8/config.mk
+>> index 4d74b2a533e0..7177dcd7c73b 100644
+>> --- a/arch/arm/cpu/armv8/config.mk
+>> +++ b/arch/arm/cpu/armv8/config.mk
+>> @@ -7,6 +7,8 @@ PLATFORM_RELFLAGS += $(call cc-option,-mbranch-protection=none)
+>>  PF_NO_UNALIGNED := $(call cc-option, -mstrict-align)
+>>  PLATFORM_CPPFLAGS += $(PF_NO_UNALIGNED)
+>>
+>> +PLATFORM_CPPFLAGS += $(call cc-option,-fno-peephole2)
+> 
+> Eek really?
 
-On Sun, Oct 1, 2023 at 6:22=E2=80=AFPM Simon Glass <sjg@chromium.org> wrote=
-:
->
-> Hi Tony,
->
-> On Tue, 26 Sept 2023 at 13:40, Tony Dinh <mibodhi@gmail.com> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Tue, Sep 26, 2023 at 4:37=E2=80=AFAM Simon Glass <sjg@chromium.org> =
-wrote:
-> > >
-> > > Hi Tony,
-> > >
-> > > On Mon, 25 Sept 2023 at 14:02, Tony Dinh <mibodhi@gmail.com> wrote:
-> > > >
-> > > > Hi Simon,
-> > > >
-> > > > Here is an observation during testing the bootflow command.
-> > > >
-> > > > If there is a SCSI bootflow, scanning for USB bootflow will remove =
-that existing
-> > > > SCSI bootflow. To bring it back, I scanned for SCSI bootflow again,=
- and it was
-> > > > back to normal. Perhaps there is some kind of indexing problem?
-> > >
-> > > Yes that's right. The 'botflow scan' command is not additive. The
-> > > first thing it does is removing existing bootflows.
-> >
-> > Thanks for clarifying that. I assumed it is additive, because the
-> > existing USB bootflow was not removed when I did a "bootflow scan
-> > scsi" immediately after (see the end of the log).
->
-> Yes, but I'm not sure what is going on there. Perhaps it is a bug?
-> When you scan SCSI it should not also scan USB.
+As mentioned the issue could be resolved with changing cmdidx from
+ushort to uint or disabling the peephole2 optimization.
 
-Yes, it looks like a bug. I think I can see the problem and am working
-on a patch.
+For the purpose of trying to get more feedback on the issue I included
+both changes that would resolve my issue.
 
-All the best,
-Tony
+Also if there is one struct affected, there could be other similar
+structs affected by a similar issue.
 
+I do not really know if this could be a cpu errata, compiler bug or
+something else, including some assembly from a non-working and working
+case (peephole2 optimization enabled/disabled).
 
->
+Code generated with ushort and peephole2 enabled (not working):
+
+  60 06 80 52     mov        w0,#0x33		// 51
+  f5 3f 06 91     add        x21,sp,#0x18f
+  e0 23 01 79     strh       w0,[sp, #cmd]
+  e0 03 00 b2     mov        x0,#0x100000001
+  b5 e6 7a 92     and        x21,x21,#-0x40
+  f5 03 06 a9     stp        x21,x0,[sp, #data]
+  00 01 80 52     mov        w0,#0x8
+  e2 83 01 91     add        x2,sp,#0x60
+  e1 43 02 91     add        x1,sp,#0x90
+  63 00 80 52     mov        w3,#0x3
+  e0 73 00 b9     str        w0,[sp, #blocksize]
+  e0 03 13 aa     mov        x0,x19
+  f6 ff 12 29     stp        w22,wzr,[sp, #resp_type]
+  50 fd ff 97     bl         mmc_send_cmd_retry
+
+Code generated with ushort and peephole2 disabled (working):
+
+  60 06 80 52     mov        w0,#0x33		// 51
+  e0 23 01 79     strh       w0,[sp, #cmd]
+  e0 03 00 b2     mov        x0,#0x100000001
+  f5 3f 06 91     add        x21,sp,#0x18f
+  e0 37 00 f9     str        x0,[sp, #local_168]
+  00 01 80 52     mov        w0,#0x8
+  b5 e6 7a 92     and        x21,x21,#-0x40
+  e2 83 01 91     add        x2,sp,#0x60
+  e1 43 02 91     add        x1,sp,#0x90
+  63 00 80 52     mov        w3,#0x3
+  f5 33 00 f9     str        x21,[sp, #data]
+  e0 73 00 b9     str        w0,[sp, #blocksize]
+  e0 03 13 aa     mov        x0,x19
+  f6 97 00 b9     str        w22,[sp, #resp_type]
+  ff 9b 00 b9     str        wzr,[sp, #cmdarg]
+  4a fd ff 97     bl         mmc_send_cmd_retry
+
+Hoping someone can see something strange I cannot.
+
+Regards,
+Jonas
+
+> 
+>> +
+>>  EFI_LDS := elf_aarch64_efi.lds
+>>  EFI_CRT0 := crt0_aarch64_efi.o
+>>  EFI_RELOC := reloc_aarch64_efi.o
+>> diff --git a/include/mmc.h b/include/mmc.h
+>> index 9aef31ea5deb..7b3868bb5664 100644
+>> --- a/include/mmc.h
+>> +++ b/include/mmc.h
+>> @@ -413,7 +413,7 @@ struct mmc_cid {
+>>  };
+>>
+>>  struct mmc_cmd {
+>> -       ushort cmdidx;
+>> +       uint cmdidx;
+> 
+> This bit looks OK.
+> 
+>>         uint resp_type;
+>>         uint cmdarg;
+>>         uint response[4];
+>> --
+>> 2.42.0
+>>
+> 
 > Regards,
-> SImon
+> Simon
+
