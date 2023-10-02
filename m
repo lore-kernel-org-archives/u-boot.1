@@ -4,75 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C88C8E7849A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 07:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D23ECE784A4
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 08:33:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26DAC86587;
-	Mon,  2 Oct 2023 09:45:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 83C16870E3;
+	Mon,  2 Oct 2023 10:33:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="KTITKSWT";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Pol7UUSv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8F48870E4; Mon,  2 Oct 2023 09:45:00 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 335EE87128; Mon,  2 Oct 2023 10:33:40 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8661D8646E
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 09:44:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6211870DC
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 10:33:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-31427ddd3fbso14863361f8f.0
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 00:44:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1696232698; x=1696837498;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=VJ8TwVIm45hDSutmESkhoFcRWNxtZpNFg3xHwBf7CxU=;
- b=KTITKSWTBSySqW7Wf9uk162XJVw2k4CWrFC38yUAcvx7rr1fJHFzr7JfjpX1MgBOOw
- /zSS3Evz5ZcUBmgCNJYDInsUckf+If1O0QsU89VVrIr9kqizAn5I5li+K1ZP/D9HTcHG
- C6JsyQRl327CfepUr3ybZ/umryKX0sumIB7wNwNInqjaOwm9fAVhmL8pKOOtwCYNIw55
- dHZBuhKqgH284k17PO0t7VXcz3cc0ZyhL2Zc+OEQTM6N5bup2igsax8AQWcyl8JovW+9
- mG8XKDBBW/E3v1sfWM4ASblfbtV3KzHLGg/PCwYF6KHghkbPCNLsSz6ucM1RSsvnRzKc
- rm/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696232698; x=1696837498;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=VJ8TwVIm45hDSutmESkhoFcRWNxtZpNFg3xHwBf7CxU=;
- b=tQDN1skVOOWKTLB0csOoDeHQ+XBFBHdpu4FnZigpddXufHaO0AqWu5Z49k1sL5P+I3
- +EY32H3EwsdMFuZSMkRvIV7mx6Nl0LrN+lJ5Uqc0YT+MWqLQVL56SvEP6ZPGle6+FZAq
- SKb3PzshFdW0Fr2yXnzu8aLc6BbXMA4q0uQSiTI8Y0fge/wNnLWeXnXGi3X9DWOK+LPw
- BcpmXcCd7ecmBk+FMZfeIl5DfaFoFl3TzhYs+55jWAFMJi4ID//50U/q3AENcRXu8oGN
- iq3kp/0ztvrPnYEZpGzdYpioZSHLq0GaZL95p5v6ssn7aUeED1NNwyoJFGzT9MqHyOlD
- jF0A==
-X-Gm-Message-State: AOJu0YwGlCpLL8ttERU0bgw9QdbknhGYQe+msg9YzbDYCUHZDBddd+/B
- SshclHksnGdaKk0diRYrz8FdB9YrvFDoBaPhFB0=
-X-Google-Smtp-Source: AGHT+IHl0u+JeWqxDyoEBrAZ7uo7IqgLoJZ5l9lQJq98SSICtz4rDZHuOQBAnWo6WQVrzJWiYJetLg==
-X-Received: by 2002:adf:ec82:0:b0:31c:804b:5ec3 with SMTP id
- z2-20020adfec82000000b0031c804b5ec3mr9380462wrn.67.1696232697681; 
- Mon, 02 Oct 2023 00:44:57 -0700 (PDT)
-Received: from localhost ([2a01:cb1d:78a:c00:357d:97d4:b439:b35c])
- by smtp.gmail.com with ESMTPSA id
- a13-20020adff7cd000000b0031ad5fb5a0fsm12553429wrq.58.2023.10.02.00.44.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 00:44:57 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Wojciech Nizinski <niziak@spox.org>, u-boot@lists.denx.de
-Cc: Wojciech Nizinski <niziak@spox.org>
-Subject: Re: [PATCH] fastboot: fix CRC32 chunk size checking
-In-Reply-To: <20230925103714.4153612-1-niziak@spox.org>
-References: <20230925103714.4153612-1-niziak@spox.org>
-Date: Mon, 02 Oct 2023 09:44:56 +0200
-Message-ID: <87o7hhlb7r.fsf@baylibre.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=4bc4=FQ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1696235597;
+ bh=Ik/FU/uSmM2DB2ceqcwAlEkI9YW8+mFalxlwfjU0OHw=;
+ b=Pol7UUSvTs6q16X4+vP1/F15+1D6bvnRk8MWrroC8jfYmDFKidCwGsplZRpbPz+nxHAxuxvom
+ +TYXSs0gCf8dPc9eFIxbLeAY9d9SonJtnLgjLVx0KaiOiOPdcHN4DT2GzwlkayCyaEhcmQcy+Pr
+ +M2xkykdj25Or2LjZnGQunNUbWPH/PZN8Wjeky3zHiFAd6qTd0nRiIiK4ANjl0G7v0iT/EFDHWb
+ lhcuTFesOaiqScZAHpILaLUvJMX49J9w9iggEYX3I7xL1QfulTkB4nEBjPuceImuTBosMEleLcH
+ 6YJA9yBe5wsZi6On45uUjCmOfTc4JVv00e8f23zz8owQ==
+Message-ID: <3e3de175-33f3-1fc8-3406-4a3ee4db8830@kwiboo.se>
+Date: Mon, 2 Oct 2023 10:33:11 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: Aw: Re: [PATCH v2 0/7] rockchip: rk3568: Fix use of PCIe
+ bifurcation
+To: Frank Wunderlich <frank-w@public-files.de>, Sebastian Reichel
+ <sebastian.reichel@collabora.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Jon Lin <jon.lin@rock-chips.com>, FUKAUMI
+ Naoki <naoki@radxa.com>, John Clark <inindev@gmail.com>,
+ u-boot@lists.denx.de
+References: <20230802190424.2963185-1-jonas@kwiboo.se>
+ <21678211-14b2-ce5c-820a-c69426725d65@kwiboo.se>
+ <29f01214-04f4-8a38-96f3-75df13bda7fa@rock-chips.com>
+ <2a605926-3d85-12fa-76db-2fa8d18b03dd@kwiboo.se>
+ <20231001191150.pydmtyqg4wtbri5k@mercury.elektranox.org>
+ <trinity-b84ddad3-528c-4117-8726-f211e21a42f6-1696231041552@3c-app-gmx-bap51>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <trinity-b84ddad3-528c-4117-8726-f211e21a42f6-1696231041552@3c-app-gmx-bap51>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 651a804ccafb75b6837295be
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,57 +83,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Wojciech,
+Hi Frank,
 
-Thank you for your patch.
+On 2023-10-02 09:17, Frank Wunderlich wrote:
+> Hi,
+> 
+>> Gesendet: Sonntag, 01. Oktober 2023 um 21:11 Uhr
+>> Von: "Sebastian Reichel" <sebastian.reichel@collabora.com>
+>> An: "Jonas Karlman" <jonas@kwiboo.se>
+>> Cc: "Kever Yang" <kever.yang@rock-chips.com>, "Simon Glass" <sjg@chromium.org>, "Philipp Tomsich" <philipp.tomsich@vrull.eu>, "Eugen Hristev" <eugen.hristev@collabora.com>, "Jon Lin" <jon.lin@rock-chips.com>, "FUKAUMI Naoki" <naoki@radxa.com>, "John Clark" <inindev@gmail.com>, u-boot@lists.denx.de
+>> Betreff: Re: [PATCH v2 0/7] rockchip: rk3568: Fix use of PCIe bifurcation
+>>
+>> Hi,
+>>
+>> On Wed, Sep 27, 2023 at 06:07:59PM +0000, Jonas Karlman wrote:
+>>> Above works with this series in U-Boot and also in mainline linux. Not
+>>> sure the RK3588 bifurcation part of driver have been verified on real HW,
+>>> rk3588 boards available for testing have typicality not used bifurcation.
+>>
+>> Upstream kernel bifurcation code looks ok to me. It's quite different
+>> from Rockchip vendor implementation, which might have confused Kever.
+>> I also missed this when having a quick look initially. As you said
+>> Rock 5A, Rock 5B and EVB1 do not use bifurcation, so no testing happened
+>> on our side.
+> 
+> my Bananapi R2Pro (rk3568) uses bifurcation and it is working in mainline Linux, but not yet in uboot.
 
-On lun., sept. 25, 2023 at 12:37, Wojciech Nizinski <niziak@spox.org> wrote:
+The issue on your Bananapi R2Pro is most likely not related to the
+pcie bifurcation code added in this series.
 
-> genimage create android-sparse file with CRC32 chunk at end. When
-> U-Boot's fastboot receives this chunk it returns error message:
-> `Fail Bogus chunk size for chunk type Dont Care`
+The coded added in this series works same/very similar as on mainline
+linux and fixes bifurcation use on devices such as Radxa E25 and NanoPi
+R5C/R5S.
 
-I could not reproduce this, probably because my sparse images don't have
-crc32 chunks.
+Please clarify if pcie work in mainline linux when booting with mainline
+u-boot, or does it only work when booting with vendor u-boot? (in case
+vendor u-boot set different/default pinconf).
 
->
-> According to reference implementation of Android's sparse file format:
->
-> <https://android.googlesource.com/platform/system/core/+/refs/heads/main/
-> libsparse/output_file.cpp#513>
->
-> the chunk_header.total_sz is CHUNK_HEADER_LEN + 4 (CRC32 size).
->
-> Signed-off-by: Wojciech Nizinski <niziak@spox.org>
+> 
+> posted my test-results here:
+> https://patchwork.ozlabs.org/project/uboot/patch/20230918173624.31464-1-linux@fw-web.de/#3183519
 
-However, the change looks fine to me.
+From your pci enum command I only see an expected pcie@fe270000 (ngff)
+link fail. Does it also print out link fail for pcie@fe280000 (minipcie)?
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+If not, try running "pci 1" and "pci 2" after an initial "pci enum" to
+see if the root complex and your minipcie device is detected.
 
-I also tested by reflashing a super image from aosp/main on the vim3 board.
-Base commit: 2173c4a99066 ("Merge tag 'u-boot-at91-fixes-2023.10-b' of https://source.denx.de/u-boot/custodians/u-boot-at91")
+Regards,
+Jonas
 
-Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on vim3
+> 
+> regards Frank
+> 
+> 
 
-> ---
->
->  lib/image-sparse.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/lib/image-sparse.c b/lib/image-sparse.c
-> index 8f8a67e158..323aad981c 100644
-> --- a/lib/image-sparse.c
-> +++ b/lib/image-sparse.c
-> @@ -289,8 +289,8 @@ int write_sparse_image(struct sparse_storage *info,
->  
->  		case CHUNK_TYPE_CRC32:
->  			if (chunk_header->total_sz !=
-> -			    sparse_header->chunk_hdr_sz) {
-> -				info->mssg("Bogus chunk size for chunk type Dont Care",
-> +			    sparse_header->chunk_hdr_sz + sizeof(uint32_t)) {
-> +				info->mssg("Bogus chunk size for chunk type CRC32",
->  					   response);
->  				return -1;
->  			}
-> -- 
-> 2.39.2
