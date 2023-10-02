@@ -4,67 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40D90E784B7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 14:52:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0793DE784BB
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 15:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A0CF87167;
-	Mon,  2 Oct 2023 16:52:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4200386E06;
+	Mon,  2 Oct 2023 17:01:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NT6f+P1I";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KHGlLtBv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5878087173; Mon,  2 Oct 2023 16:52:37 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 95FCF86EA1; Mon,  2 Oct 2023 17:01:12 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79F4586E03
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 16:52:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1439786DFD
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 17:01:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=euforiamracademia@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-50573e85ee0so3005808e87.3
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 07:52:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696258354; x=1696863154; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=9Ki3vftgljpXouoVOoSaYEb3MiWmM4xn8ZRH9/Sq9QY=;
- b=NT6f+P1II/LX0b1UHLOzZuAvA+l1sv+JmAMh7zDYoRc1ENYpzGaZPHCrE2n7Zk9O+6
- /okPqBJgTvu8VV9Q1/zE4CNX4r6w8c2gFdLusT1kyl0aSqMJTVp2j97Pda8jgugu9BvK
- huaXv/K7e7zXoKq9ADydYUCsSqEnUvI7ioqS4l9SNDiY8DrKZ+zmWOxf4rY8k60PmVKw
- 9oBFcNJqxr4+JwQDaEplJAGbXG7rhua70BOkfvUi29NyfOuvp7XdR1aD36OBepQy/0p4
- LguO83k75UQHoMOS0YToLPjO5AbVmtdoM5IozWLpXxInz1AUKN7LfB76CrowZVoaKQaC
- DQUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696258354; x=1696863154;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=9Ki3vftgljpXouoVOoSaYEb3MiWmM4xn8ZRH9/Sq9QY=;
- b=nnhungGTlpl7z0d/n2AJlEp3smjSpqNttPySBIORTrMW/Bw6KxxhQV4HfkZkgBQVnf
- 5GAf2DlGQagKLRZq/Be3IrW7OmmqWwQoAe69tQQ+GMZMBNMxeGF2KKQFZFTgxZMGT/HL
- ud+KNYFk7FRg0dNQZnjsnCfCL491wO7Ojce3hAkEb5Z9No3vZ20VhyevIhaV+Atbtz5X
- nXOwx1rp++SjgsP/74k5VKm856E8L5O6QoYeJIQknn21oI+5HnGHtJvhrlnJjbcNkerB
- 4d8ZSbrj3qwGOu0ZHmUGlCE77UbPJ3angLYUvN3YDoBFxHhBiuzCUkNvyQv8/TcpvNAa
- 5crw==
-X-Gm-Message-State: AOJu0Yy2q+5yhaAtXpaFYPglDCLQ+Iljt+KHZ0diu0fAp4GZqdtT57Ng
- EVzsA9L0QzH5J6TeErJs05Vewd3EpDoUlSijgGwav9+B
-X-Google-Smtp-Source: AGHT+IEwSogDrWNjDrvsJ9sJzUca+50l8DqwvFkHm8Aj4tT/QxmS1CSZbegmEwBWJeqov0/9RDlA+J1MHguNy2/0mm8=
-X-Received: by 2002:a05:6512:3e14:b0:500:c128:66d4 with SMTP id
- i20-20020a0565123e1400b00500c12866d4mr11218673lfv.67.1696258354510; Mon, 02
- Oct 2023 07:52:34 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 392F0suT025489;
+ Mon, 2 Oct 2023 10:00:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696258854;
+ bh=fQ2ehiH6HM7E/V1ZtCbmsQ2JnF/F+a8CP7NU5EO3tjQ=;
+ h=From:To:CC:Subject:Date;
+ b=KHGlLtBvshJEnHCh5OVJ/xxpUYdQb4nVf2vRhiyYuQm4vZslcBeWrKO/rj9d0sPXh
+ c8/Erxo+e3jcJSgee1VhiD402jO5W5TaJ+mxTdcrdBgUMg4cjdKjKBdDe9iFV2NjFU
+ Hah7BR04x86hKpqUsDntcem4zqDl29LRoIvSWF44=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 392F0s9A096527
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 2 Oct 2023 10:00:54 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
+ Oct 2023 10:00:54 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 2 Oct 2023 10:00:54 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 392F0stx099670;
+ Mon, 2 Oct 2023 10:00:54 -0500
+From: Nishanth Menon <nm@ti.com>
+To: <trini@konsulko.com>
+CC: <vigneshr@ti.com>, <m-chawdhry@ti.com>, <sjg@chromium.org>,
+ <jonas@kwiboo.se>, <afd@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
+ <u-boot@lists.denx.de>, Roger Quadros <rogerq@kernel.org>, Robert Nelson
+ <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>
+Subject: [PATCH] arm: dts: k3-am625-beagleplay: Fix Boot
+Date: Mon, 2 Oct 2023 10:00:53 -0500
+Message-ID: <20231002150053.2930710-1-nm@ti.com>
+X-Mailer: git-send-email 2.40.0
 MIME-Version: 1.0
-From: Mr Academia Euforia <euforiamracademia@gmail.com>
-Date: Mon, 2 Oct 2023 16:52:23 +0200
-Message-ID: <CAK1jQBOFtGmmfTqaBQhCo0SBac16Cpj5qb+bJoNYti_aFgwV1w@mail.gmail.com>
-Subject: Help with certain u-boot one-time job
-To: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,11 +79,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi there,
+Since commit [1] A53 u-boot proper is broken. This is because nodes
+marked as 'bootph-pre-ram' are not available at u-boot proper before
+relocation.
 
-I am working on certain project, part of which is small Uboot piece. I'm
-currently lacking man power, and I am looking for help with certain
-Uboot-related patching job. Of course paid help.
-If there's anyone interested, please email me, and I'll explain.
+To fix this we mark all nodes in u-boot.dtsi as 'bootph-all'.
 
-Best regards,
+[1]
+9e644284ab812 ("dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation")
+
+Reported-by: Roger Quadros <rogerq@kernel.org>
+Signed-off-by: Nishanth Menon <nm@ti.com>
+---
+
+Based on Roger's series:
+https://lore.kernel.org/all/20230929134646.214781-1-rogerq@kernel.org/
+
+Based on:
+  next                       e29b932aa07f Merge branch '2023-09-30-Kconfig-updates' into next
+
+See discussion thread:
+https://lore.kernel.org/all/CAPnjgZ3MgWX8T0A0SofphEr_Xd77pE3hte9DNye1RuBVeB9N8Q@mail.gmail.com/
+
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 70 ++++++++++----------
+ 1 file changed, 35 insertions(+), 35 deletions(-)
+
+diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+index f8c04e8a300a..d6c6baa5518b 100644
+--- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+@@ -14,143 +14,143 @@
+ 	};
+ 
+ 	memory@80000000 {
+-		bootph-pre-ram;
++		bootph-all;
+ 	};
+ 
+ 	/* Keep the LEDs on by default to indicate life */
+ 	leds {
+-		bootph-pre-ram;
++		bootph-all;
+ 		led-0 {
+ 			default-state = "on";
+-			bootph-pre-ram;
++			bootph-all;
+ 		};
+ 
+ 		led-1 {
+ 			default-state = "on";
+-			bootph-pre-ram;
++			bootph-all;
+ 		};
+ 
+ 		led-2 {
+ 			default-state = "on";
+-			bootph-pre-ram;
++			bootph-all;
+ 		};
+ 
+ 		led-3 {
+ 			default-state = "on";
+-			bootph-pre-ram;
++			bootph-all;
+ 		};
+ 
+ 		led-4 {
+ 			default-state = "on";
+-			bootph-pre-ram;
++			bootph-all;
+ 		};
+ 	};
+ };
+ 
+ &cbass_main {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_timer0 {
+ 	clock-frequency = <25000000>;
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &dmss {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &secure_proxy_main {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &dmsc {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &k3_pds {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &k3_clks {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &k3_reset {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &dmsc {
+-	bootph-pre-ram;
++	bootph-all;
+ 	k3_sysreset: sysreset-controller {
+ 		compatible = "ti,sci-sysreset";
+-		bootph-pre-ram;
++		bootph-all;
+ 	};
+ };
+ 
+ &wkup_conf {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &chipid {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_pmx0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_uart0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &console_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &cbass_mcu {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &cbass_wakeup {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &mcu_pmx0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_i2c0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &local_i2c_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &gpio0_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_gpio0 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &main_gpio1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &sdhci0 {
+ 	/* EMMC */
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &emmc_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &sd_pins_default {
+-	bootph-pre-ram;
++	bootph-all;
+ 	/* Force to use SDCD card detect pin */
+ 	pinctrl-single,pins = <
+ 		AM62X_IOPAD(0x023c, PIN_INPUT, 0) /* (A21) MMC1_CMD */
+@@ -164,11 +164,11 @@
+ };
+ 
+ &tps65219 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &sdhci1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ #ifdef CONFIG_TARGET_AM625_A53_EVM
+-- 
+2.40.0
+
