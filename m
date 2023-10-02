@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CED54E7849A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 12:43:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E93E7849A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 12:43:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEA5186DE7;
-	Mon,  2 Oct 2023 14:42:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 63B0C86DAD;
+	Mon,  2 Oct 2023 14:43:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="QWrZlpn4";
+	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="aAR7gdsx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E51386DDA; Mon,  2 Oct 2023 14:42:59 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 9BBCB86DFA; Mon,  2 Oct 2023 14:42:59 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2D0B870D1
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 14:42:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D4E180834
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 14:42:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=conclusive.pl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=artur@conclusive.pl
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-5048156976cso9174502e87.2
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 05:42:55 -0700 (PDT)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-503397ee920so24989593e87.1
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 05:42:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=conclusive.pl; s=google; t=1696250575; x=1696855375; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=naZKIxazljAM0dlzjnImoue9SR3PqPkmRLn+Qyap2gM=;
- b=QWrZlpn4Os/4EjQaHYybghkBNdjXnRC8QRhD1uj8KjzjPDZ1vQqPs+1p462jVzMa2z
- kvEWRTvhu9gjVA7GLQRdguM3VcTtR6EGgOwDTE60Bgtq5I3Qbutprn3pfFU09f0bIhPl
- bFtNsv+3/02MhdDUO0fj6gWZvduFTTou7s+R9fujG7PpFAoOnOuqHHlj8B3qS0/hn972
- WALgNIid7dnnmEO6cNuuNdI3c1Bqjq+vhO690+HTeOuULyYU0Ps5dl23w+oGX1b/YDws
- VYr5UsNqjoUoG6HjwtVh135n9p7KzYcciimculr+yok4bm9BJxicxTtkSsu7L4QahWFT
- DQMQ==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DoxVScwTBE3MIbFUBvAq+1CsqDIxqKVhfF3fB3WFuJc=;
+ b=aAR7gdsxe+gZUSVRA5qQAY3GAeNKzA9q5PWSPjpb9JWyxhz7f83Kzm5jXachTi5tXk
+ s0TG3Y7WOoKCtmt+NNV6YredO4AHmjfDQcF+J7erxfT0byv+N0mcv6cfUNFDQHHur6co
+ xtoTwQ9QCIN+8yhw07YP1//pn5ZlNPuOKM32LX96SIFmCtfA826Ba9ehh2SSw3Richfd
+ tApua11e1AthGP6PwXZ1JAkIHP1CGfIhe7FAhQdQfojYdCLlM5Bdv1fz9V5Z1bHk9/2Q
+ f2W+iSsv2ZQQpNj56+29j/52VAmXW2dJYCo2nOXk69Fw3TaHbPuAaJ4PwT5Lpqxr3MeN
+ IJAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1696250575; x=1696855375;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=naZKIxazljAM0dlzjnImoue9SR3PqPkmRLn+Qyap2gM=;
- b=DyFRQkSInzZr5LlUoWI6xeee53kv3ftDdzGMa3SRsdCIRZ7HIKdFx6B1o628iK4vrf
- 9cb5ZCwMjD4UfQQasUGfr/CAA9ynzPr4ZYOXA0LEns3clcT/XaZEH7jLpkIN0mfg1NPv
- /zAV+UPau9NNCmePQe1Xg5g/Qp2HgmPz4BV6Uri6u1RUsQY1otntkoazsBBNVhE3LG7f
- esAXeeAqXBjBzBniy6vFgD+wbkeIRnhVx0ZHqXbAyz+OWB9clrf3c00PTu0cg+oXIW4K
- G5gYY/DhGcKM9vYEok960Y/gwtWQ/ZcBrF5bxMRjUHpvNXaZJKPVUVxfWSmKjMWZcYi8
- 0AbA==
-X-Gm-Message-State: AOJu0YwQre7OoqEnK4FUb1tD2qxPf1RDCyaudSv9eB1eGprB8WznLsG3
- wja63N7X2lZKIeBvJ+Dc+SWuZA==
-X-Google-Smtp-Source: AGHT+IGtZUqrM5oXql+wJfdL5ncpzYsxY4bmlUPmIaRjJyGttnCtjPXSsrspyfw3NP5gYMqKuvt43A==
-X-Received: by 2002:ac2:5e3a:0:b0:502:ffdf:b098 with SMTP id
- o26-20020ac25e3a000000b00502ffdfb098mr7886527lfg.6.1696250574597; 
- Mon, 02 Oct 2023 05:42:54 -0700 (PDT)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=DoxVScwTBE3MIbFUBvAq+1CsqDIxqKVhfF3fB3WFuJc=;
+ b=JN9oQPJT2330VifeE6SPm7D+Wdzuf9RQgZneGUMQpHwgS2QiJKHOkPNgvF1S17wOhl
+ jspmk7jh585M5WgVgBF6Rxz9AzkalKfY6aNrKvlqvItK9w7ijDAugDiV+WY87TvwJP22
+ 5z4A88TUduJgej+FlKhpBGaKTGQwJetLbP06rEXDWMxUMWdoQ/YtqXNcoIFysJ59npIa
+ Ct2fpR1/MzKQNMq1wK5usGeOwiSk4P+WCq80Jq8yUVEFkcHPt/KCFHqIZi6jSx3cbda9
+ 5xJmxcV3FepsrdJHr1ttzS839XYQ9FDUoZbFk32hupF2Z9qFaoUnZFrn+gx7sgSdM1tP
+ tnZw==
+X-Gm-Message-State: AOJu0YyNYkAsQizsfUmJ5mfHHSgtEit7733Pnxpgl7k+3C0tc02BAN47
+ 0RpYfz3Qf3jVxlo7rTiVBVwZtmfqKEEfMwfl8qrQzw==
+X-Google-Smtp-Source: AGHT+IFsUvza2J6YvVmRetaiOA3OyMQqRDyHOGRU7ZFKYYMpPAu4QTqY4cflDxEoxqy9x4afZVu1OA==
+X-Received: by 2002:a05:6512:3ee:b0:502:d5b0:436e with SMTP id
+ n14-20020a05651203ee00b00502d5b0436emr7996903lfq.62.1696250575512; 
+ Mon, 02 Oct 2023 05:42:55 -0700 (PDT)
 Received: from localhost.localdomain (host-89.25.128.123.static.3s.pl.
  [89.25.128.123]) by smtp.gmail.com with ESMTPSA id
- e8-20020ac25468000000b004faa2de9877sm4719316lfn.286.2023.10.02.05.42.53
+ e8-20020ac25468000000b004faa2de9877sm4719316lfn.286.2023.10.02.05.42.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 05:42:54 -0700 (PDT)
+ Mon, 02 Oct 2023 05:42:55 -0700 (PDT)
 From: Artur Rojek <artur@conclusive.pl>
 To: Eugen Hristev <eugen.hristev@collabora.com>,
  Simon Glass <sjg@chromium.org>, Jakub Klama <jakub@conclusive.pl>,
@@ -70,10 +71,12 @@ To: Eugen Hristev <eugen.hristev@collabora.com>,
 Cc: Wojciech Kloska <wojciech@conclusive.pl>,
  =?UTF-8?q?Rados=C5=82aw=20Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
  u-boot@lists.denx.de, Artur Rojek <artur@conclusive.pl>
-Subject: [PATCH v3 0/4] Conclusive KSTR-SAMA5D27 support
-Date: Mon,  2 Oct 2023 14:42:13 +0200
-Message-ID: <20231002124217.68220-1-artur@conclusive.pl>
+Subject: [PATCH v3 1/4] common: Add generic function for reading serial number
+Date: Mon,  2 Oct 2023 14:42:14 +0200
+Message-ID: <20231002124217.68220-2-artur@conclusive.pl>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231002124217.68220-1-artur@conclusive.pl>
+References: <20231002124217.68220-1-artur@conclusive.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,70 +95,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Provide a generic way for boards to read their serial number from EEPROM
+at init.
 
-this is v3 of the Conclusive KSTR-SAMA5D27 support series.
+If CONFIG_ID_EEPROM is set, the new serial_read_from_eeprom() function
+will now be called during the post-relocation part of the board init.
 
-Patch [1/4] now takes a different approach at reading the EEPROM serial.
-An existing CONFIG_ID_EEPROM option provides a mechanism for reading
-EEPROM embedded MAC addresses at init. As this option is meant for
-reading various identifying features, not just MACs, I've decided to
-expand it by the ability of reading serial number, adding a generic
-serial_read_from_eeprom(). For tlv eeprom, this wraps around existing
-populate_serial_number(), which now becomes local to tlv_eeprom.c.
-Other boards which enable CONFIG_ID_EEPROM, but don't store EEPROM data
-as tlv, will need to provide their own implementations of
-serial_read_from_eeprom(). A dummy weak function has been provided to
-prevent compilation issues on such boards.
+Provided is the tlv eeprom implementation of the above function, making
+use of the existing, yet never utilized, populate_serial_number().
+Boards which use custom logic for interaction with their EEPROMs need to
+supply their own implementation.
 
-Simon, you've already accepted the solution from v2, however changes
-required for [4/4] have forced me to go with this new approach.
+Signed-off-by: Artur Rojek <artur@conclusive.pl>
+---
 
-Patch [2/4] is new. CONFIG_ID_EEPROM requires that the do_mac() command
-exists, however implementation of this function has been missing from
-tlv_eeprom. This patch adds a bare minimum support for it - only
-handling the "mac read" flag. KSTR-SAMA5D27 is supposed to use EEPROM
-embedded MAC addresses, however this feature has been overlooked in
-previous versions of this series.
+v3: - restore original function name and make it static
+    - provide a generic function for reading EEPROM serial number and
+      wrap it around the existing tlv logic
+    - move the env var check out of populate_serial_number() and into
+      the new serial_read_from_eeprom() in order to stay consistent with
+      the documentation
 
-Patch [3/4] remains unchanged.
+v2: - rename the function
+    - move function documentation from .c file to the prototype location
 
-Patch [4/4] now uses CONFIG_DISPLAY_BOARDINFO_LATE in order to display
-the board model and S/N. As a side effect of that, serial access has
-been moved to CONFIG_ID_EEPROM (see patch [1/4]) and BOARD_LATE_INIT
-mechanism dropped as unnecessary.
+ cmd/tlv_eeprom.c | 25 +++++++++----------------
+ common/board_r.c |  8 ++++++++
+ include/init.h   | 14 ++++++++++++++
+ 3 files changed, 31 insertions(+), 16 deletions(-)
 
-The kstr_sama5d27_defconfig has also been re-generated with
-savedefconfig, which got rid of some redundant flags.
-
-Artur Rojek (4):
-  common: Add generic function for reading serial number
-  cmd: tlv_eeprom: Add support for do_mac() command
-  arm: dts: at91: sama5: Add flexcom4 node
-  board: Add support for Conclusive KSTR-SAMA5D27
-
- arch/arm/dts/Makefile                         |   3 +
- arch/arm/dts/at91-kstr-sama5d27.dts           | 131 ++++++++++
- arch/arm/dts/sama5d2.dtsi                     |  20 ++
- arch/arm/mach-at91/Kconfig                    |  12 +
- board/conclusive/kstr-sama5d27/Kconfig        |  15 ++
- board/conclusive/kstr-sama5d27/MAINTAINERS    |   8 +
- board/conclusive/kstr-sama5d27/Makefile       |   5 +
- .../conclusive/kstr-sama5d27/kstr-sama5d27.c  | 230 ++++++++++++++++++
- cmd/tlv_eeprom.c                              |  76 ++++--
- common/board_r.c                              |   8 +
- configs/kstr_sama5d27_defconfig               |  74 ++++++
- include/configs/kstr-sama5d27.h               |  15 ++
- include/init.h                                |  14 ++
- 13 files changed, 595 insertions(+), 16 deletions(-)
- create mode 100644 arch/arm/dts/at91-kstr-sama5d27.dts
- create mode 100644 board/conclusive/kstr-sama5d27/Kconfig
- create mode 100644 board/conclusive/kstr-sama5d27/MAINTAINERS
- create mode 100644 board/conclusive/kstr-sama5d27/Makefile
- create mode 100644 board/conclusive/kstr-sama5d27/kstr-sama5d27.c
- create mode 100644 configs/kstr_sama5d27_defconfig
- create mode 100644 include/configs/kstr-sama5d27.h
-
+diff --git a/cmd/tlv_eeprom.c b/cmd/tlv_eeprom.c
+index 79796394c5c8..9aa9b070473e 100644
+--- a/cmd/tlv_eeprom.c
++++ b/cmd/tlv_eeprom.c
+@@ -1088,27 +1088,12 @@ int mac_read_from_eeprom(void)
+ 	return 0;
+ }
+ 
+-/**
+- *  populate_serial_number - read the serial number from EEPROM
+- *
+- *  This function reads the serial number from the EEPROM and sets the
+- *  appropriate environment variable.
+- *
+- *  The environment variable is only set if it has not been set
+- *  already.  This ensures that any user-saved variables are never
+- *  overwritten.
+- *
+- *  This function must be called after relocation.
+- */
+-int populate_serial_number(int devnum)
++static int populate_serial_number(int devnum)
+ {
+ 	char serialstr[257];
+ 	int eeprom_index;
+ 	struct tlvinfo_tlv *eeprom_tlv;
+ 
+-	if (env_get("serial#"))
+-		return 0;
+-
+ 	if (read_eeprom(devnum, eeprom)) {
+ 		printf("Read failed.\n");
+ 		return -1;
+@@ -1123,3 +1108,11 @@ int populate_serial_number(int devnum)
+ 
+ 	return 0;
+ }
++
++int serial_read_from_eeprom(void)
++{
++	if (env_get("serial#"))
++		return 0;
++
++	return populate_serial_number(0);
++}
+diff --git a/common/board_r.c b/common/board_r.c
+index 4aaa89403117..0f2cbf7bd741 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -121,6 +121,13 @@ __weak int fixup_cpu(void)
+ 	return 0;
+ }
+ 
++#if defined(CONFIG_ID_EEPROM)
++__weak int serial_read_from_eeprom(void)
++{
++	return 0;
++}
++#endif
++
+ static int initr_reloc_global_data(void)
+ {
+ #ifdef __ARM__
+@@ -714,6 +721,7 @@ static init_fnc_t init_sequence_r[] = {
+ 	cpu_secondary_init_r,
+ #if defined(CONFIG_ID_EEPROM)
+ 	mac_read_from_eeprom,
++	serial_read_from_eeprom,
+ #endif
+ 	INIT_FUNC_WATCHDOG_RESET
+ #if defined(CONFIG_PCI_INIT_R) && !defined(CONFIG_SYS_EARLY_PCI_INIT)
+diff --git a/include/init.h b/include/init.h
+index 3bf30476a2e0..df218c95de42 100644
+--- a/include/init.h
++++ b/include/init.h
+@@ -283,6 +283,20 @@ void board_init_r(struct global_data *id, ulong dest_addr)
+ int cpu_init_r(void);
+ int last_stage_init(void);
+ int mac_read_from_eeprom(void);
++
++/**
++ *  serial_read_from_eeprom - read the serial number from EEPROM
++ *
++ *  This function reads the serial number from the EEPROM and sets the
++ *  appropriate environment variable.
++ *
++ *  The environment variable is only set if it has not been set
++ *  already. This ensures that any user-saved variables are never
++ *  overwritten.
++ *
++ *  This function must be called after relocation.
++ */
++int serial_read_from_eeprom(void);
+ int set_cpu_clk_info(void);
+ int update_flash_size(int flash_size);
+ int arch_early_init_r(void);
 -- 
 2.42.0
 
