@@ -4,24 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF543E784BC
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 15:22:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34000E784BD
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 15:22:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B669E871B9;
-	Mon,  2 Oct 2023 17:22:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4CD71871B0;
+	Mon,  2 Oct 2023 17:22:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="FUgJo1fg";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="g0HOkj8c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CADC0871B1; Mon,  2 Oct 2023 17:21:59 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk
- [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
+ id 8952487195; Mon,  2 Oct 2023 17:22:00 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D424F87166
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 17:21:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC0C5871A8
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 17:21:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
 Authentication-Results: phobos.denx.de;
@@ -30,27 +29,27 @@ Received: from arisu.mtl.collabora.ca (mtl.collabora.ca [66.171.169.34])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested) (Authenticated sender: detlev)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id BFDC46607312;
- Mon,  2 Oct 2023 16:21:56 +0100 (BST)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id AA1706607313;
+ Mon,  2 Oct 2023 16:21:57 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1696260117;
- bh=FP2a+a1Z9aUwZV6y4KjMh6D6/T7Afk0PYvV/OB9YyYg=;
+ s=mail; t=1696260118;
+ bh=4mtG7Xvp6AoGG6oGrW0oJMg6BUPOq0XV5RzEHqakux0=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=FUgJo1fgaN5vbWAg82+IOv3LLSirULHvVenfNgxAPA76vOtJrZAeLlZS7GkZpQdZ1
- DGhAqUUoW5UzEo0d4xZiJfHlTf/M/SOgxGIgSb0d+yYXRUeD+q8McAsjkyeqGLLhN1
- 8aZEhTihj4OCdUYtlk8RXarocS+MWLl2qNaYRYhtdylchCRQl+rq6I85c7lBmWJmPg
- NT4CEBr+hA1zoB0KLWQlNaTov9fwjzdeUVjj9yLrsUoIB7nBBaaj1WNFStFAjgTGhC
- cfp3OgNGuz7A8LNTua+aLcsw2TEvNT5Yi+l95bndPwYpLZfxzErW0vbLm33xPwWqX2
- vejn1g5CR4FJA==
+ b=g0HOkj8cg4TOq4p0oiVDkZ7TFmSxjGoJ1FdO7HsMUsDTh+xNXUDcrqDzHR3cezqvq
+ Ca9XP6wPVZeEx8dMgQHvbTY+qNHfz8Otg9qTrxLMmnUAl/cckMdtaAadyKSliLKfkF
+ CRM+4DlVeRwZamzSvwDUkGpyRco4A/aoXL2hNEDmc2GhXawA4UIK8KSA3QJjRwR0VM
+ 0wWtqoE7P/4Efw3jI4Xg2F+5zEyEx/H5dpfcZinNY5aS/s0wsN1a/+Hkruea6skbzW
+ sDCea+rOntqYnGDjITXT+Fti3Rpe5X2J8CQHOKsV3EefJR63tyIMIdDfj+YMpNxui6
+ ABUeS9dXcQ40w==
 From: Detlev Casanova <detlev.casanova@collabora.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Hai Pham <hai.pham.ud@renesas.com>, Tam Nguyen <tam.nguyen.xa@renesas.com>,
  Simon Glass <sjg@chromium.org>,
  Detlev Casanova <detlev.casanova@collabora.com>
-Subject: [PATCH v5 3/6] sysinfo: Add a test
-Date: Mon,  2 Oct 2023 11:20:07 -0400
-Message-ID: <20231002152142.76516-4-detlev.casanova@collabora.com>
+Subject: [PATCH v5 4/6] sysinfo: Add documentation
+Date: Mon,  2 Oct 2023 11:20:08 -0400
+Message-ID: <20231002152142.76516-5-detlev.casanova@collabora.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231002152142.76516-1-detlev.casanova@collabora.com>
 References: <20231002152142.76516-1-detlev.casanova@collabora.com>
@@ -72,145 +71,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The test runs one of each subcommand and checks that the output matches
-the values in the sandbox sysinfo driver.
+Add documentation for the sysinfo command with examples.
 
 Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
 ---
- configs/sandbox_defconfig |  1 +
- drivers/sysinfo/sandbox.c | 17 +++++++++++++
- test/cmd/Makefile         |  1 +
- test/cmd/test_sysinfo.c   | 51 +++++++++++++++++++++++++++++++++++++++
- 4 files changed, 70 insertions(+)
- create mode 100644 test/cmd/test_sysinfo.c
+ doc/usage/cmd/sysinfo.rst | 56 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
+ create mode 100644 doc/usage/cmd/sysinfo.rst
 
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 62bc182ca16..409e3d88012 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -129,6 +129,7 @@ CONFIG_CMD_EROFS=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_CMD_SQUASHFS=y
- CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_SYSINFO=y
- CONFIG_CMD_STACKPROTECTOR_TEST=y
- CONFIG_MAC_PARTITION=y
- CONFIG_AMIGA_PARTITION=y
-diff --git a/drivers/sysinfo/sandbox.c b/drivers/sysinfo/sandbox.c
-index d270a26aa43..cc7783907a9 100644
---- a/drivers/sysinfo/sandbox.c
-+++ b/drivers/sysinfo/sandbox.c
-@@ -7,9 +7,14 @@
- #include <common.h>
- #include <dm.h>
- #include <sysinfo.h>
-+#include <version.h>
- 
- #include "sandbox.h"
- 
-+#define SANDBOX_BOARD_ID	0x42
-+#define SANDBOX_BOARD_REV_MAJOR	U_BOOT_VERSION_NUM
-+#define SANDBOX_BOARD_REV_MINOR	U_BOOT_VERSION_NUM_PATCH
-+
- struct sysinfo_sandbox_priv {
- 	bool called_detect;
- 	int test_i1;
-@@ -48,6 +53,15 @@ int sysinfo_sandbox_get_int(struct udevice *dev, int id, int *val)
- 	struct sysinfo_sandbox_priv *priv = dev_get_priv(dev);
- 
- 	switch (id) {
-+	case SYSINFO_ID_BOARD_ID:
-+		*val = SANDBOX_BOARD_ID;
-+		return 0;
-+	case SYSINFO_ID_BOARD_REV_MAJOR:
-+		*val = SANDBOX_BOARD_REV_MAJOR;
-+		return 0;
-+	case SYSINFO_ID_BOARD_REV_MINOR:
-+		*val = SANDBOX_BOARD_REV_MINOR;
-+		return 0;
- 	case INT_TEST1:
- 		*val = priv->test_i1;
- 		/* Increments with every call */
-@@ -71,6 +85,9 @@ int sysinfo_sandbox_get_str(struct udevice *dev, int id, size_t size, char *val)
- 	int index = (i1 * i2) % ARRAY_SIZE(vacation_spots);
- 
- 	switch (id) {
-+	case SYSINFO_ID_BOARD_MODEL:
-+		snprintf(val, size, "sandbox");
-+		return 0;
- 	case STR_VACATIONSPOT:
- 		/* Picks a vacation spot depending on i1 and i2 */
- 		snprintf(val, size, vacation_spots[index]);
-diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-index 6e3d7e919ef..dc8f59d87f2 100644
---- a/test/cmd/Makefile
-+++ b/test/cmd/Makefile
-@@ -26,6 +26,7 @@ ifdef CONFIG_SANDBOX
- obj-$(CONFIG_CMD_READ) += rw.o
- obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
- obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
-+obj-$(CONFIG_CMD_SYSINFO) += test_sysinfo.o
- endif
- obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
- obj-$(CONFIG_CMD_WGET) += wget.o
-diff --git a/test/cmd/test_sysinfo.c b/test/cmd/test_sysinfo.c
+diff --git a/doc/usage/cmd/sysinfo.rst b/doc/usage/cmd/sysinfo.rst
 new file mode 100644
-index 00000000000..7ba6dd0df89
+index 00000000000..1660b2aa1a6
 --- /dev/null
-+++ b/test/cmd/test_sysinfo.c
-@@ -0,0 +1,51 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Tests for sysinfo command
-+ *
-+ * Copyright 2023, Detlev Casanova <detlev.casanova@collabora.com>
-+ */
++++ b/doc/usage/cmd/sysinfo.rst
+@@ -0,0 +1,56 @@
++.. SPDX-License-Identifier: GPL-2.0+:
 +
-+#include <common.h>
-+#include <command.h>
-+#include <asm/global_data.h>
-+#include <display_options.h>
-+#include <test/lib.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <version.h>
++sysinfo command
++===============
 +
-+DECLARE_GLOBAL_DATA_PTR;
++Synopis
++-------
 +
-+#define REV_(x, y) #x "." #y
-+#define REV(x, y) REV_(x, y)
++::
 +
-+struct test_data {
-+	char *cmd;
-+	char *expected;
-+};
++    sysinfo id <varname>
++    sysinfo model <varname>
++    sysinfo revision <varname>
 +
-+static struct test_data sysinfo_data[] = {
-+	{"sysinfo model", "sandbox"},
-+	{"sysinfo id", "0x42"},
-+	{"sysinfo revision", REV(U_BOOT_VERSION_NUM, U_BOOT_VERSION_NUM_PATCH)},
-+};
++Description
++-----------
 +
-+static int lib_test_sysinfo(struct unit_test_state *uts)
-+{
-+	int i;
++The `sysinfo` command is used to show information about the running system
 +
-+	for (i = 0; i < ARRAY_SIZE(sysinfo_data); ++i) {
-+		ut_silence_console(uts);
-+		console_record_reset_enable();
-+		ut_assertok(run_command(sysinfo_data[i].cmd, 0));
-+		ut_unsilence_console(uts);
-+		console_record_readline(uts->actual_str,
-+					sizeof(uts->actual_str));
-+		ut_asserteq_str(sysinfo_data[i].expected, uts->actual_str);
-+		ut_assertok(ut_check_console_end(uts));
-+	}
++The `sysinfo id` command prints or sets an environment variable to the board id
++as an hex value.
 +
-+	return 0;
-+}
++    varname
++        an optional environment variable to store the board id into.
 +
-+LIB_TEST(lib_test_sysinfo, 0);
++The `sysinfo model` command prints or sets an environment variable to the board
++model name as a string value.
++
++    varname
++        an optional environment variable to store the board model name into.
++
++The `sysinfo revision` command prints or sets an environment variable to the
++board revision in the <MAJOR>.<MINOR> format, where MINOR and MINOR are int
++values.
++
++    varname
++        an optional environment variable to store the board revision into.
++
++Examples
++--------
++
++::
++
++    => sysinfo id
++    0x0b
++    => sysinfo model
++    Renesas Starter Kit Premier board rev 2.1
++    => sysinfo revision varname
++    => env print varname
++    2.1
++
++Return value
++------------
++
++The return value $? is set to 0 (true) if the command succeeded. If an
++error occurs, the return value $? is set to 1 (false).
 -- 
 2.41.0
 
