@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D4AE7849A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 06:35:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91E72E784A4
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 07:09:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E312F870BE;
-	Mon,  2 Oct 2023 08:35:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6782187112;
+	Mon,  2 Oct 2023 09:09:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wE4jebvB";
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="XfOqH86Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E224487103; Mon,  2 Oct 2023 08:34:59 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8C5EE87114; Mon,  2 Oct 2023 09:09:16 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 982BF870B7
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 08:34:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 44BE98710F
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 09:09:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-9b64b98656bso48278666b.0
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 23:34:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696228497; x=1696833297; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=j37dXmcc0W31gbPfZDITH0SOpCW3UvnclZY5twHFl58=;
- b=wE4jebvBbCnvrEpGPfHcq1kgVYtG0ROi6CJpaWuvJ7VTuQieWFQSixNQmDPxOl9ZDk
- F34I8LFmMTzPEdxMLJCnLK0LxyfrqLBGJ4p1iXIFihQugI+MeJ6RUnlIqk1QgdnpeOcO
- 6huCG0jBFGziO31NsIs3JBTG51kaHwvAvvvU2VuDROkpX7YWoBX/aI55mx9xUt3hoV9t
- xSCvMYcR6LBnO4lPkanKNNCV1Nfc2LFAP2AHY+omEgogajIY07UwYwU4v9ZNOgEkX3Q5
- 6HN6WWWulMYTB11PzGzVE2VN3yke2H4fA+wFU4+Y37mhadv8lLXBKwAIplW5OteO85j+
- Sd/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696228497; x=1696833297;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=j37dXmcc0W31gbPfZDITH0SOpCW3UvnclZY5twHFl58=;
- b=Yp7ybT48Ypv58djoe5IxkyzVsv83QTRqCW2GUDIoDiuNj2jmnq91DKxrLTzXW1xC9a
- FC3igr7wNnglfmBGO0u9ONfxfHFbIA33qSO4a8rg6SuLpH2Xa9ONzhs1c2H7NeAKHsz/
- p2eiZfA/gOcyiS9fusjIbiJicpM6P4HDTmvLojPc4af236i1tlvS7lSp8QQXwCyOqEwl
- jOMQi2saOpiJ1yYjzGBL1fPjYlKslCJCqw5m8YBNsOMZIrUrawDCjJsqzSLJ0Iioccd9
- PYhmc5JAzrCGoojtMxCApKsqsIWX4HmLuCWKXB5/okGWxih9F9q3/DO5bOXTSwrAndqQ
- oT2g==
-X-Gm-Message-State: AOJu0YwM/t1GvPcBZmlWbPsc9YDnxY1qe/+jRTmdb/tC86QlWLmUJXyg
- 06fW3YBRU65xxBtur6TqIFWbzYooxdLDe1JjajU8jQ==
-X-Google-Smtp-Source: AGHT+IGL0psVXciUsJ08sFbkyjtPEahgFh6lL5cqpmAoAnzqCBlhBiX/ryk6b+b/k90eflSwXFF6RchbSPE34pmxFH0=
-X-Received: by 2002:a17:906:24e:b0:9ad:e298:a5d with SMTP id
- 14-20020a170906024e00b009ade2980a5dmr10295283ejl.19.1696228496837; Sun, 01
- Oct 2023 23:34:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=public-files.de;
+ s=s31663417; t=1696230547; x=1696835347; i=frank-w@public-files.de;
+ bh=2zvyFkWwxOAE3Vf2l75lzTywH5UVn1feDPF0pB6uX0E=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=XfOqH86YT3UQJkoK/iEH3ERVX5HvyARYuQOb+kbw/fUls23wayzhOYLnC5OkzzmxmRY4/vnW137
+ GPGLLf2uNq03vUnE2kstSks5QM2fTEnR9KGwylUjGPcgAEHvpK0HMv25A3AcZQ9IzU5OizQhVJmtk
+ wwsxO7XWU97dYYMwXAcXRSedW00NkR07tXQYlkCK9T1HxFIRk6g9NfrIaFuskwT6zjC5jbCodlcqJ
+ dPV49uziQTcvS5OgQ4XslNQ2kEuoUUpxUA6fxSDTxXdRXeq1JcHGXokip4WC3FKe8psTzc0DTrUkF
+ TmCykzrslDRe7ctUaEUjvYPhMcs2DQDhCNHA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [217.61.157.132] ([217.61.157.132]) by web-mail.gmx.net
+ (3c-app-gmx-bap51.server.lan [172.19.172.121]) (via HTTP); Mon, 2 Oct 2023
+ 09:09:07 +0200
 MIME-Version: 1.0
-References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
- <20230926094124.7024-2-maxim.uvarov@linaro.org>
- <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
- <20230926134149.GS305624@bill-the-cat>
- <CAPnjgZ1iAG8Rw3jVZvFs16AvnGkO=gCsCM3dF1c30biFk4t2xw@mail.gmail.com>
- <20230926141936.GW305624@bill-the-cat>
-In-Reply-To: <20230926141936.GW305624@bill-the-cat>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Mon, 2 Oct 2023 12:34:44 +0600
-Message-ID: <CAD8XO3aifH+f_NZ1g_nJrxKu_tDmuW9H=Pk2o4v8yTAAn1nfdQ@mail.gmail.com>
-Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@google.com>, u-boot@lists.denx.de, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- goldsimon@gmx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Message-ID: <trinity-6f4dc3e7-6c77-4a85-a8b3-b7d5b1b87ef9-1696230547625@3c-app-gmx-bap51>
+From: Frank Wunderlich <frank-w@public-files.de>
+To: Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+Cc: Frank Wunderlich <linux@fw-web.de>, u-boot@lists.denx.de, Simon Glass
+ <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>, Joseph Chen
+ <chenjh@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>
+Subject: Aw: Re: [PATCH v5] board: rockchip: Add Bananapi R2Pro Board
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 2 Oct 2023 09:09:07 +0200
+Importance: normal
+Sensitivity: Normal
+In-Reply-To: <0ef110bf-12d3-d507-63d3-03f15255188c@rock-chips.com>
+References: <20230920184005.50931-1-linux@fw-web.de>
+ <0ef110bf-12d3-d507-63d3-03f15255188c@rock-chips.com>
+X-UI-Message-Type: mail
+X-Priority: 3
+X-Provags-ID: V03:K1:Q9D+627xf6U333mQwVMietCzk9JKqAw6mMMYcvrtb5l+ImdzC9+339Ij/S9jv5U1RSHmp
+ dQgOqglLGRnmgVoP6FZoTD66o1FrkdRl5Qh77hk7FQUFfcmpTQv71v9rYhPCRV/AMPpRt1IcbAEU
+ XgZnhQkN+ylblSwC9AE80ooH3aXBEyCjtfnzKBDn3YnS8R9aTi6uSERz71osYOibVvfb/rlKQd5N
+ S9zyTb3ni3ZfiHUqfdBqRJnJsGKSf3sSzX1MTwGetfXj357C+Q734lx9DYEu6ajZOYkHG44Jgiri
+ O4=
+UI-OutboundReport: notjunk:1;M01:P0:SzhDK5lL8Ag=;+zfoz6uXSomGbIboragXTjFtH6L
+ +OvEtw0WB4u15Nx8ngcOM87mFRKyLQpRmWYnHRcxKzxf0iInos9QYEjL2Tlyz8s1SzKs8cw1z
+ rHYAvaup8bNxQ0QjcTGv10zG6M8exXTSJa6jlfIHnPz0iUSkDtm2vhjBAzJq+9RAurStriY4+
+ 3MYmd2dp5nMF6Yf7WTvtogGDLr0/9MbAVVoa2iHKFHln0bniCoYk9ALIhFFKVj/wC/TddjUwv
+ gYnp/n/lGjAt05jzw/UfPAHR9brnP4a3eHfJlFjEBYznkWLqSIVIZI60WhSD9FaehsxtEVz08
+ Y2Z75ougWbyRCgx4WtDIjIkWDQTSwKACWmOnd01AsKcNoIS9gg1C2giNJ+auARRJ+W4yl7Mgw
+ GTNbcYU9CjYnuL3QR9+zAQcCaNWiQF4Bz46jF9Et+x1UH1ZX/YhRdaueGya81OIl3dFZQbkiC
+ jced/kLmZPnvQpMcQnZPNUV/5i6C7QsuVnfw51yYPVkd8Vi/6mBnGWWTge3BHOv2J/lz9Ap/W
+ Jsg1XDXaYMDqvwP2wROgKibgmA6+/juxwQ8oIjk1hKXUu7r1d/uJRYLkk9QlSTf6Mw0uyetrr
+ C+yU5EnWm6laJjLjO80YmD252+9h4E6YxwnNBjAUuQuPAgvFkaCpSIBak+ElDCzF3HZ6NO1b3
+ pn7q3RISI1nM/ik3SaNpKz82xFBwSg0FFLTEk/KeSlu7TH9AgYULFl1FOoKMi9eReM7x3KRtv
+ 9dA9pK4OSo5D6dd69PI+OsbMPajj1Ekaor62qAdUVXZqNvFYUYmJIOA5ZX8axWaA+GhuQ6aNb
+ HXukJM/Ek8n2OD4Fqt+kE2pg==
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,71 +90,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Can somebody help me to understand and reproduce CI errors?  I can run
-locally 'make check' which runs a bunch of local builds with binman and all
-of them are fine.
-It looks like some dependency is missing or addition 'git config --global
---add safe.directory <path>/net/lwip/lwip-external'  is required for the
-submodule directory.
+Hi
 
-https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/17916
+Thank you kever for review.
 
-Building current source for 1 boards (0 threads, 24 jobs per thread)
-   sandbox:  +   sandbox_spl
-+fatal: not a git repository (or any of the parent directories): .git
-+make[1]: *** [Makefile:1875: initsubmodules] Error 128
-+make: *** [Makefile:177: sub-make] Error 2
-    0    0    1 /1              sandbox_spl
-Completed: 1 total built, 1 newly), duration 0:00:06, rate 0.17
-Traceback (most recent call last):
-  File "/builds/u-boot/custodians/u-boot-tpm/./tools/binman/binman", line
-45, in <module>
-    from binman import cmdline
-  File "/builds/u-boot/custodians/u-boot-tpm/tools/binman/cmdline.py", line
-11, in <module>
-    from binman import state
-  File "/builds/u-boot/custodians/u-boot-tpm/tools/binman/state.py", line
-14, in <module>
-    from dtoc import fdt
-  File "/builds/u-boot/custodians/u-boot-tpm/tools/dtoc/fdt.py", line 14,
-in <module>
-    from libfdt import QUIET_NOTFOUND
-ImportError: cannot import name 'QUIET_NOTFOUND' from 'libfdt' (unknown
-location)
+Tom can you take this and the depencies into next release (2024-01)?
 
-On Tue, 26 Sept 2023 at 20:19, Tom Rini <trini@konsulko.com> wrote:
+regards Frank
 
-> On Tue, Sep 26, 2023 at 08:16:35AM -0600, Simon Glass wrote:
-> > Hi Tom,
+
+> Gesendet: Mittwoch, 27. September 2023 um 04:42 Uhr
+> Von: "Kever Yang" <kever.yang@rock-chips.com>
+> An: "Frank Wunderlich" <linux@fw-web.de>, u-boot@lists.denx.de
+> Cc: "Frank Wunderlich" <frank-w@public-files.de>, "Simon Glass" <sjg@chr=
+omium.org>, "Philipp Tomsich" <philipp.tomsich@vrull.eu>, "Joseph Chen" <c=
+henjh@rock-chips.com>, "Jonas Karlman" <jonas@kwiboo.se>
+> Betreff: Re: [PATCH v5] board: rockchip: Add Bananapi R2Pro Board
+>
+>
+> On 2023/9/21 02:40, Frank Wunderlich wrote:
+> > From: Frank Wunderlich <frank-w@public-files.de>
 > >
-> > On Tue, 26 Sept 2023 at 07:41, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Sep 26, 2023 at 05:37:25AM -0600, Simon Glass wrote:
-> > > > Hi Maxim,
-> > > >
-> > > > On Tue, 26 Sept 2023 at 03:43, Maxim Uvarov <maxim.uvarov@linaro.org>
-> wrote:
-> > > > >
-> > > > > add external lwIP library as a git submodule.
-> > > > > Use STABLE-2_2_0_RELEASE tag.
-> > > > >
-> > > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> > > > > ---
-> > > > >  .gitmodules            | 3 +++
-> > > > >  net/lwip/lwip-external | 1 +
-> > > > >  2 files changed, 4 insertions(+)
-> > > > >  create mode 100644 .gitmodules
-> > > > >  create mode 160000 net/lwip/lwip-external
-> > >
-> > > Do you have comments on the rest of the series?
+> > Add Bananapi R2 Pro board.
 > >
-> > Not yet, but I should be able to review the rest in a few days. My
-> > main comments before were minor - return codes, tests, error checking.
+> > tested:
+> > - sdcard
+> > - both front usb-ports
+> > - sata
+> > - wan-port
+> >
+> > lan-ports are connected to mt7531 switch where driver needs to be
+> > separated from mtk ethernet-driver.
+> >
+> > Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 >
-> OK, thanks.  I don't know how exactly I want to proceed with the core of
-> lwip itself, but that doesn't block reviewing and testing the rest of it
-> as we'll move forward with it one way or another.
->
-> --
-> Tom
->
+> Thanks,
+> - Kever
+> > ---
+> > because iodomain is different to evb and now iodomain driver is sent a=
+s
+> > patch we need to separate between EVB and R2Pro else board can be bric=
+ked.
+> >
+> > ethernet support depends on these series from jonas:
+> >
+> > rockchip: Port IO-domain driver for RK3568 from linux
+> > https://patchwork.ozlabs.org/project/uboot/cover/20230821223020.391862=
+0-1-jonas@kwiboo.se/
+> > and
+> > rockchip: Add GMAC support for RK3568 and RK3588
+> > https://patchwork.ozlabs.org/project/uboot/cover/20230807000817.170101=
+2-1-jonas@kwiboo.se/
+
