@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACF1E784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:33:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17ACCE784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:33:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1F6587442;
-	Mon,  2 Oct 2023 03:18:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F8DC87269;
+	Mon,  2 Oct 2023 03:18:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bipOWjAs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="K83X2xud";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 026F687135; Mon,  2 Oct 2023 03:18:03 +0200 (CEST)
-Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
- [IPv6:2607:f8b0:4864:20::22d])
+ id 9986D870EA; Mon,  2 Oct 2023 03:18:02 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C25487241
+ by phobos.denx.de (Postfix) with ESMTPS id 7054B87243
  for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:17:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22d.google.com with SMTP id
- 5614622812f47-3ae1916ba69so8922657b6e.2
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-79fa2125e19so506084139f.0
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:17:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209372; x=1696814172; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209383; x=1696814183; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=spYLSsXkWbQLVCs1v7fwmZoRkg58aBXWIr65dQdWTxQ=;
- b=bipOWjAswZn1lnpyJ90eoSMgY7i8/xAxJkw+erioFYPsFp7Hx827jrz4lsKmX4ACwI
- PjvazXFJIAdSKOi4VRBwJt3X0V9Fv9dmy2O5Kf4MSt+Niv2WoKWrNMdw2tyoCVQvF58a
- 5hcm2VCqbZQegr6H8eIipk6YJXMbLMjwWkL3U=
+ bh=MMZt3NAo41qXyBI7M75GvdM9AhkhHzy9jzVE4YbMLmU=;
+ b=K83X2xud1vV+tY+8ePINOoBq0yKi67CXesaHP7HykWwFaXZjw7CWsK+nMQZGC6eRzG
+ 4P3dkO77ehiaPtgvijMMLKxI+lstVaM9NFoaB6h7nJV6WxiYEktzpYzMzGlF/TyAIPvh
+ /6hYdydGLfrvSXqjLd+5+tswI5KinRNjaetGo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209372; x=1696814172;
+ d=1e100.net; s=20230601; t=1696209383; x=1696814183;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=spYLSsXkWbQLVCs1v7fwmZoRkg58aBXWIr65dQdWTxQ=;
- b=JXkfbUENXJ4/JjbgkfQM0S/1Caq+Ypq6LPnupXUo7midQaAe8rySMq5ESSLnA9E4TG
- 3+juJNHk5WDQ8fYT5kwd2tbcQ4YqnA1zDgN4TdrU5AZoqSRrgqC7iPW/mvAV6Lfh5vjC
- 8UdDPelQtf+tHgDiJX0HRG7lg4bUP/AeugIy559jAPJzDFWyLDBo813W4Vuxr2OY6GGz
- vd/dA6QC1Z+T73nM4Ex0mqlB2z1hijYgV0S72yz2daw8wIRTd3t1Fu55IackG345E3SO
- 5ioqrw2g8QcvCYXa83IrwcoTXC0nZDuklPZt0c/wGMW+lBP8Zs7dbr1AaEnFPJw+GOPr
- uuJw==
-X-Gm-Message-State: AOJu0YwTK4zaAVi12fsGJeZZsTDPlyh0YmVIV/9Mx7KjQWLE6no42ZZq
- 9eriQ+q3UY/n17ZGRt1+Q/xVW94ruQr/8fOjhvU=
-X-Google-Smtp-Source: AGHT+IFsS0hAsZDZylZwLpTp+MqC4faIhUcfNqd+x1AS/3NV5DY4c6U8xEYrs9tQoRPuwZ8INOOHEA==
-X-Received: by 2002:a05:6808:1a13:b0:3a7:6213:6899 with SMTP id
- bk19-20020a0568081a1300b003a762136899mr13345558oib.24.1696209372435; 
- Sun, 01 Oct 2023 18:16:12 -0700 (PDT)
+ bh=MMZt3NAo41qXyBI7M75GvdM9AhkhHzy9jzVE4YbMLmU=;
+ b=KkJ2GDh6XqtG3lwJv2tZudIYqUXsT1qqmyV+zgDCLRdXztXdkD/0aLs2B8+YYXeAQ9
+ 5hkK3HwsQ9C1tfwepXAhuPG+Up6lFE2zptLBHpBa2OH1vfnTnUWQ6KyIgw8wUa8pY5Q2
+ THNum7zMKOLdk2UPkDqv1uPAyJ/LlNT6vIn8hA6Rk7cOWyh34321HHxaE5zXF5sFlOGH
+ TadzTZr8mMGc+DZTEAHb8F6G35dxxhIWdu6Cz6eC9KJR5LlmInIIUwl7U7SXRivumb9M
+ 1KY19g89geCvnmnxwMgnIX042I1ttEpO1Tyi3XbjjsdNGqLUazn5TcXXC1AZ3LLCtU6q
+ AWZg==
+X-Gm-Message-State: AOJu0YxnAYRmYh1tapSKs7fqGaQjGLXXMbV9mJNqCEq87spITH5swfMJ
+ 0r3xvayHwG+ktMBQFbCXIahCryyPzowMQp2ElKE=
+X-Google-Smtp-Source: AGHT+IGTM8hz+9pJrIKDmFkL6IjoQIFd+8iQQ4yIlmI6VS99bTBTrQn4PHbpoUvqoloSHv1aTmvZSA==
+X-Received: by 2002:a05:6e02:1112:b0:351:80c:bc29 with SMTP id
+ u18-20020a056e02111200b00351080cbc29mr10109521ilk.17.1696209383347; 
+ Sun, 01 Oct 2023 18:16:23 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- l26-20020a02a89a000000b0041d859c5721sm6819619jam.64.2023.10.01.18.16.11
+ l26-20020a02a89a000000b0041d859c5721sm6819619jam.64.2023.10.01.18.16.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:16:11 -0700 (PDT)
+ Sun, 01 Oct 2023 18:16:23 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Dzmitry Sankouski <dsankouski@gmail.com>
-Subject: [PATCH 09/34] test: font: Add dependencies on fonts
-Date: Sun,  1 Oct 2023 19:15:19 -0600
-Message-ID: <20231002011553.463514-10-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH 19/34] expo: Set the initial next_id to 1
+Date: Sun,  1 Oct 2023 19:15:29 -0600
+Message-ID: <20231002011553.463514-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011553.463514-1-sjg@chromium.org>
 References: <20231002011553.463514-1-sjg@chromium.org>
@@ -89,38 +88,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The font test needs two fonts. If one is not available, skip out early,
-to avoid an error.
+If expo_set_dynamic_start() is never called, the first scene created
+will have an ID of 0, which is invalid. Correct this by setting a
+default value.
+
+Add a test to check this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- test/cmd/font.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ boot/expo.c      |  1 +
+ test/boot/expo.c | 23 +++++++++++++++++++++--
+ 2 files changed, 22 insertions(+), 2 deletions(-)
 
-diff --git a/test/cmd/font.c b/test/cmd/font.c
-index 40682e5ce495..1fe05c1ead51 100644
---- a/test/cmd/font.c
-+++ b/test/cmd/font.c
-@@ -30,13 +30,17 @@ static int font_test_base(struct unit_test_state *uts)
- 	ut_assertok(console_record_reset_enable());
- 	ut_assertok(run_command("font list", 0));
- 	ut_assert_nextline("nimbus_sans_l_regular");
--	ut_assert_nextline("cantoraone_regular");
-+	if (IS_ENABLED(CONFIG_CONSOLE_TRUETYPE_CANTORAONE))
-+		ut_assert_nextline("cantoraone_regular");
- 	ut_assertok(ut_check_console_end(uts));
+diff --git a/boot/expo.c b/boot/expo.c
+index d030820e77ca..20ca0b9bfa0a 100644
+--- a/boot/expo.c
++++ b/boot/expo.c
+@@ -30,6 +30,7 @@ int expo_new(const char *name, void *priv, struct expo **expp)
+ 	exp->priv = priv;
+ 	INIT_LIST_HEAD(&exp->scene_head);
+ 	INIT_LIST_HEAD(&exp->str_head);
++	exp->next_id = 1;
  
- 	ut_assertok(vidconsole_get_font_size(dev, &name, &size));
- 	ut_asserteq_str("nimbus_sans_l_regular", name);
- 	ut_asserteq(18, size);
+ 	*expp = exp;
  
-+	if (!IS_ENABLED(CONFIG_CONSOLE_TRUETYPE_CANTORAONE))
-+		return 0;
+diff --git a/test/boot/expo.c b/test/boot/expo.c
+index 714fdfa415d1..8a84cbc71032 100644
+--- a/test/boot/expo.c
++++ b/test/boot/expo.c
+@@ -92,7 +92,7 @@ static int expo_base(struct unit_test_state *uts)
+ 	*name = '\0';
+ 	ut_assertnonnull(exp);
+ 	ut_asserteq(0, exp->scene_id);
+-	ut_asserteq(0, exp->next_id);
++	ut_asserteq(1, exp->next_id);
+ 
+ 	/* Make sure the name was allocated */
+ 	ut_assertnonnull(exp->name);
+@@ -131,7 +131,7 @@ static int expo_scene(struct unit_test_state *uts)
+ 	ut_assertok(expo_new(EXPO_NAME, NULL, &exp));
+ 
+ 	scn = NULL;
+-	ut_asserteq(0, exp->next_id);
++	ut_asserteq(1, exp->next_id);
+ 	strcpy(name, SCENE_NAME1);
+ 	id = scene_new(exp, name, SCENE1, &scn);
+ 	*name = '\0';
+@@ -168,6 +168,25 @@ static int expo_scene(struct unit_test_state *uts)
+ }
+ BOOTSTD_TEST(expo_scene, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
+ 
++/* Check creating a scene with no ID */
++static int expo_scene_no_id(struct unit_test_state *uts)
++{
++	struct scene *scn;
++	struct expo *exp;
++	char name[100];
++	int id;
 +
- 	max_metrics = 1;
- 	if (IS_ENABLED(CONFIG_CONSOLE_TRUETYPE))
- 		max_metrics = IF_ENABLED_INT(CONFIG_CONSOLE_TRUETYPE,
++	ut_assertok(expo_new(EXPO_NAME, NULL, &exp));
++	ut_asserteq(1, exp->next_id);
++
++	strcpy(name, SCENE_NAME1);
++	id = scene_new(exp, SCENE_NAME1, 0, &scn);
++	ut_asserteq(1, scn->id);
++
++	return 0;
++}
++BOOTSTD_TEST(expo_scene_no_id, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
++
+ /* Check creating a scene with objects */
+ static int expo_object(struct unit_test_state *uts)
+ {
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
