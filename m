@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8B94E784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:27:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB61E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:27:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E874A871AB;
-	Mon,  2 Oct 2023 03:15:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A3B5F871B1;
+	Mon,  2 Oct 2023 03:15:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LNnDY3DC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ftk2JqSz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3727870FF; Mon,  2 Oct 2023 03:14:59 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 43B7B8710C; Mon,  2 Oct 2023 03:14:48 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D732187124
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 476E4870DC
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3513fa06bafso39323585ab.3
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:19 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-35273f62ca3so2591245ab.1
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209258; x=1696814058; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209257; x=1696814057; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+H1F+VvjYK6GHbXPvFmYpqGXQkJRO8qv6qZlaICxpgM=;
- b=LNnDY3DCE6wbUBRwmv4ATk8wCy9jdbXFVgeOQB+We+BLE3E1IA/bGl2OJMuxA5melq
- a3kWPo6Qfj7hQhjoF/TM89WW4FIJkFLJITAn7ER8v53yhPXWEjouvOhodS8JSwZVByB/
- 4RBztwhd7iZozZVFJ7XnYE8A3tVly07SebQpM=
+ bh=Qz9D6EOP0yM840Y955UcgC9XCl13yIsAQh5U9SVRnpM=;
+ b=Ftk2JqSzdEwZIJB2tZAHTVqUM6npzIzMfIyXT2w5CHY2uIA5GO6aOPo1vfbLqIpP3n
+ ZowNH/XWPSZPZJMl4mhdSp1sYy3GeUsWPkSTwRjQrfiajvxFZNGsjuxiEE1ADaBDd7yh
+ JHZGlvlXfoT+ng0CImOqn5p+RT/NC0BnGjK04=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209258; x=1696814058;
+ d=1e100.net; s=20230601; t=1696209257; x=1696814057;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+H1F+VvjYK6GHbXPvFmYpqGXQkJRO8qv6qZlaICxpgM=;
- b=tSylh4P2PaU9hbBI0X9oh/gKOAnk7iB63C8PdHGHF4V1B0veD9zYQndGexYyaBj7Su
- DaSWicTfwOw/aOP/A4nbV17l2k9k8hrIBwEvwn1uSOx4+i5YRZs1HhN0otwPrnORd6tk
- R2sEmN1Pd5lbx6+y46S8Hvd0msbhry/uQYQpzfAKHE7HobBEtZ85q1Rv4xZZDFmiaV2z
- 9Nl03iVOKM9w0wNkeAaIt295bWwV2lQuQyQYsA9m1bG2tWuLuTN51GNqrlJCAYdvsZ9A
- HmQk46kt0+10vGoGtf5/5vXO+JRz687+GnJXfAZ5ZBAdpo4VsFoun3SvNTtHGy8opReH
- cSzw==
-X-Gm-Message-State: AOJu0Yxxcww/kd5U3LJchfbhgDHu9miwuB8zQXyoNQhYOcXGxCIPT66T
- FXS3ICDfnqALzWI3K9s9FR59nBEBdPfh9nuWcjI=
-X-Google-Smtp-Source: AGHT+IEz2UCNV2oVMUCq33qII5rsiExuPXX47OFOhDnE6u1dJcwefbH/g/zirTTbMFUhMBqb8kJ0TQ==
-X-Received: by 2002:a05:6e02:12e3:b0:351:4bf9:5b02 with SMTP id
- l3-20020a056e0212e300b003514bf95b02mr13445100iln.7.1696209258425; 
- Sun, 01 Oct 2023 18:14:18 -0700 (PDT)
+ bh=Qz9D6EOP0yM840Y955UcgC9XCl13yIsAQh5U9SVRnpM=;
+ b=YuttpJ85vZy36/SEuaQNyA5vkMUp+jYaJLWC1HeUeO+B1Kh5V6ySLje7mBzebpdF2z
+ LQb59VHJ0P1vFEOFvVq2hPtDr7kIXg49OrsPyzsuzaUGZe8qehtHYgqh7zOv/LHqEWQu
+ JVuKWba8fC6ul3uq/OGHXk4Vah9wPDq/uolfBJDgKa258Aik1H/2E9zSnNeYGx/gjlwm
+ CYU8bTQQ4F4RXe3BiNA3pXlg7j9AN8Fdd5uf/EO9PMprq95TKGc304YwqEGi77zLNl4Z
+ 58pP+QWwerv8o7pA9140zzZvMCKg+eSX5ZA62MkMyKIWBDcGF+NLYIVH4/prXkZ8dVPX
+ GhZQ==
+X-Gm-Message-State: AOJu0YwV++OJcPCh8odiYDI+2S4uSXImMa1Ip+5Ijnq7R/GxZlSX+P67
+ xlwvSivUH75940FkbCw62HGX4utNzFSSrlXH9GI=
+X-Google-Smtp-Source: AGHT+IGhGaPN4WTVzOqDo3WNYmp0rwyX/Zn7kiB/VunEQtIz3G7G2inP1hXYjL3kOQ0X+KyQGgPlsw==
+X-Received: by 2002:a05:6e02:1c02:b0:34f:7b1e:c568 with SMTP id
+ l2-20020a056e021c0200b0034f7b1ec568mr9567720ilh.3.1696209256766; 
+ Sun, 01 Oct 2023 18:14:16 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.17
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:14:18 -0700 (PDT)
+ Sun, 01 Oct 2023 18:14:16 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 30/36] expo: Plumb in textlines to a scene
-Date: Sun,  1 Oct 2023 19:13:34 -0600
-Message-ID: <20231002011349.461284-31-sjg@chromium.org>
+Subject: [PATCH v2 28/36] expo: Add basic support for textline objects
+Date: Sun,  1 Oct 2023 19:13:32 -0600
+Message-ID: <20231002011349.461284-29-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
 References: <20231002011349.461284-1-sjg@chromium.org>
@@ -88,254 +88,341 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide an implementation for textlines in the scene code, so that they
-are displayed correctly. Provide a way to have a border around the
-textline, with the internal part being the same colour as the
-background. This looks more natural.
+A textline is a line of text which can be edited by the user. It has a
+maximum length (in chracters) but otherwise there are no restrictions.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- boot/scene.c          | 56 +++++++++++++++++++++++++++++++++++++++--
- boot/scene_internal.h | 58 +++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 112 insertions(+), 2 deletions(-)
+ boot/Makefile         |   3 +-
+ boot/scene_textline.c | 234 ++++++++++++++++++++++++++++++++++++++++++
+ include/expo.h        |  36 +++++++
+ 3 files changed, 272 insertions(+), 1 deletion(-)
+ create mode 100644 boot/scene_textline.c
 
-diff --git a/boot/scene.c b/boot/scene.c
-index 6c7c926f7c93..d4dfb49ada15 100644
---- a/boot/scene.c
-+++ b/boot/scene.c
-@@ -280,6 +280,7 @@ int scene_obj_get_hw(struct scene *scn, uint id, int *widthp)
- 	switch (obj->type) {
- 	case SCENEOBJT_NONE:
- 	case SCENEOBJT_MENU:
-+	case SCENEOBJT_TEXTLINE:
- 		break;
- 	case SCENEOBJT_IMAGE: {
- 		struct scene_obj_img *img = (struct scene_obj_img *)obj;
-@@ -328,8 +329,10 @@ int scene_obj_get_hw(struct scene *scn, uint id, int *widthp)
-  * scene_render_background() - Render the background for an object
-  *
-  * @obj: Object to render
-+ * @box_only: true to show a box around the object, but keep the normal
-+ * background colour inside
-  */
--static void scene_render_background(struct scene_obj *obj)
-+static void scene_render_background(struct scene_obj *obj, bool box_only)
- {
- 	struct expo *exp = obj->scene->expo;
- 	const struct expo_theme *theme = &exp->theme;
-@@ -360,6 +363,11 @@ static void scene_render_background(struct scene_obj *obj)
- 			label_bbox.x1 + inset, label_bbox.y1 + inset,
- 			vid_priv->colour_fg);
- 	vidconsole_pop_colour(cons, &old);
-+	if (box_only) {
-+		video_fill_part(dev, label_bbox.x0, label_bbox.y0,
-+				label_bbox.x1, label_bbox.y1,
-+				vid_priv->colour_bg);
+diff --git a/boot/Makefile b/boot/Makefile
+index 6ce983b83fa4..ad608598d298 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -56,7 +56,8 @@ ifdef CONFIG_SPL_BUILD
+ obj-$(CONFIG_SPL_LOAD_FIT) += common_fit.o
+ endif
+ 
+-obj-$(CONFIG_$(SPL_TPL_)EXPO) += expo.o scene.o scene_menu.o expo_build.o
++obj-$(CONFIG_$(SPL_TPL_)EXPO) += expo.o scene.o expo_build.o
++obj-$(CONFIG_$(SPL_TPL_)EXPO) += scene_menu.o scene_textline.o
+ 
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE) += vbe.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_VBE_REQUEST) += vbe_request.o
+diff --git a/boot/scene_textline.c b/boot/scene_textline.c
+new file mode 100644
+index 000000000000..2caa81ee1582
+--- /dev/null
++++ b/boot/scene_textline.c
+@@ -0,0 +1,234 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Implementation of a menu in a scene
++ *
++ * Copyright 2023 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ */
++
++#define LOG_CATEGORY	LOGC_EXPO
++
++#include <common.h>
++#include <expo.h>
++#include <menu.h>
++#include <video_console.h>
++#include "scene_internal.h"
++
++int scene_textline(struct scene *scn, const char *name, uint id, uint max_chars,
++		   struct scene_obj_textline **tlinep)
++{
++	struct scene_obj_textline *tline;
++	char *buf;
++	int ret;
++
++	if (max_chars >= EXPO_MAX_CHARS)
++		return log_msg_ret("chr", -E2BIG);
++
++	ret = scene_obj_add(scn, name, id, SCENEOBJT_TEXTLINE,
++			    sizeof(struct scene_obj_textline),
++			    (struct scene_obj **)&tline);
++	if (ret < 0)
++		return log_msg_ret("obj", -ENOMEM);
++	abuf_init(&tline->buf);
++	if (!abuf_realloc(&tline->buf, max_chars + 1))
++		return log_msg_ret("buf", -ENOMEM);
++	buf = abuf_data(&tline->buf);
++	*buf = '\0';
++	tline->pos = max_chars;
++	tline->max_chars = max_chars;
++
++	if (tlinep)
++		*tlinep = tline;
++
++	return tline->obj.id;
++}
++
++void scene_textline_calc_bbox(struct scene_obj_textline *tline,
++			      struct vidconsole_bbox *bbox,
++			      struct vidconsole_bbox *edit_bbox)
++{
++	const struct expo_theme *theme = &tline->obj.scene->expo->theme;
++
++	bbox->valid = false;
++	scene_bbox_union(tline->obj.scene, tline->label_id, 0, bbox);
++	scene_bbox_union(tline->obj.scene, tline->edit_id, 0, bbox);
++
++	edit_bbox->valid = false;
++	scene_bbox_union(tline->obj.scene, tline->edit_id, theme->menu_inset,
++			 edit_bbox);
++}
++
++int scene_textline_calc_dims(struct scene_obj_textline *tline)
++{
++	struct scene *scn = tline->obj.scene;
++	struct vidconsole_bbox bbox;
++	struct scene_obj_txt *txt;
++	int ret;
++
++	txt = scene_obj_find(scn, tline->edit_id, SCENEOBJT_NONE);
++	if (!txt)
++		return log_msg_ret("dim", -ENOENT);
++
++	ret = vidconsole_nominal(scn->expo->cons, txt->font_name,
++				 txt->font_size, tline->max_chars, &bbox);
++	if (ret)
++		return log_msg_ret("nom", ret);
++
++	if (bbox.valid) {
++		tline->obj.dim.w = bbox.x1 - bbox.x0;
++		tline->obj.dim.h = bbox.y1 - bbox.y0;
++
++		scene_obj_set_size(scn, tline->edit_id, tline->obj.dim.w,
++				   tline->obj.dim.h);
 +	}
- }
++
++	return 0;
++}
++
++int scene_textline_arrange(struct scene *scn, struct scene_obj_textline *tline)
++{
++	const bool open = tline->obj.flags & SCENEOF_OPEN;
++	bool point;
++	int x, y;
++	int ret;
++
++	x = tline->obj.dim.x;
++	y = tline->obj.dim.y;
++	if (tline->label_id) {
++		ret = scene_obj_set_pos(scn, tline->label_id, tline->obj.dim.x,
++					y);
++		if (ret < 0)
++			return log_msg_ret("tit", ret);
++
++		ret = scene_obj_set_pos(scn, tline->edit_id,
++					tline->obj.dim.x + 200, y);
++		if (ret < 0)
++			return log_msg_ret("tit", ret);
++
++		ret = scene_obj_get_hw(scn, tline->label_id, NULL);
++		if (ret < 0)
++			return log_msg_ret("hei", ret);
++
++		y += ret * 2;
++	}
++
++	point = scn->highlight_id == tline->obj.id;
++	point &= !open;
++	scene_obj_flag_clrset(scn, tline->edit_id, SCENEOF_POINT,
++			      point ? SCENEOF_POINT : 0);
++
++	return 0;
++}
++
++int scene_textline_send_key(struct scene *scn, struct scene_obj_textline *tline,
++			    int key, struct expo_action *event)
++{
++	const bool open = tline->obj.flags & SCENEOF_OPEN;
++
++	log_debug("key=%d\n", key);
++	switch (key) {
++	case BKEY_QUIT:
++		if (open) {
++			event->type = EXPOACT_CLOSE;
++			event->select.id = tline->obj.id;
++
++			/* Copy the backup text from the scene buffer */
++			memcpy(abuf_data(&tline->buf), abuf_data(&scn->buf),
++			       abuf_size(&scn->buf));
++		} else {
++			event->type = EXPOACT_QUIT;
++			log_debug("menu quit\n");
++		}
++		break;
++	case BKEY_SELECT:
++		if (!open)
++			break;
++		event->type = EXPOACT_CLOSE;
++		event->select.id = tline->obj.id;
++		key = '\n';
++		fallthrough;
++	default: {
++		struct udevice *cons = scn->expo->cons;
++		int ret;
++
++		ret = vidconsole_entry_restore(cons, &scn->entry_save);
++		if (ret)
++			return log_msg_ret("sav", ret);
++		ret = cread_line_process_ch(&scn->cls, key);
++		ret = vidconsole_entry_save(cons, &scn->entry_save);
++		if (ret)
++			return log_msg_ret("sav", ret);
++		break;
++	}
++	}
++
++	return 0;
++}
++
++int scene_textline_render_deps(struct scene *scn,
++			       struct scene_obj_textline *tline)
++{
++	const bool open = tline->obj.flags & SCENEOF_OPEN;
++	struct udevice *cons = scn->expo->cons;
++	struct scene_obj_txt *txt;
++	int ret;
++
++	scene_render_deps(scn, tline->label_id);
++	scene_render_deps(scn, tline->edit_id);
++
++	/* show the vidconsole cursor if open */
++	if (open) {
++		/* get the position within the field */
++		txt = scene_obj_find(scn, tline->edit_id, SCENEOBJT_NONE);
++		if (!txt)
++			return log_msg_ret("cur", -ENOENT);
++
++		if (txt->font_name || txt->font_size) {
++			ret = vidconsole_select_font(cons,
++						     txt->font_name,
++						     txt->font_size);
++		} else {
++			ret = vidconsole_select_font(cons, NULL, 0);
++		}
++
++		ret = vidconsole_entry_restore(cons, &scn->entry_save);
++		if (ret)
++			return log_msg_ret("sav", ret);
++
++		vidconsole_set_cursor_visible(cons, true, txt->obj.dim.x,
++					      txt->obj.dim.y, scn->cls.num);
++	}
++
++	return 0;
++}
++
++int scene_textline_open(struct scene *scn, struct scene_obj_textline *tline)
++{
++	struct udevice *cons = scn->expo->cons;
++	struct scene_obj_txt *txt;
++	int ret;
++
++	/* Copy the text into the scene buffer in case the edit is cancelled */
++	memcpy(abuf_data(&scn->buf), abuf_data(&tline->buf),
++	       abuf_size(&scn->buf));
++
++	/* get the position of the editable */
++	txt = scene_obj_find(scn, tline->edit_id, SCENEOBJT_NONE);
++	if (!txt)
++		return log_msg_ret("cur", -ENOENT);
++
++	vidconsole_set_cursor_pos(cons, txt->obj.dim.x, txt->obj.dim.y);
++	vidconsole_entry_start(cons);
++	cli_cread_init(&scn->cls, abuf_data(&tline->buf), tline->max_chars);
++	scn->cls.insert = true;
++	ret = vidconsole_entry_save(cons, &scn->entry_save);
++	if (ret)
++		return log_msg_ret("sav", ret);
++
++	return 0;
++}
++
++int scene_textline_close(struct scene *scn, struct scene_obj_textline *tline)
++{
++	return 0;
++}
+diff --git a/include/expo.h b/include/expo.h
+index c470f5be34d3..3260703a7a01 100644
+--- a/include/expo.h
++++ b/include/expo.h
+@@ -150,6 +150,7 @@ struct scene {
+  * @SCENEOBJT_IMAGE: Image data to render
+  * @SCENEOBJT_TEXT: Text line to render
+  * @SCENEOBJT_MENU: Menu containing items the user can select
++ * @SCENEOBJT_TEXTLINE: Line of text the user can edit
+  */
+ enum scene_obj_t {
+ 	SCENEOBJT_NONE		= 0,
+@@ -158,6 +159,7 @@ enum scene_obj_t {
+ 
+ 	/* types from here on can be highlighted */
+ 	SCENEOBJT_MENU,
++	SCENEOBJT_TEXTLINE,
+ };
  
  /**
-@@ -445,7 +453,7 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
- 				return -ENOTSUPP;
- 
- 			/* draw a background behind the menu items */
--			scene_render_background(obj);
-+			scene_render_background(obj, false);
- 		}
- 		/*
- 		 * With a vidconsole, the text and item pointer are rendered as
-@@ -461,6 +469,10 @@ static int scene_obj_render(struct scene_obj *obj, bool text_mode)
- 
- 		break;
- 	}
-+	case SCENEOBJT_TEXTLINE:
-+		if (obj->flags & SCENEOF_OPEN)
-+			scene_render_background(obj, true);
-+		break;
- 	}
- 
- 	return 0;
-@@ -486,6 +498,15 @@ int scene_arrange(struct scene *scn)
- 				return log_msg_ret("arr", ret);
- 			break;
- 		}
-+		case SCENEOBJT_TEXTLINE: {
-+			struct scene_obj_textline *tline;
-+
-+			tline = (struct scene_obj_textline *)obj,
-+			ret = scene_textline_arrange(scn, tline);
-+			if (ret)
-+				return log_msg_ret("arr", ret);
-+			break;
-+		}
- 		}
- 	}
- 
-@@ -517,6 +538,10 @@ int scene_render_deps(struct scene *scn, uint id)
- 			scene_menu_render_deps(scn,
- 					       (struct scene_obj_menu *)obj);
- 			break;
-+		case SCENEOBJT_TEXTLINE:
-+			scene_textline_render_deps(scn,
-+					(struct scene_obj_textline *)obj);
-+			break;
- 		}
- 	}
- 
-@@ -637,6 +662,15 @@ int scene_send_key(struct scene *scn, int key, struct expo_action *event)
- 				return log_msg_ret("key", ret);
- 			break;
- 		}
-+		case SCENEOBJT_TEXTLINE: {
-+			struct scene_obj_textline *tline;
-+
-+			tline = (struct scene_obj_textline *)obj,
-+			ret = scene_textline_send_key(scn, tline, key, event);
-+			if (ret)
-+				return log_msg_ret("key", ret);
-+			break;
-+		}
- 		}
- 		return 0;
- 	}
-@@ -670,6 +704,13 @@ int scene_obj_calc_bbox(struct scene_obj *obj, struct vidconsole_bbox *bbox,
- 		scene_menu_calc_bbox(menu, bbox, label_bbox);
- 		break;
- 	}
-+	case SCENEOBJT_TEXTLINE: {
-+		struct scene_obj_textline *tline;
-+
-+		tline = (struct scene_obj_textline *)obj;
-+		scene_textline_calc_bbox(tline, bbox, label_bbox);
-+		break;
-+	}
- 	}
- 
- 	return 0;
-@@ -708,6 +749,16 @@ int scene_calc_dims(struct scene *scn, bool do_menus)
- 			}
- 			break;
- 		}
-+		case SCENEOBJT_TEXTLINE: {
-+			struct scene_obj_textline *tline;
-+
-+			tline = (struct scene_obj_textline *)obj;
-+			ret = scene_textline_calc_dims(tline);
-+			if (ret)
-+				return log_msg_ret("men", ret);
-+
-+			break;
-+		}
- 		}
- 	}
- 
-@@ -727,6 +778,7 @@ int scene_apply_theme(struct scene *scn, struct expo_theme *theme)
- 		case SCENEOBJT_NONE:
- 		case SCENEOBJT_IMAGE:
- 		case SCENEOBJT_MENU:
-+		case SCENEOBJT_TEXTLINE:
- 			break;
- 		case SCENEOBJT_TEXT:
- 			scene_txt_set_font(scn, obj->id, NULL,
-diff --git a/boot/scene_internal.h b/boot/scene_internal.h
-index 7a84977646a0..e72202c98213 100644
---- a/boot/scene_internal.h
-+++ b/boot/scene_internal.h
-@@ -101,6 +101,18 @@ int scene_calc_dims(struct scene *scn, bool do_menus);
-  */
- int scene_menu_arrange(struct scene *scn, struct scene_obj_menu *menu);
+@@ -318,6 +320,27 @@ struct scene_menitem {
+ 	struct list_head sibling;
+ };
  
 +/**
-+ * scene_textline_arrange() - Set the position of things in a textline
++ * struct scene_obj_textline - information about a textline in a scene
 + *
-+ * This updates any items associated with a textline to make sure they are
-+ * positioned correctly relative to the textline.
++ * A textline has a prompt and a line of editable text
++ *
++ * @obj: Basic object information
++ * @label_id: ID of the label text, or 0 if none
++ * @edit_id: ID of the editable text
++ * @max_chars: Maximum number of characters allowed
++ * @buf: Text buffer containing current text
++ * @pos: Cursor position
++ */
++struct scene_obj_textline {
++	struct scene_obj obj;
++	uint label_id;
++	uint edit_id;
++	uint max_chars;
++	struct abuf buf;
++	uint pos;
++};
++
+ /**
+  * expo_new() - create a new expo
+  *
+@@ -552,6 +575,19 @@ int scene_txt_str(struct scene *scn, const char *name, uint id, uint str_id,
+ int scene_menu(struct scene *scn, const char *name, uint id,
+ 	       struct scene_obj_menu **menup);
+ 
++/**
++ *  scene_textline() - create a textline
 + *
 + * @scn: Scene to update
-+ * @tline: textline to process
-+ * Returns: 0 if OK, -ve on error
++ * @name: Name to use (this is allocated by this call)
++ * @id: ID to use for the new object (0 to allocate one)
++ * @max_chars: Maximum length of the textline in characters
++ * @tlinep: If non-NULL, returns the new object
++ * Returns: ID number for the object (typically @id), or -ve on error
 + */
-+int scene_textline_arrange(struct scene *scn, struct scene_obj_textline *tline);
++int scene_textline(struct scene *scn, const char *name, uint id, uint max_chars,
++		   struct scene_obj_textline **tlinep);
 +
  /**
-  * scene_apply_theme() - Apply a theme to a scene
-  *
-@@ -123,6 +135,18 @@ int scene_apply_theme(struct scene *scn, struct expo_theme *theme);
- int scene_menu_send_key(struct scene *scn, struct scene_obj_menu *menu, int key,
- 			struct expo_action *event);
- 
-+/**
-+ * scene_textline_send_key() - Send a key to a textline for processing
-+ *
-+ * @scn: Scene to use
-+ * @tline: textline to use
-+ * @key: Key code to send (KEY_...)
-+ * @event: Place to put any event which is generated by the key
-+ * Returns: 0 if OK (always)
-+ */
-+int scene_textline_send_key(struct scene *scn, struct scene_obj_textline *tline,
-+			    int key, struct expo_action *event);
-+
- /**
-  * scene_menu_destroy() - Destroy a menu in a scene
-  *
-@@ -185,6 +209,18 @@ int scene_render_deps(struct scene *scn, uint id);
-  */
- int scene_menu_render_deps(struct scene *scn, struct scene_obj_menu *menu);
- 
-+/**
-+ * scene_textline_render_deps() - Render a textline and its dependencies
-+ *
-+ * Renders the textline and all of its attached objects
-+ *
-+ * @scn: Scene to render
-+ * @tline: textline to render
-+ * Returns: 0 if OK, -ve on error
-+ */
-+int scene_textline_render_deps(struct scene *scn,
-+			       struct scene_obj_textline *tline);
-+
- /**
-  * scene_menu_calc_dims() - Calculate the dimensions of a menu
-  *
-@@ -255,6 +291,16 @@ struct scene_menitem *scene_menuitem_find_seq(const struct scene_obj_menu *menu,
- int scene_bbox_union(struct scene *scn, uint id, int inset,
- 		     struct vidconsole_bbox *bbox);
- 
-+/**
-+ * scene_textline_calc_dims() - Calculate the dimensions of a textline
-+ *
-+ * Updates the width and height of the textline based on its contents
-+ *
-+ * @tline: Textline to update
-+ * Returns 0 if OK, -ENOTSUPP if there is no graphical console
-+ */
-+int scene_textline_calc_dims(struct scene_obj_textline *tline);
-+
- /**
-  * scene_menu_calc_bbox() - Calculate bounding boxes for the menu
-  *
-@@ -267,6 +313,18 @@ void scene_menu_calc_bbox(struct scene_obj_menu *menu,
- 			  struct vidconsole_bbox *bbox,
- 			  struct vidconsole_bbox *label_bbox);
- 
-+/**
-+ * scene_textline_calc_bbox() - Calculate bounding box for the textline
-+ *
-+ * @textline: Menu to process
-+ * @bbox: Returns bounding box of textline including prompt
-+ * @edit_bbox: Returns bounding box of editable part
-+ * Return: 0 if OK, -ve on error
-+ */
-+void scene_textline_calc_bbox(struct scene_obj_textline *menu,
-+			      struct vidconsole_bbox *bbox,
-+			      struct vidconsole_bbox *label_bbox);
-+
- /**
-  * scene_obj_calc_bbox() - Calculate bounding boxes for an object
+  * scene_txt_set_font() - Set the font for an object
   *
 -- 
 2.42.0.582.g8ccd20d70d-goog
