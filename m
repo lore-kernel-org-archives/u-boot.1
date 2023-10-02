@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6597EE784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:32:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13A72E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:32:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75E958720E;
-	Mon,  2 Oct 2023 03:17:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 08E828722B;
+	Mon,  2 Oct 2023 03:17:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QF4ahdZe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QwlHYzNt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B512870F7; Mon,  2 Oct 2023 03:17:30 +0200 (CEST)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id 828BC870F7; Mon,  2 Oct 2023 03:17:30 +0200 (CEST)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55C9F8722C
+ by phobos.denx.de (Postfix) with ESMTPS id 543128722B
  for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:17:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-3515deaa7c1so23375005ab.2
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-79f915e5b47so569164439f.2
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:17:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209379; x=1696814179; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209381; x=1696814181; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J48Mn5wbsUERptAMWNXHdljGIN8T1gmxnN9MjhXeU2I=;
- b=QF4ahdZeNgDiGU7TyqQYxMB2QBirp50r0P5Lpl6GAc5sDfxnEhYm3tk2itoyXqBeff
- qKx1G6unBAkqCDOQqSjpO2spsQ9j/EVvlCT058+I3EugwFOSOK1TlE+wrCF+H0GB3AfB
- 8uCJjTEvTC34/5Z9xMYsRtnWClSJYAsG3qkdY=
+ bh=SDNfNlWmelUXYrbhlsuE5MbymORdCwHI6pICU8wVXLg=;
+ b=QwlHYzNtccr88S2tCX8ZAMiO2cT48kq7uT6tIUHLazEadR8vMzlM7US66fnmCtcon2
+ dWg9l+ppzJ7z5DBVxHIDs2vhpC5TMqdgX9wpPWkUyYmwr/xcaS+q2or0v8xP3Zsn+ZEC
+ u9rE6cZKJI8gthkzSUaJNsRWHn28Z/bNT+jjs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209379; x=1696814179;
+ d=1e100.net; s=20230601; t=1696209381; x=1696814181;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=J48Mn5wbsUERptAMWNXHdljGIN8T1gmxnN9MjhXeU2I=;
- b=bvY9n1luxDjFayCklHcxk6A3Vm+4B73uc10kkNqmo1l+5++WbQWxzHLTr1+WdjBBbZ
- K8eQKVlq5cxOo+bCpchW4mmNOUk63ZrKl748hgc3dWSbfG77TFjaYo50JDV2CCfSFOfT
- gbHRVchttXi6s3ROPjpuTxA8rzLIx6vpSNZRgkjdOCVZ5kWB/ZsACy7ryfxoXVqGrsdg
- xjCRR+fSgIg+ydqtd/UYm8Hwv5gr2VAQILD722yXLEomTgwvzPqZlvmqwyHEFGh4bHeP
- Nf3BVYJq5o1CiqUtvjCVj6o/ZlOUTITizl17RkQ9xQfLhU49wzik5DemoLgq38YQX95L
- dSdw==
-X-Gm-Message-State: AOJu0Yz571vfdd9Og6JEl8XHTBNux2oBFkfOrGcDnzqZ/WRWqw9w33eo
- X+feGj4s/k+CY5dNtB9d6pgwi8Q33aoMKVQKmo8=
-X-Google-Smtp-Source: AGHT+IH5zgM+f0SKgwfkkO5/+5LF6wX2Pff7hQSogzZCUTKDfAqhy+krDTKjpLXHvRZuKeqjIEr/SQ==
-X-Received: by 2002:a05:6e02:1112:b0:351:80c:bc29 with SMTP id
- u18-20020a056e02111200b00351080cbc29mr10109408ilk.17.1696209379272; 
- Sun, 01 Oct 2023 18:16:19 -0700 (PDT)
+ bh=SDNfNlWmelUXYrbhlsuE5MbymORdCwHI6pICU8wVXLg=;
+ b=i6U+fR8V6nxU4AklDZEGCKGnAj6rl+gaQAfeZewj0QV9PXMSDjPKXSQExZ+z2ZkdJH
+ 0miDhFqjiwyDyPWrau3zmoc2J0pN+KVZyK3Onjx/S9Op4ls6Yw3PkTbM2vXt1DCCvxkK
+ Xf5453hJzE/wpzJmm3/jEeaY6oq7tgBzCK8b8H/eHimqMgyQVBNphnnOEgdAWmVFj68e
+ ZEhFARyDFZcxJ9zRjIKcc8x9ubMIS5VSzkx6M+kdXxfVjVzdqPUO24jAzoDn1lWxjTYA
+ Nfsr75nmUF6p8eS4OpKdjr1VAQtID6b+spdksv5N4FZ441f2kD3mey4lRo4s1HyjjOjr
+ 5dIg==
+X-Gm-Message-State: AOJu0YxutW4yXoIxnDVRv51qeXivmvYU2fy8HvXUAeJBAFYUNYqWloyT
+ cyf5+fiJyji9fQ3OW/wihbHI1Dq6relXs4lpBWw=
+X-Google-Smtp-Source: AGHT+IElLEvB5NRwxf1Q4n0KjuJ3jaAjmYIF6tAerpi3tEx9hqzopfl+xWjK6m3XN73q8UHNWj66rw==
+X-Received: by 2002:a5d:9cda:0:b0:785:ca70:46a2 with SMTP id
+ w26-20020a5d9cda000000b00785ca7046a2mr12452870iow.4.1696209381199; 
+ Sun, 01 Oct 2023 18:16:21 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- l26-20020a02a89a000000b0041d859c5721sm6819619jam.64.2023.10.01.18.16.18
+ l26-20020a02a89a000000b0041d859c5721sm6819619jam.64.2023.10.01.18.16.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:16:18 -0700 (PDT)
+ Sun, 01 Oct 2023 18:16:20 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH 15/34] bootstd: Add a menu option to bootflow scan
-Date: Sun,  1 Oct 2023 19:15:25 -0600
-Message-ID: <20231002011553.463514-16-sjg@chromium.org>
+Subject: [PATCH 17/34] video: Avoid starting a new line to close to the bottom
+Date: Sun,  1 Oct 2023 19:15:27 -0600
+Message-ID: <20231002011553.463514-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011553.463514-1-sjg@chromium.org>
 References: <20231002011553.463514-1-sjg@chromium.org>
@@ -88,191 +88,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allow showing a menu and automatically booting, with 'bootflow scan'.
-This is more convenient than using a script.
+When starting a new text line, an assumption is made that the current
+vertical position is a multiple of the character height. When this is
+not true, characters can be written after the end of the framebuffer.
+
+This can causes crashes and strange errors from QEMU.
+
+Adjust the scrolling check when processing a newline character, to
+avoid any problems.
+
+Add some comments to make things a little clearer.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- cmd/bootflow.c             | 27 +++++++++++--
- doc/usage/cmd/bootflow.rst |  5 +++
- test/boot/bootflow.c       | 82 ++++++++++++++++++++++++++++++++++++++
- 3 files changed, 110 insertions(+), 4 deletions(-)
+ drivers/video/vidconsole-uclass.c | 4 +++-
+ include/video.h                   | 3 ++-
+ include/video_console.h           | 8 ++++++++
+ 3 files changed, 13 insertions(+), 2 deletions(-)
 
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index 1516f8a4193b..e4ed4ab83d9d 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -135,7 +135,7 @@ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
- 	struct udevice *dev = NULL;
- 	struct bootflow bflow;
- 	bool all = false, boot = false, errors = false, no_global = false;
--	bool list = false, no_hunter = false;
-+	bool list = false, no_hunter = false, menu = false, text_mode = false;
- 	int num_valid = 0;
- 	const char *label = NULL;
- 	bool has_args;
-@@ -155,6 +155,8 @@ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
- 			no_global = strchr(argv[1], 'G');
- 			list = strchr(argv[1], 'l');
- 			no_hunter = strchr(argv[1], 'H');
-+			menu = strchr(argv[1], 'm');
-+			text_mode = strchr(argv[1], 't');
- 			argc--;
- 			argv++;
- 		}
-@@ -213,15 +215,32 @@ static int do_bootflow_scan(struct cmd_tbl *cmdtp, int flag, int argc,
- 		}
- 		if (list)
- 			show_bootflow(i, &bflow, errors);
--		if (boot && !bflow.err)
-+		if (!menu && boot && !bflow.err)
- 			bootflow_run_boot(&iter, &bflow);
- 	}
- 	bootflow_iter_uninit(&iter);
- 	if (list)
- 		show_footer(i, num_valid);
+diff --git a/drivers/video/vidconsole-uclass.c b/drivers/video/vidconsole-uclass.c
+index a312a1985242..a8d2199147dd 100644
+--- a/drivers/video/vidconsole-uclass.c
++++ b/drivers/video/vidconsole-uclass.c
+@@ -94,7 +94,9 @@ static void vidconsole_newline(struct udevice *dev)
+ 	priv->ycur += priv->y_charsize;
  
--	if (IS_ENABLED(CONFIG_CMD_BOOTFLOW_FULL) && !num_valid && !list)
--		printf("No bootflows found; try again with -l\n");
-+	if (IS_ENABLED(CONFIG_CMD_BOOTFLOW_FULL) && IS_ENABLED(CONFIG_EXPO)) {
-+		if (!num_valid && !list) {
-+			printf("No bootflows found; try again with -l\n");
-+		} else if (menu) {
-+			struct bootflow *sel_bflow;
-+
-+			ret = bootflow_handle_menu(std, text_mode, &sel_bflow);
-+			if (!ret && boot) {
-+				ret = console_clear();
-+				if (ret) {
-+					log_err("Failed to clear console: %dE\n",
-+						ret);
-+					return ret;
-+				}
-+
-+				bootflow_run_boot(NULL, sel_bflow);
-+			}
-+		}
-+	}
- 
- 	return 0;
- }
-diff --git a/doc/usage/cmd/bootflow.rst b/doc/usage/cmd/bootflow.rst
-index 6a0645c28d07..795d5990bdc3 100644
---- a/doc/usage/cmd/bootflow.rst
-+++ b/doc/usage/cmd/bootflow.rst
-@@ -52,6 +52,8 @@ Flags are:
-     matters, since by then the system boots in the OS and U-Boot is no-longer
-     running. `bootflow scan -b` is a quick way to boot the first available OS.
-     A valid bootflow is one that made it all the way to the `loaded` state.
-+    Note that if `-m` is provided as well, booting is delayed until the user
-+    selects a bootflow.
- 
- -e
-     Used with -l to also show errors for each bootflow. The shows detailed error
-@@ -71,6 +73,9 @@ Flags are:
-     priority or label is tried, to see if more bootdevs can be discovered, but
-     this flag disables that process.
- 
-+-m
-+    Show a menu of available bootflows for the user to select. When used with
-+    -b it then boots the one that was selected, if any.
- 
- The optional argument specifies a particular bootdev to scan. This can either be
- the name of a bootdev or its sequence number (both shown with `bootdev list`).
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 04a5bd5d7a80..a57f5017364a 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -637,6 +637,88 @@ static int bootflow_cmd_menu(struct unit_test_state *uts)
- }
- BOOTSTD_TEST(bootflow_cmd_menu, UT_TESTF_DM | UT_TESTF_SCAN_FDT);
- 
-+/* Check 'bootflow scan -m' to select a bootflow using a menu */
-+static int bootflow_scan_menu(struct unit_test_state *uts)
-+{
-+	struct bootstd_priv *std;
-+	const char **old_order, **new_order;
-+	char prev[3];
-+
-+	/* get access to the current bootflow */
-+	ut_assertok(bootstd_get_priv(&std));
-+
-+	ut_assertok(prep_mmc_bootdev(uts, "mmc4", false, &old_order));
-+
-+	/* Add keypresses to move to and select the second one in the list */
-+	prev[0] = CTL_CH('n');
-+	prev[1] = '\r';
-+	prev[2] = '\0';
-+	ut_asserteq(2, console_in_puts(prev));
-+
-+	ut_assertok(run_command("bootflow scan -lm", 0));
-+	new_order = std->bootdev_order;
-+	std->bootdev_order = old_order;
-+
-+	ut_assert_skip_to_line("No more bootdevs");
-+	ut_assert_nextlinen("--");
-+	ut_assert_nextline("(2 bootflows, 2 valid)");
-+
-+	ut_assert_nextline("Selected: Armbian");
-+	ut_assertnonnull(std->cur_bootflow);
-+	ut_assert_console_end();
-+
-+	/* Check not selecting anything */
-+	prev[0] = '\e';
-+	prev[1] = '\0';
-+	ut_asserteq(1, console_in_puts(prev));
-+
-+	std->bootdev_order = new_order; /* Blue Monday */
-+	ut_assertok(run_command("bootflow scan -lm", 0));
-+	std->bootdev_order = old_order;
-+
-+	ut_assertnull(std->cur_bootflow);
-+	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
-+	ut_assert_nextline("Nothing chosen");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootflow_scan_menu,
-+	     UT_TESTF_DM | UT_TESTF_SCAN_FDT | UT_TESTF_CONSOLE_REC);
-+
-+/* Check 'bootflow scan -mb' to select and boot a bootflow using a menu */
-+static int bootflow_scan_menu_boot(struct unit_test_state *uts)
-+{
-+	struct bootstd_priv *std;
-+	const char **old_order;
-+	char prev[3];
-+
-+	/* get access to the current bootflow */
-+	ut_assertok(bootstd_get_priv(&std));
-+
-+	ut_assertok(prep_mmc_bootdev(uts, "mmc4", false, &old_order));
-+
-+	/* Add keypresses to move to and select the second one in the list */
-+	prev[0] = CTL_CH('n');
-+	prev[1] = '\r';
-+	prev[2] = '\0';
-+	ut_asserteq(2, console_in_puts(prev));
-+
-+	ut_assertok(run_command("bootflow scan -lmb", 0));
-+	std->bootdev_order = old_order;
-+
-+	ut_assert_skip_to_line("(2 bootflows, 2 valid)");
-+
-+	ut_assert_nextline("Selected: Armbian");
-+	ut_assert_skip_to_line("Boot failed (err=-14)");
-+	ut_assertnonnull(std->cur_bootflow);
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+BOOTSTD_TEST(bootflow_scan_menu_boot,
-+	     UT_TESTF_DM | UT_TESTF_SCAN_FDT | UT_TESTF_CONSOLE_REC);
-+
- /* Check searching for a single bootdev using the hunters */
- static int bootflow_cmd_hunt_single(struct unit_test_state *uts)
- {
+ 	/* Check if we need to scroll the terminal */
+-	if ((priv->ycur + priv->y_charsize) / priv->y_charsize > priv->rows) {
++	if (vid_priv->rot % 2 ?
++	    priv->ycur + priv->x_charsize > vid_priv->xsize :
++	    priv->ycur + priv->y_charsize > vid_priv->ysize) {
+ 		vidconsole_move_rows(dev, 0, rows, priv->rows - rows);
+ 		for (i = 0; i < rows; i++)
+ 			vidconsole_set_row(dev, priv->rows - i - 1,
+diff --git a/include/video.h b/include/video.h
+index ae9ce03f5bfa..e20f1173762e 100644
+--- a/include/video.h
++++ b/include/video.h
+@@ -78,7 +78,8 @@ enum video_format {
+  *
+  * @xsize:	Number of pixel columns (e.g. 1366)
+  * @ysize:	Number of pixels rows (e.g.. 768)
+- * @rot:	Display rotation (0=none, 1=90 degrees clockwise, etc.)
++ * @rot:	Display rotation (0=none, 1=90 degrees clockwise, etc.). THis
++ *		does not affect @xsize and @ysize
+  * @bpix:	Encoded bits per pixel (enum video_log2_bpp)
+  * @format:	Pixel format (enum video_format)
+  * @vidconsole_drv_name:	Driver to use for the text console, NULL to
+diff --git a/include/video_console.h b/include/video_console.h
+index bde67fa9a5a9..ecbf183b3d03 100644
+--- a/include/video_console.h
++++ b/include/video_console.h
+@@ -27,6 +27,14 @@ enum {
+  * Drivers must set up @rows, @cols, @x_charsize, @y_charsize in their probe()
+  * method. Drivers may set up @xstart_frac if desired.
+  *
++ * Note that these values relate to the rotated console, so that an 80x25
++ * console which is rotated 90 degrees will have rows=80 and cols=25
++ *
++ * The xcur_frac and ycur values refer to the unrotated coordinates, that is
++ * xcur_frac always advances with each character, even if its limit might be
++ * vid_priv->ysize instead of vid_priv->xsize if the console is rotated 90 or
++ * 270 degrees.
++ *
+  * @sdev:		stdio device, acting as an output sink
+  * @xcur_frac:		Current X position, in fractional units (VID_TO_POS(x))
+  * @ycur:		Current Y position in pixels (0=top)
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
