@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83BBAE784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:21:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D64BE784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:21:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFB5B8713C;
-	Mon,  2 Oct 2023 03:14:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 97C3C8713E;
+	Mon,  2 Oct 2023 03:14:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bgtykZg8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DFLQnpO1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 266F0870D5; Mon,  2 Oct 2023 03:14:12 +0200 (CEST)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id 39081870E1; Mon,  2 Oct 2023 03:14:06 +0200 (CEST)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C9AF870FA
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88C7286D7C
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:13:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-79fc3d32a2fso415737239f.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:02 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-3514cddf90bso34759105ab.1
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:13:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209240; x=1696814040; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209238; x=1696814038; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YkCWmutKIr94qgt2+k7eAHKiHIlaUWcHz7vAKA8XtCk=;
- b=bgtykZg8hEq3LXxi723LvzHvhzhHkJ3hqUnBPLnjbT2pW9zGa9GSgpen7ZkLpMmCyt
- k+TPxsJ18qFwzoFATHDHbgMntWiX97CEiRMSggdVUuIrKhVzptskxoVRo4nSDsE/nHvY
- IkimQM3+Dn52lemQEgXzm8sUDitmX/mBVC1d4=
+ bh=qMVdeegsnUZ6JGehDNwEnXsInc74azYED2IxH6gafJg=;
+ b=DFLQnpO1aFFzTQ6hwao+zfAz6xBNNhFNK/6tFyJWj7hG06PkQb13L7MymPp31QF3Gy
+ WeLhZWErL1URQwLmKwNXTvGXw7Goa5g0iclEzZEddIHJaf81fBe/fiwvAFhrh5zESwk9
+ nxZt+Th99LdUZ7eh8P6wtoh49jHjDryvoCq+M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209240; x=1696814040;
+ d=1e100.net; s=20230601; t=1696209238; x=1696814038;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YkCWmutKIr94qgt2+k7eAHKiHIlaUWcHz7vAKA8XtCk=;
- b=VxGIEDfukdi24mXRRjeGRMx6MIQlrBb5gytqJxcn8QNUObCbIFzPELb7cwBeaDbre1
- 52Xpo76t+BJCZymOp3qcflFwcf+pY0zwYWZKQPOXuhrZMFUDJ5ghhy5Mn6oqb3dKri56
- 7kIXivxtyjoz5PcKZlJTuE8ZPx0buxMvXp+IXmjWKLsuBl162DBDMGtTzzcwKdedaj+b
- 4+WBViRp/BdbmaG9WBKhcdTpRAH3oz/euFb2welJ5QPyRYxpUXXSM9/wSUkwR5bGP+H3
- Bzv/NBq1v8nD7kzQdBmXZn4d2yZRJIy2NaMCuhmhWaci5HJ8zxDsjy1bMNMqJjuCLhv3
- KjZg==
-X-Gm-Message-State: AOJu0YyLG8BDVfqNltNY7TN+o3P20tvBDG4BjCJ+Mac7Ffj2fDsmx4KQ
- PEKLsCdmhvxsgu8ZAbQlD2mEFsZIojZvQTo4aD8=
-X-Google-Smtp-Source: AGHT+IHVw29pUvOh4LnPEuaPcdgut5VthEkvdIFKdLlyTjKH5PVn+WGZrekhUQF7K7mj4JNhl1oHPA==
-X-Received: by 2002:a6b:dc10:0:b0:794:e96f:b87d with SMTP id
- s16-20020a6bdc10000000b00794e96fb87dmr10255131ioc.0.1696209240640; 
- Sun, 01 Oct 2023 18:14:00 -0700 (PDT)
+ bh=qMVdeegsnUZ6JGehDNwEnXsInc74azYED2IxH6gafJg=;
+ b=qAGxONEkZ1h/fsar6qi1/YsMk+SMjyI2IsY4XKgl8rBkRds3hNijC9CzvrrL3apaj3
+ BvLi+Isy390+8gYY399CpNMb0jVx7IP1Db6VHw7BNIU+FRoJ2x2bu3wdNspzmymrSqy6
+ fj4ftz/W+DVIjK5wbknX+kdoRT2+FbcblW/U34yWsRzzTIwhLvfXB9N8h0ioU7JMgnEo
+ Y96s5k1hhFCHoXso7eht6+gqjfNqX1uZ0tXSl/4KWpmA3+fWyf6m8CveI1rk8K2Ni8Ln
+ tTnCzzm0jHOEukaW7VHlbUg32YcqVXupQ33Jyd16kM9v2KxpAQdAP0V48/N3zZCvRauM
+ fM1g==
+X-Gm-Message-State: AOJu0YwzxcE/SWGNtaSQJrEFc3SSimWAtj5kE9PJfnLWIVU+PwP89z56
+ fsUSUw/OV5Hz9dTyxeeuEOkifVsMcH/iGJdB8+A=
+X-Google-Smtp-Source: AGHT+IGqmbKQtlUZ7cTaKgnFGtUje3lbyo5Fbf2IWGSnfw+o8yhv23aAxVUEDABn/gW8kDge0d4Ohg==
+X-Received: by 2002:a92:ca0f:0:b0:349:927a:5d85 with SMTP id
+ j15-20020a92ca0f000000b00349927a5d85mr15054977ils.22.1696209238127; 
+ Sun, 01 Oct 2023 18:13:58 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.00
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.13.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:14:00 -0700 (PDT)
+ Sun, 01 Oct 2023 18:13:57 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 09/36] cli: Create a function to process characters
-Date: Sun,  1 Oct 2023 19:13:13 -0600
-Message-ID: <20231002011349.461284-10-sjg@chromium.org>
+Subject: [PATCH v2 06/36] cli: Use unsigned int instead of unsigned long
+Date: Sun,  1 Oct 2023 19:13:10 -0600
+Message-ID: <20231002011349.461284-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
 References: <20231002011349.461284-1-sjg@chromium.org>
@@ -88,222 +88,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move most of the inner loop from cread_line() into a new function. This
-will allow using it from other code.
-
-This involves adding a few more members to the state struct.
+The index values are not very large so it makes no sense to use a long
+integer. Change these to uint instead.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/cli_readline.c | 108 ++++++++++++++++++++++++------------------
- include/cli.h         |  15 ++++++
- 2 files changed, 78 insertions(+), 45 deletions(-)
+ common/cli_readline.c | 17 ++++++++---------
+ 1 file changed, 8 insertions(+), 9 deletions(-)
 
 diff --git a/common/cli_readline.c b/common/cli_readline.c
-index f5d1cb034338..62d419bb36a7 100644
+index 687e239bfa77..f863404110c3 100644
 --- a/common/cli_readline.c
 +++ b/common/cli_readline.c
-@@ -253,52 +253,17 @@ static void cread_add_str(char *str, int strsize, int insert,
- 	}
+@@ -171,7 +171,7 @@ static char *hist_next(void)
+ void cread_print_hist_list(void)
+ {
+ 	int i;
+-	unsigned long n;
++	uint n;
+ 
+ 	n = hist_num - hist_max;
+ 
+@@ -211,10 +211,10 @@ void cread_print_hist_list(void)
+ 	}					\
  }
  
--static int cread_line(const char *const prompt, char *buf, unsigned int *len,
--		int timeout)
-+int cread_line_process_ch(struct cli_line_state *cls, char ichar)
+-static void cread_add_char(char ichar, int insert, unsigned long *num,
+-	       unsigned long *eol_num, char *buf, unsigned long len)
++static void cread_add_char(char ichar, int insert, uint *num,
++			   uint *eol_num, char *buf, uint len)
  {
--	struct cli_ch_state s_cch, *cch = &s_cch;
--	struct cli_line_state s_cls, *cls = &s_cls;
--	char ichar;
--	int init_len = strlen(buf);
--	int first = 1;
--
--	cli_ch_init(cch);
--	memset(cls, '\0', sizeof(struct cli_line_state));
--	cls->insert = true;
--
--	if (init_len)
--		cread_add_str(buf, init_len, 1, &cls->num, &cls->eol_num, buf,
--			      *len);
--
--	while (1) {
--		/* Check for saved characters */
--		ichar = cli_ch_process(cch, 0);
--
--		if (!ichar) {
--			if (bootretry_tstc_timeout())
--				return -2;	/* timed out */
--			if (first && timeout) {
--				u64 etime = endtick(timeout);
--
--				while (!tstc()) {	/* while no incoming data */
--					if (get_ticks() >= etime)
--						return -2;	/* timed out */
--					schedule();
--				}
--				first = 0;
--			}
--
--			ichar = getcmd_getch();
--			ichar = cli_ch_process(cch, ichar);
--		}
-+	char *buf = cls->buf;
+-	unsigned long wlen;
++	uint wlen;
  
- 	/* ichar=0x0 when error occurs in U-Boot getc */
- 	if (!ichar)
--		continue;
-+		return -EAGAIN;
+ 	/* room ??? */
+ 	if (insert || *num == *eol_num) {
+@@ -245,8 +245,7 @@ static void cread_add_char(char ichar, int insert, unsigned long *num,
+ }
  
- 	if (ichar == '\n') {
- 		putc('\n');
--		break;
-+		return 0;
- 	}
- 
- 	switch (ichar) {
-@@ -307,7 +272,7 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 		break;
- 	case CTL_CH('c'):	/* ^C - break */
- 		*buf = '\0';	/* discard input */
--		return -1;
-+		return -EINTR;
- 	case CTL_CH('f'):
- 		if (cls->num < cls->eol_num) {
- 			getcmd_putch(buf[cls->num]);
-@@ -405,7 +370,7 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 
- 		if (!hline) {
- 			getcmd_cbeep();
--			continue;
-+			break;
- 		}
- 
- 		/* nuke the current line */
-@@ -419,7 +384,7 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 		strcpy(buf, hline);
- 		cls->eol_num = strlen(buf);
- 		REFRESH_TO_EOL();
--		continue;
-+		break;
- 	}
- 	case '\t':
- 		if (IS_ENABLED(CONFIG_AUTO_COMPLETE)) {
-@@ -432,9 +397,9 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 			}
- 
- 			buf[cls->num] = '\0';
--			col = strlen(prompt) + cls->eol_num;
-+			col = strlen(cls->prompt) + cls->eol_num;
- 			num2 = cls->num;
--			if (cmd_auto_complete(prompt, buf, &num2, &col)) {
-+			if (cmd_auto_complete(cls->prompt, buf, &num2, &col)) {
- 				col = num2 - cls->num;
- 				cls->num += col;
- 				cls->eol_num += col;
-@@ -444,9 +409,62 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 		fallthrough;
- 	default:
- 		cread_add_char(ichar, cls->insert, &cls->num, &cls->eol_num,
--			       buf, *len);
-+			       buf, cls->len);
- 		break;
- 	}
-+
-+	return -EAGAIN;
-+}
-+
-+static int cread_line(const char *const prompt, char *buf, unsigned int *len,
-+		      int timeout)
-+{
-+	struct cli_ch_state s_cch, *cch = &s_cch;
-+	struct cli_line_state s_cls, *cls = &s_cls;
-+	char ichar;
-+	int init_len = strlen(buf);
-+	int first = 1;
-+
-+	cli_ch_init(cch);
-+	memset(cls, '\0', sizeof(struct cli_line_state));
-+	cls->insert = true;
-+	cls->len = *len;
-+	cls->prompt = prompt;
-+	cls->buf = buf;
-+
-+	if (init_len)
-+		cread_add_str(buf, init_len, 1, &cls->num, &cls->eol_num, buf,
-+			      *len);
-+
-+	while (1) {
-+		int ret;
-+
-+		/* Check for saved characters */
-+		ichar = cli_ch_process(cch, 0);
-+
-+		if (!ichar) {
-+			if (bootretry_tstc_timeout())
-+				return -2;	/* timed out */
-+			if (first && timeout) {
-+				u64 etime = endtick(timeout);
-+
-+				while (!tstc()) {	/* while no incoming data */
-+					if (get_ticks() >= etime)
-+						return -2;	/* timed out */
-+					schedule();
-+				}
-+				first = 0;
-+			}
-+
-+			ichar = getcmd_getch();
-+			ichar = cli_ch_process(cch, ichar);
-+		}
-+
-+		ret = cread_line_process_ch(cls, ichar);
-+		if (ret == -EINTR)
-+			return -1;
-+		else if (!ret)
-+			break;
- 	}
- 	*len = cls->eol_num;
- 	buf[cls->eol_num] = '\0';	/* lose the newline */
-diff --git a/include/cli.h b/include/cli.h
-index 1bc1ab8035c8..bbc532764355 100644
---- a/include/cli.h
-+++ b/include/cli.h
-@@ -31,11 +31,16 @@ struct cli_ch_state {
-  * @num: Current cursor position, where 0 is the start
-  * @eol_num: Number of characters in the buffer
-  * @insert: true if in 'insert' mode
-+ * @buf: Buffer containing line
-+ * @prompt: Prompt for the line
-  */
- struct cli_line_state {
- 	uint num;
- 	uint eol_num;
-+	uint len;
- 	bool insert;
-+	char *buf;
-+	const char *prompt;
- };
- 
- /**
-@@ -243,6 +248,16 @@ void cli_ch_init(struct cli_ch_state *cch);
-  */
- int cli_ch_process(struct cli_ch_state *cch, int ichar);
- 
-+/**
-+ * cread_line_process_ch() - Process a character for line input
-+ *
-+ * @cls: CLI line state
-+ * @ichar: Character to process
-+ * Return: 0 if input is complete, with line in cls->buf, -EINTR if input was
-+ * cancelled with Ctrl-C, -EAGAIN if more characters are needed
-+ */
-+int cread_line_process_ch(struct cli_line_state *cls, char ichar);
-+
- /** cread_print_hist_list() - Print the command-line history list */
- void cread_print_hist_list(void);
- 
+ static void cread_add_str(char *str, int strsize, int insert,
+-			  unsigned long *num, unsigned long *eol_num,
+-			  char *buf, unsigned long len)
++			  uint *num, uint *eol_num, char *buf, uint len)
+ {
+ 	while (strsize--) {
+ 		cread_add_char(*str, insert, num, eol_num, buf, len);
+@@ -258,9 +257,9 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
+ 		int timeout)
+ {
+ 	struct cli_ch_state s_cch, *cch = &s_cch;
+-	unsigned long num = 0;
+-	unsigned long eol_num = 0;
+-	unsigned long wlen;
++	uint num = 0;
++	uint eol_num = 0;
++	uint wlen;
+ 	char ichar;
+ 	int insert = 1;
+ 	int init_len = strlen(buf);
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
