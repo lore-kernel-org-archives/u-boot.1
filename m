@@ -4,66 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDCFCE784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:40:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D588E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:40:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFD3D87496;
-	Mon,  2 Oct 2023 03:22:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 202CF8749F;
+	Mon,  2 Oct 2023 03:22:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Lzl0H5mr";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PyTAmW+q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6524A8748B; Mon,  2 Oct 2023 03:22:34 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 6B54A87487; Mon,  2 Oct 2023 03:22:36 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64E6A87452
+ by phobos.denx.de (Postfix) with ESMTPS id 5CB938721E
  for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:22:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-53406799540so15799245a12.1
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5347e657a11so10634103a12.2
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:22:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209747; x=1696814547; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209745; x=1696814545; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xuEz2XzACHND5cth383dBgfBA+5MivC47r+qywCmxJk=;
- b=Lzl0H5mrgJqu82MiUHizBWKK+HNzOILTW5b3nUPoduTv8zViCIpFntQgJ9MEy0aXTX
- KeWZGYxhb8iC1vRHewNMbVIKz3A1zSud62IXp6/3YpsKKoi+ba4vFcInjkZHYyXZR4vu
- T++9rKpXAv+SWNtEF5Feh4Tr78rE6FKvHoZMY=
+ bh=h4N0sRbwwkOESWKICfVolxR31XPLQApy28G6F8qr6z8=;
+ b=PyTAmW+q7mFiGjquxCo2E//TBStHvcK2IcYFvhMLBSIGn/Mw+5IDrsSzIVm/+Vudes
+ /WCNlqU0CGp31f7R+Q9avgye2qPjdMSZf/Ssa2t906zjRnOoEOJHVpzTpBC0dzMkClYS
+ vxXYYxQTk0WPoKHW9hHnGI8Dy+drlfyAuPIEc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209747; x=1696814547;
+ d=1e100.net; s=20230601; t=1696209745; x=1696814545;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xuEz2XzACHND5cth383dBgfBA+5MivC47r+qywCmxJk=;
- b=fYytadHswdo+Ncx5+7uKO7tY1ahl0e9IbCH1MsumRaHrENlzOwDT3AlJVdnIK/H3mL
- pDsr/UPGvPOPLQ71J5uk9wmsmtKsA2yWrfPUJsPWnBdQDHyiAKXeN+fQmeaVS/9FZFyw
- qUbWVYDlbYFMBmn06+WecdVU+ZaC+godLDTF+33tDu6hnxtkLS/XcG8CD3XCDTcwGyQ2
- 0OjipcZ4kHekZg2ZP6Icr38whz5OPS7UPE2ak6YWk9zP1UD9mMlqbxqC3VPFfhpV81Zb
- mftwqw+tFaeT6OWbHsc1S/OJhDi617Z8fCU08ur2990Ra5xJUOg40Cs4CEkLL5icq4zE
- PufA==
-X-Gm-Message-State: AOJu0YwWWocSlrBhjcZTy73sfZv55aSlRIvrEVDYyr5w1QK88szrrDn2
- A9EeU6a05Ha1bctuY+MzuO1dJHBnwMeCel4IDgBbTE7wdQzcO+kYTI4=
-X-Google-Smtp-Source: AGHT+IFiIFOm90/k5QzLeBm3whmHvSPCNgt+w9sgPVK6eTqDLHYp9cHjaf1QZDdBHUWecD/Ede1ywVNMPofmhlR4XsY=
-X-Received: by 2002:a05:6402:1481:b0:530:5465:ad6d with SMTP id
- e1-20020a056402148100b005305465ad6dmr8565419edv.2.1696209746683; Sun, 01 Oct
- 2023 18:22:26 -0700 (PDT)
+ bh=h4N0sRbwwkOESWKICfVolxR31XPLQApy28G6F8qr6z8=;
+ b=Ix/vcPfsiMZPOjHck5nule/OIZlDArWG4HWD2oelaLcvZizInmN+apUMbkWR6DrxsW
+ q27dul6YIfBCw+mxVtuFrDMvXzqucIQGMFZI+zIH6akjwC+7+VJakBv4pyhneGcUpXbB
+ HDdpjcWKF6d2h8cFYNx8jDOdoEeMD7K8gKAPyPc5haaUn13vp+ouPY2MIA5W/pesFjOW
+ HHZcjmQP0KZtEaYuB459CwuCN6eFaVWTEUoxEo/ZeL4p/hlZVoDn9ULLlv4RlJRhSiYV
+ bZQS8nvx5HFTlF4Xvtg342DLCI2V+cvkl396mnI0i/URj2bIbe65nuH6Q4ttkliF22MR
+ m9sw==
+X-Gm-Message-State: AOJu0Yy2C5Xtu1rXLEnuJDjsNsezmyAeRpnDJNFN3sHdr9Fy7wHhgUen
+ UHkTBO5WNXHfNh33zju2mlWuFEjCClxF651YehYpTg==
+X-Google-Smtp-Source: AGHT+IHJFbch9xaX51e5UQ+yaX4WDJmTsN2tIpcWNZBMFJEVJE9l9CvJKuPO2uhyn2aKZdLtIik/2Ijd0I9SS3842Oo=
+X-Received: by 2002:aa7:c1d1:0:b0:530:9fbc:8df5 with SMTP id
+ d17-20020aa7c1d1000000b005309fbc8df5mr7801370edp.9.1696209745351; Sun, 01 Oct
+ 2023 18:22:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <9dd66b67-e372-fcb9-ed38-7ad24d83edbb@gmail.com>
- <c2acc0c6-0a8b-f4e1-7877-73fa5eef404b@gmail.com>
-In-Reply-To: <c2acc0c6-0a8b-f4e1-7877-73fa5eef404b@gmail.com>
+References: <20230929004717.37413-1-heinrich.schuchardt@canonical.com>
+ <20230929004717.37413-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20230929004717.37413-2-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Oct 2023 19:16:46 -0600
-Message-ID: <CAPnjgZ2EMus-Q9DY+-7dn-P5+VSLELd8nnp4NOxR0XxHzZfamw@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] dm: prepare rkmtd UCLASS
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, u-boot@lists.denx.de
+Date: Sun, 1 Oct 2023 19:16:45 -0600
+Message-ID: <CAPnjgZ0iQxp14c+MT__3jUJ7BT=zWSvpK44iYug8FfcsTwYqcQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] dm: serial: fix serial_post_probe()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Michal Suchanek <msuchanek@suse.de>, 
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,24 +82,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
-
-On Thu, 28 Sept 2023 at 12:51, Johan Jonker <jbx6244@gmail.com> wrote:
+On Thu, 28 Sept 2023 at 18:47, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> Prepare a rkmtd UCLASS in use for writing Rockchip boot blocks
-> in combination with existing userspace tools and rockusb command.
+> The size of the name of a udevice is not limited.
 >
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> When setting the fixed sized name field of a stdio device we must ensure
+> that the target string is NUL terminated to avoid buffer overflows.
+>
+> Fixes: 57d92753d4ca ("dm: Add a uclass for serial devices")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  disk/part.c                | 4 ++++
->  drivers/block/blk-uclass.c | 1 +
->  include/dm/uclass-id.h     | 1 +
->  3 files changed, 6 insertions(+)
->
+>  drivers/serial/serial-uclass.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-A new uclass should have a sandbox test and a header file or some
-other docs describing it.
-
-REgards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
