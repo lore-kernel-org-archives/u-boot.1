@@ -4,125 +4,151 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7AA77E7849A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 09:10:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8302DE7849A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 10:03:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02CD38714F;
-	Mon,  2 Oct 2023 11:10:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
+	by phobos.denx.de (Postfix) with ESMTP id 2F08F87112;
+	Mon,  2 Oct 2023 12:03:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.b="nLpQFeHA";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="1CF2RrOi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A1B087151; Mon,  2 Oct 2023 11:09:57 +0200 (CEST)
-Received: from APC01-TYZ-obe.outbound.protection.outlook.com
- (mail-tyzapc01on2070c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:704b::70c])
+ id ED82187130; Mon,  2 Oct 2023 12:03:36 +0200 (CEST)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20622.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5b::622])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81E6587149
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 11:09:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=aspeedtech.com
+ by phobos.denx.de (Postfix) with ESMTPS id D4F0F87146
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 12:03:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ryan_chen@aspeedtech.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XBJZKXvRVMlZlq+R7ZpcATCeYUW+lcidD5pfJnlyKt+eOWS/Nf5yXoKMaEf5u2iq+7sBD8u0ssSVLqZMBNw/2jnjUnKoANHSROM0PWuTg69jmI0vE+tkBsDN+ds6dity3Jcsg7gmr7WhOzbDiRpf+ENJTVOqmyuyXklYB4FNaJwA7YCYTzddaTHlN299/gS46TUanNivbDvPO4OWLBt6YtQZh2wCNRZyvBalngdTvOVM/qIgLBlVxmnbEYZlFB8WEj2QzsQwWI2wzhVBjRgKVJEij/F71yvCtCtKO/8HhdlnH6OoE+MOMsku7v0johviNWZzNdJRG2sfmx2A2j5jlg==
+ b=cMJrB5nO8lFqqyGFiz/cnQ8I2fQyaofIjodA9P/BrETzR3+MUa4zkIcTvd3eRJoWjUK6hUcN81SaDCyJCTi7zz5vnwUj3oOLwUrauI+ATV0BTf9uTi5oKdJbi8m/c2sG2pPnhFEYXGs5NcvGIxr9ag+hktySI03ukYa80H8+dROsmjHRrehoj4WjBq8Xj3HoVTSoKCuZljhITW+cr82ln8AmM7mC7ESJvIwmi3cBkqglO4mYTo4/fqa7VFyjzewfWp/roJoq/nVVo4gx9npi9uWiENVQLnB9rnm3U6SxLXkAsPUjQSX28LZjiKCG8Y/WjrY5HWxfoSKSKl4m6PQLiA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wvEkoG81jhFQueOyl+ckTS0xre5k+5aLsqvmS8QBDLs=;
- b=dLrg38tj6EedI/0/aIqH0Swkgw0K/pp6p8OJZj7hFOJcUNK0tFS13/zASLALH1CkQ0qcSgZL+ylHmUPZkqCrPyC3WTNGsxUtSx4HhsbCSzKWUi2fN0EG16V5vO9rwiAGJmSYtp15t4llqY5gVIy7lMHTR93icyf2cnXwF2Bd1FBYIpqdRgQ/v/bQzBRqA5fb/X8v5FihCgvaVRn+u3rjTzwUGeXilSUo+eHdcIkReVwnCdUQCSj4i2D/zQk+iJ4cTNJVTOWKIU65rh0jm9JoaomDWsQ/GxpIGEaCoaI8HHZuaYWW+MFpKpdYWbgHFh5eLebparWLd9kXPkDx4XzxUg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector2;
+ bh=bUXe/tU8Vpt61L+/PFURILMJmadBU1nHftKWDTVReZ4=;
+ b=M9da8nfhEohtqEYBSJcSVut6e9kOaLQgzAwA5ctqvipoaxpGQaNnwz2RDeAMl9r/FqnESnva1Ah45Ctv+42JDE1K9RW3ysty7k68YC5x3vv6WLhTwCI8il+OgJgONb6gGMjgktLCvW2ag0A9ntr9lXebtQ6kx8yhM0IrNsL0CvXkvviOYuYvBZIFAm+SI8mouRJCs+jAhHb4IflsCHF9JrrZqVtYsvZqoEXEltY2jXW+ouXEl3VmxXeqY/uAy9tXOZ50AJfL7hCoEBZRUTImPAfxiYu9MR7Mf89h6XOFmUvj+KfkP/w8Gw5egcw9wvQm9pg44rTl7A5NvKveNr6vLA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wvEkoG81jhFQueOyl+ckTS0xre5k+5aLsqvmS8QBDLs=;
- b=nLpQFeHAA2Uoq2D0w1S/zYUTHzuLpaK4cgzAJGzGD+Aceo9a+I4av3UOZ8daCe7ubDVnVNoprXeVijbMX0t3moOuUkwZsA+LGX752kforsHLW5wAmuiwNvMi7MFNuH4NB51cmDQ5yop3+aV1CwI6TOrsdlrEyCmKTQb+lFRf1LtxSXTK1R0sLO3P0VqnGJiTOZ5bNbFOiMT4HkPnQaqXPoSLNPoFStMM3vj4XEqPe63LbznzUAl7HidsmwELihUG9QduoD5+Aeh3WCEEVpY6bPl/dSzQdYSqymU+eqCsojtqVjGXIpU1LYTG2l9tPopYyYjkUOPskpruY4LLweypxg==
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com (2603:1096:101:78::6)
- by TYZPR06MB6167.apcprd06.prod.outlook.com (2603:1096:400:341::10) with
+ bh=bUXe/tU8Vpt61L+/PFURILMJmadBU1nHftKWDTVReZ4=;
+ b=1CF2RrOi/SFEdNQ6s9bgRd+ls3TEc0eCpbNt0bWQX/BmDDAekoQf18nKutxvKvO005kp2GSt7H6szQBd1+/x3P1S1917zHIfFL5bwu/rMy6cpmWEKWKVRzekK+YCw3niker5+hPSk2i8MfTTgtKLtiIRsxrxUwcCwtEGj68PTkA=
+Received: from SA9P223CA0006.NAMP223.PROD.OUTLOOK.COM (2603:10b6:806:26::11)
+ by DS7PR12MB6008.namprd12.prod.outlook.com (2603:10b6:8:7f::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.30; Mon, 2 Oct
- 2023 09:09:33 +0000
-Received: from SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::d6ab:2a17:4633:9a7d]) by SEZPR06MB5269.apcprd06.prod.outlook.com
- ([fe80::d6ab:2a17:4633:9a7d%5]) with mapi id 15.20.6792.026; Mon, 2 Oct 2023
- 09:09:32 +0000
-From: Ryan Chen <ryan_chen@aspeedtech.com>
-To: Dylan Hung <kobedylan@gmail.com>, ChiaWei Wang
- <chiawei_wang@aspeedtech.com>, BMC-SW <BMC-SW@aspeedtech.com>,
- "joel@jms.id.au" <joel@jms.id.au>, "joe.hershberger@ni.com"
- <joe.hershberger@ni.com>, "rfried.dev@gmail.com" <rfried.dev@gmail.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Dylan Hung <dylan_hung@aspeedtech.com>
-Subject: RE: [PATCH] net: ftgmac100: Add reset control
-Thread-Topic: [PATCH] net: ftgmac100: Add reset control
-Thread-Index: AQHZwC3VFGq+HPNuwkGx4hCzC4STlLA2nrZg
-Date: Mon, 2 Oct 2023 09:09:32 +0000
-Message-ID: <SEZPR06MB52694F1A6CFE8C9C803B44A8F2C5A@SEZPR06MB5269.apcprd06.prod.outlook.com>
-References: <20230727015814.3459990-1-dylan_hung@aspeedtech.com>
-In-Reply-To: <20230727015814.3459990-1-dylan_hung@aspeedtech.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: SEZPR06MB5269:EE_|TYZPR06MB6167:EE_
-x-ms-office365-filtering-correlation-id: dd1e6336-e0a1-4618-ec9f-08dbc3274a8d
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: IxksAB4QQecxp5L3VgeTRGj9PkTm1UsTWxC/pOipA3C/nNz7Q5+LMpsrRu6Iv+mUK73pwbOIV0swB7l1hCTKWMuxK8YltDPa6HqqGBd/sv9ZBnT6ZCrHYOQrQc0Lv4T/gkolIdoWFkbGB+HDh+CWezzbNtF0YTq+OR5Hk1CETZgbzUV9IOXOH0LT3fe3LVnSio0GUvxS/iD2nSicHUqebBF6i0bwQCR117HlBjmiizaoMix4RJTRs6fLy8qfvkqcN8kwz/8UhgnCkpRURDvtYNRvEF5N3cexFpmr05uvVZ+DfJ795yIzSAB2y29KV47kw7saD8xG8xtAnaMlJRKx73O7KERAxJL3J3iXNlF/15PRamQY0VkIpDfAL5foCfLDGbSd0qF55zMYLO+YbwGDkosYlgci9cByxm+lQBbfX0aWHqa19AF5Wr7k5jLyhHyDhheMC0GB4Vh8oXgD4N4ryxnpXrAU9WwEW27E/MoazK/+r5nw/tXgkxoRil8UG9A7J+e6P553My/OmhWFSz48b0Dhaq0IuRMsq9kkINYT7AJiaQ7w741yyqU27QJSroFjawtmfpQ0CD2aKgsED8gH1jMDwnUtJy4unDCmRlEbx6IpGMKqyJLf0ewhjgbUN5UM
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SEZPR06MB5269.apcprd06.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(366004)(39840400004)(396003)(376002)(346002)(230922051799003)(1800799009)(186009)(64100799003)(451199024)(107886003)(52536014)(66556008)(5660300002)(66946007)(8676002)(8936002)(4326008)(66446008)(66476007)(478600001)(316002)(64756008)(71200400001)(53546011)(2906002)(6506007)(76116006)(41300700001)(7696005)(110136005)(26005)(9686003)(83380400001)(55016003)(122000001)(38100700002)(38070700005)(86362001)(33656002);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?GGRfelUSLE61TrRFnnaT1YjIsCqGyl5FqEEXp44oNsd3Jw7RhN2y8jJ4sjch?=
- =?us-ascii?Q?FuQJe4PvnbWC4p37ZQjt1Iwf5D8RF36Ib+NunFMjlE4PWzu9U5wgGxxbNMHt?=
- =?us-ascii?Q?t5fJ7aopYyZfBpugIgWYIPv5kXqoyrjgBf+eYeC66UpgFfbG+AhzwCz9mLbd?=
- =?us-ascii?Q?HTjyNXELTP3GEBWpBICHsxa4uZLauQVM8/VUcToeLoCYXSyC0WZDtVn+kVim?=
- =?us-ascii?Q?riamvyBKqugbugcsTasuj0iICoA6cL2ngC4TNeRQ9H5OakJ061yY+zfHxssV?=
- =?us-ascii?Q?f1IPNcjsDZVtctttEqP6SOs+oCrAqT6rtIs5iHJ5VwSNxkTaNkcSXmvfHeOW?=
- =?us-ascii?Q?DP5x0scQP7mlShJJ98tt0XiUHibiat79aqSevSFtAjbWLbzjUFdjWKC+AGhv?=
- =?us-ascii?Q?y4zIndrzHhsB1b36/CCCiQenKEpqt6BhnBNA7AWm0WwUSLg77SetxQr4YUPh?=
- =?us-ascii?Q?Td2sE6YXc4aXABcMi4aZjbLRz/nRuhPDwZXHcM2iI218Di4DhVYRZjHGlAnu?=
- =?us-ascii?Q?Yt5bX535J+TQvOpzZ3Ur0893ipUCg3JKOYSVUQIHcyfhGzEi26Up2nDjDq4i?=
- =?us-ascii?Q?COqLDbt6AhocHsn1z8YOp27O/fEoorST+YfvQfbIQBKpEN0GL7i0ly464I19?=
- =?us-ascii?Q?gYWkgWjjUx4fDwzswJdoHhYgOwxOHW3UICbeaoWhsOMT2O0sRhrMaZdUMnXR?=
- =?us-ascii?Q?GtVpMrrQC5OJU4mvCR3XiELAaLdmR53VSGEKbOt8e15mEshH5/7JZy/cR1W/?=
- =?us-ascii?Q?iAFjpncIA7WFfsVFdGB9/nw6Gd91QgrcjltbwQ7CsHhuy01wmhhGY8El/tnA?=
- =?us-ascii?Q?A//dTFRAe7nbnpxHB74H6UtXLNNxuiA55t4NsA+3pHG1Zp02TqZIZt4jAJVb?=
- =?us-ascii?Q?WrFls3XIP/lP/Kvc9Ly4ia0VGoBpT+xPeLbaRm95XHZjdmDReL1j85JWDzmP?=
- =?us-ascii?Q?0B/qr70TXyl/rlm9XtiJiKrKR97zpaIlfTujVCj/P+ygBxl6vY4JYSy08NO6?=
- =?us-ascii?Q?W9+tj/kGdp5s25bSfvuwGwaGcVxZBd4Hqi9N08vPiYlyKJnvk3aEAUcByZp5?=
- =?us-ascii?Q?ptgI29NAKySuHJOQ+sSGlFT6h5t6TpAAE3HQLKQlhdw4Nt/Kt52mVDlB++6j?=
- =?us-ascii?Q?YAqNq17OlhyT81E8wXI9tkAJ469yH0TsskvkcwfhFHIVoz7lo4cCxt2IJ5tq?=
- =?us-ascii?Q?f7pMeyfn6Agyvs8krVrO19tsVxFRK0rx2UTdrBOH61HQHdPiII1Ch0sOU8oi?=
- =?us-ascii?Q?OKpbkc7b0bu+hXzDuaplmnpqs/DzaETKuHl0OGopeV0plPclzx8XZYDfXIQ8?=
- =?us-ascii?Q?iATqQb157U+Dz+BDQGaDvD4Sr4MXBHXjxtGId5wZrATEqkyQsxf6lHOJoMD5?=
- =?us-ascii?Q?NhSpxXLxS9sJzw0CVqpn2woz4UpI+QHRJMRCFrc7jVznFduzIP76FRiNGgah?=
- =?us-ascii?Q?2NNUFPMyUV3riqgevdh8eS2afSPqtYZDD3yvk9x/1CrLa7atwF4dkqdFUx8e?=
- =?us-ascii?Q?seIyRcpLgMatlHkspwNrfp9/GSvVUyGWbguuZuLPRWFBbciZxNyfARfqiTID?=
- =?us-ascii?Q?nWv8nyRl1ui17eg38c76HY7MFSh0dhudh5Ql/yL2?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.28; Mon, 2 Oct
+ 2023 10:03:28 +0000
+Received: from SN1PEPF0002636E.namprd02.prod.outlook.com
+ (2603:10b6:806:26:cafe::86) by SA9P223CA0006.outlook.office365.com
+ (2603:10b6:806:26::11) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.30 via Frontend
+ Transport; Mon, 2 Oct 2023 10:03:28 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SN1PEPF0002636E.mail.protection.outlook.com (10.167.241.139) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6838.14 via Frontend Transport; Mon, 2 Oct 2023 10:03:27 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 2 Oct
+ 2023 05:03:24 -0500
+Message-ID: <9a58264b-1d55-4ddc-b037-2d99d1564744@amd.com>
+Date: Mon, 2 Oct 2023 12:03:22 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5269.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd1e6336-e0a1-4618-ec9f-08dbc3274a8d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Oct 2023 09:09:32.4550 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Iw/Qd42YP+W5aJSgqV7CzKHlig9h8wSX9lkz3b2FLUzQcqGadwDuZh/V+AjZvEc12wWk7tYtBv7hL2kpE5xqw4pnill373FtJQQ1ts6FBJY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB6167
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] pinctrl: Increase size of pinmux status buffer
+Content-Language: en-US
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ <u-boot@lists.denx.de>
+CC: <sjg@chromium.org>, <git@xilinx.com>
+References: <20230920030006.6488-1-venkatesh.abbarapu@amd.com>
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20230920030006.6488-1-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002636E:EE_|DS7PR12MB6008:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6598e301-fccb-4f4f-99fe-08dbc32ed298
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Y6Oc5WC8Yk4wB2wOhqpIAYBZCRJPfYHov4GXdbypCCMEG17jGwZl4h0YVEWHNGmOkGaaTsoygKx7HkqQfxG6dw8esk2DC/x2D0eoFqn7Trwm5AeflUH5N2UNWO+ShBmStdHDV+QCaVVh/sKPjqn0C4lTJKYM/1l+TNbxbCTGctgI9KXeZz013guM7iH3GbM+zIo0kyE9f/aD5AXPzGgmsTkdSLzQ+oLMCW8pJ6v871DoNFOki5nEGqL1W/7/ixDn8kkFpiPJ4pErLmQFitA8lOqu5428v97Ni48U4AfMG05rJyXmzZkOl36mo1RDMe6tS7qc4AI7hcYcKA86CBHwAayQ8f5zXtwHFj/fqWIqd1HoRaRjMS1aETIoaPUGgaJVaXG+Agv7oWmekJJ30N8l0mSJqE/cT8MgfActh/AhbOBaevsivXiHrln5rQgxeie4NkTr3cclUnR3y20+XxXQoEZjA03BeN0Hv78zl9/OfOXzlAXgaNT1H+teZ8GwjkDb12tTA3RLE68YWBZsIYy/EPsV6of/PI5uNqhpgLgQLthkGuMr5nH3OiUvxxGaMSUNkFKkNQvMbbT3zejRdVxg7NaSwhfpEU9V1/Zs8obeypdVMA8mGze/oFTBu78Pv7p5IvyFwZo17kK9S9Qj7JDQcWr0fL6CTcBXBZ66hkf/LtwnY7+1N5w8hGB8JGC1L3JzuLsnGdeafIH2JXI4jjYnCsHpJeCuVdEyswbhE3lBL+Qqu5D7RghjIDhmAJZ+Suf2KnrxP7cDDfOeuP6tzPv5SCaZKHl5/DnawIwuhAPWu6TkigFjziiHQ6G2K+1ip5E+0FFvfY+TSVhEnzsRtrLkwQ==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(396003)(376002)(39860400002)(346002)(230922051799003)(64100799003)(82310400011)(1800799009)(451199024)(186009)(40470700004)(46966006)(36840700001)(426003)(40460700003)(2616005)(107886003)(26005)(16526019)(36860700001)(336012)(82740400003)(81166007)(356005)(86362001)(36756003)(31696002)(40480700001)(83380400001)(47076005)(316002)(54906003)(16576012)(4326008)(8676002)(8936002)(5660300002)(41300700001)(44832011)(70586007)(4744005)(110136005)(70206006)(2906002)(31686004)(53546011)(478600001)(106533001)(36900700001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2023 10:03:27.1560 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6598e301-fccb-4f4f-99fe-08dbc32ed298
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636E.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6008
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,78 +166,32 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-> -----Original Message-----
-> From: Dylan Hung <kobedylan@gmail.com>
-> Sent: Thursday, July 27, 2023 9:58 AM
-> To: Ryan Chen <ryan_chen@aspeedtech.com>; ChiaWei Wang
-> <chiawei_wang@aspeedtech.com>; BMC-SW <BMC-SW@aspeedtech.com>;
-> joel@jms.id.au; joe.hershberger@ni.com; rfried.dev@gmail.com;
-> u-boot@lists.denx.de
-> Cc: kobedylan@gmail.com; Dylan Hung <dylan_hung@aspeedtech.com>
-> Subject: [PATCH] net: ftgmac100: Add reset control
->=20
-> Add optional reset control, especially for the Aspeed SOC. For the hardwa=
-re
-> without a reset line, the reset assertion/deassertion will be skipped.
->=20
-> Signed-off-by: Dylan Hung <dylan_hung@aspeedtech.com>
 
-Reviewed-by: Ryan Chen <ryan_chen@aspeedtech.com>
-
+On 9/20/23 05:00, Venkatesh Yadav Abbarapu wrote:
+> For Xilinx ZynqMP SOC new parameter was added and now it can
+> set 7 parameters for its pins. Pinmux status command will
+> print the status of these parameters for each pin. But
+> current print buffer length is only 80 characters long, increase it
+> to 90 to print all the parameters without truncation.
+> 
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
->  drivers/net/ftgmac100.c | 12 ++++++++++++
->  1 file changed, 12 insertions(+)
->=20
-> diff --git a/drivers/net/ftgmac100.c b/drivers/net/ftgmac100.c index
-> a50cde338a..886b97119d 100644
-> --- a/drivers/net/ftgmac100.c
-> +++ b/drivers/net/ftgmac100.c
-> @@ -13,6 +13,7 @@
->=20
->  #include <common.h>
->  #include <clk.h>
-> +#include <reset.h>
->  #include <cpu_func.h>
->  #include <dm.h>
->  #include <log.h>
-> @@ -90,6 +91,7 @@ struct ftgmac100_data {
->  	u32 max_speed;
->=20
->  	struct clk_bulk clks;
-> +	struct reset_ctl *reset_ctl;
->=20
->  	/* End of RX/TX ring buffer bits. Depend on model */
->  	u32 rxdes0_edorr_mask;
-> @@ -568,6 +570,8 @@ static int ftgmac100_of_to_plat(struct udevice *dev)
->  		priv->txdes0_edotr_mask =3D BIT(15);
->  	}
->=20
-> +	priv->reset_ctl =3D devm_reset_control_get_optional(dev, NULL);
-> +
->  	return clk_get_bulk(dev, &priv->clks);  }
->=20
-> @@ -593,6 +597,12 @@ static int ftgmac100_probe(struct udevice *dev)
->  	if (ret)
->  		goto out;
->=20
-> +	if (priv->reset_ctl) {
-> +		ret =3D reset_deassert(priv->reset_ctl);
-> +		if (ret)
-> +			goto out;
-> +	}
-> +
->  	/*
->  	 * If DM MDIO is enabled, the MDIO bus will be initialized later in
->  	 * dm_eth_phy_connect
-> @@ -628,6 +638,8 @@ static int ftgmac100_remove(struct udevice *dev)
->  	free(priv->phydev);
->  	mdio_unregister(priv->bus);
->  	mdio_free(priv->bus);
-> +	if (priv->reset_ctl)
-> +		reset_assert(priv->reset_ctl);
->  	clk_release_bulk(&priv->clks);
->=20
->  	return 0;
-> --
-> 2.25.1
+>   include/dm/pinctrl.h | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/include/dm/pinctrl.h b/include/dm/pinctrl.h
+> index e3e50afeaf..70d8cc5eca 100644
+> --- a/include/dm/pinctrl.h
+> +++ b/include/dm/pinctrl.h
+> @@ -7,7 +7,7 @@
+>   #define __PINCTRL_H
+>   
+>   #define PINNAME_SIZE	10
+> -#define PINMUX_SIZE	80
+> +#define PINMUX_SIZE	90
+>   
+>   /**
+>    * struct pinconf_param - pin config parameters
 
+Applied.
+M
