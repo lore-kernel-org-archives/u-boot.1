@@ -4,72 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5F6E784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 396FCE784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:43:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4F8B874CB;
-	Mon,  2 Oct 2023 03:23:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5EC4286DA2;
+	Mon,  2 Oct 2023 03:23:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lfLxobIM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fq0qberd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 854F08721E; Mon,  2 Oct 2023 03:23:00 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 155CB874DF; Mon,  2 Oct 2023 03:23:14 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E672874A3
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:22:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1ACC8721E
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:23:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-991c786369cso2115332866b.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:22:56 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-9b1ebc80d0aso1895827666b.0
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:23:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209771; x=1696814571; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209779; x=1696814579; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HRmjdeOheihkx76TuO0tVe7DLytW9q7/6SHTunAwMpU=;
- b=lfLxobIMFZ++e+OMQ0XOJNYaJBIHlO5O6YOM2urBmBjUt9OHWrUbeyHQHsRCoYbfJp
- /w03IJJRx+DTPiXX5OeMTDuxlwb8Y3OL7vIHM6JBRIYvtHmvcvDuXH3URRVkyiHTyknp
- 9zeT1rKY1+lQcm6ysJZvio6vJfq2KUKaLDkjg=
+ bh=bVjQpAcISCnU0h8LQKvTtiKRnenCjuV1AzSzwF5RJDM=;
+ b=fq0qberd4IvQTAszyPlD2gC49bsNkwu2Tgq7LepLAzXuSFLIlyykMxqqzgRi0fPW8I
+ RTvOzs5+YylaRD6jQxnYBFyBa9QiKnA1HjCv6skWl8beHfvh7S4OyT0GmVg15VLGf+8C
+ zHBnS6zFjDusazyTg6pysa9rL3n0nDEZXQVC0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209771; x=1696814571;
+ d=1e100.net; s=20230601; t=1696209779; x=1696814579;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HRmjdeOheihkx76TuO0tVe7DLytW9q7/6SHTunAwMpU=;
- b=LENgMu1upSBNihPwPtZqpuusYnUDCU3xsV8PMrKw4bHMzAmp/BW1hCOhGpWpzv6mGc
- Mn27STgcFuLIgmrENOl7DqGbvoqyHUByW3hGQl7wvF38eK8SZZZtBrchSV9FfScT/lvG
- +e0M2gL1tawb6Y2NMmaRAJSRgL0oWiyxesPHyZQX27vy2DljJ0c2ELEgghdZwSz/17Sc
- IC8HF+ZAu5ChI4h8F5rE0YfZWjwistxbUzqwcjs/zt9lhZh5x+ndqL2mV+Z+iYAQmZwF
- 8RNJBLCBe8QmLiguuVtbCiMPij5JhAWipwbKiGLouZP31Pf63MNGY2p/sqBdAsjgmzxr
- JBng==
-X-Gm-Message-State: AOJu0YwMnnI2MdOBHCYFrzUNGxPhFEnC7NCrn0saqNuGoP/LeYnOvwhi
- +DQ1wOJX9oQG8iUoHQvADqjaV0F4SLWYWlMynUj/MJBEe3QByq6cEXI=
-X-Google-Smtp-Source: AGHT+IHxKyFknSgRIk/Y9066H/Ikl6ICpTcx+awxxJsQdcQPwkoW+HoiXcNgnCcRGuAjGw1HD+ir2kkSE81YvrtG9Us=
-X-Received: by 2002:a17:906:8464:b0:9b3:64b:4346 with SMTP id
- hx4-20020a170906846400b009b3064b4346mr1169665ejc.71.1696209771092; Sun, 01
- Oct 2023 18:22:51 -0700 (PDT)
+ bh=bVjQpAcISCnU0h8LQKvTtiKRnenCjuV1AzSzwF5RJDM=;
+ b=VyaplhN3ycvX9ucHaOpK/+dyfst9m/8Jl9mpwkxh1Ut/qsSZb2z3LvlE2H2XgB8zuO
+ 62uSt1poxyYCxPZ5D8MMo9D9kr7SWS1ugNdWJLP9o/s0zxQmmUK6n0JyjiJMRCIe9URg
+ fmQOBFpJF8xr3g2XQVPmK8aGJ14C2RAICFcaF3y7TiLkwWeF9kEmPbTMjUk9DeUqB/WQ
+ KdSA/FV4Vk2hbtkCdJ0YbReoICvHczFxZnoDfkRcTpnq9BynqXrcPNZhhuJxRh6OCsXn
+ o3j3xZdVBmnJaYhD3+RERxHHndg2XyIrlZH6//ohSMkVL9oA9TLWoJakB2Fb2wnAaXgV
+ gziw==
+X-Gm-Message-State: AOJu0YwtrzdaCbUkcKoOdmdrsBfDT1x5VP423M/zAgulbXhVv0f/HEhB
+ ak0OzILDODdVh3ZEscUhKUoHjIZuUST6Va22NuoP6NMnOVLJQfYWgVw=
+X-Google-Smtp-Source: AGHT+IFAwZgTwgYOys6D7Xn2n95RBQ4zz3CbFi5BLLhD1yMZXwT5HibDF4rI0XsH44GROE/WzA04pVPVrBv+HOsWCiE=
+X-Received: by 2002:a17:906:9c9:b0:9ae:4f9e:7813 with SMTP id
+ r9-20020a17090609c900b009ae4f9e7813mr7470763eje.73.1696209779522; Sun, 01 Oct
+ 2023 18:22:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230926-binman-firewalling-v2-0-b1a084ec634d@ti.com>
- <20230926-binman-firewalling-v2-2-b1a084ec634d@ti.com>
-In-Reply-To: <20230926-binman-firewalling-v2-2-b1a084ec634d@ti.com>
+References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
+ <20230926065750.734440-4-takahiro.akashi@linaro.org>
+In-Reply-To: <20230926065750.734440-4-takahiro.akashi@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Oct 2023 19:17:08 -0600
-Message-ID: <CAPnjgZ14Uy+gBC8kgqVA7m9NXN_WiXFffu5Ob=vz=E76rMDMPQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v2 2/8] binman: ti-secure: Add support for firewalling
- entities
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- u-boot@lists.denx.de, 
- Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
+Date: Sun, 1 Oct 2023 19:17:12 -0600
+Message-ID: <CAPnjgZ1RZKqzbDf4DFAy6gtLpp9dW3PAYEVSyx6ZFrScktpyKA@mail.gmail.com>
+Subject: Re: [PATCH v5 03/16] firmware: scmi: support dummy channels for
+ sandbox agent
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: trini@konsulko.com, etienne.carriere@st.com, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,27 +82,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit,
-
-On Tue, 26 Sept 2023 at 01:58, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+On Tue, 26 Sept 2023 at 00:58, AKASHI Takahiro
+<takahiro.akashi@linaro.org> wrote:
 >
-> We can now firewall entities while loading them through our secure
-> entity TIFS, the required information should be present in the
-> certificate that is being parsed by TIFS.
+> In sandbox scmi agent, channels are not used at all. But in this patch,
+> dummy channels are supported in order to test protocol-specific channels.
 >
-> The following commit adds the support to enable the certificates to be
-> generated if the firewall configurations are present in the binman dtsi
-> nodes.
->
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 > ---
->  tools/binman/btool/openssl.py   | 16 +++++++-
->  tools/binman/etype/ti_secure.py | 85 +++++++++++++++++++++++++++++++++++++++++
->  tools/binman/etype/x509_cert.py |  3 +-
->  3 files changed, 101 insertions(+), 3 deletions(-)
+> v5
+> * new commit
+> ---
+>  arch/sandbox/include/asm/scmi_test.h       | 13 ++++
+>  drivers/firmware/scmi/sandbox-scmi_agent.c | 90 ++++++++++++++++++++++
+>  2 files changed, 103 insertions(+)
 >
 
-Please do check that you have 100% test coverage here (binman test -T)
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
