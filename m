@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613E6E784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:36:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E83E784A6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:37:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BA028743A;
-	Mon,  2 Oct 2023 03:18:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DB8FB8724A;
+	Mon,  2 Oct 2023 03:19:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H5WcQoRW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NVizGSdz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4BFE870BE; Mon,  2 Oct 2023 03:18:48 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id B1DA38726A; Mon,  2 Oct 2023 03:19:47 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DAAC8727D
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:18:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 820A98747B
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:19:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5a229ac185aso37442317b3.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:18:35 -0700 (PDT)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5a2379a8b69so33788227b3.2
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:19:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209488; x=1696814288; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209553; x=1696814353; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PHkVOHWwu2NktbxFM6xxqf3A9p5zYq6uduiEZj1hBEU=;
- b=H5WcQoRWrr35XiSRBW5X23owJIBb9uZYRKINjmay9hkO30FmjDrjDGRDUlRJE7RpvI
- zxcEA1SfMzVwoAIICcRIowcCHQiFLHorZuSFBrFAc5Mtj8TFxdhd9VUfYac8tZVxlIR1
- /xB3UeRLVsM7AIGPFZJ7vEVF9RBBF9Hv+b3Cs=
+ bh=/v9C6d7Tp5RlKlanoLICKpl7djw/itMbBAcj9ElYt8k=;
+ b=NVizGSdz4cQxiilIQwO9dygcxYu23OD/5ocAOSBnMbEWUW4ecY/gHRPI/tC7R1c4XV
+ rgD/hlqN9FX3NQM+ubpK85EZC+eowqnDP4Vipx8XZ7N4ia6Wn3kBHhu4e4q9sbpxHB5a
+ AykiyyI0kSd0NK8sbcsf9MYlNH3Rhz2Qly4M8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209488; x=1696814288;
+ d=1e100.net; s=20230601; t=1696209553; x=1696814353;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PHkVOHWwu2NktbxFM6xxqf3A9p5zYq6uduiEZj1hBEU=;
- b=Z2coIMa8IeUFUM82ufjVB5HIL5NAQViYn9Qhu2GzcfL9Y1BHFQxHPuQPXxnOoPVFol
- aNC/nfr3ZvxHDyj24qn7oIXIoO3T8wq5uV7J3fZcxaBCgb2DqV7ExYQEsQTYXwaSJna0
- DYqFpqCiaEM0VyjcKO4SWkO4nW8j/Hogzkj9TFOukgXagncht1bMHA6J83jlDDHmpusH
- JA6pKHP7kbNI0jFlDv9CGsGbJTDL62wZdYCkZQJHIB5Zo2m4XrcyzJ2vyKFGllXWwkcx
- e4N4cTM9Ax4JiiKGdqo4+M7WFMxclEeHwSAptODi2SL1PzVX1LRyPeWPvWV1SEiUDfbK
- Xu2A==
-X-Gm-Message-State: AOJu0YzJ1CyHMxK0Z6U+AQPmntyeg0iGxnyIpJ58NDJxlUpO2vlNvy3r
- Z5m7Q1eOF4fXnGLDwxZXTiV7Evgk7dmUAVFSZvAATw==
-X-Google-Smtp-Source: AGHT+IErI+JJ0qQb0kGRaBojESvZz0XJJL4g79Qy/zZ5ny6YHKLgtq3Sh5UfWr8QnParMPf1D18KI7QU6ZpWolWmOeA=
-X-Received: by 2002:a81:738a:0:b0:59f:4e6d:b56a with SMTP id
- o132-20020a81738a000000b0059f4e6db56amr9966206ywc.2.1696209488104; Sun, 01
- Oct 2023 18:18:08 -0700 (PDT)
+ bh=/v9C6d7Tp5RlKlanoLICKpl7djw/itMbBAcj9ElYt8k=;
+ b=kEevhCeIuX2K9dxqzYC0JN2qoPRyrvFtzWL/zRoMiGvPrDiEq9xocBFr6lAdftoGFg
+ c6fiM2Mzo25mUOi/airIxg/slCbu9M7/JfJTdmDi161m1V4ODIPAoXRRpYXiZCXNGzAa
+ 2scxYt3EiHKknWUCsAjtmoKJCuE4L1F1mYRrTYeiTurhWr7hiKiCttVHs561zLNtqlkj
+ 9eMfH2PobKM35GbelOr+PzTA43Za0Z/EX5uAdWhh5H9sTw0cTo2B/YZEbamDf5pCT13n
+ FfBqYo5vCIEmA1H6I3mYRHzaefELyvpDrOng+KB7V0xD5qK8arLCS3bgf3O1LL24c+Pv
+ H4wQ==
+X-Gm-Message-State: AOJu0YyD4b5OnFUm4URR+iw6RjpaPn2uc+CS2BmRLWJ2XXftOinFxgYi
+ 7tAol3umwVGWAY3fED5sxD2xQ+Xr8QORTwlOfMU6OsnqnF+pykh3B4Y=
+X-Google-Smtp-Source: AGHT+IHQNH+AfJKt6pc+xz35IxBGc+44lolvEm+LQ3GWyHfsID6kypvUxF3a0XWRGAdGMC7++gOMhhnLlhVKccZ79YE=
+X-Received: by 2002:a81:9190:0:b0:59b:e666:1fb4 with SMTP id
+ i138-20020a819190000000b0059be6661fb4mr11127004ywg.9.1696209552806; Sun, 01
+ Oct 2023 18:19:12 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230926084346.2237483-1-bmeng@tinylab.org>
- <20230926084346.2237483-8-bmeng@tinylab.org>
-In-Reply-To: <20230926084346.2237483-8-bmeng@tinylab.org>
+ <20230926084346.2237483-12-bmeng@tinylab.org>
+In-Reply-To: <20230926084346.2237483-12-bmeng@tinylab.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Oct 2023 19:16:59 -0600
-Message-ID: <CAPnjgZ1kbNsttZXNiAOPufdSS1tY4jxt=26o9KZjP71Vgcec_g@mail.gmail.com>
-Subject: Re: [PATCH 07/15] blk: blkmap: Make bind/unbind routines static
+Date: Sun, 1 Oct 2023 19:17:02 -0600
+Message-ID: <CAPnjgZ2gqf3dNZNxuXRkuKDqmidEU6DkxJuOS3ZuwA+DTMBm+Q@mail.gmail.com>
+Subject: Re: [PATCH 11/15] dm: blk: Rename get_desc() and make it externally
+ visible
 To: Bin Meng <bmeng@tinylab.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Suchanek <msuchanek@suse.de>, 
  Tobias Waldekranz <tobias@waldekranz.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -82,15 +86,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Sept 2023 at 02:51, Bin Meng <bmeng@tinylab.org> wrote:
+On Tue, 26 Sept 2023 at 02:56, Bin Meng <bmeng@tinylab.org> wrote:
 >
-> These 2 are only used in drivers/block/blkmap.c.
+> get_desc() can be useful outside blk-uclass.c. Let's change it to
+> an API and make it externally visible.
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 > ---
 >
->  drivers/block/blkmap.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  drivers/block/blk-uclass.c | 26 ++++++++------------------
+>  include/blk.h              | 12 ++++++++++++
+>  2 files changed, 20 insertions(+), 18 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
