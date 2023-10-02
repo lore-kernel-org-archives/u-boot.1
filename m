@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 396FCE784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:43:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4601E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:43:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EC4286DA2;
-	Mon,  2 Oct 2023 03:23:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48FC38644E;
+	Mon,  2 Oct 2023 03:23:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fq0qberd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QZIbm/gS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 155CB874DF; Mon,  2 Oct 2023 03:23:14 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id E7018874E9; Mon,  2 Oct 2023 03:23:18 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1ACC8721E
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:23:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50F70874C9
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:23:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-9b1ebc80d0aso1895827666b.0
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:23:10 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-325e9cd483eso2236733f8f.2
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:23:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209779; x=1696814579; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209782; x=1696814582; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bVjQpAcISCnU0h8LQKvTtiKRnenCjuV1AzSzwF5RJDM=;
- b=fq0qberd4IvQTAszyPlD2gC49bsNkwu2Tgq7LepLAzXuSFLIlyykMxqqzgRi0fPW8I
- RTvOzs5+YylaRD6jQxnYBFyBa9QiKnA1HjCv6skWl8beHfvh7S4OyT0GmVg15VLGf+8C
- zHBnS6zFjDusazyTg6pysa9rL3n0nDEZXQVC0=
+ bh=foLI2TJJSu9BISCBd5Vmb/gazYCPwt02lR/ea1ZcC1g=;
+ b=QZIbm/gSAz1SvDiHulgwGFn3h/rFXS7oG2hmdw+JxQzI81nwr6XoftX51CuqW6UuYo
+ M6w8SuFKS8zqX8S2YwQC7YvWj5nxeQb9rg29us8YnIb+1sY4/0a1PpqYEmX0d5z0XpeT
+ vFrUE46Gw91+lHEML0D6OVRz8YHOilQEV+2+0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209779; x=1696814579;
+ d=1e100.net; s=20230601; t=1696209782; x=1696814582;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bVjQpAcISCnU0h8LQKvTtiKRnenCjuV1AzSzwF5RJDM=;
- b=VyaplhN3ycvX9ucHaOpK/+dyfst9m/8Jl9mpwkxh1Ut/qsSZb2z3LvlE2H2XgB8zuO
- 62uSt1poxyYCxPZ5D8MMo9D9kr7SWS1ugNdWJLP9o/s0zxQmmUK6n0JyjiJMRCIe9URg
- fmQOBFpJF8xr3g2XQVPmK8aGJ14C2RAICFcaF3y7TiLkwWeF9kEmPbTMjUk9DeUqB/WQ
- KdSA/FV4Vk2hbtkCdJ0YbReoICvHczFxZnoDfkRcTpnq9BynqXrcPNZhhuJxRh6OCsXn
- o3j3xZdVBmnJaYhD3+RERxHHndg2XyIrlZH6//ohSMkVL9oA9TLWoJakB2Fb2wnAaXgV
- gziw==
-X-Gm-Message-State: AOJu0YwtrzdaCbUkcKoOdmdrsBfDT1x5VP423M/zAgulbXhVv0f/HEhB
- ak0OzILDODdVh3ZEscUhKUoHjIZuUST6Va22NuoP6NMnOVLJQfYWgVw=
-X-Google-Smtp-Source: AGHT+IFAwZgTwgYOys6D7Xn2n95RBQ4zz3CbFi5BLLhD1yMZXwT5HibDF4rI0XsH44GROE/WzA04pVPVrBv+HOsWCiE=
-X-Received: by 2002:a17:906:9c9:b0:9ae:4f9e:7813 with SMTP id
- r9-20020a17090609c900b009ae4f9e7813mr7470763eje.73.1696209779522; Sun, 01 Oct
- 2023 18:22:59 -0700 (PDT)
+ bh=foLI2TJJSu9BISCBd5Vmb/gazYCPwt02lR/ea1ZcC1g=;
+ b=pBx/f022nhO0yP5vRMIRzxk7LMiGJrM+NZz4gR5hJbdaUiIN680Qv/fJ8GfavxOHgA
+ SzF/EefaIREFt5mSzPcSQR19a7jgl7WJadGqYWK1jfMzq+8kEOXuLQntvCtpY71IiceQ
+ miAMCqWYG4+yLSF6Q3oPj2VDw8u9eB2ftKSRYLa0IPhB920RNBsxtRvbT/TjiY2aYVgO
+ Err6if0jPFD87CWlPW/qFA+cvF6o4VyL5mfACxMwjmBMcHpbrualIf+4l6cpeSv38kTg
+ 8tuH+Tlx5io3iexXu6mNQCiYFtAL5IHDWI8KNXPGYvbMbYWc+eXT/kbiqPvapTyYWhwu
+ 92hA==
+X-Gm-Message-State: AOJu0YzbpaW3im5z8JtmyLaFQVpBp7iU7Z7PqYdIlewXZao1+x4kHwGY
+ Phl2u2kGaacRtYteQ9qyo188v51AD7450wyragTW/3A/VAgECrnUWE8=
+X-Google-Smtp-Source: AGHT+IHfl587gaZ9XnwVC8qw7ngFx3i98NLnS0383izk9Tp2qkhmt1R413FJbDYbFAaRb4IicjXbqZa3DHLtfMOwBR4=
+X-Received: by 2002:adf:f546:0:b0:31f:d7bb:481e with SMTP id
+ j6-20020adff546000000b0031fd7bb481emr8993360wrp.63.1696209782331; Sun, 01 Oct
+ 2023 18:23:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
- <20230926065750.734440-4-takahiro.akashi@linaro.org>
-In-Reply-To: <20230926065750.734440-4-takahiro.akashi@linaro.org>
+ <20230926065750.734440-12-takahiro.akashi@linaro.org>
+In-Reply-To: <20230926065750.734440-12-takahiro.akashi@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Oct 2023 19:17:12 -0600
-Message-ID: <CAPnjgZ1RZKqzbDf4DFAy6gtLpp9dW3PAYEVSyx6ZFrScktpyKA@mail.gmail.com>
-Subject: Re: [PATCH v5 03/16] firmware: scmi: support dummy channels for
- sandbox agent
+Date: Sun, 1 Oct 2023 19:17:15 -0600
+Message-ID: <CAPnjgZ1f7WwDAwn2Ry83BCLCRZep0dwFdi0K-s7r8i8Acv1d6A@mail.gmail.com>
+Subject: Re: [PATCH v5 11/16] firmware: scmi: add a check against availability
+ of protocols
 To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: trini@konsulko.com, etienne.carriere@st.com, u-boot@lists.denx.de
+Cc: trini@konsulko.com, etienne.carriere@st.com, u-boot@lists.denx.de, 
+ Etienne Carriere <etienne.carriere@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,17 +86,17 @@ X-Virus-Status: Clean
 On Tue, 26 Sept 2023 at 00:58, AKASHI Takahiro
 <takahiro.akashi@linaro.org> wrote:
 >
-> In sandbox scmi agent, channels are not used at all. But in this patch,
-> dummy channels are supported in order to test protocol-specific channels.
+> Now that we have Base protocol support, we will be able to check if a given
+> protocol is really supported by the SCMI server (firmware).
 >
 > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 > ---
-> v5
-> * new commit
+> v3
+> * new; import this patch from my followup patch set
 > ---
->  arch/sandbox/include/asm/scmi_test.h       | 13 ++++
->  drivers/firmware/scmi/sandbox-scmi_agent.c | 90 ++++++++++++++++++++++
->  2 files changed, 103 insertions(+)
+>  drivers/firmware/scmi/scmi_agent-uclass.c | 41 +++++++++++++++++++++--
+>  1 file changed, 38 insertions(+), 3 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
