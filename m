@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19FDCE784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB680E784A6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:17:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A9F287108;
+	by phobos.denx.de (Postfix) with ESMTP id CE7748710B;
 	Mon,  2 Oct 2023 03:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KTYCOFpg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fIh3EDh0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D693486CBB; Mon,  2 Oct 2023 03:14:05 +0200 (CEST)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id 297CD870DF; Mon,  2 Oct 2023 03:13:59 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C0DA870DC
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:13:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 162C486CBD
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:13:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-35255c1a448so13499665ab.3
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:13:57 -0700 (PDT)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-351574aca7bso27034605ab.3
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:13:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209236; x=1696814036; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FNUsB1VFtYnW6oZL98cmCHCbLxHL/yPaHclozoK1HsA=;
- b=KTYCOFpgSS7aw5b/5w13E4YVQhrCA641+CYzKEiGsIzcU1OjtS93yInO4Qx0hUYbJS
- 04w/WZduciFxNkRrh2Wap/yW80bjp4zV/msKEEMZZmBXq5DMd5GhCmMiS3yV3dbAfv1g
- RlVmxChiQmGQen9OjzA1fqEdg0GkzX6p0yoTw=
+ d=chromium.org; s=google; t=1696209233; x=1696814033; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=dfhAEldtUMdrq4Bapa8S2NsXGIbMMrDeLa6SktdH4mg=;
+ b=fIh3EDh0NpfjDKrBjXkqO4puAmGHah0L611kMVHhZlKOZKlwsC5ccOhBsSQC/jdvuH
+ byoQoWpHDgJu9wgqmX/shbwJzo+p6xYM19hhGKOmsbKi19Syd/Z4S7opBMjhRb7rZ7BH
+ ebIyifHNqf23we0fd96M6qyAL3LpuucqS1qtQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209236; x=1696814036;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FNUsB1VFtYnW6oZL98cmCHCbLxHL/yPaHclozoK1HsA=;
- b=MhS7WXA2+2uNHeRBKIqCxwav60iHwQMCPAO0dI01Wmi/ifATRFhh4PCUlrGVXwnlb3
- M285Nf1NdRdA3jFbgh12QSHnm5BzMd9KGtKUl0M0oTY0tz4WUjNpjQ50YR4jODBuXUVO
- Su+F5Gpx6rQV83TNQ2Zp2MnROUfBw3G6YOZtoyaCV8sTK/joxvgoRwq7So9ZAkFjPmrq
- 2TfIUswfNSDkkvoyXywK8CYs/OlwnGSNR81LeCDwredCXoCXvKKSo2Ve4nbxJzAHKdCd
- OlmbZQn0y5hs9hoG8mMH7IO/Q4o8QDhNceBghqNWKF3ZWotCGIdzMlej2nszXcg5XBG+
- cAUw==
-X-Gm-Message-State: AOJu0YxQgqcF18NVuqCmNgD7IagMrngEBPrLCK6bwK5QD+7LIj8XBS9y
- YHi5G5GxsdR1AWTqTjHJ95FZHK1OCgZPfMx3+YY=
-X-Google-Smtp-Source: AGHT+IHtSNb9nC+EeoP2MsI0xaLO690SFLMkCXWsFcsdQTjFP5LRzWHtRPnCiF6q5lhetIr137HdbA==
-X-Received: by 2002:a05:6e02:1c27:b0:34f:7665:c43c with SMTP id
- m7-20020a056e021c2700b0034f7665c43cmr13009342ilh.23.1696209236046; 
- Sun, 01 Oct 2023 18:13:56 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696209233; x=1696814033;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dfhAEldtUMdrq4Bapa8S2NsXGIbMMrDeLa6SktdH4mg=;
+ b=N68eJbwssbXSY6VvpSOX8wVqCjnnbbIzUcBY4RGfJMjaTMSqvzJWxXvl3nOot1KZHA
+ 2tUbM/N22NRvRaHYaHbPhykxbKay5a12dk/YtITzU+sn1NZT3P8WhGdHY9tj1lrPsIuy
+ jLto4tIFQBithhZdrzQy1PxtTLFig+Ifz7KXHiWi/wRik36L0rsZ+bd4FVqT1FBF3bYL
+ w5WRSprvvI72rxeUyGY08+zNeAVKuOXO8WBDFthWv8t7rrOmR+RSUEpAxl1I4eiJy9FI
+ BcU3ZZD+82SRcuny9HJ4vSsCE6AbyImlZAS0yvDEPTlwaMT8L+EIN45WSTiJ4VPzyYN+
+ ZEBA==
+X-Gm-Message-State: AOJu0YxIPvlws48s18rxaML3osFyxsPX4yWQMw1PjlGiSq8G3vL/ohK1
+ eMZKa7J27NqinJ6yLFPpriHOUWBdutpbRxnjFt0=
+X-Google-Smtp-Source: AGHT+IGAozEvxaDQ8q3H4j1UKT2tHbQiZvn3azY6keQpnqhPPJxyi3WegPPPqzuvCr8MCi3JBYsimg==
+X-Received: by 2002:a05:6e02:18cb:b0:34f:2484:64ce with SMTP id
+ s11-20020a056e0218cb00b0034f248464cemr12652753ilu.23.1696209233244; 
+ Sun, 01 Oct 2023 18:13:53 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.13.55
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.13.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:13:55 -0700 (PDT)
+ Sun, 01 Oct 2023 18:13:52 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 03/36] cli: Drop some #ifdefs in cli_readline
-Date: Sun,  1 Oct 2023 19:13:07 -0600
-Message-ID: <20231002011349.461284-4-sjg@chromium.org>
+ Simon Glass <sjg@chromium.org>, Anatolij Gustschin <agust@denx.de>
+Subject: [PATCH v2 00/36] expo: Support editing lines of text
+Date: Sun,  1 Oct 2023 19:13:04 -0600
+Message-ID: <20231002011349.461284-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
-In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
-References: <20231002011349.461284-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -88,69 +85,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a few static inlines to avoid the need for #ifdefs in
-cli_readline_into_buffer()
+So far expo only supports menus. These are quite flexible for various
+kinds of settings, but cannot deal with free-form input, such as a
+serial number or a machine name.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This series adds support for a textline object, which is a single line
+of text. It has a maximum length and its value is stored within the expo
+structure.
 
-(no changes since v1)
+U-Boot already has a command-line editor which provides most of the
+features needed by expo. But the code runs in its own loop and only
+returns when the line is finished. This is not suitable for expo, which
+must handle a keypress at a time, returning to its caller after each
+one.
 
- common/cli_readline.c | 20 ++++++++++++++------
- 1 file changed, 14 insertions(+), 6 deletions(-)
+In order to use the CLI code, some significant refactoring is included
+here. This mostly involves moving the internal loop of the CLI to a
+separate function and recording its state in a struct, just as was done
+for single keypresses some time back. A minor addition is support for
+Ctrl-W to delete a word, since strangely this is currently only present
+in the simple version.
 
-diff --git a/common/cli_readline.c b/common/cli_readline.c
-index f3ba76a62ec8..61f9ba99068a 100644
---- a/common/cli_readline.c
-+++ b/common/cli_readline.c
-@@ -423,6 +423,18 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 	return 0;
- }
- 
-+#else /* !CONFIG_CMDLINE_EDITING */
-+
-+static inline void hist_init(void)
-+{
-+}
-+
-+static int cread_line(const char *const prompt, char *buf, unsigned int *len,
-+		      int timeout)
-+{
-+	return 0;
-+}
-+
- #endif /* CONFIG_CMDLINE_EDITING */
- 
- /****************************************************************************/
-@@ -552,8 +564,7 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
- 			     int timeout)
- {
- 	char *p = buffer;
--#ifdef CONFIG_CMDLINE_EDITING
--	unsigned int len = CONFIG_SYS_CBSIZE;
-+	uint len = CONFIG_SYS_CBSIZE;
- 	int rc;
- 	static int initted;
- 
-@@ -563,7 +574,7 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
- 	 * Revert to non-history version if still
- 	 * running from flash.
- 	 */
--	if (gd->flags & GD_FLG_RELOC) {
-+	if (IS_ENABLED(CONFIG_CMDLINE_EDITING) && (gd->flags & GD_FLG_RELOC)) {
- 		if (!initted) {
- 			hist_init();
- 			initted = 1;
-@@ -576,9 +587,6 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
- 		return rc < 0 ? rc : len;
- 
- 	} else {
--#endif	/* CONFIG_CMDLINE_EDITING */
- 		return cread_line_simple(prompt, p);
--#ifdef CONFIG_CMDLINE_EDITING
- 	}
--#endif
- }
+The video-console system provides most of the features needed by
+testline, but a few things are missing. This series provides:
+
+- primitive cursor support so the user can see where he is typing
+- saving and restoring of the text-entry context, so that expo can allow
+  the user to continue where he left off, including deleting previously
+  entered characters correctly (for Truetype)
+- obtaining the nominal width of a string of n characters, so that a
+  suitable width can be chosen for the textline object
+
+Note that no support is provided for clearing the cursor. This was
+addressed in a previous series[1] which could perhaps be rebased. For
+this implementation, the cursor is therefore not enabled for the normal
+command line, only for expo.
+
+Reading and writing textline objects is supported for FDT and
+environment, but not for CMOS RAM, since it would likely use too much
+RAM to store a string.
+
+In terms of code size, the overall size increase is 180 bytes for
+Thumb02 boards, 160 of whcih is the addition of Ctrl-W to delete a word.
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=280178&state=*
+
+Changes in v2:
+- Drop blank line at end of help
+- Drop trailing ;
+- Correct variable declaration in switch() to make clang happy
+
+Simon Glass (36):
+  cli: Move simple readline into a function
+  cli: Add a command to show cmdline history
+  cli: Drop some #ifdefs in cli_readline
+  cli: Drop #ifdefs for CONFIG_AUTO_COMPLETE in cli_readline
+  cli: Implement delete-word in cread_line()
+  cli: Use unsigned int instead of unsigned long
+  cli: Convert cread_line() to use a struct for the main vars
+  cli: Unindent some code in cread_line()
+  cli: Create a function to process characters
+  cli: Terminate the string in cread_line_process_ch()
+  cli: Allow history to be disabled
+  cli: Allow command completion to be disabled
+  cli: Add a function to set up a new cread
+  video: Allow obtaining the nominal size of a string size
+  video: Allow saving and restoring text-entry state
+  video: Export vidconsole_entry_start()
+  video: Support showing a cursor
+  expo: Add better error reporting
+  expo: Fix up comments for get_cur_menuitem_text() et al
+  expo: Use switch statements more for object types
+  expo: Correct some swallowed errors in scene
+  expo: Correct the logic for duplicate-ID detection
+  expo: Allow highlighting other scene-object types
+  expo: Add a function to write a property to a devicetree
+  expo: Make calculation of an object bounding box generic
+  expo: Allow rendering the background of any object
+  expo: Add some scene fields needed for text entry
+  expo: Add basic support for textline objects
+  expo: Support opening a textline
+  expo: Plumb in textlines to a scene
+  video: Mark truetype_measure() static
+  expo: Support handling any key in cedit
+  expo: Plumb in textline to cedit
+  expo: Support building an expo with a textline
+  expo: Update tests to include textline
+  expo: Update documentation to include textline
+
+ arch/sandbox/dts/cedit.dtsi         |   8 +
+ boot/Makefile                       |   3 +-
+ boot/cedit.c                        | 198 ++++++++---
+ boot/expo_build.c                   | 102 +++++-
+ boot/scene.c                        | 237 +++++++++++--
+ boot/scene_internal.h               | 128 ++++++-
+ boot/scene_menu.c                   |  68 +---
+ boot/scene_textline.c               | 229 +++++++++++++
+ cmd/Kconfig                         |   7 +
+ cmd/Makefile                        |   1 +
+ cmd/history.c                       |  23 ++
+ common/cli_readline.c               | 498 ++++++++++++++++------------
+ doc/develop/cedit.rst               |   3 +-
+ doc/develop/expo.rst                |  48 ++-
+ doc/usage/cmd/history.rst           |  67 ++++
+ doc/usage/index.rst                 |   1 +
+ drivers/video/console_core.c        |  31 ++
+ drivers/video/console_normal.c      |  29 ++
+ drivers/video/console_truetype.c    | 191 ++++++++++-
+ drivers/video/vidconsole-uclass.c   |  71 +++-
+ drivers/video/vidconsole_internal.h |  24 ++
+ include/cli.h                       |  51 +++
+ include/command.h                   |   6 +
+ include/expo.h                      |  60 +++-
+ include/menu.h                      |   7 +-
+ include/test/cedit-test.h           |   5 +-
+ include/video_console.h             | 123 +++++++
+ test/boot/cedit.c                   |  30 +-
+ test/boot/expo.c                    |   2 +-
+ test/boot/files/expo_ids.h          |   3 +
+ test/boot/files/expo_layout.dts     |   8 +
+ test/cmd/Makefile                   |   1 +
+ test/cmd/history.c                  |  49 +++
+ 33 files changed, 1935 insertions(+), 377 deletions(-)
+ create mode 100644 boot/scene_textline.c
+ create mode 100644 cmd/history.c
+ create mode 100644 doc/usage/cmd/history.rst
+ create mode 100644 test/cmd/history.c
+
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
