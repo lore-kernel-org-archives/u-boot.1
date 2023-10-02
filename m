@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 619AAE784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:31:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B79E784A6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:31:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BBE787165;
-	Mon,  2 Oct 2023 03:17:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7FEC8721C;
+	Mon,  2 Oct 2023 03:17:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="j/Iij5Bf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OSCXiSB9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 984AC87118; Mon,  2 Oct 2023 03:17:00 +0200 (CEST)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 7E7DF8710D; Mon,  2 Oct 2023 03:17:07 +0200 (CEST)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A42B88721A
+ by phobos.denx.de (Postfix) with ESMTPS id A2DDB87218
  for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:16:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-79fc3d32a2fso415777639f.1
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-79f915e5b47so569158939f.2
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:16:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209366; x=1696814166; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209365; x=1696814165; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q5gB0bGiHFVxRqphlEfn3vbaOPFW4YgSKWgq+oB0pL8=;
- b=j/Iij5BfSX/spir1SXHY71PhFqXQxHU3JWMg7t+2GEAMYQAypl9iAfxQS3Y3u4lW91
- Zam5gJcL8fzNWT3yeATywgfYWz+5l6t/BHbfk0sj8Hr7nSIGDez7/EaX1vJNuUQvJOlz
- o66O7RxroiI8socUsTDBMwZCXD9yghaWvr/eU=
+ bh=YQRWKTaaVOcyC320SbnsGQnJs1jpbb/W3zNOBkrkx6I=;
+ b=OSCXiSB9B/7c6DK9v7sOGizPNs6ZfOg8R6aU48yyXLfEFA0kcSef6+qHXBlqc24B77
+ kpikJlEWY3l6m23RpM3LAPnUCi3kAR/7cU+3GD1tkCMNHzjSRbWSHXGfRhE2wE1Qg4LI
+ NHi0CcZb/SmbrZSPpm2wiAmh6zmva74PxT+i8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209366; x=1696814166;
+ d=1e100.net; s=20230601; t=1696209365; x=1696814165;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q5gB0bGiHFVxRqphlEfn3vbaOPFW4YgSKWgq+oB0pL8=;
- b=jP5beZE7i/auHgqhlM2f+Hwl4a0FJqXrL2oSKRBVkK2En/f79jLdC2UibDpM6U7LEZ
- WaxINEm4Dh9ybRJJsuqkqL4pjNpK/uFkTBH9udBP7+xrO/6fX3biOhDzx6dOj065eN2a
- vYBb7s94B1W0eCsNeM5Ma670GLNB7FaAcnpB4hd3iXJ5dq2VKOuk90mnZBhDApYysqzP
- V+mAqL2fmkFwrGJkVH+xC8YM9Ze2qsya8G5jlG+9mDjhwUcAtAij2X2+igPH7y4XbOI+
- F05CCCVVg/PgWhFEHGwHsrVcDHKEt27euqep5aW0RqACTC5wuBGBX3Gu7jukzmN34F6m
- iuKw==
-X-Gm-Message-State: AOJu0Yzr0KbzTK0Ot6sbdM+1mDdqM6lIvPExePlaIzwxpGa2iDG6eUfF
- caYjIzObdeoUcAnXbQk5lLQAttqTL5kA220mIfI=
-X-Google-Smtp-Source: AGHT+IF69MSEJ5P/b8Go46UW+fikbEQS2eYS76KE/tdWvvUEbwbTmPsICM035je8x8hcuIQfDiV+mQ==
-X-Received: by 2002:a05:6602:1b10:b0:792:82f8:7402 with SMTP id
- dk16-20020a0566021b1000b0079282f87402mr11825164iob.16.1696209366358; 
- Sun, 01 Oct 2023 18:16:06 -0700 (PDT)
+ bh=YQRWKTaaVOcyC320SbnsGQnJs1jpbb/W3zNOBkrkx6I=;
+ b=e96nj9GlvR6L7fNYtU/dsT/EYY1I+RnpFoSlR6qCGLWqqMrOsTmkDWDWPuwKG705jZ
+ 2bVv1uYf0alPeBm4jkqycsS98L5dED3JdNUfwTzFL+Gge/E1dcxzTl3gVQSzXKyojynp
+ 2Vqnzf9WUWQ/WQLpoBEn55XjfhSBGK1tM9wionYc3IZRmdYSszSRas0uKu1sIEGTgW0y
+ c8K9TRjcTaXjF28p6eMja7VNsfvqiJyX8PXMA1bGjdaNkM8E3y8o8ZxAD7NW+/dUWnXH
+ XllpT/yDR/0KkwV6AzgJGhxc6Il5X0MyJiPt/UeoYGaFN0nArTEm1FYxFRovdLIEAjQo
+ 7gWw==
+X-Gm-Message-State: AOJu0Yw2qtYOP1r9EOCe3Eb6E5QIlgVAA0puoVoYTwnwWyK0qaT+Ae+V
+ oU/Evn/MjpsdCPyiH/KJzQ2vMJh/QfycurlxaxM=
+X-Google-Smtp-Source: AGHT+IEdfaRJ5s0wgzlAocODMVEa2dHMjqTTwdWho2BQNKRRoMfB4TGZpMfyemnp3WO7tCe2sAdUZg==
+X-Received: by 2002:a5e:8712:0:b0:780:ce72:ac55 with SMTP id
+ y18-20020a5e8712000000b00780ce72ac55mr13059722ioj.10.1696209365439; 
+ Sun, 01 Oct 2023 18:16:05 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- l26-20020a02a89a000000b0041d859c5721sm6819619jam.64.2023.10.01.18.16.05
+ l26-20020a02a89a000000b0041d859c5721sm6819619jam.64.2023.10.01.18.16.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:16:06 -0700 (PDT)
+ Sun, 01 Oct 2023 18:16:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PATCH 03/34] test: Add helper to skip to partial console line
-Date: Sun,  1 Oct 2023 19:15:13 -0600
-Message-ID: <20231002011553.463514-4-sjg@chromium.org>
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>
+Subject: [PATCH 02/34] test: Add a new suite for commands
+Date: Sun,  1 Oct 2023 19:15:12 -0600
+Message-ID: <20231002011553.463514-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011553.463514-1-sjg@chromium.org>
 References: <20231002011553.463514-1-sjg@chromium.org>
@@ -89,106 +94,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sometimes we need to skip to a line but it includes addresses or other
-information which can vary depending on the runtime conditions.
+Add a new suite for 'cmd' tests, used for testing commands. These are
+kept in the test/cmd directory.
 
-Add a new ut_assert_skip_to_linen() which is similar to the existing
-ut_assert_skip_to_line() function but only checks that the console line
-matches up to the length of the provided string.
+For now it is empty, but it will be used for coreboot-command tests.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/test/ut.h | 30 ++++++++++++++++++++++++++++++
- test/ut.c         | 27 +++++++++++++++++++++++++++
- 2 files changed, 57 insertions(+)
+ include/test/cmd.h    | 15 +++++++++++++++
+ include/test/suites.h |  1 +
+ test/cmd/Makefile     |  2 ++
+ test/cmd/cmd_ut_cmd.c | 21 +++++++++++++++++++++
+ test/cmd_ut.c         |  6 ++++++
+ 5 files changed, 45 insertions(+)
+ create mode 100644 include/test/cmd.h
+ create mode 100644 test/cmd/cmd_ut_cmd.c
 
-diff --git a/include/test/ut.h b/include/test/ut.h
-index ea6ee95d7344..d3172af8083f 100644
---- a/include/test/ut.h
-+++ b/include/test/ut.h
-@@ -97,6 +97,23 @@ int ut_check_skipline(struct unit_test_state *uts);
-  */
- int ut_check_skip_to_line(struct unit_test_state *uts, const char *fmt, ...);
- 
-+/**
-+ * ut_check_skip_to_linen() - skip output until a partial line is found
-+ *
-+ * This creates a string and then checks it against the following lines of
-+ * console output obtained with console_record_readline() until it is found.
-+ * Only the characters up to the length of the string are checked, so the line
-+ * may extend further
-+ *
-+ * After the function returns, uts->expect_str holds the expected string and
-+ * uts->actual_str holds the actual string read from the console.
-+ *
-+ * @uts: Test state
-+ * @fmt: printf() format string to look for, followed by args
-+ * Return: 0 if OK, -ENOENT if not found, other value on error
+diff --git a/include/test/cmd.h b/include/test/cmd.h
+new file mode 100644
+index 000000000000..c200570e423d
+--- /dev/null
++++ b/include/test/cmd.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Copyright 2023 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
 + */
-+int ut_check_skip_to_linen(struct unit_test_state *uts, const char *fmt, ...);
 +
- /**
-  * ut_check_console_end() - Check there is no more console output
-  *
-@@ -359,6 +376,19 @@ int ut_check_console_dump(struct unit_test_state *uts, int total_bytes);
- 	__ret;								\
- })
- 
-+/* Assert that a following console output line matches */
-+#define ut_assert_skip_to_linen(fmt, args...) ({				\
-+	int __ret = 0;							\
-+									\
-+	if (ut_check_skip_to_linen(uts, fmt, ##args)) {			\
-+		ut_failf(uts, __FILE__, __LINE__, __func__,		\
-+			 "console", "\nExpected '%s',\n     got to '%s'", \
-+			 uts->expect_str, uts->actual_str);		\
-+		return CMD_RET_FAILURE;					\
-+	}								\
-+	__ret;								\
-+})
++#ifndef __TEST_CMD_H__
++#define __TEST_CMD_H__
 +
- /* Assert that there is no more console output */
- #define ut_assert_console_end() ({					\
- 	int __ret = 0;							\
-diff --git a/test/ut.c b/test/ut.c
-index 28da417686e4..628e9dc98050 100644
---- a/test/ut.c
-+++ b/test/ut.c
-@@ -121,6 +121,33 @@ int ut_check_skipline(struct unit_test_state *uts)
- 	return 0;
- }
++#include <test/test.h>
++
++/* Declare a new command test */
++#define CMD_TEST(_name, _flags) UNIT_TEST(_name, _flags, cmd_test)
++
++#endif /* __TEST_CMD_H__ */
+diff --git a/include/test/suites.h b/include/test/suites.h
+index 1c7dc65966a1..2d4897d46b8e 100644
+--- a/include/test/suites.h
++++ b/include/test/suites.h
+@@ -34,6 +34,7 @@ int do_ut_bootstd(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		  char *const argv[]);
+ int do_ut_bloblist(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		   char *const argv[]);
++int do_ut_cmd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_common(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_compression(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		      char *const argv[]);
+diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+index 8d70ac510a53..0be2cec89018 100644
+--- a/test/cmd/Makefile
++++ b/test/cmd/Makefile
+@@ -3,6 +3,8 @@
+ # Copyright (c) 2013 Google, Inc
+ # Copyright 2022-2023 Arm Limited and/or its affiliates <open-source-office@arm.com>
  
-+int ut_check_skip_to_linen(struct unit_test_state *uts, const char *fmt, ...)
++obj-y += cmd_ut_cmd.o
++
+ ifdef CONFIG_HUSH_PARSER
+ obj-$(CONFIG_CONSOLE_RECORD) += test_echo.o
+ endif
+diff --git a/test/cmd/cmd_ut_cmd.c b/test/cmd/cmd_ut_cmd.c
+new file mode 100644
+index 000000000000..1a5bfdb4a183
+--- /dev/null
++++ b/test/cmd/cmd_ut_cmd.c
+@@ -0,0 +1,21 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Copyright 2023 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
++ *
++ * Unit tests for command functions
++ */
++
++#include <common.h>
++#include <command.h>
++#include <test/cmd.h>
++#include <test/suites.h>
++#include <test/ut.h>
++
++int do_ut_cmd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 +{
-+	va_list args;
-+	int len;
-+	int ret;
++	struct unit_test *tests = UNIT_TEST_SUITE_START(cmd_test);
++	const int n_ents = UNIT_TEST_SUITE_COUNT(cmd_test);
 +
-+	va_start(args, fmt);
-+	len = vsnprintf(uts->expect_str, sizeof(uts->expect_str), fmt, args);
-+	va_end(args);
-+	if (len >= sizeof(uts->expect_str)) {
-+		ut_fail(uts, __FILE__, __LINE__, __func__,
-+			"unit_test_state->expect_str too small");
-+		return -EOVERFLOW;
-+	}
-+	while (1) {
-+		if (!console_record_avail())
-+			return -ENOENT;
-+		ret = readline_check(uts);
-+		if (ret < 0)
-+			return ret;
-+
-+		if (!strncmp(uts->expect_str, uts->actual_str,
-+			     strlen(uts->expect_str)))
-+			return 0;
-+	}
++	return cmd_ut_category("cmd", "cmd_test_", tests, n_ents, argc, argv);
 +}
-+
- int ut_check_skip_to_line(struct unit_test_state *uts, const char *fmt, ...)
- {
- 	va_list args;
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 0f56409e8031..d3505fe8d97e 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -60,6 +60,9 @@ static struct cmd_tbl cmd_ut_sub[] = {
+ #ifdef CONFIG_BOOTSTD
+ 	U_BOOT_CMD_MKENT(bootstd, CONFIG_SYS_MAXARGS, 1, do_ut_bootstd,
+ 			 "", ""),
++#endif
++#ifdef CONFIG_CMDLINE
++	U_BOOT_CMD_MKENT(cmd, CONFIG_SYS_MAXARGS, 1, do_ut_cmd, "", ""),
+ #endif
+ 	U_BOOT_CMD_MKENT(common, CONFIG_SYS_MAXARGS, 1, do_ut_common, "", ""),
+ #if defined(CONFIG_UT_DM)
+@@ -188,6 +191,9 @@ static char ut_help_text[] =
+ #ifdef CONFIG_BOOTSTD
+ 	"\nbootstd - standard boot implementation"
+ #endif
++#ifdef CONFIG_CMDLINE
++	"\ncmd - test various commands"
++#endif
+ #ifdef CONFIG_SANDBOX
+ 	"\ncompression - compressors and bootm decompression"
+ #endif
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
