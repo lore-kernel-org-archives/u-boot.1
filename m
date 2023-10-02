@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07453E7849A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 07:41:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C88C8E7849A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 07:45:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48AAF87107;
-	Mon,  2 Oct 2023 09:41:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 26DAC86587;
+	Mon,  2 Oct 2023 09:45:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wj0Ypk6N";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="KTITKSWT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1FC18712E; Mon,  2 Oct 2023 09:41:08 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id D8F48870E4; Mon,  2 Oct 2023 09:45:00 +0200 (CEST)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 78517870FB
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 09:41:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8661D8646E
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 09:44:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2bffc55af02so247363251fa.2
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 00:41:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-31427ddd3fbso14863361f8f.0
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 00:44:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696232466; x=1696837266; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qtveoxAHVhlJIobItiqft5qDEwoNtrI7BKqjyjwjWjg=;
- b=Wj0Ypk6NzGvIIaRF0+KSdt81EYIbpLHRxMFORs+JBJJBGffHbboyTeyX2j8hta8Rx3
- PXvWWZmIxp9p3uHOlqQI5bRZxa7dqg+5oMjZwGxerAc5TiaogJGRBqUH2Kc0iTnFuZ+J
- /VASABThv2evUPEa5MeR4pRl02jFy1mDZleY3VLM4vo9VvAd9Lmox7TzXY88gFW0XQ6r
- v7Q8CJ0ugx90lnYdTc5d9Y6RWwWxkXULtM06mmWiowNW1wxBLwcfeabf5oCHGCf9cR94
- QbDdbJ11vmake/vhKo41cy8wzGVHD+LgXeM6PcRO+gsFGel3j0Bqzn9wNEHa8hI477o5
- lPHQ==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1696232698; x=1696837498;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=VJ8TwVIm45hDSutmESkhoFcRWNxtZpNFg3xHwBf7CxU=;
+ b=KTITKSWTBSySqW7Wf9uk162XJVw2k4CWrFC38yUAcvx7rr1fJHFzr7JfjpX1MgBOOw
+ /zSS3Evz5ZcUBmgCNJYDInsUckf+If1O0QsU89VVrIr9kqizAn5I5li+K1ZP/D9HTcHG
+ C6JsyQRl327CfepUr3ybZ/umryKX0sumIB7wNwNInqjaOwm9fAVhmL8pKOOtwCYNIw55
+ dHZBuhKqgH284k17PO0t7VXcz3cc0ZyhL2Zc+OEQTM6N5bup2igsax8AQWcyl8JovW+9
+ mG8XKDBBW/E3v1sfWM4ASblfbtV3KzHLGg/PCwYF6KHghkbPCNLsSz6ucM1RSsvnRzKc
+ rm/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696232466; x=1696837266;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qtveoxAHVhlJIobItiqft5qDEwoNtrI7BKqjyjwjWjg=;
- b=EcL2U2CbdmP1B/Lfl2QUpHp/Z9FNCrp/rEjrLi/QvOFL+BL+/PePja/aLV8Jytahk8
- ocdaBMET1GIwx7hOsUtQ2WlM7LYGHbJaglaMBMsGy9ICZnsiB9EfO0qdC2FsUXezWjsE
- hEI12LVdUC/TAINKu/WpEhwgnEb47nhJSQdWIB7svTwQGA7M9lEDB2o40Nu0sdj1G/4G
- ne1msb5piFy1LJ8LvpLLZTMomzqVZ/fY/A2IvdAIG4IHtDDjvebqqwHdTQFjqgR/lvR7
- 6XpZnXIt9ImrBPFnahj7sbQmiVNZaDAP0/uYtqSZ9L2eZvKyqFS2re2wKFKeAPY49RJk
- kKAw==
-X-Gm-Message-State: AOJu0Yzia8OYCb6y5ao9x0JVAV4Y5CZHbfrXtPRkJ65lRYDTLnLd+txi
- EasKXFculYQ+gbPldcZJlJPSsNn2bCsTi6M0pS0=
-X-Google-Smtp-Source: AGHT+IEftKbzxUsF74PK1hiqduvJ2meYUuExYYg81RWPkj/YiNjkDPTy6XkTKwqSHIjRFPdevaroKyALqurtODRCS6g=
-X-Received: by 2002:a2e:9f14:0:b0:2bf:f989:b8e5 with SMTP id
- u20-20020a2e9f14000000b002bff989b8e5mr9263808ljk.33.1696232465334; Mon, 02
- Oct 2023 00:41:05 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696232698; x=1696837498;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=VJ8TwVIm45hDSutmESkhoFcRWNxtZpNFg3xHwBf7CxU=;
+ b=tQDN1skVOOWKTLB0csOoDeHQ+XBFBHdpu4FnZigpddXufHaO0AqWu5Z49k1sL5P+I3
+ +EY32H3EwsdMFuZSMkRvIV7mx6Nl0LrN+lJ5Uqc0YT+MWqLQVL56SvEP6ZPGle6+FZAq
+ SKb3PzshFdW0Fr2yXnzu8aLc6BbXMA4q0uQSiTI8Y0fge/wNnLWeXnXGi3X9DWOK+LPw
+ BcpmXcCd7ecmBk+FMZfeIl5DfaFoFl3TzhYs+55jWAFMJi4ID//50U/q3AENcRXu8oGN
+ iq3kp/0ztvrPnYEZpGzdYpioZSHLq0GaZL95p5v6ssn7aUeED1NNwyoJFGzT9MqHyOlD
+ jF0A==
+X-Gm-Message-State: AOJu0YwGlCpLL8ttERU0bgw9QdbknhGYQe+msg9YzbDYCUHZDBddd+/B
+ SshclHksnGdaKk0diRYrz8FdB9YrvFDoBaPhFB0=
+X-Google-Smtp-Source: AGHT+IHl0u+JeWqxDyoEBrAZ7uo7IqgLoJZ5l9lQJq98SSICtz4rDZHuOQBAnWo6WQVrzJWiYJetLg==
+X-Received: by 2002:adf:ec82:0:b0:31c:804b:5ec3 with SMTP id
+ z2-20020adfec82000000b0031c804b5ec3mr9380462wrn.67.1696232697681; 
+ Mon, 02 Oct 2023 00:44:57 -0700 (PDT)
+Received: from localhost ([2a01:cb1d:78a:c00:357d:97d4:b439:b35c])
+ by smtp.gmail.com with ESMTPSA id
+ a13-20020adff7cd000000b0031ad5fb5a0fsm12553429wrq.58.2023.10.02.00.44.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Oct 2023 00:44:57 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Wojciech Nizinski <niziak@spox.org>, u-boot@lists.denx.de
+Cc: Wojciech Nizinski <niziak@spox.org>
+Subject: Re: [PATCH] fastboot: fix CRC32 chunk size checking
+In-Reply-To: <20230925103714.4153612-1-niziak@spox.org>
+References: <20230925103714.4153612-1-niziak@spox.org>
+Date: Mon, 02 Oct 2023 09:44:56 +0200
+Message-ID: <87o7hhlb7r.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <20230926085651.395069-1-JJLIU0@nuvoton.com>
- <20230926085651.395069-4-JJLIU0@nuvoton.com>
- <20230926134807.GT305624@bill-the-cat>
- <CAKUZ0+FRnrEuyGpNMeqD_Tbi8VXTgtV=8A1ZoQPU=ZaMJRT3TQ@mail.gmail.com>
- <20230928122317.GD305624@bill-the-cat>
- <CAKUZ0+Fr+2mYYK8naK6gxLdzSDtQ=MW2Yp12ipXE5D3-pq-y1w@mail.gmail.com>
- <20230928161657.GE305624@bill-the-cat>
-In-Reply-To: <20230928161657.GE305624@bill-the-cat>
-From: Jim Liu <jim.t90615@gmail.com>
-Date: Mon, 2 Oct 2023 00:40:54 -0700
-Message-ID: <CAKUZ0+HnYEKxJUbXdrHPMUMVROcFSu7aA_mspd9OnaMCPozXTQ@mail.gmail.com>
-Subject: Re: [PATCH v1 3/3] arm: npcm8xx: support dcache off
-To: Tom Rini <trini@konsulko.com>
-Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, u-boot@lists.denx.de, 
- Bhupesh Sharma <bhupesh.sharma@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,115 +89,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom
+Hi Wojciech,
 
-I followed your suggestion to modify the code.
-but still have errors.
-Should I use my workaround?
+Thank you for your patch.
 
-Best regards,
-Jim
+On lun., sept. 25, 2023 at 12:37, Wojciech Nizinski <niziak@spox.org> wrote:
 
-On Thu, Sep 28, 2023 at 9:17=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
+> genimage create android-sparse file with CRC32 chunk at end. When
+> U-Boot's fastboot receives this chunk it returns error message:
+> `Fail Bogus chunk size for chunk type Dont Care`
+
+I could not reproduce this, probably because my sparse images don't have
+crc32 chunks.
+
 >
-> On Thu, Sep 28, 2023 at 10:32:51PM +0800, Jim Liu wrote:
-> > Hi  Tom
-> >
-> > Thanks for your understanding.
-> > but  this patch  is an incomplete patch.
-> > After I applied this patch  I had another error.
-> >
-> > arch/arm/cpu/armv8/cache_v8.c:773:2: error: #error Please describe
-> > your MMU layout in CONFIG_SYS_MEM_MAP and enable dcache.
-> >   773 | #error Please describe your MMU layout in CONFIG_SYS_MEM_MAP
-> > and enable dcache.
-> >
-> > This error is the same as that link.
+> According to reference implementation of Android's sparse file format:
 >
-> Please use that patch as a starting point (and also possibly needing to
-> grab
-> https://patchwork.ozlabs.org/project/uboot/patch/20230822075112.717992-2-=
-bhupesh.sharma@linaro.org/
-> as that's how I'd like to proceed with addressing this generic armv8
-> issue, thanks!
+> <https://android.googlesource.com/platform/system/core/+/refs/heads/main/
+> libsparse/output_file.cpp#513>
 >
-> >
-> > Best regards,
-> > Jim
-> >
-> > On Thu, Sep 28, 2023 at 8:23=E2=80=AFPM Tom Rini <trini@konsulko.com> w=
-rote:
-> > >
-> > > On Thu, Sep 28, 2023 at 08:49:23AM +0800, Jim Liu wrote:
-> > > > Hi Tom
-> > > >
-> > > > Thanks for the quick review.
-> > > >
-> > > > if we set the CONFIG_SYS_DCACHE_OFF the  armv8 will build error.
-> > > > So we added a workaround for our bmc uboot.
-> > > >
-> > > > the error message as below:
-> > > >
-> > > > CONFIG_SYS_DCACHE_OFF can't be enabled on armv8, or the following
-> > > > build error would happen.
-> > > >
-> > > > arch/arm/cpu/armv8/cpu.o: in function `cleanup_before_linux':
-> > > > arch/arm/cpu/armv8/cpu.c:60: undefined reference to `icache_disable=
-'
-> > > > arch/arm/cpu/armv8/cpu.c:68: undefined reference to `dcache_disable=
-'
-> > > > arch/arm/cpu/armv8/cpu.c:69: undefined reference to `invalidate_dca=
-che_all'
-> > >
-> > > OK, so you need
-> > > https://patchwork.ozlabs.org/project/uboot/patch/20230811054228.37214=
-55-1-bhupesh.sharma@linaro.org/
-> > > to be applied, as-is, yes? Thanks!
-> > >
-> > > >
-> > > > Best regards,
-> > > > Jim
-> > > >
-> > > > On Tue, Sep 26, 2023 at 9:48=E2=80=AFPM Tom Rini <trini@konsulko.co=
-m> wrote:
-> > > > >
-> > > > > On Tue, Sep 26, 2023 at 04:56:50PM +0800, Jim Liu wrote:
-> > > > >
-> > > > > > do not enable dcache by setting CONFIG_SYS_NPCM_DCACHE_OFF=3Dy
-> > > > > >
-> > > > > > Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
-> > > > > > ---
-> > > > > >  arch/arm/mach-npcm/npcm8xx/Kconfig |  4 ++++
-> > > > > >  arch/arm/mach-npcm/npcm8xx/cpu.c   | 12 +++++++++++-
-> > > > > >  2 files changed, 15 insertions(+), 1 deletion(-)
-> > > > > >
-> > > > > > diff --git a/arch/arm/mach-npcm/npcm8xx/Kconfig b/arch/arm/mach=
--npcm/npcm8xx/Kconfig
-> > > > > > index 5f4a0506dc..163e7e7d48 100644
-> > > > > > --- a/arch/arm/mach-npcm/npcm8xx/Kconfig
-> > > > > > +++ b/arch/arm/mach-npcm/npcm8xx/Kconfig
-> > > > > > @@ -6,6 +6,10 @@ config SYS_CPU
-> > > > > >  config SYS_SOC
-> > > > > >       default "npcm8xx"
-> > > > > >
-> > > > > > +config SYS_NPCM_DCACHE_OFF
-> > > > > > +     bool "Do not enable dcache"
-> > > > > > +     default n
-> > > > > > +
-> > > > > >  config TARGET_ARBEL_EVB
-> > > > > >       bool "Arbel Evaluation Board"
-> > > > > >       help
-> > > > >
-> > > > > Why do we need a new Kconfig option here on top of the existing g=
-eneric
-> > > > > ones to control cache?
-> > > > >
-> > > > > --
-> > > > > Tom
-> > >
-> > > --
-> > > Tom
+> the chunk_header.total_sz is CHUNK_HEADER_LEN + 4 (CRC32 size).
 >
-> --
-> Tom
+> Signed-off-by: Wojciech Nizinski <niziak@spox.org>
+
+However, the change looks fine to me.
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+I also tested by reflashing a super image from aosp/main on the vim3 board.
+Base commit: 2173c4a99066 ("Merge tag 'u-boot-at91-fixes-2023.10-b' of https://source.denx.de/u-boot/custodians/u-boot-at91")
+
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on vim3
+
+> ---
+>
+>  lib/image-sparse.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/lib/image-sparse.c b/lib/image-sparse.c
+> index 8f8a67e158..323aad981c 100644
+> --- a/lib/image-sparse.c
+> +++ b/lib/image-sparse.c
+> @@ -289,8 +289,8 @@ int write_sparse_image(struct sparse_storage *info,
+>  
+>  		case CHUNK_TYPE_CRC32:
+>  			if (chunk_header->total_sz !=
+> -			    sparse_header->chunk_hdr_sz) {
+> -				info->mssg("Bogus chunk size for chunk type Dont Care",
+> +			    sparse_header->chunk_hdr_sz + sizeof(uint32_t)) {
+> +				info->mssg("Bogus chunk size for chunk type CRC32",
+>  					   response);
+>  				return -1;
+>  			}
+> -- 
+> 2.39.2
