@@ -4,75 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38DA7E784AC
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 13:02:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFB32E784AC
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 13:42:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BB3F87167;
-	Mon,  2 Oct 2023 15:00:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C56FB870AD;
+	Mon,  2 Oct 2023 15:42:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YXtrTuab";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="gKlYyK1q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E794870DE; Mon,  2 Oct 2023 14:42:54 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7585786DE8; Mon,  2 Oct 2023 15:42:54 +0200 (CEST)
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
+ [217.70.183.195])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A136B870D1
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 14:42:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C28E86DF6
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 15:42:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=viraniac@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-523100882f2so21518512a12.2
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 05:42:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696250572; x=1696855372; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=223ACxqdg0nkH/otEslobyv6NbTjepSS6radzJ3oKRU=;
- b=YXtrTuabvTvQVKP+PLnS3ZMud1DgES9VLOIogVYNAD1/3HAQCwjLa/NsYUSCLKPg6e
- rYgnL1DvXQJbkGokdXf4l/7BrxExscEubo6oGyfwbk80vY9PNVwzvBQADc1g2igeFUOl
- ZXO0L82rMyioEfUQ1IcYgnPyQ4ykyLYd7hKyh2kkPDrWiiphpj0q/u/aMnjeFKQHRK9V
- u002/Z9HErqv5ujBfPgbFmdpVvfRxZz52DxDAJBfyAPWsl6gZ0QG47wW2usQu1g3Gh12
- 9Ap5cyLNpuY735aGu87rqR6cpmaNVXRf990ckid9kIk8ZAjreijajD/EXRZhtMbVvNNG
- 46lQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696250572; x=1696855372;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=223ACxqdg0nkH/otEslobyv6NbTjepSS6radzJ3oKRU=;
- b=bjb0dHTwAkc9scfRYpxHHRljCpugSSYraOUd+/RRS7d6IEEoBHsNLY16WXUhLwbPrm
- HKosRT9lrYbVNpy2NSnnrTtoO08LKM3cOcbbAMuZH/2VrV1NUJ9PQ5AfPxyP47h+eFw5
- 8XLuQ3hka91zjHaSUM+rclHke4Ntg9sqGCqaMEOX2wCoIfhFT9VMWe4zqt2PF/T7b4TN
- dx3SXzzoB3Fhd1QZr+wXKfIZteuFn3vvfHsoEKBA7heH/r9zb4PlUrty9xVf4v/sMlwq
- Xtp4ZM1zxqXQ60xbpMOPchLK04PTxJskz18530YNLyyDmIFwfNpLDJtbkC2tRjUIXWxT
- TtGg==
-X-Gm-Message-State: AOJu0YyMz8VjS9sqqMB++FuFiq8EDWGfcDZioMAGaTGv2uYoPr5ItTdC
- R8YiSio6AfRlRtjOYO/d41rm0/AHC467ACFh4oo=
-X-Google-Smtp-Source: AGHT+IFM0S4Jaz62/xLUfPnV6C/g2LTEFE6cUVUwDSWSjCCzD+dBNNvWpcZu4kYzAeJB/ldpX+oavH7WtppgEZF+dHs=
-X-Received: by 2002:aa7:cb13:0:b0:526:5c70:7318 with SMTP id
- s19-20020aa7cb13000000b005265c707318mr9354689edt.6.1696250571925; Mon, 02 Oct
- 2023 05:42:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id D199260002;
+ Mon,  2 Oct 2023 13:42:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1696254170;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1Pw9oVYxWmLCzRyqRsy37YM09Y7zNtfIMFj/v8KgtJw=;
+ b=gKlYyK1qKp4l4s3F1qgN24akzjKe16fA0HuBzJw+v3nnCbo4E9MZ/Ag3qZJbFSbXuMbvJ5
+ Uc0DpTR1ASiflV64tM4L72DmACSfVXhjDsKhCyDQlezy7fU8lnh0o9Q9B/VM/u3GiNk4Kw
+ MorsaGzKoP9ZFwIT+DnKltQtk7NcNjMfdz6/pB8af8D7nma16pU1IDINKf/6jUShW8hqs1
+ Um5Jf8zRNwfRk8ijT+KDe7TSWwx6N9WkTaEZVyBvU0EG+7nFVIZn4PLh+XozLsOtZSXtua
+ 3UXfnVzcCab6Wxz4H/liCWo9Id0V0KFSntTYvQIqlWtrq1R/oR+DoYPel0/SMw==
+Date: Mon, 2 Oct 2023 15:42:46 +0200
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Angus Ainslie <angus@akkea.ca>, Dmitrii Merkurev <dimorinny@google.com>,
+ Eddie Cai <eddie.cai.linux@gmail.com>, Kever Yang
+ <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>, Nishanth
+ Menon <nm@ti.com>, Patrice Chotard <patrice.chotard@foss.st.com>, Patrick
+ Delaunay <patrick.delaunay@foss.st.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, Stefan Roese
+ <sr@denx.de>, kernel@puri.sm
+Subject: Re: [PATCH v2 01/17] dm: usb: udc: Factor out plain udevice handler
+ functions
+Message-ID: <20231002154246.38d43236@xps-13>
+In-Reply-To: <7abc460b-54c2-67b0-2f1e-e67a6878666e@denx.de>
+References: <20230901095003.352930-1-marex@denx.de>
+ <20230922120012.6e24645f@xps-13> <20230927155901.10c5d520@xps-13>
+ <7abc460b-54c2-67b0-2f1e-e67a6878666e@denx.de>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-References: <20231001161336.31140-1-viraniac@gmail.com>
- <20231001161336.31140-2-viraniac@gmail.com>
- <20231002122626.047b4043@donnerap.manchester.arm.com>
-In-Reply-To: <20231002122626.047b4043@donnerap.manchester.arm.com>
-From: Gunjan Gupta <viraniac@gmail.com>
-Date: Mon, 2 Oct 2023 18:12:40 +0530
-Message-ID: <CAJAzxbVw_TZ+eJ6uh63nCp5ggZR76k5bup49TkUtZV426M3R+Q@mail.gmail.com>
-Subject: Re: [PATCH 1/1] sunxi: dram: Fix incorrect ram size detection for
- some H6 boards
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>, 
- Ondrej Jirman <megi@xff.cz>, Jagan Teki <jagan@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Mon, 02 Oct 2023 15:00:05 +0200
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,60 +80,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> >  bool mctl_mem_matches(u32 offset)
-> >  {
-> > +     dsb();
-> This looks a bit odd, do you have an explanation for that? And are you
-> sure that is really needed?
-> I understand why we need the DSB after the writel's below, but before that?
+Hi Marek,
 
-I started with Ondrej Jirman's patch from LibreELEC's tree that had a
-dsb call added
-after the first writel call. That reduced the frequency of the errors
-but didn't removed
-it completely. My reason for moving it before the writel was to make
-sure any memory
-access is completed before starting the actual logic for the test.
-That reduced the
-frequency even further, but didn't resolve the issue. I did try
-removing it leaving only
-udelay added to the code, but that brings back the issue.
+marex@denx.de wrote on Sat, 30 Sep 2023 23:11:17 +0200:
 
-> The only thing I could think of is that we are missing a barrier in
-> mctl_core_init() - which is the function called before mctl_mem_matches().
-> Can you move that dsb(); into mctl_auto_detect_dram_size(), right after
-> the mctl_core_init() call (where you add the udelay() below)? And I wonder
-> if a dmb() would already be sufficient?
+> On 9/27/23 15:59, Miquel Raynal wrote:
+> > Hi Marek, =20
+>=20
+> Hi,
+>=20
+> > miquel.raynal@bootlin.com wrote on Fri, 22 Sep 2023 12:00:12 +0200:
+> >  =20
+> >> Hi Marek,
+> >>
+> >> I'm answering here as there is no cover letter. Just to let you know
+> >> I'm still concerned by the series and want to test it but did not had
+> >> the time to do so recently. Hopefully next week. =20
+> >=20
+> > The series looks good to me and works as well on a Beagle Bone Black
+> > with no visible functional changes regarding the use of the UDC. The
+> > whole series is:
+> >=20
+> > Tested-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> >=20
+> > By the way, following your initial series there have been three
+> > followup patches trying to improve a little bit the doc, one got merged
+> > and two others were delegated to you:
+> > https://patchwork.ozlabs.org/project/uboot/list/?series=3D367635
+> >=20
+> > They are almost 2 months old now, would you mind acking or merging
+> > them so both your initial USB gadget rework and the additional
+> > (related) doc can be in the same release please? =20
+>=20
+> Can you resend those and CC this mail address ?
 
-Sure, I will try experimenting with it.
+Of course!
 
-> I noticed recently that the clr/setbit_le32() functions don't have a barrier at all, maybe
-> that should be fixed instead?
+> That said, 1/2 should be in some sort of README instead, and the 'dm tree=
+' command depends on CMD_DM=3Dy .
 
-I haven't done much of the low level programming myself. Mostly have
-done user space
-programming along with fixing minor kernel module compilation issues
-due to kernel api
-changes. So I wasn't sure what all places to debug. But if you point
-me to places with
-things to try, I surely can give time playing around testing the proposed fixes.
+Well, the README is more something which targets the developer IMO,
+whereas here I want to target the users. Many people only see U-Boot
+through Yocto now (that's a different topic) and the purpose of this
+additional text is to help them in finding their way into U-Boot device
+model *alone*. It's really short, but I bet it can really help, given
+how I felt when I actually understood why you advised to type a couple
+of semi-random bind/unbind commands which eventually worked. Anybody not
+involved in any DM conversion is likely just not aware of all of that.
+Having people finding their own way through the DM means less
+complaints/needs for help on the mailing list.
 
-> > @@ -623,6 +623,8 @@ static void mctl_auto_detect_dram_size(struct dram_para *para)
-> >       para->cols = 11;
-> >       mctl_core_init(para);
-> >
-> > +     udelay(50);
-> The location of that udelay() looks a bit odd, any chance that belongs at
-> the end of mctl_channel_init() instead? And how did you come up with that
-> and the value of 50? Just pure experimentation?
+> The usb_gadget_probe_driver() is code synchronized from kernel, you likel=
+y want to add any such clarification to usb_gadget_register_driver() .
 
-Before adding the udelay, I added 7 print statements to print all the
-members of the para
-struct. That itself solved the issue along with the dsb added to the
-top of the mctl_mem_matches
-function. This is what gave me the clue that a delay is needed there.
-The value of 50 is
-indeed from pure experimentation
+Actually the kernel functions do have some kind of alternate error
+message as well now :-) Clearly different given that this code has been
+adapted to U-Boot's DM, but the idea is close. However
+usb_gadget_register_driver() is kind of blind regarding the number of
+UDCs in the system and if they are already bound or not, so I don't
+really see the point in moving the error message there along with all
+the logic duplication involved.
 
-Thanks & Regards
-Gunjan Gupta
+> That said, the usb_gadget_register_driver() should be reworked into
+> some new functions, which takes UDC controller *udevice pointer to
+> avoid this binding heuristics.
+
+Yes, I don't know many boards with two UDCs but it's a clear limitation.
+
+Thanks,
+Miqu=C3=A8l
