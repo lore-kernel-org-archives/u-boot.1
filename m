@@ -4,59 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31D66E7490C
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 19:29:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C38DFE7491F
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 21:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80DFD86DBC;
-	Mon,  2 Oct 2023 21:29:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B483B86DBC;
+	Mon,  2 Oct 2023 23:00:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="husae6c5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UUBjeJJj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3A15586D59; Mon,  2 Oct 2023 21:29:06 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 148B286E16; Mon,  2 Oct 2023 23:00:29 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A29286DD3
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 21:29:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C788D86D56
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 23:00:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=bc9a=FR=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1696274938;
- bh=Rl3pa15kIxuKdcUR2Plz7qwWT0uhAmKM5/zWIAhxIb8=;
- b=husae6c5/nJB1UM0lKodJHFmUx7QbK6NeYgBzvWB6KQjJDIcrI/As+0Sufz8Qr5PeZqnBnyKw
- CIq4X+UTFu2ezkgMGiKRX5XTl4AaoSSQcU8+6fxVijM+LauDiF9sdvhEdDcBM5mxqAd6GvZSHsd
- ldtyEKQRxXQY9XQj81Bm8S/XKTbWRxCQgkNwr26yyah+fJNisoiMlEk4dgYStptYbFCBQkjuy/9
- vQhsgK1nB18Kf1MN3shxZhPPbeGafDx+5l+sHWLP9HcE3pYxbI17QVohSPPKFI9FbbXg/NCNYZb
- /YuoZVmfLSlP5BDRQskAfGFJJE0Pn6JAaPBwBwyfI61g==
-Message-ID: <550d1f16-b788-d2b5-c2d9-fe5d199e63e1@kwiboo.se>
-Date: Mon, 2 Oct 2023 21:28:53 +0200
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-d8162698f0dso237996276.0
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 14:00:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1696280425; x=1696885225; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aYpZ5qwdsHqTDapn9VjI5pKK13wpNEmLuS5Bnuih5o4=;
+ b=UUBjeJJjxie8ZumuGYJr5hjdMVsbaDI9+ZRLCyRRn2ojR1lx8AAYZgUWrOFWcXenjE
+ GuVqfbwDy+dAERhmLzliUNaIdOTQXJ5MZV5MVxjrHyWvqwCXYRU0VRdxO+MwUisLIvBa
+ luPsvHAMAahGIzSGDIXiSQLpvANj2OnzGJPNA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696280425; x=1696885225;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aYpZ5qwdsHqTDapn9VjI5pKK13wpNEmLuS5Bnuih5o4=;
+ b=JcNbCJA2N9AXGypSj7FrD9AWGLshFd0FinWkjAH3QyRxtIRnaCWYIpvRoIgUhlxir+
+ gSFPBLePP2TSH0JH5MOtXWBEZ03okR8cYY7LUzp2hraKvggsn2v+NHZR9PaRO3YekaM3
+ NoDYNz6kzn+49URKVwcW8ZYsac1qJWx3+XowWLpg3kWRjRJfGDKwc6YDeSfS94aA5I7H
+ B0fEluIW+LRGurBVxC6SyhMp8ZHh91X/6MR6Ym9eBYvMG/NyCgqwsiZbVQAHwM6DN8rc
+ imhecb5MCeLR+i/94w7+y1n3m524WlMpP6j+/iZVShKz4WWXMIYoya2ZCvNcptohchCS
+ jtLg==
+X-Gm-Message-State: AOJu0YzgZTQy0odFED5ebPBo0Tm1pni78gsuZl5s/aDJig6XODq/noTh
+ SnmvjMdP3y/B95BEpiW9l3i0iQ==
+X-Google-Smtp-Source: AGHT+IFC9mQhckARMp8fyLbTTbsae732jkaBog7JrbOqYyk6Bg7RXxwYZy9Bxt9It5CR6VddFMnJOg==
+X-Received: by 2002:a25:3747:0:b0:d81:65a9:ac6c with SMTP id
+ e68-20020a253747000000b00d8165a9ac6cmr11444901yba.24.1696280425289; 
+ Mon, 02 Oct 2023 14:00:25 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-1bd6-f13c-2029-607c.res6.spectrum.com.
+ [2603:6081:7b00:6400:1bd6:f13c:2029:607c])
+ by smtp.gmail.com with ESMTPSA id
+ n80-20020a25da53000000b00d217e46d25csm7167187ybf.4.2023.10.02.14.00.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 02 Oct 2023 14:00:24 -0700 (PDT)
+Date: Mon, 2 Oct 2023 17:00:23 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PULL] u-boot-sh/next_pinctrl_sync
+Message-ID: <20231002210023.GA8465@bill-the-cat>
+References: <20231002104756.6132-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [RFC] mmc: Remove alignment hole for cmdidx in struct mmc_cmd
-Content-Language: en-US
-To: Simon Glass <sjg@google.com>
-Cc: u-boot@lists.denx.de, Ferass El Hafidi <vitali64pmemail@protonmail.com>
-References: <20230929230655.2932698-1-jonas@kwiboo.se>
- <CAPnjgZ2O7kxiRt9j3forPPjm=R5EgmLdZKVrwVbyR156YhNDpw@mail.gmail.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAPnjgZ2O7kxiRt9j3forPPjm=R5EgmLdZKVrwVbyR156YhNDpw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 651b19f9bc08fefbb6f1b9de
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+PjK0C3NGHrGP/Jo"
+Content-Disposition: inline
+In-Reply-To: <20231002104756.6132-1-marek.vasut+renesas@mailbox.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,144 +91,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-10-02 20:56, Simon Glass wrote:
-> On Fri, 29 Sept 2023 at 17:07, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> The alignment hole caused by cmdidx in struct mmc_cmd cause strange
->> issues together with the peephole2 optimization on Amlogic SoCs.
->> Following was observed while working on SPL support for Amlogic SoCs.
->>
->> sd_get_capabilities() normally issue a CMD55 followed by a CMD51.
->> However, on at least Amlogic S905 (Cortex-A53) and S905X3 (Cortex-A55),
->> CMD55 was instead followed by CMD8 (and a few reties) in SPL.
->>
->> Code from the call site:
->>
->>   cmd.cmdidx = SD_CMD_APP_SEND_SCR; // 51
->>   ...
->>   data.blocksize = 8;
->>   ...
->>   err = mmc_send_cmd_retry(mmc, &cmd, &data, 3);
->>
->> Running the code with MMC_TRACE enabled shows:
->>
->> CMD_SEND:55
->>                 ARG                      0x50480000
->>                 MMC_RSP_R1,5,6,7         0x00000920
->> CMD_SEND:8
->>                 ARG                      0x00000000
->>                 RET                      -110
->>
->> Removing the alignment hole by changing cmdidx from ushort to uint or
->> building with -fno-peephole2 flag seem to resolve this issue.
->>
->> CMD_SEND:55
->>                 ARG                      0x50480000
->>                 MMC_RSP_R1,5,6,7         0x00000920
->> CMD_SEND:51
->>                 ARG                      0x00000000
->>                 MMC_RSP_R1,5,6,7         0x00000920
->>
->> Same issue was observed building U-Boot with gcc 8-13. Please advise on
->> how to best work around this possible gcc optimization bug.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>  arch/arm/cpu/armv8/config.mk | 2 ++
->>  include/mmc.h                | 2 +-
->>  2 files changed, 3 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/cpu/armv8/config.mk b/arch/arm/cpu/armv8/config.mk
->> index 4d74b2a533e0..7177dcd7c73b 100644
->> --- a/arch/arm/cpu/armv8/config.mk
->> +++ b/arch/arm/cpu/armv8/config.mk
->> @@ -7,6 +7,8 @@ PLATFORM_RELFLAGS += $(call cc-option,-mbranch-protection=none)
->>  PF_NO_UNALIGNED := $(call cc-option, -mstrict-align)
->>  PLATFORM_CPPFLAGS += $(PF_NO_UNALIGNED)
->>
->> +PLATFORM_CPPFLAGS += $(call cc-option,-fno-peephole2)
-> 
-> Eek really?
 
-As mentioned the issue could be resolved with changing cmdidx from
-ushort to uint or disabling the peephole2 optimization.
+--+PjK0C3NGHrGP/Jo
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-For the purpose of trying to get more feedback on the issue I included
-both changes that would resolve my issue.
+On Mon, Oct 02, 2023 at 12:47:56PM +0200, Marek Vasut wrote:
 
-Also if there is one struct affected, there could be other similar
-structs affected by a similar issue.
+> The following changes since commit 90c81f407dd4a7747385b10f9b8f732202c45c=
+de:
+>=20
+>   Merge tag 'dm-next-23sep23' of https://source.denx.de/u-boot/custodians=
+/u-boot-dm into next (2023-09-24 12:43:00 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-sh.git next_pinctrl_sync
+>=20
+> for you to fetch changes up to 30c210b9bee474d3ca5803f866ed07a6bac56fd4:
+>=20
+>   ARM: renesas: Align env eMMC device number with Linux 6.5.3 DT changes =
+on R-Car Gen3 Salvator-X (2023-10-01 00:08:29 +0200)
+>=20
 
-I do not really know if this could be a cpu errata, compiler bug or
-something else, including some assembly from a non-working and working
-case (peephole2 optimization enabled/disabled).
+Applied to u-boot/master, thanks!
 
-Code generated with ushort and peephole2 enabled (not working):
+--=20
+Tom
 
-  60 06 80 52     mov        w0,#0x33		// 51
-  f5 3f 06 91     add        x21,sp,#0x18f
-  e0 23 01 79     strh       w0,[sp, #cmd]
-  e0 03 00 b2     mov        x0,#0x100000001
-  b5 e6 7a 92     and        x21,x21,#-0x40
-  f5 03 06 a9     stp        x21,x0,[sp, #data]
-  00 01 80 52     mov        w0,#0x8
-  e2 83 01 91     add        x2,sp,#0x60
-  e1 43 02 91     add        x1,sp,#0x90
-  63 00 80 52     mov        w3,#0x3
-  e0 73 00 b9     str        w0,[sp, #blocksize]
-  e0 03 13 aa     mov        x0,x19
-  f6 ff 12 29     stp        w22,wzr,[sp, #resp_type]
-  50 fd ff 97     bl         mmc_send_cmd_retry
+--+PjK0C3NGHrGP/Jo
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Code generated with ushort and peephole2 disabled (working):
+-----BEGIN PGP SIGNATURE-----
 
-  60 06 80 52     mov        w0,#0x33		// 51
-  e0 23 01 79     strh       w0,[sp, #cmd]
-  e0 03 00 b2     mov        x0,#0x100000001
-  f5 3f 06 91     add        x21,sp,#0x18f
-  e0 37 00 f9     str        x0,[sp, #local_168]
-  00 01 80 52     mov        w0,#0x8
-  b5 e6 7a 92     and        x21,x21,#-0x40
-  e2 83 01 91     add        x2,sp,#0x60
-  e1 43 02 91     add        x1,sp,#0x90
-  63 00 80 52     mov        w3,#0x3
-  f5 33 00 f9     str        x21,[sp, #data]
-  e0 73 00 b9     str        w0,[sp, #blocksize]
-  e0 03 13 aa     mov        x0,x19
-  f6 97 00 b9     str        w22,[sp, #resp_type]
-  ff 9b 00 b9     str        wzr,[sp, #cmdarg]
-  4a fd ff 97     bl         mmc_send_cmd_retry
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUbL1QACgkQFHw5/5Y0
+tywg/wwAos/9wYlL0cmZotAjugp7T/+QUq8QnuhwNjpa+yyNK84+h1dzV5RU/tAu
+A4CY3ORi+zvdUyYLDg2lBsKiSZkyeYnkMlzUFIw1M+2ECoOzeLWW6TUc1ywrI2Q/
+phS6AlJb97PGQ6In39qruIcxTC5eGKu/dZi4cepmyBojOIn5yT0jPMCbY7eBFIW4
+wZJA6f9aCv/CRNY45G3pNp69uW5c53nCMj2IHc3Fnb5xN3MvZB3UgmrCvZRvjlTx
+FKGmBW+M0fhckTluYQ6IRwn9EADPPpGz5QeBTYflh6xSVVQDsfm/AuZKGchWT/rg
+v1icxGsfFjgabU1L5RFAgUUecCyU+vTi/mqdJCZkOpgkcUMxJV8gI3ImRP9E3ov8
+nb+/zm3ADZhmjhQGo4M82FaSBwTRMjbEY6AApptAXs4RwL4lMa1uKVvHWqXBdYdV
+biMiPlCGCup+8sk4j29lemJzgyUxZvtF2cna84RzJrsiyMmMmD1aCMhaGOD8Uwzm
+QsvsFuJu
+=0gac
+-----END PGP SIGNATURE-----
 
-Hoping someone can see something strange I cannot.
-
-Regards,
-Jonas
-
-> 
->> +
->>  EFI_LDS := elf_aarch64_efi.lds
->>  EFI_CRT0 := crt0_aarch64_efi.o
->>  EFI_RELOC := reloc_aarch64_efi.o
->> diff --git a/include/mmc.h b/include/mmc.h
->> index 9aef31ea5deb..7b3868bb5664 100644
->> --- a/include/mmc.h
->> +++ b/include/mmc.h
->> @@ -413,7 +413,7 @@ struct mmc_cid {
->>  };
->>
->>  struct mmc_cmd {
->> -       ushort cmdidx;
->> +       uint cmdidx;
-> 
-> This bit looks OK.
-> 
->>         uint resp_type;
->>         uint cmdarg;
->>         uint response[4];
->> --
->> 2.42.0
->>
-> 
-> Regards,
-> Simon
-
+--+PjK0C3NGHrGP/Jo--
