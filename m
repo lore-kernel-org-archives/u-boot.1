@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C53FE784AF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 10:05:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5975E7849A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 10:05:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F34087156;
-	Mon,  2 Oct 2023 12:05:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 217F387169;
+	Mon,  2 Oct 2023 12:05:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="NqwvFMv9";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="4WO5NJet";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 172498716E; Mon,  2 Oct 2023 12:05:14 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on2062a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e89::62a])
+ id 2520D87178; Mon,  2 Oct 2023 12:05:43 +0200 (CEST)
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on20628.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8d::628])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07F4587147
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 12:05:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D471287147
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 12:05:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NMsMQPoy85Vlidqi8BB56vdDsW6d4wwPOV7yjUBwYJyr8Xu3aFyuQuPUKltgcS8UD7sdqIxceirwns+44Y+/vy6GkTltnTVDcj5Zj1wzzCbn2Snuxx4zfUfnATjq+lANv95GfNmYhibklZDO4zP7BZ2yPogEHFj8D0ZJ7187WM51JZcJmKLmXkGdNTVdfUrsdIqgOWbiYh5RF/neYFbz8Os8zCD3tV4uzcKQrjj7FdNa+1wdu7jqiMNgjgJKDnVZlcxFwuASZfdvmDDMsm9J3KF4WMtqXW3sbWqpKUDSNjVL+ds8oAg7gMylrqfOYhor9qfmj2Xs1R1tJp5W6GHQHw==
+ b=ja01rkg0Orb2bS7bouyU4P2W/pC94MXxLcsODqkVDzkce/lP+MX31qM5UZSnS++CcNKSlG2/n/A98WiDmtNAL0Ka6iAh46OOB3bU4EfqMqyt6v9JyZHhMm5wy/1dIzNIVF1ndZw6NVetSpWQjsJKBqws531/mgMTonfjRNUD5YmlSLmG9aornN1aSdKTW9SUf46ZZzakqTfZagirxM3FonpRG/YHKV4fGMeFIuRntHc+/SiJCT8X40YiyvWesgek7rLn/K5y+nX4VlZ+uPeGL5lfGEZ4o/XA0UufkoXec76aTjmN/DY/4FXAYelMhpeUsGQ0Jnwx4IL19S2dMWJMUw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Dn12itznsH5XeaGToWrGMu7RlIdI1gwL1fVBGSQ/nDY=;
- b=E+jMkanNd2zUMRCTyrBg+lqa8cZX5aBs7JTeobYcFe/G7bjKXPsrnUiR8q5j6GOiE1uQ1GbJ8f4AYT971q05dYomayzm8up8eOHrdx9TnxLRFNoQHP+WEfgxZGzO4hBnaaEMmiCxdewB3y0QhF0MsXNY5CewAYLOf7i5O3zQfolB+KtdfghCri8pBIoe9e4bhHgYk2Qz98Dc/fbhk7f3UOz4YXQkSdjdplPo7174BgHx4lcwJ3J9+1+PtUfOz3QB+xiw4qC2EQckRlpXhk+y3gp/ku998IUEpkFC4zOtHXYxJtUB/yBijRRPcFCaero/7UFRbNICvjdVYsBgB0ojig==
+ bh=S/Vf0x/uqAxtyF6E2TcAKts85L5cMWUKGtn8IX1rvA0=;
+ b=Vy7qayUkPxqGEPtBWs18qPaOILGYnwUkEXMxwyZC9cPXL6rJ5WhfU2Hgz3e/yDDhWgRF4FKYcPYd4Y5Zmx670HoN1zw8njW/gfI4OGBilHGiDCQEfIldC0mACcH3WTQb2GprvZ4c+N/o4QiI6do1ZmTm6cvexfvoGqB32tOGQMlM31QdUR5/ICcmN3iHDJ0datT9/dos1ovgYR4uTkSuJAqa0/IES5pHY5PUZIMKUfges3MKkfSVALwmR3CcHJSUmbiGLlUf6pomDBogP2FyWUbxut7uj+wdYueLRaes3Y5r0lpd6c9R6zENTxjBLf8UuBFHJ8XPdHb5t86PtJV6hA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Dn12itznsH5XeaGToWrGMu7RlIdI1gwL1fVBGSQ/nDY=;
- b=NqwvFMv95souNnAEcfs91n+MvD1FVI87lEmNXM+R/bH8x9wTxtgk5CV45vVNpJi6OaQFQJzoJl7RrYRBFHsYoL0v0d0FXrxQd1ILrJLcgelvn2udzdgm3f3buRrIPHvFnX/QPr0xeh2+J1MNHncoU4OWiA7HAdsWwLy98EYziqo=
-Received: from SA9PR13CA0162.namprd13.prod.outlook.com (2603:10b6:806:28::17)
- by DM6PR12MB4044.namprd12.prod.outlook.com (2603:10b6:5:21d::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.30; Mon, 2 Oct
- 2023 10:05:07 +0000
-Received: from SN1PEPF0002636B.namprd02.prod.outlook.com
- (2603:10b6:806:28:cafe::c2) by SA9PR13CA0162.outlook.office365.com
- (2603:10b6:806:28::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.21 via Frontend
- Transport; Mon, 2 Oct 2023 10:05:07 +0000
+ bh=S/Vf0x/uqAxtyF6E2TcAKts85L5cMWUKGtn8IX1rvA0=;
+ b=4WO5NJetf0RvJXTQtsTKmQuoQaFa8mvj65xIXQI6+ZifZaQcmd1bRGi4iL7QrC63eJ2ZcZh2KAYoJphZq4ofHcRl539yDXo+fmR2ku1sZrneHGnE94+tWclCW/jEK6NYaluKxOOnaxYe1omGWxwy6ztvJHvUTqqvbbxW+WbQm1Q=
+Received: from SN6PR01CA0015.prod.exchangelabs.com (2603:10b6:805:b6::28) by
+ DM4PR12MB7576.namprd12.prod.outlook.com (2603:10b6:8:10c::17) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6813.23; Mon, 2 Oct 2023 10:05:35 +0000
+Received: from SN1PEPF0002636E.namprd02.prod.outlook.com
+ (2603:10b6:805:b6:cafe::35) by SN6PR01CA0015.outlook.office365.com
+ (2603:10b6:805:b6::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.29 via Frontend
+ Transport; Mon, 2 Oct 2023 10:05:34 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,23 +58,22 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002636B.mail.protection.outlook.com (10.167.241.136) with Microsoft
+ SN1PEPF0002636E.mail.protection.outlook.com (10.167.241.139) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Mon, 2 Oct 2023 10:05:06 +0000
+ 15.20.6838.14 via Frontend Transport; Mon, 2 Oct 2023 10:05:34 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 2 Oct
- 2023 05:05:04 -0500
-Message-ID: <94d69335-3acf-40b8-83d4-db5cc53684f9@amd.com>
-Date: Mon, 2 Oct 2023 12:05:04 +0200
+ 2023 05:05:32 -0500
+Message-ID: <63d04e3a-36cc-46bc-a05c-05182a6ef459@amd.com>
+Date: Mon, 2 Oct 2023 12:05:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Rename dt overlay file names from dts to
- dtso
+Subject: Re: [PATCH] arm64: zynqmp: Remove resetin/out from K24 psu_init
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-References: <1dce37e72428c14a3ccbb5dc674b90dfe56b75ac.1695046155.git.michal.simek@amd.com>
+References: <7b207e90f68028ab36fcc22df4127492f174793d.1695046281.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -120,7 +118,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <1dce37e72428c14a3ccbb5dc674b90dfe56b75ac.1695046155.git.michal.simek@amd.com>
+In-Reply-To: <7b207e90f68028ab36fcc22df4127492f174793d.1695046281.git.michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -128,26 +126,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636B:EE_|DM6PR12MB4044:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6b5396e2-101f-42af-a5bd-08dbc32f0e01
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002636E:EE_|DM4PR12MB7576:EE_
+X-MS-Office365-Filtering-Correlation-Id: fc839091-d5d8-420b-316b-08dbc32f1e7b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /VRpvWwoCl3vCWNBSbCxQBZXwO9NWnL6cmAYlZvGxeKze8D+wKP/xel/HfumaiYC9dQa5ur1wUFKPCVyyKSCkMSCEA53B8qH852lJgk3bTX4sMXWaRYOMvZxAXdHV9gnErek9oRDvI0RIYEVH1jyLxPGiVyWbz/CZds8RzzeHbdfMyrH3+o4p4ITy5JnV8Ll7uG5TK6w8hul704sW501cibdcETUUn1KDoHh5pH6VGCiZSYSNkKdIf5WUyLaRBeQW/ILnCrBcbOglKuy9KoywQ64wrGf4rrzUxRnDW4pq7Vb5viGf6pIQmEela0CaLqYakQ+KdPn7e+Tld0eAzlpBdRt8DPH3qWn1JcgjToVPCMsnuac8drQ2GnrsFD5rmugvRtEd1C0C8gmGAq59K5tb1S/7G3LJ2ROT7Ca8g7to/2Llc6aXaeQB6JRWT89GFovSEWotgazncrkYJUro3xDge0D+WNfF97T4WrsviQvS0iypoCvkAlmYWVGj5YtU+ENOtQlSD+Mc9aQ2tsZithfj9RRtWdjzTq/GdyS50KQXkfWsl6wmdVI472pmfhX17657BxGCAL8kwEdmaFuflHyIz2ITOn5IYXdY/HCafmN80kxcfUkGRUdFM7vM1Oj7zZo/vPUh/GYjtoxjYX0WvaQe1EnI+4AeRptwm1z9SssHjdMKKp+eLVGq2//K++8cYo6OjQKAAEzloWskxpuP3PNl6ZtJCJz/5DIBgL4uurc69Imj56XDGXUrx98ZspZh1FnSuEkCan2JQh/lw78LzX1IVTQ4qCusCBOtf4WViP3r40E7xR3Ye17aUYIOFQnMQJa
+X-Microsoft-Antispam-Message-Info: HU0mL08yhCnADmmJnAuCnawPCufSPcFP6cdnAv+ocmvaTrzX5JM9wEuNBt/nKJwe+YmsFeL+YmISUf59vYCUXSA+oYQrDUVIr7290Rx/sS4sYvq5JexKmNk/+KBxDts8WwOeBHfw+fXnV+DSndWAi0bIQOUgkeTDcvTwxT7m4chX84bNxac5HQb+REpLolz7SWjFf8A1G9fMaBoQT0cYJIAKfc1hYATB90nPUiwwvqD3VI2NADNkRrdFfHbOlAvCu93NWMWN/yfUQkFreehp77WD5Co5NntxK31WBlCYa65uihdZmIFRLS8nEHq4bDrCulsPexMavyl0VM3ggOUopOlICYUY1Zu5taySUctboshWUj/8aP/NtUTDbondwN7eZ6ND8M0axbNVdauKMYnqttICYJvXaY2c9yzA5qt4r/3o7Sz298Rw4aYxloV6N/VyFR+gmHPneq8gPEzpNTFOrPC1MgrEeDCIJQ0/qe1j0lzbp9I7SQFwcGR6dATTnbqF/hnDRjctpA+7RiR4L8bhKBQJl4IAq8UcRz1YDxbO48TijHzUa9vIoRaE4D7g3zr3217a3vEoP2MyvwiieKHHYGvAyP63wntHwM9HKv8ydyUVhrcM3fZTq3qBtTmCjmNJp1OPFCwfj9aT1t+mWLT7giF5boS0uhV/+9S/N8/2wcTciRndvFs0rYKO7uPMB1t/le5Bq02n1E3V3/DLjo5/Mly0WnixJYXaJM0i/lkawQm9teoD6Z7UPDU0hPghkiP5f1Eh0JE/RZ1k+J08ou0oPl+rPngTa9V39fp0bioMRxYGHQxH5FCJ3b9mLZoCZe+S
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(346002)(136003)(396003)(376002)(230922051799003)(186009)(1800799009)(82310400011)(451199024)(64100799003)(46966006)(40470700004)(36840700001)(2616005)(53546011)(2906002)(356005)(83380400001)(82740400003)(81166007)(31696002)(86362001)(36756003)(36860700001)(40480700001)(26005)(336012)(47076005)(16526019)(426003)(8676002)(8936002)(44832011)(40460700003)(478600001)(5660300002)(31686004)(16576012)(316002)(41300700001)(70586007)(70206006)(110136005)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(39860400002)(136003)(346002)(396003)(376002)(230922051799003)(64100799003)(451199024)(82310400011)(186009)(1800799009)(40470700004)(46966006)(36840700001)(86362001)(8676002)(8936002)(41300700001)(31686004)(16576012)(5660300002)(70206006)(70586007)(81166007)(110136005)(44832011)(16526019)(2906002)(316002)(40460700003)(40480700001)(31696002)(47076005)(36756003)(26005)(53546011)(478600001)(426003)(356005)(82740400003)(83380400001)(336012)(2616005)(36860700001)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2023 10:05:06.8144 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6b5396e2-101f-42af-a5bd-08dbc32f0e01
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2023 10:05:34.4857 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fc839091-d5d8-420b-316b-08dbc32f1e7b
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636B.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636E.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4044
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7576
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,40 +164,149 @@ X-Virus-Status: Clean
 
 
 
-On 9/18/23 16:09, Michal Simek wrote:
-> Use dtso suffix instead of dts. Build option was introduced by
-> commit a0f9a77912b2 ("kbuild: Allow DTB overlays to built from .dtso named
-> source files").
+On 9/18/23 16:11, Michal Simek wrote:
+> The code is not called that's why remove it.
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
->   .../dts/{zynqmp-sck-kr-g-revA.dts => zynqmp-sck-kr-g-revA.dtso}   | 0
->   .../dts/{zynqmp-sck-kr-g-revB.dts => zynqmp-sck-kr-g-revB.dtso}   | 0
->   .../dts/{zynqmp-sck-kv-g-revA.dts => zynqmp-sck-kv-g-revA.dtso}   | 0
->   .../dts/{zynqmp-sck-kv-g-revB.dts => zynqmp-sck-kv-g-revB.dtso}   | 0
->   4 files changed, 0 insertions(+), 0 deletions(-)
->   rename arch/arm/dts/{zynqmp-sck-kr-g-revA.dts => zynqmp-sck-kr-g-revA.dtso} (100%)
->   rename arch/arm/dts/{zynqmp-sck-kr-g-revB.dts => zynqmp-sck-kr-g-revB.dtso} (100%)
->   rename arch/arm/dts/{zynqmp-sck-kv-g-revA.dts => zynqmp-sck-kv-g-revA.dtso} (100%)
->   rename arch/arm/dts/{zynqmp-sck-kv-g-revB.dts => zynqmp-sck-kv-g-revB.dtso} (100%)
+>   .../zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c  | 123 ------------------
+>   1 file changed, 123 deletions(-)
 > 
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dts b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-> similarity index 100%
-> rename from arch/arm/dts/zynqmp-sck-kr-g-revA.dts
-> rename to arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
-> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dts b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> similarity index 100%
-> rename from arch/arm/dts/zynqmp-sck-kr-g-revB.dts
-> rename to arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
-> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dts b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-> similarity index 100%
-> rename from arch/arm/dts/zynqmp-sck-kv-g-revA.dts
-> rename to arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
-> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dts b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
-> similarity index 100%
-> rename from arch/arm/dts/zynqmp-sck-kv-g-revB.dts
-> rename to arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+> diff --git a/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c b/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
+> index 45102302dc2c..166e61431ba5 100644
+> --- a/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
+> +++ b/board/xilinx/zynqmp/zynqmp-sm-k24-revA/psu_init_gpl.c
+> @@ -602,129 +602,6 @@ static unsigned long psu_peripherals_init_data(void)
+>   	return 1;
+>   }
+>   
+> -static unsigned long psu_serdes_init_data(void)
+> -{
+> -	psu_mask_write(0xFD410000, 0x0000001FU, 0x00000009U);
+> -	psu_mask_write(0xFD410004, 0x0000001FU, 0x00000009U);
+> -	psu_mask_write(0xFD410008, 0x0000001FU, 0x00000008U);
+> -	psu_mask_write(0xFD402860, 0x00000080U, 0x00000080U);
+> -	psu_mask_write(0xFD402864, 0x00000081U, 0x00000001U);
+> -	psu_mask_write(0xFD402868, 0x00000082U, 0x00000002U);
+> -	psu_mask_write(0xFD40A094, 0x00000010U, 0x00000010U);
+> -	psu_mask_write(0xFD40A368, 0x000000FFU, 0x00000038U);
+> -	psu_mask_write(0xFD40A36C, 0x00000007U, 0x00000003U);
+> -	psu_mask_write(0xFD402368, 0x000000FFU, 0x00000058U);
+> -	psu_mask_write(0xFD40236C, 0x00000007U, 0x00000003U);
+> -	psu_mask_write(0xFD406368, 0x000000FFU, 0x00000058U);
+> -	psu_mask_write(0xFD40636C, 0x00000007U, 0x00000003U);
+> -	psu_mask_write(0xFD402370, 0x000000FFU, 0x0000007CU);
+> -	psu_mask_write(0xFD402374, 0x000000FFU, 0x00000033U);
+> -	psu_mask_write(0xFD402378, 0x000000FFU, 0x00000002U);
+> -	psu_mask_write(0xFD40237C, 0x00000033U, 0x00000030U);
+> -	psu_mask_write(0xFD406370, 0x000000FFU, 0x0000007CU);
+> -	psu_mask_write(0xFD406374, 0x000000FFU, 0x00000033U);
+> -	psu_mask_write(0xFD406378, 0x000000FFU, 0x00000002U);
+> -	psu_mask_write(0xFD40637C, 0x00000033U, 0x00000030U);
+> -	psu_mask_write(0xFD40A370, 0x000000FFU, 0x000000F4U);
+> -	psu_mask_write(0xFD40A374, 0x000000FFU, 0x00000031U);
+> -	psu_mask_write(0xFD40A378, 0x000000FFU, 0x00000002U);
+> -	psu_mask_write(0xFD40A37C, 0x00000033U, 0x00000030U);
+> -	psu_mask_write(0xFD40906C, 0x00000003U, 0x00000003U);
+> -	psu_mask_write(0xFD4080F4, 0x00000003U, 0x00000003U);
+> -	psu_mask_write(0xFD4090CC, 0x00000020U, 0x00000020U);
+> -	psu_mask_write(0xFD401074, 0x00000010U, 0x00000010U);
+> -	psu_mask_write(0xFD405074, 0x00000010U, 0x00000010U);
+> -	psu_mask_write(0xFD409074, 0x00000010U, 0x00000010U);
+> -	psu_mask_write(0xFD40D074, 0x00000010U, 0x00000010U);
+> -	psu_mask_write(0xFD401994, 0x00000007U, 0x00000007U);
+> -	psu_mask_write(0xFD405994, 0x00000007U, 0x00000007U);
+> -	psu_mask_write(0xFD40989C, 0x00000080U, 0x00000080U);
+> -	psu_mask_write(0xFD4098F8, 0x000000FFU, 0x0000001AU);
+> -	psu_mask_write(0xFD4098FC, 0x000000FFU, 0x0000001AU);
+> -	psu_mask_write(0xFD409990, 0x000000FFU, 0x00000010U);
+> -	psu_mask_write(0xFD409924, 0x000000FFU, 0x000000FEU);
+> -	psu_mask_write(0xFD409928, 0x000000FFU, 0x00000000U);
+> -	psu_mask_write(0xFD409900, 0x000000FFU, 0x0000001AU);
+> -	psu_mask_write(0xFD40992C, 0x000000FFU, 0x00000000U);
+> -	psu_mask_write(0xFD409980, 0x000000FFU, 0x000000FFU);
+> -	psu_mask_write(0xFD409914, 0x000000FFU, 0x000000F7U);
+> -	psu_mask_write(0xFD409918, 0x00000001U, 0x00000001U);
+> -	psu_mask_write(0xFD409940, 0x000000FFU, 0x000000F7U);
+> -	psu_mask_write(0xFD409944, 0x00000001U, 0x00000001U);
+> -	psu_mask_write(0xFD409994, 0x00000007U, 0x00000007U);
+> -	psu_mask_write(0xFD40D994, 0x00000007U, 0x00000007U);
+> -	psu_mask_write(0xFD40107C, 0x0000000FU, 0x00000001U);
+> -	psu_mask_write(0xFD40507C, 0x0000000FU, 0x00000001U);
+> -	psu_mask_write(0xFD40907C, 0x0000000FU, 0x00000001U);
+> -	psu_mask_write(0xFD40D07C, 0x0000000FU, 0x00000001U);
+> -	psu_mask_write(0xFD4019A4, 0x000000FFU, 0x000000FFU);
+> -	psu_mask_write(0xFD401038, 0x00000040U, 0x00000040U);
+> -	psu_mask_write(0xFD40102C, 0x00000040U, 0x00000040U);
+> -	psu_mask_write(0xFD4059A4, 0x000000FFU, 0x000000FFU);
+> -	psu_mask_write(0xFD405038, 0x00000040U, 0x00000040U);
+> -	psu_mask_write(0xFD40502C, 0x00000040U, 0x00000040U);
+> -	psu_mask_write(0xFD4099A4, 0x000000FFU, 0x000000FFU);
+> -	psu_mask_write(0xFD409038, 0x00000040U, 0x00000040U);
+> -	psu_mask_write(0xFD40902C, 0x00000040U, 0x00000040U);
+> -	psu_mask_write(0xFD40D9A4, 0x000000FFU, 0x000000FFU);
+> -	psu_mask_write(0xFD40D038, 0x00000040U, 0x00000040U);
+> -	psu_mask_write(0xFD40D02C, 0x00000040U, 0x00000040U);
+> -	psu_mask_write(0xFD4019AC, 0x00000003U, 0x00000000U);
+> -	psu_mask_write(0xFD4059AC, 0x00000003U, 0x00000000U);
+> -	psu_mask_write(0xFD4099AC, 0x00000003U, 0x00000000U);
+> -	psu_mask_write(0xFD40D9AC, 0x00000003U, 0x00000000U);
+> -	psu_mask_write(0xFD401978, 0x00000010U, 0x00000010U);
+> -	psu_mask_write(0xFD405978, 0x00000010U, 0x00000010U);
+> -	psu_mask_write(0xFD409978, 0x00000010U, 0x00000010U);
+> -	psu_mask_write(0xFD40D978, 0x00000010U, 0x00000010U);
+> -
+> -	serdes_illcalib(0, 0, 3, 0, 4, 0, 4, 0);
+> -	psu_mask_write(0xFD410010, 0x00000077U, 0x00000044U);
+> -	psu_mask_write(0xFD410014, 0x00000007U, 0x00000003U);
+> -	psu_mask_write(0xFD400CB4, 0x00000037U, 0x00000037U);
+> -	psu_mask_write(0xFD404CB4, 0x00000037U, 0x00000037U);
+> -	psu_mask_write(0xFD4001D8, 0x00000001U, 0x00000001U);
+> -	psu_mask_write(0xFD4041D8, 0x00000001U, 0x00000001U);
+> -	psu_mask_write(0xFD404CC0, 0x0000001FU, 0x00000000U);
+> -	psu_mask_write(0xFD400CC0, 0x0000001FU, 0x00000000U);
+> -	psu_mask_write(0xFD404048, 0x000000FFU, 0x00000000U);
+> -	psu_mask_write(0xFD400048, 0x000000FFU, 0x00000000U);
+> -
+> -	return 1;
+> -}
+> -
+> -static unsigned long psu_resetout_init_data(void)
+> -{
+> -	psu_mask_write(0xFF5E023C, 0x00000400U, 0x00000000U);
+> -	psu_mask_write(0xFF9D0080, 0x00000001U, 0x00000001U);
+> -	psu_mask_write(0xFF9D007C, 0x00000001U, 0x00000000U);
+> -	psu_mask_write(0xFF5E023C, 0x00000140U, 0x00000000U);
+> -	psu_mask_write(0xFF5E0230, 0x00000008U, 0x00000000U);
+> -	psu_mask_write(0xFD1A0100, 0x00010000U, 0x00000000U);
+> -	psu_mask_write(0xFD4A0200, 0x00000002U, 0x00000000U);
+> -	psu_mask_write(0xFD4A0238, 0x0000000FU, 0x00000000U);
+> -	psu_mask_write(0xFE20C200, 0x00023FFFU, 0x00022457U);
+> -	psu_mask_write(0xFE20C630, 0x003FFF00U, 0x00000000U);
+> -	psu_mask_write(0xFE20C11C, 0x00000600U, 0x00000600U);
+> -	psu_mask_write(0xFE20C12C, 0x00004000U, 0x00004000U);
+> -	psu_mask_write(0xFD480064, 0x00000200U, 0x00000200U);
+> -	mask_poll(0xFD4063E4, 0x00000010U);
+> -	mask_poll(0xFD40A3E4, 0x00000010U);
+> -
+> -	return 1;
+> -}
+> -
+> -static unsigned long psu_resetin_init_data(void)
+> -{
+> -	psu_mask_write(0xFF5E023C, 0x00000540U, 0x00000540U);
+> -	psu_mask_write(0xFF5E0230, 0x00000008U, 0x00000008U);
+> -	psu_mask_write(0xFD4A0238, 0x0000000FU, 0x0000000AU);
+> -	psu_mask_write(0xFD4A0200, 0x00000002U, 0x00000002U);
+> -	psu_mask_write(0xFD1A0100, 0x00010000U, 0x00010000U);
+> -
+> -	return 1;
+> -}
+> -
+>   static unsigned long psu_afi_config(void)
+>   {
+>   	psu_mask_write(0xFD1A0100, 0x00001F80U, 0x00000000U);
 
 Applied.
 M
