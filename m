@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45A1AE784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40B71E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:45:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 620528750B;
-	Mon,  2 Oct 2023 03:23:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 34F70874CD;
+	Mon,  2 Oct 2023 03:23:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GDWun13V";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bE8k3zWi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D4C9874CE; Mon,  2 Oct 2023 03:23:26 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 72D91874F8; Mon,  2 Oct 2023 03:23:28 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA27F874C9
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:23:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6409C8634D
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:23:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so5556098a12.1
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:23:22 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-50307acd445so24393241e87.0
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:23:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209793; x=1696814593; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209795; x=1696814595; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=83oy3uKZlZ9XKyJbjWP2SueQ/aFh9AjzsPn1GtTa2K0=;
- b=GDWun13VAxvzehQMcG+OlTRQwrvVvrr9pfZgAEk2bYM997kjwSiK8yVb8XAUTGdVeZ
- oUGfOOgOzoy5nz87fcjZWqtHuYWlaKJrFJUAJKj/fEck6gxHSMNKSxxMw2stCLvfZZ0S
- h6jwGnOCzBtZSuax0dFkK4sBXsSMdPx1+ZU8M=
+ bh=l+IVK7V1eZFpHzzP7FUmcKzZiL9ukt5RbgAyrKEtLZY=;
+ b=bE8k3zWikbsB++xoFyLLR944NB0elmXSGM5A27BXEN9CHH/5XKmSi1PoKTaOrQL4lC
+ RN4aVq4orfm0cWuDJpeXrNGASDDnxN62ZPrU3sM/GVQzrpsuRHjLnOlWwrd5VST1kMY/
+ RrZ2GL6eOKInkqf6FTol41O2Qog4PsKfhXuH8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209793; x=1696814593;
+ d=1e100.net; s=20230601; t=1696209795; x=1696814595;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=83oy3uKZlZ9XKyJbjWP2SueQ/aFh9AjzsPn1GtTa2K0=;
- b=VEBt0NwwYx6YpzTdT0XVAPDe4DFuOPTtoYAZeMNKV9xRFEow2s+D3wFQfK/cQ2YyJD
- bbkyg9ECT4pB9oMS+L6fCThO6rMWobvkA0jiKpd808VqcS2BAK6vaasexvMMFYlcRTvq
- hvFyWbnCQidg8O05++2eQvKmRKecPit3J9sONajRBweQHSyS0SYosHC7EvfJuxuIDO4N
- Rx3xoj6od9J9wWACugIEKrd1DGxEDX12g7UqT4am/VQHDw143nKPmy1aOigfvI8w4187
- K+2h1HolJQ8YF4mBgF4hUQswinBKcwDg5VAhmx1U78NeNIWSoKY5bqNdlebbWsveGzt1
- qOgw==
-X-Gm-Message-State: AOJu0YwQGkJvhC0E4jwfRBkfZqXLBzwyLBFmZgE2oDYtbFnnwwwmPA5b
- WG9i9wY4tFM0PTztDuEYTQsMOPIuuzfQnNEqRRe/hA==
-X-Google-Smtp-Source: AGHT+IEHbl9r9LB7ipdsHW9SM/ShVnVpokjB6tTFRoQiEIONKIftGAEtadpQRjPqWpSxJF9qhEkmedzJc7lmzukHZ2Q=
-X-Received: by 2002:a17:906:76cc:b0:9a9:f042:deb9 with SMTP id
- q12-20020a17090676cc00b009a9f042deb9mr8621241ejn.19.1696209793110; Sun, 01
- Oct 2023 18:23:13 -0700 (PDT)
+ bh=l+IVK7V1eZFpHzzP7FUmcKzZiL9ukt5RbgAyrKEtLZY=;
+ b=NuJ1/r0My10HW3klOVbKWf9csF/cLh/ZdMlJ1GxE/5XLZnEywDblwO+LWcx1Dml6XG
+ Ux5j4pftn1dZtbbdsFWHXTPihc9GF8i4ooMwMyOmLNL9pIWU3kvP8i1HTah29DPzmCvy
+ ZLz+F7xt6PQ7LsKKK+OtlekdNNWzhjQRHPTJMK7jx3URSIqoNmhoT2XSmH8QiOzVXht0
+ uxEyntT3OIvbKYp8WH1GTsAO7h2J7UNhFdcONyChy0HM4AP6RZ/U7RslRf4DjiPVJhcr
+ 4noRE4vqbXqXBMAzLnCAVfEDSr0imhOqWQqFT9PS80+4d3jjj2We6RTHBZsrIpE2T0Jp
+ 9yVQ==
+X-Gm-Message-State: AOJu0YxZzymIPJS8C7IhO/HMQDDt51vX30/QWpxhbFxg/FlER3S8hxGj
+ pLj0ctt9h1sBbMGzmM/4Ks3EeXkPuze8L58TD3RY1OGFCf244HKMyC4=
+X-Google-Smtp-Source: AGHT+IGhtlU4eyH1vn6rUPeltAG1VgY/9nFe567audIQZDo5nV0Tfy+2128SHCmOTKmceNOA1uUXMgLVznWLTUL9CoU=
+X-Received: by 2002:a05:6512:318a:b0:500:8fcb:e0c9 with SMTP id
+ i10-20020a056512318a00b005008fcbe0c9mr8811393lfe.69.1696209795150; Sun, 01
+ Oct 2023 18:23:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230921015730.1511373-1-sjg@chromium.org>
- <20230921015730.1511373-31-sjg@chromium.org>
- <CAC_iWjJ=-MvO5rPwmnGTbjyaqTv+VzXNq2mXmP+Az3FKaQ_Jyg@mail.gmail.com>
- <CAPnjgZ3yAYQ7V=n-4MyPiaB_JU7_wre9xOHg5K0L22a4gYBenA@mail.gmail.com>
- <CAC_iWjJBsNXguALKFKVDOnTWFH4YB6PMevt43fOyQWonitwS7w@mail.gmail.com>
- <CAPnjgZ2DFvGz6NvS5JORBLXcCk0HMLYM-HGaRhqWDzuz4ZF1Xw@mail.gmail.com>
- <CAC_iWjLS62kkMOYT6UiGoL66o-CaFst1nYWv7xgH+GNyeuaz9A@mail.gmail.com>
-In-Reply-To: <CAC_iWjLS62kkMOYT6UiGoL66o-CaFst1nYWv7xgH+GNyeuaz9A@mail.gmail.com>
+References: <20230427162100.GE1134230@bill-the-cat>
+ <20230427173113.GG1134230@bill-the-cat>
+ <40c79f7b-205d-0b48-7ee2-e052eaa1317f@prevas.dk>
+ <20230503135158.GY1134230@bill-the-cat>
+ <20230503145438.GB1134230@bill-the-cat>
+ <0f2df366-65ca-664f-1f90-0c2aeafce8f1@prevas.dk>
+ <68f445de-c903-c3a1-906f-2cf7b5675d08@prevas.dk>
+ <20230925181940.GH305624@bill-the-cat>
+ <08e35aab-309c-a8e1-931e-7ab142beb593@prevas.dk>
+ <CAPnjgZ3jO5s3HZRjXdG-dVLNmGYnyCWnpvzRKpKhBCRQqWH33Q@mail.gmail.com>
+ <20230929160230.GP305624@bill-the-cat>
+In-Reply-To: <20230929160230.GP305624@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Oct 2023 19:17:28 -0600
-Message-ID: <CAPnjgZ0Vo1iPhGRW6bcROfa6Q56ZNV=Kw_z4hD4jiJdAJ3kqXw@mail.gmail.com>
-Subject: Re: [PATCH v2 30/32] fdt: Allow the devicetree to come from a bloblist
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
- Tom Rini <trini@konsulko.com>, 
- Baruch Siach <baruch@tkos.co.il>, Bin Meng <bmeng.cn@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Jerry Van Baren <vanbaren@cideas.com>,
- Michal Simek <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Nikhil M Jain <n-jain1@ti.com>, Qu Wenruo <wqu@suse.com>
+Date: Sun, 1 Oct 2023 19:17:27 -0600
+Message-ID: <CAPnjgZ29hTMrzey1eZreTKhEVXWvi50JWBw-kUKC2VUYgXLYsw@mail.gmail.com>
+Subject: Re: [PATCH] scripts/Makefile.lib: also consider
+ $(CONFIG_SYS_BOARD)-u-boot.dtsi
+To: Tom Rini <trini@konsulko.com>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,197 +91,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Tom,
 
-On Tue, 26 Sept 2023 at 07:13, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Fri, 29 Sept 2023 at 10:02, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> [...]
->
-> > > > >
-> > > > > So, instead of adding OF_BLOBLIST, just move this code under OF_BOARD,
-> > > > > inside an IS_ENABLED(BLOBLIST) check. If a bloblist is required and
-> > > > > the previous stage loader is supposed to provide a DT we can just
-> > > > > throw an error and stop booting
-> > > >
-> > > > This is the bit I don't get.
-> > > >
-> > > > The OF_BOARD thing is a hack, in that the board can do what it likes.
-> > > > It is our way of handling board-specific mechanisms.
-> > > >
-> > > > But I am wanting a standard mechanism, i.e. like 'standard passage', a
-> > > > way of passing the DT through the phases.
-> > > >
-> > > > If I put this under OF_BOARD, then the board gets to override the
-> > > > mechanism, so which is it?
+> On Fri, Sep 29, 2023 at 09:15:00AM -0600, Simon Glass wrote:
+> > Hi Rasmus,
+> >
+> > On Mon, 25 Sept 2023 at 13:05, Rasmus Villemoes
+> > <rasmus.villemoes@prevas.dk> wrote:
 > > >
-> > > No, it's the other way around in my head.  OF_BOARD description is 'a
-> > > previous stage loader hands me over the DT', which is a superset of
-> > > the bloblist.
-> > > Whether it comes in a firmware handoff format, or a hacky register the
-> > > previous bootloader filled in is a detail we have to deal with and we
-> > > need to keep backwards compatibility.
+> > > On 25/09/2023 20.19, Tom Rini wrote:
+> > > > On Mon, Sep 25, 2023 at 10:27:43AM +0200, Rasmus Villemoes wrote:
+> > > >> On 04/05/2023 14.35, Rasmus Villemoes wrote:
+> > > >>> On 03/05/2023 16.54, Tom Rini wrote:
+> > > >>
+> > > >>>> The one last problem now is on stm32mp15_dhcor_basic which is a
+> > > >>>> defconfig missing one from OF_LIST but including it in the its file, so
+> > > >>>> the above is the patch we need.
+> > > >>>>
+> > > >>
+> > > >> Hi Tom
+> > > >>
+> > > >> Can I persuade you to try something like
+> > > >> https://source.denx.de/u-boot/u-boot/-/commit/a05e0d0e6b9103542a1076f9cab0005f400fa072
+> > > >> again, but leaving the .dtbo targets in there?
+> > > >>
+> > > >> I could send a patch, but it's entirely mechanical, and not really meant
+> > > >> for being applied until we know if there's more to be cleaned up.
+> > > >
+> > > > So what ended up being the problem I think is the case Simon pointed out
+> > > > where we do take the output from "make all" and concatenate one of the
+> > > > dtbs that was generated with u-boot.img or so, and it works.  But maybe
+> > > > that should just list all of the valid DTBs that it needs in the
+> > > > defconfig to start with? I don't quite know, it was a case I hadn't
+> > > > considered at the time.
+> > > >
 > > >
-> > > Maybe adding a coding snip would help
-> > > if (IS_ENABLED(CONFIG_OF_BOARD)) {
-> > >     if (CONFIG_IS_ENABLED(BLOBLIST)) { <- This instead of OF_BLOBLIST
-> > >         ret = bloblist_maybe_init();
-> > >         if (ret)
-> > >             return ret;
-> > >         /* Dynamically scan for a DT in the bloblist. */
-> > >         gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> > >         if (!gd->fdt_blob) {
-> > >             printf("Not FDT found in bloblist\n");
-> > >             bloblist_show_list();
-> > >            // We can choose to not return an error here and keep
-> > > scanning in case the DT is in a register, but I am fine with both
-> > >             return -ENOENT;
-> > >         }
-> > >        gd->fdt_src = FDTSRC_BLOBLIST;
-> > >        bloblist_show_list();
-> > >        log_debug("Devicetree is in bloblist at %p\n", gd->fdt_blob);
-> > >       // We can also bail out of this entirely if we do find a DT via
-> > > a bloblist.
-> > >      } else {
-> > >          gd->fdt_blob = board_fdt_blob_setup(&ret);
-> > >          if (ret)
-> > >              return ret;
-> > >          gd->fdt_src = FDTSRC_BOARD;
-> > >     }
-> > > }
+> > > Re-reading the thread, I can't see where that was mentioned.
 > > >
-> > > I haven't even compiled the code above, but it should give you a
-> > > better idea of what I am suggesting
+> > > But yes, if some boards (still) need that, and have more than one
+> > > possible .dtb, the board can't set an OF_LIST different from the default
+> > > consisting of DEFAULT_DEVICE_TREE because changing OF_LIST requires
+> > > SPL_LOAD_FIT || MULTI_DTB_FIT.
+> > >
+> > > How do we figure out if such boards even exist?
 > >
-> > OK I see...yes that is along the lines of what I thought you meant.
+> > Honestly at this point I've forgotten what this is all about.
 > >
-> > But OF_BOARD does not mean 'previous stage loader hands me over the
-> > DT'. I means call board_fdt_blob_setup() which could do anything. If
-> > some boards use that function to implement getting a DT from the prior
-> > stage, that's fine, but it isn't limited to that.
+> > Perhaps the easiest approach is to create a new Kconfig to control
+> > whether a board-level .dtsi is included in the list of wildcard
+> > searches. Then you can enable it for your board without affecting
+> > others.
 >
-> I think it is limited. The help message says 'Provider of DTB for DT
-> control' and OF_BOARD help message is 'Provided by the board (e.g a
-> previous loader) at runtime '.
-> In fact, that's exactly what I tried to clean up with commit
-> e7fb789612e39.  Sandbox had its special OF_HOSTFILE for the DT.  We
-> cleaned that up and then reintroduced it with a different name in
-> commit 275b4832f6bf91c.
+> That's getting things backwards, from what this cleanup does.  Today we
+> have messy lists of "build these device trees" and then don't use most
+> of them, and some of the list is just Wrong (listing dts files as an
+> output).  With the series to handle dtbo files, we could remove
+> virtually all of that, and the only use cases that don't Just Work still
+> are the ones I forget which board you mentioned (I think it was Samsung
+> tho?) where the defconfig doesn't list all of the device trees, just one
+> of them, and the other 5 that we build can also be easily used.  Does
+> that ring a bell?
 
-That commit adds HAS_PRIOR_STATE, though, not anything to do with sandbox.
+Yes it does...but what is the problem here?
 
-OK. Perhaps it is just the OF_BOARD name that I object to?
+The DT files for an SoC are supposed to be buildable without needing
+to have the context of a particular board.
 
->
-> In any case, if people want to do 'more' we have
-> CONFIG_OF_BOARD_SETUP/FIXUP which should be used instead for other
-> platform-specific stuff.  While at it OF_PRIOR_STAGE is a much better
-> name that OF_BOARD.  So we could get rid of OF_PRIOR_STAGE and rename
-> OF_BOARD to that.
+I don't know what the point of the dtbo files is...is that for using
+overlays somehow at runtime?
 
-To do that, we have to work out what to do with board-specific setup.
+The defconfig does not need to mention all the DTs...we just need to
+make sure they get built.
 
->
-> The function name that is called in the setup phase is
-> board_fdt_blob_setup(), so it's explicitly targeting the fdt setup, or
-> at least that's what the name suggets. Grepping for CONFIG_OF_BOARD
-> matches in
-> board/AndesTech/ae350/ae350.c
-> board/armltd/vexpress64/vexpress64.c
-> board/raspberrypi/rpi/rpi.c
-> board/sifive/unleashed/unleashed.c
-> board/sifive/unmatched/unmatched.c
-> board/starfive/visionfive2/starfive_visionfive2.c
-> board/xilinx/common/board.c:
-> All these just use it to setup the DT, apart from the rpi which
-> additionally sets up some memory for the DT.
->
-> Apart from that it's used on a few platform drivers to setup so DM
-> flags (most of them set DM_FLAG_PRE_RELOC), but we can easily change
-> that and use The only affected files are
-> drivers/pinctrl/broadcom/pinctrl-bcm283x.c
-> drivers/serial/serial_bcm283x_mu.c
-> drivers/serial/serial_bcm283x_pl011.c
->
-> So making OF_BOARD do the right thing is trivial and I can work with
-> you on that.  I don't think it's too much effort anyway
+Is this another instance of something that needs cleaning up, like the
+config fragments?
 
-What is the right thing you refer to here?
-
->
-> >
-> > There is an HAS_PRIOR_STAGE option which sets OF_BOARD at present. But
-> > that doesn't seem right in the long term.
-> >
-> > The goal here is to standardise the passing of DT from a prior stage,
-> > so that all boards (except perhaps the dark child rpi) use standard
-> > passage (bloblist) to do so. That should not depend on OF_BOARD and in
-> > fact I would like to make OF_BOARD the exception, used when
-> > OF_BLOBLIST doesn't suit.
->
-> We are on the same page regarding the standardization.  But I think
-> shoehorning an OF_BLOBLIST just papers over the problem.
-> The board should ideally have 2 options
-> 1. a previous loader gives me the DT in X random ways (one of them is
-> the bloblist)
-> 2. U-Boot provides it because it was built with it
-> A user can always load his own special DT if he wants to, but that's
-> done at a later stage.
-
-OK
-
->
-> But if we clean it up properly we can
-> 1. Do Not allow people to sneak in random options in OF_BOARD or
-> whatever and keep the options sane and clean
-
-I am certainly keen to remove OF_BOARD, or print a warning when it is used.
-
-> 2. enable BLOBLIST by default in all supported platforms and push to
-> make it the default.  We can even be stricter and crash on boot if
-> BLOBLIST is selected and we can't find the DT in there.  That would
-> have a similar effect to selecting it as a Kconfig option
-
-Yes, that's what I am doing with this patch. So we end up with:
-
-OF_SEPARATE - packed with U-Boot
-OF_BLOBLIST - comes in a bloblist
-OF_BOARD - escape hatch, please don't use
+I am find with making the boards list the DTs that they can run with,
+if there is an easy way of doing that. CONFIG_SPL_OF_LIST is just for
+SPL, I think.
 
 Regards,
 Simon
-
-
-
->
-> Thanks
-> /Ilias
->
->
-> >
-> > >
-> > > Hope that helps
-> > > /Ilias
-> > > >
-> > > > You say 'we can just throw and error' but what is the error? If the DT
-> > > > is provided via the bloblist, there is no error. If it is not, I
-> > > > already show an error and halt as you can see in the code below.
-> > > >
-> > > > I guess I'm just confused about what you are saying here.
-> > > >
-> > > > >
-> > > > >
-> > > > > > +               gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
-> > > > > > +               if (!gd->fdt_blob) {
-> > > > > > +                       printf("Not FDT found in bloblist\n");
-> > > > > > +                       bloblist_show_list();
-> > > > > > +                       return -ENOENT;
-> > > > > > +               }
-> > > > >
-> > > > > [...]
-> > > > >
-> >
-> > Regards,
-> > Simon
