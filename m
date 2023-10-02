@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38097E748FC
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 17:35:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD96E748FE
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 17:35:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E25E68719D;
-	Mon,  2 Oct 2023 19:34:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 57152871A7;
+	Mon,  2 Oct 2023 19:34:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="fgFmomG1";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="bJ2Pc0hH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B755286E26; Mon,  2 Oct 2023 18:59:15 +0200 (CEST)
+ id BC74986DE7; Mon,  2 Oct 2023 18:59:15 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AD4987160
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 18:59:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EC4486DCA
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 18:59:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 7A701100006;
- Mon,  2 Oct 2023 19:59:07 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 7A701100006
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 1C3BB10000B;
+ Mon,  2 Oct 2023 19:59:09 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 1C3BB10000B
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696265947;
- bh=RSua3e1KWXbtVOapcFR72823yBEq9ezC7Te4f/ETzgw=;
+ s=mail; t=1696265949;
+ bh=2nLWOwXpWdY7SqkqEcGT+2OxJFhdkE+JryPgcUKhFGc=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=fgFmomG1KsPxQkj0PgK/q4EbR7OS6yL3+tkKu2SMB/8jH/4zsE/IF+gmZwXvjObjv
- olak+NP1xlr4ge91U+4rHzNusDUpL39HJvuXqsv9Wlp7nKIurLuknt7RqTg8F+E4a/
- fQkvBn6RSNwdafRwdjanszuVa8J6oxbOwdE8NFKstgTcoLBtDWMMUEC+xiUcHbf6P1
- eS8JysI3ROofrQbX/nnyE7uamqKtILnMrqACTt8S7bhJOxdLUInsc09/P7hXpMqgJq
- ccA//EPwJ5nKRFQ+KL0sIDK6PqGQJInaNs7QOx50y2NraHd3A9Lgh2ewGrml3EjitM
- Dc1laJt74rhdA==
+ b=bJ2Pc0hHVQZwZhZGeaFNZeUpBrLUx+eQa6tJ0I7hhNVGsEHqdAP6tlms/pn977gfb
+ oEmRniKbh47YOAPUH8iixOQdTaVmoQmol4FuKLd8R9qaNnICwQUTx4n+wJy1qY1Gxn
+ 8d+F4HZTMmiEpIH99hBgFT8mDsMZ9a0tXwc+Eir6yc2niQX3YcphHAtJA/oq+1BlJb
+ naL9wCSJdeWBgR1vvwv7tULF35psbaaxaNJzUn2jBLCAcfZ7eRXwMXjUBjctCMJRhW
+ 01y+yuziLIniltMukSAr8Ac0OF9BDzzlgPyCNKvlYVeh8myfU73WiCqIT5s+oztB9+
+ tk+/tigeHiuXQ==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon,  2 Oct 2023 19:59:07 +0300 (MSK)
+ Mon,  2 Oct 2023 19:59:08 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Mon, 2 Oct 2023 19:59:07 +0300
+ 15.2.1118.30; Mon, 2 Oct 2023 19:59:08 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <lukma@denx.de>, <seanga2@gmail.com>, <marex@denx.de>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v1 3/8] phy: get rid of raw hex values
-Date: Mon, 2 Oct 2023 19:58:47 +0300
-Message-ID: <20231002165857.19512-4-avromanov@salutedevices.com>
+Subject: [PATCH v1 5/8] phy: support Amlogic A1 family
+Date: Mon, 2 Oct 2023 19:58:49 +0300
+Message-ID: <20231002165857.19512-6-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231002165857.19512-1-avromanov@salutedevices.com>
 References: <20231002165857.19512-1-avromanov@salutedevices.com>
@@ -106,226 +106,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is better to use defines instead of write raw
-hex values in regmap.
+Setting G12A and A1 is similar, so we can use G12A phy
+driver with little changes.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- drivers/phy/meson-g12a-usb2.c | 161 ++++++++++++++++++++++++++++++++--
- 1 file changed, 153 insertions(+), 8 deletions(-)
+ drivers/phy/Kconfig           |  2 +-
+ drivers/phy/meson-g12a-usb2.c | 77 ++++++++++++++++++++++++++++-------
+ 2 files changed, 64 insertions(+), 15 deletions(-)
 
+diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
+index cf4d5908d7..60be62907d 100644
+--- a/drivers/phy/Kconfig
++++ b/drivers/phy/Kconfig
+@@ -190,7 +190,7 @@ config MESON_GXL_USB_PHY
+ 
+ config MESON_G12A_USB_PHY
+ 	bool "Amlogic Meson G12A USB PHYs"
+-	depends on PHY && ARCH_MESON && MESON_G12A
++	depends on PHY && ARCH_MESON && (MESON_G12A || MESON_A1)
+ 	imply REGMAP
+ 	help
+ 	  This is the generic phy driver for the Amlogic Meson G12A
 diff --git a/drivers/phy/meson-g12a-usb2.c b/drivers/phy/meson-g12a-usb2.c
-index 650b88bd18..2e366b16ae 100644
+index 7b028784a0..c1b9baa7b7 100644
 --- a/drivers/phy/meson-g12a-usb2.c
 +++ b/drivers/phy/meson-g12a-usb2.c
-@@ -23,12 +23,28 @@
+@@ -18,6 +18,7 @@
+ #include <regmap.h>
+ #include <linux/delay.h>
+ #include <power/regulator.h>
++#include <power-domain.h>
+ #include <reset.h>
+ #include <clk.h>
  
- #include <linux/bitops.h>
- #include <linux/compat.h>
-+#include <linux/bitfield.h>
+@@ -146,18 +147,28 @@
+ #define RESET_COMPLETE_TIME					1000
+ #define PLL_RESET_COMPLETE_TIME					100
  
- #define PHY_CTRL_R0						0x0
- #define PHY_CTRL_R1						0x4
- #define PHY_CTRL_R2						0x8
++enum meson_soc_id {
++	MESON_SOC_A1,
++	MESON_SOC_G12A,
++};
 +
- #define PHY_CTRL_R3						0xc
-+	#define PHY_CTRL_R3_SQUELCH_REF				GENMASK(1, 0)
-+	#define PHY_CTRL_R3_HSDIC_REF				GENMASK(3, 2)
-+	#define PHY_CTRL_R3_DISC_THRESH				GENMASK(7, 4)
-+
- #define PHY_CTRL_R4						0x10
-+	#define PHY_CTRL_R4_CALIB_CODE_7_0			GENMASK(7, 0)
-+	#define PHY_CTRL_R4_CALIB_CODE_15_8			GENMASK(15, 8)
-+	#define PHY_CTRL_R4_CALIB_CODE_23_16			GENMASK(23, 16)
-+	#define PHY_CTRL_R4_I_C2L_CAL_EN			BIT(24)
-+	#define PHY_CTRL_R4_I_C2L_CAL_RESET_N			BIT(25)
-+	#define PHY_CTRL_R4_I_C2L_CAL_DONE			BIT(26)
-+	#define PHY_CTRL_R4_TEST_BYPASS_MODE_EN			BIT(27)
-+	#define PHY_CTRL_R4_I_C2L_BIAS_TRIM_1_0			GENMASK(29, 28)
-+	#define PHY_CTRL_R4_I_C2L_BIAS_TRIM_3_2			GENMASK(31, 30)
-+
- #define PHY_CTRL_R5						0x14
- #define PHY_CTRL_R6						0x18
- #define PHY_CTRL_R7						0x1c
-@@ -37,15 +53,93 @@
- #define PHY_CTRL_R10						0x28
- #define PHY_CTRL_R11						0x2c
- #define PHY_CTRL_R12						0x30
-+
- #define PHY_CTRL_R13						0x34
-+	#define PHY_CTRL_R13_CUSTOM_PATTERN_19			GENMASK(7, 0)
-+	#define PHY_CTRL_R13_LOAD_STAT				BIT(14)
-+	#define PHY_CTRL_R13_UPDATE_PMA_SIGNALS			BIT(15)
-+	#define PHY_CTRL_R13_MIN_COUNT_FOR_SYNC_DET		GENMASK(20, 16)
-+	#define PHY_CTRL_R13_CLEAR_HOLD_HS_DISCONNECT		BIT(21)
-+	#define PHY_CTRL_R13_BYPASS_HOST_DISCONNECT_VAL		BIT(22)
-+	#define PHY_CTRL_R13_BYPASS_HOST_DISCONNECT_EN		BIT(23)
-+	#define PHY_CTRL_R13_I_C2L_HS_EN			BIT(24)
-+	#define PHY_CTRL_R13_I_C2L_FS_EN			BIT(25)
-+	#define PHY_CTRL_R13_I_C2L_LS_EN			BIT(26)
-+	#define PHY_CTRL_R13_I_C2L_HS_OE			BIT(27)
-+	#define PHY_CTRL_R13_I_C2L_FS_OE			BIT(28)
-+	#define PHY_CTRL_R13_I_C2L_HS_RX_EN			BIT(29)
-+	#define PHY_CTRL_R13_I_C2L_FSLS_RX_EN			BIT(30)
-+
- #define PHY_CTRL_R14						0x38
- #define PHY_CTRL_R15						0x3c
-+
- #define PHY_CTRL_R16						0x40
-+	#define PHY_CTRL_R16_MPLL_M				GENMASK(8, 0)
-+	#define PHY_CTRL_R16_MPLL_N				GENMASK(14, 10)
-+	#define PHY_CTRL_R16_MPLL_TDC_MODE			BIT(20)
-+	#define PHY_CTRL_R16_MPLL_SDM_EN			BIT(21)
-+	#define PHY_CTRL_R16_MPLL_LOAD				BIT(22)
-+	#define PHY_CTRL_R16_MPLL_DCO_SDM_EN			BIT(23)
-+	#define PHY_CTRL_R16_MPLL_LOCK_LONG			GENMASK(25, 24)
-+	#define PHY_CTRL_R16_MPLL_LOCK_F			BIT(26)
-+	#define PHY_CTRL_R16_MPLL_FAST_LOCK			BIT(27)
-+	#define PHY_CTRL_R16_MPLL_EN				BIT(28)
-+	#define PHY_CTRL_R16_MPLL_RESET				BIT(29)
-+	#define PHY_CTRL_R16_MPLL_LOCK				BIT(30)
-+	#define PHY_CTRL_R16_MPLL_LOCK_DIG			BIT(31)
-+
- #define PHY_CTRL_R17						0x44
-+	#define PHY_CTRL_R17_MPLL_FRAC_IN			GENMASK(13, 0)
-+	#define PHY_CTRL_R17_MPLL_FIX_EN			BIT(16)
-+	#define PHY_CTRL_R17_MPLL_LAMBDA1			GENMASK(19, 17)
-+	#define PHY_CTRL_R17_MPLL_LAMBDA0			GENMASK(22, 20)
-+	#define PHY_CTRL_R17_MPLL_FILTER_MODE			BIT(23)
-+	#define PHY_CTRL_R17_MPLL_FILTER_PVT2			GENMASK(27, 24)
-+	#define PHY_CTRL_R17_MPLL_FILTER_PVT1			GENMASK(31, 28)
-+
- #define PHY_CTRL_R18						0x48
-+	#define PHY_CTRL_R18_MPLL_LKW_SEL			GENMASK(1, 0)
-+	#define PHY_CTRL_R18_MPLL_LK_W				GENMASK(5, 2)
-+	#define PHY_CTRL_R18_MPLL_LK_S				GENMASK(11, 6)
-+	#define PHY_CTRL_R18_MPLL_DCO_M_EN			BIT(12)
-+	#define PHY_CTRL_R18_MPLL_DCO_CLK_SEL			BIT(13)
-+	#define PHY_CTRL_R18_MPLL_PFD_GAIN			GENMASK(15, 14)
-+	#define PHY_CTRL_R18_MPLL_ROU				GENMASK(18, 16)
-+	#define PHY_CTRL_R18_MPLL_DATA_SEL			GENMASK(21, 19)
-+	#define PHY_CTRL_R18_MPLL_BIAS_ADJ			GENMASK(23, 22)
-+	#define PHY_CTRL_R18_MPLL_BB_MODE			GENMASK(25, 24)
-+	#define PHY_CTRL_R18_MPLL_ALPHA				GENMASK(28, 26)
-+	#define PHY_CTRL_R18_MPLL_ADJ_LDO			GENMASK(30, 29)
-+	#define PHY_CTRL_R18_MPLL_ACG_RANGE			BIT(31)
-+
- #define PHY_CTRL_R19						0x4c
-+
- #define PHY_CTRL_R20						0x50
-+	#define PHY_CTRL_R20_USB2_IDDET_EN			BIT(0)
-+	#define PHY_CTRL_R20_USB2_OTG_VBUS_TRIM_2_0		GENMASK(3, 1)
-+	#define PHY_CTRL_R20_USB2_OTG_VBUSDET_EN		BIT(4)
-+	#define PHY_CTRL_R20_USB2_AMON_EN			BIT(5)
-+	#define PHY_CTRL_R20_USB2_CAL_CODE_R5			BIT(6)
-+	#define PHY_CTRL_R20_BYPASS_OTG_DET			BIT(7)
-+	#define PHY_CTRL_R20_USB2_DMON_EN			BIT(8)
-+	#define PHY_CTRL_R20_USB2_DMON_SEL_3_0			GENMASK(12, 9)
-+	#define PHY_CTRL_R20_USB2_EDGE_DRV_EN			BIT(13)
-+	#define PHY_CTRL_R20_USB2_EDGE_DRV_TRIM_1_0		GENMASK(15, 14)
-+	#define PHY_CTRL_R20_USB2_BGR_ADJ_4_0			GENMASK(20, 16)
-+	#define PHY_CTRL_R20_USB2_BGR_START			BIT(21)
-+	#define PHY_CTRL_R20_USB2_BGR_VREF_4_0			GENMASK(28, 24)
-+	#define PHY_CTRL_R20_USB2_BGR_DBG_1_0			GENMASK(30, 29)
-+	#define PHY_CTRL_R20_BYPASS_CAL_DONE_R5			BIT(31)
-+
- #define PHY_CTRL_R21						0x54
-+	#define PHY_CTRL_R21_USB2_BGR_FORCE			BIT(0)
-+	#define PHY_CTRL_R21_USB2_CAL_ACK_EN			BIT(1)
-+	#define PHY_CTRL_R21_USB2_OTG_ACA_EN			BIT(2)
-+	#define PHY_CTRL_R21_USB2_TX_STRG_PD			BIT(3)
-+	#define PHY_CTRL_R21_USB2_OTG_ACA_TRIM_1_0		GENMASK(5, 4)
-+	#define PHY_CTRL_R21_BYPASS_UTMI_CNTR			GENMASK(15, 6)
-+	#define PHY_CTRL_R21_BYPASS_UTMI_REG			GENMASK(25, 20)
-+
- #define PHY_CTRL_R22						0x58
- #define PHY_CTRL_R23						0x5c
+ struct phy_meson_g12a_usb2_priv {
+ 	struct regmap		*regmap;
+ #if CONFIG_IS_ENABLED(CLK)
+ 	struct clk		clk;
+ #endif
+ 	struct reset_ctl	reset;
++#if CONFIG_IS_ENABLED(POWER_DOMAIN)
++	struct power_domain pwrdm;
++#endif
++	int soc_id;
+ };
  
-@@ -78,25 +172,76 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
- 	regmap_update_bits(priv->regmap, PHY_CTRL_R21, BIT(2), 0);
+ static int phy_meson_g12a_usb2_init(struct phy *phy)
+ {
+ 	struct udevice *dev = phy->dev;
+ 	struct phy_meson_g12a_usb2_priv *priv = dev_get_priv(dev);
++	u32 value;
+ 	int ret;
  
- 	/* PLL Setup : 24MHz * 20 / 1 = 480MHz */
--	regmap_write(priv->regmap, PHY_CTRL_R16, 0x39400414);
--	regmap_write(priv->regmap, PHY_CTRL_R17, 0x927e0000);
--	regmap_write(priv->regmap, PHY_CTRL_R18, 0xac5f49e5);
-+	regmap_write(priv->regmap, PHY_CTRL_R16,
-+		FIELD_PREP(PHY_CTRL_R16_MPLL_M, 20) |
-+		FIELD_PREP(PHY_CTRL_R16_MPLL_N, 1) |
-+		PHY_CTRL_R16_MPLL_LOAD |
-+		FIELD_PREP(PHY_CTRL_R16_MPLL_LOCK_LONG, 1) |
-+		PHY_CTRL_R16_MPLL_FAST_LOCK |
-+		PHY_CTRL_R16_MPLL_EN |
-+		PHY_CTRL_R16_MPLL_RESET);
-+
-+	regmap_write(priv->regmap, PHY_CTRL_R17,
-+		FIELD_PREP(PHY_CTRL_R17_MPLL_FRAC_IN, 0) |
-+		FIELD_PREP(PHY_CTRL_R17_MPLL_LAMBDA1, 7) |
-+		FIELD_PREP(PHY_CTRL_R17_MPLL_LAMBDA0, 7) |
-+		FIELD_PREP(PHY_CTRL_R17_MPLL_FILTER_PVT2, 2) |
-+		FIELD_PREP(PHY_CTRL_R17_MPLL_FILTER_PVT1, 9));
-+
-+	regmap_write(priv->regmap, PHY_CTRL_R18,
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_LKW_SEL, 1) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_LK_W, 9) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_LK_S, 0x27) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_PFD_GAIN, 1) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_ROU, 7) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_DATA_SEL, 3) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_BIAS_ADJ, 1) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_BB_MODE, 0) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_ALPHA, 3) |
-+		FIELD_PREP(PHY_CTRL_R18_MPLL_ADJ_LDO, 1) |
-+		PHY_CTRL_R18_MPLL_ACG_RANGE;
+ #if CONFIG_IS_ENABLED(CLK)
+@@ -196,8 +207,7 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
+ 		FIELD_PREP(PHY_CTRL_R17_MPLL_FILTER_PVT2, 2) |
+ 		FIELD_PREP(PHY_CTRL_R17_MPLL_FILTER_PVT1, 9));
  
+-	regmap_write(priv->regmap, PHY_CTRL_R18,
+-		FIELD_PREP(PHY_CTRL_R18_MPLL_LKW_SEL, 1) |
++	value = FIELD_PREP(PHY_CTRL_R18_MPLL_LKW_SEL, 1) |
+ 		FIELD_PREP(PHY_CTRL_R18_MPLL_LK_W, 9) |
+ 		FIELD_PREP(PHY_CTRL_R18_MPLL_LK_S, 0x27) |
+ 		FIELD_PREP(PHY_CTRL_R18_MPLL_PFD_GAIN, 1) |
+@@ -209,6 +219,11 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
+ 		FIELD_PREP(PHY_CTRL_R18_MPLL_ADJ_LDO, 1) |
+ 		PHY_CTRL_R18_MPLL_ACG_RANGE;
+ 
++	if (priv->soc_id == MESON_SOC_A1)
++		value |= PHY_CTRL_R18_MPLL_DCO_CLK_SEL;
++
++	regmap_write(priv->regmap, PHY_CTRL_R18, value);
++
  	udelay(PLL_RESET_COMPLETE_TIME);
  
  	/* UnReset PLL */
--	regmap_write(priv->regmap, PHY_CTRL_R16, 0x19400414);
-+	regmap_write(priv->regmap, PHY_CTRL_R16,
-+		FIELD_PREP(PHY_CTRL_R16_MPLL_M, 20) |
-+		FIELD_PREP(PHY_CTRL_R16_MPLL_N, 1) |
-+		PHY_CTRL_R16_MPLL_LOAD |
-+		FIELD_PREP(PHY_CTRL_R16_MPLL_LOCK_LONG, 1) |
-+		PHY_CTRL_R16_MPLL_FAST_LOCK |
-+		PHY_CTRL_R16_MPLL_EN);
+@@ -231,13 +246,19 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
+ 		FIELD_PREP(PHY_CTRL_R20_USB2_BGR_VREF_4_0, 0) |
+ 		FIELD_PREP(PHY_CTRL_R20_USB2_BGR_DBG_1_0, 0));
  
- 	/* PHY Tuning */
--	regmap_write(priv->regmap, PHY_CTRL_R20, 0xfe18);
--	regmap_write(priv->regmap, PHY_CTRL_R4, 0x8000fff);
-+	regmap_write(priv->regmap, PHY_CTRL_R20,
-+		FIELD_PREP(PHY_CTRL_R20_USB2_OTG_VBUS_TRIM_2_0, 4) |
-+		PHY_CTRL_R20_USB2_OTG_VBUSDET_EN |
-+		FIELD_PREP(PHY_CTRL_R20_USB2_DMON_SEL_3_0, 15) |
-+		PHY_CTRL_R20_USB2_EDGE_DRV_EN |
-+		FIELD_PREP(PHY_CTRL_R20_USB2_EDGE_DRV_TRIM_1_0, 3) |
-+		FIELD_PREP(PHY_CTRL_R20_USB2_BGR_ADJ_4_0, 0) |
-+		FIELD_PREP(PHY_CTRL_R20_USB2_BGR_VREF_4_0, 0) |
-+		FIELD_PREP(PHY_CTRL_R20_USB2_BGR_DBG_1_0, 0));
-+
-+	regmap_write(priv->regmap, PHY_CTRL_R4,
-+		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_7_0, 0xf) |
-+		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_15_8, 0xf) |
-+		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_23_16, 0xf) |
-+		PHY_CTRL_R4_TEST_BYPASS_MODE_EN |
-+		FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_1_0, 0) |
-+		FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_3_2, 0));
+-	regmap_write(priv->regmap, PHY_CTRL_R4,
+-		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_7_0, 0xf) |
+-		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_15_8, 0xf) |
+-		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_23_16, 0xf) |
+-		PHY_CTRL_R4_TEST_BYPASS_MODE_EN |
+-		FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_1_0, 0) |
+-		FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_3_2, 0));
++	if (priv->soc_id == MESON_SOC_G12A)
++		regmap_write(priv->regmap, PHY_CTRL_R4,
++			FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_7_0, 0xf) |
++			FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_15_8, 0xf) |
++			FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_23_16, 0xf) |
++			PHY_CTRL_R4_TEST_BYPASS_MODE_EN |
++			FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_1_0, 0) |
++			FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_3_2, 0));
++	else if (priv->soc_id == MESON_SOC_A1)
++		regmap_write(priv->regmap, PHY_CTRL_R21,
++			PHY_CTRL_R21_USB2_CAL_ACK_EN |
++			PHY_CTRL_R21_USB2_TX_STRG_PD |
++			FIELD_PREP(PHY_CTRL_R21_USB2_OTG_ACA_TRIM_1_0, 2));
  
  	/* Tuning Disconnect Threshold */
--	regmap_write(priv->regmap, PHY_CTRL_R3, 0x34);
-+	regmap_write(priv->regmap, PHY_CTRL_R3,
-+		FIELD_PREP(PHY_CTRL_R3_SQUELCH_REF, 0) |
-+		FIELD_PREP(PHY_CTRL_R3_HSDIC_REF, 1) |
-+		FIELD_PREP(PHY_CTRL_R3_DISC_THRESH, 3));
+ 	regmap_write(priv->regmap, PHY_CTRL_R3,
+@@ -246,10 +267,15 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
+ 		FIELD_PREP(PHY_CTRL_R3_DISC_THRESH, 3));
  
  	/* Analog Settings */
- 	regmap_write(priv->regmap, PHY_CTRL_R14, 0);
--	regmap_write(priv->regmap, PHY_CTRL_R13, 0x78000);
-+	regmap_write(priv->regmap, PHY_CTRL_R13,
-+		PHY_CTRL_R13_UPDATE_PMA_SIGNALS |
-+		FIELD_PREP(PHY_CTRL_R13_MIN_COUNT_FOR_SYNC_DET, 7));
+-	regmap_write(priv->regmap, PHY_CTRL_R14, 0);
+-	regmap_write(priv->regmap, PHY_CTRL_R13,
+-		PHY_CTRL_R13_UPDATE_PMA_SIGNALS |
+-		FIELD_PREP(PHY_CTRL_R13_MIN_COUNT_FOR_SYNC_DET, 7));
++	if (priv->soc_id == MESON_SOC_G12A) {
++		regmap_write(priv->regmap, PHY_CTRL_R14, 0);
++		regmap_write(priv->regmap, PHY_CTRL_R13,
++			PHY_CTRL_R13_UPDATE_PMA_SIGNALS |
++			FIELD_PREP(PHY_CTRL_R13_MIN_COUNT_FOR_SYNC_DET, 7));
++	} else if (priv->soc_id == MESON_SOC_A1) {
++		regmap_write(priv->regmap, PHY_CTRL_R13,
++			FIELD_PREP(PHY_CTRL_R13_MIN_COUNT_FOR_SYNC_DET, 7));
++	}
  
  	return 0;
  }
+@@ -281,6 +307,8 @@ int meson_g12a_usb2_phy_probe(struct udevice *dev)
+ 	struct phy_meson_g12a_usb2_priv *priv = dev_get_priv(dev);
+ 	int ret;
+ 
++	priv->soc_id = (enum meson_soc_id)dev_get_driver_data(dev);
++
+ 	ret = regmap_init_mem(dev_ofnode(dev), &priv->regmap);
+ 	if (ret)
+ 		return ret;
+@@ -297,6 +325,20 @@ int meson_g12a_usb2_phy_probe(struct udevice *dev)
+ 		return ret;
+ 	}
+ 
++#if CONFIG_IS_ENABLED(POWER_DOMAIN)
++	ret = power_domain_get(dev, &priv->pwrdm);
++	if (ret < 0) {
++		pr_err("failed to get power domain\n");
++		return ret;
++	}
++
++	ret = power_domain_on(&priv->pwrdm);
++	if (ret < 0) {
++		pr_err("failed to enable power domain\n");
++		return ret;
++	}
++#endif
++
+ #if CONFIG_IS_ENABLED(CLK)
+ 	ret = clk_get_by_index(dev, 0, &priv->clk);
+ 	if (ret < 0)
+@@ -307,7 +349,14 @@ int meson_g12a_usb2_phy_probe(struct udevice *dev)
+ }
+ 
+ static const struct udevice_id meson_g12a_usb2_phy_ids[] = {
+-	{ .compatible = "amlogic,g12a-usb2-phy" },
++	{
++		.compatible = "amlogic,g12a-usb2-phy",
++		.data = (ulong)MESON_SOC_G12A,
++	},
++	{
++		.compatible = "amlogic,a1-usb2-phy",
++		.data = (ulong)MESON_SOC_A1,
++	},
+ 	{ }
+ };
+ 
 -- 
 2.25.1
 
