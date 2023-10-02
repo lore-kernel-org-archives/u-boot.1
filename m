@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D54A2E784AF
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 10:04:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C53FE784AF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 10:05:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2231C87163;
-	Mon,  2 Oct 2023 12:04:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F34087156;
+	Mon,  2 Oct 2023 12:05:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="JDBITMW+";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="NqwvFMv9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B876687164; Mon,  2 Oct 2023 12:04:46 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::60b])
+ id 172498716E; Mon,  2 Oct 2023 12:05:14 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on2062a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e89::62a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0C6C87156
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 12:04:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 07F4587147
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 12:05:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DnjzucDpcUoKcTJm/NJGGv+lebQSnpfqw0n68C9RCmsV8wc33igSSxc+SVoBavzIVPKXrUQ+sdt2gV412X1pwGim5+FxU1ZAe4ZW7HMNlUWH/O/kjB/Zrrx7Pfr+hOajXwGkRrFo8Wqst41k0POb/gwTXu+lCznzpzqDOlcxONtVQFcs4tsezxl2J5eQtqY3Jr3v2V/9N5aZJY9uaLjucxeij91q3P2+88zZn4C29j3bY0cHfd54zohWfr9CcDP01vfjeEL07YuhICU2ZwF2lyOpmltJGIksvzwQPfbrCHXI0GmfMGSEBERyLcCfWdc2NFiNkj3wW4Lv+ihmvHUCDw==
+ b=NMsMQPoy85Vlidqi8BB56vdDsW6d4wwPOV7yjUBwYJyr8Xu3aFyuQuPUKltgcS8UD7sdqIxceirwns+44Y+/vy6GkTltnTVDcj5Zj1wzzCbn2Snuxx4zfUfnATjq+lANv95GfNmYhibklZDO4zP7BZ2yPogEHFj8D0ZJ7187WM51JZcJmKLmXkGdNTVdfUrsdIqgOWbiYh5RF/neYFbz8Os8zCD3tV4uzcKQrjj7FdNa+1wdu7jqiMNgjgJKDnVZlcxFwuASZfdvmDDMsm9J3KF4WMtqXW3sbWqpKUDSNjVL+ds8oAg7gMylrqfOYhor9qfmj2Xs1R1tJp5W6GHQHw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qFInVm2N0x0og4CPHvunMfj9xXog8AXC6gxf1sjdd+w=;
- b=NOX/gd6rR5XyLgG66kl8IxSCabQmOIu4wspI5iRO9S9AAfwU4EfU9Ojk/JULxxcs+YwskIRpyE+zk5Jv0m9d1BfZBu15rhJMp1FUuHl/Es7KoKAWBht0YYhNNkuDCV5/I07/Cugn348aF045CXnFvjwDJKR3hnS8wq6zSw9oFNE4eRoPUPfSujfYz1VOxrCUJNyXfev2HYxlZxknFMGSg9RYN2bPKY/Rwq5qud0P53Jt3LP6p7QzK3xOWgIXKdM3FzyBHzyV37tTV+EILEVl7pztJr8IxSC4WmZYk0UqheRlyc15bVg2+6y1vAtkpcriAsi74yi1WmCUIPtTFmw6FA==
+ bh=Dn12itznsH5XeaGToWrGMu7RlIdI1gwL1fVBGSQ/nDY=;
+ b=E+jMkanNd2zUMRCTyrBg+lqa8cZX5aBs7JTeobYcFe/G7bjKXPsrnUiR8q5j6GOiE1uQ1GbJ8f4AYT971q05dYomayzm8up8eOHrdx9TnxLRFNoQHP+WEfgxZGzO4hBnaaEMmiCxdewB3y0QhF0MsXNY5CewAYLOf7i5O3zQfolB+KtdfghCri8pBIoe9e4bhHgYk2Qz98Dc/fbhk7f3UOz4YXQkSdjdplPo7174BgHx4lcwJ3J9+1+PtUfOz3QB+xiw4qC2EQckRlpXhk+y3gp/ku998IUEpkFC4zOtHXYxJtUB/yBijRRPcFCaero/7UFRbNICvjdVYsBgB0ojig==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qFInVm2N0x0og4CPHvunMfj9xXog8AXC6gxf1sjdd+w=;
- b=JDBITMW+eWzJCSDt6ijOL7F1VBxAO07VASNsil4ccsm39h//liA+q6XEa4JkLICAUEtzA5Wfd9kcR1EHhdp6uqXRv7KCZybMbkDoC8xEE/03uBtoVPhXYjGh10H4aSf2HVBsFw7xGIvz4/5x7/qP2Or2QQq8h47fA0PK6WxkxpI=
-Received: from SN6PR08CA0013.namprd08.prod.outlook.com (2603:10b6:805:66::26)
- by PH7PR12MB6836.namprd12.prod.outlook.com (2603:10b6:510:1b6::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6792.27; Mon, 2 Oct
- 2023 10:04:41 +0000
-Received: from SN1PEPF00026367.namprd02.prod.outlook.com
- (2603:10b6:805:66:cafe::e9) by SN6PR08CA0013.outlook.office365.com
- (2603:10b6:805:66::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.30 via Frontend
- Transport; Mon, 2 Oct 2023 10:04:41 +0000
+ bh=Dn12itznsH5XeaGToWrGMu7RlIdI1gwL1fVBGSQ/nDY=;
+ b=NqwvFMv95souNnAEcfs91n+MvD1FVI87lEmNXM+R/bH8x9wTxtgk5CV45vVNpJi6OaQFQJzoJl7RrYRBFHsYoL0v0d0FXrxQd1ILrJLcgelvn2udzdgm3f3buRrIPHvFnX/QPr0xeh2+J1MNHncoU4OWiA7HAdsWwLy98EYziqo=
+Received: from SA9PR13CA0162.namprd13.prod.outlook.com (2603:10b6:806:28::17)
+ by DM6PR12MB4044.namprd12.prod.outlook.com (2603:10b6:5:21d::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.30; Mon, 2 Oct
+ 2023 10:05:07 +0000
+Received: from SN1PEPF0002636B.namprd02.prod.outlook.com
+ (2603:10b6:806:28:cafe::c2) by SA9PR13CA0162.outlook.office365.com
+ (2603:10b6:806:28::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.21 via Frontend
+ Transport; Mon, 2 Oct 2023 10:05:07 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,22 +59,23 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF00026367.mail.protection.outlook.com (10.167.241.132) with Microsoft
+ SN1PEPF0002636B.mail.protection.outlook.com (10.167.241.136) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Mon, 2 Oct 2023 10:04:40 +0000
+ 15.20.6838.14 via Frontend Transport; Mon, 2 Oct 2023 10:05:06 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 2 Oct
- 2023 05:04:39 -0500
-Message-ID: <af19b506-dd6c-42bb-a663-1df578a246fc@amd.com>
-Date: Mon, 2 Oct 2023 12:04:39 +0200
+ 2023 05:05:04 -0500
+Message-ID: <94d69335-3acf-40b8-83d4-db5cc53684f9@amd.com>
+Date: Mon, 2 Oct 2023 12:05:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Describe assigned-clocks for uarts
+Subject: Re: [PATCH] arm64: zynqmp: Rename dt overlay file names from dts to
+ dtso
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-References: <bddbb81209a4567b0939c5d2d0ecb42fdfcd71ea.1695036114.git.michal.simek@amd.com>
+References: <1dce37e72428c14a3ccbb5dc674b90dfe56b75ac.1695046155.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -119,7 +120,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <bddbb81209a4567b0939c5d2d0ecb42fdfcd71ea.1695036114.git.michal.simek@amd.com>
+In-Reply-To: <1dce37e72428c14a3ccbb5dc674b90dfe56b75ac.1695046155.git.michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -127,26 +128,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00026367:EE_|PH7PR12MB6836:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7953e24e-b00c-4a62-bd22-08dbc32efe8e
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002636B:EE_|DM6PR12MB4044:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6b5396e2-101f-42af-a5bd-08dbc32f0e01
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: kK0uL4ZQlOW8pdqkTjLnYYB/wF+AqWndbJAMXRI1/2eU6TYays6V5K+xv+IdIgJu5VEg7Xtk16Zhg91DdPrMCGRzsbC2bOIkdAKy3B3szLZONk8cBmwY9B+JjvgSzsHtrMzEgble9pnsEC/FL7RrQzXSfWqmlp3Ews3WYnZm1lbX0YL4QY1BIR8GTQ9fL3fvoPkmbZ9t+3egQh+80oUdlkcZjHSi/ONy+bk8wn+ul446VWfrbtrjnGdGamoJq+vJEWnrhFIU3nqXZCkedNDTWBNs9DHHcLV0gkYrty0briRnf/htCtZ2hT7y39LI0+5Xyv+5ZF1IrREH1HacAZ5DUUQfRP7YVSOzryyZAO3ZB7V3NtDVt/CRRw51oY1hhpgrCoSpQJCNP7k2+GLdJvWRySiKvUzrhPiDJZFe1FgJgDJHd4OwsYg96e9Nejn/B4TYE9jST8HVYoouanmZZG9BbsbsH5M8p/XO6c1g1BYSoVSrBCWfwACaT+/3VRaY3u+klYmEp9vB8izCaCVaP8LaMlXE7iNd/f2fpwrofbtJpTekvVfv8nn1yWjttDgsK1JxuIMErSi6bcyPLkdXEhW7icd7hqY2m4cGF7iZC+9K8c58EjyREOSvLSUiGlggAi98MjMxo0RPP5VNpeMs4z3aYKO7SxODkCTCevgLDhQcz+NkkT8hanEHCF9/gjnSlbE2rmnslloSVY3lnH1dGmpiP7NBI7gjWO9x7E4vRic9l5y1a07VTvs6+kp5OHt5B6s7Wjr4JVvRzcjOxl6S+leAr/dopRbFmJkjTx8Deg8bfqyJ9AMd10vTl8KIDH+Imth1
+X-Microsoft-Antispam-Message-Info: /VRpvWwoCl3vCWNBSbCxQBZXwO9NWnL6cmAYlZvGxeKze8D+wKP/xel/HfumaiYC9dQa5ur1wUFKPCVyyKSCkMSCEA53B8qH852lJgk3bTX4sMXWaRYOMvZxAXdHV9gnErek9oRDvI0RIYEVH1jyLxPGiVyWbz/CZds8RzzeHbdfMyrH3+o4p4ITy5JnV8Ll7uG5TK6w8hul704sW501cibdcETUUn1KDoHh5pH6VGCiZSYSNkKdIf5WUyLaRBeQW/ILnCrBcbOglKuy9KoywQ64wrGf4rrzUxRnDW4pq7Vb5viGf6pIQmEela0CaLqYakQ+KdPn7e+Tld0eAzlpBdRt8DPH3qWn1JcgjToVPCMsnuac8drQ2GnrsFD5rmugvRtEd1C0C8gmGAq59K5tb1S/7G3LJ2ROT7Ca8g7to/2Llc6aXaeQB6JRWT89GFovSEWotgazncrkYJUro3xDge0D+WNfF97T4WrsviQvS0iypoCvkAlmYWVGj5YtU+ENOtQlSD+Mc9aQ2tsZithfj9RRtWdjzTq/GdyS50KQXkfWsl6wmdVI472pmfhX17657BxGCAL8kwEdmaFuflHyIz2ITOn5IYXdY/HCafmN80kxcfUkGRUdFM7vM1Oj7zZo/vPUh/GYjtoxjYX0WvaQe1EnI+4AeRptwm1z9SssHjdMKKp+eLVGq2//K++8cYo6OjQKAAEzloWskxpuP3PNl6ZtJCJz/5DIBgL4uurc69Imj56XDGXUrx98ZspZh1FnSuEkCan2JQh/lw78LzX1IVTQ4qCusCBOtf4WViP3r40E7xR3Ye17aUYIOFQnMQJa
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(396003)(136003)(346002)(39860400002)(230922051799003)(451199024)(186009)(64100799003)(1800799009)(82310400011)(46966006)(40470700004)(36840700001)(40480700001)(40460700003)(356005)(47076005)(4744005)(2906002)(81166007)(36860700001)(83380400001)(82740400003)(316002)(70206006)(53546011)(110136005)(8676002)(5660300002)(70586007)(426003)(336012)(8936002)(16576012)(44832011)(26005)(16526019)(2616005)(41300700001)(478600001)(36756003)(86362001)(31696002)(31686004)(43740500002)(36900700001);
+ SFS:(13230031)(4636009)(39860400002)(346002)(136003)(396003)(376002)(230922051799003)(186009)(1800799009)(82310400011)(451199024)(64100799003)(46966006)(40470700004)(36840700001)(2616005)(53546011)(2906002)(356005)(83380400001)(82740400003)(81166007)(31696002)(86362001)(36756003)(36860700001)(40480700001)(26005)(336012)(47076005)(16526019)(426003)(8676002)(8936002)(44832011)(40460700003)(478600001)(5660300002)(31686004)(16576012)(316002)(41300700001)(70586007)(70206006)(110136005)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2023 10:04:40.9111 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7953e24e-b00c-4a62-bd22-08dbc32efe8e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2023 10:05:06.8144 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6b5396e2-101f-42af-a5bd-08dbc32f0e01
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00026367.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636B.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB6836
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4044
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,32 +166,40 @@ X-Virus-Status: Clean
 
 
 
-On 9/18/23 13:22, Michal Simek wrote:
-> Describe assigned-clocks for both uarts. SOM is using this functionality.
+On 9/18/23 16:09, Michal Simek wrote:
+> Use dtso suffix instead of dts. Build option was introduced by
+> commit a0f9a77912b2 ("kbuild: Allow DTB overlays to built from .dtso named
+> source files").
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
->   arch/arm/dts/zynqmp-clk-ccf.dtsi | 2 ++
->   1 file changed, 2 insertions(+)
+>   .../dts/{zynqmp-sck-kr-g-revA.dts => zynqmp-sck-kr-g-revA.dtso}   | 0
+>   .../dts/{zynqmp-sck-kr-g-revB.dts => zynqmp-sck-kr-g-revB.dtso}   | 0
+>   .../dts/{zynqmp-sck-kv-g-revA.dts => zynqmp-sck-kv-g-revA.dtso}   | 0
+>   .../dts/{zynqmp-sck-kv-g-revB.dts => zynqmp-sck-kv-g-revB.dtso}   | 0
+>   4 files changed, 0 insertions(+), 0 deletions(-)
+>   rename arch/arm/dts/{zynqmp-sck-kr-g-revA.dts => zynqmp-sck-kr-g-revA.dtso} (100%)
+>   rename arch/arm/dts/{zynqmp-sck-kr-g-revB.dts => zynqmp-sck-kr-g-revB.dtso} (100%)
+>   rename arch/arm/dts/{zynqmp-sck-kv-g-revA.dts => zynqmp-sck-kv-g-revA.dtso} (100%)
+>   rename arch/arm/dts/{zynqmp-sck-kv-g-revB.dts => zynqmp-sck-kv-g-revB.dtso} (100%)
 > 
-> diff --git a/arch/arm/dts/zynqmp-clk-ccf.dtsi b/arch/arm/dts/zynqmp-clk-ccf.dtsi
-> index 1ae8ea2e43f7..9c0aa073dd94 100644
-> --- a/arch/arm/dts/zynqmp-clk-ccf.dtsi
-> +++ b/arch/arm/dts/zynqmp-clk-ccf.dtsi
-> @@ -253,10 +253,12 @@
->   
->   &uart0 {
->   	clocks = <&zynqmp_clk UART0_REF>, <&zynqmp_clk LPD_LSBUS>;
-> +	assigned-clocks = <&zynqmp_clk UART0_REF>;
->   };
->   
->   &uart1 {
->   	clocks = <&zynqmp_clk UART1_REF>, <&zynqmp_clk LPD_LSBUS>;
-> +	assigned-clocks = <&zynqmp_clk UART1_REF>;
->   };
->   
->   &usb0 {
+> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revA.dts b/arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+> similarity index 100%
+> rename from arch/arm/dts/zynqmp-sck-kr-g-revA.dts
+> rename to arch/arm/dts/zynqmp-sck-kr-g-revA.dtso
+> diff --git a/arch/arm/dts/zynqmp-sck-kr-g-revB.dts b/arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+> similarity index 100%
+> rename from arch/arm/dts/zynqmp-sck-kr-g-revB.dts
+> rename to arch/arm/dts/zynqmp-sck-kr-g-revB.dtso
+> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dts b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+> similarity index 100%
+> rename from arch/arm/dts/zynqmp-sck-kv-g-revA.dts
+> rename to arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+> diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dts b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+> similarity index 100%
+> rename from arch/arm/dts/zynqmp-sck-kv-g-revB.dts
+> rename to arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
 
 Applied.
 M
