@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1072E784BE
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 15:39:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CB04E784BF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 15:51:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20B2E87166;
-	Mon,  2 Oct 2023 17:39:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 23AA286E27;
+	Mon,  2 Oct 2023 17:51:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BqT6EW9D";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fM6vMJhz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 418948717A; Mon,  2 Oct 2023 17:39:39 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8AE8C80374; Mon,  2 Oct 2023 17:51:55 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9876586DE1
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 17:39:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B023E86E27
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 17:51:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-99c136ee106so2340428366b.1
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 08:39:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696261176; x=1696865976; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DH9JBHtL15p5kDx36xoKgV09qAryYwk0TOZxr7Jv3cY=;
- b=BqT6EW9DJeY/zOTJIbekllid9YVCtUi+j5OjSmCcJ4pd95jytd3IR0Z+O32S7cjDeM
- PPuEqaC9IquhyMayo22ZUC16ZMor9tGXgvVxHtCLJ7Qh2gqBTAN0aPOthQRZ2V26ulZO
- nDIHgx53f+htxlsKN/DOz1IOGVzo/ZR8wDyTM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696261176; x=1696865976;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DH9JBHtL15p5kDx36xoKgV09qAryYwk0TOZxr7Jv3cY=;
- b=pZrCr+QViD2HK9nc36iCUHik5OphxtlxpJm90ZMEN9rIDfEfS/KRSCEnEIYU0ran2K
- iG7VePFO1DLWNcTyRdZSG++kXKFrz11Ts2KCRvEsYnSnXXCRL4dNTCDhh52p6vGcqQsl
- Kv6y+QAYvJvaV9Ci6XkeSXjrs5anZ4Pz/3W+2G34w9kYh+4a46yy3q5H2Xe9ebaGQ9Z/
- J0zTdfBMyzLIrpjGrBfj4MXyDKZaPC3AJyaj6vpY0xjwE2KIVRhYLX39lvahosnHd3TQ
- Np0wA1CHSod4ltSsIXYA4aS/BoUiBEvTwdZQYFBVtCronczI8ZJDJbpYYw39jX5//jaL
- K2Lw==
-X-Gm-Message-State: AOJu0Ywg+Klv1MsPWdZwD3jibDRZyQhi49OkLsT72ThX5exkyjhFB2Vf
- BkhKNggAEZwWo2R532muV6ALHtrIpP/ryP5fAAWp6qT9TeG+U0R63X0=
-X-Google-Smtp-Source: AGHT+IHfeEbhX6zVGdFIYxawuraTyof9V4OsfAl6crrnEXI+Xuuid/Di44cH+3th/KZnznJYnsUYpVnzQxktT4tJplk=
-X-Received: by 2002:a17:906:845b:b0:9ae:6538:643b with SMTP id
- e27-20020a170906845b00b009ae6538643bmr11487649ejy.38.1696261175907; Mon, 02
- Oct 2023 08:39:35 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 392FpgDF084085;
+ Mon, 2 Oct 2023 10:51:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696261902;
+ bh=5tOhKCTyg5fz9RXHc3sqO/rGJlZk4nlDqPNN5P5ttwk=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=fM6vMJhzMqk/fULBYHSkHHX8TipKvNqeSYuzyVf3Ob4siuFCBHj/8mOz7LY0VcAdM
+ zt1VbeAgLsC5XLxmf5CSZCun+EXuPHYQo860lcRoY7fpTPJryYo3tNMJIf4felAY/G
+ 4YIevBgREueUffaCPRO0qrCyawr4Pue9Pfd4jksc=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 392Fpg6w126375
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 2 Oct 2023 10:51:42 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
+ Oct 2023 10:51:41 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 2 Oct 2023 10:51:41 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 392FpfSe012370;
+ Mon, 2 Oct 2023 10:51:41 -0500
+Date: Mon, 2 Oct 2023 10:51:41 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Apurva Nandan <a-nandan@ti.com>
+CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
+ Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
+ <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
+ <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
+ <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v4 09/16] board: ti: j784s4: Add board support for J784S4
+ EVM
+Message-ID: <20231002155141.e6iw2kpdtrighpwi@headache>
+References: <20231001165545.494212-1-a-nandan@ti.com>
+ <20231001165545.494212-10-a-nandan@ti.com>
 MIME-Version: 1.0
-References: <20230503145438.GB1134230@bill-the-cat>
- <0f2df366-65ca-664f-1f90-0c2aeafce8f1@prevas.dk>
- <68f445de-c903-c3a1-906f-2cf7b5675d08@prevas.dk>
- <20230925181940.GH305624@bill-the-cat>
- <08e35aab-309c-a8e1-931e-7ab142beb593@prevas.dk>
- <CAPnjgZ3jO5s3HZRjXdG-dVLNmGYnyCWnpvzRKpKhBCRQqWH33Q@mail.gmail.com>
- <20230929160230.GP305624@bill-the-cat>
- <CAPnjgZ29hTMrzey1eZreTKhEVXWvi50JWBw-kUKC2VUYgXLYsw@mail.gmail.com>
- <20231002140854.GU305624@bill-the-cat>
- <CAPnjgZ0TTNCEUHfHDr7tALx+Po9PDoD-R7zYeN2gc4wnkWqSzw@mail.gmail.com>
- <20231002151212.GY305624@bill-the-cat>
-In-Reply-To: <20231002151212.GY305624@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 2 Oct 2023 09:39:18 -0600
-Message-ID: <CAPnjgZ1fZjxTi8ryiVZC=Js1MDfP+PdGbJK87BA_kJe52d038w@mail.gmail.com>
-Subject: Re: [PATCH] scripts/Makefile.lib: also consider
- $(CONFIG_SYS_BOARD)-u-boot.dtsi
-To: Tom Rini <trini@konsulko.com>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231001165545.494212-10-a-nandan@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,140 +91,196 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 22:25-20231001, Apurva Nandan wrote:
+> Add board files for J784S4 EVM.
+> 
+> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+> [ add env and board specific yaml files for binman ]
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> [ cleaned up the env files ]
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
+> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
+> ---
+>  arch/arm/mach-k3/Kconfig         |    1 +
+>  board/ti/j784s4/Kconfig          |   63 +
+>  board/ti/j784s4/MAINTAINERS      |   22 +
+>  board/ti/j784s4/Makefile         |    7 +
+>  board/ti/j784s4/board-cfg.yaml   |   37 +
+>  board/ti/j784s4/evm.c            |   82 +
+>  board/ti/j784s4/j784s4.env       |   35 +
+>  board/ti/j784s4/pm-cfg.yaml      |   13 +
+>  board/ti/j784s4/rm-cfg.yaml      | 3058 ++++++++++++++++++++++++++++++
+>  board/ti/j784s4/sec-cfg.yaml     |  380 ++++
+>  board/ti/j784s4/tifs-rm-cfg.yaml | 2656 ++++++++++++++++++++++++++
+>  include/configs/j784s4_evm.h     |   20 +
 
-On Mon, 2 Oct 2023 at 09:12, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Oct 02, 2023 at 08:43:41AM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Mon, 2 Oct 2023 at 08:09, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sun, Oct 01, 2023 at 07:17:27PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 29 Sept 2023 at 10:02, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Sep 29, 2023 at 09:15:00AM -0600, Simon Glass wrote:
-> > > > > > Hi Rasmus,
-> > > > > >
-> > > > > > On Mon, 25 Sept 2023 at 13:05, Rasmus Villemoes
-> > > > > > <rasmus.villemoes@prevas.dk> wrote:
-> > > > > > >
-> > > > > > > On 25/09/2023 20.19, Tom Rini wrote:
-> > > > > > > > On Mon, Sep 25, 2023 at 10:27:43AM +0200, Rasmus Villemoes wrote:
-> > > > > > > >> On 04/05/2023 14.35, Rasmus Villemoes wrote:
-> > > > > > > >>> On 03/05/2023 16.54, Tom Rini wrote:
-> > > > > > > >>
-> > > > > > > >>>> The one last problem now is on stm32mp15_dhcor_basic which is a
-> > > > > > > >>>> defconfig missing one from OF_LIST but including it in the its file, so
-> > > > > > > >>>> the above is the patch we need.
-> > > > > > > >>>>
-> > > > > > > >>
-> > > > > > > >> Hi Tom
-> > > > > > > >>
-> > > > > > > >> Can I persuade you to try something like
-> > > > > > > >> https://source.denx.de/u-boot/u-boot/-/commit/a05e0d0e6b9103542a1076f9cab0005f400fa072
-> > > > > > > >> again, but leaving the .dtbo targets in there?
-> > > > > > > >>
-> > > > > > > >> I could send a patch, but it's entirely mechanical, and not really meant
-> > > > > > > >> for being applied until we know if there's more to be cleaned up.
-> > > > > > > >
-> > > > > > > > So what ended up being the problem I think is the case Simon pointed out
-> > > > > > > > where we do take the output from "make all" and concatenate one of the
-> > > > > > > > dtbs that was generated with u-boot.img or so, and it works.  But maybe
-> > > > > > > > that should just list all of the valid DTBs that it needs in the
-> > > > > > > > defconfig to start with? I don't quite know, it was a case I hadn't
-> > > > > > > > considered at the time.
-> > > > > > > >
-> > > > > > >
-> > > > > > > Re-reading the thread, I can't see where that was mentioned.
-> > > > > > >
-> > > > > > > But yes, if some boards (still) need that, and have more than one
-> > > > > > > possible .dtb, the board can't set an OF_LIST different from the default
-> > > > > > > consisting of DEFAULT_DEVICE_TREE because changing OF_LIST requires
-> > > > > > > SPL_LOAD_FIT || MULTI_DTB_FIT.
-> > > > > > >
-> > > > > > > How do we figure out if such boards even exist?
-> > > > > >
-> > > > > > Honestly at this point I've forgotten what this is all about.
-> > > > > >
-> > > > > > Perhaps the easiest approach is to create a new Kconfig to control
-> > > > > > whether a board-level .dtsi is included in the list of wildcard
-> > > > > > searches. Then you can enable it for your board without affecting
-> > > > > > others.
-> > > > >
-> > > > > That's getting things backwards, from what this cleanup does.  Today we
-> > > > > have messy lists of "build these device trees" and then don't use most
-> > > > > of them, and some of the list is just Wrong (listing dts files as an
-> > > > > output).  With the series to handle dtbo files, we could remove
-> > > > > virtually all of that, and the only use cases that don't Just Work still
-> > > > > are the ones I forget which board you mentioned (I think it was Samsung
-> > > > > tho?) where the defconfig doesn't list all of the device trees, just one
-> > > > > of them, and the other 5 that we build can also be easily used.  Does
-> > > > > that ring a bell?
-> > > >
-> > > > Yes it does...but what is the problem here?
-> > >
-> > > Messy and unused and incorrect Makefile content.
-> >
-> > The problem I see there is people using TARGET in
-> > arch/arm/dts/Makefile for example. There are 80 instances of that. The
-> > rules should depend on SoC (e.g. use ARCH_EXYNOS5), as Linux does it.
->
-> It shouldn't be there at all since there's almost no cases where we
-> "just" take an arbitrary dtb file and u-boot.img and then the system
-> boot.  That's what this series is about fixing.
+There is all kind of changes mixed in that makes this patch hard to review.
 
-I'm really not sure that replacing build rules with a board CONFIG is
-a good idea. I suppose part of my confusion is why the Makefile is
-considered a problem?
+>  12 files changed, 6374 insertions(+)
+>  create mode 100644 board/ti/j784s4/Kconfig
+>  create mode 100644 board/ti/j784s4/MAINTAINERS
+>  create mode 100644 board/ti/j784s4/Makefile
+>  create mode 100644 board/ti/j784s4/board-cfg.yaml
+>  create mode 100644 board/ti/j784s4/evm.c
+>  create mode 100644 board/ti/j784s4/j784s4.env
+>  create mode 100644 board/ti/j784s4/pm-cfg.yaml
+>  create mode 100644 board/ti/j784s4/rm-cfg.yaml
+>  create mode 100644 board/ti/j784s4/sec-cfg.yaml
+>  create mode 100644 board/ti/j784s4/tifs-rm-cfg.yaml
+>  create mode 100644 include/configs/j784s4_evm.h
+[...]
 
->
-> > > > The DT files for an SoC are supposed to be buildable without needing
-> > > > to have the context of a particular board.
-> > >
-> > > They're still buildable, without an explicit rule, they just need to
-> > > (like they can now) be built explicitly.
-> >
-> > But isn't that creating dead code? It will rot.
->
-> No, that's the problem we have today, people list something in the
-> Makefile, since they think they need to list something, and then put the
-> device trees they use in the defconfig.
+> new file mode 100644
+> index 0000000000..025079c6a8
+> --- /dev/null
+> +++ b/board/ti/j784s4/evm.c
+> @@ -0,0 +1,82 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Board specific initialization for J784S4 EVM
+> + *
+> + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
+> + *	Hari Nagalla <hnagalla@ti.com>
+> + *
+> + */
+> +
+> +#include <common.h>
+> +#include <env.h>
+> +#include <fdt_support.h>
+> +#include <generic-phy.h>
+> +#include <image.h>
+> +#include <init.h>
+> +#include <log.h>
+> +#include <net.h>
+> +#include <asm/arch/hardware.h>
+> +#include <asm/gpio.h>
+> +#include <asm/io.h>
+> +#include <spl.h>
+> +#include <dm.h>
+> +#include <dm/uclass-internal.h>
+> +
+> +#include "../common/board_detect.h"
+> +
+> +#define board_is_j784s4_evm()	board_ti_k3_is("J784S4-EVM")
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +int board_init(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +int dram_init(void)
+> +{
+> +#ifdef CONFIG_PHYS_64BIT
 
-If they don't list something, it won't build, right?
+stop using #ifdef. if (IS_ENABLED())
+Checkpatch will warn you on this. you seem to have ignore it.
 
->
-> [snip]
-> > > > I am find with making the boards list the DTs that they can run with,
-> > > > if there is an easy way of doing that. CONFIG_SPL_OF_LIST is just for
-> > > > SPL, I think.
-> > >
-> > > Yes, every board except for some use case you've described before as far
-> > > as I know lists the device trees that they use in the defconfig.  Which
-> > > is why there's an impetus to clean up arch/*/dts/Makefile as 95% of
-> > > those lines can just be removed.
-> >
-> > It seems like you are wanting a board-level CONFIG which lists the DTs
-> > which need to be built for that board. Is that right? You are
-> > suggesting that this already exists, but I am not aware of it. Do you
-> > mean SPL_OF_LIST, perhaps?
->
-> I mean today CONFIG_DEFAULT_DEVICE_TREE + CONFIG_OF_LIST +
-> CONFIG_SPL_OF_LIST is set and correct for everyone board except some use
-> case you have, which I think is something about exynos?  And so we only
-> need scripts/Makefile.dts in arch/*/dts/Makefile
+> +	gd->ram_size = 0x100000000;
+> +#else
+> +	gd->ram_size = 0x80000000;
+> +#endif
+> +
+> +	return 0;
+> +}
+> +
+> +phys_size_t board_get_usable_ram_top(phys_size_t total_size)
+> +{
+> +#ifdef CONFIG_PHYS_64BIT
+> +	/* Limit RAM used by U-Boot to the DDR low region */
+> +	if (gd->ram_top > 0x100000000)
+> +		return 0x100000000;
+> +#endif
+> +
+> +	return gd->ram_top;
+> +}
+> +
+> +int dram_init_banksize(void)
+> +{
+> +	/* Bank 0 declares the memory available in the DDR low region */
+> +	gd->bd->bi_dram[0].start = CFG_SYS_SDRAM_BASE;
+> +	gd->bd->bi_dram[0].size = 0x7fffffff;
+> +	gd->ram_size = 0x80000000;
+NAK. Use fdtdec_setup_mem_size_base fdtdec_setup_memory_banksize
+And fix up accordingly.
 
-Yes exynos5 boards (the original reason for DT) have / had the same
-u-boot-nodtb.bin and you can add the DT you want to boot it on
-particular hardware. That is one of the goals of DT.
+> +
+> +#ifdef CONFIG_PHYS_64BIT
+> +	/* Bank 1 declares the memory available in the DDR high region */
+> +	gd->bd->bi_dram[1].start = CFG_SYS_SDRAM_BASE1;
+> +	gd->bd->bi_dram[1].size = 0x77fffffff;
+> +	gd->ram_size = 0x800000000;
+> +#endif
+> +
+> +	return 0;
+> +}
+> +
+> +int board_late_init(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +void spl_board_init(void)
+> +{
+> +}
+> diff --git a/board/ti/j784s4/j784s4.env b/board/ti/j784s4/j784s4.env
+> new file mode 100644
+> index 0000000000..74f822440e
+> --- /dev/null
+> +++ b/board/ti/j784s4/j784s4.env
+> @@ -0,0 +1,35 @@
+> +#include <env/ti/ti_armv7_common.env>
+> +#include <env/ti/mmc.env>
+> +#include <env/ti/ufs.env>
+> +#include <env/ti/k3_dfu.env>
+> +
+> +#if CONFIG_CMD_REMOTEPROC
+> +#include <env/ti/k3_rproc.env>
+> +#endif
+> +
+> +default_device_tree=ti/k3-j784s4-evm.dtb
+> +findfdt=
+> +	setenv name_fdt ${default_device_tree};
+> +	if test CONFIG_DEFAULT_DEVICE_TREE = "k3-j784s4-evm"; then
+> +		setenv name_fdt ti/k3-j784s4-evm.dtb; fi;
+> +	setenv fdtfile ${name_fdt}
 
-The OF_LIST option is a little vague but I think it means that the DTs
-are packaged into a FIT in u-boot.img - is that right? But they
-presumably have to be built first.
+Explained that this is a NAK.
+> +name_kern=Image
+> +console=ttyS2,115200n8
+> +args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02880000
+> +	${mtdparts}
+> +run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
+> +
+> +boot_targets=ti_mmc mmc0 mmc1 usb pxe dhcp
 
-I think this would be better discussed f2f.
+ti_mmc is a boot_target in stdboot?? no, it wont work.
 
+Also change the boot meth to mmc1 (SD), mmc0(emmc), usb pxe dhcp.
+
+> +boot=mmc
+> +mmcdev=1
+> +dorprocboot=1
+> +bootpart=1:2
+> +bootdir=/boot
+> +rd_spec=-
+> +
+> +rproc_fw_binaries= 2 /lib/firmware/j784s4-main-r5f0_0-fw 3 /lib/firmware/j784s4-main-r5f0_1-fw 4 /lib/firmware/j784s4-main-r5f1_0-fw 5 /lib/firmware/j784s4-main-r5f1_1-fw 6 /lib/firmware/j784s4-main-r5f2_0-fw 7 /lib/firmware/j784s4-main-r5f2_1-fw 8 /lib/firmware/j784s4-c71_0-fw 9 /lib/firmware/j784s4-c71_1-fw 10 /lib/firmware/j784s4-c71_2-fw 11 /lib/firmware/j784s4-c71_3-fw
+
+No clue what the above mess is.
+
+> +
+> +splashfile=ti.gz
+> +splashimage=0x82000000
+> +splashpos=m,m
+> +splashsource=mmc
+
+You have splash screen support?
+
+
+-- 
 Regards,
-Simon
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
