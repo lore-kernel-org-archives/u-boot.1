@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84538E748FE
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 17:34:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2361E748FC
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 17:34:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD1D386EAA;
-	Mon,  2 Oct 2023 19:34:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5581C870DE;
+	Mon,  2 Oct 2023 19:34:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="UxdE/FTH";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="jbOCRLmj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA301870AD; Mon,  2 Oct 2023 18:59:11 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 2A644871AB; Mon,  2 Oct 2023 18:59:13 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64435870DE
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 18:59:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F9B086E00
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 18:59:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 925D0120008;
- Mon,  2 Oct 2023 19:59:06 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 925D0120008
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id A0161100003;
+ Mon,  2 Oct 2023 19:59:05 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru A0161100003
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696265946;
- bh=h09tsDHxJ4Yq7zZBJG7akE8egNmXf1eriOetPOLWm0A=;
+ s=mail; t=1696265945;
+ bh=p/s7cm/xGcZ9cF0Xqg6WIcrD5JPQPIu0ZYchy5WwFqg=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=UxdE/FTHkTq/IZzb6AAx9s2R8yrd9BjwQU28l/QN+Qh3a7QjSQ9kYcgDre/4PNqw6
- LZTt8Oa3a17w8y5kTbm1o010P5I5UhrM4NqIrFtYkRkTv23LTmPf/4fDgMF6mZAxBa
- RnXG8mabUFJMlFIUtNjl6yHh+vNnmTK1mzpoNJv8Z8n1elqQILKwn77cxq0G+75eWJ
- duk4NoNvfKvfS5mZbUQU7NBv9wZuWRfHTKmattQ4CpWsoU3blThULF7pNVtw4HO4+7
- 3zfm8DxXdkv0Qs5Rd1slt0CLTfCWisEG+loB+jTcFkFmdzRL7s7g5yBF+XmnyNXliG
- GEKj5bh+7PhNg==
+ b=jbOCRLmjRm5lRawluBhE1XZQu3Tpjas4EkXRW5hXbe6TTG4DEMK7OYZ7BR4RBvr3P
+ kXXxA3lqiSea5RN2jjpsUjIJgOM1ZqeBS5M3pZ1zKQBOUJ9fJsNFHie12u0z+ubHAK
+ yZrX4Sye3dzeKwyMIhPOXXNgWa8xx50hiduGzwdmVLrsp3Fhmmu88AT59SzLc+uCKE
+ qbceYrMBzE6CVixWJkbVXAXbrd1t7pr/M+XgNgPoDd5eLgIwtaE83ddYBEZY5XzqCA
+ m0IgyGthdnBOFayv8Ct8vJV+DWMl85XA5ddRODNzcNu/SOt5r6KSuHsKKADriU7mEf
+ wBzP2+QtsHoKw==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon,  2 Oct 2023 19:59:06 +0300 (MSK)
+ Mon,  2 Oct 2023 19:59:05 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Mon, 2 Oct 2023 19:59:06 +0300
+ 15.2.1118.30; Mon, 2 Oct 2023 19:59:05 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <lukma@denx.de>, <seanga2@gmail.com>, <marex@denx.de>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v1 2/8] reset: add support for Amlogic A1 family
-Date: Mon, 2 Oct 2023 19:58:46 +0300
-Message-ID: <20231002165857.19512-3-avromanov@salutedevices.com>
+Subject: [PATCH v1 1/8] dt-bindings: reset: add Meson A1 reset bindings
+Date: Mon, 2 Oct 2023 19:58:45 +0300
+Message-ID: <20231002165857.19512-2-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231002165857.19512-1-avromanov@salutedevices.com>
 References: <20231002165857.19512-1-avromanov@salutedevices.com>
@@ -77,10 +77,11 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 535 535
  da804c0ea8918f802fc60e7a20ba49783d957ba2,
- {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+ {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
+ 127.0.0.199:7.1.2; salutedevices.com:7.1.1;
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
+ ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -105,101 +106,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds reset support for the Amlogic A1 family.
-We add the structure meson_reset_drvdata, which in the future
-will allow this driver to be used for other families by declaring
-only the correct parameters reg_count and level_offset.
+Get this from Linux 6.6-rc3.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- drivers/reset/reset-meson.c | 42 +++++++++++++++++++++++++++++++------
- 1 file changed, 36 insertions(+), 6 deletions(-)
+ .../reset/amlogic,meson-a1-reset.h            | 76 +++++++++++++++++++
+ 1 file changed, 76 insertions(+)
+ create mode 100644 include/dt-bindings/reset/amlogic,meson-a1-reset.h
 
-diff --git a/drivers/reset/reset-meson.c b/drivers/reset/reset-meson.c
-index 64bc696f13..9d0c8b354f 100644
---- a/drivers/reset/reset-meson.c
-+++ b/drivers/reset/reset-meson.c
-@@ -13,18 +13,26 @@
- #include <reset-uclass.h>
- #include <regmap.h>
- #include <linux/bitops.h>
-+#include <linux/delay.h>
- 
--#define REG_COUNT	8
- #define BITS_PER_REG	32
--#define LEVEL_OFFSET	0x7c
+diff --git a/include/dt-bindings/reset/amlogic,meson-a1-reset.h b/include/dt-bindings/reset/amlogic,meson-a1-reset.h
+new file mode 100644
+index 0000000000..2c749c655e
+--- /dev/null
++++ b/include/dt-bindings/reset/amlogic,meson-a1-reset.h
+@@ -0,0 +1,76 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (c) 2019 Amlogic, Inc. All rights reserved.
++ * Author: Xingyu Chen <xingyu.chen@amlogic.com>
++ *
++ * Copyright (c) 2023, SberDevices, Inc.
++ * Author: Alexey Romanov <avromanov@salutedevices.com>
++ */
 +
-+struct meson_reset_drvdata {
-+	unsigned int reg_count;
-+	unsigned int level_offset;
-+};
- 
- struct meson_reset_priv {
- 	struct regmap *regmap;
-+	struct meson_reset_drvdata *drvdata;
- };
- 
- static int meson_reset_request(struct reset_ctl *reset_ctl)
- {
--	if (reset_ctl->id > (REG_COUNT * BITS_PER_REG))
-+	struct meson_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-+	struct meson_reset_drvdata *data = priv->drvdata;
++#ifndef _DT_BINDINGS_AMLOGIC_MESON_A1_RESET_H
++#define _DT_BINDINGS_AMLOGIC_MESON_A1_RESET_H
 +
-+	if (reset_ctl->id > (data->reg_count * BITS_PER_REG))
- 		return -EINVAL;
- 
- 	return 0;
-@@ -33,9 +41,10 @@ static int meson_reset_request(struct reset_ctl *reset_ctl)
- static int meson_reset_level(struct reset_ctl *reset_ctl, bool assert)
- {
- 	struct meson_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-+	struct meson_reset_drvdata *data = priv->drvdata;
- 	uint bank = reset_ctl->id / BITS_PER_REG;
- 	uint offset = reset_ctl->id % BITS_PER_REG;
--	uint reg_offset = LEVEL_OFFSET + (bank << 2);
-+	uint reg_offset = data->level_offset + (bank << 2);
- 	uint val;
- 
- 	regmap_read(priv->regmap, reg_offset, &val);
-@@ -64,15 +73,36 @@ struct reset_ops meson_reset_ops = {
- 	.rst_deassert = meson_reset_deassert,
- };
- 
-+static const struct meson_reset_drvdata meson_gxbb_data = {
-+	.reg_count = 8,
-+	.level_offset = 0x7c,
-+};
++/*	RESET0					*/
++/*					0	*/
++#define RESET_AM2AXI_VAD		1
++/*					2-3	*/
++#define RESET_PSRAM			4
++#define RESET_PAD_CTRL			5
++/*					6	*/
++#define RESET_TEMP_SENSOR		7
++#define RESET_AM2AXI_DEV		8
++/*					9	*/
++#define RESET_SPICC_A			10
++#define RESET_MSR_CLK			11
++#define RESET_AUDIO			12
++#define RESET_ANALOG_CTRL		13
++#define RESET_SAR_ADC			14
++#define RESET_AUDIO_VAD			15
++#define RESET_CEC			16
++#define RESET_PWM_EF			17
++#define RESET_PWM_CD			18
++#define RESET_PWM_AB			19
++/*					20	*/
++#define RESET_IR_CTRL			21
++#define RESET_I2C_S_A			22
++/*					23	*/
++#define RESET_I2C_M_D			24
++#define RESET_I2C_M_C			25
++#define RESET_I2C_M_B			26
++#define RESET_I2C_M_A			27
++#define RESET_I2C_PROD_AHB		28
++#define RESET_I2C_PROD			29
++/*					30-31	*/
 +
-+static const struct meson_reset_drvdata meson_a1_data = {
-+	.reg_count = 3,
-+	.level_offset = 0x40,
-+};
++/*	RESET1					*/
++#define RESET_ACODEC			32
++#define RESET_DMA			33
++#define RESET_SD_EMMC_A			34
++/*					35	*/
++#define RESET_USBCTRL			36
++/*					37	*/
++#define RESET_USBPHY			38
++/*					39-41	*/
++#define RESET_RSA			42
++#define RESET_DMC			43
++/*					44	*/
++#define RESET_IRQ_CTRL			45
++/*					46	*/
++#define RESET_NIC_VAD			47
++#define RESET_NIC_AXI			48
++#define RESET_RAMA			49
++#define RESET_RAMB			50
++/*					51-52	*/
++#define RESET_ROM			53
++#define RESET_SPIFC			54
++#define RESET_GIC			55
++#define RESET_UART_C			56
++#define RESET_UART_B			57
++#define RESET_UART_A			58
++#define RESET_OSC_RING			59
++/*					60-63	*/
 +
- static const struct udevice_id meson_reset_ids[] = {
--	{ .compatible = "amlogic,meson-gxbb-reset" },
--	{ .compatible = "amlogic,meson-axg-reset" },
-+	{
-+		.compatible = "amlogic,meson-gxbb-reset",
-+		.data = (ulong)&meson_gxbb_data,
-+	},
-+	{
-+		.compatible = "amlogic,meson-axg-reset",
-+		.data = (ulong)&meson_gxbb_data,
-+	},
-+	{
-+		.compatible = "amlogic,meson-a1-reset",
-+		.data = (ulong)&meson_a1_data,
-+	},
- 	{ }
- };
- 
- static int meson_reset_probe(struct udevice *dev)
- {
- 	struct meson_reset_priv *priv = dev_get_priv(dev);
-+	priv->drvdata = (struct meson_reset_drvdata *)dev_get_driver_data(dev);
- 
- 	return regmap_init_mem(dev_ofnode(dev), &priv->regmap);
- }
++/*	RESET2					*/
++/*					64-95	*/
++
++#endif
 -- 
 2.25.1
 
