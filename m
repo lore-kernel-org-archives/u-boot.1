@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D48A2E784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:30:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E77B6E784A6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:30:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFBFC8718F;
-	Mon,  2 Oct 2023 03:16:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C62A871E6;
+	Mon,  2 Oct 2023 03:16:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GnzVJLQb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="N43A38To";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C3DD87164; Mon,  2 Oct 2023 03:16:03 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id BD07D87120; Mon,  2 Oct 2023 03:16:05 +0200 (CEST)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6728487153
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:15:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C746087122
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:15:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3af64a4c97eso2151759b6e.2
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:15:12 -0700 (PDT)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-79fa7e33573so476446439f.0
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:15:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209306; x=1696814106; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209305; x=1696814105; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yZsx1PqtiCzkneIYC7Xn/D2a59JaElp6aimlo3TEANc=;
- b=GnzVJLQbQrDd8uD4jATcctgho4OrsyLtkjqsNyMVdtSzh2LzxLcIFLdbI1QtfNPfJc
- qr+7O7tK4KcGwaXgt+0vJ/0cUVFwTzqY5FRDd0E9IF4AZBUhpP7il7jfurM68cAToA0s
- jiS0slEloBUponjx1lrhe5zfw2zTHXNUTerKA=
+ bh=I4k8w3jmwzg3Lig42juPNVhV1vGd3c6UJij8pnOShr0=;
+ b=N43A38To8tp08iL2wpKvxdk5KWtD9i3y5scCDtI0tU5bRXS3IZWNK0PKUY6hOsxjXT
+ MutdQUNCFwqwkJ3O96asyBDtL/y6AGm8Iv4lzSsvu9Jy3y3VmLsujjDJlkPUWJUhNPq0
+ LEJtwoKEtz5KnqzWj/+pVl3c6O4d0kLxe+6aY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209306; x=1696814106;
+ d=1e100.net; s=20230601; t=1696209305; x=1696814105;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yZsx1PqtiCzkneIYC7Xn/D2a59JaElp6aimlo3TEANc=;
- b=Gc9AXjnUeC6vRogc7JnJ+NrFYGP0pKFn/zgAujq4DLipjSLmz5Z/tL1JCkEwIKV08Q
- gSMnkm7ih/uYEinne5//u+78QbzB3f3polZDyap64xGrIYFj/UeaA/taLSrikBxsvQUS
- Oh/FWbay+PVxC7oInllmKTF0PPS3QK9lm/mBAvo/4dFKzpfis4D6sJoFJ9dtaZmBL0q/
- /jzIZZDX8DtqgKhK7PpXIz1FtuXnoRkhq2QMGJbvLfj4FnOiNSjr8uO7nPESQExWKfOt
- Zxhn8NCZOXXl8/2LkIqMxxLGXTpB617Hjng4pXM1H1R0edW1B24sdKGbB3Q14sraorbX
- 7cIA==
-X-Gm-Message-State: AOJu0YzD6mW6HH+kLOqvPhrm+8X7gsgTiQZS5av9i4DR5cy78+z+YAzi
- OtY2yMt6PM5gqkISHXIDBXmsRwja9hgCb32X0WI=
-X-Google-Smtp-Source: AGHT+IHVdW8BOf9NaD1vxwGTZZBC2Z1rqppj2F0POA47Gwn32lvLBSojY6ccE9is5ACkKb/vzB9x2g==
-X-Received: by 2002:a05:6808:1582:b0:3ad:f8a7:1485 with SMTP id
- t2-20020a056808158200b003adf8a71485mr11295079oiw.18.1696209306216; 
- Sun, 01 Oct 2023 18:15:06 -0700 (PDT)
+ bh=I4k8w3jmwzg3Lig42juPNVhV1vGd3c6UJij8pnOShr0=;
+ b=NSRUUXs++w71wlXvFd7keTecTlIe6mrClebALFoFq9H8b4EzncF+4aCypTXmLH7csz
+ kLSzXkAFmhR65iThBQiJFPjwWO07y44slZKVRLPelybRlSZxw1BH0DyjvEjnDoDIyw3D
+ 5/KsdJ5fXQPPek/P/ei2hVWkzwbKa7mlIP7Ra1Dw3chNgkV29b5NkcXiDstJthIiTGiJ
+ 5OP0/DLbHHn9yjpIbbM25WrjrIm5l4jA47CcaWIAV+5u0CI4Uj/5MiRQmkrMdraNpCGJ
+ 17s1co9uTGc6BrOBK5oMomWp4zHijoHEx33rINBzQBCfG8TJfnbD6Zxc8eGJrn0p/f1L
+ Qssw==
+X-Gm-Message-State: AOJu0YyNd9yFYp9lAiygw8kkvRAdMh5Hy4j2I0r/u9KNy8lr14bP30zP
+ +HWNLAx4RosSKSeVzL2yPBYc6NNr7evQNfOTNHs=
+X-Google-Smtp-Source: AGHT+IEEqV7gamDFfZe2LGfyKxaHz8IqFyI3yvQUdU0z00ESUKoosoy+Ed8f/GdRB0dcG+qDUOcMtg==
+X-Received: by 2002:a6b:ea15:0:b0:79e:4abd:7be3 with SMTP id
+ m21-20020a6bea15000000b0079e4abd7be3mr10960839ioc.15.1696209305345; 
+ Sun, 01 Oct 2023 18:15:05 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- s23-20020a02c517000000b0042b2e309f97sm6522951jam.177.2023.10.01.18.15.05
+ s23-20020a02c517000000b0042b2e309f97sm6522951jam.177.2023.10.01.18.15.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:15:05 -0700 (PDT)
+ Sun, 01 Oct 2023 18:15:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
 	Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH v3 12/12] x86: qemu: Enable truetype fonts
-Date: Sun,  1 Oct 2023 19:14:47 -0600
-Message-ID: <20231002011450.462468-8-sjg@chromium.org>
+Subject: [PATCH v3 11/12] x86: qemu: Expand ROM size
+Date: Sun,  1 Oct 2023 19:14:46 -0600
+Message-ID: <20231002011450.462468-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011450.462468-1-sjg@chromium.org>
 References: <20231002011450.462468-1-sjg@chromium.org>
@@ -88,43 +88,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable this feature to provide a larger font choice and more attractive
-menus. Expand the ROM for x86_64 to 2MB to make space for the font.
+Expand the ROM for x86_64 to 2MB to make space for the font, as it is
+already on the edge.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Add new patch to enable truetype fonts in qemu-x86 and qemu-x86_64
+(no changes since v1)
 
- configs/qemu-x86_64_defconfig | 1 +
- configs/qemu-x86_defconfig    | 1 +
- 2 files changed, 2 insertions(+)
+ board/emulation/qemu-x86/Kconfig | 3 ++-
+ configs/qemu-x86_64_defconfig    | 6 +++---
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
+diff --git a/board/emulation/qemu-x86/Kconfig b/board/emulation/qemu-x86/Kconfig
+index 787751abba4f..04b7a8aff89e 100644
+--- a/board/emulation/qemu-x86/Kconfig
++++ b/board/emulation/qemu-x86/Kconfig
+@@ -21,7 +21,8 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	select X86_RESET_VECTOR
+ 	select QEMU
+ 	select QFW_PIO
+-	select BOARD_ROMSIZE_KB_1024
++	select BOARD_ROMSIZE_KB_1024 if TARGET_QEMU_X86
++	select BOARD_ROMSIZE_KB_2048 if TARGET_QEMU_X86_64
+ 	imply VIRTIO_PCI
+ 	imply VIRTIO_NET
+ 	imply VIRTIO_BLK
 diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-index 6de3da2d8269..c73d3f96e53d 100644
+index 165f0b512c8b..6de3da2d8269 100644
 --- a/configs/qemu-x86_64_defconfig
 +++ b/configs/qemu-x86_64_defconfig
-@@ -83,6 +83,7 @@ CONFIG_SPL_DM_RTC=y
- CONFIG_SYS_NS16550_PORT_MAPPED=y
- CONFIG_SPI=y
- CONFIG_USB_KEYBOARD=y
-+CONFIG_CONSOLE_TRUETYPE=y
- CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
- CONFIG_FRAMEBUFFER_VESA_MODE_USER=y
- CONFIG_FRAMEBUFFER_VESA_MODE=0x144
-diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
-index 4b2787d4aaef..123d5ad63e53 100644
---- a/configs/qemu-x86_defconfig
-+++ b/configs/qemu-x86_defconfig
-@@ -60,6 +60,7 @@ CONFIG_NVME_PCI=y
- CONFIG_SYS_NS16550_PORT_MAPPED=y
- CONFIG_SPI=y
- CONFIG_USB_KEYBOARD=y
-+CONFIG_CONSOLE_TRUETYPE=y
- CONFIG_FRAMEBUFFER_SET_VESA_MODE=y
- CONFIG_FRAMEBUFFER_VESA_MODE_USER=y
- CONFIG_FRAMEBUFFER_VESA_MODE=0x144
+@@ -6,7 +6,7 @@ CONFIG_ENV_SIZE=0x40000
+ CONFIG_MAX_CPUS=2
+ CONFIG_SPL_DM_SPI=y
+ CONFIG_DEFAULT_DEVICE_TREE="qemu-x86_i440fx"
+-CONFIG_SPL_TEXT_BASE=0xfffd8000
++CONFIG_SPL_TEXT_BASE=0xfffd4000
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_DEBUG_UART_BASE=0x3f8
+ CONFIG_DEBUG_UART_CLOCK=1843200
+@@ -17,12 +17,12 @@ CONFIG_DEBUG_UART=y
+ CONFIG_SMP=y
+ CONFIG_GENERATE_PIRQ_TABLE=y
+ CONFIG_GENERATE_MP_TABLE=y
+-CONFIG_X86_OFFSET_U_BOOT=0xfff00000
++CONFIG_X86_OFFSET_U_BOOT=0xffe00000
++CONFIG_SYS_MONITOR_BASE=0x01110000
+ CONFIG_FIT=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_BOOTSTD_FULL=y
+ CONFIG_BOOTSTD_DEFAULTS=y
+-CONFIG_SYS_MONITOR_BASE=0x01110000
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_SHOW_BOOT_PROGRESS=y
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
