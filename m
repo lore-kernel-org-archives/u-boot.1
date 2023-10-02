@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8302DE7849A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 10:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE89E784AF
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 10:04:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F08F87112;
-	Mon,  2 Oct 2023 12:03:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A34E58715B;
+	Mon,  2 Oct 2023 12:04:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="1CF2RrOi";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tuFFZ3Ih";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED82187130; Mon,  2 Oct 2023 12:03:36 +0200 (CEST)
+ id 3D5358715E; Mon,  2 Oct 2023 12:04:16 +0200 (CEST)
 Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20622.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5b::622])
+ (mail-bn8nam12on20614.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5b::614])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4F0F87146
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 12:03:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ECB9387156
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 12:04:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cMJrB5nO8lFqqyGFiz/cnQ8I2fQyaofIjodA9P/BrETzR3+MUa4zkIcTvd3eRJoWjUK6hUcN81SaDCyJCTi7zz5vnwUj3oOLwUrauI+ATV0BTf9uTi5oKdJbi8m/c2sG2pPnhFEYXGs5NcvGIxr9ag+hktySI03ukYa80H8+dROsmjHRrehoj4WjBq8Xj3HoVTSoKCuZljhITW+cr82ln8AmM7mC7ESJvIwmi3cBkqglO4mYTo4/fqa7VFyjzewfWp/roJoq/nVVo4gx9npi9uWiENVQLnB9rnm3U6SxLXkAsPUjQSX28LZjiKCG8Y/WjrY5HWxfoSKSKl4m6PQLiA==
+ b=GzXp/y3I+OepcyzK6M0+vLg80aVt1H/Dvy0foVRKLG/ajbV/xOcP81TYHAA3D0OZCnF6hSKW+/WyEZm4AIMxAV8gFGPX5FEKG6PqAfQ4X3cz3HCipSfHHJ2EMhCgVRkjTQ2miead9Z+joOgyEeKtP/hbSMRygap+RLOz6aBL+Drnl5grZfYRv74yPuE0L4Qvwq61S1BwN1zA6ZlamvaPWQQs7gyR+hRJe2bwDaAAgqlY62pE9DZ+XQuFlhPRh5G5f2JJ1puW0zLPS/vYo3V/MS7rk6jHRK9gaKC88grgKz4GwHMUoxKs6KqojKFnIui+XXCljYDB25hbQo6t+fvt4w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bUXe/tU8Vpt61L+/PFURILMJmadBU1nHftKWDTVReZ4=;
- b=M9da8nfhEohtqEYBSJcSVut6e9kOaLQgzAwA5ctqvipoaxpGQaNnwz2RDeAMl9r/FqnESnva1Ah45Ctv+42JDE1K9RW3ysty7k68YC5x3vv6WLhTwCI8il+OgJgONb6gGMjgktLCvW2ag0A9ntr9lXebtQ6kx8yhM0IrNsL0CvXkvviOYuYvBZIFAm+SI8mouRJCs+jAhHb4IflsCHF9JrrZqVtYsvZqoEXEltY2jXW+ouXEl3VmxXeqY/uAy9tXOZ50AJfL7hCoEBZRUTImPAfxiYu9MR7Mf89h6XOFmUvj+KfkP/w8Gw5egcw9wvQm9pg44rTl7A5NvKveNr6vLA==
+ bh=BqcvTE9UfFXiJQfjwugp+Zp7TxZJBqPG3Dp0fZRKI2E=;
+ b=BSlOSOKRWlUfTagH/5rae4ro8NRO1hGI9yhu/EQ0UEHoG9PkfEPWxuTFH1o/z5Nm3L7mQmfpCCHvPQV8hI5QaELKEzccHtOaigK0JiKA2tpG2KxfKAwxvV/U8CEz5mLMv8i8SSaWYtwdJXYEdAieS3AcLi+1bSG/lnYTJOcErSB0f3bWCScyY6mLQDQRMZSeCs8OnaRWHz9QXjtznf2SMrY/MHi8NvCmj+qY7MhC08m1r7aQrvqRQFINflPuyk5TqEMVXoveoz4xHnBLiGU/0cBEOQiSwaVXR9bBbxAoQ67dWEgGxaUwUo2ovrShWzhWvA8dTzJ4P+wRv0Rbzecqkg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bUXe/tU8Vpt61L+/PFURILMJmadBU1nHftKWDTVReZ4=;
- b=1CF2RrOi/SFEdNQ6s9bgRd+ls3TEc0eCpbNt0bWQX/BmDDAekoQf18nKutxvKvO005kp2GSt7H6szQBd1+/x3P1S1917zHIfFL5bwu/rMy6cpmWEKWKVRzekK+YCw3niker5+hPSk2i8MfTTgtKLtiIRsxrxUwcCwtEGj68PTkA=
-Received: from SA9P223CA0006.NAMP223.PROD.OUTLOOK.COM (2603:10b6:806:26::11)
- by DS7PR12MB6008.namprd12.prod.outlook.com (2603:10b6:8:7f::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.28; Mon, 2 Oct
- 2023 10:03:28 +0000
-Received: from SN1PEPF0002636E.namprd02.prod.outlook.com
- (2603:10b6:806:26:cafe::86) by SA9P223CA0006.outlook.office365.com
- (2603:10b6:806:26::11) with Microsoft SMTP Server (version=TLS1_2,
+ bh=BqcvTE9UfFXiJQfjwugp+Zp7TxZJBqPG3Dp0fZRKI2E=;
+ b=tuFFZ3IhCRKedSUm2OAubXGF8+xnkpgJoMbZoQwz3jwkKd1noY+oP6efWCZl9qZX5kmPFUOBq0JNkuAYLoaesTm4TNNvvwSBYnYpXgKRX03MWsBuIDzHrCj/lUsJG64a+dumAGeqdv2EMtdazMoE+CqOykADt0J9EC+J3WZxYKs=
+Received: from SN1PR12CA0091.namprd12.prod.outlook.com (2603:10b6:802:21::26)
+ by IA0PR12MB8302.namprd12.prod.outlook.com (2603:10b6:208:40f::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.25; Mon, 2 Oct
+ 2023 10:04:10 +0000
+Received: from SN1PEPF0002636A.namprd02.prod.outlook.com
+ (2603:10b6:802:21:cafe::64) by SN1PR12CA0091.outlook.office365.com
+ (2603:10b6:802:21::26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.30 via Frontend
- Transport; Mon, 2 Oct 2023 10:03:28 +0000
+ Transport; Mon, 2 Oct 2023 10:04:10 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,23 +59,24 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002636E.mail.protection.outlook.com (10.167.241.139) with Microsoft
+ SN1PEPF0002636A.mail.protection.outlook.com (10.167.241.135) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Mon, 2 Oct 2023 10:03:27 +0000
+ 15.20.6838.14 via Frontend Transport; Mon, 2 Oct 2023 10:04:09 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 2 Oct
- 2023 05:03:24 -0500
-Message-ID: <9a58264b-1d55-4ddc-b037-2d99d1564744@amd.com>
-Date: Mon, 2 Oct 2023 12:03:22 +0200
+ 2023 05:04:07 -0500
+Message-ID: <23899e2f-0dc7-4be0-b50e-4ee9322a3599@amd.com>
+Date: Mon, 2 Oct 2023 12:04:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pinctrl: Increase size of pinmux status buffer
+Subject: Re: [PATCH] pinctrl: zynqmp: Display the tristate configuration for
+ all pins
 Content-Language: en-US
 To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
  <u-boot@lists.denx.de>
-CC: <sjg@chromium.org>, <git@xilinx.com>
-References: <20230920030006.6488-1-venkatesh.abbarapu@amd.com>
+CC: <git@xilinx.com>
+References: <20230914100620.26346-1-venkatesh.abbarapu@amd.com>
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -121,7 +122,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20230920030006.6488-1-venkatesh.abbarapu@amd.com>
+In-Reply-To: <20230914100620.26346-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -129,26 +130,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002636E:EE_|DS7PR12MB6008:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6598e301-fccb-4f4f-99fe-08dbc32ed298
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002636A:EE_|IA0PR12MB8302:EE_
+X-MS-Office365-Filtering-Correlation-Id: 21ab9bfc-01b9-43a8-20a6-08dbc32eec09
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Y6Oc5WC8Yk4wB2wOhqpIAYBZCRJPfYHov4GXdbypCCMEG17jGwZl4h0YVEWHNGmOkGaaTsoygKx7HkqQfxG6dw8esk2DC/x2D0eoFqn7Trwm5AeflUH5N2UNWO+ShBmStdHDV+QCaVVh/sKPjqn0C4lTJKYM/1l+TNbxbCTGctgI9KXeZz013guM7iH3GbM+zIo0kyE9f/aD5AXPzGgmsTkdSLzQ+oLMCW8pJ6v871DoNFOki5nEGqL1W/7/ixDn8kkFpiPJ4pErLmQFitA8lOqu5428v97Ni48U4AfMG05rJyXmzZkOl36mo1RDMe6tS7qc4AI7hcYcKA86CBHwAayQ8f5zXtwHFj/fqWIqd1HoRaRjMS1aETIoaPUGgaJVaXG+Agv7oWmekJJ30N8l0mSJqE/cT8MgfActh/AhbOBaevsivXiHrln5rQgxeie4NkTr3cclUnR3y20+XxXQoEZjA03BeN0Hv78zl9/OfOXzlAXgaNT1H+teZ8GwjkDb12tTA3RLE68YWBZsIYy/EPsV6of/PI5uNqhpgLgQLthkGuMr5nH3OiUvxxGaMSUNkFKkNQvMbbT3zejRdVxg7NaSwhfpEU9V1/Zs8obeypdVMA8mGze/oFTBu78Pv7p5IvyFwZo17kK9S9Qj7JDQcWr0fL6CTcBXBZ66hkf/LtwnY7+1N5w8hGB8JGC1L3JzuLsnGdeafIH2JXI4jjYnCsHpJeCuVdEyswbhE3lBL+Qqu5D7RghjIDhmAJZ+Suf2KnrxP7cDDfOeuP6tzPv5SCaZKHl5/DnawIwuhAPWu6TkigFjziiHQ6G2K+1ip5E+0FFvfY+TSVhEnzsRtrLkwQ==
+X-Microsoft-Antispam-Message-Info: ih7HrF/WMwLa/HW2YSbUadDPyMPrx+q1wzLaHOXzvDqQescAFyVdFKTm3LxILglGlKsS5UUOEWlYXDoDtwNKrAimiGOAA81v1GOKzH8a1FXuJKLu9INll4hd2NeREf/+Y0JUcxi/TF72KjC9bhx/fRoZcMVO85a/nPHUJZpf8s+C6Xm/VNGORxO/HqJO93d0Q5qYy/Y/5tnyJgae0u/84r+Lzi5xuYHYt3ntPKDyyfhHK6vPQArKW8apxrIq9EQfzoeD8Lwg8HjGW+t09uE45wiGxmHLNgUH+pAMwEXEv/mUA3Bqby9JbDlUfZV/PA6PDL/eURlHvWsqjVaHxpOcY3QyPqxBu1TewTKfqK65mpTuDqqbjoWKcCPisEv1yWAk0A+d0ermxqubO3eobSJNhRtNsK56H3FXR9Pp26G23Kj0Stxw898N6LdaksrhZwL+IsR6usZEZKhaj3FMLFjmi3TyBtkCSc9LKSy6vPiPYLR1awokYhC5S1AavSQcgwGrRs0IDvDSh/74tTV30niwNQKyTNml3Jcchf95U0zBLkfK/hcmSlDeeAVeOkNtLy10NtJhHOkF3sjG5eV0p6GQ1wOj9Kx3CYTTqGWSBZLTuVGtxtESR0yVc4Jfm4bVpkgSDsuW86ysptsVAJmICviWAEX8CIIpMFzTjW2aStcblTXwQilFJn3lj6Y1Q8Yb0YMXI82be0xr9WhjGQ105UAU3j2VF/yTBQc7p9ikAj8Rh3ei4HwHLa9Jh4499c5rhuFJROXUss2jjZZ8rzYbKzYUtLu/krtPCXeXhQqAIWig+Eg=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(396003)(376002)(39860400002)(346002)(230922051799003)(64100799003)(82310400011)(1800799009)(451199024)(186009)(40470700004)(46966006)(36840700001)(426003)(40460700003)(2616005)(107886003)(26005)(16526019)(36860700001)(336012)(82740400003)(81166007)(356005)(86362001)(36756003)(31696002)(40480700001)(83380400001)(47076005)(316002)(54906003)(16576012)(4326008)(8676002)(8936002)(5660300002)(41300700001)(44832011)(70586007)(4744005)(110136005)(70206006)(2906002)(31686004)(53546011)(478600001)(106533001)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(376002)(39860400002)(346002)(396003)(136003)(230922051799003)(82310400011)(451199024)(1800799009)(64100799003)(186009)(36840700001)(46966006)(40470700004)(2906002)(40460700003)(107886003)(110136005)(316002)(53546011)(16576012)(478600001)(36860700001)(47076005)(426003)(83380400001)(82740400003)(966005)(81166007)(16526019)(26005)(336012)(356005)(86362001)(31696002)(4326008)(40480700001)(5660300002)(70586007)(44832011)(70206006)(36756003)(8676002)(41300700001)(8936002)(2616005)(31686004)(43740500002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2023 10:03:27.1560 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6598e301-fccb-4f4f-99fe-08dbc32ed298
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Oct 2023 10:04:09.8365 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 21ab9bfc-01b9-43a8-20a6-08dbc32eec09
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636E.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002636A.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6008
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PR12MB8302
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -167,31 +168,53 @@ X-Virus-Status: Clean
 
 
 
-On 9/20/23 05:00, Venkatesh Yadav Abbarapu wrote:
-> For Xilinx ZynqMP SOC new parameter was added and now it can
-> set 7 parameters for its pins. Pinmux status command will
-> print the status of these parameters for each pin. But
-> current print buffer length is only 80 characters long, increase it
-> to 90 to print all the parameters without truncation.
+On 9/14/23 12:06, Venkatesh Yadav Abbarapu wrote:
+> Read the tristate config for all the pins and display it.
+> 
+> ZynqMP> pinmux status MIO1
+> MIO1: slew:fast	bias:enabled pull:up input:cmos	drive:12mA
+>        volt:1.8	tri_state:enabled
 > 
 > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
->   include/dm/pinctrl.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/pinctrl/pinctrl-zynqmp.c | 8 ++++++--
+>   1 file changed, 6 insertions(+), 2 deletions(-)
 > 
-> diff --git a/include/dm/pinctrl.h b/include/dm/pinctrl.h
-> index e3e50afeaf..70d8cc5eca 100644
-> --- a/include/dm/pinctrl.h
-> +++ b/include/dm/pinctrl.h
-> @@ -7,7 +7,7 @@
->   #define __PINCTRL_H
+> diff --git a/drivers/pinctrl/pinctrl-zynqmp.c b/drivers/pinctrl/pinctrl-zynqmp.c
+> index 02626a7561..d98834b1aa 100644
+> --- a/drivers/pinctrl/pinctrl-zynqmp.c
+> +++ b/drivers/pinctrl/pinctrl-zynqmp.c
+> @@ -533,6 +533,8 @@ static int zynqmp_pinctrl_get_pin_muxing(struct udevice *dev,
+>   				     &pinmux.drive_strength);
+>   	zynqmp_pm_pinctrl_get_config(selector, PM_PINCTRL_CONFIG_VOLTAGE_STATUS,
+>   				     &pinmux.volt_sts);
+> +	zynqmp_pm_pinctrl_get_config(selector, PM_PINCTRL_CONFIG_TRI_STATE,
+> +				     &pinmux.tri_state);
 >   
->   #define PINNAME_SIZE	10
-> -#define PINMUX_SIZE	80
-> +#define PINMUX_SIZE	90
+>   	switch (pinmux.drive_strength) {
+>   	case PM_PINCTRL_DRIVE_STRENGTH_2MA:
+> @@ -553,13 +555,15 @@ static int zynqmp_pinctrl_get_pin_muxing(struct udevice *dev,
+>   		return -EINVAL;
+>   	}
 >   
->   /**
->    * struct pinconf_param - pin config parameters
+> -	snprintf(buf, size, "slew:%s\tbias:%s\tpull:%s\tinput:%s\tdrive:%dmA\tvolt:%s",
+> +	snprintf(buf, size,
+> +		 "slew:%s\tbias:%s\tpull:%s\tinput:%s\tdrive:%dmA\tvolt:%s\ttri_state:%s",
+>   		 pinmux.slew ? "slow" : "fast",
+>   		 pinmux.bias ? "enabled" : "disabled",
+>   		 pinmux.pull_ctrl ? "up" : "down",
+>   		 pinmux.input_type ? "schmitt" : "cmos",
+>   		 pinmux.drive_strength,
+> -		 pinmux.volt_sts ? "1.8" : "3.3");
+> +		 pinmux.volt_sts ? "1.8" : "3.3",
+> +		 pinmux.tri_state ? "enabled" : "disabled");
+>   
+>   	return 0;
+>   }
 
-Applied.
-M
+The patch fixes reported issue
+https://lore.kernel.org/all/20230920030006.6488-1-venkatesh.abbarapu@amd.com/
+that's why I applied also this patch.
+
+Thanks,
+Michal
