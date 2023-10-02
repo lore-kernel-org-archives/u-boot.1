@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D9AE784A6
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:46:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62D4AE7849A
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 06:35:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8504871C5;
-	Mon,  2 Oct 2023 03:46:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E312F870BE;
+	Mon,  2 Oct 2023 08:35:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vvv4XkYU";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wE4jebvB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 764C6871CC; Mon,  2 Oct 2023 03:46:24 +0200 (CEST)
-Received: from mail-qv1-xf2d.google.com (mail-qv1-xf2d.google.com
- [IPv6:2607:f8b0:4864:20::f2d])
+ id E224487103; Mon,  2 Oct 2023 08:34:59 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11448871AB
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:46:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 982BF870B7
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 08:34:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2d.google.com with SMTP id
- 6a1803df08f44-65afd746330so72265876d6.3
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:46:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-9b64b98656bso48278666b.0
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 23:34:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696211181; x=1696815981; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=xM3VcpedO4NB0RFuIXpKbUhtHwPg+MMVZYy4CoL7lGw=;
- b=Vvv4XkYU70GyNl+a/M9Laxz+iw+JeOFd9qh4bUZlRm+HIRw2nrCr8qq0zkjRuKMlHc
- 5j+sR59oWn0YpEVigv72LOV+5AcI6CVJ8qlgW6OBKfaTApJbdiLcn8CuJ3Ie/shZUwdh
- szkuMDIBbdCvhok+GEkuiPSiP4/tvTx1V4uWjVZ8JHNXocjOtvZfbpC1W/07taOzjovj
- eNHgQ140BAgswJDGit+oBW1LRda3qh98gTO+WXChzN/e0BGnTOuIFBLyCP6gnoZliolr
- w8Zct1obvVmilRaFUbQXa7vORMnoicP0rZF1jzN9Mj1C6mXTXl5Qg7bENHDG9ONdpMJW
- FAog==
+ d=linaro.org; s=google; t=1696228497; x=1696833297; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=j37dXmcc0W31gbPfZDITH0SOpCW3UvnclZY5twHFl58=;
+ b=wE4jebvBbCnvrEpGPfHcq1kgVYtG0ROi6CJpaWuvJ7VTuQieWFQSixNQmDPxOl9ZDk
+ F34I8LFmMTzPEdxMLJCnLK0LxyfrqLBGJ4p1iXIFihQugI+MeJ6RUnlIqk1QgdnpeOcO
+ 6huCG0jBFGziO31NsIs3JBTG51kaHwvAvvvU2VuDROkpX7YWoBX/aI55mx9xUt3hoV9t
+ xSCvMYcR6LBnO4lPkanKNNCV1Nfc2LFAP2AHY+omEgogajIY07UwYwU4v9ZNOgEkX3Q5
+ 6HN6WWWulMYTB11PzGzVE2VN3yke2H4fA+wFU4+Y37mhadv8lLXBKwAIplW5OteO85j+
+ Sd/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696211181; x=1696815981;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xM3VcpedO4NB0RFuIXpKbUhtHwPg+MMVZYy4CoL7lGw=;
- b=IaVICs1VJ8ziOGJawavoyPKs0eM1+auIqZ72w+brJqck2fH4IaFLhLzobq/YYiW0rr
- H0cYMn6vW56y5tj79R4PFmed0wlZhh5xVlOm+L/iu+QsFyNSLVwFxxz5bY8/ZRyI5XPB
- hIa9rjd2b+KzeIOdKqyjooqWeLefJa/8gBl/4K3FbnifORuoxZ5EGtAy9b0XhoOTUfNO
- oqXJAQV+Ey8mE1VrO9X3YvSTpq37L9YuCwIiqa3v4kLAOWZK/YzqSxcHgyExpXZ0960y
- Rbr1f9hO8jgu5MkKNQIeLhv9MLQ5nmxOXD49OGG1DOFuhKfzDXodNwmKRrhzovuqwcan
- wk+w==
-X-Gm-Message-State: AOJu0Yw2Zyu0kGPUzcaHITw33VitA2h0IZSbvz6x8MMV1K7iahVMz8Io
- 1YiMEdlDdsxjBpucdqwpboY=
-X-Google-Smtp-Source: AGHT+IGwme0JJkP5b5LjSVXC4KCnAwJKz7iDyeTMagBwFnzZJI2I4/ZAjrET3AJvoFu2QpwfMY9EPw==
-X-Received: by 2002:a05:6214:16c2:b0:658:2857:ed6a with SMTP id
- d2-20020a05621416c200b006582857ed6amr10723530qvz.43.1696211180791; 
- Sun, 01 Oct 2023 18:46:20 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- fc17-20020ad44f31000000b00668bb8be252sm668312qvb.60.2023.10.01.18.46.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 01 Oct 2023 18:46:20 -0700 (PDT)
-Message-ID: <be166e65-9892-11ac-3727-3779c453014a@gmail.com>
-Date: Sun, 1 Oct 2023 21:46:19 -0400
+ d=1e100.net; s=20230601; t=1696228497; x=1696833297;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=j37dXmcc0W31gbPfZDITH0SOpCW3UvnclZY5twHFl58=;
+ b=Yp7ybT48Ypv58djoe5IxkyzVsv83QTRqCW2GUDIoDiuNj2jmnq91DKxrLTzXW1xC9a
+ FC3igr7wNnglfmBGO0u9ONfxfHFbIA33qSO4a8rg6SuLpH2Xa9ONzhs1c2H7NeAKHsz/
+ p2eiZfA/gOcyiS9fusjIbiJicpM6P4HDTmvLojPc4af236i1tlvS7lSp8QQXwCyOqEwl
+ jOMQi2saOpiJ1yYjzGBL1fPjYlKslCJCqw5m8YBNsOMZIrUrawDCjJsqzSLJ0Iioccd9
+ PYhmc5JAzrCGoojtMxCApKsqsIWX4HmLuCWKXB5/okGWxih9F9q3/DO5bOXTSwrAndqQ
+ oT2g==
+X-Gm-Message-State: AOJu0YwM/t1GvPcBZmlWbPsc9YDnxY1qe/+jRTmdb/tC86QlWLmUJXyg
+ 06fW3YBRU65xxBtur6TqIFWbzYooxdLDe1JjajU8jQ==
+X-Google-Smtp-Source: AGHT+IGL0psVXciUsJ08sFbkyjtPEahgFh6lL5cqpmAoAnzqCBlhBiX/ryk6b+b/k90eflSwXFF6RchbSPE34pmxFH0=
+X-Received: by 2002:a17:906:24e:b0:9ad:e298:a5d with SMTP id
+ 14-20020a170906024e00b009ade2980a5dmr10295283ejl.19.1696228496837; Sun, 01
+ Oct 2023 23:34:56 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v3 0/4] malloc: Reduce size by initializing data at runtime
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, Sean Anderson <sean.anderson@seco.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20230928144458.2511087-1-sean.anderson@seco.com>
- <CAPnjgZ1Y=+2GoHzj=6mJySyYrn9CoHBZzSDjFreWNEWJyi+jMQ@mail.gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAPnjgZ1Y=+2GoHzj=6mJySyYrn9CoHBZzSDjFreWNEWJyi+jMQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
+ <20230926094124.7024-2-maxim.uvarov@linaro.org>
+ <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
+ <20230926134149.GS305624@bill-the-cat>
+ <CAPnjgZ1iAG8Rw3jVZvFs16AvnGkO=gCsCM3dF1c30biFk4t2xw@mail.gmail.com>
+ <20230926141936.GW305624@bill-the-cat>
+In-Reply-To: <20230926141936.GW305624@bill-the-cat>
+From: Maxim Uvarov <maxim.uvarov@linaro.org>
+Date: Mon, 2 Oct 2023 12:34:44 +0600
+Message-ID: <CAD8XO3aifH+f_NZ1g_nJrxKu_tDmuW9H=Pk2o4v8yTAAn1nfdQ@mail.gmail.com>
+Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@google.com>, u-boot@lists.denx.de, pbrobinson@gmail.com, 
+ ilias.apalodimas@linaro.org, joe.hershberger@ni.com, rfried.dev@gmail.com, 
+ goldsimon@gmx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,129 +92,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/1/23 21:16, Simon Glass wrote:
-> Hi Sean,
-> 
-> On Thu, 28 Sept 2023 at 08:45, Sean Anderson <sean.anderson@seco.com> wrote:
->>
->> In my efforts to get SPL to fit into flash after some changes I made, I
->> noticed that av_ is one of the largest variables in SPL. As it turns
->> out, we can generate it at runtime, and the code is already there. This
->> has the potential to save 1-2k across the board, for some (very) minor
->> boot time increase.
->>
->> This series is based on [1], since this makes checking for SYS_MALLOC_F
->> easier. Passing CI at [2].
->>
->> To measure the boot time difference, I applied the following patch:
->>
->> ---
->>   common/board_r.c | 5 +++++
->>   common/spl/spl.c | 4 ++++
->>   2 files changed, 9 insertions(+)
->>
->> diff --git a/common/board_r.c b/common/board_r.c
->> index 58a5986aa54..ca624b20d46 100644
->> --- a/common/board_r.c
->> +++ b/common/board_r.c
->> @@ -194,6 +194,7 @@ static int initr_barrier(void)
->>          return 0;
->>   }
->>
->> +static ulong malloc_begin, malloc_end;
->>   static int initr_malloc(void)
->>   {
->>          ulong malloc_start;
->> @@ -208,8 +209,10 @@ static int initr_malloc(void)
->>           * reserve_noncached().
->>           */
->>          malloc_start = gd->relocaddr - TOTAL_MALLOC_LEN;
->> +       malloc_begin = timer_get_boot_us();
-> 
-> Perhaps this would be better done with bootstage, since then the
-> timing can be enabled / disabled, and reported along with other
-> timings.
+Can somebody help me to understand and reproduce CI errors?  I can run
+locally 'make check' which runs a bunch of local builds with binman and all
+of them are fine.
+It looks like some dependency is missing or addition 'git config --global
+--add safe.directory <path>/net/lwip/lwip-external'  is required for the
+submodule directory.
 
-I'll try that out next time.
+https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/17916
 
->>          mem_malloc_init((ulong)map_sysmem(malloc_start, TOTAL_MALLOC_LEN),
->>                          TOTAL_MALLOC_LEN);
->> +       malloc_end = timer_get_boot_us();
->>          gd->flags |= GD_FLG_FULL_MALLOC_INIT;
->>          return 0;
->>   }
->> @@ -570,6 +573,8 @@ static int dm_announce(void)
->>
->>   static int run_main_loop(void)
->>   {
->> +       printf("malloc_init took %luus (%lu %lu)\n", malloc_end - malloc_begin,
->> +              malloc_begin, malloc_end);
->>   #ifdef CONFIG_SANDBOX
->>          sandbox_main_loop_init();
->>   #endif
->> diff --git a/common/spl/spl.c b/common/spl/spl.c
->> index d74acec10b5..b34d1f4b4e6 100644
->> --- a/common/spl/spl.c
->> +++ b/common/spl/spl.c
->> @@ -755,7 +755,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
->>          spl_set_bd();
->>
->>   #if defined(CONFIG_SYS_SPL_MALLOC)
->> +       ulong malloc_begin = timer_get_boot_us();
->>          mem_malloc_init(SYS_SPL_MALLOC_START, CONFIG_SYS_SPL_MALLOC_SIZE);
->> +       ulong malloc_end = timer_get_boot_us();
->>          gd->flags |= GD_FLG_FULL_MALLOC_INIT;
->>   #endif
->>          if (!(gd->flags & GD_FLG_SPL_INIT)) {
->> @@ -817,6 +819,8 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
->>          spl_image.boot_device = BOOT_DEVICE_NONE;
->>          board_boot_order(spl_boot_list);
->>
->> +       printf("malloc_init took %luus (%lu %lu)\n", malloc_end - malloc_begin,
->> +              malloc_begin, malloc_end);
-> 
-> debug() ?
+Building current source for 1 boards (0 threads, 24 jobs per thread)
+   sandbox:  +   sandbox_spl
++fatal: not a git repository (or any of the parent directories): .git
++make[1]: *** [Makefile:1875: initsubmodules] Error 128
++make: *** [Makefile:177: sub-make] Error 2
+    0    0    1 /1              sandbox_spl
+Completed: 1 total built, 1 newly), duration 0:00:06, rate 0.17
+Traceback (most recent call last):
+  File "/builds/u-boot/custodians/u-boot-tpm/./tools/binman/binman", line
+45, in <module>
+    from binman import cmdline
+  File "/builds/u-boot/custodians/u-boot-tpm/tools/binman/cmdline.py", line
+11, in <module>
+    from binman import state
+  File "/builds/u-boot/custodians/u-boot-tpm/tools/binman/state.py", line
+14, in <module>
+    from dtoc import fdt
+  File "/builds/u-boot/custodians/u-boot-tpm/tools/dtoc/fdt.py", line 14,
+in <module>
+    from libfdt import QUIET_NOTFOUND
+ImportError: cannot import name 'QUIET_NOTFOUND' from 'libfdt' (unknown
+location)
 
-Well, this is not going to be applied, so I used the easiest thing :)
+On Tue, 26 Sept 2023 at 20:19, Tom Rini <trini@konsulko.com> wrote:
 
---Sean
-
->>          ret = boot_from_devices(&spl_image, spl_boot_list,
->>                                  ARRAY_SIZE(spl_boot_list));
->>          if (ret) {
->> --
->> 2.25.1
->>
->> I found that MALLOC_CLEAR_ON_INIT dominated the mem_malloc_init time
->> (taking around 150 ms in SPL on my board). After disabling it, I found
->> that MALLOC_RUNTIME_INIT took around 5 us on average.
->>
->> [1] https://lore.kernel.org/u-boot/20230926141514.2101787-1-sjg@chromium.org/
->> [2] https://source.denx.de/u-boot/custodians/u-boot-clk/-/pipelines/17900
->>
->> Changes in v3:
->> - Use CONFIG_IS_ENABLED in conditionals
->> - Don't enable SPL_SYS_MALLOC_RUNTIME_INIT if we are short on BSS
->>
->> Changes in v2:
->> - Only mark malloc initialized after mem_malloc_init
->> - Fix cALLOc condition
->>
->> Sean Anderson (4):
->>    common: Only mark malloc initialized after mem_malloc_init
->>    malloc: Don't use ifdefs for SYS_MALLOC_DEFAULT_TO_INIT
->>    malloc: Don't statically initialize av_ if using malloc_init
->>    malloc: Enable SYS_MALLOC_RUNTIME_INIT by default in SPL
->>
->>   Kconfig           | 27 +++++++++++++++++----------
->>   common/board_r.c  |  3 ++-
->>   common/dlmalloc.c | 16 ++++++++--------
->>   3 files changed, 27 insertions(+), 19 deletions(-)
->>
->> --
->> 2.35.1.1320.gc452695387.dirty
->>
-> 
-> REgards,
-> SImon
-
+> On Tue, Sep 26, 2023 at 08:16:35AM -0600, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Tue, 26 Sept 2023 at 07:41, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Sep 26, 2023 at 05:37:25AM -0600, Simon Glass wrote:
+> > > > Hi Maxim,
+> > > >
+> > > > On Tue, 26 Sept 2023 at 03:43, Maxim Uvarov <maxim.uvarov@linaro.org>
+> wrote:
+> > > > >
+> > > > > add external lwIP library as a git submodule.
+> > > > > Use STABLE-2_2_0_RELEASE tag.
+> > > > >
+> > > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
+> > > > > ---
+> > > > >  .gitmodules            | 3 +++
+> > > > >  net/lwip/lwip-external | 1 +
+> > > > >  2 files changed, 4 insertions(+)
+> > > > >  create mode 100644 .gitmodules
+> > > > >  create mode 160000 net/lwip/lwip-external
+> > >
+> > > Do you have comments on the rest of the series?
+> >
+> > Not yet, but I should be able to review the rest in a few days. My
+> > main comments before were minor - return codes, tests, error checking.
+>
+> OK, thanks.  I don't know how exactly I want to proceed with the core of
+> lwip itself, but that doesn't block reviewing and testing the rest of it
+> as we'll move forward with it one way or another.
+>
+> --
+> Tom
+>
