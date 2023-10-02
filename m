@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD96E748FE
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 17:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14F14E748FE
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 17:35:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57152871A7;
+	by phobos.denx.de (Postfix) with ESMTP id C6A02871B3;
 	Mon,  2 Oct 2023 19:34:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="bJ2Pc0hH";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="kZ2/iKjD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC74986DE7; Mon,  2 Oct 2023 18:59:15 +0200 (CEST)
+ id 2433086DFE; Mon,  2 Oct 2023 18:59:17 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EC4486DCA
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 18:59:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB64F870AD
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 18:59:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 1C3BB10000B;
- Mon,  2 Oct 2023 19:59:09 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 1C3BB10000B
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 8CB64100003;
+ Mon,  2 Oct 2023 19:59:10 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 8CB64100003
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696265949;
- bh=2nLWOwXpWdY7SqkqEcGT+2OxJFhdkE+JryPgcUKhFGc=;
+ s=mail; t=1696265950;
+ bh=A0DfJv78BZAlR6ZTJr8rUFQ8KTu5C2NvgdRnuUn79fo=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=bJ2Pc0hHVQZwZhZGeaFNZeUpBrLUx+eQa6tJ0I7hhNVGsEHqdAP6tlms/pn977gfb
- oEmRniKbh47YOAPUH8iixOQdTaVmoQmol4FuKLd8R9qaNnICwQUTx4n+wJy1qY1Gxn
- 8d+F4HZTMmiEpIH99hBgFT8mDsMZ9a0tXwc+Eir6yc2niQX3YcphHAtJA/oq+1BlJb
- naL9wCSJdeWBgR1vvwv7tULF35psbaaxaNJzUn2jBLCAcfZ7eRXwMXjUBjctCMJRhW
- 01y+yuziLIniltMukSAr8Ac0OF9BDzzlgPyCNKvlYVeh8myfU73WiCqIT5s+oztB9+
- tk+/tigeHiuXQ==
+ b=kZ2/iKjDo9bUU3o23dvAvb6Lpcv1CAw5dkihoNNBvkt+VW0pNsyurF/5GUD8ZEebK
+ 5EOys2ivnfCl15KjkIsqOPmoz+qeUYHtLsFjulAIuwrkjt85pgiwdfNWnUin2Z8p3Z
+ Os4z8r8RpO6GaCFZSpM3tZfkT+jN63NDhBUh1TgmqSnFJve6dEuEJiBNorEXXBoFpY
+ 4CQ3mmlFGBfWfrBSaOQqE9nuusC2iyoMoHTVfisc3+1egMJww0TtT7EAE6SVx2KFYf
+ F7Kz0y2v+kAQQ4AVu8JlJY8FmvPbMYaXlT/ec0IsDP4CDEX6o9v0ZaDMB+arwYKNcd
+ cTvT03oOAnlXw==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon,  2 Oct 2023 19:59:08 +0300 (MSK)
+ Mon,  2 Oct 2023 19:59:10 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Mon, 2 Oct 2023 19:59:08 +0300
+ 15.2.1118.30; Mon, 2 Oct 2023 19:59:10 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <lukma@denx.de>, <seanga2@gmail.com>, <marex@denx.de>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v1 5/8] phy: support Amlogic A1 family
-Date: Mon, 2 Oct 2023 19:58:49 +0300
-Message-ID: <20231002165857.19512-6-avromanov@salutedevices.com>
+Subject: [PATCH v1 7/8] dwc3: add support for Amlogic A1 family
+Date: Mon, 2 Oct 2023 19:58:51 +0300
+Message-ID: <20231002165857.19512-8-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231002165857.19512-1-avromanov@salutedevices.com>
 References: <20231002165857.19512-1-avromanov@salutedevices.com>
@@ -106,180 +106,185 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Setting G12A and A1 is similar, so we can use G12A phy
-driver with little changes.
+Now the driver supports also A1 phy layer.
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- drivers/phy/Kconfig           |  2 +-
- drivers/phy/meson-g12a-usb2.c | 77 ++++++++++++++++++++++++++++-------
- 2 files changed, 64 insertions(+), 15 deletions(-)
+ drivers/usb/dwc3/dwc3-meson-g12a.c | 73 ++++++++++++++++++++++++++----
+ 1 file changed, 63 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/phy/Kconfig b/drivers/phy/Kconfig
-index cf4d5908d7..60be62907d 100644
---- a/drivers/phy/Kconfig
-+++ b/drivers/phy/Kconfig
-@@ -190,7 +190,7 @@ config MESON_GXL_USB_PHY
+diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3-meson-g12a.c
+index 90418ddc1d..550e6682a2 100644
+--- a/drivers/usb/dwc3/dwc3-meson-g12a.c
++++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
+@@ -28,6 +28,7 @@
+ #include <linux/bitfield.h>
+ #include <linux/bitops.h>
+ #include <linux/compat.h>
++#include <dt-bindings/clock/amlogic,a1-peripherals-clkc.h>
  
- config MESON_G12A_USB_PHY
- 	bool "Amlogic Meson G12A USB PHYs"
--	depends on PHY && ARCH_MESON && MESON_G12A
-+	depends on PHY && ARCH_MESON && (MESON_G12A || MESON_A1)
- 	imply REGMAP
- 	help
- 	  This is the generic phy driver for the Amlogic Meson G12A
-diff --git a/drivers/phy/meson-g12a-usb2.c b/drivers/phy/meson-g12a-usb2.c
-index 7b028784a0..c1b9baa7b7 100644
---- a/drivers/phy/meson-g12a-usb2.c
-+++ b/drivers/phy/meson-g12a-usb2.c
-@@ -18,6 +18,7 @@
- #include <regmap.h>
- #include <linux/delay.h>
- #include <power/regulator.h>
-+#include <power-domain.h>
- #include <reset.h>
- #include <clk.h>
+ /* USB2 Ports Control Registers */
  
-@@ -146,18 +147,28 @@
- #define RESET_COMPLETE_TIME					1000
- #define PLL_RESET_COMPLETE_TIME					100
- 
-+enum meson_soc_id {
-+	MESON_SOC_A1,
-+	MESON_SOC_G12A,
-+};
-+
- struct phy_meson_g12a_usb2_priv {
- 	struct regmap		*regmap;
- #if CONFIG_IS_ENABLED(CLK)
- 	struct clk		clk;
- #endif
- 	struct reset_ctl	reset;
-+#if CONFIG_IS_ENABLED(POWER_DOMAIN)
-+	struct power_domain pwrdm;
-+#endif
-+	int soc_id;
+@@ -102,10 +103,22 @@ enum {
+ 	PHY_COUNT,
  };
  
- static int phy_meson_g12a_usb2_init(struct phy *phy)
+-static const char *phy_names[PHY_COUNT] = {
++static const char *const dwc3_meson_g12a_phy_names[] = {
+ 	"usb2-phy0", "usb2-phy1", "usb3-phy0",
+ };
+ 
++static const char *const dwc3_meson_a1_phy_names[] = {
++	"usb2-phy0", "usb2-phy1"
++};
++
++struct dwc3_meson_g12a;
++
++struct dwc3_meson_g12a_drvdata {
++	const char *const *phy_names;
++	unsigned int phy_cnt;
++	int (*clk_init)(struct dwc3_meson_g12a *priv);
++};
++
+ struct dwc3_meson_g12a {
+ 	struct udevice		*dev;
+ 	struct regmap           *regmap;
+@@ -119,6 +132,7 @@ struct dwc3_meson_g12a {
+ #if CONFIG_IS_ENABLED(DM_REGULATOR)
+ 	struct udevice		*vbus_supply;
+ #endif
++	struct dwc3_meson_g12a_drvdata *drvdata;
+ };
+ 
+ #define U2P_REG_SIZE						0x20
+@@ -293,10 +307,11 @@ int dwc3_meson_g12a_force_mode(struct udevice *dev, enum usb_dr_mode mode)
+ 
+ static int dwc3_meson_g12a_get_phys(struct dwc3_meson_g12a *priv)
  {
- 	struct udevice *dev = phy->dev;
- 	struct phy_meson_g12a_usb2_priv *priv = dev_get_priv(dev);
-+	u32 value;
- 	int ret;
++	struct dwc3_meson_g12a_drvdata *data = priv->drvdata;
+ 	int i, ret;
  
- #if CONFIG_IS_ENABLED(CLK)
-@@ -196,8 +207,7 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
- 		FIELD_PREP(PHY_CTRL_R17_MPLL_FILTER_PVT2, 2) |
- 		FIELD_PREP(PHY_CTRL_R17_MPLL_FILTER_PVT1, 9));
- 
--	regmap_write(priv->regmap, PHY_CTRL_R18,
--		FIELD_PREP(PHY_CTRL_R18_MPLL_LKW_SEL, 1) |
-+	value = FIELD_PREP(PHY_CTRL_R18_MPLL_LKW_SEL, 1) |
- 		FIELD_PREP(PHY_CTRL_R18_MPLL_LK_W, 9) |
- 		FIELD_PREP(PHY_CTRL_R18_MPLL_LK_S, 0x27) |
- 		FIELD_PREP(PHY_CTRL_R18_MPLL_PFD_GAIN, 1) |
-@@ -209,6 +219,11 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
- 		FIELD_PREP(PHY_CTRL_R18_MPLL_ADJ_LDO, 1) |
- 		PHY_CTRL_R18_MPLL_ACG_RANGE;
- 
-+	if (priv->soc_id == MESON_SOC_A1)
-+		value |= PHY_CTRL_R18_MPLL_DCO_CLK_SEL;
-+
-+	regmap_write(priv->regmap, PHY_CTRL_R18, value);
-+
- 	udelay(PLL_RESET_COMPLETE_TIME);
- 
- 	/* UnReset PLL */
-@@ -231,13 +246,19 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
- 		FIELD_PREP(PHY_CTRL_R20_USB2_BGR_VREF_4_0, 0) |
- 		FIELD_PREP(PHY_CTRL_R20_USB2_BGR_DBG_1_0, 0));
- 
--	regmap_write(priv->regmap, PHY_CTRL_R4,
--		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_7_0, 0xf) |
--		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_15_8, 0xf) |
--		FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_23_16, 0xf) |
--		PHY_CTRL_R4_TEST_BYPASS_MODE_EN |
--		FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_1_0, 0) |
--		FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_3_2, 0));
-+	if (priv->soc_id == MESON_SOC_G12A)
-+		regmap_write(priv->regmap, PHY_CTRL_R4,
-+			FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_7_0, 0xf) |
-+			FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_15_8, 0xf) |
-+			FIELD_PREP(PHY_CTRL_R4_CALIB_CODE_23_16, 0xf) |
-+			PHY_CTRL_R4_TEST_BYPASS_MODE_EN |
-+			FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_1_0, 0) |
-+			FIELD_PREP(PHY_CTRL_R4_I_C2L_BIAS_TRIM_3_2, 0));
-+	else if (priv->soc_id == MESON_SOC_A1)
-+		regmap_write(priv->regmap, PHY_CTRL_R21,
-+			PHY_CTRL_R21_USB2_CAL_ACK_EN |
-+			PHY_CTRL_R21_USB2_TX_STRG_PD |
-+			FIELD_PREP(PHY_CTRL_R21_USB2_OTG_ACA_TRIM_1_0, 2));
- 
- 	/* Tuning Disconnect Threshold */
- 	regmap_write(priv->regmap, PHY_CTRL_R3,
-@@ -246,10 +267,15 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
- 		FIELD_PREP(PHY_CTRL_R3_DISC_THRESH, 3));
- 
- 	/* Analog Settings */
--	regmap_write(priv->regmap, PHY_CTRL_R14, 0);
--	regmap_write(priv->regmap, PHY_CTRL_R13,
--		PHY_CTRL_R13_UPDATE_PMA_SIGNALS |
--		FIELD_PREP(PHY_CTRL_R13_MIN_COUNT_FOR_SYNC_DET, 7));
-+	if (priv->soc_id == MESON_SOC_G12A) {
-+		regmap_write(priv->regmap, PHY_CTRL_R14, 0);
-+		regmap_write(priv->regmap, PHY_CTRL_R13,
-+			PHY_CTRL_R13_UPDATE_PMA_SIGNALS |
-+			FIELD_PREP(PHY_CTRL_R13_MIN_COUNT_FOR_SYNC_DET, 7));
-+	} else if (priv->soc_id == MESON_SOC_A1) {
-+		regmap_write(priv->regmap, PHY_CTRL_R13,
-+			FIELD_PREP(PHY_CTRL_R13_MIN_COUNT_FOR_SYNC_DET, 7));
-+	}
- 
+-	for (i = 0 ; i < PHY_COUNT ; ++i) {
+-		ret = generic_phy_get_by_name(priv->dev, phy_names[i],
++	for (i = 0 ; i < data->phy_cnt; ++i) {
++		ret = generic_phy_get_by_name(priv->dev, data->phy_names[i],
+ 					      &priv->phys[i]);
+ 		if (ret == -ENOENT || ret == -ENODATA)
+ 			continue;
+@@ -354,18 +369,36 @@ static int dwc3_meson_g12a_clk_init(struct dwc3_meson_g12a *priv)
  	return 0;
  }
-@@ -281,6 +307,8 @@ int meson_g12a_usb2_phy_probe(struct udevice *dev)
- 	struct phy_meson_g12a_usb2_priv *priv = dev_get_priv(dev);
- 	int ret;
  
-+	priv->soc_id = (enum meson_soc_id)dev_get_driver_data(dev);
++static int dwc3_meson_a1_clk_init(struct dwc3_meson_g12a *priv)
++{
++	int ret;
 +
++	ret = clk_get_by_name(priv->dev, "usb_bus", &priv->clk);
++	if (ret)
++		return ret;
++
++	ret = clk_enable(&priv->clk);
++	if (ret)
++		return ret;
++
++	return 0;
++}
++
+ static int dwc3_meson_g12a_probe(struct udevice *dev)
+ {
+ 	struct dwc3_meson_g12a *priv = dev_get_plat(dev);
++	struct dwc3_meson_g12a_drvdata *data =
++		(struct dwc3_meson_g12a_drvdata *)dev_get_driver_data(dev);
+ 	int ret, i;
+ 
++	priv->drvdata = data;
+ 	priv->dev = dev;
+ 
  	ret = regmap_init_mem(dev_ofnode(dev), &priv->regmap);
  	if (ret)
  		return ret;
-@@ -297,6 +325,20 @@ int meson_g12a_usb2_phy_probe(struct udevice *dev)
+ 
+-	ret = dwc3_meson_g12a_clk_init(priv);
++	ret = data->clk_init(priv);
+ 	if (ret)
  		return ret;
+ 
+@@ -398,7 +431,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	for (i = 0 ; i < PHY_COUNT ; ++i) {
++	for (i = 0 ; i < data->phy_cnt; ++i) {
+ 		if (!priv->phys[i].dev)
+ 			continue;
+ 
+@@ -407,7 +440,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
+ 			goto err_phy_init;
  	}
  
-+#if CONFIG_IS_ENABLED(POWER_DOMAIN)
-+	ret = power_domain_get(dev, &priv->pwrdm);
-+	if (ret < 0) {
-+		pr_err("failed to get power domain\n");
-+		return ret;
-+	}
-+
-+	ret = power_domain_on(&priv->pwrdm);
-+	if (ret < 0) {
-+		pr_err("failed to enable power domain\n");
-+		return ret;
-+	}
-+#endif
-+
- #if CONFIG_IS_ENABLED(CLK)
- 	ret = clk_get_by_index(dev, 0, &priv->clk);
- 	if (ret < 0)
-@@ -307,7 +349,14 @@ int meson_g12a_usb2_phy_probe(struct udevice *dev)
+-	for (i = 0; i < PHY_COUNT; ++i) {
++	for (i = 0; i < data->phy_cnt; ++i) {
+ 		if (!priv->phys[i].dev)
+ 			continue;
+ 
+@@ -419,7 +452,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
+ 	return 0;
+ 
+ err_phy_init:
+-	for (i = 0 ; i < PHY_COUNT ; ++i) {
++	for (i = 0 ; i < data->phy_cnt ; ++i) {
+ 		if (!priv->phys[i].dev)
+ 			continue;
+ 
+@@ -432,20 +465,21 @@ err_phy_init:
+ static int dwc3_meson_g12a_remove(struct udevice *dev)
+ {
+ 	struct dwc3_meson_g12a *priv = dev_get_plat(dev);
++	struct dwc3_meson_g12a_drvdata *data = priv->drvdata;
+ 	int i;
+ 
+ 	reset_release_all(&priv->reset, 1);
+ 
+ 	clk_release_all(&priv->clk, 1);
+ 
+-	for (i = 0; i < PHY_COUNT; ++i) {
++	for (i = 0; i < data->phy_cnt; ++i) {
+ 		if (!priv->phys[i].dev)
+ 			continue;
+ 
+ 		 generic_phy_power_off(&priv->phys[i]);
+ 	}
+ 
+-	for (i = 0 ; i < PHY_COUNT ; ++i) {
++	for (i = 0 ; i < data->phy_cnt; ++i) {
+ 		if (!priv->phys[i].dev)
+ 			continue;
+ 
+@@ -455,8 +489,27 @@ static int dwc3_meson_g12a_remove(struct udevice *dev)
+ 	return dm_scan_fdt_dev(dev);
  }
  
- static const struct udevice_id meson_g12a_usb2_phy_ids[] = {
--	{ .compatible = "amlogic,g12a-usb2-phy" },
++static const struct dwc3_meson_g12a_drvdata meson_g12a_drvdata = {
++	.phy_names = dwc3_meson_g12a_phy_names,
++	.phy_cnt = ARRAY_SIZE(dwc3_meson_g12a_phy_names),
++	.clk_init = dwc3_meson_g12a_clk_init,
++};
++
++static const struct dwc3_meson_g12a_drvdata meson_a1_drvdata = {
++	.phy_names = dwc3_meson_a1_phy_names,
++	.phy_cnt = ARRAY_SIZE(dwc3_meson_a1_phy_names),
++	.clk_init = dwc3_meson_a1_clk_init,
++};
++
+ static const struct udevice_id dwc3_meson_g12a_ids[] = {
+-	{ .compatible = "amlogic,meson-g12a-usb-ctrl" },
 +	{
-+		.compatible = "amlogic,g12a-usb2-phy",
-+		.data = (ulong)MESON_SOC_G12A,
++		.compatible = "amlogic,meson-g12a-usb-ctrl",
++		.data = (ulong)&meson_g12a_drvdata,
 +	},
 +	{
-+		.compatible = "amlogic,a1-usb2-phy",
-+		.data = (ulong)MESON_SOC_A1,
++		.compatible = "amlogic,meson-a1-usb-ctrl",
++		.data = (ulong)&meson_a1_drvdata,
 +	},
  	{ }
  };
