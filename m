@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D0AE784AC
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 14:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E7C1E784B8
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 14:37:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C363870AD;
-	Mon,  2 Oct 2023 16:15:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5819986DCC;
+	Mon,  2 Oct 2023 16:37:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZSU2jweV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AaiziH2T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6081E86E14; Mon,  2 Oct 2023 16:15:14 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 0C38886DC3; Mon,  2 Oct 2023 16:37:25 +0200 (CEST)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7122086DF5
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 16:15:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AC4C86DCC
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 16:37:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-59f4db9e11eso163299177b3.0
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 07:15:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=massimo.pegorer@gmail.com
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-d818d65f23cso17926161276.3
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 07:37:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696256110; x=1696860910; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TIMqewLpL2QWRR9Cp0X0P7+q4OZ2SrYIj1KumP1qbO4=;
- b=ZSU2jweVbS+9VLrDNJuEzI6pnHlDM/0FxjhpoVgTwDIkG24g0LSFND+4UvbIwsvmLe
- HweG3JKH2AtZHJovTEtNe0nV1oOik+fNjakixUzw1zC2yWSoHW8dyUEkxlS0OppcA9gQ
- PwWZ8CfdMMilKD9WqQoiqS/0WsXRqAuHSEb1w=
+ d=gmail.com; s=20230601; t=1696257441; x=1696862241; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iSk68P+7MRTV4TFOLJLOK9zSRhUDiGHcyj7vBgTR1pQ=;
+ b=AaiziH2TLsZqSTb03oap05psjc+fCqXf+Qbp1IQHUJzdYT8LEFa6mW0dNvDr3v7juq
+ tQzpouskKctVaFoR0KEeleXyteFlkL1Dlg11/nfaykvrShnU0gYER9afiBmtZ3wNMT2I
+ bXgckoFYPHSP8jkTazzdgzTOPc2egabyT46nZFY+YyK+vG/DDeHyq9gsJ1eqhei9oq9F
+ eDzsgZxE6vq2hUTnqdDsTlIaMto2fODdZpLCcBLAi/YCpMCAP6aIZjXkv6TxYCeoCc53
+ KT/jU455vFAA3f4EnDcuZgLzvNVvNbyD3zgiyYjUMI9LzbEWBj5bmirSTVtCD7/dz1MV
+ HwKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696256110; x=1696860910;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TIMqewLpL2QWRR9Cp0X0P7+q4OZ2SrYIj1KumP1qbO4=;
- b=MDLNnHNxTUULbQFu7KDfY6QI87NjvSn8pyIi8o2NTub1x9QDqGZkKk0NVIatIvEMNg
- S7BXsrPlEjSoWPETvjMkeIrgXnDmX5GTyPujqVn6DvfKGCqdFPBOq6iZd80ripGFTGg7
- rk//fIVaEk1YyiD53uEZHR2QfVxYAwb4+t5I3/G6h4fO2HY6vprSYZi7QA3m99rM/2Qb
- hs6kQbIFESETmdfBJkWsmfVM1Qp/MwjYl7MoFvpLSCGQlov/6Pj+7lEFy86W4Ug4o8sT
- kNDY60XIWcEhF44k0ELX9BhpVeoXQzSTON+f3z5vHzIxfxP2P8fUKhmQsEnklKG19BSj
- d9jA==
-X-Gm-Message-State: AOJu0YxYeNfIwOJiK1w6vz8kRDfl1Q71p9t9tpov01+mEWgf3tEpD0uI
- iulrcksKRjXh4SFHOx1T+MR7DNMO7rCNdF27wWnb6w==
-X-Google-Smtp-Source: AGHT+IHz5LtJ5nupfhUONhgJvTCu7a+D85+dZq5DXu5iD4K33jnJ4f6zzMyGfReFza+X/ZEkMFj9xw==
-X-Received: by 2002:a81:5f03:0:b0:59b:f18b:efa0 with SMTP id
- t3-20020a815f03000000b0059bf18befa0mr12625818ywb.36.1696256109947; 
- Mon, 02 Oct 2023 07:15:09 -0700 (PDT)
-Received: from bill-the-cat.lan
- (2603-6081-7b00-6400-92a5-a961-a832-88f6.res6.spectrum.com.
- [2603:6081:7b00:6400:92a5:a961:a832:88f6])
- by smtp.gmail.com with ESMTPSA id
- r63-20020a81b342000000b0059f7ca6beb4sm5958292ywh.55.2023.10.02.07.15.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 07:15:09 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de,
-	Bhupesh Sharma <bhupesh.linux@gmail.com>
-Cc: sjg@chromium.org,
-	marex@denx.de,
-	n-francis@ti.com
-Subject: Re: [PATCH] MAINTAINERS: ufs: Change Bhupesh's email address
-Date: Mon,  2 Oct 2023 10:15:08 -0400
-Message-Id: <169625609072.3543335.17943862289371460560.b4-ty@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230915181442.3403172-1-bhupesh.linux@gmail.com>
-References: <20230915181442.3403172-1-bhupesh.linux@gmail.com>
+ d=1e100.net; s=20230601; t=1696257441; x=1696862241;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iSk68P+7MRTV4TFOLJLOK9zSRhUDiGHcyj7vBgTR1pQ=;
+ b=CA4zBJ/LbeETkCw7WZFn3bq/OJ/sNz3pLuUF8mWbn3hfETRHZITSHbkL74QkYPRY2N
+ +MJKSd9xNw+9814AOKvYqZ3bAVpDCbkngYBeIJ64mVdehNVlkySQpb6GKe6HbZR4jrwq
+ rWYJghWvioPOtRTryC3Ept36o2eQ2p3dCyanKKyoUkcymcPg6vlwtC46Tj7u74326ujY
+ xsI9h7oMGSc0atkNtmEzGWxJLBUT/BIObmYq3EUZP+k1CxnxXKS62lWdBaobDo4RwTTt
+ SwSshQor/VR+lo/nAmXOmrSSb3ft+4HrM6/LUDfK/wSOXBctCJ4Sa2XZjJu34rowPWxe
+ f/Pw==
+X-Gm-Message-State: AOJu0YxlCtCshqvIXLWvlU5wWSUwK4FnXZ6y2pEEhY0Fa2pmhtDmz8js
+ v2LPIZnuCELz1jphhTwqvFg31jxf1DNeYWJAx0I=
+X-Google-Smtp-Source: AGHT+IG4iaSc2Y5Y1oCkhZynkBuenakGs4AWDa3Dur7B/I/XmMB5bUyae8wmDXltx1lhZwzB9H1mgrtzuJRDlWAl4Tg=
+X-Received: by 2002:a25:dd1:0:b0:d62:6514:45b7 with SMTP id
+ 200-20020a250dd1000000b00d62651445b7mr10952190ybn.37.1696257441641; Mon, 02
+ Oct 2023 07:37:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+References: <20231002134621.94786-1-miquel.raynal@bootlin.com>
+ <20231002134621.94786-2-miquel.raynal@bootlin.com>
+In-Reply-To: <20231002134621.94786-2-miquel.raynal@bootlin.com>
+From: Massimo Pegorer <massimo.pegorer+oss@gmail.com>
+Date: Mon, 2 Oct 2023 16:37:10 +0200
+Message-ID: <CAC928Ha_dkjjjfdQdFMiU34UQgfoNbP9zavPDtboADWZrBYD8w@mail.gmail.com>
+Subject: Re: [PATCH RESEND v2 2/2] usb: udc: Try to clarify an error message
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,14 +86,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 15 Sep 2023 23:44:41 +0530, Bhupesh Sharma wrote:
+Hi Miquel,
 
-> Set my current personal email in the MAINTAINERS file.
-> 
-> 
+Il giorno lun 2 ott 2023 alle ore 15:46 Miquel Raynal
+<miquel.raynal@bootlin.com> ha scritto:
+>
+> At some point when trying to use USB gadgets, two situations may arise
 
-Applied to u-boot/master, thanks!
+[...cut...]
 
--- 
-Tom
+> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> ---
+> While doing this I really wanted to add "much more" error comments but I
+> faced another reality: often the messages are there but use
+> pr_err/log_err which is actually silenced by default with LOGLEVEL=3, so
+> I consider this unnecessary, as decreasing the loglevel will make these
+> messages appear. I would have expected errors to be displayed, but I
+> understand it makes the binaries even bigger.
 
+This is how it works for pr_err but not for log_err: if you are not
+using CONFIG_LOG, all log_xxx with level less than or equal to INFO
+are in the binary. On the other hand, if you have CONFIG_LOG=y,
+log_xxx are left out based on LOG_MAX_LEVEL value, while pr_xxx are
+left out based on both LOGLEVEL and LOG_MAX_LEVEL too (due to the fact
+that pr_xxx relies on log_xxx). This is quite confusing IMO. I'm
+working on a proposal for a simpler and clearer unified way to log in
+U-Boot.
+
+Regards,
+Massimo
+
+> Resend: no change.
+>
+
+[...cut...]
