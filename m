@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1854E784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AC15E784A6
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:23:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11C558715B;
-	Mon,  2 Oct 2023 03:15:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A90EC87155;
+	Mon,  2 Oct 2023 03:15:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m3277H1W";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fUpq5rhK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB4BE8711A; Mon,  2 Oct 2023 03:14:14 +0200 (CEST)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id DBD7287116; Mon,  2 Oct 2023 03:14:16 +0200 (CEST)
+Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
+ [IPv6:2607:f8b0:4864:20::d30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6F5087104
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9747D870EB
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-35255c1a448so13499905ab.3
- for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:03 -0700 (PDT)
+Received: by mail-io1-xd30.google.com with SMTP id
+ ca18e2360f4ac-79fd60f40ebso59557339f.1
+ for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:14:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209242; x=1696814042; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209244; x=1696814044; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ms0xnjJ2izoICBk5H1WvfghFkEB+AKY8GKRuZxg4dlU=;
- b=m3277H1Wv7Y2KhJkTDqHEgBdXrqTXD+MdWBPvIpQ4PUVts922e5W9Udb1DBDzpVNyT
- Z/iwymzhorLtn1Xn5OLYdhu2gd8PDeETYfSB+3Gm2Ty8c7igqo2qv0W+3yY5fwGsmj53
- MCI6PdlkA1WA19B5ivhPCDMwaFsp3XyUzbstk=
+ bh=Bld7zdrqSwYHdTRhD0N77M9IPwAIVQ4waUtS0TKtPow=;
+ b=fUpq5rhKaO9E8pZDrdk9/QXT2pllisrfSfh4m2hpNL/LfTYBati/vR2+Exa8H+dYHB
+ W31L6Cdv7I8UR8dNdWpcIwskJoFRY5IXMXZ8Wt4zg3SdSUQW/FNODdrp4LULE0q31OW8
+ 3exyXF0PZmWjl9PKiGak6NCBCXBsg+1CB2veA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209242; x=1696814042;
+ d=1e100.net; s=20230601; t=1696209244; x=1696814044;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ms0xnjJ2izoICBk5H1WvfghFkEB+AKY8GKRuZxg4dlU=;
- b=Clp1oGjLd8OpjR5syX/dFlEbBY4eRubdX9pjVgM4jxEhdSRgsTIzTvxebBkFJG7HSv
- Fhqzq16/IKaJfXfZ5Bh0l8WhkvBNDRssiEuHxRMYgbc+ofRuawizGRc+bDfVoYEsnbwr
- NYMjbRS+yO/tJ5kkmY7QfpXyvgxVv9uyWVKk6Zk6eQvO0pCDd4TzNftzxnilgojrZDwO
- 2NZqTbNfecAn9/DJyibO7t0V+SCyjGLSCLxZ2pU4JbO9ahE8/JnkRHoEHFfLVypngvmM
- scw2tfw0EHw86N83nPHCOs9Ln33B4UrhArhpmjSlsOOLM2dGBzxEFBbF/oVWZSwLKmFZ
- 6HbA==
-X-Gm-Message-State: AOJu0YzySeyyeNIXOflh/76w8HHE/pPlpJZtgrnE8JSkfm9uAVwIG/R1
- zsabR9X5CaYfELxXZIgIaigQGNACKDDuP+FNw5Q=
-X-Google-Smtp-Source: AGHT+IHpXpcYPZ4dvJZ+6lkeu7zXwicIK6Vk1tRRfGXStIaSPjouS63pHQVSjlS94Ii+8YNnBPF0Qw==
-X-Received: by 2002:a05:6e02:b26:b0:351:47fd:e9df with SMTP id
- e6-20020a056e020b2600b0035147fde9dfmr11256783ilu.32.1696209242330; 
- Sun, 01 Oct 2023 18:14:02 -0700 (PDT)
+ bh=Bld7zdrqSwYHdTRhD0N77M9IPwAIVQ4waUtS0TKtPow=;
+ b=s1GHVKwymjLeqACzt/HfVzoeNdXfXv63qaKr+zrHjP7/wGpIB4ONm/nHBbrPgR4asc
+ r/f1sr6snt17r8eBERHxLL/e6X+bP3igxZ3fQIKfdrQrU2S/ITWeycHSVAi37eUzqwzH
+ v7t6GLDv1gBgN6YjJ053jrKNoOgOmbizt3md40EziEAty3+xcsAp2JeefElC4uN3PMBF
+ SqANTfeJ3p1tnFimYOsUyDfu+Jud7EB7ldWt6UwuUvbYISNcyYT+ieaLN60UsH8m9Git
+ iiKzUGoa9260tOrjSM2sMdl1a5GWjO2dOaLI59l8vKyGwd46XHc2ygVPh6Xuvt2Ro6U1
+ FtMw==
+X-Gm-Message-State: AOJu0YxRtjAVpdX1YuNeo1eSbZ2mEA+X46l5mQ2hRaIrDii2PpZitbNr
+ JHXfpHumk8yxneX/iqpHZdWgbnHm8KuPX9Pgmhk=
+X-Google-Smtp-Source: AGHT+IHZEH6zV4Sb0/I5X0kTaGChFm1/YgilE+r7vkRK8AYCNvzwUKR11ThSWJm0IxNTQAghaizyRw==
+X-Received: by 2002:a6b:5805:0:b0:795:d33:861f with SMTP id
+ m5-20020a6b5805000000b007950d33861fmr8773611iob.6.1696209244213; 
+ Sun, 01 Oct 2023 18:14:04 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.01
+ bq6-20020a056638468600b0042aec33bc26sm3571046jab.18.2023.10.01.18.14.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 01 Oct 2023 18:14:02 -0700 (PDT)
+ Sun, 01 Oct 2023 18:14:04 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 11/36] cli: Allow history to be disabled
-Date: Sun,  1 Oct 2023 19:13:15 -0600
-Message-ID: <20231002011349.461284-12-sjg@chromium.org>
+Subject: [PATCH v2 13/36] cli: Add a function to set up a new cread
+Date: Sun,  1 Oct 2023 19:13:17 -0600
+Message-ID: <20231002011349.461284-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.582.g8ccd20d70d-goog
 In-Reply-To: <20231002011349.461284-1-sjg@chromium.org>
 References: <20231002011349.461284-1-sjg@chromium.org>
@@ -88,104 +88,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When inputting text outside the command line we don't want history to be
-accessible. Add an option to control this.
+Create a init function so that it is easy to use command-line reading.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/cli_readline.c | 42 ++++++++++++++++++++++--------------------
- include/cli.h         |  2 ++
- 2 files changed, 24 insertions(+), 20 deletions(-)
+ common/cli_readline.c | 24 +++++++++++++++---------
+ include/cli.h         | 17 ++++++++++++++++-
+ 2 files changed, 31 insertions(+), 10 deletions(-)
 
 diff --git a/common/cli_readline.c b/common/cli_readline.c
-index fdb84d9204f6..fa8f525d3a41 100644
+index 23913a857a99..06b8d4650447 100644
 --- a/common/cli_readline.c
 +++ b/common/cli_readline.c
-@@ -361,32 +361,33 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
- 		break;
- 	case CTL_CH('p'):
- 	case CTL_CH('n'):
--	{
--		char *hline;
-+		if (cls->history) {
-+			char *hline;
+@@ -424,28 +424,34 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
+ 	return -EAGAIN;
+ }
  
--		if (ichar == CTL_CH('p'))
--			hline = hist_prev();
--		else
--			hline = hist_next();
-+			if (ichar == CTL_CH('p'))
-+				hline = hist_prev();
-+			else
-+				hline = hist_next();
++void cli_cread_init(struct cli_line_state *cls, char *buf, uint buf_size)
++{
++	int init_len = strlen(buf);
++
++	memset(cls, '\0', sizeof(struct cli_line_state));
++	cls->insert = true;
++	cls->buf = buf;
++	cls->len = buf_size;
++
++	if (init_len)
++		cread_add_str(buf, init_len, 0, &cls->num, &cls->eol_num, buf,
++			      buf_size);
++}
++
+ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
+ 		      int timeout)
+ {
+ 	struct cli_ch_state s_cch, *cch = &s_cch;
+ 	struct cli_line_state s_cls, *cls = &s_cls;
+ 	char ichar;
+-	int init_len = strlen(buf);
+ 	int first = 1;
  
--		if (!hline) {
--			getcmd_cbeep();
--			break;
--		}
-+			if (!hline) {
-+				getcmd_cbeep();
-+				break;
-+			}
- 
--		/* nuke the current line */
--		/* first, go home */
--		BEGINNING_OF_LINE();
-+			/* nuke the current line */
-+			/* first, go home */
-+			BEGINNING_OF_LINE();
- 
--		/* erase to end of line */
--		ERASE_TO_EOL();
-+			/* erase to end of line */
-+			ERASE_TO_EOL();
- 
--		/* copy new line into place and display */
--		strcpy(buf, hline);
--		cls->eol_num = strlen(buf);
--		REFRESH_TO_EOL();
-+			/* copy new line into place and display */
-+			strcpy(buf, hline);
-+			cls->eol_num = strlen(buf);
-+			REFRESH_TO_EOL();
-+			break;
-+		}
- 		break;
--	}
- 	case '\t':
- 		if (IS_ENABLED(CONFIG_AUTO_COMPLETE)) {
- 			int num2, col;
-@@ -438,6 +439,7 @@ static int cread_line(const char *const prompt, char *buf, unsigned int *len,
- 	cls->len = *len;
+ 	cli_ch_init(cch);
+-	memset(cls, '\0', sizeof(struct cli_line_state));
+-	cls->insert = true;
+-	cls->len = *len;
++	cli_cread_init(cls, buf, *len);
  	cls->prompt = prompt;
- 	cls->buf = buf;
-+	cls->history = true;
+-	cls->buf = buf;
+ 	cls->history = true;
+ 	cls->cmd_complete = true;
  
- 	if (init_len)
- 		cread_add_str(buf, init_len, 1, &cls->num, &cls->eol_num, buf,
+-	if (init_len)
+-		cread_add_str(buf, init_len, 1, &cls->num, &cls->eol_num, buf,
+-			      *len);
+-
+ 	while (1) {
+ 		int ret;
+ 
 diff --git a/include/cli.h b/include/cli.h
-index bbc532764355..252bdb70ab0d 100644
+index ad3cb4499fe1..e183d5613697 100644
 --- a/include/cli.h
 +++ b/include/cli.h
-@@ -31,6 +31,7 @@ struct cli_ch_state {
-  * @num: Current cursor position, where 0 is the start
+@@ -32,7 +32,8 @@ struct cli_ch_state {
   * @eol_num: Number of characters in the buffer
   * @insert: true if in 'insert' mode
-+ * @history: true if history should be accessible
+  * @history: true if history should be accessible
+- * @cmd_complete: true if tab completion should be enabled
++ * @cmd_complete: true if tab completion should be enabled (requires @prompt to
++ *	be set)
   * @buf: Buffer containing line
   * @prompt: Prompt for the line
   */
-@@ -39,6 +40,7 @@ struct cli_line_state {
- 	uint eol_num;
- 	uint len;
- 	bool insert;
-+	bool history;
- 	char *buf;
- 	const char *prompt;
- };
+@@ -262,6 +263,20 @@ int cli_ch_process(struct cli_ch_state *cch, int ichar);
+  */
+ int cread_line_process_ch(struct cli_line_state *cls, char ichar);
+ 
++/**
++ * cli_cread_init() - Set up a new cread struct
++ *
++ * Sets up a new cread state, with history and cmd_complete set to false
++ *
++ * After calling this, you can use cread_line_process_ch() to process characters
++ * received from the user.
++ *
++ * @cls: CLI line state
++ * @buf: Text buffer containing the initial text
++ * @buf_size: Buffer size, including nul terminator
++ */
++void cli_cread_init(struct cli_line_state *cls, char *buf, uint buf_size);
++
+ /** cread_print_hist_list() - Print the command-line history list */
+ void cread_print_hist_list(void);
+ 
 -- 
 2.42.0.582.g8ccd20d70d-goog
 
