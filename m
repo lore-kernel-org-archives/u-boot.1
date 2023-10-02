@@ -4,90 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FFB0E776D1
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 23:03:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EDFFE776CB
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 23:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B79186DFD;
-	Tue,  3 Oct 2023 01:03:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 861D086D80;
+	Tue,  3 Oct 2023 01:11:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="V2NQMqlz";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="eC523/g9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2937586E0F; Tue,  3 Oct 2023 01:03:37 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EA37A8710A; Tue,  3 Oct 2023 01:11:01 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A4FB86D80
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 01:03:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8369986C59
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 01:10:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 903B23F594
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 23:03:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1696287814;
- bh=STfE6D/qic3lhwwZ4dDMgaWcNdoNgfPrt4si76O3Evg=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=V2NQMqlzaGHxLMJbUYBHqN+BCzzJWYNiNPWRdLyPaGT+IdZrE3SLZFN2xL80SW1/A
- JrPuiiNtyTc9VDyRFrPLnOAwGS4mFwPbC0TyUvjZUL7ATZtPrd06PFSj6E+7OAgpPf
- ztEZDIdNFy/3YIFQ+/chw3PdiU+4Aqan3IBGcNjrXV73lb0Il/rxCkhD01M2SbhziN
- 3csznaBy5meDTbHcqsxwCDrWFVbKnVwKYpp+2F6KqZ8BzzZ3qteq3+Lmp91TTjqhTG
- 2WJO8Bw6Yy2VmrMGo7SVRHD/JRp4T4sX2AWI4NlgtEjyQimGmLssg4fwfFESNN3BpD
- g6XM5zWhaNtIQ==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-406710d9a4aso2313195e9.2
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 16:03:34 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-99c3c8adb27so45992666b.1
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 16:10:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1696288259; x=1696893059; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=r+YINemaxbK2N3IGh727w+/MwEk7qS2elYlOKIcBRMY=;
+ b=eC523/g9AwrAOXkwMfWCK8rXYgXm27JCobQeVwb7KOWfb9LVajh3GYC/egdx849E/G
+ uWrLdsQEvCcojXzFcguCjPi/OWovOSwQTsSLbfXly/xfm8F/Q9Ym3PxEXhX2VcySaut2
+ lM19qJVm5XRtvBTqJ7/Al3X2t+Pyhq1NewQG7VvQfRVwqF4y4ybvZoOiwFb6Of8+YqDq
+ SG8mEJOIvk0QpFFk1lL4LsMqMkWvEs33AeZaMmrn+Dk8diySxEkahoPHAhzRsNuBfObL
+ mw0t/8cU5OtWNMO3bIVpbROYFzKYfqWFpAAc6ZGXKo84eafGKNegWolWOT4I4u8HljET
+ sCLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696287814; x=1696892614;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=STfE6D/qic3lhwwZ4dDMgaWcNdoNgfPrt4si76O3Evg=;
- b=JO2zPwv93c2N0fbJ7sFW2Poz702giMEg5TvUMHBiQucTKr54kazZqNIA1QKKAZfLr5
- xizW68OxU/rlQAlXoRMJDMFXkF8zjz8SLlgl2vaT9dTxLURxbOru6UWAClfzof75aisR
- JAZIVo8jzIyLiTTeq+Dxfa2YQrgGW7L+FVjcy1UUlsfROqmhHifZBe0fJvpUpzQInNTp
- ZsTDDwEaoja38/g3d8L+Jad70Tvpag7hhg0KksMCuy/ffb4EIxuciwop5/dy6LcVrXKl
- s6EPEJpPHFpL7wg7EdaOpdNtuQBz3mMPd6euCxDdijp+NzL4MNXUn1+gcrUieGt4B22u
- WL2A==
-X-Gm-Message-State: AOJu0Yy5PzTQ5FLEXw7o0V/c4w7hK6vNY4Fx2P5brSwSwkpjDrT+bokB
- OOiEqJJfeXyJQokEb4j58St37L9smwmu+8Zygo7zW3PCE31h1+kxfe0PundvS0+NKpCs0DnoK43
- +ixCYh2efcrajK0B8ma7lMHAgVrwflxc=
-X-Received: by 2002:a05:600c:2484:b0:406:7d74:a29b with SMTP id
- 4-20020a05600c248400b004067d74a29bmr266019wms.13.1696287813898; 
- Mon, 02 Oct 2023 16:03:33 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHnb0iLdgZQTuSlTW3mv8VdjEE9RS8Gr21lEH7RDEVk+mf9mfQzUXwBXOv/942v+/U7HnicGg==
-X-Received: by 2002:a05:600c:2484:b0:406:7d74:a29b with SMTP id
- 4-20020a05600c248400b004067d74a29bmr266002wms.13.1696287813464; 
- Mon, 02 Oct 2023 16:03:33 -0700 (PDT)
-Received: from [172.25.0.170] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- 11-20020a05600c248b00b003fefe70ec9csm8158595wms.10.2023.10.02.16.03.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Oct 2023 16:03:33 -0700 (PDT)
-Message-ID: <fbd3773d-9073-48eb-b378-b2bc5d670592@canonical.com>
-Date: Tue, 3 Oct 2023 01:03:32 +0200
+ d=1e100.net; s=20230601; t=1696288259; x=1696893059;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=r+YINemaxbK2N3IGh727w+/MwEk7qS2elYlOKIcBRMY=;
+ b=mbmNKpZB57xFBnAZSydICgReyfP3Vdkfy5JSY5D3zN3loP3fHnZRejqoMjpujspvOW
+ 7jHyuJCXMB+kMvUQN3nJDRgga9oFy7uAsvxVc5FZauwuQRZ8ro98SDFAKQb+Bo1UkQJm
+ mGpGssVgp6PeFqPafQh76sUsmzEvPatin+iILGEjL67mGr9AwOf2o32CvLsJyinxG5Bc
+ p0Xz0Sh9Ywb/62lDJCP8ILUA4WJhwzOq0ojpx4NJ4wM5lZyD+T2JQc7NA5+nyj2bgVrB
+ XmPes2+eHCSshkH7cKP5NRIucdiOCw+FRZ4o/FvY/tbXG7apJ5da+03o7kpIdS/PhNlq
+ AAZA==
+X-Gm-Message-State: AOJu0YwaKNrSaeQQRghhbD7X76/I7ozdlB3RWW/Wn2GQvCyYJGtoaDDU
+ ki2NdY88E8TzLRXkQi1IGdO1sR6QseZ4zht1gVUrk45kDdSyBW8ZDkQ=
+X-Google-Smtp-Source: AGHT+IGLJJf+uwLvR4nD/RskKJzzhSutEkGvVnKSZ2dK8WpU77+MfoQ3Tr1uvOyCHIxZG6QemEf1nhWuqcVnUu6Fy2I=
+X-Received: by 2002:a17:906:19:b0:9a3:c4f4:12de with SMTP id
+ 25-20020a170906001900b009a3c4f412demr11868502eja.37.1696288258860; Mon, 02
+ Oct 2023 16:10:58 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] input: avoid NULL dereference
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@google.com>, u-boot@lists.denx.de
 References: <20231002222725.25125-1-heinrich.schuchardt@canonical.com>
- <20231002224641.GB8465@bill-the-cat>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231002224641.GB8465@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <20231002222725.25125-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@google.com>
+Date: Mon, 2 Oct 2023 17:10:40 -0600
+Message-ID: <CAPnjgZ1KNf_ZmbVGAo1J=GfzPE78Hh=nfxvh9DMn=qYoXqt-aA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] input: avoid NULL dereference
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,64 +83,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/3/23 00:46, Tom Rini wrote:
-> On Tue, Oct 03, 2023 at 12:27:25AM +0200, Heinrich Schuchardt wrote:
->> Before using the result of env_get("stdin") we must check if it is NULL.
->>
->> Avoid #if. This resolves the -Wunused-but-set-variable issue and we don't
->> need a dummy assignment in the else branch. Anyway this warning is
->> disabled in the Makefile.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->> v2:
->> 	Avoid #if.
->> ---
->>   drivers/input/input.c | 22 ++++++++++++----------
->>   1 file changed, 12 insertions(+), 10 deletions(-)
->>
->> diff --git a/drivers/input/input.c b/drivers/input/input.c
->> index a4341e8c7c..de62189782 100644
->> --- a/drivers/input/input.c
->> +++ b/drivers/input/input.c
->> @@ -669,17 +669,19 @@ int input_stdio_register(struct stdio_dev *dev)
->>   	int error;
->>   
->>   	error = stdio_register(dev);
->> -#if !defined(CONFIG_SPL_BUILD) || CONFIG_IS_ENABLED(ENV_SUPPORT)
->> -	/* check if this is the standard input device */
->> -	if (!error && strcmp(env_get("stdin"), dev->name) == 0) {
->> -		/* reassign the console */
->> -		if (OVERWRITE_CONSOLE ||
->> -				console_assign(stdin, dev->name))
->> -			return -1;
->> +	if ((IS_ENABLED(SPL_BUILD) || CONFIG_IS_ENABLED(ENV_SUPPORT)) &&
->> +	    !error) {
->> +		const char *cstdin;
->> +
->> +		/* check if this is the standard input device */
->> +		cstdin = env_get("stdin");
->> +		if (cstdin && !strcmp(cstdin, dev->name)) {
->> +			/* reassign the console */
->> +			if (OVERWRITE_CONSOLE ||
->> +			    console_assign(stdin, dev->name))
->> +				return -1;
->> +		}
->>   	}
->> -#else
->> -	error = error;
->> -#endif
->>   
->>   	return 0;
->>   }
-> 
-> This is an example I think of where #if is more readable.
+On Mon, 2 Oct 2023 at 16:27, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
+> Before using the result of env_get("stdin") we must check if it is NULL.
+>
+> Avoid #if. This resolves the -Wunused-but-set-variable issue and we don't
+> need a dummy assignment in the else branch. Anyway this warning is
+> disabled in the Makefile.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         Avoid #if.
+> ---
+>  drivers/input/input.c | 22 ++++++++++++----------
+>  1 file changed, 12 insertions(+), 10 deletions(-)
 
-See v1 review. Simon asked to replace #if.
-
-I don't mind which version you merge. Just mark the other one as superseded.
-
-Best regards
-
-Heinrich
+Reviewed-by: Simon Glass <sjg@chromium.org>
