@@ -4,68 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85BA8E784A7
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:43:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F5F6E784A7
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 01:43:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C09D4874E6;
-	Mon,  2 Oct 2023 03:23:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D4F8B874CB;
+	Mon,  2 Oct 2023 03:23:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lRd8/EYl";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lfLxobIM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8019C874B7; Mon,  2 Oct 2023 03:23:00 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 854F08721E; Mon,  2 Oct 2023 03:23:00 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25CA4874A9
+ by phobos.denx.de (Postfix) with ESMTPS id 0E672874A3
  for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 03:22:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-307d20548adso14458997f8f.0
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-991c786369cso2115332866b.1
  for <u-boot@lists.denx.de>; Sun, 01 Oct 2023 18:22:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696209767; x=1696814567; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696209771; x=1696814571; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Qb2fkaFfAA9gH5jfMdFq7m+J1+A0X3HLBoP9ZlQfpdQ=;
- b=lRd8/EYlf0KTyEnbvV9/TCEZ2L0YewAgd4BzjUxX72Uywv3FNRHN8of55KPl92/K5+
- DeA6odBZnmyGPE1Zz74xPKBNvsbgrK4T8T+AUmEXFqASpNK8iTegrWvj4jL7WeNB97ca
- hAvh3w3eED2+2ukq/q0cn57Kew3FQApvc+sNg=
+ bh=HRmjdeOheihkx76TuO0tVe7DLytW9q7/6SHTunAwMpU=;
+ b=lfLxobIMFZ++e+OMQ0XOJNYaJBIHlO5O6YOM2urBmBjUt9OHWrUbeyHQHsRCoYbfJp
+ /w03IJJRx+DTPiXX5OeMTDuxlwb8Y3OL7vIHM6JBRIYvtHmvcvDuXH3URRVkyiHTyknp
+ 9zeT1rKY1+lQcm6ysJZvio6vJfq2KUKaLDkjg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696209767; x=1696814567;
+ d=1e100.net; s=20230601; t=1696209771; x=1696814571;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Qb2fkaFfAA9gH5jfMdFq7m+J1+A0X3HLBoP9ZlQfpdQ=;
- b=wwdShO/BFr0kZ73iPFTXVK4KRNnMstGtSLWfBb6iFiRPRX5+poYkjH9WnyOY8UdhUA
- vus6KAQc6CQ8inpPHqcN1npaZvZOKVdV8Bk0nE8IuiSkfEeIg2bpBjECGOJJcqVWA4Xx
- VqA1hSKst65DedVSt+olKk2kTHc/DK4WypWE4mVVR/YoR5PBtsMRLJWbSjap5qParbYz
- 1maE+xZh7b0d3w1kq9iBa3sK3jE69LjdDtRuRoES68z6zJwMSLH7aw9652PlfxzDGWmk
- 73vbFuIwWQilapm7BVo4Wpm+qtci36KtLd6Y5h4bmkCiYC40BAJz2DD5ybgI52lV1+RS
- 168Q==
-X-Gm-Message-State: AOJu0YxknaZHv28icSGRo0uBQj7ml9cSU88YdvKJWrtKv5ptT57aTzzB
- fKARTEbzUjQJQ6UHeDqkOyPL/l81fNT/xCQBpntLBzC+gwsJKqhOqc4=
-X-Google-Smtp-Source: AGHT+IEcAZ+gPgYTjD5/S+sUgsJIsmQY6DM7JQ2WLRC3CNBCp2DJ/HIWlDE+L4dk3ocSCdM/3yKt5U7oahHN4eviCW8=
-X-Received: by 2002:a5d:4049:0:b0:319:7787:54a9 with SMTP id
- w9-20020a5d4049000000b00319778754a9mr9337467wrp.24.1696209766639; Sun, 01 Oct
- 2023 18:22:46 -0700 (PDT)
+ bh=HRmjdeOheihkx76TuO0tVe7DLytW9q7/6SHTunAwMpU=;
+ b=LENgMu1upSBNihPwPtZqpuusYnUDCU3xsV8PMrKw4bHMzAmp/BW1hCOhGpWpzv6mGc
+ Mn27STgcFuLIgmrENOl7DqGbvoqyHUByW3hGQl7wvF38eK8SZZZtBrchSV9FfScT/lvG
+ +e0M2gL1tawb6Y2NMmaRAJSRgL0oWiyxesPHyZQX27vy2DljJ0c2ELEgghdZwSz/17Sc
+ IC8HF+ZAu5ChI4h8F5rE0YfZWjwistxbUzqwcjs/zt9lhZh5x+ndqL2mV+Z+iYAQmZwF
+ 8RNJBLCBe8QmLiguuVtbCiMPij5JhAWipwbKiGLouZP31Pf63MNGY2p/sqBdAsjgmzxr
+ JBng==
+X-Gm-Message-State: AOJu0YwMnnI2MdOBHCYFrzUNGxPhFEnC7NCrn0saqNuGoP/LeYnOvwhi
+ +DQ1wOJX9oQG8iUoHQvADqjaV0F4SLWYWlMynUj/MJBEe3QByq6cEXI=
+X-Google-Smtp-Source: AGHT+IHxKyFknSgRIk/Y9066H/Ikl6ICpTcx+awxxJsQdcQPwkoW+HoiXcNgnCcRGuAjGw1HD+ir2kkSE81YvrtG9Us=
+X-Received: by 2002:a17:906:8464:b0:9b3:64b:4346 with SMTP id
+ hx4-20020a170906846400b009b3064b4346mr1169665ejc.71.1696209771092; Sun, 01
+ Oct 2023 18:22:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230926084346.2237483-1-bmeng@tinylab.org>
- <20230926084346.2237483-13-bmeng@tinylab.org>
-In-Reply-To: <20230926084346.2237483-13-bmeng@tinylab.org>
+References: <20230926-binman-firewalling-v2-0-b1a084ec634d@ti.com>
+ <20230926-binman-firewalling-v2-2-b1a084ec634d@ti.com>
+In-Reply-To: <20230926-binman-firewalling-v2-2-b1a084ec634d@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 1 Oct 2023 19:17:04 -0600
-Message-ID: <CAPnjgZ3Fd5HOXCaAE6CYnWJfc0mbbAAk9kxyMcioXTg3pavKFw@mail.gmail.com>
-Subject: Re: [PATCH 12/15] cmd: blk_common: Stop using hard-coded block size
- for Sandbox operations
-To: Bin Meng <bmeng@tinylab.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Tobias Waldekranz <tobias@waldekranz.com>
+Date: Sun, 1 Oct 2023 19:17:08 -0600
+Message-ID: <CAPnjgZ14Uy+gBC8kgqVA7m9NXN_WiXFffu5Ob=vz=E76rMDMPQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v2 2/8] binman: ti-secure: Add support for firewalling
+ entities
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ u-boot@lists.denx.de, 
+ Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,19 +87,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 26 Sept 2023 at 04:09, Bin Meng <bmeng@tinylab.org> wrote:
+Hi Manorit,
+
+On Tue, 26 Sept 2023 at 01:58, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
 >
-> commit 3d2fc7971454 ("cmd: blk: Allow generic read/write operations to work in sandbox")
-> used the hard-coded block size (512) for accessing the sandbox host
-> device. Now that we have added support for non-512 block size for both
-> Sandbox host device and blkmap driver, let's stop using the hard-coded
-> block size.
+> We can now firewall entities while loading them through our secure
+> entity TIFS, the required information should be present in the
+> certificate that is being parsed by TIFS.
 >
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> The following commit adds the support to enable the certificates to be
+> generated if the firewall configurations are present in the binman dtsi
+> nodes.
+>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > ---
->
->  cmd/blk_common.c | 20 ++++++++++++++------
->  1 file changed, 14 insertions(+), 6 deletions(-)
+>  tools/binman/btool/openssl.py   | 16 +++++++-
+>  tools/binman/etype/ti_secure.py | 85 +++++++++++++++++++++++++++++++++++++++++
+>  tools/binman/etype/x509_cert.py |  3 +-
+>  3 files changed, 101 insertions(+), 3 deletions(-)
 >
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Please do check that you have 100% test coverage here (binman test -T)
+
+Regards,
+Simon
