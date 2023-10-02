@@ -4,50 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D18EE7849A
-	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 13:46:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A02C3E784AC
+	for <u-boot@archiver.kernel.org>; Mon,  2 Oct 2023 13:46:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2060870B7;
-	Mon,  2 Oct 2023 15:46:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 176D686DAF;
+	Mon,  2 Oct 2023 15:46:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="pHRpM2oR";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="MWSHgnyv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 325BB8694A; Mon,  2 Oct 2023 15:46:25 +0200 (CEST)
+ id 8081B86E06; Mon,  2 Oct 2023 15:46:26 +0200 (CEST)
 Received: from relay5-d.mail.gandi.net (relay5-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::225])
+ [217.70.183.197])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5649686DE8
- for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 15:46:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D0A387116
+ for <u-boot@lists.denx.de>; Mon,  2 Oct 2023 15:46:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 1B8B01C0014;
- Mon,  2 Oct 2023 13:46:21 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 3A6D81C0015;
+ Mon,  2 Oct 2023 13:46:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
  t=1696254383;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=RctxHRt564dl8UoJl5WcwwxLVbWad/xtDaTlYMbDWbs=;
- b=pHRpM2oRjDeXMKpJgLUzlnoUdtvP3sPxC7KuTILUjQ916e8R2g81ZMqneXP7H9Wro01iJJ
- 87XJ+Osvqw8q1/OtKSHr/0CFyUS3pq7ELkreGT3RhOU0cwS1Do6MbOPHbMnzH/+MuZHJPj
- CN3DSJE+y0CQP/ogjSOj2j32kRHWzV0etBaUD4R3LFd8i0MVXr268r/7gQmsV/ww1E+1JZ
- fLzND5KlO/g6HYWJ0Puz7KXIIUtzh6w5qWRLuP6fVWtM5YRPnkCtb5cZQdQuMmdXsmlmPZ
- 1lo6BW/22E4Umsk1xLvQe7BZEFjNDTb1H+ezdf9+RkBWeaslNPcBtQfolvd7jw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=q2LkYXnkX9mklGHlRUQC3DrrmPLVyffGDTfqh2OwXck=;
+ b=MWSHgnyvwJiPxDD//YtMpXF7/Dpq/L7sIspLR3cgqnuuix7SzbJZv9QCTs/1zPODCnuuQ5
+ nv3WBezuzEvGfaek/SXQQvv3DTSRYAMQi1WY5v/NJt6yCifpm85F+GhJDMFDTwngrD9Gqk
+ ZYFvZJu4m0y+TYsmQpysno84CyQ+z3IkFrg1Y+BwDexRoa+xy703gsaNdn8jArFx63raOt
+ lg1cPbGMhz654lpAo5s2zQCLga36LJ1T3Q1/90o6Ii4h/lfZ0fgL7fatW/5XOuryKA0YEl
+ x8BzbY61G/SNxqWYGo6HszO8H6XRVyWB3bqUEGivlzsYHa6OhoEm/gaxK47SHQ==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Marek Vasut <marex@denx.de>, Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: u-boot@lists.denx.de,
 	Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH RESEND v2 1/2] cmd: bind: Try to improve the (un)bind help
-Date: Mon,  2 Oct 2023 15:46:20 +0200
-Message-Id: <20231002134621.94786-1-miquel.raynal@bootlin.com>
+Subject: [PATCH RESEND v2 2/2] usb: udc: Try to clarify an error message
+Date: Mon,  2 Oct 2023 15:46:21 +0200
+Message-Id: <20231002134621.94786-2-miquel.raynal@bootlin.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231002134621.94786-1-miquel.raynal@bootlin.com>
+References: <20231002134621.94786-1-miquel.raynal@bootlin.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-GND-Sasl: miquel.raynal@bootlin.com
@@ -67,50 +70,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While it may sound totally obvious for the regular U-Boot developer to
-get the parameters of the bind/unbind commands from the output of 'dm
-tree', it did not felt straightforward to me until I was explicitly
-told to look there. And even when I knew the command, I did not make a
-direct link between the arguments of this command and the columns
-returned by 'dm tree'.
+At some point when trying to use USB gadgets, two situations may arise
+and lead to a failure. Either the UDC (USB Device Controller) is not
+available at all (not described or not probed) or the UDC is already in
+use. For instance, as the USB Ethernet gadget remains bound to the UDC,
+the use of any other USB gadget (fastboot, dfu, etc) *after* will always
+fail with the "couldn't find an available UDC" error.
 
-Several of us lost a lot of time because of that, I would like to kindly
-help other users by slightly improving this textual line. Unfortunately,
-because of how this string is used (like within the 'help' command) I
-cannot detail much more, but at least the pointer is there.
+Let's give a more helpful message by making a difference between the two
+cases. Let's also hint people who would get this error and grep it into
+the sources a better explanation of what's wrong with their workflow.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 ---
+While doing this I really wanted to add "much more" error comments but I
+faced another reality: often the messages are there but use
+pr_err/log_err which is actually silenced by default with LOGLEVEL=3, so
+I consider this unnecessary, as decreasing the loglevel will make these
+messages appear. I would have expected errors to be displayed, but I
+understand it makes the binaries even bigger.
+
 Resend: no change.
 
 Changes in v2:
-* Moved the details in the long text section as suggested by Heinrich.
-* Rephrased the help text as well, not fully following Heinrich
-  suggestion, but taking inspiration from it.
+* s/UDC/UDCs/. I kept the sentence as it was as the suggested form did
+  not sound well at all when there is only one UDC.
 ---
- cmd/bind.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/usb/gadget/udc/udc-core.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
-diff --git a/cmd/bind.c b/cmd/bind.c
-index 4d1b7885e60..be0d4d2a711 100644
---- a/cmd/bind.c
-+++ b/cmd/bind.c
-@@ -246,6 +246,8 @@ U_BOOT_CMD(
- 	"Bind a device to a driver",
- 	"<node path> <driver>\n"
- 	"bind <class> <index> <driver>\n"
-+	"Use 'dm tree' to list all devices registered in the driver model,\n"
-+	"their path, class, index and current driver.\n"
- );
+diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
+index 7f73926cb3e..8405b03462e 100644
+--- a/drivers/usb/gadget/udc/udc-core.c
++++ b/drivers/usb/gadget/udc/udc-core.c
+@@ -323,6 +323,7 @@ err1:
+ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
+ {
+ 	struct usb_udc		*udc = NULL;
++	unsigned int		udc_count = 0;
+ 	int			ret;
  
- U_BOOT_CMD(
-@@ -254,4 +256,6 @@ U_BOOT_CMD(
- 	"<node path>\n"
- 	"unbind <class> <index>\n"
- 	"unbind <class> <index> <driver>\n"
-+	"Use 'dm tree' to list all devices registered in the driver model,\n"
-+	"their path, class, index and current driver.\n"
- );
+ 	if (!driver || !driver->bind || !driver->setup)
+@@ -330,12 +331,22 @@ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
+ 
+ 	mutex_lock(&udc_lock);
+ 	list_for_each_entry(udc, &udc_list, list) {
++		udc_count++;
++
+ 		/* For now we take the first one */
+ 		if (!udc->driver)
+ 			goto found;
+ 	}
+ 
+-	printf("couldn't find an available UDC\n");
++	if (!udc_count)
++		printf("No UDC available in the system\n");
++	else
++		/* When this happens, users should 'unbind <class> <index>'
++		 * using the output of 'dm tree' and looking at the line right
++		 * after the USB peripheral/device controller.
++		 */
++		printf("All UDCs in use (%d available), use the unbind command\n",
++		       udc_count);
+ 	mutex_unlock(&udc_lock);
+ 	return -ENODEV;
+ found:
 -- 
 2.34.1
 
