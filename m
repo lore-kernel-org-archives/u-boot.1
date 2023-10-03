@@ -4,108 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86FFEE7AD42
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 592D0E7AD41
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:26:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C279B87259;
-	Tue,  3 Oct 2023 15:21:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8F6DA86E26;
+	Tue,  3 Oct 2023 15:26:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h+TFABzN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kyJgvAPp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FC5C87285; Tue,  3 Oct 2023 15:21:11 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id D216987257; Tue,  3 Oct 2023 15:26:05 +0200 (CEST)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F56687441
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:21:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3B9D8634D
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:26:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-327b7e08456so945560f8f.2
- for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 06:21:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=jaswinder.singh@linaro.org
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-d8181087dc9so943830276.3
+ for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 06:26:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696339269; x=1696944069; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=KK8nmRmNQygjjViCiLRnGglt+F9y0kDV4bmr3SV9+Fk=;
- b=h+TFABzNYqFD2DJFmqDW1hC7Nn7ue01QTXBqOMJAl8y8Ib+hfUXMzAUr+rTMnEZvvY
- rU9wrj6K2v8knwRNbXHrMT9kEc+4XxjwJGmrIfgFK2Dr8AzKeaSFVW0oQOOIC3s87wGK
- 0HE31qZNrn4JNoWxIhGdbTou2zaaYtkPIx7yRy1cjLDarH57IUZhpyuYVvKFU8FWEKQz
- nTjLll4KKvTIk1Y7GnCwtygpCdcudAR7cQ21kopYeb26yIvXksgSvLmlP8+jODhv46kx
- 0EFOXmDjyZ2L4NmBfzResWPZJAVoA+TQhBgEVaItWBIGGyewV+K/7aiEO2Bg9NqebA7i
- W1jg==
+ d=linaro.org; s=google; t=1696339562; x=1696944362; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VKvN9yiZH6xOqoXAQQ0tYudaznEMQTVupcnMD5i5q7c=;
+ b=kyJgvAPps1CxsoPTM8OYQsIRYcdGWP50iV7NjfZywYbOouLOEetvSPD/XQlOa5Ili+
+ M6RSeTEE4orzSWw2k3NcdIOaN9GriiHxTlIPUhaaIzJKCK89b+PHhohF2g8ZF2baQ3TF
+ /ZMLPjsGvz0NcZUIVxnEl4GXG/0HFD0RTABP67Ti4dPQm5uYeCD72/1VoRXgRfebrwzz
+ BLjNHZhYpB3vsmbsjSZ0tt8sICpBvcHmt/mCW6HMmIPLMvfkgph7tpLIlblXWNakowkY
+ c1F5/YHXrJs2XjxCn91FxDUCGPVxf5G+woWS4Pch43ll0S/dEuU5xMNJgIdGPSn9WD0A
+ xo2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696339269; x=1696944069;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=KK8nmRmNQygjjViCiLRnGglt+F9y0kDV4bmr3SV9+Fk=;
- b=ogb2kvEjJbVZresrvOdbNgww6eqcYbYN6KIiIhXHU6QRoQlATPN6Y3k6x9eNGcjKMx
- 9tyIBTZE5HW/6reCNFgSf36e7Ub8GdhCmMF9r7vWOSJRKj2kw7KAtP62gi854YW2qsBq
- UgITv2p+5GCfaMkYc6S58I6g0CVfWtkCXx9rJtMcAwsac8qvZFo5zspc4KfvhjqjnM4L
- Mu+1z13BgRamnhv9UdCU58eFUT9Kw2hraVqb10QeUuUlpLbxqbP7/3ZvjKqB/3qp7cXK
- MKmEVp9BQnPbBdxOfg+HANh71reiVy/+6BcsMsJd0uzBtAqTvQLSLcLk2Yo824MAN9Zc
- r22Q==
-X-Gm-Message-State: AOJu0Yxx4LE99fnFiSFkdLJtsbbb6Yb65eoPJJPGNyKEspPUzNFYpNLU
- 23yUxQQKFOZ7tNkCraGXN7iZLQ==
-X-Google-Smtp-Source: AGHT+IHdbWDShCgBiloWUJ08ARDisa8mrQI8/CwcNNIWVhwJuYUF3wlQERa6Xjznvqq1LuaYSDTqSA==
-X-Received: by 2002:a5d:6447:0:b0:324:8239:2872 with SMTP id
- d7-20020a5d6447000000b0032482392872mr11530081wrw.71.1696339268822; 
- Tue, 03 Oct 2023 06:21:08 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:e31a:fe1c:e925:9858?
- ([2a01:e0a:982:cbb0:e31a:fe1c:e925:9858])
- by smtp.gmail.com with ESMTPSA id
- f8-20020adfdb48000000b0031ff89af0e4sm1568213wrj.99.2023.10.03.06.21.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Oct 2023 06:21:08 -0700 (PDT)
-Message-ID: <e8f12d8c-aa70-45e9-b7f1-29840110b356@linaro.org>
-Date: Tue, 3 Oct 2023 15:21:07 +0200
+ d=1e100.net; s=20230601; t=1696339562; x=1696944362;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VKvN9yiZH6xOqoXAQQ0tYudaznEMQTVupcnMD5i5q7c=;
+ b=m1WkVfKByDW0CysKPsHT09oqgEGybs30rcUZPG+NAbq+AOvUyFl+ds/LdcdINtHYe9
+ 1UsNSEWJhZAs2i49XT0H7zVo7ungWvurQowBkg6DD9C2yilNlpz6fu8x1+cZRp/fKb5W
+ YDl0NFOJUuzFx5CyT2JHvP1i3tCraKzRRdSknCITzhcoVQTOqYf0N69j0OtBSm7y3bgr
+ xLD9uw9VgB2fS10lLwp59VdJwRT1U/qUXogbrHzZjhN3e6rKAjMysRFa72vP/2MeHH5Z
+ 1G/gbfrX/y4aEPDysW1pBkPuKEhWCvyS/rPbHY/PKGeAu0lR2fNMIIV863iVlzJTPnPs
+ CQ1w==
+X-Gm-Message-State: AOJu0YzZkQanXwX2dVnVhnW8jee/YstdR9CK1kZq3D9oS2Nw11TbisSD
+ vnyZXAHG4kwrSVypZ0euz1AvgfwoAWmyobgSGbus4w==
+X-Google-Smtp-Source: AGHT+IHX3uR0SbLFguyk2Sg5wRlhbVKoOvmGsYfBTe2p+1EegtB4u1B1dNAMad0fGG+5IGLPidPZfEzxDxa6nHo07Do=
+X-Received: by 2002:a25:6086:0:b0:d8d:4913:9f39 with SMTP id
+ u128-20020a256086000000b00d8d49139f39mr7544197ybb.46.1696339562297; Tue, 03
+ Oct 2023 06:26:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2 8/8] ad401: enable USB stack
-Content-Language: en-US, fr
-To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com,
- sjg@google.com, lukma@denx.de, seanga2@gmail.com, marex@denx.de
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
-References: <20231003112838.41503-1-avromanov@salutedevices.com>
- <20231003112838.41503-9-avromanov@salutedevices.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231003112838.41503-9-avromanov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20231003022957.1743493-1-masahisa.kojima@linaro.org>
+In-Reply-To: <20231003022957.1743493-1-masahisa.kojima@linaro.org>
+From: Jassi Brar <jaswinder.singh@linaro.org>
+Date: Tue, 3 Oct 2023 08:25:51 -0500
+Message-ID: <CAJe_ZhfRhscaYFkqKYFUCu=vxYDBpuSk_KDdSgpG9MN5LP-CkA@mail.gmail.com>
+Subject: Re: [PATCH] board: synquacer: set actual gd->ram_top and gd->ram_size
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Ryosuke Saito <ryosuke.saito@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,33 +80,25 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 03/10/2023 13:28, Alexey Romanov wrote:
-> Currently we have all drivers for use USB stack on A1-series
-> SoC's. Let's enable USB options for the Amlogic AD401 reference A1
-> SoC board.
-> 
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> ---
->   configs/ad401_defconfig | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/configs/ad401_defconfig b/configs/ad401_defconfig
-> index 529e553bac..b02ff47b7a 100644
-> --- a/configs/ad401_defconfig
-> +++ b/configs/ad401_defconfig
-> @@ -51,4 +51,7 @@ CONFIG_DEBUG_UART_SKIP_INIT=y
->   CONFIG_MESON_SERIAL=y
->   CONFIG_SPI=y
->   CONFIG_DM_SPI=y
-> +CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
-> +CONFIG_USB_GADGET=y
->   CONFIG_WDT=y
+On Mon, 2 Oct 2023 at 21:31, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
+>
+> Current gd->ram_size and gd->ram_top reflect only the
+> first DRAM bank even if the SynQuacer Developerbox could
+> have up to three DRAM banks.
+> With the commit 06d514d77c37 ("lmb: consider EFI memory map"),
+> the first DRAM bank indicates <4GB address, so whole >4GB memory
+> is marked as EFI_BOOT_SERVICES_DATA and it results that
+> U-Boot can not access >4GB memory.
+>
+> Since 64-bits DRAM address is fully available on the SynQuacer
+> Developerbox, let's set the installed DIMM information to
+> gd->ram_top and gd->ram_size.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
