@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7296BE7542B
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:38:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE818E7542B
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:39:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F274A87280;
-	Tue,  3 Oct 2023 08:37:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5B3468745D;
+	Tue,  3 Oct 2023 08:37:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ndf5M2SD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hSDsKsFh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 035EC87468; Tue,  3 Oct 2023 08:37:11 +0200 (CEST)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id 325DA87474; Tue,  3 Oct 2023 08:37:12 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B08987272
+ by phobos.denx.de (Postfix) with ESMTPS id DF52787282
  for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:37:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5041d6d8b10so642456e87.2
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-50585357903so633427e87.2
  for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:37:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696315025; x=1696919825; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696315026; x=1696919826; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UUzmiGsM+CBVI2t21fk1UNwMwq+HMhJ7S0OUYqJCFtI=;
- b=ndf5M2SDB4UifOoC6X7qSkHXPpYbeS0acjOIjSOwoj1xwU4DHKBtzrHhG+ML75wL1w
- zpAuUPMV3qUlInDt42zTWFtKeRtYFLo0FRn2IzssfuCaZVa3Oki2ALVfw05gl6AAOUey
- /nzH/GzudXQS1Dz0boG4V+PUxPLvOxcZr8zEYAWfPz1h/Hw3iCU2eL2tL7kKrZVt2AII
- YMWV27L72ceVQxBoB5NZg6XgTFkQB1pt68DiKBbsMtQDg5Y6Ye6qy9gEpcentocA08FP
- 8TxFIoCGx9KDwv6UqbAIDaVjrjGmMJM7HTox7w/3IZC9xBJf0EJRjxZJafC6eVV+lWuY
- qmSQ==
+ bh=vr9n0P0qVMY+WYRHd5Ub+DS0AQa6+rIqHwGr+l+6Rho=;
+ b=hSDsKsFhNqXv77yLXAmunCM1oYht7YdIFnaj/piz48RSIt2CjOg/a797jx9yo8f0h1
+ 3x+qrGxUwmvzFRle5zwr5PrT6rDwhn8IY3KJix8WDW6Q56sw/rcbwOy91ic0c6ZS/0o3
+ TqGcIMnsxpn2Pi8RoraMnJa4mLx7P4oOJ8wslJ0/lGzVDXKYQuAQnQc2+45JCnpkuEJH
+ u0M1k9XieckVxFeGKF5kBLjj4Hs0AKFWmvrWhdoCCiGFdgxb3dRo5a4YQBjyPWBN4VQ4
+ p54akWElT+Gh5Szx//oWqDyx0mbUmrYVA+MUQIcihiN2JtmFgsj8ar+Ekq1A+VqzW73G
+ Rn3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696315025; x=1696919825;
+ d=1e100.net; s=20230601; t=1696315026; x=1696919826;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UUzmiGsM+CBVI2t21fk1UNwMwq+HMhJ7S0OUYqJCFtI=;
- b=W9UkNfVSArfnMUqMfd1qcWHRdbHIS110NP7+lVqJ/6Cb0v/4/8Q/S/9FUjBc8g24v9
- JxEu9uZLAcuYfv6O7yJUlp/ivQ6spa+GPo2IK2slTNdD6Cnax/xNNSv66AO0fC2Az3zN
- AledFEDSqgZ31pfk93jMlyINrAI4IL41wTbiNxy/nAMnyDjxUDXhWqPBNVR7xrfK4iy9
- m2nQX4t/ucaeZsXW8RMZTbYCL4us0zPh+ip11JaVwL3Yyy3MotVOwuIl6QHhj0MxWRuX
- CvyB3sua01h/OnumJW2JBsnEZD3P+tLY6a9dg/hy5kXTt57cTWMzkyj0GG6QTH0WteRq
- /f8A==
-X-Gm-Message-State: AOJu0YxheSq3nyOisL2RYvxqMUZ5vA1fgw9WshPJhGdWEi+MVmxMOTDZ
- gMBkirZ2ZXQXfgbrbGHaBfs=
-X-Google-Smtp-Source: AGHT+IHWtRYIZWOcnaQKlQm9dZt3UXTyEcQoNC5VtxTm9hNWlivzBXFKKcdP1d0U9O0XmkVSmTtorA==
-X-Received: by 2002:a05:6512:224b:b0:504:7dc9:671a with SMTP id
- i11-20020a056512224b00b005047dc9671amr12869707lfu.69.1696315025428; 
- Mon, 02 Oct 2023 23:37:05 -0700 (PDT)
+ bh=vr9n0P0qVMY+WYRHd5Ub+DS0AQa6+rIqHwGr+l+6Rho=;
+ b=L7kbo3v1IP9JU9zRUDFLlxh+RGBVpkj7dAgf6fKO6WH6osYAALfo3sAIU+H74JqgCO
+ cEHuN/9U/nK44/GYB2h0uBnG/zazBXN5i2W+KMiFm6vAbL61rAfgGe2uJ0Loa7AWuOB3
+ fBsVcjSuI+CQDpoiw0Ijucq7OtMLuywLe6nr3CwxuHK7p+KtSbsbrzsqJOEAKoLfBzHK
+ RevIQjzA/OEFHeUsmkAcJaJ7OX2QsiYxOEhbk3JSJUhb/8T4njGt8nxoF2xfqvCGYuUj
+ JDC5LpcGjjaTmua1pJX6GgQ+7EipgTzTM5gOBbvi9GileEYAqiC8GdB8sJ02DnqEzeea
+ pFOQ==
+X-Gm-Message-State: AOJu0YzbkR2LFEveWwSfaBvSjkExhJVUrUkN3fyTPoSCqhaDXHtVBgsl
+ njCwrvM3S2kRwNvVrG/5hCM=
+X-Google-Smtp-Source: AGHT+IF1MwSsoChGtmibMQPa7JvKeihKdklOror+LIDDNhos7xcXFHbWi57UYpn7BZKQPadgCIpLSw==
+X-Received: by 2002:a19:a40a:0:b0:503:9c2:e44e with SMTP id
+ q10-20020a19a40a000000b0050309c2e44emr11085108lfc.55.1696315026125; 
+ Mon, 02 Oct 2023 23:37:06 -0700 (PDT)
 Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- s1-20020a19ad41000000b00502b04e2722sm79636lfd.3.2023.10.02.23.37.04
+ s1-20020a19ad41000000b00502b04e2722sm79636lfd.3.2023.10.02.23.37.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Mon, 02 Oct 2023 23:37:05 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 13/16] ARM: tegra20: tegra30: support EBTUPDATE on
- non-encrypted devices
-Date: Tue,  3 Oct 2023 09:36:44 +0300
-Message-Id: <20231003063647.42770-14-clamor95@gmail.com>
+Subject: [PATCH v3 14/16] ARM: tegra: board2: add generic late init
+Date: Tue,  3 Oct 2023 09:36:45 +0300
+Message-Id: <20231003063647.42770-15-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231003063647.42770-1-clamor95@gmail.com>
 References: <20231003063647.42770-1-clamor95@gmail.com>
@@ -91,146 +90,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Re-crypt support was extended to devices without burnt SBK. In case
-SBK is not set, place from where it is read is filled with zeroes.
-This patch adds support for ebtupdate function to detect nosbk device
-and avoid crypto operations for it.
+Board specific late init allows vendors to set up different device
+or board specific env variables (like serial number, platform name).
+In case this information is missing, u-boot will lack info regards
+serial or platform.
 
-Tested-by: Maksim Kurnosenko <asusx2@mail.ru>
+To avoid this prior nvidia_board_late_init internal generic function
+is called which fills required data. In this case platform name is
+obtained from get_chip and serialno is filled with SoC id.
+
+Though SoC id is not dedicated to be devices serial but it fits well
+in case of restriction of data about device and since SoC is basically
+a main chip of the device.
+
+Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Transformers
+Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- arch/arm/mach-tegra/tegra20/bct.c | 30 ++++++++++++++++++++----------
- arch/arm/mach-tegra/tegra30/bct.c | 30 ++++++++++++++++++++----------
- 2 files changed, 40 insertions(+), 20 deletions(-)
+ arch/arm/mach-tegra/board2.c | 43 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
 
-diff --git a/arch/arm/mach-tegra/tegra20/bct.c b/arch/arm/mach-tegra/tegra20/bct.c
-index 5eb48990b6..b2c44f3d23 100644
---- a/arch/arm/mach-tegra/tegra20/bct.c
-+++ b/arch/arm/mach-tegra/tegra20/bct.c
-@@ -11,6 +11,9 @@
- #include "bct.h"
- #include "uboot_aes.h"
+diff --git a/arch/arm/mach-tegra/board2.c b/arch/arm/mach-tegra/board2.c
+index 981768bb0e..cd405874d3 100644
+--- a/arch/arm/mach-tegra/board2.c
++++ b/arch/arm/mach-tegra/board2.c
+@@ -26,6 +26,10 @@
+ #include <asm/arch-tegra/gpu.h>
+ #include <asm/arch-tegra/usb.h>
+ #include <asm/arch-tegra/xusb-padctl.h>
++#ifndef CONFIG_TEGRA186
++#include <asm/arch-tegra/fuse.h>
++#include <asm/arch/gp_padctrl.h>
++#endif
+ #if IS_ENABLED(CONFIG_TEGRA_CLKRST)
+ #include <asm/arch/clock.h>
+ #endif
+@@ -256,6 +260,37 @@ int board_early_init_f(void)
+ }
+ #endif	/* EARLY_INIT */
  
-+/* Device with "sbk burned: false" will expose zero key */
-+const u8 nosbk[AES128_KEY_LENGTH] = { 0 };
++#ifndef CONFIG_TEGRA186
++static void nvidia_board_late_init_generic(void)
++{
++	char serialno_str[17];
 +
- /*
-  * @param  bct		boot config table start in RAM
-  * @param  ect		bootloader start in RAM
-@@ -23,22 +26,27 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
- 	u8 ebt_hash[AES128_KEY_LENGTH] = { 0 };
- 	u8 sbk[AES128_KEY_LENGTH] = { 0 };
- 	u8 *bct_hash = bct;
-+	bool encrypted;
- 	int ret;
- 
- 	bct += BCT_HASH;
- 
-+	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
++	/* Set chip id as serialno */
++	sprintf(serialno_str, "%016llx", tegra_chip_uid());
++	env_set("serial#", serialno_str);
 +
- 	memcpy(sbk, (u8 *)(bct + BCT_LENGTH),
- 	       NVBOOT_CMAC_AES_HASH_LENGTH * 4);
- 
--	ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
--	if (ret)
--		return 1;
-+	encrypted = memcmp(&sbk, &nosbk, AES128_KEY_LENGTH);
- 
--	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
-+	if (encrypted) {
-+		ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
-+		if (ret)
-+			return 1;
- 
--	ret = encrypt_data_block(ebt, ebt_size, sbk);
--	if (ret)
--		return 1;
-+		ret = encrypt_data_block(ebt, ebt_size, sbk);
-+		if (ret)
-+			return 1;
++	switch (tegra_get_chip()) {
++	case CHIPID_TEGRA20:
++		env_set("platform", "tegra20");
++		break;
++	case CHIPID_TEGRA30:
++		env_set("platform", "tegra30");
++		break;
++	case CHIPID_TEGRA114:
++		env_set("platform", "tegra114");
++		break;
++	case CHIPID_TEGRA124:
++		env_set("platform", "tegra124");
++		break;
++	case CHIPID_TEGRA210:
++		env_set("platform", "tegra210");
++		break;
++	default:
++		return;
 +	}
- 
- 	ret = sign_enc_data_block(ebt, ebt_size, ebt_hash, sbk);
- 	if (ret)
-@@ -52,9 +60,11 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
- 	bct_tbl->bootloader[0].load_addr = CONFIG_SPL_TEXT_BASE;
- 	bct_tbl->bootloader[0].length = ebt_size;
- 
--	ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
--	if (ret)
--		return 1;
-+	if (encrypted) {
-+		ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
-+		if (ret)
-+			return 1;
-+	}
- 
- 	ret = sign_enc_data_block(bct, BCT_LENGTH, bct_hash, sbk);
- 	if (ret)
-diff --git a/arch/arm/mach-tegra/tegra30/bct.c b/arch/arm/mach-tegra/tegra30/bct.c
-index c56958da69..cff1a3e98d 100644
---- a/arch/arm/mach-tegra/tegra30/bct.c
-+++ b/arch/arm/mach-tegra/tegra30/bct.c
-@@ -11,6 +11,9 @@
- #include "bct.h"
- #include "uboot_aes.h"
- 
-+/* Device with "sbk burned: false" will expose zero key */
-+const u8 nosbk[AES128_KEY_LENGTH] = { 0 };
++}
++#endif
 +
- /*
-  * @param  bct		boot config table start in RAM
-  * @param  ect		bootloader start in RAM
-@@ -23,22 +26,27 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
- 	u8 ebt_hash[AES128_KEY_LENGTH] = { 0 };
- 	u8 sbk[AES128_KEY_LENGTH] = { 0 };
- 	u8 *bct_hash = bct;
-+	bool encrypted;
- 	int ret;
- 
- 	bct += BCT_HASH;
- 
-+	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
+ int board_late_init(void)
+ {
+ #if defined(CONFIG_TEGRA_SUPPORT_NON_SECURE)
+@@ -268,6 +303,14 @@ int board_late_init(void)
+ #endif
+ 	start_cpu_fan();
+ 	cboot_late_init();
 +
- 	memcpy(sbk, (u8 *)(bct + BCT_LENGTH),
- 	       NVBOOT_CMAC_AES_HASH_LENGTH * 4);
++	/*
++	 * Perform generic env setup in case
++	 * vendor does not provide it.
++	 */
++#ifndef CONFIG_TEGRA186
++	nvidia_board_late_init_generic();
++#endif
+ 	nvidia_board_late_init();
  
--	ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
--	if (ret)
--		return 1;
-+	encrypted = memcmp(&sbk, &nosbk, AES128_KEY_LENGTH);
- 
--	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
-+	if (encrypted) {
-+		ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
-+		if (ret)
-+			return 1;
- 
--	ret = encrypt_data_block(ebt, ebt_size, sbk);
--	if (ret)
--		return 1;
-+		ret = encrypt_data_block(ebt, ebt_size, sbk);
-+		if (ret)
-+			return 1;
-+	}
- 
- 	ret = sign_enc_data_block(ebt, ebt_size, ebt_hash, sbk);
- 	if (ret)
-@@ -52,9 +60,11 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
- 	bct_tbl->bootloader[0].load_addr = CONFIG_SPL_TEXT_BASE;
- 	bct_tbl->bootloader[0].length = ebt_size;
- 
--	ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
--	if (ret)
--		return 1;
-+	if (encrypted) {
-+		ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
-+		if (ret)
-+			return 1;
-+	}
- 
- 	ret = sign_enc_data_block(bct, BCT_LENGTH, bct_hash, sbk);
- 	if (ret)
+ 	return 0;
 -- 
 2.39.2
 
