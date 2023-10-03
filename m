@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B403AE7542B
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:21:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3C51E7542B
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:22:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 420F787165;
+	by phobos.denx.de (Postfix) with ESMTP id 9F9B8871E7;
 	Tue,  3 Oct 2023 08:21:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mbEKCQ61";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="X5AA0zER";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 066D9871DB; Tue,  3 Oct 2023 08:21:47 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id CCCF1871E2; Tue,  3 Oct 2023 08:21:48 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1CD387165
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:21:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E375086E15
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:21:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2c15463ddd4so5498141fa.3
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:21:44 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2c28e35752cso6392411fa.0
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:21:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696314104; x=1696918904; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696314105; x=1696918905; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ANLIjtPoT6SG2XGbIRx4qpZAMR/iRxcgjWpKbr7R2AA=;
- b=mbEKCQ61W1eVo3s7uorOMubMaLhWu2Zp+imPFsYWzJwGftS+kYydd3r09qhjhJLKF+
- d4wn0K1fakBBySO+vZARS8xn6c1sCl/9gNo7fi2zGGs6TwGOx6czf/8GGpbrH1gqPn6j
- EZkoQNmohoxJskovVA5uBtQ+D6mruiogSjmXys/rYo0bu9U6q0H52XIthJD7QVtiufHi
- tzV3Ruy6T4esllt0bEjE+ZL3kg2BrzgCVvi8NbKlf2hKPeZvNSyXuGkTIsSp/ycNeJWG
- Y5dBv83/fK+wTxHiaYgLY5vVZ+n7kz4gKy+LxkGqKk8pghy2Ue+Ix8WluLV/ztpkVmZL
- bB4w==
+ bh=133KeprTV/vR0eagW5kUqY7IWB39BGwuNCAQ+zim7o4=;
+ b=X5AA0zERXKuh2K57tXfpKg2cz5O17AIHhLXcopby7ud1Bfb3du15ntdx9dGbKrmXsY
+ zrrCYR7WvbS1qKBi5zf0Jh1w1OqGOFn4MY2YKNkkXwJ5Dksd6tMBO6K+EVtZieaDVU+v
+ 9jlGuX468IEAkytBLCxfQzQHWJ8HRY6f8iXVLyDgHvWSs6WHEJIeDLk48qEGEN9xcTXC
+ ZdHtBq6QBQqynyjeorqKFuf4tG5WecHd8X3Sg6Vb33GLDN+Pl485XpohdaTt6B6CB5Ao
+ h2WCpGHET8lKRUw0+Ix/XPny36Dte7Brqlut6R52J5uqMogVyv5xFWSgf5lN2plbkCk0
+ o4Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696314104; x=1696918904;
+ d=1e100.net; s=20230601; t=1696314105; x=1696918905;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ANLIjtPoT6SG2XGbIRx4qpZAMR/iRxcgjWpKbr7R2AA=;
- b=eMyw170e5vGKL87SytQj9xPTxDesn8rAiXM6Z3GdfOG9KOhE30k5yeSt5uUrl37siz
- 4IEnbZyeEKmbMYD/uw5FFFNZWXAZPDx+z0a3S8sju1Two9DJIyBU6jRZESfLhDt/h0r2
- s37uQAluplTVZHucEUJP+91tWnj4VF1OMYgAbmJFzMt8l3xT/KPguXM/Wc4k3G+dfvoP
- +TBxNQ8QflilDdTYzCsXz5IC9aBmKgfvRH7p1GfGLFWqjvk3lMJvJPW0jlzDoqbqC2I6
- IJN99zbvwo2wVywY/XtLfhTU/kQhTOH1x+HWX6J5tG5Yv9C/xC0m3TB1fqmhFSKBfVDX
- KudQ==
-X-Gm-Message-State: AOJu0YziuyupH2BGWYtCTmtfqFlNQ4AfKed7al+gSJza0RUF3pVVJy2H
- jqTIg1ne6giaJGlTJ0u6yO0=
-X-Google-Smtp-Source: AGHT+IFJUro5wbB+FcKkA5/690IdtnO+34dFuefOrf7Rti2e1q9yfjTuqIxeepWM/4tf9OH4T943Sg==
-X-Received: by 2002:a2e:9914:0:b0:2c0:2ab7:9aae with SMTP id
- v20-20020a2e9914000000b002c02ab79aaemr11395562lji.11.1696314103966; 
- Mon, 02 Oct 2023 23:21:43 -0700 (PDT)
+ bh=133KeprTV/vR0eagW5kUqY7IWB39BGwuNCAQ+zim7o4=;
+ b=xEaAknFB3nbabNy/7rNmkoVt9BY3mv7WXjKbxCUK3Dshho/fNyEGA1uWLIli2Wlt50
+ oyYRrXbWMjVMh9381aqSEr07VuV2f+wUJG8v4XhVlZIv1Y0Tj4IGq47Ze19oCttW8W+1
+ eTft0D/dOjNNJf4z42nieuttMjTXAh9rnYAL9iKOxxJx/fJHXDr+yreVKDV4S3q1slEl
+ 6sE0rn3BCTG03cGRdY+mUEiJsxySKU874mf8pNHNixfdCe5ctMJ00Nl6FMGdusMeXtOp
+ la2njS85aTJYZdk5ARU6Bup+4d6xqeRYFJMIHODXw4KS/RvJgUM7bc+5doZ9yP/BlmBQ
+ F9rg==
+X-Gm-Message-State: AOJu0Yw9GmL1ma40DFdMOZWfoj51cqMheo1+fLXBEEke5Pnm0gsjHatg
+ 9coOyFcwOp1f4vxcFQG5X8o=
+X-Google-Smtp-Source: AGHT+IFhYTBjBHfhMFUCotjzWbttuBEwyUSRv7QwC4BeM31ftQMsgwzwjgEm4n5Yl4dNQShK8vtj3Q==
+X-Received: by 2002:a2e:a404:0:b0:2bc:b75e:b8b with SMTP id
+ p4-20020a2ea404000000b002bcb75e0b8bmr12156803ljn.38.1696314104955; 
+ Mon, 02 Oct 2023 23:21:44 -0700 (PDT)
 Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- n4-20020a2e86c4000000b002bfba0d26bcsm103594ljj.8.2023.10.02.23.21.43
+ n4-20020a2e86c4000000b002bfba0d26bcsm103594ljj.8.2023.10.02.23.21.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 23:21:43 -0700 (PDT)
+ Mon, 02 Oct 2023 23:21:44 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
  Jonas Karlman <jonas@kwiboo.se>, Svyatoslav Ryhel <clamor95@gmail.com>,
@@ -70,10 +70,10 @@ To: Jaehoon Chung <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  John Keeping <john@metanate.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v4 1/4] power: regulator: expand basic reference counter onto
- all uclass
-Date: Tue,  3 Oct 2023 09:21:23 +0300
-Message-Id: <20231003062126.42026-2-clamor95@gmail.com>
+Subject: [PATCH v4 2/4] test: dm: regulator: test counter in
+ set_enable_if_allowed test
+Date: Tue,  3 Oct 2023 09:21:24 +0300
+Message-Id: <20231003062126.42026-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231003062126.42026-1-clamor95@gmail.com>
 References: <20231003062126.42026-1-clamor95@gmail.com>
@@ -95,183 +95,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Commit is based on 4fcba5d ("regulator: implement basic reference
-counter") but expands the idea to all regulators instead of just
-fixed/gpio regulators.
+Emulate use of the regulator by a few consumers with balanced on/off
+calls.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- drivers/power/regulator/regulator-uclass.c | 41 ++++++++++++++++++++++
- drivers/power/regulator/regulator_common.c | 22 ------------
- drivers/power/regulator/regulator_common.h | 21 -----------
- include/power/regulator.h                  |  2 ++
- 4 files changed, 43 insertions(+), 43 deletions(-)
+ test/dm/regulator.c | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 
-diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index d5a79d861c..4b2c6c2964 100644
---- a/drivers/power/regulator/regulator-uclass.c
-+++ b/drivers/power/regulator/regulator-uclass.c
-@@ -159,6 +159,25 @@ int regulator_get_enable(struct udevice *dev)
- 	return ops->get_enable(dev);
- }
+diff --git a/test/dm/regulator.c b/test/dm/regulator.c
+index 86f4862d9d..33115daaf5 100644
+--- a/test/dm/regulator.c
++++ b/test/dm/regulator.c
+@@ -194,6 +194,24 @@ int dm_test_power_regulator_set_enable_if_allowed(struct unit_test_state *uts)
+ 	ut_assertok(regulator_set_enable_if_allowed(dev, val_set));
+ 	ut_asserteq(regulator_get_enable(dev), !val_set);
  
-+/*
-+ * Enable or Disable a regulator
-+ *
-+ * This is a reentrant function and subsequent calls that enable will
-+ * increase an internal counter, and disable calls will decrease the counter.
-+ * The actual resource will be enabled when the counter gets to 1 coming from 0,
-+ * and disabled when it reaches 0 coming from 1.
-+ *
-+ * @dev: regulator device
-+ * @enable: bool indicating whether to enable or disable the regulator
-+ * @return:
-+ * 0 on Success
-+ * -EBUSY if the regulator cannot be disabled because it's requested by
-+ *        another device
-+ * -EALREADY if the regulator has already been enabled or has already been
-+ *        disabled
-+ * -EACCES if there is no possibility to enable/disable the regulator
-+ * -ve on different error situation
-+ */
- int regulator_set_enable(struct udevice *dev, bool enable)
- {
- 	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
-@@ -172,6 +191,23 @@ int regulator_set_enable(struct udevice *dev, bool enable)
- 	if (!enable && uc_pdata->always_on)
- 		return -EACCES;
- 
-+	/* If previously enabled, increase count */
-+	if (enable && uc_pdata->enable_count > 0) {
-+		uc_pdata->enable_count++;
-+		return -EALREADY;
-+	}
++	/* Set the Enable of LDO1 - default is disabled */
++	platname = regulator_names[LDO1][PLATNAME];
++	ut_assertok(regulator_get_by_platname(platname, &dev));
++	ut_assertok(regulator_set_enable_if_allowed(dev, true));
 +
-+	if (!enable) {
-+		if (uc_pdata->enable_count > 1) {
-+			/* If enabled multiple times, decrease count */
-+			uc_pdata->enable_count--;
-+			return -EBUSY;
-+		} else if (!uc_pdata->enable_count) {
-+			/* If already disabled, do nothing */
-+			return -EALREADY;
-+		}
-+	}
++	/* Get the Enable state of LDO1 and compare it with the requested one */
++	ut_asserteq(regulator_get_enable(dev), true);
 +
- 	if (uc_pdata->ramp_delay)
- 		old_enable = regulator_get_enable(dev);
- 
-@@ -187,6 +223,11 @@ int regulator_set_enable(struct udevice *dev, bool enable)
- 		}
- 	}
- 
-+	if (enable)
-+		uc_pdata->enable_count++;
-+	else
-+		uc_pdata->enable_count--;
++	/* Emulate second consumer */
++	ut_assertok(regulator_set_enable_if_allowed(dev, true));
++	ut_asserteq(regulator_get_enable(dev), true);
 +
- 	return ret;
- }
- 
-diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
-index 0116fa01bb..62d06bf616 100644
---- a/drivers/power/regulator/regulator_common.c
-+++ b/drivers/power/regulator/regulator_common.c
-@@ -74,23 +74,6 @@ int regulator_common_set_enable(const struct udevice *dev,
- 		return 0;
- 	}
- 
--	/* If previously enabled, increase count */
--	if (enable && plat->enable_count > 0) {
--		plat->enable_count++;
--		return -EALREADY;
--	}
--
--	if (!enable) {
--		if (plat->enable_count > 1) {
--			/* If enabled multiple times, decrease count */
--			plat->enable_count--;
--			return -EBUSY;
--		} else if (!plat->enable_count) {
--			/* If already disabled, do nothing */
--			return -EALREADY;
--		}
--	}
--
- 	ret = dm_gpio_set_value(&plat->gpio, enable);
- 	if (ret) {
- 		pr_err("Can't set regulator : %s gpio to: %d\n", dev->name,
-@@ -105,10 +88,5 @@ int regulator_common_set_enable(const struct udevice *dev,
- 	if (!enable && plat->off_on_delay_us)
- 		udelay(plat->off_on_delay_us);
- 
--	if (enable)
--		plat->enable_count++;
--	else
--		plat->enable_count--;
--
++	/* Emulate one of counsumers disable call */
++	ut_assertok(regulator_set_enable_if_allowed(dev, false));
++
++	/* Regulator should still be on since counter indicates one consumer active */
++	ut_asserteq(regulator_get_enable(dev), true);
++
  	return 0;
  }
-diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
-index d4962899d8..15f1fa4c93 100644
---- a/drivers/power/regulator/regulator_common.h
-+++ b/drivers/power/regulator/regulator_common.h
-@@ -13,7 +13,6 @@ struct regulator_common_plat {
- 	struct gpio_desc gpio; /* GPIO for regulator enable control */
- 	unsigned int startup_delay_us;
- 	unsigned int off_on_delay_us;
--	unsigned int enable_count;
- };
- 
- int regulator_common_of_to_plat(struct udevice *dev,
-@@ -21,26 +20,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
- 				char *enable_gpio_name);
- int regulator_common_get_enable(const struct udevice *dev,
- 	struct regulator_common_plat *plat);
--/*
-- * Enable or Disable a regulator
-- *
-- * This is a reentrant function and subsequent calls that enable will
-- * increase an internal counter, and disable calls will decrease the counter.
-- * The actual resource will be enabled when the counter gets to 1 coming from 0,
-- * and disabled when it reaches 0 coming from 1.
-- *
-- * @dev: regulator device
-- * @plat: Platform data
-- * @enable: bool indicating whether to enable or disable the regulator
-- * @return:
-- * 0 on Success
-- * -EBUSY if the regulator cannot be disabled because it's requested by
-- *        another device
-- * -EALREADY if the regulator has already been enabled or has already been
-- *        disabled
-- * -EACCES if there is no possibility to enable/disable the regulator
-- * -ve on different error situation
-- */
- int regulator_common_set_enable(const struct udevice *dev,
- 	struct regulator_common_plat *plat, bool enable);
- 
-diff --git a/include/power/regulator.h b/include/power/regulator.h
-index 200652cb3d..1c7995bd5d 100644
---- a/include/power/regulator.h
-+++ b/include/power/regulator.h
-@@ -159,6 +159,7 @@ enum regulator_flag {
-  * @name**     - fdt regulator name - should be taken from the device tree
-  * ctrl_reg:   - Control register offset used to enable/disable regulator
-  * volt_reg:   - register offset for writing voltage vsel values
-+ * enable_count - counter of enable calls for this regulator
-  *
-  * Note:
-  * *  - set automatically on device probe by the uclass's '.pre_probe' method.
-@@ -185,6 +186,7 @@ struct dm_regulator_uclass_plat {
- 	u8 volt_reg;
- 	bool suspend_on;
- 	u32 suspend_uV;
-+	u32 enable_count;
- };
- 
- /* Regulator device operations */
+ DM_TEST(dm_test_power_regulator_set_enable_if_allowed, UT_TESTF_SCAN_FDT);
 -- 
 2.39.2
 
