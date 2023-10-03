@@ -4,71 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 592D0E7AD41
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:26:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 369AEE7AD46
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:40:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F6DA86E26;
-	Tue,  3 Oct 2023 15:26:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 806F086E28;
+	Tue,  3 Oct 2023 15:40:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kyJgvAPp";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QM0R7cZB";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="q7xVR7Mw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D216987257; Tue,  3 Oct 2023 15:26:05 +0200 (CEST)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A9C4E86E1E; Tue,  3 Oct 2023 15:40:43 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3B9D8634D
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:26:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA53586E28
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:40:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jaswinder.singh@linaro.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-d8181087dc9so943830276.3
- for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 06:26:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696339562; x=1696944362; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VKvN9yiZH6xOqoXAQQ0tYudaznEMQTVupcnMD5i5q7c=;
- b=kyJgvAPps1CxsoPTM8OYQsIRYcdGWP50iV7NjfZywYbOouLOEetvSPD/XQlOa5Ili+
- M6RSeTEE4orzSWw2k3NcdIOaN9GriiHxTlIPUhaaIzJKCK89b+PHhohF2g8ZF2baQ3TF
- /ZMLPjsGvz0NcZUIVxnEl4GXG/0HFD0RTABP67Ti4dPQm5uYeCD72/1VoRXgRfebrwzz
- BLjNHZhYpB3vsmbsjSZ0tt8sICpBvcHmt/mCW6HMmIPLMvfkgph7tpLIlblXWNakowkY
- c1F5/YHXrJs2XjxCn91FxDUCGPVxf5G+woWS4Pch43ll0S/dEuU5xMNJgIdGPSn9WD0A
- xo2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696339562; x=1696944362;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VKvN9yiZH6xOqoXAQQ0tYudaznEMQTVupcnMD5i5q7c=;
- b=m1WkVfKByDW0CysKPsHT09oqgEGybs30rcUZPG+NAbq+AOvUyFl+ds/LdcdINtHYe9
- 1UsNSEWJhZAs2i49XT0H7zVo7ungWvurQowBkg6DD9C2yilNlpz6fu8x1+cZRp/fKb5W
- YDl0NFOJUuzFx5CyT2JHvP1i3tCraKzRRdSknCITzhcoVQTOqYf0N69j0OtBSm7y3bgr
- xLD9uw9VgB2fS10lLwp59VdJwRT1U/qUXogbrHzZjhN3e6rKAjMysRFa72vP/2MeHH5Z
- 1G/gbfrX/y4aEPDysW1pBkPuKEhWCvyS/rPbHY/PKGeAu0lR2fNMIIV863iVlzJTPnPs
- CQ1w==
-X-Gm-Message-State: AOJu0YzZkQanXwX2dVnVhnW8jee/YstdR9CK1kZq3D9oS2Nw11TbisSD
- vnyZXAHG4kwrSVypZ0euz1AvgfwoAWmyobgSGbus4w==
-X-Google-Smtp-Source: AGHT+IHX3uR0SbLFguyk2Sg5wRlhbVKoOvmGsYfBTe2p+1EegtB4u1B1dNAMad0fGG+5IGLPidPZfEzxDxa6nHo07Do=
-X-Received: by 2002:a25:6086:0:b0:d8d:4913:9f39 with SMTP id
- u128-20020a256086000000b00d8d49139f39mr7544197ybb.46.1696339562297; Tue, 03
- Oct 2023 06:26:02 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4S0JqX4Q1wz9spZ;
+ Tue,  3 Oct 2023 15:40:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1696340440;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=urDJqzqG1o3ubA3QzhDZShlYMlEDP8n3zJBX437fKaE=;
+ b=QM0R7cZBu8EzSRym/CGSg+TXOCnpJTcQMW++yIqq1jBoVV/kgxWPdNwz862tCFR/pU16oF
+ 1OrBLEqhPOvQtZFhYxYlK340qmpK0mjspDa1e42FhaHaeaCAZ2aPn7Ytu9hl5Z8dzyp6Q8
+ LTEpNncQSqL+ZsUfp+e/re22OpuMsUsQgQGNL0YWAy7X7x+CVInfohrhzDrtpf0/ydSnLo
+ wrV3pG6bW6AGBuj6G8P+eIe1NFN88MnA3iQjoavOxWhIHEeRPoIHUwca1xtCsVQmieT3qk
+ hK2p2qmmLKqnn71NmuSgPnMDB93NdkIZ1hocH9rrfAGk/G4ud9yfdiLtZ90VtQ==
+Message-ID: <ce466f52-f91d-9fb9-fe18-b58cefac5b20@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1696340438;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=urDJqzqG1o3ubA3QzhDZShlYMlEDP8n3zJBX437fKaE=;
+ b=q7xVR7MwwvEONYlUv2Y/VMwjn/Axe1FEO2PEEfLi1k/WTGrDGAx/i2Rxh1yTXGqpM0PdA2
+ kif+t1qf2sNeI7YvieSz5D4GuhdPWrwTltNpdTO0UjvSTrhLpOCE6BVIaqaqN4IsijD+Zp
+ TjD2ZeLZPQJnCuYXmWsX0A0K9Xi6JuWVz79qmEM/zLCaOxBkB3D1b0dj1D8R4x0j/w8RjA
+ dVlAB1IkIisM/lpCt2V76dnrjngr/zwO7pbMPCtCmUQj1mySk7A8jztNu9d2es2su6116i
+ PXxVu2ynGEfZ9T8kEOoGodo5SI8h+bUYY4/i2oBPCfqxNLLxW5HsiqFXnLNKdQ==
+Date: Tue, 3 Oct 2023 14:42:40 +0200
 MIME-Version: 1.0
-References: <20231003022957.1743493-1-masahisa.kojima@linaro.org>
-In-Reply-To: <20231003022957.1743493-1-masahisa.kojima@linaro.org>
-From: Jassi Brar <jaswinder.singh@linaro.org>
-Date: Tue, 3 Oct 2023 08:25:51 -0500
-Message-ID: <CAJe_ZhfRhscaYFkqKYFUCu=vxYDBpuSk_KDdSgpG9MN5LP-CkA@mail.gmail.com>
-Subject: Re: [PATCH] board: synquacer: set actual gd->ram_top and gd->ram_size
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Ryosuke Saito <ryosuke.saito@linaro.org>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH 01/16] serial: sh: Fix compile error when lacking HSCIF
+ support
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>, Simon Glass <sjg@chromium.org>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-2-paul.barker.ct@bp.renesas.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20230920124212.63535-2-paul.barker.ct@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 8ba742d30136e15bd9c
+X-MBO-RS-META: 6babgzrauzbf4guuw9g77ygkzz4r3b5s
+X-Rspamd-Queue-Id: 4S0JqX4Q1wz9spZ
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,20 +92,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2 Oct 2023 at 21:31, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
->
-> Current gd->ram_size and gd->ram_top reflect only the
-> first DRAM bank even if the SynQuacer Developerbox could
-> have up to three DRAM banks.
-> With the commit 06d514d77c37 ("lmb: consider EFI memory map"),
-> the first DRAM bank indicates <4GB address, so whole >4GB memory
-> is marked as EFI_BOOT_SERVICES_DATA and it results that
-> U-Boot can not access >4GB memory.
->
-> Since 64-bits DRAM address is fully available on the SynQuacer
-> Developerbox, let's set the installed DIMM information to
-> gd->ram_top and gd->ram_size.
->
-> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+On 9/20/23 14:41, Paul Barker wrote:
+> If we attempt to compile serial_sh.c for a system which lacks HSCIF
+> support (e.g. R8A7740), we see the following compilation error:
+> 
+>      In file included from drivers/serial/serial_sh.c:20:
+>      drivers/serial/serial_sh.c: In function ‘sh_serial_init_generic’:
+>      drivers/serial/serial_sh.h:429:35: warning: implicit declaration of function ‘sci_HSSRR_out’; did you mean ‘sci_SCSCR_out’? [-Wimplicit-function-declaration]
+>        429 | #define sci_out(port, reg, value) sci_##reg##_out(port, value)
+>            |                                   ^~~~
+>      drivers/serial/serial_sh.c:62:17: note: in expansion of macro ‘sci_out’
+>         62 |                 sci_out(port, HSSRR, HSSRR_SRE | HSSRR_SRCYC8);
+>            |                 ^~~~~~~
+> 
+> To fix this, only try to support access to the HSSRR register for SoCs
+> where it actually exists.
+> 
+> Fixes: bbe36e29ca2c ('serial: sh: Add HSCIF support for R-Car SoC')
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> Cc: Hai Pham <hai.pham.ud@renesas.com>
+> Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Cc: Simon Glass <sjg@chromium.org>
+> ---
+>   drivers/serial/serial_sh.c | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
+> index 20cda5dbe272..5e543dbf3d58 100644
+> --- a/drivers/serial/serial_sh.c
+> +++ b/drivers/serial/serial_sh.c
+> @@ -58,8 +58,10 @@ static void sh_serial_init_generic(struct uart_port *port)
+>   	sci_out(port, SCSPTR, 0x0003);
+>   #endif
+>   
+> +#if IS_ENABLED(CONFIG_RCAR_GEN2) || IS_ENABLED(CONFIG_RCAR_GEN3) || IS_ENABLED(CONFIG_RCAR_GEN4)
 
-Acked-by: Jassi Brar <jaswinder.singh@linaro.org>
+There should be CONFIG_RCAR_64 for GEN3+GEN4, please use it.
+
+With that fixed:
+
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
