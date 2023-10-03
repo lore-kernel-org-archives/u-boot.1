@@ -4,68 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 441B8E7544E
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 11:25:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D249E75426
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 12:12:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7804F871B0;
-	Tue,  3 Oct 2023 13:24:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B7A2F86D2D;
+	Tue,  3 Oct 2023 14:12:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cKaCGSLw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 105FD871E1; Tue,  3 Oct 2023 13:24:57 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 214BA8719F
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 13:24:55 +0200 (CEST)
+ id 97C1187165; Tue,  3 Oct 2023 08:12:20 +0200 (CEST)
+Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com
+ [61.152.239.71]) by phobos.denx.de (Postfix) with ESMTP id 1B09D86E14
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:12:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 393BOrXZ064525;
- Tue, 3 Oct 2023 06:24:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696332293;
- bh=4ok4sQSof1RTlClOgAcfzhAI+DhemBHACwnuELfT9r4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=cKaCGSLw2x3TUJMV31CfEdoFqVJakrkVgwUAJ5cnAn/q9vOJBkfabzyFS9A8b91ac
- 1zErMZUtluZQz5L2k6hEn+oBS3U/pqWwx9Y22soySr8+pAa35Jmv2kUTcodFiGJ8Az
- 45sPu/jhDyOVcqOYNqjZXSP2DDzXAMEm54djOr7w=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 393BOrrb012515
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 3 Oct 2023 06:24:53 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
- Oct 2023 06:24:53 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 3 Oct 2023 06:24:53 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 393BOqjE005624;
- Tue, 3 Oct 2023 06:24:52 -0500
-Date: Tue, 3 Oct 2023 06:24:52 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Nitin Yadav <n-yadav@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 2/4] arm: dts: Add support for AM62x LP SK
-Message-ID: <20231003112452.pwyvalz62ft4frgl@rockslide>
-References: <20230927082105.3729470-1-n-yadav@ti.com>
- <20230927082105.3729470-3-n-yadav@ti.com>
- <20230927115231.i3kg3wvpvqmmexnd@dazzling>
- <d51d4e84-71b8-1282-0007-7b5f1061e012@ti.com>
- <20230928143015.gzofmiqtjyh2ls57@darkening>
- <ba65c9e4-b280-c715-1467-56fbcbbec70b@ti.com>
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=weiliang.lim@starfivetech.com
+Received: from EXMBX165.cuchost.com (unknown [175.102.18.54])
+ (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+ (Client CN "EXMBX165", Issuer "EXMBX165" (not verified))
+ by fd01.gateway.ufhost.com (Postfix) with ESMTP id B38D424DC31
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 14:12:12 +0800 (CST)
+Received: from EXMBX167.cuchost.com (172.16.6.77) by EXMBX165.cuchost.com
+ (172.16.6.75) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 3 Oct
+ 2023 14:12:12 +0800
+Received: from EXMBX163.cuchost.com (172.16.7.73) by EXMBX167.cuchost.com
+ (172.16.6.77) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 3 Oct
+ 2023 14:12:11 +0800
+Received: from EXMBX163.cuchost.com ([fe80::f887:9bab:b86b:e804]) by
+ EXMBX163.cuchost.com ([fe80::f887:9bab:b86b:e804%17]) with mapi id
+ 15.00.1497.044; Tue, 3 Oct 2023 14:12:11 +0800
+From: WeiLiang Lim <weiliang.lim@starfivetech.com>
+To: KuanLim.Lee <kuanlim.lee@starfivetech.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: RE: [PATCH] timer: starfive: Add Starfive timer support
+Thread-Topic: [PATCH] timer: starfive: Add Starfive timer support
+Thread-Index: AQHZ6stHsy74hv74/0SP3GuD9FJCXbA3qy0w
+Date: Tue, 3 Oct 2023 06:12:11 +0000
+Message-ID: <917d54924df44252817d44f92e210209@EXMBX163.cuchost.com>
+References: <20230919073049.1418-1-kuanlim.lee@starfivetech.com>
+In-Reply-To: <20230919073049.1418-1-kuanlim.lee@starfivetech.com>
+Accept-Language: en-US, zh-CN
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [202.188.176.82]
+x-yovoleruleagent: yovoleflag
 Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <ba65c9e4-b280-c715-1467-56fbcbbec70b@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-Mailman-Approved-At: Tue, 03 Oct 2023 14:12:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,27 +71,154 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16:11-20231003, Nitin Yadav wrote:
-[...]
+Can anyone help review this patch please?
 
-> >>>
-> >>> NAK. should come from board.dts.
-> >>
-> >> am62sip support is also in the queue where we have only 512M of RAM.
-> >> That's why I'm adding this node in r5-sk.dts
-> > 
-> > NAK.
-> > 
-> > Do this cleanup in the context of the new platform addition - when you
-> > get it in the kernel first.
-> 
-> I haven't planned to have a kernel dt for am62sip as there is only
-> difference is DDR size which will be taken care by U-boot.
+> -----Original Message-----
+> From: KuanLim.Lee <kuanlim.lee@starfivetech.com>
+> Sent: Tuesday, September 19, 2023 3:31 PM
+> To: u-boot@lists.denx.de
+> Cc: WeiLiang Lim <weiliang.lim@starfivetech.com>; KuanLim.Lee
+> <kuanlim.lee@starfivetech.com>
+> Subject: [PATCH] timer: starfive: Add Starfive timer support
+>=20
+> Add timer driver in Starfive SoC. It is an timer that outside of CPU core=
+ and
+> inside Starfive SoC.
+>=20
+> Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+> Reviewed-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
+> ---
+>  drivers/timer/Kconfig          |  7 +++
+>  drivers/timer/Makefile         |  1 +
+>  drivers/timer/starfive-timer.c | 94
+> ++++++++++++++++++++++++++++++++++
+>  3 files changed, 102 insertions(+)
+>  create mode 100644 drivers/timer/starfive-timer.c
+>=20
+> diff --git a/drivers/timer/Kconfig b/drivers/timer/Kconfig index
+> 915b2af160..a98be9dfae 100644
+> --- a/drivers/timer/Kconfig
+> +++ b/drivers/timer/Kconfig
+> @@ -326,4 +326,11 @@ config XILINX_TIMER
+>  	  Select this to enable support for the timer found on
+>  	  any Xilinx boards (axi timer).
+>=20
+> +config STARFIVE_TIMER
+> +	bool "Starfive timer support"
+> +	depends on TIMER
+> +	help
+> +	  Select this to enable support for the timer found on
+> +	  Starfive SoC.
+> +
+>  endmenu
+> diff --git a/drivers/timer/Makefile b/drivers/timer/Makefile index
+> 1ca74805fd..1ef814970b 100644
+> --- a/drivers/timer/Makefile
+> +++ b/drivers/timer/Makefile
+> @@ -34,3 +34,4 @@ obj-$(CONFIG_MTK_TIMER)		+=3D
+> mtk_timer.o
+>  obj-$(CONFIG_MCHP_PIT64B_TIMER)	+=3D mchp-pit64b-timer.o
+>  obj-$(CONFIG_IMX_GPT_TIMER)	+=3D imx-gpt-timer.o
+>  obj-$(CONFIG_XILINX_TIMER)	+=3D xilinx-timer.o
+> +obj-$(CONFIG_STARFIVE_TIMER)	+=3D starfive-timer.o
+> diff --git a/drivers/timer/starfive-timer.c b/drivers/timer/starfive-time=
+r.c new
+> file mode 100644 index 0000000000..816402fdbf
+> --- /dev/null
+> +++ b/drivers/timer/starfive-timer.c
+> @@ -0,0 +1,94 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2022 StarFive, Inc. All rights reserved.
+> + *   Author: Lee Kuan Lim <kuanlim.lee@starfivetech.com>
+> + */
+> +
+> +#include <common.h>
+> +#include <clk.h>
+> +#include <dm.h>
+> +#include <time.h>
+> +#include <timer.h>
+> +#include <asm/io.h>
+> +#include <dm/device-internal.h>
+> +#include <linux/err.h>
+> +
+> +#define	STF_TIMER_INT_STATUS	0x00
+> +#define STF_TIMER_CTL		0x04
+> +#define STF_TIMER_LOAD		0x08
+> +#define STF_TIMER_ENABLE	0x10
+> +#define STF_TIMER_RELOAD	0x14
+> +#define STF_TIMER_VALUE		0x18
+> +#define STF_TIMER_INT_CLR	0x20
+> +#define STF_TIMER_INT_MASK	0x24
+> +
+> +struct starfive_timer_priv {
+> +	void __iomem *base;
+> +	u32 timer_size;
+> +};
+> +
+> +static u64 notrace starfive_get_count(struct udevice *dev) {
+> +	struct starfive_timer_priv *priv =3D dev_get_priv(dev);
+> +
+> +	/* Read decrement timer value and convert to increment value */
+> +	return priv->timer_size - readl(priv->base + STF_TIMER_VALUE); }
+> +
+> +static const struct timer_ops starfive_ops =3D {
+> +	.get_count =3D starfive_get_count,
+> +};
+> +
+> +static int starfive_probe(struct udevice *dev) {
+> +	struct timer_dev_priv *uc_priv =3D dev_get_uclass_priv(dev);
+> +	struct starfive_timer_priv *priv =3D dev_get_priv(dev);
+> +	int timer_channel;
+> +	struct clk clk;
+> +	int ret;
+> +
+> +	priv->base =3D dev_read_addr_ptr(dev);
+> +	if (IS_ERR(priv->base))
+> +		return PTR_ERR(priv->base);
+> +
+> +	timer_channel =3D dev_read_u32_default(dev, "channel", 0);
+> +	priv->base =3D priv->base + (0x40 * timer_channel);
+> +
+> +	/* Get clock rate from channel selectecd*/
+> +	ret =3D clk_get_by_index(dev, timer_channel, &clk);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret =3D clk_enable(&clk);
+> +	if (ret)
+> +		return ret;
+> +	uc_priv->clock_rate =3D clk_get_rate(&clk);
+> +
+> +	/* Initiate timer, channel 0 */
+> +	/* Unmask Interrupt Mask */
+> +	writel(0, priv->base + STF_TIMER_INT_MASK);
+> +	/* Single run mode Setting */
+> +	if (dev_read_bool(dev, "single-run"))
+> +		writel(1, priv->base + STF_TIMER_CTL);
+> +	/* Set Reload value */
+> +	priv->timer_size =3D dev_read_u32_default(dev, "timer-size", 0xffffffff=
+);
+> +	writel(priv->timer_size, priv->base + STF_TIMER_LOAD);
+> +	/* Enable to start timer */
+> +	writel(1, priv->base + STF_TIMER_ENABLE);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct udevice_id starfive_ids[] =3D {
+> +	{ .compatible =3D "starfive,jh8100-timers" },
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(jh8100_starfive_timer) =3D {
+> +	.name		=3D "jh8100_starfive_timer",
+> +	.id		=3D UCLASS_TIMER,
+> +	.of_match	=3D starfive_ids,
+> +	.probe		=3D starfive_probe,
+> +	.ops		=3D &starfive_ops,
+> +	.priv_auto	=3D sizeof(struct starfive_timer_priv),
+> +};
+> --
+> 2.34.1
 
-We can cross that bridge when we get to it - but overall, that sounds
-Assumption is wrong.
-
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
