@@ -4,93 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 136E8E776E5
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 00:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85A0CE776E5
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 01:00:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C506886DB5;
-	Tue,  3 Oct 2023 02:56:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A9C1C870D3;
+	Tue,  3 Oct 2023 02:59:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YNKFGizi";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pTaPDr/r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8FC886DDE; Tue,  3 Oct 2023 02:56:14 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 2870E870EB; Tue,  3 Oct 2023 02:59:58 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2E3B86D5A
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 02:56:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B29786D5A
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 02:59:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
+Received: from LT2ubnt.lan (ip-178-202-040-247.um47.pools.vodafone-ip.de
+ [178.202.40.247])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 246673F622
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 00:56:12 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 5836C3F2A0; 
+ Tue,  3 Oct 2023 00:59:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1696294572;
- bh=Ajv7zU45gF0vRIm5FD+KEw7CqhG3UAOVVz1GXG/xUNs=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=YNKFGizi2z+2wtcx3ZRu2/T3rylhr0jBpUqz6RLRuXjPg6EWuw5vXGK2NkT4vaF0J
- Mp2lrzTozv4/b5j6ADsgfsb6SgLZx3IivZqipDacejMtQw+8/F5Xlg4aOjmnm9imOq
- vnBEGC+SMkDa1b8qpbXkRqo0HKck6VhvrmDm7sXSE1ITYpMgwWlsP7mSAe68pK90DH
- xMZM0nn0ndtGHHSYOledy0kcOU4tQRyrlJ14cdV7sRPvnkG6a8+aNPy6M91dlJj/rR
- zoeW7dB90zIRLxZzbsaoqXLgpoZ2M7lSXonpKQRKp8VHg0a7VSUXETBN1qCbr7nwQX
- EZuBNLWCd/eew==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-3233a13b47eso318212f8f.1
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 17:56:12 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696294571; x=1696899371;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Ajv7zU45gF0vRIm5FD+KEw7CqhG3UAOVVz1GXG/xUNs=;
- b=GDPjcVYJ4RseF/dyMsTKSzP+X2FbEa6JqdCnxVLiMvgw7NB+ki9krPuwyP2VuwfR16
- DY22x/dUPcdpTa0ciWalkhm95hJpwjt8+bt6e/lSeq7qy2bDyiP/NJJ3QAdatfcA3i6S
- vqFh1V1TQZYjUU0l9TpPOMELLausdO3qfQ9baWjEiVxAXUigCWixHJ1LroNwp3+hFjLJ
- iH3AaAfazLchVBE3+V7mz5v9rfuN8DvVImybqXgTxh/Tv4OXTDNyPJthpeTjTyHjGPRG
- 4Mo6aInoV/B/XOWdY12NW1czgcLV8d77xU9wJu9h3FZwx/1D8pnBGPLb2FwIatcpIh6d
- XKkg==
-X-Gm-Message-State: AOJu0YyonlUQ7PqSKkqbR9PKjnAULWHxIIiFsEGbftSfFXQee1xw8yUV
- qgubw0ut+pZ3OQeHHHOq0AoeIjxbNg+8z2oUgHZpJlhJkmKoOeqtKvQn/LZpiTVsmECM6WL8Mzp
- tctdBCN3NRKg0zWViOxx7wwlmYxTRN+w=
-X-Received: by 2002:adf:f9cb:0:b0:319:7472:f0b6 with SMTP id
- w11-20020adff9cb000000b003197472f0b6mr11645825wrr.15.1696294571635; 
- Mon, 02 Oct 2023 17:56:11 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGye3Of5RPGmj/ADmPQy8VK3Na9PuC8lfJydWC7PqvxCUv1Yr6IpA5wJmWuZZBHkIUoqpANgQ==
-X-Received: by 2002:adf:f9cb:0:b0:319:7472:f0b6 with SMTP id
- w11-20020adff9cb000000b003197472f0b6mr11645814wrr.15.1696294571196; 
- Mon, 02 Oct 2023 17:56:11 -0700 (PDT)
-Received: from [172.25.0.170] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- f2-20020a056000128200b0032196c508e3sm216865wrx.53.2023.10.02.17.56.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 02 Oct 2023 17:56:10 -0700 (PDT)
-Message-ID: <41b5ec6b-7a7e-45dc-9365-4cd61cfc0501@canonical.com>
-Date: Tue, 3 Oct 2023 02:56:09 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/1] input: avoid NULL dereference
-Content-Language: en-US, de-DE
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@google.com>, u-boot@lists.denx.de,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-References: <20231002222725.25125-1-heinrich.schuchardt@canonical.com>
- <20231002224641.GB8465@bill-the-cat>
- <beb3e0aa-a72d-a4dc-4fed-3c2e0453e9f0@prevas.dk>
- <20231002234030.GC8465@bill-the-cat>
+ s=20210705; t=1696294794;
+ bh=tbgbUztb01cRQ8HOhnzXJ9lsMO9oxvxej1SYfPlVe+Y=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=pTaPDr/rzX8GwDvWeoxchUeVDdofQokqUlwHRGG9Rojz/NinRVOs0LPsXtq+f6+Je
+ sYzK9QrHexQ+YTU5D9ngtoIR4rVYtYq3SypaegnBiH51Woy5s9ms1ZdSoM7+ZdnNSv
+ HVFlF6FXR1MzYCf2TkClVwTIZPxm4rC0pfL66Uqg5wwbAanbPkTVBFIUDQFqu7Yvlj
+ gfaxCQ/LKKlpRvWK8fK8K7uVMIuwnhIpSPxcEdm5k7ZO/xTUgg22WuCS8azkEPW2YF
+ fjqeuKgYpsIpeZrg2vPPKr+WkqcD08aN16+vdiRhlBu6Grh5pJEUdD6jqbJhTN3psL
+ AlWfjgdaouzpA==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20231002234030.GC8465@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] sandbox: fix spl_board_init
+Date: Tue,  3 Oct 2023 02:59:46 +0200
+Message-Id: <20231003005946.97653-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,70 +69,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/3/23 01:40, Tom Rini wrote:
-> On Tue, Oct 03, 2023 at 01:37:14AM +0200, Rasmus Villemoes wrote:
->> On 03/10/2023 00.46, Tom Rini wrote:
->>> On Tue, Oct 03, 2023 at 12:27:25AM +0200, Heinrich Schuchardt wrote:
->>>>   
->>>>   	error = stdio_register(dev);
->>>> -#if !defined(CONFIG_SPL_BUILD) || CONFIG_IS_ENABLED(ENV_SUPPORT)
->>>> -	/* check if this is the standard input device */
->>>> -	if (!error && strcmp(env_get("stdin"), dev->name) == 0) {
->>>> -		/* reassign the console */
->>>> -		if (OVERWRITE_CONSOLE ||
->>>> -				console_assign(stdin, dev->name))
->>>> -			return -1;
->>>> +	if ((IS_ENABLED(SPL_BUILD) || CONFIG_IS_ENABLED(ENV_SUPPORT)) &&
->>>> +	    !error) {
->>>> +		const char *cstdin;
->>>> +
->>>> +		/* check if this is the standard input device */
->>>> +		cstdin = env_get("stdin");
->>>> +		if (cstdin && !strcmp(cstdin, dev->name)) {
->>>> +			/* reassign the console */
->>>> +			if (OVERWRITE_CONSOLE ||
->>>> +			    console_assign(stdin, dev->name))
->>>> +				return -1;
->>>> +		}
->>>>   	}
->>>> -#else
->>>> -	error = error;
->>>> -#endif
->>>>   
->>>>   	return 0;
->>>>   }
->>>
->>> This is an example I think of where #if is more readable.
->>>
->>
->> I kind of agree, but at the same time, this could just be rewritten to
->> avoid that extra indentation. Turn the condition around and make it an
->> early return, then the rest of the function need not be indented.
-> 
-> Yes, both the indentation and having to use "CONFIG_SPL_BUILD" to start
-> with (which is a special case!).
+sandbox_spl_defconfig with CONFIG_SPL_UNIT_TEST=n fails to build.
 
-The configuration check looks incorrect:
+    in function `spl_board_init':
+    arch/sandbox/cpu/spl.c:134:(.text.spl_board_init+0x4a):
+    undefined reference to `ut_run_list'
 
-Function get_env() only exists if CONFIG_$(SPL_TPL)_ENV_SUPPORT=y.
-There is no good reason to check for CONFIG_SPL_BUILD.
+Add the missing configuration check.
 
-Why do we have symbols CONFIG_SPL_INPUT and CONFIG_TPL_INPUT if there is 
-no board using these?
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/sandbox/cpu/spl.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Best regards
-
-Heinrich
-
-> 
->> I also think the conversion above is buggy (loses a ! on the SPL part),
->> but also, the condition is needlessly convoluted to begin with.
->> !defined(CONFIG_SPL_BUILD) implies ENV_SUPPORT, so the condition is
->> equivalent to just CONFIG_IS_ENABLED(ENV_SUPPORT). So I'd add a
->>
->>    if (!CONFIG_IS_ENABLED(ENV_SUPPORT)
->>      return 0;
-> 
-> Changes like that would make things overall better, agreed.
-> 
+diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
+index 09e3d10d6a..7590f1b80a 100644
+--- a/arch/sandbox/cpu/spl.c
++++ b/arch/sandbox/cpu/spl.c
+@@ -126,6 +126,9 @@ void spl_board_init(void)
+ {
+ 	struct sandbox_state *state = state_get_current();
+ 
++	if (!CONFIG_IS_ENABLED(UNIT_TEST))
++		return;
++
+ 	if (state->run_unittests) {
+ 		struct unit_test *tests = UNIT_TEST_ALL_START();
+ 		const int count = UNIT_TEST_ALL_COUNT();
+-- 
+2.40.1
 
