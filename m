@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AE30E75428
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:26:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC22CE75428
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:26:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FD1F87206;
+	by phobos.denx.de (Postfix) with ESMTP id 94AD387214;
 	Tue,  3 Oct 2023 08:25:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iZs1tvvo";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ikyhidk5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27C0687218; Tue,  3 Oct 2023 08:25:52 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 2E01B87203; Tue,  3 Oct 2023 08:25:52 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1235287203
+ by phobos.denx.de (Postfix) with ESMTPS id D1DD787211
  for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:25:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2c27d653856so47070491fa.0
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5043a01ee20so604953e87.0
  for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:25:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696314347; x=1696919147; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696314348; x=1696919148; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GVxD021MVTrYNE+DC0MuYlYJBSs2FO9uD+/gTJsLcNQ=;
- b=iZs1tvvoHW2xuKPMkXGnAnbt81/RvtsM67i2e2x4ZuyR8yoJXfmOK1SQhIzK5qjhJo
- ydjx6jdaLtqG1wCdO9N+NL6KoE53Z+hqow2W3EICQCKlit+sGRdwGEmc5j3IQvihsGlV
- aItm0C9rvG0w85AW+XZfZEjQh/M4dBz850N06+XWiuTenDG4lRxz8OLZVwTcglQEJvCD
- Y7Hh2N4DUJiEodT4nv2DTWM1uyJfpFHpZRzOwta/Mj7LNnXRWLvRoypdaNYg0gsDuFYr
- AYm1brevNHSYn3wt5o9xwYDZFq6R78S7AB3aY5207SDaIdkWo7fltvwkzQoVrT6nTOMX
- H19Q==
+ bh=cOAMR8uQ7AIukEgE07sxvY580KQDj+NcF1W0RijSo6o=;
+ b=ikyhidk5xTW9IPFD93U2uIomqYVbbWbWrF3jJA8XY3e7+lQw3SR04Fw2yG67F7+GO5
+ mSVv2mFTdOqWhu0bXAJrIPOBevjp9hc8knkaYgSMZL7COtnmRpoylw4vHEhdVEXLTbgV
+ OUNqhkE2EmfVONahZ1tFjcNpp0+1NLr0NhuZHdjj9M2sXI1YF2TV0ed/LoigvDr2BhVF
+ hlkAWEdTP5xTaaehhKFtdwfnWJAEjJTcg2vax5e+rOPgGyI+8kF+ZPj6acgSsP0bAP26
+ gwdVQP0hAioz1icmVV2XW2SPMAS1yIfhvDpb3z0T211SdyMhBpRojA2mWung1VHAnHtK
+ lntQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696314347; x=1696919147;
+ d=1e100.net; s=20230601; t=1696314348; x=1696919148;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GVxD021MVTrYNE+DC0MuYlYJBSs2FO9uD+/gTJsLcNQ=;
- b=hO+WoAyPVqY2ydjKK6dhdVzsURuJJrEQz0S1rfDAHMRl8tnz06qoW2ITnpsiPPLYif
- eaVrStMIwyrb2tfcyhtWmvO25Gwxaii6UceHKLPO02YRQLn8P3agv/WzAcdkK4th6huK
- SsZHnIb9oGbqTViyLYPIMydOCNWjTmr7duqCTJi29SKpfZW92w1pHtZhcp78i8zmUzoC
- kgZM+KJY05SQ/ow/tVJvwj9USdaVJvuAi+HO+Z06I7pz9a82fSIbK8vx3YwE2vVHZGQ4
- wcWd7/tRAX4ght0IPJ7UavsNmmLaFc4h2OSIP4bNA5J49wOjMAt4s+84Gimj1VP84hpM
- UxEw==
-X-Gm-Message-State: AOJu0YwB/wZTxrawTJgOuruk1UualsTmiaQjlShrVu92yhNek/8hNte7
- U53NytVk+C7swqu48M8mrhs=
-X-Google-Smtp-Source: AGHT+IGZQUKjeDCJFDaG3rhl4Z+dZdLNDnNQM/gKfTp+GE7f4hIIY3iTgYMCOS2ftEsqOi2MKNP7JA==
-X-Received: by 2002:ac2:4c23:0:b0:4fe:b97:e361 with SMTP id
- u3-20020ac24c23000000b004fe0b97e361mr1127454lfq.18.1696314347298; 
- Mon, 02 Oct 2023 23:25:47 -0700 (PDT)
+ bh=cOAMR8uQ7AIukEgE07sxvY580KQDj+NcF1W0RijSo6o=;
+ b=rfAfd/3XO/bEdt9yxKzlBEod4tD794Y0UAVRvZlL3jK8eiQ04km68c2je51qsDkBaF
+ 240uFpjZdJmw2TBoLG2q4dU6my4AHWXgQd0dueKFMty3PqOJo8oN1T5M/ehUKoTB9F+l
+ 9qZLebniAEeGlBwpax7j4jgPozZ/ls9rx3ZAn8PA30sPH48LZS3cB2fEJcIT75iWt10u
+ OU8wwfd2hH4MLYl5tl/JOtINvFHl0mJoTmXRXwGgqedjFWvCe398OJUD2kEStuh3NS3c
+ 7J6Wo90cLByewY6bcOh5be6I3q1YgpBkc0XpymkQIVq7JmPD7enOUvpQkZ/Qdhmj1OFY
+ dcPQ==
+X-Gm-Message-State: AOJu0YwOaiI1qwGsE3n/nQHtD5xlBUoOV0kJppcWf6goafR9zjSr8XQQ
+ lphJ3TkxJ776C18kQoDXMIs=
+X-Google-Smtp-Source: AGHT+IHdjwgV8wCrMxQPGytPhJrzm7As6qcB3RRQJQycscc3T2sLEX+2VUP6uyFCWum0f0Mm2qIsxA==
+X-Received: by 2002:ac2:42c6:0:b0:503:3b5:a65 with SMTP id
+ n6-20020ac242c6000000b0050303b50a65mr9330935lfl.31.1696314348020; 
+ Mon, 02 Oct 2023 23:25:48 -0700 (PDT)
 Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- c10-20020ac244aa000000b005031641b40asm74615lfm.159.2023.10.02.23.25.46
+ c10-20020ac244aa000000b005031641b40asm74615lfm.159.2023.10.02.23.25.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 23:25:46 -0700 (PDT)
+ Mon, 02 Oct 2023 23:25:47 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
  Jonas Karlman <jonas@kwiboo.se>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 1/3] video: pwm_backlight: use
+Subject: [PATCH v3 2/3] video: simple_panel: use
  regulator_set_enable_if_allowed
-Date: Tue,  3 Oct 2023 09:25:32 +0300
-Message-Id: <20231003062534.42325-2-clamor95@gmail.com>
+Date: Tue,  3 Oct 2023 09:25:33 +0300
+Message-Id: <20231003062534.42325-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231003062534.42325-1-clamor95@gmail.com>
 References: <20231003062534.42325-1-clamor95@gmail.com>
@@ -102,40 +102,30 @@ continue if regulator already was enabled or disabled.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/pwm_backlight.c | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+ drivers/video/simple_panel.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/video/pwm_backlight.c b/drivers/video/pwm_backlight.c
-index aa0e292866..1c747d98d7 100644
---- a/drivers/video/pwm_backlight.c
-+++ b/drivers/video/pwm_backlight.c
-@@ -100,8 +100,8 @@ static int enable_sequence(struct udevice *dev, int seq)
- 			plat = dev_get_uclass_plat(priv->reg);
- 			log_debug("Enable '%s', regulator '%s'/'%s'\n",
- 				  dev->name, priv->reg->name, plat->name);
--			ret = regulator_set_enable(priv->reg, true);
--			if (ret) {
-+			ret = regulator_set_enable_if_allowed(priv->reg, true);
-+			if (ret && ret != -ENOSYS) {
- 				log_debug("Cannot enable regulator for PWM '%s'\n",
- 					  dev->name);
- 				return log_ret(ret);
-@@ -181,11 +181,10 @@ static int pwm_backlight_set_brightness(struct udevice *dev, int percent)
- 	}
- 	if (disable) {
- 		dm_gpio_set_value(&priv->enable, 0);
--		if (priv->reg) {
--			ret = regulator_set_enable(priv->reg, false);
--			if (ret)
--				return log_ret(ret);
--		}
-+		ret = regulator_set_enable_if_allowed(priv->reg, false);
-+		if (ret && ret != -ENOSYS)
-+			return log_ret(ret);
-+
- 		priv->enabled = false;
+diff --git a/drivers/video/simple_panel.c b/drivers/video/simple_panel.c
+index 6a6473eb0e..efb122b534 100644
+--- a/drivers/video/simple_panel.c
++++ b/drivers/video/simple_panel.c
+@@ -114,11 +114,11 @@ static int simple_panel_probe(struct udevice *dev)
+ 	const u32 dsi_data = dev_get_driver_data(dev);
+ 	int ret;
+ 
+-	if (CONFIG_IS_ENABLED(DM_REGULATOR) && priv->reg) {
+-		debug("%s: Enable regulator '%s'\n", __func__, priv->reg->name);
+-		ret = regulator_set_enable(priv->reg, true);
+-		if (ret)
+-			return ret;
++	ret = regulator_set_enable_if_allowed(priv->reg, true);
++	if (ret && ret != -ENOSYS) {
++		debug("%s: failed to enable regulator '%s' %d\n",
++		      __func__, priv->reg->name, ret);
++		return ret;
  	}
  
+ 	switch (dsi_data) {
 -- 
 2.39.2
 
