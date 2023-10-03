@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D96E75433
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 08:36:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E67A4E75433
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 08:41:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B34A86DA7;
-	Tue,  3 Oct 2023 10:36:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AAC1587222;
+	Tue,  3 Oct 2023 10:41:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cvnund9S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="STRCIWVa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 154A487137; Tue,  3 Oct 2023 10:36:54 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 23EEA87222; Tue,  3 Oct 2023 10:41:17 +0200 (CEST)
+Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
+ [IPv6:2607:f8b0:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 259E586C96
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 10:36:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DC8787201
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 10:41:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-5046bf37ec1so770341e87.1
- for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 01:36:51 -0700 (PDT)
+Received: by mail-pf1-x435.google.com with SMTP id
+ d2e1a72fcca58-69101d33315so512434b3a.3
+ for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 01:41:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696322210; x=1696927010; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x+kU6Ph+iAEyEB2VshoVf67KfBtyNs1dCPD1HGUdsEE=;
- b=Cvnund9SSA3F8Ka977VeXwQKoBSKYxIlpnVxCDf7IOwunUmAfB31HQIegg4wsgyfhS
- By/hQZzHrx+8A8Ouf/WzpgkkvIbGdJdWdw7eEk8m/tklyKkmWO3YYZLCzZJB8razLOxN
- lcNkXYkyfs179fReGTXsGcCtLx3hnEyc+hYZELcCxc6qu6gNWWc9IOcTCngpweEbhh5V
- fQyix/CN8zwYYUTXRXsoxYeV0rCxGfg68+ygfDmHCKHUtNp9i+yirG0xKafEchhqioDU
- Yjgaax8ompuQVGx02Fx8uOz4OoclqutbmXWvtzMWuqEde3FGDgXH7odDPYg/hWZ9sNZJ
- YmJg==
+ d=gmail.com; s=20230601; t=1696322470; x=1696927270; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1sjwdXifx+JA/aXFP7BCpMbSPUFbAJgcSPgBTpX/Eyk=;
+ b=STRCIWVapmUvbYGs51MKsODiE141Oo1x1yr3MP20+iyZJTveKTTILq+TKBbmNoBvT1
+ 2aOKI1cbNNkg9Acsp4UrD7Ny0ZUd8Xky69YDMCQfnPb8jxaQCkXgmyCHm9D8P3247mbE
+ I4Hd3xo1yJWY9jFmMk1erofLcWwLcLeZBYHXM9MYvWSiHJmCGZn4JcAurcKUtXp9CYNs
+ kxUT8nWeaPBrO8BmLVXiC0lwXduM5WfGFdWbty+jkqHUL9WDeMm5ZgZlKUlerzQRMujH
+ Atsp7cUi3pOivUjXjEaHRHkm9tXldTOdocuGHaVqEmmzuru/p2bhdbv9cWJ5z9Tjr5t6
+ Qx3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696322210; x=1696927010;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=x+kU6Ph+iAEyEB2VshoVf67KfBtyNs1dCPD1HGUdsEE=;
- b=FqNscUg4Y/y0zxgHVC1jjiWzcuqmp0HLzq/SmQPf6jF0O+GJHRJK7iCN2xMFu6KZLL
- MEFqUWUOJB8kMwsK/VRFo47geV4ugKroRcJxCMgpG1ci8xfEFjWPP7fkaF/78bEm/rPx
- MSmj1sQnDigUIFWU6grwy/VIVORWWK5gE8kDosB+Rf8XRGxK8TIixsDr41gwqsh+B7DG
- auFH3JLBXeluFOBxE3v/knP81nykENcpjl+REmP6bILBvwoo6uGHdlYKz2r5fRRuDLuv
- /oIwI19pf7ordFccFpXnwYHe+wX1yBJ9NqdNHjf0nXdhQHXZQjaZVMo1ABJ2sPbogXjF
- gmsA==
-X-Gm-Message-State: AOJu0YxPVH/yWtwjmySUVUop3WJBUquXCIPrJqJo+vwZY2YWDhIqQJid
- xZWu9bzQNj69lT6yjX3cMLvYZZqWn4xUKh6hoTy4k7fTXkjXWQ==
-X-Google-Smtp-Source: AGHT+IEVhM/KLG517wDTZ/wt7RMyixHr90uU6bg66cszfgKYzJBiHkx2Rk+CMJKu7peTP5WL/3mB2BSf1itFM7DxejA=
-X-Received: by 2002:a05:6512:5ce:b0:500:ac0b:8d58 with SMTP id
- o14-20020a05651205ce00b00500ac0b8d58mr10859712lfo.18.1696322209993; Tue, 03
- Oct 2023 01:36:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230926090808.408095-1-JJLIU0@nuvoton.com>
- <ec256874-0fca-83fe-d207-67e4048b461c@denx.de>
-In-Reply-To: <ec256874-0fca-83fe-d207-67e4048b461c@denx.de>
+ d=1e100.net; s=20230601; t=1696322470; x=1696927270;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1sjwdXifx+JA/aXFP7BCpMbSPUFbAJgcSPgBTpX/Eyk=;
+ b=vw7aKL/LJ1QMvW0rn0aixVbVH2fqLbQaoYK99ln66ePBlwRduZaBTxd25CpDH3Cniv
+ Dh4C2ym9LTf7HQ/IJnuKMwRCNHNKO0pxYwq66lB9v6p7HHwGa24C7L6CoU5GZ5ibp2hs
+ QF86pBIKPJahdTY1eejJBSyi1MPH4+yIYW8kJOKf6oFdxlbUaBjNKSznq9AqBY+AxIwM
+ TSCb9x4mnRqVA6hAzpWVRPbtZ66OChgnbNvX8N+PJFMVSHqc1LKjZyiJOPDnFZpTe7i7
+ cGABZCHOmnS3d6jl3VRSTCU53L4DaX1a13kLL7FGhKT4IK5mLWIjpuHZ/6Rl353GZpX9
+ Ihgg==
+X-Gm-Message-State: AOJu0YwiF4FBkvi6eaGg0m+8AVyuj9X/Es5NAuh/uGWo5zOajSi+sZPU
+ 5P5rg8ILwGHS4OZO7ViBSAQ=
+X-Google-Smtp-Source: AGHT+IEV4wkv8aWVLHtqV2zJmBG2ESFExbV/x0jws/iGPPWTLxF6+wDZW5nUGIBMn5M/Cy4YCjfEVQ==
+X-Received: by 2002:a05:6a20:5509:b0:14b:f9b2:eb7 with SMTP id
+ ko9-20020a056a20550900b0014bf9b20eb7mr10158992pzb.59.1696322469646; 
+ Tue, 03 Oct 2023 01:41:09 -0700 (PDT)
+Received: from cs20-buildserver.lan ([2403:c300:d608:e3a4:b564:cfec:3897:9e1b])
+ by smtp.gmail.com with ESMTPSA id
+ n17-20020a170902e55100b001c625acfed0sm907689plf.44.2023.10.03.01.41.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 03 Oct 2023 01:41:09 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
-Date: Tue, 3 Oct 2023 01:36:38 -0700
-Message-ID: <CAKUZ0+Exu_F2tjY9q8QqQz83PEZQKYZY_bdAFwdPGKQdpKTr3w@mail.gmail.com>
-Subject: Re: [PATCH v1] i2c: nuvoton: add support fast mode
-To: hs@denx.de
-Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, trini@konsulko.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
+To: sr@denx.de, trini@konsulko.com, KWLIU@nuvoton.com, YSCHU@nuvoton.com,
+ JJLIU0@nuvoton.com, jim.t90615@gmail.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2] wdt: nuvoton: fix reset/expire function error
+Date: Tue,  3 Oct 2023 16:40:58 +0800
+Message-Id: <20231003084058.2656171-1-JJLIU0@nuvoton.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,57 +90,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi  Heiko
+fix npcm845 watchdog halt for reset function and expire function.
+reset function is restart wdt.
 
-Thanks for your review.
-Our bmc HW can support standard / fast / fast plus mode
-but our first uboot version 2019 is only run on standard mode.
-so the first upstream version is the same as before.
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 
-Now, some customer need to test other mode on uboot.
-So remove this judgment to support other mode.
+Changes for v2:
+   - add commit message
+   - fix no empty line problem
+   - remove dts
+---
+ drivers/watchdog/npcm_wdt.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
 
-I will add a commit message in the next version.
+diff --git a/drivers/watchdog/npcm_wdt.c b/drivers/watchdog/npcm_wdt.c
+index e56aa0ebe1..22d7fc45dd 100644
+--- a/drivers/watchdog/npcm_wdt.c
++++ b/drivers/watchdog/npcm_wdt.c
+@@ -70,14 +70,21 @@ static int npcm_wdt_reset(struct udevice *dev)
+ {
+ 	struct npcm_wdt_priv *priv = dev_get_priv(dev);
+ 
+-	writel(NPCM_WTR | NPCM_WTRE | NPCM_WTE, priv->regs);
++	u32 val;
++
++	val = readl(priv->regs);
++	writel(val | NPCM_WTR, priv->regs);
+ 
+ 	return 0;
+ }
+ 
+ static int npcm_wdt_expire_now(struct udevice *dev, ulong flags)
+ {
+-	return npcm_wdt_reset(dev);
++	struct npcm_wdt_priv *priv = dev_get_priv(dev);
++
++	writel(NPCM_WTR | NPCM_WTRE | NPCM_WTE, priv->regs);
++
++	return 0;
+ }
+ 
+ static int npcm_wdt_of_to_plat(struct udevice *dev)
+-- 
+2.25.1
 
-Best regards,
-Jim
-
-On Mon, Oct 2, 2023 at 9:37=E2=80=AFPM Heiko Schocher <hs@denx.de> wrote:
->
-> Hello Jim,
->
-> On 26.09.23 11:08, Jim Liu wrote:
-> > Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
-> > ---
-> >  drivers/i2c/npcm_i2c.c | 5 -----
-> >  1 file changed, 5 deletions(-)
-> >
-> > diff --git a/drivers/i2c/npcm_i2c.c b/drivers/i2c/npcm_i2c.c
-> > index ea4ef53256..b867b6c8e9 100644
-> > --- a/drivers/i2c/npcm_i2c.c
-> > +++ b/drivers/i2c/npcm_i2c.c
-> > @@ -517,11 +517,6 @@ static int npcm_i2c_init_clk(struct npcm_i2c_bus *=
-bus, u32 bus_freq)
-> >       u32 sclfrq;
-> >       u8 hldt, val;
-> >
-> > -     if (bus_freq > I2C_FREQ_100K) {
-> > -             printf("Support standard mode only\n");
-> > -             return -EINVAL;
-> > -     }
-> > -
->
-> Is it so easy to enable fast mode? As original code explicitely
-> says "Support standard mode only" and returns -EINVAL?
->
-> And please add some text into commit message, may you can explain
-> why current driver supports fast mode?
->
-> Thanks!
->
-> bye,
-> Heiko
-> --
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
