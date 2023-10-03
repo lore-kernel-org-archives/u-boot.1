@@ -4,77 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA6DFE7AD4D
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FEDFE7AD4D
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:57:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B635874B4;
-	Tue,  3 Oct 2023 15:41:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3D3F78725E;
+	Tue,  3 Oct 2023 15:57:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="esj2ZQ52";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="TJChQk3V";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="J3USMikJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5DB4874B1; Tue,  3 Oct 2023 15:41:09 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 659368725E; Tue,  3 Oct 2023 15:57:39 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D321E87458
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:41:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D611F86D7E
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:57:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S0Jr35d7Gz9sWl;
- Tue,  3 Oct 2023 15:41:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696340467;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7XiWGZK6IMTzrEKOmcdEQpoUSb5+sTooyWrBar51N0w=;
- b=esj2ZQ52j2Z4cLEW+89qakIarJc5Lpbxax5/y2aElz5M/TAVfliCY9r3vz61T9TJ4AVdaa
- 22yr8XCxMgMB8oIXqR/yTvhA2vbIbC7t6pTZh/LhnemOli69pw4hfZhaC+NX/5S5Q2nKVF
- FKxRBK4WZ8VnupPo+m3oK2WvgnPX21OQxf+swHDmEgcd3rtbKuxGFlWo1LgDYl0FkuaWAM
- uW4dF9fY8NM/qqUPy8lncj+0vo5HOhNsiqls4sst4GYkP3WKTxL2ENUtolzfmTDlf1udFf
- JrQ9HlxQkRoSlft4WJGvFVktG7PaPyuu0RGvXNJ87V3p+w9aqQPtUI3nOM3Hyg==
-Message-ID: <37900365-9d1c-6248-635c-5f6566a08bfb@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696340466;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7XiWGZK6IMTzrEKOmcdEQpoUSb5+sTooyWrBar51N0w=;
- b=TJChQk3VC1AHkkCzcKUcxKlRoqLs9rSXToFeuu1/jYMpu7J6OsfiVNj4jhbQ9CleiQMw2z
- ewjvcE/AYxuPv1c/Flf1/NatwqDlwKo+tqhXPWKN1O93tiWqaz8HTRArjUDo6R2zUmsr9a
- t8MyjIaJ+1Cdf7j4kn3k1lWvLXibDQg3lGF8cJlQOhDgRnRvgqJbr6IELvYQ4rAC1+0uHA
- EnUD0Cpfz+ptqG2khksmNVf7v6LTl1B0O6Re8c8m+P/e88s11PQjayasosgW7hJnSccAqu
- ul1O2EcJt3BpAmCbBQCVI/x6yohYKJ9bhJTKHwZtjTMdaNzrFBlMwuIXE2hqtQ==
-Date: Tue, 3 Oct 2023 15:36:30 +0200
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8c8e=FS=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1696341446;
+ bh=ltL9G0FN3Zyrs9BE8EPuykyvETqgJVTIRocQUcmeAYQ=;
+ b=J3USMikJ2hotZJaaEW+ionykRLq18EKMfwSCl500d3XaKbk1bSmS6ZBTHBPQ90tQ3mc0bC4eI
+ XGNmjMeALcOCH0ekoFdwhOyIGhbS6VmVK+zSHJwDlVvCzwbkaA+hU9aabsXb9eBVpDz/LdCZEkg
+ ixnGHaUclewZ5nTP32jTxKzn4x5lU0+tTVtDO9uGJDou9zWf+yFyjE/pf7k8vdVqevuDspeRy56
+ qSGi8FM2OaZXCTNGnCAYNC0M6lDOXk+AzzSMj+UoL1Kha+ZpFSMjs+owWeSV4qUp6C55bqZL5gA
+ RKjaXWeDoE/pZkRAWw2zwSLnvXg6XU5AXIR5TkkkwJSA==
+Message-ID: <d071dce9-cc08-0998-81e7-f4f06e8f96a5@kwiboo.se>
+Date: Tue, 3 Oct 2023 15:57:20 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 16/16] board: rzg2l: Add RZ/G2L SMARC EVK board
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v4 1/4] power: regulator: expand basic reference counter
+ onto all uclass
 Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-17-paul.barker.ct@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20230920124212.63535-17-paul.barker.ct@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Svyatoslav Ryhel <clamor95@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, John Keeping <john@metanate.com>
+Cc: u-boot@lists.denx.de
+References: <20231003062126.42026-1-clamor95@gmail.com>
+ <20231003062126.42026-2-clamor95@gmail.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20231003062126.42026-2-clamor95@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: fk1swgcnth84ibm63744d1kqyctzmipc
-X-MBO-RS-ID: fef7eb2697b1977b829
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 651c1dc5b856b1d4dfc17f19
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,204 +77,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/20/23 14:42, Paul Barker wrote:
-> The Renesas RZ/G2L SMARC Evaluation Board Kit consists of the RZ/G2L
-> System-on-Module (SOM) based on the R9A07G044L2 SoC, and a common SMARC
-> carrier board.
+On 2023-10-03 08:21, Svyatoslav Ryhel wrote:
+> Commit is based on 4fcba5d ("regulator: implement basic reference
+> counter") but expands the idea to all regulators instead of just
+> fixed/gpio regulators.
 > 
-> The ARM TrustedFirmware code for the Renesas RZ/G2L SoC family passes a
-> devicetree blob to the bootloader as an argument in the same was
-> previous R-Car gen3/gen4 SoCs. This blob contains a compatible string
-> which can be used to identify the particular SoC we are running on and
-> this is used to select the appropriate device tree to load.
-> 
-> The configuration renesas_rzg2l_smarc_defconfig is added to support
-> building for this target. In the future this defconfig will be extended
-> to support other SoCs and evaluation boards from the RZ/G2L family.
-> 
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
-> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
->   arch/arm/mach-rmobile/Kconfig.rzg2l   | 14 +++++
->   board/renesas/rzg2l/Kconfig           | 18 +++++++
->   board/renesas/rzg2l/MAINTAINERS       |  6 +++
->   board/renesas/rzg2l/Makefile          |  4 ++
->   board/renesas/rzg2l/rzg2l.c           | 76 +++++++++++++++++++++++++++
->   configs/renesas_rzg2l_smarc_defconfig | 52 ++++++++++++++++++
->   include/configs/rzg2l-smarc.h         | 14 +++++
->   7 files changed, 184 insertions(+)
->   create mode 100644 board/renesas/rzg2l/Kconfig
->   create mode 100644 board/renesas/rzg2l/MAINTAINERS
->   create mode 100644 board/renesas/rzg2l/Makefile
->   create mode 100644 board/renesas/rzg2l/rzg2l.c
->   create mode 100644 configs/renesas_rzg2l_smarc_defconfig
->   create mode 100644 include/configs/rzg2l-smarc.h
+>  drivers/power/regulator/regulator-uclass.c | 41 ++++++++++++++++++++++
+>  drivers/power/regulator/regulator_common.c | 22 ------------
+>  drivers/power/regulator/regulator_common.h | 21 -----------
+>  include/power/regulator.h                  |  2 ++
+>  4 files changed, 43 insertions(+), 43 deletions(-)
 > 
-> diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-rmobile/Kconfig.rzg2l
-> index 7d268e8c366a..1fe49e323300 100644
-> --- a/arch/arm/mach-rmobile/Kconfig.rzg2l
-> +++ b/arch/arm/mach-rmobile/Kconfig.rzg2l
-> @@ -9,6 +9,20 @@ config R9A07G044L
->   	help
->   	  Enable support for the R9A07G044L SoC used in the RZ/G2L.
->   
-> +choice
-> +	prompt "Renesas RZ/G2L Family Board selection"
-> +	default TARGET_RZG2L_SMARC_EVK
-> +
-> +config TARGET_RZG2L_SMARC_EVK
-> +	bool "Renesas RZ/G2L SMARC EVK"
-> +	imply R9A07G044L
-> +	help
-> +	  Enable support for the RZ/G2L SMARC evaluation board.
-> +
-> +source "board/renesas/rzg2l/Kconfig"
-> +
-> +endchoice
-> +
->   config MULTI_DTB_FIT_UNCOMPRESS_SZ
->   	default 0x80000 if TARGET_RZG2L_SMARC_EVK
->   
-> diff --git a/board/renesas/rzg2l/Kconfig b/board/renesas/rzg2l/Kconfig
-> new file mode 100644
-> index 000000000000..1335fc7ae806
-> --- /dev/null
-> +++ b/board/renesas/rzg2l/Kconfig
-> @@ -0,0 +1,18 @@
-> +# Copyright (C) 2023 Renesas Electronics Corporation
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +if TARGET_RZG2L_SMARC_EVK
-> +
-> +config SYS_SOC
-> +	default "rmobile"
-> +
-> +config SYS_BOARD
-> +	default "rzg2l"
-> +
-> +config SYS_VENDOR
-> +	default "renesas"
-> +
-> +config SYS_CONFIG_NAME
-> +	default "rzg2l-smarc"
-> +
-> +endif
-> diff --git a/board/renesas/rzg2l/MAINTAINERS b/board/renesas/rzg2l/MAINTAINERS
-> new file mode 100644
-> index 000000000000..0a51391c1fc9
-> --- /dev/null
-> +++ b/board/renesas/rzg2l/MAINTAINERS
-> @@ -0,0 +1,6 @@
-> +RENESAS RZG2L BOARD FAMILY
-> +M:	Paul Barker <paul.barker.ct@bp.renesas.com>
-> +S:	Supported
-> +F:	arch/arm/dts/rz-smarc-common.dtsi
-
-I suspect there should be more files here, right ?
-You likely want to be CCed on things like rzg2l clock, scif, and so on.
-
-> +N:	rzg2l
-> +N:	r9a07g044
-> diff --git a/board/renesas/rzg2l/Makefile b/board/renesas/rzg2l/Makefile
-> new file mode 100644
-> index 000000000000..466935fc8158
-> --- /dev/null
-> +++ b/board/renesas/rzg2l/Makefile
-> @@ -0,0 +1,4 @@
-> +# Copyright (C) 2023 Renesas Electronics Corporation
-> +# SPDX-License-Identifier: GPL-2.0+
-> +
-> +obj-y	:= rzg2l.o
-
-> diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
-> new file mode 100644
-> index 000000000000..2b1bb3546c26
-> --- /dev/null
-> +++ b/board/renesas/rzg2l/rzg2l.c
-> @@ -0,0 +1,76 @@
-> +// SPDX-License-Identifier: GPL-2.0+
+> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
+> index d5a79d861c..4b2c6c2964 100644
+> --- a/drivers/power/regulator/regulator-uclass.c
+> +++ b/drivers/power/regulator/regulator-uclass.c
+> @@ -159,6 +159,25 @@ int regulator_get_enable(struct udevice *dev)
+>  	return ops->get_enable(dev);
+>  }
+>  
 > +/*
-> + * RZ/G2L board support.
-> + * Copyright (C) 2023 Renesas Electronics Corporation
+> + * Enable or Disable a regulator
+> + *
+> + * This is a reentrant function and subsequent calls that enable will
+> + * increase an internal counter, and disable calls will decrease the counter.
+> + * The actual resource will be enabled when the counter gets to 1 coming from 0,
+> + * and disabled when it reaches 0 coming from 1.
+> + *
+> + * @dev: regulator device
+> + * @enable: bool indicating whether to enable or disable the regulator
+> + * @return:
+> + * 0 on Success
+> + * -EBUSY if the regulator cannot be disabled because it's requested by
+> + *        another device
+> + * -EALREADY if the regulator has already been enabled or has already been
+> + *        disabled
+> + * -EACCES if there is no possibility to enable/disable the regulator
+> + * -ve on different error situation
 > + */
-> +
-> +#include <common.h>
-> +#include <fdtdec.h>
-> +#include <linux/libfdt.h>
-> +
-> +#if IS_ENABLED(CONFIG_MULTI_DTB_FIT)
-> +/* If the firmware passed a device tree, use it for board identification. */
-> +extern u64 rcar_atf_boot_args[];
-> +
-> +static bool is_rzg2l_board(const char *board_name)
-> +{
-> +	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
-> +
-> +	return fdt_node_check_compatible(atf_fdt_blob, 0, board_name) == 0;
-> +}
-> +
-> +int board_fit_config_name_match(const char *name)
-> +{
-> +	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
-> +
-> +	if (fdt_magic(atf_fdt_blob) != FDT_MAGIC)
-> +		return -1;
-> +
-> +	if (is_rzg2l_board("renesas,r9a07g044l2"))
-> +		return strcmp(name, "r9a07g044l2-smarc");
-> +
-> +	return -1;
-> +}
-> +#endif
-> +
-> +static void apply_atf_overlay(void *fdt_blob)
-> +{
-> +	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
-> +
-> +	if (fdt_magic(atf_fdt_blob) == FDT_MAGIC)
-> +		fdt_overlay_apply_node(fdt_blob, 0, atf_fdt_blob, 0);
-> +}
-> +
-> +int fdtdec_board_setup(const void *fdt_blob)
-> +{
-> +	apply_atf_overlay((void *)fdt_blob);
-> +
-> +	return 0;
-> +}
-> +
-> +int ft_board_setup(void *blob, struct bd_info *bd)
-> +{
-> +	return 0;
 
-Are all these stub functions really needed or can they be removed 
-(possibly also with removal of unnecessary config options) ?
+Maybe better to replace the existing comment for this function in
+include/power/regulator.h ?
 
-> +}
+Regards,
+Jonas
+
+>  int regulator_set_enable(struct udevice *dev, bool enable)
+>  {
+>  	const struct dm_regulator_ops *ops = dev_get_driver_ops(dev);
+> @@ -172,6 +191,23 @@ int regulator_set_enable(struct udevice *dev, bool enable)
+>  	if (!enable && uc_pdata->always_on)
+>  		return -EACCES;
+>  
+> +	/* If previously enabled, increase count */
+> +	if (enable && uc_pdata->enable_count > 0) {
+> +		uc_pdata->enable_count++;
+> +		return -EALREADY;
+> +	}
 > +
-> +int __weak board_init(void)
-> +{
-> +	return 0;
-> +}
+> +	if (!enable) {
+> +		if (uc_pdata->enable_count > 1) {
+> +			/* If enabled multiple times, decrease count */
+> +			uc_pdata->enable_count--;
+> +			return -EBUSY;
+> +		} else if (!uc_pdata->enable_count) {
+> +			/* If already disabled, do nothing */
+> +			return -EALREADY;
+> +		}
+> +	}
 > +
-> +int dram_init(void)
-> +{
-> +	return fdtdec_setup_mem_size_base();
-> +}
+>  	if (uc_pdata->ramp_delay)
+>  		old_enable = regulator_get_enable(dev);
+>  
+> @@ -187,6 +223,11 @@ int regulator_set_enable(struct udevice *dev, bool enable)
+>  		}
+>  	}
+>  
+> +	if (enable)
+> +		uc_pdata->enable_count++;
+> +	else
+> +		uc_pdata->enable_count--;
 > +
-> +int dram_init_banksize(void)
-> +{
-> +	fdtdec_setup_memory_banksize();
+>  	return ret;
+>  }
+>  
+> diff --git a/drivers/power/regulator/regulator_common.c b/drivers/power/regulator/regulator_common.c
+> index 0116fa01bb..62d06bf616 100644
+> --- a/drivers/power/regulator/regulator_common.c
+> +++ b/drivers/power/regulator/regulator_common.c
+> @@ -74,23 +74,6 @@ int regulator_common_set_enable(const struct udevice *dev,
+>  		return 0;
+>  	}
+>  
+> -	/* If previously enabled, increase count */
+> -	if (enable && plat->enable_count > 0) {
+> -		plat->enable_count++;
+> -		return -EALREADY;
+> -	}
+> -
+> -	if (!enable) {
+> -		if (plat->enable_count > 1) {
+> -			/* If enabled multiple times, decrease count */
+> -			plat->enable_count--;
+> -			return -EBUSY;
+> -		} else if (!plat->enable_count) {
+> -			/* If already disabled, do nothing */
+> -			return -EALREADY;
+> -		}
+> -	}
+> -
+>  	ret = dm_gpio_set_value(&plat->gpio, enable);
+>  	if (ret) {
+>  		pr_err("Can't set regulator : %s gpio to: %d\n", dev->name,
+> @@ -105,10 +88,5 @@ int regulator_common_set_enable(const struct udevice *dev,
+>  	if (!enable && plat->off_on_delay_us)
+>  		udelay(plat->off_on_delay_us);
+>  
+> -	if (enable)
+> -		plat->enable_count++;
+> -	else
+> -		plat->enable_count--;
+> -
+>  	return 0;
+>  }
+> diff --git a/drivers/power/regulator/regulator_common.h b/drivers/power/regulator/regulator_common.h
+> index d4962899d8..15f1fa4c93 100644
+> --- a/drivers/power/regulator/regulator_common.h
+> +++ b/drivers/power/regulator/regulator_common.h
+> @@ -13,7 +13,6 @@ struct regulator_common_plat {
+>  	struct gpio_desc gpio; /* GPIO for regulator enable control */
+>  	unsigned int startup_delay_us;
+>  	unsigned int off_on_delay_us;
+> -	unsigned int enable_count;
+>  };
+>  
+>  int regulator_common_of_to_plat(struct udevice *dev,
+> @@ -21,26 +20,6 @@ int regulator_common_of_to_plat(struct udevice *dev,
+>  				char *enable_gpio_name);
+>  int regulator_common_get_enable(const struct udevice *dev,
+>  	struct regulator_common_plat *plat);
+> -/*
+> - * Enable or Disable a regulator
+> - *
+> - * This is a reentrant function and subsequent calls that enable will
+> - * increase an internal counter, and disable calls will decrease the counter.
+> - * The actual resource will be enabled when the counter gets to 1 coming from 0,
+> - * and disabled when it reaches 0 coming from 1.
+> - *
+> - * @dev: regulator device
+> - * @plat: Platform data
+> - * @enable: bool indicating whether to enable or disable the regulator
+> - * @return:
+> - * 0 on Success
+> - * -EBUSY if the regulator cannot be disabled because it's requested by
+> - *        another device
+> - * -EALREADY if the regulator has already been enabled or has already been
+> - *        disabled
+> - * -EACCES if there is no possibility to enable/disable the regulator
+> - * -ve on different error situation
+> - */
+>  int regulator_common_set_enable(const struct udevice *dev,
+>  	struct regulator_common_plat *plat, bool enable);
+>  
+> diff --git a/include/power/regulator.h b/include/power/regulator.h
+> index 200652cb3d..1c7995bd5d 100644
+> --- a/include/power/regulator.h
+> +++ b/include/power/regulator.h
+> @@ -159,6 +159,7 @@ enum regulator_flag {
+>   * @name**     - fdt regulator name - should be taken from the device tree
+>   * ctrl_reg:   - Control register offset used to enable/disable regulator
+>   * volt_reg:   - register offset for writing voltage vsel values
+> + * enable_count - counter of enable calls for this regulator
+>   *
+>   * Note:
+>   * *  - set automatically on device probe by the uclass's '.pre_probe' method.
+> @@ -185,6 +186,7 @@ struct dm_regulator_uclass_plat {
+>  	u8 volt_reg;
+>  	bool suspend_on;
+>  	u32 suspend_uV;
+> +	u32 enable_count;
+>  };
+>  
+>  /* Regulator device operations */
 
-This and the one function above can likely go into arch/mach-rmobile/
-
-> +	return 0;
-> +}
-> +
-> +void __weak reset_cpu(void)
-> +{
-
-Is this platform missing a way to reset the system ?
-Please fix.
-
-[...]
