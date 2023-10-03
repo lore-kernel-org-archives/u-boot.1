@@ -4,91 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 045DFE75426
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 12:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC907E75455
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 12:46:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 732CE8744F;
-	Tue,  3 Oct 2023 14:12:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id BDBC5871DE;
+	Tue,  3 Oct 2023 14:46:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="q7aqN5/n";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lXyfgcf+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63E7D8707E; Tue,  3 Oct 2023 13:29:02 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id 6F567871F7; Tue,  3 Oct 2023 14:46:22 +0200 (CEST)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on2060f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7ea9::60f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB1698722A
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 13:28:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 190CE8707E
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 14:46:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 02E4C12000C;
- Tue,  3 Oct 2023 14:28:57 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 02E4C12000C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696332537;
- bh=aFsGu+0Y8wTbxw4/QIEFMU/gCctcf9R0zTVJfZ/JNHE=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=q7aqN5/nBmVk/CIhKzXOHsJyaF18McL5e2ifa3e6KckQvsvrXiQpIpg8gzaQwSvsl
- 16ho8TTCXazj8eDQ2WUFxHhmH8UvSWJCxquXCbz4uUZR4iT/wh87oWdNkLfyh47Prf
- W35mEpVASvdYzT66vyDD6rd6Lf30EDqDSO/84A9Dp1KlfOWnjeom2G2qCjQLKVkcj7
- /eDJZcjFJ4V7UVKUXq4jyymLAokdVWCRTOSDyJSKvBTduP92NWTvx7busfFl1VcS2Z
- 5RFhFickS7Gs+lhxI/Z736ZWrV0HXHCSZfkLFcpKAlXPFLEj5vn6N37JYMhFXDH/qs
- uRFn+qIr5HdmA==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue,  3 Oct 2023 14:28:56 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Tue, 3 Oct 2023 14:28:56 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
- <lukma@denx.de>, <seanga2@gmail.com>, <marex@denx.de>
-CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
- <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 7/8] dwc3: add support for Amlogic A1 family
-Date: Tue, 3 Oct 2023 14:28:33 +0300
-Message-ID: <20231003112838.41503-8-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231003112838.41503-1-avromanov@salutedevices.com>
-References: <20231003112838.41503-1-avromanov@salutedevices.com>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=love.kumar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Or33+pAsNsMWN4ZJhT7f9OEiET4lVvtdilQorhI9MGb1I3Z1sWidXin4gqw9pIlIWGdW9+jPsLx+WZSdKtYjzvDpl/aytUkTxh0yTol4RKI0KZ6FjOS8Lqv2HnA4Zg4DQn5/9Onbmw9NuUv8QODGkPVbnMzxFAMHWtuX7TITRlrGO/MuOSuoOQXW1vfcKdcIk9rbn2rSN8qEb3nKFVnTrA+oraGCP3vVYpuXYoJgVzyg4oHQoViUHbbasBiMlnpbaY2l5fTv8S1meiywJXUpD163iLIU6ECeJEFvI402g1xOWtg7RtK7wVw/MAyeFTY3jP2S9CeEc1RZE9epkOI7+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=kxrzH/95d/6pzqdYS6XJT/XMjAZaCpoQ53YDPs0cy0g=;
+ b=ho2TghXHDm3sGA6XwwWQGUv6xgB9QREpZYx7FD4Yci5YihwTo2xX6GwIu3kp5IhDfcoeBsAIyEkOWf2aJ/Q5m/RzoAykjArpTO251uUz43fgVOmd2eJhQ10EdUdeEtkGIoV4KPefVXEWjlCmzkWryGXqrkP2f93l1Vq86UK4QkqoHlxNZBNi2HgMCQgs7ZBNOAXj/Jj23M0sRGz07buGZi8K0Th/x4dBP23q2/X5KG4ol377953atguEivGwfYbd6clpkYrrPqvbfwiVgoXGlZDS7rhOgTCsZu9B153g8gQNZWY4JKRV2XepiHGFlW8ce0puKCP5sugIXv13STGr6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kxrzH/95d/6pzqdYS6XJT/XMjAZaCpoQ53YDPs0cy0g=;
+ b=lXyfgcf+KMQli2CIwK0p7ZAwDzFYr4L/kqSHFpF2JYcZhnkTfcVpUeqLY03/JZkUtgAnurMHD9H3cGoqX45W0o3MuiK1683HmHyRv0fOLhEXH0yz26vg9ZfvkYvUDKn45Qx/IRitcEzSCxfXfWOhMIBDru/bx+ZsaP+zMTvgwS0=
+Received: from BL1PR13CA0301.namprd13.prod.outlook.com (2603:10b6:208:2c1::6)
+ by LV3PR12MB9141.namprd12.prod.outlook.com (2603:10b6:408:1a7::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.33; Tue, 3 Oct
+ 2023 12:46:13 +0000
+Received: from BL02EPF0001A0F9.namprd03.prod.outlook.com
+ (2603:10b6:208:2c1:cafe::e) by BL1PR13CA0301.outlook.office365.com
+ (2603:10b6:208:2c1::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.23 via Frontend
+ Transport; Tue, 3 Oct 2023 12:46:13 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ BL02EPF0001A0F9.mail.protection.outlook.com (10.167.242.100) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6838.14 via Frontend Transport; Tue, 3 Oct 2023 12:46:12 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 3 Oct
+ 2023 07:46:12 -0500
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.27 via Frontend
+ Transport; Tue, 3 Oct 2023 07:46:10 -0500
+From: Love Kumar <love.kumar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@xilinx.com>, <rfried.dev@gmail.com>,
+ <v.v.mitrofanov@yadro.com>, <seanedmond@microsoft.com>,
+ <emohandesi@linux.microsoft.com>
+Subject: [PATCH] test/py: net: Add dhcp abort test
+Date: Tue, 3 Oct 2023 18:16:04 +0530
+Message-ID: <12a4371d0abfe7de83a42847573b8db8c1bba8da.1696337031.git.love.kumar@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 180316 [Oct 03 2023]
-X-KSMG-AntiSpam-Version: 5.9.59.0
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 535 535
- da804c0ea8918f802fc60e7a20ba49783d957ba2,
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/10/03 10:12:00 #22029534
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Tue, 03 Oct 2023 14:12:00 +0200
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A0F9:EE_|LV3PR12MB9141:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6777bb10-5b5c-40d1-0bbb-08dbc40eb9c8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: eNXSviEWGP68D7Lf2FF+lExO8dpvITMWLg2DZ2hkHbASkqkoI1bdHZrhseWzMjNTaZZ61Aksq6b8O7VJXpji5szIpq1eBZAwBkq13Ff03lga8v8EoL6ZMAsbIkfijNX5kvbgqOlm1GNnPuVTDrxd/tk706j2BtayiylWARlFpyUEPH/M8eC6d5myGwhQ1Iq8GlOyhNKtW4Lg+k4ooxS4ybxUZE30NXGNHRpU7aOwJmeXfzxAHTJB1AgUmpkGH16LW84byiNlVgS82uhs3KEBqY5DRfY+KABOAU7aeUD3zXZIqwkR71a98/N82YlKjl0YWGg9ucsFXmgeaGqgjr82nlTd0kEz2yNhCQOfyLIpTWPewz4pymnU2b2zeYFa4OjmB9F5jn6kBxoA3/yLXNBMQBEtxvmvjmSBV9PQu8CbuDqm0mqsurAElnk/dRnBfErFyOYEkuAOvbJvVDmFuqJDpKwXXZ1UyljpwEr9fAdKdBcAFH/1wy+CxNlVyKnCIFaGemTZVvV4OQdN90qZDexvqgRjWZihFY1MSczWGMQ8MO6GbjMb8toh4KWVgY1coH0Bsp71O3RYDjunZgazI/53PTvK4pqTBx9bvPOgkie+rxCs6kHta13TW6+YB0yta7Kc/J9cKc4Tov4sQaxok5vKStznx/e7Nsk3yThStl4IZrBD2vDOam3cfY1toZKRlY8RFRyLs16bZALVN886JAY8f2ZnIWDGZMtL67aqh0WxEftMhiOZm0Ntggz3rBpPLbihzo7Y3CweNDU9ZBk6RN2hvA==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(376002)(396003)(136003)(346002)(39860400002)(230922051799003)(186009)(82310400011)(1800799009)(451199024)(64100799003)(40470700004)(36840700001)(46966006)(40460700003)(40480700001)(4326008)(83380400001)(336012)(426003)(5660300002)(356005)(81166007)(82740400003)(44832011)(86362001)(36756003)(6916009)(36860700001)(54906003)(316002)(70206006)(70586007)(478600001)(41300700001)(8676002)(8936002)(47076005)(2906002)(2616005)(26005)(6666004)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Oct 2023 12:46:12.8069 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6777bb10-5b5c-40d1-0bbb-08dbc40eb9c8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0F9.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9141
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,205 +119,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now the driver supports also A1 phy layer.
+Abort the dhcp request in the middle by pressing ctrl + c on u-boot
+prompt and validate the abort status.
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Love Kumar <love.kumar@amd.com>
 ---
- drivers/usb/dwc3/dwc3-meson-g12a.c | 73 ++++++++++++++++++++++++++----
- 1 file changed, 63 insertions(+), 10 deletions(-)
+ test/py/tests/test_net.py | 44 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3-meson-g12a.c
-index 195670e4ca..5433ac0dca 100644
---- a/drivers/usb/dwc3/dwc3-meson-g12a.c
-+++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
-@@ -28,6 +28,7 @@
- #include <linux/bitfield.h>
- #include <linux/bitops.h>
- #include <linux/compat.h>
-+#include <dt-bindings/clock/amlogic,a1-peripherals-clkc.h>
+diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
+index cd4b4dc53cbc..1e8eb0357eef 100644
+--- a/test/py/tests/test_net.py
++++ b/test/py/tests/test_net.py
+@@ -6,6 +6,7 @@
  
- /* USB2 Ports Control Registers */
+ import pytest
+ import u_boot_utils
++import re
  
-@@ -102,10 +103,22 @@ enum {
- 	PHY_COUNT,
- };
+ """
+ Note: This test relies on boardenv_* containing configuration values to define
+@@ -104,6 +105,49 @@ def test_net_dhcp(u_boot_console):
+     global net_set_up
+     net_set_up = True
  
--static const char *phy_names[PHY_COUNT] = {
-+static const char *const dwc3_meson_g12a_phy_names[] = {
- 	"usb2-phy0", "usb2-phy1", "usb3-phy0",
- };
- 
-+static const char *const dwc3_meson_a1_phy_names[] = {
-+	"usb2-phy0", "usb2-phy1"
-+};
++@pytest.mark.buildconfigspec("cmd_dhcp")
++def test_net_dhcp_abort(u_boot_console):
++    """Test the dhcp command by pressing ctrl+c in the middle of dhcp request
 +
-+struct dwc3_meson_g12a;
++    The boardenv_* file may be used to enable/disable this test; see the
++    comment at the beginning of this file.
++    """
 +
-+struct dwc3_meson_g12a_drvdata {
-+	const char *const *phy_names;
-+	unsigned int phy_cnt;
-+	int (*clk_init)(struct dwc3_meson_g12a *priv);
-+};
++    test_dhcp = u_boot_console.config.env.get("env__net_dhcp_server", False)
++    if not test_dhcp:
++        pytest.skip("No DHCP server available")
 +
- struct dwc3_meson_g12a {
- 	struct udevice		*dev;
- 	struct regmap           *regmap;
-@@ -119,6 +132,7 @@ struct dwc3_meson_g12a {
- #if CONFIG_IS_ENABLED(DM_REGULATOR)
- 	struct udevice		*vbus_supply;
- #endif
-+	struct dwc3_meson_g12a_drvdata *drvdata;
- };
- 
- #define U2P_REG_SIZE						0x20
-@@ -293,10 +307,11 @@ int dwc3_meson_g12a_force_mode(struct udevice *dev, enum usb_dr_mode mode)
- 
- static int dwc3_meson_g12a_get_phys(struct dwc3_meson_g12a *priv)
- {
-+	struct dwc3_meson_g12a_drvdata *data = priv->drvdata;
- 	int i, ret;
- 
--	for (i = 0 ; i < PHY_COUNT ; ++i) {
--		ret = generic_phy_get_by_name(priv->dev, phy_names[i],
-+	for (i = 0 ; i < data->phy_cnt; ++i) {
-+		ret = generic_phy_get_by_name(priv->dev, data->phy_names[i],
- 					      &priv->phys[i]);
- 		if (ret == -ENOENT || ret == -ENODATA)
- 			continue;
-@@ -354,18 +369,36 @@ static int dwc3_meson_g12a_clk_init(struct dwc3_meson_g12a *priv)
- 	return 0;
- }
- 
-+static int dwc3_meson_a1_clk_init(struct dwc3_meson_g12a *priv)
-+{
-+	int ret;
++    u_boot_console.run_command("setenv autoload no")
 +
-+	ret = clk_get_by_name(priv->dev, "usb_bus", &priv->clk);
-+	if (ret)
-+		return ret;
++    # Phy reset before running dhcp command
++    output = u_boot_console.run_command("mii device")
++    eth_num = re.search(r"Current device: '(.+?)'", output).groups()[0]
++    u_boot_console.run_command(f"mii device {eth_num}")
++    output = u_boot_console.run_command("mii info")
++    eth_addr = hex(int(re.search(r"PHY (.+?):", output).groups()[0], 16))
++    u_boot_console.run_command(f"mii modify {eth_addr} 0 0x8000 0x8000")
 +
-+	ret = clk_enable(&priv->clk);
-+	if (ret)
-+		return ret;
++    u_boot_console.run_command("dhcp", wait_for_prompt=False)
++    try:
++        u_boot_console.wait_for("Waiting for PHY auto negotiation to complete")
++    except:
++        pytest.skip("Timeout waiting for PHY auto negotiation to complete")
 +
-+	return 0;
-+}
++    u_boot_console.wait_for("done")
 +
- static int dwc3_meson_g12a_probe(struct udevice *dev)
- {
- 	struct dwc3_meson_g12a *priv = dev_get_plat(dev);
-+	struct dwc3_meson_g12a_drvdata *data =
-+		(struct dwc3_meson_g12a_drvdata *)dev_get_driver_data(dev);
- 	int ret, i;
- 
-+	priv->drvdata = data;
- 	priv->dev = dev;
- 
- 	ret = regmap_init_mem(dev_ofnode(dev), &priv->regmap);
- 	if (ret)
- 		return ret;
- 
--	ret = dwc3_meson_g12a_clk_init(priv);
-+	ret = data->clk_init(priv);
- 	if (ret)
- 		return ret;
- 
-@@ -398,7 +431,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
--	for (i = 0 ; i < PHY_COUNT ; ++i) {
-+	for (i = 0 ; i < data->phy_cnt; ++i) {
- 		if (!priv->phys[i].dev)
- 			continue;
- 
-@@ -407,7 +440,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
- 			goto err_phy_init;
- 	}
- 
--	for (i = 0; i < PHY_COUNT; ++i) {
-+	for (i = 0; i < data->phy_cnt; ++i) {
- 		if (!priv->phys[i].dev)
- 			continue;
- 
-@@ -419,7 +452,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
- 	return 0;
- 
- err_phy_init:
--	for (i = 0 ; i < PHY_COUNT ; ++i) {
-+	for (i = 0 ; i < data->phy_cnt ; ++i) {
- 		if (!priv->phys[i].dev)
- 			continue;
- 
-@@ -432,20 +465,21 @@ err_phy_init:
- static int dwc3_meson_g12a_remove(struct udevice *dev)
- {
- 	struct dwc3_meson_g12a *priv = dev_get_plat(dev);
-+	struct dwc3_meson_g12a_drvdata *data = priv->drvdata;
- 	int i;
- 
- 	reset_release_all(&priv->reset, 1);
- 
- 	clk_release_all(&priv->clk, 1);
- 
--	for (i = 0; i < PHY_COUNT; ++i) {
-+	for (i = 0; i < data->phy_cnt; ++i) {
- 		if (!priv->phys[i].dev)
- 			continue;
- 
- 		 generic_phy_power_off(&priv->phys[i]);
- 	}
- 
--	for (i = 0 ; i < PHY_COUNT ; ++i) {
-+	for (i = 0 ; i < data->phy_cnt; ++i) {
- 		if (!priv->phys[i].dev)
- 			continue;
- 
-@@ -461,11 +495,20 @@ static const struct dwc3_meson_g12a_drvdata meson_g12a_drvdata = {
- 	.clk_init = dwc3_meson_g12a_clk_init,
- };
- 
-+static const struct dwc3_meson_g12a_drvdata meson_a1_drvdata = {
-+	.phy_names = dwc3_meson_a1_phy_names,
-+	.phy_cnt = ARRAY_SIZE(dwc3_meson_a1_phy_names),
-+	.clk_init = dwc3_meson_a1_clk_init,
-+};
++    # Sending Ctrl-C
++    output = u_boot_console.run_command(
++        chr(3), wait_for_echo=False, send_nl=False
++    )
 +
- static int dwc3_meson_g12a_child_pre_probe(struct udevice *dev)
- {
- 	if (ofnode_device_is_compatible(dev_ofnode(dev), "amlogic,meson-g12a-usb"))
- 		return dwc3_meson_g12a_force_mode(dev->parent, USB_DR_MODE_PERIPHERAL);
- 
-+	if (ofnode_device_is_compatible(dev_ofnode(dev), "amlogic,meson-a1-usb"))
-+		return dwc3_meson_g12a_force_mode(dev->parent, USB_DR_MODE_PERIPHERAL);
++    assert "TIMEOUT" not in output
++    assert "DHCP client bound to address " not in output
++    assert "Abort" in output
 +
- 	return 0;
- }
- 
-@@ -474,11 +517,21 @@ static int dwc3_meson_g12a_child_post_remove(struct udevice *dev)
- 	if (ofnode_device_is_compatible(dev_ofnode(dev), "amlogic,meson-g12a-usb"))
- 		return dwc3_meson_g12a_force_mode(dev->parent, USB_DR_MODE_HOST);
- 
-+	if (ofnode_device_is_compatible(dev_ofnode(dev), "amlogic,meson-a1-usb"))
-+		return dwc3_meson_g12a_force_mode(dev->parent, USB_DR_MODE_HOST);
++    # Provide a time to recover from Abort - if it is not performed
++    # There is message like: ethernet@ff0e0000: No link.
++    u_boot_console.run_command("sleep 1")
 +
- 	return 0;
- }
- 
- static const struct udevice_id dwc3_meson_g12a_ids[] = {
--	{ .compatible = "amlogic,meson-g12a-usb-ctrl" },
-+	{
-+		.compatible = "amlogic,meson-g12a-usb-ctrl",
-+		.data = (ulong)&meson_g12a_drvdata,
-+	},
-+	{
-+		.compatible = "amlogic,meson-a1-usb-ctrl",
-+		.data = (ulong)&meson_a1_drvdata,
-+	},
- 	{ }
- };
- 
+ @pytest.mark.buildconfigspec('cmd_dhcp6')
+ def test_net_dhcp6(u_boot_console):
+     """Test the dhcp6 command.
 -- 
 2.25.1
 
