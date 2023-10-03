@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92EEFE7AD4B
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:42:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEDEEE7AD4C
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9324687493;
-	Tue,  3 Oct 2023 15:41:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 019C68749E;
+	Tue,  3 Oct 2023 15:41:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qJDox5K1";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ybVz1S26";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="shf5vNoj";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Hd1tapqB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42C4D87486; Tue,  3 Oct 2023 15:41:04 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 9D6A487494; Tue,  3 Oct 2023 15:41:05 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 714BE8748B
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:41:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4F318725E
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:41:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,36 +31,36 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
  SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4S0Jqy1fSnz9sTH;
- Tue,  3 Oct 2023 15:41:02 +0200 (CEST)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4S0Jqz4XpNz9spF;
+ Tue,  3 Oct 2023 15:41:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696340462;
+ s=mail20150812; t=1696340463;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DbhI0TmL5jXer/4DKeucIwj+1cKOz7Gjs+87Quh0w/s=;
- b=qJDox5K1jk8Pq0JKMjfMJV3SlYAcIei93svtiuKkQiOPDu1GbqWB9bfOEaVyReA1zze7xW
- B84irhESsU9IQF1VBd+a5HzU0PIL3wl5uBmSMtIVSw+WkY0sgLCTb2CV0dgRA06nrmncNa
- eM+4BnEFSJXG8UmMsegpy02y4zNFTUN5oXMgwK9CS7dM8Dv12RP21XC0DVPU6W8i2FVrZ8
- lSMX6JWu7IKr1ifi9KtTn6CptbuTpW+llSDK0ILZccgPxdtKDaZyQYVf0Ro5EwY1pSXHIL
- jnqiMuRZ98ob8udCj7EkZMWu1imkkwRsCsbQA3zChdeowE9U231N23RwA0LPxw==
-Message-ID: <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
+ bh=H9jfFLco6at+1xOI7jImdF1dxyqnr0iRi5UABVVvhdc=;
+ b=shf5vNojzNGrALoT08VzGZDB+2CGc1MkmWWxC4F8Q2xehSw1GWos/9rLD6Y8VRWa74vx3o
+ bNoY+Rgd7XqOEgAqN51yiPXXhdq8ABMl5S87FPm4YfH0m019KcMdNMuhDVQVxcrrDdMOH4
+ LlU0N8QujaYMS3tWJ+1vSV1vVGXq/dNzUa4ZyUikZOisQCkBUeVXasvT9m6AFqXp+Ik86n
+ rHXj6DSg5XRKJKU5SW5xEVutvOII34byaZa6ghI+EQ8IvJfJpy1BEsibKxwQbzZr8uprym
+ I+LeGmZfl2mtaqn0iaJmf1viDpOq/sD/00P7jrTJ65l+hvXwyQhIcHSPPZXjuw==
+Message-ID: <af43734f-e901-3261-1a26-094b5c84583f@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696340460;
+ s=mail20150812; t=1696340461;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DbhI0TmL5jXer/4DKeucIwj+1cKOz7Gjs+87Quh0w/s=;
- b=ybVz1S261s9Mt9DrXVX7Nl21Po8RyaHwGFT976GgEZVE+FlwQI6qs4Q57bwku0IFqv20zt
- Pgq9TMBcGFEQMhNh+hnecCUgy1QSuCS3KAn5wPIXBNgSINbhu2wtvtebiXNA5PmMtwFXC2
- gXKjwTaXZsbGMUUbw6d9n5I4ynMFUOxBuxof+eHsyyqXJOCrqok9UBg/SUGy/rH9yJV5m/
- iYmLzsUnSemYRCscOhtwQK+UaO6QGzkUgzmz5g65AwhnxGnRQSwqKcVGf216mlPWzBdIos
- rpDyloJljFhfGLEq/2yJj4xnKd21jyqharj7ndnywoSbAmK7a+5O0Bo2CmmOFA==
-Date: Tue, 3 Oct 2023 15:27:44 +0200
+ bh=H9jfFLco6at+1xOI7jImdF1dxyqnr0iRi5UABVVvhdc=;
+ b=Hd1tapqBL1c9NJLpEASlSaqrGS7IKb5/oxMRs2EDF6sdCf2dAnxErbK5wtREy4/pcIZoE7
+ aP9wn+kitIANda2qeEpJ1oI5GQg4Jqa/BWckPqzj7ghFkiljVayXGe8menBn0eJSe/AXn5
+ qNF4Dj3ZT31OMib4buiw+FF4IfQzb2bFoTewqqPrCclGlehi7hWSIwarxb+2qVlHiAZR7v
+ CygFRvBHYYcFTeeLXAqkd1QjQkTKB/lhiJNHYunYwzgkWaUV/qCraeEIKEssl8SSQdTVtK
+ 28+irRZ4+KaztsK9eXK5POlGExA38D0eGLNtIADViuorhrtD301gQq0NPI33ag==
+Date: Tue, 3 Oct 2023 15:28:47 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 12/16] arm: rmobile: Include <asm/types.h> in header
+Subject: Re: [PATCH 13/16] arm: rmobile: Add CPU detection for RZ/G2L
 Content-Language: en-US
 To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -68,14 +68,14 @@ To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-13-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-14-paul.barker.ct@bp.renesas.com>
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20230920124212.63535-13-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20230920124212.63535-14-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: jepegz196b7qsd5kqwxs8s9b4wpu8bq3
-X-MBO-RS-ID: 35f2f2f7ea07e1ca80b
-X-Rspamd-Queue-Id: 4S0Jqy1fSnz9sTH
+X-MBO-RS-ID: 6a904c32c8b62d35268
+X-MBO-RS-META: shajwo5indigco5bo9n8z8yoxxfxkqbu
+X-Rspamd-Queue-Id: 4S0Jqz4XpNz9spF
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,7 +93,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 9/20/23 14:42, Paul Barker wrote:
-> We don't want to rely on source files including <asm/types.h> before
-> <asm/arch/rmobile.h>.
+> The ARM TrustedFirmware code for the Renesas RZ/G2L SoC family passes a
+> devicetree blob to the bootloader as an argument in the same was
 
-What kind of error does this solve ?
+same way (typo)
+
+> previous R-Car gen3/gen4 SoCs.
+
+Gen3 / Gen4
+
+> This blob contains a compatible string
+> which can be used to identify the particular SoC we are running on.
+
+Why not read the PRR ?
+
+[...]
