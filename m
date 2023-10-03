@@ -4,83 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CEE6E776D4
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 00:22:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 136E8E776E5
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 00:56:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D648186DDE;
-	Tue,  3 Oct 2023 02:22:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C506886DB5;
+	Tue,  3 Oct 2023 02:56:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K3LmWlgJ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="YNKFGizi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B4B0686DE7; Tue,  3 Oct 2023 02:22:52 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E8FC886DDE; Tue,  3 Oct 2023 02:56:14 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7004386DCA
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 02:22:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F2E3B86D5A
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 02:56:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-d8682b713c4so78621276.0
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 17:22:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696292569; x=1696897369; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=h9OuhKxRr8cfmm2xi778wO2tX2r5BrqVtjcFjka2x3I=;
- b=K3LmWlgJ2BaGNXQpNBduX/j1c8NwTjJy2vWZVw86inYbkaL6xXxREb5uKcymbZH11T
- +HenqGd0JfV3T0kOyfhBAgTXOU6qsX+rb363D5Z6igrjfzzs04RvH35YUrYc3qM3yoNQ
- 1O+S4k0/tbDl2EOrF7XJbysXNLs2l3V391UNMJUE85c+YTLNJVxMWMbX6UWlsxgGfJ1Q
- D0SKIbNAtV00B6pggdws7je/KWiaTtvcJ2QlJoiF8d/7jSy9fwQzmz3uSBZQBD6Ffzgy
- el0qOY4heVb7GPHTrCrbkn0wT+d80pCmF7kHo+itaHwNq5+slh7LEMoIq8fTNtWQ6Vn/
- K90w==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 246673F622
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 00:56:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1696294572;
+ bh=Ajv7zU45gF0vRIm5FD+KEw7CqhG3UAOVVz1GXG/xUNs=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=YNKFGizi2z+2wtcx3ZRu2/T3rylhr0jBpUqz6RLRuXjPg6EWuw5vXGK2NkT4vaF0J
+ Mp2lrzTozv4/b5j6ADsgfsb6SgLZx3IivZqipDacejMtQw+8/F5Xlg4aOjmnm9imOq
+ vnBEGC+SMkDa1b8qpbXkRqo0HKck6VhvrmDm7sXSE1ITYpMgwWlsP7mSAe68pK90DH
+ xMZM0nn0ndtGHHSYOledy0kcOU4tQRyrlJ14cdV7sRPvnkG6a8+aNPy6M91dlJj/rR
+ zoeW7dB90zIRLxZzbsaoqXLgpoZ2M7lSXonpKQRKp8VHg0a7VSUXETBN1qCbr7nwQX
+ EZuBNLWCd/eew==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-3233a13b47eso318212f8f.1
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 17:56:12 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696292569; x=1696897369;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
+ d=1e100.net; s=20230601; t=1696294571; x=1696899371;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=h9OuhKxRr8cfmm2xi778wO2tX2r5BrqVtjcFjka2x3I=;
- b=O4hLZzQE2Cfeq9d9G4Zeh2hIXqtSqamQVJQRuSlotaAGl6JgOzz90EOtjNAmRyJz6U
- Vja30osgmeiIcIiD6Fpb0t8a3Dl+2PTSCkUyP9qVah68uOaYlD4m6Lk9pVMX716HpAx8
- FVmsCUsPAMcavjEhRbb8+v3ILTFrPSMYPQLXC3ZKZFBtimfY7P+UN8Gjv9V88shxrCCV
- R9TlaOwym+t1MlJH1kSWdP6Fw+N/KRH092jo/yINn7Cp6H6o56dsZivJovrcNJ+6QSzD
- GjIzNA9Fox88WZQKUcTYydOp/1/RMQIR6JfIOOcwA7HE5wbyFS8z1xUVhfCeW5nMv9Ef
- b4vQ==
-X-Gm-Message-State: AOJu0YyUHYFGzGqH0k2ozHcTcL7XTY2DDZUzLCDPNLN1mG51N1GpXtOD
- lgDUhj/raDahKB64PURvTvcFFA==
-X-Google-Smtp-Source: AGHT+IF9gNWb5Lk8HBrLc0Sv19Xm0FCGvng31Eg/rZ99Qq8yvwTlAQ/4WK2l+6vrrTuAwSBpMAVVoA==
-X-Received: by 2002:a25:ac43:0:b0:d85:aebb:86ca with SMTP id
- r3-20020a25ac43000000b00d85aebb86camr9142636ybd.5.1696292568996; 
- Mon, 02 Oct 2023 17:22:48 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:783d:e8bb:e013:a869])
- by smtp.gmail.com with ESMTPSA id
- w17-20020a63af11000000b0057c44503835sm49592pge.65.2023.10.02.17.22.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 17:22:48 -0700 (PDT)
-Date: Tue, 3 Oct 2023 09:22:45 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: trini@konsulko.com, etienne.carriere@st.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 3/4] sandbox: add SCMI power domain protocol support for
- testing
-Message-ID: <ZRte1Xr0c0rS7K1w@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Simon Glass <sjg@chromium.org>, trini@konsulko.com,
- etienne.carriere@st.com, u-boot@lists.denx.de
-References: <20230926070043.738340-1-takahiro.akashi@linaro.org>
- <20230926070043.738340-4-takahiro.akashi@linaro.org>
- <CAPnjgZ20qGzZD=jNh0c2cucN-M8AKnvSh_kD0bL9=JeCC+doLA@mail.gmail.com>
+ bh=Ajv7zU45gF0vRIm5FD+KEw7CqhG3UAOVVz1GXG/xUNs=;
+ b=GDPjcVYJ4RseF/dyMsTKSzP+X2FbEa6JqdCnxVLiMvgw7NB+ki9krPuwyP2VuwfR16
+ DY22x/dUPcdpTa0ciWalkhm95hJpwjt8+bt6e/lSeq7qy2bDyiP/NJJ3QAdatfcA3i6S
+ vqFh1V1TQZYjUU0l9TpPOMELLausdO3qfQ9baWjEiVxAXUigCWixHJ1LroNwp3+hFjLJ
+ iH3AaAfazLchVBE3+V7mz5v9rfuN8DvVImybqXgTxh/Tv4OXTDNyPJthpeTjTyHjGPRG
+ 4Mo6aInoV/B/XOWdY12NW1czgcLV8d77xU9wJu9h3FZwx/1D8pnBGPLb2FwIatcpIh6d
+ XKkg==
+X-Gm-Message-State: AOJu0YyonlUQ7PqSKkqbR9PKjnAULWHxIIiFsEGbftSfFXQee1xw8yUV
+ qgubw0ut+pZ3OQeHHHOq0AoeIjxbNg+8z2oUgHZpJlhJkmKoOeqtKvQn/LZpiTVsmECM6WL8Mzp
+ tctdBCN3NRKg0zWViOxx7wwlmYxTRN+w=
+X-Received: by 2002:adf:f9cb:0:b0:319:7472:f0b6 with SMTP id
+ w11-20020adff9cb000000b003197472f0b6mr11645825wrr.15.1696294571635; 
+ Mon, 02 Oct 2023 17:56:11 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGye3Of5RPGmj/ADmPQy8VK3Na9PuC8lfJydWC7PqvxCUv1Yr6IpA5wJmWuZZBHkIUoqpANgQ==
+X-Received: by 2002:adf:f9cb:0:b0:319:7472:f0b6 with SMTP id
+ w11-20020adff9cb000000b003197472f0b6mr11645814wrr.15.1696294571196; 
+ Mon, 02 Oct 2023 17:56:11 -0700 (PDT)
+Received: from [172.25.0.170] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ f2-20020a056000128200b0032196c508e3sm216865wrx.53.2023.10.02.17.56.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 02 Oct 2023 17:56:10 -0700 (PDT)
+Message-ID: <41b5ec6b-7a7e-45dc-9365-4cd61cfc0501@canonical.com>
+Date: Tue, 3 Oct 2023 02:56:09 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ20qGzZD=jNh0c2cucN-M8AKnvSh_kD0bL9=JeCC+doLA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] input: avoid NULL dereference
+Content-Language: en-US, de-DE
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@google.com>, u-boot@lists.denx.de,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+References: <20231002222725.25125-1-heinrich.schuchardt@canonical.com>
+ <20231002224641.GB8465@bill-the-cat>
+ <beb3e0aa-a72d-a4dc-4fed-3c2e0453e9f0@prevas.dk>
+ <20231002234030.GC8465@bill-the-cat>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231002234030.GC8465@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,96 +107,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 10/3/23 01:40, Tom Rini wrote:
+> On Tue, Oct 03, 2023 at 01:37:14AM +0200, Rasmus Villemoes wrote:
+>> On 03/10/2023 00.46, Tom Rini wrote:
+>>> On Tue, Oct 03, 2023 at 12:27:25AM +0200, Heinrich Schuchardt wrote:
+>>>>   
+>>>>   	error = stdio_register(dev);
+>>>> -#if !defined(CONFIG_SPL_BUILD) || CONFIG_IS_ENABLED(ENV_SUPPORT)
+>>>> -	/* check if this is the standard input device */
+>>>> -	if (!error && strcmp(env_get("stdin"), dev->name) == 0) {
+>>>> -		/* reassign the console */
+>>>> -		if (OVERWRITE_CONSOLE ||
+>>>> -				console_assign(stdin, dev->name))
+>>>> -			return -1;
+>>>> +	if ((IS_ENABLED(SPL_BUILD) || CONFIG_IS_ENABLED(ENV_SUPPORT)) &&
+>>>> +	    !error) {
+>>>> +		const char *cstdin;
+>>>> +
+>>>> +		/* check if this is the standard input device */
+>>>> +		cstdin = env_get("stdin");
+>>>> +		if (cstdin && !strcmp(cstdin, dev->name)) {
+>>>> +			/* reassign the console */
+>>>> +			if (OVERWRITE_CONSOLE ||
+>>>> +			    console_assign(stdin, dev->name))
+>>>> +				return -1;
+>>>> +		}
+>>>>   	}
+>>>> -#else
+>>>> -	error = error;
+>>>> -#endif
+>>>>   
+>>>>   	return 0;
+>>>>   }
+>>>
+>>> This is an example I think of where #if is more readable.
+>>>
+>>
+>> I kind of agree, but at the same time, this could just be rewritten to
+>> avoid that extra indentation. Turn the condition around and make it an
+>> early return, then the rest of the function need not be indented.
+> 
+> Yes, both the indentation and having to use "CONFIG_SPL_BUILD" to start
+> with (which is a special case!).
 
-Thank you for the review.
+The configuration check looks incorrect:
 
-On Sun, Oct 01, 2023 at 07:17:17PM -0600, Simon Glass wrote:
-> Hi AKASHI,
-> 
-> On Tue, 26 Sept 2023 at 01:01, AKASHI Takahiro
-> <takahiro.akashi@linaro.org> wrote:
-> >
-> > SCMI power domain management protocol is supported on sandbox
-> > for test purpose. Add fake agent interfaces and associated
-> > power domain devices.
-> >
-> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> > ---
-> >  arch/sandbox/dts/test.dts                    |   6 +
-> >  arch/sandbox/include/asm/scmi_test.h         |  20 ++
-> >  configs/sandbox_defconfig                    |   1 +
-> >  drivers/firmware/scmi/sandbox-scmi_agent.c   | 265 ++++++++++++++++++-
-> >  drivers/firmware/scmi/sandbox-scmi_devices.c |  10 +
-> >  5 files changed, 301 insertions(+), 1 deletion(-)
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> nit below
-> 
-> >
-> > diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-> > index 36de6a37cf6d..38fcf42cd23d 100644
-> > --- a/arch/sandbox/dts/test.dts
-> > +++ b/arch/sandbox/dts/test.dts
-> > @@ -693,6 +693,11 @@
-> >                         #address-cells = <1>;
-> >                         #size-cells = <0>;
-> >
-> > +                       pwrdom_scmi: protocol@11 {
-> > +                               reg = <0x11>;
-> > +                               #power-domain-cells = <1>;
-> > +                       };
-> > +
-> >                         clk_scmi: protocol@14 {
-> >                                 reg = <0x14>;
-> >                                 #clock-cells = <1>;
-> > @@ -1589,6 +1594,7 @@
-> >
-> >         sandbox_scmi {
-> >                 compatible = "sandbox,scmi-devices";
-> > +               power-domains = <&pwrdom_scmi 2>;
-> >                 clocks = <&clk_scmi 2>, <&clk_scmi 0>;
-> >                 resets = <&reset_scmi 3>;
-> >                 regul0-supply = <&regul0_scmi>;
-> > diff --git a/arch/sandbox/include/asm/scmi_test.h b/arch/sandbox/include/asm/scmi_test.h
-> > index ccb0df6c148f..1b0f4464b98f 100644
-> > --- a/arch/sandbox/include/asm/scmi_test.h
-> > +++ b/arch/sandbox/include/asm/scmi_test.h
-> > @@ -6,10 +6,21 @@
-> >  #ifndef __SANDBOX_SCMI_TEST_H
-> >  #define __SANDBOX_SCMI_TEST_H
-> >
-> > +#include <power-domain.h>
-> > +
-> >  struct udevice;
-> >  struct sandbox_scmi_agent;
-> >  struct sandbox_scmi_service;
-> >
-> > +/**
-> > + * struct sandbox_scmi_pwd
-> > + * @id:                Identifier of the power domain used in the SCMI protocol
-> 
-> @pstate ?
+Function get_env() only exists if CONFIG_$(SPL_TPL)_ENV_SUPPORT=y.
+There is no good reason to check for CONFIG_SPL_BUILD.
 
-Yes, I will add a comment.
+Why do we have symbols CONFIG_SPL_INPUT and CONFIG_TPL_INPUT if there is 
+no board using these?
 
--Takahiro Akashi
+Best regards
 
+Heinrich
 
-> > + */
-> > +struct sandbox_scmi_pwd {
-> > +       uint id;
-> > +       u32 pstate;
-> > +};
-> > +
-> >  /**
-> >   * struct sandbox_scmi_clk - Simulated clock exposed by SCMI
-> >   * @id:                Identifier of the clock used in the SCMI protocol
-> > @@ -45,6 +56,8 @@ struct sandbox_scmi_voltd {
-> >
 > 
-> [..]
+>> I also think the conversion above is buggy (loses a ! on the SPL part),
+>> but also, the condition is needlessly convoluted to begin with.
+>> !defined(CONFIG_SPL_BUILD) implies ENV_SUPPORT, so the condition is
+>> equivalent to just CONFIG_IS_ENABLED(ENV_SUPPORT). So I'd add a
+>>
+>>    if (!CONFIG_IS_ENABLED(ENV_SUPPORT)
+>>      return 0;
 > 
-> Regards,
-> Simon
+> Changes like that would make things overall better, agreed.
+> 
+
