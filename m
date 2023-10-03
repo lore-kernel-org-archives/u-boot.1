@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CC2E7542B
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:38:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6257E7542B
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:38:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4CD087466;
-	Tue,  3 Oct 2023 08:37:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3724C87468;
+	Tue,  3 Oct 2023 08:37:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IdNOpiyk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q+MkSxzL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43F248745D; Tue,  3 Oct 2023 08:37:05 +0200 (CEST)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 852A887281; Tue,  3 Oct 2023 08:37:05 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F6AD87281
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:37:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9738D8726E
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:37:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-5046bf37daeso611078e87.1
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:37:03 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5041d6d8b10so642399e87.2
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:37:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696315023; x=1696919823; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696315022; x=1696919822; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OwFbiwXgnoNebUKcMaE5CPo9N+pBTPcV90X8EJXYPyk=;
- b=IdNOpiykIFR/07lWKueO/i1rgokcUi35HGsoGcIBF+4C9gk68r2MF9mnoodnk84hCo
- 2m3TnU2uL29pUu/O+i0rMKTQvIbRD0iJSrmif0qV3HuwgyWoJwV0GwWgplQMuQ2Cnk1z
- UsnZHufDr/v0FiaMjFQnvUHenPfJUYHKZ5lrRFbW6O/OKiDuBIANRCN2C/w5UV53Ik5s
- 5ujpGAh/C5DmvXDODbVaRkw4GUcVeHpycR0nqis5jghD1ibbEOYEnbCUQsKPIhpcWyJe
- pdsnyAa8OTClcM9nWXjl3liajlGm/Ta/k5lC1H8AMMwsbaGPQJY1jkQJJP03JyLA8vyk
- YBOw==
+ bh=mAZXWCtOXErgwteXkvnggMCEi7wnIc4O1akb4gC0G80=;
+ b=Q+MkSxzLWThD79EFvcbPGukzEvKTZjBj+qxYYWXEW9ejySrDGoBMWrk64K7k0lks2l
+ xmcSvr8hnef0lqiTxXwJFGS7WGhbpGGRD/B9nNfaz2YU9n0kntWVTeMBcDvQXbBVuODI
+ Jk9lpy0Ad2Fm3NtN+rHNJSjy8ka+ZLWYMeVqioKtCTUp2xXZj1+g5lFscNBC1BIr1eIT
+ rW9Dpe7ljFmi0XMRgugmo/oExOGk4WCw2qPfeHYCL9/mzWGTHdgjxO3wEVn2b1Yhpk6y
+ c37o5bpSjqtbD1GY3YKFGVxAolaWZtlv6c6J9deirfX8P1VCDnvo024U/QD3CfQ9ij76
+ iuXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696315023; x=1696919823;
+ d=1e100.net; s=20230601; t=1696315022; x=1696919822;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OwFbiwXgnoNebUKcMaE5CPo9N+pBTPcV90X8EJXYPyk=;
- b=RYxiHIztopJ74utB+rpLOoADPgHVw91g3NoxBt/ex80+RDeMTshRfOAx/1pETIURcW
- nJzRHjmF00eqNbCw8+txT16n6ob2fc6cUiaIOl/mNFK0imMTbTaVc5cidPmlZOGgkfzo
- kOFavFQLX2GTqgkuN1DEmvfftx+Wd/az0SLmyfv5LcH+gLWTMsp1TeS9zKpNXxrkN3/A
- UUlPPRKHTpMcpQVMuWOUfKOoVukV/QOZlcrOUo+uy2YUcQFv5a84tZ+hh5sKcmHL5HlZ
- 0aS05Z17GDzWUa+I/m4U07+pQqeXue0uY98hUSjgxijw/lnEiAqw56YTyx2uMkXZfRqy
- dFCA==
-X-Gm-Message-State: AOJu0YwOfISesPpu2SZyZc7hycAiHA/ReLpMim2Ua2G2yL6NILVGqMMx
- jh1ushQeRhgyUgKIfbSHzdQ=
-X-Google-Smtp-Source: AGHT+IH0D7z2C6krHgTTLUTJPCgV+ifzrQQa+8kT+P8OEXrNj4DDm3GEas+IE3nYSDVAgs6l5dmqug==
-X-Received: by 2002:a05:6512:29b:b0:503:fee:5849 with SMTP id
- j27-20020a056512029b00b005030fee5849mr9494242lfp.53.1696315022663; 
- Mon, 02 Oct 2023 23:37:02 -0700 (PDT)
+ bh=mAZXWCtOXErgwteXkvnggMCEi7wnIc4O1akb4gC0G80=;
+ b=SOcmxpSCr0ECBijYvLa8wuCeym3MLDJSge0D5NNxEOKU8G+UMRPemZ0JEV/0kgPp1F
+ FtZ4OzSic7LwGuMaVza86tvYrXEHHil9BFE0FTrShNZly91yn3fHzFwwp4FYB5k896Rz
+ Uxjuigcgnsb0xotpNLMWwBhMBtiL1JDvOdYMKDT0QCX6J8bDBhDgnNtzARxx/pVNSIgI
+ hR5EWss2SovvlsPMGUhFTgBpbF7JqWVW0cyePorMvFaa0TuQyaky6C8lVCWegTRilNX1
+ YH45uIWRaxg/MvhTswzCN7iDugcM127FM3XcijHfhp8YdUuE94rMtRR5AZ5c5xn+Jc2l
+ Xzdw==
+X-Gm-Message-State: AOJu0YwVuFVJCxy5sI+VD43sncLreY1LrOCfZD9Is7aAxWlkSjxGBT5a
+ sP5MOR1X5Af7/p1x5X2iWWmdQYwyCVQ=
+X-Google-Smtp-Source: AGHT+IHiE3mggARMMLSFjANuO7TUsBH+B+6y1lC3qLgqLWcnEIxETssliYyhKVakgDTIRoYiDaUduw==
+X-Received: by 2002:ac2:4f0b:0:b0:500:bb99:69a7 with SMTP id
+ k11-20020ac24f0b000000b00500bb9969a7mr13742392lfr.14.1696315021842; 
+ Mon, 02 Oct 2023 23:37:01 -0700 (PDT)
 Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
  s1-20020a19ad41000000b00502b04e2722sm79636lfd.3.2023.10.02.23.37.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 23:37:02 -0700 (PDT)
+ Mon, 02 Oct 2023 23:37:01 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 09/16] ARM: dts: lg-x3: complete missing bindings
-Date: Tue,  3 Oct 2023 09:36:40 +0300
-Message-Id: <20231003063647.42770-10-clamor95@gmail.com>
+Subject: [PATCH v3 08/16] ARM: dts: endeavoru: complete missing bindings
+Date: Tue,  3 Oct 2023 09:36:39 +0300
+Message-Id: <20231003063647.42770-9-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231003063647.42770-1-clamor95@gmail.com>
 References: <20231003063647.42770-1-clamor95@gmail.com>
@@ -94,45 +94,55 @@ Clean up the tree and prepare for DM PMIC migration.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra30-lg-x3.dtsi | 11 ++++++++---
- 1 file changed, 8 insertions(+), 3 deletions(-)
+ arch/arm/dts/tegra30-htc-endeavoru.dts | 15 +++++++++++++--
+ 1 file changed, 13 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/dts/tegra30-lg-x3.dtsi b/arch/arm/dts/tegra30-lg-x3.dtsi
-index 922e39915e..6e52fc5a53 100644
---- a/arch/arm/dts/tegra30-lg-x3.dtsi
-+++ b/arch/arm/dts/tegra30-lg-x3.dtsi
-@@ -1,7 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
+diff --git a/arch/arm/dts/tegra30-htc-endeavoru.dts b/arch/arm/dts/tegra30-htc-endeavoru.dts
+index c55e193d1d..5c7b2deae5 100644
+--- a/arch/arm/dts/tegra30-htc-endeavoru.dts
++++ b/arch/arm/dts/tegra30-htc-endeavoru.dts
+@@ -5,7 +5,6 @@
+ /* CPU Speedo ID 4, Soc Speedo ID 1, CPU Process: 1, Core Process: 0 */
  
  #include <dt-bindings/input/input.h>
 -
  #include "tegra30.dtsi"
  
  / {
-@@ -91,6 +90,14 @@
- 					regulator-boot-on;
- 				};
+@@ -66,13 +65,22 @@
+ 			compatible = "ti,tps80032";
+ 			reg = <0x48>;
  
-+				avdd_3v3_periph: ldo2 {
-+					regulator-name = "avdd_usb";
-+					regulator-min-microvolt = <3300000>;
-+					regulator-max-microvolt = <3300000>;
++			ti,system-power-controller;
++
+ 			regulators {
++				vdd_1v8_vio: smps5 {
++					regulator-name = "vdd_1v8_gen";
++					regulator-min-microvolt = <1800000>;
++					regulator-max-microvolt = <1800000>;
 +					regulator-always-on;
 +					regulator-boot-on;
 +				};
 +
- 				vdd_usd: ldo3 {
- 					regulator-name = "vdd_sdmmc3";
- 					regulator-min-microvolt = <3000000>;
-@@ -103,8 +110,6 @@
- 					regulator-name = "vdd_ddr_rx";
- 					regulator-min-microvolt = <2850000>;
- 					regulator-max-microvolt = <2850000>;
+ 				/* DSI VDD */
+ 				avdd_dsi_csi: ldo1 {
+ 					regulator-name = "avdd_dsi_csi";
+ 					regulator-min-microvolt = <1200000>;
+ 					regulator-max-microvolt = <1200000>;
 -					regulator-always-on;
--					regulator-boot-on;
  				};
  			};
  		};
+@@ -82,6 +90,9 @@
+ 		status = "okay";
+ 		bus-width = <8>;
+ 		non-removable;
++
++		vmmc-supply = <&vcore_emmc>;
++		vqmmc-supply = <&vdd_1v8_vio>;
+ 	};
+ 
+ 	micro_usb: usb@7d000000 {
 -- 
 2.39.2
 
