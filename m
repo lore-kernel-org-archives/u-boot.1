@@ -4,120 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26628E7AD78
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 17:05:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1B7AE75455
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 17:58:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84D0186C4D;
-	Tue,  3 Oct 2023 19:05:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arri.de
+	by phobos.denx.de (Postfix) with ESMTP id A032F86E2C;
+	Tue,  3 Oct 2023 19:58:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=arrigroup.onmicrosoft.com header.i=@arrigroup.onmicrosoft.com header.b="EXbOCDKK";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.b="rAtkHQSV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67CE786E5A; Tue,  3 Oct 2023 19:04:56 +0200 (CEST)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on070f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0d::70f])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70AE786C4D
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 19:04:54 +0200 (CEST)
+ id A026986E2C; Tue,  3 Oct 2023 19:58:46 +0200 (CEST)
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+ by phobos.denx.de (Postfix) with ESMTP id A531B86DED
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 19:58:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.microsoft.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=arri.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=LPolak@arri.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZQdZt4sHNWotfWMxPPiobrkVzHhP+gH9bjCahYbBr+Fo9EPiWVwaJHbeZwXQiGSfLDnyfNUtNLybpKOAgIPNZ59cwjDRCa/AkwihIyYqUIbUQEx7zW8uoEQuC6Gql9xGN7rN32fPSqPQevqq0BwNZyb2djI6Cv1EdZRnEgxCv8JRloO88AZZJS+qX3+HZxTr9TCTYGrakvCSkSOLCKelhU9YLrQHhKiSjYPHiWx+ZWPbxYNpbm6gW7OWA7EOoxpKtMPw04OH2eBsZdURFw7+aW6LhQj850DflObeBAkmHXya+gBExHeB1cT/1cbB5pLKOQnrB+u+AYlIpB0wlNntDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VAzajAoo8/2ttGicPbhtPNqJdNWCmogaL8Ui1LjGYCg=;
- b=aohYyJSb/kUskZ45zovQGDi7FN5SeUSWzAo1dIEkaw9JojjQoMhVXOzG93t4I+xfIvrUmbZ3hl58lUXxeFU8fF6/SSJQ+5rQP+uUhocf0M8ldGripjOLr/1pK330vKiuQl+fyF+He4c0qNSZQirL+HX8pdN5qe0gqVQPxU5z1MWqgEEXNhgTQRxRFErUZhxtfo44cS206rZ1eSzesppeLMEDOkQZVQTW2VOGh7ZERLwA9mbk/9skuSpSw4OK2M1jS9vFD+NiW5gtQ/Nm2eSkbFw1flfA8fdEdg5d6CJlVHSNkmiP3F7YHhjDwEg7q3/6M8szF67ovqpPpHNS1Scqxg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=arri.de; dmarc=pass action=none header.from=arri.de; dkim=pass
- header.d=arri.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VAzajAoo8/2ttGicPbhtPNqJdNWCmogaL8Ui1LjGYCg=;
- b=EXbOCDKK6Fhfg2WkknzX1z5ZkFFfG3imjqeVdj+6xYsB6RQQrWLJM40IfccgDs4EQaJQLWASLJc9VJ5HIPBZK36z+K/1BeNcSTE7nAU50MSGdqiGzGINr4e0EYswmfsmsaex7now6+CP0r82ny7stbzCPTvt6ytGm/mW92/5CPw=
-Received: from DU0PR07MB8419.eurprd07.prod.outlook.com (2603:10a6:10:353::13)
- by DU2PR07MB8173.eurprd07.prod.outlook.com (2603:10a6:10:272::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.28; Tue, 3 Oct
- 2023 17:04:52 +0000
-Received: from DU0PR07MB8419.eurprd07.prod.outlook.com
- ([fe80::a48:2399:6ba1:da39]) by DU0PR07MB8419.eurprd07.prod.outlook.com
- ([fe80::a48:2399:6ba1:da39%4]) with mapi id 15.20.6838.030; Tue, 3 Oct 2023
- 17:04:51 +0000
-From: "Polak, Leszek" <LPolak@arri.de>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: "michal.simek@amd.com" <michal.simek@amd.com>, Stefan Roese <sr@denx.de>
-Subject: [PATCH v3] arm64: versal: Add SelectMAP boot mode identification
-Thread-Topic: [PATCH v3] arm64: versal: Add SelectMAP boot mode identification
-Thread-Index: AQHZ9hlFwxYl+vQaRUG30MYX0TM2Vw==
-Date: Tue, 3 Oct 2023 17:04:51 +0000
-Message-ID: <DU0PR07MB84197FD4D47E8F4921E200B1C8C4A@DU0PR07MB8419.eurprd07.prod.outlook.com>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=arri.de;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DU0PR07MB8419:EE_|DU2PR07MB8173:EE_
-x-ms-office365-filtering-correlation-id: 099b651c-c292-4324-537a-08dbc432dbdf
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: OcsP4HWxKTs06W05yyb6Tju350Q7jr2SxOl2mOzQNRghcYD+oNBqL0RptApF+UG2VhFm4RaFEVRbguQDevS0g6KSW3h8MoOz7P9yOtlu50085pGRGnudRSHRvf2vgF9/0WAQ9DuLSMn4vBYErYKkHAKwvrTPb3b/0EFzu1JpDNFRKoICczZ8tMLSOiSugWeN5f8qcJgVD+0qdYPPHMGZ2p3T4Am9tGqBL/6caTCnHJkzPytCNXwhLNAq5GyBFsua+EBxGOO5Op9IwQd9oV2twbNuG9WEPamxXX8rZCd5ho8aqZjTSdrW3oiwM7TY0qJd02l8g4SPR62AzQAqLV2823wbSJWkJJb7YkcyTn7/0LR5Qg5+QMZKYCdJa8fSwbEwLACh+v6X/pExqYy6ey0WOY9HjqE0UqxSHnmor3ukAJzTxgSMbwaxZQUm3IOfgOltFm8fTw2sxiRVrUlkbVuYDa+nIsvrqJvYi68LXvQBhUc/is8GZC/nFRpeNNP4xfpy0W0yLCHJqQIphu0vkCe50DAe/QLr+m0JRogkjhZKSE1Cv4J9jQVhUXcH/+xDGurYYCg0VKg5Yv2weLyX5AOBW/FUp95rdSDNJ0HAAOeI8WkLrFU2u6t+01vZt36f1U+RxPai27kT8W2zvmEuNQsUj6aE70xxw0bZgQq27xRBUtY=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU0PR07MB8419.eurprd07.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376002)(366004)(136003)(346002)(39860400002)(396003)(230922051799003)(186009)(1800799009)(451199024)(64100799003)(478600001)(55016003)(26005)(9686003)(38070700005)(122000001)(38100700002)(33656002)(86362001)(71200400001)(6506007)(7696005)(54906003)(64756008)(41300700001)(66476007)(66446008)(76116006)(66946007)(316002)(6916009)(4326008)(66556008)(8936002)(8676002)(91956017)(52536014)(2906002)(5660300002);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?QnicPxAySux0nM5XTh9jzminBdxFS8yj8EcY/2F4FBdkCNoK0fYxwHaqGB?=
- =?iso-8859-1?Q?+MPPzY/+CHvsXx60lasZC1g2ZY8SSDYWhDvCB+t5I1juwpTe1CQKkd6lnB?=
- =?iso-8859-1?Q?CZyElOiNOBO4ddlJIHLzn8+NBRNAUBfBLhA4bqlKDPT03PBSWfZaglKK1a?=
- =?iso-8859-1?Q?SLMbP8IvkOAzFIpQhByvJXQMp9Bqto+xNNYIXtr5NmfaILYjtydNAbK71h?=
- =?iso-8859-1?Q?CpLF1WHpcixvbmZn9p1viQQkLChWc+NJK6AQRo2kLO1G5IAY/kKIfPUnbY?=
- =?iso-8859-1?Q?ru9YqEGu5/quunmvMpFpeSU93g9mXdNnLwsc2zY7L2buAIgluPUgf8OsZF?=
- =?iso-8859-1?Q?zUTdZko8cAdLvHu9s/G76ZXVSmF3g2syN5wizT9kgi8JuRBja6do4gMVf9?=
- =?iso-8859-1?Q?OWAeRvDOoWizM3A4HUeFw02MPqNkxpNVCwpqlq0NPKw2Jt1pKfg5ndp1Mx?=
- =?iso-8859-1?Q?KMPSr+xNed+6KHuGr5167Tb2VT+F8zlAmLp0W8xY64+K+MDd6l5ML5oXGn?=
- =?iso-8859-1?Q?WqFvarGcO7geQW/ArHTsKIvVzuzZOg+B5RAGpeVcr+FGFv1OM7eQ70YTUb?=
- =?iso-8859-1?Q?DN43LPTlaiY13g8AFEaLwW6aKwxyPKYhCPDcpMpfhH/W5SzVbPAbOodGP2?=
- =?iso-8859-1?Q?dlS+8qc459//X/5OTqpg3hewMTd+nEdPDF5wc+yjnXvcojB5VVgwpW/o/S?=
- =?iso-8859-1?Q?0PK/O3bAl2luZE1kRP1wD55xdEMcLrsBbF0lp8HAqpowaABL6gU8usPVmp?=
- =?iso-8859-1?Q?6rKrVV1HaPD9SAb+KDqpSC7H1vrnBCbJgiRt+01lszIkF2Ob+txNhlkfZM?=
- =?iso-8859-1?Q?cnkgG3jtleDDu2ky8WqvtnCLcU5uuIBX4Q2dz9gGCTNk1HnCTsqcmEvJj6?=
- =?iso-8859-1?Q?m7QlR28ZLmBkCiCbB0FMwZAQLdj0Rwvs90cTthz9i7zJU9ziCiBf9/nLAn?=
- =?iso-8859-1?Q?GjhTVndYMfb/xvP7sN72tntZSILkoMOJXyHawvxEFRcJAFJIJWYSYYcnHX?=
- =?iso-8859-1?Q?ouIaiPW/4fhSiz2b1t4EL6WTwC+v+pIAXxLx4s/iGN4xWl4U2IjMFiUyzz?=
- =?iso-8859-1?Q?iIU2GAEqxAYwT6J+o2N3tGUSmFvz6GgZLXeDN+gRfKekIUvxTp3OM7EPnW?=
- =?iso-8859-1?Q?YCnMWCPvcePoQIWZSJ7pfmuS8n4e7q9LNnGsUsGms4iAqRZwXY8hDfbCV5?=
- =?iso-8859-1?Q?2vm5/qIzey7teEr5Fm9YtT1eIHbnubYtAV19oKzUmt+NG/DDLS9rw69Asb?=
- =?iso-8859-1?Q?59+pZCR7AqwV+uihHjH6erMVhEHx/DrbFVWW2w70zSVHwGr6wsd3R913x4?=
- =?iso-8859-1?Q?fpMwkCJuBi4VzKja46DKPweR55FICuZEarYTymvJekDt0obXBxEC/nv9qU?=
- =?iso-8859-1?Q?TSPec2zcvI4q3qPj3mdcD4OLnCMfRo+vKVRBJZlg2yUmBBGMZdDZQV5FC3?=
- =?iso-8859-1?Q?aS845y/sp8sVHEzPWz0HGxMsolSUds55rzePyMV34AJX8LoW5ny/2bBhOt?=
- =?iso-8859-1?Q?sDltm/fnFwwoxeR90yhpYWe+9KYihEHbbU/dz6OVjuDKZAuhSAbABC8IGJ?=
- =?iso-8859-1?Q?rkDOdAThRBumsJRJrXoNzNZrrZlatX+V2bRlKPfuxxBMPLynEO4++NOQq8?=
- =?iso-8859-1?Q?EASts+bgDaYBw=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ spf=pass smtp.mailfrom=seanedmond@linux.microsoft.com
+Received: from [10.7.98.35] (unknown [167.220.24.35])
+ by linux.microsoft.com (Postfix) with ESMTPSA id EDE8820B74C0;
+ Tue,  3 Oct 2023 10:58:41 -0700 (PDT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com EDE8820B74C0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+ s=default; t=1696355922;
+ bh=SJLjh/BZrG5UDO2njCMd3qVmb8EvFXLtexVPnfGSCW0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=rAtkHQSV7p0HT0FIx7IDkfy2SF4ZdbDCdFj/tuxM9tGzrvIIF+3gDT9ccwmACNPWi
+ TJ+gYJbJIXBjy5VLhnQmh6Tdezv7epCvmpQgMx06W9+zRw3/CJrmp8kHmyh4+srAP7
+ 3G1t32KmbbavQWdDiMW03fnsWO6uvGQnDlEKxRow=
+Message-ID: <77c30b7d-66ae-a7ff-0e7d-07be3098acbc@linux.microsoft.com>
+Date: Tue, 3 Oct 2023 10:58:41 -0700
 MIME-Version: 1.0
-X-OriginatorOrg: arri.de
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DU0PR07MB8419.eurprd07.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 099b651c-c292-4324-537a-08dbc432dbdf
-X-MS-Exchange-CrossTenant-originalarrivaltime: 03 Oct 2023 17:04:51.8969 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: aeX1O2k0vMqsxfCNOxQJZX7/R6SSAbScBp5KHmSojQ8RH1gqAY3V2KOtPwILjImu
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR07MB8173
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCHv10 14/15] net/lwip: replace original net commands with lwip
+Content-Language: en-GB
+To: Maxim Uvarov <maxim.uvarov@linaro.org>, u-boot@lists.denx.de
+Cc: pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com,
+ goldsimon@gmx.de
+References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
+ <20230926094124.7024-15-maxim.uvarov@linaro.org>
+From: Sean Edmond <seanedmond@linux.microsoft.com>
+In-Reply-To: <20230926094124.7024-15-maxim.uvarov@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,97 +67,424 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SelectMAP configuration interface provides an 8-bit, 16-bit or=0A=
-32-bit bidirectional data bus interface to the Versal FPGA=0A=
-configuration logic that can be used for both configuration and=0A=
-readback.=0A=
-=0A=
-A connected microcontoller to the SelectMAP interface can load boot=0A=
-image with bitstream, TF-A (ARM Trusted Firmware) and U-Boot.=0A=
-=0A=
-This commit adds the missing identification of the SelectMAP mode.=0A=
-=0A=
-Signed-off-by: Polak, Leszek <LPolak@arri.de>=0A=
-Reviewed-by: Stefan Roese <sr@denx.de>=0A=
-Cc: Michal Simek <michal.simek@amd.com>=0A=
-Cc: Stefan Roese <sr@denx.de>=0A=
----=0A=
-v2:=0A=
-- Drop assignment of 'mode' as selectmap is not be supported=0A=
-  by distro boot=0A=
-v3:=0A=
-- Changed E-Mail/Name to be the same as git setup=0A=
-=0A=
----=0A=
- arch/arm/mach-versal-net/include/mach/hardware.h | 1 +=0A=
- arch/arm/mach-versal/include/mach/hardware.h     | 1 +=0A=
- board/xilinx/versal-net/board.c                  | 3 +++=0A=
- board/xilinx/versal/board.c                      | 4 ++++=0A=
- 4 files changed, 9 insertions(+)=0A=
-=0A=
-diff --git a/arch/arm/mach-versal-net/include/mach/hardware.h b/arch/arm/ma=
-ch-versal-net/include/mach/hardware.h=0A=
-index 9bddb8b007..767cdd3686 100644=0A=
---- a/arch/arm/mach-versal-net/include/mach/hardware.h=0A=
-+++ b/arch/arm/mach-versal-net/include/mach/hardware.h=0A=
-@@ -66,6 +66,7 @@ struct crp_regs {=0A=
- #define EMMC_MODE       0x00000006=0A=
- #define USB_MODE        0x00000007=0A=
- #define OSPI_MODE       0x00000008=0A=
-+#define SELECTMAP_MODE 0x0000000A=0A=
- #define SD1_LSHFT_MODE  0x0000000E /* SD1 Level shifter */=0A=
- #define JTAG_MODE       0x00000000=0A=
- #define BOOT_MODE_USE_ALT       0x100=0A=
-diff --git a/arch/arm/mach-versal/include/mach/hardware.h b/arch/arm/mach-v=
-ersal/include/mach/hardware.h=0A=
-index 000af974e8..9d1c2f0dcf 100644=0A=
---- a/arch/arm/mach-versal/include/mach/hardware.h=0A=
-+++ b/arch/arm/mach-versal/include/mach/hardware.h=0A=
-@@ -82,6 +82,7 @@ struct crp_regs {=0A=
- #define EMMC_MODE       0x00000006=0A=
- #define USB_MODE        0x00000007=0A=
- #define OSPI_MODE       0x00000008=0A=
-+#define SELECTMAP_MODE 0x0000000A=0A=
- #define SD1_LSHFT_MODE  0x0000000E /* SD1 Level shifter */=0A=
- #define JTAG_MODE       0x00000000=0A=
- #define BOOT_MODE_USE_ALT       0x100=0A=
-diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/boar=
-d.c=0A=
-index f0d2224b33..651b7d24d7 100644=0A=
---- a/board/xilinx/versal-net/board.c=0A=
-+++ b/board/xilinx/versal-net/board.c=0A=
-@@ -260,6 +260,9 @@ int board_late_init(void)=0A=
-                 mode =3D "mmc";=0A=
-                 bootseq =3D dev_seq(dev);=0A=
-                 break;=0A=
-+       case SELECTMAP_MODE:=0A=
-+               puts("SELECTMAP_MODE\n");=0A=
-+               break;=0A=
-         case SD_MODE:=0A=
-                 puts("SD_MODE\n");=0A=
-                 if (uclass_get_device_by_name(UCLASS_MMC,=0A=
-diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c=0A=
-index 60bf37d3c9..26b4c7bf39 100644=0A=
---- a/board/xilinx/versal/board.c=0A=
-+++ b/board/xilinx/versal/board.c=0A=
-@@ -182,6 +182,9 @@ int board_late_init(void)=0A=
-                 mode =3D "mmc";=0A=
-                 bootseq =3D dev_seq(dev);=0A=
-                 break;=0A=
-+       case SELECTMAP_MODE:=0A=
-+               puts("SELECTMAP_MODE\n");=0A=
-+               break;=0A=
-         case SD_MODE:=0A=
-                 puts("SD_MODE\n");=0A=
-                 if (uclass_get_device_by_name(UCLASS_MMC,=0A=
-@@ -298,6 +301,7 @@ enum env_location env_get_location(enum env_operation o=
-p, int prio)=0A=
-                         return ENVL_SPI_FLASH;=0A=
-                 return ENVL_NOWHERE;=0A=
-         case JTAG_MODE:=0A=
-+       case SELECTMAP_MODE:=0A=
-         default:=0A=
-                 return ENVL_NOWHERE;=0A=
-         }=0A=
--- =0A=
-2.34.1=0A=
+
+On 2023-09-26 2:41 a.m., Maxim Uvarov wrote:
+> Replace original commands: ping, tftp, dhcp and wget.
+>
+> Signed-off-by: Maxim Uvarov<maxim.uvarov@linaro.org>
+> ---
+>   boot/bootmeth_efi.c | 18 +++++++---
+>   boot/bootmeth_pxe.c | 21 ++++++-----
+>   cmd/net.c           | 86 +++++----------------------------------------
+>   cmd/pxe.c           | 19 +++++-----
+>   include/net.h       |  8 +++--
+>   include/net/ulwip.h | 64 +++++++++++++++++++++++++++++++++
+>   6 files changed, 113 insertions(+), 103 deletions(-)
+>   create mode 100644 include/net/ulwip.h
+>
+> diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+> index ae936c8daa..52399d627c 100644
+> --- a/boot/bootmeth_efi.c
+> +++ b/boot/bootmeth_efi.c
+> @@ -20,6 +20,8 @@
+>   #include <mapmem.h>
+>   #include <mmc.h>
+>   #include <net.h>
+> +#include <net/lwip.h>
+> +#include <net/ulwip.h>
+>   #include <pxe_utils.h>
+>   #include <linux/sizes.h>
+>   
+> @@ -319,9 +321,7 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
+>   
+>   static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+>   {
+> -	char file_addr[17], fname[256];
+> -	char *tftp_argv[] = {"tftp", file_addr, fname, NULL};
+> -	struct cmd_tbl cmdtp = {};	/* dummy */
+> +	char fname[256];
+>   	const char *addr_str, *fdt_addr_str;
+>   	int ret, arch, size;
+>   	ulong addr, fdt_addr;
+> @@ -368,7 +368,6 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+>   	if (!fdt_addr_str)
+>   		return log_msg_ret("fdt", -EINVAL);
+>   	fdt_addr = hextoul(fdt_addr_str, NULL);
+> -	sprintf(file_addr, "%lx", fdt_addr);
+>   
+>   	/* We only allow the first prefix with PXE */
+>   	ret = distro_efi_get_fdt_name(fname, sizeof(fname), 0);
+> @@ -379,7 +378,16 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+>   	if (!bflow->fdt_fname)
+>   		return log_msg_ret("fil", -ENOMEM);
+>   
+> -	if (!do_tftpb(&cmdtp, 0, 3, tftp_argv)) {
+> +	ret = ulwip_init();
+> +	if (ret)
+> +		return log_msg_ret("ulwip_init", ret);
+> +
+> +	ret = ulwip_tftp(fdt_addr, fname);
+> +	if (ret)
+> +		return log_msg_ret("ulwip_tftp", ret);
+> +
+> +	ret = ulwip_loop();
+> +	if (!ret) {
+>   		bflow->fdt_size = env_get_hex("filesize", 0);
+>   		bflow->fdt_addr = fdt_addr;
+>   	} else {
+> diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
+> index 8d489a11aa..fc6aabaa18 100644
+> --- a/boot/bootmeth_pxe.c
+> +++ b/boot/bootmeth_pxe.c
+> @@ -21,6 +21,8 @@
+>   #include <mapmem.h>
+>   #include <mmc.h>
+>   #include <net.h>
+> +#include <net/ulwip.h>
+> +#include <net/lwip.h>
+>   #include <pxe_utils.h>
+>   
+>   static int extlinux_pxe_getfile(struct pxe_context *ctx, const char *file_path,
+> @@ -116,18 +118,21 @@ static int extlinux_pxe_read_file(struct udevice *dev, struct bootflow *bflow,
+>   				  const char *file_path, ulong addr,
+>   				  ulong *sizep)
+>   {
+> -	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
+> -	struct pxe_context *ctx = dev_get_priv(dev);
+> -	char file_addr[17];
+>   	ulong size;
+>   	int ret;
+>   
+> -	sprintf(file_addr, "%lx", addr);
+> -	tftp_argv[1] = file_addr;
+> -	tftp_argv[2] = (void *)file_path;
+> +	ret = ulwip_init();
+> +	if (ret)
+> +		return log_msg_ret("ulwip_init", ret);
+> +
+> +	ret = ulwip_tftp(addr, file_path);
+> +	if (ret)
+> +		return log_msg_ret("ulwip_tftp", ret);
+> +
+> +	ret = ulwip_loop();
+> +	if (ret)
+> +		return log_msg_ret("ulwip_loop", ret);
+>   
+> -	if (do_tftpb(ctx->cmdtp, 0, 3, tftp_argv))
+> -		return -ENOENT;
+>   	ret = pxe_get_file_size(&size);
+>   	if (ret)
+>   		return log_msg_ret("tftp", ret);
+> diff --git a/cmd/net.c b/cmd/net.c
+> index d407d8320a..dc5a114309 100644
+> --- a/cmd/net.c
+> +++ b/cmd/net.c
+> @@ -22,6 +22,7 @@
+>   #include <net/udp.h>
+>   #include <net/sntp.h>
+>   #include <net/ncsi.h>
+> +#include <net/lwip.h>
+>   
+>   static int netboot_common(enum proto_t, struct cmd_tbl *, int, char * const []);
+>   
+> @@ -40,19 +41,9 @@ U_BOOT_CMD(
+>   #endif
+>   
+>   #ifdef CONFIG_CMD_TFTPBOOT
+> -int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -	int ret;
+> -
+> -	bootstage_mark_name(BOOTSTAGE_KERNELREAD_START, "tftp_start");
+> -	ret = netboot_common(TFTPGET, cmdtp, argc, argv);
+> -	bootstage_mark_name(BOOTSTAGE_KERNELREAD_STOP, "tftp_done");
+> -	return ret;
+> -}
+> -
+>   #if IS_ENABLED(CONFIG_IPV6)
+>   U_BOOT_CMD(
+> -	tftpboot,	4,	1,	do_tftpb,
+> +	tftpboot,	4,	1, do_lwip_tftp,
+
+It looks like LWIP doesn't support TFTP with IPv6 addressing.  Perhaps 
+we need to fall back onto the existing TFTP implementation until LWIP 
+supports it?
+
+Note, that currently, IPv6 TFTP is enabled using the "-ipv6" argument. 
+The intention is that netboot_common() sees the argument and sets the 
+"use_ip6" variable.  It looks like the new implementation in 
+do_lwip_tftp() doesn't re-use the argument parsing in netboot_common() 
+and that it doesn't handle the addition of the "-ipv6" flag.
+
+I support the addition of LWIP, but I'm concerned about how abrupt 
+changes like this one will be for existing users.  The underlying stack 
+will change, with no easy way for the user to revert to the previous 
+stack. Has there been any discussion about preserving the existing 
+functionality, with an option to enable/disable LWIP stack?This would 
+give the community time to transition/validate LWIP before deprecating 
+the old u-boot networking stack.
+
+
+>   	"boot image via network using TFTP protocol\n"
+>   	"To use IPv6 add -ipv6 parameter or use IPv6 hostIPaddr framed "
+>   	"with [] brackets",
+> @@ -60,7 +51,7 @@ U_BOOT_CMD(
+>   );
+>   #else
+>   U_BOOT_CMD(
+> -	tftpboot,	3,	1,	do_tftpb,
+> +	tftpboot,	3,	1,  do_lwip_tftp,
+>   	"load file via network using TFTP protocol",
+>   	"[loadAddress] [[hostIPaddr:]bootfilename]"
+>   );
+> @@ -139,7 +130,7 @@ U_BOOT_CMD(dhcp6,	3,	1,	do_dhcp6,
+>   static int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc,
+>   		   char *const argv[])
+>   {
+> -	return netboot_common(DHCP, cmdtp, argc, argv);
+> +	return do_lwip_dhcp();
+>   }
+>   
+>   U_BOOT_CMD(
+> @@ -196,13 +187,11 @@ U_BOOT_CMD(
+>   #endif
+>   
+>   #if defined(CONFIG_CMD_WGET)
+> -static int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
+> -{
+> -	return netboot_common(WGET, cmdtp, argc, argv);
+> -}
+> +int do_lwip_wget(struct cmd_tbl *cmdtp, int flag, int argc,
+> +		 char *const argv[]);
+>   
+>   U_BOOT_CMD(
+> -	wget,   3,      1,      do_wget,
+> +	wget,   3,      1, do_lwip_wget,
+>   	"boot image via network using HTTP protocol",
+>   	"[loadAddress] [[hostIPaddr:]path and image name]"
+>   );
+> @@ -456,28 +445,8 @@ static int netboot_common(enum proto_t proto, struct cmd_tbl *cmdtp, int argc,
+>   }
+>   
+>   #if defined(CONFIG_CMD_PING)
+> -static int do_ping(struct cmd_tbl *cmdtp, int flag, int argc,
+> -		   char *const argv[])
+> -{
+> -	if (argc < 2)
+> -		return CMD_RET_USAGE;
+> -
+> -	net_ping_ip = string_to_ip(argv[1]);
+> -	if (net_ping_ip.s_addr == 0)
+> -		return CMD_RET_USAGE;
+> -
+> -	if (net_loop(PING) < 0) {
+> -		printf("ping failed; host %s is not alive\n", argv[1]);
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+> -	printf("host %s is alive\n", argv[1]);
+> -
+> -	return CMD_RET_SUCCESS;
+> -}
+> -
+>   U_BOOT_CMD(
+> -	ping,	2,	1,	do_ping,
+> +	ping,	2,	1, do_lwip_ping,
+>   	"send ICMP ECHO_REQUEST to network host",
+>   	"pingAddress"
+>   );
+> @@ -601,45 +570,8 @@ U_BOOT_CMD(
+>   #endif
+>   
+>   #if defined(CONFIG_CMD_DNS)
+> -int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+> -{
+> -	if (argc == 1)
+> -		return CMD_RET_USAGE;
+> -
+> -	/*
+> -	 * We should check for a valid hostname:
+> -	 * - Each label must be between 1 and 63 characters long
+> -	 * - the entire hostname has a maximum of 255 characters
+> -	 * - only the ASCII letters 'a' through 'z' (case-insensitive),
+> -	 *   the digits '0' through '9', and the hyphen
+> -	 * - cannot begin or end with a hyphen
+> -	 * - no other symbols, punctuation characters, or blank spaces are
+> -	 *   permitted
+> -	 * but hey - this is a minimalist implmentation, so only check length
+> -	 * and let the name server deal with things.
+> -	 */
+> -	if (strlen(argv[1]) >= 255) {
+> -		printf("dns error: hostname too long\n");
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+> -	net_dns_resolve = argv[1];
+> -
+> -	if (argc == 3)
+> -		net_dns_env_var = argv[2];
+> -	else
+> -		net_dns_env_var = NULL;
+> -
+> -	if (net_loop(DNS) < 0) {
+> -		printf("dns lookup of %s failed, check setup\n", argv[1]);
+> -		return CMD_RET_FAILURE;
+> -	}
+> -
+> -	return CMD_RET_SUCCESS;
+> -}
+> -
+>   U_BOOT_CMD(
+> -	dns,	3,	1,	do_dns,
+> +	dns,	3,	1,	do_lwip_dns,
+>   	"lookup the IP of a hostname",
+>   	"hostname [envvar]"
+>   );
+> diff --git a/cmd/pxe.c b/cmd/pxe.c
+> index 677142520b..d44df428d2 100644
+> --- a/cmd/pxe.c
+> +++ b/cmd/pxe.c
+> @@ -8,6 +8,7 @@
+>   #include <command.h>
+>   #include <fs.h>
+>   #include <net.h>
+> +#include <net/lwip.h>
+>   #include <net6.h>
+>   #include <malloc.h>
+>   
+> @@ -29,21 +30,19 @@ const char *pxe_default_paths[] = {
+>   static int do_get_tftp(struct pxe_context *ctx, const char *file_path,
+>   		       char *file_addr, ulong *sizep)
+>   {
+> -	char *tftp_argv[] = {"tftp", NULL, NULL, NULL};
+> +	ulong addr;
+> +	char *end;
+>   	int ret;
+> -	int num_args;
+>   
+> -	tftp_argv[1] = file_addr;
+> -	tftp_argv[2] = (void *)file_path;
+> +	addr = hextoul(file_addr, &end);
+> +
+>   	if (ctx->use_ipv6) {
+> -		tftp_argv[3] = USE_IP6_CMD_PARAM;
+> -		num_args = 4;
+> -	} else {
+> -		num_args = 3;
+> +		/* @todo: check and fix me, here */
+Again, looks like LWIP doesn't support IPv6 addressing, we may want to 
+fall back on existing TFTP implementation here.
+>   	}
+>   
+> -	if (do_tftpb(ctx->cmdtp, 0, num_args, tftp_argv))
+> -		return -ENOENT;
+> +	ret = ulwip_tftp(addr, file_path);
+> +	if (ret)
+> +		return log_msg_ret("tftp", ret);
+>   
+>   	ret = pxe_get_file_size(sizep);
+>   	if (ret)
+> diff --git a/include/net.h b/include/net.h
+> index e254df7d7f..de7baeb121 100644
+> --- a/include/net.h
+> +++ b/include/net.h
+> @@ -54,8 +54,10 @@ struct in_addr {
+>   	__be32 s_addr;
+>   };
+>   
+> +int do_lwip_dhcp(void);
+> +
+>   /**
+> - * do_tftpb - Run the tftpboot command
+> + * do_lwip_tftp - Run the tftpboot command
+>    *
+>    * @cmdtp: Command information for tftpboot
+>    * @flag: Command flags (CMD_FLAG_...)
+> @@ -63,7 +65,7 @@ struct in_addr {
+>    * @argv: List of arguments
+>    * Return: result (see enum command_ret_t)
+>    */
+> -int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+> +int do_lwip_tftp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+>   
+>   /**
+>    * dhcp_run() - Run DHCP on the current ethernet device
+> @@ -514,7 +516,7 @@ extern int		net_restart_wrap;	/* Tried all network devices */
+>   enum proto_t {
+>   	BOOTP, RARP, ARP, TFTPGET, DHCP, DHCP6, PING, PING6, DNS, NFS, CDP,
+>   	NETCONS, SNTP, TFTPSRV, TFTPPUT, LINKLOCAL, FASTBOOT_UDP, FASTBOOT_TCP,
+> -	WOL, UDP, NCSI, WGET, RS
+> +	WOL, UDP, NCSI, WGET, RS, LWIP
+>   };
+>   
+>   extern char	net_boot_file_name[1024];/* Boot File name */
+> diff --git a/include/net/ulwip.h b/include/net/ulwip.h
+> new file mode 100644
+> index 0000000000..8eac7aa130
+> --- /dev/null
+> +++ b/include/net/ulwip.h
+> @@ -0,0 +1,64 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +
+> +/**
+> + * ulwip_init() - initialize lwIP network stack
+> + *
+> + * @return 0 if success, !0 if error
+> + */
+> +int ulwip_init(void);
+> +
+> +/**
+> + * ulwip_enabled() - check if lwIP network stack was initialized
+> + *
+> + * @return 1 lwip initialized, 0 if not yet initialized
+> + */
+> +int ulwip_enabled(void);
+> +
+> +/**
+> + * ulwip_in_loop() - lwIP controls packet net loop
+> + *
+> + * @return 1 lwIP owns packet loop, 0 lwip does not own packet loop
+> + */
+> +int ulwip_in_loop(void);
+> +
+> +/**
+> + * ulwip_loop_set() - make loop to be used by lwIP
+> + *
+> + * Function is used to make lwIP control network pool.
+> + *
+> + * @loop: 1. Rx packets go to lwIP 2. Rx packets go to the original stack.
+> + */
+> +void ulwip_loop_set(int loop);
+> +
+> +/**
+> + * ulwip_exit() - exit from lwIP with a return code
+> + *
+> + * Exit from lwIP application back to the U-Boot with specific error code.
+> + *
+> + * @err: Error code to return
+> + */
+> +void ulwip_exit(int err);
+> +
+> +/**
+> + * ulwip_poll() - polling function to feed lwIP with ethernet packet
+> + *
+> + * Function takes network packet and passes it to lwIP network stack
+> + */
+> +void ulwip_poll(void);
+> +
+> +/**
+> + * ulwip_app_get_err() - return error code from lwIP application
+> + *
+> + * @return error code
+> + */
+> +int ulwip_app_get_err(void);
+> +
+> +/**
+> + * ulwip_loop() - enter to packet polling loop
+> + *
+> + * When lwIP application did it's initialization stage, then it needs to enter
+> + * to packet polling loop to grab rx packets.
+> + *
+> + * Returns:  0 if success, !0 if error
+> + */
+> +int ulwip_loop(void);
