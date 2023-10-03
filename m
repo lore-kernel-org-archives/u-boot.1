@@ -4,49 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EABB3E784A8
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 04:17:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9FF8E75420
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 04:37:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FC3886E15;
-	Tue,  3 Oct 2023 06:17:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id F3AB28719C;
+	Tue,  3 Oct 2023 06:37:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2331286E1F; Tue,  3 Oct 2023 06:17:48 +0200 (CEST)
-Received: from ex01.ufhost.com (ex01.ufhost.com [61.152.239.75])
- by phobos.denx.de (Postfix) with ESMTP id E1B3686DCA
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 06:17:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kuanlim.lee@starfivetech.com
-Received: from EXMBX165.cuchost.com (unknown [175.102.18.54])
- (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "EXMBX165", Issuer "EXMBX165" (not verified))
- by ex01.ufhost.com (Postfix) with ESMTP id 4A16624E1CE
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 12:17:42 +0800 (CST)
-Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX165.cuchost.com
- (172.16.6.75) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 3 Oct
- 2023 12:17:42 +0800
-Received: from localhost.localdomain (115.135.197.53) by EXMBX066.cuchost.com
- (172.16.6.66) with Microsoft SMTP Server (TLS) id 15.0.1497.42;
- Tue, 3 Oct 2023 12:17:38 +0800
-From: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
-To: <u-boot@lists.denx.de>
-CC: <cheehong.ang@starfivetech.com>, <weiliang.lim@starfivetech.com>, "Kuan
- Lim Lee" <kuanlim.lee@starfivetech.com>
-Subject: [PATCH] spl: mmc: Resolve emmc not load image after switched hw
- partition
-Date: Tue, 3 Oct 2023 12:16:49 +0800
-Message-ID: <20231003041720.893-1-kuanlim.lee@starfivetech.com>
-X-Mailer: git-send-email 2.42.0.windows.2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1696307850;
+	bh=9SFPNOhBlXbrAbYXsbuX72cMiUK8CIjxS4WIp2sRt/M=;
+	h=Subject:To:Cc:References:From:Date:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=aBraqzUomi4kktAoQ3nqPXJjEip15SQB8DfFsyxXawBZlM04j9rZsNQktNkvfcjoh
+	 /mButRav0MMNUZHVB31gPNNIu5l2o8uKS//SSLbgKD+zRDUeBz8Ovfc0pZR8XLm53p
+	 ZOuCW/6PLNsppxpA/94uwZVI2Fp5fXTrhAOP4Ss8A6hi4rnFwo9GIa/ssmFtqsi35y
+	 cZ2SC426IaNO0s9J1fONMQiJNtkbGcMJT3Y0fFcwvIw+dRtE0RME2GbTHorE3YQDnS
+	 QIwMd7CJVgZLGO4ZiYfH4AkCxJwXGpB02MhjQVb4jk3CEIV1lQ+k5JkUIxew8rR6dZ
+	 derUkrpjyCr1w==
+Received: from [192.168.1.107] (87-97-106-223.pool.digikabel.hu
+ [87.97.106.223])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E6B1086E15;
+ Tue,  3 Oct 2023 06:37:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1696307848;
+ bh=9SFPNOhBlXbrAbYXsbuX72cMiUK8CIjxS4WIp2sRt/M=;
+ h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
+ b=hamWN8YnYzGWqwyJC6LX+Fuy52f8444tus47bYNRAU/Vfa244VwTewhh//0p3CZ+u
+ 9cUmsB6WshifRddnPMP3MWXYpzpBX0hzjuUEFoBP62eod0INgQPWGsEOhYvxCI7QRZ
+ GKGqo9UV3px72htR/sZDu5GIiVdlkzUJJsh15kTf78KZua7UgM+Kss/RU/djAZ2+/N
+ d3edluZy6M9uDf5eJEG4TfgUHucxKZIFrxo/UJKXNDxTyzuuWY68LKryHTt+E6UmQG
+ 3OAyBUlPDXoReMIO9esgAeJJOWWaA2jpSHIaxnvqrMHVUvXQeIJK+Dt0NQJ0QW0Ql8
+ qpqwGNat8PG6w==
+Subject: Re: [PATCH v1] i2c: nuvoton: add support fast mode
+To: Jim Liu <jim.t90615@gmail.com>, JJLIU0@nuvoton.com, KWLIU@nuvoton.com,
+ trini@konsulko.com
+Cc: u-boot@lists.denx.de
+References: <20230926090808.408095-1-JJLIU0@nuvoton.com>
+From: Heiko Schocher <hs@denx.de>
+Message-ID: <ec256874-0fca-83fe-d207-67e4048b461c@denx.de>
+Date: Tue, 3 Oct 2023 06:37:15 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [115.135.197.53]
-X-ClientProxiedBy: EXCAS066.cuchost.com (172.16.6.26) To EXMBX066.cuchost.com
- (172.16.6.66)
-X-YovoleRuleAgent: yovoleflag
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20230926090808.408095-1-JJLIU0@nuvoton.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,35 +65,45 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When selecting MMCSD_MODE_EMMCBOOT as boot_mode, emmc do not load U-boot=20
-proper image after switched hardware partition.
+Hello Jim,
 
-Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
-Reviewed-by: Chee Hong Ang <cheehong.ang@starfivetech.com>
-Reviewed-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
----
- common/spl/spl_mmc.c | 3 +++
- 1 file changed, 3 insertions(+)
+On 26.09.23 11:08, Jim Liu wrote:
+> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> ---
+>  drivers/i2c/npcm_i2c.c | 5 -----
+>  1 file changed, 5 deletions(-)
+> 
+> diff --git a/drivers/i2c/npcm_i2c.c b/drivers/i2c/npcm_i2c.c
+> index ea4ef53256..b867b6c8e9 100644
+> --- a/drivers/i2c/npcm_i2c.c
+> +++ b/drivers/i2c/npcm_i2c.c
+> @@ -517,11 +517,6 @@ static int npcm_i2c_init_clk(struct npcm_i2c_bus *bus, u32 bus_freq)
+>  	u32 sclfrq;
+>  	u8 hldt, val;
+>  
+> -	if (bus_freq > I2C_FREQ_100K) {
+> -		printf("Support standard mode only\n");
+> -		return -EINVAL;
+> -	}
+> -
 
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index 20f687e138..dc8a45222b 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -447,6 +447,9 @@ int spl_mmc_load(struct spl_image_info *spl_image,
- #endif
- 			return err;
- 		}
-+		err =3D mmc_load_image_raw_sector(spl_image, bootdev, mmc, 0);
-+		if (!err)
-+			return err;
- 		/* Fall through */
- 	case MMCSD_MODE_RAW:
- 		debug("spl: mmc boot mode: raw\n");
---=20
-2.34.1
+Is it so easy to enable fast mode? As original code explicitely
+says "Support standard mode only" and returns -EINVAL?
 
+And please add some text into commit message, may you can explain
+why current driver supports fast mode?
+
+Thanks!
+
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
