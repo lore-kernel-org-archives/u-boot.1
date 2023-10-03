@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E59E75434
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 08:12:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD5CE75433
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 08:12:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5CC187486;
-	Tue,  3 Oct 2023 10:11:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 18CA687460;
+	Tue,  3 Oct 2023 10:11:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="S7UhzCtf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YkN43kUI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4A5087452; Tue,  3 Oct 2023 10:11:08 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id D733086BE1; Tue,  3 Oct 2023 10:11:12 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3565886BE1
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 10:11:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FDAC8747E
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 10:11:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j-keerthy@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3938B4ZM018462;
- Tue, 3 Oct 2023 03:11:04 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3938B6Vm023819;
+ Tue, 3 Oct 2023 03:11:06 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696320664;
- bh=L5JA6bmkD5JjTdFPduGiS9LtJ+C9f5xj5SxubjATxec=;
+ s=ti-com-17Q1; t=1696320666;
+ bh=v453GfVCYnXtlZqWB4LwOjs9l84UUIKlMgO1XsLPhog=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=S7UhzCtfzTfmmwo56zGeiDsxa1/+7TTamHiFB+G4NMBpd1uH4VR8bo4yEpomofIgQ
- 9Z1h7IBs+rB7+v5jBwNpM34vfR812FC7IaLoXLTwEbZjMpsRCc+cHXq2v9KfxLZ4Q3
- a4r/YdogYJPUpOt4TX3vBrfkI6p65yIqxdrYsiDo=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3938B43J042326
+ b=YkN43kUIWp24erIL/kdqqbCvC5VR1NYmSgOzUxOZiLPVFJA3CoaU5gOmNoArZp4BZ
+ SZLdkJbmfL0ozFk+jIp/lDKKq8nsczywHPjTXnw9cHYg8OU3hEmSwHwxGBq1NyjGxF
+ FpHHy8EQ0m+Kn9M6pVZrjR2oYS3VYnzIJc9VEEoo=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3938B6GX042372
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 3 Oct 2023 03:11:04 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 3 Oct 2023 03:11:06 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
- Oct 2023 03:11:03 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 03:11:06 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 3 Oct 2023 03:11:03 -0500
+ Frontend Transport; Tue, 3 Oct 2023 03:11:06 -0500
 Received: from keerthy.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3938AhEI110453;
- Tue, 3 Oct 2023 03:11:02 -0500
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3938AhEJ110453;
+ Tue, 3 Oct 2023 03:11:04 -0500
 From: Keerthy <j-keerthy@ti.com>
 To: <u-boot@lists.denx.de>, <u-kumar1@ti.com>
 CC: <j-keerthy@ti.com>, <n-francis@ti.com>, <trini@konsulko.com>,
  <vigneshr@ti.com>
-Subject: [PATCH RFC 08/10] arm: dts: k3-j7200-r5-common-proc-board: Add PMIC
- ESM node
-Date: Tue, 3 Oct 2023 13:40:36 +0530
-Message-ID: <20231003081038.24299-9-j-keerthy@ti.com>
+Subject: [PATCH RFC 09/10] configs: j7200_evm_r5_defconfig: Enable the ESM
+ configs
+Date: Tue, 3 Oct 2023 13:40:37 +0530
+Message-ID: <20231003081038.24299-10-j-keerthy@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20231003081038.24299-1-j-keerthy@ti.com>
 References: <20231003081038.24299-1-j-keerthy@ti.com>
@@ -79,38 +79,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the TPS659413 has the ESM PMIC.
+Enable the ESM configs.
 
 Signed-off-by: Keerthy <j-keerthy@ti.com>
 ---
- arch/arm/dts/k3-j7200-r5-common-proc-board.dts | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ configs/j7200_evm_r5_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-index e62f9218e8..4e5e4a08f8 100644
---- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-+++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-@@ -271,6 +271,20 @@
- 		};
- 	};
- 
-+	tps659413: tps659413@48 {
-+		compatible = "ti,tps659413";
-+		reg = <0x48>;
-+		bootph-pre-ram;
-+
-+		regulators_a: regulators {
-+			bootph-pre-ram;
-+		};
-+
-+		esm: esm {
-+			compatible = "ti,tps659413-esm";
-+			bootph-pre-ram;
-+		};
-+	};
- };
- 
- &wkup_vtm0 {
+diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
+index c4dd33627b..7adc230fc1 100644
+--- a/configs/j7200_evm_r5_defconfig
++++ b/configs/j7200_evm_r5_defconfig
+@@ -101,6 +101,8 @@ CONFIG_DM_MAILBOX=y
+ CONFIG_K3_SEC_PROXY=y
+ CONFIG_FS_LOADER=y
+ CONFIG_SPL_FS_LOADER=y
++CONFIG_ESM_K3=y
++CONFIG_ESM_PMIC=y
+ CONFIG_K3_AVS0=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_SPL_MMC_HS400_SUPPORT=y
 -- 
 2.17.1
 
