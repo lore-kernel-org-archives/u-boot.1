@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FEEFE75432
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 07:25:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28788E7542D
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 07:25:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3B2F86DD3;
-	Tue,  3 Oct 2023 09:25:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 885918723B;
+	Tue,  3 Oct 2023 09:25:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZqYyPr+s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N5pMYf4C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C37798723B; Tue,  3 Oct 2023 09:25:01 +0200 (CEST)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id 444D487222; Tue,  3 Oct 2023 09:25:31 +0200 (CEST)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8FE486DD3
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 09:24:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 35E968724B
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 09:25:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-32157c8e4c7so636556f8f.1
- for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 00:24:59 -0700 (PDT)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-32488a22810so569625f8f.3
+ for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 00:25:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696317899; x=1696922699; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1696317927; x=1696922727; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=XcLN8dO/VlbnaKnnDbYOL6x9VTYmz7ZSfkgHj3t2Esk=;
- b=ZqYyPr+s6bAZvJr3tJEphpMiGNnHGFSyCkBtgqxIpuWfI9FGKQu5lCtVm9afzBEbwr
- uEQlPP2hwOKZG7K1X/uw1iZZxvMbTMQ3LVPo0NRZu93skQzW4xuMzgkR5/I/jxWs4NJd
- CWbHVJojEnuHAftuuRGAkjf13k9Rq/ybqrkPviIVJvjKyzEHbS8uc88He6hbF8XSu5s4
- 0VzOmEAZ1P/n9+ksq0wPYPJzeBIkyqnUEdo53LbbrvODAugzNxnW/NtKHxG/m55FGCIA
- XA4w26FAWnw5GxEwXQ24ZKpT7WL/x2JgO+Fqbag9dnv3e0kqNac6d+sh6Jnveef8SEtQ
- UtYw==
+ :reply-to; bh=CQhOFoEAhUQ8MM8lzRTBmRbrIKO+On2/xFqVETc6Fsc=;
+ b=N5pMYf4CJtbxmEmqSH0bNKg2JGgTVAbDPwAqBLYJAMLqSWGzgfihrolAZoMzVhFYrq
+ hZT4SVX9MRKO8Mj0jMZYVNvhcEdPZOnviKqeh70D5i9lCwb2CODc8z+w1V03aC2K1Xer
+ ZcJ1Tts3z3L+/mv7au0M7BAL7fkoDFQL66qDb495mr5sRi44ig3ZTcwyh91N82/l1cVt
+ FSSoKohV2x7NOpzsp/taSscFJaDm+/A4DBLsttj16QG7P9VwjrzydeNtE9iblepqt4oE
+ h3SeE50opJK5/5pp8PMEile5cbYF3jbtZyuB3y307kal9RLOY671mK1NsBWqDk/F6Fe/
+ Uxdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696317899; x=1696922699;
+ d=1e100.net; s=20230601; t=1696317927; x=1696922727;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=XcLN8dO/VlbnaKnnDbYOL6x9VTYmz7ZSfkgHj3t2Esk=;
- b=GBWvMqFpoVusKd5ErEjrSCWFaihHcyD44I0GJ4UGmSn+Tek/tMeN9p1kp3YXnWrsNa
- mrw2zaWRKuJGSu1kOKy64rAwOEoNOzGaDwf95JlMgGDDH0tywiyOC4YVdAQhQDjkuNae
- Y5gJi6dEGbetPUH1mPGfD1muLPQcW/34WYVIXPMdBcmD9nzlhX4G55R5dF4O64IR3far
- D0BWtlMN9D3zSSc+XlMOW6jsEHa/nRmJcCc8QmtpH3Q5tBuZm9Tb+hNNq55lyQJ+P995
- xR86q79JmC9QSjScYsHYVBuy+NIbcKw/sb9NBB1WVkP+n8fAnCVkzC8BdaQWfd7mQCH3
- ywZg==
-X-Gm-Message-State: AOJu0Ywfm8fz/MOdb301BS9cj7xMhQ9BcWL3mN5E2YGE/TZUItOwNTaZ
- pKVHN+yyeh2axbNy7UWufK95fw==
-X-Google-Smtp-Source: AGHT+IGKLylPctvk93Ca/DuchLeJFECL3AZTrVSZzqv0u2gavXqHO7Nq9W4vpTlVtfVPKQ/pxW7Tow==
-X-Received: by 2002:a5d:5547:0:b0:320:a16:7028 with SMTP id
- g7-20020a5d5547000000b003200a167028mr12099108wrw.31.1696317899331; 
- Tue, 03 Oct 2023 00:24:59 -0700 (PDT)
+ bh=CQhOFoEAhUQ8MM8lzRTBmRbrIKO+On2/xFqVETc6Fsc=;
+ b=aOmcloo/ONtmtTXTzGw3onEOBB1oqJXfvTJ/EdpriITlWhms/Gn85u9kpEvezscxBa
+ LHmgHodKyMfnkLOa1uZ0ddbnHrW4kiB6AzBYuW6d/xARhdx5KyHGoXUfPy1ai/5cnKyq
+ p9q/kfN20kCvIYFZtlZz+jAo+DgAvazt5/94u4XkPHX+tkabJ2pwCyu/qOYWvWnuH0wJ
+ y979iNZHq//Ey2QylB81998VmhYT4JlI0APUQu3/g+3NwgfvHEdMv0GQrvoRU/rXuCE5
+ PtR+t3yKbRuxuF0OlMYVOeI5WSA3nDX4G/zVTW7IlVkiznDTUY/joHUNGzvBVCPqflxu
+ Rb1A==
+X-Gm-Message-State: AOJu0YzHD8hqtb+EjnJfxDVT2uLeWhF4EKAfRczGXhq7NjLhBd4PLZTH
+ xU9sYnGv3Kzi5oerKY+OFK6m/1Wk1eGUnlUOdoxz2h6E
+X-Google-Smtp-Source: AGHT+IEhOJkUPiRUCm79nhg/DAVEMjK+6tFZDySwVkECnZuQkSzEdlOBYfdvza6k/YNT+FGVn6h0SQ==
+X-Received: by 2002:adf:de11:0:b0:319:74b5:b67d with SMTP id
+ b17-20020adfde11000000b0031974b5b67dmr11301055wrm.66.1696317927575; 
+ Tue, 03 Oct 2023 00:25:27 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:e31a:fe1c:e925:9858?
  ([2a01:e0a:982:cbb0:e31a:fe1c:e925:9858])
  by smtp.gmail.com with ESMTPSA id
- x15-20020a5d444f000000b0031c5e9c2ed7sm865579wrr.92.2023.10.03.00.24.58
+ x15-20020a5d444f000000b0031c5e9c2ed7sm865579wrr.92.2023.10.03.00.25.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Oct 2023 00:24:58 -0700 (PDT)
-Message-ID: <6046140a-48fd-4c28-873c-44adb3bb479c@linaro.org>
-Date: Tue, 3 Oct 2023 09:24:57 +0200
+ Tue, 03 Oct 2023 00:25:27 -0700 (PDT)
+Message-ID: <090b7afc-38e0-4fda-a143-b8737e24bc0d@linaro.org>
+Date: Tue, 3 Oct 2023 09:25:25 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v1 1/8] dt-bindings: reset: add Meson A1 reset bindings
+Subject: Re: [PATCH v1 2/8] reset: add support for Amlogic A1 family
 Content-Language: en-US, fr
 To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com,
  sjg@google.com, lukma@denx.de, seanga2@gmail.com, marex@denx.de
 Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
 References: <20231002165857.19512-1-avromanov@salutedevices.com>
- <20231002165857.19512-2-avromanov@salutedevices.com>
+ <20231002165857.19512-3-avromanov@salutedevices.com>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -103,7 +103,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231002165857.19512-2-avromanov@salutedevices.com>
+In-Reply-To: <20231002165857.19512-3-avromanov@salutedevices.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -124,95 +124,100 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 02/10/2023 18:58, Alexey Romanov wrote:
-> Get this from Linux 6.6-rc3.
+> This patch adds reset support for the Amlogic A1 family.
+> We add the structure meson_reset_drvdata, which in the future
+> will allow this driver to be used for other families by declaring
+> only the correct parameters reg_count and level_offset.
 > 
 > Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 > ---
->   .../reset/amlogic,meson-a1-reset.h            | 76 +++++++++++++++++++
->   1 file changed, 76 insertions(+)
->   create mode 100644 include/dt-bindings/reset/amlogic,meson-a1-reset.h
+>   drivers/reset/reset-meson.c | 42 +++++++++++++++++++++++++++++++------
+>   1 file changed, 36 insertions(+), 6 deletions(-)
 > 
-> diff --git a/include/dt-bindings/reset/amlogic,meson-a1-reset.h b/include/dt-bindings/reset/amlogic,meson-a1-reset.h
-> new file mode 100644
-> index 0000000000..2c749c655e
-> --- /dev/null
-> +++ b/include/dt-bindings/reset/amlogic,meson-a1-reset.h
-> @@ -0,0 +1,76 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2019 Amlogic, Inc. All rights reserved.
-> + * Author: Xingyu Chen <xingyu.chen@amlogic.com>
-> + *
-> + * Copyright (c) 2023, SberDevices, Inc.
-> + * Author: Alexey Romanov <avromanov@salutedevices.com>
-> + */
+> diff --git a/drivers/reset/reset-meson.c b/drivers/reset/reset-meson.c
+> index 64bc696f13..9d0c8b354f 100644
+> --- a/drivers/reset/reset-meson.c
+> +++ b/drivers/reset/reset-meson.c
+> @@ -13,18 +13,26 @@
+>   #include <reset-uclass.h>
+>   #include <regmap.h>
+>   #include <linux/bitops.h>
+> +#include <linux/delay.h>
+>   
+> -#define REG_COUNT	8
+>   #define BITS_PER_REG	32
+> -#define LEVEL_OFFSET	0x7c
 > +
-> +#ifndef _DT_BINDINGS_AMLOGIC_MESON_A1_RESET_H
-> +#define _DT_BINDINGS_AMLOGIC_MESON_A1_RESET_H
+> +struct meson_reset_drvdata {
+> +	unsigned int reg_count;
+> +	unsigned int level_offset;
+> +};
+>   
+>   struct meson_reset_priv {
+>   	struct regmap *regmap;
+> +	struct meson_reset_drvdata *drvdata;
+>   };
+>   
+>   static int meson_reset_request(struct reset_ctl *reset_ctl)
+>   {
+> -	if (reset_ctl->id > (REG_COUNT * BITS_PER_REG))
+> +	struct meson_reset_priv *priv = dev_get_priv(reset_ctl->dev);
+> +	struct meson_reset_drvdata *data = priv->drvdata;
 > +
-> +/*	RESET0					*/
-> +/*					0	*/
-> +#define RESET_AM2AXI_VAD		1
-> +/*					2-3	*/
-> +#define RESET_PSRAM			4
-> +#define RESET_PAD_CTRL			5
-> +/*					6	*/
-> +#define RESET_TEMP_SENSOR		7
-> +#define RESET_AM2AXI_DEV		8
-> +/*					9	*/
-> +#define RESET_SPICC_A			10
-> +#define RESET_MSR_CLK			11
-> +#define RESET_AUDIO			12
-> +#define RESET_ANALOG_CTRL		13
-> +#define RESET_SAR_ADC			14
-> +#define RESET_AUDIO_VAD			15
-> +#define RESET_CEC			16
-> +#define RESET_PWM_EF			17
-> +#define RESET_PWM_CD			18
-> +#define RESET_PWM_AB			19
-> +/*					20	*/
-> +#define RESET_IR_CTRL			21
-> +#define RESET_I2C_S_A			22
-> +/*					23	*/
-> +#define RESET_I2C_M_D			24
-> +#define RESET_I2C_M_C			25
-> +#define RESET_I2C_M_B			26
-> +#define RESET_I2C_M_A			27
-> +#define RESET_I2C_PROD_AHB		28
-> +#define RESET_I2C_PROD			29
-> +/*					30-31	*/
+> +	if (reset_ctl->id > (data->reg_count * BITS_PER_REG))
+>   		return -EINVAL;
+>   
+>   	return 0;
+> @@ -33,9 +41,10 @@ static int meson_reset_request(struct reset_ctl *reset_ctl)
+>   static int meson_reset_level(struct reset_ctl *reset_ctl, bool assert)
+>   {
+>   	struct meson_reset_priv *priv = dev_get_priv(reset_ctl->dev);
+> +	struct meson_reset_drvdata *data = priv->drvdata;
+>   	uint bank = reset_ctl->id / BITS_PER_REG;
+>   	uint offset = reset_ctl->id % BITS_PER_REG;
+> -	uint reg_offset = LEVEL_OFFSET + (bank << 2);
+> +	uint reg_offset = data->level_offset + (bank << 2);
+>   	uint val;
+>   
+>   	regmap_read(priv->regmap, reg_offset, &val);
+> @@ -64,15 +73,36 @@ struct reset_ops meson_reset_ops = {
+>   	.rst_deassert = meson_reset_deassert,
+>   };
+>   
+> +static const struct meson_reset_drvdata meson_gxbb_data = {
+> +	.reg_count = 8,
+> +	.level_offset = 0x7c,
+> +};
 > +
-> +/*	RESET1					*/
-> +#define RESET_ACODEC			32
-> +#define RESET_DMA			33
-> +#define RESET_SD_EMMC_A			34
-> +/*					35	*/
-> +#define RESET_USBCTRL			36
-> +/*					37	*/
-> +#define RESET_USBPHY			38
-> +/*					39-41	*/
-> +#define RESET_RSA			42
-> +#define RESET_DMC			43
-> +/*					44	*/
-> +#define RESET_IRQ_CTRL			45
-> +/*					46	*/
-> +#define RESET_NIC_VAD			47
-> +#define RESET_NIC_AXI			48
-> +#define RESET_RAMA			49
-> +#define RESET_RAMB			50
-> +/*					51-52	*/
-> +#define RESET_ROM			53
-> +#define RESET_SPIFC			54
-> +#define RESET_GIC			55
-> +#define RESET_UART_C			56
-> +#define RESET_UART_B			57
-> +#define RESET_UART_A			58
-> +#define RESET_OSC_RING			59
-> +/*					60-63	*/
+> +static const struct meson_reset_drvdata meson_a1_data = {
+> +	.reg_count = 3,
+> +	.level_offset = 0x40,
+> +};
 > +
-> +/*	RESET2					*/
-> +/*					64-95	*/
-> +
-> +#endif
+>   static const struct udevice_id meson_reset_ids[] = {
+> -	{ .compatible = "amlogic,meson-gxbb-reset" },
+> -	{ .compatible = "amlogic,meson-axg-reset" },
+> +	{
+> +		.compatible = "amlogic,meson-gxbb-reset",
+> +		.data = (ulong)&meson_gxbb_data,
+> +	},
+> +	{
+> +		.compatible = "amlogic,meson-axg-reset",
+> +		.data = (ulong)&meson_gxbb_data,
+> +	},
+> +	{
+> +		.compatible = "amlogic,meson-a1-reset",
+> +		.data = (ulong)&meson_a1_data,
+> +	},
+>   	{ }
+>   };
+>   
+>   static int meson_reset_probe(struct udevice *dev)
+>   {
+>   	struct meson_reset_priv *priv = dev_get_priv(dev);
+> +	priv->drvdata = (struct meson_reset_drvdata *)dev_get_driver_data(dev);
+>   
+>   	return regmap_init_mem(dev_ofnode(dev), &priv->regmap);
+>   }
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
