@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD5CE75433
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 08:12:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E08A1E75434
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 08:12:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18CA687460;
-	Tue,  3 Oct 2023 10:11:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CDED787452;
+	Tue,  3 Oct 2023 10:11:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YkN43kUI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iWQJjVYX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D733086BE1; Tue,  3 Oct 2023 10:11:12 +0200 (CEST)
+ id C61A086BE1; Tue,  3 Oct 2023 10:11:18 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FDAC8747E
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 10:11:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5089687492
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 10:11:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j-keerthy@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3938B6Vm023819;
- Tue, 3 Oct 2023 03:11:06 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3938B8UX023825;
+ Tue, 3 Oct 2023 03:11:08 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696320666;
- bh=v453GfVCYnXtlZqWB4LwOjs9l84UUIKlMgO1XsLPhog=;
+ s=ti-com-17Q1; t=1696320668;
+ bh=I/iMhVFMRchxUoqQ80Jkc3I2EMhKOs2BNpbWO5pRA3g=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=YkN43kUIWp24erIL/kdqqbCvC5VR1NYmSgOzUxOZiLPVFJA3CoaU5gOmNoArZp4BZ
- SZLdkJbmfL0ozFk+jIp/lDKKq8nsczywHPjTXnw9cHYg8OU3hEmSwHwxGBq1NyjGxF
- FpHHy8EQ0m+Kn9M6pVZrjR2oYS3VYnzIJc9VEEoo=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3938B6GX042372
+ b=iWQJjVYXDclVUY2h2EmGYeVIYO4MIBozgFaZm+u0gdRNla3bH/C9LjnHpJ0leqZwJ
+ CwkaJZxQ6qW7RY9I8sPqvh924bOUnbuVtcyI/S4B1zup2wGLdmhNyANyXR2U0iUVzV
+ 1Yy722BE29/bpfGie+ISCKHGk78XQ0lytpEq5Btk=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3938B8BR022326
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 3 Oct 2023 03:11:06 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ Tue, 3 Oct 2023 03:11:08 -0500
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
- Oct 2023 03:11:06 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 03:11:08 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 3 Oct 2023 03:11:06 -0500
+ Frontend Transport; Tue, 3 Oct 2023 03:11:08 -0500
 Received: from keerthy.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3938AhEJ110453;
- Tue, 3 Oct 2023 03:11:04 -0500
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3938AhEK110453;
+ Tue, 3 Oct 2023 03:11:06 -0500
 From: Keerthy <j-keerthy@ti.com>
 To: <u-boot@lists.denx.de>, <u-kumar1@ti.com>
 CC: <j-keerthy@ti.com>, <n-francis@ti.com>, <trini@konsulko.com>,
  <vigneshr@ti.com>
-Subject: [PATCH RFC 09/10] configs: j7200_evm_r5_defconfig: Enable the ESM
- configs
-Date: Tue, 3 Oct 2023 13:40:37 +0530
-Message-ID: <20231003081038.24299-10-j-keerthy@ti.com>
+Subject: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization for
+ J7200
+Date: Tue, 3 Oct 2023 13:40:38 +0530
+Message-ID: <20231003081038.24299-11-j-keerthy@ti.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20231003081038.24299-1-j-keerthy@ti.com>
 References: <20231003081038.24299-1-j-keerthy@ti.com>
@@ -79,26 +79,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the ESM configs.
+Enable ESM initialization for J7200
 
 Signed-off-by: Keerthy <j-keerthy@ti.com>
 ---
- configs/j7200_evm_r5_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ board/ti/j721e/evm.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index c4dd33627b..7adc230fc1 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -101,6 +101,8 @@ CONFIG_DM_MAILBOX=y
- CONFIG_K3_SEC_PROXY=y
- CONFIG_FS_LOADER=y
- CONFIG_SPL_FS_LOADER=y
-+CONFIG_ESM_K3=y
-+CONFIG_ESM_PMIC=y
- CONFIG_K3_AVS0=y
- CONFIG_SUPPORT_EMMC_BOOT=y
- CONFIG_SPL_MMC_HS400_SUPPORT=y
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index 42fa94b7a5..070b28326f 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -543,7 +543,8 @@ void spl_board_init(void)
+ 	}
+ 
+ #ifdef CONFIG_ESM_K3
+-	if (board_ti_k3_is("J721EX-PM2-SOM")) {
++	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
++	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
+ 		ret = uclass_get_device_by_driver(UCLASS_MISC,
+ 						  DM_DRIVER_GET(k3_esm), &dev);
+ 		if (ret)
+@@ -557,7 +558,8 @@ void spl_board_init(void)
+ #endif
+ 
+ #ifdef CONFIG_ESM_PMIC
+-	if (board_ti_k3_is("J721EX-PM2-SOM")) {
++	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
++	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
+ 		ret = uclass_get_device_by_driver(UCLASS_MISC,
+ 						  DM_DRIVER_GET(pmic_esm),
+ 						  &dev);
 -- 
 2.17.1
 
