@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6178E75432
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 07:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A23E1E7542D
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 07:28:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E043872AD;
-	Tue,  3 Oct 2023 09:27:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1AB2686DDB;
+	Tue,  3 Oct 2023 09:28:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sJAGyPTu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hL3lR7d+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0CF487460; Tue,  3 Oct 2023 09:27:49 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 4D88D86A28; Tue,  3 Oct 2023 09:28:06 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1747887222
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 09:27:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71E7887236
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 09:28:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-31c5cac3ae2so615367f8f.3
- for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 00:27:47 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3215f19a13aso629808f8f.3
+ for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 00:28:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696318066; x=1696922866; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1696318083; x=1696922883; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=/JoGW1PL7iE2wfeVTeRF473P6kJ0k+9TWP+BP9Jo/Wk=;
- b=sJAGyPTu5ILVVBohOoK7CKODx80zYQKiwbDBALF3PGSNrBnFeKBskB4lZ24KrAo6df
- TUV4E1nes6LlBk+2dduUfWtWKKp/89tmoHR4CHli0dQK7ROKJrKd12MfA6TNZikoBcia
- PzzsrSxpOqJAUVK4sKm8BfkR+ujh9ujpjbvfSaCXwximDAHCGXZuYr8GLdub53/FWIyw
- V4SUFefW67U5x6uttMZkfsXuZtGy7VHfwwIe0SEm7ZZ26hL9+uBWsNrxRqo1uDpKtRMQ
- SMA5yT3F0obhmQM36iqvxjjzaJ88ddjZ4O3DBmB+4QlsjUIJP8k9mxP3Tj5oNbEisw/D
- wnqQ==
+ :reply-to; bh=dI1Orn3EJa3HQcc/ggnsfl+sLGf56m79pjP3Xr2ASt4=;
+ b=hL3lR7d+bCelcOV5SPcsMlQ0k+RsEOhbOPO5Sj6VTnAW3RQCKOX38XoRe7HaftPeFW
+ knVDSgsWvW75kj7zqwdgC8EDbCfF44MXQZ1QeP60Qq0ONjp/qoSjp8OS3IkZuLgP1BKn
+ qeT5iTALcKHFNJLi3TbifE9iC4+Y3jreLbSQJn7TP3Ue5NRlZEl/YLAVDVgrXnj1H29B
+ U5YKdacgky/PeX6q3EKn0jEIdlRB2wAPU3PvkeneKMBebt6pqGiW0fthH0excFzNb2dN
+ APFQHc+QSLdFVIhA7OATZpAO4SP6Hoj0ZaIWM+mfBCXVDjLzXPH2WTj+xz5K8WuZeczp
+ bGLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696318066; x=1696922866;
+ d=1e100.net; s=20230601; t=1696318083; x=1696922883;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=/JoGW1PL7iE2wfeVTeRF473P6kJ0k+9TWP+BP9Jo/Wk=;
- b=SrdSOjR4mE+sVMMZimTOIlmlDGUSfA7xt0zBo2DQAT7dqzNbmgxKEUFTTN3iHM1dFB
- zmKxTjJtakeE6HNN1lulaH5QW5xWfSszj+uqYfJCimAk+PZA/Pik3A1BbLitDtKw15R8
- vdxG68Ii+Ut4LAJ+2sHot/IzqC/cdOstdT5/jGqjya+rcqN8pYm3vnQZ50L/nPgqfF3D
- wxIVHyMn475tikldvHs0vuAT0Qy1qS2dvSHihX3wQ0ZGeiaLpM1ZI6yT/YqS6vt7zBOB
- n9OPFRHZxuFDsVvacXyHM8iuGA6oMLujph3zegjL9WAeKn6WP31cc8MaF2GKEShfNLwN
- cgZg==
-X-Gm-Message-State: AOJu0Yy6JGRQqn+EZlVB1V/erCjd6c8WmYtn6kik+CdRow/GGO3A3FqP
- bdfiAEWAUlCradtgAnHYsOK1Sw==
-X-Google-Smtp-Source: AGHT+IGSI6Y/zTS1DqF6QQX8cSjcsW5kuVWI+7rc4aR4jqqFlXI8LMsKWWqgBUXO77nBcYEzU5UOsQ==
-X-Received: by 2002:a5d:4751:0:b0:321:6fb0:9a8b with SMTP id
- o17-20020a5d4751000000b003216fb09a8bmr10507360wrs.70.1696318066643; 
- Tue, 03 Oct 2023 00:27:46 -0700 (PDT)
+ bh=dI1Orn3EJa3HQcc/ggnsfl+sLGf56m79pjP3Xr2ASt4=;
+ b=hfcF/BhXb6QqUo+Am8M5v9de/+sXaU9UncMadaNadXnfT0RktetXzeNYDXauOXVMQd
+ EnY/2KQ+r+qxCnCtieBWaWw0KA26qO3KHPVaIv0rhp9oOXlAglwVDQcQR9dntoHlm8kh
+ dzTqto9icnoT5uRfjLZH2D1ewTJvPcTG/IXNXT/LmvQrFgunOuHRLIdkLvB2chYrxnMP
+ 1pxgKmo2kOJfVz4i8iSmE59VQAkrJp4aEeMTgR7lyVtWXubtBvWHJXQouektz7rS/q5f
+ r+XwOK9j9domZZoSN+YL4CEI6pHY859Woc9ovAm+9KQmBrV9j13EwOBQkq0SJC1/K5VN
+ sZjA==
+X-Gm-Message-State: AOJu0YzHIK5cWbFfjgmgH/HfwFE7qveKMOOOexzcjk3o340SNpdeWlLV
+ H7rF6NugJLGxG6qO5GD/d0e9Gw==
+X-Google-Smtp-Source: AGHT+IHzoDsxsUdAE1X1rQHkxdWxC+qAx7bNs4ioDUUQkI4RxKCFGPNUqG/G+uyBTytcVIJJrND9lQ==
+X-Received: by 2002:a05:6000:11c7:b0:321:6005:8979 with SMTP id
+ i7-20020a05600011c700b0032160058979mr12672148wrx.17.1696318082951; 
+ Tue, 03 Oct 2023 00:28:02 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:e31a:fe1c:e925:9858?
  ([2a01:e0a:982:cbb0:e31a:fe1c:e925:9858])
  by smtp.gmail.com with ESMTPSA id
- y16-20020a5d4710000000b003179d5aee67sm857666wrq.94.2023.10.03.00.27.45
+ y16-20020a5d4710000000b003179d5aee67sm857666wrq.94.2023.10.03.00.28.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Oct 2023 00:27:46 -0700 (PDT)
-Message-ID: <0d3d89f1-ec88-432f-9b17-2fb718a6bd3c@linaro.org>
-Date: Tue, 3 Oct 2023 09:27:44 +0200
+ Tue, 03 Oct 2023 00:28:02 -0700 (PDT)
+Message-ID: <60b40445-d790-4f1d-89a8-14b8beb20d9e@linaro.org>
+Date: Tue, 3 Oct 2023 09:28:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v1 6/8] a1: clk: Add missing CLKID_USB_PHY_IN gate
+Subject: Re: [PATCH v1 7/8] dwc3: add support for Amlogic A1 family
 Content-Language: en-US, fr
 To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com,
  sjg@google.com, lukma@denx.de, seanga2@gmail.com, marex@denx.de
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru,
- Igor Prusov <ivprusov@salutedevices.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
 References: <20231002165857.19512-1-avromanov@salutedevices.com>
- <20231002165857.19512-7-avromanov@salutedevices.com>
+ <20231002165857.19512-8-avromanov@salutedevices.com>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -104,7 +103,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231002165857.19512-7-avromanov@salutedevices.com>
+In-Reply-To: <20231002165857.19512-8-avromanov@salutedevices.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -125,28 +124,188 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 02/10/2023 18:58, Alexey Romanov wrote:
-> From: Igor Prusov <ivprusov@salutedevices.com>
+> Now the driver supports also A1 phy layer.
 > 
-> We use this clock in dwc3 driver.
-> 
-> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
+> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 > ---
->   drivers/clk/meson/a1.c | 3 +++
->   1 file changed, 3 insertions(+)
+>   drivers/usb/dwc3/dwc3-meson-g12a.c | 73 ++++++++++++++++++++++++++----
+>   1 file changed, 63 insertions(+), 10 deletions(-)
 > 
-> diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-> index 3aec42f33b..1540e1875b 100644
-> --- a/drivers/clk/meson/a1.c
-> +++ b/drivers/clk/meson/a1.c
-> @@ -238,6 +238,9 @@ static const struct meson_clk_info *meson_clocks[] = {
->   	[CLKID_FIXPLL_IN] = CLK_GATE("fixpll_in", A1_SYS_OSCIN_CTRL, 1,
->   		EXTERNAL_XTAL
->   	),
-> +	[CLKID_USB_PHY_IN] = CLK_GATE("usb_phy_in", A1_SYS_OSCIN_CTRL, 2,
-> +		EXTERNAL_XTAL
-> +	),
->   	[CLKID_SARADC] = CLK_GATE("saradc", A1_SAR_ADC_CLK_CTR, 8,
->   		-ENOENT
->   	),
+> diff --git a/drivers/usb/dwc3/dwc3-meson-g12a.c b/drivers/usb/dwc3/dwc3-meson-g12a.c
+> index 90418ddc1d..550e6682a2 100644
+> --- a/drivers/usb/dwc3/dwc3-meson-g12a.c
+> +++ b/drivers/usb/dwc3/dwc3-meson-g12a.c
+> @@ -28,6 +28,7 @@
+>   #include <linux/bitfield.h>
+>   #include <linux/bitops.h>
+>   #include <linux/compat.h>
+> +#include <dt-bindings/clock/amlogic,a1-peripherals-clkc.h>
+>   
+>   /* USB2 Ports Control Registers */
+>   
+> @@ -102,10 +103,22 @@ enum {
+>   	PHY_COUNT,
+>   };
+>   
+> -static const char *phy_names[PHY_COUNT] = {
+> +static const char *const dwc3_meson_g12a_phy_names[] = {
+>   	"usb2-phy0", "usb2-phy1", "usb3-phy0",
+>   };
+>   
+> +static const char *const dwc3_meson_a1_phy_names[] = {
+> +	"usb2-phy0", "usb2-phy1"
+> +};
+> +
+> +struct dwc3_meson_g12a;
+> +
+> +struct dwc3_meson_g12a_drvdata {
+> +	const char *const *phy_names;
+> +	unsigned int phy_cnt;
+> +	int (*clk_init)(struct dwc3_meson_g12a *priv);
+> +};
+> +
+>   struct dwc3_meson_g12a {
+>   	struct udevice		*dev;
+>   	struct regmap           *regmap;
+> @@ -119,6 +132,7 @@ struct dwc3_meson_g12a {
+>   #if CONFIG_IS_ENABLED(DM_REGULATOR)
+>   	struct udevice		*vbus_supply;
+>   #endif
+> +	struct dwc3_meson_g12a_drvdata *drvdata;
+>   };
+>   
+>   #define U2P_REG_SIZE						0x20
+> @@ -293,10 +307,11 @@ int dwc3_meson_g12a_force_mode(struct udevice *dev, enum usb_dr_mode mode)
+>   
+>   static int dwc3_meson_g12a_get_phys(struct dwc3_meson_g12a *priv)
+>   {
+> +	struct dwc3_meson_g12a_drvdata *data = priv->drvdata;
+>   	int i, ret;
+>   
+> -	for (i = 0 ; i < PHY_COUNT ; ++i) {
+> -		ret = generic_phy_get_by_name(priv->dev, phy_names[i],
+> +	for (i = 0 ; i < data->phy_cnt; ++i) {
+> +		ret = generic_phy_get_by_name(priv->dev, data->phy_names[i],
+>   					      &priv->phys[i]);
+>   		if (ret == -ENOENT || ret == -ENODATA)
+>   			continue;
+> @@ -354,18 +369,36 @@ static int dwc3_meson_g12a_clk_init(struct dwc3_meson_g12a *priv)
+>   	return 0;
+>   }
+>   
+> +static int dwc3_meson_a1_clk_init(struct dwc3_meson_g12a *priv)
+> +{
+> +	int ret;
+> +
+> +	ret = clk_get_by_name(priv->dev, "usb_bus", &priv->clk);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = clk_enable(&priv->clk);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return 0;
+> +}
+> +
+>   static int dwc3_meson_g12a_probe(struct udevice *dev)
+>   {
+>   	struct dwc3_meson_g12a *priv = dev_get_plat(dev);
+> +	struct dwc3_meson_g12a_drvdata *data =
+> +		(struct dwc3_meson_g12a_drvdata *)dev_get_driver_data(dev);
+>   	int ret, i;
+>   
+> +	priv->drvdata = data;
+>   	priv->dev = dev;
+>   
+>   	ret = regmap_init_mem(dev_ofnode(dev), &priv->regmap);
+>   	if (ret)
+>   		return ret;
+>   
+> -	ret = dwc3_meson_g12a_clk_init(priv);
+> +	ret = data->clk_init(priv);
+>   	if (ret)
+>   		return ret;
+>   
+> @@ -398,7 +431,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
+>   	if (ret)
+>   		return ret;
+>   
+> -	for (i = 0 ; i < PHY_COUNT ; ++i) {
+> +	for (i = 0 ; i < data->phy_cnt; ++i) {
+>   		if (!priv->phys[i].dev)
+>   			continue;
+>   
+> @@ -407,7 +440,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
+>   			goto err_phy_init;
+>   	}
+>   
+> -	for (i = 0; i < PHY_COUNT; ++i) {
+> +	for (i = 0; i < data->phy_cnt; ++i) {
+>   		if (!priv->phys[i].dev)
+>   			continue;
+>   
+> @@ -419,7 +452,7 @@ static int dwc3_meson_g12a_probe(struct udevice *dev)
+>   	return 0;
+>   
+>   err_phy_init:
+> -	for (i = 0 ; i < PHY_COUNT ; ++i) {
+> +	for (i = 0 ; i < data->phy_cnt ; ++i) {
+>   		if (!priv->phys[i].dev)
+>   			continue;
+>   
+> @@ -432,20 +465,21 @@ err_phy_init:
+>   static int dwc3_meson_g12a_remove(struct udevice *dev)
+>   {
+>   	struct dwc3_meson_g12a *priv = dev_get_plat(dev);
+> +	struct dwc3_meson_g12a_drvdata *data = priv->drvdata;
+>   	int i;
+>   
+>   	reset_release_all(&priv->reset, 1);
+>   
+>   	clk_release_all(&priv->clk, 1);
+>   
+> -	for (i = 0; i < PHY_COUNT; ++i) {
+> +	for (i = 0; i < data->phy_cnt; ++i) {
+>   		if (!priv->phys[i].dev)
+>   			continue;
+>   
+>   		 generic_phy_power_off(&priv->phys[i]);
+>   	}
+>   
+> -	for (i = 0 ; i < PHY_COUNT ; ++i) {
+> +	for (i = 0 ; i < data->phy_cnt; ++i) {
+>   		if (!priv->phys[i].dev)
+>   			continue;
+>   
+> @@ -455,8 +489,27 @@ static int dwc3_meson_g12a_remove(struct udevice *dev)
+>   	return dm_scan_fdt_dev(dev);
+>   }
+>   
+> +static const struct dwc3_meson_g12a_drvdata meson_g12a_drvdata = {
+> +	.phy_names = dwc3_meson_g12a_phy_names,
+> +	.phy_cnt = ARRAY_SIZE(dwc3_meson_g12a_phy_names),
+> +	.clk_init = dwc3_meson_g12a_clk_init,
+> +};
+> +
+> +static const struct dwc3_meson_g12a_drvdata meson_a1_drvdata = {
+> +	.phy_names = dwc3_meson_a1_phy_names,
+> +	.phy_cnt = ARRAY_SIZE(dwc3_meson_a1_phy_names),
+> +	.clk_init = dwc3_meson_a1_clk_init,
+> +};
+> +
+>   static const struct udevice_id dwc3_meson_g12a_ids[] = {
+> -	{ .compatible = "amlogic,meson-g12a-usb-ctrl" },
+> +	{
+> +		.compatible = "amlogic,meson-g12a-usb-ctrl",
+> +		.data = (ulong)&meson_g12a_drvdata,
+> +	},
+> +	{
+> +		.compatible = "amlogic,meson-a1-usb-ctrl",
+> +		.data = (ulong)&meson_a1_drvdata,
+> +	},
+>   	{ }
+>   };
+>   
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
