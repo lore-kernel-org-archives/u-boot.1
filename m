@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E366EE7AD42
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86FFEE7AD42
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 13:21:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5C488725E;
-	Tue,  3 Oct 2023 15:21:02 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C279B87259;
+	Tue,  3 Oct 2023 15:21:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="o0cDcn+1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="h+TFABzN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 351CE87259; Tue,  3 Oct 2023 15:21:02 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 8FC5C87285; Tue,  3 Oct 2023 15:21:11 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC62287284
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:20:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F56687441
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 15:21:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3248aa5cf4eso970911f8f.1
- for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 06:20:58 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-327b7e08456so945560f8f.2
+ for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 06:21:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696339258; x=1696944058; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1696339269; x=1696944069; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=pI59aYosQYHU2guYGI0SzdHSoKj72+JZp8wirAuCrGE=;
- b=o0cDcn+1SgvO6uGQlzgGJ/bybiegi5dVVEdJhlClLsFUgOunuPw9Rizk/RdItsaHsO
- 6jsFwKorkDQpz7FhJ7Yiab3DaLKPFiyaChnd5GuZSxfI5ZTU339wcaV8niD1hLpiM+Ke
- 3kGn8vf2M2snLeW+6GIXUs43ghcIopvInSbX5aV3V6Ott6MRvecuy+zVtxnrjLFnA9D9
- xg4UqaQQLo/czknyrV7kH/2GWflGa1mYWrqyToxEd6N+cZWDVQLSlk7uE1RUYaha5wby
- EPC3ZUQzYsrGoX66InMBwtewTNvxFvu/FmZuYFa1UnbTwIkWrYNo64SHrfFv4RFEmkfa
- 91/g==
+ :reply-to; bh=KK8nmRmNQygjjViCiLRnGglt+F9y0kDV4bmr3SV9+Fk=;
+ b=h+TFABzNYqFD2DJFmqDW1hC7Nn7ue01QTXBqOMJAl8y8Ib+hfUXMzAUr+rTMnEZvvY
+ rU9wrj6K2v8knwRNbXHrMT9kEc+4XxjwJGmrIfgFK2Dr8AzKeaSFVW0oQOOIC3s87wGK
+ 0HE31qZNrn4JNoWxIhGdbTou2zaaYtkPIx7yRy1cjLDarH57IUZhpyuYVvKFU8FWEKQz
+ nTjLll4KKvTIk1Y7GnCwtygpCdcudAR7cQ21kopYeb26yIvXksgSvLmlP8+jODhv46kx
+ 0EFOXmDjyZ2L4NmBfzResWPZJAVoA+TQhBgEVaItWBIGGyewV+K/7aiEO2Bg9NqebA7i
+ W1jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696339258; x=1696944058;
+ d=1e100.net; s=20230601; t=1696339269; x=1696944069;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=pI59aYosQYHU2guYGI0SzdHSoKj72+JZp8wirAuCrGE=;
- b=fQXLzYPGgyGH1WQfmuuavSGKwNW5VRnqc8dIDAmFurV3cel7XS8L6hu2f4oKAA51Hq
- mq1H662432wKXgljvWjyuUYj4Zv7tOf6NH+pY6aBYm124B4B9y9zSqFfcqN011d41dBu
- Hd0X79Ai+cFiGKzzQSgtyXWclExsV76+CphyJledABFID6nld0P9N0T4nHCCIIR9ESQK
- blgt7QRXlP1SnHcveZTCMSzY2jAW2y8GhhkKjC0G2BNK+a2x4gca6eR3vlzlkm2TDy+o
- yFJldZpoqxvqS56UH1tZ6FCkAjt6ExM/Qw24wD//QuFpJviaf+RI9c2HrzMbAMhCSBp4
- urzQ==
-X-Gm-Message-State: AOJu0Yxi2QfLXqhWf2990f6vSdn2GetfMqv+sxkJ+8N4E/SiC5PCzx4U
- jOnQlRcNTc14llpMkIRdxb6AVA==
-X-Google-Smtp-Source: AGHT+IHJCuJxmeALtTlU8BrV59Ugbt8hd8eVxx1N0/LwifXq4nn3+D4zwGIyxmXXEv482voBB8Dd7Q==
-X-Received: by 2002:adf:e683:0:b0:321:4c7e:45e3 with SMTP id
- r3-20020adfe683000000b003214c7e45e3mr12965303wrm.11.1696339258356; 
- Tue, 03 Oct 2023 06:20:58 -0700 (PDT)
+ bh=KK8nmRmNQygjjViCiLRnGglt+F9y0kDV4bmr3SV9+Fk=;
+ b=ogb2kvEjJbVZresrvOdbNgww6eqcYbYN6KIiIhXHU6QRoQlATPN6Y3k6x9eNGcjKMx
+ 9tyIBTZE5HW/6reCNFgSf36e7Ub8GdhCmMF9r7vWOSJRKj2kw7KAtP62gi854YW2qsBq
+ UgITv2p+5GCfaMkYc6S58I6g0CVfWtkCXx9rJtMcAwsac8qvZFo5zspc4KfvhjqjnM4L
+ Mu+1z13BgRamnhv9UdCU58eFUT9Kw2hraVqb10QeUuUlpLbxqbP7/3ZvjKqB/3qp7cXK
+ MKmEVp9BQnPbBdxOfg+HANh71reiVy/+6BcsMsJd0uzBtAqTvQLSLcLk2Yo824MAN9Zc
+ r22Q==
+X-Gm-Message-State: AOJu0Yxx4LE99fnFiSFkdLJtsbbb6Yb65eoPJJPGNyKEspPUzNFYpNLU
+ 23yUxQQKFOZ7tNkCraGXN7iZLQ==
+X-Google-Smtp-Source: AGHT+IHdbWDShCgBiloWUJ08ARDisa8mrQI8/CwcNNIWVhwJuYUF3wlQERa6Xjznvqq1LuaYSDTqSA==
+X-Received: by 2002:a5d:6447:0:b0:324:8239:2872 with SMTP id
+ d7-20020a5d6447000000b0032482392872mr11530081wrw.71.1696339268822; 
+ Tue, 03 Oct 2023 06:21:08 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:e31a:fe1c:e925:9858?
  ([2a01:e0a:982:cbb0:e31a:fe1c:e925:9858])
  by smtp.gmail.com with ESMTPSA id
- f8-20020adfdb48000000b0031ff89af0e4sm1568213wrj.99.2023.10.03.06.20.56
+ f8-20020adfdb48000000b0031ff89af0e4sm1568213wrj.99.2023.10.03.06.21.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 03 Oct 2023 06:20:57 -0700 (PDT)
-Message-ID: <a0fef13f-0f39-4595-abb2-2859f0bb18a4@linaro.org>
-Date: Tue, 3 Oct 2023 15:20:56 +0200
+ Tue, 03 Oct 2023 06:21:08 -0700 (PDT)
+Message-ID: <e8f12d8c-aa70-45e9-b7f1-29840110b356@linaro.org>
+Date: Tue, 3 Oct 2023 15:21:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2 6/8] a1: clk: Add missing USB_PHY_IN and USB_PHY gates
+Subject: Re: [PATCH v2 8/8] ad401: enable USB stack
 Content-Language: en-US, fr
 To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com,
  sjg@google.com, lukma@denx.de, seanga2@gmail.com, marex@denx.de
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru,
- Igor Prusov <ivprusov@salutedevices.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
 References: <20231003112838.41503-1-avromanov@salutedevices.com>
- <20231003112838.41503-7-avromanov@salutedevices.com>
+ <20231003112838.41503-9-avromanov@salutedevices.com>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -104,7 +103,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231003112838.41503-7-avromanov@salutedevices.com>
+In-Reply-To: <20231003112838.41503-9-avromanov@salutedevices.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -125,32 +124,26 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 03/10/2023 13:28, Alexey Romanov wrote:
-> From: Igor Prusov <ivprusov@salutedevices.com>
+> Currently we have all drivers for use USB stack on A1-series
+> SoC's. Let's enable USB options for the Amlogic AD401 reference A1
+> SoC board.
 > 
-> We use this clocks in dwc3 driver.
-> 
-> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
 > Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 > ---
->   drivers/clk/meson/a1.c | 6 ++++++
->   1 file changed, 6 insertions(+)
+>   configs/ad401_defconfig | 3 +++
+>   1 file changed, 3 insertions(+)
 > 
-> diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-> index 3aec42f33b..1075ba7333 100644
-> --- a/drivers/clk/meson/a1.c
-> +++ b/drivers/clk/meson/a1.c
-> @@ -238,6 +238,12 @@ static const struct meson_clk_info *meson_clocks[] = {
->   	[CLKID_FIXPLL_IN] = CLK_GATE("fixpll_in", A1_SYS_OSCIN_CTRL, 1,
->   		EXTERNAL_XTAL
->   	),
-> +	[CLKID_USB_PHY_IN] = CLK_GATE("usb_phy_in", A1_SYS_OSCIN_CTRL, 2,
-> +		EXTERNAL_XTAL
-> +	),
-> +	[CLKID_USB_PHY] = CLK_GATE("usb_phy", A1_SYS_CLK_EN0, 27,
-> +		CLKID_SYS
-> +	),
->   	[CLKID_SARADC] = CLK_GATE("saradc", A1_SAR_ADC_CLK_CTR, 8,
->   		-ENOENT
->   	),
+> diff --git a/configs/ad401_defconfig b/configs/ad401_defconfig
+> index 529e553bac..b02ff47b7a 100644
+> --- a/configs/ad401_defconfig
+> +++ b/configs/ad401_defconfig
+> @@ -51,4 +51,7 @@ CONFIG_DEBUG_UART_SKIP_INIT=y
+>   CONFIG_MESON_SERIAL=y
+>   CONFIG_SPI=y
+>   CONFIG_DM_SPI=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_USB_GADGET=y
+>   CONFIG_WDT=y
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
