@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55593E75428
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 258AFE7542B
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:41:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C567987457;
-	Tue,  3 Oct 2023 08:40:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 372F787462;
+	Tue,  3 Oct 2023 08:40:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gwn5jqGC";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XelsUycP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38D838724F; Tue,  3 Oct 2023 08:40:57 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id E2EF687458; Tue,  3 Oct 2023 08:40:57 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 156FC8720E
+ by phobos.denx.de (Postfix) with ESMTPS id DB10187240
  for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:40:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-5046bf37ec1so646784e87.1
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5031ccf004cso600795e87.2
  for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:40:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696315254; x=1696920054; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696315255; x=1696920055; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BSNYImZ+6x42mOnLRUPZUyMatggRfflCcWQ6vewDBZQ=;
- b=gwn5jqGCfAjsK/tqqMBXONlqu2x9mUWrR+PRyaRiSRkw0sRuXILdwDFzI8PkWx4CTq
- hO0F4u3JZXTxY3dQGdunRlhMw7ethznwNOd2uVWDkwpZD8kIFq/GbNIeD09TwBZ6HoVy
- UzRprIAO9+aQQiv0xDV2lGyKW9/ybylzEXsVJkuDYlJ1dxIU945ppmLpEYXmxmnWsu9T
- rUhKY1PISjc9wT6K3moPR8C3q8MfXYI6CE0agPk4bBHUGJ8ENH/Uo5GjwnLDzK8RHHfC
- OcrGOO0CnecwXt0snvLNNyaFXA3sdqH4aswVmWn8lx7LBDUa38vhCxGBBGhhs+YR5FG+
- GlKA==
+ bh=VWPD7jJgudMcQ465nZQXIm308+0rV5CUNp5J9ozOswI=;
+ b=XelsUycPQ+Xr6S5OQyolk3tohpJAUPdPgbQRBHE7EdKEKSc146mjZafG2D18sBsFEu
+ JpRPstwFNXV/TPRNiA3lLqJYZJTf+iA1mRcQKm55T/urRTWRHO1SqIK3PuDqOeDQihV/
+ aMHtV7HyURpCF+fzPM+oqTpWiBXV/uV9amUuwZU/R9+3bzvKp4kFM+pSSDlSDvmqlw3i
+ nt1guivv55UixZ40WZN1nc597JYTrZUQmWq3kEkpcn3f24xEJI/MWasHrHNHZhCbxaWy
+ EIlouOHbwXdwjZYH29An2odzftgVwI6ddlGTCSj5liB09W5qc5axMxfs8ct8ZnE8JzkV
+ peWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696315254; x=1696920054;
+ d=1e100.net; s=20230601; t=1696315255; x=1696920055;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BSNYImZ+6x42mOnLRUPZUyMatggRfflCcWQ6vewDBZQ=;
- b=sLhzglX0PJZ7WmMwN3s9H+smr6H/kx5/ocMWnwFQKi0TYHHWVQNCfPfEOIrhTblni0
- Q/NnhRzypZ63kFGnwqWduPngKvwmrOgcFDX/S/ZmiqAshTo79mI/PQ6t3WjfS2auAVrV
- yw6yX37MXWUJLPYpfW14ZGUP//GzQYs/F9X9Dxxp0Hg0Gro6HP2o2K5+V9iExyZUP7V7
- UGisc3QRvXffiCFKlMaeJMx9eJswdHDyTtUTwOj3Wn9ryzr2ZW/3XBGgjKZ242gRGw4F
- eEEYpoQS0c1+s8Qp7uYgvw9OUxV67WwIM+GxXyMwog5X/jwAryQVJVDtmJSepTtqAJqB
- PUYg==
-X-Gm-Message-State: AOJu0YwRb8TwhYhrs1V5fjZJ14Hl48uKuVHvdClSsvEIB7ynmzOGFesm
- 0J1ESCzD9Q1aVVqh6DpsUi8=
-X-Google-Smtp-Source: AGHT+IFG+f4wpd6nSA+k7tE3mDjWp3/oYfCesSxgyvku8Jr1LihhAKVS7rYj0ehdIEFjUEYKd1GoWw==
-X-Received: by 2002:a05:6512:2344:b0:503:56e:ae4 with SMTP id
- p4-20020a056512234400b00503056e0ae4mr14005817lfu.38.1696315254210; 
- Mon, 02 Oct 2023 23:40:54 -0700 (PDT)
+ bh=VWPD7jJgudMcQ465nZQXIm308+0rV5CUNp5J9ozOswI=;
+ b=nXX099kpvzlz3Gzu/lsufLSC6MjEu/bGmUgOGCKNT/Yz/1hvpReSrNdk6PwYZ9TAQi
+ DUNZbHuUdLlWxwHZeVCd7dWPcJ79CiC7q4fLie7lFGihnWWg46uIi0yssHJfMpsEUObN
+ M9akCkgfAAEIauRgEm9fnN2eZlwyp55XzRXb3VaVubbmDz70ZVivDpLhWcir0LuSNkcZ
+ 6rI5Pmz4YQlu8wRunHVAnfRi0oMfhEoNWhcw0zteM43oAaPp4NKbrxYCJk6zAQv1GmbE
+ R+CH0/e6b4GxDs3Fh4ye/2sExefC4iwlIlba6WD9VCOJdcecnMNk4IPoBj5YdwoX2vkp
+ UEzQ==
+X-Gm-Message-State: AOJu0Ywhhqe47LcgwDtQ5j3/OycmCdxWzQJ5d7JgKJxX4Q3wAjnzGH5I
+ hqURWq3E9smXxJhUjCqzi/M=
+X-Google-Smtp-Source: AGHT+IEewskwgYrvDXSysVrTp/PnZTQRrQGZ0jFyGIGxUbrHwtL7PaWV4A6jJW2tDHd+G7Zeh9NG0A==
+X-Received: by 2002:a05:6512:ac9:b0:4f3:9136:9cd0 with SMTP id
+ n9-20020a0565120ac900b004f391369cd0mr12742227lfu.44.1696315255053; 
+ Mon, 02 Oct 2023 23:40:55 -0700 (PDT)
 Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- x12-20020ac25dcc000000b004fe202a5c7csm79730lfq.135.2023.10.02.23.40.53
+ x12-20020ac25dcc000000b004fe202a5c7csm79730lfq.135.2023.10.02.23.40.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 23:40:53 -0700 (PDT)
+ Mon, 02 Oct 2023 23:40:54 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>,
  Jaehoon Chung <jh80.chung@samsung.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 1/6] sysreset: tegra: create arch specific sysreset driver
-Date: Tue,  3 Oct 2023 09:40:37 +0300
-Message-Id: <20231003064042.43201-2-clamor95@gmail.com>
+Subject: [PATCH v3 2/6] arm: mach-tegra: enable sysreset driver
+Date: Tue,  3 Oct 2023 09:40:38 +0300
+Message-Id: <20231003064042.43201-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231003064042.43201-1-clamor95@gmail.com>
 References: <20231003064042.43201-1-clamor95@gmail.com>
@@ -92,99 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tegra uses built in Power Management Controller (PMC) to perform
-CPU reset. Code to perform this was located in mach-tegra, so lest
-create DM driver to handle this.
-
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/sysreset/Kconfig          |  6 ++++
- drivers/sysreset/Makefile         |  1 +
- drivers/sysreset/sysreset_tegra.c | 46 +++++++++++++++++++++++++++++++
- 3 files changed, 53 insertions(+)
- create mode 100644 drivers/sysreset/sysreset_tegra.c
+ arch/arm/mach-tegra/Kconfig | 3 +++
+ arch/arm/mach-tegra/pmc.c   | 9 ---------
+ 2 files changed, 3 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index bdbe2a9536..eab556c349 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -137,6 +137,12 @@ config SYSRESET_SOCFPGA_SOC64
- 	  This enables the system reset driver support for Intel SOCFPGA
- 	  SoC64 SoCs.
+diff --git a/arch/arm/mach-tegra/Kconfig b/arch/arm/mach-tegra/Kconfig
+index 464bd0798f..453f94bcf2 100644
+--- a/arch/arm/mach-tegra/Kconfig
++++ b/arch/arm/mach-tegra/Kconfig
+@@ -61,6 +61,9 @@ config TEGRA_COMMON
+ 	select MISC
+ 	select OF_CONTROL
+ 	select SPI
++	select SYSRESET
++	select SPL_SYSRESET
++	select SYSRESET_TEGRA
+ 	imply CMD_DM
+ 	imply CRC32_VERIFY
  
-+config SYSRESET_TEGRA
-+	bool "Tegra PMC system reset driver"
-+	depends on ARCH_TEGRA
-+	help
-+	  This enables the system reset ability of PMC used in Tegra SoCs.
-+
- config SYSRESET_TI_SCI
- 	bool "TI System Control Interface (TI SCI) system reset driver"
- 	depends on TI_SCI_PROTOCOL
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index 40c876764a..a9ac123754 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -16,6 +16,7 @@ obj-$(CONFIG_SYSRESET_PSCI) += sysreset_psci.o
- obj-$(CONFIG_SYSRESET_SBI) += sysreset_sbi.o
- obj-$(CONFIG_SYSRESET_SOCFPGA) += sysreset_socfpga.o
- obj-$(CONFIG_SYSRESET_SOCFPGA_SOC64) += sysreset_socfpga_soc64.o
-+obj-$(CONFIG_SYSRESET_TEGRA) += sysreset_tegra.o
- obj-$(CONFIG_SYSRESET_TI_SCI) += sysreset-ti-sci.o
- obj-$(CONFIG_SYSRESET_SYSCON) += sysreset_syscon.o
- obj-$(CONFIG_SYSRESET_WATCHDOG) += sysreset_watchdog.o
-diff --git a/drivers/sysreset/sysreset_tegra.c b/drivers/sysreset/sysreset_tegra.c
-new file mode 100644
-index 0000000000..ee95826a29
---- /dev/null
-+++ b/drivers/sysreset/sysreset_tegra.c
-@@ -0,0 +1,46 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <sysreset.h>
-+#include <linux/err.h>
-+#include <asm/arch-tegra/pmc.h>
-+
-+static int tegra_sysreset_request(struct udevice *dev,
-+				  enum sysreset_t type)
-+{
-+	u32 value;
-+
-+	switch (type) {
-+	case SYSRESET_WARM:
-+	case SYSRESET_COLD:
-+		/* resets everything but scratch 0 and reset status */
-+		value = tegra_pmc_readl(PMC_CNTRL);
-+		value |= PMC_CNTRL_MAIN_RST;
-+		tegra_pmc_writel(value, PMC_CNTRL);
-+		break;
-+	default:
-+		return -EPROTONOSUPPORT;
-+	}
-+
-+	return -EINPROGRESS;
-+}
-+
-+static struct sysreset_ops tegra_sysreset = {
-+	.request = tegra_sysreset_request,
-+};
-+
-+U_BOOT_DRIVER(sysreset_tegra) = {
-+	.id	= UCLASS_SYSRESET,
-+	.name	= "sysreset_tegra",
-+	.ops	= &tegra_sysreset,
-+};
-+
-+/* Link to Tegra PMC once there is a driver */
-+U_BOOT_DRVINFO(sysreset_tegra) = {
-+	.name = "sysreset_tegra"
-+};
+diff --git a/arch/arm/mach-tegra/pmc.c b/arch/arm/mach-tegra/pmc.c
+index 8d617bee63..c4f5106750 100644
+--- a/arch/arm/mach-tegra/pmc.c
++++ b/arch/arm/mach-tegra/pmc.c
+@@ -84,12 +84,3 @@ void tegra_pmc_writel(u32 value, unsigned long offset)
+ 
+ 	writel(value, NV_PA_PMC_BASE + offset);
+ }
+-
+-void reset_cpu(void)
+-{
+-	u32 value;
+-
+-	value = tegra_pmc_readl(PMC_CNTRL);
+-	value |= PMC_CNTRL_MAIN_RST;
+-	tegra_pmc_writel(value, PMC_CNTRL);
+-}
 -- 
 2.39.2
 
