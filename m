@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C118E75426
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 12:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C329E7544F
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 12:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DBE887284;
-	Tue,  3 Oct 2023 14:12:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F0C187441;
+	Tue,  3 Oct 2023 14:12:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="gSmSRuWO";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="r0LsciQi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0AAC8716D; Tue,  3 Oct 2023 13:29:00 +0200 (CEST)
+ id 32500870BB; Tue,  3 Oct 2023 13:29:02 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DFC3871FE
+ by phobos.denx.de (Postfix) with ESMTPS id BC6B887202
  for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 13:28:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id B5711100006;
- Tue,  3 Oct 2023 14:28:57 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru B5711100006
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 383D510000C;
+ Tue,  3 Oct 2023 14:28:56 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 383D510000C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696332537;
- bh=3F4Uk2alvwuEN4Hwjp7PJnAPyi65bY3vqxP9QG8HS4Q=;
+ s=mail; t=1696332536;
+ bh=UR0yEmUKLSaMRb9bayS9HVWVLhOqnWt3i4gAEsEyhNA=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=gSmSRuWOOa1JcqP60IP+qauKzERBpMr7O7zdn/QmJJQeViQ3IGRIUYJrjKXO22I18
- BJN+d2PiRLh8HsPilSYCpnADhr1oyIw2CyE2keLpPWfIwHjV4xmFhFgAGA6CgJvNzx
- Ws/vJHE51Wr5SPMk0j7PCOgDnuOVzFHllQY5BVJT/eM01RnDfH4foMl9z0mRSbTSEr
- IEhJkB+jGz3CCm1Zib4dn3NjSi9ReKgXCk906d2FunwunXP7mlpjESH3GgGlS0Sxh1
- +x3aSVhDh4cxgy8xHPQT3BprKfM/lAcRcnO9Npyk+SQWXa4eWa9uLq22pM7//ywR1o
- t+NwXCWDNWdmg==
+ b=r0LsciQik8C50vZQmiSHzVrGQEp6mqV/Huo5fddMqc1HCYA8zzllWJJ6+bX1v1lnj
+ l29nl8hgEYpjtg9LC8T0avYYlbtoFZjt0TW5R9HCplZvQkKkUYjSWql6aWFyTiLUyH
+ jo9eYWodkLtoT4GkaI6KRE6xFbhGMlAPPcgJ6ja9jo377AeNCU6jllqfxkhnGJPYd8
+ dIbCLmUOgdZYyWk4G3TjbFwauEZ6mbHtLbJ91aALuHh6+bnPgdgSnLzRMBqlfsJ5sN
+ x16PMrhHj5N8h8i8CkWLvKxGTAEmdwudol5Z9VgVejFTr8SWXeKDXFMcMgzmtLAsCS
+ i8z4UIOIeS8Fw==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue,  3 Oct 2023 14:28:57 +0300 (MSK)
+ Tue,  3 Oct 2023 14:28:56 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Tue, 3 Oct 2023 14:28:57 +0300
+ 15.2.1118.30; Tue, 3 Oct 2023 14:28:55 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <lukma@denx.de>, <seanga2@gmail.com>, <marex@denx.de>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
- <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 8/8] ad401: enable USB stack
-Date: Tue, 3 Oct 2023 14:28:34 +0300
-Message-ID: <20231003112838.41503-9-avromanov@salutedevices.com>
+ <kernel@sberdevices.ru>, Igor Prusov <ivprusov@salutedevices.com>, Alexey
+ Romanov <avromanov@salutedevices.com>
+Subject: [PATCH v2 6/8] a1: clk: Add missing USB_PHY_IN and USB_PHY gates
+Date: Tue, 3 Oct 2023 14:28:32 +0300
+Message-ID: <20231003112838.41503-7-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231003112838.41503-1-avromanov@salutedevices.com>
 References: <20231003112838.41503-1-avromanov@salutedevices.com>
@@ -105,27 +106,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently we have all drivers for use USB stack on A1-series
-SoC's. Let's enable USB options for the Amlogic AD401 reference A1
-SoC board.
+From: Igor Prusov <ivprusov@salutedevices.com>
 
+We use this clocks in dwc3 driver.
+
+Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 ---
- configs/ad401_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ drivers/clk/meson/a1.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/configs/ad401_defconfig b/configs/ad401_defconfig
-index 529e553bac..b02ff47b7a 100644
---- a/configs/ad401_defconfig
-+++ b/configs/ad401_defconfig
-@@ -51,4 +51,7 @@ CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_MESON_SERIAL=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_GADGET=y
- CONFIG_WDT=y
+diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
+index 3aec42f33b..1075ba7333 100644
+--- a/drivers/clk/meson/a1.c
++++ b/drivers/clk/meson/a1.c
+@@ -238,6 +238,12 @@ static const struct meson_clk_info *meson_clocks[] = {
+ 	[CLKID_FIXPLL_IN] = CLK_GATE("fixpll_in", A1_SYS_OSCIN_CTRL, 1,
+ 		EXTERNAL_XTAL
+ 	),
++	[CLKID_USB_PHY_IN] = CLK_GATE("usb_phy_in", A1_SYS_OSCIN_CTRL, 2,
++		EXTERNAL_XTAL
++	),
++	[CLKID_USB_PHY] = CLK_GATE("usb_phy", A1_SYS_CLK_EN0, 27,
++		CLKID_SYS
++	),
+ 	[CLKID_SARADC] = CLK_GATE("saradc", A1_SAR_ADC_CLK_CTR, 8,
+ 		-ENOENT
+ 	),
 -- 
 2.25.1
 
