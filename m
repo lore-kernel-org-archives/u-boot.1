@@ -4,65 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E08A1E75434
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 08:12:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85D96E75433
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 08:36:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDED787452;
-	Tue,  3 Oct 2023 10:11:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B34A86DA7;
+	Tue,  3 Oct 2023 10:36:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iWQJjVYX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cvnund9S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C61A086BE1; Tue,  3 Oct 2023 10:11:18 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 154A487137; Tue,  3 Oct 2023 10:36:54 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5089687492
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 10:11:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 259E586C96
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 10:36:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j-keerthy@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3938B8UX023825;
- Tue, 3 Oct 2023 03:11:08 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696320668;
- bh=I/iMhVFMRchxUoqQ80Jkc3I2EMhKOs2BNpbWO5pRA3g=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=iWQJjVYXDclVUY2h2EmGYeVIYO4MIBozgFaZm+u0gdRNla3bH/C9LjnHpJ0leqZwJ
- CwkaJZxQ6qW7RY9I8sPqvh924bOUnbuVtcyI/S4B1zup2wGLdmhNyANyXR2U0iUVzV
- 1Yy722BE29/bpfGie+ISCKHGk78XQ0lytpEq5Btk=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3938B8BR022326
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 3 Oct 2023 03:11:08 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
- Oct 2023 03:11:08 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 3 Oct 2023 03:11:08 -0500
-Received: from keerthy.dhcp.ti.com (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3938AhEK110453;
- Tue, 3 Oct 2023 03:11:06 -0500
-From: Keerthy <j-keerthy@ti.com>
-To: <u-boot@lists.denx.de>, <u-kumar1@ti.com>
-CC: <j-keerthy@ti.com>, <n-francis@ti.com>, <trini@konsulko.com>,
- <vigneshr@ti.com>
-Subject: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization for
- J7200
-Date: Tue, 3 Oct 2023 13:40:38 +0530
-Message-ID: <20231003081038.24299-11-j-keerthy@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20231003081038.24299-1-j-keerthy@ti.com>
-References: <20231003081038.24299-1-j-keerthy@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5046bf37ec1so770341e87.1
+ for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 01:36:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696322210; x=1696927010; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=x+kU6Ph+iAEyEB2VshoVf67KfBtyNs1dCPD1HGUdsEE=;
+ b=Cvnund9SSA3F8Ka977VeXwQKoBSKYxIlpnVxCDf7IOwunUmAfB31HQIegg4wsgyfhS
+ By/hQZzHrx+8A8Ouf/WzpgkkvIbGdJdWdw7eEk8m/tklyKkmWO3YYZLCzZJB8razLOxN
+ lcNkXYkyfs179fReGTXsGcCtLx3hnEyc+hYZELcCxc6qu6gNWWc9IOcTCngpweEbhh5V
+ fQyix/CN8zwYYUTXRXsoxYeV0rCxGfg68+ygfDmHCKHUtNp9i+yirG0xKafEchhqioDU
+ Yjgaax8ompuQVGx02Fx8uOz4OoclqutbmXWvtzMWuqEde3FGDgXH7odDPYg/hWZ9sNZJ
+ YmJg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696322210; x=1696927010;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=x+kU6Ph+iAEyEB2VshoVf67KfBtyNs1dCPD1HGUdsEE=;
+ b=FqNscUg4Y/y0zxgHVC1jjiWzcuqmp0HLzq/SmQPf6jF0O+GJHRJK7iCN2xMFu6KZLL
+ MEFqUWUOJB8kMwsK/VRFo47geV4ugKroRcJxCMgpG1ci8xfEFjWPP7fkaF/78bEm/rPx
+ MSmj1sQnDigUIFWU6grwy/VIVORWWK5gE8kDosB+Rf8XRGxK8TIixsDr41gwqsh+B7DG
+ auFH3JLBXeluFOBxE3v/knP81nykENcpjl+REmP6bILBvwoo6uGHdlYKz2r5fRRuDLuv
+ /oIwI19pf7ordFccFpXnwYHe+wX1yBJ9NqdNHjf0nXdhQHXZQjaZVMo1ABJ2sPbogXjF
+ gmsA==
+X-Gm-Message-State: AOJu0YxPVH/yWtwjmySUVUop3WJBUquXCIPrJqJo+vwZY2YWDhIqQJid
+ xZWu9bzQNj69lT6yjX3cMLvYZZqWn4xUKh6hoTy4k7fTXkjXWQ==
+X-Google-Smtp-Source: AGHT+IEVhM/KLG517wDTZ/wt7RMyixHr90uU6bg66cszfgKYzJBiHkx2Rk+CMJKu7peTP5WL/3mB2BSf1itFM7DxejA=
+X-Received: by 2002:a05:6512:5ce:b0:500:ac0b:8d58 with SMTP id
+ o14-20020a05651205ce00b00500ac0b8d58mr10859712lfo.18.1696322209993; Tue, 03
+ Oct 2023 01:36:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20230926090808.408095-1-JJLIU0@nuvoton.com>
+ <ec256874-0fca-83fe-d207-67e4048b461c@denx.de>
+In-Reply-To: <ec256874-0fca-83fe-d207-67e4048b461c@denx.de>
+From: Jim Liu <jim.t90615@gmail.com>
+Date: Tue, 3 Oct 2023 01:36:38 -0700
+Message-ID: <CAKUZ0+Exu_F2tjY9q8QqQz83PEZQKYZY_bdAFwdPGKQdpKTr3w@mail.gmail.com>
+Subject: Re: [PATCH v1] i2c: nuvoton: add support fast mode
+To: hs@denx.de
+Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, trini@konsulko.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,37 +88,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable ESM initialization for J7200
+Hi  Heiko
 
-Signed-off-by: Keerthy <j-keerthy@ti.com>
----
- board/ti/j721e/evm.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+Thanks for your review.
+Our bmc HW can support standard / fast / fast plus mode
+but our first uboot version 2019 is only run on standard mode.
+so the first upstream version is the same as before.
 
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 42fa94b7a5..070b28326f 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -543,7 +543,8 @@ void spl_board_init(void)
- 	}
- 
- #ifdef CONFIG_ESM_K3
--	if (board_ti_k3_is("J721EX-PM2-SOM")) {
-+	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
-+	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
- 		ret = uclass_get_device_by_driver(UCLASS_MISC,
- 						  DM_DRIVER_GET(k3_esm), &dev);
- 		if (ret)
-@@ -557,7 +558,8 @@ void spl_board_init(void)
- #endif
- 
- #ifdef CONFIG_ESM_PMIC
--	if (board_ti_k3_is("J721EX-PM2-SOM")) {
-+	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
-+	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
- 		ret = uclass_get_device_by_driver(UCLASS_MISC,
- 						  DM_DRIVER_GET(pmic_esm),
- 						  &dev);
--- 
-2.17.1
+Now, some customer need to test other mode on uboot.
+So remove this judgment to support other mode.
 
+I will add a commit message in the next version.
+
+Best regards,
+Jim
+
+On Mon, Oct 2, 2023 at 9:37=E2=80=AFPM Heiko Schocher <hs@denx.de> wrote:
+>
+> Hello Jim,
+>
+> On 26.09.23 11:08, Jim Liu wrote:
+> > Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> > ---
+> >  drivers/i2c/npcm_i2c.c | 5 -----
+> >  1 file changed, 5 deletions(-)
+> >
+> > diff --git a/drivers/i2c/npcm_i2c.c b/drivers/i2c/npcm_i2c.c
+> > index ea4ef53256..b867b6c8e9 100644
+> > --- a/drivers/i2c/npcm_i2c.c
+> > +++ b/drivers/i2c/npcm_i2c.c
+> > @@ -517,11 +517,6 @@ static int npcm_i2c_init_clk(struct npcm_i2c_bus *=
+bus, u32 bus_freq)
+> >       u32 sclfrq;
+> >       u8 hldt, val;
+> >
+> > -     if (bus_freq > I2C_FREQ_100K) {
+> > -             printf("Support standard mode only\n");
+> > -             return -EINVAL;
+> > -     }
+> > -
+>
+> Is it so easy to enable fast mode? As original code explicitely
+> says "Support standard mode only" and returns -EINVAL?
+>
+> And please add some text into commit message, may you can explain
+> why current driver supports fast mode?
+>
+> Thanks!
+>
+> bye,
+> Heiko
+> --
+> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
