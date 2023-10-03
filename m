@@ -4,80 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D03E776FC
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 03:58:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3339E776FC
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 03:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FA14871A2;
-	Tue,  3 Oct 2023 05:58:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B2E1386DFD;
+	Tue,  3 Oct 2023 05:59:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C1mwGlx8";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="q7K7y3h2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3A1C87196; Tue,  3 Oct 2023 05:58:16 +0200 (CEST)
-Received: from mail-pg1-x531.google.com (mail-pg1-x531.google.com
- [IPv6:2607:f8b0:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3A30E86DFD; Tue,  3 Oct 2023 05:59:22 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BEE486DD9
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 05:58:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1146C86BFA
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 05:59:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-pg1-x531.google.com with SMTP id
- 41be03b00d2f7-564af0ac494so273423a12.0
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 20:58:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696305492; x=1696910292; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SQ8ypgUFZybTlNrrx2mMHZ5s7ZjZ4s7stSolC3AZ7MM=;
- b=C1mwGlx8Ss3GtrVlvSN035i5UM7gAxaS6MTfNvwuPM0BNAOG0xeK42xT09RY1BMbcM
- 6gVFWMrFAj7+bZVwIBeuYpssd9LU2MiQY7o3hoaEMv3UOSRFI3kuyf+wbU1nvtY+1elQ
- UbTulM3Lz1k3l1OepxIhSUI76BuPe+c/wIjYx1owfGCXn4SWiS4q/Op0nMSPqRS10CZl
- 6IUlSc294JocWjSZnYBARKdAZ9opOp60zht0D14iTWKhDmEXNUnfuIO4jW67ZvMBWr3f
- k1VHbbsqfiGk5x8xLaXf9qrwdr4f6jqWvhDn7OvRN2wXoIBrNvDDOIpYbnyfGA6q03+o
- TZFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696305492; x=1696910292;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SQ8ypgUFZybTlNrrx2mMHZ5s7ZjZ4s7stSolC3AZ7MM=;
- b=eXaun9hs9WV9MXLo/+O5NpoxYkVYZd74+ccTFwzklqzz51leNLVj4xnXIZARCT1gN3
- uGb/QG1L3NPH3vVnJKQEmqae2kLGVq9W7jQXqm65d3Aeq/+mk5VlzcBN/bJBQqStn63S
- pjBmkIaFcC4Icj5+wr6rsBHPMf/AsgrBj+XGRJERkBhgpgvA4hM0kr3szY2D7MBvA0Jj
- p+r7U5pObEnx0ExlHP3DPqlAeXltPWVLNh2wqn/Z4B4LrC5rnxPxW2gdmVJTOVB/3zJw
- Pr1U5+yJqik/2nhxwUd7DHelpIGQ1HsBUlp7+eJSHDtbx7bJJNmeL1wJDTt7IZ0pba9A
- T5jw==
-X-Gm-Message-State: AOJu0YyWuXOQOAlJpy6EuHjrilMA81T9wmR4cVstnjjXzYc+a/JwzJMP
- 0IxNGcn5a15aheG3sSbAvFUk8yDM/eJUmA==
-X-Google-Smtp-Source: AGHT+IGYrnoYcndi+UmCbO0undI0xSTsbmpPF00PVTWH7XFISjbbG5MdelL2VY6nqqZ8bdxWEUKPYA==
-X-Received: by 2002:a05:6a21:7785:b0:153:919e:18ce with SMTP id
- bd5-20020a056a21778500b00153919e18cemr12838631pzc.48.1696305492317; 
- Mon, 02 Oct 2023 20:58:12 -0700 (PDT)
-Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:f6be:e369:f897:f543])
- by smtp.gmail.com with ESMTPSA id
- u2-20020a17090341c200b001b86492d724sm270112ple.223.2023.10.02.20.58.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 20:58:11 -0700 (PDT)
-From: Chris Packham <judge.packham@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Chris Packham <judge.packham@gmail.com>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Stefan Roese <sr@denx.de>
-Subject: [PATCH 2/2] Revert "arm: mvebu: x240: Use i2c-gpio instead of built
- in controller"
-Date: Tue,  3 Oct 2023 16:57:39 +1300
-Message-ID: <20231003035800.2626121-2-judge.packham@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231003035800.2626121-1-judge.packham@gmail.com>
-References: <20231003035800.2626121-1-judge.packham@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3933xGIi094522;
+ Mon, 2 Oct 2023 22:59:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696305556;
+ bh=a83S99+awl7fux0HsSqDMOXuQKFBHeRltpFqGc+YzBw=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=q7K7y3h2tOZ5jcyi8tMttzZAlKzsGVA9uMCRDKCr2odYnzRzmYpcJqFwdmycF2TsG
+ +rGcXzEE6nEPpYvwdtVEdqAfYxRiNv0cRFkqw/2zB7sPZC0GsIvqrFNP+nZPtjOy0O
+ DyuCrw4MhIsfoIEPBtvnk89+gcOhEoE2GFfajV1M=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3933xGNJ021990
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 2 Oct 2023 22:59:16 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 2
+ Oct 2023 22:59:16 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 2 Oct 2023 22:59:15 -0500
+Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3933xDWa027060;
+ Mon, 2 Oct 2023 22:59:13 -0500
+Message-ID: <27e8ede5-676a-9ea4-49b8-7d452c008b4b@ti.com>
+Date: Tue, 3 Oct 2023 09:29:12 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v2 1/2] binman: openssl: x509: ti_secure_rom: Add support
+ for bootcore_opts
+To: Simon Glass <sjg@chromium.org>
+CC: <trini@konsulko.com>, <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>, 
+ <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-nandan@ti.com>
+References: <20230927040751.622194-1-n-francis@ti.com>
+ <20230927040751.622194-2-n-francis@ti.com>
+ <CAPnjgZ2jiWVDpcW9LaMMNOkVoueaUm0GWftE67qXbxSwjwJjYw@mail.gmail.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <CAPnjgZ2jiWVDpcW9LaMMNOkVoueaUm0GWftE67qXbxSwjwJjYw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,113 +84,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This reverts commit 5c1c6b7306f2b4c0fd50c7cb5d757e245b93606e. The reason
-for switching to i2c-gpio was due to an issue we were seeing in the
-Linux kernel where the CPU would lock up on certain adverse I2C bus
-conditions. We were never able to reproduce the lockup in U-Boot but
-assumed that was probably just luck.
+Hi Simon
 
-Since then we have discovered that the lock up was due to the I2C
-transaction offload engine in the I2C controller not coping with the
-adverse bus conditions (basically it thinks there's another master and
-waits for a STOP condition that never comes). U-Boot doesn't use the I2C
-offload feature so is not susceptible to the lockup.
+On 02/10/23 06:46, Simon Glass wrote:
+> Hi Neha,
+> 
+> On Tue, 26 Sept 2023 at 22:08, Neha Malcom Francis <n-francis@ti.com> wrote:
+>>
+>> According to the TRMs of K3 platform of devices, the ROM boot image
+>> format specifies a "Core Options Field" that provides the capability to
+>> set the boot core in lockstep when set to 0 or to split mode when set
+>> to 2. Add support for providing the same from the binman DTS. Also
+>> modify existing test case for ensuring future coverage.
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>> Link to J721E TRM: https://www.ti.com/lit/zip/spruil1
+>> Section 4.5.4.1 Boot Info
+>>
+>>   tools/binman/btool/openssl.py           |  6 ++++--
+>>   tools/binman/etype/ti_secure_rom.py     | 12 ++++++++++--
+>>   tools/binman/etype/x509_cert.py         |  3 ++-
+>>   tools/binman/test/297_ti_secure_rom.dts |  1 +
+>>   4 files changed, 17 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
+>> index aad3b61ae2..86cc56fbd7 100644
+>> --- a/tools/binman/btool/openssl.py
+>> +++ b/tools/binman/btool/openssl.py
+>> @@ -155,6 +155,7 @@ authInPlace = INTEGER:2
+>>               C, ST, L, O, OU, CN and emailAddress
+>>               cert_type (int): Certification type
+>>               bootcore (int): Booting core
+>> +            bootcore_opts(int): Booting core option (split/lockstep mode)
+>>               load_addr (int): Load address of image
+>>               sha (int): Hash function
+>>
+>> @@ -225,7 +226,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
+>>                     imagesize_sbl, hashval_sbl, load_addr_sysfw, imagesize_sysfw,
+>>                     hashval_sysfw, load_addr_sysfw_data, imagesize_sysfw_data,
+>>                     hashval_sysfw_data, sysfw_inner_cert_ext_boot_block,
+>> -                  dm_data_ext_boot_block):
+>> +                  dm_data_ext_boot_block, bootcore_opts):
+>>           """Create a certificate
+>>
+>>           Args:
+>> @@ -241,6 +242,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
+>>               bootcore (int): Booting core
+>>               load_addr (int): Load address of image
+>>               sha (int): Hash function
+>> +            bootcore_opts (int): Boot core option (split/lockstep mode)
+>>
+>>           Returns:
+>>               str: Tool output
+>> @@ -285,7 +287,7 @@ sysfw_data=SEQUENCE:sysfw_data
+>>   [sbl]
+>>   compType = INTEGER:1
+>>   bootCore = INTEGER:16
+>> -compOpts = INTEGER:0
+>> +compOpts = INTEGER:{bootcore_opts}
+>>   destAddr = FORMAT:HEX,OCT:{load_addr:08x}
+>>   compSize = INTEGER:{imagesize_sbl}
+>>   shaType  = OID:{sha_type}
+>> diff --git a/tools/binman/etype/ti_secure_rom.py b/tools/binman/etype/ti_secure_rom.py
+>> index 9a7ac9e9e0..780f132ea5 100644
+>> --- a/tools/binman/etype/ti_secure_rom.py
+>> +++ b/tools/binman/etype/ti_secure_rom.py
+>> @@ -32,6 +32,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>>           - core: core on which bootloader runs, valid cores are 'secure' and 'public'
+>>           - content: phandle of SPL in case of legacy bootflow or phandles of component binaries
+>>             in case of combined bootflow
+>> +        - bootcore_opts (optional): split-mode (0) or lockstep mode (1) set to 0 by default
+> 
+> core-opts is what it is called in your .dts so you should use the same
+> name here. Please also regen the entries.rst file
+> 
+>>
+>>       The following properties are only for generating a combined bootflow binary:
+>>           - sysfw-inner-cert: boolean if binary contains sysfw inner certificate
+>> @@ -69,6 +70,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>>           self.sw_rev = fdt_util.GetInt(self._node, 'sw-rev', 1)
+>>           self.sha = fdt_util.GetInt(self._node, 'sha', 512)
+>>           self.core = fdt_util.GetString(self._node, 'core', 'secure')
+>> +        self.bootcore_opts = fdt_util.GetInt(self._node, 'core-opts')
+> 
+>>           self.key_fname = self.GetEntryArgsOrProps([
+>>               EntryArg('keyfile', str)], required=True)[0]
+>>           if self.combined:
+>> @@ -103,11 +105,14 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>>               else:
+>>                   self.cert_type = 2
+>>               self.bootcore = 0
+>> -            self.bootcore_opts = 32
+>> +            if self.bootcore_opts is None:
+>> +                self.bootcore_opts = 32
+> 
+> How come it is 32? I thought it was 0 or 1 (as documented above)?
+> Please add docs to explain this.
+> 
+>>           else:
+>>               self.cert_type = 1
+>>               self.bootcore = 16
+>> -            self.bootcore_opts = 0
+>> +            if self.bootcore_opts is None:
+>> +                self.bootcore_opts = 0
+>> +
+>>           return super().GetCertificate(required=required, type='rom')
+>>
+>>       def CombinedGetCertificate(self, required):
+>> @@ -126,6 +131,9 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>>           self.num_comps = 3
+>>           self.sha_type = SHA_OIDS[self.sha]
+>>
+>> +        if self.bootcore_opts is None:
+>> +            self.bootcore_opts = 0
+>> +
+>>           # sbl
+>>           self.content = fdt_util.GetPhandleList(self._node, 'content-sbl')
+>>           input_data_sbl = self.GetContents(required)
+>> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
+>> index d028cfe38c..fc0bb12278 100644
+>> --- a/tools/binman/etype/x509_cert.py
+>> +++ b/tools/binman/etype/x509_cert.py
+>> @@ -136,7 +136,8 @@ class Entry_x509_cert(Entry_collection):
+>>                   imagesize_sysfw_data=self.imagesize_sysfw_data,
+>>                   hashval_sysfw_data=self.hashval_sysfw_data,
+>>                   sysfw_inner_cert_ext_boot_block=self.sysfw_inner_cert_ext_boot_block,
+>> -                dm_data_ext_boot_block=self.dm_data_ext_boot_block
+>> +                dm_data_ext_boot_block=self.dm_data_ext_boot_block,
+>> +                bootcore_opts=self.bootcore_opts
+> 
+> When you add args to a function, please update the function comment.
+> 
+>>               )
+>>           if stdout is not None:
+>>               data = tools.read_file(output_fname)
+>> diff --git a/tools/binman/test/297_ti_secure_rom.dts b/tools/binman/test/297_ti_secure_rom.dts
+>> index d1313769f4..1a3eca9425 100644
+>> --- a/tools/binman/test/297_ti_secure_rom.dts
+>> +++ b/tools/binman/test/297_ti_secure_rom.dts
+>> @@ -9,6 +9,7 @@
+>>          binman {
+>>                  ti-secure-rom {
+>>                          content = <&unsecure_binary>;
+>> +                       core-opts = <2>;
+>>                  };
+>>                  unsecure_binary: blob-ext {
+>>                          filename = "ti_unsecure.bin";
+>> --
+>> 2.34.1
+>>
+> 
+> Regards,
+> Simonm
 
-We can therefore safely return to using the built-in I2C controller.
 
-Signed-off-by: Chris Packham <judge.packham@gmail.com>
----
+Thanks for the review comments! Will send out v3.
 
- arch/arm/dts/ac5-98dx35xx-atl-x240.dts | 30 ++++++--------------------
- configs/x240_defconfig                 |  1 -
- 2 files changed, 7 insertions(+), 24 deletions(-)
-
-diff --git a/arch/arm/dts/ac5-98dx35xx-atl-x240.dts b/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
-index c19b25925ba2..820ec18b4355 100644
---- a/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
-+++ b/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
-@@ -16,7 +16,7 @@
- 		gpio0 = &gpio0;
- 		gpio1 = &gpio1;
- 		spi0 = &spi0;
--		i2c0 = &i2cgpio;
-+		i2c0 = &i2c0;
- 		usb0 = &usb0;
- 		pinctrl0 = &pinctrl0;
- 	};
-@@ -40,19 +40,6 @@
- 			default-state = "on";
- 		};
- 	};
--
--	i2cgpio: i2c-gpio-0 {
--			compatible = "i2c-gpio";
--			#address-cells = <1>;
--			#size-cells = <0>;
--
--			pinctrl-names = "default";
--			pinctrl-0 =  <&i2c0_gpio>;
--			scl-gpios = <&gpio0 26 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
--			sda-gpios = <&gpio0 27 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
--			i2c-gpio,delay-us = <2>;
--			status = "okay";
--		 };
- };
- 
- &nand {
-@@ -83,7 +70,9 @@
- 	status = "okay";
- };
- 
--&i2cgpio {
-+&i2c0 {
-+	status = "okay";
-+
- 	mux@71 {
- 		#address-cells = <1>;
- 		#size-cells = <0>;
-@@ -188,8 +177,8 @@
- 	 * LED_OE_N              [23]
- 	 * USB_PWR_FLT_N         [24]
- 	 * SFP_INT_N             [25]
--	 * I2C0_SCL              [26] (GPIO)
--	 * I2C0_SDA              [27] (GPIO)
-+	 * I2C0_SCL              [26]
-+	 * I2C0_SDA              [27]
- 	 * USB_EN                [28]
- 	 * MONITOR_INT_N         [29]
- 	 * XM1_MDC               [30]
-@@ -212,7 +201,7 @@
- 	/*	     0    1    2    3    4    5    6    7    8    9 */
- 	pin-func = < 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
- 		     0xff 0xff 1    1    1    1    0xff 0xff 0    0
--		     0    0    0    0    0    0    0xff 0xff 0    0
-+		     0    0    0    0    0    0    1    1    0    0
- 		     1    1    1    1    0    0    0    0    0    0
- 		     0    0    0    1    1    1    >;
- 
-@@ -220,9 +209,4 @@
- 		marvell,pins = <0 1 2 3 4 5 6 7 8 9 10 11 16 17>;
- 		marvell,function = <2>;
- 	};
--
--	i2c0_gpio: i2c0-gpio-pins {
--		marvell,pins = <26 27>;
--		marvell,function = <0>;
--	};
- };
-diff --git a/configs/x240_defconfig b/configs/x240_defconfig
-index 0d5a19df25aa..4b1a761a9086 100644
---- a/configs/x240_defconfig
-+++ b/configs/x240_defconfig
-@@ -42,7 +42,6 @@ CONFIG_CLK_MVEBU=y
- CONFIG_GPIO_HOG=y
- CONFIG_DM_PCA953X=y
- CONFIG_DM_I2C=y
--CONFIG_DM_I2C_GPIO=y
- CONFIG_SYS_I2C_MVTWSI=y
- CONFIG_I2C_MUX=y
- CONFIG_I2C_MUX_PCA954x=y
 -- 
-2.42.0
-
+Thanking You
+Neha Malcom Francis
