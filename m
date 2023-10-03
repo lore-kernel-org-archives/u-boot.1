@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA8EE75428
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:38:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7296BE7542B
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:38:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 948458746E;
-	Tue,  3 Oct 2023 08:37:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F274A87280;
+	Tue,  3 Oct 2023 08:37:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Im33jabZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ndf5M2SD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ABE187456; Tue,  3 Oct 2023 08:37:10 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 035EC87468; Tue,  3 Oct 2023 08:37:11 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 225A98743C
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:37:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B08987272
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:37:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-5046bf37ec1so643140e87.1
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:37:04 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-5041d6d8b10so642456e87.2
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:37:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696315023; x=1696919823; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696315025; x=1696919825; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mSSqpiiTKFMhLmIKSJQ2JBruJbcK3t9XTWfTF9IzDzk=;
- b=Im33jabZnuz7Sdw2gdkHEHcVCAY4MFKA2PRyIIc2l81SR/Ukc0INXGR8YrPjUPlcqv
- OBCHo0lMP7t5Uvk5/FbdvbP+oW+DHO3dvacXdnGT8gcxaShG3SBQ2wqBK0jHCuSWKYol
- 98nZqI9hPGZjHcJI651M8cF6QENB1Kdxh8Xo3t+e6/Gaa+xuWaaE/HX48qBiG62bQNhL
- /wJsZe3nzGmYKLCRlOYZzkCWzGqejtX8TfUOPdXOi1hYM9GugEmSux+zqCllc6DwPaVg
- X5kvit/+bNhz9BUN/JHZhijHeeiqf0d7lSfcz6E+KzCUPyl8VpikKj+lDwQmJc2zxgdC
- o3hg==
+ bh=UUzmiGsM+CBVI2t21fk1UNwMwq+HMhJ7S0OUYqJCFtI=;
+ b=ndf5M2SDB4UifOoC6X7qSkHXPpYbeS0acjOIjSOwoj1xwU4DHKBtzrHhG+ML75wL1w
+ zpAuUPMV3qUlInDt42zTWFtKeRtYFLo0FRn2IzssfuCaZVa3Oki2ALVfw05gl6AAOUey
+ /nzH/GzudXQS1Dz0boG4V+PUxPLvOxcZr8zEYAWfPz1h/Hw3iCU2eL2tL7kKrZVt2AII
+ YMWV27L72ceVQxBoB5NZg6XgTFkQB1pt68DiKBbsMtQDg5Y6Ye6qy9gEpcentocA08FP
+ 8TxFIoCGx9KDwv6UqbAIDaVjrjGmMJM7HTox7w/3IZC9xBJf0EJRjxZJafC6eVV+lWuY
+ qmSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696315023; x=1696919823;
+ d=1e100.net; s=20230601; t=1696315025; x=1696919825;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mSSqpiiTKFMhLmIKSJQ2JBruJbcK3t9XTWfTF9IzDzk=;
- b=KCwWQLEtCDb7+lFvs9A5iiJKTX8CmZ5VlOvk9tIMUH/lCvvfosDA4h42SHCE3NK2Ko
- mx3QS5/JzDVl1aEZV+f19BXlvTskfkGGboT7dVU8sopNTrJ9170Z6bTLh/zGJYnpSFsG
- qGmZd8FL9afED154kqLOSoeoPX5f78n7b/IgfD1rvJvxucBqrD5bT5qflGMytbuxirF4
- ew2bU5ZOxvsjY9/RqmdMrBjUBBJD/kLU3Fb/9QVEjOyAHmMVj3o/oO37A5lECtWCKOSs
- 4DorOaKR/rsLQnU225z9N657Q9WJdGxcU2qa1Tvhx0+c5Zxjjoq+fG4BYXkY1KdRMQEx
- QRTA==
-X-Gm-Message-State: AOJu0Yw06887DvkgoRx5/QVik4VpSYvgrFL1V7ofkrabisk95FCPSoc1
- 8dkAnu+Wfe1I70riMuBJzeo=
-X-Google-Smtp-Source: AGHT+IFnojsVSeYuL7j8rSkqEQQIxc9WKgCySi3eY1Hy35oigki7bPswjRylpLvqcFTc0Uft1FijuQ==
-X-Received: by 2002:a05:6512:3147:b0:502:fd1a:9fa0 with SMTP id
- s7-20020a056512314700b00502fd1a9fa0mr9692405lfi.53.1696315023401; 
- Mon, 02 Oct 2023 23:37:03 -0700 (PDT)
+ bh=UUzmiGsM+CBVI2t21fk1UNwMwq+HMhJ7S0OUYqJCFtI=;
+ b=W9UkNfVSArfnMUqMfd1qcWHRdbHIS110NP7+lVqJ/6Cb0v/4/8Q/S/9FUjBc8g24v9
+ JxEu9uZLAcuYfv6O7yJUlp/ivQ6spa+GPo2IK2slTNdD6Cnax/xNNSv66AO0fC2Az3zN
+ AledFEDSqgZ31pfk93jMlyINrAI4IL41wTbiNxy/nAMnyDjxUDXhWqPBNVR7xrfK4iy9
+ m2nQX4t/ucaeZsXW8RMZTbYCL4us0zPh+ip11JaVwL3Yyy3MotVOwuIl6QHhj0MxWRuX
+ CvyB3sua01h/OnumJW2JBsnEZD3P+tLY6a9dg/hy5kXTt57cTWMzkyj0GG6QTH0WteRq
+ /f8A==
+X-Gm-Message-State: AOJu0YxheSq3nyOisL2RYvxqMUZ5vA1fgw9WshPJhGdWEi+MVmxMOTDZ
+ gMBkirZ2ZXQXfgbrbGHaBfs=
+X-Google-Smtp-Source: AGHT+IHWtRYIZWOcnaQKlQm9dZt3UXTyEcQoNC5VtxTm9hNWlivzBXFKKcdP1d0U9O0XmkVSmTtorA==
+X-Received: by 2002:a05:6512:224b:b0:504:7dc9:671a with SMTP id
+ i11-20020a056512224b00b005047dc9671amr12869707lfu.69.1696315025428; 
+ Mon, 02 Oct 2023 23:37:05 -0700 (PDT)
 Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- s1-20020a19ad41000000b00502b04e2722sm79636lfd.3.2023.10.02.23.37.02
+ s1-20020a19ad41000000b00502b04e2722sm79636lfd.3.2023.10.02.23.37.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 23:37:03 -0700 (PDT)
+ Mon, 02 Oct 2023 23:37:05 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 10/16] ARM: dts: grouper: complete missing bindings
-Date: Tue,  3 Oct 2023 09:36:41 +0300
-Message-Id: <20231003063647.42770-11-clamor95@gmail.com>
+Subject: [PATCH v3 13/16] ARM: tegra20: tegra30: support EBTUPDATE on
+ non-encrypted devices
+Date: Tue,  3 Oct 2023 09:36:44 +0300
+Message-Id: <20231003063647.42770-14-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231003063647.42770-1-clamor95@gmail.com>
 References: <20231003063647.42770-1-clamor95@gmail.com>
@@ -90,118 +91,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clean up the tree and prepare for DM PMIC migration.
+Re-crypt support was extended to devices without burnt SBK. In case
+SBK is not set, place from where it is read is filled with zeroes.
+This patch adds support for ebtupdate function to detect nosbk device
+and avoid crypto operations for it.
 
+Tested-by: Maksim Kurnosenko <asusx2@mail.ru>
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- arch/arm/dts/tegra30-asus-grouper-common.dtsi      |  5 +++--
- arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts |  5 ++---
- arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts | 11 +++++++++--
- arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts |  5 ++---
- 4 files changed, 16 insertions(+), 10 deletions(-)
+ arch/arm/mach-tegra/tegra20/bct.c | 30 ++++++++++++++++++++----------
+ arch/arm/mach-tegra/tegra30/bct.c | 30 ++++++++++++++++++++----------
+ 2 files changed, 40 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/dts/tegra30-asus-grouper-common.dtsi b/arch/arm/dts/tegra30-asus-grouper-common.dtsi
-index 4fa980f24f..fcf31e2dd0 100644
---- a/arch/arm/dts/tegra30-asus-grouper-common.dtsi
-+++ b/arch/arm/dts/tegra30-asus-grouper-common.dtsi
-@@ -1,7 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0
+diff --git a/arch/arm/mach-tegra/tegra20/bct.c b/arch/arm/mach-tegra/tegra20/bct.c
+index 5eb48990b6..b2c44f3d23 100644
+--- a/arch/arm/mach-tegra/tegra20/bct.c
++++ b/arch/arm/mach-tegra/tegra20/bct.c
+@@ -11,6 +11,9 @@
+ #include "bct.h"
+ #include "uboot_aes.h"
  
- #include <dt-bindings/input/input.h>
--
- #include "tegra30.dtsi"
- 
- / {
-@@ -62,6 +61,9 @@
- 		status = "okay";
- 		bus-width = <8>;
- 		non-removable;
++/* Device with "sbk burned: false" will expose zero key */
++const u8 nosbk[AES128_KEY_LENGTH] = { 0 };
 +
-+		vmmc-supply = <&vcore_emmc>;
-+		vqmmc-supply = <&vdd_1v8_vio>;
- 	};
+ /*
+  * @param  bct		boot config table start in RAM
+  * @param  ect		bootloader start in RAM
+@@ -23,22 +26,27 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
+ 	u8 ebt_hash[AES128_KEY_LENGTH] = { 0 };
+ 	u8 sbk[AES128_KEY_LENGTH] = { 0 };
+ 	u8 *bct_hash = bct;
++	bool encrypted;
+ 	int ret;
  
- 	usb1: usb@7d000000 {
-@@ -150,7 +152,6 @@
- 		regulator-name = "vdd_5v0_bl";
- 		regulator-min-microvolt = <5000000>;
- 		regulator-max-microvolt = <5000000>;
--		regulator-boot-on;
- 		gpio = <&gpio TEGRA_GPIO(H, 3) GPIO_ACTIVE_HIGH>;
- 		enable-active-high;
- 	};
-diff --git a/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts b/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
-index a98d3e2145..945ae404ac 100644
---- a/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
-+++ b/arch/arm/dts/tegra30-asus-nexus7-grouper-E1565.dts
-@@ -22,7 +22,7 @@
- 			gpio-controller;
+ 	bct += BCT_HASH;
  
- 			regulators {
--				vdd_1v8: sd2 {
-+				vdd_1v8_vio: sd2 {
- 					regulator-name = "vdd_1v8_gen";
- 					regulator-min-microvolt = <1800000>;
- 					regulator-max-microvolt = <1800000>;
-@@ -34,8 +34,7 @@
- 				vcore_emmc: ldo3 {
- 					regulator-name = "vcore_emmc";
- 					regulator-min-microvolt = <2850000>;
--					regulator-max-microvolt = <3100000>;
--					regulator-always-on;
-+					regulator-max-microvolt = <2850000>;
- 				};
- 			};
- 		};
-diff --git a/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts b/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
-index 44ea218a47..4363bfc87d 100644
---- a/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
-+++ b/arch/arm/dts/tegra30-asus-nexus7-grouper-PM269.dts
-@@ -23,12 +23,19 @@
- 			gpio-controller;
- 
- 			regulators {
-+				vdd_1v8_vio: vddio {
-+					regulator-name = "vdd_1v8_gen";
-+					regulator-min-microvolt = <1800000>;
-+					regulator-max-microvolt = <1800000>;
-+					regulator-always-on;
-+					regulator-boot-on;
-+				};
++	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
 +
- 				/* eMMC VDD */
- 				vcore_emmc: ldo1 {
- 					regulator-name = "vdd_emmc_core";
--					regulator-min-microvolt = <1000000>;
-+					regulator-min-microvolt = <3300000>;
- 					regulator-max-microvolt = <3300000>;
--					regulator-always-on;
- 				};
- 			};
- 		};
-diff --git a/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts b/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
-index 812d5a1ba7..89348fde13 100644
---- a/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
-+++ b/arch/arm/dts/tegra30-asus-nexus7-tilapia-E1565.dts
-@@ -22,7 +22,7 @@
- 			gpio-controller;
+ 	memcpy(sbk, (u8 *)(bct + BCT_LENGTH),
+ 	       NVBOOT_CMAC_AES_HASH_LENGTH * 4);
  
- 			regulators {
--				vdd_1v8: sd2 {
-+				vdd_1v8_vio: sd2 {
- 					regulator-name = "vdd_1v8_gen";
- 					regulator-min-microvolt = <1800000>;
- 					regulator-max-microvolt = <1800000>;
-@@ -34,8 +34,7 @@
- 				vcore_emmc: ldo3 {
- 					regulator-name = "vcore_emmc";
- 					regulator-min-microvolt = <2850000>;
--					regulator-max-microvolt = <3100000>;
--					regulator-always-on;
-+					regulator-max-microvolt = <2850000>;
- 				};
- 			};
- 		};
+-	ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
+-	if (ret)
+-		return 1;
++	encrypted = memcmp(&sbk, &nosbk, AES128_KEY_LENGTH);
+ 
+-	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
++	if (encrypted) {
++		ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
++		if (ret)
++			return 1;
+ 
+-	ret = encrypt_data_block(ebt, ebt_size, sbk);
+-	if (ret)
+-		return 1;
++		ret = encrypt_data_block(ebt, ebt_size, sbk);
++		if (ret)
++			return 1;
++	}
+ 
+ 	ret = sign_enc_data_block(ebt, ebt_size, ebt_hash, sbk);
+ 	if (ret)
+@@ -52,9 +60,11 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
+ 	bct_tbl->bootloader[0].load_addr = CONFIG_SPL_TEXT_BASE;
+ 	bct_tbl->bootloader[0].length = ebt_size;
+ 
+-	ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
+-	if (ret)
+-		return 1;
++	if (encrypted) {
++		ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
++		if (ret)
++			return 1;
++	}
+ 
+ 	ret = sign_enc_data_block(bct, BCT_LENGTH, bct_hash, sbk);
+ 	if (ret)
+diff --git a/arch/arm/mach-tegra/tegra30/bct.c b/arch/arm/mach-tegra/tegra30/bct.c
+index c56958da69..cff1a3e98d 100644
+--- a/arch/arm/mach-tegra/tegra30/bct.c
++++ b/arch/arm/mach-tegra/tegra30/bct.c
+@@ -11,6 +11,9 @@
+ #include "bct.h"
+ #include "uboot_aes.h"
+ 
++/* Device with "sbk burned: false" will expose zero key */
++const u8 nosbk[AES128_KEY_LENGTH] = { 0 };
++
+ /*
+  * @param  bct		boot config table start in RAM
+  * @param  ect		bootloader start in RAM
+@@ -23,22 +26,27 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
+ 	u8 ebt_hash[AES128_KEY_LENGTH] = { 0 };
+ 	u8 sbk[AES128_KEY_LENGTH] = { 0 };
+ 	u8 *bct_hash = bct;
++	bool encrypted;
+ 	int ret;
+ 
+ 	bct += BCT_HASH;
+ 
++	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
++
+ 	memcpy(sbk, (u8 *)(bct + BCT_LENGTH),
+ 	       NVBOOT_CMAC_AES_HASH_LENGTH * 4);
+ 
+-	ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
+-	if (ret)
+-		return 1;
++	encrypted = memcmp(&sbk, &nosbk, AES128_KEY_LENGTH);
+ 
+-	ebt_size = roundup(ebt_size, EBT_ALIGNMENT);
++	if (encrypted) {
++		ret = decrypt_data_block(bct, BCT_LENGTH, sbk);
++		if (ret)
++			return 1;
+ 
+-	ret = encrypt_data_block(ebt, ebt_size, sbk);
+-	if (ret)
+-		return 1;
++		ret = encrypt_data_block(ebt, ebt_size, sbk);
++		if (ret)
++			return 1;
++	}
+ 
+ 	ret = sign_enc_data_block(ebt, ebt_size, ebt_hash, sbk);
+ 	if (ret)
+@@ -52,9 +60,11 @@ static int bct_patch(u8 *bct, u8 *ebt, u32 ebt_size)
+ 	bct_tbl->bootloader[0].load_addr = CONFIG_SPL_TEXT_BASE;
+ 	bct_tbl->bootloader[0].length = ebt_size;
+ 
+-	ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
+-	if (ret)
+-		return 1;
++	if (encrypted) {
++		ret = encrypt_data_block(bct, BCT_LENGTH, sbk);
++		if (ret)
++			return 1;
++	}
+ 
+ 	ret = sign_enc_data_block(bct, BCT_LENGTH, bct_hash, sbk);
+ 	if (ret)
 -- 
 2.39.2
 
