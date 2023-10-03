@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC22CE75428
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:26:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 040CBE7542B
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:26:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94AD387214;
+	by phobos.denx.de (Postfix) with ESMTP id F36D68721E;
 	Tue,  3 Oct 2023 08:25:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ikyhidk5";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JkmwjaVm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E01B87203; Tue,  3 Oct 2023 08:25:52 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 4E47E87203; Tue,  3 Oct 2023 08:25:52 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1DD787211
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:25:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C324E8721A
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:25:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5043a01ee20so604953e87.0
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:25:48 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-5044dd5b561so596370e87.1
+ for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:25:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696314348; x=1696919148; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696314349; x=1696919149; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cOAMR8uQ7AIukEgE07sxvY580KQDj+NcF1W0RijSo6o=;
- b=ikyhidk5xTW9IPFD93U2uIomqYVbbWbWrF3jJA8XY3e7+lQw3SR04Fw2yG67F7+GO5
- mSVv2mFTdOqWhu0bXAJrIPOBevjp9hc8knkaYgSMZL7COtnmRpoylw4vHEhdVEXLTbgV
- OUNqhkE2EmfVONahZ1tFjcNpp0+1NLr0NhuZHdjj9M2sXI1YF2TV0ed/LoigvDr2BhVF
- hlkAWEdTP5xTaaehhKFtdwfnWJAEjJTcg2vax5e+rOPgGyI+8kF+ZPj6acgSsP0bAP26
- gwdVQP0hAioz1icmVV2XW2SPMAS1yIfhvDpb3z0T211SdyMhBpRojA2mWung1VHAnHtK
- lntQ==
+ bh=TrrrJR5uwiMiXvc4TVg8NYc1Z2wMAqLDNUClbUu96E4=;
+ b=JkmwjaVmF2xd48VHERGS0iUkZtBF46FM0i0KmsHdL4IU3+o9uuMSvan79nzKvP2pcR
+ 76EMz+fcI/obRQiMj/5RdN7PGc/wGmqrIb2ML1XuhQtTO7TnI37KG3XoKZCpSoyeOFxW
+ /j2sSMjQ5Qx6T0rwEDkvVwwGeP2wv48ltfPuqwHpJ4uCA2Cl9erQ205pQF+xjyVh5oGf
+ RLa04rGV+lzXZyC0NSueLve2yLauE8Ti2HisSeB9TsKr8tunLZSVlg/D2I+1F8UdKsif
+ 16D0OXwhDSit3u1yUFqVl4DOgmCoJ/7OdFNVwSKji6kYtWLK5bBZTLnghekPwWnSCZGR
+ Y+qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696314348; x=1696919148;
+ d=1e100.net; s=20230601; t=1696314349; x=1696919149;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cOAMR8uQ7AIukEgE07sxvY580KQDj+NcF1W0RijSo6o=;
- b=rfAfd/3XO/bEdt9yxKzlBEod4tD794Y0UAVRvZlL3jK8eiQ04km68c2je51qsDkBaF
- 240uFpjZdJmw2TBoLG2q4dU6my4AHWXgQd0dueKFMty3PqOJo8oN1T5M/ehUKoTB9F+l
- 9qZLebniAEeGlBwpax7j4jgPozZ/ls9rx3ZAn8PA30sPH48LZS3cB2fEJcIT75iWt10u
- OU8wwfd2hH4MLYl5tl/JOtINvFHl0mJoTmXRXwGgqedjFWvCe398OJUD2kEStuh3NS3c
- 7J6Wo90cLByewY6bcOh5be6I3q1YgpBkc0XpymkQIVq7JmPD7enOUvpQkZ/Qdhmj1OFY
- dcPQ==
-X-Gm-Message-State: AOJu0YwOaiI1qwGsE3n/nQHtD5xlBUoOV0kJppcWf6goafR9zjSr8XQQ
- lphJ3TkxJ776C18kQoDXMIs=
-X-Google-Smtp-Source: AGHT+IHdjwgV8wCrMxQPGytPhJrzm7As6qcB3RRQJQycscc3T2sLEX+2VUP6uyFCWum0f0Mm2qIsxA==
-X-Received: by 2002:ac2:42c6:0:b0:503:3b5:a65 with SMTP id
- n6-20020ac242c6000000b0050303b50a65mr9330935lfl.31.1696314348020; 
+ bh=TrrrJR5uwiMiXvc4TVg8NYc1Z2wMAqLDNUClbUu96E4=;
+ b=ezO2KI44FlUTHuCSxjjPMMprA3sEmruKsXcIkpXHhaVITHPnJeRRj+2rI7h3DQ282m
+ uFD0uIuZZyYtDaZK59mv0pUkhMlqI75Qf0bj886mmmaSK42shJXxkp4WcbU5d0eY3vM1
+ VemRhOC8F3RFjkkAT5Piz6B2I95dmt/njHNZzGe7RiF1gj4C9J1Si/DnGdHjqE2CrNKa
+ eCxi7VJsALh5MlVqLBxD64W37qxW2YarQoF+48JE3spsbl/531u/TjCaF6COz5QxSRjO
+ 12ehndr9iv9V1wku81S5F+whFbX0KOffgkp4rhCihxODB5wMe5djge0PLM5H7YdFfAG7
+ ugxQ==
+X-Gm-Message-State: AOJu0YxtwyhhwhD+aF0lTCel0p7XvVtMbZNEcHyIGHsoSqeY2Z5+uEk9
+ BtBwZ4DLPPiReuiIpr9OHrU=
+X-Google-Smtp-Source: AGHT+IE6tLuogxrK/Yt4tB1infEc4Z9h+dj8PjEavX64kMYf6uswNCKCASA5bvpxL3YNUohNv+sPFw==
+X-Received: by 2002:a05:6512:3d17:b0:503:c51:74d7 with SMTP id
+ d23-20020a0565123d1700b005030c5174d7mr12648696lfv.17.1696314348919; 
  Mon, 02 Oct 2023 23:25:48 -0700 (PDT)
 Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- c10-20020ac244aa000000b005031641b40asm74615lfm.159.2023.10.02.23.25.47
+ c10-20020ac244aa000000b005031641b40asm74615lfm.159.2023.10.02.23.25.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 23:25:47 -0700 (PDT)
+ Mon, 02 Oct 2023 23:25:48 -0700 (PDT)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
  Jonas Karlman <jonas@kwiboo.se>, Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 2/3] video: simple_panel: use
+Subject: [PATCH v3 3/3] video: tegra20: dsi: use
  regulator_set_enable_if_allowed
-Date: Tue,  3 Oct 2023 09:25:33 +0300
-Message-Id: <20231003062534.42325-3-clamor95@gmail.com>
+Date: Tue,  3 Oct 2023 09:25:34 +0300
+Message-Id: <20231003062534.42325-4-clamor95@gmail.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231003062534.42325-1-clamor95@gmail.com>
 References: <20231003062534.42325-1-clamor95@gmail.com>
@@ -102,30 +102,28 @@ continue if regulator already was enabled or disabled.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/video/simple_panel.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/video/tegra20/tegra-dsi.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/video/simple_panel.c b/drivers/video/simple_panel.c
-index 6a6473eb0e..efb122b534 100644
---- a/drivers/video/simple_panel.c
-+++ b/drivers/video/simple_panel.c
-@@ -114,11 +114,11 @@ static int simple_panel_probe(struct udevice *dev)
- 	const u32 dsi_data = dev_get_driver_data(dev);
- 	int ret;
+diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/tegra-dsi.c
+index 8c3404e085..b4cf4fad5e 100644
+--- a/drivers/video/tegra20/tegra-dsi.c
++++ b/drivers/video/tegra20/tegra-dsi.c
+@@ -831,11 +831,9 @@ static int tegra_dsi_bridge_probe(struct udevice *dev)
  
--	if (CONFIG_IS_ENABLED(DM_REGULATOR) && priv->reg) {
--		debug("%s: Enable regulator '%s'\n", __func__, priv->reg->name);
--		ret = regulator_set_enable(priv->reg, true);
+ 	tegra_dsi_get_format(device->format, &priv->format);
+ 
+-	if (priv->avdd) {
+-		ret = regulator_set_enable(priv->avdd, true);
 -		if (ret)
 -			return ret;
-+	ret = regulator_set_enable_if_allowed(priv->reg, true);
-+	if (ret && ret != -ENOSYS) {
-+		debug("%s: failed to enable regulator '%s' %d\n",
-+		      __func__, priv->reg->name, ret);
+-	}
++	ret = regulator_set_enable_if_allowed(priv->avdd, true);
++	if (ret && ret != -ENOSYS)
 +		return ret;
- 	}
  
- 	switch (dsi_data) {
+ 	tegra_dsi_init_clocks(dev);
+ 
 -- 
 2.39.2
 
