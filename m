@@ -4,63 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40AD0E7AD56
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 14:06:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FA90E7AD58
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 14:27:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70A8986E34;
-	Tue,  3 Oct 2023 16:06:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7F2FB87227;
+	Tue,  3 Oct 2023 16:27:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="X5IIhttE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aD2cwiX/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A69A86E3B; Tue,  3 Oct 2023 16:06:14 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7A05487468; Tue,  3 Oct 2023 16:27:13 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ABE786E23
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 16:06:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 88A9587224
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 16:27:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8c8e=FS=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1696341964;
- bh=4qSkRveuzjPc1EWNJz2bd3iyF+8gP74+1bviCH1iJy4=;
- b=X5IIhttEthPakWV3ljrEoK499KvgyLJiV+bPRv4BhfXuxBjO2CcgifwdR/Qxr6wusqGz8BnTS
- yS2ePVcLFMPLH/Z19LWhwhTlQ5DaH1UOV0AM0q0mB7FBK1oNktqTlSxOmln683R6wECDW+m0pBh
- /DRxkoVWx0aKqKzBYp7RMEr8I54p2TKwuwGwMispRRuRuQwI/FBtyr2hJp8Qh+T9tmhYvKgq/1r
- jA4P26HA1T6/5tPNC7fWB0RsmEdDmMRmtEJ3DvVVDe/fTs1ZqXey/itWDewFK9hpge+3OrV5iRM
- mtCMPiHEgGHcSvlFDazSLuHm855Pj+hwSBQLpcdCHdeA==
-Message-ID: <d0d9508c-e181-040b-946c-308d8500528b@kwiboo.se>
-Date: Tue, 3 Oct 2023 16:05:59 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 393ER7MN112771;
+ Tue, 3 Oct 2023 09:27:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696343227;
+ bh=uGKPed+KpYx6GzgVd9rZOHEj1JuM3f7WC1FiPDKS5lA=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=aD2cwiX/to+scIgYlIg/+7p/NgHMDQyjWpCJGANuVUOfFzi3tXex8HnR6+MMQaBqt
+ YonqrumBmYnZk55/SjgNbQncASG5Ol2FiYT/FvF2l0RjtetICP+YmF8l1JMz5YEW5C
+ w+m6J1VB7rOimCNa7Gaqd+e/al7cQX4KnKuRvSEE=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 393ER7Ft127645
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 3 Oct 2023 09:27:07 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 3
+ Oct 2023 09:27:07 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 3 Oct 2023 09:27:06 -0500
+Received: from [10.249.141.75] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 393ER4Mx088450;
+ Tue, 3 Oct 2023 09:27:05 -0500
+Message-ID: <838b07a0-8490-c05b-b08f-3ab6d3e1737a@ti.com>
+Date: Tue, 3 Oct 2023 19:57:04 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH v4 3/4] power: regulator: Perform regulator setup inside
- uclass
+Subject: Re: [PATCH RFC 10/10] board: ti: j721e: Enable ESM initialization for
+ J7200
+To: Keerthy <j-keerthy@ti.com>, <u-boot@lists.denx.de>
+CC: <n-francis@ti.com>, <trini@konsulko.com>, <vigneshr@ti.com>
+References: <20231003081038.24299-1-j-keerthy@ti.com>
+ <20231003081038.24299-11-j-keerthy@ti.com>
 Content-Language: en-US
-To: Svyatoslav Ryhel <clamor95@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Simon Glass <sjg@chromium.org>, Eugen Hristev
- <eugen.hristev@collabora.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, John Keeping <john@metanate.com>
-Cc: u-boot@lists.denx.de
-References: <20231003062126.42026-1-clamor95@gmail.com>
- <20231003062126.42026-4-clamor95@gmail.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20231003062126.42026-4-clamor95@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 651c1fcb83e069af5ee471ff
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <20231003081038.24299-11-j-keerthy@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,95 +82,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-10-03 08:21, Svyatoslav Ryhel wrote:
-> Regulators initial setup was previously dependent on board call.
-> To move from this behaviour next solution is proposed: on post_bind
-> boot-on/always-on properties are checked, all regulators with
-> such props will be probed just after binding which ensures that
-> essential regulators are set, then in the post probe regulator
-> autoset is called so that correct regulator state according to
-> device tree is reached.
-> 
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> [jonas@kwiboo.se: use autoset func, only probe with always/boot-on prop]
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+
+On 10/3/2023 1:40 PM, Keerthy wrote:
+> Enable ESM initialization for J7200
+>
+> Signed-off-by: Keerthy <j-keerthy@ti.com>
 > ---
->  drivers/power/regulator/regulator-uclass.c | 30 ++++++++++++++++++----
->  1 file changed, 25 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-> index 4b2c6c2964..69d6d6428d 100644
-> --- a/drivers/power/regulator/regulator-uclass.c
-> +++ b/drivers/power/regulator/regulator-uclass.c
-> @@ -473,6 +473,7 @@ static int regulator_post_bind(struct udevice *dev)
->  {
->  	struct dm_regulator_uclass_plat *uc_pdata;
->  	const char *property = "regulator-name";
-> +	int ret;
->  
->  	uc_pdata = dev_get_uclass_plat(dev);
->  
-> @@ -486,13 +487,20 @@ static int regulator_post_bind(struct udevice *dev)
->  			return -EINVAL;
->  	}
->  
-> -	if (regulator_name_is_unique(dev, uc_pdata->name))
-> -		return 0;
-> +	ret = regulator_name_is_unique(dev, uc_pdata->name);
-> +	if (!ret) {
-> +		debug("'%s' of dev: '%s', has nonunique value: '%s'\n",
-> +		      property, dev->name, uc_pdata->name);
-> +		return -EINVAL;
-> +	}
->  
-> -	debug("'%s' of dev: '%s', has nonunique value: '%s\n",
-> -	      property, dev->name, uc_pdata->name);
-> +	uc_pdata->always_on = dev_read_bool(dev, "regulator-always-on");
-> +	uc_pdata->boot_on = dev_read_bool(dev, "regulator-boot-on");
->  
-> -	return -EINVAL;
-> +	if (uc_pdata->always_on || uc_pdata->boot_on)
-> +		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
-> +
-> +	return 0;
->  }
->  
->  static int regulator_pre_probe(struct udevice *dev)
-> @@ -546,6 +554,17 @@ static int regulator_pre_probe(struct udevice *dev)
->  	return 0;
->  }
->  
-> +static int regulator_post_probe(struct udevice *dev)
-> +{
-> +	int ret;
-> +
-> +	ret = regulator_autoset(dev);
-> +	if (ret == -EMEDIUMTYPE || ret == -ENOSYS)
+>   board/ti/j721e/evm.c | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+> index 42fa94b7a5..070b28326f 100644
+> --- a/board/ti/j721e/evm.c
+> +++ b/board/ti/j721e/evm.c
+> @@ -543,7 +543,8 @@ void spl_board_init(void)
+>   	}
+>   
+>   #ifdef CONFIG_ESM_K3
+> -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
+> +	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
+> +	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
 
-Would be good to also check for || ret == -EALREADY here.
 
-Following pending patch extend regulator_autoset to also return
--EALREADY when it has already been called for a regulator.
+Could we align on one kind of check,  For J721E check is done against 
+board-id, whereas for J7200 checking
 
-power: regulator: Only run autoset once for each regulator
-https://patchwork.ozlabs.org/patch/1823770/
+for config option.
 
-Regards,
-Jonas
-
-> +		return 0;
-> +
-> +	return ret;
-> +}
-> +
->  int regulators_enable_boot_on(bool verbose)
->  {
->  	struct udevice *dev;
-> @@ -603,5 +622,6 @@ UCLASS_DRIVER(regulator) = {
->  	.name		= "regulator",
->  	.post_bind	= regulator_post_bind,
->  	.pre_probe	= regulator_pre_probe,
-> +	.post_probe	= regulator_post_probe,
->  	.per_device_plat_auto	= sizeof(struct dm_regulator_uclass_plat),
->  };
-
+>   		ret = uclass_get_device_by_driver(UCLASS_MISC,
+>   						  DM_DRIVER_GET(k3_esm), &dev);
+>   		if (ret)
+> @@ -557,7 +558,8 @@ void spl_board_init(void)
+>   #endif
+>   
+>   #ifdef CONFIG_ESM_PMIC
+> -	if (board_ti_k3_is("J721EX-PM2-SOM")) {
+> +	if ((board_ti_k3_is("J721EX-PM2-SOM")) ||
+> +	    IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM)) {
+>   		ret = uclass_get_device_by_driver(UCLASS_MISC,
+>   						  DM_DRIVER_GET(pmic_esm),
+>   						  &dev);
