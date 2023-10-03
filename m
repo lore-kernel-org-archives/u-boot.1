@@ -4,78 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00713E7542B
-	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 06:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52540E7542D
+	for <u-boot@archiver.kernel.org>; Tue,  3 Oct 2023 07:23:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05E6187494;
-	Tue,  3 Oct 2023 08:41:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 72BA586DD5;
+	Tue,  3 Oct 2023 09:23:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kBStVMwm";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34C4F87487; Tue,  3 Oct 2023 08:41:01 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28DAE86D38
- for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 08:40:59 +0200 (CEST)
+ id AB30086E14; Tue,  3 Oct 2023 09:23:50 +0200 (CEST)
+Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com
+ [61.152.239.71]) by phobos.denx.de (Postfix) with ESMTP id 73B4986DD3
+ for <u-boot@lists.denx.de>; Tue,  3 Oct 2023 09:23:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-504b84d59cbso665981e87.3
- for <u-boot@lists.denx.de>; Mon, 02 Oct 2023 23:40:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696315258; x=1696920058; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5q2M5DXsELqKWZaRrPpGsGtFwA0AL8RCnmyrStDSLv0=;
- b=kBStVMwmDMhjh32SxLAeCKNbgAj/AN6xvj9A7yQEbBw3UiPbsnqaiKs0Y6Tn8zxJ9F
- eEaxgUXZBQc/rrUY/Zx/JeCTLqDCsLtETnpVhsQeeAb5BByN776nq++k9KhfWkMB3vgv
- JHr8+CNeDSgHfF6fFIm5tenLyF5SjkCrBF/DS+P/+dlbpqFMicbP7xUSqBFasgyUX6cG
- AAZEge86o8mz6k1KHDgD8agTh1dJVmG4+S6+leAYgp0Zuo6zQ480sbhnFjiRHGYltVMS
- Txn9OMS2oCgaBfwTp3sj5dQx22MyS/yv3YnV7ox7KLTN9y4BHGwRkAENgsGLw+6nG2ih
- ZuwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696315258; x=1696920058;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5q2M5DXsELqKWZaRrPpGsGtFwA0AL8RCnmyrStDSLv0=;
- b=rtJh4Q+M7+4hshoreIQnv2kuEzTqeZhDOFMD7FLcVR5IfJFciiYqIMRSYpVxOKVNA4
- Z++qLZd7UyvGS5CwuDroW1ywbl3ugZQuNTBXJibq9sSMVaQnQ1Z4BVZ9NdkxRlizkUEs
- LdpvHX3/axI/NZKaytemRE5lm+UsKM7jgKG7efqp29kAY4YeG5ZCAnKiFm+BnIIDVaBT
- 7XEEjKNdupWTAdQP5V5V2Dcz9Ud3C9FxE8xnMoguPRihp6YBwWNHSwgvdkNdjw3BHCIB
- j4zaf5owezmVyhBjgwY3V7ZlEsGqJ5vspNy8sjgMh0s7fwI/zKonbxj4fq2mI8F9K8Z1
- QQlg==
-X-Gm-Message-State: AOJu0Yy2RpoQWlesf+UPDJ6BiNohi2KWyA/tLtJPeP8lOpLP3hV3shk1
- hPkRvDSlGI4EiL6ACjhRpen49Fhe4O8=
-X-Google-Smtp-Source: AGHT+IGRTmIQMmdKt++z5guicT5X9rJ6iD3ygGRIIsdYH9F36VDo2yFfj/++07rkk/TMtV93yW/p0A==
-X-Received: by 2002:a05:6512:e83:b0:502:ff3b:7671 with SMTP id
- bi3-20020a0565120e8300b00502ff3b7671mr14570974lfb.9.1696315258402; 
- Mon, 02 Oct 2023 23:40:58 -0700 (PDT)
-Received: from xeon.. ([188.163.112.76]) by smtp.gmail.com with ESMTPSA id
- x12-20020ac25dcc000000b004fe202a5c7csm79730lfq.135.2023.10.02.23.40.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 02 Oct 2023 23:40:57 -0700 (PDT)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <treding@nvidia.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 6/6] sysreset: implement PALMAS sysreset functions
-Date: Tue,  3 Oct 2023 09:40:42 +0300
-Message-Id: <20231003064042.43201-7-clamor95@gmail.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231003064042.43201-1-clamor95@gmail.com>
-References: <20231003064042.43201-1-clamor95@gmail.com>
+ spf=pass smtp.mailfrom=kuanlim.lee@starfivetech.com
+Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
+ (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+ (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
+ by fd01.gateway.ufhost.com (Postfix) with ESMTP id A817A8109;
+ Tue,  3 Oct 2023 15:23:43 +0800 (CST)
+Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX166.cuchost.com
+ (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 3 Oct
+ 2023 15:23:43 +0800
+Received: from localhost.localdomain (115.135.197.53) by EXMBX066.cuchost.com
+ (172.16.6.66) with Microsoft SMTP Server (TLS) id 15.0.1497.42;
+ Tue, 3 Oct 2023 15:23:39 +0800
+From: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+To: <u-boot@lists.denx.de>
+CC: <yuklin.soo@starfivetech.com>, <weiliang.lim@starfivetech.com>, "Kuan Lim
+ Lee" <kuanlim.lee@linux.starfivetech.com>, Kuan Lim Lee
+ <kuanlim.lee@starfivetech.com>
+Subject: [PATCH] mmc: sdhci-cadence: Add support for Cadence sdmmc v6
+Date: Tue, 3 Oct 2023 15:22:58 +0800
+Message-ID: <20231003072320.2008-1-kuanlim.lee@starfivetech.com>
+X-Mailer: git-send-email 2.42.0.windows.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [115.135.197.53]
+X-ClientProxiedBy: EXCAS066.cuchost.com (172.16.6.26) To EXMBX066.cuchost.com
+ (172.16.6.66)
+X-YovoleRuleAgent: yovoleflag
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,212 +63,558 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PALMAS PMIC family has embedded poweroff function used by some
-device to initiane device power off. Implement it as sysreset
-driver.
+From: Kuan Lim Lee <kuanlim.lee@linux.starfivetech.com>
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+Cadence SDMMC v6 controller has a lot of changes on initialize
+compared to v4 controller. PHY is needed by v6 controller.
+
+Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+Reviewed-by: Alex Soo <yuklin.soo@starfivetech.com>
+Reviewed-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
 ---
- drivers/power/pmic/palmas.c        | 33 +++++++++++++++++--
- drivers/sysreset/Kconfig           |  7 ++++
- drivers/sysreset/Makefile          |  1 +
- drivers/sysreset/sysreset_palmas.c | 53 ++++++++++++++++++++++++++++++
- include/power/palmas.h             | 11 +++++++
- 5 files changed, 103 insertions(+), 2 deletions(-)
- create mode 100644 drivers/sysreset/sysreset_palmas.c
+ drivers/mmc/Kconfig              |  13 ++
+ drivers/mmc/Makefile             |   1 +
+ drivers/mmc/sdhci-cadence.c      |  63 ++-----
+ drivers/mmc/sdhci-cadence.h      |  68 +++++++
+ drivers/mmc/sdhci-cadence6-phy.c | 302 +++++++++++++++++++++++++++++++
+ 5 files changed, 396 insertions(+), 51 deletions(-)
+ create mode 100644 drivers/mmc/sdhci-cadence.h
+ create mode 100644 drivers/mmc/sdhci-cadence6-phy.c
 
-diff --git a/drivers/power/pmic/palmas.c b/drivers/power/pmic/palmas.c
-index b2e8a2930c..32f2a938b2 100644
---- a/drivers/power/pmic/palmas.c
-+++ b/drivers/power/pmic/palmas.c
-@@ -8,13 +8,13 @@
- #include <fdtdec.h>
- #include <errno.h>
- #include <dm.h>
-+#include <dm/lists.h>
- #include <i2c.h>
- #include <log.h>
- #include <linux/printk.h>
- #include <power/pmic.h>
- #include <power/regulator.h>
- #include <power/palmas.h>
--#include <dm/device.h>
- 
- static const struct pmic_child_info pmic_children_info[] = {
- 	{ .prefix = "ldo", .driver = PALMAS_LDO_DRIVER },
-@@ -47,7 +47,16 @@ static int palmas_bind(struct udevice *dev)
- {
- 	ofnode pmic_node = ofnode_null(), regulators_node;
- 	ofnode subnode;
--	int children;
-+	int children, ret;
-+
-+	if (IS_ENABLED(CONFIG_SYSRESET_PALMAS)) {
-+		ret = device_bind_driver(dev, PALMAS_RST_DRIVER,
-+					 "sysreset", NULL);
-+		if (ret) {
-+			log_err("cannot bind SYSRESET (ret = %d)\n", ret);
-+			return ret;
-+		}
-+	}
- 
- 	dev_for_each_subnode(subnode, dev) {
- 		const char *name;
-@@ -81,6 +90,24 @@ static int palmas_bind(struct udevice *dev)
- 	return 0;
- }
- 
-+static int palmas_probe(struct udevice *dev)
-+{
-+	struct dm_i2c_chip *chip = dev_get_parent_plat(dev);
-+	struct palmas_priv *priv = dev_get_priv(dev);
-+	struct udevice *bus = dev_get_parent(dev);
-+	u32 chip2_addr = chip->chip_addr + 1;
-+	int ret;
-+
-+	/* Palmas PMIC is multi chip and chips are located in a row */
-+	ret = i2c_get_chip(bus, chip2_addr, 1, &priv->chip2);
-+	if (ret) {
-+		log_err("cannot get second PMIC I2C chip (err %d)\n", ret);
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
- static struct dm_pmic_ops palmas_ops = {
- 	.read = palmas_read,
- 	.write = palmas_write,
-@@ -98,5 +125,7 @@ U_BOOT_DRIVER(pmic_palmas) = {
- 	.id = UCLASS_PMIC,
- 	.of_match = palmas_ids,
- 	.bind = palmas_bind,
-+	.probe = palmas_probe,
- 	.ops = &palmas_ops,
-+	.priv_auto = sizeof(struct palmas_priv),
- };
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 659170d156..0e52f99628 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -109,6 +109,13 @@ config SYSRESET_SPL_AT91
- 	  This enables the system reset driver support for Microchip/Atmel
- 	  SoCs in SPL.
- 
-+config SYSRESET_PALMAS
-+	bool "Enable support for PALMAS System Reset"
-+	depends on PMIC_PALMAS
-+	select SYSRESET_CMD_POWEROFF if CMD_POWEROFF
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index de01b9687b..cec881d862 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -573,6 +573,19 @@ config MMC_SDHCI_CADENCE
+=20
+ 	  If unsure, say N.
+=20
++config MMC_SDHCI_CADENCE_V6
++	bool "SDHCI support for the Cadence SD/SDIO/eMMC controller & driver ve=
+rsion 6"
++	depends on BLK && DM_MMC
++	depends on MMC_SDHCI
++	depends on OF_CONTROL
++	select MMC_SDHCI_CADENCE
 +	help
-+	  Enable system power management functions found in PLAMAS PMIC family.
++	  This selects the Cadence SD/SDIO/eMMC driver version 6.
 +
- config SYSRESET_PSCI
- 	bool "Enable support for PSCI System Reset"
- 	depends on ARM_PSCI_FW
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index 0d96a204a9..c9f1c625ae 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -13,6 +13,7 @@ obj-$(CONFIG_$(SPL_TPL_)SYSRESET_MAX77663) += sysreset_max77663.o
- obj-$(CONFIG_SYSRESET_MPC83XX) += sysreset_mpc83xx.o
- obj-$(CONFIG_SYSRESET_MICROBLAZE) += sysreset_microblaze.o
- obj-$(CONFIG_SYSRESET_OCTEON) += sysreset_octeon.o
-+obj-$(CONFIG_$(SPL_TPL_)SYSRESET_PALMAS) += sysreset_palmas.o
- obj-$(CONFIG_SYSRESET_PSCI) += sysreset_psci.o
- obj-$(CONFIG_SYSRESET_SBI) += sysreset_sbi.o
- obj-$(CONFIG_SYSRESET_SOCFPGA) += sysreset_socfpga.o
-diff --git a/drivers/sysreset/sysreset_palmas.c b/drivers/sysreset/sysreset_palmas.c
++	  If you have a controller with this interface, say Y here.
++
++	  If unsure, say N.
++
+ config MMC_SDHCI_AM654
+ 	bool "SDHCI Controller on TI's Am654 devices"
+ 	depends on ARCH_K3
+diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile
+index 2c65c4765a..cdcce55b8b 100644
+--- a/drivers/mmc/Makefile
++++ b/drivers/mmc/Makefile
+@@ -61,6 +61,7 @@ obj-$(CONFIG_MMC_SDHCI_ATMEL)		+=3D atmel_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_BCM2835)		+=3D bcm2835_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_BCMSTB)		+=3D bcmstb_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_CADENCE)		+=3D sdhci-cadence.o
++obj-$(CONFIG_MMC_SDHCI_CADENCE_V6)	+=3D sdhci-cadence6-phy.o
+ obj-$(CONFIG_MMC_SDHCI_AM654)		+=3D am654_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_IPROC)		+=3D iproc_sdhci.o
+ obj-$(CONFIG_MMC_SDHCI_KONA)		+=3D kona_sdhci.o
+diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c
+index 327a05ad11..d7a270e74c 100644
+--- a/drivers/mmc/sdhci-cadence.c
++++ b/drivers/mmc/sdhci-cadence.c
+@@ -17,56 +17,7 @@
+ #include <linux/libfdt.h>
+ #include <mmc.h>
+ #include <sdhci.h>
+-
+-/* HRS - Host Register Set (specific to Cadence) */
+-#define SDHCI_CDNS_HRS04		0x10		/* PHY access port */
+-#define   SDHCI_CDNS_HRS04_ACK			BIT(26)
+-#define   SDHCI_CDNS_HRS04_RD			BIT(25)
+-#define   SDHCI_CDNS_HRS04_WR			BIT(24)
+-#define   SDHCI_CDNS_HRS04_RDATA		GENMASK(23, 16)
+-#define   SDHCI_CDNS_HRS04_WDATA		GENMASK(15, 8)
+-#define   SDHCI_CDNS_HRS04_ADDR			GENMASK(5, 0)
+-
+-#define SDHCI_CDNS_HRS06		0x18		/* eMMC control */
+-#define   SDHCI_CDNS_HRS06_TUNE_UP		BIT(15)
+-#define   SDHCI_CDNS_HRS06_TUNE			GENMASK(13, 8)
+-#define   SDHCI_CDNS_HRS06_MODE			GENMASK(2, 0)
+-#define   SDHCI_CDNS_HRS06_MODE_SD		0x0
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_SDR		0x2
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_DDR		0x3
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_HS200	0x4
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400	0x5
+-#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400ES	0x6
+-
+-/* SRS - Slot Register Set (SDHCI-compatible) */
+-#define SDHCI_CDNS_SRS_BASE		0x200
+-
+-/* PHY */
+-#define SDHCI_CDNS_PHY_DLY_SD_HS	0x00
+-#define SDHCI_CDNS_PHY_DLY_SD_DEFAULT	0x01
+-#define SDHCI_CDNS_PHY_DLY_UHS_SDR12	0x02
+-#define SDHCI_CDNS_PHY_DLY_UHS_SDR25	0x03
+-#define SDHCI_CDNS_PHY_DLY_UHS_SDR50	0x04
+-#define SDHCI_CDNS_PHY_DLY_UHS_DDR50	0x05
+-#define SDHCI_CDNS_PHY_DLY_EMMC_LEGACY	0x06
+-#define SDHCI_CDNS_PHY_DLY_EMMC_SDR	0x07
+-#define SDHCI_CDNS_PHY_DLY_EMMC_DDR	0x08
+-#define SDHCI_CDNS_PHY_DLY_SDCLK	0x0b
+-#define SDHCI_CDNS_PHY_DLY_HSMMC	0x0c
+-#define SDHCI_CDNS_PHY_DLY_STROBE	0x0d
+-
+-/*
+- * The tuned val register is 6 bit-wide, but not the whole of the range =
+is
+- * available.  The range 0-42 seems to be available (then 43 wraps aroun=
+d to 0)
+- * but I am not quite sure if it is official.  Use only 0 to 39 for safe=
+ty.
+- */
+-#define SDHCI_CDNS_MAX_TUNING_LOOP	40
+-
+-struct sdhci_cdns_plat {
+-	struct mmc_config cfg;
+-	struct mmc mmc;
+-	void __iomem *hrs_addr;
+-};
++#include "sdhci-cadence.h"
+=20
+ struct sdhci_cdns_phy_cfg {
+ 	const char *property;
+@@ -112,8 +63,11 @@ static int sdhci_cdns_write_phy_reg(struct sdhci_cdns=
+_plat *plat,
+ }
+=20
+ static int sdhci_cdns_phy_init(struct sdhci_cdns_plat *plat,
+-				const void *fdt, int nodeoffset)
++			       const void *fdt, int nodeoffset)
+ {
++	if (IS_ENABLED(CONFIG_MMC_SDHCI_CADENCE_V6))
++		return sdhci_cdns6_phy_init(plat, SDHCI_CDNS_HRS06_MODE_SD);
++
+ 	const fdt32_t *prop;
+ 	int ret, i;
+=20
+@@ -163,6 +117,9 @@ static void sdhci_cdns_set_control_reg(struct sdhci_h=
+ost *host)
+ 	tmp &=3D ~SDHCI_CDNS_HRS06_MODE;
+ 	tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS06_MODE, mode);
+ 	writel(tmp, plat->hrs_addr + SDHCI_CDNS_HRS06);
++
++	if (IS_ENABLED(CONFIG_MMC_SDHCI_CADENCE_V6))
++		sdhci_cdns6_phy_init(plat, mode);
+ }
+=20
+ static const struct sdhci_ops sdhci_cdns_ops =3D {
+@@ -172,6 +129,9 @@ static const struct sdhci_ops sdhci_cdns_ops =3D {
+ static int sdhci_cdns_set_tune_val(struct sdhci_cdns_plat *plat,
+ 				   unsigned int val)
+ {
++	if (IS_ENABLED(CONFIG_MMC_SDHCI_CADENCE_V6))
++		return sdhci_cdns6_set_tune_val(plat, val);
++
+ 	void __iomem *reg =3D plat->hrs_addr + SDHCI_CDNS_HRS06;
+ 	u32 tmp;
+ 	int i, ret;
+@@ -301,6 +261,7 @@ static int sdhci_cdns_probe(struct udevice *dev)
+ static const struct udevice_id sdhci_cdns_match[] =3D {
+ 	{ .compatible =3D "socionext,uniphier-sd4hc" },
+ 	{ .compatible =3D "cdns,sd4hc" },
++	{ .compatible =3D "cdns,sd6hc" },
+ 	{ /* sentinel */ }
+ };
+=20
+diff --git a/drivers/mmc/sdhci-cadence.h b/drivers/mmc/sdhci-cadence.h
 new file mode 100644
-index 0000000000..d853c33504
+index 0000000000..2c42cff2f3
 --- /dev/null
-+++ b/drivers/sysreset/sysreset_palmas.c
-@@ -0,0 +1,53 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/drivers/mmc/sdhci-cadence.h
+@@ -0,0 +1,68 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
 +/*
-+ *  Copyright(C) 2023 Svyatoslav Ryhel <clamor95@gmail.com>
++ * Copyright (C) 2022 Starfive.
++ *   Author: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
++ */
++
++#ifndef SDHCI_CADENCE_H_
++#define SDHCI_CADENCE_H_
++
++/* HRS - Host Register Set (specific to Cadence) */
++/* PHY access port */
++#define SDHCI_CDNS_HRS04		0x10
++/* Cadence V4 HRS04 Description*/
++#define   SDHCI_CDNS_HRS04_ACK			BIT(26)
++#define   SDHCI_CDNS_HRS04_RD			BIT(25)
++#define   SDHCI_CDNS_HRS04_WR			BIT(24)
++#define   SDHCI_CDNS_HRS04_RDATA		GENMASK(23, 16)
++#define   SDHCI_CDNS_HRS04_WDATA		GENMASK(15, 8)
++#define   SDHCI_CDNS_HRS04_ADDR			GENMASK(5, 0)
++
++#define SDHCI_CDNS_HRS05		0x14
++
++/* eMMC control */
++#define SDHCI_CDNS_HRS06		0x18
++#define   SDHCI_CDNS_HRS06_TUNE_UP		BIT(15)
++#define   SDHCI_CDNS_HRS06_TUNE			GENMASK(13, 8)
++#define   SDHCI_CDNS_HRS06_MODE			GENMASK(2, 0)
++#define   SDHCI_CDNS_HRS06_MODE_SD		0x0
++#define   SDHCI_CDNS_HRS06_MODE_MMC_SDR		0x2
++#define   SDHCI_CDNS_HRS06_MODE_MMC_DDR		0x3
++#define   SDHCI_CDNS_HRS06_MODE_MMC_HS200	0x4
++#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400	0x5
++#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400ES	0x6
++
++/* SRS - Slot Register Set (SDHCI-compatible) */
++#define SDHCI_CDNS_SRS_BASE		0x200
++
++/* Cadence V4 PHY Setting*/
++#define SDHCI_CDNS_PHY_DLY_SD_HS	0x00
++#define SDHCI_CDNS_PHY_DLY_SD_DEFAULT	0x01
++#define SDHCI_CDNS_PHY_DLY_UHS_SDR12	0x02
++#define SDHCI_CDNS_PHY_DLY_UHS_SDR25	0x03
++#define SDHCI_CDNS_PHY_DLY_UHS_SDR50	0x04
++#define SDHCI_CDNS_PHY_DLY_UHS_DDR50	0x05
++#define SDHCI_CDNS_PHY_DLY_EMMC_LEGACY	0x06
++#define SDHCI_CDNS_PHY_DLY_EMMC_SDR	0x07
++#define SDHCI_CDNS_PHY_DLY_EMMC_DDR	0x08
++#define SDHCI_CDNS_PHY_DLY_SDCLK	0x0b
++#define SDHCI_CDNS_PHY_DLY_HSMMC	0x0c
++#define SDHCI_CDNS_PHY_DLY_STROBE	0x0d
++
++/*
++ * The tuned val register is 6 bit-wide, but not the whole of the range =
+is
++ * available.  The range 0-42 seems to be available (then 43 wraps aroun=
+d to 0)
++ * but I am not quite sure if it is official.  Use only 0 to 39 for safe=
+ty.
++ */
++#define SDHCI_CDNS_MAX_TUNING_LOOP	40
++
++struct sdhci_cdns_plat {
++	struct mmc_config cfg;
++	struct mmc mmc;
++	void __iomem *hrs_addr;
++};
++
++int sdhci_cdns6_phy_init(struct sdhci_cdns_plat *plat, u32 mode);
++int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int =
+val);
++
++#endif
+diff --git a/drivers/mmc/sdhci-cadence6-phy.c b/drivers/mmc/sdhci-cadence=
+6-phy.c
+new file mode 100644
+index 0000000000..dd3df27dc8
+--- /dev/null
++++ b/drivers/mmc/sdhci-cadence6-phy.c
+@@ -0,0 +1,302 @@
++// SPDX-License-Identifier: GPL-2.0-or-platform_driver
++/*
++ * Copyright (C) 2022 Starfive.
++ *   Author: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
 + */
 +
 +#include <common.h>
 +#include <dm.h>
-+#include <i2c.h>
-+#include <errno.h>
-+#include <sysreset.h>
-+#include <power/pmic.h>
-+#include <power/palmas.h>
++#include <asm/global_data.h>
++#include <dm/device_compat.h>
++#include <linux/bitfield.h>
++#include <linux/bitops.h>
++#include <linux/bug.h>
++#include <linux/io.h>
++#include <linux/iopoll.h>
++#include <linux/sizes.h>
++#include <linux/libfdt.h>
++#include <mmc.h>
++#include <sdhci.h>
++#include "sdhci-cadence.h"
 +
-+static int palmas_sysreset_request(struct udevice *dev,
-+				   enum sysreset_t type)
++/* IO Delay Information */
++#define SDHCI_CDNS_HRS07		0X1C
++#define   SDHCI_CDNS_HRS07_RW_COMPENSATE		GENMASK(20, 16)
++#define   SDHCI_CDNS_HRS07_IDELAY_VAL			GENMASK(4, 0)
++
++#define SDHCI_CDNS_HRS09		0x24		/* PHY Control and Status */
++#define   SDHCI_CDNS_HRS09_RDDATA_EN		BIT(16)
++#define   SDHCI_CDNS_HRS09_RDCMD_EN		BIT(15)
++#define   SDHCI_CDNS_HRS09_EXTENDED_WR_MODE	BIT(3)
++#define   SDHCI_CDNS_HRS09_EXTENDED_RD_MODE	BIT(2)
++#define   SDHCI_CDNS_HRS09_PHY_INIT_COMPLETE	BIT(1)
++#define   SDHCI_CDNS_HRS09_PHY_SW_RESET		BIT(0)
++
++#define SDHCI_CDNS_HRS10		0x28		/* SDCLK adjustment */
++#define   SDHCI_CDNS_HRS10_HCSDCLKADJ		GENMASK(19, 16)
++
++#define SDHCI_CDNS_HRS16		0x40		/* CMD/DAT output delay */
++
++/* PHY Special Function Registers */
++//#define DLL_PHY_REG_BASE		0x2000
++
++/* register to control the DQ related timing */
++#define PHY_DQ_TIMING_REG_ADDR		0x2000
++
++/* register to control the DQS related timing */
++#define PHY_DQS_TIMING_REG_ADDR		0x2004
++
++/* register to control the gate and loopback control related timing */
++#define PHY_GATE_LPBK_CTRL_REG_ADDR	0x2008
++
++/* register to control the Master DLL logic */
++#define PHY_DLL_MASTER_CTRL_REG_ADDR	0x200C
++
++/* register to control the Slave DLL logic */
++#define PHY_DLL_SLAVE_CTRL_REG_ADDR	0x2010
++#define PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY	GENMASK(31, 24)
++#define PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY		GENMASK(7, 0)
++
++/* register to control the global settings for PHY */
++#define PHY_CTRL_REG_ADDR		0x2080
++
++struct phy_reg {
++	u32 phy_dqs_timing;
++	u32 phy_gate_lpbk_ctrl;
++	//u32 phy_dll_master_ctrl;
++	u32 phy_dll_slave_ctrl;
++	//u32 phy_ctrl;
++	u32 phy_dq_timing;
++	//cp_sw_half_cycle_shift; ASIC
++};
++
++struct controller_reg {
++	u32 hrs07;
++	u32 hrs09;
++	u32 hrs10;
++	u32 hrs16;
++};
++
++static struct phy_reg sd_ds_phy_cfg =3D {
++	0x00380004,
++	0x01A00040,
++	0x00000000,
++	0x00000001,
++};
++
++static struct phy_reg emmc_sdr_phy_cfg =3D {
++	0x00380004,
++	0x01A00040,
++	0x00000000,
++	0x00000001,
++};
++
++static struct phy_reg emmc_ddr_phy_cfg =3D {
++	0x00380004,
++	0x01A00040,
++	0x00000000,
++	0x10000001,
++};
++
++static struct phy_reg emmc_hs200_phy_cfg =3D {
++	0x00380004,
++	0x01A00040,
++	0x00DADA00,
++	0x00000001,
++};
++
++static struct phy_reg emmc_hs400_phy_cfg =3D {
++	0x00280004,
++	0x01A00040,
++	0x00DAD800,
++	0x00000001,
++};
++
++static struct controller_reg sd_ds_ctrl_cfg =3D {
++	0x00080000,
++	0x0001800C,
++	0x00020000,
++	0x00000000,
++};
++
++static struct controller_reg emmc_sdr_ctrl_cfg =3D {
++	0x00080000,
++	0x0001800C,
++	0x00030000,
++	0x00000000,
++};
++
++static struct controller_reg emmc_ddr_ctrl_cfg =3D {
++	0x00090001,
++	0x0001800C,
++	0x00020000,
++	0x11000001,
++};
++
++static struct controller_reg emmc_hs200_ctrl_cfg =3D {
++	0x00090000,
++	0x00018000,
++	0x00080000,
++	0x00000000,
++};
++
++static struct controller_reg emmc_hs400_ctrl_cfg =3D {
++	0x00080000,
++	0x00018000,
++	0x00080000,
++	0x11000000,
++};
++
++static unsigned int sdhci_cdns6_read_phy_reg(struct sdhci_cdns_plat *pla=
+t,=20
++					     u32 addr)
 +{
-+	struct palmas_priv *priv = dev_get_priv(dev->parent);
-+	int ret;
++	u32 data =3D 0;
 +
-+	/*
-+	 * Mask INT3 on second page which detects vbus
-+	 * or device will immediately turn on.
-+	 */
-+	ret = dm_i2c_reg_clrset(priv->chip2, PALMAS_INT3_MASK,
-+				MASK_VBUS, MASK_VBUS);
-+	if (ret < 0)
-+		return ret;
-+
-+	switch (type) {
-+	case SYSRESET_POWER:
-+		/* PALMAS: SW_RST > DEV_CTRL */
-+		pmic_reg_write(dev->parent, PALMAS_DEV_CTRL, SW_RST);
-+		break;
-+	case SYSRESET_POWER_OFF:
-+		/* PALMAS: DEV_OFF > DEV_CTRL */
-+		pmic_reg_write(dev->parent, PALMAS_DEV_CTRL, DEV_OFF);
-+		break;
-+	default:
-+		return -EPROTONOSUPPORT;
-+	}
-+
-+	return -EINPROGRESS;
++	writel(addr, plat->hrs_addr + SDHCI_CDNS_HRS04);
++	data =3D readl(plat->hrs_addr + SDHCI_CDNS_HRS05);
++	return data;
 +}
 +
-+static struct sysreset_ops palmas_sysreset = {
-+	.request = palmas_sysreset_request,
-+};
++static void sdhci_cdns6_write_phy_reg(struct sdhci_cdns_plat *plat,=20
++				      u32 addr, u32 data)
++{
++	u32 readdat =3D 0;
 +
-+U_BOOT_DRIVER(sysreset_palmas) = {
-+	.id	= UCLASS_SYSRESET,
-+	.name	= PALMAS_RST_DRIVER,
-+	.ops	= &palmas_sysreset,
-+};
-diff --git a/include/power/palmas.h b/include/power/palmas.h
-index df5f15c5bd..0a612052f0 100644
---- a/include/power/palmas.h
-+++ b/include/power/palmas.h
-@@ -2,6 +2,10 @@
- #define TPS659038	0x1
- #define TPS65917	0x2
- 
-+struct palmas_priv {
-+	struct udevice *chip2;
-+};
++	writel(addr, plat->hrs_addr + SDHCI_CDNS_HRS04);
++	writel(data, plat->hrs_addr + SDHCI_CDNS_HRS05);
++	readdat =3D readl(plat->hrs_addr + SDHCI_CDNS_HRS05);
 +
- /* I2C device address for pmic palmas */
- #define PALMAS_I2C_ADDR	(0x12 >> 1)
- #define PALMAS_LDO_NUM		11
-@@ -10,6 +14,7 @@
- /* Drivers name */
- #define PALMAS_LDO_DRIVER     "palmas_ldo"
- #define PALMAS_SMPS_DRIVER    "palmas_smps"
-+#define PALMAS_RST_DRIVER     "palmas_rst"
- 
- #define PALMAS_SMPS_VOLT_MASK		0x7F
- #define PALMAS_SMPS_RANGE_MASK		0x80
-@@ -24,3 +29,9 @@
- #define PALMAS_LDO_MODE_MASK	0x1
- #define PALMAS_LDO_STATUS_MASK	0x10
- #define PALMAS_LDO_BYPASS_EN	0x40
++	if (readdat !=3D data) {
++		pr_err("Error, %s: Writing failed!: address: 0x%x, value : 0x%x,=20
++		       readval: 0x%x\n", __func__, addr, data, readdat);
++	}
++}
 +
-+#define PALMAS_DEV_CTRL			0xA0
-+#define   SW_RST			BIT(1)
-+#define   DEV_OFF			0x00
-+#define PALMAS_INT3_MASK		0x1B
-+#define   MASK_VBUS			BIT(7)
--- 
-2.39.2
++static int sdhci_cdns6_reset_phy_dll(struct sdhci_cdns_plat *plat,=20
++				     unsigned int reset)
++{
++	void __iomem *reg =3D plat->hrs_addr + SDHCI_CDNS_HRS09;
++	u32 tmp;
++	int ret;
++
++	tmp =3D readl(reg);
++	tmp &=3D ~SDHCI_CDNS_HRS09_PHY_SW_RESET;
++
++	if (reset)	/* Switch On DLL Reset */
++		tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS09_PHY_SW_RESET, 0);
++	else		/* Switch Off DLL Reset */
++		tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS09_PHY_SW_RESET, 1);
++
++	writel(tmp, reg);
++
++	if (!reset) {
++		ret =3D readl_poll_timeout(reg, tmp,=20
++					 (tmp & SDHCI_CDNS_HRS09_PHY_INIT_COMPLETE),
++					 3000);
++	}
++
++	return ret;
++}
++
++int sdhci_cdns6_phy_init(struct sdhci_cdns_plat *plat, u32 mode)
++{
++	struct phy_reg *phy_cfgs;
++	struct controller_reg *ctrl_cfgs;
++	void __iomem *reg =3D NULL;
++	u32 tmp;
++	int ret;
++
++	switch (mode) {
++	case SDHCI_CDNS_HRS06_MODE_SD:
++		phy_cfgs =3D &sd_ds_phy_cfg;
++		ctrl_cfgs =3D &sd_ds_ctrl_cfg;
++		break;
++
++	case SDHCI_CDNS_HRS06_MODE_MMC_SDR:
++		phy_cfgs =3D &emmc_sdr_phy_cfg;
++		ctrl_cfgs =3D &emmc_sdr_ctrl_cfg;
++		break;
++
++	case SDHCI_CDNS_HRS06_MODE_MMC_DDR:
++		phy_cfgs =3D &emmc_ddr_phy_cfg;
++		ctrl_cfgs =3D &emmc_ddr_ctrl_cfg;
++		break;
++
++	case SDHCI_CDNS_HRS06_MODE_MMC_HS200:
++		phy_cfgs =3D &emmc_hs200_phy_cfg;
++		ctrl_cfgs =3D &emmc_hs200_ctrl_cfg;
++		break;
++
++	case SDHCI_CDNS_HRS06_MODE_MMC_HS400:
++		phy_cfgs =3D &emmc_hs400_phy_cfg;
++		ctrl_cfgs =3D &emmc_hs400_ctrl_cfg;
++		break;
++	}
++
++	/* Switch On the DLL Reset */
++	sdhci_cdns6_reset_phy_dll(plat, 1);
++
++	sdhci_cdns6_write_phy_reg(plat, PHY_DQS_TIMING_REG_ADDR,=20
++				  phy_cfgs->phy_dqs_timing);
++	sdhci_cdns6_write_phy_reg(plat, PHY_GATE_LPBK_CTRL_REG_ADDR,=20
++				  phy_cfgs->phy_gate_lpbk_ctrl);
++	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,=20
++				  phy_cfgs->phy_dll_slave_ctrl);
++
++	/* Switch Off the DLL Reset */
++	ret =3D sdhci_cdns6_reset_phy_dll(plat, 0);
++	if (ret) {
++		printf("sdhci_cdns6_reset_phy is not completed\n");
++		return ret;
++	}
++
++	/* Set PHY DQ TIMING control register */
++	sdhci_cdns6_write_phy_reg(plat, PHY_DQ_TIMING_REG_ADDR,=20
++				  phy_cfgs->phy_dq_timing);
++
++	/* Set HRS09 register */
++	reg =3D plat->hrs_addr + SDHCI_CDNS_HRS09;
++	tmp =3D readl(reg);
++	tmp &=3D ~(SDHCI_CDNS_HRS09_EXTENDED_WR_MODE |
++		 SDHCI_CDNS_HRS09_EXTENDED_RD_MODE |
++		 SDHCI_CDNS_HRS09_RDDATA_EN |
++		 SDHCI_CDNS_HRS09_RDCMD_EN);
++	tmp |=3D ctrl_cfgs->hrs09;
++	writel(tmp, reg);
++
++	/* Set HRS10 register */
++	reg =3D plat->hrs_addr + SDHCI_CDNS_HRS10;
++	tmp =3D readl(reg);
++	tmp &=3D ~SDHCI_CDNS_HRS10_HCSDCLKADJ;
++	tmp |=3D ctrl_cfgs->hrs10;
++	writel(tmp, reg);
++
++	/* Set HRS16 register */
++	reg =3D plat->hrs_addr + SDHCI_CDNS_HRS16;
++	tmp =3D ctrl_cfgs->hrs16;
++	writel(tmp, reg);
++
++	/* Set HRS07 register */
++	reg =3D plat->hrs_addr + SDHCI_CDNS_HRS07;
++	tmp =3D ctrl_cfgs->hrs07;
++	writel(tmp, reg);
++
++	return 0;
++}
++
++int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat,=20
++			     unsigned int val)
++{
++	u32 tmp, tuneval;
++
++	tuneval =3D (val * 256) / SDHCI_CDNS_MAX_TUNING_LOOP;
++
++	tmp =3D sdhci_cdns6_read_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR);
++	tmp &=3D ~(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY |
++		 PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY);
++	tmp |=3D FIELD_PREP(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY, tuneval)=
+ |
++		FIELD_PREP(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY, tuneval);
++	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR, tmp);
++
++	return 0;
++}
+--=20
+2.34.1
 
