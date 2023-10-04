@@ -4,80 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AA38E7C4DB
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:06:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DE61E7C4E7
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:39:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2272B87581;
-	Wed,  4 Oct 2023 18:06:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 34E558750F;
+	Wed,  4 Oct 2023 18:39:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Y3RKumSJ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 59B0187552; Wed,  4 Oct 2023 18:06:38 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A61B8756E
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:06:34 +0200 (CEST)
+ id F09F887493; Wed,  4 Oct 2023 18:39:17 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 64D0F8750F
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:39:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-99bdeae1d0aso436262466b.1
- for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:06:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1696435594; x=1697040394; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=7U7qfPQ5g3FbWYnfWHHCZZpFybmuqVdTqR+KxdJ0Ta4=;
- b=Y3RKumSJOjFUH36tGtG6tx1UdeEACcrQ8bWOI7h09wzRZBGNzUjj9tHUAvx1Xs0kO9
- KqZiirLXmSsMAGBOYR6IG2FbQ0vZld1gxKp2N0xSvgfSC8QFnkltRMXpiHWkXBgxNcZw
- uqpoEa6DVfdlu6ca/cvaPjEWp/E1UiY9MbzIngYyhJR/ijib3XXQtuIOGYJwRjxEjFNv
- HJdhN35NjsH7hPiaWVnYi9/ivuHIjzesdzo23u/yaEZha5PcrOeZR+mCh8MOCGULfCGQ
- L37Q0Gl+d/1sEAVwdN41NVRam2/PA0vIHGEaBXyA06BkmsbRJ4lkXLjbmIu18crcEK4j
- /rYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696435594; x=1697040394;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7U7qfPQ5g3FbWYnfWHHCZZpFybmuqVdTqR+KxdJ0Ta4=;
- b=pZNBqFAmC0VgLixotoKpWYGCjD1PIvC5e3WdHoFHJeEm1Wxs6iw6RttWkl96uzZN+k
- ITrb8z4/hTlrWJkc4NHhU1L2qAaEZvv+yLvgRX/ceN/tOTePnVp3HuWXuy1rPLyURXoz
- rSfc4/4v6wwEzFT585pHiPd5ZFug5lDXp3TuULZhR8hTCDlF/5aACzpk+IOfB2A/MNHA
- 51ByYcz8ka+yubtAuHAvGxBHhGX3/M4IMo2o3av3gsdv7Es6t4y9sY+D4q8N/6O/5Q7W
- dr3SRSgeCnxlXKDuWlx4rZmUaBEGzU1sBmfatVasW3SAT6v3/Ed0qodOE6sLZwroDiuC
- msOg==
-X-Gm-Message-State: AOJu0Yy+fdMYDOVqhyQICXkbvcE18Zmw8+DwaMFgOqc8GHXgG5QrFYW4
- fKwAaAfiJy894V1sDvgC5N9oMJSzN1xbxxgORCbYVS9IH6Bx8W7ldiE=
-X-Google-Smtp-Source: AGHT+IFk/ncR7csMKH7IG7fsabMBLzeLUsycv15ONqefSErPj+jk9STfKd0O7n1I4asJ7gtQFkO9o9gkMAB8hQ+VsvI=
-X-Received: by 2002:a17:906:53:b0:9b2:be4e:4940 with SMTP id
- 19-20020a170906005300b009b2be4e4940mr2461983ejg.61.1696435593834; Wed, 04 Oct
- 2023 09:06:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,200,1694703600"; 
+ d="asc'?scan'208";a="181923170"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 05 Oct 2023 01:39:02 +0900
+Received: from unknown (unknown [10.226.92.49])
+ by relmlir5.idc.renesas.com (Postfix) with SMTP id 10E39400C441;
+ Thu,  5 Oct 2023 01:38:59 +0900 (JST)
+Date: Wed, 4 Oct 2023 17:38:58 +0100
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Hai Pham <hai.pham.ud@renesas.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
+Message-ID: <20231004163858.zeuxy64olun5iini@GBR-5CG2373LKG.adwin.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
+ <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
+ <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
+ <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
+ <20231004134308.oaeqeolblr4ex2l5@GBR-5CG2373LKG.adwin.renesas.com>
+ <9893a1f5-b085-46f7-a694-f186ab764cd2@mailbox.org>
 MIME-Version: 1.0
-References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
- <20230926094124.7024-2-maxim.uvarov@linaro.org>
- <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
- <20230926134149.GS305624@bill-the-cat>
- <CAPnjgZ1iAG8Rw3jVZvFs16AvnGkO=gCsCM3dF1c30biFk4t2xw@mail.gmail.com>
- <20230926141936.GW305624@bill-the-cat>
- <CAD8XO3aifH+f_NZ1g_nJrxKu_tDmuW9H=Pk2o4v8yTAAn1nfdQ@mail.gmail.com>
- <CAD8XO3Yy1ppSgvUQ3ZZOmVzK2puxruHu2Q4UiCDPUzsWuKA8Vw@mail.gmail.com>
- <CAPnjgZ3aqSjChJqCHQfrO5kxg0=-BR-KV4aC6jquC4ZRTovi0g@mail.gmail.com>
- <CAD8XO3Z87tOqMx4gmipRfwnMY-U9Sr0Bf21GtKCgq=Ay+Jtakw@mail.gmail.com>
-In-Reply-To: <CAD8XO3Z87tOqMx4gmipRfwnMY-U9Sr0Bf21GtKCgq=Ay+Jtakw@mail.gmail.com>
-From: Simon Glass <sjg@google.com>
-Date: Wed, 4 Oct 2023 10:06:22 -0600
-Message-ID: <CAPnjgZ3owGdZ8hi4p5FbWw+xh5msLsMCKiisfmW9enrPRKj+Gg@mail.gmail.com>
-Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
-To: Maxim Uvarov <maxim.uvarov@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- goldsimon@gmx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="nl7dtuh4ul4q3oj6"
+Content-Disposition: inline
+In-Reply-To: <9893a1f5-b085-46f7-a694-f186ab764cd2@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,124 +64,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Maxim,
 
-On Wed, 4 Oct 2023 at 01:53, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
->
->
->
-> On Mon, 2 Oct 2023 at 20:46, Simon Glass <sjg@google.com> wrote:
->>
->> Hi Maxim,
->>
->> On Mon, 2 Oct 2023 at 05:23, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
->> >
->> > I found what was missing. (reproduced with CI docker.)
->>
->> How about adding a script that copies in the lwip code needed for
->> U-Boot, that you (or whoever the maintainer is) can run each quarter?
->>
->> Alternatively, I think just sending a patch with the code would be
->> helpful, so we can see what you are wanting to include.
->>
->> Regards,
->> Simon
->
->
-> Hello Simon,
->
-> That might also work. lwIP is a little bit special library which we can not just connect as an external library from the repo, because it has platform implementation specifics (U-Boot here).
+--nl7dtuh4ul4q3oj6
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Do you mean that it has an adaptation layer that we are using? I'm not
-sure what you are getting at.
+On Wed, Oct 04, 2023 at 05:17:55PM +0200, Marek Vasut wrote:
+> On 10/4/23 15:43, Paul Barker wrote:
+> > On Wed, Oct 04, 2023 at 02:26:49PM +0200, Marek Vasut wrote:
+> > > On 10/4/23 10:48, Paul Barker wrote:
+> > > > On 03/10/2023 14:23, Marek Vasut wrote:
+> > > > > On 9/20/23 14:42, Paul Barker wrote:
+> > > > > > Extend the existing driver to support the SCIF serial ports on =
+the
+> > > > > > Renesas RZ/G2L (R9A07G044) SoC. This also requires us to ensure=
+ that the
+> > > > > > relevant reset signal is de-asserted before we try to talk to t=
+he SCIF
+> > > > > > module.
+> > > > > >=20
+> > > > > > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> > > > > > Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> > > > > > Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas=
+=2Ecom>
+> > > > > > ---
+> > > > > >     arch/arm/mach-rmobile/Kconfig |  1 +
+> > > > > >     drivers/serial/serial_sh.c    | 32 ++++++++++++++++++++++++=
+++++++--
+> > > > > >     drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
+> > > > > >     3 files changed, 49 insertions(+), 3 deletions(-)
+> > > > > >=20
+> > > > > > diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmob=
+ile/Kconfig
+> > > > > > index 973e84fcf7ba..0ab22356aee5 100644
+> > > > > > --- a/arch/arm/mach-rmobile/Kconfig
+> > > > > > +++ b/arch/arm/mach-rmobile/Kconfig
+> > > > > > @@ -77,6 +77,7 @@ config RZG2L
+> > > > > >     	imply RENESAS_SDHI
+> > > > > >     	imply CLK_RZG2L
+> > > > > >     	imply PINCTRL_RZG2L
+> > > > > > +	imply SCIF_CONSOLE
+> > > > > >     	help
+> > > > > >     	  Enable support for the Renesas RZ/G2L family of SoCs, in=
+cluding the
+> > > > > >     	  the RZ/G2L itself (based on the R9A07G044 SoC).
+> > > > > > diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial=
+_sh.c
+> > > > > > index 5e543dbf3d58..a2e9a57137a6 100644
+> > > > > > --- a/drivers/serial/serial_sh.c
+> > > > > > +++ b/drivers/serial/serial_sh.c
+> > > > > > @@ -17,6 +17,8 @@
+> > > > > >     #include <linux/compiler.h>
+> > > > > >     #include <dm/platform_data/serial_sh.h>
+> > > > > >     #include <linux/delay.h>
+> > > > > > +#include <dm/device_compat.h>
+> > > > > > +#include <reset.h>
+> > > > > >     #include "serial_sh.h"
+> > > > > >     DECLARE_GLOBAL_DATA_PTR;
+> > > > > > @@ -79,8 +81,16 @@ sh_serial_setbrg_generic(struct uart_port *p=
+ort, int clk, int baudrate)
+> > > > > >     static void handle_error(struct uart_port *port)
+> > > > > >     {
+> > > > > > -	sci_in(port, SCxSR);
+> > > > > > -	sci_out(port, SCxSR, SCxSR_ERROR_CLEAR(port));
+> > > > > > +	/* The RZ/G2L datasheet says that error conditions are cleare=
+d by
+> > > > > > +	 * resetting the error bits in the FSR register to zero.
+> > > > >=20
+> > > > > Can you be more specific here ?
+> > > > >=20
+> > > > > It doesn't seem Linux sh-sci.c driver does anything special for G=
+2L, so
+> > > > > is this special case really needed ?
+> > > >=20
+> > > > On page 1268 of the datasheet (R01UH0914EJ0130 Rev.1.30):
+> > > >=20
+> > > > "DR is cleared to 0 when DR =3D 1 is read and then 0 is written to =
+the DR
+> > > > flag."
+> > > >=20
+> > > > On page 1270:
+> > > >=20
+> > > > "[Clearing condition]
+> > > > =E2=97=8F When 0 is written to ER after it has been read as 1"
+> > > >=20
+> > > > So zeros must be written to clear these errors, not ones.
+> > > >=20
+> > > > We have an open task to investigate the issue in the Linux driver a=
+nd
+> > > > fix it.
+> > >=20
+> > > Is the G2L UART broken in Linux ?
+> >=20
+> > Likely yes, but we need to reproduce the issue.
+> >=20
+> > > Does it misbehave in U-Boot ?
+> >=20
+> > Yes, before I changed this, if a framing error occurred it could never
+> > be cleared and the serial port stopped sending/receiving data.
+> >=20
+> > The framing error was triggered by accident by unnecessarily re-doing
+> > pinmuxing for the serial port after TrustedFirmware had already set it
+> > up correctly. Since SCIF0 is wired to an FTDI USB/serial adaptor chip on
+> > the SMARC carrier board, it seems very difficult to trigger a framing
+> > error in any other way, the FTDI chip is too well behaved.
+>=20
+> Is it possible to trigger this on RZ/G2<non-L> with SCIF on those platfor=
+ms
+> as well ?
 
-> At this time I'm trying to pass all CI tests. And even if they pass for me locally CI has some interesting combinations where the test fails and I'm not even sure that it's related to lwip code.
-> Once CI will pass all the things I want to take more attention on submodule support or patch support. I really hope that submodule will work for us, but that also will require Makefile and CI changes.
+It's not been seen or reported to my knowledge, but it's on our list to
+look into further.
 
-I just hit a roadblock with submodules at the weekend. They are not
-properly integrated into git (git fetch, git rebase, etc.). Perhaps
-they will never be.
+Thanks,
+Paul
 
->
-> However, review of lwIP code here might be helpful. But I think the mailing list will not allow me to send such a big patch, and it's almost impossible to do a review project in one email.
+--nl7dtuh4ul4q3oj6
+Content-Type: application/pgp-signature; name="signature.asc"
 
-It just gets held up, but is released by Tom.
+-----BEGIN PGP SIGNATURE-----
 
-Yes, the email piece has its limits. Also I'm not sure how useful it
-is to review the lwip code, unless we actually plan to submit fixes
-upstream.
+iHQEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR2VEwAKCRDbaV4Vf/JG
+veUBAP0QqAu/oUIhqeKQOzy2dJsMc8nGoUp4I5lbKygdW60MlQD2MsDd9jlgOhXH
+nfWDdZCbZtJ6yN1CxYkBbZdaD8oHBw==
+=ftDo
+-----END PGP SIGNATURE-----
 
-> I guess it's better to do a git clone https://git.savannah.nongnu.org/git/lwip.git and see what is there.
-
-OK.
-
-Regards,
-Simon
-
-
->
-> BR,
-> Maxim.
->
->
->>
->> >
->> > On Mon, 2 Oct 2023 at 12:34, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
->> >>
->> >> Can somebody help me to understand and reproduce CI errors?  I can run locally 'make check' which runs a bunch of local builds with binman and all of them are fine.
->> >> It looks like some dependency is missing or addition 'git config --global --add safe.directory <path>/net/lwip/lwip-external'  is required for the submodule directory.
->> >>
->> >> https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/17916
->> >>
->> >> Building current source for 1 boards (0 threads, 24 jobs per thread)
->> >>    sandbox:  +   sandbox_spl
->> >> +fatal: not a git repository (or any of the parent directories): .git
->> >> +make[1]: *** [Makefile:1875: initsubmodules] Error 128
->> >> +make: *** [Makefile:177: sub-make] Error 2
->> >>     0    0    1 /1              sandbox_spl
->> >> Completed: 1 total built, 1 newly), duration 0:00:06, rate 0.17
->> >> Traceback (most recent call last):
->> >>   File "/builds/u-boot/custodians/u-boot-tpm/./tools/binman/binman", line 45, in <module>
->> >>     from binman import cmdline
->> >>   File "/builds/u-boot/custodians/u-boot-tpm/tools/binman/cmdline.py", line 11, in <module>
->> >>     from binman import state
->> >>   File "/builds/u-boot/custodians/u-boot-tpm/tools/binman/state.py", line 14, in <module>
->> >>     from dtoc import fdt
->> >>   File "/builds/u-boot/custodians/u-boot-tpm/tools/dtoc/fdt.py", line 14, in <module>
->> >>     from libfdt import QUIET_NOTFOUND
->> >> ImportError: cannot import name 'QUIET_NOTFOUND' from 'libfdt' (unknown location)
->> >>
->> >> On Tue, 26 Sept 2023 at 20:19, Tom Rini <trini@konsulko.com> wrote:
->> >>>
->> >>> On Tue, Sep 26, 2023 at 08:16:35AM -0600, Simon Glass wrote:
->> >>> > Hi Tom,
->> >>> >
->> >>> > On Tue, 26 Sept 2023 at 07:41, Tom Rini <trini@konsulko.com> wrote:
->> >>> > >
->> >>> > > On Tue, Sep 26, 2023 at 05:37:25AM -0600, Simon Glass wrote:
->> >>> > > > Hi Maxim,
->> >>> > > >
->> >>> > > > On Tue, 26 Sept 2023 at 03:43, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
->> >>> > > > >
->> >>> > > > > add external lwIP library as a git submodule.
->> >>> > > > > Use STABLE-2_2_0_RELEASE tag.
->> >>> > > > >
->> >>> > > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
->> >>> > > > > ---
->> >>> > > > >  .gitmodules            | 3 +++
->> >>> > > > >  net/lwip/lwip-external | 1 +
->> >>> > > > >  2 files changed, 4 insertions(+)
->> >>> > > > >  create mode 100644 .gitmodules
->> >>> > > > >  create mode 160000 net/lwip/lwip-external
->> >>> > >
->> >>> > > Do you have comments on the rest of the series?
->> >>> >
->> >>> > Not yet, but I should be able to review the rest in a few days. My
->> >>> > main comments before were minor - return codes, tests, error checking.
->> >>>
->> >>> OK, thanks.  I don't know how exactly I want to proceed with the core of
->> >>> lwip itself, but that doesn't block reviewing and testing the rest of it
->> >>> as we'll move forward with it one way or another.
->> >>>
->> >>> --
->> >>> Tom
+--nl7dtuh4ul4q3oj6--
