@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98DA0E8FDD9
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 07:59:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2699E8FDD1
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 08:15:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1446086B0C;
-	Wed,  4 Oct 2023 09:59:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA4EA86B75;
+	Wed,  4 Oct 2023 10:15:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD10686B1B; Wed,  4 Oct 2023 09:59:56 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 7DFC586B0A
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 09:59:53 +0200 (CEST)
+ id BF10286B7E; Wed,  4 Oct 2023 10:15:53 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 0605286B68
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 10:15:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.03,199,1694703600"; 
- d="asc'?scan'208";a="181880850"
+ d="asc'?scan'208";a="178139784"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 04 Oct 2023 16:59:52 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 04 Oct 2023 17:15:47 +0900
 Received: from [10.226.93.90] (unknown [10.226.93.90])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 9FE114197FDD;
- Wed,  4 Oct 2023 16:59:49 +0900 (JST)
-Message-ID: <8d68fc58-6af4-8fa1-5683-f456a9ddf393@bp.renesas.com>
-Date: Wed, 4 Oct 2023 08:59:47 +0100
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 221F341A1494;
+ Wed,  4 Oct 2023 17:15:44 +0900 (JST)
+Message-ID: <44532c66-f21c-c930-9ca7-963add3196db@bp.renesas.com>
+Date: Wed, 4 Oct 2023 09:15:43 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 06/16] arm: rmobile: Add basic R9A07G044L SoC support
 To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-7-paul.barker.ct@bp.renesas.com>
- <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
+ <20230920124212.63535-8-paul.barker.ct@bp.renesas.com>
+ <cf94aea9-e750-8636-9f31-941617e8b8be@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
+Subject: Re: [PATCH 07/16] clk: renesas: Add RZ/G2L CPG driver
+In-Reply-To: <cf94aea9-e750-8636-9f31-941617e8b8be@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------HoCoy2jbO4R6a0KNJN23raLU"
+ boundary="------------5WKtDjUQ0wJDAJtmkKovObqK"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,66 +63,307 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------HoCoy2jbO4R6a0KNJN23raLU
-Content-Type: multipart/mixed; boundary="------------ojlsV9efPNaVmGHBaar6kB9U";
+--------------5WKtDjUQ0wJDAJtmkKovObqK
+Content-Type: multipart/mixed; boundary="------------no0ZNnhi4h14mW035iD3vrbw";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Message-ID: <8d68fc58-6af4-8fa1-5683-f456a9ddf393@bp.renesas.com>
-Subject: Re: [PATCH 06/16] arm: rmobile: Add basic R9A07G044L SoC support
+Message-ID: <44532c66-f21c-c930-9ca7-963add3196db@bp.renesas.com>
+Subject: Re: [PATCH 07/16] clk: renesas: Add RZ/G2L CPG driver
 References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-7-paul.barker.ct@bp.renesas.com>
- <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
-In-Reply-To: <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
+ <20230920124212.63535-8-paul.barker.ct@bp.renesas.com>
+ <cf94aea9-e750-8636-9f31-941617e8b8be@mailbox.org>
+In-Reply-To: <cf94aea9-e750-8636-9f31-941617e8b8be@mailbox.org>
 
---------------ojlsV9efPNaVmGHBaar6kB9U
-Content-Type: multipart/mixed; boundary="------------2GuoERk2oFtdGGe7gEIDSZ1O"
+--------------no0ZNnhi4h14mW035iD3vrbw
+Content-Type: multipart/mixed; boundary="------------DxY4js5ZhZmfNFUtA6Av1oOO"
 
---------------2GuoERk2oFtdGGe7gEIDSZ1O
+--------------DxY4js5ZhZmfNFUtA6Av1oOO
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 03/10/2023 13:46, Marek Vasut wrote:
+On 03/10/2023 13:56, Marek Vasut wrote:
 > On 9/20/23 14:42, Paul Barker wrote:
->> Add a config option for the R9A07G044L SoC used in the RZ/G2L so that =
-we
->> can make use of this in the subsequent driver patches.
+>> This driver provides clock and reset control for the Renesas RZ/G2L
+>> (R9A07G044) SoC. It consists of two parts:
 >>
+>> * driver code which is applicable to all SoCs in the RZ/G2L family
+>>
+>> * static data describing the clocks and resets which are specific to t=
+he
+>>    R9A07G044 SoC.
+>>
+>> clk_set_rate() and clk_get_rate() are implemented only for the clocks
+>> that are actually used in u-boot.
+>>
+>> The CPG driver is marked with DM_FLAG_PRE_RELOC to ensure that its bin=
+d
+>> function is called before the SCIF (serial port) driver is probed. Thi=
+s
+>> is required so that we can de-assert the relevant reset signal during
+>> the serial driver probe function.
+>>
+>> This patch is based on the corresponding Linux v6.5 driver.
+>=20
+> Same thing as 02/16..04/16 applies here.
+>=20
 >> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 >> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
 >> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 >> ---
->>   arch/arm/mach-rmobile/Kconfig.rzg2l | 5 +++++
->>   1 file changed, 5 insertions(+)
+>>   arch/arm/mach-rmobile/Kconfig       |   1 +
+>>   arch/arm/mach-rmobile/Kconfig.rzg2l |   1 +
+>>   drivers/clk/renesas/Kconfig         |   9 +
+>>   drivers/clk/renesas/Makefile        |   2 +
+>>   drivers/clk/renesas/r9a07g044-cpg.c | 384 +++++++++++++++++++++
+>>   drivers/clk/renesas/rzg2l-cpg.c     | 502 ++++++++++++++++++++++++++=
+++
+>>   drivers/clk/renesas/rzg2l-cpg.h     | 318 ++++++++++++++++++
+>>   7 files changed, 1217 insertions(+)
+>>   create mode 100644 drivers/clk/renesas/r9a07g044-cpg.c
+>>   create mode 100644 drivers/clk/renesas/rzg2l-cpg.c
+>>   create mode 100644 drivers/clk/renesas/rzg2l-cpg.h
 >>
+>> diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kco=
+nfig
+>> index fd240832d83d..fc37f6c79e50 100644
+>> --- a/arch/arm/mach-rmobile/Kconfig
+>> +++ b/arch/arm/mach-rmobile/Kconfig
+>> @@ -74,6 +74,7 @@ config RZG2L
+>>   	imply MULTI_DTB_FIT_USER_DEFINED_AREA
+>>   	imply SYS_MALLOC_F
+>>   	imply RENESAS_SDHI
+>> +	imply CLK_RZG2L
+>=20
+> Keep the list sorted
+>=20
+>>   	help
+>>   	  Enable support for the Renesas RZ/G2L family of SoCs, including t=
+he
+>>   	  the RZ/G2L itself (based on the R9A07G044 SoC).
 >> diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-rmobi=
 le/Kconfig.rzg2l
->> index 37ff6cd34160..266f82c18085 100644
+>> index 266f82c18085..7d268e8c366a 100644
 >> --- a/arch/arm/mach-rmobile/Kconfig.rzg2l
 >> +++ b/arch/arm/mach-rmobile/Kconfig.rzg2l
->> @@ -3,6 +3,11 @@
+>> @@ -5,6 +5,7 @@ if RZG2L
 >>  =20
->>   if RZG2L
->>  =20
->> +config R9A07G044L
->> +	bool "Renesas R9A07G044L SoC"
->> +	help
->> +	  Enable support for the R9A07G044L SoC used in the RZ/G2L.
+>>   config R9A07G044L
+>>   	bool "Renesas R9A07G044L SoC"
+>> +	imply CLK_R9A07G044
 >=20
-> I was under the impression that RZ/G2L is a SoC family, so the=20
-> R9A07G044L is part of that SoC family ? Maybe just reword this paragrap=
-h=20
-> and the commit message a bit to make it less confusing.
+> Why not CLK_R9A07G044L (with L at the end) ?
 
-The confusion is hard to avoid (see my reply re patch 5 of this series),
-but I'll see if I can improve this a bit in v2.
+The driver will also support the RZ/G2LC (R9A07G044C) when support for
+that SoC is added in a later patch series.
+
+>=20
+>>   	help
+>>   	  Enable support for the R9A07G044L SoC used in the RZ/G2L.
+>>  =20
+>> diff --git a/drivers/clk/renesas/Kconfig b/drivers/clk/renesas/Kconfig=
+
+>> index 437a82cd48be..927d62cf99a3 100644
+>> --- a/drivers/clk/renesas/Kconfig
+>> +++ b/drivers/clk/renesas/Kconfig
+>> @@ -156,3 +156,12 @@ config CLK_R9A06G032
+>>   	depends on CLK_RENESAS
+>>   	help
+>>   	  Enable this to support the clocks on Renesas R9A06G032 SoC.
+>> +
+>> +config CLK_RZG2L
+>> +	bool "Renesas RZ/G2L family clock support"
+>> +	depends on CLK_RENESAS
+>> +	select DM_RESET
+>> +
+>> +config CLK_R9A07G044
+>> +	bool "RZ/G2L (R9A07G044L) clock support"
+>> +	depends on CLK_RZG2L
+>> diff --git a/drivers/clk/renesas/Makefile b/drivers/clk/renesas/Makefi=
+le
+>> index 48373e61b901..df7e225e9ca4 100644
+>> --- a/drivers/clk/renesas/Makefile
+>> +++ b/drivers/clk/renesas/Makefile
+>> @@ -23,3 +23,5 @@ obj-$(CONFIG_CLK_R8A779A0) +=3D r8a779a0-cpg-mssr.o
+>>   obj-$(CONFIG_CLK_R8A779F0) +=3D r8a779f0-cpg-mssr.o
+>>   obj-$(CONFIG_CLK_R8A779G0) +=3D r8a779g0-cpg-mssr.o
+>>   obj-$(CONFIG_CLK_R9A06G032) +=3D r9a06g032-clocks.o
+>> +obj-$(CONFIG_CLK_RZG2L) +=3D rzg2l-cpg.o
+>> +obj-$(CONFIG_CLK_R9A07G044) +=3D r9a07g044-cpg.o
+>> diff --git a/drivers/clk/renesas/r9a07g044-cpg.c b/drivers/clk/renesas=
+/r9a07g044-cpg.c
+>> new file mode 100644
+>> index 000000000000..e215db7caf15
+>> --- /dev/null
+>> +++ b/drivers/clk/renesas/r9a07g044-cpg.c
+>> @@ -0,0 +1,384 @@
+>> +// SPDX-License-Identifier: GPL-2.0
+>> +/*
+>> + * RZ/G2L CPG driver
+>> + *
+>> + * Copyright (C) 2021-2023 Renesas Electronics Corp.
+>> + */
+>> +
+>> +#include <common.h>
+>> +#include <dm/device.h>
+>> +#include <dt-bindings/clock/r9a07g044-cpg.h>
+>> +#include <linux/clk-provider.h>
+>> +
+>> +#include "rzg2l-cpg.h"
+>> +
+>> +/* Divider tables */
+>> +static const struct clk_div_table dtable_1_8[] =3D {
+>> +	{0, 1},
+>> +	{1, 2},
+>> +	{2, 4},
+>> +	{3, 8},
+>> +	{0, 0},
+>> +};
+>> +
+>> +static const struct clk_div_table dtable_1_32[] =3D {
+>> +	{0, 1},
+>> +	{1, 2},
+>> +	{2, 4},
+>> +	{3, 8},
+>> +	{4, 32},
+>> +	{0, 0},
+>> +};
+>> +
+>> +static const struct clk_div_table dtable_16_128[] =3D {
+>> +	{0, 16},
+>> +	{1, 32},
+>> +	{2, 64},
+>> +	{3, 128},
+>> +	{0, 0},
+>> +};
+>> +
+>> +/* Mux clock tables */
+>> +static const char * const sel_pll3_3[] =3D { ".pll3_533", ".pll3_400"=
+ };
+>> +static const char * const sel_pll5_4[] =3D { ".pll5_foutpostdiv", ".p=
+ll5_fout1ph0" };
+>> +static const char * const sel_pll6_2[]	=3D { ".pll6_250", ".pll5_250"=
+ };
+>=20
+> Is this mixed tabs and spaces here ?
+>=20
+> (please fix this in Linux too)
+
+I've tried to minimize changes between the u-boot and Linux drivers, so
+this mixed tabs/spaces issue, parenthesis around numbers in defines,
+etc, is an exact copy of what was accepted into the mainline kernel. The
+hope is that we can more easily port fixes from Linux to u-boot if the
+code remains as similar as possible.
+
+>=20
+>> +static const char * const sel_shdi[] =3D { ".clk_533", ".clk_400", ".=
+clk_266" };
+>> +static const char * const sel_gpu2[] =3D { ".pll6", ".pll3_div2_2" };=
+
+>=20
+> [...]
+>=20
+>> diff --git a/drivers/clk/renesas/rzg2l-cpg.c b/drivers/clk/renesas/rzg=
+2l-cpg.c
+>=20
+> [...]
+>=20
+>> +static int rzg2l_cpg_clk_set(struct clk *clk, bool enable)
+>> +{
+>> +	struct rzg2l_cpg_data *data =3D
+>> +		(struct rzg2l_cpg_data *)dev_get_driver_data(clk->dev);
+>> +	unsigned int cpg_clk_id =3D CPG_CLK_ID(clk->id);
+>> +	const struct rzg2l_mod_clk *mod_clk =3D NULL;
+>> +	u32 value;
+>> +	unsigned int i;
+>> +
+>> +	dev_dbg(clk->dev, "%s %s clock %u\n", enable ? "enable" : "disable",=
+
+>> +		is_mod_clk(clk->id) ? "module" : "core", cpg_clk_id);
+>> +	if (!is_mod_clk(clk->id)) {
+>> +		dev_err(clk->dev, "ID %lu is not a module clock\n", clk->id);
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	for (i =3D 0; i < data->info->num_mod_clks; i++) {
+>> +		if (data->info->mod_clks[i].id =3D=3D cpg_clk_id) {
+>> +			mod_clk =3D &data->info->mod_clks[i];
+>> +			break;
+>> +		}
+>> +	}
+>> +
+>> +	if (!mod_clk) {
+>> +		dev_err(clk->dev, "Module clock %u not found\n", cpg_clk_id);
+>> +		return -ENODEV;
+>> +	}
+>> +
+>> +	value =3D (BIT(mod_clk->bit) << 16);
+>=20
+> Parenthesis not needed around this statement.
+
+This one is my mistake - I forgot to remove the brackets when I
+simplified this expression. Will fix in v2.
+
+>=20
+>> +	if (enable)
+>> +		value |=3D BIT(mod_clk->bit);
+>> +	writel(value, data->base + mod_clk->off);
+>> +
+>> +	if (enable && readl_poll_timeout(data->base + CLK_MON_R(mod_clk->off=
+),
+>> +					 value, (value & BIT(mod_clk->bit)),
+>> +					 10)) {
+>> +		dev_err(clk->dev, "Timeout\n");
+>> +		return -ETIMEDOUT;
+>> +	}
+>> +
+>> +	return 0;
+>> +}
+>> +
+>> +static int rzg2l_cpg_clk_enable(struct clk *clk)
+>> +{
+>> +	return rzg2l_cpg_clk_set(clk, true);
+>> +}
+>> +
+>> +static int rzg2l_cpg_clk_disable(struct clk *clk)
+>> +{
+>> +	return rzg2l_cpg_clk_set(clk, false);
+>> +}
+>> +
+>> +static int rzg2l_cpg_clk_of_xlate(struct clk *clk,
+>> +				  struct ofnode_phandle_args *args)
+>> +{
+>> +	struct rzg2l_cpg_data *data =3D
+>> +		(struct rzg2l_cpg_data *)dev_get_driver_data(clk->dev);
+>> +	u32 cpg_clk_type, cpg_clk_id;
+>> +	bool found =3D false;
+>> +	unsigned int i;
+>> +
+>> +	if (args->args_count !=3D 2) {
+>> +		dev_dbg(clk->dev, "Invalid args_count: %d\n", args->args_count);
+>> +		return -EINVAL;
+>> +	}
+>> +
+>> +	cpg_clk_type =3D args->args[0];
+>> +	cpg_clk_id =3D args->args[1];
+>> +
+>> +	switch (cpg_clk_type) {
+>> +	case CPG_CORE:
+>=20
+> Is this copied from RCAR clock driver ?
+>=20
+> Can this be deduplicated someohw ?
+
+This isn't copied from the RCAR driver. In Linux the RZ/G2L family CPG
+drivers are separate to the RCAR clock drivers as there are too many
+differences to easily combine them.
 
 Thanks,
 Paul
---------------2GuoERk2oFtdGGe7gEIDSZ1O
+--------------DxY4js5ZhZmfNFUtA6Av1oOO
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -186,21 +427,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------2GuoERk2oFtdGGe7gEIDSZ1O--
+--------------DxY4js5ZhZmfNFUtA6Av1oOO--
 
---------------ojlsV9efPNaVmGHBaar6kB9U--
+--------------no0ZNnhi4h14mW035iD3vrbw--
 
---------------HoCoy2jbO4R6a0KNJN23raLU
+--------------5WKtDjUQ0wJDAJtmkKovObqK
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR0bcwUDAAAAAAAKCRDbaV4Vf/JGvYUk
-AP42f/yRNgsN+mCYQpqH6rtMhZOu9eD5FOvgp6OBR+egnAD/TJddpcDr7yjZbhLYGRgDwh88Kp7l
-j0sy/0fHo12NgwQ=
-=/peq
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR0fLwUDAAAAAAAKCRDbaV4Vf/JGvcZC
+AQCbabnz3oMUDx+u1M3Kk6mIreI7NYYqwe5cqUeG1w9ozwD+Mxh48L+RudeaC/+mgCvCm7756YNV
+P8TQM5JrtKpPRwI=
+=cml/
 -----END PGP SIGNATURE-----
 
---------------HoCoy2jbO4R6a0KNJN23raLU--
+--------------5WKtDjUQ0wJDAJtmkKovObqK--
