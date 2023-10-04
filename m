@@ -4,48 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 332E7E7B61B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 13:48:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C334E7B61B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 13:48:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C95B87540;
-	Wed,  4 Oct 2023 15:48:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 079738756A;
+	Wed,  4 Oct 2023 15:48:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 91C5F87540; Wed,  4 Oct 2023 15:48:30 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 4331087500
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 15:48:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,200,1694703600"; 
- d="asc'?scan'208";a="181912243"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 04 Oct 2023 22:48:23 +0900
-Received: from unknown (unknown [10.226.92.199])
- by relmlir5.idc.renesas.com (Postfix) with SMTP id B35C8400618A;
- Wed,  4 Oct 2023 22:48:20 +0900 (JST)
-Date: Wed, 4 Oct 2023 14:48:19 +0100
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Hai Pham <hai.pham.ud@renesas.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: Re: [PATCH 12/16] arm: rmobile: Include <asm/types.h> in header
-Message-ID: <20231004134819.4ajesdoiktyejnt6@GBR-5CG2373LKG.adwin.renesas.com>
-References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-13-paul.barker.ct@bp.renesas.com>
- <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
- <fe6c6582-6155-81d4-0c7f-19c545a4acf7@bp.renesas.com>
- <c2d3799b-634e-4279-a762-8d0d5bd29d23@mailbox.org>
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bVx86qmI";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 76B8B8755B; Wed,  4 Oct 2023 15:48:34 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 855DB87500
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 15:48:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394DmNee056451;
+ Wed, 4 Oct 2023 08:48:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696427303;
+ bh=mmxSUUqrN4vgNJYuBT6WGtXtzQT9GX4pm2Cpa4Y8vWk=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=bVx86qmImo8UQu80k+IetSPeQtKC/O8Rbkj7T2wC9T6GqylfAB+1CRJXTVdEsCLdq
+ SaEslMVrpYVGIrwPU6UdqBr1wU6qLMJaGAp4WcSiiBVeG73YYV394St7CbKflredUL
+ q7EPuRWrLA93KUaV0yZTAQXzK90zqh7+L0BBHOW0=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394DmNRt017252
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 4 Oct 2023 08:48:23 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
+ Oct 2023 08:48:23 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 4 Oct 2023 08:48:23 -0500
+Received: from [10.250.38.120] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394DmMbV024309;
+ Wed, 4 Oct 2023 08:48:22 -0500
+Message-ID: <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
+Date: Wed, 4 Oct 2023 08:48:22 -0500
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="arzbwegngxatstbj"
-Content-Disposition: inline
-In-Reply-To: <c2d3799b-634e-4279-a762-8d0d5bd29d23@mailbox.org>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
+To: Roger Quadros <rogerq@kernel.org>, <trini@konsulko.com>, <nm@ti.com>
+CC: <vigneshr@ti.com>, <m-chawdhry@ti.com>, <sjg@chromium.org>,
+ <jonas@kwiboo.se>, <srk@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20231004132324.44198-1-rogerq@kernel.org>
+ <20231004132324.44198-2-rogerq@kernel.org>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20231004132324.44198-2-rogerq@kernel.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,56 +83,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/4/23 8:23 AM, Roger Quadros wrote:
+> ti_mmc is not a valid boot_target for standard boot flow so
 
---arzbwegngxatstbj
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Is there some way to make it into a valid boot_target? Otherwise
+how do we use uEnv.txt files, or boot from FIT images with overlays?
 
-On Wed, Oct 04, 2023 at 02:27:50PM +0200, Marek Vasut wrote:
-> On 10/4/23 10:57, Paul Barker wrote:
-> > On 03/10/2023 14:27, Marek Vasut wrote:
-> > > On 9/20/23 14:42, Paul Barker wrote:
-> > > > We don't want to rely on source files including <asm/types.h> before
-> > > > <asm/arch/rmobile.h>.
-> > >=20
-> > > What kind of error does this solve ?
-> >=20
-> > Without this, <asm/types.h> must be included before
-> > <asm/arch/rmobile.h>, for example in include/configs/rzg2l-smarc.h added
-> > in patch 16, to avoid the following error:
-> >=20
-> >    CC      arch/arm/lib/asm-offsets.s
-> > In file included from include/configs/rzg2l-smarc.h:9,
-> >                   from include/config.h:3,
-> >                   from include/common.h:16,
-> >                   from lib/asm-offsets.c:14:
-> > ./arch/arm/include/asm/arch/rmobile.h:49:7: error: unknown type name =
-=E2=80=98u8=E2=80=99
-> >     49 | const u8 *rzg_get_cpu_name(void);
->=20
-> Hmmm, that's weird, why am I not hitting it with the rcar CPU name functi=
-on
-> too ?
+Andrew
 
-arch/arm/mach-rmobile/include/mach/rcar-gen3-base.h includes
-<asm/types.h> as it uses the `u32` type.
-
-However, arch/arm/mach-rmobile/include/mach/rzg2l.h doesn't use anything
-=66rom <asm/types.h> so doesn't include it.
-
-Thanks,
-Paul
-
---arzbwegngxatstbj
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR1tIwAKCRDbaV4Vf/JG
-vZsJAQDFfDeyipXPT1GNTLlIc5PSxV7vbW7lAnVOVF7SRYYsnQEAzYzMKvhgNhnA
-ewt6Ur/UZwlJFqrMZOBypj2o2O6Ltw8=
-=WCNN
------END PGP SIGNATURE-----
-
---arzbwegngxatstbj--
+> remove it. Prefer mmc1 (sd-card) over mmc0 (emmc).
+> 
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+> ---
+>   board/ti/am62x/am62x.env | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
+> index 22a6c2c91b..e53a55c38f 100644
+> --- a/board/ti/am62x/am62x.env
+> +++ b/board/ti/am62x/am62x.env
+> @@ -8,7 +8,7 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+>   	${mtdparts}
+>   run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
+>   
+> -boot_targets=ti_mmc mmc0 mmc1 usb pxe dhcp
+> +boot_targets=mmc1 mmc0 usb pxe dhcp
+>   boot=mmc
+>   mmcdev=1
+>   bootpart=1:2
