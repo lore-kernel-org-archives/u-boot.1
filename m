@@ -4,69 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C334E7B61B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 13:48:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C461AE7B61B
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 13:52:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 079738756A;
-	Wed,  4 Oct 2023 15:48:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 84547864A0;
+	Wed,  4 Oct 2023 15:43:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bVx86qmI";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76B8B8755B; Wed,  4 Oct 2023 15:48:34 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 855DB87500
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 15:48:31 +0200 (CEST)
+ id 0B7B0864A9; Wed,  4 Oct 2023 15:43:19 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 63B2986496
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 15:43:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394DmNee056451;
- Wed, 4 Oct 2023 08:48:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696427303;
- bh=mmxSUUqrN4vgNJYuBT6WGtXtzQT9GX4pm2Cpa4Y8vWk=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=bVx86qmImo8UQu80k+IetSPeQtKC/O8Rbkj7T2wC9T6GqylfAB+1CRJXTVdEsCLdq
- SaEslMVrpYVGIrwPU6UdqBr1wU6qLMJaGAp4WcSiiBVeG73YYV394St7CbKflredUL
- q7EPuRWrLA93KUaV0yZTAQXzK90zqh7+L0BBHOW0=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394DmNRt017252
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 4 Oct 2023 08:48:23 -0500
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
- Oct 2023 08:48:23 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 4 Oct 2023 08:48:23 -0500
-Received: from [10.250.38.120] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394DmMbV024309;
- Wed, 4 Oct 2023 08:48:22 -0500
-Message-ID: <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
-Date: Wed, 4 Oct 2023 08:48:22 -0500
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,200,1694703600"; 
+ d="asc'?scan'208";a="178167351"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 04 Oct 2023 22:43:11 +0900
+Received: from unknown (unknown [10.226.92.199])
+ by relmlir5.idc.renesas.com (Postfix) with SMTP id 60A1F400C9F4;
+ Wed,  4 Oct 2023 22:43:09 +0900 (JST)
+Date: Wed, 4 Oct 2023 14:43:08 +0100
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Hai Pham <hai.pham.ud@renesas.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
+Message-ID: <20231004134308.oaeqeolblr4ex2l5@GBR-5CG2373LKG.adwin.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
+ <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
+ <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
+ <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
-To: Roger Quadros <rogerq@kernel.org>, <trini@konsulko.com>, <nm@ti.com>
-CC: <vigneshr@ti.com>, <m-chawdhry@ti.com>, <sjg@chromium.org>,
- <jonas@kwiboo.se>, <srk@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
- <u-boot@lists.denx.de>
-References: <20231004132324.44198-1-rogerq@kernel.org>
- <20231004132324.44198-2-rogerq@kernel.org>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20231004132324.44198-2-rogerq@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="ag4mmcadgxw4uavb"
+Content-Disposition: inline
+In-Reply-To: <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,31 +62,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/4/23 8:23 AM, Roger Quadros wrote:
-> ti_mmc is not a valid boot_target for standard boot flow so
 
-Is there some way to make it into a valid boot_target? Otherwise
-how do we use uEnv.txt files, or boot from FIT images with overlays?
+--ag4mmcadgxw4uavb
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Andrew
+On Wed, Oct 04, 2023 at 02:26:49PM +0200, Marek Vasut wrote:
+> On 10/4/23 10:48, Paul Barker wrote:
+> > On 03/10/2023 14:23, Marek Vasut wrote:
+> > > On 9/20/23 14:42, Paul Barker wrote:
+> > > > Extend the existing driver to support the SCIF serial ports on the
+> > > > Renesas RZ/G2L (R9A07G044) SoC. This also requires us to ensure tha=
+t the
+> > > > relevant reset signal is de-asserted before we try to talk to the S=
+CIF
+> > > > module.
+> > > >=20
+> > > > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> > > > Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> > > > Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> > > > ---
+> > > >    arch/arm/mach-rmobile/Kconfig |  1 +
+> > > >    drivers/serial/serial_sh.c    | 32 +++++++++++++++++++++++++++++=
++--
+> > > >    drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
+> > > >    3 files changed, 49 insertions(+), 3 deletions(-)
+> > > >=20
+> > > > diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/=
+Kconfig
+> > > > index 973e84fcf7ba..0ab22356aee5 100644
+> > > > --- a/arch/arm/mach-rmobile/Kconfig
+> > > > +++ b/arch/arm/mach-rmobile/Kconfig
+> > > > @@ -77,6 +77,7 @@ config RZG2L
+> > > >    	imply RENESAS_SDHI
+> > > >    	imply CLK_RZG2L
+> > > >    	imply PINCTRL_RZG2L
+> > > > +	imply SCIF_CONSOLE
+> > > >    	help
+> > > >    	  Enable support for the Renesas RZ/G2L family of SoCs, includi=
+ng the
+> > > >    	  the RZ/G2L itself (based on the R9A07G044 SoC).
+> > > > diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
+> > > > index 5e543dbf3d58..a2e9a57137a6 100644
+> > > > --- a/drivers/serial/serial_sh.c
+> > > > +++ b/drivers/serial/serial_sh.c
+> > > > @@ -17,6 +17,8 @@
+> > > >    #include <linux/compiler.h>
+> > > >    #include <dm/platform_data/serial_sh.h>
+> > > >    #include <linux/delay.h>
+> > > > +#include <dm/device_compat.h>
+> > > > +#include <reset.h>
+> > > >    #include "serial_sh.h"
+> > > >    DECLARE_GLOBAL_DATA_PTR;
+> > > > @@ -79,8 +81,16 @@ sh_serial_setbrg_generic(struct uart_port *port,=
+ int clk, int baudrate)
+> > > >    static void handle_error(struct uart_port *port)
+> > > >    {
+> > > > -	sci_in(port, SCxSR);
+> > > > -	sci_out(port, SCxSR, SCxSR_ERROR_CLEAR(port));
+> > > > +	/* The RZ/G2L datasheet says that error conditions are cleared by
+> > > > +	 * resetting the error bits in the FSR register to zero.
+> > >=20
+> > > Can you be more specific here ?
+> > >=20
+> > > It doesn't seem Linux sh-sci.c driver does anything special for G2L, =
+so
+> > > is this special case really needed ?
+> >=20
+> > On page 1268 of the datasheet (R01UH0914EJ0130 Rev.1.30):
+> >=20
+> > "DR is cleared to 0 when DR =3D 1 is read and then 0 is written to the =
+DR
+> > flag."
+> >=20
+> > On page 1270:
+> >=20
+> > "[Clearing condition]
+> > =E2=97=8F When 0 is written to ER after it has been read as 1"
+> >=20
+> > So zeros must be written to clear these errors, not ones.
+> >=20
+> > We have an open task to investigate the issue in the Linux driver and
+> > fix it.
+>=20
+> Is the G2L UART broken in Linux ?
 
-> remove it. Prefer mmc1 (sd-card) over mmc0 (emmc).
-> 
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
-> ---
->   board/ti/am62x/am62x.env | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
-> index 22a6c2c91b..e53a55c38f 100644
-> --- a/board/ti/am62x/am62x.env
-> +++ b/board/ti/am62x/am62x.env
-> @@ -8,7 +8,7 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
->   	${mtdparts}
->   run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
->   
-> -boot_targets=ti_mmc mmc0 mmc1 usb pxe dhcp
-> +boot_targets=mmc1 mmc0 usb pxe dhcp
->   boot=mmc
->   mmcdev=1
->   bootpart=1:2
+Likely yes, but we need to reproduce the issue.
+
+> Does it misbehave in U-Boot ?
+
+Yes, before I changed this, if a framing error occurred it could never
+be cleared and the serial port stopped sending/receiving data.
+
+The framing error was triggered by accident by unnecessarily re-doing
+pinmuxing for the serial port after TrustedFirmware had already set it
+up correctly. Since SCIF0 is wired to an FTDI USB/serial adaptor chip on
+the SMARC carrier board, it seems very difficult to trigger a framing
+error in any other way, the FTDI chip is too well behaved.
+
+Thanks,
+Paul
+
+--ag4mmcadgxw4uavb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR1r6wAKCRDbaV4Vf/JG
+vQOCAQDwtQRkO3Qr0WO+YJOeyIaEcmiMTtsd2UQ6gXyu2CtoHQD/cUWbAiO1U4Cd
+I2jKsBuAQDFYv3TB/K5UUfga/tDNRgg=
+=I/Vq
+-----END PGP SIGNATURE-----
+
+--ag4mmcadgxw4uavb--
