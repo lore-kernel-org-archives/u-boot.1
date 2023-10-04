@@ -4,56 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79BBCE7B60F
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 13:24:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A4A1E7B611
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 13:27:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D5D987542;
-	Wed,  4 Oct 2023 15:23:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6B2748754D;
+	Wed,  4 Oct 2023 15:27:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="nbmyqBvM";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83F5887550; Wed,  4 Oct 2023 15:23:46 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 819A987542
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 15:23:44 +0200 (CEST)
+ id 26E0187555; Wed,  4 Oct 2023 15:27:00 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id D129587548
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 15:26:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id DB2F4CE1BF5;
- Wed,  4 Oct 2023 13:23:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59DE7C433C9;
- Wed,  4 Oct 2023 13:23:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1696425819;
- bh=hOoQs2gNguwcgGv4LZYZ7MwhVCmJbY2AalIrKGWjf8s=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=nbmyqBvMQ/74Z5xbF2S6FT39A1HNzxeRuNbzIx28bMflGmaDuli2ijOcUnDHUVRPo
- Nl4PFsvw2lXG2+8HDuSKBit1+y57wpaTOKMxlRuIOalrfiWVkwSZOc1azlamqqtIzM
- wrQW4ahgbS1ZlVQYbAIcHefbtA4Q7hvyhLPIHaFxIB0NOkOc2L/YJdxsgtbhc7WKuo
- roRXVmCK9MVkiud+GxGCZMuHlZY7IKS2iOR21+rDj57FGu+GQejLTbGyAiIFpc/cuU
- hYmcujbBieOHULfKSXF6nKBMq8HxVlNQMeyZYHgpkanIU5s3MQ6RpYMUQ0Im9VkoQo
- aZWWwJ6SQHtoA==
-From: Roger Quadros <rogerq@kernel.org>
-To: trini@konsulko.com,
-	nm@ti.com
-Cc: vigneshr@ti.com, m-chawdhry@ti.com, sjg@chromium.org, jonas@kwiboo.se,
- srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de,
- Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 2/2] board: ti: am64x: Switch to standard boot flow
-Date: Wed,  4 Oct 2023 16:23:24 +0300
-Message-Id: <20231004132324.44198-3-rogerq@kernel.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231004132324.44198-1-rogerq@kernel.org>
-References: <20231004132324.44198-1-rogerq@kernel.org>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,200,1694703600"; 
+ d="asc'?scan'208";a="181911123"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 04 Oct 2023 22:26:50 +0900
+Received: from unknown (unknown [10.226.92.199])
+ by relmlir5.idc.renesas.com (Postfix) with SMTP id EEE6A400C9ED;
+ Wed,  4 Oct 2023 22:26:47 +0900 (JST)
+Date: Wed, 4 Oct 2023 14:26:46 +0100
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Hai Pham <hai.pham.ud@renesas.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Subject: Re: [PATCH 06/16] arm: rmobile: Add basic R9A07G044L SoC support
+Message-ID: <20231004132646.qj72ofp2fdt3cbrc@GBR-5CG2373LKG.adwin.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-7-paul.barker.ct@bp.renesas.com>
+ <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
+ <8d68fc58-6af4-8fa1-5683-f456a9ddf393@bp.renesas.com>
+ <b8a2e546-e14d-4c08-b841-87e06a53104e@mailbox.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature"; boundary="7dd7naek43jyotsi"
+Content-Disposition: inline
+In-Reply-To: <b8a2e546-e14d-4c08-b841-87e06a53104e@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,58 +62,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch to using bootstd. Note with this change, we will stop using
-distro_bootcmd and instead depend entirely on bootflow method of
-starting the system up.
 
-Signed-off-by: Roger Quadros <rogerq@kernel.org>
----
- board/ti/am64x/am64x.env        | 1 +
- configs/am64x_evm_a53_defconfig | 5 +++--
- include/configs/am64x_evm.h     | 2 --
- 3 files changed, 4 insertions(+), 4 deletions(-)
+--7dd7naek43jyotsi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
-index 68e42222b7..efd736b99b 100644
---- a/board/ti/am64x/am64x.env
-+++ b/board/ti/am64x/am64x.env
-@@ -15,6 +15,7 @@ console=ttyS2,115200n8
- args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000 ${mtdparts}
- run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
- 
-+boot_targets=mmc1 mmc0 usb pxe dhcp
- boot=mmc
- mmcdev=1
- bootpart=1:2
-diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-index 718ad176cb..43bfcf957a 100644
---- a/configs/am64x_evm_a53_defconfig
-+++ b/configs/am64x_evm_a53_defconfig
-@@ -31,8 +31,9 @@ CONFIG_SPL_SPI=y
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
- CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x180000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
-index 062102a610..d3d9eac8b6 100644
---- a/include/configs/am64x_evm.h
-+++ b/include/configs/am64x_evm.h
-@@ -10,8 +10,6 @@
- #define __CONFIG_AM642_EVM_H
- 
- #include <linux/sizes.h>
--#include <config_distro_bootcmd.h>
--#include <env/ti/mmc.h>
- #include <asm/arch/am64_hardware.h>
- #include <env/ti/k3_dfu.h>
- 
--- 
-2.34.1
+On Wed, Oct 04, 2023 at 02:15:24PM +0200, Marek Vasut wrote:
+> On 10/4/23 09:59, Paul Barker wrote:
+> > On 03/10/2023 13:46, Marek Vasut wrote:
+> > > On 9/20/23 14:42, Paul Barker wrote:
+> > > > Add a config option for the R9A07G044L SoC used in the RZ/G2L so th=
+at we
+> > > > can make use of this in the subsequent driver patches.
+> > > >=20
+> > > > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> > > > Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> > > > Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> > > > ---
+> > > >    arch/arm/mach-rmobile/Kconfig.rzg2l | 5 +++++
+> > > >    1 file changed, 5 insertions(+)
+> > > >=20
+> > > > diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-rm=
+obile/Kconfig.rzg2l
+> > > > index 37ff6cd34160..266f82c18085 100644
+> > > > --- a/arch/arm/mach-rmobile/Kconfig.rzg2l
+> > > > +++ b/arch/arm/mach-rmobile/Kconfig.rzg2l
+> > > > @@ -3,6 +3,11 @@
+> > > >    if RZG2L
+> > > > +config R9A07G044L
+> > > > +	bool "Renesas R9A07G044L SoC"
+> > > > +	help
+> > > > +	  Enable support for the R9A07G044L SoC used in the RZ/G2L.
+> > >=20
+> > > I was under the impression that RZ/G2L is a SoC family, so the
+> > > R9A07G044L is part of that SoC family ? Maybe just reword this paragr=
+aph
+> > > and the commit message a bit to make it less confusing.
+> >=20
+> > The confusion is hard to avoid (see my reply re patch 5 of this series),
+> > but I'll see if I can improve this a bit in v2.
+>=20
+> So uh ... RZ/G2L is both the name of R9A07G044L SoC (what's the R9... mod=
+el
+> number of e.g. RZ/G2LC?) and a family name ?
 
+Yes. Definitely easy to confuse!
+
+We have (with differences from the RZ/G2L model numbers highlighted):
+ * RZ/G2L  (R9A07G044L1 or R9A07G044L2)
+ * RZ/G2LC (R9A07G044*C*1 or R9A07G044*C*2)
+ * RZ/G2UL (R9A07G04*3U1*)
+ * RZ/V2L  (R9A07G0*5*4L1 or R9A07G0*5*4L2)
+ * RZ/Five (R9A07G04*3F0*)
+
+The last digit indicates the number of cores (1 or 2), except for on the
+RZ/Five which has one core but the model number ends in a zero.
+
+Thanks,
+Paul
+
+--7dd7naek43jyotsi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR1oCAAKCRDbaV4Vf/JG
+vW8cAP9aZBulNmhrhlmK2KnL9h7aaZes1T+EskmksyCj5wYiAwEAlQbDGzqr+LdS
+mmXCCMi1Fw2dMtv1Vc8w42ABybqHSAI=
+=Zzin
+-----END PGP SIGNATURE-----
+
+--7dd7naek43jyotsi--
