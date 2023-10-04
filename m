@@ -4,80 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 976EBE7B601
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 12:24:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB984E7B601
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 12:24:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10B5F8638B;
-	Wed,  4 Oct 2023 14:24:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C01EB874CB;
+	Wed,  4 Oct 2023 14:24:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ew9RLsgg";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="nDfJJkpZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32D52863E3; Wed,  4 Oct 2023 14:24:39 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E91AA874C4; Wed,  4 Oct 2023 14:24:51 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE13E8615A
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 14:24:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C36887445
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 14:24:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394COQM7037821;
- Wed, 4 Oct 2023 07:24:26 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696422266;
- bh=TbZeqNl3cxvzI/Nu5kKT5Bq/sLRF9UCUJXooQGDJ0n4=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=Ew9RLsggv0lASA5mdnYAWCs5YkaQEv6w09rbKpWqUQQmiAFfZLsOh84mXOiKSTE5V
- e0nmXz5YAPrXKlLZ8eBCi6hqUgtmU0oNEdh5HS+YRIvDTNiI1nYlArCpY1rVOxWQYu
- HK6cy9ZMnP2mkhisgyw97h27brZm8qSBejTmHH1g=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394COQst094699
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 4 Oct 2023 07:24:26 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
- Oct 2023 07:24:25 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 4 Oct 2023 07:24:25 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394COPsP027051;
- Wed, 4 Oct 2023 07:24:25 -0500
-Date: Wed, 4 Oct 2023 07:24:25 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
- Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>,
- Dasnavis Sabiya <sabiya.d@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>,
- Bryan Brattlof <bb@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
- <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
- <ralph.siemsen@linaro.org>, Yanhong Wang <yanhong.wang@starfivetech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v4 02/16] arm: mach-k3: Add basic support for J784S4 SoC
- definition
-Message-ID: <20231004122425.3lvghvwufnx5simt@manhunt>
-References: <20231001165545.494212-1-a-nandan@ti.com>
- <20231001165545.494212-3-a-nandan@ti.com>
- <20231002160156.pacy7j53bbtx766e@reboot>
- <20231004051327.jvatwiwpmdz4lykd@ula0497581>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S0v5P4X0Sz9scQ;
+ Wed,  4 Oct 2023 14:24:41 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1696422281;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=P1j8UdZBwvy3EL4XS8S9p5WzTVP6vF6+GnLC3mztY4c=;
+ b=nDfJJkpZNppfJCEOgy5e6GBOvvOpNO553Z9HhVnKa80EUiihTUdWBwLT2pk8OXCBXEXoHo
+ KdGnhQtQJE+4ZJDzLrR0gqmF839loQ0IJhwnhY8X3yNIVvp2yI/dhNEMyLdcTs3HmIKRuu
+ OxoP4Z94duMUMml793d5YUrQaM6O5d00C193l6PNQpm2369nrmjR/mH0KnhIO9M6aXBXzc
+ HReURwPzVi5iJyVbiNAAhX1fwPLoOSPF0Cs9K6wQtA5+kQ5Ob6rUsTHYNjMKyF1ZBZjOaL
+ o0SiAZSKGx/MLro81IV2D+wvibuSbenRwjhPH7RK1WQVPF4wrVl2Aql7JGdoyQ==
+Message-ID: <ebcddc10-e450-45e0-8f93-585ff440da4a@mailbox.org>
+Date: Wed, 4 Oct 2023 14:24:38 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231004051327.jvatwiwpmdz4lykd@ula0497581>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: Re: [PATCH 09/16] pinctrl: renesas: Add RZ/G2L PFC driver
+Content-Language: en-US
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-10-paul.barker.ct@bp.renesas.com>
+ <b0df977c-75ef-1579-506e-42e48ef2a06b@mailbox.org>
+ <8d2eb729-977f-9fd8-669c-25520218880d@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <8d2eb729-977f-9fd8-669c-25520218880d@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 2f63dcbe51e11cdb66e
+X-MBO-RS-META: dq8uaeqmc7worga8pgycysae7s7e8jqd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,30 +78,178 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10:43-20231004, Manorit Chawdhry wrote:
+On 10/4/23 10:40, Paul Barker wrote:
+> On 03/10/2023 14:20, Marek Vasut wrote:
+>> On 9/20/23 14:42, Paul Barker wrote:
+>>> This driver provides pinctrl and gpio control for the Renesas RZ/G2L
+>>> (R9A07G044) SoC.
+>>>
+>>> This patch is based on the corresponding Linux v6.5 driver.
+>>>
+>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+>>> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+>>> ---
+>>>    arch/arm/mach-rmobile/Kconfig       |   1 +
+>>>    drivers/pinctrl/renesas/Kconfig     |   9 +
+>>>    drivers/pinctrl/renesas/Makefile    |   1 +
+>>>    drivers/pinctrl/renesas/rzg2l-pfc.c | 906 ++++++++++++++++++++++++++++
+>>>    4 files changed, 917 insertions(+)
+>>>    create mode 100644 drivers/pinctrl/renesas/rzg2l-pfc.c
+>>>
+>>> diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
+>>> index 91f544c78337..973e84fcf7ba 100644
+>>> --- a/arch/arm/mach-rmobile/Kconfig
+>>> +++ b/arch/arm/mach-rmobile/Kconfig
+>>> @@ -76,6 +76,7 @@ config RZG2L
+>>>    	imply SYS_MALLOC_F
+>>>    	imply RENESAS_SDHI
+>>>    	imply CLK_RZG2L
+>>> +	imply PINCTRL_RZG2L
+>>
+>> Keep the list sorted
+>>
+>> [...]
+>>
+>> Drop the parenthesis around values please, fix globally and in other
+>> patches too.
+>>
+>>> +#define PWPR			(0x3014)
+>>> +#define SD_CH(n)		(0x3000 + (n) * 4)
+>>> +#define QSPI			(0x3008)
+>>> +
+>>> +#define PVDD_1800		1	/* I/O domain voltage <= 1.8V */
+>>> +#define PVDD_3300		0	/* I/O domain voltage >= 3.3V */
+>>> +
+>>> +#define PWPR_B0WI		BIT(7)	/* Bit Write Disable */
+>>> +#define PWPR_PFCWE		BIT(6)	/* PFC Register Write Enable */
+>>> +
+>>> +#define PM_MASK			0x03
+>>> +#define PVDD_MASK		0x01
+>>> +#define PFC_MASK		0x07
+>>> +#define IEN_MASK		0x01
+>>> +#define IOLH_MASK		0x03
+>>> +
+>>> +#define PM_HIGH_Z		0x0
+>>> +#define PM_INPUT		0x1
+>>> +#define PM_OUTPUT		0x2
+>>> +#define PM_OUTPUT_IEN		0x3
+>>> +
+>>> +struct rzg2l_pfc_driver_data {
+>>> +	uint num_dedicated_pins;
+>>> +	uint num_ports;
+>>> +	const u32 *gpio_configs;
+>>> +};
+>>> +
+>>> +struct rzg2l_pfc_data {
+>>> +	void __iomem *base;
+>>> +	uint num_dedicated_pins;
+>>> +	uint num_ports;
+>>> +	uint num_pins;
+>>> +	const u32 *gpio_configs;
+>>> +	bool pfc_enabled;
+>>> +};
+>>> +
+>>> +struct rzg2l_dedicated_configs {
+>>> +	const char *name;
+>>> +	u32 config;
+>>> +};
+>>> +
+>>> +/*
+>>> + * We need to ensure that the module clock is enabled and all resets are
+>>> + * de-asserted before using either the gpio or pinctrl functionality. Error
+>>> + * handling can be quite simple here as if the PFC cannot be enabled then we
+>>> + * will not be able to progress with the boot anyway.
+>>> + */
+>>> +static int rzg2l_pfc_enable(struct udevice *dev)
+>>> +{
+>>> +	struct rzg2l_pfc_data *data =
+>>> +		(struct rzg2l_pfc_data *)dev_get_driver_data(dev);
+>>> +	struct reset_ctl_bulk rsts;
+>>> +	struct clk clk;
+>>> +	int ret;
+>>> +
+>>> +	if (data->pfc_enabled)
+>>
+>> When does this get triggered ?
+> 
+> This is initialised to false in rzg2l_pfc_bind(), then this function
+> rzg2l_pfc_enable() sets it to true before a successful return. The
+> effect is that the PFC is enabled just once, regardless of whether the
+> pinctrl or gpio driver is probed first.
 
-> These are required to remove the firewall configurations that are done
-> by ROM, those are not the ones that are being handled by OIDs. The
+Why would be call to rzg2l_pfc_enable() a problem in the first place ?
+It just grabs and enables clock and ungates reset, the second time this 
+is called the impact on harware should be no-op , right ?
 
-I am not sure I understand this clearly. OIDs are setup to open up
-firewalls or close firewalls as the system requires and since it
-is authenticated, not compromiseable.- U-boot by itself (even if
-authenticated), is not a secure entity for it to dictate the firewall
-configuration (u-boot must be assumed to be compromised after
-authentication is complete). So, doing firewall configuration via APIs
-after boot, to me looks broken approach.
+>>> +		return 0;
+>>
+>> [...]
+>>
+>>> +static int rzg2l_gpio_set_value(struct udevice *dev, unsigned int offset,
+>>> +				int value)
+>>> +{
+>>> +	struct rzg2l_pfc_data *data =
+>>> +		(struct rzg2l_pfc_data *)dev_get_driver_data(dev);
+>>> +	u32 port = RZG2L_PINMUX_TO_PORT(offset);
+>>> +	u8 pin = RZG2L_PINMUX_TO_PIN(offset);
+>>
+>> A lot of this can also be const
+> 
+> This is aligned with the Linux driver to make it easier to port any
+> future fixes across.
 
-> current series that is being worked on is to add additional firewalling
-> support with OIDs that TIFS will be handling.
-> The above patch is
-> essentially added to have the same development experience on GP devices
-> similar to HS after the secure boot is done so that people don't end up
+Maybe send patches to Geert and see what happens ?
 
-huh? the code seems to blindly call the remove_fwl_configs(cbass_hc_cfg0_fwls, ARRAY_SIZE(cbass_hc_cfg0_fwls));
-where is the distinction of HS vs GP here? This implementation looks
-completely broken to me at least.. please correct what I missed here.
+[...]
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+>>> +		return -EINVAL;
+>>> +	}
+>>> +
+>>> +	uc_priv->gpio_count = args.args[2];
+>>> +	return rzg2l_pfc_enable(dev);
+>>> +}
+>>> +
+>>> +U_BOOT_DRIVER(rzg2l_pfc_gpio) = {
+>>> +	.name		= "rzg2l-pfc-gpio",
+>>> +	.id		= UCLASS_GPIO,
+>>> +	.ops		= &rzg2l_gpio_ops,
+>>> +	.probe		= rzg2l_gpio_probe,
+>>> +};
+>>
+>> Can you please split the GPIO and PFC drivers into separate files ?
+> 
+> I assume you mean gpio and pinctrl here - the PFC handles both. I can
+> move the gpio driver out to drivers/gpio.
+
+Thanks. R-Car already does it that way.
+
+[...]
+
+>>> +		if (cfg & PIN_CFG_IO_VMC_SD0) {
+>>> +			dev_dbg(dev, "port off %u:%u set SD_CH 0 PVDD=%u\n",
+>>> +				port_offset, pin, argument);
+>>> +			pwr_reg = SD_CH(0);
+>>> +		} else if (cfg & PIN_CFG_IO_VMC_SD1) {
+>>> +			dev_dbg(dev, "port off %u:%u set SD_CH 1 PVDD=%u\n",
+>>> +				port_offset, pin, argument);
+>>> +			pwr_reg = SD_CH(1);
+>>> +		} else if (cfg & PIN_CFG_IO_VMC_QSPI) {
+>>> +			dev_dbg(dev, "port off %u:%u set QSPI PVDD=%u\n",
+>>> +				port_offset, pin, argument);
+>>> +			pwr_reg = QSPI;
+>>> +		} else {
+>>> +			dev_dbg(dev, "pin power source is not selectable\n");
+>>> +			return -EINVAL;
+>>> +		}
+>>> +
+>>> +		addr = data->base + pwr_reg;
+>>> +		writel((argument == 1800) ? PVDD_1800 : PVDD_3300, addr);
+>>
+>> Does RZG2L not do 2V5 IO ? If not, please ignore the comment .
+> 
+> 2V5 IO is supported on the Ethernet interfaces. Support for configuring
+> those interfaces will be added along with the Ethernet driver in future
+> patches.
+
+Add a TODO comment please.
