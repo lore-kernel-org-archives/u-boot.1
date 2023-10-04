@@ -4,78 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C652E7C4F1
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 20:14:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B894E936E6
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 21:23:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3080C874F4;
-	Wed,  4 Oct 2023 22:14:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1E9608695F;
+	Wed,  4 Oct 2023 23:23:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=goldsimon@gmx.de header.b="Emg5BHla";
+	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="d5PaBwnz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF157875AE; Wed,  4 Oct 2023 22:14:53 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id A46078667A; Wed,  4 Oct 2023 23:23:10 +0200 (CEST)
+Received: from de-smtp-delivery-113.mimecast.com
+ (de-smtp-delivery-113.mimecast.com [194.104.111.113])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 97DDB874EC
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 22:14:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C282A8695F
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 23:23:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=toradex.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=goldsimon@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1696450483; x=1697055283; i=goldsimon@gmx.de;
- bh=q0wh5ChI/wWFTRasFFKoKzNq3pWSGgfMdVBsigXcs24=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
- b=Emg5BHlap0kGlehSmrICA+a/wCEfAjmxbDSKQ6a0C84BTGB9T+6Ld3ciL7oEMIvFj7+i/0TAnhB
- btWIwpso/4VMDw90HvAdgS93jYvqUtupiU15dvP2kEEnUhkt9MymIpqqRxIy1PitoXt7Bo0hjhq/D
- /OS/eHoakkqP7q4M+XRZHhklvww27cW/WiFXNvI99O09mi8pK+yUr0HvFETyC5yCy6Un6qI/0d48d
- fro36B35hXOw3gKlMzi8jEmFkYgK8PvD+5f0xUIBDZ1YKVNp7MSyQnSSTlFGT+05jzziKa8Sd6IeD
- aagUWerzQSXLHWG9PUY0oIihwdUEMIaUZspw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([176.199.209.230]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MiJVG-1rIFka3S10-00fWDK; Wed, 04
- Oct 2023 22:14:42 +0200
-Date: Wed, 04 Oct 2023 22:14:40 +0200
-From: Simon Goldschmidt <goldsimon@gmx.de>
-To: Maxim Uvarov <maxim.uvarov@linaro.org>, Simon Glass <sjg@google.com>
-CC: Sean Edmond <seanedmond@linux.microsoft.com>, u-boot@lists.denx.de,
- pbrobinson@gmail.com, ilias.apalodimas@linaro.org, joe.hershberger@ni.com,
- rfried.dev@gmail.com, trini@konsulko.com
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCHv10_14/15=5D_net/lwip=3A_repl?=
- =?US-ASCII?Q?ace_original_net_commands_with_lwip?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <CAD8XO3Yj0vCnTx81UwvpWsQiSyyJkMBQG4qn8qSWq2cnS1Ugfw@mail.gmail.com>
-References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
- <20230926094124.7024-15-maxim.uvarov@linaro.org>
- <77c30b7d-66ae-a7ff-0e7d-07be3098acbc@linux.microsoft.com>
- <CAPnjgZ3a5MVTKEzDwnYGiRW+cvz5H-v7ictRUTeUjWJUKV1D9g@mail.gmail.com>
- <CAD8XO3Yj0vCnTx81UwvpWsQiSyyJkMBQG4qn8qSWq2cnS1Ugfw@mail.gmail.com>
-Message-ID: <F6207291-222C-4B9A-B093-9ACD593B0611@gmx.de>
+ spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
+ s=toradex-com; t=1696454586;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=wbGB26XJvd6XDKnEoHk2gEdHd4GoGqbRXFL2HxLF2yQ=;
+ b=d5PaBwnza+M0SrJ2UE0ZJRDEEhXwypFqrWU0+ko+34IHnnivn+mbUQlRPGVxu73tyvP8K9
+ SA5kg+wCBuv8YrxK8huAKETVip132qQyQcUBByyYGLZ59okXzgF11UFaQYsyGtibupST2e
+ Q7WRZcKMjM7/FFdFBvMRdbDM+ffJyJw=
+Received: from CHE01-GV0-obe.outbound.protection.outlook.com
+ (mail-gv0che01lp2041.outbound.protection.outlook.com [104.47.22.41]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ de-mta-60-WnPJ4KkKO5-LCACN5bCUxw-3; Wed, 04 Oct 2023 23:23:05 +0200
+X-MC-Unique: WnPJ4KkKO5-LCACN5bCUxw-3
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
+ ZR0P278MB0154.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:32::13) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6838.33; Wed, 4 Oct 2023 21:23:02 +0000
+Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::ccb1:8f1e:69ef:d622]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+ ([fe80::ccb1:8f1e:69ef:d622%5]) with mapi id 15.20.6838.033; Wed, 4 Oct 2023
+ 21:23:02 +0000
+From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+To: "francesco@dolcini.it" <francesco@dolcini.it>
+CC: =?utf-8?B?Sm/Do28gUGF1bG8gU2lsdmEgR29uw6dhbHZlcw==?=
+ <joao.goncalves@toradex.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "sbabic@denx.de" <sbabic@denx.de>, Francesco Dolcini
+ <francesco.dolcini@toradex.com>, "festevam@gmail.com" <festevam@gmail.com>
+Subject: Re: [PATCH] toradex: verdin-imx8mm/imx8mp: Remove bootcmd_mfg
+Thread-Topic: [PATCH] toradex: verdin-imx8mm/imx8mp: Remove bootcmd_mfg
+Thread-Index: AQHZ9vb3tJ8M1BRUsUirlzxQErR1bLA6I/qA
+Date: Wed, 4 Oct 2023 21:23:02 +0000
+Message-ID: <df849acd8d1b602c5721cad8241fda08fb155ce6.camel@toradex.com>
+References: <20231004191358.24488-1-francesco@dolcini.it>
+In-Reply-To: <20231004191358.24488-1-francesco@dolcini.it>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR0P278MB0154:EE_
+x-ms-office365-filtering-correlation-id: 93722f33-e035-44b2-7df3-08dbc520178b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0
+x-microsoft-antispam-message-info: WwG7t9nngBOwgotDTxjPVBzYG9HrT1EpHG7AB4WB37vwY/5JRUdvSEPFZrdKsgCj2YOVNDDi7NOExs4bkZWpzcs5oYE3iFX1sDholEbsNyw8GCCjjPzqEuAX4HmxWxqNv4Q+iPBtsj2jUFcMjKPjO0NZWEq+GnOytUU5guZPCguFuKJC2O+diFuGyKLzOcErIine7VCIUnqzexyD54lv60+SYrFQ/wTkXw1J4EhrD43LnxwUInG2bviBMwFOo36HfC2Uw0yghGEgEZvr4lgPNfMqrK9098Jxe7VaC/c9rTbMC98JRqC6g2ZshlCkAZX8BrT+oIKl06YP//g6dWgc8pTzDzbGzzfdgNsRWDQFpIQFkI9hXq/od1u7dwlL0RWw8gO3EugK9JrEKn/GUoojAZYXfEEd1o+enXUdGjOQbf2Q+M8SDy7Q7FreigFInxHTXhjLToPKDXsu1uQ7W/l2NY8aBRYEWHGKnaa7agNaUZgwweVIuhIchwauW7uRBjYpIUUl3fQQKH7sObAk7Of4ncd31PQvjVPuakgyKzbUDlbyCgDzkseAHnfNZIbsJ6XxLPhB7vndU/0Wd/N42n1isbX3JWKbKhUS7hgrjaCTKqZM2V9LtMHM20WUZ6rcb3QjDWFCpv/VTdI+A/KfSiOKBQ==
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(136003)(376002)(366004)(396003)(346002)(39840400004)(230922051799003)(186009)(64100799003)(451199024)(1800799009)(38100700002)(83380400001)(2906002)(86362001)(38070700005)(122000001)(36756003)(316002)(66556008)(6512007)(54906003)(66946007)(66476007)(64756008)(76116006)(6916009)(6506007)(41300700001)(66446008)(6486002)(2616005)(478600001)(71200400001)(8676002)(4326008)(44832011)(5660300002)(8936002)(139555002);
+ DIR:OUT; SFP:1102
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WHVPRUJ3T3czRGw3eEhnb292dzJmTUthdS9NMXBRYzZmall5UVQycGN0ZHlr?=
+ =?utf-8?B?ZFE4QVVYVGtPWElSR1RvNktsTHF5cmk4Q1BTNjh1c3JVWVlOaVdLS2dyNkFH?=
+ =?utf-8?B?VzZiTVI4Tk1iTUp1d3VQQXNIcTlRSTR4aU5nMmEydjV5SGoyUGYwaHlZeVRM?=
+ =?utf-8?B?YVVrbUU2VXZDMHR6RUN4Z1RLdXVpejMzUGJPQThYTE1yUEYySDVZQVkyWTBU?=
+ =?utf-8?B?bERocHF5dXFWSndtSTBCNDRRWHNxd1g1SEpKQTBCSitOMlQ2TDEzeDhOempa?=
+ =?utf-8?B?YTloVDVTZU1WOENZV00vU2R5bW1tM2wyMDdhNTF0TDFMNVVjV2RlTzZ3QXIw?=
+ =?utf-8?B?aXBhcnpLZWpPb1J2anE1MkZvNlNjeWcxSm9tTVRybk5IcGlaaTRMbjJXRXJZ?=
+ =?utf-8?B?UWJHT043QWRjcXpuWGxwQ2lkVFordFN2aTF5bE5KZnloaDA1V3pYaTAzOHU0?=
+ =?utf-8?B?ZE1PYWtJdGxQUUd1dW1jN3drUUhZblY1T1EyVXVQWU03Qm5RUEMwQmp6K2xh?=
+ =?utf-8?B?M1kwMjBNR0FjZCtLbUhCZ0k0RUhjY2pHbnFPSUhkSzZQL0M0azJQdjM5RDRF?=
+ =?utf-8?B?cWZjbnFSU0E3OEJZa2pzVGM2ZVRlUFU1bEpPeWtzeDBYLytPN0M3cnVGOGgz?=
+ =?utf-8?B?UHpGOWk3K1NRZFR0QUVSS29IYmlKZjZhMy81TWpSR0pDcjhjVHpTN3pIcXdr?=
+ =?utf-8?B?eGs4NVBSam1vNUo5NFE0QWpoZ0NqczgxeDJhZGgzTzlxbWRxdFFJcWZaaFRS?=
+ =?utf-8?B?UEEzeHA3NFA3VnBHY1pVeUVnTmorNmlMSzlTWHUyMGVmUlNaMGU1K3VCU0NB?=
+ =?utf-8?B?R3BSaG96S0Vtb2pmaWtPYlkxWEdyNjIvM2hTWURZc1p5Sk5ETWJIZWZ1djE4?=
+ =?utf-8?B?ekp1THFERVFzaHdyUGE0UmViOEZqRkhPcmMvanF2aE5Nb3V1aHB4RzM2K1Ax?=
+ =?utf-8?B?VE1YWEtSQ1prTG9mZzRaYnJwMnp6MWh2RSt6VUo3R3M5ZStjNHpFTnB2Wk5S?=
+ =?utf-8?B?Y0gzdEN4cFkzTFJQdHVzSFVtQ1Q5V1NVU003NCs2R2cyVjE1UXE5dHpEdVFS?=
+ =?utf-8?B?TGlaUFpScmViNkRqWis0YkR0bnBxdG9nUzljMUg5N0VSQld5S0lOVHZRaXJW?=
+ =?utf-8?B?bEpBcTRUUnkyNE9CQm1pR3dZNDBRRTlxV2JHYVhTSFU0bzVSbmJ1bmlkM3hl?=
+ =?utf-8?B?WEpwNENKNmFnM0ZSZTk3ODBvdmhVQ1ZCdEpnREFpS0FTaEs4T0JYbW9uZ0xH?=
+ =?utf-8?B?YXdML1VjRnBSMzZFWlZBTjJMU1ZKbldrc3RKTnNGelhkRmFOODVwTTEvQksz?=
+ =?utf-8?B?UnBGQmMzelh1UDBwWTVDS09pdGQ5d1JoQ0I3MkFUQXdkNVZzSitnVm9ROEdn?=
+ =?utf-8?B?SVV1dzdsTUc3bysxQ0tQam9FSWtycldUcWxDd2VvZ1RWZ0N6NElTS0tUZHRY?=
+ =?utf-8?B?Y28zOURiMzkySkwzOFdMZUh1ZEdEK1pPTTgrY1BFbm1YVW8zRXBKeFA5RUww?=
+ =?utf-8?B?RzZEWjBYdDZrbVVzOFFZVlpLTWpIaDUvUHl2L2t2cG5pSVZhcFovbmlqZmZq?=
+ =?utf-8?B?ZzVlL3ljQXhhM3ZrMG9YYW44cFVjcE4wTldrSDdzdlZXNkMvcDZlRzByUFpu?=
+ =?utf-8?B?bzQvSE9kMHVuTStpUmU4MENKWGxlQXlJYWIyL3VEZlgyUWdQUEpCV21GQ1Ba?=
+ =?utf-8?B?V0J2Y1h0TVJRRklEQ1p5cG1yK2FaUmFKcTd3QkhoUDJwYjFFa1ArNmpnUHN0?=
+ =?utf-8?B?U2hBTkNOdzBteTBNMHRuck5ycGkzZURwYi9DQmxsc1J1em5yeHVMNzZlb295?=
+ =?utf-8?B?OE1KMUdoTkg0NUZzeEdVcXcvcUxJMVhka1VnbmJuT2w5Q3UrUVpaWTBMOTJG?=
+ =?utf-8?B?eXozUlRvNTBLdW5jajg4Z0hjOHZZOFFHL2ZCYzg1cGxPK0gvanBMaUFWT1h6?=
+ =?utf-8?B?a0xWOVFQb3pwRTJ1aUExdkFRRGdDTjYyQ2lYZ2M4a3l3WGlIS1loMDlmcVY5?=
+ =?utf-8?B?L1p5T2M3QUxPL1pEZzMwelhWbm45NmlTVFJKcUFVOWZQVDZnMlhEMGFOYm4x?=
+ =?utf-8?B?djZ3dDQyUXFaUFlJdStCMXZHZXRaT2RDT3M4N2pNanhjWXU4N2JJeTFHdXda?=
+ =?utf-8?B?WHoyc0doTXgxUVNtYW0waHcwL1o4MnNKQnNJaUZETmluOTZmUE5JMGxGMWhI?=
+ =?utf-8?Q?xxMp5a2emK6u/Mml68aKY3A=3D?=
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:37ZnSsu/AojZXqE1HEw9KTeag1Ju1hyjEz/ng9X3WycE9AzLzBN
- CULBVNcvZolyxLP1yKQyHjfFoCd310ld7o9KEGYu+9yhNS04apLSiSqmiK0yzKVzy0vKf+P
- 9/prKFUNOAiN3TtqA4ThPF4gyxqvuRHnur/lNtFEpv6nBK1jGxiiCtgJp6U5QQmnaHE+Wmd
- FZBnsXG883T1dTMSVVYqQ==
-UI-OutboundReport: notjunk:1;M01:P0:RbwHHx/qNBk=;phoRYJzHwYfc31rIFRtJRXBLgU1
- dC48lzPRsvnlGfcy2uv7FRipxzOpHtluatO8wZYWDJC4JU98AKMyUreAGAJa9SlxqFeLSs5Ss
- +7yW1BEk4kexBsN/TOCpeYhxqEt+Dp3BRVAOg++ibVxjT+lw8RFj+ndNlwekiWcEuGBnCDu8z
- CPlbWA8sAhXZ3UJAxxt+nvcKiclbIOHWOhqJXzyN6whRoQi1hj1bD9EjEO8aRfPf94G7+esnF
- OWko/tNPHJpAzd4pvyZO8rdSyJLSclsuNQc967MsOjyDzabkYVDjC1kLMdtVcI4XeiasP8TdO
- zjARMr3TSRyULww6T9hg1RddR6H/hYts44uSff8KesExrvYKtueS2injhpMjsJAbnGZ1LIaKp
- 0A48HQ1+saI7//fzM25XWfA6+O2vq4ZU0QExn9oPR2k/ntUMldxqxKgCZAbBiRPbzeSEoa/QF
- wEloUmmkgk2374b+UgpTNMNBrBqGFPTDRQmSJ5sfsXsKg71rYDdZQyEs6+p3isyB8I6NyKc+k
- 34Bt01CvnD4Lmbdf5tSHkUYcW+nfI7Tpn7PPGRWw9GLd702xsBh98MleIW6ZWZhU60yEkjQh5
- Y2hcuEmoAt7bjZ0DrST5XuKYrH0vlDqQSWYu1LaFcZRN8lDyahuhUD3Li08nIvN0sqqXQYwKI
- TYe3Q9UUIvYCjpvpbsoAlCThEFtGN25qtd+7QoFjTBXovybRhxOBr050HFYqoGgMKyhL5bHNF
- EneHNFKvZe8SD6A7rhJkRr4oW80CakA8ISQt9NjInMss56NEeXLqLwHqMPxS8IOjLaYNgm6Xa
- joLvDkSKZ+udAGDl7Jmkw6NKaZwP+5pihIe6stzma8v4j/d3UpptH9DHIT4wEhEwQfjwsWS1l
- u6g7afykBS4rpJtKyePZ6la+qZ+tydULK9NYuiENDneaL3i2QZWOZV9xpVlVULVZ125TKGM0q
- bLJYK7rUKH/DyeALNeU0vK74WfE=
+X-OriginatorOrg: toradex.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 93722f33-e035-44b2-7df3-08dbc520178b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Oct 2023 21:23:02.7316 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: WkKdRL9dBu8UvTxbNbxELN3RTsJjKfXOgaYFaTzpA26EKQjrpSRjrFzGOwHB/lMAQGJEpgommO2fBtNM8cQf43fu3LCxoqr/V0hZWN9RKWo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0154
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: toradex.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-ID: <53B1B3AB29C51246A601875D7E7DE3AF@CHEP278.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,220 +149,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+T24gV2VkLCAyMDIzLTEwLTA0IGF0IDE2OjEzIC0wMzAwLCBGcmFuY2VzY28gRG9sY2luaSB3cm90
+ZToNCj4gRnJvbTogSm9hbyBQYXVsbyBHb25jYWx2ZXMgPGpvYW8uZ29uY2FsdmVzQHRvcmFkZXgu
+Y29tPg0KPiANCj4gVGhlIGJvb3RjbWRfbWZnIGVudiB2YXJpYWJsZSBpcyBsZWdhY3kgZnJvbSBJ
+TVggZG93bnN0cmVhbSB1LWJvb3QgYnJhbmNoDQo+IGFuZCBpcyBub3QgbmVlZGVkIG9uIG1haW5s
+aW5lLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogSm9hbyBQYXVsbyBHb25jYWx2ZXMgPGpvYW8uZ29u
+Y2FsdmVzQHRvcmFkZXguY29tPg0KPiBTaWduZWQtb2ZmLWJ5OiBGcmFuY2VzY28gRG9sY2luaSA8
+ZnJhbmNlc2NvLmRvbGNpbmlAdG9yYWRleC5jb20+DQoNCkFja2VkLWJ5OiBNYXJjZWwgWmlzd2ls
+ZXIgPG1hcmNlbC56aXN3aWxlckB0b3JhZGV4LmNvbT4NCg0KPiAtLS0NCj4gwqBpbmNsdWRlL2Nv
+bmZpZ3MvdmVyZGluLWlteDhtbS5oIHwgMSAtDQo+IMKgaW5jbHVkZS9jb25maWdzL3ZlcmRpbi1p
+bXg4bXAuaCB8IDEgLQ0KPiDCoDIgZmlsZXMgY2hhbmdlZCwgMiBkZWxldGlvbnMoLSkNCj4gDQo+
+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2NvbmZpZ3MvdmVyZGluLWlteDhtbS5oIGIvaW5jbHVkZS9j
+b25maWdzL3ZlcmRpbi1pbXg4bW0uaA0KPiBpbmRleCA4Y2IxZjFhZmYzNTMuLjgwNzJkNWQ1MDNm
+MiAxMDA2NDQNCj4gLS0tIGEvaW5jbHVkZS9jb25maWdzL3ZlcmRpbi1pbXg4bW0uaA0KPiArKysg
+Yi9pbmNsdWRlL2NvbmZpZ3MvdmVyZGluLWlteDhtbS5oDQo+IEBAIC0zNyw3ICszNyw2IEBADQo+
+IMKgI2RlZmluZSBDRkdfRVhUUkFfRU5WX1NFVFRJTkdTIFwNCj4gwqAJQk9PVEVOViBcDQo+IMKg
+CU1FTV9MQVlPVVRfRU5WX1NFVFRJTkdTIFwNCj4gLQkiYm9vdGNtZF9tZmc9ZmFzdGJvb3QgMFww
+IiBcDQo+IMKgCSJib290X2ZpbGU9SW1hZ2VcMCIgXA0KPiDCoAkiYm9vdF9zY3JpcHRfZGhjcD1i
+b290LnNjclwwIiBcDQo+IMKgCSJjb25zb2xlPXR0eW14YzBcMCIgXA0KPiBkaWZmIC0tZ2l0IGEv
+aW5jbHVkZS9jb25maWdzL3ZlcmRpbi1pbXg4bXAuaCBiL2luY2x1ZGUvY29uZmlncy92ZXJkaW4t
+aW14OG1wLmgNCj4gaW5kZXggOTQyMDgxYWI4NGQ3Li41YTM0ZjZhOWIyMDUgMTAwNjQ0DQo+IC0t
+LSBhL2luY2x1ZGUvY29uZmlncy92ZXJkaW4taW14OG1wLmgNCj4gKysrIGIvaW5jbHVkZS9jb25m
+aWdzL3ZlcmRpbi1pbXg4bXAuaA0KPiBAQCAtNDYsNyArNDYsNiBAQA0KPiDCoCNkZWZpbmUgQ0ZH
+X0VYVFJBX0VOVl9TRVRUSU5HUyBcDQo+IMKgCUJPT1RFTlYgXA0KPiDCoAlNRU1fTEFZT1VUX0VO
+Vl9TRVRUSU5HUyBcDQo+IC0JImJvb3RjbWRfbWZnPWZhc3Rib290IDBcMCIgXA0KPiDCoAkiYm9v
+dF9maWxlPUltYWdlXDAiIFwNCj4gwqAJImJvb3Rfc2NyaXB0cz0iIEJPT1RfU0NSSVBUICJcMCIg
+XA0KPiDCoAkiYm9vdF9zY3JpcHRfZGhjcD0iIEJPT1RfU0NSSVBUICJcMCIgXA0K
 
-
-Am 4=2E Oktober 2023 10:29:54 MESZ schrieb Maxim Uvarov <maxim=2Euvarov@li=
-naro=2Eorg>:
->On Wed, 4 Oct 2023 at 08:12, Simon Glass <sjg@google=2Ecom> wrote:
->
->> Hi Sean,
->>
->> On Tue, 3 Oct 2023 at 11:58, Sean Edmond <seanedmond@linux=2Emicrosoft=
-=2Ecom>
->> wrote:
->> >
->> >
->> > On 2023-09-26 2:41 a=2Em=2E, Maxim Uvarov wrote:
->> > > Replace original commands: ping, tftp, dhcp and wget=2E
->> > >
->> > > Signed-off-by: Maxim Uvarov<maxim=2Euvarov@linaro=2Eorg>
->> > > ---
->> > >   boot/bootmeth_efi=2Ec | 18 +++++++---
->> > >   boot/bootmeth_pxe=2Ec | 21 ++++++-----
->> > >   cmd/net=2Ec           | 86
->> +++++----------------------------------------
->> > >   cmd/pxe=2Ec           | 19 +++++-----
->> > >   include/net=2Eh       |  8 +++--
->> > >   include/net/ulwip=2Eh | 64 +++++++++++++++++++++++++++++++++
->> > >   6 files changed, 113 insertions(+), 103 deletions(-)
->> > >   create mode 100644 include/net/ulwip=2Eh
->> > >
->> > > diff --git a/boot/bootmeth_efi=2Ec b/boot/bootmeth_efi=2Ec
->> > > index ae936c8daa=2E=2E52399d627c 100644
->> > > --- a/boot/bootmeth_efi=2Ec
->> > > +++ b/boot/bootmeth_efi=2Ec
->> > > @@ -20,6 +20,8 @@
->> > >   #include <mapmem=2Eh>
->> > >   #include <mmc=2Eh>
->> > >   #include <net=2Eh>
->> > > +#include <net/lwip=2Eh>
->> > > +#include <net/ulwip=2Eh>
->> > >   #include <pxe_utils=2Eh>
->> > >   #include <linux/sizes=2Eh>
->> > >
->> > > @@ -319,9 +321,7 @@ static int distro_efi_try_bootflow_files(struct
->> udevice *dev,
->> > >
->> > >   static int distro_efi_read_bootflow_net(struct bootflow *bflow)
->> > >   {
->> > > -     char file_addr[17], fname[256];
->> > > -     char *tftp_argv[] =3D {"tftp", file_addr, fname, NULL};
->> > > -     struct cmd_tbl cmdtp =3D {};      /* dummy */
->> > > +     char fname[256];
->> > >       const char *addr_str, *fdt_addr_str;
->> > >       int ret, arch, size;
->> > >       ulong addr, fdt_addr;
->> > > @@ -368,7 +368,6 @@ static int distro_efi_read_bootflow_net(struct
->> bootflow *bflow)
->> > >       if (!fdt_addr_str)
->> > >               return log_msg_ret("fdt", -EINVAL);
->> > >       fdt_addr =3D hextoul(fdt_addr_str, NULL);
->> > > -     sprintf(file_addr, "%lx", fdt_addr);
->> > >
->> > >       /* We only allow the first prefix with PXE */
->> > >       ret =3D distro_efi_get_fdt_name(fname, sizeof(fname), 0);
->> > > @@ -379,7 +378,16 @@ static int distro_efi_read_bootflow_net(struct
->> bootflow *bflow)
->> > >       if (!bflow->fdt_fname)
->> > >               return log_msg_ret("fil", -ENOMEM);
->> > >
->> > > -     if (!do_tftpb(&cmdtp, 0, 3, tftp_argv)) {
->> > > +     ret =3D ulwip_init();
->> > > +     if (ret)
->> > > +             return log_msg_ret("ulwip_init", ret);
->> > > +
->> > > +     ret =3D ulwip_tftp(fdt_addr, fname);
->> > > +     if (ret)
->> > > +             return log_msg_ret("ulwip_tftp", ret);
->> > > +
->> > > +     ret =3D ulwip_loop();
->> > > +     if (!ret) {
->> > >               bflow->fdt_size =3D env_get_hex("filesize", 0);
->> > >               bflow->fdt_addr =3D fdt_addr;
->> > >       } else {
->> > > diff --git a/boot/bootmeth_pxe=2Ec b/boot/bootmeth_pxe=2Ec
->> > > index 8d489a11aa=2E=2Efc6aabaa18 100644
->> > > --- a/boot/bootmeth_pxe=2Ec
->> > > +++ b/boot/bootmeth_pxe=2Ec
->> > > @@ -21,6 +21,8 @@
->> > >   #include <mapmem=2Eh>
->> > >   #include <mmc=2Eh>
->> > >   #include <net=2Eh>
->> > > +#include <net/ulwip=2Eh>
->> > > +#include <net/lwip=2Eh>
->> > >   #include <pxe_utils=2Eh>
->> > >
->> > >   static int extlinux_pxe_getfile(struct pxe_context *ctx, const ch=
-ar
->> *file_path,
->> > > @@ -116,18 +118,21 @@ static int extlinux_pxe_read_file(struct udev=
-ice
->> *dev, struct bootflow *bflow,
->> > >                                 const char *file_path, ulong addr,
->> > >                                 ulong *sizep)
->> > >   {
->> > > -     char *tftp_argv[] =3D {"tftp", NULL, NULL, NULL};
->> > > -     struct pxe_context *ctx =3D dev_get_priv(dev);
->> > > -     char file_addr[17];
->> > >       ulong size;
->> > >       int ret;
->> > >
->> > > -     sprintf(file_addr, "%lx", addr);
->> > > -     tftp_argv[1] =3D file_addr;
->> > > -     tftp_argv[2] =3D (void *)file_path;
->> > > +     ret =3D ulwip_init();
->> > > +     if (ret)
->> > > +             return log_msg_ret("ulwip_init", ret);
->> > > +
->> > > +     ret =3D ulwip_tftp(addr, file_path);
->> > > +     if (ret)
->> > > +             return log_msg_ret("ulwip_tftp", ret);
->> > > +
->> > > +     ret =3D ulwip_loop();
->> > > +     if (ret)
->> > > +             return log_msg_ret("ulwip_loop", ret);
->> > >
->> > > -     if (do_tftpb(ctx->cmdtp, 0, 3, tftp_argv))
->> > > -             return -ENOENT;
->> > >       ret =3D pxe_get_file_size(&size);
->> > >       if (ret)
->> > >               return log_msg_ret("tftp", ret);
->> > > diff --git a/cmd/net=2Ec b/cmd/net=2Ec
->> > > index d407d8320a=2E=2Edc5a114309 100644
->> > > --- a/cmd/net=2Ec
->> > > +++ b/cmd/net=2Ec
->> > > @@ -22,6 +22,7 @@
->> > >   #include <net/udp=2Eh>
->> > >   #include <net/sntp=2Eh>
->> > >   #include <net/ncsi=2Eh>
->> > > +#include <net/lwip=2Eh>
->> > >
->> > >   static int netboot_common(enum proto_t, struct cmd_tbl *, int, ch=
-ar
->> * const []);
->> > >
->> > > @@ -40,19 +41,9 @@ U_BOOT_CMD(
->> > >   #endif
->> > >
->> > >   #ifdef CONFIG_CMD_TFTPBOOT
->> > > -int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *cons=
-t
->> argv[])
->> > > -{
->> > > -     int ret;
->> > > -
->> > > -     bootstage_mark_name(BOOTSTAGE_KERNELREAD_START, "tftp_start")=
-;
->> > > -     ret =3D netboot_common(TFTPGET, cmdtp, argc, argv);
->> > > -     bootstage_mark_name(BOOTSTAGE_KERNELREAD_STOP, "tftp_done");
->> > > -     return ret;
->> > > -}
->> > > -
->> > >   #if IS_ENABLED(CONFIG_IPV6)
->> > >   U_BOOT_CMD(
->> > > -     tftpboot,       4,      1,      do_tftpb,
->> > > +     tftpboot,       4,      1, do_lwip_tftp,
->> >
->> > It looks like LWIP doesn't support TFTP with IPv6 addressing=2E  Perh=
-aps
->> > we need to fall back onto the existing TFTP implementation until LWIP
->> > supports it?
->> >
->> > Note, that currently, IPv6 TFTP is enabled using the "-ipv6" argument=
-=2E
->> > The intention is that netboot_common() sees the argument and sets the
->> > "use_ip6" variable=2E  It looks like the new implementation in
->> > do_lwip_tftp() doesn't re-use the argument parsing in netboot_common(=
-)
->> > and that it doesn't handle the addition of the "-ipv6" flag=2E
->> >
->> > I support the addition of LWIP, but I'm concerned about how abrupt
->> > changes like this one will be for existing users=2E  The underlying s=
-tack
->> > will change, with no easy way for the user to revert to the previous
->> > stack=2E Has there been any discussion about preserving the existing
->> > functionality, with an option to enable/disable LWIP stack?This would
->> > give the community time to transition/validate LWIP before deprecatin=
-g
->> > the old u-boot networking stack=2E
->>
->> IPv6 is news to me=2E=2E=2Eand surprising=2E
->>
->> Regards,
->> Simon
->>
->
->For this time I enabled only ipv4 in lwip U-boot implementation and plann=
-ed
->to keep the original ping6 dhcp6 tftp6 on first submission=2E After the f=
-irst
->ipv4 lwip patches can be merged I planned to work on ipv6 support=2E  I t=
-hink
->it will require more time for the test environment to be set up, then
->actually enabling ipv6 in the configuration header=2E lwIP can work in du=
-al
->stack mode=2E But I'm not sure that example applications support ipv6 at =
-this
->time=2E
-
-All lwIP example apps building on UDP or TCP should support IPv6 just fine=
-=2E Ping is of course a special case in that it uses a different protocol f=
-or IPv6 and IPv4 and no one has bothered yet to port it to IPv6=2E That's t=
-he reason it remained in contrib/apps instead of src/apps=2E
-
-Aside from DNS, we do not have built in a fallback mechanism from IPv6 to =
-IPv4 or the other way around, so that would have to be coded by the applica=
-tion (U-Boot command in this case)=2E
-
-Regards,
-Simon
