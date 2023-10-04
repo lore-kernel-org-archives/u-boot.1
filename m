@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A22F9E8FDC3
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 02:13:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC146E8FDCA
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 05:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F266D87494;
-	Wed,  4 Oct 2023 04:12:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 73FB487056;
+	Wed,  4 Oct 2023 07:13:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Euzcoxg/";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OOCCE7Ds";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 34E818723B; Wed,  4 Oct 2023 04:12:41 +0200 (CEST)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 45D5B87056; Wed,  4 Oct 2023 07:13:52 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6630F87479
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 04:12:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF1F786E9F
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 07:13:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-d865c441a54so1745898276.1
- for <u-boot@lists.denx.de>; Tue, 03 Oct 2023 19:12:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696385556; x=1696990356; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ntwW2zDM1+rmsicy1+qgQDqCXsDPOdiiVLb65JJ01tk=;
- b=Euzcoxg/wEBLRCeAtzPPBRFKXkrun0tsdCrbv8IrvBfDqoZXsk/GaZbt7sKAYIia5H
- u9VDXmsQy8XobfexTbQC0+ZFU89Jzj2n+mEYbhwOI/2BKy4vJpGHBxW2PYcucMakP9K1
- R5BSPneNMYFdQ9mTlBNIKEdnpmgqth9kf3SCc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696385556; x=1696990356;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ntwW2zDM1+rmsicy1+qgQDqCXsDPOdiiVLb65JJ01tk=;
- b=mpdajMOPFqESGH4QMT7zLFVdP5LCfRWQvg/jHem1r/OnA71aQ/e1HR9XrL0WHLVBZ3
- AvTSAiTnukIFI1Kp1kudA0MA6qD4FKHRKg0NocV8hgnx6NqP6c2mbrGd5i35lCuCNFVQ
- CvuvFQxLQu2iATh6pqdgpLRNx0nqO/RcKdQ4IN9Ceh48W0bXsJ9QmiV4ftDdYHNMgUea
- iPMkumP5virKjL+3QP9inr49WIb2gkQgJ8sakGuhd7HtMBtBldQtTq9nAsFyKwAH5UXc
- OsjVr/FCvRslzGX6Ej74b9RLBoiJYDNnjAV3YVQbP0MdI8ZQ/ZmVDPyzjzPoP/bE3XSU
- fvyA==
-X-Gm-Message-State: AOJu0YyaH6cxuBEqIL7wd8ZRvpGt0xi3MI+ngW7xhcfebaki0hrL19P8
- 3IOrucEwYn8UdSfjtYVxmA+0oHLAKtqoAWKIemqVuw==
-X-Google-Smtp-Source: AGHT+IHVto8tNgU/Cz+sDpMzk41ZuoeR4LE/J8VNV1R5F9hakbH8hxZoXCmx2LHIJYm4CtGfhx6/MuzgGqXWwQN/mxk=
-X-Received: by 2002:a25:6854:0:b0:d81:a0c5:f275 with SMTP id
- d81-20020a256854000000b00d81a0c5f275mr827350ybc.15.1696385555924; Tue, 03 Oct
- 2023 19:12:35 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3945DTWb091413;
+ Wed, 4 Oct 2023 00:13:29 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696396409;
+ bh=K92ZqUbR9xLpagcXbSYpoa7or3rgGWH13mFF7FdyWNE=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=OOCCE7Dsm/iynyUL+/wCxeMpkGF8O0WG3He+oawxyeChGbQgWkalmicXhZTohcmLE
+ SO2/dnC4uUlNS+9jt+UwsHjEVAhttnffIE4XqVlyXrOE7v5rDGrMLHr0SH7Y1CXIb3
+ iwc1ZZjIgAF+LjNOdquQ7/5cWKAYVWSq7Uxvervk=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3945DTHf023099
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 4 Oct 2023 00:13:29 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
+ Oct 2023 00:13:29 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 4 Oct 2023 00:13:29 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3945DRNf011174;
+ Wed, 4 Oct 2023 00:13:28 -0500
+Date: Wed, 4 Oct 2023 10:43:27 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Nishanth Menon <nm@ti.com>
+CC: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>,
+ Dasnavis Sabiya <sabiya.d@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
+ <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v4 02/16] arm: mach-k3: Add basic support for J784S4 SoC
+ definition
+Message-ID: <20231004051327.jvatwiwpmdz4lykd@ula0497581>
+References: <20231001165545.494212-1-a-nandan@ti.com>
+ <20231001165545.494212-3-a-nandan@ti.com>
+ <20231002160156.pacy7j53bbtx766e@reboot>
 MIME-Version: 1.0
-References: <20230803152215.3794531-1-lukas.funke-oss@weidmueller.com>
- <20230803152215.3794531-2-lukas.funke-oss@weidmueller.com>
- <CAPnjgZ0Xxqb4=AA3jYWOp9aW7jUjC4xPbhA9Zma1Opy39HRrXw@mail.gmail.com>
- <CAPnjgZ0t5AhnaTZDYgN6FCFoae=7RNK3LU15PHSuLJguWpx9EQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0t5AhnaTZDYgN6FCFoae=7RNK3LU15PHSuLJguWpx9EQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 3 Oct 2023 20:10:56 -0600
-Message-ID: <CAPnjgZ2Dk5QMT7-51mxejX_s-HD_m8exXVHFL2d8UKoQkn=3nA@mail.gmail.com>
-Subject: Re: [PATCH v4 1/3] binman: btool: Add Xilinx Bootgen btool
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Michal Simek <michal.simek@amd.com>, 
- Lukas Funke <lukas.funke@weidmueller.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- lukas.funke-oss@weidmueller.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231002160156.pacy7j53bbtx766e@reboot>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,66 +94,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Nishanth,
 
-On Sat, 5 Aug 2023 at 13:51, Simon Glass <sjg@chromium.org> wrote:
->
-> On Thu, 3 Aug 2023 at 09:22, <lukas.funke-oss@weidmueller.com> wrote:
-> >
-> > From: Lukas Funke <lukas.funke@weidmueller.com>
-> >
-> > Add the Xilinx Bootgen as bintool. Xilinx Bootgen is used to create
-> > bootable SPL (FSBL in Xilinx terms) images for Zynq/ZynqMP devices. The
-> > btool creates a signed version of the SPL. Additionally to signing the
-> > key source for the decryption engine can be passend to the boot image.
-> >
-> > Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> >
-> > ---
-> >
-> > Changes in v4:
-> > - Fixed some typos
-> >
-> > Changes in v3:
-> > - Fixed an issue where the build result was not found
-> > - Fixed an issue where the version string was not reported correctly
-> >
-> > Changes in v2:
-> > - Pass additional 'keysrc_enc' parameter to Bootgen
-> > - Added more information and terms to documentation
-> >
-> >  tools/binman/bintools.rst     |   2 +-
-> >  tools/binman/btool/bootgen.py | 137 ++++++++++++++++++++++++++++++++++
-> >  2 files changed, 138 insertions(+), 1 deletion(-)
-> >  create mode 100644 tools/binman/btool/bootgen.py
-> >
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Applied to u-boot-dm, thanks!
+On 11:01-20231002, Nishanth Menon wrote:
+> > diff --git a/arch/arm/mach-k3/j784s4_init.c b/arch/arm/mach-k3/j784s4_init.c
+[..]
+> > +struct fwl_data infra_cbass0_fwls[] = {
+> > +	{ "PSC0", 5, 1 },
+> > +	{ "PLL_CTRL0", 6, 1 },
+> > +	{ "PLL_MMR0", 8, 26 },
+> > +	{ "CTRL_MMR0", 9, 16 },
+> > +	{ "GPIO0", 16, 1 },
+> > +}, wkup_cbass0_fwls[] = {
+> > +	{ "WKUP_PSC0", 129, 1 },
+> > +	{ "WKUP_PLL_CTRL0", 130, 1 },
+> > +	{ "WKUP_CTRL_MMR0", 131, 16 },
+> > +	{ "WKUP_GPIO0", 132, 1 },
+> > +	{ "WKUP_I2C0", 144, 1 },
+> > +	{ "WKUP_USART0", 160, 1 },
+> > +}, mcu_cbass0_fwls[] = {
+> > +	{ "MCU_R5FSS0_CORE0", 1024, 4 },
+> > +	{ "MCU_R5FSS0_CORE0_CFG", 1025, 3 },
+> > +	{ "MCU_R5FSS0_CORE1", 1028, 4 },
+> > +	{ "MCU_R5FSS0_CORE1_CFG", 1029, 1 },
+> > +	{ "MCU_FSS0_CFG", 1032, 12 },
+> > +	{ "MCU_FSS0_S1", 1033, 8 },
+> > +	{ "MCU_FSS0_S0", 1036, 8 },
+> > +	{ "MCU_PSROM49152X32", 1048, 1 },
+> > +	{ "MCU_MSRAM128KX64", 1050, 8 },
+> > +	{ "MCU_MSRAM128KX64_CFG", 1051, 1 },
+> > +	{ "MCU_TIMER0", 1056, 1 },
+> > +	{ "MCU_TIMER9", 1065, 1 },
+> > +	{ "MCU_USART0", 1120, 1 },
+> > +	{ "MCU_I2C0", 1152, 1 },
+> > +	{ "MCU_CTRL_MMR0", 1200, 8 },
+> > +	{ "MCU_PLL_MMR0", 1201, 3 },
+> > +	{ "MCU_CPSW0", 1220, 2 },
+> > +}, cbass_rc_cfg0_fwls[] = {
+> > +	{ "EMMCSD4SS0_CFG", 2400, 4 },
+> > +}, cbass_hc2_fwls[] = {
+> > +	{ "PCIE0", 2547, 24 },
+> > +}, cbass_hc_cfg0_fwls[] = {
+> > +	{ "PCIE0_CFG", 2577, 7 },
+> > +	{ "EMMC8SS0_CFG", 2579, 4 },
+> > +	{ "USB3SS0_CORE", 2580, 4 },
+> > +	{ "USB3SS1_CORE", 2581, 1 },
+> > +}, navss_cbass0_fwls[] = {
+> > +	{ "NACSS_VIRT0", 6253, 1 },
+> > +};
 
-On -next I see this:
+[..]
+> > +void board_init_f(ulong dummy)
+> > +{
+[..]
+> > +
+> > +		remove_fwl_configs(cbass_hc_cfg0_fwls, ARRAY_SIZE(cbass_hc_cfg0_fwls));
+> > +		remove_fwl_configs(cbass_hc2_fwls, ARRAY_SIZE(cbass_hc2_fwls));
+> > +		remove_fwl_configs(cbass_rc_cfg0_fwls, ARRAY_SIZE(cbass_rc_cfg0_fwls));
+> > +		remove_fwl_configs(infra_cbass0_fwls, ARRAY_SIZE(infra_cbass0_fwls));
+> > +		remove_fwl_configs(mcu_cbass0_fwls, ARRAY_SIZE(mcu_cbass0_fwls));
+> > +		remove_fwl_configs(wkup_cbass0_fwls, ARRAY_SIZE(wkup_cbass0_fwls));
+> > +		remove_fwl_configs(navss_cbass0_fwls, ARRAY_SIZE(navss_cbass0_fwls));
+> 
+> Why do you need this? firewall configuration was coming in via OIDs in 
+> https://lore.kernel.org/all/CAPnjgZ14Uy+gBC8kgqVA7m9NXN_WiXFffu5Ob=vz=E76rMDMPQ@mail.gmail.com/
+> 
 
-binman tool -f bootgen
-Fetch: bootgen
-- trying method: binary download
-- trying method: build from source
-- clone git repo 'https://github.com/Xilinx/bootgen' to '/tmp/binmanf.0bzta5ph'
-- build target 'a'
-Exception: Error 2 running 'make -C /tmp/binmanf.0bzta5ph -j 64 a':
-make: *** No rule to make target 'a'.  Stop.
-
-- failed to fetch with all methods
-
-2. There seems to be some test coverage missing:
-
-tools/binman/etype/xilinx_bootgen.py                       72      1    99%
-
-The offending line is 216:
-
-   data = tools.read_file(bootbin_fname)
-
-Please could you take a look?
+These are required to remove the firewall configurations that are done
+by ROM, those are not the ones that are being handled by OIDs. The
+current series that is being worked on is to add additional firewalling
+support with OIDs that TIFS will be handling. The above patch is
+essentially added to have the same development experience on GP devices
+similar to HS after the secure boot is done so that people don't end up
+hitting random firewall exceptions that the ROM had configured.
 
 Regards,
-Simon
+Manorit
+
+> 
+> > +	}
+> > +
+[..]
