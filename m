@@ -4,58 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 064FEE7B5E2
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 09:49:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1886AE7B5E2
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 09:53:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F80E86DB5;
-	Wed,  4 Oct 2023 11:49:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 45FEE874A7;
+	Wed,  4 Oct 2023 11:53:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C040386E86; Wed,  4 Oct 2023 11:49:19 +0200 (CEST)
-Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com
- [61.152.239.71]) by phobos.denx.de (Postfix) with ESMTP id DAF3986BF2
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 11:49:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
+ id 4787A874A8; Wed,  4 Oct 2023 11:53:41 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ECBB874A1
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 11:53:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kuanlim.lee@starfivetech.com
-Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
- (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
- by fd01.gateway.ufhost.com (Postfix) with ESMTP id 82C288086;
- Wed,  4 Oct 2023 17:49:13 +0800 (CST)
-Received: from EXMBX162.cuchost.com (172.16.6.72) by EXMBX166.cuchost.com
- (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 4 Oct
- 2023 17:49:13 +0800
-Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX162.cuchost.com
- (172.16.6.72) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 4 Oct
- 2023 17:49:12 +0800
-Received: from EXMBX066.cuchost.com ([fe80::5947:9245:907e:339f]) by
- EXMBX066.cuchost.com ([fe80::5947:9245:907e:339f%17]) with mapi id
- 15.00.1497.044; Wed, 4 Oct 2023 17:49:12 +0800
-From: KuanLim.Lee <kuanlim.lee@starfivetech.com>
-To: Simon Glass <sjg@google.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, WeiLiang Lim
- <weiliang.lim@starfivetech.com>
-Subject: RE: [PATCH] timer: starfive: Add Starfive timer support
-Thread-Topic: [PATCH] timer: starfive: Add Starfive timer support
-Thread-Index: AQHZ6stHTX8h/cMJ4kWKnVQw6HRiBbA4dEuAgADxmiA=
-Date: Wed, 4 Oct 2023 09:49:12 +0000
-Message-ID: <ee1bf93e2a0a40c9b46cce9f7672433a@EXMBX066.cuchost.com>
-References: <20230919073049.1418-1-kuanlim.lee@starfivetech.com>
- <CAPnjgZ0L++Mc+P3xOBetaiB_ziXVQ5JAnSHjKunYqODQRMrwSA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0L++Mc+P3xOBetaiB_ziXVQ5JAnSHjKunYqODQRMrwSA@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [115.135.197.217]
-x-yovoleruleagent: yovoleflag
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=none (p=none dis=none) header.from=andestech.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3949rOA3027981;
+ Wed, 4 Oct 2023 17:53:24 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Wed, 4 Oct 2023 17:53:19 +0800
+Date: Wed, 4 Oct 2023 17:51:19 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+CC: Paul Walmsley <paul.walmsley@sifive.com>, Green Wan
+ <green.wan@sifive.com>, Rick Chen <rick@andestech.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/1] configs: sifive: enable poweroff command on Unmatched
+Message-ID: <ZR01l2-s1GjhbZFo@swlinux02>
+References: <20231001054047.9054-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231001054047.9054-1-heinrich.schuchardt@canonical.com>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3949rOA3027981
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,122 +63,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgU2ltb24sDQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogU2ltb24g
-R2xhc3MgPHNqZ0Bnb29nbGUuY29tPg0KPiBTZW50OiBXZWRuZXNkYXksIE9jdG9iZXIgNCwgMjAy
-MyAxMDoxMSBBTQ0KPiBUbzogS3VhbkxpbS5MZWUgPGt1YW5saW0ubGVlQHN0YXJmaXZldGVjaC5j
-b20+DQo+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgV2VpTGlhbmcgTGltIDx3ZWlsaWFuZy5s
-aW1Ac3RhcmZpdmV0ZWNoLmNvbT4NCj4gU3ViamVjdDogUmU6IFtQQVRDSF0gdGltZXI6IHN0YXJm
-aXZlOiBBZGQgU3RhcmZpdmUgdGltZXIgc3VwcG9ydA0KPiANCj4gT24gVHVlLCAxOSBTZXB0IDIw
-MjMgYXQgMDY6MDgsIEt1YW4gTGltIExlZSA8a3VhbmxpbS5sZWVAc3RhcmZpdmV0ZWNoLmNvbT4N
-Cj4gd3JvdGU6DQo+ID4NCj4gPiBBZGQgdGltZXIgZHJpdmVyIGluIFN0YXJmaXZlIFNvQy4gSXQg
-aXMgYW4gdGltZXIgdGhhdCBvdXRzaWRlIG9mIENQVQ0KPiA+IGNvcmUgYW5kIGluc2lkZSBTdGFy
-Zml2ZSBTb0MuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBLdWFuIExpbSBMZWUgPGt1YW5saW0u
-bGVlQHN0YXJmaXZldGVjaC5jb20+DQo+ID4gUmV2aWV3ZWQtYnk6IFdlaSBMaWFuZyBMaW0gPHdl
-aWxpYW5nLmxpbUBzdGFyZml2ZXRlY2guY29tPg0KPiA+IC0tLQ0KPiA+ICBkcml2ZXJzL3RpbWVy
-L0tjb25maWcgICAgICAgICAgfCAgNyArKysNCj4gPiAgZHJpdmVycy90aW1lci9NYWtlZmlsZSAg
-ICAgICAgIHwgIDEgKw0KPiA+ICBkcml2ZXJzL3RpbWVyL3N0YXJmaXZlLXRpbWVyLmMgfCA5NA0K
-PiA+ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysNCj4gPiAgMyBmaWxlcyBjaGFu
-Z2VkLCAxMDIgaW5zZXJ0aW9ucygrKQ0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy90
-aW1lci9zdGFyZml2ZS10aW1lci5jDQo+IA0KPiBSZXZpZXdlZC1ieTogU2ltb24gR2xhc3MgPHNq
-Z0BjaHJvbWl1bS5vcmc+DQo+IA0KPiBuaXRzIGJlbG93DQpXaGF0IGFyZSB0aGUgbml0cz8NCkhv
-dyBkbyB0aGUgbml0cyB0byBiZSBzb2x2ZWQ/IA0KPiANCj4gPg0KPiA+IGRpZmYgLS1naXQgYS9k
-cml2ZXJzL3RpbWVyL0tjb25maWcgYi9kcml2ZXJzL3RpbWVyL0tjb25maWcgaW5kZXgNCj4gPiA5
-MTViMmFmMTYwLi5hOThiZTlkZmFlIDEwMDY0NA0KPiA+IC0tLSBhL2RyaXZlcnMvdGltZXIvS2Nv
-bmZpZw0KPiA+ICsrKyBiL2RyaXZlcnMvdGltZXIvS2NvbmZpZw0KPiA+IEBAIC0zMjYsNCArMzI2
-LDExIEBAIGNvbmZpZyBYSUxJTlhfVElNRVINCj4gPiAgICAgICAgICAgU2VsZWN0IHRoaXMgdG8g
-ZW5hYmxlIHN1cHBvcnQgZm9yIHRoZSB0aW1lciBmb3VuZCBvbg0KPiA+ICAgICAgICAgICBhbnkg
-WGlsaW54IGJvYXJkcyAoYXhpIHRpbWVyKS4NCj4gPg0KPiA+ICtjb25maWcgU1RBUkZJVkVfVElN
-RVINCj4gPiArICAgICAgIGJvb2wgIlN0YXJmaXZlIHRpbWVyIHN1cHBvcnQiDQo+ID4gKyAgICAg
-ICBkZXBlbmRzIG9uIFRJTUVSDQo+ID4gKyAgICAgICBoZWxwDQo+ID4gKyAgICAgICAgIFNlbGVj
-dCB0aGlzIHRvIGVuYWJsZSBzdXBwb3J0IGZvciB0aGUgdGltZXIgZm91bmQgb24NCj4gPiArICAg
-ICAgICAgU3RhcmZpdmUgU29DLg0KPiANCj4gV2hhdCByZXNvbHV0aW9uIGlzIHRoZSB0aW1lcj8g
-SG93IGlzIGl0IGNsb2NrZWQ/IElzIHRoZXJlIG9ubHkgb25lIGNoYW5uZWw/DQpUaW1lciB3aWxs
-IGJlIGRyaXZlbiBieSBjbG9jayBwdWxzZXMgZnJvbSBjbG9ja3MuIFRoZSBjbG9ja3MgYXJlIGRl
-ZmluZWQgaW4gZGV2aWNlIHRyZWUuDQpGb3VyIGNoYW5uZWxzIHRpbWVyLCBlYWNoIHRpbWVyIGhh
-cyBvd24gY2xvY2sgc291cmNlLiANCkNsb2NrIHNvdXJjZSBmcmVxdWVuY3kgaXMgZ290dGVuIGJ5
-IGNsa19nZXRfYnlfaW5kZXggKCkgYW5kIGNsa19nZXRfcmF0ZSgpLg0KVGhlIHRpbWVyIGNvdW50
-ZXIgcmVnaXN0ZXIgaXMgYSAzMmJpdHMgc2l6ZSByZWdpc3Rlci4NCj4gDQo+ID4gKw0KPiA+ICBl
-bmRtZW51DQo+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdGltZXIvTWFrZWZpbGUgYi9kcml2ZXJz
-L3RpbWVyL01ha2VmaWxlIGluZGV4DQo+ID4gMWNhNzQ4MDVmZC4uMWVmODE0OTcwYiAxMDA2NDQN
-Cj4gPiAtLS0gYS9kcml2ZXJzL3RpbWVyL01ha2VmaWxlDQo+ID4gKysrIGIvZHJpdmVycy90aW1l
-ci9NYWtlZmlsZQ0KPiA+IEBAIC0zNCwzICszNCw0IEBAIG9iai0kKENPTkZJR19NVEtfVElNRVIp
-ICAgICAgICAgICAgICAgKz0gbXRrX3RpbWVyLm8NCj4gPiAgb2JqLSQoQ09ORklHX01DSFBfUElU
-NjRCX1RJTUVSKSAgICAgICAgKz0gbWNocC1waXQ2NGItdGltZXIubw0KPiA+ICBvYmotJChDT05G
-SUdfSU1YX0dQVF9USU1FUikgICAgKz0gaW14LWdwdC10aW1lci5vDQo+ID4gIG9iai0kKENPTkZJ
-R19YSUxJTlhfVElNRVIpICAgICArPSB4aWxpbngtdGltZXIubw0KPiA+ICtvYmotJChDT05GSUdf
-U1RBUkZJVkVfVElNRVIpICAgKz0gc3RhcmZpdmUtdGltZXIubw0KPiA+IGRpZmYgLS1naXQgYS9k
-cml2ZXJzL3RpbWVyL3N0YXJmaXZlLXRpbWVyLmMNCj4gPiBiL2RyaXZlcnMvdGltZXIvc3RhcmZp
-dmUtdGltZXIuYyBuZXcgZmlsZSBtb2RlIDEwMDY0NCBpbmRleA0KPiA+IDAwMDAwMDAwMDAuLjgx
-NjQwMmZkYmYNCj4gPiAtLS0gL2Rldi9udWxsDQo+ID4gKysrIGIvZHJpdmVycy90aW1lci9zdGFy
-Zml2ZS10aW1lci5jDQo+ID4gQEAgLTAsMCArMSw5NCBAQA0KPiA+ICsvLyBTUERYLUxpY2Vuc2Ut
-SWRlbnRpZmllcjogR1BMLTIuMCsNCj4gPiArLyoNCj4gPiArICogQ29weXJpZ2h0IDIwMjIgU3Rh
-ckZpdmUsIEluYy4gQWxsIHJpZ2h0cyByZXNlcnZlZC4NCj4gPiArICogICBBdXRob3I6IExlZSBL
-dWFuIExpbSA8a3VhbmxpbS5sZWVAc3RhcmZpdmV0ZWNoLmNvbT4NCj4gPiArICovDQo+ID4gKw0K
-PiA+ICsjaW5jbHVkZSA8Y29tbW9uLmg+DQo+ID4gKyNpbmNsdWRlIDxjbGsuaD4NCj4gPiArI2lu
-Y2x1ZGUgPGRtLmg+DQo+ID4gKyNpbmNsdWRlIDx0aW1lLmg+DQo+ID4gKyNpbmNsdWRlIDx0aW1l
-ci5oPg0KPiA+ICsjaW5jbHVkZSA8YXNtL2lvLmg+DQo+ID4gKyNpbmNsdWRlIDxkbS9kZXZpY2Ut
-aW50ZXJuYWwuaD4NCj4gPiArI2luY2x1ZGUgPGxpbnV4L2Vyci5oPg0KPiA+ICsNCj4gPiArI2Rl
-ZmluZSAgICAgICAgU1RGX1RJTUVSX0lOVF9TVEFUVVMgICAgMHgwMA0KPiA+ICsjZGVmaW5lIFNU
-Rl9USU1FUl9DVEwgICAgICAgICAgMHgwNA0KPiA+ICsjZGVmaW5lIFNURl9USU1FUl9MT0FEICAg
-ICAgICAgMHgwOA0KPiA+ICsjZGVmaW5lIFNURl9USU1FUl9FTkFCTEUgICAgICAgMHgxMA0KPiA+
-ICsjZGVmaW5lIFNURl9USU1FUl9SRUxPQUQgICAgICAgMHgxNA0KPiA+ICsjZGVmaW5lIFNURl9U
-SU1FUl9WQUxVRSAgICAgICAgICAgICAgICAweDE4DQo+ID4gKyNkZWZpbmUgU1RGX1RJTUVSX0lO
-VF9DTFIgICAgICAweDIwDQo+ID4gKyNkZWZpbmUgU1RGX1RJTUVSX0lOVF9NQVNLICAgICAweDI0
-DQo+ID4gKw0KPiA+ICtzdHJ1Y3Qgc3RhcmZpdmVfdGltZXJfcHJpdiB7DQo+ID4gKyAgICAgICB2
-b2lkIF9faW9tZW0gKmJhc2U7DQo+ID4gKyAgICAgICB1MzIgdGltZXJfc2l6ZTsNCj4gPiArfTsN
-Cj4gPiArDQo+ID4gK3N0YXRpYyB1NjQgbm90cmFjZSBzdGFyZml2ZV9nZXRfY291bnQoc3RydWN0
-IHVkZXZpY2UgKmRldikgew0KPiA+ICsgICAgICAgc3RydWN0IHN0YXJmaXZlX3RpbWVyX3ByaXYg
-KnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2KTsNCj4gPiArDQo+ID4gKyAgICAgICAvKiBSZWFkIGRl
-Y3JlbWVudCB0aW1lciB2YWx1ZSBhbmQgY29udmVydCB0byBpbmNyZW1lbnQgdmFsdWUgKi8NCj4g
-PiArICAgICAgIHJldHVybiBwcml2LT50aW1lcl9zaXplIC0gcmVhZGwocHJpdi0+YmFzZSArIFNU
-Rl9USU1FUl9WQUxVRSk7DQo+ID4gK30NCj4gDQo+IEFzIGFuIGVuaGFuY2VtZW50LCB5b3UgY291
-bGQgcHJvdmlkZSBhIHRpbWVyX2Vhcmx5X2dldF9jb3VudCgpIGZ1bmN0aW9uIGFuZA0KPiBhbiBl
-YXNseSBzZXR1cCwgc28geW91IGNhbiB1c2UgYm9vdHN0YWdlLg0KPiANCklzIHRoaXMgYSBtdXN0
-PyBJZiBzbywgSSBtdXN0IGRlZmluZSBzb21lIGZpeGVkIGFkZHJlc3MgdG8gZ2V0IHRoZSB0aW1l
-ciBjb3VudCwNCmVuYWJsZSB0aW1lciwgY2xvY2sgc291cmNlIGZyZXF1ZW5jeSBiZWNhdXNlIEkg
-Y2FuJ3QgZ2V0IGJhc2UgYWRkcmVzcyBhbmQNCmZyZXF1ZW5jeSBmcm9tIHRoZSBkZXZpY2UgdHJl
-ZSBpbiBlYXJseSBzdGFnZS4NCj4gPiArDQo+ID4gK3N0YXRpYyBjb25zdCBzdHJ1Y3QgdGltZXJf
-b3BzIHN0YXJmaXZlX29wcyA9IHsNCj4gPiArICAgICAgIC5nZXRfY291bnQgPSBzdGFyZml2ZV9n
-ZXRfY291bnQsIH07DQo+ID4gKw0KPiA+ICtzdGF0aWMgaW50IHN0YXJmaXZlX3Byb2JlKHN0cnVj
-dCB1ZGV2aWNlICpkZXYpIHsNCj4gPiArICAgICAgIHN0cnVjdCB0aW1lcl9kZXZfcHJpdiAqdWNf
-cHJpdiA9IGRldl9nZXRfdWNsYXNzX3ByaXYoZGV2KTsNCj4gPiArICAgICAgIHN0cnVjdCBzdGFy
-Zml2ZV90aW1lcl9wcml2ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7DQo+ID4gKyAgICAgICBp
-bnQgdGltZXJfY2hhbm5lbDsNCj4gPiArICAgICAgIHN0cnVjdCBjbGsgY2xrOw0KPiA+ICsgICAg
-ICAgaW50IHJldDsNCj4gPiArDQo+ID4gKyAgICAgICBwcml2LT5iYXNlID0gZGV2X3JlYWRfYWRk
-cl9wdHIoZGV2KTsNCj4gPiArICAgICAgIGlmIChJU19FUlIocHJpdi0+YmFzZSkpDQo+IA0KPiBp
-ZiAoIXByaXYtPmJhc2UpDQo+ICAgICByZXR1cm4gLUVJTlZBTA0KPiANCk5vdGVkLg0KPiA+ICsg
-ICAgICAgICAgICAgICByZXR1cm4gUFRSX0VSUihwcml2LT5iYXNlKTsNCj4gPiArDQo+ID4gKyAg
-ICAgICB0aW1lcl9jaGFubmVsID0gZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2LCAiY2hhbm5lbCIs
-IDApOw0KPiA+ICsgICAgICAgcHJpdi0+YmFzZSA9IHByaXYtPmJhc2UgKyAoMHg0MCAqIHRpbWVy
-X2NoYW5uZWwpOw0KPiA+ICsNCj4gPiArICAgICAgIC8qIEdldCBjbG9jayByYXRlIGZyb20gY2hh
-bm5lbCBzZWxlY3RlY2QqLw0KPiA+ICsgICAgICAgcmV0ID0gY2xrX2dldF9ieV9pbmRleChkZXYs
-IHRpbWVyX2NoYW5uZWwsICZjbGspOw0KPiA+ICsgICAgICAgaWYgKHJldCkNCj4gPiArICAgICAg
-ICAgICAgICAgcmV0dXJuIHJldDsNCj4gPiArDQo+ID4gKyAgICAgICByZXQgPSBjbGtfZW5hYmxl
-KCZjbGspOw0KPiA+ICsgICAgICAgaWYgKHJldCkNCj4gPiArICAgICAgICAgICAgICAgcmV0dXJu
-IHJldDsNCj4gPiArICAgICAgIHVjX3ByaXYtPmNsb2NrX3JhdGUgPSBjbGtfZ2V0X3JhdGUoJmNs
-ayk7DQo+ID4gKw0KPiA+ICsgICAgICAgLyogSW5pdGlhdGUgdGltZXIsIGNoYW5uZWwgMCAqLw0K
-PiA+ICsgICAgICAgLyogVW5tYXNrIEludGVycnVwdCBNYXNrICovDQo+IA0KPiBtdWx0aS1saW5l
-IGNvbW1lbnQgc3R5bGUgaXM6DQo+IA0KPiAgLyoNCj4gICAqIGxpbmUgMQ0KPiAgICogbGluZSAy
-DQo+ICAgKi8NCj4gDQpOb3RlZC4NCj4gPiArICAgICAgIHdyaXRlbCgwLCBwcml2LT5iYXNlICsg
-U1RGX1RJTUVSX0lOVF9NQVNLKTsNCj4gPiArICAgICAgIC8qIFNpbmdsZSBydW4gbW9kZSBTZXR0
-aW5nICovDQo+ID4gKyAgICAgICBpZiAoZGV2X3JlYWRfYm9vbChkZXYsICJzaW5nbGUtcnVuIikp
-DQo+ID4gKyAgICAgICAgICAgICAgIHdyaXRlbCgxLCBwcml2LT5iYXNlICsgU1RGX1RJTUVSX0NU
-TCk7DQo+ID4gKyAgICAgICAvKiBTZXQgUmVsb2FkIHZhbHVlICovDQo+ID4gKyAgICAgICBwcml2
-LT50aW1lcl9zaXplID0gZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2LCAidGltZXItc2l6ZSIsDQo+
-ID4gKyAweGZmZmZmZmZmKTsNCj4gDQo+IC0xVSAgPw0KPiANCldpbGwgcmVwbGFjZSAweGZmZmZm
-ZmZmIHRvIC0xVQ0KPiA+ICsgICAgICAgd3JpdGVsKHByaXYtPnRpbWVyX3NpemUsIHByaXYtPmJh
-c2UgKyBTVEZfVElNRVJfTE9BRCk7DQo+ID4gKyAgICAgICAvKiBFbmFibGUgdG8gc3RhcnQgdGlt
-ZXIgKi8NCj4gPiArICAgICAgIHdyaXRlbCgxLCBwcml2LT5iYXNlICsgU1RGX1RJTUVSX0VOQUJM
-RSk7DQo+ID4gKw0KPiA+ICsgICAgICAgcmV0dXJuIDA7DQo+ID4gK30NCj4gPiArDQo+ID4gK3N0
-YXRpYyBjb25zdCBzdHJ1Y3QgdWRldmljZV9pZCBzdGFyZml2ZV9pZHNbXSA9IHsNCj4gPiArICAg
-ICAgIHsgLmNvbXBhdGlibGUgPSAic3RhcmZpdmUsamg4MTAwLXRpbWVycyIgfSwNCj4gPiArICAg
-ICAgIHsgfQ0KPiA+ICt9Ow0KPiA+ICsNCj4gPiArVV9CT09UX0RSSVZFUihqaDgxMDBfc3RhcmZp
-dmVfdGltZXIpID0gew0KPiA+ICsgICAgICAgLm5hbWUgICAgICAgICAgID0gImpoODEwMF9zdGFy
-Zml2ZV90aW1lciIsDQo+IA0KV2lsbCB1c2UgbmFtZSAiIHN0YXJmaXZlX3RpbWVyIiBpbnN0ZWFk
-IG9mICJqaDgxMDBfc3RhcmZpdmVfdGltZXIiDQo+IFdoYXQgaXMgamg4MTAwID8gRG8geW91IG5l
-ZWQgdGhhdD8NCj4gDQo+ID4gKyAgICAgICAuaWQgICAgICAgICAgICAgPSBVQ0xBU1NfVElNRVIs
-DQo+ID4gKyAgICAgICAub2ZfbWF0Y2ggICAgICAgPSBzdGFyZml2ZV9pZHMsDQo+ID4gKyAgICAg
-ICAucHJvYmUgICAgICAgICAgPSBzdGFyZml2ZV9wcm9iZSwNCj4gPiArICAgICAgIC5vcHMgICAg
-ICAgICAgICA9ICZzdGFyZml2ZV9vcHMsDQo+ID4gKyAgICAgICAucHJpdl9hdXRvICAgICAgPSBz
-aXplb2Yoc3RydWN0IHN0YXJmaXZlX3RpbWVyX3ByaXYpLA0KPiA+ICt9Ow0KPiA+IC0tDQo+ID4g
-Mi4zNC4xDQo+ID4NCj4gDQo+IFJlZ2FyZHMsDQo+IFNpbW9uDQo=
+On Sun, Oct 01, 2023 at 07:40:47AM +0200, Heinrich Schuchardt wrote:
+> Powering off the SiFive HiFive Unmatched board is supported both via the
+> SBI and GPIO sysreset drivers. See device-tree entry
+> 
+>     compatible = "gpio-poweroff".
+> 
+> Enable the poweroff command.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  configs/sifive_unmatched_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
