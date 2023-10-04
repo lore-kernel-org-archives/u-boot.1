@@ -4,111 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89275E7C4D9
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DD7BE7C4D8
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:02:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9114186EE7;
-	Wed,  4 Oct 2023 18:00:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 33BAD8749D;
+	Wed,  4 Oct 2023 18:02:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ItkkN9WH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IO3X52pm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C292874CA; Wed,  4 Oct 2023 18:00:45 +0200 (CEST)
-Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
- [IPv6:2a00:1450:4864:20::434])
+ id 1D15F874DA; Wed,  4 Oct 2023 18:02:14 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CC1F8723E
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:00:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 431A186D3F
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:02:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x434.google.com with SMTP id
- ffacd0b85a97d-3231df054c4so31450f8f.0
- for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:00:37 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5a2478862dbso28150757b3.2
+ for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:02:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696435237; x=1697040037; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=XsBGWuhWhDrzlY5Ar9QKF4+YnosDaZnkKurpFU/qcEg=;
- b=ItkkN9WHpPD5MbwieYJsF4ABIyC1TjB/v6T6xXBPAGsMMUihB5wsDxJbtwKNn8CTYN
- UMqqEh5DMzyEScbiJW73e5OUoN27sxLGOLrE5TCmOG4031/62r4tFqbxQ3265KW1nN7+
- lzkU4GYwHp/CE5FYAh1HlNNity1NEcmbxUZY/ySx+lxZ5My4iliC8Ed9BkdPGx78lJxH
- S4/5aBPkJFZ4IdiAWqEMFSuxkfeac7n+qvVsjaEHzh+bmmgfZEdOrVnyD8IhZBRUISDK
- TxSwWYCnK8bw50R0mlMkxdFd7cEa9Pk+vXAjjb/3oUeMEjqnAgzM3MKIZeaSKLNsB2u5
- s1IA==
+ d=konsulko.com; s=google; t=1696435326; x=1697040126; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=5Sux0RQH+8zf0wpONHva2T2ykKJ4RmBHLqPj436/OUM=;
+ b=IO3X52pmXOQBsDXsKL7LcbdLsgzB73pLUxxS8ge54QUsou5eJuxn+DExhioi4BZtF6
+ qli0AlI0RhLdGuHCZ+0b0G+EzgQZVG+OowRY0aiKRXUGIooWlg/QHCsCY7+CKT6QJrDD
+ Sc1VWMd3CBT9v0IFvYC5FU7CkJutxteLBWUPI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696435237; x=1697040037;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=XsBGWuhWhDrzlY5Ar9QKF4+YnosDaZnkKurpFU/qcEg=;
- b=BkVumI4Y9yUyAunsqRBmZHLkEL3OnH5OKbLzo8RVjntPmTNqEHQuD1ZxWUEnfw3A3V
- e68Aidu3XRicy27fRUY7h3Qm9k9Vvvt+gkgMZs5ayWh3xuwb/nY++WfOYDZOXauhSrhN
- XTF3yiniqChePySBUrzG9WWGt2XM2SVFPXywWK90GkeVqWWfa0q6rz2HvlqP1Dxo/k97
- FJjLzThBim3zceYS3JXH+1eB4s+fYkxAOCaRDU7a8o8SOX9dV+Fz5QLntqknuiCe+aQI
- FNdsGMql75BuBbG+Yd5aogZRt2aHjtxrjcdGDqlJys9Vv15xanXnLSqvaWiai4DqWVwW
- LIfw==
-X-Gm-Message-State: AOJu0Yx5Werr96KUkkW5T4ZM5xvYCJcUjfqtM3w1FUX9+Y8gPeobA1UP
- 6fcwznGZn3+BwBEbBpC3SP/kEg==
-X-Google-Smtp-Source: AGHT+IGtbl91fic0Vfof0yYehSzucdOsv8YZPh7BZx5YTY/6X5O8U5gNC4odTamH/zjoYqfH3iKhqw==
-X-Received: by 2002:a5d:4d8c:0:b0:323:36a3:8ca with SMTP id
- b12-20020a5d4d8c000000b0032336a308camr2526059wru.28.1696435236139; 
- Wed, 04 Oct 2023 09:00:36 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:5bcc:9741:3ed2:97f5?
- ([2a01:e0a:982:cbb0:5bcc:9741:3ed2:97f5])
+ d=1e100.net; s=20230601; t=1696435326; x=1697040126;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5Sux0RQH+8zf0wpONHva2T2ykKJ4RmBHLqPj436/OUM=;
+ b=tIUq1XgFX4L9AL3J3VjwQg2HPAvXOyjPCfu4NnknFsappPWWzOeJS7gXqE4NbJEK2o
+ TwydmIw9t8FihXuIOXBrdtaLxUUsdNG2gvWGgUsfLUIipjJ6M5bo/ldCJtcBZnrtiTy6
+ mhmQpIC8tCkwTNHeGLyWNh+apPfLs2e1+lDFrc+GsSTJR8DDHWIR1H+KnjAIcO22KzYb
+ jqWmraJgPlY0H7LMUhtnWyRaTm1eLgHLBV3fwh0B1fmmLJ9DsGvhpNonv4O27QR+MDBz
+ x5Ves2Ubyty7p+CFxkaFYCpaOVNVuMkkc04N2ypfySro0A9XuvwMYdACGRPCmUzwSuVy
+ 8z/w==
+X-Gm-Message-State: AOJu0Yzph7gJziGw42kO0PWpmYu6NeANBKPAv9L2+/oMtbXrwcznR+9/
+ gCi8gZyNAyWpRCBC6o534lmcnw==
+X-Google-Smtp-Source: AGHT+IFIpYsY+jeZG0D06ixqO8Pdmn/ruhcerb2uF1fpGt9ORI+uHG/pbmHvvm8ulljfJgN2fSMWCg==
+X-Received: by 2002:a05:690c:4813:b0:5a5:65e:b847 with SMTP id
+ hc19-20020a05690c481300b005a5065eb847mr291383ywb.34.1696435325794; 
+ Wed, 04 Oct 2023 09:02:05 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-1e7b-517b-66e6-a4a8.res6.spectrum.com.
+ [2603:6081:7b00:6400:1e7b:517b:66e6:a4a8])
  by smtp.gmail.com with ESMTPSA id
- k2-20020a5d6d42000000b003232d122dbfsm4317216wri.66.2023.10.04.09.00.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Oct 2023 09:00:35 -0700 (PDT)
-Message-ID: <7521ff4a-4e7f-48c2-be6e-c1489e5bfd19@linaro.org>
-Date: Wed, 4 Oct 2023 18:00:34 +0200
+ b70-20020a0dd949000000b005a247c18403sm1256246ywe.37.2023.10.04.09.02.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Oct 2023 09:02:05 -0700 (PDT)
+Date: Wed, 4 Oct 2023 12:02:03 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Maxim Uvarov <maxim.uvarov@linaro.org>
+Cc: Simon Glass <sjg@google.com>, u-boot@lists.denx.de,
+ pbrobinson@gmail.com, ilias.apalodimas@linaro.org,
+ joe.hershberger@ni.com, rfried.dev@gmail.com, goldsimon@gmx.de
+Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
+Message-ID: <20231004160203.GG8465@bill-the-cat>
+References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
+ <20230926094124.7024-2-maxim.uvarov@linaro.org>
+ <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
+ <20230926134149.GS305624@bill-the-cat>
+ <CAPnjgZ1iAG8Rw3jVZvFs16AvnGkO=gCsCM3dF1c30biFk4t2xw@mail.gmail.com>
+ <20230926141936.GW305624@bill-the-cat>
+ <CAD8XO3aifH+f_NZ1g_nJrxKu_tDmuW9H=Pk2o4v8yTAAn1nfdQ@mail.gmail.com>
+ <CAD8XO3Yy1ppSgvUQ3ZZOmVzK2puxruHu2Q4UiCDPUzsWuKA8Vw@mail.gmail.com>
+ <CAPnjgZ3aqSjChJqCHQfrO5kxg0=-BR-KV4aC6jquC4ZRTovi0g@mail.gmail.com>
+ <CAD8XO3Z87tOqMx4gmipRfwnMY-U9Sr0Bf21GtKCgq=Ay+Jtakw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v3 6/8] drivers: introduce Meson Secure Monitor driver
-Content-Language: en-US, fr
-To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com,
- sjg@google.com, takahiro.akashi@linaro.org, ilias.apalodimas@linaro.org,
- post@lespocky.de, marex@denx.de, msuchanek@suse.de, sughosh.ganu@linaro.org,
- jh80.chung@samsung.com, paul.barker@sancloud.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru,
- Simon Glass <sjg@chromium.org>
-References: <20230921081346.22157-1-avromanov@salutedevices.com>
- <20230921081346.22157-7-avromanov@salutedevices.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20230921081346.22157-7-avromanov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="KNGrlStpoKE43+Hp"
+Content-Disposition: inline
+In-Reply-To: <CAD8XO3Z87tOqMx4gmipRfwnMY-U9Sr0Bf21GtKCgq=Ay+Jtakw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,310 +97,84 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 21/09/2023 10:13, Alexey Romanov wrote:
-> This patch adds an implementation of the Meson Secure Monitor
-> driver based on UCLASS_SM.
-> 
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->   MAINTAINERS           |   1 +
->   drivers/sm/Kconfig    |   7 ++
->   drivers/sm/Makefile   |   1 +
->   drivers/sm/meson-sm.c | 198 ++++++++++++++++++++++++++++++++++++++++++
->   include/meson/sm.h    |  19 ++++
->   5 files changed, 226 insertions(+)
->   create mode 100644 drivers/sm/meson-sm.c
->   create mode 100644 include/meson/sm.h
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 6c64427782..bdc364fd4c 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -158,6 +158,7 @@ F:	drivers/net/phy/meson-gxl.c
->   F:	drivers/adc/meson-saradc.c
->   F:	drivers/phy/meson*
->   F:	drivers/mmc/meson_gx_mmc.c
-> +F:	drivers/sm/meson-sm.c
->   F:	drivers/spi/meson_spifc.c
->   F:	drivers/pinctrl/meson/
->   F:	drivers/power/domain/meson-gx-pwrc-vpu.c
-> diff --git a/drivers/sm/Kconfig b/drivers/sm/Kconfig
-> index 6cc6d55578..b4cc3f768e 100644
-> --- a/drivers/sm/Kconfig
-> +++ b/drivers/sm/Kconfig
-> @@ -1,2 +1,9 @@
->   config SM
->   	bool "Enable Secure Monitor driver support"
-> +
-> +config MESON_SM
-> +	bool "Amlogic Secure Monitor driver"
-> +	depends on SM
-> +	default n
+--KNGrlStpoKE43+Hp
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I get:
-WARNING: unmet direct dependencies detected for MESON_SM
-   Depends on [n]: SM [=n]
-   Selected by [y]:
-   - MESON64_COMMON [=y] && ARM [=y] && ARCH_MESON [=y]
+On Wed, Oct 04, 2023 at 01:52:53PM +0600, Maxim Uvarov wrote:
+> On Mon, 2 Oct 2023 at 20:46, Simon Glass <sjg@google.com> wrote:
+>=20
+> > Hi Maxim,
+> >
+> > On Mon, 2 Oct 2023 at 05:23, Maxim Uvarov <maxim.uvarov@linaro.org> wro=
+te:
+> > >
+> > > I found what was missing. (reproduced with CI docker.)
+> >
+> > How about adding a script that copies in the lwip code needed for
+> > U-Boot, that you (or whoever the maintainer is) can run each quarter?
+> >
+> > Alternatively, I think just sending a patch with the code would be
+> > helpful, so we can see what you are wanting to include.
+> >
+> > Regards,
+> > Simon
+> >
+>=20
+> Hello Simon,
+>=20
+> That might also work. lwIP is a little bit special library which we can n=
+ot
+> just connect as an external library from the repo, because it has
+> platform implementation specifics (U-Boot here).
+> At this time I'm trying to pass all CI tests. And even if they pass for me
+> locally CI has some interesting combinations where the test fails and I'm
+> not even sure that it's related to lwip code.
+> Once CI will pass all the things I want to take more attention on submodu=
+le
+> support or patch support. I really hope that submodule will work for us,
+> but that also will require Makefile and CI changes.
+>=20
+> However, review of lwIP code here might be helpful. But I think the maili=
+ng
+> list will not allow me to send such a big patch, and it's almost impossib=
+le
+> to do a review project in one email.
+> I guess it's better to do a git clone
+> https://git.savannah.nongnu.org/git/lwip.git and see what is there.
 
+Yes, the mailing list will hold the message for moderation until I, or
+one of the other people with the password approve it.  That's not a
+consideration for how we handle the initial lwip integration.  It does
+need to be a "just the import" patch as there's no real way to review
+the code itself.
 
-so I think this should be:
-   select SM
-instead of:
-   depends on SM
+--=20
+Tom
 
-Could you post a fix so I can send the PR ?
+--KNGrlStpoKE43+Hp
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Neil
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUdjHcACgkQFHw5/5Y0
+tyzXWwv/SgQs+2YLa4L4210qcO70gkgSMZI9Up59qH+VAhuI7AN4QtUCdXK/Pqof
+OEssVJgWQUhd7cWkoZma8cJkQLXckFuo5HGN0d1kIKYjUaPcNBmCpStlAjB9syDE
+2jdyUVpw1eBbo9QbfzX2IJH7XNlVn4+JIN6r1S/S/2eKQxFuUSvn7uD8+P1MoyP/
+pajJj2uhVJU7QpXA5Ug1d2tkDEnlf2klQAQemBJijWQz+aC+fmgPtmlXrcfheOMa
+jg9Yo9FvJd1N0xRPn2lXcHaswk+n5NVHKV+OWdHhE6pMu88yA0dlIUqCfJ1P4nCo
+wr8JGSMF9ZENOZwdAZnu9YFiTyjqMTtHS4sM8s4LHGohCWOVRukPESx9MR7Py1Cj
+KxPCZ9kExltacJfj6o9ZO58Tn450Aqvg6wbLbpU/t+VNA2D3VYhlN7zprD0dhWQs
+riYCUUhDEiE1v5NTh2SlZEJTTJQLdd5maj1e5Gq3qo39GLBtRNolUVZSa9cg0wZO
+XMHpnqma
+=nwSt
+-----END PGP SIGNATURE-----
 
-> +	help
-> +	  Say y here to enable the Amlogic secure monitor driver.
-> diff --git a/drivers/sm/Makefile b/drivers/sm/Makefile
-> index af5f475c2b..da81ee898a 100644
-> --- a/drivers/sm/Makefile
-> +++ b/drivers/sm/Makefile
-> @@ -2,3 +2,4 @@
->   
->   obj-y += sm-uclass.o
->   obj-$(CONFIG_SANDBOX) += sandbox-sm.o
-> +obj-$(CONFIG_MESON_SM) += meson-sm.o
-> diff --git a/drivers/sm/meson-sm.c b/drivers/sm/meson-sm.c
-> new file mode 100644
-> index 0000000000..25adaf4560
-> --- /dev/null
-> +++ b/drivers/sm/meson-sm.c
-> @@ -0,0 +1,198 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2023 SberDevices, Inc.
-> + *
-> + * Author: Alexey Romanov <avromanov@salutedevices.com>
-> + */
-> +
-> +#include <common.h>
-> +#include <dm.h>
-> +#include <regmap.h>
-> +#include <sm.h>
-> +#include <sm-uclass.h>
-> +#include <stdlib.h>
-> +#include <syscon.h>
-> +#include <asm/ptrace.h>
-> +#include <asm/system.h>
-> +#include <meson/sm.h>
-> +#include <linux/bitfield.h>
-> +#include <linux/err.h>
-> +#include <linux/sizes.h>
-> +
-> +struct meson_sm_cmd {
-> +	u32 smc_id;
-> +};
-> +
-> +#define SET_CMD(index, id)	\
-> +	[index] = {		\
-> +		.smc_id = (id),	\
-> +	}
-> +
-> +struct meson_sm_data {
-> +	u32 cmd_get_shmem_in;
-> +	u32 cmd_get_shmem_out;
-> +	unsigned int shmem_size;
-> +	struct meson_sm_cmd cmd[];
-> +};
-> +
-> +struct meson_sm_priv {
-> +	void *sm_shmem_in;
-> +	void *sm_shmem_out;
-> +	const struct meson_sm_data *data;
-> +};
-> +
-> +static unsigned long __meson_sm_call(u32 cmd, const struct pt_regs *args)
-> +{
-> +	struct pt_regs r = *args;
-> +
-> +	r.regs[0] = cmd;
-> +	smc_call(&r);
-> +
-> +	return r.regs[0];
-> +};
-> +
-> +static u32 meson_sm_get_cmd(const struct meson_sm_data *data,
-> +			    u32 cmd_index)
-> +{
-> +	struct meson_sm_cmd cmd;
-> +
-> +	if (cmd_index >= MESON_SMC_CMD_COUNT)
-> +		return 0;
-> +
-> +	cmd = data->cmd[cmd_index];
-> +	return cmd.smc_id;
-> +}
-> +
-> +static int meson_sm_call(struct udevice *dev, u32 cmd_index, s32 *retval,
-> +			 struct pt_regs *args)
-> +{
-> +	struct meson_sm_priv *priv = dev_get_priv(dev);
-> +	u32 cmd, ret;
-> +
-> +	cmd = meson_sm_get_cmd(priv->data, cmd_index);
-> +	if (!cmd)
-> +		return -ENOENT;
-> +
-> +	ret = __meson_sm_call(cmd, args);
-> +	if (retval)
-> +		*retval = ret;
-> +
-> +	return 0;
-> +}
-> +
-> +static int meson_sm_call_read(struct udevice *dev, void *buffer, size_t size,
-> +			      u32 cmd_index, struct pt_regs *args)
-> +{
-> +	struct meson_sm_priv *priv = dev_get_priv(dev);
-> +	s32 nbytes;
-> +	int ret;
-> +
-> +	if (!buffer || size > priv->data->shmem_size)
-> +		return -EINVAL;
-> +
-> +	ret = meson_sm_call(dev, cmd_index, &nbytes, args);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if (nbytes < 0 || nbytes > size)
-> +		return -ENOBUFS;
-> +
-> +	/* In some cases (for example GET_CHIP_ID command),
-> +	 * SMC doesn't return the number of bytes read, even
-> +	 * though the bytes were actually read into sm_shmem_out.
-> +	 * So this check is needed.
-> +	 */
-> +	ret = nbytes;
-> +	if (!nbytes)
-> +		nbytes = size;
-> +
-> +	memcpy(buffer, priv->sm_shmem_out, nbytes);
-> +
-> +	return ret;
-> +}
-> +
-> +static int meson_sm_call_write(struct udevice *dev, void *buffer, size_t size,
-> +			       u32 cmd_index, struct pt_regs *args)
-> +{
-> +	struct meson_sm_priv *priv = dev_get_priv(dev);
-> +	s32 nbytes;
-> +	int ret;
-> +
-> +	if (!buffer || size > priv->data->shmem_size)
-> +		return -EINVAL;
-> +
-> +	memcpy(priv->sm_shmem_in, buffer, size);
-> +
-> +	ret = meson_sm_call(dev, cmd_index, &nbytes, args);
-> +	if (ret)
-> +		return ret;
-> +
-> +	if (nbytes <= 0 || nbytes > size)
-> +		return -EIO;
-> +
-> +	return nbytes;
-> +}
-> +
-> +static int meson_sm_probe(struct udevice *dev)
-> +{
-> +	struct meson_sm_priv *priv = dev_get_priv(dev);
-> +	struct pt_regs regs = { 0 };
-> +
-> +	priv->data = (struct meson_sm_data *)dev_get_driver_data(dev);
-> +	if (!priv->data)
-> +		return -EINVAL;
-> +
-> +	priv->sm_shmem_in =
-> +		(void *)__meson_sm_call(priv->data->cmd_get_shmem_in, &regs);
-> +
-> +	if (!priv->sm_shmem_in)
-> +		return -ENOMEM;
-> +
-> +	priv->sm_shmem_out =
-> +		(void *)__meson_sm_call(priv->data->cmd_get_shmem_out, &regs);
-> +
-> +	if (!priv->sm_shmem_out)
-> +		return -ENOMEM;
-> +
-> +	pr_debug("meson sm driver probed\n"
-> +		 "shmem_in addr: 0x%p, shmem_out addr: 0x%p\n",
-> +		 priv->sm_shmem_in,
-> +		 priv->sm_shmem_out);
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct meson_sm_data meson_sm_gxbb_data = {
-> +	.cmd_get_shmem_in  = 0x82000020,
-> +	.cmd_get_shmem_out = 0x82000021,
-> +	.shmem_size = SZ_4K,
-> +	.cmd = {
-> +		SET_CMD(MESON_SMC_CMD_EFUSE_READ,  0x82000030),
-> +		SET_CMD(MESON_SMC_CMD_EFUSE_WRITE, 0x82000031),
-> +		SET_CMD(MESON_SMC_CMD_CHIP_ID_GET, 0x82000044),
-> +		SET_CMD(MESON_SMC_CMD_PWRDM_SET,   0x82000093),
-> +	},
-> +};
-> +
-> +static const struct udevice_id meson_sm_ids[] = {
-> +	{
-> +		.compatible = "amlogic,meson-gxbb-sm",
-> +		.data = (ulong)&meson_sm_gxbb_data,
-> +	},
-> +	{ }
-> +};
-> +
-> +static const struct sm_ops sm_ops = {
-> +	.sm_call = meson_sm_call,
-> +	.sm_call_read = meson_sm_call_read,
-> +	.sm_call_write = meson_sm_call_write,
-> +};
-> +
-> +U_BOOT_DRIVER(meson_sm) = {
-> +	.name = "meson_sm",
-> +	.id = UCLASS_SM,
-> +	.of_match = meson_sm_ids,
-> +	.probe = meson_sm_probe,
-> +	.priv_auto = sizeof(struct meson_sm_priv),
-> +	.ops = &sm_ops,
-> +};
-> diff --git a/include/meson/sm.h b/include/meson/sm.h
-> new file mode 100644
-> index 0000000000..fbaab1f1ee
-> --- /dev/null
-> +++ b/include/meson/sm.h
-> @@ -0,0 +1,19 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (c) 2023 SberDevices, Inc.
-> + *
-> + * Author: Alexey Romanov <avromanov@salutedevices.com>
-> + */
-> +
-> +#ifndef __MESON_SM_CMD_H__
-> +#define __MESON_SM_CMD_H__
-> +
-> +enum meson_smc_cmd {
-> +	MESON_SMC_CMD_EFUSE_READ,  /* read efuse memory */
-> +	MESON_SMC_CMD_EFUSE_WRITE, /* write efuse memory */
-> +	MESON_SMC_CMD_CHIP_ID_GET, /* readh chip unique id */
-> +	MESON_SMC_CMD_PWRDM_SET,   /* do command at specified power domain */
-> +	MESON_SMC_CMD_COUNT,
-> +};
-> +
-> +#endif
-
+--KNGrlStpoKE43+Hp--
