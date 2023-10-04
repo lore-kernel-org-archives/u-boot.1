@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1F36E7C4E9
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 18:08:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5EADE7C4EA
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 18:08:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DAF1875DB;
-	Wed,  4 Oct 2023 20:04:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id EACD1876A3;
+	Wed,  4 Oct 2023 20:04:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=public-files.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aXcZk35o";
+	dkim=pass (2048-bit key; unprotected) header.d=public-files.de header.i=frank-w@public-files.de header.b="IXZzqQZf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43430875DB; Wed,  4 Oct 2023 20:04:27 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1E727876A4; Wed,  4 Oct 2023 20:04:50 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58A1B875C0
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 20:04:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 781A58768E
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 20:04:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=public-files.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394I44v9007998;
- Wed, 4 Oct 2023 13:04:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696442644;
- bh=s8v7PKE+4PDV4lzcwoXCBAC0K/Xlo3nEwx+UcxmRCHE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=aXcZk35o2GCh1pYCQ0XYXOBWaAJDRWJ1VB2FUe/8MzJA5Gi+h8A20VTtG/YBLk+EL
- jM1t3IVD1jfYFbooRXs8eNtJdK/v840dp8/psmq8Q2B4N/UZ/Yfj+cCrr+xgZLZ+i+
- lbaY8QaHO9EJQ23YxamLVdfLHipOk+na2J5Kzsn4=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394I44lY027739
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 4 Oct 2023 13:04:04 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
- Oct 2023 13:04:03 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 4 Oct 2023 13:04:03 -0500
-Received: from [10.24.69.34] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394I3uRi016579;
- Wed, 4 Oct 2023 13:03:57 -0500
-Message-ID: <bfec3d47-56d0-b5ed-72b7-3804ef22943d@ti.com>
-Date: Wed, 4 Oct 2023 23:33:56 +0530
+ spf=pass smtp.mailfrom=frank-w@public-files.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=public-files.de;
+ s=s31663417; t=1696442677; x=1697047477; i=frank-w@public-files.de;
+ bh=MudRV+ASeoXSifOL70gExZIi/+H75JqqyGMqFK/UAUo=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
+ b=IXZzqQZfJhsFaDco4o8A+TkNSQUvWZSG3IxtO28Eyht67MzXvC+IGRn3dEgePHzKHIM8lO5JVS4
+ hldsALTOo+MNxfy3jHpNO2/l1pmyIKYmShaZXhIfVFv4I15Nz6tpTbF1zxsIuHHDT29yewh7K3fkU
+ P3W/K9dDNlFWgiokGrp3SK8X3bU77luL7vbwD4GpYVaG4HncWrz0eEEA2NMxfwYtJzDJRqHimIKXx
+ e3w8mKxPHAo0UkKpHJi9dxAu8HTLG4fwx1B88j8bcR4SdyBNFPK2B9urFhCEBRZ/XZzcP3n2QsCuV
+ KPSXtQnmW9vEUiGXAiZBBS+ev24CoEdwdCHw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [217.61.145.247] ([217.61.145.247]) by web-mail.gmx.net
+ (3c-app-gmx-bap42.server.lan [172.19.172.112]) (via HTTP); Wed, 4 Oct 2023
+ 20:04:37 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH v4 16/16] doc: board: ti: k3: Add J784S4 EVM and AM69 SK
- documentation
-Content-Language: en-US
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>
-CC: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, Neha
- Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Andrew
- Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya
- <sabiya.d@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Aradhya Bhatia
- <a-bhatia1@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>,
- Nishanth Menon <nm@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>, Yanhong Wang
- <yanhong.wang@starfivetech.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
- <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
-References: <20231001165545.494212-1-a-nandan@ti.com>
- <20231001165545.494212-17-a-nandan@ti.com>
- <20231002165819.42yde4zsgl235c2u@bryanbrattlof.com>
- <cc674d96-1e18-4497-b66e-f4058d6a11d3@gmx.de>
-From: Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <cc674d96-1e18-4497-b66e-f4058d6a11d3@gmx.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Message-ID: <trinity-f83e3edb-6459-493f-9386-2ba91c2711aa-1696442677622@3c-app-gmx-bap42>
+From: Frank Wunderlich <frank-w@public-files.de>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Frank Wunderlich <linux@fw-web.de>, Kever Yang
+ <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, Philipp
+ Tomsich <philipp.tomsich@vrull.eu>, Joseph Chen <chenjh@rock-chips.com>,
+ u-boot@lists.denx.de
+Subject: Aw: Re: [PATCH v5] board: rockchip: Add Bananapi R2Pro Board
+Content-Type: text/plain; charset=UTF-8
+Date: Wed, 4 Oct 2023 20:04:37 +0200
+Importance: normal
+Sensitivity: Normal
+In-Reply-To: <8c7f5643-0130-ea31-bf3e-c05609abd8c0@kwiboo.se>
+References: <20230920184005.50931-1-linux@fw-web.de>
+ <8c7f5643-0130-ea31-bf3e-c05609abd8c0@kwiboo.se>
+X-UI-Message-Type: mail
+X-Priority: 3
+X-Provags-ID: V03:K1:/5BVi/WaTFw0S+YNhNts5LgIngTYC35lAFcA/nTWk2w8WxZprXFu571e8BQykwMeK0Cuz
+ hV2TXB//37NQLYN8Wsh3vgx8usj6JMpVR3iPwIItY8+KJVfpHvL6XpZZUuqezultwX7pmYzdoVs7
+ epD3xkoh5/1E2qDeBb/Y4iAK0v8AcLDjmSHpo/nbcHnlfMgPkFXaTSB3nO3w1iePPwjeTfSfNmCI
+ CBD//gSr4nAdgsrrHqoReYUhi1+CJYIYrU5kMiLR7vuAr1eu3B15Ha//0kC6h5NEGNV91YgGxe0s
+ sM=
+UI-OutboundReport: notjunk:1;M01:P0:4//34MaarKw=;hW8Z4i1jA5QdAlQqcyMTQSsx/8a
+ dVyANeoVVBRvQWvqR+3FQwe+qSxrEEoDrfVS/eT+mb9HbnTdBjC0x+0vqh7SVxMNH0nWG9hdd
+ DfQuwIO4H7bG6hJBmIKawP6MbtfdCa1QxGA6i4u0bFWJRY9tEm/t67ImT7pTbNFzW9LTE/RwI
+ BgdxiM6v96HHkFbHc01RLXzvNrazXibO7zjAsP6ZNJb0y2qOjCF7IFOLdP9JwVKOV2NUPajSa
+ d1kAzgwZC72IesNghqzeXjnZZmZrnwoZqcuae/O167fEY0aJJq6u4XjWINYljE2Xa6qpfv+6u
+ XZKCEk+OmN3v0NR5nmvONoG2Kel6EhSfu70f6KliqC9ZIKu0fMw5naIhWu0trHLFHihr1cwAb
+ hEyFn2wuie455mZ90lNFu+zlLU6Sm9YHzgxF6u+qbklM+YRiSxFL8XM59/NdUKNA8nGKI9zcF
+ aduxaV0MLR+P2bjj82t1chPvcouk/juAbJBpE/NlVPrdlzvrwcVmt6sie3yY2sQkDkyxfRvs4
+ xlJwl9KJwnhv41Br0d6Efndkc9YZmbY9l3tDYSAY+aHAKTqjTeVxlhYnsZMDjRFoOcuvT+nf4
+ cjkgK+eScFltZPlyuADi5RFPM7bpoPeWCYRwN1xbOS0qnnthY1HBIUf7XwJMsN/sYiWYVgSJ7
+ zmT+mmgweSk2qO6DzcZVnQfeSTRNFfCv7gEDelQAluTGpdMjWjcobOZcl/BGzSdakErQK1DXy
+ M8fH/q22LgE8dbjP5n9EnKqnuZRs0uI/UQY5HX/CCZocTRnRQouIlks8SHGqvFZdi+yGJjYiI
+ V4lzMTe1xr8c98j+unifthsZHA5WgfPtCvP9jPr+7zmns=
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,456 +91,301 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas
 
-On 03/10/23 04:25, Heinrich Schuchardt wrote:
-> On 10/2/23 18:58, Bryan Brattlof wrote:
->> Hi Apurva!
->>
->> Sorry for the late review. Just some updates I noticed when reading over
->> the docs.
->>
->> On October  1, 2023 thus sayeth Apurva Nandan:
->>> TI K3 J784S4 and AM69 are new additions to the K3 SoC family.
->>> Add documentation about the J784S4 EVM and AM69 SK.
->>>
->>> Signed-off-by: Dasnavis Sabiya <sabiya.d@ti.com>
->>> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
->>> ---
->>>   board/ti/j784s4/MAINTAINERS |   1 +
->>>   doc/board/ti/j784s4_evm.rst | 339 
->>> ++++++++++++++++++++++++++++++++++++
->>>   doc/board/ti/k3.rst         |   1 +
->>>   3 files changed, 341 insertions(+)
->>>   create mode 100644 doc/board/ti/j784s4_evm.rst
->>>
->>> diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
->>> index 5b5ef8b109..24db43f09b 100644
->>> --- a/board/ti/j784s4/MAINTAINERS
->>> +++ b/board/ti/j784s4/MAINTAINERS
->>> @@ -15,6 +15,7 @@ F:    arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
->>>   F:    arch/arm/dts/k3-j784s4-r5-evm.dts
->>>   F:    arch/arm/dts/k3-j784s4-ddr.dtsi
->>>   F:    arch/arm/dts/k3-j784s4-ddr-evm-lp4-4266.dtsi
->>> +F:    doc/board/ti/j784s4_evm.rst
->>>
->>>   AM69 BOARD
->>>   F:    arch/arm/dts/k3-am69-sk.dts
->>> diff --git a/doc/board/ti/j784s4_evm.rst b/doc/board/ti/j784s4_evm.rst
->>> new file mode 100644
->>> index 0000000000..c04894b47a
->>> --- /dev/null
->>> +++ b/doc/board/ti/j784s4_evm.rst
->>> @@ -0,0 +1,339 @@
->>> +.. SPDX-License-Identifier: GPL-2.0-or-later OR BSD-3-Clause
->>> +.. sectionauthor:: Apurva Nandan <a-nandan@ti.com>
->>> +
->>> +J784S4 and AM69 Platforms
->>> +=========================
->>> +
->>> +Introduction
->>> +------------
->>> +The J784S4 SoC belongs to the K3 Multicore SoC architecture
->>> +platform, providing advanced system integration in automotive,
->>> +ADAS and industrial applications requiring AI at the network edge.
->>> +This SoC extends the K3 Jacinto 7 family of SoCs with focus on
->>> +raising performance and integration while providing interfaces,
->>> +memory architecture and compute performance for multi-sensor, high
->>> +concurrency applications.
->>> +
->>> +The device is partitioned into three functional domains, each 
->>> containing
->>> +specific processing cores and peripherals:
->>> +
->>> +1. Wake-up (WKUP) domain
->>> +    * ARM Cortex-M4F processor, runs TI Foundational Security (TIFS)
->>> +
->>> +2. Microcontroller (MCU) domain
->>> +    * Dual core ARM Cortex-R5F processor, runs device management
->>> +      and SoC early boot
->>> +
->>> +3. MAIN domain
->>> +    * Dual core 64-bit ARM Cortex-A72, runs HLOS
->>
->> You have much more than this on these SoCs ;)
->>
->>> +
->>> +More info can be found in TRM: http://www.ti.com/lit/zip/spruj52
->>> +
->>> +Platform information:
->>> +
->>> +* https://www.ti.com/tool/J784S4XEVM
->>> +* https://www.ti.com/tool/SK-AM69
->>> +
->>> +Boot Flow
->>> +---------
->>> +Below is the pictorial representation of boot flow:
->>> +
->>> +.. image:: img/boot_diagram_k3_current.svg
+thanks for your review.
+
+> Gesendet: Dienstag, 03. Oktober 2023 um 22:27 Uhr
+> Von: "Jonas Karlman" <jonas@kwiboo.se>
+> An: "Frank Wunderlich" <linux@fw-web.de>, "Frank Wunderlich" <frank-w@pu=
+blic-files.de>, "Kever Yang" <kever.yang@rock-chips.com>
+> Cc: "Simon Glass" <sjg@chromium.org>, "Philipp Tomsich" <philipp.tomsich=
+@vrull.eu>, "Joseph Chen" <chenjh@rock-chips.com>, u-boot@lists.denx.de
+> Betreff: Re: [PATCH v5] board: rockchip: Add Bananapi R2Pro Board
 >
-> Please, provide alternative texts for all images, e.g.
+> Hi Frank,
 >
-> .. image:: img/boot_diagram_k3_current.svg
->    :alt: K3 boot flow
+> On 2023-09-20 20:40, Frank Wunderlich wrote:
+> > From: Frank Wunderlich <frank-w@public-files.de>
+> >
+> > Add Bananapi R2 Pro board.
+> >
+> > tested:
+> > - sdcard
+> > - both front usb-ports
+> > - sata
+> > - wan-port
+> >
+> > lan-ports are connected to mt7531 switch where driver needs to be
+> > separated from mtk ethernet-driver.
+> >
+> > Signed-off-by: Frank Wunderlich <frank-w@public-files.de>
+> > ---
+> > because iodomain is different to evb and now iodomain driver is sent a=
+s
+> > patch we need to separate between EVB and R2Pro else board can be bric=
+ked.
+> >
+> > ethernet support depends on these series from jonas:
+> >
+> > rockchip: Port IO-domain driver for RK3568 from linux
+> > https://patchwork.ozlabs.org/project/uboot/cover/20230821223020.391862=
+0-1-jonas@kwiboo.se/
+> > and
+> > rockchip: Add GMAC support for RK3568 and RK3588
+> > https://patchwork.ozlabs.org/project/uboot/cover/20230807000817.170101=
+2-1-jonas@kwiboo.se/
+> > ---
+> > v5:
+> > - add line break in description
+> > - reorder in makefile
+> > - drop special dts-handling
+> >   (deletion of switchnode, disable of usb and gmac0)
+> > - add MAINTAINERS entry
+> > - changes to defconfig suggested by jonas
+> >   - remove "pinctrl-0 pinctrl-names" from CONFIG_OF_SPL_REMOVE_PROPS
+> >   - add CONFIG_SPL_DM_SEQ_ALIAS=3Dy
+> >   - add CONFIG_SPL_PINCTRL=3Dy
+> >   - remove CONFIG_USB_UHCI_HCD
+> >   - enable EFI_LOADER (defaults to y)
+> >   - drop CONFIG_SYSRESET_PSCI (reset works without)
+> >
+> > v4:
+> > - add r2pro board to readme
+> > - update r2pro dts to linux version
+> > - remove switch node from linux dts
+> > - disable gmac0 because switch driver does not work yet
+> >   to solve timeout error:
+> >   ethernet@fe2a0000 Waiting for PHY auto negotiation to complete......=
+... TIMEOUT!
+> >   phy_startup() failed: -110FAILED: -110ethernet@fe010000 Waiting for =
+PHY auto nee
+> > - cleanup r2pro u-boot.dtsi like jonas suggests
+> > - update and reorder defconfig based on jonas suggestions
+> > - dts: disable usb_host0_ohci because of error on usb-start
+> >   scanning bus usb@fd840000 for devices...
+> >   ERROR: USB-error: DEVICENOTRESPONDING: Device did not respond to tok=
+en (IN) or did
+> >   not provide a handshake (OUT) (5)
+> >   unable to get device descriptor (error=3D-1)
+> > - pcie is not yet working, so not adding these options
+> >   rockchip_pcie3phy phy@fe8c0000: lock failed 0x6890000
+> >   rockchip_pcie3phy phy@fe8c0000: PHY: Failed to init phy@fe8c0000: -1=
+10.
+> >   pcie_dw_rockchip pcie@fe270000: failed to init phy (ret=3D-110)
+> >   rockchip_pcie3phy phy@fe8c0000: lock failed 0x6890000
+> >   rockchip_pcie3phy phy@fe8c0000: PHY: Failed to init phy@fe8c0000: -1=
+10.
+> >   pcie_dw_rockchip pcie@fe280000: failed to init phy (ret=3D-110)
+> > - emmc not tested as it is empty on my board because it breaks sdcard =
+boot
+> > - rename dts and defconfig (add minus sign)
+> > - enable efi_loader in defconfig
+> >
+> > v3:
+> > - disable gmac0 as switch-driver is not yet ready to attach to the mac
+> >
+> > v2:
+> > - drop switch-node for now as u-boot driver works differently to linux
+> > ---
+> >  arch/arm/dts/Makefile                      |   1 +
+> >  arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi |  19 +
+> >  arch/arm/dts/rk3568-bpi-r2-pro.dts         | 852 ++++++++++++++++++++=
++
+> >  board/rockchip/evb_rk3568/MAINTAINERS      |   7 +
+> >  configs/bpi-r2-pro-rk3568_defconfig        |  94 +++
+> >  doc/board/rockchip/rockchip.rst            |   1 +
+> >  6 files changed, 974 insertions(+)
+> >  create mode 100644 arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi
+> >  create mode 100644 arch/arm/dts/rk3568-bpi-r2-pro.dts
+> >  create mode 100644 configs/bpi-r2-pro-rk3568_defconfig
+> >
 >
-Thanks for pointing, will fix
->>> +
->>> +- On this platform, "TI Foundational Security (TIFS)" functions as the
->>> +  security enclave master. While "Device Manager (DM)", also known 
->>> as the
->>> +  "TISCI server" in TI terminology, offers all the essential services.
->>> +
->>> +- As illustrated in the diagram above, R5 SPL manages power and clock
->>> +  services independently before handing over control to DM. The A72 or
->>> +  the C7x (Aux core) software components request TIFS/DM to handle
->>> +  security or device management services.
->>> +
->>> +Sources
->>> +-------
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_boot_sources
->>> +    :end-before: .. k3_rst_include_end_boot_sources
->>> +
->>> +Build procedure
->>> +---------------
->>> +0. Setup the environment variables:
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_common_env_vars_desc
->>> +    :end-before: .. k3_rst_include_end_common_env_vars_desc
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_board_env_vars_desc
->>> +    :end-before: .. k3_rst_include_end_board_env_vars_desc
->>> +
->>> +Set the variables corresponding to this platform:
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_common_env_vars_defn
->>> +    :end-before: .. k3_rst_include_end_common_env_vars_defn
->>> +.. code-block:: bash
->>> +
->>> + $ export UBOOT_CFG_CORTEXR=j784s4_evm_r5_defconfig
->>> + $ export UBOOT_CFG_CORTEXA=j784s4_evm_a72_defconfig
->>> + $ export TFA_BOARD=generic
->>
->> sadly the j784s4 breaks from the lite vs generic platform norm
->>
->>> + $ export TFA_EXTRA_ARGS="K3_USART=0x8"
->>> + $ export OPTEE_PLATFORM=k3-j784s4
->>> + $ export OPTEE_EXTRA_ARGS="CFG_CONSOLE_UART=0x8"
->>> +
->>> +.. j784s4_evm_rst_include_start_build_steps
->>> +
->>> +1. Trusted Firmware-A
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_build_steps_tfa
->>> +
->>> +2. OP-TEE
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_build_steps_optee
->>> +    :end-before: .. k3_rst_include_end_build_steps_optee
->>> +
->>> +3. U-Boot
->>> +
->>> +.. _j784s4_evm_rst_u_boot_r5:
->>> +
->>> +* 3.1 R5
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_build_steps_spl_r5
->>> +    :end-before: .. k3_rst_include_end_build_steps_spl_r5
->>> +
->>> +.. _j784s4_evm_rst_u_boot_a72:
->>> +
->>> +* 3.2 A72
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_build_steps_uboot
->>> +    :end-before: .. k3_rst_include_end_build_steps_uboot
->>> +.. j784s4_evm_rst_include_end_build_steps
->>> +
->>> +Target Images
->>> +-------------
->>> +In order to boot we need tiboot3.bin, tispl.bin and u-boot.img. 
->>> Each SoC
->>> +variant (GP, HS-FS, HS-SE) requires a different source for these 
->>> files.
->>> +
->>> + - GP
->>> +
->>> +    * tiboot3-j784s4-gp-evm.bin from :ref:`step 3.1 
->>> <j784s4_evm_rst_u_boot_r5>`
->>> +    * tispl.bin_unsigned, u-boot.img_unsigned from :ref:`step 3.2 
->>> <j784s4_evm_rst_u_boot_a72>`
->>> +
->>> + - HS-FS
->>> +
->>> +    * tiboot3-j784s4-hs-fs-evm.bin from :ref:`step 3.1 
->>> <j784s4_evm_rst_u_boot_r5>`
->>> +    * tispl.bin, u-boot.img from :ref:`step 3.2 
->>> <j784s4_evm_rst_u_boot_a72>`
->>> +
->>> + - HS-SE
->>> +
->>> +    * tiboot3-j784s4-hs-evm.bin from :ref:`step 3.1 
->>> <j784s4_evm_rst_u_boot_r5>`
->>> +    * tispl.bin, u-boot.img from :ref:`step 3.2 
->>> <j784s4_evm_rst_u_boot_a72>`
->>> +
->>> +Image formats
->>> +-------------
->>> +
->>> +- tiboot3.bin
->>> +
->>> +.. image:: img/multi_cert_tiboot3.bin.svg
+> [...]
 >
-> Alternative text missing.
+> > diff --git a/board/rockchip/evb_rk3568/MAINTAINERS b/board/rockchip/ev=
+b_rk3568/MAINTAINERS
+> > index cc9eb432a8b5..8c506162c01e 100644
+> > --- a/board/rockchip/evb_rk3568/MAINTAINERS
+> > +++ b/board/rockchip/evb_rk3568/MAINTAINERS
+> > @@ -7,6 +7,13 @@ F:	configs/evb-rk3568_defconfig
+> >  F:	arch/arm/dts/rk3568-evb-u-boot.dtsi
+> >  F:	arch/arm/dts/rk3568-evb.dts
+> >
+> > +Banana Pi BPI-R2 Pro
 >
->>> +
->>> +- tispl.bin
->>> +
->>> +.. image:: img/dm_tispl.bin.svg
+> Maintainer entries are typically in upper case. get_maintainer.pl does
+> not seem to mind, but use of uppercase seem to be the norm.
+
+ok, i wil change it to "BANANAPI-BPI-R2-PRO" as i noticed that no spaces a=
+re in the other Boards
+
+> > +M:	Frank Wunderlich <frank-w@public-files.de>
+> > +S:	Maintained
+> > +F:	configs/bpi-r2-pro-rk3568_defconfig
+> > +F:	arch/arm/dts/rk3568-bpi-r2-pro.dts
+> > +F:	arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi
+> > +
+> >  LUBANCAT-2
+> >  M:	Andy Yan <andyshrk@163.com>
+> >  S:	Maintained
+> > diff --git a/configs/bpi-r2-pro-rk3568_defconfig b/configs/bpi-r2-pro-=
+rk3568_defconfig
+> > new file mode 100644
+> > index 000000000000..5989eab569b8
+> > --- /dev/null
+> > +++ b/configs/bpi-r2-pro-rk3568_defconfig
+> > @@ -0,0 +1,94 @@
+> > +CONFIG_ARM=3Dy
+> > +CONFIG_SKIP_LOWLEVEL_INIT=3Dy
+> > +CONFIG_COUNTER_FREQUENCY=3D24000000
+> > +CONFIG_ARCH_ROCKCHIP=3Dy
+> > +CONFIG_TEXT_BASE=3D0x00a00000
+> > +CONFIG_SPL_LIBCOMMON_SUPPORT=3Dy
+> > +CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
+> > +CONFIG_NR_DRAM_BANKS=3D2
+> > +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+> > +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0xc00000
+> > +CONFIG_DEFAULT_DEVICE_TREE=3D"rk3568-bpi-r2-pro"
+> > +CONFIG_SYS_PROMPT=3D"BPI-R2PRO> "
 >
-> Alternative text missing.
+> Very few Rockchip boards use a custom prompt, is this needed?
+
+as i use different boards here it is easier with this prompt ;)
+
+> > +CONFIG_ROCKCHIP_RK3568=3Dy
+> > +CONFIG_SPL_ROCKCHIP_COMMON_BOARD=3Dy
+> > +CONFIG_SPL_SERIAL=3Dy
+> > +CONFIG_SPL_STACK_R_ADDR=3D0x600000
+> > +CONFIG_SPL_STACK=3D0x400000
+> > +CONFIG_DEBUG_UART_BASE=3D0xFE660000
+> > +CONFIG_DEBUG_UART_CLOCK=3D24000000
+> > +CONFIG_SYS_LOAD_ADDR=3D0xc00800
+> > +CONFIG_DEBUG_UART=3Dy
+> > +CONFIG_AHCI=3Dy
+> > +CONFIG_FIT=3Dy
+> > +CONFIG_FIT_VERBOSE=3Dy
+> > +CONFIG_SPL_FIT_SIGNATURE=3Dy
+> > +CONFIG_SPL_LOAD_FIT=3Dy
+> > +CONFIG_BOOTSTD_FULL=3Dy
+> > +CONFIG_LEGACY_IMAGE_FORMAT=3Dy
+> > +CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3568-bpi-r2-pro"
 >
->>> +
->>> +R5 Memory Map
->>> +-------------
->>> +
->>> +.. list-table::
->>> +   :widths: 16 16 16
->>> +   :header-rows: 1
->>> +
->>> +   * - Region
->>> +     - Start Address
->>> +     - End Address
->>> +
->>> +   * - SPL
->>> +     - 0x41c00000
->>> +     - 0x41c40000
->>> +
->>> +   * - EMPTY
->>> +     - 0x41c40000
->>> +     - 0x41c61f20
->>> +
->>> +   * - STACK
->>> +     - 0x41c65f20
->>> +     - 0x41c61f20
->>> +
->>> +   * - Global data
->>> +     - 0x41c65f20
->>> +     - 0x41c66000
->>> +
->>> +   * - Heap
->>> +     - 0x41c66000
->>> +     - 0x41c76000
->>> +
->>> +   * - BSS
->>> +     - 0x41c76000
->>> +     - 0x41c80000
->>> +
->>> +   * - DM DATA
->>> +     - 0x41c80000
->>> +     - 0x41c84130
->>> +
->>> +   * - EMPTY
->>> +     - 0x41c84130
->>> +     - 0x41cff9fc
->>> +
->>> +   * - MCU Scratchpad
->>> +     - 0x41cff9fc
->>> +     - 0x41cffbfc
->>> +
->>> +   * - ROM DATA
->>> +     - 0x41cffbfc
->>> +     - 0x41cfffff
->>> +
->>> +Switch Setting for Boot Mode
->>> +----------------------------
->>> +
->>> +Boot Mode pins provide means to select the boot mode and options 
->>> before the
->>> +device is powered up. After every POR, they are the main source to 
->>> populate
->>> +the Boot Parameter Tables.
->>> +
->>> +Boot Mode Pins for J784S4-EVM
->>> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>> +
->>> +The following tables show some common boot modes used on J784S4 SoC 
->>> platform.
->>> +More details can be found in the Technical Reference Manual:
->>> +http://www.ti.com/lit/zip/spruj52 under the `Boot Mode Pins` section.
->>> +
->>> +.. list-table:: J784S4 EVM Boot Modes
->>> +   :widths: 16 16 16
->>> +   :header-rows: 1
->>> +
->>> +   * - Switch Label
->>> +     - SW9: 12345678
->>> +     - SW8: 12345678
->>> +
->>> +   * - SD
->>> +     - 00000000
->>> +     - 10000010
->>> +
->>> +   * - EMMC
->>> +     - 01000000
->>> +     - 10000000
->>> +
->>> +   * - OSPI
->>> +     - 01000000
->>> +     - 00000110
->>> +
->>> +   * - UART
->>> +     - 01110000
->>> +     - 00000000
->>> +
->>> +   * - USB DFU
->>> +     - 00100000
->>> +     - 10000000
->>> +
->>> +For SW8 and SW9, the switch state in the "ON" position = 1.
->>> +
->>> +Boot Mode Pins for AM69-SK
->>> +^^^^^^^^^^^^^^^^^^^^^^^^^^
->>> +
->>> +The following table show some common boot modes used on AM69-SK 
->>> platform.
->>> +More details can be found in the User Guide for AM69-SK:
->>> +https://www.ti.com/lit/ug/spruj70/spruj70.pdf under the `Bootmode 
->>> Settings`
->>> +section.
->>> +
->>> +.. list-table:: AM69 SK Boot Modes
->>> +   :widths: 16 16
->>> +   :header-rows: 1
->>> +
->>> +   * - Switch Label
->>> +     - SW2: 1234
->>> +
->>> +   * - SD
->>> +     - 0000
->>> +
->>> +   * - EMMC
->>> +     - 0110
->>> +
->>> +   * - OSPI
->>> +     - 1110
->>> +
->>> +   * - UART
->>> +     - 1010
->>> +
->>> +For SW2, the switch state in the "ON" position = 1.
->>> +
->>> +Debugging U-Boot
->>> +----------------
->>> +
->>> +See :ref:`Common Debugging environment - 
->>> OpenOCD<k3_rst_refer_openocd>`: for
->>> +detailed setup information.
->>> +
->>> +.. warning::
->>> +
->>> +  **OpenOCD support since**: v0.12.0
+> This is missing .dtb suffix, fdtfile env var ends up as:
 >
-> Can we put a whole sentence here, e.g.
+>   fdtfile=3Drockchip/rk3568-bpi-r2-pro
 >
-> Debugging the platform via JTAG requires OpenOCD v0.12.0 or later.
+> instead of:
 >
-Okay sure, will fix.
->>
->> I could be wrong here, are we talking tcl scripts? or just the K3
->> platform in general?
->>
->>> +
->>> +  If the default package version of OpenOCD in your development
->>> +  environment's distribution needs to be updated, it might be 
->>> necessary to
->>> +  build OpenOCD from the source.
+>   fdtfile=3Drockchip/rk3568-bpi-r2-pro.dtb
 >
-> This sentence seems superfluous if you have a complete sentence above.
+> Resulting in possible a dtb-file not being loaded when an entry in
+> extlinux.conf use fdtdir instead of fdt value.
+
+ok, will fix it to
+
+CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3568-bpi-r2-pro.dtb"
+
+> > +# CONFIG_DISPLAY_CPUINFO is not set
+> > +CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> > +CONFIG_SPL_MAX_SIZE=3D0x40000
+> > +CONFIG_SPL_PAD_TO=3D0x7f8000
+> > +CONFIG_SPL_HAS_BSS_LINKER_SECTION=3Dy
+> > +CONFIG_SPL_BSS_START_ADDR=3D0x4000000
+> > +CONFIG_SPL_BSS_MAX_SIZE=3D0x4000
+> > +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> > +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> > +CONFIG_SPL_STACK_R=3Dy
+> > +CONFIG_SPL_ATF=3Dy
+> > +CONFIG_CMD_GPIO=3Dy
+> > +CONFIG_CMD_GPT=3Dy
+> > +CONFIG_CMD_I2C=3Dy
+> > +CONFIG_CMD_MMC=3Dy
+> > +CONFIG_CMD_USB=3Dy
+> > +CONFIG_CMD_SYSBOOT=3Dy
+> > +CONFIG_CMD_PMIC=3Dy
+> > +CONFIG_CMD_REGULATOR=3Dy
+> > +# CONFIG_SPL_DOS_PARTITION is not set
+> > +CONFIG_SPL_OF_CONTROL=3Dy
+> > +CONFIG_OF_LIVE=3Dy
+> > +CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned-c=
+locks assigned-clock-rates assigned-clock-parents"
+> > +CONFIG_SPL_DM_SEQ_ALIAS=3Dy
+> > +CONFIG_SPL_REGMAP=3Dy
+> > +CONFIG_SPL_SYSCON=3Dy
+> > +CONFIG_DWC_AHCI=3Dy
+> > +CONFIG_SPL_CLK=3Dy
+> > +CONFIG_ROCKCHIP_GPIO=3Dy
+> > +CONFIG_SYS_I2C_ROCKCHIP=3Dy
+> > +CONFIG_MISC=3Dy
+> > +CONFIG_SUPPORT_EMMC_RPMB=3Dy
+> > +CONFIG_SUPPORT_EMMC_BOOT=3Dy
 >
-Okay, will fix it.
-> Best regards
+> arch/arm/mach-rockchip/spl.c override spl_mmc_boot_mode() to always
+> return MMCSD_MODE_RAW, so there should not be any need to include
+> support for MMCSD_MODE_EMMCBOOT.
+
+i would leave it till i known how to correctly boot from emmc and how
+to determine from which mmc device board was booted.
+
+> > +CONFIG_MMC_DW=3Dy
+> > +CONFIG_MMC_DW_ROCKCHIP=3Dy
+> > +CONFIG_MMC_SDHCI=3Dy
+> > +CONFIG_MMC_SDHCI_SDMA=3Dy
+> > +CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
+> > +CONFIG_PHY_REALTEK=3Dy
+> > +CONFIG_DWC_ETH_QOS=3Dy
+> > +CONFIG_DWC_ETH_QOS_ROCKCHIP=3Dy
+> > +CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
+> > +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=3Dy
+> > +CONFIG_SPL_PINCTRL=3Dy
+> > +CONFIG_DM_PMIC=3Dy
+> > +CONFIG_PMIC_RK8XX=3Dy
+> > +CONFIG_REGULATOR_PWM=3Dy
 >
-> Heinrich
+> Not seeing any pwm-regulator compatible in the DT, so this option could
+> be removed.
+
+ok, i drop it
+
+> > +CONFIG_REGULATOR_RK8XX=3Dy
+> > +CONFIG_PWM_ROCKCHIP=3Dy
+> > +CONFIG_SPL_RAM=3Dy
+> > +CONFIG_SCSI=3Dy
+> > +CONFIG_DM_SCSI=3Dy
+> > +CONFIG_BAUDRATE=3D1500000
+> > +CONFIG_DEBUG_UART_SHIFT=3D2
+> > +CONFIG_SYS_NS16550_MEM32=3Dy
+> > +CONFIG_SYSRESET=3Dy
+> > +CONFIG_USB=3Dy
+> > +CONFIG_USB_XHCI_HCD=3Dy
+> > +CONFIG_USB_EHCI_HCD=3Dy
+> > +CONFIG_USB_EHCI_GENERIC=3Dy
+> > +CONFIG_USB_OHCI_HCD=3Dy
+> > +CONFIG_USB_OHCI_GENERIC=3Dy
+> > +CONFIG_USB_DWC3=3Dy
+> > +CONFIG_USB_DWC3_GENERIC=3Dy
+> > +CONFIG_ERRNO_STR=3Dy
+> > diff --git a/doc/board/rockchip/rockchip.rst b/doc/board/rockchip/rock=
+chip.rst
+> > index de9fe8e642b1..58f20b837876 100644
+> > --- a/doc/board/rockchip/rockchip.rst
+> > +++ b/doc/board/rockchip/rockchip.rst
+> > @@ -101,6 +101,7 @@ List of mainline supported Rockchip boards:
+> >
+> >  * rk3568
+> >       - Rockchip Evb-RK3568 (evb-rk3568)
+> > +     - Banana Pi BPI-R2 Pro (bpi-r2-pro-rk3568)
+> >       - EmbedFire LubanCat 2 (lubancat-2-rk3568)
+> >       - FriendlyElec NanoPi R5C (nanopi-r5c-rk3568)
+> >       - FriendlyElec NanoPi R5S (nanopi-r5s-rk3568)
 >
->>> +
->>> +Debugging U-Boot on J784S4-EVM
->>> +^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
->>> +    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
->>> +
->>> +To start OpenOCD and connect to the board
->>> +
->>> +.. code-block:: bash
->>> +
->>> +  openocd -f board/ti_j784s4evm.cfg
->>> +
->>> +Debugging U-Boot on SK-AM69
->>> +^^^^^^^^^^^^^^^^^^^^^^^^^^^
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_openocd_connect_cti20
->>> +    :end-before: .. k3_rst_include_end_openocd_connect_cti20
->>> +
->>> +.. include::  k3.rst
->>> +    :start-after: .. k3_rst_include_start_openocd_cfg_external_intro
->>> +    :end-before: .. k3_rst_include_end_openocd_cfg_external_intro
->>> +
->>> +For SK-AM69, the openocd_connect.cfg is as follows:
->>> +
->>> +.. code-block:: tcl
->>> +
->>> +  # TUMPA example:
->>> +  # 
->>> http://www.tiaowiki.com/w/TIAO_USB_Multi_Protocol_Adapter_User's_Manual
->>> +  source [find interface/ftdi/tumpa.cfg]
->>> +
->>> +  transport select jtag
->>> +
->>> +  # default JTAG configuration has only SRST and no TRST
->>> +  reset_config srst_only srst_push_pull
->>> +
->>> +  # delay after SRST goes inactive
->>> +  adapter srst delay 20
->>> +
->>> +  if { ![info exists SOC] } {
->>> +    # Set the SoC of interest
->>> +    set SOC j784s4
->>> +  }
->>> +
->>> +  source [find target/ti_k3.cfg]
->>> +
->>> +  ftdi tdo_sample_edge falling
->>> +
->>> +  # Speeds for FT2232H are in multiples of 2, and 32MHz is tops
->>> +  # max speed we seem to achieve is ~20MHz.. so we pick 16MHz
->>> +  adapter speed 16000
->>> diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
->>> index ec447358ac..60aacdac99 100644
->>> --- a/doc/board/ti/k3.rst
->>> +++ b/doc/board/ti/k3.rst
->>> @@ -35,6 +35,7 @@ K3 Based SoCs
->>>      am65x_evm
->>>      j7200_evm
->>>      j721e_evm
->>> +   j784s4_evm
->>>
->>>   Boot Flow Overview
->>>   ------------------
->>> -- 
->>> 2.34.1
->>>
+> With CONFIG_DEFAULT_FDT_FILE fixed, this is:
 >
--- 
-Regards,
-Apurva Nandan,
-Texas Instruments.
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+>
+> remaining nits is fully up to you.
+
+
+regards Frank
 
