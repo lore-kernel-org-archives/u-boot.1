@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84919E7C4E2
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 17:53:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E74E7C4E2
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 17:58:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 639DF87581;
-	Wed,  4 Oct 2023 19:53:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF93E875B0;
+	Wed,  4 Oct 2023 19:58:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TJCAPGJ3";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nkWWgb3j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1131287591; Wed,  4 Oct 2023 19:53:09 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 9B593875BD; Wed,  4 Oct 2023 19:58:15 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A80718757E
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 19:53:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB59F875A2
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 19:58:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394Hqpln013058;
- Wed, 4 Oct 2023 12:52:51 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394Hvwn4127576;
+ Wed, 4 Oct 2023 12:57:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696441971;
- bh=Hu6DJlFo1aMWSUMKZ5O8pJ0Nh/zJud+q+OYKv65Oh4g=;
+ s=ti-com-17Q1; t=1696442278;
+ bh=E+jE8o8zV/R8Kn7ySLZScKgiHdq/NRug3vgE1XhtV1o=;
  h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=TJCAPGJ3stfXJUrhc3/d0hE8jpWe9/CRzGOWyrXP1LK8WQQNaI2AMdbOwqv7i/9/G
- ePcJRv2mHZJIzoV78Qo8D+bsI5QvLWt3wxnltV/JdKPNwkx4vD4x7isKBgHkmHwlcp
- 8mPjtvlinqPGlTlElukuwHA5QFs1mqgfRh5qIlyo=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394HqpQM020917
+ b=nkWWgb3j3U2uKloR53oXAAr75BYyWpYPm1IgApwy271Pe6dzZX7UWj2KkNOIPZz5s
+ a4N1cJs413LuV85tjGufGxaA9x58gNYtJ9cTcOCeb43+NKCpQjCOOxUURNQX/VKVbJ
+ Fmq1qu5ireiEB2FI8F8yIGyMSNPtx1b7RE3zThd8=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394HvwJ1126864
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 4 Oct 2023 12:52:51 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 4 Oct 2023 12:57:58 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
- Oct 2023 12:52:50 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 12:57:58 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 4 Oct 2023 12:52:51 -0500
-Received: from [10.24.69.34] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394Hqhr2005623;
- Wed, 4 Oct 2023 12:52:44 -0500
-Message-ID: <b5c48875-cca0-c62f-1254-ef50307553ec@ti.com>
-Date: Wed, 4 Oct 2023 23:22:43 +0530
+ Frontend Transport; Wed, 4 Oct 2023 12:57:58 -0500
+Received: from [10.24.69.34] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394Hvp4G010319;
+ Wed, 4 Oct 2023 12:57:51 -0500
+Message-ID: <4efae709-19e5-2246-3f9c-e4d491ed0338@ti.com>
+Date: Wed, 4 Oct 2023 23:27:50 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
@@ -274,9 +274,7 @@ On 02/10/23 21:31, Nishanth Menon wrote:
 >> +	}
 >> +};
 > Why not reuse CONFIG_SOC_K3_J721S2 or adopt it?
-The mem_map regions are different for J784S4 from J721S2,
-and on the hardware side also, i.e. J784S4 has 4x8G DDR slots,
-so how can we bring it in same CONFIG as J721S2?
+>
 >> +
 >> +struct mm_region *mem_map = j784s4_mem_map;
 >> +
@@ -373,7 +371,7 @@ so how can we bring it in same CONFIG as J721S2?
 >> + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
 >> + *	David Huang <d-huang@ti.com>
 > Does'nt appear in the sign-offs etc..
->
+Okay, will fix
 >> + */
 >> +#ifndef _ASM_ARCH_J784S4_SPL_H_
 >> +#define _ASM_ARCH_J784S4_SPL_H_
@@ -708,7 +706,7 @@ so how can we bring it in same CONFIG as J721S2?
 >> +	case BOOT_DEVICE_MMC2:
 >> +		return MMCSD_MODE_FS;
 > See commit 0f1c1e8b368bd598b1c7f4b285f8921665ab62ac
->
+Okay, will enable this
 >> +	default:
 >> +		return MMCSD_MODE_RAW;
 >> +	}
