@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C023E7B5F3
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 11:39:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A648E7B5F6
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 11:39:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A21A687504;
-	Wed,  4 Oct 2023 13:39:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 22DC6874F4;
+	Wed,  4 Oct 2023 13:39:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ssyfwugF";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="TdSFSwur";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9721F874DC; Wed,  4 Oct 2023 13:39:35 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id 26D85874E4; Wed,  4 Oct 2023 13:39:41 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 445B6874F3
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 13:39:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1AB586199
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 13:39:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=864180acd4=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 394AqUUV022073; Wed, 4 Oct 2023 13:39:30 +0200
+ 394A38FZ022388; Wed, 4 Oct 2023 13:39:38 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=2QVMa5eSDssDWpKmjD5GyswUamKy3X3g9wOYAyonq1Q=; b=ss
- yfwugFPUny4BOZ11QpZz2o6dPRqW2qMkgnCcKPTVIONacmIRF98Qh5imerVDdlG8
- oQK+0EZNVjMgYRbsmXw8vtwICNKMw7sMXgMN5KiseK34hGk4DLuRed/79Ju8BJfw
- FIrCBr4bAV2R3pb6jMcM4oTVGchCn3Pxt5bsbabl3P56eAXTmQuYZZSiGfqyfggV
- L10AddSk3J+BpV0uVIYcPrt1CL69p/e+9uUngbqr3bdn8/4T++rePOsAa8GYvPv+
- MYRP86PFuq7Bymm6o6wXa9u8QrhrBcCJ/KfHX/PRLIyR6ituQqa/H7fbkMp+ZkgN
- Uel/ofH5RBZdpYTKylWw==
+ selector1; bh=1bjYv1+qVN48CPkXw+G6lEYUvQYM46eB6hTjeD9zBmA=; b=Td
+ SFSwurktfRslAiwx9x+mrpMUhtug9YIisQ3Q2riOkHYkAQP9s65ueq8L0J6uGVQF
+ uddVRN2TAf9zjgWAim/IjV4Xo/ANIBytluPBlytdVDAnhTShsRrLzP16WygJsbJY
+ KvtuX4ytwfEe5fYXzgYiLvkgtjAFDj1NK2eRxmFrOhufy927N10y4eLZseA012mn
+ 0bSJ4YOBHCcRMiERtLiTkLuy94dNfWk+AkQXozGb/5WlXVaDhsK2UHoCsZabqeCJ
+ H2FljNf0AbeKB10ex/yiGDI5Nzsl/ImbAj25+ReSmRmoYADgm60MRbXhMGWero0e
+ ztTPfu1iT5+AHkDjrfrw==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3teajd0sxd-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3texmj6h1k-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 04 Oct 2023 13:39:30 +0200 (MEST)
+ Wed, 04 Oct 2023 13:39:38 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 61371100053;
- Wed,  4 Oct 2023 13:39:30 +0200 (CEST)
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 33F81100053;
+ Wed,  4 Oct 2023 13:39:38 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 5B1DC235F10;
- Wed,  4 Oct 2023 13:39:30 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 2C77B235F10;
+ Wed,  4 Oct 2023 13:39:38 +0200 (CEST)
 Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 4 Oct
- 2023 13:39:30 +0200
-Message-ID: <ae63ae81-ead1-2273-85fc-9781dfd708bb@foss.st.com>
-Date: Wed, 4 Oct 2023 13:39:29 +0200
+ 2023 13:39:37 +0200
+Message-ID: <e08165c0-6426-2e6c-e086-9250eba2398d@foss.st.com>
+Date: Wed, 4 Oct 2023 13:39:36 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH v1 3/6] configs: stm32mp13: Enable USB related flags
+Subject: Re: [PATCH v1 4/6] configs: stm32mp13: activate command stm32prog
 Content-Language: en-US
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 CC: Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20230926150924.1150082-1-patrice.chotard@foss.st.com>
- <20230926150924.1150082-4-patrice.chotard@foss.st.com>
- <4bc13cf3-9936-d986-dc10-fd4bdecb5b12@foss.st.com>
+ <20230926150924.1150082-5-patrice.chotard@foss.st.com>
+ <9767555c-ae04-35f7-fdae-f84f2750c4f0@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <4bc13cf3-9936-d986-dc10-fd4bdecb5b12@foss.st.com>
+In-Reply-To: <9767555c-ae04-35f7-fdae-f84f2750c4f0@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.201.20.38]
 X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-10-04_03,2023-10-02_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,13 +98,20 @@ On 10/4/23 11:56, Patrick DELAUNAY wrote:
 > Hi,
 > 
 > On 9/26/23 17:09, Patrice Chotard wrote:
->> Enable USB related flags.
+>> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
 >>
+>> Activate the command stm32prog with CONFIG_CMD_STM32MPROG.
+>> The CONFIG_SET_DFU_ALT_INFO is also activated to support
+>> the required weak functions for the DFU virtual backen defined in
+>> board/st/common/stm32mp_dfu.c.
+>>
+>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>   configs/stm32mp13_defconfig | 18 ++++++++++++++++++
->>   1 file changed, 18 insertions(+)
+>>   configs/stm32mp13_defconfig        | 2 ++
+>>   include/configs/stm32mp13_common.h | 4 ++++
+>>   2 files changed, 6 insertions(+)
 >>
 > 
 > 
@@ -112,6 +119,7 @@ On 10/4/23 11:56, Patrick DELAUNAY wrote:
 > 
 > Thanks
 > Patrick
+> 
 > 
 > 
 > 
