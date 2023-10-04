@@ -4,124 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E445E8FDDD
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 08:56:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A22AE8FDDB
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 08:57:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E64486D77;
-	Wed,  4 Oct 2023 10:56:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
+	by phobos.denx.de (Postfix) with ESMTP id 9B48186DD5;
+	Wed,  4 Oct 2023 10:57:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="r1QzRY5l";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B91886D94; Wed,  4 Oct 2023 10:56:49 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20620.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7d00::620])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B897886D5C
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 10:56:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=weidmueller.com
+ id 83D9A86DD5; Wed,  4 Oct 2023 10:57:16 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 95BBF86DC1
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 10:57:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=egeK/kvo0G+40hGix5szDTNBl9REnXjMun4boeARpbfqAFOyZgP5CpUU6skzgzCrC5itfS1B6NZRm+XLDUcBhfAAGGJ45dfOwJ/q+fOt8MKCrlhYBIB5YsjEFSKhwHCLGbfQyobVYrWNSCrR/XEVI6uDTEYYyGrzSj1N74iJKEZ5xg/jXJVRaaDO4GZsAm+nUxi2zycRlRECZ/S+eBJZm8I6Tsebg/BKY9zJoy4AKs0pEzDyZfm47Hz7x4U6Y95erXVTpp5Xah1ufYhw27cuyt1Z00TVQP1S/52OMbQDC3zyiim8Eszj+M9ylY4DMfYueBpraeHS4X8xmatGgW3Xqg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PHISZJb0YhVxar9t66C8SimX91OlX2WeWtIP4qG7O1U=;
- b=VZy5Se5Y1l180GK70MINEC/WUVbEJXkFWbfhxJSLZcdT1Ew70tITx7DUbw5ssjhjHN31059X1I6r+N4Hafx19TXz2bVZZpVOKlsqGFdenkiedUsI+bVyFMSOXDGL78S8PIv3T0rAD9TDRJHq6PBRWtPT0Y8DVhoErLmak/ZnjdEefaaBChJSWHG9If1eOiup0snjsr0xLY0++XEwcAFCFVsy5W/juLKA3QFXdFjQEw5+8nOy9h3cOH4Wg0QgxvuqgK+xBx4fwRu6u0OBeWqBBLG+qaSsPkVXMf++hApA8cLtYztjDlM65VBhs4CLwx4t70+e60Q+aDbbzCLngEYeXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PHISZJb0YhVxar9t66C8SimX91OlX2WeWtIP4qG7O1U=;
- b=r1QzRY5lBBvbx7vRGo87GxmpgGJhCGZtpt/0Lu3DjJkXRNP5qJSf3U62uHzzvOFekeJTyIt/uzTn/JCzvuXKmJecv0iPK2XCko9y3WEtua7VS0J5IfyAh8Z/uvHMgUVu5T4IalE81ZhfZTMhjTQaIQ+8Qm7RmsONGHDUpDbIWRw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by DB8PR08MB5482.eurprd08.prod.outlook.com (2603:10a6:10:116::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6813.28; Wed, 4 Oct
- 2023 08:56:44 +0000
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::4d2c:55ba:282e:9a62]) by AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::4d2c:55ba:282e:9a62%5]) with mapi id 15.20.6838.030; Wed, 4 Oct 2023
- 08:56:44 +0000
-From: lukas.funke-oss@weidmueller.com
-To: u-boot@lists.denx.de,
-	Simon Glass <sjg@chromium.org>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Michal Simek <michal.simek@amd.com>,
- Lukas Funke <lukas.funke-oss@weidmueller.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>
-Subject: [PATCH] binman: bintool: Change make target arg type from string to
- list
-Date: Wed,  4 Oct 2023 10:56:35 +0200
-Message-Id: <20231004085635.330221-1-lukas.funke-oss@weidmueller.com>
-X-Mailer: git-send-email 2.30.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: FR0P281CA0067.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:49::21) To AS2PR08MB8431.eurprd08.prod.outlook.com
- (2603:10a6:20b:55a::18)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,199,1694703600"; 
+ d="asc'?scan'208";a="178144828"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 04 Oct 2023 17:57:09 +0900
+Received: from [10.226.93.90] (unknown [10.226.93.90])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 43B09400C728;
+ Wed,  4 Oct 2023 17:57:06 +0900 (JST)
+Message-ID: <fe6c6582-6155-81d4-0c7f-19c545a4acf7@bp.renesas.com>
+Date: Wed, 4 Oct 2023 09:57:05 +0100
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|DB8PR08MB5482:EE_
-X-MS-Office365-Filtering-Correlation-Id: 047375b5-02ec-4598-8fa5-08dbc4b7d584
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: jefbtj9qV3EyO4hl+K1pdPVXkblxWfyg8Dvxeg8Jb1I4icZzhtN7HLGRT07xsF8/TsrTEch9nFbn+H6CLoK7XJCZYCPAzQn6JpavXxlCa4D4oVSznHmBMuqpw60ZBOlLqmcmGb2AzQuvUhsZWrPAB/wOjwIQfpXhdmBpmdxyU9Yv1sjPQbbKvtHAOJbk8S/dVUInbSmn4L2nzMuuBU+1l0mu8jQ4NFDZvDAc+RJ2D2ymgbLGCJhxUs8i49kY5zkf9bpDK3EnFUP6zF6nWwUQFUTjwWjujUYJvLZFwao1PN3sOcveHrO7zSyatHVtRBHL+8s+MUvpClcdnrdq3fJPVT4zGufQ8b/sbzCPMvFBElp94iRux1jDBnJe4tro+5z5mCqspunNU0sx/G9V1QgpnkbNGVvywXc05lsS7vcosnNOdhU8l6YNl5h8hZ3Ai4IlOEdHrQlHeQPbvju946+IdTeotxPxUozuL08nwFuWPzxgLjUxmp1rOlN48SP5BPG/omVYj+/rqr/sLlO3Xdzvln0TGNm0LFt3C/E9oQl4bmvmvjuhFVDzijbcmdVhWBhm71fUHnfCgMzXtKYkTJkg7L1u1b0bGM6c5sPnICnMMBU=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(346002)(396003)(366004)(136003)(39860400002)(376002)(230922051799003)(64100799003)(186009)(451199024)(1800799009)(2616005)(6506007)(6512007)(9686003)(8936002)(6486002)(38100700002)(478600001)(5660300002)(66946007)(4326008)(26005)(316002)(6916009)(1076003)(41300700001)(8676002)(6666004)(54906003)(2906002)(66476007)(66556008)(52116002)(83380400001)(36756003)(38350700002)(86362001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?eN6XoaXkTfIEpe48sqHIDBglttB4AbrNbbSwfvn0bhy9gS+mHzJkZnwmZRQQ?=
- =?us-ascii?Q?FO3vYbvZIQX4NelHkKxNyAl3qP59wwid9n3bL34OhmX1+tW+x49GxzA++dZH?=
- =?us-ascii?Q?4sRI0Cmqkm9Dp228Sv8Ry8nsDjle6Z59+NKqbGxpwINHQKJRS0EsOTsq6dnY?=
- =?us-ascii?Q?1oJEHA8d2WYGwflRw7yBz0tkhv/5i1dPYIMwH+0PWl6sTm2Ff/aLAlWvypcT?=
- =?us-ascii?Q?vkGjNAW7P2xT2gLRIPC0cdtnKQeGNCaNrFoUSIiOWsQZ+NTeDFKXxPAJRKoH?=
- =?us-ascii?Q?nfDLrNAnyK9ZN3AC3XXOlMEOCFCR1zkv3yxsU360eLh/ejw00DbeL9WVtSN3?=
- =?us-ascii?Q?CAKOR6rUYpjU4xSUQJaf7ybuz+2j2B29fRTdE/6d8G9EL7RxeAQZ8+qvLF8d?=
- =?us-ascii?Q?KFa56bXTJK2Em8qlQzt9vyp9/Kyq9dWN3+UzLqw6VdJkHf1LnNw8WtHuL2fv?=
- =?us-ascii?Q?xIV6PESRioPVz9+Ak7L9B6lIA/Pz427GBkeMGk7W44NPTcl+Z4SQi/4HMNe1?=
- =?us-ascii?Q?itEhaKfBf4+iMf0XCtEkADJMy00VLKuYBeDSewl5zLC4YR7YzAHTrZJoUup/?=
- =?us-ascii?Q?DJZcv49Qp0VNYT7Tw5PRuMmjHkT3a6JQYLgX1MFqnP6JVVxIDU1l3y6lo4Gk?=
- =?us-ascii?Q?WWb1/97wymE0XS/5OhNdH8UpZdVr5a3FPEXatrfS3AsQHie+4RsNFML2K7eE?=
- =?us-ascii?Q?YOaKaXdsBbK5nJmg3yBheoCMFMvANHlcKPpAWAUnwMgtzFiqYEyR+hiTOEZF?=
- =?us-ascii?Q?3cqIWSEcZ/hurA6/a5kH5WYyqNrAJbdCevLJKipxVQwwJAbOuiKEdzVDN5bH?=
- =?us-ascii?Q?VrMeyykjMKuPnBCbuPrVE32iFuIJKSgr+fkVx+tB50WAZ/vo9/GywnCiUrT3?=
- =?us-ascii?Q?RK+UDHz1jO0REzFugKvZ76tDKJCbLMlLkOhH1K2kXn+j+Lcsxe1Fp8QvjLO7?=
- =?us-ascii?Q?P3x5im+4r0LxWsrOSsfu8is7axDt4v0NoEartkGNR/ncggibSvi63bH+kG02?=
- =?us-ascii?Q?eCnjPFpHBU/Zl6c8ystgRdbFWM8UWdBi9gClLnKufHMTWAOmfWOA1c4LU3FU?=
- =?us-ascii?Q?ujB1K58WcssiFympwfNFIBZ2sOOMFhd3atZkRNXUIJpS/7kV7KhJCdo1/Ww1?=
- =?us-ascii?Q?Gz/K5c1aPn+rj6bWhc7Y9XSaEJEDN7PvqL1NQ1pVr7GZQHuVuLo/TuokwoCU?=
- =?us-ascii?Q?wR32I2YVgcLfIVc0Kz63t4VvbCb9VOZhcLpeL07tnopS3ZlQ5aKCNrLM5Ur3?=
- =?us-ascii?Q?3Uu7MIbHzlHYcUPhPosyEZIM3orTJUJ558iHlOPJqgyFVFxr0TIfq7up1sny?=
- =?us-ascii?Q?w8WNBhW5Rs42yDUIsy84mlsRhLRHInNQFA+rrQ/nxmr+g0Tq4RIw/BnIuUli?=
- =?us-ascii?Q?2tmnfFBpfwTFLpxMraprzxZ7GhON/oC9LGt7diIotMHB0k2khaZlO2Mn4keb?=
- =?us-ascii?Q?u/1jqvb11k6WbrWYfjfV8f9f4kIIeHZtBuZ1wSsRki5/zPOBVPwmAUent26b?=
- =?us-ascii?Q?UUHOPshTJ9D7F21KJT3AtZ2qISsZucYLKyiyKpSMGNhjPfyEmgoSS6sOUMkq?=
- =?us-ascii?Q?mHA/kfoNhxjSQqawtnSumbczXJkndoQ75Y5yYB6XloDr1FHO5PgGFhlhWZ5Q?=
- =?us-ascii?Q?7A=3D=3D?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 047375b5-02ec-4598-8fa5-08dbc4b7d584
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Oct 2023 08:56:44.4784 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ojcdWMSgkUK+NCEDeOHIJyINUgu7OXtrLz0p8lNRKFpbT756g2Up591jJGjQIytPoeDQPju9b1Iq1JcFnQOoYA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR08MB5482
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 12/16] arm: rmobile: Include <asm/types.h> in header
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-13-paul.barker.ct@bp.renesas.com>
+ <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------uvQ9YoqoqZ05BSFmQMQ2yEkf"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,60 +62,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lukas Funke <lukas.funke@weidmueller.com>
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------uvQ9YoqoqZ05BSFmQMQ2yEkf
+Content-Type: multipart/mixed; boundary="------------qOOmG5XOXlWkUY1DJIVtLMuY";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Message-ID: <fe6c6582-6155-81d4-0c7f-19c545a4acf7@bp.renesas.com>
+Subject: Re: [PATCH 12/16] arm: rmobile: Include <asm/types.h> in header
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-13-paul.barker.ct@bp.renesas.com>
+ <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
+In-Reply-To: <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
 
-The argument type of `build_from_git` was changed from string to list
-in d71e7116997f14097735f04cc7847f0a68dbc485.
+--------------qOOmG5XOXlWkUY1DJIVtLMuY
+Content-Type: multipart/mixed; boundary="------------weEjkdviK84J2Opj0Zcznw0V"
 
-This commit adapts the argument type of all bintools using this
-function.
+--------------weEjkdviK84J2Opj0Zcznw0V
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+On 03/10/2023 14:27, Marek Vasut wrote:
+> On 9/20/23 14:42, Paul Barker wrote:
+>> We don't want to rely on source files including <asm/types.h> before
+>> <asm/arch/rmobile.h>.
+>=20
+> What kind of error does this solve ?
 
----
+Without this, <asm/types.h> must be included before
+<asm/arch/rmobile.h>, for example in include/configs/rzg2l-smarc.h added
+in patch 16, to avoid the following error:
 
- tools/binman/btool/bootgen.py  | 2 +-
- tools/binman/btool/fiptool.py  | 2 +-
- tools/binman/btool/futility.py | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+  CC      arch/arm/lib/asm-offsets.s
+In file included from include/configs/rzg2l-smarc.h:9,
+                 from include/config.h:3,
+                 from include/common.h:16,
+                 from lib/asm-offsets.c:14:
+=2E/arch/arm/include/asm/arch/rmobile.h:49:7: error: unknown type name =E2=
+=80=98u8=E2=80=99
+   49 | const u8 *rzg_get_cpu_name(void);
+      |       ^~
+In file included from include/configs/rzg2l-smarc.h:9,
+                 from include/config.h:3,
+                 from include/common.h:16,
+                 from arch/arm/lib/asm-offsets.c:19:
+=2E/arch/arm/include/asm/arch/rmobile.h:49:7: error: unknown type name =E2=
+=80=98u8=E2=80=99
+   49 | const u8 *rzg_get_cpu_name(void);
+      |       ^~
+=2E/arch/arm/include/asm/arch/rmobile.h:50:1: error: unknown type name =E2=
+=80=98u32=E2=80=99
+   50 | u32 rmobile_get_cpu_type(void);
+      | ^~~
+=2E/arch/arm/include/asm/arch/rmobile.h:50:1: error: unknown type name =E2=
+=80=98u32=E2=80=99
+   50 | u32 rmobile_get_cpu_type(void);
+      | ^~~
+=2E/arch/arm/include/asm/arch/rmobile.h:51:1: error: unknown type name =E2=
+=80=98u32=E2=80=99
+   51 | u32 rmobile_get_cpu_rev_integer(void);
+      | ^~~
+=2E/arch/arm/include/asm/arch/rmobile.h:52:1: error: unknown type name =E2=
+=80=98u32=E2=80=99
+   52 | u32 rmobile_get_cpu_rev_fraction(void);
+      | ^~~
+=2E/arch/arm/include/asm/arch/rmobile.h:51:1: error: unknown type name =E2=
+=80=98u32=E2=80=99
+   51 | u32 rmobile_get_cpu_rev_integer(void);
+      | ^~~
+=2E/arch/arm/include/asm/arch/rmobile.h:52:1: error: unknown type name =E2=
+=80=98u32=E2=80=99
+   52 | u32 rmobile_get_cpu_rev_fraction(void);
+      | ^~~
+make[1]: *** [scripts/Makefile.build:146: arch/arm/lib/asm-offsets.s]
+Error 1
+make[1]: *** Waiting for unfinished jobs....
+make[1]: *** [scripts/Makefile.build:146: lib/asm-offsets.s] Error 1
+make: *** [Makefile:1916: prepare0] Error 2
 
-diff --git a/tools/binman/btool/bootgen.py b/tools/binman/btool/bootgen.py
-index f2ca552dc2..1bc9f0aa96 100644
---- a/tools/binman/btool/bootgen.py
-+++ b/tools/binman/btool/bootgen.py
-@@ -132,6 +132,6 @@ class Bintoolbootgen(bintool.Bintool):
- 
-         result = self.build_from_git(
-             'https://github.com/Xilinx/bootgen',
--            'all',
-+            ['all'],
-             'bootgen')
-         return result
-diff --git a/tools/binman/btool/fiptool.py b/tools/binman/btool/fiptool.py
-index c80f8275c4..34002f54af 100644
---- a/tools/binman/btool/fiptool.py
-+++ b/tools/binman/btool/fiptool.py
-@@ -109,6 +109,6 @@ class Bintoolfiptool(bintool.Bintool):
-             return None
-         result = self.build_from_git(
-             'https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git',
--            'fiptool',
-+            ['fiptool'],
-             'tools/fiptool/fiptool')
-         return result
-diff --git a/tools/binman/btool/futility.py b/tools/binman/btool/futility.py
-index 04c9aefe9b..0d3980d071 100644
---- a/tools/binman/btool/futility.py
-+++ b/tools/binman/btool/futility.py
-@@ -170,7 +170,7 @@ class Bintoolfutility(bintool.Bintool):
-         # .gitcookies file. So use a mirror instead.
-         result = self.build_from_git(
-             'https://github.com/sjg20/vboot_reference.git',
--            'all',
-+            ['all'],
-             'build/futility/futility',
-             flags=['USE_FLASHROM=0'])
-         return result
--- 
-2.30.2
+Thanks,
+Paul
+--------------weEjkdviK84J2Opj0Zcznw0V
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------weEjkdviK84J2Opj0Zcznw0V--
+
+--------------qOOmG5XOXlWkUY1DJIVtLMuY--
+
+--------------uvQ9YoqoqZ05BSFmQMQ2yEkf
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR0o4QUDAAAAAAAKCRDbaV4Vf/JGvQxp
+AQDz8Qqtmgo6lqCnwkR//I4dfIXJ9hkV+BHImi04za0sYAD6A4z5t9j7E/7isZAwr6lYJSoIVEzg
+i8hPCY87AyY8XQs=
+=g+ST
+-----END PGP SIGNATURE-----
+
+--------------uvQ9YoqoqZ05BSFmQMQ2yEkf--
