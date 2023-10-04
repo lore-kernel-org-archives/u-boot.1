@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A22AE8FDDB
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 08:57:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EFFAE8FDDE
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 09:06:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B48186DD5;
-	Wed,  4 Oct 2023 10:57:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BB13D86D0E;
+	Wed,  4 Oct 2023 11:05:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83D9A86DD5; Wed,  4 Oct 2023 10:57:16 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 95BBF86DC1
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 10:57:11 +0200 (CEST)
+ id DA1AF8691E; Wed,  4 Oct 2023 11:05:57 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id E5F3E86E43
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 11:05:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.03,199,1694703600"; 
- d="asc'?scan'208";a="178144828"
+ d="asc'?scan'208";a="181889738"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 04 Oct 2023 17:57:09 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 04 Oct 2023 18:05:53 +0900
 Received: from [10.226.93.90] (unknown [10.226.93.90])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 43B09400C728;
- Wed,  4 Oct 2023 17:57:06 +0900 (JST)
-Message-ID: <fe6c6582-6155-81d4-0c7f-19c545a4acf7@bp.renesas.com>
-Date: Wed, 4 Oct 2023 09:57:05 +0100
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 18B0540071FA;
+ Wed,  4 Oct 2023 18:05:50 +0900 (JST)
+Message-ID: <b66f6888-2789-40f6-2ae5-8abe81e03474@bp.renesas.com>
+Date: Wed, 4 Oct 2023 10:05:49 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 12/16] arm: rmobile: Include <asm/types.h> in header
+Subject: Re: [PATCH 13/16] arm: rmobile: Add CPU detection for RZ/G2L
 To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-13-paul.barker.ct@bp.renesas.com>
- <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
+ <20230920124212.63535-14-paul.barker.ct@bp.renesas.com>
+ <af43734f-e901-3261-1a26-094b5c84583f@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
+In-Reply-To: <af43734f-e901-3261-1a26-094b5c84583f@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------uvQ9YoqoqZ05BSFmQMQ2yEkf"
+ boundary="------------0TXp1mq4lpCAUJOk31KKywHN"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,89 +63,67 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------uvQ9YoqoqZ05BSFmQMQ2yEkf
-Content-Type: multipart/mixed; boundary="------------qOOmG5XOXlWkUY1DJIVtLMuY";
+--------------0TXp1mq4lpCAUJOk31KKywHN
+Content-Type: multipart/mixed; boundary="------------FukvOBdYV3AloT2anxzD4G6c";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Message-ID: <fe6c6582-6155-81d4-0c7f-19c545a4acf7@bp.renesas.com>
-Subject: Re: [PATCH 12/16] arm: rmobile: Include <asm/types.h> in header
+Message-ID: <b66f6888-2789-40f6-2ae5-8abe81e03474@bp.renesas.com>
+Subject: Re: [PATCH 13/16] arm: rmobile: Add CPU detection for RZ/G2L
 References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-13-paul.barker.ct@bp.renesas.com>
- <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
-In-Reply-To: <c163f447-ae15-2a85-a120-d821848e3e24@mailbox.org>
+ <20230920124212.63535-14-paul.barker.ct@bp.renesas.com>
+ <af43734f-e901-3261-1a26-094b5c84583f@mailbox.org>
+In-Reply-To: <af43734f-e901-3261-1a26-094b5c84583f@mailbox.org>
 
---------------qOOmG5XOXlWkUY1DJIVtLMuY
-Content-Type: multipart/mixed; boundary="------------weEjkdviK84J2Opj0Zcznw0V"
+--------------FukvOBdYV3AloT2anxzD4G6c
+Content-Type: multipart/mixed; boundary="------------IJTrS34VBlPTAR3eivp7VEHQ"
 
---------------weEjkdviK84J2Opj0Zcznw0V
+--------------IJTrS34VBlPTAR3eivp7VEHQ
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 03/10/2023 14:27, Marek Vasut wrote:
+On 03/10/2023 14:28, Marek Vasut wrote:
 > On 9/20/23 14:42, Paul Barker wrote:
->> We don't want to rely on source files including <asm/types.h> before
->> <asm/arch/rmobile.h>.
+>> The ARM TrustedFirmware code for the Renesas RZ/G2L SoC family passes =
+a
+>> devicetree blob to the bootloader as an argument in the same was
 >=20
-> What kind of error does this solve ?
+> same way (typo)
+>=20
+>> previous R-Car gen3/gen4 SoCs.
+>=20
+> Gen3 / Gen4
+>=20
+>> This blob contains a compatible string
+>> which can be used to identify the particular SoC we are running on.
+>=20
+> Why not read the PRR ?
 
-Without this, <asm/types.h> must be included before
-<asm/arch/rmobile.h>, for example in include/configs/rzg2l-smarc.h added
-in patch 16, to avoid the following error:
+Reading the DEVID & PRR registers is not sufficient to tell the SoCs apar=
+t.
 
-  CC      arch/arm/lib/asm-offsets.s
-In file included from include/configs/rzg2l-smarc.h:9,
-                 from include/config.h:3,
-                 from include/common.h:16,
-                 from lib/asm-offsets.c:14:
-=2E/arch/arm/include/asm/arch/rmobile.h:49:7: error: unknown type name =E2=
-=80=98u8=E2=80=99
-   49 | const u8 *rzg_get_cpu_name(void);
-      |       ^~
-In file included from include/configs/rzg2l-smarc.h:9,
-                 from include/config.h:3,
-                 from include/common.h:16,
-                 from arch/arm/lib/asm-offsets.c:19:
-=2E/arch/arm/include/asm/arch/rmobile.h:49:7: error: unknown type name =E2=
-=80=98u8=E2=80=99
-   49 | const u8 *rzg_get_cpu_name(void);
-      |       ^~
-=2E/arch/arm/include/asm/arch/rmobile.h:50:1: error: unknown type name =E2=
-=80=98u32=E2=80=99
-   50 | u32 rmobile_get_cpu_type(void);
-      | ^~~
-=2E/arch/arm/include/asm/arch/rmobile.h:50:1: error: unknown type name =E2=
-=80=98u32=E2=80=99
-   50 | u32 rmobile_get_cpu_type(void);
-      | ^~~
-=2E/arch/arm/include/asm/arch/rmobile.h:51:1: error: unknown type name =E2=
-=80=98u32=E2=80=99
-   51 | u32 rmobile_get_cpu_rev_integer(void);
-      | ^~~
-=2E/arch/arm/include/asm/arch/rmobile.h:52:1: error: unknown type name =E2=
-=80=98u32=E2=80=99
-   52 | u32 rmobile_get_cpu_rev_fraction(void);
-      | ^~~
-=2E/arch/arm/include/asm/arch/rmobile.h:51:1: error: unknown type name =E2=
-=80=98u32=E2=80=99
-   51 | u32 rmobile_get_cpu_rev_integer(void);
-      | ^~~
-=2E/arch/arm/include/asm/arch/rmobile.h:52:1: error: unknown type name =E2=
-=80=98u32=E2=80=99
-   52 | u32 rmobile_get_cpu_rev_fraction(void);
-      | ^~~
-make[1]: *** [scripts/Makefile.build:146: arch/arm/lib/asm-offsets.s]
-Error 1
-make[1]: *** Waiting for unfinished jobs....
-make[1]: *** [scripts/Makefile.build:146: lib/asm-offsets.s] Error 1
-make: *** [Makefile:1916: prepare0] Error 2
+=46rom page 204 of the datasheet (R01UH0914EJ0130 Rev.1.30) regarding the=
+
+DEVID register:
+
+"Note: RZ/G2L and RZ/G2LC are the same value.
+If identification between G2L and G2LC is needed, read the value of
+address H=E2=80=990_1186_1178.
+The value is below.
+H=E2=80=990000_0000: RZ/G2L
+H=E2=80=990000_0001: RZ/G2LC"
+
+Address 0x11861178 is in the OTP region which can only be read from the
+secure world (i.e. TrustedFirmware). So we have to rely on
+TrustedFirmware to determine the SoC and pass this information to u-boot
+via an fdt blob.
 
 Thanks,
 Paul
---------------weEjkdviK84J2Opj0Zcznw0V
+--------------IJTrS34VBlPTAR3eivp7VEHQ
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -209,21 +187,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------weEjkdviK84J2Opj0Zcznw0V--
+--------------IJTrS34VBlPTAR3eivp7VEHQ--
 
---------------qOOmG5XOXlWkUY1DJIVtLMuY--
+--------------FukvOBdYV3AloT2anxzD4G6c--
 
---------------uvQ9YoqoqZ05BSFmQMQ2yEkf
+--------------0TXp1mq4lpCAUJOk31KKywHN
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR0o4QUDAAAAAAAKCRDbaV4Vf/JGvQxp
-AQDz8Qqtmgo6lqCnwkR//I4dfIXJ9hkV+BHImi04za0sYAD6A4z5t9j7E/7isZAwr6lYJSoIVEzg
-i8hPCY87AyY8XQs=
-=g+ST
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR0q7QUDAAAAAAAKCRDbaV4Vf/JGvTB4
+AP9mDMZM520cYvmE0rlubPjZtR1IHDLQ9lEx+g3LWMWwkAD/XO58/eui9oYT2nWdJM67dMb7tCly
+OGtCebxifmiUrQM=
+=FLKA
 -----END PGP SIGNATURE-----
 
---------------uvQ9YoqoqZ05BSFmQMQ2yEkf--
+--------------0TXp1mq4lpCAUJOk31KKywHN--
