@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C68F8E7B5FB
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 11:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27824E7B5FB
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 11:57:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B243A86741;
-	Wed,  4 Oct 2023 13:57:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 89F2D87504;
+	Wed,  4 Oct 2023 13:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="a7hdGQgp";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="W0MdeA9A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D404B867D6; Wed,  4 Oct 2023 13:57:01 +0200 (CEST)
+ id EA324874FF; Wed,  4 Oct 2023 13:57:44 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B7297865ED
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 13:56:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12FBC87507
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 13:57:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=864180acd4=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ smtp.mailfrom=prvs=8641a2a2c4=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 394ALo4A026794; Wed, 4 Oct 2023 13:56:56 +0200
+ 3949ecHA012636; Wed, 4 Oct 2023 13:57:41 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=FfuhDUq8QmvdKIFp47kdWb8P2pvA4VHekfhecBJPM+8=; b=a7
- hdGQgpTdDDTSIA+QvaTup/pLUSfDOmfrZmYiShXuzlzGYFaWxDswhm9UQCAM7NXL
- WiaMfiuM1a+KTeav7JFtlK5ikWuhftp7oMIjfNU44BcowGeBFuLbGv7DWTXCLZTr
- Ui2IVye1bAgHcVzAimoYiKEDcnkYaEuY6jsIOOTOLA+t2AbnCIm0UOQHo7ERnN3H
- gWNUkEQQzASV2l5QR49SQK2zaSDWfdC8KxdLJLsBCzHHaFEVfzfbL04UHtdMcMlx
- ig4igHm6NgNUJvBI1Eq1oylVMFE8/4WAk5q8gXsiuCtOx8YR6QrilqXjmqDpt9P0
- uHWtc11t/LOaZFXJZJDw==
+ selector1; bh=n308pKGexYEgpAX+JEIb1cAHzsac5DAEz4tHxwCNQQY=; b=W0
+ MdeA9Aj6wHphppmIczMlJWQkEtMR84LOCPZEzoOCUZneAu1j9GnFAcVnN4rXBxP6
+ Ga2bmQ5qPalGXU5/T8mGzxrzlV6Vu+kkD69kOFwQkgKscGwNnxp/L7A+nTKxrPfS
+ TL9/nXZwwwFeVfaN59AX9uKwHIPEvtOaacVSbOpd1ZBaGcZAbQw1WIzAa+wWEKdM
+ TEEkOOEbAbUNv8hQgBM7V/AxZjNzqYL+Q4oYueiqcyzgo5ZDppPZBebZkWg2l9sm
+ 4/yw7PDa2rtWYZK7ZnVJC5nb71xuqfRqrBAw8HCRBae2e4IyCf7Eu18J1sPkEN83
+ q/3oeMdj0uFZ4tcynZAw==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3tew80pge0-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3te93g0ygg-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 04 Oct 2023 13:56:56 +0200 (MEST)
+ Wed, 04 Oct 2023 13:57:41 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E0F13100053;
- Wed,  4 Oct 2023 13:56:55 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D804A235F29;
- Wed,  4 Oct 2023 13:56:55 +0200 (CEST)
-Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 9E33F100053;
+ Wed,  4 Oct 2023 13:57:40 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7BBF9235F29;
+ Wed,  4 Oct 2023 13:57:40 +0200 (CEST)
+Received: from [10.201.22.165] (10.201.22.165) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 4 Oct
- 2023 13:56:55 +0200
-Message-ID: <55910f71-d7ca-bb3b-1611-10cb53b07da9@foss.st.com>
-Date: Wed, 4 Oct 2023 13:56:54 +0200
+ 2023 13:57:39 +0200
+Message-ID: <f9c7637d-aaf8-716b-7e4d-3091f2ccc296@foss.st.com>
+Date: Wed, 4 Oct 2023 13:57:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH v1 6/6] board: st: common: cleanup dfu support
+Subject: Re: [PATCH] Revert "fs: ext4: check the minimal partition size to
+ mount"
 Content-Language: en-US
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: Fabrice Gasnier <fabrice.gasnier@foss.st.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20230926150924.1150082-1-patrice.chotard@foss.st.com>
- <20230926150924.1150082-7-patrice.chotard@foss.st.com>
- <8a5daa34-e50a-2f2d-7ce2-9879e64e881d@foss.st.com>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <8a5daa34-e50a-2f2d-7ce2-9879e64e881d@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
+To: Sean Anderson <seanga2@gmail.com>, <u-boot@lists.denx.de>, Tom Rini
+ <trini@konsulko.com>
+CC: Simon Glass <sjg@chromium.org>, Mikhail Ilin <ilin.mikhail.ol@gmail.com>
+References: <20230930204246.515254-1-seanga2@gmail.com>
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20230930204246.515254-1-seanga2@gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.201.20.38]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
+X-Originating-IP: [10.201.22.165]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2023-10-04_04,2023-10-02_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,43 +91,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
+
+On 9/30/23 22:42, Sean Anderson wrote:
+> This check breaks small partitions (under 1024 blocks) because part_length
+> is in units of part.blksz and not bytes. Given the purpose of this
+> function, we really want to make sure the partition is SUPERBLOCK_START +
+> SUPERBLOCK_SIZE (2048) bytes so we can call ext4_read_superblock without
+> error.
+>
+> The obvious solution is to convert callers from things like
+>
+> 	ext4fs_mount(part_info.size)
+>
+> to
+>
+> 	ext4fs_mount(part_info.size * part_info.blksz);
+>
+> However, I'm not really a fan of the bloat that would cause, especially
+> since the error is now suppressed. I think the best course of action here
+> is to just revert the patch.
+>
+> This reverts commit 9905cae65e03335aefcb1ebfab5b7ee62d89f64e.
+>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> ---
+>
+>   fs/ext4/ext4_common.c | 4 ----
+>   1 file changed, 4 deletions(-)
+>
+> diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+> index 9a9c520e22c..f50de7c089e 100644
+> --- a/fs/ext4/ext4_common.c
+> +++ b/fs/ext4/ext4_common.c
+> @@ -2373,10 +2373,6 @@ int ext4fs_mount(unsigned part_length)
+>   	struct ext2_data *data;
+>   	int status;
+>   	struct ext_filesystem *fs = get_fs();
+> -
+> -	if (part_length < SUPERBLOCK_SIZE)
+> -		return 0;
+> -
+>   	data = zalloc(SUPERBLOCK_SIZE);
+>   	if (!data)
+>   		return 0;
 
 
-On 10/4/23 11:57, Patrick DELAUNAY wrote:
-> Hi,
-> 
-> On 9/26/23 17:09, Patrice Chotard wrote:
->> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>
->> split the file stm32mp_dfu.c in two files to simplify the Makefile
->> - stm32mp_dfu.c: required by CONFIG_SET_DFU_ALT_INFO
->> - stm32mp_dfu_virt.c: required by CONFIG_DFU_VIRT for stm32prog
->>    command or VIRT device for PMIC for CONFIG_SET_DFU_ALT_INFO.
->>
->> This patch also remove some remaining #ifdef CONFIG
->> and avoid compilation error when CONFIG_SET_DFU_ALT_INFO is not
->> activated.
->>
->> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> ---
->>
->>   board/st/common/Makefile           |   1 +
->>   board/st/common/stm32mp_dfu.c      | 103 ++---------------------------
->>   board/st/common/stm32mp_dfu_virt.c |  99 +++++++++++++++++++++++++++
->>   3 files changed, 104 insertions(+), 99 deletions(-)
->>   create mode 100644 board/st/common/stm32mp_dfu_virt.c
->>
-> 
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> 
-> Thanks
-> Patrick
-> 
-> 
-> 
-Apply on stm32/next
+Agreed, I introduced error for part size in parameter
+
+(in blk multiple even if after dev read if done after with bytes size)
+
+And with caller change (part_info.size * part_info.blksz) we have risk 
+of overflow for large ex4 partition.
+
+
+
+minor remark: "part_length" is no more used....
+
+it can be removed to avoid warining ?
+
+include/ext4fs.h:149:int ext4fs_mount(void);
+
+or use the tag  "__always_unused":
+
+int ext4fs_mount(unsigned __always_unused part_length)
+{
+
+
+With the remarks:
+
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
 Thanks
-Patrice
+Patrick
+
+
