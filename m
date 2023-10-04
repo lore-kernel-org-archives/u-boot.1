@@ -4,59 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1151BE7B5FA
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 11:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E2A6E7B5F5
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 11:50:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 788398751A;
-	Wed,  4 Oct 2023 13:41:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BCE0B86D77;
+	Wed,  4 Oct 2023 13:50:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=lexina.in
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1696419692;
-	bh=9WXTuMY1i00rT+7DRvvoiiWPXdMjPkUBrK4GTBxM64U=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=tIC3lr7XNM0QhxG2DtbWOnjbRd6Ke9mmg6UHWPtU4g37PuSB9wtn/xm7YhcHlwRNg
-	 VnGiXB5PiJsKVv592WCZtyuP3kvBwi8+1wjUe+C51oECvzJ1Fqt5AKyqiCdAxTNKge
-	 Nha1o6RgkbFyNWpOjm7jgatHYhwDFKLb/CLXKnkCUkpkYP/X/jTrGLayPxThKH4cG2
-	 Lux+FsAgSPgP4eSZrFRcRMip2WZkIou6UMiY0zGmxDYgpwezwnLClhDgVGf+11szrp
-	 x7QtUUqXBCJk529jfECGIEF+Rsef1jmCoy37mCIcpf5qEiPqIKLtu/TTdxMhnNy9kG
-	 FfgMuD+WlUpmQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=lexina.in header.i=@lexina.in header.b="BPcaLNr/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 700CF874CC; Wed,  4 Oct 2023 13:50:14 +0200 (CEST)
+Received: from mx.msync.work (mx.msync.work [62.182.159.68])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 11BA5874FB;
- Wed,  4 Oct 2023 13:41:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1696419690;
- bh=9WXTuMY1i00rT+7DRvvoiiWPXdMjPkUBrK4GTBxM64U=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=YkLDyhSVqC1GqgECqx42tRTQ/tlU2fXPMrpHKKso0ck812laky30MH9TySd80c/kA
- MGcrkgjjFg1b40pcScRP7yHYX1VmbLNR4KhigGCaynbSLfibUQnEG93C0aJDvng7Hd
- X2RwDvbNJO4g8j8WCTvOZokRWjHCMg4uc0O7UtAt3O7SyjYDCFWzBhwLDpMXZHRsqy
- oGclJp3u8e1H36yGeVz5+z//o/gB4t0HGhYQrBNimW1NafFuR0tN/V+IovxGIXqKH7
- mLf0d2S/U1BeQgQXwZzBLqCBkes6XPTa/m766uUuuoP+mWmDTXMcApTQVvFvLhwK8X
- 1SRBa4EMHp9Gg==
-Message-ID: <6334910c-baf3-4e6a-81b0-784f3dd372f6@denx.de>
-Date: Wed, 4 Oct 2023 13:41:29 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id B73CE86940
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 13:50:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=lexina.in
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=adeep@lexina.in
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 766E3FE4D7; Wed,  4 Oct 2023 11:50:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lexina.in; s=dkim;
+ t=1696420210; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=XxUVsJJIJc1rvpKl2Qlby4KqXmIuq9s5BvqtsFO8Aec=;
+ b=BPcaLNr/VC98tA+CXGuwo6yJZdAaqa031z49psX2SoX0SH4ITRFhtzGeZwBhs1pliY15Rz
+ tYdMwtvvb9DXDBT763G+H9WFHWRj320Go7v9w2aNfmRcjkNh1kDTn9sNxEFsb5So8Yy02k
+ LHlDeG70o2ypVIGFTr4YESKy9HOwCWAKE4i7VKtPO/1+CXIPah/IXRHyQ+ZH7R73pcgu2e
+ DtMDD/9MeRhQpnzu9GwkIQqf/gRIkQg+HuUHhBtjXuZHenNq2SntWkFz9etUev7oHHUtMK
+ ERbVSguLA9Zp7PmNVKQzsaL9vKhfiVdPziQR42JmlADoDUSAVPVH//h/esYmeg==
+Message-ID: <92db249a-435d-483a-aeaa-50cd3a0c1adc@lexina.in>
+Date: Wed, 4 Oct 2023 14:50:05 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] board: dh_stm32mp1: Only print board code with
- CONFIG_SPL_DISPLAY_PRINT
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, Harald Seiler
- <hws@denx.de>, u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@dh-electronics.com,
- Patrick Delaunay <patrick.delaunay@foss.st.com>
-References: <20230927124625.247858-1-hws@denx.de>
- <7943bfcb-204d-526d-9208-fd38fbc567b4@denx.de>
- <756093f5-d3da-eeae-9619-763e48d297cc@foss.st.com>
+Subject: Re: [RFT PATCH 0/2] mmc: meson-gx: improve MMC reliabilty
+To: Jerome Brunet <jbrunet@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
+References: <20230915160130.352099-1-jbrunet@baylibre.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <756093f5-d3da-eeae-9619-763e48d297cc@foss.st.com>
+From: Viacheslav <adeep@lexina.in>
+In-Reply-To: <20230915160130.352099-1-jbrunet@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,20 +67,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/4/23 11:19, Patrice CHOTARD wrote:
-> 
-> 
-> On 9/30/23 23:02, Marek Vasut wrote:
->> On 9/27/23 14:46, Harald Seiler wrote:
->>> Ensure that the SoM and board code information is only printed when
->>> CONFIG_SPL_DISPLAY_PRINT is set.
->>>
->>> Signed-off-by: Harald Seiler <hws@denx.de>
->>
->> Reviewed-by: Marek Vasut <marex@denx.de>
-> 
-> 
-> Apply on stm32/next
+Hi, Jerome!
 
-This all should be on master, since we're way before 2024.01-rc1 now , 
-2023.10 was just released on Monday.
+Seems works for me. Tested on axg (A113X) and gxl (S905W).
+
+Tested-by: Viacheslav Bocharov <adeep@lexina.in>
+
+On 15/09/2023 19.01, Jerome Brunet wrote:
+> Amlogic MMC on the GX (and later) SoCs has been problematic for years,
+> especially with u-boot.
+> 
+> Linux has been fairly stable for a few years. It is using a fixed phase
+> setting with Core = 180, Tx = 0 and Rx = 0 (the latter cannot be set
+> starting from the v3 MMC IPs)
+> 
+> Still the results were not good with those settings with u-boot, on some
+> sm1 based platforms. U-boot then started using a 270 core phase for sm1
+> only.  This worked for most sm1 platforms but problems persist on others.
+> 
+> The proposal with this patchset is to use 270 for the ID phase, 180
+> otherwise.  This works well on the platforms I have tested (Libretech's
+> boards and VIM3L)
+> 
+> It would be great if others could test this and report whether this work
+> for them or not.
+> 
+> If the results are good, this might be ported to Linux as well (... but the
+> situation is less critical there)
+> 
+> Jerome Brunet (2):
+>    mmc: meson-gx: clean up and align on Linux settings
+>    mmc: meson-gx: set 270 core phase during the identification
+> 
+>   drivers/mmc/meson_gx_mmc.c | 50 ++++++++++++++++++--------------------
+>   drivers/mmc/meson_gx_mmc.h |  9 +++++--
+>   2 files changed, 31 insertions(+), 28 deletions(-)
+> 
