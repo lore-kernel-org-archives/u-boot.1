@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD21AE7C4E2
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:42:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40E88E7C4E2
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:43:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CAC18758C;
-	Wed,  4 Oct 2023 18:42:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E536887581;
+	Wed,  4 Oct 2023 18:42:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YLWGCw0a";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="p8UtlO3N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 793E987582; Wed,  4 Oct 2023 18:42:49 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 1039487597; Wed,  4 Oct 2023 18:42:54 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F41F38757A
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:42:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9C148757E
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:42:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-533d6a8d6b6so4462257a12.2
- for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:42:46 -0700 (PDT)
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-534659061afso4023662a12.3
+ for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:42:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1696437766; x=1697042566;
+ d=amarulasolutions.com; s=google; t=1696437769; x=1697042569;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=I8PuhP4J/PUFh+iepIj7z67AYmNd2xE/hqMwTpdz40A=;
- b=YLWGCw0atidtBjG5McQ+CQI2mImVuahQxSO78sD9VjRLzj26KgCTiD+x7jeHqxZrB+
- fSYGq+9BKU3r/AlsRj0NLCWKJiSOkPSkg9YzKUhKZ4PuAJfDwivUb5ieEFxhufjscLD7
- aJOZozYJy/3HJmodnk2Ifd9a7O6gcTbNWA+PY=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lvGl5zb98VwIugyj4+Y2I/03Yvp0yU2qe//gmYgvzRk=;
+ b=p8UtlO3NCamfWNUSLL4nvmDDlo+CHT/0U7oFhn5P5ArYWI69l6iHPvVvjLU2/+J/gF
+ 0wayE/wP8elz94nxFfMPSAMN2DU7OE/1bcs+Ce/wJJC9PzgI+Cf0UXrvSE+LFfSrM/qD
+ qMcGCkJGI2qPKrW5ibH2MQi+0INrL7a32+bVk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696437766; x=1697042566;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=I8PuhP4J/PUFh+iepIj7z67AYmNd2xE/hqMwTpdz40A=;
- b=Wj1q2wHbG+xuIpUF+oVQN6qDuTu1Q4U0iiOHvD82rPYCD96tsnH9opFtob1xYMlmtg
- Dyl4pHW3vhaDMqNw4ehByE//cRYAxRiFY7Ht0AjoMNQ4sfUvAbDTzA23pAm4heEw45Fs
- kLFv9D+Hq62t36dNhemZ2GTGCBgbcbjKF09rVlwssRU/vMsHh60EEhtokgV9VkKAHsph
- kQJWFfnN42IGSxtdDHx3yMGfo442oxn0c+zwgAwnQouuHiUqdlxashOYGLW9MV/MFr/M
- aB9PBRXMB+jxpQrqBExrsYfC8w+uNP6bTurBrcdYtvIOAcGKNyXg3FJdXn/fcl1PS1/O
- 5gvA==
-X-Gm-Message-State: AOJu0YyQXxwebaEswp/ARsxIYBor0FFZ/D5kwean7rHCy604IkOnPjGp
- cQKb4XW2I0E/VhNiNJJucRHCxpJGEH0qloeRUH8=
-X-Google-Smtp-Source: AGHT+IGflucW88eQiYnBTxJrAcojO6HVhy1urZuGqK6AEwNCYopkMGfRrQvEXBmiGhtKcdkgj33XCw==
-X-Received: by 2002:aa7:d757:0:b0:530:8d55:9c6f with SMTP id
- a23-20020aa7d757000000b005308d559c6fmr2465467eds.2.1696437766461; 
- Wed, 04 Oct 2023 09:42:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696437769; x=1697042569;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lvGl5zb98VwIugyj4+Y2I/03Yvp0yU2qe//gmYgvzRk=;
+ b=m3kM8ZHwUJarPMzVOScNiqUuGspn8nKj/yYP1vPsy9sPdF4RAOpnYbyMB9HShXEFFT
+ N7QYyw3k84msQpujxJCSNEUSXG8o5pb/MnVG1TRAK0lRIiAricHIywY4dep3wyQrZmKs
+ Puw8+5R0Ibf/ex9jUpbCXo0DrcYe0QEMBBHZhjSEFIbu7Ev54/tkKWZPL2O136dlTnDX
+ 9OKc+e6MEAr7sQakV0cXavcXjWH0ECP3dyLZgiNrrYgLBDQqq1o1NohEW8IhYRrBL8Zo
+ s9Jn5xzb1ywjpfNxJBCWa+M1B94Fpo7T2w+FPCQRyzFvBY8dDHf4wteH/OCoI3KzBQzc
+ kF2Q==
+X-Gm-Message-State: AOJu0YxZIfrNiYGgUg3M4XQnn6B6lxuoqjRySb45NiVDIN4kWnyCCFrM
+ uOQ5Rs6CFYHyHwS+8sYp5Uo95wUf1w2CfDJEn1U=
+X-Google-Smtp-Source: AGHT+IHV6QQoiauVMQ3CwcnpWxureTlQStmqyrW3uWheawdrAslkUGkOd0IgS+TdGj3f4bOColSd+A==
+X-Received: by 2002:a05:6402:217:b0:533:4c15:c337 with SMTP id
+ t23-20020a056402021700b005334c15c337mr2356525edv.16.1696437768779; 
+ Wed, 04 Oct 2023 09:42:48 -0700 (PDT)
 Received: from pwmachine.numericable.fr
  ([2a02:2f0a:e213:b400:4d86:b2fb:68b4:3466])
  by smtp.gmail.com with ESMTPSA id
- f2-20020a056402150200b005381936efa7sm118351edw.16.2023.10.04.09.42.45
+ f2-20020a056402150200b005381936efa7sm118351edw.16.2023.10.04.09.42.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Oct 2023 09:42:46 -0700 (PDT)
+ Wed, 04 Oct 2023 09:42:48 -0700 (PDT)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Harald Seiler <hws@denx.de>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [RFC PATCH v10 00/24] Modernize U-Boot shell
-Date: Wed,  4 Oct 2023 19:41:56 +0300
-Message-Id: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [RFC PATCH v10 01/24] test: Add framework to test hush behavior
+Date: Wed,  4 Oct 2023 19:41:57 +0300
+Message-Id: <20231004164220.15738-2-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
+References: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,220 +97,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi.
+Introduce a new subcommand to ut: ut hush.
+For the moment, this command does nothing, future commits will add tests which
+will be run on command call.
 
+Note that CONFIG_HUSH_PARSER must be defined to compile this new subcommand.
 
-During 2021 summer, Sean Anderson wrote a contribution to add a new shell, based
-on LIL, to U-Boot [1, 2].
-While one of the goals of this contribution was to address the fact actual
-U-Boot shell, which is based on Busybox hush, is old there was a discussion
-about adding a new shell versus updating the actual one [3, 4].
-
-So, in this series, with Harald Seiler, we updated the actual U-Boot shell to
-reflect what is currently in Busybox source code.
-Basically, this contribution is about taking a snapshot of Busybox shell/hush.c
-file (as it exists in commit 37460f5da) and adapt it to suit U-Boot needs.
-
-This contribution was written to be as backward-compatible as possible to avoid
-breaking the existing.
-So, the 2021 hush flavor offers the same as the actual, that is to say:
-1. Variable expansion.
-2. Instruction lists (;, && and ||).
-3. If, then and else.
-4. Loops (for, while and until).
-No new features offered by Busybox hush were implemented (e.g. functions).
-
-It is possible to change the parser at runtime using the "cli" command:
-=> cli print
-old
-=> cli set 2021
-=> cli print
-2021
-=> cli set old
-The default parser is the old one.
-Note that to use both parser, you would need to set both CONFIG_HUSH_2021_PARSER
-and CONFIG_HUSH_OLD_PARSER.
-
-In terms of testing, new unit tests were added to ut to ensure the new behavior
-is the same as the old one and it does not add regression.
-Nonetheless, if old behavior was buggy and fixed upstream, the fix is then added
-to U-Boot [5].
-In sandbox, all of these tests pass smoothly:
-=> printenv board
-board=sandbox
-=> ut hush
-Running 20 hush tests
-...
-Failures: 0
-=> parser set 2021
-=> ut hush
-Running 20 hush tests
-...
-Failures: 0
-
-Thanks to the effort of Harald Seiler, I was successful booting a board:
-=> printenv fdtfile
-fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
-=> cli get
-old
-=> boot
-...
-root@lepotato:~#
-root@lepotato:~# reboot
-...
-=> cli set 2021
-=> cli get
-2021
-=> printenv fdtfile
-fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
-=> boot
-...
-root@lepotato:~#
-
-I had to not use CONFIG_HUSH_2021_PARSER for the keymile board.
-Indeed, the keymile board family is the only set of boards to call
-get_local_var(), set_local_var() and unset_local_var().
-Sadly, these functions are static in this contribution.
-I could have change all of them to introduce code like this:
-*_local_var(/*...*/)
-{
-        if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
-                return *_local_var_old(/*...*/);
-        if (gd->flags & GD_FLG_HUSH_2021_PARSER)
-                return *_local_var_2021(/*...*/);
-}
-But this would have mean renaming all old hush functions calls and I did not
-want to change the old hush particularly to avoid breaking things.
-Instead, I change the keymile board to use environment variable instead of local
-ones.
-I think this particularities can be addressed in future works.
-
-I also had to enable CONFIG_LTO for kirkwoord sheevaplug and phytec bk4r1, so
-they do not hit their limits.
-
-For all these reasons, I marked this contribution as RFC to indeed collect your
-opinions.
-My goal is not to change suddenly actual shell to this one, we clearly need a
-transition period to think about it.
-I think it is better to see this contribution as a proof of concept which shows
-it is possible to update the actual shell.
-
-If you want to review it - your review will really be appreciated - here are
-some information regarding the commits:
-* commits marked as "test:" deal with unit tests.
-* commit "cli: Add Busybox upstream hush.c file." copies Busybox shell/hush.c
-into U-Boot tree, this explain why this commit contains around 12000 additions.
-* commit "cli: Port Busybox 2021 hush to U-Boot." modifies previously added file
-to permit us to use this as new shell.
-The really good idea of #include'ing Busybox code into a wrapper file to define
-some particular functions while minimizing modifications to upstream code comes
-from Harald Seiler.
-* commit "cmd: Add new parser command" adds a new command which permits
-selecting parser at runtime.
-I am not really satisfied with the fact it calls cli_init() and cli_loop() each
-time the parser is set, so your reviews would be welcomed.
-* Other commits focus on enabling features we need (e.g. if).
-
-Changes since:
- v2:
-  * Added a small fix to compile sandbox with NO_SDL=1.
-  * Added a command to change parser at runtime.
-  * Added 2021 parser function to all run_command*().
- v3:
-  * Various bug fixes pointed by the CI.
-  * Added upstream busybox hush commits until 6th February 2022.
- v4:
-  * Various cleaning.
-  * Modified python test to accept failure output when the test are designed to
-  fail.
-  * Bumped upstream busybox hush commits until 24h March 2022.
- v5:
-  * Bumped upstream busybox hush commits until 30th January 2023.
-  * Fix how hush interprets '<' and '>', indeed we needed to escape them but I
-  removed this behavior as tests are handled by test command and not hush
-  itself. This permitted to have the ut fdt to pass.
-  * Fix a problem with how exit was handled. This was reported by the ut exit
-  test.
- v6:
-  * There was no v6 and I got mixed up with version.
- v7:
-  * Bumped upstream busybox hush commits until 9th May 2023.
-  * Renamed parser command to change parser at runtime to cli and added
-  documentation.
-  * Added better separation of patches.
-  * Removed code about __gnu_thumb1_case_si as it was merged in another series.
-  * Various cleaning.
- v8:
-  * Bumped upstream busybox hush commits until 25th May 2023.
- v9:
-  * Bumped upstream busybox hush commits until 2nd October 2023.
-
-Francis Laniel (24):
-  test: Add framework to test hush behavior
-  test: hush: Test hush if/else
-  test/py: hush_if_test: Remove the test file
-  test: hush: Test hush variable expansion
-  test: hush: Test hush commands list
-  test: hush: Test hush loops
-  cli: Add Busybox upstream hush.c file
-  cli: Port Busybox 2021 hush to U-Boot
-  cli: Add menu for hush parser
-  global_data.h: add GD_FLG_HUSH_OLD_PARSER flag
-  cmd: Add new cli command
-  cli: Enables using hush 2021 parser as command line parser
-  cli: hush_2021: Enable variables expansion for hush 2021
-  cli: hush_2021: Add functions to be called from run_command()
-  cli: add hush 2021 as parser for run_command*()
-  test: hush: Fix instructions list tests for hush 2021
-  test: hush: Fix variable expansion tests for hush 2021
-  cli: hush_2021: Enable using < and > as string compare operators
-  cli: hush_2021: Enable if keyword
-  cli: hush_2021: Enable loops
-  test: hush: Fix loop tests for hush 2021
-  cli: hush_2021: Add upstream commits up to 2nd October 2023.
-  DO NOT MERGE: only to make CI happy
-  DO NOT MERGE: ci: Build the world in any case.
-
- .azure-pipelines.yml               |     1 +
- cmd/Kconfig                        |    22 +
- cmd/Makefile                       |     2 +
- cmd/cli.c                          |   125 +
- common/Makefile                    |     3 +-
- common/cli.c                       |    82 +-
- common/cli_hush_2021.c             |   324 +
- common/cli_hush_upstream.c         | 13030 +++++++++++++++++++++++++++
- configs/sheevaplug_defconfig       |     1 +
- doc/usage/cmd/cli.rst              |    74 +
- doc/usage/index.rst                |     1 +
- include/asm-generic/global_data.h  |     8 +
- include/cli_hush.h                 |    51 +-
- include/test/hush.h                |    15 +
- include/test/suites.h              |     1 +
- test/Makefile                      |     3 +
- test/cmd_ut.c                      |     6 +
- test/hush/Makefile                 |    10 +
- test/hush/cmd_ut_hush.c            |    20 +
- test/hush/dollar.c                 |   226 +
- test/hush/if.c                     |   316 +
- test/hush/list.c                   |   140 +
- test/hush/loop.c                   |    91 +
- test/py/tests/test_hush_if_test.py |   197 -
- test/py/tests/test_ut.py           |     8 +-
- tools/patman/series.py             |     4 +
- 26 files changed, 14549 insertions(+), 212 deletions(-)
- create mode 100644 cmd/cli.c
- create mode 100644 common/cli_hush_2021.c
- create mode 100644 common/cli_hush_upstream.c
- create mode 100644 doc/usage/cmd/cli.rst
+Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+ include/test/hush.h     | 15 +++++++++++++++
+ include/test/suites.h   |  1 +
+ test/Makefile           |  3 +++
+ test/cmd_ut.c           |  6 ++++++
+ test/hush/Makefile      |  6 ++++++
+ test/hush/cmd_ut_hush.c | 20 ++++++++++++++++++++
+ 6 files changed, 51 insertions(+)
  create mode 100644 include/test/hush.h
  create mode 100644 test/hush/Makefile
  create mode 100644 test/hush/cmd_ut_hush.c
- create mode 100644 test/hush/dollar.c
- create mode 100644 test/hush/if.c
- create mode 100644 test/hush/list.c
- create mode 100644 test/hush/loop.c
- delete mode 100644 test/py/tests/test_hush_if_test.py
 
---
+diff --git a/include/test/hush.h b/include/test/hush.h
+new file mode 100644
+index 0000000000..cca66544a0
+--- /dev/null
++++ b/include/test/hush.h
+@@ -0,0 +1,15 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * (C) Copyright 2021
++ * Francis Laniel, Amarula Solutions, francis.laniel@amarulasolutions.com
++ */
++
++#ifndef __TEST_HUSH_H__
++#define __TEST_HUSH_H__
++
++#include <test/test.h>
++
++/* Declare a new environment test */
++#define HUSH_TEST(_name, _flags)	UNIT_TEST(_name, _flags, hush_test)
++
++#endif /* __TEST_HUSH_H__ */
+diff --git a/include/test/suites.h b/include/test/suites.h
+index 1c7dc65966..340a2b041f 100644
+--- a/include/test/suites.h
++++ b/include/test/suites.h
+@@ -42,6 +42,7 @@ int do_ut_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_exit(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_font(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
++int do_ut_hush(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_lib(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_loadm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+ int do_ut_log(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
+diff --git a/test/Makefile b/test/Makefile
+index 178773647a..d6ca3e221d 100644
+--- a/test/Makefile
++++ b/test/Makefile
+@@ -20,6 +20,9 @@ obj-$(CONFIG_FUZZ) += fuzz/
+ ifndef CONFIG_SANDBOX_VPL
+ obj-$(CONFIG_UNIT_TEST) += lib/
+ endif
++ifneq ($(CONFIG_HUSH_PARSER),)
++obj-$(CONFIG_$(SPL_)CMDLINE) += hush/
++endif
+ obj-$(CONFIG_$(SPL_)CMDLINE) += print_ut.o
+ obj-$(CONFIG_$(SPL_)CMDLINE) += str_ut.o
+ obj-$(CONFIG_UT_TIME) += time_ut.o
+diff --git a/test/cmd_ut.c b/test/cmd_ut.c
+index 0cb514490b..aae0c460ad 100644
+--- a/test/cmd_ut.c
++++ b/test/cmd_ut.c
+@@ -110,6 +110,9 @@ static struct cmd_tbl cmd_ut_sub[] = {
+ #ifdef CONFIG_CMD_ADDRMAP
+ 	U_BOOT_CMD_MKENT(addrmap, CONFIG_SYS_MAXARGS, 1, do_ut_addrmap, "", ""),
+ #endif
++#if CONFIG_IS_ENABLED(HUSH_PARSER)
++	U_BOOT_CMD_MKENT(hush, CONFIG_SYS_MAXARGS, 1, do_ut_hush, "", ""),
++#endif
+ #ifdef CONFIG_CMD_LOADM
+ 	U_BOOT_CMD_MKENT(loadm, CONFIG_SYS_MAXARGS, 1, do_ut_loadm, "", ""),
+ #endif
+@@ -203,6 +206,9 @@ static char ut_help_text[] =
+ #ifdef CONFIG_CONSOLE_TRUETYPE
+ 	"\nut font - font command"
+ #endif
++#if CONFIG_IS_ENABLED(HUSH_PARSER)
++	"\nhush - Test hush behavior"
++#endif
+ #ifdef CONFIG_CMD_LOADM
+ 	"\nloadm - loadm command parameters and loading memory blob"
+ #endif
+diff --git a/test/hush/Makefile b/test/hush/Makefile
+new file mode 100644
+index 0000000000..dfa2a92615
+--- /dev/null
++++ b/test/hush/Makefile
+@@ -0,0 +1,6 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# (C) Copyright 2021
++# Francis Laniel, Amarula Solutions, francis.laniel@amarulasolutions.com
++
++obj-y += cmd_ut_hush.o
+diff --git a/test/hush/cmd_ut_hush.c b/test/hush/cmd_ut_hush.c
+new file mode 100644
+index 0000000000..48a1adbf28
+--- /dev/null
++++ b/test/hush/cmd_ut_hush.c
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * (C) Copyright 2021
++ * Francis Laniel, Amarula Solutions, francis.laniel@amarulasolutions.com
++ */
++
++#include <common.h>
++#include <command.h>
++#include <test/hush.h>
++#include <test/suites.h>
++#include <test/ut.h>
++
++int do_ut_hush(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
++{
++	struct unit_test *tests = UNIT_TEST_SUITE_START(hush_test);
++	const int n_ents = UNIT_TEST_SUITE_COUNT(hush_test);
++
++	return cmd_ut_category("hush", "hush_test_",
++			       tests, n_ents, argc, argv);
++}
+-- 
 2.34.1
 
