@@ -4,81 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09DA4E8FDD9
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 07:53:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E2FE8FDD9
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 07:58:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 319D386ADA;
-	Wed,  4 Oct 2023 09:53:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 887508648D;
+	Wed,  4 Oct 2023 09:58:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="E2riy1q6";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8CD186AE1; Wed,  4 Oct 2023 09:53:08 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3956086A4C
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 09:53:06 +0200 (CEST)
+ id 98DE586AFD; Wed,  4 Oct 2023 09:58:20 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id C7FE386487
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 09:58:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maxim.uvarov@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-9adb9fa7200so140037866b.0
- for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 00:53:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696405986; x=1697010786; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8MksrFUO3diDivAWJtFcnWoiN3rxETsJUTYG4ZyFk4c=;
- b=E2riy1q6jyXbbF37jKL9rDa7w0fja8ohOlUEZtFCtTqaFohv7XMd7gSB1ikhHIc6x/
- wa4TwjMGWRALLf7EERoLkI1iQwCjX7bZPGqiQyVl1o3j6/Pf47y8PQWmqBgciMMKbm2d
- D1v2BZ1Hlx/OBOHpqImlJj01uF9tnyHQBBCFlipMeZAObYZ4+C9k7YPXNadLCAdT5pJF
- QgQ00Czkfly7ClDjLOenOvErsBfrrpiDJarNcFOZ90AGfPO7oT/bzMjmaGW3bUZYyvhi
- sFwW2tO+jFjbkU1fc1NgCht3Lg0OaoKMDJgvbbyo/0jnYhKI/6j9n88B/zTvmFRJ/u8x
- E8/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696405986; x=1697010786;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=8MksrFUO3diDivAWJtFcnWoiN3rxETsJUTYG4ZyFk4c=;
- b=MwkP5EN9iWbjSbsX87zZ9DUrSKEVczSjBhbAueU14pKJbb0PfRpwidph98uojw4X6l
- wjvQIlpz/0pwmsdZVatymInoRIPGvoafAnxPUBCjKZMGmC7gjKM5Qp67VMdA2NDi+er0
- UUtOZw5bAeMsmkjbt38wBRXbpQ6Gyy3A1GaYIAznrTxqR40tOjfarqoxgex4OibEv5I0
- kahxZzol7WNwJdAYbbx3sH22AuofY53mC1HbIxJNYoc9PVqjmF9ouJ733CaD33NN0OLk
- hDsb/wEoI3ESRRRwhyHQhllzhGM7U73hY08XHucBFfyF+DA9bte/GmQKz6u2oLrclkxX
- 2uoQ==
-X-Gm-Message-State: AOJu0Yw1DlZ0MIJfAq+7YVQ4chbLrJseAnRvoHMDCfyLBPanlG3zN1Au
- i1peeSgbEZFEvPbHtIQwQAW+yKryfSV5zXeW5XMNNA==
-X-Google-Smtp-Source: AGHT+IGnKGcM3eZ82djLIfK998uKozBNPllKiL27penTIGOevxPB5zu1qIqGlWGRclYV7poQwyL+ncexZx/F1HL64Vk=
-X-Received: by 2002:a17:907:2cf7:b0:9ae:5513:e475 with SMTP id
- hz23-20020a1709072cf700b009ae5513e475mr1320345ejc.9.1696405985644; Wed, 04
- Oct 2023 00:53:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,199,1694703600"; 
+ d="asc'?scan'208";a="181880687"
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 04 Oct 2023 16:58:16 +0900
+Received: from [10.226.93.90] (unknown [10.226.93.90])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id AEF77400C4F5;
+ Wed,  4 Oct 2023 16:58:13 +0900 (JST)
+Message-ID: <102be5d1-c0b4-e532-5d7a-8fea14ce8e98@bp.renesas.com>
+Date: Wed, 4 Oct 2023 08:58:11 +0100
 MIME-Version: 1.0
-References: <20230926094124.7024-1-maxim.uvarov@linaro.org>
- <20230926094124.7024-2-maxim.uvarov@linaro.org>
- <CAPnjgZ2OV8ug3+3ji8nEnK7cwONu7KFa2zSyP5urKWUkQvMqJA@mail.gmail.com>
- <20230926134149.GS305624@bill-the-cat>
- <CAPnjgZ1iAG8Rw3jVZvFs16AvnGkO=gCsCM3dF1c30biFk4t2xw@mail.gmail.com>
- <20230926141936.GW305624@bill-the-cat>
- <CAD8XO3aifH+f_NZ1g_nJrxKu_tDmuW9H=Pk2o4v8yTAAn1nfdQ@mail.gmail.com>
- <CAD8XO3Yy1ppSgvUQ3ZZOmVzK2puxruHu2Q4UiCDPUzsWuKA8Vw@mail.gmail.com>
- <CAPnjgZ3aqSjChJqCHQfrO5kxg0=-BR-KV4aC6jquC4ZRTovi0g@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3aqSjChJqCHQfrO5kxg0=-BR-KV4aC6jquC4ZRTovi0g@mail.gmail.com>
-From: Maxim Uvarov <maxim.uvarov@linaro.org>
-Date: Wed, 4 Oct 2023 13:52:53 +0600
-Message-ID: <CAD8XO3Z87tOqMx4gmipRfwnMY-U9Sr0Bf21GtKCgq=Ay+Jtakw@mail.gmail.com>
-Subject: Re: [PATCHv10 01/15] submodule: add lwIP as git submodule
-To: Simon Glass <sjg@google.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, pbrobinson@gmail.com, 
- ilias.apalodimas@linaro.org, joe.hershberger@ni.com, rfried.dev@gmail.com, 
- goldsimon@gmx.de
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 05/16] arm: rmobile: Add basic RZ/G2L family support
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-6-paul.barker.ct@bp.renesas.com>
+ <40598007-6c1d-440b-70f8-469ad12693b8@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <40598007-6c1d-440b-70f8-469ad12693b8@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------R8khhbIHkUVPwhuWRExMvj4c"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,119 +62,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 2 Oct 2023 at 20:46, Simon Glass <sjg@google.com> wrote:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------R8khhbIHkUVPwhuWRExMvj4c
+Content-Type: multipart/mixed; boundary="------------htt068sykBd4MmBWFZuGv7a8";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Message-ID: <102be5d1-c0b4-e532-5d7a-8fea14ce8e98@bp.renesas.com>
+Subject: Re: [PATCH 05/16] arm: rmobile: Add basic RZ/G2L family support
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-6-paul.barker.ct@bp.renesas.com>
+ <40598007-6c1d-440b-70f8-469ad12693b8@mailbox.org>
+In-Reply-To: <40598007-6c1d-440b-70f8-469ad12693b8@mailbox.org>
 
-> Hi Maxim,
->
-> On Mon, 2 Oct 2023 at 05:23, Maxim Uvarov <maxim.uvarov@linaro.org> wrote:
-> >
-> > I found what was missing. (reproduced with CI docker.)
->
-> How about adding a script that copies in the lwip code needed for
-> U-Boot, that you (or whoever the maintainer is) can run each quarter?
->
-> Alternatively, I think just sending a patch with the code would be
-> helpful, so we can see what you are wanting to include.
->
-> Regards,
-> Simon
->
+--------------htt068sykBd4MmBWFZuGv7a8
+Content-Type: multipart/mixed; boundary="------------M7q0eK3LG0VMgXIOipUD5ceX"
 
-Hello Simon,
+--------------M7q0eK3LG0VMgXIOipUD5ceX
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-That might also work. lwIP is a little bit special library which we can not
-just connect as an external library from the repo, because it has
-platform implementation specifics (U-Boot here).
-At this time I'm trying to pass all CI tests. And even if they pass for me
-locally CI has some interesting combinations where the test fails and I'm
-not even sure that it's related to lwip code.
-Once CI will pass all the things I want to take more attention on submodule
-support or patch support. I really hope that submodule will work for us,
-but that also will require Makefile and CI changes.
+On 03/10/2023 13:45, Marek Vasut wrote:
+> On 9/20/23 14:42, Paul Barker wrote:
+>> +	help
+>> +	  Enable support for the Renesas RZ/G2L family of SoCs, including th=
+e
+>> +	  the RZ/G2L itself (based on the R9A07G044 SoC).
+>=20
+> Including the RZ/G2L itself ... and what else (you likely want to add=20
+> answer to that into this paragraph) ?
+The intention is to expand this list as support for the other boards is
+added in future patches, rather than advertising support in the help
+message which isn't available yet.
 
-However, review of lwIP code here might be helpful. But I think the mailing
-list will not allow me to send such a big patch, and it's almost impossible
-to do a review project in one email.
-I guess it's better to do a git clone
-https://git.savannah.nongnu.org/git/lwip.git and see what is there.
+The family of boards is:
+  * RZ/G2L
+  * RZ/G2LC
+  * RZ/G2UL
+  * RZ/V2L
+  * RZ/Five
 
-BR,
-Maxim.
+RZ/Five will be handled separately as that's RISC-V architecture so
+won't belong in a Kconfig under arch/arm.
 
+The family has no "official" name, but all share the same core set of IP
+blocks so drivers will be reused across them. Typically the drivers have
+'rzg2l' in the name in Linux (e.g. drivers/clk/renesas/rzg2l-cpg.c), so
+I'm doing the same here. We tend to refer to the group of SoCs as the
+"RZ/G2L family", and the RZ/G2L itself is a member of that family.
 
+Thanks,
+Paul
+--------------M7q0eK3LG0VMgXIOipUD5ceX
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-> >
-> > On Mon, 2 Oct 2023 at 12:34, Maxim Uvarov <maxim.uvarov@linaro.org>
-> wrote:
-> >>
-> >> Can somebody help me to understand and reproduce CI errors?  I can run
-> locally 'make check' which runs a bunch of local builds with binman and all
-> of them are fine.
-> >> It looks like some dependency is missing or addition 'git config
-> --global --add safe.directory <path>/net/lwip/lwip-external'  is required
-> for the submodule directory.
-> >>
-> >> https://source.denx.de/u-boot/custodians/u-boot-tpm/-/pipelines/17916
-> >>
-> >> Building current source for 1 boards (0 threads, 24 jobs per thread)
-> >>    sandbox:  +   sandbox_spl
-> >> +fatal: not a git repository (or any of the parent directories): .git
-> >> +make[1]: *** [Makefile:1875: initsubmodules] Error 128
-> >> +make: *** [Makefile:177: sub-make] Error 2
-> >>     0    0    1 /1              sandbox_spl
-> >> Completed: 1 total built, 1 newly), duration 0:00:06, rate 0.17
-> >> Traceback (most recent call last):
-> >>   File "/builds/u-boot/custodians/u-boot-tpm/./tools/binman/binman",
-> line 45, in <module>
-> >>     from binman import cmdline
-> >>   File "/builds/u-boot/custodians/u-boot-tpm/tools/binman/cmdline.py",
-> line 11, in <module>
-> >>     from binman import state
-> >>   File "/builds/u-boot/custodians/u-boot-tpm/tools/binman/state.py",
-> line 14, in <module>
-> >>     from dtoc import fdt
-> >>   File "/builds/u-boot/custodians/u-boot-tpm/tools/dtoc/fdt.py", line
-> 14, in <module>
-> >>     from libfdt import QUIET_NOTFOUND
-> >> ImportError: cannot import name 'QUIET_NOTFOUND' from 'libfdt' (unknown
-> location)
-> >>
-> >> On Tue, 26 Sept 2023 at 20:19, Tom Rini <trini@konsulko.com> wrote:
-> >>>
-> >>> On Tue, Sep 26, 2023 at 08:16:35AM -0600, Simon Glass wrote:
-> >>> > Hi Tom,
-> >>> >
-> >>> > On Tue, 26 Sept 2023 at 07:41, Tom Rini <trini@konsulko.com> wrote:
-> >>> > >
-> >>> > > On Tue, Sep 26, 2023 at 05:37:25AM -0600, Simon Glass wrote:
-> >>> > > > Hi Maxim,
-> >>> > > >
-> >>> > > > On Tue, 26 Sept 2023 at 03:43, Maxim Uvarov <
-> maxim.uvarov@linaro.org> wrote:
-> >>> > > > >
-> >>> > > > > add external lwIP library as a git submodule.
-> >>> > > > > Use STABLE-2_2_0_RELEASE tag.
-> >>> > > > >
-> >>> > > > > Signed-off-by: Maxim Uvarov <maxim.uvarov@linaro.org>
-> >>> > > > > ---
-> >>> > > > >  .gitmodules            | 3 +++
-> >>> > > > >  net/lwip/lwip-external | 1 +
-> >>> > > > >  2 files changed, 4 insertions(+)
-> >>> > > > >  create mode 100644 .gitmodules
-> >>> > > > >  create mode 160000 net/lwip/lwip-external
-> >>> > >
-> >>> > > Do you have comments on the rest of the series?
-> >>> >
-> >>> > Not yet, but I should be able to review the rest in a few days. My
-> >>> > main comments before were minor - return codes, tests, error
-> checking.
-> >>>
-> >>> OK, thanks.  I don't know how exactly I want to proceed with the core
-> of
-> >>> lwip itself, but that doesn't block reviewing and testing the rest of
-> it
-> >>> as we'll move forward with it one way or another.
-> >>>
-> >>> --
-> >>> Tom
->
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------M7q0eK3LG0VMgXIOipUD5ceX--
+
+--------------htt068sykBd4MmBWFZuGv7a8--
+
+--------------R8khhbIHkUVPwhuWRExMvj4c
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR0bEwUDAAAAAAAKCRDbaV4Vf/JGvcks
+AP9WeOMhlN5CZY9U+eN9B5qTsEQsA5HhzanKET2ONF8yCQD/UJuzyY2soRx7CkjHb22ZKiMrH/dG
+sbtmrIwCsnDcCAw=
+=bd2n
+-----END PGP SIGNATURE-----
+
+--------------R8khhbIHkUVPwhuWRExMvj4c--
