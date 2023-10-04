@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E2FE8FDD9
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 07:58:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98DA0E8FDD9
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 07:59:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 887508648D;
-	Wed,  4 Oct 2023 09:58:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1446086B0C;
+	Wed,  4 Oct 2023 09:59:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98DE586AFD; Wed,  4 Oct 2023 09:58:20 +0200 (CEST)
+ id AD10686B1B; Wed,  4 Oct 2023 09:59:56 +0200 (CEST)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id C7FE386487
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 09:58:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 7DFC586B0A
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 09:59:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.03,199,1694703600"; 
- d="asc'?scan'208";a="181880687"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 04 Oct 2023 16:58:16 +0900
+ d="asc'?scan'208";a="181880850"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 04 Oct 2023 16:59:52 +0900
 Received: from [10.226.93.90] (unknown [10.226.93.90])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id AEF77400C4F5;
- Wed,  4 Oct 2023 16:58:13 +0900 (JST)
-Message-ID: <102be5d1-c0b4-e532-5d7a-8fea14ce8e98@bp.renesas.com>
-Date: Wed, 4 Oct 2023 08:58:11 +0100
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 9FE114197FDD;
+ Wed,  4 Oct 2023 16:59:49 +0900 (JST)
+Message-ID: <8d68fc58-6af4-8fa1-5683-f456a9ddf393@bp.renesas.com>
+Date: Wed, 4 Oct 2023 08:59:47 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH 05/16] arm: rmobile: Add basic RZ/G2L family support
+Subject: Re: [PATCH 06/16] arm: rmobile: Add basic R9A07G044L SoC support
 To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-6-paul.barker.ct@bp.renesas.com>
- <40598007-6c1d-440b-70f8-469ad12693b8@mailbox.org>
+ <20230920124212.63535-7-paul.barker.ct@bp.renesas.com>
+ <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <40598007-6c1d-440b-70f8-469ad12693b8@mailbox.org>
+In-Reply-To: <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------R8khhbIHkUVPwhuWRExMvj4c"
+ boundary="------------HoCoy2jbO4R6a0KNJN23raLU"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,60 +63,66 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------R8khhbIHkUVPwhuWRExMvj4c
-Content-Type: multipart/mixed; boundary="------------htt068sykBd4MmBWFZuGv7a8";
+--------------HoCoy2jbO4R6a0KNJN23raLU
+Content-Type: multipart/mixed; boundary="------------ojlsV9efPNaVmGHBaar6kB9U";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
 Cc: Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Message-ID: <102be5d1-c0b4-e532-5d7a-8fea14ce8e98@bp.renesas.com>
-Subject: Re: [PATCH 05/16] arm: rmobile: Add basic RZ/G2L family support
+Message-ID: <8d68fc58-6af4-8fa1-5683-f456a9ddf393@bp.renesas.com>
+Subject: Re: [PATCH 06/16] arm: rmobile: Add basic R9A07G044L SoC support
 References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-6-paul.barker.ct@bp.renesas.com>
- <40598007-6c1d-440b-70f8-469ad12693b8@mailbox.org>
-In-Reply-To: <40598007-6c1d-440b-70f8-469ad12693b8@mailbox.org>
+ <20230920124212.63535-7-paul.barker.ct@bp.renesas.com>
+ <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
+In-Reply-To: <f39461fe-cbfb-2bef-b012-0ca5c546520f@mailbox.org>
 
---------------htt068sykBd4MmBWFZuGv7a8
-Content-Type: multipart/mixed; boundary="------------M7q0eK3LG0VMgXIOipUD5ceX"
+--------------ojlsV9efPNaVmGHBaar6kB9U
+Content-Type: multipart/mixed; boundary="------------2GuoERk2oFtdGGe7gEIDSZ1O"
 
---------------M7q0eK3LG0VMgXIOipUD5ceX
+--------------2GuoERk2oFtdGGe7gEIDSZ1O
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 03/10/2023 13:45, Marek Vasut wrote:
+On 03/10/2023 13:46, Marek Vasut wrote:
 > On 9/20/23 14:42, Paul Barker wrote:
+>> Add a config option for the R9A07G044L SoC used in the RZ/G2L so that =
+we
+>> can make use of this in the subsequent driver patches.
+>>
+>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+>> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+>> ---
+>>   arch/arm/mach-rmobile/Kconfig.rzg2l | 5 +++++
+>>   1 file changed, 5 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-rmobi=
+le/Kconfig.rzg2l
+>> index 37ff6cd34160..266f82c18085 100644
+>> --- a/arch/arm/mach-rmobile/Kconfig.rzg2l
+>> +++ b/arch/arm/mach-rmobile/Kconfig.rzg2l
+>> @@ -3,6 +3,11 @@
+>>  =20
+>>   if RZG2L
+>>  =20
+>> +config R9A07G044L
+>> +	bool "Renesas R9A07G044L SoC"
 >> +	help
->> +	  Enable support for the Renesas RZ/G2L family of SoCs, including th=
-e
->> +	  the RZ/G2L itself (based on the R9A07G044 SoC).
+>> +	  Enable support for the R9A07G044L SoC used in the RZ/G2L.
 >=20
-> Including the RZ/G2L itself ... and what else (you likely want to add=20
-> answer to that into this paragraph) ?
-The intention is to expand this list as support for the other boards is
-added in future patches, rather than advertising support in the help
-message which isn't available yet.
+> I was under the impression that RZ/G2L is a SoC family, so the=20
+> R9A07G044L is part of that SoC family ? Maybe just reword this paragrap=
+h=20
+> and the commit message a bit to make it less confusing.
 
-The family of boards is:
-  * RZ/G2L
-  * RZ/G2LC
-  * RZ/G2UL
-  * RZ/V2L
-  * RZ/Five
-
-RZ/Five will be handled separately as that's RISC-V architecture so
-won't belong in a Kconfig under arch/arm.
-
-The family has no "official" name, but all share the same core set of IP
-blocks so drivers will be reused across them. Typically the drivers have
-'rzg2l' in the name in Linux (e.g. drivers/clk/renesas/rzg2l-cpg.c), so
-I'm doing the same here. We tend to refer to the group of SoCs as the
-"RZ/G2L family", and the RZ/G2L itself is a member of that family.
+The confusion is hard to avoid (see my reply re patch 5 of this series),
+but I'll see if I can improve this a bit in v2.
 
 Thanks,
 Paul
---------------M7q0eK3LG0VMgXIOipUD5ceX
+--------------2GuoERk2oFtdGGe7gEIDSZ1O
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -180,21 +186,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------M7q0eK3LG0VMgXIOipUD5ceX--
+--------------2GuoERk2oFtdGGe7gEIDSZ1O--
 
---------------htt068sykBd4MmBWFZuGv7a8--
+--------------ojlsV9efPNaVmGHBaar6kB9U--
 
---------------R8khhbIHkUVPwhuWRExMvj4c
+--------------HoCoy2jbO4R6a0KNJN23raLU
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR0bEwUDAAAAAAAKCRDbaV4Vf/JGvcks
-AP9WeOMhlN5CZY9U+eN9B5qTsEQsA5HhzanKET2ONF8yCQD/UJuzyY2soRx7CkjHb22ZKiMrH/dG
-sbtmrIwCsnDcCAw=
-=bd2n
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR0bcwUDAAAAAAAKCRDbaV4Vf/JGvYUk
+AP42f/yRNgsN+mCYQpqH6rtMhZOu9eD5FOvgp6OBR+egnAD/TJddpcDr7yjZbhLYGRgDwh88Kp7l
+j0sy/0fHo12NgwQ=
+=/peq
 -----END PGP SIGNATURE-----
 
---------------R8khhbIHkUVPwhuWRExMvj4c--
+--------------HoCoy2jbO4R6a0KNJN23raLU--
