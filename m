@@ -4,64 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 359F5E7B601
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 12:33:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE076E7B608
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 12:39:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 613D887524;
-	Wed,  4 Oct 2023 14:33:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 0924E87522;
+	Wed,  4 Oct 2023 14:39:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QZF2PYrw";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="l27YaV92";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17AE2863DD; Wed,  4 Oct 2023 14:33:13 +0200 (CEST)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 5954687505; Wed,  4 Oct 2023 14:39:35 +0200 (CEST)
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4251A87456
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 14:33:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2960287531
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 14:39:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4S0vH92WpLz9sqw;
- Wed,  4 Oct 2023 14:33:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696422789;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=7kLeDhNx7al+H9Im++Y3MZr2LWuweF98BakRzrhwzo4=;
- b=QZF2PYrwZSc9rZjN3DMNpRhOW5OiaxF0jKaAJAadw/8KlIsplwtDKs80ZY0jK0AIQW4brr
- Fj9mxB71ait6i/fO2Z4kFOXIjhRg4Dhk8OjV+tMV13+DG5tFU9UNL8NaDGghsmpW1TIijB
- Y3W1VL5Ip/TOis4+Q4WlLxCJk7C5gTnjUAyqY2Fe6LD24eg9yrUaUL9fF8rsBZwmh4oTt6
- R7mt1mq/efTjbgmDG85Bhkyezns43DZxuE9qpUfZoCN4HsfVb9SLnOS+Kihc3HKicPw1B2
- 9WF7Bpmv82Cd1HYDJucbr0Eb5i1x0EV+UqcrlrpY4V99Yqygejreyjjb6sR4zA==
-Message-ID: <26a440db-073b-4615-9e20-03a74cc46b23@mailbox.org>
-Date: Wed, 4 Oct 2023 14:33:07 +0200
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by ams.source.kernel.org (Postfix) with ESMTP id AD97BB81DE1;
+ Wed,  4 Oct 2023 12:39:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FA20C433C7;
+ Wed,  4 Oct 2023 12:39:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1696423168;
+ bh=rJOV6o8fwPrbjDUGSFsJ7jmJEUlBTEPwToORv23IIzo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=l27YaV92nKg6u+qzOXsaw6nv8RJPaQCnrwWma01mRBWJkp7Z96SK4gd8eauEDPTKY
+ ROuunl0ptE2EAd8kfaorkul8KExcs+PCGDu7jurAj3JWGQfRrBgeKav2cGkIL6IPdt
+ jzGhcaGkV+jESqamovq1JvnN9JDb8yQG9Qrud3yfd2oMLkRfhfhdbKpwDkB6vsp0NK
+ fNLklAmN4lSb96RVh/xTb4kLiLp3OQsZ32EiBFusDf7q9bibcAgFxEMBzDESF0ApDD
+ X3UuPlQhHTZ+rQ2Mu1FXgkmdV3iC2cUGCBD7NlOZxKOFwozE0TL05ADf3k9FTZW4Uk
+ gDhY6071HfiKQ==
+Message-ID: <263918be-381e-44b6-899e-321ecaabb2bc@kernel.org>
+Date: Wed, 4 Oct 2023 15:39:23 +0300
 MIME-Version: 1.0
-Subject: Re: [PATCH 16/16] board: rzg2l: Add RZ/G2L SMARC EVK board
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 2/2] board: ti: am65x: Move to using Extension
+ framework
 Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-17-paul.barker.ct@bp.renesas.com>
- <37900365-9d1c-6248-635c-5f6566a08bfb@mailbox.org>
- <52c1d2c3-9b43-9519-b014-02a107a4cc28@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <52c1d2c3-9b43-9519-b014-02a107a4cc28@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>
+Cc: vigneshr@ti.com, trini@konsulko.com, srk@ti.com, robertcnelson@gmail.com, 
+ u-boot@lists.denx.de, "Francis, Neha" <n-francis@ti.com>,
+ kory.maincent@bootlin.com
+References: <20230710145026.128481-1-rogerq@kernel.org>
+ <20230710145026.128481-3-rogerq@kernel.org>
+ <CAPnjgZ1odo6F7RTumJ6A=+kgZ-pm0JnRvxNYB00HX7YpAyrFXg@mail.gmail.com>
+ <574c8eb0-4c19-72ef-5920-e506e4be6203@kernel.org>
+ <20230713184438.y3ac7c425fwu575b@radiantly>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20230713184438.y3ac7c425fwu575b@radiantly>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 7fdbbf4d18249034369
-X-MBO-RS-META: e63ua4udf5iad8m3pxciwimtnxi5k3jz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,43 +76,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/4/23 11:36, Paul Barker wrote:
+Hi,
 
-[...]
-
->>> +int dram_init(void)
->>> +{
->>> +	return fdtdec_setup_mem_size_base();
->>> +}
->>> +
->>> +int dram_init_banksize(void)
->>> +{
->>> +	fdtdec_setup_memory_banksize();
+On 13/07/2023 21:44, Nishanth Menon wrote:
+> On 15:29-20230711, Roger Quadros wrote:
+>> Hi Simon,
 >>
->> This and the one function above can likely go into arch/mach-rmobile/
-> 
-> We're not able to test every supported mach-rmobile board so we've
-> preferred to keep changes to RZ/G2L specific code where possible. I'm
-> happy to merge this into mach-rmobile (along with the similar code in
-> board/renesas/rcar-common/common.c), but it will only be tested on the
-> boards we have in our team.
+>> On 10/07/2023 22:45, Simon Glass wrote:
+>>> Hi Roger,
+>>>
+>>> On Mon, 10 Jul 2023 at 08:51, Roger Quadros <rogerq@kernel.org> wrote:
+>>>>
+>>>> Support the Expansion cards via Extension framework.
+>>>> This should make 'expansion' command work to scan
+>>>> for expansion cards and apply DT overlays.
+>>>>
+>>>> Card detection code is moved to a library so
+>>>> other boards can benefit from it.
+>>>>
+>>>> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+>>>> ---
+>>>>  board/ti/am65x/evm.c               | 264 ++++++++---------------------
+>>>>  board/ti/common/Kconfig            |   8 +
+>>>>  board/ti/common/Makefile           |   1 +
+>>>>  board/ti/common/ti_card_detect.c   | 155 +++++++++++++++++
+>>>>  board/ti/common/ti_card_detect.h   |  43 +++++
+>>>>  configs/am65x_evm_a53_defconfig    |   2 +
+>>>>  configs/am65x_hs_evm_a53_defconfig |   2 +
+>>>>  7 files changed, 280 insertions(+), 195 deletions(-)
+>>>>  create mode 100644 board/ti/common/ti_card_detect.c
+>>>>  create mode 100644 board/ti/common/ti_card_detect.h
+>>>
+>>> Before this goes too far I think this should move to using a linker
+>>> list to declare the driver (or a driver-model driver if you prefer,
+>>> but that might be overkill).
 
-Don't you already have a G2L specific file in arch/arm/mach-rmobile/ ?
+So I've been working on this on the side and got linker list way working
+with custom script booting but as soon as I move to standard boot flow
+it no longer works. This is because there is no code in place to
+apply the overlay and pass it to next stage e.g. EFI.
 
-(I can test whatever changes on R-Car if needed)
+I see the following note at
+https://elixir.bootlin.com/u-boot/latest/source/boot/bootmeth_efi.c#L304
 
->>> +	return 0;
->>> +}
->>> +
->>> +void __weak reset_cpu(void)
->>> +{
->>
->> Is this platform missing a way to reset the system ?
->> Please fix.
-> 
-> Adding reset support is on my todo list. I'm prioritising Ethernet
-> support above this right now, but we don't mind too much what order we
-> do things. Let me know if you'd prefer us to prioritise reset support.
+"
+                /*
+                 * TODO: Apply extension overlay
+                 *
+                 * Here we need to load and apply the extension overlay. This is
+                 * not implemented. See do_extension_apply(). The extension
+                 * stuff needs an implementation in boot/extension.c so it is
+                 * separate from the command code. Really the extension stuff
+                 * should use the device tree and a uclass / driver interface
+                 * rather than implementing its own list
+                 */
+"
 
-Isn't the reset like really really simple ? Enable SYSRESET config 
-option and do TFA/SMC reset I guess ?
+Another note at
+https://elixir.bootlin.com/u-boot/latest/source/cmd/extension_board.c#L198
+
+"/* extensions should have a uclass - for now we use UCLASS_SIMPLE_BUS uclass */"
+
+So are we better off implementing a class driver for extension stuff?
+
+Once that is in place how should extension apply work?
+Current implementation relies on a extension_overlay_cmd environment
+to be specified.
+e.g. for EFI boot case, the overlay files should be obtained in the same
+way we get the base device tree i.e. bootmeth_common_read_file()?
+
+-- 
+cheers,
+-roger
