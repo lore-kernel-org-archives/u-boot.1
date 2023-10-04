@@ -4,67 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F98E7B5FB
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 12:16:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C6B4E7B5FB
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 12:17:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBD5B87522;
-	Wed,  4 Oct 2023 14:15:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B010E87526;
+	Wed,  4 Oct 2023 14:17:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YXc/HzUG";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HjOR42PC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EDCC87523; Wed,  4 Oct 2023 14:15:57 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8448187526; Wed,  4 Oct 2023 14:17:48 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 146B787521
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 14:15:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49FAE87520
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 14:17:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394CFlHC034089;
- Wed, 4 Oct 2023 07:15:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696421747;
- bh=acIu81G0HEmq6Yd+23iwABwosnxF6/ZSHR2DeqyAH40=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=YXc/HzUGkNHpvKYquyoBEoyft6Y1VPK1IgGfIthDPhK22k2XRNP0b5i5M2R8Uv2jj
- 9g+XrerD5hk6UvbBMn8PwWAv9qM/p6D7nqVLcuG3LiPp3gUQOWyIHwJ88J/6Gxr7L3
- 51/rbcJNNdMzNGxkjk3sqIHFZ001he0Ue26JpFoQ=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394CFl6b072409
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 4 Oct 2023 07:15:47 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
- Oct 2023 07:15:47 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 4 Oct 2023 07:15:46 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394CFkCu064775;
- Wed, 4 Oct 2023 07:15:46 -0500
-Date: Wed, 4 Oct 2023 07:15:46 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Jan Kiszka <jan.kiszka@siemens.com>
-CC: Roger Quadros <rogerq@kernel.org>, <trini@konsulko.com>, <vigneshr@ti.com>,
- <m-chawdhry@ti.com>, <sjg@chromium.org>, <jonas@kwiboo.se>,
- <srk@ti.com>, <afd@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH] arm: dts: k3-am625-beagleplay: Fix boot
-Message-ID: <20231004121546.uvvqcbewyt5s6kdx@extrude>
-References: <20230929134646.214781-1-rogerq@kernel.org>
- <c430c549-6c6d-4d32-a51b-e2bfa597bd4a@siemens.com>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4S0txN3fY7z9spn;
+ Wed,  4 Oct 2023 14:17:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1696421864;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=YWJJMIcQ9hKDAOFEa78v3CMfhAB8auAANMT/+2kFdsA=;
+ b=HjOR42PCzd218YkRwTDxYR1TakmbYD5qs8pNw3ds6pBXhUo5UqCIOBQj6/SpyHKHKOPGBJ
+ lUVB4ZtYMebYB4bvFW61Cx9Jyzt1vDH8nK0kumdnM3a8ZW34iePpxNHTPwaDrPYk/f4fBf
+ tIqND8pOU+hbbja6BDFImGN1ml6bbcR4/YxfXgDma5yVItWNf13g1WY/sLbSXSHzGsFvMz
+ Xc0Gf2XsWvw1orOAtcadSdd9Zjoil4G9iJXPFhxDsSSPlR7z+r8YEr2D96BgYFaSFwb0e4
+ 1WgUBj2rrXwiGl3an86IwZfEHu6FpmqaN1UF1JfdnGW9ZekOvPtfqoKzhIhBUg==
+Message-ID: <28064fe9-a696-49a0-99eb-1e233d924bac@mailbox.org>
+Date: Wed, 4 Oct 2023 14:17:41 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <c430c549-6c6d-4d32-a51b-e2bfa597bd4a@siemens.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Subject: Re: [PATCH 07/16] clk: renesas: Add RZ/G2L CPG driver
+Content-Language: en-US
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-8-paul.barker.ct@bp.renesas.com>
+ <cf94aea9-e750-8636-9f31-941617e8b8be@mailbox.org>
+ <44532c66-f21c-c930-9ca7-963add3196db@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <44532c66-f21c-c930-9ca7-963add3196db@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 1f665d324aac0535157
+X-MBO-RS-META: 36h9efqq1yxna5t9jynn11nkiondudoa
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,244 +79,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 22:26-20231003, Jan Kiszka wrote:
-> From: Jan Kiszka <jan.kiszka@siemens.com>
-> 
-> Since commit [1] A53 u-boot proper is broken. This is because nodes
-> marked as 'bootph-pre-ram' are not available at u-boot proper before
-> relocation.
-> 
-> To fix this we mark all nodes as 'bootph-all'.
-> 
-> [1] 9e644284ab812 ("dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation")
-> 
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
-> ---
-> 
-> This may overshoot, but at least the board boots again. Could it be that 
-> [1] broke even more boards?
+On 10/4/23 10:15, Paul Barker wrote:
 
-Jan: https://lore.kernel.org/all/b1c62a7d-a90e-4212-8972-9b622e147975@kernel.org/
+[...]
 
-I got boot without r5-beagleplay.dts modified. and it is in line with
-the changes in linux-next commit 944adefc7f88 ("arm64: dts: ti:
-k3-am625-beagleplay: Add boot phase tags marking")
-
+>>>    config R9A07G044L
+>>>    	bool "Renesas R9A07G044L SoC"
+>>> +	imply CLK_R9A07G044
+>>
+>> Why not CLK_R9A07G044L (with L at the end) ?
 > 
->  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi | 70 ++++++++++----------
->  arch/arm/dts/k3-am625-r5-beagleplay.dts      | 12 ++--
->  2 files changed, 41 insertions(+), 41 deletions(-)
-> 
-> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> index f8c04e8a300..d6c6baa5518 100644
-> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-> @@ -14,143 +14,143 @@
->  	};
->   	memory@80000000 {
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->   	/* Keep the LEDs on by default to indicate life */
->  	leds {
-> -		bootph-pre-ram;
-> +		bootph-all;
->  		led-0 {
->  			default-state = "on";
-> -			bootph-pre-ram;
-> +			bootph-all;
->  		};
->   		led-1 {
->  			default-state = "on";
-> -			bootph-pre-ram;
-> +			bootph-all;
->  		};
->   		led-2 {
->  			default-state = "on";
-> -			bootph-pre-ram;
-> +			bootph-all;
->  		};
->   		led-3 {
->  			default-state = "on";
-> -			bootph-pre-ram;
-> +			bootph-all;
->  		};
->   		led-4 {
->  			default-state = "on";
-> -			bootph-pre-ram;
-> +			bootph-all;
->  		};
->  	};
->  };
->   &cbass_main {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &main_timer0 {
->  	clock-frequency = <25000000>;
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &dmss {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &secure_proxy_main {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &dmsc {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &k3_pds {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &k3_clks {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &k3_reset {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &dmsc {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	k3_sysreset: sysreset-controller {
->  		compatible = "ti,sci-sysreset";
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->  };
->   &wkup_conf {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &chipid {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &main_pmx0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &main_uart0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &console_pins_default {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &cbass_mcu {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &cbass_wakeup {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &mcu_pmx0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &main_i2c0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &local_i2c_pins_default {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &gpio0_pins_default {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &main_gpio0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &main_gpio1 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &sdhci0 {
->  	/* EMMC */
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &emmc_pins_default {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &sd_pins_default {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	/* Force to use SDCD card detect pin */
->  	pinctrl-single,pins = <
->  		AM62X_IOPAD(0x023c, PIN_INPUT, 0) /* (A21) MMC1_CMD */
-> @@ -164,11 +164,11 @@
->  };
->   &tps65219 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &sdhci1 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   #ifdef CONFIG_TARGET_AM625_A53_EVM
-> diff --git a/arch/arm/dts/k3-am625-r5-beagleplay.dts b/arch/arm/dts/k3-am625-r5-beagleplay.dts
-> index 9c9d0570592..ac5461a32c0 100644
-> --- a/arch/arm/dts/k3-am625-r5-beagleplay.dts
-> +++ b/arch/arm/dts/k3-am625-r5-beagleplay.dts
-> @@ -31,7 +31,7 @@
->  		ti,sci = <&dmsc>;
->  		ti,sci-proc-id = <32>;
->  		ti,sci-host-id = <10>;
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->   	dm_tifs: dm-tifs {
-> @@ -41,7 +41,7 @@
->  		mbox-names = "rx", "tx";
->  		mboxes= <&secure_proxy_main 22>,
->  			<&secure_proxy_main 23>;
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->  };
->  @@ -55,11 +55,11 @@
->  };
->   &mcu_esm {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &secure_proxy_sa3 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	/* We require this for boot handshake */
->  	status = "okay";
->  };
-> @@ -69,12 +69,12 @@
->  		compatible = "ti,am654-system-controller";
->  		mboxes= <&secure_proxy_main 1>, <&secure_proxy_main 0>, <&secure_proxy_sa3 0>;
->  		mbox-names = "tx", "rx", "boot_notify";
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->  };
->   &main_esm {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->   &main_pktdma {
-> -- 
-> 2.35.3
+> The driver will also support the RZ/G2LC (R9A07G044C) when support for
+> that SoC is added in a later patch series.
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Ah, please, do add this explanation into the commit message.
+
+This is really valuable piece of information to de-confuse whoever is 
+looking at this naming scheme, really.
+
+>>> +/* Mux clock tables */
+>>> +static const char * const sel_pll3_3[] = { ".pll3_533", ".pll3_400" };
+>>> +static const char * const sel_pll5_4[] = { ".pll5_foutpostdiv", ".pll5_fout1ph0" };
+>>> +static const char * const sel_pll6_2[]	= { ".pll6_250", ".pll5_250" };
+>>
+>> Is this mixed tabs and spaces here ?
+>>
+>> (please fix this in Linux too)
+> 
+> I've tried to minimize changes between the u-boot and Linux drivers, so
+> this mixed tabs/spaces issue, parenthesis around numbers in defines,
+> etc, is an exact copy of what was accepted into the mainline kernel. The
+> hope is that we can more easily port fixes from Linux to u-boot if the
+> code remains as similar as possible.
+
+Send patch to Geert on Linux side too and problem should be solved.
