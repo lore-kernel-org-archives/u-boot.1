@@ -4,48 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58803E7B61B
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 13:54:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1732E7B61D
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 13:54:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8330487524;
-	Wed,  4 Oct 2023 15:54:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 3122C874E8;
+	Wed,  4 Oct 2023 15:54:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D0084874CC; Wed,  4 Oct 2023 15:54:10 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id C9944874E8
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 15:54:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,200,1694703600"; 
- d="asc'?scan'208";a="181912495"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 04 Oct 2023 22:54:06 +0900
-Received: from unknown (unknown [10.226.92.199])
- by relmlir5.idc.renesas.com (Postfix) with SMTP id F2D59400618A;
- Wed,  4 Oct 2023 22:54:03 +0900 (JST)
-Date: Wed, 4 Oct 2023 14:54:02 +0100
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>
-Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Hai Pham <hai.pham.ud@renesas.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: Re: [PATCH 14/16] arm: rmobile: Support RZ/G2L memory map
-Message-ID: <20231004135402.7hnhb2li66ixyro3@GBR-5CG2373LKG.adwin.renesas.com>
-References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-15-paul.barker.ct@bp.renesas.com>
- <78e94ddb-3708-12f8-9466-31a8a912d607@mailbox.org>
- <4ee54918-cb7f-b6e1-a712-31b613c4f8ea@bp.renesas.com>
- <f3f30fb3-65ed-4070-9f5a-2efd84acc722@mailbox.org>
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="opPFTMef";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5224E87563; Wed,  4 Oct 2023 15:54:50 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BCD1874CC
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 15:54:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394DsbK5083148;
+ Wed, 4 Oct 2023 08:54:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696427677;
+ bh=kJPvvjN1f+kh5Dzkiz0oXgumbLl2dM7l5R2o/lXa7dQ=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=opPFTMefxUXtX0CFVLG1jmSj6f+ags13NAb4M+lbw6E8/omS8Egvp+IVghHC3Ypdb
+ OfRwWP99syteJ/nhR78CsMriz9T3R0u2E10Sh+arlahZU7UQlt9AOurrxY243lHrbC
+ 99Galr9WCZe3y139/Vhbm0vcKBavxrPgPKrCf6jI=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394Dsb77028872
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 4 Oct 2023 08:54:37 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
+ Oct 2023 08:54:36 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 4 Oct 2023 08:54:36 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394DsaO6041367;
+ Wed, 4 Oct 2023 08:54:36 -0500
+Date: Wed, 4 Oct 2023 08:54:36 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Roger Quadros <rogerq@kernel.org>, <trini@konsulko.com>, <vigneshr@ti.com>,
+ <m-chawdhry@ti.com>, <sjg@chromium.org>, <jonas@kwiboo.se>,
+ <srk@ti.com>, <bb@ti.com>, <praneeth@ti.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
+Message-ID: <20231004135436.ihofrxutzcdefica@audacious>
+References: <20231004132324.44198-1-rogerq@kernel.org>
+ <20231004132324.44198-2-rogerq@kernel.org>
+ <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="5h7azbqfrhr5tij5"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <f3f30fb3-65ed-4070-9f5a-2efd84acc722@mailbox.org>
+In-Reply-To: <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,81 +81,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 08:48-20231004, Andrew Davis wrote:
+> On 10/4/23 8:23 AM, Roger Quadros wrote:
+> > ti_mmc is not a valid boot_target for standard boot flow so
+> 
+> Is there some way to make it into a valid boot_target? Otherwise
+> how do we use uEnv.txt files, or boot from FIT images with overlays?
 
---5h7azbqfrhr5tij5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+envboot takes care of uEnv.txt file (see
+https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
 
-On Wed, Oct 04, 2023 at 02:30:53PM +0200, Marek Vasut wrote:
-> On 10/4/23 11:18, Paul Barker wrote:
->=20
-> [...]
->=20
-> > > > +static struct mm_region rzg2l_mem_map[RZG2L_NR_REGIONS] =3D {
-> > > > +	{
-> > > > +		.virt =3D 0x0UL,
-> > > > +		.phys =3D 0x0UL,
-> > > > +		.size =3D 0x40000000UL,
-> > > > +		.attrs =3D PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
-> > > > +			 PTE_BLOCK_NON_SHARE |
-> > > > +			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
-> > > > +	}, {
-> > > > +		.virt =3D 0x40000000UL,
-> > > > +		.phys =3D 0x40000000UL,
-> > > > +		.size =3D 0x03F00000UL,
-> > > > +		.attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> > > > +			 PTE_BLOCK_INNER_SHARE
-> > > > +	}, {
-> > > > +		.virt =3D 0x47E00000UL,
-> > >=20
-> > > What's this part about ?
-> >=20
-> > This is copied from the RCar Gen3 memory map.
->=20
-> I suspected as much. Please recheck the memory map instead of copy-paste =
-and
-> make sure it is really matching the hardware.
+Early remote proc loading and FIT image is a question for stdboot itself.
 
-Sorry, I wasn't specific enough there.
+> 
+> Andrew
+> 
+> > remove it. Prefer mmc1 (sd-card) over mmc0 (emmc).
+> > 
+> > Signed-off-by: Roger Quadros <rogerq@kernel.org>
+> > ---
+> >   board/ti/am62x/am62x.env | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
+> > index 22a6c2c91b..e53a55c38f 100644
+> > --- a/board/ti/am62x/am62x.env
+> > +++ b/board/ti/am62x/am62x.env
+> > @@ -8,7 +8,7 @@ args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+> >   	${mtdparts}
+> >   run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
+> > -boot_targets=ti_mmc mmc0 mmc1 usb pxe dhcp
+> > +boot_targets=mmc1 mmc0 usb pxe dhcp
+> >   boot=mmc
+> >   mmcdev=1
+> >   bootpart=1:2
 
-The addition of an entry at 0x40000000 of size 0x03F00000, followed by a
-gap until 0x47E00000, is coped from R-Car as the way TrustedFirmware and
-OP-TEE use the first 128MiB of system memory is the same. The mappings
-here are due to the software configuration of TrustedFirmware & OP-TEE,
-not due to the hardware.
-
-The hardware itself has a pretty simple memory map which is shown in the
-commit message. The memory map in this file is complete.
-
-I have a note in the commit that says "Within the DDR area, the first
-128 MiB are reserved by TrustedFirmware.", I probably just need to
-expand on why we need the mappings at 0x40000000 and 0x47E00000, instead
-of just using the mapping from 0x48000000 that's in the dtb.
-
->=20
-> > > > +		.phys =3D 0x47E00000UL,
-> > > > +		.size =3D 0xF8200000UL,
-> > > > +		.attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> > > > +			 PTE_BLOCK_INNER_SHARE
-> > > > +	}, {
-> > > > +		/* List terminator */
-> > > > +		0,
-> > > > +	}
-> > > > +};
-
-Thanks,
-Paul
-
---5h7azbqfrhr5tij5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR1uegAKCRDbaV4Vf/JG
-vbEiAQDRya2+RIYNdi63zJX9iGlbA0Ua90fMoEUqpR4zDjnnQwEApKwi5+6SXAgD
-i+k8dHP1sELYdOCO1+Pbuh5aMhAXew0=
-=rKSB
------END PGP SIGNATURE-----
-
---5h7azbqfrhr5tij5--
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
