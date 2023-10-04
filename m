@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F0DE7C4E3
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:46:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64639E7C4E5
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:47:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D21D875C5;
+	by phobos.denx.de (Postfix) with ESMTP id EE31F87604;
 	Wed,  4 Oct 2023 18:43:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="jwwZrX52";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="RYypCQXw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 95E4A87594; Wed,  4 Oct 2023 18:43:44 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id A144386CF1; Wed,  4 Oct 2023 18:43:44 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47865875CB
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:43:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBE6987513
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:43:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-53808d5b774so3932817a12.3
- for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:43:22 -0700 (PDT)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-533c4d20b33so184834a12.0
+ for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:43:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1696437801; x=1697042601;
+ d=amarulasolutions.com; s=google; t=1696437809; x=1697042609;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mn9irTLZeIp1ybS5hwFfjYiPVkcNPqEC5RGf5JtixrI=;
- b=jwwZrX52+18xXTY5ihMvEExpIF1Vch1ffrmgQzYgYHvJZYNyi2tanfWjkj/sHg2c3Y
- TEi7513hpvLJohrH23FbOlrCZvpTh9LjpRRVsOvAA2mB+LELC9Ou3rg2fa+sROUk2qqm
- GyhA5mnSZFXdLsQAptPaMMksX7iW5SM2uV68c=
+ bh=11Ziq5j8tH6//n8W109RGgZi+yynEIbpG8hLQmj18Xg=;
+ b=RYypCQXwhBEip1YVDbYKuMFbvuDQva+Xuyflxcbs48f/+uBcSn+SXtihv2jUMOxI6m
+ m+6K4q3fkt6gdipCRweNiXi4UuqxkUuKaNWL42bbYFyG3zHjVbqYk8R90Lp6D0CvbV7y
+ OaoFBlkabiZ01NII36DdpaPmpnKco1xtqYNOE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696437801; x=1697042601;
+ d=1e100.net; s=20230601; t=1696437809; x=1697042609;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mn9irTLZeIp1ybS5hwFfjYiPVkcNPqEC5RGf5JtixrI=;
- b=LqDREevcJQwpNvBWfwsW84tUSlD+0QmsyY5+gNCy2UPTBH08y3Oigyp/JV6uijB94X
- O3uEsSoGC6XRgfSSU5KQaY/5jYo7iayzjj7R4uEAojG0bsHKptGO9o1aUt6lBIHgE8e0
- y8PA7qSJchYibTF9r+0hvT7zDrDqJoTtfqUiDh4OXjzmkxFxABt5PDY0zYhmeSJR1gNs
- rF0qdq6udO2/PERm3GcIwX80nWn1X2qTkjzzehkv/kKYWkj+58pghqTbdN4irO/KLF9+
- +HiqzyVKQBqq7sYYnJYi29OUYuCJpDjBP1Hb5dtd+JHPg+v4/n1S8Cv73U5OUML9T4QF
- bH8Q==
-X-Gm-Message-State: AOJu0YwhTaIuEdjEpcyfnt6bUL8uOJXj4ihcBvcGZ0yfSTAeKd+bdJCl
- LRTrgxr6lxpd+hvp9oQYW05cSzeVnmtL82kL7Os=
-X-Google-Smtp-Source: AGHT+IEP8cnC/kwgK8/+XK5goR6lEX08dQ6fFKpKcFS+0FIFu0KZFX644KJOalnqd7VL/IDFOx43ZQ==
-X-Received: by 2002:a05:6402:1604:b0:523:5012:63d5 with SMTP id
- f4-20020a056402160400b00523501263d5mr2396947edv.16.1696437801646; 
- Wed, 04 Oct 2023 09:43:21 -0700 (PDT)
+ bh=11Ziq5j8tH6//n8W109RGgZi+yynEIbpG8hLQmj18Xg=;
+ b=MWKBpui1UlyrgWq45zH5BAXq41989HK+ZssBemULGt8b0bDoTIew4FANE6FcfMNhsO
+ qsCHgaQ7XCWqsunB36JAcG2Ar0W7W04CYgXJv/n3QuqDOm0SYm8HJTl6KMasadmYH47L
+ 1MWBBHKhZhFQlI1g2nSCfk5PYSgwhSp0TLZwR4WTeFRDTVUnrPyK9a+DU08AYycgzLbc
+ 5D75aFd7MYEI5WGiD0X6lPZHP4uiiGAekXou1fbIHZ7VZRnUm3WZWOt9DeCNZ00ELWd8
+ vPGs9b7t/gFQLYX5vVlwRWZpP8hLB6PnSjxcGbztvS17PVu2PjWyuGN/sn8zSn7gFqU0
+ 2ZVQ==
+X-Gm-Message-State: AOJu0YyW7lTt6rDu18j0TuUxNvnz17qdVEPKg76+g0lUpPNvc5qLxaeo
+ U/IYvRkUefNWf7IkQiMSA1lYaOdNkNXGeD1ZyEc=
+X-Google-Smtp-Source: AGHT+IGA8VxKR6aXSJP4LtMhdDgQPNjRoErLuJge4xrqQBWCU4yEWnbMvSkiABl1vo49SKJxMu/pnA==
+X-Received: by 2002:a05:6402:274c:b0:531:14c4:ae30 with SMTP id
+ z12-20020a056402274c00b0053114c4ae30mr245282edd.0.1696437809452; 
+ Wed, 04 Oct 2023 09:43:29 -0700 (PDT)
 Received: from pwmachine.numericable.fr
  ([2a02:2f0a:e213:b400:4d86:b2fb:68b4:3466])
  by smtp.gmail.com with ESMTPSA id
- f2-20020a056402150200b005381936efa7sm118351edw.16.2023.10.04.09.43.20
+ f2-20020a056402150200b005381936efa7sm118351edw.16.2023.10.04.09.43.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Oct 2023 09:43:21 -0700 (PDT)
+ Wed, 04 Oct 2023 09:43:29 -0700 (PDT)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Harald Seiler <hws@denx.de>,
- Francis Laniel <francis.laniel@amarulasolutions.com>
-Subject: [RFC PATCH v10 16/24] test: hush: Fix instructions list tests for
- hush 2021
-Date: Wed,  4 Oct 2023 19:42:12 +0300
-Message-Id: <20231004164220.15738-17-francis.laniel@amarulasolutions.com>
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [RFC PATCH v10 20/24] cli: hush_2021: Enable loops
+Date: Wed,  4 Oct 2023 19:42:16 +0300
+Message-Id: <20231004164220.15738-21-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
 References: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
@@ -94,115 +94,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Modifies the expected result for hush 2021.
-Indeed, there were bugs in actual U-Boot hush which were fixed in upstream
-Busybox.
-As hush 2021 is based on upstream Busybox, these bugs no longer exist.
+Enables the use of for, while and until loops for command line as
+well as with run_command().
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- test/hush/list.c | 69 +++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 65 insertions(+), 4 deletions(-)
+ common/cli_hush_2021.c     |  1 +
+ common/cli_hush_upstream.c | 15 ++++++++++++++-
+ 2 files changed, 15 insertions(+), 1 deletion(-)
 
-diff --git a/test/hush/list.c b/test/hush/list.c
-index 052cf2783c..6f8f10f15e 100644
---- a/test/hush/list.c
-+++ b/test/hush/list.c
-@@ -9,6 +9,7 @@
- #include <env_attr.h>
- #include <test/hush.h>
- #include <test/ut.h>
-+#include <asm/global_data.h>
- 
- static int hush_test_semicolon(struct unit_test_state *uts)
- {
-@@ -46,12 +47,43 @@ static int hush_test_or(struct unit_test_state *uts)
- }
- HUSH_TEST(hush_test_or, 0);
- 
-+DECLARE_GLOBAL_DATA_PTR;
+diff --git a/common/cli_hush_2021.c b/common/cli_hush_2021.c
+index aba5dcbbcd..0a207d147b 100644
+--- a/common/cli_hush_2021.c
++++ b/common/cli_hush_2021.c
+@@ -34,6 +34,7 @@
+ #define ENABLE_HUSH_INTERACTIVE	1
+ #define ENABLE_FEATURE_EDITING	1
+ #define ENABLE_HUSH_IF		1
++#define ENABLE_HUSH_LOOPS	1
+ /* No MMU in U-Boot */
+ #define BB_MMU			0
+ #define USE_FOR_NOMMU(...)	__VA_ARGS__
+diff --git a/common/cli_hush_upstream.c b/common/cli_hush_upstream.c
+index 9b65dcbde1..23392939e1 100644
+--- a/common/cli_hush_upstream.c
++++ b/common/cli_hush_upstream.c
+@@ -10349,7 +10349,7 @@ static int run_list(struct pipe *pi)
+ #ifndef __U_BOOT__
+ 	for (; pi; pi = IF_HUSH_LOOPS(rword == RES_DONE ? loop_top : ) pi->next) {
+ #else /* __U_BOOT__ */
+-	for (; pi; pi = pi->next) {
++	for (; pi; pi = rword == RES_DONE ? loop_top : pi->next) {
+ #endif /* __U_BOOT__ */
+ 		int r;
+ 		int sv_errexit_depth;
+@@ -10451,7 +10451,20 @@ static int run_list(struct pipe *pi)
+ 			}
+ 			/* Insert next value from for_lcur */
+ 			/* note: *for_lcur already has quotes removed, $var expanded, etc */
++#ifndef __U_BOOT__
+ 			set_local_var(xasprintf("%s=%s", pi->cmds[0].argv[0], *for_lcur++), /*flag:*/ 0);
++#else /* __U_BOOT__ */
++			/* We cannot use xasprintf, so we emulate it. */
++			char *full_var;
++			char *var = pi->cmds[0].argv[0];
++			char *val = *for_lcur++;
 +
- static int hush_test_and_or(struct unit_test_state *uts)
- {
- 	/* A && B || C truth table. */
- 	ut_asserteq(1, run_command("false && false || false", 0));
--	ut_asserteq(1, run_command("false && false || true", 0));
--	ut_asserteq(1, run_command("false && true || true", 0));
++			/* + 1 to take into account =. */
++			full_var = xmalloc(strlen(var) + strlen(val) + 1);
++			sprintf(full_var, "%s=%s", var, val);
 +
-+	if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		ut_asserteq(1, run_command("false && false || true", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_2021_PARSER) {
-+		/*
-+		 * This difference seems to come from a bug solved in Busybox
-+		 * hush.
-+		 *
-+		 * Indeed, the following expression can be seen like this:
-+		 * (false && false) || true
-+		 * So, (false && false) returns 1, the second false is not
-+		 * executed, and true is executed because of ||.
-+		 */
-+		ut_assertok(run_command("false && false || true", 0));
-+	}
-+
-+	if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		ut_asserteq(1, run_command("false && true || true", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_2021_PARSER) {
-+		/*
-+		 * This difference seems to come from a bug solved in Busybox
-+		 * hush.
-+		 *
-+		 * Indeed, the following expression can be seen like this:
-+		 * (false && true) || true
-+		 * So, (false && true) returns 1, the true is not executed, and
-+		 * true is executed because of ||.
-+		 */
-+		ut_assertok(run_command("false && true || true", 0));
-+	}
-+
- 	ut_asserteq(1, run_command("false && true || false", 0));
- 	ut_assertok(run_command("true && true || false", 0));
- 	ut_asserteq(1, run_command("true && false || false", 0));
-@@ -69,8 +101,37 @@ static int hush_test_or_and(struct unit_test_state *uts)
- 	ut_asserteq(1, run_command("false || false && true", 0));
- 	ut_assertok(run_command("false || true && true", 0));
- 	ut_asserteq(1, run_command("false || true && false", 0));
--	ut_assertok(run_command("true || true && false", 0));
--	ut_assertok(run_command("true || false && false", 0));
-+
-+	if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		ut_assertok(run_command("true || true && false", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_2021_PARSER) {
-+		/*
-+		 * This difference seems to come from a bug solved in Busybox
-+		 * hush.
-+		 *
-+		 * Indeed, the following expression can be seen like this:
-+		 * (true || true) && false
-+		 * So, (true || true) returns 0, the second true is not
-+		 * executed, and then false is executed because of &&.
-+		 */
-+		ut_asserteq(1, run_command("true || true && false", 0));
-+	}
-+
-+	if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		ut_assertok(run_command("true || false && false", 0));
-+	} else if (gd->flags & GD_FLG_HUSH_2021_PARSER) {
-+		/*
-+		 * This difference seems to come from a bug solved in Busybox
-+		 * hush.
-+		 *
-+		 * Indeed, the following expression can be seen like this:
-+		 * (true || false) && false
-+		 * So, (true || false) returns 0, the false is not executed, and
-+		 * then false is executed because of &&.
-+		 */
-+		ut_asserteq(1, run_command("true || false && false", 0));
-+	}
-+
- 	ut_assertok(run_command("true || false && true", 0));
- 	ut_assertok(run_command("true || true && true", 0));
- 
++			set_local_var_2021(full_var, /*flag:*/ 0);
++#endif /* __U_BOOT__ */
+ 			continue;
+ 		}
+ 		if (rword == RES_IN) {
 -- 
 2.34.1
 
