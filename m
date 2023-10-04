@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DD2FE7C4E7
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 18:04:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB5ADE7C4E9
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 18:04:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF7118765E;
+	by phobos.denx.de (Postfix) with ESMTP id 4B7B68765A;
 	Wed,  4 Oct 2023 19:58:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Dkd96Ld5";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ilTekWHd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81E528764D; Wed,  4 Oct 2023 19:58:50 +0200 (CEST)
+ id A31818763F; Wed,  4 Oct 2023 19:58:48 +0200 (CEST)
 Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
  [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD7A98762E
+ by phobos.denx.de (Postfix) with ESMTPS id BC19E8761F
  for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 19:58:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-9ad8a822508so25129266b.0
+ a640c23a62f3a-9b98a699f45so18991666b.3
  for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 10:58:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696442323; x=1697047123; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696442325; x=1697047125; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qp81b1vGmqJlUZWM1d89sGb/9HP0KyzR+aHQ9UBM6+U=;
- b=Dkd96Ld5Pp+tDVpP+3kjKdEc6hZnj5Nb3nrmZJUKJRjrq1v4BNvtm5J3BK0Kd2UVop
- xnjaXSYzLEFHWEIOBlTLKfK4mxkmkI4z93hH603QbW96p9cbvrcbScEmcKjGuhZcVxYW
- aesBxHvWP5Ip9ZqnRMZmnZLy3LF1UQKOwYeWg=
+ bh=VXRBAOxasKaZPLvza8ACdxPleWj5dGgB43G2mzT6j4U=;
+ b=ilTekWHdx+4rpVKrOiRY25mi7XoJERF2V43ZxlgHcEN96UkYcDpyA+QwCRPC7iEU5n
+ h/QD9kcB3bsQP5zprjtZCUmlmdD8VVWgGy2a4H/k6T8kRoA+sRZIepYUzs93iiAefTg7
+ sx0DZ7gKHWmDIVM97HtwPmYlUJR2YO6awPS3Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696442323; x=1697047123;
+ d=1e100.net; s=20230601; t=1696442325; x=1697047125;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qp81b1vGmqJlUZWM1d89sGb/9HP0KyzR+aHQ9UBM6+U=;
- b=pT1eAKQZ4smoaYSAh3VlZPSQgu1SHsBFxT7QrlkKub0+H5t9M1YjHfmpDiovnBagts
- AUvtjrKwkDpVe8JSs3PPDIaDRBJloPXQnlBX6VXbmYCioYoCe/YAWt5p6r5QcGE2IXWO
- kKJd7XuiigEh9hSsl3X7oNhBe6DNPj20ZL8IXXfePkCTE2NzDu7t2y2B6mk2pVlGD7R5
- Al9Y7XpBoQxZ2bGNMbGfyJrBggkzp4D97vJwglh1BLGh1QBuTcTbuOZXSdcgF97xep83
- xMQ3wvJVDqylOrtYxtBaZGx+oN5UbXU6SpbO5JGy29eDTwffYOPjLdh0RI8ydBc2hFyM
- nIcQ==
-X-Gm-Message-State: AOJu0Yw2A0eSVMjbxzNSzqEOnlvSG/YJywn6ZBzLLjiJvPrNotfLTsLv
- T8D/LMxHCqQd/zJV6QDrqngfqdUIGAckoITTz8cvTg==
-X-Google-Smtp-Source: AGHT+IEBGm19MUidVn5rlAj0/gAMFmq2aUsZPNSr5MAJntzjnjnXORHxQQYO8lzBWUYvpezVvbOZsOp5juCyHBdBswM=
-X-Received: by 2002:a17:906:3ca1:b0:9ae:6da8:1819 with SMTP id
- b1-20020a1709063ca100b009ae6da81819mr2797685ejh.48.1696442323291; Wed, 04 Oct
- 2023 10:58:43 -0700 (PDT)
+ bh=VXRBAOxasKaZPLvza8ACdxPleWj5dGgB43G2mzT6j4U=;
+ b=e874zSeVT5gbhAB+wItNYxA1cv7sE2ZJ2JXqaXpj7lAPMcOaa5RxIRZqXeNCSy4al1
+ xnLmlbohje1IzO1zw7lDrZaxM8sHJDQu5wSW+guZ63CeCKKAtbq6D4wlQFGy8ihkOVgZ
+ 1CWwOwZm7fApax4HsnTFJ6lfV9p37ff76WeISovb69Y1cCNGAPHlE1X59E346vTJkX6/
+ VQm3d7QjrU1cr0rtR79FoEfz1Ifslva9GBvlGDOiF8UDm8RDJe5btba5xdLtOF+swYGO
+ fUj4xoRUQtTAsxhpR9m2Bvokyvu1zlwNbuRkoV3O9jcTqPtvEWTN9Y6CNem0VMiGYj9D
+ hU6Q==
+X-Gm-Message-State: AOJu0YxOYrzsPsCHR6DanVReaYpTX0c+aYRQTD+SGB0Nt4JpRg6A5jes
+ rk7KUzLw5xQA7kv6Z3SfjXt/gC+QcsMRHmuKcWcAcg==
+X-Google-Smtp-Source: AGHT+IE6M1ZCQZ/nRcn7PcVLTR9LOr2brMKXU+x+FZ4MnJWYxfWpUS99YbDaNq1GsLf/0zA9JCnd9BwWMg5bpAbWQ6A=
+X-Received: by 2002:a17:906:5a6b:b0:9a1:e8c0:7e2e with SMTP id
+ my43-20020a1709065a6b00b009a1e8c07e2emr2558088ejc.14.1696442325438; Wed, 04
+ Oct 2023 10:58:45 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 4 Oct 2023 10:58:42 -0700
+ HTTPREST; Wed, 4 Oct 2023 10:58:44 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20230923194424.1739224-9-sjg@chromium.org>
-References: <20230923194424.1739224-9-sjg@chromium.org>
+In-Reply-To: <20230923194424.1739224-7-sjg@chromium.org>
+References: <20230923194424.1739224-7-sjg@chromium.org>
  <20230923194424.1739224-1-sjg@chromium.org>
-Date: Wed, 4 Oct 2023 10:58:42 -0700
-X-Google-Sender-Auth: bup2rN18RyPRKvxXRTv5thZ1HcU
-Message-ID: <CAPnjgZ0820VO7vOVLeu=215Q8N6FtE2iZ7VWZnYjQwU1S4YK=A@mail.gmail.com>
-Subject: Re: [PATCH v3 08/27] moveconfig: Correct some regular-expression
- strings
+Date: Wed, 4 Oct 2023 10:58:44 -0700
+X-Google-Sender-Auth: YOBaL0PqEioqaX-juHpp9Foh5e8
+Message-ID: <CAPnjgZ3QgcBTw5ckef68MTzOspXYRST_ia1wz45enNtdoEaQvw@mail.gmail.com>
+Subject: Re: [PATCH v3 06/27] moveconfig: Drop check_defconfig() and
+ update_dotconfig()
 To: Simon Glass <sjg@chromium.org>
 Cc: Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
@@ -86,14 +86,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the 'r' prefix for these strings to avoid pylint warnings.
+These functions are not needed anymore. Drop them.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/moveconfig.py | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ tools/moveconfig.py | 62 ++-------------------------------------------
+ 1 file changed, 2 insertions(+), 60 deletions(-)
 
 Applied to u-boot-dm, thanks!
