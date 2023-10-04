@@ -4,135 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B894E936E6
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 21:23:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EA9FE936EC
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 23:27:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E9608695F;
-	Wed,  4 Oct 2023 23:23:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=toradex.com
+	by phobos.denx.de (Postfix) with ESMTP id E11CD86E2F;
+	Thu,  5 Oct 2023 01:27:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=toradex.com header.i=@toradex.com header.b="d5PaBwnz";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jSHY6Npa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A46078667A; Wed,  4 Oct 2023 23:23:10 +0200 (CEST)
-Received: from de-smtp-delivery-113.mimecast.com
- (de-smtp-delivery-113.mimecast.com [194.104.111.113])
+ id 22A988753C; Thu,  5 Oct 2023 01:27:07 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C282A8695F
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 23:23:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=toradex.com
+ by phobos.denx.de (Postfix) with ESMTPS id C74CD86B18
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 01:27:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel.ziswiler@toradex.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=toradex.com;
- s=toradex-com; t=1696454586;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wbGB26XJvd6XDKnEoHk2gEdHd4GoGqbRXFL2HxLF2yQ=;
- b=d5PaBwnza+M0SrJ2UE0ZJRDEEhXwypFqrWU0+ko+34IHnnivn+mbUQlRPGVxu73tyvP8K9
- SA5kg+wCBuv8YrxK8huAKETVip132qQyQcUBByyYGLZ59okXzgF11UFaQYsyGtibupST2e
- Q7WRZcKMjM7/FFdFBvMRdbDM+ffJyJw=
-Received: from CHE01-GV0-obe.outbound.protection.outlook.com
- (mail-gv0che01lp2041.outbound.protection.outlook.com [104.47.22.41]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- de-mta-60-WnPJ4KkKO5-LCACN5bCUxw-3; Wed, 04 Oct 2023 23:23:05 +0200
-X-MC-Unique: WnPJ4KkKO5-LCACN5bCUxw-3
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:3b::9) by
- ZR0P278MB0154.CHEP278.PROD.OUTLOOK.COM (2603:10a6:910:32::13) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6838.33; Wed, 4 Oct 2023 21:23:02 +0000
-Received: from ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::ccb1:8f1e:69ef:d622]) by ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
- ([fe80::ccb1:8f1e:69ef:d622%5]) with mapi id 15.20.6838.033; Wed, 4 Oct 2023
- 21:23:02 +0000
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-To: "francesco@dolcini.it" <francesco@dolcini.it>
-CC: =?utf-8?B?Sm/Do28gUGF1bG8gU2lsdmEgR29uw6dhbHZlcw==?=
- <joao.goncalves@toradex.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "sbabic@denx.de" <sbabic@denx.de>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, "festevam@gmail.com" <festevam@gmail.com>
-Subject: Re: [PATCH] toradex: verdin-imx8mm/imx8mp: Remove bootcmd_mfg
-Thread-Topic: [PATCH] toradex: verdin-imx8mm/imx8mp: Remove bootcmd_mfg
-Thread-Index: AQHZ9vb3tJ8M1BRUsUirlzxQErR1bLA6I/qA
-Date: Wed, 4 Oct 2023 21:23:02 +0000
-Message-ID: <df849acd8d1b602c5721cad8241fda08fb155ce6.camel@toradex.com>
-References: <20231004191358.24488-1-francesco@dolcini.it>
-In-Reply-To: <20231004191358.24488-1-francesco@dolcini.it>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZR0P278MB0683:EE_|ZR0P278MB0154:EE_
-x-ms-office365-filtering-correlation-id: 93722f33-e035-44b2-7df3-08dbc520178b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0
-x-microsoft-antispam-message-info: WwG7t9nngBOwgotDTxjPVBzYG9HrT1EpHG7AB4WB37vwY/5JRUdvSEPFZrdKsgCj2YOVNDDi7NOExs4bkZWpzcs5oYE3iFX1sDholEbsNyw8GCCjjPzqEuAX4HmxWxqNv4Q+iPBtsj2jUFcMjKPjO0NZWEq+GnOytUU5guZPCguFuKJC2O+diFuGyKLzOcErIine7VCIUnqzexyD54lv60+SYrFQ/wTkXw1J4EhrD43LnxwUInG2bviBMwFOo36HfC2Uw0yghGEgEZvr4lgPNfMqrK9098Jxe7VaC/c9rTbMC98JRqC6g2ZshlCkAZX8BrT+oIKl06YP//g6dWgc8pTzDzbGzzfdgNsRWDQFpIQFkI9hXq/od1u7dwlL0RWw8gO3EugK9JrEKn/GUoojAZYXfEEd1o+enXUdGjOQbf2Q+M8SDy7Q7FreigFInxHTXhjLToPKDXsu1uQ7W/l2NY8aBRYEWHGKnaa7agNaUZgwweVIuhIchwauW7uRBjYpIUUl3fQQKH7sObAk7Of4ncd31PQvjVPuakgyKzbUDlbyCgDzkseAHnfNZIbsJ6XxLPhB7vndU/0Wd/N42n1isbX3JWKbKhUS7hgrjaCTKqZM2V9LtMHM20WUZ6rcb3QjDWFCpv/VTdI+A/KfSiOKBQ==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(376002)(366004)(396003)(346002)(39840400004)(230922051799003)(186009)(64100799003)(451199024)(1800799009)(38100700002)(83380400001)(2906002)(86362001)(38070700005)(122000001)(36756003)(316002)(66556008)(6512007)(54906003)(66946007)(66476007)(64756008)(76116006)(6916009)(6506007)(41300700001)(66446008)(6486002)(2616005)(478600001)(71200400001)(8676002)(4326008)(44832011)(5660300002)(8936002)(139555002);
- DIR:OUT; SFP:1102
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WHVPRUJ3T3czRGw3eEhnb292dzJmTUthdS9NMXBRYzZmall5UVQycGN0ZHlr?=
- =?utf-8?B?ZFE4QVVYVGtPWElSR1RvNktsTHF5cmk4Q1BTNjh1c3JVWVlOaVdLS2dyNkFH?=
- =?utf-8?B?VzZiTVI4Tk1iTUp1d3VQQXNIcTlRSTR4aU5nMmEydjV5SGoyUGYwaHlZeVRM?=
- =?utf-8?B?YVVrbUU2VXZDMHR6RUN4Z1RLdXVpejMzUGJPQThYTE1yUEYySDVZQVkyWTBU?=
- =?utf-8?B?bERocHF5dXFWSndtSTBCNDRRWHNxd1g1SEpKQTBCSitOMlQ2TDEzeDhOempa?=
- =?utf-8?B?YTloVDVTZU1WOENZV00vU2R5bW1tM2wyMDdhNTF0TDFMNVVjV2RlTzZ3QXIw?=
- =?utf-8?B?aXBhcnpLZWpPb1J2anE1MkZvNlNjeWcxSm9tTVRybk5IcGlaaTRMbjJXRXJZ?=
- =?utf-8?B?UWJHT043QWRjcXpuWGxwQ2lkVFordFN2aTF5bE5KZnloaDA1V3pYaTAzOHU0?=
- =?utf-8?B?ZE1PYWtJdGxQUUd1dW1jN3drUUhZblY1T1EyVXVQWU03Qm5RUEMwQmp6K2xh?=
- =?utf-8?B?M1kwMjBNR0FjZCtLbUhCZ0k0RUhjY2pHbnFPSUhkSzZQL0M0azJQdjM5RDRF?=
- =?utf-8?B?cWZjbnFSU0E3OEJZa2pzVGM2ZVRlUFU1bEpPeWtzeDBYLytPN0M3cnVGOGgz?=
- =?utf-8?B?UHpGOWk3K1NRZFR0QUVSS29IYmlKZjZhMy81TWpSR0pDcjhjVHpTN3pIcXdr?=
- =?utf-8?B?eGs4NVBSam1vNUo5NFE0QWpoZ0NqczgxeDJhZGgzTzlxbWRxdFFJcWZaaFRS?=
- =?utf-8?B?UEEzeHA3NFA3VnBHY1pVeUVnTmorNmlMSzlTWHUyMGVmUlNaMGU1K3VCU0NB?=
- =?utf-8?B?R3BSaG96S0Vtb2pmaWtPYlkxWEdyNjIvM2hTWURZc1p5Sk5ETWJIZWZ1djE4?=
- =?utf-8?B?ekp1THFERVFzaHdyUGE0UmViOEZqRkhPcmMvanF2aE5Nb3V1aHB4RzM2K1Ax?=
- =?utf-8?B?VE1YWEtSQ1prTG9mZzRaYnJwMnp6MWh2RSt6VUo3R3M5ZStjNHpFTnB2Wk5S?=
- =?utf-8?B?Y0gzdEN4cFkzTFJQdHVzSFVtQ1Q5V1NVU003NCs2R2cyVjE1UXE5dHpEdVFS?=
- =?utf-8?B?TGlaUFpScmViNkRqWis0YkR0bnBxdG9nUzljMUg5N0VSQld5S0lOVHZRaXJW?=
- =?utf-8?B?bEpBcTRUUnkyNE9CQm1pR3dZNDBRRTlxV2JHYVhTSFU0bzVSbmJ1bmlkM3hl?=
- =?utf-8?B?WEpwNENKNmFnM0ZSZTk3ODBvdmhVQ1ZCdEpnREFpS0FTaEs4T0JYbW9uZ0xH?=
- =?utf-8?B?YXdML1VjRnBSMzZFWlZBTjJMU1ZKbldrc3RKTnNGelhkRmFOODVwTTEvQksz?=
- =?utf-8?B?UnBGQmMzelh1UDBwWTVDS09pdGQ5d1JoQ0I3MkFUQXdkNVZzSitnVm9ROEdn?=
- =?utf-8?B?SVV1dzdsTUc3bysxQ0tQam9FSWtycldUcWxDd2VvZ1RWZ0N6NElTS0tUZHRY?=
- =?utf-8?B?Y28zOURiMzkySkwzOFdMZUh1ZEdEK1pPTTgrY1BFbm1YVW8zRXBKeFA5RUww?=
- =?utf-8?B?RzZEWjBYdDZrbVVzOFFZVlpLTWpIaDUvUHl2L2t2cG5pSVZhcFovbmlqZmZq?=
- =?utf-8?B?ZzVlL3ljQXhhM3ZrMG9YYW44cFVjcE4wTldrSDdzdlZXNkMvcDZlRzByUFpu?=
- =?utf-8?B?bzQvSE9kMHVuTStpUmU4MENKWGxlQXlJYWIyL3VEZlgyUWdQUEpCV21GQ1Ba?=
- =?utf-8?B?V0J2Y1h0TVJRRklEQ1p5cG1yK2FaUmFKcTd3QkhoUDJwYjFFa1ArNmpnUHN0?=
- =?utf-8?B?U2hBTkNOdzBteTBNMHRuck5ycGkzZURwYi9DQmxsc1J1em5yeHVMNzZlb295?=
- =?utf-8?B?OE1KMUdoTkg0NUZzeEdVcXcvcUxJMVhka1VnbmJuT2w5Q3UrUVpaWTBMOTJG?=
- =?utf-8?B?eXozUlRvNTBLdW5jajg4Z0hjOHZZOFFHL2ZCYzg1cGxPK0gvanBMaUFWT1h6?=
- =?utf-8?B?a0xWOVFQb3pwRTJ1aUExdkFRRGdDTjYyQ2lYZ2M4a3l3WGlIS1loMDlmcVY5?=
- =?utf-8?B?L1p5T2M3QUxPL1pEZzMwelhWbm45NmlTVFJKcUFVOWZQVDZnMlhEMGFOYm4x?=
- =?utf-8?B?djZ3dDQyUXFaUFlJdStCMXZHZXRaT2RDT3M4N2pNanhjWXU4N2JJeTFHdXda?=
- =?utf-8?B?WHoyc0doTXgxUVNtYW0waHcwL1o4MnNKQnNJaUZETmluOTZmUE5JMGxGMWhI?=
- =?utf-8?Q?xxMp5a2emK6u/Mml68aKY3A=3D?=
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1696462016; x=1697066816; i=xypron.glpk@gmx.de;
+ bh=kAbP0WRdALH8jQxjlD7JC6JLbbdSMGQ7xrgvtgdYoeI=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=jSHY6NparPDnYQJgzmPhz6ICvfo414qXaDPgeLZrWGRKe+FSWU94TbvWeOhdvCxssS2RATB8Fjl
+ pP+gLOFWi+c+Hvlzp9uU4QwCVXx7cQHbp4e3NBQ6+w3+Qni/NK2ukHL0lZ43qsk1kffR0x/ua+b6G
+ rxOh9xAaUArwdNH3rb2k2GSCwDlpEbajrc8FJjrtMYCPdI4AxSVXJETrVKsEzhPeEAik8K7avQOtw
+ LFAfeythSBhkRbOUFmw8lEk+AfWkFsJQgpQ49nGs/0AG+99cmlGha/GgMK//EOGc9v+F+pNB37pdR
+ /T7+mBF1RBfx5X4eKQ9ObG3cyUzxHmORvZHA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MsHru-1rd8Dt3qCg-00tnXv; Thu, 05
+ Oct 2023 01:26:56 +0200
+Message-ID: <9a4cea75-894f-4c71-b672-3b5607199ba5@gmx.de>
+Date: Thu, 5 Oct 2023 01:26:52 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: toradex.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZR0P278MB0683.CHEP278.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 93722f33-e035-44b2-7df3-08dbc520178b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 04 Oct 2023 21:23:02.7316 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: d9995866-0d9b-4251-8315-093f062abab4
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: WkKdRL9dBu8UvTxbNbxELN3RTsJjKfXOgaYFaTzpA26EKQjrpSRjrFzGOwHB/lMAQGJEpgommO2fBtNM8cQf43fu3LCxoqr/V0hZWN9RKWo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR0P278MB0154
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: toradex.com
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v10 11/24] cmd: Add new cli command
+To: Francis Laniel <francis.laniel@amarulasolutions.com>
+Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Harald Seiler <hws@denx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Roger Knecht <rknecht@pm.me>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Alexey Romanov <avromanov@sberdevices.ru>,
+ Dzmitry Sankouski <dsankouski@gmail.com>,
+ Hector Palacios <hector.palacios@digi.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+References: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
+ <20231004164220.15738-12-francis.laniel@amarulasolutions.com>
 Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-ID: <53B1B3AB29C51246A601875D7E7DE3AF@CHEP278.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231004164220.15738-12-francis.laniel@amarulasolutions.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:tFO9K6fAmQUB55Xrqu9bnT7RMp419tpnDrIZ+0bEMjQJqvbF5Zm
+ rIhyltCcVFdJDBAHmoM+Sw86yxlmkPAYfB/Du5PI8dmDzXYuEHVAZQM8M25jJNsWhwFMoKt
+ h6vE+BQ8fPHaF6vraoP3eZRhwKOijvbRP7rUd+RnG6DvWzHxa9XTF8iR1BBja1Vvhz/kvdU
+ mVGZRcl3kna6xY8RbbEuw==
+UI-OutboundReport: notjunk:1;M01:P0:EzgQ94J1zOM=;PNPGe4GgYwuWDmKfnKkdIrOyVjy
+ 3N00MQBW2COlCBe2rDLOyZvAhuTRQwGFvD6IwH9kZnjHyj/jC7Mwb1mpzkTln4b1ok+Iogwq2
+ hUKzqNocjOd2xJfQttVJKGJeMD1i1+pzypTeKKt7rSasyshOv9czupZcr7dyPYL/qiQzLtE2A
+ my4GMIzlv+sszMkSjF9AP2RocJSLYBncNogc5ThPWleMDbrwhCztfKnuTCvmdJNZfCxJL8mWv
+ +IwUQlLvT3t4FSw9OMGhz7wzA34W+fINefZ2KvZxfGUaVm/IUYxuBQGmNwjP+fNvVz47w96az
+ Ofa+PX9+86N2Fy9meUC/sKpP2FTajEY5etUaH7Fqv4PNwu5V2tq3Is7uMCkgu4O0qTsUU8K4w
+ qux5DThUo3QaznnUcmPxHReNbAaSozyDjRJctXWJREqwF0c7DXIwSyLSPFs5sIvhj8BZQ+Px/
+ jb7fIIiqYaPdNR5cgm53ebudU+MB88XXg8mHfAzJ3dM3WmpwGfPzIHbG6pin4++YMC/sd7AOO
+ m7AnMStE5kzbdVWDUskPXh5LWX1W//DbmALk8/uezc+Jn/wH/yL4GkrpJBn1A06KeLa1qBfAJ
+ KNSHU34wzLptO/tbzIZHEg2PyifWTvthE7MB7unl13U3s5DyEB24mIEXbxYIqasryhcSzNaEh
+ z0HsfZFNv7sl8AS/SDn87oz9Ip1G/eIkykMIBYmvsS3l45gLRanKDtDCey7Xi6ACzeOUxJ35+
+ yE/wkHuEmQEW/j3bKDMIk/Q9lKn7rj4f7Qkv0qSccnGFhmo01+/2KgRAvoPLFaqP2gqhyIe4T
+ pG5pH1fCZCZYCYAf+31F85wRG2AIDIzFQcI4OWTRR5cNhWQaBqoqBL+cFi/kIpqi0OEDncbXr
+ vhOGR8ORrg6zQn4zAvtnHPJQuMlxNmmZKGJc/jjazQj8AMK82BOKVIaX0Mz49mRCFLD8DSBoz
+ mhoVr1P7XuU4Jjr7rKCaTvkalaM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,30 +97,392 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gV2VkLCAyMDIzLTEwLTA0IGF0IDE2OjEzIC0wMzAwLCBGcmFuY2VzY28gRG9sY2luaSB3cm90
-ZToNCj4gRnJvbTogSm9hbyBQYXVsbyBHb25jYWx2ZXMgPGpvYW8uZ29uY2FsdmVzQHRvcmFkZXgu
-Y29tPg0KPiANCj4gVGhlIGJvb3RjbWRfbWZnIGVudiB2YXJpYWJsZSBpcyBsZWdhY3kgZnJvbSBJ
-TVggZG93bnN0cmVhbSB1LWJvb3QgYnJhbmNoDQo+IGFuZCBpcyBub3QgbmVlZGVkIG9uIG1haW5s
-aW5lLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogSm9hbyBQYXVsbyBHb25jYWx2ZXMgPGpvYW8uZ29u
-Y2FsdmVzQHRvcmFkZXguY29tPg0KPiBTaWduZWQtb2ZmLWJ5OiBGcmFuY2VzY28gRG9sY2luaSA8
-ZnJhbmNlc2NvLmRvbGNpbmlAdG9yYWRleC5jb20+DQoNCkFja2VkLWJ5OiBNYXJjZWwgWmlzd2ls
-ZXIgPG1hcmNlbC56aXN3aWxlckB0b3JhZGV4LmNvbT4NCg0KPiAtLS0NCj4gwqBpbmNsdWRlL2Nv
-bmZpZ3MvdmVyZGluLWlteDhtbS5oIHwgMSAtDQo+IMKgaW5jbHVkZS9jb25maWdzL3ZlcmRpbi1p
-bXg4bXAuaCB8IDEgLQ0KPiDCoDIgZmlsZXMgY2hhbmdlZCwgMiBkZWxldGlvbnMoLSkNCj4gDQo+
-IGRpZmYgLS1naXQgYS9pbmNsdWRlL2NvbmZpZ3MvdmVyZGluLWlteDhtbS5oIGIvaW5jbHVkZS9j
-b25maWdzL3ZlcmRpbi1pbXg4bW0uaA0KPiBpbmRleCA4Y2IxZjFhZmYzNTMuLjgwNzJkNWQ1MDNm
-MiAxMDA2NDQNCj4gLS0tIGEvaW5jbHVkZS9jb25maWdzL3ZlcmRpbi1pbXg4bW0uaA0KPiArKysg
-Yi9pbmNsdWRlL2NvbmZpZ3MvdmVyZGluLWlteDhtbS5oDQo+IEBAIC0zNyw3ICszNyw2IEBADQo+
-IMKgI2RlZmluZSBDRkdfRVhUUkFfRU5WX1NFVFRJTkdTIFwNCj4gwqAJQk9PVEVOViBcDQo+IMKg
-CU1FTV9MQVlPVVRfRU5WX1NFVFRJTkdTIFwNCj4gLQkiYm9vdGNtZF9tZmc9ZmFzdGJvb3QgMFww
-IiBcDQo+IMKgCSJib290X2ZpbGU9SW1hZ2VcMCIgXA0KPiDCoAkiYm9vdF9zY3JpcHRfZGhjcD1i
-b290LnNjclwwIiBcDQo+IMKgCSJjb25zb2xlPXR0eW14YzBcMCIgXA0KPiBkaWZmIC0tZ2l0IGEv
-aW5jbHVkZS9jb25maWdzL3ZlcmRpbi1pbXg4bXAuaCBiL2luY2x1ZGUvY29uZmlncy92ZXJkaW4t
-aW14OG1wLmgNCj4gaW5kZXggOTQyMDgxYWI4NGQ3Li41YTM0ZjZhOWIyMDUgMTAwNjQ0DQo+IC0t
-LSBhL2luY2x1ZGUvY29uZmlncy92ZXJkaW4taW14OG1wLmgNCj4gKysrIGIvaW5jbHVkZS9jb25m
-aWdzL3ZlcmRpbi1pbXg4bXAuaA0KPiBAQCAtNDYsNyArNDYsNiBAQA0KPiDCoCNkZWZpbmUgQ0ZH
-X0VYVFJBX0VOVl9TRVRUSU5HUyBcDQo+IMKgCUJPT1RFTlYgXA0KPiDCoAlNRU1fTEFZT1VUX0VO
-Vl9TRVRUSU5HUyBcDQo+IC0JImJvb3RjbWRfbWZnPWZhc3Rib290IDBcMCIgXA0KPiDCoAkiYm9v
-dF9maWxlPUltYWdlXDAiIFwNCj4gwqAJImJvb3Rfc2NyaXB0cz0iIEJPT1RfU0NSSVBUICJcMCIg
-XA0KPiDCoAkiYm9vdF9zY3JpcHRfZGhjcD0iIEJPT1RfU0NSSVBUICJcMCIgXA0K
+On 10/4/23 18:42, Francis Laniel wrote:
+> This command can be used to print the current parser with 'cli print'.
+
+Please, provide a commit message that matches the code.
+
+> It can also be used to set the current parser with 'cli set'.
+> For the moment, only one value is valid for set: old.
+
+If there is only one valid value, we should not provide the 'cli'
+command to save code size. The patch seems to be in the wrong spot in
+the series.
+
+>
+> Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
+> ---
+>   cmd/Makefile          |   2 +
+>   cmd/cli.c             | 120 ++++++++++++++++++++++++++++++++++++++++++
+>   common/cli.c          |   3 +-
+>   doc/usage/cmd/cli.rst |  59 +++++++++++++++++++++
+>   doc/usage/index.rst   |   1 +
+>   5 files changed, 184 insertions(+), 1 deletion(-)
+>   create mode 100644 cmd/cli.c
+>   create mode 100644 doc/usage/cmd/cli.rst
+>
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 9bebf321c3..d468cc5065 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -226,6 +226,8 @@ obj-$(CONFIG_CMD_AVB) +=3D avb.o
+>   # Foundries.IO SCP03
+>   obj-$(CONFIG_CMD_SCP03) +=3D scp03.o
+>
+> +obj-$(CONFIG_HUSH_PARSER) +=3D cli.o
+
+Don't waste binary code size. We only need the command if at least two
+parsers are available.
+
+ifeq ($(CONFIG_HUSH_OLD_PARSER)$(HUSH_2021_PARSER),yy)
+obj-y +=3D cli.o
+endif
+
+The symbol CONFIG_HUSH_PARSER should be eliminated.
+
+> +
+>   obj-$(CONFIG_ARM) +=3D arm/
+>   obj-$(CONFIG_RISCV) +=3D riscv/
+>   obj-$(CONFIG_SANDBOX) +=3D sandbox/
+> diff --git a/cmd/cli.c b/cmd/cli.c
+> new file mode 100644
+> index 0000000000..7671785b83
+> --- /dev/null
+> +++ b/cmd/cli.c
+> @@ -0,0 +1,120 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +
+> +#include <common.h>
+> +#include <cli.h>
+> +#include <command.h>
+> +#include <string.h>
+> +#include <asm/global_data.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +static const char *gd_flags_to_parser(void)
+> +{
+> +	if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
+> +		return "old";
+> +	return NULL;
+> +}
+> +
+> +static int do_cli_get(struct cmd_tbl *cmdtp, int flag, int argc,
+> +			 char *const argv[])
+> +{
+> +	const char *current =3D gd_flags_to_parser();
+> +
+> +	if (!current) {
+> +		printf("current cli value is not valid, this should not happen!\n");
+> +		return CMD_RET_FAILURE;
+> +	}
+> +
+> +	printf("%s\n", current);
+> +
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+
+Please, describe this function (and all the others) in Sphinx style.
+
+/**
+  * parser_string_to_gd_flags() - converts parser name to bit mask
+  *
+  * @parser:	parser name
+  * Return:	valid bit mask or -1
+  */
+
+> +static int parser_string_to_gd_flags(const char *parser)
+> +{
+> +	if (!strcmp(parser, "old"))
+> +		return GD_FLG_HUSH_OLD_PARSER;
+
+Please, do not return an invalid bit mask.
+
+if (CONFIG_IS_ENABLED(HUSH_OLD_PARSER) && !strcmp(parser, "old"))
+	return GD_FLG_HUSH_OLD_PARSER;
+if (CONFIG_IS_ENABLED(HUSH_2021_PARSER) && !strcmp(parser, "2021"))
+	return GD_FLG_HUSH_201_PARSER;
+
+> +	return -1;
+> +}
+> +
+> +static void reset_parser_gd_flags(void)
+> +{
+> +	gd->flags &=3D ~GD_FLG_HUSH_OLD_PARSER;
+
+gd->flags &=3D ~(GD_FLG_HUSH_OLD_PARSER | GD_FLG_HUSH_2021_PARSER);
+
+If there were only one parser, we wouldn't create this command.
+
+> +}
+> +
+> +static int do_cli_set(struct cmd_tbl *cmdtp, int flag, int argc,
+> +		      char *const argv[])
+> +{
+> +	char *parser_name;
+> +	int parser_flag;
+> +
+> +	if (argc < 2)
+> +		return CMD_RET_USAGE;
+> +
+> +	parser_name =3D argv[1];
+> +
+> +	parser_flag =3D parser_string_to_gd_flags(parser_name);
+
+This function should return -1 for for any value that is not supported
+be it 'foo', 'old', or '2021'. Then you can eliminate a bunch of error
+checking code below.
+
+> +	if (parser_flag =3D=3D -1) {
+> +		printf("Bad value for parser name: %s\n", parser_name);
+> +		return CMD_RET_USAGE;
+> +	}
+> +
+> +	if (parser_flag =3D=3D GD_FLG_HUSH_OLD_PARSER &&
+> +		!CONFIG_IS_ENABLED(HUSH_OLD_PARSER)) {
+> +		printf("Want to set current parser to old, but its code was not compi=
+led!\n");
+> +		return CMD_RET_FAILURE;
+> +	}
+
+Superfluous check, see above.
+
+> +
+> +	if (parser_flag =3D=3D GD_FLG_HUSH_2021_PARSER &&
+> +		!CONFIG_IS_ENABLED(HUSH_2021_PARSER)) {
+> +		printf("Want to set current parser to 2021, but its code was not comp=
+iled!\n");
+> +		return CMD_RET_FAILURE;
+> +	}
+
+Superfluous check, see above.
+
+> +
+> +	reset_parser_gd_flags();
+> +	gd->flags |=3D parser_flag;
+> +
+> +	cli_init();
+> +	cli_loop();
+> +
+> +	/* cli_loop() should never return. */
+> +	return CMD_RET_FAILURE;
+
+Consuming stack space for every invocation of the 'cli set' command
+cannot be intended.
+
+Why don't we define cli_loop as __noreturn and ensure that it has no
+return statement? Then gcc can generate a simple jump without consuming
+stack.
+
+cli_loop should() invoke panic() instead of returning.
+
+> +}
+> +
+> +static struct cmd_tbl parser_sub[] =3D {
+> +	U_BOOT_CMD_MKENT(get, 1, 1, do_cli_get, "", ""),
+> +	U_BOOT_CMD_MKENT(set, 2, 1, do_cli_set, "", ""),
+> +};
+> +
+> +static int do_cli(struct cmd_tbl *cmdtp, int flag, int argc,
+> +		  char *const argv[])
+> +{
+> +	struct cmd_tbl *cp;
+> +
+> +	if (argc < 2)
+> +		return CMD_RET_USAGE;
+> +
+> +	/* drop initial "parser" arg */
+> +	argc--;
+> +	argv++;
+> +
+> +	cp =3D find_cmd_tbl(argv[0], parser_sub, ARRAY_SIZE(parser_sub));
+> +	if (cp)
+> +		return cp->cmd(cmdtp, flag, argc, argv);
+> +
+> +	return CMD_RET_USAGE;
+> +}
+> +
+> +#if CONFIG_IS_ENABLED(SYS_LONGHELP)
+> +static char cli_help_text[] =3D
+> +	"get - print current cli\n"
+
+"get - display parser\n"
+
+> +	"set - set the current cli, possible value is: old"
+
+'cli ' is only printed automatically in the first line.
+
+"cli set - set parser to one of:\n"
+#ifdef CONFIG_HUSH_OLD_PARSER
+"\t- old\n"
+#endif
+#ifdef CONFIG_HUSH_2021_PARSER
+"\t- 2021\n"
+#endif
+
+Why would we need the 'cli set' command at all if there is only one
+parser enabled?
+Should we better disable the sub-command in that case?
+
+> +	;
+> +#endif
+> +
+> +U_BOOT_CMD(cli, 3, 1, do_cli,
+> +	   "cli",
+> +#if CONFIG_IS_ENABLED(SYS_LONGHELP)
+> +	   cli_help_text
+> +#endif
+
+This is wrong. You must pass an empty string at least. Please, follow
+the style of the other commands and place the #if in the long text.
+
+> +);
+> diff --git a/common/cli.c b/common/cli.c
+> index e5fe1060d0..d419671e8c 100644
+> --- a/common/cli.c
+> +++ b/common/cli.c
+> @@ -268,7 +268,8 @@ void cli_loop(void)
+>   void cli_init(void)
+>   {
+>   #ifdef CONFIG_HUSH_PARSER
+
+This Kconfig symbol is superfluous when you already have
+CONFIG_HUSH_OLD_PARSER and CONFIG_HUSH_2021_PARSER.
+
+Please, remove CONFIG_HUSH_PARSER from Kconfig.
+
+> -	if (!(gd->flags & GD_FLG_HUSH_OLD_PARSER))
+> +	if (!(gd->flags & GD_FLG_HUSH_OLD_PARSER)
+
+The first part of the if statement is superfluous.
+There is no harm in setting the bit again.
+
+> +		&& CONFIG_IS_ENABLED(HUSH_OLD_PARSER))
+>   		gd->flags |=3D GD_FLG_HUSH_OLD_PARSER;
+>   	u_boot_hush_start();
+>   #endif
+> diff --git a/doc/usage/cmd/cli.rst b/doc/usage/cmd/cli.rst
+> new file mode 100644
+> index 0000000000..89ece3203d
+> --- /dev/null
+> +++ b/doc/usage/cmd/cli.rst
+> @@ -0,0 +1,59 @@
+> +.. SPDX-License-Identifier: GPL-2.0+
+> +
+> +cli command
+> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +Synopis
+> +-------
+> +
+> +::
+> +
+> +    cli get
+> +    cli set cli_flavor
+
+We should show the available values here:
+
+cli set [old|2021]
+
+> +
+> +Description
+> +-----------
+> +
+> +The cli command permits getting and changing the current parser at runt=
+ime.
+
+The cli command permits displaying and setting the command line parsers.
+Currently two parsers are implemented:
+
+old
+    The 'old' parser is what U-Boot provided until v2023.10.
+
+2021
+    The '2021' parser provides ....
+
+Please, describe here why the '2021' parser might be preferable. Please,
+describe which parser is the default.
+
+> +
+> +cli get
+> +~~~~~~~
+> +
+> +It shows the current value of the parser used by the CLI.
+
+The command display the parser used by the command line interface ('old'
+or '2021').
+
+> +
+> +cli set
+> +~~~~~~~
+> +
+> +It permits setting the value of the parser used by the CLI.
+
+The command sets the parser used by the command line interface.
+
+> +
+> +Possible values are old and 2021.
+> +Note that, to use a specific parser its code should have been compiled,=
+ that
+> +is to say you need to enable the corresponding CONFIG_HUSH*.
+> +Otherwise, an error message is printed.
+
+Should we use .. note:: here to highlight the information?
+
+> +
+> +Examples
+> +--------
+> +
+> +Get the current parser::
+> +
+> +    =3D> cli get
+> +    old
+> +
+> +Change the current parser::
+> +
+> +    =3D> cli set old
+
+=3D> cli set 2021
+
+Who would want to set the current value?
+
+> +
+> +Trying to set the current parser to an unknown value::
+> +
+> +    =3D> cli set foo
+> +    Bad value for parser name: foo
+> +    cli - cli
+> +
+> +    Usage:
+> +    cli get - print current cli
+> +    set - set the current cli, possible value is: old
+
+This looks like a bug. I would have expected at least two possible
+values. Otherwise we would not need a 'cli' command.
+
+Please, add a 'Configuration' section describing the relevant
+configuration variables.
+
+Best regards
+
+Heinrich
+
+> +
+> +Return value
+> +------------
+> +
+> +The return value $? indicates whether the command succeeded.
+> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
+> index fa702920fa..90a38c5713 100644
+> --- a/doc/usage/index.rst
+> +++ b/doc/usage/index.rst
+> @@ -42,6 +42,7 @@ Shell commands
+>      cmd/cat
+>      cmd/cbsysinfo
+>      cmd/cedit
+> +   cmd/cli
+>      cmd/cls
+>      cmd/cmp
+>      cmd/coninfo
 
