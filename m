@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A3BEE7C4E3
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:45:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CACB3E7C4E6
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 16:45:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70256875F4;
-	Wed,  4 Oct 2023 18:43:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54AAC875F5;
+	Wed,  4 Oct 2023 18:43:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="lMnHQWCi";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="clGdARlc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 149028667A; Wed,  4 Oct 2023 18:43:32 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id 44DF886EE0; Wed,  4 Oct 2023 18:43:34 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D787B875B9
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:43:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 70352875B1
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 18:43:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=francis.laniel@amarulasolutions.com
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-504a7f9204eso25011e87.3
- for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:43:16 -0700 (PDT)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-533edb5ac54so3961985a12.0
+ for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 09:43:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1696437794; x=1697042594;
+ d=amarulasolutions.com; s=google; t=1696437785; x=1697042585;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3tyUdlH2zXdjGlI7QblSr+rWcXIrQ039hI6HFNL9e3A=;
- b=lMnHQWCii6Scte89d3OqZQjmwxVLibQ5HLcbO1VcpL3J7KrAR0s58Fpyck6Gj0DBxu
- +17qnDalXHukapwis5Gg3X4KsVDgeeVdKMdZtiOfGRdAea4ugSBJj3BjZuIlCzCH2NBw
- DikPzF0KeCdoK+m1q8Mj8PafW3cIgk/ptbQuk=
+ bh=ew1zt3pNvvkATj1clCxbz6aJISraXZHi1FIqGjxl7IA=;
+ b=clGdARlcUKW+Ce9DurXnfEaMdE+OXKHxAh5tU2G2UGQ5OTEtO8aQmOsllc6KLChliG
+ ykrJNy9cal+5SalVNVXWK3z3lmOb4lv9ezATzAZNIcj4Brhm/RSiJPOh3PP4+4pmUvIY
+ 4A/ttpcGjB0J67Z0bosOIb6QyfhG5OdrT8mSA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696437794; x=1697042594;
+ d=1e100.net; s=20230601; t=1696437785; x=1697042585;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3tyUdlH2zXdjGlI7QblSr+rWcXIrQ039hI6HFNL9e3A=;
- b=jGnKtWU2QNr0AOSNdk9ORMaC7TKtyEdbvIUKfLRX+Lskn1XkBSmEe9kER4fPh29dly
- RSlANxp4eg+DQIqItPB3FEmN/2v6Ht1lQ0klCkVm/3s9dPsn0YqY58u84P26sXZ9EVX1
- XKVsTB6EBYazDsosRx67bPq+Bh9oE8vu+XE+8anyzKrfA5+aO87cDhTGbdtjv4loIadN
- P8wlugeMUnIVVaSHWIgmHNSw6LtONQ4bieayyT8Sy5sSx7ylB0KHzco63ilTLqrSvx/Y
- DvjD72cI7qMlZrmVmt4/5+ElVNt9KIqo/yEIAMMusK5z9b2lb1jYx/evSfwZM3ssKwOf
- SBJw==
-X-Gm-Message-State: AOJu0YwkOeObH1UxAS/COlIglfDnyiyrc9w6Emw1kFHW6XUZEBotz2rz
- 9C+fKuqTiQhBmcMY17nHyux5Eefb1cowU24M4Ek=
-X-Google-Smtp-Source: AGHT+IHEG6icwcGTk04FgCiRDMN9kVeDAQLeHXMUn06C9yVoT3/98dtLYbA50nivan75sBO5qXFAmg==
-X-Received: by 2002:ac2:5f0a:0:b0:503:905:c5a3 with SMTP id
- 10-20020ac25f0a000000b005030905c5a3mr2130964lfq.35.1696437793950; 
- Wed, 04 Oct 2023 09:43:13 -0700 (PDT)
+ bh=ew1zt3pNvvkATj1clCxbz6aJISraXZHi1FIqGjxl7IA=;
+ b=j8oZQYVNTbTUHRROQBlwyOj+YARRwn0Y4RSbIXK5CTWEE2WK4c29sIVQ7BWPwBmsaX
+ NupbQkWApQmD8mn6xu7hjhWxjuZObF36EguMx+yjVZMwu1d1jTLI6B0VL+QUfnWfPcUh
+ tWTEKkSz0F1byjQ1kRj8ScYxmobuoAk+wXBhssh4Ez7CsP7mxs9VqqhsNWIw6VC9Ru9H
+ scHlRNM78M5vf1RQd3a5yfh1YJXbNsjTS3/zbL6LGKEkuS4ZyxHSbadovMs8c/vs+qV8
+ 8o7uJbUjXfO7Ct/iTSivfPXuMvhk2aSarJyKBun+PPIzuCoSnb9SNd3VivEp0Oh4PATS
+ 8bMQ==
+X-Gm-Message-State: AOJu0YxOvpQb4JURQv0VRIIHl8grO4JeJuEmDZrgMq3U88FjLhXLCQJ9
+ 35usGo7Xt6aAFd63kZk8Grio7t8Ly3+CuToKia4=
+X-Google-Smtp-Source: AGHT+IEg2jBs0MM1h1Y181N+lf1Sd/NuVOMQAErKk7Go9GApjG/5k6++jn6XkoMR+J5Ero5oIAE4Fg==
+X-Received: by 2002:a05:6402:6d4:b0:533:4c67:c911 with SMTP id
+ n20-20020a05640206d400b005334c67c911mr2652394edy.19.1696437785128; 
+ Wed, 04 Oct 2023 09:43:05 -0700 (PDT)
 Received: from pwmachine.numericable.fr
  ([2a02:2f0a:e213:b400:4d86:b2fb:68b4:3466])
  by smtp.gmail.com with ESMTPSA id
- f2-20020a056402150200b005381936efa7sm118351edw.16.2023.10.04.09.43.12
+ f2-20020a056402150200b005381936efa7sm118351edw.16.2023.10.04.09.43.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Oct 2023 09:43:13 -0700 (PDT)
+ Wed, 04 Oct 2023 09:43:04 -0700 (PDT)
 From: Francis Laniel <francis.laniel@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
@@ -74,15 +74,10 @@ Cc: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
  Ramon Fried <rfried.dev@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Nikhil M Jain <n-jain1@ti.com>, Devarsh Thakkar <devarsht@ti.com>,
- Fabrice Gasnier <fabrice.gasnier@foss.st.com>, Marek Vasut <marex@denx.de>,
- Hector Palacios <hector.palacios@digi.com>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>, Tony Dinh <mibodhi@gmail.com>,
- Stefan Roese <sr@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Subject: [RFC PATCH v10 12/24] cli: Enables using hush 2021 parser as command
- line parser
-Date: Wed,  4 Oct 2023 19:42:08 +0300
-Message-Id: <20231004164220.15738-13-francis.laniel@amarulasolutions.com>
+ Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+Subject: [RFC PATCH v10 09/24] cli: Add menu for hush parser
+Date: Wed,  4 Oct 2023 19:42:05 +0300
+Message-Id: <20231004164220.15738-10-francis.laniel@amarulasolutions.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
 References: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
@@ -104,370 +99,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If one defines HUSH_2021_PARSER, it is then possible to use 2021 parser with:
-=> cli get
-old
-=> cli set 2021
-=> cli get
-2021
+For the moment, the menu contains only entry: HUSH_OLD_PARSER which is the
+default.
+The goal is to prepare the field to add a new hush parser which guarantees
+actual behavior is still correct.
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Francis Laniel <francis.laniel@amarulasolutions.com>
 ---
- cmd/Kconfig                       |  8 +++++
- cmd/cli.c                         |  7 ++++-
- common/Makefile                   |  1 +
- common/cli.c                      | 38 +++++++++++++++++++----
- common/cli_hush_2021.c            |  3 ++
- common/cli_hush_upstream.c        | 46 +++++++++++++++++++++++++---
- doc/usage/cmd/cli.rst             | 17 ++++++++++-
- include/asm-generic/global_data.h |  4 +++
- include/cli_hush.h                | 51 +++++++++++++++++++++++++++++--
- 9 files changed, 160 insertions(+), 15 deletions(-)
+ cmd/Kconfig     | 13 +++++++++++++
+ common/Makefile |  2 +-
+ 2 files changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 5fb4cef54c..36595638a2 100644
+index 43ca10f69c..5fb4cef54c 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -34,6 +34,14 @@ menu "Hush flavor to use"
- 		  2005.
+@@ -23,6 +23,19 @@ config HUSH_PARSER
+ 	  If disabled, you get the old, much simpler behaviour with a somewhat
+ 	  smaller memory footprint.
  
- 		  It is actually the default U-Boot shell when decided to use hush as shell.
++menu "Hush flavor to use"
++	depends on HUSH_PARSER
 +
-+	config HUSH_2021_PARSER
-+		bool "Use hush 2021 parser"
++	config HUSH_OLD_PARSER
++		bool "Use hush old parser"
++		default y
 +		help
-+		  This option enables the new flavor of hush based on hush Busybox from
-+		  2021.
++		  This option enables the old flavor of hush based on hush Busybox from
++		  2005.
 +
-+		  For the moment, it is highly experimental and should be used at own risks.
- endmenu
- 
++		  It is actually the default U-Boot shell when decided to use hush as shell.
++endmenu
++
  config CMDLINE_EDITING
-diff --git a/cmd/cli.c b/cmd/cli.c
-index 7671785b83..d2b64da613 100644
---- a/cmd/cli.c
-+++ b/cmd/cli.c
-@@ -12,6 +12,8 @@ static const char *gd_flags_to_parser(void)
- {
- 	if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
- 		return "old";
-+	if (gd->flags & GD_FLG_HUSH_2021_PARSER)
-+		return "2021";
- 	return NULL;
- }
- 
-@@ -34,12 +36,15 @@ static int parser_string_to_gd_flags(const char *parser)
- {
- 	if (!strcmp(parser, "old"))
- 		return GD_FLG_HUSH_OLD_PARSER;
-+	if (!strcmp(parser, "2021"))
-+		return GD_FLG_HUSH_2021_PARSER;
- 	return -1;
- }
- 
- static void reset_parser_gd_flags(void)
- {
- 	gd->flags &= ~GD_FLG_HUSH_OLD_PARSER;
-+	gd->flags &= ~GD_FLG_HUSH_2021_PARSER;
- }
- 
- static int do_cli_set(struct cmd_tbl *cmdtp, int flag, int argc,
-@@ -108,7 +113,7 @@ static int do_cli(struct cmd_tbl *cmdtp, int flag, int argc,
- #if CONFIG_IS_ENABLED(SYS_LONGHELP)
- static char cli_help_text[] =
- 	"get - print current cli\n"
--	"set - set the current cli, possible value is: old"
-+	"set - set the current cli, possible value are: old, 2021"
- 	;
- #endif
- 
+ 	bool "Enable command line editing"
+ 	depends on CMDLINE
 diff --git a/common/Makefile b/common/Makefile
-index 615eba8672..4b060bb565 100644
+index f5c3d90f06..615eba8672 100644
 --- a/common/Makefile
 +++ b/common/Makefile
-@@ -9,6 +9,7 @@ obj-y += init/
+@@ -8,7 +8,7 @@ ifndef CONFIG_SPL_BUILD
+ obj-y += init/
  obj-y += main.o
  obj-y += exports.o
- obj-$(CONFIG_HUSH_OLD_PARSER) += cli_hush.o
-+obj-$(CONFIG_HUSH_2021_PARSER) += cli_hush_2021.o
+-obj-$(CONFIG_HUSH_PARSER) += cli_hush.o
++obj-$(CONFIG_HUSH_OLD_PARSER) += cli_hush.o
  obj-$(CONFIG_AUTOBOOT) += autoboot.o
  
  # # boards
-diff --git a/common/cli.c b/common/cli.c
-index d419671e8c..e3e2bc7fe1 100644
---- a/common/cli.c
-+++ b/common/cli.c
-@@ -43,12 +43,15 @@ int run_command(const char *cmd, int flag)
- 		return 1;
- 
- 	return 0;
--#else
-+#elif CONFIG_IS_ENABLED(HUSH_OLD_PARSER)
- 	int hush_flags = FLAG_PARSE_SEMICOLON | FLAG_EXIT_FROM_LOOP;
- 
- 	if (flag & CMD_FLAG_ENV)
- 		hush_flags |= FLAG_CONT_ON_NEWLINE;
- 	return parse_string_outer(cmd, hush_flags);
-+#else /* HUSH_2021_PARSER */
-+	/* Not yet implemented. */
-+	return 1;
- #endif
- }
- 
-@@ -108,7 +111,12 @@ int run_command_list(const char *cmd, int len, int flag)
- 		buff[len] = '\0';
- 	}
- #ifdef CONFIG_HUSH_PARSER
-+#if CONFIG_IS_ENABLED(HUSH_OLD_PARSER)
- 	rcode = parse_string_outer(buff, FLAG_PARSE_SEMICOLON);
-+#else /* HUSH_2021_PARSER */
-+	/* Not yet implemented. */
-+	rcode = 1;
-+#endif
- #else
- 	/*
- 	 * This function will overwrite any \n it sees with a \0, which
-@@ -254,8 +262,13 @@ err:
- void cli_loop(void)
- {
- 	bootstage_mark(BOOTSTAGE_ID_ENTER_CLI_LOOP);
--#ifdef CONFIG_HUSH_PARSER
--	parse_file_outer();
-+#if CONFIG_IS_ENABLED(HUSH_PARSER)
-+	if (gd->flags & GD_FLG_HUSH_2021_PARSER)
-+		parse_and_run_file();
-+	else if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
-+		parse_file_outer();
-+
-+	printf("Problem\n");
- 	/* This point is never reached */
- 	for (;;);
- #elif defined(CONFIG_CMDLINE)
-@@ -268,10 +281,23 @@ void cli_loop(void)
- void cli_init(void)
- {
- #ifdef CONFIG_HUSH_PARSER
-+	/* This if block is used to initialize hush parser gd flag. */
- 	if (!(gd->flags & GD_FLG_HUSH_OLD_PARSER)
--		&& CONFIG_IS_ENABLED(HUSH_OLD_PARSER))
--		gd->flags |= GD_FLG_HUSH_OLD_PARSER;
--	u_boot_hush_start();
-+		&& !(gd->flags & GD_FLG_HUSH_2021_PARSER)) {
-+		if (CONFIG_IS_ENABLED(HUSH_OLD_PARSER))
-+			gd->flags |= GD_FLG_HUSH_OLD_PARSER;
-+		else if (CONFIG_IS_ENABLED(HUSH_2021_PARSER))
-+			gd->flags |= GD_FLG_HUSH_2021_PARSER;
-+	}
-+
-+	if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
-+		u_boot_hush_start();
-+	} else if (gd->flags & GD_FLG_HUSH_2021_PARSER) {
-+		u_boot_hush_start_2021();
-+	} else {
-+		printf("No valid hush parser to use, cli will not initialized!\n");
-+		return;
-+	}
- #endif
- 
- #if defined(CONFIG_HUSH_INIT_VAR)
-diff --git a/common/cli_hush_2021.c b/common/cli_hush_2021.c
-index 6d109933b8..653ea52929 100644
---- a/common/cli_hush_2021.c
-+++ b/common/cli_hush_2021.c
-@@ -221,6 +221,9 @@ static uint8_t xfunc_error_retval;
- static const char defifsvar[] __aligned(1) = "IFS= \t\n";
- #define defifs (defifsvar + 4)
- 
-+/* This define is used to check if exit command was called. */
-+#define EXIT_RET_CODE -2
-+
- /*
-  * This define is used for changes that need be done directly in the upstream
-  * sources still. Ideally, its use should be minimized as much as possible.
-diff --git a/common/cli_hush_upstream.c b/common/cli_hush_upstream.c
-index cc64af4e0c..84227a248e 100644
---- a/common/cli_hush_upstream.c
-+++ b/common/cli_hush_upstream.c
-@@ -7914,7 +7914,17 @@ static void parse_and_run_stream(struct in_str *inp, int end_trigger)
- 		}
- 		debug_print_tree(pipe_list, 0);
- 		debug_printf_exec("parse_and_run_stream: run_and_free_list\n");
-+#ifndef __U_BOOT__
- 		run_and_free_list(pipe_list);
-+#else /* __U_BOOT__ */
-+		int rcode = run_and_free_list(pipe_list);
-+		/*
-+		 * We reset input string to not run the following command, so running
-+		 * 'exit; echo foo' does not print foo.
-+		 */
-+		if (rcode <= EXIT_RET_CODE)
-+			setup_file_in_str(inp);
-+#endif /* __U_BOOT__ */
- 		empty = 0;
- 		if (G_flag_return_in_progress == 1)
- 			break;
-@@ -10369,13 +10379,39 @@ static int run_list(struct pipe *pi)
- #endif /* !__U_BOOT__ */
- 		rcode = r = run_pipe(pi); /* NB: rcode is a smalluint, r is int */
- #ifdef __U_BOOT__
--		if (r == -2) {
--			/* -2 indicates exit was called, so we need to quit now. */
--			G.last_exitcode = rcode;
-+		if (r <= EXIT_RET_CODE) {
-+			int previous_rcode = G.last_exitcode;
-+			/*
-+			 * This magic is to get the exit code given by the user.
-+			 * Contrary to old shell code, we use + EXIT_RET_CODE as EXIT_RET_CODE
-+			 * equals -2.
-+			 */
-+			G.last_exitcode = -r + EXIT_RET_CODE;
- 
--			break;
-+			/*
-+			 * This case deals with the following:
-+			 * => setenv inner 'echo entry inner; exit; echo inner done'
-+			 * => setenv outer 'echo entry outer; run inner; echo outer done'
-+			 * => run outer
-+			 * So, if we are in inner, we need to break and not run the other
-+			 * commands.
-+			 * Otherwise, we just continue in outer.
-+			 * As return code are propagated, we use the previous value to check if
-+			 * exit was just called or was propagated.
-+			 */
-+			if (previous_rcode != r) {
-+				/*
-+				 * If run from run_command, run_command_flags will be set, so we check
-+				 * this to know if we are in main input shell.
-+				 */
-+				if (!G.run_command_flags)
-+					printf("exit not allowed from main input shell.\n");
-+
-+				break;
-+			}
-+			continue;
- 		}
--#endif
-+#endif /* __U_BOOT__ */
- 		if (r != -1) {
- 			/* We ran a builtin, function, or group.
- 			 * rcode is already known
-diff --git a/doc/usage/cmd/cli.rst b/doc/usage/cmd/cli.rst
-index 89ece3203d..bc600bf9e9 100644
---- a/doc/usage/cmd/cli.rst
-+++ b/doc/usage/cmd/cli.rst
-@@ -41,7 +41,14 @@ Get the current parser::
- 
- Change the current parser::
- 
-+    => cli get
-+    old
-+    => cli set 2021
-+    => cli get
-+    2021
-     => cli set old
-+    => cli get
-+    old
- 
- Trying to set the current parser to an unknown value::
- 
-@@ -51,7 +58,15 @@ Trying to set the current parser to an unknown value::
- 
-     Usage:
-     cli get - print current cli
--    set - set the current cli, possible value is: old
-+    set - set the current cli, possible values are: old, 2021
-+
-+Trying to set the current parser to a correct value but its code was not
-+compiled::
-+
-+    => cli get
-+    2021
-+    => cli set old
-+    Want to set current parser to old, but its code was not compiled!
- 
- Return value
- ------------
-diff --git a/include/asm-generic/global_data.h b/include/asm-generic/global_data.h
-index f21926aa23..49ac892912 100644
---- a/include/asm-generic/global_data.h
-+++ b/include/asm-generic/global_data.h
-@@ -671,6 +671,10 @@ enum gd_flags {
- 	 * @GD_FLG_HUSH_OLD_PARSER: Use hush old parser.
- 	 */
- 	GD_FLG_HUSH_OLD_PARSER = 0x400000,
-+	/**
-+	 * @GD_FLG_HUSH_2021_PARSER: Use hush 2021 parser.
-+	 */
-+	GD_FLG_HUSH_2021_PARSER = 0x800000,
- };
- 
- #endif /* __ASSEMBLY__ */
-diff --git a/include/cli_hush.h b/include/cli_hush.h
-index 2bd35670c7..4ef79de53c 100644
---- a/include/cli_hush.h
-+++ b/include/cli_hush.h
-@@ -12,11 +12,58 @@
- #define FLAG_REPARSING       (1 << 2)	  /* >=2nd pass */
- #define FLAG_CONT_ON_NEWLINE (1 << 3)	  /* continue when we see \n */
- 
-+#if CONFIG_IS_ENABLED(HUSH_OLD_PARSER)
- extern int u_boot_hush_start(void);
--extern int parse_string_outer(const char *, int);
-+extern int parse_string_outer(const char *str, int flag);
- extern int parse_file_outer(void);
--
- int set_local_var(const char *s, int flg_export);
-+#else
-+static inline int u_boot_hush_start(void)
-+{
-+	return 0;
-+}
-+
-+static inline int parse_string_outer(const char *str, int flag)
-+{
-+	return 1;
-+}
-+
-+static inline int parse_file_outer(void)
-+{
-+	return 0;
-+}
-+
-+static inline int set_local_var(const char *s, int flg_export)
-+{
-+	return 0;
-+}
-+#endif
-+#if CONFIG_IS_ENABLED(HUSH_2021_PARSER)
-+extern int u_boot_hush_start_2021(void);
-+extern int parse_string_outer_2021(const char *str, int flag);
-+extern void parse_and_run_file(void);
-+int set_local_var_2021(char *s, int flg_export);
-+#else
-+static inline int u_boot_hush_start_2021(void)
-+{
-+	return 0;
-+}
-+
-+static inline int parse_string_outer_2021(const char *str, int flag)
-+{
-+	return 1;
-+}
-+
-+static inline void parse_and_run_file(void)
-+{
-+}
-+
-+static inline int set_local_var_2021(char *s, int flg_export)
-+{
-+	return 0;
-+}
-+#endif
-+
- void unset_local_var(const char *name);
- char *get_local_var(const char *s);
- 
 -- 
 2.34.1
 
