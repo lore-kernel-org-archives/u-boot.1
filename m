@@ -4,76 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 378F4E7B606
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 12:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 359F5E7B601
+	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 12:33:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6E5587555;
-	Wed,  4 Oct 2023 14:32:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 613D887524;
+	Wed,  4 Oct 2023 14:33:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WzSGuotX";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QZF2PYrw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EC9387541; Wed,  4 Oct 2023 14:32:41 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 17AE2863DD; Wed,  4 Oct 2023 14:33:13 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E727287564
- for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 14:32:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4251A87456
+ for <u-boot@lists.denx.de>; Wed,  4 Oct 2023 14:33:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 394CWa30032627;
- Wed, 4 Oct 2023 07:32:36 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696422756;
- bh=gZieOVKnqgQtoj/CKyRLTGOC+PtkTXoMf+/m9M4HAyI=;
- h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=WzSGuotX67zom7A2t+eTsiWiA24R5SZCZYCqa6Yr7I5m/rg93WVNkFsiwNH8YcRZY
- zQaGvAu//rK03B1v78z2+pqtcIIe/yTHX7z5K8gHxISe8uMNKi5ewg1/roExpr52K+
- 9MEKDwcEkRkOPxgDIMTrFJPlXsrMCDtORdWMyE2o=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 394CWa7B082622
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 4 Oct 2023 07:32:36 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 4
- Oct 2023 07:32:36 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 4 Oct 2023 07:32:36 -0500
-Received: from [127.0.1.1] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 394CWBJr010622;
- Wed, 4 Oct 2023 07:32:33 -0500
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Wed, 4 Oct 2023 18:01:35 +0530
-Subject: [PATCH v3 6/6] binman: j7200: Add firewall configurations
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4S0vH92WpLz9sqw;
+ Wed,  4 Oct 2023 14:33:09 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1696422789;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7kLeDhNx7al+H9Im++Y3MZr2LWuweF98BakRzrhwzo4=;
+ b=QZF2PYrwZSc9rZjN3DMNpRhOW5OiaxF0jKaAJAadw/8KlIsplwtDKs80ZY0jK0AIQW4brr
+ Fj9mxB71ait6i/fO2Z4kFOXIjhRg4Dhk8OjV+tMV13+DG5tFU9UNL8NaDGghsmpW1TIijB
+ Y3W1VL5Ip/TOis4+Q4WlLxCJk7C5gTnjUAyqY2Fe6LD24eg9yrUaUL9fF8rsBZwmh4oTt6
+ R7mt1mq/efTjbgmDG85Bhkyezns43DZxuE9qpUfZoCN4HsfVb9SLnOS+Kihc3HKicPw1B2
+ 9WF7Bpmv82Cd1HYDJucbr0Eb5i1x0EV+UqcrlrpY4V99Yqygejreyjjb6sR4zA==
+Message-ID: <26a440db-073b-4615-9e20-03a74cc46b23@mailbox.org>
+Date: Wed, 4 Oct 2023 14:33:07 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH 16/16] board: rzg2l: Add RZ/G2L SMARC EVK board
+Content-Language: en-US
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-17-paul.barker.ct@bp.renesas.com>
+ <37900365-9d1c-6248-635c-5f6566a08bfb@mailbox.org>
+ <52c1d2c3-9b43-9519-b014-02a107a4cc28@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <52c1d2c3-9b43-9519-b014-02a107a4cc28@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-ID: <20231004-binman-firewalling-v3-6-e4a102324e1f@ti.com>
-References: <20231004-binman-firewalling-v3-0-e4a102324e1f@ti.com>
-In-Reply-To: <20231004-binman-firewalling-v3-0-e4a102324e1f@ti.com>
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Andrew
- Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
- <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon
- <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>
-X-Mailer: b4 0.13-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1696422731; l=5559;
- i=m-chawdhry@ti.com; s=20230324; h=from:subject:message-id;
- bh=V1Z5mIlGA4J6rAkSxyNbHNJeehf6P8Z3PXY71S2N7YU=;
- b=9yWxTqi6LHtqVZGvRurzQboodQ/08hmj9P34bsKmQCTpNtnrtGvx4fN3FvTJfUmoQdyUJ8yoB
- q5ZMLtVRq4bD8dfKvin4ahNCuvYeS1nKcVIHn64HdsKisPA1RlfDdpH
-X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
- pk=Z51yAzxWCcDqKRLHiDBrUxIdXbB21R89ms8xgECdiak=
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-MBO-RS-ID: 7fdbbf4d18249034369
+X-MBO-RS-META: e63ua4udf5iad8m3pxciwimtnxi5k3jz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,177 +78,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following commits adds the configuration of firewalls required to
-protect ATF and OP-TEE memory region from non-secure reads and
-writes using master and slave firewalls present in our K3 SOCs.
+On 10/4/23 11:36, Paul Barker wrote:
 
-Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
----
- arch/arm/dts/k3-j7200-binman.dtsi | 143 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 143 insertions(+)
+[...]
 
-diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
-index 14f7dea65ee3..8177375b42ee 100644
---- a/arch/arm/dts/k3-j7200-binman.dtsi
-+++ b/arch/arm/dts/k3-j7200-binman.dtsi
-@@ -214,6 +214,74 @@
- 					ti-secure {
- 						content = <&atf>;
- 						keyfile = "custMpk.pem";
-+						auth_in_place = <0xa02>;
-+
-+						firewall-257-0 {
-+							/* cpu_0_cpu_0_msmc Background Firewall */
-+							id = <257>;
-+							region = <0>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_BG | FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD |
-+											FWPERM_NON_SECURE_PRIV_RWCD |
-+											FWPERM_NON_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x0>;
-+							end_address = <0xff 0xffffffff>;
-+						};
-+
-+						firewall-257-1 {
-+							/* cpu_0_cpu_0_msmc Foreground Firewall */
-+							id = <257>;
-+							region = <1>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x70000000>;
-+							end_address = <0x0 0x7001ffff>;
-+						};
-+
-+						/*	firewall-4760-0 {
-+						 *		nb_slv0__mem0 Background Firewall
-+						 *		Already configured by the secure entity
-+						 *	};
-+						 */
-+
-+						firewall-4760-1 {
-+							/* nb_slv0__mem0 Foreground Firewall */
-+							id = <4760>;
-+							region = <1>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x70000000>;
-+							end_address = <0x0 0x7001ffff>;
-+						};
-+
-+						/*	firewall-4761-0 {
-+						 *		nb_slv1__mem0 Background Firewall
-+						 *		Already configured by the secure entity
-+						 *	};
-+						 */
-+
-+						firewall-4761-1 {
-+							/* nb_slv1__mem0 Foreground Firewall */
-+							id = <4761>;
-+							region = <1>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x70000000>;
-+							end_address = <0x0 0x7001ffff>;
-+						};
-+
- 					};
- 					atf: atf-bl31 {
- 					};
-@@ -230,6 +298,81 @@
- 					ti-secure {
- 						content = <&tee>;
- 						keyfile = "custMpk.pem";
-+						auth_in_place = <0xa02>;
-+
-+						/* cpu_0_cpu_0_msmc region 0 and 1 configured
-+						 * during ATF Firewalling
-+						 */
-+
-+						firewall-257-2 {
-+							/* cpu_0_cpu_0_msmc Foreground Firewall */
-+							id = <257>;
-+							region = <2>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x9e800000>;
-+							end_address = <0x0 0x9fffffff>;
-+						};
-+
-+						firewall-4762-0 {
-+							/* nb_slv2__mem0 Background Firewall - 0 */
-+							id = <4762>;
-+							region = <0>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_BG | FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD |
-+											FWPERM_NON_SECURE_PRIV_RWCD |
-+											FWPERM_NON_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x0>;
-+							end_address = <0xff 0xffffffff>;
-+						};
-+
-+						firewall-4762-1 {
-+							/* nb_slv2__mem0 Foreground Firewall */
-+							id = <4762>;
-+							region = <1>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x9e800000>;
-+							end_address = <0x0 0x9fffffff>;
-+						};
-+
-+						firewall-4763-0 {
-+							/* nb_slv3__mem0 Background Firewall - 0 */
-+							id = <4763>;
-+							region = <0>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_BG | FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD |
-+											FWPERM_NON_SECURE_PRIV_RWCD |
-+											FWPERM_NON_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x0>;
-+							end_address = <0xff 0xffffffff>;
-+						};
-+
-+						firewall-4763-1 {
-+							/* nb_slv3__mem0 Foreground Firewall */
-+							id = <4763>;
-+							region = <1>;
-+							control = <(FWCTRL_EN | FWCTRL_LOCK |
-+										FWCTRL_CACHE)>;
-+							permissions = <((FWPRIVID_ARMV8 << FWPRIVID_SHIFT) |
-+											FWPERM_SECURE_PRIV_RWCD |
-+											FWPERM_SECURE_USER_RWCD)>;
-+							start_address = <0x0 0x9e800000>;
-+							end_address = <0x0 0x9fffffff>;
-+						};
-+
- 					};
- 					tee: tee-os {
- 					};
+>>> +int dram_init(void)
+>>> +{
+>>> +	return fdtdec_setup_mem_size_base();
+>>> +}
+>>> +
+>>> +int dram_init_banksize(void)
+>>> +{
+>>> +	fdtdec_setup_memory_banksize();
+>>
+>> This and the one function above can likely go into arch/mach-rmobile/
+> 
+> We're not able to test every supported mach-rmobile board so we've
+> preferred to keep changes to RZ/G2L specific code where possible. I'm
+> happy to merge this into mach-rmobile (along with the similar code in
+> board/renesas/rcar-common/common.c), but it will only be tested on the
+> boards we have in our team.
 
--- 
-2.41.0
+Don't you already have a G2L specific file in arch/arm/mach-rmobile/ ?
 
+(I can test whatever changes on R-Car if needed)
+
+>>> +	return 0;
+>>> +}
+>>> +
+>>> +void __weak reset_cpu(void)
+>>> +{
+>>
+>> Is this platform missing a way to reset the system ?
+>> Please fix.
+> 
+> Adding reset support is on my todo list. I'm prioritising Ethernet
+> support above this right now, but we don't mind too much what order we
+> do things. Let me know if you'd prefer us to prioritise reset support.
+
+Isn't the reset like really really simple ? Enable SYSRESET config 
+option and do TFA/SMC reset I guess ?
