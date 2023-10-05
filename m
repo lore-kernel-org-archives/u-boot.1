@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C25CE92FCE
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 23:09:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33737E92FCE
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 23:09:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F2A686BFA;
-	Fri,  6 Oct 2023 01:08:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B1BD86C98;
+	Fri,  6 Oct 2023 01:08:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FxuIzusA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LzpP/ccb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99E4A86D28; Fri,  6 Oct 2023 01:08:48 +0200 (CEST)
+ id E76C286C0C; Fri,  6 Oct 2023 01:08:48 +0200 (CEST)
 Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
  [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C85D686C0C
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 01:08:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F5B886BA0
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 01:08:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
 Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-351367c8fcdso6225385ab.3
- for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 16:08:43 -0700 (PDT)
+ e9e14a558f8ab-351208d0d6cso6256335ab.1
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 16:08:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696547322; x=1697152122; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696547321; x=1697152121; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2z9xVsPdWH0H95bkDMT585tTHq2Ow72A8On4zXyiplM=;
- b=FxuIzusAJwUdwK9Zf7Ub8xCfb+h4Qqka1ucDaSAZC1As+60jPCFaA5zeaXXZM1mbyI
- ofJukHf7Du+VIlQ2GUuKsz+A4OnM8AzaBck96FtT+eNGsq1XNltk1Ut48tfAvo/XU4II
- yq77IHM5OgWo1DCAs0AzeOfBt5YCYF7ZkT5t/h/u+cW833EKDQnCxfe5tk5xWeoQA1tD
- THwZ0qCvPC8kmTVmkCjIFjXMINwXqoI/dQJDqZaoqvW3N8F3zUYRvHs9uZaH1wUHbSId
- KlWg5dOGVxOftSLY6vBvQ+69IRo+4U3ku6skEbqrM1LW10knfVMQ+1j3ACzZZSDYWVZI
- ALtA==
+ bh=SzttcXK/PKgI20uIB1bBvYt7CYS7s1sFWwjsGhMAXJU=;
+ b=LzpP/ccbJW9flf2cJkWjqcDuVcMHdL6Shp6Foo7ZdW/3dM0u+ey2hDirMblbOt8wwy
+ zVzbbiAGIl2bdUsd7kS0LTQqfy5hKYe5pzCxJ72jwxwq/BFeVcK/X56LhkFKXQPfzCRu
+ FllQF3hbMyW5M7I3AfOG2g/+3l8jlFFgxqETU3j1bF2o9p72byxGTa1iRuWY0t5zveKb
+ 96ubgsllDKTRMz4yIlTF+KUsGOp1+zeocHOOhS0XVxtrblfuPKncrSGpHbw20P2xUyPs
+ Sx/oM53srMPAYenGN7dW032zp9NK5ixP0HFlgP8C4Lzs0Pv+V1OFVtCdbVevdovfbF8p
+ Zbcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696547322; x=1697152122;
+ d=1e100.net; s=20230601; t=1696547321; x=1697152121;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2z9xVsPdWH0H95bkDMT585tTHq2Ow72A8On4zXyiplM=;
- b=IwS9K7yaOf6M1RsMknxLorJfiooSChpWCM6uaN8ZN0qDaQn5JNMxz28iJmg3El6rSm
- V3Ursb4pz30Esri1w/X2WexF9tqJZSXkzXPCD8Q57VMx551jz7e77URtSYTWbquqi94d
- fZgqgox1wEaUxRg12ry7zwNh11g+FJ9oTx6Ode5WSEtihjzfEhxmu/CSBstErsyQ8/FL
- oLygKIFkCXfRTPgmIQyIq2ujvxqQl153AtOV9xlWewABs7opQ8w2nS19U+GeKqeEjxun
- tqSUOvF6MJT7awaOffi16exzW5cG+dNMyp5SxYPZVR02x2d4wIjwZIpfNeTjjBYM4Uc2
- mxJw==
-X-Gm-Message-State: AOJu0YyZQ6pIhd53D58vKT7EcRCLKt5cwIK7GNrzlmcepw8VNry+4Zsu
- jYtwern9npKIZfxb35jjd7pNdZ4//ePcsA==
-X-Google-Smtp-Source: AGHT+IHJAHmthY0UxEI2MNapnkFsPLZQWbBXXAhuuA/t66dJMpckTSDGahHoBt5iMER0wpfMkmqnvQ==
-X-Received: by 2002:a05:6e02:1d11:b0:352:a306:9ad1 with SMTP id
- i17-20020a056e021d1100b00352a3069ad1mr8080547ila.0.1696547322427; 
- Thu, 05 Oct 2023 16:08:42 -0700 (PDT)
+ bh=SzttcXK/PKgI20uIB1bBvYt7CYS7s1sFWwjsGhMAXJU=;
+ b=kMqL+wEcRsP+6WOkxiDQEozkjmwts0c3oX5XgpzXQ77gt5Qnua4bKcje3eR3VBqO0O
+ YxtazHCot5Fljp1g8+dgFe+gzKza6H6D+sJqhpaCaWz6SNOmq+QXQ1NR7WpdxroD3jAJ
+ bKhLm2hVjBkgxM9sB+/rI9LRuodAIqZHnpfgBV3L12lV0bAJw7wNXhPgobJMzplAAmVr
+ OKKMckFod0knjMrJD8FBdHdebIU/pJ7DNAf04HYExR21HTZlDTU3nTz98LIZp+dYWtpK
+ OsVVVAZQAKYmccVffqr5zntzccgZ7rptnCRa+LNKZPtdAFgihvEPBIhMVuJPcJtx7eQ6
+ kRmQ==
+X-Gm-Message-State: AOJu0Yyu1X5zZwvaDjRPwnErRC9VQG/vIeZFMHfnpc90spaTrqCv+Vl+
+ 3fXaK+jiRSFbDcBjmeoM4xr6UkchVY2+wQ==
+X-Google-Smtp-Source: AGHT+IGA7eaOc9+KBcJZkyR2uxothx9yl6YSDx3b4+FsTJSWhKSsG3LqPacAlZe+46GnVCNVg0hqDw==
+X-Received: by 2002:a05:6e02:930:b0:349:851b:3e48 with SMTP id
+ o16-20020a056e02093000b00349851b3e48mr5629076ilt.28.1696547321311; 
+ Thu, 05 Oct 2023 16:08:41 -0700 (PDT)
 Received: from celestia.nettie.lan ([2001:470:42c4:101:9b88:f219:40c8:60fc])
  by smtp.gmail.com with ESMTPSA id
- l17-20020a922811000000b003513b7613f3sm709974ilf.3.2023.10.05.16.08.41
+ l17-20020a922811000000b003513b7613f3sm709974ilf.3.2023.10.05.16.08.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Oct 2023 16:08:41 -0700 (PDT)
+ Thu, 05 Oct 2023 16:08:40 -0700 (PDT)
 From: Sam Edwards <cfsworks@gmail.com>
 X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
 To: Heiko Schocher <hs@denx.de>,
 	Simon Glass <sjg@chromium.org>
 Cc: Kyungmin Park <kmpark@infradead.org>, u-boot@lists.denx.de,
  Sam Edwards <CFSworks@gmail.com>
-Subject: [RFC PATCH v2 2/4] mtd: ubi: bind block device driver for static
- volumes
-Date: Thu,  5 Oct 2023 17:08:29 -0600
-Message-ID: <20231005230831.4032070-3-CFSworks@gmail.com>
+Subject: [RFC PATCH v2 1/4] mtd: ubi: register UBI attachments as DM devices
+Date: Thu,  5 Oct 2023 17:08:28 -0600
+Message-ID: <20231005230831.4032070-2-CFSworks@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231005230831.4032070-1-CFSworks@gmail.com>
 References: <20231005230831.4032070-1-CFSworks@gmail.com>
@@ -95,129 +94,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This makes static UBI volumes readable as block devices, however
-no mechanism for selecting these volume devices yet exists.
+This is in preparation for exposing static UBI volumes as block devices.
+
+A UBI uclass and driver are introduced, and a "ubi0" virtual device
+with the proper driver is created below whichever MTD device is
+attached as the active UBI partition. This virtual device will soon
+be the parent for the BLK devices that represent the static volumes.
 
 Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 ---
- drivers/mtd/ubi/ubi-uclass.c | 111 +++++++++++++++++++++++++++++++++++
- 1 file changed, 111 insertions(+)
+ cmd/ubi.c                    | 11 ++++++
+ drivers/mtd/ubi/Makefile     |  1 +
+ drivers/mtd/ubi/ubi-uclass.c | 74 ++++++++++++++++++++++++++++++++++++
+ include/dm/uclass-id.h       |  1 +
+ include/ubi_uboot.h          |  5 +++
+ 5 files changed, 92 insertions(+)
+ create mode 100644 drivers/mtd/ubi/ubi-uclass.c
 
+diff --git a/cmd/ubi.c b/cmd/ubi.c
+index 0a6a80bdd1..314c7f60f4 100644
+--- a/cmd/ubi.c
++++ b/cmd/ubi.c
+@@ -560,6 +560,13 @@ static int ubi_detach(void)
+ 		cmd_ubifs_umount();
+ #endif
+ 
++#ifdef CONFIG_DM_MTD
++	/*
++	 * Clean up any UBI devices in DM
++	 */
++	ubi_dm_unbind_all();
++#endif
++
+ 	/*
+ 	 * Call ubi_exit() before re-initializing the UBI subsystem
+ 	 */
+@@ -598,6 +605,10 @@ int ubi_part(char *part_name, const char *vid_header_offset)
+ 		return err;
+ 	}
+ 
++#ifdef CONFIG_DM_MTD
++	ubi_dm_bind(0);
++#endif
++
+ 	ubi = ubi_devices[0];
+ 
+ 	return 0;
+diff --git a/drivers/mtd/ubi/Makefile b/drivers/mtd/ubi/Makefile
+index 30d00fbdfe..375075f75e 100644
+--- a/drivers/mtd/ubi/Makefile
++++ b/drivers/mtd/ubi/Makefile
+@@ -7,3 +7,4 @@ obj-y += attach.o build.o vtbl.o vmt.o upd.o kapi.o eba.o io.o wl.o crc32.o
+ obj-$(CONFIG_MTD_UBI_FASTMAP) += fastmap.o
+ obj-y += misc.o
+ obj-y += debug.o
++obj-$(CONFIG_DM_MTD) += ubi-uclass.o
 diff --git a/drivers/mtd/ubi/ubi-uclass.c b/drivers/mtd/ubi/ubi-uclass.c
-index f8971e793e..b2c47bfe0c 100644
---- a/drivers/mtd/ubi/ubi-uclass.c
+new file mode 100644
+index 0000000000..f8971e793e
+--- /dev/null
 +++ b/drivers/mtd/ubi/ubi-uclass.c
-@@ -8,10 +8,120 @@
- #define LOG_CATEGORY UCLASS_UBI
- 
- #include <common.h>
-+#include <blk.h>
- #include <dm.h>
- #include <dm/device-internal.h>
- #include <ubi_uboot.h>
- 
-+static ulong ubi_bread(struct udevice *dev, lbaint_t lba, lbaint_t blkcnt,
-+		       void *dst)
+@@ -0,0 +1,74 @@
++// SPDX-License-Identifier: GPL-2.0
++/**
++ * ubi-uclass.c - UBI partition and volume block device uclass driver
++ *
++ * Copyright (C) 2023 Sam Edwards <CFSworks@gmail.com>
++ */
++
++#define LOG_CATEGORY UCLASS_UBI
++
++#include <common.h>
++#include <dm.h>
++#include <dm/device-internal.h>
++#include <ubi_uboot.h>
++
++int ubi_dm_bind(unsigned int index)
 +{
-+	int err, lnum;
-+	struct blk_desc *blk = dev_get_uclass_plat(dev);
-+	struct ubi_device *ubi = dev_get_plat(dev->parent);
-+	struct ubi_volume *vol = ubi->volumes[blk->devnum];
-+	lbaint_t lba_per_peb = vol->usable_leb_size / blk->blksz;
-+	lbaint_t lba_off, lba_len, total = 0;
++	struct udevice *dev;
++	int ret;
++	char name[16];
++	const char *name_dup;
++	struct ubi_device *ubi = ubi_devices[index];
++	const struct mtd_info *mtd = ubi->mtd;
 +
-+	while (blkcnt) {
-+		lnum = lba / lba_per_peb;
-+		lba_off = lba % lba_per_peb;
-+		lba_len = lba_per_peb - lba_off;
-+		if (lba_len > blkcnt)
-+			lba_len = blkcnt;
++	/* MTD partitions are not in DM; navigate to the real MTD device */
++	if (mtd->parent)
++		mtd = mtd->parent;
 +
-+		err = ubi_eba_read_leb(ubi, vol, lnum, dst,
-+				       lba_off << blk->log2blksz,
-+				       lba_len << blk->log2blksz, 0);
-+		if (err) {
-+			pr_err("UBI read error %x\n", err);
-+			break;
-+		}
-+
-+		lba += lba_len;
-+		blkcnt -= lba_len;
-+		dst += lba_len << blk->log2blksz;
-+		total += lba_len;
++	snprintf(name, sizeof(name), "ubi%u", index);
++	name_dup = strdup(name);
++	ret = device_bind(mtd->dev, DM_DRIVER_GET(ubi), name_dup, ubi,
++			  ofnode_null(), &dev);
++	if (ret) {
++		free((void *)name_dup);
++		return ret;
 +	}
 +
-+	return total;
++	device_set_name_alloced(dev);
++
++	return 0;
 +}
 +
-+static const struct blk_ops ubi_block_ops = {
-+	.read 	= ubi_bread,
-+};
-+
-+U_BOOT_DRIVER(ubi_block) = {
-+	.name	= "ubi_block",
-+	.id	= UCLASS_BLK,
-+	.ops	= &ubi_block_ops,
-+};
-+
-+static bool is_power_of_two(unsigned int x)
++int ubi_dm_unbind_all(void)
 +{
-+	return (x & -x) == x;
-+}
-+
-+static unsigned int choose_blksz_for_volume(const struct ubi_volume *vol)
-+{
-+	/*
-+	 * U-Boot assumes a power-of-two blksz; however, UBI LEBs are
-+	 * very often not suitably sized. To solve this, we divide the
-+	 * LEBs into a whole number of LBAs per LEB, such that each LBA
-+	 * addresses a power-of-two-sized block. To choose the blksz,
-+	 * we either:
-+	 * 1) Use the volume alignment, if it's a non-unity power of
-+	 *    two. The LEB size is a multiple of this alignment, and it
-+	 *    allows the user to force a particular blksz if needed for
-+	 *    their use case.
-+	 * 2) Otherwise, find the greatest power-of-two factor of the
-+	 *    LEB size.
-+	 */
-+	if (vol->alignment > 1 && is_power_of_two(vol->alignment))
-+		return vol->alignment;
-+
-+	unsigned int blksz = 1;
-+	while ((vol->usable_leb_size & blksz) == 0)
-+		blksz <<= 1;
-+	return blksz;
-+}
-+
-+static int ubi_post_bind(struct udevice *dev)
-+{
-+	int i;
 +	int ret;
-+	unsigned int blksz;
-+	lbaint_t lba;
-+	struct udevice *blkdev;
-+	struct ubi_device *ubi = dev_get_plat(dev);
++	struct uclass *uc;
++	struct udevice *dev;
++	struct udevice *next;
 +
-+	for (i = 0; i < ubi->vtbl_slots; i++) {
-+		struct ubi_volume *vol = ubi->volumes[i];
-+		if (!vol || vol->vol_id >= UBI_INTERNAL_VOL_START ||
-+		    vol->vol_type != UBI_STATIC_VOLUME)
-+			continue;
++	ret = uclass_get(UCLASS_UBI, &uc);
++	if (ret)
++		return ret;
 +
-+		if (vol->updating || vol->upd_marker) {
-+			pr_err("** UBI volume %d (\"%s\") midupdate; ignored\n",
-+			       vol->vol_id, vol->name);
-+			continue;
-+		}
++	uclass_foreach_dev_safe(dev, next, uc) {
++		ret = device_remove(dev, DM_REMOVE_NORMAL);
++		if (ret)
++			return ret;
 +
-+		blksz = choose_blksz_for_volume(vol);
-+		lba = DIV_ROUND_UP((unsigned long long)vol->used_bytes, blksz);
-+
-+		pr_debug("UBI volume %d (\"%s\"): %lu blocks, %d bytes each\n",
-+			 vol->vol_id, vol->name, lba, blksz);
-+
-+		ret = blk_create_device(dev, "ubi_block", vol->name, UCLASS_UBI,
-+					vol->vol_id, blksz, lba, &blkdev);
++		ret = device_unbind(dev);
 +		if (ret)
 +			return ret;
 +	}
@@ -225,15 +220,43 @@ index f8971e793e..b2c47bfe0c 100644
 +	return 0;
 +}
 +
- int ubi_dm_bind(unsigned int index)
- {
- 	struct udevice *dev;
-@@ -71,4 +181,5 @@ U_BOOT_DRIVER(ubi) = {
- UCLASS_DRIVER(ubi) = {
- 	.id		= UCLASS_UBI,
- 	.name		= "ubi",
-+	.post_bind	= ubi_post_bind,
- };
++U_BOOT_DRIVER(ubi) = {
++	.id		= UCLASS_UBI,
++	.name		= "ubi_dev",
++};
++
++UCLASS_DRIVER(ubi) = {
++	.id		= UCLASS_UBI,
++	.name		= "ubi",
++};
+diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+index 0432c95c9e..ee11fbb38d 100644
+--- a/include/dm/uclass-id.h
++++ b/include/dm/uclass-id.h
+@@ -140,6 +140,7 @@ enum uclass_id {
+ 	UCLASS_THERMAL,		/* Thermal sensor */
+ 	UCLASS_TIMER,		/* Timer device */
+ 	UCLASS_TPM,		/* Trusted Platform Module TIS interface */
++	UCLASS_UBI,		/* Unsorted Block Images MTD partition */
+ 	UCLASS_UFS,		/* Universal Flash Storage */
+ 	UCLASS_USB,		/* USB bus */
+ 	UCLASS_USB_DEV_GENERIC,	/* USB generic device */
+diff --git a/include/ubi_uboot.h b/include/ubi_uboot.h
+index 6da348eb62..9d37848f03 100644
+--- a/include/ubi_uboot.h
++++ b/include/ubi_uboot.h
+@@ -52,6 +52,11 @@ extern int ubi_part(char *part_name, const char *vid_header_offset);
+ extern int ubi_volume_write(char *volume, void *buf, size_t size);
+ extern int ubi_volume_read(char *volume, char *buf, size_t size);
+ 
++#ifdef CONFIG_DM_MTD
++extern int ubi_dm_bind(unsigned int);
++extern int ubi_dm_unbind_all(void);
++#endif
++
+ extern struct ubi_device *ubi_devices[];
+ int cmd_ubifs_mount(char *vol_name);
+ int cmd_ubifs_umount(void);
 -- 
 2.41.0
 
