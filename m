@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37BF0E9370C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:30:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD86E9370C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:33:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7D8486A4C;
-	Thu,  5 Oct 2023 14:30:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A951386AE6;
+	Thu,  5 Oct 2023 14:33:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oh2cZJDL";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="18E952Qm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 189A786A4C; Thu,  5 Oct 2023 14:30:19 +0200 (CEST)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id ECE1286C6A; Thu,  5 Oct 2023 14:33:21 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3772186977
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 14:30:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8253186AE6
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 14:33:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-3248aa5cf4eso940027f8f.1
- for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 05:30:14 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4056ce55e7eso7866695e9.2
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 05:33:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1696509014; x=1697113814;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1696509199; x=1697113999;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=RoAWXJkeExRphLVgS++XuW7S+E0kZKIA5LQ7ZtsgSgw=;
- b=oh2cZJDLdJHuHGStrXxBGEWLSP/5yif1utUjRQCD+IOICF0UOLCIE+KFHHziMrIaFK
- No4520xXHfOHK7FrHy7pszRW0hP4CvDbGbNFD6YGhCueZMNyGamevE+Y3oGKghv0+KI7
- 43UbRABZ/ieZq4zBReVcCPSgm6GJ0VEMPVRuTKuBfUWT5xYDOEWOnJqrwNvgcpaRt0Q3
- jXe16rRzyQ+IriYD2w6Vf17xE6qf9RQfvNMX7OzuOkqtMxchS+BRcJlCjeBDkSXwPbXf
- vhzfhemoT5bI1W7MWTX8AGDkGXWdA8tZqBQh4am52jZc11SAuu5flLXruoYQ2o0ThbJs
- k/Ww==
+ bh=onzvcJ1g6UZ8o5CzvZFjBum2BLB9jQgIETRP4zT71VM=;
+ b=18E952QmTaFGSlIfmlbsIwF1IJDOjRoRnFojE5fEvudFc5Wd/lg9x09ttIt+LgKWvR
+ azeYo4u2kpr2/MG7Ij4fldQ9VdL1Ig5GFeCPC37MuaGyxxAIrZIIgZvPNdcWEXEN1GOD
+ 2Z1UrceXmQDNJsUy5/2Bi+nXBp34Ndm+kIB46x8Lhki+erC372U9OqUXjDQiGKjoXMi8
+ 9GJ3jackrrfzuygAd72dJcCedyWMJOQFM+sI5lhj3UjzTiTqFLH28Q+36eqjGTpxVu/y
+ pfDOU/ZH9qdMuOeDxi1lljaEz16gNVqYIc/P/4y5REXdJVqz07Lc0ASClhTqv7Nr0MXt
+ q8LQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696509014; x=1697113814;
+ d=1e100.net; s=20230601; t=1696509199; x=1697113999;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=RoAWXJkeExRphLVgS++XuW7S+E0kZKIA5LQ7ZtsgSgw=;
- b=HoILMAvqRrHbiCjghQXwycPzlZsZVq/XArrOcAZvXbdqdfFdqYBbUixJmY5Wds8hyx
- vqKi5ycCLVdwBMXn6xWZ7LobUjmmMzK/okaMVuIbYUkBW9IkQg0y1d4V3uvZSFftlQxv
- wGQMleo88y/aBef7UHlit7hyeQr7wrKyXPvohMAKsZ2y8K3i11FQDQOZzO6F+hW+x5TQ
- /6Ceg3HlG5gajmTjci6prerxOzUpj/JqWxJ/ztMHjprGZkOMGyWXKORMoVe51pg/smBt
- p05VgyRJPhNBuAhz4bnP10ZeF/L2hJk/n1zzVJ9LnE7h9G23o9hLEtj7DM/p4KO4OuyC
- XqDg==
-X-Gm-Message-State: AOJu0Ywd9OuNSu3EaXBVsdBMzpK9Noqmnb+8GXF+u5rRA03i46nMskwN
- O0yatoX5NYh7M2TrX7J/t11rxA==
-X-Google-Smtp-Source: AGHT+IGOwUvYfxB3EvIm58hdMJT/rbGvCo7rjI5Ux9Y98wf3AlqoBmtWprpMQDvtwzQcxQDNM1QZ0Q==
-X-Received: by 2002:a5d:4bc1:0:b0:317:1b08:b317 with SMTP id
- l1-20020a5d4bc1000000b003171b08b317mr4756981wrt.6.1696509013829; 
- Thu, 05 Oct 2023 05:30:13 -0700 (PDT)
+ bh=onzvcJ1g6UZ8o5CzvZFjBum2BLB9jQgIETRP4zT71VM=;
+ b=qGhWIeiWW41rtGLN709y+CbFBAYUt1KjfMg6voNCP+upozSxJtmnKw0jcYCVAX/jps
+ mgihhmQWmyRfQQjZe9AdkDpkvRQBzCkim50SQgoQWGwF6oI0NLaTe/bxpl2Jlqg82NQO
+ EbEs95b6Aw4/Lhnb7PhG1tojSmquX8BTRPwg6zrINv4dyRl7V9pkq97GJAu6eh67klEC
+ 4Z+dYNccT6EMDU/cbIbvycXf9l6ejWG3PNwAYjwoT0e5GgnfEhGy36Xf0vfomeGTKfss
+ j64LsYN943PM0HvAVrMjG5S9eAYwrSWdYZRWZjGGbL1byO9HIPSg7Ur4/7HD7vb0HFi/
+ NjVA==
+X-Gm-Message-State: AOJu0YysfZ/QeMnOdG8mK12fbBTkQ6Iw5RLajWtiwNQsWxBrEDGXH+hC
+ xOZIHmzubks//U0mU11tNk5f9Xet6kp0s6Egy+c=
+X-Google-Smtp-Source: AGHT+IGg2Abp7oHkWZnOItmrAxTZPwEuK/tl6tbi3ZpMig58/rt0/Tn7vL/VuIWyX/wyPdbrc0Gkmw==
+X-Received: by 2002:a05:600c:2298:b0:3fe:1af6:6542 with SMTP id
+ 24-20020a05600c229800b003fe1af66542mr5283715wmf.33.1696509198947; 
+ Thu, 05 Oct 2023 05:33:18 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- d7-20020adfe887000000b00326dd5486dcsm1701124wrm.107.2023.10.05.05.30.13
+ l17-20020a1ced11000000b0040588d85b3asm3672770wmh.15.2023.10.05.05.33.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Oct 2023 05:30:13 -0700 (PDT)
+ Thu, 05 Oct 2023 05:33:18 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Miquel Raynal <miquel.raynal@bootlin.com>, Marek Vasut <marex@denx.de>,
  Lukasz Majewski <lukma@denx.de>
 Cc: u-boot@lists.denx.de, Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: Re: [PATCH RESEND v2 1/2] cmd: bind: Try to improve the (un)bind help
-In-Reply-To: <20231002134621.94786-1-miquel.raynal@bootlin.com>
+Subject: Re: [PATCH RESEND v2 2/2] usb: udc: Try to clarify an error message
+In-Reply-To: <20231002134621.94786-2-miquel.raynal@bootlin.com>
 References: <20231002134621.94786-1-miquel.raynal@bootlin.com>
-Date: Thu, 05 Oct 2023 14:30:12 +0200
-Message-ID: <87sf6pb6az.fsf@baylibre.com>
+ <20231002134621.94786-2-miquel.raynal@bootlin.com>
+Date: Thu, 05 Oct 2023 14:33:17 +0200
+Message-ID: <87pm1tb65u.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -91,52 +92,73 @@ X-Virus-Status: Clean
 
 On lun., oct. 02, 2023 at 15:46, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
 
-> While it may sound totally obvious for the regular U-Boot developer to
-> get the parameters of the bind/unbind commands from the output of 'dm
-> tree', it did not felt straightforward to me until I was explicitly
-> told to look there. And even when I knew the command, I did not make a
-> direct link between the arguments of this command and the columns
-> returned by 'dm tree'.
+> At some point when trying to use USB gadgets, two situations may arise
+> and lead to a failure. Either the UDC (USB Device Controller) is not
+> available at all (not described or not probed) or the UDC is already in
+> use. For instance, as the USB Ethernet gadget remains bound to the UDC,
+> the use of any other USB gadget (fastboot, dfu, etc) *after* will always
+> fail with the "couldn't find an available UDC" error.
 >
-> Several of us lost a lot of time because of that, I would like to kindly
-> help other users by slightly improving this textual line. Unfortunately,
-> because of how this string is used (like within the 'help' command) I
-> cannot detail much more, but at least the pointer is there.
+> Let's give a more helpful message by making a difference between the two
+> cases. Let's also hint people who would get this error and grep it into
+> the sources a better explanation of what's wrong with their workflow.
 >
 > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
+> While doing this I really wanted to add "much more" error comments but I
+> faced another reality: often the messages are there but use
+> pr_err/log_err which is actually silenced by default with LOGLEVEL=3, so
+> I consider this unnecessary, as decreasing the loglevel will make these
+> messages appear. I would have expected errors to be displayed, but I
+> understand it makes the binaries even bigger.
+>
 > Resend: no change.
 >
 > Changes in v2:
-> * Moved the details in the long text section as suggested by Heinrich.
-> * Rephrased the help text as well, not fully following Heinrich
->   suggestion, but taking inspiration from it.
+> * s/UDC/UDCs/. I kept the sentence as it was as the suggested form did
+>   not sound well at all when there is only one UDC.
 > ---
->  cmd/bind.c | 4 ++++
->  1 file changed, 4 insertions(+)
+>  drivers/usb/gadget/udc/udc-core.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
 >
-> diff --git a/cmd/bind.c b/cmd/bind.c
-> index 4d1b7885e60..be0d4d2a711 100644
-> --- a/cmd/bind.c
-> +++ b/cmd/bind.c
-> @@ -246,6 +246,8 @@ U_BOOT_CMD(
->  	"Bind a device to a driver",
->  	"<node path> <driver>\n"
->  	"bind <class> <index> <driver>\n"
-> +	"Use 'dm tree' to list all devices registered in the driver model,\n"
-> +	"their path, class, index and current driver.\n"
->  );
+> diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
+> index 7f73926cb3e..8405b03462e 100644
+> --- a/drivers/usb/gadget/udc/udc-core.c
+> +++ b/drivers/usb/gadget/udc/udc-core.c
+> @@ -323,6 +323,7 @@ err1:
+>  int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
+>  {
+>  	struct usb_udc		*udc = NULL;
+> +	unsigned int		udc_count = 0;
+>  	int			ret;
 >  
->  U_BOOT_CMD(
-> @@ -254,4 +256,6 @@ U_BOOT_CMD(
->  	"<node path>\n"
->  	"unbind <class> <index>\n"
->  	"unbind <class> <index> <driver>\n"
-> +	"Use 'dm tree' to list all devices registered in the driver model,\n"
-> +	"their path, class, index and current driver.\n"
->  );
+>  	if (!driver || !driver->bind || !driver->setup)
+> @@ -330,12 +331,22 @@ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
+>  
+>  	mutex_lock(&udc_lock);
+>  	list_for_each_entry(udc, &udc_list, list) {
+> +		udc_count++;
+> +
+>  		/* For now we take the first one */
+>  		if (!udc->driver)
+>  			goto found;
+>  	}
+>  
+> -	printf("couldn't find an available UDC\n");
+> +	if (!udc_count)
+> +		printf("No UDC available in the system\n");
+> +	else
+> +		/* When this happens, users should 'unbind <class> <index>'
+> +		 * using the output of 'dm tree' and looking at the line right
+> +		 * after the USB peripheral/device controller.
+> +		 */
+> +		printf("All UDCs in use (%d available), use the unbind command\n",
+> +		       udc_count);
+>  	mutex_unlock(&udc_lock);
+>  	return -ENODEV;
+>  found:
 > -- 
 > 2.34.1
