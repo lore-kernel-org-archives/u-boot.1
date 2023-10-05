@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43EECE9370C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 20:26:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F2E6E93717
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 20:38:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A743886D30;
-	Thu,  5 Oct 2023 22:25:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 22E0186CE7;
+	Thu,  5 Oct 2023 22:38:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=prp.uespi.br
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SwJzHp1Y";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=prp.uespi.br header.i=@prp.uespi.br header.b="YySqSYqb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 513BA86D31; Thu,  5 Oct 2023 22:25:58 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id B9E3C86D10; Thu,  5 Oct 2023 22:38:01 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4884586D28
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 22:25:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB1C486C87
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 22:37:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=prp.uespi.br
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-d8673a90f56so1555815276.0
- for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 13:25:56 -0700 (PDT)
+ spf=pass smtp.mailfrom=project-tvbox@prp.uespi.br
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-405361bb9f7so12377485e9.2
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 13:37:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696537555; x=1697142355; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JoxwNfBDm36A+XKaizD+zdbfBRb0lHxdnvuzFFYzTs4=;
- b=SwJzHp1YMO7KAYCK1v5zQl48hD2Pmz2AddaXmVqDS/BR8+sO9KNFgXtxleDDEu70JR
- XmGxidE0gvrsK/yCKfbBgZW9DmWMo2zM/HZ2gCnXXnhiq7bgCzy6sVP+r9piP7zxIThU
- 3dtXvZ1lrpIjebxp4virEhWAvoey+7/sRFmok=
+ d=prp.uespi.br; s=uespi; t=1696538279; x=1697143079; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=kFT7Th9oeTaRTzwLxvpRH2Z9l//LNOyWytyw1LuBGX0=;
+ b=YySqSYqbJBu4sqrqikz0IbfOx/u3l8Fagj1rEHdviVM4szjLF1edgoY6ypXOuXj2V4
+ bfyYMOCOMD8AEE5aC0B0uPyg/yk3f9AOvjF+qAYwaaKGSYmQrCwOgtlqh413kqsb/WqK
+ KPTNXMs3lN/eitJmiKMOROLN8LHHxBD+KVYTC20mfWDcUc07AU7kw9oQvqEL+4M+bMHn
+ vwuYVRlJo+nR2nok7LyYicQ5788FkQZz8CGspfW5r482WoCyLtnv9wWgqKWtX9ojaYIv
+ jlvVROFnL/N4rMPdAV/awk4sF+FWJeUkUwXZDzolgH9dkUjhb4ua26I8D8sG4juYb9NX
+ Q5XQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696537555; x=1697142355;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JoxwNfBDm36A+XKaizD+zdbfBRb0lHxdnvuzFFYzTs4=;
- b=vhUqlzxXA/8WFsH/vnmrvuTEQGxx6ZKwYO/092MlqALNGn0cBbzJo4BdN0dlqu+qOB
- 77SPzLKVSkkIq+a/3UwfoZGDIRe3ovgxL83lxRD8S8S15RcDGkOEreB5O0xGm+uJd9En
- JGivbWp5kAWuL0Z0ZN30aQa98uyv2YH+EMbUj0AifXM7R+CWP+K8x+22r7OE6rzsVuZM
- pU7M9OJqPZFpuhRnZMSFdcqhMROmsZ9vQIKtMzpQawEHEwoT9KdJMoyFuAx91ghCib+J
- 2qgFEZAWUrc5wJR9j4SfIq8Wb6iIU2kSR2gzfkVdrPoJP14dV9xANzkIStpwp+P1FIoZ
- 7KyQ==
-X-Gm-Message-State: AOJu0YzY/BrlPS8zc23Wb2bmnURQygvTQVD0Ie+cI716tBSe8g2nquGK
- YOT4Av7P/a4UmpiO2xCnp+rIfQ==
-X-Google-Smtp-Source: AGHT+IEO/i+QVTMC0Bda2vISmMVFQYX8Bs5Jrma0WsqSeIqbnn5NMih3Q6IoW3wS+ZEjUOb64fLNLg==
-X-Received: by 2002:a25:b54:0:b0:d81:64e7:2141 with SMTP id
- 81-20020a250b54000000b00d8164e72141mr5953284ybl.24.1696537554466; 
- Thu, 05 Oct 2023 13:25:54 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-385b-0a87-6b23-cb7e.res6.spectrum.com.
- [2603:6081:7b00:6400:385b:a87:6b23:cb7e])
- by smtp.gmail.com with ESMTPSA id
- t40-20020a25aaab000000b00d853795d3e6sm612522ybi.9.2023.10.05.13.25.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Oct 2023 13:25:53 -0700 (PDT)
-Date: Thu, 5 Oct 2023 16:25:51 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>
-Cc: vigneshr@ti.com, m-chawdhry@ti.com, sjg@chromium.org, jonas@kwiboo.se,
- afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de,
- Roger Quadros <rogerq@kernel.org>, Neha Francis <n-francis@ti.com>
-Subject: Re: [PATCH] arm: dts: k3-j721e-sk/common-proc-board: Fix boot
-Message-ID: <20231005202551.GA2227687@bill-the-cat>
-References: <20231005181514.4054241-1-nm@ti.com>
+ d=1e100.net; s=20230601; t=1696538279; x=1697143079;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kFT7Th9oeTaRTzwLxvpRH2Z9l//LNOyWytyw1LuBGX0=;
+ b=sLOikGzcpOPlx7G3LaN+oyc+1KkcK+tbNF9MpDshbSr644RXJ3N8z5PUQPMeTZRdf4
+ 5pBLqjHljXCsEvsYeEG7jAHe/64sdUbHoBtS296v4EBAAlzhVgyqmAi4RPnZvOu/JdRq
+ BRgw9FzHe0p+6iZy3LTREDCUzfvnqzb+661w9mD36lT3fxI8pYMipZX9dfHqZg5b0cNR
+ VRi19d9KWrVQ3NnOnRBduA8ktCJJKEiR6DAfIm4Wrs+on7FDxx4xUDc2XTkE279B3Llp
+ 9pg75bTj61gyQEOT+P77Lk4fRQ/wtERw1JS8pCUbH5rJENm7Q8C+SHTT6TeegExh2mIB
+ UrwA==
+X-Gm-Message-State: AOJu0YxxqfkH9xYDOeotyr5a2S+dw8tj+kNFXKz/5BLxgKrF42yUM3Q0
+ c9P6xlxdGoTzYnZ0TNv88bpxN1oJwg/8cdAr5pslnyaKjJBOA5sA
+X-Google-Smtp-Source: AGHT+IEtRXMswkUSrS/QWIzHyspACkq0WmeU3doRzNMuAdMZ2bhvEtw7vHa29ZK2wBF6wn4c9HUOHbyIOVJ/LyeEO2k=
+X-Received: by 2002:a05:600c:210b:b0:406:548e:bd51 with SMTP id
+ u11-20020a05600c210b00b00406548ebd51mr5276662wml.26.1696538278988; Thu, 05
+ Oct 2023 13:37:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5EtOKClQLqodqDFT"
-Content-Disposition: inline
-In-Reply-To: <20231005181514.4054241-1-nm@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: project-tvbox project-tvbox <project-tvbox@prp.uespi.br>
+Date: Thu, 5 Oct 2023 17:37:48 -0300
+Message-ID: <CAC15VHSqtbfP-4YZYJ71CDXryJT2s-vXF9Kj=kNT4yCEAHmC=A@mail.gmail.com>
+Subject: error on h616 ID axp806 legacy kernel
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,46 +81,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---5EtOKClQLqodqDFT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Oct 05, 2023 at 01:15:14PM -0500, Nishanth Menon wrote:
-
-> Since commit 9e644284ab81 ("dm: core: Report bootph-pre-ram/sram node
-> as pre-reloc after relocation") A53 u-boot proper is broken. This is
-> because nodes marked as 'bootph-pre-ram' are not available at u-boot
-> proper before relocation.
->=20
-> To fix this we mark all nodes in u-boot.dtsi as 'bootph-all'.
->=20
-> Fixes: 69b19ca67bcb ("arm: dts: k3-j721e: Sync with v6.6-rc1")
-> Cc: Neha Francis <n-francis@ti.com>
-> Signed-off-by: Nishanth Menon <nm@ti.com>
-
-Tested-by: Tom Rini <trini@konsulko.com> # J721E-EVM GP
-
---=20
-Tom
-
---5EtOKClQLqodqDFT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUfG8wACgkQFHw5/5Y0
-tyxtkgwAmCPmR1CjXTLMjrD4/7w6+acqH+lqjdvVT8IwwR9OI8CjeVzDgBI+lQj5
-Y44htbp+WQt3QIm8+Rcxpg30mktr5Jz5E4UvSCIcRXOr+tuWK7UjOuaQh6dsL6Qx
-0b0qZJbGa9gi6gRjtzR3z1T+l7Wi+pcM+oAu28V0MkCakgwP4J6cV6E8ILyF57Dd
-+yxxH1J43gY7fUa4syt38siooq3ZG2axdWyGmgvgEwT9qatV4ixxaDKely7J9kj4
-8qU0sMpz3gAB8SBuIMnJmWaaqGErAh2EtbfrQSxFw7Pv1V0AI7ik9Yh5j6q7EXu/
-Lw7ADAmNmC0qa8b0jz062b3GrpmlIEAGDfOTF0M0MgSejoA7lslKIMtjDIhCuL6Q
-ESTDPZ3yfMvQjy+8jJuxf++A217rYmuNTFXw49N7uXstYwhzz0E8v6oss/WqOexL
-oN0M8vq+yUlAZ7Iz7dux1TxGtIYjfLpU03HRCfd+C6fIeWsRT6jfpxgbUnU3DnMi
-/EEm+Mnm
-=S0Ef
------END PGP SIGNATURE-----
-
---5EtOKClQLqodqDFT--
+In the legacy kernel, when starting, the error appears:
+the chip id is 0x5d00
+ic cant match axp, please check...
+well, in the axp.h code the id is defined as 0x40, I tried changing it
+to 0x5d00, but it does not accept the u-boot compilation error, does
+anyone know how to change it, it seems to be an error in the number of
+registers available in the .h
