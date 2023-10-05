@@ -4,62 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9B70E93709
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:11:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10297E9370C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:11:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 273FF86C37;
-	Thu,  5 Oct 2023 14:07:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B75C86C2A;
+	Thu,  5 Oct 2023 14:07:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="f5q3Ikz5";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Jwe+JjQ5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D712486EC9; Thu,  5 Oct 2023 10:55:02 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id D4C5786EA3; Thu,  5 Oct 2023 10:54:53 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C910586EEC
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 10:54:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 716C186EC7
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 10:54:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 6EE64100004;
- Thu,  5 Oct 2023 11:54:47 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6EE64100004
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 2EC2D120006;
+ Thu,  5 Oct 2023 11:54:45 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 2EC2D120006
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696496087;
- bh=AhyjZRwsFsTWqTQTltLkGCSO8YdEOeSdhmHxjovN03U=;
+ s=mail; t=1696496085;
+ bh=lCf9AZRC7ntp/ff+WquINbBXOJABoWti1v17T5MmIwI=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=f5q3Ikz5Z+ju4KdGcxnM57CDe6FNgJxgsIUZMJQPK3jtngrexYUTi5MKSxHQ0EEe6
- bivoaO14emwG28PaDvE6Xdtl2h+fkV3lWdcnncQyN+xZKiFtP+MsHiJMH1QncoLAh8
- g0QtChLIyjvf7tFv67EHj9j+Zbu7Me9hk2UqZBgTEuu45GsjFyO0VRwALP/U2T4OGU
- RhI1tpiAQVA18CaExz2pS3xj5PARmD9LKT+Ay41GogvSq5zJLNgj4ROzjVkOjDduRF
- qEMIOsHJEwtSWuMkGgfBQaWqRbHIF+Bi4aK7CGAiIW/EsTkkLhdQ/Pi5rbf3BwOUi4
- ehrrp4Wwkchag==
+ b=Jwe+JjQ5GntusMVosiOIcOIGw3p/EBjxj6wmdsk/YP560FOIxhftMxBRnwpL9Jmzo
+ A3+qlid8ll4PZcDLWrBfBa0ewjgKwqN1XJwvzNCOH7jxThYXYuAHOeGjEHQ7Gdlp49
+ p1j1uCrhzgzXdvBFydBgKyx/iqLpYYsqgj3HcxYZsVhVDGqYj1LwGMiONCiZibTY0G
+ s+A6/WS1EFlJrEqW3wEQ2s1LxhJIWXnK9dMhIstAKnOw5KXqAmKLhftGnjj8KaVJe8
+ jbDQNDUiHdCBMl5Eed/FQJJByHbpsIy3gCvgZGthbFGfKMIpoOEv9rGPK9kSMTpzD7
+ vQ3ONDbvx8aQA==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  5 Oct 2023 11:54:47 +0300 (MSK)
+ Thu,  5 Oct 2023 11:54:45 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Thu, 5 Oct 2023 11:54:46 +0300
+ 15.2.1118.30; Thu, 5 Oct 2023 11:54:44 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <lukma@denx.de>, <marex@denx.de>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v3 1/8] dt-bindings: reset: add Meson A1 reset bindings
-Date: Thu, 5 Oct 2023 11:54:22 +0300
-Message-ID: <20231005085434.74755-2-avromanov@salutedevices.com>
+Subject: [PATCH v3 0/8] Support USB for Meson A1
+Date: Thu, 5 Oct 2023 11:54:21 +0300
+Message-ID: <20231005085434.74755-1-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231005085434.74755-1-avromanov@salutedevices.com>
-References: <20231005085434.74755-1-avromanov@salutedevices.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -77,11 +75,10 @@ X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 535 535
  da804c0ea8918f802fc60e7a20ba49783d957ba2,
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- salutedevices.com:7.1.1; 127.0.0.199:7.1.2;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
+ {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
 X-KSMG-AntiPhishing: Clean
@@ -106,97 +103,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get this from Linux 6.6-rc3.
+Hello!
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- .../reset/amlogic,meson-a1-reset.h            | 76 +++++++++++++++++++
- 1 file changed, 76 insertions(+)
+This patchset adds USB stack support for Amlogic A1 SoC's
+series. Made reset / phy / dwc3 drivers more flexible and
+added support for A1 board.
+
+V2:
+
+- Made power domain for PHY optional.
+- Add missing CLKID_USB_PHY gate.
+- Drop patch with USB stack initialization in board-a1.c.
+Instead of, enable CONFIG_DM_USB_GADGET for AD401 board.
+- Support A1 in g12a_child_pre_probe/post_remove functions
+in dwc3 driver.
+
+V3:
+
+- Rebased over latests Amlogic U-Boot branch.
+
+Alexey Romanov (7):
+  dt-bindings: reset: add Meson A1 reset bindings
+  reset: add support for Amlogic A1 family
+  phy: get rid of raw hex values
+  phy: move clk enable/disable in init/exit
+  phy: support Amlogic A1 family
+  dwc3: add support for Amlogic A1 family
+  ad401: enable USB stack
+
+Igor Prusov (1):
+  a1: clk: Add missing USB_PHY_IN and USB_PHY gates
+
+ configs/ad401_defconfig                       |   3 +
+ drivers/clk/meson/a1.c                        |   6 +
+ drivers/phy/Kconfig                           |   2 +-
+ drivers/phy/meson-g12a-usb2.c                 | 235 ++++++++++++++++--
+ drivers/reset/reset-meson.c                   |  42 +++-
+ drivers/usb/dwc3/dwc3-meson-g12a.c            |  79 +++++-
+ .../reset/amlogic,meson-a1-reset.h            |  76 ++++++
+ 7 files changed, 409 insertions(+), 34 deletions(-)
  create mode 100644 include/dt-bindings/reset/amlogic,meson-a1-reset.h
 
-diff --git a/include/dt-bindings/reset/amlogic,meson-a1-reset.h b/include/dt-bindings/reset/amlogic,meson-a1-reset.h
-new file mode 100644
-index 0000000000..2c749c655e
---- /dev/null
-+++ b/include/dt-bindings/reset/amlogic,meson-a1-reset.h
-@@ -0,0 +1,76 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2019 Amlogic, Inc. All rights reserved.
-+ * Author: Xingyu Chen <xingyu.chen@amlogic.com>
-+ *
-+ * Copyright (c) 2023, SberDevices, Inc.
-+ * Author: Alexey Romanov <avromanov@salutedevices.com>
-+ */
-+
-+#ifndef _DT_BINDINGS_AMLOGIC_MESON_A1_RESET_H
-+#define _DT_BINDINGS_AMLOGIC_MESON_A1_RESET_H
-+
-+/*	RESET0					*/
-+/*					0	*/
-+#define RESET_AM2AXI_VAD		1
-+/*					2-3	*/
-+#define RESET_PSRAM			4
-+#define RESET_PAD_CTRL			5
-+/*					6	*/
-+#define RESET_TEMP_SENSOR		7
-+#define RESET_AM2AXI_DEV		8
-+/*					9	*/
-+#define RESET_SPICC_A			10
-+#define RESET_MSR_CLK			11
-+#define RESET_AUDIO			12
-+#define RESET_ANALOG_CTRL		13
-+#define RESET_SAR_ADC			14
-+#define RESET_AUDIO_VAD			15
-+#define RESET_CEC			16
-+#define RESET_PWM_EF			17
-+#define RESET_PWM_CD			18
-+#define RESET_PWM_AB			19
-+/*					20	*/
-+#define RESET_IR_CTRL			21
-+#define RESET_I2C_S_A			22
-+/*					23	*/
-+#define RESET_I2C_M_D			24
-+#define RESET_I2C_M_C			25
-+#define RESET_I2C_M_B			26
-+#define RESET_I2C_M_A			27
-+#define RESET_I2C_PROD_AHB		28
-+#define RESET_I2C_PROD			29
-+/*					30-31	*/
-+
-+/*	RESET1					*/
-+#define RESET_ACODEC			32
-+#define RESET_DMA			33
-+#define RESET_SD_EMMC_A			34
-+/*					35	*/
-+#define RESET_USBCTRL			36
-+/*					37	*/
-+#define RESET_USBPHY			38
-+/*					39-41	*/
-+#define RESET_RSA			42
-+#define RESET_DMC			43
-+/*					44	*/
-+#define RESET_IRQ_CTRL			45
-+/*					46	*/
-+#define RESET_NIC_VAD			47
-+#define RESET_NIC_AXI			48
-+#define RESET_RAMA			49
-+#define RESET_RAMB			50
-+/*					51-52	*/
-+#define RESET_ROM			53
-+#define RESET_SPIFC			54
-+#define RESET_GIC			55
-+#define RESET_UART_C			56
-+#define RESET_UART_B			57
-+#define RESET_UART_A			58
-+#define RESET_OSC_RING			59
-+/*					60-63	*/
-+
-+/*	RESET2					*/
-+/*					64-95	*/
-+
-+#endif
 -- 
 2.25.1
 
