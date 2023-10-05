@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DE0EE7C4F3
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 07:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20600E7C4F3
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 07:08:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02B7786EB7;
-	Thu,  5 Oct 2023 09:07:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7AE4386EB3;
+	Thu,  5 Oct 2023 09:08:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="4CveMOV6";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ekQRpNQy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22AA186CCD; Thu,  5 Oct 2023 09:07:32 +0200 (CEST)
+ id 63CF086EB3; Thu,  5 Oct 2023 09:08:23 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CBD7D86EB8
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 09:07:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8784186CCD
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 09:08:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=864251c908=etienne.carriere@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
- 394NxwOF016445; Thu, 5 Oct 2023 09:07:21 +0200
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 3955KKQ2008769; Thu, 5 Oct 2023 09:08:14 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:references:in-reply-to
  :content-type:content-transfer-encoding:mime-version; s=
- selector1; bh=3knODt/4jsrZbqoi4FIwiju3xVRwmy0fu4xV3E5cmfk=; b=4C
- veMOV6xt6Kesl3MltS2+mtBLjYVPEURljwYy1mwuFr6kTfKB9zK7Ce3Dts+8qrAT
- omWODnQCN8ufFXy4t6RyhS2pz5z5qvbe6jTQiHf0bFgtz5AF1Jw7CShn/Sqa37nE
- fLjazp3Jx2TC3pflZj06S7OOOsY5k7wzkdx9cAlqNuQ5YUv1KIEzwYLaZbSEw1vE
- R2N5kn3Fa71TGsSRO53APas0YKHPnyCXUIFQ6OPAilig1ElxQkx7RIAQRN+wWfXg
- nXcWxziDAWdSWaMkKl2G7xMKnIpMyTyxvLX3XbYPSlpIB3gfMInnfMBC8+TkQNZe
- IEpbDAYkTCgqqgoHmUcA==
+ selector1; bh=tPT3cmjEXebSr0pdfze9T5cexbShgphB6hf9/XpNjaw=; b=ek
+ QRpNQy0goCT3XLdR4n0k1YuyszME7qUxp9rt11oNYfHM8DX3ogEdEMp+RwO39u/U
+ a00kbbXtyjPHm45Oru5/2ce5cMa4o7vqr9E4qfWCg2u9XhZ/XLGAWmfLYOkfCsWS
+ J6BCFfRSMCM6njpxAYer9UFu+kpkTSe9KcWc5kaiQCQ9BzNGaWtadKSZLD4mgl5Q
+ SV4i0ZI5exoM8tVP0Cy/IJqd5BQGL557HemHfezTAe19hN2sU4lSoJLv03tSAC5x
+ ShXDx3mUsBgFziRMSm3Av1nXpLz6HDrQ+ZktMAVG5SpwEpiOFi7Vgoypqf6dDAbA
+ Jk5jfg2NwU90BqN+DYdQ==
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3thj7e997p-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3thpwfgdh0-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 05 Oct 2023 09:07:20 +0200 (MEST)
+ Thu, 05 Oct 2023 09:08:14 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 8638A10006D;
- Thu,  5 Oct 2023 09:07:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7D96721B52B;
- Thu,  5 Oct 2023 09:07:20 +0200 (CEST)
-Received: from SHFDAG1NODE1.st.com (10.75.129.69) by SHFDAG1NODE2.st.com
- (10.75.129.70) with Microsoft SMTP Server (version=TLS1_2,
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id EDD0D10005C;
+ Thu,  5 Oct 2023 09:08:13 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E7F3221ADCB;
+ Thu,  5 Oct 2023 09:08:13 +0200 (CEST)
+Received: from SHFDAG1NODE1.st.com (10.75.129.69) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 5 Oct
- 2023 09:07:20 +0200
+ 2023 09:08:13 +0200
 Received: from SHFDAG1NODE1.st.com ([fe80::117e:c4ab:ed81:6cb1]) by
  SHFDAG1NODE1.st.com ([fe80::117e:c4ab:ed81:6cb1%14]) with mapi id
- 15.01.2507.027; Thu, 5 Oct 2023 09:07:20 +0200
+ 15.01.2507.027; Thu, 5 Oct 2023 09:08:13 +0200
 From: Etienne CARRIERE - foss <etienne.carriere@foss.st.com>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>, "trini@konsulko.com"
- <trini@konsulko.com>, "sjg@chromium.org" <sjg@chromium.org>
-CC: Etienne CARRIERE <etienne.carriere@st.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH v5 02/16] firmware: scmi: use a protocol's own channel if
- assigned
-Thread-Topic: [PATCH v5 02/16] firmware: scmi: use a protocol's own channel if
- assigned
-Thread-Index: AQHZ8Ebc2sxd4AsO9U+s5vaAlFjrWLA6ylJn
-Date: Thu, 5 Oct 2023 07:07:20 +0000
-Message-ID: <872a32eac67e43e499f3640512c1a6a3@foss.st.com>
-References: <20230926065750.734440-1-takahiro.akashi@linaro.org>,
- <20230926065750.734440-3-takahiro.akashi@linaro.org>
-In-Reply-To: <20230926065750.734440-3-takahiro.akashi@linaro.org>
+To: Simon Glass <sjg@chromium.org>, AKASHI Takahiro
+ <takahiro.akashi@linaro.org>
+CC: "trini@konsulko.com" <trini@konsulko.com>, Etienne CARRIERE
+ <etienne.carriere@st.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH v5 03/16] firmware: scmi: support dummy channels for
+ sandbox agent
+Thread-Topic: [PATCH v5 03/16] firmware: scmi: support dummy channels for
+ sandbox agent
+Thread-Index: AQHZ8Ebj7k1SK3x7Yk+K9wS3K8WM37A1mkIAgAUxHLA=
+Date: Thu, 5 Oct 2023 07:08:13 +0000
+Message-ID: <73a0f9bb6d3c43088882afd471bf6c08@foss.st.com>
+References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
+ <20230926065750.734440-4-takahiro.akashi@linaro.org>,
+ <CAPnjgZ1RZKqzbDf4DFAy6gtLpp9dW3PAYEVSyx6ZFrScktpyKA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1RZKqzbDf4DFAy6gtLpp9dW3PAYEVSyx6ZFrScktpyKA@mail.gmail.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -98,33 +99,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: U-Boot <u-boot-bounces@lists.denx.de> on behalf of AKASHI Takahiro =
-<takahiro.akashi@linaro.org>
-> Sent: Tuesday, September 26, 2023 8:57 AM
 >=20
-> SCMI specification allows any protocol to have its own channel for
-> the transport. While the current SCMI driver may assign its channel
-> from a device tree, the core function, devm_scmi_process_msg(), doesn't
-> use a protocol's channel, but always use an agent's channel.
+> From: U-Boot <u-boot-bounces@lists.denx.de> on behalf of Simon Glass <sjg=
+@chromium.org>
+> Sent: Monday, October 2, 2023 3:17 AM
 >=20
-> With this commit, devm_scmi_process_msg() tries to find and use
-> a protocol's channel. If it doesn't exist, use an agent's.
+> On Tue, 26 Sept 2023 at 00:58, AKASHI Takahiro
+> <takahiro.akashi@linaro.org> wrote:
+> >
+> > In sandbox scmi agent, channels are not used at all. But in this patch,
+> > dummy channels are supported in order to test protocol-specific channel=
+s.
+> >
+> > Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> > ---
+> > v5
+> > * new commit
+> > ---
+> >  arch/sandbox/include/asm/scmi_test.h       | 13 ++++
+> >  drivers/firmware/scmi/sandbox-scmi_agent.c | 90 ++++++++++++++++++++++
+> >  2 files changed, 103 insertions(+)
+> >
 >=20
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> ---
-> v5
-> * new commit (fixing a potential bug)
-> ---
->  drivers/firmware/scmi/mailbox_agent.c     | 5 +++--
->  drivers/firmware/scmi/optee_agent.c       | 5 +++--
->  drivers/firmware/scmi/scmi_agent-uclass.c | 7 ++++---
->  drivers/firmware/scmi/smccc_agent.c       | 5 +++--
->  include/scmi_agent-uclass.h               | 8 +++++---
->  5 files changed, 18 insertions(+), 12 deletions(-)
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 >=20
 
 Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
-
-Thanks for addressing this protocol channel issue.
-BR,
-Etienne=
