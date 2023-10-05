@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7022CE7AD45
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 17:10:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E0C8E9271D
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 17:14:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DB7486B55;
-	Thu,  5 Oct 2023 19:10:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 955EE86CA7;
+	Thu,  5 Oct 2023 19:14:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Xgc6TcfW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FstbfqW0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B73098611C; Thu,  5 Oct 2023 19:10:21 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 24AE08692B; Thu,  5 Oct 2023 19:14:20 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCF7B8074B
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 19:10:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFF908692B
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 19:14:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395HAAZx081526;
- Thu, 5 Oct 2023 12:10:10 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395HE7If081773;
+ Thu, 5 Oct 2023 12:14:07 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696525810;
- bh=ceNohPTaC5X2ymoTsBGINp0n2x5Qgqlg2lT85SwiTwA=;
+ s=ti-com-17Q1; t=1696526047;
+ bh=5FA+noIrZJP99J4MYZ4QdopGNZoodPY099CWwgTIRbU=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=Xgc6TcfWjUKLBE2KOEq5iQS3ARtPIjDaMof1VH/2Ed+MtrNpf8MH3XzsKuWpsDPg7
- wlKVPnUs3I4ywEg8MIIEeTB+VK7SdinzGErsFCDSkHcWDHySn/8gY4RlhCwivwZiRd
- k6S9mAGx/LLG/mlH7wIxTfvkqmUXpa48tHsxyPfw=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395HAAU4007860
+ b=FstbfqW0EXQ5DTQDvHkcMr0mR8iT/GWt8dadaRRPhOOITuxQw0aRwaaf14DE2MKHk
+ 40FAQI6ES5SeELIYGrVqb8dDjQXunc7WuAwYxRBImSnOzCd9nIQtWiYuL/puiZEyJs
+ 1zrE6nvmVsHlnqI2tL67C3ktnybKOrf6hOozniIY=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395HE7HE052595
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 5 Oct 2023 12:10:10 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 5 Oct 2023 12:14:07 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Oct 2023 12:10:10 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 12:14:07 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Oct 2023 12:10:10 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395HAAZR026011;
- Thu, 5 Oct 2023 12:10:10 -0500
-Date: Thu, 5 Oct 2023 12:10:10 -0500
+ Frontend Transport; Thu, 5 Oct 2023 12:14:07 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395HE7eb008582;
+ Thu, 5 Oct 2023 12:14:07 -0500
+Date: Thu, 5 Oct 2023 12:14:07 -0500
 From: Nishanth Menon <nm@ti.com>
 To: Tom Rini <trini@konsulko.com>
-CC: Andrew Davis <afd@ti.com>, Roger Quadros <rogerq@kernel.org>,
- <vigneshr@ti.com>, <m-chawdhry@ti.com>, <sjg@chromium.org>,
- <jonas@kwiboo.se>, <srk@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
+CC: Simon Glass <sjg@chromium.org>, Roger Quadros <rogerq@kernel.org>,
+ <vigneshr@ti.com>, <m-chawdhry@ti.com>, <jonas@kwiboo.se>,
+ <srk@ti.com>, <afd@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
  <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
-Message-ID: <20231005171010.zvza7uqyn4mcgp5g@handsaw>
-References: <20231004132324.44198-1-rogerq@kernel.org>
- <20231004132324.44198-2-rogerq@kernel.org>
- <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
- <20231004135436.ihofrxutzcdefica@audacious>
- <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
- <20231005163645.GS8465@bill-the-cat>
+Subject: Re: [PATCH v2 2/2] board: ti: am64x: Switch to standard boot flow
+Message-ID: <20231005171407.jijjxbt66vakivap@chemicals>
+References: <20231005130642.21402-1-rogerq@kernel.org>
+ <20231005130642.21402-3-rogerq@kernel.org>
+ <CAPnjgZ0uMLFdqvpcDMKnXQDL-m1ecUB33gat4EZK7jm=UeEB4g@mail.gmail.com>
+ <20231005163148.GR8465@bill-the-cat>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231005163645.GS8465@bill-the-cat>
+In-Reply-To: <20231005163148.GR8465@bill-the-cat>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,47 +83,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:36-20231005, Tom Rini wrote:
-> On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
-> > On 10/4/23 8:54 AM, Nishanth Menon wrote:
-> > > On 08:48-20231004, Andrew Davis wrote:
-> > > > On 10/4/23 8:23 AM, Roger Quadros wrote:
-> > > > > ti_mmc is not a valid boot_target for standard boot flow so
-> > > > 
-> > > > Is there some way to make it into a valid boot_target? Otherwise
-> > > > how do we use uEnv.txt files, or boot from FIT images with overlays?
-> > > 
-> > > envboot takes care of uEnv.txt file (see
-> > > https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
-> > > 
-> > > Early remote proc loading and FIT image is a question for stdboot itself.
-> > > 
+On 12:31-20231005, Tom Rini wrote:
+[...]
+
+> > >  /* Now for the remaining common defines */
+> > >  #include <configs/ti_armv7_common.h>
 > > 
-> > If stdboot is missing these features then we shouldn't switch until it
-> > has them. I'm all for switching to this, but only if it is complete.
+> > It looks like this file still includes distro_bootcmd and defines all
+> > the BOOT_TARGET things. Can they be dropped? Perhaps for now they
+> > could be put behind an #ifdef if other boards need them?
+> > 
+> > I suspect that with your patch as is, the environment is still full of scripts?
 > 
-> Depends on what you mean?  Did you mean an option to run scripts
-> (exists) or an option to do what TI needs done, via
-> boot/bootmeth_something.c ?  If the latter, someone from TI needs to
-> figure out what that should be and do (but plumbing-wise everything it
-> needs should exist).
+> There's a lot of TI platforms, so I'm not sure what "#if" you're
+> thinking of might make it cleaner?  We could / should move some of the
+> still relevant content and comments from that file to
+> include/env/ti/ti_armv7_common.env as I do think some of the K3
+> platforms could just drop <configs/ti_armv7_common.h> at this point.
 
-Andrew is generalizing here (on the wrong patch though).
+Is'nt the header distro_bootcmd.h and related stuff under #ifdef
+CONFIG_DISTRO_DEFAULTS already?
 
-On am62x platforms, there is nothing regressing with this series. The
-challenge is early remote_proc loading which is done for J7* platforms.
-
-How that is initiated as part of bootmethods is something of a gap.
-
-The other gap has been support for uEnv.txt -> which we can workaround
-at the moment by using CONFIG_BOOTCOMMAND="run envboot; bootflow scan
--lb" in defconfig (This series from Roger already does that - hence I am
-saying that Andrew is complaining on the wrong series).
-
-Ideally, we should just have CONFIG_BOOTCOMMAND="bootflow scan -lb" and
-uEnv.txt remoteproc loads and the various standard bootmethods should
-"just work".
-
+So, all we are picking up in effect is really CFG_SYS_SDRAM_BASE - which
+is consistent across platforms.
 -- 
 Regards,
 Nishanth Menon
