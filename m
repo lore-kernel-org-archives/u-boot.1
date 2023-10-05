@@ -4,89 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A79E92705
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 14:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3863E92708
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 15:02:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE4E386ED4;
-	Thu,  5 Oct 2023 16:54:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2824B86D05;
+	Thu,  5 Oct 2023 17:02:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h3gMIZM9";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QYj3IlxQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A17686EDF; Thu,  5 Oct 2023 16:54:04 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id F03C386D0A; Thu,  5 Oct 2023 17:02:03 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5982C86EDE
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 16:53:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6500D86CF7
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 17:01:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5a2379a8b69so12043497b3.2
- for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 07:53:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-9a9f139cd94so186252166b.2
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 08:01:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696517633; x=1697122433; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VjbYhOAt/YNDDaDTXsrimMZRlXkFQEwpct9VUjGHujg=;
- b=h3gMIZM99f7p0nkzAgJrBFRDRaJNXLDBLb+4gxx+npKpUZPuO1HeNdR/97KQrN49dh
- I6f4uK4SdMLKXqnju1nrRsTY4idE2M93S9IV5ayAELS4gq4CUAImhJC363y378YHVsNd
- KS3O1sNf/x5rfJGwQifSR4zVCM4dXeItjgHhQ=
+ d=chromium.org; s=google; t=1696518116; x=1697122916; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=TzOGvmVycVU/YlTKc2iM7DeYnHJIDhHG9U9pm+Wksrk=;
+ b=QYj3IlxQc6jktu5R4gEuYEvTynKfFVk9qVLg6CwBUVn4eXsuOeZ8fp2nDFbMzLdNJa
+ hAgwI4JtoiO/Ot5zcfQiPkdM2LoKo2eTCmnC+jFFC7KAuncKS/ctPzECdv+Qx4JqE59+
+ DdvPTNB5X/nDDuuQkl8KdhbvjR0QxpbWTjAao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696517633; x=1697122433;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VjbYhOAt/YNDDaDTXsrimMZRlXkFQEwpct9VUjGHujg=;
- b=T71cJdlqilsXDm5cMi23/4f8ZzRtsvO+Xx9vDPNptcSWC4wTf8WZztDLR7whW8kR+m
- dwFNzkv85+qTh+07yQjtbnzGPlb1Q6hnjk4hohDKD6VWDzwRDmI9VK8kgxmMEjXLpnOn
- n4Nve5vlOPXs/94EU1slBzbkkmmsQtvaWNCmgaJSxJbfngoaAFpdV0/RxocbZLUk5eTw
- oos9VMqBbqt02Y4iFrk6On7HeS4oRw7SJLK7xxxzK7KNy4YInSP8f2CpP3pnYJ7xmUUz
- gfWlDXWLKh2/ORT6tr5QKBSp7C7zgcz2NH66YytvQKpmMkbz/ylCOXDOo9Xr9SiqfNy6
- sxzA==
-X-Gm-Message-State: AOJu0Yw/WS9KTmUsa6jTHyxlJdLysAQOHHLvzCPkjQ2Pl8aYMfmHII+A
- pAfsz1nQ0OHLQr21fC4I9hZiCHwujeP6sv2mT2wpug==
-X-Google-Smtp-Source: AGHT+IFBNTskLVxrGPXwJ1A2gj9IqTb9yti0SIHa8xNrGTq9gDNpAUVO+0Wxp2vyipdEqldxD/pYMA==
-X-Received: by 2002:a81:6d48:0:b0:59f:4e6d:b56c with SMTP id
- i69-20020a816d48000000b0059f4e6db56cmr5652552ywc.22.1696517633135; 
- Thu, 05 Oct 2023 07:53:53 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-f1fa-53fc-3572-fce8.res6.spectrum.com.
- [2603:6081:7b00:6400:f1fa:53fc:3572:fce8])
- by smtp.gmail.com with ESMTPSA id
- r126-20020a0de884000000b005869f734036sm560996ywe.19.2023.10.05.07.53.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Oct 2023 07:53:52 -0700 (PDT)
-Date: Thu, 5 Oct 2023 10:53:50 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Fabio Estevam <festevam@gmail.com>, Leo <ycliang@andestech.com>,
- Michael Walle <michael@walle.cc>, Michal Suchanek <msuchanek@suse.de>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Rick Chen <rick@andestech.com>,
- Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 05/25] treewide: Correct use of long help
-Message-ID: <20231005145350.GQ8465@bill-the-cat>
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-6-sjg@chromium.org>
- <20230924232658.GM305624@bill-the-cat>
- <CAPnjgZ2-ORog-+Onh1McptpMDrzccVc+BfByCMjp93wLqAms6w@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1696518116; x=1697122916;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TzOGvmVycVU/YlTKc2iM7DeYnHJIDhHG9U9pm+Wksrk=;
+ b=b1GbGbje3BwCyCkF1vWSeHKksg6RTZrWiDtMUZ9XJYJX6D7FWzmdt89gTNjI2XM31/
+ mj3t0B5H55lMXCaqQWr1yYV+vNlAz4NzuSf+jC6+QZS5MAFhH9rcxKilU2c5CbYDnGGZ
+ ejl3wylaKvsk2kwdRro5fvn+48tjYTAbWneJDTShsMzwORFR7SuArWNJOsS0whSZD/cW
+ 3R64LtDoTxCS+VUJTczxz7uAsCl3VQ+MU3uPXztdyHU8xPrSK7YhBZbIbtaUAQp6IJ6O
+ w6zKS4bsMRE1Q6Y293KijOs9ONrQrFmN2PIbl3rK5a/B1Nq7AcOH2+JqR86igzGccVT3
+ eZBw==
+X-Gm-Message-State: AOJu0Yw6Vlp+w9p4/pF7moCQeOJflsMQZyaCc5OdAcq4m+OC3SGjfLnz
+ iSdRGBF2E6FQFhdy8zdAsUtA5nuwXtu4YuXbLbjoiQ==
+X-Google-Smtp-Source: AGHT+IFZf/fyKP2XMxDE9eS8YnYwg91ErnSSWZKxbvpTTnIaamb8zSt4xZ1YY6LSItj+7RHnyKpIdaV1mCNbLS21LUQ=
+X-Received: by 2002:a17:907:75fb:b0:9b2:b2ad:2a8f with SMTP id
+ jz27-20020a17090775fb00b009b2b2ad2a8fmr4477166ejc.11.1696518115519; Thu, 05
+ Oct 2023 08:01:55 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3WAuJ+cuHDAcGqDL"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2-ORog-+Onh1McptpMDrzccVc+BfByCMjp93wLqAms6w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231005130642.21402-1-rogerq@kernel.org>
+ <20231005130642.21402-3-rogerq@kernel.org>
+In-Reply-To: <20231005130642.21402-3-rogerq@kernel.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 5 Oct 2023 09:01:42 -0600
+Message-ID: <CAPnjgZ0uMLFdqvpcDMKnXQDL-m1ecUB33gat4EZK7jm=UeEB4g@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] board: ti: am64x: Switch to standard boot flow
+To: Roger Quadros <rogerq@kernel.org>
+Cc: trini@konsulko.com, nm@ti.com, vigneshr@ti.com, m-chawdhry@ti.com, 
+ jonas@kwiboo.se, srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, 
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,75 +83,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Roger,
 
---3WAuJ+cuHDAcGqDL
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 5 Oct 2023 at 07:07, Roger Quadros <rogerq@kernel.org> wrote:
+>
+> Switch to using bootstd. Note with this change, we will stop using
+> distro_bootcmd and instead depend entirely on bootflow method of
+> starting the system up.
+>
+> Drop header files that are no longer needed in am64x_evm.h.
+> k3_dfu.h is available via k3_dfu.env in am64x.env.
+>
+> Drop unused macro CFG_SYS_SDRAM_BASE1.
+>
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+> ---
+>  board/ti/am64x/am64x.env        | 1 +
+>  configs/am64x_evm_a53_defconfig | 5 +++--
+>  include/configs/am64x_evm.h     | 9 ---------
+>  3 files changed, 4 insertions(+), 11 deletions(-)
+>
+> diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
+> index 68e42222b7..efd736b99b 100644
+> --- a/board/ti/am64x/am64x.env
+> +++ b/board/ti/am64x/am64x.env
+> @@ -15,6 +15,7 @@ console=ttyS2,115200n8
+>  args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000 ${mtdparts}
+>  run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
+>
+> +boot_targets=mmc1 mmc0 usb pxe dhcp
+>  boot=mmc
+>  mmcdev=1
+>  bootpart=1:2
+> diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+> index 718ad176cb..43bfcf957a 100644
+> --- a/configs/am64x_evm_a53_defconfig
+> +++ b/configs/am64x_evm_a53_defconfig
+> @@ -31,8 +31,9 @@ CONFIG_SPL_SPI=y
+>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>  CONFIG_SPL_LOAD_FIT=y
+>  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+> -CONFIG_DISTRO_DEFAULTS=y
+> -CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
+> +CONFIG_BOOTSTD_FULL=y
+> +CONFIG_BOOTSTD_DEFAULTS=y
+> +CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
+>  CONFIG_BOARD_LATE_INIT=y
+>  CONFIG_SPL_MAX_SIZE=0x180000
+>  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
+> index 062102a610..f9f8c7bc2f 100644
+> --- a/include/configs/am64x_evm.h
+> +++ b/include/configs/am64x_evm.h
+> @@ -9,15 +9,6 @@
+>  #ifndef __CONFIG_AM642_EVM_H
+>  #define __CONFIG_AM642_EVM_H
+>
+> -#include <linux/sizes.h>
+> -#include <config_distro_bootcmd.h>
+> -#include <env/ti/mmc.h>
+> -#include <asm/arch/am64_hardware.h>
+> -#include <env/ti/k3_dfu.h>
+> -
+> -/* DDR Configuration */
+> -#define CFG_SYS_SDRAM_BASE1            0x880000000
+> -
+>  /* Now for the remaining common defines */
+>  #include <configs/ti_armv7_common.h>
 
-On Wed, Oct 04, 2023 at 07:23:47PM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sun, 24 Sept 2023 at 17:27, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sun, Sep 24, 2023 at 02:39:23PM -0600, Simon Glass wrote:
-> > > Some commands assume that CONFIG_SYS_LONGHELP is always defined.
-> > > Declaration of long help should be bracketed by an #ifdef to avoid an
-> > > 'unused variable' warning.
-> > >
-> > > Fix this treewide.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > [snip]
-> > > diff --git a/arch/arm/mach-imx/cmd_dek.c b/arch/arm/mach-imx/cmd_dek.c
-> > > index 6fa5b41fcd38..25ea7d3b37da 100644
-> > > --- a/arch/arm/mach-imx/cmd_dek.c
-> > > +++ b/arch/arm/mach-imx/cmd_dek.c
-> > > @@ -393,11 +393,12 @@ static int do_dek_blob(struct cmd_tbl *cmdtp, i=
-nt flag, int argc,
-> > >       return blob_encap_dek(src_addr, dst_addr, len);
-> > >  }
-> > >
-> > > -/***************************************************/
-> > > +#if IS_ENABLED(CONFIG_SYS_LONGHELP)
-> > >  static char dek_blob_help_text[] =3D
-> > >       "src dst len            - Encapsulate and create blob of data\n"
-> > >       "                         $len bits long at address $src and\n"
-> > >       "                         store the result at address $dst.\n";
-> > > +#endif
-> > >
-> > >  U_BOOT_CMD(
-> > >       dek_blob, 4, 1, do_dek_blob,
-> >
-> > This really doesn't read nicely.  I would rather (globally and fix
-> > existing users) __maybe_unused this instead.  I think there's just one
-> > example today that isn't "foo_help_text".
->=20
-> Hmm, what do you think about adding a __longhelp symbol to cause the
-> linker to discard it when not needed?
+It looks like this file still includes distro_bootcmd and defines all
+the BOOT_TARGET things. Can they be dropped? Perhaps for now they
+could be put behind an #ifdef if other boards need them?
 
-Well, I don't think we need linker list magic when __maybe_unused will
-just have them be discarded normally.
+I suspect that with your patch as is, the environment is still full of scripts?
 
---=20
-Tom
+>
+> --
+> 2.34.1
+>
 
---3WAuJ+cuHDAcGqDL
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUezf4ACgkQFHw5/5Y0
-tyyfxAv/Rzerxchv9zt5z6QoVeWO1UcGiai3TTMp0/WCwHa9LiPp4ltbRbWggVdw
-Lx4t1JvUeClt0yk+5GRofoaxAvQm5Rah6NvA7Ima3b7wfvHDsSq/ir3G4Yb6EGmN
-uwMLeF5/POkaXyHssQK5dZtIEvKmOE+fPEstDQ3egLkEHfL+hswmrv+HmJKVVt3Q
-PzwgCCkEy06Gl58zGkSzXsibWLWYmAwQR8DgFqvidfs4fhoSvkYXiZKddZybI0Bd
-qsp+FbhOuyYyqMQzVqsgZxKygZoI2GBAryYhEhZPlNQAfnjwtsjkzzlWJJzQivmx
-OIQ/VKi3KI9dV2WYo/hgOZnbih27LtGwCcSpUTEtAp++G1LIPkiVaPwtgm40gWzq
-xNx7mx+DILiBhAyu73hrjOPKhH141pINTif2eldZOfIkHbzZTI6V28fgL/ZhRRyq
-lxSJOEespA3KH2C0RCW5L22v94QDORqg12VDjn+E7a/13QgKzy+x7zQ4LNg826O0
-XH58CCsm
-=gGR9
------END PGP SIGNATURE-----
-
---3WAuJ+cuHDAcGqDL--
+Regards,
+Simon
