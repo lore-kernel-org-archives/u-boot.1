@@ -4,74 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 824B5E92702
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 14:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DC2EE92706
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 14:29:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 416E086D05;
-	Thu,  5 Oct 2023 16:23:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CDAD86D04;
+	Thu,  5 Oct 2023 16:29:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HbFqL/iK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MxMK4qKV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6038986CF7; Thu,  5 Oct 2023 16:23:07 +0200 (CEST)
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
- [IPv6:2607:f8b0:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6AEA286D04; Thu,  5 Oct 2023 16:29:22 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CF0286CF3
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 16:23:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A15E86B67
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 16:29:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vicooodin@gmail.com
-Received: by mail-oi1-x229.google.com with SMTP id
- 5614622812f47-3af609c5736so629987b6e.3
- for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 07:23:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696515782; x=1697120582; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lYInJ3qeG3d63YXOWn5N68yHVVnZIa6Kx3zVyYQy/Zk=;
- b=HbFqL/iKh6kOe+IduW6/I2ho3fSj0boNdb0hEidxq7eXuoHLKJh4fxZnidhIiCJRPE
- FSCiiNz2wk9WJWTkMaImJLvlbOsO72/tp5fBCxLRiFggdjvpG+PiDAda69Huh9zj8aup
- NKU0V8l1mrh8Qr4KAhQNYxF4ye5jwa20x9rxKIUqvr3yAFG3DVVMR31moLUl/O/2jxNo
- 6pVoPhbbYdXqGj0/OFuRNrgBNC4kluhw6eVThnd8w/0Jxl9wQG5bMO6f6FxpLLxWG3D2
- gpOghO1mWqsXu/xcdB7a6+DNR08SyKOog0VBgSe7gGUQLanLC4LxWVkGKMEq4WbzvbL+
- r4dw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696515782; x=1697120582;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lYInJ3qeG3d63YXOWn5N68yHVVnZIa6Kx3zVyYQy/Zk=;
- b=bc23YFGXJQGvIielaSUf52PLnVcfGJvW1dCSTsUeYZ/7OywjrEPfv4J3OBBYJmNo6H
- 8DuH9U1xwT4GnNxdGqpuHHi1fG7s/R57kvEYhvak/FhjNPe7RCZsz1Z+CioeHfjfbXce
- H0VaXMEUzJZnIVauDUJHCoBEGIgNWbj84ApSNg5lMuab4Z54LQWPjuzTEsBXY5HGQCpr
- mDFmzx2LtzppOLSUkxjyACx86knBYVoGmIaD+q2+aRm9ETDHXptmrr72DNHBoBNpkKzZ
- dAkGqIi60LZnJz7R+4P2b4lbwmsy1DXM5p/ElEiyGZVVIewiE+IGgFqC4Ak9FvvrfxVf
- 3wHQ==
-X-Gm-Message-State: AOJu0YwZWR+kYbTPr5wgwFy3cCoIN2nTSTjtBlLyyQgiULQY+itk9yVY
- QjlGa/UtCY3vMSIh6q6Hxvye3TGmBGqCovkJS/PS5qUtyOT5BA==
-X-Google-Smtp-Source: AGHT+IFb6F+dD1NQ+JEb1ZvIOzFT7KDEIkT3dxZq73OiZebZph1WWp/JJx2LbKfAbi7EUWagBpo5nFVZIdKT3LbV/EQ=
-X-Received: by 2002:a25:a545:0:b0:d89:4357:a9fd with SMTP id
- h63-20020a25a545000000b00d894357a9fdmr4745611ybi.18.1696513228273; Thu, 05
- Oct 2023 06:40:28 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=reidt@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395E4RJb010026;
+ Thu, 5 Oct 2023 09:04:27 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696514667;
+ bh=lN5BbeAydTxTYpaHiFQQL0rNK+MQlIkRuMnXG3Og/XY=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=MxMK4qKVi9kYRYMeNhpH/sn8y6lBaUThe6qLTpr7LrvfRkbJ3R7TIfatHE1d2vu+H
+ lPMsSydAKa76k8HTSr9+5cTq3FrVfdv9qukxXASQnQmNTXWP7adh2Fr0Sdkx4/DFcJ
+ mkzYVfcrkMoYVNmVWSvkO7uXJpGA3bHULAnvoLR0=
+Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395E4RF5063133
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 5 Oct 2023 09:04:27 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
+ Oct 2023 09:04:26 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 5 Oct 2023 09:04:26 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395E4QtB017450;
+ Thu, 5 Oct 2023 09:04:26 -0500
+Date: Thu, 5 Oct 2023 09:04:26 -0500
+From: reidt <reidt@ti.com>
+To: Nishanth Menon <nm@ti.com>
+CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <n-francis@ti.com>,
+ <u-kumar1@ti.com>, <vigneshr@ti.com>, <m-chawdhry@ti.com>, <reidt@ti.com>
+Subject: Re: [PATCH v4 2/2] arm: dts: j7200: dts sync with Linux 6.6-rc1
+Message-ID: <20231005140426.44wnkiguqa2agb25@reidt-HP-Z2>
+References: <20231004165629.506664-1-reidt@ti.com>
+ <20231004165629.506664-3-reidt@ti.com>
+ <20231005113336.tysphzl4dvc65oks@litigate>
 MIME-Version: 1.0
-References: <20231003085805.2214260-1-andrii_chepurnyi@epam.com>
-In-Reply-To: <20231003085805.2214260-1-andrii_chepurnyi@epam.com>
-From: Nastya Vicodin <vicooodin@gmail.com>
-Date: Thu, 5 Oct 2023 15:40:17 +0200
-Message-ID: <CAFdZxxm4n26PNWUH1vSuuqe27vJ_=voBkLmkuhjwbcfpFE1YNQ@mail.gmail.com>
-Subject: Re: [PATCH v1 0/1] virtio-blk support for xen board
-To: Andrii Chepurnyi <Andrii_Chepurnyi@epam.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "leo.yan@linaro.org" <leo.yan@linaro.org>, 
- "andrii.chepurnyi82@gmail.com" <andrii.chepurnyi82@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231005113336.tysphzl4dvc65oks@litigate>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,32 +80,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reviewed-by <Anastasiia Lukianenko vicooodin@gmail.com>
+On 06:33-20231005, Nishanth Menon wrote:
+> On 11:56-20231004, Reid Tonking wrote:
+> > Sync j7200 dts with Linux 6.6-rc1
+> [..]
+> > diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > index e62f9218e8..9469dca39f 100644
+> > --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
+> > @@ -1,13 +1,14 @@
+> >  // SPDX-License-Identifier: GPL-2.0
+> >  /*
+> > - * Copyright (C) 2020 Texas Instruments Incorporated - https://www.ti.com/
+> > + * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
+> >   */
+> >  
+> >  /dts-v1/;
+> >  
+> > -#include "k3-j7200-som-p0.dtsi"
+> > +#include "k3-j7200-common-proc-board.dts"
+> >  #include "k3-j7200-ddr-evm-lp4-2666.dtsi"
+> >  #include "k3-j721e-ddr.dtsi"
+> > +#include "k3-j7200-common-proc-board-u-boot.dtsi"
+> >  
+> >  / {
+> >  	aliases {
+> > @@ -15,17 +16,6 @@
+> >  		remoteproc1 = &a72_0;
+> >  	};
+> >  
+> > -	chosen {
+> > -		stdout-path = &main_uart0;
+> > -		tick-timer = &timer1;
+> > -		firmware-loader = &fs_loader0;
+> > -	};
+> > -
+> > -	fs_loader0: fs_loader@0 {
+> > -		bootph-all;
+> > -		compatible = "u-boot,fs-loader";
+> > -	};
+> > -
+> >  	a72_0: a72@0 {
+> >  		compatible = "ti,am654-rproc";
+> >  		reg = <0x0 0x00a90000 0x0 0x10>;
+> > @@ -39,21 +29,17 @@
+> >  		ti,sci = <&dmsc>;
+> >  		ti,sci-proc-id = <32>;
+> >  		ti,sci-host-id = <10>;
+> > -		bootph-pre-ram;
+> > -	};
+> > -
+> > -	clk_200mhz: dummy_clock_200mhz {
+> > -		compatible = "fixed-clock";
+> > -		#clock-cells = <0>;
+> > -		clock-frequency = <200000000>;
+> > -		bootph-pre-ram;
+> > +		bootph-all;
+> 
+> Here and else where in the r5 file: why switch from pre-ram to bootph-all
+> ? dont we need these prior to ddr initialization?
+>
 
-On Tue, Oct 3, 2023 at 10:58=E2=80=AFAM Andrii Chepurnyi <Andrii_Chepurnyi@=
-epam.com>
-wrote:
+Due to the change in how booth-pre-ram works [0], bootph-pre-ram alone no
+longer works. U-boot docs Pre-Relocation Support section says some-ram
+can be used for u-boot prior to reloc, but not spl. So like Massimo
+mentioned in the linked discussion, some-ram + pre-ram can work, as well
+as -all. Outside of affecting the TPL phase, I'm not sure I know of a
+difference in regards to how it affects pre-ddr.
 
-> Hello.
->
-> This patch adds the ability to use virtio-blk in the guest domain
-> under Xen hypervisor. To do such you need to build U-boot
-> with xenguest_arm64_virtio_defconfig.
->
-> The patch was tested on a specific build for rcar-gen3 hardware,
-> with multiple Linux domains running under Xen and QEMU
-> as a block backend.
->
-> Andrii Chepurnyi (1):
->   board: xen: introduce virtio-blk support
->
->  board/xen/xenguest_arm64/xenguest_arm64.c | 108 +++++++++++++++++++++-
->  configs/xenguest_arm64_virtio_defconfig   |  63 +++++++++++++
->  doc/board/xen/xenguest_arm64.rst          |   2 +
->  include/configs/xenguest_arm64.h          |  10 +-
->  4 files changed, 180 insertions(+), 3 deletions(-)
->  create mode 100644 configs/xenguest_arm64_virtio_defconfig
->
-> --
-> 2.25.1
->
+
+[0]: https://lore.kernel.org/u-boot/CAPnjgZ3MgWX8T0A0SofphEr_Xd77pE3hte9DNye1RuBVeB9N8Q@mail.gmail.com/
+
+> [...]
+> 
+> -- 
+> Regards,
+> Nishanth Menon
+> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
