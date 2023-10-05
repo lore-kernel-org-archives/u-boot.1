@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69690E93709
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED71E9370C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:12:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D721A86C4D;
-	Thu,  5 Oct 2023 14:07:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6FF9986C43;
+	Thu,  5 Oct 2023 14:08:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ZJLv+r4b";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="sNPFHu+5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4E6C86EC9; Thu,  5 Oct 2023 10:55:08 +0200 (CEST)
+ id 1735B86B18; Thu,  5 Oct 2023 10:55:13 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6AC586EF3
+ by phobos.denx.de (Postfix) with ESMTPS id F18C287056
  for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 10:54:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 3679412000E;
- Thu,  5 Oct 2023 11:54:49 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 3679412000E
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 6EB5212000D;
+ Thu,  5 Oct 2023 11:54:51 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 6EB5212000D
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696496089;
- bh=S+eRtZO9DQrwhKtLcc7qZcUIx8g5fJ8c+M+628vRRCo=;
+ s=mail; t=1696496091;
+ bh=PAkrasm5+Fo1/+bC4ligWBrZq+1j4l1wgbERXnvEE7Y=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=ZJLv+r4boWO7lyCDTrKiRn7uuX2kqR1n0tonF2IBtbeF4o8GzG9NoeYDs1SbVT4PH
- boH2ddYMKGBm9FB1vw9FxZsaGEUN6iHusu/9Mi3q1vrdGll/eDLNpKuII9qqIEUm24
- 5n8anxY6qjYVH8AU3yDGC/R9WP/aw1E2vnNQ7ZkhZHkUl97jyIDPApiRzs4q0TQcug
- QSm+QzNtq+Ej0XMWrn9/q0pK3XcQm3Lwj0VWwj3X6gZFYwbuMx9hHxtvOCBnE4kGdp
- XU0PovCwwieCwLSYisQdhppTccdShLUzZQCawoPpkhfhaqtnngERvbrAKm6UB2rCl6
- YPEkLePpwn33A==
+ b=sNPFHu+5U/a5lb8d6+L6gVz/7Go5zSWuNiqfpOGSBQ+Hxynb27pyr5JfhtwoeHZYV
+ l+K2bCA4NMbxMUpLzRGp3TZGkkHOm5GJsbBw659mhiyfqjhw6NFmFDR0O1V3PBg4af
+ hh7dru/YyN4FYzQyzyJO4ASCtXDex7CU6nX5Xf9KOHkDSYwi/TJHu7rPj6ybUDDFDA
+ jzgr3UvGLX9NbXt6CTi6lR915x8YuBnjVZD77lkeUeyalNw0BZpJ7U416g+lhPApNp
+ M0sURHIw/QAWvm2K/qekQVLH4fSvShayml770Z3JNcYh6OsU5cpNptqRHyZWNNJoZR
+ ZM1Zqyy0ay9qA==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  5 Oct 2023 11:54:48 +0300 (MSK)
+ Thu,  5 Oct 2023 11:54:51 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Thu, 5 Oct 2023 11:54:48 +0300
+ 15.2.1118.30; Thu, 5 Oct 2023 11:54:50 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
  <lukma@denx.de>, <marex@denx.de>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v3 2/8] reset: add support for Amlogic A1 family
-Date: Thu, 5 Oct 2023 11:54:23 +0300
-Message-ID: <20231005085434.74755-3-avromanov@salutedevices.com>
+Subject: [PATCH v3 4/8] phy: move clk enable/disable in init/exit
+Date: Thu, 5 Oct 2023 11:54:25 +0300
+Message-ID: <20231005085434.74755-5-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20231005085434.74755-1-avromanov@salutedevices.com>
 References: <20231005085434.74755-1-avromanov@salutedevices.com>
@@ -76,15 +76,16 @@ X-KSMG-AntiSpam-Status: not_detected
 X-KSMG-AntiSpam-Method: none
 X-KSMG-AntiSpam-Auth: dkim=none
 X-KSMG-AntiSpam-Info: LuaCore: 535 535
- da804c0ea8918f802fc60e7a20ba49783d957ba2,
+ da804c0ea8918f802fc60e7a20ba49783d957ba2, {Tracking_uf_ne_domains},
  {Tracking_from_domain_doesnt_match_to},
  d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
  salutedevices.com:7.1.1; p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
+ lore.kernel.org:7.1.1;
  100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
 X-MS-Exchange-Organization-SCL: -1
 X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
+X-KSMG-AntiPhishing: Clean, bases: 2023/10/05 03:25:00
+X-KSMG-LinksScanning: Clean, bases: 2023/10/05 03:25:00
 X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
  bases: 2023/10/05 07:49:00 #22061642
 X-KSMG-AntiVirus-Status: Clean, skipped
@@ -105,102 +106,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds reset support for the Amlogic A1 family.
-We add the structure meson_reset_drvdata, which in the future
-will allow this driver to be used for other families by declaring
-only the correct parameters reg_count and level_offset.
+It is better to place clk_enable() in phy_meson_g12a_usb2_init()
+and clk_disable() in phy_meson_g12a_usb2_exit().
+
+For more detailed information, please see comments in the review of
+a similar driver in the Linux Kernel:
+
+https://lore.kernel.org/all/CAFBinCCEhobbyKHuKDWzTYCQWgNT1-e8=7hMhq1mvT6CuEOjGw@mail.gmail.com/
 
 Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/reset/reset-meson.c | 42 +++++++++++++++++++++++++++++++------
- 1 file changed, 36 insertions(+), 6 deletions(-)
+ drivers/phy/meson-g12a-usb2.c | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/reset/reset-meson.c b/drivers/reset/reset-meson.c
-index 64bc696f13..9d0c8b354f 100644
---- a/drivers/reset/reset-meson.c
-+++ b/drivers/reset/reset-meson.c
-@@ -13,18 +13,26 @@
- #include <reset-uclass.h>
- #include <regmap.h>
- #include <linux/bitops.h>
-+#include <linux/delay.h>
+diff --git a/drivers/phy/meson-g12a-usb2.c b/drivers/phy/meson-g12a-usb2.c
+index a803b6796c..2ea0498f86 100644
+--- a/drivers/phy/meson-g12a-usb2.c
++++ b/drivers/phy/meson-g12a-usb2.c
+@@ -161,6 +161,14 @@ static int phy_meson_g12a_usb2_init(struct phy *phy)
+ 	struct phy_meson_g12a_usb2_priv *priv = dev_get_priv(dev);
+ 	int ret;
  
--#define REG_COUNT	8
- #define BITS_PER_REG	32
--#define LEVEL_OFFSET	0x7c
++#if CONFIG_IS_ENABLED(CLK)
++	ret = clk_enable(&priv->clk);
++	if (ret && ret != -ENOSYS && ret != -ENOTSUPP) {
++		pr_err("failed to enable PHY clock\n");
++		return ret;
++	}
++#endif
 +
-+struct meson_reset_drvdata {
-+	unsigned int reg_count;
-+	unsigned int level_offset;
-+};
+ 	ret = reset_assert(&priv->reset);
+ 	udelay(1);
+ 	ret |= reset_deassert(&priv->reset);
+@@ -253,6 +261,10 @@ static int phy_meson_g12a_usb2_exit(struct phy *phy)
+ 	struct phy_meson_g12a_usb2_priv *priv = dev_get_priv(dev);
+ 	int ret;
  
- struct meson_reset_priv {
- 	struct regmap *regmap;
-+	struct meson_reset_drvdata *drvdata;
- };
- 
- static int meson_reset_request(struct reset_ctl *reset_ctl)
- {
--	if (reset_ctl->id > (REG_COUNT * BITS_PER_REG))
-+	struct meson_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-+	struct meson_reset_drvdata *data = priv->drvdata;
++#if CONFIG_IS_ENABLED(CLK)
++	clk_disable(&priv->clk);
++#endif
 +
-+	if (reset_ctl->id > (data->reg_count * BITS_PER_REG))
- 		return -EINVAL;
+ 	ret = reset_assert(&priv->reset);
+ 	if (ret)
+ 		return ret;
+@@ -290,13 +302,6 @@ int meson_g12a_usb2_phy_probe(struct udevice *dev)
+ 	ret = clk_get_by_index(dev, 0, &priv->clk);
+ 	if (ret < 0)
+ 		return ret;
+-
+-	ret = clk_enable(&priv->clk);
+-	if (ret && ret != -ENOSYS && ret != -ENOTSUPP) {
+-		pr_err("failed to enable PHY clock\n");
+-		clk_free(&priv->clk);
+-		return ret;
+-	}
+ #endif
  
  	return 0;
-@@ -33,9 +41,10 @@ static int meson_reset_request(struct reset_ctl *reset_ctl)
- static int meson_reset_level(struct reset_ctl *reset_ctl, bool assert)
- {
- 	struct meson_reset_priv *priv = dev_get_priv(reset_ctl->dev);
-+	struct meson_reset_drvdata *data = priv->drvdata;
- 	uint bank = reset_ctl->id / BITS_PER_REG;
- 	uint offset = reset_ctl->id % BITS_PER_REG;
--	uint reg_offset = LEVEL_OFFSET + (bank << 2);
-+	uint reg_offset = data->level_offset + (bank << 2);
- 	uint val;
- 
- 	regmap_read(priv->regmap, reg_offset, &val);
-@@ -64,15 +73,36 @@ struct reset_ops meson_reset_ops = {
- 	.rst_deassert = meson_reset_deassert,
- };
- 
-+static const struct meson_reset_drvdata meson_gxbb_data = {
-+	.reg_count = 8,
-+	.level_offset = 0x7c,
-+};
-+
-+static const struct meson_reset_drvdata meson_a1_data = {
-+	.reg_count = 3,
-+	.level_offset = 0x40,
-+};
-+
- static const struct udevice_id meson_reset_ids[] = {
--	{ .compatible = "amlogic,meson-gxbb-reset" },
--	{ .compatible = "amlogic,meson-axg-reset" },
-+	{
-+		.compatible = "amlogic,meson-gxbb-reset",
-+		.data = (ulong)&meson_gxbb_data,
-+	},
-+	{
-+		.compatible = "amlogic,meson-axg-reset",
-+		.data = (ulong)&meson_gxbb_data,
-+	},
-+	{
-+		.compatible = "amlogic,meson-a1-reset",
-+		.data = (ulong)&meson_a1_data,
-+	},
- 	{ }
- };
- 
- static int meson_reset_probe(struct udevice *dev)
- {
- 	struct meson_reset_priv *priv = dev_get_priv(dev);
-+	priv->drvdata = (struct meson_reset_drvdata *)dev_get_driver_data(dev);
- 
- 	return regmap_init_mem(dev_ofnode(dev), &priv->regmap);
- }
 -- 
 2.25.1
 
