@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD86E9370C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:33:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6033E9370C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:37:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A951386AE6;
-	Thu,  5 Oct 2023 14:33:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 5639386C7A;
+	Thu,  5 Oct 2023 14:37:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="18E952Qm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FYZvigbd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECE1286C6A; Thu,  5 Oct 2023 14:33:21 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id D245686C7A; Thu,  5 Oct 2023 14:37:54 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8253186AE6
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 14:33:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE39886CA1
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 14:37:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4056ce55e7eso7866695e9.2
- for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 05:33:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-405361bb94eso8772905e9.0
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 05:37:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1696509199; x=1697113999;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=onzvcJ1g6UZ8o5CzvZFjBum2BLB9jQgIETRP4zT71VM=;
- b=18E952QmTaFGSlIfmlbsIwF1IJDOjRoRnFojE5fEvudFc5Wd/lg9x09ttIt+LgKWvR
- azeYo4u2kpr2/MG7Ij4fldQ9VdL1Ig5GFeCPC37MuaGyxxAIrZIIgZvPNdcWEXEN1GOD
- 2Z1UrceXmQDNJsUy5/2Bi+nXBp34Ndm+kIB46x8Lhki+erC372U9OqUXjDQiGKjoXMi8
- 9GJ3jackrrfzuygAd72dJcCedyWMJOQFM+sI5lhj3UjzTiTqFLH28Q+36eqjGTpxVu/y
- pfDOU/ZH9qdMuOeDxi1lljaEz16gNVqYIc/P/4y5REXdJVqz07Lc0ASClhTqv7Nr0MXt
- q8LQ==
+ d=linaro.org; s=google; t=1696509469; x=1697114269; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5vILP50vAWqz1sGV49ycYMK1044oT2WQWquY6fd4VE8=;
+ b=FYZvigbdxpwzgQA2VtxtBsKJCxxR9m+3xQ6haap3NpChsAwX/VE9gtrL2WpipWN6oK
+ VLacVAhY6yruUNVc3h96H3gBD8Eh+m9gnaBEhHsf2fiErW1AKgKl9LgB8Bn8YknjnWn8
+ 2h3mmoYIWbnziOn4mYYfarwAVXaaW2qGaL2yAzWudr95evSm9VkUVdkHiRLJyPSOx7B5
+ vun1Ee2XHitKG4CjKePLYnJHXlZ1G+mCyHSjScWg7j0IuahyTeNHucH6Hvyre5rM1IEw
+ cRLrVyhXk/BgTYAvSWUrxsdiqHw/TIolXQB3dhsq6WKBkbSHy0Fi8D8IaSnDEoBuQ/gB
+ VjTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696509199; x=1697113999;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=onzvcJ1g6UZ8o5CzvZFjBum2BLB9jQgIETRP4zT71VM=;
- b=qGhWIeiWW41rtGLN709y+CbFBAYUt1KjfMg6voNCP+upozSxJtmnKw0jcYCVAX/jps
- mgihhmQWmyRfQQjZe9AdkDpkvRQBzCkim50SQgoQWGwF6oI0NLaTe/bxpl2Jlqg82NQO
- EbEs95b6Aw4/Lhnb7PhG1tojSmquX8BTRPwg6zrINv4dyRl7V9pkq97GJAu6eh67klEC
- 4Z+dYNccT6EMDU/cbIbvycXf9l6ejWG3PNwAYjwoT0e5GgnfEhGy36Xf0vfomeGTKfss
- j64LsYN943PM0HvAVrMjG5S9eAYwrSWdYZRWZjGGbL1byO9HIPSg7Ur4/7HD7vb0HFi/
- NjVA==
-X-Gm-Message-State: AOJu0YysfZ/QeMnOdG8mK12fbBTkQ6Iw5RLajWtiwNQsWxBrEDGXH+hC
- xOZIHmzubks//U0mU11tNk5f9Xet6kp0s6Egy+c=
-X-Google-Smtp-Source: AGHT+IGg2Abp7oHkWZnOItmrAxTZPwEuK/tl6tbi3ZpMig58/rt0/Tn7vL/VuIWyX/wyPdbrc0Gkmw==
-X-Received: by 2002:a05:600c:2298:b0:3fe:1af6:6542 with SMTP id
- 24-20020a05600c229800b003fe1af66542mr5283715wmf.33.1696509198947; 
- Thu, 05 Oct 2023 05:33:18 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- l17-20020a1ced11000000b0040588d85b3asm3672770wmh.15.2023.10.05.05.33.18
+ d=1e100.net; s=20230601; t=1696509469; x=1697114269;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5vILP50vAWqz1sGV49ycYMK1044oT2WQWquY6fd4VE8=;
+ b=OtRiyLudL0qAYkiwMsiYItWN3GrmSJNvutqmROApObu5JbVW22tjz4jsqfnLfGjt+Z
+ sztTMXPlWOOqPR+CKtuKpQS6M1D8K5X3ZcVC1K7jKv+eLQemX1yQPSmLC9qFUK9a6Lvk
+ iHWXnN28KelUCf3lNA2fAbbFIEkeZ71eCA4i1/zl+PTqUQi9lArxFYZw/oAh+8o5VhUR
+ VRNXfmpeg78b8ndTgYa8Oj6N04MDiZONZAOkQ0im8TNAShnW93aUdCH+qX+q/AolXMgU
+ RvVBzZg3YCOCYqRExPBDXH3yMkUECiEpl/W35jrEomzhfcaY0/bhlCQ00Z4NyhgrTYoi
+ R4RA==
+X-Gm-Message-State: AOJu0YyTgRcCAc34sUpwlbavgz2+DN1WxT3YmvDbuQorYR4Zvrmgvyou
+ AoM74h9RkfVP6TCKxoUX24DZ5A==
+X-Google-Smtp-Source: AGHT+IFDv2g//dYtCLGZQb933u9QwgB+63BxytZt4FWOu0hUe5MlJI/qiv64BbwHmIjOIZvdDWZy5Q==
+X-Received: by 2002:adf:e491:0:b0:320:b2a:4ea6 with SMTP id
+ i17-20020adfe491000000b003200b2a4ea6mr4435100wrm.9.1696509469268; 
+ Thu, 05 Oct 2023 05:37:49 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ by smtp.gmail.com with ESMTPSA id
+ k14-20020a056000004e00b003177074f830sm1715339wrx.59.2023.10.05.05.37.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Oct 2023 05:33:18 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Miquel Raynal <miquel.raynal@bootlin.com>, Marek Vasut <marex@denx.de>,
- Lukasz Majewski <lukma@denx.de>
-Cc: u-boot@lists.denx.de, Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: Re: [PATCH RESEND v2 2/2] usb: udc: Try to clarify an error message
-In-Reply-To: <20231002134621.94786-2-miquel.raynal@bootlin.com>
-References: <20231002134621.94786-1-miquel.raynal@bootlin.com>
- <20231002134621.94786-2-miquel.raynal@bootlin.com>
-Date: Thu, 05 Oct 2023 14:33:17 +0200
-Message-ID: <87pm1tb65u.fsf@baylibre.com>
+ Thu, 05 Oct 2023 05:37:48 -0700 (PDT)
+From: neil.armstrong@linaro.org
+To: sjg@google.com, lukma@denx.de, marex@denx.de,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>
+Cc: u-boot-amlogic@groups.io,
+	u-boot@lists.denx.de,
+	kernel@sberdevices.ru
+Subject: Re: [PATCH v3 0/8] Support USB for Meson A1
+Date: Thu,  5 Oct 2023 14:37:46 +0200
+Message-Id: <169650945649.3912260.17461050766538864431.b4-ty@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231005085434.74755-1-avromanov@salutedevices.com>
+References: <20231005085434.74755-1-avromanov@salutedevices.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,75 +96,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On lun., oct. 02, 2023 at 15:46, Miquel Raynal <miquel.raynal@bootlin.com> wrote:
+From: Neil Armstrong <neil.armstrong@linaro.org>
 
-> At some point when trying to use USB gadgets, two situations may arise
-> and lead to a failure. Either the UDC (USB Device Controller) is not
-> available at all (not described or not probed) or the UDC is already in
-> use. For instance, as the USB Ethernet gadget remains bound to the UDC,
-> the use of any other USB gadget (fastboot, dfu, etc) *after* will always
-> fail with the "couldn't find an available UDC" error.
->
-> Let's give a more helpful message by making a difference between the two
-> cases. Let's also hint people who would get this error and grep it into
-> the sources a better explanation of what's wrong with their workflow.
->
-> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+Hi,
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+On Thu, 5 Oct 2023 11:54:21 +0300, Alexey Romanov wrote:
+> This patchset adds USB stack support for Amlogic A1 SoC's
+> series. Made reset / phy / dwc3 drivers more flexible and
+> added support for A1 board.
+> 
+> V2:
+> 
+> - Made power domain for PHY optional.
+> - Add missing CLKID_USB_PHY gate.
+> - Drop patch with USB stack initialization in board-a1.c.
+> Instead of, enable CONFIG_DM_USB_GADGET for AD401 board.
+> - Support A1 in g12a_child_pre_probe/post_remove functions
+> in dwc3 driver.
+> 
+> [...]
 
-> ---
-> While doing this I really wanted to add "much more" error comments but I
-> faced another reality: often the messages are there but use
-> pr_err/log_err which is actually silenced by default with LOGLEVEL=3, so
-> I consider this unnecessary, as decreasing the loglevel will make these
-> messages appear. I would have expected errors to be displayed, but I
-> understand it makes the binaries even bigger.
->
-> Resend: no change.
->
-> Changes in v2:
-> * s/UDC/UDCs/. I kept the sentence as it was as the suggested form did
->   not sound well at all when there is only one UDC.
-> ---
->  drivers/usb/gadget/udc/udc-core.c | 13 ++++++++++++-
->  1 file changed, 12 insertions(+), 1 deletion(-)
->
-> diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
-> index 7f73926cb3e..8405b03462e 100644
-> --- a/drivers/usb/gadget/udc/udc-core.c
-> +++ b/drivers/usb/gadget/udc/udc-core.c
-> @@ -323,6 +323,7 @@ err1:
->  int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
->  {
->  	struct usb_udc		*udc = NULL;
-> +	unsigned int		udc_count = 0;
->  	int			ret;
->  
->  	if (!driver || !driver->bind || !driver->setup)
-> @@ -330,12 +331,22 @@ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
->  
->  	mutex_lock(&udc_lock);
->  	list_for_each_entry(udc, &udc_list, list) {
-> +		udc_count++;
-> +
->  		/* For now we take the first one */
->  		if (!udc->driver)
->  			goto found;
->  	}
->  
-> -	printf("couldn't find an available UDC\n");
-> +	if (!udc_count)
-> +		printf("No UDC available in the system\n");
-> +	else
-> +		/* When this happens, users should 'unbind <class> <index>'
-> +		 * using the output of 'dm tree' and looking at the line right
-> +		 * after the USB peripheral/device controller.
-> +		 */
-> +		printf("All UDCs in use (%d available), use the unbind command\n",
-> +		       udc_count);
->  	mutex_unlock(&udc_lock);
->  	return -ENODEV;
->  found:
-> -- 
-> 2.34.1
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
+
+[1/8] dt-bindings: reset: add Meson A1 reset bindings
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/fccbc810551a7e1c821ac23d5e8fd27c12ded1b2
+[2/8] reset: add support for Amlogic A1 family
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/29ad8b0401dc9a75a15077f2a38363659091580e
+[3/8] phy: get rid of raw hex values
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/11572764d44783870cc61ac2f0435bd555222ef6
+[4/8] phy: move clk enable/disable in init/exit
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/ac7f5b2f768d298fe84ab36d363853748ae23243
+[5/8] phy: support Amlogic A1 family
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/66defb628f658df97e426ab13dc620b9bf6277ab
+[6/8] a1: clk: Add missing USB_PHY_IN and USB_PHY gates
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/84b0d40f3adb03074a80a58e4e655b422bce40ce
+[7/8] dwc3: add support for Amlogic A1 family
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/8a4781ff2e51d5831b7d236a327c5fb13849b689
+[8/8] ad401: enable USB stack
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/686a98392fc1beaf544c8cf65f48b781a56a5148
+
+-- 
+Neil
