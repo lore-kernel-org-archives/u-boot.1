@@ -4,58 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128A6E92716
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 15:54:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C42E75451
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 16:18:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7504386BA4;
-	Thu,  5 Oct 2023 17:54:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id F136386BDB;
+	Thu,  5 Oct 2023 18:18:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="mP52AVoy";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA8D186BA4; Thu,  5 Oct 2023 17:54:47 +0200 (CEST)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::227])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D46F186B58
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 17:54:44 +0200 (CEST)
+ id 3207286C02; Thu,  5 Oct 2023 18:18:41 +0200 (CEST)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 5B97A8642D
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 18:18:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 191452000A;
- Thu,  5 Oct 2023 15:54:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1696521284;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=YiMaH6dSgja5LQes7JfC21C6shxIN3Mp41ogr4YvqVA=;
- b=mP52AVoyWCUmo28uKxYTkF5tYNQIx9SWGzRESxbB/LF6WWb+ZRamGD7gqCKFUDSriVzs6V
- rURf+Zupzs7/C0BVSyOaMvUO8HG2Ate3gU5VGu6xNXDrkhUsl/lMIvBlPok3d2+GTqy4Yw
- zl1vNVfHpwC1WSWQCu7TzV0o4vTAxmsxfVNm4Tumd9Gr1+sVZbMEQ1/WCPRKAMgraMa2OO
- e40JMt6/IhAOya0mPYalMer4GPkIsEk2QwnDbUC89bvjD0jIyZ9XowKpXLgbmYVdpMurFs
- CmQ+WeuqWHztDKZmqOLuVuyplWhi4dGItmMSmBqJ6FTU4B/Mdrn8p+gyYtDHAA==
-Date: Thu, 5 Oct 2023 17:54:43 +0200
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH RESEND v2 1/2] cmd: bind: Try to improve the (un)bind help
-Message-ID: <20231005175443.7d042e8b@xps-13>
-In-Reply-To: <b812e5e2-aa29-4802-99cc-72f2e83595de@denx.de>
-References: <20231002134621.94786-1-miquel.raynal@bootlin.com>
- <b812e5e2-aa29-4802-99cc-72f2e83595de@denx.de>
-Organization: Bootlin
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-IronPort-AV: E=Sophos;i="6.03,203,1694703600"; 
+ d="asc'?scan'208";a="178310431"
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 06 Oct 2023 01:18:35 +0900
+Received: from [10.226.92.48] (unknown [10.226.92.48])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 3FED7403186E;
+ Fri,  6 Oct 2023 01:18:32 +0900 (JST)
+Message-ID: <5d5f0da0-c0f1-670d-d43a-dd2618f226db@bp.renesas.com>
+Date: Thu, 5 Oct 2023 17:18:31 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-GND-Sasl: miquel.raynal@bootlin.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
+ <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
+ <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
+ <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------NicUVy0ptTM0LMH74etC0guc"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,60 +64,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------NicUVy0ptTM0LMH74etC0guc
+Content-Type: multipart/mixed; boundary="------------XyzPBryRJehF5iRaU0hPx0j6";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Message-ID: <5d5f0da0-c0f1-670d-d43a-dd2618f226db@bp.renesas.com>
+Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
+ <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
+ <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
+ <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
+In-Reply-To: <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
 
-marex@denx.de wrote on Thu, 5 Oct 2023 15:01:51 +0200:
+--------------XyzPBryRJehF5iRaU0hPx0j6
+Content-Type: multipart/mixed; boundary="------------baSKLaFR533aLVESZHdKrk6r"
 
-> On 10/2/23 15:46, Miquel Raynal wrote:
-> > While it may sound totally obvious for the regular U-Boot developer to
-> > get the parameters of the bind/unbind commands from the output of 'dm
-> > tree', it did not felt straightforward to me until I was explicitly
-> > told to look there. And even when I knew the command, I did not make a
-> > direct link between the arguments of this command and the columns
-> > returned by 'dm tree'.
-> >=20
-> > Several of us lost a lot of time because of that, I would like to kindly
-> > help other users by slightly improving this textual line. Unfortunately,
-> > because of how this string is used (like within the 'help' command) I
-> > cannot detail much more, but at least the pointer is there.
-> >=20
-> > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-> > ---
-> > Resend: no change.
-> >=20
-> > Changes in v2:
-> > * Moved the details in the long text section as suggested by Heinrich.
-> > * Rephrased the help text as well, not fully following Heinrich
-> >    suggestion, but taking inspiration from it.
-> > ---
-> >   cmd/bind.c | 4 ++++
-> >   1 file changed, 4 insertions(+)
-> >=20
-> > diff --git a/cmd/bind.c b/cmd/bind.c
-> > index 4d1b7885e60..be0d4d2a711 100644
-> > --- a/cmd/bind.c
-> > +++ b/cmd/bind.c
-> > @@ -246,6 +246,8 @@ U_BOOT_CMD(
-> >   	"Bind a device to a driver",
-> >   	"<node path> <driver>\n"
-> >   	"bind <class> <index> <driver>\n"
-> > +	"Use 'dm tree' to list all devices registered in the driver model,\n"
-> > +	"their path, class, index and current driver.\n"
-> >   ); =20
-> >   >   U_BOOT_CMD( =20
-> > @@ -254,4 +256,6 @@ U_BOOT_CMD(
-> >   	"<node path>\n"
-> >   	"unbind <class> <index>\n"
-> >   	"unbind <class> <index> <driver>\n"
-> > +	"Use 'dm tree' to list all devices registered in the driver model,\n"
-> > +	"their path, class, index and current driver.\n" =20
+--------------baSKLaFR533aLVESZHdKrk6r
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On 04/10/2023 13:26, Marek Vasut wrote:
+> On 10/4/23 10:48, Paul Barker wrote:
+>> On 03/10/2023 14:23, Marek Vasut wrote:
+>>> On 9/20/23 14:42, Paul Barker wrote:
+>>>> +	if (IS_ENABLED(CONFIG_RZG2L)) {
+>>>> +		struct reset_ctl rst;
+>>>> +		int ret;
+>>>> +
+>>>> +		ret =3D reset_get_by_index(dev, 0, &rst);
+>>>> +		if (ret < 0) {
+>>>> +			dev_err(dev, "failed to get reset line\n");
+>>>> +			return ret;
+>>>> +		}
+>>>> +
+>>>> +		ret =3D reset_deassert(&rst);
+>>>> +		if (ret < 0) {
+>>>> +			dev_err(dev, "failed to de-assert reset line\n");
+>>>> +			return ret;
+>>>> +		}
+>>>> +	}
+>>>
+>>> devm_reset_control_get_optional() or something should do here too , r=
+ight ?
+>>>
+>>> Note that R-Car does have SCIF reset too, so this can be generic code=
+=2E
+>>
+>> For R-Car systems the current behaviour is working and well tested, we=
+
+>> concluded that we shouldn't change it so this reset de-assert was made=
+
+>> RZ/G2L specific.
 >=20
-> 'dm tree' depends on CMD_DM , you might need some if (IS_ENABLED()) here.
+> I can test on R-Car just fine, no worries.
+>=20
+> SH R2Dplus is even tested in CI nightly.
+>=20
+>> For RZ/G2L, de-asserting the reset is not optional.
+>=20
+> Let's avoid special-cases like that.
 
-Well, no, and that's my point actually. People need to know that this
-command exist and should be used for this purpose. If you only tell
-them "use 'dm tree'" conditionally, you loose part of the audience:
-people not aware of this command or its usefulness.
+Looking at this again, I don't see how we can avoid a special case here,
+de-asserting the reset is required for the RZ/G2L. It may be optional on
+other SoCs (I don't know), but it's definitely not optional here, so I
+don't think we should be using the devm_reset_control_get_optional()
+function.
 
 Thanks,
-Miqu=C3=A8l
+Paul
+--------------baSKLaFR533aLVESZHdKrk6r
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------baSKLaFR533aLVESZHdKrk6r--
+
+--------------XyzPBryRJehF5iRaU0hPx0j6--
+
+--------------NicUVy0ptTM0LMH74etC0guc
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR7h1wUDAAAAAAAKCRDbaV4Vf/JGva/i
+AP48fOVGYXtyOGmB8cMo6wk0NFKxlckBAwzeOIKV2lg4cAEA46WTL/xJBPWIdWxepwAN/NcE9UUJ
++yPG4d5h6GKpxgA=
+=AKZm
+-----END PGP SIGNATURE-----
+
+--------------NicUVy0ptTM0LMH74etC0guc--
