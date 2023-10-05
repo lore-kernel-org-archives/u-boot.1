@@ -4,91 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17960E93709
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:13:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD711E93709
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 12:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A99C86C91;
-	Thu,  5 Oct 2023 14:08:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 6578386C69;
+	Thu,  5 Oct 2023 14:08:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="mZCuu91i";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G8omCfFb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C91EE86EE4; Thu,  5 Oct 2023 10:55:23 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3A62E86B33; Thu,  5 Oct 2023 12:22:30 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2D2587473
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 10:54:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id BF1D786B18
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 12:22:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id CEC6C12000C;
- Thu,  5 Oct 2023 11:54:57 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru CEC6C12000C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696496097;
- bh=iFWikqhv7WLzRZEjex0NBgDjWJ5qis63UG5DcwSp5gc=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=mZCuu91is2RavP7sZZDdUeEtO7UXniIF5HQWuPYqN1tG4kVmAY392vv7WKr2nZy6g
- uBZVI4IHjpa9l+bB1FynwoYaqKqa48x/LhT87YFTa/NZf6P5FP5S4VZL4Ppqpn2wcJ
- cK9Ku7w//gQqtME+aJxjnrRQitkXtTHW1mp1W487LyfI4ko4axbmurmsfuOgtUsAfR
- kI40rkFkOQyFxkLJLmgaeSWg3w1wBRdDIOhyqTslBFgrZDT2uR5XsdLa5t6kSglLqF
- 7Q4P26C5BaQ+r5UnbEoNOV1ikoGOSpOz4oyTqEaBx5M8TKypqP6eAkEOQH9ErxCRbA
- 8WjGS/n9NNWxQ==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu,  5 Oct 2023 11:54:57 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Thu, 5 Oct 2023 11:54:57 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>, <sjg@google.com>, 
- <lukma@denx.de>, <marex@denx.de>
-CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
- <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v3 8/8] ad401: enable USB stack
-Date: Thu, 5 Oct 2023 11:54:29 +0300
-Message-ID: <20231005085434.74755-9-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231005085434.74755-1-avromanov@salutedevices.com>
-References: <20231005085434.74755-1-avromanov@salutedevices.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=stacey.pellegrino@gmail.com
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-9ae75ece209so151065966b.3
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 03:22:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696501346; x=1697106146; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=LkOdyq7b+ugSHriCyY9KXxCgRbSuEJW9mHQTcn6Yidw=;
+ b=G8omCfFbRR/EeS3Cf28VjKcCpmZhvTjZoEsWbDbvHD26am5svuLenBlRO5OPeTEhIl
+ A+MoHEs6jLNdzAmx/SV/2VjW5mI1AdhMEbaEXE0F0czHljPKa3irAx+CJ6aVKtAlKrk3
+ fFPe/mR6oe7hG+9oErcVvsScGx17MCqe3sf3lLwoNrPvISMZloOnKP8GpFkNVqs2cJLu
+ E8Tvr7Aanx+vvHMZJ7SOe7dtDiO/H+shpypse3dxDsQTYSLUQnPkp/cNnozpaHmNOjKD
+ I+wN8yOqmKLItim9V+t+8O6Gr1enD0BgtwutqYAd3n9kOyYTHjPkcoudzbVzqk1o5axc
+ TPgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696501346; x=1697106146;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=LkOdyq7b+ugSHriCyY9KXxCgRbSuEJW9mHQTcn6Yidw=;
+ b=OT+JIFhvaYoXccoXM1T2WsKFxkbGxqUBIAb5Dt+KO4L0wfpIINCPw8eTrxDtCs0KD2
+ h/IQardHytTtbMsxC9MiNp1djMNh5vhw7+UL2M8ML3Df2Ja+xY8wlYWg/iZZ4Gx0GbP4
+ PQIJPR4aGG2aeKn0AdyJYtCYUlvAoh64PbThCJHGe6+YwwIrV8oAnQoo1BTUGk031kPE
+ itVrP39mriVt1WI8cCGyM+lELXoqOYlvonSau8KWUS98dxN+/W+umm/b6c0xHewShKCS
+ t7cdKdgeZb4gpi2CzzqQ7Flx4hsD+ytPNUjuAdYNYpqZtHNr9NtxUsA4fB9IX/t/g4qO
+ lueQ==
+X-Gm-Message-State: AOJu0YxjdH2lfLRpSa5ig8IMs092l3Xe4mstq3rOboeZ6FT5zPPSZ7iH
+ 5apsnmozGCnJTMPvP0ZTpT2HQ+1zxot2Xc/sDT0TttoEI7ZcUwAi
+X-Google-Smtp-Source: AGHT+IG13VoJXS0kC5I7J/m1f1BmI9EO6mzx6vWw/619RZxEVjsjevRg0QSQcq3jTETQlSCVEyrWSxJ6eLcS5f4RCP8=
+X-Received: by 2002:a17:906:8a71:b0:9ae:3d75:4c83 with SMTP id
+ hy17-20020a1709068a7100b009ae3d754c83mr3712661ejc.0.1696501345764; Thu, 05
+ Oct 2023 03:22:25 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 180369 [Oct 05 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 535 535
- da804c0ea8918f802fc60e7a20ba49783d957ba2,
- {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
- 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/10/05 07:49:00 #22061642
-X-KSMG-AntiVirus-Status: Clean, skipped
+From: Stacey Pellegrino <stacey.pellegrino@gmail.com>
+Date: Thu, 5 Oct 2023 11:22:14 +0100
+Message-ID: <CAKNxVbNWrLrX=rzb4RONo96AtM+G2NKs_2g28WohgCwVkFstSA@mail.gmail.com>
+Subject: ZFS support in custom u-boot build...
+To: u-boot@lists.denx.de
+Cc: zhao_steven@263.net, wanglimei@orange-pi.onaliyun.com
 X-Mailman-Approved-At: Thu, 05 Oct 2023 14:07:47 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,28 +83,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently we have all drivers for use USB stack on A1-series
-SoC's. Let's enable USB options for the Amlogic AD401 reference A1
-SoC board.
+To all those of concern,
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- configs/ad401_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+I am in need of help regarding building u-boot with ZFS support for the
+Orange Pi 5 Plus.
 
-diff --git a/configs/ad401_defconfig b/configs/ad401_defconfig
-index 31752cc7f5..b9aca3ab0d 100644
---- a/configs/ad401_defconfig
-+++ b/configs/ad401_defconfig
-@@ -51,4 +51,7 @@ CONFIG_DEBUG_UART_SKIP_INIT=y
- CONFIG_MESON_SERIAL=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_GADGET=y
- CONFIG_WDT=y
--- 
-2.25.1
+I have tried working out the following...
 
+https://github.com/u-boot/u-boot/blob/22ad69b7987eb4b10221330661db4427e40174fb/doc/README.zfs
+
+The URL link above specifies using the board specific config file, which
+for the Orange Pi 5 Plus is (so I believe)
+orangepi-build/userpatches/config-default.conf.
+I therefore edited this file in question with CONFIG_CMD_ZFS="yes" and
+uncommenting the line install_zfs="yes".
+
+However, it still does not allow me to boot with root ZFS on the NVMe SSD
+with the official Orange Pi Debian v12 (Bookwork) ARM image. ZFS does not
+seem to be referenced in the custom u-boot source code build output as
+well. I followed the build instructions located at the following URL link...
+
+http://www.orangepi.org/orangepiwiki/index.php/Orange_Pi_5_Plus#Compile_u-boot
+
+...but am I required to apply a patch to the u-boot source for ZFS support?
+If so, then that could be my problem. If a patch is required, then how
+would I go about applying this accordingly?
+
+Thank you in advance for help in this matter. Kindest regards, -Stacey
+Pellegrino
