@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE65EE92719
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 17:28:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 678D6E9271B
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 17:46:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 745FE86C8E;
-	Thu,  5 Oct 2023 19:28:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 8BD1386C3F;
+	Thu,  5 Oct 2023 19:46:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="d4CYLnq/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DKe9r6CY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1D3586C8E; Thu,  5 Oct 2023 19:28:45 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0674586C43; Thu,  5 Oct 2023 19:46:17 +0200 (CEST)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC53886B67
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 19:28:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCE3A86C39
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 19:46:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=nm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395HSZCE093849;
- Thu, 5 Oct 2023 12:28:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696526915;
- bh=xn/y/PJvbxlxurJa30VbIaK+B/wKFV1uReWH1QNmcno=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=d4CYLnq/9+BqFvR7xV8Akh13y6vduiKWoUsM/Zga7cPj5HqCH6OhY5Qurwa9CNJFq
- b/KQ9MSv+J3rwOakBOOTphj7Ui+EwQiOlZIBxoZGRynZunZjMKYtqSuN2vcS3J7eVx
- t+NJwWf0Brumx3i0n+J1b+zPwQnk0TowsnO9pT7c=
-Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395HSZrw024164
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 5 Oct 2023 12:28:35 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Oct 2023 12:28:35 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Oct 2023 12:28:34 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395HSYoN093184;
- Thu, 5 Oct 2023 12:28:34 -0500
-Date: Thu, 5 Oct 2023 12:28:34 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Tom Rini <trini@konsulko.com>, Roger Quadros <rogerq@kernel.org>,
- <vigneshr@ti.com>, <m-chawdhry@ti.com>, <sjg@chromium.org>,
- <jonas@kwiboo.se>, <srk@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
-Message-ID: <20231005172834.epqqt3oe74wn7hss@overbill>
-References: <20231004132324.44198-1-rogerq@kernel.org>
- <20231004132324.44198-2-rogerq@kernel.org>
- <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
- <20231004135436.ihofrxutzcdefica@audacious>
- <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
- <20231005163645.GS8465@bill-the-cat>
- <20231005171010.zvza7uqyn4mcgp5g@handsaw>
- <20231005171614.yiatmyczip2jnmf4@surround>
- <bfe21d76-344c-45fe-8bca-a5677c8db464@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-d8181087dc9so1410254276.3
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 10:46:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1696527971; x=1697132771; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=g52xfY8ZxzIimwkhNY7mMuL2L1PXp0wVeXL790zdlV0=;
+ b=DKe9r6CYjKuB7QS9qIXrvyLqlZ1ow2sVO2z2LJA37GbY8wMabG2KE/iEmtY6jbbLVD
+ swVV6LCNOZuzXUg9zNGQfHjP3Lm9MRWUUE8fdJOq5bKMA6seUvPUVw2VcbBfGfFpgReS
+ s+OPhT+nFwARwZee2AaOaXCEM8BvXq+/8DKNg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696527971; x=1697132771;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g52xfY8ZxzIimwkhNY7mMuL2L1PXp0wVeXL790zdlV0=;
+ b=qRH6fFEsmmF4f19w6ZHAuLHdhbMVxSTi2j8R3FhtYDugIK1uRisNkxu+jQuS6cBjKU
+ 3WVC1kw5LbIPcOo8YQaYdzvSjjoWlTOxl+QklWGH/HDP+oSf6yig0jE7b38gJwRxaymq
+ kvMV5wA09fkfemYVIIebYXinvdTSVD7kjvnQxgIu7oJOZ/gkudXtr9p5RQnvnx3roOg6
+ va/5lLKKxoatdgi2JT6pRv4q7x5rbDcGKsWNo941tEmqqZs8uwpyX6oZ2gmzPZIYYkt4
+ Oxttqun6jip3uzZq/rjL8qsF5giiOJXK6rMW/HWwlAUN4/7eufmC1ItcJALc02AB0kKI
+ 9PYw==
+X-Gm-Message-State: AOJu0YyFlMSUoAErYnZ2lHZnFI3kRNzckVBdjJIXd1dlcOIdtAifoIvv
+ iApMX8hkOn6d3OSOvoKdEBATPWmTTl4V9VM3gWT5OA==
+X-Google-Smtp-Source: AGHT+IFyNXhkGHULo6hHNWO//DEiuX2UqDk7vwX6dmFkKwlKJKgTvtCZm9nQNBDdJObJvC7qlhOw4w==
+X-Received: by 2002:a25:f80b:0:b0:d74:6c43:f327 with SMTP id
+ u11-20020a25f80b000000b00d746c43f327mr6180865ybd.10.1696527970649; 
+ Thu, 05 Oct 2023 10:46:10 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-f1fa-53fc-3572-fce8.res6.spectrum.com.
+ [2603:6081:7b00:6400:f1fa:53fc:3572:fce8])
+ by smtp.gmail.com with ESMTPSA id
+ f131-20020a255189000000b00d72176bdc5csm523583ybb.40.2023.10.05.10.46.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Oct 2023 10:46:10 -0700 (PDT)
+Date: Thu, 5 Oct 2023 13:46:08 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [PULL] u-boot-riscv/master
+Message-ID: <20231005174608.GU8465@bill-the-cat>
+References: <ZR5vj5SgDa3RbDV5@swlinux02>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="HevFzp8yV/wNu816"
 Content-Disposition: inline
-In-Reply-To: <bfe21d76-344c-45fe-8bca-a5677c8db464@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <ZR5vj5SgDa3RbDV5@swlinux02>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,74 +91,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 12:22-20231005, Andrew Davis wrote:
-> On 10/5/23 12:16 PM, Nishanth Menon wrote:
-> > On 12:10-20231005, Nishanth Menon wrote:
-> > > On 12:36-20231005, Tom Rini wrote:
-> > > > On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
-> > > > > On 10/4/23 8:54 AM, Nishanth Menon wrote:
-> > > > > > On 08:48-20231004, Andrew Davis wrote:
-> > > > > > > On 10/4/23 8:23 AM, Roger Quadros wrote:
-> > > > > > > > ti_mmc is not a valid boot_target for standard boot flow so
-> > > > > > > 
-> > > > > > > Is there some way to make it into a valid boot_target? Otherwise
-> > > > > > > how do we use uEnv.txt files, or boot from FIT images with overlays?
-> > > > > > 
-> > > > > > envboot takes care of uEnv.txt file (see
-> > > > > > https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
-> > > > > > 
-> > > > > > Early remote proc loading and FIT image is a question for stdboot itself.
-> > > > > > 
-> > > > > 
-> > > > > If stdboot is missing these features then we shouldn't switch until it
-> > > > > has them. I'm all for switching to this, but only if it is complete.
-> > > > 
-> > > > Depends on what you mean?  Did you mean an option to run scripts
-> > > > (exists) or an option to do what TI needs done, via
-> > > > boot/bootmeth_something.c ?  If the latter, someone from TI needs to
-> > > > figure out what that should be and do (but plumbing-wise everything it
-> > > > needs should exist).
-> > > 
-> > > Andrew is generalizing here (on the wrong patch though).
-> > > 
-> > > On am62x platforms, there is nothing regressing with this series. The
-> > > challenge is early remote_proc loading which is done for J7* platforms.
-> > > 
-> > > How that is initiated as part of bootmethods is something of a gap.
-> > > 
-> > > The other gap has been support for uEnv.txt -> which we can workaround
-> > > at the moment by using CONFIG_BOOTCOMMAND="run envboot; bootflow scan
-> > > -lb" in defconfig (This series from Roger already does that - hence I am
-> > > saying that Andrew is complaining on the wrong series).
-> > > 
-> > > Ideally, we should just have CONFIG_BOOTCOMMAND="bootflow scan -lb" and
-> > > uEnv.txt remoteproc loads and the various standard bootmethods should
-> > > "just work".
-> > 
-> > 
-> > I forgot to add: FIT image authenticated boot flow. That is really what
-> > ti_mmc distroboot method was trying to solve.
-> > 
-> 
-> Right, FIT (and remote proc loading) are handled in ti_mmc, and this
-> is the patch removing that (so I do believe I am complaining on the right
-> patch here). I know that needs removed before we switch to stdboot, but
-> we cant remove it until someone has the the alternative in place.
-> 
-> Simply dropping it and hoping someone else comes along later and re-adds
-> the features isn't a good idea. Even if, as said above, the plumbing we
-> need should already exist, it needs done first.
 
-As simon stated:
-https://lore.kernel.org/all/CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com/
-FIT is already supported.
+--HevFzp8yV/wNu816
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-remoteproc support was not yet added for am62.. so there is no real
-regression, that said, even then, it can still be handled by envboot
-till we solve that aspect. There is no real reason to hold back stdboot
-as the standardization is very valuable at this point.
+On Thu, Oct 05, 2023 at 04:10:55PM +0800, Leo Liang wrote:
 
--- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+> Hi Tom,
+>=20
+> The following changes since commit 65b9b3462bec2966911658836983819ab4e482=
+3e:
+>=20
+>   Merge branch 'next_pinctrl_sync' of https://source.denx.de/u-boot/custo=
+dians/u-boot-sh (2023-10-02 15:19:02 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
+>=20
+> for you to fetch changes up to 7cfdacbe8020292845bd5eba63b576b8586c433c:
+>=20
+>   configs: sifive: enable poweroff command on Unmatched (2023-10-04 18:23=
+:59 +0800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/18005
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--HevFzp8yV/wNu816
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUe9lkACgkQFHw5/5Y0
+tyzFBwv/Qglq6AFvjykuCqmkMPHYoQzYY2Odmum+6Wlh0qtwe7ZdB2DBp8thX3oP
+31iIKg/WqF946k714K4Yt0hnBQRceV2Rrr4JhXYLcMFuBnD0UriPtoEvlObpMYJN
+hYx3y6d7bLUWh8MMkGUhFRgqUXEO8W1enLf89fVjkcE1w7p+j+9xPWQIGQz2+eM4
+fKzEjZuE02Hsw76OLmR9jYjruyZpPIY4U+BrQYzP4GngTsw6r7XRsnmx1I2hshOM
+/pvUntt0GNRnMOGdhMGxVrHGhplr1HJnJdEaDY0sjrUSbuS8Q8DEEO30JzNt15Aw
+03anSbpLQ5ucvwhXnFn8T+XV9KjzQZ9m5vPFtQe1Tde5E/7jgAP+cY8G2uqIL04k
+CnKAfUiAi9gvXZMj1sQFz6UYh1nCXNXaxL7mLzGOe1WWMA1I2WIf/TMVaM5kuKSc
+Seqi2X1YCI8SRDCvzw5SKr7fc5wLiOmndA6XrLyylLrTtSH8JlwApL1/j7TmmLdS
+K3iFNVFn
+=jCkZ
+-----END PGP SIGNATURE-----
+
+--HevFzp8yV/wNu816--
