@@ -4,50 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C42E75451
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 16:18:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AAADE71D4F
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 16:27:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F136386BDB;
-	Thu,  5 Oct 2023 18:18:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 45B7D86BDB;
+	Thu,  5 Oct 2023 18:27:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 3207286C02; Thu,  5 Oct 2023 18:18:41 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 5B97A8642D
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 18:18:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,203,1694703600"; 
- d="asc'?scan'208";a="178310431"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 06 Oct 2023 01:18:35 +0900
-Received: from [10.226.92.48] (unknown [10.226.92.48])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 3FED7403186E;
- Fri,  6 Oct 2023 01:18:32 +0900 (JST)
-Message-ID: <5d5f0da0-c0f1-670d-d43a-dd2618f226db@bp.renesas.com>
-Date: Thu, 5 Oct 2023 17:18:31 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fZ/u0Mhu";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3BA3486BDD; Thu,  5 Oct 2023 18:27:44 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E6EB086BD6
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 18:27:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-59f7f2b1036so13836757b3.3
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 09:27:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1696523260; x=1697128060; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=szgNXrX5jWF5ONmXQb2jfTHXvf0BboxuUeH4gn48ctA=;
+ b=fZ/u0Mhu2Tux6DiIfUnvV5D4xLxmdBE42+bX/kS/LQWJHjEKXHcbMjmBp1yvyXhLyg
+ /Czd+TPfGH8JtktThngmw2+5rD2CqGUhEivTt8YUahYq0EryxDzO89LlKQYFodYnOpLR
+ 5T9EaSy0SE4RQzJY7rwhqtAaTBzlbfjVtLNMU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696523260; x=1697128060;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=szgNXrX5jWF5ONmXQb2jfTHXvf0BboxuUeH4gn48ctA=;
+ b=UcKZ5qU4IKXdQ9j7/+9OjHeV4PXDybJkQ7/KmujBOHi42S3z/EaaIS0dxwi/2hic/k
+ XjUbDpbYNpmjcfCL+8pJX6CkqvGpVkiDw/j6SsgbioOyTgKXDxpVTkmO64O7aI89GKh+
+ HqI2H7BBHuqFPqjET+YH+xdy/9BxA5oRehknpOQvqfBx5WHyLfgmeUsWeGnucmZI5aHF
+ JkU4szkCoxKEIIcKoY9QZNJKHGpt+auy3uuH9djIghl9/pKYLmXr0PL2GKclKhuzEzcF
+ s4NtmkgFlhIdWSmjsmHab/HCbgaRfn5M2cy/97wiSW8jTJ3AjMxsTve4T9Iub/BsslfZ
+ D7vw==
+X-Gm-Message-State: AOJu0Yxt0WZbvbzFca9x1peO/zfn3mt8nZG87xgezgdQQ/bVbE2ITbg8
+ BwIATr/mKCWOdkswph+8N+ezKhyf1BMHvryxzb/ZOA==
+X-Google-Smtp-Source: AGHT+IELEs29+IgQFdzdwsB0dN9bILSUgvBqNRXDUIoJ51p4pTq1+asXVfGsXUfBnKopC7oPZnBwnQ==
+X-Received: by 2002:a81:b402:0:b0:59b:eab8:7ac6 with SMTP id
+ h2-20020a81b402000000b0059beab87ac6mr5381928ywi.42.1696523260360; 
+ Thu, 05 Oct 2023 09:27:40 -0700 (PDT)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-f1fa-53fc-3572-fce8.res6.spectrum.com.
+ [2603:6081:7b00:6400:f1fa:53fc:3572:fce8])
+ by smtp.gmail.com with ESMTPSA id
+ m131-20020a817189000000b005950e1bbf11sm609289ywc.60.2023.10.05.09.27.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Oct 2023 09:27:39 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH] sphinx: Bump urllib3 version
+Date: Thu,  5 Oct 2023 12:27:38 -0400
+Message-Id: <20231005162738.3327197-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
-To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
- <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
- <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
- <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------NicUVy0ptTM0LMH74etC0guc"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,159 +87,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------NicUVy0ptTM0LMH74etC0guc
-Content-Type: multipart/mixed; boundary="------------XyzPBryRJehF5iRaU0hPx0j6";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>, u-boot@lists.denx.de,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Message-ID: <5d5f0da0-c0f1-670d-d43a-dd2618f226db@bp.renesas.com>
-Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
-References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
- <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
- <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
- <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
-In-Reply-To: <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
+While not a direct issue for us, urllib3 before 1.26.17 is vulnerable to
+CVE-2023-43804 to bump our version up.
 
---------------XyzPBryRJehF5iRaU0hPx0j6
-Content-Type: multipart/mixed; boundary="------------baSKLaFR533aLVESZHdKrk6r"
+Reported-by: GitHub dependabot
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+---
+ doc/sphinx/requirements.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---------------baSKLaFR533aLVESZHdKrk6r
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+diff --git a/doc/sphinx/requirements.txt b/doc/sphinx/requirements.txt
+index 6ccbe527ee79..23a296d3fca9 100644
+--- a/doc/sphinx/requirements.txt
++++ b/doc/sphinx/requirements.txt
+@@ -23,4 +23,4 @@ sphinxcontrib-htmlhelp==2.0.0
+ sphinxcontrib-jsmath==1.0.1
+ sphinxcontrib-qthelp==1.0.3
+ sphinxcontrib-serializinghtml==1.1.5
+-urllib3==1.26.9
++urllib3==1.26.17
+-- 
+2.34.1
 
-On 04/10/2023 13:26, Marek Vasut wrote:
-> On 10/4/23 10:48, Paul Barker wrote:
->> On 03/10/2023 14:23, Marek Vasut wrote:
->>> On 9/20/23 14:42, Paul Barker wrote:
->>>> +	if (IS_ENABLED(CONFIG_RZG2L)) {
->>>> +		struct reset_ctl rst;
->>>> +		int ret;
->>>> +
->>>> +		ret =3D reset_get_by_index(dev, 0, &rst);
->>>> +		if (ret < 0) {
->>>> +			dev_err(dev, "failed to get reset line\n");
->>>> +			return ret;
->>>> +		}
->>>> +
->>>> +		ret =3D reset_deassert(&rst);
->>>> +		if (ret < 0) {
->>>> +			dev_err(dev, "failed to de-assert reset line\n");
->>>> +			return ret;
->>>> +		}
->>>> +	}
->>>
->>> devm_reset_control_get_optional() or something should do here too , r=
-ight ?
->>>
->>> Note that R-Car does have SCIF reset too, so this can be generic code=
-=2E
->>
->> For R-Car systems the current behaviour is working and well tested, we=
-
->> concluded that we shouldn't change it so this reset de-assert was made=
-
->> RZ/G2L specific.
->=20
-> I can test on R-Car just fine, no worries.
->=20
-> SH R2Dplus is even tested in CI nightly.
->=20
->> For RZ/G2L, de-asserting the reset is not optional.
->=20
-> Let's avoid special-cases like that.
-
-Looking at this again, I don't see how we can avoid a special case here,
-de-asserting the reset is required for the RZ/G2L. It may be optional on
-other SoCs (I don't know), but it's definitely not optional here, so I
-don't think we should be using the devm_reset_control_get_optional()
-function.
-
-Thanks,
-Paul
---------------baSKLaFR533aLVESZHdKrk6r
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------baSKLaFR533aLVESZHdKrk6r--
-
---------------XyzPBryRJehF5iRaU0hPx0j6--
-
---------------NicUVy0ptTM0LMH74etC0guc
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZR7h1wUDAAAAAAAKCRDbaV4Vf/JGva/i
-AP48fOVGYXtyOGmB8cMo6wk0NFKxlckBAwzeOIKV2lg4cAEA46WTL/xJBPWIdWxepwAN/NcE9UUJ
-+yPG4d5h6GKpxgA=
-=AKZm
------END PGP SIGNATURE-----
-
---------------NicUVy0ptTM0LMH74etC0guc--
