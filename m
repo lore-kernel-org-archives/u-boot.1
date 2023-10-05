@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72829E9270D
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 15:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128A6E92716
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 15:54:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0EBB86B67;
-	Thu,  5 Oct 2023 17:52:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7504386BA4;
+	Thu,  5 Oct 2023 17:54:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="XWWjSUrb";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="mP52AVoy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3A7786B58; Thu,  5 Oct 2023 17:52:03 +0200 (CEST)
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
- [217.70.183.196])
+ id CA8D186BA4; Thu,  5 Oct 2023 17:54:47 +0200 (CEST)
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E082886B55
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 17:51:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D46F186B58
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 17:54:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 19210E0013;
- Thu,  5 Oct 2023 15:51:58 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 191452000A;
+ Thu,  5 Oct 2023 15:54:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1696521119;
+ t=1696521284;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=QrBEQ42FqeZUiJZ7t4J08w3rbwYJ8aVSvXQ1XX0hwI8=;
- b=XWWjSUrb5yd4ZlYB2oW8Zkws/pFxXS/GS9oKS+U/Z7BJSyHotGhkmBj34TKTANDcDSEXjK
- 6P375i+w25M62Y96ni4H0pAQ4f3gID8d7OyNBJJKbY49sM62VkXS8pSjIvgdEg6Tw/B36f
- S69zhJ94wcqsI5wo/JM/mNSdCNta1tQZUhZOjLLnhoWwYz7ONQlofs+4HJpJFvpz1J/mkQ
- pFCa188uwv14YvUB1JYhR9dPp3vwfNbx/zGDT+p4waJy71jv/YQ79JanFtRkrcQTVGdRz/
- QgQ/MbE2eWPWiLCZtw6skzC27HOQTw25ZHs2AtZG49TpT+xGCtmmvln4Q571Yg==
-Date: Thu, 5 Oct 2023 17:51:58 +0200
+ bh=YiMaH6dSgja5LQes7JfC21C6shxIN3Mp41ogr4YvqVA=;
+ b=mP52AVoyWCUmo28uKxYTkF5tYNQIx9SWGzRESxbB/LF6WWb+ZRamGD7gqCKFUDSriVzs6V
+ rURf+Zupzs7/C0BVSyOaMvUO8HG2Ate3gU5VGu6xNXDrkhUsl/lMIvBlPok3d2+GTqy4Yw
+ zl1vNVfHpwC1WSWQCu7TzV0o4vTAxmsxfVNm4Tumd9Gr1+sVZbMEQ1/WCPRKAMgraMa2OO
+ e40JMt6/IhAOya0mPYalMer4GPkIsEk2QwnDbUC89bvjD0jIyZ9XowKpXLgbmYVdpMurFs
+ CmQ+WeuqWHztDKZmqOLuVuyplWhi4dGItmMSmBqJ6FTU4B/Mdrn8p+gyYtDHAA==
+Date: Thu, 5 Oct 2023 17:54:43 +0200
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Marek Vasut <marex@denx.de>
 Cc: Lukasz Majewski <lukma@denx.de>, Mattijs Korpershoek
  <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH RESEND v2 2/2] usb: udc: Try to clarify an error message
-Message-ID: <20231005175158.58374ff0@xps-13>
-In-Reply-To: <7bdef74c-5756-45f2-80c5-63a9f5d68b03@denx.de>
+Subject: Re: [PATCH RESEND v2 1/2] cmd: bind: Try to improve the (un)bind help
+Message-ID: <20231005175443.7d042e8b@xps-13>
+In-Reply-To: <b812e5e2-aa29-4802-99cc-72f2e83595de@denx.de>
 References: <20231002134621.94786-1-miquel.raynal@bootlin.com>
- <20231002134621.94786-2-miquel.raynal@bootlin.com>
- <7bdef74c-5756-45f2-80c5-63a9f5d68b03@denx.de>
+ <b812e5e2-aa29-4802-99cc-72f2e83595de@denx.de>
 Organization: Bootlin
 X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
@@ -75,93 +74,58 @@ X-Virus-Status: Clean
 
 Hi Marek,
 
-marex@denx.de wrote on Thu, 5 Oct 2023 15:04:25 +0200:
+marex@denx.de wrote on Thu, 5 Oct 2023 15:01:51 +0200:
 
 > On 10/2/23 15:46, Miquel Raynal wrote:
-> > At some point when trying to use USB gadgets, two situations may arise
-> > and lead to a failure. Either the UDC (USB Device Controller) is not
-> > available at all (not described or not probed) or the UDC is already in
-> > use. For instance, as the USB Ethernet gadget remains bound to the UDC,
-> > the use of any other USB gadget (fastboot, dfu, etc) *after* will always
-> > fail with the "couldn't find an available UDC" error.
+> > While it may sound totally obvious for the regular U-Boot developer to
+> > get the parameters of the bind/unbind commands from the output of 'dm
+> > tree', it did not felt straightforward to me until I was explicitly
+> > told to look there. And even when I knew the command, I did not make a
+> > direct link between the arguments of this command and the columns
+> > returned by 'dm tree'.
 > >=20
-> > Let's give a more helpful message by making a difference between the two
-> > cases. Let's also hint people who would get this error and grep it into
-> > the sources a better explanation of what's wrong with their workflow.
+> > Several of us lost a lot of time because of that, I would like to kindly
+> > help other users by slightly improving this textual line. Unfortunately,
+> > because of how this string is used (like within the 'help' command) I
+> > cannot detail much more, but at least the pointer is there.
 > >=20
 > > Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
 > > ---
-> > While doing this I really wanted to add "much more" error comments but I
-> > faced another reality: often the messages are there but use
-> > pr_err/log_err which is actually silenced by default with LOGLEVEL=3D3,=
- so
-> > I consider this unnecessary, as decreasing the loglevel will make these
-> > messages appear. I would have expected errors to be displayed, but I
-> > understand it makes the binaries even bigger.
-> >=20
 > > Resend: no change.
 > >=20
 > > Changes in v2:
-> > * s/UDC/UDCs/. I kept the sentence as it was as the suggested form did
-> >    not sound well at all when there is only one UDC.
+> > * Moved the details in the long text section as suggested by Heinrich.
+> > * Rephrased the help text as well, not fully following Heinrich
+> >    suggestion, but taking inspiration from it.
 > > ---
-> >   drivers/usb/gadget/udc/udc-core.c | 13 ++++++++++++-
-> >   1 file changed, 12 insertions(+), 1 deletion(-)
+> >   cmd/bind.c | 4 ++++
+> >   1 file changed, 4 insertions(+)
 > >=20
-> > diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc=
-/udc-core.c
-> > index 7f73926cb3e..8405b03462e 100644
-> > --- a/drivers/usb/gadget/udc/udc-core.c
-> > +++ b/drivers/usb/gadget/udc/udc-core.c
-> > @@ -323,6 +323,7 @@ err1:
-> >   int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
-> >   {
-> >   	struct usb_udc		*udc =3D NULL;
-> > +	unsigned int		udc_count =3D 0;
-> >   	int			ret; =20
-> >   >   	if (!driver || !driver->bind || !driver->setup) =20
-> > @@ -330,12 +331,22 @@ int usb_gadget_probe_driver(struct usb_gadget_dri=
-ver *driver) =20
-> >   >   	mutex_lock(&udc_lock); =20
-> >   	list_for_each_entry(udc, &udc_list, list) {
-> > +		udc_count++;
-> > +
-> >   		/* For now we take the first one */
-> >   		if (!udc->driver)
-> >   			goto found;
-> >   	} =20
-> >   > -	printf("couldn't find an available UDC\n"); =20
-> > +	if (!udc_count)
-> > +		printf("No UDC available in the system\n");
-> > +	else
-> > +		/* When this happens, users should 'unbind <class> <index>'
-> > +		 * using the output of 'dm tree' and looking at the line right
-> > +		 * after the USB peripheral/device controller.
-> > +		 */
-> > +		printf("All UDCs in use (%d available), use the unbind command\n",
-> > +		       udc_count); =20
+> > diff --git a/cmd/bind.c b/cmd/bind.c
+> > index 4d1b7885e60..be0d4d2a711 100644
+> > --- a/cmd/bind.c
+> > +++ b/cmd/bind.c
+> > @@ -246,6 +246,8 @@ U_BOOT_CMD(
+> >   	"Bind a device to a driver",
+> >   	"<node path> <driver>\n"
+> >   	"bind <class> <index> <driver>\n"
+> > +	"Use 'dm tree' to list all devices registered in the driver model,\n"
+> > +	"their path, class, index and current driver.\n"
+> >   ); =20
+> >   >   U_BOOT_CMD( =20
+> > @@ -254,4 +256,6 @@ U_BOOT_CMD(
+> >   	"<node path>\n"
+> >   	"unbind <class> <index>\n"
+> >   	"unbind <class> <index> <driver>\n"
+> > +	"Use 'dm tree' to list all devices registered in the driver model,\n"
+> > +	"their path, class, index and current driver.\n" =20
 >=20
-> Users should really use 'bind' command in the first place, to avoid this =
-guesswork to which UDC (on systems with multiple UDCs) a gadget gets bound =
-to, and instead bind the gadget to specific UDC they want to bind it to. Th=
-is code should then be removed entirely.
+> 'dm tree' depends on CMD_DM , you might need some if (IS_ENABLED()) here.
 
-There are two cases when this can happen:
-* a single UDC (common) but a function already bound, there is no
-  guessing here
-* two (or more) UDC and there is some guessing
-
-Before your cleanup, drivers would get automatically unbound from the
-UDC to let the one being needed to bind. This is no longer the case,
-so there is a change in the CLI and I want to help people facing
-this new problem with a slightly more comprehensive message because
-people don't fully understand what USB is all about. We cannot
-ask all U-Boot USB users to be U-Boot experts and USB experts. This
-is just a little help.
-
-In an ideal world, we will have the possibility to create
-composite gadgets and all this can go away once it is well
-integrated, I guess?
+Well, no, and that's my point actually. People need to know that this
+command exist and should be used for this purpose. If you only tell
+them "use 'dm tree'" conditionally, you loose part of the audience:
+people not aware of this command or its usefulness.
 
 Thanks,
 Miqu=C3=A8l
