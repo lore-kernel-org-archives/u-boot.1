@@ -4,79 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CEFAE9370C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 13:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4872DE9370C
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 13:10:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B17A864AD;
-	Thu,  5 Oct 2023 15:06:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id BF8D586C3B;
+	Thu,  5 Oct 2023 15:07:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="kR43qsGF";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="A4YAdF+0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E24D86CC9; Thu,  5 Oct 2023 15:05:23 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B5409864DD; Thu,  5 Oct 2023 15:07:01 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21DC386CD9
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 15:04:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51A3F86C7A
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 15:06:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-405497850dbso8610985e9.0
- for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 06:04:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1696511069; x=1697115869;
- darn=lists.denx.de; 
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lvcYIbm/mguCW80tK50Uyrd54fm3HM3fSbiIrS0WdeQ=;
- b=kR43qsGFzkp7p2CvBAPJ4//5Cfi8uLQWyTONte+MFYyPSqy0n/RjYJ3oWwFWBLBWR+
- +wkl2cjGx3Lc1XzRUkRgSzT5II4ekjObc4843wE34QbWvv7mKgG+jNfxkpB9yJGQzycH
- WYqwVAtLYxQC/4p7ns2fB+3V/keGcmdIE94sjoCkO+6RT4gD2KOHVYLZrxaqIjQT3IIH
- ZEFrb3kmoQ9KQ+QQD0dbLEfuckhNXzHOKziatxe7APqsHgDIysPPGvhu2POiEUTEf+RW
- 5bHBWgrLndjMU9zcANAleiMG20EkdddPIBwY3295BfJVDWUXyGDqGoE2MrlKFcXCZKQN
- PzMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696511069; x=1697115869;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lvcYIbm/mguCW80tK50Uyrd54fm3HM3fSbiIrS0WdeQ=;
- b=tQP/zb/b+wR9AdCw1G08+wr8XeAbScSx34xdlAa0UnLvbhv81sfgiZiA/PVJV7pfw1
- hIjMGKy71JFvOw7OWPFTvVNvvk7bIAjOz11D6uxTj75FOwyGWh+G8Ae0OHdX8YBjdymi
- 0UVqW4RG6SX7PwaTnv50p2qSXl56aoCCFGil/onyC2evu3aHQkB/0cKZJPVYTfrx0RCL
- HJMn6P4n4Mo0rsRigmprpsIlZux5E/JZpsPHA/NqA0pA/SzFXbR5T/z8P/D4mF7FuUNs
- lrS9fillP1sV6Al0FQ/GeAW4l/uPsxiKdsHUHXE1qk64yhL6BvfWt1Dxge5iE8IWlbt5
- B2+w==
-X-Gm-Message-State: AOJu0Yxl8pPfYNxX7OaZXgObhbqcZO8h41dMwIWsMJSAvnI5959AjkqX
- yerhhQngZWq/6ri+d/zUXYDahv1K6lXM5JfSKf0=
-X-Google-Smtp-Source: AGHT+IG+xwmcj2r8nvdIZK5Ww9PC7WhZRrhghQhQj2mSt0FaJoajXYGCtKf7Cm2zuoxDwHDAGM8wMA==
-X-Received: by 2002:a05:600c:2a4e:b0:406:44fd:6ce3 with SMTP id
- x14-20020a05600c2a4e00b0040644fd6ce3mr5058851wme.38.1696511069407; 
- Thu, 05 Oct 2023 06:04:29 -0700 (PDT)
-Received: from [192.168.2.35] ([82.66.159.240])
- by smtp.gmail.com with ESMTPSA id
- o4-20020a05600c378400b003fc0505be19sm1466983wmr.37.2023.10.05.06.04.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 05 Oct 2023 06:04:29 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Thu, 05 Oct 2023 15:04:26 +0200
-Subject: [PATCH 2/2] MAINTAINERS: fastboot: add Mattijs
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 02EBC6192B;
+ Thu,  5 Oct 2023 13:06:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CE1E2C3279E;
+ Thu,  5 Oct 2023 13:06:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1696511209;
+ bh=fkYteOgBd7MlWnjlYNgHwNknS+j4WgTF2n/kMsvacQ4=;
+ h=From:To:Cc:Subject:Date:From;
+ b=A4YAdF+0HPR8tPYsy23YQobSt0wskcnkpjU0fdYr8PNwjmjrq3O+1w5RA+R7HbiJZ
+ 0+FTFj2Uh5wXA81eY4+M6mFs71n6Ky6MCqTH5WO12fyrXT6yE2kbdGIQUMPNd6i/gP
+ 52gKgTRXVuKCh+pQJ3Tcuo/N6whDifJ1zq60MOfpUed93+SX20Q0aQXb2kbDug+nSq
+ VbItyGKFwVsnebBrm2KQbSvZAfemPSRG5G8X5nz8FBoM33Y5gd6swPwKufXtd9iIw5
+ 3nkC7HhlRdba8Ri5SeB3dQK/IaZarNAXBP0v2hC+KItp9KL5NrnlyF1VMQR/0lbEJm
+ 3IPeg3tQenFlQ==
+From: Roger Quadros <rogerq@kernel.org>
+To: trini@konsulko.com,
+	nm@ti.com
+Cc: vigneshr@ti.com, m-chawdhry@ti.com, sjg@chromium.org, jonas@kwiboo.se,
+ srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de,
+ Roger Quadros <rogerq@kernel.org>
+Subject: [PATCH v2 0/2] board: ti: am6x: Switch to standard boot
+Date: Thu,  5 Oct 2023 16:06:40 +0300
+Message-Id: <20231005130642.21402-1-rogerq@kernel.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20231005-mattijs-usb-v1-2-7e79ab31ca49@baylibre.com>
-References: <20231005-mattijs-usb-v1-0-7e79ab31ca49@baylibre.com>
-In-Reply-To: <20231005-mattijs-usb-v1-0-7e79ab31ca49@baylibre.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.12.4-dev-6aa5d
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,29 +68,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fastboot has been marked as orphaned since 2021.
-Since I'm interested in maintaining this, assign myself.
+Hi,
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- MAINTAINERS | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+This series switches am64x to standard boot flow.
+Also minor fix to am62x boot targets.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 008c593f30ee..6790f4ddbd45 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1052,7 +1052,8 @@ F:	test/common/event.c
- F:	test/py/tests/test_event_dump.py
- 
- FASTBOOT
--S:	Orphaned
-+M:	Mattijs Korpershoek <mkorpershoek@baylibre.com>
-+S:	Maintained
- F:	cmd/fastboot.c
- F:	doc/android/fastboot*.rst
- F:	include/fastboot.h
+NOTE:
+Tested on AM64x GP EVM but I had to hand edit the grub.cfg
+file provided with the TI release [1]
 
+from,
+
+menuentry 'boot'{
+linux /Image root=PARTUUID=3a4a99a8-02 rootwait rootfstype=ext4
+}
+
+to,
+
+menuentry 'boot'{
+linux /Image console=ttyS2,115200n8 root=PARTUUID=3a4a99a8-02 rootwait rootfstype=ext4
+}
+
+else there is no console output.
+
+
+[1] https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-yXgchBCk98/09.00.00.03/tisdk-default-image-am64xx-evm.wic.xz
+
+cheers,
+-roger
+
+Changelog:
+v2:
+- Added Nishanth's Reviewed-by for patch 1
+- Dropped unnecessary headers and macro from patch 2
+
+Roger Quadros (2):
+  board: ti: am62x: am62x.env: Fix boot_targets
+  board: ti: am64x: Switch to standard boot flow
+
+ board/ti/am62x/am62x.env        | 2 +-
+ board/ti/am64x/am64x.env        | 1 +
+ configs/am64x_evm_a53_defconfig | 5 +++--
+ include/configs/am64x_evm.h     | 9 ---------
+ 4 files changed, 5 insertions(+), 12 deletions(-)
+
+
+base-commit: e29b932aa07fa0226d325b35d96cd4eea0370129
+prerequisite-patch-id: afb49f33f198747451687f83936f039049365924
+prerequisite-patch-id: 1d8297eb0a3b44d8578cae785cc22f0fb6077239
+prerequisite-patch-id: 4ae9fdc0b3737e55289a78a59d546a08c03d62e5
+prerequisite-patch-id: 2be0e0caf153bec2c453b2f21342ba207c1ee13d
+prerequisite-patch-id: 7710703ce9a41b72ff3fb89abf0823625a5b5454
+prerequisite-patch-id: 60d61440bf0ab8c0bea8b971ef18aa6d0d26e113
+prerequisite-patch-id: c974e6d80489cbb0ee8cc1f3e19bcc9cf47f25b6
 -- 
-2.41.0
+2.34.1
 
