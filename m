@@ -4,55 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EC07E7C4F4
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 07:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E860E7C4F4
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 08:13:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B4E186EC9;
-	Thu,  5 Oct 2023 09:54:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 7CFD586EA3;
+	Thu,  5 Oct 2023 10:13:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1696492492;
-	bh=yrz/NsTb6S7Ejs1II5/LgtklT4iSWjvnF1UU8xDzSMk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bhR/QJrog+JxUxJY9AGXbLyrd+m4xrU5hU8FOlbzpxEsZKUSscrSU0kHAN8egNWDF
-	 AWCka6TSPSmmbTSf5ndaIOruoSa54jCTYiKpJDioAjiVRXBpmnhacYi96oPi+u8MMi
-	 gUG/l1yTry3Hk4m2usf4SZkkqpPrLJjxd0JHXgeoUZGyXrXnZKj70mIrNfe7JNejAQ
-	 tz1agAh9aZ0FbaOK6fmkiBIdWBiB+uOPgQDkXa5SgIv5oNMcsIXo+mqWg+72m2DNJR
-	 516UqDBnSTykY+x8Qh3cBcXoL47rL/qbApE2BfmCW7btJgX6UwvVrY/2/bQdzl0eDR
-	 dBk2yx+ocHoIw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB64E86ECA; Thu,  5 Oct 2023 09:54:49 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id 9437B86EC0; Thu,  5 Oct 2023 10:13:19 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCD0786B87
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 09:54:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86DB386C4B
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 10:13:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4S1P3R0ql8z9sS6;
- Thu,  5 Oct 2023 09:54:43 +0200 (CEST)
-Message-ID: <99db8b85-b47d-450c-b525-743f379fecf6@denx.de>
-Date: Thu, 5 Oct 2023 09:54:42 +0200
+ dmarc=none (p=none dis=none) header.from=andestech.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 3958D3X6078472;
+ Thu, 5 Oct 2023 16:13:03 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Thu, 5 Oct 2023 16:12:59 +0800
+Date: Thu, 5 Oct 2023 16:10:55 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
+Subject: [PULL] u-boot-riscv/master
+Message-ID: <ZR5vj5SgDa3RbDV5@swlinux02>
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/2] Revert "arm: mvebu: x240: Use i2c-gpio instead of
- built in controller"
-Content-Language: en-US
-To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
-Cc: Chris Packham <chris.packham@alliedtelesis.co.nz>
-References: <20231003035800.2626121-1-judge.packham@gmail.com>
- <20231003035800.2626121-2-judge.packham@gmail.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231003035800.2626121-2-judge.packham@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 3958D3X6078472
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,125 +59,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/3/23 05:57, Chris Packham wrote:
-> This reverts commit 5c1c6b7306f2b4c0fd50c7cb5d757e245b93606e. The reason
-> for switching to i2c-gpio was due to an issue we were seeing in the
-> Linux kernel where the CPU would lock up on certain adverse I2C bus
-> conditions. We were never able to reproduce the lockup in U-Boot but
-> assumed that was probably just luck.
-> 
-> Since then we have discovered that the lock up was due to the I2C
-> transaction offload engine in the I2C controller not coping with the
-> adverse bus conditions (basically it thinks there's another master and
-> waits for a STOP condition that never comes). U-Boot doesn't use the I2C
-> offload feature so is not susceptible to the lockup.
-> 
-> We can therefore safely return to using the built-in I2C controller.
-> 
-> Signed-off-by: Chris Packham <judge.packham@gmail.com>
+Hi Tom,
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+The following changes since commit 65b9b3462bec2966911658836983819ab4e4823e:
 
-Thanks,
-Stefan
+  Merge branch 'next_pinctrl_sync' of https://source.denx.de/u-boot/custodians/u-boot-sh (2023-10-02 15:19:02 -0400)
 
-> ---
-> 
->   arch/arm/dts/ac5-98dx35xx-atl-x240.dts | 30 ++++++--------------------
->   configs/x240_defconfig                 |  1 -
->   2 files changed, 7 insertions(+), 24 deletions(-)
-> 
-> diff --git a/arch/arm/dts/ac5-98dx35xx-atl-x240.dts b/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
-> index c19b25925ba2..820ec18b4355 100644
-> --- a/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
-> +++ b/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
-> @@ -16,7 +16,7 @@
->   		gpio0 = &gpio0;
->   		gpio1 = &gpio1;
->   		spi0 = &spi0;
-> -		i2c0 = &i2cgpio;
-> +		i2c0 = &i2c0;
->   		usb0 = &usb0;
->   		pinctrl0 = &pinctrl0;
->   	};
-> @@ -40,19 +40,6 @@
->   			default-state = "on";
->   		};
->   	};
-> -
-> -	i2cgpio: i2c-gpio-0 {
-> -			compatible = "i2c-gpio";
-> -			#address-cells = <1>;
-> -			#size-cells = <0>;
-> -
-> -			pinctrl-names = "default";
-> -			pinctrl-0 =  <&i2c0_gpio>;
-> -			scl-gpios = <&gpio0 26 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
-> -			sda-gpios = <&gpio0 27 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
-> -			i2c-gpio,delay-us = <2>;
-> -			status = "okay";
-> -		 };
->   };
->   
->   &nand {
-> @@ -83,7 +70,9 @@
->   	status = "okay";
->   };
->   
-> -&i2cgpio {
-> +&i2c0 {
-> +	status = "okay";
-> +
->   	mux@71 {
->   		#address-cells = <1>;
->   		#size-cells = <0>;
-> @@ -188,8 +177,8 @@
->   	 * LED_OE_N              [23]
->   	 * USB_PWR_FLT_N         [24]
->   	 * SFP_INT_N             [25]
-> -	 * I2C0_SCL              [26] (GPIO)
-> -	 * I2C0_SDA              [27] (GPIO)
-> +	 * I2C0_SCL              [26]
-> +	 * I2C0_SDA              [27]
->   	 * USB_EN                [28]
->   	 * MONITOR_INT_N         [29]
->   	 * XM1_MDC               [30]
-> @@ -212,7 +201,7 @@
->   	/*	     0    1    2    3    4    5    6    7    8    9 */
->   	pin-func = < 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
->   		     0xff 0xff 1    1    1    1    0xff 0xff 0    0
-> -		     0    0    0    0    0    0    0xff 0xff 0    0
-> +		     0    0    0    0    0    0    1    1    0    0
->   		     1    1    1    1    0    0    0    0    0    0
->   		     0    0    0    1    1    1    >;
->   
-> @@ -220,9 +209,4 @@
->   		marvell,pins = <0 1 2 3 4 5 6 7 8 9 10 11 16 17>;
->   		marvell,function = <2>;
->   	};
-> -
-> -	i2c0_gpio: i2c0-gpio-pins {
-> -		marvell,pins = <26 27>;
-> -		marvell,function = <0>;
-> -	};
->   };
-> diff --git a/configs/x240_defconfig b/configs/x240_defconfig
-> index 0d5a19df25aa..4b1a761a9086 100644
-> --- a/configs/x240_defconfig
-> +++ b/configs/x240_defconfig
-> @@ -42,7 +42,6 @@ CONFIG_CLK_MVEBU=y
->   CONFIG_GPIO_HOG=y
->   CONFIG_DM_PCA953X=y
->   CONFIG_DM_I2C=y
-> -CONFIG_DM_I2C_GPIO=y
->   CONFIG_SYS_I2C_MVTWSI=y
->   CONFIG_I2C_MUX=y
->   CONFIG_I2C_MUX_PCA954x=y
+are available in the Git repository at:
 
-Viele Grüße,
-Stefan Roese
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+for you to fetch changes up to 7cfdacbe8020292845bd5eba63b576b8586c433c:
+
+  configs: sifive: enable poweroff command on Unmatched (2023-10-04 18:23:59 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/18005
+
+----------------------------------------------------------------
+
++ ae350: modify memory layout and target name
++ ae350: use generic RISC-V timer driver in S-mode
++ Support bootstage report for RISC-V
++ Support C extension exception command for RISC-V
++ Add Starfive timer support
+
+----------------------------------------------------------------
+Chanho Park (3):
+      riscv: bootstage: correct bootstage_report guard
+      riscv: timer: add timer_get_boot_us for BOOTSTAGE
+      timer: riscv_aclint_timer: add timer_get_boot_us for BOOTSTAGE
+
+Heinrich Schuchardt (4):
+      cmd/exception: support RISC-V compressed instruction
+      cmd/exception: test RISC-V 16 bit aligned instruction
+      riscv: enable CONFIG_DEBUG_UART by default
+      configs: sifive: enable poweroff command on Unmatched
+
+Kuan Lim Lee (1):
+      timer: starfive: Add Starfive timer support
+
+Randolph (2):
+      configs: andes: add vender prefix for target name
+      configs: andes: rearrange SPL mode memory layout
+
+Yu Chien Peter Lin (1):
+      riscv: andesv5: Prefer using the generic RISC-V timer driver in S-mode
+
+ arch/riscv/Kconfig                   |  5 +-
+ arch/riscv/cpu/andesv5/Kconfig       |  3 +-
+ arch/riscv/dts/Makefile              |  2 +-
+ arch/riscv/lib/bootm.c               |  2 +-
+ board/AndesTech/ae350/Kconfig        |  2 +-
+ cmd/riscv/exception.c                | 34 +++++++++++--
+ configs/ae350_rv32_defconfig         |  3 +-
+ configs/ae350_rv32_spl_defconfig     | 10 ++--
+ configs/ae350_rv32_spl_xip_defconfig |  7 +--
+ configs/ae350_rv32_xip_defconfig     |  2 +-
+ configs/ae350_rv64_defconfig         |  2 +-
+ configs/ae350_rv64_spl_defconfig     | 11 +++--
+ configs/ae350_rv64_spl_xip_defconfig |  8 +--
+ configs/ae350_rv64_xip_defconfig     |  2 +-
+ configs/sifive_unmatched_defconfig   |  1 +
+ drivers/timer/Kconfig                | 16 +++++-
+ drivers/timer/Makefile               |  3 +-
+ drivers/timer/riscv_aclint_timer.c   | 23 +++++++++
+ drivers/timer/riscv_timer.c          | 22 +++++++++
+ drivers/timer/starfive-timer.c       | 94 ++++++++++++++++++++++++++++++++++++
+ 20 files changed, 223 insertions(+), 29 deletions(-)
+ create mode 100644 drivers/timer/starfive-timer.c
+
+Best regards,
+Leo
