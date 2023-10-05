@@ -4,66 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA9AE9370A
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 11:21:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C27E9370B
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 11:26:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F83786B68;
-	Thu,  5 Oct 2023 13:21:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C420086B08;
+	Thu,  5 Oct 2023 13:26:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rpJNJywv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CzpAaqgY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F67E86AB9; Thu,  5 Oct 2023 13:21:25 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id D51F986B8D; Thu,  5 Oct 2023 13:26:36 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45BD986AB9
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 13:21:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD15F869DA
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 13:26:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=nm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395BKtf0119297;
- Thu, 5 Oct 2023 06:20:55 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395BQPxo120406;
+ Thu, 5 Oct 2023 06:26:25 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696504855;
- bh=WU6j3R1dGM+Ks6OjzJu6HTPxl6je4jMOFnf6jbUs95c=;
+ s=ti-com-17Q1; t=1696505185;
+ bh=H0jdrUEXhfjVFjydUuAmFBP2CnrS3rbcJQTVHIn2XJI=;
  h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=rpJNJywvezxHlc6MW0ROqbvxx5QxzDzAsLGaJfwk3/W9Hl1sRby0tUC75VKIbNrtc
- 4AI2VsaMu1X0F1Zl5Ymeg6KdVPijQb1EVzQuoUcYCtOKuqYei5x+vbPkAujW4Aayn+
- O/jFljL1tPVHAICunROfPkYCwcFFupej8uQZsTqw=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395BKtHB014554
+ b=CzpAaqgYs/AoQh9ZRwTtAo6HhN3YkA+LJp0P8WTXBKDLjIMT7VZyJtQuSVQGU4pVS
+ ijBYGsi2jaLV0Vn+mVrtcHsightbNXa7nPS0FiDMpl6+jnWQOuUl0sz7UQ2yscMq+1
+ zWxFYFKaQO5x8eZKUwcmkr7pmHMNPq5AM3u/Px5s=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395BQPaJ076334
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 5 Oct 2023 06:20:55 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 5 Oct 2023 06:26:25 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Oct 2023 06:20:55 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 06:26:24 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Oct 2023 06:20:55 -0500
+ Frontend Transport; Thu, 5 Oct 2023 06:26:24 -0500
 Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395BKt1Y075242;
- Thu, 5 Oct 2023 06:20:55 -0500
-Date: Thu, 5 Oct 2023 06:20:55 -0500
+ by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395BQOSn014363;
+ Thu, 5 Oct 2023 06:26:24 -0500
+Date: Thu, 5 Oct 2023 06:26:24 -0500
 From: Nishanth Menon <nm@ti.com>
-To: Jan Kiszka <jan.kiszka@siemens.com>
-CC: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>, <vigneshr@ti.com>, 
- <m-chawdhry@ti.com>, <sjg@chromium.org>, <jonas@kwiboo.se>,
- <afd@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Robert Nelson <robertcnelson@gmail.com>,
- "Su, Bao Cheng (RC-CN DF FA R&D)" <baocheng.su@siemens.com>
-Subject: Re: [PATCH] arm: dts: k3-am65-iot2050: Fix boot
-Message-ID: <20231005112055.dotxcq6z7albagum@derby>
-References: <3376a0eb-57f4-416a-b4b8-86cee769d6eb@siemens.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>,
+ Dasnavis Sabiya <sabiya.d@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
+ <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v4 02/16] arm: mach-k3: Add basic support for J784S4 SoC
+ definition
+Message-ID: <20231005112624.sair56f6kff4ixv2@countdown>
+References: <20231001165545.494212-1-a-nandan@ti.com>
+ <20231001165545.494212-3-a-nandan@ti.com>
+ <20231002160156.pacy7j53bbtx766e@reboot>
+ <20231004051327.jvatwiwpmdz4lykd@ula0497581>
+ <20231004122425.3lvghvwufnx5simt@manhunt>
+ <20231005045948.syyj3xvpokloudxd@ula0497581>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <3376a0eb-57f4-416a-b4b8-86cee769d6eb@siemens.com>
+In-Reply-To: <20231005045948.syyj3xvpokloudxd@ula0497581>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,143 +96,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 06:37-20231005, Jan Kiszka wrote:
-> From: Jan Kiszka <jan.kiszka@siemens.com>
+On 10:29-20231005, Manorit Chawdhry wrote:
+> Hi Nishanth,
 > 
-> Since commit [1] A53 u-boot proper is broken. This is because nodes
-> marked as 'bootph-pre-ram' are not available at u-boot proper before
-> relocation.
+> On 07:24-20231004, Nishanth Menon wrote:
+> > On 10:43-20231004, Manorit Chawdhry wrote:
+> > 
+> > > These are required to remove the firewall configurations that are done
+> > > by ROM, those are not the ones that are being handled by OIDs. The
+> > 
+> > I am not sure I understand this clearly. OIDs are setup to open up
+> > firewalls or close firewalls as the system requires and since it
+> > is authenticated, not compromiseable.- U-boot by itself (even if
+> > authenticated), is not a secure entity for it to dictate the firewall
+> > configuration (u-boot must be assumed to be compromised after
+> > authentication is complete). So, doing firewall configuration via APIs
+> > after boot, to me looks broken approach.
+> > 
 > 
-> To fix this we mark all nodes in u-boot.dtsi as 'bootph-all'.
+> I know U-boot ain't that secure given the most trusted entity is always
+> gonna be the software that starts up the system, we can't expect those
+> to be doing all the work and based on that we have the secure boot
+> designed to configure firewalls (that are not owned by anymore) and
+> U-boot R5 being one of the early bootloaders do come as a part of it. 
 > 
-> [1] 9e644284ab812 ("dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation")
+> Regarding the OIDs thing, I don't think the OID in question is looked by
+> ROM and ROM always configures some firewalls for it's usecase that are
+> present in those arrays. 
 > 
-> Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+> The OID that we are using in the series that you had shared is looked by
+> TIFS instead of ROM and TIFS is the entity that is authenticating the
+> binary along with setting up the firewalls.
+> 
+> > > current series that is being worked on is to add additional firewalling
+> > > support with OIDs that TIFS will be handling.
+> > > The above patch is
+> > > essentially added to have the same development experience on GP devices
+> > > similar to HS after the secure boot is done so that people don't end up
+> > 
+> > huh? the code seems to blindly call the remove_fwl_configs(cbass_hc_cfg0_fwls, ARRAY_SIZE(cbass_hc_cfg0_fwls));
+> > where is the distinction of HS vs GP here? This implementation looks
+> > completely broken to me at least.. please correct what I missed here.
+> 
+> Since this call is used across all SoCs there wasn't any point to make
+> the differentiation between GP and HS here, remove_fwl_configs
+> internally handles looking at the firewalls and disabling them if they
+> are enabled ( Which would be only in the case of HS devices ), for GP it
+> would automatically by a noop.
 
-Reviewed-by: Nishanth Menon <nm@ti.com>
+Correct me if I understand the security chain here:
 
-> ---
->  .../dts/k3-am65-iot2050-common-u-boot.dtsi    | 44 +++++++++----------
->  1 file changed, 22 insertions(+), 22 deletions(-)
-> 
-> diff --git a/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi b/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
-> index 9fd64809a63..30fc7a78d89 100644
-> --- a/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-am65-iot2050-common-u-boot.dtsi
-> @@ -37,18 +37,18 @@
->  	};
->  
->  	leds {
-> -		bootph-pre-ram;
-> +		bootph-all;
->  		status-led-red {
-> -			bootph-pre-ram;
-> +			bootph-all;
->  		};
->  		status-led-green {
-> -			bootph-pre-ram;
-> +			bootph-all;
->  		};
->  	};
->  };
->  
->  &cbass_mcu {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  
->  	mcu_navss: bus@28380000 {
->  		ringacc@2b800000 {
-> @@ -75,70 +75,70 @@
->  };
->  
->  &cbass_wakeup {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->  
->  &cbass_main {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	main_navss: bus@30800000 {
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->  };
->  
->  &wkup_pmx0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	mcu-fss0-ospi0-pins-default {
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->  };
->  
->  &main_pmx0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	main-uart1-pins-default {
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->  };
->  
->  &main_uart1 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	current-speed = <115200>;
->  };
->  
->  &wkup_gpio0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->  
->  &ospi0 {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	flash@0 {
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->  };
->  
->  &secure_proxy_main {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->  
->  &dmsc {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  	k3_sysreset: sysreset-controller {
->  		compatible = "ti,sci-sysreset";
-> -		bootph-pre-ram;
-> +		bootph-all;
->  	};
->  };
->  
->  &k3_pds {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->  
->  &k3_clks {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->  
->  &k3_reset {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
->  
->  &fss {
-> -	bootph-pre-ram;
-> +	bootph-all;
->  };
-> -- 
-> 2.35.3
+ROM sets up firewalls that are needed by itself
+TIFS (in multicertificate will setup it's own firewalls)
+R5 SPL comes along and opens up other firewalls
+Each stage beyond this: such as tispl.bin containing TFA/OPTEE uses OIDs to
+set up firewalls to protect themselves (enforced by TIFS)
+A53 SPL and U-boot itself startups but has no ability to change the
+protection firewalls enforced by x509 OIDs.
+
+Further, firewalls have lockdown bit that enforces the setting (and
+cannot be over-ridden) till system restart is requested
+
+Is this correct? If so, needs to be clearly documented.
 
 -- 
 Regards,
