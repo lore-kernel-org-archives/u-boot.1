@@ -4,73 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AE3BE936EC
-	for <u-boot@archiver.kernel.org>; Wed,  4 Oct 2023 23:49:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C6BFE936EC
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 00:03:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2D908755C;
-	Thu,  5 Oct 2023 01:49:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 572F086E04;
+	Thu,  5 Oct 2023 02:02:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ba9GFYpX";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AdSH2thR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 169EB87595; Thu,  5 Oct 2023 01:49:56 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5294086E51; Thu,  5 Oct 2023 02:02:52 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 504E4833DE
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 01:49:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2454086590
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 02:02:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-27909dabf1cso74467a91.1
- for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 16:49:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696463379; x=1697068179; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eFt+Bg8jTcjnu/WQJMafXuny5VA1YphzPt4681If2zc=;
- b=Ba9GFYpXThKCzYYIKyy8tygimTvJrCuHzg53+3y/cJ0BniuOleShSIt48aUbNPm7a2
- JRSwu1V1W0qKU4KBhd1T8MAcwHxUjKCHyK19HQXjQcR61m1SmBM67VxpuyFjQaWJdVRX
- cJ9dbmkSesNduUi/sMlUOOkqxqJchkHWMH//uUfuMx2HFAJtWThD9ZEZq/ABRBL/50oV
- 79XDP8RQrXyL+EeKx39HpK0/6BNAvj+9DwLfSicHdv9NYh/EIT1cNHr6lT3Zv+PjbnsT
- K1t8RdoI9YaEW5UJZJB7p+puXEvd8P2M2XSmrcUKkwUbLfybo8HOTbtCEVBdiPcyX4cx
- sbfA==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4705E3F66D
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 00:02:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1696464167;
+ bh=3sanlyXOlAzhqP/ipqIn9gTlqLsugALCIYIvECshh9A=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=AdSH2thR6+jc9i4I0O6EL38PpSJ1kUV4/OW4SXPegg6kBjCe+8kwVU/bBNsL5ztoG
+ cP18fYcOWwVCefbiGnRBDo0XhFuip/X8Ykh6bSAiY3RoxUPxAMKNbUaNiO1AN9HI6+
+ RfZGIvxpgD0HqBT8/1/M+ubuanJkmR4Uh3hZn7tYvyckZcj2xVzONBPZIRX6Lj3/aK
+ yG4hchsvfO+eleJfHgkbImlL/OajVVhINbOqBEGKpHbYtU6DKl/fyJDaMBTdqYGXvC
+ NYD1qhHOHIWZQAMkAouaEeHKLF6QG4GzDZdzS+KMYRx5h32faC+v6VvHrY/u2AXR65
+ saRjZcGJPWMdA==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-314256aedcbso371813f8f.0
+ for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 17:02:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696463379; x=1697068179;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=eFt+Bg8jTcjnu/WQJMafXuny5VA1YphzPt4681If2zc=;
- b=n4ZxFkmr4yPbrtFEjJgz/TE9df4BBU1GGyYeRpuhJlEq1wwZtPMF/gEgpJ+nPkehW2
- JASK3xjFt3Y2P8C+oH9We/Bhk/n6Pftbziuu21O7Gvoj10rjPXpQFfIxOI2n4hmBwjlp
- LkxqmOXnLGUK4KN99/XqmQ3GVuBzVyrkX2xT+kEDAGElBuW95WHH5e5adUeIjeFGiZeo
- 2kgSKwA7fQ8dtqyJ/RtJCI1UUNTN6YdduMWoFufatZXoPummqzHQV86IyCx6TjXPBBGT
- L4Qms9YV1CFps9fpXh74eKUJyKUEGVSvas8bb2UIp2LmTHmmGaa09oujQCgiduNGV56z
- FjPA==
-X-Gm-Message-State: AOJu0YyECGv8DtWJfkpjowIbddG53N72dDjg36uBkYlKjpBlp17hKKCp
- 3dDrXDOQy/YXnAVWrFDwk5haysOnkQVYsOJS9k6X1Q5fslU=
-X-Google-Smtp-Source: AGHT+IH8T3WV16qWiT30KvFSmLQtvRXnN2NUOsJnhiJ57822/CBbWMUJMS6zdTjbIMw/WvohrNrB/rb+H/n1R03GCdc=
-X-Received: by 2002:a17:90a:13cd:b0:279:9611:1020 with SMTP id
- s13-20020a17090a13cd00b0027996111020mr3422784pjf.1.1696463379235; Wed, 04 Oct
- 2023 16:49:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696464165; x=1697068965;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=3sanlyXOlAzhqP/ipqIn9gTlqLsugALCIYIvECshh9A=;
+ b=NWHc5dxM9q6RzLi9fmEtL1jdbtfVU7bqyYyhVjGisfAQPw/cmle9PDCGJM/ihXJaTB
+ ix8OBGE/QQFCUvtl+etogJrlZAUkWVS0gYuC2LiaZYzd1JOE1WkYsc6ZPG5as6i+1LLo
+ 05P2XP6pucfgQHvgD/YfKVt5i3kVQvMS7qcbu/QMUKFVn1ZGRa4xsWJQCRfmy/h0615F
+ EG+xtVzRZD980g6ynKoFp6SG4Hb+5WE2jq8j4Iz6LVv5DL5ArkIEXsPHykgXXHpgqlTQ
+ 44N3H+BeAO34ndSyHi4NjXUNS4lpg6LwrLLyYv0739TjnYePLJfdXkI2Kxo9QXEESDG7
+ CMmA==
+X-Gm-Message-State: AOJu0Yx5bDfk1GbxlZIvpytH4CTExDEkrxlxVTDazwk45214ZYIaKpaH
+ +1EVOImLaXvL0JL451yqqYwljgTnvXuKCCcNhaS48BA8XD015j0KTW46j+0shszVmv0ltJZKiqC
+ dmqr0JIgxcTUlHTgNz4QzWLtB1S0g/0c=
+X-Received: by 2002:a5d:6986:0:b0:31a:e972:3601 with SMTP id
+ g6-20020a5d6986000000b0031ae9723601mr3492571wru.54.1696464165069; 
+ Wed, 04 Oct 2023 17:02:45 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFh3ifFtgFadh5O+4lP2DPxKeFcPlAGxJ6Eban5TAsuXwXC7Rp61JHJqQwHI/FViyDlM+Rt/g==
+X-Received: by 2002:a5d:6986:0:b0:31a:e972:3601 with SMTP id
+ g6-20020a5d6986000000b0031ae9723601mr3492559wru.54.1696464164763; 
+ Wed, 04 Oct 2023 17:02:44 -0700 (PDT)
+Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ z12-20020adfec8c000000b00324853fc8adsm305109wrn.104.2023.10.04.17.02.43
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 04 Oct 2023 17:02:44 -0700 (PDT)
+Message-ID: <3011f86a-7df9-416c-9b0f-a6b07d14667a@canonical.com>
+Date: Thu, 5 Oct 2023 02:02:45 +0200
 MIME-Version: 1.0
-References: <20231004233453.508-1-egyszeregy@freemail.hu>
-In-Reply-To: <20231004233453.508-1-egyszeregy@freemail.hu>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 4 Oct 2023 20:49:27 -0300
-Message-ID: <CAOMZO5Cy931S=5y55K64d6EEnacfMK7mFJ+UEMKYh3Zui3m=XA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] [u-boot][master][PATCH v3] pico-imx7d: add baseboard
- SD card boot detect
-To: egyszeregy@freemail.hu
-Cc: u-boot@lists.denx.de, otavio@ossystems.com.br
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] riscv: remove dram_init_banksize()
+Content-Language: en-US
+To: "Wu, Fei" <fei2.wu@intel.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Anup Patel <apatel@ventanamicro.com>,
+ u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>
+References: <20230926071634.22016-1-heinrich.schuchardt@canonical.com>
+ <fcc91051-81c5-7b0f-fd93-d971200e5c2d@intel.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <fcc91051-81c5-7b0f-fd93-d971200e5c2d@intel.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,57 +106,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Oct 4, 2023 at 8:35=E2=80=AFPM <egyszeregy@freemail.hu> wrote:
->
-> From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
->
-> Take over codes from Techenxion to support mmc autodetect boot for pico-i=
-mx7d.
->
-> Signed-off-by: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
+On 9/26/23 09:46, Wu, Fei wrote:
+> On 9/26/2023 3:16 PM, Heinrich Schuchardt wrote:
+>> Remove dram_init_banksize() on the architecture level.
+>>
+>> Limiting used RAM to under 4 GiB is only necessary for CPUs which have a
+>> DMA issue. SoC specific code already exists for FU540, FU740, JH7110.
+>>
+>> Not all RISC-V boards will have memory below 4 GiB.
+>>
+>> A weak implementation of dram_init_banksize() exists in common/board_f.c.
+>>
+>> See the discussion in
+>> https://lore.kernel.org/u-boot/545fe813-cb1e-469c-a131-0025c77aeaa2@canonical.com/T/
+>>
+> Thanks you Heinrich, this patch itself is okay to me, but it still
+> doesn't address the problem in that thread. In setup_dest_addr():
+> 
+> #ifdef CFG_SYS_SDRAM_BASE
+>          gd->ram_base = CFG_SYS_SDRAM_BASE;
+> #endif
+>          gd->ram_top = gd->ram_base + get_effective_memsize();
+>          gd->ram_top = board_get_usable_ram_top(gd->mon_len);
+> 
+> ram_base is modified in #ifdef so that ram_base and
+> get_effective_memsize() is not well paired. e.g. two ranges of memory
+> [2GB, 3GB) and [4GB, 6GB), ram_base is set to 2GB of 1st range and
+> get_effective_memsize() returns 2GB of 2nd range, ram_top will be set to
+> 4GB which is not desired. Will you address this too?
 
-I wanted to test your patch, but there are several issues:
+No, that is an independent issue. I only want to get rid of the generic 
+restriction to memory below 4 GiB on RISC-V.
 
-checkpatch complains:
-total: 5 errors, 7 warnings, 5 checks, 214 lines checked
+I would recommend to set ram_top to the highest available memory address 
+of the highest RAM bank with some special handling of the ARM LPAE case 
+or 32bit in general. But this is not a RISC-V specific topic.
 
-git am complains:
+Best regards
 
-Applying: pico-imx7d: add baseboard SD card boot detect
-.git/rebase-apply/patch:41: trailing whitespace.
-.git/rebase-apply/patch:58: trailing whitespace.
-.git/rebase-apply/patch:61: trailing whitespace.
-warning: 3 lines add whitespace errors.
+Heinrich
 
-Then when I try to build:
+> 
+> Best Regards,
+> Fei.
+> 
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   arch/riscv/cpu/generic/dram.c | 16 ----------------
+>>   1 file changed, 16 deletions(-)
+>>
+>> diff --git a/arch/riscv/cpu/generic/dram.c b/arch/riscv/cpu/generic/dram.c
+>> index 94d8018407..1b51bae9b6 100644
+>> --- a/arch/riscv/cpu/generic/dram.c
+>> +++ b/arch/riscv/cpu/generic/dram.c
+>> @@ -20,19 +20,3 @@ int dram_init_banksize(void)
+>>   {
+>>   	return fdtdec_setup_memory_banksize();
+>>   }
+>> -
+>> -phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
+>> -{
+>> -	/*
+>> -	 * Ensure that we run from first 4GB so that all
+>> -	 * addresses used by U-Boot are 32bit addresses.
+>> -	 *
+>> -	 * This in-turn ensures that 32bit DMA capable
+>> -	 * devices work fine because DMA mapping APIs will
+>> -	 * provide 32bit DMA addresses only.
+>> -	 */
+>> -	if (gd->ram_top >= SZ_4G)
+>> -		return SZ_4G - 1;
+>> -
+>> -	return gd->ram_top;
+>> -}
+> 
 
-board/technexion/pico-imx7d/pico-imx7d.c: In function =E2=80=98board_late_m=
-mc_init=E2=80=99:
-board/technexion/pico-imx7d/pico-imx7d.c:173:9: warning: implicit
-declaration of function =E2=80=98run_command=E2=80=99
-[-Wimplicit-function-declaration]
-  173 |         run_command(cmd, 0);
-      |         ^~~~~~~~~~~
-board/technexion/pico-imx7d/pico-imx7d.c:150:14: warning: unused
-variable =E2=80=98mmcblk=E2=80=99 [-Wunused-variable]
-  150 |         char mmcblk[32];
-      |              ^~~~~~
-
-board/technexion/pico-imx7d/spl.c: In function =E2=80=98board_mmc_init=E2=
-=80=99:
-board/technexion/pico-imx7d/spl.c:261:33: error:
-=E2=80=98CONFIG_SYS_FSL_USDHC_NUM=E2=80=99 undeclared (first use in this fu=
-nction);
-did you mean =E2=80=98CFG_SYS_FSL_USDHC_NUM=E2=80=99?
-  261 |         for (index =3D 0; index < CONFIG_SYS_FSL_USDHC_NUM; ++index=
-) {
-      |                                 ^~~~~~~~~~~~~~~~~~~~~~~~
-      |                                 CFG_SYS_FSL_USDHC_NUM
-board/technexion/pico-imx7d/spl.c:261:33: note: each undeclared
-identifier is reported only once for each function it appears in
-make[2]: *** [scripts/Makefile.build:256:
-spl/board/technexion/pico-imx7d/spl.o] Error 1
-make[1]: *** [scripts/Makefile.spl:533: spl/board/technexion/pico-imx7d] Er=
-ror 2
-
-You clearly haven't tested your patch.
