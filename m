@@ -4,66 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DC2EE92706
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 14:29:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45A7CE92706
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 14:49:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CDAD86D04;
-	Thu,  5 Oct 2023 16:29:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 39A5186CF7;
+	Thu,  5 Oct 2023 16:49:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MxMK4qKV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hhYWUcmW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AEA286D04; Thu,  5 Oct 2023 16:29:22 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 49FF386CB7; Thu,  5 Oct 2023 16:49:12 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A15E86B67
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 16:29:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C413E86CFE
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 16:49:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=reidt@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395E4RJb010026;
- Thu, 5 Oct 2023 09:04:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696514667;
- bh=lN5BbeAydTxTYpaHiFQQL0rNK+MQlIkRuMnXG3Og/XY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=MxMK4qKVi9kYRYMeNhpH/sn8y6lBaUThe6qLTpr7LrvfRkbJ3R7TIfatHE1d2vu+H
- lPMsSydAKa76k8HTSr9+5cTq3FrVfdv9qukxXASQnQmNTXWP7adh2Fr0Sdkx4/DFcJ
- mkzYVfcrkMoYVNmVWSvkO7uXJpGA3bHULAnvoLR0=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395E4RF5063133
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 5 Oct 2023 09:04:27 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
- Oct 2023 09:04:26 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 5 Oct 2023 09:04:26 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395E4QtB017450;
- Thu, 5 Oct 2023 09:04:26 -0500
-Date: Thu, 5 Oct 2023 09:04:26 -0500
-From: reidt <reidt@ti.com>
-To: Nishanth Menon <nm@ti.com>
-CC: <trini@konsulko.com>, <u-boot@lists.denx.de>, <n-francis@ti.com>,
- <u-kumar1@ti.com>, <vigneshr@ti.com>, <m-chawdhry@ti.com>, <reidt@ti.com>
-Subject: Re: [PATCH v4 2/2] arm: dts: j7200: dts sync with Linux 6.6-rc1
-Message-ID: <20231005140426.44wnkiguqa2agb25@reidt-HP-Z2>
-References: <20231004165629.506664-1-reidt@ti.com>
- <20231004165629.506664-3-reidt@ti.com>
- <20231005113336.tysphzl4dvc65oks@litigate>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-d8afe543712so1199397276.0
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 07:49:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1696517348; x=1697122148; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KqCvGmJTWUjsD7bYG3OaYBBQn42gDoqEf2Z2rsjfZRc=;
+ b=hhYWUcmWXebcYYtAcqb+O9d5H1+lsEJxjWjftQHHXUAqx5ACeFvRhYxnDdHcEHXk24
+ DPITURieBdmInayylwKn2CSUgzxSEab/jOz170O5Yrs2SAEXRsQGb01+LlRbErhPH1L7
+ 2MHgOXsFQWzdIP9MITIevy3YPfOnUUb3fI9e4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696517348; x=1697122148;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KqCvGmJTWUjsD7bYG3OaYBBQn42gDoqEf2Z2rsjfZRc=;
+ b=SRs9uo/oiYMWM4SN4CTLQ/WpJpndTiLoUtYSKyRMKPPQYWuTTkjWka2FHOsSDHnuxx
+ bYfiiTOvIkgintkDrvTPgq9BaVoC9767ztbxc5LgZU28Z9PyF97f6Q/6EwBs4NWw8/EN
+ 5kgyklBxyA2WoS1U7A4StcPTqVgBiRQr0TYfvOV3fOBv9qws6Evz1pVZDSpeFT5EQPjS
+ rugrmXE1+OOAKn0AXxd56mhDIDlEnr/eU8ATIkF47TeZZPf6sGx2PJAe9sfipwzW7Xf0
+ erLOH7a73OdOCPKZtTFCVqGZRH+N9+GoxFx2VD8Rdvukp6bqAHcf/v8ricehEF0yEfhr
+ Nx1g==
+X-Gm-Message-State: AOJu0Yy8ejn0CqV0GA27QYVRxtnhBY8FRZN4FxwxD/K0jw8lFLe47WYc
+ Fn/kp5Lctp8/LgaPy7l5mq3OIw==
+X-Google-Smtp-Source: AGHT+IGoRdFKjBvaCH4frmcxZzIrBjGrJx8M7CBc8nC6HveRxuNKdBrlRLjJkbmdvEfESUVSiF6PNw==
+X-Received: by 2002:a25:d202:0:b0:d71:8e8c:5233 with SMTP id
+ j2-20020a25d202000000b00d718e8c5233mr5507416ybg.12.1696517348477; 
+ Thu, 05 Oct 2023 07:49:08 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-f1fa-53fc-3572-fce8.res6.spectrum.com.
+ [2603:6081:7b00:6400:f1fa:53fc:3572:fce8])
+ by smtp.gmail.com with ESMTPSA id
+ 6-20020a251806000000b00d800eb5ac2asm427615yby.65.2023.10.05.07.49.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Oct 2023 07:49:07 -0700 (PDT)
+Date: Thu, 5 Oct 2023 10:49:06 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-dm
+Message-ID: <20231005144906.GJ8465@bill-the-cat>
+References: <CAPnjgZ0V5_UsZOPPX_sjNECHTzC-pgFqMsfuNWP0-kEe5dZxRw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="i2acLTeY8iSv6bEu"
 Content-Disposition: inline
-In-Reply-To: <20231005113336.tysphzl4dvc65oks@litigate>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <CAPnjgZ0V5_UsZOPPX_sjNECHTzC-pgFqMsfuNWP0-kEe5dZxRw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,80 +91,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 06:33-20231005, Nishanth Menon wrote:
-> On 11:56-20231004, Reid Tonking wrote:
-> > Sync j7200 dts with Linux 6.6-rc1
-> [..]
-> > diff --git a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> > index e62f9218e8..9469dca39f 100644
-> > --- a/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> > +++ b/arch/arm/dts/k3-j7200-r5-common-proc-board.dts
-> > @@ -1,13 +1,14 @@
-> >  // SPDX-License-Identifier: GPL-2.0
-> >  /*
-> > - * Copyright (C) 2020 Texas Instruments Incorporated - https://www.ti.com/
-> > + * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
-> >   */
-> >  
-> >  /dts-v1/;
-> >  
-> > -#include "k3-j7200-som-p0.dtsi"
-> > +#include "k3-j7200-common-proc-board.dts"
-> >  #include "k3-j7200-ddr-evm-lp4-2666.dtsi"
-> >  #include "k3-j721e-ddr.dtsi"
-> > +#include "k3-j7200-common-proc-board-u-boot.dtsi"
-> >  
-> >  / {
-> >  	aliases {
-> > @@ -15,17 +16,6 @@
-> >  		remoteproc1 = &a72_0;
-> >  	};
-> >  
-> > -	chosen {
-> > -		stdout-path = &main_uart0;
-> > -		tick-timer = &timer1;
-> > -		firmware-loader = &fs_loader0;
-> > -	};
-> > -
-> > -	fs_loader0: fs_loader@0 {
-> > -		bootph-all;
-> > -		compatible = "u-boot,fs-loader";
-> > -	};
-> > -
-> >  	a72_0: a72@0 {
-> >  		compatible = "ti,am654-rproc";
-> >  		reg = <0x0 0x00a90000 0x0 0x10>;
-> > @@ -39,21 +29,17 @@
-> >  		ti,sci = <&dmsc>;
-> >  		ti,sci-proc-id = <32>;
-> >  		ti,sci-host-id = <10>;
-> > -		bootph-pre-ram;
-> > -	};
-> > -
-> > -	clk_200mhz: dummy_clock_200mhz {
-> > -		compatible = "fixed-clock";
-> > -		#clock-cells = <0>;
-> > -		clock-frequency = <200000000>;
-> > -		bootph-pre-ram;
-> > +		bootph-all;
-> 
-> Here and else where in the r5 file: why switch from pre-ram to bootph-all
-> ? dont we need these prior to ddr initialization?
->
 
-Due to the change in how booth-pre-ram works [0], bootph-pre-ram alone no
-longer works. U-boot docs Pre-Relocation Support section says some-ram
-can be used for u-boot prior to reloc, but not spl. So like Massimo
-mentioned in the linked discussion, some-ram + pre-ram can work, as well
-as -all. Outside of affecting the TPL phase, I'm not sure I know of a
-difference in regards to how it affects pre-ddr.
+--i2acLTeY8iSv6bEu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, Oct 04, 2023 at 12:00:32PM -0600, Simon Glass wrote:
 
-[0]: https://lore.kernel.org/u-boot/CAPnjgZ3MgWX8T0A0SofphEr_Xd77pE3hte9DNye1RuBVeB9N8Q@mail.gmail.com/
+> Hi Tom,
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/18014
+> (usual azure branch but I cannot get the link)
+>=20
+> The following changes since commit 65b9b3462bec2966911658836983819ab4e482=
+3e:
+>=20
+>   Merge branch 'next_pinctrl_sync' of
+> https://source.denx.de/u-boot/custodians/u-boot-sh (2023-10-02
+> 15:19:02 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://git.denx.de/u-boot-dm.git tags/dm-pull-4oct23
+>=20
+> for you to fetch changes up to 4840b71bb009711564e20f9695b92950c3f73e42:
+>=20
+>   qconfig: Update the documentation (2023-10-04 09:25:22 -0600)
+>=20
 
-> [...]
-> 
-> -- 
-> Regards,
-> Nishanth Menon
-> Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--i2acLTeY8iSv6bEu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUezOIACgkQFHw5/5Y0
+tyzipAv/aLeb1hiQFamDJrDFBJIHc0lEHlD6J8p50pO/x3a5mz9tYFDQ6jx+KkV+
+DjQLmz7nNWm7WS4I53iIY1AezHdeSyIPUzY0sYA3+oJMWbzuCYMoiOijAlvRxnWG
+tG14rHQc7j8xbqy7Ps3eekgLkyDAUBKBZf8a1rTpfuQLtC1EtWcmHaoShyD40Mzv
+DU9clrcPe62LrTeGl7EZzQQ6k3XK7RHoNLsxv5X8c58TfzNO6zn2pABMZmYSYqGp
+FJXZctTi98mJGdgEVE0Pu5GcvVICNnANoZcqsDLNkLD4u4Hfi5LBPOqShY+8uQrZ
+Z97ZNLj/14V8Yb8AcKH+BfVUfsQ0aoj/eP4fpPxf7CicrNshlkoI21lB8eqE6R4u
+Fz8051l7qsxibIDEVLSJ6UPmiq8OD22C/pNPtvTUV3Z+VkIbktAmHSXACuZ6FKDQ
+lfUSGhTtkWR2DFrnxlFp7zB3PXavBBj88lOppAF4su4MK4Fd+zozRMriDIKDJ8Jj
+rHXbkKSI
+=d8Ki
+-----END PGP SIGNATURE-----
+
+--i2acLTeY8iSv6bEu--
