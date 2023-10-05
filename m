@@ -4,56 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3521FE9370C
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 13:13:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5AC5E92701
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 14:13:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCB4F86CCE;
-	Thu,  5 Oct 2023 15:07:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id DDD6486C20;
+	Thu,  5 Oct 2023 16:13:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DI7wnu/L";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lX5H0zdM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F8C986CC8; Thu,  5 Oct 2023 15:07:33 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E159586CF7; Thu,  5 Oct 2023 15:33:08 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACFE686CE5
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 15:07:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7747086D0B
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 15:28:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 904706192B;
- Thu,  5 Oct 2023 13:06:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71B4BC3279E;
- Thu,  5 Oct 2023 13:06:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1696511216;
- bh=8FL8ELOznQxbTRBUfoIAWBZKSjQ0eCnIPkubm4519JI=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=DI7wnu/LmGJHUJ4ElFX934rWAdXy/W0BrmtJXbhA32EZ0QEwmpk9dtfkpn3k3ZyHS
- 2fCDlxqKomiuEX/QOz+mzD9EIAQo+Ubp79ELMyCcj2dHglfwqTslRXm/P5tjlG9Bls
- hf3q+VZUgQnQlEaR51L6f0rcZt1bzgWEMGjeX6WGoKRueVMC62W1qZyu3/0wB+H0L9
- 4ILSfTkpgkFv2wcM63F84FWKwy1wSszlHsx0P3sJYWsApCH4BXUMiZnQWyss3IrtIM
- sgJn6f9xYM+I9eBdwta2nSYPRe6+FqwDgSAXwt9ib/GWyIWNwQTV6o7Z/oZBh36ukm
- RolpBdm+KT8Cw==
-From: Roger Quadros <rogerq@kernel.org>
-To: trini@konsulko.com,
-	nm@ti.com
-Cc: vigneshr@ti.com, m-chawdhry@ti.com, sjg@chromium.org, jonas@kwiboo.se,
- srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de,
- Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH v2 2/2] board: ti: am64x: Switch to standard boot flow
-Date: Thu,  5 Oct 2023 16:06:42 +0300
-Message-Id: <20231005130642.21402-3-rogerq@kernel.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231005130642.21402-1-rogerq@kernel.org>
-References: <20231005130642.21402-1-rogerq@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-99bdeae1d0aso190229066b.1
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 06:28:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1696512514; x=1697117314; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Uttje9H76CjAHqDi0nb3p+4z8+RlBcA4fdin0GblyOs=;
+ b=lX5H0zdM9osCmVlM9q4Q1JiiJ9/SaDbIvKcvLedK/hH3FjSvv2GlEtbyoM8Jh+8Nwq
+ KZ2E6Ti+DIXUf740efhxyIDC8p0b1ZXPb5dbO0GP33lAk8dNqHxP6IxvZuev2D6+i+Mw
+ VdZpnOTTvj2xTd479U2v3Uev2fKy1LmGGVTPE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696512514; x=1697117314;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Uttje9H76CjAHqDi0nb3p+4z8+RlBcA4fdin0GblyOs=;
+ b=pmAbKanjlAWGfV5CxB34RZM6OKvFXCifU7+uxTQ3YH2F13zrVJKXmgeUjG0wDR+FCv
+ B/kITFOkub71reSpPc0hJaim+/umOplu/J0MAEo/MPyzVa7s0wMDSi0Tsa+N/ufYEwvL
+ 82x8EHIQSxnAXVZ7fETiTJvZvl11y6aroQIf5qalZEaAjbpj6FmDSY/83b4qWJAkTGvI
+ 6QWSytoHf7Q7uT+i/p7lptNpcRFAIs0oBoB7h6HyQcY3VObTvVW9mLYGt4I+FQ7lOjzh
+ pAfgV7kXjzgBnZATcGw6krpNYwnayPJheBCSj4MvosaOhrbxCxgUWnCfSOn94ofMc3ne
+ 1pUA==
+X-Gm-Message-State: AOJu0YzEouoKn9u0e6yn6udsRPHiSk3yK9/OuJAqszfWKhLhotMqa7w8
+ vRd05h8xEEB55MoEMLTBlEmKqB8d7XHNtCXUkYBSOA==
+X-Google-Smtp-Source: AGHT+IGEm5wF2Q+BhWlWTvL7ZYsdruoCPmp9Uy47bElz9kCchf+LdIy88b0VQuw88Imfh5qH6nm1g3tJn7WJrqlN0EQ=
+X-Received: by 2002:a17:906:224c:b0:9ae:3c2f:5a99 with SMTP id
+ 12-20020a170906224c00b009ae3c2f5a99mr5697789ejr.51.1696512513425; Thu, 05 Oct
+ 2023 06:28:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231004093620.2b1d6917@xps-13>
+ <20231004113458.531124-1-mwalle@kernel.org>
+ <CAPnjgZ2hWE6Sc=rg55W=-r-TnoWP7Y5gSpn41kwoyja-AMVw+w@mail.gmail.com>
+ <9e588e3ec8c0c321a2861723d0d42b9a@kernel.org>
+ <CAPnjgZ20ezipPWAj6bUM9_oCTcX1XzuLqQ7b7-nKjXf1t4p9-Q@mail.gmail.com>
+ <a581ef73fa09c6ffeb83a1c1780053bd@kernel.org>
+In-Reply-To: <a581ef73fa09c6ffeb83a1c1780053bd@kernel.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 5 Oct 2023 07:28:15 -0600
+Message-ID: <CAPnjgZ2PnKD5m0EgTdEAf-gcK3wuBZvWw_AO2iehb1dmfdoz3A@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] dt-bindings: mtd: fixed-partitions: Add binman
+ compatible
+To: Michael Walle <mwalle@kernel.org>
+Cc: miquel.raynal@bootlin.com, conor+dt@kernel.org, devicetree@vger.kernel.org,
+ krzysztof.kozlowski+dt@linaro.org, linux-kernel@vger.kernel.org, 
+ linux-mtd@lists.infradead.org, ptyadav@amazon.de, rafal@milecki.pl, 
+ richard@nod.at, robh+dt@kernel.org, robh@kernel.org, trini@konsulko.com, 
+ u-boot@lists.denx.de, vigneshr@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,70 +90,216 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Switch to using bootstd. Note with this change, we will stop using
-distro_bootcmd and instead depend entirely on bootflow method of
-starting the system up.
+Hi Michael,
 
-Drop header files that are no longer needed in am64x_evm.h.
-k3_dfu.h is available via k3_dfu.env in am64x.env.
+On Thu, 5 Oct 2023 at 02:54, Michael Walle <mwalle@kernel.org> wrote:
+>
+> Hi,
+>
+> >> >> >> Add a compatible string for binman, so we can extend fixed-partitions
+> >> >> >> in various ways.
+> >> >> >
+> >> >> > I've been thinking at the proper way to describe the binman partitions.
+> >> >> > I am wondering if we should really extend the fixed-partitions
+> >> >> > schema. This description is really basic and kind of supposed to remain
+> >> >> > like that. Instead, I wonder if we should not just keep the binman
+> >> >> > compatible alone, like many others already. This way it would be very clear
+> >> >> > what is expected and allowed in both cases. I am thinking about
+> >> >> > something like that:
+> >> >> >
+> >> >> >       Documentation/devicetree/bindings/mtd/partitions/brcm,bcm4908-partitions.yaml
+> >> >> >
+> >> >> > this file is also referenced there (but this patch does the same, which
+> >> >> > is what I'd expect):
+> >> >> >
+> >> >> >       Documentation/devicetree/bindings/mtd/partitions/partitions.yaml
+> >> >> >
+> >> >> > I'll let the binding maintainers judge whether they think it's
+> >> >> > relevant, it's not a strong opposition.
+> >> >>
+> >> >> What is the overall goal here? To replace the current binman node
+> >> >> which is
+> >> >> usually contained in the -u-boot.dtsi files? If one is using binman to
+> >> >> create an image, is it expected that one needs to adapt the DT in
+> >> >> linux?
+> >> >> Or will it still be a seperate -u-boot.dtsi? > Because in the latter
+> >> >> case
+> >> >> I see that there will be conflicts because you have to overwrite the
+> >> >> flash node. Or will it be a seperate node with all the information
+> >> >> duplicated?
+> >> >
+> >> > The goal is simply to have a full binding for firmware layout, such
+> >> > that firmware images can be created, examined and updated. The
+> >> > -u-boot.dtsi files are a stopgap while we sort out a real binding.
+> >> > They should eventually go away.
+> >>
+> >> You haven't answered whether this node should be a seperate binman
+> >> node - or if you'll reuse the existing flash (partitions) node(s) and
+> >> add any missing property there. If it's the latter, I don't think
+> >> compatible = "binman", "fixed-partitions"; is correct.
+> >
+> > My intent is to make it compatible, so wouldn't it make sense to have
+> > binman as the first compatible, then falling back to fixed-partitions
+> > as the second?
+>
+> As far as I know, the compatibles should get more specific with each
+> string.
 
-Drop unused macro CFG_SYS_SDRAM_BASE1.
+That's the opposite to what I understood.
 
-Signed-off-by: Roger Quadros <rogerq@kernel.org>
----
- board/ti/am64x/am64x.env        | 1 +
- configs/am64x_evm_a53_defconfig | 5 +++--
- include/configs/am64x_evm.h     | 9 ---------
- 3 files changed, 4 insertions(+), 11 deletions(-)
+> But "binman" seems to be used as a kind of tag which could be
+> added to any compatible under the flash node. What if one wants to build
+> an image which isn't compatible = "fixed-partitions"? E.g.
+> "linksys,ns-partitions", will it then have
+> compatible = "binman", "linksys,ns-partitions"?
 
-diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
-index 68e42222b7..efd736b99b 100644
---- a/board/ti/am64x/am64x.env
-+++ b/board/ti/am64x/am64x.env
-@@ -15,6 +15,7 @@ console=ttyS2,115200n8
- args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000 ${mtdparts}
- run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
- 
-+boot_targets=mmc1 mmc0 usb pxe dhcp
- boot=mmc
- mmcdev=1
- bootpart=1:2
-diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-index 718ad176cb..43bfcf957a 100644
---- a/configs/am64x_evm_a53_defconfig
-+++ b/configs/am64x_evm_a53_defconfig
-@@ -31,8 +31,9 @@ CONFIG_SPL_SPI=y
- # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
- CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
--CONFIG_DISTRO_DEFAULTS=y
--CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
- CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x180000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
-index 062102a610..f9f8c7bc2f 100644
---- a/include/configs/am64x_evm.h
-+++ b/include/configs/am64x_evm.h
-@@ -9,15 +9,6 @@
- #ifndef __CONFIG_AM642_EVM_H
- #define __CONFIG_AM642_EVM_H
- 
--#include <linux/sizes.h>
--#include <config_distro_bootcmd.h>
--#include <env/ti/mmc.h>
--#include <asm/arch/am64_hardware.h>
--#include <env/ti/k3_dfu.h>
--
--/* DDR Configuration */
--#define CFG_SYS_SDRAM_BASE1		0x880000000
--
- /* Now for the remaining common defines */
- #include <configs/ti_armv7_common.h>
- 
--- 
-2.34.1
+I suppose so.
 
+>
+>
+> >> >> Maybe (a more complete) example would be helpful.
+> >> >
+> >> > Can you please be a bit more specific? What is missing from the
+> >> > example?
+> >>
+> >> Like a complete (stripped) DTS. Right now I just see how the
+> >> individual
+> >> node looks like. But with a complete example DTS, my question from
+> >> above
+> >> would have been answered.
+>
+> So to give an example myself, please correct it if it's wrong. From
+> our board (kontron-sl28):
+>
+> &fspi {
+>          status = "okay";
+>
+>          flash@0 {
+>                  compatible = "jedec,spi-nor";
+>                  m25p,fast-read;
+>                  spi-max-frequency = <133000000>;
+>                  reg = <0>;
+>                  /* The following setting enables 1-1-2 (CMD-ADDR-DATA)
+> mode */
+>                  spi-rx-bus-width = <2>; /* 2 SPI Rx lines */
+>                  spi-tx-bus-width = <1>; /* 1 SPI Tx line */
+>
+>                  partitions {
+>                          compatible = "fixed-partitions";
+>                          #address-cells = <1>;
+>                          #size-cells = <1>;
+>
+>                          partition@0 {
+>                                  reg = <0x000000 0x010000>;
+>                                  label = "rcw";
+>                                  read-only;
+>                          };
+>
+>                          partition@10000 {
+>                                  reg = <0x010000 0x1d0000>;
+>                                  label = "failsafe bootloader";
+>                                  read-only;
+>                          };
+>
+>                          partition@200000 {
+>                                  reg = <0x200000 0x010000>;
+>                                  label = "configuration store";
+>                          };
+>
+>                          partition@210000 {
+>                                  reg = <0x210000 0x1d0000>;
+>                                  label = "bootloader";
+>                          };
+>
+>                          partition@3e0000 {
+>                                  reg = <0x3e0000 0x020000>;
+>                                  label = "bootloader environment";
+>                          };
+>                  };
+>          };
+> };
+>
+> In u-boot we use binman, see
+> arch/arm/dts/fsl-ls1028a-kontron-sl28-u-boot.dtsi
+> in the u-boot repository.
+>
+> Now to use the new method, am I expected to adapt the dts in the
+> linux kernel? As far as I understand that is the case. So that node
+> from above would look something like the following:
+>
+> &fspi {
+>          status = "okay";
+>
+>          flash@0 {
+>                  compatible = "jedec,spi-nor";
+>                  m25p,fast-read;
+>                  spi-max-frequency = <133000000>;
+>                  reg = <0>;
+>                  /* The following setting enables 1-1-2 (CMD-ADDR-DATA)
+> mode */
+>                  spi-rx-bus-width = <2>; /* 2 SPI Rx lines */
+>                  spi-tx-bus-width = <1>; /* 1 SPI Tx line */
+>
+>                  partitions {
+>                          compatible = "binman", "fixed-partitions";
+>                          #address-cells = <1>;
+>                          #size-cells = <1>;
+> [..]
+>                          partition@210000 {
+>                                  reg = <0x210000 0x1d0000>;
+>                                  label = "u-boot"; /* or "u-boot+atf" ?
+> */
+>                          };
+>
+>                          partition@3e0000 {
+>                                  reg = <0x3e0000 0x020000>;
+>                                  label = "bootloader environment";
+>                          };
+>                  };
+>          };
+> };
+>
+> I'm still not sure why that compatible is needed. Also I'd need to
+> change
+> the label which might break user space apps looking for that specific
+> name.
+>
+> Also, our board might have u-boot/spl or u-boot/spl/bl31/bl32, right now
+> that's something which depends on an u-boot configuration variable,
+> which
+> then enables or disables binman nodes in the -u-boot.dtsi. So in linux
+> we only have that "bootloader" partition, but there might be either
+> u-boot+spl or u-boot+spl+bl31+bl32.
+>
+> Honestly, I'm really not sure this should go into a device tree.
+
+I think we might be getting a bit ahead of ourselves here. I thought
+that the decision was that the label should indicate the contents. If
+you have multiple things in a partition then it would become a
+'section' in Binman's terminology. Either the label programmatically
+describes what is inside or it doesn't. We can't have it both ways.
+What do you suggest?
+
+At present it seems you have the image described in two places - one
+is the binman node and the other is the partitions node. I would like
+to unify these.
+
+What does user space do with the partition labels?
+
+>
+> >> What if a board uses eMMC to store the firmware binaries? Will that
+> >> then
+> >> be a subnode to the eMMC device?
+> >
+> > I thought there was a way to link the partition nodes and the device
+> > using a property, without having the partition info as a subnode of
+> > the device. But I may have imagined it as I cannot find it now. So
+> > yes, it will be a subnode of the eMMC device.
+>
+> Not sure if that will fly.
+
+I can't find it anyway. There is somelike like that in
+simple-framebuffer with the 'display' property.
+
+Regards,
+SImon
