@@ -4,92 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C6BFE936EC
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 00:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56AFEE936ED
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 01:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 572F086E04;
-	Thu,  5 Oct 2023 02:02:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 844A887522;
+	Thu,  5 Oct 2023 03:01:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="AdSH2thR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rhq7QWjh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5294086E51; Thu,  5 Oct 2023 02:02:52 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 59B0687522; Thu,  5 Oct 2023 03:01:06 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2454086590
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 02:02:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E953E8757D
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 03:00:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4705E3F66D
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 00:02:47 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1696464167;
- bh=3sanlyXOlAzhqP/ipqIn9gTlqLsugALCIYIvECshh9A=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=AdSH2thR6+jc9i4I0O6EL38PpSJ1kUV4/OW4SXPegg6kBjCe+8kwVU/bBNsL5ztoG
- cP18fYcOWwVCefbiGnRBDo0XhFuip/X8Ykh6bSAiY3RoxUPxAMKNbUaNiO1AN9HI6+
- RfZGIvxpgD0HqBT8/1/M+ubuanJkmR4Uh3hZn7tYvyckZcj2xVzONBPZIRX6Lj3/aK
- yG4hchsvfO+eleJfHgkbImlL/OajVVhINbOqBEGKpHbYtU6DKl/fyJDaMBTdqYGXvC
- NYD1qhHOHIWZQAMkAouaEeHKLF6QG4GzDZdzS+KMYRx5h32faC+v6VvHrY/u2AXR65
- saRjZcGJPWMdA==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-314256aedcbso371813f8f.0
- for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 17:02:47 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-27740ce6c76so281424a91.0
+ for <u-boot@lists.denx.de>; Wed, 04 Oct 2023 18:00:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1696467656; x=1697072456; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lOMCYkerI+rKoLjXWf732/AbPf/YBZAcLZzjGXRAiuo=;
+ b=rhq7QWjhaS9etXtLscUGbNIIirFBdMYGGkJqJe2ZWKb6OnxSmhSJ/AlpwN8djZJAuj
+ WOFlBXVmItFXoxIDfiRd4LcKmVcETrw5LNXhjzFf/EAHfX/luOAKIlDZySpC1Q7my05l
+ kkJZ11aSvoYwhscHgCt1klDweMFmdxetLdGTVqYUhHmOqFbaXRhElmpeJrh04qw9xIaR
+ 1iOzez+TvmIkyUDnS4lViYhYvAXhZt79q2uPI95NBi4X42N7N6MQSdxEYGqcRafLagwv
+ vvn8MqcgVN3b1E7uZs7LRo3iraiQ/UcZ3zRMBVyf4VL/3vbC/zUi/ll/TcSkUsFapbqV
+ 7m7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696464165; x=1697068965;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3sanlyXOlAzhqP/ipqIn9gTlqLsugALCIYIvECshh9A=;
- b=NWHc5dxM9q6RzLi9fmEtL1jdbtfVU7bqyYyhVjGisfAQPw/cmle9PDCGJM/ihXJaTB
- ix8OBGE/QQFCUvtl+etogJrlZAUkWVS0gYuC2LiaZYzd1JOE1WkYsc6ZPG5as6i+1LLo
- 05P2XP6pucfgQHvgD/YfKVt5i3kVQvMS7qcbu/QMUKFVn1ZGRa4xsWJQCRfmy/h0615F
- EG+xtVzRZD980g6ynKoFp6SG4Hb+5WE2jq8j4Iz6LVv5DL5ArkIEXsPHykgXXHpgqlTQ
- 44N3H+BeAO34ndSyHi4NjXUNS4lpg6LwrLLyYv0739TjnYePLJfdXkI2Kxo9QXEESDG7
- CMmA==
-X-Gm-Message-State: AOJu0Yx5bDfk1GbxlZIvpytH4CTExDEkrxlxVTDazwk45214ZYIaKpaH
- +1EVOImLaXvL0JL451yqqYwljgTnvXuKCCcNhaS48BA8XD015j0KTW46j+0shszVmv0ltJZKiqC
- dmqr0JIgxcTUlHTgNz4QzWLtB1S0g/0c=
-X-Received: by 2002:a5d:6986:0:b0:31a:e972:3601 with SMTP id
- g6-20020a5d6986000000b0031ae9723601mr3492571wru.54.1696464165069; 
- Wed, 04 Oct 2023 17:02:45 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFh3ifFtgFadh5O+4lP2DPxKeFcPlAGxJ6Eban5TAsuXwXC7Rp61JHJqQwHI/FViyDlM+Rt/g==
-X-Received: by 2002:a5d:6986:0:b0:31a:e972:3601 with SMTP id
- g6-20020a5d6986000000b0031ae9723601mr3492559wru.54.1696464164763; 
- Wed, 04 Oct 2023 17:02:44 -0700 (PDT)
-Received: from [192.168.123.94] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
- [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
- z12-20020adfec8c000000b00324853fc8adsm305109wrn.104.2023.10.04.17.02.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Oct 2023 17:02:44 -0700 (PDT)
-Message-ID: <3011f86a-7df9-416c-9b0f-a6b07d14667a@canonical.com>
-Date: Thu, 5 Oct 2023 02:02:45 +0200
+ d=1e100.net; s=20230601; t=1696467656; x=1697072456;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=lOMCYkerI+rKoLjXWf732/AbPf/YBZAcLZzjGXRAiuo=;
+ b=kPnnU1eI9jDAHW48njBj0/U+mR2AHnQzvmSUIWJrvfJr6YaWEZD0Lo1P1sQ0oKW1R7
+ oYN/9vYRXnH9bWvRIXx+J0qfy+Ue0IuDB7XHln3LTZnrvMvO0TbKXnDY+gfi3tDHBo7s
+ D5N7HF3gOYO9bM27CBkNep8bMqbDPoMgc74rJD0oCBJCIcZhcaOsgMCxZMqEMMX+3HrQ
+ wYK3wSHKvp82Hz1TmQ/j6dfenmJjpE/z72L5QHnUYJBFrXZKdeQVgQbz64D+etFgKr2l
+ j3TyI2DnDEATSU1jNbraWnzZCrnRijMzBZ6sdf0vER9ZC3Ci7JX3ZLhd29uFf+6ikzbz
+ 3OJg==
+X-Gm-Message-State: AOJu0Yyx6+IEQzASZ2YuNlTZECDmp87FWuN8j8ea2YpA7lTQecSQzKGZ
+ BtWwPVGrLG5z0dOdHEVOMWRzhx/SAyWujzRoFdjKr33cA1GN4NIE
+X-Google-Smtp-Source: AGHT+IFMeLafzKXIN2O7MHejMJhIpOyNNELw26X5SA8ogiN2JjBW6c1VXGnKn2f2Yd/Ij3bpCSOqj3bi7RR4bxzf2BQ=
+X-Received: by 2002:a17:90a:e651:b0:268:1be1:745a with SMTP id
+ ep17-20020a17090ae65100b002681be1745amr3513418pjb.29.1696467656479; Wed, 04
+ Oct 2023 18:00:56 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] riscv: remove dram_init_banksize()
-Content-Language: en-US
-To: "Wu, Fei" <fei2.wu@intel.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Anup Patel <apatel@ventanamicro.com>,
- u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
-References: <20230926071634.22016-1-heinrich.schuchardt@canonical.com>
- <fcc91051-81c5-7b0f-fd93-d971200e5c2d@intel.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <fcc91051-81c5-7b0f-fd93-d971200e5c2d@intel.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20230927010436.1503621-1-masahisa.kojima@linaro.org>
+In-Reply-To: <20230927010436.1503621-1-masahisa.kojima@linaro.org>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Thu, 5 Oct 2023 10:00:45 +0900
+Message-ID: <CADQ0-X9qG+qyZe9eeS6tOH=ySMQqWcxyJRYLBRmanEceC6PECg@mail.gmail.com>
+Subject: Re: [PATCH v12] Boot var automatic management for removable medias
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Raymond Mao <raymond.mao@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,78 +89,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/26/23 09:46, Wu, Fei wrote:
-> On 9/26/2023 3:16 PM, Heinrich Schuchardt wrote:
->> Remove dram_init_banksize() on the architecture level.
->>
->> Limiting used RAM to under 4 GiB is only necessary for CPUs which have a
->> DMA issue. SoC specific code already exists for FU540, FU740, JH7110.
->>
->> Not all RISC-V boards will have memory below 4 GiB.
->>
->> A weak implementation of dram_init_banksize() exists in common/board_f.c.
->>
->> See the discussion in
->> https://lore.kernel.org/u-boot/545fe813-cb1e-469c-a131-0025c77aeaa2@canonical.com/T/
->>
-> Thanks you Heinrich, this patch itself is okay to me, but it still
-> doesn't address the problem in that thread. In setup_dest_addr():
-> 
-> #ifdef CFG_SYS_SDRAM_BASE
->          gd->ram_base = CFG_SYS_SDRAM_BASE;
-> #endif
->          gd->ram_top = gd->ram_base + get_effective_memsize();
->          gd->ram_top = board_get_usable_ram_top(gd->mon_len);
-> 
-> ram_base is modified in #ifdef so that ram_base and
-> get_effective_memsize() is not well paired. e.g. two ranges of memory
-> [2GB, 3GB) and [4GB, 6GB), ram_base is set to 2GB of 1st range and
-> get_effective_memsize() returns 2GB of 2nd range, ram_top will be set to
-> 4GB which is not desired. Will you address this too?
+Hi Tom, Heinrich, Ilias,
+ # Added Tom since this patch is delegated to him
 
-No, that is an independent issue. I only want to get rid of the generic 
-restriction to memory below 4 GiB on RISC-V.
+On Wed, 27 Sept 2023 at 10:06, Masahisa Kojima
+<masahisa.kojima@linaro.org> wrote:
+>
+> From: Raymond Mao <raymond.mao@linaro.org>
+>
+> Changes for complying to EFI spec =C2=A73.5.1.1
+> 'Removable Media Boot Behavior'.
+> Boot variables can be automatically generated during a removable
+> media is probed. At the same time, unused boot variables will be
+> detected and removed.
+>
+> Please note that currently the function 'efi_disk_remove' has no
+> ability to distinguish below two scenarios
+> a) Unplugging of a removable media under U-Boot
+> b) U-Boot exiting and booting an OS
+> Thus currently the boot variables management is not added into
+> 'efi_disk_remove' to avoid boot options being added/erased
+> repeatedly under scenario b) during power cycles
+> See TODO comments under function 'efi_disk_remove' for more details
+>
+> The original efi_secboot tests expect that BootOrder EFI variable
+> is not defined. With this commit, the BootOrder EFI variable is
+> automatically added when the disk is detected. The original efi_secboot
+> tests end up with unexpected failure.
+> The efi_secboot tests need to be modified to clear the BootOrder
+> EFI variable at the beginning of each test.
+>
+> Co-developed-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  lib/efi_loader/efi_disk.c                      | 18 ++++++++++++++++++
+>  lib/efi_loader/efi_setup.c                     |  7 +++++++
+>  test/py/tests/test_efi_secboot/test_signed.py  |  9 +++++++++
+>  .../test_efi_secboot/test_signed_intca.py      |  3 +++
+>  .../py/tests/test_efi_secboot/test_unsigned.py |  3 +++
+>  5 files changed, 40 insertions(+)
+>
+> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> index f0d76113b0..b808a7fe62 100644
+> --- a/lib/efi_loader/efi_disk.c
+> +++ b/lib/efi_loader/efi_disk.c
+> @@ -690,6 +690,13 @@ int efi_disk_probe(void *ctx, struct event *event)
+>                         return -1;
+>         }
+>
+> +       /* only do the boot option management when UEFI sub-system is ini=
+tialized */
+> +       if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR) && efi_obj_list_initia=
+lized =3D=3D EFI_SUCCESS) {
+> +               ret =3D efi_bootmgr_update_media_device_boot_option();
+> +               if (ret !=3D EFI_SUCCESS)
+> +                       return -1;
+> +       }
+> +
+>         return 0;
+>  }
+>
+> @@ -742,6 +749,17 @@ int efi_disk_remove(void *ctx, struct event *event)
+>         dev_tag_del(dev, DM_TAG_EFI);
+>
+>         return 0;
+> +
+> +       /*
+> +        * TODO A flag to distinguish below 2 different scenarios of this
+> +        * function call is needed:
+> +        * a) Unplugging of a removable media under U-Boot
+> +        * b) U-Boot exiting and booting an OS
+> +        * In case of scenario a), efi_bootmgr_update_media_device_boot_o=
+ption()
+> +        * needs to be invoked here to update the boot options and remove=
+ the
+> +        * unnecessary ones.
+> +        */
+> +
+>  }
+>
+>  /**
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index 58d4e13402..69c8b27730 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -245,6 +245,13 @@ efi_status_t efi_init_obj_list(void)
+>         if (ret !=3D EFI_SUCCESS)
+>                 goto out;
+>
+> +       if (IS_ENABLED(CONFIG_CMD_BOOTEFI_BOOTMGR)) {
+> +               /* update boot option after variable service initialized =
+*/
+> +               ret =3D efi_bootmgr_update_media_device_boot_option();
+> +               if (ret !=3D EFI_SUCCESS)
+> +                       goto out;
+> +       }
+> +
+>         /* Define supported languages */
+>         ret =3D efi_init_platform_lang();
+>         if (ret !=3D EFI_SUCCESS)
+> diff --git a/test/py/tests/test_efi_secboot/test_signed.py b/test/py/test=
+s/test_efi_secboot/test_signed.py
+> index ca52e853d8..b77b60e223 100644
+> --- a/test/py/tests/test_efi_secboot/test_signed.py
+> +++ b/test/py/tests/test_efi_secboot/test_signed.py
+> @@ -28,6 +28,7 @@ class TestEfiSignedImage(object):
+>              # Test Case 1a, run signed image if no PK
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
 
-I would recommend to set ram_top to the highest available memory address 
-of the highest RAM bank with some special handling of the ARM LPAE case 
-or 32bit in general. But this is not a RISC-V specific topic.
+This patch itself is trying to automatically add the EFI boot
+option(BOOT####) and
+update the BootOrder variable.
+I now understand that clearing the BootOrder variable is not an appropriate=
+ fix
+in this efi_secboot test, 'setenv -e -nv -bs -rt BootOrder' fails
+when the BootOrder variable is not found.
+When booting the system with BootNext fails, efibootmgr falls back to BootO=
+rder.
+Instead of loading an image with BootNext, efi_secboot tests need to
+explicitly set
+the BootOrder variable.
 
-Best regards
+I will revise this patch, and let me include this patch in EFI HTTP
+Boot series[1].
+As discussed with Ilias, EFI HTTP Boot series[1] will rely heavily on
+this patch.
 
-Heinrich
+[1] https://lore.kernel.org/u-boot/20230927093631.1595494-1-masahisa.kojima=
+@linaro.org/
 
-> 
-> Best Regards,
-> Fei.
-> 
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   arch/riscv/cpu/generic/dram.c | 16 ----------------
->>   1 file changed, 16 deletions(-)
->>
->> diff --git a/arch/riscv/cpu/generic/dram.c b/arch/riscv/cpu/generic/dram.c
->> index 94d8018407..1b51bae9b6 100644
->> --- a/arch/riscv/cpu/generic/dram.c
->> +++ b/arch/riscv/cpu/generic/dram.c
->> @@ -20,19 +20,3 @@ int dram_init_banksize(void)
->>   {
->>   	return fdtdec_setup_memory_banksize();
->>   }
->> -
->> -phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->> -{
->> -	/*
->> -	 * Ensure that we run from first 4GB so that all
->> -	 * addresses used by U-Boot are 32bit addresses.
->> -	 *
->> -	 * This in-turn ensures that 32bit DMA capable
->> -	 * devices work fine because DMA mapping APIs will
->> -	 * provide 32bit DMA addresses only.
->> -	 */
->> -	if (gd->ram_top >= SZ_4G)
->> -		return SZ_4G - 1;
->> -
->> -	return gd->ram_top;
->> -}
-> 
+Thanks,
+Masahisa Kojima
 
+
+
+>                  'efidebug boot add -b 1 HELLO1 host 0:1 /helloworld.efi.=
+signed -s ""',
+>                  'efidebug boot next 1',
+>                  'bootefi bootmgr'])
+> @@ -52,6 +53,7 @@ class TestEfiSignedImage(object):
+>              # Test Case 2a, db is not yet installed
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 KEK.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
+>                  'fatload host 0:1 4000000 PK.auth',
+> @@ -96,6 +98,7 @@ class TestEfiSignedImage(object):
+>              # Test Case 3a, rejected by dbx
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 db.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
+>                  'fatload host 0:1 4000000 KEK.auth',
+> @@ -132,6 +135,7 @@ class TestEfiSignedImage(object):
+>              # Test Case 4, rejected by dbx
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 dbx_hash.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
+>                  'fatload host 0:1 4000000 db.auth',
+> @@ -161,6 +165,7 @@ class TestEfiSignedImage(object):
+>              # is verified
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 db.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
+>                  'fatload host 0:1 4000000 KEK.auth',
+> @@ -217,6 +222,7 @@ class TestEfiSignedImage(object):
+>              # is verified. Same as before but reject dbx_hash1.auth only
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 db.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
+>                  'fatload host 0:1 4000000 KEK.auth',
+> @@ -294,6 +300,7 @@ class TestEfiSignedImage(object):
+>          with u_boot_console.log.section('Test Case 7a'):
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 db.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
+>                  'fatload host 0:1 4000000 KEK.auth',
+> @@ -317,6 +324,7 @@ class TestEfiSignedImage(object):
+>          with u_boot_console.log.section('Test Case 7b'):
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 db.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
+>                  'fatload host 0:1 4000000 KEK.auth',
+> @@ -348,6 +356,7 @@ class TestEfiSignedImage(object):
+>              # Test Case 8a, Secure boot is not yet forced
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'efidebug boot add -b 1 HELLO1 host 0:1 /helloworld_forg=
+ed.efi.signed -s ""',
+>                  'efidebug boot next 1',
+>                  'efidebug test bootmgr'])
+> diff --git a/test/py/tests/test_efi_secboot/test_signed_intca.py b/test/p=
+y/tests/test_efi_secboot/test_signed_intca.py
+> index d8d599d22f..318715fa08 100644
+> --- a/test/py/tests/test_efi_secboot/test_signed_intca.py
+> +++ b/test/py/tests/test_efi_secboot/test_signed_intca.py
+> @@ -30,6 +30,7 @@ class TestEfiSignedImageIntca(object):
+>              # Test Case 1a, with no Int CA and not authenticated by root=
+ CA
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 db_c.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
+>                  'fatload host 0:1 4000000 KEK.auth',
+> @@ -63,6 +64,7 @@ class TestEfiSignedImageIntca(object):
+>              # Test Case 2a, unsigned and not authenticated by root CA
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 KEK.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
+>                  'fatload host 0:1 4000000 PK.auth',
+> @@ -105,6 +107,7 @@ class TestEfiSignedImageIntca(object):
+>              # Test Case 3a, revoked by int CA in dbx
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 dbx_b.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
+>                  'fatload host 0:1 4000000 db_c.auth',
+> diff --git a/test/py/tests/test_efi_secboot/test_unsigned.py b/test/py/te=
+sts/test_efi_secboot/test_unsigned.py
+> index df63f0df08..9042a46ccc 100644
+> --- a/test/py/tests/test_efi_secboot/test_unsigned.py
+> +++ b/test/py/tests/test_efi_secboot/test_unsigned.py
+> @@ -28,6 +28,7 @@ class TestEfiUnsignedImage(object):
+>              # Test Case 1
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 KEK.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
+>                  'fatload host 0:1 4000000 PK.auth',
+> @@ -55,6 +56,7 @@ class TestEfiUnsignedImage(object):
+>              # Test Case 2
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 db_hello.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize db',
+>                  'fatload host 0:1 4000000 KEK.auth',
+> @@ -79,6 +81,7 @@ class TestEfiUnsignedImage(object):
+>              # Test Case 3a, rejected by dbx
+>              output =3D u_boot_console.run_command_list([
+>                  'host bind 0 %s' % disk_img,
+> +                'setenv -e -nv -bs -rt BootOrder',
+>                  'fatload host 0:1 4000000 db_hello.auth',
+>                  'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx',
+>                  'fatload host 0:1 4000000 KEK.auth',
+> --
+> 2.34.1
+>
