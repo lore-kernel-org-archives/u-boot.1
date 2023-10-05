@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B94E3E92716
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 19:13:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6699FE93712
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 20:23:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0448686D11;
-	Thu,  5 Oct 2023 21:13:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F30F86CE7;
+	Thu,  5 Oct 2023 22:23:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=prp.uespi.br
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Cn1vtP+9";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=prp.uespi.br header.i=@prp.uespi.br header.b="crTvfQpB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E05C86D28; Thu,  5 Oct 2023 21:13:26 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 384E886D02; Thu,  5 Oct 2023 22:23:24 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F00C85095
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 21:13:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EB5986C87
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 22:23:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=prp.uespi.br
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4S1h6V2BYPz9sST;
- Thu,  5 Oct 2023 21:13:22 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696533202;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6/vxx3Jfb9wzzvNy+B7nuMKQUn0XEfPgvEZDMkO0u3E=;
- b=Cn1vtP+9L5QLyOV+FsxBtoV4shSKsxQhMy5j3vicXgoy9/de0AatnoqVF/zOFPzwYB6E3C
- Z4pNafGxwysJ+aQqy9oZ0oKVg2+yLBQ+h0KzlQ8AEajRvC26pWuVwoyhrZq9M5PX8YP7li
- aR+SB2xxTr2i8tgKTv/jfs+KFiBLNadzLYsjqhw+/Q3jmMmKdMPhJiJNlqslIdM7U9xgRI
- VZsLH5xt4UXxCEGmkun4gWXzdMnDiYNHem1aemoh0vb8+QQY4ZKjQP6nSvZ5dWX6IgEAFn
- M1bEzRTtmDw2XU/elo8opwMcC9JjrCARb7W9Jp5MGW4PNBUV/zxWHdTqcU9vag==
-Message-ID: <d3734870-add1-4b34-910c-4adbeb864ac9@mailbox.org>
-Date: Thu, 5 Oct 2023 21:13:21 +0200
+ spf=pass smtp.mailfrom=project-tvbox@prp.uespi.br
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-40651a726acso12842755e9.1
+ for <u-boot@lists.denx.de>; Thu, 05 Oct 2023 13:23:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=prp.uespi.br; s=uespi; t=1696537397; x=1697142197; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=KuXzQPkTPsTYFLwbvrapDW4g9uhSUWNqna+/CMav3MM=;
+ b=crTvfQpBHcP1UfzzWkXDlTV7gI5dJOyqGaKmABbbKIQ6Qm1MTlqzaHRUqZAODjiHwG
+ AKN4GMQ3o0MOFnLJUa5IwJ5e9dz2DgXRmPqF7jycUZkWPJW5zmWQnnPwY0QDI9s0hFek
+ uO9yWG+QFr8a3uJcF2OuqmB6eRqrKuuLAAeWg5YyMMXgn8FS0auHZyhoayJd2hA1n0g2
+ 8oLJSuwQLhTW4L0iSWeHBs7+dpQ0TRccKK1ZW4/YIQ61W7l+VI+XHGfrhFrYGpddPmgj
+ u272902PxcE5vmj2kzrz/0DATtG6ffAGPJ+HQ6T2pWW5B5Z1tzVbCI80Xc0JoMk0mcBm
+ ckYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696537397; x=1697142197;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=KuXzQPkTPsTYFLwbvrapDW4g9uhSUWNqna+/CMav3MM=;
+ b=fISe9TUBlvK+D1vRBjXvbboxfCLb2SIzrAbnChfxM1pBB8VSfwtZ2JCJmY9MdVQcQF
+ 2mAjTSUQPwYuM7N5f3b+kADBPXMHO9F6XQ9ydPle2nFyGtji34Zixz0NYuARgwHY9V1A
+ pQ6WYYPwp9oDV138OkHiy+VsBWG5YSvD9A0tQTdtdKaDcVKAIRm6NjrX9kA+xz6dcD9a
+ TRcdoojQnf2ok1NElF+Jzbv5DeMcZZJjepxtQLTM8dgIjydIvCJSGMks1mGp4wkox4rH
+ 5MiDmp4VZX87EnAtK4XZtfX0aeHEjfC72QdxR33Ofjizobi+QzU//u2NKgDxkaHqe+FH
+ afpQ==
+X-Gm-Message-State: AOJu0YxFZpNBS2H9kA/0FKE4uLl1/CDvnMbsnZmvk92hjrY5G51VcqT4
+ hanhtwHuW1nuvs7eStuYF61Xwy6orbDhLV3EGA4SdzdEFOcZllze
+X-Google-Smtp-Source: AGHT+IFAmUq9fuTUn2PMDYDa1/l1yidNzDq+UWwPP6HgP8hR1EazY8BIzf0Aess69mh3XsTcmFeX9qUUkiNCp+Q5siY=
+X-Received: by 2002:a05:600c:2189:b0:402:bcac:5773 with SMTP id
+ e9-20020a05600c218900b00402bcac5773mr6161070wme.38.1696537397234; Thu, 05 Oct
+ 2023 13:23:17 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
-Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
- <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
- <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
- <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
- <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
- <5d5f0da0-c0f1-670d-d43a-dd2618f226db@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <5d5f0da0-c0f1-670d-d43a-dd2618f226db@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 737ed6690859f34004e
-X-MBO-RS-META: imx58hh1c8dqqu1n7euur1m89yfutgfw
+From: project-tvbox project-tvbox <project-tvbox@prp.uespi.br>
+Date: Thu, 5 Oct 2023 17:23:06 -0300
+Message-ID: <CAC15VHQzeob=727iTbah2uOkr0LGhFLRq4W3ZpQoPNJ4rHdEJw@mail.gmail.com>
+Subject: H616 DRAM support on mailine kernel
+To: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,49 +81,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/5/23 18:18, Paul Barker wrote:
-> On 04/10/2023 13:26, Marek Vasut wrote:
->> On 10/4/23 10:48, Paul Barker wrote:
->>> On 03/10/2023 14:23, Marek Vasut wrote:
->>>> On 9/20/23 14:42, Paul Barker wrote:
->>>>> +	if (IS_ENABLED(CONFIG_RZG2L)) {
->>>>> +		struct reset_ctl rst;
->>>>> +		int ret;
->>>>> +
->>>>> +		ret = reset_get_by_index(dev, 0, &rst);
->>>>> +		if (ret < 0) {
->>>>> +			dev_err(dev, "failed to get reset line\n");
->>>>> +			return ret;
->>>>> +		}
->>>>> +
->>>>> +		ret = reset_deassert(&rst);
->>>>> +		if (ret < 0) {
->>>>> +			dev_err(dev, "failed to de-assert reset line\n");
->>>>> +			return ret;
->>>>> +		}
->>>>> +	}
->>>>
->>>> devm_reset_control_get_optional() or something should do here too , right ?
->>>>
->>>> Note that R-Car does have SCIF reset too, so this can be generic code.
->>>
->>> For R-Car systems the current behaviour is working and well tested, we
->>> concluded that we shouldn't change it so this reset de-assert was made
->>> RZ/G2L specific.
->>
->> I can test on R-Car just fine, no worries.
->>
->> SH R2Dplus is even tested in CI nightly.
->>
->>> For RZ/G2L, de-asserting the reset is not optional.
->>
->> Let's avoid special-cases like that.
-> 
-> Looking at this again, I don't see how we can avoid a special case here,
-> de-asserting the reset is required for the RZ/G2L. It may be optional on
-> other SoCs (I don't know), but it's definitely not optional here, so I
-> don't think we should be using the devm_reset_control_get_optional()
-> function.
+dears,
 
-I'd say let's just unconditionally assume reset is needed for all 
-platforms. That should work, right ?
+How can I edit the drm parameters directly in the mainline kernel,
+since the mainline dts does not have these options like the legacy
+one, I saw that the dram.c drives in the legacy and mailline are
+similar, for example:
+[dram_para]
+dram_clk = 600
+dram_type = 3
+dram_dx_odt = 0x03030303
+dram_dx_dri = 0x0e0e0e0e
+dram_ca_dri = 0x1f12
+dram_odt_en = 1
+dram_para1 = 0x30fb
+dram_para2 = 0x0000
+dram_mr0 = 0x840
+ in the mainline kernel
