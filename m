@@ -4,39 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3554FE7B614
-	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 17:07:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7022CE7AD45
+	for <u-boot@archiver.kernel.org>; Thu,  5 Oct 2023 17:10:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D09B86C87;
-	Thu,  5 Oct 2023 19:07:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 7DB7486B55;
+	Thu,  5 Oct 2023 19:10:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CCCF86C91; Thu,  5 Oct 2023 19:07:22 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 2C7E586C71
- for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 19:07:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,203,1694703600"; d="scan'208";a="178312534"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 06 Oct 2023 02:07:16 +0900
-Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.48])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id C96C34068F4C;
- Fri,  6 Oct 2023 02:07:14 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ralph Siemsen <ralph.siemsen@linaro.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PATCH] doc: Migrate Renesas board docs to rst
-Date: Thu,  5 Oct 2023 18:07:05 +0100
-Message-Id: <20231005170705.31319-1-paul.barker.ct@bp.renesas.com>
-X-Mailer: git-send-email 2.39.2
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Xgc6TcfW";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B73098611C; Thu,  5 Oct 2023 19:10:21 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CCF7B8074B
+ for <u-boot@lists.denx.de>; Thu,  5 Oct 2023 19:10:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=nm@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 395HAAZx081526;
+ Thu, 5 Oct 2023 12:10:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696525810;
+ bh=ceNohPTaC5X2ymoTsBGINp0n2x5Qgqlg2lT85SwiTwA=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=Xgc6TcfWjUKLBE2KOEq5iQS3ARtPIjDaMof1VH/2Ed+MtrNpf8MH3XzsKuWpsDPg7
+ wlKVPnUs3I4ywEg8MIIEeTB+VK7SdinzGErsFCDSkHcWDHySn/8gY4RlhCwivwZiRd
+ k6S9mAGx/LLG/mlH7wIxTfvkqmUXpa48tHsxyPfw=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 395HAAU4007860
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 5 Oct 2023 12:10:10 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 5
+ Oct 2023 12:10:10 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 5 Oct 2023 12:10:10 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 395HAAZR026011;
+ Thu, 5 Oct 2023 12:10:10 -0500
+Date: Thu, 5 Oct 2023 12:10:10 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Andrew Davis <afd@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ <vigneshr@ti.com>, <m-chawdhry@ti.com>, <sjg@chromium.org>,
+ <jonas@kwiboo.se>, <srk@ti.com>, <bb@ti.com>, <praneeth@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
+Message-ID: <20231005171010.zvza7uqyn4mcgp5g@handsaw>
+References: <20231004132324.44198-1-rogerq@kernel.org>
+ <20231004132324.44198-2-rogerq@kernel.org>
+ <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
+ <20231004135436.ihofrxutzcdefica@audacious>
+ <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
+ <20231005163645.GS8465@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231005163645.GS8465@bill-the-cat>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,411 +85,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of the information in README.rmobile is obsolete, references
-defconfigs which no longer exist in u-boot or has broken links. The
-information which is still relevant is moved into the reStructuredText
-documentation under `doc/board/renesas`, and `doc/README.rmobile` is
-dropped.
+On 12:36-20231005, Tom Rini wrote:
+> On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
+> > On 10/4/23 8:54 AM, Nishanth Menon wrote:
+> > > On 08:48-20231004, Andrew Davis wrote:
+> > > > On 10/4/23 8:23 AM, Roger Quadros wrote:
+> > > > > ti_mmc is not a valid boot_target for standard boot flow so
+> > > > 
+> > > > Is there some way to make it into a valid boot_target? Otherwise
+> > > > how do we use uEnv.txt files, or boot from FIT images with overlays?
+> > > 
+> > > envboot takes care of uEnv.txt file (see
+> > > https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
+> > > 
+> > > Early remote proc loading and FIT image is a question for stdboot itself.
+> > > 
+> > 
+> > If stdboot is missing these features then we shouldn't switch until it
+> > has them. I'm all for switching to this, but only if it is complete.
+> 
+> Depends on what you mean?  Did you mean an option to run scripts
+> (exists) or an option to do what TI needs done, via
+> boot/bootmeth_something.c ?  If the latter, someone from TI needs to
+> figure out what that should be and do (but plumbing-wise everything it
+> needs should exist).
 
-The list of boards in `doc/board/renesas` is converted into a table so
-it's easier to see which defconfig to use. The list is expanded based on
-reviewing the current u-boot code and the contents of the eLinux wiki
-[1] [2].
+Andrew is generalizing here (on the wrong patch though).
 
-[1]: https://elinux.org/R-Car
-[2]: https://elinux.org/RZ-G
+On am62x platforms, there is nothing regressing with this series. The
+challenge is early remote_proc loading which is done for J7* platforms.
 
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
----
- doc/README.rmobile            |  99 -------------
- doc/board/renesas/renesas.rst | 255 +++++++++++++++++++++++++++++-----
- doc/board/renesas/rzn1.rst    |   2 +
- 3 files changed, 226 insertions(+), 130 deletions(-)
- delete mode 100644 doc/README.rmobile
+How that is initiated as part of bootmethods is something of a gap.
 
-diff --git a/doc/README.rmobile b/doc/README.rmobile
-deleted file mode 100644
-index 524d839558bb..000000000000
---- a/doc/README.rmobile
-+++ /dev/null
-@@ -1,99 +0,0 @@
--Summary
--=======
--
--This README is about U-Boot support for Renesas's ARM Cortex-A9 based RMOBILE[1]
--and Cortex-A9/A53/A57 based R-Car[2] family of SoCs. Renesas's RMOBILE/R-Car SoC
--family contains an ARM Cortex-A9/A53/A57.
--
--Currently the following boards are supported:
--
--| SoC           | Board                                  | defconfig
--|===============+========================================+===================
--| R8A73A0       | KMC KZM-A9-GT [3]                      | kzm9g_config
--| R8A7734       | Atmark-Techno Armadillo-800-EVA [4]    | armadillo-800eva_config
--|===============+========================================+===================
--| R8A7790  H2   | Renesas Electronics Lager              | lager_defconfig
--|               | Renesas Electronics Stout              | stout_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A7791  M2-W | Renesas Electronics Koelsch            | koelsch_defconfig
--|               | Renesas Electronics Porter             | porter_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A7792  V2H  | Renesas Electronics Blanche            | blanche_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A7793  M2-N | Renesas Electronics Gose               | gose_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A7794  E2   | Renesas Electronics Alt                | alt_defconfig
--|               | Renesas Electronics Silk               | silk_defconfig
--|===============+========================================+===================
--| R8A7795  H3   | Renesas Electronics Salvator-XS ES2.0+ | r8a7795_salvator-x_defconfig
--| R8A7795  H3   | Renesas Electronics ULCB ES2.0+        | r8a7795_ulcb
--|---------------+----------------------------------------+-------------------
--| R8A7796  M3-W | Renesas Electronics Salvator-X         | r8a7796_salvator-x_defconfig
--| R8A7796  M3-W | Renesas Electronics ULCB               | r8a7796_ulcb
--|---------------+----------------------------------------+-------------------
--| R8A77965 M3-N | Renesas Electronics Salvator-XS        | r8a77965_salvator-x_defconfig
--| R8A77965 M3-N | Renesas Electronics ULCB               | r8a77965_ulcb
--|---------------+----------------------------------------+-------------------
--| R8A77970 V3M  | Renesas Electronics Eagle              | r8a77970_eagle_defconfig
--| R8A77970 V3M  | Renesas Electronics V3MSK              | r8a77970_v3msk_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A77995 D3   | Renesas Electronics Draak              | r8a77995_draak_defconfig
--'===============+========================================+===================
--
--Toolchain
--=========
--
--Either ARMv7 toolchain for 32bit Cortex-A9 systems or ARMv8 (aarch64)
--toolchain for 64bit Cortex-A53/A57 systems. Currently we compile the
--32bit systems with -march=armv5 to allow more compilers to work. (For
--U-Boot code this has no performance impact.)
--
--Currently, ELDK[5], Linaro[6], CodeSourcery[7] and Emdebian[8] supports
--ARMv7. Modern distributions also contain ARMv7 and ARMv8 crosstoolchains
--in their package feeds.
--
--Build
--=====
--
--Locate defconfig in the table above. Then apply standard build procedure:
--
--  make <board>_defconfig
--  make
--
--  Note: Armadillo-800-EVA's U-Boot supports booting from SDcard only.
--        Please see "B.2 Appendix B Boot Specifications" in hardware manual.
--
--Links
--=====
--
--[1] Renesas RMOBILE:
--
--http://am.renesas.com/products/soc/assp/mobile/r_mobile/index.jsp
--
--[2] Renesas R-Car:
--
--http://am.renesas.com/products/soc/assp/automotive/index.jsp
--
--[3] KZM-A9-GT
--
--http://www.kmckk.co.jp/kzma9-gt/index.html
--
--[4] Armadillo-800-EVA
--
--http://armadillo.atmark-techno.com/armadillo-800-EVA
--
--[5] ELDK
--
--http://www.denx.de/wiki/view/ELDK-5/WebHome#Section_1.6.
--
--[6] Linaro
--
--http://www.linaro.org/downloads/
--
--[7] CodeSourcey
--
--http://www.mentor.com/embedded-software/codesourcery
--
--[8] Emdebian
--
--http://www.emdebian.org/crosstools.html
-diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.rst
-index 04dee8da2454..57d30958b55f 100644
---- a/doc/board/renesas/renesas.rst
-+++ b/doc/board/renesas/renesas.rst
-@@ -9,37 +9,230 @@ About this
- This document describes the information about Renesas supported boards
- and their usage steps.
- 
--Renesas boards
----------------
-+Renesas SoC based boards
-+------------------------
- 
- Renesas is a SoC solutions provider for automotive and industrial applications.
- 
--U-Boot supports several Renesas SoC families:
--
--* R-Car Gen2 (32-bit)
--    - Blanche board
--    - Gose board
--    - Koelsch board
--    - Lager board
--    - Silk board
--    - Porter board
--    - Stout board
--* R-Car Gen3 (64-bit)
--    - Condor board
--    - Draak board
--    - Eagle board
--    - Ebisu board
--    - Salvator-X and Salvator-XS boards
--    - ULCB board
--* R-Car Gen4 (64-bit)
--    - Falcon board
--    - Spider board
--    - Whitehawk board
--* RZ/A1 (32-bit)
--    - GR-PEACH board
--* RZ/G
--    - Beacon-rzg2 board
--    - Hihope-rzg2 board
--    - ek874 board
--* RZ/N1 (32-bit)
--    - Schneider rzn1-snarc board
-+.. list-table:: Supported Renesas SoC based boards
-+   :widths: 10, 25, 15, 10, 25
-+   :header-rows: 1
-+
-+   * - Family
-+     - Board
-+     - SoC
-+     - Arch
-+     - defconfig
-+
-+   * - R2D
-+     - R2D-PLUS
-+     - SH7751
-+     - sh
-+     - ``r2dplus_defconfig``
-+
-+   * - RZ/A1
-+     - GR-PEACH
-+     - R7S72100 (RZ/A1H)
-+     - arm
-+     - ``grpeach_defconfig``
-+
-+   * - R-Car Gen2
-+     - Lager
-+     - R8A7790 (H2)
-+     - arm
-+     - ``lager_defconfig``
-+
-+   * -
-+     - Stout
-+     - R8A7790 (H2)
-+     - arm
-+     - ``stout_defconfig``
-+
-+   * -
-+     - Koelsch
-+     - R8A7791 (M2-W)
-+     - arm
-+     - ``koelsch_defconfig``
-+
-+   * -
-+     - Porter
-+     - R8A7791 (M2-W)
-+     - arm
-+     - ``porter_defconfig``
-+
-+   * -
-+     - Blanche
-+     - R8A7792 (V2H)
-+     - arm
-+     - ``blanche_defconfig``
-+
-+   * -
-+     - Gose
-+     - R8A7793 (M2-N)
-+     - arm
-+     - ``gose_defconfig``
-+
-+   * -
-+     - Alt
-+     - R8A7794 (E2)
-+     - arm
-+     - ``alt_defconfig``
-+
-+   * -
-+     - Silk
-+     - R8A7794 (E2)
-+     - arm
-+     - ``silk_defconfig``
-+
-+   * - R-Car Gen3
-+     - Salvator-X
-+     - R8A77950 (H3)
-+     - arm64
-+     - ``rcar3_salvator-x_defconfig``
-+
-+   * -
-+     - ULCB
-+     - R8A77950 (H3)
-+     - arm64
-+     - ``rcar3_ulcb_defconfig``
-+
-+   * -
-+     - Salvator-X
-+     - R8A77960 (M3-W)
-+     - arm64
-+     - ``rcar3_salvator-x_defconfig``
-+
-+   * -
-+     - ULCB
-+     - R8A77960 (M3-W)
-+     - arm64
-+     - ``rcar3_ulcb_defconfig``
-+
-+   * -
-+     - Salvator-X
-+     - R8A77965 (M3-N)
-+     - arm64
-+     - ``rcar3_salvator-x_defconfig``
-+
-+   * -
-+     - ULCB
-+     - R8A77965 (M3-N)
-+     - arm64
-+     - ``rcar3_ulcb_defconfig``
-+
-+   * -
-+     - Eagle
-+     - R8A77970 (V3M)
-+     - arm64
-+     - ``r8a77970_eagle_defconfig``
-+
-+   * -
-+     - V3MSK
-+     - R8A77970 (V3M)
-+     - arm64
-+     - ``r8a77970_v3msk_defconfig``
-+
-+   * -
-+     - Condor
-+     - R8A77980 (V3H)
-+     - arm64
-+     - ``r8a77980_condor_defconfig``
-+
-+   * -
-+     - V3MSK
-+     - R8A77980 (V3H)
-+     - arm64
-+     - ``r8a77980_v3hsk_defconfig``
-+
-+   * -
-+     - Ebisu
-+     - R8A77990 (E3)
-+     - arm64
-+     - ``r8a77990_ebisu_defconfig``
-+
-+   * -
-+     - Draak
-+     - R8A77995 (D3)
-+     - arm64
-+     - ``r8a77995_draak_defconfig``
-+
-+   * - R-Car Gen4
-+     - Falcon
-+     - R8A779A0 (V3U)
-+     - arm64
-+     - ``r8a779a0_falcon_defconfig``
-+
-+   * -
-+     - Spider
-+     - R8A779F0 (S4)
-+     - arm64
-+     - ``r8a779f0_spider_defconfig``
-+
-+   * -
-+     - Whitehawk
-+     - R8A779G0 (V4H)
-+     - arm64
-+     - ``r8a779g0_whitehawk_defconfig``
-+
-+   * - RZ/G2 Family
-+     - Beacon EmbeddedWorks RZ/G2M SoM
-+     - R8A774A1 (RZ/G2M)
-+     - arm64
-+     - ``rzg2_beacon_defconfig``
-+
-+   * -
-+     - HopeRun HiHope RZ/G2M
-+     - R8A774A1 (RZ/G2M)
-+     - arm64
-+     - ``hihope_rzg2_defconfig``
-+
-+   * -
-+     - Beacon EmbeddedWorks RZ/G2N SoM
-+     - R8A774B1 (RZ/G2N)
-+     - arm64
-+     - ``rzg2_beacon_defconfig``
-+
-+   * -
-+     - HopeRun HiHope RZ/G2N
-+     - R8A774B1 (RZ/G2N)
-+     - arm64
-+     - ``hihope_rzg2_defconfig``
-+
-+   * -
-+     - Silicon Linux RZ/G2E evaluation kit (EK874)
-+     - R8A774C0 (RZ/G2E)
-+     - arm64
-+     - ``silinux_ek874_defconfig``
-+
-+   * -
-+     - Beacon EmbeddedWorks RZ/G2H SoM
-+     - R8A774E1 (RZ/G2H)
-+     - arm64
-+     - ``rzg2_beacon_defconfig``
-+
-+   * -
-+     - HopeRun HiHope RZ/G2H
-+     - R8A774E1 (RZ/G2H)
-+     - arm64
-+     - ``hihope_rzg2_defconfig``
-+
-+   * - :ref:`RZ/N1 Family <renesas_rzn1>`
-+     - Schneider RZ/N1D board
-+     - R9A06G032 (RZ/N1D)
-+     - arm64
-+     - ``rzn1_snarc_defconfig``
-+
-+   * -
-+     - Schneider RZ/N1S board
-+     - R9A06G033 (RZ/N1S)
-+     - arm64
-+     - ``rzn1_snarc_defconfig``
-+
-+Build
-+-----
-+
-+Locate the appropriate defconfig in the table above. Then apply standard build
-+procedure::
-+
-+    make <board_defconfig>
-+    make
-diff --git a/doc/board/renesas/rzn1.rst b/doc/board/renesas/rzn1.rst
-index e6d636b89e8e..afdfa6944d89 100644
---- a/doc/board/renesas/rzn1.rst
-+++ b/doc/board/renesas/rzn1.rst
-@@ -1,5 +1,7 @@
- .. SPDX-License-Identifier: GPL-2.0+
- 
-+.. _renesas_rzn1:
-+
- Renesas RZ/N1
- =============
- 
+The other gap has been support for uEnv.txt -> which we can workaround
+at the moment by using CONFIG_BOOTCOMMAND="run envboot; bootflow scan
+-lb" in defconfig (This series from Roger already does that - hence I am
+saying that Andrew is complaining on the wrong series).
+
+Ideally, we should just have CONFIG_BOOTCOMMAND="bootflow scan -lb" and
+uEnv.txt remoteproc loads and the various standard bootmethods should
+"just work".
+
 -- 
-2.39.2
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
