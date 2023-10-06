@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD904E94114
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 20:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0749E94115
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 20:31:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E26286C78;
-	Fri,  6 Oct 2023 22:27:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19AC586DB8;
+	Fri,  6 Oct 2023 22:31:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jUX6RJJG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L126s2m7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7055586D7E; Fri,  6 Oct 2023 22:27:37 +0200 (CEST)
-Received: from mail-oo1-xc36.google.com (mail-oo1-xc36.google.com
- [IPv6:2607:f8b0:4864:20::c36])
+ id AB95386DD5; Fri,  6 Oct 2023 22:31:12 +0200 (CEST)
+Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
+ [IPv6:2607:f8b0:4864:20::c35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E39B86ACF
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 22:27:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EF3986ACF
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 22:31:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rfried.dev@gmail.com
-Received: by mail-oo1-xc36.google.com with SMTP id
- 006d021491bc7-57b9231e91dso1442039eaf.2
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 13:27:34 -0700 (PDT)
+Received: by mail-oo1-xc35.google.com with SMTP id
+ 006d021491bc7-57b811a6ce8so1381317eaf.3
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 13:31:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696624053; x=1697228853; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696624269; x=1697229069; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/u47TsV5kAHbJnXomo1lS6pGCQ0BF5TQg8f8FYVrBkg=;
- b=jUX6RJJGbuq4nrqQrUFy6ie76S2yqZ8yHCHuH3ptRBHQIN2eq2RNeAhhN/2tn+rog8
- 7NNf8W98IP84RSact7m6dQupXxtJ6QmPNfyVBRZPpmRxARPiM+h54OQdQB71F1/5O/tH
- +EPTLvZxzV4C1ydp/Dwo3TCNnTeE4/9UxTzjOvt1ysoOJSbnQqu0zMKT6FnwnNKkd0+1
- 17wtDXCeQRnAOaohfKnUKmaqYGqfyhwnjwZOrCu2IurIYZEFUO9wIlrvhIhlWRN6ywzT
- fs4Id6DfZ0SNM8eOibu+WW3vlQ3WukNMaoHQ07strq/L/b9ePBIsMzojlvkbW90zm7U3
- v/hg==
+ bh=WTT4KORJ0Uc7a6rbK+g4mzGEx04akjAmS75CeYL+VhI=;
+ b=L126s2m79iaKyvaGrYr+agPcILRYzlwO+cHh/XQCEImwCeKD5VqNtRb00qRt+QrTun
+ r1D+KJ5B+/mes05u7vD4Wi35aD828NhoXzd6F42g5VhnOE4vatbX+whKPCyXN9tvLGB8
+ HbRKhjUR4pK0gmakeIPNCmouqEndtXWb7ZfZm6WyYNDolwGFIDF2rKk1aapbnyJ1lnpK
+ A6ugn8A/V+nvJfIA6LZa9oo8sAoi9NDixxtHq3UM/2AgWwtGcpQSW459NjDm5SsII+Hw
+ L6fCf5b5nJYPy0S2oaig/FYJanxdGPoWifhJ+St7lZ4Y2BiVQk7z9E72WxqY004TkLAG
+ a29Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696624053; x=1697228853;
+ d=1e100.net; s=20230601; t=1696624269; x=1697229069;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/u47TsV5kAHbJnXomo1lS6pGCQ0BF5TQg8f8FYVrBkg=;
- b=hENZicHBJHw9KMYUSWaau42mAQiK3+1oRUvWnBZtHACzz3eyr9bCkSJ7e/7BulI7jh
- tk7vK7ZT4DdyaQ2EkA7sYRJjzL/h6dJ/NQgUm99TA8GQyR0ekq/nKuXuu+ko0tawNNPk
- mVbbRlk/NAQwH14Vaq5Zj/gLGF0O5ef7EM8FDMJX47DmBmmo7UUCn7747W95RbUCFmCR
- e0m6RIhzwmVvxaBXB+cLaxxhDoUsk6T+w21j07oSqCjTUKYAAJF7712aN50Dt3wWLhs8
- Jetzhn0JPIF3gjqqkwANrAkF1e860mPA+GgFN4tjG2ahQnI7Ghe97uQi5wXwStenza1S
- 5wFw==
-X-Gm-Message-State: AOJu0Yzcy4AnKsFGCmjJlrNLHSmBhjPfAJpg7F9EttpDHSORgw9nA1Dl
- FP02MgVFGumU9q8Dsz1CFN3OtBSNHMQoom14FQs=
-X-Google-Smtp-Source: AGHT+IGI9YUdwqyfjSueQqVLPYYZluYmuDoFavtAFzuxftQ8OM6+ftT8rGeb6EDzyqNLtfE/szxTPYzkUY74Hu3ra4E=
-X-Received: by 2002:a4a:8447:0:b0:571:28d5:2c71 with SMTP id
- m7-20020a4a8447000000b0057128d52c71mr7612610oog.2.1696624053749; Fri, 06 Oct
- 2023 13:27:33 -0700 (PDT)
+ bh=WTT4KORJ0Uc7a6rbK+g4mzGEx04akjAmS75CeYL+VhI=;
+ b=HcMkrErVYbesBkIWJrqpmtB6pl0ZC6wPkEDY4iNoDrg9thnGSMhVvKQoAbrxnVPkNm
+ sisAMQIgNzLEcwVefRhneNwWOvaDD5BCZrK2PCgnj7T7HNflv6+0Lb/ThnhhSg4oxhph
+ cjFKyTI2sY31M6yECxIcNwjlYP8rXqWqJwZo3rELRSwmt4T7hP8mfJGVd13oWygbU7sZ
+ Fs6YG2Fzzvi1j9aeaKcFwOUwdlLNUJMnkbPf56cvaVZcSzvzexxN+ykOhR61aKYchVRU
+ 4QYllNLuNVFqwC/BWC/ZCq/U23+kJjTuNmebgXQ/RZ7iXxKwpM1uS3f69zdS3hVSq5nB
+ GTzA==
+X-Gm-Message-State: AOJu0YxSkJGMbcHKDdgPxKv3ZIzO+18x6riKb0cv0a8lD8siqt6bwAeS
+ RNHJGs4cPpc5IkUYNEgfdlMf0SkegZOalKhpYVk=
+X-Google-Smtp-Source: AGHT+IGQkkwYyD02Eq0B6CtynHL0dPvD+Dk4PK9YkPPkrO/B3Kvd64cXqfHxHs3Z79qQUEs/cZ7Y4N4eGfhTmFv5dIw=
+X-Received: by 2002:a4a:3946:0:b0:57b:6c85:972 with SMTP id
+ x6-20020a4a3946000000b0057b6c850972mr9109137oog.0.1696624269070; Fri, 06 Oct
+ 2023 13:31:09 -0700 (PDT)
 MIME-Version: 1.0
-References: <b5d263cf61282b158052ba87bde1fb4a227c0bb7.1696338593.git.love.kumar@amd.com>
-In-Reply-To: <b5d263cf61282b158052ba87bde1fb4a227c0bb7.1696338593.git.love.kumar@amd.com>
+References: <20231006122439.10720-1-debrabander@gmail.com>
+In-Reply-To: <20231006122439.10720-1-debrabander@gmail.com>
 From: Ramon Fried <rfried.dev@gmail.com>
-Date: Fri, 6 Oct 2023 23:27:22 +0300
-Message-ID: <CAGi-RUKAYoCjmCJa_tBLsHHJfHn5hrJjn22A_MOhbnH8yaSuJw@mail.gmail.com>
-Subject: Re: [PATCH] test/py: net: Add a test for 'pxe get' command
-To: Love Kumar <love.kumar@amd.com>
-Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com, 
- v.v.mitrofanov@yadro.com, seanedmond@microsoft.com, 
- emohandesi@linux.microsoft.com
+Date: Fri, 6 Oct 2023 23:30:58 +0300
+Message-ID: <CAGi-RU+=4cvY3xcyidTNErVLFNKg+cM+Qmfc7AdWaqDemm9b7A@mail.gmail.com>
+Subject: Re: [PATCH] net: phy: TI DP83869 fix invalid clock delay configuration
+To: Frank de Brabander <debrabander@gmail.com>
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,117 +86,153 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 3, 2023 at 4:12=E2=80=AFPM Love Kumar <love.kumar@amd.com> wrot=
-e:
+On Fri, Oct 6, 2023 at 3:24=E2=80=AFPM Frank de Brabander <debrabander@gmai=
+l.com> wrote:
 >
-> Execute the 'pxe get' command to download a pxe configuration file from
-> the TFTP server and validate its interpretation.
+> Setting the clock delay from the device tree settings
+> rx-internal-delay-ps and tx-internal-delay-ps was broken:
 >
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
+>  - The expected value in the device tree is suppose to be a
+>    delay in picoseconds, but the driver only allowed an array index.
+>  - Driver converted this array index to the actual delay in
+>    picoseconds and tried to apply this in the device register. This
+>    however is not a valid register value. The actual logic here was
+>    reversed, it converted an register representation of the delay to
+>    the device tree delay in picoseconds.
+>
+> Only when the internal delays were NOT configured in the device tree
+> and they default value of 7 (=3D2000ps) was used, a valid value was
+> loaded in the register.
+>
+> Signed-off-by: Frank de Brabander <debrabander@gmail.com>
 > ---
->  test/py/tests/test_net.py | 66 +++++++++++++++++++++++++++++++++++++++
->  1 file changed, 66 insertions(+)
+>  drivers/net/phy/dp83869.c | 53 +++++++++++++++++++++++----------------
+>  1 file changed, 32 insertions(+), 21 deletions(-)
 >
-> diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
-> index cd4b4dc53cbc..b2241ae6a482 100644
-> --- a/test/py/tests/test_net.py
-> +++ b/test/py/tests/test_net.py
-> @@ -6,6 +6,7 @@
+> diff --git a/drivers/net/phy/dp83869.c b/drivers/net/phy/dp83869.c
+> index 8d32d73b07..f9d4782580 100644
+> --- a/drivers/net/phy/dp83869.c
+> +++ b/drivers/net/phy/dp83869.c
+> @@ -81,7 +81,10 @@
 >
->  import pytest
->  import u_boot_utils
-> +import uuid
+>  /* RGMIIDCTL bits */
+>  #define DP83869_RGMII_TX_CLK_DELAY_SHIFT       4
+> -#define DP83869_CLK_DELAY_DEF                          7
+> +#define DP83869_CLK_DELAY_STEP                 250
+> +#define DP83869_CLK_DELAY_MIN                  250
+> +#define DP83869_CLK_DELAY_MAX                  4000
+> +#define DP83869_CLK_DELAY_DEFAULT              2000
 >
->  """
->  Note: This test relies on boardenv_* containing configuration values to =
-define
-> @@ -61,6 +62,16 @@ env__net_nfs_readable_file =3D {
->      'crc32': 'c2244b26',
+>  /* CFG2 bits */
+>  #define MII_DP83869_CFG2_SPEEDOPT_10EN         0x0040
+> @@ -157,10 +160,6 @@ static int dp83869_config_port_mirroring(struct phy_=
+device *phydev)
+>         return 0;
 >  }
 >
-> +# Details regarding a file that may be read from a TFTP server. This var=
-iable
-> +# may be omitted or set to None if PXE testing is not possible or desire=
-d.
-> +env__net_pxe_readable_file =3D {
-> +    'fn': 'default',
-> +    'addr': 0x2000000,
-> +    'size': 74,
-> +    'timeout': 50000,
-> +    'pattern': 'Linux',
-> +}
-> +
->  # True if a router advertisement service is connected to the network, an=
-d should
->  # be tested. If router advertisement testing is not possible or desired,=
- this
->  variable may be omitted or set to False.
-> @@ -260,3 +271,58 @@ def test_net_nfs(u_boot_console):
+> -static const int dp83869_internal_delay[] =3D {250, 500, 750, 1000, 1250=
+, 1500,
+> -                                            1750, 2000, 2250, 2500, 2750=
+, 3000,
+> -                                            3250, 3500, 3750, 4000};
+> -
+>  static int dp83869_set_strapped_mode(struct phy_device *phydev)
+>  {
+>         struct dp83869_private *dp83869 =3D phydev->priv;
+> @@ -183,7 +182,6 @@ static int dp83869_set_strapped_mode(struct phy_devic=
+e *phydev)
+>  static int dp83869_of_init(struct phy_device *phydev)
+>  {
+>         struct dp83869_private * const dp83869 =3D phydev->priv;
+> -       const int delay_entries =3D ARRAY_SIZE(dp83869_internal_delay);
+>         int ret;
+>         ofnode node;
 >
->      output =3D u_boot_console.run_command('crc32 %x $filesize' % addr)
->      assert expected_crc in output
+> @@ -238,32 +236,45 @@ static int dp83869_of_init(struct phy_device *phyde=
+v)
+>         dp83869->tx_fifo_depth =3D ofnode_read_s32_default(node, "tx-fifo=
+-depth",
+>                                                          DP83869_PHYCR_FI=
+FO_DEPTH_4_B_NIB);
+>
+> +       /* Internal clock delay values can be configured in steps of
+> +        * 250ps (0.25ns). The register field for clock delay is 4-bits w=
+ide,
+> +        * the values range from 0b0000 for 0.25ns to 0b1111 for 4ns.
+> +        */
 > +
-> +@pytest.mark.buildconfigspec("cmd_net")
-> +@pytest.mark.buildconfigspec("cmd_pxe")
-> +def test_net_pxe_get(u_boot_console):
-> +    """Test the pxe get command.
-> +
-> +    A pxe configuration file is downloaded from the TFTP server and inte=
-rpreted
-> +    to boot the images mentioned in pxe configuration file.
-> +
-> +    The details of the file to download are provided by the boardenv_* f=
-ile;
-> +    see the comment at the beginning of this file.
-> +    """
-> +
-> +    if not net_set_up:
-> +        pytest.skip("Network not initialized")
-> +
-> +    test_net_setup_static(u_boot_console)
-> +
-> +    f =3D u_boot_console.config.env.get("env__net_pxe_readable_file", No=
-ne)
-> +    if not f:
-> +        pytest.skip("No PXE readable file to read")
-> +
-> +    addr =3D f.get("addr", None)
-> +    timeout =3D f.get("timeout", u_boot_console.p.timeout)
-> +
-> +    pxeuuid =3D uuid.uuid1()
-> +    u_boot_console.run_command(f"setenv pxeuuid {pxeuuid}")
-> +    expected_text_uuid =3D f"Retrieving file: pxelinux.cfg/{pxeuuid}"
-> +
-> +    ethaddr =3D u_boot_console.run_command("echo $ethaddr")
-> +    ethaddr =3D ethaddr.replace(':', '-')
-> +    expected_text_ethaddr =3D f"Retrieving file: pxelinux.cfg/01-{ethadd=
-r}"
-> +
-> +    ip =3D u_boot_console.run_command("echo $ipaddr")
-> +    ip =3D ip.split('.')
-> +    ipaddr_file =3D "".join(['%02x' % int(x) for x in ip]).upper()
-> +    expected_text_ipaddr =3D f"Retrieving file: pxelinux.cfg/{ipaddr_fil=
-e}"
-> +    expected_text_default =3D f"Retrieving file: pxelinux.cfg/default"
-> +
-> +    with u_boot_console.temporary_timeout(timeout):
-> +        output =3D u_boot_console.run_command("pxe get")
-> +
-> +    assert "TIMEOUT" not in output
-> +    assert expected_text_uuid in output
-> +    assert expected_text_ethaddr in output
-> +    assert expected_text_ipaddr in output
-> +
-> +    i =3D 1
-> +    for i in range(0, len(ipaddr_file) - 1):
-> +        expected_text_ip =3D f"Retrieving file: pxelinux.cfg/{ipaddr_fil=
-e[:-i]}"
-> +        assert expected_text_ip in output
-> +        i +=3D 1
-> +
-> +    assert expected_text_default in output
-> +    assert "Config file 'default.boot' found" in output
+>         /* RX delay *must* be specified if internal delay of RX is used. =
+*/
+>         if (phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_ID ||
+>             phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_RXID) {
+> -               dp83869->rx_int_delay =3D ofnode_read_u32_default(node, "=
+rx-internal-delay-ps",
+> -                                                               DP83869_C=
+LK_DELAY_DEF);
+> -               if (dp83869->rx_int_delay > delay_entries) {
+> -                       dp83869->rx_int_delay =3D DP83869_CLK_DELAY_DEF;
+> -                       pr_debug("rx-internal-delay-ps not set/invalid, d=
+efault to %ups\n",
+> -                                dp83869_internal_delay[dp83869->rx_int_d=
+elay]);
+> +               dp83869->rx_int_delay =3D ofnode_read_u32_default(node,
+> +                       "rx-internal-delay-ps", DP83869_CLK_DELAY_DEFAULT=
+);
+> +               if (dp83869->rx_int_delay > DP83869_CLK_DELAY_MAX ||
+> +                   dp83869->rx_int_delay < DP83869_CLK_DELAY_MIN ||
+> +                   dp83869->rx_int_delay % DP83869_CLK_DELAY_STEP) {
+> +                       dp83869->rx_int_delay =3D DP83869_CLK_DELAY_DEFAU=
+LT;
+> +                       pr_warn("rx-internal-delay-ps not set/invalid, de=
+fault"
+> +                               " to %ups\n", DP83869_CLK_DELAY_DEFAULT);
+>                 }
+>
+> -               dp83869->rx_int_delay =3D dp83869_internal_delay[dp83869-=
+>rx_int_delay];
+> +               dp83869->rx_int_delay =3D
+> +                       (dp83869->rx_int_delay - DP83869_CLK_DELAY_STEP)
+> +                       / DP83869_CLK_DELAY_STEP;
+>         }
+>
+> -       /* TX delay *must* be specified if internal delay of RX is used. =
+*/
+> +       /* TX delay *must* be specified if internal delay of TX is used. =
+*/
+>         if (phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_ID ||
+>             phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_TXID) {
+> -               dp83869->tx_int_delay =3D ofnode_read_u32_default(node, "=
+tx-internal-delay-ps",
+> -                                                               DP83869_C=
+LK_DELAY_DEF);
+> -               if (dp83869->tx_int_delay > delay_entries) {
+> -                       dp83869->tx_int_delay =3D DP83869_CLK_DELAY_DEF;
+> -                       pr_debug("tx-internal-delay-ps not set/invalid, d=
+efault to %ups\n",
+> -                                dp83869_internal_delay[dp83869->tx_int_d=
+elay]);
+> +               dp83869->tx_int_delay =3D ofnode_read_u32_default(node,
+> +                       "tx-internal-delay-ps", DP83869_CLK_DELAY_DEFAULT=
+);
+> +               if (dp83869->tx_int_delay > DP83869_CLK_DELAY_MAX ||
+> +                   dp83869->tx_int_delay < DP83869_CLK_DELAY_MIN ||
+> +                   dp83869->tx_int_delay % DP83869_CLK_DELAY_STEP) {
+> +                       dp83869->tx_int_delay =3D DP83869_CLK_DELAY_DEFAU=
+LT;
+> +                       pr_warn("tx-internal-delay-ps not set/invalid, de=
+fault"
+> +                               " to %ups\n", DP83869_CLK_DELAY_DEFAULT);
+>                 }
+>
+> -               dp83869->tx_int_delay =3D dp83869_internal_delay[dp83869-=
+>tx_int_delay];
+> +               dp83869->tx_int_delay =3D
+> +                       (dp83869->tx_int_delay - DP83869_CLK_DELAY_STEP)
+> +                       / DP83869_CLK_DELAY_STEP;
+>         }
+>
+>         return 0;
 > --
-> 2.25.1
+> 2.30.2
 >
 Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
