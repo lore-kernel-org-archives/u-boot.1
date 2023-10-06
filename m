@@ -4,66 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C381E92FFF
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 10:08:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 863E1E936FC
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 11:14:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 521B686EAF;
-	Fri,  6 Oct 2023 12:07:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1017986E70;
+	Fri,  6 Oct 2023 13:14:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pd5OmoBi";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rhexFZeJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63E2386D19; Fri,  6 Oct 2023 12:07:50 +0200 (CEST)
+ id 2D7D286E73; Fri,  6 Oct 2023 13:14:01 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 783DE86E2D
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 12:07:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5FDB86BFA
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 13:13:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=n-francis@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 396A7kCg051603;
- Fri, 6 Oct 2023 05:07:46 -0500
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 396BDmT9064077;
+ Fri, 6 Oct 2023 06:13:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696586866;
- bh=N/bUVtLYXwQbYVtXQXJs0wlsGltucITdBs8MwKgcb88=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=pd5OmoBikVVdJ4kSxO0YfEanzzwcWtufPtXfY6Msg6bFJVgBD2qA5pUhxUikeZiCC
- WX+FblRIJA2uTr8ztOBgOCZ71B44L19m8FZx4cryeUhOuu6OVKZhySKjb4p58NPCcf
- VNu1sEjkNsTmNTlbpAGAGfmN5xivYdbgOqWfeiqY=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 396A7kT4103658
+ s=ti-com-17Q1; t=1696590828;
+ bh=4KF/HsQhgnfhpJ4bVYmdfHp+wnJiPOgvsfv14J4cm2A=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=rhexFZeJdYqBlZKiUG5RipoA9ffm4hJ5Jf74pxMcmMfOhOiMrmdBh9A+CH80tZSrQ
+ 84FbnM4MWDy769C15dma6bxjv0kULVGVC1n0AjdA3fMXnMiIeGI4rjlO7eyg2RSu8L
+ cHvqNtBmNo8qK/TN9NUDr6/RvPb5nAhMcF2kC6iU=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 396BDm5L003646
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 6 Oct 2023 05:07:46 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 6 Oct 2023 06:13:48 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 6
- Oct 2023 05:07:45 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 06:13:47 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 6 Oct 2023 05:07:45 -0500
-Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 396A7c70105951;
- Fri, 6 Oct 2023 05:07:43 -0500
-From: Neha Malcom Francis <n-francis@ti.com>
-To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
-CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
- <a-nandan@ti.com>
-Subject: [PATCH v3 2/2] DONOTMERGE: arm: dts: k3-j7200-binman: Enable split
- mode for MCU R5
-Date: Fri, 6 Oct 2023 15:37:37 +0530
-Message-ID: <20231006100737.343745-3-n-francis@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231006100737.343745-1-n-francis@ti.com>
-References: <20231006100737.343745-1-n-francis@ti.com>
+ Frontend Transport; Fri, 6 Oct 2023 06:13:47 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 396BDlWJ030420;
+ Fri, 6 Oct 2023 06:13:47 -0500
+Date: Fri, 6 Oct 2023 06:13:47 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>, Lukasz
+ Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>,
+ Dasnavis Sabiya <sabiya.d@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Roger Quadros
+ <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>, Ralph Siemsen
+ <ralph.siemsen@linaro.org>, Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Rasmus Villemoes
+ <rasmus.villemoes@prevas.dk>, <u-boot@lists.denx.de>, Sinthu Raja M
+ <sinthu.raja@mistralsolutions.com>, Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v4 02/16] arm: mach-k3: Add basic support for J784S4 SoC
+ definition
+Message-ID: <20231006111347.2o37pa4r22xc3z6v@jersey>
+References: <20231001165545.494212-1-a-nandan@ti.com>
+ <20231001165545.494212-3-a-nandan@ti.com>
+ <20231002160156.pacy7j53bbtx766e@reboot>
+ <20231004051327.jvatwiwpmdz4lykd@ula0497581>
+ <20231004122425.3lvghvwufnx5simt@manhunt>
+ <20231005045948.syyj3xvpokloudxd@ula0497581>
+ <20231005112624.sair56f6kff4ixv2@countdown>
+ <20231006041604.xs6kkbxi3lfz5vpt@ula0497581>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231006041604.xs6kkbxi3lfz5vpt@ula0497581>
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,44 +98,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set boot core-opts to enable split mode for MCU R5 cluster by default.
-This patch serves to demonstrate how this can be done.
+On 09:46-20231006, Manorit Chawdhry wrote:
+> Hi Nishanth,
+> 
+> On 06:26-20231005, Nishanth Menon wrote:
+> > On 10:29-20231005, Manorit Chawdhry wrote:
+> > > Hi Nishanth,
+> > > 
+> > > On 07:24-20231004, Nishanth Menon wrote:
+> > > > On 10:43-20231004, Manorit Chawdhry wrote:
+> > > > 
+> > > > > These are required to remove the firewall configurations that are done
+> > > > > by ROM, those are not the ones that are being handled by OIDs. The
+> > > > 
+> > > > I am not sure I understand this clearly. OIDs are setup to open up
+> > > > firewalls or close firewalls as the system requires and since it
+> > > > is authenticated, not compromiseable.- U-boot by itself (even if
+> > > > authenticated), is not a secure entity for it to dictate the firewall
+> > > > configuration (u-boot must be assumed to be compromised after
+> > > > authentication is complete). So, doing firewall configuration via APIs
+> > > > after boot, to me looks broken approach.
+> > > > 
+> > > 
+> > > I know U-boot ain't that secure given the most trusted entity is always
+> > > gonna be the software that starts up the system, we can't expect those
+> > > to be doing all the work and based on that we have the secure boot
+> > > designed to configure firewalls (that are not owned by anymore) and
+> > > U-boot R5 being one of the early bootloaders do come as a part of it. 
+> > > 
+> > > Regarding the OIDs thing, I don't think the OID in question is looked by
+> > > ROM and ROM always configures some firewalls for it's usecase that are
+> > > present in those arrays. 
+> > > 
+> > > The OID that we are using in the series that you had shared is looked by
+> > > TIFS instead of ROM and TIFS is the entity that is authenticating the
+> > > binary along with setting up the firewalls.
+> > > 
+> > > > > current series that is being worked on is to add additional firewalling
+> > > > > support with OIDs that TIFS will be handling.
+> > > > > The above patch is
+> > > > > essentially added to have the same development experience on GP devices
+> > > > > similar to HS after the secure boot is done so that people don't end up
+> > > > 
+> > > > huh? the code seems to blindly call the remove_fwl_configs(cbass_hc_cfg0_fwls, ARRAY_SIZE(cbass_hc_cfg0_fwls));
+> > > > where is the distinction of HS vs GP here? This implementation looks
+> > > > completely broken to me at least.. please correct what I missed here.
+> > > 
+> > > Since this call is used across all SoCs there wasn't any point to make
+> > > the differentiation between GP and HS here, remove_fwl_configs
+> > > internally handles looking at the firewalls and disabling them if they
+> > > are enabled ( Which would be only in the case of HS devices ), for GP it
+> > > would automatically by a noop.
+> > 
+> > Correct me if I understand the security chain here:
+> > 
+> > ROM sets up firewalls that are needed by itself
+> > TIFS (in multicertificate will setup it's own firewalls)
+> > R5 SPL comes along and opens up other firewalls
+> > Each stage beyond this: such as tispl.bin containing TFA/OPTEE uses OIDs to
+> > set up firewalls to protect themselves (enforced by TIFS)
+> > A53 SPL and U-boot itself startups but has no ability to change the
+> > protection firewalls enforced by x509 OIDs.
+> > 
+> > Further, firewalls have lockdown bit that enforces the setting (and
+> > cannot be over-ridden) till system restart is requested
+> > 
+> > Is this correct? If so, needs to be clearly documented.
+> 
+> Yes, this seems correct. Will be updating it in the upstream
+> documentation in another series.
+> 
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
-No change since v2
+Thanks. I suggest:
+a) Add documentation as part of firewall series[1] including information
+as to how to customize the flow as needed.
+b) once the firewall series is merged
+c) am69/j784s4 series and add reference in code to the section of
+documentation.
 
- arch/arm/dts/k3-j7200-binman.dtsi | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
-index 14f7dea65e..025a0bd071 100644
---- a/arch/arm/dts/k3-j7200-binman.dtsi
-+++ b/arch/arm/dts/k3-j7200-binman.dtsi
-@@ -55,6 +55,7 @@
- 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
- 			combined;
- 			dm-data;
-+			core-opts = <2>;
- 			sysfw-inner-cert;
- 			keyfile = "custMpk.pem";
- 			sw-rev = <1>;
-@@ -100,6 +101,7 @@
- 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
- 			combined;
- 			dm-data;
-+			core-opts = <2>;
- 			sysfw-inner-cert;
- 			keyfile = "custMpk.pem";
- 			sw-rev = <1>;
-@@ -146,6 +148,7 @@
- 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
- 			combined;
- 			dm-data;
-+			core-opts = <2>;
- 			content-sbl = <&u_boot_spl_unsigned>;
- 			load = <0x41c00000>;
- 			content-sysfw = <&ti_fs_gp>;
+[1] https://lore.kernel.org/all/20231004-binman-firewalling-v3-0-e4a102324e1f@ti.com/
 -- 
-2.34.1
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
