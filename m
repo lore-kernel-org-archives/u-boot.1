@@ -4,67 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 252F4E81E13
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 16:11:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0434E81E1B
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 16:48:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B13686DB8;
-	Fri,  6 Oct 2023 18:11:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id A0AEF8638B;
+	Fri,  6 Oct 2023 18:48:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Ndf7M6I2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CHopOpqs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9856E86D65; Fri,  6 Oct 2023 18:11:22 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3252486CF4; Fri,  6 Oct 2023 18:48:03 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C2668667A
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 18:11:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 877F985095
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 18:48:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=mMYI=FU=robh_at_kernel.org=rob@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 8C0D361242;
- Fri,  6 Oct 2023 16:11:17 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11A9BC433C7;
- Fri,  6 Oct 2023 16:11:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1696608676;
- bh=2E1MNctTSxoG5VE50oJM9yMY/dfSLIM7MkC8uY5n6I8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=Ndf7M6I2Ha7XUsr7BbDTNhDj9gLpk/Iui5kN6/CI4DaL7NubEIq2KjsGCtRLhiBBw
- JCCJ+sJpzASxFIRjx1xBGpWYjcBxJEa8RxYiWPbzuN1jNQQJpLxmYwIj5b5lTWmY5m
- NYeU1AIPn0Fa8GZitrh4ihWmaaCagI0N9FjMcCf+JYqzjbN5X0kcmpGoewd9ppxw3F
- +9D+uOGyJeaZT4JKaU+LezQ/Mci/Yy99M0NC899FUn473ikndsKYOoG9Ow2WXSRzGJ
- +T1m1tm19vjw5DsACRmWo5GMxyDJWd0xidAsGiZfNT0bJWNUd4oX4CNB5xonhPgWJw
- WrkAcKEk28Hsw==
-Received: (nullmailer pid 4016330 invoked by uid 1000);
- Fri, 06 Oct 2023 16:11:13 -0000
-Date: Fri, 6 Oct 2023 11:11:13 -0500
-From: Rob Herring <robh@kernel.org>
-To: Michael Walle <mwalle@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>, miquel.raynal@bootlin.com,
- conor+dt@kernel.org, devicetree@vger.kernel.org,
- krzysztof.kozlowski+dt@linaro.org, linux-kernel@vger.kernel.org,
- linux-mtd@lists.infradead.org, ptyadav@amazon.de, rafal@milecki.pl,
- richard@nod.at, trini@konsulko.com, u-boot@lists.denx.de, vigneshr@ti.com
-Subject: Re: [PATCH v2 1/3] dt-bindings: mtd: fixed-partitions: Add binman
- compatible
-Message-ID: <20231006161113.GA3983739-robh@kernel.org>
-References: <20231004093620.2b1d6917@xps-13>
- <20231004113458.531124-1-mwalle@kernel.org>
- <CAPnjgZ2hWE6Sc=rg55W=-r-TnoWP7Y5gSpn41kwoyja-AMVw+w@mail.gmail.com>
- <9e588e3ec8c0c321a2861723d0d42b9a@kernel.org>
- <CAPnjgZ20ezipPWAj6bUM9_oCTcX1XzuLqQ7b7-nKjXf1t4p9-Q@mail.gmail.com>
- <a581ef73fa09c6ffeb83a1c1780053bd@kernel.org>
- <CAPnjgZ2PnKD5m0EgTdEAf-gcK3wuBZvWw_AO2iehb1dmfdoz3A@mail.gmail.com>
- <27d37d4c7cf353d99737a1e7a450f9f7@kernel.org>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5a2478862dbso28907517b3.2
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 09:48:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1696610879; x=1697215679; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=81FQgOY311jckuZ8jut7ivaItCddripN2NiOBYAXc0I=;
+ b=CHopOpqsBODRYENSuiOsLTHmyRI8lMkJpr+svQsEiVXmakGSF9lhhR4HAXQ3vHcQ/K
+ ZUD2ZWzjel76r8ifyEvp15CAuOlXaV3W5t7Ag1dVSzcU5H65YOW68RfzvBTFOwwLI+kF
+ iwg1KcbOzpjihI8b8KDRO5tHHOdWZonX7ous8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696610879; x=1697215679;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=81FQgOY311jckuZ8jut7ivaItCddripN2NiOBYAXc0I=;
+ b=CkzusJ33LtUkwnolxq+OoooWSxI0eJ04tZFYdmz0uMFzO7n0AFUl8UyUlsBqu21q4G
+ XdWYZkQZnQM+dTY0o05kICqylIHmtKdIdQH9R/O+AvH3p/4wKewUMw6Ll5hJdSUN1orK
+ c/07xusQxVlQIVk7KWDHBzhpzsyHfsUU72m9WtTj0CHeq93rkRw8tngoq7e0/k3vEw2s
+ J+3nTqcDzk9JWKxwtXF8og6bY7PEtT46dpxAV9iwLofHj4fm+gBN+yFBZcEQ+T/vdZ9D
+ W5xK+KQPAgTx/YS3ZrZcHtR/76iAXZr+Y0phDuhhJpDz5kfoMiLHEWK2le/H2HuOTdzq
+ u/hw==
+X-Gm-Message-State: AOJu0YzNploRPSGhC7I/nkM9Nhrph0KBX0anZC/l4K5deJfnE4+/Ln8c
+ iEdt/m9Kk5kc2pkUvvnXVmKmYmj2nGKIIODBbfqxfg==
+X-Google-Smtp-Source: AGHT+IHUrO9efjoq3WXXUlSjBN4gqIh3ZApkGCHBE5gJUqa/llDNI/9t96TmHI6U62MJKg+TytbiUTR/t/K0R3GYhMU=
+X-Received: by 2002:a0d:f542:0:b0:59f:5361:d18c with SMTP id
+ e63-20020a0df542000000b0059f5361d18cmr8615295ywf.41.1696610878808; Fri, 06
+ Oct 2023 09:47:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <27d37d4c7cf353d99737a1e7a450f9f7@kernel.org>
+References: <20230710145026.128481-1-rogerq@kernel.org>
+ <20230710145026.128481-3-rogerq@kernel.org>
+ <CAPnjgZ1odo6F7RTumJ6A=+kgZ-pm0JnRvxNYB00HX7YpAyrFXg@mail.gmail.com>
+ <574c8eb0-4c19-72ef-5920-e506e4be6203@kernel.org>
+ <20230713184438.y3ac7c425fwu575b@radiantly>
+ <263918be-381e-44b6-899e-321ecaabb2bc@kernel.org>
+ <20231006152625.68903ab6@kmaincent-XPS-13-7390>
+In-Reply-To: <20231006152625.68903ab6@kmaincent-XPS-13-7390>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 6 Oct 2023 10:47:41 -0600
+Message-ID: <CAPnjgZ1UQ6YxrDcSeC0+XAAG295ZCJFYWF8ojiFSqkvZYYoz7A@mail.gmail.com>
+Subject: Re: [RFC PATCH 2/2] board: ti: am65x: Move to using Extension
+ framework
+To: =?UTF-8?Q?K=C3=B6ry_Maincent?= <kory.maincent@bootlin.com>
+Cc: Roger Quadros <rogerq@kernel.org>, Nishanth Menon <nm@ti.com>,
+ vigneshr@ti.com, trini@konsulko.com, 
+ srk@ti.com, robertcnelson@gmail.com, u-boot@lists.denx.de, 
+ "Francis, Neha" <n-francis@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,76 +92,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 06, 2023 at 10:37:41AM +0200, Michael Walle wrote:
-> Hi,
-> 
-> > > I'm still not sure why that compatible is needed. Also I'd need to
-> > > change
-> > > the label which might break user space apps looking for that specific
-> > > name.
-> > > 
-> > > Also, our board might have u-boot/spl or u-boot/spl/bl31/bl32, right
-> > > now
-> > > that's something which depends on an u-boot configuration variable,
-> > > which
-> > > then enables or disables binman nodes in the -u-boot.dtsi. So in linux
-> > > we only have that "bootloader" partition, but there might be either
-> > > u-boot+spl or u-boot+spl+bl31+bl32.
-> > > 
-> > > Honestly, I'm really not sure this should go into a device tree.
-> > 
-> > I think we might be getting a bit ahead of ourselves here. I thought
-> > that the decision was that the label should indicate the contents.
-> > If you have multiple things in a partition then it would become a
-> > 'section' in Binman's terminology. Either the label programmatically
-> > describes what is inside or it doesn't. We can't have it both ways.
-> > What do you suggest?
-> 
-> As Rob pointed out earlier, it's just a user-facing string. I'm a bit
-> reluctant to use it programatically.
+Hi K=C3=B6ry,
 
-In general, yes, but the partition stuff has long (and still) uses 
-label. As long as the values the tools understand are documented (which 
-we don't normally do for label), I don't care so much. That's my 
-opinion as long as this is shared with fixed-partitions. If it is not 
-and there's little reason to use label, then absolutely, I think 
-'compatible' makes more sense. 
+On Fri, 6 Oct 2023 at 07:26, K=C3=B6ry Maincent <kory.maincent@bootlin.com>=
+ wrote:
+>
+> On Wed, 4 Oct 2023 15:39:23 +0300
+> Roger Quadros <rogerq@kernel.org> wrote:
+>
+> Hello,
+> Thanks for adding me in cc. Also it seems I forgot to add myself to MAINT=
+AINERS
+> for the extension_board.c file.
+>
+> > >>> Before this goes too far I think this should move to using a linker
+> > >>> list to declare the driver (or a driver-model driver if you prefer,
+> > >>> but that might be overkill).
+> >
+> > So I've been working on this on the side and got linker list way workin=
+g
+> > with custom script booting but as soon as I move to standard boot flow
+> > it no longer works. This is because there is no code in place to
+> > apply the overlay and pass it to next stage e.g. EFI.
+> >
+> > I see the following note at
+> > https://elixir.bootlin.com/u-boot/latest/source/boot/bootmeth_efi.c#L30=
+4
+> >
+> > "
+> >                 /*
+> >                  * TODO: Apply extension overlay
+> >                  *
+> >                  * Here we need to load and apply the extension overlay=
+. This
+> > is
+> >                  * not implemented. See do_extension_apply(). The exten=
+sion
+> >                  * stuff needs an implementation in boot/extension.c so=
+ it is
+> >                  * separate from the command code. Really the extension=
+ stuff
+> >                  * should use the device tree and a uclass / driver int=
+erface
+> >                  * rather than implementing its own list
+> >                  */
+> > "
+>
+> I agreed that the extension implementation should move in boot/extension.=
+c or
+> common for general use. I am wondering what the advantage of creating an =
+uclass
+> interface?
+> I am not an uclass expert but there is no per driver ops and usage. What =
+do you
+> dislike about using its own list?
 
-> Taking my example again, the string "bootloader" is sufficient for a
-> user. He doesn't care if it's u-boot with spl or u-boot with tfa, or
-> even coreboot. It just says, "in this partition is the bootloader".
-> If you have an "bootloader" image you can flash it there.
+I looked at this briefly for bootstd and left it alone, partly for this rea=
+son.
 
-These days, there's generally not just 1 bootloader in the boot flow. 
-Maybe there's 1 image, maybe not. Being more specific is hardly ever a 
-bad thing. Only when the number of specific things becomes multiple 10s 
-or 100s of them does it become a problem.
+The operations I know about are:
+- scan for extension boards to produce a list: needs to happen at
+start of 'bootflow scan' I think)
+- applying relevant overlays: needs to happen in the read_bootflow()
+method perhaps
+- listing available extensions
 
+I think a uclass makes sense, along with separating out the
+'extension' command from the actual functionality.
 
-> If it has a label "u-boot" and I want to switch to coreboot, will
-> it have to change to "coreboot"? I really don't think this is practical,
-> you are really putting software configuration into the device tree.
+>
+> > Another note at
+> > https://elixir.bootlin.com/u-boot/latest/source/cmd/extension_board.c#L=
+198
+> >
+> > "/* extensions should have a uclass - for now we use UCLASS_SIMPLE_BUS =
+uclass
+> > */"
+> >
+> > So are we better off implementing a class driver for extension stuff?
+>
+> I think the first point should be to move it in common or boot and makes =
+it
+> generic for using the extension function everywhere. I will let Simon ans=
+wer
+> about the uclass part.
 
-On the input side (to binman), yes it is config, but on the output side 
-(to the running system) we are saying what's there.
+I believe this relates to boot/
 
+>
+> Regards,
 
-> > At present it seems you have the image described in two places - one
-> > is the binman node and the other is the partitions node. I would like
-> > to unify these.
-> 
-> And I'm not sure that will work for all the corner cases :/
-> 
-> If you keep the binman section seperate from the flash partition
-> definition you don't have any of these problems, although there is
-> some redundancy:
->  - you only have compatible = "binman", "fixed-partition", no further
->    compatibles are required
->  - you don't have any conflicts with the current partition descriptions
->  - you could even use the labels, because binman is the (only?) user
-> 
-> But of course you need to find a place where to put your node.
-
-And remove it. We don't need 2 sources of truth in the DTB.
-
-Rob
+Regards,
+Simon
