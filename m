@@ -4,75 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08FD4E92FFA
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 09:22:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B5C8E92FFB
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 09:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 789AE86D19;
-	Fri,  6 Oct 2023 11:22:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 452F786D21;
+	Fri,  6 Oct 2023 11:53:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bxKIR44C";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CxOyvN/K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D51286D3F; Fri,  6 Oct 2023 11:22:49 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9FE2A86D3F; Fri,  6 Oct 2023 11:53:20 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A246386CE5
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 11:22:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7344C86CB8
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 11:53:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-5347e657a11so3225142a12.2
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 02:22:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696584166; x=1697188966; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b4NNMWPQHMdNZ/rw6Qpon3AsNGu/loOkzH2fO00qDb4=;
- b=bxKIR44CM1jJas8WJ2w4iWiu3sZgYpAYacT/NVNXg+tvJpOSCtCibEuq7/sUxep8s2
- q6835VBQBsdRKlnqyf9U8+nk2C+UlYnZEHELWosJkSNoro8iV3iLXrvRaDM16r6hm923
- +8bQrqIV+jyvoJeXTWvJ6Nn9F5kp/Nv0wQiVCoT6paZF7z6ruee/WRDA+TbkMughmSmi
- MrrS69V7+oXSFuFR6sLjE8BfxstsPlz21TbXl0IvuythLNxGJwTZbMZz4BJFZR/ZyBXG
- NdddGP2FiAFArfqAnvYp0ws0CQOD+QbJ8f+z+j73ETvoNEFirWkHK9TBKwUSfBLupAFZ
- HHUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696584166; x=1697188966;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b4NNMWPQHMdNZ/rw6Qpon3AsNGu/loOkzH2fO00qDb4=;
- b=ZOVMZDNK8mHVxtOctbLT9ERaswJWXrFsk4EfD9zav+07rxlEhLU2GR05jP8PI4gULC
- nErNodzKS93+SIpraVe52Z6jTOTlPVtWE0TORPA2gF08P7NQeaQPsQmseCLWYLCA8OWr
- +yU30GOJeL+AUjw4xnWTZSgqV0LJLhoaM5kwUoMMXq13t+OM1B3uUc0VV+zhK2HQA5bv
- GB4JiQ6apBEy5u7C/HHjjmWYQ71hJGnFihf0dmdq08Vun/E9aYRuQta4TZvSE4n4dLIr
- IjXBbWie8+PMi62q/R7sZmG8VAbQuqL7+atSSZw8t8ZlPVu7e87QmHVwKBCTU6imcFbn
- 0KQA==
-X-Gm-Message-State: AOJu0Yxsspa24pQTn3SPc7yNc7sE2JimhpdkMCGfgDxkU4hCKivnDU3s
- xxezN89xBfMMZYwnKqvvUn6Z11cz0FtBqm3gIrU=
-X-Google-Smtp-Source: AGHT+IGXHYrJyrX5Q7V1pgnH7p49QmVytAIk/8rIw0EMijPBDOds+UgrFJT3VV1YPKEwFsUQWhUcrA5yxb8Ni41NEE4=
-X-Received: by 2002:aa7:dd0e:0:b0:533:1832:f2b4 with SMTP id
- i14-20020aa7dd0e000000b005331832f2b4mr6596000edv.13.1696584165934; Fri, 06
- Oct 2023 02:22:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 63D4061C15;
+ Fri,  6 Oct 2023 09:53:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FEFDC433C8;
+ Fri,  6 Oct 2023 09:53:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1696585995;
+ bh=+4KfkDNKgXenaPnWABRx3mgvkMC29n3M0pSc7r6q/78=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=CxOyvN/KRZJzM/zydMsV8/49P7AE6xsuoopjdwX4yidUQdsQAFiDXoCssNzp/WsUb
+ qS+O6UOo/h/NSbImwkvQPF21q67Zu7jSg2jU1/AspR4cWXGWezHsSQrW5ME+WnDUGz
+ Xhrwz8D9RgTRc3/5VC/2ir00TgiWP0GQC2Psn6GEXW135Abiu/JSmEsm3Pkl4F0cme
+ 79gINMjuW3rxux26jjbm9/5wLJCHbE0U5UP4AQy8rZ3DyBK2IXGfDOKi3IkzR0I5bb
+ t0mrrfKzydNHcBJIjjArFA3JimjIcWkNc6h5kH0vHomx63tPeD6XZQbfUQ+wcPrqwW
+ iWfpQrbHl2Wzw==
+Message-ID: <7071ebae-66cb-40db-bba1-458291f5e42a@kernel.org>
+Date: Fri, 6 Oct 2023 12:53:09 +0300
 MIME-Version: 1.0
-References: <20230727215433.578830-1-sjg@chromium.org>
-In-Reply-To: <20230727215433.578830-1-sjg@chromium.org>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 6 Oct 2023 10:22:34 +0100
-Message-ID: <CALeDE9MADwXU_gExvQZJnxKYDk1C1YLiZyL1jhe9-Um1hQA=6Q@mail.gmail.com>
-Subject: Re: [RESEND PATCH v3 0/3] rpi: Convert to standard boot
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Matthias Brugger <mbrugger@suse.com>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] board: ti: am64x: Switch to standard boot flow
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: nm@ti.com, vigneshr@ti.com, m-chawdhry@ti.com, jonas@kwiboo.se,
+ srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
+References: <20231005130642.21402-1-rogerq@kernel.org>
+ <20231005130642.21402-3-rogerq@kernel.org>
+ <CAPnjgZ0uMLFdqvpcDMKnXQDL-m1ecUB33gat4EZK7jm=UeEB4g@mail.gmail.com>
+ <20231005163148.GR8465@bill-the-cat>
+ <CAPnjgZ0GHurenhh0eSWsQKy0EKmx2mS_rqVhJ=V3Peo8Azx9kQ@mail.gmail.com>
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <CAPnjgZ0GHurenhh0eSWsQKy0EKmx2mS_rqVhJ=V3Peo8Azx9kQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,68 +76,109 @@ X-Virus-Status: Clean
 
 Hi Simon,
 
-So with more testing of 2023.10 in Fedora we found a regression where
-the display dies when the vc4 module loads in the kernel. With further
-debug it was found that it was due to the new U-Boot and with
-bisecting it myself I have found this series is the cause of the
-regression.
+On 05/10/2023 20:22, Simon Glass wrote:
+> Hi Tom,
+> 
+> On Thu, 5 Oct 2023 at 10:31, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Thu, Oct 05, 2023 at 09:01:42AM -0600, Simon Glass wrote:
+>>> Hi Roger,
+>>>
+>>> On Thu, 5 Oct 2023 at 07:07, Roger Quadros <rogerq@kernel.org> wrote:
+>>>>
+>>>> Switch to using bootstd. Note with this change, we will stop using
+>>>> distro_bootcmd and instead depend entirely on bootflow method of
+>>>> starting the system up.
+>>>>
+>>>> Drop header files that are no longer needed in am64x_evm.h.
+>>>> k3_dfu.h is available via k3_dfu.env in am64x.env.
+>>>>
+>>>> Drop unused macro CFG_SYS_SDRAM_BASE1.
+>>>>
+>>>> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+>>>> ---
+>>>>  board/ti/am64x/am64x.env        | 1 +
+>>>>  configs/am64x_evm_a53_defconfig | 5 +++--
+>>>>  include/configs/am64x_evm.h     | 9 ---------
+>>>>  3 files changed, 4 insertions(+), 11 deletions(-)
+>>>>
+>>>> diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
+>>>> index 68e42222b7..efd736b99b 100644
+>>>> --- a/board/ti/am64x/am64x.env
+>>>> +++ b/board/ti/am64x/am64x.env
+>>>> @@ -15,6 +15,7 @@ console=ttyS2,115200n8
+>>>>  args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000 ${mtdparts}
+>>>>  run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
+>>>>
+>>>> +boot_targets=mmc1 mmc0 usb pxe dhcp
+>>>>  boot=mmc
+>>>>  mmcdev=1
+>>>>  bootpart=1:2
+>>>> diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+>>>> index 718ad176cb..43bfcf957a 100644
+>>>> --- a/configs/am64x_evm_a53_defconfig
+>>>> +++ b/configs/am64x_evm_a53_defconfig
+>>>> @@ -31,8 +31,9 @@ CONFIG_SPL_SPI=y
+>>>>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>>>>  CONFIG_SPL_LOAD_FIT=y
+>>>>  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+>>>> -CONFIG_DISTRO_DEFAULTS=y
+>>>> -CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
+>>>> +CONFIG_BOOTSTD_FULL=y
+>>>> +CONFIG_BOOTSTD_DEFAULTS=y
+>>>> +CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
+>>>>  CONFIG_BOARD_LATE_INIT=y
+>>>>  CONFIG_SPL_MAX_SIZE=0x180000
+>>>>  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+>>>> diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
+>>>> index 062102a610..f9f8c7bc2f 100644
+>>>> --- a/include/configs/am64x_evm.h
+>>>> +++ b/include/configs/am64x_evm.h
+>>>> @@ -9,15 +9,6 @@
+>>>>  #ifndef __CONFIG_AM642_EVM_H
+>>>>  #define __CONFIG_AM642_EVM_H
+>>>>
+>>>> -#include <linux/sizes.h>
+>>>> -#include <config_distro_bootcmd.h>
+>>>> -#include <env/ti/mmc.h>
+>>>> -#include <asm/arch/am64_hardware.h>
+>>>> -#include <env/ti/k3_dfu.h>
+>>>> -
+>>>> -/* DDR Configuration */
+>>>> -#define CFG_SYS_SDRAM_BASE1            0x880000000
+>>>> -
+>>>>  /* Now for the remaining common defines */
+>>>>  #include <configs/ti_armv7_common.h>
+>>>
+>>> It looks like this file still includes distro_bootcmd and defines all
+>>> the BOOT_TARGET things. Can they be dropped? Perhaps for now they
+>>> could be put behind an #ifdef if other boards need them?
+>>>
+>>> I suspect that with your patch as is, the environment is still full of scripts?
+>>
+>> There's a lot of TI platforms, so I'm not sure what "#if" you're
+>> thinking of might make it cleaner?  We could / should move some of the
+>> still relevant content and comments from that file to
+>> include/env/ti/ti_armv7_common.env as I do think some of the K3
+>> platforms could just drop <configs/ti_armv7_common.h> at this point.
+> 
+> OK so if they are using text env then the header-file stuff doesn't
+> matter since I believe it is ignored? I was thinking of something
+> like:
+> 
+> #ifdef CONFIG_DISTRO_DEFAULTS
+> 
+> do all the distro #defines
+> 
+> #endif
 
-The testing I have done is with recent RPi firmware, U-Boot 2023.10
-and kernel 6.5.x, but also seen with 6.4.x, with a minimal text only
-image. I can also reproduce it by using the F-38 GA image, no updates
-and purely just changing the U-Boot component. I've done my testing on
-the RPi4.
+This is already done, although within #ifdef CONFIG_ARM64 ...
 
-Let me know if you need more information, I believe you have a RPi you
-can test with.
+All we are picking up is really CFG_SYS_SDRAM_BASE.
 
-Regards,
-Peter
+Cleaning up ti_armv7_common.h should be a separate series and
+involve testing on all affected platforms (entire TI range) :P.
 
-On Thu, Jul 27, 2023 at 10:54=E2=80=AFPM Simon Glass <sjg@chromium.org> wro=
-te:
->
-> This series moves Raspberry Pi boards over to use standard boot.
->
-> It also moves rpi over to use a text-based environment. Unfortunately it
-> is not possible to empty the header file due to several CFG options.
->
-> Fix the repeated "and and" while we are here.
->
-> Note that this reduces rodata size by about 4.5KB. We could get another
->
-> for a total image-size saving of about 15KB. This is mostly because
-> HUSH_PARSER is not enabled anymore and the environment shrinks down by
-> about 3.5K. Hush is not actually needed anymore, since standard boot does
-> not use it. Also CMD_SYSBOOT is dropped since standard boot calls the
-> pxe_utils code directly in that case.
->
-> Changes in v3:
-> - Rebase to -master
->
-> Changes in v2:
-> - Rebase to -next
-> - Add new patch to disable DISTRO_DEFAULTS
->
-> Simon Glass (3):
->   arm: rpi: Switch to standard boot
->   rpi: Disable DISTRO_DEFAULTS
->   arm: rpi: Switch to a text environment
->
->  board/raspberrypi/rpi/rpi.env  |  77 +++++++++++++++++++
->  configs/rpi_0_w_defconfig      |   2 +-
->  configs/rpi_2_defconfig        |   2 +-
->  configs/rpi_3_32b_defconfig    |   2 +-
->  configs/rpi_3_b_plus_defconfig |   2 +-
->  configs/rpi_3_defconfig        |   2 +-
->  configs/rpi_4_32b_defconfig    |   2 +-
->  configs/rpi_4_defconfig        |   2 +-
->  configs/rpi_arm64_defconfig    |   2 +-
->  configs/rpi_defconfig          |   2 +-
->  include/configs/rpi.h          | 134 ---------------------------------
->  11 files changed, 86 insertions(+), 143 deletions(-)
->  create mode 100644 board/raspberrypi/rpi/rpi.env
->
-> --
-> 2.41.0.487.g6d72f3e995-goog
->
+-- 
+cheers,
+-roger
