@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83CD8E9412E
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 21:32:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2CDDE94136
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 22:42:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8FB286EA9;
-	Fri,  6 Oct 2023 23:32:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C335786EA6;
+	Sat,  7 Oct 2023 00:42:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QP1+WOUE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mvb4dHL0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE7C686CCE; Fri,  6 Oct 2023 20:33:35 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id A9FAB86D6E; Sat,  7 Oct 2023 00:42:55 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0131D86BDF
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 20:33:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDBAB86B89
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 00:42:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=monakov.y@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-50308217223so3017292e87.3
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 11:33:33 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-9936b3d0286so483876266b.0
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 15:42:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696617213; x=1697222013; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:subject:to:from
- :date:from:to:cc:subject:date:message-id:reply-to;
- bh=4cm6glvfKr8qH5JtTSB6xIhlENd96WvUYy2y8DsZ4Ck=;
- b=QP1+WOUEb/xNmnBJ5QJq/l34PpcQu/ilEBKcEAYb9JceSiEeBBd9PN+hDGHQ+DjlNR
- Vynnma+M5KqYqke5099QTNG0UEI8ZBzpcxidwHm8ksJS1E+x1yYV4EYxjTVcfnpM4ktv
- QvU6dxyEHyeSXR6wS/ibM9OpKFk428g5kGIFP4odYLKzyckfz9tYYC71pJaZD1JrGy1a
- R5Zd0/78opCgefGJe3zKxfeAg64Ne0b9cgGVTR1d5vjDL/aHEQNxlDWFzq1N8iFqOpdt
- 6LCzUdha/IpNy4vjvgm5/eF7cO4bu1gs0NWvS26kEW2nxo6/4+9m6yET+PaL4xfZa9lo
- 0P/w==
+ d=chromium.org; s=google; t=1696632173; x=1697236973; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tbJe5uh4l4WowaF+Dz/BNyMCwcBxsc/c/ZDqXyAhV2E=;
+ b=Mvb4dHL0RUeLsSEEyK4NtG4nHQdQfunggStm4gdy6qHGmA5ivDjM1xLq3QP+2xxQG8
+ TlBDde0gV+ABM0L+5fCvjj91jiI+Z3hXlbx0XWMkFEjxd8PLvC5P4JCou5Tm1AwWHxui
+ OkI0SjC7q1CXSTdWLOJRe1m97yFL0Yu3wHMdA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696617213; x=1697222013;
- h=content-transfer-encoding:mime-version:message-id:subject:to:from
- :date:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4cm6glvfKr8qH5JtTSB6xIhlENd96WvUYy2y8DsZ4Ck=;
- b=rg0qJf1ZXYxJ1JUp2H+fhPQuHe7ZzEMCNvWJCX8GeGdmPQxFyBOo/8NxEEP8mRDWNK
- s8ls6WMHwRfv59KLSoyxig0vOdaXWpjacwz5f/E3niMAInUV2ABSgdoy6DURi8+dS6cA
- nhWWffk+sZ5XX1oFE8+/wAU3plwtVphw4BZshFyMUmfiGYuURMY5rHuv27oqB1ey2a7E
- B5KtHLJwYPIwatIUMQE8SDdEUEG00ffiOyP3wW6IgIenkEnAgDj0m7X8L+46YSXaCz9l
- kJSmGRYHAa+P0sr6Co82+pR2npmpOz4Gvm6VqSnwm4kmv/+2qvURFB0+0+aK2tlbVwvl
- cLjA==
-X-Gm-Message-State: AOJu0YyB7TiEVOrOAed4VRWA6CiSUdfW75W2/bIIx9PO3a2s84Z/Zl4F
- xYdSzs2BDbaHC4jYhHdMwCpCKac4Slcv8w==
-X-Google-Smtp-Source: AGHT+IHVHKxDY2FZVN661tEyIHuar2aVklPvzoLYRy8qcGqL4GHeP79oBnroEWHJ6xaARasFzpYP9A==
-X-Received: by 2002:a05:6512:3144:b0:502:d5b0:436e with SMTP id
- s4-20020a056512314400b00502d5b0436emr7201019lfi.62.1696617212400; 
- Fri, 06 Oct 2023 11:33:32 -0700 (PDT)
-Received: from monakov-desktop ([92.62.56.106])
- by smtp.gmail.com with ESMTPSA id
- y5-20020ac24465000000b005041e5050e1sm395555lfl.147.2023.10.06.11.33.32
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Oct 2023 11:33:32 -0700 (PDT)
-Date: Fri, 6 Oct 2023 21:33:29 +0300
-From: Yurii Monakov <monakov.y@gmail.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] cli: Consume invalid escape sequences early
-Message-ID: <20231006213329.03aad5f5@monakov-desktop>
-X-Mailer: Claws Mail 4.0.0 (GTK+ 3.24.33; x86_64-pc-linux-gnu)
+ d=1e100.net; s=20230601; t=1696632173; x=1697236973;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tbJe5uh4l4WowaF+Dz/BNyMCwcBxsc/c/ZDqXyAhV2E=;
+ b=ctLS9GPmiZ9AWCJ+dgIRbTXrycF0rfcHXw+y8AC+7kcTJwdFAjBD+lnuVIkend5+GC
+ 73hbtfk3OnOHtwcMLYWKt+Wn14Lc4Ov6xsiBaCHICeAZRStlqTapO5SLyNIqZu3vGpLC
+ NxhzHayuOTvwM7mSCoa3Oi9D7rcBPK1HD4Adj4qzWlpmzhljlQwGe+l8/EHD5/4XpZqJ
+ 9/mWiCgDkQTiBPC09n6WAlURpYCgWMifj9y/qA1s8MH2h8c/uNmyeS+zaNNCwPVfq7/P
+ Kvc9QE7Ac1QfCvkJXQz4rwhwhKU/44xkDeKF/rGHF1o5aoz3v7ZzMwd0PMaAEaRvH1X9
+ t94g==
+X-Gm-Message-State: AOJu0Ywyany2Gf/zv+GU8yyppxBOs3hiXWygkHRY+OzVbHkYqWhjj/G1
+ PfICoBmPZSZM1BFh9lNc6ZPnaVjElc8BXXRMM5vA5g==
+X-Google-Smtp-Source: AGHT+IFUXQ/Q2OgM4/o+Dbwj97C/Z5Pk5dOl1xIw21nn18NIMWsMUJggxBxI+RaCQwycWf8KXMfMl84kC2OC9sYdPYA=
+X-Received: by 2002:a17:906:31cc:b0:9ae:56da:6068 with SMTP id
+ f12-20020a17090631cc00b009ae56da6068mr1076077ejf.57.1696632173128; Fri, 06
+ Oct 2023 15:42:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Fri, 06 Oct 2023 23:32:20 +0200
+References: <20230727215433.578830-1-sjg@chromium.org>
+ <CALeDE9MADwXU_gExvQZJnxKYDk1C1YLiZyL1jhe9-Um1hQA=6Q@mail.gmail.com>
+In-Reply-To: <CALeDE9MADwXU_gExvQZJnxKYDk1C1YLiZyL1jhe9-Um1hQA=6Q@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 6 Oct 2023 16:42:38 -0600
+Message-ID: <CAPnjgZ2L7Rfbuj6aN3oQqOPPxywraDaL1AM6xyQiNB8T6PFPGg@mail.gmail.com>
+Subject: Re: [RESEND PATCH v3 0/3] rpi: Convert to standard boot
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,36 +86,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This commit fixes some issues with extra 'Esc' keys entered by user:
+Hi Peter,
 
-1. Sequence <Esc><Esc><Enter> right after autoboot stop gives:
-=>
-nknown command 'ry 'help'
-=>
-2. Sequence <Esc><p><r><i><Enter> gives:
-=> ri
-Unknown command 'ri' - try 'help'
-=>
-3. Extra 'Esc' key presses break backspace functionality.
+On Fri, 6 Oct 2023 at 03:22, Peter Robinson <pbrobinson@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> So with more testing of 2023.10 in Fedora we found a regression where
+> the display dies when the vc4 module loads in the kernel. With further
+> debug it was found that it was due to the new U-Boot and with
+> bisecting it myself I have found this series is the cause of the
+> regression.
+>
+> The testing I have done is with recent RPi firmware, U-Boot 2023.10
+> and kernel 6.5.x, but also seen with 6.4.x, with a minimal text only
+> image. I can also reproduce it by using the F-38 GA image, no updates
+> and purely just changing the U-Boot component. I've done my testing on
+> the RPi4.
+>
+> Let me know if you need more information, I believe you have a RPi you
+> can test with.
 
-Signed-off-by: Yurii Monakov <monakov.y@gmail.com>
----
- common/cli_getch.c | 2 ++
- 1 file changed, 2 insertions(+)
+Thanks for the report. Which rpi should I test with? I take it that
+vc4 is a kernel module? Do you have the error message?
 
-diff --git a/common/cli_getch.c b/common/cli_getch.c
-index 61d4cb261b..0ee7908777 100644
---- a/common/cli_getch.c
-+++ b/common/cli_getch.c
-@@ -46,6 +46,8 @@ static int cli_ch_esc(struct cli_ch_state *cch, int ichar,
- 	case 1:
- 		if (ichar == '[' || ichar == 'O')
- 			act = ESC_SAVE;
-+		else
-+			act = ESC_CONVERTED;
- 		break;
- 	case 2:
- 		switch (ichar) {
--- 
-2.34.1
+Regards,
+Simon
 
+
+>
+> Regards,
+> Peter
+>
+> On Thu, Jul 27, 2023 at 10:54=E2=80=AFPM Simon Glass <sjg@chromium.org> w=
+rote:
+> >
+> > This series moves Raspberry Pi boards over to use standard boot.
+> >
+> > It also moves rpi over to use a text-based environment. Unfortunately i=
+t
+> > is not possible to empty the header file due to several CFG options.
+> >
+> > Fix the repeated "and and" while we are here.
+> >
+> > Note that this reduces rodata size by about 4.5KB. We could get another
+> >
+> > for a total image-size saving of about 15KB. This is mostly because
+> > HUSH_PARSER is not enabled anymore and the environment shrinks down by
+> > about 3.5K. Hush is not actually needed anymore, since standard boot do=
+es
+> > not use it. Also CMD_SYSBOOT is dropped since standard boot calls the
+> > pxe_utils code directly in that case.
+> >
+> > Changes in v3:
+> > - Rebase to -master
+> >
+> > Changes in v2:
+> > - Rebase to -next
+> > - Add new patch to disable DISTRO_DEFAULTS
+> >
+> > Simon Glass (3):
+> >   arm: rpi: Switch to standard boot
+> >   rpi: Disable DISTRO_DEFAULTS
+> >   arm: rpi: Switch to a text environment
+> >
+> >  board/raspberrypi/rpi/rpi.env  |  77 +++++++++++++++++++
+> >  configs/rpi_0_w_defconfig      |   2 +-
+> >  configs/rpi_2_defconfig        |   2 +-
+> >  configs/rpi_3_32b_defconfig    |   2 +-
+> >  configs/rpi_3_b_plus_defconfig |   2 +-
+> >  configs/rpi_3_defconfig        |   2 +-
+> >  configs/rpi_4_32b_defconfig    |   2 +-
+> >  configs/rpi_4_defconfig        |   2 +-
+> >  configs/rpi_arm64_defconfig    |   2 +-
+> >  configs/rpi_defconfig          |   2 +-
+> >  include/configs/rpi.h          | 134 ---------------------------------
+> >  11 files changed, 86 insertions(+), 143 deletions(-)
+> >  create mode 100644 board/raspberrypi/rpi/rpi.env
+> >
+> > --
+> > 2.41.0.487.g6d72f3e995-goog
+> >
