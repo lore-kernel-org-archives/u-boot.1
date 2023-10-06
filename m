@@ -4,58 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B5C8E92FFB
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 09:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48039E92FFA
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 09:55:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 452F786D21;
-	Fri,  6 Oct 2023 11:53:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4747386E2C;
+	Fri,  6 Oct 2023 11:55:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="CxOyvN/K";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Xew+wNvM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FE2A86D3F; Fri,  6 Oct 2023 11:53:20 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 1FA5086E2D; Fri,  6 Oct 2023 11:55:00 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7344C86CB8
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 11:53:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D63686CB8
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 11:54:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 63D4061C15;
- Fri,  6 Oct 2023 09:53:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9FEFDC433C8;
- Fri,  6 Oct 2023 09:53:12 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id E94C661BF0;
+ Fri,  6 Oct 2023 09:54:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1CFA1C433C7;
+ Fri,  6 Oct 2023 09:54:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1696585995;
- bh=+4KfkDNKgXenaPnWABRx3mgvkMC29n3M0pSc7r6q/78=;
+ s=k20201202; t=1696586095;
+ bh=Q1toJ4vUAzkug70MCHNRQ1qHa74Pfoa5kU7oeC1gULk=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=CxOyvN/KRZJzM/zydMsV8/49P7AE6xsuoopjdwX4yidUQdsQAFiDXoCssNzp/WsUb
- qS+O6UOo/h/NSbImwkvQPF21q67Zu7jSg2jU1/AspR4cWXGWezHsSQrW5ME+WnDUGz
- Xhrwz8D9RgTRc3/5VC/2ir00TgiWP0GQC2Psn6GEXW135Abiu/JSmEsm3Pkl4F0cme
- 79gINMjuW3rxux26jjbm9/5wLJCHbE0U5UP4AQy8rZ3DyBK2IXGfDOKi3IkzR0I5bb
- t0mrrfKzydNHcBJIjjArFA3JimjIcWkNc6h5kH0vHomx63tPeD6XZQbfUQ+wcPrqwW
- iWfpQrbHl2Wzw==
-Message-ID: <7071ebae-66cb-40db-bba1-458291f5e42a@kernel.org>
-Date: Fri, 6 Oct 2023 12:53:09 +0300
+ b=Xew+wNvMfXMDvg3Fahb2z9g0dasH9+yp7NcXtTqm8MRGGg+Lz/DYMaXabWkG7E29p
+ pQyQ3f/qiTlVWsQTtsYASPvZ1r8QXFdYF9mmlN4rxd8/3xmc7F1a5guPz0rJKGo7vw
+ +YTUdSTSTm1CdCw+VEOvdvfzCtkmgYWV2fxv2AnCAYSLXje8QfA1mN0nWNVCjR/+rK
+ Yo4rVBmUk7EgRAPaoSJacAjZazN9/liYxt4tI+PnYHoJKhv4ckGLp6oy+eKmB/lCGF
+ a41qe38t866SLpnKIC0W+cr7mL+m3XqH7nzw3NbUg8KME/JW738oEL6OXPAv8Va2mS
+ 9mr7sdhON1QNA==
+Message-ID: <a8f3749a-ab3f-4e77-bf68-b45ca86117cc@kernel.org>
+Date: Fri, 6 Oct 2023 12:54:52 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] board: ti: am64x: Switch to standard boot flow
+Subject: Re: [PATCH 1/2] board: ti: am62x: am62x.env: Fix boot_targets
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Cc: nm@ti.com, vigneshr@ti.com, m-chawdhry@ti.com, jonas@kwiboo.se,
- srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com, u-boot@lists.denx.de
-References: <20231005130642.21402-1-rogerq@kernel.org>
- <20231005130642.21402-3-rogerq@kernel.org>
- <CAPnjgZ0uMLFdqvpcDMKnXQDL-m1ecUB33gat4EZK7jm=UeEB4g@mail.gmail.com>
- <20231005163148.GR8465@bill-the-cat>
- <CAPnjgZ0GHurenhh0eSWsQKy0EKmx2mS_rqVhJ=V3Peo8Azx9kQ@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>, Nishanth Menon <nm@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>,
+ vigneshr@ti.com, m-chawdhry@ti.com, jonas@kwiboo.se, srk@ti.com, bb@ti.com,
+ praneeth@ti.com, u-boot@lists.denx.de
+References: <20231004132324.44198-1-rogerq@kernel.org>
+ <20231004132324.44198-2-rogerq@kernel.org>
+ <26457fd1-439d-fb87-52cc-350a884a8dcd@ti.com>
+ <20231004135436.ihofrxutzcdefica@audacious>
+ <895a5d8f-1d5f-4f90-90a1-ca75bc1ff54f@ti.com>
+ <20231005163645.GS8465@bill-the-cat>
+ <20231005171010.zvza7uqyn4mcgp5g@handsaw>
+ <20231005171614.yiatmyczip2jnmf4@surround>
+ <CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com>
 From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <CAPnjgZ0GHurenhh0eSWsQKy0EKmx2mS_rqVhJ=V3Peo8Azx9kQ@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1fnqgk5W_8-jkJL1keXGM4CfnK-jPnFtQcFcV+y89+cA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,107 +83,63 @@ X-Virus-Status: Clean
 Hi Simon,
 
 On 05/10/2023 20:22, Simon Glass wrote:
-> Hi Tom,
+> Hi Nishanth,
 > 
-> On Thu, 5 Oct 2023 at 10:31, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 5 Oct 2023 at 11:16, Nishanth Menon <nm@ti.com> wrote:
 >>
->> On Thu, Oct 05, 2023 at 09:01:42AM -0600, Simon Glass wrote:
->>> Hi Roger,
+>> On 12:10-20231005, Nishanth Menon wrote:
+>>> On 12:36-20231005, Tom Rini wrote:
+>>>> On Thu, Oct 05, 2023 at 09:19:48AM -0500, Andrew Davis wrote:
+>>>>> On 10/4/23 8:54 AM, Nishanth Menon wrote:
+>>>>>> On 08:48-20231004, Andrew Davis wrote:
+>>>>>>> On 10/4/23 8:23 AM, Roger Quadros wrote:
+>>>>>>>> ti_mmc is not a valid boot_target for standard boot flow so
+>>>>>>>
+>>>>>>> Is there some way to make it into a valid boot_target? Otherwise
+>>>>>>> how do we use uEnv.txt files, or boot from FIT images with overlays?
+>>>>>>
+>>>>>> envboot takes care of uEnv.txt file (see
+>>>>>> https://lore.kernel.org/all/20231004132324.44198-3-rogerq@kernel.org/)
+>>>>>>
+>>>>>> Early remote proc loading and FIT image is a question for stdboot itself.
+>>>>>>
+>>>>>
+>>>>> If stdboot is missing these features then we shouldn't switch until it
+>>>>> has them. I'm all for switching to this, but only if it is complete.
+>>>>
+>>>> Depends on what you mean?  Did you mean an option to run scripts
+>>>> (exists) or an option to do what TI needs done, via
+>>>> boot/bootmeth_something.c ?  If the latter, someone from TI needs to
+>>>> figure out what that should be and do (but plumbing-wise everything it
+>>>> needs should exist).
 >>>
->>> On Thu, 5 Oct 2023 at 07:07, Roger Quadros <rogerq@kernel.org> wrote:
->>>>
->>>> Switch to using bootstd. Note with this change, we will stop using
->>>> distro_bootcmd and instead depend entirely on bootflow method of
->>>> starting the system up.
->>>>
->>>> Drop header files that are no longer needed in am64x_evm.h.
->>>> k3_dfu.h is available via k3_dfu.env in am64x.env.
->>>>
->>>> Drop unused macro CFG_SYS_SDRAM_BASE1.
->>>>
->>>> Signed-off-by: Roger Quadros <rogerq@kernel.org>
->>>> ---
->>>>  board/ti/am64x/am64x.env        | 1 +
->>>>  configs/am64x_evm_a53_defconfig | 5 +++--
->>>>  include/configs/am64x_evm.h     | 9 ---------
->>>>  3 files changed, 4 insertions(+), 11 deletions(-)
->>>>
->>>> diff --git a/board/ti/am64x/am64x.env b/board/ti/am64x/am64x.env
->>>> index 68e42222b7..efd736b99b 100644
->>>> --- a/board/ti/am64x/am64x.env
->>>> +++ b/board/ti/am64x/am64x.env
->>>> @@ -15,6 +15,7 @@ console=ttyS2,115200n8
->>>>  args_all=setenv optargs earlycon=ns16550a,mmio32,0x02800000 ${mtdparts}
->>>>  run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
->>>>
->>>> +boot_targets=mmc1 mmc0 usb pxe dhcp
->>>>  boot=mmc
->>>>  mmcdev=1
->>>>  bootpart=1:2
->>>> diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
->>>> index 718ad176cb..43bfcf957a 100644
->>>> --- a/configs/am64x_evm_a53_defconfig
->>>> +++ b/configs/am64x_evm_a53_defconfig
->>>> @@ -31,8 +31,9 @@ CONFIG_SPL_SPI=y
->>>>  # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->>>>  CONFIG_SPL_LOAD_FIT=y
->>>>  CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
->>>> -CONFIG_DISTRO_DEFAULTS=y
->>>> -CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
->>>> +CONFIG_BOOTSTD_FULL=y
->>>> +CONFIG_BOOTSTD_DEFAULTS=y
->>>> +CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
->>>>  CONFIG_BOARD_LATE_INIT=y
->>>>  CONFIG_SPL_MAX_SIZE=0x180000
->>>>  CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->>>> diff --git a/include/configs/am64x_evm.h b/include/configs/am64x_evm.h
->>>> index 062102a610..f9f8c7bc2f 100644
->>>> --- a/include/configs/am64x_evm.h
->>>> +++ b/include/configs/am64x_evm.h
->>>> @@ -9,15 +9,6 @@
->>>>  #ifndef __CONFIG_AM642_EVM_H
->>>>  #define __CONFIG_AM642_EVM_H
->>>>
->>>> -#include <linux/sizes.h>
->>>> -#include <config_distro_bootcmd.h>
->>>> -#include <env/ti/mmc.h>
->>>> -#include <asm/arch/am64_hardware.h>
->>>> -#include <env/ti/k3_dfu.h>
->>>> -
->>>> -/* DDR Configuration */
->>>> -#define CFG_SYS_SDRAM_BASE1            0x880000000
->>>> -
->>>>  /* Now for the remaining common defines */
->>>>  #include <configs/ti_armv7_common.h>
+>>> Andrew is generalizing here (on the wrong patch though).
 >>>
->>> It looks like this file still includes distro_bootcmd and defines all
->>> the BOOT_TARGET things. Can they be dropped? Perhaps for now they
->>> could be put behind an #ifdef if other boards need them?
+>>> On am62x platforms, there is nothing regressing with this series. The
+>>> challenge is early remote_proc loading which is done for J7* platforms.
 >>>
->>> I suspect that with your patch as is, the environment is still full of scripts?
+>>> How that is initiated as part of bootmethods is something of a gap.
+>>>
+>>> The other gap has been support for uEnv.txt -> which we can workaround
+>>> at the moment by using CONFIG_BOOTCOMMAND="run envboot; bootflow scan
+>>> -lb" in defconfig (This series from Roger already does that - hence I am
+>>> saying that Andrew is complaining on the wrong series).
+>>>
+>>> Ideally, we should just have CONFIG_BOOTCOMMAND="bootflow scan -lb" and
+>>> uEnv.txt remoteproc loads and the various standard bootmethods should
+>>> "just work".
 >>
->> There's a lot of TI platforms, so I'm not sure what "#if" you're
->> thinking of might make it cleaner?  We could / should move some of the
->> still relevant content and comments from that file to
->> include/env/ti/ti_armv7_common.env as I do think some of the K3
->> platforms could just drop <configs/ti_armv7_common.h> at this point.
+>>
+>> I forgot to add: FIT image authenticated boot flow. That is really what
+>> ti_mmc distroboot method was trying to solve.
+>>
+>> Maybe Simon or someone know how the stdboot flow handles authenticated
+>> kernel image and dtb boot flow with FIT image?
 > 
-> OK so if they are using text env then the header-file stuff doesn't
-> matter since I believe it is ignored? I was thinking of something
-> like:
+> Yes you can use FIT configuration verification and things should work as normal.
 > 
-> #ifdef CONFIG_DISTRO_DEFAULTS
-> 
-> do all the distro #defines
-> 
-> #endif
 
-This is already done, although within #ifdef CONFIG_ARM64 ...
-
-All we are picking up is really CFG_SYS_SDRAM_BASE.
-
-Cleaning up ti_armv7_common.h should be a separate series and
-involve testing on all affected platforms (entire TI range) :P.
+It there any reference to look at on how this is done? Thanks.
 
 -- 
 cheers,
