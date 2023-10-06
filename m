@@ -4,81 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CA1BE94139
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 22:43:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54555E94136
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 23:00:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DEBF86BDF;
-	Sat,  7 Oct 2023 00:42:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5B7C886D3C;
+	Sat,  7 Oct 2023 01:00:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jadbyeSZ";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="k5/VSAnW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1552186B89; Sat,  7 Oct 2023 00:42:58 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7596486E37; Sat,  7 Oct 2023 01:00:16 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DE0C86B89
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 00:42:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 48CA886D30
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 01:00:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-522bd411679so4428652a12.0
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 15:42:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696632175; x=1697236975; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gyR5sV5GMYvjytTrl0n0bTviimCSK3SbnVT9yfcYBjQ=;
- b=jadbyeSZW+MZVYGgVbUVYBlSPKkOPUt/Ch0sDW+yfCxhp9GLK7muCOJM7cXH1ksibo
- Qdipc4SlrSvnJQLPQ/v8f3CRw43BzNW+1I80bmcy99V4BG+PRW7iJ8eg7fuVI86+KfUv
- K0yRDrDEWhVZBoOa6LDCDXxqOn84tCCQbFeLk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696632175; x=1697236975;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gyR5sV5GMYvjytTrl0n0bTviimCSK3SbnVT9yfcYBjQ=;
- b=wuNf9K2/5YusICa26ayh1r4Qv1Yq0sUMI3y2y03VQIFvwbYB9lbM7qJGaiiI4fCVaf
- iN9Mb5m0COn4twMPNmMl+CNVyd7JpN71jsPmxNxQTR7y0hHrZ0BqcxaRnqPk2Hch++Jz
- w7DYULSXhsiMzMoIWo5mxqczU9WD7sWektEo8xK6FAjnxLKg5bOPbLnROTGAQOfm1KqD
- Nc+caNwSiCRIy3BtCLUhP/IvxOqv+R93B9XfniabXwj/C8b1YdwefG/VFQnM+k06chYs
- nKQ9VYxOnwTSOp2+1dZLkXrZq+WI9gAAL6FuV/l0jFmwxx7ZTzVSrrOM2wYvDd4vb73w
- M7ng==
-X-Gm-Message-State: AOJu0Yy5gTaWJL00HHYpZ+xZdBlUJAQLBnFUS3IoDAioo0uA8HDI3TRu
- DsL5xEy7cbK+8wRj4bDGUGlONyjouSzV4+GbDflO6w==
-X-Google-Smtp-Source: AGHT+IG6z2Qgpv5CAIdZTG0sTKtGt1xIeTIEfnKCDdbQPNQ36Na6n5QJJRusE8Ys4KcsTz/ZY8F4R5P9621Fzh5yf/8=
-X-Received: by 2002:a17:906:1097:b0:9ad:7890:b4c0 with SMTP id
- u23-20020a170906109700b009ad7890b4c0mr7445670eju.56.1696632175274; Fri, 06
- Oct 2023 15:42:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0105C6129D
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 23:00:11 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A395AC433C9
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 23:00:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1696633210;
+ bh=k8j0XLQXjQQJNDui+0jlFZl+AAfuXhuCpn9vIwWl/cE=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=k5/VSAnWHKDBM+aIaW9QONktl0tgBQMkfEMqxBot4G6+wPYt1Z4J99Em95YUTDseY
+ jGYDjY/mNJfz3h6IDzruMe+TCkQuBvsV+78ssBXvhZDthyjlPQaQJC4AanULx4jJsm
+ udEBGn5mwgluyt40Cb0H4b9Rt4EoHlwr/4tKhZJkwAG5M6AooiUM+qPWQNcq/S02L0
+ uXRCHgIoYf95seef8oUkwVjkIy8c3hxlqxiu5kjtgdkWQ1JPziVj7jT/CkmoWqv7dB
+ MpKq3AWdGdLHCySq4EF227rhl/LTJuItrLWjF986UZOQrfH6sQpospQwPwBkhWTC0/
+ ohcKg3tNSgdvg==
+Received: by mail-lf1-f43.google.com with SMTP id
+ 2adb3069b0e04-50435a9f800so3404015e87.2
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 16:00:10 -0700 (PDT)
+X-Gm-Message-State: AOJu0YyGMZiqRbgRn6409dX840ONKYPirznpQD/ae/S8+oufoEBiXzaU
+ PpMTyw6/gykD7K0o/FPIZLrHWw4M2YZktKyavLo=
+X-Google-Smtp-Source: AGHT+IGUwIsnV63UDRYG6J0ZqF0iXQaqHVFbYxtJQSuymsUOMmUxtPl2e5FaMeYVFq286z0ldqJng0iURsW6bIABAWg=
+X-Received: by 2002:a05:6512:68a:b0:502:d743:9fc4 with SMTP id
+ t10-20020a056512068a00b00502d7439fc4mr9541254lfe.37.1696633208839; Fri, 06
+ Oct 2023 16:00:08 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-6-sjg@chromium.org>
- <20230924232658.GM305624@bill-the-cat>
- <CAPnjgZ2-ORog-+Onh1McptpMDrzccVc+BfByCMjp93wLqAms6w@mail.gmail.com>
- <20231005145350.GQ8465@bill-the-cat>
- <CAPnjgZ2Mbx9H_ve_F_gq_eqt2hvwmYF455-0PHB31fV5m9HN2A@mail.gmail.com>
- <20231006021616.GB2227687@bill-the-cat>
- <CAPnjgZ3sTQNQJCpuZ4doJJH=t=mLxXaAYQR8kVXorOfqn2t5CA@mail.gmail.com>
- <20231006165504.GC2227687@bill-the-cat>
-In-Reply-To: <20231006165504.GC2227687@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Oct 2023 16:42:44 -0600
-Message-ID: <CAPnjgZ1GZ+Ryt2=_Sf0Z+XM+V58Ty4UmdrAo2bW-Ubs9s19=Ww@mail.gmail.com>
-Subject: Re: [PATCH 05/25] treewide: Correct use of long help
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>,
- Fabio Estevam <festevam@gmail.com>, 
- Leo <ycliang@andestech.com>, Michael Walle <michael@walle.cc>, 
- Michal Suchanek <msuchanek@suse.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Rick Chen <rick@andestech.com>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@denx.de>, uboot-stm32@st-md-mailman.stormreply.com
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+ <CAPnjgZ0Xf3U1aj32LbU-xiU1AqwnM3JL1F8xX-wZ18oEmg+irw@mail.gmail.com>
+ <CAMj1kXEXcX7BkDyfy-6_5Vnch=N+onza-yfWfsVaGLE93h2c+Q@mail.gmail.com>
+ <CAPnjgZ2SEby-ndrs=W_afBJH56eqc=-mhp1F1nwkvWks+=B54Q@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2SEby-ndrs=W_afBJH56eqc=-mhp1F1nwkvWks+=B54Q@mail.gmail.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Sat, 7 Oct 2023 00:59:57 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
+Message-ID: <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, 
+ Rob Herring <robh@kernel.org>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, 
+ Guo Dong <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
+ ron minnich <rminnich@gmail.com>, Gua Guo <gua.guo@intel.com>, 
+ Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,147 +87,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Fri, 6 Oct 2023 at 10:55, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 6 Oct 2023 at 20:17, Simon Glass <sjg@chromium.org> wrote:
 >
-> On Fri, Oct 06, 2023 at 07:03:17AM -0600, Simon Glass wrote:
-> > Hi Tom,
+> Hi Ard,
+>
+> On Fri, 6 Oct 2023 at 11:33, Ard Biesheuvel <ardb@kernel.org> wrote:
 > >
-> > On Thu, 5 Oct 2023 at 20:16, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 2 Oct 2023 at 19:54, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > On Thu, Oct 05, 2023 at 07:41:49PM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 5 Oct 2023 at 08:53, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Oct 04, 2023 at 07:23:47PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Sun, 24 Sept 2023 at 17:27, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Sun, Sep 24, 2023 at 02:39:23PM -0600, Simon Glass wrote:
-> > > > > > > > Some commands assume that CONFIG_SYS_LONGHELP is always defined.
-> > > > > > > > Declaration of long help should be bracketed by an #ifdef to avoid an
-> > > > > > > > 'unused variable' warning.
-> > > > > > > >
-> > > > > > > > Fix this treewide.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > [snip]
-> > > > > > > > diff --git a/arch/arm/mach-imx/cmd_dek.c b/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > index 6fa5b41fcd38..25ea7d3b37da 100644
-> > > > > > > > --- a/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > +++ b/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > @@ -393,11 +393,12 @@ static int do_dek_blob(struct cmd_tbl *cmdtp, int flag, int argc,
-> > > > > > > >       return blob_encap_dek(src_addr, dst_addr, len);
-> > > > > > > >  }
-> > > > > > > >
-> > > > > > > > -/***************************************************/
-> > > > > > > > +#if IS_ENABLED(CONFIG_SYS_LONGHELP)
-> > > > > > > >  static char dek_blob_help_text[] =
-> > > > > > > >       "src dst len            - Encapsulate and create blob of data\n"
-> > > > > > > >       "                         $len bits long at address $src and\n"
-> > > > > > > >       "                         store the result at address $dst.\n";
-> > > > > > > > +#endif
-> > > > > > > >
-> > > > > > > >  U_BOOT_CMD(
-> > > > > > > >       dek_blob, 4, 1, do_dek_blob,
-> > > > > > >
-> > > > > > > This really doesn't read nicely.  I would rather (globally and fix
-> > > > > > > existing users) __maybe_unused this instead.  I think there's just one
-> > > > > > > example today that isn't "foo_help_text".
-> > > > > >
-> > > > > > Hmm, what do you think about adding a __longhelp symbol to cause the
-> > > > > > linker to discard it when not needed?
-> > > > >
-> > > > > Well, I don't think we need linker list magic when __maybe_unused will
-> > > > > just have them be discarded normally.
-> > > >
-> > > > Yes, perhaps things are in a better state than they used to be, but
-> > > > there is a linker discard for commands at present.
+> > > Hi Rob,
 > > >
-> > > Yes, but __maybe_unused means we don't get a warning about it, and it's
-> > > literally discarded as part of --gc-sections as it done everywhere with
-> > > maybe 3 exceptions?
+> > > On Tue, 26 Sept 2023 at 13:42, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > It is common to split firmware into 'Platform Init', which does the
+> > > > initial hardware setup and a "Payload" which selects the OS to be booted.
+> > > > Thus an handover interface is required between these two pieces.
+> > > >
+> > > > Where UEFI boot-time services are not available, but UEFI firmware is
+> > > > present on either side of this interface, information about memory usage
+> > > > and attributes must be presented to the "Payload" in some form.
+> > > >
+> > > > This aims to provide an small schema addition for the memory mapping
+> > > > needed to keep these two pieces working together well.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > > Changes in v7:
+> > > > - Rename acpi-reclaim to acpi
+> > > > - Drop individual mention of when memory can be reclaimed
+> > > > - Rewrite the item descriptions
+> > > > - Add back the UEFI text (with trepidation)
+> > >
+> > > I am again checking on this series. Can it be applied, please?
+> > >
 > >
-> > Actually with this series we get a lot closer to that. The problem
-> > with the status quo is that disabling CMDLINE doesn't disable most
-> > commands, relying instead on discarding them at link time.
+> > Apologies for the delay in response. I have been away.
 >
-> I don't follow you here.  We're talking only about the long help.
-
-I was actually talking about how the command code is removed. This
-series allows that to happen via Kconfig rather than needing a
-linker-script discard rule, something I only just fully appreciated.
-
-> There's already an option to enable/disable it.  When disabled all of
-> the long help text should be discarded, because we reference it via
-> U_BOOT_CMD macro which in turn cares about it, or not.  What's missing
-> is a U_BOOT_LONGHELP macro so that instead of:
-> #ifdef CONFIG_SYS_LONGHELP
-> static char cat_help_text[] =
->         "<interface> <dev[:part]> <file>\n"
->         "  - Print file from 'dev' on 'interface' to standard output\n";
-> #endif
+> OK, I hope you had a nice trip.
 >
-> We do:
-> U_BOOT_LONGHELP(cat,
->         "<interface> <dev[:part]> <file>\n"
->         "  - Print file from 'dev' on 'interface' to standard output\n"
-> );
->
-> Which then does:
-> static __maybe_unused char cat_help_text[] =
-> ...
-> ;
->
-> And we discard the text automatically due to --gc-sections.  We possibly
-> haven't already been doing this since back when we first started using
-> --gc-sections there was a bug in binutils that caused text like the
-> above to still get combined in to other objects and not discarded.
-> That's been fixed for ages.
->
-> And the above macro would also let us clean up U_BOOT_CMD macro slightly
-> to just omit the longhelp option and instead always do _CMD_HELP(_name)
-> inside the macros.  It'll also make it harder to add new commands
-> without a long help by accident.
 
-Gosh this is complicated.
+Thanks, it was wonderful!
 
-At present the U_BOOT_CMD() macro just drops the strings...the problem
-with the unused var only happens in a small number of cases where an
-explicit var is used. I don't see why creating a var (when none is
-there today) helps anything? It doesn't detect missing longhelp, since
-this is already an error (missing argument). Sure,  "" can be
-provided, but your macro doesn't stop that either.
-
-If you are suggesting a new U_BOOT_LONGHELP() macro, bear in mind that
-we already have quite a lot...each new 'top-level' macro results in
-more combinations.
-
->
-> > With this series, it looks like we can in fact do that, so I should
-> > remove the discards as well.
 > >
-> > The one proviso is that this does drop a lot of things we want...e.g.
-> > BOOTSTD_DEFAULTS cannot be enabled due to its use of 'select', meaning
-> > that common filesystems are dropped. So we'll need more effort after
-> > this, to allow (for example) bootmeths that don't need commands to
-> > work correctly. But I think this series at least provides a better
-> > starting point for teasing things apart.
+> > >
+> > > >
+> > > > Changes in v6:
+> > > > - Drop mention of UEFI
+> > > > - Use compatible strings instead of node names
+> > > >
+> > > > Changes in v5:
+> > > > - Drop the memory-map node (should have done that in v4)
+> > > > - Tidy up schema a bit
+> > > >
+> > > > Changes in v4:
+> > > > - Make use of the reserved-memory node instead of creating a new one
+> > > >
+> > > > Changes in v3:
+> > > > - Reword commit message again
+> > > > - cc a lot more people, from the FFI patch
+> > > > - Split out the attributes into the /memory nodes
+> > > >
+> > > > Changes in v2:
+> > > > - Reword commit message
+> > > >
+> > > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++++
+> > > >  1 file changed, 71 insertions(+)
+> > > >  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > >
+> > > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > new file mode 100644
+> > > > index 0000000..f7fbdfd
+> > > > --- /dev/null
+> > > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > @@ -0,0 +1,71 @@
+> > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> > > > +%YAML 1.2
+> > > > +---
+> > > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserved.yaml#
+> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > +
+> > > > +title: Common memory reservations
+> > > > +
+> > > > +description: |
+> > > > +  Specifies that the reserved memory region can be used for the purpose
+> > > > +  indicated by its compatible string.
+> > > > +
+> > > > +  Clients may reuse this reserved memory if they understand what it is for,
+> > > > +  subject to the notes below.
+> > > > +
+> > > > +maintainers:
+> > > > +  - Simon Glass <sjg@chromium.org>
+> > > > +
+> > > > +allOf:
+> > > > +  - $ref: reserved-memory.yaml
+> > > > +
+> > > > +properties:
+> > > > +  compatible:
+> > > > +    description: |
+> > > > +      This describes some common memory reservations, with the compatible
+> > > > +      string indicating what it is used for:
+> > > > +
+> > > > +         acpi: Advanced Configuration and Power Interface (ACPI) tables
+> > > > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This is reserved by
+> > > > +           the firmware for its use and is required to be saved and restored
+> > > > +           across an NVS sleep
+> > > > +         boot-code: Contains code used for booting which is not needed by the OS
+> > > > +         boot-code: Contains data used for booting which is not needed by the OS
+> > > > +         runtime-code: Contains code used for interacting with the system when
+> > > > +           running the OS
+> > > > +         runtime-data: Contains data used for interacting with the system when
+> > > > +           running the OS
+> > > > +
+> > > > +    enum:
+> > > > +      - acpi
+> > > > +      - acpi-nvs
+> > > > +      - boot-code
+> > > > +      - boot-data
+> > > > +      - runtime-code
+> > > > +      - runtime-data
+> > > > +
 > >
-> > So OK I'll go with __maybe_unused for the ones that need it, which
-> > isn't too many given that many of the strings are just included
-> > directly in the macro. It is considerably easier than trying to be to
-> > clever about things.
+> > As I mentioned a few times already, I don't think these compatibles
+> > should be introduced here.
+> >
+> > A reserved region has a specific purpose, and the compatible should be
+> > more descriptive than the enum above. If the consumer does not
+> > understand this purpose, it should simply treat the memory as reserved
+> > and not touch it. Alternatively, these regions can be referenced from
+> > other DT nodes using phandles if needed.
 >
-> Yes, this series itself has a lot of problems that need to be addressed
-> before reposting because I don't like "hiding" that network stuff no
-> longer works, and I also saw that DFU also silently failing.
+> We still need some description of what these regions are used for, so
+> that the payload can use the correct regions. I do not have any other
+> solution to this problem. We are in v7 at present. At least explain
+> where you want the compatible strings to be introduced.
+>
 
-Yes I saw your other comments. But I think this patch is the big area
-of confusion.
+My point is really that by themselves, these regions are not usable by
+either a payload or an OS that consumes this information. Unless there
+is some other information being provided (via DT I imagine) that
+describes how these things are supposed to be used, they are nothing
+more than memory reservations that should be honored, and providing
+this arbitrary set of labels is unnecessary.
 
-Regards,
-Simon
+> What sort of extra detail are you looking for? Please be specific and
+> preferably add some suggestions so I can close this out ASAP.
+>
+
+A payload or OS can do nothing with a memory reservation called
+'runtime-code' it it doesn't know what is inside. So there is another
+DT node somewhere that describes this, and that can simply point to
+this region (via a phandle) if it needs to describe the
+correspondence. This is more idiomatic for DT afaik (but I am not the
+expert).  But more importantly, it avoids overloading some vague
+labels with behavior (e.g., executable permissions for code regions)
+that should only be displayed for regions with a particular use,
+rather than for a ill defined class of reservations the purpose of
+which is not clear.
+
+What I am trying to avoid is the OS ending up being forced to consume
+this information in parallel to the EFI memory map, and having to
+reconcile them. I'd be much happier if this gets contributed to a spec
+that only covers firmware-to-firmware, and is prevented from leaking
+into the OS facing interface.
+
+
+
+> >
+> >
+> > > > +  reg:
+> > > > +    description: region of memory that is reserved for the purpose indicated
+> > > > +      by the compatible string.
+> > > > +
+> > > > +required:
+> > > > +  - reg
+> > > > +
+> > > > +unevaluatedProperties: false
+> > > > +
+> > > > +examples:
+> > > > +  - |
+> > > > +    reserved-memory {
+> > > > +        #address-cells = <1>;
+> > > > +        #size-cells = <1>;
+> > > > +
+> > > > +        reserved@12340000 {
+> > > > +            compatible = "boot-code";
+> > > > +            reg = <0x12340000 0x00800000>;
+> > > > +        };
+> > > > +
+> > > > +        reserved@43210000 {
+> > > > +            compatible = "boot-data";
+> > > > +            reg = <0x43210000 0x00800000>;
+> > > > +        };
+> > > > +    };
+> > > > --
+> > > > 2.42.0.515.g380fc7ccd1-goog
+>
+> Regards,
+> Simon
