@@ -4,68 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2F33E92FE4
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 05:25:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC44E92FF3
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 07:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D0F886A51;
-	Fri,  6 Oct 2023 07:25:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1820C86CE5;
+	Fri,  6 Oct 2023 09:21:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BWPhGb94";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wFZIoQE7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7DED86B42; Fri,  6 Oct 2023 07:25:52 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id DC40686CE7; Fri,  6 Oct 2023 09:21:34 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5E7C86A2B
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 07:25:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AE7E186B8B
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 09:21:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=n-jain1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3965Pklc004574;
- Fri, 6 Oct 2023 00:25:46 -0500
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3967LSjG014603;
+ Fri, 6 Oct 2023 02:21:28 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1696569947;
- bh=v+Gcoo5SSfkUsWI0oEZI3cuHuUc4C7eO8S3eXfrKoBs=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=BWPhGb94oThpVJ51I+2uUx30eVyGr77I/CArNod2ygcPprqAROP9+u6DkMeRaK9A4
- 3RobtCFLKvvcdTCWytkXx2V5Imx5fp25XEGpBQc9nVmhNcTrhl6UArLGLWdlG4+gn8
- WEjoDT/Bk7wA3SPLTH88m3dc+tzqT4Lav4vbRzWY=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3965PkxN062385
+ s=ti-com-17Q1; t=1696576888;
+ bh=6aYWXWj8cFwS3Gk71ffHeVzZXQiQpST1yuBS4NkEJJ4=;
+ h=Date:Subject:To:References:From:In-Reply-To;
+ b=wFZIoQE7WUPOjBOgF4fr9YvGtpVZEV3V2S5rCbvWN9RlckZdguChQyEKrLBBuTsO2
+ ntpSvdH+K15wlM3MXo9JKp9Ke6ze4Trm+nQrjJL8s0iitCpSduPMVxGCpuFXN5qCYB
+ hRdnypGZgt+Cjt2TNRaE/URxSl9r3NsZmyl5VTEU=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3967LSRR003307
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 6 Oct 2023 00:25:46 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 6 Oct 2023 02:21:28 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 6
- Oct 2023 00:25:46 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Oct 2023 02:21:28 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 6 Oct 2023 00:25:46 -0500
-Received: from [172.24.227.70] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3965Pgkp107478;
- Fri, 6 Oct 2023 00:25:43 -0500
-Message-ID: <f3e4eb39-acff-4cc4-88b0-c1263091936d@ti.com>
-Date: Fri, 6 Oct 2023 10:55:42 +0530
+ Frontend Transport; Fri, 6 Oct 2023 02:21:28 -0500
+Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3967LQbh080679;
+ Fri, 6 Oct 2023 02:21:27 -0500
+Message-ID: <278a5d08-cbd5-4846-9907-28f6d49a4206@ti.com>
+Date: Fri, 6 Oct 2023 12:51:25 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/7] configs: j721s2_evm_r5_defconfig: Increase malloc
- pool size in DRAM
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>, Apurva Nandan
- <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
-References: <20231006-b4-upstream-j721s2-r5-pinmux-v7-0-5d31f765dd2c@ti.com>
- <20231006-b4-upstream-j721s2-r5-pinmux-v7-1-5d31f765dd2c@ti.com>
+Subject: Re: [PATCH] arm: mach-k3: Remove secure device makefile
 Content-Language: en-US
-From: Nikhil Jain <n-jain1@ti.com>
-In-Reply-To: <20231006-b4-upstream-j721s2-r5-pinmux-v7-1-5d31f765dd2c@ti.com>
-Content-Type: text/plain; charset="UTF-8"
+To: Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, <u-boot@lists.denx.de>
+References: <20231005142117.18671-1-afd@ti.com>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20231005142117.18671-1-afd@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
@@ -84,32 +79,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Andrew
 
-On 06/10/23 10:15, Manorit Chawdhry wrote:
-> From: Udit Kumar <u-kumar1@ti.com>
->
-> The malloc capacity in DRAM at R5 SPL is set to 1MB which isn't
-> sufficient to load the new tispl.bin to
-> enable loading of tispl.bin the size is increased by 256KB to 1.25MB.
->
-> Cc: Nikhil M Jain <n-jain1@ti.com>
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-> Reviewed-by: Nishanth Menon <nm@ti.com>
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+On 05/10/23 19:51, Andrew Davis wrote:
+> This is now done using binman but this file was leftover and is now
+> unused, remove it.
+> 
+> Signed-off-by: Andrew Davis <afd@ti.com>
+
+Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+
 > ---
->  configs/j721s2_evm_r5_defconfig | 1 +
->  1 file changed, 1 insertion(+)
-Reviewed-by: Nikhil M Jain <n-jain1@ti.com>
-> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
-> index 1e66ac23d05b..e2b83b337809 100644
-> --- a/configs/j721s2_evm_r5_defconfig
-> +++ b/configs/j721s2_evm_r5_defconfig
-> @@ -42,6 +42,7 @@ CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
->  CONFIG_SPL_BOARD_INIT=y
->  CONFIG_SPL_SYS_MALLOC_SIMPLE=y
->  CONFIG_SPL_STACK_R=y
-> +CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x140000
->  CONFIG_SPL_SEPARATE_BSS=y
->  CONFIG_SYS_SPL_MALLOC=y
->  CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
->
+>   MAINTAINERS                       |  1 -
+>   arch/arm/mach-k3/config_secure.mk | 44 -------------------------------
+>   2 files changed, 45 deletions(-)
+>   delete mode 100644 arch/arm/mach-k3/config_secure.mk
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 4df79254dfe..de4711721b2 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1548,7 +1548,6 @@ F:	arch/arm/mach-omap2/omap5/sec_entry_cpu1.S
+>   F:	arch/arm/mach-omap2/sec-common.c
+>   F:	arch/arm/mach-omap2/config_secure.mk
+>   F:	arch/arm/mach-k3/security.c
+> -F:	arch/arm/mach-k3/config_secure.mk
+>   F:	configs/am335x_hs_evm_defconfig
+>   F:	configs/am335x_hs_evm_uart_defconfig
+>   F:	configs/am43xx_hs_evm_defconfig
+> diff --git a/arch/arm/mach-k3/config_secure.mk b/arch/arm/mach-k3/config_secure.mk
+> deleted file mode 100644
+> index 9cc1f9eb24f..00000000000
+> --- a/arch/arm/mach-k3/config_secure.mk
+> +++ /dev/null
+> @@ -1,44 +0,0 @@
+> -# SPDX-License-Identifier: GPL-2.0
+> -#
+> -# Copyright (C) 2018 Texas Instruments, Incorporated - http://www.ti.com/
+> -#	Andrew F. Davis <afd@ti.com>
+> -
+> -quiet_cmd_k3secureimg = SECURE  $@
+> -ifneq ($(TI_SECURE_DEV_PKG),)
+> -ifneq ($(wildcard $(TI_SECURE_DEV_PKG)/scripts/secure-binary-image.sh),)
+> -cmd_k3secureimg = $(TI_SECURE_DEV_PKG)/scripts/secure-binary-image.sh \
+> -	$< $@ \
+> -	$(if $(KBUILD_VERBOSE:1=), >/dev/null)
+> -else
+> -cmd_k3secureimg = echo "WARNING:" \
+> -	"$(TI_SECURE_DEV_PKG)/scripts/secure-binary-image.sh not found." \
+> -	"$@ was NOT secured!"; cp $< $@
+> -endif
+> -else
+> -cmd_k3secureimg = echo "WARNING: TI_SECURE_DEV_PKG environment" \
+> -	"variable must be defined for TI secure devices." \
+> -	"$@ was NOT secured!"; cp $< $@
+> -endif
+> -
+> -%.dtb_HS: %.dtb FORCE
+> -	$(call if_changed,k3secureimg)
+> -
+> -$(obj)/u-boot-spl-nodtb.bin_HS: $(obj)/u-boot-spl-nodtb.bin FORCE
+> -	$(call if_changed,k3secureimg)
+> -
+> -tispl.bin_HS: $(obj)/u-boot-spl-nodtb.bin_HS $(patsubst %,$(obj)/dts/%.dtb_HS,$(subst ",,$(CONFIG_SPL_OF_LIST))) $(SPL_ITS) FORCE
+> -	$(call if_changed,mkfitimage)
+> -
+> -MKIMAGEFLAGS_u-boot.img_HS = -f auto -A $(ARCH) -T firmware -C none -O u-boot \
+> -	-a $(CONFIG_TEXT_BASE) -e $(CONFIG_SYS_UBOOT_START) \
+> -	-n "U-Boot $(UBOOTRELEASE) for $(BOARD) board" -E \
+> -	$(patsubst %,-b arch/$(ARCH)/dts/%.dtb_HS,$(subst ",,$(CONFIG_OF_LIST)))
+> -
+> -OF_LIST_TARGETS = $(patsubst %,arch/$(ARCH)/dts/%.dtb,$(subst ",,$(CONFIG_OF_LIST)))
+> -$(OF_LIST_TARGETS): dtbs
+> -
+> -u-boot-nodtb.bin_HS: u-boot-nodtb.bin FORCE
+> -	$(call if_changed,k3secureimg)
+> -
+> -u-boot.img_HS: u-boot-nodtb.bin_HS u-boot.img $(patsubst %.dtb,%.dtb_HS,$(OF_LIST_TARGETS)) FORCE
+> -	$(call if_changed,mkimage)
+
+-- 
+Thanking You
+Neha Malcom Francis
