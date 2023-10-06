@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89AFFE94115
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 20:52:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCCF1E9412E
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 21:32:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E871286D30;
-	Fri,  6 Oct 2023 22:52:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7BA2886D3C;
+	Fri,  6 Oct 2023 23:32:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aatE0h3Q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ktOIdNls";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA522865DA; Fri,  6 Oct 2023 22:52:23 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 6BC2286DB5; Fri,  6 Oct 2023 14:24:44 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B071E865DA
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 22:52:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 77DEB86CF4
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 14:24:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-5a22f9e2f40so30354687b3.1
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 13:52:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=debrabander@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-5347e657a11so3510608a12.2
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 05:24:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696625539; x=1697230339; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ao6qFvQJwNA7iOw6yC70NySbKhEkAIWuom18ntyoydY=;
- b=aatE0h3QEe/ZkRzo5/59scN+TC7zrISZzCRuSJfo9xCgmP2CDvTiJvox2dKg1KJ5ls
- 49hPepxKMOt5pI8+pXBSGkNwMuaO8MWRU/WEliag19tsAknKjSe+UIkip/vaEPgL2ZiV
- HWI15gJUZ0s5d36mAK5iz/Q4+LWLaGm1pGUsA=
+ d=gmail.com; s=20230601; t=1696595082; x=1697199882; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YO48bivJ9H5mlQ2OEyPlCTdMOcJ1xMHvdPJpgHLD/BM=;
+ b=ktOIdNlsoujQolrqXXW0ONG53iFKtdIHIo2pEKumLX40bqLfAap73iVeaMjfg/UHeX
+ LDSUrs8bmntVhhJmw80XKvD5p3KWjWiNZjGXnpiC1s/fC+w+yLAF1hYY7kMgAQwLxndI
+ 6yJ7YmqOGaEJecWxB8uWRuMKSzyA7Nvpb8p8vuHm9v4QY9oUhj2J2JtZdOCVwWCNgh+1
+ hML2FZzSoSn68ejQw8a1TNMkDcS1CMej6dQjKacoC3OFaVl0md/IPrYBvSu4s9yKK70I
+ BCl7W5zZ+Z68kMKsSbobJDoR4pqBkA8j9oDx0ZHHkfy25c8Yee3iaeSUckAHqm+vie5z
+ e5iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696625539; x=1697230339;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ao6qFvQJwNA7iOw6yC70NySbKhEkAIWuom18ntyoydY=;
- b=arxiHydzcnaQrOkf0I203dUH41INZ5ksRWYEq/48QF4Y9Nv1UmRgzvBztNjXK4lIVN
- a1xwH7MW/O+2WmBxx3I6/6Qqni91e6kNiPHnK5hJgrlNwXPwOVc6l0tR7xKXnl0TBcNv
- fJXakpze62nzPqdMPBka25+cZebVqVR65JUG1WPWo8lg9V8ZcVAuGl/Il1pUgEZCKQhY
- ZFPgkrkShfz8v0FfVCXSv6lSpiiU67Py6gLWqizbnlNdtsQ6aszTnTKjw/SjHbEJiRof
- Jwu9ahNGtCUQj+cAbS6cHC/6RP46VHrHR4xYyNPrYOd7S079b5otP2nSbT4aLjANceOS
- t2XQ==
-X-Gm-Message-State: AOJu0YyHRCpUeU28stN2HWV21UZoqmAxFrQvJ1yve9zDTpgeSBaTLFpd
- PIi00oKruof2E6WbT1vrnKHBmw==
-X-Google-Smtp-Source: AGHT+IFbMc4s3qn7DNmmD8wxIZY8sxbaehAA37g3XXnrFTBSWMXSRRrvzMqMfDcqntSd2P0F1VS0vA==
-X-Received: by 2002:a81:6cc2:0:b0:59b:5456:a9bb with SMTP id
- h185-20020a816cc2000000b0059b5456a9bbmr11067355ywc.42.1696625539277; 
- Fri, 06 Oct 2023 13:52:19 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-429b-02e7-f294-8f62.res6.spectrum.com.
- [2603:6081:7b00:6400:429b:2e7:f294:8f62])
- by smtp.gmail.com with ESMTPSA id
- i141-20020a816d93000000b0056d51c39c1fsm1520018ywc.23.2023.10.06.13.52.08
+ d=1e100.net; s=20230601; t=1696595082; x=1697199882;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YO48bivJ9H5mlQ2OEyPlCTdMOcJ1xMHvdPJpgHLD/BM=;
+ b=Y4INcYcA/WzcBpFD3BomWPmz9B57/yYT/bjwsbDfKkLPVr+zJUvif/rPX7VrJTlT1F
+ KZdQCUfnRA0rjFt7aMj3M0yQTZn0X6EWts+65YXF7NiKZCwa5dpSpP95tYT+gSipBXHO
+ X1Da55QqkQnL8W76pCgkbgd8+XJsrnVvUdGKg8/Bk9nfHrBLwvDljQjvHJaEYBTLG55j
+ y5sPjWXmCnjhYcV/4Ud8+OgoIz9umvtmCarLwBpahpviUoUFuUTdVwbYHjhqbe4/CnQv
+ 2XS3dcT/urChewouDu0IPhWxKkcuZ0A7SZdwqGu7bEsvJtwAyacZDdbt0U8Dvr+D2p5W
+ g+ag==
+X-Gm-Message-State: AOJu0YwUEHmvXMjSk7kZ+wK5X0dsAue9I3NySQ5Qr6F14vu4jLYGlejl
+ NdB3ZIImYJzNDf1yrL3Y5PptD99zRKa7HA==
+X-Google-Smtp-Source: AGHT+IFBDYAVqcb7+BNRp8vyzoUvsz6Osezl+2D1Mv7BTrR0ouAFJGy8HVzib4MNqIIREOLp6iLOoQ==
+X-Received: by 2002:aa7:d998:0:b0:51a:3159:53c7 with SMTP id
+ u24-20020aa7d998000000b0051a315953c7mr7528897eds.30.1696595081739; 
+ Fri, 06 Oct 2023 05:24:41 -0700 (PDT)
+Received: from win95.FOX.local (186-153-172-081.dynamic.caiway.nl.
+ [81.172.153.186]) by smtp.gmail.com with ESMTPSA id
+ k18-20020a05640212d200b00537fa467ddasm2497376edx.65.2023.10.06.05.24.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 06 Oct 2023 13:52:09 -0700 (PDT)
-Date: Fri, 6 Oct 2023 16:52:06 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@google.com>
-Subject: Re: [PATCH] sphinx: Bump urllib3 version
-Message-ID: <20231006205206.GD2227687@bill-the-cat>
-References: <20231005162738.3327197-1-trini@konsulko.com>
- <CAPnjgZ2w-u68LQSoy_0140PrkGDgrEGi+Wvypcunn0p_shfb6w@mail.gmail.com>
- <084eb86a-080b-4b0b-ad35-98497a290071@gmx.de>
+ Fri, 06 Oct 2023 05:24:41 -0700 (PDT)
+From: Frank de Brabander <debrabander@gmail.com>
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ Frank de Brabander <debrabander@gmail.com>
+Subject: [PATCH] net: phy: TI DP83869 fix invalid clock delay configuration
+Date: Fri,  6 Oct 2023 14:24:39 +0200
+Message-Id: <20231006122439.10720-1-debrabander@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="69RX45iJREq1r7Gc"
-Content-Disposition: inline
-In-Reply-To: <084eb86a-080b-4b0b-ad35-98497a290071@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Fri, 06 Oct 2023 23:32:20 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,48 +90,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Setting the clock delay from the device tree settings
+rx-internal-delay-ps and tx-internal-delay-ps was broken:
 
---69RX45iJREq1r7Gc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ - The expected value in the device tree is suppose to be a
+   delay in picoseconds, but the driver only allowed an array index.
+ - Driver converted this array index to the actual delay in
+   picoseconds and tried to apply this in the device register. This
+   however is not a valid register value. The actual logic here was
+   reversed, it converted an register representation of the delay to
+   the device tree delay in picoseconds.
 
-On Fri, Oct 06, 2023 at 09:50:20PM +0200, Heinrich Schuchardt wrote:
-> On 10/6/23 03:41, Simon Glass wrote:
-> > On Thu, 5 Oct 2023 at 10:27, Tom Rini <trini@konsulko.com> wrote:
-> > >=20
-> > > While not a direct issue for us, urllib3 before 1.26.17 is vulnerable=
- to
-> > > CVE-2023-43804 to bump our version up.
->=20
-> The same bug is also fixed in 2.0.6. Why should we stick with the old
-> series? I could not see any issues building the documentation locally
-> and on Github with 2.0.6.
+Only when the internal delays were NOT configured in the device tree
+and they default value of 7 (=2000ps) was used, a valid value was
+loaded in the register.
 
-There's probably a number of packages we could bump for similar reasons,
-if you'd like to unfreeze, build, check the output and refreeze.  I'm
-just posting something to get Dependabot to be silenced since I get this
-whenever I push a branch.
+Signed-off-by: Frank de Brabander <debrabander@gmail.com>
+---
+ drivers/net/phy/dp83869.c | 53 +++++++++++++++++++++++----------------
+ 1 file changed, 32 insertions(+), 21 deletions(-)
 
---=20
-Tom
+diff --git a/drivers/net/phy/dp83869.c b/drivers/net/phy/dp83869.c
+index 8d32d73b07..f9d4782580 100644
+--- a/drivers/net/phy/dp83869.c
++++ b/drivers/net/phy/dp83869.c
+@@ -81,7 +81,10 @@
+ 
+ /* RGMIIDCTL bits */
+ #define DP83869_RGMII_TX_CLK_DELAY_SHIFT	4
+-#define DP83869_CLK_DELAY_DEF				7
++#define DP83869_CLK_DELAY_STEP			250
++#define DP83869_CLK_DELAY_MIN			250
++#define DP83869_CLK_DELAY_MAX			4000
++#define DP83869_CLK_DELAY_DEFAULT		2000
+ 
+ /* CFG2 bits */
+ #define MII_DP83869_CFG2_SPEEDOPT_10EN		0x0040
+@@ -157,10 +160,6 @@ static int dp83869_config_port_mirroring(struct phy_device *phydev)
+ 	return 0;
+ }
+ 
+-static const int dp83869_internal_delay[] = {250, 500, 750, 1000, 1250, 1500,
+-					     1750, 2000, 2250, 2500, 2750, 3000,
+-					     3250, 3500, 3750, 4000};
+-
+ static int dp83869_set_strapped_mode(struct phy_device *phydev)
+ {
+ 	struct dp83869_private *dp83869 = phydev->priv;
+@@ -183,7 +182,6 @@ static int dp83869_set_strapped_mode(struct phy_device *phydev)
+ static int dp83869_of_init(struct phy_device *phydev)
+ {
+ 	struct dp83869_private * const dp83869 = phydev->priv;
+-	const int delay_entries = ARRAY_SIZE(dp83869_internal_delay);
+ 	int ret;
+ 	ofnode node;
+ 
+@@ -238,32 +236,45 @@ static int dp83869_of_init(struct phy_device *phydev)
+ 	dp83869->tx_fifo_depth = ofnode_read_s32_default(node, "tx-fifo-depth",
+ 							 DP83869_PHYCR_FIFO_DEPTH_4_B_NIB);
+ 
++	/* Internal clock delay values can be configured in steps of
++	 * 250ps (0.25ns). The register field for clock delay is 4-bits wide,
++	 * the values range from 0b0000 for 0.25ns to 0b1111 for 4ns.
++	 */
++
+ 	/* RX delay *must* be specified if internal delay of RX is used. */
+ 	if (phydev->interface == PHY_INTERFACE_MODE_RGMII_ID ||
+ 	    phydev->interface == PHY_INTERFACE_MODE_RGMII_RXID) {
+-		dp83869->rx_int_delay = ofnode_read_u32_default(node, "rx-internal-delay-ps",
+-								DP83869_CLK_DELAY_DEF);
+-		if (dp83869->rx_int_delay > delay_entries) {
+-			dp83869->rx_int_delay = DP83869_CLK_DELAY_DEF;
+-			pr_debug("rx-internal-delay-ps not set/invalid, default to %ups\n",
+-				 dp83869_internal_delay[dp83869->rx_int_delay]);
++		dp83869->rx_int_delay = ofnode_read_u32_default(node,
++			"rx-internal-delay-ps", DP83869_CLK_DELAY_DEFAULT);
++		if (dp83869->rx_int_delay > DP83869_CLK_DELAY_MAX ||
++		    dp83869->rx_int_delay < DP83869_CLK_DELAY_MIN ||
++		    dp83869->rx_int_delay % DP83869_CLK_DELAY_STEP) {
++			dp83869->rx_int_delay = DP83869_CLK_DELAY_DEFAULT;
++			pr_warn("rx-internal-delay-ps not set/invalid, default"
++				" to %ups\n", DP83869_CLK_DELAY_DEFAULT);
+ 		}
+ 
+-		dp83869->rx_int_delay = dp83869_internal_delay[dp83869->rx_int_delay];
++		dp83869->rx_int_delay =
++			(dp83869->rx_int_delay - DP83869_CLK_DELAY_STEP)
++			/ DP83869_CLK_DELAY_STEP;
+ 	}
+ 
+-	/* TX delay *must* be specified if internal delay of RX is used. */
++	/* TX delay *must* be specified if internal delay of TX is used. */
+ 	if (phydev->interface == PHY_INTERFACE_MODE_RGMII_ID ||
+ 	    phydev->interface == PHY_INTERFACE_MODE_RGMII_TXID) {
+-		dp83869->tx_int_delay = ofnode_read_u32_default(node, "tx-internal-delay-ps",
+-								DP83869_CLK_DELAY_DEF);
+-		if (dp83869->tx_int_delay > delay_entries) {
+-			dp83869->tx_int_delay = DP83869_CLK_DELAY_DEF;
+-			pr_debug("tx-internal-delay-ps not set/invalid, default to %ups\n",
+-				 dp83869_internal_delay[dp83869->tx_int_delay]);
++		dp83869->tx_int_delay = ofnode_read_u32_default(node,
++			"tx-internal-delay-ps", DP83869_CLK_DELAY_DEFAULT);
++		if (dp83869->tx_int_delay > DP83869_CLK_DELAY_MAX ||
++		    dp83869->tx_int_delay < DP83869_CLK_DELAY_MIN ||
++		    dp83869->tx_int_delay % DP83869_CLK_DELAY_STEP) {
++			dp83869->tx_int_delay = DP83869_CLK_DELAY_DEFAULT;
++			pr_warn("tx-internal-delay-ps not set/invalid, default"
++				" to %ups\n", DP83869_CLK_DELAY_DEFAULT);
+ 		}
+ 
+-		dp83869->tx_int_delay = dp83869_internal_delay[dp83869->tx_int_delay];
++		dp83869->tx_int_delay =
++			(dp83869->tx_int_delay - DP83869_CLK_DELAY_STEP)
++			/ DP83869_CLK_DELAY_STEP;
+ 	}
+ 
+ 	return 0;
+-- 
+2.30.2
 
---69RX45iJREq1r7Gc
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUgc20ACgkQFHw5/5Y0
-tyxNOwwAtkaCj4KsVixv8wYw5Qd+hoCyc65bIv+lF8F0nUedXPCSePWJgPUVml1m
-B4sDxKpb6VinXzK/EJac8cBRq3bw/kT2qXGWqFDsvLfkWjZk6rqQeVTfvTKl1cxe
-MepH4r670F50qYux6UIIMdwpbIMdXth8zLSAE/u3NjFrUE88j3t1IpxhEAY4YwDN
-2lUZCHH6K7B/IAAX7fbRCajoHTZK+lfG70EYm+G3/oiEbft7Y4t76IbKyjg9WU3Y
-P6myPjtgHWcylsm4YLEJyVIZhu7oR5hEEuV3P4wktoQ8P8+0+g1/bajPjbSpQcxZ
-PbwC9NqnnzhyctyJsZAAHxzd3GngXaXMx/zuqBdnYxHiwbYxEYBFNQGiOxD4nGts
-1Jp0SROQ4enDbXkzxtdtIlUmrb729SAzJxDki6VPTqRCQS/OYys06QxH+RnRsqu3
-8gwoKlydDHc8NXbSI7Xa+WQeea9KcCHfSLN8oHm6WyH+62zt4aYc5cIi/WlmuTqO
-C4JI8cRy
-=TiOY
------END PGP SIGNATURE-----
-
---69RX45iJREq1r7Gc--
