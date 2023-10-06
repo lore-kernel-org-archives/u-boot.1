@@ -4,67 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B17E92FF9
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 08:37:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 325AEE92FF9
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 08:44:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02F1E86CCE;
-	Fri,  6 Oct 2023 10:37:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C1BF86CE7;
+	Fri,  6 Oct 2023 10:43:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iH3wJagT";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UPzWllj2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A763886D30; Fri,  6 Oct 2023 10:37:50 +0200 (CEST)
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D05C686D17; Fri,  6 Oct 2023 10:43:57 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73F00868BB
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 10:37:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A008B868BB
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 10:43:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by ams.source.kernel.org (Postfix) with ESMTP id F2B48B8272A;
- Fri,  6 Oct 2023 08:37:47 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23CC7C433C7;
- Fri,  6 Oct 2023 08:37:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1696581467;
- bh=FgJYm01/N7btQ6Qz+G8RgkTRmDSNcZ+Y3gfxNpLK3Tg=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=iH3wJagTAe22K+Ho9b7VGPb4l4lwixmsS4OrGinVrtNjm56X8TWlcag3S4Pe0akve
- GMwvi2ADg93Sb0+A/dIQFcv+QWfjRof7It7afH70n+Zc/SHU1tNrI8cv4O0YPv/S5Y
- vfBrwcAP5o2I7/khzmM5esD2aO+XNle5mqK0pUMIRf+SGmzDAOaPpS8Al/gmwrbsB8
- LNJVySamIQ6vTUofquyw5J+5/NzthSkN0pXcO0zTj3QY1SMC3Xom7VwBa2rWa2uFN2
- QBLgX31TpeS0lfMQ116AnrP4EKQ3wHQqMVZq+YCz5kpLXJLsze3Rqin2tnaPlq8BEr
- QcqJ5gPkLtD/A==
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 3968hpTV026952;
+ Fri, 6 Oct 2023 03:43:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696581832;
+ bh=jkk7ENtgj8oEUIxA6qgvzdZM6xgFVmoQ4eJkEJxpRxA=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=UPzWllj2ZfWlHrsFJlSeGJzBXQdJ/5fmAtXmmuziGGfdujq7hdbAsiMWgKEOzKvHb
+ isJthfljJCuluWIQa4fPfZdWN2iCxVCwQb9rVDRXjaE5+72pPkH3V/kmR938TcFvNH
+ aYxPiKuwzuwFphKtZ21Nz2qfvMP1dGUKvHvvbrP8=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 3968hpIH015718
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 6 Oct 2023 03:43:51 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 6
+ Oct 2023 03:43:51 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 6 Oct 2023 03:43:51 -0500
+Received: from [10.24.68.114] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 3968hmGf117302;
+ Fri, 6 Oct 2023 03:43:49 -0500
+Message-ID: <31170828-a7d6-49d9-919c-5795fc17f67b@ti.com>
+Date: Fri, 6 Oct 2023 14:13:48 +0530
 MIME-Version: 1.0
-Date: Fri, 06 Oct 2023 10:37:41 +0200
-From: Michael Walle <mwalle@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] binman: openssl: x509: ti_secure_rom: Add support
+ for bootcore_opts
+Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>
-Cc: miquel.raynal@bootlin.com, conor+dt@kernel.org,
- devicetree@vger.kernel.org, krzysztof.kozlowski+dt@linaro.org,
- linux-kernel@vger.kernel.org, linux-mtd@lists.infradead.org,
- ptyadav@amazon.de, rafal@milecki.pl, richard@nod.at, robh+dt@kernel.org,
- robh@kernel.org, trini@konsulko.com, u-boot@lists.denx.de, vigneshr@ti.com
-Subject: Re: [PATCH v2 1/3] dt-bindings: mtd: fixed-partitions: Add binman
- compatible
-In-Reply-To: <CAPnjgZ2PnKD5m0EgTdEAf-gcK3wuBZvWw_AO2iehb1dmfdoz3A@mail.gmail.com>
-References: <20231004093620.2b1d6917@xps-13>
- <20231004113458.531124-1-mwalle@kernel.org>
- <CAPnjgZ2hWE6Sc=rg55W=-r-TnoWP7Y5gSpn41kwoyja-AMVw+w@mail.gmail.com>
- <9e588e3ec8c0c321a2861723d0d42b9a@kernel.org>
- <CAPnjgZ20ezipPWAj6bUM9_oCTcX1XzuLqQ7b7-nKjXf1t4p9-Q@mail.gmail.com>
- <a581ef73fa09c6ffeb83a1c1780053bd@kernel.org>
- <CAPnjgZ2PnKD5m0EgTdEAf-gcK3wuBZvWw_AO2iehb1dmfdoz3A@mail.gmail.com>
-Message-ID: <27d37d4c7cf353d99737a1e7a450f9f7@kernel.org>
-X-Sender: mwalle@kernel.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+CC: <trini@konsulko.com>, <alpernebiyasak@gmail.com>, <u-boot@lists.denx.de>, 
+ <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-nandan@ti.com>
+References: <20230927040751.622194-1-n-francis@ti.com>
+ <20230927040751.622194-2-n-francis@ti.com>
+ <CAPnjgZ2jiWVDpcW9LaMMNOkVoueaUm0GWftE67qXbxSwjwJjYw@mail.gmail.com>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <CAPnjgZ2jiWVDpcW9LaMMNOkVoueaUm0GWftE67qXbxSwjwJjYw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,77 +83,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Simon
 
->> I'm still not sure why that compatible is needed. Also I'd need to
->> change
->> the label which might break user space apps looking for that specific
->> name.
->> 
->> Also, our board might have u-boot/spl or u-boot/spl/bl31/bl32, right 
->> now
->> that's something which depends on an u-boot configuration variable,
->> which
->> then enables or disables binman nodes in the -u-boot.dtsi. So in linux
->> we only have that "bootloader" partition, but there might be either
->> u-boot+spl or u-boot+spl+bl31+bl32.
->> 
->> Honestly, I'm really not sure this should go into a device tree.
+On 02/10/23 06:46, Simon Glass wrote:
+> Hi Neha,
 > 
-> I think we might be getting a bit ahead of ourselves here. I thought
-> that the decision was that the label should indicate the contents.
-> If you have multiple things in a partition then it would become a
-> 'section' in Binman's terminology. Either the label programmatically
-> describes what is inside or it doesn't. We can't have it both ways.
-> What do you suggest?
+> On Tue, 26 Sept 2023 at 22:08, Neha Malcom Francis <n-francis@ti.com> wrote:
+>>
+>> According to the TRMs of K3 platform of devices, the ROM boot image
+>> format specifies a "Core Options Field" that provides the capability to
+>> set the boot core in lockstep when set to 0 or to split mode when set
+>> to 2. Add support for providing the same from the binman DTS. Also
 
-As Rob pointed out earlier, it's just a user-facing string. I'm a bit
-reluctant to use it programatically.
-Taking my example again, the string "bootloader" is sufficient for a
-user. He doesn't care if it's u-boot with spl or u-boot with tfa, or
-even coreboot. It just says, "in this partition is the bootloader".
-If you have an "bootloader" image you can flash it there.
+[...]
 
-If it has a label "u-boot" and I want to switch to coreboot, will
-it have to change to "coreboot"? I really don't think this is practical,
-you are really putting software configuration into the device tree.
-
-> At present it seems you have the image described in two places - one
-> is the binman node and the other is the partitions node. I would like
-> to unify these.
-
-And I'm not sure that will work for all the corner cases :/
-
-If you keep the binman section seperate from the flash partition
-definition you don't have any of these problems, although there is
-some redundancy:
-  - you only have compatible = "binman", "fixed-partition", no further
-    compatibles are required
-  - you don't have any conflicts with the current partition descriptions
-  - you could even use the labels, because binman is the (only?) user
-
-But of course you need to find a place where to put your node.
-
-> What does user space do with the partition labels?
-
-I'm not sure. Also I'm not sure if it really matters, I just wanted to
-point out, that you'll force users to change it.
-
--michael
-
->> >> What if a board uses eMMC to store the firmware binaries? Will that
->> >> then
->> >> be a subnode to the eMMC device?
->> >
->> > I thought there was a way to link the partition nodes and the device
->> > using a property, without having the partition info as a subnode of
->> > the device. But I may have imagined it as I cannot find it now. So
->> > yes, it will be a subnode of the eMMC device.
->> 
->> Not sure if that will fly.
+>>           self.content = fdt_util.GetPhandleList(self._node, 'content-sbl')
+>>           input_data_sbl = self.GetContents(required)
+>> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
+>> index d028cfe38c..fc0bb12278 100644
+>> --- a/tools/binman/etype/x509_cert.py
+>> +++ b/tools/binman/etype/x509_cert.py
+>> @@ -136,7 +136,8 @@ class Entry_x509_cert(Entry_collection):
+>>                   imagesize_sysfw_data=self.imagesize_sysfw_data,
+>>                   hashval_sysfw_data=self.hashval_sysfw_data,
+>>                   sysfw_inner_cert_ext_boot_block=self.sysfw_inner_cert_ext_boot_block,
+>> -                dm_data_ext_boot_block=self.dm_data_ext_boot_block
+>> +                dm_data_ext_boot_block=self.dm_data_ext_boot_block,
+>> +                bootcore_opts=self.bootcore_opts
 > 
-> I can't find it anyway. There is somelike like that in
-> simple-framebuffer with the 'display' property.
+> When you add args to a function, please update the function comment.
 > 
-> Regards,
-> SImon
+
+Before sending out the next version, just wanted to mention that this was a 
+function call, the function comment has already been updated in 
+tools/binman/btool/openssl.py
+
+-- 
+Thanking You
+Neha Malcom Francis
