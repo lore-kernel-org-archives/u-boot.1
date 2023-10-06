@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24ED4E81E1B
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 18:17:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC45E94107
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 19:51:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0479886B89;
-	Fri,  6 Oct 2023 20:17:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id CE7E086672;
+	Fri,  6 Oct 2023 21:51:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HJXIEaQ/";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HYvvfRAK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFC8C86B8F; Fri,  6 Oct 2023 20:17:47 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2C73E86CFE; Fri,  6 Oct 2023 21:51:02 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5435B86B42
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 20:17:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 41D1D86504
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 21:51:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-59e77e4f707so30210687b3.0
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 11:17:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696616264; x=1697221064; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=N1kuvdFzr7bMP1IyvjWvGqylFglQ5IsaUBjLbA0R1mM=;
- b=HJXIEaQ/jItaWOmg5gFGdvBhyimSr1FR6I+j+wMQHqRrcD9Vd9aRHCD+FitRC9qZv3
- C2iqF2aN0iWCRyG8qikocgjWF4yqh2A6EfvzSIN/5Ne30IUozpi2Eoaz5jfGAV+uc4iH
- 4PDlid5QfMcEWbc4kUbIrXVCeDOncJgXzE7hE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696616264; x=1697221064;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=N1kuvdFzr7bMP1IyvjWvGqylFglQ5IsaUBjLbA0R1mM=;
- b=sLe1TLUoTQDIWVgFhX2atII8azkrI8rFGeyxEVEWeRjk3qUMj6e1o8IZN9CoXKzhPd
- b5ajVOfyWQEh54Hw4Pu6B7TSv09eG8mmqtaEYjHqgW55MRfuUpPl7kPoOefMWg/KdIoU
- ZycweptnYq8qhevFvEWwS0BQhbrR6Gi7BfEKi/CTfVfA+tyQoW/us4vcoT1BRQUbrsn7
- ElaBGv/CRL+Svdjpqd8R791eHzublmYnarSqufZHSB7GHSdEP590bNPFZKjZLMjbIQoC
- +YQRdRMfPi0Jr1yHy31s0BSCOKCkQnlMZ8yu+nY3tgJ6Jwvfi8sjFn1tY7YWYNqoLtLj
- Seeg==
-X-Gm-Message-State: AOJu0Yz3Ex8vJU63JHSrvPMFHdVNnAULNxRNc5FsMfHsT/RLVsAsirgQ
- +LIvQ/oLWiTRI+GuKq0g9OHHC6wy5ma1y0GecKnUlg==
-X-Google-Smtp-Source: AGHT+IGIR7IRjqzwhRUNpXjT8dLojncj3fRT3VJBx9+8GCPm7ydQ54cLXAEYShIToVA6nQy5pwi/6OxP9yHrPkR3CRA=
-X-Received: by 2002:a81:6d47:0:b0:59f:81c4:631a with SMTP id
- i68-20020a816d47000000b0059f81c4631amr11073507ywc.24.1696616263670; Fri, 06
- Oct 2023 11:17:43 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1696621858; x=1697226658; i=xypron.glpk@gmx.de;
+ bh=T/FxwjNo3XS61R+UPLQBI2ZN93fE1SCIfpa5BbHaeUI=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=HYvvfRAKifr678MlfPYjYGlqg9VrltnjjOxJBxNRPU4lCiiL5JdJtKkLQl2pyj7A5W6ufb6P/wl
+ EoYv/sfKlLxMGTPG+oUOOwYc6EO//L6vtwNnpUfsIoBTGt9ctanketrEC4Z+iV4ctmTKxXlkbLhQs
+ ZyiGZuNxMJijxPI9yKvzttlpkEWLy1Sg4QSFBfV/i+j/pWAhebPKOb+Eg+cdWcoq0pgrXwUmTJkwt
+ o/ySTlTU4901YyWBh8d5nxrdca9humFMCR7X1gcq2yS8r5jDSHluuJq+w3IiS8LI1Oe6TAOgEGr1U
+ Bm6md5qoxGTuajzuNs+0El0y072+8FsXVCDg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2wKq-1qs9hl434e-003LSs; Fri, 06
+ Oct 2023 21:50:58 +0200
+Message-ID: <084eb86a-080b-4b0b-ad35-98497a290071@gmx.de>
+Date: Fri, 6 Oct 2023 21:50:20 +0200
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <CAPnjgZ0Xf3U1aj32LbU-xiU1AqwnM3JL1F8xX-wZ18oEmg+irw@mail.gmail.com>
- <CAMj1kXEXcX7BkDyfy-6_5Vnch=N+onza-yfWfsVaGLE93h2c+Q@mail.gmail.com>
-In-Reply-To: <CAMj1kXEXcX7BkDyfy-6_5Vnch=N+onza-yfWfsVaGLE93h2c+Q@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Oct 2023 12:17:23 -0600
-Message-ID: <CAPnjgZ2SEby-ndrs=W_afBJH56eqc=-mhp1F1nwkvWks+=B54Q@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: devicetree@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, 
- Rob Herring <robh@kernel.org>, Lean Sheng Tan <sheng.tan@9elements.com>, 
- lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, 
- Guo Dong <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
- ron minnich <rminnich@gmail.com>, Gua Guo <gua.guo@intel.com>, 
- Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] sphinx: Bump urllib3 version
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@google.com>
+References: <20231005162738.3327197-1-trini@konsulko.com>
+ <CAPnjgZ2w-u68LQSoy_0140PrkGDgrEGi+Wvypcunn0p_shfb6w@mail.gmail.com>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAPnjgZ2w-u68LQSoy_0140PrkGDgrEGi+Wvypcunn0p_shfb6w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:gPXebYR4zqp1J/APnNg114o0zxAB7vxz+gtjCHXJkdqLuN885wu
+ mkGCAHFIngfvzUm79/pcEnpH/isGhD1uqs6C2MTEWsLxc1EiOG1IE+5VVoWW66xDh1294dc
+ jCROLZCKtJPdUt6oPqIGhxhmyIOHHa4EHCS5RiuMoMDFIURwEz0RHv/r6gcuBa+YhNxLYFr
+ Xs+GK2rMWI0riiyAd2J5w==
+UI-OutboundReport: notjunk:1;M01:P0:DsXtX8nAHaI=;1C3gQR4906Qvr876G7JXVcfDW0T
+ r9JazyREMpi/x5zK9YE8GaxgfhV8A41H3vxqD88YThVpbfdbqFnKLo2Z8DMjH1qcS75s8OM6+
+ ZpdaBRiEJROsQjXZWAJJ/G5+oBhV2Iyf25KawgfZrNkk3Y6BPDS6JMFJsYpHgV2Z1fH9me34z
+ RQGtBduaauuy7yVWvRt3oLep0QRYiyc+1vi5JenuWnYs9dxhLSAV2S3jDA25JOZucGvTzDGD2
+ u0RUOa5v8RI0V4N5l+UiELesnlhfIyGek/3MCKw9TtMCJcJVSba50UGRAfwbrAfT0UMnieuT6
+ EQTdD6fHBJxK41zVsvDtCnKufgGPBZ7TjdxnTUqco8GDOE8G9SZxf56Ip6AXcsMA0wSdz5rKS
+ U1MkKUPPgXuMEgtwjAk3WnsOEylJljXirQCuHZKSgATkFjjjXtUdBXDH788qA1ISfvykhWNL5
+ 8pFm5tvookzuxn4PmhJ3ROZE7C62GMtPXHi2tVuqmjb7vAKER8ZMVA/KAvz62u1PPr6nRvYHf
+ 5ZmifFnaJJwyh1TzEgcvgD5uQbZbO8ULN9yh8Mrj83TwoGLTsXTGEzEJRx4rFNYhAEO7qjJl8
+ Jj9FP1+2McdQ/CusAusZj9CbgtvULW+zREaE+Ef9oUPeQpCBSsU0L0rZ5h4D0qjTS3qaDLD6J
+ ICfGJFtCgvWhcWsq6//ltJOW6EEaHTICPY/NTTLxM3bWWKjAUAO7cIXBBUKOrw+FhgTCr8kgc
+ pZhR05YkqXyQDvSbFvDvT0lZKeAFrFk2xaZO4J9NI4wbdamJIcn9zORPc9Hk1JHWBOdTbNXL4
+ 0lnRJKswrtodu3mcwGQVbHHgDZu4HOjq6AIwsgI8618utH56t7erWL4Vo3YJPjwaf9NSU7r68
+ pJqKtwGz6mQO3iQRQEBY+KwguBIE6XYuRoUeTfWXbTzoaDPqI1CRzGt0IYudWYbbQ4c3k5Ul4
+ 77y7+lw6P/Z5ygegBupVas72oqc=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,168 +87,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ard,
+On 10/6/23 03:41, Simon Glass wrote:
+> On Thu, 5 Oct 2023 at 10:27, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> While not a direct issue for us, urllib3 before 1.26.17 is vulnerable t=
+o
+>> CVE-2023-43804 to bump our version up.
 
-On Fri, 6 Oct 2023 at 11:33, Ard Biesheuvel <ardb@kernel.org> wrote:
->
-> On Mon, 2 Oct 2023 at 19:54, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Rob,
-> >
-> > On Tue, 26 Sept 2023 at 13:42, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > It is common to split firmware into 'Platform Init', which does the
-> > > initial hardware setup and a "Payload" which selects the OS to be booted.
-> > > Thus an handover interface is required between these two pieces.
-> > >
-> > > Where UEFI boot-time services are not available, but UEFI firmware is
-> > > present on either side of this interface, information about memory usage
-> > > and attributes must be presented to the "Payload" in some form.
-> > >
-> > > This aims to provide an small schema addition for the memory mapping
-> > > needed to keep these two pieces working together well.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v7:
-> > > - Rename acpi-reclaim to acpi
-> > > - Drop individual mention of when memory can be reclaimed
-> > > - Rewrite the item descriptions
-> > > - Add back the UEFI text (with trepidation)
-> >
-> > I am again checking on this series. Can it be applied, please?
-> >
->
-> Apologies for the delay in response. I have been away.
+The same bug is also fixed in 2.0.6. Why should we stick with the old
+series? I could not see any issues building the documentation locally
+and on Github with 2.0.6.
 
-OK, I hope you had a nice trip.
+Best regards
 
->
-> >
-> > >
-> > > Changes in v6:
-> > > - Drop mention of UEFI
-> > > - Use compatible strings instead of node names
-> > >
-> > > Changes in v5:
-> > > - Drop the memory-map node (should have done that in v4)
-> > > - Tidy up schema a bit
-> > >
-> > > Changes in v4:
-> > > - Make use of the reserved-memory node instead of creating a new one
-> > >
-> > > Changes in v3:
-> > > - Reword commit message again
-> > > - cc a lot more people, from the FFI patch
-> > > - Split out the attributes into the /memory nodes
-> > >
-> > > Changes in v2:
-> > > - Reword commit message
-> > >
-> > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++++
-> > >  1 file changed, 71 insertions(+)
-> > >  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.yaml
-> > >
-> > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > new file mode 100644
-> > > index 0000000..f7fbdfd
-> > > --- /dev/null
-> > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > @@ -0,0 +1,71 @@
-> > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> > > +%YAML 1.2
-> > > +---
-> > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserved.yaml#
-> > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > +
-> > > +title: Common memory reservations
-> > > +
-> > > +description: |
-> > > +  Specifies that the reserved memory region can be used for the purpose
-> > > +  indicated by its compatible string.
-> > > +
-> > > +  Clients may reuse this reserved memory if they understand what it is for,
-> > > +  subject to the notes below.
-> > > +
-> > > +maintainers:
-> > > +  - Simon Glass <sjg@chromium.org>
-> > > +
-> > > +allOf:
-> > > +  - $ref: reserved-memory.yaml
-> > > +
-> > > +properties:
-> > > +  compatible:
-> > > +    description: |
-> > > +      This describes some common memory reservations, with the compatible
-> > > +      string indicating what it is used for:
-> > > +
-> > > +         acpi: Advanced Configuration and Power Interface (ACPI) tables
-> > > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This is reserved by
-> > > +           the firmware for its use and is required to be saved and restored
-> > > +           across an NVS sleep
-> > > +         boot-code: Contains code used for booting which is not needed by the OS
-> > > +         boot-code: Contains data used for booting which is not needed by the OS
-> > > +         runtime-code: Contains code used for interacting with the system when
-> > > +           running the OS
-> > > +         runtime-data: Contains data used for interacting with the system when
-> > > +           running the OS
-> > > +
-> > > +    enum:
-> > > +      - acpi
-> > > +      - acpi-nvs
-> > > +      - boot-code
-> > > +      - boot-data
-> > > +      - runtime-code
-> > > +      - runtime-data
-> > > +
->
-> As I mentioned a few times already, I don't think these compatibles
-> should be introduced here.
->
-> A reserved region has a specific purpose, and the compatible should be
-> more descriptive than the enum above. If the consumer does not
-> understand this purpose, it should simply treat the memory as reserved
-> and not touch it. Alternatively, these regions can be referenced from
-> other DT nodes using phandles if needed.
+Heinrich
 
-We still need some description of what these regions are used for, so
-that the payload can use the correct regions. I do not have any other
-solution to this problem. We are in v7 at present. At least explain
-where you want the compatible strings to be introduced.
-
-What sort of extra detail are you looking for? Please be specific and
-preferably add some suggestions so I can close this out ASAP.
-
+>>
+>> Reported-by: GitHub dependabot
+>> Signed-off-by: Tom Rini <trini@konsulko.com>
+>> ---
+>> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> ---
+>>   doc/sphinx/requirements.txt | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
 >
->
-> > > +  reg:
-> > > +    description: region of memory that is reserved for the purpose indicated
-> > > +      by the compatible string.
-> > > +
-> > > +required:
-> > > +  - reg
-> > > +
-> > > +unevaluatedProperties: false
-> > > +
-> > > +examples:
-> > > +  - |
-> > > +    reserved-memory {
-> > > +        #address-cells = <1>;
-> > > +        #size-cells = <1>;
-> > > +
-> > > +        reserved@12340000 {
-> > > +            compatible = "boot-code";
-> > > +            reg = <0x12340000 0x00800000>;
-> > > +        };
-> > > +
-> > > +        reserved@43210000 {
-> > > +            compatible = "boot-data";
-> > > +            reg = <0x43210000 0x00800000>;
-> > > +        };
-> > > +    };
-> > > --
-> > > 2.42.0.515.g380fc7ccd1-goog
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
-Regards,
-Simon
