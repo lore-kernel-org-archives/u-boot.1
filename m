@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBC45E94107
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 19:51:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E64E94114
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 20:26:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE7E086672;
-	Fri,  6 Oct 2023 21:51:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id CF88C86BE7;
+	Fri,  6 Oct 2023 22:26:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="HYvvfRAK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lgnyGtX/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C73E86CFE; Fri,  6 Oct 2023 21:51:02 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 36A9986C78; Fri,  6 Oct 2023 22:26:19 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41D1D86504
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 21:51:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BB5B086ACF
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 22:26:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1696621858; x=1697226658; i=xypron.glpk@gmx.de;
- bh=T/FxwjNo3XS61R+UPLQBI2ZN93fE1SCIfpa5BbHaeUI=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=HYvvfRAKifr678MlfPYjYGlqg9VrltnjjOxJBxNRPU4lCiiL5JdJtKkLQl2pyj7A5W6ufb6P/wl
- EoYv/sfKlLxMGTPG+oUOOwYc6EO//L6vtwNnpUfsIoBTGt9ctanketrEC4Z+iV4ctmTKxXlkbLhQs
- ZyiGZuNxMJijxPI9yKvzttlpkEWLy1Sg4QSFBfV/i+j/pWAhebPKOb+Eg+cdWcoq0pgrXwUmTJkwt
- o/ySTlTU4901YyWBh8d5nxrdca9humFMCR7X1gcq2yS8r5jDSHluuJq+w3IiS8LI1Oe6TAOgEGr1U
- Bm6md5qoxGTuajzuNs+0El0y072+8FsXVCDg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M2wKq-1qs9hl434e-003LSs; Fri, 06
- Oct 2023 21:50:58 +0200
-Message-ID: <084eb86a-080b-4b0b-ad35-98497a290071@gmx.de>
-Date: Fri, 6 Oct 2023 21:50:20 +0200
+ spf=pass smtp.mailfrom=rfried.dev@gmail.com
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-57b6c7d0cabso1493139eaf.1
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 13:26:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696623975; x=1697228775; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EN3VbJKpueOyfFSkLYfny1GWxIQAVl7frgDK2P/7ItY=;
+ b=lgnyGtX/H9AvceTu5dyIvpOJFYwLH8idd4JY7UVoHXDu44DgAHzQKr9NP9ONR90z+1
+ gax1+0+wmG0oULcjh8Qb/755Lo98nLiYELayIdWVz+YMda7qUIyWLjGeriZk/nAEyEfk
+ 2vJwn9uwav9RzkxNk7FYdTeU2vAEee/ZL8ImrvzOQT9k2I6JqyZ30VS9pYnmh62Z/Isw
+ qjlMNUfSI9/bQGiadhZND4GOroF7TIJB3xeH7RCYt/IW+6B7ZmlAocrX4G2ifdVEfntg
+ ZzS+HOOCShMttuJHfiTYYvInuKpRF2Qvn8Oh3RKOjey6x+GXJ9cVF9u38t/5v9jF8r/E
+ MH6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696623975; x=1697228775;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EN3VbJKpueOyfFSkLYfny1GWxIQAVl7frgDK2P/7ItY=;
+ b=nXQPqqRV7TrWrDav4oEuJRI3Zr9mPe5JoGC0zfZaFYzsymxOyesggZRQYcQysvS60t
+ KySitPCqBHNsJpaoNuwvpJdzIGzQkgah1kM315W1M5JO/+sremlrLCWwbAzeSfPzVpOS
+ Vxacq+zU//VE3iLZz4P/jglxIcsdwdHf9zymN0Y6wa/dcPNTUBqworkJpqiTftYf0D+e
+ n3ReE/qZ86GkzjCTx59IKosPRfSh3xVALdCCWUrJHT2Sb0C0/zJaWCrSskZ0OmJhnI4w
+ LVznP9DaXBaraWW7bI3rRYT7TyUmdguO0OZ8O09eApzu4rw/CRYeurNdzu8DROU0TPUm
+ zOOg==
+X-Gm-Message-State: AOJu0Yz8drycnIJwKhH6feWSC8nbivNHh5Q39AEFv55fuPSBS6FcEVAO
+ msgOLPXZKR3C335xs1Hl+rn83QKl57pC3YnKrgo=
+X-Google-Smtp-Source: AGHT+IHKbEiNq7NWrTKzU7gqv0u9/JGYk389hQAwiEJk2jF2IwLp6V2wM4tv5YzDy4pCtGFEXtHNlJkpB1L4gpWqXkw=
+X-Received: by 2002:a4a:6c57:0:b0:57b:82d2:8254 with SMTP id
+ u23-20020a4a6c57000000b0057b82d28254mr8861129oof.3.1696623975202; Fri, 06 Oct
+ 2023 13:26:15 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] sphinx: Bump urllib3 version
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@google.com>
-References: <20231005162738.3327197-1-trini@konsulko.com>
- <CAPnjgZ2w-u68LQSoy_0140PrkGDgrEGi+Wvypcunn0p_shfb6w@mail.gmail.com>
-Content-Language: en-US, de-DE
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <CAPnjgZ2w-u68LQSoy_0140PrkGDgrEGi+Wvypcunn0p_shfb6w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <f67478ee2642e6c598da4364f84c3bec900f89c3.1696323438.git.love.kumar@amd.com>
+In-Reply-To: <f67478ee2642e6c598da4364f84c3bec900f89c3.1696323438.git.love.kumar@amd.com>
+From: Ramon Fried <rfried.dev@gmail.com>
+Date: Fri, 6 Oct 2023 23:26:04 +0300
+Message-ID: <CAGi-RU+vrfYjHU3OpvuvQyZ07O+iDMCmPbR1Js7t4y2KitFaLg@mail.gmail.com>
+Subject: Re: [PATCH] test/py: net: Add a TFTP put test
+To: Love Kumar <love.kumar@amd.com>
+Cc: u-boot@lists.denx.de, michal.simek@amd.com, git@xilinx.com, 
+ v.v.mitrofanov@yadro.com, seanedmond@microsoft.com, 
+ emohandesi@linux.microsoft.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:gPXebYR4zqp1J/APnNg114o0zxAB7vxz+gtjCHXJkdqLuN885wu
- mkGCAHFIngfvzUm79/pcEnpH/isGhD1uqs6C2MTEWsLxc1EiOG1IE+5VVoWW66xDh1294dc
- jCROLZCKtJPdUt6oPqIGhxhmyIOHHa4EHCS5RiuMoMDFIURwEz0RHv/r6gcuBa+YhNxLYFr
- Xs+GK2rMWI0riiyAd2J5w==
-UI-OutboundReport: notjunk:1;M01:P0:DsXtX8nAHaI=;1C3gQR4906Qvr876G7JXVcfDW0T
- r9JazyREMpi/x5zK9YE8GaxgfhV8A41H3vxqD88YThVpbfdbqFnKLo2Z8DMjH1qcS75s8OM6+
- ZpdaBRiEJROsQjXZWAJJ/G5+oBhV2Iyf25KawgfZrNkk3Y6BPDS6JMFJsYpHgV2Z1fH9me34z
- RQGtBduaauuy7yVWvRt3oLep0QRYiyc+1vi5JenuWnYs9dxhLSAV2S3jDA25JOZucGvTzDGD2
- u0RUOa5v8RI0V4N5l+UiELesnlhfIyGek/3MCKw9TtMCJcJVSba50UGRAfwbrAfT0UMnieuT6
- EQTdD6fHBJxK41zVsvDtCnKufgGPBZ7TjdxnTUqco8GDOE8G9SZxf56Ip6AXcsMA0wSdz5rKS
- U1MkKUPPgXuMEgtwjAk3WnsOEylJljXirQCuHZKSgATkFjjjXtUdBXDH788qA1ISfvykhWNL5
- 8pFm5tvookzuxn4PmhJ3ROZE7C62GMtPXHi2tVuqmjb7vAKER8ZMVA/KAvz62u1PPr6nRvYHf
- 5ZmifFnaJJwyh1TzEgcvgD5uQbZbO8ULN9yh8Mrj83TwoGLTsXTGEzEJRx4rFNYhAEO7qjJl8
- Jj9FP1+2McdQ/CusAusZj9CbgtvULW+zREaE+Ef9oUPeQpCBSsU0L0rZ5h4D0qjTS3qaDLD6J
- ICfGJFtCgvWhcWsq6//ltJOW6EEaHTICPY/NTTLxM3bWWKjAUAO7cIXBBUKOrw+FhgTCr8kgc
- pZhR05YkqXyQDvSbFvDvT0lZKeAFrFk2xaZO4J9NI4wbdamJIcn9zORPc9Hk1JHWBOdTbNXL4
- 0lnRJKswrtodu3mcwGQVbHHgDZu4HOjq6AIwsgI8618utH56t7erWL4Vo3YJPjwaf9NSU7r68
- pJqKtwGz6mQO3iQRQEBY+KwguBIE6XYuRoUeTfWXbTzoaDPqI1CRzGt0IYudWYbbQ4c3k5Ul4
- 77y7+lw6P/Z5ygegBupVas72oqc=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,29 +88,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/6/23 03:41, Simon Glass wrote:
-> On Thu, 5 Oct 2023 at 10:27, Tom Rini <trini@konsulko.com> wrote:
->>
->> While not a direct issue for us, urllib3 before 1.26.17 is vulnerable t=
-o
->> CVE-2023-43804 to bump our version up.
-
-The same bug is also fixed in 2.0.6. Why should we stick with the old
-series? I could not see any issues building the documentation locally
-and on Github with 2.0.6.
-
-Best regards
-
-Heinrich
-
->>
->> Reported-by: GitHub dependabot
->> Signed-off-by: Tom Rini <trini@konsulko.com>
->> ---
->> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
->> ---
->>   doc/sphinx/requirements.txt | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
+On Tue, Oct 3, 2023 at 12:02=E2=80=AFPM Love Kumar <love.kumar@amd.com> wro=
+te:
 >
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-
+> Execute tftpput command for uploading files to a server and validate its
+> size & CRC32.
+>
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> ---
+>  test/py/tests/test_net.py | 69 +++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 69 insertions(+)
+>
+> diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
+> index cd4b4dc53cbc..f69e3ea2dbba 100644
+> --- a/test/py/tests/test_net.py
+> +++ b/test/py/tests/test_net.py
+> @@ -6,6 +6,7 @@
+>
+>  import pytest
+>  import u_boot_utils
+> +import datetime
+>
+>  """
+>  Note: This test relies on boardenv_* containing configuration values to =
+define
+> @@ -50,6 +51,7 @@ env__net_tftp_readable_file =3D {
+>      'addr': 0x10000000,
+>      'size': 5058624,
+>      'crc32': 'c2244b26',
+> +    'timeout': 50000,
+>  }
+>
+>  # Details regarding a file that may be read from a NFS server. This vari=
+able
+> @@ -260,3 +262,70 @@ def test_net_nfs(u_boot_console):
+>
+>      output =3D u_boot_console.run_command('crc32 %x $filesize' % addr)
+>      assert expected_crc in output
+> +
+> +@pytest.mark.buildconfigspec("cmd_crc32")
+> +@pytest.mark.buildconfigspec("cmd_net")
+> +def test_net_tftpput(u_boot_console):
+> +    """Test the tftpput command.
+> +    A file is downloaded from the TFTP server and then uploaded to the T=
+FTP
+> +    server, its size and its CRC32 are validated.
+> +    The details of the file to download are provided by the boardenv_* f=
+ile;
+> +    see the comment at the beginning of this file.
+> +    """
+> +
+> +    if not net_set_up:
+> +        pytest.skip("Network not initialized")
+> +
+> +    f =3D u_boot_console.config.env.get("env__net_tftp_readable_file", N=
+one)
+> +    if not f:
+> +        pytest.skip("No TFTP readable file to read")
+> +
+> +    addr =3D f.get("addr", None)
+> +    if not addr:
+> +        addr =3D u_boot_utils.find_ram_base(u_boot_console)
+> +
+> +    sz =3D f.get("size", None)
+> +    timeout =3D f.get("timeout", u_boot_console.p.timeout)
+> +    fn =3D f["fn"]
+> +    fnu =3D "_".join([datetime.datetime.now().strftime("%y%m%d%H%M%S"), =
+fn])
+> +    expected_text =3D "Bytes transferred =3D "
+> +    if sz:
+> +        expected_text +=3D "%d" % sz
+> +
+> +    with u_boot_console.temporary_timeout(timeout):
+> +        output =3D u_boot_console.run_command("tftpboot %x %s" % (addr, =
+fn))
+> +
+> +    assert "TIMEOUT" not in output
+> +    assert expected_text in output
+> +
+> +    expected_tftpb_crc =3D f.get("crc32", None)
+> +
+> +    output =3D u_boot_console.run_command("crc32 $fileaddr $filesize")
+> +    assert expected_tftpb_crc in output
+> +
+> +    with u_boot_console.temporary_timeout(timeout):
+> +        output =3D u_boot_console.run_command(
+> +            "tftpput $fileaddr $filesize $serverip:%s" % (fnu)
+> +        )
+> +
+> +    expected_text =3D "Bytes transferred =3D "
+> +    if sz:
+> +        expected_text +=3D "%d" % sz
+> +        addr =3D addr + sz
+> +    assert "TIMEOUT" not in output
+> +    assert "Access violation" not in output
+> +    assert expected_text in output
+> +
+> +    with u_boot_console.temporary_timeout(timeout):
+> +        output =3D u_boot_console.run_command("tftpboot %x %s" % (addr, =
+fnu))
+> +
+> +    expected_text =3D "Bytes transferred =3D "
+> +    if sz:
+> +        expected_text +=3D "%d" % sz
+> +    assert "TIMEOUT" not in output
+> +    assert expected_text in output
+> +
+> +    expected_tftpp_crc =3D expected_tftpb_crc
+> +
+> +    output =3D u_boot_console.run_command("crc32 $fileaddr $filesize")
+> +    assert expected_tftpp_crc in output
+> --
+> 2.25.1
+>
+Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
