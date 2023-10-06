@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0749E94115
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 20:31:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 223DEE94114
+	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 20:31:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19AC586DB8;
-	Fri,  6 Oct 2023 22:31:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8BA2A86E45;
+	Fri,  6 Oct 2023 22:31:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="L126s2m7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Nu/uknE+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB95386DD5; Fri,  6 Oct 2023 22:31:12 +0200 (CEST)
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com
- [IPv6:2607:f8b0:4864:20::c35])
+ id 5B7C186E70; Fri,  6 Oct 2023 22:31:55 +0200 (CEST)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6EF3986ACF
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 22:31:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04F0286ACF
+ for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 22:31:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rfried.dev@gmail.com
-Received: by mail-oo1-xc35.google.com with SMTP id
- 006d021491bc7-57b811a6ce8so1381317eaf.3
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 13:31:10 -0700 (PDT)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-57e3c2adbf0so1371435eaf.2
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 13:31:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696624269; x=1697229069; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696624311; x=1697229111; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WTT4KORJ0Uc7a6rbK+g4mzGEx04akjAmS75CeYL+VhI=;
- b=L126s2m79iaKyvaGrYr+agPcILRYzlwO+cHh/XQCEImwCeKD5VqNtRb00qRt+QrTun
- r1D+KJ5B+/mes05u7vD4Wi35aD828NhoXzd6F42g5VhnOE4vatbX+whKPCyXN9tvLGB8
- HbRKhjUR4pK0gmakeIPNCmouqEndtXWb7ZfZm6WyYNDolwGFIDF2rKk1aapbnyJ1lnpK
- A6ugn8A/V+nvJfIA6LZa9oo8sAoi9NDixxtHq3UM/2AgWwtGcpQSW459NjDm5SsII+Hw
- L6fCf5b5nJYPy0S2oaig/FYJanxdGPoWifhJ+St7lZ4Y2BiVQk7z9E72WxqY004TkLAG
- a29Q==
+ bh=bj6anwmjp0NnOe5LaXD9O06QqxOr/gXLYVI+mbtrMmM=;
+ b=Nu/uknE+0MlL4gHlma1jsyPEHH1Bw89Ly1rUCtTvCcAQvFXSCTDGKAPOEPV+QJ6yWW
+ BsqhRG0jmIy6iNoeb7e4GslDiPf8vqCCUppDPNxjtE+SoJl5bT9YMDe3mZAVbagjwMwl
+ KDyTCirTsDPkP25AWXyvgNzXtJZjXO1PSPPtPy2tIUNRI4Nbi80ZIBBIgV1lwIuzJ8aP
+ srMuq4UHriQWTrID5tfNnoMRGIFwsYn/FNt2pQZ1n0kowbmknp4z55zxnI9EDxuwh/Wp
+ isPSHqUGSf+zeSkrYW3fxYTpoXef2j9b+IfqHjKU8XyIBYlShxJFO00AlGt1JZaB6KX2
+ 9L4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696624269; x=1697229069;
+ d=1e100.net; s=20230601; t=1696624311; x=1697229111;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WTT4KORJ0Uc7a6rbK+g4mzGEx04akjAmS75CeYL+VhI=;
- b=HcMkrErVYbesBkIWJrqpmtB6pl0ZC6wPkEDY4iNoDrg9thnGSMhVvKQoAbrxnVPkNm
- sisAMQIgNzLEcwVefRhneNwWOvaDD5BCZrK2PCgnj7T7HNflv6+0Lb/ThnhhSg4oxhph
- cjFKyTI2sY31M6yECxIcNwjlYP8rXqWqJwZo3rELRSwmt4T7hP8mfJGVd13oWygbU7sZ
- Fs6YG2Fzzvi1j9aeaKcFwOUwdlLNUJMnkbPf56cvaVZcSzvzexxN+ykOhR61aKYchVRU
- 4QYllNLuNVFqwC/BWC/ZCq/U23+kJjTuNmebgXQ/RZ7iXxKwpM1uS3f69zdS3hVSq5nB
- GTzA==
-X-Gm-Message-State: AOJu0YxSkJGMbcHKDdgPxKv3ZIzO+18x6riKb0cv0a8lD8siqt6bwAeS
- RNHJGs4cPpc5IkUYNEgfdlMf0SkegZOalKhpYVk=
-X-Google-Smtp-Source: AGHT+IGQkkwYyD02Eq0B6CtynHL0dPvD+Dk4PK9YkPPkrO/B3Kvd64cXqfHxHs3Z79qQUEs/cZ7Y4N4eGfhTmFv5dIw=
-X-Received: by 2002:a4a:3946:0:b0:57b:6c85:972 with SMTP id
- x6-20020a4a3946000000b0057b6c850972mr9109137oog.0.1696624269070; Fri, 06 Oct
- 2023 13:31:09 -0700 (PDT)
+ bh=bj6anwmjp0NnOe5LaXD9O06QqxOr/gXLYVI+mbtrMmM=;
+ b=khUvZk5UXpyJ9LdG0QhFZe0x3VYyUGL0BTQsgNCsMBg9sbrUnXZ15y5pu20wLWx6rf
+ yKIoANbU7pBGtpxLLo16SRLFfq0b2jkTt1NnPI1RJX1nVvGB4xnLJ4ePSdWk+pbGYvBV
+ ckKxgkp8gQ79VGYG+UJ7+6KNF/g93G4WdcfIcFRXQEHO6UXQUnAegc47/UBE+mOggnun
+ M6lONVC5Nd5vtIf7U9YXLJLNtyV5aXP89jAnzWRqRbYpksvPLH9N354N6dFYLBvax6S2
+ bUXrl0Cn7LTGQiqghJXwZmjcjxskwfbDhWTKbDHkkUtKMY75qO14tqvraEzBNrZOY7Tp
+ r+lQ==
+X-Gm-Message-State: AOJu0YxpBi3dP+dOzNHMyuNu2Qt5pcuDcNctHlu3+wp4yJC745L9yrUn
+ LrA3O20AXAYPF/Y5a71hUWuFgN/wfUUhEqdYByg=
+X-Google-Smtp-Source: AGHT+IFngbvPhH1CYstLYInDV0qN2MoSMeNd9iBaqMnxg4ApgFNd8xjvxSDaN02GOSHfsqcXyybE2K4eWgnLLpTsxwQ=
+X-Received: by 2002:a4a:300f:0:b0:57b:a346:167e with SMTP id
+ q15-20020a4a300f000000b0057ba346167emr8772850oof.6.1696624311655; Fri, 06 Oct
+ 2023 13:31:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231006122439.10720-1-debrabander@gmail.com>
-In-Reply-To: <20231006122439.10720-1-debrabander@gmail.com>
+References: <20230727015814.3459990-1-dylan_hung@aspeedtech.com>
+In-Reply-To: <20230727015814.3459990-1-dylan_hung@aspeedtech.com>
 From: Ramon Fried <rfried.dev@gmail.com>
-Date: Fri, 6 Oct 2023 23:30:58 +0300
-Message-ID: <CAGi-RU+=4cvY3xcyidTNErVLFNKg+cM+Qmfc7AdWaqDemm9b7A@mail.gmail.com>
-Subject: Re: [PATCH] net: phy: TI DP83869 fix invalid clock delay configuration
-To: Frank de Brabander <debrabander@gmail.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com
+Date: Fri, 6 Oct 2023 23:31:40 +0300
+Message-ID: <CAGi-RULN4KXhGg3FpJu4GC3EC0nzBDOGwx6CP1V=3b02-PN8sQ@mail.gmail.com>
+Subject: Re: [PATCH] net: ftgmac100: Add reset control
+To: Dylan Hung <kobedylan@gmail.com>
+Cc: ryan_chen@aspeedtech.com, chiawei_wang@aspeedtech.com, 
+ BMC-SW@aspeedtech.com, joel@jms.id.au, joe.hershberger@ni.com, 
+ u-boot@lists.denx.de, Dylan Hung <dylan_hung@aspeedtech.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -86,153 +88,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 6, 2023 at 3:24=E2=80=AFPM Frank de Brabander <debrabander@gmai=
-l.com> wrote:
+On Thu, Jul 27, 2023 at 4:58=E2=80=AFAM Dylan Hung <kobedylan@gmail.com> wr=
+ote:
 >
-> Setting the clock delay from the device tree settings
-> rx-internal-delay-ps and tx-internal-delay-ps was broken:
+> Add optional reset control, especially for the Aspeed SOC. For the
+> hardware without a reset line, the reset assertion/deassertion will be
+> skipped.
 >
->  - The expected value in the device tree is suppose to be a
->    delay in picoseconds, but the driver only allowed an array index.
->  - Driver converted this array index to the actual delay in
->    picoseconds and tried to apply this in the device register. This
->    however is not a valid register value. The actual logic here was
->    reversed, it converted an register representation of the delay to
->    the device tree delay in picoseconds.
->
-> Only when the internal delays were NOT configured in the device tree
-> and they default value of 7 (=3D2000ps) was used, a valid value was
-> loaded in the register.
->
-> Signed-off-by: Frank de Brabander <debrabander@gmail.com>
+> Signed-off-by: Dylan Hung <dylan_hung@aspeedtech.com>
 > ---
->  drivers/net/phy/dp83869.c | 53 +++++++++++++++++++++++----------------
->  1 file changed, 32 insertions(+), 21 deletions(-)
+>  drivers/net/ftgmac100.c | 12 ++++++++++++
+>  1 file changed, 12 insertions(+)
 >
-> diff --git a/drivers/net/phy/dp83869.c b/drivers/net/phy/dp83869.c
-> index 8d32d73b07..f9d4782580 100644
-> --- a/drivers/net/phy/dp83869.c
-> +++ b/drivers/net/phy/dp83869.c
-> @@ -81,7 +81,10 @@
+> diff --git a/drivers/net/ftgmac100.c b/drivers/net/ftgmac100.c
+> index a50cde338a..886b97119d 100644
+> --- a/drivers/net/ftgmac100.c
+> +++ b/drivers/net/ftgmac100.c
+> @@ -13,6 +13,7 @@
 >
->  /* RGMIIDCTL bits */
->  #define DP83869_RGMII_TX_CLK_DELAY_SHIFT       4
-> -#define DP83869_CLK_DELAY_DEF                          7
-> +#define DP83869_CLK_DELAY_STEP                 250
-> +#define DP83869_CLK_DELAY_MIN                  250
-> +#define DP83869_CLK_DELAY_MAX                  4000
-> +#define DP83869_CLK_DELAY_DEFAULT              2000
+>  #include <common.h>
+>  #include <clk.h>
+> +#include <reset.h>
+>  #include <cpu_func.h>
+>  #include <dm.h>
+>  #include <log.h>
+> @@ -90,6 +91,7 @@ struct ftgmac100_data {
+>         u32 max_speed;
 >
->  /* CFG2 bits */
->  #define MII_DP83869_CFG2_SPEEDOPT_10EN         0x0040
-> @@ -157,10 +160,6 @@ static int dp83869_config_port_mirroring(struct phy_=
-device *phydev)
->         return 0;
+>         struct clk_bulk clks;
+> +       struct reset_ctl *reset_ctl;
+>
+>         /* End of RX/TX ring buffer bits. Depend on model */
+>         u32 rxdes0_edorr_mask;
+> @@ -568,6 +570,8 @@ static int ftgmac100_of_to_plat(struct udevice *dev)
+>                 priv->txdes0_edotr_mask =3D BIT(15);
+>         }
+>
+> +       priv->reset_ctl =3D devm_reset_control_get_optional(dev, NULL);
+> +
+>         return clk_get_bulk(dev, &priv->clks);
 >  }
 >
-> -static const int dp83869_internal_delay[] =3D {250, 500, 750, 1000, 1250=
-, 1500,
-> -                                            1750, 2000, 2250, 2500, 2750=
-, 3000,
-> -                                            3250, 3500, 3750, 4000};
-> -
->  static int dp83869_set_strapped_mode(struct phy_device *phydev)
->  {
->         struct dp83869_private *dp83869 =3D phydev->priv;
-> @@ -183,7 +182,6 @@ static int dp83869_set_strapped_mode(struct phy_devic=
-e *phydev)
->  static int dp83869_of_init(struct phy_device *phydev)
->  {
->         struct dp83869_private * const dp83869 =3D phydev->priv;
-> -       const int delay_entries =3D ARRAY_SIZE(dp83869_internal_delay);
->         int ret;
->         ofnode node;
+> @@ -593,6 +597,12 @@ static int ftgmac100_probe(struct udevice *dev)
+>         if (ret)
+>                 goto out;
 >
-> @@ -238,32 +236,45 @@ static int dp83869_of_init(struct phy_device *phyde=
-v)
->         dp83869->tx_fifo_depth =3D ofnode_read_s32_default(node, "tx-fifo=
--depth",
->                                                          DP83869_PHYCR_FI=
-FO_DEPTH_4_B_NIB);
->
-> +       /* Internal clock delay values can be configured in steps of
-> +        * 250ps (0.25ns). The register field for clock delay is 4-bits w=
-ide,
-> +        * the values range from 0b0000 for 0.25ns to 0b1111 for 4ns.
-> +        */
+> +       if (priv->reset_ctl) {
+> +               ret =3D reset_deassert(priv->reset_ctl);
+> +               if (ret)
+> +                       goto out;
+> +       }
 > +
->         /* RX delay *must* be specified if internal delay of RX is used. =
-*/
->         if (phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_ID ||
->             phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_RXID) {
-> -               dp83869->rx_int_delay =3D ofnode_read_u32_default(node, "=
-rx-internal-delay-ps",
-> -                                                               DP83869_C=
-LK_DELAY_DEF);
-> -               if (dp83869->rx_int_delay > delay_entries) {
-> -                       dp83869->rx_int_delay =3D DP83869_CLK_DELAY_DEF;
-> -                       pr_debug("rx-internal-delay-ps not set/invalid, d=
-efault to %ups\n",
-> -                                dp83869_internal_delay[dp83869->rx_int_d=
-elay]);
-> +               dp83869->rx_int_delay =3D ofnode_read_u32_default(node,
-> +                       "rx-internal-delay-ps", DP83869_CLK_DELAY_DEFAULT=
-);
-> +               if (dp83869->rx_int_delay > DP83869_CLK_DELAY_MAX ||
-> +                   dp83869->rx_int_delay < DP83869_CLK_DELAY_MIN ||
-> +                   dp83869->rx_int_delay % DP83869_CLK_DELAY_STEP) {
-> +                       dp83869->rx_int_delay =3D DP83869_CLK_DELAY_DEFAU=
-LT;
-> +                       pr_warn("rx-internal-delay-ps not set/invalid, de=
-fault"
-> +                               " to %ups\n", DP83869_CLK_DELAY_DEFAULT);
->                 }
->
-> -               dp83869->rx_int_delay =3D dp83869_internal_delay[dp83869-=
->rx_int_delay];
-> +               dp83869->rx_int_delay =3D
-> +                       (dp83869->rx_int_delay - DP83869_CLK_DELAY_STEP)
-> +                       / DP83869_CLK_DELAY_STEP;
->         }
->
-> -       /* TX delay *must* be specified if internal delay of RX is used. =
-*/
-> +       /* TX delay *must* be specified if internal delay of TX is used. =
-*/
->         if (phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_ID ||
->             phydev->interface =3D=3D PHY_INTERFACE_MODE_RGMII_TXID) {
-> -               dp83869->tx_int_delay =3D ofnode_read_u32_default(node, "=
-tx-internal-delay-ps",
-> -                                                               DP83869_C=
-LK_DELAY_DEF);
-> -               if (dp83869->tx_int_delay > delay_entries) {
-> -                       dp83869->tx_int_delay =3D DP83869_CLK_DELAY_DEF;
-> -                       pr_debug("tx-internal-delay-ps not set/invalid, d=
-efault to %ups\n",
-> -                                dp83869_internal_delay[dp83869->tx_int_d=
-elay]);
-> +               dp83869->tx_int_delay =3D ofnode_read_u32_default(node,
-> +                       "tx-internal-delay-ps", DP83869_CLK_DELAY_DEFAULT=
-);
-> +               if (dp83869->tx_int_delay > DP83869_CLK_DELAY_MAX ||
-> +                   dp83869->tx_int_delay < DP83869_CLK_DELAY_MIN ||
-> +                   dp83869->tx_int_delay % DP83869_CLK_DELAY_STEP) {
-> +                       dp83869->tx_int_delay =3D DP83869_CLK_DELAY_DEFAU=
-LT;
-> +                       pr_warn("tx-internal-delay-ps not set/invalid, de=
-fault"
-> +                               " to %ups\n", DP83869_CLK_DELAY_DEFAULT);
->                 }
->
-> -               dp83869->tx_int_delay =3D dp83869_internal_delay[dp83869-=
->tx_int_delay];
-> +               dp83869->tx_int_delay =3D
-> +                       (dp83869->tx_int_delay - DP83869_CLK_DELAY_STEP)
-> +                       / DP83869_CLK_DELAY_STEP;
->         }
+>         /*
+>          * If DM MDIO is enabled, the MDIO bus will be initialized later =
+in
+>          * dm_eth_phy_connect
+> @@ -628,6 +638,8 @@ static int ftgmac100_remove(struct udevice *dev)
+>         free(priv->phydev);
+>         mdio_unregister(priv->bus);
+>         mdio_free(priv->bus);
+> +       if (priv->reset_ctl)
+> +               reset_assert(priv->reset_ctl);
+>         clk_release_bulk(&priv->clks);
 >
 >         return 0;
 > --
-> 2.30.2
+> 2.25.1
 >
 Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
