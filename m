@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA373E95A67
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:26:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CC3CE95A67
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52A3D86F23;
-	Sun,  8 Oct 2023 01:16:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DD93786F66;
+	Sun,  8 Oct 2023 01:16:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Rhp6a1XG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R7PUq6Am";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13D3786F07; Sun,  8 Oct 2023 01:14:29 +0200 (CEST)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id 0796D86EC6; Sun,  8 Oct 2023 01:14:19 +0200 (CEST)
+Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
+ [IPv6:2607:f8b0:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF5F786EE6
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:13:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF81186F05
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:13:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-79fa7e33573so140247539f.0
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:13:20 -0700 (PDT)
+Received: by mail-il1-x12c.google.com with SMTP id
+ e9e14a558f8ab-352a1a0348fso13402815ab.1
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:13:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696720393; x=1697325193; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696720396; x=1697325196; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ol7IlMM6QfxaFgBkWoDX7zMirKd6YdBPxM8e+t7twfM=;
- b=Rhp6a1XGFIy27yqWrhLVs8F32Q/CShGtACdo66zq7BTWOOQN4DS8HphGSsGNt5l8ua
- KrjJRBRT11hhpq/ClPGEI5RErE6nArp9fTt8WtNBY/HW0MCxniqBZwdmZxr9yx5YfTN/
- +ENUyQFq7sTIETkpN4E0VBdhnYvct3wXe5s28=
+ bh=fBp0HYn+zW7JB7fktd6W1FL9Bcd7GSWvX7ntYSU4Mzk=;
+ b=R7PUq6AmO8O4zLWreQ4hJpuLddMMNDcSfp9SeqcYQIy0AkpJK6L1HcU/MiJf/HVmEs
+ iRfCWqIKhTrFTCoMcNxMlOQUMbjINdRkavFSKlpDCgVb8ZWjIVtRMeEOhuTkC2lcijp7
+ Lff9kmj12zNzmUYKDdXZBKmfleOEc24cDaOh0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696720393; x=1697325193;
+ d=1e100.net; s=20230601; t=1696720396; x=1697325196;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ol7IlMM6QfxaFgBkWoDX7zMirKd6YdBPxM8e+t7twfM=;
- b=ovAqCh3a3neN5YxgyGJ5oqEg87UdmQgchsLEgF3ITnfuIEiOoaMKogPMeYy1YaS6jk
- EZK03DIvWEhJIWZ5JA4Ys6dlriYGcXHY9XMBB0d0boUICj9uBKudopgup7sejBveIYCu
- jZm3+bS0tXgV/2jA/OXrcy72JZOZajPHaVANb/JKkp7xjVd0hvSkxyreeUhUuIoR9h+f
- b/pu/7Xx1SHjwf8rv1My9onuwlFnDEDxwjTUFLrMZ1mQGpxLY37QZIL8cLwT+pY7e2Zl
- edS70o2lE/IIk3+fJjXAbbeUORXbCJjDhfZLD9ElCuEm5h57hMHlOu9rntZh8M+/X+zT
- fDyQ==
-X-Gm-Message-State: AOJu0Yy/6v3s29wmLFH1niebh/6w1x/L6QXJ7ZmQSoS66rPCsgG0MY4k
- g2IYomtPRy1SKGlg/7LYLM4DSnvTg+EOW0Sbmhg=
-X-Google-Smtp-Source: AGHT+IEiPmSmsoPsSImrY6GxMbkccOwfFstdax3py8xQ+/tolhabL3UThYy6HoxeFJ2nkohJT1gG8A==
-X-Received: by 2002:a92:c90d:0:b0:353:a2d8:463a with SMTP id
- t13-20020a92c90d000000b00353a2d8463amr6666363ilp.16.1696720393589; 
- Sat, 07 Oct 2023 16:13:13 -0700 (PDT)
+ bh=fBp0HYn+zW7JB7fktd6W1FL9Bcd7GSWvX7ntYSU4Mzk=;
+ b=ZKH12f1jN5L+IvGzE7QCeh2YDfXH6a7XVHAGjLRdHehe4MFuGqDA4Y9nuqvtmNjqC6
+ h0DO3TTGE99nOktI4LZcfML8Ctb+e7DODBixAZG6yP46uMcfXl5jMrDqcgI7s5nGvP7r
+ lqOGeTQeZCPvDj/AU9QsHC83OAuade6HYXL/edM9XpAKV5p3voUCXhb/E5MdhXez+p5v
+ A95KyAOIQwdXLpLBm7CrMsmbhdCTFYAt975pBWjCfxB4t+8EJJREpJmd5lGugN/Id7YN
+ 6U/sbGX8p5CAfruvV3RUMEmqee/pDSopTBa58aaX9yJh/3LZdNPDjt7RYdPKjiGkuPai
+ rMgQ==
+X-Gm-Message-State: AOJu0Yy6xDeXwbZrOvI1WgMtHukV5BU73077+O8RYbAn8wp8aUjYxtaH
+ Sg3jWZBk89KZh9ykUqi7xsEiJ+NCkZHLl9UsJ+M=
+X-Google-Smtp-Source: AGHT+IGd2UPncUta7KQf8NzgD/JOap4QKZ0Wa261HFLaubMyoX62QVBXNKHgV7g7NUByvZFcQoxTcA==
+X-Received: by 2002:a05:6e02:1d11:b0:352:a306:9ad1 with SMTP id
+ i17-20020a056e021d1100b00352a3069ad1mr15139158ila.0.1696720396239; 
+ Sat, 07 Oct 2023 16:13:16 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- x7-20020a92de07000000b0035129b9c61bsm2002320ilm.45.2023.10.07.16.13.13
+ x7-20020a92de07000000b0035129b9c61bsm2002320ilm.45.2023.10.07.16.13.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Oct 2023 16:13:13 -0700 (PDT)
+ Sat, 07 Oct 2023 16:13:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 12/27] Move bootmenu_conv_key() into its own file
-Date: Sat,  7 Oct 2023 17:12:31 -0600
-Message-ID: <20231007231255.277623-13-sjg@chromium.org>
+Subject: [PATCH v2 15/27] console: Move SYS_PBSIZE into common/
+Date: Sat,  7 Oct 2023 17:12:34 -0600
+Message-ID: <20231007231255.277623-16-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.609.gbb76f46606-goog
 In-Reply-To: <20231007231255.277623-1-sjg@chromium.org>
 References: <20231007231255.277623-1-sjg@chromium.org>
@@ -88,155 +88,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This conversion function is used by expo which does not require CMDLINE.
-The menu feature does require CMDLINE.
-
-Move the function into a separate file so that it can be used even when
-CMDLINE is not enabled.
+This relates to printing output and does not need a command line. Move
+it next to the other console-related options.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- common/Makefile    |  2 +-
- common/cli_getch.c |  1 +
- common/menu.c      | 40 -------------------------------------
- common/menu_key.c  | 49 ++++++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 51 insertions(+), 41 deletions(-)
- create mode 100644 common/menu_key.c
+ cmd/Kconfig    | 5 -----
+ common/Kconfig | 5 +++++
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/common/Makefile b/common/Makefile
-index b21916f15340..637066ae6682 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -8,7 +8,7 @@ ifndef CONFIG_SPL_BUILD
- obj-y += init/
- obj-y += main.o
- obj-y += exports.o
--obj-y += cli_getch.o
-+obj-y += cli_getch.o menu_key.o
- obj-$(CONFIG_HUSH_PARSER) += cli_hush.o
- obj-$(CONFIG_AUTOBOOT) += autoboot.o
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index f9e023730c53..96ea40109abd 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -84,11 +84,6 @@ config SYS_CBSIZE
+ 	default 256 if M68K || PPC
+ 	default 1024
  
-diff --git a/common/cli_getch.c b/common/cli_getch.c
-index 61d4cb261b81..c3332dc27fae 100644
---- a/common/cli_getch.c
-+++ b/common/cli_getch.c
-@@ -8,6 +8,7 @@
- 
- #include <common.h>
- #include <cli.h>
-+#include <menu.h>
- 
- /**
-  * enum cli_esc_state_t - indicates what to do with an escape character
-diff --git a/common/menu.c b/common/menu.c
-index b55cf7b99967..844d0ec52af3 100644
---- a/common/menu.c
-+++ b/common/menu.c
-@@ -483,46 +483,6 @@ enum bootmenu_key bootmenu_autoboot_loop(struct bootmenu_data *menu,
- 	return key;
- }
- 
--enum bootmenu_key bootmenu_conv_key(int ichar)
--{
--	enum bootmenu_key key;
+-config SYS_PBSIZE
+-	int "Buffer size for console output"
+-	default 1024 if ARCH_SUNXI
+-	default 1044
 -
--	switch (ichar) {
--	case '\n':
--		/* enter key was pressed */
--		key = BKEY_SELECT;
--		break;
--	case CTL_CH('c'):
--	case '\e':
--		/* ^C was pressed */
--		key = BKEY_QUIT;
--		break;
--	case CTL_CH('p'):
--		key = BKEY_UP;
--		break;
--	case CTL_CH('n'):
--		key = BKEY_DOWN;
--		break;
--	case CTL_CH('s'):
--		key = BKEY_SAVE;
--		break;
--	case '+':
--		key = BKEY_PLUS;
--		break;
--	case '-':
--		key = BKEY_MINUS;
--		break;
--	case ' ':
--		key = BKEY_SPACE;
--		break;
--	default:
--		key = BKEY_NONE;
--		break;
--	}
--
--	return key;
--}
--
- enum bootmenu_key bootmenu_loop(struct bootmenu_data *menu,
- 				struct cli_ch_state *cch)
- {
-diff --git a/common/menu_key.c b/common/menu_key.c
-new file mode 100644
-index 000000000000..4e9c3b426b0c
---- /dev/null
-+++ b/common/menu_key.c
-@@ -0,0 +1,49 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2010-2011 Calxeda, Inc.
-+ * Copyright (c) 2019, NVIDIA CORPORATION. All rights reserved.
-+ */
+ config SYS_XTRACE
+ 	bool "Command execution tracer"
+ 	depends on CMDLINE
+diff --git a/common/Kconfig b/common/Kconfig
+index 5e79b5422178..16601655caf7 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -52,6 +52,11 @@ config CONSOLE_RECORD_IN_SIZE
+ 	  The buffer is allocated immediately after the malloc() region is
+ 	  ready.
+ 
++config SYS_PBSIZE
++	int "Buffer size for console output"
++	default 1024 if ARCH_SUNXI
++	default 1044
 +
-+#include <common.h>
-+#include <cli.h>
-+#include <menu.h>
-+
-+enum bootmenu_key bootmenu_conv_key(int ichar)
-+{
-+	enum bootmenu_key key;
-+
-+	switch (ichar) {
-+	case '\n':
-+		/* enter key was pressed */
-+		key = BKEY_SELECT;
-+		break;
-+	case CTL_CH('c'):
-+	case '\e':
-+		/* ^C was pressed */
-+		key = BKEY_QUIT;
-+		break;
-+	case CTL_CH('p'):
-+		key = BKEY_UP;
-+		break;
-+	case CTL_CH('n'):
-+		key = BKEY_DOWN;
-+		break;
-+	case CTL_CH('s'):
-+		key = BKEY_SAVE;
-+		break;
-+	case '+':
-+		key = BKEY_PLUS;
-+		break;
-+	case '-':
-+		key = BKEY_MINUS;
-+		break;
-+	case ' ':
-+		key = BKEY_SPACE;
-+		break;
-+	default:
-+		key = BKEY_NONE;
-+		break;
-+	}
-+
-+	return key;
-+}
+ config DISABLE_CONSOLE
+ 	bool "Add functionality to disable console completely"
+ 	help
 -- 
 2.42.0.609.gbb76f46606-goog
 
