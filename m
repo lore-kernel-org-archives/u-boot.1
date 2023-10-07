@@ -4,63 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54555E94136
-	for <u-boot@archiver.kernel.org>; Fri,  6 Oct 2023 23:00:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0874E94139
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 00:03:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B7C886D3C;
-	Sat,  7 Oct 2023 01:00:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 2B3CE86D65;
+	Sat,  7 Oct 2023 02:03:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="k5/VSAnW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LKlO4pJS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7596486E37; Sat,  7 Oct 2023 01:00:16 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A140486CEC; Sat,  7 Oct 2023 02:03:37 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48CA886D30
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 01:00:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64CAD8695F
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 02:03:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 0105C6129D
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 23:00:11 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A395AC433C9
- for <u-boot@lists.denx.de>; Fri,  6 Oct 2023 23:00:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1696633210;
- bh=k8j0XLQXjQQJNDui+0jlFZl+AAfuXhuCpn9vIwWl/cE=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=k5/VSAnWHKDBM+aIaW9QONktl0tgBQMkfEMqxBot4G6+wPYt1Z4J99Em95YUTDseY
- jGYDjY/mNJfz3h6IDzruMe+TCkQuBvsV+78ssBXvhZDthyjlPQaQJC4AanULx4jJsm
- udEBGn5mwgluyt40Cb0H4b9Rt4EoHlwr/4tKhZJkwAG5M6AooiUM+qPWQNcq/S02L0
- uXRCHgIoYf95seef8oUkwVjkIy8c3hxlqxiu5kjtgdkWQ1JPziVj7jT/CkmoWqv7dB
- MpKq3AWdGdLHCySq4EF227rhl/LTJuItrLWjF986UZOQrfH6sQpospQwPwBkhWTC0/
- ohcKg3tNSgdvg==
-Received: by mail-lf1-f43.google.com with SMTP id
- 2adb3069b0e04-50435a9f800so3404015e87.2
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 16:00:10 -0700 (PDT)
-X-Gm-Message-State: AOJu0YyGMZiqRbgRn6409dX840ONKYPirznpQD/ae/S8+oufoEBiXzaU
- PpMTyw6/gykD7K0o/FPIZLrHWw4M2YZktKyavLo=
-X-Google-Smtp-Source: AGHT+IGUwIsnV63UDRYG6J0ZqF0iXQaqHVFbYxtJQSuymsUOMmUxtPl2e5FaMeYVFq286z0ldqJng0iURsW6bIABAWg=
-X-Received: by 2002:a05:6512:68a:b0:502:d743:9fc4 with SMTP id
- t10-20020a056512068a00b00502d7439fc4mr9541254lfe.37.1696633208839; Fri, 06
- Oct 2023 16:00:08 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-9b29186e20aso472473166b.2
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 17:03:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1696637013; x=1697241813; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uDcsQIEmgkQ2z2v3WWS4XEV0ph0sL9LSX0+s7n0YMh4=;
+ b=LKlO4pJSQvmjdoq6NiE8Luwpy11YwiaTl4Jc2LfO+v+roSSAI6hUWZcHXFd8/+LpOg
+ fl0thl9YbovMREfXOSShmzxRwwSK5C+pt1v9HkLtZ/n8X1fXtJZODL8qlQNG8o+PgoZm
+ uyziL3JImfw9hp6fSdHsxRRD4eelS13aONyUQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696637013; x=1697241813;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uDcsQIEmgkQ2z2v3WWS4XEV0ph0sL9LSX0+s7n0YMh4=;
+ b=G1Z4fPgcTOK0qieK9dj0dFNhJWy5wPf3+LgiccoxeMtBo8oHxSu+T4yR6J7U4tBNI4
+ CktjXc/LKwe4PMVYtyIksNJmIpbyucJebdkx1HpHBG7Dt1Nb6C8a05YaVjUeaEaYjN+V
+ FVYFNhrhrdpy9p01hCPmi1+O/jSKq/fq8RTOnpsHiqjP7GgSq91zqAyvdF4RhkgnSUiD
+ q/Vis3GoCpKUZVgz3GZRTwDiemKLzcBDJziGtc1vFABIGLscRALUDxJUkclL8VKy7Mg8
+ yERcezemsT8ts8KeFzfTEew/buzkw7VNyXtwPRu7CwWjGSV1PN4CiuAVPiTNMy7aSDZG
+ 2NQw==
+X-Gm-Message-State: AOJu0YwkHj5nqan/z8rcJyjg1ex3DaOEFk+S8ffaBMPTtxMlx+gB1Ein
+ KHLzNaYL046aeU/78l4GX5C6ADLEN99zn/pFCkxbhQ==
+X-Google-Smtp-Source: AGHT+IHICfBlh5Jn9KCKxlRJo8KnQizgtIiA61TtzHAjgOF4pLzWyegSnBlNZCq/yTtUnR27UDOzc7A1CepkEFmMBc8=
+X-Received: by 2002:a17:906:3284:b0:9b8:e670:657b with SMTP id
+ 4-20020a170906328400b009b8e670657bmr8851025ejw.64.1696637012708; Fri, 06 Oct
+ 2023 17:03:32 -0700 (PDT)
 MIME-Version: 1.0
 References: <20230926194242.2732127-1-sjg@chromium.org>
  <20230926194242.2732127-2-sjg@chromium.org>
  <CAPnjgZ0Xf3U1aj32LbU-xiU1AqwnM3JL1F8xX-wZ18oEmg+irw@mail.gmail.com>
  <CAMj1kXEXcX7BkDyfy-6_5Vnch=N+onza-yfWfsVaGLE93h2c+Q@mail.gmail.com>
  <CAPnjgZ2SEby-ndrs=W_afBJH56eqc=-mhp1F1nwkvWks+=B54Q@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2SEby-ndrs=W_afBJH56eqc=-mhp1F1nwkvWks+=B54Q@mail.gmail.com>
-From: Ard Biesheuvel <ardb@kernel.org>
-Date: Sat, 7 Oct 2023 00:59:57 +0200
-X-Gmail-Original-Message-ID: <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
-Message-ID: <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
+ <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
+In-Reply-To: <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 6 Oct 2023 18:03:16 -0600
+Message-ID: <CAPnjgZ0LrsJ2_ENTYoBrnyFaH3UKdHs3D2XWY=TzBuBpBoTXZA@mail.gmail.com>
 Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: Simon Glass <sjg@chromium.org>
+To: Ard Biesheuvel <ardb@kernel.org>
 Cc: devicetree@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, 
  Rob Herring <robh@kernel.org>, Lean Sheng Tan <sheng.tan@9elements.com>, 
  lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
@@ -71,6 +78,7 @@ Cc: devicetree@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>,
  Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,201 +95,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 6 Oct 2023 at 20:17, Simon Glass <sjg@chromium.org> wrote:
+Hi Ard,
+
+On Fri, 6 Oct 2023 at 17:00, Ard Biesheuvel <ardb@kernel.org> wrote:
 >
-> Hi Ard,
->
-> On Fri, 6 Oct 2023 at 11:33, Ard Biesheuvel <ardb@kernel.org> wrote:
+> On Fri, 6 Oct 2023 at 20:17, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Mon, 2 Oct 2023 at 19:54, Simon Glass <sjg@chromium.org> wrote:
+> > Hi Ard,
+> >
+> > On Fri, 6 Oct 2023 at 11:33, Ard Biesheuvel <ardb@kernel.org> wrote:
 > > >
-> > > Hi Rob,
+> > > On Mon, 2 Oct 2023 at 19:54, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Rob,
+> > > >
+> > > > On Tue, 26 Sept 2023 at 13:42, Simon Glass <sjg@chromium.org> wrote=
+:
+> > > > >
+> > > > > It is common to split firmware into 'Platform Init', which does t=
+he
+> > > > > initial hardware setup and a "Payload" which selects the OS to be=
+ booted.
+> > > > > Thus an handover interface is required between these two pieces.
+> > > > >
+> > > > > Where UEFI boot-time services are not available, but UEFI firmwar=
+e is
+> > > > > present on either side of this interface, information about memor=
+y usage
+> > > > > and attributes must be presented to the "Payload" in some form.
+> > > > >
+> > > > > This aims to provide an small schema addition for the memory mapp=
+ing
+> > > > > needed to keep these two pieces working together well.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > Changes in v7:
+> > > > > - Rename acpi-reclaim to acpi
+> > > > > - Drop individual mention of when memory can be reclaimed
+> > > > > - Rewrite the item descriptions
+> > > > > - Add back the UEFI text (with trepidation)
+> > > >
+> > > > I am again checking on this series. Can it be applied, please?
+> > > >
 > > >
-> > > On Tue, 26 Sept 2023 at 13:42, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > It is common to split firmware into 'Platform Init', which does the
-> > > > initial hardware setup and a "Payload" which selects the OS to be booted.
-> > > > Thus an handover interface is required between these two pieces.
-> > > >
-> > > > Where UEFI boot-time services are not available, but UEFI firmware is
-> > > > present on either side of this interface, information about memory usage
-> > > > and attributes must be presented to the "Payload" in some form.
-> > > >
-> > > > This aims to provide an small schema addition for the memory mapping
-> > > > needed to keep these two pieces working together well.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > Changes in v7:
-> > > > - Rename acpi-reclaim to acpi
-> > > > - Drop individual mention of when memory can be reclaimed
-> > > > - Rewrite the item descriptions
-> > > > - Add back the UEFI text (with trepidation)
-> > >
-> > > I am again checking on this series. Can it be applied, please?
-> > >
+> > > Apologies for the delay in response. I have been away.
 > >
-> > Apologies for the delay in response. I have been away.
->
-> OK, I hope you had a nice trip.
->
-
-Thanks, it was wonderful!
-
+> > OK, I hope you had a nice trip.
 > >
+>
+> Thanks, it was wonderful!
+>
 > > >
 > > > >
-> > > > Changes in v6:
-> > > > - Drop mention of UEFI
-> > > > - Use compatible strings instead of node names
-> > > >
-> > > > Changes in v5:
-> > > > - Drop the memory-map node (should have done that in v4)
-> > > > - Tidy up schema a bit
-> > > >
-> > > > Changes in v4:
-> > > > - Make use of the reserved-memory node instead of creating a new one
-> > > >
-> > > > Changes in v3:
-> > > > - Reword commit message again
-> > > > - cc a lot more people, from the FFI patch
-> > > > - Split out the attributes into the /memory nodes
-> > > >
-> > > > Changes in v2:
-> > > > - Reword commit message
-> > > >
-> > > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++++++++
-> > > >  1 file changed, 71 insertions(+)
-> > > >  create mode 100644 dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > >
-> > > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yaml b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > > new file mode 100644
-> > > > index 0000000..f7fbdfd
-> > > > --- /dev/null
-> > > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > > @@ -0,0 +1,71 @@
-> > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> > > > +%YAML 1.2
-> > > > +---
-> > > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserved.yaml#
-> > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > +
-> > > > +title: Common memory reservations
-> > > > +
-> > > > +description: |
-> > > > +  Specifies that the reserved memory region can be used for the purpose
-> > > > +  indicated by its compatible string.
-> > > > +
-> > > > +  Clients may reuse this reserved memory if they understand what it is for,
-> > > > +  subject to the notes below.
-> > > > +
-> > > > +maintainers:
-> > > > +  - Simon Glass <sjg@chromium.org>
-> > > > +
-> > > > +allOf:
-> > > > +  - $ref: reserved-memory.yaml
-> > > > +
-> > > > +properties:
-> > > > +  compatible:
-> > > > +    description: |
-> > > > +      This describes some common memory reservations, with the compatible
-> > > > +      string indicating what it is used for:
-> > > > +
-> > > > +         acpi: Advanced Configuration and Power Interface (ACPI) tables
-> > > > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This is reserved by
-> > > > +           the firmware for its use and is required to be saved and restored
-> > > > +           across an NVS sleep
-> > > > +         boot-code: Contains code used for booting which is not needed by the OS
-> > > > +         boot-code: Contains data used for booting which is not needed by the OS
-> > > > +         runtime-code: Contains code used for interacting with the system when
-> > > > +           running the OS
-> > > > +         runtime-data: Contains data used for interacting with the system when
-> > > > +           running the OS
-> > > > +
-> > > > +    enum:
-> > > > +      - acpi
-> > > > +      - acpi-nvs
-> > > > +      - boot-code
-> > > > +      - boot-data
-> > > > +      - runtime-code
-> > > > +      - runtime-data
-> > > > +
+> > > > >
+> > > > > Changes in v6:
+> > > > > - Drop mention of UEFI
+> > > > > - Use compatible strings instead of node names
+> > > > >
+> > > > > Changes in v5:
+> > > > > - Drop the memory-map node (should have done that in v4)
+> > > > > - Tidy up schema a bit
+> > > > >
+> > > > > Changes in v4:
+> > > > > - Make use of the reserved-memory node instead of creating a new =
+one
+> > > > >
+> > > > > Changes in v3:
+> > > > > - Reword commit message again
+> > > > > - cc a lot more people, from the FFI patch
+> > > > > - Split out the attributes into the /memory nodes
+> > > > >
+> > > > > Changes in v2:
+> > > > > - Reword commit message
+> > > > >
+> > > > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++=
+++++++
+> > > > >  1 file changed, 71 insertions(+)
+> > > > >  create mode 100644 dtschema/schemas/reserved-memory/common-reser=
+ved.yaml
+> > > > >
+> > > > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yam=
+l b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > > new file mode 100644
+> > > > > index 0000000..f7fbdfd
+> > > > > --- /dev/null
+> > > > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > > @@ -0,0 +1,71 @@
+> > > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> > > > > +%YAML 1.2
+> > > > > +---
+> > > > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserv=
+ed.yaml#
+> > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > > +
+> > > > > +title: Common memory reservations
+> > > > > +
+> > > > > +description: |
+> > > > > +  Specifies that the reserved memory region can be used for the =
+purpose
+> > > > > +  indicated by its compatible string.
+> > > > > +
+> > > > > +  Clients may reuse this reserved memory if they understand what=
+ it is for,
+> > > > > +  subject to the notes below.
+> > > > > +
+> > > > > +maintainers:
+> > > > > +  - Simon Glass <sjg@chromium.org>
+> > > > > +
+> > > > > +allOf:
+> > > > > +  - $ref: reserved-memory.yaml
+> > > > > +
+> > > > > +properties:
+> > > > > +  compatible:
+> > > > > +    description: |
+> > > > > +      This describes some common memory reservations, with the c=
+ompatible
+> > > > > +      string indicating what it is used for:
+> > > > > +
+> > > > > +         acpi: Advanced Configuration and Power Interface (ACPI)=
+ tables
+> > > > > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This=
+ is reserved by
+> > > > > +           the firmware for its use and is required to be saved =
+and restored
+> > > > > +           across an NVS sleep
+> > > > > +         boot-code: Contains code used for booting which is not =
+needed by the OS
+> > > > > +         boot-code: Contains data used for booting which is not =
+needed by the OS
+> > > > > +         runtime-code: Contains code used for interacting with t=
+he system when
+> > > > > +           running the OS
+> > > > > +         runtime-data: Contains data used for interacting with t=
+he system when
+> > > > > +           running the OS
+> > > > > +
+> > > > > +    enum:
+> > > > > +      - acpi
+> > > > > +      - acpi-nvs
+> > > > > +      - boot-code
+> > > > > +      - boot-data
+> > > > > +      - runtime-code
+> > > > > +      - runtime-data
+> > > > > +
+> > >
+> > > As I mentioned a few times already, I don't think these compatibles
+> > > should be introduced here.
+> > >
+> > > A reserved region has a specific purpose, and the compatible should b=
+e
+> > > more descriptive than the enum above. If the consumer does not
+> > > understand this purpose, it should simply treat the memory as reserve=
+d
+> > > and not touch it. Alternatively, these regions can be referenced from
+> > > other DT nodes using phandles if needed.
 > >
-> > As I mentioned a few times already, I don't think these compatibles
-> > should be introduced here.
+> > We still need some description of what these regions are used for, so
+> > that the payload can use the correct regions. I do not have any other
+> > solution to this problem. We are in v7 at present. At least explain
+> > where you want the compatible strings to be introduced.
 > >
-> > A reserved region has a specific purpose, and the compatible should be
-> > more descriptive than the enum above. If the consumer does not
-> > understand this purpose, it should simply treat the memory as reserved
-> > and not touch it. Alternatively, these regions can be referenced from
-> > other DT nodes using phandles if needed.
 >
-> We still need some description of what these regions are used for, so
-> that the payload can use the correct regions. I do not have any other
-> solution to this problem. We are in v7 at present. At least explain
-> where you want the compatible strings to be introduced.
+> My point is really that by themselves, these regions are not usable by
+> either a payload or an OS that consumes this information. Unless there
+> is some other information being provided (via DT I imagine) that
+> describes how these things are supposed to be used, they are nothing
+> more than memory reservations that should be honored, and providing
+> this arbitrary set of labels is unnecessary.
 >
-
-My point is really that by themselves, these regions are not usable by
-either a payload or an OS that consumes this information. Unless there
-is some other information being provided (via DT I imagine) that
-describes how these things are supposed to be used, they are nothing
-more than memory reservations that should be honored, and providing
-this arbitrary set of labels is unnecessary.
-
-> What sort of extra detail are you looking for? Please be specific and
-> preferably add some suggestions so I can close this out ASAP.
->
-
-A payload or OS can do nothing with a memory reservation called
-'runtime-code' it it doesn't know what is inside. So there is another
-DT node somewhere that describes this, and that can simply point to
-this region (via a phandle) if it needs to describe the
-correspondence. This is more idiomatic for DT afaik (but I am not the
-expert).  But more importantly, it avoids overloading some vague
-labels with behavior (e.g., executable permissions for code regions)
-that should only be displayed for regions with a particular use,
-rather than for a ill defined class of reservations the purpose of
-which is not clear.
-
-What I am trying to avoid is the OS ending up being forced to consume
-this information in parallel to the EFI memory map, and having to
-reconcile them. I'd be much happier if this gets contributed to a spec
-that only covers firmware-to-firmware, and is prevented from leaking
-into the OS facing interface.
-
-
-
+> > What sort of extra detail are you looking for? Please be specific and
+> > preferably add some suggestions so I can close this out ASAP.
 > >
-> >
-> > > > +  reg:
-> > > > +    description: region of memory that is reserved for the purpose indicated
-> > > > +      by the compatible string.
-> > > > +
-> > > > +required:
-> > > > +  - reg
-> > > > +
-> > > > +unevaluatedProperties: false
-> > > > +
-> > > > +examples:
-> > > > +  - |
-> > > > +    reserved-memory {
-> > > > +        #address-cells = <1>;
-> > > > +        #size-cells = <1>;
-> > > > +
-> > > > +        reserved@12340000 {
-> > > > +            compatible = "boot-code";
-> > > > +            reg = <0x12340000 0x00800000>;
-> > > > +        };
-> > > > +
-> > > > +        reserved@43210000 {
-> > > > +            compatible = "boot-data";
-> > > > +            reg = <0x43210000 0x00800000>;
-> > > > +        };
-> > > > +    };
-> > > > --
-> > > > 2.42.0.515.g380fc7ccd1-goog
 >
-> Regards,
-> Simon
+> A payload or OS can do nothing with a memory reservation called
+> 'runtime-code' it it doesn't know what is inside. So there is another
+> DT node somewhere that describes this, and that can simply point to
+> this region (via a phandle) if it needs to describe the
+> correspondence. This is more idiomatic for DT afaik (but I am not the
+> expert).  But more importantly, it avoids overloading some vague
+> labels with behavior (e.g., executable permissions for code regions)
+> that should only be displayed for regions with a particular use,
+> rather than for a ill defined class of reservations the purpose of
+> which is not clear.
+>
+> What I am trying to avoid is the OS ending up being forced to consume
+> this information in parallel to the EFI memory map, and having to
+> reconcile them. I'd be much happier if this gets contributed to a spec
+> that only covers firmware-to-firmware, and is prevented from leaking
+> into the OS facing interface.
+
+I don't know about "another DT node". We don't have one at present.
+
+There is already a note in the DT spec about this:
+
+> 3.5.4 /reserved-memory and UEFI
+
+> When booting via [UEFI], static /reserved-memory regions must also be lis=
+ted in the system memory map obtained
+> via the GetMemoryMap() UEFI boot time service as defined in [UEFI] =C2=A7=
+ 7.2. The reserved memory regions need to be
+> included in the UEFI memory map to protect against allocations by UEFI ap=
+plications.
+>
+> Reserved regions with the no-map property must be listed in the memory ma=
+p with type EfiReservedMemoryType. All
+> other reserved regions must be listed with type EfiBootServicesData.
+>
+> Dynamic reserved memory regions must not be listed in the [UEFI] memory m=
+ap because they are allocated by the OS
+> after exiting firmware boot services.
+
+I don't fully understand what all that means, but does it cover your concer=
+n?
+
+Regards,
+Simon
