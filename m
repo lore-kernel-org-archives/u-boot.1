@@ -4,58 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67DABE95A6A
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 21:10:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53832E95A6A
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 21:15:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD18F86DAF;
-	Sat,  7 Oct 2023 23:10:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id AE36386377;
+	Sat,  7 Oct 2023 23:15:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1696713034;
-	bh=oXKXm7MYZkrum21puYraKSYILP6kbA51QGzZRZf654I=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=aqkHqxESfFuA+0IwaqGmWRm2igip2axBLPenuJcGP3e0av/eBTBwaPmjnyOq6zMOY
-	 Lo04EWQXwKfIOCKA/32gUfnHeSzxYRsPNOtHuTUWbvX7tZi7gdPn4hJxswc99bOZ4a
-	 pPEJ0SverIfW65eCMXMX5Ogb79LZ54SdsMLok3KsCx2lcUPGqETX7xaxa9EBliDEwl
-	 V/0gehEbTfA8xP0qCuwiWtUSPYEmVjWoYn+JaKHnBs8iyNO2DV3s4Foqi/gPbTxeRI
-	 fW/g5j3HR43q3VzpB7JXrh0MBeG99AYr3JxArP2oD6tP4FrRK7yUHcfzg3HhkG5SYW
-	 /It+0JAvtT6uQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KsJ1Edyf";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C68F986977; Sat,  7 Oct 2023 23:15:28 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D03BA869D1;
- Sat,  7 Oct 2023 23:10:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1696713025;
- bh=oXKXm7MYZkrum21puYraKSYILP6kbA51QGzZRZf654I=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=FgWgqFeZ82acQPGRYiM3NVS23z11EAiwebco7STWRIK4AnfSCIaGXd29xPSo3WA9I
- wdWi2f76k2sHnfr1aBTafv6iQX8N9KxNAUYD2neEktxAjkpx+Rmm/YBldx0YIQ1dc+
- VbJT47Ink+bO/J+94qSZiBN71sIUB60pAon2qwWYUniGZ58KU0e3mqAxhKIyL63yJI
- r2Z8FjfjAkOV/2cbBsQduhbKjV28X0U7dF2foia3ybKBPrAVV6xu1fyi4y+mJHNICl
- y9SNEdTNwrrkH2zSv4dELci02LRXhjS05EP1Ru88rDoAgPpKcIqJEJVnIl7jre2I8O
- R04cZ+y/UNmXA==
-Message-ID: <d8e97696-38fb-4e4f-9473-9a9b820af3ee@denx.de>
-Date: Sat, 7 Oct 2023 23:09:32 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 68BE5846DF
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 23:15:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S2ykD47w7z9sTC;
+ Sat,  7 Oct 2023 23:15:16 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1696713316;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=vXo7LnSNarZ97thAXNMIwImsXP2WYd52N46h/uMr/ls=;
+ b=KsJ1Edyf9t3NYeAEzdoiYBM32I4QTK8mM4QGs7EBGfMNVt2/7AjsbNqLbpQmsqli6QfpYG
+ Qs0MuRN+vt/Q8LNTfg//k2OFjra0hJO8Z+vVEr0Xj9HQVQ2D7h6xs2aPCbYfSp6Ire5EgS
+ ZD/ZPLdw7Z4qqRis6AU4iwgVT5Pd33XW/bK4StXOFQxuMrZXoBkhNMepJ6sP2d0nZ346nm
+ EKpIRropcNazT49qrvGWiQKRI+Al71V5ufurlECSMBQO/Qr2PmexKvtx8AgEMsA9ktW9A5
+ 7/G3G7q2YyptrjniRZkfigROrvWdly1Hx8zbT+VntSHCvase6SmM+76SjB7/rw==
+Message-ID: <b2b0f756-9bb8-4618-8f32-7660a3421875@mailbox.org>
+Date: Sat, 7 Oct 2023 23:15:13 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND v2 2/2] usb: udc: Try to clarify an error message
+Subject: Re: [PATCH 16/16] board: rzg2l: Add RZ/G2L SMARC EVK board
 Content-Language: en-US
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-References: <20231002134621.94786-1-miquel.raynal@bootlin.com>
- <20231002134621.94786-2-miquel.raynal@bootlin.com>
- <7bdef74c-5756-45f2-80c5-63a9f5d68b03@denx.de>
- <20231005175158.58374ff0@xps-13>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231005175158.58374ff0@xps-13>
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-17-paul.barker.ct@bp.renesas.com>
+ <37900365-9d1c-6248-635c-5f6566a08bfb@mailbox.org>
+ <7f298a13-72e4-7187-7849-c223b15384ff@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <7f298a13-72e4-7187-7849-c223b15384ff@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: efs5bk1dercddcwo43q8b1316fai1onc
+X-MBO-RS-ID: 66ac37a08f51e36ca95
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,99 +80,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/5/23 17:51, Miquel Raynal wrote:
-> Hi Marek,
-> 
-> marex@denx.de wrote on Thu, 5 Oct 2023 15:04:25 +0200:
-> 
->> On 10/2/23 15:46, Miquel Raynal wrote:
->>> At some point when trying to use USB gadgets, two situations may arise
->>> and lead to a failure. Either the UDC (USB Device Controller) is not
->>> available at all (not described or not probed) or the UDC is already in
->>> use. For instance, as the USB Ethernet gadget remains bound to the UDC,
->>> the use of any other USB gadget (fastboot, dfu, etc) *after* will always
->>> fail with the "couldn't find an available UDC" error.
+On 10/5/23 22:50, Paul Barker wrote:
+> On 03/10/2023 14:36, Marek Vasut wrote:
+>> On 9/20/23 14:42, Paul Barker wrote:
+>>> The Renesas RZ/G2L SMARC Evaluation Board Kit consists of the RZ/G2L
+>>> System-on-Module (SOM) based on the R9A07G044L2 SoC, and a common SMARC
+>>> carrier board.
 >>>
->>> Let's give a more helpful message by making a difference between the two
->>> cases. Let's also hint people who would get this error and grep it into
->>> the sources a better explanation of what's wrong with their workflow.
+>>> The ARM TrustedFirmware code for the Renesas RZ/G2L SoC family passes a
+>>> devicetree blob to the bootloader as an argument in the same was
+>>> previous R-Car gen3/gen4 SoCs. This blob contains a compatible string
+>>> which can be used to identify the particular SoC we are running on and
+>>> this is used to select the appropriate device tree to load.
 >>>
->>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+>>> The configuration renesas_rzg2l_smarc_defconfig is added to support
+>>> building for this target. In the future this defconfig will be extended
+>>> to support other SoCs and evaluation boards from the RZ/G2L family.
+>>>
+>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+>>> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 >>> ---
->>> While doing this I really wanted to add "much more" error comments but I
->>> faced another reality: often the messages are there but use
->>> pr_err/log_err which is actually silenced by default with LOGLEVEL=3, so
->>> I consider this unnecessary, as decreasing the loglevel will make these
->>> messages appear. I would have expected errors to be displayed, but I
->>> understand it makes the binaries even bigger.
+>>>    arch/arm/mach-rmobile/Kconfig.rzg2l   | 14 +++++
+>>>    board/renesas/rzg2l/Kconfig           | 18 +++++++
+>>>    board/renesas/rzg2l/MAINTAINERS       |  6 +++
+>>>    board/renesas/rzg2l/Makefile          |  4 ++
+>>>    board/renesas/rzg2l/rzg2l.c           | 76 +++++++++++++++++++++++++++
+>>>    configs/renesas_rzg2l_smarc_defconfig | 52 ++++++++++++++++++
+>>>    include/configs/rzg2l-smarc.h         | 14 +++++
+>>>    7 files changed, 184 insertions(+)
+>>>    create mode 100644 board/renesas/rzg2l/Kconfig
+>>>    create mode 100644 board/renesas/rzg2l/MAINTAINERS
+>>>    create mode 100644 board/renesas/rzg2l/Makefile
+>>>    create mode 100644 board/renesas/rzg2l/rzg2l.c
+>>>    create mode 100644 configs/renesas_rzg2l_smarc_defconfig
+>>>    create mode 100644 include/configs/rzg2l-smarc.h
 >>>
->>> Resend: no change.
->>>
->>> Changes in v2:
->>> * s/UDC/UDCs/. I kept the sentence as it was as the suggested form did
->>>     not sound well at all when there is only one UDC.
->>> ---
->>>    drivers/usb/gadget/udc/udc-core.c | 13 ++++++++++++-
->>>    1 file changed, 12 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
->>> index 7f73926cb3e..8405b03462e 100644
->>> --- a/drivers/usb/gadget/udc/udc-core.c
->>> +++ b/drivers/usb/gadget/udc/udc-core.c
->>> @@ -323,6 +323,7 @@ err1:
->>>    int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
->>>    {
->>>    	struct usb_udc		*udc = NULL;
->>> +	unsigned int		udc_count = 0;
->>>    	int			ret;
->>>    >   	if (!driver || !driver->bind || !driver->setup)
->>> @@ -330,12 +331,22 @@ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
->>>    >   	mutex_lock(&udc_lock);
->>>    	list_for_each_entry(udc, &udc_list, list) {
->>> +		udc_count++;
+>>> diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-rmobile/Kconfig.rzg2l
+>>> index 7d268e8c366a..1fe49e323300 100644
+>>> --- a/arch/arm/mach-rmobile/Kconfig.rzg2l
+>>> +++ b/arch/arm/mach-rmobile/Kconfig.rzg2l
+>>> @@ -9,6 +9,20 @@ config R9A07G044L
+>>>    	help
+>>>    	  Enable support for the R9A07G044L SoC used in the RZ/G2L.
+>>>    
+>>> +choice
+>>> +	prompt "Renesas RZ/G2L Family Board selection"
+>>> +	default TARGET_RZG2L_SMARC_EVK
 >>> +
->>>    		/* For now we take the first one */
->>>    		if (!udc->driver)
->>>    			goto found;
->>>    	}
->>>    > -	printf("couldn't find an available UDC\n");
->>> +	if (!udc_count)
->>> +		printf("No UDC available in the system\n");
->>> +	else
->>> +		/* When this happens, users should 'unbind <class> <index>'
->>> +		 * using the output of 'dm tree' and looking at the line right
->>> +		 * after the USB peripheral/device controller.
->>> +		 */
->>> +		printf("All UDCs in use (%d available), use the unbind command\n",
->>> +		       udc_count);
+>>> +config TARGET_RZG2L_SMARC_EVK
+>>> +	bool "Renesas RZ/G2L SMARC EVK"
+>>> +	imply R9A07G044L
+>>> +	help
+>>> +	  Enable support for the RZ/G2L SMARC evaluation board.
+>>> +
+>>> +source "board/renesas/rzg2l/Kconfig"
+>>> +
+>>> +endchoice
+>>> +
+>>>    config MULTI_DTB_FIT_UNCOMPRESS_SZ
+>>>    	default 0x80000 if TARGET_RZG2L_SMARC_EVK
+>>>    
+>>> diff --git a/board/renesas/rzg2l/Kconfig b/board/renesas/rzg2l/Kconfig
+>>> new file mode 100644
+>>> index 000000000000..1335fc7ae806
+>>> --- /dev/null
+>>> +++ b/board/renesas/rzg2l/Kconfig
+>>> @@ -0,0 +1,18 @@
+>>> +# Copyright (C) 2023 Renesas Electronics Corporation
+>>> +# SPDX-License-Identifier: GPL-2.0+
+>>> +
+>>> +if TARGET_RZG2L_SMARC_EVK
+>>> +
+>>> +config SYS_SOC
+>>> +	default "rmobile"
+>>> +
+>>> +config SYS_BOARD
+>>> +	default "rzg2l"
+>>> +
+>>> +config SYS_VENDOR
+>>> +	default "renesas"
+>>> +
+>>> +config SYS_CONFIG_NAME
+>>> +	default "rzg2l-smarc"
+>>> +
+>>> +endif
+>>> diff --git a/board/renesas/rzg2l/MAINTAINERS b/board/renesas/rzg2l/MAINTAINERS
+>>> new file mode 100644
+>>> index 000000000000..0a51391c1fc9
+>>> --- /dev/null
+>>> +++ b/board/renesas/rzg2l/MAINTAINERS
+>>> @@ -0,0 +1,6 @@
+>>> +RENESAS RZG2L BOARD FAMILY
+>>> +M:	Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> +S:	Supported
+>>> +F:	arch/arm/dts/rz-smarc-common.dtsi
 >>
->> Users should really use 'bind' command in the first place, to avoid this guesswork to which UDC (on systems with multiple UDCs) a gadget gets bound to, and instead bind the gadget to specific UDC they want to bind it to. This code should then be removed entirely.
+>> I suspect there should be more files here, right ?
+>> You likely want to be CCed on things like rzg2l clock, scif, and so on.
+>>
+>>> +N:	rzg2l
+>>> +N:	r9a07g044
+>>> diff --git a/board/renesas/rzg2l/Makefile b/board/renesas/rzg2l/Makefile
+>>> new file mode 100644
+>>> index 000000000000..466935fc8158
+>>> --- /dev/null
+>>> +++ b/board/renesas/rzg2l/Makefile
+>>> @@ -0,0 +1,4 @@
+>>> +# Copyright (C) 2023 Renesas Electronics Corporation
+>>> +# SPDX-License-Identifier: GPL-2.0+
+>>> +
+>>> +obj-y	:= rzg2l.o
+>>
+>>> diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
+>>> new file mode 100644
+>>> index 000000000000..2b1bb3546c26
+>>> --- /dev/null
+>>> +++ b/board/renesas/rzg2l/rzg2l.c
+>>> @@ -0,0 +1,76 @@
+>>> +// SPDX-License-Identifier: GPL-2.0+
+>>> +/*
+>>> + * RZ/G2L board support.
+>>> + * Copyright (C) 2023 Renesas Electronics Corporation
+>>> + */
+>>> +
+>>> +#include <common.h>
+>>> +#include <fdtdec.h>
+>>> +#include <linux/libfdt.h>
+>>> +
+>>> +#if IS_ENABLED(CONFIG_MULTI_DTB_FIT)
+>>> +/* If the firmware passed a device tree, use it for board identification. */
+>>> +extern u64 rcar_atf_boot_args[];
+>>> +
+>>> +static bool is_rzg2l_board(const char *board_name)
+>>> +{
+>>> +	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
+>>> +
+>>> +	return fdt_node_check_compatible(atf_fdt_blob, 0, board_name) == 0;
+>>> +}
+>>> +
+>>> +int board_fit_config_name_match(const char *name)
+>>> +{
+>>> +	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
+>>> +
+>>> +	if (fdt_magic(atf_fdt_blob) != FDT_MAGIC)
+>>> +		return -1;
+>>> +
+>>> +	if (is_rzg2l_board("renesas,r9a07g044l2"))
+>>> +		return strcmp(name, "r9a07g044l2-smarc");
+>>> +
+>>> +	return -1;
+>>> +}
+>>> +#endif
+>>> +
+>>> +static void apply_atf_overlay(void *fdt_blob)
+>>> +{
+>>> +	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
+>>> +
+>>> +	if (fdt_magic(atf_fdt_blob) == FDT_MAGIC)
+>>> +		fdt_overlay_apply_node(fdt_blob, 0, atf_fdt_blob, 0);
+>>> +}
+>>> +
+>>> +int fdtdec_board_setup(const void *fdt_blob)
+>>> +{
+>>> +	apply_atf_overlay((void *)fdt_blob);
+>>> +
+>>> +	return 0;
+>>> +}
+>>> +
+>>> +int ft_board_setup(void *blob, struct bd_info *bd)
+>>> +{
+>>> +	return 0;
+>>
+>> Are all these stub functions really needed or can they be removed
+>> (possibly also with removal of unnecessary config options) ?
 > 
-> There are two cases when this can happen:
-> * a single UDC (common) but a function already bound, there is no
->    guessing here
-> * two (or more) UDC and there is some guessing
+> I've moved dram_init() & dram_init_banksize() out to
+> arch/arm/mach-rmobile/memmap-rzg2l.c. However, the other three stub
+> functions can't easily be removed:
 > 
-> Before your cleanup, drivers would get automatically unbound from the
-> UDC to let the one being needed to bind.
+> * board_init() is always called if CONFIG_ARM is enabled. There is a
+>    similar stub in board/renesas/rcar-common/common.c so I think this is
+>    ok.
+> 
+> * ft_board_setup() is called if CONFIG_OF_BOARD_SETUP is enabled, which
+>    is selected by CONFIG_RCAR_64, I don't see much point messing around
+>    to break that config dependency when I'm going to be coming back to
+>    fill in this stub once support for these boards is fully upstreamed to
+>    TrustedFirmware.
 
-How did that ever work ?
+OK
 
-> This is no longer the case,
-> so there is a change in the CLI and I want to help people facing
-> this new problem with a slightly more comprehensive message because
-> people don't fully understand what USB is all about. We cannot
-> ask all U-Boot USB users to be U-Boot experts and USB experts. This
-> is just a little help.
+> * reset_cpu() is called from arch/arm/lib/reset.c, which is included
+>    unless CONFIG_SYSRESET is defined, and I don't think enabling
+>    CONFIG_SYSRESET makes any sense here. Again, I'll be filling in this
+>    stub once TrustedFirmware supports resetting this board.
+> 
+> I'll chat to the rest of the team tomorrow and see if there's a hacky
+> way we can do the reset before TrustedFirmware support is complete.
 
-In that case, you have to handle the details like CMD_BIND may not be 
-enabled, and CMD_DM may not be enabled. But then, maybe what we want to 
-do is fix the automatic switching of gadgets to make it work again ?
-
-> In an ideal world, we will have the possibility to create
-> composite gadgets and all this can go away once it is well
-> integrated, I guess?
-
-I believe you would still have to do a disconnect/connect cycle even 
-with a composite driver, you cannot just add functions to existing 
-composite at runtime.
+Maybe just add a ToDo comment and let's get this in before 2024.01-rc1 
+is out.
