@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF221E95A63
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 12:51:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16DB6E95A61
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 12:52:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5A8886A19;
-	Sat,  7 Oct 2023 14:51:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79C2286D14;
+	Sat,  7 Oct 2023 14:52:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cceXTlHs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Kfe+YS8h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EA3186A23; Sat,  7 Oct 2023 14:51:37 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 5BDE286D3C; Sat,  7 Oct 2023 14:52:32 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6AD948477A
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 14:51:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E571D8477A
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 14:52:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1c76ef40e84so5765115ad.0
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 05:51:35 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-27730028198so505831a91.1
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 05:52:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696683094; x=1697287894; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696683148; x=1697287948; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AHz5xtWOuY+DlAFRla14Vav10EDP+pDjAJkxN2C3S6E=;
- b=cceXTlHse0Bu3uuaonOwU4/cZcAy2AB51wZRu7u8Px5ZAyhUZvJBCN+b6BPXf+kffD
- L8CQ8soOTbvQ3C4CuF0WYkwWBAwUP3IsQbWlPj+KJqbdi6SWlxn1pU4CjnUjKUzGgND3
- VLaad1LdrYF9dR/QVou6jQr82BoIYPN0CjpdCktEMDIoU3FPZ6eFRR6oP09SDUZe/7Uv
- 4J7GQtLsk6zs0vLV/Aznrk06RsUERnyT/ExMUXTQMCebjJ7dvWBwBF7qdbCQRzWrLCUG
- PMxC63nDSpFmRiFEnKEI0zFNrfeOc6NsHG8fTN5T9HXza71rjfSlboVAZx8fWF7VRQ+a
- sm0A==
+ bh=IZH1wiSy7bap3Z6t/idXe2h/qd7VJUai+nfRaG5LUQM=;
+ b=Kfe+YS8hHIUHG4cBmZI4dQ3290vHl24Ng354bLb84mwYi8hdaO0gx8jKaRrMgycI79
+ nkI79JvyrW8WM3jtq5haiJMjhsvaU3UnldkfVYhM84eQWKhbxx/4+Gzqsv9uykiKPsso
+ R3wfjsI5KEqI5yI4LQNDGIw8L5Y49lHfTOPwQqo/WQ9X2aCsfuDy83UhwWAOlyQqL2GM
+ TeZ8hiW5OZHrzvvtBKTGOy9kV/aM83DhFLy1/EvSIhLdxgTsdVXM4FN4ZWt2Q5EhnDa9
+ 5mcneAkQOJ0S9imQ613gwqO7ZT1u4bzSrNu6HOL7WjxukY5aDH51beMzQV+3emorrThA
+ L0tA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696683094; x=1697287894;
+ d=1e100.net; s=20230601; t=1696683148; x=1697287948;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AHz5xtWOuY+DlAFRla14Vav10EDP+pDjAJkxN2C3S6E=;
- b=UAnrMlc1xvEVwCBiGJl/3QMbauQjfF5TbYzRGhwaAOWZljHE7e5Jk52GMigafw7cHv
- 2yrr9nE8LE4x6W8KfLiAIj2ovqj4OOVyGf10YSYjK02e3PFxxP93gNZCagRkGhQTHdXb
- lYPy/pSer4cKmKFLPnteucOuRRVHUSNimGbYCIXE/UOrNm+y7AfWbb+78Hsqub6x67JU
- +7fTTCjdK/cHG8rav4LXSDJZOBqfVJEu4Nbxz+8N6LeqzpR4oalLVOc1+7vIer6hXPi7
- Jb0aoqwYQf0dsUbGoL/QhkSO7O2+fmOpIR2kRmH1OMWHLXSySYeydpSd34Fu2SKPSn+v
- i41Q==
-X-Gm-Message-State: AOJu0YzG+53+a7e8C/YNZWtI4ITgfapOvSbx+cDC5t8R9b0GXjptkLFP
- J5NrWrKt4D+y1e9+jvBUeLbjLnnFLajcEi8+lZvtVr+P
-X-Google-Smtp-Source: AGHT+IHiJlKxrCt7cVACMBsShYVj5HR1oIud4EDEjAMwU6wmneVf2uRxFKNcoMLaYu334HO4l2sMk6LfPxHaud7/kBk=
-X-Received: by 2002:a05:6a20:8f01:b0:15a:2c0b:6c81 with SMTP id
- b1-20020a056a208f0100b0015a2c0b6c81mr12284729pzk.3.1696683093752; Sat, 07 Oct
- 2023 05:51:33 -0700 (PDT)
+ bh=IZH1wiSy7bap3Z6t/idXe2h/qd7VJUai+nfRaG5LUQM=;
+ b=VaQnkLSgdcuyl3g1bUk9aZViJBvj8QOG5+6AZvjPdVuqBhKTJfidtTZjhI3OuLq2Lv
+ +L/kw+YxjbrHRX08BadqMGVZY5tm+fO/V/e8E7/Tiki1GbZxBFSGy19lcLjCuVR6PX81
+ Q9Ts+sva2Sq1hySoAF1PCGaiHTBFvCjr8Ut6DWWdU7/MkOXuOc8quVazOu8MmOdM//1X
+ s/wF5+oNUQC4OO0Lqi1aFO+zP0xYbp7DJQLIZSh7tZ2xZXGCJai5LgBrfP/Hk93aDu84
+ SN8uqXCse7mP8QSeoI4NhyMoFMMjN2WXcf6o3VeletwTJqRsB0I53/hsqBHHVAIx+6l2
+ +e6Q==
+X-Gm-Message-State: AOJu0YyP7Gh4oQZuVKRed/zFr6ajMDD5E2JKxxfGLiM097d0dzEo3sH0
+ Irx/DhxlYm4JaGtoD5McJuAtqUy0jn3nbe7U52HP1Q/qaPk=
+X-Google-Smtp-Source: AGHT+IGKhv9//47JphqPrrtnqIkijmFIrws/6k0TpjIFYki4E8tm3xUPC98rxmiIloqTMA5J9d5wYP4uMOyebWiDBSo=
+X-Received: by 2002:a17:90a:43c2:b0:278:f656:ca0e with SMTP id
+ r60-20020a17090a43c200b00278f656ca0emr9766014pjg.0.1696683148204; Sat, 07 Oct
+ 2023 05:52:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231002115749.15160-1-hiagofranco@gmail.com>
-In-Reply-To: <20231002115749.15160-1-hiagofranco@gmail.com>
+References: <20231003212654.53139-1-hiagofranco@gmail.com>
+In-Reply-To: <20231003212654.53139-1-hiagofranco@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 7 Oct 2023 09:51:22 -0300
-Message-ID: <CAOMZO5DP5gZvQyBeNdOu9hxf2_JsUddDXhkr5yW9PEA6mpOTKA@mail.gmail.com>
-Subject: Re: [PATCH] toradex: colibri_imx7: Enable nand/emmc detection and set
- boot variant
+Date: Sat, 7 Oct 2023 09:52:16 -0300
+Message-ID: <CAOMZO5AcsRTeSu_FjpZQx0wfr9EB5Kniag9=oLS4hxLhG9ebtw@mail.gmail.com>
+Subject: Re: [PATCH] arm: mach-imx: Makefile: Extend u-boot-nand.imx padding
 To: Hiago De Franco <hiagofranco@gmail.com>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, u-boot@lists.denx.de, 
- Hiago De Franco <hiago.franco@toradex.com>
+Cc: Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Hiago De Franco <hiago.franco@toradex.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,23 +87,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Oct 2, 2023 at 10:08=E2=80=AFAM Hiago De Franco <hiagofranco@gmail.=
-com> wrote:
+On Tue, Oct 3, 2023 at 6:27=E2=80=AFPM Hiago De Franco <hiagofranco@gmail.c=
+om> wrote:
 >
 > From: Hiago De Franco <hiago.franco@toradex.com>
 >
-> Add detection of eMMC vs NAND devices on the Colibri iMX7
-> board. A GPIO is configured to detect the presence of an on-board resisto=
-r
-> that is configured differently based on the flash memory used. Depending =
-on
-> the detection result, the 'variant' environment variable is set to '-emmc=
-'
-> or cleared, indicating the type of storage device.
+> Extend the padding process of u-boot-nand.imx target by adding 10k bytes
+> of zeros to the end of the binary using the 'dd' command.
 >
-> This enhancement improves variant detection during system initialization
-> through USB recovery mode, where U-Boot is loaded directly to RAM. This
-> allows variant detection for an accurate device tree selection.
+> The existing padding method did not generate a functional binary,
+> as discussed in more detail in this thread [1]. Instead, we adopt the
+> end-padding calculation method documented in 'board/doc/colibri_imx7.rst'
+> as a reference, which is relevant for iMX7 with NAND storage.
+>
+> Adding 10k bytes of zeros provides an approximate value that makes the
+> proper padding for these NAND devices.
+>
+> [1] https://lore.kernel.org/all/CAC4tdFUqffQzRQFv5AGe_xtbFy1agr2SEpn_FzEd=
+exhwjdryyw@mail.gmail.com/
 >
 > Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
 
