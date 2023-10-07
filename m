@@ -4,70 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36173E95A7E
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41A89E95A7E
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:21:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55C2A86F18;
-	Sun,  8 Oct 2023 01:14:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1C72786EDA;
+	Sun,  8 Oct 2023 01:14:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LASuIsa2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EONY1xU4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C55A486EE5; Sun,  8 Oct 2023 01:12:21 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 502ED86D7E; Sun,  8 Oct 2023 01:12:23 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FA6D86EBF
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:12:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E1EF86EA9
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-59f6441215dso40756347b3.2
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-59bebd5bdadso40447787b3.0
  for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:12:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1696720299; x=1697325099; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uoZr7jSRE1HADXb7/6yCEBtP/0yjStMWTIr10liyt4U=;
- b=LASuIsa2jPjY2E19SEr7WiuBvC6QyZBBe5ATROlBZ1BDASF0p0v2wcDUNwa9+AhgrF
- 1lLeBo718CyYjogSbdqGNbq5kY5akFvf31uuyvhaS+pNvROwh4TUf6kqbnSwI7DNom2P
- 28/nwALeJj9C4YMJS+xhHM8UWXjYHhKajtqKs=
+ bh=jaQBs6g8H8SsEhvQSjcqsYk9ozpwQs4y7EyR1OkVXyY=;
+ b=EONY1xU48VZfTY+f+fbxDdoRGJpXIK8SQxacLxHUd9tsQrII9ASAo4JwQ+5b0EbBVm
+ OlHvrHmUcZVTubx0U1iHd92+RwI/CgXwIIj4IwqQ0J/ZjvbJl7Wwcus85nDJSDyVVK67
+ gTJebertFodHTEIO65y9Tc5AwAcXawqJHg9CQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1696720299; x=1697325099;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uoZr7jSRE1HADXb7/6yCEBtP/0yjStMWTIr10liyt4U=;
- b=AuiyXc+K8v7r0zS80Dd90jup9bEc0Frm5w0qx+iT0aTAtt7d95g3dzk6hFIYkbMknT
- 4sObS2f3aRosZeMhtxn0l7ms3w8Pa09k9YNeu6Dk3G0DHbaY2VlF68FWqFNfYplJbbqb
- dZxUhyXThhpc5tttBRrTxXYdH1461ISZX5P1TekGklsMB6WdDXviFe1+1jvV5R1ikZs3
- rt2jhdIA8Wrq8nCBgiTMCTB7KlX0DNeUFyBuKgVDovWX9jPJeWGYLqR4EbwCK7C69oRi
- SBN6h9YxbPJO4n2hba6v3XW98RXf6W70ELlefZhjV1yBnilLlv2iyKEpC2RbqNAnSbNJ
- co5A==
-X-Gm-Message-State: AOJu0Yzvw5xnmbcORHf0OybDLT7DJtIYIr51asJd4rv+XX531eJRaCpg
- T5lb71T8MVPpFma2sleiD0g+2kCotFwenQBUFsYTSA==
-X-Google-Smtp-Source: AGHT+IGKJTUggEsui4lnQM1jIUrmP5QQQ1Da/ONkc3i2YLG1IKm1DvmlpOoTU1zKq5pwCumpFQgsrZ+2WZk2piXFvFI=
-X-Received: by 2002:a0d:cf01:0:b0:59b:54b5:7d66 with SMTP id
- r1-20020a0dcf01000000b0059b54b57d66mr12125918ywd.34.1696720299301; Sat, 07
+ bh=jaQBs6g8H8SsEhvQSjcqsYk9ozpwQs4y7EyR1OkVXyY=;
+ b=CljRYSdfZ3qajWpLzZWcgteXvJSa3P2NsP9rOgF+U0KNZUJL+h6o0wr2Z2+0CM1p/L
+ AWaJ8yP9hCp77q2lIPddNuensf43ueUKqZOl/PMgrANIbIjMDxyjHOa/CSM6jd+bm9ro
+ 681LPIQCfcV69Iqd0gFG9etQ9rXUubEPh3QS2mUSeqzE6APwwfBaWPHYozbVW4g1wCWv
+ JVJXP1N2GUZlXWioGrYPaHRCNRH2ZBaHc0q80s9wrqcXH9hA2p2tFLnilbTVu1PhxZHz
+ Pa4/nh9GrXnX9WoIHYWi2sMnA8lS9kBLjpVnRr1nEIQQO4nay5nQgRDOvHMu5N0pVWiF
+ /3zQ==
+X-Gm-Message-State: AOJu0Yy0yjNyaxrKUndidJ/xHGXDlZ07xdRZV+rpRclr136s0Dx7if5z
+ EcwmW1tSgx+UPuZsRReNm89N3oZAvYhEDHG98CdGIA==
+X-Google-Smtp-Source: AGHT+IGc8XX0Nkdb9fQHv5rxbQcgN1+l6BRFEHxjAZqR0uXszbmF8ZQYlT9DRGN3cXrD+D7dRSJpOie1d/xvLl+J5ko=
+X-Received: by 2002:a81:4885:0:b0:59f:61b6:f584 with SMTP id
+ v127-20020a814885000000b0059f61b6f584mr12136961ywa.9.1696720299279; Sat, 07
  Oct 2023 16:11:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231004112722.416877-1-sughosh.ganu@linaro.org>
- <20231004112722.416877-4-sughosh.ganu@linaro.org>
-In-Reply-To: <20231004112722.416877-4-sughosh.ganu@linaro.org>
+References: <20230924203953.1829820-1-sjg@chromium.org>
+ <20230924203953.1829820-9-sjg@chromium.org>
+ <20230924225937.GL305624@bill-the-cat>
+In-Reply-To: <20230924225937.GL305624@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Oct 2023 17:09:48 -0600
-Message-ID: <CAPnjgZ0_8FqJEarNvE6RN218PJWUGu1W0_f3iVjzBTibpQ1KFg@mail.gmail.com>
-Subject: Re: [PATCH 3/5] binman: capsule: Use dumped capsule header contents
- for verification
-To: sughosh.ganu@linaro.org
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Tom Rini <trini@konsulko.com>
+Date: Sat, 7 Oct 2023 17:10:10 -0600
+Message-ID: <CAPnjgZ0_ieX-PY4=1SomYztzX=12-W7zAkABRwrg27o=W3mS3A@mail.gmail.com>
+Subject: Re: [PATCH 08/25] fastboot: Avoid depending on CMDLINE
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Dmitrii Merkurev <dimorinny@google.com>, 
+ Heiko Schocher <hs@denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Samuel Holland <samuel@sholland.org>, 
+ Sean Anderson <sean.anderson@seco.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,67 +87,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sughosh,
+Hi Tom,
 
-On Wed, 4 Oct 2023 at 05:27, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Sun, 24 Sept 2023 at 16:59, Tom Rini <trini@konsulko.com> wrote:
 >
-> The various fields of a generated capsule are currently verified
-> through hard-coded offsets. Use the dump-capsule feature for dumping
-> the capsule header contents and use those for capsule verification.
+> On Sun, Sep 24, 2023 at 02:39:26PM -0600, Simon Glass wrote:
 >
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
->  tools/binman/ftest.py | 95 ++++++++++++++++++++++++-------------------
->  1 file changed, 54 insertions(+), 41 deletions(-)
-
-This looks good apart from a few nits below. However, the tests fail for me.
-
+> > When CMDLINE is not enabled, this code fails to build. Correct this by
+> > adding conditions.
+> >
+> > Note that this should not happen in normal use, since the use of
+> > 'select CMDLINE' will cause a visible warning. But it is needed for the
+> > sandbox build to pass without CMDLINE.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  drivers/fastboot/fb_command.c |  3 ++-
+> >  drivers/fastboot/fb_common.c  | 15 +++++++++++++--
+> >  2 files changed, 15 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+> > index 71cfaec6e9dc..4e52e6f0f8bf 100644
+> > --- a/drivers/fastboot/fb_command.c
+> > +++ b/drivers/fastboot/fb_command.c
+> > @@ -346,7 +346,8 @@ static char g_a_cmd_buff[64];
+> >
+> >  void fastboot_acmd_complete(void)
+> >  {
+> > -     run_command(g_a_cmd_buff, 0);
+> > +     if (IS_ENABLED(CONFIG_CMDLINE))
+> > +             run_command(g_a_cmd_buff, 0);
+> >  }
+> >
+> >  /**
+> > diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+> > index 4e9d9b719c6f..35b7aafe5af3 100644
+> > --- a/drivers/fastboot/fb_common.c
+> > +++ b/drivers/fastboot/fb_common.c
+> > @@ -132,6 +132,13 @@ void fastboot_boot(void)
+> >  {
+> >       char *s;
+> >
+> > +     /*
+> > +      * Avoid a build error; this will always have generated a Kconfig
+> > +      * warning about CMDLINE not being enabled
+> > +      */
+> > +     if (!IS_ENABLED(CONFIG_CMDLINE))
+> > +             return;
+> > +
+> >       s = env_get("fastboot_bootcmd");
+> >       if (s) {
+> >               run_command(s, CMD_FLAG_ENV);
+> > @@ -170,8 +177,12 @@ void fastboot_handle_boot(int command, bool success)
+> >
+> >       switch (command) {
+> >       case FASTBOOT_COMMAND_BOOT:
+> > -             fastboot_boot();
+> > -             net_set_state(NETLOOP_SUCCESS);
+> > +             if (IS_ENABLED(CONFIG_CMDLINE)) {
+> > +                     fastboot_boot();
+> > +                     net_set_state(NETLOOP_SUCCESS);
+> > +             } else {
+> > +                     net_set_state(NETLOOP_FAIL);
+> > +             }
+> >               break;
+> >
+> >       case FASTBOOT_COMMAND_CONTINUE:
 >
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index 8e419645a6..2b8871ab7e 100644
-> --- a/tools/binman/ftest.py
-> +++ b/tools/binman/ftest.py
-> @@ -121,9 +121,11 @@ COMP_BINTOOLS = ['bzip2', 'gzip', 'lz4', 'lzma_alone', 'lzop', 'xz', 'zstd']
->  TEE_ADDR = 0x5678
->
->  # Firmware Management Protocol(FMP) GUID
-> -FW_MGMT_GUID = 'edd5cb6d2de8444cbda17194199ad92a'
-> +FW_MGMT_GUID = '6DCBD5ED-E82D-4C44-BDA1-7194199AD92A'
->  # Image GUID specified in the DTS
-> -CAPSULE_IMAGE_GUID = '52cfd7092007104791d108469b7fe9c8'
-> +CAPSULE_IMAGE_GUID = '09D7CF52-0720-4710-91D1-08469B7FE9C8'
-> +# Windows cert GUID
-> +WIN_CERT_TYPE_EFI_GUID = '4AAFD29D-68DF-49EE-8AA9-347D375665A7'
+> All of this just means it now fails to work, yes?
 
-Please use lower-case hex
+It actually fails to build, since there is a Kconfig conflict, as
+mentioned in the commit message. The use of 'select FASTBOOT' when
+CMDLINE is not enabled produces an error.
 
->
->  class TestFunctional(unittest.TestCase):
->      """Functional tests for binman
-> @@ -7223,52 +7225,63 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
->          self.assertRegex(err,
->                           "Image 'image'.*missing bintools.*: bootgen")
->
-> +    def _GetCapsuleHeaders(self, data):
-
-This should have a function comment so it is clear what it is doing, returning.
-
-> +        capsule_file = os.path.join(self._indir, 'test.capsule')
-> +        tools.write_file(capsule_file, data)
-> +
-> +        out = tools.run('mkeficapsule', '--dump-capsule', capsule_file)
-> +        lines = out.splitlines()
-> +
-> +        re_line = re.compile(r'^([^:\-\t]*)(?:\t*\s*:\s*(.*))?$')
-> +        vals = collections.defaultdict(list)
-> +        for line in lines:
-> +            mat = re_line.match(line)
-> +            if mat:
-> +                vals[mat.group(1)] = mat.group(2)
-> +
-> +        return vals
-> +
-[..]
+I will see if I can do this another way.
 
 Regards,
 Simon
