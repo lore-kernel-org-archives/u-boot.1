@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEE97E95A6A
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 21:41:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E920BE95A6A
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 21:42:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AAB186E11;
-	Sat,  7 Oct 2023 23:41:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 005B786E37;
+	Sat,  7 Oct 2023 23:41:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="QANrZmBp";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="CSMZZ/c2";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="wSERj+n2";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="b52urS8W";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D3D086977; Sat,  7 Oct 2023 23:41:30 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 2FD9786977; Sat,  7 Oct 2023 23:41:32 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CB0386D3F
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 23:41:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78C1086B0C
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 23:41:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,47 +31,47 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4S2zJK10Mbz9snn;
- Sat,  7 Oct 2023 23:41:21 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S2zJJ1hdZz9sks;
+ Sat,  7 Oct 2023 23:41:20 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696714881;
+ s=mail20150812; t=1696714880;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DRu67jTGfIMlcAdLgXrYyMI7jKYC6HLWuDAUUpsY3Mo=;
- b=QANrZmBpAbnMwY5OVaQHMyGcGe7OTaWZCyJ4w/wOdMonFr3fW7o7mYrdWojZb1lzJayOjl
- brb5428frs0ZCJJ+A9KARVYCkf0X7gyyuX7X8rI9OW8VDz3by0U4Lqv6Ilcc3GHk1AT7pe
- ScaPb/LKthzukfUi6RVt0P/YbpxeobHVzW1miqkwR4IflvDLOvWmh0kmlHu3IGCI8qrEQW
- AInnH0JyP/p+vHzs3jmdrIoKnv3Ru5yPFaqclKxbSuZ6sIa1r9vQyGnYO3ccdUQnsTc+6M
- ENJVSUeArT0Lbo32/txmuid1u/y9GZ4qsKzn9HuUX4CTEu9ASvHhWZPv1IuMlw==
+ bh=L+tKkAb8u7o0PTYts8mTy15uXmYCKD841fR0Jc1wIj8=;
+ b=wSERj+n2OOJgRdw8RKnfmyHnAWIl+sfklZGY9dUDyWNhuO0MojXxI09U+dxj5SoZ4hDV88
+ NIVg7E6cCafZEm9gQDiWYwfTBYQzYFoYaPnopoHV9dAzLtHXvRkf2CSTpQ/B/3jKGjyXuN
+ +5mlOipcEJJpYi+JcLbuWRb08LlCbqvFcbhH9UnQgU/UHWltoqR7zWQXpsIv9NjGkbEedD
+ fGuGiqzcqUGIU9Dh6XC8Tw8WnFawpnmT7flZffIcZj5JZk668Sd3+/mG9ELKNzrKdXvnUi
+ EWMKaocgIDcVpBaBtXuySPFnw/HadpoaE7M7rFWGWzIhO40eXTf4SJyuiEPB0Q==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696714879;
+ s=mail20150812; t=1696714878;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DRu67jTGfIMlcAdLgXrYyMI7jKYC6HLWuDAUUpsY3Mo=;
- b=CSMZZ/c2H1kOW51phxA+cojKdf0Us8G7bl0/cGnOmJeHOKPtnm5hvywGdj2g5S85lankuo
- 4GCutAAi3wYoAOSSDy4zvsWP/bK3KAuvAMvsLMBBTaDbr+xWXTYJQtk3NiwwaMF3/9XfxN
- p08WW7jPtTpSBm/JpjnxBzyewnyuKq7isD7OEw+E/7ZMY1VA78c7Tjtb05knTZc2ST4IUu
- w9Ft8VigSwG883KnuTkRtiFumnWNLMKsxzVr8399YH4ZDtUzsx9h5/OdSe09ZmqNx4LOj0
- RpHfrJEd0t18WXI0Lpsb8ysXqMnUwdo1rIc1BiBgSea6/mj1DxiNXI2bmPt06A==
+ bh=L+tKkAb8u7o0PTYts8mTy15uXmYCKD841fR0Jc1wIj8=;
+ b=b52urS8W9WnLIyygHmB9+SBi7rI5ZL8yjyE8IjL4oack0JcrnBL4G3L5FMCHEurn3dV0du
+ 8Zz5YWzCQBzzTAQNTz1D1sdgHdegi4y8i+rYs9DRLPuNpDbcNYL/ad6Lt4fFfp0mloG6vC
+ 3RCPwWn0+6L+O/acc9YgK998lEGSBscoqRC7ujojMTbhdLNkCfsN9cVJ8W5+7l5PjRVV15
+ TOJHYTP+9LzVQ5RKY0bg4EDA1KtFl5OPLPLBTDPeOYIdcUMiQipzRiMDsOPKD3SRY+jgSd
+ vN5AE9Tfi4YciDjhWfLktswwE6/O6w0pG1ycUwvquwhrLTUmWsfhTftmNQ9r3w==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Mario Six <mario.six@gdsys.cc>, Nikhil M Jain <n-jain1@ti.com>
-Subject: [PATCH v2 4/9] configs: sandbox: Enable GETOPT for sandbox and
- sandbox64 target
-Date: Sat,  7 Oct 2023 23:41:01 +0200
-Message-Id: <20231007214106.15744-4-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 3/9] cmd: bdinfo: Implement support for printing ethernet
+ settings via bdinfo -e
+Date: Sat,  7 Oct 2023 23:41:00 +0200
+Message-Id: <20231007214106.15744-3-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20231007214106.15744-1-marek.vasut+renesas@mailbox.org>
 References: <20231007214106.15744-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 97bcc3473434b0b906f
-X-MBO-RS-META: rp5q6orpjrhp8jwpx64uqen6qxq3dmcx
+X-MBO-RS-META: 8a9ezt774zdi11s49wdkccotjce3gm8h
+X-MBO-RS-ID: 8f57ac5537f97c6bcb9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,8 +88,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable GETOPT so that 'bdinfo' command with getopt() support can be
-tested in CI.
+Add support for printing ethernet settings only via 'bdinfo -e' .
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
@@ -101,34 +100,30 @@ Cc: Simon Glass <sjg@chromium.org>
 ---
 V2: Add RB from Simon
 ---
- configs/sandbox64_defconfig | 1 +
- configs/sandbox_defconfig   | 1 +
- 2 files changed, 2 insertions(+)
+ cmd/bdinfo.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index 1a033b22018..e937ac66964 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -262,6 +262,7 @@ CONFIG_CMD_DHRYSTONE=y
- CONFIG_TPM=y
- CONFIG_LZ4=y
- CONFIG_ERRNO_STR=y
-+CONFIG_GETOPT=y
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 01830c7bd25..019e41580c1 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -338,6 +338,7 @@ CONFIG_ECDSA_VERIFY=y
- CONFIG_TPM=y
- CONFIG_SHA384=y
- CONFIG_ERRNO_STR=y
-+CONFIG_GETOPT=y
- CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/cmd/bdinfo.c b/cmd/bdinfo.c
+index c720ee6f9b6..79106caeec2 100644
+--- a/cmd/bdinfo.c
++++ b/cmd/bdinfo.c
+@@ -193,10 +193,15 @@ int do_bdinfo(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 		return bdinfo_print_all(bd);
+ 
+ 	getopt_init_state(&gs);
+-	while ((opt = getopt(&gs, argc, argv, "am")) > 0) {
++	while ((opt = getopt(&gs, argc, argv, "aem")) > 0) {
+ 		switch (opt) {
+ 		case 'a':
+ 			return bdinfo_print_all(bd);
++		case 'e':
++			if (!IS_ENABLED(CONFIG_CMD_NET))
++				return CMD_RET_USAGE;
++			print_eth();
++			return CMD_RET_SUCCESS;
+ 		case 'm':
+ 			print_bi_dram(bd);
+ 			return CMD_RET_SUCCESS;
 -- 
 2.40.1
 
