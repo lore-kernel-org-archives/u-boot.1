@@ -4,24 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB83E95A6A
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 21:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D36C9E95A6B
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 21:36:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 829AE86DAF;
-	Sat,  7 Oct 2023 23:35:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 05AB286DC5;
+	Sat,  7 Oct 2023 23:35:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HBOMSPZZ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="n6GaVS84";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="n98EVjYS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1578F86568; Sat,  7 Oct 2023 23:35:52 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 0463386DE3; Sat,  7 Oct 2023 23:35:54 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30DE686DAF
+ by phobos.denx.de (Postfix) with ESMTPS id 397FC86DB8
  for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 23:35:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
@@ -30,53 +28,47 @@ Authentication-Results: phobos.denx.de;
 Received: from smtp2.mailbox.org (smtp2.mailbox.org
  [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-384) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4S2z9v73g3z9sQm;
- Sat,  7 Oct 2023 23:35:47 +0200 (CEST)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4S2z9s01Hxz9scY;
+ Sat,  7 Oct 2023 23:35:45 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696714548;
+ s=mail20150812; t=1696714545;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5G05Y21WRXw8D06L+tAX/543vIG4QeO/yRfmORexH4I=;
- b=HBOMSPZZqqKauvK0WWOEDq154UyWyY6ggHU+1sy1r1ZpfDNtvWZ+8bqgwrarRlPBQ3dF/B
- ZaaNHJLX1PogOdduvXBauOoiAU8g2fVkDCyNdaspdRU0qeD6WVgZ0iGLToCArVpw4lssMz
- PJplPbcVz8eiCGZsIMqDiL6GYvXUCsvfZxsr4WmTBA8YAcFppVttFrpYM+0pvDpzNdut3f
- ZSKQvvuguo7IShX+adqTHA1T5e2rWBPMmWRvFhKJHpwIrjTwbLIv7ePLd6uBXEqvrdQEbI
- 1adCA5hEQRu1aSXsdVYxKsoutGaf8krih9LtfyALold+uNA72Imp8cygeZJGpg==
-Message-ID: <20e31b28-5bd0-4d29-b040-8d4c49e0b26a@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1696714546;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5G05Y21WRXw8D06L+tAX/543vIG4QeO/yRfmORexH4I=;
- b=n6GaVS84ZFjL2Bjy6iszcnbxqH1Sk/5t3BMg/5dpEoHrSXqbnylPGj1qPuFFLVoAu91Q4K
- /rRYyffP+2uCRj0U2DxPdTBKd7BpnVIog4JPoPKTMVW58fbwYfXkUHiVLK+dccRMJP5ewG
- ed9+/gHzUNAQXT8bdpsKHPcMUrlzo4hy0i3Xs1dwav8vJkrGlFvrYnd0pX3zKW2eDBmtge
- TekChPC/CamqUghSLjoE6bnR0vJ2ejAnGpf+5MLq1lgIkLlxahszOztObONIyKwz/saYBv
- mAUc9LztpIVIi+PcFkRRktPpaHj1q9CTlhjKhTYAAW3c57bCmFjNRX/DAoPiag==
-Date: Sat, 7 Oct 2023 23:32:24 +0200
+ bh=ZvRIQINfs9ubQM2f7pRx60SPrzC/0ATM3AV88NQL/Po=;
+ b=n98EVjYSb5KANTLmh6LUeXjBIgHBMOb3gl1P5n+Tjpah7KzcuJ9La+l7QbjOkGxJ70df+P
+ kcyzYvKAErqAvRnb18LcV5MnKNPA8GncI//mr5crXC6uYpr4TG56p6grzk5mPYe71gXFeg
+ vhmcyaBdyeg/stgRKUXDUD/k+M1bn8RNQ069pQARdFCtied1MIo3u9u37w8vwEd8rWxM/Y
+ BKgKIZS2iQJPQIfSGUGkR8iZ4Ver522g3Ei+bsC8NWm4zs7xAhcGcqORMbAszetbFJ4VDv
+ iAIiPoRzXBDBITGoQkX81+W7KHoG9Few5NXMc7ZbI4zm/9OO/eGV8RqgnkMs8w==
+Message-ID: <8e04236c-a262-41e3-b891-5b22afcbd86f@mailbox.org>
+Date: Sat, 7 Oct 2023 23:14:06 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v5 5/6] sysinfo: rcar3: Use int instead of char for
- revision
+Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
 Content-Language: en-US
-To: Detlev Casanova <detlev.casanova@collabora.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>, Tam Nguyen <tam.nguyen.xa@renesas.com>,
- Simon Glass <sjg@chromium.org>
-References: <20231002152142.76516-1-detlev.casanova@collabora.com>
- <20231002152142.76516-6-detlev.casanova@collabora.com>
+To: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Hai Pham <hai.pham.ud@renesas.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20230920124212.63535-1-paul.barker.ct@bp.renesas.com>
+ <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
+ <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
+ <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
+ <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
+ <20231004134308.oaeqeolblr4ex2l5@GBR-5CG2373LKG.adwin.renesas.com>
+ <9893a1f5-b085-46f7-a694-f186ab764cd2@mailbox.org>
+ <20231004163858.zeuxy64olun5iini@GBR-5CG2373LKG.adwin.renesas.com>
+ <1bdc45f0-8c32-4347-b238-c6ee8037f620@mailbox.org>
+ <6514beaa-6584-84de-883a-69933e0f54db@bp.renesas.com>
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231002152142.76516-6-detlev.casanova@collabora.com>
+In-Reply-To: <6514beaa-6584-84de-883a-69933e0f54db@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 8nobxd9bjpo3q89diitms565sy84qdqn
-X-MBO-RS-ID: fa8fd5a4982a594c735
-X-Rspamd-Queue-Id: 4S2z9v73g3z9sQm
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 94251a03a33a95a245c
+X-MBO-RS-META: zb7kx7zrkman3ecqaqws696mn14d9n97
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,53 +85,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/2/23 17:20, Detlev Casanova wrote:
-> To be used with the sysinfo command, revision values must be considered
-> as integers, not chars as some boards will implement BOARD_REVISION_*
-> and might use numbers greater than 9.
+On 10/5/23 14:08, Paul Barker wrote:
+> On 04/10/2023 20:41, Marek Vasut wrote:
+>> On 10/4/23 18:38, Paul Barker wrote:
+>>> On Wed, Oct 04, 2023 at 05:17:55PM +0200, Marek Vasut wrote:
+>>>> On 10/4/23 15:43, Paul Barker wrote:
+>>>>> On Wed, Oct 04, 2023 at 02:26:49PM +0200, Marek Vasut wrote:
+>>>>>> On 10/4/23 10:48, Paul Barker wrote:
+>>>>>>> On 03/10/2023 14:23, Marek Vasut wrote:
+>>>>>>>> On 9/20/23 14:42, Paul Barker wrote:
+>>>>>>>>> Extend the existing driver to support the SCIF serial ports on the
+>>>>>>>>> Renesas RZ/G2L (R9A07G044) SoC. This also requires us to ensure that the
+>>>>>>>>> relevant reset signal is de-asserted before we try to talk to the SCIF
+>>>>>>>>> module.
+>>>>>>>>>
+>>>>>>>>> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>>>>>>>> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+>>>>>>>>> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+>>>>>>>>> ---
+>>>>>>>>>       arch/arm/mach-rmobile/Kconfig |  1 +
+>>>>>>>>>       drivers/serial/serial_sh.c    | 32 ++++++++++++++++++++++++++++++--
+>>>>>>>>>       drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
+>>>>>>>>>       3 files changed, 49 insertions(+), 3 deletions(-)
+>>>>>>>>>
+>>>>>>>>> diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
+>>>>>>>>> index 973e84fcf7ba..0ab22356aee5 100644
+>>>>>>>>> --- a/arch/arm/mach-rmobile/Kconfig
+>>>>>>>>> +++ b/arch/arm/mach-rmobile/Kconfig
+>>>>>>>>> @@ -77,6 +77,7 @@ config RZG2L
+>>>>>>>>>       	imply RENESAS_SDHI
+>>>>>>>>>       	imply CLK_RZG2L
+>>>>>>>>>       	imply PINCTRL_RZG2L
+>>>>>>>>> +	imply SCIF_CONSOLE
+>>>>>>>>>       	help
+>>>>>>>>>       	  Enable support for the Renesas RZ/G2L family of SoCs, including the
+>>>>>>>>>       	  the RZ/G2L itself (based on the R9A07G044 SoC).
+>>>>>>>>> diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
+>>>>>>>>> index 5e543dbf3d58..a2e9a57137a6 100644
+>>>>>>>>> --- a/drivers/serial/serial_sh.c
+>>>>>>>>> +++ b/drivers/serial/serial_sh.c
+>>>>>>>>> @@ -17,6 +17,8 @@
+>>>>>>>>>       #include <linux/compiler.h>
+>>>>>>>>>       #include <dm/platform_data/serial_sh.h>
+>>>>>>>>>       #include <linux/delay.h>
+>>>>>>>>> +#include <dm/device_compat.h>
+>>>>>>>>> +#include <reset.h>
+>>>>>>>>>       #include "serial_sh.h"
+>>>>>>>>>       DECLARE_GLOBAL_DATA_PTR;
+>>>>>>>>> @@ -79,8 +81,16 @@ sh_serial_setbrg_generic(struct uart_port *port, int clk, int baudrate)
+>>>>>>>>>       static void handle_error(struct uart_port *port)
+>>>>>>>>>       {
+>>>>>>>>> -	sci_in(port, SCxSR);
+>>>>>>>>> -	sci_out(port, SCxSR, SCxSR_ERROR_CLEAR(port));
+>>>>>>>>> +	/* The RZ/G2L datasheet says that error conditions are cleared by
+>>>>>>>>> +	 * resetting the error bits in the FSR register to zero.
+>>>>>>>>
+>>>>>>>> Can you be more specific here ?
+>>>>>>>>
+>>>>>>>> It doesn't seem Linux sh-sci.c driver does anything special for G2L, so
+>>>>>>>> is this special case really needed ?
+>>>>>>>
+>>>>>>> On page 1268 of the datasheet (R01UH0914EJ0130 Rev.1.30):
+>>>>>>>
+>>>>>>> "DR is cleared to 0 when DR = 1 is read and then 0 is written to the DR
+>>>>>>> flag."
+>>>>>>>
+>>>>>>> On page 1270:
+>>>>>>>
+>>>>>>> "[Clearing condition]
+>>>>>>> ● When 0 is written to ER after it has been read as 1"
+>>>>>>>
+>>>>>>> So zeros must be written to clear these errors, not ones.
+>>>>>>>
+>>>>>>> We have an open task to investigate the issue in the Linux driver and
+>>>>>>> fix it.
+>>>>>>
+>>>>>> Is the G2L UART broken in Linux ?
+>>>>>
+>>>>> Likely yes, but we need to reproduce the issue.
+>>>>>
+>>>>>> Does it misbehave in U-Boot ?
+>>>>>
+>>>>> Yes, before I changed this, if a framing error occurred it could never
+>>>>> be cleared and the serial port stopped sending/receiving data.
+>>>>>
+>>>>> The framing error was triggered by accident by unnecessarily re-doing
+>>>>> pinmuxing for the serial port after TrustedFirmware had already set it
+>>>>> up correctly. Since SCIF0 is wired to an FTDI USB/serial adaptor chip on
+>>>>> the SMARC carrier board, it seems very difficult to trigger a framing
+>>>>> error in any other way, the FTDI chip is too well behaved.
+>>>>
+>>>> Is it possible to trigger this on RZ/G2<non-L> with SCIF on those platforms
+>>>> as well ?
+>>>
+>>> It's not been seen or reported to my knowledge, but it's on our list to
+>>> look into further.
+>>
+>> Can you give it a quick try ? I'd really like to avoid G2L specific
+>> behavior here if it can be avoided.
+>>
+>> Is there a testcase ?
 > 
-> Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
-> ---
->   drivers/sysinfo/rcar3.c | 73 ++++++++++++++++++++++-------------------
->   1 file changed, 39 insertions(+), 34 deletions(-)
 > 
-> diff --git a/drivers/sysinfo/rcar3.c b/drivers/sysinfo/rcar3.c
-> index 7b127986da7..633e80bc19b 100644
-> --- a/drivers/sysinfo/rcar3.c
-> +++ b/drivers/sysinfo/rcar3.c
-> @@ -68,8 +68,9 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
->   	bool salvator_xs = false;
->   	bool ebisu_4d = false;
->   	bool condor_i = false;
-> -	char rev_major = '?';
-> -	char rev_minor = '?';
-> +	char rev[4] = "?.?";
-> +	u8 rev_major = 0;
-> +	u8 rev_minor = 0;
->   
->   	switch (board_id) {
->   	case BOARD_SALVATOR_XS:
-> @@ -77,81 +78,85 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
->   		fallthrough;
->   	case BOARD_SALVATOR_X:
->   		if (!(board_rev & ~1)) { /* Only rev 0 and 1 is valid */
-> -			rev_major = '1';
-> -			rev_minor = '0' + (board_rev & BIT(0));
-> +			rev_major = 1;
-> +			rev_minor = board_rev & BIT(0);
-> +			snprintf(rev, sizeof(rev), "%u.%u", rev_major, rev_minor);
->   		}
->   		snprintf(priv->boardmodel, sizeof(priv->boardmodel),
-> -			 "Renesas Salvator-X%s board rev %c.%c",
-> -			 salvator_xs ? "S" : "", rev_major, rev_minor);
-> +			 "Renesas Salvator-X%s board rev %s",
-> +			 salvator_xs ? "S" : "", rev);
-> +
->   		return;
+> The case we're interested in here is the Receive Error (ER) & Break
+> Detect (BRK) conditions. I've done some further datasheet digging...
+> 
+> RZ/G2L datasheet says these are cleared by writing zero to the
+> appropriate bits of the FSR register.
+> 
+> RZ/G2{H,M,N,E} datasheet says the same (pages 50-18 & 50-19 of
+> R01UH0808EJ0111 Rev.1.11).
+> 
+> The R-Car Gen3 Hardware Manual says the same (pages 55-18 & 55-19 of
+> R19UH0105EJ0230 Rev.2.30).
+> 
+> For R-Car S4, there is an Excel spreadsheet attached to page 105-5 of
+> the datasheet (R19UH0161EJ0100 Rev.1.00) which again says the same.
+> 
+> For R-Car V4H, the relevant info is on pages 105-16 & 105-18 of the
+> datasheet (R19UH0172EJ0081 Rev.0.81) and says the same.
+> 
+> On the RZ/G2L I was able to reproduce a break condition by changing
+> pinmux settings after the SCIF interface has been configured. You could
+> try this out on an R-Car system, but I don't think it's guaranteed to
+> cause a break condition, it may depend on how the port input is
+> implemented in those SoCs. From my reading, the only guaranteed way to
+> cause a break condition is to hold the Rx signal low, and you might need
+> to solder on some extra wires on to a board to be able to do that.
 
-Extra newline got added just before the return here. If you want to do 
-V6 with that fixed, that would be nice. In either case:
+Can't you simply send a BREAK from terminal program ?
+In minicom, I think that's meta-F B .
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> We should still fix the error handling here, even if the boards we have
+> don't easily cause Receive Errors or Break conditions, other folks may
+> have their own boards based on these SoCs.
+> 
+> If you're happy I'll go ahead and check IS_ENABLED(CONFIG_RCAR_64) here
+> instead of IS_ENABLED(CONFIG_RZG2L).
 
-Thanks !
+Based on the input I am getting from you here, it seems to me we should 
+just use the G2L case as the common case for all systems, without any 
+special casing, right ?
