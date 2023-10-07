@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DDD2E95A62
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 20:42:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4BE3E95A6A
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 20:42:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A55FC86EB3;
-	Sat,  7 Oct 2023 22:38:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3273C86EF1;
+	Sat,  7 Oct 2023 22:38:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jH4Z+XjK";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aZD/fi/X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4A9286DCE; Sat,  7 Oct 2023 22:37:59 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id B0DCF863CF; Sat,  7 Oct 2023 22:38:01 +0200 (CEST)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9C1D86DFA
+ by phobos.denx.de (Postfix) with ESMTPS id E47E786DFE
  for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 22:37:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-40572aeb73cso30048475e9.3
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-9adb9fa7200so722655766b.0
  for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 13:37:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1696711075; x=1697315875; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=zQzZGxGZhbbHt6K1M9mIXSjXBoB3NHieuWq29SkZhJc=;
- b=jH4Z+XjK6vglHpXoQFeMhW+6ob/2CcfnhA7ZI/fbMltsi6QmJi5YXyhQrR9zQGA+ku
- IvTNDc8WzzgQldUPDzPoWZmOykNgp837Guf1vrov5OGqazs/BmjfMhNUYyqnLeFumuoF
- zC2IiBHCwPg7f4pHq/uQvaxiDBrhAQBxJYQnU=
+ bh=YF/Zz4emXh4ZDoXdQ+QIYOFfruzzH+tndRZ/TYpRb80=;
+ b=aZD/fi/Xq10aP1FvvejzXKbtP+Q6/OyIf5/TxM4dbh26HgSg/PPP7lSMckuuFmD9K7
+ 8rsJa3/jo6V0TsGzO9Z0B0o2G67i74otbsnkGHk7MmClEytshVGZDET4iNIfVPcLrCWO
+ M9RQkPSBsMG7O/wBMMQOkmSLlATpOSCUxJJIA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1696711075; x=1697315875;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=zQzZGxGZhbbHt6K1M9mIXSjXBoB3NHieuWq29SkZhJc=;
- b=RcjJGU4x9tnaRdl3Mkd7p+5b/16H0jPKQNzWw5X3nSq/DzFsY3U7U7tuYeNCvgDHzZ
- OSbNzvpY00+A87n0Q6+V9fjQdecldJO3294OXcnRIQvUKosv1ojMv6GvxklLLxGXOBr7
- /H3Q55xvKBQzStpPogEeE29NTbosbt9xu5tLhohds7PfwSWnKKCbDYZVCYTFMTsTu42o
- YRvrboPzpU3P+3DmZ0vO3bOdnDOGy732YfkM1Jxu0EQUUzLQAaIIDJcUQqN4AMdNO6Db
- jvR12uCJ2lYgTUE4DxtUFbUAsgPBPesQOrRuWMtQnxXe+RIYC3zeV+C4bJNDWqOjNZTG
- ZNOA==
-X-Gm-Message-State: AOJu0YzmEpDel45KcNyK9RejBjzaOCWaDzpA/Q24z1oGufubR14olSqw
- 0/GBtUSCtmUBqBg/UkypIbc+Qp0nQ2tEdnE94jS9RA==
-X-Google-Smtp-Source: AGHT+IHFSdyMWHt9PaDDkbswlmVzLpwoBoxA5j6YDPjnKXKIRrEyiGdAPURfe6kQw5DLU15CXfmv9LCfr5CEahE7kjI=
-X-Received: by 2002:a5d:5309:0:b0:31f:8276:5d04 with SMTP id
- e9-20020a5d5309000000b0031f82765d04mr10469918wrv.34.1696711074908; Sat, 07
- Oct 2023 13:37:54 -0700 (PDT)
+ bh=YF/Zz4emXh4ZDoXdQ+QIYOFfruzzH+tndRZ/TYpRb80=;
+ b=muuxhSk/T993zk55KcOLVSHDf+1CrA6blBaKrxx9QFE2rFFGMBMw9/196ZfdwGD5zW
+ ehtoU0/PzmXLI2nsxOW5+qQNDLPKR4m3qQeTBNh3Spdeq9aAUAoO8A62JhhYg+uNVfbv
+ DEC4STOpkrCWrwCllv/iRWAO10n/gdd4+fxx5sNGhvtAnCwvGwjwodYSRpjYhStSvbeC
+ p8t+8XFPaNuKMz7nYryiapWeKRwY5kcnqMgmb3+aiEgoCV/3Yc8ScuGJbhXvNoXcFsPa
+ fLJuY/bBlzIcuMMO9Gf7LVhSOl5SKuocGXv3i0Q3Oo+2PLAhFHyUB/pa7WpxeMbbuRJU
+ dKoA==
+X-Gm-Message-State: AOJu0YxPt7lMkojDxvxqIdd9oLnKgQ+B6rReYINS4NGkEa0PZWSYrD5F
+ iLVLQ8V5IJ8S3MOz2pZzE0A3UvnrxxefeFSxbCRuNQ==
+X-Google-Smtp-Source: AGHT+IFakyC31UhT3BPX4imIzsNZXZK4LUC8nXKI1bKzv7j0jOqsvLH4TDbmW4F9GQ9VilyUenAl5VbiTOIBJE+TSww=
+X-Received: by 2002:a17:907:1c1e:b0:9a5:7dec:fab9 with SMTP id
+ nc30-20020a1709071c1e00b009a57decfab9mr7116821ejc.9.1696711075345; Sat, 07
+ Oct 2023 13:37:55 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
- HTTPREST; Sat, 7 Oct 2023 13:37:53 -0700
+ HTTPREST; Sat, 7 Oct 2023 13:37:54 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ3AXRPMJSWDFDXuERVrrRowGJgvjufQF21VjGB0zfohVA@mail.gmail.com>
-References: <CAPnjgZ3AXRPMJSWDFDXuERVrrRowGJgvjufQF21VjGB0zfohVA@mail.gmail.com>
- <20230923194424.1739224-14-sjg@chromium.org>
+In-Reply-To: <CAPnjgZ3oE_iFqrsenJ-q4Ha0N0Q1CicCc8WN7RYzLZhYZ-cSmQ@mail.gmail.com>
+References: <CAPnjgZ3oE_iFqrsenJ-q4Ha0N0Q1CicCc8WN7RYzLZhYZ-cSmQ@mail.gmail.com>
+ <20230923194424.1739224-13-sjg@chromium.org>
  <20230923194424.1739224-1-sjg@chromium.org>
-Date: Sat, 7 Oct 2023 13:37:53 -0700
-X-Google-Sender-Auth: KevHw_MRlrUpzWlORoErA8a2Aks
-Message-ID: <CAPnjgZ0P6SErUrYB1fn699YWjr8ehW47a3pr=ome_RcjC+LrHA@mail.gmail.com>
-Subject: Re: [PATCH v3 13/27] moveconfig: Correct use of members not declared
- in __init__()
+Date: Sat, 7 Oct 2023 13:37:54 -0700
+X-Google-Sender-Auth: gJPIGZu5yezZN5386W6_b6iRJJY
+Message-ID: <CAPnjgZ25OP1_LPMLLL1+HuUU29xhajo2AQFv9DLUEBoRfNxFAA@mail.gmail.com>
+Subject: Re: [PATCH v3 12/27] moveconfig: Correct non-snake variables names
 To: Simon Glass <sjg@chromium.org>
 Cc: Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
@@ -87,15 +86,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix these pylint warnings.
+Correct some variable names that do not conform to snake case, with the
+three-character minimum.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/moveconfig.py | 4 ++++
- 1 file changed, 4 insertions(+)
+ tools/moveconfig.py | 70 ++++++++++++++++++++++-----------------------
+ 1 file changed, 35 insertions(+), 35 deletions(-)
 
 Applied to u-boot-dm, thanks!
 Applied to u-boot-dm, thanks!
