@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF579E95A62
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 20:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BBDFE95A6A
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 20:39:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB60C86E22;
-	Sat,  7 Oct 2023 22:37:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F63086E8B;
+	Sat,  7 Oct 2023 22:37:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bYK0SkyH";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gJQfxeYQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F119986DCE; Sat,  7 Oct 2023 22:37:48 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id C4A4186DDA; Sat,  7 Oct 2023 22:37:53 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C7E286A02
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 22:37:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6376E86DC5
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 22:37:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-533e7d127d4so5661474a12.3
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 13:37:43 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9ae7383b7ecso966056966b.0
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 13:37:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696711063; x=1697315863; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696711065; x=1697315865; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kr190rY0w5eIW9RTBZ93v980OBd+K6ohan0+3qX/6E8=;
- b=bYK0SkyH84ftdduEEz6ngkFZY9jczlfu3x6/AzBbwJEfevPgk1+Mh4xBeL+5GZDaEP
- Rit2WEzUk0SL/i/gkffcYI16XiWbyb82VWSehcWxkLImDxXv60rNYjZga1whWyjdNrwG
- 2sprtXwj2fOl+5uysNrl0CUa8KCCRzOxRzcSk=
+ bh=QTZMfI9RNEflbpbZzxg4NgKnaXO7j0vbqnG58eCOLw4=;
+ b=gJQfxeYQ1K4qe/xBKTOErpKsBCAQux31kF11jMhh2hamawzyX7f/AKppgJ6d3Rxo5a
+ BUchB3iyW+WO500oBkVkkZTafwSYLbekf8WABZSvnhobTImH3s6z90pD5Lm50drAK/Ta
+ Kj3oupZaH70NWfJeja3GlTUGrQUs1ADt7lS6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696711063; x=1697315863;
+ d=1e100.net; s=20230601; t=1696711065; x=1697315865;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kr190rY0w5eIW9RTBZ93v980OBd+K6ohan0+3qX/6E8=;
- b=MgH6cxZemxAN/WzH2LeeFxom7T2SM8l3c7xFHzDDMVz0wSGuPvoZC2v4xjrQJP5Phb
- 0RLhMrreCgc4vut6ogu0UTY/vV2RCP9ArGMnS7O+9ejdjWaUttyeu0fKc6eR3aYktKBQ
- JY2dB+gutqSfmXblOQrBAR9HfvOKXretKtL2Ec8OnrgVb7qrlLz8cQ14LO0Jgb44Nx0J
- dVQJ8v2uicSwBypJE+SllVHzrSXzbyb2ASoPZo5ql+oBWTZSYM2nnW/yOnmz2px3tGOt
- 0anfrRic/nKEjnX/WO+zkBoL+CO6ZSsSh83r5qEVqzDsLaUrbjYXIfPXDnzNbWb0UgYY
- T8PA==
-X-Gm-Message-State: AOJu0YwKNqs7e1O7q7UGdTqzzlSLaXNSIrny4MEFnNoO8GudkyVApT62
- ypCq7ka2vfCuxKOgbiK8ETTB3GBb+rI4/stT210jCw==
-X-Google-Smtp-Source: AGHT+IFYNIrNPuIyqwbj/VJ9HbjrS5LxFnxHSiQemZPt5WbO81dSnW0EzMc9IP/1X5XVigDiWyI3kdSavK7bwMYxCZ8=
-X-Received: by 2002:aa7:db43:0:b0:530:f880:ca74 with SMTP id
- n3-20020aa7db43000000b00530f880ca74mr9922778edt.28.1696711062872; Sat, 07 Oct
- 2023 13:37:42 -0700 (PDT)
+ bh=QTZMfI9RNEflbpbZzxg4NgKnaXO7j0vbqnG58eCOLw4=;
+ b=DPAgUITAwWdJzmYx1ncFlvI9nestR9CdcK/HrcDXFDFPjGlKkZMJVsSwNs0Jk3/Qug
+ nBJZREP22has7quYs2358hgzSB5DfDSs8xPqlTpqDbnax//95Y5lgOci1ztSXDEfK8GA
+ oHwi6ViZ0yzlXHL+AgZ3Rt3Mdv4kkzMjUVtukZo88NGMnv9zNvRUns1bXibz8eR3hvWD
+ gg7pHmkz3VDOZydohgEQnbNc0REsea3m9ahy8/ZixHEUCk6My5qDcjmQ5O0zEkxazwLj
+ yyECOTxXCvg3NkElp7hX7GBoy4hf+/4Jt98PFjaDDw7fFQrVf5jHwZ9Yrxz1m16O9k+d
+ EE1g==
+X-Gm-Message-State: AOJu0Yx7aZp69CT4kNC27nsNjsTWhMbr4cGf596XwKooO3ieUa3ouuOE
+ UCjBcHhvq1jSXk/YrQevl09e/dw+t2XdU00AaH4DZw==
+X-Google-Smtp-Source: AGHT+IEQPBTRaopqP21ptbcKqDd3xrh3EWhZgfr3cX0fsmECkWPbQMlWDSDJSM+nXYu0B/qABy/ETUKBMAUuvceOf58=
+X-Received: by 2002:a17:907:9616:b0:9a4:11a3:c32b with SMTP id
+ gb22-20020a170907961600b009a411a3c32bmr6015244ejc.29.1696711064632; Sat, 07
+ Oct 2023 13:37:44 -0700 (PDT)
 Received: from 480794996271 named unknown by gmailapi.google.com with
  HTTPREST; Sat, 7 Oct 2023 13:37:42 -0700
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <CAPnjgZ2Q7jDyqkR63=1ws+g4LR6LGOAuYUkbuFWULad05diEXA@mail.gmail.com>
-References: <CAPnjgZ2Q7jDyqkR63=1ws+g4LR6LGOAuYUkbuFWULad05diEXA@mail.gmail.com>
- <20230923194424.1739224-23-sjg@chromium.org>
+In-Reply-To: <CAPnjgZ2fO-2yeotg2NDwnFfbyuynBtQOoC5Q+CzfwLA----79g@mail.gmail.com>
+References: <CAPnjgZ2fO-2yeotg2NDwnFfbyuynBtQOoC5Q+CzfwLA----79g@mail.gmail.com>
+ <20230923194424.1739224-22-sjg@chromium.org>
  <20230923194424.1739224-1-sjg@chromium.org>
 Date: Sat, 7 Oct 2023 13:37:42 -0700
-X-Google-Sender-Auth: nDTkh6UROxO8Md2oJg7mPlbz88g
-Message-ID: <CAPnjgZ3FEzS87uSq-+OewGW7LWvJsObdrQU4L9uE6WCz96BYLA@mail.gmail.com>
-Subject: Re: [PATCH v3 22/27] moveconfig: Show a summary at the end
+X-Google-Sender-Auth: MsrN4ai7hZGcmaJBqBiezLYMZcE
+Message-ID: <CAPnjgZ1KPOR+dLhRT-h6Qd41rxY7wpeF9NtfJe0pjUOuaXB0Sw@mail.gmail.com>
+Subject: Re: [PATCH v3 21/27] moveconfig: Show failures in progress
 To: Simon Glass <sjg@chromium.org>
 Cc: Masahiro Yamada <masahiroy@kernel.org>, Tom Rini <trini@konsulko.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
@@ -86,17 +86,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than printing all the failed boards, which are now easily visible
-on the terminal, just show a summary. Sort it by defconfig and drop the
-'_defconfig' suffix.
+Show the number of accumulated failures when processing. Use a shorter
+format with colour.
+
+An unwanted space appears before the defconfig name on every item except
+the last. Fix that while we are here.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- tools/moveconfig.py | 28 +++++++++++++++-------------
- 1 file changed, 15 insertions(+), 13 deletions(-)
+ tools/moveconfig.py | 26 +++++++++++++++++++-------
+ 1 file changed, 19 insertions(+), 7 deletions(-)
 
 Applied to u-boot-dm, thanks!
 Applied to u-boot-dm, thanks!
