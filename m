@@ -4,72 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F69EE95A62
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 19:37:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB6E9E95A62
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 20:19:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4BB086A02;
-	Sat,  7 Oct 2023 21:37:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 63252869C8;
+	Sat,  7 Oct 2023 22:19:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TF6Yf+/1";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="vfzM0gsA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2657786ACA; Sat,  7 Oct 2023 21:37:08 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id D836D86D61; Sat,  7 Oct 2023 22:19:11 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C88D86961
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 21:37:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EDD2869C8
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 22:19:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5a229ac185aso39570627b3.1
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 12:37:01 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-9b9faf05f51so332745366b.2
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 13:19:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696707420; x=1697312220; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=NItRSEBr0QtiG7blGpCzc16od46YIQheRW57lGGnYk4=;
- b=TF6Yf+/18ShSXarSjKlWr0Nxb/ukU2O1Oj64nQRAuXXmojoHnbf4GsdYXlmshTb/nm
- PbLXdpSeqphUy7NwAWV1E5xzRfOM2qivqjWbAPRQCYW0R602XWOcYQg+xBBUKLkfPI8l
- ZgNYF2280qfRHMGQhRExK0T4BR9J6fEzXsgKY=
+ d=google.com; s=20230601; t=1696709947; x=1697314747; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zArO69o+8CfMqYbQMdZDO9gO3I+1xCAd6we+462qm5Q=;
+ b=vfzM0gsAnU44QBvZG5Nl5SEDVqJ5PAIwxZy99X/LlpWkBN1eLhANIyabC6Zh7u7E/L
+ Zz+FPPv6OUGlaSpqkYZ2BtowrLfDk7BplwdntSfTyZSVbBJDrFLushzuAuQcfSRiVUId
+ WwXREGAtYQw2oYSZ8048WQhFUG3tgMHDzn4/xtpd4Gbc8TdJ6DTBz9MqNZ+JPCMmmMvF
+ OdrjiXr+D3HQRq/tUDo5oT0kgm8bp2DZkTV05HNrkUfrWagvkbajLr+uIiN3KzrQ0ZO/
+ eF5xMUEGKihBX1D0iQZvUuDFspOwLg7X0lktDvcSAbcWnkA+kqUTBVT2AV6MziWdTvYu
+ Lsrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696707420; x=1697312220;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=NItRSEBr0QtiG7blGpCzc16od46YIQheRW57lGGnYk4=;
- b=gjJJLkGgauVzbvqYIJL+cgyqFsiiG3Nk9UhfsKEeMj0jZbUqYM4IZdNZ1BLP+O/SUO
- JEriaEro7HSy9h2dIfRj4n3ys2dLJ50s3w38iD5VqKHG+arll3GV6p7SZkzQvNNwaVN/
- ecLIGVTZqS1pHHorUrVd1ekk7macxE+xmR9xlUMZeZEWNbq2RA4vGIOWa/8NS+ap9Pxs
- JLubJLDsONuH/vO4NgBWXZTpNtyHGGArYHx1Gmy0l1jb/og05XqlOoiqwkslaCDXHfzD
- AnPX4GgsjNksYY+fBVHdp2ipyvIPnl0DZK0S8bkCEgGKaE5ADktg5YeM0JI92liiaUqi
- UrDg==
-X-Gm-Message-State: AOJu0YwNeyzL6g2UXmr9F2KkAxH0XSnqBe+1nk5q97dHC6YHq1IetfU1
- BzipdsS+PcUS4U1QjiVEZIDCsPM5pxkFAMCe9+2WIw==
-X-Google-Smtp-Source: AGHT+IGKdaPlE+piNCb25MpBIhk7nNtiukZrWv4hUvpq/CQC7ZkLN52pnX3ezu0PvuxXkKY2PXyaKw==
-X-Received: by 2002:a0d:d94f:0:b0:59b:ff76:8d03 with SMTP id
- b76-20020a0dd94f000000b0059bff768d03mr11734235ywe.12.1696707420059; 
- Sat, 07 Oct 2023 12:37:00 -0700 (PDT)
-Received: from bill-the-cat.lan
- (2603-6081-7b00-6400-3c47-81c9-6281-4dc8.res6.spectrum.com.
- [2603:6081:7b00:6400:3c47:81c9:6281:4dc8])
- by smtp.gmail.com with ESMTPSA id
- n75-20020a0dcb4e000000b005a1d51ce1aasm2269492ywd.25.2023.10.07.12.36.59
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Oct 2023 12:36:59 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: [PATCH] cmd/ti: Update Kconfig logic and Makefile recursion logic
-Date: Sat,  7 Oct 2023 15:36:58 -0400
-Message-Id: <20231007193658.2617151-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1696709947; x=1697314747;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zArO69o+8CfMqYbQMdZDO9gO3I+1xCAd6we+462qm5Q=;
+ b=fLf0skEHBU8KOA7hh+bNHdHF2HOivSrJiPXWxbDRb18vqil4VtBwfYcq/zr+OWJDaW
+ DSyrYDZTyDl19lkoGE0QZalcoRpidcz04fMTus11U0q4LU9WcI/+QveuvqPo7cjw3rYH
+ +U4MAfEDBADJ74P6s8u+RR2LBgJHMmqYdNt/bRPpW6dr5SrC9i9WYD+m/J/X/YtDSxh4
+ JBcPghh6RBOmNqRjIyM3k9A20jQa+6TZtHDSKlcEf4WohWzwZdsdbLDnT/nWLIEeZhXT
+ yaV0L2MkZYAkdgS4JedKZDSzbkeh8UOUvriL8pDs8py+tYqZDUVIrCAPmRMkT/wy2Vom
+ HHcA==
+X-Gm-Message-State: AOJu0YxYt02ZU3+PvyGWV6k7ZRq7g6NMaRQDWNTrllnla9Pq4gOXKmjy
+ oGLTaPMms7cxY/kmDYOZnBFoRMnCIgN/QqbkyrAdKg==
+X-Google-Smtp-Source: AGHT+IEa165opOX0w6ngSw7364AxtAm64M57vx40/jct5xfTm3FijftJ3/pJ3ZbYpDpiQYLipSlzoxvEtnHwQnOiVH8=
+X-Received: by 2002:a17:907:2711:b0:9b2:6c58:87a2 with SMTP id
+ w17-20020a170907271100b009b26c5887a2mr9971336ejk.29.1696709946842; Sat, 07
+ Oct 2023 13:19:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231007191308.2222470-1-trini@konsulko.com>
+In-Reply-To: <20231007191308.2222470-1-trini@konsulko.com>
+From: Simon Glass <sjg@google.com>
+Date: Sat, 7 Oct 2023 14:18:54 -0600
+Message-ID: <CAPnjgZ3hsaTzPLbx4h+C3PbfF1oNfh6pOVO9eykphGboEnkjgQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] command.h: Add a U_BOOT_LONGHELP macro
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,70 +83,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Add some dependencies to CMD_DDR3 as this is only valid on some
-  platforms (which tend to select it as well).
-- The proper gate for going in to cmd/ti is not
-  CONFIG_TI_COMMON_CMD_OPTIONS as nothing under there is controlled by
-  that symbol but the general TI architecture options.
+On Sat, 7 Oct 2023 at 13:13, Tom Rini <trini@konsulko.com> wrote:
+>
+> In order to be able to discard unused long help texts without further
+> linker lists, add a macro for defining the long help messages which uses
+> __maybe_unused.  This allows us to discard them as unreferenced as part
+> of the link.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+>  include/command.h | 3 +++
+>  1 file changed, 3 insertions(+)
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- cmd/Makefile    | 7 +++++--
- cmd/ti/Kconfig  | 1 +
- cmd/ti/Makefile | 4 ----
- 3 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 9bebf321c397..be13e288ae28 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -235,6 +235,11 @@ obj-$(CONFIG_X86) += x86/
- obj-$(CONFIG_CMD_MESON) += meson/
- 
- obj-$(CONFIG_ARCH_MVEBU) += mvebu/
-+
-+# TI
-+obj-$(CONFIG_ARCH_KEYSTONE) += ti/
-+obj-$(CONFIG_ARCH_K3) += ti/
-+obj-$(CONFIG_ARCH_OMAP2PLUS) += ti/
- endif # !CONFIG_SPL_BUILD
- 
- obj-$(CONFIG_$(SPL_)CMD_TLV_EEPROM) += tlv_eeprom.o
-@@ -244,8 +249,6 @@ obj-y += nvedit.o
- 
- obj-$(CONFIG_CMD_BCM_EXT_UTILS) += broadcom/
- 
--obj-$(CONFIG_TI_COMMON_CMD_OPTIONS) += ti/
--
- filechk_data_gz = (echo "static const char data_gz[] ="; cat $< | scripts/bin2c; echo ";")
- 
- filechk_data_size = \
-diff --git a/cmd/ti/Kconfig b/cmd/ti/Kconfig
-index db557445a890..9442c9993c19 100644
---- a/cmd/ti/Kconfig
-+++ b/cmd/ti/Kconfig
-@@ -2,6 +2,7 @@ menu "TI specific command line interface"
- 
- config CMD_DDR3
- 	bool "command for verifying DDR features"
-+	depends on ARCH_KEYSTONE || DRA7XX
- 	help
- 	   Support for testing ddr3 on TI platforms. This command
- 	   supports memory verification, memory comapre and ecc
-diff --git a/cmd/ti/Makefile b/cmd/ti/Makefile
-index 045593396b70..87f85b2c2323 100644
---- a/cmd/ti/Makefile
-+++ b/cmd/ti/Makefile
-@@ -1,9 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0+
- # Copyright (C) 2017 Texas Instruments Incorporated - http://www.ti.com/
- 
--obj- += dummy.o
--
--ifndef CONFIG_SPL_BUILD
- obj-$(CONFIG_CMD_DDR3) += ddr3.o
- obj-$(CONFIG_CMD_PD) += pd.o
--endif
--- 
-2.34.1
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
