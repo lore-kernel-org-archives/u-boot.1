@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE866E95A61
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 15:37:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D4DFE95A63
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 15:56:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC53186AB9;
-	Sat,  7 Oct 2023 17:37:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3D0E086AB9;
+	Sat,  7 Oct 2023 17:56:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IGJvcTnK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EV7r4GMn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E939C86A2B; Sat,  7 Oct 2023 17:37:30 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 2159D86B8E; Sat,  7 Oct 2023 17:56:00 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EAD586ACA
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 17:37:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12172868BB
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 17:55:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-538e8eca9c1so5470860a12.3
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 08:37:26 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=benwolsieffer@gmail.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-41819a68143so20598241cf.3
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 08:55:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696693046; x=1697297846; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wAn45+N26M0Tg654QeqjuoVTMWajyQ7Ubw4sWjTcIFQ=;
- b=IGJvcTnK5x7g/+0Fb9msfdbzzQm3/k+uhsrItFIGAOAWgMAaIoypuWKWbcIivyPSvT
- BkRHVg3ACkW864M2k/bPeaq8z1hVfacax5bUqkHPbRPs6Ifea1oMbE0+AfmnvWrdxDrV
- s2kVF2c8/w8ZgNzNHVzgyYQAq4NRiYBSsCHvc=
+ d=gmail.com; s=20230601; t=1696694156; x=1697298956; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=0Sh/gjTYVK0pT2Od1XT7Z6Y9xiHG3h0L3HrsgjeC3GU=;
+ b=EV7r4GMntUra5f2/n9rLXXkS6XaHAZeJfsui6abuKCPNiL/sDigjwWqG98S0iGyXvT
+ LsbgVlLqvboLioAS2OryMzJdEjVdEO5Hp+UEqiXTii30R5q6/+7E7Vepzd9VEiolNh1h
+ 2MDXfmEHnhmNhv6wLHrMJtYPMxJeb7Sqn5jGjlgeM4BEZRX5i7ecD7iCMcMxSN0yz5Dz
+ hGDm9Ubpj6xHPVUep3Krq7x6wRMG1BjeAy1k35YIaWXyaSP4PqY3/GJSUbIbi/y/7+r7
+ uNmd6hLy6fajeBp83nV92nNbxidcHEBjB8cMGElNcbpyVCr67y3BoDFliDXAHilvycoV
+ 7BhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696693046; x=1697297846;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1696694156; x=1697298956;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wAn45+N26M0Tg654QeqjuoVTMWajyQ7Ubw4sWjTcIFQ=;
- b=cAk6XW1X5vwtRKybDnS50sUDK7vFibS5pjM3bRXfjPEuZjZzrDJ5QcUsQmoThNa4VK
- Jgl/0fvNueaqZuxES0qu1qfb/weAxk1RkpwT4pFUr9hTa4PgjP7hi435uvzHfsJF+Pdc
- HrgKURB5eBRKBY6KY6eYlcWfvxBCmjiTetoxKLLGrYT9Z4wnWVKjs9LJMHv52F2gP+gj
- TyRWI3am6SQmDU2TnSDXnj4IPpyR+74K8yITF7mMkaLfH5c7MpVzViIEKnrdZptBa69U
- B+IMDQCYu3CWBIUcu3rtGKQrf+ZX8eTw+WbXFC79WTUzQmlpsMEp9HOtdxHR3LUs2+K/
- azcg==
-X-Gm-Message-State: AOJu0Yzee9Cgh/96BHUtLZSIkEopuLCp8EWWOUol946iXEFSWr2gtWZv
- t5HmOz1mb0ZqBLLc4rIp3/egYwfFEMEY9x35DqQBJw==
-X-Google-Smtp-Source: AGHT+IHeAFWJozsIdvfpcoaUTu1MBj4CDf0u29UDTarOTgP3hd63qRWQjQajhzlMwqNbP1BjBE5XVn6KnBwrS1Aa/eg=
-X-Received: by 2002:a17:906:10dc:b0:9ae:6ffd:be12 with SMTP id
- v28-20020a17090610dc00b009ae6ffdbe12mr10716649ejv.76.1696693045735; Sat, 07
- Oct 2023 08:37:25 -0700 (PDT)
+ bh=0Sh/gjTYVK0pT2Od1XT7Z6Y9xiHG3h0L3HrsgjeC3GU=;
+ b=ufMBe9e1K6fn44SXW8gMZb24rvNVpDV7JXpuQ2RplZJXK86HZOvD81KPq8zUKKrTMl
+ F/ZKcjVO15DM7chtwsL5goKyPYcZScnjK6aeKVeNjIvEVyZidpwdOTtobPDGY8kpDHeZ
+ fVPNCH3T1tgS0oLF67DoyZ5d7K+UKs/LFKEmQAXwZBxwHJAH+jGz1tcAF7Vu5E04pmU2
+ 33mW8ZJbaAWFqvV/yHxevxRvwQUELw6eNcXL1Spqop+TtWXIphlptWA5VBsPb7URgXgN
+ 6AbIn5Xk5U+94KyFXqlNp2QyN2OLvhHkIO5qG6DfDZDujILY8ZPGiO7WZ7FuGWuDhi3l
+ HYPA==
+X-Gm-Message-State: AOJu0YyPPo5xQaO66U9tQ2szPvXjlsFjx1oBYxX8HNbRlPCdEzuUSZJO
+ pY2fjzHyGcDkfPQD6gthu0l860e4gGo=
+X-Google-Smtp-Source: AGHT+IEbAsl2cKh2buIykEikjEtQPipi8i/xg4MPhzEXTR3olxlmg+aWF+rbXny7BxPKlwjNCD8c+w==
+X-Received: by 2002:a05:622a:246:b0:415:14bb:5632 with SMTP id
+ c6-20020a05622a024600b0041514bb5632mr11242282qtx.28.1696694156440; 
+ Sat, 07 Oct 2023 08:55:56 -0700 (PDT)
+Received: from Dell-Inspiron-15.. ([2601:18c:8002:3d40:7920:e10c:26cf:ff86])
+ by smtp.gmail.com with ESMTPSA id
+ kb4-20020a05622a448400b00415268abe26sm2154298qtb.8.2023.10.07.08.55.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 07 Oct 2023 08:55:55 -0700 (PDT)
+From: Ben Wolsieffer <benwolsieffer@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Ben Wolsieffer <benwolsieffer@gmail.com>
+Subject: [PATCH] arm: rpi: explicitly enumerate mmc boot targets
+Date: Sat,  7 Oct 2023 11:55:35 -0400
+Message-ID: <20231007155535.1699567-1-benwolsieffer@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-6-sjg@chromium.org>
- <20230924232658.GM305624@bill-the-cat>
- <CAPnjgZ2-ORog-+Onh1McptpMDrzccVc+BfByCMjp93wLqAms6w@mail.gmail.com>
- <20231005145350.GQ8465@bill-the-cat>
- <CAPnjgZ2Mbx9H_ve_F_gq_eqt2hvwmYF455-0PHB31fV5m9HN2A@mail.gmail.com>
- <20231006021616.GB2227687@bill-the-cat>
- <CAPnjgZ3sTQNQJCpuZ4doJJH=t=mLxXaAYQR8kVXorOfqn2t5CA@mail.gmail.com>
- <20231006165504.GC2227687@bill-the-cat>
- <CAPnjgZ1GZ+Ryt2=_Sf0Z+XM+V58Ty4UmdrAo2bW-Ubs9s19=Ww@mail.gmail.com>
- <20231007010053.GE2227687@bill-the-cat>
-In-Reply-To: <20231007010053.GE2227687@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Oct 2023 09:37:07 -0600
-Message-ID: <CAPnjgZ3Pss6uOhnopo4Yn0digdNs1niNqqrJHRmnrbDvehT1hg@mail.gmail.com>
-Subject: Re: [PATCH 05/25] treewide: Correct use of long help
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Dan Carpenter <dan.carpenter@linaro.org>,
- Fabio Estevam <festevam@gmail.com>, 
- Leo <ycliang@andestech.com>, Michael Walle <michael@walle.cc>, 
- Michal Suchanek <msuchanek@suse.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Peng Fan <peng.fan@nxp.com>, 
- Rick Chen <rick@andestech.com>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@denx.de>, uboot-stm32@st-md-mailman.stormreply.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,183 +90,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Using the unqualified "mmc" boot target causes the Raspberry Pi 4 to
+fail to boot. c771e5b explains this approach as follows:
 
-On Fri, 6 Oct 2023 at 19:01, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Oct 06, 2023 at 04:42:44PM -0600, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Fri, 6 Oct 2023 at 10:55, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Oct 06, 2023 at 07:03:17AM -0600, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 5 Oct 2023 at 20:16, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Oct 05, 2023 at 07:41:49PM -0600, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Thu, 5 Oct 2023 at 08:53, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Wed, Oct 04, 2023 at 07:23:47PM -0600, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Sun, 24 Sept 2023 at 17:27, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Sun, Sep 24, 2023 at 02:39:23PM -0600, Simon Glass wrote:
-> > > > > > > > > > Some commands assume that CONFIG_SYS_LONGHELP is always defined.
-> > > > > > > > > > Declaration of long help should be bracketed by an #ifdef to avoid an
-> > > > > > > > > > 'unused variable' warning.
-> > > > > > > > > >
-> > > > > > > > > > Fix this treewide.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > [snip]
-> > > > > > > > > > diff --git a/arch/arm/mach-imx/cmd_dek.c b/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > > > index 6fa5b41fcd38..25ea7d3b37da 100644
-> > > > > > > > > > --- a/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > > > +++ b/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > > > @@ -393,11 +393,12 @@ static int do_dek_blob(struct cmd_tbl *cmdtp, int flag, int argc,
-> > > > > > > > > >       return blob_encap_dek(src_addr, dst_addr, len);
-> > > > > > > > > >  }
-> > > > > > > > > >
-> > > > > > > > > > -/***************************************************/
-> > > > > > > > > > +#if IS_ENABLED(CONFIG_SYS_LONGHELP)
-> > > > > > > > > >  static char dek_blob_help_text[] =
-> > > > > > > > > >       "src dst len            - Encapsulate and create blob of data\n"
-> > > > > > > > > >       "                         $len bits long at address $src and\n"
-> > > > > > > > > >       "                         store the result at address $dst.\n";
-> > > > > > > > > > +#endif
-> > > > > > > > > >
-> > > > > > > > > >  U_BOOT_CMD(
-> > > > > > > > > >       dek_blob, 4, 1, do_dek_blob,
-> > > > > > > > >
-> > > > > > > > > This really doesn't read nicely.  I would rather (globally and fix
-> > > > > > > > > existing users) __maybe_unused this instead.  I think there's just one
-> > > > > > > > > example today that isn't "foo_help_text".
-> > > > > > > >
-> > > > > > > > Hmm, what do you think about adding a __longhelp symbol to cause the
-> > > > > > > > linker to discard it when not needed?
-> > > > > > >
-> > > > > > > Well, I don't think we need linker list magic when __maybe_unused will
-> > > > > > > just have them be discarded normally.
-> > > > > >
-> > > > > > Yes, perhaps things are in a better state than they used to be, but
-> > > > > > there is a linker discard for commands at present.
-> > > > >
-> > > > > Yes, but __maybe_unused means we don't get a warning about it, and it's
-> > > > > literally discarded as part of --gc-sections as it done everywhere with
-> > > > > maybe 3 exceptions?
-> > > >
-> > > > Actually with this series we get a lot closer to that. The problem
-> > > > with the status quo is that disabling CMDLINE doesn't disable most
-> > > > commands, relying instead on discarding them at link time.
-> > >
-> > > I don't follow you here.  We're talking only about the long help.
-> >
-> > I was actually talking about how the command code is removed. This
-> > series allows that to happen via Kconfig rather than needing a
-> > linker-script discard rule, something I only just fully appreciated.
->
-> OK.  But this series as-is has a lot of problems and I don't see it as
-> more than a proof of concept.
+> We don't need to specify the mmc devices individually, since they are
+> used in order from 0 to 2, and standard boot uses that order anyway.
 
-Probably I need to send a few version as this discussion is becoming a
-bit theoretical.
+In practice, U-Boot first attempts to boot from the unconnected mmc1
+interface, and, when this fails, moves on to attempt the USB and network
+boot targets rather than trying mmc0.
 
->
-> > > There's already an option to enable/disable it.  When disabled all of
-> > > the long help text should be discarded, because we reference it via
-> > > U_BOOT_CMD macro which in turn cares about it, or not.  What's missing
-> > > is a U_BOOT_LONGHELP macro so that instead of:
-> > > #ifdef CONFIG_SYS_LONGHELP
-> > > static char cat_help_text[] =
-> > >         "<interface> <dev[:part]> <file>\n"
-> > >         "  - Print file from 'dev' on 'interface' to standard output\n";
-> > > #endif
-> > >
-> > > We do:
-> > > U_BOOT_LONGHELP(cat,
-> > >         "<interface> <dev[:part]> <file>\n"
-> > >         "  - Print file from 'dev' on 'interface' to standard output\n"
-> > > );
-> > >
-> > > Which then does:
-> > > static __maybe_unused char cat_help_text[] =
-> > > ...
-> > > ;
-> > >
-> > > And we discard the text automatically due to --gc-sections.  We possibly
-> > > haven't already been doing this since back when we first started using
-> > > --gc-sections there was a bug in binutils that caused text like the
-> > > above to still get combined in to other objects and not discarded.
-> > > That's been fixed for ages.
-> > >
-> > > And the above macro would also let us clean up U_BOOT_CMD macro slightly
-> > > to just omit the longhelp option and instead always do _CMD_HELP(_name)
-> > > inside the macros.  It'll also make it harder to add new commands
-> > > without a long help by accident.
-> >
-> > Gosh this is complicated.
-> >
-> > At present the U_BOOT_CMD() macro just drops the strings...the problem
-> > with the unused var only happens in a small number of cases where an
-> > explicit var is used. I don't see why creating a var (when none is
-> > there today) helps anything? It doesn't detect missing longhelp, since
-> > this is already an error (missing argument). Sure,  "" can be
-> > provided, but your macro doesn't stop that either.
->
-> The problem today is that 95% of the cases surround the help text with
-> #ifdef CONFIG_SYS_LONGHELP ... #endif.  That's why the rest of the
-> macros are the way they are today.  And that in turn is due to (in part
-> at least) old compiler bugs.
+This patch explicitly enumerates the mmc interfaces, causing each to be
+attempted in turn. This matches what is done on other boards, and allows
+the system to boot successfully.
 
-I see about 46 #idefs for that and nearly 300 commands that don't have one.
+Fixes: c771e5b8c2 ("arm: rpi: Switch to standard boot")
+Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
+---
+ board/raspberrypi/rpi/rpi.env | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->
-> > If you are suggesting a new U_BOOT_LONGHELP() macro, bear in mind that
-> > we already have quite a lot...each new 'top-level' macro results in
-> > more combinations.
->
-> It really should just be a single macro.  I think I'll make an attempt
-> at this, to show what I'm talking about.
+diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+index 30228285ed..02210b97b5 100644
+--- a/board/raspberrypi/rpi/rpi.env
++++ b/board/raspberrypi/rpi/rpi.env
+@@ -74,4 +74,4 @@ pxefile_addr_r=0x02500000
+ fdt_addr_r=0x02600000
+ ramdisk_addr_r=0x02700000
+ 
+-boot_targets=mmc usb pxe dhcp
++boot_targets=mmc0 mmc1 mmc2 usb pxe dhcp
+-- 
+2.42.0
 
-OK thanks.
-
->
-> > > > With this series, it looks like we can in fact do that, so I should
-> > > > remove the discards as well.
-> > > >
-> > > > The one proviso is that this does drop a lot of things we want...e.g.
-> > > > BOOTSTD_DEFAULTS cannot be enabled due to its use of 'select', meaning
-> > > > that common filesystems are dropped. So we'll need more effort after
-> > > > this, to allow (for example) bootmeths that don't need commands to
-> > > > work correctly. But I think this series at least provides a better
-> > > > starting point for teasing things apart.
-> > > >
-> > > > So OK I'll go with __maybe_unused for the ones that need it, which
-> > > > isn't too many given that many of the strings are just included
-> > > > directly in the macro. It is considerably easier than trying to be to
-> > > > clever about things.
-> > >
-> > > Yes, this series itself has a lot of problems that need to be addressed
-> > > before reposting because I don't like "hiding" that network stuff no
-> > > longer works, and I also saw that DFU also silently failing.
-> >
-> > Yes I saw your other comments. But I think this patch is the big area
-> > of confusion.
->
-> This isn't the tricky part of the series that I'm saying has problems,
-> that part is all of the functionality that's not being untangled and I
-> think leads to the question of what exactly is the use case where we do
-> remove the command line but don't need some of that functionality still.
-
-For security and code-size reasons it is useful to disable commands,
-perhaps all of them. Quite a few features don't need it, but it
-certainly would take more effort to get a usable version. The goal of
-this series is to avoid people adding Kconfig mistakes which need to
-be cleaned up later.
-
-Regards,
-Simon
