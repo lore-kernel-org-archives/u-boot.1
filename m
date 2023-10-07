@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0874E94139
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 00:03:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97AA4E9413C
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 00:50:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B3CE86D65;
-	Sat,  7 Oct 2023 02:03:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3F13986D30;
+	Sat,  7 Oct 2023 02:50:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LKlO4pJS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jqZ5kQgu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A140486CEC; Sat,  7 Oct 2023 02:03:37 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 66BF886B35; Sat,  7 Oct 2023 02:49:59 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64CAD8695F
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 02:03:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D504986E79
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 02:49:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-9b29186e20aso472473166b.2
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 17:03:33 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-d81b42a3108so3067867276.1
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 17:49:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696637013; x=1697241813; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=uDcsQIEmgkQ2z2v3WWS4XEV0ph0sL9LSX0+s7n0YMh4=;
- b=LKlO4pJSQvmjdoq6NiE8Luwpy11YwiaTl4Jc2LfO+v+roSSAI6hUWZcHXFd8/+LpOg
- fl0thl9YbovMREfXOSShmzxRwwSK5C+pt1v9HkLtZ/n8X1fXtJZODL8qlQNG8o+PgoZm
- uyziL3JImfw9hp6fSdHsxRRD4eelS13aONyUQ=
+ d=gmail.com; s=20230601; t=1696639795; x=1697244595; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=DhHYcdEMuw/rKuSwUvJxMrGp0kUMd4v68C2+I89Fhss=;
+ b=jqZ5kQguWCuLFlPm31bDUcF3aAOU5xF7pxU64gvmOxPUFM+DRdznkAuggu31iYqR7e
+ +QnBvNMGeXFKyXWSXhVKm2s4rMYOSMSTIfruuKWD/ezs5CtEmMY4hE/+iJCBXjViCJak
+ eVlfAaye222s8v6PtSXTsbCmzU7F+cT37nLXxKDPNtLj61Igk27KIZEeB+rDd7KBgYdw
+ 6v5jvZP7DMCRbm/pma6q2fk8hua9NGT6mKN+RegmgKE7kpzaI3mVdEta7JlTgZzv9lCy
+ wbFy+V0IWd9LlJADSB+p8ptrLuAZtppps6uqOFsFbCkplsjyKyYpqpw15QXt6bfFtXuI
+ /yLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696637013; x=1697241813;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=uDcsQIEmgkQ2z2v3WWS4XEV0ph0sL9LSX0+s7n0YMh4=;
- b=G1Z4fPgcTOK0qieK9dj0dFNhJWy5wPf3+LgiccoxeMtBo8oHxSu+T4yR6J7U4tBNI4
- CktjXc/LKwe4PMVYtyIksNJmIpbyucJebdkx1HpHBG7Dt1Nb6C8a05YaVjUeaEaYjN+V
- FVYFNhrhrdpy9p01hCPmi1+O/jSKq/fq8RTOnpsHiqjP7GgSq91zqAyvdF4RhkgnSUiD
- q/Vis3GoCpKUZVgz3GZRTwDiemKLzcBDJziGtc1vFABIGLscRALUDxJUkclL8VKy7Mg8
- yERcezemsT8ts8KeFzfTEew/buzkw7VNyXtwPRu7CwWjGSV1PN4CiuAVPiTNMy7aSDZG
- 2NQw==
-X-Gm-Message-State: AOJu0YwkHj5nqan/z8rcJyjg1ex3DaOEFk+S8ffaBMPTtxMlx+gB1Ein
- KHLzNaYL046aeU/78l4GX5C6ADLEN99zn/pFCkxbhQ==
-X-Google-Smtp-Source: AGHT+IHICfBlh5Jn9KCKxlRJo8KnQizgtIiA61TtzHAjgOF4pLzWyegSnBlNZCq/yTtUnR27UDOzc7A1CepkEFmMBc8=
-X-Received: by 2002:a17:906:3284:b0:9b8:e670:657b with SMTP id
- 4-20020a170906328400b009b8e670657bmr8851025ejw.64.1696637012708; Fri, 06 Oct
- 2023 17:03:32 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696639795; x=1697244595;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DhHYcdEMuw/rKuSwUvJxMrGp0kUMd4v68C2+I89Fhss=;
+ b=i+pYmVNMU4pRedIIqZdxHSKS++br4vAbUt2NL2yFAc3K/Q9Kpj/oRiBwQtWPhCrBs9
+ pWXDtDBpwwqwANLllZrmpYFZ209wYJ7X6QvGjlvvkhCfvMNJwYvA4OJYUsTvQtw7MGNJ
+ KWVQBrZPza/ZHYIf4Ejk/HA3jx7Lu7APZAhVi1GKXHZhdqe3VTFPW0XiT/vqgipF6TKP
+ 1of/7Dk/73DClA360OM/k+4xhm9YJvLHUNRiGYkxFmmSyjjuwO8MBZS4EIysZdv1D6xk
+ NrIJcQqpSIehnQTbIak+9jUCyHZfIw6PcN0YyzR72wYmBBwYQ85QJdJE4A/2o7MbTnHt
+ /PoA==
+X-Gm-Message-State: AOJu0Ywot50DIbvUHE1KmpSS7425NKUA508Vcceq2AGh8otE/8FEh+r1
+ FlaV1TnMFmSNHvksy7bP5lY=
+X-Google-Smtp-Source: AGHT+IHEeZiE20n5AxK/MsYKF6e8j41xpd3IDUIHmpuzDrID6XfiBzQ/f9wYPtUtXCsxMpi3eTamtw==
+X-Received: by 2002:a25:850d:0:b0:d74:6cdc:290d with SMTP id
+ w13-20020a25850d000000b00d746cdc290dmr9170930ybk.36.1696639794712; 
+ Fri, 06 Oct 2023 17:49:54 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ d4-20020a258244000000b00d746487d6f7sm1378078ybn.35.2023.10.06.17.49.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Oct 2023 17:49:54 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [PATCH] bootstd: sata: bootdev scanning for ahci sata with no drive
+ attached
+Date: Fri,  6 Oct 2023 17:49:36 -0700
+Message-Id: <20231007004937.11600-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
- <20230926194242.2732127-2-sjg@chromium.org>
- <CAPnjgZ0Xf3U1aj32LbU-xiU1AqwnM3JL1F8xX-wZ18oEmg+irw@mail.gmail.com>
- <CAMj1kXEXcX7BkDyfy-6_5Vnch=N+onza-yfWfsVaGLE93h2c+Q@mail.gmail.com>
- <CAPnjgZ2SEby-ndrs=W_afBJH56eqc=-mhp1F1nwkvWks+=B54Q@mail.gmail.com>
- <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
-In-Reply-To: <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 6 Oct 2023 18:03:16 -0600
-Message-ID: <CAPnjgZ0LrsJ2_ENTYoBrnyFaH3UKdHs3D2XWY=TzBuBpBoTXZA@mail.gmail.com>
-Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
-To: Ard Biesheuvel <ardb@kernel.org>
-Cc: devicetree@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, 
- Rob Herring <robh@kernel.org>, Lean Sheng Tan <sheng.tan@9elements.com>, 
- lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
- Maximilian Brune <maximilian.brune@9elements.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, 
- Guo Dong <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
- ron minnich <rminnich@gmail.com>, Gua Guo <gua.guo@intel.com>, 
- Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,220 +91,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ard,
+It's normal to have no SATA drive attached to the controller, so return a
+successful status when there is no block device found after probing.
 
-On Fri, 6 Oct 2023 at 17:00, Ard Biesheuvel <ardb@kernel.org> wrote:
->
-> On Fri, 6 Oct 2023 at 20:17, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Ard,
-> >
-> > On Fri, 6 Oct 2023 at 11:33, Ard Biesheuvel <ardb@kernel.org> wrote:
-> > >
-> > > On Mon, 2 Oct 2023 at 19:54, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Rob,
-> > > >
-> > > > On Tue, 26 Sept 2023 at 13:42, Simon Glass <sjg@chromium.org> wrote=
-:
-> > > > >
-> > > > > It is common to split firmware into 'Platform Init', which does t=
-he
-> > > > > initial hardware setup and a "Payload" which selects the OS to be=
- booted.
-> > > > > Thus an handover interface is required between these two pieces.
-> > > > >
-> > > > > Where UEFI boot-time services are not available, but UEFI firmwar=
-e is
-> > > > > present on either side of this interface, information about memor=
-y usage
-> > > > > and attributes must be presented to the "Payload" in some form.
-> > > > >
-> > > > > This aims to provide an small schema addition for the memory mapp=
-ing
-> > > > > needed to keep these two pieces working together well.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > > Changes in v7:
-> > > > > - Rename acpi-reclaim to acpi
-> > > > > - Drop individual mention of when memory can be reclaimed
-> > > > > - Rewrite the item descriptions
-> > > > > - Add back the UEFI text (with trepidation)
-> > > >
-> > > > I am again checking on this series. Can it be applied, please?
-> > > >
-> > >
-> > > Apologies for the delay in response. I have been away.
-> >
-> > OK, I hope you had a nice trip.
-> >
->
-> Thanks, it was wonderful!
->
-> > >
-> > > >
-> > > > >
-> > > > > Changes in v6:
-> > > > > - Drop mention of UEFI
-> > > > > - Use compatible strings instead of node names
-> > > > >
-> > > > > Changes in v5:
-> > > > > - Drop the memory-map node (should have done that in v4)
-> > > > > - Tidy up schema a bit
-> > > > >
-> > > > > Changes in v4:
-> > > > > - Make use of the reserved-memory node instead of creating a new =
-one
-> > > > >
-> > > > > Changes in v3:
-> > > > > - Reword commit message again
-> > > > > - cc a lot more people, from the FFI patch
-> > > > > - Split out the attributes into the /memory nodes
-> > > > >
-> > > > > Changes in v2:
-> > > > > - Reword commit message
-> > > > >
-> > > > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++++=
-++++++
-> > > > >  1 file changed, 71 insertions(+)
-> > > > >  create mode 100644 dtschema/schemas/reserved-memory/common-reser=
-ved.yaml
-> > > > >
-> > > > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.yam=
-l b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > > > new file mode 100644
-> > > > > index 0000000..f7fbdfd
-> > > > > --- /dev/null
-> > > > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
-> > > > > @@ -0,0 +1,71 @@
-> > > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> > > > > +%YAML 1.2
-> > > > > +---
-> > > > > +$id: http://devicetree.org/schemas/reserved-memory/common-reserv=
-ed.yaml#
-> > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > > > > +
-> > > > > +title: Common memory reservations
-> > > > > +
-> > > > > +description: |
-> > > > > +  Specifies that the reserved memory region can be used for the =
-purpose
-> > > > > +  indicated by its compatible string.
-> > > > > +
-> > > > > +  Clients may reuse this reserved memory if they understand what=
- it is for,
-> > > > > +  subject to the notes below.
-> > > > > +
-> > > > > +maintainers:
-> > > > > +  - Simon Glass <sjg@chromium.org>
-> > > > > +
-> > > > > +allOf:
-> > > > > +  - $ref: reserved-memory.yaml
-> > > > > +
-> > > > > +properties:
-> > > > > +  compatible:
-> > > > > +    description: |
-> > > > > +      This describes some common memory reservations, with the c=
-ompatible
-> > > > > +      string indicating what it is used for:
-> > > > > +
-> > > > > +         acpi: Advanced Configuration and Power Interface (ACPI)=
- tables
-> > > > > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). This=
- is reserved by
-> > > > > +           the firmware for its use and is required to be saved =
-and restored
-> > > > > +           across an NVS sleep
-> > > > > +         boot-code: Contains code used for booting which is not =
-needed by the OS
-> > > > > +         boot-code: Contains data used for booting which is not =
-needed by the OS
-> > > > > +         runtime-code: Contains code used for interacting with t=
-he system when
-> > > > > +           running the OS
-> > > > > +         runtime-data: Contains data used for interacting with t=
-he system when
-> > > > > +           running the OS
-> > > > > +
-> > > > > +    enum:
-> > > > > +      - acpi
-> > > > > +      - acpi-nvs
-> > > > > +      - boot-code
-> > > > > +      - boot-data
-> > > > > +      - runtime-code
-> > > > > +      - runtime-data
-> > > > > +
-> > >
-> > > As I mentioned a few times already, I don't think these compatibles
-> > > should be introduced here.
-> > >
-> > > A reserved region has a specific purpose, and the compatible should b=
-e
-> > > more descriptive than the enum above. If the consumer does not
-> > > understand this purpose, it should simply treat the memory as reserve=
-d
-> > > and not touch it. Alternatively, these regions can be referenced from
-> > > other DT nodes using phandles if needed.
-> >
-> > We still need some description of what these regions are used for, so
-> > that the payload can use the correct regions. I do not have any other
-> > solution to this problem. We are in v7 at present. At least explain
-> > where you want the compatible strings to be introduced.
-> >
->
-> My point is really that by themselves, these regions are not usable by
-> either a payload or an OS that consumes this information. Unless there
-> is some other information being provided (via DT I imagine) that
-> describes how these things are supposed to be used, they are nothing
-> more than memory reservations that should be honored, and providing
-> this arbitrary set of labels is unnecessary.
->
-> > What sort of extra detail are you looking for? Please be specific and
-> > preferably add some suggestions so I can close this out ASAP.
-> >
->
-> A payload or OS can do nothing with a memory reservation called
-> 'runtime-code' it it doesn't know what is inside. So there is another
-> DT node somewhere that describes this, and that can simply point to
-> this region (via a phandle) if it needs to describe the
-> correspondence. This is more idiomatic for DT afaik (but I am not the
-> expert).  But more importantly, it avoids overloading some vague
-> labels with behavior (e.g., executable permissions for code regions)
-> that should only be displayed for regions with a particular use,
-> rather than for a ill defined class of reservations the purpose of
-> which is not clear.
->
-> What I am trying to avoid is the OS ending up being forced to consume
-> this information in parallel to the EFI memory map, and having to
-> reconcile them. I'd be much happier if this gets contributed to a spec
-> that only covers firmware-to-firmware, and is prevented from leaking
-> into the OS facing interface.
+Note: this patch depends on the previous patch
+https://patchwork.ozlabs.org/project/uboot/patch/20230917230649.30357-1-mibodhi@gmail.com/
 
-I don't know about "another DT node". We don't have one at present.
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
 
-There is already a note in the DT spec about this:
+ drivers/ata/sata.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-> 3.5.4 /reserved-memory and UEFI
+diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+index f126b84e05..59c40a829f 100644
+--- a/drivers/ata/sata.c
++++ b/drivers/ata/sata.c
+@@ -79,6 +79,11 @@ int sata_rescan(bool verbose)
+ 
+ 	ret = uclass_probe_all(UCLASS_AHCI);
+ 
++	if (verbose && ret == -ENODEV) {
++		printf("No SATA block device found\n");
++		return 0;
++	}
++
+ 	return ret;
+ }
+ 
+-- 
+2.39.2
 
-> When booting via [UEFI], static /reserved-memory regions must also be lis=
-ted in the system memory map obtained
-> via the GetMemoryMap() UEFI boot time service as defined in [UEFI] =C2=A7=
- 7.2. The reserved memory regions need to be
-> included in the UEFI memory map to protect against allocations by UEFI ap=
-plications.
->
-> Reserved regions with the no-map property must be listed in the memory ma=
-p with type EfiReservedMemoryType. All
-> other reserved regions must be listed with type EfiBootServicesData.
->
-> Dynamic reserved memory regions must not be listed in the [UEFI] memory m=
-ap because they are allocated by the OS
-> after exiting firmware boot services.
-
-I don't fully understand what all that means, but does it cover your concer=
-n?
-
-Regards,
-Simon
