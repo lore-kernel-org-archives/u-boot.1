@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49DDBE95A61
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 12:58:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16FCAE95A63
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 13:01:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA79386CDB;
-	Sat,  7 Oct 2023 14:58:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3783F86406;
+	Sat,  7 Oct 2023 15:01:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gePjIH4L";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RKoaIrvN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10401863C8; Sat,  7 Oct 2023 14:58:09 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 1A07386D14; Sat,  7 Oct 2023 15:01:13 +0200 (CEST)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66A3986406
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 14:58:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7744F86406
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 15:01:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1c76ef40e84so5777925ad.0
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 05:58:05 -0700 (PDT)
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-57bf04841ccso634004eaf.0
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 06:01:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696683484; x=1697288284; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696683668; x=1697288468; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lUXk5XDlDAIPkpZR9f4fitNdbfxemJ0TLMqVDFiD/rM=;
- b=gePjIH4LCkPHC6JEJq4H5bNbjjIbCXMte61R82h+oOm3+qQd4SpaBLEYdM76dfNQTy
- CyEjgqo8MEnUQ3HQPMF3d3wl79uXJWTkjE5zKCJyhP0iy0YmEHfSDTwsoWN6FlDt7w8U
- tDKc7Mtnhq7MxsTtEw0UVAF/VnMkQSarU8BRgYh5ecJyFaKsMpQJHLd7o+pvGuR+s2pe
- a9PLEwhZNrMZXEKpXN/2BJiMK3by3y61cyERfZq3VZtq1/vWPhltqBvdAWcBoXh4xUMx
- 8sNNVv518BipcPPEmFkIPDvD2GpVrK9+hjdxGf9wrKhrx+stqly7dsqZTVlz3CqeUBuJ
- hEDA==
+ bh=2dawRT+1GURQVaaVywIlOo/7pSdbnNkec1q9O62PJ/w=;
+ b=RKoaIrvNDS+wRw5Ebx+6UutPhwybcWUn6vXLPGD9kGc9qUn/kwVOoCE3RWdUILpEJb
+ WPJkL1pDgHvYu5yC3tS+cMowvDsSzUnU0khHH1rr9ISvq0PgQXA949E5EWznPrcEVVHM
+ L8le+Ai3paL8y4skozDHIbu4sxBCeqheMNoUCbvj59/cDtm5aGFmBcNPLfQkkeD1O/7c
+ PIanG5GChjDMgycJGfPJu1qLZIW4UHFis8xUIFaDEw1lfjgMr2dBMmWg3S/5WLvuBn0T
+ 54FSgYuIm0Vnx1dvOVA90JYRzTXAlOVh2FVtnqLyrjNH5kRXgUbSrIyWhSC2+9U3Fo+q
+ y7uA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696683484; x=1697288284;
+ d=1e100.net; s=20230601; t=1696683668; x=1697288468;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lUXk5XDlDAIPkpZR9f4fitNdbfxemJ0TLMqVDFiD/rM=;
- b=PpEait4M/wUOTChHdCV2KEoa+gD/CNM2N9UdrAOo/XaSdhtAtNsmma/yqESWQrXvU9
- r73sZtuH/TBgbfg1rs18JdLWu/JNaVFUk08ScUfN2rzvNTZkeuxfw/ws1bNP2SxpxTLM
- usuosz26Z+qQKt+3ePHDny4KcK1JEHfw7hd2fyLdLCFOYBSByahpDu0qX/KtVPWr+IId
- QPtoIoyqaGn3weupy+AhDyv8j4i2Zg/ylAvJz6MHqRDUHP+qFcXew+JzqY4ihwfd9Bxt
- rU1+kZfkrKUQlJLoXJCo3DClccW1GWPyjQAa9eFEIOdtXpjIVfycH9i8OUgXQ4xQ/zti
- g1rQ==
-X-Gm-Message-State: AOJu0YziAG1QYMi6jxUlZMJmX+xuRJGKudWz7HpQOtAFA4J6kh9XnfWT
- G79K88+o2DIDOvVZ4lM1akQsNGfVn/KpXFxpyFY=
-X-Google-Smtp-Source: AGHT+IG+Y6CoFuZexHCG6NRuSePLoca0ubytL+0XR8uydxUrmLMam6jcJ7gqnbh8vM2m1t7wri9GfCDigGn7Z9EJLA0=
-X-Received: by 2002:a05:6a20:c18f:b0:16e:26fd:7c02 with SMTP id
- bg15-20020a056a20c18f00b0016e26fd7c02mr61843pzb.2.1696683483759; Sat, 07 Oct
- 2023 05:58:03 -0700 (PDT)
+ bh=2dawRT+1GURQVaaVywIlOo/7pSdbnNkec1q9O62PJ/w=;
+ b=QR3ltcE+jzI4ksLzrLEOstQTXwpaZWai2MdT7wSeYioulZaCCxskSpkoagttBK1pfa
+ NueOFdQHgTPneTRo/EYyFEI6nXXYlfhV3p3pdalc8HF1ZjcST39mW6cvp5uONtlvcPX/
+ OB58M/zx/Vm14/AmnJ/0vwnLDiIIj8eZF+ZQdKrLI0lK8s8YxlyRTSEIj3NdiPtCgtEy
+ l2oJEVdowk4M6zNoqOzrUC25+CkHaRqsqXop+0Dt3fCMLx7DZbUYdScmoHmnS483vcpe
+ HRpKXeczM8jAOXJHwL3r6BNx8CqePD8lbPchWed47starN22avnuV9W5D33W5cgkaV+L
+ MHLw==
+X-Gm-Message-State: AOJu0Yy8iToY3298ERMhBIgrLlkV/ApInI66ChDe9pwQ2jMyw6R6YBh7
+ iCZ+a07Cjzn7SP6U1YFyDzWvatacyQZqNiVbdigW+lYxtF4=
+X-Google-Smtp-Source: AGHT+IENFtkpZW078hP92MX5A2ineRsl7QdD0hfJvl9CQqFraQeh0ECt5SKpBFKL8UsdEqIiGBXb11/A3b+zdarY3g4=
+X-Received: by 2002:a05:6358:cc28:b0:143:92d5:1fdb with SMTP id
+ gx40-20020a056358cc2800b0014392d51fdbmr9956500rwb.0.1696683667866; Sat, 07
+ Oct 2023 06:01:07 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230921082955.28951-1-andrej.rosano@withsecure.com>
-In-Reply-To: <20230921082955.28951-1-andrej.rosano@withsecure.com>
+References: <20230817085711.45339-1-t.remmet@phytec.de>
+ <20230817085711.45339-2-t.remmet@phytec.de>
+ <c3ae2eca245851ac7f7395edd19f91af7eab4dfd.camel@phytec.de>
+In-Reply-To: <c3ae2eca245851ac7f7395edd19f91af7eab4dfd.camel@phytec.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 7 Oct 2023 09:57:51 -0300
-Message-ID: <CAOMZO5CjTEy_18g7Nq4z1NO1mz3+4BeL_4yBRjLXS4ea99nPKA@mail.gmail.com>
-Subject: Re: [PATCH] usbarmory: Add DM_I2C and DM_SERIAL support
-To: Andrej Rosano <andrej.rosano@withsecure.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Stefano Babic <sbabic@denx.de>
+Date: Sat, 7 Oct 2023 10:00:55 -0300
+Message-ID: <CAOMZO5A21pni4m7BibF79nnGyuV_YthjsKoMWdjeZpJZ7EuyhA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/6] board: phytec: Add common PHYTEC SoM detection
+To: Yannic Moog <Y.Moog@phytec.de>
+Cc: "uboot-imx@nxp.com" <uboot-imx@nxp.com>, "sbabic@denx.de" <sbabic@denx.de>,
+ Teresa Remmet <T.Remmet@phytec.de>,
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Daniel Schultz <D.Schultz@phytec.de>, Wadim Egorov <W.Egorov@phytec.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -87,13 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 21, 2023 at 8:27=E2=80=AFAM Andrej Rosano
-<andrej.rosano@withsecure.com> wrote:
+On Mon, Aug 28, 2023 at 9:32=E2=80=AFAM Yannic Moog <Y.Moog@phytec.de> wrot=
+e:
 >
-> From: Andrej Rosano <andrej.rosano@withsecure.com>
+> On Thu, 2023-08-17 at 10:57 +0200, Teresa Remmet wrote:
+> > Recent shipped PHYTEC SoMs come with an i2c  EEPROM containing
+> > information about the hardware such as board revision and variant.
+> > This can be used for RAM detection and loading device tree overlays
+> > during kernel start.
+> >
+> > Signed-off-by: Teresa Remmet <t.remmet@phytec.de>
 >
-> Use DM_I2C and DM_SERIAL as it is now mandatory.
->
-> Signed-off-by: Andrej Rosano <andrej.rosano@withsecure.com>
+> Reviewed-by: Yannic Moog <y.moog@phytec.de>
+> Tested-by: Yannic Moog <y.moog@phytec.de>
+
+For the series:
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
