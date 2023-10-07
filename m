@@ -4,69 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 812FAE95A80
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:19:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1016E95A7E
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:19:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5FA786DD5;
-	Sun,  8 Oct 2023 01:13:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 9F02286F12;
+	Sun,  8 Oct 2023 01:13:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="VqBDSMC2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MaBmTvfs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F63886DF5; Sun,  8 Oct 2023 01:12:21 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id D11B786D82; Sun,  8 Oct 2023 01:12:23 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAF6286D82
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:11:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FCDF86EC3
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:12:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-59c215f2f4aso40848677b3.1
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:11:27 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-59f55c276c3so41692347b3.2
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:12:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1696720286; x=1697325086; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696720299; x=1697325099; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/i6Ilta+bxRrw3q3+FQ+SfFUvFwlqxSugD4YKuJ1rbI=;
- b=VqBDSMC2lCjwvcP1QjZoQ6WpFFMHhGxLoQDOxpd6LGCe13pOVkrnA9LLhhcvR2qIrH
- t8wo8KgkQoy3+VnTq0akOF+6mwicbbK8QmsB1jxqPW9F88Nj8uBL+yESwckOOG8KclaT
- 5C47B7IFSLAY47DdH4MAurV3Im+kAF/PqdDojGdtGfQrTDqn5q4UGwMIgXfbVVyw2wPk
- dUZRHLlD54/7woP8yMWlvHw+065CR2bJawauRBzzn5XGMaPYrZy77v6KnCczLbPMY5T5
- DUwH1A/RqfHVwdy+gV4VrvQZmZfTtIDf4WcEiBNpaw3o1camZCxWpBA5hJmYcLr6mOzf
- jAag==
+ bh=brwmuHGu8Riz1grNFaWCRLl9hr+96w+HHxXHdlBbJa0=;
+ b=MaBmTvfsMn2ZBq8TPlAkRD/TiM4PmQkXQsMNyaecKQsvh00SOQ1ea1Iyur4T7gjYNf
+ pgjfVToEn2NSr/MX8N/DxeGQ7hI/b9Y5r4+vmXg1vkXxcvT9hN2jrPQ62bv+RYib+sfl
+ yFG2VR7NrqQgimn8fwEe7jIA8h7VENkDa4DD4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696720286; x=1697325086;
+ d=1e100.net; s=20230601; t=1696720299; x=1697325099;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/i6Ilta+bxRrw3q3+FQ+SfFUvFwlqxSugD4YKuJ1rbI=;
- b=ZswE259zyK/IxlsMGDeP0DPW2YYOtpEIlzxqvyirl0FAiQ4UE+UX698DAECry5g5WU
- rHW3ecORc2QGKsbc4suxZHe7Ns2g2HAEDs7gBJC9JOksKLNGwoWmlDfkXvKjSk4vfvva
- LkmB4KDDcOMPKn9sH+rnrZezd/y++aQ/l1l/RDxjiizaSKmD/qdtzw3DUoJ83c+g+vKE
- zbb6GkpZFkjhHS723abQWZal3Osi1EtYVCxLVAQFGMd3PyZSRYjwAKMgLJRrF4D34AQ7
- U8B4PL00xMNE1gUb/fJxVfDZZLRXu+9YTOX2e6M1qHpnIGZ7dqYX6wckg07yC5fpyRfB
- UFEA==
-X-Gm-Message-State: AOJu0Yyszjo71TLuT+04dTSzgZzJaOszC33ibJT5V2qAO6BZl8087NQI
- 3TYUY1bR/mWBDc8Mzj+iPBN7+nJJCGY0tuhqUvQhFdu5q75fsf0z+dw=
-X-Google-Smtp-Source: AGHT+IEZoH/pT4yBAxJiUTykyhHx50J8xtUTu0ERqiYZlWcRdHSREh40pX2IbUVy9zrE+CjqwhlWEtnn22bXmOeuh/I=
-X-Received: by 2002:a0d:d611:0:b0:577:1560:9e17 with SMTP id
- y17-20020a0dd611000000b0057715609e17mr12455450ywd.35.1696720285467; Sat, 07
- Oct 2023 16:11:25 -0700 (PDT)
+ bh=brwmuHGu8Riz1grNFaWCRLl9hr+96w+HHxXHdlBbJa0=;
+ b=CjUj2DdRpRrmIZWpPsZYoI0OT1pOtPwvlfLNDyxycacpXRew3c1NGTHgWjN55dpF0W
+ HdohB4bOsNrdTJKmISxF2VRaWJwm2DDiubZx2+J+3UEh/YzwAjfjQ47L5SdsJxY94Dey
+ L10sOVPB3gtwWxJUKFckwtiBqdIZx1BgMIjFBqJC4Ztpyn3555TnCrzg9hqLFLYjRG8d
+ D/HbVWTVtuKRxp9mJgkbNUM6dnIJWLMVHRL/EChq2x2AacCtTANGxgLnJ+vnbtVoFTuu
+ n7+3VgrWpvus+DHlkKUuU5pK0nSnVh4nzRW/hpaRm+yv8Wj4ImIki6ZQ6ubsLI3tbgvy
+ xLJw==
+X-Gm-Message-State: AOJu0YxjHPdEWOT83Vv4YByZK5ihYsYVGC47pzl25OITSEQWJyytLhBE
+ mZIK/unay71KBkXUUxwl2svQeB3YqiIwC0MHqUfeaw==
+X-Google-Smtp-Source: AGHT+IE/q4WVrykVhytH4GX3E6zpV6P7+sGh17U68i6teOYP6EWMG02srY2RydhMZuICYdZZ6eQEwwQ7LZqVco13jzA=
+X-Received: by 2002:a81:8345:0:b0:59c:a68:d36b with SMTP id
+ t66-20020a818345000000b0059c0a68d36bmr13523340ywf.20.1696720299265; Sat, 07
+ Oct 2023 16:11:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <ZSCw7eCcnSRpgkBN@alg-gentoo>
-In-Reply-To: <ZSCw7eCcnSRpgkBN@alg-gentoo>
-From: Simon Glass <sjg@google.com>
-Date: Sat, 7 Oct 2023 17:10:02 -0600
-Message-ID: <CAPnjgZ1jyvKku8V5UKqVxBHC4qEy7EtHN+yBuUNQW0pxxHpwkg@mail.gmail.com>
-Subject: Re: [PATCH] cmd: mbr: Allow 4 MBR partitions without need for extended
-To: Alexander Gendin <agendin@matrox.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>
+References: <20231004-binman-firewalling-v3-0-e4a102324e1f@ti.com>
+ <20231004-binman-firewalling-v3-1-e4a102324e1f@ti.com>
+In-Reply-To: <20231004-binman-firewalling-v3-1-e4a102324e1f@ti.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 7 Oct 2023 17:10:06 -0600
+Message-ID: <CAPnjgZ0zULhGofQvoThH1i1Ynjg1r1fT1U6reimbysfAxfNo9Q@mail.gmail.com>
+Subject: Re: [PATCH v3 1/6] binman: ti-secure: Add support for firewalling
+ entities
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ u-boot@lists.denx.de, 
+ Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,558 +87,233 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexander,
+Hi Manorit,
 
-On Fri, 6 Oct 2023 at 21:58, Alexander Gendin <agendin@matrox.com> wrote:
+On Wed, 4 Oct 2023 at 06:32, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
 >
-> Current code allows up to 3 MBR partitions without extended one.
-> If more than 3 partitions are required, then extended partition(s)
-> must be used.
-> This commit allows up to 4 primary MBR partitions without the
-> need for extended partition.
+> We can now firewall entities while loading them through our secure
+> entity TIFS, the required information should be present in the
+> certificate that is being parsed by TIFS.
 >
-> Add mbr test unit. In order to use the test, mmc1.img file of size
-> 12 MiB or greater is required in the same directory as u-boot.
-> Running mbr test is only supported in sandbox mode.
+> The following commit adds the support to enable the certificates to be
+> generated if the firewall configurations are present in the binman dtsi
+> nodes.
 >
-> Signed-off-by: Alex Gendin <agendin@matrox.com>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 > ---
->  disk/part_dos.c       |   2 +-
->  include/test/suites.h |   1 +
->  test/cmd/Makefile     |   1 +
->  test/cmd/mbr.c        | 440 ++++++++++++++++++++++++++++++++++++++++++
->  test/cmd_ut.c         |   4 +
->  5 files changed, 447 insertions(+), 1 deletion(-)
->  create mode 100644 test/cmd/mbr.c
-
-This looks OK apart from one thing...also I have a few suggestions /
-questions below.
-
+>  tools/binman/btool/openssl.py   | 16 +++++++-
+>  tools/binman/etype/ti_secure.py | 85 +++++++++++++++++++++++++++++++++++++++++
+>  tools/binman/etype/x509_cert.py |  3 +-
+>  3 files changed, 101 insertions(+), 3 deletions(-)
 >
-> diff --git a/disk/part_dos.c b/disk/part_dos.c
-> index 3337438437..567ead7511 100644
-> --- a/disk/part_dos.c
-> +++ b/disk/part_dos.c
-> @@ -466,7 +466,7 @@ int layout_mbr_partitions(struct disk_partition *p, int count,
->                         ext = &p[i];
->         }
+> diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
+> index aad3b61ae27c..dff439df211f 100644
+> --- a/tools/binman/btool/openssl.py
+> +++ b/tools/binman/btool/openssl.py
+> @@ -82,7 +82,7 @@ imageSize              = INTEGER:{len(indata)}
+>          return self.run_cmd(*args)
 >
-> -       if (count < 4)
-> +       if (count <= 4)
->                 return 0;
+>      def x509_cert_sysfw(self, cert_fname, input_fname, key_fname, sw_rev,
+> -                  config_fname, req_dist_name_dict):
+> +                  config_fname, req_dist_name_dict, firewall_cert_data):
+>          """Create a certificate to be booted by system firmware
 >
->         if (!ext) {
-> diff --git a/include/test/suites.h b/include/test/suites.h
-> index 1c7dc65966..51acbe47b2 100644
-> --- a/include/test/suites.h
-> +++ b/include/test/suites.h
-> @@ -45,6 +45,7 @@ int do_ut_font(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_ut_lib(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_ut_loadm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_ut_log(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
-> +int do_ut_mbr(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_ut_mem(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
->  int do_ut_overlay(struct cmd_tbl *cmdtp, int flag, int argc,
-> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
-> index 6e3d7e919e..2f251e07b4 100644
-> --- a/test/cmd/Makefile
-> +++ b/test/cmd/Makefile
-> @@ -23,6 +23,7 @@ obj-$(CONFIG_CMD_PINMUX) += pinmux.o
->  obj-$(CONFIG_CMD_PWM) += pwm.o
->  obj-$(CONFIG_CMD_SEAMA) += seama.o
->  ifdef CONFIG_SANDBOX
-> +obj-$(CONFIG_CMD_MBR) += mbr.o
->  obj-$(CONFIG_CMD_READ) += rw.o
->  obj-$(CONFIG_CMD_SETEXPR) += setexpr.o
->  obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
-> diff --git a/test/cmd/mbr.c b/test/cmd/mbr.c
-> new file mode 100644
-> index 0000000000..bedcef0638
-> --- /dev/null
-> +++ b/test/cmd/mbr.c
-> @@ -0,0 +1,440 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Tests for mbr command
-> + *
-> + * Copyright 2023 Matrox Video
-> + * Written by Alex Gendin <agendin@matrox.com>
-> + */
+>          Args:
+> @@ -94,6 +94,13 @@ imageSize              = INTEGER:{len(indata)}
+>              req_dist_name_dict (dict): Dictionary containing key-value pairs of
+>              req_distinguished_name section extensions, must contain extensions for
+>              C, ST, L, O, OU, CN and emailAddress
+> +            firewall_cert_data (dict):
+> +              - auth_in_place (int): The Priv ID for copying as the
+> +                specific host in firewall protected region
+> +              - num_firewalls (int): The number of firewalls in the
+> +                extended certificate
+> +              - certificate (str): Extended firewall certificate with
+> +                the information for the firewall configurations.
+>
+>          Returns:
+>              str: Tool output
+> @@ -121,6 +128,7 @@ basicConstraints       = CA:true
+>  1.3.6.1.4.1.294.1.3    = ASN1:SEQUENCE:swrv
+>  1.3.6.1.4.1.294.1.34   = ASN1:SEQUENCE:sysfw_image_integrity
+>  1.3.6.1.4.1.294.1.35   = ASN1:SEQUENCE:sysfw_image_load
+> +1.3.6.1.4.1.294.1.37   = ASN1:SEQUENCE:firewall
+>
+>  [ swrv ]
+>  swrv = INTEGER:{sw_rev}
+> @@ -132,7 +140,11 @@ imageSize              = INTEGER:{len(indata)}
+>
+>  [ sysfw_image_load ]
+>  destAddr = FORMAT:HEX,OCT:00000000
+> -authInPlace = INTEGER:2
+> +authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
 > +
-> +#include <common.h>
-> +#include <console.h>
-> +#include <mapmem.h>
-> +#include <part.h>
-> +#include <asm/global_data.h>
-> +#include <test/suites.h>
-> +#include <test/ut.h>
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +/*
-> + * Test requirements:
-> + * mmc1.img - File size needs to be at least 12 MiB
-> + *
-> + * Command to create mmc1.img:
-> + * $ dd if=/dev/zero of=mmc1.img bs=12M count=1
-> + *
-> + * Place mmc1.img into the same directory as sandboxed u-boot
-> + *
-> + * To run this test manually:
-> + * $ ./u-boot -Tc 'ut mbr'
+> +[ firewall ]
+> +numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
+> +{firewall_cert_data['certificate']}
 
-These requirements need to be dealt with by a test script. You can set
-up this device in test_ut_dm_init_bootstd(). You may need to create a
-new mmc as the others are in use.
+Do we want the text above if there is no firewall info?
 
-> + */
+>  ''', file=outf)
+>          args = ['req', '-new', '-x509', '-key', key_fname, '-nodes',
+>                  '-outform', 'DER', '-out', cert_fname, '-config', config_fname,
+> diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
+> index d939dce57139..a7409023fa55 100644
+> --- a/tools/binman/etype/ti_secure.py
+> +++ b/tools/binman/etype/ti_secure.py
+> @@ -7,9 +7,35 @@
+>
+>  from binman.entry import EntryArg
+>  from binman.etype.x509_cert import Entry_x509_cert
+> +from dataclasses import dataclass
+>
+>  from dtoc import fdt_util
+>
+> +@dataclass
+> +class Firewall():
+> +    id: int
+> +    region: int
+> +    control : int
+> +    permissions: list[hex]
+> +    start_address: str
+> +    end_address: str
 > +
-> +static char * mbr_parts_header = "setenv mbr_parts '";
-> +static char * mbr_parts_p1 = "uuid_disk=0x12345678;name=p1,start=8M,bootable,size=1M,id=0x0e";
-> +static char * mbr_parts_p2 = ";name=p2,size=1M,id=0x0e";
-> +static char * mbr_parts_p3 = ";name=p3,size=1M,id=0x0e";
-> +static char * mbr_parts_p4 = ";name=p4,size=1M,id=0x0e";
-> +static char * mbr_parts_p5 = ";name=[ext],size=2M,id=0x05;name=p5,size=1M,id=0x0e";
-> +static char * mbr_parts_tail = "'";
+> +    def get_certificate(self) -> str:
+> +        unique_identifier = f"{self.id}{self.region}"
+> +        cert = f"""
+> +firewallID{unique_identifier} = INTEGER:{self.id}
+> +region{unique_identifier} = INTEGER:{self.region}
+> +control{unique_identifier} = INTEGER:{hex(self.control)}
+> +nPermissionRegs{unique_identifier} = INTEGER:{len(self.permissions)}
+> +"""
+> +        for index, permission in enumerate(self.permissions):
+> +            cert += f"""permissions{unique_identifier}{index} = INTEGER:{hex(permission)}
+> +"""
+> +        cert += f"""startAddress{unique_identifier} = FORMAT:HEX,OCT:{self.start_address:02x}
+> +endAddress{unique_identifier} = FORMAT:HEX,OCT:{self.end_address:02x}
+> +"""
+> +        return cert
 > +
-> +/*
-> + * One MBR partition
-> +000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 00  |...%$..@........|
-> +000001d0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
-> +*/
-> +static unsigned mbr_cmp_start = 0x1B8;
-> +static unsigned mbr_cmp_size = 0x48;
-> +static unsigned char mbr_parts_ref_p1[] = {
-> +                                                0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x80, 0x05,
-> +0x05, 0x01, 0x0e, 0x25, 0x24, 0x01, 0x00, 0x40, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xaa
-> +};
+>  class Entry_ti_secure(Entry_x509_cert):
+>      """Entry containing a TI x509 certificate binary
+>
+> @@ -17,6 +43,11 @@ class Entry_ti_secure(Entry_x509_cert):
+>          - content: List of phandles to entries to sign
+>          - keyfile: Filename of file containing key to sign binary with
+>          - sha: Hash function to be used for signing
+> +        - auth_in_place: This is an integer field that contains two pieces
+> +          of information
+> +            Lower Byte - Remains 0x02 as per our use case
+> +            ( 0x02: Move the authenticated binary back to the header )
+> +            Upper Byte - The Host ID of the core owning the firewall
+>
+>      Output files:
+>          - input.<unique_name> - input file passed to openssl
+> @@ -25,6 +56,35 @@ class Entry_ti_secure(Entry_x509_cert):
+>          - cert.<unique_name> - output file generated by openssl (which is
+>            used as the entry contents)
+>
+> +    Depending on auth_in_place information in the inputs, we read the
+> +    firewall nodes that describe the configurations of firewall that TIFS
+> +    will be doing after reading the certificate.
 > +
-> +/*
-> + * Two MBR partitions
-> +000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-> +000001d0  25 01 0e 46 05 01 00 48  00 00 00 08 00 00 00 00  |%..F...H........|
-> +000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
-> +*/
-> +static unsigned char mbr_parts_ref_p2[] = {
-> +                                                0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x80, 0x05,
-> +0x05, 0x01, 0x0e, 0x25, 0x24, 0x01, 0x00, 0x40, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x25,
-> +0x25, 0x01, 0x0e, 0x46, 0x05, 0x01, 0x00, 0x48, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xaa
-> +};
+> +    The syntax of the firewall nodes are as such:
 > +
-> +/*
-> + * Three MBR partitions
-> +000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-> +000001d0  25 01 0e 46 05 01 00 48  00 00 00 08 00 00 00 46  |%..F...H.......F|
-> +000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 00  |...f%..P........|
-> +000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
-> +*/
-> +static unsigned char mbr_parts_ref_p3[] = {
-> +                                                0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x80, 0x05,
-> +0x05, 0x01, 0x0e, 0x25, 0x24, 0x01, 0x00, 0x40, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x25,
-> +0x25, 0x01, 0x0e, 0x46, 0x05, 0x01, 0x00, 0x48, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x46,
-> +0x06, 0x01, 0x0e, 0x66, 0x25, 0x01, 0x00, 0x50, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xaa
-> +};
+> +    firewall-257-0 {
+> +        id = <257>;           /* The ID of the firewall being configured */
+> +        region = <0>;         /* Region number to configure */
 > +
-> +/*
-> + * Four MBR partitions
-> +000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-> +000001d0  25 01 0e 46 05 01 00 48  00 00 00 08 00 00 00 46  |%..F...H.......F|
-> +000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 66  |...f%..P.......f|
-> +000001f0  26 01 0e 87 06 01 00 58  00 00 00 08 00 00 55 aa  |&......X......U.|
-> +*/
-> +static unsigned char mbr_parts_ref_p4[] = {
-> +                                                0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x80, 0x05,
-> +0x05, 0x01, 0x0e, 0x25, 0x24, 0x01, 0x00, 0x40, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x25,
-> +0x25, 0x01, 0x0e, 0x46, 0x05, 0x01, 0x00, 0x48, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x46,
-> +0x06, 0x01, 0x0e, 0x66, 0x25, 0x01, 0x00, 0x50, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x66,
-> +0x26, 0x01, 0x0e, 0x87, 0x06, 0x01, 0x00, 0x58, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x55, 0xaa
-> +};
+> +        control =             /* The control register */
+> +            <(FWCTRL_EN | FWCTRL_LOCK | FWCTRL_BG | FWCTRL_CACHE)>;
 > +
-> +/*
-> + * Five MBR partitions
-> +000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-> +000001d0  25 01 0e 46 05 01 00 48  00 00 00 08 00 00 00 46  |%..F...H.......F|
-> +000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 66  |...f%..P.......f|
-> +000001f0  26 01 05 a7 26 01 00 58  00 00 00 10 00 00 55 aa  |&...&..X......U.|
-> +*/
-> +static unsigned char mbr_parts_ref_p5[] = {
-> +                                                0x78, 0x56, 0x34, 0x12, 0x00, 0x00, 0x80, 0x05,
-> +0x05, 0x01, 0x0e, 0x25, 0x24, 0x01, 0x00, 0x40, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x25,
-> +0x25, 0x01, 0x0e, 0x46, 0x05, 0x01, 0x00, 0x48, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x46,
-> +0x06, 0x01, 0x0e, 0x66, 0x25, 0x01, 0x00, 0x50, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x66,
-> +0x26, 0x01, 0x05, 0xa7, 0x26, 0x01, 0x00, 0x58, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x55, 0xaa
-> +};
-> +static unsigned ebr_cmp_start = 0x1B8;
-> +static unsigned ebr_cmp_size = 0x48;
-> +/*
-> + * EBR
-> +00b001b0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 87  |................|
-> +00b001c0  07 01 0e a7 26 01 00 08  00 00 00 08 00 00 00 00  |....&...........|
-> +00b001d0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +00b001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +00b001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
-> +*/
-> +static unsigned char ebr_parts_ref_p5[] = {
-> +                                                0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x87,
-> +0x07, 0x01, 0x0e, 0xa7, 0x26, 0x01, 0x00, 0x08, 0x00, 0x00, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-> +0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x55, 0xaa
-> +};
+> +        permissions =         /* The permission registers */
+> +            <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
+> +                        FWPERM_SECURE_PRIV_RWCD |
+> +                        FWPERM_SECURE_USER_RWCD |
+> +                        FWPERM_NON_SECURE_PRIV_RWCD |
+> +                        FWPERM_NON_SECURE_USER_RWCD)>;
+> +
+> +        /* More defines can be found in k3-security.h */
+> +
+> +        start_address =        /* The Start Address of the firewall */
+> +            <0x0 0x0>;
+> +        end_address =          /* The End Address of the firewall */
+> +            <0xff 0xffffffff>;
+> +    };
+> +
+> +
+>      openssl signs the provided data, using the TI templated config file and
+>      writes the signature in this entry. This allows verification that the
+>      data is genuine.
+> @@ -32,11 +92,20 @@ class Entry_ti_secure(Entry_x509_cert):
+>      def __init__(self, section, etype, node):
+>          super().__init__(section, etype, node)
+>          self.openssl = None
+> +        self.firewall_cert_data: dict = {
+> +            'auth_in_place': 0x02,
+> +            'num_firewalls': 0,
+> +            'certificate': "",
+> +        }
+>
+>      def ReadNode(self):
+>          super().ReadNode()
+>          self.key_fname = self.GetEntryArgsOrProps([
+>              EntryArg('keyfile', str)], required=True)[0]
+> +        auth_in_place = fdt_util.GetInt(self._node, "auth_in_place")
 
-What do you think about creating these in code? E.g. have a function
-which outputs the bytes for a partition and then call it 1 to 4 times?
+Please use hyphens in properties. If that is a bool, use GetBool()
 
-> +
-> +static void init_buffers(char *rb, size_t rb_size, char *mbr_wb, size_t mbr_wb_size,
-> +                       char *ebr_wb, size_t ebr_wb_size, unsigned seed)
 
-Needs a comment
+> +        if auth_in_place:
+> +            self.firewall_cert_data['auth_in_place'] = auth_in_place
+> +            self.ReadFirewallNode()
+>          self.sha = fdt_util.GetInt(self._node, 'sha', 512)
+>          self.req_dist_name = {'C': 'US',
+>                  'ST': 'TX',
+> @@ -46,6 +115,22 @@ class Entry_ti_secure(Entry_x509_cert):
+>                  'CN': 'TI Support',
+>                  'emailAddress': 'support@ti.com'}
+>
+> +    def ReadFirewallNode(self):
+> +        self.firewall_cert_data['certificate'] = ""
+> +        self.firewall_cert_data['num_firewalls'] = 0
+> +        for node in self._node.subnodes:
+> +            if 'firewall' in node.name:
+> +                firewall = Firewall(
+> +                     fdt_util.GetInt(node, 'id'),
+> +                     fdt_util.GetInt(node, 'region'),
+> +                     fdt_util.GetInt(node, 'control'),
+> +                     fdt_util.GetPhandleList(node, 'permissions'),
+> +                     fdt_util.GetInt64(node, 'start_address'),
+> +                     fdt_util.GetInt64(node, 'end_address'),
 
-> +{
-> +       memset(rb, 0, rb_size);
-> +       while (mbr_wb_size--) {
-> +               *mbr_wb++ = seed;
-> +               seed *= 43;
-> +               seed += 17 + mbr_wb_size/4;
-> +       }
-> +       while (ebr_wb_size--) {
-> +               *ebr_wb++ = seed;
-> +               seed *= 43;
-> +               seed += 17 + ebr_wb_size/4;
-> +       }
-> +}
-> +
-> +static unsigned build_mbr_parts(char *buf, size_t buf_size, unsigned num_parts)
-> +{
-> +       size_t bytes_remaining, cur_str_size;
-> +       char * cur_buf;
-> +
-> +       if (0 == num_parts || 5 < num_parts || NULL == buf)
-> +               return 1;
+What happens if some of these properties are missing?
 
-!num_parts
-!buf
-
-(we normally put the var before the value, so numparts >= 5)
-
+> +                )
+> +                self.firewall_cert_data['num_firewalls'] += 1
+> +                self.firewall_cert_data['certificate'] += firewall.get_certificate()
 > +
-> +       cur_buf = buf;
-> +       *cur_buf = '\0';
-> +       bytes_remaining = buf_size;
-> +
-> +       cur_str_size = sizeof(mbr_parts_header);
-> +       if (1 + cur_str_size > bytes_remaining)
-
-Again, better to use cur_str_size + 1
-
-> +               return 1;
-> +       strcat(cur_buf, mbr_parts_header);
-> +       bytes_remaining -= cur_str_size;
-> +
-> +       if (1 <= num_parts) {
-> +               cur_str_size = sizeof(mbr_parts_p1);
-> +               if (1 + cur_str_size > bytes_remaining)
-> +                       return 1;
-> +               strcat(cur_buf, mbr_parts_p1);
-> +               bytes_remaining -= cur_str_size;
-> +
-> +               if (2 <= num_parts) {
-> +                       cur_str_size = sizeof(mbr_parts_p2);
-> +                       if (1 + cur_str_size > bytes_remaining)
-> +                               return 1;
-> +                       strcat(cur_buf, mbr_parts_p2);
-> +                       bytes_remaining -= cur_str_size;
-> +
-> +                       if (3 <= num_parts) {
-> +                               cur_str_size = sizeof(mbr_parts_p3);
-> +                               if (1 + cur_str_size > bytes_remaining)
-> +                                       return 1;
-> +                               strcat(cur_buf, mbr_parts_p3);
-> +                               bytes_remaining -= cur_str_size;
-> +
-> +                               if (4 == num_parts) {
-> +                                       cur_str_size = sizeof(mbr_parts_p4);
-> +                                       if (1 + cur_str_size > bytes_remaining)
-> +                                               return 1;
-> +                                       strcat(cur_buf, mbr_parts_p4);
-> +                                       bytes_remaining -= cur_str_size;
-> +
-> +                               }
-> +                       else if (5 == num_parts) {
-> +                               cur_str_size = sizeof(mbr_parts_p5);
-> +                               if (1 + cur_str_size > bytes_remaining)
-> +                                       return 1;
-> +                               strcat(cur_buf, mbr_parts_p5);
-> +                               bytes_remaining -= cur_str_size;
-> +
-> +                       }
-> +                       else if (5 < num_parts)
-> +                               return 1;
-> +                       }
-> +               }
-> +       }
-> +
-> +       cur_str_size = sizeof(mbr_parts_tail);
-> +       if (1 + cur_str_size > bytes_remaining)
-> +               return 1;
-> +       strcat(cur_buf, mbr_parts_tail);
-> +
-> +       return 0;
-> +}
-> +
-> +static int mbr_test_run(struct unit_test_state *uts)
-> +{
-> +       struct blk_desc *mmc_dev_desc;
-> +       unsigned char mbr_wbuf[512], ebr_wbuf[512], rbuf[512];
-> +       char mbr_parts_buf[256];
-> +       ulong mbr_wa, ebr_wa, ra, ebr_blk, mbr_parts_max;
-> +
-> +       mbr_parts_max = 2 + sizeof('\0')
-> +               + strlen(mbr_parts_header)
-> +               + strlen(mbr_parts_p1)
-> +               + strlen(mbr_parts_p2)
-> +               + strlen(mbr_parts_p3)
-> +               + strlen(mbr_parts_p4)
-> +               + strlen(mbr_parts_p5)
-> +               + strlen(mbr_parts_tail);
-> +       ut_assertf(sizeof(mbr_parts_buf) >= mbr_parts_max, "Buffer avail: %ld; buffer req: %ld\n",
-> +               sizeof(mbr_parts_buf), mbr_parts_max);
-> +
-> +       mbr_wa = map_to_sysmem(mbr_wbuf);
-> +       ebr_wa = map_to_sysmem(ebr_wbuf);
-> +       ra = map_to_sysmem(rbuf);
-> +       ebr_blk = (ulong)0xB00000 / 0x200;
-> +
-> +       /* Make sure mmc1 exists */
-> +       ut_asserteq(1, blk_get_device_by_str("mmc", "1", &mmc_dev_desc));
-> +       ut_assertok(console_record_reset_enable());
-
-You shouldn't need these
-
-> +       ut_assertok(run_commandf("mmc dev 1"));
-> +       ut_assert_nextline("switch to partitions #0, OK");
-> +       ut_assert_nextline("mmc1 is current device");
-> +       ut_assertok(ut_check_console_end(uts));
-> +
-> +       /* Make sure mmc1 is 12+ MiB in size */
-> +       ut_assertok(run_commandf("mmc read 0x%lx 0x%lx 1", ra, (ulong)0xBFFE00 / 0x200));
-> +
-> +       /* Test one MBR partition */
-> +       init_buffers(rbuf, sizeof(rbuf), mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
-> +       ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 1));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0 1", mbr_wa));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0x%lx 1", ebr_wa, ebr_blk));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(console_record_reset_enable());
-> +       ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
-> +       ut_assertok(run_commandf("mbr write mmc 1"));
-> +       ut_assert_nextline("MBR: write success!");
-> +       ut_assertok(run_commandf("mbr verify mmc 1"));
-> +       ut_assert_nextline("MBR: verify success!");
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(ut_check_console_end(uts));
-> +       /*
-> +       000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +       000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 00  |...%$..@........|
-> +       000001d0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +       000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +       000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
-> +       */
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       for (unsigned i = 0; i < mbr_cmp_size; i++) {
-> +               ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p1[i],
-> +                       "1P MBR+0x%04X: expected 0x%02X, actual: 0x%02X\n",
-> +                       mbr_cmp_start + i, mbr_parts_ref_p1[i], rbuf[mbr_cmp_start + i]);
-> +       }
-> +
-> +       /* Test two MBR partitions */
-> +       init_buffers(rbuf, sizeof(rbuf), mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
-> +       ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 2));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0 1", mbr_wa));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0x%lx 1", ebr_wa, ebr_blk));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(console_record_reset_enable());
-> +       ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
-> +       ut_assertok(run_commandf("mbr write mmc 1"));
-> +       ut_assert_nextline("MBR: write success!");
-> +       ut_assertok(run_commandf("mbr verify mmc 1"));
-> +       ut_assert_nextline("MBR: verify success!");
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(ut_check_console_end(uts));
-> +       /*
-> +       000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +       000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-> +       000001d0  25 01 0e 46 05 01 00 48  00 00 00 08 00 00 00 00  |%..F...H........|
-> +       000001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +       000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
-> +       */
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       for (unsigned i = 0; i < mbr_cmp_size; i++) {
-> +               ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p2[i],
-> +                       "2P MBR+0x%04X: expected 0x%02X, actual: 0x%02X\n",
-> +                       mbr_cmp_start + i, mbr_parts_ref_p2[i], rbuf[mbr_cmp_start + i]);
-> +       }
-> +
-> +       /* Test three MBR partitions */
-> +       init_buffers(rbuf, sizeof(rbuf), mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
-> +       ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 3));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0 1", mbr_wa));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0x%lx 1", ebr_wa, ebr_blk));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(console_record_reset_enable());
-> +       ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
-> +       ut_assertok(run_commandf("mbr write mmc 1"));
-> +       ut_assert_nextline("MBR: write success!");
-> +       ut_assertok(run_commandf("mbr verify mmc 1"));
-> +       ut_assert_nextline("MBR: verify success!");
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(ut_check_console_end(uts));
-> +       /*
-> +       000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +       000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-> +       000001d0  25 01 0e 46 05 01 00 48  00 00 00 08 00 00 00 46  |%..F...H.......F|
-> +       000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 00  |...f%..P........|
-> +       000001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
-> +       */
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       for (unsigned i = 0; i < mbr_cmp_size; i++) {
-> +               ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p3[i],
-> +                       "3P MBR+0x%04X: expected 0x%02X, actual: 0x%02X\n",
-> +                       mbr_cmp_start + i, mbr_parts_ref_p3[i], rbuf[mbr_cmp_start + i]);
-> +       }
-> +
-> +       /* Test four MBR partitions */
-> +       init_buffers(rbuf, sizeof(rbuf), mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
-> +       ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 4));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0 1", mbr_wa));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0x%lx 1", ebr_wa, ebr_blk));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(console_record_reset_enable());
-> +       ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
-> +       ut_assertok(run_commandf("mbr write mmc 1"));
-> +       ut_assert_nextline("MBR: write success!");
-> +       ut_assertok(run_commandf("mbr verify mmc 1"));
-> +       ut_assert_nextline("MBR: verify success!");
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(ut_check_console_end(uts));
-> +       /*
-> +       000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +       000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-> +       000001d0  25 01 0e 46 05 01 00 48  00 00 00 08 00 00 00 46  |%..F...H.......F|
-> +       000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 66  |...f%..P.......f|
-> +       000001f0  26 01 0e 87 06 01 00 58  00 00 00 08 00 00 55 aa  |&......X......U.|
-> +       */
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       for (unsigned i = 0; i < mbr_cmp_size; i++) {
-> +               ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p4[i],
-> +                       "4P MBR+0x%04X: expected 0x%02X, actual: 0x%02X\n",
-> +                       mbr_cmp_start + i, mbr_parts_ref_p4[i], rbuf[mbr_cmp_start + i]);
-> +       }
-> +
-> +       /* Test five MBR partitions */
-> +       init_buffers(rbuf, sizeof(rbuf), mbr_wbuf, sizeof(mbr_wbuf), ebr_wbuf, sizeof(ebr_wbuf), __LINE__);
-> +       ut_assertok(build_mbr_parts(mbr_parts_buf, sizeof(mbr_parts_buf), 5));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0 1", mbr_wa));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       ut_assertok(memcmp(mbr_wbuf, rbuf, 512));
-> +       ut_assertok(run_commandf("write mmc 1:0 0x%lx 0x%lx 1", ebr_wa, ebr_blk));
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       ut_assertok(memcmp(ebr_wbuf, rbuf, 512));
-> +       ut_assertok(console_record_reset_enable());
-> +       ut_assertf(0 == run_commandf(mbr_parts_buf), "Invalid partitions string: %s\n", mbr_parts_buf);
-> +       ut_assertf(0 == run_commandf("mbr write mmc 1"), "Invalid partitions string: %s\n", mbr_parts_buf);
-> +       ut_assert_nextline("MBR: write success!");
-> +       ut_assertok(run_commandf("mbr verify mmc 1"));
-> +       ut_assert_nextline("MBR: verify success!");
-> +       ut_assertok(ut_check_console_end(uts));
-> +       /*
-> +       000001b0  00 00 00 00 00 00 00 00  78 56 34 12 00 00 80 05  |........xV4.....|
-> +       000001c0  05 01 0e 25 24 01 00 40  00 00 00 08 00 00 00 25  |...%$..@.......%|
-> +       000001d0  25 01 0e 46 05 01 00 48  00 00 00 08 00 00 00 46  |%..F...H.......F|
-> +       000001e0  06 01 0e 66 25 01 00 50  00 00 00 08 00 00 00 66  |...f%..P.......f|
-> +       000001f0  26 01 05 a7 26 01 00 58  00 00 00 10 00 00 55 aa  |&...&..X......U.|
-> +       */
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0 1", ra));
-> +       for (unsigned i = 0; i < mbr_cmp_size; i++) {
-> +               ut_assertf(rbuf[mbr_cmp_start + i] == mbr_parts_ref_p5[i],
-> +                       "5P MBR+0x%04X: expected 0x%02X, actual: 0x%02X\n",
-> +                       mbr_cmp_start + i, mbr_parts_ref_p5[i], rbuf[mbr_cmp_start + i]);
-> +       }
-> +       /*
-> +       00b001b0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 87  |................|
-> +       00b001c0  07 01 0e a7 26 01 00 08  00 00 00 08 00 00 00 00  |....&...........|
-> +       00b001d0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +       00b001e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
-> +       00b001f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 55 aa  |..............U.|
-> +       */
-> +       ut_assertok(run_commandf("read mmc 1:0 0x%lx 0x%lx 1", ra, ebr_blk));
-> +       for (unsigned i = 0; i < ebr_cmp_size; i++) {
-> +               ut_assertf(rbuf[ebr_cmp_start + i] == ebr_parts_ref_p5[i],
-> +                       "5P EBR+0x%04X: expected 0x%02X, actual: 0x%02X\n",
-> +                       ebr_cmp_start + i, ebr_parts_ref_p5[i], rbuf[ebr_cmp_start + i]);
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +/* Declare mbr test */
-> +UNIT_TEST(mbr_test_run, UT_TESTF_CONSOLE_REC, mbr_test);
-> +
-> +int do_ut_mbr(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-> +{
-> +       struct unit_test *tests = UNIT_TEST_SUITE_START(mbr_test);
-> +       const int n_ents = UNIT_TEST_SUITE_COUNT(mbr_test);
-> +
-> +       return cmd_ut_category("mbr", "mbr_test_", tests, n_ents, argc, argv);
-> +}
-> diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-> index 0f56409e80..123db7cc7d 100644
-> --- a/test/cmd_ut.c
-> +++ b/test/cmd_ut.c
-> @@ -86,6 +86,10 @@ static struct cmd_tbl cmd_ut_sub[] = {
->  #endif
->  #ifdef CONFIG_UT_LOG
->         U_BOOT_CMD_MKENT(log, CONFIG_SYS_MAXARGS, 1, do_ut_log, "", ""),
-> +#endif
-> +#if defined(CONFIG_SANDBOX) && defined(CONFIG_CMD_MBR) && defined(CONFIG_CMD_MMC) \
-> +        && defined(CONFIG_MMC_SANDBOX) && defined(CONFIG_MMC_WRITE)
-> +       U_BOOT_CMD_MKENT(mbr, CONFIG_SYS_MAXARGS, 1, do_ut_mbr, "", ""),
->  #endif
->         U_BOOT_CMD_MKENT(mem, CONFIG_SYS_MAXARGS, 1, do_ut_mem, "", ""),
->  #if defined(CONFIG_SANDBOX) && defined(CONFIG_CMD_SETEXPR)
+>      def GetCertificate(self, required):
+>          """Get the contents of this entry
+>
+> diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
+> index d028cfe38cd9..9e1cf479023b 100644
+> --- a/tools/binman/etype/x509_cert.py
+> +++ b/tools/binman/etype/x509_cert.py
+> @@ -98,7 +98,8 @@ class Entry_x509_cert(Entry_collection):
+>                  key_fname=self.key_fname,
+>                  config_fname=config_fname,
+>                  sw_rev=self.sw_rev,
+> -                req_dist_name_dict=self.req_dist_name)
+> +                req_dist_name_dict=self.req_dist_name,
+> +                firewall_cert_data=self.firewall_cert_data)
+>          elif type == 'rom':
+>              stdout = self.openssl.x509_cert_rom(
+>                  cert_fname=output_fname,
+>
 > --
 > 2.41.0
+>
 
 Regards,
 Simon
