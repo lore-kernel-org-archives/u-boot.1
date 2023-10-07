@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89A02E95A61
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 17:46:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5943EE95A62
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 19:13:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D043186936;
-	Sat,  7 Oct 2023 19:46:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0A2D686A02;
+	Sat,  7 Oct 2023 21:13:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HC7Hf/Y/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Zvw1ruMY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C62BA86AB9; Sat,  7 Oct 2023 19:46:53 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 350CA86961; Sat,  7 Oct 2023 21:13:14 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BF9686552
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 19:46:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 32F8586A02
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 21:13:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-277317a0528so683830a91.0
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 10:46:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-59f6441215dso39428537b3.2
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 12:13:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696700806; x=1697305606; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WHgMstv1HiZHaMVdEre7Y//HyvdtVe6wbsp6QXm/bkg=;
- b=HC7Hf/Y/xM33F6OVLB0tbR6YrE0pcuvhi4r3o4Yrd/ILGNuUVByQME6tecjaFFr19T
- 2KqRxepKfZVeLVltUHsdZDSj3ZiQefzFREgpvbAXBerdaClVTA46hKiFm+eCiy082I49
- 1U1ede/mp0kjnX9qemyzkrOhfa7I8sKFCeWcwjf8S6YrzkpKnYZAnlLlz1ptV03AdNWI
- mIVfHeFU4s1/dew4mlwWOfT2n6dXRbWozFdMr8lfemBirkD4jgYzGqIpevvfMx0RA5sv
- tRBl8Xv9bo85t2rEJ9Z2aJ65d+TSgm5Da17WECx205AbGKGdlrVpYLsr0emIC2nNOIZb
- uPOQ==
+ d=konsulko.com; s=google; t=1696705990; x=1697310790; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rA/L7Vbet13XIcJog6RB2P2xOXELlxAAiV9mIAOhFuI=;
+ b=Zvw1ruMY4PSXYdbTCfHiBLKXKo/eqnN3WsGt2Ztg1Jojo7zeZYPvEgYz//n1XHIXr9
+ VmMjwnx7Hl4XSgIAdzNRD0cy3QkMt2noE8asO85v73jJoW83Z8ZcPBW3bZureIGZ99K1
+ UrhWlmYkcQ+q/qOz3Za6e1kpxzL9cjMp1svgQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696700806; x=1697305606;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=WHgMstv1HiZHaMVdEre7Y//HyvdtVe6wbsp6QXm/bkg=;
- b=YkJGTbYYaWcA+ROO5nPqf6aUaR1bHBqWVSCPZ+2tirY7r9Xvqzx+bn3iTT4YHJ2JeV
- 5iWcPOkFXyErKv5X0Dfj/WMa/mEcwV2cu9fdyOZEIYEt4/ThdzJvem+gUaRVDXY3Wrd1
- TqsH+PdCETk5pyn5ZlhWoBTUojOMuNBZ3/M6vZP0ofpHS7igqiiXchl6vtP1Ifexy0Dw
- G0Ti5ZrlWdE2MjcjlXBxJC805l892kl3CH2D2HsjSwKRxQIgbDnKJ79vbAE3TpJWr0uL
- /D9cuLqH+MtAJDWj3DHNiRtkVRicg5WKSi3kDawTcZrLD/wVQA5dprYihcH0V3CQJGID
- Hy0g==
-X-Gm-Message-State: AOJu0Yz74Y8Xo6tZ7bshQI2y++d4TUd67jXT60462PjZFdBoxOe9A1/C
- zvdcBZs1ObBBOW0HafigNPP7p3svyUMLDB7HwevW2VdBtJ0=
-X-Google-Smtp-Source: AGHT+IEEMj+uNlLo0pSCQ9RgCJzK1sJL16Y2aHukmtRt9coFl488liXFmUtLVrEzlRcbRTBWi+zKq9xM9eCbSLB+ZHw=
-X-Received: by 2002:a17:902:e885:b0:1c0:bf60:ba82 with SMTP id
- w5-20020a170902e88500b001c0bf60ba82mr12730878plg.5.1696700806433; Sat, 07 Oct
- 2023 10:46:46 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696705990; x=1697310790;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=rA/L7Vbet13XIcJog6RB2P2xOXELlxAAiV9mIAOhFuI=;
+ b=XEQMlehRMRce3o52Wd9CP54d9bQVZMWSxiOJN6WqYfTISZlGLO4X3ApkhdTOLCWKfq
+ BT4jVexxX8hu7zWUiTIAN6w2qioBbAqHRctwP61Tk0UXsKAH5kNX9gzcvhcu2SFBIG6L
+ AJv5Z9q3Ns/vT952qb+E0pKq4gZE7ejytuinuHvxxcZK53PmS2aiiS8GKUjPfwPF5si4
+ d0+XxTQWUzqu5zcVIoKVsxvay1oYf3XYRr1+/ae9iStHCDC5UkTyPgMdJXJQq8RPYuJN
+ uhMUjsiCicreBOH6CWjm9LNwX0jwb+6RsYtE3auFAmCGiFkxFzqE8lODTK3nwcbPQYej
+ UbwA==
+X-Gm-Message-State: AOJu0YxY9eK7Gw40lR7VsI9UDygTgCLlUftEVJyVvW4ORX4AP5qBTZpP
+ BIG/sUJq6gsg4oGTgNZIXFbqAJhU7otKYN8tnQ+9LA==
+X-Google-Smtp-Source: AGHT+IFpZm+scbYeswU3l6L7+tUAkojie1EQpJmAPpNkCYzUAlfgAUmcyi/uCqrQtv8si2060w6ewA==
+X-Received: by 2002:a81:84c4:0:b0:58e:fa3c:9401 with SMTP id
+ u187-20020a8184c4000000b0058efa3c9401mr10943635ywf.12.1696705990655; 
+ Sat, 07 Oct 2023 12:13:10 -0700 (PDT)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-3c47-81c9-6281-4dc8.res6.spectrum.com.
+ [2603:6081:7b00:6400:3c47:81c9:6281:4dc8])
+ by smtp.gmail.com with ESMTPSA id
+ p63-20020a0de642000000b005704c4d3579sm2244883ywe.40.2023.10.07.12.13.09
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 07 Oct 2023 12:13:09 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH 1/2] command.h: Add a U_BOOT_LONGHELP macro
+Date: Sat,  7 Oct 2023 15:13:07 -0400
+Message-Id: <20231007191308.2222470-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20220830174932.96360-1-alan@londelec.com>
-In-Reply-To: <20220830174932.96360-1-alan@londelec.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 7 Oct 2023 14:46:34 -0300
-Message-ID: <CAOMZO5BJyoxUTBuygdL7tOyzJfRGJT1BQHJ_r0qAD8jYfC+CbQ@mail.gmail.com>
-Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
- from DCDC_BATT without 5V
-To: Alan Kay <alan@londelec.com>, cody@londelec.com,
- Lukasz Majewski <lukma@denx.de>
-Cc: Stefano Babic <sbabic@denx.de>, Marek Vasut <marex@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,44 +86,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alan,
+In order to be able to discard unused long help texts without further
+linker lists, add a macro for defining the long help messages which uses
+__maybe_unused.  This allows us to discard them as unreferenced as part
+of the link.
 
-[Adding Lukasz and Cody]
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ include/command.h | 3 +++
+ 1 file changed, 3 insertions(+)
 
-On Tue, Aug 30, 2022 at 2:49=E2=80=AFPM Alan Kay <alan@londelec.com> wrote:
->
-> mxs_power_enable_4p2() was added to mxs_batt_boot() in
-> 'commit a0f97610757d ("ARM: mxs: Enable DCDC converter for battery boot")=
-'
-> to enable DCDC converter when board is powered from 5V and has
-> detected sufficient battery voltage.
-> This involves enabling 4P2 regulator and there is a code
-> in mxs_power_enable_4p2() that disables VDDIO, VDDA, VDDD outputs of
-> the DCDC converter and enables BO for each power rail e.g.
->
->         setbits_le32(&power_regs->hw_power_vddioctrl,
->                 POWER_VDDIOCTRL_DISABLE_FET | POWER_VDDIOCTRL_PWDN_BRNOUT=
-);
->
-> In case the mx28 is powered by the 5V source and linear regulators are
-> supplying power to the VDDIO, VDDA, VDDD rails there is no issue.
->
-> However if the mx28 is powered by the DCDC_BATT source only without 5V,
-> disabling the DCDC converter outputs causes brownout power down.
->
-> The proposed solution is not to call mxs_power_enable_4p2() at all
-> if the mx28 is powered by the DCDC_BATT source only. There is no
-> reason to enable 4P2 regulator in this case and setup of all registers
-> is done in mxs_batt_boot().
->
-> Also there is no need to enable 5V brownout in
-> mxs_power_init() in this case.
->
-> Please consider if this is acceptable and I will submit a proper patch.
->
-> Signed-off-by: Alan Kay <alan@londelec.com>
+diff --git a/include/command.h b/include/command.h
+index 34ea989b39b4..a836ea795ab6 100644
+--- a/include/command.h
++++ b/include/command.h
+@@ -322,6 +322,9 @@ int cmd_source_script(ulong addr, const char *fit_uname, const char *confname);
+ # define _CMD_HELP(x)
+ #endif
+ 
++#define U_BOOT_LONGHELP(_cmdname, text)					\
++	static __maybe_unused const char _cmdname##_help_text[] = text;
++
+ #define U_BOOT_SUBCMDS_DO_CMD(_cmdname)					\
+ 	static int do_##_cmdname(struct cmd_tbl *cmdtp, int flag,	\
+ 				 int argc, char *const argv[],		\
+-- 
+2.34.1
 
-Cody also sent a fix for this issue:
-
-https://patchwork.ozlabs.org/project/uboot/patch/20230703163340.101490-2-co=
-dy@londelec.com/
