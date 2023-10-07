@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1016E95A7E
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:19:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 471EFE95A7E
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:19:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F02286F12;
-	Sun,  8 Oct 2023 01:13:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0A41F86F1C;
+	Sun,  8 Oct 2023 01:13:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MaBmTvfs";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Uz+8+PYH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D11B786D82; Sun,  8 Oct 2023 01:12:23 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 35B1286D3F; Sun,  8 Oct 2023 01:12:23 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FCDF86EC3
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:12:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FC4086EBC
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-59f55c276c3so41692347b3.2
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-59f82ad1e09so41929937b3.0
  for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:12:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1696720299; x=1697325099; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=brwmuHGu8Riz1grNFaWCRLl9hr+96w+HHxXHdlBbJa0=;
- b=MaBmTvfsMn2ZBq8TPlAkRD/TiM4PmQkXQsMNyaecKQsvh00SOQ1ea1Iyur4T7gjYNf
- pgjfVToEn2NSr/MX8N/DxeGQ7hI/b9Y5r4+vmXg1vkXxcvT9hN2jrPQ62bv+RYib+sfl
- yFG2VR7NrqQgimn8fwEe7jIA8h7VENkDa4DD4=
+ bh=ByGQwHxCrWRSYOeQqA6EffvO8D2bUD7pEAy4TDotNV0=;
+ b=Uz+8+PYHfBf+9ryLvkhScfcgSTggROPiR8LcQFwFBi8MUcKgrzlsCn7XCUdJBkHASf
+ I0inYp/LcdU5metnCCduPGwFpcgqZRb53BZOdOTq2P/5JV5oFEvYpwXrzdr4inxF7rnR
+ CFTcq34zyv9nU9oFqVvSSJHZxwHYUU6GC0HDI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1696720299; x=1697325099;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=brwmuHGu8Riz1grNFaWCRLl9hr+96w+HHxXHdlBbJa0=;
- b=CjUj2DdRpRrmIZWpPsZYoI0OT1pOtPwvlfLNDyxycacpXRew3c1NGTHgWjN55dpF0W
- HdohB4bOsNrdTJKmISxF2VRaWJwm2DDiubZx2+J+3UEh/YzwAjfjQ47L5SdsJxY94Dey
- L10sOVPB3gtwWxJUKFckwtiBqdIZx1BgMIjFBqJC4Ztpyn3555TnCrzg9hqLFLYjRG8d
- D/HbVWTVtuKRxp9mJgkbNUM6dnIJWLMVHRL/EChq2x2AacCtTANGxgLnJ+vnbtVoFTuu
- n7+3VgrWpvus+DHlkKUuU5pK0nSnVh4nzRW/hpaRm+yv8Wj4ImIki6ZQ6ubsLI3tbgvy
- xLJw==
-X-Gm-Message-State: AOJu0YxjHPdEWOT83Vv4YByZK5ihYsYVGC47pzl25OITSEQWJyytLhBE
- mZIK/unay71KBkXUUxwl2svQeB3YqiIwC0MHqUfeaw==
-X-Google-Smtp-Source: AGHT+IE/q4WVrykVhytH4GX3E6zpV6P7+sGh17U68i6teOYP6EWMG02srY2RydhMZuICYdZZ6eQEwwQ7LZqVco13jzA=
-X-Received: by 2002:a81:8345:0:b0:59c:a68:d36b with SMTP id
- t66-20020a818345000000b0059c0a68d36bmr13523340ywf.20.1696720299265; Sat, 07
+ bh=ByGQwHxCrWRSYOeQqA6EffvO8D2bUD7pEAy4TDotNV0=;
+ b=l96ByNeGuQHNctFLYP6BTkRoRS7N11oP0s07SbSDQe/zkzqtUnmw2y8PqJU0Hh1on3
+ kXDrbftuw8yq6Tsk2CWhXc/ropzB/uNJxuO+rGQ6A47VJ5rQ1vwN6ret89ZcOmmJRI4k
+ rvcGkg2uY5vmUVCIKdVmNdJJoKnaQ19TjPHyXcT5P8CfSGGG6sO7NCnbGUkp/il1NMk8
+ cnxO3jLUAAUgRwCVhRA+vHnH2eocQvCijfQrFJ8ZetnNbam2tWdzc8568EAUiD7kCYF+
+ d7Qh64AnJSe4c5wD3a/ggJTLwVz8c9S6fsu1LRYWQbAY2J0XSESSTQRBn0BliCmPmOXy
+ Ospw==
+X-Gm-Message-State: AOJu0Yw9LN/9+avVH2iGpPYbHoatWN24Fo+qikswoj4SHydLu/82NL9A
+ UdW/b8pSXFPtlveronNlLg0rt1Uoe3icm20rAWQc+Q==
+X-Google-Smtp-Source: AGHT+IG+zpO+ASafuvti8DzFQQM5HRMLLIh/4YNdw/Wcj/70aWzPXElu5My7GSDAmDbRIt3SrttmBnEBbGVzgIwldSk=
+X-Received: by 2002:a0d:d744:0:b0:5a1:d11e:b745 with SMTP id
+ z65-20020a0dd744000000b005a1d11eb745mr15641916ywd.24.1696720299271; Sat, 07
  Oct 2023 16:11:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231004-binman-firewalling-v3-0-e4a102324e1f@ti.com>
- <20231004-binman-firewalling-v3-1-e4a102324e1f@ti.com>
-In-Reply-To: <20231004-binman-firewalling-v3-1-e4a102324e1f@ti.com>
+References: <20231006100737.343745-1-n-francis@ti.com>
+ <20231006100737.343745-2-n-francis@ti.com>
+In-Reply-To: <20231006100737.343745-2-n-francis@ti.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Oct 2023 17:10:06 -0600
-Message-ID: <CAPnjgZ0zULhGofQvoThH1i1Ynjg1r1fT1U6reimbysfAxfNo9Q@mail.gmail.com>
-Subject: Re: [PATCH v3 1/6] binman: ti-secure: Add support for firewalling
- entities
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- u-boot@lists.denx.de, 
- Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
+Date: Sat, 7 Oct 2023 17:09:59 -0600
+Message-ID: <CAPnjgZ2RAwdZxZMccwcLL5QLs-HyBcx6B=LLKfVSjSb0qpjGxg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] binman: openssl: x509: ti_secure_rom: Add support
+ for bootcore_opts
+To: Neha Malcom Francis <n-francis@ti.com>
+Cc: trini@konsulko.com, alpernebiyasak@gmail.com, u-boot@lists.denx.de, 
+ vigneshr@ti.com, u-kumar1@ti.com, a-nandan@ti.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,232 +83,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Manorit,
+Hi Neha,
 
-On Wed, 4 Oct 2023 at 06:32, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+On Fri, 6 Oct 2023 at 04:07, Neha Malcom Francis <n-francis@ti.com> wrote:
 >
-> We can now firewall entities while loading them through our secure
-> entity TIFS, the required information should be present in the
-> certificate that is being parsed by TIFS.
+> According to the TRMs of K3 platform of devices, the ROM boot image
+> format specifies a "Core Options Field" that provides the capability to
+> set the boot core in lockstep when set to 0 or to split mode when set
+> to 2. Add support for providing the same from the binman DTS. Also
+> modify existing test case for ensuring future coverage.
 >
-> The following commit adds the support to enable the certificates to be
-> generated if the firewall configurations are present in the binman dtsi
-> nodes.
->
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 > ---
->  tools/binman/btool/openssl.py   | 16 +++++++-
->  tools/binman/etype/ti_secure.py | 85 +++++++++++++++++++++++++++++++++++++++++
->  tools/binman/etype/x509_cert.py |  3 +-
->  3 files changed, 101 insertions(+), 3 deletions(-)
+> Link to J721E TRM: https://www.ti.com/lit/zip/spruil1
+> Section 4.5.4.1 Boot Info
+>
+> Changes in v3:
+>         - updated function comments
+>         - removed inconsistency in setting bootcore_opts to 32
+>
+> Changes in v2:
+>         - included TRM link in commit message
+>
+>  tools/binman/btool/openssl.py           |  6 ++++--
+>  tools/binman/entries.rst                |  1 +
+>  tools/binman/etype/ti_secure_rom.py     | 11 +++++++++--
+>  tools/binman/etype/x509_cert.py         |  3 ++-
+>  tools/binman/test/297_ti_secure_rom.dts |  1 +
+>  5 files changed, 17 insertions(+), 5 deletions(-)
 >
 > diff --git a/tools/binman/btool/openssl.py b/tools/binman/btool/openssl.py
-> index aad3b61ae27c..dff439df211f 100644
+> index aad3b61ae2..86cc56fbd7 100644
 > --- a/tools/binman/btool/openssl.py
 > +++ b/tools/binman/btool/openssl.py
-> @@ -82,7 +82,7 @@ imageSize              = INTEGER:{len(indata)}
->          return self.run_cmd(*args)
+> @@ -155,6 +155,7 @@ authInPlace = INTEGER:2
+>              C, ST, L, O, OU, CN and emailAddress
+>              cert_type (int): Certification type
+>              bootcore (int): Booting core
+> +            bootcore_opts(int): Booting core option (split/lockstep mode)
+
+Please indicate what possible values are allowed
+
+>              load_addr (int): Load address of image
+>              sha (int): Hash function
 >
->      def x509_cert_sysfw(self, cert_fname, input_fname, key_fname, sw_rev,
-> -                  config_fname, req_dist_name_dict):
-> +                  config_fname, req_dist_name_dict, firewall_cert_data):
->          """Create a certificate to be booted by system firmware
+> @@ -225,7 +226,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
+>                    imagesize_sbl, hashval_sbl, load_addr_sysfw, imagesize_sysfw,
+>                    hashval_sysfw, load_addr_sysfw_data, imagesize_sysfw_data,
+>                    hashval_sysfw_data, sysfw_inner_cert_ext_boot_block,
+> -                  dm_data_ext_boot_block):
+> +                  dm_data_ext_boot_block, bootcore_opts):
+>          """Create a certificate
 >
 >          Args:
-> @@ -94,6 +94,13 @@ imageSize              = INTEGER:{len(indata)}
->              req_dist_name_dict (dict): Dictionary containing key-value pairs of
->              req_distinguished_name section extensions, must contain extensions for
->              C, ST, L, O, OU, CN and emailAddress
-> +            firewall_cert_data (dict):
-> +              - auth_in_place (int): The Priv ID for copying as the
-> +                specific host in firewall protected region
-> +              - num_firewalls (int): The number of firewalls in the
-> +                extended certificate
-> +              - certificate (str): Extended firewall certificate with
-> +                the information for the firewall configurations.
+> @@ -241,6 +242,7 @@ emailAddress           = {req_dist_name_dict['emailAddress']}
+>              bootcore (int): Booting core
+>              load_addr (int): Load address of image
+>              sha (int): Hash function
+> +            bootcore_opts (int): Boot core option (split/lockstep mode)
 >
 >          Returns:
 >              str: Tool output
-> @@ -121,6 +128,7 @@ basicConstraints       = CA:true
->  1.3.6.1.4.1.294.1.3    = ASN1:SEQUENCE:swrv
->  1.3.6.1.4.1.294.1.34   = ASN1:SEQUENCE:sysfw_image_integrity
->  1.3.6.1.4.1.294.1.35   = ASN1:SEQUENCE:sysfw_image_load
-> +1.3.6.1.4.1.294.1.37   = ASN1:SEQUENCE:firewall
->
->  [ swrv ]
->  swrv = INTEGER:{sw_rev}
-> @@ -132,7 +140,11 @@ imageSize              = INTEGER:{len(indata)}
->
->  [ sysfw_image_load ]
->  destAddr = FORMAT:HEX,OCT:00000000
-> -authInPlace = INTEGER:2
-> +authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
-> +
-> +[ firewall ]
-> +numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
-> +{firewall_cert_data['certificate']}
+> @@ -285,7 +287,7 @@ sysfw_data=SEQUENCE:sysfw_data
+>  [sbl]
+>  compType = INTEGER:1
+>  bootCore = INTEGER:16
+> -compOpts = INTEGER:0
+> +compOpts = INTEGER:{bootcore_opts}
+>  destAddr = FORMAT:HEX,OCT:{load_addr:08x}
+>  compSize = INTEGER:{imagesize_sbl}
+>  shaType  = OID:{sha_type}
+> diff --git a/tools/binman/entries.rst b/tools/binman/entries.rst
+> index 801bd94674..b401f9426a 100644
+> --- a/tools/binman/entries.rst
+> +++ b/tools/binman/entries.rst
+> @@ -1900,6 +1900,7 @@ Properties / Entry arguments:
+>      - core: core on which bootloader runs, valid cores are 'secure' and 'public'
+>      - content: phandle of SPL in case of legacy bootflow or phandles of component binaries
+>        in case of combined bootflow
+> +    - core-opts (optional): split-mode (0) or lockstep mode (1) set to 0 by default
 
-Do we want the text above if there is no firewall info?
+Here it is 1 but below it says 2
 
->  ''', file=outf)
->          args = ['req', '-new', '-x509', '-key', key_fname, '-nodes',
->                  '-outform', 'DER', '-out', cert_fname, '-config', config_fname,
-> diff --git a/tools/binman/etype/ti_secure.py b/tools/binman/etype/ti_secure.py
-> index d939dce57139..a7409023fa55 100644
-> --- a/tools/binman/etype/ti_secure.py
-> +++ b/tools/binman/etype/ti_secure.py
-> @@ -7,9 +7,35 @@
 >
->  from binman.entry import EntryArg
->  from binman.etype.x509_cert import Entry_x509_cert
-> +from dataclasses import dataclass
+>  The following properties are only for generating a combined bootflow binary:
+>      - sysfw-inner-cert: boolean if binary contains sysfw inner certificate
+> diff --git a/tools/binman/etype/ti_secure_rom.py b/tools/binman/etype/ti_secure_rom.py
+> index 9a7ac9e9e0..17c50cefa1 100644
+> --- a/tools/binman/etype/ti_secure_rom.py
+> +++ b/tools/binman/etype/ti_secure_rom.py
+> @@ -32,6 +32,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>          - core: core on which bootloader runs, valid cores are 'secure' and 'public'
+>          - content: phandle of SPL in case of legacy bootflow or phandles of component binaries
+>            in case of combined bootflow
+> +        - core-opts (optional): split-mode (0) or lockstep mode (1) set to 0 by default
 >
->  from dtoc import fdt_util
->
-> +@dataclass
-> +class Firewall():
-> +    id: int
-> +    region: int
-> +    control : int
-> +    permissions: list[hex]
-> +    start_address: str
-> +    end_address: str
-> +
-> +    def get_certificate(self) -> str:
-> +        unique_identifier = f"{self.id}{self.region}"
-> +        cert = f"""
-> +firewallID{unique_identifier} = INTEGER:{self.id}
-> +region{unique_identifier} = INTEGER:{self.region}
-> +control{unique_identifier} = INTEGER:{hex(self.control)}
-> +nPermissionRegs{unique_identifier} = INTEGER:{len(self.permissions)}
-> +"""
-> +        for index, permission in enumerate(self.permissions):
-> +            cert += f"""permissions{unique_identifier}{index} = INTEGER:{hex(permission)}
-> +"""
-> +        cert += f"""startAddress{unique_identifier} = FORMAT:HEX,OCT:{self.start_address:02x}
-> +endAddress{unique_identifier} = FORMAT:HEX,OCT:{self.end_address:02x}
-> +"""
-> +        return cert
-> +
->  class Entry_ti_secure(Entry_x509_cert):
->      """Entry containing a TI x509 certificate binary
->
-> @@ -17,6 +43,11 @@ class Entry_ti_secure(Entry_x509_cert):
->          - content: List of phandles to entries to sign
->          - keyfile: Filename of file containing key to sign binary with
->          - sha: Hash function to be used for signing
-> +        - auth_in_place: This is an integer field that contains two pieces
-> +          of information
-> +            Lower Byte - Remains 0x02 as per our use case
-> +            ( 0x02: Move the authenticated binary back to the header )
-> +            Upper Byte - The Host ID of the core owning the firewall
->
->      Output files:
->          - input.<unique_name> - input file passed to openssl
-> @@ -25,6 +56,35 @@ class Entry_ti_secure(Entry_x509_cert):
->          - cert.<unique_name> - output file generated by openssl (which is
->            used as the entry contents)
->
-> +    Depending on auth_in_place information in the inputs, we read the
-> +    firewall nodes that describe the configurations of firewall that TIFS
-> +    will be doing after reading the certificate.
-> +
-> +    The syntax of the firewall nodes are as such:
-> +
-> +    firewall-257-0 {
-> +        id = <257>;           /* The ID of the firewall being configured */
-> +        region = <0>;         /* Region number to configure */
-> +
-> +        control =             /* The control register */
-> +            <(FWCTRL_EN | FWCTRL_LOCK | FWCTRL_BG | FWCTRL_CACHE)>;
-> +
-> +        permissions =         /* The permission registers */
-> +            <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
-> +                        FWPERM_SECURE_PRIV_RWCD |
-> +                        FWPERM_SECURE_USER_RWCD |
-> +                        FWPERM_NON_SECURE_PRIV_RWCD |
-> +                        FWPERM_NON_SECURE_USER_RWCD)>;
-> +
-> +        /* More defines can be found in k3-security.h */
-> +
-> +        start_address =        /* The Start Address of the firewall */
-> +            <0x0 0x0>;
-> +        end_address =          /* The End Address of the firewall */
-> +            <0xff 0xffffffff>;
-> +    };
-> +
-> +
->      openssl signs the provided data, using the TI templated config file and
->      writes the signature in this entry. This allows verification that the
->      data is genuine.
-> @@ -32,11 +92,20 @@ class Entry_ti_secure(Entry_x509_cert):
->      def __init__(self, section, etype, node):
->          super().__init__(section, etype, node)
->          self.openssl = None
-> +        self.firewall_cert_data: dict = {
-> +            'auth_in_place': 0x02,
-> +            'num_firewalls': 0,
-> +            'certificate': "",
-> +        }
->
->      def ReadNode(self):
->          super().ReadNode()
+>      The following properties are only for generating a combined bootflow binary:
+>          - sysfw-inner-cert: boolean if binary contains sysfw inner certificate
+> @@ -69,6 +70,7 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>          self.sw_rev = fdt_util.GetInt(self._node, 'sw-rev', 1)
+>          self.sha = fdt_util.GetInt(self._node, 'sha', 512)
+>          self.core = fdt_util.GetString(self._node, 'core', 'secure')
+> +        self.bootcore_opts = fdt_util.GetInt(self._node, 'core-opts')
 >          self.key_fname = self.GetEntryArgsOrProps([
 >              EntryArg('keyfile', str)], required=True)[0]
-> +        auth_in_place = fdt_util.GetInt(self._node, "auth_in_place")
-
-Please use hyphens in properties. If that is a bool, use GetBool()
-
-
-> +        if auth_in_place:
-> +            self.firewall_cert_data['auth_in_place'] = auth_in_place
-> +            self.ReadFirewallNode()
->          self.sha = fdt_util.GetInt(self._node, 'sha', 512)
->          self.req_dist_name = {'C': 'US',
->                  'ST': 'TX',
-> @@ -46,6 +115,22 @@ class Entry_ti_secure(Entry_x509_cert):
->                  'CN': 'TI Support',
->                  'emailAddress': 'support@ti.com'}
->
-> +    def ReadFirewallNode(self):
-> +        self.firewall_cert_data['certificate'] = ""
-> +        self.firewall_cert_data['num_firewalls'] = 0
-> +        for node in self._node.subnodes:
-> +            if 'firewall' in node.name:
-> +                firewall = Firewall(
-> +                     fdt_util.GetInt(node, 'id'),
-> +                     fdt_util.GetInt(node, 'region'),
-> +                     fdt_util.GetInt(node, 'control'),
-> +                     fdt_util.GetPhandleList(node, 'permissions'),
-> +                     fdt_util.GetInt64(node, 'start_address'),
-> +                     fdt_util.GetInt64(node, 'end_address'),
-
-What happens if some of these properties are missing?
-
-> +                )
-> +                self.firewall_cert_data['num_firewalls'] += 1
-> +                self.firewall_cert_data['certificate'] += firewall.get_certificate()
+>          if self.combined:
+> @@ -97,17 +99,19 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>              bytes content of the entry, which is the certificate binary for the
+>                  provided data
+>          """
+> +        if self.bootcore_opts is None:
+> +            self.bootcore_opts = 0
 > +
->      def GetCertificate(self, required):
->          """Get the contents of this entry
+>          if self.core == 'secure':
+>              if self.countersign:
+>                  self.cert_type = 3
+>              else:
+>                  self.cert_type = 2
+>              self.bootcore = 0
+> -            self.bootcore_opts = 32
+>          else:
+>              self.cert_type = 1
+>              self.bootcore = 16
+> -            self.bootcore_opts = 0
+> +
+>          return super().GetCertificate(required=required, type='rom')
 >
+>      def CombinedGetCertificate(self, required):
+> @@ -126,6 +130,9 @@ class Entry_ti_secure_rom(Entry_x509_cert):
+>          self.num_comps = 3
+>          self.sha_type = SHA_OIDS[self.sha]
+>
+> +        if self.bootcore_opts is None:
+> +            self.bootcore_opts = 0
+> +
+>          # sbl
+>          self.content = fdt_util.GetPhandleList(self._node, 'content-sbl')
+>          input_data_sbl = self.GetContents(required)
 > diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
-> index d028cfe38cd9..9e1cf479023b 100644
+> index d028cfe38c..fc0bb12278 100644
 > --- a/tools/binman/etype/x509_cert.py
 > +++ b/tools/binman/etype/x509_cert.py
-> @@ -98,7 +98,8 @@ class Entry_x509_cert(Entry_collection):
->                  key_fname=self.key_fname,
->                  config_fname=config_fname,
->                  sw_rev=self.sw_rev,
-> -                req_dist_name_dict=self.req_dist_name)
-> +                req_dist_name_dict=self.req_dist_name,
-> +                firewall_cert_data=self.firewall_cert_data)
->          elif type == 'rom':
->              stdout = self.openssl.x509_cert_rom(
->                  cert_fname=output_fname,
->
+> @@ -136,7 +136,8 @@ class Entry_x509_cert(Entry_collection):
+>                  imagesize_sysfw_data=self.imagesize_sysfw_data,
+>                  hashval_sysfw_data=self.hashval_sysfw_data,
+>                  sysfw_inner_cert_ext_boot_block=self.sysfw_inner_cert_ext_boot_block,
+> -                dm_data_ext_boot_block=self.dm_data_ext_boot_block
+> +                dm_data_ext_boot_block=self.dm_data_ext_boot_block,
+> +                bootcore_opts=self.bootcore_opts
+>              )
+>          if stdout is not None:
+>              data = tools.read_file(output_fname)
+> diff --git a/tools/binman/test/297_ti_secure_rom.dts b/tools/binman/test/297_ti_secure_rom.dts
+> index d1313769f4..1a3eca9425 100644
+> --- a/tools/binman/test/297_ti_secure_rom.dts
+> +++ b/tools/binman/test/297_ti_secure_rom.dts
+> @@ -9,6 +9,7 @@
+>         binman {
+>                 ti-secure-rom {
+>                         content = <&unsecure_binary>;
+> +                       core-opts = <2>;
+
+here ^
+
+Do you think there could be a binding file in dt-bindings/ for this value?
+
+>                 };
+>                 unsecure_binary: blob-ext {
+>                         filename = "ti_unsecure.bin";
 > --
-> 2.41.0
+> 2.34.1
 >
 
 Regards,
