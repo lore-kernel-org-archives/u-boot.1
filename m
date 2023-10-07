@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACAE7E94139
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 02:48:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84415E9413F
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 03:34:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A23D7867EF;
-	Sat,  7 Oct 2023 04:48:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id A638D86B35;
+	Sat,  7 Oct 2023 05:34:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BmjqCUGM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kP9rupEf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35B20869F5; Sat,  7 Oct 2023 04:48:16 +0200 (CEST)
-Received: from mail-m12736.qiye.163.com (mail-m12736.qiye.163.com
- [115.236.127.36])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5DF5686B89; Sat,  7 Oct 2023 05:34:49 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A393C85894
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 04:48:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 119AF86AE6
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 05:34:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=BmjqCUGMIXKAZhmDMrfD1v6Z9gP55H2qsbvBECgAItj7UwCMAdj6RGzDYf5D1NoMoytXpK91vwy9RFb0yAduwHSsEqo2fmWvWGlJ/D8BEr4KjssnaOsqH7oXeUtKJcgAwkc5jwgfNTeuQMGlz8q9lhqX+xtFoj8hSBTRfeSMFMA=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=MrHMvWJL9q0IWATA7h6jeW5Jd/jXBvfw3Hi007Fmpjs=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 9C2974001DE;
- Sat,  7 Oct 2023 10:47:30 +0800 (CST)
-Message-ID: <ac3eb083-76ad-e960-63a8-dfbbd90896c7@rock-chips.com>
-Date: Sat, 7 Oct 2023 10:47:30 +0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-59f6e6b206fso34350457b3.3
+ for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 20:34:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696649685; x=1697254485; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=YxSvlTt8BaSlGvrFW3s3PsPsa+POYOURVmO4q5R+KBU=;
+ b=kP9rupEfxUe25evBuf2MG47N0CcnoqVZ9bBQtYT7bt9perlNeHIa6fn0IV/oozEj2p
+ qwREDFOg1CROE2SqgLrcv6tJj1XFHjYv6zkszYqn3tqzcDCl/aGeURp+hR+CZWmR3Plh
+ 5cEMZMmDG7882xfmEyMplXG0N12BU1H+92m7qqbA3JwV2yR2/hxDnc3w1e9w2gGma4CG
+ 3GYNiIu+G9Y6hi11AOsmQ1TcVp3ZqM+m9gOrfRqIDcnnfWinrhcE2KDkG2NEK7fWHnCD
+ VJ48ZAdDADpwXxMJXMOWMb+4sWtW9S175SKguVx7raxMO2PJHBfxoVnDaMM39AavGBSv
+ k0rA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696649685; x=1697254485;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YxSvlTt8BaSlGvrFW3s3PsPsa+POYOURVmO4q5R+KBU=;
+ b=UFaUXEDHNfKioXQcmMeA+HFHTRKPWfHlYL71j7B6bHF6KmSzoypXgY8ZtcaYPIDRZd
+ EvSmjgKnJf1lLsu4CaQiSvBr9hxIBpwRe4JduZTjgcc4EO8dcOakinExW4++ne1LA067
+ Zxp3HLCZ45K7mfnhrH9xWPTbsJJtNdq0cT2w23qACMBEGHY9YseMS8+tftGpSmk42j7W
+ gdO7EqJIBDnJ4aTNVOyH8gMVyAeeQi0CXYArTF0ayUiKHz9MmTxL/DhB91Z0nRDojlc7
+ j8kMbYDWFEAQ7N/raNtyvu5/dXEdkwqSknG0bAeyTAyYi+adYx4RrpdCcwB8tUefvCpO
+ 40bw==
+X-Gm-Message-State: AOJu0YxKuwpIWW+CowDPmZbU2rBvHu4wbI8aEzKm4dyiFIS27JnrbKwE
+ 5f7VSCwlynCU5x3yMZs7UxM=
+X-Google-Smtp-Source: AGHT+IFpVzGNPMe3S+6Ir27yGdo9IJ8EOm8LEQoRzaUBnkcEHMFJKRt7c2YwjGsvDbde7UHoWXV3aw==
+X-Received: by 2002:a0d:eb8a:0:b0:583:2ce7:2e10 with SMTP id
+ u132-20020a0deb8a000000b005832ce72e10mr11222126ywe.27.1696649685654; 
+ Fri, 06 Oct 2023 20:34:45 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ i194-20020a8191cb000000b0058419c57c66sm1772470ywg.4.2023.10.06.20.34.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 06 Oct 2023 20:34:45 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Tony Dinh <mibodhi@gmail.com>
+Subject: [RESEND PATCH] bootstd: sata: bootdev scanning for ahci sata with no
+ drive attached
+Date: Fri,  6 Oct 2023 20:34:28 -0700
+Message-Id: <20231007033429.25109-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 2/2] configs: rockchip: rk3308: enable
- CONFIG_OF_LIBFDT_OVERLAY
-Content-Language: en-US
-To: FUKAUMI Naoki <naoki@radxa.com>, u-boot@lists.denx.de
-Cc: andy.yan@rock-chips.com, gajjar04akash@gmail.com, sjg@chromium.org,
- jonas@kwiboo.se
-References: <20230911100121.122228-1-naoki@radxa.com>
- <20230911100121.122228-2-naoki@radxa.com>
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20230911100121.122228-2-naoki@radxa.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQhpNHlZLGUIYSE1IH0pJGU9VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8b0808691c2eb3kusn9c2974001de
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6KxQ6Cio4DDw1TRksFTNJEBNJ
- MktPFA1VSlVKTUJNTU9NQ05KTUJMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTEpLNwY+
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,41 +91,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+It's normal to have no SATA drive attached to the controller, so return a
+successful status when there is no block device found after probing.
 
-On 2023/9/11 18:01, FUKAUMI Naoki wrote:
-> enable CONFIG_OF_LIBFDT_OVERLAY and use it on Radxa ROCK Pi S.
->
-> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Note: this patch depends on the previous patch
+https://patchwork.ozlabs.org/project/uboot/patch/20230917230649.30357-1-mibodhi@gmail.com/
 
-Thanks,
-- Kever
-> ---
->   configs/rock-pi-s-rk3308_defconfig | 1 +
->   include/configs/rk3308_common.h    | 1 +
->   2 files changed, 2 insertions(+)
->
-> diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
-> index e2abe4b4f7..ca4a1800e7 100644
-> --- a/configs/rock-pi-s-rk3308_defconfig
-> +++ b/configs/rock-pi-s-rk3308_defconfig
-> @@ -9,6 +9,7 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
->   CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->   CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x800000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3308-rock-pi-s"
-> +CONFIG_OF_LIBFDT_OVERLAY=y
->   CONFIG_DM_RESET=y
->   CONFIG_ROCKCHIP_RK3308=y
->   CONFIG_ROCKCHIP_SPL_RESERVE_IRAM=0x0
-> diff --git a/include/configs/rk3308_common.h b/include/configs/rk3308_common.h
-> index a413af1bd4..861154fbeb 100644
-> --- a/include/configs/rk3308_common.h
-> +++ b/include/configs/rk3308_common.h
-> @@ -17,6 +17,7 @@
->   	"scriptaddr=0x00500000\0" \
->   	"pxefile_addr_r=0x00600000\0" \
->   	"fdt_addr_r=0x03e00000\0" \
-> +	"fdtoverlay_addr_r=0x03f00000\0" \
->   	"kernel_addr_r=0x00680000\0" \
->   	"ramdisk_addr_r=0x04000000\0"
->   
+Resend the right patch.
+
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
+
+ drivers/ata/sata.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+index f126b84e05..dcb5fcf476 100644
+--- a/drivers/ata/sata.c
++++ b/drivers/ata/sata.c
+@@ -79,6 +79,12 @@ int sata_rescan(bool verbose)
+ 
+ 	ret = uclass_probe_all(UCLASS_AHCI);
+ 
++	if (ret == -ENODEV) {
++		if (verbose)
++			printf("No SATA block device found\n");
++		return 0;
++	}
++
+ 	return ret;
+ }
+ 
+-- 
+2.39.2
+
