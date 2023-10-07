@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC812E95A7E
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:22:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F293DE95A7E
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:23:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D71EF86F3B;
-	Sun,  8 Oct 2023 01:14:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A273186F32;
+	Sun,  8 Oct 2023 01:14:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jMn3puUf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i28nudpC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9965C86EE9; Sun,  8 Oct 2023 01:13:55 +0200 (CEST)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id B186386EF3; Sun,  8 Oct 2023 01:13:14 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21ABC86E22
+ by phobos.denx.de (Postfix) with ESMTPS id 2198886DCB
  for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:13:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-351574aca7bso12197625ab.3
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-351574aca7bso12197565ab.3
  for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:13:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696720387; x=1697325187; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FogF10Ztwoc9ZjqjlfBzmQKLMeQIOphDNfTK6QPviXA=;
- b=jMn3puUfDz0JroQxxR91HC3IyUn7kVv/rN3iJ3TlS5UrXT4nYVaKcue6ELmqg1pB7C
- C6kYU01IaEtGY7gvIFCDb1d47xCVYPZ+xO70cE2W06vZwrsepk7zTuD7pTMYdrvhnezd
- PzvFdhtgj4JqXEiab8nmkMioP2i9JE9CeSj+A=
+ d=chromium.org; s=google; t=1696720384; x=1697325184; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mbNrL1YrJCVzC4lY2j9JAwMzDGmmIVrdum5tgWWkWvE=;
+ b=i28nudpCSO07d70WpM8VD3r8TvmpP8LH6aM/T3IvuOwCd290GDvyWuuIZSIQZhrg1W
+ dt8ShjlG/hDd7JBvinaijc8ZiiClEtmgVeWu6ZmDiv+xsgX6ekGvgFZeu6sF8455rlKR
+ ZNMIC/C3AsO/aY8vhfDw0wRibHypB52jCVnag=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696720387; x=1697325187;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FogF10Ztwoc9ZjqjlfBzmQKLMeQIOphDNfTK6QPviXA=;
- b=QI5WQvvcOtXcW4ZSnlZElAEC5ynT+UWUa/voMi86a0aYhu8Kz2ve5u6Sl2nlFU23b0
- oTyMhqKyvVcYGADkNcKvPyPzevn5h/dCo4WQ1gq2v8huD5phcIUi9MENGm9JjSKLhty9
- qgK8dq9j+D/nN+c7/kv+o3HdtTqIRVqJQth/I+5wnMJI+k+Z45zVxp/f9P6jc+cv41WM
- ti9zNEo3L+L5dSpxdrDpP/jc6F6Z+Iql9jf83fmmfvW2f6KkYrmWIBaGy98jW42v5B8O
- jm4Pb8yWX0K9TNsF5P7M+nGSv002jF7VxFJhN4EPJpkDK3iWFtuSCVfeYqjn6qario3Z
- fFOg==
-X-Gm-Message-State: AOJu0YxQ7WbsC62CBCdoqk3nn3BI46HN7BtHYoewKS8J4fDHLzDxXAP+
- HelYzEDfw+OnUnqKjv8218yWHAG0ZmQzt2oXWb8=
-X-Google-Smtp-Source: AGHT+IFGV4/HrYWkCOZf0ic4X86K5MVdIT+saQe8qxBWvTY2Kna75dNm6rVaa6OWzqNr0qnuGxu8Pw==
-X-Received: by 2002:a05:6e02:ee8:b0:351:a18:51bf with SMTP id
- j8-20020a056e020ee800b003510a1851bfmr10672427ilk.13.1696720386135; 
- Sat, 07 Oct 2023 16:13:06 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696720384; x=1697325184;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mbNrL1YrJCVzC4lY2j9JAwMzDGmmIVrdum5tgWWkWvE=;
+ b=A8VpNvFfrQavmRZ/dney2zHjhOidVLkJoaihejF6ZQ4rnXlGj8Z+yCpPSITr3auS05
+ BwhWwR1WxTEgX9VU63JZ/YyVc6n3P+xxsL0bDcu5kAFSF/VijD25QxAzrNQNXgoo52Sg
+ IS0+YP2e/ep8dSGzxP1IIiADdWo4JEDlsjuOloFqnMaEWCO0zMmyPi3GWsxJxa53ErhY
+ mvpIaA6W/tgrYMpP6INr5EQwsKdyoFPt4/0s/yCv+6zFgNP3oyZpLYVp52Dvm7xk715Z
+ lp/OSmFCXH9xE0MUs3E/eTOVXTlnMV108V4xzEytdUuOgTSx9XfUMZ4uVpjVbxiV3miQ
+ bHng==
+X-Gm-Message-State: AOJu0YyrfLA8nOkhoNR22rpzD/vF8VEGD91PJzeSrjmT7/RQQdZrRw/W
+ mLFGo+FBwrjZqgDxONYnDnv/qHIoygOTl3gUW38=
+X-Google-Smtp-Source: AGHT+IHpJHxLOxKsvB/fDJGeoJ3vR8ppglTwlkeG+Lpwpu7BnlWepvB0fi+/QBKIrUJLqt9w1gMV6A==
+X-Received: by 2002:a05:6e02:1248:b0:351:134d:ce46 with SMTP id
+ j8-20020a056e02124800b00351134dce46mr9848795ilq.24.1696720383982; 
+ Sat, 07 Oct 2023 16:13:03 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- x7-20020a92de07000000b0035129b9c61bsm2002320ilm.45.2023.10.07.16.13.05
+ x7-20020a92de07000000b0035129b9c61bsm2002320ilm.45.2023.10.07.16.13.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Oct 2023 16:13:05 -0700 (PDT)
+ Sat, 07 Oct 2023 16:13:03 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 02/27] cmd: Convert existing long help messages to the new
- macro
-Date: Sat,  7 Oct 2023 17:12:21 -0600
-Message-ID: <20231007231255.277623-3-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>
+Subject: [PATCH v2 00/27] Tidy up use of CONFIG_CMDLINE
+Date: Sat,  7 Oct 2023 17:12:19 -0600
+Message-ID: <20231007231255.277623-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.609.gbb76f46606-goog
-In-Reply-To: <20231007231255.277623-1-sjg@chromium.org>
-References: <20231007231255.277623-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,1334 +89,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Tom Rini <trini@konsulko.com>
+It should be possible to disable CONFIG_CMDLINE and have all commands
+and related functionality dropped from U-Boot. This is useful when
+trying to reduce the size of U-Boot.
 
-- Generally we just drop the #ifdef CONFIG_SYS_LONGHELP and endif lines
-  and use U_BOOT_LONGHELP to declare the same variable name as before
-- In a few places, either rename the variable to follow convention or
-  introduce the variable as it was being done inline before.
+Recent changes have stopped this from working.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+This series repairs the feature for sandbox and adds a test to stop it
+breaking again.
 
-(no changes since v1)
+Note that quite a lot of functionality is lost if CONFIG_CMDLINE is
+disabled, e.g. networking and most booting options. Further work is
+needed to make the option more generally useful.
 
- arch/arm/mach-imx/cmd_nandbcb.c                      |  6 ++----
- board/freescale/common/ngpixis.c                     |  6 ++----
- board/work-microwave/work_92105/work_92105_display.c | 12 ++++--------
- board/xilinx/common/fru.c                            |  7 ++-----
- board/xilinx/versal/cmds.c                           |  7 ++-----
- board/xilinx/zynq/cmds.c                             |  6 ++----
- board/xilinx/zynqmp/cmds.c                           |  6 ++----
- cmd/acpi.c                                           |  6 ++----
- cmd/aes.c                                            |  6 ++----
- cmd/armffa.c                                         |  4 ++--
- cmd/axi.c                                            |  4 ++--
- cmd/bloblist.c                                       |  6 ++----
- cmd/bootcount.c                                      |  9 ++-------
- cmd/bootdev.c                                        |  6 ++----
- cmd/bootefi.c                                        |  6 ++----
- cmd/bootflow.c                                       |  9 ++++-----
- cmd/booti.c                                          |  6 ++----
- cmd/bootm.c                                          |  6 ++----
- cmd/bootmeth.c                                       |  6 ++----
- cmd/bootz.c                                          |  6 ++----
- cmd/cat.c                                            |  6 ++----
- cmd/cedit.c                                          |  6 ++----
- cmd/clk.c                                            |  6 ++----
- cmd/conitrace.c                                      |  4 +---
- cmd/cpu.c                                            |  7 ++-----
- cmd/cyclic.c                                         |  4 ++--
- cmd/dm.c                                             |  7 ++-----
- cmd/efidebug.c                                       |  6 ++----
- cmd/event.c                                          |  6 ++----
- cmd/fdt.c                                            |  6 ++----
- cmd/font.c                                           |  6 ++----
- cmd/help.c                                           |  5 ++++-
- cmd/i2c.c                                            |  6 ++----
- cmd/kaslrseed.c                                      |  6 ++----
- cmd/log.c                                            |  7 ++-----
- cmd/mp.c                                             |  6 ++----
- cmd/mtd.c                                            |  6 ++----
- cmd/mtdparts.c                                       |  6 ++----
- cmd/mux.c                                            |  4 ++--
- cmd/nand.c                                           |  6 ++----
- cmd/nvedit.c                                         |  6 ++----
- cmd/osd.c                                            |  4 ++--
- cmd/pcap.c                                           |  4 ++--
- cmd/pci.c                                            |  6 ++----
- cmd/pci_mps.c                                        |  6 ++----
- cmd/riscv/sbi.c                                      |  7 ++-----
- cmd/rng.c                                            |  6 ++----
- cmd/sandbox/exception.c                              |  5 ++---
- cmd/scp03.c                                          |  7 ++++---
- cmd/sf.c                                             |  8 +++-----
- cmd/source.c                                         |  9 ++++-----
- cmd/ti/pd.c                                          | 10 +++++-----
- cmd/vbe.c                                            |  6 ++----
- cmd/wdt.c                                            |  4 ++--
- cmd/ximg.c                                           |  6 ++----
- cmd/xxd.c                                            |  6 ++----
- test/cmd_ut.c                                        |  6 ++----
- test/fuzz/cmd_fuzz.c                                 |  7 ++-----
- 58 files changed, 129 insertions(+), 230 deletions(-)
+Changes in v2:
+- Move AUTOBOOT_USE_MENUKEY under AUTOBOOT
+- Change this to use a Kconfig dependency instead of code failing
+- Add new patch to drop discarding of command linker-lists
+- Add new patch to unify the U_BOOT_ENV_LOCATION conditions
+- Rebase on Tom's LONGHELP series
+- Correct 'of' typo
 
-diff --git a/arch/arm/mach-imx/cmd_nandbcb.c b/arch/arm/mach-imx/cmd_nandbcb.c
-index c54f52b343c7..70a213a49dd0 100644
---- a/arch/arm/mach-imx/cmd_nandbcb.c
-+++ b/arch/arm/mach-imx/cmd_nandbcb.c
-@@ -1561,8 +1561,7 @@ usage:
- 	return CMD_RET_USAGE;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char nandbcb_help_text[] =
-+U_BOOT_LONGHELP(nandbcb,
- 	"init addr off|partition len - update 'len' bytes starting at\n"
- 	"       'off|part' to memory address 'addr', skipping  bad blocks\n"
- 	"nandbcb bcbonly off|partition fw1-off fw1-size [fw2-off fw2-size]\n"
-@@ -1572,8 +1571,7 @@ static char nandbcb_help_text[] =
- 	"       FIY, BCB isn't erased automatically, so mtd erase should\n"
- 	"       be called in advance before writing new BCB:\n"
- 	"           > mtd erase mx7-bcb\n"
--	"nandbcb dump off|partition - dump/verify boot structures\n";
--#endif
-+	"nandbcb dump off|partition - dump/verify boot structures\n");
- 
- U_BOOT_CMD(nandbcb, 7, 1, do_nandbcb,
- 	   "i.MX NAND Boot Control Blocks write",
-diff --git a/board/freescale/common/ngpixis.c b/board/freescale/common/ngpixis.c
-index 37a6f775a057..7be1ccee6383 100644
---- a/board/freescale/common/ngpixis.c
-+++ b/board/freescale/common/ngpixis.c
-@@ -234,15 +234,13 @@ int pixis_reset_cmd(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char pixis_help_text[] =
-+U_BOOT_LONGHELP(pixis,
- 	"- hard reset to default bank\n"
- 	"pixis_reset altbank - reset to alternate bank\n"
- #ifdef DEBUG
- 	"pixis_reset dump - display the PIXIS registers\n"
- #endif
--	"pixis_reset sysclk <SYSCLK_freq> - reset with SYSCLK frequency(KHz)\n";
--#endif
-+	"pixis_reset sysclk <SYSCLK_freq> - reset with SYSCLK frequency(KHz)\n");
- 
- U_BOOT_CMD(
- 	pixis_reset, CONFIG_SYS_MAXARGS, 1, pixis_reset_cmd,
-diff --git a/board/work-microwave/work_92105/work_92105_display.c b/board/work-microwave/work_92105/work_92105_display.c
-index 5f625e6f52ad..64dd5d4072a6 100644
---- a/board/work-microwave/work_92105/work_92105_display.c
-+++ b/board/work-microwave/work_92105/work_92105_display.c
-@@ -293,12 +293,10 @@ static int do_max6957aax(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 1;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char max6957aax_help_text[] =
-+U_BOOT_LONGHELP(max6957aax,
- 	"max6957aax - write or read display register:\n"
- 		"\tmax6957aax R|r reg - read display register;\n"
--		"\tmax6957aax reg val - write display register.";
--#endif
-+		"\tmax6957aax reg val - write display register.");
- 
- U_BOOT_CMD(
- 	max6957aax, 6, 1, do_max6957aax,
-@@ -337,13 +335,11 @@ static int do_hd44780(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char hd44780_help_text[] =
-+U_BOOT_LONGHELP(hd44780,
- 	"hd44780 - control LCD driver:\n"
- 		"\thd44780 cmd <val> - send command <val> to driver;\n"
- 		"\thd44780 data <val> - send data <val> to driver;\n"
--		"\thd44780 str \"<text>\" - send \"<text>\" to driver.";
--#endif
-+		"\thd44780 str \"<text>\" - send \"<text>\" to driver.");
- 
- U_BOOT_CMD(
- 	hd44780, 6, 1, do_hd44780,
-diff --git a/board/xilinx/common/fru.c b/board/xilinx/common/fru.c
-index f6ca46c3cecc..c916c3d6b4c8 100644
---- a/board/xilinx/common/fru.c
-+++ b/board/xilinx/common/fru.c
-@@ -72,17 +72,14 @@ static int do_fru(struct cmd_tbl *cmdtp, int flag, int argc,
- }
- 
- /***************************************************/
--#ifdef CONFIG_SYS_LONGHELP
--static char fru_help_text[] =
-+U_BOOT_LONGHELP(fru,
- 	"capture <addr> - Parse and capture FRU table present at address.\n"
- 	"fru display - Displays content of FRU table that was captured using\n"
- 	"              fru capture command\n"
- 	"fru board_gen <addr> <manufacturer> <board name> <serial number>\n"
- 	"              <part number> <revision> - Generate FRU format with\n"
- 	"              board info area filled based on parameters. <addr> is\n"
--	"              pointing to place where FRU is generated.\n"
--	;
--#endif
-+	"              pointing to place where FRU is generated.\n");
- 
- U_BOOT_CMD(
- 	fru, 8, 1, do_fru,
-diff --git a/board/xilinx/versal/cmds.c b/board/xilinx/versal/cmds.c
-index 148fa51266d2..9cc2cdcebf1c 100644
---- a/board/xilinx/versal/cmds.c
-+++ b/board/xilinx/versal/cmds.c
-@@ -91,12 +91,9 @@ static int do_versal(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return cmd_process_error(c, ret);
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char versal_help_text[] =
-+U_BOOT_LONGHELP(versal,
- 	"loadpdi addr len - Load pdi image\n"
--	"load pdi image at ddr address 'addr' with pdi image size 'len'\n"
--;
--#endif
-+	"load pdi image at ddr address 'addr' with pdi image size 'len'\n");
- 
- U_BOOT_CMD(versal, 4, 1, do_versal,
- 	   "versal sub-system",
-diff --git a/board/xilinx/zynq/cmds.c b/board/xilinx/zynq/cmds.c
-index 024fac65f304..d7c7b2f22955 100644
---- a/board/xilinx/zynq/cmds.c
-+++ b/board/xilinx/zynq/cmds.c
-@@ -527,8 +527,7 @@ static int do_zynq(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return cmd_process_error(zynq_cmd, ret);
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char zynq_help_text[] =
-+U_BOOT_LONGHELP(zynq,
- 	""
- #ifdef CONFIG_CMD_ZYNQ_RSA
- 	"rsa <baseaddr>  - Verifies the authenticated and encrypted\n"
-@@ -545,8 +544,7 @@ static char zynq_help_text[] =
- 	"       if operation type is load or loadp, it loads the encrypted\n"
- 	"       full or partial bitstream on to PL respectively.\n"
- #endif
--	;
--#endif
-+	);
- 
- U_BOOT_CMD(zynq,	6,	0,	do_zynq,
- 	   "Zynq specific commands", zynq_help_text
-diff --git a/board/xilinx/zynqmp/cmds.c b/board/xilinx/zynqmp/cmds.c
-index fadb0edb24fb..f1f3eff501e1 100644
---- a/board/xilinx/zynqmp/cmds.c
-+++ b/board/xilinx/zynqmp/cmds.c
-@@ -381,8 +381,7 @@ static int do_zynqmp(struct cmd_tbl *cmdtp, int flag, int argc,
- }
- 
- /***************************************************/
--#ifdef CONFIG_SYS_LONGHELP
--static char zynqmp_help_text[] =
-+U_BOOT_LONGHELP(zynqmp,
- 	"secure src len [key_addr] - verifies secure images of $len bytes\n"
- 	"                            long at address $src. Optional key_addr\n"
- 	"                            can be specified if user key needs to\n"
-@@ -422,8 +421,7 @@ static char zynqmp_help_text[] =
- 	"	48 bytes hash value into srcaddr\n"
- 	"	Optional key_addr can be specified for saving sha3 hash value\n"
- 	"	Note: srcaddr/srclen should not be 0\n"
--	;
--#endif
-+	);
- 
- U_BOOT_CMD(
- 	zynqmp, 9, 1, do_zynqmp,
-diff --git a/cmd/acpi.c b/cmd/acpi.c
-index ede9c8c7dcb4..7e397d1a74e1 100644
---- a/cmd/acpi.c
-+++ b/cmd/acpi.c
-@@ -171,13 +171,11 @@ static int do_acpi_dump(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char acpi_help_text[] =
-+U_BOOT_LONGHELP(acpi,
- 	"list  - list ACPI tables\n"
- 	"acpi items [-d]   - List/dump each piece of ACPI data from devices\n"
- 	"acpi set [<addr>] - Set or show address of ACPI tables\n"
--	"acpi dump <name>  - Dump ACPI table";
--#endif
-+	"acpi dump <name>  - Dump ACPI table");
- 
- U_BOOT_CMD_WITH_SUBCMDS(acpi, "ACPI tables", acpi_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 1, 1, do_acpi_list),
-diff --git a/cmd/aes.c b/cmd/aes.c
-index 1936518824a1..1264675aa01f 100644
---- a/cmd/aes.c
-+++ b/cmd/aes.c
-@@ -88,8 +88,7 @@ static int do_aes(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- }
- 
- /***************************************************/
--#ifdef CONFIG_SYS_LONGHELP
--static char aes_help_text[] =
-+U_BOOT_LONGHELP(aes,
- 	"[.128,.192,.256] enc key iv src dst len - Encrypt block of data $len bytes long\n"
- 	"                             at address $src using a key at address\n"
- 	"                             $key with initialization vector at address\n"
-@@ -101,8 +100,7 @@ static char aes_help_text[] =
- 	"                             $key with initialization vector at address\n"
- 	"                             $iv. Store the result at address $dst.\n"
- 	"                             The $len size must be multiple of 16 bytes.\n"
--	"                             The $key and $iv must be 16 bytes long.";
--#endif
-+	"                             The $key and $iv must be 16 bytes long.");
- 
- U_BOOT_CMD(
- 	aes, 7, 1, do_aes,
-diff --git a/cmd/armffa.c b/cmd/armffa.c
-index 7e6eafc03ad7..9585150b9627 100644
---- a/cmd/armffa.c
-+++ b/cmd/armffa.c
-@@ -188,13 +188,13 @@ static int do_ffa_devlist(struct cmd_tbl *cmdtp, int flag, int argc, char *const
- 	return CMD_RET_SUCCESS;
- }
- 
--static char armffa_help_text[] =
-+U_BOOT_LONGHELP(armffa,
- 	"getpart <partition UUID>\n"
- 	"       - lists the partition(s) info\n"
- 	"ping <partition ID>\n"
- 	"       - sends a data pattern to the specified partition\n"
- 	"devlist\n"
--	"       - displays information about the FF-A device/driver\n";
-+	"       - displays information about the FF-A device/driver\n");
- 
- U_BOOT_CMD_WITH_SUBCMDS(armffa, "Arm FF-A test command", armffa_help_text,
- 			U_BOOT_SUBCMD_MKENT(getpart, 2, 1, do_ffa_getpart),
-diff --git a/cmd/axi.c b/cmd/axi.c
-index b97b43eb7d01..5620891db28b 100644
---- a/cmd/axi.c
-+++ b/cmd/axi.c
-@@ -344,11 +344,11 @@ static int do_ihs_axi(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return CMD_RET_USAGE;
- }
- 
--static char axi_help_text[] =
-+U_BOOT_LONGHELP(axi,
- 	"bus  - show AXI bus info\n"
- 	"axi dev [bus] - show or set current AXI bus to bus number [bus]\n"
- 	"axi md size addr [# of objects] - read from AXI device at address [addr] and data width [size] (one of 8, 16, 32)\n"
--	"axi mw size addr value [count] - write data [value] to AXI device at address [addr] and data width [size] (one of 8, 16, 32)\n";
-+	"axi mw size addr value [count] - write data [value] to AXI device at address [addr] and data width [size] (one of 8, 16, 32)\n");
- 
- U_BOOT_CMD(axi, 7, 1, do_ihs_axi,
- 	   "AXI sub-system",
-diff --git a/cmd/bloblist.c b/cmd/bloblist.c
-index 21e7ff67af20..26548ecf847e 100644
---- a/cmd/bloblist.c
-+++ b/cmd/bloblist.c
-@@ -29,11 +29,9 @@ static int do_bloblist_list(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char bloblist_help_text[] =
-+U_BOOT_LONGHELP(bloblist,
- 	"info   - show information about the bloblist\n"
--	"bloblist list   - list blobs in the bloblist";
--#endif
-+	"bloblist list   - list blobs in the bloblist");
- 
- U_BOOT_CMD_WITH_SUBCMDS(bloblist, "Bloblists", bloblist_help_text,
- 	U_BOOT_SUBCMD_MKENT(info, 1, 1, do_bloblist_info),
-diff --git a/cmd/bootcount.c b/cmd/bootcount.c
-index 3898d2543d2c..30ce5dba30d9 100644
---- a/cmd/bootcount.c
-+++ b/cmd/bootcount.c
-@@ -46,16 +46,11 @@ static int do_bootcount(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_USAGE;
- }
- 
--#if IS_ENABLED(CONFIG_SYS_LONGHELP)
--static char bootcount_help_text[] =
-+U_BOOT_LONGHELP(bootcount,
- 	"print - print current bootcounter\n"
--	"reset - reset the bootcounter"
--	;
--#endif
-+	"reset - reset the bootcounter");
- 
- U_BOOT_CMD(bootcount, 2, 1, do_bootcount,
- 	   "bootcount",
--#if IS_ENABLED(CONFIG_SYS_LONGHELP)
- 	   bootcount_help_text
--#endif
- );
-diff --git a/cmd/bootdev.c b/cmd/bootdev.c
-index a657de6bd0f6..471189cda480 100644
---- a/cmd/bootdev.c
-+++ b/cmd/bootdev.c
-@@ -139,13 +139,11 @@ static int do_bootdev_hunt(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char bootdev_help_text[] =
-+U_BOOT_LONGHELP(bootdev,
- 	"list [-p]         - list all available bootdevs (-p to probe)\n"
- 	"bootdev hunt [-l|<spec>]  - use hunt drivers to find bootdevs\n"
- 	"bootdev select <bd>       - select a bootdev by name | label | seq\n"
--	"bootdev info [-p]         - show information about a bootdev (-p to probe)";
--#endif
-+	"bootdev info [-p]         - show information about a bootdev (-p to probe)");
- 
- U_BOOT_CMD_WITH_SUBCMDS(bootdev, "Boot devices", bootdev_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 2, 1, do_bootdev_list),
-diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-index f73d6eb0e2d8..20e5c94a33a4 100644
---- a/cmd/bootefi.c
-+++ b/cmd/bootefi.c
-@@ -698,8 +698,7 @@ static int do_bootefi(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return ret;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char bootefi_help_text[] =
-+U_BOOT_LONGHELP(bootefi,
- 	"<image address>[:<image size>] [<fdt address>]\n"
- 	"  - boot EFI payload\n"
- #ifdef CONFIG_CMD_BOOTEFI_HELLO
-@@ -719,8 +718,7 @@ static char bootefi_help_text[] =
- 	"    If specified, the device tree located at <fdt address> gets\n"
- 	"    exposed as EFI configuration table.\n"
- #endif
--	;
--#endif
-+	);
- 
- U_BOOT_CMD(
- 	bootefi, 4, 0, do_bootefi,
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index 300ad3aaa760..ad39ebe4379f 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -541,8 +541,7 @@ static int do_bootflow_cmdline(struct cmd_tbl *cmdtp, int flag, int argc,
- }
- #endif /* CONFIG_CMD_BOOTFLOW_FULL */
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char bootflow_help_text[] =
-+U_BOOT_LONGHELP(bootflow,
- #ifdef CONFIG_CMD_BOOTFLOW_FULL
- 	"scan [-abeGl] [bdev]  - scan for valid bootflows (-l list, -a all, -e errors, -b boot, -G no global)\n"
- 	"bootflow list [-e]             - list scanned bootflows (-e errors)\n"
-@@ -551,11 +550,11 @@ static char bootflow_help_text[] =
- 	"bootflow read                  - read all current-bootflow files\n"
- 	"bootflow boot                  - boot current bootflow\n"
- 	"bootflow menu [-t]             - show a menu of available bootflows\n"
--	"bootflow cmdline [set|get|clear|delete|auto] <param> [<value>] - update cmdline";
-+	"bootflow cmdline [set|get|clear|delete|auto] <param> [<value>] - update cmdline"
- #else
--	"scan - boot first available bootflow\n";
-+	"scan - boot first available bootflow\n"
- #endif
--#endif /* CONFIG_SYS_LONGHELP */
-+	);
- 
- U_BOOT_CMD_WITH_SUBCMDS(bootflow, "Boot flows", bootflow_help_text,
- 	U_BOOT_SUBCMD_MKENT(scan, 3, 1, do_bootflow_scan),
-diff --git a/cmd/booti.c b/cmd/booti.c
-index 6ac39193db80..1d531bdd0658 100644
---- a/cmd/booti.c
-+++ b/cmd/booti.c
-@@ -134,8 +134,7 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return ret;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char booti_help_text[] =
-+U_BOOT_LONGHELP(booti,
- 	"[addr [initrd[:size]] [fdt]]\n"
- 	"    - boot Linux flat or compressed 'Image' stored at 'addr'\n"
- 	"\tThe argument 'initrd' is optional and specifies the address\n"
-@@ -151,8 +150,7 @@ static char booti_help_text[] =
- 	"\tis required. To boot a kernel with a device-tree blob but\n"
- 	"\twithout an initrd image, use a '-' for the initrd argument.\n"
- #endif
--	"";
--#endif
-+	);
- 
- U_BOOT_CMD(
- 	booti,	CONFIG_SYS_MAXARGS,	1,	do_booti,
-diff --git a/cmd/bootm.c b/cmd/bootm.c
-index 7968415b6d1e..3e504ccfe811 100644
---- a/cmd/bootm.c
-+++ b/cmd/bootm.c
-@@ -168,8 +168,7 @@ int bootm_maybe_autostart(struct cmd_tbl *cmdtp, const char *cmd)
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char bootm_help_text[] =
-+U_BOOT_LONGHELP(bootm,
- 	"[addr [arg ...]]\n    - boot application image stored in memory\n"
- 	"\tpassing arguments 'arg ...'; when booting a Linux kernel,\n"
- 	"\t'arg' can be the address of an initrd image\n"
-@@ -208,8 +207,7 @@ static char bootm_help_text[] =
- #if defined(CONFIG_TRACE)
- 	"\tfake    - OS specific fake start without go\n"
- #endif
--	"\tgo      - start OS";
--#endif
-+	"\tgo      - start OS");
- 
- U_BOOT_CMD(
- 	bootm,	CONFIG_SYS_MAXARGS,	1,	do_bootm,
-diff --git a/cmd/bootmeth.c b/cmd/bootmeth.c
-index 9fbcccdba7ef..f5b01343c48c 100644
---- a/cmd/bootmeth.c
-+++ b/cmd/bootmeth.c
-@@ -104,11 +104,9 @@ static int do_bootmeth_order(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char bootmeth_help_text[] =
-+U_BOOT_LONGHELP(bootmeth,
- 	"list [-a]     - list available bootmeths (-a all)\n"
--	"bootmeth order [<bd> ...]  - select bootmeth order / subset to use";
--#endif
-+	"bootmeth order [<bd> ...]  - select bootmeth order / subset to use");
- 
- U_BOOT_CMD_WITH_SUBCMDS(bootmeth, "Boot methods", bootmeth_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 2, 1, do_bootmeth_list),
-diff --git a/cmd/bootz.c b/cmd/bootz.c
-index f1423573d23d..742889f21de7 100644
---- a/cmd/bootz.c
-+++ b/cmd/bootz.c
-@@ -88,8 +88,7 @@ int do_bootz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return ret;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char bootz_help_text[] =
-+U_BOOT_LONGHELP(bootz,
- 	"[addr [initrd[:size]] [fdt]]\n"
- 	"    - boot Linux zImage stored in memory\n"
- 	"\tThe argument 'initrd' is optional and specifies the address\n"
-@@ -102,8 +101,7 @@ static char bootz_help_text[] =
- 	"\tuse a '-' for the second argument. If you do not pass a third\n"
- 	"\ta bd_info struct will be passed instead\n"
- #endif
--	"";
--#endif
-+	);
- 
- U_BOOT_CMD(
- 	bootz,	CONFIG_SYS_MAXARGS,	1,	do_bootz,
-diff --git a/cmd/cat.c b/cmd/cat.c
-index b059080193d4..18aa6ca7aa67 100644
---- a/cmd/cat.c
-+++ b/cmd/cat.c
-@@ -60,11 +60,9 @@ static int do_cat(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char cat_help_text[] =
-+U_BOOT_LONGHELP(cat,
- 	"<interface> <dev[:part]> <file>\n"
--	"  - Print file from 'dev' on 'interface' to standard output\n";
--#endif
-+	"  - Print file from 'dev' on 'interface' to standard output\n");
- 
- U_BOOT_CMD(cat, 4, 1, do_cat,
- 	   "Print file to standard output",
-diff --git a/cmd/cedit.c b/cmd/cedit.c
-index 2ff284f4cde6..6352e6369d1e 100644
---- a/cmd/cedit.c
-+++ b/cmd/cedit.c
-@@ -270,8 +270,7 @@ static int do_cedit_run(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char cedit_help_text[] =
-+U_BOOT_LONGHELP(cedit,
- 	"load <interface> <dev[:part]> <filename>   - load config editor\n"
- 	"cedit read_fdt <i/f> <dev[:part]> <filename>     - read settings\n"
- 	"cedit write_fdt <i/f> <dev[:part]> <filename>    - write settings\n"
-@@ -279,8 +278,7 @@ static char cedit_help_text[] =
- 	"cedit write_env [-v]                             - write settings to env vars\n"
- 	"cedit read_cmos [-v] [dev]                       - read settings from CMOS RAM\n"
- 	"cedit write_cmos [-v] [dev]                      - write settings to CMOS RAM\n"
--	"cedit run                                        - run config editor";
--#endif /* CONFIG_SYS_LONGHELP */
-+	"cedit run                                        - run config editor");
- 
- U_BOOT_CMD_WITH_SUBCMDS(cedit, "Configuration editor", cedit_help_text,
- 	U_BOOT_SUBCMD_MKENT(load, 5, 1, do_cedit_load),
-diff --git a/cmd/clk.c b/cmd/clk.c
-index ff7c7649a159..c7c379d7a617 100644
---- a/cmd/clk.c
-+++ b/cmd/clk.c
-@@ -152,10 +152,8 @@ static int do_clk(struct cmd_tbl *cmdtp, int flag, int argc,
- 		return CMD_RET_USAGE;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char clk_help_text[] =
-+U_BOOT_LONGHELP(clk,
- 	"dump - Print clock frequencies\n"
--	"clk setfreq [clk] [freq] - Set clock frequency";
--#endif
-+	"clk setfreq [clk] [freq] - Set clock frequency");
- 
- U_BOOT_CMD(clk, 4, 1, do_clk, "CLK sub-system", clk_help_text);
-diff --git a/cmd/conitrace.c b/cmd/conitrace.c
-index d50f3bf3ccbf..9a1bc3518485 100644
---- a/cmd/conitrace.c
-+++ b/cmd/conitrace.c
-@@ -41,9 +41,7 @@ static int do_conitrace(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_SUCCESS;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char conitrace_help_text[] = "";
--#endif
-+U_BOOT_LONGHELP(conitrace, "");
- 
- U_BOOT_CMD_COMPLETE(
- 	conitrace, 2, 0, do_conitrace,
-diff --git a/cmd/cpu.c b/cmd/cpu.c
-index 314852440f1d..245a82fa3eb4 100644
---- a/cmd/cpu.c
-+++ b/cmd/cpu.c
-@@ -83,12 +83,9 @@ static int do_cpu_detail(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#if IS_ENABLED(CONFIG_SYS_LONGHELP)
--static char cpu_help_text[] =
-+U_BOOT_LONGHELP(cpu,
- 	"list	- list available CPUs\n"
--	"cpu detail	- show CPU detail"
--	;
--#endif
-+	"cpu detail	- show CPU detail");
- 
- U_BOOT_CMD_WITH_SUBCMDS(cpu, "display information about CPUs", cpu_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 1, 1, do_cpu_list),
-diff --git a/cmd/cyclic.c b/cmd/cyclic.c
-index 946f1d78184d..ad7fc3b975e1 100644
---- a/cmd/cyclic.c
-+++ b/cmd/cyclic.c
-@@ -76,9 +76,9 @@ static int do_cyclic_list(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--static char cyclic_help_text[] =
-+U_BOOT_LONGHELP(cyclic,
- 	"demo <cycletime_ms> <delay_us> - register cyclic demo function\n"
--	"cyclic list - list cyclic functions\n";
-+	"cyclic list - list cyclic functions\n");
- 
- U_BOOT_CMD_WITH_SUBCMDS(cyclic, "Cyclic", cyclic_help_text,
- 	U_BOOT_SUBCMD_MKENT(demo, 3, 1, do_cyclic_demo),
-diff --git a/cmd/dm.c b/cmd/dm.c
-index 1aa86aab9c1c..fb605c2da1a8 100644
---- a/cmd/dm.c
-+++ b/cmd/dm.c
-@@ -112,17 +112,14 @@ static int do_dm_dump_uclass(struct cmd_tbl *cmdtp, int flag, int argc,
- #define DM_MEM
- #endif
- 
--#if IS_ENABLED(CONFIG_SYS_LONGHELP)
--static char dm_help_text[] =
-+U_BOOT_LONGHELP(dm,
- 	"compat        Dump list of drivers with compatibility strings\n"
- 	"dm devres        Dump list of device resources for each device\n"
- 	"dm drivers       Dump list of drivers with uclass and instances\n"
- 	DM_MEM_HELP
- 	"dm static        Dump list of drivers with static platform data\n"
- 	"dm tree [-s][-e][name]   Dump tree of driver model devices (-s=sort)\n"
--	"dm uclass [-e][name]     Dump list of instances for each uclass"
--	;
--#endif
-+	"dm uclass [-e][name]     Dump list of instances for each uclass");
- 
- U_BOOT_CMD_WITH_SUBCMDS(dm, "Driver model low level access", dm_help_text,
- 	U_BOOT_SUBCMD_MKENT(compat, 1, 1, do_dm_dump_driver_compat),
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index 0be3af3e7630..201531ac19fc 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -1484,8 +1484,7 @@ static int do_efidebug(struct cmd_tbl *cmdtp, int flag,
- 	return cp->cmd(cmdtp, flag, argc, argv);
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char efidebug_help_text[] =
-+U_BOOT_LONGHELP(efidebug,
- 	"  - UEFI Shell-like interface to configure UEFI environment\n"
- 	"\n"
- 	"efidebug boot add - set UEFI BootXXXX variable\n"
-@@ -1532,8 +1531,7 @@ static char efidebug_help_text[] =
- 	"  - run simple bootmgr for test\n"
- #endif
- 	"efidebug query [-nv][-bs][-rt][-at]\n"
--	"  - show size of UEFI variables store\n";
--#endif
-+	"  - show size of UEFI variables store\n");
- 
- U_BOOT_CMD(
- 	efidebug, CONFIG_SYS_MAXARGS, 0, do_efidebug,
-diff --git a/cmd/event.c b/cmd/event.c
-index b4b779ffac00..f6cdb55fc913 100644
---- a/cmd/event.c
-+++ b/cmd/event.c
-@@ -18,10 +18,8 @@ static int do_event_list(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char event_help_text[] =
--	"list - list event spies";
--#endif
-+U_BOOT_LONGHELP(event,
-+	"list - list event spies");
- 
- U_BOOT_CMD_WITH_SUBCMDS(event, "Events", event_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 1, 1, do_event_list));
-diff --git a/cmd/fdt.c b/cmd/fdt.c
-index 2401ea8b44cb..331564c13be9 100644
---- a/cmd/fdt.c
-+++ b/cmd/fdt.c
-@@ -1113,8 +1113,7 @@ static int fdt_print(const char *pathp, char *prop, int depth)
- }
- 
- /********************************************************************/
--#ifdef CONFIG_SYS_LONGHELP
--static char fdt_help_text[] =
-+U_BOOT_LONGHELP(fdt,
- 	"addr [-c] [-q] <addr> [<size>]  - Set the [control] fdt location to <addr>\n"
- #ifdef CONFIG_OF_LIBFDT_OVERLAY
- 	"fdt apply <addr>                    - Apply overlay to the DT\n"
-@@ -1153,8 +1152,7 @@ static char fdt_help_text[] =
- 	"                                               default gd->fdt_blob\n"
- #endif
- 	"NOTE: Dereference aliases by omitting the leading '/', "
--		"e.g. fdt print ethernet0.";
--#endif
-+		"e.g. fdt print ethernet0.");
- 
- U_BOOT_CMD(
- 	fdt,	255,	0,	do_fdt,
-diff --git a/cmd/font.c b/cmd/font.c
-index fe2d65caaf77..cb39c88063fb 100644
---- a/cmd/font.c
-+++ b/cmd/font.c
-@@ -79,12 +79,10 @@ static int do_font_size(struct cmd_tbl *cmdtp, int flag, int argc,
- }
- 
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char font_help_text[] =
-+U_BOOT_LONGHELP(font,
- 	"list       - list available fonts\n"
- 	"font select <name> [<size>] - select font to use\n"
--	"font size <size> - select font size to";
--#endif
-+	"font size <size> - select font size to");
- 
- U_BOOT_CMD_WITH_SUBCMDS(font, "Fonts", font_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 1, 1, do_font_list),
-diff --git a/cmd/help.c b/cmd/help.c
-index 8d67d977bf1a..9f8393eefd81 100644
---- a/cmd/help.c
-+++ b/cmd/help.c
-@@ -29,7 +29,10 @@ U_BOOT_CMD(
- );
- 
- #ifdef CONFIG_CMDLINE
--/* This does not use the U_BOOT_CMD macro as ? can't be used in symbol names */
-+/*
-+ * This does not use the U_BOOT_CMD macro as ? can't be used in symbol names
-+ * nor can we rely on the CONFIG_SYS_LONGHELP helper macro
-+ */
- ll_entry_declare(struct cmd_tbl, question_mark, cmd) = {
- 	"?",	CONFIG_SYS_MAXARGS, cmd_always_repeatable,	do_help,
- 	"alias for 'help'",
-diff --git a/cmd/i2c.c b/cmd/i2c.c
-index f0a5fa2e741f..80831561c671 100644
---- a/cmd/i2c.c
-+++ b/cmd/i2c.c
-@@ -1969,8 +1969,7 @@ static int do_i2c(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- }
- 
- /***************************************************/
--#ifdef CONFIG_SYS_LONGHELP
--static char i2c_help_text[] =
-+U_BOOT_LONGHELP(i2c,
- #if CONFIG_IS_ENABLED(SYS_I2C_LEGACY) || CONFIG_IS_ENABLED(DM_I2C)
- 	"bus [muxtype:muxaddr:muxchannel] - show I2C bus info\n"
- 	"i2c " /* That's the prefix for the crc32 command below. */
-@@ -1999,8 +1998,7 @@ static char i2c_help_text[] =
- #if defined(CONFIG_CMD_SDRAM)
- 	"i2c sdram chip - print SDRAM configuration information\n"
- #endif
--	"i2c speed [speed] - show or set I2C bus speed";
--#endif
-+	"i2c speed [speed] - show or set I2C bus speed");
- 
- U_BOOT_CMD(
- 	i2c, 7, 1, do_i2c,
-diff --git a/cmd/kaslrseed.c b/cmd/kaslrseed.c
-index 8a1d8120cdcf..9acb8e163863 100644
---- a/cmd/kaslrseed.c
-+++ b/cmd/kaslrseed.c
-@@ -68,11 +68,9 @@ static int do_kaslr_seed(struct cmd_tbl *cmdtp, int flag, int argc, char *const
- 	return ret;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char kaslrseed_help_text[] =
-+U_BOOT_LONGHELP(kaslrseed,
- 	"[n]\n"
--	"  - append random bytes to chosen kaslr-seed node\n";
--#endif
-+	"  - append random bytes to chosen kaslr-seed node\n");
- 
- U_BOOT_CMD(
- 	kaslrseed, 1, 0, do_kaslr_seed,
-diff --git a/cmd/log.c b/cmd/log.c
-index c377aee85c5e..c9a23e4ae0d3 100644
---- a/cmd/log.c
-+++ b/cmd/log.c
-@@ -375,8 +375,7 @@ static int do_log_rec(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char log_help_text[] =
-+U_BOOT_LONGHELP(log,
- 	"level [<level>] - get/set log level\n"
- 	"categories - list log categories\n"
- 	"drivers - list log drivers\n"
-@@ -405,9 +404,7 @@ static char log_help_text[] =
- 	"\tc=category, l=level, F=file, L=line number, f=function, m=msg\n"
- 	"\tor 'default', or 'all' for all\n"
- 	"log rec <category> <level> <file> <line> <func> <message> - "
--		"output a log record"
--	;
--#endif
-+		"output a log record");
- 
- U_BOOT_CMD_WITH_SUBCMDS(log, "log system", log_help_text,
- 	U_BOOT_SUBCMD_MKENT(level, 2, 1, do_log_level),
-diff --git a/cmd/mp.c b/cmd/mp.c
-index 8d14401b4944..1b4373f25873 100644
---- a/cmd/mp.c
-+++ b/cmd/mp.c
-@@ -66,8 +66,7 @@ cpu_cmd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char cpu_help_text[] =
-+U_BOOT_LONGHELP(cpu,
- 	    "<num> reset                 - Reset cpu <num>\n"
- 	"cpu status                      - Status of all cpus\n"
- 	"cpu <num> status                - Status of cpu <num>\n"
-@@ -86,8 +85,7 @@ static char cpu_help_text[] =
- 	"     When cpu <num> is released r4 and r5 = 0.\n" \
- 	"     r7 will contain the size of the initial mapped area"
- #endif
--	"";
--#endif
-+	);
- 
- U_BOOT_CMD(
- 	cpu, CONFIG_SYS_MAXARGS, 1, cpu_cmd,
-diff --git a/cmd/mtd.c b/cmd/mtd.c
-index eb6e2d6892ff..e63c011e7910 100644
---- a/cmd/mtd.c
-+++ b/cmd/mtd.c
-@@ -541,8 +541,7 @@ static int mtd_name_complete(int argc, char *const argv[], char last_char,
- }
- #endif /* CONFIG_AUTO_COMPLETE */
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char mtd_help_text[] =
-+U_BOOT_LONGHELP(mtd,
- 	"- generic operations on memory technology devices\n\n"
- 	"mtd list\n"
- 	"mtd read[.raw][.oob]                  <name> <addr> [<off> [<size>]]\n"
-@@ -563,8 +562,7 @@ static char mtd_help_text[] =
- 	"\t\t* must be a multiple of a block for erase\n"
- 	"\t\t* must be a multiple of a page otherwise (special case: default is a page with dump)\n"
- 	"\n"
--	"The .dontskipff option forces writing empty pages, don't use it if unsure.\n";
--#endif
-+	"The .dontskipff option forces writing empty pages, don't use it if unsure.\n");
- 
- U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
- 		U_BOOT_SUBCMD_MKENT(list, 1, 1, do_mtd_list),
-diff --git a/cmd/mtdparts.c b/cmd/mtdparts.c
-index 0984158f41ea..b31db73ebfc9 100644
---- a/cmd/mtdparts.c
-+++ b/cmd/mtdparts.c
-@@ -2079,8 +2079,7 @@ U_BOOT_CMD(
- 	"    - change active partition (e.g. part-id = nand0,1) of a MTD device"
- );
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char mtdparts_help_text[] =
-+U_BOOT_LONGHELP(mtdparts,
- 	"\n"
- 	"    - list partition table\n"
- 	"mtdparts delall\n"
-@@ -2122,8 +2121,7 @@ static char mtdparts_help_text[] =
- 	"<size>     := standard linux memsize OR '-' to denote all remaining space\n"
- 	"<offset>   := partition start offset within the device\n"
- 	"<name>     := '(' NAME ')'\n"
--	"<ro-flag>  := when set to 'ro' makes partition read-only (not used, passed to kernel)";
--#endif
-+	"<ro-flag>  := when set to 'ro' makes partition read-only (not used, passed to kernel)");
- 
- U_BOOT_CMD(
- 	mtdparts,	6,	0,	do_mtdparts,
-diff --git a/cmd/mux.c b/cmd/mux.c
-index c75907af7726..388fb0878a84 100644
---- a/cmd/mux.c
-+++ b/cmd/mux.c
-@@ -173,10 +173,10 @@ static int do_mux_deselect(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_SUCCESS;
- }
- 
--static char mux_help_text[] =
-+U_BOOT_LONGHELP(mux,
- 	"list - List all Muxes and their states\n"
- 	"select <chip> <id> <state> - Select the given mux state\n"
--	"deselect <chip> <id> - Deselect the given mux and reset it to its idle state";
-+	"deselect <chip> <id> - Deselect the given mux and reset it to its idle state");
- 
- U_BOOT_CMD_WITH_SUBCMDS(mux, "List, select, and deselect muxes", mux_help_text,
- 			U_BOOT_SUBCMD_MKENT(list, 1, 1, do_mux_list),
-diff --git a/cmd/nand.c b/cmd/nand.c
-index b41e54ec4229..71b8f9644296 100644
---- a/cmd/nand.c
-+++ b/cmd/nand.c
-@@ -919,8 +919,7 @@ usage:
- 	return CMD_RET_USAGE;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char nand_help_text[] =
-+U_BOOT_LONGHELP(nand,
- 	"info - show available NAND devices\n"
- 	"nand device [dev] - show or set current device\n"
- 	"nand read - addr off|partition size\n"
-@@ -965,8 +964,7 @@ static char nand_help_text[] =
- 	"nand env.oob set off|partition - set enviromnent offset\n"
- 	"nand env.oob get - get environment offset"
- #endif
--	"";
--#endif
-+	);
- 
- U_BOOT_CMD(
- 	nand, CONFIG_SYS_MAXARGS, 1, do_nand,
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index eaa000bd3559..daf1ad37f9be 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -1238,8 +1238,7 @@ static int do_env(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return CMD_RET_USAGE;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char env_help_text[] =
-+U_BOOT_LONGHELP(env,
- #if defined(CONFIG_CMD_ASKENV)
- 	"ask name [message] [size] - ask for environment variable\nenv "
- #endif
-@@ -1304,8 +1303,7 @@ static char env_help_text[] =
- 	"env set -e [-nv][-bs][-rt][-at][-a][-i addr:size][-v] name [arg ...]\n"
- 	"    - set UEFI variable; unset if '-i' or 'arg' not specified\n"
- #endif
--	"env set [-f] name [arg ...]\n";
--#endif
-+	"env set [-f] name [arg ...]\n");
- 
- U_BOOT_CMD(
- 	env, CONFIG_SYS_MAXARGS, 1, do_env,
-diff --git a/cmd/osd.c b/cmd/osd.c
-index c8c62d4a2ab3..210bc5d4c231 100644
---- a/cmd/osd.c
-+++ b/cmd/osd.c
-@@ -278,12 +278,12 @@ static int do_osd(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 		return CMD_RET_USAGE;
- }
- 
--static char osd_help_text[] =
-+U_BOOT_LONGHELP(osd,
- 	"show  - show OSD info\n"
- 	"osd dev [dev] - show or set current OSD\n"
- 	"write [pos_x] [pos_y] [buffer] [count] - write 8-bit hex encoded buffer to osd memory at a given position\n"
- 	"print [pos_x] [pos_y] [color] [text] - write ASCII buffer (given by text data and driver-specific color information) to osd memory\n"
--	"size [size_x] [size_y] - set OSD XY size in characters\n";
-+	"size [size_x] [size_y] - set OSD XY size in characters\n");
- 
- U_BOOT_CMD(
- 	osd, 6, 1, do_osd,
-diff --git a/cmd/pcap.c b/cmd/pcap.c
-index ab5c1a7e8737..a0149203fad5 100644
---- a/cmd/pcap.c
-+++ b/cmd/pcap.c
-@@ -48,7 +48,7 @@ static int do_pcap_clear(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return pcap_clear() ? CMD_RET_FAILURE : CMD_RET_SUCCESS;
- }
- 
--static char pcap_help_text[] =
-+U_BOOT_LONGHELP(pcap,
- 	"- network packet capture\n\n"
- 	"pcap\n"
- 	"pcap init\t\t\t<addr> <max_size>\n"
-@@ -60,7 +60,7 @@ static char pcap_help_text[] =
- 	"With:\n"
- 	"\t<addr>: user address to which pcap will be stored (hexedcimal)\n"
- 	"\t<max_size>: Maximum size of pcap file (decimal)\n"
--	"\n";
-+	"\n");
- 
- U_BOOT_CMD_WITH_SUBCMDS(pcap, "pcap", pcap_help_text,
- 			U_BOOT_SUBCMD_MKENT(init, 3, 0, do_pcap_init),
-diff --git a/cmd/pci.c b/cmd/pci.c
-index 78b661d15b1c..d89e71c16a04 100644
---- a/cmd/pci.c
-+++ b/cmd/pci.c
-@@ -620,8 +620,7 @@ static int do_pci(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 
- /***************************************************/
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char pci_help_text[] =
-+U_BOOT_LONGHELP(pci,
- 	"[bus|*] [long]\n"
- 	"    - short or long list of PCI devices on bus 'bus'\n"
- 	"pci enum\n"
-@@ -639,8 +638,7 @@ static char pci_help_text[] =
- 	"pci modify[.b, .w, .l] b.d.f address\n"
- 	"    -  modify, auto increment CFG address\n"
- 	"pci write[.b, .w, .l] b.d.f address value\n"
--	"    - write to CFG address";
--#endif
-+	"    - write to CFG address");
- 
- U_BOOT_CMD(
- 	pci,	5,	1,	do_pci,
-diff --git a/cmd/pci_mps.c b/cmd/pci_mps.c
-index 555a5fdd8e6b..98161da93a05 100644
---- a/cmd/pci_mps.c
-+++ b/cmd/pci_mps.c
-@@ -152,13 +152,11 @@ usage:
- 
- /***************************************************/
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char pci_mps_help_text[] =
-+U_BOOT_LONGHELP(pci_mps,
- 	"safe\n"
- 	"    - Set PCI Express MPS of all devices to safe values\n"
- 	"pci_mps peer2peer\n"
--	"    - Set PCI Express MPS of all devices to support hotplug and peer-to-peer DMA\n";
--#endif
-+	"    - Set PCI Express MPS of all devices to support hotplug and peer-to-peer DMA\n");
- 
- U_BOOT_CMD(pci_mps, 2, 0, do_pci_mps,
- 	   "configure PCI Express MPS", pci_mps_help_text);
-diff --git a/cmd/riscv/sbi.c b/cmd/riscv/sbi.c
-index 32761c595eb3..940d9bc1681a 100644
---- a/cmd/riscv/sbi.c
-+++ b/cmd/riscv/sbi.c
-@@ -119,11 +119,8 @@ static int do_sbi(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char sbi_help_text[] =
--	"- display SBI spec version, implementation, and available extensions";
--
--#endif
-+U_BOOT_LONGHELP(sbi,
-+	"- display SBI spec version, implementation, and available extensions");
- 
- U_BOOT_CMD_COMPLETE(
- 	sbi, 1, 0, do_sbi,
-diff --git a/cmd/rng.c b/cmd/rng.c
-index 81a23964b82e..52f722c7af89 100644
---- a/cmd/rng.c
-+++ b/cmd/rng.c
-@@ -56,11 +56,9 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return ret;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char rng_help_text[] =
-+U_BOOT_LONGHELP(rng,
- 	"[dev [n]]\n"
--	"  - print n random bytes(max 64) read from dev\n";
--#endif
-+	"  - print n random bytes(max 64) read from dev\n");
- 
- U_BOOT_CMD(
- 	rng, 3, 0, do_rng,
-diff --git a/cmd/sandbox/exception.c b/cmd/sandbox/exception.c
-index 1aa1d673aed4..c082401ce6b3 100644
---- a/cmd/sandbox/exception.c
-+++ b/cmd/sandbox/exception.c
-@@ -31,11 +31,10 @@ static struct cmd_tbl cmd_sub[] = {
- 			 "", ""),
- };
- 
--static char exception_help_text[] =
-+U_BOOT_LONGHELP(exception,
- 	"<ex>\n"
- 	"  The following exceptions are available:\n"
- 	"  undefined  - undefined instruction\n"
--	"  sigsegv    - illegal memory access\n"
--	;
-+	"  sigsegv    - illegal memory access\n");
- 
- #include <exception.h>
-diff --git a/cmd/scp03.c b/cmd/scp03.c
-index 216c942dd48b..2b8d5aecf349 100644
---- a/cmd/scp03.c
-+++ b/cmd/scp03.c
-@@ -41,11 +41,12 @@ int do_scp03_provision(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_SUCCESS;
- }
- 
--static char text[] =
-+U_BOOT_LONGHELP(scp03,
- 	"provides a command to enable SCP03 and provision the SCP03 keys\n"
- 	" enable    - enable SCP03 on the TEE\n"
--	" provision - provision SCP03 on the TEE\n";
-+	" provision - provision SCP03 on the TEE\n");
- 
--U_BOOT_CMD_WITH_SUBCMDS(scp03, "Secure Channel Protocol 03 control", text,
-+U_BOOT_CMD_WITH_SUBCMDS(scp03, "Secure Channel Protocol 03 control",
-+	scp03_help_text,
- 	U_BOOT_SUBCMD_MKENT(enable, 1, 1, do_scp03_enable),
- 	U_BOOT_SUBCMD_MKENT(provision, 1, 1, do_scp03_provision));
-diff --git a/cmd/sf.c b/cmd/sf.c
-index 977ffcb63c10..30b2bd5ef689 100644
---- a/cmd/sf.c
-+++ b/cmd/sf.c
-@@ -614,8 +614,7 @@ static int do_spi_flash(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return ret;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static const char long_help[] =
-+U_BOOT_LONGHELP(sf,
- 	"probe [[bus:]cs] [hz] [mode]	- init flash device on given SPI bus\n"
- 	"				  and chip select\n"
- 	"sf read addr offset|partition len	- read `len' bytes starting at\n"
-@@ -635,10 +634,9 @@ static const char long_help[] =
- #ifdef CONFIG_CMD_SF_TEST
- 	"\nsf test offset len		- run a very basic destructive test"
- #endif
--#endif /* CONFIG_SYS_LONGHELP */
--	;
-+	);
- 
- U_BOOT_CMD(
- 	sf,	5,	1,	do_spi_flash,
--	"SPI flash sub-system", long_help
-+	"SPI flash sub-system", sf_help_text
- );
-diff --git a/cmd/source.c b/cmd/source.c
-index 92c7835bf50e..0ba9736b1ab3 100644
---- a/cmd/source.c
-+++ b/cmd/source.c
-@@ -54,19 +54,18 @@ static int do_source(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return rcode;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char source_help_text[] =
-+U_BOOT_LONGHELP(source,
- #if defined(CONFIG_FIT)
- 	"[<addr>][:[<image>]|#[<config>]]\n"
- 	"\t- Run script starting at addr\n"
- 	"\t- A FIT config name or subimage name may be specified with : or #\n"
- 	"\t  (like bootm). If the image or config name is omitted, the\n"
--	"\t  default is used.";
-+	"\t  default is used."
- #else
- 	"[<addr>]\n"
--	"\t- Run script starting at addr";
--#endif
-+	"\t- Run script starting at addr"
- #endif
-+	);
- 
- U_BOOT_CMD(
- 	source, 2, 0,	do_source,
-diff --git a/cmd/ti/pd.c b/cmd/ti/pd.c
-index a9a182fc386e..a0492a5fdee3 100644
---- a/cmd/ti/pd.c
-+++ b/cmd/ti/pd.c
-@@ -175,11 +175,11 @@ static int ti_do_pd(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv
- 		return CMD_RET_USAGE;
- }
- 
--U_BOOT_CMD(pd, 4, 1, ti_do_pd,
--	   "TI power domain control",
--#if IS_ENABLED(CONFIG_SYS_LONGHELP)
-+U_BOOT_LONGHELP(pd,
- 	   "dump                 - show power domain status\n"
- 	   "enable [psc] [lpsc]  - enable power domain\n"
--	   "disable [psc] [lpsc] - disable power domain\n"
--#endif
-+	   "disable [psc] [lpsc] - disable power domain\n");
-+
-+U_BOOT_CMD(pd, 4, 1, ti_do_pd,
-+	   "TI power domain control", pd_help_text
- );
-diff --git a/cmd/vbe.c b/cmd/vbe.c
-index 600690394eb8..0e84b0e97aa4 100644
---- a/cmd/vbe.c
-+++ b/cmd/vbe.c
-@@ -104,13 +104,11 @@ static int do_vbe_state(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char vbe_help_text[] =
-+U_BOOT_LONGHELP(vbe,
- 	"list   - list VBE bootmeths\n"
- 	"vbe select - select a VBE bootmeth by sequence or name\n"
- 	"vbe info   - show information about a VBE bootmeth\n"
--	"vbe state  - show VBE state";
--#endif
-+	"vbe state  - show VBE state");
- 
- U_BOOT_CMD_WITH_SUBCMDS(vbe, "Verified Boot for Embedded", vbe_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 1, 1, do_vbe_list),
-diff --git a/cmd/wdt.c b/cmd/wdt.c
-index 27410981e7bf..b9fdf7ad155f 100644
---- a/cmd/wdt.c
-+++ b/cmd/wdt.c
-@@ -157,13 +157,13 @@ static int do_wdt_expire(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return CMD_RET_SUCCESS;
- }
- 
--static char wdt_help_text[] =
-+U_BOOT_LONGHELP(wdt,
- 	"list - list watchdog devices\n"
- 	"wdt dev [<name>] - get/set current watchdog device\n"
- 	"wdt start <timeout ms> [flags] - start watchdog timer\n"
- 	"wdt stop - stop watchdog timer\n"
- 	"wdt reset - reset watchdog timer\n"
--	"wdt expire [flags] - expire watchdog timer immediately\n";
-+	"wdt expire [flags] - expire watchdog timer immediately\n");
- 
- U_BOOT_CMD_WITH_SUBCMDS(wdt, "Watchdog sub-system", wdt_help_text,
- 	U_BOOT_SUBCMD_MKENT(list, 1, 1, do_wdt_list),
-diff --git a/cmd/ximg.c b/cmd/ximg.c
-index 60ed2c9f6f9e..a50dd20b19aa 100644
---- a/cmd/ximg.c
-+++ b/cmd/ximg.c
-@@ -258,8 +258,7 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char imgextract_help_text[] =
-+U_BOOT_LONGHELP(imgextract,
- 	"addr part [dest]\n"
- 	"    - extract <part> from legacy image at <addr> and copy to <dest>"
- #if defined(CONFIG_FIT)
-@@ -267,8 +266,7 @@ static char imgextract_help_text[] =
- 	"addr uname [dest]\n"
- 	"    - extract <uname> subimage from FIT image at <addr> and copy to <dest>"
- #endif
--	"";
--#endif
-+	);
- 
- U_BOOT_CMD(
- 	imxtract, 4, 1, do_imgextract,
-diff --git a/cmd/xxd.c b/cmd/xxd.c
-index 742a85c7a933..446ac1915ef5 100644
---- a/cmd/xxd.c
-+++ b/cmd/xxd.c
-@@ -73,11 +73,9 @@ static int do_xxd(struct cmd_tbl *cmdtp, int flag, int argc,
- 	return 0;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char xxd_help_text[] =
-+U_BOOT_LONGHELP(xxd,
- 	"<interface> <dev[:part]> <file>\n"
--	"  - Print file from 'dev' on 'interface' as hexdump to standard output\n";
--#endif
-+	"  - Print file from 'dev' on 'interface' as hexdump to standard output\n");
- 
- U_BOOT_CMD(xxd, 4, 1, do_xxd,
- 	   "Print file as hexdump to standard output",
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 0f56409e8031..477d4759521c 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -166,8 +166,7 @@ static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	return CMD_RET_USAGE;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char ut_help_text[] =
-+U_BOOT_LONGHELP(ut,
- 	"[-r] [-f] [<suite>] - run unit tests\n"
- 	"   -r<runs>   Number of times to run each test\n"
- 	"   -f         Force 'manual' tests to run as well\n"
-@@ -237,8 +236,7 @@ static char ut_help_text[] =
- 	!defined(CONFIG_SPL_BUILD) && !defined(API_BUILD)
- 	"\nunicode - Unicode functions"
- #endif
--	;
--#endif /* CONFIG_SYS_LONGHELP */
-+	);
- 
- U_BOOT_CMD(
- 	ut, CONFIG_SYS_MAXARGS, 1, do_ut,
-diff --git a/test/fuzz/cmd_fuzz.c b/test/fuzz/cmd_fuzz.c
-index e2f44f3ecb61..d0bc7b8d7b76 100644
---- a/test/fuzz/cmd_fuzz.c
-+++ b/test/fuzz/cmd_fuzz.c
-@@ -70,11 +70,8 @@ static int do_fuzz(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]
- 	return 1;
- }
- 
--#ifdef CONFIG_SYS_LONGHELP
--static char fuzz_help_text[] =
--	"[fuzz-test-name] - execute the named fuzz test\n"
--	;
--#endif /* CONFIG_SYS_LONGHELP */
-+U_BOOT_LONGHELP(fuzz,
-+	"[fuzz-test-name] - execute the named fuzz test\n");
- 
- U_BOOT_CMD(
- 	fuzz, CONFIG_SYS_MAXARGS, 1, do_fuzz,
+Simon Glass (25):
+  buildman: Use oldconfig when adjusting the config
+  bootstd: Correct dependencies on CMDLINE
+  autoboot: Correct dependencies on CMDLINE
+  cmd: Add a few more dependencies on CMDLINE
+  test: Make UNIT_TEST depend on CMDLINE
+  sifive: Change #ifdef for nop
+  fastboot: Declare a dependency on CMDLINE
+  cli: Always build cli_getch
+  cmd: Use an #ifdef around run_commandf()
+  Move bootmenu_conv_key() into its own file
+  pxe: Depend on CMDLINE
+  env: Split out non-command code into a new file
+  console: Move SYS_PBSIZE into common/
+  bootm: Allow building when cleanup functions are missing
+  fdt: Move working_fdt into fdt_support
+  net: Depend on CONFIG_CMDLINE
+  log: Allow use without CONFIG_CMDLINE
+  video: Allow use without CONFIG_CMDLINE
+  video: Dont require the font command
+  efi: Depend on CMDLINE for efi_loader
+  cmd: Make all commands depend on CMDLINE
+  sandbox: Avoid requiring cmdline
+  arm: x86: Drop discarding of command linker-lists
+  mmc: env: Unify the U_BOOT_ENV_LOCATION conditions
+  sandbox: Add a test for disabling CONFIG_CMDLINE
+
+Tom Rini (2):
+  command.h: Add a U_BOOT_LONGHELP macro
+  cmd: Convert existing long help messages to the new macro
+
+ arch/Kconfig                                  |   6 +-
+ arch/arm/cpu/u-boot.lds                       |   3 -
+ arch/arm/lib/bootm.c                          |   2 +
+ arch/arm/mach-imx/cmd_nandbcb.c               |   6 +-
+ arch/x86/cpu/u-boot-64.lds                    |   4 -
+ arch/x86/cpu/u-boot-spl.lds                   |   4 -
+ arch/x86/cpu/u-boot.lds                       |   4 -
+ board/freescale/common/ngpixis.c              |   6 +-
+ .../work_92105/work_92105_display.c           |  12 +-
+ board/xilinx/common/fru.c                     |   7 +-
+ board/xilinx/versal/cmds.c                    |   7 +-
+ board/xilinx/zynq/cmds.c                      |   6 +-
+ board/xilinx/zynqmp/cmds.c                    |   6 +-
+ boot/Kconfig                                  |  48 ++++---
+ boot/bootm.c                                  |  10 +-
+ boot/fdt_support.c                            |   5 +
+ cmd/Kconfig                                   |  25 ++--
+ cmd/Makefile                                  |   2 +-
+ cmd/acpi.c                                    |   6 +-
+ cmd/aes.c                                     |   6 +-
+ cmd/armffa.c                                  |   4 +-
+ cmd/axi.c                                     |   4 +-
+ cmd/bloblist.c                                |   6 +-
+ cmd/bootcount.c                               |   9 +-
+ cmd/bootdev.c                                 |   6 +-
+ cmd/bootefi.c                                 |   6 +-
+ cmd/bootflow.c                                |   9 +-
+ cmd/booti.c                                   |   6 +-
+ cmd/bootm.c                                   |   6 +-
+ cmd/bootmeth.c                                |   6 +-
+ cmd/bootz.c                                   |   6 +-
+ cmd/cat.c                                     |   6 +-
+ cmd/cedit.c                                   |   6 +-
+ cmd/clk.c                                     |   6 +-
+ cmd/conitrace.c                               |   4 +-
+ cmd/cpu.c                                     |   7 +-
+ cmd/cyclic.c                                  |   4 +-
+ cmd/dm.c                                      |   7 +-
+ cmd/efidebug.c                                |   6 +-
+ cmd/event.c                                   |   6 +-
+ cmd/fdt.c                                     |  11 +-
+ cmd/font.c                                    |   6 +-
+ cmd/help.c                                    |   5 +-
+ cmd/i2c.c                                     |   6 +-
+ cmd/kaslrseed.c                               |   6 +-
+ cmd/log.c                                     |   7 +-
+ cmd/mp.c                                      |   6 +-
+ cmd/mtd.c                                     |   6 +-
+ cmd/mtdparts.c                                |   6 +-
+ cmd/mux.c                                     |   4 +-
+ cmd/nand.c                                    |   6 +-
+ cmd/nvedit.c                                  | 128 +----------------
+ cmd/osd.c                                     |   4 +-
+ cmd/pcap.c                                    |   4 +-
+ cmd/pci.c                                     |   6 +-
+ cmd/pci_mps.c                                 |   6 +-
+ cmd/riscv/sbi.c                               |   7 +-
+ cmd/rng.c                                     |   6 +-
+ cmd/sandbox/exception.c                       |   5 +-
+ cmd/scp03.c                                   |   7 +-
+ cmd/sf.c                                      |   8 +-
+ cmd/source.c                                  |   9 +-
+ cmd/ti/pd.c                                   |  10 +-
+ cmd/vbe.c                                     |   6 +-
+ cmd/wdt.c                                     |   4 +-
+ cmd/ximg.c                                    |   6 +-
+ cmd/xxd.c                                     |   6 +-
+ common/Kconfig                                |   5 +
+ common/Makefile                               |   3 +-
+ common/cli.c                                  |   2 +
+ common/cli_getch.c                            |   1 +
+ common/log.c                                  |   4 +-
+ common/menu.c                                 |  40 ------
+ common/menu_key.c                             |  49 +++++++
+ drivers/fastboot/Kconfig                      |   1 +
+ drivers/video/Kconfig                         |   2 +-
+ drivers/video/console_truetype.c              |   4 +
+ env/Makefile                                  |   1 +
+ env/env_set.c                                 | 132 ++++++++++++++++++
+ env/mmc.c                                     |   2 +-
+ include/bootm.h                               |  15 +-
+ include/command.h                             |   3 +
+ include/env_internal.h                        |  23 +++
+ include/k210/pll.h                            |   2 +-
+ lib/efi_loader/Kconfig                        |   2 +
+ net/Kconfig                                   |   1 +
+ test/Kconfig                                  |   1 +
+ test/cmd_ut.c                                 |   6 +-
+ test/fuzz/cmd_fuzz.c                          |   7 +-
+ test/py/tests/test_sandbox_opts.py            |  20 +++
+ tools/buildman/builder.py                     |   2 +-
+ tools/buildman/builderthread.py               |   6 +
+ tools/buildman/func_test.py                   |   4 +-
+ 93 files changed, 462 insertions(+), 462 deletions(-)
+ create mode 100644 common/menu_key.c
+ create mode 100644 env/env_set.c
+ create mode 100644 test/py/tests/test_sandbox_opts.py
+
 -- 
 2.42.0.609.gbb76f46606-goog
 
