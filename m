@@ -4,95 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9504E95A62
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 17:25:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABD6CE95A62
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 17:26:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B7C5869DA;
-	Sat,  7 Oct 2023 19:25:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 21E6C868BB;
+	Sat,  7 Oct 2023 19:26:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VZOB702u";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h00DXPWU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77F19864DD; Sat,  7 Oct 2023 19:25:27 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 8756286A26; Sat,  7 Oct 2023 19:26:41 +0200 (CEST)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93C7986A26
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 19:25:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8580868AE
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 19:26:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5a22eaafd72so39503377b3.3
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 10:25:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2773b10bd05so693680a91.0
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 10:26:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696699520; x=1697304320; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=fzJZDjPIEN93DWLlEuMsaZ37M+q/vUw3ByM+b8f8A0c=;
- b=VZOB702uiQayKKwcf8WH/Ubc0s7qfbBsnMVdv98IvDZsbyuG909XqrknEeBsX7d2X6
- SVZE7RBOX1Kc+nzWF/oNOvbu1PSQrYsLY/6QlpKRDaJXjmMQ023+yzANggyccmD29z+B
- 0n7yCnl/C4OycMRlBamxCFQmJDxKIqSPtpymo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696699520; x=1697304320;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1696699596; x=1697304396; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fzJZDjPIEN93DWLlEuMsaZ37M+q/vUw3ByM+b8f8A0c=;
- b=i1J3Q0GXR+q6CMvkucfKJgSFiZRgDvWl1TH38w0uwtKWNRBIWMOGBsAfJVmJUh1KWV
- P1mi60vfrJjcdsMk8JoCFUw26IEqMy7b2xW7wpr84eabbqMghBtLpRAf0h6ZcfvIcznQ
- hMyzrHzvzFkccUDR6RFN9tTax8HM4F3+JStaUyiGcm2fFl8G6G0L8FL1+XncQ0ndoekt
- 2qakvE+qICDluABrmRKoILg8qC2146ZjtH7FTc+5slAuSfCVP4JzESv2SgXsgHyGjQg9
- hk4RSCey+ks8d+dsPFx5zolQkJBzlXh827Lkhdf2AdOoeeyZNULYuqm/olE+aIHirHiO
- iUBA==
-X-Gm-Message-State: AOJu0YyZU2qvAvPOjHX5Tlz6vuXtxibs+miokZZwPO3EiS9fnLlfSsBl
- uo5ctXNv3b+DzMArkKFSuej0Gg==
-X-Google-Smtp-Source: AGHT+IGewKQvjyIORdJzLCP8uDlX7D/HdZ6XmMUwDvZBbdUoY2l/Qe+WzsSgFbNzMHYjxaIEoZlgUw==
-X-Received: by 2002:a81:52c2:0:b0:59b:1bf9:b2db with SMTP id
- g185-20020a8152c2000000b0059b1bf9b2dbmr13018192ywb.13.1696699520030; 
- Sat, 07 Oct 2023 10:25:20 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-429b-02e7-f294-8f62.res6.spectrum.com.
- [2603:6081:7b00:6400:429b:2e7:f294:8f62])
- by smtp.gmail.com with ESMTPSA id
- o13-20020a81de4d000000b0057a44e20fb8sm2171347ywl.73.2023.10.07.10.25.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Oct 2023 10:25:19 -0700 (PDT)
-Date: Sat, 7 Oct 2023 13:25:16 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Fabio Estevam <festevam@gmail.com>, Leo <ycliang@andestech.com>,
- Michael Walle <michael@walle.cc>, Michal Suchanek <msuchanek@suse.de>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Peng Fan <peng.fan@nxp.com>, Rick Chen <rick@andestech.com>,
- Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH 05/25] treewide: Correct use of long help
-Message-ID: <20231007172516.GH2227687@bill-the-cat>
-References: <20230924232658.GM305624@bill-the-cat>
- <CAPnjgZ2-ORog-+Onh1McptpMDrzccVc+BfByCMjp93wLqAms6w@mail.gmail.com>
- <20231005145350.GQ8465@bill-the-cat>
- <CAPnjgZ2Mbx9H_ve_F_gq_eqt2hvwmYF455-0PHB31fV5m9HN2A@mail.gmail.com>
- <20231006021616.GB2227687@bill-the-cat>
- <CAPnjgZ3sTQNQJCpuZ4doJJH=t=mLxXaAYQR8kVXorOfqn2t5CA@mail.gmail.com>
- <20231006165504.GC2227687@bill-the-cat>
- <CAPnjgZ1GZ+Ryt2=_Sf0Z+XM+V58Ty4UmdrAo2bW-Ubs9s19=Ww@mail.gmail.com>
- <20231007010053.GE2227687@bill-the-cat>
- <CAPnjgZ3Pss6uOhnopo4Yn0digdNs1niNqqrJHRmnrbDvehT1hg@mail.gmail.com>
+ bh=BdJw4T8PASujMIkAB5JpYdzdWcL+solQFHyvKHIOIKc=;
+ b=h00DXPWUM6+G8hKlyXR3Nq5UY3pCUWCKPQOvtTA+R5rHdkAtGxRJv7G8bTatyNEAyo
+ OcDAbjfzzO7U0zn5psHQTgjiqBXoCxOOuJ+HIYQvndXEcFYlDiruiiklNX+bJqNzWJCH
+ 3hh42epIaQSrvZjNH3GC743xjkd+ywII98JXnmlyWx0BfyduyUVsXck/1UVorV7mv7jq
+ 51yEA/oocCL0Gk8W6GtV3XmMcGKOBpDcbNoANA3EOqlI7skX4guGqsjViiC7aKbDLZsi
+ nkPOqgTYGI7qV/sHDHi/zeuFaC0xv1lFkf2RII4yp40P07gA6FIYsByWxJizipE55ey0
+ XjtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696699596; x=1697304396;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=BdJw4T8PASujMIkAB5JpYdzdWcL+solQFHyvKHIOIKc=;
+ b=hWkKlfJcImQ1D3IlOoPfDDZNeblAruYgzNhsdVLDKIcHjB/bLEhfVqX5/natzhh2xR
+ bLuQhtThkdUl5laPP4gXFpxpk9GQ7IZTiys1O8Vb3UQyGWXhWTEWf2smDZjGE/6a27Ld
+ fOC5KIQAEWkWUibDlk4zWTlQsVWroAN9/2h8CHaqMg+RIPNuZfUZ6vJ347lU+leNInAw
+ E4C4Uz3wiyeRoioD1ayW3fO51jIZJmN+NT+k5kPW0fPBVy7uV/hJ9FYJNC8H8mYpcvzv
+ ArtliPxsLkeju0gKfL59Y0BCRLxWREGJOplpm4GafIhDn0POqd9x5kmzR+QVTHZr6fVE
+ Kadw==
+X-Gm-Message-State: AOJu0YyX8XcOXsjoyr6LMNDR6kvBra1OSfwpj8VvqpqEjjULY/jiH5Xi
+ b9YrmHk485Qu8c8WoLHApLIF16X+1aWp/ug3FkNfg/mi
+X-Google-Smtp-Source: AGHT+IEztrRYyqsHfKr1IXwgBQqAhiL+Ywx8ojhG1myS4hJ1vLsDydnrx3N2wYtPz0/Di3msEX2HrqFrInNCzhQTR8I=
+X-Received: by 2002:a17:90a:3da1:b0:274:60c7:e15a with SMTP id
+ i30-20020a17090a3da100b0027460c7e15amr9959318pjc.4.1696699595833; Sat, 07 Oct
+ 2023 10:26:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9g6HhpWIqkh4e52b"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3Pss6uOhnopo4Yn0digdNs1niNqqrJHRmnrbDvehT1hg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230928143933.11510-1-andrejs.cainikovs@gmail.com>
+In-Reply-To: <20230928143933.11510-1-andrejs.cainikovs@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 7 Oct 2023 14:26:24 -0300
+Message-ID: <CAOMZO5A8UCkhmMWuVkd_vG26vx9eXH2sNcfVoCqBeBG1Z0pmhQ@mail.gmail.com>
+Subject: Re: [PATCH v1] board: toradex: verdin-imx8mm: set fixed LPDDR4
+ refresh rate as per errata ERR050805
+To: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
+Cc: u-boot@lists.denx.de, Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,247 +88,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Sep 28, 2023 at 11:57=E2=80=AFAM Andrejs Cainikovs
+<andrejs.cainikovs@gmail.com> wrote:
+>
+> From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+>
+> Update lpddr4 configuration and training using updated spreadsheet and
+> tools from NXP using data from previous spreadsheet and verified
+> toward datasheet:
+>
+> - MX8M_Mini_LPDDR4_RPA_v22.xlsx
+> - mscale_ddr_tool_v3.31_setup.exe
+>
+> The most relevant update is related to errata ERR050805:
+> "DRAM: Controller automatic derating logic may not work when
+> the LPDDR4 memory temperature is above 85 =C2=B0C at initialization"
+>
+> Other relevant fixes:
+> - DRAMTMG7 register: corrected calculation of T_CKPDX parameter
+>   (equal to tCKCKEH for LPDDR4)
+> - RANKCTL register: corrected calculations for ODTLon and ODTLoff
+>   to follow the JEDEC specification
+> - ADDRMAP7 register: added support for 17-row devices
+>
+> As per errata ERR050805:
+>
+> An issue exists with the automatic derating logic of the DDR
+> controller that only samples the LPDDR4 MR4 register when the
+> Temperature Update Flag (TUF) field (MR4[7] ) is 1=E2=80=99b1. If the
+> LPDDR4 memory is initialized and starts operation above 85 =C2=B0C
+> (MR4[2:0] > 3=E2=80=99b011), the MR4 Temperature Update Flag (TUF) will
+> not be set. The DDR Controller will therefore not automatically
+> adjust the memory refresh rate or de-rate memory timings based
+> on the LPDDR4 memory temperature. This may cause the controller
+> incorrectly setting the refresh period, potentially cause the
+> LPDDR4 memory losing data contents and lead to possible data
+> integrity issues above 85 =C2=B0C.
+>
+> Errata provides three possible workaround options, while option 2
+> is the most reasonable:
+>
+> Disable the automatic derating logic of the DDR controller and
+> apply fixed x2 refresh rate (0.5x refresh). This option is
+> suitable for designs that are expected to boot at or above 85 =C2=B0C
+> and memory=E2=80=99s MR4[2:0] (Refresh Rate) DOES NOT report the followin=
+g
+> conditions:
+> 3b101: 0.25x refresh, no de-rating
+> 3b110: 0.25x refresh, with de-rating
+> 3b111: SDRAM High temperature operating limit exceeded
+>
+> [1]: https://www.nxp.com/docs/en/errata/IMX8MM_0N87W.pdf
+>
+> Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
 
---9g6HhpWIqkh4e52b
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Sat, Oct 07, 2023 at 09:37:07AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Fri, 6 Oct 2023 at 19:01, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Oct 06, 2023 at 04:42:44PM -0600, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Fri, 6 Oct 2023 at 10:55, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Fri, Oct 06, 2023 at 07:03:17AM -0600, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Thu, 5 Oct 2023 at 20:16, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Oct 05, 2023 at 07:41:49PM -0600, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Thu, 5 Oct 2023 at 08:53, Tom Rini <trini@konsulko.com> wr=
-ote:
-> > > > > > > >
-> > > > > > > > On Wed, Oct 04, 2023 at 07:23:47PM -0600, Simon Glass wrote:
-> > > > > > > > > Hi Tom,
-> > > > > > > > >
-> > > > > > > > > On Sun, 24 Sept 2023 at 17:27, Tom Rini <trini@konsulko.c=
-om> wrote:
-> > > > > > > > > >
-> > > > > > > > > > On Sun, Sep 24, 2023 at 02:39:23PM -0600, Simon Glass w=
-rote:
-> > > > > > > > > > > Some commands assume that CONFIG_SYS_LONGHELP is alwa=
-ys defined.
-> > > > > > > > > > > Declaration of long help should be bracketed by an #i=
-fdef to avoid an
-> > > > > > > > > > > 'unused variable' warning.
-> > > > > > > > > > >
-> > > > > > > > > > > Fix this treewide.
-> > > > > > > > > > >
-> > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > [snip]
-> > > > > > > > > > > diff --git a/arch/arm/mach-imx/cmd_dek.c b/arch/arm/m=
-ach-imx/cmd_dek.c
-> > > > > > > > > > > index 6fa5b41fcd38..25ea7d3b37da 100644
-> > > > > > > > > > > --- a/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > > > > +++ b/arch/arm/mach-imx/cmd_dek.c
-> > > > > > > > > > > @@ -393,11 +393,12 @@ static int do_dek_blob(struct c=
-md_tbl *cmdtp, int flag, int argc,
-> > > > > > > > > > >       return blob_encap_dek(src_addr, dst_addr, len);
-> > > > > > > > > > >  }
-> > > > > > > > > > >
-> > > > > > > > > > > -/***************************************************/
-> > > > > > > > > > > +#if IS_ENABLED(CONFIG_SYS_LONGHELP)
-> > > > > > > > > > >  static char dek_blob_help_text[] =3D
-> > > > > > > > > > >       "src dst len            - Encapsulate and creat=
-e blob of data\n"
-> > > > > > > > > > >       "                         $len bits long at add=
-ress $src and\n"
-> > > > > > > > > > >       "                         store the result at a=
-ddress $dst.\n";
-> > > > > > > > > > > +#endif
-> > > > > > > > > > >
-> > > > > > > > > > >  U_BOOT_CMD(
-> > > > > > > > > > >       dek_blob, 4, 1, do_dek_blob,
-> > > > > > > > > >
-> > > > > > > > > > This really doesn't read nicely.  I would rather (globa=
-lly and fix
-> > > > > > > > > > existing users) __maybe_unused this instead.  I think t=
-here's just one
-> > > > > > > > > > example today that isn't "foo_help_text".
-> > > > > > > > >
-> > > > > > > > > Hmm, what do you think about adding a __longhelp symbol t=
-o cause the
-> > > > > > > > > linker to discard it when not needed?
-> > > > > > > >
-> > > > > > > > Well, I don't think we need linker list magic when __maybe_=
-unused will
-> > > > > > > > just have them be discarded normally.
-> > > > > > >
-> > > > > > > Yes, perhaps things are in a better state than they used to b=
-e, but
-> > > > > > > there is a linker discard for commands at present.
-> > > > > >
-> > > > > > Yes, but __maybe_unused means we don't get a warning about it, =
-and it's
-> > > > > > literally discarded as part of --gc-sections as it done everywh=
-ere with
-> > > > > > maybe 3 exceptions?
-> > > > >
-> > > > > Actually with this series we get a lot closer to that. The problem
-> > > > > with the status quo is that disabling CMDLINE doesn't disable most
-> > > > > commands, relying instead on discarding them at link time.
-> > > >
-> > > > I don't follow you here.  We're talking only about the long help.
-> > >
-> > > I was actually talking about how the command code is removed. This
-> > > series allows that to happen via Kconfig rather than needing a
-> > > linker-script discard rule, something I only just fully appreciated.
-> >
-> > OK.  But this series as-is has a lot of problems and I don't see it as
-> > more than a proof of concept.
->=20
-> Probably I need to send a few version as this discussion is becoming a
-> bit theoretical.
->=20
-> >
-> > > > There's already an option to enable/disable it.  When disabled all =
-of
-> > > > the long help text should be discarded, because we reference it via
-> > > > U_BOOT_CMD macro which in turn cares about it, or not.  What's miss=
-ing
-> > > > is a U_BOOT_LONGHELP macro so that instead of:
-> > > > #ifdef CONFIG_SYS_LONGHELP
-> > > > static char cat_help_text[] =3D
-> > > >         "<interface> <dev[:part]> <file>\n"
-> > > >         "  - Print file from 'dev' on 'interface' to standard outpu=
-t\n";
-> > > > #endif
-> > > >
-> > > > We do:
-> > > > U_BOOT_LONGHELP(cat,
-> > > >         "<interface> <dev[:part]> <file>\n"
-> > > >         "  - Print file from 'dev' on 'interface' to standard outpu=
-t\n"
-> > > > );
-> > > >
-> > > > Which then does:
-> > > > static __maybe_unused char cat_help_text[] =3D
-> > > > ...
-> > > > ;
-> > > >
-> > > > And we discard the text automatically due to --gc-sections.  We pos=
-sibly
-> > > > haven't already been doing this since back when we first started us=
-ing
-> > > > --gc-sections there was a bug in binutils that caused text like the
-> > > > above to still get combined in to other objects and not discarded.
-> > > > That's been fixed for ages.
-> > > >
-> > > > And the above macro would also let us clean up U_BOOT_CMD macro sli=
-ghtly
-> > > > to just omit the longhelp option and instead always do _CMD_HELP(_n=
-ame)
-> > > > inside the macros.  It'll also make it harder to add new commands
-> > > > without a long help by accident.
-> > >
-> > > Gosh this is complicated.
-> > >
-> > > At present the U_BOOT_CMD() macro just drops the strings...the problem
-> > > with the unused var only happens in a small number of cases where an
-> > > explicit var is used. I don't see why creating a var (when none is
-> > > there today) helps anything? It doesn't detect missing longhelp, since
-> > > this is already an error (missing argument). Sure,  "" can be
-> > > provided, but your macro doesn't stop that either.
-> >
-> > The problem today is that 95% of the cases surround the help text with
-> > #ifdef CONFIG_SYS_LONGHELP ... #endif.  That's why the rest of the
-> > macros are the way they are today.  And that in turn is due to (in part
-> > at least) old compiler bugs.
->=20
-> I see about 46 #idefs for that and nearly 300 commands that don't have on=
-e.
->=20
-> >
-> > > If you are suggesting a new U_BOOT_LONGHELP() macro, bear in mind that
-> > > we already have quite a lot...each new 'top-level' macro results in
-> > > more combinations.
-> >
-> > It really should just be a single macro.  I think I'll make an attempt
-> > at this, to show what I'm talking about.
->=20
-> OK thanks.
->=20
-> >
-> > > > > With this series, it looks like we can in fact do that, so I shou=
-ld
-> > > > > remove the discards as well.
-> > > > >
-> > > > > The one proviso is that this does drop a lot of things we want...=
-e.g.
-> > > > > BOOTSTD_DEFAULTS cannot be enabled due to its use of 'select', me=
-aning
-> > > > > that common filesystems are dropped. So we'll need more effort af=
-ter
-> > > > > this, to allow (for example) bootmeths that don't need commands to
-> > > > > work correctly. But I think this series at least provides a better
-> > > > > starting point for teasing things apart.
-> > > > >
-> > > > > So OK I'll go with __maybe_unused for the ones that need it, which
-> > > > > isn't too many given that many of the strings are just included
-> > > > > directly in the macro. It is considerably easier than trying to b=
-e to
-> > > > > clever about things.
-> > > >
-> > > > Yes, this series itself has a lot of problems that need to be addre=
-ssed
-> > > > before reposting because I don't like "hiding" that network stuff no
-> > > > longer works, and I also saw that DFU also silently failing.
-> > >
-> > > Yes I saw your other comments. But I think this patch is the big area
-> > > of confusion.
-> >
-> > This isn't the tricky part of the series that I'm saying has problems,
-> > that part is all of the functionality that's not being untangled and I
-> > think leads to the question of what exactly is the use case where we do
-> > remove the command line but don't need some of that functionality still.
->=20
-> For security and code-size reasons it is useful to disable commands,
-> perhaps all of them. Quite a few features don't need it, but it
-> certainly would take more effort to get a usable version. The goal of
-> this series is to avoid people adding Kconfig mistakes which need to
-> be cleaned up later.
-
-Maybe the biggest take away should be to do things smaller.  DFU
-intentionally and fundamentally constructs something for the CLI parser
-to use.  Rework that.  Same for the network stack.  Do some slight
-re-org / fixing of more intentional dependencies on their own.
-
---=20
-Tom
-
---9g6HhpWIqkh4e52b
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUhlHkACgkQFHw5/5Y0
-tyz0ggv+MfTck/ewZWdKQMJQSbnH4B16KrxdRiADQobvoz68CT9KkFqKCqcWFtlX
-cIPPa4WwLhGaemH+oc6JjMqiypdqKszLxWmECdMHySAJQaxpGEpUhEsXWzvijyx7
-HZbS9kQmaiRFrvN7PaAETzsBSvmT/LTi2HZDE7QB45fMiFSaPPDiPEdaByFRh953
-FNp6dizmEE17bTf8bBRO51tZcyl3oQlZvYt2u1BpGz8P6qZm+9/7mFI74cjCHWFE
-2BZFsqfuk5AUcVweG9w+5ShKNxuIKlqNZWsx78ud9UWriLooGFxhqJSQv9hduD6/
-tRghd1JOIhV9eSkVuEI4ffSNxKuJxXcEDaV5REnffYNB2YRbCm8g6vBzK51NROR6
-zRbbFWt8/YP0SedJ4jpWKOUg7PAT3dYd2HPy8jwNhFq3yjzoo8KCkRH5+errrCGu
-rX5WsROsRbZo/YLZWMnHGJWXaKC6q8q8kgHWm2HI0ChokxIV43wj7N9DbRsfKT+E
-lhOL6SRJ
-=5tgV
------END PGP SIGNATURE-----
-
---9g6HhpWIqkh4e52b--
+Reviewed-by: Fabio Estevam <festevam@gmail.com>
