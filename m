@@ -4,73 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D50BE9413E
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 02:32:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 667F9E9413E
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 02:37:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8BF71864CB;
-	Sat,  7 Oct 2023 04:31:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BDE0786587;
+	Sat,  7 Oct 2023 04:37:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HO3SGCcw";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Od+jEstF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D090E8642A; Sat,  7 Oct 2023 04:31:56 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D98B4865A5; Sat,  7 Oct 2023 04:37:08 +0200 (CEST)
+Received: from ec2-44-216-146-129.compute-1.amazonaws.com
+ (ec2-44-216-146-129.compute-1.amazonaws.com [44.216.146.129])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 620008642A
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 04:31:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 516508642E
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 04:37:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5363227cc80so4554021a12.3
- for <u-boot@lists.denx.de>; Fri, 06 Oct 2023 19:31:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696645912; x=1697250712; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TsC5btBWemMnniALmw57el7pprNXK5koXN9gd9X9qCY=;
- b=HO3SGCcwgdVaqbDMPIEtMIbouO1csR1LVW5BqSC2jJVWsLS9XmfKr2/Ys6MTrTUQFV
- LFrZExfF7tI2ZXD1UvnV2IumNrhYktns1bnypE9BjQtZMLO0j+uHs8Z8A19O34Srcj/r
- oNOcFcQ2wzr2t+SEl1TfCRlLjZoZj8w0/0BDLJwjM6H4sHeV2nEDRUOrfUNvIv3Z2YR9
- 4AAbaSQZuRBAufpjwxjycXIsNqYHLhUt/h3WEY7B9Se1fh6Kdh9STL7fnchv35ASqqNR
- rTCBGGaLUZSVCVKnSeQsQk3QWtVMLreF5MCTNU24o2k4kNTfEBwwNFlJg1wogJTa3TAB
- d5Ig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696645912; x=1697250712;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TsC5btBWemMnniALmw57el7pprNXK5koXN9gd9X9qCY=;
- b=EmaBdI9bBKdv23h480bMipbZ9E7bV1TFHDfwYh9LAEcpYNxfMDLlEm/XHXO494gPZG
- xVk32Rkd+njK5Wsh9SM54VWcg2yEiOSDit1Fcqsjtb31hi6ui7IWl3Qqoq3RnVe+2p0i
- 4tGaI59qfrr+1tT4nW2Ra+cg8qDLdM8BYoUMK5dqWgOUiCE1bRk7UgPhP9+oaoTvFDvP
- b/pcZ0tYI6z6XlFrUkhXjMqCe6gu+dJerZwWA5L+VRNmqq30U8agOCnLYW5MAUQfpOGc
- lUSHcQ49d5MvoVLChXpMUgUsD4XkKrrZBUUHeyszX/05nSVdR7ZbADmvzcED3FkJrnH4
- RyhA==
-X-Gm-Message-State: AOJu0YyV1Aw9T1u0eB/ee0coSX6Ipc1dYXFhDiKg7anG9oDDkFTEw3+N
- Ihh7JRVyzwt1KRXztaRPMaa1b/J/ukpU7CuiubMUyqhG
-X-Google-Smtp-Source: AGHT+IFqfDlWwWmU3NQtPI2GrjlaD1js++bOz2cGrKvHIheYJAEwzYZEt1nWRZSZUAQKkumMmz7jgfI/mOOM7sD/3GU=
-X-Received: by 2002:aa7:c68e:0:b0:530:a186:f8a8 with SMTP id
- n14-20020aa7c68e000000b00530a186f8a8mr9161557edq.37.1696645911624; Fri, 06
- Oct 2023 19:31:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=Od+jEstF1yzrBLMPqdLL86Hq6raPWvgPYdSRt07rZKO7Ozj0c7L11gLWpOnX7g2cmmDyTUU7L/TqABgJqCOms3djIH1raVOff7k9JV5k9yjgJu02htMlb/cb5O2RkHahTEdMimrOuotPnE0C1MFQZAiCvHHljitNJkmhBdx8MF8=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=ToTEE4/HQRhukIz6i42C+3jUTbhD/jQI2yIUIoi1Lm0=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id B120D4001B6;
+ Sat,  7 Oct 2023 10:36:48 +0800 (CST)
+Message-ID: <6cdc5762-bf26-fb0b-6234-ba53b125a2c8@rock-chips.com>
+Date: Sat, 7 Oct 2023 10:36:48 +0800
 MIME-Version: 1.0
-References: <20231007004937.11600-1-mibodhi@gmail.com>
-In-Reply-To: <20231007004937.11600-1-mibodhi@gmail.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 6 Oct 2023 19:31:24 -0700
-Message-ID: <CAJaLiFwEnH8+SO14+BvwLw49fn8y_P1pSq+xdoj6AjSOdzn+cw@mail.gmail.com>
-Subject: Re: [PATCH] bootstd: sata: bootdev scanning for ahci sata with no
- drive attached
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH] board: rockchip: add Pine64 QuartzPro64 RK3588 board
+Content-Language: en-US
+To: Tom Fitzhenry <tom@tom-fitzhenry.me.uk>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Eugen Hristev <eugen.hristev@collabora.com>,
+ Jonas Karlman <jonas@kwiboo.se>, u-boot@lists.denx.de
+References: <20231001141858.164019-1-tom@tom-fitzhenry.me.uk>
+ <87o7hfaf9j.fsf@tom-fitzhenry.me.uk>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <87o7hfaf9j.fsf@tom-fitzhenry.me.uk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR9NSFZLTUoaTExIHhgdH0xVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8b07fe9d9a2eb3kusnb120d4001b6
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MAw6PTo*KTw3PhkILBMVMAsU
+ QjZPCzpVSlVKTUJNTU9NSUtCSExOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJS01LNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,42 +76,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 6, 2023 at 5:49=E2=80=AFPM Tony Dinh <mibodhi@gmail.com> wrote:
->
-> It's normal to have no SATA drive attached to the controller, so return a
-> successful status when there is no block device found after probing.
->
-> Note: this patch depends on the previous patch
-> https://patchwork.ozlabs.org/project/uboot/patch/20230917230649.30357-1-m=
-ibodhi@gmail.com/
->
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> ---
->
->  drivers/ata/sata.c | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-> index f126b84e05..59c40a829f 100644
-> --- a/drivers/ata/sata.c
-> +++ b/drivers/ata/sata.c
-> @@ -79,6 +79,11 @@ int sata_rescan(bool verbose)
->
->         ret =3D uclass_probe_all(UCLASS_AHCI);
->
-> +       if (verbose && ret =3D=3D -ENODEV) {
-> +               printf("No SATA block device found\n");
-> +               return 0;
-> +       }
-> +
->         return ret;
->  }
->
-> --
-> 2.39.2
->
+Hi Tom,
 
-Sorry, I need to resend this patch (fat finger).
+     Please add the info about where is the dts from in you v2, eg. a 
+tag in mainline kernel.
 
-All the best,
-Tony
+
+Thanks,
+
+- Kever
+
+On 2023/10/3 23:34, Tom Fitzhenry wrote:
+> Tom Fitzhenry <tom@tom-fitzhenry.me.uk> writes:
+>
+>> QuartzPro64 is a Rockchip RK3588 based SBC by Pine64.
+>>
+>> UART and booting over SD card are tested to work.
+> I've found a few issues with this patch, incl. confusion over the
+> relationship between rk3588-quartzpro64.dts and
+> rk3588-quartzpro64-u-boot.dtsi .
+>
+> I will rework this patch as a v2, and include eMMC support too.
