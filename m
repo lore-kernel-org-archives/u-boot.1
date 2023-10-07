@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 199C8E95A77
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:14:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AAECE95A7E
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:14:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1C2C86EC9;
-	Sun,  8 Oct 2023 01:12:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3BB2086EDB;
+	Sun,  8 Oct 2023 01:12:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RTGFkTym";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="EfQybngP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A24A86DD5; Sun,  8 Oct 2023 01:12:16 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
+ id 4D3A986D3F; Sun,  8 Oct 2023 01:12:17 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CD8E86DF4
+ by phobos.denx.de (Postfix) with ESMTPS id 9D51C86EA6
  for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5a50756542cso40994667b3.0
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-59f6041395dso41681687b3.1
  for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:12:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696720299; x=1697325099; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1696720299; x=1697325099; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=//wCYinzy+eVKIJtd6Mg3Afs1yIE7jnwox5otG4b9Us=;
- b=RTGFkTymXK6V+lH7DR7biYp6sbvVewjUqIL0GeGZGIEw2zSuq2tm2hxmyZ1G/oCP98
- G8QxiEa55mbI3aoocqEHdgwIfpKQWcl9F5tXhOSldwfq0sf9tbZJ2XNRjg5H5AmxfbqA
- q+ApqsaTroRshVwaEcg1tZwKbIP3rpIu+ImWs=
+ bh=gv1nFrnBnq9DkH0Bl+I3WP9yogc0dfC/g/BVOcpgrYs=;
+ b=EfQybngPgyZlEUjH/lViDxoxhmVSMUQGNnonzRjxI5eVEE+mJvUmjPbqmtPAx/CTUk
+ C2Cv/OqpJpHjZPiAn8mxj37EBEtDWF2hc+tOlZONiRsfkeXZY/lAF4wPSsolM7JVwVeO
+ Z1S1BpFHJfcW4ygO0xODdOy8VZeOr8kUWV5cspH13pDbX/Ur25j82ihzBpjtQK2sVKht
+ yXrdyWJnZ2XtG2J//11uUcEtI3/9Urc9SMwOQM0z2CsY/558/nHY35ttbYqmvPoKVCWX
+ 4HGHig0OdMDfwtOJIn3dHNuYfH1bh982morwEeq43UJRNV0a330OVKkfxGDi48+buB76
+ gsMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1696720299; x=1697325099;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=//wCYinzy+eVKIJtd6Mg3Afs1yIE7jnwox5otG4b9Us=;
- b=TD2/+CG9qKhvBwHA+vLZYMRIdRTCbzDnA0KgaWQdcDtpzOIvbAqcxRFKtjjo2CXRIc
- UXsu9heVgSNuL0dQqOPO4USFFdLV71h9JWW0pLQrpp0qSGAvqBk1t4Mr++Dv/6IwnwE6
- UadSmpZ/iA5ZjbobCeFzJTa5mTbJKjrx+KsR9A6xgI25OjcwtlEoROojR/LQOFNcGoTa
- tYMDlUlVgSReA/XfiBLoJJGiijDBjx/SuyB9So/QnXt3keOPdeAOMq4QzkjKlW+8Xmom
- 5OKQ/LKBL/ux3M+ed9ZwQEXmVJGuNaEWl/zlXdHe0Ib/6OFvfhHZY6RNPLyZpD9vw2vj
- fOoQ==
-X-Gm-Message-State: AOJu0YynVTepExCh/W/t+9qWzcjZx76BJKQpngVZt4TqnFLxNdKmtYym
- Jd1hE/cYXH4JB0ZZoT+lmf9YNYM7+A5dc84/bHyPEA==
-X-Google-Smtp-Source: AGHT+IFGu3Scorf3htwff+B85JXNQl9OPVGEpbwpClplALyAKBF3OZsufx0PxDGP7pv3eSCvs2QEpQ9oaEb/AYS/bmE=
-X-Received: by 2002:a0d:d402:0:b0:59b:c847:bce0 with SMTP id
- w2-20020a0dd402000000b0059bc847bce0mr12825255ywd.42.1696720299273; Sat, 07
+ bh=gv1nFrnBnq9DkH0Bl+I3WP9yogc0dfC/g/BVOcpgrYs=;
+ b=O3Iqp2Y7SnJf+YsRkBKm71F/zX6acB9dNHuF0Sw/hUWg6RVLNzRrWYqHTN0I97nmKU
+ 3i0EcRMOPasVGrSbF63x34UmiTBveqQxd6Wuc/boExiVT3UyJTfo+VoZUvGt84U6HUvR
+ p1PkWLb3qY1O549yCTCC1KT+QsHVkoU5h4Zts7xFW2ZLG9mvX2jY9Xu/drXETeor6Rlj
+ YLC9Ri9EVzb8Z5Z9Dp5fyAdsMl0Ak0szQ+U4ApHE5J9nO8c++YhD39xXfxjJtEWC9R38
+ m/RE7f7JEov5iL3FCbcbuWl645ln+GvuzQoNOjpThH0vnUifTF7ax2rVy6HQiGKuKP9T
+ g6rw==
+X-Gm-Message-State: AOJu0YwFMI2nHYR9meNv6KNNC+3tAf0YP3mfNZuQUaWdDpNP/WIrtBWy
+ j1v8xZWctqS6PVZFhQBhnBepVgOcyzf+D0gMGlGviQ==
+X-Google-Smtp-Source: AGHT+IGPvHG6tJWulr9PJ8+JJHK+sH0v/6ClrsFoLKEHqK/byJu118s+nbItxBvyiKS+LEeJ9tu3joYVIP9hdIN8Ers=
+X-Received: by 2002:a0d:c886:0:b0:59f:9c08:8f12 with SMTP id
+ k128-20020a0dc886000000b0059f9c088f12mr13821212ywd.38.1696720299249; Sat, 07
  Oct 2023 16:11:39 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-8-sjg@chromium.org>
- <20230925004346.GP305624@bill-the-cat>
-In-Reply-To: <20230925004346.GP305624@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Oct 2023 17:10:08 -0600
-Message-ID: <CAPnjgZ3ieXXhidSeqzMuPBCgy9UrvOt5zSMO671t1KG9zWAGxQ@mail.gmail.com>
-Subject: Re: [PATCH 07/25] tegra: Change #ifdef for nop
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>, 
- Tom Warren <twarren@nvidia.com>
+References: <20231006112351.2275090-1-randolph@andestech.com>
+ <20231006112351.2275090-2-randolph@andestech.com>
+In-Reply-To: <20231006112351.2275090-2-randolph@andestech.com>
+From: Simon Glass <sjg@google.com>
+Date: Sat, 7 Oct 2023 17:09:52 -0600
+Message-ID: <CAPnjgZ2K-Rq6mDZYzeYKn0=0oTZjXWtQSXFGPZvpeihvjkQJNg@mail.gmail.com>
+Subject: Re: [PATCH RESEND 1/7] riscv: dts: Introduce SPL_LOAD_FIT_CONFIG
+ symbol
+To: randolph@andestech.com
+Cc: u-boot@lists.denx.de, randolph.sklin@gmail.com, dylan@andestech.com, 
+ tim609@andestech.com, peterlin@andestech.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,51 +86,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom.
+Hi Randoph,
 
-On Sun, 24 Sept 2023 at 18:43, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 6 Oct 2023 at 05:26, Randolph <randolph@andestech.com> wrote:
 >
-> On Sun, Sep 24, 2023 at 02:39:25PM -0600, Simon Glass wrote:
+> Introduce common Kconfig symbol for riscv architecture
+> This symbol SPL_LOAD_FIT_CONFIG for binman itb layout selection
+> Default is using binman.dtsi
 >
-> > This code is normally compiled for Tegra, but sandbox can also compile
-> > it. We should not use UNIT_TEST as a synonym for SANDBOX, since it is
-> > possible to disable UNIT_TEST for sandbox.
-> >
-> > Correct the condition.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  include/k210/pll.h | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/include/k210/pll.h b/include/k210/pll.h
-> > index fd16a89cb203..6dd60b2eb4fc 100644
-> > --- a/include/k210/pll.h
-> > +++ b/include/k210/pll.h
-> > @@ -13,7 +13,7 @@ struct k210_pll_config {
-> >       u8 od;
-> >  };
-> >
-> > -#ifdef CONFIG_UNIT_TEST
-> > +#ifdef CONFIG_SANDBOX
-> >  TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
-> >                                    struct k210_pll_config *best);
-> >  #ifndef nop
+> Signed-off-by: Randolph <randolph@andestech.com>
+> ---
+>  arch/riscv/Kconfig               | 7 +++++++
+>  arch/riscv/dts/ae350-u-boot.dtsi | 1 +
+>  arch/riscv/dts/ae350_32.dts      | 1 -
+>  arch/riscv/dts/ae350_64.dts      | 1 -
+>  4 files changed, 8 insertions(+), 2 deletions(-)
 >
-> Tegra? Do you mean sifive?  That's where CLK_K210 stuff is... but it
-
-Oh yes, I got confused.
-
-> also seems wrong, you can run unit test on real hardware, and this is a
-> test that could (should?) be run on that platform.
-
-Only if it enables UNIT_TEST. You cannot run unit tests without that.
-The current tests are designed for sandbox.
-
+> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+> index aff1f33665..ec1cfcaaa7 100644
+> --- a/arch/riscv/Kconfig
+> +++ b/arch/riscv/Kconfig
+> @@ -422,4 +422,11 @@ config TPL_USE_ARCH_MEMSET
 >
+>  endmenu
+>
+> +config SPL_LOAD_FIT_CONFIG
+> +       string "Default FIT configuration for SPL"
+> +       default "binman.dtsi"
+> +       depends on SPL_LOAD_FIT
+> +       help
+> +         Specify corresponding FIT configuration for SPL modes.
+> +
+>  endmenu
+> diff --git a/arch/riscv/dts/ae350-u-boot.dtsi b/arch/riscv/dts/ae350-u-boot.dtsi
+> index aef9159b7a..ff5725501f 100644
+> --- a/arch/riscv/dts/ae350-u-boot.dtsi
+> +++ b/arch/riscv/dts/ae350-u-boot.dtsi
+> @@ -1,4 +1,5 @@
+>  // SPDX-License-Identifier: (GPL-2.0 OR MIT)
+> +#include CONFIG_SPL_LOAD_FIT_CONFIG
+
+That doesn't seem great to me. I will check the next patch.
+
+>  / {
+>         cpus {
+> diff --git a/arch/riscv/dts/ae350_32.dts b/arch/riscv/dts/ae350_32.dts
+> index 61af6d5465..2caabad888 100644
+> --- a/arch/riscv/dts/ae350_32.dts
+> +++ b/arch/riscv/dts/ae350_32.dts
+> @@ -2,7 +2,6 @@
+>
+>  /dts-v1/;
+>
+> -#include "binman.dtsi"
+>  #include "ae350-u-boot.dtsi"
+>
+>  / {
+> diff --git a/arch/riscv/dts/ae350_64.dts b/arch/riscv/dts/ae350_64.dts
+> index 8c7db29b4f..9d5f6c743c 100644
+> --- a/arch/riscv/dts/ae350_64.dts
+> +++ b/arch/riscv/dts/ae350_64.dts
+> @@ -2,7 +2,6 @@
+>
+>  /dts-v1/;
+>
+> -#include "binman.dtsi"
+>  #include "ae350-u-boot.dtsi"
+>
+>  / {
 > --
-> Tom
+> 2.34.1
+>
 
 Regards,
 Simon
