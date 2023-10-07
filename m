@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABD6CE95A62
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 17:26:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1E77E95A62
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 17:35:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21E6C868BB;
-	Sat,  7 Oct 2023 19:26:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 99B5C86B0C;
+	Sat,  7 Oct 2023 19:34:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h00DXPWU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VDklnP/H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8756286A26; Sat,  7 Oct 2023 19:26:41 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 526EF86D61; Sat,  7 Oct 2023 19:34:54 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8580868AE
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 19:26:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8BD7868D1
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 19:34:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2773b10bd05so693680a91.0
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 10:26:37 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-690f2719ab2so716707b3a.0
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 10:34:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696699596; x=1697304396; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696700087; x=1697304887; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BdJw4T8PASujMIkAB5JpYdzdWcL+solQFHyvKHIOIKc=;
- b=h00DXPWUM6+G8hKlyXR3Nq5UY3pCUWCKPQOvtTA+R5rHdkAtGxRJv7G8bTatyNEAyo
- OcDAbjfzzO7U0zn5psHQTgjiqBXoCxOOuJ+HIYQvndXEcFYlDiruiiklNX+bJqNzWJCH
- 3hh42epIaQSrvZjNH3GC743xjkd+ywII98JXnmlyWx0BfyduyUVsXck/1UVorV7mv7jq
- 51yEA/oocCL0Gk8W6GtV3XmMcGKOBpDcbNoANA3EOqlI7skX4guGqsjViiC7aKbDLZsi
- nkPOqgTYGI7qV/sHDHi/zeuFaC0xv1lFkf2RII4yp40P07gA6FIYsByWxJizipE55ey0
- XjtA==
+ bh=LRFY7VlHUWvG0GKDB3XxYrhzcwcKY09M98ozuqh//kU=;
+ b=VDklnP/HiJORNnw19ursvQC5GaNxIX1bXK3TQPYvHrQhJxD0ZfCsEv1ANFUGEgmxFq
+ yGxf5Qpt4Yd9XCabLtrSX8xneqnQxMf4DsBvDXJmiaoOWSd0SE7cnpNPIqsEHrMexEyh
+ KiPsz5cTc4zzi3HVHQ5zRGs059RlYEu28yldDNkX67DsVn/D7ibanFhrIMrWYpsVUg2h
+ eo5b9lV0JMGPIIFyv3ahzNi8MyI89hnlNw3puLqNa7fIhdKGjRZaTi/wjoYSIvaSXd2H
+ e5tfovdZwaPn5+XDOZgnccsWD5gePWhDi2AoQMUIPJmcBWNJM2w3/6JwPE5+7AtijwhI
+ WXCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696699596; x=1697304396;
+ d=1e100.net; s=20230601; t=1696700087; x=1697304887;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BdJw4T8PASujMIkAB5JpYdzdWcL+solQFHyvKHIOIKc=;
- b=hWkKlfJcImQ1D3IlOoPfDDZNeblAruYgzNhsdVLDKIcHjB/bLEhfVqX5/natzhh2xR
- bLuQhtThkdUl5laPP4gXFpxpk9GQ7IZTiys1O8Vb3UQyGWXhWTEWf2smDZjGE/6a27Ld
- fOC5KIQAEWkWUibDlk4zWTlQsVWroAN9/2h8CHaqMg+RIPNuZfUZ6vJ347lU+leNInAw
- E4C4Uz3wiyeRoioD1ayW3fO51jIZJmN+NT+k5kPW0fPBVy7uV/hJ9FYJNC8H8mYpcvzv
- ArtliPxsLkeju0gKfL59Y0BCRLxWREGJOplpm4GafIhDn0POqd9x5kmzR+QVTHZr6fVE
- Kadw==
-X-Gm-Message-State: AOJu0YyX8XcOXsjoyr6LMNDR6kvBra1OSfwpj8VvqpqEjjULY/jiH5Xi
- b9YrmHk485Qu8c8WoLHApLIF16X+1aWp/ug3FkNfg/mi
-X-Google-Smtp-Source: AGHT+IEztrRYyqsHfKr1IXwgBQqAhiL+Ywx8ojhG1myS4hJ1vLsDydnrx3N2wYtPz0/Di3msEX2HrqFrInNCzhQTR8I=
-X-Received: by 2002:a17:90a:3da1:b0:274:60c7:e15a with SMTP id
- i30-20020a17090a3da100b0027460c7e15amr9959318pjc.4.1696699595833; Sat, 07 Oct
- 2023 10:26:35 -0700 (PDT)
+ bh=LRFY7VlHUWvG0GKDB3XxYrhzcwcKY09M98ozuqh//kU=;
+ b=uc3ZUmSht5elJoiWt7Gt563DbNyihcrBuBvym8bJ/8rWXe3Mgy2jbQGyPbOUQEyMUu
+ nvyDqg2y6M5ev7LWRpRf8yGY79e4WyG8tRqjpdroCIagzEo653xAEhVEmakb9NqCTUgN
+ /X29nJHPiHbwUsVTDJ3Qk7l0tBEuigtIZP/lw0r1CoO0Q6n+zuObQU4IAyekyqO2lUgW
+ J6rwQALm89gtQ6hxD5DXgrN0pW4/W7nSdXkCabs4llN2oQzrIl+rx55yW0A5sWfRM0i+
+ lM1uOHorvnhER9gf1o91cU7tRwvKicYDW6TDXvALlYvf7fQLZgc1t9iu7Va9gT/0Ot+1
+ oZkw==
+X-Gm-Message-State: AOJu0YzvXOjDec7jmVzUtS+wKANWufGRkA5psfFPOSTxJqeOSZCnaKeP
+ +wqE5jfx774HmOztN6NNOwc6dInDJpKCMufKamSv2/++
+X-Google-Smtp-Source: AGHT+IFof5EX6YBn0UyiZ4MTD8BANIUMs1CGjh0GTIexB0qRxaXJv9xDe8TOWej/9xLE4QNzlduYb8l3MKlXvsFQ8/o=
+X-Received: by 2002:a05:6a20:8f02:b0:15c:b7bb:2bd9 with SMTP id
+ b2-20020a056a208f0200b0015cb7bb2bd9mr13046765pzk.6.1696700086915; Sat, 07 Oct
+ 2023 10:34:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230928143933.11510-1-andrejs.cainikovs@gmail.com>
-In-Reply-To: <20230928143933.11510-1-andrejs.cainikovs@gmail.com>
+References: <20230629105931.-r3v-pmW@linutronix.de> <ZRaTt4NvbJ7F5yNe@mt.com>
+In-Reply-To: <ZRaTt4NvbJ7F5yNe@mt.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 7 Oct 2023 14:26:24 -0300
-Message-ID: <CAOMZO5A8UCkhmMWuVkd_vG26vx9eXH2sNcfVoCqBeBG1Z0pmhQ@mail.gmail.com>
-Subject: Re: [PATCH v1] board: toradex: verdin-imx8mm: set fixed LPDDR4
- refresh rate as per errata ERR050805
-To: Andrejs Cainikovs <andrejs.cainikovs@gmail.com>
-Cc: u-boot@lists.denx.de, Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Date: Sat, 7 Oct 2023 14:34:35 -0300
+Message-ID: <CAOMZO5A2jvZT_f0UDvMrSZ_qnTsLF=uRLZ1Ob4Ra642x6CBJOA@mail.gmail.com>
+Subject: Re: [PATCH v5] imx: imx8mm: Add support for Mettler-Toledo snowflake
+ board.
+To: Manuel Traut <manuel.traut@mt.com>
+Cc: u-boot@lists.denx.de, Sebastian Andrzej Siewior <bigeasyat@linutronix.de>, 
+ Frieder Schrempf <frieder.schrempfatkontron.de@mt.com>, sbabic@denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -88,58 +88,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Sep 28, 2023 at 11:57=E2=80=AFAM Andrejs Cainikovs
-<andrejs.cainikovs@gmail.com> wrote:
+On Fri, Sep 29, 2023 at 9:13=E2=80=AFAM Manuel Traut <manuel.traut@mt.com> =
+wrote:
 >
-> From: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+> This patch probably got somehow lost. Rebased against latest master.
 >
-> Update lpddr4 configuration and training using updated spreadsheet and
-> tools from NXP using data from previous spreadsheet and verified
-> toward datasheet:
+> It is originally based on:
 >
-> - MX8M_Mini_LPDDR4_RPA_v22.xlsx
-> - mscale_ddr_tool_v3.31_setup.exe
+> From patchwork Fri Mar 31 14:18:41 2023
+> X-Patchwork-Submitter: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+> X-Patchwork-Id: 1763795
+> X-Patchwork-Delegate: sbabic@denx.de
+> Return-Path: <u-boot-bounces@lists.denx.de>
+> X-Original-To: incoming@patchwork.ozlabs.org
+> Delivered-To: patchwork-incoming@legolas.ozlabs.org
+> Authentication-Results: legolas.ozlabs.org;
+>  spf=3Dpass (sender SPF authorized) smtp.mailfrom=3Dlists.denx.de
+>  (client-ip=3D2a01:238:438b:c500:173d:9f52:ddab:ee01; helo=3Dphobos.denx.=
+de;
+>  envelope-from=3Du-boot-bounces@lists.denx.de; receiver=3D<UNKNOWN>)
+> Authentication-Results: legolas.ozlabs.org;
 >
-> The most relevant update is related to errata ERR050805:
-> "DRAM: Controller automatic derating logic may not work when
-> the LPDDR4 memory temperature is above 85 =C2=B0C at initialization"
+> The board is similar to "Kontron SL i.MX 8M Mini" SoM. There are two vari=
+ants.
+> Snowflake_v2 has an external SDCard Interface. LEIG is the same, but with=
+out
+> display and without external SDCard Interface. Both variants support
+> only 1GiB of main memory.
 >
-> Other relevant fixes:
-> - DRAMTMG7 register: corrected calculation of T_CKPDX parameter
->   (equal to tCKCKEH for LPDDR4)
-> - RANKCTL register: corrected calculations for ODTLon and ODTLoff
->   to follow the JEDEC specification
-> - ADDRMAP7 register: added support for 17-row devices
+> [ bigeasy: porting and a bit of cleanup ]
 >
-> As per errata ERR050805:
+> Signed-off-by: Manuel Traut <manuel.traut@mt.com>
+> Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+> Reviewed-by: Frieder Schrempf <frieder.schrempf@kontron.de>
 >
-> An issue exists with the automatic derating logic of the DDR
-> controller that only samples the LPDDR4 MR4 register when the
-> Temperature Update Flag (TUF) field (MR4[7] ) is 1=E2=80=99b1. If the
-> LPDDR4 memory is initialized and starts operation above 85 =C2=B0C
-> (MR4[2:0] > 3=E2=80=99b011), the MR4 Temperature Update Flag (TUF) will
-> not be set. The DDR Controller will therefore not automatically
-> adjust the memory refresh rate or de-rate memory timings based
-> on the LPDDR4 memory temperature. This may cause the controller
-> incorrectly setting the refresh period, potentially cause the
-> LPDDR4 memory losing data contents and lead to possible data
-> integrity issues above 85 =C2=B0C.
+> v4?v5:
+>  - Rebased on top of todays master
+> v3?v4:
+>  - Added Frieder's tag
+>  - Rebased on top of v2023.07-rc5.
+> v2?v3:
+>  Addressing Frieder's comments:
+>  - Add "kontron,imx8mm-sl" to the compatible string.
+>  - Remove pca9450 node and pinctrl_i2c1. The included
+>    imx8mm-kontron-sl.dtsi already provides this.
+>  - Merge the overwritten values in dram_timing.ddrc_cfg/fsp_msg directly
+>    into lpddr4_timing.c.
+>  - Simplify the init in spl_dram_init() and panic() if the init failed.
+>  - Replace a reference to SMARC with the current product name of the
+>    SoM.
 >
-> Errata provides three possible workaround options, while option 2
-> is the most reasonable:
->
-> Disable the automatic derating logic of the DDR controller and
-> apply fixed x2 refresh rate (0.5x refresh). This option is
-> suitable for designs that are expected to boot at or above 85 =C2=B0C
-> and memory=E2=80=99s MR4[2:0] (Refresh Rate) DOES NOT report the followin=
-g
-> conditions:
-> 3b101: 0.25x refresh, no de-rating
-> 3b110: 0.25x refresh, with de-rating
-> 3b111: SDRAM High temperature operating limit exceeded
->
-> [1]: https://www.nxp.com/docs/en/errata/IMX8MM_0N87W.pdf
->
-> Signed-off-by: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+> v1?v2:
+>  - Clarify details about the board and whether or not there is an
+>    external SD-card interface.
+
+The changelog should go below the --- line.
 
 Reviewed-by: Fabio Estevam <festevam@gmail.com>
