@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AAECE95A7E
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:14:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0ECF6E95A77
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BB2086EDB;
+	by phobos.denx.de (Postfix) with ESMTP id A9CCA86EE0;
 	Sun,  8 Oct 2023 01:12:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="EfQybngP";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="R4wSbj+d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D3A986D3F; Sun,  8 Oct 2023 01:12:17 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 23B7786D3F; Sun,  8 Oct 2023 01:12:18 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D51C86EA6
+ by phobos.denx.de (Postfix) with ESMTPS id 9C50986E22
  for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:12:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-59f6041395dso41681687b3.1
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:12:03 -0700 (PDT)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5a1f00b75aaso39199337b3.2
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1696720299; x=1697325099; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1696720295; x=1697325095; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gv1nFrnBnq9DkH0Bl+I3WP9yogc0dfC/g/BVOcpgrYs=;
- b=EfQybngPgyZlEUjH/lViDxoxhmVSMUQGNnonzRjxI5eVEE+mJvUmjPbqmtPAx/CTUk
- C2Cv/OqpJpHjZPiAn8mxj37EBEtDWF2hc+tOlZONiRsfkeXZY/lAF4wPSsolM7JVwVeO
- Z1S1BpFHJfcW4ygO0xODdOy8VZeOr8kUWV5cspH13pDbX/Ur25j82ihzBpjtQK2sVKht
- yXrdyWJnZ2XtG2J//11uUcEtI3/9Urc9SMwOQM0z2CsY/558/nHY35ttbYqmvPoKVCWX
- 4HGHig0OdMDfwtOJIn3dHNuYfH1bh982morwEeq43UJRNV0a330OVKkfxGDi48+buB76
- gsMQ==
+ bh=LyW6FcVZ4UIBoP4cIPv71u7vNFU7O/P/kcLnYKvg0LU=;
+ b=R4wSbj+dSqKDxOKqP1VhOJ9Xr9I+ega0i9Rf60mg+ooHuHXGdJxKE7dd8BjdiRvCII
+ 6W53PgR16gCyi24VmMuAP4l48rftkkWJAgvFcFhA7RSX0lMY7CPHM6tRc3QzDWTfi+zA
+ OdWSCMAI0JbBugN6B8kz2ABIWtwJsgHzZLTEBqPyEqzpdEvtwV2sJOCQ5CcnP87qsCrf
+ sKxweUcZKvVfT5ih5amwAsqEbm+8ddW+l/bZ3UW1IRkBgdUAHKAiHSy6eIjb5lvl44SK
+ sDhROrnqZElFa77c6C+oZgSMvC+P2/ZZPDMgHUrmAxu/BoTebz6ep0or4EK9I8hUrNTR
+ WV3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696720299; x=1697325099;
+ d=1e100.net; s=20230601; t=1696720295; x=1697325095;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gv1nFrnBnq9DkH0Bl+I3WP9yogc0dfC/g/BVOcpgrYs=;
- b=O3Iqp2Y7SnJf+YsRkBKm71F/zX6acB9dNHuF0Sw/hUWg6RVLNzRrWYqHTN0I97nmKU
- 3i0EcRMOPasVGrSbF63x34UmiTBveqQxd6Wuc/boExiVT3UyJTfo+VoZUvGt84U6HUvR
- p1PkWLb3qY1O549yCTCC1KT+QsHVkoU5h4Zts7xFW2ZLG9mvX2jY9Xu/drXETeor6Rlj
- YLC9Ri9EVzb8Z5Z9Dp5fyAdsMl0Ak0szQ+U4ApHE5J9nO8c++YhD39xXfxjJtEWC9R38
- m/RE7f7JEov5iL3FCbcbuWl645ln+GvuzQoNOjpThH0vnUifTF7ax2rVy6HQiGKuKP9T
- g6rw==
-X-Gm-Message-State: AOJu0YwFMI2nHYR9meNv6KNNC+3tAf0YP3mfNZuQUaWdDpNP/WIrtBWy
- j1v8xZWctqS6PVZFhQBhnBepVgOcyzf+D0gMGlGviQ==
-X-Google-Smtp-Source: AGHT+IGPvHG6tJWulr9PJ8+JJHK+sH0v/6ClrsFoLKEHqK/byJu118s+nbItxBvyiKS+LEeJ9tu3joYVIP9hdIN8Ers=
-X-Received: by 2002:a0d:c886:0:b0:59f:9c08:8f12 with SMTP id
- k128-20020a0dc886000000b0059f9c088f12mr13821212ywd.38.1696720299249; Sat, 07
- Oct 2023 16:11:39 -0700 (PDT)
+ bh=LyW6FcVZ4UIBoP4cIPv71u7vNFU7O/P/kcLnYKvg0LU=;
+ b=lXJQ/pgco7Mk05a6jTxYD9ph1L/LBwlxDDLFUKjeYN576TSKR03qBhyaUKyFf1IOLM
+ TOwLnq1WrvNDg8Hd73b72KID4n8FWnjOvsHSx8C1RaAsftyE4/uWczd5CncfE4aFK4e/
+ KwibiXwOtRJv3iHKfbw7JQfuWsECADrqluTXUFMLgUHL/d9vTIq55XBhfTNf8ZhcR0vY
+ Exb8wwB0leqVeVXweM3eNQGad61DYmRvLs7jE8cTPdyTHpFMUW5pU2LTtrM8wWT4PHv7
+ LPtOR2j7tkqUnmOHbxzk/+15uPO29kNnEqoQR59LHgjJBSBYQct94SDu9kSLI4qc/tdQ
+ 6fPQ==
+X-Gm-Message-State: AOJu0Yyzomhsx5yhmp0nH0+fDg00bq4hob8Jt2PIeMmotHBSPG6NlI2w
+ ZSKRfxKa25VhH+D73azvbRMvXh2Yf7PDL6oUamBYFg==
+X-Google-Smtp-Source: AGHT+IHoCscVg32WhtMn9RwjkIC/JOB2QfgD5x15k3oVFraL210o/huQFKusT6+5vCBwUsMz9Ivv4i1uZb3KimiAnzA=
+X-Received: by 2002:a05:690c:3693:b0:5a7:3cc8:f206 with SMTP id
+ fu19-20020a05690c369300b005a73cc8f206mr6234734ywb.40.1696720294606; Sat, 07
+ Oct 2023 16:11:34 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231006112351.2275090-1-randolph@andestech.com>
- <20231006112351.2275090-2-randolph@andestech.com>
-In-Reply-To: <20231006112351.2275090-2-randolph@andestech.com>
+ <20231006112351.2275090-4-randolph@andestech.com>
+In-Reply-To: <20231006112351.2275090-4-randolph@andestech.com>
 From: Simon Glass <sjg@google.com>
-Date: Sat, 7 Oct 2023 17:09:52 -0600
-Message-ID: <CAPnjgZ2K-Rq6mDZYzeYKn0=0oTZjXWtQSXFGPZvpeihvjkQJNg@mail.gmail.com>
-Subject: Re: [PATCH RESEND 1/7] riscv: dts: Introduce SPL_LOAD_FIT_CONFIG
- symbol
+Date: Sat, 7 Oct 2023 17:09:55 -0600
+Message-ID: <CAPnjgZ2aJMScxYzW=2YUpvNk_gRZNysX8EMSCvs5x7Q-O5gn-Q@mail.gmail.com>
+Subject: Re: [PATCH RESEND 3/7] spl: riscv: opensbi: change the default
+ os_type as varible
 To: randolph@andestech.com
 Cc: u-boot@lists.denx.de, randolph.sklin@gmail.com, dylan@andestech.com, 
  tim609@andestech.com, peterlin@andestech.com
@@ -86,77 +86,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Randoph,
-
 On Fri, 6 Oct 2023 at 05:26, Randolph <randolph@andestech.com> wrote:
 >
-> Introduce common Kconfig symbol for riscv architecture
-> This symbol SPL_LOAD_FIT_CONFIG for binman itb layout selection
-> Default is using binman.dtsi
+> In order to introduce the Opensbi OS boot mode, the next stage boot
+> image of OpenSBI should be configurable.
 >
 > Signed-off-by: Randolph <randolph@andestech.com>
 > ---
->  arch/riscv/Kconfig               | 7 +++++++
->  arch/riscv/dts/ae350-u-boot.dtsi | 1 +
->  arch/riscv/dts/ae350_32.dts      | 1 -
->  arch/riscv/dts/ae350_64.dts      | 1 -
->  4 files changed, 8 insertions(+), 2 deletions(-)
->
-> diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-> index aff1f33665..ec1cfcaaa7 100644
-> --- a/arch/riscv/Kconfig
-> +++ b/arch/riscv/Kconfig
-> @@ -422,4 +422,11 @@ config TPL_USE_ARCH_MEMSET
->
->  endmenu
->
-> +config SPL_LOAD_FIT_CONFIG
-> +       string "Default FIT configuration for SPL"
-> +       default "binman.dtsi"
-> +       depends on SPL_LOAD_FIT
-> +       help
-> +         Specify corresponding FIT configuration for SPL modes.
-> +
->  endmenu
-> diff --git a/arch/riscv/dts/ae350-u-boot.dtsi b/arch/riscv/dts/ae350-u-boot.dtsi
-> index aef9159b7a..ff5725501f 100644
-> --- a/arch/riscv/dts/ae350-u-boot.dtsi
-> +++ b/arch/riscv/dts/ae350-u-boot.dtsi
-> @@ -1,4 +1,5 @@
->  // SPDX-License-Identifier: (GPL-2.0 OR MIT)
-> +#include CONFIG_SPL_LOAD_FIT_CONFIG
-
-That doesn't seem great to me. I will check the next patch.
-
->  / {
->         cpus {
-> diff --git a/arch/riscv/dts/ae350_32.dts b/arch/riscv/dts/ae350_32.dts
-> index 61af6d5465..2caabad888 100644
-> --- a/arch/riscv/dts/ae350_32.dts
-> +++ b/arch/riscv/dts/ae350_32.dts
-> @@ -2,7 +2,6 @@
->
->  /dts-v1/;
->
-> -#include "binman.dtsi"
->  #include "ae350-u-boot.dtsi"
->
->  / {
-> diff --git a/arch/riscv/dts/ae350_64.dts b/arch/riscv/dts/ae350_64.dts
-> index 8c7db29b4f..9d5f6c743c 100644
-> --- a/arch/riscv/dts/ae350_64.dts
-> +++ b/arch/riscv/dts/ae350_64.dts
-> @@ -2,7 +2,6 @@
->
->  /dts-v1/;
->
-> -#include "binman.dtsi"
->  #include "ae350-u-boot.dtsi"
->
->  / {
-> --
-> 2.34.1
+>  common/spl/spl_opensbi.c | 26 ++++++++++++++++----------
+>  1 file changed, 16 insertions(+), 10 deletions(-)
 >
 
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
