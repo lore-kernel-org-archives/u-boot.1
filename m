@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16FCAE95A63
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 13:01:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EECC7E95A61
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 14:17:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3783F86406;
-	Sat,  7 Oct 2023 15:01:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9BA9D86A02;
+	Sat,  7 Oct 2023 16:17:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RKoaIrvN";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GW3EE+99";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A07386D14; Sat,  7 Oct 2023 15:01:13 +0200 (CEST)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
+ id 0A4C686B68; Sat,  7 Oct 2023 16:17:52 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7744F86406
- for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 15:01:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D21CB86A02
+ for <u-boot@lists.denx.de>; Sat,  7 Oct 2023 16:17:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-57bf04841ccso634004eaf.0
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 06:01:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-59f82ad1e09so38605757b3.0
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 07:17:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696683668; x=1697288468; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2dawRT+1GURQVaaVywIlOo/7pSdbnNkec1q9O62PJ/w=;
- b=RKoaIrvNDS+wRw5Ebx+6UutPhwybcWUn6vXLPGD9kGc9qUn/kwVOoCE3RWdUILpEJb
- WPJkL1pDgHvYu5yC3tS+cMowvDsSzUnU0khHH1rr9ISvq0PgQXA949E5EWznPrcEVVHM
- L8le+Ai3paL8y4skozDHIbu4sxBCeqheMNoUCbvj59/cDtm5aGFmBcNPLfQkkeD1O/7c
- PIanG5GChjDMgycJGfPJu1qLZIW4UHFis8xUIFaDEw1lfjgMr2dBMmWg3S/5WLvuBn0T
- 54FSgYuIm0Vnx1dvOVA90JYRzTXAlOVh2FVtnqLyrjNH5kRXgUbSrIyWhSC2+9U3Fo+q
- y7uA==
+ d=konsulko.com; s=google; t=1696688268; x=1697293068; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xFfCSkChEReN0X7tKkZjApDme9a4IoIjx8YgBIaJVYc=;
+ b=GW3EE+99+q30IQ6tgumVXZfv4e/Qj53SxayYgCUx8Y9LkRyUHpL958OuruMc7nCMcx
+ Dt1ypHND4aLhkkoizIw9PTkMe1vvlENhI5RWZYlnTcvu7jDJSsUeIMM87BMBFu3GpXmc
+ MYyKZU9TrL1MtyJgMXcQPoq7o5zNDiqDfnqxo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696683668; x=1697288468;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2dawRT+1GURQVaaVywIlOo/7pSdbnNkec1q9O62PJ/w=;
- b=QR3ltcE+jzI4ksLzrLEOstQTXwpaZWai2MdT7wSeYioulZaCCxskSpkoagttBK1pfa
- NueOFdQHgTPneTRo/EYyFEI6nXXYlfhV3p3pdalc8HF1ZjcST39mW6cvp5uONtlvcPX/
- OB58M/zx/Vm14/AmnJ/0vwnLDiIIj8eZF+ZQdKrLI0lK8s8YxlyRTSEIj3NdiPtCgtEy
- l2oJEVdowk4M6zNoqOzrUC25+CkHaRqsqXop+0Dt3fCMLx7DZbUYdScmoHmnS483vcpe
- HRpKXeczM8jAOXJHwL3r6BNx8CqePD8lbPchWed47starN22avnuV9W5D33W5cgkaV+L
- MHLw==
-X-Gm-Message-State: AOJu0Yy8iToY3298ERMhBIgrLlkV/ApInI66ChDe9pwQ2jMyw6R6YBh7
- iCZ+a07Cjzn7SP6U1YFyDzWvatacyQZqNiVbdigW+lYxtF4=
-X-Google-Smtp-Source: AGHT+IENFtkpZW078hP92MX5A2ineRsl7QdD0hfJvl9CQqFraQeh0ECt5SKpBFKL8UsdEqIiGBXb11/A3b+zdarY3g4=
-X-Received: by 2002:a05:6358:cc28:b0:143:92d5:1fdb with SMTP id
- gx40-20020a056358cc2800b0014392d51fdbmr9956500rwb.0.1696683667866; Sat, 07
- Oct 2023 06:01:07 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696688268; x=1697293068;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xFfCSkChEReN0X7tKkZjApDme9a4IoIjx8YgBIaJVYc=;
+ b=eJxFyq1f+uIfHq/wfeh+a5iBOqfdDsMc3hMV2LAMpIrenJkYbPY7RPvjrL2BN2d6wm
+ kLEudTFpWIMwwIl3qlEUSlnqPm4adpQpNXUxR/WeMUFNohwqA+yadMy56w7kDXcH6zY/
+ KyxTSbWZBjM1b/6/xkCsR3ZhhF/36nkNvQ0wvLSdvxWb7uziOyyTVjhkkqoa3VKJXDIg
+ tcZ8c1iwPYAcxon6++1t+/e8/0owI5Xhpb5m4BiHZRv4OYEZl3Vn4P3Z43hx1bR2qXwG
+ MvTxkC7v58cDasQiPQouNXAHFS5DolUuUsZrp9elgfqH8anGixPlJT8cHp/KJT8jb/Nu
+ b0RQ==
+X-Gm-Message-State: AOJu0Yz3CLd28Cri9M4g9IvMssC9gDSWFpfiH75A7mpurnhm+3JfcnsR
+ 9uvKw//LoA4pKO046DzhbXtyFA==
+X-Google-Smtp-Source: AGHT+IHAv60EmkEb4ooefZAuVIkTmhFjKqcWLNG4AGyayWvv8oemNQJDD1PlGq86E0cYY2tFtbfDaw==
+X-Received: by 2002:a81:8345:0:b0:59c:a68:d36b with SMTP id
+ t66-20020a818345000000b0059c0a68d36bmr12560425ywf.20.1696688268464; 
+ Sat, 07 Oct 2023 07:17:48 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-429b-02e7-f294-8f62.res6.spectrum.com.
+ [2603:6081:7b00:6400:429b:2e7:f294:8f62])
+ by smtp.gmail.com with ESMTPSA id
+ z124-20020a0dd782000000b0058ddb62f99bsm2113204ywd.38.2023.10.07.07.17.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 07 Oct 2023 07:17:47 -0700 (PDT)
+Date: Sat, 7 Oct 2023 10:17:45 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Marek Vasut <marex@denx.de>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Safae Ouajih <souajih@baylibre.com>
+Subject: Re: [PATCH v5 39/43] command: Include a required header in command.h
+Message-ID: <20231007141745.GF2227687@bill-the-cat>
+References: <20230927142359.2965941-40-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20230817085711.45339-1-t.remmet@phytec.de>
- <20230817085711.45339-2-t.remmet@phytec.de>
- <c3ae2eca245851ac7f7395edd19f91af7eab4dfd.camel@phytec.de>
-In-Reply-To: <c3ae2eca245851ac7f7395edd19f91af7eab4dfd.camel@phytec.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 7 Oct 2023 10:00:55 -0300
-Message-ID: <CAOMZO5A21pni4m7BibF79nnGyuV_YthjsKoMWdjeZpJZ7EuyhA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/6] board: phytec: Add common PHYTEC SoM detection
-To: Yannic Moog <Y.Moog@phytec.de>
-Cc: "uboot-imx@nxp.com" <uboot-imx@nxp.com>, "sbabic@denx.de" <sbabic@denx.de>,
- Teresa Remmet <T.Remmet@phytec.de>,
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Daniel Schultz <D.Schultz@phytec.de>, Wadim Egorov <W.Egorov@phytec.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="wfMGeql5PDDDNh5J"
+Content-Disposition: inline
+In-Reply-To: <20230927142359.2965941-40-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,20 +96,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Aug 28, 2023 at 9:32=E2=80=AFAM Yannic Moog <Y.Moog@phytec.de> wrot=
-e:
->
-> On Thu, 2023-08-17 at 10:57 +0200, Teresa Remmet wrote:
-> > Recent shipped PHYTEC SoMs come with an i2c  EEPROM containing
-> > information about the hardware such as board revision and variant.
-> > This can be used for RAM detection and loading device tree overlays
-> > during kernel start.
-> >
-> > Signed-off-by: Teresa Remmet <t.remmet@phytec.de>
->
-> Reviewed-by: Yannic Moog <y.moog@phytec.de>
-> Tested-by: Yannic Moog <y.moog@phytec.de>
 
-For the series:
+--wfMGeql5PDDDNh5J
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+On Wed, Sep 27, 2023 at 08:22:37AM -0600, Simon Glass wrote:
+
+> This uses ARRAY_SIZE() but does not include the header file which declares
+> it. Fix this, so that command.h can be included without common.h
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--wfMGeql5PDDDNh5J
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUhaIYACgkQFHw5/5Y0
+tyxRcQwAqjXbBhV0APiEZAxRg7p//Uei8G2puYQTMaliSOsL6WTaCgb0AXRLYzD9
+Ltw5Ky/3Bgfgy409UwWOV8vAfjsmsPwTx/uEc2u1DJFwWqO2z1yuGDd0rYC/wcJP
+tPW7Badpm2e8GR7E0F7iaGGX5mGCCCFCqQj0JjeWNtJoxg0bUbCab6+8rT69D5dy
+GSpF5oYCvPqdlbSuF+5miIyEj1wa7GNacIKTQxo57ByBtX1W4lgpK5ucSwSCY1LU
+KHjkogQSPlQMIYKL4zr9O8GOGTzbmzcLnWxRsX2PP/BNFAJcfJdKjN+1hizqqhHR
+4qkREZ9uRJDMZlBWBdueSlrtmjy3pU/3ZLxA+X2qr+efxoYDTFVzqeZLxCcq43Nu
+5jiQUhv3YIYR6PpcUgwYIfOoF1/S8ELvIJb2SGNH9vEjnXlI3SpU3UXVDz6X1sOg
+tWkntUtQOXtv3mscYGYWbtyRywUbW9NoOcyrf4EsF1ldWZMeMvnwn2DFNIbt/9SP
+8azRKcBF
+=HTVi
+-----END PGP SIGNATURE-----
+
+--wfMGeql5PDDDNh5J--
