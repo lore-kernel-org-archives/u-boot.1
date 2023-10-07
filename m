@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFFEEE95A67
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:28:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5108BE95A66
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:28:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E865C86F99;
-	Sun,  8 Oct 2023 01:16:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D59D86F91;
+	Sun,  8 Oct 2023 01:16:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lQlNZByM";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AjnfOJgM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0CD286EBF; Sun,  8 Oct 2023 01:15:20 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id DDE0086F04; Sun,  8 Oct 2023 01:14:58 +0200 (CEST)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06BFB86D82
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:13:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A6FD86F14
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:13:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3529eafb3a9so13404365ab.2
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:13:26 -0700 (PDT)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-352a1a0348fso13403305ab.1
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:13:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696720405; x=1697325205; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696720402; x=1697325202; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MpybGH7y1JNMcp/jxcY2j7JBFi/eB3zM779IhD+0ooU=;
- b=lQlNZByMq+wTfMz6lFInymxoTniiSjZAw/hCHWK30+vA7N12/mH8aqEYsrUi5z0VQk
- n7YeEnuG0UCQQ19uXuuSwkJLvxOhJXkwW/XJnV6rY99ynFX2FmlynGQoudwgnee9DTbL
- icfQj4OHT0uQ/mThRv3/dds/ROY+4CmSE11ns=
+ bh=7fWqYwC2ttubNGbxdtaZWKOcqhecCNc3AZkSP7ylyv0=;
+ b=AjnfOJgMm7qatIP4E/OyZ4U15BMZ+Qr+H9G/lBumlRaBq94m/YW3AEEN9jhyS6cbge
+ eRggLQvrOTsEr/p+WM8fUoTJ3Q4UEWFsD2bDqx713xQoZKQT0vMUfjsFu7EGzJLTzAZW
+ p/nHHL5SbK9iSAPtGStXVmsa52oKRoNHwyCvk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696720405; x=1697325205;
+ d=1e100.net; s=20230601; t=1696720402; x=1697325202;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MpybGH7y1JNMcp/jxcY2j7JBFi/eB3zM779IhD+0ooU=;
- b=L8mFfj0XYxbleFsdRcfDtaq6NemhRNKZarJrpMKNjGyAVs4gJt0pPzmf8b3ZXydQd3
- 1gN09AxQPztNt2RELb2xuxEPukPzxTXRFg2SynaLHolrtCer67z8RvOjPg+ZrFAk0AOl
- jUCCL7GxL7zTG8Q2XxxszXKKMpABgX1ZMx2RMDui372Xc+5P/Hb1qQLOHQOjHdNfaqcY
- x94AhYQvtkSXT1iKwrBz3CyjhOSupKzMUfB4PXT3lrtM5UzYKL54vOwD/q3t+8xRTzKk
- Dbog40pA7YdIQvyZlLaofrnQfyMg6k4kfkOQwaEp0AfAEJgYMtKh+Dhzqn+RoN6WNfTq
- F8+Q==
-X-Gm-Message-State: AOJu0YyJbO3Gbnh34hQoiU56v0+v8pDSi6aRZfgMpb9S2kmvDgMNJHD0
- 6ncpl494vRtu3icFJTmUUsX/1O0cw61vnSx6PTg=
-X-Google-Smtp-Source: AGHT+IFucwwtWmyz1wmdpac0nmfaAyZGL7A3i0MspPZbwoTkP2CVeq/jAieP4sK967Lvje2C3i0OgA==
-X-Received: by 2002:a05:6e02:12ea:b0:34a:c2e2:b2a7 with SMTP id
- l10-20020a056e0212ea00b0034ac2e2b2a7mr14185471iln.25.1696720405465; 
- Sat, 07 Oct 2023 16:13:25 -0700 (PDT)
+ bh=7fWqYwC2ttubNGbxdtaZWKOcqhecCNc3AZkSP7ylyv0=;
+ b=b7GjEMGmRr3VqXvoYj6Ny7ahUWUUshRdmfiDzMywb41Hw0DMppgK+1A55GkPIfX9My
+ 9eR2SyXUbiyK8Lp5WK4DjLSEIld3asqbbS1dmpLy3GmsoQKXMOfJHHbmoVfO6ULpgNlj
+ OaqBXDbXSt1lSNoIMWkqA2iq+EQpZy+YIbz1qig9OdiMDaQoCQDU6NQhH8AN2mjdUJJ3
+ MI2NZlvLWnrjsTlVP+TmtCv+ZeExYAgGiyeNfiRH2i3cqwpNAUrU+liL2lcQ3ZozoeLt
+ 47mPhlF+s0UCk/i8wtD2EZ++EIwZkdnOTrU2tf6jNSHh0S5V4bj4duJMMRs2HT576Wc+
+ zz/g==
+X-Gm-Message-State: AOJu0YyTlRBqySvibLoEH/tGfcKhibZgBZheYXvt1CnKrXvdinYwZPTE
+ mo8Em5RJUzZQSt/WItOo4JpiioBEDHVXvP0T6yw=
+X-Google-Smtp-Source: AGHT+IEax7CyQCyDBC9TfmTupyYJK6s210SMCVo6lRAYy1XO443NsBrGH89hXZKS8q5w3JCppv83/A==
+X-Received: by 2002:a05:6e02:1061:b0:34f:d9db:66c4 with SMTP id
+ q1-20020a056e02106100b0034fd9db66c4mr10788704ilj.30.1696720402123; 
+ Sat, 07 Oct 2023 16:13:22 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- x7-20020a92de07000000b0035129b9c61bsm2002320ilm.45.2023.10.07.16.13.24
+ x7-20020a92de07000000b0035129b9c61bsm2002320ilm.45.2023.10.07.16.13.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Oct 2023 16:13:25 -0700 (PDT)
+ Sat, 07 Oct 2023 16:13:21 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v2 26/27] mmc: env: Unify the U_BOOT_ENV_LOCATION conditions
-Date: Sat,  7 Oct 2023 17:12:45 -0600
-Message-ID: <20231007231255.277623-27-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 22/27] efi: Depend on CMDLINE for efi_loader
+Date: Sat,  7 Oct 2023 17:12:41 -0600
+Message-ID: <20231007231255.277623-23-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.609.gbb76f46606-goog
 In-Reply-To: <20231007231255.277623-1-sjg@chromium.org>
 References: <20231007231255.277623-1-sjg@chromium.org>
@@ -89,32 +88,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The declaration of U_BOOT_ENV_LOCATION() uses a different #ifdef
-condition from the code it calls. Use the same condition to avoid a
-build warning if CONFIG_CMD_SAVEENV is disabled.
+This features currently requires the command line, so make this
+explicit. Future work could adjust this, but it needs effort within
+the booting support first, like the bootm command.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Add new patch to unify the U_BOOT_ENV_LOCATION conditions
+(no changes since v1)
 
- env/mmc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ lib/efi_loader/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/env/mmc.c b/env/mmc.c
-index cb14bbb58f13..da84cddd74f0 100644
---- a/env/mmc.c
-+++ b/env/mmc.c
-@@ -495,7 +495,7 @@ U_BOOT_ENV_LOCATION(mmc) = {
- 	.location	= ENVL_MMC,
- 	ENV_NAME("MMC")
- 	.load		= env_mmc_load,
--#ifndef CONFIG_SPL_BUILD
-+#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_SPL_BUILD)
- 	.save		= env_save_ptr(env_mmc_save),
- 	.erase		= ENV_ERASE_PTR(env_mmc_erase)
- #endif
+diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+index 621ed5e5b0fb..2aef9336034e 100644
+--- a/lib/efi_loader/Kconfig
++++ b/lib/efi_loader/Kconfig
+@@ -12,6 +12,7 @@ config EFI_LOADER
+ 	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
+ 	depends on BLK
+ 	depends on !EFI_APP
++	depends on CMDLINE
+ 	default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
+ 	select CHARSET
+ 	# We need to send DM events, dynamically, in the EFI block driver
 -- 
 2.42.0.609.gbb76f46606-goog
 
