@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCFF4E95A7E
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:23:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C85AE95A77
+	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:23:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0298A86F4F;
-	Sun,  8 Oct 2023 01:14:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BBD9986F44;
+	Sun,  8 Oct 2023 01:14:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AgQLl7dO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lNZBftLr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D976F86DDA; Sun,  8 Oct 2023 01:13:55 +0200 (CEST)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id C440686F17; Sun,  8 Oct 2023 01:13:38 +0200 (CEST)
+Received: from mail-il1-x12b.google.com (mail-il1-x12b.google.com
+ [IPv6:2607:f8b0:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF9FD86F0C
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:13:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 218DE86ACA
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:13:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-7a2cc9ee64cso133594639f.1
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:13:21 -0700 (PDT)
+Received: by mail-il1-x12b.google.com with SMTP id
+ e9e14a558f8ab-3512b425662so14043935ab.0
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:13:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696720397; x=1697325197; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696720387; x=1697325187; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BnIf55QgYF2oKjcC8nh/6+oYjz38GzbLKRsejGRdy6A=;
- b=AgQLl7dOOczElCu/j9rj9q6M61LzVe1XND1ld6hU6rwav1jpwYTbUahxg1id/b+ppB
- 2YNv2HG6NKdd62vCL3t8A5BBJ4f4TH+eovTSJ4+JNK1WUtM92ZRCMVbkRSpmAjI7bZGj
- w+9bWJXmJormlRjzrycFyQZ61aVc5YcytqdS0=
+ bh=dBTo8W5MIZyktlVvjDLNXNHjKwmQ6Hk1104nqqxuqu0=;
+ b=lNZBftLrQwNcDARS4iKhi1a+heonnqNsVB7GVj87xhWMKkLzLjZyvPx4hj7aKKnEoZ
+ IeCqPW/OHMdv2wlwxgXRzy++xWqJCiHrT2AIR2AUUFRMMAjJPGU8cbU6QAebPbtUlJbu
+ oWZKTc3Oh0H54lck8V+/ah8LSO5SVdY5ZoMgI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696720397; x=1697325197;
+ d=1e100.net; s=20230601; t=1696720387; x=1697325187;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BnIf55QgYF2oKjcC8nh/6+oYjz38GzbLKRsejGRdy6A=;
- b=psf97e3l4dPWGf6JZXNG7OEMe0TudynYXRSa76I/b9iN1b/9PSDEMfFOFTPTUGodJm
- itz2VbO+bkRFmUQUQpFbMP37Jcwud/M/46xLWX0Revi+zLK7KH6Gj8gWD97dLcZqVxII
- oNwcAZ/FnSfznDusy9e259fOmLg4sYkSFoqoBwlwEm/SCGQvWScmap20EqQStxHGz+hg
- +jR5CbR+mSUWSSY/WYI5HaZFpLpxLyx92S+87Tiu4/TlORrGn/avGYVCIbQUtm4cgJMN
- PEQNEiM0nLTcIfAMIidg7vYbI44PREAMWPWCYj2sY9loSVgnBfSqvB+WV3qnTCpCevSy
- u4+A==
-X-Gm-Message-State: AOJu0YzF9DQ6tdPCacG6KcsvENxaym9T7wY8mpSPesJJKwFeJ4QTwBZ0
- oYRiBpWlFzwnrx4wUy9jzsTCpgLWqVSiEee8hUA=
-X-Google-Smtp-Source: AGHT+IGGYJ+T5M3yQY/h2OVqpXfu1tVQ1ad1h/fMStFhsL/V2gNER3TyjXHc3MNRK7rUCg+UrdQwDg==
-X-Received: by 2002:a05:6e02:11aa:b0:351:59db:a20e with SMTP id
- 10-20020a056e0211aa00b0035159dba20emr10644774ilj.18.1696720397135; 
- Sat, 07 Oct 2023 16:13:17 -0700 (PDT)
+ bh=dBTo8W5MIZyktlVvjDLNXNHjKwmQ6Hk1104nqqxuqu0=;
+ b=sajNPxwNxzkZPpy3AB5cMeeUtiQYF16SDddYuKAYTYw3NclaV+R6rgaNJL2aNkniyM
+ p4Qy+AYAYr158ce6oe8QaJ77auYgd06zGUBoiZ9SWhDdk2u3AJZiK/SoVtIWqu7W4t/B
+ LYESHEBBoBeRrSEcbFHLBmVsiaC+GCUMRgySWwPt8ydxsiKF6fn2/YnpKN8ZWE0oy9AB
+ 8O8Knlqt9FmtJXv9nlYtSiLJ9PTvNWQT2M5sKUkA44JJUDXv3Ew0X4ZrmwysI0Z7le1c
+ Wxzgng/O0JqMolnFSH8CycU+A96jZzADnndccMVW43ZChqKztpMGSdLYhvOmDB3dRw8E
+ K/kg==
+X-Gm-Message-State: AOJu0Yz0zoy9h9Q0SNfeXk6+T6b+8bn7S7SbWZ5RjdoXqNBRxtMTYQ9T
+ 2Cw7IHwhnbzfne6yNUYaH6y0qgHbuNPwN0nmjLQ=
+X-Google-Smtp-Source: AGHT+IEKL76c0ZNaG8ra4M9+6JxdVpe526UcKH7S2ItJ72clQRnmFt44si9bapretKsExcQgvABQ1g==
+X-Received: by 2002:a05:6e02:1c84:b0:34c:bc7e:896c with SMTP id
+ w4-20020a056e021c8400b0034cbc7e896cmr14646835ill.1.1696720386954; 
+ Sat, 07 Oct 2023 16:13:06 -0700 (PDT)
 Received: from sjg1.roam.corp.google.com (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- x7-20020a92de07000000b0035129b9c61bsm2002320ilm.45.2023.10.07.16.13.16
+ x7-20020a92de07000000b0035129b9c61bsm2002320ilm.45.2023.10.07.16.13.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 07 Oct 2023 16:13:16 -0700 (PDT)
+ Sat, 07 Oct 2023 16:13:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 16/27] bootm: Allow building when cleanup functions are
- missing
-Date: Sat,  7 Oct 2023 17:12:35 -0600
-Message-ID: <20231007231255.277623-17-sjg@chromium.org>
+Subject: [PATCH v2 03/27] buildman: Use oldconfig when adjusting the config
+Date: Sat,  7 Oct 2023 17:12:22 -0600
+Message-ID: <20231007231255.277623-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.609.gbb76f46606-goog
 In-Reply-To: <20231007231255.277623-1-sjg@chromium.org>
 References: <20231007231255.277623-1-sjg@chromium.org>
@@ -89,116 +88,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are two cleanup functions needed during boot which depend on
-CMD_BOOTM: bootm_disable_interrupts() and board_quiesce_devices()
-
-Provide static inline versions of these for when commands are not
-enabled.
+We cannot be sure that the new config is consistent, particularly when
+changing a major item like CONFIG_CMDLINE. Use 'make oldconfig' to
+check that and avoid any such problems.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/arm/lib/bootm.c |  2 ++
- boot/bootm.c         | 10 ++++------
- include/bootm.h      | 15 +++++++++++++--
- 3 files changed, 19 insertions(+), 8 deletions(-)
+ tools/buildman/builder.py       | 2 +-
+ tools/buildman/builderthread.py | 6 ++++++
+ tools/buildman/func_test.py     | 4 +++-
+ 3 files changed, 10 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
-index c56285738a26..db8df57cb56e 100644
---- a/arch/arm/lib/bootm.c
-+++ b/arch/arm/lib/bootm.c
-@@ -42,9 +42,11 @@ DECLARE_GLOBAL_DATA_PTR;
+diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
+index 5305477c5be6..782e59dd5cca 100644
+--- a/tools/buildman/builder.py
++++ b/tools/buildman/builder.py
+@@ -476,7 +476,7 @@ class Builder:
+         Args:
+             commit: Commit object that is being built
+             brd: Board object that is being built
+-            stage: Stage that we are at (mrproper, config, build)
++            stage: Stage that we are at (mrproper, config, oldconfig, build)
+             cwd: Directory where make should be run
+             args: Arguments to pass to make
+             kwargs: Arguments to pass to command.run_pipe()
+diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
+index 6a61f64da1d4..a8599c0bb2a8 100644
+--- a/tools/buildman/builderthread.py
++++ b/tools/buildman/builderthread.py
+@@ -426,6 +426,12 @@ class BuilderThread(threading.Thread):
  
- static struct tag *params;
+         # Now do the build, if everything looks OK
+         if result.return_code == 0:
++            if adjust_cfg:
++                oldc_args = list(args) + ['oldconfig']
++                oldc_result = self.make(commit, brd, 'oldconfig', cwd,
++                                        *oldc_args, env=env)
++                if oldc_result.return_code:
++                    return oldc_result
+             result = self._build(commit, brd, cwd, args, env, cmd_list,
+                                  config_only)
+             if adjust_cfg:
+diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
+index 55dd494fe8ee..6b88ed815d65 100644
+--- a/tools/buildman/func_test.py
++++ b/tools/buildman/func_test.py
+@@ -439,6 +439,8 @@ class TestFunctional(unittest.TestCase):
+             tools.write_file(fname, b'CONFIG_SOMETHING=1')
+             return command.CommandResult(return_code=0,
+                     combined='Test configuration complete')
++        elif stage == 'oldconfig':
++            return command.CommandResult(return_code=0)
+         elif stage == 'build':
+             stderr = ''
+             fname = os.path.join(cwd or '', out_dir, 'u-boot')
+@@ -461,7 +463,7 @@ Some images are invalid'''
+             return command.CommandResult(return_code=0)
  
-+#ifdef CONFIG_CMD_BOOTM
- __weak void board_quiesce_devices(void)
- {
- }
-+#endif
+         # Not handled, so abort
+-        print('make', stage)
++        print('_HandleMake failure: make', stage)
+         sys.exit(1)
  
- /**
-  * announce_and_cleanup() - Print message and prepare for kernel boot
-diff --git a/boot/bootm.c b/boot/bootm.c
-index 8f96a80d4259..7deae058552a 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -47,9 +47,11 @@ static const void *boot_get_kernel(struct cmd_tbl *cmdtp, int flag, int argc,
- 				   char *const argv[], struct bootm_headers *images,
- 				   ulong *os_data, ulong *os_len);
- 
-+#ifdef CONFIG_CMD_BOOTM
- __weak void board_quiesce_devices(void)
- {
- }
-+#endif
- 
- #ifdef CONFIG_LMB
- static void boot_start_lmb(struct bootm_headers *images)
-@@ -470,12 +472,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 	return 0;
- }
- 
--/**
-- * bootm_disable_interrupts() - Disable interrupts in preparation for load/boot
-- *
-- * Return: interrupt flag (0 if interrupts were disabled, non-zero if they were
-- *	enabled)
-- */
-+#ifdef CONFIG_CMD_BOOTM
- ulong bootm_disable_interrupts(void)
- {
- 	ulong iflag;
-@@ -505,6 +502,7 @@ ulong bootm_disable_interrupts(void)
- #endif
- 	return iflag;
- }
-+#endif
- 
- #define CONSOLE_ARG		"console="
- #define NULL_CONSOLE		(CONSOLE_ARG "ttynull")
-diff --git a/include/bootm.h b/include/bootm.h
-index c3c7336207b1..17c740449efd 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -50,8 +50,6 @@ int bootm_host_load_images(const void *fit, int cfg_noffset);
- int boot_selected_os(int argc, char *const argv[], int state,
- 		     struct bootm_headers *images, boot_os_fn *boot_fn);
- 
--ulong bootm_disable_interrupts(void);
--
- /* This is a special function used by booti/bootz */
- int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
- 		      ulong size);
-@@ -62,6 +60,15 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, int argc,
- 
- void arch_preboot_os(void);
- 
-+#ifdef CONFIG_CMD_BOOTM
-+/**
-+ * bootm_disable_interrupts() - Disable interrupts, stop Ethernet and USB
-+ *
-+ * Return: interrupt flag (0 if interrupts were disabled, non-zero if they were
-+ *	enabled)
-+ */
-+ulong bootm_disable_interrupts(void);
-+
- /*
-  * boards should define this to disable devices when EFI exits from boot
-  * services.
-@@ -69,6 +76,10 @@ void arch_preboot_os(void);
-  * TODO(sjg@chromium.org>): Update this to use driver model's device_remove().
-  */
- void board_quiesce_devices(void);
-+#else
-+static inline ulong bootm_disable_interrupts(void) { return 0; }
-+static inline void board_quiesce_devices(void) {}
-+#endif
- 
- /**
-  * switch_to_non_secure_mode() - switch to non-secure mode
+     # Example function to print output lines
 -- 
 2.42.0.609.gbb76f46606-goog
 
