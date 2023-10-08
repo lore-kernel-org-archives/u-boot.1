@@ -4,72 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B54FBE95A67
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 20:20:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4C55E95A8E
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 20:59:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6664586898;
-	Sun,  8 Oct 2023 22:20:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8753786C42;
+	Sun,  8 Oct 2023 22:59:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HWy0qr1p";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BHedY/Sb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42B5C86B3C; Sun,  8 Oct 2023 22:20:41 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 52AA586C26; Sun,  8 Oct 2023 22:59:50 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6495886801
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 22:20:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 279208655F
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 22:59:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9a645e54806so665094066b.0
- for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 13:20:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-6a4ff9d7e86so31005b3a.0
+ for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 13:59:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696796439; x=1697401239; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oY3Kl1E/XoZnqA5c5qfVSaGTYiDuWatQCz6SLAHnEoU=;
- b=HWy0qr1p0e1okJm33WhIvea8xADPN2RYLyVIlDc5lKg5Zfi6aaxAJ9/N12sriPRnod
- mcRlxkr6cjQDGnBtM5mT6IxINs5A4OUyHob0jBI2jezu5Y1hTcXI07mgDc5QpMd8mqtN
- rhbFNkX/UpGniYi5r6nveHzRXrs6YkEAJuaXw=
+ d=gmail.com; s=20230601; t=1696798786; x=1697403586; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=t/zbsEOuDlSi2h1QydwleLdLBqtYiLFnrmHGGKBYaA8=;
+ b=BHedY/SbPOp1/6dkJDKzwvpwN2ipMRa4NfBOnpBhDzZllmWLLcsv6PClnP4jXDV5zR
+ xOHSnkfDI55fulFskn1B1htBnuDdRdTrGGU+5r53SrEdSIltP0/LEA7JHDEFHM8pkDw8
+ wPP/BwGlVxL09tFepj6QzB15kYvh0CDtLG78WVTUcsL4iImdamrmPk9AbZR/5M6WJZ8+
+ VFVYNxzUK5/EwMF8H6cZJDK4oSLt+7jqzvH1hJgiLe9lSC8hteh6Mdk06vv0dVQNYPKY
+ h9E6pVshb+xzTpGp9w7y678qWo0aE4Pb5YDfBdU1Yf+AjjUF8Dl5W1QbAVFSaCDVhnd0
+ 0hug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696796439; x=1697401239;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1696798786; x=1697403586;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oY3Kl1E/XoZnqA5c5qfVSaGTYiDuWatQCz6SLAHnEoU=;
- b=PFJaipjQ8S6v7VtgShy7+L1k1RqgyYcukgLpHJ+TnL7cIMyPi3WU0rjhtANLe4tddj
- UOWFESpCPPc5QYT3du70i1121zyGvlr//T4zQH3sFtJWBi+RGgm3z/tWntSSilq/rM5g
- DlCPwzcrnK1McCF8TR1uA56VEhtqoIiSNaHMcCg6UDmmcWoKdUvZ9sMzMdAxMVBgR2Mf
- r+52+ygkikcOjGJI7bBM4TOoTl870PrsQRBk3VxAhK0tKpub1g/iNhGbwjIPJfmuy7YH
- 0RYMyJdZxk9NyPUCKUlfzMKEDtbPbI4gdxAAnigcye2EsVgXMzsVd1lFoiTTKcgZ+Pgl
- fREA==
-X-Gm-Message-State: AOJu0Yxd4oWvC2c0JyjcfBkvFr4o8ahDnEPnwDjmbeN0jcAsDYSAoaf/
- GmZ0EhO5LZNlXd1iI+KxG/XHpqZ6Q0z8ixt+4ml2Sg==
-X-Google-Smtp-Source: AGHT+IG7SOCEJgWkQoiGVySC41x9WUipBkxRIApOWBt0KOgxU/0LrJdVVVp1/kusfI0axYzj1ojsKCXchdQvspq2POk=
-X-Received: by 2002:a17:906:51ca:b0:9b8:9838:1df9 with SMTP id
- v10-20020a17090651ca00b009b898381df9mr12853909ejk.59.1696796438613; Sun, 08
- Oct 2023 13:20:38 -0700 (PDT)
+ bh=t/zbsEOuDlSi2h1QydwleLdLBqtYiLFnrmHGGKBYaA8=;
+ b=tGKLJjrrVaXnywzYlyDMcoNsbUSA8Y5nL4l7QIQn0jrE4vyKmiEsUU48q9KBWNJIxh
+ ipyzdMRspqPSAQ47nnp4nTTxlGiASHtJqGZ725suhthmVxo/WxnjZVgDyayXDHizkItC
+ 3oanZnm3vYrC+QosmRQ6NpvOCx/bEkpKiJb3nwejH1jLt3iIPCLRktZhrmtEJB7Xu7F6
+ Mb1ttU4OfSlkDpuuEEJtFH2Khw5GG2z1PZ6QGC8Kl9XXZpMqOXmx7ASL+XR4TKN/ZrkW
+ q/rKUCloLzcmkZPT4FMDE4FrmXqgEUP73MCJk7QIYIPOcw6yPZ+fXlMayv1dkXeN74lA
+ ZUgw==
+X-Gm-Message-State: AOJu0Ywvv4nUbytmRPd01rPwPgBs4YLbNJbQj7q1A5Gi4TB2E3I8s3j8
+ +0TvyfjRRIEsq9ugNxBoqCw=
+X-Google-Smtp-Source: AGHT+IFLvXoqIWINuO34tzkLPi2PEHtlnohuj/+d5oYkzfoPFV/O2iZNaO7AV/TitPdLvyitiEp59Q==
+X-Received: by 2002:a05:6a00:398c:b0:68a:6cbe:35a7 with SMTP id
+ fi12-20020a056a00398c00b0068a6cbe35a7mr15889438pfb.2.1696798786171; 
+ Sun, 08 Oct 2023 13:59:46 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:3eae:c867:7cc4:36a5])
+ by smtp.gmail.com with ESMTPSA id
+ a12-20020a62bd0c000000b0068e49cb1692sm4919550pff.1.2023.10.08.13.59.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Oct 2023 13:59:45 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: marex@denx.de
+Cc: sbabic@denx.de,
+	u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v2 1/3] usb: ehci: mxs: Fix the USB node pointer retrieval
+Date: Sun,  8 Oct 2023 17:59:37 -0300
+Message-Id: <20231008205939.3332647-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20230727215433.578830-1-sjg@chromium.org>
- <CALeDE9MADwXU_gExvQZJnxKYDk1C1YLiZyL1jhe9-Um1hQA=6Q@mail.gmail.com>
- <CAPnjgZ2L7Rfbuj6aN3oQqOPPxywraDaL1AM6xyQiNB8T6PFPGg@mail.gmail.com>
- <CALeDE9OJpP8P-8Wk=Jt=Ju2Q8MQoLVDOjvY8HBMF6JZP3pitVg@mail.gmail.com>
-In-Reply-To: <CALeDE9OJpP8P-8Wk=Jt=Ju2Q8MQoLVDOjvY8HBMF6JZP3pitVg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 8 Oct 2023 14:20:27 -0600
-Message-ID: <CAPnjgZ2FGkx+v3rn24D0rdNQE3AnmJhM-=e8uzbXw7u1-J_zSg@mail.gmail.com>
-Subject: Re: [RESEND PATCH v3 0/3] rpi: Convert to standard boot
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Matthias Brugger <mbrugger@suse.com>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,73 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+From: Fabio Estevam <festevam@denx.de>
 
-On Sun, 8 Oct 2023 at 12:02, Peter Robinson <pbrobinson@gmail.com> wrote:
->
-> Hi Simon,
->
-> > > So with more testing of 2023.10 in Fedora we found a regression where
-> > > the display dies when the vc4 module loads in the kernel. With further
-> > > debug it was found that it was due to the new U-Boot and with
-> > > bisecting it myself I have found this series is the cause of the
-> > > regression.
-> > >
-> > > The testing I have done is with recent RPi firmware, U-Boot 2023.10
-> > > and kernel 6.5.x, but also seen with 6.4.x, with a minimal text only
-> > > image. I can also reproduce it by using the F-38 GA image, no updates
-> > > and purely just changing the U-Boot component. I've done my testing on
-> > > the RPi4.
-> > >
-> > > Let me know if you need more information, I believe you have a RPi you
-> > > can test with.
-> >
-> > Thanks for the report. Which rpi should I test with? I take it that
-> > vc4 is a kernel module? Do you have the error message?
->
-> Well I've been testing on the RPi4 (as I mentioned above), there's no
-> direct error message that's directly linked but the screen goes blank
-> and turns off, even on a text only install, and yes, on the rpi4 the
-> vc4 kernel module deals with driving the HDMI and other output
-> interfaces (whereas the v3d is the driver for the render unit), and on
-> rpi3 and older vc4 also runs the 3D render module too.
+Use dev_ofnode() to retrieve the USB node pointer from the udevice
+structure.
 
-OK I have an rpi4, but I don't get that far:
+This fixes the following build error:
 
->>>
-U-Boot 2023.10-00111-g7d1e5aacdb4 (Oct 08 2023 - 14:14:10 -0600)
+drivers/usb/host/ehci-mxs.c:143:38: error: 'struct udevice' has no member named 'node_'
 
-DRAM:  948 MiB (effective 3.9 GiB)
-RPI 4 Model B (0xc03111)
-Core:  205 devices, 16 uclasses, devicetree: board
-MMC:   mmcnr@7e300000: 1, mmc@7e340000: 0
-Loading Environment from FAT... Unable to read "uboot.env" from mmc0:1...
-In:    serial,usbkbd
-Out:   serial,vidconsole
-Err:   serial,vidconsole
-Net:   eth0: ethernet@7d580000
-PCIe BRCM: link up, 5.0 Gbps x1 (SSC)
-starting USB...
-Bus xhci_pci: Register 5000420 NbrPorts 5
-Starting the controller
-USB XHCI 1.00
-scanning bus xhci_pci for devices... 3 USB Device(s) found
-       scanning usb for storage devices... 1 Storage Device(s) found
-Hit any key to stop autoboot:  0
-U-Boot> bootfl scan
-Card did not respond to voltage select! : -110
-** Booting bootflow 'usb_mass_storage.lun0.bootdev.part_2' with efi
-Card did not respond to voltage select! : -110
-Failed to load EFI variables
-ERROR: invalid device tree
-Boot failed (err=-22)
-<<<
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+Reviewed-by: Marek Vasut <marex@denx.de>
+---
+Changes since v1:
+- Only collected Marek's Reviewed-by tag.
 
-Do you know what that might be? I ask because it seems that you are
-actually able to boot.
+ drivers/usb/host/ehci-mxs.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-I'll keep looking.
+diff --git a/drivers/usb/host/ehci-mxs.c b/drivers/usb/host/ehci-mxs.c
+index 147b2fa145d6..092c79fd4bc5 100644
+--- a/drivers/usb/host/ehci-mxs.c
++++ b/drivers/usb/host/ehci-mxs.c
+@@ -136,11 +136,12 @@ static int ehci_usb_ofdata_to_platdata(struct udevice *dev)
+ 	struct usb_plat *plat = dev_get_plat(dev);
+ 	struct ehci_mxs_port *port = &priv->port;
+ 	u32 phandle, phy_reg, clk_reg, clk_id;
++	ofnode np = dev_ofnode(dev);
+ 	ofnode phy_node, clk_node;
+ 	const char *mode;
+ 	int ret;
+ 
+-	mode = ofnode_read_string(dev->node_, "dr_mode");
++	mode = ofnode_read_string(np, "dr_mode");
+ 	if (mode) {
+ 		if (strcmp(mode, "peripheral") == 0)
+ 			plat->init_type = USB_INIT_DEVICE;
+@@ -151,12 +152,12 @@ static int ehci_usb_ofdata_to_platdata(struct udevice *dev)
+ 	}
+ 
+ 	/* Read base address of the USB IP block */
+-	ret = ofnode_read_u32(dev->node_, "reg", &port->usb_regs);
++	ret = ofnode_read_u32(np, "reg", &port->usb_regs);
+ 	if (ret)
+ 		return ret;
+ 
+ 	/* Read base address of the USB PHY IP block */
+-	ret = ofnode_read_u32(dev->node_, "fsl,usbphy", &phandle);
++	ret = ofnode_read_u32(np, "fsl,usbphy", &phandle);
+ 	if (ret)
+ 		return ret;
+ 
+-- 
+2.34.1
 
-Regards,
-Simon
-[..]
