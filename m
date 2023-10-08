@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D908E95A82
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 08:03:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61FF9E95A82
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 08:23:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFED2866AA;
-	Sun,  8 Oct 2023 10:03:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A1F5286801;
+	Sun,  8 Oct 2023 10:23:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ERjbFpWS";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="G8XkGsaU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4324F86579; Sun,  8 Oct 2023 10:03:51 +0200 (CEST)
+ id 62FEE86898; Sun,  8 Oct 2023 10:23:42 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BFBB86579
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 10:03:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CABDB866AA
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 10:23:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,36 +28,38 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: References: Cc:
  To: Subject: From: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1696752221;
- bh=neeP7I5dEii2hPStLUXrUr+j36pFIVXGul2SFJDryDI=;
- b=ERjbFpWS9KGEEzBsqK2en03XqyRxFwpp8u3Z2S6e/Iw3hWbVyCG6uw4aE6NyQFwiTxhIDz2qZ
- wsn2VTVcKiacZzx8D6Jv2kxiUf8qtYaqvvOx/Bnyj4GKXSMUiiV/O8u2UAemR4i3ObrlertC0MV
- 2RPKq4alxDaETTAhzHIIDRLmP8A1KATXQq4Gi2wLDY5bgttDcMeQjKbMg0SSD3fACymWnXopRHm
- vywJOZK/h8qoEuJ9Jg2D/2M2z1r+j4dPDmtp7CdQhGw6zMXdXqLcVMC3B4JANLM8zpjPE75WbWG
- QUikz5lCFLhb0Gx0GSvZBptndRQTbVerWmG/Q2FNISxw==
-Message-ID: <2df66bb7-7b3c-c885-adf8-d4fa2948c45b@kwiboo.se>
-Date: Sun, 8 Oct 2023 10:03:36 +0200
+ s=fe-e1b5cab7be; t=1696753411;
+ bh=Fgr4K4Vlo6+6wzLEYHL1xdG7y4GgpQIB4jxi4NoZ84M=;
+ b=G8XkGsaUf/Raz+IZVWbDtNKsE1JfFJRNASYN3bdNun+nx5U/J+Ibj4u/Jjk2IeDKjXhrjPvs7
+ MgD2topRbTATEZHnXntT2+IutOup1Ny2vr4HbdLv6Ev3GR3p7GBuzBMGZTRokXpmwiyKwNOKuxm
+ mjZWq7tzcpE4pndToJO7xy6wSIVTwORZ1L2nJq5EfFS0RvLAeK2zLPWQLsyPSahiEqAPEt1hbSq
+ SEb5vx9VlcH6+Vz6jYb7vu+8ZPxkzH/s3LFUGBdhkivdIv1uiWxuJDAI/p/VVp8h6nuS3lZ7P38
+ Q3O/l+n7OVKaaZAoUQbw49l0i4A6dBmNx9PCN9GGLCVg==
+Message-ID: <df2e3613-a7ad-d945-3620-eaaa2675cfc1@kwiboo.se>
+Date: Sun, 8 Oct 2023 10:23:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
 From: Jonas Karlman <jonas@kwiboo.se>
-Subject: Re: Pull request: u-boot-rockchip-20231007
-To: Kever Yang <kever.yang@rock-chips.com>, trini@konsulko.com
-Cc: u-boot@lists.denx.de
-References: <20231007102658.568693-1-kever.yang@rock-chips.com>
- <0df00e4a-3fc3-a72f-8b1a-76b73d109e25@kwiboo.se>
- <6d685aaf-ac11-ff44-c3a6-204dab33b3d5@rock-chips.com>
+Subject: Re: [PATCH] board: rockchip: add FriendlyElec NanoPC-T6 rk3588 board
+To: John Clark <inindev@gmail.com>, Kever Yang <kever.yang@rock-chips.com>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>, Jagan Teki
+ <jagan@edgeble.ai>, Philipp Tomsich
+ <philipp.tomsich@theobroma-systems.com>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20231007212552.11109-1-inindev@gmail.com>
 Content-Language: en-US
-In-Reply-To: <6d685aaf-ac11-ff44-c3a6-204dab33b3d5@rock-chips.com>
+In-Reply-To: <20231007212552.11109-1-inindev@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Report-Abuse-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6522625dd9b9768cac6f6e89
+X-ForwardEmail-ID: 652267035ad66b81e81eddfc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,213 +76,320 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+Hi John,
 
-On 2023-10-08 03:13, Kever Yang wrote:
-> Hi Jonas,
-> 
-> On 2023/10/7 18:37, Jonas Karlman wrote:
->> Hi Kever,
->>
->> Looks like the following patch is missing:
->>
->> [v2,7/7] rockchip: rk3568-radxa-e25: Enable pcie3x1 node
->> https://patchwork.ozlabs.org/patch/1816145/
-> 
-> This patch set does not show in sorted order in the patchwork system.
-> 
-> I use the last patch(which is 6/7) to apply this series, but 
-> unfortunately 7/7 is missing.
-> 
-> How do you send this patch set? All other patch sets looks OK in system.
+Quick feedback below, will look at schematics and runtime test later.
 
-I think there was an issue with the mail-server at the time, as a result
-mails got delayed and patches ended up in a strange order.
-
-Patchwork list them in wrong/strange order, trying to download the
-series as a mbox seem to sort the patches in proper patch order.
-
+On 2023-10-07 23:25, John Clark wrote:
+> NanoPC-T6 is a Rockchip RK3588 based SBC by FriendlyElec.
 > 
-> I can pick this patch up later when merge other patches for next PR.
+> There are four variants depending on the DRAM size: 4G/32GB eMMC, 8G/64GB eMMC,
+> 16G/16MB SPI NOR, and 16G/256GB eMMC/16MB SPI NOR
+> 
+> Specifications:
+>     CPU: Rockchip RK3588, 4x Cortex-A76 (up to 2.4GHz) + 4x Cortex-A55 (up to 1.8GHz)
+>     GPU: Mali-G610 MP4
+>     VPU: 8K@60fps H.265 and VP9 decoder, 8K@30fps H.264 decoder,
+>          4K@60fps AV1 decoder, 8K@30fps H.264 and H.265 encoder
+>     NPU: 6TOPs, supports INT4/INT8/INT16/FP16
+>     RAM: 64-bit 4GB/8GB/16GB LPDDR4X at 2133MHz
+>     eMMC: 0GB/32GB/64GB/256GB HS400
+>     MicroSD Slot: MicroSD SDR104
+>     PCIe 3.0: M.2 M-Key x1, PCIe 3.0 x4 for NVMe SSDs up to 2,500 MB/s
+>     Ethernet: PCIe 2.5G 2x Ethernet (RTL8125BG)
+>     PCIe 2.1: M.2 E-Key x1, PCIe 2.1 x1 and USB2.0 Host, supports M.2 WiFi and Bluetooth
+>     4G Module: MiniPCIe x1, MicroSIM Card Slot x1
+>     Audio Out: 3.5mm jack for stereo headphone output
+>     Audio In: 2.0mm PH-2A connector for analog microphone input
+>     Video Input: standard HDMI input port, up to 4Kp60
+>     2x 4-lane MIPI-CSI, compatible with MIPI V1.2
+>     Video Output: 2x standard HDMI output ports compatible with HDMI2.1, HDMI2.0, and HDMI1.4
+>     2x 4-lane MIPI-DSI, compatible with MIPI DPHY 2.0 or CPHY 1.1
+>     USB-A: USB 3.0, Type A
+>     USB-C: Full function USB Type‑C port, supports DP display up to 4Kp60, USB 3.0
+>     40-pin 2.54mm header connector: up to 2x SPIs, 6x UARTs, 1x I2Cs, 8x PWMs, 2x I2Ss, 28x GPIOs
+>     Debug UART: 3 Pin 2.54mm header, 3V level, 1500000bps
+>     Onboard IR receiver: 38KHz carrier frequency
+>     RTC Battery: 2 Pin 1.27/1.25mm RTC battery input connector for low power RTC IC HYM8563TS
+>     5V Fan connector
+>     Working Temperature: 0C to 70C
+>     Power: 5.5*2.1mm DC Jack, 12VDC input
+>     Dimensions: 110x80x1.6mm (without case) / 86x114.5x30mm (with case)
+> 
+> Kernel commits:
+> 893c17716d0c ("arm64: dts: rockchip: Add NanoPC T6")
+> a721e28dfad2 ("arm64: dts: rockchip: Add NanoPC T6 PCIe Ethernet support")
+> ac76b786cc37 ("arm64: dts: rockchip: Add NanoPC T6 PCIe e-key support")
+> 
+> Signed-off-by: John Clark <inindev@gmail.com>
+> ---
+> 
+>  arch/arm/dts/Makefile                     |   1 +
+>  arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi |  36 +
+>  arch/arm/dts/rk3588-nanopc-t6.dts         | 916 ++++++++++++++++++++++
+>  arch/arm/mach-rockchip/rk3588/rk3588.c    |   1 +
+>  configs/nanopc-t6-rk3588_defconfig        | 113 +++
+>  5 files changed, 1067 insertions(+)
+>  create mode 100644 arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
+>  create mode 100644 arch/arm/dts/rk3588-nanopc-t6.dts
+>  create mode 100644 configs/nanopc-t6-rk3588_defconfig
 
-Great, I will re-send the missing patch after this PR has been merged.
+This is missing addition of the board to the list in board documentation
+and an entry in the evb_rk3588 MAINTAINERS file.
+
+[...]
+
+> diff --git a/arch/arm/dts/rk3588-nanopc-t6.dts b/arch/arm/dts/rk3588-nanopc-t6.dts
+> new file mode 100644
+> index 0000000000..965bf5263d
+> --- /dev/null
+> +++ b/arch/arm/dts/rk3588-nanopc-t6.dts
+> @@ -0,0 +1,916 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
+> + * Copyright (c) 2023 Thomas McKahan
+> + *
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/pinctrl/rockchip.h>
+> +#include <dt-bindings/usb/pd.h>
+> +#include "rk3588.dtsi"
+> +
+> +/ {
+> +	model = "FriendlyElec NanoPC-T6";
+> +	compatible = "friendlyarm,nanopc-t6", "rockchip,rk3588";
+> +
+> +	aliases {
+> +		mmc0 = &sdhci;
+> +		mmc1 = &sdmmc;
+> +		serial2 = &uart2;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial2:1500000n8";
+> +	};
+> +
+> +	sound {
+> +		compatible = "simple-audio-card";
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&hp_det>;
+> +
+> +		simple-audio-card,name = "realtek,rt5616-codec";
+> +		simple-audio-card,format = "i2s";
+> +		simple-audio-card,mclk-fs = <256>;
+> +
+> +		simple-audio-card,hp-det-gpio = <&gpio1 RK_PC4 GPIO_ACTIVE_LOW>;
+> +		simple-audio-card,hp-pin-name = "Headphones";
+> +
+> +		simple-audio-card,widgets =
+> +			"Headphone", "Headphones",
+> +			"Microphone", "Microphone Jack";
+> +		simple-audio-card,routing =
+> +			"Headphones", "HPOL",
+> +			"Headphones", "HPOR",
+> +			"MIC1", "Microphone Jack",
+> +			"Microphone Jack", "micbias1";
+> +
+> +		simple-audio-card,cpu {
+> +			sound-dai = <&i2s0_8ch>;
+> +		};
+> +		simple-audio-card,codec {
+> +			sound-dai = <&rt5616>;
+> +		};
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +
+> +		sys_led: led-0 {
+> +			gpios = <&gpio2 RK_PB7 GPIO_ACTIVE_HIGH>;
+> +			label = "system-led";
+> +			pinctrl-names = "default";
+> +			pinctrl-0 = <&sys_led_pin>;
+> +			linux,default-trigger = "heartbeat";
+> +		};
+> +
+> +		usr_led: led-1 {
+> +			gpios = <&gpio2 RK_PC0 GPIO_ACTIVE_HIGH>;
+> +			label = "user-led";
+> +			pinctrl-names = "default";
+> +			pinctrl-0 = <&usr_led_pin>;
+> +		};
+> +	};
+
+sound and leds node is out of order compared to mmind/for-next tree.
+Rest of the device tree seem to be a 1:1 copy.
+
+https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/tree/arch/arm64/boot/dts/rockchip/rk3588-nanopc-t6.dts?h=for-next
+
+[...]
+
+> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> index b1f535fad5..e08ebfa39b 100644
+> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> @@ -40,6 +40,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@fe2e0000",
+>  	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe2b0000/flash@0",
+> +	[BROM_BOOTSOURCE_SPINAND] = "/spi@fe2b0000/flash@0",
+
+Hum, maybe we need to look at using the atags to determine boot device.
+We now have 3 different bootsource values representing same dt node.
+
+>  	[BROM_BOOTSOURCE_SD] = "/mmc@fe2c0000",
+>  	[BROM_BOOTSOURCE_SPINOR_RK3588] = "/spi@fe2b0000/flash@0",
+>  };
+> diff --git a/configs/nanopc-t6-rk3588_defconfig b/configs/nanopc-t6-rk3588_defconfig
+> new file mode 100644
+> index 0000000000..a1d20b0770
+> --- /dev/null
+> +++ b/configs/nanopc-t6-rk3588_defconfig
+> @@ -0,0 +1,113 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+> +CONFIG_COUNTER_FREQUENCY=24000000
+> +CONFIG_ARCH_ROCKCHIP=y
+> +CONFIG_TEXT_BASE=0x00a00000
+> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
+> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
+> +CONFIG_NR_DRAM_BANKS=2
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
+> +CONFIG_SF_DEFAULT_SPEED=24000000
+> +CONFIG_SF_DEFAULT_MODE=0x2000
+> +CONFIG_DEFAULT_DEVICE_TREE="rk3588-nanopc-t6"
+> +CONFIG_ROCKCHIP_RK3588=y
+> +CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+> +CONFIG_SPL_SERIAL=y
+> +CONFIG_SPL_STACK_R_ADDR=0x600000
+> +CONFIG_TARGET_EVB_RK3588=y
+> +CONFIG_SPL_STACK=0x400000
+> +CONFIG_DEBUG_UART_BASE=0xFEB50000
+> +CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+> +CONFIG_SYS_LOAD_ADDR=0xc00800
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_SPL_FIT_SIGNATURE=y
+> +CONFIG_SPL_LOAD_FIT=y
+> +CONFIG_LEGACY_IMAGE_FORMAT=y
+> +CONFIG_OF_BOARD_SETUP=y
+> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-nanopc-t6.dtb"
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_PCI_INIT_R=y
+
+This should not be needed and may slow down boot from e.g. eMMC when
+there is no PCIe devices attached. Standard boot should init pci after
+it has tested faster boot targets.
+
+> +CONFIG_SPL_MAX_SIZE=0x40000
+> +CONFIG_SPL_PAD_TO=0x7f8000
+> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+> +CONFIG_SPL_BSS_START_ADDR=0x4000000
+> +CONFIG_SPL_BSS_MAX_SIZE=0x4000
+> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
+> +CONFIG_SPL_STACK_R=y
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
+
+We use 0x60000 for other rk35xx boards, odroid-m1 use 0x100000 because
+board vendor have existing partitions defined in the device tree.
+
+> +CONFIG_SPL_ATF=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_USB=y
+> +# CONFIG_CMD_SETEXPR is not set
+> +CONFIG_CMD_REGULATOR=y
+> +# CONFIG_SPL_DOS_PARTITION is not set
+> +CONFIG_SPL_OF_CONTROL=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+> +CONFIG_SPL_DM_SEQ_ALIAS=y
+> +CONFIG_SPL_REGMAP=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SPL_CLK=y
+> +CONFIG_ROCKCHIP_GPIO=y
+> +CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_MISC=y
+> +CONFIG_SUPPORT_EMMC_RPMB=y
+> +CONFIG_MMC_DW=y
+> +CONFIG_MMC_DW_ROCKCHIP=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=5
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHYLIB=y
+> +CONFIG_RTL8169=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_ROCKCHIP=y
+> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+> +CONFIG_PHY_ROCKCHIP_USBDP=y
+> +CONFIG_SPL_PINCTRL=y
+> +CONFIG_REGULATOR_PWM=y
+
+This could be dropped, there is no use of pwm-regulator in the DT.
+
+> +CONFIG_PWM_ROCKCHIP=y
+> +CONFIG_SPL_RAM=y
+> +CONFIG_BAUDRATE=1500000
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SFC=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_USB=y
+> +CONFIG_DM_USB_GADGET=y
+> +CONFIG_USB_XHCI_HCD=y
+> +# CONFIG_USB_XHCI_DWC3_OF_SIMPLE is not set
+
+You can drop this line, only the pre-mainline usb3 nodes in -u-boot.dtsi
+use a rk3399 compatible that would load this driver. I will also send
+two series that make this driver obsolete on rockchip platform.
+
+- First series will sync compatible of usb3 nodes with collabora rk3588
+  tree, removing the use of the rk3399 compatible.
+- Second series will switch rk3399 boards to use dwc3-generic and drop
+  the use of dwc3-of-simple driver.
+
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_EHCI_GENERIC=y
+> +CONFIG_USB_OHCI_HCD=y
+> +CONFIG_USB_OHCI_GENERIC=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_GENERIC=y
+
+This is not really needed, usb nodes are not included in the spl dtb.
 
 Regards,
 Jonas
 
-> 
-> 
-> Thanks,
-> 
-> - Kever
-> 
->>
->> from merged series:
->> [v2,0/7] rockchip: rk3568: Fix use of PCIe bifurcation
->>
->> Do you want me to send it as a new separate patch?
->>
->> Regards,
->> Jonas
->>
->> On 2023-10-07 12:26, Kever Yang wrote:
->>> Hi Tom,
->>>
->>> Please pull the updates for rockchip platform:
->>> - Add Board: rk3568 Bananapi R2Pro;
->>> - Update pcie bifurcation support;
->>> - dwc_eth_qos controller support for rk3568 and rk3588;
->>> - Compressed binary support for U-Boot on rockchip platform;
->>> - dts and config updates for different board and soc;
->>>
->>> CI:
->>> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/18047
->>>
->>> Thanks,
->>> - Kever
->>>
->>> The following changes since commit be2abe73df58a35da9e8d5afb13fccdf1b0faa8e:
->>>
->>>    Merge https://source.denx.de/u-boot/custodians/u-boot-riscv (2023-10-05 13:26:44 -0400)
->>>
->>> are available in the Git repository at:
->>>
->>>    https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20231007
->>>
->>> for you to fetch changes up to dd8d52c934e8858264f91e8e8e2d8c7d8b059dd7:
->>>
->>>    rockchip: rk356x-u-boot: Add bootph-all to i2c0_xfer pinctrl node (2023-10-07 16:52:48 +0800)
->>>
->>> ----------------------------------------------------------------
->>> FUKAUMI Naoki (5):
->>>        configs: rockchip: rock-pi-s: use default bootdelay (2s)
->>>        arm: dts: rockchip: sync DT for RK3588 series with Linux
->>>        arm: dts: rockchip: rock-5b: add support for PCIe3 and NVMe
->>>        configs: rockchip: rk3308: use CONFIG_DEFAULT_FDT_FILE
->>>        configs: rockchip: rk3308: enable CONFIG_OF_LIBFDT_OVERLAY
->>>
->>> Frank Wunderlich (1):
->>>        board: rockchip: Add Bananapi R2Pro Board
->>>
->>> Jonas Karlman (22):
->>>        pci: pcie_dw_rockchip: Configure number of lanes and link width speed
->>>        phy: rockchip: snps-pcie3: Refactor to use clk_bulk API
->>>        phy: rockchip: snps-pcie3: Refactor to use a phy_init ops
->>>        phy: rockchip: snps-pcie3: Add bifurcation support for RK3568
->>>        phy: rockchip: snps-pcie3: Add support for RK3588
->>>        phy: rockchip: naneng-combphy: Use signal from comb PHY on RK3588
->>>        rockchip: rk3568-nanopi-r5: Update defconfig for NanoPi R5C and R5S
->>>        rockchip: rk3568-nanopi-r5: Enable PCIe on NanoPi R5C and R5S
->>>        power: regulator: Only run autoset once for each regulator
->>>        rockchip: Port IO-domain driver for RK3568 from linux
->>>        rockchip: board: Add minimal generic RK3566/RK3568 board
->>>        net: dwc_eth_qos: Drop unused rx_pkt from eqos_priv
->>>        net: dwc_eth_qos: Return error code when start fails
->>>        net: dwc_eth_qos: Stop spam of RX packet not available message
->>>        net: dwc_eth_qos: Add glue driver for GMAC on Rockchip RK3568
->>>        net: dwc_eth_qos_rockchip: Add support for RK3588
->>>        configs: rockchip: Enable ethernet driver on RK356x boards
->>>        configs: rockchip: Enable ethernet driver on RK3588 boards
->>>        power: pmic: rk8xx: Use sysreset implementation of the poweroff command
->>>        rockchip: rk356x: Enable poweroff command
->>>        power: pmic: rk8xx: Fix power-on source check in SPL
->>>        rockchip: rk356x-u-boot: Add bootph-all to i2c0_xfer pinctrl node
->>>
->>> Joseph Chen (1):
->>>        regulator: rk8xx: Return correct voltage for buck converters
->>>
->>> Manoj Sai (4):
->>>        spl: fit: support for booting a GZIP-compressed U-boot binary
->>>        spl: fit: support for booting a LZMA-compressed U-boot binary
->>>        rockchip: Add support to generate GZIP compressed U-boot binary
->>>        rockchip: Add support to generate LZMA compressed U-boot binary
->>>
->>> Massimo Pegorer (3):
->>>        rockchip: Kconfig: Enable external TPL binary for rk3308
->>>        doc: rockchip: Update and improve info on rk3308, TPL and TF-A
->>>        configs: rockchip: add DOS_PARTITION to RK3308 boards defconfig
->>>
->>> shengfei Xu (1):
->>>        regulator: rk8xx: Return correct voltage for switchout converters
->>>
->>>   arch/arm/dts/Makefile                              |   1 +
->>>   arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi         |  19 +
->>>   arch/arm/dts/rk3568-bpi-r2-pro.dts                 | 852 +++++++++++++++++++++
->>>   arch/arm/dts/rk3568-generic-u-boot.dtsi            |  14 +
->>>   arch/arm/dts/rk3568-generic.dts                    |  38 +
->>>   arch/arm/dts/rk3568-nanopi-r5c-u-boot.dtsi         |   4 +
->>>   arch/arm/dts/rk3568-nanopi-r5c.dts                 |   2 +-
->>>   arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi         |  10 +-
->>>   arch/arm/dts/rk356x-u-boot.dtsi                    |   8 +
->>>   arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi   |   1 -
->>>   arch/arm/dts/rk3588-edgeble-neu6a.dtsi             |   1 -
->>>   arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi   |   6 -
->>>   arch/arm/dts/rk3588-edgeble-neu6b-io.dts           |  66 ++
->>>   arch/arm/dts/rk3588-edgeble-neu6b.dtsi             | 359 ++++++++-
->>>   arch/arm/dts/rk3588-evb1-v10.dts                   | 720 ++++++++++++++++-
->>>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi            | 142 ++--
->>>   arch/arm/dts/rk3588-rock-5b.dts                    | 448 ++++++++++-
->>>   arch/arm/dts/rk3588.dtsi                           | 215 ++++++
->>>   arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi           |  12 -
->>>   arch/arm/dts/rk3588s-rock-5a.dts                   | 665 +++++++++++++++-
->>>   arch/arm/dts/rk3588s-u-boot.dtsi                   | 162 ----
->>>   arch/arm/dts/rk3588s.dtsi                          | 367 +++++++++
->>>   arch/arm/dts/rockchip-u-boot.dtsi                  |  11 +
->>>   arch/arm/mach-rockchip/Kconfig                     |   3 +-
->>>   board/rockchip/evb_rk3568/MAINTAINERS              |  14 +
->>>   common/spl/spl_fit.c                               |  20 +-
->>>   configs/bpi-r2-pro-rk3568_defconfig                |  93 +++
->>>   configs/evb-rk3308_defconfig                       |   3 +-
->>>   configs/evb-rk3568_defconfig                       |   6 +-
->>>   configs/evb-rk3588_defconfig                       |   5 +-
->>>   configs/generic-rk3568_defconfig                   |  64 ++
->>>   configs/lubancat-2-rk3568_defconfig                |   3 +
->>>   configs/nanopi-r5c-rk3568_defconfig                |  18 +-
->>>   configs/nanopi-r5s-rk3568_defconfig                |  22 +-
->>>   configs/neu6a-io-rk3588_defconfig                  |   2 -
->>>   configs/neu6b-io-rk3588_defconfig                  |   2 -
->>>   configs/odroid-m1-rk3568_defconfig                 |   3 +
->>>   configs/quartz64-a-rk3566_defconfig                |   4 +
->>>   configs/quartz64-b-rk3566_defconfig                |   4 +
->>>   configs/radxa-cm3-io-rk3566_defconfig              |   6 +-
->>>   configs/roc-cc-rk3308_defconfig                    |   3 +-
->>>   configs/rock-3a-rk3568_defconfig                   |   6 +-
->>>   configs/rock-pi-s-rk3308_defconfig                 |   5 +-
->>>   configs/rock5a-rk3588s_defconfig                   |   5 +-
->>>   configs/rock5b-rk3588_defconfig                    |   4 +-
->>>   configs/soquartz-blade-rk3566_defconfig            |   3 +
->>>   configs/soquartz-cm4-rk3566_defconfig              |   3 +
->>>   configs/soquartz-model-a-rk3566_defconfig          |   4 +
->>>   doc/README.rockchip                                |  10 +-
->>>   doc/board/rockchip/rockchip.rst                    |  45 +-
->>>   drivers/misc/Kconfig                               |   9 +
->>>   drivers/misc/Makefile                              |   1 +
->>>   drivers/misc/rockchip-io-domain.c                  | 167 ++++
->>>   drivers/net/Kconfig                                |   8 +
->>>   drivers/net/Makefile                               |   1 +
->>>   drivers/net/dwc_eth_qos.c                          |  33 +-
->>>   drivers/net/dwc_eth_qos.h                          |   3 +-
->>>   drivers/net/dwc_eth_qos_rockchip.c                 | 531 +++++++++++++
->>>   drivers/pci/pcie_dw_rockchip.c                     |  58 +-
->>>   drivers/phy/rockchip/phy-rockchip-naneng-combphy.c |   6 +
->>>   drivers/phy/rockchip/phy-rockchip-snps-pcie3.c     | 230 ++++--
->>>   drivers/power/pmic/Kconfig                         |   1 +
->>>   drivers/power/pmic/rk8xx.c                         |  20 +-
->>>   drivers/power/regulator/regulator-uclass.c         |  18 +-
->>>   drivers/power/regulator/rk8xx.c                    |  95 ++-
->>>   include/configs/rk3308_common.h                    |   4 +-
->>>   include/dt-bindings/ata/ahci.h                     |  20 +
->>>   include/power/regulator.h                          |   1 +
->>>   include/spl.h                                      |  10 +
->>>   69 files changed, 5227 insertions(+), 472 deletions(-)
->>>   create mode 100644 arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi
->>>   create mode 100644 arch/arm/dts/rk3568-bpi-r2-pro.dts
->>>   create mode 100644 arch/arm/dts/rk3568-generic-u-boot.dtsi
->>>   create mode 100644 arch/arm/dts/rk3568-generic.dts
->>>   create mode 100644 configs/bpi-r2-pro-rk3568_defconfig
->>>   create mode 100644 configs/generic-rk3568_defconfig
->>>   create mode 100644 drivers/misc/rockchip-io-domain.c
->>>   create mode 100644 drivers/net/dwc_eth_qos_rockchip.c
->>>   create mode 100644 include/dt-bindings/ata/ahci.h
+> +CONFIG_USB_HOST_ETHER=y
+> +CONFIG_USB_ETHER_ASIX=y
+> +CONFIG_USB_ETHER_ASIX88179=y
+> +CONFIG_USB_ETHER_MCS7830=y
+> +CONFIG_USB_ETHER_RTL8152=y
+> +CONFIG_USB_ETHER_SMSC95XX=y
+> +CONFIG_ERRNO_STR=y
 
 
