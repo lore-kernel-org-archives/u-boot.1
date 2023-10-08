@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D139E95A67
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 21:55:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B982E95A8E
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 22:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE0B486D60;
-	Sun,  8 Oct 2023 23:55:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D40286406;
+	Mon,  9 Oct 2023 00:32:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y56qkqQz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CEJaX1Rp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8653D86587; Sun,  8 Oct 2023 23:55:08 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id 1C3E486538; Mon,  9 Oct 2023 00:32:54 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EFE686DB0
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 23:55:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E9101863CF
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 00:32:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=benwolsieffer@gmail.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-419787a43ebso25974471cf.1
- for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 14:55:05 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-65b0557ec77so23789836d6.0
+ for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 15:32:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696802104; x=1697406904; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SM1TW6mH29YouGRYdpqt0KMcPhpFC+Ym2zseEo6S4Rs=;
- b=Y56qkqQzoBg6rEQL9cIwhX7F/ZMMnFlwH7ZJJfuxGBHefztEZY6dNPYbU0nwukyWOm
- X9X15CAvokOzz6ZMwgzLfv5/tNbapaaRG+XMTDI+69Xdo7WClZsnNFnXcpVgxRrG+GqP
- 5XK2EP6hJO7c39LW+i94cHP0TuLrJJjnFeQl3bfYXTsLPyAOqSqKtj1ON7GM2BzwFOr1
- gAMs4nz4J1mOHNqiDPCFg0D5MocgVPnwyEsE7x9pNBRcdLlY7jMM4eVZnm4HJ6XpL7Qq
- XZ6pFGdruTTxDULgIJf8lHQFdwaQR96ObRN+FhoOlCbiiyKOhVPizPTVbGk7GGMHby8z
- 0qBw==
+ d=gmail.com; s=20230601; t=1696804369; x=1697409169; darn=lists.denx.de;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=FNXgeLTAEHhaeHQhPNtcXqpf4G01yhUfjOkBs5+VvOs=;
+ b=CEJaX1RpVxdwMXyC+SjcehQ2AeJx4MWrN3RoBdAq7PlzBxioOhSOrhntdzNYlJwYuD
+ HcNbHPlUNGa1Y4T2J0y6RkJffg8gA/YAuwV8u12Qcrw4Scdx2qNkn8b6Q602N8knV+81
+ i/nW5o4esQ+E2dAY5aWVFz+b4baWQxw8xOke8x1uyLsWIRv9TSzhXa7y6V82oBOuj73r
+ cXQkJNX5vOL2MoM/lpLKiZQeGV7qf9mWOk5oNnaxjYlPHEbUU06NvBap0WyY6ob7+SHT
+ XaVUx6V2qZyc3iDnj2PdUhg708uH/hDInUIzJl1gVFLTQQy7pafZNgEln5v/+ozSa2bN
+ KlQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696802104; x=1697406904;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SM1TW6mH29YouGRYdpqt0KMcPhpFC+Ym2zseEo6S4Rs=;
- b=ilvNqKQYVrwrEXF+vEyITCk2QOGX8P08LrfD/4COUbvOOZIgRYQC0/K5udeKC5N6Vw
- 2Hitl5b6umlQRdGSUTP5Cj4z62jxqxIiRn9Lcom2BzZg2KvdCsR9TzhbxksoB+VBAFQA
- cL+jn8RiJTo4jawMBisbSLvC7MUVCU6o/hviigmQdBE+yvIBFPm2LTAxrjBDnF73azfw
- TzadtS1r/z2UeLxzqmg3KlfBDm+08vQijb3akIFs6Jn0FthYrSrjsRYOKR2IwPLW+ATr
- 8drASTyCIVxYWn488zMXTG8dSuN9EExaTSGalaTYCFXEfzHUagcaElNlpKjoU2gUOLHe
- GC5Q==
-X-Gm-Message-State: AOJu0YxRc9wjEt7IGwU2vtJxJBAwqCTTJ+KWvQGnUQmvs4TZ6Kjpru+p
- H5OUaSLQMjNlh6SyOZ7qTHQ=
-X-Google-Smtp-Source: AGHT+IGL77bqsk9cqYJtd8wT/77p6/WJH73197HVaJi9L/X1bccbbWgOpWOEExxTKOa9Pkj1LLKe/w==
-X-Received: by 2002:ac8:5746:0:b0:419:573c:59a3 with SMTP id
- 6-20020ac85746000000b00419573c59a3mr18433419qtx.19.1696802104073; 
- Sun, 08 Oct 2023 14:55:04 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696804369; x=1697409169;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=FNXgeLTAEHhaeHQhPNtcXqpf4G01yhUfjOkBs5+VvOs=;
+ b=lPxufxxB4xj724bQRJgZP/KnfRFt/lWHbDmFW8YJpF22ZnlvNY/otjom53zDfmVTlj
+ v/ikfCmTVPap+cdN58CSrWVC9sDSyyJk+8xA91WynYmhgQnu2MUqvoKQlAuH/fpJYm2s
+ kxc7j6iqiX8jMZa1aP6tcfTO9e5J3b5NyDIns0KQWH1mAq1jJRRdZ8tZzzu6AAU/ufFn
+ P85jz0SExtyaBYZjBa0gfbdw3FoAHG7nX4YzLwF1DixKAkRylm0aMurTND8bU1cSuDTa
+ nm1/3HuzWaoyUQx6p+RQbeG1iG6hdBiuQB4ifOvdtfnP+zSz7pyKYCwNX2Ov+nHmZUp5
+ k2Zg==
+X-Gm-Message-State: AOJu0YzzihgPG1FyZf9jBpJdObzQkBrEeNNiWrOE5qx4W+RD+CZRivBB
+ XCw70PfcYl8R6CuNtnplE10=
+X-Google-Smtp-Source: AGHT+IGWK+fI6wtU/yk5cJ4omJBTOSFdRKeJhpTd2EOW7YHdsfc0YA1ROkToocm4MRnfNQ7RB9u4PA==
+X-Received: by 2002:a05:6214:3019:b0:65b:150e:604b with SMTP id
+ ke25-20020a056214301900b0065b150e604bmr14866586qvb.49.1696804369466; 
+ Sun, 08 Oct 2023 15:32:49 -0700 (PDT)
 Received: from Dell-Inspiron-15 ([2601:18c:8002:3d40:7920:e10c:26cf:ff86])
  by smtp.gmail.com with ESMTPSA id
- lf7-20020a0562142cc700b0065d0d0c752csm3310140qvb.116.2023.10.08.14.55.02
+ c24-20020a05620a11b800b0076ee973b9a7sm3077357qkk.27.2023.10.08.15.32.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Oct 2023 14:55:03 -0700 (PDT)
-Date: Sun, 8 Oct 2023 17:55:01 -0400
+ Sun, 08 Oct 2023 15:32:48 -0700 (PDT)
+Date: Sun, 8 Oct 2023 18:32:46 -0400
 From: Ben Wolsieffer <benwolsieffer@gmail.com>
-To: Simon Glass <sjg@chromium.org>
+To: Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>
+ Simon Glass <sjg@chromium.org>
 Subject: Re: [PATCH] arm: rpi: explicitly enumerate mmc boot targets
-Message-ID: <ZSMlNWJ9f7HkoaNg@Dell-Inspiron-15>
+Message-ID: <ZSMuDsxG8M6opMFy@Dell-Inspiron-15>
 References: <20231007155535.1699567-1-benwolsieffer@gmail.com>
- <CAPnjgZ0qrDB_+HUNdGeCzS2FS4+fb1x9Cyr7xTjGccLCHpxwWg@mail.gmail.com>
+ <CALeDE9MX8FiayfjY=Wv2y3n9DBkTAqQsqnNjDkCXDDUeCSMLag@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0qrDB_+HUNdGeCzS2FS4+fb1x9Cyr7xTjGccLCHpxwWg@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CALeDE9MX8FiayfjY=Wv2y3n9DBkTAqQsqnNjDkCXDDUeCSMLag@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,12 +94,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Peter,
 
-On Sat, Oct 07, 2023 at 02:18:48PM -0600, Simon Glass wrote:
-> Hi Ben,
-> 
-> On Sat, 7 Oct 2023 at 09:55, Ben Wolsieffer <benwolsieffer@gmail.com> wrote:
+On Sun, Oct 08, 2023 at 07:21:57PM +0100, Peter Robinson wrote:
+> On Sat, Oct 7, 2023 at 4:55 PM Ben Wolsieffer <benwolsieffer@gmail.com> wrote:
 > >
 > > Using the unqualified "mmc" boot target causes the Raspberry Pi 4 to
 > > fail to boot. c771e5b explains this approach as follows:
@@ -108,7 +108,17 @@ On Sat, Oct 07, 2023 at 02:18:48PM -0600, Simon Glass wrote:
 > > In practice, U-Boot first attempts to boot from the unconnected mmc1
 > > interface, and, when this fails, moves on to attempt the USB and network
 > > boot targets rather than trying mmc0.
-> >
+> 
+> Really? It shouldn't be enumerating it if it's not defined in device
+> tree, I've not seen this in my testing.
+
+It does seem odd, but U-Boot definitely sees two MMC interfaces:
+
+U-Boot> mmc list
+mmcnr@7e300000: 1
+mmc@7e340000: 0 (SD)
+
+> 
 > > This patch explicitly enumerates the mmc interfaces, causing each to be
 > > attempted in turn. This matches what is done on other boards, and allows
 > > the system to boot successfully.
@@ -119,17 +129,18 @@ On Sat, Oct 07, 2023 at 02:18:48PM -0600, Simon Glass wrote:
 > >  board/raspberrypi/rpi/rpi.env | 2 +-
 > >  1 file changed, 1 insertion(+), 1 deletion(-)
 > >
+> > diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+> > index 30228285ed..02210b97b5 100644
+> > --- a/board/raspberrypi/rpi/rpi.env
+> > +++ b/board/raspberrypi/rpi/rpi.env
+> > @@ -74,4 +74,4 @@ pxefile_addr_r=0x02500000
+> >  fdt_addr_r=0x02600000
+> >  ramdisk_addr_r=0x02700000
+> >
+> > -boot_targets=mmc usb pxe dhcp
+> > +boot_targets=mmc0 mmc1 mmc2 usb pxe dhcp
 > 
-> Does this patch help? [1]. Alternatively, if you just remove that
-> variable entirely, does it do the right thing?
+> Why are you adding mmc1 and mmc2 if they're not connected?
 
-Yes, trying either of those suggestions makes it work correctly.
-
-> 
-> Regards,
-> Simon
-> 
-> [1] https://patchwork.ozlabs.org/project/uboot/patch/20230923205017.1754340-1-sjg@chromium.org/
-
-
-Thanks, Ben
+I was trying to match the old distro boot behavior, which had three MMC
+interfaces listed.
