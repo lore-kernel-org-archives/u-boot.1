@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19C28E95A67
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 01:40:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6C4DE95A87
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 01:46:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71C8386DCB;
-	Sun,  8 Oct 2023 03:29:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2884A86DFA;
+	Sun,  8 Oct 2023 03:30:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1696728561;
-	bh=6WYNznKDe8jxRKbMi278PJ7nIXBb+v9POtaBpw8XZBs=;
+	s=phobos-20191101; t=1696728642;
+	bh=v2Nsubm/7tHBruxQ1rUy/Jwzi3k+FZdknhPTCcxLIp0=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=RuJQ8Y3ru9kyPzIl2yVuWr7k7/6H4nbOWccRqc1/3h9s51lIpWj2paHWdUEWwnSYH
-	 rhcPD6Y0+RXjI4xodMC48ZfR898LAxrXOUHDT3AO9q+K9yHUOT/dzjDQqcRRWfCPDP
-	 uZSHuTQ6SANRv/65/qFwht4LbYt5DVVaPzBTEjlgqu7HG6DwjzOEcpBPBImIWpWGSw
-	 /pJWT+fabDqnzvbXcaR9clD9B9ZPUPUy0tTfpIoAJW81zvGgIQKvJpf8tcdJ5IEsjh
-	 BexZz8gkstefxVJkneCsvef0zfSbqisqsmG8Y81DxeFEcZYX4AYKsBkVyscGvYjy3l
-	 i/ns+A46fMfWA==
+	b=Pj8jYdmP8iSml6h66xxHKzN5bjcnDKksO18d5Y3iz/BR63CZ9H8ZXXAsU04FpyjQR
+	 e9aBMqbylR4ugjaZ9VWbhILshjcUUe5jyXDpwfdQ/E51iDKabjg7q4ao8X8ef854UT
+	 AhKx0XS74Dy/Cylk3yTSXnvK2JrpufLuAoDa4YoGNO7xKzyFOV+K4tp1TTfp1LlWMu
+	 t3vf2K2MYXXMG2Zz5fLjP6lXqXSl2IMNyf9yC68jk9m6zndgyVEV4D0fMvEh7SGAsm
+	 +/Lzyy4xg956m9OolqffjbN2vTWsnzkJGIWr4mdE8A+LmDSL9hNz6ifxTAbN6N2BjL
+	 0IqRCMtOXctAw==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D30BC86DA2;
- Sun,  8 Oct 2023 03:29:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id D18FE86DD8;
+ Sun,  8 Oct 2023 03:30:22 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1696728547;
- bh=6WYNznKDe8jxRKbMi278PJ7nIXBb+v9POtaBpw8XZBs=;
+ s=phobos-20191101; t=1696728624;
+ bh=v2Nsubm/7tHBruxQ1rUy/Jwzi3k+FZdknhPTCcxLIp0=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=cuygSG21qopaVj8nlfDa5KCcSgggAN7eswGYrmbZa1J5qEUFEeNN3fttnXMnkqdeq
- hLivJWxtht4oa0kx/b04VZbX7Pr8kvwwBpu5+LZ8rfNP+BbjxZFHbOr8LxNHQekYhu
- c9AoaRfbPcY9fzqla6dIXbZTOsa7HU1vz2szkJiq0mLt2KqMxZoby7n8YQG/lmSXph
- XXtwUOREzD/FSVCsOhE+2Sh4UvTp5Lg8aRk5Es6fTD292kkP8mcF6qzOgcy3kpziCg
- rcJ8U/7Hxf3sn4AVziNdatj2gu99E/ndtnNecZjUN0ioTRvkRgOuoBAhK5qyt+fB6k
- e4alOj0iQuM1g==
-Message-ID: <c2ff503f-6c1d-439d-a8c8-dab86985237c@denx.de>
-Date: Sun, 8 Oct 2023 03:29:06 +0200
+ b=vZ19VzuTVVkpS7KX1H2czR8gnhnO1RMAEtgMJ9cCEqqDvRpsX+cLSbAhFt++BCw5s
+ 8ogrDB8qCQoJPq/68nPFoWqCamHr47T3H8dvFBCDTqfMBAp4rcGpjxIsMyA+8+0S10
+ 2LyFexeBEmHkKJVYdUqq8cOjjlmr3MTsFyqjadNUZjUilG7crXu2q5bb/PZKlhr1qr
+ xIz0iRmDiGpvfLFZWX2l+Z/R0PCSnxALnUVFfxjOx8dHrexMm+zFwDdN7hJOaPohxp
+ 7Hx2+sFZdw/3gKtVEbmWKyw4vr8fMkTMlOgVchB94W9LMjrEX37N8rKLiJy2DDnmB2
+ CNxNoZmsUvh1Q==
+Message-ID: <5c8382f1-6406-4843-bc3a-2cf7e4eb032c@denx.de>
+Date: Sun, 8 Oct 2023 03:30:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] usb: ehci: mxs: Use regulator_set_enable_if_allowed()
+Subject: Re: [PATCH 3/3] mx28evk: Add USB Mass Storage support
 Content-Language: en-US
 To: Fabio Estevam <festevam@gmail.com>
 Cc: sbabic@denx.de, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
 References: <20231007215648.3156877-1-festevam@gmail.com>
- <20231007215648.3156877-2-festevam@gmail.com>
+ <20231007215648.3156877-3-festevam@gmail.com>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231007215648.3156877-2-festevam@gmail.com>
+In-Reply-To: <20231007215648.3156877-3-festevam@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -72,21 +72,44 @@ X-Virus-Status: Clean
 On 10/7/23 23:56, Fabio Estevam wrote:
 > From: Fabio Estevam <festevam@denx.de>
 > 
-> Since commit 4fcba5d556b4 ("regulator: implement basic reference
-> counter") the return value of regulator_set_enable() may be EALREADY or
-> EBUSY for fixed/GPIO regulators.
-> 
-> Swict to using the more relaxed regulator_set_enable_if_allowed() to
-> continue if regulator already was enabled or disabled.
-> 
-> This fixes the following error when running the 'ums' command:
-> 
-> => ums 0 mmc 0
-> UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0xece000
-> Error enabling VBUS supply
-> g_dnl_register: failed!, error: -114
-> g_dnl_register failed
+> Select the USB options to allow running "ums 0 mmc 0".
 > 
 > Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+>   configs/mx28evk_defconfig | 14 ++++++++++++++
+>   1 file changed, 14 insertions(+)
+> 
+> diff --git a/configs/mx28evk_defconfig b/configs/mx28evk_defconfig
+> index df0cceaea719..15cc99684c05 100644
+> --- a/configs/mx28evk_defconfig
+> +++ b/configs/mx28evk_defconfig
+> @@ -32,6 +32,9 @@ CONFIG_CMD_DM=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_MMC=y
+>   CONFIG_CMD_NAND_TRIMFFS=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_USB_SDP=y
 
-Reviewed-by: Marek Vasut <marex@denx.de>
+This seems to be doing more than just enabling UMS, right ?
+SDP is enabled too, but not mentioned in commit message.
+
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_DATE=y
+>   CONFIG_CMD_EXT4=y
+> @@ -65,3 +68,14 @@ CONFIG_RTC_MXS=y
+>   CONFIG_DM_SERIAL=y
+>   CONFIG_SPI=y
+>   CONFIG_USB=y
+> +CONFIG_SPL_USB_HOST=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_MAX_CONTROLLER_COUNT=2
+> +CONFIG_USB_GADGET=y
+> +CONFIG_SPL_USB_GADGET=y
+
+This SPL USB gadget is not related to UMS either .
+
+Please fix, either document the full amount of changes, or drop 
+unrelated changes.
+
+[...]
