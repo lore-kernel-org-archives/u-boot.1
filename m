@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B02ECE95A8E
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 21:50:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D139E95A67
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 21:55:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1384486C26;
-	Sun,  8 Oct 2023 23:50:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AE0B486D60;
+	Sun,  8 Oct 2023 23:55:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="d0uksVIw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y56qkqQz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CF2686CDB; Sun,  8 Oct 2023 23:50:17 +0200 (CEST)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 8653D86587; Sun,  8 Oct 2023 23:55:08 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8338986587
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 23:50:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EFE686DB0
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 23:55:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-77acb04309dso176917739f.2
- for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 14:50:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=benwolsieffer@gmail.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-419787a43ebso25974471cf.1
+ for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 14:55:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696801814; x=1697406614; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=doOLO7TnwKN64HL0/FShBMsjmhiq3g16i5NR+3rnKAY=;
- b=d0uksVIwuHt+DCNV2z8luPjqNESWqfeU9yCJt2QPKBKH5rDCfPwhB0P1FQKgyNnprG
- Zu1DwPCIAA73OWaD93XYHF7HV63YAnFBfo7lSa4RFX/apSGh8tm87B+TXOZwcypJbBCu
- ERkXE/dEAoLjDiZhnz2SIQwB+qkQOkPxve9khbTJzXAHBu6cAzekXLODIuFgdXFoBbjo
- ZXrdLEdhhAMNTJTlZstUPrup+tjEaW1J273dCu0xsKx8dSyF82qp4NqMIYV9hL0pWP2W
- JlwFjVT7ZiiayS7PFPM6LbqVZjf+x7At4Pss+CciV6RaKyUmBO8IgmNq3iSNHpea48+T
- 6i9A==
+ d=gmail.com; s=20230601; t=1696802104; x=1697406904; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=SM1TW6mH29YouGRYdpqt0KMcPhpFC+Ym2zseEo6S4Rs=;
+ b=Y56qkqQzoBg6rEQL9cIwhX7F/ZMMnFlwH7ZJJfuxGBHefztEZY6dNPYbU0nwukyWOm
+ X9X15CAvokOzz6ZMwgzLfv5/tNbapaaRG+XMTDI+69Xdo7WClZsnNFnXcpVgxRrG+GqP
+ 5XK2EP6hJO7c39LW+i94cHP0TuLrJJjnFeQl3bfYXTsLPyAOqSqKtj1ON7GM2BzwFOr1
+ gAMs4nz4J1mOHNqiDPCFg0D5MocgVPnwyEsE7x9pNBRcdLlY7jMM4eVZnm4HJ6XpL7Qq
+ XZ6pFGdruTTxDULgIJf8lHQFdwaQR96ObRN+FhoOlCbiiyKOhVPizPTVbGk7GGMHby8z
+ 0qBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696801814; x=1697406614;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=doOLO7TnwKN64HL0/FShBMsjmhiq3g16i5NR+3rnKAY=;
- b=TTYVFVuTbDYINlEKZelliRc3POzpwYH9CbpYYLu4Xm1LWMnfBOvKitI64Rd5kezxxc
- egR1ibMPHC4ReyvMU3zDUcAPBOqNoO6ZFSw/qy77hyOdK6cM+Jjz4LhIfTW4fFte+kNA
- caJ3QWNbSusCn8GpvmXrJ+iJYLEeZ+ekabCH+OCzg/RogP8WnLdJ8z+jWX9h059I3MQW
- 27dpzLegln15JeMcOecgfBArEFzs2Gzgw3dDX//Jzad7gtV4znOZcyAGHTlyMZBkvwR0
- cGrgclrVsyBMzNmBwNBMItv0Xdnoni4Pa3kvNF7e/Z2uAw9FcfdRHMWKRR54cpA55kTh
- xcKA==
-X-Gm-Message-State: AOJu0YzYQQaLItZKCIidcLWqT2dKKR1uePmubHW/Jb8niG/3YLj8AYzF
- KvxcqtwJutSfjFox6yI93RsWEnojtPJUgw==
-X-Google-Smtp-Source: AGHT+IF23TCD7SJ2qGeaSLycLFKTweH+sbsl9fzYVwUknsAIjK4l6PKKKfHJaP+fyo5MVj3cF5CE1A==
-X-Received: by 2002:a6b:f318:0:b0:798:3e95:274f with SMTP id
- m24-20020a6bf318000000b007983e95274fmr17105423ioh.19.1696801814107; 
- Sun, 08 Oct 2023 14:50:14 -0700 (PDT)
-Received: from ?IPV6:2001:470:42c4:101:970b:72ee:fe52:77dd?
- ([2001:470:42c4:101:970b:72ee:fe52:77dd])
+ d=1e100.net; s=20230601; t=1696802104; x=1697406904;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=SM1TW6mH29YouGRYdpqt0KMcPhpFC+Ym2zseEo6S4Rs=;
+ b=ilvNqKQYVrwrEXF+vEyITCk2QOGX8P08LrfD/4COUbvOOZIgRYQC0/K5udeKC5N6Vw
+ 2Hitl5b6umlQRdGSUTP5Cj4z62jxqxIiRn9Lcom2BzZg2KvdCsR9TzhbxksoB+VBAFQA
+ cL+jn8RiJTo4jawMBisbSLvC7MUVCU6o/hviigmQdBE+yvIBFPm2LTAxrjBDnF73azfw
+ TzadtS1r/z2UeLxzqmg3KlfBDm+08vQijb3akIFs6Jn0FthYrSrjsRYOKR2IwPLW+ATr
+ 8drASTyCIVxYWn488zMXTG8dSuN9EExaTSGalaTYCFXEfzHUagcaElNlpKjoU2gUOLHe
+ GC5Q==
+X-Gm-Message-State: AOJu0YxRc9wjEt7IGwU2vtJxJBAwqCTTJ+KWvQGnUQmvs4TZ6Kjpru+p
+ H5OUaSLQMjNlh6SyOZ7qTHQ=
+X-Google-Smtp-Source: AGHT+IGL77bqsk9cqYJtd8wT/77p6/WJH73197HVaJi9L/X1bccbbWgOpWOEExxTKOa9Pkj1LLKe/w==
+X-Received: by 2002:ac8:5746:0:b0:419:573c:59a3 with SMTP id
+ 6-20020ac85746000000b00419573c59a3mr18433419qtx.19.1696802104073; 
+ Sun, 08 Oct 2023 14:55:04 -0700 (PDT)
+Received: from Dell-Inspiron-15 ([2601:18c:8002:3d40:7920:e10c:26cf:ff86])
  by smtp.gmail.com with ESMTPSA id
- w2-20020a029682000000b0042b3e04510asm1741178jai.98.2023.10.08.14.50.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 08 Oct 2023 14:50:13 -0700 (PDT)
-Message-ID: <f2856fda-ff90-97b2-a53a-59a7368f0549@gmail.com>
-Date: Sun, 8 Oct 2023 15:50:13 -0600
+ lf7-20020a0562142cc700b0065d0d0c752csm3310140qvb.116.2023.10.08.14.55.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Oct 2023 14:55:03 -0700 (PDT)
+Date: Sun, 8 Oct 2023 17:55:01 -0400
+From: Ben Wolsieffer <benwolsieffer@gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Subject: Re: [PATCH] arm: rpi: explicitly enumerate mmc boot targets
+Message-ID: <ZSMlNWJ9f7HkoaNg@Dell-Inspiron-15>
+References: <20231007155535.1699567-1-benwolsieffer@gmail.com>
+ <CAPnjgZ0qrDB_+HUNdGeCzS2FS4+fb1x9Cyr7xTjGccLCHpxwWg@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH] ARM: psci: move GIC address override to Kconfig
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>,
- Krzysztof Kozlowski <krzk@kernel.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-References: <20231001225212.19081-1-andre.przywara@arm.com>
-From: Sam Edwards <cfsworks@gmail.com>
-In-Reply-To: <20231001225212.19081-1-andre.przywara@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ0qrDB_+HUNdGeCzS2FS4+fb1x9Cyr7xTjGccLCHpxwWg@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,28 +92,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/1/23 16:52, Andre Przywara wrote:
-> As the code to switch an ARM core from secure to the non-secure state
-> needs to know the base address of the Generic Interrupt Controller
-> (GIC), we read an Arm Cortex defined system register that is supposed to
-> hold that base address. However there are SoCs out there that get this
-> wrong, and this CBAR register either reads as 0 or points to the wrong
-> address. To accommodate those systems, so far we use a macro defined in
-> some platform specific header files, for affected boards.
+Hi Simon,
+
+On Sat, Oct 07, 2023 at 02:18:48PM -0600, Simon Glass wrote:
+> Hi Ben,
 > 
-> To simplify future extensions, replace that macro with a Kconfig variable
-> that holds this override address, and define a default value for SoCs
-> that need it.
+> On Sat, 7 Oct 2023 at 09:55, Ben Wolsieffer <benwolsieffer@gmail.com> wrote:
+> >
+> > Using the unqualified "mmc" boot target causes the Raspberry Pi 4 to
+> > fail to boot. c771e5b explains this approach as follows:
+> >
+> > > We don't need to specify the mmc devices individually, since they are
+> > > used in order from 0 to 2, and standard boot uses that order anyway.
+> >
+> > In practice, U-Boot first attempts to boot from the unconnected mmc1
+> > interface, and, when this fails, moves on to attempt the USB and network
+> > boot targets rather than trying mmc0.
+> >
+> > This patch explicitly enumerates the mmc interfaces, causing each to be
+> > attempted in turn. This matches what is done on other boards, and allows
+> > the system to boot successfully.
+> >
+> > Fixes: c771e5b8c2 ("arm: rpi: Switch to standard boot")
+> > Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
+> > ---
+> >  board/raspberrypi/rpi/rpi.env | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> 
+> Does this patch help? [1]. Alternatively, if you just remove that
+> variable entirely, does it do the right thing?
 
-Hi Andre,
-
-Looks great to me. I'll update my PSCI series atop this once either this 
-or the R528 series lands (I don't want my series to depend on *two* 
-pending patchsets).
+Yes, trying either of those suggestions makes it work correctly.
 
 > 
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-Reviewed-by: Sam Edwards <CFSworks@gmail.com>
+> Regards,
+> Simon
+> 
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20230923205017.1754340-1-sjg@chromium.org/
 
-Cheers,
-Sam
+
+Thanks, Ben
