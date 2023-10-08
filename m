@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8975E95A67
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 15:46:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5B3EE95A67
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 15:46:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E62E186CB8;
-	Sun,  8 Oct 2023 17:46:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FC4D86D48;
+	Sun,  8 Oct 2023 17:46:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="X92t/FXB";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="iEV2rtSH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99AA586B89; Sun,  8 Oct 2023 17:46:03 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 4B6A286A3C; Sun,  8 Oct 2023 17:46:07 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0F098662F
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 17:46:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08A5E86CF4
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 17:46:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-9936b3d0286so672022466b.0
- for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 08:46:00 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-9a645e54806so643845866b.0
+ for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 08:46:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1696779960; x=1697384760;
+ d=amarulasolutions.com; s=google; t=1696779962; x=1697384762;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bIGSMWG9wB8nSXXdhajx7VgE3zyfpt07huxXjyhDX0I=;
- b=X92t/FXBuL2AFsiiP/jOLoT0OFk55ehjrCIDAOtCO/iC12RR7OV/4g5LIfOeeDPSkb
- cEx9aoI47XGSqHtFoM5Y64yqT9AdboXxyTGkD/AdbCOGwxoh22jYvlm0nAmDvc7Uhmc8
- RBkPDSQB43j7DGN7xWvqqomb5fA3IJ3PR+FPs=
+ bh=fY6FlJfVNoPy6YrmmBZZaj6Y9r9HCEihc5HK1yFhXQQ=;
+ b=iEV2rtSHlLSDmzNUFWXE2MoRtTZlCzclS6Wfue9L8q3veZfRqeG82o2A2UwO0Gl4tX
+ /2FO8770tkeuc3+ghEHRoxO5F6JItHh2fsS99zUu9O0TPcHOl/OU2CS59Rfp8BTgM0Gh
+ kJE3JR9sA0jRSf4f/ieln1clzHOOfhrJJ+6Wg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696779960; x=1697384760;
+ d=1e100.net; s=20230601; t=1696779962; x=1697384762;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bIGSMWG9wB8nSXXdhajx7VgE3zyfpt07huxXjyhDX0I=;
- b=IvE1MVaCvFbkVyVCVHEoW23zkX1/fYnEMcvJA8i2qhPm5TfCY0gjw3L3/m+FM3tH1W
- hakEAHpDeSJdbZ+5ZWgBbKgux6sOXtQUnjP0qYKf08HDAk3yYZUd+9EPT0BggtBCSTbT
- 5HS/f6yMmIqFPDgs9zOXcxaZZyM3SfCHTR4GTRDor4egBuGiB4D3jfPg7YP7swzZ4xv/
- I0sMaRUdOeD0zCWYKeRKloMP2KzzHexdV3AWdBXZdW4Q9xp4+zO9DKdLSObm87X+Mp0E
- j76hgvs8qHawNqNNFl6ARybTgT3lr+9gQrk5ERM2NfW46eSzMtCbboBDm/IBg+ejSiHZ
- jRzQ==
-X-Gm-Message-State: AOJu0YxHP4Qz9PH4K+8vnlQ35NzRtRk6zwJUooaDXEkbs7zbJ3qotDcJ
- L8Yw1eWNSs9uj+Ee0360hCEhTHlcpq281mNqc1w=
-X-Google-Smtp-Source: AGHT+IHUr6AHuKTWWjdKW+oU12w5z0UGUUjHSuXBq9J71VYBMuS59ZQ0TlQD/kgv8xg3ZLTeAyxNmw==
-X-Received: by 2002:a17:907:774e:b0:9a5:d972:af43 with SMTP id
- kx14-20020a170907774e00b009a5d972af43mr11896479ejc.65.1696779959775; 
- Sun, 08 Oct 2023 08:45:59 -0700 (PDT)
+ bh=fY6FlJfVNoPy6YrmmBZZaj6Y9r9HCEihc5HK1yFhXQQ=;
+ b=C+GV0HzQo7kcHNxPSeU3JpRJgtrBvdF21MCx0+hHUn1ZLptMQT7OZYz95XylI/7eA7
+ 55w9YvmgNrzT+f1T8aBUNgXPKThoYvm94zBNUDiXSvqol37HDqEsjY2ZDnrucwTggeS0
+ XBGX54dRLOw1xMzlyJ8d2RIiHLgiDmBg8g+WMqXczF6V0QlMMJaAEgbDMTdJgIF3YSKy
+ b2zzihq8zmVekgjo9yQdaJul9Xj65nWPJ9abxpe9+6dGyEk5HWbQq6T/UiRFxyn38KAJ
+ zkS315Ftw1aFfqUeoyznIiV3Ba5f6qkiKnVNx2hhq6XetVBeaNOuSKrdrh/vXbd6CAr3
+ Cs2A==
+X-Gm-Message-State: AOJu0YzD881bWXSJiwvve/tCtpiXVjw+/emcV5RxySwSm26+K/YY+ks9
+ UTQTiYUOVdkwCCcTHYkg6QnlQuB900/VF0RMDkI=
+X-Google-Smtp-Source: AGHT+IFa8uy7If46bkn3X+X8IJdmXe+icpv6wVYCVOnxLTC+HAZ2rhZnjDgcispEGT4zirr8EIZhIA==
+X-Received: by 2002:a17:907:7887:b0:9b2:ccd8:2d2c with SMTP id
+ ku7-20020a170907788700b009b2ccd82d2cmr11653180ejc.34.1696779962307; 
+ Sun, 08 Oct 2023 08:46:02 -0700 (PDT)
 Received: from dario-ThinkPad-T14s-Gen-2i.homenet.telecomitalia.it
  (host-79-50-102-159.retail.telecomitalia.it. [79.50.102.159])
  by smtp.gmail.com with ESMTPSA id
- lc11-20020a170906f90b00b009b9aa8fffdasm5623981ejb.131.2023.10.08.08.45.58
+ lc11-20020a170906f90b00b009b9aa8fffdasm5623981ejb.131.2023.10.08.08.46.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 08 Oct 2023 08:45:59 -0700 (PDT)
+ Sun, 08 Oct 2023 08:46:01 -0700 (PDT)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: linux-amarula@amarulasolutions.com,
  Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [RFC PATCH v2 2/5] ARM: dts: stm32: make the LTDC clock usable by the
- clock driver
-Date: Sun,  8 Oct 2023 17:44:54 +0200
-Message-ID: <20231008154538.1622772-3-dario.binacchi@amarulasolutions.com>
+Subject: [RFC PATCH v2 4/5] ARM: dts: stm32: support display on
+ stm32f469-disco board
+Date: Sun,  8 Oct 2023 17:44:56 +0200
+Message-ID: <20231008154538.1622772-5-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231008154538.1622772-1-dario.binacchi@amarulasolutions.com>
 References: <20231008154538.1622772-1-dario.binacchi@amarulasolutions.com>
@@ -96,42 +97,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As described in [1], the "clocks" property contains "a phandle to the
-clock device node, an index selecting between gated clocks (0) and other
-clocks (1), and an index specifying the clock to use." The current version
-of the clock driver, unlike the kernel, is currently able to properly
-handle nodes with "clocks" properties with an index set to 0.
+Add support to Orise Tech OTM8009A display on stm32f469-disco board.
 
-This patch is preparatory for future developments that require the use
-of the LTDC clock.
+It was necessary to retrieve the framebuffer address from the device tree
+because the address returned by the video-uclass driver pointed to a memory
+area that was not usable.
 
-[1] Documentation/devicetree/bindings/clock/st,stm32-rcc.txt
+Furthermore, unlike Linux, the DSI driver requires the LTDC clock to be
+properly probed. Hence, the changes made to the DSI node in
+stm32f469-disco-u-boot.dtsi.
+
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
 ---
 
 Changes in v2:
-- Add Patrice Chotard's Reviewed-by tag.
+- Add DRAM_SIZE macro.
+- Fix frame buffer allocation function so that it is backward compatible
+  with boards other than the one it was introduced for (i. e. stm32f469-disco).
+  Tested on stm32f469-disco and stm32mp157f-dk2 boards.
 
- arch/arm/dts/stm32f469-disco-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/arm/dts/stm32f469-disco-u-boot.dtsi |  4 +++
+ configs/stm32f469-discovery_defconfig    | 13 ++++++++++
+ drivers/video/stm32/stm32_ltdc.c         | 31 ++++++++++++++++++++++++
+ 3 files changed, 48 insertions(+)
 
 diff --git a/arch/arm/dts/stm32f469-disco-u-boot.dtsi b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
-index c07e2022e4a8..dcc70369cd0d 100644
+index 8e781c5a7b23..47ba9fa4a783 100644
 --- a/arch/arm/dts/stm32f469-disco-u-boot.dtsi
 +++ b/arch/arm/dts/stm32f469-disco-u-boot.dtsi
-@@ -134,6 +134,10 @@
- 	bootph-all;
+@@ -92,7 +92,9 @@
+ 
+ &dsi {
+ 	clocks = <&rcc 0 STM32F4_APB2_CLOCK(DSI)>,
++		 <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>,
+ 		 <&clk_hse>;
++	clock-names = "pclk", "px_clk", "ref";
  };
  
-+&ltdc {
-+	clocks = <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>;
-+};
-+
- &pinctrl {
- 	bootph-all;
+ &gpioa {
+@@ -140,6 +142,8 @@
+ };
  
+ &ltdc {
++	bootph-all;
++
+ 	clocks = <&rcc 0 STM32F4_APB2_CLOCK(LTDC)>;
+ };
+ 
+diff --git a/configs/stm32f469-discovery_defconfig b/configs/stm32f469-discovery_defconfig
+index 21c5498466cd..85e795e83e7d 100644
+--- a/configs/stm32f469-discovery_defconfig
++++ b/configs/stm32f469-discovery_defconfig
+@@ -21,6 +21,7 @@ CONFIG_CMD_GPT=y
+ # CONFIG_RANDOM_UUID is not set
+ CONFIG_CMD_MMC=y
+ # CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_BMP=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIMER=y
+ # CONFIG_ISO_PARTITION is not set
+@@ -40,3 +41,15 @@ CONFIG_SPI_FLASH_STMICRO=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
+ CONFIG_STM32_QSPI=y
++CONFIG_VIDEO=y
++CONFIG_BACKLIGHT_GPIO=y
++CONFIG_VIDEO_LCD_ORISETECH_OTM8009A=y
++CONFIG_VIDEO_STM32=y
++CONFIG_VIDEO_STM32_DSI=y
++CONFIG_VIDEO_STM32_MAX_XRES=480
++CONFIG_VIDEO_STM32_MAX_YRES=800
++CONFIG_BMP_16BPP=y
++CONFIG_BMP_24BPP=y
++CONFIG_BMP_32BPP=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
+diff --git a/drivers/video/stm32/stm32_ltdc.c b/drivers/video/stm32/stm32_ltdc.c
+index 6fd90e33919d..9054db1d78b3 100644
+--- a/drivers/video/stm32/stm32_ltdc.c
++++ b/drivers/video/stm32/stm32_ltdc.c
+@@ -495,6 +495,33 @@ static void stm32_ltdc_set_layer1(struct stm32_ltdc_priv *priv, ulong fb_addr)
+ 	setbits_le32(priv->regs + LTDC_L1CR, LXCR_LEN);
+ }
+ 
++#if IS_ENABLED(CONFIG_TARGET_STM32F469_DISCOVERY)
++static int stm32_ltdc_alloc_fb(struct udevice *dev)
++{
++#define SDRAM_SIZE 0x1000000 /* 128Mbit = 16 Mbyte = 0x1000000 */
++	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
++	phys_addr_t cpu;
++	dma_addr_t bus;
++	u64 dma_size;
++	int ret;
++
++	ret = dev_get_dma_range(dev, &cpu, &bus, &dma_size);
++	if (ret) {
++		dev_err(dev, "failed to get dma address\n");
++		return ret;
++	}
++
++	uc_plat->base = bus + SDRAM_SIZE - ALIGN(uc_plat->size, uc_plat->align);
++	return 0;
++}
++#else
++static inline int stm32_ltdc_alloc_fb(struct udevice *dev)
++{
++	/* Delegate framebuffer allocation to video-uclass */
++	return 0;
++}
++#endif
++
+ static int stm32_ltdc_probe(struct udevice *dev)
+ {
+ 	struct video_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+@@ -605,6 +632,10 @@ static int stm32_ltdc_probe(struct udevice *dev)
+ 	priv->crop_h = timings.vactive.typ;
+ 	priv->alpha = 0xFF;
+ 
++	ret = stm32_ltdc_alloc_fb(dev);
++	if (ret)
++		return ret;
++
+ 	dev_dbg(dev, "%dx%d %dbpp frame buffer at 0x%lx\n",
+ 		timings.hactive.typ, timings.vactive.typ,
+ 		VNBITS(priv->l2bpp), uc_plat->base);
 -- 
 2.42.0
 
