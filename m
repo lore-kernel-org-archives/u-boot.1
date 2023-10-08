@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79FE5E95A86
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 02:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29223E95A84
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 02:05:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 754E086A0B;
-	Sun,  8 Oct 2023 03:54:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48152864D4;
+	Sun,  8 Oct 2023 04:03:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jHKWQhzc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ITLgq8dP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D37086D3C; Sun,  8 Oct 2023 03:54:04 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id D8F5086550; Sun,  8 Oct 2023 04:02:37 +0200 (CEST)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E822E8477A
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 03:53:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B449586496
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 04:02:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-775751c35d4so218749185a.0
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 18:53:22 -0700 (PDT)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-65b2463d663so18246586d6.0
+ for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 19:02:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696729995; x=1697334795; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696730519; x=1697335319; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=LnsFRl6drRhqjMVVBgHI2vTZE4h6KsKjIESddoLp6kM=;
- b=jHKWQhzcUd1iLCZPM9nficcYeUoYOYXRbXoixTA5ehBNKdvV7bd6OMmAbnjQcexLZu
- fRzTGf0aEot35R9mR+ZZJ0+iw8kS4NwIb071Dzfswvnbaw9VcMjGJzp/yURY5CdEej4X
- stqP+TqbBkuXG4K1EyI9obbKb63UT5r60wH0r+EKuGXJl3LNioQIuQzk74KDq6fF9mNZ
- nMGo4B+xYJXvFjPCSFj7PoH7iwtBAI8PFL172+RU5KHVs/OhxQQUIin0dkiQhZnSUPh+
- N2qhy6B5tomE9IyikabPqhsEIiCWYE9dzmwOC3hCVM7lRaA6H/mnRjWifTXk/EEQwUB8
- SZCA==
+ bh=YSjvEQ5he5li9rsF12WCwfAn7VoDVxsmryxmLHUL6RE=;
+ b=ITLgq8dPQGHYt66smp+8Lli7SAx9a8mfUlW90JffhvehcnH7RPxChmM7hz7LfOHJXJ
+ x/uRwbdPj/glsx3MtJIm0MHGh1oM+L9hXKDR/RMblCHdoVxD15PZ9SykHHfOeUAYENUB
+ enwN9vXc3lVOX6qthWYGfTFtSmBZxOptFPyPcnzo6hB5YPKFt471IfAAoHvbU/OSUOyq
+ 5KKlR0NxZ7xi0h86OzYt5x7+CASyLw7O/rOuQBVSefFnuNdHkYE5ZNGHJ/6+lk9USV5q
+ 3UtNLW0o8SwC35yFYcITLfHBcPskMJVcCTXr5I1JCxF06jDT2yNdZTQhB3HfewVbdG50
+ iGHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696729995; x=1697334795;
+ d=1e100.net; s=20230601; t=1696730519; x=1697335319;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LnsFRl6drRhqjMVVBgHI2vTZE4h6KsKjIESddoLp6kM=;
- b=NrlPo2y5Pls5OG6p1O54NKUXXkPK6tvtPITSiOBM3iMg7gsHUz2F1GFbnFwDXX3KxJ
- YRmxhY91UZG95oX/a9Wlx6tL6lwH4WvuWP4TF/BCRWTBGAzgh0T0KDMBRZufwF0UmU8N
- OlIRPmT0sBgK1V58jCQau7XGqTbrnnrDPhPS8jRVtGTBqoK3rpN7OPSw3iIRCOqwYjJs
- fiwQIrnevo7+civHgD+89TrHbE5POkjKA2IbXi6HsdRPlN/mexAzl8TgqRDNJt4nAol/
- 7U1cG63fTti/4kJEFGsb1mD346szTBnYpQUeRTvJDCTiNKgE5IjLrpp6CDn09bzR35iu
- /IfA==
-X-Gm-Message-State: AOJu0YwcQXgk8P5vTUaqOWSO2LnVAQzuccAzpX0nUEUqqFTCaEdnA64D
- yJzInTo8Q/kM5iP6EwJN1+0=
-X-Google-Smtp-Source: AGHT+IGNsuIHl2NhxfSkX0WUqyRpMqO/+AgPCcMX7aL/FiYvoEmSloe1iPQVgRQt2DMxM+vltqDlxw==
-X-Received: by 2002:a05:620a:b47:b0:767:915a:ccf6 with SMTP id
- x7-20020a05620a0b4700b00767915accf6mr11532739qkg.65.1696729994957; 
- Sat, 07 Oct 2023 18:53:14 -0700 (PDT)
+ bh=YSjvEQ5he5li9rsF12WCwfAn7VoDVxsmryxmLHUL6RE=;
+ b=gV5A599OTsYl27kFRKVWcj+vd8f43bxZMUc3v37lV+F7R2LM2VjJ9mltT72G0N4oa5
+ mzm9bLL5Tdxejy+eY1rDCfYzIooUK1ANKmS/3lDrT7TFQWflti49swyHMZ39CYazOgrv
+ vF6T3e+QtEqdYSLHxNRTTXN+h51urC3jl45+xdYZadUsCbiohFHLycjdGppTMZHXSgWR
+ Xs4flkWJsSufXb43x4GSqtusDUBPkLCCCqRftNMAI4qMoS8h1Eu52yE4zU59hM5qw5e2
+ u6dJrBuwEUwoeDfFLSFah0+QZPZs2FiX1sTyzrVnjWYOyZkybJUcWB2PqlsBsPv07s1o
+ /+Rw==
+X-Gm-Message-State: AOJu0YyuG8Vnven7ph9BCHOYTPxkNpoc9RrC6gbEhGrnIkbB7Q9mqqk9
+ IK3Mbe6Cx9oyzHliug1zbfg=
+X-Google-Smtp-Source: AGHT+IEjP8Y6Iga6Tpcff9ISMi/9HWQTvv51B0uiSebTKKOXumArLufOcVU6wnPUpzbrsp3xLe+6qQ==
+X-Received: by 2002:a05:6214:1fd3:b0:63c:ec39:13d0 with SMTP id
+ jh19-20020a0562141fd300b0063cec3913d0mr11108831qvb.64.1696730518710; 
+ Sat, 07 Oct 2023 19:01:58 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- h23-20020a05620a13f700b00767d6ec578csm2475787qkl.20.2023.10.07.18.53.14
+ v13-20020a0ce1cd000000b0065af657ddf7sm2631641qvl.144.2023.10.07.19.01.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 07 Oct 2023 18:53:14 -0700 (PDT)
+ Sat, 07 Oct 2023 19:01:58 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de
-Cc: Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH] net: Add option for tracing packets
-Date: Sat,  7 Oct 2023 21:53:12 -0400
-Message-Id: <20231008015312.1988866-1-seanga2@gmail.com>
+To: Tom Rini <trini@konsulko.com>,
+	u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>,
+	Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH] malloc: Enable assertions if UNIT_TEST is enabled
+Date: Sat,  7 Oct 2023 22:01:56 -0400
+Message-Id: <20231008020156.1990125-1-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -89,62 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an option to trace all packets send/received. This can be helpful when
-debugging protocol issues, as the packets can then be imported into
-wireshark [1] and analyzed further.
-
-[1] https://www.wireshark.org/docs/wsug_html_chunked/ChIOImportSection.html
+dlmalloc has some sanity checks it performs on free() which can help detect
+memory corruption. However, they are only enabled if DEBUG is defined before
+including common.h. Define DEBUG earlier if UNIT_TEST is enabled so that
+assertions are enabled in sandbox.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- include/net.h | 4 ++++
- net/net.c     | 3 +++
- 2 files changed, 7 insertions(+)
+ common/dlmalloc.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/include/net.h b/include/net.h
-index e254df7d7f4..e63a946002d 100644
---- a/include/net.h
-+++ b/include/net.h
-@@ -16,6 +16,7 @@
- #include <asm/cache.h>
- #include <asm/byteorder.h>	/* for nton* / ntoh* stuff */
- #include <env.h>
-+#include <hexdump.h>
+diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+index dcecdb8623c..500a0dbda89 100644
+--- a/common/dlmalloc.c
++++ b/common/dlmalloc.c
+@@ -8,14 +8,14 @@
+  * as file malloc-2.6.6.c.
+  */
+ 
++#if CONFIG_IS_ENABLED(UNIT_TEST)
++#define DEBUG
++#endif
++
+ #include <common.h>
  #include <log.h>
- #include <time.h>
- #include <linux/if_ether.h>
-@@ -29,6 +30,7 @@ struct udevice;
- #define DEBUG_DEV_PKT 0		/* Packets or info directed to the device */
- #define DEBUG_NET_PKT 0		/* Packets on info on the network at large */
- #define DEBUG_INT_STATE 0	/* Internal network state changes */
-+#define DEBUG_NET_PKT_TRACE 0	/* Trace all packet data */
+ #include <asm/global_data.h>
  
- /*
-  *	The number of receive packet buffers, and the required packet buffer
-@@ -640,6 +642,8 @@ uchar * net_get_async_tx_pkt_buf(void);
- /* Transmit a packet */
- static inline void net_send_packet(uchar *pkt, int len)
- {
-+	if (DEBUG_NET_PKT_TRACE)
-+		print_hex_dump_bytes("tx: ", DUMP_PREFIX_OFFSET, pkt, len);
- 	/* Currently no way to return errors from eth_send() */
- 	(void) eth_send(pkt, len);
- }
-diff --git a/net/net.c b/net/net.c
-index 43abbac7c32..53eb9ef1324 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -1201,6 +1201,9 @@ void net_process_received_packet(uchar *in_packet, int len)
- 	ushort cti = 0, vlanid = VLAN_NONE, myvlanid, mynvlanid;
- 
- 	debug_cond(DEBUG_NET_PKT, "packet received\n");
-+	if (DEBUG_NET_PKT_TRACE)
-+		print_hex_dump_bytes("rx: ", DUMP_PREFIX_OFFSET, in_packet,
-+				     len);
- 
- #if defined(CONFIG_CMD_PCAP)
- 	pcap_post(in_packet, len, false);
+-#if CONFIG_IS_ENABLED(UNIT_TEST)
+-#define DEBUG
+-#endif
+-
+ #include <malloc.h>
+ #include <asm/io.h>
+ #include <valgrind/memcheck.h>
 -- 
 2.37.1
 
