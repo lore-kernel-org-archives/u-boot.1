@@ -4,120 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE4E9E95A82
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 12:48:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22350E95A67
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 14:34:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1216F86A23;
-	Sun,  8 Oct 2023 14:47:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=solid-run.com
+	by phobos.denx.de (Postfix) with ESMTP id 60DFB865ED;
+	Sun,  8 Oct 2023 16:34:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=arri.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.b="NFB/Q7F0";
+	dkim=pass (1024-bit key; unprotected) header.d=arrigroup.onmicrosoft.com header.i=@arrigroup.onmicrosoft.com header.b="M1ScAUJp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D49C86ACA; Sun,  8 Oct 2023 14:47:50 +0200 (CEST)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on060f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe02::60f])
+ id 371B98667A; Sun,  8 Oct 2023 16:34:47 +0200 (CEST)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20724.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe16::724])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D436786A23
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 14:47:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD15386477
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 16:34:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=solid-run.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=josua@solid-run.com
+ dmarc=none (p=none dis=none) header.from=arri.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=LPolak@arri.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TnLpFW5FITzuKTfvc9xP8p9egOAPRqDDPqceqhaG9ZjXRY/AI53RLdcVYL8vtAEEwq8hPcwx3lmMQ6W1QJg2NPXduE8ixcfVsyBL7uhegJb2sFcRPCUUAU/5E0a4AJLtiC5uMF6wT1VwPl6P8mSbSy1/fkoMOtFC6czu2S5w31Lrq5odD87NZHTAt954m8X/C7JIkwr6VcC1CzFkkg8R2LEe+We7Q89B6K1LGt/AmbBL9uYbo4yanIaWEh3pCWGzBkeMoPTBB3NGJb3XgQQTnfRmw+xWVXegMnDTo1TSoDw4DFslei7aC3ILkpQmPdE+uCMxqVYN4p0YTxGHKZkbLg==
+ b=hq1HfQQiFB50iQv5oNdMmzObpWI86klLCzbpRaFXpHB1LBT2dqGdmAWerJSoFZG5h7U4spXyTvgaFhMwTer+lKNTePHC5W9RmFwouLt+jd3XYtbDIByJaem0GEmUuHLljiKJrnYY8CORRR8CAecazcPZ5Ea07SpzEw68W/tTUZoipz9AgKvrJnX27S495SFIsYnnY/5WR3Lys8ph67aoU9E746ICR06puC0MMyZKzIAQ5R0ezYYaRCVtI+jo0INK72PEPbBnskqK4JZXwlfTEXEcVojQQQZRvPxKX7YX5+HSVrnM2V0lFDnOVDk7w7VbDNoWc4L2djpEkB58naT6mw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QhIk5pon1BY26MpOBk4EvDAXJLlFhDP4ikX/4+WvkVQ=;
- b=VUdRkhlqSLZg9Cn5QUs+L+jpKyeXt8TSs7M89JKUAP47VfvoDH0Qdb+J5ppwtyGWxGYhZ8jTHanOViCOy6HlBBd8B6fIAgk3fLAT4KpJqDSf0jgd8nC8B6OaP0nZDYcvTqkU2qtSTPcUdIg8UTVmGAOfL55Th35PZ9aLz0k2BynqsOmiSaNzvgXwwkPjFFeNfwJt/kMC3RhsVjr72jZTdpDMd9goBSIWk3QRNcsk+lwuZw6iecMtZ6sZIYL07sRMsuviUx51BDmemOuuPhV8s9CXmsg9O4hYqZWrkzDriuWAcK9DpP4e2tSZaFT2VqQq2cRyt9schbnHc9I/VZ/O/g==
+ bh=wc3au8X2++UjCUQlzvyV0PdGpmA2whF3fiOSlj97EhA=;
+ b=SdW2NUSL3lbK64s2s23Lb7OZ7GtGNlDTM4SMqvYqsuawSnpEkaVHIrpK9rE29Bfzw/jTq7SXT1/QAIXNBrWZhldp/9IuC1alsR+/r5a/ureRPfrbZ8ykJ9/TNK+CS6LD1OfJD6the4n23akU7zUOlC4+yRiYBS3uK+MzHHp+kHKg5liJfMKjsRj4onsVgbd3IssFXfzv8W4JyXHJKqnX7H7xtlgD/RTxD8Ixk93WkdmKWlv92bQmrqr3SB2nDeyXNqb3DisucKSh24/gUkZok/G5zn50Lszvt7hD/C1wt9XNH5QGD+BY8V6b5lW8301J3KsaKxTVgrbnBFJGw4PqWQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=solid-run.com; dmarc=pass action=none
- header.from=solid-run.com; dkim=pass header.d=solid-run.com; arc=none
+ smtp.mailfrom=arri.de; dmarc=pass action=none header.from=arri.de; dkim=pass
+ header.d=arri.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=solidrn.onmicrosoft.com; s=selector1-solidrn-onmicrosoft-com;
+ d=arrigroup.onmicrosoft.com; s=selector1-arrigroup-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QhIk5pon1BY26MpOBk4EvDAXJLlFhDP4ikX/4+WvkVQ=;
- b=NFB/Q7F0e8P9nYfZjeo347004Xq5fS0frDWzedAJH3rBLrLfHhO2nH9r7SH8SnZjA527uj64282O+CJPtD8UQPTPi9kDAI2bWHC86yfiPQrIXt767n1Dqzt6nI0pa60o9DsHqv/tskubj6s4xwqYAKILXkfJp7Ppt2EOKxTQOEE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=solid-run.com;
-Received: from AS8PR04MB8963.eurprd04.prod.outlook.com (2603:10a6:20b:42e::18)
- by AM9PR04MB7651.eurprd04.prod.outlook.com (2603:10a6:20b:280::13)
+ bh=wc3au8X2++UjCUQlzvyV0PdGpmA2whF3fiOSlj97EhA=;
+ b=M1ScAUJpccHRBiPjyWHZ0gHKdi9mKwNcQ1GuW8lKdss9wDjnm25LqiLc+XAAx7LVOIB1SkNuF3cXmhSBIPnI3YRC+jBnOXQRp0chOER1mJTh3ffJOaOfiWR0cPsffFISwUSdGM7FQ8vHyAvfBkk+mcpUMcFFz0v2wRX6rDoOHmU=
+Received: from DU0PR07MB8419.eurprd07.prod.outlook.com (2603:10a6:10:353::13)
+ by DU0PR07MB9039.eurprd07.prod.outlook.com (2603:10a6:10:409::18)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.36; Sun, 8 Oct
- 2023 12:47:43 +0000
-Received: from AS8PR04MB8963.eurprd04.prod.outlook.com
- ([fe80::986:55cb:8fd6:87a4]) by AS8PR04MB8963.eurprd04.prod.outlook.com
- ([fe80::986:55cb:8fd6:87a4%5]) with mapi id 15.20.6863.032; Sun, 8 Oct 2023
- 12:47:43 +0000
-From: Josua Mayer <josua@solid-run.com>
-To: u-boot@lists.denx.de
-Cc: sr@denx.de, sjg@chromium.org, kabel@kernel.org,
- Josua Mayer <josua@solid-run.com>
-Subject: [PATCH 3/3] arm: mvebu: clearfog: Add defconfigs for eMMC booting
-Date: Sun,  8 Oct 2023 14:46:21 +0200
-Message-Id: <20231008124621.18803-4-josua@solid-run.com>
-X-Mailer: git-send-email 2.35.3
-In-Reply-To: <20231008124621.18803-1-josua@solid-run.com>
-References: <20231008124621.18803-1-josua@solid-run.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: ZR2P278CA0019.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:46::14) To AS8PR04MB8963.eurprd04.prod.outlook.com
- (2603:10a6:20b:42e::18)
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.38; Sun, 8 Oct
+ 2023 14:34:42 +0000
+Received: from DU0PR07MB8419.eurprd07.prod.outlook.com
+ ([fe80::cbf9:cff3:7543:9c36]) by DU0PR07MB8419.eurprd07.prod.outlook.com
+ ([fe80::cbf9:cff3:7543:9c36%5]) with mapi id 15.20.6838.033; Sun, 8 Oct 2023
+ 14:34:42 +0000
+From: "Polak, Leszek" <LPolak@arri.de>
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: "michal.simek@amd.com" <michal.simek@amd.com>, Stefan Roese <sr@denx.de>
+Subject: [PATCH v4] arm64: versal: Add SelectMAP boot mode identification
+Thread-Topic: [PATCH v4] arm64: versal: Add SelectMAP boot mode identification
+Thread-Index: AQHZ+fPmqEhWzlpgS06mBfWjXH8blQ==
+Date: Sun, 8 Oct 2023 14:34:42 +0000
+Message-ID: <DU0PR07MB8419F7765892CDBCE7D559C5C8CFA@DU0PR07MB8419.eurprd07.prod.outlook.com>
+Accept-Language: de-DE, en-US
+Content-Language: de-DE
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+msip_labels: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=arri.de;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DU0PR07MB8419:EE_|DU0PR07MB9039:EE_
+x-ms-office365-filtering-correlation-id: a504214c-9a87-47ae-573f-08dbc80bb5cf
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 3MvU4OoHqFtHO3wnlajc3JoM1ggX3OTlurgu2R7f1hlEfDVs7+ArCWjCTdE4jNIjjbCYbak3kb5tFAhSyO4RjY0Z+MKDDpE0hSR/P9H/bt2VEpZ5MGtvuBm9ovrcBZohNwO8+fd930Q5L7Xby+WcZKO/8q1ZsY5NMqd4pB7LS9UPy/10yTyEZ4yy4WheOZGnYob20kLdEEmSPQ4sQWnDZng+LCYvNSFdUePd2sD0XPdFZ33s6j8B/Me9g9INum7ToDKo0k7cTNCGrZwJV0Yg8QvjbNWPEVyMjHXxYyXbViwVYsv8t5S38Q5dPw19HaRfHHyoUMOc7jcBcke9gT7X9gPYufZaCAWZTO0yyv3mZQC9kkGi6hNejua5r0SOiPHoBPvfZkoB7eVS6CHIzHDquV6+CZVVw9O7FHmDr0KGTuz5PUDL2va4k1fadPTldEqmeOeHKAXhswPuauF0immiFzO8B5Qem4KcptuW0BynJYaTTgX7C7v5ij3IRwWMC738ghHV0w4XkiFZWVDwsvRvRlJjP5/5Ak1Dsq5WX6g3ETXIY9LT11mV0xB7wJZii8wlRJ+JlhKdPcn989DKXvXjzqqjfsBPk792qzXlTkaMY912upj7kAd6DE+4RYBU4SNLeRbodNFsIUgIs8JyViq9kHB2kutXa61pfPrKB4FxMlM=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU0PR07MB8419.eurprd07.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366004)(136003)(396003)(39840400004)(346002)(376002)(230922051799003)(64100799003)(1800799009)(186009)(451199024)(2906002)(33656002)(86362001)(55016003)(122000001)(38100700002)(38070700005)(76116006)(26005)(66946007)(8936002)(8676002)(71200400001)(4326008)(316002)(66476007)(66556008)(66446008)(6916009)(64756008)(54906003)(55236004)(9686003)(7696005)(6506007)(91956017)(41300700001)(478600001)(5660300002)(52536014);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?HMeGDzMaKgIyVQVI96eFqGj49RnqUF70OzoYYl4HboBGn8PTYpy+eiSRTB?=
+ =?iso-8859-1?Q?WlvbQXQNqMOIoLQkwnHSo1H0avIAGQyVX1e3RwE7CwWpXRHiaXkpFPXxzm?=
+ =?iso-8859-1?Q?5lqrqvGXxB0Tm31D8CCgDwYKSsn6Yzv34TK/G0SsnRxOlReT4EUb/iMD1M?=
+ =?iso-8859-1?Q?vIKQW8ugiFFLKvans3NcK8g7+X8TKkS6u2VVHd5mMU2I7lAZyP3u2ko8cE?=
+ =?iso-8859-1?Q?deDDkjmiqKumK+HQ+6XQOCx6Wk2Wwvo0UZJPQNGTx6BLMxEQrxllF4bw2X?=
+ =?iso-8859-1?Q?Q8qsd9lBtiw2Bq7rg+ZzzXlxmU/6MMXXUCyqsus5mNRIU3w3togAjo3cHq?=
+ =?iso-8859-1?Q?bG8mrBT9I8iLuA8uDlHQ81VEz800rKrc71ix1RUCgf4MbnnC0Z+cFNxfF/?=
+ =?iso-8859-1?Q?3WFwZPc2X46Xhjndi2GlFDFG+BEr1AsTPO5g8he8e+LtXr/g0PrZHA8Jrj?=
+ =?iso-8859-1?Q?aN7tkds0J1RJTd8UKju1Xd0FWfwocT3/jkubQqUwe0YhsEJpkMwJU8lSYF?=
+ =?iso-8859-1?Q?sEBolgZMfyYqLPcIRT8y0zXRj96BW743Pn1CEJocJOyff/kdAFxSZd0FWh?=
+ =?iso-8859-1?Q?3hSPANQ3TqMThiby369d7alUpFMYI5/IQvFxjAd+l+UvdPx9FnFEubS+AV?=
+ =?iso-8859-1?Q?+JUlJClm03E9eIpWIH7LBVe1s2ifAzYNH+dEOkH6/S3GSChCHLNxZOTr69?=
+ =?iso-8859-1?Q?BI142jFJP69bvPnLw1XXKgBKEH4hhAzE871gdZbxAGnBEU6/KsrN9s0w55?=
+ =?iso-8859-1?Q?TACP2lOu6x8l09k7pslInZ/Rsy8yT2nteIdoaFkHfgOw3BYdKX8Ix1VYR2?=
+ =?iso-8859-1?Q?q0KP6q+p23Jw4lmYlNWrl27bMEI5d2zlkxYOmlJA/0v74D+pX6axSRoe4q?=
+ =?iso-8859-1?Q?gpzE5TK4O1I9KqLzfCKxZv+EB8S7rUjxRRZscEGmc4d1lb/Ul08PJt9h4w?=
+ =?iso-8859-1?Q?Z7Fd/4DIj9D12vsgYlkL9LWQAogepMBW8XRBT3g8wR01gOm4LcCcqmeBO1?=
+ =?iso-8859-1?Q?zXI9cOsNGIYiAUk5CAIRJBOx85wkQVajgGZOi9rdjLESRSdvwtMLF/TCwi?=
+ =?iso-8859-1?Q?XqsKwdNjQWNAOiofZDAPDgLmysyrGoIkOIl7moS35r1gd3BERqHH/N8bYq?=
+ =?iso-8859-1?Q?YvOfpIrEpMTLPCFeMXDkDkUY534ZuNnFiUcsNWyPGvV4fUQIbCStzbSID1?=
+ =?iso-8859-1?Q?hD72z5HHi+NrwVwgZLMAtuXpdGdrngnfg3JxPYJYLE6aHUqccGBEvzobe/?=
+ =?iso-8859-1?Q?ruszOznBd52kSJuY+WCaIzGkNbbKRZDCyfy8KiobSXW6d7LUrCSxxkPkgm?=
+ =?iso-8859-1?Q?Q5uU0Af+oKxRoggCkXbJHYf9mKYkOTo5aFW1rYaM1L9TTXv8q0KpnYSDp6?=
+ =?iso-8859-1?Q?C0erISL6M+W+ZeozBdOAkJ+kgcVZxCvwQ9SwcxPU+pbx0vX2u2q1kanKK9?=
+ =?iso-8859-1?Q?Npyc2O527tL0qXB6Y95fp1SGb4HG9+GYXnDtkhWElJmEgqaqazPFoCcci2?=
+ =?iso-8859-1?Q?YW8WTMXX+VRcVZiq6ujjOMOUB5XN6KfXsfJc1KgcDDJ2Co2XGvea2jIvc/?=
+ =?iso-8859-1?Q?kgRz+LGe7nLp2ToTfZKYTDEYpwzCzk0HK0KySv/9jrVnN/DWheF0+5jRDT?=
+ =?iso-8859-1?Q?S9QSBOxV8M6+4=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8963:EE_|AM9PR04MB7651:EE_
-X-MS-Office365-Filtering-Correlation-Id: aaf6c6e9-2236-4923-4391-08dbc7fcc3b1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Sh/1tPvCFhN4OLV+oJLugyBSuzcsl7A8i+o0JY+S9zMvQIu1SvTeIfrr9PC5F7a//nWtpjNjAkqvmq59SV6y/qw/411eRe2T8cVfEJDJ1I41RO135t1In7utUbx1fyHid3m9IQ4vNM09ctVkjcrMe111ydvX6Wl7kRO8l/ebYco60svJTI7oolx8Iop8GfyYW5lRcPHhkWUmwkUa2aRxMchU3afz8Eo1TdFgUKgYWdv0FwMxBWKx7x03ncyNmByWD+huwlOQf/Sw6fckjX+EB+1UwMP7pKBdKnIYmpZqaDLwayUJ+iSFG3PDa+0ykv3FB7C4NRaOOcnUsJSG9RZ04DgScK7QS13uXfijO6/Oya7NsLJ01aRux0JdgzIAF2ZjyKvf11zk+EQk/4bFUP9Dx4Z0YuYlRhL/mNRJGsEzYTBn9J+Gub0LjHi7K0pm4RHQldHzfUDUwzZYzg+G12+hfSNkjQubQvzvkqtUQAb2yJ88mvVqbQ3MfzsRJXHVS2aFE+AEPeF75nwrOQ04iFdqeaGlKktPWtGJk1RriTcIleTh8KEgyoLZL0PAx6nBce0r9lJ1wlpCs0rZ5cFjvXHyCs16xRw9SbmMDj/yN5oQeGAnMpEIfeWnqX/subSvUDen
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8963.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(396003)(366004)(136003)(346002)(376002)(39840400004)(230922051799003)(451199024)(64100799003)(186009)(1800799009)(83380400001)(1076003)(107886003)(2616005)(26005)(66946007)(66476007)(66556008)(316002)(6916009)(8936002)(5660300002)(8676002)(4326008)(41300700001)(6506007)(52116002)(6666004)(6512007)(2906002)(6486002)(478600001)(36756003)(38100700002)(38350700002)(86362001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kBpdsSTNuZDvuEoHr4E/l/th/vjb0EF1wdkmDebr8bsJlL9f4YCmXcUZphZq?=
- =?us-ascii?Q?dBg7VQ0UOZrDfKQaPyAKL/HjV+MYl6jIaqRDzKHefemltPuUPyz/KqqsKni6?=
- =?us-ascii?Q?f8IpcR+h50wuftE5VEgnkGYSqDBTBNsJhskGEzHgI3/8azJ5cFjaO17ZLF0S?=
- =?us-ascii?Q?jlZNrbn8AXlRNgGWXkqdSfnvu7ri6Fybm6mMDAUAJ8OVfRWKKPkSkqir+6xO?=
- =?us-ascii?Q?FpIJZyh1bdrXU6BSvPruaQyz6tf6Tzd5XHRDEaM8Fp9dhW2CasWuQiNIw5Rf?=
- =?us-ascii?Q?uMCTw1TpLV3+gAQzymKUX2s1cGtjYxh6sve0t8BiJ9mAwTvZ7DHdM3YBtfKZ?=
- =?us-ascii?Q?wOKlggGWLVPAcwq8LFyt7S1Oa5jsiHSLRx/y0+nLMZ39BSIuU1tObTvcuCfD?=
- =?us-ascii?Q?xTJSN2FZ4sTQHiaHX63d49NICjyVOwOmhB3I7oc6vCNBPe/6CyP28ybAeFJY?=
- =?us-ascii?Q?7UWXs27kNyQSF+ZShwMO7ERQu5TBBZn2MyDKC6Vo9sN/xhmOEOmaFeKC8Mzi?=
- =?us-ascii?Q?UOnc3DAZwpYO+rVu/PnZyRIRlDs+msH+erkT1KSwalj9zKHacXxBCLCyWq2q?=
- =?us-ascii?Q?cU1VqxmSTMNJgoiXwI6nkS2B/ASJf5YX6NAGVIh1Gca4Vuq/uLpN2hjxIrU4?=
- =?us-ascii?Q?n/JzpuizKDie5uF6V4qv0nJVOUrslPlGhUHSN+S/mkb+SFFToa8cXa3Rj2Fs?=
- =?us-ascii?Q?AI27AiAqAJ0QwGswy8xGxN2KeYcoqzkZQ9s2ZEAjeLwXNvofyhi3P7xqAQ4S?=
- =?us-ascii?Q?ciREgQwFUCl4PmiiATbZG0xJk9FzeWKLG5mKl5WbubdPanjprgklUwvDYKRb?=
- =?us-ascii?Q?D8H6tM1n44EYI7l3J6StD6o99mm43/02zr7MWjZejLMK4CLsVQUM7rsc+4iH?=
- =?us-ascii?Q?iY4Q831Jw6QjOUCibGAL4ToYJuvSin1NevN6wjfHqALfQS0Rs5Z8uzRUQ4km?=
- =?us-ascii?Q?Z06uRikHnMq0VCaseaHiHCEWTKZocJtnBuJfvXHiAouxgG9C18DlhJpm8vJV?=
- =?us-ascii?Q?CmSBljAXl70I4YzDy4G3riZqjoWR2MrlxOtsLnmk0Q/B1QVc858raBI5ypzl?=
- =?us-ascii?Q?9Be3eHJ1oMFQ+QhUkDbLTngPpzt3g8QM43oNQAReDm5qMFCL4Nt4gntlxXy5?=
- =?us-ascii?Q?4/Sc6TMcBj8hvTQMHpxgCBYjPAYIIxRtlB4dXRfdYLr21vKQw3TBSsE3vdIQ?=
- =?us-ascii?Q?zLd61B16CaEHUp++zYfGNgS7jqGWKwQhtfmxynZj3SxBF5P+J4dOr7IHH0iU?=
- =?us-ascii?Q?wgB9MxXTRqforHignuWpLDIZZILMbnXI5ykAzNjMxZHvT9LHnKWJXgTRTA5Q?=
- =?us-ascii?Q?kLJcm4OTBTvDSkkGTPQCMwtSCvelLTeIdGlSyT46BsOey2tVHTo6e3IaEwO3?=
- =?us-ascii?Q?Ok5jGAwcizRETcCSPnaGmM0gYv8wpHpvQxm2QEm80/3WuWY6ZtPeAjM1MRAd?=
- =?us-ascii?Q?+WTrjwQksOgG6IodTHXm7BJrDDUFlKT/+DqCL82LVytk0SiD0SLe1OFSu+Qb?=
- =?us-ascii?Q?MhSYLbL5XxyI3035UdvFUCh3vvdxsL4Oz9PTZtvChSs+XvZCtEhmsVTBsUi/?=
- =?us-ascii?Q?+SWZUT+KfuVD34MxWX5BNySUb+yMQa9BbVlyJL6j?=
-X-OriginatorOrg: solid-run.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: aaf6c6e9-2236-4923-4391-08dbc7fcc3b1
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8963.eurprd04.prod.outlook.com
+X-OriginatorOrg: arri.de
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2023 12:47:43.3197 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a4a8aaf3-fd27-4e27-add2-604707ce5b82
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: DkwcrEppXUoc1+TMsLqBgC+cJugkmRownrOnSrdA4at/YD3+KoI3+abUjT0KuCSldqrID+SpGmN/Nkd1NHuHew==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7651
+X-MS-Exchange-CrossTenant-AuthSource: DU0PR07MB8419.eurprd07.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a504214c-9a87-47ae-573f-08dbc80bb5cf
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Oct 2023 14:34:42.3290 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e6a73a5a-614d-4c51-b3e3-53b660a9433a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: lu9dqdBt85bLJhi1PDF4Bz3ohHP4ZUzIjyacxo+qRxR/4CIxdO9zogqyqggSHM4j
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR07MB9039
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,291 +134,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Armada 388 can boot from either eMMC data, boot0 or boot1 partitions.
-
-data partition requires booting from LBA-4096 to avoid conflict with
-MBR. When booting from boot0/boot1 environment should be stored there
-respectively, too.
-
-Add 3 new defconfigs, for each eMMC partition:
-- clearfog_emmcboot0_defconfig
-- clearfog_emmcboot1_defconfig
-- clearfog_emmcdata_defconfig
-
-Signed-off-by: Josua Mayer <josua@solid-run.com>
----
- configs/clearfog_emmcboot0_defconfig | 82 ++++++++++++++++++++++++++++
- configs/clearfog_emmcboot1_defconfig | 82 ++++++++++++++++++++++++++++
- configs/clearfog_emmcdata_defconfig  | 82 ++++++++++++++++++++++++++++
- 3 files changed, 246 insertions(+)
- create mode 100644 configs/clearfog_emmcboot0_defconfig
- create mode 100644 configs/clearfog_emmcboot1_defconfig
- create mode 100644 configs/clearfog_emmcdata_defconfig
-
-diff --git a/configs/clearfog_emmcboot0_defconfig b/configs/clearfog_emmcboot0_defconfig
-new file mode 100644
-index 00000000000..215b7708a0d
---- /dev/null
-+++ b/configs/clearfog_emmcboot0_defconfig
-@@ -0,0 +1,82 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_CPU_INIT=y
-+CONFIG_SYS_THUMB_BUILD=y
-+CONFIG_ARCH_MVEBU=y
-+CONFIG_TEXT_BASE=0x00800000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
-+CONFIG_TARGET_CLEARFOG=y
-+CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
-+CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
-+CONFIG_SPL_TEXT_BASE=0x40000030
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK=0x4002c000
-+CONFIG_SPL=y
-+CONFIG_DEBUG_UART_BASE=0xf1012000
-+CONFIG_DEBUG_UART_CLOCK=250000000
-+CONFIG_SYS_LOAD_ADDR=0x800000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x22fd0
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x40023000
-+CONFIG_SPL_BSS_MAX_SIZE=0x4000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SYS_MAXARGS=32
-+CONFIG_CMD_TLV_EEPROM=y
-+CONFIG_SPL_CMD_TLV_EEPROM=y
-+# CONFIG_CMD_FLASH is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_MIN_ENTRIES=128
-+CONFIG_SYS_MMC_ENV_PART=1
-+CONFIG_ARP_TIMEOUT=200
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_AHCI_MVEBU=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SPL_I2C_EEPROM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_MV=y
-+CONFIG_MTD=y
-+CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHY_MARVELL=y
-+CONFIG_PHY_GIGE=y
-+CONFIG_MVNETA=y
-+CONFIG_MII=y
-+CONFIG_MVMDIO=y
-+CONFIG_PCI_MVEBU=y
-+CONFIG_SCSI=y
-+CONFIG_SPL_DEBUG_UART_BASE=0xd0012000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550=y
-+CONFIG_KIRKWOOD_SPI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-diff --git a/configs/clearfog_emmcboot1_defconfig b/configs/clearfog_emmcboot1_defconfig
-new file mode 100644
-index 00000000000..59f88c64a2e
---- /dev/null
-+++ b/configs/clearfog_emmcboot1_defconfig
-@@ -0,0 +1,82 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_CPU_INIT=y
-+CONFIG_SYS_THUMB_BUILD=y
-+CONFIG_ARCH_MVEBU=y
-+CONFIG_TEXT_BASE=0x00800000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
-+CONFIG_TARGET_CLEARFOG=y
-+CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
-+CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
-+CONFIG_SPL_TEXT_BASE=0x40000030
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK=0x4002c000
-+CONFIG_SPL=y
-+CONFIG_DEBUG_UART_BASE=0xf1012000
-+CONFIG_DEBUG_UART_CLOCK=250000000
-+CONFIG_SYS_LOAD_ADDR=0x800000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x22fd0
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x40023000
-+CONFIG_SPL_BSS_MAX_SIZE=0x4000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SYS_MAXARGS=32
-+CONFIG_CMD_TLV_EEPROM=y
-+CONFIG_SPL_CMD_TLV_EEPROM=y
-+# CONFIG_CMD_FLASH is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_MIN_ENTRIES=128
-+CONFIG_SYS_MMC_ENV_PART=2
-+CONFIG_ARP_TIMEOUT=200
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_AHCI_MVEBU=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SPL_I2C_EEPROM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_MV=y
-+CONFIG_MTD=y
-+CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHY_MARVELL=y
-+CONFIG_PHY_GIGE=y
-+CONFIG_MVNETA=y
-+CONFIG_MII=y
-+CONFIG_MVMDIO=y
-+CONFIG_PCI_MVEBU=y
-+CONFIG_SCSI=y
-+CONFIG_SPL_DEBUG_UART_BASE=0xd0012000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550=y
-+CONFIG_KIRKWOOD_SPI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
-diff --git a/configs/clearfog_emmcdata_defconfig b/configs/clearfog_emmcdata_defconfig
-new file mode 100644
-index 00000000000..335b50e3c48
---- /dev/null
-+++ b/configs/clearfog_emmcdata_defconfig
-@@ -0,0 +1,82 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_CPU_INIT=y
-+CONFIG_SYS_THUMB_BUILD=y
-+CONFIG_ARCH_MVEBU=y
-+CONFIG_TEXT_BASE=0x00800000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
-+CONFIG_TARGET_CLEARFOG=y
-+CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
-+CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
-+CONFIG_SPL_TEXT_BASE=0x40000030
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK=0x4002c000
-+CONFIG_SPL=y
-+CONFIG_DEBUG_UART_BASE=0xf1012000
-+CONFIG_DEBUG_UART_CLOCK=250000000
-+CONFIG_SYS_LOAD_ADDR=0x800000
-+CONFIG_PCI=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_CONSOLE_INFO_QUIET=y
-+# CONFIG_DISPLAY_BOARDINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_SPL_MAX_SIZE=0x22fd0
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x40023000
-+CONFIG_SPL_BSS_MAX_SIZE=0x4000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET=0x1000
-+CONFIG_SPL_I2C=y
-+CONFIG_SYS_MAXARGS=32
-+CONFIG_CMD_TLV_EEPROM=y
-+CONFIG_SPL_CMD_TLV_EEPROM=y
-+# CONFIG_CMD_FLASH is not set
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
-+CONFIG_CMD_SPI=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_TFTPPUT=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_MIN_ENTRIES=128
-+CONFIG_ARP_TIMEOUT=200
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_AHCI_MVEBU=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SPL_I2C_EEPROM=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_SDMA=y
-+CONFIG_MMC_SDHCI_MV=y
-+CONFIG_MTD=y
-+CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_MTD=y
-+CONFIG_PHY_MARVELL=y
-+CONFIG_PHY_GIGE=y
-+CONFIG_MVNETA=y
-+CONFIG_MII=y
-+CONFIG_MVMDIO=y
-+CONFIG_PCI_MVEBU=y
-+CONFIG_SCSI=y
-+CONFIG_SPL_DEBUG_UART_BASE=0xd0012000
-+CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550=y
-+CONFIG_KIRKWOOD_SPI=y
-+CONFIG_USB=y
-+CONFIG_USB_XHCI_HCD=y
--- 
-2.35.3
-
+The SelectMAP configuration interface provides an 8-bit,=0A=
+16-bit or 32-bit bidirectional data bus interface to the Versal FPGA=0A=
+configuration logic that can be used for both configuration and readback.=
+=0A=
+=0A=
+A connected microcontoller to the SelectMAP interface can load boot=0A=
+image with bitstream, TF-A (ARM Trusted Firmware) and U-Boot.=0A=
+=0A=
+This commit adds the missing identification of the SelectMAP mode.=0A=
+=0A=
+Signed-off-by: Polak, Leszek <LPolak@arri.de>=0A=
+Reviewed-by: Stefan Roese <sr@denx.de>=0A=
+Cc: Michal Simek <michal.simek@amd.com>=0A=
+Cc: Stefan Roese <sr@denx.de>=0A=
+---=0A=
+v2:=0A=
+- Drop assignment of 'mode' as selectmap is not be supported=0A=
+  by distro boot=0A=
+v3:=0A=
+- Changed E-Mail/Name to be the same as git setup=0A=
+v4:=0A=
+- Fixed formatting=0A=
+---=0A=
+ arch/arm/mach-versal-net/include/mach/hardware.h | 1 +=0A=
+ arch/arm/mach-versal/include/mach/hardware.h     | 1 +=0A=
+ board/xilinx/versal-net/board.c                  | 3 +++=0A=
+ board/xilinx/versal/board.c                      | 4 ++++=0A=
+ 4 files changed, 9 insertions(+)=0A=
+=0A=
+diff --git a/arch/arm/mach-versal-net/include/mach/hardware.h b/arch/arm/ma=
+ch-versal-net/include/mach/hardware.h=0A=
+index 9bddb8b007..767cdd3686 100644=0A=
+--- a/arch/arm/mach-versal-net/include/mach/hardware.h=0A=
++++ b/arch/arm/mach-versal-net/include/mach/hardware.h=0A=
+@@ -66,6 +66,7 @@ struct crp_regs {=0A=
+ #define EMMC_MODE	0x00000006=0A=
+ #define USB_MODE	0x00000007=0A=
+ #define OSPI_MODE	0x00000008=0A=
++#define SELECTMAP_MODE	0x0000000A=0A=
+ #define SD1_LSHFT_MODE	0x0000000E /* SD1 Level shifter */=0A=
+ #define JTAG_MODE	0x00000000=0A=
+ #define BOOT_MODE_USE_ALT	0x100=0A=
+diff --git a/arch/arm/mach-versal/include/mach/hardware.h b/arch/arm/mach-v=
+ersal/include/mach/hardware.h=0A=
+index 000af974e8..9d1c2f0dcf 100644=0A=
+--- a/arch/arm/mach-versal/include/mach/hardware.h=0A=
++++ b/arch/arm/mach-versal/include/mach/hardware.h=0A=
+@@ -82,6 +82,7 @@ struct crp_regs {=0A=
+ #define EMMC_MODE	0x00000006=0A=
+ #define USB_MODE	0x00000007=0A=
+ #define OSPI_MODE	0x00000008=0A=
++#define SELECTMAP_MODE	0x0000000A=0A=
+ #define SD1_LSHFT_MODE	0x0000000E /* SD1 Level shifter */=0A=
+ #define JTAG_MODE	0x00000000=0A=
+ #define BOOT_MODE_USE_ALT	0x100=0A=
+diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/boar=
+d.c=0A=
+index c18be0c26c..990ca1650a 100644=0A=
+--- a/board/xilinx/versal-net/board.c=0A=
++++ b/board/xilinx/versal-net/board.c=0A=
+@@ -252,6 +252,9 @@ static int boot_targets_setup(void)=0A=
+ 		mode =3D "mmc";=0A=
+ 		bootseq =3D dev_seq(dev);=0A=
+ 		break;=0A=
++	case SELECTMAP_MODE:=0A=
++		puts("SELECTMAP_MODE\n");=0A=
++		break;=0A=
+ 	case SD_MODE:=0A=
+ 		puts("SD_MODE\n");=0A=
+ 		if (uclass_get_device_by_name(UCLASS_MMC,=0A=
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c=0A=
+index e4bdd5d7a3..8c2e614ad8 100644=0A=
+--- a/board/xilinx/versal/board.c=0A=
++++ b/board/xilinx/versal/board.c=0A=
+@@ -174,6 +174,9 @@ static int boot_targets_setup(void)=0A=
+ 		mode =3D "mmc";=0A=
+ 		bootseq =3D dev_seq(dev);=0A=
+ 		break;=0A=
++	case SELECTMAP_MODE:=0A=
++		puts("SELECTMAP_MODE\n");=0A=
++		break;=0A=
+ 	case SD_MODE:=0A=
+ 		puts("SD_MODE\n");=0A=
+ 		if (uclass_get_device_by_name(UCLASS_MMC,=0A=
+@@ -312,6 +315,7 @@ enum env_location env_get_location(enum env_operation o=
+p, int prio)=0A=
+ 			return ENVL_SPI_FLASH;=0A=
+ 		return ENVL_NOWHERE;=0A=
+ 	case JTAG_MODE:=0A=
++	case SELECTMAP_MODE:=0A=
+ 	default:=0A=
+ 		return ENVL_NOWHERE;=0A=
+ 	}=0A=
+-- =0A=
+2.25.1=0A=
