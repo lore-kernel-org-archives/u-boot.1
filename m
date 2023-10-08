@@ -4,73 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04D2CE95A82
-	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 18:22:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E300E95A67
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 18:48:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 287318652F;
-	Sun,  8 Oct 2023 20:22:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 337E486940;
+	Sun,  8 Oct 2023 20:48:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YmjBhHr/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OLmIW3G6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64BAC8652B; Sun,  8 Oct 2023 20:22:11 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 19A128691E; Sun,  8 Oct 2023 20:48:29 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 841C386590
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 20:22:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CA6681F44
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 20:48:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-532c81b9adbso6664082a12.1
- for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 11:22:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=inindev@gmail.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-59f57ad6126so44408027b3.3
+ for <u-boot@lists.denx.de>; Sun, 08 Oct 2023 11:48:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696789329; x=1697394129; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EiO+5o6+4Gt1jYTZMjjX7PyAh9mPpQJcgrNYe1dR8iU=;
- b=YmjBhHr/XVNz3iNnq+lcmzYGbC9p9pJf9IssDhbqIDajuiqx2DrbTtxnAY48yiRx/e
- PZANCT1vzVBkv9zx8z0qLZjHr+q9d/DcZF0bv0IfuFcTOwygv81xNkjw4o4pusbniNKg
- Qej4aViayKZOKn6/3QrRHYrpKK930d84cEqyUGUdVbiiMgnXAcnoOQweyq5Woz3hwFQj
- LiYMWQdzIn5He289GDIRyQwj6DOZEN7jx/CszunBSwyXopZQVZpOhs53eYS9xQkrGuG6
- KDku1L3bvgbQ3P/OmSit8UMmaTiTIMM6SXEa2G+towndFQbiSym5jZpPPAXKi9rziVW/
- yoBQ==
+ d=gmail.com; s=20230601; t=1696790905; x=1697395705; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aio8cq5xH2eoAxUvgwBJDc9coRXPQ+ECQA3sXxMFlYE=;
+ b=OLmIW3G65Nx0WOeuS96EsT6KcOrVXm7xJMvEMf8YSto0PHcEGldmlqFbcqUTyC6YJk
+ eoVKyA3Qcdl/5+AvehfZhUROAAv/VZyM7M0vdHUgI0K49pMUktc3Azb2k431NJiurYYC
+ FEUiwqvAhouz7nTCl3lbjiP7SV/x/4PPK/R2QcWvD6J5OWHPo6FTBPn0NKFCPRGXSbPK
+ apXEC8a16STf1VfK+cwn+WBNLep9J49eKwx7+/lSevhNHQ1sB5EqKp/jLVwi8LMtilHB
+ oZ3pYgopdpvHPwdO9o9DvKxSOn6zEPfn68QsxRWQWMj4Pg9Uf163iUGsP/FFrLsCIaBT
+ PXnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696789329; x=1697394129;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EiO+5o6+4Gt1jYTZMjjX7PyAh9mPpQJcgrNYe1dR8iU=;
- b=WQsSodo7egoMPtDvXD9GKYXEFZZ5/iCZyVkcWcVW0asEUtgkW5t8vpQrDCNcuIRHSG
- trl17M33uB/VtCrFZAj75etfwDZJiWUV479uBVebJF5w8wE93EjC6s5D1VOi2bftl9vC
- FM8c9ZimpKyaWZW4PcVXX8omFzejRJLMRW6JKrRv5dupRZ5F6CeX6mKsViKkaZPYS1ms
- nx2ZKIAJE1/8OiPGs7//aGsiD7TwKA4gOGfzhvspJ5xWpUxLpJcNqR7w+EeWXg7eka6m
- 0hPS1mju7TgqxsaV63igTrDjpQpUQiNmpJl9LAlBkBFMSNzql4Y0vMu10kwa34BFTN6H
- jndQ==
-X-Gm-Message-State: AOJu0Yzxbe+q4kBN7ZOzkva7eaYZjt1OmlPj3fNXdidafrsQAgyZNRAn
- CN5WpSfvHD95hO2gwqE365WfUOKoN1sj9TcnpVY=
-X-Google-Smtp-Source: AGHT+IGnKZNjuvxGHhBmJwpuZhVvt+VKnDmBL7r78vECGCdynkX+26q7+jalKJF8uZJMgDmQAZzEbtLebG6V+j0dT0I=
-X-Received: by 2002:aa7:c248:0:b0:534:6b51:83a3 with SMTP id
- y8-20020aa7c248000000b005346b5183a3mr12744798edo.1.1696789328710; Sun, 08 Oct
- 2023 11:22:08 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696790905; x=1697395705;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aio8cq5xH2eoAxUvgwBJDc9coRXPQ+ECQA3sXxMFlYE=;
+ b=gpR5SL04YiZLPzqLQz2hb66YOH+PtkJsGpF7ZScH8N9lyWTC5NM+w0oYD/6jb2q7aE
+ ojwQx1GcpLoS+dC3Gie1ryQmPzxI4b6hLZ/1iVqOW6HKl7Xg6u0t9m5+6XqmgzNtJga0
+ 9bA835NUTISAO4VlAV6QcVJ+nzuoci2Tn6stjUdPzOp+0F84p3dP1cOHZGCLTNybn25q
+ 5B5n0ZCOJWTySTB1Q0zYjS4IzKY3ZpyIzeUgEs86ro2M2UnncanALNM2KZGUpsR4vL4U
+ DYE9zPPI+MEuiQvVWBoi6+2D6YGa3Sa1Pqe8lko8PZoqpid76611BBChFeSXdx1ioW1N
+ ygtA==
+X-Gm-Message-State: AOJu0YxQsRMB9stUj84xc/VTqud+IU2RAPmzhN+q6AdN6GTpYckTCbGT
+ jGwWQPNqjWZKN5Gn9nlSXpqOh0yBl6vwGA==
+X-Google-Smtp-Source: AGHT+IFQMw55POMf9bMYnnBwPSrTZs4F5zCGaxmHz9awrM9ovnvCh5F4vSgbqvxnv2irkFTHBx7W/w==
+X-Received: by 2002:a0d:e88d:0:b0:59b:d7c0:ea0c with SMTP id
+ r135-20020a0de88d000000b0059bd7c0ea0cmr14571791ywe.11.1696790904869; 
+ Sun, 08 Oct 2023 11:48:24 -0700 (PDT)
+Received: from localhost.localdomain ([192.34.165.40])
+ by smtp.gmail.com with ESMTPSA id
+ z16-20020a81a250000000b0059b24bd4f2asm3003777ywg.57.2023.10.08.11.48.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 08 Oct 2023 11:48:24 -0700 (PDT)
+From: John Clark <inindev@gmail.com>
+To: u-boot@lists.denx.de
+Cc: John Clark <inindev@gmail.com>, Chris Morgan <macromorgan@hotmail.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Jagan Teki <jagan@edgeble.ai>,
+ Johan Jonker <jbx6244@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>,
+ Stefan Bosch <stefan_b@posteo.net>
+Subject: [PATCH v2 0/1] board: rockchip: add FriendlyElec NanoPC-T6 rk3588
+ board
+Date: Sun,  8 Oct 2023 18:46:32 +0000
+Message-ID: <20231008184805.5088-1-inindev@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-References: <20231007155535.1699567-1-benwolsieffer@gmail.com>
-In-Reply-To: <20231007155535.1699567-1-benwolsieffer@gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sun, 8 Oct 2023 19:21:57 +0100
-Message-ID: <CALeDE9MX8FiayfjY=Wv2y3n9DBkTAqQsqnNjDkCXDDUeCSMLag@mail.gmail.com>
-Subject: Re: [PATCH] arm: rpi: explicitly enumerate mmc boot targets
-To: Ben Wolsieffer <benwolsieffer@gmail.com>
-Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>,
- Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,42 +99,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Oct 7, 2023 at 4:55=E2=80=AFPM Ben Wolsieffer <benwolsieffer@gmail.=
-com> wrote:
->
-> Using the unqualified "mmc" boot target causes the Raspberry Pi 4 to
-> fail to boot. c771e5b explains this approach as follows:
->
-> > We don't need to specify the mmc devices individually, since they are
-> > used in order from 0 to 2, and standard boot uses that order anyway.
->
-> In practice, U-Boot first attempts to boot from the unconnected mmc1
-> interface, and, when this fails, moves on to attempt the USB and network
-> boot targets rather than trying mmc0.
+Jonas, thank you for your detailed review.  The explanations for each of config change recommendations were especially helpful.
 
-Really? It shouldn't be enumerating it if it's not defined in device
-tree, I've not seen this in my testing.
+As for the CFG_IRAM_BASE / BROM_LAST_BOOTSOURCE issue, I have made a step forward, but expect I will be getting feedback as to a better approach.
 
-> This patch explicitly enumerates the mmc interfaces, causing each to be
-> attempted in turn. This matches what is done on other boards, and allows
-> the system to boot successfully.
->
-> Fixes: c771e5b8c2 ("arm: rpi: Switch to standard boot")
-> Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
-> ---
->  board/raspberrypi/rpi/rpi.env | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.en=
-v
-> index 30228285ed..02210b97b5 100644
-> --- a/board/raspberrypi/rpi/rpi.env
-> +++ b/board/raspberrypi/rpi/rpi.env
-> @@ -74,4 +74,4 @@ pxefile_addr_r=3D0x02500000
->  fdt_addr_r=3D0x02600000
->  ramdisk_addr_r=3D0x02700000
->
-> -boot_targets=3Dmmc usb pxe dhcp
-> +boot_targets=3Dmmc0 mmc1 mmc2 usb pxe dhcp
+Note: This patchset is based on Kever's most recent pull request "u-boot-rockchip-20231007" which, as of this writing, has yet to be merged upstream.
 
-Why are you adding mmc1 and mmc2 if they're not connected?
+Finally, I would appreciate any insight as to FriendlyElec vs FriendlyARM naming.  Currently, I have documented this as the "FriendlyARM NanoPC-T6" but it would seem that it could also be called the "FriendlyElec NanoPC-T6" and be equally correct.  It is worth noting that u-boot currently contains support for the "FriendlyARM NanoPi2" board/friendlyarm/nanopi2 and thus my use of FriendlyARM.
+
+Changes in v2:
+- resync dt from:
+    https://git.kernel.org/pub/scm/linux/kernel/git/mmind/linux-rockchip.git/plain/arch/arm64/boot/dts/rockchip/rk3588-nanopc-t6.dts?h=for-next
+- config changes:
+    -CONFIG_PCI_INIT_R=y
+    -CONFIG_SYS_SPI_U_BOOT_OFFS=0x100000
+    +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+    -CONFIG_REGULATOR_PWM=y
+    -# CONFIG_USB_XHCI_DWC3_OF_SIMPLE is not set
+    -CONFIG_SPL_USB_DWC3_GENERIC=y
+- added board files:
+    create mode 100644 board/friendlyarm/nanopct6-rk3588/Kconfig
+    create mode 100644 board/friendlyarm/nanopct6-rk3588/MAINTAINERS
+    create mode 100644 board/friendlyarm/nanopct6-rk3588/Makefile
+    create mode 100644 board/friendlyarm/nanopct6-rk3588/nanopct6-rk3588.c
+    create mode 100644 include/configs/nanopct6-rk3588.h
+- improved BROM_LAST_BOOTSOURCE handling for SPI NOR:
+    if (CONFIG_IS_ENABLED(TARGET_NANOPCT6_RK3588) && bootdevice_brom_id == 4)
+        bootdevice_ofpath = boot_devices[BROM_BOOTSOURCE_SPINOR];
+    else
+        bootdevice_ofpath = boot_devices[bootdevice_brom_id];
+
+-- 
+2.42.0
+
