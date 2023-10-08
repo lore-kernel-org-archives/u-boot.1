@@ -4,68 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EB92E95A68
-	for <u-boot@archiver.kernel.org>; Sat,  7 Oct 2023 23:45:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 295BAE95A67
+	for <u-boot@archiver.kernel.org>; Sun,  8 Oct 2023 01:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D42E86DE1;
-	Sun,  8 Oct 2023 01:45:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 975A2868AE;
+	Sun,  8 Oct 2023 03:14:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FFhqqAo2";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="C3umSwuy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D8ADA86DE6; Sun,  8 Oct 2023 01:45:31 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 089AB86977; Sun,  8 Oct 2023 03:14:07 +0200 (CEST)
+Received: from mail-m12814.netease.com (mail-m12814.netease.com
+ [103.209.128.14])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72A4F86DD5
- for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 01:45:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 20A558669F
+ for <u-boot@lists.denx.de>; Sun,  8 Oct 2023 03:13:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5344d996bedso5963344a12.3
- for <u-boot@lists.denx.de>; Sat, 07 Oct 2023 16:45:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696722329; x=1697327129; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MrQdc7WqcmWgIVj6FgqzZeoYjCRMRaynKzCnXkpcAw8=;
- b=FFhqqAo2cBxwb0fCzUzu4ypMp16MaZd0S6fDN8SVxfPpEfsrFjc+t/8w+4o43xYPKY
- CFDLlavCxEW3H17+eS+tGhIw45jDr7WDSGkO3E7YrbhMXGK3dXN8KRuiQEHEMpjeVZ/R
- 4WitD6/TJzBVnN9seQULBE1FaaU5VhzoBv2Yo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696722329; x=1697327129;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MrQdc7WqcmWgIVj6FgqzZeoYjCRMRaynKzCnXkpcAw8=;
- b=iJc/mUsmYPtA16nqq/T5obFRwxIaZsY/x96R9//P+EqtfBElcAI37AR+7UGSu+LYJC
- H+IdhTQafvGMUVgS5y6sJ9CvaWQ11bBsZ6384j39UcRiyWlcNj7X6wm5ZMCAcgmz0A/V
- jwChtw8jgjzb8fVU19XlhVhxZq/G48vbvQpk99NC4kTBFt2EbhuVO2bEggmejaGKmYFb
- Ntq3mrqk4nmEUqGY6qllQzvxf56aP2w6VV4t1DSV7HXP+U2uI/QJZmyOK90bA5q1ysDW
- GVuu5KHbdZpxhEkAQPf/GYMA0sufcVzCe+LHV4yesaS2ka9unBgTcQpTRasSTzhomocR
- CMlg==
-X-Gm-Message-State: AOJu0Yyr4iWGfRfK27okqOhu90MrJkONXAf7khmdrw5Jm+mwEB0XVbTJ
- 005t7kWvqbX9cXI9vd99fC5y2qiEBz2OqKjcgNn2Uyy2YHwEboTfboQ=
-X-Google-Smtp-Source: AGHT+IEgWMW/OOAhc7XFOI2rYHw7CyqEKN+3qIOXs2a8VUMRAZRSZV44bAEoooIICSiRImZ9fUeMEuUTyYwhKu3wwjo=
-X-Received: by 2002:a17:906:2258:b0:9aa:25f5:8d95 with SMTP id
- 24-20020a170906225800b009aa25f58d95mr10923927ejr.59.1696722328767; Sat, 07
- Oct 2023 16:45:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=C3umSwuyNF8Zzz38KTKF9L4iPBRVUlJQ3Z7Gg/CX//wAeebID20hCjRu10QMpHsGJFYube/9uwuJyhr17qzPzXC1M92RQdKen2pRMz2xULZlJTJDR86RQ5PkPkSotWwryI14VBydOpoSYDW+HPQfowJrA4cafgvgkvcotmAMioQ=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=HcQqrYHzWRCKvs2IglpBY5e4/cOZCoQPlgeqSqSdWYE=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 03A6B4001DE;
+ Sun,  8 Oct 2023 09:13:43 +0800 (CST)
+Message-ID: <6d685aaf-ac11-ff44-c3a6-204dab33b3d5@rock-chips.com>
+Date: Sun, 8 Oct 2023 09:13:43 +0800
 MIME-Version: 1.0
-References: <20231007231255.277623-1-sjg@chromium.org>
- <20231007231255.277623-5-sjg@chromium.org>
- <20231007233219.GI2227687@bill-the-cat>
-In-Reply-To: <20231007233219.GI2227687@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 7 Oct 2023 17:45:17 -0600
-Message-ID: <CAPnjgZ37DN50orkHmNFs7w4yA+npw_7W0-6iEU=wwtOZ60U8rg@mail.gmail.com>
-Subject: Re: [PATCH v2 04/27] bootstd: Correct dependencies on CMDLINE
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: Pull request: u-boot-rockchip-20231007
+Content-Language: en-US
+To: Jonas Karlman <jonas@kwiboo.se>, trini@konsulko.com
+Cc: u-boot@lists.denx.de
+References: <20231007102658.568693-1-kever.yang@rock-chips.com>
+ <0df00e4a-3fc3-a72f-8b1a-76b73d109e25@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <0df00e4a-3fc3-a72f-8b1a-76b73d109e25@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU5IT1YYQkMfQk1KTkkaTBpVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5IVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8b0cd8e98c2eb3kusn03a6b4001de
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORg6Nxw5PTw3Lh8iSx8PCz4r
+ IQIKFA5VSlVKTUJNTElMTUlPTUlJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSktISDcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,22 +74,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Jonas,
 
-On Sat, 7 Oct 2023 at 17:32, Tom Rini <trini@konsulko.com> wrote:
+On 2023/10/7 18:37, Jonas Karlman wrote:
+> Hi Kever,
 >
-> On Sat, Oct 07, 2023 at 05:12:23PM -0600, Simon Glass wrote:
+> Looks like the following patch is missing:
 >
-> > With recent changes in boot/Kconfig it is no-longer possible to disable
-> > CMDLINE. It results in various link errors because some options which
-> > require CMDLINE are enabled regardless of whether it is available.
+> [v2,7/7] rockchip: rk3568-radxa-e25: Enable pcie3x1 node
+> https://patchwork.ozlabs.org/patch/1816145/
+
+This patch set does not show in sorted order in the patchwork system.
+
+I use the last patch(which is 6/7) to apply this series, but 
+unfortunately 7/7 is missing.
+
+How do you send this patch set? All other patch sets looks OK in system.
+
+I can pick this patch up later when merge other patches for next PR.
+
+
+Thanks,
+
+- Kever
+
 >
-> How "recent" is this problem?
-
-Over the last few years, I think. It was definitely in better shape
-3-4 years ago.
-
-I just realised that I sent your patches as part of my series, sorry.
-
-Regards,
-Simon
+> from merged series:
+> [v2,0/7] rockchip: rk3568: Fix use of PCIe bifurcation
+>
+> Do you want me to send it as a new separate patch?
+>
+> Regards,
+> Jonas
+>
+> On 2023-10-07 12:26, Kever Yang wrote:
+>> Hi Tom,
+>>
+>> Please pull the updates for rockchip platform:
+>> - Add Board: rk3568 Bananapi R2Pro;
+>> - Update pcie bifurcation support;
+>> - dwc_eth_qos controller support for rk3568 and rk3588;
+>> - Compressed binary support for U-Boot on rockchip platform;
+>> - dts and config updates for different board and soc;
+>>
+>> CI:
+>> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/18047
+>>
+>> Thanks,
+>> - Kever
+>>
+>> The following changes since commit be2abe73df58a35da9e8d5afb13fccdf1b0faa8e:
+>>
+>>    Merge https://source.denx.de/u-boot/custodians/u-boot-riscv (2023-10-05 13:26:44 -0400)
+>>
+>> are available in the Git repository at:
+>>
+>>    https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20231007
+>>
+>> for you to fetch changes up to dd8d52c934e8858264f91e8e8e2d8c7d8b059dd7:
+>>
+>>    rockchip: rk356x-u-boot: Add bootph-all to i2c0_xfer pinctrl node (2023-10-07 16:52:48 +0800)
+>>
+>> ----------------------------------------------------------------
+>> FUKAUMI Naoki (5):
+>>        configs: rockchip: rock-pi-s: use default bootdelay (2s)
+>>        arm: dts: rockchip: sync DT for RK3588 series with Linux
+>>        arm: dts: rockchip: rock-5b: add support for PCIe3 and NVMe
+>>        configs: rockchip: rk3308: use CONFIG_DEFAULT_FDT_FILE
+>>        configs: rockchip: rk3308: enable CONFIG_OF_LIBFDT_OVERLAY
+>>
+>> Frank Wunderlich (1):
+>>        board: rockchip: Add Bananapi R2Pro Board
+>>
+>> Jonas Karlman (22):
+>>        pci: pcie_dw_rockchip: Configure number of lanes and link width speed
+>>        phy: rockchip: snps-pcie3: Refactor to use clk_bulk API
+>>        phy: rockchip: snps-pcie3: Refactor to use a phy_init ops
+>>        phy: rockchip: snps-pcie3: Add bifurcation support for RK3568
+>>        phy: rockchip: snps-pcie3: Add support for RK3588
+>>        phy: rockchip: naneng-combphy: Use signal from comb PHY on RK3588
+>>        rockchip: rk3568-nanopi-r5: Update defconfig for NanoPi R5C and R5S
+>>        rockchip: rk3568-nanopi-r5: Enable PCIe on NanoPi R5C and R5S
+>>        power: regulator: Only run autoset once for each regulator
+>>        rockchip: Port IO-domain driver for RK3568 from linux
+>>        rockchip: board: Add minimal generic RK3566/RK3568 board
+>>        net: dwc_eth_qos: Drop unused rx_pkt from eqos_priv
+>>        net: dwc_eth_qos: Return error code when start fails
+>>        net: dwc_eth_qos: Stop spam of RX packet not available message
+>>        net: dwc_eth_qos: Add glue driver for GMAC on Rockchip RK3568
+>>        net: dwc_eth_qos_rockchip: Add support for RK3588
+>>        configs: rockchip: Enable ethernet driver on RK356x boards
+>>        configs: rockchip: Enable ethernet driver on RK3588 boards
+>>        power: pmic: rk8xx: Use sysreset implementation of the poweroff command
+>>        rockchip: rk356x: Enable poweroff command
+>>        power: pmic: rk8xx: Fix power-on source check in SPL
+>>        rockchip: rk356x-u-boot: Add bootph-all to i2c0_xfer pinctrl node
+>>
+>> Joseph Chen (1):
+>>        regulator: rk8xx: Return correct voltage for buck converters
+>>
+>> Manoj Sai (4):
+>>        spl: fit: support for booting a GZIP-compressed U-boot binary
+>>        spl: fit: support for booting a LZMA-compressed U-boot binary
+>>        rockchip: Add support to generate GZIP compressed U-boot binary
+>>        rockchip: Add support to generate LZMA compressed U-boot binary
+>>
+>> Massimo Pegorer (3):
+>>        rockchip: Kconfig: Enable external TPL binary for rk3308
+>>        doc: rockchip: Update and improve info on rk3308, TPL and TF-A
+>>        configs: rockchip: add DOS_PARTITION to RK3308 boards defconfig
+>>
+>> shengfei Xu (1):
+>>        regulator: rk8xx: Return correct voltage for switchout converters
+>>
+>>   arch/arm/dts/Makefile                              |   1 +
+>>   arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi         |  19 +
+>>   arch/arm/dts/rk3568-bpi-r2-pro.dts                 | 852 +++++++++++++++++++++
+>>   arch/arm/dts/rk3568-generic-u-boot.dtsi            |  14 +
+>>   arch/arm/dts/rk3568-generic.dts                    |  38 +
+>>   arch/arm/dts/rk3568-nanopi-r5c-u-boot.dtsi         |   4 +
+>>   arch/arm/dts/rk3568-nanopi-r5c.dts                 |   2 +-
+>>   arch/arm/dts/rk3568-nanopi-r5s-u-boot.dtsi         |  10 +-
+>>   arch/arm/dts/rk356x-u-boot.dtsi                    |   8 +
+>>   arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi   |   1 -
+>>   arch/arm/dts/rk3588-edgeble-neu6a.dtsi             |   1 -
+>>   arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi   |   6 -
+>>   arch/arm/dts/rk3588-edgeble-neu6b-io.dts           |  66 ++
+>>   arch/arm/dts/rk3588-edgeble-neu6b.dtsi             | 359 ++++++++-
+>>   arch/arm/dts/rk3588-evb1-v10.dts                   | 720 ++++++++++++++++-
+>>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi            | 142 ++--
+>>   arch/arm/dts/rk3588-rock-5b.dts                    | 448 ++++++++++-
+>>   arch/arm/dts/rk3588.dtsi                           | 215 ++++++
+>>   arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi           |  12 -
+>>   arch/arm/dts/rk3588s-rock-5a.dts                   | 665 +++++++++++++++-
+>>   arch/arm/dts/rk3588s-u-boot.dtsi                   | 162 ----
+>>   arch/arm/dts/rk3588s.dtsi                          | 367 +++++++++
+>>   arch/arm/dts/rockchip-u-boot.dtsi                  |  11 +
+>>   arch/arm/mach-rockchip/Kconfig                     |   3 +-
+>>   board/rockchip/evb_rk3568/MAINTAINERS              |  14 +
+>>   common/spl/spl_fit.c                               |  20 +-
+>>   configs/bpi-r2-pro-rk3568_defconfig                |  93 +++
+>>   configs/evb-rk3308_defconfig                       |   3 +-
+>>   configs/evb-rk3568_defconfig                       |   6 +-
+>>   configs/evb-rk3588_defconfig                       |   5 +-
+>>   configs/generic-rk3568_defconfig                   |  64 ++
+>>   configs/lubancat-2-rk3568_defconfig                |   3 +
+>>   configs/nanopi-r5c-rk3568_defconfig                |  18 +-
+>>   configs/nanopi-r5s-rk3568_defconfig                |  22 +-
+>>   configs/neu6a-io-rk3588_defconfig                  |   2 -
+>>   configs/neu6b-io-rk3588_defconfig                  |   2 -
+>>   configs/odroid-m1-rk3568_defconfig                 |   3 +
+>>   configs/quartz64-a-rk3566_defconfig                |   4 +
+>>   configs/quartz64-b-rk3566_defconfig                |   4 +
+>>   configs/radxa-cm3-io-rk3566_defconfig              |   6 +-
+>>   configs/roc-cc-rk3308_defconfig                    |   3 +-
+>>   configs/rock-3a-rk3568_defconfig                   |   6 +-
+>>   configs/rock-pi-s-rk3308_defconfig                 |   5 +-
+>>   configs/rock5a-rk3588s_defconfig                   |   5 +-
+>>   configs/rock5b-rk3588_defconfig                    |   4 +-
+>>   configs/soquartz-blade-rk3566_defconfig            |   3 +
+>>   configs/soquartz-cm4-rk3566_defconfig              |   3 +
+>>   configs/soquartz-model-a-rk3566_defconfig          |   4 +
+>>   doc/README.rockchip                                |  10 +-
+>>   doc/board/rockchip/rockchip.rst                    |  45 +-
+>>   drivers/misc/Kconfig                               |   9 +
+>>   drivers/misc/Makefile                              |   1 +
+>>   drivers/misc/rockchip-io-domain.c                  | 167 ++++
+>>   drivers/net/Kconfig                                |   8 +
+>>   drivers/net/Makefile                               |   1 +
+>>   drivers/net/dwc_eth_qos.c                          |  33 +-
+>>   drivers/net/dwc_eth_qos.h                          |   3 +-
+>>   drivers/net/dwc_eth_qos_rockchip.c                 | 531 +++++++++++++
+>>   drivers/pci/pcie_dw_rockchip.c                     |  58 +-
+>>   drivers/phy/rockchip/phy-rockchip-naneng-combphy.c |   6 +
+>>   drivers/phy/rockchip/phy-rockchip-snps-pcie3.c     | 230 ++++--
+>>   drivers/power/pmic/Kconfig                         |   1 +
+>>   drivers/power/pmic/rk8xx.c                         |  20 +-
+>>   drivers/power/regulator/regulator-uclass.c         |  18 +-
+>>   drivers/power/regulator/rk8xx.c                    |  95 ++-
+>>   include/configs/rk3308_common.h                    |   4 +-
+>>   include/dt-bindings/ata/ahci.h                     |  20 +
+>>   include/power/regulator.h                          |   1 +
+>>   include/spl.h                                      |  10 +
+>>   69 files changed, 5227 insertions(+), 472 deletions(-)
+>>   create mode 100644 arch/arm/dts/rk3568-bpi-r2-pro-u-boot.dtsi
+>>   create mode 100644 arch/arm/dts/rk3568-bpi-r2-pro.dts
+>>   create mode 100644 arch/arm/dts/rk3568-generic-u-boot.dtsi
+>>   create mode 100644 arch/arm/dts/rk3568-generic.dts
+>>   create mode 100644 configs/bpi-r2-pro-rk3568_defconfig
+>>   create mode 100644 configs/generic-rk3568_defconfig
+>>   create mode 100644 drivers/misc/rockchip-io-domain.c
+>>   create mode 100644 drivers/net/dwc_eth_qos_rockchip.c
+>>   create mode 100644 include/dt-bindings/ata/ahci.h
