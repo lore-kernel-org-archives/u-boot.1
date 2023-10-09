@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE0A3CD612A
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 19:22:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFA2CCD612E
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 19:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4F4A864A0;
-	Mon,  9 Oct 2023 21:22:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 20513864A0;
+	Mon,  9 Oct 2023 21:41:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eqQMaJfx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ez66Um6Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E64B0864A9; Mon,  9 Oct 2023 21:22:41 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id ED56A864A6; Mon,  9 Oct 2023 21:41:26 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B646C86489
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 21:22:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DF8A086489
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 21:41:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-9b95622c620so897959566b.0
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 12:22:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-534659061afso8169607a12.3
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 12:41:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696879359; x=1697484159; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1696880484; x=1697485284; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W213PjLTqM3JEmBmT6cQ0NV691A2RnRzmI4p6V+/cyA=;
- b=eqQMaJfxwyHI3P6qMu7kedvrXHFLzPai4t49yRd6aizixOvoI8nclKXwd46MESEv6S
- 4MsnsNxJkh+N/lhC16KSVix8p9EFhxGgX7fN3eCwULBfcmv3MG59By+bkmdMGn0Qf+wr
- 59LXHJswyptfJjKc5L3lYzISBvbcfpSBF7N/4=
+ bh=QNiLXui5dwkhiHEQzQKi+HBOC0K0BFXTe/9eC14kpEs=;
+ b=Ez66Um6YrlKz77sPlmNeEJn5TSl5IwS8/Gwa8diDxaOufDDgvM2GH8QAsd/plfdkVD
+ o+IWyhrUv594hFtE7tXuTAvRLnL+wRAv4krk/GsJb5Y5veRfzSNf3t0Yk3v7WzpayQrI
+ nbwHUFi8xaonVPoMq4uaB748/q/PW24gq3Ggq4t7LAy4tHglYEqEANkHn44940GwW3nK
+ YEKpi7tgZ0JFjmnfEK4tkEXgVhhMTAHiSv1hZOWb43Zih7pI40NvybxQUDZ2GN6dpluA
+ mPiHB4g5mvDk1wGABkKUAQjRvV1A+6DWORocPND7iugZn5x65M33d304hrtyQmglYFOq
+ qGWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696879359; x=1697484159;
+ d=1e100.net; s=20230601; t=1696880484; x=1697485284;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=W213PjLTqM3JEmBmT6cQ0NV691A2RnRzmI4p6V+/cyA=;
- b=Z6i5OEWNIhr78XoDkeJP0DxHeKF/qbEca0MD0e8cEeC7s+IFthwhUKuJzmP6Gcwhuv
- NH7r+4PL66QO20MFvc9ifB2jL1IssAoQAcNDBI4CKAYcmeTWiWHvGSRaQsY/AIA2SWe4
- PQfRHJmSAT56Ukdqgl5j2i4hOjnlPz1YfqGcOttue1hzq2gcAqtRgTsGdkpzJST5dYLN
- qSyMtlAS4qxft50YmkNNEZIUcoFbhSiIzbs5J4VPNYvXd4UiS7BxsDcLMv+4B8uv6sAT
- l1FMOK7Dj+4AyNtN8DasO2HnrNk+vEe5QRewHKk1hS/ltsrKWgHpSXUWvxrhK+pVGbYG
- a8rg==
-X-Gm-Message-State: AOJu0Yy9IrE/7ZZ1p+kZ70Q8tsahfimlpPkA+gGeur343AnNihlwU+xP
- VzuaPGO316IggQOaK17yEEo0mULuu3NSA4geJSzEHA==
-X-Google-Smtp-Source: AGHT+IHc7jcdlWh8LiRicdltTnLDX2OAGb0AbRSSrZm/5DGfpUC/nMASnv47R9hAghm2qceVMSwbZySZxRl5RqG6+zE=
-X-Received: by 2002:a17:906:3012:b0:9ae:4054:5d2a with SMTP id
- 18-20020a170906301200b009ae40545d2amr14184483ejz.16.1696879358971; Mon, 09
- Oct 2023 12:22:38 -0700 (PDT)
+ bh=QNiLXui5dwkhiHEQzQKi+HBOC0K0BFXTe/9eC14kpEs=;
+ b=sFcgXhjaHpkacZ3G4bZK+TmfqXuQodPVtC/ib0e3gDr86SttsBJ9C10xsQAA4Ojsrk
+ qvmWYEow5yzSVpP1Qny3tUeOYEnjFTZqR4nAvRLXqOOL50+pPb6ByKobFJ09uO/KInsc
+ fJSQOGsVtLs7JducFUi92LhusmZavL7PtFzAoVgn0Rf7RPn14UblmE2jM/CgUT0jahu3
+ jzz4UloEAo2JnH9/s+57P9sSxwgJDg6AUcNYUJJ1s1XiVQgu/ni/hIWWlaVtVrjeaWvp
+ dsQn+0ZHFOz6RgHoEKFCx7DCsmLcdR56RuzZTQPRlmALzIcIF6ePmJ6vs0qR3aOTuBSN
+ 3udA==
+X-Gm-Message-State: AOJu0Yycii8wCCWkBtF3KERjCXkhMBb1sxveSucQfIghUoSLeWi/fj/5
+ Vq5j/3PWgjVKxo+zivFgDcHACb18bmtzRQuxX1gcsw==
+X-Google-Smtp-Source: AGHT+IE+XC0i9zY8dpxqUzwZq4+8eL28SZL8IvwoSwV1f7d0O46u3VD8BrSQcaUVxM9SeyOVAVUFuYr/IeH+FDFd310=
+X-Received: by 2002:aa7:c607:0:b0:530:7abf:3a84 with SMTP id
+ h7-20020aa7c607000000b005307abf3a84mr13506565edq.25.1696880484403; Mon, 09
+ Oct 2023 12:41:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230926194242.2732127-1-sjg@chromium.org>
-In-Reply-To: <20230926194242.2732127-1-sjg@chromium.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Oct 2023 13:22:21 -0600
-Message-ID: <CAPnjgZ1WgOB08C32PWdhagP5CRuBou8Z0ZPfxdAmRKD5uxKQJw@mail.gmail.com>
-Subject: Re: [PATCH v7 1/2] schemas: memory: Add ECC properties
-To: devicetree@vger.kernel.org
-Cc: Mark Rutland <mark.rutland@arm.com>, Rob Herring <robh@kernel.org>, 
- Lean Sheng Tan <sheng.tan@9elements.com>, lkml <linux-kernel@vger.kernel.org>, 
- Dhaval Sharma <dhaval@rivosinc.com>,
- Maximilian Brune <maximilian.brune@9elements.com>, 
- Yunhui Cui <cuiyunhui@bytedance.com>, Guo Dong <guo.dong@intel.com>, 
- Tom Rini <trini@konsulko.com>, ron minnich <rminnich@gmail.com>,
- Gua Guo <gua.guo@intel.com>, 
- Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
- U-Boot Mailing List <u-boot@lists.denx.de>, Ard Biesheuvel <ardb@kernel.org>
+References: <20231004112722.416877-1-sughosh.ganu@linaro.org>
+ <20231004112722.416877-4-sughosh.ganu@linaro.org>
+ <CAPnjgZ0_8FqJEarNvE6RN218PJWUGu1W0_f3iVjzBTibpQ1KFg@mail.gmail.com>
+ <CADg8p97Xpc6MVs+oviNZ1NnKq4cvAuntb1HpO4K0PnJ7DULj9Q@mail.gmail.com>
+ <CAPnjgZ0HocWeW9eNtXXjVPAyL1bu4YU=CE=iSKsXN5hg7u8Ysw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0HocWeW9eNtXXjVPAyL1bu4YU=CE=iSKsXN5hg7u8Ysw@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 10 Oct 2023 01:11:13 +0530
+Message-ID: <CADg8p97YLcGQk50aBwgpRnKc4GzM-rtY=2DzWZYGy9qx95r5hw@mail.gmail.com>
+Subject: Re: [PATCH 3/5] binman: capsule: Use dumped capsule header contents
+ for verification
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,67 +93,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rob,
+hi Simon,
 
-On Tue, 26 Sept 2023 at 13:42, Simon Glass <sjg@chromium.org> wrote:
+On Mon, 9 Oct 2023 at 23:27, Simon Glass <sjg@chromium.org> wrote:
 >
-> Some memories provide ECC detection and/or correction. For software which
-> wants to check memory, it is helpful to see which regions provide this
-> feature.
+> Hi Sughosh,
 >
-> Add this as a property of the /memory nodes, since it presumably follows
-> the hardware-level memory system.
+> On Mon, 9 Oct 2023 at 01:46, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> >
+> > hi Simon,
+> >
+> > On Sun, 8 Oct 2023 at 04:41, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Sughosh,
+> > >
+> > > On Wed, 4 Oct 2023 at 05:27, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > >
+> > > > The various fields of a generated capsule are currently verified
+> > > > through hard-coded offsets. Use the dump-capsule feature for dumping
+> > > > the capsule header contents and use those for capsule verification.
+> > > >
+> > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > ---
+> > > >  tools/binman/ftest.py | 95 ++++++++++++++++++++++++-------------------
+> > > >  1 file changed, 54 insertions(+), 41 deletions(-)
+> > >
+> > > This looks good apart from a few nits below. However, the tests fail for me.
+> >
+> > Can you please specify which tests fail, and the way to reproduce the
+> > failures? I ran the tests before sending the patches, and they ran
+> > fine, including the coverage which is 100%. Ci too did not complain.
 >
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> Sure, for example:
 >
-> Changes in v7:
-> - Drop unnecessary |
-> - Add a blank line between properties
+> $ binman test testCapsuleGen
+> ======================== Running binman tests ========================
+> /usr/lib/python3.10/os.py:1030: RuntimeWarning: line buffering (buffering=1) isn't supported in binary mode, the default buffer size will be used
+>   return io.open(fd, mode, buffering, encoding, *args, **kwargs)
+> /usr/lib/python3.10/os.py:1030: RuntimeWarning: line buffering (buffering=1) isn't supported in binary mode, the default buffer size will be used
+>   return io.open(fd, mode, buffering, encoding, *args, **kwargs)
+> F
+> ======================================================================
+> FAIL: binman.ftest.TestFunctional.testCapsuleGen (subunit.RemotedTestCase)
+> binman.ftest.TestFunctional.testCapsuleGen
+> ----------------------------------------------------------------------
+> testtools.testresult.real._StringException: Traceback (most recent call last):
+> AssertionError: '6DCBD5ED-E82D-4C44-BDA1-7194199AD92A' != []
 >
-> Changes in v6:
-> - Use a number of bits instead of a string property
-> - Fix inidcates typo
 >
-> Changes in v5:
-> - Redo to make this property specific to ECC
-> - Provide properties both for detection and correction
+> ----------------------------------------------------------------------
+> Ran 1 test in 0.147s
 >
-> Changes in v3:
-> - Add new patch to update the /memory nodes
->
->  dtschema/schemas/memory.yaml | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->
-> diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
-> index 1d74410..b3bf3c9 100644
-> --- a/dtschema/schemas/memory.yaml
-> +++ b/dtschema/schemas/memory.yaml
-> @@ -35,6 +35,19 @@ patternProperties:
->            For the purpose of identification, each NUMA node is associated with
->            a unique token known as a node id.
->
-> +      ecc-detection-bits:
-> +        default: 0
-> +        description: |
-> +          If present, this indicates the number of bits of memory error which
-> +          can be detected and reported by the Error-Correction Code (ECC) memory
-> +          subsystem (typically 0, 1 or 2).
-> +
-> +      ecc-correction-bits:
-> +        default: 0
-> +        description: |
-> +          If present, this indicates the number of bits of memory error which
-> +          can be corrected by the Error-Correction Code (ECC) memory subsystem
-> +          (typically 0, 1 or 2).
->
->      required:
->        - device_type
-> --
-> 2.42.0.515.g380fc7ccd1-goog
->
+> FAILED (failures=1)
 
-What is the status of this patch, please?
+That is interesting. When I run the tests, they run just fine. I had
+tested them before sending the patches. For e.g.
 
-Regards,
-Simon
+./tools/binman/binman test testCapsuleGen
+======================== Running binman tests ========================
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.375s
+
+OK
+
+-sughosh
+
+>
+>
+> >
+> > >
+> > > >
+> > > > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> > > > index 8e419645a6..2b8871ab7e 100644
+> > > > --- a/tools/binman/ftest.py
+> > > > +++ b/tools/binman/ftest.py
+> > > > @@ -121,9 +121,11 @@ COMP_BINTOOLS = ['bzip2', 'gzip', 'lz4', 'lzma_alone', 'lzop', 'xz', 'zstd']
+> > > >  TEE_ADDR = 0x5678
+> > > >
+> > > >  # Firmware Management Protocol(FMP) GUID
+> > > > -FW_MGMT_GUID = 'edd5cb6d2de8444cbda17194199ad92a'
+> > > > +FW_MGMT_GUID = '6DCBD5ED-E82D-4C44-BDA1-7194199AD92A'
+> > > >  # Image GUID specified in the DTS
+> > > > -CAPSULE_IMAGE_GUID = '52cfd7092007104791d108469b7fe9c8'
+> > > > +CAPSULE_IMAGE_GUID = '09D7CF52-0720-4710-91D1-08469B7FE9C8'
+> > > > +# Windows cert GUID
+> > > > +WIN_CERT_TYPE_EFI_GUID = '4AAFD29D-68DF-49EE-8AA9-347D375665A7'
+> > >
+> > > Please use lower-case hex
+> >
+> > Okay
+> >
+> > >
+> > > >
+> > > >  class TestFunctional(unittest.TestCase):
+> > > >      """Functional tests for binman
+> > > > @@ -7223,52 +7225,63 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+> > > >          self.assertRegex(err,
+> > > >                           "Image 'image'.*missing bintools.*: bootgen")
+> > > >
+> > > > +    def _GetCapsuleHeaders(self, data):
+> > >
+> > > This should have a function comment so it is clear what it is doing, returning.
+> >
+> > Will add
+> >
+> > -sughosh
+> >
+> > >
+> > > > +        capsule_file = os.path.join(self._indir, 'test.capsule')
+> > > > +        tools.write_file(capsule_file, data)
+> > > > +
+> > > > +        out = tools.run('mkeficapsule', '--dump-capsule', capsule_file)
+> > > > +        lines = out.splitlines()
+> > > > +
+> > > > +        re_line = re.compile(r'^([^:\-\t]*)(?:\t*\s*:\s*(.*))?$')
+> > > > +        vals = collections.defaultdict(list)
+> > > > +        for line in lines:
+> > > > +            mat = re_line.match(line)
+> > > > +            if mat:
+> > > > +                vals[mat.group(1)] = mat.group(2)
+> > > > +
+> > > > +        return vals
+> > > > +
+> > > [..]
+> > >
+> > > Regards,
+> > > Simon
+>
+> Regards,
+> SImon
