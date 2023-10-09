@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C7DE95A96
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 13:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098C4E95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 13:16:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2EF7F864D4;
-	Mon,  9 Oct 2023 15:15:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1B9CE86C00;
+	Mon,  9 Oct 2023 15:15:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vdrw0GLH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ETra2odk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A602D864A7; Mon,  9 Oct 2023 15:15:49 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id A7E2E86C58; Mon,  9 Oct 2023 15:15:51 +0200 (CEST)
+Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
+ [IPv6:2607:f8b0:4864:20::429])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C9A1864A6
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 15:15:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA62B86B1B
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 15:15:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-690d935dbc2so888105b3a.1
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 06:15:46 -0700 (PDT)
+Received: by mail-pf1-x429.google.com with SMTP id
+ d2e1a72fcca58-690d935dbc2so888112b3a.1
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 06:15:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696857344; x=1697462144; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jbtNkGW6W6rxKbzuaYUzragRS4T83AFRZg/3b47f4PY=;
- b=Vdrw0GLHrQgEkV5rcs7cfpcJRnHfizTlYJXrMzsU90HiJcJ9yI3h5lbf4bDOTpYDSf
- ijo6Tu/0p8hIgzD4SFZmqV90V/Ig3sxBZw8gFT3Ncf8qmtiy7nvm8XawlIJZ/f63KQp3
- xjkT9wMgSoFlA3+I4hfJYUFJCqL0g+xk9Q342MD82mEgnqaf1pmMwXdvmM+8F9Ixkzat
- hDp03XgsbAD9tDxuF8yTFZT/tUqIVJ1ZWMKmyjk0ETEUJqi28/EtYEw05RxlYzHHY9uz
- ivGfR4sA3PpCdziwSLUVTESKFy45CDYN5qHWwhfxbPiWGImRYxEZ80Nkc+H/4hCuYf9e
- +6Bw==
+ d=gmail.com; s=20230601; t=1696857347; x=1697462147; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IOwCfB25mOg7eyu/t+liiyNXmoKvX+8TJ4yix28N+hw=;
+ b=ETra2odkwdNFcVc54KS6qpKqGF40ed+RpRCpiAnscjJOB7CfnSA4OXalTNXBCDSBc+
+ GTVvOG8Zg0NpUyKg7V7NANaqvYrl2g4BCx6efiwhdnBx+NJJ74oyRX6lQipPf6Nl8xRl
+ /UaqTrFag4DVdosSxcXmmPTKy+eTa0oMEbCRGmc/fraQNxCCTfALDzX9xRXgat6YCgqH
+ /0MbopcuXso1GW0pWdO4XKf+w3//BFyB12zwVIR94Dy8YP/nAHqzHW4+pXgWQGmbyTsg
+ nB3pmZk5a3PNv3O+K6yWRqRwnEL6ZTGHns7Hs93c5BcNodaLp6HdHlCC/aJ2fkvAsps2
+ wLuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696857344; x=1697462144;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jbtNkGW6W6rxKbzuaYUzragRS4T83AFRZg/3b47f4PY=;
- b=qsQ7zl8cmBSw1njdC77xp0vUopQPvmp+RpHH25NREhDkmFTfar3wKr4xxVExecCsWt
- tn4FsYCj31fTHhHwjqeO5mUnNCQRr4FdXQLnwcdfzWQDizAZs1mGGVsYJBEKcIEwrqK9
- /EavgRbHeRwKht4TdZopEdqszt4jlsGGOOaOuQu9EFN+i4c1FpnLUNNz40jPSMx64U5x
- MDNnYegC0A6e2YweDmmjVSVkLVhWNJihRQuunva4Mhz/CvpSI92/IVRNdQ6iqINe/fcs
- 3zBsmBkNlCKwzlDAZv38Vm8jgK5W8QEPr5QPp7a9rNZz0Pzhg8fbnnvmTtHj4W/2zK7a
- X8tg==
-X-Gm-Message-State: AOJu0YzJYSWUXlFhu8j4cEkme47doMqS1KllPUNbfC6JzkjnVw9d53VC
- bpsTa/dPsmCgmoNVcXyo4nBDx5Dbeu4=
-X-Google-Smtp-Source: AGHT+IGyZLifpihXKFYiE81AfzGDE8GE3cJ7l0ummrGvAbKHTE3rJgX9TDPQoVCc3DKdSCLqUMgOZA==
-X-Received: by 2002:a17:902:e74b:b0:1c7:1eed:10f2 with SMTP id
- p11-20020a170902e74b00b001c71eed10f2mr17632770plf.2.1696857344489; 
- Mon, 09 Oct 2023 06:15:44 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696857347; x=1697462147;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=IOwCfB25mOg7eyu/t+liiyNXmoKvX+8TJ4yix28N+hw=;
+ b=LoagPusMy1/8bgTXdqmwa/3lr8nCXmUsw0AM7ONgdIAVLr95YD7SSVGe4T8895QILk
+ ZguTHsAFS7k/kjQS8Bc/RPv32k72X60w2zdGwKVWaCFv1XBlbQybomI0481ZNiXqh71e
+ 1k4cuBzDBUBeAuZQxAiw0MpH0/+Hqmf2YYH40/dSC6z1WzFL2agjH1oB9SHRbzjraEUf
+ Xl2pkrW71bftDp7tQ+gm80pH8OuFxZz0kn9PNdM1AqgG5zXD5tlkwteRcNkql1PEWVN6
+ OBj9yIklppLmx0kbQhEB7wyC6xjHhMUh4En0KXcqxdG2gbUrHhrie09yZsTcJjnVRQds
+ Z4gA==
+X-Gm-Message-State: AOJu0Yz1Xk/py6oOr9fs9znqlBY6VgpyaI5i/Kc4HcjVB64Lfvo6cOv3
+ jmX85mqknS+BqXndk74Bbz6t4J1Io9A=
+X-Google-Smtp-Source: AGHT+IFhSPPdPqYIVhDvbBnP+U+KNkDr3PfCloOtCLuNZ5LYYo4XOS4LazRJe097eQwZVUUOjlMQEQ==
+X-Received: by 2002:a05:6a21:3394:b0:163:ab09:193e with SMTP id
+ yy20-20020a056a21339400b00163ab09193emr17733632pzb.1.1696857347101; 
+ Mon, 09 Oct 2023 06:15:47 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:22d5:b586:66b8:6e03])
  by smtp.gmail.com with ESMTPSA id
- r10-20020a170902be0a00b001c8a0879805sm4743965pls.206.2023.10.09.06.15.42
+ r10-20020a170902be0a00b001c8a0879805sm4743965pls.206.2023.10.09.06.15.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 06:15:43 -0700 (PDT)
+ Mon, 09 Oct 2023 06:15:46 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: marex@denx.de
 Cc: sbabic@denx.de,
 	u-boot@lists.denx.de,
 	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v3 1/3] usb: ehci: mxs: Fix the USB node pointer retrieval
-Date: Mon,  9 Oct 2023 10:15:34 -0300
-Message-Id: <20231009131536.3475878-1-festevam@gmail.com>
+Subject: [PATCH v3 2/3] usb: ehci: mxs: Use regulator_set_enable_if_allowed()
+Date: Mon,  9 Oct 2023 10:15:35 -0300
+Message-Id: <20231009131536.3475878-2-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231009131536.3475878-1-festevam@gmail.com>
+References: <20231009131536.3475878-1-festevam@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,12 +95,20 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-Use dev_ofnode() to retrieve the USB node pointer from the udevice
-structure.
+Since commit 4fcba5d556b4 ("regulator: implement basic reference
+counter") the return value of regulator_set_enable() may be EALREADY or
+EBUSY for fixed/GPIO regulators.
 
-This fixes the following build error:
+Switch to using the more relaxed regulator_set_enable_if_allowed() to
+continue if regulator already was enabled or disabled.
 
-drivers/usb/host/ehci-mxs.c:143:38: error: 'struct udevice' has no member named 'node_'
+This fixes the following error when running the 'ums' command:
+
+=> ums 0 mmc 0
+UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0xece000
+Error enabling VBUS supply
+g_dnl_register: failed!, error: -114
+g_dnl_register failed
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 Reviewed-by: Marek Vasut <marex@denx.de>
@@ -107,42 +118,35 @@ Changes since v2:
 Changes since v1:
 - Only collected Marek's Reviewed-by tag.
 
- drivers/usb/host/ehci-mxs.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
+ drivers/usb/host/ehci-mxs.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/usb/host/ehci-mxs.c b/drivers/usb/host/ehci-mxs.c
-index 147b2fa145d6..092c79fd4bc5 100644
+index 092c79fd4bc5..ddf7cc2d00a7 100644
 --- a/drivers/usb/host/ehci-mxs.c
 +++ b/drivers/usb/host/ehci-mxs.c
-@@ -136,11 +136,12 @@ static int ehci_usb_ofdata_to_platdata(struct udevice *dev)
- 	struct usb_plat *plat = dev_get_plat(dev);
- 	struct ehci_mxs_port *port = &priv->port;
- 	u32 phandle, phy_reg, clk_reg, clk_id;
-+	ofnode np = dev_ofnode(dev);
- 	ofnode phy_node, clk_node;
- 	const char *mode;
- 	int ret;
+@@ -236,9 +236,9 @@ static int ehci_usb_probe(struct udevice *dev)
+ 		debug("%s: No vbus supply\n", dev->name);
  
--	mode = ofnode_read_string(dev->node_, "dr_mode");
-+	mode = ofnode_read_string(np, "dr_mode");
- 	if (mode) {
- 		if (strcmp(mode, "peripheral") == 0)
- 			plat->init_type = USB_INIT_DEVICE;
-@@ -151,12 +152,12 @@ static int ehci_usb_ofdata_to_platdata(struct udevice *dev)
- 	}
+ 	if (!ret && priv->vbus_supply) {
+-		ret = regulator_set_enable(priv->vbus_supply,
+-					   (type == USB_INIT_DEVICE) ?
+-					   false : true);
++		ret = regulator_set_enable_if_allowed(priv->vbus_supply,
++						      (type == USB_INIT_DEVICE) ?
++						      false : true);
+ 		if (ret) {
+ 			puts("Error enabling VBUS supply\n");
+ 			return ret;
+@@ -265,7 +265,7 @@ static int ehci_usb_remove(struct udevice *dev)
  
- 	/* Read base address of the USB IP block */
--	ret = ofnode_read_u32(dev->node_, "reg", &port->usb_regs);
-+	ret = ofnode_read_u32(np, "reg", &port->usb_regs);
- 	if (ret)
- 		return ret;
- 
- 	/* Read base address of the USB PHY IP block */
--	ret = ofnode_read_u32(dev->node_, "fsl,usbphy", &phandle);
-+	ret = ofnode_read_u32(np, "fsl,usbphy", &phandle);
- 	if (ret)
- 		return ret;
- 
+ #if CONFIG_IS_ENABLED(DM_REGULATOR)
+ 	if (priv->vbus_supply) {
+-		ret = regulator_set_enable(priv->vbus_supply, false);
++		ret = regulator_set_enable_if_allowed(priv->vbus_supply, false);
+ 		if (ret) {
+ 			puts("Error disabling VBUS supply\n");
+ 			return ret;
 -- 
 2.34.1
 
