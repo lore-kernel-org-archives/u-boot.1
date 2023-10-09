@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C595FE95A8E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 10:14:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 467D7E95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 10:14:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36D4686B7E;
-	Mon,  9 Oct 2023 12:14:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C086D86B1B;
+	Mon,  9 Oct 2023 12:14:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="qaa8Meci";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZvKL7TwP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 771A186B8F; Mon,  9 Oct 2023 12:14:00 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::61d])
+ id B42AD8638B; Mon,  9 Oct 2023 12:14:32 +0200 (CEST)
+Received: from NAM02-SN1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02on20626.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7ea9::626])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38C828638B
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 12:13:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B38DA86C1E
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 12:14:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=NDXJINYTflNQKDW7k/PBMxbTGNiF4vPz0uuu40mDW7Pt0F1eeFUPBZ57aHvOfC061T+z/EuUMjcohPTWcgRTeLp1uyDRgRblCFvJQVvR3jX8I30QBjsp6RmAt5w8F8LTY1h3B7OUQ3UPGFSOiqOoNKC5VBGYc4J1oy4taDk3XkY9VU05FBP10zOlLr9mdHmL/9VpKLXIrLMBN+Taeb59xpZpy6svUbXySsdvtRK3kFlzGj8+q+AL8/W2VbPQb65uJea9HtFcWEKWZOQhAwsehpnmc5FDpsGk8xfLT7UUvzBf4mwdzVwFK0GDDrQECTpGxdMqWGRoWXg+J1c30ln3OQ==
+ b=iNYUhqtapZSNx/FiPix5MmNrKdVg0kWZC0yMDOITHUj/ZAr50tgdPkOyLrVMUQ4J2krUo6i5AA3wF8LkrlPsEt03QFDH0sUK62kprHHTuWWv/Ga6XH+1ll3MhOlAEoSmfOcAaNt/k3lHl6b22Xf1ny2kkyQy26/DQVbHsrLM5io8pc/+TtVIt99ZwGVKk3RDkfMQwoxfUf3ivZpKtqbkpARd+qOxV/z1NrE4NntFO9TNdPBFZvE6CnCR+8HwR+eopB/5ffvtMV8i7Zf70nXmV0Ay7EcpmMhArmSfVMw3GHSB0DbnhIqsYSrpGIpFbQHzwL6ZKUhCFhj23WCMjRoK7Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QwOGLY5tIsXNDGSZdSByJh8f9Ks9o4jxF+bAmJJ44Mg=;
- b=CxG3Fr7JGRgxiFI6arkudD9QzBm6k6TuD8Z50X7eyV663YWNnrVWNieLxcay4m19bNQl9CXGyiNlqQi09/L9awDpbSx5aZ8CYuuK2DxE+MD6pycZ4lMQf2+L7LhpQYbGjqo8K1Rvfcmttf7f0dy7o1KfXCxt0tpFo6TgTi5qGaEf/h50sKORugM2e47jPZvbFWzIOvOu7NuKDxk7H5Y9jrvHZp/KpFsc763unLSAe7cJRTiHijKnDbNt9cA++pg/+6zgAEeGdB0GzUAsT4svP2erQ71qQlAgAw6kY8HAxyzAoJPMjCl2bzQE/9n8mJ3Vyixqj242RnW4t9MTG1j97Q==
+ bh=YkIOSStxMrTAmzUxamY6hj7bGRpWs6tIrOkTNGZ1wWg=;
+ b=laVS9fsx9tjba0Ct7c66DK40scA9NhfS4a++i6yTlT9usRXtnNYnD8mIsylcbbie5nCEGVElWL8SB8NUctAMITrSHsgB6ckbZX7NVTbJJupNRlbXZEKnQRkXfPmWOYB728CV3cXR2OTh5wzi7L5jsxeP1yZlNpLYUAkYQZKHH2bRMHBIqorqEHp4zV/XhL9sBZzVSXYHXF5eQN/cpTFBhknS/1QeYFmQ3VAmlROWtpWchX5y+YDcgv9w6rrAJlnCC6IU+U6pz8DfzEUyI9aLug/eXpb1QoXCkv0T0VjsDEJh7kyBkfYOwYHMF/WMjqPHWdKyXs4uCgNDNBBavDEmRA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QwOGLY5tIsXNDGSZdSByJh8f9Ks9o4jxF+bAmJJ44Mg=;
- b=qaa8Meci1aWsHJyNq0pt+ztMsTy4DvAspNA3PpZohAqTbJqRM9+tfOnQOJinNAFszY4nn4AWVax6xw6lkZlRNE4YMRSLuidAMnMJjMOId5+vFHMUi0U9x1VLDKn9VTbbLsKiXTD5NouY8hAYvxp3Z1Vd8Jbhdi05aw0I+x0j3Fc=
-Received: from CY5PR13CA0073.namprd13.prod.outlook.com (2603:10b6:930:a::33)
- by SA1PR12MB6726.namprd12.prod.outlook.com (2603:10b6:806:255::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.43; Mon, 9 Oct
- 2023 10:13:53 +0000
-Received: from CY4PEPF0000EDD5.namprd03.prod.outlook.com
- (2603:10b6:930:a:cafe::4f) by CY5PR13CA0073.outlook.office365.com
- (2603:10b6:930:a::33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.20 via Frontend
- Transport; Mon, 9 Oct 2023 10:13:53 +0000
+ bh=YkIOSStxMrTAmzUxamY6hj7bGRpWs6tIrOkTNGZ1wWg=;
+ b=ZvKL7TwPyG43IujmFD6A5iWVED6fZZYVv1t2/suW0uQ9wE4QDym7cdkm7rCjdYy+3hoCyp5RiAFBK+n/MBm/0Qxte1TGSrrbwHVhgoOy6SneQjxvqG3NA08WLVqh62AeXGvSsEUy9rFOVDSvrTrWzHxCFD5r5nkqMI0A5p/APks=
+Received: from CY5P221CA0011.NAMP221.PROD.OUTLOOK.COM (2603:10b6:930:b::15) by
+ DM4PR12MB6494.namprd12.prod.outlook.com (2603:10b6:8:ba::19) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6863.38; Mon, 9 Oct 2023 10:14:26 +0000
+Received: from CY4PEPF0000EDD4.namprd03.prod.outlook.com
+ (2603:10b6:930:b:cafe::7d) by CY5P221CA0011.outlook.office365.com
+ (2603:10b6:930:b::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.37 via Frontend
+ Transport; Mon, 9 Oct 2023 10:14:25 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,25 +59,23 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EDD5.mail.protection.outlook.com (10.167.241.209) with Microsoft
+ CY4PEPF0000EDD4.mail.protection.outlook.com (10.167.241.208) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.21 via Frontend Transport; Mon, 9 Oct 2023 10:13:53 +0000
+ 15.20.6838.14 via Frontend Transport; Mon, 9 Oct 2023 10:14:25 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 9 Oct
- 2023 05:13:50 -0500
-Message-ID: <30af624f-6e72-494d-9ad6-97c87eb2c129@amd.com>
-Date: Mon, 9 Oct 2023 12:13:46 +0200
+ 2023 05:14:23 -0500
+Message-ID: <a0e42c5a-474f-4ec2-97a3-4cdb3dd780f0@amd.com>
+Date: Mon, 9 Oct 2023 12:14:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Do not use '_' in DT node names
+Subject: Re: [PATCH] Revert "clk: versal: Enable clock driver for Versal NET"
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, Radhey Shyam Pandey
- <radhey.shyam.pandey@amd.com>, Robert Hancock <robert.hancock@calian.com>, 
- Simon Glass <sjg@chromium.org>, Tanmay Shah <tanmay.shah@amd.com>
-References: <dd33d6cb0595ffedab117d477f4a3c9d9eb11715.1695808665.git.michal.simek@amd.com>
+CC: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+References: <c09276022db5f1b150679cc7a9f9583363ace2fb.1695808971.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -122,7 +120,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <dd33d6cb0595ffedab117d477f4a3c9d9eb11715.1695808665.git.michal.simek@amd.com>
+In-Reply-To: <c09276022db5f1b150679cc7a9f9583363ace2fb.1695808971.git.michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -130,26 +128,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD5:EE_|SA1PR12MB6726:EE_
-X-MS-Office365-Filtering-Correlation-Id: dd3a8874-a171-4391-7e3b-08dbc8b0708e
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD4:EE_|DM4PR12MB6494:EE_
+X-MS-Office365-Filtering-Correlation-Id: 79551b6c-b549-478d-95fd-08dbc8b08415
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: SnyDP4xr/U8G5RqnNXNXVM66cJZUyLZSrCQHoXNkWcg+RjPPNo/P1fiGFNr483ZueKuxQMc3aIg/RJNwGbSjAokqgIlL++TriFzO13+uo9gwXum8xF90ny/VBDWbouGPQW6A4KYqqSb2BWB3Ygx6KFYDnxhJVM7/I5xLe6QFfrE20DltsYzbXBbBGyR3PYvGq2GduilZdz+bK/WyG7j+Mp/d/ttLIcZ+v1LCJs/4zupJZSpaCbYQ0aciZzv2be/FWwyPmGqYndtYZiH8+bhpYfeF00MshAGus1IakkRet6Ja9gF/xCt1aNSYKqndXSio7FCzt1Ln7tHSakGUriLPnOgMxapPaIJpkARcsDcYmKVZHi+GpfaE/WTS5zYzn43WX4yeVSlP4z7e4m2qg3AJIWTAmTjYkYBNZI1L8Y8ilp/nPDN/z/4UCtvq7Y4HYCEJ4LvaSs0PCFStO0HLB8zhp68P+zfF4NxZF7cdVncc7WSHjGq3ajoauDd0OzHf8SM+KynPL67HF5BFPTuRTfbg/pEy9jQWvWfKT3losV/lcTPR4/4I4ax6XxBWl/Q9uvGcYo7MpKgo3VlKskv3sIKsqOOM5Eic3TITevh0Ppxk+FEl1eP8bd1Kx7NqqFphDZx++y517AKPmdRy2Vizpx22gXEX6TDBFgS1vAE+x0cGBNveRnE82sb9/1+0pVNXLmAekrSkxk6dsv92BpE7hhWTWQFVsBbxu67yahfVjMWoVk3IDcSoLkOYzc8/E2oDLvWpBcYNSNsCBb+lzwyw8a5RCiPspAfom9VokLUXn6xrBHM+CpStVaIQDGZkIr9Ne+Ch
+X-Microsoft-Antispam-Message-Info: BrFC0RM3Pmeh5Nj12MLGVuZb5SjbBakNBdGVwzvHVRxeJVT17kn9IT2++2e5VDaduttASHSW2oM4bepvIxGu4FNTV2uT2aQsXFEDcpCIxExbP9RPzx6UgzFz7jOaiFtexxUdbZQWfY180PbLcDCikiVh/a7qCltsJ0ChBmv8GGpCE2ErfejyMwLKE4EPCuBwvGB8G5ubvKCwcfgVaBmx+5wKJ1XnhOLSAF9HFWR0uKrCv0Z23TCBXkiQBPcp6lZM7auVg+vT9DtIClGhOAIQxOAkxINPS2NIIfXOtGmUHGYl+R4+4wxK2oYAPWU+TGQJ05cxsQXFOogM8uwHyDho+it+dUQowHMSZvTCFw9uehRSPEOR5QI+aP9MeIaRu8KGPAxZ5bzhCFHbPKfS52prIeXwy6zBe7/1z+2wdKk1tSsXEGyuuYwaZLnWaBFWMc7J/Ews5k0OFVBH4B7dGWp7/G+MKWzG9qE/iHFAjtLf+kud0uMUXjZrLUo2cXPpIOqxv00/CGU3V27dRoDGi0nDYKvhpWj/KD73BdEwGyj+dkmuP56v5GH9LMo2QHgfcuvxXzU5tYpneQ/ynuPEQnSromKK6riu3AAuSxuMsfEP0+h/RvMlZ3FG3OhmFdglWQLLE9qI+cyvykbbw98oAPSY5GXGPOjPdwUcouv6RBOYSr3CJ6a5Zkadutwi5E9wO7zJ3GW14GpK7mzEjzKViC5cteo0j+JLcpE+3wz/QodvtNbEtjz1CzT/pHOG5nrnwVRgpv2hZbaTCBlD8cT/ncCORol3tbSIi1R3bC7IuUJbux+FU80inooKZZ8z7R3uAnfv
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(346002)(376002)(396003)(39860400002)(136003)(230922051799003)(1800799009)(451199024)(82310400011)(64100799003)(186009)(36840700001)(40470700004)(46966006)(81166007)(31696002)(356005)(86362001)(36756003)(31686004)(40480700001)(82740400003)(2906002)(478600001)(8936002)(53546011)(44832011)(41300700001)(8676002)(4326008)(5660300002)(83380400001)(426003)(336012)(2616005)(6666004)(40460700003)(36860700001)(316002)(110136005)(70586007)(70206006)(54906003)(16576012)(26005)(47076005)(16526019)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(396003)(346002)(39860400002)(376002)(136003)(230922051799003)(82310400011)(64100799003)(451199024)(1800799009)(186009)(46966006)(40470700004)(36840700001)(81166007)(31696002)(356005)(86362001)(36756003)(31686004)(40480700001)(2906002)(82740400003)(478600001)(4744005)(5660300002)(41300700001)(8936002)(4326008)(8676002)(53546011)(6666004)(44832011)(83380400001)(426003)(336012)(2616005)(40460700003)(36860700001)(110136005)(70586007)(70206006)(54906003)(16576012)(316002)(16526019)(26005)(47076005)(43740500002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 10:13:53.0305 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd3a8874-a171-4391-7e3b-08dbc8b0708e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 10:14:25.7769 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 79551b6c-b549-478d-95fd-08dbc8b08415
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD5.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD4.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6726
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6494
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,217 +166,33 @@ X-Virus-Status: Clean
 
 
 
-On 9/27/23 11:57, Michal Simek wrote:
-> Using '_' is not recommended for node names. Use '-' instead.
-> Pretty much run seds below for node names.
-> s/heartbeat_led/heartbeat-led/
-> s/gtr_sel/gtr-sel/
-> s/zynqmp_ipi/zynqmp-ipi/
-> s/nvmem_firmware/nvmem-firmware/
-> s/soc_revision/soc-revision/
+On 9/27/23 12:02, Michal Simek wrote:
+> This partially reverts commit ff33227819f579ffb963e0dac6bc6a6566b89563.
+> 
+> Versal NET clock node should use "xlnx,versal-net-clk", "xlnx,versal-clk"
+> compatible string that's why it is not necessary to define Versal NET
+> specific compatible string if there is no any other change needed. It can
+> be get back if there is a need to differentiate clock support between
+> Versal and Versal NET.
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
->   arch/arm/dts/zynqmp-m-a2197-01-revA.dts | 8 ++++----
->   arch/arm/dts/zynqmp-m-a2197-02-revA.dts | 8 ++++----
->   arch/arm/dts/zynqmp-m-a2197-03-revA.dts | 8 ++++----
->   arch/arm/dts/zynqmp-p-a2197-00-revA.dts | 8 ++++----
->   arch/arm/dts/zynqmp-zcu208-revA.dts     | 2 +-
->   arch/arm/dts/zynqmp-zcu216-revA.dts     | 2 +-
->   arch/arm/dts/zynqmp.dtsi                | 6 +++---
->   7 files changed, 21 insertions(+), 21 deletions(-)
+>   drivers/clk/clk_versal.c | 1 -
+>   1 file changed, 1 deletion(-)
 > 
-> diff --git a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
-> index cfd5ba1aac63..25ef646c8466 100644
-> --- a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
-> +++ b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
-> @@ -363,25 +363,25 @@
->   				#gpio-cells = <2>;
->   				gpio-line-names = "sw4_1", "sw4_2", "sw4_3", "sw4_4",
->   						  "", "", "", "";
-> -				gtr_sel0 {
-> +				gtr-sel0 {
->   					gpio-hog;
->   					gpios = <0 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_1";
->   				};
-> -				gtr_sel1 {
-> +				gtr-sel1 {
->   					gpio-hog;
->   					gpios = <1 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_2";
->   				};
-> -				gtr_sel2 {
-> +				gtr-sel2 {
->   					gpio-hog;
->   					gpios = <2 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_3";
->   				};
-> -				gtr_sel3 {
-> +				gtr-sel3 {
->   					gpio-hog;
->   					gpios = <3 0>;
->   					input; /* FIXME add meaning */
-> diff --git a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
-> index 18e14389f85f..ece9e6914541 100644
-> --- a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
-> +++ b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
-> @@ -365,25 +365,25 @@
->   				#gpio-cells = <2>;
->   				gpio-line-names = "sw4_1", "sw4_2", "sw4_3", "sw4_4",
->   						  "", "", "", "";
-> -				gtr_sel0 {
-> +				gtr-sel0 {
->   					gpio-hog;
->   					gpios = <0 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_1";
->   				};
-> -				gtr_sel1 {
-> +				gtr-sel1 {
->   					gpio-hog;
->   					gpios = <1 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_2";
->   				};
-> -				gtr_sel2 {
-> +				gtr-sel2 {
->   					gpio-hog;
->   					gpios = <2 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_3";
->   				};
-> -				gtr_sel3 {
-> +				gtr-sel3 {
->   					gpio-hog;
->   					gpios = <3 0>;
->   					input; /* FIXME add meaning */
-> diff --git a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
-> index cd7654a9f7ed..7372968e5734 100644
-> --- a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
-> +++ b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
-> @@ -359,25 +359,25 @@
->   				#gpio-cells = <2>;
->   				gpio-line-names = "sw4_1", "sw4_2", "sw4_3", "sw4_4",
->   						  "", "", "", "";
-> -				gtr_sel0 {
-> +				gtr-sel0 {
->   					gpio-hog;
->   					gpios = <0 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_1";
->   				};
-> -				gtr_sel1 {
-> +				gtr-sel1 {
->   					gpio-hog;
->   					gpios = <1 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_2";
->   				};
-> -				gtr_sel2 {
-> +				gtr-sel2 {
->   					gpio-hog;
->   					gpios = <2 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_3";
->   				};
-> -				gtr_sel3 {
-> +				gtr-sel3 {
->   					gpio-hog;
->   					gpios = <3 0>;
->   					input; /* FIXME add meaning */
-> diff --git a/arch/arm/dts/zynqmp-p-a2197-00-revA.dts b/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
-> index 97b9cdf82ae7..c456c375ac80 100644
-> --- a/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
-> +++ b/arch/arm/dts/zynqmp-p-a2197-00-revA.dts
-> @@ -427,25 +427,25 @@
->   				#gpio-cells = <2>;
->   				gpio-line-names = "sw4_1", "sw4_2", "sw4_3", "sw4_4",
->   						  "", "", "", "";
-> -				gtr_sel0 {
-> +				gtr-sel0 {
->   					gpio-hog;
->   					gpios = <0 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_1";
->   				};
-> -				gtr_sel1 {
-> +				gtr-sel1 {
->   					gpio-hog;
->   					gpios = <1 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_2";
->   				};
-> -				gtr_sel2 {
-> +				gtr-sel2 {
->   					gpio-hog;
->   					gpios = <2 0>;
->   					input; /* FIXME add meaning */
->   					line-name = "sw4_3";
->   				};
-> -				gtr_sel3 {
-> +				gtr-sel3 {
->   					gpio-hog;
->   					gpios = <3 0>;
->   					input; /* FIXME add meaning */
-> diff --git a/arch/arm/dts/zynqmp-zcu208-revA.dts b/arch/arm/dts/zynqmp-zcu208-revA.dts
-> index d09e53f42fa8..22ad8d33a116 100644
-> --- a/arch/arm/dts/zynqmp-zcu208-revA.dts
-> +++ b/arch/arm/dts/zynqmp-zcu208-revA.dts
-> @@ -57,7 +57,7 @@
+> diff --git a/drivers/clk/clk_versal.c b/drivers/clk/clk_versal.c
+> index 2e004beca2f9..c473643603a4 100644
+> --- a/drivers/clk/clk_versal.c
+> +++ b/drivers/clk/clk_versal.c
+> @@ -773,7 +773,6 @@ static struct clk_ops versal_clk_ops = {
 >   
->   	leds {
->   		compatible = "gpio-leds";
-> -		heartbeat_led {
-> +		heartbeat-led {
->   			label = "heartbeat";
->   			gpios = <&gpio 23 GPIO_ACTIVE_HIGH>;
->   			linux,default-trigger = "heartbeat";
-> diff --git a/arch/arm/dts/zynqmp-zcu216-revA.dts b/arch/arm/dts/zynqmp-zcu216-revA.dts
-> index fd026347c25f..575ff5b1b77b 100644
-> --- a/arch/arm/dts/zynqmp-zcu216-revA.dts
-> +++ b/arch/arm/dts/zynqmp-zcu216-revA.dts
-> @@ -57,7 +57,7 @@
+>   static const struct udevice_id versal_clk_ids[] = {
+>   	{ .compatible = "xlnx,versal-clk" },
+> -	{ .compatible = "xlnx,versal-net-clk" },
+>   	{ }
+>   };
 >   
->   	leds {
->   		compatible = "gpio-leds";
-> -		heartbeat_led {
-> +		heartbeat-led {
->   			label = "heartbeat";
->   			gpios = <&gpio 23 GPIO_ACTIVE_HIGH>;
->   			linux,default-trigger = "heartbeat";
-> diff --git a/arch/arm/dts/zynqmp.dtsi b/arch/arm/dts/zynqmp.dtsi
-> index 30bd7b499603..f03c201caee9 100644
-> --- a/arch/arm/dts/zynqmp.dtsi
-> +++ b/arch/arm/dts/zynqmp.dtsi
-> @@ -136,7 +136,7 @@
->   		};
->   	};
->   
-> -	zynqmp_ipi: zynqmp_ipi {
-> +	zynqmp_ipi: zynqmp-ipi {
->   		bootph-all;
->   		compatible = "xlnx,zynqmp-ipi-mailbox";
->   		interrupt-parent = <&gic>;
-> @@ -206,12 +206,12 @@
->   				mbox-names = "tx", "rx";
->   			};
->   
-> -			nvmem_firmware {
-> +			nvmem-firmware {
->   				compatible = "xlnx,zynqmp-nvmem-fw";
->   				#address-cells = <1>;
->   				#size-cells = <1>;
->   
-> -				soc_revision: soc_revision@0 {
-> +				soc_revision: soc-revision@0 {
->   					reg = <0x0 0x4>;
->   				};
->   			};
 
 Applied.
 M
