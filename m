@@ -4,80 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03976C2BA1B
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 22:05:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0241EE81E18
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 23:15:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D603686D9C;
-	Tue, 10 Oct 2023 00:04:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D88E0864A7;
+	Tue, 10 Oct 2023 01:15:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q3/364d1";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FECE86D9D; Tue, 10 Oct 2023 00:04:47 +0200 (CEST)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1696893317;
+	bh=gWz6RzBG7dNOuY3asQQVeYsP9Bz4b//1KRGdya+JWBA=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=SXTuLnqHD+m9hhj5NRNt70c7qHOfzzmC+Lbj7OlQoO7V12on1PGSHMSDAS6Y7n/mb
+	 nGyNr4lRp70wGAM0YKZCgHULBf545sFLQgHBI6hh9cVOJlXahbi2+noVG8SDaNKE2W
+	 D7TlCwxvbhfH/ASMx+zzRd4BuA65ObtUv+rWCNOMes6+o9kyrR+nNEg7s/ZP38ZdZ1
+	 +CS001KGXsgW+rbPgbKwlm0AClyD1tbq0bEnkpFgiaHevjzTadGHbDdGcgbKyyjQlx
+	 zJxDVkz51FKmXfuAHmZOC75FhcQAWFy8Ev1fPKbojiBxVImOdLEsYd063liOf0E3mJ
+	 v8B4MnxSUnwBA==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81FD086D65
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 00:04:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-35135f69de2so16897605ab.2
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 15:04:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696889082; x=1697493882; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KzMuw4I+Nd8N8oi2Xxm8m0QPQBwYQL/tbGvCzQaub7A=;
- b=Q3/364d1x20nra6rk2XPuTTmSPG+0ji05WaJXxTmUPrS6M7tzZq+lPKFcPl0PGK1sH
- gVuj3bkKKl+y2MesioFOCCCnnkaZYumDHxsjBb3cNp9jaUj4fNQ6av3ie5ke8WGnriPw
- oG+b5kmWavhSPcuWK5g0kccuP9NtkSh+O5Exw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696889082; x=1697493882;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KzMuw4I+Nd8N8oi2Xxm8m0QPQBwYQL/tbGvCzQaub7A=;
- b=F1GVBOGMrPD19VP6s+eifd/BEEJws6j9oofvfUs3gGoVa6zf8aI00FGl2cn1sWc8Qt
- ppzJ6YFL2x4YelHeD9JS7/SvTBLu/aMjfXkzRnVmxFBFhiVGQBOgwgljCUf+lu5/do3d
- 5I9XDQlHczeSWk1DA5B5e36+3OvptyJ0yfCUt+AAGm4XatrnKdPG/BfznOQGHuEqEcqL
- x1L6K29b3M4BaAL+lnHCTjRC8cPK/flp63tGD3oKnws/gBQm3qp517b/ntkvfDVjMf6y
- Xy7ugfPMRncHg2JxZLej0+kjIpdV3FGiH85Ft40zZCoI6VfJwmxQKvgKE2CVVYVPq9dA
- Vy7A==
-X-Gm-Message-State: AOJu0YwuVUgzV11VWQn5NURRrfTHXNsoudNtABQ6Jm6cdOtZZX+mRQ4z
- 9POahXHIvE6kiQh6C4KR01BRaQ==
-X-Google-Smtp-Source: AGHT+IHvK9QConjcBvixojUyIyEr2xvgdQipUvlCIBgg0tv4RZCg9G9yvZ9PkNArpEDRXj4vHK+oAw==
-X-Received: by 2002:a05:6e02:1a2e:b0:351:4f0c:b95d with SMTP id
- g14-20020a056e021a2e00b003514f0cb95dmr20621948ile.22.1696889082165; 
- Mon, 09 Oct 2023 15:04:42 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:138c:cf57:c18d:20f5])
- by smtp.gmail.com with ESMTPSA id
- o3-20020a92d4c3000000b0034cd2c0afe8sm3164063ilm.56.2023.10.09.15.04.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 15:04:41 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: devicetree@vger.kernel.org
-Cc: linux-mtd@lists.infradead.org, Miquel Raynal <miquel.raynal@bootlin.com>,
- Michael Walle <mwalle@kernel.org>, Rob Herring <robh@kernel.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Conor Dooley <conor+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
- Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
-Subject: [PATCH v4 3/3] dt-bindings: mtd: binman-partitions: Add alignment
- properties
-Date: Mon,  9 Oct 2023 16:04:15 -0600
-Message-ID: <20231009220436.2164245-3-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.609.gbb76f46606-goog
-In-Reply-To: <20231009220436.2164245-1-sjg@chromium.org>
-References: <20231009220436.2164245-1-sjg@chromium.org>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id BBEDF86459;
+ Tue, 10 Oct 2023 01:15:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1696893313;
+ bh=gWz6RzBG7dNOuY3asQQVeYsP9Bz4b//1KRGdya+JWBA=;
+ h=From:To:Cc:Subject:Date:From;
+ b=KmDCOItMzgFLtLT5oT0XsOdfTPVsQbADZsNMjTpVlZ4wuujGl9H7QAxXGqUTDu++7
+ Dt6Yd4KMzB8Ucz+aBrjB9zBjY/0lAwW9oUO4D+jfM7VqopcrUMWCqxArhLvSbAAy5a
+ JOb/v1rBOH1+br844QzOgekl4qemG7l08im52f/oMoliziECvXVEHGozSmenfvuZCW
+ RjdNwTAjx3x2tBl1axzwvFcqoCxv8v1a2fHHnA2NBR3gUj9+Qoaylp3svDVuFhnGL6
+ er7OUL+pmHPXuL5KkkJ300oAxsp6XU0aTGhev1nT3fE6lZixF+6cJ1YB/qRDD8LcQu
+ C16u3xh2vJj3Q==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tobias Waldekranz <tobias@waldekranz.com>
+Subject: [PATCH] cmd: mmc: Add mmc reg read command for reading card registers
+Date: Tue, 10 Oct 2023 01:14:58 +0200
+Message-Id: <20231009231458.354400-1-marex@denx.de>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,89 +69,167 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add three properties for controlling alignment of partitions, aka
-'entries' in binman.
+Add extension to the 'mmc' command to read out the card registers.
+Currently, only the eMMC OCR/CID/CSD/EXTCSD/RCA/DSR register are
+supported. A register value can either be displayed or read into
+an environment variable.
 
-For now there is no explicit mention of hierarchy, so a 'section' is
-just the 'binman' node.
-
-These new properties are inputs to the packaging process, but are also
-needed if the firmware is repacked, to ensure that alignment
-constraints are not violated. Therefore they are provided as part of
-the schema.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Marek Vasut <marex@denx.de>
 ---
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Roger Knecht <rknecht@pm.me>
+Cc: Sean Edmond <seanedmond@microsoft.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tobias Waldekranz <tobias@waldekranz.com>
+---
+ cmd/Kconfig |  8 +++++
+ cmd/mmc.c   | 96 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 104 insertions(+)
 
-(no changes since v2)
-
-Changes in v2:
-- Fix 'a' typo in commit message
-
- .../mtd/partitions/binman-partition.yaml      | 39 +++++++++++++++++++
- 1 file changed, 39 insertions(+)
-
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-index 35a320359ec1..8e8a3b6d4d14 100644
---- a/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-+++ b/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
-@@ -28,6 +28,42 @@ properties:
-           - const: u-boot       # u-boot.bin from U-Boot project
-           - const: atf-bl31     # bl31.bin or bl31.elf from TF-A project
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 6470b138d2f..dcd99757a1e 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -1307,6 +1307,14 @@ config CMD_BKOPS_ENABLE
+ 	  on a eMMC device. The feature is optionally available on eMMC devices
+ 	  conforming to standard >= 4.41.
  
-+  align:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    description:
-+      This sets the alignment of the entry. The entry offset is adjusted
-+      so that the entry starts on an aligned boundary within the containing
-+      section or image. For example ‘align = <16>’ means that the entry will
-+      start on a 16-byte boundary. This may mean that padding is added before
-+      the entry. The padding is part of the containing section but is not
-+      included in the entry, meaning that an empty space may be created before
-+      the entry starts. Alignment should be a power of 2. If ‘align’ is not
-+      provided, no alignment is performed.
++config CMD_MMC_REG
++	bool "Enable support for reading card registers in the mmc command"
++	depends on CMD_MMC
++	default n
++	help
++	  Enable the commands for reading card registers. This is useful
++	  mostly for debugging or extracting details from the card.
 +
-+  align-size:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    description:
-+      This sets the alignment of the entry size. For example, to ensure
-+      that the size of an entry is a multiple of 64 bytes, set this to 64.
-+      While this does not affect the contents of the entry within binman
-+      itself (the padding is performed only when its parent section is
-+      assembled), the end result is that the entry ends with the padding
-+      bytes, so may grow. If ‘align-size’ is not provided, no alignment is
-+      performed.
-+
-+  align-end:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    description:
-+      This sets the alignment of the end of an entry with respect to the
-+      containing section. Some entries require that they end on an alignment
-+      boundary, regardless of where they start. This does not move the start
-+      of the entry, so the contents of the entry will still start at the
-+      beginning. But there may be padding at the end. While this does not
-+      affect the contents of the entry within binman itself (the padding is
-+      performed only when its parent section is assembled), the end result is
-+      that the entry ends with the padding bytes, so may grow. If ‘align-end’
-+      is not provided, no alignment is performed.
-+
- additionalProperties: false
+ config CMD_MMC_RPMB
+ 	bool "Enable support for RPMB in the mmc command"
+ 	depends on SUPPORT_EMMC_RPMB
+diff --git a/cmd/mmc.c b/cmd/mmc.c
+index c6bd81cebbc..c29f44b7a18 100644
+--- a/cmd/mmc.c
++++ b/cmd/mmc.c
+@@ -1110,6 +1110,93 @@ static int do_mmc_boot_wp(struct cmd_tbl *cmdtp, int flag,
+ 	return CMD_RET_SUCCESS;
+ }
  
- examples:
-@@ -40,10 +76,13 @@ examples:
-         partition@100000 {
-             compatible = "u-boot";
-             reg = <0x100000 0xf00000>;
-+            align-size = <0x1000>;
-+            align-end = <0x10000>;
-         };
++#if CONFIG_IS_ENABLED(CMD_MMC_REG)
++static int do_mmc_reg(struct cmd_tbl *cmdtp, int flag,
++		      int argc, char *const argv[])
++{
++	ALLOC_CACHE_ALIGN_BUFFER(u8, ext_csd, MMC_MAX_BLOCK_LEN);
++	struct mmc *mmc;
++	int i, ret;
++	u32 off;
++
++	if (argc < 3 || argc > 5)
++		return CMD_RET_USAGE;
++
++	mmc = find_mmc_device(curr_device);
++	if (!mmc) {
++		printf("no mmc device at slot %x\n", curr_device);
++		return CMD_RET_FAILURE;
++	}
++
++	if (IS_SD(mmc)) {
++		printf("SD registers are not supported\n");
++		return CMD_RET_FAILURE;
++	}
++
++	off = simple_strtoul(argv[3], NULL, 10);
++	if (!strcmp(argv[2], "cid")) {
++		if (off > 3)
++			return CMD_RET_USAGE;
++		printf("CID[%i]: 0x%08x\n", off, mmc->cid[off]);
++		if (argv[4])
++			env_set_hex(argv[4], mmc->cid[off]);
++		return CMD_RET_SUCCESS;
++	}
++	if (!strcmp(argv[2], "csd")) {
++		if (off > 3)
++			return CMD_RET_USAGE;
++		printf("CSD[%i]: 0x%08x\n", off, mmc->csd[off]);
++		if (argv[4])
++			env_set_hex(argv[4], mmc->csd[off]);
++		return CMD_RET_SUCCESS;
++	}
++	if (!strcmp(argv[2], "dsr")) {
++		printf("DSR: 0x%08x\n", mmc->dsr);
++		if (argv[4])
++			env_set_hex(argv[4], mmc->dsr);
++		return CMD_RET_SUCCESS;
++	}
++	if (!strcmp(argv[2], "ocr")) {
++		printf("OCR: 0x%08x\n", mmc->ocr);
++		if (argv[4])
++			env_set_hex(argv[4], mmc->ocr);
++		return CMD_RET_SUCCESS;
++	}
++	if (!strcmp(argv[2], "rca")) {
++		printf("RCA: 0x%08x\n", mmc->rca);
++		if (argv[4])
++			env_set_hex(argv[4], mmc->rca);
++		return CMD_RET_SUCCESS;
++	}
++	if (!strcmp(argv[2], "extcsd") &&
++	    mmc->version >= MMC_VERSION_4_41) {
++		ret = mmc_send_ext_csd(mmc, ext_csd);
++		if (ret)
++			return ret;
++		if (!strcmp(argv[3], "all")) {
++			/* Dump the entire register */
++			printf("EXT_CSD:");
++			for (i = 0; i < MMC_MAX_BLOCK_LEN; i++) {
++				if (!(i % 10))
++					printf("\n%03i: ", i);
++				printf(" %02x", ext_csd[i]);
++			}
++			printf("\n");
++			return CMD_RET_SUCCESS;
++		}
++		off = simple_strtoul(argv[3], NULL, 10);
++		if (off > 512)
++			return CMD_RET_USAGE;
++		printf("EXT_CSD[%i]: 0x%02x\n", off, ext_csd[off]);
++		if (argv[4])
++			env_set_hex(argv[4], ext_csd[off]);
++		return CMD_RET_SUCCESS;
++	}
++
++	return CMD_RET_FAILURE;
++}
++#endif
++
+ static struct cmd_tbl cmd_mmc[] = {
+ 	U_BOOT_CMD_MKENT(info, 1, 0, do_mmcinfo, "", ""),
+ 	U_BOOT_CMD_MKENT(read, 4, 1, do_mmc_read, "", ""),
+@@ -1142,6 +1229,9 @@ static struct cmd_tbl cmd_mmc[] = {
+ 	U_BOOT_CMD_MKENT(bkops-enable, 2, 0, do_mmc_bkops_enable, "", ""),
+ 	U_BOOT_CMD_MKENT(bkops, 4, 0, do_mmc_bkops, "", ""),
+ #endif
++#if CONFIG_IS_ENABLED(CMD_MMC_REG)
++	U_BOOT_CMD_MKENT(reg, 5, 0, do_mmc_reg, "", ""),
++#endif
+ };
  
-         partition@200000 {
-             compatible = "atf-bl31";
-             reg = <0x200000 0x100000>;
-+            align = <0x4000>;
-         };
-     };
+ static int do_mmcops(struct cmd_tbl *cmdtp, int flag, int argc,
+@@ -1229,6 +1319,12 @@ U_BOOT_CMD(
+ 	"   WARNING: This is a write-once setting.\n"
+ 	"mmc bkops <dev> [auto|manual] [enable|disable]\n"
+ 	" - configure background operations handshake on device\n"
++#endif
++#if CONFIG_IS_ENABLED(CMD_MMC_REG)
++	"mmc reg read <reg> <offset> [env] - read card register <reg> offset <offset>\n"
++	"                                    (optionally into [env] variable)\n"
++	" - reg: cid/csd/dsr/ocr/rca/extcsd\n"
++	" - offset: for cid/csd [0..3], for extcsd [0..511,all]\n"
+ #endif
+ 	);
+ 
 -- 
-2.42.0.609.gbb76f46606-goog
+2.40.1
 
