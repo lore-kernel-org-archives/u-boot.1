@@ -4,151 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7197DE95A91
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 14:15:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA6BDE95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 14:36:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D21E864A6;
-	Mon,  9 Oct 2023 16:15:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 63F6386406;
+	Mon,  9 Oct 2023 16:36:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="opGBakqe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U983npx3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B972286504; Mon,  9 Oct 2023 16:14:59 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2062c.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::62c])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 986D286406; Mon,  9 Oct 2023 16:36:03 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3281D80EF7
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 16:14:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 553A5863C9
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 16:35:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DNgFXYoNrLrN9G4iKmS6Jm4/PlZQD/uo8v1k2jzzWHb0ZUZruWeyQJUHXobi+qF/IPvNWKOfBp0BJfCLp+mZcWh5IyzLzLoG06MgZSY1Ro9qn/02g+YjxQfvIGbKHMTtF7LEzNs5R9QcjkACdk5Yt4jmEL5qVZQNgR01yQSBti7cRYHVMPTgQlSIcyvczKcXbaSvEw/gJUh+b6bYFb3upKY5vivqM5iW1/q8TF+3bLB7Vc7xl5qRtjC1Cz7wtsKa0OZdqoOx9XZVKHsxrbn4lQeOmevJZxJUYhKpf1SxAuBUtLuUBJAqCX8yOz+gqGDBMd3SCKptEUu8V4MdOvtSSQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=akXQQ+LfuM+Ytl6R5e1b6asLPoBab2QE6GD+9W6eOh4=;
- b=Qr49WHytB+/pr8Zi0V9JoYX7HIIDhpUP3soZpW0Buju7Ttxq2N/n22PzXDr8mhqHQgAnEE45vFFS82cQGTQ1Ymf+6Saa/lbSEriDFN4xsqYeOKDt/UgG7h3JZoq8ZXZoa1rWv8a6c+boD16on0V0JWRVmzsHoZPoEyMr54NMAuLZnN0tpix0jM7o4mIgSNpwWUIRVh8dSjAB0YKXz6fyFOeoJOz8OILrzE0fzUNY5GTLk2+aVdSevgOHSTLtuXWpTGfUaRg1isfoDALNfoGb+MxRKyKWStPyP+fNEh5b6GwiPMxXEsJAj79qrlodaMNY7KhP9hJ84A7pL3Q1eQ0RSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=akXQQ+LfuM+Ytl6R5e1b6asLPoBab2QE6GD+9W6eOh4=;
- b=opGBakqeNaBcolODqu4lRV42bE36Sy9FW9cMHTNBazGeKf6XAbIFw3AL8CDhPTYFlKtf4+3v5fmf+wf9kNAkX3zPxcvf0HozyNvwDMMa1pPUz1C/f2rsGU+9aWEPWZ+ARWAky7RiOxdrO51aiKL4rIlivcdcXLCrqBxqCbhnIjU=
-Received: from BLAPR03CA0063.namprd03.prod.outlook.com (2603:10b6:208:329::8)
- by DM6PR12MB4561.namprd12.prod.outlook.com (2603:10b6:5:2ac::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.43; Mon, 9 Oct
- 2023 14:14:50 +0000
-Received: from BL6PEPF0001AB56.namprd02.prod.outlook.com
- (2603:10b6:208:329:cafe::87) by BLAPR03CA0063.outlook.office365.com
- (2603:10b6:208:329::8) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.36 via Frontend
- Transport; Mon, 9 Oct 2023 14:14:50 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL6PEPF0001AB56.mail.protection.outlook.com (10.167.241.8) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Mon, 9 Oct 2023 14:14:49 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 9 Oct
- 2023 09:14:47 -0500
-Message-ID: <cfd6849d-184c-4484-89dd-bfaf82548f74@amd.com>
-Date: Mon, 9 Oct 2023 16:14:45 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-5a4c073cc06so47054617b3.1
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 07:35:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1696862153; x=1697466953; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=A7Vo5OzivvdYSe/MZN0yrYS34JuaTP9tqCVKnAdHgUs=;
+ b=U983npx3rvQG1hZLEGvHGr3Neu0vTTsvAOefvbEzvi5tze6jiCvd5NQuWq5cVknvZW
+ +CLSdZJ+5zUHfUQ0aAUh8ge5jMovcR3UDq4OhMfGIQXwYRmvSeanW3gnNC9U5Lj0XKhG
+ dJASBQpM7vtTGSpOAAL4+2DZGucDcz85b9Rd0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696862153; x=1697466953;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=A7Vo5OzivvdYSe/MZN0yrYS34JuaTP9tqCVKnAdHgUs=;
+ b=nD3FfnNyBsv5MwpsarqIDfqHYHOtbS3fCWwKmpImlUAExArYDyK2rxUPA0IJ3xxzjo
+ qEOP/z+SjfPQNVgeW8TehbIB96k6rfB/1kke0lQ/lm7UcsJz+Qmfofu7FotLdAYVjtlj
+ zsEoHm+nm5vu3foDk5FPemz4OSxUOc/EC3jwGjh+fHxX7RmNz2UJjovdL0mY3kQ6UsLW
+ 3A6r1x5RB3Xga7R+4u4zekc3f+wVejvAr30plEMz5ziZ1Rlcrp7a06fLjEt88gBW2dyd
+ jLdW1h8H5ttfY0NGz/KXIp477kl5la8KVAfQvHccVE29AXn6DoItFYU3nLD2ebS3xOQ2
+ ekHw==
+X-Gm-Message-State: AOJu0Yz6oBNKZwWsQ0K7RRBExtOzE6ftNrRdbyyjPDRMHE8f3uxcDYA5
+ u0ylKgh29cyRGNHRv8xGzoq10HNuzWNoMsl4iX/w1A==
+X-Google-Smtp-Source: AGHT+IHGloqiinRZLjThvyy9h5BuSzVHLgIkemsjnkl/IFnN/gM3P40FjJxGzt0ux8L+PlL0e95cuQ==
+X-Received: by 2002:a0d:eb85:0:b0:59f:6404:89b5 with SMTP id
+ u127-20020a0deb85000000b0059f640489b5mr8606831ywe.9.1696862153482; 
+ Mon, 09 Oct 2023 07:35:53 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-fae2-bb7a-3833-e7d0.res6.spectrum.com.
+ [2603:6081:7b00:6400:fae2:bb7a:3833:e7d0])
+ by smtp.gmail.com with ESMTPSA id
+ q66-20020a0dce45000000b0059bcadded9dsm3719620ywd.116.2023.10.09.07.35.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Oct 2023 07:35:52 -0700 (PDT)
+Date: Mon, 9 Oct 2023 10:35:50 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: Pull request: u-boot-rockchip-20231007
+Message-ID: <20231009143550.GJ2227687@bill-the-cat>
+References: <20231007102658.568693-1-kever.yang@rock-chips.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] test/py: net: Add dhcp abort test
-Content-Language: en-US
-To: Love Kumar <love.kumar@amd.com>, <u-boot@lists.denx.de>
-CC: <git@xilinx.com>, <rfried.dev@gmail.com>, <v.v.mitrofanov@yadro.com>,
- <seanedmond@microsoft.com>, <emohandesi@linux.microsoft.com>
-References: <12a4371d0abfe7de83a42847573b8db8c1bba8da.1696337031.git.love.kumar@amd.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <12a4371d0abfe7de83a42847573b8db8c1bba8da.1696337031.git.love.kumar@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB56:EE_|DM6PR12MB4561:EE_
-X-MS-Office365-Filtering-Correlation-Id: 870f61e2-12c5-4282-c7a9-08dbc8d21952
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: xOjoZl/4SawNH1siIB7zFDIIEEvUngiVXjzONzfGB45yT0u5mQIpT2cmUbnk65+I7xxc5VLyFZwy3zOzPNj++j3lxed5npZG5dBbl3X9isHKRy/qDJXGG2Pu7kFLOcc+5LD+R67Zw/fXbhe6UBys5pB2ZhyP6UxvbztQP6Pyxqq/8TVzDFFdT2GBEVw7RfmMexp69S608Zt4g6pIvqhYj+5J7+7V5U0+JBW3V/NP0fGOceVDoteqLsnXCboeIyHsGC4rbWhDzgj8nDpCZDJAmq7HUSRJQT2jlaQWWxCzY5nP/GHsIhdTx7t7cCqWVsZQHCFWdSNFzq12puMi6q3pv/z5JEmnDyZtdE5ozxLT6Pxd8zlPVoBsrhvIxadzoJALQEf98Qfs35xTuA6ukzCVHcs/r0wkywnh0lTg4xbFPCSrNyaYnctogvyuVHfy2+JwcLd/pa5vZyuXaSvlvQxr7j5/JxAVdw7dGYSA3idrLbK4SZG1U7TjmyifNO2wUO/ZvsvZZ8IOGsw23VN8EtCeqsJV/QogUcQ7dmC3ZiEwIJlpOz+xWaGjY5Jjm2nbdC52XBYTTWJs31Z0TLmS82EGshnuHPGI2jTzavqEQOB4XQPFItBssQZGo8HuNN1T++coqYdb8SpjlY+UgwODSHRvWHh+rpFWwHgRPGaaXDdMmAxe9pFb8AZuJyc7hPpkwnU4dOO8E9ja2sqWOxrcl/+bNjYjkBh+Gn0Q4ex56MIGId/4d8C2iwuIt8Cxh87sa2FVVhH9iUzr4tbZOK2UWdQXgEmvDoV0+16+sEWVHch0wYxHwvZ/sY1JBHgs7Ew/l/nA
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(39860400002)(136003)(396003)(376002)(346002)(230922051799003)(186009)(64100799003)(1800799009)(82310400011)(451199024)(36840700001)(46966006)(40470700004)(31686004)(53546011)(40460700003)(70206006)(86362001)(36756003)(31696002)(40480700001)(81166007)(36860700001)(356005)(82740400003)(26005)(47076005)(2906002)(83380400001)(426003)(336012)(2616005)(478600001)(8676002)(4326008)(16526019)(16576012)(8936002)(41300700001)(316002)(70586007)(5660300002)(110136005)(54906003)(44832011)(43740500002)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 14:14:49.6131 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 870f61e2-12c5-4282-c7a9-08dbc8d21952
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB56.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4561
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="OjVOFj8QOptiy4F4"
+Content-Disposition: inline
+In-Reply-To: <20231007102658.568693-1-kever.yang@rock-chips.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,87 +92,66 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--OjVOFj8QOptiy4F4
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 10/3/23 14:46, Love Kumar wrote:
-> Abort the dhcp request in the middle by pressing ctrl + c on u-boot
-> prompt and validate the abort status.
-> 
-> Signed-off-by: Love Kumar <love.kumar@amd.com>
-> ---
->   test/py/tests/test_net.py | 44 +++++++++++++++++++++++++++++++++++++++
->   1 file changed, 44 insertions(+)
-> 
-> diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
-> index cd4b4dc53cbc..1e8eb0357eef 100644
-> --- a/test/py/tests/test_net.py
-> +++ b/test/py/tests/test_net.py
-> @@ -6,6 +6,7 @@
->   
->   import pytest
->   import u_boot_utils
-> +import re
->   
->   """
->   Note: This test relies on boardenv_* containing configuration values to define
-> @@ -104,6 +105,49 @@ def test_net_dhcp(u_boot_console):
->       global net_set_up
->       net_set_up = True
->   
-> +@pytest.mark.buildconfigspec("cmd_dhcp")
+On Sat, Oct 07, 2023 at 06:26:58PM +0800, Kever Yang wrote:
 
-Similar issue is visible here too.
-There should be CMD_MII dependency.
+> Hi Tom,
+>=20
+> Please pull the updates for rockchip platform:
+> - Add Board: rk3568 Bananapi R2Pro;
+> - Update pcie bifurcation support;
+> - dwc_eth_qos controller support for rk3568 and rk3588;
+> - Compressed binary support for U-Boot on rockchip platform;
+> - dts and config updates for different board and soc;
+>=20
+> CI:
+> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/18047
+>=20
+> Thanks,
+> - Kever
+>=20
+> The following changes since commit be2abe73df58a35da9e8d5afb13fccdf1b0faa=
+8e:
+>=20
+>   Merge https://source.denx.de/u-boot/custodians/u-boot-riscv (2023-10-05=
+ 13:26:44 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
+t-rockchip-20231007
+>=20
+> for you to fetch changes up to dd8d52c934e8858264f91e8e8e2d8c7d8b059dd7:
+>=20
+>   rockchip: rk356x-u-boot: Add bootph-all to i2c0_xfer pinctrl node (2023=
+-10-07 16:52:48 +0800)
+>=20
 
-> +def test_net_dhcp_abort(u_boot_console):
-> +    """Test the dhcp command by pressing ctrl+c in the middle of dhcp request
-> +
-> +    The boardenv_* file may be used to enable/disable this test; see the
-> +    comment at the beginning of this file.
-> +    """
-> +
-> +    test_dhcp = u_boot_console.config.env.get("env__net_dhcp_server", False)
-> +    if not test_dhcp:
-> +        pytest.skip("No DHCP server available")
-> +
-> +    u_boot_console.run_command("setenv autoload no")
-> +
-> +    # Phy reset before running dhcp command
-> +    output = u_boot_console.run_command("mii device")
-> +    eth_num = re.search(r"Current device: '(.+?)'", output).groups()[0]
-> +    u_boot_console.run_command(f"mii device {eth_num}")
-> +    output = u_boot_console.run_command("mii info")
-> +    eth_addr = hex(int(re.search(r"PHY (.+?):", output).groups()[0], 16))
-> +    u_boot_console.run_command(f"mii modify {eth_addr} 0 0x8000 0x8000")
-> +
-> +    u_boot_console.run_command("dhcp", wait_for_prompt=False)
-> +    try:
-> +        u_boot_console.wait_for("Waiting for PHY auto negotiation to complete")
-> +    except:
-> +        pytest.skip("Timeout waiting for PHY auto negotiation to complete")
-> +
-> +    u_boot_console.wait_for("done")
-> +
-> +    # Sending Ctrl-C
-> +    output = u_boot_console.run_command(
-> +        chr(3), wait_for_echo=False, send_nl=False
-> +    )
-> +
-> +    assert "TIMEOUT" not in output
-> +    assert "DHCP client bound to address " not in output
-> +    assert "Abort" in output
-> +
-> +    # Provide a time to recover from Abort - if it is not performed
-> +    # There is message like: ethernet@ff0e0000: No link.
-> +    u_boot_console.run_command("sleep 1")
-> +
->   @pytest.mark.buildconfigspec('cmd_dhcp6')
->   def test_net_dhcp6(u_boot_console):
->       """Test the dhcp6 command.
+Applied to u-boot/master, thanks!
 
-qemu_arm64 test.py is showing this issue.
-____________________________ test_net_dhcp_abort ______________________________
-test/py/tests/test_net.py:138: in test_net_dhcp_abort
-     eth_num = re.search(r"Current device: '(.+?)'", output).groups()[0]
-E   AttributeError: 'NoneType' object has no attribute 'groups'
+--=20
+Tom
 
-M
+--OjVOFj8QOptiy4F4
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUkD8IACgkQFHw5/5Y0
+tywFuQwAgck9N1GzQkfQ/l/SfhKNBKzVWYh+hs0dSVeSRDQaYNTxT88tFoxBTpV0
+z+pohs66ix8LBcwEePWUAuwKxY1boNDad+ut+nnP268yK0AvqmwSAOc4CIB2r9Yk
+yTpjUp/rmhyRMckx0ykUEAIZgkz4VpLDPerzw+QgBOceLEB9y78YZLHuNwdkjK0z
+kpc0MH0BebTBwvEhYahwzacCYe1G94poJBKmgb9uAgxwa0C3g+0G8hHlkmpsSWSH
+Vn6UZ/NUq/7rKjRJaEMUUlz8rDsK6RXDbPOBHwHJ4OKPg9Rn1PPtq57psA13FRIv
+yCqePGDw0DUY0oQ8fxeOm/4a1kAwNZVz8gmpxR3snss2vG7aSXRwXNLCOsPigYbd
+IxdfKTbRVzupY7HLxg7/eBvQrifbx1LFN3szPi37gh/YiVNtOzbPVf6xOuLC3PJr
+RPKcYqcP1VaBfvJPPoHn5YkUCWmmTWwb9yxhWphOiNdjXMIfWNhE1OlVoEfOB6KK
+rgPOb46o
+=fLHt
+-----END PGP SIGNATURE-----
+
+--OjVOFj8QOptiy4F4--
