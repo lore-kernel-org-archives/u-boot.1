@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69C8BE95A91
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 07:46:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92F6E95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 07:47:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C22AE8692B;
-	Mon,  9 Oct 2023 09:46:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4489B86ACA;
+	Mon,  9 Oct 2023 09:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ELMqsQX+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YnAfD/cl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DB4086940; Mon,  9 Oct 2023 09:46:16 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 60D4186AB9; Mon,  9 Oct 2023 09:47:01 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8487B86504
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 09:46:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7DA9C869BD
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 09:46:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-533c8f8f91dso7337739a12.0
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 00:46:14 -0700 (PDT)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-538e8eca9c1so7294933a12.3
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 00:46:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696837574; x=1697442374; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1696837619; x=1697442419; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LZ4vDAPS1GZ0DgNYk5ygw6JWcxlBbEuxtdIaAf0U1SU=;
- b=ELMqsQX+tIzIZ3rodcO50LhttkcK8799TaA5GbMlOq4Ep82s+mus0JsIvC3xpSe8ti
- LlZSbsGHwv6J0C3Wn0+Oxu1GkVwTx2yc8G8XGMs659tPM5rB3e2ji6maiAlrTcWEAsuS
- /DnhtB2Ta5UXX2pgvSzmh9pr4A4pzeWHOmMGp25ein1ImR9g+sUpM1ak9Mo08uQCqrCL
- jgQxlQm+I2YKcFXr7xcuOiEN43jSCIJf/SOPGKkEivwyaDWVQ3QYtBizNguwO+3WzeTS
- JPXEqaSx4+tT0M9sMHdx8rXkwe1VXzsa1EAFmqH2rLdPsA5PbFIc7jGWdWzvzKPP2a7g
- Y+eg==
+ bh=U7xg5X+aiDUj0t72/3deUgUrd/fzOr0yMB37L4LZj5o=;
+ b=YnAfD/cl1x4C10VgB6xPC82b439yOobEBpvKszbPF7M4epFGioSxBtLynpSd1BQnqC
+ wXKbP3vwyKtlhy7zZsTIqYgvCo62+sRBKT3LXmf01IOUF95gJNhfwf4GEkrtE0p39ey6
+ 3fIgWPiPiXe8nrkzHeTh1u0UzI9VMK/o7IkSd3f86/4AztRo4T8llmBPPdm1JTcgtSG4
+ XQX9ks/iIJjQYvL4IdTEbeqoBNu98TAtqEs4f2h2La3fdy0Rju/6dX0VSbGiPDYUGJLF
+ GPocetFXz8t7PNm8V98I15Bt7zFKWNszkvKSuUxA3xhiMQfChnAlCt2XK7pmu1fS1Mq0
+ uEog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696837574; x=1697442374;
+ d=1e100.net; s=20230601; t=1696837619; x=1697442419;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=LZ4vDAPS1GZ0DgNYk5ygw6JWcxlBbEuxtdIaAf0U1SU=;
- b=KUHVtNybdZQeNSwd3g47yfOTMz4BRsblmjEG29b9D6mNOigRgcyxMmWQOf1QKsSJJw
- 8QuIWRkGTOtEkfmUz/paKJsm9EGu59A8exvcOqjp5WeZRe9I6Qf0MidUHdSlg26T9fX/
- 96i4nGdw8U9Rr5IkA/bpZcZRsZU4/PI4n8D2mdos1ZpG2Wg359DUMm1SkzHQ15OmiTdV
- 3x4M69JOfvJ1z69b0/IM1QEtDNM9IumZlP0Q/Hj4LHLPsxwPWezRD3el9t1yErAM3Su/
- pgs0oEuJSFulMtjVbosNVNME0FcooVskw9p3W9JF09GM16k30hq7G9qB8/yTJgBrJLVq
- yciw==
-X-Gm-Message-State: AOJu0Ywaiw3tOxHwy9dMVHIe0D0scmTViXXwW57KBPLvvfTbvL92+V5B
- wxHIzHr5zxv2FUJiPsPIZ8/C/bhgN1o9rP5M8PNjFQ==
-X-Google-Smtp-Source: AGHT+IEHur4rsMDhL9B0j+b98ZA5/fWL6U+9E7sz6mqvv86IrZsEb1fRBvzlH3k8WxzQ+LTxyJ1fQT0p66f9ZdM6BzA=
-X-Received: by 2002:a05:6402:14d2:b0:530:e9bf:1ea3 with SMTP id
- f18-20020a05640214d200b00530e9bf1ea3mr13910446edx.7.1696837573954; Mon, 09
- Oct 2023 00:46:13 -0700 (PDT)
+ bh=U7xg5X+aiDUj0t72/3deUgUrd/fzOr0yMB37L4LZj5o=;
+ b=Fvkb5QoEIfOo2h8pG3OKsLie0vb7ukFqOv/kHtw2cNu+uvZlr/Byib3cBWHAUesAb5
+ IrKQrdbl29yyQYdoVkaBfp6jj4ANcSafqGPBn8iflJ9FynbAwly68PVakZnCMxXJxsYv
+ M1VXjxbEsSP/mwJgqvVaLEW91MHvtTeF0jnjZWzYouET2zVp7zN8T2bkL8q7d/XZTly1
+ 3v3HW6XQfBbD/eV1/gsOfJ+eKFvy/oU+39lAp9UHEoaxDFmMwBzR7LNs5KprvBpcraP1
+ TQqO263gr0d8CBAW7l8GgyFQ2xVcYB+jVau7El9o9XHWsS4y/1wqK4wSS6v1h4PXhnnz
+ +bHw==
+X-Gm-Message-State: AOJu0YzJDCj/HyMgo8szPnN5tzqh4VMkCcKe+psLKxdZ874rgfJMapG9
+ uBNp5kJDzJi5SHS0o26jiWkgWCYpWNPTRzRIGynHxQ==
+X-Google-Smtp-Source: AGHT+IG7Xng024+5cgXU7Lvw2rriL2lI42dJEMs6+ZeSBtXN7l/DdlqRPXUlo/Hqar37c3pvO9MofcaEUxRqtq9UTwM=
+X-Received: by 2002:aa7:d5c8:0:b0:534:78a6:36cb with SMTP id
+ d8-20020aa7d5c8000000b0053478a636cbmr12746409eds.39.1696837619044; Mon, 09
+ Oct 2023 00:46:59 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231004112722.416877-1-sughosh.ganu@linaro.org>
- <20231004112722.416877-4-sughosh.ganu@linaro.org>
- <CAPnjgZ0_8FqJEarNvE6RN218PJWUGu1W0_f3iVjzBTibpQ1KFg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ0_8FqJEarNvE6RN218PJWUGu1W0_f3iVjzBTibpQ1KFg@mail.gmail.com>
+ <20231004112722.416877-5-sughosh.ganu@linaro.org>
+ <CAPnjgZ2zhqStA-1viaTgTHvkMWNUg5TYAraWP0UxAi28sr0EmA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2zhqStA-1viaTgTHvkMWNUg5TYAraWP0UxAi28sr0EmA@mail.gmail.com>
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 9 Oct 2023 13:16:02 +0530
-Message-ID: <CADg8p97Xpc6MVs+oviNZ1NnKq4cvAuntb1HpO4K0PnJ7DULj9Q@mail.gmail.com>
-Subject: Re: [PATCH 3/5] binman: capsule: Use dumped capsule header contents
- for verification
+Date: Mon, 9 Oct 2023 13:16:48 +0530
+Message-ID: <CADg8p972NEVQgiQALDFWR7ct5-6Sh3BFgvRGJhSf8M0zKE_i=w@mail.gmail.com>
+Subject: Re: [PATCH 4/5] btool: mkeficapsule: Add support for EFI empty
+ capsule generation
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -92,82 +92,79 @@ X-Virus-Status: Clean
 
 hi Simon,
 
-On Sun, 8 Oct 2023 at 04:41, Simon Glass <sjg@chromium.org> wrote:
+On Sun, 8 Oct 2023 at 04:42, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Sughosh,
+> Hi Sugosh,
 >
 > On Wed, 4 Oct 2023 at 05:27, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > The various fields of a generated capsule are currently verified
-> > through hard-coded offsets. Use the dump-capsule feature for dumping
-> > the capsule header contents and use those for capsule verification.
+> > Add a method to the mkeficapsule bintool to generate empty
+> > capsules. These are capsules needed for the FWU A/B update feature.
 > >
 > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > > ---
-> >  tools/binman/ftest.py | 95 ++++++++++++++++++++++++-------------------
-> >  1 file changed, 54 insertions(+), 41 deletions(-)
->
-> This looks good apart from a few nits below. However, the tests fail for me.
-
-Can you please specify which tests fail, and the way to reproduce the
-failures? I ran the tests before sending the patches, and they ran
-fine, including the coverage which is 100%. Ci too did not complain.
-
->
+> >  tools/binman/btool/mkeficapsule.py | 29 +++++++++++++++++++++++++++++
+> >  1 file changed, 29 insertions(+)
 > >
-> > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> > index 8e419645a6..2b8871ab7e 100644
-> > --- a/tools/binman/ftest.py
-> > +++ b/tools/binman/ftest.py
-> > @@ -121,9 +121,11 @@ COMP_BINTOOLS = ['bzip2', 'gzip', 'lz4', 'lzma_alone', 'lzop', 'xz', 'zstd']
-> >  TEE_ADDR = 0x5678
+> > diff --git a/tools/binman/btool/mkeficapsule.py b/tools/binman/btool/mkeficapsule.py
+> > index 61179747ff..89c0adfc9f 100644
+> > --- a/tools/binman/btool/mkeficapsule.py
+> > +++ b/tools/binman/btool/mkeficapsule.py
+> > @@ -80,6 +80,35 @@ class Bintoolmkeficapsule(bintool.Bintool):
 > >
-> >  # Firmware Management Protocol(FMP) GUID
-> > -FW_MGMT_GUID = 'edd5cb6d2de8444cbda17194199ad92a'
-> > +FW_MGMT_GUID = '6DCBD5ED-E82D-4C44-BDA1-7194199AD92A'
-> >  # Image GUID specified in the DTS
-> > -CAPSULE_IMAGE_GUID = '52cfd7092007104791d108469b7fe9c8'
-> > +CAPSULE_IMAGE_GUID = '09D7CF52-0720-4710-91D1-08469B7FE9C8'
-> > +# Windows cert GUID
-> > +WIN_CERT_TYPE_EFI_GUID = '4AAFD29D-68DF-49EE-8AA9-347D375665A7'
->
-> Please use lower-case hex
-
-Okay
-
->
+> >          return self.run_cmd(*args)
 > >
-> >  class TestFunctional(unittest.TestCase):
-> >      """Functional tests for binman
-> > @@ -7223,52 +7225,63 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> >          self.assertRegex(err,
-> >                           "Image 'image'.*missing bintools.*: bootgen")
-> >
-> > +    def _GetCapsuleHeaders(self, data):
+> > +    def generate_empty_capsule(self, accept, revert, image_guid,
 >
-> This should have a function comment so it is clear what it is doing, returning.
+> Instead of two separate bools, how about an 'operation' param, a
+> string which is either accept or revert? Or perhaps just have 'accept'
+>  and pass True or False?
 
-Will add
+Okay incorporate this and the other two review comments on this patch. Thanks.
 
 -sughosh
 
 >
-> > +        capsule_file = os.path.join(self._indir, 'test.capsule')
-> > +        tools.write_file(capsule_file, data)
+> > +                               output_fname):
+> > +        """Generate empty capsules for FWU A/B updates
 > > +
-> > +        out = tools.run('mkeficapsule', '--dump-capsule', capsule_file)
-> > +        lines = out.splitlines()
+> > +        Args:
+> > +            accept (int): Generate an accept capsule
+> > +            revert (int): Generate a revert capsule
+> > +            image_guid (str): GUID used for identifying the image
+> > +            output_fname (str): Path to the output capsule file
 > > +
-> > +        re_line = re.compile(r'^([^:\-\t]*)(?:\t*\s*:\s*(.*))?$')
-> > +        vals = collections.defaultdict(list)
-> > +        for line in lines:
-> > +            mat = re_line.match(line)
-> > +            if mat:
-> > +                vals[mat.group(1)] = mat.group(2)
+> > +        Returns:
+> > +            str: Tool output
+> > +        """
+> > +        if accept:
+> > +            args = [
+> > +                f'--guid={image_guid}',
+> > +                '--fw-accept'
+> > +            ]
+> > +        elif revert:
+> > +            args = [
+> > +                '--fw-revert'
+> > +            ]
+>
+> That can be on none line
+>
 > > +
-> > +        return vals
+> > +        args += [
+> > +            output_fname
+> > +        ]
+>
+> Same here
+>
 > > +
-> [..]
+> > +        return self.run_cmd(*args)
+> > +
+> >      def fetch(self, method):
+> >          """Fetch handler for mkeficapsule
+> >
+> > --
+> > 2.34.1
+> >
 >
 > Regards,
 > Simon
