@@ -4,53 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFABCE95A8E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 11:03:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E8DBE95A8E
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 11:11:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 835258652F;
-	Mon,  9 Oct 2023 13:03:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5A3608652F;
+	Mon,  9 Oct 2023 13:11:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="zyMSks2t";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3zF5b6ev";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4DA8986AFA; Mon,  9 Oct 2023 13:03:26 +0200 (CEST)
+ id 8F05D8652F; Mon,  9 Oct 2023 13:11:05 +0200 (CEST)
 Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on2061c.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5a::61c])
+ (mail-mw2nam12on20626.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::626])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B29AF864A0
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 13:03:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E96086B68
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 13:11:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OnSHI+FnTm6xmjDodWn23KIu9xIK8E/B+taRE+d/SQqjAJTF74hiq9gPcaej741WWHRK9sY6VZUuBxqmaG1GZGCCm972CxI+a3KTfzt+wfQEYinTe4QLKcTxsbZ99wcjoDAoNtGTB9o6NMVBvCPSE9Yi3WeaoEybLXeGjFwhz3WUvBWaGmEahJKrj1J4m+uA0xQxMtoDZFVqPdkRxiNGMENHzXK/mbrmtAaTfmZ79dUgUlEjK7qTgVPP3CZzWYC1nHxoemUVDRBUZKRIosyKMJxJzVt7MA5tUHjDS+l2C+8BCe5Vy+R5vtjWr9YrzsIQv55knIcW3Ldoxpj/g5bZ0A==
+ b=jlymT9g3ExBeJHOOztd5cMMs9X95h96d2NO2uYQBzIEB/xAMK5arsG44/F3+J/8VZ9TlAUGx6DGaaFZXElA7iZLC+CcFePTR3jggNboiiJ+RVqDMnsSlpHL/I4GwYSPun584ygCuGaDg3LBd6Dg8FcCQRSYyHmNS46buP5gXoTedJMyh39TNPVcfeIHXfwqsogorob4HMUPpm1+u8qF1DkkQJ891R2e9djd791zx/donAwsIH15WqGCS8g//Sm2fqhT0Cy2QGYcpGORqciTH9BEuZJUeBmpfzFbdrYsvPvizobj5exKPPOss27rqCeTwh1CvoGp66PFDNSXK3idarw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MxdRi5tiy0wN2NLZDxKCKGVb1qBOLeOQAwRYk7Mh/g8=;
- b=GiGGl6sNWGsBohk5vB+XnGsRpwGqwQ/ZOYrtCBwmrOLs/K+IGs1ttjhHg2Xz0lI6NmxY6ASvqRgEbCEy0RpeF93Qa7iUcLTRJVXxEn4xDiJ3ZesbAoRFgkyAFxTG3EcW0uJq7GlTOqEUYrXwf6Wt1qJbnlpFVJZF5fJpLPE9EdJJAhtpwA75I+UXVHkhy+vf2e4WDDakO6VkSGrFMeIGe4n4lZumb9REubSDT3OGAzV0YdX/cRlDc5I+9xf+uLdIq+qPqE8Af/X/VtQi67xykLBGDDW0qof8SgBHf2ZJNchnsJa4aYu1eH5bwQDm8Xr5cbQFveL2DJmeiHr3/RZPRw==
+ bh=1UGthZD1FPTga9gfs+ajw8+Z7lZ43co7tWrNR9eNarI=;
+ b=ic8a3aWhfdtDbolFv3UDpDHE8T7wfrqFGScu5Yq8XaRqvVENbW2O3jR46vThTWHxbo9pPjR7EH/QQdRHlSV2Pp3Ymqo2H6BSSFWOA3EXtg651fku6PNSLyYINs6ox+SNpQt2TfQ6Ainn1EOd0fJlXHBamJ5D1Q17uv4UsbgJqfT0q++nXg/dVB9uvXUs9iDrUJT2lZu8xr1dvETeMDQdFURfWUmJ0cVqbCnYH5L36RjjOxROp6N5pseBTuw6Go7UkWfeCeGsp3BmpOndgF0UZ2sOaWlX+IkdV6xWaPh28IaJIsYMhjFhIqjyNm+W6fSwwh3oAPEn9Dsyk5qoYKDIcA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MxdRi5tiy0wN2NLZDxKCKGVb1qBOLeOQAwRYk7Mh/g8=;
- b=zyMSks2t8SYa6aa6/UJY0W7hQ8NSnunYIGCnJKc6VbLsl52CPDfH+YmFR6rLEpjiPhPNJWSAc8c+NeK4w7wh7oQX+jvtQCmd05LyLGA+pclOjBIEmBxvGfccIj7MHOB43glTH9bO0Z2EVgcb3oOixC/qd5C0HsMyNY4FB2QB8Ns=
-Received: from BYAPR01CA0002.prod.exchangelabs.com (2603:10b6:a02:80::15) by
- PH7PR12MB8015.namprd12.prod.outlook.com (2603:10b6:510:26a::7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6838.31; Mon, 9 Oct 2023 11:03:17 +0000
-Received: from CO1PEPF000044EF.namprd05.prod.outlook.com
- (2603:10b6:a02:80:cafe::ce) by BYAPR01CA0002.outlook.office365.com
- (2603:10b6:a02:80::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.36 via Frontend
- Transport; Mon, 9 Oct 2023 11:03:17 +0000
+ bh=1UGthZD1FPTga9gfs+ajw8+Z7lZ43co7tWrNR9eNarI=;
+ b=3zF5b6evMuYg711Rn1T+QV902cNAsIwqWQUhHnG7rsSJAIPYBWoukMCDAtMXrc388WdlKtrR3tOT27mZR8SeaU3LmRaU1Cc6pWvVIgOz3gG1/Nlu6dDespGCrjjnsXjU+xrgHlxaQtrmoYN6yvLCV3a3dq7cJ1N0m1iTj3JC1eQ=
+Received: from CH0PR03CA0304.namprd03.prod.outlook.com (2603:10b6:610:118::28)
+ by MN0PR12MB6224.namprd12.prod.outlook.com (2603:10b6:208:3c0::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.36; Mon, 9 Oct
+ 2023 11:10:58 +0000
+Received: from DS3PEPF000099DE.namprd04.prod.outlook.com
+ (2603:10b6:610:118:cafe::1d) by CH0PR03CA0304.outlook.office365.com
+ (2603:10b6:610:118::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.38 via Frontend
+ Transport; Mon, 9 Oct 2023 11:10:58 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -58,26 +59,24 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000044EF.mail.protection.outlook.com (10.167.241.69) with Microsoft
+ DS3PEPF000099DE.mail.protection.outlook.com (10.167.17.200) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.22 via Frontend Transport; Mon, 9 Oct 2023 11:03:16 +0000
+ 15.20.6838.22 via Frontend Transport; Mon, 9 Oct 2023 11:10:57 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 9 Oct
- 2023 06:03:15 -0500
-Message-ID: <ce462a4b-f7ae-437c-bcc5-42f8ff232fe8@amd.com>
-Date: Mon, 9 Oct 2023 13:03:12 +0200
+ 2023 06:10:55 -0500
+Message-ID: <b61dd362-7b53-4e62-950c-a86d7850d579@amd.com>
+Date: Mon, 9 Oct 2023 13:10:53 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: phy: xilinx_phy: Get rid of using property
- xlnx,phy-type
+Subject: Re: [PATCH] test/py: net: Add a TFTP put test
 Content-Language: en-US
+To: Love Kumar <love.kumar@amd.com>, <u-boot@lists.denx.de>
+CC: <git@xilinx.com>, <rfried.dev@gmail.com>, <v.v.mitrofanov@yadro.com>,
+ <seanedmond@microsoft.com>, <emohandesi@linux.microsoft.com>
+References: <f67478ee2642e6c598da4364f84c3bec900f89c3.1696323438.git.love.kumar@amd.com>
 From: Michal Simek <michal.simek@amd.com>
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- <u-boot@lists.denx.de>
-CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <git@xilinx.com>
-References: <20231005030202.2764-1-venkatesh.abbarapu@amd.com>
- <97d46d27-691d-4af6-8414-41012e32d3f8@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -122,34 +121,34 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <97d46d27-691d-4af6-8414-41012e32d3f8@amd.com>
+In-Reply-To: <f67478ee2642e6c598da4364f84c3bec900f89c3.1696323438.git.love.kumar@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
 X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000044EF:EE_|PH7PR12MB8015:EE_
-X-MS-Office365-Filtering-Correlation-Id: 22cf3d43-ab44-48b7-9c1d-08dbc8b75734
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DE:EE_|MN0PR12MB6224:EE_
+X-MS-Office365-Filtering-Correlation-Id: 33718aae-7a8a-4d26-3cfd-08dbc8b86979
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 1YGe1lKJhq4HmnVkL/8TyfhjbvUplsLgMKKseQvNV8KBwxduGeTtABql6MxG7jOcEoZNraykm27vM25FjtBMPlDmUminDSamUg9ezWpMX4bdmfz/R/wLj+4LPuhDMTI/qwykxvLHmnrA+21TPU+v3YD/DEAZAORgSkP+RM5qlgiuPJZBm1Zl9qxt9YMxqwbLvP97o6+l5R0oZi0fVKTWDpjGe6WtCBntTuUymUvIIRlWRXgfx96Lnq3pfphfQ6Rn1MEbEZpYWGpUzMKIJ06i3LP4wlLbC63bYAgM7UHW5t4RfChy6DLSlxs1AJu+23h9+iuKGxLTiCWFqNiJ/vSZ+yFCctyU3n42FvDsp3y6qzYyFDfrlo1sFnKz7u/QCkc4O8s71gvXOxPr6nIpydqccaGd2yXX8p2EmpwKV5Ldix0+2pm67KwbKXVvzDfI6ULkUewUvlwpLCQmoHQvVwyr/ORXhLMuIZdtm0tOQn3ToKwgCErVlL5XEfAo6X9DUaP2nWaT2Xcsmz8F0MZslkgcYxvFkRLfqddd1eKpbbGw7DHmdLYs9N0IXdD6hqAwcHBY33sR+e5u8dgu08t5lswl9fIFLgu6VCRlAURIZRk8qKqlyQ82O4KRBz3knoEvQfylSGFjjYfBPsXQrYDSAQHoolOStbkFma9LpCSX+FSJpT636Z5nUscf1y6lsWb39fA43bBsV5MYnlkMRaLIlUVvaBx05lXjawc3jQIKG/yFEW6Rq+tSaiNqcSATmzPInQXOQh8vPAFLF5jLi8Ib7ZtxmPcrAwuFYoyFT56o2jsyHgdRi7chE9gwmrkTyocBEhz5scErI/mHFPQZ/bHcjsaarA==
+X-Microsoft-Antispam-Message-Info: kwjA/V9F/LsltHm18Wj+oxgm9OHsioL4rEEEjVEuf5vm8Ca/NofqrCrKfcYXB8rDsZkkx6CdYPMNBNVhUkvwRCseU9Nts3UPTA5XpmRSu7IvYx18bQ4jTP8WssV+RkTouqsT3bJf/pVEawX9ByYynNJRDIgxSZEayCcFYE+MH4X9Ljr1kPW72xux5E1y2/4EK38wVNl7u5fMuSvDU27zPu9q4m3gi2zM4RUAMHNZfkTQYK0x7cytDLlwpgauuJvu50t4DSlF1EnVA6cchgjflg21hEtrXR5SqRJqGrzM4J1gMxKaIdBqCp9fH4jSQ+hIHcVSNA30jyaPZ9S9vFEcV9nzDr0S75MP5iHHxesHs2xbXglaUaISAYE53UOkPs5NP1cKkY6A4918Qohlva9KL2AiLnYZs0fXjNoGQDpTQhA4yteuCcyXb94aM0qS/XNJr8Fuc/iedHukSB2Ch3JqxCose2DgWH8nybvgqldtTIvO76VvSVGY3pEHMgkDuMIebnsNmxUBqVNVnDqN4nwrh9Qzx1/A+CYcCcgB5J6KFQiLBrveqaZIRKbVUiBZEWUsyJoOda/g5AQJQNRJHuzGHoIpNbSUEQlyEoEZGhnXJNs0vh742gU7e1eDDlbgRyBcs4rQ4yBh8PD+NaVsMqzZd8Rhuqb7DUSDUvomOjMsuzdktYs9UIm4ekfSAtLg+aNLwuijoCdLo53kyko+BbcnFo9Q4ND1sQokTxgGRDYKwaBt8LFBjyiLZfn80RxzaekqfqgSqSxuqwntQ9yhgIb4h50HPUqcYQM++QqxLDst7YDQhEIw8m6Tk5NMx2F8l33q
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(346002)(136003)(39860400002)(396003)(230922051799003)(1800799009)(451199024)(64100799003)(186009)(82310400011)(40470700004)(36840700001)(46966006)(2616005)(83380400001)(40460700003)(31686004)(16526019)(40480700001)(53546011)(478600001)(336012)(426003)(31696002)(356005)(86362001)(81166007)(6666004)(107886003)(82740400003)(36860700001)(47076005)(8676002)(26005)(110136005)(36756003)(44832011)(2906002)(70586007)(316002)(8936002)(70206006)(5660300002)(16576012)(4326008)(41300700001)(54906003)(26583001)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(346002)(136003)(396003)(39860400002)(376002)(230922051799003)(64100799003)(451199024)(1800799009)(186009)(82310400011)(36840700001)(40470700004)(46966006)(81166007)(31696002)(356005)(86362001)(36756003)(31686004)(40480700001)(82740400003)(2906002)(478600001)(44832011)(41300700001)(8936002)(5660300002)(4326008)(8676002)(53546011)(83380400001)(426003)(336012)(2616005)(40460700003)(36860700001)(70586007)(70206006)(54906003)(110136005)(16576012)(316002)(26005)(47076005)(16526019)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 11:03:16.9130 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22cf3d43-ab44-48b7-9c1d-08dbc8b75734
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 11:10:57.1366 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 33718aae-7a8a-4d26-3cfd-08dbc8b86979
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044EF.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DE.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB8015
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6224
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -168,37 +167,131 @@ X-Virus-Status: Clean
 
 
 
-On 10/9/23 12:15, Michal Simek wrote:
+On 10/3/23 11:02, Love Kumar wrote:
+> Execute tftpput command for uploading files to a server and validate its
+> size & CRC32.
 > 
+> Signed-off-by: Love Kumar <love.kumar@amd.com>
+> ---
+>   test/py/tests/test_net.py | 69 +++++++++++++++++++++++++++++++++++++++
+>   1 file changed, 69 insertions(+)
 > 
-> On 10/5/23 05:02, Venkatesh Yadav Abbarapu wrote:
->> As the xlnx,phy-type device tree property is deprecated and phy-mode
->> is being used, so removing the code references of xlnx,phy-type.
->>
->> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->> ---
->>   drivers/net/phy/xilinx_phy.c | 4 ----
->>   1 file changed, 4 deletions(-)
->>
->> diff --git a/drivers/net/phy/xilinx_phy.c b/drivers/net/phy/xilinx_phy.c
->> index 1df639d6f4..50f1611ad5 100644
->> --- a/drivers/net/phy/xilinx_phy.c
->> +++ b/drivers/net/phy/xilinx_phy.c
->> @@ -107,10 +107,6 @@ static int xilinxphy_of_init(struct phy_device *phydev)
->>       if (!ofnode_valid(node))
->>           return -EINVAL;
->> -    phytype = ofnode_read_u32_default(node, "xlnx,phy-type", -1);
->> -    if (phytype == XAE_PHY_TYPE_1000BASE_X)
->> -        phydev->flags |= XAE_PHY_TYPE_1000BASE_X;
->> -
->>       return 0;
->>   }
-> 
-> Applied.
-> M
+> diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
+> index cd4b4dc53cbc..f69e3ea2dbba 100644
+> --- a/test/py/tests/test_net.py
+> +++ b/test/py/tests/test_net.py
+> @@ -6,6 +6,7 @@
+>   
+>   import pytest
+>   import u_boot_utils
+> +import datetime
+>   
+>   """
+>   Note: This test relies on boardenv_* containing configuration values to define
+> @@ -50,6 +51,7 @@ env__net_tftp_readable_file = {
+>       'addr': 0x10000000,
+>       'size': 5058624,
+>       'crc32': 'c2244b26',
+> +    'timeout': 50000,
+>   }
+>   
+>   # Details regarding a file that may be read from a NFS server. This variable
+> @@ -260,3 +262,70 @@ def test_net_nfs(u_boot_console):
+>   
+>       output = u_boot_console.run_command('crc32 %x $filesize' % addr)
+>       assert expected_crc in output
+> +
+> +@pytest.mark.buildconfigspec("cmd_crc32")
+> +@pytest.mark.buildconfigspec("cmd_net")
 
-Actually no. I will remove this patch from my queue. You also need to remove 
-phytype variable.
-That's why please send v2 on this.
+Here should be CMD_TFTPPUT marking.
+
+
+> +def test_net_tftpput(u_boot_console):
+> +    """Test the tftpput command.
+> +    A file is downloaded from the TFTP server and then uploaded to the TFTP
+> +    server, its size and its CRC32 are validated.
+> +    The details of the file to download are provided by the boardenv_* file;
+> +    see the comment at the beginning of this file.
+> +    """
+> +
+> +    if not net_set_up:
+> +        pytest.skip("Network not initialized")
+> +
+> +    f = u_boot_console.config.env.get("env__net_tftp_readable_file", None)
+> +    if not f:
+> +        pytest.skip("No TFTP readable file to read")
+> +
+> +    addr = f.get("addr", None)
+> +    if not addr:
+> +        addr = u_boot_utils.find_ram_base(u_boot_console)
+> +
+> +    sz = f.get("size", None)
+> +    timeout = f.get("timeout", u_boot_console.p.timeout)
+> +    fn = f["fn"]
+> +    fnu = "_".join([datetime.datetime.now().strftime("%y%m%d%H%M%S"), fn])
+> +    expected_text = "Bytes transferred = "
+> +    if sz:
+> +        expected_text += "%d" % sz
+> +
+> +    with u_boot_console.temporary_timeout(timeout):
+> +        output = u_boot_console.run_command("tftpboot %x %s" % (addr, fn))
+> +
+> +    assert "TIMEOUT" not in output
+> +    assert expected_text in output
+> +
+> +    expected_tftpb_crc = f.get("crc32", None)
+> +
+> +    output = u_boot_console.run_command("crc32 $fileaddr $filesize")
+> +    assert expected_tftpb_crc in output
+> +
+> +    with u_boot_console.temporary_timeout(timeout):
+> +        output = u_boot_console.run_command(
+> +            "tftpput $fileaddr $filesize $serverip:%s" % (fnu)
+> +        )
+> +
+> +    expected_text = "Bytes transferred = "
+> +    if sz:
+> +        expected_text += "%d" % sz
+> +        addr = addr + sz
+> +    assert "TIMEOUT" not in output
+> +    assert "Access violation" not in output
+> +    assert expected_text in output
+> +
+> +    with u_boot_console.temporary_timeout(timeout):
+> +        output = u_boot_console.run_command("tftpboot %x %s" % (addr, fnu))
+> +
+> +    expected_text = "Bytes transferred = "
+> +    if sz:
+> +        expected_text += "%d" % sz
+> +    assert "TIMEOUT" not in output
+> +    assert expected_text in output
+> +
+> +    expected_tftpp_crc = expected_tftpb_crc
+> +
+> +    output = u_boot_console.run_command("crc32 $fileaddr $filesize")
+> +    assert expected_tftpp_crc in output
+
+I pushed this to CI to see if that goes through and  I see couple of failures 
+like this.
+
+test/py/tests/test_net.py:409: in test_net_tftpput
+     assert expected_text in output
+E   assert 'Bytes transferred = 5181868' in "smc911x: detected LAN9118 
+controller\r\r\nsmc911x: phy initialized\r\r\nsmc911x: MAC 
+52:54:00:12:34:56\r\r\n*** ERROR: `serverip' not set\r\r\nsmc911x: MAC 
+52:54:00:12:34:56"
+
+_______________________________ test_net_tftpput _______________________________
+test/py/tests/test_net.py:417: in test_net_tftpput
+     output = u_boot_console.run_command(
+test/py/u_boot_console_base.py:269: in run_command
+     raise Exception('Bad pattern found on console: ' +
+E   Exception: Bad pattern found on console: unknown_command
+
+test/py/tests/test_net.py:409: in test_net_tftpput
+     assert expected_text in output
+E   assert 'Bytes transferred = 6096080' in "*** ERROR: `serverip' not set"
+
 
 M
