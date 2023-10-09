@@ -4,79 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC02E95A8E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 13:16:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18610E95A8E
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 13:18:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B64F86B7E;
-	Mon,  9 Oct 2023 15:15:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 57D29864D4;
+	Mon,  9 Oct 2023 15:18:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hFNzvzQD";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B38E864A7; Mon,  9 Oct 2023 15:15:53 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1696857482;
+	bh=Z/YiIVx46pj6w95rCGEg24JRE4PJ0nd8KCtZMr8VC3A=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=QeBIPKVJCAOFpLm5J01FoCB+XSjqWsJKwi3Myw06Q+zsAvTdwOwaDMb5MhlrxA/i0
+	 sYGsdM1HyAqahlJtuBiYEe2IpNsWs3TBDPhdZhltUwc+daMa4Iz3k+pB9/BcHUp+ZQ
+	 RcOx3I69T5WDxi0i/jZx8Rhb0FX1LfoW2GmyFYlwRYxRfBOraG9nH8LmzQQ+3mC1uH
+	 67Jzl8qtrC+tUdsZBaLClDdsgF3NlXhZ5H+eZ10/Tvwoa3QZUgTRrC+OopFvqE+hsQ
+	 eAiD1biprTqBVRp2/CQOhMNcw9xGSJsCuhzhmMZ7c3fQP8RpiI4i+cmo0w4nMxeWMk
+	 baRYg6CYtLtGA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24932864A6
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 15:15:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1c746bc3bceso10020265ad.1
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 06:15:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696857349; x=1697462149; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ykl7+QXYhv+gIqf+fZ0nzzp6jq5wmREVP6x41KuZG0g=;
- b=hFNzvzQD/xfVdpmRodYWpKOwhWAEzy9GdxmBoXqI0nNud+m4MTEPqLhihKySygIjoq
- WhGzsPcmjtyw+vN1lqo5rG6Suo5r4yNvDOBWTc+HM7OBe8R/deHFp/dCmU7HXG/UQXzs
- YmWuZOVy43do5wlT6LAHQ8LkcWsTFEodInbZtRQj3l9hvqZaCqIt4/jSFr68y08WHqDX
- vhGDvY3JMjprdKtw3+ZwJN7MtklcGhncCggdZ0nP1l7g9vBDLPO6WTbePKVI7ME0z6VL
- 0B/P1gkVinBbALQ0ewK24yEzX1rQjp+UaaqrIBSt8SF71Pd6XdOwAO269pZgxEg7HK6K
- 8tLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696857349; x=1697462149;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ykl7+QXYhv+gIqf+fZ0nzzp6jq5wmREVP6x41KuZG0g=;
- b=lKZ0o5gwLEepV51LbNf/FAcdNDGVbMk2jUfsx28hgIc56dElTomEFJz/+lckthdtSB
- 3PtdUP/nTV64RgFzXOcwgUJae0+s2H41iIt4sppABljP1Q777q5yGzEew8Djnr5H7bpB
- xzG7RCs55QML2owEOwaJDvsvqRFM1RFzK8Gp6iQVA+A0LMT3Sg+/IIW7bTibV//3wGRJ
- bGfG1nIZYHzCUpHwayDBjS1m017dSRnANrxulNTQBvvFxa61ojq0lTeL/XBOldgdvwFx
- 4WvvHaMLrQ/PZETjAKA2mfr0bAFasnXdPy25y5CGuSRDJF0SURyiCFETw/9sKdrOh4bK
- Ah4g==
-X-Gm-Message-State: AOJu0YwZ580x0KFtCa3RhibD8k0veJbGWppJhRRvoMyF71vt8wFW3G2C
- ZMZ0YAIlnzrH2eAd4l9J8rI=
-X-Google-Smtp-Source: AGHT+IFHA6G8uadvJi6d7Wqr867UDgDUBOWPTnn91I79iugjnZBUDJuLrSkC1soS0oLDXcgpxQutew==
-X-Received: by 2002:a17:902:da8d:b0:1c1:fbec:bc3f with SMTP id
- j13-20020a170902da8d00b001c1fbecbc3fmr17317098plx.5.1696857349354; 
- Mon, 09 Oct 2023 06:15:49 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:22d5:b586:66b8:6e03])
- by smtp.gmail.com with ESMTPSA id
- r10-20020a170902be0a00b001c8a0879805sm4743965pls.206.2023.10.09.06.15.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 06:15:48 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: marex@denx.de
-Cc: sbabic@denx.de,
-	u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v3 3/3] mx28evk: Add USB Mass Storage support
-Date: Mon,  9 Oct 2023 10:15:36 -0300
-Message-Id: <20231009131536.3475878-3-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231009131536.3475878-1-festevam@gmail.com>
-References: <20231009131536.3475878-1-festevam@gmail.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id DBF2986A02;
+ Mon,  9 Oct 2023 15:17:59 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1696857480;
+ bh=Z/YiIVx46pj6w95rCGEg24JRE4PJ0nd8KCtZMr8VC3A=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=qAPWvQUawlTW2a1DWZR6QXVKC+4LOT6DiHcQulhlM/GPGzn6ebqW7X0+4WdaOqKLo
+ IKtoOoUtu7jHUBHiqLDs05RVs6ukH2Zb4uNE+pgwXnQuC/L6nfLZFAa5qDt1IUURwo
+ 2Ea0N28ff0vzHTmXU79XqEjsEvGuiFB2OB/G2y6gqIv5jJKHWRsYMMw0gKQFc3+OTZ
+ NxJKr6eQaHjPMV4W4e/GXXa+L/r4MBYEpG2W4b5R4kWmQZ8orSEb4B4b8VKcm5Cf7X
+ PG26nMNyuQec7lAdP8XNZR8o/oNrCL2hyEGWAxdjw0cJmNVG0NtWGu64fZMNMMfc65
+ PG5/eo6z6OspA==
+Message-ID: <d7dc380a-ad8f-4337-ac63-8b1d70c9a085@denx.de>
+Date: Mon, 9 Oct 2023 15:17:59 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/3] mx28evk: Add USB Mass Storage support
+Content-Language: en-US
+To: Fabio Estevam <festevam@gmail.com>
+Cc: sbabic@denx.de, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+References: <20231009131536.3475878-1-festevam@gmail.com>
+ <20231009131536.3475878-3-festevam@gmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20231009131536.3475878-3-festevam@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,44 +69,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On 10/9/23 15:15, Fabio Estevam wrote:
+> From: Fabio Estevam <festevam@denx.de>
+> 
+> Select the USB options to allow running "ums 0 mmc 0".
+> 
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
 
-Select the USB options to allow running "ums 0 mmc 0".
+Reviewed-by: Marek Vasut <marex@denx.de>
 
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
-Changes since v2:
-- Removed further unrelated options. (Marek)
-Changes since v1:
-- Remove unrelated config options. (Marek)
-
- configs/mx28evk_defconfig | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-diff --git a/configs/mx28evk_defconfig b/configs/mx28evk_defconfig
-index df0cceaea719..4058d08f961a 100644
---- a/configs/mx28evk_defconfig
-+++ b/configs/mx28evk_defconfig
-@@ -32,6 +32,7 @@ CONFIG_CMD_DM=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_NAND_TRIMFFS=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_DATE=y
- CONFIG_CMD_EXT4=y
-@@ -65,3 +66,11 @@ CONFIG_RTC_MXS=y
- CONFIG_DM_SERIAL=y
- CONFIG_SPI=y
- CONFIG_USB=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_MAX_CONTROLLER_COUNT=2
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="FSL"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_CI_UDC=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
--- 
-2.34.1
-
+Thanks !
