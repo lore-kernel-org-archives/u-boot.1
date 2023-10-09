@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 773DAE95A91
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 14:36:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B341E95A8E
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 14:37:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CDE886D48;
-	Mon,  9 Oct 2023 16:36:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20B3A86D80;
+	Mon,  9 Oct 2023 16:36:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ljLWlB2P";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tDPv9ENT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 643D086C1E; Mon,  9 Oct 2023 16:36:18 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 88BA186D2E; Mon,  9 Oct 2023 16:36:21 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4462F863C9
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 16:36:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CCBD82BBF
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 16:36:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-59e88a28b98so39347867b3.1
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 07:36:14 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-59f6492b415so39540187b3.0
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 07:36:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696862173; x=1697466973; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1696862178; x=1697466978; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=98C1ihTk2K6RYBxxbygsTEeBfxRTxU7IAx8L+EKtxZY=;
- b=ljLWlB2PEoyIdgZ5EbgRV+agxrtCaICU7JnYIUxTRhTBfZwTLKynqzcmusKfmtHqG0
- uypnKQlNGHef83OVwm8W3dBFitZc5NPweX/vBSPxGLL2U5o2r75vnwSk/ENZ3QoSmCRl
- nA032VTrC84C7mo7LLczmOe/ZYOLl43f7Mhw0=
+ bh=97Db99ZHVca0mm5uLKXtcJwrUe6Zmr0t2NRsjmtmXmA=;
+ b=tDPv9ENTClP9osnuoauOzq2TdR8u7xcf/hYK4vzHQbU2yRHJmAjNasDV3UYIDGPcyl
+ HCTrDXhCo9mQGKMVpp3d8gKrclaeswaYFywjKvyA3fSUl/e/ddSlHfOz0r58VUVkxKnU
+ j4jOnZqMs6AFjinVyI+/AZFi7q6UzdAsf8OBc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696862173; x=1697466973;
+ d=1e100.net; s=20230601; t=1696862178; x=1697466978;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=98C1ihTk2K6RYBxxbygsTEeBfxRTxU7IAx8L+EKtxZY=;
- b=mnYM/NrsEUKChpIdVxYEcYl9rGi3vpZPW4PaS7JUhTJe6bBaTqQfHvhPjXAbvipscf
- Q0GJX/8TkfKCsE3MXcXgGhhlFYMH02NDO455JM0So/lUf4O5hq0tAdMvgu6u3+V74EYj
- eb+9/jSdGf+4Ivmf4hMTwxd97K8tJgI3why0x8TX274zxsim6I+s79lLfOxYxpExrlq1
- Oac0hjKw1cjVRZPf/YMXE5VrvbCtx/Koh+xdW4UY1HIIJg5JtAoI3YrHNuDDkh6Zgb5o
- k+gtGDC0ei/tA4lBe/99gJda9hpR27EBS2MAPdc8mSHa5cIa53XrxhL8HoAbi8aNCJRM
- +5Tg==
-X-Gm-Message-State: AOJu0YwD7cQbauxQDkX1cUj3xslCWXfsgFGfSOmDSK+MQlAXPBlHBGX0
- JZhtefP6xrumn5tpVk0C22aNHHkXvHa6CqxwV84XJQ==
-X-Google-Smtp-Source: AGHT+IHhzRPwFKTr8w+bqXQpCcBw3uJJWQ2j/E4eGwyzxKjvt1agq1JoguUGeUskwcZZNMYnZRlRuA==
-X-Received: by 2002:a81:4e10:0:b0:56c:e480:2b2b with SMTP id
- c16-20020a814e10000000b0056ce4802b2bmr7924185ywb.12.1696862173032; 
- Mon, 09 Oct 2023 07:36:13 -0700 (PDT)
+ bh=97Db99ZHVca0mm5uLKXtcJwrUe6Zmr0t2NRsjmtmXmA=;
+ b=UnA+yzv7OU7s9ERPcvS4UccRhm+6PM+4Ce5tsUDXVjjLm2IbLzIWcDCVy9RM4z6Au9
+ DPpHfqeTInQ1fkJBc6XFBjqZAz+w3N9R72eTMxMq2SsXhyWusltzGd2atq8Ac+qYCRFz
+ H4GiOZdOHNO/d/CXyE+OFhjYgZGHwxtnLm1RUL2MFEvNw04zl9lwu0AmZ6NJAC/X9Iib
+ 15Fk6Vzpw0NPqRSZS93D4SsdybLUr+N/65MaE7VPBCUdb41g6r7voZ2823n7v4Aa3XHL
+ OxiST2yfDUMi2ucTqakMsG20icH9XV/bGogXHKdIUCnJHY+odOoFBptOfgMzXc0F8Z4N
+ SE0g==
+X-Gm-Message-State: AOJu0YxJbZ0fgXrMJbjDUp4e3/WXPWDTMT1tBn2crpHRIZzLudImgrcc
+ auoB3vbaM7yUydw5Z5ugSN0NhL1hrLwOnMsfTZjDHw==
+X-Google-Smtp-Source: AGHT+IFsUBV/jz8GtNBs8ntruJr4dD+zxATVXO3HXTzS5cFbgqSFUOmurQVZey48vnccZJgkovDmQA==
+X-Received: by 2002:a81:9297:0:b0:59f:7c95:a0cc with SMTP id
+ j145-20020a819297000000b0059f7c95a0ccmr7346118ywg.17.1696862178259; 
+ Mon, 09 Oct 2023 07:36:18 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-fae2-bb7a-3833-e7d0.res6.spectrum.com.
  [2603:6081:7b00:6400:fae2:bb7a:3833:e7d0])
  by smtp.gmail.com with ESMTPSA id
- u185-20020a8160c2000000b005928ba6806dsm3724401ywb.97.2023.10.09.07.36.12
+ d18-20020a81ab52000000b005a4da74b869sm3723362ywk.139.2023.10.09.07.36.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 07:36:12 -0700 (PDT)
-Date: Mon, 9 Oct 2023 10:36:10 -0400
+ Mon, 09 Oct 2023 07:36:17 -0700 (PDT)
+Date: Mon, 9 Oct 2023 10:36:15 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 07/27] test: Make UNIT_TEST depend on CMDLINE
-Message-ID: <20231009143610.GM2227687@bill-the-cat>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+Subject: Re: [PATCH v2 08/27] sifive: Change #ifdef for nop
+Message-ID: <20231009143615.GN2227687@bill-the-cat>
 References: <20231007231255.277623-1-sjg@chromium.org>
- <20231007231255.277623-8-sjg@chromium.org>
+ <20231007231255.277623-9-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kxDjSS/JbN82Z9UP"
+ protocol="application/pgp-signature"; boundary="hRLb0wwYJNHN7fmo"
 Content-Disposition: inline
-In-Reply-To: <20231007231255.277623-8-sjg@chromium.org>
+In-Reply-To: <20231007231255.277623-9-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,42 +94,62 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---kxDjSS/JbN82Z9UP
+--hRLb0wwYJNHN7fmo
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Oct 07, 2023 at 05:12:26PM -0600, Simon Glass wrote:
+On Sat, Oct 07, 2023 at 05:12:27PM -0600, Simon Glass wrote:
 
-> Many tests make some use of the command line, so require it for all test
-> code.
+> This code is normally compiled for sifive, but sandbox can also compile
+> it. We should not use UNIT_TEST as a synonym for SANDBOX, since it is
+> possible to disable UNIT_TEST for sandbox.
 >=20
-> This could be teased apart, perhaps with a test flag indicating that ut
-> uses the command line. Leave that for later.
+> Correct the condition.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> (no changes since v1)
+>=20
+>  include/k210/pll.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+> diff --git a/include/k210/pll.h b/include/k210/pll.h
+> index fd16a89cb203..6dd60b2eb4fc 100644
+> --- a/include/k210/pll.h
+> +++ b/include/k210/pll.h
+> @@ -13,7 +13,7 @@ struct k210_pll_config {
+>  	u8 od;
+>  };
+> =20
+> -#ifdef CONFIG_UNIT_TEST
+> +#ifdef CONFIG_SANDBOX
+>  TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
+>  				     struct k210_pll_config *best);
+>  #ifndef nop
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Sean just explained that this is wrong.
 
 --=20
 Tom
 
---kxDjSS/JbN82Z9UP
+--hRLb0wwYJNHN7fmo
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUkD9oACgkQFHw5/5Y0
-tyw4Ygv/duBlcQr4jKPuS03lAe5WrFYsjcGAgItKaFx9ew9b0XRRJnBftjBXw50I
-EsdFONkm3qpGlteGx7dy2szgQ8wUrhzfK7yD1dLGpGV4LOwUaJt3kbLmavxBpRGH
-mXBUZIdNCD3tk9kbe6+L6fLTKLuNYjFRRt7re+mp891N9QQGl6EZKvolp2M2kIU4
-ekHpfAyX2blGokzSBVK6UxEPX62XgD8IeX+TjioEw+bUWfBYhAf2kgDAtSIZd68Y
-2iaQnzJgU8CsLb9+rvTdJ9CDfGNr/0752YuQfDmcfuwpk4DizdeQ5TYudbjuuaZG
-eODVJ82i3aAjQnplUKWnkdEPv0792z9Q8he36uSnPorn9roJPSCR4FeQ9EVNvPjA
-bH5RcSFLD84QyVCDjMwh7975GM5gOpYBQPwoAlyNSV44ZQ9mhSzTNeIL3q08aXBz
-s5Lr2exPuOF/aVHe5UYkgrdXUPWZKN0UbwVD4zJGHU0xk/xMt7HCkl8t7IFIyPgd
-RJEqVseb
-=WBPC
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUkD98ACgkQFHw5/5Y0
+tywr3Qv7BRfBn6+qrEOdXZ/HqfiaFGYrbUcxVcLAWtFAv7znKUw03nMO36cE1rxy
+y7YfS86p27kWBj1MzEBQUpJV7gVoVzvg21CQFKK0ZsxpTe5Jp1UZ/3gCz3Be3Wkr
+JLas19FrPiywu+Pe9KdobC8MIgbyhE93j/fZGcmr4mJiRTtsvGM5fct2Z1UPQOju
+2pj28YgbwnP+6wX3MZ42jOMvLipjAsCnQ7ajAH8fMcf1rTql9zKw6vMndqgR7jnd
+yfmWjV9bhw2KKyqhiyGyG7rEVPGH2yG76cR03HSxu9JvX6b5ngGv4OmBUuhS2Xti
+EMpMR4PGM6AlTU6wsixX3VWMnU5OPXovMuLkGUkbcC64/AviMy74eIdBZ4yVfaYO
+dFN6Hdl5sxLS3tZ0LZBhFmI6Si4pvWXPRdKGMfYRLwsQBu9ZGNRH/0zDN9ppAaIO
+mukQAtNMQrCfA75m9KZnUYSqw6BG1zEiTQma6pMwxT3g7e7L9sEIqngyOySbfmqB
+3+FDMXLM
+=B4BS
 -----END PGP SIGNATURE-----
 
---kxDjSS/JbN82Z9UP--
+--hRLb0wwYJNHN7fmo--
