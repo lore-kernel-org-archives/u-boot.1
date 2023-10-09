@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5315CCD610D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE278CD610B
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 16:47:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CB3C86DA2;
-	Mon,  9 Oct 2023 18:47:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3415886DC7;
+	Mon,  9 Oct 2023 18:47:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BB7F86D85; Mon,  9 Oct 2023 18:47:13 +0200 (CEST)
+ id A0E7286DA8; Mon,  9 Oct 2023 18:47:16 +0200 (CEST)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id ADF8186A02
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 18:47:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id BA50886D62
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 18:47:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,210,1694703600"; d="scan'208";a="178655024"
+X-IronPort-AV: E=Sophos;i="6.03,210,1694703600"; d="scan'208";a="178655027"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 10 Oct 2023 01:47:09 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 10 Oct 2023 01:47:12 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.229])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 8C8CB402A8D6;
- Tue, 10 Oct 2023 01:47:06 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id AE317402A8D6;
+ Tue, 10 Oct 2023 01:47:09 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
@@ -34,9 +34,9 @@ To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v2 03/19] dt-bindings: Add RZ/G2L PFC bindings
-Date: Mon,  9 Oct 2023 17:46:29 +0100
-Message-Id: <20231009164645.164464-4-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v2 04/19] dt-bindings: Add RZ/G2L IRQC bindings
+Date: Mon,  9 Oct 2023 17:46:30 +0100
+Message-Id: <20231009164645.164464-5-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
 References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
@@ -58,7 +58,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Import bindings for the Port Function Control (PFC) module in the
+Import bindings for the Interrupt Controller (IRQC) module in the
 Renesas RZ/G2L SoC family.
 
 This patch is based on the dt-bindings in Linux v6.5
@@ -73,39 +73,41 @@ v1->v2:
   * Added the exact Linux commit we imported from.
   * Add Marek's Reivewed-by.
 
- include/dt-bindings/pinctrl/rzg2l-pinctrl.h | 23 +++++++++++++++++++++
- 1 file changed, 23 insertions(+)
- create mode 100644 include/dt-bindings/pinctrl/rzg2l-pinctrl.h
+ .../interrupt-controller/irqc-rzg2l.h         | 25 +++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 include/dt-bindings/interrupt-controller/irqc-rzg2l.h
 
-diff --git a/include/dt-bindings/pinctrl/rzg2l-pinctrl.h b/include/dt-bindings/pinctrl/rzg2l-pinctrl.h
+diff --git a/include/dt-bindings/interrupt-controller/irqc-rzg2l.h b/include/dt-bindings/interrupt-controller/irqc-rzg2l.h
 new file mode 100644
-index 000000000000..c78ed5e5efb7
+index 000000000000..34ce778885a1
 --- /dev/null
-+++ b/include/dt-bindings/pinctrl/rzg2l-pinctrl.h
-@@ -0,0 +1,23 @@
++++ b/include/dt-bindings/interrupt-controller/irqc-rzg2l.h
+@@ -0,0 +1,25 @@
 +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 +/*
-+ * This header provides constants for Renesas RZ/G2L family pinctrl bindings.
++ * This header provides constants for Renesas RZ/G2L family IRQC bindings.
 + *
-+ * Copyright (C) 2021 Renesas Electronics Corp.
++ * Copyright (C) 2022 Renesas Electronics Corp.
 + *
 + */
 +
-+#ifndef __DT_BINDINGS_RZG2L_PINCTRL_H
-+#define __DT_BINDINGS_RZG2L_PINCTRL_H
++#ifndef __DT_BINDINGS_IRQC_RZG2L_H
++#define __DT_BINDINGS_IRQC_RZG2L_H
 +
-+#define RZG2L_PINS_PER_PORT	8
++/* NMI maps to SPI0 */
++#define RZG2L_NMI	0
 +
-+/*
-+ * Create the pin index from its bank and position numbers and store in
-+ * the upper 16 bits the alternate function identifier
-+ */
-+#define RZG2L_PORT_PINMUX(b, p, f)	((b) * RZG2L_PINS_PER_PORT + (p) | ((f) << 16))
++/* IRQ0-7 map to SPI1-8 */
++#define RZG2L_IRQ0	1
++#define RZG2L_IRQ1	2
++#define RZG2L_IRQ2	3
++#define RZG2L_IRQ3	4
++#define RZG2L_IRQ4	5
++#define RZG2L_IRQ5	6
++#define RZG2L_IRQ6	7
++#define RZG2L_IRQ7	8
 +
-+/* Convert a port and pin label to its global pin index */
-+#define RZG2L_GPIO(port, pin)	((port) * RZG2L_PINS_PER_PORT + (pin))
-+
-+#endif /* __DT_BINDINGS_RZG2L_PINCTRL_H */
++#endif /* __DT_BINDINGS_IRQC_RZG2L_H */
 -- 
 2.39.2
 
