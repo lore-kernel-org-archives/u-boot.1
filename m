@@ -4,44 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18592CD610D
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 16:50:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A2F0CD6115
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 17:56:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86C8A86E09;
-	Mon,  9 Oct 2023 18:48:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id ED8DC86BCD;
+	Mon,  9 Oct 2023 19:56:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C50786C27; Mon,  9 Oct 2023 18:48:04 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id B043A86E0F
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 18:48:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,210,1694703600"; d="scan'208";a="182438655"
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 10 Oct 2023 01:47:59 +0900
-Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.229])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id D184A402A8DA;
- Tue, 10 Oct 2023 01:47:56 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Hai Pham <hai.pham.ud@renesas.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v2 19/19] board: rzg2l: Add RZ/G2L SMARC EVK board
-Date: Mon,  9 Oct 2023 17:46:45 +0100
-Message-Id: <20231009164645.164464-20-paul.barker.ct@bp.renesas.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
-References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UEPODr8R";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id AC74286BD0; Mon,  9 Oct 2023 19:56:52 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D46F986504
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 19:56:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-5a7a80a96dbso4967417b3.0
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 10:56:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1696874208; x=1697479008; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=F3J80voWavcmIA5JO5Dx9FXzHTvu7aI81wG0S95ORow=;
+ b=UEPODr8RjA/ony599SK4IOiOoKm0LwGxkHWAfp3JQcFXevJZh5fSOP+EgEOBKXkvZA
+ iC7maGuQjM4hC3Ju4pDPaqP14IN9Wo3bnv/5b1+ZV2wEjxYCXnQarkEofOiZSlEjftGi
+ DyQUZC3GufABTuTfsIm8vmkAgvVd47yhM//k4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696874208; x=1697479008;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=F3J80voWavcmIA5JO5Dx9FXzHTvu7aI81wG0S95ORow=;
+ b=vLyX1JB/YBK/ihmdFYeIYCAU5eBTG3SJpvIvuBijElaTYH9oShjZH/Y+p4jD4afNaE
+ zUPUxmZj45B683s5GhMw6xsgV7RYHf4PQ4GkjoWgNodqzITfvukAGCuS9WuAW8v04gJ1
+ tFBk+hHFrnCUBcsC+mPf1xv23xnFe59Vqt0DX99phIv9gd6pyqwfFDJyvcIsMyn3JKpx
+ rsrl/mV9gQV9KbvJoYoq4Xcat73nKp0sUgCxQxF5MobKtO/zhyVjPC7pg3ewNgCepfXS
+ 9JLccCR+QFNiykwvXjgBjTTL58T0iAe6WnZLMuVo2+RgFGv+sKudNOOy5DVSkoJnXHcP
+ O+MQ==
+X-Gm-Message-State: AOJu0Yx/jeMFRLQ5pMm2uUNasKAktJNKPUneS0QVSgdEh9yN2Jhf1Jb4
+ pOWMJCni9qJ30LbcLKCURFr6qqxniGgOa5+Cj7EEMQ==
+X-Google-Smtp-Source: AGHT+IFuTxq8a6AHJv3T++gk7jZAv8BsekP9fQuD8iaM4pAJYJ1rqBuY3uWB9Rvd1oGE0xbZUVNIPYX7wOFLvc7gKFc=
+X-Received: by 2002:a25:d8c1:0:b0:d0c:7309:87f7 with SMTP id
+ p184-20020a25d8c1000000b00d0c730987f7mr9796841ybg.10.1696874208202; Mon, 09
+ Oct 2023 10:56:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
+In-Reply-To: <20231004164220.15738-1-francis.laniel@amarulasolutions.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 9 Oct 2023 11:56:30 -0600
+Message-ID: <CAPnjgZ2XUa6TQMoYu91WAL6T=0QGVUZMQGQA2R-bMasT0aSZig@mail.gmail.com>
+Subject: Re: [RFC PATCH v10 00/24] Modernize U-Boot shell
+To: Francis Laniel <francis.laniel@amarulasolutions.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Tom Rini <trini@konsulko.com>, Harald Seiler <hws@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,286 +83,318 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Renesas RZ/G2L SMARC Evaluation Board Kit consists of the RZ/G2L
-System-on-Module (SOM) based on the R9A07G044L2 SoC, and a common SMARC
-carrier board.
+Hi Francis,
 
-The ARM TrustedFirmware code for the Renesas RZ/G2L SoC family passes a
-devicetree blob to the bootloader as an argument in the same was
-previous R-Car gen3/gen4 SoCs. This blob contains a compatible string
-which can be used to identify the particular SoC we are running on and
-this is used to select the appropriate device tree to load.
+On Wed, 4 Oct 2023 at 10:42, Francis Laniel <
+francis.laniel@amarulasolutions.com> wrote:
+>
+> Hi.
+>
+>
+> During 2021 summer, Sean Anderson wrote a contribution to add a new
+shell, based
+> on LIL, to U-Boot [1, 2].
+> While one of the goals of this contribution was to address the fact actual
+> U-Boot shell, which is based on Busybox hush, is old there was a
+discussion
+> about adding a new shell versus updating the actual one [3, 4].
+>
+> So, in this series, with Harald Seiler, we updated the actual U-Boot
+shell to
+> reflect what is currently in Busybox source code.
+> Basically, this contribution is about taking a snapshot of Busybox
+shell/hush.c
+> file (as it exists in commit 37460f5da) and adapt it to suit U-Boot needs.
+>
+> This contribution was written to be as backward-compatible as possible to
+avoid
+> breaking the existing.
+> So, the 2021 hush flavor offers the same as the actual, that is to say:
+> 1. Variable expansion.
+> 2. Instruction lists (;, && and ||).
+> 3. If, then and else.
+> 4. Loops (for, while and until).
+> No new features offered by Busybox hush were implemented (e.g. functions).
+>
+> It is possible to change the parser at runtime using the "cli" command:
+> => cli print
+> old
+> => cli set 2021
+> => cli print
+> 2021
+> => cli set old
+> The default parser is the old one.
+> Note that to use both parser, you would need to set both
+CONFIG_HUSH_2021_PARSER
+> and CONFIG_HUSH_OLD_PARSER.
+>
+> In terms of testing, new unit tests were added to ut to ensure the new
+behavior
+> is the same as the old one and it does not add regression.
+> Nonetheless, if old behavior was buggy and fixed upstream, the fix is
+then added
+> to U-Boot [5].
+> In sandbox, all of these tests pass smoothly:
+> => printenv board
+> board=sandbox
+> => ut hush
+> Running 20 hush tests
+> ...
+> Failures: 0
+> => parser set 2021
+> => ut hush
+> Running 20 hush tests
+> ...
+> Failures: 0
+>
+> Thanks to the effort of Harald Seiler, I was successful booting a board:
+> => printenv fdtfile
+> fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
+> => cli get
+> old
 
-The configuration renesas_rzg2l_smarc_defconfig is added to support
-building for this target. In the future this defconfig will be extended
-to support other SoCs and evaluation boards from the RZ/G2L family.
+This is a really nice integration.
 
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
-Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
----
-v1->v2:
- * Move dram_init() & dram_init_banksize() to memmap-rzg2l.c
- * Add a TODO note for reset support.
+I think it could benefit from a new Kconfig like CONFIG_HUSH_SELECTABLE
+which enables the cli command and selection of parser...this could perhaps
+be enabled automatically if two parsers are selected. Then the code growth
+(about 1KB on Thumb 2) would mostly go away.
 
- arch/arm/mach-rmobile/Kconfig.rzg2l   | 14 ++++++
- arch/arm/mach-rmobile/memmap-rzg2l.c  | 12 +++++
- board/renesas/rzg2l/Kconfig           | 18 +++++++
- board/renesas/rzg2l/MAINTAINERS       |  6 +++
- board/renesas/rzg2l/Makefile          |  4 ++
- board/renesas/rzg2l/rzg2l.c           | 67 +++++++++++++++++++++++++++
- configs/renesas_rzg2l_smarc_defconfig | 52 +++++++++++++++++++++
- include/configs/rzg2l-smarc.h         | 14 ++++++
- 8 files changed, 187 insertions(+)
- create mode 100644 board/renesas/rzg2l/Kconfig
- create mode 100644 board/renesas/rzg2l/MAINTAINERS
- create mode 100644 board/renesas/rzg2l/Makefile
- create mode 100644 board/renesas/rzg2l/rzg2l.c
- create mode 100644 configs/renesas_rzg2l_smarc_defconfig
- create mode 100644 include/configs/rzg2l-smarc.h
+For checking parsers, the code you use:
 
-diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-rmobile/Kconfig.rzg2l
-index 039d6b0a45aa..dc30bdf3e5c2 100644
---- a/arch/arm/mach-rmobile/Kconfig.rzg2l
-+++ b/arch/arm/mach-rmobile/Kconfig.rzg2l
-@@ -9,6 +9,20 @@ config R9A07G044L
- 	help
- 	  Enable support for the Renesas R9A07G044L (RZ/G2L) SoC.
- 
-+choice
-+	prompt "Renesas RZ/G2L Family Board selection"
-+	default TARGET_RZG2L_SMARC_EVK
-+
-+config TARGET_RZG2L_SMARC_EVK
-+	bool "Renesas RZ/G2L SMARC EVK"
-+	imply R9A07G044L
-+	help
-+	  Enable support for the RZ/G2L SMARC evaluation board.
-+
-+source "board/renesas/rzg2l/Kconfig"
-+
-+endchoice
-+
- config MULTI_DTB_FIT_UNCOMPRESS_SZ
- 	default 0x80000 if TARGET_RZG2L_SMARC_EVK
- 
-diff --git a/arch/arm/mach-rmobile/memmap-rzg2l.c b/arch/arm/mach-rmobile/memmap-rzg2l.c
-index d0509424fb73..a08d0ea08fc0 100644
---- a/arch/arm/mach-rmobile/memmap-rzg2l.c
-+++ b/arch/arm/mach-rmobile/memmap-rzg2l.c
-@@ -113,3 +113,15 @@ void enable_caches(void)
- 
- 	dcache_enable();
- }
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	fdtdec_setup_memory_banksize();
-+
-+	return 0;
-+}
-diff --git a/board/renesas/rzg2l/Kconfig b/board/renesas/rzg2l/Kconfig
-new file mode 100644
-index 000000000000..1335fc7ae806
---- /dev/null
-+++ b/board/renesas/rzg2l/Kconfig
-@@ -0,0 +1,18 @@
-+# Copyright (C) 2023 Renesas Electronics Corporation
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+if TARGET_RZG2L_SMARC_EVK
-+
-+config SYS_SOC
-+	default "rmobile"
-+
-+config SYS_BOARD
-+	default "rzg2l"
-+
-+config SYS_VENDOR
-+	default "renesas"
-+
-+config SYS_CONFIG_NAME
-+	default "rzg2l-smarc"
-+
-+endif
-diff --git a/board/renesas/rzg2l/MAINTAINERS b/board/renesas/rzg2l/MAINTAINERS
-new file mode 100644
-index 000000000000..0a51391c1fc9
---- /dev/null
-+++ b/board/renesas/rzg2l/MAINTAINERS
-@@ -0,0 +1,6 @@
-+RENESAS RZG2L BOARD FAMILY
-+M:	Paul Barker <paul.barker.ct@bp.renesas.com>
-+S:	Supported
-+F:	arch/arm/dts/rz-smarc-common.dtsi
-+N:	rzg2l
-+N:	r9a07g044
-diff --git a/board/renesas/rzg2l/Makefile b/board/renesas/rzg2l/Makefile
-new file mode 100644
-index 000000000000..466935fc8158
---- /dev/null
-+++ b/board/renesas/rzg2l/Makefile
-@@ -0,0 +1,4 @@
-+# Copyright (C) 2023 Renesas Electronics Corporation
-+# SPDX-License-Identifier: GPL-2.0+
-+
-+obj-y	:= rzg2l.o
-diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
-new file mode 100644
-index 000000000000..5b919f0b495a
---- /dev/null
-+++ b/board/renesas/rzg2l/rzg2l.c
-@@ -0,0 +1,67 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * RZ/G2L board support.
-+ * Copyright (C) 2023 Renesas Electronics Corporation
-+ */
-+
-+#include <common.h>
-+#include <fdtdec.h>
-+#include <linux/libfdt.h>
-+
-+#if IS_ENABLED(CONFIG_MULTI_DTB_FIT)
-+/* If the firmware passed a device tree, use it for board identification. */
-+extern u64 rcar_atf_boot_args[];
-+
-+static bool is_rzg2l_board(const char *board_name)
-+{
-+	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
-+
-+	return fdt_node_check_compatible(atf_fdt_blob, 0, board_name) == 0;
-+}
-+
-+int board_fit_config_name_match(const char *name)
-+{
-+	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
-+
-+	if (fdt_magic(atf_fdt_blob) != FDT_MAGIC)
-+		return -1;
-+
-+	if (is_rzg2l_board("renesas,r9a07g044l2"))
-+		return strcmp(name, "r9a07g044l2-smarc");
-+
-+	return -1;
-+}
-+#endif
-+
-+static void apply_atf_overlay(void *fdt_blob)
-+{
-+	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
-+
-+	if (fdt_magic(atf_fdt_blob) == FDT_MAGIC)
-+		fdt_overlay_apply_node(fdt_blob, 0, atf_fdt_blob, 0);
-+}
-+
-+int fdtdec_board_setup(const void *fdt_blob)
-+{
-+	apply_atf_overlay((void *)fdt_blob);
-+
-+	return 0;
-+}
-+
-+int ft_board_setup(void *blob, struct bd_info *bd)
-+{
-+	return 0;
-+}
-+
-+int __weak board_init(void)
-+{
-+	return 0;
-+}
-+
-+void __weak reset_cpu(void)
-+{
-+	/*
-+	 * TODO: Implement reset support once TrustedFirmware supports
-+	 * the appropriate call.
-+	 */
-+}
-diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
-new file mode 100644
-index 000000000000..e17d22695787
---- /dev/null
-+++ b/configs/renesas_rzg2l_smarc_defconfig
-@@ -0,0 +1,52 @@
-+CONFIG_ARM=y
-+CONFIG_COUNTER_FREQUENCY=16666666
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=1048576
-+CONFIG_ARCH_CPU_INIT=y
-+CONFIG_ARCH_RMOBILE=y
-+CONFIG_TEXT_BASE=0x50000000
-+CONFIG_SYS_MALLOC_LEN=0x4000000
-+CONFIG_SYS_MALLOC_F_LEN=0x80000
-+CONFIG_ENV_SIZE=0x20000
-+CONFIG_ENV_OFFSET=0xFFFE0000
-+CONFIG_DM_GPIO=y
-+CONFIG_DEFAULT_DEVICE_TREE="r9a07g044l2-smarc"
-+CONFIG_RZG2L=y
-+CONFIG_SYS_MONITOR_LEN=1048576
-+CONFIG_SYS_LOAD_ADDR=0x58000000
-+CONFIG_REMAKE_ELF=y
-+CONFIG_FIT=y
-+CONFIG_SUPPORT_RAW_INITRD=y
-+CONFIG_USE_BOOTARGS=y
-+# CONFIG_BOARD_EARLY_INIT_F is not set
-+CONFIG_SYS_MALLOC_BOOTPARAMS=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_SYS_MAXARGS=64
-+CONFIG_SYS_PBSIZE=2068
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_PART=y
-+CONFIG_CMD_EXT2=y
-+CONFIG_CMD_EXT4=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_FAT=y
-+CONFIG_CMD_FS_GENERIC=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_MULTI_DTB_FIT_LZO=y
-+CONFIG_MULTI_DTB_FIT_USER_DEFINED_AREA=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SYS_MMC_ENV_PART=2
-+CONFIG_VERSION_VARIABLE=y
-+CONFIG_REGMAP=y
-+CONFIG_CLK=y
-+CONFIG_CLK_RENESAS=y
-+# CONFIG_CLK_RCAR_GEN3 is not set
-+CONFIG_GPIO_HOG=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_UHS_SUPPORT=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-diff --git a/include/configs/rzg2l-smarc.h b/include/configs/rzg2l-smarc.h
-new file mode 100644
-index 000000000000..ea57d280cb8d
---- /dev/null
-+++ b/include/configs/rzg2l-smarc.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (C) 2023 Renesas Electronics Corporation
-+ */
-+
-+#ifndef __RENESAS_RZG2L_H
-+#define __RENESAS_RZG2L_H
-+
-+#include <asm/arch/rmobile.h>
-+
-+/* console */
-+#define CFG_SYS_BAUDRATE_TABLE	{ 115200, 38400 }
-+
-+#endif /* __RENESAS_RZG2L_H */
--- 
-2.39.2
+   if (gd->flags & GD_FLG_HUSH_OLD_PARSER) {
+      int hush_flags = FLAG_PARSE_SEMICOLON | FLAG_EXIT_FROM_LOOP;
 
+      if (flag & CMD_FLAG_ENV)
+         hush_flags |= FLAG_CONT_ON_NEWLINE;
+      return parse_string_outer(cmd, hush_flags);
+   } else if (gd->flags & GD_FLG_HUSH_2021_PARSER) {
+...
+      return parse_string_outer_2021(cmd, FLAG_EXIT_FROM_LOOP);
+   }
+
+could be written to reduce code size...i.e. there is only a need to check
+the gd flag if HUSH_SELECTABLE is enabled, so:
+
+static inline bool use_hush_old(void)
+{
+ return IS_ENABLED(CONFIG_HUSH_SELECTABLE) ?
+     gd->flags & GD_FLG_HUSH_OLD_PARSER :
+     IS_ENABLD(CONFIG_HUSH_OLD_PARSER);
+}
+
+Then use that function in the code able.
+
+Size growth when swtiching to the the new parser is only 3KB, from my test.
+I thought it would be much more?
+
+> => boot
+> ...
+> root@lepotato:~#
+> root@lepotato:~# reboot
+> ...
+> => cli set 2021
+> => cli get
+> 2021
+> => printenv fdtfile
+> fdtfile=amlogic/meson-gxl-s905x-libretech-cc.dtb
+> => boot
+> ...
+> root@lepotato:~#
+>
+> I had to not use CONFIG_HUSH_2021_PARSER for the keymile board.
+> Indeed, the keymile board family is the only set of boards to call
+> get_local_var(), set_local_var() and unset_local_var().
+> Sadly, these functions are static in this contribution.
+> I could have change all of them to introduce code like this:
+> *_local_var(/*...*/)
+> {
+>         if (gd->flags & GD_FLG_HUSH_OLD_PARSER)
+>                 return *_local_var_old(/*...*/);
+>         if (gd->flags & GD_FLG_HUSH_2021_PARSER)
+>                 return *_local_var_2021(/*...*/);
+> }
+> But this would have mean renaming all old hush functions calls and I did
+not
+> want to change the old hush particularly to avoid breaking things.
+> Instead, I change the keymile board to use environment variable instead
+of local
+> ones.
+> I think this particularities can be addressed in future works.
+
+I agree.
+
+>
+> I also had to enable CONFIG_LTO for kirkwoord sheevaplug and phytec
+bk4r1, so
+> they do not hit their limits.
+>
+> For all these reasons, I marked this contribution as RFC to indeed
+collect your
+> opinions.
+> My goal is not to change suddenly actual shell to this one, we clearly
+need a
+> transition period to think about it.
+> I think it is better to see this contribution as a proof of concept which
+shows
+> it is possible to update the actual shell.
+>
+> If you want to review it - your review will really be appreciated - here
+are
+> some information regarding the commits:
+> * commits marked as "test:" deal with unit tests.
+> * commit "cli: Add Busybox upstream hush.c file." copies Busybox
+shell/hush.c
+> into U-Boot tree, this explain why this commit contains around 12000
+additions.
+> * commit "cli: Port Busybox 2021 hush to U-Boot." modifies previously
+added file
+> to permit us to use this as new shell.
+> The really good idea of #include'ing Busybox code into a wrapper file to
+define
+> some particular functions while minimizing modifications to upstream code
+comes
+> from Harald Seiler.
+> * commit "cmd: Add new parser command" adds a new command which permits
+> selecting parser at runtime.
+> I am not really satisfied with the fact it calls cli_init() and
+cli_loop() each
+> time the parser is set, so your reviews would be welcomed.
+
+It would be great if this could go in this cycle.
+
+One minor nit is that the commit "cmd: Add new cli command" introduces a
+build error which is fixed in the next commit. It would be better to have
+the GD flag added in that first commit.
+
+It is great to see such a simple diff from 2 years of busybox activity. It
+augurs well for future maintenance.
+
+I feel that in general, if if() were used instead of #if, some of the
+#ifdef stuff might go away. For example, if some #ifdef'd code calls foo(),
+then foo() itself needs an #ifdef but if the code which calls foo() is 'if
+(!U_BOOT) foo()' then we don't need the #ifdef around foo().
+
+Another point is that I wonder if it is worth #ifdefing out struct members.
+Perhaps it is safer that way, but it does create more #ifdefs, where if()
+could be used.
+
+In a few cases I saw chunks of code being added - it might be better for
+maintenance to create a new function with the U-Boot code and call it from
+the original site.
+
+These are all minor things, though. I suggest sending a non-RFC as I
+believe it is mostly ready to go in.
+
+> * Other commits focus on enabling features we need (e.g. if).
+>
+> Changes since:
+>  v2:
+>   * Added a small fix to compile sandbox with NO_SDL=1.
+>   * Added a command to change parser at runtime.
+>   * Added 2021 parser function to all run_command*().
+>  v3:
+>   * Various bug fixes pointed by the CI.
+>   * Added upstream busybox hush commits until 6th February 2022.
+>  v4:
+>   * Various cleaning.
+>   * Modified python test to accept failure output when the test are
+designed to
+>   fail.
+>   * Bumped upstream busybox hush commits until 24h March 2022.
+>  v5:
+>   * Bumped upstream busybox hush commits until 30th January 2023.
+>   * Fix how hush interprets '<' and '>', indeed we needed to escape them
+but I
+>   removed this behavior as tests are handled by test command and not hush
+>   itself. This permitted to have the ut fdt to pass.
+>   * Fix a problem with how exit was handled. This was reported by the ut
+exit
+>   test.
+>  v6:
+>   * There was no v6 and I got mixed up with version.
+>  v7:
+>   * Bumped upstream busybox hush commits until 9th May 2023.
+>   * Renamed parser command to change parser at runtime to cli and added
+>   documentation.
+>   * Added better separation of patches.
+>   * Removed code about __gnu_thumb1_case_si as it was merged in another
+series.
+>   * Various cleaning.
+>  v8:
+>   * Bumped upstream busybox hush commits until 25th May 2023.
+>  v9:
+>   * Bumped upstream busybox hush commits until 2nd October 2023.
+>
+> Francis Laniel (24):
+>   test: Add framework to test hush behavior
+>   test: hush: Test hush if/else
+>   test/py: hush_if_test: Remove the test file
+>   test: hush: Test hush variable expansion
+>   test: hush: Test hush commands list
+>   test: hush: Test hush loops
+>   cli: Add Busybox upstream hush.c file
+>   cli: Port Busybox 2021 hush to U-Boot
+>   cli: Add menu for hush parser
+>   global_data.h: add GD_FLG_HUSH_OLD_PARSER flag
+>   cmd: Add new cli command
+>   cli: Enables using hush 2021 parser as command line parser
+>   cli: hush_2021: Enable variables expansion for hush 2021
+>   cli: hush_2021: Add functions to be called from run_command()
+>   cli: add hush 2021 as parser for run_command*()
+>   test: hush: Fix instructions list tests for hush 2021
+>   test: hush: Fix variable expansion tests for hush 2021
+>   cli: hush_2021: Enable using < and > as string compare operators
+>   cli: hush_2021: Enable if keyword
+>   cli: hush_2021: Enable loops
+>   test: hush: Fix loop tests for hush 2021
+>   cli: hush_2021: Add upstream commits up to 2nd October 2023.
+>   DO NOT MERGE: only to make CI happy
+>   DO NOT MERGE: ci: Build the world in any case.
+>
+>  .azure-pipelines.yml               |     1 +
+>  cmd/Kconfig                        |    22 +
+>  cmd/Makefile                       |     2 +
+>  cmd/cli.c                          |   125 +
+>  common/Makefile                    |     3 +-
+>  common/cli.c                       |    82 +-
+>  common/cli_hush_2021.c             |   324 +
+>  common/cli_hush_upstream.c         | 13030 +++++++++++++++++++++++++++
+>  configs/sheevaplug_defconfig       |     1 +
+>  doc/usage/cmd/cli.rst              |    74 +
+>  doc/usage/index.rst                |     1 +
+>  include/asm-generic/global_data.h  |     8 +
+>  include/cli_hush.h                 |    51 +-
+>  include/test/hush.h                |    15 +
+>  include/test/suites.h              |     1 +
+>  test/Makefile                      |     3 +
+>  test/cmd_ut.c                      |     6 +
+>  test/hush/Makefile                 |    10 +
+>  test/hush/cmd_ut_hush.c            |    20 +
+>  test/hush/dollar.c                 |   226 +
+>  test/hush/if.c                     |   316 +
+>  test/hush/list.c                   |   140 +
+>  test/hush/loop.c                   |    91 +
+>  test/py/tests/test_hush_if_test.py |   197 -
+>  test/py/tests/test_ut.py           |     8 +-
+>  tools/patman/series.py             |     4 +
+>  26 files changed, 14549 insertions(+), 212 deletions(-)
+>  create mode 100644 cmd/cli.c
+>  create mode 100644 common/cli_hush_2021.c
+>  create mode 100644 common/cli_hush_upstream.c
+>  create mode 100644 doc/usage/cmd/cli.rst
+>  create mode 100644 include/test/hush.h
+>  create mode 100644 test/hush/Makefile
+>  create mode 100644 test/hush/cmd_ut_hush.c
+>  create mode 100644 test/hush/dollar.c
+>  create mode 100644 test/hush/if.c
+>  create mode 100644 test/hush/list.c
+>  create mode 100644 test/hush/loop.c
+>  delete mode 100644 test/py/tests/test_hush_if_test.py
+>
+> --
+> 2.34.1
+>
+
+Regards,
+Simon
