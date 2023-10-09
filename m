@@ -4,43 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC86DE95A95
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 07:12:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD0A6E95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 07:30:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7FB5A865ED;
-	Mon,  9 Oct 2023 09:12:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7766A86661;
+	Mon,  9 Oct 2023 09:30:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 121F486661; Mon,  9 Oct 2023 09:12:35 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 20E1286568
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 09:12:30 +0200 (CEST)
+ id 7AA6E864CD; Mon,  9 Oct 2023 09:30:09 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 45F4B864CD
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 09:30:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
 X-IronPort-AV: E=Sophos;i="6.03,209,1694703600"; 
- d="asc'?scan'208";a="178621557"
+ d="asc'?scan'208";a="182404230"
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 09 Oct 2023 16:12:28 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 09 Oct 2023 16:30:01 +0900
 Received: from unknown (unknown [10.226.92.156])
- by relmlir5.idc.renesas.com (Postfix) with SMTP id D3A28400C099;
- Mon,  9 Oct 2023 16:12:26 +0900 (JST)
-Date: Mon, 9 Oct 2023 08:12:25 +0100
+ by relmlir5.idc.renesas.com (Postfix) with SMTP id 9E8084006DC9;
+ Mon,  9 Oct 2023 16:29:59 +0900 (JST)
+Date: Mon, 9 Oct 2023 08:29:58 +0100
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Sean Anderson <seanga2@gmail.com>
-Subject: Re: [PATCH] doc: Add a short intro video
-Message-ID: <20231009071027.ujkgzxq4trahncal@GBR-5CG2373LKG.adwin.renesas.com>
-References: <20231008213557.621529-1-sjg@chromium.org>
+To: Marek Vasut <marek.vasut@mailbox.org>
+Cc: u-boot@lists.denx.de, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Hai Pham <hai.pham.ud@renesas.com>, Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Subject: Re: [PATCH 10/16] serial: sh: Add RZ/G2L SCIF support
+Message-ID: <20231009072958.g3zpoyp7ih2c4hvm@GBR-5CG2373LKG.adwin.renesas.com>
+References: <20230920124212.63535-11-paul.barker.ct@bp.renesas.com>
+ <94bd4c16-67c4-828d-7eb2-fe6a68df4800@mailbox.org>
+ <68462bfa-c11a-8e21-7fc5-21bb9af9ccd9@bp.renesas.com>
+ <8cd7a684-3e5e-4bd4-bab4-796502935d83@mailbox.org>
+ <20231004134308.oaeqeolblr4ex2l5@GBR-5CG2373LKG.adwin.renesas.com>
+ <9893a1f5-b085-46f7-a694-f186ab764cd2@mailbox.org>
+ <20231004163858.zeuxy64olun5iini@GBR-5CG2373LKG.adwin.renesas.com>
+ <1bdc45f0-8c32-4347-b238-c6ee8037f620@mailbox.org>
+ <6514beaa-6584-84de-883a-69933e0f54db@bp.renesas.com>
+ <8e04236c-a262-41e3-b891-5b22afcbd86f@mailbox.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="2anyrk6ghdevr7vt"
+ protocol="application/pgp-signature"; boundary="2wezfiqihfetkbff"
 Content-Disposition: inline
-In-Reply-To: <20231008213557.621529-1-sjg@chromium.org>
+In-Reply-To: <8e04236c-a262-41e3-b891-5b22afcbd86f@mailbox.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,57 +68,76 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---2anyrk6ghdevr7vt
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="7e4gjldcmpydlqtq"
-Content-Disposition: inline
-
-
---7e4gjldcmpydlqtq
+--2wezfiqihfetkbff
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Oct 08, 2023 at 03:35:56PM -0600, Simon Glass wrote:
-> This video covers the basics in a short time, so add a link to it.
+On Sat, Oct 07, 2023 at 11:14:06PM +0200, Marek Vasut wrote:
+> On 10/5/23 14:08, Paul Barker wrote:
+> > The case we're interested in here is the Receive Error (ER) & Break
+> > Detect (BRK) conditions. I've done some further datasheet digging...
+> >=20
+> > RZ/G2L datasheet says these are cleared by writing zero to the
+> > appropriate bits of the FSR register.
+> >=20
+> > RZ/G2{H,M,N,E} datasheet says the same (pages 50-18 & 50-19 of
+> > R01UH0808EJ0111 Rev.1.11).
+> >=20
+> > The R-Car Gen3 Hardware Manual says the same (pages 55-18 & 55-19 of
+> > R19UH0105EJ0230 Rev.2.30).
+> >=20
+> > For R-Car S4, there is an Excel spreadsheet attached to page 105-5 of
+> > the datasheet (R19UH0161EJ0100 Rev.1.00) which again says the same.
+> >=20
+> > For R-Car V4H, the relevant info is on pages 105-16 & 105-18 of the
+> > datasheet (R19UH0172EJ0081 Rev.0.81) and says the same.
+> >=20
+> > On the RZ/G2L I was able to reproduce a break condition by changing
+> > pinmux settings after the SCIF interface has been configured. You could
+> > try this out on an R-Car system, but I don't think it's guaranteed to
+> > cause a break condition, it may depend on how the port input is
+> > implemented in those SoCs. From my reading, the only guaranteed way to
+> > cause a break condition is to hold the Rx signal low, and you might need
+> > to solder on some extra wires on to a board to be able to do that.
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+> Can't you simply send a BREAK from terminal program ?
+> In minicom, I think that's meta-F B .
 >=20
->  doc/learn/talks.rst | 3 +++
->  1 file changed, 3 insertions(+)
+> > We should still fix the error handling here, even if the boards we have
+> > don't easily cause Receive Errors or Break conditions, other folks may
+> > have their own boards based on these SoCs.
+> >=20
+> > If you're happy I'll go ahead and check IS_ENABLED(CONFIG_RCAR_64) here
+> > instead of IS_ENABLED(CONFIG_RZG2L).
 >=20
-> diff --git a/doc/learn/talks.rst b/doc/learn/talks.rst
-> index 0bb44aeabe55..d65e3b92be1a 100644
-> --- a/doc/learn/talks.rst
-> +++ b/doc/learn/talks.rst
-> @@ -15,6 +15,9 @@ learn a bit about U-Boot:
->    <https://www.youtube.com/watch?v=3DYlJBsVZJkDI>`__
->    from Embedded Linux Conference 2023.
-> =20
-> +* `Introduction to U-Boot for beginners
-> +  <https://www.youtube.com/watch?v=3DrVaiLgXccSE>`__
-> +
->  See elinux_talks_ for a more comprehensive list.
-> =20
->  .. _elinux_talks: https://elinux.org/Boot_Loaders#U-Boot
-> --=20
-> 2.42.0.609.gbb76f46606-goog
->=20
+> Based on the input I am getting from you here, it seems to me we should j=
+ust
+> use the G2L case as the common case for all systems, without any special
+> casing, right ?
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+I assumed that the code that's in place here was correct for some older
+SoC when it was added to u-boot. But I've just looked at the SH7751
+datasheet this morning and guess what? It requires writing zeros to
+clear the errors.
 
---7e4gjldcmpydlqtq--
+As long as SCIF_ERRORS is correctly defined for each SoC, then yes, it
+looks like we can drop the conditional.
 
---2anyrk6ghdevr7vt
+I'll include this in v2.
+
+Thanks,
+Paul
+
+--2wezfiqihfetkbff
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZSOn2QAKCRDbaV4Vf/JG
-vfRtAQCwuBJ89TltUn7qLgL9Cak5vD7TWis/Adb/T3wZmJ9oewD/fVngzBwQpK0C
-bu9t2L9165ZC1IRAKEFeCRNugXqgOAA=
-=nSFu
+iHUEABYIAB0WIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZSOr6AAKCRDbaV4Vf/JG
+vY3kAP9l39OCb475sJ2tnEVgYFRfS5KUdkGsz1pL0CFUVQHyYgEAkYM35qk9+WrX
+0aSboQ4ZJHzNnKOhdgoKzsOwiUY8pg8=
+=wLVR
 -----END PGP SIGNATURE-----
 
---2anyrk6ghdevr7vt--
+--2wezfiqihfetkbff--
