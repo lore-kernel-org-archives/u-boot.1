@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A627E95A8E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 10:12:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68D68E95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 10:13:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C28586413;
-	Mon,  9 Oct 2023 12:12:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B8D7286A26;
+	Mon,  9 Oct 2023 12:13:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="E9UUvqSf";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="1fVd+SVa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10B4186AB9; Mon,  9 Oct 2023 12:12:56 +0200 (CEST)
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::600])
+ id 7B8BF86B1B; Mon,  9 Oct 2023 12:13:21 +0200 (CEST)
+Received: from NAM02-DM3-obe.outbound.protection.outlook.com
+ (mail-dm3nam02on2061a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e83::61a])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD5238638B
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 12:12:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36D578638B
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 12:13:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hTLTOOpNCoxYKKVFRZQex9jRPsviF2jRPU8N4fS35LbPp2ruMoHAdgA6z+RubjvumKq6xmN+5saNq8iamjafzLEdO6g0OQhZO0m6ops7qw5RChJlLPCSoXpY1cRhEZEgbgtBJyt6GQdP97EfkAqvTalNvjJcIifH0dGbK+yoW4ValUsIwx1fvtuxNjZ8ALzvi0XspkGvDjTZvDscylJIeVBq7caxmw49zibOx4Lkacj84IQn30qU4Wm3O5kVDdisFDehtmtvs8lK1ifuVNxty0BITSumDDrr4KoV68HFvTF6abqilbox1AJW3Ot3wSN2TVS58liIkOvakOjzSXuRfQ==
+ b=RM+4ecxl56kNrJcMIqvik2dDUnFOY8psoevN/CjLVNZ5reN1L658u72/vu0Y2c0WnpMdZFp3dpHyztWDmFKnuBfTS+E3jyDTpIy7xX9d8C3zzI4cHHAWXadH14JExsPY9KyCqjYvSpnpYcYhdMVSVKbJA4RmRc3XIYvQWb7OrmOZkDb1MZu7FDkrNLlHAu875RQ7dMRN9TPYpcJi9Qdbv2Gt+xP/83CsikGhmy0vKeNoQl1cQYmv9D4T3mK8NhcyfZpnwFVhl+6arZgCtAGxU+DdET3qN4t8069oGuUl7Z5EcGRiHAMh2SoAT1WAN6YOZ048CV4X1A2sD1Iy2ntQdA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Yzv7fDb6WAGzUVhDcX+SVZE4k60azk7q7JD6RUN/esc=;
- b=ll0Uq/8LKp4cv2rTG3pIzs1wyRjRkYTha7yBrvWsXWqACymKoVtAqIfiWjKSQPBf0PNy91bN4x/N/rZ2tbEAgMZ4L0wxlUY85W+iTNYgRA2RnSaIgz2j2Fhg0+Wm5knCMQ9Jg91hDPtPW1xL3IasmCZizVVOuXh8z0dTo1e95oozntkzsGFG2bfxxJc2IlNrxo63odQiVs2DPW1gYe/tgBZW+RAqn1WOZIncIGQAXZPcO94d8MeNb2bLXXmt3hOKUweS5/YxGs3LDvM7kgPABH/d6VpEx9kHR0ib2mAkwX+QFgY3bsGCmdM5wOqm3lByQfrpq5DCRn8zuCPvoov0Fw==
+ bh=y4jprHCPEoZc9Cb+J/Kiu5jb4CvG4wfaG2hOTpS1/40=;
+ b=Gr26VJiLRHibWXw8bg1XP3BvWmw4fpB6tMKkXp4l68k06VP92ainUbb2bFyEu7NrrpTzqUSq8lJm6KZkx1VWrXEXGlJkrN5qdo54zLsbMJGh0LZfv3mwo69JRF2vo6NYCW2LgdjYR1WkrkUFsIrPgNCguZkLCh5cMdY9/J03gC8JE0p6T8FTb9qTkNro1sm5AbFKScoaEMWkfddQ0+oV69SA0P1t+zUR07EtwgHtvEHdmVa2xPNpF9hw/WlX3MptAe5LEkS4eHy1fi7bduruGktTYeJgPR/dq3gs7hx3jDwQP6ygd/SW8vMuLhx251RfSwfPimKRcSuiVVn7uIRYbg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Yzv7fDb6WAGzUVhDcX+SVZE4k60azk7q7JD6RUN/esc=;
- b=E9UUvqSfwbjo0YBE8Llu/hdTni2+DSiAeQ41WcVCKNHG0x5EiFoJx2GiCBrkYwSwhD54IjRxA7WtERXziqP0FT8++CHVkZUZ37R7rAXw+MPaWosdsJ8CQKERiYrRxzXNT22WwFq7myPXq71RoXRpy/U4N4g6pcc4mLOQhi+ofd0=
-Received: from DS7PR03CA0142.namprd03.prod.outlook.com (2603:10b6:5:3b4::27)
- by DM4PR12MB5344.namprd12.prod.outlook.com (2603:10b6:5:39a::9) with
+ bh=y4jprHCPEoZc9Cb+J/Kiu5jb4CvG4wfaG2hOTpS1/40=;
+ b=1fVd+SVafgfyUtQ6oykur/o9ueW4qxmKKQK52ny2nvopyyGtT8kbFboXGftxnceO89GIEvRkGFfTz8//+fY4axwm+Q07imxKdUrPY1SL6w9u8ZO7u/5McTusFAI2V7uJyDnRoorRJbwrUV9XaNPWRomilAeE4B8yDDO80QrZWXU=
+Received: from CY5PR16CA0011.namprd16.prod.outlook.com (2603:10b6:930:10::29)
+ by DS0PR12MB8765.namprd12.prod.outlook.com (2603:10b6:8:14e::6) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.38; Mon, 9 Oct
- 2023 10:12:48 +0000
-Received: from CY4PEPF0000EDD3.namprd03.prod.outlook.com
- (2603:10b6:5:3b4:cafe::44) by DS7PR03CA0142.outlook.office365.com
- (2603:10b6:5:3b4::27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.42; Mon, 9 Oct
+ 2023 10:13:16 +0000
+Received: from CY4PEPF0000EDD7.namprd03.prod.outlook.com
+ (2603:10b6:930:10:cafe::72) by CY5PR16CA0011.outlook.office365.com
+ (2603:10b6:930:10::29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.36 via Frontend
- Transport; Mon, 9 Oct 2023 10:12:48 +0000
+ Transport; Mon, 9 Oct 2023 10:13:16 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,22 +59,22 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EDD3.mail.protection.outlook.com (10.167.241.207) with Microsoft
+ CY4PEPF0000EDD7.mail.protection.outlook.com (10.167.241.211) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.19 via Frontend Transport; Mon, 9 Oct 2023 10:12:48 +0000
+ 15.20.6838.14 via Frontend Transport; Mon, 9 Oct 2023 10:13:15 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 9 Oct
- 2023 05:12:45 -0500
-Message-ID: <a61e77fb-9049-4366-a575-32ca238ad32b@amd.com>
-Date: Mon, 9 Oct 2023 12:12:43 +0200
+ 2023 05:13:14 -0500
+Message-ID: <06c03b2f-d0c1-4e91-9f02-87b0f6129d2b@amd.com>
+Date: Mon, 9 Oct 2023 12:13:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/11] xilinx: add missing boards/SC descriptions
+Subject: Re: [PATCH] arm: dts: xilinx: Remove undocumented is-dual property
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-References: <cover.1695808407.git.michal.simek@amd.com>
+References: <15980560b98672959a889ff9970cbe9540b4ed69.1695808563.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -119,7 +119,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <cover.1695808407.git.michal.simek@amd.com>
+In-Reply-To: <15980560b98672959a889ff9970cbe9540b4ed69.1695808563.git.michal.simek@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -127,26 +127,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD3:EE_|DM4PR12MB5344:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7cd06457-7c54-4d38-1da5-08dbc8b049f5
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EDD7:EE_|DS0PR12MB8765:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7a989c38-1466-4c17-c019-08dbc8b05a69
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 6WciRuLg9uEw18oxO9qUXETz9l7oz7o5tDXvnYEfrZJblbScJRsqVXbVeteSJ873VPtTnpMaqMxqePhhFZ86sGvzYYhY/fd/uHyVCiF7A4n4D53FSqBcWiTKVj8VbPLHcL+RbmcVDfvcMrk9FzLPpKif9fCdAW64cTZZEis+z9z/lWeU4f4cML4D0+Vr+Y3TZsMn/VHK3ZNcFNt/iXm76xqnMGAqFQ1fYHcM/UPFjBqmytSy7bl02LiJACmMA7+9Rt6G4irxTHTkDnDg5wEGY43DDd4Hy+QWnw/pL0fSgEDwkGA0obZdvP/7tTvkK5CG3pWCisHi323VuWEtsjEk8lvBPxcvghp7evbV4ly8UuzpSbWd2lUGCHbfKcDpksQk+fskTqzTMLDZzOU6kzea17qH2Cl/TUX61h9iJRfeD0mMeRUpD0JnufTZNNJv0eTk4bSbKNniG5C4FWQVN8Tk+oYwNYuP1yAKbMN9bS5F5i3rHH4nEphP4RlIkA9ATD1LxEVuJE16Vp+Oi/gqoXPpR/6milb8O8nwrOUFQdqeg3NlMvdDCIqrtBgifaKB47Oo4FvAJSJ5T5drqVQq5TN51GWLMZkbiZoIoIEahZ8O6v2bomH58hqHhnA3S59im3UjVilh3sMuBLs6MetFiZt44ap7JJlUmveuY4uv8Wm/fPl/Arwo8DOqV/tRMIZXtzaOQShU0Qe6bfgGlrg+5F48I7amuUfqc08+U+UOPm0lFjDm+B5pmKllqTXXCzvXEs9fZl55rYx1XoSedTHlyOf+MtM0fjic5ci9+u3PBzbEpEs1+u5rpnm4TS4YI9/2gH95
+X-Microsoft-Antispam-Message-Info: qfD/MVCEQn2Re934pAugnDmeT1IHjeA25RISwQBCvlN2DXMfxrqGAqcW8kmi44M1MctHa+GVozf89XgAqsn6HrDSYWa5qYh5CpvIOCEw5gCVoQoa+TL+HdMfbQvafRwzkCwk+wui0IDK5kXZoY2Cxaf+uhYWIZV/H/5wi73Pom4GCsadFnx3xeQFnKiJNdut23hsoLmvub2U85RjIVMQo9jYfKnC0ZbOezN5QJnvo6SA0LO+71YkfDuaKAKDIfOBNCPlERpVdXojbX5a3D2crxzTN2hRaSTGIuRHIBOh2lncBiqRqqkdUo6X+Q1pOuKDuGeOoh45lzs4lLooo+jNLAtbIqRHCht9xrALkMVGBljDHTGpEXNhzY88uHuRox9KBneQCdDSJT73MnCttAiFhUd0caU9pKQw8Wx8Tl+IL/kjtphZX0VQ8dMoBozm00xKq3kgEeNm9hCk2RdNGv35CV84wkZ2G5p7upfHFne7sKlYK+zdU/ZVRRKC2iLOZlcrEObymcVGxRQE3DJE5YIVE0lgRw5Ddr4X7rCEp0IdMxBRFURZ+2lj9SBakih3gpfCDUZNIXGXix7MckNpoBOQa4OHQkJvbDj4qt1/a9f3FRtoPt5puK6sfvz2cQjGPnGnH7vQ8M6RH/0ev76mREd3YHgAimY4AVd+vuJZ5/636ZpmzuFfZmmNAJh0CVBY/4yPdKJeHeHqoWRKgLuwPott7Er7geZpZIs1Zyi2ymCvo+GIjM0yjFOnViJTnVWHE9460pczVzVHLxEDLJfhpXTKJkJ1PALCN/36Qdo7tjqzooQ=
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(346002)(39860400002)(396003)(376002)(230922051799003)(64100799003)(451199024)(1800799009)(186009)(82310400011)(40470700004)(36840700001)(46966006)(31686004)(2616005)(426003)(26005)(336012)(16526019)(53546011)(40460700003)(40480700001)(36756003)(86362001)(31696002)(82740400003)(356005)(81166007)(83380400001)(8676002)(2906002)(478600001)(19627235002)(47076005)(36860700001)(8936002)(41300700001)(44832011)(5660300002)(16576012)(316002)(70586007)(70206006)(110136005)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(136003)(346002)(396003)(39860400002)(376002)(230922051799003)(64100799003)(451199024)(1800799009)(82310400011)(186009)(46966006)(36840700001)(40470700004)(81166007)(31696002)(356005)(86362001)(36756003)(31686004)(40480700001)(82740400003)(2906002)(478600001)(8936002)(53546011)(44832011)(41300700001)(8676002)(5660300002)(83380400001)(426003)(336012)(2616005)(40460700003)(316002)(36860700001)(110136005)(70586007)(70206006)(16576012)(26005)(47076005)(16526019)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 10:12:48.2563 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7cd06457-7c54-4d38-1da5-08dbc8b049f5
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 10:13:15.8642 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7a989c38-1466-4c17-c019-08dbc8b05a69
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD3.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EDD7.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5344
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB8765
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,85 +165,215 @@ X-Virus-Status: Clean
 
 
 
-On 9/27/23 11:53, Michal Simek wrote:
-> Hi,
+On 9/27/23 11:56, Michal Simek wrote:
+> Xilinx was using in past is-dual property for QSPIs to reflect their
+> configurations. But handling for them never reached upstream code that's
+> why better to remove them.
 > 
-> I am sending series of zynqmp boards mostly related to system controller.
-> System controller is small ZynqMP board sitting on Versal/Versal NET board
-> doing board management. There is a internal spec about connection outside
-> but pretty much DT description describe all connected IPs.
-> The only thing what it is not covered in generic SC are i2c buses because
-> they contain different devices. That's why they are described by DT
-> overlays.
-> The first version was created for vpk120-revA, next was generic SC revB and
-> because of supply chain issue ethernet phy was replaced which ends up in
-> revC version.
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
 > 
-> The series also contain some cleanups and also adding new platforms like
-> KD240.
+>   arch/arm/dts/zynq-cc108.dts                           | 1 -
+>   arch/arm/dts/zynq-dlc20-rev1.0.dts                    | 1 -
+>   arch/arm/dts/zynq-minized.dts                         | 1 -
+>   arch/arm/dts/zynq-topic-miami.dts                     | 1 -
+>   arch/arm/dts/zynq-topic-miamilite.dts                 | 1 -
+>   arch/arm/dts/zynq-topic-miamiplus.dts                 | 1 -
+>   arch/arm/dts/zynqmp-m-a2197-01-revA.dts               | 1 -
+>   arch/arm/dts/zynqmp-m-a2197-02-revA.dts               | 1 -
+>   arch/arm/dts/zynqmp-m-a2197-03-revA.dts               | 1 -
+>   arch/arm/dts/zynqmp-topic-miamimp-xilinx-xdp-v1r1.dts | 2 --
+>   arch/arm/dts/zynqmp-zcu102-revA.dts                   | 1 -
+>   arch/arm/dts/zynqmp-zcu106-revA.dts                   | 1 -
+>   arch/arm/dts/zynqmp-zcu111-revA.dts                   | 1 -
+>   arch/arm/dts/zynqmp-zcu208-revA.dts                   | 1 -
+>   arch/arm/dts/zynqmp-zcu216-revA.dts                   | 1 -
+>   15 files changed, 16 deletions(-)
 > 
-> Thanks,
-> Michal
-> 
-> 
-> Michal Simek (11):
->    arm64: zynqmp: Add support for KD240 Kria SOM CC
->    arm64: zynqmp: Remove xlnx,fclk nodes
->    arm64: zynqmp: Add support for vck190 revB system controller
->    arm64: zynqmp: Add x-prc-01/02/03/04/05 revA support from SC
->    arm64: zynqmp: Add support for vpk120-revA
->    arm64: zynqmp: Create description for generic SC (vpk120-revB)
->    arm64: zynqmp: Add support for SC revC
->    arm64: zynqmp: Describe i2c structures for SCs
->    arm64: zynqmp: Add support for VPXA2785
->    arm64: zynqmp: Add support for zcu670-revA
->    arm64: zynqmp: Add support for zcu670-revB
-> 
->   arch/arm/dts/Makefile                         |  20 +
->   arch/arm/dts/zynqmp-clk-ccf.dtsi              |  18 -
->   arch/arm/dts/zynqmp-e-a2197-00-revB.dts       |  34 +
->   .../zynqmp-p-a2197-00-revA-x-prc-01-revA.dtso |  76 ++
->   .../zynqmp-p-a2197-00-revA-x-prc-02-revA.dtso |  76 ++
->   .../zynqmp-p-a2197-00-revA-x-prc-03-revA.dtso |  80 +++
->   .../zynqmp-p-a2197-00-revA-x-prc-04-revA.dtso |  86 +++
->   .../zynqmp-p-a2197-00-revA-x-prc-05-revA.dtso |  86 +++
->   arch/arm/dts/zynqmp-sc-revB.dts               | 430 +++++++++++
->   arch/arm/dts/zynqmp-sc-revC.dts               |  37 +
->   arch/arm/dts/zynqmp-sc-vek280-revA.dtso       | 230 ++++++
->   arch/arm/dts/zynqmp-sc-vek280-revB.dtso       |  15 +
->   arch/arm/dts/zynqmp-sc-vhk158-revA.dtso       | 321 +++++++++
->   .../arm/dts/zynqmp-sc-vn-p-b2197-00-revA.dtso | 460 ++++++++++++
->   arch/arm/dts/zynqmp-sc-vpk120-revB.dtso       | 326 +++++++++
->   arch/arm/dts/zynqmp-sc-vpk180-revA.dtso       | 371 ++++++++++
->   arch/arm/dts/zynqmp-sc-vpk180-revB.dtso       | 337 +++++++++
->   arch/arm/dts/zynqmp-sck-kd-g-revA.dtso        | 353 +++++++++
->   arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts    | 438 ++++++++++++
->   arch/arm/dts/zynqmp-vpk120-revA.dts           | 574 +++++++++++++++
->   arch/arm/dts/zynqmp-zcu670-revA.dts           | 669 +++++++++++++++++
->   arch/arm/dts/zynqmp-zcu670-revB.dts           | 672 ++++++++++++++++++
->   configs/xilinx_zynqmp_virt_defconfig          |   2 +-
->   23 files changed, 5692 insertions(+), 19 deletions(-)
->   create mode 100644 arch/arm/dts/zynqmp-e-a2197-00-revB.dts
->   create mode 100644 arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-01-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-02-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-03-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-04-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-p-a2197-00-revA-x-prc-05-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-sc-revB.dts
->   create mode 100644 arch/arm/dts/zynqmp-sc-revC.dts
->   create mode 100644 arch/arm/dts/zynqmp-sc-vek280-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-sc-vek280-revB.dtso
->   create mode 100644 arch/arm/dts/zynqmp-sc-vhk158-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-sc-vn-p-b2197-00-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-sc-vpk120-revB.dtso
->   create mode 100644 arch/arm/dts/zynqmp-sc-vpk180-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-sc-vpk180-revB.dtso
->   create mode 100644 arch/arm/dts/zynqmp-sck-kd-g-revA.dtso
->   create mode 100644 arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts
->   create mode 100644 arch/arm/dts/zynqmp-vpk120-revA.dts
->   create mode 100644 arch/arm/dts/zynqmp-zcu670-revA.dts
->   create mode 100644 arch/arm/dts/zynqmp-zcu670-revB.dts
-> 
+> diff --git a/arch/arm/dts/zynq-cc108.dts b/arch/arm/dts/zynq-cc108.dts
+> index dc942b0f595e..593ca4a49cf5 100644
+> --- a/arch/arm/dts/zynq-cc108.dts
+> +++ b/arch/arm/dts/zynq-cc108.dts
+> @@ -55,7 +55,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <0>;
+>   	num-cs = <1>;
+>   	flash@0 { /* 16 MB */
+>   		compatible = "n25q128a11", "jedec,spi-nor";
+> diff --git a/arch/arm/dts/zynq-dlc20-rev1.0.dts b/arch/arm/dts/zynq-dlc20-rev1.0.dts
+> index d06838c5eeb3..8d0073780336 100644
+> --- a/arch/arm/dts/zynq-dlc20-rev1.0.dts
+> +++ b/arch/arm/dts/zynq-dlc20-rev1.0.dts
+> @@ -66,7 +66,6 @@
+>   &qspi {
+>   	bootph-all;
+>   	status = "okay";
+> -	is-dual = <0>;
+>   	num-cs = <1>;
+>   	spi-tx-bus-width = <4>;
+>   	spi-rx-bus-width = <4>;
+> diff --git a/arch/arm/dts/zynq-minized.dts b/arch/arm/dts/zynq-minized.dts
+> index 3214ee49e283..96d2937de8bf 100644
+> --- a/arch/arm/dts/zynq-minized.dts
+> +++ b/arch/arm/dts/zynq-minized.dts
+> @@ -39,7 +39,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <0>;
+>   	num-cs = <1>;
+>   	flash@0 {
+>   		compatible = "micron,m25p128";
+> diff --git a/arch/arm/dts/zynq-topic-miami.dts b/arch/arm/dts/zynq-topic-miami.dts
+> index 57cb86aafd29..8307a2ef9dd3 100644
+> --- a/arch/arm/dts/zynq-topic-miami.dts
+> +++ b/arch/arm/dts/zynq-topic-miami.dts
+> @@ -33,7 +33,6 @@
+>   &qspi {
+>   	bootph-all;
+>   	status = "okay";
+> -	is-dual = <0>;
+>   	num-cs = <1>;
+>   	flash@0 {
+>   		compatible = "st,m25p80", "n25q256a", "jedec,spi-nor";
+> diff --git a/arch/arm/dts/zynq-topic-miamilite.dts b/arch/arm/dts/zynq-topic-miamilite.dts
+> index 366fd5bbb100..af0bc7ecf700 100644
+> --- a/arch/arm/dts/zynq-topic-miamilite.dts
+> +++ b/arch/arm/dts/zynq-topic-miamilite.dts
+> @@ -12,5 +12,4 @@
+>   };
+>   
+>   &qspi {
+> -	is-dual = <1>;
+>   };
+> diff --git a/arch/arm/dts/zynq-topic-miamiplus.dts b/arch/arm/dts/zynq-topic-miamiplus.dts
+> index df538865296d..36a7db355e5b 100644
+> --- a/arch/arm/dts/zynq-topic-miamiplus.dts
+> +++ b/arch/arm/dts/zynq-topic-miamiplus.dts
+> @@ -21,5 +21,4 @@
+>   };
+>   
+>   &qspi {
+> -	is-dual = <1>;
+>   };
+> diff --git a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
+> index 2c3e30ba8916..cfd5ba1aac63 100644
+> --- a/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
+> +++ b/arch/arm/dts/zynqmp-m-a2197-01-revA.dts
+> @@ -71,7 +71,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	flash@0 {
+>   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
+>   		#address-cells = <1>;
+> diff --git a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
+> index ad724a135872..18e14389f85f 100644
+> --- a/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
+> +++ b/arch/arm/dts/zynqmp-m-a2197-02-revA.dts
+> @@ -67,7 +67,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	flash@0 {
+>   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
+>   		#address-cells = <1>;
+> diff --git a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
+> index 296af0426ee2..cd7654a9f7ed 100644
+> --- a/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
+> +++ b/arch/arm/dts/zynqmp-m-a2197-03-revA.dts
+> @@ -67,7 +67,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	flash@0 {
+>   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
+>   		#address-cells = <1>;
+> diff --git a/arch/arm/dts/zynqmp-topic-miamimp-xilinx-xdp-v1r1.dts b/arch/arm/dts/zynqmp-topic-miamimp-xilinx-xdp-v1r1.dts
+> index 3750bb38b585..0d96c6f9f041 100644
+> --- a/arch/arm/dts/zynqmp-topic-miamimp-xilinx-xdp-v1r1.dts
+> +++ b/arch/arm/dts/zynqmp-topic-miamimp-xilinx-xdp-v1r1.dts
+> @@ -56,7 +56,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	flash@0 {
+>   		compatible = "st,m25p80", "n25q256a", "jedec,spi-nor";
+>   		m25p,fast-read;
+> @@ -66,7 +65,6 @@
+>   		spi-max-frequency = <166000000>;
+>   		#address-cells = <1>;
+>   		#size-cells = <1>;
+> -		is-dual = <1>;
+>   		partition@0 {
+>   			label = "qspi-boot-bin";
+>   			reg = <0x00000 0x60000>;
+> diff --git a/arch/arm/dts/zynqmp-zcu102-revA.dts b/arch/arm/dts/zynqmp-zcu102-revA.dts
+> index be75ca6443d8..e166c9555069 100644
+> --- a/arch/arm/dts/zynqmp-zcu102-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu102-revA.dts
+> @@ -971,7 +971,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	num-cs = <2>;
+>   	flash@0 {
+>   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
+> diff --git a/arch/arm/dts/zynqmp-zcu106-revA.dts b/arch/arm/dts/zynqmp-zcu106-revA.dts
+> index 6cae681dc29f..b90ff61d2416 100644
+> --- a/arch/arm/dts/zynqmp-zcu106-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu106-revA.dts
+> @@ -978,7 +978,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	num-cs = <2>;
+>   	flash@0 {
+>   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
+> diff --git a/arch/arm/dts/zynqmp-zcu111-revA.dts b/arch/arm/dts/zynqmp-zcu111-revA.dts
+> index d08865203ecf..ba9e4891fccc 100644
+> --- a/arch/arm/dts/zynqmp-zcu111-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu111-revA.dts
+> @@ -789,7 +789,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	num-cs = <2>;
+>   	flash@0 {
+>   		compatible = "m25p80", "jedec,spi-nor"; /* 32MB */
+> diff --git a/arch/arm/dts/zynqmp-zcu208-revA.dts b/arch/arm/dts/zynqmp-zcu208-revA.dts
+> index 702888177a1f..d09e53f42fa8 100644
+> --- a/arch/arm/dts/zynqmp-zcu208-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu208-revA.dts
+> @@ -643,7 +643,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	num-cs = <2>;
+>   	flash@0 {
+>   		compatible = "m25p80", "jedec,spi-nor"; /* U11 and U12 MT25QU02GCBBE12 1Gb */
+> diff --git a/arch/arm/dts/zynqmp-zcu216-revA.dts b/arch/arm/dts/zynqmp-zcu216-revA.dts
+> index 989ac28c106b..fd026347c25f 100644
+> --- a/arch/arm/dts/zynqmp-zcu216-revA.dts
+> +++ b/arch/arm/dts/zynqmp-zcu216-revA.dts
+> @@ -653,7 +653,6 @@
+>   
+>   &qspi {
+>   	status = "okay";
+> -	is-dual = <1>;
+>   	num-cs = <2>;
+>   	flash@0 {
+>   		compatible = "m25p80", "jedec,spi-nor"; /* U11 and U12 MT25QU02GCBBE12 1Gb */
 
 Applied.
 M
