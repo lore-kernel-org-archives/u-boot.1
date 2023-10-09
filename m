@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CC78CD6114
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 17:58:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE0A3CD612A
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 19:22:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3130386D7F;
-	Mon,  9 Oct 2023 19:57:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C4F4A864A0;
+	Mon,  9 Oct 2023 21:22:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hPow5rhL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eqQMaJfx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7E09186504; Mon,  9 Oct 2023 19:57:45 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id E64B0864A9; Mon,  9 Oct 2023 21:22:41 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1244086C27
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 19:57:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B646C86489
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 21:22:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-d852b28ec3bso5069422276.2
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 10:57:43 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9b95622c620so897959566b.0
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 12:22:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696874261; x=1697479061; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696879359; x=1697484159; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kOPShpI2J5dEgxYKiwSPzMRHIaGGW6qdmB2m9yC3ih8=;
- b=hPow5rhLGmmDoC1Qu2F2wZrs+wsf0BZYQITx8CCCLXdbGHoz1K2WfmqXnw8hxAIO5t
- wih4FoA+BPV5yMpFaZpZ2YBpEMEHhr6O1uLWGPPq3jIc8DILMVH0awDtXqAhU3qj/ej+
- vJVDVzSsGMPjCMQUNsmaMmDv5zJPTikx5cLZc=
+ bh=W213PjLTqM3JEmBmT6cQ0NV691A2RnRzmI4p6V+/cyA=;
+ b=eqQMaJfxwyHI3P6qMu7kedvrXHFLzPai4t49yRd6aizixOvoI8nclKXwd46MESEv6S
+ 4MsnsNxJkh+N/lhC16KSVix8p9EFhxGgX7fN3eCwULBfcmv3MG59By+bkmdMGn0Qf+wr
+ 59LXHJswyptfJjKc5L3lYzISBvbcfpSBF7N/4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696874261; x=1697479061;
+ d=1e100.net; s=20230601; t=1696879359; x=1697484159;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kOPShpI2J5dEgxYKiwSPzMRHIaGGW6qdmB2m9yC3ih8=;
- b=sNPr3mr+i4sTCwK1+df/HYAaUSiQyEjCigc1ZBLHpL5YZ6KOLv/Quaz2mEp/1r/kDi
- E/35zP7kjDS53AXJ2eMoS1/WQNPg8/9kh1BRmVCKSOhgUmgXyJNgcBmpEXlHIATsipjW
- 3UE+AH3eC1fFLTeS5oVl11Ls5tEVdbbisl1BDObZVnARqGZQPpi8Ef/IJJj0o02iEjrc
- ruUqQep8olSENuBUkTIoVVfHiTNN9Un1d8QxpUvG4HD+TI2wOcgifdED3xI2vTrrz1Hd
- EokqxIAWadcRnc/z3bzmDVr5DRb0bIVXDLhbmSyXilf1ooklVeFFA1mEjTpof1Of2gIu
- Li1A==
-X-Gm-Message-State: AOJu0Yx6EoS1f+PVdUbDmUL+SJtlqcBKcG4N4ET6JU8R3DlP2ujcUO08
- P1ylx9/63v+2F6SzBZz09FwbmXBVf8LP+4RydJrxNw==
-X-Google-Smtp-Source: AGHT+IFNpmSQAS3dy1CKZxqNzd6UTHHp40TrGZrg5DxEze/OTnWF4OKn2ikO/btqz0wqy2vekNQws8j5HWVMoyiwkTo=
-X-Received: by 2002:a25:6a85:0:b0:d99:d1b8:672f with SMTP id
- f127-20020a256a85000000b00d99d1b8672fmr4718971ybc.33.1696874261308; Mon, 09
- Oct 2023 10:57:41 -0700 (PDT)
+ bh=W213PjLTqM3JEmBmT6cQ0NV691A2RnRzmI4p6V+/cyA=;
+ b=Z6i5OEWNIhr78XoDkeJP0DxHeKF/qbEca0MD0e8cEeC7s+IFthwhUKuJzmP6Gcwhuv
+ NH7r+4PL66QO20MFvc9ifB2jL1IssAoQAcNDBI4CKAYcmeTWiWHvGSRaQsY/AIA2SWe4
+ PQfRHJmSAT56Ukdqgl5j2i4hOjnlPz1YfqGcOttue1hzq2gcAqtRgTsGdkpzJST5dYLN
+ qSyMtlAS4qxft50YmkNNEZIUcoFbhSiIzbs5J4VPNYvXd4UiS7BxsDcLMv+4B8uv6sAT
+ l1FMOK7Dj+4AyNtN8DasO2HnrNk+vEe5QRewHKk1hS/ltsrKWgHpSXUWvxrhK+pVGbYG
+ a8rg==
+X-Gm-Message-State: AOJu0Yy9IrE/7ZZ1p+kZ70Q8tsahfimlpPkA+gGeur343AnNihlwU+xP
+ VzuaPGO316IggQOaK17yEEo0mULuu3NSA4geJSzEHA==
+X-Google-Smtp-Source: AGHT+IHc7jcdlWh8LiRicdltTnLDX2OAGb0AbRSSrZm/5DGfpUC/nMASnv47R9hAghm2qceVMSwbZySZxRl5RqG6+zE=
+X-Received: by 2002:a17:906:3012:b0:9ae:4054:5d2a with SMTP id
+ 18-20020a170906301200b009ae40545d2amr14184483ejz.16.1696879358971; Mon, 09
+ Oct 2023 12:22:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231007155535.1699567-1-benwolsieffer@gmail.com>
- <CAPnjgZ0qrDB_+HUNdGeCzS2FS4+fb1x9Cyr7xTjGccLCHpxwWg@mail.gmail.com>
- <ZSMlNWJ9f7HkoaNg@Dell-Inspiron-15>
-In-Reply-To: <ZSMlNWJ9f7HkoaNg@Dell-Inspiron-15>
+References: <20230926194242.2732127-1-sjg@chromium.org>
+In-Reply-To: <20230926194242.2732127-1-sjg@chromium.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Oct 2023 11:56:55 -0600
-Message-ID: <CAPnjgZ0EOZCdXJc4HRmHmKGmzDiAJQH7X=3sTP3dO5YFOeVMdg@mail.gmail.com>
-Subject: Re: [PATCH] arm: rpi: explicitly enumerate mmc boot targets
-To: Ben Wolsieffer <benwolsieffer@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Matthias Brugger <mbrugger@suse.com>, 
- Peter Robinson <pbrobinson@gmail.com>
+Date: Mon, 9 Oct 2023 13:22:21 -0600
+Message-ID: <CAPnjgZ1WgOB08C32PWdhagP5CRuBou8Z0ZPfxdAmRKD5uxKQJw@mail.gmail.com>
+Subject: Re: [PATCH v7 1/2] schemas: memory: Add ECC properties
+To: devicetree@vger.kernel.org
+Cc: Mark Rutland <mark.rutland@arm.com>, Rob Herring <robh@kernel.org>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>, lkml <linux-kernel@vger.kernel.org>, 
+ Dhaval Sharma <dhaval@rivosinc.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Yunhui Cui <cuiyunhui@bytedance.com>, Guo Dong <guo.dong@intel.com>, 
+ Tom Rini <trini@konsulko.com>, ron minnich <rminnich@gmail.com>,
+ Gua Guo <gua.guo@intel.com>, 
+ Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Ard Biesheuvel <ardb@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,64 +88,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ben,
+Hi Rob,
 
-On Sun, 8 Oct 2023 at 15:55, Ben Wolsieffer <benwolsieffer@gmail.com> wrote:
+On Tue, 26 Sept 2023 at 13:42, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Simon,
+> Some memories provide ECC detection and/or correction. For software which
+> wants to check memory, it is helpful to see which regions provide this
+> feature.
 >
-> On Sat, Oct 07, 2023 at 02:18:48PM -0600, Simon Glass wrote:
-> > Hi Ben,
-> >
-> > On Sat, 7 Oct 2023 at 09:55, Ben Wolsieffer <benwolsieffer@gmail.com>
-wrote:
-> > >
-> > > Using the unqualified "mmc" boot target causes the Raspberry Pi 4 to
-> > > fail to boot. c771e5b explains this approach as follows:
-> > >
-> > > > We don't need to specify the mmc devices individually, since they
-are
-> > > > used in order from 0 to 2, and standard boot uses that order anyway.
-> > >
-> > > In practice, U-Boot first attempts to boot from the unconnected mmc1
-> > > interface, and, when this fails, moves on to attempt the USB and
-network
-> > > boot targets rather than trying mmc0.
-> > >
-> > > This patch explicitly enumerates the mmc interfaces, causing each to
-be
-> > > attempted in turn. This matches what is done on other boards, and
-allows
-> > > the system to boot successfully.
-> > >
-> > > Fixes: c771e5b8c2 ("arm: rpi: Switch to standard boot")
-> > > Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
-> > > ---
-> > >  board/raspberrypi/rpi/rpi.env | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> >
-> > Does this patch help? [1]. Alternatively, if you just remove that
-> > variable entirely, does it do the right thing?
+> Add this as a property of the /memory nodes, since it presumably follows
+> the hardware-level memory system.
 >
-> Yes, trying either of those suggestions makes it work correctly.
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> Changes in v7:
+> - Drop unnecessary |
+> - Add a blank line between properties
+>
+> Changes in v6:
+> - Use a number of bits instead of a string property
+> - Fix inidcates typo
+>
+> Changes in v5:
+> - Redo to make this property specific to ECC
+> - Provide properties both for detection and correction
+>
+> Changes in v3:
+> - Add new patch to update the /memory nodes
+>
+>  dtschema/schemas/memory.yaml | 13 +++++++++++++
+>  1 file changed, 13 insertions(+)
+>
+> diff --git a/dtschema/schemas/memory.yaml b/dtschema/schemas/memory.yaml
+> index 1d74410..b3bf3c9 100644
+> --- a/dtschema/schemas/memory.yaml
+> +++ b/dtschema/schemas/memory.yaml
+> @@ -35,6 +35,19 @@ patternProperties:
+>            For the purpose of identification, each NUMA node is associated with
+>            a unique token known as a node id.
+>
+> +      ecc-detection-bits:
+> +        default: 0
+> +        description: |
+> +          If present, this indicates the number of bits of memory error which
+> +          can be detected and reported by the Error-Correction Code (ECC) memory
+> +          subsystem (typically 0, 1 or 2).
+> +
+> +      ecc-correction-bits:
+> +        default: 0
+> +        description: |
+> +          If present, this indicates the number of bits of memory error which
+> +          can be corrected by the Error-Correction Code (ECC) memory subsystem
+> +          (typically 0, 1 or 2).
+>
+>      required:
+>        - device_type
+> --
+> 2.42.0.515.g380fc7ccd1-goog
+>
 
-Thank you for testing this
-
-In that case, I would rather that [1] since it should fix it for all
-boards. If you want to send a patch to drop boot_targets, please do and
-I'll leave that to Peter.
-
->
-> >
-> > Regards,
-> > Simon
-> >
-> > [1]
-https://patchwork.ozlabs.org/project/uboot/patch/20230923205017.1754340-1-sjg@chromium.org/
->
->
-> Thanks, Ben
+What is the status of this patch, please?
 
 Regards,
 Simon
