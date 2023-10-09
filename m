@@ -4,38 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 185A1E95A91
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 11:11:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD05E95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 11:39:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7760286AB9;
-	Mon,  9 Oct 2023 13:11:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id E5A1086C00;
+	Mon,  9 Oct 2023 13:39:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ict42.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 551E686898; Mon,  9 Oct 2023 13:11:47 +0200 (CEST)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id B5D2A86AB9
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 13:11:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,210,1694703600"; d="scan'208";a="182420058"
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 09 Oct 2023 20:11:40 +0900
-Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.92.153])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 15C1F40062DB;
- Mon,  9 Oct 2023 20:11:38 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ralph Siemsen <ralph.siemsen@linaro.org>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Subject: [PATCH v2] doc: Migrate Renesas board docs to rst
-Date: Mon,  9 Oct 2023 12:11:36 +0100
-Message-Id: <20231009111136.79646-1-paul.barker.ct@bp.renesas.com>
-X-Mailer: git-send-email 2.39.2
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ict42.de header.i=@ict42.de header.b="kBKHrtAr";
+	dkim=permerror (0-bit key) header.d=ict42.de header.i=@ict42.de header.b="gp30GJ1m";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 755A086C00; Mon,  9 Oct 2023 13:39:29 +0200 (CEST)
+Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
+ [81.169.146.220])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 64F7E8642A
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 13:39:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=ict42.de
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=ludwig.kormann@ict42.de
+ARC-Seal: i=1; a=rsa-sha256; t=1696851566; cv=none;
+ d=strato.com; s=strato-dkim-0002;
+ b=TWY6I9XgFRnOPexjXyht+p5zej6rlaGuY1DTdSjHC1wtj6dN259MJ3z6TwEGRYm7ML
+ 723QlITjCIEGnF59b2cpuan0nzB9i6L412alsKzdZ2H6nQw4AG2BHbYiFKqemxl2l0/w
+ 8SQK7UYykl4V8BoUl/B8QwYZZAaDM8MSBHi2AJKU35OGMW3Oz/hPLphXpSOUKNQAvCGT
+ E53+7DkTuk7Ec5Im8tMQm8f6uggcXuntJABBeZ6m4Qq2g74nR+hq0JmuLCrZERqFXu8R
+ ZsphNh3WOIb16+K4ua8K1WLk545MF0BvBYMDJouXWiCkw1joTUnujdXTfyeN+8dBIyh+
+ fbWQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1696851566;
+ s=strato-dkim-0002; d=strato.com;
+ h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+ bh=HQyFwgOTr1o2IXYZUbgbLomjWyVVxsjukipNJYZtjK4=;
+ b=q6ZY0OStczTcJn/C1hTQ/CcOuDmAJWQNqrmOo+6ujBOkU2jnX0Hdt5OA1DhEhda6XM
+ 1mknkEQF4euu+YxiYaE4nYGFRsNvEcc7iUNqix0apI6MKIXih5OZeHeJAm4qFn8Ihn0/
+ yg3HXqzFJuskU2SzQWTKQAcmbsygYU5h79VH7qfYfuBPo+FZsLJpu/vYKhYDD8B01c9t
+ OMYRgBzax7uaJjOT49qDPoyt+gHGAg3p3ZD4YT8nB+aoPqVxEZWovoM8Jo6KjHOh0yfN
+ zWGAejDKKnfjvFB0k/tb9xR1tCO5RQKY+k/+jMdeAx5H5kZvolWomsMDkBYFLocaGLvJ
+ sk7A==
+ARC-Authentication-Results: i=1; strato.com;
+    arc=none;
+    dkim=none
+X-RZG-CLASS-ID: mo00
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1696851566;
+ s=strato-dkim-0002; d=ict42.de;
+ h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+ bh=HQyFwgOTr1o2IXYZUbgbLomjWyVVxsjukipNJYZtjK4=;
+ b=kBKHrtAr7YqxrEzxiMa1SMUC2h0RELT5X1oacXqT7LD7AgfEqqx5TWtyAeuF+TQn25
+ mQ/tzwSArvG+1FPxKxXKI3HPlvOfLDNx+DClV4hPePFaqhYOMVpdFZmCiZ9ar1Qj17YP
+ aX31iIgrt0eoenMNOEQxpcKGLCIyHVPvWoO4JnGps05vhlz4259JNb0hdop+vm45ojxP
+ ydN/iKfrfogGVkoU/HjXjD0SWA81GCHTIM8DeK9xnyAN5c9ZIatNqnNDNCqiYYqhJRGV
+ 1OTxUCWofNJ1sHAjDXaC9VixVh0VQJ4fBRLkBNKB1tU3XhuMdMJVBskp2CqUi9iSaWgu
+ 05kQ==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1696851566;
+ s=strato-dkim-0003; d=ict42.de;
+ h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
+ bh=HQyFwgOTr1o2IXYZUbgbLomjWyVVxsjukipNJYZtjK4=;
+ b=gp30GJ1mXQFJ5ItIoKAdFWuZLOKrie5C0gHjLH87epfpgt/mFsxOj/HGDJa7rneeMT
+ pxASod+9PSczoZOn+nCg==
+X-RZG-AUTH: ":IHkAYkmvNfSwjg/qSc4u8zZOVaURsoXe3UH2mQA0KglxDI1B7BeEcdPLARTmoNSwY8PK6ePqKQZ9qTSC"
+Received: from debian-test.local.in-circuit.de
+ by smtp.strato.de (RZmta 49.8.2 DYNA|AUTH)
+ with ESMTPSA id 20424fz99BdP1Fu
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
+ (Client did not present a certificate);
+ Mon, 9 Oct 2023 13:39:25 +0200 (CEST)
+From: Ludwig Kormann <ludwig.kormann@ict42.de>
+To: hdegoede@redhat.com,
+	jagan@amarulasolutions.com,
+	andre.przywara@arm.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH RESEND v3 1/1] arm: dts: icnova-a20-adb4006: Add board support
+Date: Mon,  9 Oct 2023 13:39:16 +0200
+Message-Id: <20231009113916.2668425-1-ludwig.kormann@ict42.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -53,416 +100,323 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of the information in README.rmobile is obsolete, references
-defconfigs which no longer exist in u-boot or has broken links. The
-information which is still relevant is moved into the reStructuredText
-documentation under `doc/board/renesas`, and `doc/README.rmobile` is
-dropped.
+Add board support for ICnova A20 SomPi compute module on
+ICnova ADB4006 development board.
 
-The list of boards in `doc/board/renesas` is converted into a table so
-it's easier to see which defconfig to use. The list is expanded based on
-reviewing the current u-boot code and the contents of the eLinux wiki
-[1] [2].
+Specification:
+SoM
+- Processor: Allwinner A20 Cortex-A7 Dual Core at 1GHz
+- 512MB DDR3 RAM
+- Fast Ethernet (Phy: Realtek RTL8201CP)
+ADB4006
+- I2C
+- 2x USB 2.0
+- 1x Fast Ethernet port
+- 1x SATA
+- 2x buttons (PWRON, Boot)
+- 2x LEDS
+- serial console
+- HDMI
+- µSD-Card slot
+- Audio Line-In / Line-Out
+- GPIO pinheaders
 
-[1]: https://elinux.org/R-Car
-[2]: https://elinux.org/RZ-G
+https://wiki.in-circuit.de/index.php5?title=ICnova_ADB4006
+https://wiki.in-circuit.de/index.php5?title=ICnova_A20_SODIMM
 
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+devicetree upstreamed with linux 6.5
+
+Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
 ---
-v1->v2:
-  * Fixed minor issues pointed out by Marek.
+changes in v3:
+- rebase on v2023.10
 
- doc/README.rmobile            |  99 -------------
- doc/board/renesas/renesas.rst | 255 +++++++++++++++++++++++++++++-----
- doc/board/renesas/rzn1.rst    |   2 +
- 3 files changed, 226 insertions(+), 130 deletions(-)
- delete mode 100644 doc/README.rmobile
+changes in v2:
+- rebase on v2023.07-rc2
+- remove pin defines from defconfig
+- get dts reviewed on the linux mailing list and
+  scheduled for kernel 6.5 [1]
 
-diff --git a/doc/README.rmobile b/doc/README.rmobile
-deleted file mode 100644
-index 524d839558bb..000000000000
---- a/doc/README.rmobile
-+++ /dev/null
-@@ -1,99 +0,0 @@
--Summary
--=======
--
--This README is about U-Boot support for Renesas's ARM Cortex-A9 based RMOBILE[1]
--and Cortex-A9/A53/A57 based R-Car[2] family of SoCs. Renesas's RMOBILE/R-Car SoC
--family contains an ARM Cortex-A9/A53/A57.
--
--Currently the following boards are supported:
--
--| SoC           | Board                                  | defconfig
--|===============+========================================+===================
--| R8A73A0       | KMC KZM-A9-GT [3]                      | kzm9g_config
--| R8A7734       | Atmark-Techno Armadillo-800-EVA [4]    | armadillo-800eva_config
--|===============+========================================+===================
--| R8A7790  H2   | Renesas Electronics Lager              | lager_defconfig
--|               | Renesas Electronics Stout              | stout_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A7791  M2-W | Renesas Electronics Koelsch            | koelsch_defconfig
--|               | Renesas Electronics Porter             | porter_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A7792  V2H  | Renesas Electronics Blanche            | blanche_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A7793  M2-N | Renesas Electronics Gose               | gose_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A7794  E2   | Renesas Electronics Alt                | alt_defconfig
--|               | Renesas Electronics Silk               | silk_defconfig
--|===============+========================================+===================
--| R8A7795  H3   | Renesas Electronics Salvator-XS ES2.0+ | r8a7795_salvator-x_defconfig
--| R8A7795  H3   | Renesas Electronics ULCB ES2.0+        | r8a7795_ulcb
--|---------------+----------------------------------------+-------------------
--| R8A7796  M3-W | Renesas Electronics Salvator-X         | r8a7796_salvator-x_defconfig
--| R8A7796  M3-W | Renesas Electronics ULCB               | r8a7796_ulcb
--|---------------+----------------------------------------+-------------------
--| R8A77965 M3-N | Renesas Electronics Salvator-XS        | r8a77965_salvator-x_defconfig
--| R8A77965 M3-N | Renesas Electronics ULCB               | r8a77965_ulcb
--|---------------+----------------------------------------+-------------------
--| R8A77970 V3M  | Renesas Electronics Eagle              | r8a77970_eagle_defconfig
--| R8A77970 V3M  | Renesas Electronics V3MSK              | r8a77970_v3msk_defconfig
--|---------------+----------------------------------------+-------------------
--| R8A77995 D3   | Renesas Electronics Draak              | r8a77995_draak_defconfig
--'===============+========================================+===================
--
--Toolchain
--=========
--
--Either ARMv7 toolchain for 32bit Cortex-A9 systems or ARMv8 (aarch64)
--toolchain for 64bit Cortex-A53/A57 systems. Currently we compile the
--32bit systems with -march=armv5 to allow more compilers to work. (For
--U-Boot code this has no performance impact.)
--
--Currently, ELDK[5], Linaro[6], CodeSourcery[7] and Emdebian[8] supports
--ARMv7. Modern distributions also contain ARMv7 and ARMv8 crosstoolchains
--in their package feeds.
--
--Build
--=====
--
--Locate defconfig in the table above. Then apply standard build procedure:
--
--  make <board>_defconfig
--  make
--
--  Note: Armadillo-800-EVA's U-Boot supports booting from SDcard only.
--        Please see "B.2 Appendix B Boot Specifications" in hardware manual.
--
--Links
--=====
--
--[1] Renesas RMOBILE:
--
--http://am.renesas.com/products/soc/assp/mobile/r_mobile/index.jsp
--
--[2] Renesas R-Car:
--
--http://am.renesas.com/products/soc/assp/automotive/index.jsp
--
--[3] KZM-A9-GT
--
--http://www.kmckk.co.jp/kzma9-gt/index.html
--
--[4] Armadillo-800-EVA
--
--http://armadillo.atmark-techno.com/armadillo-800-EVA
--
--[5] ELDK
--
--http://www.denx.de/wiki/view/ELDK-5/WebHome#Section_1.6.
--
--[6] Linaro
--
--http://www.linaro.org/downloads/
--
--[7] CodeSourcey
--
--http://www.mentor.com/embedded-software/codesourcery
--
--[8] Emdebian
--
--http://www.emdebian.org/crosstools.html
-diff --git a/doc/board/renesas/renesas.rst b/doc/board/renesas/renesas.rst
-index 04dee8da2454..75a6273b2c93 100644
---- a/doc/board/renesas/renesas.rst
-+++ b/doc/board/renesas/renesas.rst
-@@ -9,37 +9,230 @@ About this
- This document describes the information about Renesas supported boards
- and their usage steps.
- 
--Renesas boards
----------------
-+Renesas SoC based boards
-+------------------------
- 
- Renesas is a SoC solutions provider for automotive and industrial applications.
- 
--U-Boot supports several Renesas SoC families:
--
--* R-Car Gen2 (32-bit)
--    - Blanche board
--    - Gose board
--    - Koelsch board
--    - Lager board
--    - Silk board
--    - Porter board
--    - Stout board
--* R-Car Gen3 (64-bit)
--    - Condor board
--    - Draak board
--    - Eagle board
--    - Ebisu board
--    - Salvator-X and Salvator-XS boards
--    - ULCB board
--* R-Car Gen4 (64-bit)
--    - Falcon board
--    - Spider board
--    - Whitehawk board
--* RZ/A1 (32-bit)
--    - GR-PEACH board
--* RZ/G
--    - Beacon-rzg2 board
--    - Hihope-rzg2 board
--    - ek874 board
--* RZ/N1 (32-bit)
--    - Schneider rzn1-snarc board
-+.. list-table:: Supported Renesas SoC based boards
-+   :widths: 10, 25, 15, 10, 25
-+   :header-rows: 1
-+
-+   * - Family
-+     - Board
-+     - SoC
-+     - Arch
-+     - defconfig
-+
-+   * - R2D
-+     - R2D-PLUS
-+     - SH7751
-+     - sh
-+     - ``r2dplus_defconfig``
-+
-+   * - RZ/A1
-+     - GR-PEACH
-+     - R7S72100 (RZ/A1H)
-+     - arm
-+     - ``grpeach_defconfig``
-+
-+   * - R-Car Gen2
-+     - Lager
-+     - R8A7790 (H2)
-+     - arm
-+     - ``lager_defconfig``
-+
-+   * -
-+     - Stout
-+     - R8A7790 (H2)
-+     - arm
-+     - ``stout_defconfig``
-+
-+   * -
-+     - Koelsch
-+     - R8A7791 (M2-W)
-+     - arm
-+     - ``koelsch_defconfig``
-+
-+   * -
-+     - Porter
-+     - R8A7791 (M2-W)
-+     - arm
-+     - ``porter_defconfig``
-+
-+   * -
-+     - Blanche
-+     - R8A7792 (V2H)
-+     - arm
-+     - ``blanche_defconfig``
-+
-+   * -
-+     - Gose
-+     - R8A7793 (M2-N)
-+     - arm
-+     - ``gose_defconfig``
-+
-+   * -
-+     - Alt
-+     - R8A7794 (E2)
-+     - arm
-+     - ``alt_defconfig``
-+
-+   * -
-+     - Silk
-+     - R8A7794 (E2)
-+     - arm
-+     - ``silk_defconfig``
-+
-+   * - R-Car Gen3
-+     - Salvator-X(S)
-+     - R8A77951 (H3)
-+     - arm64
-+     - ``rcar3_salvator-x_defconfig``
-+
-+   * -
-+     - ULCB
-+     - R8A77951 (H3)
-+     - arm64
-+     - ``rcar3_ulcb_defconfig``
-+
-+   * -
-+     - Salvator-X(S)
-+     - R8A77960 (M3-W)
-+     - arm64
-+     - ``rcar3_salvator-x_defconfig``
-+
-+   * -
-+     - ULCB
-+     - R8A77960 (M3-W)
-+     - arm64
-+     - ``rcar3_ulcb_defconfig``
-+
-+   * -
-+     - Salvator-X(S)
-+     - R8A77965 (M3-N)
-+     - arm64
-+     - ``rcar3_salvator-x_defconfig``
-+
-+   * -
-+     - ULCB
-+     - R8A77965 (M3-N)
-+     - arm64
-+     - ``rcar3_ulcb_defconfig``
-+
-+   * -
-+     - Eagle
-+     - R8A77970 (V3M)
-+     - arm64
-+     - ``r8a77970_eagle_defconfig``
-+
-+   * -
-+     - V3MSK
-+     - R8A77970 (V3M)
-+     - arm64
-+     - ``r8a77970_v3msk_defconfig``
-+
-+   * -
-+     - Condor
-+     - R8A77980 (V3H)
-+     - arm64
-+     - ``r8a77980_condor_defconfig``
-+
-+   * -
-+     - V3HSK
-+     - R8A77980 (V3H)
-+     - arm64
-+     - ``r8a77980_v3hsk_defconfig``
-+
-+   * -
-+     - Ebisu
-+     - R8A77990 (E3)
-+     - arm64
-+     - ``r8a77990_ebisu_defconfig``
-+
-+   * -
-+     - Draak
-+     - R8A77995 (D3)
-+     - arm64
-+     - ``r8a77995_draak_defconfig``
-+
-+   * - R-Car Gen4
-+     - Falcon
-+     - R8A779A0 (V3U)
-+     - arm64
-+     - ``r8a779a0_falcon_defconfig``
-+
-+   * -
-+     - Spider
-+     - R8A779F0 (S4)
-+     - arm64
-+     - ``r8a779f0_spider_defconfig``
-+
-+   * -
-+     - White Hawk
-+     - R8A779G0 (V4H)
-+     - arm64
-+     - ``r8a779g0_whitehawk_defconfig``
-+
-+   * - RZ/G2 Family
-+     - Beacon EmbeddedWorks RZ/G2M SoM
-+     - R8A774A1 (RZ/G2M)
-+     - arm64
-+     - ``rzg2_beacon_defconfig``
-+
-+   * -
-+     - HopeRun HiHope RZ/G2M
-+     - R8A774A1 (RZ/G2M)
-+     - arm64
-+     - ``hihope_rzg2_defconfig``
-+
-+   * -
-+     - Beacon EmbeddedWorks RZ/G2N SoM
-+     - R8A774B1 (RZ/G2N)
-+     - arm64
-+     - ``rzg2_beacon_defconfig``
-+
-+   * -
-+     - HopeRun HiHope RZ/G2N
-+     - R8A774B1 (RZ/G2N)
-+     - arm64
-+     - ``hihope_rzg2_defconfig``
-+
-+   * -
-+     - Silicon Linux RZ/G2E evaluation kit (EK874)
-+     - R8A774C0 (RZ/G2E)
-+     - arm64
-+     - ``silinux_ek874_defconfig``
-+
-+   * -
-+     - Beacon EmbeddedWorks RZ/G2H SoM
-+     - R8A774E1 (RZ/G2H)
-+     - arm64
-+     - ``rzg2_beacon_defconfig``
-+
-+   * -
-+     - HopeRun HiHope RZ/G2H
-+     - R8A774E1 (RZ/G2H)
-+     - arm64
-+     - ``hihope_rzg2_defconfig``
-+
-+   * - :ref:`RZ/N1 Family <renesas_rzn1>`
-+     - Schneider RZ/N1D board
-+     - R9A06G032 (RZ/N1D)
-+     - arm64
-+     - ``rzn1_snarc_defconfig``
-+
-+   * -
-+     - Schneider RZ/N1S board
-+     - R9A06G033 (RZ/N1S)
-+     - arm64
-+     - ``rzn1_snarc_defconfig``
-+
-+Build
-+-----
-+
-+Locate the appropriate defconfig in the table above. Then apply standard build
-+procedure::
-+
-+    make <board_defconfig>
-+    make
-diff --git a/doc/board/renesas/rzn1.rst b/doc/board/renesas/rzn1.rst
-index e6d636b89e8e..afdfa6944d89 100644
---- a/doc/board/renesas/rzn1.rst
-+++ b/doc/board/renesas/rzn1.rst
-@@ -1,5 +1,7 @@
- .. SPDX-License-Identifier: GPL-2.0+
- 
-+.. _renesas_rzn1:
-+
- Renesas RZ/N1
- =============
- 
+[1]
+https://git.kernel.org/pub/scm/linux/kernel/git/sunxi/linux.git
+commit de2bdfb7f79d5c655eb056d459e02be2c7f13c8b
 
-base-commit: 83aa0ed1e93e1ffac24888d98d37a5b04ed3fb07
+---
+ arch/arm/dts/Makefile                         |   1 +
+ arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts | 137 ++++++++++++++++++
+ arch/arm/dts/sun7i-a20-icnova-a20.dtsi        |  62 ++++++++
+ board/sunxi/MAINTAINERS                       |   5 +
+ configs/icnova-a20-adb4006_defconfig          |  20 +++
+ 5 files changed, 225 insertions(+)
+ create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
+ create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20.dtsi
+ create mode 100644 configs/icnova-a20-adb4006_defconfig
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 85fd5b1157..16d5930b78 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -667,6 +667,7 @@ dtb-$(CONFIG_MACH_SUN7I) += \
+ 	sun7i-a20-haoyu-marsboard.dtb \
+ 	sun7i-a20-hummingbird.dtb \
+ 	sun7i-a20-i12-tvbox.dtb \
++	sun7i-a20-icnova-a20-adb4006.dtb \
+ 	sun7i-a20-icnova-swac.dtb \
+ 	sun7i-a20-itead-ibox.dtb \
+ 	sun7i-a20-lamobo-r1.dtb \
+diff --git a/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
+new file mode 100644
+index 0000000000..577ead1d02
+--- /dev/null
++++ b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
+@@ -0,0 +1,137 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++// Copyright (C) 2023 In-Circuit GmbH
++
++/dts-v1/;
++
++#include "sun7i-a20-icnova-a20.dtsi"
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
++
++/ {
++	model = "In-Circuit ICnova A20 ADB4006";
++	compatible = "incircuit,icnova-a20-adb4006", "incircuit,icnova-a20",
++		     "allwinner,sun7i-a20";
++
++	aliases {
++		serial0 = &uart0;
++	};
++
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
++
++	hdmi-connector {
++		compatible = "hdmi-connector";
++		type = "a";
++
++		port {
++			hdmi_con_in: endpoint {
++				remote-endpoint = <&hdmi_out_con>;
++			};
++		};
++	};
++
++	leds {
++		compatible = "gpio-leds";
++
++		led-0 {
++			function = LED_FUNCTION_POWER;
++			color = <LED_COLOR_ID_YELLOW>;
++			gpios = <&pio 7 21 GPIO_ACTIVE_HIGH>; /* PH21 */
++			default-state = "on";
++		};
++
++		led-1 {
++			function = LED_FUNCTION_HEARTBEAT;
++			color = <LED_COLOR_ID_RED>;
++			gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>; /* PH20 */
++			linux,default-trigger = "heartbeat";
++		};
++	};
++};
++
++&ahci {
++	target-supply = <&reg_ahci_5v>;
++	status = "okay";
++};
++
++&codec {
++	status = "okay";
++};
++
++&de {
++	status = "okay";
++};
++
++&ehci0 {
++	status = "okay";
++};
++
++&ehci1 {
++	status = "okay";
++};
++
++&hdmi {
++	status = "okay";
++};
++
++&hdmi_out {
++	hdmi_out_con: endpoint {
++		remote-endpoint = <&hdmi_con_in>;
++	};
++};
++
++&mmc0 {
++	vmmc-supply = <&reg_vcc3v3>;
++	bus-width = <4>;
++	cd-gpios = <&pio 7 1 GPIO_ACTIVE_LOW>; /* PH1 */
++	status = "okay";
++};
++
++&ohci0 {
++	status = "okay";
++};
++
++&ohci1 {
++	status = "okay";
++};
++
++&otg_sram {
++	status = "okay";
++};
++
++&reg_ahci_5v {
++	status = "okay";
++};
++
++&ac_power_supply {
++	status = "okay";
++};
++
++&reg_usb1_vbus {
++	status = "okay";
++};
++
++&reg_usb2_vbus {
++	status = "okay";
++};
++
++&uart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart0_pb_pins>;
++	status = "okay";
++};
++
++&usb_otg {
++	dr_mode = "otg";
++	status = "okay";
++};
++
++&usbphy {
++	usb0_id_det-gpios = <&pio 7 4 GPIO_ACTIVE_HIGH>; /* PH4 */
++	usb0_vbus_det-gpios = <&pio 7 5 GPIO_ACTIVE_HIGH>; /* PH5 */
++	usb1_vbus-supply = <&reg_usb1_vbus>;
++	usb2_vbus-supply = <&reg_usb2_vbus>;
++	status = "okay";
++};
+diff --git a/arch/arm/dts/sun7i-a20-icnova-a20.dtsi b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
+new file mode 100644
+index 0000000000..46616c6bc8
+--- /dev/null
++++ b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
+@@ -0,0 +1,62 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++// Copyright (C) 2023 In-Circuit GmbH
++
++#include "sun7i-a20.dtsi"
++#include "sunxi-common-regulators.dtsi"
++
++#include <dt-bindings/interrupt-controller/irq.h>
++
++&cpu0 {
++	cpu-supply = <&reg_dcdc2>;
++};
++
++&gmac {
++	pinctrl-names = "default";
++	pinctrl-0 = <&gmac_mii_pins>;
++	phy-handle = <&phy1>;
++	phy-mode = "mii";
++	status = "okay";
++};
++
++&i2c0 {
++	status = "okay";
++
++	axp209: pmic@34 {
++		reg = <0x34>;
++		interrupt-parent = <&nmi_intc>;
++		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
++	};
++};
++
++&gmac_mdio {
++	phy1: ethernet-phy@1 {
++		reg = <1>;
++	};
++};
++
++#include "axp209.dtsi"
++
++&reg_dcdc2 {
++	regulator-always-on;
++	regulator-min-microvolt = <1000000>;
++	regulator-max-microvolt = <1400000>;
++	regulator-name = "vdd-cpu";
++};
++
++&reg_dcdc3 {
++	regulator-always-on;
++	regulator-min-microvolt = <1000000>;
++	regulator-max-microvolt = <1400000>;
++	regulator-name = "vdd-int-dll";
++};
++
++&reg_ldo1 {
++	regulator-name = "vdd-rtc";
++};
++
++&reg_ldo2 {
++	regulator-always-on;
++	regulator-min-microvolt = <3000000>;
++	regulator-max-microvolt = <3000000>;
++	regulator-name = "avcc";
++};
+diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
+index 98bbd2dd25..67cdd01371 100644
+--- a/board/sunxi/MAINTAINERS
++++ b/board/sunxi/MAINTAINERS
+@@ -236,6 +236,11 @@ M:	Stefan Roese <sr@denx.de>
+ S:	Maintained
+ F:	configs/icnova-a20-swac_defconfig
+ 
++ICnova-A20-ADB4006 BOARD
++M:	Ludwig Kormann <ludwig.kormann@ict42.de>
++S:	Maintained
++F:	configs/icnova-a20-adb4006_defconfig
++
+ ITEAD IBOX BOARD
+ M:	Marcus Cooper <codekipper@gmail.com>
+ S:	Maintained
+diff --git a/configs/icnova-a20-adb4006_defconfig b/configs/icnova-a20-adb4006_defconfig
+new file mode 100644
+index 0000000000..f70ffe45ab
+--- /dev/null
++++ b/configs/icnova-a20-adb4006_defconfig
+@@ -0,0 +1,20 @@
++CONFIG_ARM=y
++CONFIG_ARCH_SUNXI=y
++CONFIG_DEFAULT_DEVICE_TREE="sun7i-a20-icnova-a20-adb4006"
++CONFIG_SPL=y
++CONFIG_MACH_SUN7I=y
++CONFIG_DRAM_CLK=384
++CONFIG_AHCI=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_I2C=y
++CONFIG_SCSI_AHCI=y
++CONFIG_SYS_I2C_MVTWSI=y
++CONFIG_SYS_I2C_SLAVE=0x7f
++CONFIG_SYS_I2C_SPEED=400000
++CONFIG_ETH_DESIGNWARE=y
++CONFIG_MII=y
++CONFIG_SUN7I_GMAC=y
++CONFIG_AXP_ALDO4_VOLT=2800
++CONFIG_SCSI=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_OHCI_HCD=y
 -- 
-2.39.2
+2.30.2
 
