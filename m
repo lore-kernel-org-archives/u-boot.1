@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098C4E95A91
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 13:16:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC02E95A8E
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 13:16:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B9CE86C00;
-	Mon,  9 Oct 2023 15:15:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3B64F86B7E;
+	Mon,  9 Oct 2023 15:15:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ETra2odk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hFNzvzQD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7E2E86C58; Mon,  9 Oct 2023 15:15:51 +0200 (CEST)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id 8B38E864A7; Mon,  9 Oct 2023 15:15:53 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA62B86B1B
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 15:15:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24932864A6
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 15:15:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-690d935dbc2so888112b3a.1
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 06:15:48 -0700 (PDT)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1c746bc3bceso10020265ad.1
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 06:15:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696857347; x=1697462147; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1696857349; x=1697462149; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IOwCfB25mOg7eyu/t+liiyNXmoKvX+8TJ4yix28N+hw=;
- b=ETra2odkwdNFcVc54KS6qpKqGF40ed+RpRCpiAnscjJOB7CfnSA4OXalTNXBCDSBc+
- GTVvOG8Zg0NpUyKg7V7NANaqvYrl2g4BCx6efiwhdnBx+NJJ74oyRX6lQipPf6Nl8xRl
- /UaqTrFag4DVdosSxcXmmPTKy+eTa0oMEbCRGmc/fraQNxCCTfALDzX9xRXgat6YCgqH
- /0MbopcuXso1GW0pWdO4XKf+w3//BFyB12zwVIR94Dy8YP/nAHqzHW4+pXgWQGmbyTsg
- nB3pmZk5a3PNv3O+K6yWRqRwnEL6ZTGHns7Hs93c5BcNodaLp6HdHlCC/aJ2fkvAsps2
- wLuw==
+ bh=ykl7+QXYhv+gIqf+fZ0nzzp6jq5wmREVP6x41KuZG0g=;
+ b=hFNzvzQD/xfVdpmRodYWpKOwhWAEzy9GdxmBoXqI0nNud+m4MTEPqLhihKySygIjoq
+ WhGzsPcmjtyw+vN1lqo5rG6Suo5r4yNvDOBWTc+HM7OBe8R/deHFp/dCmU7HXG/UQXzs
+ YmWuZOVy43do5wlT6LAHQ8LkcWsTFEodInbZtRQj3l9hvqZaCqIt4/jSFr68y08WHqDX
+ vhGDvY3JMjprdKtw3+ZwJN7MtklcGhncCggdZ0nP1l7g9vBDLPO6WTbePKVI7ME0z6VL
+ 0B/P1gkVinBbALQ0ewK24yEzX1rQjp+UaaqrIBSt8SF71Pd6XdOwAO269pZgxEg7HK6K
+ 8tLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696857347; x=1697462147;
+ d=1e100.net; s=20230601; t=1696857349; x=1697462149;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=IOwCfB25mOg7eyu/t+liiyNXmoKvX+8TJ4yix28N+hw=;
- b=LoagPusMy1/8bgTXdqmwa/3lr8nCXmUsw0AM7ONgdIAVLr95YD7SSVGe4T8895QILk
- ZguTHsAFS7k/kjQS8Bc/RPv32k72X60w2zdGwKVWaCFv1XBlbQybomI0481ZNiXqh71e
- 1k4cuBzDBUBeAuZQxAiw0MpH0/+Hqmf2YYH40/dSC6z1WzFL2agjH1oB9SHRbzjraEUf
- Xl2pkrW71bftDp7tQ+gm80pH8OuFxZz0kn9PNdM1AqgG5zXD5tlkwteRcNkql1PEWVN6
- OBj9yIklppLmx0kbQhEB7wyC6xjHhMUh4En0KXcqxdG2gbUrHhrie09yZsTcJjnVRQds
- Z4gA==
-X-Gm-Message-State: AOJu0Yz1Xk/py6oOr9fs9znqlBY6VgpyaI5i/Kc4HcjVB64Lfvo6cOv3
- jmX85mqknS+BqXndk74Bbz6t4J1Io9A=
-X-Google-Smtp-Source: AGHT+IFhSPPdPqYIVhDvbBnP+U+KNkDr3PfCloOtCLuNZ5LYYo4XOS4LazRJe097eQwZVUUOjlMQEQ==
-X-Received: by 2002:a05:6a21:3394:b0:163:ab09:193e with SMTP id
- yy20-20020a056a21339400b00163ab09193emr17733632pzb.1.1696857347101; 
- Mon, 09 Oct 2023 06:15:47 -0700 (PDT)
+ bh=ykl7+QXYhv+gIqf+fZ0nzzp6jq5wmREVP6x41KuZG0g=;
+ b=lKZ0o5gwLEepV51LbNf/FAcdNDGVbMk2jUfsx28hgIc56dElTomEFJz/+lckthdtSB
+ 3PtdUP/nTV64RgFzXOcwgUJae0+s2H41iIt4sppABljP1Q777q5yGzEew8Djnr5H7bpB
+ xzG7RCs55QML2owEOwaJDvsvqRFM1RFzK8Gp6iQVA+A0LMT3Sg+/IIW7bTibV//3wGRJ
+ bGfG1nIZYHzCUpHwayDBjS1m017dSRnANrxulNTQBvvFxa61ojq0lTeL/XBOldgdvwFx
+ 4WvvHaMLrQ/PZETjAKA2mfr0bAFasnXdPy25y5CGuSRDJF0SURyiCFETw/9sKdrOh4bK
+ Ah4g==
+X-Gm-Message-State: AOJu0YwZ580x0KFtCa3RhibD8k0veJbGWppJhRRvoMyF71vt8wFW3G2C
+ ZMZ0YAIlnzrH2eAd4l9J8rI=
+X-Google-Smtp-Source: AGHT+IFHA6G8uadvJi6d7Wqr867UDgDUBOWPTnn91I79iugjnZBUDJuLrSkC1soS0oLDXcgpxQutew==
+X-Received: by 2002:a17:902:da8d:b0:1c1:fbec:bc3f with SMTP id
+ j13-20020a170902da8d00b001c1fbecbc3fmr17317098plx.5.1696857349354; 
+ Mon, 09 Oct 2023 06:15:49 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:22d5:b586:66b8:6e03])
  by smtp.gmail.com with ESMTPSA id
- r10-20020a170902be0a00b001c8a0879805sm4743965pls.206.2023.10.09.06.15.44
+ r10-20020a170902be0a00b001c8a0879805sm4743965pls.206.2023.10.09.06.15.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 06:15:46 -0700 (PDT)
+ Mon, 09 Oct 2023 06:15:48 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: marex@denx.de
 Cc: sbabic@denx.de,
 	u-boot@lists.denx.de,
 	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v3 2/3] usb: ehci: mxs: Use regulator_set_enable_if_allowed()
-Date: Mon,  9 Oct 2023 10:15:35 -0300
-Message-Id: <20231009131536.3475878-2-festevam@gmail.com>
+Subject: [PATCH v3 3/3] mx28evk: Add USB Mass Storage support
+Date: Mon,  9 Oct 2023 10:15:36 -0300
+Message-Id: <20231009131536.3475878-3-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231009131536.3475878-1-festevam@gmail.com>
 References: <20231009131536.3475878-1-festevam@gmail.com>
@@ -95,58 +95,42 @@ X-Virus-Status: Clean
 
 From: Fabio Estevam <festevam@denx.de>
 
-Since commit 4fcba5d556b4 ("regulator: implement basic reference
-counter") the return value of regulator_set_enable() may be EALREADY or
-EBUSY for fixed/GPIO regulators.
-
-Switch to using the more relaxed regulator_set_enable_if_allowed() to
-continue if regulator already was enabled or disabled.
-
-This fixes the following error when running the 'ums' command:
-
-=> ums 0 mmc 0
-UMS: LUN 0, dev mmc 0, hwpart 0, sector 0x0, count 0xece000
-Error enabling VBUS supply
-g_dnl_register: failed!, error: -114
-g_dnl_register failed
+Select the USB options to allow running "ums 0 mmc 0".
 
 Signed-off-by: Fabio Estevam <festevam@denx.de>
-Reviewed-by: Marek Vasut <marex@denx.de>
 ---
 Changes since v2:
-- None
+- Removed further unrelated options. (Marek)
 Changes since v1:
-- Only collected Marek's Reviewed-by tag.
+- Remove unrelated config options. (Marek)
 
- drivers/usb/host/ehci-mxs.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ configs/mx28evk_defconfig | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/drivers/usb/host/ehci-mxs.c b/drivers/usb/host/ehci-mxs.c
-index 092c79fd4bc5..ddf7cc2d00a7 100644
---- a/drivers/usb/host/ehci-mxs.c
-+++ b/drivers/usb/host/ehci-mxs.c
-@@ -236,9 +236,9 @@ static int ehci_usb_probe(struct udevice *dev)
- 		debug("%s: No vbus supply\n", dev->name);
- 
- 	if (!ret && priv->vbus_supply) {
--		ret = regulator_set_enable(priv->vbus_supply,
--					   (type == USB_INIT_DEVICE) ?
--					   false : true);
-+		ret = regulator_set_enable_if_allowed(priv->vbus_supply,
-+						      (type == USB_INIT_DEVICE) ?
-+						      false : true);
- 		if (ret) {
- 			puts("Error enabling VBUS supply\n");
- 			return ret;
-@@ -265,7 +265,7 @@ static int ehci_usb_remove(struct udevice *dev)
- 
- #if CONFIG_IS_ENABLED(DM_REGULATOR)
- 	if (priv->vbus_supply) {
--		ret = regulator_set_enable(priv->vbus_supply, false);
-+		ret = regulator_set_enable_if_allowed(priv->vbus_supply, false);
- 		if (ret) {
- 			puts("Error disabling VBUS supply\n");
- 			return ret;
+diff --git a/configs/mx28evk_defconfig b/configs/mx28evk_defconfig
+index df0cceaea719..4058d08f961a 100644
+--- a/configs/mx28evk_defconfig
++++ b/configs/mx28evk_defconfig
+@@ -32,6 +32,7 @@ CONFIG_CMD_DM=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_NAND_TRIMFFS=y
++CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_DATE=y
+ CONFIG_CMD_EXT4=y
+@@ -65,3 +66,11 @@ CONFIG_RTC_MXS=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_SPI=y
+ CONFIG_USB=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_MAX_CONTROLLER_COUNT=2
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="FSL"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0525
++CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
++CONFIG_CI_UDC=y
++CONFIG_USB_GADGET_DOWNLOAD=y
 -- 
 2.34.1
 
