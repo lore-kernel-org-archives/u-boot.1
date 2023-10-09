@@ -4,72 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1853CD6136
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 20:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ADFBCD612F
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 20:42:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4D0C86487;
-	Mon,  9 Oct 2023 22:32:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 906F786C32;
+	Mon,  9 Oct 2023 22:41:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZM7TCvLc";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="D48MRUAS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DFC786BD0; Mon,  9 Oct 2023 22:32:49 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A571786D4A; Mon,  9 Oct 2023 22:41:56 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE14D8642D
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 22:32:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CCF4864A9
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 22:41:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-79faf4210b2so188148539f.2
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 13:32:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696883565; x=1697488365; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=I+Lp3XFGntTJgc0hNFf/bTB0F124VVp57snWB91oGSM=;
- b=ZM7TCvLcOIMuH9VlM2Gp3PpKLNttElRzTX7TcLcKTreUsPt8gEwPhNj2QQwQGnN16I
- 3+FyMvkFas/Sv3dDiXMlHShsMRxriWwttjk9xqf9hEJygEUdqyoEyvBsDBWWN+BlPsHa
- g/It/GP1sMq9KotilmUC8ywQF18yUgQHj7mJg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696883565; x=1697488365;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=I+Lp3XFGntTJgc0hNFf/bTB0F124VVp57snWB91oGSM=;
- b=nTM0Ad2Tr7WsGRkmk86+tye3lFaQXKge0dqaD0cK2GfquBJJCgN9NgZRmWzt8T/sCn
- w7nmqxRy+0bEAqqxv9CdYAyO4+vSIbCQImNMJS2lqHSq7sIaMmzHtPIkN796cYlN/Od5
- g0HISgzZKo2mVPGabEC09+/Q+6FVzKYmOHLyAmoBdzKkeT0y8wKEnfxjFBGHQl9kctee
- 8J0KYWcyTHu7X8rMZa78DMcmOg/RkvWh/uFfFmPXwVhPQ+3pILU7EiHgc/SDKPaDl8FS
- uuVpM9W7V3Y2j5fk8RIy4Yfzv86pFxwHWiDbBNY7RSzLh8A6heIwsdEFLDFL5+5FwqfR
- EXPg==
-X-Gm-Message-State: AOJu0YwZSx4dWWyZWBkHOvf14DMDJBGsfYL+yyC0z+nRVZptZ3aR1Xpw
- G8JGbryP7qHazZmxB6g1d9vFEXaSCW/gxnJQGSc=
-X-Google-Smtp-Source: AGHT+IEOrzG9gqzXcMJLw9vGsfMKG/hj9U6is0KbehJmbCQXho1MpFFuq++bSgJmpYgDfl49M4NdgQ==
-X-Received: by 2002:a05:6602:22d8:b0:794:c9a2:5fe3 with SMTP id
- e24-20020a05660222d800b00794c9a25fe3mr18566541ioe.4.1696883565193; 
- Mon, 09 Oct 2023 13:32:45 -0700 (PDT)
-Received: from kea.bld.corp.google.com ([2620:15c:183:200:138c:cf57:c18d:20f5])
- by smtp.gmail.com with ESMTPSA id
- br13-20020a05663846cd00b0042b62a31349sm2300859jab.146.2023.10.09.13.32.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 13:32:45 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Andre Przywara <andre.przywara@arm.com>
-Subject: [PATCH] RFC: x86: serial: ns16550: Allow the UART to be silently
- disabled
-Date: Mon,  9 Oct 2023 14:32:38 -0600
-Message-ID: <20231009203242.1979537-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.609.gbb76f46606-goog
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=5f6d=FY=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1696884106;
+ bh=p6n2dyBlHim3xEMmFw5/gsjqIdIdxmveY0GoOEOh1rk=;
+ b=D48MRUAS9biMsZgNKUZHiw19h9wXZM8rNtgOE9hQ+6GBjvwZ+5B5sJqh4gVyFoUKj7/Xm69Va
+ 67U+nPDa2NhVA629wQo7y5Z6Rn49p2OxNs7Q9lRx2FMv1DsBbLH/MefsniyIGp/sZI/+xuciNaY
+ YysCjHUMb50jTrZbmcONZUWq7HN+byZG1ga4nREI4iJxLKWG1R24H9VwtNpOPRrH6wlIZ7LSF44
+ ez/bRSGqtxwA7y4q/hwW5lnh4OtNl+N+zuvANwP/pK4Jid0Uvqgk1Qs5m2O3TS7ojFUbG99B5dM
+ 9kcef3qgksVcOMqYdGFMTHU1yugb3r7yF/mk3t3H/4gA==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
+ <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v3] rockchip: rk3568-radxa-e25: Enable pcie3x1 node
+Date: Mon,  9 Oct 2023 20:41:39 +0000
+Message-ID: <20231009204141.3074894-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6524658aae6aaef2f99d9ecd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,114 +68,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot normally requires a UART. When booting from coreboot it is
-sometimes just not available, e.g. when no sysinfo or DBG2 information
-is provided.
+Enable mini PCIe slot, pcie3x1 node, now that the PCIe PHY driver
+support bifurcation.
 
-In this case we need to continue running, since the display can be used.
-Add a flag to disable serial for this case.
+A pinctrl is assigned for reset-gpios or the device may freeze running
+pci enum and nothing is connected to the mini PCIe slot.
 
-This allows U-Boot to start up and operation from the display, instead
-of hanging on start-up.
+Also drop the AHCI_PCI Kconfig option as this option is not required for
+a functional M.2 SATA drive slot.
 
-This could perhaps be hidden behind a Kconfig option to reduce code
-size.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
+v3:
+- Collect r-b tag
 
- drivers/serial/ns16550.c         | 17 +++++++++++++++--
- drivers/serial/serial_coreboot.c |  1 +
- include/ns16550.h                |  1 +
- 3 files changed, 17 insertions(+), 2 deletions(-)
+v2:
+- No change
 
-diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
-index eab9537fbae..6bb84f8c5bc 100644
---- a/drivers/serial/ns16550.c
-+++ b/drivers/serial/ns16550.c
-@@ -384,6 +384,8 @@ static int ns16550_serial_putc(struct udevice *dev, const char ch)
- {
- 	struct ns16550 *const com_port = dev_get_priv(dev);
- 
-+	if (com_port->plat->flags & NS16550_FLAG_DISABLE)
-+		return 0;
- 	if (!(serial_in(&com_port->lsr) & UART_LSR_THRE))
- 		return -EAGAIN;
- 	serial_out(ch, &com_port->thr);
-@@ -404,6 +406,9 @@ static int ns16550_serial_pending(struct udevice *dev, bool input)
- {
- 	struct ns16550 *const com_port = dev_get_priv(dev);
- 
-+	if (com_port->plat->flags & NS16550_FLAG_DISABLE)
-+		return 0;
-+
- 	if (input)
- 		return (serial_in(&com_port->lsr) & UART_LSR_DR) ? 1 : 0;
- 	else
-@@ -414,6 +419,9 @@ static int ns16550_serial_getc(struct udevice *dev)
- {
- 	struct ns16550 *const com_port = dev_get_priv(dev);
- 
-+	if (com_port->plat->flags & NS16550_FLAG_DISABLE)
-+		return 0;
-+
- 	if (!(serial_in(&com_port->lsr) & UART_LSR_DR))
- 		return -EAGAIN;
- 
-@@ -428,7 +436,8 @@ static int ns16550_serial_setbrg(struct udevice *dev, int baudrate)
- 
- 	clock_divisor = ns16550_calc_divisor(com_port, plat->clock, baudrate);
- 
--	ns16550_setbrg(com_port, clock_divisor);
-+	if (!(plat->flags & NS16550_FLAG_DISABLE))
-+		ns16550_setbrg(com_port, clock_divisor);
- 
- 	return 0;
- }
-@@ -441,6 +450,9 @@ static int ns16550_serial_setconfig(struct udevice *dev, uint serial_config)
- 	uint bits = SERIAL_GET_BITS(serial_config);
- 	uint stop = SERIAL_GET_STOP(serial_config);
- 
-+	if (com_port->plat->flags & NS16550_FLAG_DISABLE)
-+		return 0;
-+
- 	/*
- 	 * only parity config is implemented, check if other serial settings
- 	 * are the default one.
-@@ -525,7 +537,8 @@ int ns16550_serial_probe(struct udevice *dev)
- 		reset_deassert_bulk(&reset_bulk);
- 
- 	com_port->plat = dev_get_plat(dev);
--	ns16550_init(com_port, -1);
-+	if (!(plat->flags & NS16550_FLAG_DISABLE))
-+		ns16550_init(com_port, -1);
- 
- 	return 0;
- }
-diff --git a/drivers/serial/serial_coreboot.c b/drivers/serial/serial_coreboot.c
-index 23066e4d054..cdf9afc1739 100644
---- a/drivers/serial/serial_coreboot.c
-+++ b/drivers/serial/serial_coreboot.c
-@@ -120,6 +120,7 @@ static int coreboot_of_to_plat(struct udevice *dev)
- 		 * there is no UART, which may panic. So stay silent and
- 		 * pray that the video console will work.
- 		 */
-+		plat->flags |= NS16550_FLAG_DISABLE;
- 		log_debug("Cannot detect UART\n");
- 	}
- 
-diff --git a/include/ns16550.h b/include/ns16550.h
-index e7e68663d03..618bb4026b3 100644
---- a/include/ns16550.h
-+++ b/include/ns16550.h
-@@ -52,6 +52,7 @@ enum ns16550_flags {
- 	NS16550_FLAG_IO		= 1 << 0, /* Use I/O access (else mem-mapped) */
- 	NS16550_FLAG_ENDIAN	= 1 << 1, /* Use out_le/be_32() */
- 	NS16550_FLAG_BE		= 1 << 2, /* Big-endian access (else little) */
-+	NS16550_FLAG_DISABLE	= BIT(3), /* No output or input */
+ arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi | 11 +++++++++--
+ configs/radxa-e25-rk3568_defconfig        |  1 -
+ 2 files changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+index 572bdc5665b1..1136f0bb3b81 100644
+--- a/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
++++ b/arch/arm/dts/rk3568-radxa-e25-u-boot.dtsi
+@@ -8,9 +8,16 @@
+ 	};
  };
  
- /**
+-/* PCIe PHY driver in U-Boot does not support bifurcation */
+ &pcie3x1 {
+-	status = "disabled";
++	pinctrl-0 = <&pcie30x1_reset_h>;
++};
++
++&pinctrl {
++	pcie {
++		pcie30x1_reset_h: pcie30x1-reset-h {
++			rockchip,pins = <0 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
+ };
+ 
+ &sdhci {
+diff --git a/configs/radxa-e25-rk3568_defconfig b/configs/radxa-e25-rk3568_defconfig
+index a905100a794d..2dfff6af3bd1 100644
+--- a/configs/radxa-e25-rk3568_defconfig
++++ b/configs/radxa-e25-rk3568_defconfig
+@@ -54,7 +54,6 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_SYSCON=y
+-CONFIG_AHCI_PCI=y
+ CONFIG_DWC_AHCI=y
+ CONFIG_SPL_CLK=y
+ CONFIG_ROCKCHIP_GPIO=y
 -- 
-2.42.0.609.gbb76f46606-goog
+2.42.0
 
