@@ -4,76 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E442E95A8E
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 07:59:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A362E95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 08:24:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8516786B3C;
-	Mon,  9 Oct 2023 09:59:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8C6C386550;
+	Mon,  9 Oct 2023 10:24:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fdMKCEDl";
+	dkim=pass (1024-bit key; unprotected) header.d=mysnt.onmicrosoft.com header.i=@mysnt.onmicrosoft.com header.b="QC3QXSQ3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 70BFB86A2B; Mon,  9 Oct 2023 09:59:25 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B669866B2; Mon,  9 Oct 2023 10:24:01 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20706.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7d00::706])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0744381FA8
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 09:59:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B059986504
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 10:23:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=kontron.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5347e657a11so6981549a12.2
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 00:59:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696838362; x=1697443162; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4OaWtuTBE0/2ixd8H6B0WsGu5C5pAnfa5bJUt2w1PeM=;
- b=fdMKCEDl22ZHLPZC6GOyZC2+ixF6B8HbDby33RQIMfQZL0XJINOOmcCNMfz/WLLf78
- Vq2SR2VXkCXuMWVo+ThUzWwi/Z8C5GLaYrpPL3t3GTLnxUtQqi/v6h8VZEvk132SemHP
- jJGF3Xmxx3wmhkI++gTplCLHezs8/WVctxe/eSH5PcrDkN7ZT7USRwPVEWqnfr1MUIfm
- FQtnjAQQSqeSJ5YrAi/m4W4l41W8Zm4z0Lv47DNslqYFjfFfECCjqJeQSkDyICafoFPk
- o6/6TNx2EsMXMn2GiiR9ofUH7uTAuoJc6WrPNc6kW2Oow+dz/oMh5qZb97fQGzytLFIX
- HI4A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696838362; x=1697443162;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4OaWtuTBE0/2ixd8H6B0WsGu5C5pAnfa5bJUt2w1PeM=;
- b=Or0rY/obqaFfC/mzJUdvqcafCvV+dqI9VSuHDgmTsUWudvX/Src5QotNKI98HaQ2xW
- NcequFsm5ra+QKunWlnoSPtFinV4hOACnPOKCt08ctsKGoK+jFKkzByTwjtfEmjYArr1
- r0ShrpyIHBrOAZ2sGMxLPhpUl7EZauurQMS6TOmwP1svB0CMRDwFZCO+CWAdjVBwC6fr
- 8MuSUZmCWzZpgAzd14hSYITCHrh5KnBmeS+3cT6dgvzJ7oaFyficSF3a5kr2OPV8r1TE
- ggwdNccclEA95/nxFd+edd70WJaGGAEs7G1wlOvkXZ5iqGo8HnhoeL1UNVv7qZ+X7Lod
- PEng==
-X-Gm-Message-State: AOJu0YzmytDAl5QBCCLZ6lNJYg9CUU4+sxQUJ89rlMHJpqVeI3mxBIRF
- utifOdlgKLLWlpP53CPxUeJINiTxOG7K4cKkmrEOUg==
-X-Google-Smtp-Source: AGHT+IGbFBYXo4zQZpuJrjUzmnP8Ap2b1ly6IrDMIhxgS3ul9DKHeYAWYuQeNk2IgLK3OEtccfY2sK7Hv2Ls284wEHE=
-X-Received: by 2002:aa7:dcd5:0:b0:524:547b:59eb with SMTP id
- w21-20020aa7dcd5000000b00524547b59ebmr10701795edu.15.1696838362444; Mon, 09
- Oct 2023 00:59:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=frieder.schrempf@kontron.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OhfilxLpTbgWM81Qm3MAdDP4fDECk4UdNSiLVunDJv3at6il2RGoG2M0TdQ04HO/ZZTOwIFDHOU9tG1g8+lnS7kHpErjPQyLGftQK+uGzKrshtX9BcCc7gSEHQAsnuWuFItOuKmy7QZ8zDC/41RvC4wKZ4chgnTVpryo8S1Q5IcR6ZhcFzxmTp0pSrqK1JIY1kczB1ifmjDxShJF9Ku682WJExnIVxxYxHE9dVANEMqqzyWdcK7nuQmaIO+/lFD5Kvzg84yNeA0irmU8ONSlsbshxEvvhP42jETw02l160eE+3l4jc3u8WSTkNZ3cchhjdS6x4saEpLr8J3p1CtG7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=tygqFOGIELrDR7qF96v3RgePO7vDJ7tRvAwjxFJ5ybs=;
+ b=OJHAWQEbQ3memgwnc0MEg52/MTe0nXu/8DX732ZTZL4+CUk9xlOANM8Qk1bkTDJ5UAdTTTY+bLvJU/kmXCJnS6F9wgG/d/3MGkNhiZaA1d/3lSp2zn0D2v93fZk3gmwO22KEnDNeRUYFLDUqwu+GuZmNSZg0gLQKdG0PinWV9iw/oTcpEn2RJSzYl+MY2I+hV9Dg6TtPaNV7RQz7Y2X9ToQMWnyp71I0tCaMrQE1fjre4s+7fgye4HETNENbDLYipM+faip9XVJT55j/9JyTwGNXDKBOA0ZwT2iOOw8tnSUhjiJSwKETgwmOfLzArtHDhyoNUUEQUuj1KOojP9hrqA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=kontron.de; dmarc=pass action=none header.from=kontron.de;
+ dkim=pass header.d=kontron.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mysnt.onmicrosoft.com; 
+ s=selector2-mysnt-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=tygqFOGIELrDR7qF96v3RgePO7vDJ7tRvAwjxFJ5ybs=;
+ b=QC3QXSQ3AwkRh1+9hm8Atc+H/3jW5FypKMVA9mDSkI8AlwWCDiQjCO9zIiTh52qGRxSZXcXnrBTgmbm+LB3/xrczeTpf0KjwPnPCrGvMHXKru7OtViN6v3tkQwQXIBqZyNVFbKq7nfkTveachVMq6WW/RY4BxaF5AFrWNP7L/ck=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=kontron.de;
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:263::10)
+ by DU0PR10MB6653.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:403::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.37; Mon, 9 Oct
+ 2023 08:23:56 +0000
+Received: from PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::3e1d:976b:532c:939a]) by PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::3e1d:976b:532c:939a%3]) with mapi id 15.20.6838.040; Mon, 9 Oct 2023
+ 08:23:56 +0000
+Message-ID: <cd1bc5f7-b8b1-41ec-ac0e-849ef3eece73@kontron.de>
+Date: Mon, 9 Oct 2023 10:23:53 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 1/2] mtd: spinand: rework detect procedure for
+ different READ_ID operation
+Content-Language: en-US, de-DE
+To: Igor Prusov <ivprusov@salutedevices.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Martin Kurbanov <mmkurbanov@sberdevices.ru>,
+ Chuanhong Guo <gch981213@gmail.com>,
+ Dmitry Rokosov <ddrokosov@sberdevices.ru>, Simon Glass <sjg@chromium.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: prusovigor@gmail.com, kernel@sberdevices.ru, u-boot@lists.denx.de
+References: <20231004150704.49945-1-ivprusov@salutedevices.com>
+ <20231004150704.49945-2-ivprusov@salutedevices.com>
+From: Frieder Schrempf <frieder.schrempf@kontron.de>
+In-Reply-To: <20231004150704.49945-2-ivprusov@salutedevices.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: ZR0P278CA0153.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:41::20) To PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:102:263::10)
 MIME-Version: 1.0
-References: <20231004112722.416877-1-sughosh.ganu@linaro.org>
- <20231004112722.416877-6-sughosh.ganu@linaro.org>
- <CAPnjgZ38v8ObWRDRB0mnyzpfJf_8wK8ChjTMzpRC387MKhgXwQ@mail.gmail.com>
-In-Reply-To: <CAPnjgZ38v8ObWRDRB0mnyzpfJf_8wK8ChjTMzpRC387MKhgXwQ@mail.gmail.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Mon, 9 Oct 2023 13:29:11 +0530
-Message-ID: <CADg8p96cPTPPzZ02BOdwDnNtRHOUiGmXgCcWxCHrjSWC_UwsdQ@mail.gmail.com>
-Subject: Re: [PATCH 5/5] binman: capsule: Add support for generating EFI empty
- capsules
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PA4PR10MB5681:EE_|DU0PR10MB6653:EE_
+X-MS-Office365-Filtering-Correlation-Id: 31e1f71e-949c-482a-b737-08dbc8a1146c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: A8960fJj+79+VZt6gHht4Z9NVegC27zTTLEZ25tSWxYjtMi1wWgUsejd4d9ccbO8WqtCKDKw6CSRlVQcv6joK4kEa8t7d0HV/EYCKew2SsP5P60IpBz6JuyMqrnWVc4WCkoMlN7XYU9wmt/mAZ6d7mbofhwJ8FYzWM10YibERaSQ1Lp+nayRziCXEG9YDvx9gHet4uiqSX00J8a22rX4xs3Rjh/q4m9kncHtOMLaYyg8QkNt/RfB0lSqnKO+jjpDrpvaSZVyzREEU+aN6gBjifaTGL/fm2bIPvQeHTYF83DkI5mQZTFaPaEOg4k93iElpdWF12/5VN7JC11IHEMnWnKP5NViMDdRaOcwuOmDJ4Mha7Yf7UvYofGhFAcZzvkcScU1iY60AyXgqwblILUR3jMx8c8jqEyGoLqsWZCiKn16T0X79JVadhRMK66vrnH6BoO2//LF7B6p4VL8s7x05poKbuDT5OGuj4YI8hbttCUlcfPhXg2kr6Rp1KA/zw9sxGFvEN1lLq5b789cAMQadugvUg1ecjawzWNmd7haWY+oIN2pQ9AD9MgeHjhiCkBVh0I57gvXT8/zgeenWeiDjEtPQRz5Pi58XbwFoaHDGtNVCUSO3HjHhxIZTzIb2BTU7kTiFqKajKAUNEZLkTOw8g==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(376002)(366004)(136003)(396003)(39860400002)(230922051799003)(186009)(451199024)(64100799003)(1800799009)(31686004)(6506007)(53546011)(2616005)(6512007)(36756003)(86362001)(31696002)(38100700002)(26005)(83380400001)(7416002)(44832011)(2906002)(6486002)(966005)(6666004)(478600001)(41300700001)(8676002)(4326008)(8936002)(316002)(5660300002)(66476007)(110136005)(66556008)(66946007)(45980500001)(43740500002);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?b0d1akZ3T3htOFJzellCWmlEa2NwMkowZ3Z6ZVRtcW02SUNNUlQ1NlhWU0dh?=
+ =?utf-8?B?eVlaeWhzMWg5dStzdklvTTlhdkQxaS9WOU5WSVZPbUR5V2NaT09xcGFqeGFu?=
+ =?utf-8?B?ZDFaaVNsM2NTQzRVS3lkU0dHVGFnS3RVMzZ5a3UrYWUvRTBBTlJIOFBGSk93?=
+ =?utf-8?B?M0ZOL2FCZ0twQ3hQL2ppS0xOWGVLTVJIalRMckw1ZkZLMDU2d1U1N0dLRjdo?=
+ =?utf-8?B?eGluT05iN2RCOERHZUZjcHNiNUVsTmpVOXFnelFTai9JSkQ0ckNMWnlETDNW?=
+ =?utf-8?B?UVAwS1A0SUFZS2VKbnA5cWwyWFJYQnIwYXoxd1RKV3NrY1ZhRy82M3RzdWVp?=
+ =?utf-8?B?NHlZWDA5RjhDa1pqd3h1YzdNZDNmNnZmdk1BWUZoNTc5bk1HckRVL25kdERC?=
+ =?utf-8?B?VFhENjNYYitaT3MrZ2lSTDZ1RVBIS21LSEVYWFRCUEg0ZkZjbjB2dWZlaDFH?=
+ =?utf-8?B?Ykp3bUVqNW9uN0lTUzE2aWYwNWxRWk40d3lKdEExNmJibXFIMnlWUmJWWEdD?=
+ =?utf-8?B?ZngvUFBoL0FMbU9YR3V0cENHMFArZU10UWFJRWFsR1kyb1M2NnVrWHd3aTZH?=
+ =?utf-8?B?R0JULzFoRC9adEcxWkZnRWVzU2ZTdUFUVnZYZ2w2VWFHYWFKTCtkQ3AvWG40?=
+ =?utf-8?B?N0VOMG5IcDh0MVZLSy85VkN3a3ZtczdrTm94dERETENEOVhJTlJmTjRUZ0N0?=
+ =?utf-8?B?bndLcFlGREF5S1FUbnVFa0pGRWl5bm4rTEYyZTc5NjRrUmRzSjlzc2JCTm1X?=
+ =?utf-8?B?b1RBbXBONDYrUWYxU0RCbTI5azZFNjlqclFRV1NXQ0MzY1dxRkhiQkIvMDd3?=
+ =?utf-8?B?eDZ3RnptL3crREtleElXcnBCSmdOS1BkcDlpSVZFOGt6NnVjN3NqRTRLN0Fl?=
+ =?utf-8?B?NzRUWHVYUk9GT2ZBTU9ma0pkTUMzRld0Z2o2Z3ppV1lubGpFcVZHOTE5eUpP?=
+ =?utf-8?B?ckZnYWdOUC91aTYySEVzSk9ncVlORVgzNGdlYkJxbWJGMm9rUlZSMnVSczRR?=
+ =?utf-8?B?T0VsUkFVZVM4OTByaVNSR0JaakRxVUQ2NExLYTJUWCthQjR6L0poMzRpNStt?=
+ =?utf-8?B?S2NtTEU2Uis2eHYxUE1IK1VaMVhPR3dCWVBQR3BkQjE4V2NTN3lrQ2xyVGds?=
+ =?utf-8?B?TGpUUnlRbERraFZoZExxa2JSTmFFQklKMmZPNjdEWCt0Z1JqTXBXbWtPQ1Fh?=
+ =?utf-8?B?MG1kMTFnaXQrZ0xscHdILzVnMjJxTDVHWFp1SnNRSDBwcVhzbElGM1lBWFJI?=
+ =?utf-8?B?L1Z5RDZLTExXNzFxbjFpS2RmbjRBV1RBbDlEYU95WG9LVzJCMmVRT1RmUUVG?=
+ =?utf-8?B?QUNHdjA2VzZ3bks0RGJzeHZtTExpWW0wM09HNldtVW5adWs0RFpkZi9sRXRj?=
+ =?utf-8?B?QktjSFAzNndTbkRxaU9PY1h0ZXkweUpraGdvdDZlSnVYOXhPUFRadVhsWVZn?=
+ =?utf-8?B?ZjNsMTVLQ1pXUmU2UytnbWdwaXVrZlg4anFnQ3dDRjZsbE1hUEcxT1MxeUNt?=
+ =?utf-8?B?TXFGQUExMnRhVHZObVFNVTI2TEI3U2s0L2dIM1B0T2hSUDVKSlZrbkxMeEtH?=
+ =?utf-8?B?UjlscE1WTE9DSE1yMHh2RFRIZGcyY3l1UzRrTnhCbTRLcVgzTDhyV2xmbUdW?=
+ =?utf-8?B?d01FSWFycENXalJKWU1FRHgxUm9Qc2xYMFdjNUlpNTAxc1loVFJKSFhITmRN?=
+ =?utf-8?B?dlVUY2ExcUNISXVQT3ovM2xQN05kZWI1eXRHMFBvVUpBQ2VkN2h2WFRPalR2?=
+ =?utf-8?B?RUVXVm5FK3dkdmhjK3U2YXMySnBFaWh2MDZ2S2Qzbm9SMDE1c3JISUl6R1hX?=
+ =?utf-8?B?Y1E0N29kTVROMVRMRW43V00rWUlHdmh1Ry9KMGxiNURsNzdjY2ZxcysvWHF6?=
+ =?utf-8?B?emovYlVHQkVMZzFYQjZnR2xWVTB6RVJSNkR3TllRSGJCNWptUGpGdzN0K2JQ?=
+ =?utf-8?B?NHVWbmFiZlIzTmpXRVlwakM1eXc2OEZBeXZHUEFncEltRFdzRXZyNHJCd3Ri?=
+ =?utf-8?B?UG1EdUpjR1JiWkJJL015eHJ2NS9lNC9vTFRoUElQMm43STM2d3lIQ3ZXdWpC?=
+ =?utf-8?B?VjJLR2xieFBwRit1TDJxQXl6OUxoNmFkN0Z4ZjlISGJtRHhJUlI3UG1KdnA2?=
+ =?utf-8?B?ZEx0Q3ViV0xkTUMxTkVaNmg5R0h2a2NUN2lyeU9XVW1ZcmllZk9ZSkpSRDY3?=
+ =?utf-8?B?T3c9PQ==?=
+X-OriginatorOrg: kontron.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 31e1f71e-949c-482a-b737-08dbc8a1146c
+X-MS-Exchange-CrossTenant-AuthSource: PA4PR10MB5681.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 08:23:56.2314 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 8c9d3c97-3fd9-41c8-a2b1-646f3942daf1
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tPh1tjAN6ANC0EzaR5tnUxtZioDMiSehJvN71WQNw9PbspU6RFukNmeJHCVJWletkcIJkl7jcI8Nh1vvQM6EPQdJjMb7Cpv18VD4AWUTAsQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR10MB6653
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,334 +152,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Simon,
+On 04.10.23 17:07, Igor Prusov wrote:
+> Adaptation of Linux commit f1541773af49.
+> 
+> Currently there are 3 different variants of read_id implementation:
+> 1. opcode only. Found in GD5FxGQ4xF.
+> 2. opcode + 1 addr byte. Found in GD5GxGQ4xA/E
+> 3. opcode + 1 dummy byte. Found in other currently supported chips.
+> 
+> Original implementation was for variant 1 and let detect function
+> of chips with variant 2 and 3 to ignore the first byte. This isn't
+> robust:
+> 
+> 1. For chips of variant 2, if SPI master doesn't keep MOSI low
+> during read, chip will get a random id offset, and the entire id
+> buffer will shift by that offset, causing detect failure.
+> 
+> 2. For chips of variant 1, if it happens to get a devid that equals
+> to manufacture id of variant 2 or 3 chips, it'll get incorrectly
+> detected.
+> 
+> This patch reworks detect procedure to address problems above. New
+> logic do detection for all variants separatedly, in 1-2-3 order.
+> Since all current detect methods do exactly the same id matching
+> procedure, unify them into core.c and remove detect method from
+> manufacture_ops.
+> 
+> Signed-off-by: Chuanhong Guo <gch981213@gmail.com>
+> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
 
-On Sun, 8 Oct 2023 at 04:41, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Sugosh,
->
-> On Wed, 4 Oct 2023 at 05:27, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> >
-> > Add support in binman for generating EFI empty capsules. These
-> > capsules are used in the FWU A/B update feature. Also add test cases
-> > in binman for the corresponding code coverage.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> >  tools/binman/etype/efi_empty_capsule.py       | 91 +++++++++++++++++++
-> >  tools/binman/ftest.py                         | 52 +++++++++++
-> >  tools/binman/test/319_capsule_accept.dts      | 16 ++++
-> >  tools/binman/test/320_capsule_revert.dts      | 14 +++
-> >  .../test/321_capsule_accept_missing_guid.dts  | 14 +++
-> >  .../binman/test/322_capsule_accept_revert.dts | 17 ++++
-> >  6 files changed, 204 insertions(+)
-> >  create mode 100644 tools/binman/etype/efi_empty_capsule.py
-> >  create mode 100644 tools/binman/test/319_capsule_accept.dts
-> >  create mode 100644 tools/binman/test/320_capsule_revert.dts
-> >  create mode 100644 tools/binman/test/321_capsule_accept_missing_guid.dts
-> >  create mode 100644 tools/binman/test/322_capsule_accept_revert.dts
-> >
-> > diff --git a/tools/binman/etype/efi_empty_capsule.py b/tools/binman/etype/efi_empty_capsule.py
-> > new file mode 100644
-> > index 0000000000..d2c781627b
-> > --- /dev/null
-> > +++ b/tools/binman/etype/efi_empty_capsule.py
-> > @@ -0,0 +1,91 @@
-> > +# SPDX-License-Identifier: GPL-2.0+
-> > +# Copyright (c) 2023 Linaro Limited
-> > +#
-> > +# Entry-type module for producing an empty  EFI capsule
-> > +#
-> > +
-> > +import os
-> > +
-> > +from binman.entry import Entry
-> > +from binman.etype.section import Entry_section
-> > +from dtoc import fdt_util
-> > +from u_boot_pylib import tools
-> > +
-> > +class Entry_efi_empty_capsule(Entry_section):
->
-> Do you think this could subclass Entry_efi_capsule? They seem to do
-> similar things. You could call generate_capsule() or
-> generate_empty_capsule(). depending on whether any data is present
-> (and perhaps require an operation if no data).
->
-> I'm not sure about this, just an idea.
+An adaptation of this patch was already sent long ago [1] and Dario also
+picked it up in nand-next [2]. Though it looks like this was never
+merged upstream as there wasn't any pull request sent to Tom, right?
 
-Okay, let me try this out. If it is getting too confusing or unclear,
-I will keep the two entry types separate.
+Dario, as you already seem to have rebased nand-next recently, can you
+please sent the changes to Tom for picking them up? As the merge window
+is open at the moment it would be good to get it done soon. Thanks!
 
->
-> > +    """Generate EFI empty capsules
-> > +
-> > +    The parameters needed for generation of the empty capsules can
-> > +    be provided as properties in the entry.
-> > +
-> > +    Properties / Entry arguments:
-> > +    - image-guid: Image GUID which will be used for identifying the
-> > +      updatable image on the board. Mandatory for accept capsule.
-> > +    - accept-capsule - Boolean property to generate an accept capsule.
-> > +      image-type-id
-> > +    - revert-capsule - Boolean property to generate a revert capsule
-> > +
-> > +    For more details on the description of the capsule format, and the capsule
-> > +    update functionality, refer Section 8.5 and Chapter 23 in the `UEFI
-> > +    specification`_. For more information on the empty capsule, refer the
-> > +    sections 2.3.2 and 2.3.3 in the `Dependable Boot specification`_.
-> > +
-> > +    A typical accept empty capsule entry node would then look something like this
-> > +
-> > +    empty-capsule {
-> > +            type = "efi-empty-capsule";
-> > +            /* Image GUID for testing capsule update */
-> > +            image-type-id = SANDBOX_UBOOT_IMAGE_GUID;
-> > +            accept-capsule;
-> > +    };
-> > +
-> > +    A typical revert empty capsule entry node would then look something like this
-> > +
-> > +    empty-capsule {
-> > +            type = "efi-empty-capsule";
-> > +            revert-capsule;
-> > +    };
-> > +
-> > +    The empty capsules do not have any input payload image.
-> > +
-> > +    .. _`UEFI specification`: https://uefi.org/sites/default/files/resources/UEFI_Spec_2_10_Aug29.pdf
-> > +    .. _`Dependable Boot specification`: https://git.codelinaro.org/linaro/dependable-boot/mbfw/uploads/6f7ddfe3be24e18d4319e108a758d02e/mbfw.pdf
-> > +    """
-> > +    def __init__(self, section, etype, node):
-> > +        super().__init__(section, etype, node)
-> > +        self.accept = 0
-> > +        self.revert = 0
-> > +
-> > +    def ReadNode(self):
-> > +        super().ReadNode()
-> > +
-> > +        self.image_guid = fdt_util.GetString(self._node, 'image-guid')
-> > +        self.accept = fdt_util.GetBool(self._node, 'accept-capsule')
-> > +        self.revert = fdt_util.GetBool(self._node, 'revert-capsule')
->
-> Perhaps it should be
->
-> operation = "accept" / "revert" ?
->
-> Using two conflicting bools is not great.
-
-Will change
-
->
-> > +
-> > +        if self.accept and not self.image_guid:
-> > +            self.Raise('Image GUID needed for generating accept capsule')
-> > +
-> > +        if self.accept and self.revert:
-> > +            self.Raise('Need to enable either Accept or Revert capsule')
-> > +
-> > +    def BuildSectionData(self, required):
-> > +        def get_binman_test_guid(type_str):
-> > +            TYPE_TO_GUID = {
-> > +                'binman-test' : '09d7cf52-0720-4710-91d1-08469b7fe9c8'
->
-> Can you put this in a shared file somewhere, used by this and the
-> efi_capsule.py module?
-
-Okay. I will put this in a separate global function, and use it in the
-other module.
-
->
-> > +            }
-> > +            return TYPE_TO_GUID[type_str]
-> > +
-> > +        uniq = self.GetUniqueName()
-> > +        outfile = self._filename if self._filename else 'capsule.%s' % uniq
-> > +        capsule_fname = tools.get_output_filename(outfile)
-> > +        guid = self.image_guid
-> > +        if self.image_guid == "binman-test":
-> > +            guid = get_binman_test_guid('binman-test')
-> > +
-> > +        ret = self.mkeficapsule.generate_empty_capsule(self.accept, self.revert,
-> > +                                                       guid, capsule_fname)
-> > +        if ret is not None:
-> > +            return tools.read_file(capsule_fname)
-> > +
-> > +    def AddBintools(self, btools):
-> > +        self.mkeficapsule = self.AddBintool(btools, 'mkeficapsule')
-> > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> > index 2b8871ab7e..9286de28e4 100644
-> > --- a/tools/binman/ftest.py
-> > +++ b/tools/binman/ftest.py
-> > @@ -126,6 +126,9 @@ FW_MGMT_GUID = '6DCBD5ED-E82D-4C44-BDA1-7194199AD92A'
-> >  CAPSULE_IMAGE_GUID = '09D7CF52-0720-4710-91D1-08469B7FE9C8'
-> >  # Windows cert GUID
-> >  WIN_CERT_TYPE_EFI_GUID = '4AAFD29D-68DF-49EE-8AA9-347D375665A7'
-> > +# Empty capsule GUIDs
-> > +EMPTY_CAPSULE_ACCEPT_GUID = '0C996046-BCC0-4D04-85EC-E1FCEDF1C6F8'
-> > +EMPTY_CAPSULE_REVERT_GUID = 'ACD58B4B-C0E8-475F-99B5-6B3F7E07AAF0'
-> >
-> >  class TestFunctional(unittest.TestCase):
-> >      """Functional tests for binman
-> > @@ -7283,6 +7286,27 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> >
-> >          self.assertEqual(payload_data_len, int(hdr['Payload Image Size']))
-> >
-> > +    def _CheckEmptyCapsule(self, data, accept_capsule=False):
-> > +        if accept_capsule:
-> > +            capsule_hdr_guid = EMPTY_CAPSULE_ACCEPT_GUID
-> > +        else:
-> > +            capsule_hdr_guid = EMPTY_CAPSULE_REVERT_GUID
-> > +
-> > +        hdr = self._GetCapsuleHeaders(data)
-> > +
-> > +        self.assertEqual(capsule_hdr_guid,
-> > +                         hdr['EFI_CAPSULE_HDR.CAPSULE_GUID'])
-> > +
-> > +        if accept_capsule:
-> > +            capsule_size = "0000002C"
-> > +        else:
-> > +            capsule_size = "0000001C"
-> > +        self.assertEqual(capsule_size,
-> > +                         hdr['EFI_CAPSULE_HDR.CAPSULE_IMAGE_SIZE'])
-> > +
-> > +        if accept_capsule:
-> > +            self.assertEqual(CAPSULE_IMAGE_GUID, hdr['ACCEPT_IMAGE_GUID'])
-> > +
-> >      def testCapsuleGen(self):
-> >          """Test generation of EFI capsule"""
-> >          data = self._DoReadFile('311_capsule.dts')
-> > @@ -7347,5 +7371,33 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-> >          self.assertIn("entry is missing properties: image-guid",
-> >                        str(e.exception))
-> >
-> > +    def testCapsuleGenAcceptCapsule(self):
-> > +        """Test generationg of accept EFI capsule"""
-> > +        data = self._DoReadFile('319_capsule_accept.dts')
-> > +
-> > +        self._CheckEmptyCapsule(data, accept_capsule=True)
-> > +
-> > +    def testCapsuleGenRevertCapsule(self):
-> > +        """Test generationg of revert EFI capsule"""
-> > +        data = self._DoReadFile('320_capsule_revert.dts')
-> > +
-> > +        self._CheckEmptyCapsule(data)
-> > +
-> > +    def testCapsuleGenAcceptGuidMissing(self):
-> > +        """Test that binman errors out on missing image GUID for accept capsule"""
-> > +        with self.assertRaises(ValueError) as e:
-> > +            self._DoReadFile('321_capsule_accept_missing_guid.dts')
-> > +
-> > +        self.assertIn("Image GUID needed for generating accept capsule",
-> > +                      str(e.exception))
-> > +
-> > +    def testCapsuleGenAcceptOrRevert(self):
-> > +        """Test that both accept and revert capsule are not specified"""
-> > +        with self.assertRaises(ValueError) as e:
-> > +            self._DoReadFile('322_capsule_accept_revert.dts')
-> > +
-> > +        self.assertIn("Need to enable either Accept or Revert capsule",
-> > +                      str(e.exception))
-> > +
-> >  if __name__ == "__main__":
-> >      unittest.main()
-> > diff --git a/tools/binman/test/319_capsule_accept.dts b/tools/binman/test/319_capsule_accept.dts
-> > new file mode 100644
-> > index 0000000000..4d6c005019
-> > --- /dev/null
-> > +++ b/tools/binman/test/319_capsule_accept.dts
-> > @@ -0,0 +1,16 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +/dts-v1/;
-> > +
-> > +/ {
-> > +       #address-cells = <1>;
-> > +       #size-cells = <1>;
-> > +
-> > +       binman {
-> > +               efi-empty-capsule {
-> > +                       /* Image GUID for testing capsule update */
-> > +                       image-guid = "binman-test";
-> > +                       accept-capsule;
-> > +               };
-> > +       };
-> > +};
-> > diff --git a/tools/binman/test/320_capsule_revert.dts b/tools/binman/test/320_capsule_revert.dts
-> > new file mode 100644
-> > index 0000000000..eeaa2793a5
-> > --- /dev/null
-> > +++ b/tools/binman/test/320_capsule_revert.dts
-> > @@ -0,0 +1,14 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +/dts-v1/;
-> > +
-> > +/ {
-> > +       #address-cells = <1>;
-> > +       #size-cells = <1>;
-> > +
-> > +       binman {
-> > +               efi-empty-capsule {
-> > +                       revert-capsule;
-> > +               };
-> > +       };
-> > +};
-> > diff --git a/tools/binman/test/321_capsule_accept_missing_guid.dts b/tools/binman/test/321_capsule_accept_missing_guid.dts
-> > new file mode 100644
-> > index 0000000000..6f7062e83e
-> > --- /dev/null
-> > +++ b/tools/binman/test/321_capsule_accept_missing_guid.dts
-> > @@ -0,0 +1,14 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +/dts-v1/;
-> > +
-> > +/ {
-> > +       #address-cells = <1>;
-> > +       #size-cells = <1>;
->
-> I wonder if those two lines are needed? Perhaps it generates a warning?
-
-Tbh, I just copied them from another file which I was using as a
-reference when I introduced the capsule changes. I will check if
-removing them causes any issues.
-
--sughosh
-
->
-> > +
-> > +       binman {
-> > +               efi-empty-capsule {
-> > +                       accept-capsule;
-> > +               };
-> > +       };
-> > +};
-> > diff --git a/tools/binman/test/322_capsule_accept_revert.dts b/tools/binman/test/322_capsule_accept_revert.dts
-> > new file mode 100644
-> > index 0000000000..c68e76a669
-> > --- /dev/null
-> > +++ b/tools/binman/test/322_capsule_accept_revert.dts
-> > @@ -0,0 +1,17 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +
-> > +/dts-v1/;
-> > +
-> > +/ {
-> > +       #address-cells = <1>;
-> > +       #size-cells = <1>;
-> > +
-> > +       binman {
-> > +               efi-empty-capsule {
-> > +                       /* Image GUID for testing capsule update */
-> > +                       image-guid = "binman-test";
-> > +                       accept-capsule;
-> > +                       revert-capsule;
-> > +               };
-> > +       };
-> > +};
-> > --
-> > 2.34.1
-> >
->
-> Regards,
-> Simon
+[1]
+https://patchwork.ozlabs.org/project/uboot/patch/20230110115843.391630-1-frieder@fris.de/
+[2]
+https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/commits/nand-next/
