@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD05E95A91
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 11:39:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAAB0E95A91
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 12:49:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5A1086C00;
-	Mon,  9 Oct 2023 13:39:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ict42.de
+	by phobos.denx.de (Postfix) with ESMTP id A5762863F8;
+	Mon,  9 Oct 2023 14:49:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=londelec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=ict42.de header.i=@ict42.de header.b="kBKHrtAr";
-	dkim=permerror (0-bit key) header.d=ict42.de header.i=@ict42.de header.b="gp30GJ1m";
+	dkim=pass (2048-bit key; unprotected) header.d=londelec-com.20230601.gappssmtp.com header.i=@londelec-com.20230601.gappssmtp.com header.b="q+DxFXo2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 755A086C00; Mon,  9 Oct 2023 13:39:29 +0200 (CEST)
-Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
- [81.169.146.220])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0CF5D8692B; Mon,  9 Oct 2023 14:46:04 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64F7E8642A
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 13:39:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7308C863E3
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 14:45:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ict42.de
+ dmarc=none (p=none dis=none) header.from=londelec.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=ludwig.kormann@ict42.de
-ARC-Seal: i=1; a=rsa-sha256; t=1696851566; cv=none;
- d=strato.com; s=strato-dkim-0002;
- b=TWY6I9XgFRnOPexjXyht+p5zej6rlaGuY1DTdSjHC1wtj6dN259MJ3z6TwEGRYm7ML
- 723QlITjCIEGnF59b2cpuan0nzB9i6L412alsKzdZ2H6nQw4AG2BHbYiFKqemxl2l0/w
- 8SQK7UYykl4V8BoUl/B8QwYZZAaDM8MSBHi2AJKU35OGMW3Oz/hPLphXpSOUKNQAvCGT
- E53+7DkTuk7Ec5Im8tMQm8f6uggcXuntJABBeZ6m4Qq2g74nR+hq0JmuLCrZERqFXu8R
- ZsphNh3WOIb16+K4ua8K1WLk545MF0BvBYMDJouXWiCkw1joTUnujdXTfyeN+8dBIyh+
- fbWQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; t=1696851566;
- s=strato-dkim-0002; d=strato.com;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=HQyFwgOTr1o2IXYZUbgbLomjWyVVxsjukipNJYZtjK4=;
- b=q6ZY0OStczTcJn/C1hTQ/CcOuDmAJWQNqrmOo+6ujBOkU2jnX0Hdt5OA1DhEhda6XM
- 1mknkEQF4euu+YxiYaE4nYGFRsNvEcc7iUNqix0apI6MKIXih5OZeHeJAm4qFn8Ihn0/
- yg3HXqzFJuskU2SzQWTKQAcmbsygYU5h79VH7qfYfuBPo+FZsLJpu/vYKhYDD8B01c9t
- OMYRgBzax7uaJjOT49qDPoyt+gHGAg3p3ZD4YT8nB+aoPqVxEZWovoM8Jo6KjHOh0yfN
- zWGAejDKKnfjvFB0k/tb9xR1tCO5RQKY+k/+jMdeAx5H5kZvolWomsMDkBYFLocaGLvJ
- sk7A==
-ARC-Authentication-Results: i=1; strato.com;
-    arc=none;
-    dkim=none
-X-RZG-CLASS-ID: mo00
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1696851566;
- s=strato-dkim-0002; d=ict42.de;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=HQyFwgOTr1o2IXYZUbgbLomjWyVVxsjukipNJYZtjK4=;
- b=kBKHrtAr7YqxrEzxiMa1SMUC2h0RELT5X1oacXqT7LD7AgfEqqx5TWtyAeuF+TQn25
- mQ/tzwSArvG+1FPxKxXKI3HPlvOfLDNx+DClV4hPePFaqhYOMVpdFZmCiZ9ar1Qj17YP
- aX31iIgrt0eoenMNOEQxpcKGLCIyHVPvWoO4JnGps05vhlz4259JNb0hdop+vm45ojxP
- ydN/iKfrfogGVkoU/HjXjD0SWA81GCHTIM8DeK9xnyAN5c9ZIatNqnNDNCqiYYqhJRGV
- 1OTxUCWofNJ1sHAjDXaC9VixVh0VQJ4fBRLkBNKB1tU3XhuMdMJVBskp2CqUi9iSaWgu
- 05kQ==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; t=1696851566;
- s=strato-dkim-0003; d=ict42.de;
- h=Message-Id:Date:Subject:Cc:To:From:Cc:Date:From:Subject:Sender;
- bh=HQyFwgOTr1o2IXYZUbgbLomjWyVVxsjukipNJYZtjK4=;
- b=gp30GJ1mXQFJ5ItIoKAdFWuZLOKrie5C0gHjLH87epfpgt/mFsxOj/HGDJa7rneeMT
- pxASod+9PSczoZOn+nCg==
-X-RZG-AUTH: ":IHkAYkmvNfSwjg/qSc4u8zZOVaURsoXe3UH2mQA0KglxDI1B7BeEcdPLARTmoNSwY8PK6ePqKQZ9qTSC"
-Received: from debian-test.local.in-circuit.de
- by smtp.strato.de (RZmta 49.8.2 DYNA|AUTH)
- with ESMTPSA id 20424fz99BdP1Fu
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256 bits))
- (Client did not present a certificate);
- Mon, 9 Oct 2023 13:39:25 +0200 (CEST)
-From: Ludwig Kormann <ludwig.kormann@ict42.de>
-To: hdegoede@redhat.com,
-	jagan@amarulasolutions.com,
-	andre.przywara@arm.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH RESEND v3 1/1] arm: dts: icnova-a20-adb4006: Add board support
-Date: Mon,  9 Oct 2023 13:39:16 +0200
-Message-Id: <20231009113916.2668425-1-ludwig.kormann@ict42.de>
-X-Mailer: git-send-email 2.30.2
+ spf=none smtp.mailfrom=alan@londelec.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-59f4f80d084so53212337b3.1
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 05:45:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=londelec-com.20230601.gappssmtp.com; s=20230601; t=1696855557; x=1697460357;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HIDIWImADYFPWv4z5lMZb1JLDIb1MwJ9Kt0/bcMsRQE=;
+ b=q+DxFXo24qV9SM5E26V8XWr2D17u0qN7B73buimG3Xw8bbLXoBQntQqD4MmdV4KJkj
+ f47CkBZ6a6NlwcU0IlyP8E9JX+0c582/AQW3oAVSd87GQTiTE802On+rjHbopnfw2czy
+ sUqygBdY+/1vRGrKlJMzr8sVrTNCLkObvgYZ9YFcovg5enpUs4XnVuLTk1DZio7Uhzu6
+ JbLJTIw0wegQq2c1bHuXpY15IVkS+PyG3ucbs+bj4dC2rqkUuvBgHNa+5xQAxHyF6/MO
+ gGQHnH/wCgapi7KMwCHlj/OvKbXp4G3cc7OoJzMRA6SyHWTFDf+QdiwJ+VDaGI82H9eN
+ jQQQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696855557; x=1697460357;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HIDIWImADYFPWv4z5lMZb1JLDIb1MwJ9Kt0/bcMsRQE=;
+ b=a0WHKZ1Jyjo8QaIpso29b8vGudnxkDxtmtRlGePuuz0SJBWIqt//wLGpvQ73bwxAB6
+ d5/jqCPwZ2nXAIGHxvBmISdiB+OMazYXNpPbS4yBryZ8cyvOx+iOaddCXhqVcd2Ea0X0
+ +SXVGFxtJb/Xq4pEQoQQzA7JUVf2fti8SGzDFX0ocPRzihBLm/2oDW6DF4ANOQeprxLl
+ VG+1oXn4S8L3dmO9cidJK0i4g5d4sFAlMoyJmjYbvqmnnr7d3wgvFHbki/QUy9fHnMh8
+ p0RiAS9HGEYkbWhXaXJknrdz8csmZfK02H5uvxEadLyK0UmtrofYu+m4DK5kN/BlIGvp
+ UgRw==
+X-Gm-Message-State: AOJu0YzodG9P/2ksnmaopNUboTOG+x4Is5vl1coOSnBZSCTLFyjAYAOi
+ SgUU1N1NL7ZLVJD8roZV77nawXYTsp42F07MtjJJLw==
+X-Google-Smtp-Source: AGHT+IE/rcxWs5eWRmsWgS5nUz7PyHg1UkM+OjDd5PxX5hkYb0Kgqf+hcxjlp6mJbQKlIykgcZEdwD2lXhC9QStUi3g=
+X-Received: by 2002:a25:8d85:0:b0:d0c:110b:2f17 with SMTP id
+ o5-20020a258d85000000b00d0c110b2f17mr12972027ybl.53.1696855556490; Mon, 09
+ Oct 2023 05:45:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20220830174932.96360-1-alan@londelec.com>
+ <CAOMZO5BJyoxUTBuygdL7tOyzJfRGJT1BQHJ_r0qAD8jYfC+CbQ@mail.gmail.com>
+ <20231009094924.56042353@wsk>
+In-Reply-To: <20231009094924.56042353@wsk>
+From: Alan Kay <alan@londelec.com>
+Date: Mon, 9 Oct 2023 13:45:45 +0100
+Message-ID: <CAFQdmxK-TdWajPzZnCGGNr_rWKbNL=6gYfmDOKBRxGd9nrHK1A@mail.gmail.com>
+Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
+ from DCDC_BATT without 5V
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>, cody@londelec.com,
+ Stefano Babic <sbabic@denx.de>, 
+ Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Mon, 09 Oct 2023 14:49:04 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,323 +94,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add board support for ICnova A20 SomPi compute module on
-ICnova ADB4006 development board.
+Hi Lukasz,
 
-Specification:
-SoM
-- Processor: Allwinner A20 Cortex-A7 Dual Core at 1GHz
-- 512MB DDR3 RAM
-- Fast Ethernet (Phy: Realtek RTL8201CP)
-ADB4006
-- I2C
-- 2x USB 2.0
-- 1x Fast Ethernet port
-- 1x SATA
-- 2x buttons (PWRON, Boot)
-- 2x LEDS
-- serial console
-- HDMI
-- µSD-Card slot
-- Audio Line-In / Line-Out
-- GPIO pinheaders
+On Mon, Oct 9, 2023 at 8:49=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wrot=
+e:
+>
+> Hi Fabio, Alan,
+>
+> > Hi Alan,
+> >
+> > [Adding Lukasz and Cody]
+> >
+> > On Tue, Aug 30, 2022 at 2:49=E2=80=AFPM Alan Kay <alan@londelec.com> wr=
+ote:
+> > >
+> > > mxs_power_enable_4p2() was added to mxs_batt_boot() in
+> > > 'commit a0f97610757d ("ARM: mxs: Enable DCDC converter for battery
+> > > boot")' to enable DCDC converter when board is powered from 5V and
+> > > has detected sufficient battery voltage.
+> > > This involves enabling 4P2 regulator and there is a code
+> > > in mxs_power_enable_4p2() that disables VDDIO, VDDA, VDDD outputs of
+> > > the DCDC converter and enables BO for each power rail e.g.
+> > >
+> > >         setbits_le32(&power_regs->hw_power_vddioctrl,
+> > >                 POWER_VDDIOCTRL_DISABLE_FET |
+> > > POWER_VDDIOCTRL_PWDN_BRNOUT);
+> > >
+> > > In case the mx28 is powered by the 5V source and linear regulators
+> > > are supplying power to the VDDIO, VDDA, VDDD rails there is no
+> > > issue.
+> > >
+> > > However if the mx28 is powered by the DCDC_BATT source only without
+> > > 5V, disabling the DCDC converter outputs causes brownout power down.
+> > >
+> > > The proposed solution is not to call mxs_power_enable_4p2() at all
+> > > if the mx28 is powered by the DCDC_BATT source only. There is no
+> > > reason to enable 4P2 regulator in this case and setup of all
+> > > registers is done in mxs_batt_boot().
+> > >
+> > > Also there is no need to enable 5V brownout in
+> > > mxs_power_init() in this case.
+> > >
+> > > Please consider if this is acceptable and I will submit a proper
+> > > patch.
+> > >
+> > > Signed-off-by: Alan Kay <alan@londelec.com>
+> >
+> > Cody also sent a fix for this issue:
+> >
+> > https://patchwork.ozlabs.org/project/uboot/patch/20230703163340.101490-=
+2-cody@londelec.com/
+>
+> Isn't this already addressed with:
+> https://source.denx.de/u-boot/u-boot/-/commit/79230640cb4fb780e2be9bb9a47=
+b31976b18cac4
+>
+> Please also look into the recent patches for imx287 (xea board for
+> reference):
+>
+> tig -- arch/arm/cpu/arm926ejs/mxs/spl_power_init.c
+>
+> At least SHA1: 65b9b3462bec2966911658836983819ab4e4823e
+>
+>
+> Best regards,
+>
+> Lukasz Majewski
+>
+> --
+>
+> DENX Software Engineering GmbH,      Managing Director: Erika Unter
+> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+> Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
 
-https://wiki.in-circuit.de/index.php5?title=ICnova_ADB4006
-https://wiki.in-circuit.de/index.php5?title=ICnova_A20_SODIMM
+The patch:
+https://source.denx.de/u-boot/u-boot/-/commit/79230640cb4fb780e2be9bb9a47b3=
+1976b18cac4
+does fix the issue, please feel free to discard my patch, thank you.
 
-devicetree upstreamed with linux 6.5
-
-Signed-off-by: Ludwig Kormann <ludwig.kormann@ict42.de>
----
-changes in v3:
-- rebase on v2023.10
-
-changes in v2:
-- rebase on v2023.07-rc2
-- remove pin defines from defconfig
-- get dts reviewed on the linux mailing list and
-  scheduled for kernel 6.5 [1]
-
-[1]
-https://git.kernel.org/pub/scm/linux/kernel/git/sunxi/linux.git
-commit de2bdfb7f79d5c655eb056d459e02be2c7f13c8b
-
----
- arch/arm/dts/Makefile                         |   1 +
- arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts | 137 ++++++++++++++++++
- arch/arm/dts/sun7i-a20-icnova-a20.dtsi        |  62 ++++++++
- board/sunxi/MAINTAINERS                       |   5 +
- configs/icnova-a20-adb4006_defconfig          |  20 +++
- 5 files changed, 225 insertions(+)
- create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
- create mode 100644 arch/arm/dts/sun7i-a20-icnova-a20.dtsi
- create mode 100644 configs/icnova-a20-adb4006_defconfig
-
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 85fd5b1157..16d5930b78 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -667,6 +667,7 @@ dtb-$(CONFIG_MACH_SUN7I) += \
- 	sun7i-a20-haoyu-marsboard.dtb \
- 	sun7i-a20-hummingbird.dtb \
- 	sun7i-a20-i12-tvbox.dtb \
-+	sun7i-a20-icnova-a20-adb4006.dtb \
- 	sun7i-a20-icnova-swac.dtb \
- 	sun7i-a20-itead-ibox.dtb \
- 	sun7i-a20-lamobo-r1.dtb \
-diff --git a/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
-new file mode 100644
-index 0000000000..577ead1d02
---- /dev/null
-+++ b/arch/arm/dts/sun7i-a20-icnova-a20-adb4006.dts
-@@ -0,0 +1,137 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+// Copyright (C) 2023 In-Circuit GmbH
-+
-+/dts-v1/;
-+
-+#include "sun7i-a20-icnova-a20.dtsi"
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+
-+/ {
-+	model = "In-Circuit ICnova A20 ADB4006";
-+	compatible = "incircuit,icnova-a20-adb4006", "incircuit,icnova-a20",
-+		     "allwinner,sun7i-a20";
-+
-+	aliases {
-+		serial0 = &uart0;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	hdmi-connector {
-+		compatible = "hdmi-connector";
-+		type = "a";
-+
-+		port {
-+			hdmi_con_in: endpoint {
-+				remote-endpoint = <&hdmi_out_con>;
-+			};
-+		};
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		led-0 {
-+			function = LED_FUNCTION_POWER;
-+			color = <LED_COLOR_ID_YELLOW>;
-+			gpios = <&pio 7 21 GPIO_ACTIVE_HIGH>; /* PH21 */
-+			default-state = "on";
-+		};
-+
-+		led-1 {
-+			function = LED_FUNCTION_HEARTBEAT;
-+			color = <LED_COLOR_ID_RED>;
-+			gpios = <&pio 7 20 GPIO_ACTIVE_HIGH>; /* PH20 */
-+			linux,default-trigger = "heartbeat";
-+		};
-+	};
-+};
-+
-+&ahci {
-+	target-supply = <&reg_ahci_5v>;
-+	status = "okay";
-+};
-+
-+&codec {
-+	status = "okay";
-+};
-+
-+&de {
-+	status = "okay";
-+};
-+
-+&ehci0 {
-+	status = "okay";
-+};
-+
-+&ehci1 {
-+	status = "okay";
-+};
-+
-+&hdmi {
-+	status = "okay";
-+};
-+
-+&hdmi_out {
-+	hdmi_out_con: endpoint {
-+		remote-endpoint = <&hdmi_con_in>;
-+	};
-+};
-+
-+&mmc0 {
-+	vmmc-supply = <&reg_vcc3v3>;
-+	bus-width = <4>;
-+	cd-gpios = <&pio 7 1 GPIO_ACTIVE_LOW>; /* PH1 */
-+	status = "okay";
-+};
-+
-+&ohci0 {
-+	status = "okay";
-+};
-+
-+&ohci1 {
-+	status = "okay";
-+};
-+
-+&otg_sram {
-+	status = "okay";
-+};
-+
-+&reg_ahci_5v {
-+	status = "okay";
-+};
-+
-+&ac_power_supply {
-+	status = "okay";
-+};
-+
-+&reg_usb1_vbus {
-+	status = "okay";
-+};
-+
-+&reg_usb2_vbus {
-+	status = "okay";
-+};
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0_pb_pins>;
-+	status = "okay";
-+};
-+
-+&usb_otg {
-+	dr_mode = "otg";
-+	status = "okay";
-+};
-+
-+&usbphy {
-+	usb0_id_det-gpios = <&pio 7 4 GPIO_ACTIVE_HIGH>; /* PH4 */
-+	usb0_vbus_det-gpios = <&pio 7 5 GPIO_ACTIVE_HIGH>; /* PH5 */
-+	usb1_vbus-supply = <&reg_usb1_vbus>;
-+	usb2_vbus-supply = <&reg_usb2_vbus>;
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/sun7i-a20-icnova-a20.dtsi b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
-new file mode 100644
-index 0000000000..46616c6bc8
---- /dev/null
-+++ b/arch/arm/dts/sun7i-a20-icnova-a20.dtsi
-@@ -0,0 +1,62 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+// Copyright (C) 2023 In-Circuit GmbH
-+
-+#include "sun7i-a20.dtsi"
-+#include "sunxi-common-regulators.dtsi"
-+
-+#include <dt-bindings/interrupt-controller/irq.h>
-+
-+&cpu0 {
-+	cpu-supply = <&reg_dcdc2>;
-+};
-+
-+&gmac {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&gmac_mii_pins>;
-+	phy-handle = <&phy1>;
-+	phy-mode = "mii";
-+	status = "okay";
-+};
-+
-+&i2c0 {
-+	status = "okay";
-+
-+	axp209: pmic@34 {
-+		reg = <0x34>;
-+		interrupt-parent = <&nmi_intc>;
-+		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
-+	};
-+};
-+
-+&gmac_mdio {
-+	phy1: ethernet-phy@1 {
-+		reg = <1>;
-+	};
-+};
-+
-+#include "axp209.dtsi"
-+
-+&reg_dcdc2 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <1000000>;
-+	regulator-max-microvolt = <1400000>;
-+	regulator-name = "vdd-cpu";
-+};
-+
-+&reg_dcdc3 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <1000000>;
-+	regulator-max-microvolt = <1400000>;
-+	regulator-name = "vdd-int-dll";
-+};
-+
-+&reg_ldo1 {
-+	regulator-name = "vdd-rtc";
-+};
-+
-+&reg_ldo2 {
-+	regulator-always-on;
-+	regulator-min-microvolt = <3000000>;
-+	regulator-max-microvolt = <3000000>;
-+	regulator-name = "avcc";
-+};
-diff --git a/board/sunxi/MAINTAINERS b/board/sunxi/MAINTAINERS
-index 98bbd2dd25..67cdd01371 100644
---- a/board/sunxi/MAINTAINERS
-+++ b/board/sunxi/MAINTAINERS
-@@ -236,6 +236,11 @@ M:	Stefan Roese <sr@denx.de>
- S:	Maintained
- F:	configs/icnova-a20-swac_defconfig
- 
-+ICnova-A20-ADB4006 BOARD
-+M:	Ludwig Kormann <ludwig.kormann@ict42.de>
-+S:	Maintained
-+F:	configs/icnova-a20-adb4006_defconfig
-+
- ITEAD IBOX BOARD
- M:	Marcus Cooper <codekipper@gmail.com>
- S:	Maintained
-diff --git a/configs/icnova-a20-adb4006_defconfig b/configs/icnova-a20-adb4006_defconfig
-new file mode 100644
-index 0000000000..f70ffe45ab
---- /dev/null
-+++ b/configs/icnova-a20-adb4006_defconfig
-@@ -0,0 +1,20 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_SUNXI=y
-+CONFIG_DEFAULT_DEVICE_TREE="sun7i-a20-icnova-a20-adb4006"
-+CONFIG_SPL=y
-+CONFIG_MACH_SUN7I=y
-+CONFIG_DRAM_CLK=384
-+CONFIG_AHCI=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_I2C=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_SYS_I2C_MVTWSI=y
-+CONFIG_SYS_I2C_SLAVE=0x7f
-+CONFIG_SYS_I2C_SPEED=400000
-+CONFIG_ETH_DESIGNWARE=y
-+CONFIG_MII=y
-+CONFIG_SUN7I_GMAC=y
-+CONFIG_AXP_ALDO4_VOLT=2800
-+CONFIG_SCSI=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_OHCI_HCD=y
--- 
-2.30.2
-
+Best regards,
+Alan Kay
