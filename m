@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAAB0E95A91
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 12:49:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22C7DE95A96
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 13:15:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5762863F8;
-	Mon,  9 Oct 2023 14:49:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=londelec.com
+	by phobos.denx.de (Postfix) with ESMTP id 2EF7F864D4;
+	Mon,  9 Oct 2023 15:15:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=londelec-com.20230601.gappssmtp.com header.i=@londelec-com.20230601.gappssmtp.com header.b="q+DxFXo2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vdrw0GLH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CF5D8692B; Mon,  9 Oct 2023 14:46:04 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id A602D864A7; Mon,  9 Oct 2023 15:15:49 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7308C863E3
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 14:45:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C9A1864A6
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 15:15:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=londelec.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=alan@londelec.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-59f4f80d084so53212337b3.1
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 05:45:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-690d935dbc2so888105b3a.1
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 06:15:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=londelec-com.20230601.gappssmtp.com; s=20230601; t=1696855557; x=1697460357;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HIDIWImADYFPWv4z5lMZb1JLDIb1MwJ9Kt0/bcMsRQE=;
- b=q+DxFXo24qV9SM5E26V8XWr2D17u0qN7B73buimG3Xw8bbLXoBQntQqD4MmdV4KJkj
- f47CkBZ6a6NlwcU0IlyP8E9JX+0c582/AQW3oAVSd87GQTiTE802On+rjHbopnfw2czy
- sUqygBdY+/1vRGrKlJMzr8sVrTNCLkObvgYZ9YFcovg5enpUs4XnVuLTk1DZio7Uhzu6
- JbLJTIw0wegQq2c1bHuXpY15IVkS+PyG3ucbs+bj4dC2rqkUuvBgHNa+5xQAxHyF6/MO
- gGQHnH/wCgapi7KMwCHlj/OvKbXp4G3cc7OoJzMRA6SyHWTFDf+QdiwJ+VDaGI82H9eN
- jQQQ==
+ d=gmail.com; s=20230601; t=1696857344; x=1697462144; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=jbtNkGW6W6rxKbzuaYUzragRS4T83AFRZg/3b47f4PY=;
+ b=Vdrw0GLHrQgEkV5rcs7cfpcJRnHfizTlYJXrMzsU90HiJcJ9yI3h5lbf4bDOTpYDSf
+ ijo6Tu/0p8hIgzD4SFZmqV90V/Ig3sxBZw8gFT3Ncf8qmtiy7nvm8XawlIJZ/f63KQp3
+ xjkT9wMgSoFlA3+I4hfJYUFJCqL0g+xk9Q342MD82mEgnqaf1pmMwXdvmM+8F9Ixkzat
+ hDp03XgsbAD9tDxuF8yTFZT/tUqIVJ1ZWMKmyjk0ETEUJqi28/EtYEw05RxlYzHHY9uz
+ ivGfR4sA3PpCdziwSLUVTESKFy45CDYN5qHWwhfxbPiWGImRYxEZ80Nkc+H/4hCuYf9e
+ +6Bw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696855557; x=1697460357;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=HIDIWImADYFPWv4z5lMZb1JLDIb1MwJ9Kt0/bcMsRQE=;
- b=a0WHKZ1Jyjo8QaIpso29b8vGudnxkDxtmtRlGePuuz0SJBWIqt//wLGpvQ73bwxAB6
- d5/jqCPwZ2nXAIGHxvBmISdiB+OMazYXNpPbS4yBryZ8cyvOx+iOaddCXhqVcd2Ea0X0
- +SXVGFxtJb/Xq4pEQoQQzA7JUVf2fti8SGzDFX0ocPRzihBLm/2oDW6DF4ANOQeprxLl
- VG+1oXn4S8L3dmO9cidJK0i4g5d4sFAlMoyJmjYbvqmnnr7d3wgvFHbki/QUy9fHnMh8
- p0RiAS9HGEYkbWhXaXJknrdz8csmZfK02H5uvxEadLyK0UmtrofYu+m4DK5kN/BlIGvp
- UgRw==
-X-Gm-Message-State: AOJu0YzodG9P/2ksnmaopNUboTOG+x4Is5vl1coOSnBZSCTLFyjAYAOi
- SgUU1N1NL7ZLVJD8roZV77nawXYTsp42F07MtjJJLw==
-X-Google-Smtp-Source: AGHT+IE/rcxWs5eWRmsWgS5nUz7PyHg1UkM+OjDd5PxX5hkYb0Kgqf+hcxjlp6mJbQKlIykgcZEdwD2lXhC9QStUi3g=
-X-Received: by 2002:a25:8d85:0:b0:d0c:110b:2f17 with SMTP id
- o5-20020a258d85000000b00d0c110b2f17mr12972027ybl.53.1696855556490; Mon, 09
- Oct 2023 05:45:56 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1696857344; x=1697462144;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jbtNkGW6W6rxKbzuaYUzragRS4T83AFRZg/3b47f4PY=;
+ b=qsQ7zl8cmBSw1njdC77xp0vUopQPvmp+RpHH25NREhDkmFTfar3wKr4xxVExecCsWt
+ tn4FsYCj31fTHhHwjqeO5mUnNCQRr4FdXQLnwcdfzWQDizAZs1mGGVsYJBEKcIEwrqK9
+ /EavgRbHeRwKht4TdZopEdqszt4jlsGGOOaOuQu9EFN+i4c1FpnLUNNz40jPSMx64U5x
+ MDNnYegC0A6e2YweDmmjVSVkLVhWNJihRQuunva4Mhz/CvpSI92/IVRNdQ6iqINe/fcs
+ 3zBsmBkNlCKwzlDAZv38Vm8jgK5W8QEPr5QPp7a9rNZz0Pzhg8fbnnvmTtHj4W/2zK7a
+ X8tg==
+X-Gm-Message-State: AOJu0YzJYSWUXlFhu8j4cEkme47doMqS1KllPUNbfC6JzkjnVw9d53VC
+ bpsTa/dPsmCgmoNVcXyo4nBDx5Dbeu4=
+X-Google-Smtp-Source: AGHT+IGyZLifpihXKFYiE81AfzGDE8GE3cJ7l0ummrGvAbKHTE3rJgX9TDPQoVCc3DKdSCLqUMgOZA==
+X-Received: by 2002:a17:902:e74b:b0:1c7:1eed:10f2 with SMTP id
+ p11-20020a170902e74b00b001c71eed10f2mr17632770plf.2.1696857344489; 
+ Mon, 09 Oct 2023 06:15:44 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:22d5:b586:66b8:6e03])
+ by smtp.gmail.com with ESMTPSA id
+ r10-20020a170902be0a00b001c8a0879805sm4743965pls.206.2023.10.09.06.15.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Oct 2023 06:15:43 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: marex@denx.de
+Cc: sbabic@denx.de,
+	u-boot@lists.denx.de,
+	Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v3 1/3] usb: ehci: mxs: Fix the USB node pointer retrieval
+Date: Mon,  9 Oct 2023 10:15:34 -0300
+Message-Id: <20231009131536.3475878-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20220830174932.96360-1-alan@londelec.com>
- <CAOMZO5BJyoxUTBuygdL7tOyzJfRGJT1BQHJ_r0qAD8jYfC+CbQ@mail.gmail.com>
- <20231009094924.56042353@wsk>
-In-Reply-To: <20231009094924.56042353@wsk>
-From: Alan Kay <alan@londelec.com>
-Date: Mon, 9 Oct 2023 13:45:45 +0100
-Message-ID: <CAFQdmxK-TdWajPzZnCGGNr_rWKbNL=6gYfmDOKBRxGd9nrHK1A@mail.gmail.com>
-Subject: Re: [RFC PATCH] mxs: Don't enable 4P2 reg if mx28 is powered only
- from DCDC_BATT without 5V
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Fabio Estevam <festevam@gmail.com>, cody@londelec.com,
- Stefano Babic <sbabic@denx.de>, 
- Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Mon, 09 Oct 2023 14:49:04 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,83 +90,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+From: Fabio Estevam <festevam@denx.de>
 
-On Mon, Oct 9, 2023 at 8:49=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wrot=
-e:
->
-> Hi Fabio, Alan,
->
-> > Hi Alan,
-> >
-> > [Adding Lukasz and Cody]
-> >
-> > On Tue, Aug 30, 2022 at 2:49=E2=80=AFPM Alan Kay <alan@londelec.com> wr=
-ote:
-> > >
-> > > mxs_power_enable_4p2() was added to mxs_batt_boot() in
-> > > 'commit a0f97610757d ("ARM: mxs: Enable DCDC converter for battery
-> > > boot")' to enable DCDC converter when board is powered from 5V and
-> > > has detected sufficient battery voltage.
-> > > This involves enabling 4P2 regulator and there is a code
-> > > in mxs_power_enable_4p2() that disables VDDIO, VDDA, VDDD outputs of
-> > > the DCDC converter and enables BO for each power rail e.g.
-> > >
-> > >         setbits_le32(&power_regs->hw_power_vddioctrl,
-> > >                 POWER_VDDIOCTRL_DISABLE_FET |
-> > > POWER_VDDIOCTRL_PWDN_BRNOUT);
-> > >
-> > > In case the mx28 is powered by the 5V source and linear regulators
-> > > are supplying power to the VDDIO, VDDA, VDDD rails there is no
-> > > issue.
-> > >
-> > > However if the mx28 is powered by the DCDC_BATT source only without
-> > > 5V, disabling the DCDC converter outputs causes brownout power down.
-> > >
-> > > The proposed solution is not to call mxs_power_enable_4p2() at all
-> > > if the mx28 is powered by the DCDC_BATT source only. There is no
-> > > reason to enable 4P2 regulator in this case and setup of all
-> > > registers is done in mxs_batt_boot().
-> > >
-> > > Also there is no need to enable 5V brownout in
-> > > mxs_power_init() in this case.
-> > >
-> > > Please consider if this is acceptable and I will submit a proper
-> > > patch.
-> > >
-> > > Signed-off-by: Alan Kay <alan@londelec.com>
-> >
-> > Cody also sent a fix for this issue:
-> >
-> > https://patchwork.ozlabs.org/project/uboot/patch/20230703163340.101490-=
-2-cody@londelec.com/
->
-> Isn't this already addressed with:
-> https://source.denx.de/u-boot/u-boot/-/commit/79230640cb4fb780e2be9bb9a47=
-b31976b18cac4
->
-> Please also look into the recent patches for imx287 (xea board for
-> reference):
->
-> tig -- arch/arm/cpu/arm926ejs/mxs/spl_power_init.c
->
-> At least SHA1: 65b9b3462bec2966911658836983819ab4e4823e
->
->
-> Best regards,
->
-> Lukasz Majewski
->
-> --
->
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
+Use dev_ofnode() to retrieve the USB node pointer from the udevice
+structure.
 
-The patch:
-https://source.denx.de/u-boot/u-boot/-/commit/79230640cb4fb780e2be9bb9a47b3=
-1976b18cac4
-does fix the issue, please feel free to discard my patch, thank you.
+This fixes the following build error:
 
-Best regards,
-Alan Kay
+drivers/usb/host/ehci-mxs.c:143:38: error: 'struct udevice' has no member named 'node_'
+
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+Reviewed-by: Marek Vasut <marex@denx.de>
+---
+Changes since v2:
+- None
+Changes since v1:
+- Only collected Marek's Reviewed-by tag.
+
+ drivers/usb/host/ehci-mxs.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/usb/host/ehci-mxs.c b/drivers/usb/host/ehci-mxs.c
+index 147b2fa145d6..092c79fd4bc5 100644
+--- a/drivers/usb/host/ehci-mxs.c
++++ b/drivers/usb/host/ehci-mxs.c
+@@ -136,11 +136,12 @@ static int ehci_usb_ofdata_to_platdata(struct udevice *dev)
+ 	struct usb_plat *plat = dev_get_plat(dev);
+ 	struct ehci_mxs_port *port = &priv->port;
+ 	u32 phandle, phy_reg, clk_reg, clk_id;
++	ofnode np = dev_ofnode(dev);
+ 	ofnode phy_node, clk_node;
+ 	const char *mode;
+ 	int ret;
+ 
+-	mode = ofnode_read_string(dev->node_, "dr_mode");
++	mode = ofnode_read_string(np, "dr_mode");
+ 	if (mode) {
+ 		if (strcmp(mode, "peripheral") == 0)
+ 			plat->init_type = USB_INIT_DEVICE;
+@@ -151,12 +152,12 @@ static int ehci_usb_ofdata_to_platdata(struct udevice *dev)
+ 	}
+ 
+ 	/* Read base address of the USB IP block */
+-	ret = ofnode_read_u32(dev->node_, "reg", &port->usb_regs);
++	ret = ofnode_read_u32(np, "reg", &port->usb_regs);
+ 	if (ret)
+ 		return ret;
+ 
+ 	/* Read base address of the USB PHY IP block */
+-	ret = ofnode_read_u32(dev->node_, "fsl,usbphy", &phandle);
++	ret = ofnode_read_u32(np, "fsl,usbphy", &phandle);
+ 	if (ret)
+ 		return ret;
+ 
+-- 
+2.34.1
+
