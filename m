@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6873CE95A9A
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 10:15:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCF32E95A8E
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 10:16:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D837986C27;
-	Mon,  9 Oct 2023 12:15:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6283186D29;
+	Mon,  9 Oct 2023 12:16:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="I6gsxjfD";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="e/ve3qmh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1CECB86C32; Mon,  9 Oct 2023 12:15:55 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2060f.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::60f])
+ id 891E08638B; Mon,  9 Oct 2023 12:16:31 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2060c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eaa::60c])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 047FB8638B
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 12:15:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 778668638B
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 12:16:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ETtSJX31RsI7RSVcxyrrECpdZhHdGr4borFcAvCina5/oCLsbgxBsnkNYsxresr2FMKiZXtACGxZ1BxxEEAOvzT810J4rngQe7H2hH7HDHs9goe/Xgxd+C0URCokINJujGabwJFsWdLfCa5hzqBF7vGrK+/sbxq+EtZZZGDutdvNfDiN23um5I7oO81sjp2fQLELm3ZpU8TnIfibCz0a2bDlnSolhUU4EAzUaHedcB9YokvZ5BJzBRWC7PYmCdCpJIbzZBa3JTPgrxsJOjHU/o9Z18Pt/FH6hqAd9o7BJIoy0d5xDU2+JvcNCBGTZc3KUmpB4kDPFo1vvUTQYSBjJA==
+ b=cn0ewRYflpP3plm5RZMnqOlMZSOvA7rLq/UxzuTcWvFGfA5cotTOXNIYyaRJNywi/NTyE52LQZFVWZIvEiMECwZjiK1dvO5ngaeCNfLgtUDCLcdsCWmjR1//D69DH0ncYfHL43WMMKELgJqHeIVcCIlNbZV6QTnK6PoS9Op1kQKzp8JpfG9Ryx5fFi1eKC7S5uT+NCOIAqg1w5HdbkUBoaEjRf8Ikyn9w0dvOZNBV7aUSu9U8skGpxesysjB+z5Xfv5pe6Ahtu60+cD87vyliiqWqfJcOVlrBeSpFmthMMNWk8eQp+hxU8pCx+WJUrpkeKzbG02YwdTwgLleN74rUw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2yGQ9hw12UuWicGh2oH21ez2gZkH0BeIG/qOp9z3Sew=;
- b=eXr6ZYrvqc7zMfhH+FXQIyG+XDWW1x8nR/Ee9/9ZjVmRvkm+td1jHtWrMMkBiNFMXEQueKb2B9Gv6dfWpif1Tvva3To6sQzd6klF8rNlc49f/jUDyGxZGfujX7tcq+46RjUDKfBOas+WYcxcizTmrxLWXGoMKmjGgDjgJZa5yRm6iLiLW1TqtgBeL7FMRiI1T7CthR4JlkvwDE8aQ3VPSsq/7NpJCkTa08yexuD1sAdl5pk6pj+KehnLNZdZ5ehhb03Osyli+jK5iXoMW7DU3Q7rcb9RywdLeSUatLx03e/Xk/P0pyXNTmnYjb8uGpx+0rDqKV9btR6XcKs16g804Q==
+ bh=OCF4n21HbIq/loRInevd7WtFlrojE179+v8dooQ2ygo=;
+ b=h2K/FnoJqGICUELCAWhvm6x3QRswFefTsyq7sVvZV8Y5QaTTQpSppPaazRRYLvmZfIXxQGG03PCyALNnLEWOlPsgzqbmHEvGf2W887zxwdC4zgFeXkCYC1OESdU3UplLHRnj/FIQI5BdVW5zd+Nt23gtZdbcfiyYjo27ilNoNogeO6M7tcaRebBWdoj0JxwYq8bwYwvOvbhB7SX/F3vloFCESGpDAWwvqslmCT8rhpVL+EBeIxODNN5ijG4N1/ofNdMnRLkr35ANwA5mKP+8cHqVdqENOvaKEHcB1FEd80hEi4nUwMfoxPhXr5/UzAy14t3nugJGFulqwP1FU8hpIg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2yGQ9hw12UuWicGh2oH21ez2gZkH0BeIG/qOp9z3Sew=;
- b=I6gsxjfDdTYiwK27xXFwqU5t/SQqDpUKN5LZuqGwjtr+YecGuO1ZiR+BWIRk7+qxwBJTbLJKLkTSkKQ1AB3JktBBBv2lALC3f89CYyVvVj27K08kQm/AyFO25U9NeX+C1LZSehtroA7bx9W1i8EF13J3TR8xHnZpmP0GbQzbOjA=
-Received: from MN2PR11CA0024.namprd11.prod.outlook.com (2603:10b6:208:23b::29)
- by MN2PR12MB4319.namprd12.prod.outlook.com (2603:10b6:208:1dc::10)
+ bh=OCF4n21HbIq/loRInevd7WtFlrojE179+v8dooQ2ygo=;
+ b=e/ve3qmh7msXI9//nBbWVeTssnacbDXQVOr2Q0oCiv7jr8jxCe9LHs8B2ILDOJ213fRavfKzuFqYMf9VwSRyJgp1PQQY4iq8Vkoo0P1i62RtxSQrgWnyz4qotNF1DJeC+obBS02/TLzYIPltp++QIgqIpd4TzOgzDy4sxoJBxE0=
+Received: from MN2PR11CA0023.namprd11.prod.outlook.com (2603:10b6:208:23b::28)
+ by BL1PR12MB5239.namprd12.prod.outlook.com (2603:10b6:208:315::24)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.36; Mon, 9 Oct
- 2023 10:15:49 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.38; Mon, 9 Oct
+ 2023 10:16:22 +0000
 Received: from MN1PEPF0000F0DE.namprd04.prod.outlook.com
- (2603:10b6:208:23b:cafe::34) by MN2PR11CA0024.outlook.office365.com
- (2603:10b6:208:23b::29) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:208:23b:cafe::93) by MN2PR11CA0023.outlook.office365.com
+ (2603:10b6:208:23b::28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.36 via Frontend
- Transport; Mon, 9 Oct 2023 10:15:48 +0000
+ Transport; Mon, 9 Oct 2023 10:16:22 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,20 +61,23 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  MN1PEPF0000F0DE.mail.protection.outlook.com (10.167.242.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.14 via Frontend Transport; Mon, 9 Oct 2023 10:15:48 +0000
+ 15.20.6838.14 via Frontend Transport; Mon, 9 Oct 2023 10:16:22 +0000
 Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 9 Oct
- 2023 05:14:50 -0500
-Message-ID: <85a8d7f7-0186-4f54-9d06-7eb2443a9d95@amd.com>
-Date: Mon, 9 Oct 2023 12:14:50 +0200
+ 2023 05:15:52 -0500
+Message-ID: <97d46d27-691d-4af6-8414-41012e32d3f8@amd.com>
+Date: Mon, 9 Oct 2023 12:15:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: xilinx: Do not use '_' in si5335 DT node names
+Subject: Re: [PATCH] net: phy: xilinx_phy: Get rid of using property
+ xlnx,phy-type
 Content-Language: en-US
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ <u-boot@lists.denx.de>
+CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <git@xilinx.com>
+References: <20231005030202.2764-1-venkatesh.abbarapu@amd.com>
 From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-References: <ac752b1e27f02efb32608188992bb7ae50e4b1b0.1695809130.git.michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -119,7 +122,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <ac752b1e27f02efb32608188992bb7ae50e4b1b0.1695809130.git.michal.simek@amd.com>
+In-Reply-To: <20231005030202.2764-1-venkatesh.abbarapu@amd.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.180.168.240]
@@ -127,26 +130,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DE:EE_|MN2PR12MB4319:EE_
-X-MS-Office365-Filtering-Correlation-Id: e97e44b2-8c5f-4e4c-1480-08dbc8b0b59b
+X-MS-TrafficTypeDiagnostic: MN1PEPF0000F0DE:EE_|BL1PR12MB5239:EE_
+X-MS-Office365-Filtering-Correlation-Id: f52a71f3-b4eb-475e-2049-08dbc8b0c9a1
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: F1/TE4RVEboVtNNUBkjupGTgVaPqNY9PwS4/roVmGFfgh5PP+IC6eZQiIpRQGq8ipDrtizGxb6ARCM93ENf+CvdizIVNM3B4y0FhEgLbk5YvCBVHCFLI57zv6GTj8EnkZ1SN/RJwRg9vJfwLYoZxrKNqK3GpdjsLjm7o759WTtnCzY/x4MQsFbmMFbq1RGhmhKnajltg/eFgJ5KOuxuF5dMg+NhN6WullKZCxxZZW4TQdd0caCFoiXm1QX610ccctpr7zkP3ZpgLjmfw34imMwwbXO3er+VUW6KX+LQIiIE3RPZ0XneBxVu3ZNsjn6AOeo0RdjIMzXNMmsuSzjdr9VAtRdWYZI3waElUaz7nnir0RU2BzWKB4GYMtDiJVSoHb4G/NDCc4RQNFOj2+4U9NraGT0wVHcCOG7+KlXoB1s8vsu1rONXRQKc78KMROo9TUTOzpn2bNiGq/yNHDO7zF/Bh34L4x2IB4l4YERrKIiH9jCcu2PSyAwiqOBI7i2p6PP3d5QPfaTFuUMi1j55NAti8aBXOaniuizyZJQRlufVwYDKNfIgy5JchKfkkJ0170q46tSiwB10eDNTPUCgebPhMSE+flpMFhK5BzECxwHAq/RLSs1BEjC63sGEoaiwZB4u8ToyZnwR5U2MbU5Hrm9ixtHn/JAlNPjemhdqcpmIsWrCKh3e5V+jsXZYXZUCiyByjGiTq6BsHZ/rwD6YBB+xQlgBxqYOohY/5aK7kHhZltfz904YwgXmhK+O4xsoA1WycM1f2xxjnt5PngU/L/CV+0k2vIYu7jkF5Nb64v6DV+XzNNCQoggpbrRVUFjrr
+X-Microsoft-Antispam-Message-Info: UWjmrK4XH593Ggll7d6nH4ARkxc/dhA/bI24UYMYtsIPioD4ncjyXsZ/j3Qsaoc24+EFk5ww0U3Yhd44l/KAk0Hkt+hb2dFwLEO+Jn8Pd0wBN91nl796Jw+Rja9NJn7MfKo/qyoZ+kYjaFXMRK9zdfEdgHOaw01ovTG1HDZwQ9JYt8gzhSpcVJNwm4pUBqriWlHQLqDC7xFYvCCjEQd6TvCFvfR7Hk5Anje7otIy/qdtxr35EcC4bkZPe1poCTF1lsnEW9gOPCzBwDI61iKWn74Xywrynzu1hr0LEZBDlutuLTFfhJiwgP18eXrI+IHNj3ma746oovKi1EwNRBe4erEtZtYUidjRUqbgxnh+O49hri6ctphgdvqSeHRREMIR7pdS/0DSm3J7SkfgLThZ2NuJLSfvMHPKF1t+X8aHdqoCFNIf/1FkuZ36rjasP3WVWOEez+HZK8sgtoFcIYlZ4VWBXpEjXA9NXP23e5Mbd6GT+egWzSDQY25SkCgS//jtV9OZ7UNiorNQbYUp/5gQmhQ8turoaDSe4Q5ux2P37R0DIznyOcRHYQvRWcFjpBUyV1ayWLgy99bj2TgHPTCmJIe1EN47Yh56foNdf3a0r2yHdS6Bj0aTBXITGznw3Kd/Lc6O4+vScP9TTn1asWxI6B53z2WvVuyB4mBdOi+pXHb0SmtKwULzrViMsbFfzyLBgtN8uv6rEv0KlPitALRglY6fJZxjS/WiVwZCTMrwVYk8m7G0qvOJEwrorC7GL+GXqKtRWigC1NaiPy2jFIyxJnXxKKSJB3R5C1k9px+HS8NTTlWId/DmsOO96IjNR1ds54As2KOJwoWiv29VJIPESQ==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(39860400002)(396003)(346002)(376002)(230922051799003)(82310400011)(1800799009)(451199024)(64100799003)(186009)(36840700001)(40470700004)(46966006)(81166007)(356005)(31696002)(86362001)(36756003)(31686004)(40460700003)(40480700001)(2906002)(478600001)(82740400003)(41300700001)(8936002)(5660300002)(8676002)(44832011)(53546011)(83380400001)(2616005)(426003)(336012)(36860700001)(16576012)(70586007)(70206006)(110136005)(316002)(26005)(16526019)(47076005)(36900700001)(43740500002);
+ SFS:(13230031)(4636009)(376002)(396003)(346002)(39860400002)(136003)(230922051799003)(186009)(1800799009)(82310400011)(64100799003)(451199024)(40470700004)(46966006)(36840700001)(40480700001)(40460700003)(83380400001)(107886003)(2616005)(336012)(426003)(26005)(16526019)(47076005)(36860700001)(70206006)(70586007)(110136005)(54906003)(316002)(16576012)(8936002)(8676002)(4326008)(5660300002)(41300700001)(44832011)(53546011)(2906002)(4744005)(82740400003)(478600001)(36756003)(356005)(81166007)(31696002)(86362001)(31686004)(26583001)(43740500002)(36900700001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 10:15:48.9227 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e97e44b2-8c5f-4e4c-1480-08dbc8b0b59b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2023 10:16:22.5167 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f52a71f3-b4eb-475e-2049-08dbc8b0c9a1
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000F0DE.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4319
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5239
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -165,52 +168,30 @@ X-Virus-Status: Clean
 
 
 
-On 9/27/23 12:05, Michal Simek wrote:
-> Character '_' not recommended in node name. Use '-' instead.
-> Pretty much run sed below for node names.
-> s/si5335_/si5335-/
+On 10/5/23 05:02, Venkatesh Yadav Abbarapu wrote:
+> As the xlnx,phy-type device tree property is deprecated and phy-mode
+> is being used, so removing the code references of xlnx,phy-type.
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 > ---
+>   drivers/net/phy/xilinx_phy.c | 4 ----
+>   1 file changed, 4 deletions(-)
 > 
-> Till now I didn't heard back that different style should be used that's why
-> also sending this patch and separately from other similar change recently
-> sent.
-> ---
->   arch/arm/dts/zynqmp-zcu100-revC.dts | 7 ++++---
->   1 file changed, 4 insertions(+), 3 deletions(-)
-> 
-> diff --git a/arch/arm/dts/zynqmp-zcu100-revC.dts b/arch/arm/dts/zynqmp-zcu100-revC.dts
-> index a84cd86694e2..44d1b24677d1 100644
-> --- a/arch/arm/dts/zynqmp-zcu100-revC.dts
-> +++ b/arch/arm/dts/zynqmp-zcu100-revC.dts
-> @@ -2,7 +2,8 @@
->   /*
->    * dts file for Xilinx ZynqMP ZCU100 revC
->    *
-> - * (C) Copyright 2016 - 2021, Xilinx, Inc.
-> + * (C) Copyright 2016 - 2022, Xilinx, Inc.
-> + * (C) Copyright 2022 - 2023, Advanced Micro Devices, Inc.
->    *
->    * Michal Simek <michal.simek@amd.com>
->    * Nathalie Chan King Choy
-> @@ -131,13 +132,13 @@
->   		io-channels = <&u35 0>, <&u35 1>, <&u35 2>, <&u35 3>;
->   	};
+> diff --git a/drivers/net/phy/xilinx_phy.c b/drivers/net/phy/xilinx_phy.c
+> index 1df639d6f4..50f1611ad5 100644
+> --- a/drivers/net/phy/xilinx_phy.c
+> +++ b/drivers/net/phy/xilinx_phy.c
+> @@ -107,10 +107,6 @@ static int xilinxphy_of_init(struct phy_device *phydev)
+>   	if (!ofnode_valid(node))
+>   		return -EINVAL;
 >   
-> -	si5335_0: si5335_0 { /* clk0_usb - u23 */
-> +	si5335_0: si5335-0 { /* clk0_usb - u23 */
->   		compatible = "fixed-clock";
->   		#clock-cells = <0>;
->   		clock-frequency = <26000000>;
->   	};
+> -	phytype = ofnode_read_u32_default(node, "xlnx,phy-type", -1);
+> -	if (phytype == XAE_PHY_TYPE_1000BASE_X)
+> -		phydev->flags |= XAE_PHY_TYPE_1000BASE_X;
+> -
+>   	return 0;
+>   }
 >   
-> -	si5335_1: si5335_1 { /* clk1_dp - u23 */
-> +	si5335_1: si5335-1 { /* clk1_dp - u23 */
->   		compatible = "fixed-clock";
->   		#clock-cells = <0>;
->   		clock-frequency = <27000000>;
-
 
 Applied.
 M
