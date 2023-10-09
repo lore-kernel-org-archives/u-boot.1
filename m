@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C967CCD6114
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 17:57:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CC78CD6114
+	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 17:58:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F15186DA8;
-	Mon,  9 Oct 2023 19:57:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3130386D7F;
+	Mon,  9 Oct 2023 19:57:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mmZZN2sk";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hPow5rhL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A35686DA2; Mon,  9 Oct 2023 19:57:35 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 7E09186504; Mon,  9 Oct 2023 19:57:45 +0200 (CEST)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8AFA586D56
- for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 19:57:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1244086C27
+ for <u-boot@lists.denx.de>; Mon,  9 Oct 2023 19:57:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5a24b03e22eso58987137b3.0
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 10:57:31 -0700 (PDT)
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-d852b28ec3bso5069422276.2
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 10:57:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696874250; x=1697479050; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696874261; x=1697479061; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HQodDi/KaijfzZnC2cxwby1HGey/QDTm7Ekr0eJ8Jwg=;
- b=mmZZN2skzIMKGfjYCbnFZ0/BytTKoGnsE70Pp1FjsRSjJbhypmrPxQRIcg42BVlHQ7
- aemAkXIu/D4TbSG5rbO+X6q2Wk9vb6NgvXbEr1nvml9mHTs7Di80ydkXl1BFm4yK99Bf
- JKTdnbfhUMBdCNbELaZUzKs8Yru+XvYJPK8j0=
+ bh=kOPShpI2J5dEgxYKiwSPzMRHIaGGW6qdmB2m9yC3ih8=;
+ b=hPow5rhLGmmDoC1Qu2F2wZrs+wsf0BZYQITx8CCCLXdbGHoz1K2WfmqXnw8hxAIO5t
+ wih4FoA+BPV5yMpFaZpZ2YBpEMEHhr6O1uLWGPPq3jIc8DILMVH0awDtXqAhU3qj/ej+
+ vJVDVzSsGMPjCMQUNsmaMmDv5zJPTikx5cLZc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696874250; x=1697479050;
+ d=1e100.net; s=20230601; t=1696874261; x=1697479061;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HQodDi/KaijfzZnC2cxwby1HGey/QDTm7Ekr0eJ8Jwg=;
- b=r4hJ2LPfvxOoB8trppmKNWyxp3TA4NN1tL9T+mqTIeWm6h6Tc8hLcSKeR0HY2ZL9j8
- pz3wC45pCSIgHjMnOLMUFoEmU+2nFL/EVgecuxeFYZ7Q+UwwYUOnXCVAjOfMgmL5VWwU
- FAIY+foZKAAQna4MNU6fqOBY2ew6Zv1IDKTzHXbZenEt3LJXvwTPHFqZpK+kBc40ce0w
- lZ7e7EcvdJIToEnyceszTWJa1KFrW1U1BGwhUvhOKUzDU13QwLDKYjgaKYqcqZBLQNN0
- F3QonZPf7QQvDr/2irhY5VaosoG2zo6Hnayr3BNwZDi62Kr9lOtxU4xDCshyhg8iPL7t
- Sz2Q==
-X-Gm-Message-State: AOJu0Yx1k2G91ijyvFBrjJPJL5Sof3xsAkBjjzrz/X+ZV6xozq62nwkZ
- XqVKtBGkHtsCT4k1dqlnleHATk7iIb2Vy2CERXpYrqhDpWt9fmbZA60=
-X-Google-Smtp-Source: AGHT+IE1sWG7xfBnuvQyNf2HfSY7G4GrYDh6qERJnw91dIJ6Qo4ojIY56Pz2RquI4F5CbrEvmXpoRqwAkBF1Iw6o6JE=
-X-Received: by 2002:a81:6c92:0:b0:5a7:b918:26be with SMTP id
- h140-20020a816c92000000b005a7b91826bemr498288ywc.15.1696874250029; Mon, 09
- Oct 2023 10:57:30 -0700 (PDT)
+ bh=kOPShpI2J5dEgxYKiwSPzMRHIaGGW6qdmB2m9yC3ih8=;
+ b=sNPr3mr+i4sTCwK1+df/HYAaUSiQyEjCigc1ZBLHpL5YZ6KOLv/Quaz2mEp/1r/kDi
+ E/35zP7kjDS53AXJ2eMoS1/WQNPg8/9kh1BRmVCKSOhgUmgXyJNgcBmpEXlHIATsipjW
+ 3UE+AH3eC1fFLTeS5oVl11Ls5tEVdbbisl1BDObZVnARqGZQPpi8Ef/IJJj0o02iEjrc
+ ruUqQep8olSENuBUkTIoVVfHiTNN9Un1d8QxpUvG4HD+TI2wOcgifdED3xI2vTrrz1Hd
+ EokqxIAWadcRnc/z3bzmDVr5DRb0bIVXDLhbmSyXilf1ooklVeFFA1mEjTpof1Of2gIu
+ Li1A==
+X-Gm-Message-State: AOJu0Yx6EoS1f+PVdUbDmUL+SJtlqcBKcG4N4ET6JU8R3DlP2ujcUO08
+ P1ylx9/63v+2F6SzBZz09FwbmXBVf8LP+4RydJrxNw==
+X-Google-Smtp-Source: AGHT+IFNpmSQAS3dy1CKZxqNzd6UTHHp40TrGZrg5DxEze/OTnWF4OKn2ikO/btqz0wqy2vekNQws8j5HWVMoyiwkTo=
+X-Received: by 2002:a25:6a85:0:b0:d99:d1b8:672f with SMTP id
+ f127-20020a256a85000000b00d99d1b8672fmr4718971ybc.33.1696874261308; Mon, 09
+ Oct 2023 10:57:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231009144151.773721-1-artur@conclusive.pl>
- <20231009144151.773721-2-artur@conclusive.pl>
-In-Reply-To: <20231009144151.773721-2-artur@conclusive.pl>
+References: <20231007155535.1699567-1-benwolsieffer@gmail.com>
+ <CAPnjgZ0qrDB_+HUNdGeCzS2FS4+fb1x9Cyr7xTjGccLCHpxwWg@mail.gmail.com>
+ <ZSMlNWJ9f7HkoaNg@Dell-Inspiron-15>
+In-Reply-To: <ZSMlNWJ9f7HkoaNg@Dell-Inspiron-15>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 9 Oct 2023 11:57:00 -0600
-Message-ID: <CAPnjgZ1q_TEUzLB3t6H0fw7APDJ5PcYzgnF4Q_3=-nrTVKrLDg@mail.gmail.com>
-Subject: Re: [PATCH v4 1/4] common: add prototype & rename
- populate_serial_number()
-To: Artur Rojek <artur@conclusive.pl>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>,
- Jakub Klama <jakub@conclusive.pl>, 
- Marcin Jabrzyk <marcin@conclusive.pl>, Wojciech Kloska <wojciech@conclusive.pl>,
- =?UTF-8?Q?Rados=C5=82aw_Adamczyk?= <radoslaw.adamczyk@conclusive.pl>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Mon, 9 Oct 2023 11:56:55 -0600
+Message-ID: <CAPnjgZ0EOZCdXJc4HRmHmKGmzDiAJQH7X=3sTP3dO5YFOeVMdg@mail.gmail.com>
+Subject: Re: [PATCH] arm: rpi: explicitly enumerate mmc boot targets
+To: Ben Wolsieffer <benwolsieffer@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -87,33 +85,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 9 Oct 2023 at 08:42, Artur Rojek <artur@conclusive.pl> wrote:
->
-> Rename populate_serial_number() to a more descriptive
-> serial_read_from_eeprom() and provide the missing function prototype.
->
-> This is useful for boards that wish to read their serial number from
-> EEPROM at init.
->
-> Signed-off-by: Artur Rojek <artur@conclusive.pl>
-> ---
->
-> v4: - revert to the approach found in v2
->     - keep the new serial_read_from_eeprom() name
->
-> v3: - restore original function name and make it static
->     - provide a generic function for reading EEPROM serial number and
->       wrap it around the existing tlv logic
->     - move the env var check out of populate_serial_number() and into
->       the new serial_read_from_eeprom() in order to stay consistent with
->       the documentation
->
-> v2: - rename the function
->     - move function documentation from .c file to the prototype location
->
->  cmd/tlv_eeprom.c | 14 +-------------
->  include/init.h   | 14 ++++++++++++++
->  2 files changed, 15 insertions(+), 13 deletions(-)
->
+Hi Ben,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Sun, 8 Oct 2023 at 15:55, Ben Wolsieffer <benwolsieffer@gmail.com> wrote:
+>
+> Hi Simon,
+>
+> On Sat, Oct 07, 2023 at 02:18:48PM -0600, Simon Glass wrote:
+> > Hi Ben,
+> >
+> > On Sat, 7 Oct 2023 at 09:55, Ben Wolsieffer <benwolsieffer@gmail.com>
+wrote:
+> > >
+> > > Using the unqualified "mmc" boot target causes the Raspberry Pi 4 to
+> > > fail to boot. c771e5b explains this approach as follows:
+> > >
+> > > > We don't need to specify the mmc devices individually, since they
+are
+> > > > used in order from 0 to 2, and standard boot uses that order anyway.
+> > >
+> > > In practice, U-Boot first attempts to boot from the unconnected mmc1
+> > > interface, and, when this fails, moves on to attempt the USB and
+network
+> > > boot targets rather than trying mmc0.
+> > >
+> > > This patch explicitly enumerates the mmc interfaces, causing each to
+be
+> > > attempted in turn. This matches what is done on other boards, and
+allows
+> > > the system to boot successfully.
+> > >
+> > > Fixes: c771e5b8c2 ("arm: rpi: Switch to standard boot")
+> > > Signed-off-by: Ben Wolsieffer <benwolsieffer@gmail.com>
+> > > ---
+> > >  board/raspberrypi/rpi/rpi.env | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> >
+> > Does this patch help? [1]. Alternatively, if you just remove that
+> > variable entirely, does it do the right thing?
+>
+> Yes, trying either of those suggestions makes it work correctly.
+
+Thank you for testing this
+
+In that case, I would rather that [1] since it should fix it for all
+boards. If you want to send a patch to drop boot_targets, please do and
+I'll leave that to Peter.
+
+>
+> >
+> > Regards,
+> > Simon
+> >
+> > [1]
+https://patchwork.ozlabs.org/project/uboot/patch/20230923205017.1754340-1-sjg@chromium.org/
+>
+>
+> Thanks, Ben
+
+Regards,
+Simon
