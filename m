@@ -4,83 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59C1CCD8CB6
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 20:17:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C14CCD98C5
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 21:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7731A863F9;
-	Tue, 10 Oct 2023 22:17:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BC804869CD;
+	Tue, 10 Oct 2023 23:17:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YLH7AoCF";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="eLtfc9mT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 323E5863F9; Tue, 10 Oct 2023 22:17:34 +0200 (CEST)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B775686B29; Tue, 10 Oct 2023 23:17:40 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C378E86B79
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 22:17:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE702864A0
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 23:17:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-5a7b92cd0ccso18668757b3.1
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 13:17:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696969049; x=1697573849; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gQYPXm13GNez0KWBvXwUI3Vsie7V/yKFPSgh5w5eQyE=;
- b=YLH7AoCF+psDf4scaRMNjGbACnuAYdDoV0Hs0iblUcs41ErblfWmYOZQ0X/N6GCxjp
- JCTyI9cl0XqlTUx+02ZUAt5Fxh2sEIFXW1UBdxm7yx/QgReKnu08ZhF2/bPwTHpNIEfO
- IzBizlWIv78+nZ9rU7XLZChJ/WuQJXw9PN58I=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696969049; x=1697573849;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gQYPXm13GNez0KWBvXwUI3Vsie7V/yKFPSgh5w5eQyE=;
- b=Lz1OmP7k08YfSZ3/8OG6tnJomaqcr25OjE5VmydgWGRSi6oK3HKv3JUBDQDtBJQbKN
- qNcUi3Lyt7H+DvYfFaq5XpCCV5/NaMYthCur1dxCu3R/oYtI1JAMm2BlLiBoY84qHNar
- pABfsx3QVlIJb8YRLdw1g0VuBZ+RlbLu8La9hk05ZgK2QwEIathZ03W9FRxuC3KK3x5h
- LcfJmsnODYbUJddkfl8Ss475jChVq9Bt8RqWDsRR7Nqktaw20mDMo5O4z+lT3cZ3uHJg
- 255PeAhwQ3AB2I49z/LoCA8LLw8WZ23lSF0HzPlNkKboMcy8qLABWPNYueyEXo6EV5HU
- ZLQQ==
-X-Gm-Message-State: AOJu0YwgElULG49xSLu0bpPNFSHszb+15AKX1Hxi6w8nTKWdsmId1e+j
- wbMtu6yWTOItgcPtrPGSjHapiA==
-X-Google-Smtp-Source: AGHT+IGCSfBXWbdZSRf1h1vXnh+Um/ntyAVro1UaXTqzz9GpjZga1/J8fV0GtNj0nmX78Sr0oCGejg==
-X-Received: by 2002:a25:ad18:0:b0:d9a:60f2:a734 with SMTP id
- y24-20020a25ad18000000b00d9a60f2a734mr2800394ybi.36.1696969048865; 
- Tue, 10 Oct 2023 13:17:28 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a369-3392-aca4-1f00.res6.spectrum.com.
- [2603:6081:7b00:6400:a369:3392:aca4:1f00])
- by smtp.gmail.com with ESMTPSA id
- z14-20020a5b0b0e000000b00d81425266c1sm3911030ybp.42.2023.10.10.13.17.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 13:17:27 -0700 (PDT)
-Date: Tue, 10 Oct 2023 16:17:25 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Bin Meng <bmeng@tinylab.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: Re: [PATCH 10/15] cmd: blk_common: Use macros for the return values
-Message-ID: <20231010201725.GB3119521@bill-the-cat>
-References: <20230926084346.2237483-1-bmeng@tinylab.org>
- <20230926084346.2237483-11-bmeng@tinylab.org>
- <CAPnjgZ082BzO4AGXvYqkaZPC_BkF1zc_AAW1zV9k31GnZhwpJQ@mail.gmail.com>
- <CAEUhbmX3hhOkUqj-2bj6BvrmE3zvsbeOtGUMK=mAs+Pg-Ay94A@mail.gmail.com>
- <CAPnjgZ1uaWkf+yWQ2_UiyYca3fNgLw0izRE0-zm0oeWybc4o9A@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="5sZBkGh2Xo6buYFI"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ1uaWkf+yWQ2_UiyYca3fNgLw0izRE0-zm0oeWybc4o9A@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 6d9a54fd-67b2-11ee-90ec-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 6d9a54fd-67b2-11ee-90ec-00505699b430;
+ Tue, 10 Oct 2023 23:17:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=2BolB8QAvvmI76+nAresX+6xPowj9H8eBXIbT1W06Js=;
+ b=eLtfc9mTWOqgRWUWNMBtOhF4gXDhIV+Wc1FT/7Ec3OT5kzbFopYAqpUPUuESwt2oI1cs60dBrGZPv
+ gJ1qJGPOxLGBCMxRD3JhmwlvubR3n1m1wP+ljj4c2f0iQoXv5zpqWwadt3gzmfY3aRjFcZCcPfH1VU
+ Uq5wPFeD3NRKzmp6EHPbz2UT3T5eJAluvR5KlzY2pQK4NcEte1tqp5syqVq9pcYY7rHHP1+osLhKK+
+ U7C4SrQt6mDenIvJk7g0sajpPuOaraf/Vx4wV2y1ymDdoV7KlGAnBWs5+GUBwqhMLME//hK+ZAvIAn
+ q5c++inp1vBkf1tQir3CqHQ+s3O6htw==
+X-KPN-MID: 33|EfNSqll7wrHsVrgy5BZDlIUurqzTTh3JndsAc4xQS+xkiY4BbTue4VqLTs0vjmJ
+ USxWtP9LLlyHy9akF8Lf4J2Th9EOlEyRbRmvspQzSbYs=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|JuhWdg9nDldNU0zS5nuMezvCVB9JKSzTUbtAjd7n/g5LFvycgPvvbVl0CCaBNVh
+ 1bNBp+P7meMqi3pEyxmwsUw==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 6f65a6c7-67b2-11ee-ac79-00505699b758;
+ Tue, 10 Oct 2023 23:17:37 +0200 (CEST)
+Date: Tue, 10 Oct 2023 23:17:36 +0200
+Message-Id: <87wmvufa8f.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Ivaylo Ivanov <ivo.ivanov@null.net>
+Cc: u-boot@lists.denx.de, kettenis@openbsd.org
+In-Reply-To: <0c9cea14-cb3f-d3bb-98f6-2d0907b7cb79@null.net> (message from
+ Ivaylo Ivanov on Tue, 29 Aug 2023 22:13:53 +0300)
+Subject: Re: [PATCH] arm: mach-apple: Move M1/M2 specifics into a separate
+ folder
+References: <20230829172519.72803-1-ivo.ivanov@null.net>
+ <878r9trbfn.fsf@bloch.sibelius.xs4all.nl>
+ <0c9cea14-cb3f-d3bb-98f6-2d0907b7cb79@null.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,158 +76,210 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> Date: Tue, 29 Aug 2023 22:13:53 +0300
+> From: Ivaylo Ivanov <ivo.ivanov@null.net>
+> 
+> I'm currently working on S5L8950X. I also have some T7000 and T8010
+> devices that I'll work on in the future.
+> 
+> There's a project called freemyipod that has a fork of U-Boot working on
+> iPod Nano's (specifically the S5L8730 in the iPod Nano 5). I've read
+> that they're planning on upstreaming it in the near future.
 
---5sZBkGh2Xo6buYFI
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+ok, well, most of the code you're moving isn't really M1/M2 specific.
+Apple uses RTKit all over the place.  And some of the SoCs you mention
+are really close to M1/M2.  And the older ones have a lot of Samsung
+heritage so I'm not sure they belong under mach-apple ...
 
-On Tue, Oct 10, 2023 at 08:58:04AM -0600, Simon Glass wrote:
-> Hi Bin,
->=20
-> On Tue, 10 Oct 2023 at 03:06, Bin Meng <bmeng.cn@gmail.com> wrote:
+Also, unless you actually have code to support other Apple SoCs, this
+just causes disruption for upstreaming more of the M1/M2 code.  So I
+think this is best left alone until you actually show your code and we
+can see how to integrate it.
+
+> 
+> On 8/29/23 20:43, Mark Kettenis wrote:
+> >> From: ivo.ivanov@null.net
+> >> Date: Tue, 29 Aug 2023 20:25:19 +0300
+> >>
+> >> From: Ivaylo Ivanov <ivo.ivanov@null.net>
+> >>
+> >> Currently, mach-apple assumes we're working with M1/M2. Make room for
+> >> adding support for other Apple SoCs by moving everything from the M1/M2
+> >> SoC family in "mach-apple/" into "mach-apple/m1/".
 > >
-> > Hi Simon,
+> > Which other Apple SoCs?
 > >
-> > On Mon, Oct 2, 2023 at 9:42=E2=80=AFAM Simon Glass <sjg@chromium.org> w=
-rote:
-> > >
-> > > Hi Bin,
-> > >
-> > > On Tue, 26 Sept 2023 at 02:54, Bin Meng <bmeng@tinylab.org> wrote:
-> > > >
-> > > > Avoid using magic number 0/1 for the command result.
-> > > >
-> > > > Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> > > > ---
-> > > >
-> > > >  cmd/blk_common.c | 14 +++++++-------
-> > > >  1 file changed, 7 insertions(+), 7 deletions(-)
-> > > >
-> > > > diff --git a/cmd/blk_common.c b/cmd/blk_common.c
-> > > > index 9f9d4327a9..ad9b16dc09 100644
-> > > > --- a/cmd/blk_common.c
-> > > > +++ b/cmd/blk_common.c
-> > > > @@ -25,18 +25,18 @@ int blk_common_cmd(int argc, char *const argv[],
-> enum uclass_id uclass_id,
-> > > >         case 2:
-> > > >                 if (strncmp(argv[1], "inf", 3) =3D=3D 0) {
-> > > >                         blk_list_devices(uclass_id);
-> > > > -                       return 0;
-> > > > +                       return CMD_RET_SUCCESS;
-> > >
-> > > I really don't like this...0 is success.
-> > >
-> > > >                 } else if (strncmp(argv[1], "dev", 3) =3D=3D 0) {
-> > > >                         if (blk_print_device_num(uclass_id,
-> *cur_devnump)) {
-> > > >                                 printf("\nno %s devices available\n=
-",
-> if_name);
-> > > >                                 return CMD_RET_FAILURE;
-> > > >                         }
-> > > > -                       return 0;
-> > > > +                       return CMD_RET_SUCCESS;
-> > > >                 } else if (strncmp(argv[1], "part", 4) =3D=3D 0) {
-> > > >                         if (blk_list_part(uclass_id))
-> > > >                                 printf("\nno %s partition table
-> available\n",
-> > > >                                        if_name);
-> > > > -                       return 0;
-> > > > +                       return CMD_RET_SUCCESS;
-> > > >                 }
-> > > >                 return CMD_RET_USAGE;
-> > > >         case 3:
-> > > > @@ -49,7 +49,7 @@ int blk_common_cmd(int argc, char *const argv[],
-> enum uclass_id uclass_id,
-> > > >                         } else {
-> > > >                                 return CMD_RET_FAILURE;
-> > > >                         }
-> > > > -                       return 0;
-> > > > +                       return CMD_RET_SUCCESS;
-> > > >                 } else if (strncmp(argv[1], "part", 4) =3D=3D 0) {
-> > > >                         int dev =3D (int)dectoul(argv[2], NULL);
-> > > >
-> > > > @@ -58,7 +58,7 @@ int blk_common_cmd(int argc, char *const argv[],
-> enum uclass_id uclass_id,
-> > > >                                        if_name, dev);
-> > > >                                 return CMD_RET_FAILURE;
-> > > >                         }
-> > > > -                       return 0;
-> > > > +                       return CMD_RET_SUCCESS;
-> > > >                 }
-> > > >                 return CMD_RET_USAGE;
-> > > >
-> > > > @@ -80,7 +80,7 @@ int blk_common_cmd(int argc, char *const argv[],
-> enum uclass_id uclass_id,
-> > > >
-> > > >                         printf("%ld blocks read: %s\n", n,
-> > > >                                n =3D=3D cnt ? "OK" : "ERROR");
-> > > > -                       return n =3D=3D cnt ? 0 : 1;
-> > > > +                       return n =3D=3D cnt ? CMD_RET_SUCCESS :
-> CMD_RET_FAILURE;
-> > >
-> > > CMD_RET_FAILURE is OK, but I would prefer not to use CMD_RET_SUCCESS.
-> > > It is 0 and always will be.
-> > >
-> > > It encourages people to do things like:
-> > >
-> > > if (ret =3D=3D CMD_RET_SUCCESS)
-> > >
-> > > instead of
-> > >
-> > > if (!ret)
-> >
-> > I see your concern. However we don't change the return value type to
-> > enum, so people can still use
-> >
-> >     if (!ret)
-> >
-> > I would still defend that we should use CMD_RET_SUCCESS.
-> >
-> > This is like EXIT_XXX defined in stdlib.h:
-> >
-> > #define   EXIT_FAILURE   1    /* Failing exit status.  */
-> > #define   EXIT_SUCCESS   0    /* Successful exit status.  */
-> >
-> > One should use predefined macros whenever possible.
->=20
-> I agree except for success, where I don't, sorry. It should always be 0 in
-> U-Boot.
->=20
-> People then have to look up the value and also we get things like
->=20
-> if (ret !=3D CMD_RET_SUCCESS)
->=20
-> It is a slippery and I would rather not start down it.
-
-To be clear, we have a large amount of code today that uses
-CMD_RET_SUCCESS in the way this patch converts to.  We do have a few
-cases even of the kind of code you worry about seeing, but I think in
-context clearer (it's in security or OTP fuse contexts) and the compiler
-will do the right thing regardless.
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---5sZBkGh2Xo6buYFI
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlsU8ACgkQFHw5/5Y0
-tyz5qAv/RWIvJ4agHoCCnToRsoTvNGQCzMMlrntSiQ+mDS2GFn3TJUfxRwyoHikc
-pp77tC1BdwWAyri1ar7fnHwP48/AOXrUVDZT2/6WVojk/7zjqPKGb4rqRdlu+DsC
-7cdXQx//R+QrmkCjgCXU7sb+McOusZxmCIh17Zi9rT+zUxDVlOXGM1mgJ4lRfUfz
-4yP623IyiTsyhn0vRjk//5M0LGEtSJk7oh55HF7Xie/YhCxgnov7yF1jxL4AVFBs
-wql4OnCwqYyVItmfYmE2wq1QnVDma02tXaPZ9iWsiTigD107af4DwtNQKKiyoZtE
-I3aRx5aQJudNDHInlKuOur7K+pfWMPHjL4OMGlmzK4KuT94Qdl0iCbk+TO978jRC
-WhXgTRhSlg9ZEcD58t+7fuyonPMLry2Tf0jW1n4pH0qU2TzeKB5YbgPyFBU+jysi
-+5SOTxbu6QlgU2yk0XwT1ffDc0MEHkmlb8CsrIvWktQv+R/fi0fE42bOrwgTzmFY
-z+1PnCvy
-=Tw55
------END PGP SIGNATURE-----
-
---5sZBkGh2Xo6buYFI--
+> >> Signed-off-by: Ivaylo Ivanov <ivo.ivanov@null.net>
+> >> ---
+> >>  arch/arm/Kconfig                             | 29 --------------
+> >>  arch/arm/mach-apple/Kconfig                  | 42 ++++++++++++++++++++
+> >>  arch/arm/mach-apple/Makefile                 |  5 +--
+> >>  arch/arm/mach-apple/m1/Makefile              |  6 +++
+> >>  arch/arm/mach-apple/{ => m1}/board.c         |  0
+> >>  arch/arm/mach-apple/{ => m1}/lowlevel_init.S |  0
+> >>  arch/arm/mach-apple/{ => m1}/rtkit.c         |  0
+> >>  arch/arm/mach-apple/{ => m1}/sart.c          |  0
+> >>  configs/apple_m1_defconfig                   |  1 +
+> >>  9 files changed, 50 insertions(+), 33 deletions(-)
+> >>  create mode 100644 arch/arm/mach-apple/m1/Makefile
+> >>  rename arch/arm/mach-apple/{ => m1}/board.c (100%)
+> >>  rename arch/arm/mach-apple/{ => m1}/lowlevel_init.S (100%)
+> >>  rename arch/arm/mach-apple/{ => m1}/rtkit.c (100%)
+> >>  rename arch/arm/mach-apple/{ => m1}/sart.c (100%)
+> >>
+> >> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> >> index 97c25b4f14..5339da370c 100644
+> >> --- a/arch/arm/Kconfig
+> >> +++ b/arch/arm/Kconfig
+> >> @@ -980,38 +980,9 @@ config ARCH_NPCM
+> >>
+> >>  config ARCH_APPLE
+> >>  	bool "Apple SoCs"
+> >> -	select ARM64
+> >> -	select CLK
+> >> -	select CMD_PCI
+> >> -	select CMD_USB
+> >>  	select DM
+> >> -	select DM_GPIO
+> >> -	select DM_KEYBOARD
+> >> -	select DM_MAILBOX
+> >>  	select DM_RESET
+> >>  	select DM_SERIAL
+> >> -	select DM_SPI
+> >> -	select DM_USB
+> >> -	select VIDEO
+> >> -	select IOMMU
+> >> -	select LINUX_KERNEL_IMAGE_HEADER
+> >> -	select OF_BOARD_SETUP
+> >> -	select OF_CONTROL
+> >> -	select PCI
+> >> -	select PINCTRL
+> >> -	select POSITION_INDEPENDENT
+> >> -	select POWER_DOMAIN
+> >> -	select REGMAP
+> >> -	select SPI
+> >> -	select SYSCON
+> >> -	select SYSRESET
+> >> -	select SYSRESET_WATCHDOG
+> >> -	select SYSRESET_WATCHDOG_AUTO
+> >> -	select USB
+> >> -	imply CMD_DM
+> >> -	imply CMD_GPT
+> >> -	imply DISTRO_DEFAULTS
+> >> -	imply OF_HAS_PRIOR_STAGE
+> >>
+> >>  config ARCH_OWL
+> >>  	bool "Actions Semi OWL SoCs"
+> >> diff --git a/arch/arm/mach-apple/Kconfig b/arch/arm/mach-apple/Kconfig
+> >> index 294690ec0e..a38779b387 100644
+> >> --- a/arch/arm/mach-apple/Kconfig
+> >> +++ b/arch/arm/mach-apple/Kconfig
+> >> @@ -3,6 +3,46 @@ if ARCH_APPLE
+> >>  config TEXT_BASE
+> >>  	default 0x00000000
+> >>
+> >> +choice
+> >> +	prompt "Apple Silicon architecture type select"
+> >> +	optional
+> >> +
+> >> +config ARCH_APPLE_M1
+> >> +	bool "Apple M1/M2 SoC family"
+> >> +	select ARM64
+> >> +	select CLK
+> >> +	select CMD_PCI
+> >> +	select CMD_USB
+> >> +	select DM_GPIO
+> >> +	select DM_KEYBOARD
+> >> +	select DM_MAILBOX
+> >> +	select DM_SPI
+> >> +	select DM_USB
+> >> +	select VIDEO
+> >> +	select IOMMU
+> >> +	select LINUX_KERNEL_IMAGE_HEADER
+> >> +	select OF_BOARD_SETUP
+> >> +	select OF_CONTROL
+> >> +	select PCI
+> >> +	select PINCTRL
+> >> +	select POSITION_INDEPENDENT
+> >> +	select POWER_DOMAIN
+> >> +	select REGMAP
+> >> +	select SPI
+> >> +	select SYSCON
+> >> +	select SYSRESET
+> >> +	select SYSRESET_WATCHDOG
+> >> +	select SYSRESET_WATCHDOG_AUTO
+> >> +	select USB
+> >> +	imply CMD_DM
+> >> +	imply CMD_GPT
+> >> +	imply DISTRO_DEFAULTS
+> >> +	imply OF_HAS_PRIOR_STAGE
+> >> +
+> >> +endchoice
+> >> +
+> >> +if ARCH_APPLE_M1
+> >> +
+> >>  config SYS_CONFIG_NAME
+> >>  	default "apple"
+> >>
+> >> @@ -19,3 +59,5 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+> >>  	default TEXT_BASE
+> >>
+> >>  endif
+> >> +
+> >> +endif
+> >> diff --git a/arch/arm/mach-apple/Makefile b/arch/arm/mach-apple/Makefile
+> >> index 50b465b947..d147ccdde2 100644
+> >> --- a/arch/arm/mach-apple/Makefile
+> >> +++ b/arch/arm/mach-apple/Makefile
+> >> @@ -1,6 +1,3 @@
+> >>  # SPDX-License-Identifier: GPL-2.0+
+> >>
+> >> -obj-y += board.o
+> >> -obj-y += lowlevel_init.o
+> >> -obj-y += rtkit.o
+> >> -obj-$(CONFIG_NVME_APPLE) += sart.o
+> >> +obj-$(CONFIG_ARCH_APPLE_M1) += m1/
+> >> diff --git a/arch/arm/mach-apple/m1/Makefile b/arch/arm/mach-apple/m1/Makefile
+> >> new file mode 100644
+> >> index 0000000000..50b465b947
+> >> --- /dev/null
+> >> +++ b/arch/arm/mach-apple/m1/Makefile
+> >> @@ -0,0 +1,6 @@
+> >> +# SPDX-License-Identifier: GPL-2.0+
+> >> +
+> >> +obj-y += board.o
+> >> +obj-y += lowlevel_init.o
+> >> +obj-y += rtkit.o
+> >> +obj-$(CONFIG_NVME_APPLE) += sart.o
+> >> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/m1/board.c
+> >> similarity index 100%
+> >> rename from arch/arm/mach-apple/board.c
+> >> rename to arch/arm/mach-apple/m1/board.c
+> >> diff --git a/arch/arm/mach-apple/lowlevel_init.S b/arch/arm/mach-apple/m1/lowlevel_init.S
+> >> similarity index 100%
+> >> rename from arch/arm/mach-apple/lowlevel_init.S
+> >> rename to arch/arm/mach-apple/m1/lowlevel_init.S
+> >> diff --git a/arch/arm/mach-apple/rtkit.c b/arch/arm/mach-apple/m1/rtkit.c
+> >> similarity index 100%
+> >> rename from arch/arm/mach-apple/rtkit.c
+> >> rename to arch/arm/mach-apple/m1/rtkit.c
+> >> diff --git a/arch/arm/mach-apple/sart.c b/arch/arm/mach-apple/m1/sart.c
+> >> similarity index 100%
+> >> rename from arch/arm/mach-apple/sart.c
+> >> rename to arch/arm/mach-apple/m1/sart.c
+> >> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
+> >> index 755560971e..bd723881da 100644
+> >> --- a/configs/apple_m1_defconfig
+> >> +++ b/configs/apple_m1_defconfig
+> >> @@ -1,5 +1,6 @@
+> >>  CONFIG_ARM=y
+> >>  CONFIG_ARCH_APPLE=y
+> >> +CONFIG_ARCH_APPLE_M1=y
+> >>  CONFIG_DEFAULT_DEVICE_TREE="t8103-j274"
+> >>  CONFIG_SYS_LOAD_ADDR=0x0
+> >>  CONFIG_USE_PREBOOT=y
+> >> --
+> >> 2.34.1
+> >>
+> >>
+> 
