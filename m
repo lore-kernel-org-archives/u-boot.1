@@ -4,92 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 899FCCD80B0
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 11:53:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01448CD80B7
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 11:54:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19C5C86DED;
-	Tue, 10 Oct 2023 13:53:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 95BC886B82;
+	Tue, 10 Oct 2023 13:53:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="jdONpSf7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eJB0CBPK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1227486AA6; Tue, 10 Oct 2023 13:14:01 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F0671864A7; Tue, 10 Oct 2023 04:18:25 +0200 (CEST)
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
+ [IPv6:2607:f8b0:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7648686A24
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 13:13:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id D456386489
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 04:18:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 45A3D100003;
- Tue, 10 Oct 2023 14:13:52 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 45A3D100003
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696936432;
- bh=e2OChmm/ieZLnaVCCxqOjoymXv3jta8FBPn/QwxH5TU=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=jdONpSf71zv4j6CzAcGeu2iv+Ht7pcGJxP05aWHoP7I4n4QgEYkojBvfgrkzr5U5T
- qoIdYAQVZHwcHAaYOb/Yz2SckEbcj5pu4h91IjYHRXq1i9CVhGCMHhXuh+D9fCeZTy
- lVV6cjpcIQ+FS2feOBl1nI16JeHUsjwj87zSq6g4tDX1G8Y/vkuhcrwGKdyTdj+1tg
- 9LY2GQgnneFoCYngE7+AY9fSpn1XgJ6Ia57hui9liB7dC0HjmuzgF9vMNTEfmNvx63
- NMQAAKbEg2GEiFipY+rLsacOEdt8RHUyokbqblMPCSA6CChCsgP8+gq8e8SQtaYKEz
- m1owwq6AIJqYQ==
-Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 10 Oct 2023 14:13:52 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Tue, 10 Oct 2023 14:13:51 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>,
- <sughosh.ganu@linaro.org>, <xypron.glpk@gmx.de>
-CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
- <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 1/1] drivers: rng: add support for Meson S4
-Date: Tue, 10 Oct 2023 14:13:38 +0300
-Message-ID: <20231010111344.77563-2-avromanov@salutedevices.com>
-X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231010111344.77563-1-avromanov@salutedevices.com>
-References: <20231010111344.77563-1-avromanov@salutedevices.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jpaulo.silvagoncalves@gmail.com
+Received: by mail-pg1-x536.google.com with SMTP id
+ 41be03b00d2f7-564b6276941so3788568a12.3
+ for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 19:18:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1696904300; x=1697509100; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K9folgvi1B7MAmwHvR7F3QZ+At8YZk3pMqD4wU3pLXE=;
+ b=eJB0CBPKH9+b5+wbEN/06VLQ85bx2+yeVLWWEd/OmgturLaysSVe+FjN4/Xgt4/PXA
+ mt4Idb+yHrRg4m8uMPjfC3sTl7OtymrTDKYk1rxNljRS3ns4uKXD/ALorqa9QCHsQy3y
+ aiXgrDtlOozpJCGc1JVw/3Xm6KN9G5zEqZBpU5TJyrAsIPK0aoWvmoHnxbKxWX1uuxF9
+ aYudRNPpsXNZJrXR1n5JMmu+DD0RO//Qo2hc689/7m4QLtCqpJ86OAesGsW+DywbxUNI
+ O3QgS0ZKIp3zuLmj60DV2SdWGGAFFtbRsGTagudbacgOSx9lhUWsy3haduQuaz9D3fvC
+ jN4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1696904300; x=1697509100;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=K9folgvi1B7MAmwHvR7F3QZ+At8YZk3pMqD4wU3pLXE=;
+ b=wGySdcc/otjsRbFCWAJfCXHdRU8sOxQQZoaUhTD8XGTAbSCjsIjYYeBK2i/4EXRIpE
+ 4ofcTVGxDKxULVOKl9CIpinYAt+lgwIvBVOf7qthDNzHyiSBzRyeB1cDu14+pUogc6IJ
+ LlT25u5NKx4yGMOzJxWwUCfzgriz9wRKc3QtrXKG/2iymuUSno8Tlg4e9n51xBgYVRr+
+ uM8LeRn20KYT3GKJIpRGUpoZQlYxiXyd/ftE8rV8MzHpHhPbqn/TGNKy7S3pMIX/xHKs
+ +sLyipE8UbR2YLV+O6kFFeIlR1K+eD+h4lnS5KPVApLix33PxCz4Z6goIFMWsRrXVjLu
+ ZZJw==
+X-Gm-Message-State: AOJu0YxzGb6DY3JoEQbB8XsPefeLbPsbs0MIyfSC/lHNumDj6jKon5GW
+ s90sD9gq5WGIBs70TejTMqs=
+X-Google-Smtp-Source: AGHT+IEgDPwe1al8nA+kcVnQ/xI6BsKnIahlLaMTVaUst8iHdxowLHUQAweux0mfFRLhJ+XfGgokBg==
+X-Received: by 2002:a05:6a20:7343:b0:14c:3218:c1bd with SMTP id
+ v3-20020a056a20734300b0014c3218c1bdmr19759907pzc.11.1696904299763; 
+ Mon, 09 Oct 2023 19:18:19 -0700 (PDT)
+Received: from joaog-nb.. ([152.249.60.243]) by smtp.gmail.com with ESMTPSA id
+ w18-20020a170902e89200b001b9c960ffeasm54340plg.47.2023.10.09.19.18.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Oct 2023 19:18:19 -0700 (PDT)
+From: Joao Paulo Goncalves <jpaulo.silvagoncalves@gmail.com>
+X-Google-Original-From: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+To: jmcosta944@gmail.com
+Cc: Y.Moog@phytec.de, sjg@chromium.org, trini@konsulko.com,
+ u-boot@lists.denx.de, xypron.glpk@gmx.de,
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>
+Subject: Re: Port gen_compile_commands.py from Linux to U-Boot
+Date: Mon,  9 Oct 2023 23:17:56 -0300
+Message-Id: <20231010021756.34200-1-joao.goncalves@toradex.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231001100036.34936-1-jmcosta944@gmail.com>
+References: <20231001100036.34936-1-jmcosta944@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 180498 [Oct 10 2023]
-X-KSMG-AntiSpam-Version: 6.0.0.2
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 536 536
- 1ae19c7800f69da91432b5e67ed4a00b9ade0d03,
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2; salutedevices.com:7.1.1;
- p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2023/10/10 10:20:00 #22141444
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Tue, 10 Oct 2023 13:53:11 +0200
+X-Mailman-Approved-At: Tue, 10 Oct 2023 13:53:33 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,135 +94,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For some Amlogic SOC's, mechanism to obtain random number
-has been changed. For example, S4 now uses status bit waiting algo.
+>Hello U-Boot community,
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
----
- drivers/rng/meson-rng.c | 72 ++++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 71 insertions(+), 1 deletion(-)
+>I'm submitting a patch series that ports the gen_compile_commands.py
+>script from the Linux kernel's sources to U-Boot. This script, originally
+>located in scripts/clang-tools/gen_compile_commands.py, enables the
+>generation of compile_commands.json file for improved code navigation
+>and analysis. The series consists of the initial script import, the
+>necessary modifications for U-Boot compatibility, and finally some
+>documentation.
 
-diff --git a/drivers/rng/meson-rng.c b/drivers/rng/meson-rng.c
-index e0a1e8c7e0..ba60325b94 100644
---- a/drivers/rng/meson-rng.c
-+++ b/drivers/rng/meson-rng.c
-@@ -10,10 +10,23 @@
- #include <dm.h>
- #include <rng.h>
- #include <asm/io.h>
-+#include <linux/iopoll.h>
-+
-+#define RNG_DATA	0x00
-+#define RNG_S4_DATA	0x08
-+#define RNG_S4_CFG	0x00
-+
-+#define RUN_BIT		BIT(0)
-+#define SEED_READY_STS_BIT	BIT(31)
-+
-+struct meson_rng_priv {
-+	u32 (*read)(fdt_addr_t base);
-+};
- 
- struct meson_rng_plat {
- 	fdt_addr_t base;
- 	struct clk clk;
-+	struct meson_rng_priv *priv;
- };
- 
- /**
-@@ -27,10 +40,11 @@ struct meson_rng_plat {
- static int meson_rng_read(struct udevice *dev, void *data, size_t len)
- {
- 	struct meson_rng_plat *pdata = dev_get_plat(dev);
-+	struct meson_rng_priv *priv = pdata->priv;
- 	char *buffer = (char *)data;
- 
- 	while (len) {
--		u32 rand = readl(pdata->base);
-+		u32 rand = priv->read(pdata->base);
- 		size_t step;
- 
- 		if (len >= 4)
-@@ -44,6 +58,47 @@ static int meson_rng_read(struct udevice *dev, void *data, size_t len)
- 	return 0;
- }
- 
-+static int meson_rng_wait_status(void __iomem *cfg_addr, int bit)
-+{
-+	u32 status = 0;
-+	int ret;
-+
-+	ret = readl_relaxed_poll_timeout(cfg_addr,
-+					 status, !(status & bit),
-+					 10000);
-+	if (ret)
-+		return -EBUSY;
-+
-+	return 0;
-+}
-+
-+static u32 meson_common_rng_read(fdt_addr_t base)
-+{
-+	return readl(base);
-+}
-+
-+static u32 meson_s4_rng_read(fdt_addr_t base)
-+{
-+	void __iomem *cfg_addr = (void *)base + RNG_S4_CFG;
-+	int err;
-+
-+	writel_relaxed(readl_relaxed(cfg_addr) | SEED_READY_STS_BIT, cfg_addr);
-+
-+	err = meson_rng_wait_status(cfg_addr, SEED_READY_STS_BIT);
-+	if (err) {
-+		pr_err("Seed isn't ready, try again\n");
-+		return err;
-+	}
-+
-+	err = meson_rng_wait_status(cfg_addr, RUN_BIT);
-+	if (err) {
-+		pr_err("Can't get random number, try again\n");
-+		return err;
-+	}
-+
-+	return readl_relaxed(base + RNG_S4_DATA);
-+}
-+
- /**
-  * meson_rng_probe() - probe rng device
-  *
-@@ -59,6 +114,8 @@ static int meson_rng_probe(struct udevice *dev)
- 	if (err)
- 		return err;
- 
-+	pdata->priv = dev_get_driver_data(dev);
-+
- 	return 0;
- }
- 
-@@ -102,9 +159,22 @@ static const struct dm_rng_ops meson_rng_ops = {
- 	.read = meson_rng_read,
- };
- 
-+static const struct meson_rng_priv meson_rng_priv = {
-+	.read = meson_common_rng_read,
-+};
-+
-+static const struct meson_rng_priv meson_rng_priv_s4 = {
-+	.read = meson_s4_rng_read,
-+};
-+
- static const struct udevice_id meson_rng_match[] = {
- 	{
- 		.compatible = "amlogic,meson-rng",
-+		.data = (ulong)&meson_rng_priv,
-+	},
-+	{
-+		.compatible = "amlogic,meson-s4-rng",
-+		.data = (ulong)&meson_rng_priv_s4,
- 	},
- 	{},
- };
--- 
-2.25.1
-
+Tested-by: Joao Paulo Goncalves <joao.goncalves@toradex.com>
