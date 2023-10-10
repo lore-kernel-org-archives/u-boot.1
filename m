@@ -4,62 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C14CCD98C5
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 21:17:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BEDDCD98CA
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 22:26:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC804869CD;
-	Tue, 10 Oct 2023 23:17:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id E086884B20;
+	Wed, 11 Oct 2023 00:25:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="eLtfc9mT";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="TXgVCU/r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B775686B29; Tue, 10 Oct 2023 23:17:40 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ id 3103E86B57; Wed, 11 Oct 2023 00:24:24 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE702864A0
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 23:17:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7746B86B6D
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 00:24:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 6d9a54fd-67b2-11ee-90ec-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 6d9a54fd-67b2-11ee-90ec-00505699b430;
- Tue, 10 Oct 2023 23:17:33 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=2BolB8QAvvmI76+nAresX+6xPowj9H8eBXIbT1W06Js=;
- b=eLtfc9mTWOqgRWUWNMBtOhF4gXDhIV+Wc1FT/7Ec3OT5kzbFopYAqpUPUuESwt2oI1cs60dBrGZPv
- gJ1qJGPOxLGBCMxRD3JhmwlvubR3n1m1wP+ljj4c2f0iQoXv5zpqWwadt3gzmfY3aRjFcZCcPfH1VU
- Uq5wPFeD3NRKzmp6EHPbz2UT3T5eJAluvR5KlzY2pQK4NcEte1tqp5syqVq9pcYY7rHHP1+osLhKK+
- U7C4SrQt6mDenIvJk7g0sajpPuOaraf/Vx4wV2y1ymDdoV7KlGAnBWs5+GUBwqhMLME//hK+ZAvIAn
- q5c++inp1vBkf1tQir3CqHQ+s3O6htw==
-X-KPN-MID: 33|EfNSqll7wrHsVrgy5BZDlIUurqzTTh3JndsAc4xQS+xkiY4BbTue4VqLTs0vjmJ
- USxWtP9LLlyHy9akF8Lf4J2Th9EOlEyRbRmvspQzSbYs=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|JuhWdg9nDldNU0zS5nuMezvCVB9JKSzTUbtAjd7n/g5LFvycgPvvbVl0CCaBNVh
- 1bNBp+P7meMqi3pEyxmwsUw==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 6f65a6c7-67b2-11ee-ac79-00505699b758;
- Tue, 10 Oct 2023 23:17:37 +0200 (CEST)
-Date: Tue, 10 Oct 2023 23:17:36 +0200
-Message-Id: <87wmvufa8f.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Ivaylo Ivanov <ivo.ivanov@null.net>
-Cc: u-boot@lists.denx.de, kettenis@openbsd.org
-In-Reply-To: <0c9cea14-cb3f-d3bb-98f6-2d0907b7cb79@null.net> (message from
- Ivaylo Ivanov on Tue, 29 Aug 2023 22:13:53 +0300)
-Subject: Re: [PATCH] arm: mach-apple: Move M1/M2 specifics into a separate
- folder
-References: <20230829172519.72803-1-ivo.ivanov@null.net>
- <878r9trbfn.fsf@bloch.sibelius.xs4all.nl>
- <0c9cea14-cb3f-d3bb-98f6-2d0907b7cb79@null.net>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=f707=FZ=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
+ Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
+ t=1696976635; bh=VOFpK3kLIijRtHAkn08fowo9SfKyTINnUF9j5+dRAbE=;
+ b=TXgVCU/ruPo19Ic75kzp3InoSRcdKW3MNDz4H3NeYsSXXc0VQ4zfcG1lVBvgfo608+9qZdoVk
+ cFny6G9NPFWaonvDCjm3L98v8GLSR9LDXxGkbEqyn/VZPfvR6MI5nHrCuyR8unbUPBbnh5oOmyj
+ GrIeFoI1YAY7WRyBbO2K0x+TFaZYRCRVIYlOYLX1NuFpgF8ADTFF1/Gv25z8f15oGAOZDISO2RG
+ uDYXqtqXeX7+Rk2Auz62t/BUrd4awQ2/pF7MgOn9XGJE1EPvJchI+XEdNgF0c4FRS3Gi8sexprJ
+ 2maw7IC9KEX7PRs9FFATumHtJyieRcTyZPv047BRVopA==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Marek Vasut <marex@denx.de>, Jonas Karlman
+ <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH 1/4] rockchip: rk3588: Sync device tree from linux maintainer
+ tree
+Date: Tue, 10 Oct 2023 22:23:35 +0000
+Message-ID: <20231010222344.3436526-2-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231010222344.3436526-1-jonas@kwiboo.se>
+References: <20231010222344.3436526-1-jonas@kwiboo.se>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6525cefadfb1822b4d6ef2f9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,210 +72,621 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Tue, 29 Aug 2023 22:13:53 +0300
-> From: Ivaylo Ivanov <ivo.ivanov@null.net>
-> 
-> I'm currently working on S5L8950X. I also have some T7000 and T8010
-> devices that I'll work on in the future.
-> 
-> There's a project called freemyipod that has a fork of U-Boot working on
-> iPod Nano's (specifically the S5L8730 in the iPod Nano 5). I've read
-> that they're planning on upstreaming it in the near future.
+Sync rk3588 device tree from linux maintainer tree (v6.7-armsoc/dts64).
+Adds PCIe nodes to rk3588-evb1-v10 and rk3588-rock-5b boards. Also
+remove includes from u-boot.dtsi-files that is no longer needed.
 
-ok, well, most of the code you're moving isn't really M1/M2 specific.
-Apple uses RTKit all over the place.  And some of the SoCs you mention
-are really close to M1/M2.  And the older ones have a lot of Samsung
-heritage so I'm not sure they belong under mach-apple ...
+Linux commits:
+42145b7a8235 ("arm64: dts: rockchip: add PCIe network controller to rock-5b")
+199cbd5f195a ("arm64: dts: rockchip: add PCIe for M.2 M-key to rock-5b")
+da447ec38780 ("arm64: dts: rockchip: add PCIe for M.2 E-Key to rock-5b")
+86a2024d95e2 ("arm64: dts: rockchip: add PCIe2 network controller to rk3588-evb1")
+46bb398ea1d8 ("arm64: dts: rockchip: add PCIe3 bus to rk3588-evb1")
+1c9a53ff7ece ("arm64: dts: rockchip: Add sdio node to rock-5b")
+3eaf2abd11aa ("arm64: dts: rockchip: Add sfc node to rk3588s")
+bf012368bb0a ("arm64: dts: rockchip: Add I2S2 M0 pin definitions to rk3588s")
+3d77a3e51b0f ("arm64: dts: rockchip: Add UART9 M0 pin definitions to rk3588s")
 
-Also, unless you actually have code to support other Apple SoCs, this
-just causes disruption for upstreaming more of the M1/M2 code.  So I
-think this is best left alone until you actually show your code and we
-can see how to integrate it.
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+---
+ arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi |  11 +-
+ arch/arm/dts/rk3588-evb1-v10.dts         |  98 ++++++++++++++++
+ arch/arm/dts/rk3588-rock-5b-u-boot.dtsi  |  60 ----------
+ arch/arm/dts/rk3588-rock-5b.dts          | 140 +++++++++++++++++++++++
+ arch/arm/dts/rk3588-u-boot.dtsi          |   1 -
+ arch/arm/dts/rk3588s-pinctrl.dtsi        |  44 +++++++
+ arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi |   4 -
+ arch/arm/dts/rk3588s-u-boot.dtsi         |  10 --
+ arch/arm/dts/rk3588s.dtsi                |  11 ++
+ 9 files changed, 294 insertions(+), 85 deletions(-)
 
-> 
-> On 8/29/23 20:43, Mark Kettenis wrote:
-> >> From: ivo.ivanov@null.net
-> >> Date: Tue, 29 Aug 2023 20:25:19 +0300
-> >>
-> >> From: Ivaylo Ivanov <ivo.ivanov@null.net>
-> >>
-> >> Currently, mach-apple assumes we're working with M1/M2. Make room for
-> >> adding support for other Apple SoCs by moving everything from the M1/M2
-> >> SoC family in "mach-apple/" into "mach-apple/m1/".
-> >
-> > Which other Apple SoCs?
-> >
-> >> Signed-off-by: Ivaylo Ivanov <ivo.ivanov@null.net>
-> >> ---
-> >>  arch/arm/Kconfig                             | 29 --------------
-> >>  arch/arm/mach-apple/Kconfig                  | 42 ++++++++++++++++++++
-> >>  arch/arm/mach-apple/Makefile                 |  5 +--
-> >>  arch/arm/mach-apple/m1/Makefile              |  6 +++
-> >>  arch/arm/mach-apple/{ => m1}/board.c         |  0
-> >>  arch/arm/mach-apple/{ => m1}/lowlevel_init.S |  0
-> >>  arch/arm/mach-apple/{ => m1}/rtkit.c         |  0
-> >>  arch/arm/mach-apple/{ => m1}/sart.c          |  0
-> >>  configs/apple_m1_defconfig                   |  1 +
-> >>  9 files changed, 50 insertions(+), 33 deletions(-)
-> >>  create mode 100644 arch/arm/mach-apple/m1/Makefile
-> >>  rename arch/arm/mach-apple/{ => m1}/board.c (100%)
-> >>  rename arch/arm/mach-apple/{ => m1}/lowlevel_init.S (100%)
-> >>  rename arch/arm/mach-apple/{ => m1}/rtkit.c (100%)
-> >>  rename arch/arm/mach-apple/{ => m1}/sart.c (100%)
-> >>
-> >> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> >> index 97c25b4f14..5339da370c 100644
-> >> --- a/arch/arm/Kconfig
-> >> +++ b/arch/arm/Kconfig
-> >> @@ -980,38 +980,9 @@ config ARCH_NPCM
-> >>
-> >>  config ARCH_APPLE
-> >>  	bool "Apple SoCs"
-> >> -	select ARM64
-> >> -	select CLK
-> >> -	select CMD_PCI
-> >> -	select CMD_USB
-> >>  	select DM
-> >> -	select DM_GPIO
-> >> -	select DM_KEYBOARD
-> >> -	select DM_MAILBOX
-> >>  	select DM_RESET
-> >>  	select DM_SERIAL
-> >> -	select DM_SPI
-> >> -	select DM_USB
-> >> -	select VIDEO
-> >> -	select IOMMU
-> >> -	select LINUX_KERNEL_IMAGE_HEADER
-> >> -	select OF_BOARD_SETUP
-> >> -	select OF_CONTROL
-> >> -	select PCI
-> >> -	select PINCTRL
-> >> -	select POSITION_INDEPENDENT
-> >> -	select POWER_DOMAIN
-> >> -	select REGMAP
-> >> -	select SPI
-> >> -	select SYSCON
-> >> -	select SYSRESET
-> >> -	select SYSRESET_WATCHDOG
-> >> -	select SYSRESET_WATCHDOG_AUTO
-> >> -	select USB
-> >> -	imply CMD_DM
-> >> -	imply CMD_GPT
-> >> -	imply DISTRO_DEFAULTS
-> >> -	imply OF_HAS_PRIOR_STAGE
-> >>
-> >>  config ARCH_OWL
-> >>  	bool "Actions Semi OWL SoCs"
-> >> diff --git a/arch/arm/mach-apple/Kconfig b/arch/arm/mach-apple/Kconfig
-> >> index 294690ec0e..a38779b387 100644
-> >> --- a/arch/arm/mach-apple/Kconfig
-> >> +++ b/arch/arm/mach-apple/Kconfig
-> >> @@ -3,6 +3,46 @@ if ARCH_APPLE
-> >>  config TEXT_BASE
-> >>  	default 0x00000000
-> >>
-> >> +choice
-> >> +	prompt "Apple Silicon architecture type select"
-> >> +	optional
-> >> +
-> >> +config ARCH_APPLE_M1
-> >> +	bool "Apple M1/M2 SoC family"
-> >> +	select ARM64
-> >> +	select CLK
-> >> +	select CMD_PCI
-> >> +	select CMD_USB
-> >> +	select DM_GPIO
-> >> +	select DM_KEYBOARD
-> >> +	select DM_MAILBOX
-> >> +	select DM_SPI
-> >> +	select DM_USB
-> >> +	select VIDEO
-> >> +	select IOMMU
-> >> +	select LINUX_KERNEL_IMAGE_HEADER
-> >> +	select OF_BOARD_SETUP
-> >> +	select OF_CONTROL
-> >> +	select PCI
-> >> +	select PINCTRL
-> >> +	select POSITION_INDEPENDENT
-> >> +	select POWER_DOMAIN
-> >> +	select REGMAP
-> >> +	select SPI
-> >> +	select SYSCON
-> >> +	select SYSRESET
-> >> +	select SYSRESET_WATCHDOG
-> >> +	select SYSRESET_WATCHDOG_AUTO
-> >> +	select USB
-> >> +	imply CMD_DM
-> >> +	imply CMD_GPT
-> >> +	imply DISTRO_DEFAULTS
-> >> +	imply OF_HAS_PRIOR_STAGE
-> >> +
-> >> +endchoice
-> >> +
-> >> +if ARCH_APPLE_M1
-> >> +
-> >>  config SYS_CONFIG_NAME
-> >>  	default "apple"
-> >>
-> >> @@ -19,3 +59,5 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
-> >>  	default TEXT_BASE
-> >>
-> >>  endif
-> >> +
-> >> +endif
-> >> diff --git a/arch/arm/mach-apple/Makefile b/arch/arm/mach-apple/Makefile
-> >> index 50b465b947..d147ccdde2 100644
-> >> --- a/arch/arm/mach-apple/Makefile
-> >> +++ b/arch/arm/mach-apple/Makefile
-> >> @@ -1,6 +1,3 @@
-> >>  # SPDX-License-Identifier: GPL-2.0+
-> >>
-> >> -obj-y += board.o
-> >> -obj-y += lowlevel_init.o
-> >> -obj-y += rtkit.o
-> >> -obj-$(CONFIG_NVME_APPLE) += sart.o
-> >> +obj-$(CONFIG_ARCH_APPLE_M1) += m1/
-> >> diff --git a/arch/arm/mach-apple/m1/Makefile b/arch/arm/mach-apple/m1/Makefile
-> >> new file mode 100644
-> >> index 0000000000..50b465b947
-> >> --- /dev/null
-> >> +++ b/arch/arm/mach-apple/m1/Makefile
-> >> @@ -0,0 +1,6 @@
-> >> +# SPDX-License-Identifier: GPL-2.0+
-> >> +
-> >> +obj-y += board.o
-> >> +obj-y += lowlevel_init.o
-> >> +obj-y += rtkit.o
-> >> +obj-$(CONFIG_NVME_APPLE) += sart.o
-> >> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/m1/board.c
-> >> similarity index 100%
-> >> rename from arch/arm/mach-apple/board.c
-> >> rename to arch/arm/mach-apple/m1/board.c
-> >> diff --git a/arch/arm/mach-apple/lowlevel_init.S b/arch/arm/mach-apple/m1/lowlevel_init.S
-> >> similarity index 100%
-> >> rename from arch/arm/mach-apple/lowlevel_init.S
-> >> rename to arch/arm/mach-apple/m1/lowlevel_init.S
-> >> diff --git a/arch/arm/mach-apple/rtkit.c b/arch/arm/mach-apple/m1/rtkit.c
-> >> similarity index 100%
-> >> rename from arch/arm/mach-apple/rtkit.c
-> >> rename to arch/arm/mach-apple/m1/rtkit.c
-> >> diff --git a/arch/arm/mach-apple/sart.c b/arch/arm/mach-apple/m1/sart.c
-> >> similarity index 100%
-> >> rename from arch/arm/mach-apple/sart.c
-> >> rename to arch/arm/mach-apple/m1/sart.c
-> >> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-> >> index 755560971e..bd723881da 100644
-> >> --- a/configs/apple_m1_defconfig
-> >> +++ b/configs/apple_m1_defconfig
-> >> @@ -1,5 +1,6 @@
-> >>  CONFIG_ARM=y
-> >>  CONFIG_ARCH_APPLE=y
-> >> +CONFIG_ARCH_APPLE_M1=y
-> >>  CONFIG_DEFAULT_DEVICE_TREE="t8103-j274"
-> >>  CONFIG_SYS_LOAD_ADDR=0x0
-> >>  CONFIG_USE_PREBOOT=y
-> >> --
-> >> 2.34.1
-> >>
-> >>
-> 
+diff --git a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
+index bd2e25948633..e8566785e965 100644
+--- a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
+@@ -6,16 +6,7 @@
+ #include "rk3588-u-boot.dtsi"
+ 
+ / {
+-	aliases {
+-		mmc0 = &sdmmc;
+-		mmc1 = &sdhci;
+-	};
+-
+ 	chosen {
+-		u-boot,spl-boot-order = &sdhci;
++		u-boot,spl-boot-order = "same-as-spl", &sdhci;
+ 	};
+ };
+-
+-&sdhci {
+-	bootph-all;
+-};
+diff --git a/arch/arm/dts/rk3588-evb1-v10.dts b/arch/arm/dts/rk3588-evb1-v10.dts
+index 229a9111f5eb..c3fe58e39e99 100644
+--- a/arch/arm/dts/rk3588-evb1-v10.dts
++++ b/arch/arm/dts/rk3588-evb1-v10.dts
+@@ -29,6 +29,46 @@
+ 		pwms = <&pwm2 0 25000 0>;
+ 	};
+ 
++	pcie20_avdd0v85: pcie20-avdd0v85-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie20_avdd0v85";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <850000>;
++		regulator-max-microvolt = <850000>;
++		vin-supply = <&avdd_0v85_s0>;
++	};
++
++	pcie20_avdd1v8: pcie20-avdd1v8-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie20_avdd1v8";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		vin-supply = <&avcc_1v8_s0>;
++	};
++
++	pcie30_avdd0v75: pcie30-avdd0v75-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie30_avdd0v75";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <750000>;
++		regulator-max-microvolt = <750000>;
++		vin-supply = <&avdd_0v75_s0>;
++	};
++
++	pcie30_avdd1v8: pcie30-avdd1v8-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "pcie30_avdd1v8";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <1800000>;
++		regulator-max-microvolt = <1800000>;
++		vin-supply = <&avcc_1v8_s0>;
++	};
++
+ 	vcc12v_dcin: vcc12v-dcin-regulator {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc12v_dcin";
+@@ -38,6 +78,19 @@
+ 		regulator-max-microvolt = <12000000>;
+ 	};
+ 
++	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_pcie30";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		enable-active-high;
++		gpios = <&gpio3 RK_PC3 GPIO_ACTIVE_HIGH>;
++		startup-delay-us = <5000>;
++		vin-supply = <&vcc12v_dcin>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&vcc3v3_pcie30_en>;
++	};
++
+ 	vcc5v0_host: vcc5v0-host-regulator {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc5v0_host";
+@@ -87,6 +140,10 @@
+ 	status = "okay";
+ };
+ 
++&combphy2_psu {
++	status = "okay";
++};
++
+ &cpu_b0 {
+ 	cpu-supply = <&vdd_cpu_big0_s0>;
+ };
+@@ -163,7 +220,32 @@
+ 	};
+ };
+ 
++&pcie2x1l1 {
++	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pcie2_1_rst>, <&rtl8111_isolate>;
++	status = "okay";
++};
++
++&pcie30phy {
++	status = "okay";
++};
++
++&pcie3x4 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pcie3_reset>;
++	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_pcie30>;
++	status = "okay";
++};
++
+ &pinctrl {
++	rtl8111 {
++		rtl8111_isolate: rtl8111-isolate {
++			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>;
++		};
++	};
++
+ 	rtl8211f {
+ 		rtl8211f_rst: rtl8211f-rst {
+ 			rockchip,pins = <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
+@@ -177,6 +259,22 @@
+ 		};
+ 	};
+ 
++	pcie2 {
++		pcie2_1_rst: pcie2-1-rst {
++			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	pcie3 {
++		pcie3_reset: pcie3-reset {
++			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		vcc3v3_pcie30_en: vcc3v3-pcie30-en {
++			rockchip,pins = <3 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
+ 	usb {
+ 		vcc5v0_host_en: vcc5v0-host-en {
+ 			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+index 96cc84e5aac9..3f390ef26a3f 100644
+--- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+@@ -4,9 +4,6 @@
+  */
+ 
+ #include "rk3588-u-boot.dtsi"
+-#include <dt-bindings/pinctrl/rockchip.h>
+-#include <dt-bindings/input/input.h>
+-#include <dt-bindings/gpio/gpio.h>
+ #include <dt-bindings/usb/pd.h>
+ 
+ / {
+@@ -23,19 +20,6 @@
+ 		regulator-max-microvolt = <12000000>;
+ 	};
+ 
+-	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc3v3_pcie30";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		enable-active-high;
+-		gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
+-		startup-delay-us = <5000>;
+-		vin-supply = <&vcc5v0_sys>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pcie3_vcc3v3_en>;
+-	};
+-
+ 	vcc5v0_usbdcin: vcc5v0-usbdcin {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc5v0_usbdcin";
+@@ -69,53 +53,11 @@
+ 	};
+ };
+ 
+-&combphy0_ps {
+-	status = "okay";
+-};
+-
+ &fspim2_pins {
+ 	bootph-all;
+ };
+ 
+-&pcie2x1l2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pcie2x1l2_pins &pcie_reset_h>;
+-	reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
+-	status = "okay";
+-};
+-
+-&pcie30phy {
+-	status = "okay";
+-};
+-
+-&pcie3x4 {
+-	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+-	vpcie3v3-supply = <&vcc3v3_pcie30>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pcie3_rst>;
+-	status = "okay";
+-};
+-
+ &pinctrl {
+-	pcie {
+-		pcie_reset_h: pcie-reset-h {
+-			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-
+-		pcie2x1l2_pins: pcie2x1l2-pins {
+-			rockchip,pins = <3 RK_PC7 4 &pcfg_pull_none>,
+-					<3 RK_PD0 4 &pcfg_pull_none>;
+-		};
+-
+-		pcie3_rst: pcie3-rst {
+-			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-
+-		pcie3_vcc3v3_en: pcie3-vcc3v3-en {
+-			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+-		};
+-	};
+-
+ 	usb-typec {
+ 		usbc0_int: usbc0-int {
+ 			rockchip,pins = <3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_up>;
+@@ -138,8 +80,6 @@
+ 	u-boot,spl-sfc-no-dma;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&fspim2_pins>;
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+ 	status = "okay";
+ 
+ 	flash@0 {
+diff --git a/arch/arm/dts/rk3588-rock-5b.dts b/arch/arm/dts/rk3588-rock-5b.dts
+index 8ab60968f275..8618887899d9 100644
+--- a/arch/arm/dts/rk3588-rock-5b.dts
++++ b/arch/arm/dts/rk3588-rock-5b.dts
+@@ -12,6 +12,7 @@
+ 	aliases {
+ 		mmc0 = &sdhci;
+ 		mmc1 = &sdmmc;
++		mmc2 = &sdio;
+ 		serial2 = &uart2;
+ 	};
+ 
+@@ -44,6 +45,43 @@
+ 		#cooling-cells = <2>;
+ 	};
+ 
++	vcc3v3_pcie2x1l0: vcc3v3-pcie2x1l0-regulator {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpios = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pcie2_0_vcc3v3_en>;
++		regulator-name = "vcc3v3_pcie2x1l0";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		startup-delay-us = <50000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
++	vcc3v3_pcie2x1l2: vcc3v3-pcie2x1l2-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_pcie2x1l2";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		startup-delay-us = <5000>;
++		vin-supply = <&vcc_3v3_s3>;
++	};
++
++	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
++		compatible = "regulator-fixed";
++		enable-active-high;
++		gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pcie3_vcc3v3_en>;
++		regulator-name = "vcc3v3_pcie30";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		startup-delay-us = <5000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++
+ 	vcc5v0_host: vcc5v0-host-regulator {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "vcc5v0_host";
+@@ -76,6 +114,29 @@
+ 		regulator-max-microvolt = <1100000>;
+ 		vin-supply = <&vcc5v0_sys>;
+ 	};
++
++	vcc3v3_wf: vcc3v3-wf-regulator {
++		compatible = "regulator-fixed";
++		regulator-name = "vcc3v3_wf";
++		regulator-always-on;
++		regulator-boot-on;
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		enable-active-high;
++		gpios = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&vcc3v3_wf_en>;
++		startup-delay-us = <50000>;
++		vin-supply = <&vcc5v0_sys>;
++	};
++};
++
++&combphy0_ps {
++	status = "okay";
++};
++
++&combphy1_ps {
++	status = "okay";
+ };
+ 
+ &cpu_b0 {
+@@ -204,6 +265,34 @@
+ 	};
+ };
+ 
++&pcie2x1l0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pcie2_0_rst>;
++	reset-gpios = <&gpio4 RK_PA5 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_pcie2x1l0>;
++	status = "okay";
++};
++
++&pcie2x1l2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pcie2_2_rst>;
++	reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_pcie2x1l2>;
++	status = "okay";
++};
++
++&pcie30phy {
++	status = "okay";
++};
++
++&pcie3x4 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pcie3_rst>;
++	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
++	vpcie3v3-supply = <&vcc3v3_pcie30>;
++	status = "okay";
++};
++
+ &pinctrl {
+ 	hym8563 {
+ 		hym8563_int: hym8563-int {
+@@ -217,11 +306,41 @@
+ 		};
+ 	};
+ 
++	pcie2 {
++		pcie2_0_rst: pcie2-0-rst {
++			rockchip,pins = <4 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		pcie2_0_vcc3v3_en: pcie2-0-vcc-en {
++			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		pcie2_2_rst: pcie2-2-rst {
++			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
++	pcie3 {
++		pcie3_rst: pcie3-rst {
++			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++
++		pcie3_vcc3v3_en: pcie3-vcc3v3-en {
++			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
++
+ 	usb {
+ 		vcc5v0_host_en: vcc5v0-host-en {
+ 			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+ 		};
+ 	};
++
++	m2e {
++		vcc3v3_wf_en: vcc3v3-wf-en {
++			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
++		};
++	};
+ };
+ 
+ &pwm1 {
+@@ -258,6 +377,27 @@
+ 	status = "okay";
+ };
+ 
++&sdio {
++	max-frequency = <200000000>;
++	no-sd;
++	no-mmc;
++	non-removable;
++	bus-width = <4>;
++	cap-sdio-irq;
++	disable-wp;
++	keep-power-in-suspend;
++	wakeup-source;
++	sd-uhs-sdr12;
++	sd-uhs-sdr25;
++	sd-uhs-sdr50;
++	sd-uhs-sdr104;
++	vmmc-supply = <&vcc3v3_wf>;
++	vqmmc-supply = <&vcc_1v8_s3>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&sdiom0_pins>;
++	status = "okay";
++};
++
+ &spi2 {
+ 	status = "okay";
+ 	assigned-clocks = <&cru CLK_SPI2>;
+diff --git a/arch/arm/dts/rk3588-u-boot.dtsi b/arch/arm/dts/rk3588-u-boot.dtsi
+index 68b419f3abd5..15de4706254e 100644
+--- a/arch/arm/dts/rk3588-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-u-boot.dtsi
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
+  */
+ 
+-#include "rockchip-u-boot.dtsi"
+ #include "rk3588s-u-boot.dtsi"
+ 
+ / {
+diff --git a/arch/arm/dts/rk3588s-pinctrl.dtsi b/arch/arm/dts/rk3588s-pinctrl.dtsi
+index 48181671eacb..63151d9d2377 100644
+--- a/arch/arm/dts/rk3588s-pinctrl.dtsi
++++ b/arch/arm/dts/rk3588s-pinctrl.dtsi
+@@ -1349,6 +1349,41 @@
+ 	};
+ 
+ 	i2s2 {
++		/omit-if-no-ref/
++		i2s2m0_lrck: i2s2m0-lrck {
++			rockchip,pins =
++				/* i2s2m0_lrck */
++				<2 RK_PC0 2 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		i2s2m0_mclk: i2s2m0-mclk {
++			rockchip,pins =
++				/* i2s2m0_mclk */
++				<2 RK_PB6 2 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		i2s2m0_sclk: i2s2m0-sclk {
++			rockchip,pins =
++				/* i2s2m0_sclk */
++				<2 RK_PB7 2 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		i2s2m0_sdi: i2s2m0-sdi {
++			rockchip,pins =
++				/* i2s2m0_sdi */
++				<2 RK_PC3 2 &pcfg_pull_none>;
++		};
++
++		/omit-if-no-ref/
++		i2s2m0_sdo: i2s2m0-sdo {
++			rockchip,pins =
++				/* i2s2m0_sdo */
++				<4 RK_PC3 2 &pcfg_pull_none>;
++		};
++
+ 		/omit-if-no-ref/
+ 		i2s2m1_lrck: i2s2m1-lrck {
+ 			rockchip,pins =
+@@ -3307,6 +3342,15 @@
+ 	};
+ 
+ 	uart9 {
++		/omit-if-no-ref/
++		uart9m0_xfer: uart9m0-xfer {
++			rockchip,pins =
++				/* uart9_rx_m0 */
++				<2 RK_PC4 10 &pcfg_pull_up>,
++				/* uart9_tx_m0 */
++				<2 RK_PC2 10 &pcfg_pull_up>;
++		};
++
+ 		/omit-if-no-ref/
+ 		uart9m1_xfer: uart9m1-xfer {
+ 			rockchip,pins =
+diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+index c47b0a7112c8..584476f77b13 100644
+--- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
++++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+@@ -4,10 +4,6 @@
+  */
+ 
+ #include "rk3588s-u-boot.dtsi"
+-#include <dt-bindings/pinctrl/rockchip.h>
+-#include <dt-bindings/input/input.h>
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/usb/pd.h>
+ 
+ / {
+ 	chosen {
+diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
+index 27b2d7eff87b..878936fa07d6 100644
+--- a/arch/arm/dts/rk3588s-u-boot.dtsi
++++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+@@ -4,7 +4,6 @@
+  */
+ 
+ #include "rockchip-u-boot.dtsi"
+-#include <dt-bindings/phy/phy.h>
+ 
+ / {
+ 	aliases {
+@@ -102,15 +101,6 @@
+ 		reg = <0x0 0xfd5c8000 0x0 0x4000>;
+ 	};
+ 
+-	sfc: spi@fe2b0000 {
+-		compatible = "rockchip,sfc";
+-		reg = <0x0 0xfe2b0000 0x0 0x4000>;
+-		interrupts = <GIC_SPI 206 IRQ_TYPE_LEVEL_HIGH 0>;
+-		clocks = <&cru SCLK_SFC>, <&cru HCLK_SFC>;
+-		clock-names = "clk_sfc", "hclk_sfc";
+-		status = "disabled";
+-	};
+-
+ 	rng: rng@fe378000 {
+ 		compatible = "rockchip,trngv1";
+ 		reg = <0x0 0xfe378000 0x0 0x200>;
+diff --git a/arch/arm/dts/rk3588s.dtsi b/arch/arm/dts/rk3588s.dtsi
+index 5544f66c6ff4..1a820a5a51eb 100644
+--- a/arch/arm/dts/rk3588s.dtsi
++++ b/arch/arm/dts/rk3588s.dtsi
+@@ -1424,6 +1424,17 @@
+ 		};
+ 	};
+ 
++	sfc: spi@fe2b0000 {
++		compatible = "rockchip,sfc";
++		reg = <0x0 0xfe2b0000 0x0 0x4000>;
++		interrupts = <GIC_SPI 206 IRQ_TYPE_LEVEL_HIGH 0>;
++		clocks = <&cru SCLK_SFC>, <&cru HCLK_SFC>;
++		clock-names = "clk_sfc", "hclk_sfc";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		status = "disabled";
++	};
++
+ 	sdmmc: mmc@fe2c0000 {
+ 		compatible = "rockchip,rk3588-dw-mshc", "rockchip,rk3288-dw-mshc";
+ 		reg = <0x0 0xfe2c0000 0x0 0x4000>;
+-- 
+2.42.0
+
