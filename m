@@ -4,18 +4,18 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF733CD68FE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 08:11:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F0BCD6901
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 08:14:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DE1386940;
-	Tue, 10 Oct 2023 10:11:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE4C786940;
+	Tue, 10 Oct 2023 10:14:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73E2986940; Tue, 10 Oct 2023 10:11:27 +0200 (CEST)
-Received: from ex01.ufhost.com (ex01.ufhost.com [61.152.239.75])
- by phobos.denx.de (Postfix) with ESMTP id 360CB86C3E
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 10:11:23 +0200 (CEST)
+ id 1EF13864A0; Tue, 10 Oct 2023 10:14:52 +0200 (CEST)
+Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com
+ [61.152.239.71]) by phobos.denx.de (Postfix) with ESMTP id 24F1686D59
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 10:14:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
@@ -23,30 +23,27 @@ Authentication-Results: phobos.denx.de;
 Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
  (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
  (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
- by ex01.ufhost.com (Postfix) with ESMTP id 27F9B24E2C7;
- Tue, 10 Oct 2023 16:11:20 +0800 (CST)
-Received: from EXMBX062.cuchost.com (172.16.6.62) by EXMBX166.cuchost.com
+ by fd01.gateway.ufhost.com (Postfix) with ESMTP id 131C383D4
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:14:43 +0800 (CST)
+Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX166.cuchost.com
  (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 10 Oct
- 2023 16:11:20 +0800
-Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX062.cuchost.com
- (172.16.6.62) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 10 Oct
- 2023 16:11:19 +0800
+ 2023 16:14:42 +0800
 Received: from EXMBX066.cuchost.com ([fe80::5947:9245:907e:339f]) by
  EXMBX066.cuchost.com ([fe80::5947:9245:907e:339f%17]) with mapi id
- 15.00.1497.044; Tue, 10 Oct 2023 16:11:19 +0800
+ 15.00.1497.044; Tue, 10 Oct 2023 16:14:42 +0800
 From: KuanLim.Lee <kuanlim.lee@starfivetech.com>
-To: Simon Glass <sjg@google.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, WeiLiang Lim
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Cheehong Ang <cheehong.ang@starfivetech.com>, WeiLiang Lim
  <weiliang.lim@starfivetech.com>
-Subject: RE: [PATCH] timer: starfive: Add Starfive timer support
-Thread-Topic: [PATCH] timer: starfive: Add Starfive timer support
-Thread-Index: AQHZ6stHTX8h/cMJ4kWKnVQw6HRiBbA4dEuAgADxmiCACWZ+sA==
-Date: Tue, 10 Oct 2023 08:11:19 +0000
-Message-ID: <c491121b685e4e1087b819b53b4213e5@EXMBX066.cuchost.com>
-References: <20230919073049.1418-1-kuanlim.lee@starfivetech.com>
- <CAPnjgZ0L++Mc+P3xOBetaiB_ziXVQ5JAnSHjKunYqODQRMrwSA@mail.gmail.com>
- <ee1bf93e2a0a40c9b46cce9f7672433a@EXMBX066.cuchost.com>
-In-Reply-To: <ee1bf93e2a0a40c9b46cce9f7672433a@EXMBX066.cuchost.com>
+Subject: RE: [PATCH] spl: mmc: Resolve emmc not load image after switched hw
+ partition
+Thread-Topic: [PATCH] spl: mmc: Resolve emmc not load image after switched hw
+ partition
+Thread-Index: AQHZ9bCNy1u6JRMnxUuVKA8o7Cp387BCt2Fw
+Date: Tue, 10 Oct 2023 08:14:42 +0000
+Message-ID: <4c05105b92894041bad3c706c2ed5c34@EXMBX066.cuchost.com>
+References: <20231003041720.893-1-kuanlim.lee@starfivetech.com>
+In-Reply-To: <20231003041720.893-1-kuanlim.lee@starfivetech.com>
 Accept-Language: en-US, zh-CN
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -54,8 +51,8 @@ X-MS-TNEF-Correlator:
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [202.188.176.82]
 x-yovoleruleagent: yovoleflag
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,136 +70,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgU2ltb24sDQoNCkRvIG15IHF1ZXN0aW9ucyBhbmQgcmVwbGllcyBhcmUgcHJvcGVyPyBTb3Jy
-eSBmb3IgdGhpcyB0aW1lIGlzIG15IGZpcnN0IHRpbWUgdXBzdHJlYW0uDQoNCj4gLS0tLS1Pcmln
-aW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS3VhbkxpbS5MZWUNCj4gU2VudDogV2VkbmVzZGF5
-LCBPY3RvYmVyIDQsIDIwMjMgNTo0OSBQTQ0KPiBUbzogJ1NpbW9uIEdsYXNzJyA8c2pnQGdvb2ds
-ZS5jb20+DQo+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgV2VpTGlhbmcgTGltIDx3ZWlsaWFu
-Zy5saW1Ac3RhcmZpdmV0ZWNoLmNvbT4NCj4gU3ViamVjdDogUkU6IFtQQVRDSF0gdGltZXI6IHN0
-YXJmaXZlOiBBZGQgU3RhcmZpdmUgdGltZXIgc3VwcG9ydA0KPiANCj4gSGkgU2ltb24sDQo+IA0K
-PiA+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQo+ID4gRnJvbTogU2ltb24gR2xhc3MgPHNq
-Z0Bnb29nbGUuY29tPg0KPiA+IFNlbnQ6IFdlZG5lc2RheSwgT2N0b2JlciA0LCAyMDIzIDEwOjEx
-IEFNDQo+ID4gVG86IEt1YW5MaW0uTGVlIDxrdWFubGltLmxlZUBzdGFyZml2ZXRlY2guY29tPg0K
-PiA+IENjOiB1LWJvb3RAbGlzdHMuZGVueC5kZTsgV2VpTGlhbmcgTGltIDx3ZWlsaWFuZy5saW1A
-c3RhcmZpdmV0ZWNoLmNvbT4NCj4gPiBTdWJqZWN0OiBSZTogW1BBVENIXSB0aW1lcjogc3RhcmZp
-dmU6IEFkZCBTdGFyZml2ZSB0aW1lciBzdXBwb3J0DQo+ID4NCj4gPiBPbiBUdWUsIDE5IFNlcHQg
-MjAyMyBhdCAwNjowOCwgS3VhbiBMaW0gTGVlDQo+ID4gPGt1YW5saW0ubGVlQHN0YXJmaXZldGVj
-aC5jb20+DQo+ID4gd3JvdGU6DQo+ID4gPg0KPiA+ID4gQWRkIHRpbWVyIGRyaXZlciBpbiBTdGFy
-Zml2ZSBTb0MuIEl0IGlzIGFuIHRpbWVyIHRoYXQgb3V0c2lkZSBvZiBDUFUNCj4gPiA+IGNvcmUg
-YW5kIGluc2lkZSBTdGFyZml2ZSBTb0MuDQo+ID4gPg0KPiA+ID4gU2lnbmVkLW9mZi1ieTogS3Vh
-biBMaW0gTGVlIDxrdWFubGltLmxlZUBzdGFyZml2ZXRlY2guY29tPg0KPiA+ID4gUmV2aWV3ZWQt
-Ynk6IFdlaSBMaWFuZyBMaW0gPHdlaWxpYW5nLmxpbUBzdGFyZml2ZXRlY2guY29tPg0KPiA+ID4g
-LS0tDQo+ID4gPiAgZHJpdmVycy90aW1lci9LY29uZmlnICAgICAgICAgIHwgIDcgKysrDQo+ID4g
-PiAgZHJpdmVycy90aW1lci9NYWtlZmlsZSAgICAgICAgIHwgIDEgKw0KPiA+ID4gIGRyaXZlcnMv
-dGltZXIvc3RhcmZpdmUtdGltZXIuYyB8IDk0DQo+ID4gPiArKysrKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrDQo+ID4gPiAgMyBmaWxlcyBjaGFuZ2VkLCAxMDIgaW5zZXJ0aW9ucygrKQ0K
-PiA+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBkcml2ZXJzL3RpbWVyL3N0YXJmaXZlLXRpbWVyLmMN
-Cj4gPg0KPiA+IFJldmlld2VkLWJ5OiBTaW1vbiBHbGFzcyA8c2pnQGNocm9taXVtLm9yZz4NCj4g
-Pg0KPiA+IG5pdHMgYmVsb3cNCj4gV2hhdCBhcmUgdGhlIG5pdHM/DQo+IEhvdyBkbyB0aGUgbml0
-cyB0byBiZSBzb2x2ZWQ/DQo+ID4NCj4gPiA+DQo+ID4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy90
-aW1lci9LY29uZmlnIGIvZHJpdmVycy90aW1lci9LY29uZmlnIGluZGV4DQo+ID4gPiA5MTViMmFm
-MTYwLi5hOThiZTlkZmFlIDEwMDY0NA0KPiA+ID4gLS0tIGEvZHJpdmVycy90aW1lci9LY29uZmln
-DQo+ID4gPiArKysgYi9kcml2ZXJzL3RpbWVyL0tjb25maWcNCj4gPiA+IEBAIC0zMjYsNCArMzI2
-LDExIEBAIGNvbmZpZyBYSUxJTlhfVElNRVINCj4gPiA+ICAgICAgICAgICBTZWxlY3QgdGhpcyB0
-byBlbmFibGUgc3VwcG9ydCBmb3IgdGhlIHRpbWVyIGZvdW5kIG9uDQo+ID4gPiAgICAgICAgICAg
-YW55IFhpbGlueCBib2FyZHMgKGF4aSB0aW1lcikuDQo+ID4gPg0KPiA+ID4gK2NvbmZpZyBTVEFS
-RklWRV9USU1FUg0KPiA+ID4gKyAgICAgICBib29sICJTdGFyZml2ZSB0aW1lciBzdXBwb3J0Ig0K
-PiA+ID4gKyAgICAgICBkZXBlbmRzIG9uIFRJTUVSDQo+ID4gPiArICAgICAgIGhlbHANCj4gPiA+
-ICsgICAgICAgICBTZWxlY3QgdGhpcyB0byBlbmFibGUgc3VwcG9ydCBmb3IgdGhlIHRpbWVyIGZv
-dW5kIG9uDQo+ID4gPiArICAgICAgICAgU3RhcmZpdmUgU29DLg0KPiA+DQo+ID4gV2hhdCByZXNv
-bHV0aW9uIGlzIHRoZSB0aW1lcj8gSG93IGlzIGl0IGNsb2NrZWQ/IElzIHRoZXJlIG9ubHkgb25l
-IGNoYW5uZWw/DQo+IFRpbWVyIHdpbGwgYmUgZHJpdmVuIGJ5IGNsb2NrIHB1bHNlcyBmcm9tIGNs
-b2Nrcy4gVGhlIGNsb2NrcyBhcmUgZGVmaW5lZCBpbg0KPiBkZXZpY2UgdHJlZS4NCj4gRm91ciBj
-aGFubmVscyB0aW1lciwgZWFjaCB0aW1lciBoYXMgb3duIGNsb2NrIHNvdXJjZS4NCj4gQ2xvY2sg
-c291cmNlIGZyZXF1ZW5jeSBpcyBnb3R0ZW4gYnkgY2xrX2dldF9ieV9pbmRleCAoKSBhbmQgY2xr
-X2dldF9yYXRlKCkuDQo+IFRoZSB0aW1lciBjb3VudGVyIHJlZ2lzdGVyIGlzIGEgMzJiaXRzIHNp
-emUgcmVnaXN0ZXIuDQo+ID4NCj4gPiA+ICsNCj4gPiA+ICBlbmRtZW51DQo+ID4gPiBkaWZmIC0t
-Z2l0IGEvZHJpdmVycy90aW1lci9NYWtlZmlsZSBiL2RyaXZlcnMvdGltZXIvTWFrZWZpbGUgaW5k
-ZXgNCj4gPiA+IDFjYTc0ODA1ZmQuLjFlZjgxNDk3MGIgMTAwNjQ0DQo+ID4gPiAtLS0gYS9kcml2
-ZXJzL3RpbWVyL01ha2VmaWxlDQo+ID4gPiArKysgYi9kcml2ZXJzL3RpbWVyL01ha2VmaWxlDQo+
-ID4gPiBAQCAtMzQsMyArMzQsNCBAQCBvYmotJChDT05GSUdfTVRLX1RJTUVSKSAgICAgICAgICAg
-ICAgICs9IG10a190aW1lci5vDQo+ID4gPiAgb2JqLSQoQ09ORklHX01DSFBfUElUNjRCX1RJTUVS
-KSAgICAgICAgKz0gbWNocC1waXQ2NGItdGltZXIubw0KPiA+ID4gIG9iai0kKENPTkZJR19JTVhf
-R1BUX1RJTUVSKSAgICArPSBpbXgtZ3B0LXRpbWVyLm8NCj4gPiA+ICBvYmotJChDT05GSUdfWElM
-SU5YX1RJTUVSKSAgICAgKz0geGlsaW54LXRpbWVyLm8NCj4gPiA+ICtvYmotJChDT05GSUdfU1RB
-UkZJVkVfVElNRVIpICAgKz0gc3RhcmZpdmUtdGltZXIubw0KPiA+ID4gZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvdGltZXIvc3RhcmZpdmUtdGltZXIuYw0KPiA+ID4gYi9kcml2ZXJzL3RpbWVyL3N0YXJm
-aXZlLXRpbWVyLmMgbmV3IGZpbGUgbW9kZSAxMDA2NDQgaW5kZXgNCj4gPiA+IDAwMDAwMDAwMDAu
-LjgxNjQwMmZkYmYNCj4gPiA+IC0tLSAvZGV2L251bGwNCj4gPiA+ICsrKyBiL2RyaXZlcnMvdGlt
-ZXIvc3RhcmZpdmUtdGltZXIuYw0KPiA+ID4gQEAgLTAsMCArMSw5NCBAQA0KPiA+ID4gKy8vIFNQ
-RFgtTGljZW5zZS1JZGVudGlmaWVyOiBHUEwtMi4wKw0KPiA+ID4gKy8qDQo+ID4gPiArICogQ29w
-eXJpZ2h0IDIwMjIgU3RhckZpdmUsIEluYy4gQWxsIHJpZ2h0cyByZXNlcnZlZC4NCj4gPiA+ICsg
-KiAgIEF1dGhvcjogTGVlIEt1YW4gTGltIDxrdWFubGltLmxlZUBzdGFyZml2ZXRlY2guY29tPg0K
-PiA+ID4gKyAqLw0KPiA+ID4gKw0KPiA+ID4gKyNpbmNsdWRlIDxjb21tb24uaD4NCj4gPiA+ICsj
-aW5jbHVkZSA8Y2xrLmg+DQo+ID4gPiArI2luY2x1ZGUgPGRtLmg+DQo+ID4gPiArI2luY2x1ZGUg
-PHRpbWUuaD4NCj4gPiA+ICsjaW5jbHVkZSA8dGltZXIuaD4NCj4gPiA+ICsjaW5jbHVkZSA8YXNt
-L2lvLmg+DQo+ID4gPiArI2luY2x1ZGUgPGRtL2RldmljZS1pbnRlcm5hbC5oPg0KPiA+ID4gKyNp
-bmNsdWRlIDxsaW51eC9lcnIuaD4NCj4gPiA+ICsNCj4gPiA+ICsjZGVmaW5lICAgICAgICBTVEZf
-VElNRVJfSU5UX1NUQVRVUyAgICAweDAwDQo+ID4gPiArI2RlZmluZSBTVEZfVElNRVJfQ1RMICAg
-ICAgICAgIDB4MDQNCj4gPiA+ICsjZGVmaW5lIFNURl9USU1FUl9MT0FEICAgICAgICAgMHgwOA0K
-PiA+ID4gKyNkZWZpbmUgU1RGX1RJTUVSX0VOQUJMRSAgICAgICAweDEwDQo+ID4gPiArI2RlZmlu
-ZSBTVEZfVElNRVJfUkVMT0FEICAgICAgIDB4MTQNCj4gPiA+ICsjZGVmaW5lIFNURl9USU1FUl9W
-QUxVRSAgICAgICAgICAgICAgICAweDE4DQo+ID4gPiArI2RlZmluZSBTVEZfVElNRVJfSU5UX0NM
-UiAgICAgIDB4MjANCj4gPiA+ICsjZGVmaW5lIFNURl9USU1FUl9JTlRfTUFTSyAgICAgMHgyNA0K
-PiA+ID4gKw0KPiA+ID4gK3N0cnVjdCBzdGFyZml2ZV90aW1lcl9wcml2IHsNCj4gPiA+ICsgICAg
-ICAgdm9pZCBfX2lvbWVtICpiYXNlOw0KPiA+ID4gKyAgICAgICB1MzIgdGltZXJfc2l6ZTsNCj4g
-PiA+ICt9Ow0KPiA+ID4gKw0KPiA+ID4gK3N0YXRpYyB1NjQgbm90cmFjZSBzdGFyZml2ZV9nZXRf
-Y291bnQoc3RydWN0IHVkZXZpY2UgKmRldikgew0KPiA+ID4gKyAgICAgICBzdHJ1Y3Qgc3RhcmZp
-dmVfdGltZXJfcHJpdiAqcHJpdiA9IGRldl9nZXRfcHJpdihkZXYpOw0KPiA+ID4gKw0KPiA+ID4g
-KyAgICAgICAvKiBSZWFkIGRlY3JlbWVudCB0aW1lciB2YWx1ZSBhbmQgY29udmVydCB0byBpbmNy
-ZW1lbnQgdmFsdWUgKi8NCj4gPiA+ICsgICAgICAgcmV0dXJuIHByaXYtPnRpbWVyX3NpemUgLSBy
-ZWFkbChwcml2LT5iYXNlICsNCj4gPiA+ICtTVEZfVElNRVJfVkFMVUUpOyB9DQo+ID4NCj4gPiBB
-cyBhbiBlbmhhbmNlbWVudCwgeW91IGNvdWxkIHByb3ZpZGUgYSB0aW1lcl9lYXJseV9nZXRfY291
-bnQoKQ0KPiA+IGZ1bmN0aW9uIGFuZCBhbiBlYXNseSBzZXR1cCwgc28geW91IGNhbiB1c2UgYm9v
-dHN0YWdlLg0KPiA+DQo+IElzIHRoaXMgYSBtdXN0PyBJZiBzbywgSSBtdXN0IGRlZmluZSBzb21l
-IGZpeGVkIGFkZHJlc3MgdG8gZ2V0IHRoZSB0aW1lciBjb3VudCwNCj4gZW5hYmxlIHRpbWVyLCBj
-bG9jayBzb3VyY2UgZnJlcXVlbmN5IGJlY2F1c2UgSSBjYW4ndCBnZXQgYmFzZSBhZGRyZXNzIGFu
-ZA0KPiBmcmVxdWVuY3kgZnJvbSB0aGUgZGV2aWNlIHRyZWUgaW4gZWFybHkgc3RhZ2UuDQo+ID4g
-PiArDQo+ID4gPiArc3RhdGljIGNvbnN0IHN0cnVjdCB0aW1lcl9vcHMgc3RhcmZpdmVfb3BzID0g
-ew0KPiA+ID4gKyAgICAgICAuZ2V0X2NvdW50ID0gc3RhcmZpdmVfZ2V0X2NvdW50LCB9Ow0KPiA+
-ID4gKw0KPiA+ID4gK3N0YXRpYyBpbnQgc3RhcmZpdmVfcHJvYmUoc3RydWN0IHVkZXZpY2UgKmRl
-dikgew0KPiA+ID4gKyAgICAgICBzdHJ1Y3QgdGltZXJfZGV2X3ByaXYgKnVjX3ByaXYgPSBkZXZf
-Z2V0X3VjbGFzc19wcml2KGRldik7DQo+ID4gPiArICAgICAgIHN0cnVjdCBzdGFyZml2ZV90aW1l
-cl9wcml2ICpwcml2ID0gZGV2X2dldF9wcml2KGRldik7DQo+ID4gPiArICAgICAgIGludCB0aW1l
-cl9jaGFubmVsOw0KPiA+ID4gKyAgICAgICBzdHJ1Y3QgY2xrIGNsazsNCj4gPiA+ICsgICAgICAg
-aW50IHJldDsNCj4gPiA+ICsNCj4gPiA+ICsgICAgICAgcHJpdi0+YmFzZSA9IGRldl9yZWFkX2Fk
-ZHJfcHRyKGRldik7DQo+ID4gPiArICAgICAgIGlmIChJU19FUlIocHJpdi0+YmFzZSkpDQo+ID4N
-Cj4gPiBpZiAoIXByaXYtPmJhc2UpDQo+ID4gICAgIHJldHVybiAtRUlOVkFMDQo+ID4NCj4gTm90
-ZWQuDQo+ID4gPiArICAgICAgICAgICAgICAgcmV0dXJuIFBUUl9FUlIocHJpdi0+YmFzZSk7DQo+
-ID4gPiArDQo+ID4gPiArICAgICAgIHRpbWVyX2NoYW5uZWwgPSBkZXZfcmVhZF91MzJfZGVmYXVs
-dChkZXYsICJjaGFubmVsIiwgMCk7DQo+ID4gPiArICAgICAgIHByaXYtPmJhc2UgPSBwcml2LT5i
-YXNlICsgKDB4NDAgKiB0aW1lcl9jaGFubmVsKTsNCj4gPiA+ICsNCj4gPiA+ICsgICAgICAgLyog
-R2V0IGNsb2NrIHJhdGUgZnJvbSBjaGFubmVsIHNlbGVjdGVjZCovDQo+ID4gPiArICAgICAgIHJl
-dCA9IGNsa19nZXRfYnlfaW5kZXgoZGV2LCB0aW1lcl9jaGFubmVsLCAmY2xrKTsNCj4gPiA+ICsg
-ICAgICAgaWYgKHJldCkNCj4gPiA+ICsgICAgICAgICAgICAgICByZXR1cm4gcmV0Ow0KPiA+ID4g
-Kw0KPiA+ID4gKyAgICAgICByZXQgPSBjbGtfZW5hYmxlKCZjbGspOw0KPiA+ID4gKyAgICAgICBp
-ZiAocmV0KQ0KPiA+ID4gKyAgICAgICAgICAgICAgIHJldHVybiByZXQ7DQo+ID4gPiArICAgICAg
-IHVjX3ByaXYtPmNsb2NrX3JhdGUgPSBjbGtfZ2V0X3JhdGUoJmNsayk7DQo+ID4gPiArDQo+ID4g
-PiArICAgICAgIC8qIEluaXRpYXRlIHRpbWVyLCBjaGFubmVsIDAgKi8NCj4gPiA+ICsgICAgICAg
-LyogVW5tYXNrIEludGVycnVwdCBNYXNrICovDQo+ID4NCj4gPiBtdWx0aS1saW5lIGNvbW1lbnQg
-c3R5bGUgaXM6DQo+ID4NCj4gPiAgLyoNCj4gPiAgICogbGluZSAxDQo+ID4gICAqIGxpbmUgMg0K
-PiA+ICAgKi8NCj4gPg0KPiBOb3RlZC4NCj4gPiA+ICsgICAgICAgd3JpdGVsKDAsIHByaXYtPmJh
-c2UgKyBTVEZfVElNRVJfSU5UX01BU0spOw0KPiA+ID4gKyAgICAgICAvKiBTaW5nbGUgcnVuIG1v
-ZGUgU2V0dGluZyAqLw0KPiA+ID4gKyAgICAgICBpZiAoZGV2X3JlYWRfYm9vbChkZXYsICJzaW5n
-bGUtcnVuIikpDQo+ID4gPiArICAgICAgICAgICAgICAgd3JpdGVsKDEsIHByaXYtPmJhc2UgKyBT
-VEZfVElNRVJfQ1RMKTsNCj4gPiA+ICsgICAgICAgLyogU2V0IFJlbG9hZCB2YWx1ZSAqLw0KPiA+
-ID4gKyAgICAgICBwcml2LT50aW1lcl9zaXplID0gZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2LCAi
-dGltZXItc2l6ZSIsDQo+ID4gPiArIDB4ZmZmZmZmZmYpOw0KPiA+DQo+ID4gLTFVICA/DQo+ID4N
-Cj4gV2lsbCByZXBsYWNlIDB4ZmZmZmZmZmYgdG8gLTFVDQo+ID4gPiArICAgICAgIHdyaXRlbChw
-cml2LT50aW1lcl9zaXplLCBwcml2LT5iYXNlICsgU1RGX1RJTUVSX0xPQUQpOw0KPiA+ID4gKyAg
-ICAgICAvKiBFbmFibGUgdG8gc3RhcnQgdGltZXIgKi8NCj4gPiA+ICsgICAgICAgd3JpdGVsKDEs
-IHByaXYtPmJhc2UgKyBTVEZfVElNRVJfRU5BQkxFKTsNCj4gPiA+ICsNCj4gPiA+ICsgICAgICAg
-cmV0dXJuIDA7DQo+ID4gPiArfQ0KPiA+ID4gKw0KPiA+ID4gK3N0YXRpYyBjb25zdCBzdHJ1Y3Qg
-dWRldmljZV9pZCBzdGFyZml2ZV9pZHNbXSA9IHsNCj4gPiA+ICsgICAgICAgeyAuY29tcGF0aWJs
-ZSA9ICJzdGFyZml2ZSxqaDgxMDAtdGltZXJzIiB9LA0KPiA+ID4gKyAgICAgICB7IH0NCj4gPiA+
-ICt9Ow0KPiA+ID4gKw0KPiA+ID4gK1VfQk9PVF9EUklWRVIoamg4MTAwX3N0YXJmaXZlX3RpbWVy
-KSA9IHsNCj4gPiA+ICsgICAgICAgLm5hbWUgICAgICAgICAgID0gImpoODEwMF9zdGFyZml2ZV90
-aW1lciIsDQo+ID4NCj4gV2lsbCB1c2UgbmFtZSAiIHN0YXJmaXZlX3RpbWVyIiBpbnN0ZWFkIG9m
-ICJqaDgxMDBfc3RhcmZpdmVfdGltZXIiDQo+ID4gV2hhdCBpcyBqaDgxMDAgPyBEbyB5b3UgbmVl
-ZCB0aGF0Pw0KPiA+DQo+ID4gPiArICAgICAgIC5pZCAgICAgICAgICAgICA9IFVDTEFTU19USU1F
-UiwNCj4gPiA+ICsgICAgICAgLm9mX21hdGNoICAgICAgID0gc3RhcmZpdmVfaWRzLA0KPiA+ID4g
-KyAgICAgICAucHJvYmUgICAgICAgICAgPSBzdGFyZml2ZV9wcm9iZSwNCj4gPiA+ICsgICAgICAg
-Lm9wcyAgICAgICAgICAgID0gJnN0YXJmaXZlX29wcywNCj4gPiA+ICsgICAgICAgLnByaXZfYXV0
-byAgICAgID0gc2l6ZW9mKHN0cnVjdCBzdGFyZml2ZV90aW1lcl9wcml2KSwNCj4gPiA+ICt9Ow0K
-PiA+ID4gLS0NCj4gPiA+IDIuMzQuMQ0KPiA+ID4NCj4gPg0KPiA+IFJlZ2FyZHMsDQo+ID4gU2lt
-b24NCg==
+Hi,
+
+Is this patch considered as accepted?
+
+> -----Original Message-----
+> From: KuanLim.Lee <kuanlim.lee@starfivetech.com>
+> Sent: Tuesday, October 3, 2023 12:17 PM
+> To: u-boot@lists.denx.de
+> Cc: Cheehong Ang <cheehong.ang@starfivetech.com>; WeiLiang Lim
+> <weiliang.lim@starfivetech.com>; KuanLim.Lee
+> <kuanlim.lee@starfivetech.com>
+> Subject: [PATCH] spl: mmc: Resolve emmc not load image after switched hw
+> partition
+>=20
+> When selecting MMCSD_MODE_EMMCBOOT as boot_mode, emmc do not
+> load U-boot proper image after switched hardware partition.
+>=20
+> Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+> Reviewed-by: Chee Hong Ang <cheehong.ang@starfivetech.com>
+> Reviewed-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
+> ---
+>  common/spl/spl_mmc.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>=20
+> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c index
+> 20f687e138..dc8a45222b 100644
+> --- a/common/spl/spl_mmc.c
+> +++ b/common/spl/spl_mmc.c
+> @@ -447,6 +447,9 @@ int spl_mmc_load(struct spl_image_info *spl_image,
+> #endif
+>  			return err;
+>  		}
+> +		err =3D mmc_load_image_raw_sector(spl_image, bootdev, mmc,
+> 0);
+> +		if (!err)
+> +			return err;
+>  		/* Fall through */
+>  	case MMCSD_MODE_RAW:
+>  		debug("spl: mmc boot mode: raw\n");
+> --
+> 2.34.1
+
