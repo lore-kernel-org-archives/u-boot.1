@@ -4,38 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 895A7CD690C
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 09:12:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D96BBCD68E5
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 09:12:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADACE86DEE;
-	Tue, 10 Oct 2023 11:12:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2748086E00;
+	Tue, 10 Oct 2023 11:12:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B100C86DC5; Tue, 10 Oct 2023 11:12:05 +0200 (CEST)
+ id 752AD86DF4; Tue, 10 Oct 2023 11:12:10 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 894C886D85
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 11:12:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id ABA0286DC3
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 11:12:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 188501FB;
- Tue, 10 Oct 2023 02:12:42 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C1A541FB;
+ Tue, 10 Oct 2023 02:12:44 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2A5DD3F762;
- Tue, 10 Oct 2023 02:11:58 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D6A453F762;
+ Tue, 10 Oct 2023 02:12:01 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 2/6] doc: capsule: Add documentation for the capsule dump
- feature
-Date: Tue, 10 Oct 2023 14:40:55 +0530
-Message-Id: <20231010091059.375036-3-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 3/6] binman: capsule: Remove superfluous [address,
+ size]-cells properties
+Date: Tue, 10 Oct 2023 14:40:56 +0530
+Message-Id: <20231010091059.375036-4-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231010091059.375036-1-sughosh.ganu@linaro.org>
 References: <20231010091059.375036-1-sughosh.ganu@linaro.org>
@@ -57,45 +57,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation to explain the printing of the capsule headers
-through the mkeficapsule tool.
+The #address-cells and #size-cells are not needed for running the
+capsule generation binman tests. Remove the superfluous properties.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-Changes since V1: None
+Changes since V1:
+* New patch based on review comment from Simon.
 
- doc/develop/uefi/uefi.rst | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
+ tools/binman/test/311_capsule.dts               | 3 ---
+ tools/binman/test/312_capsule_signed.dts        | 3 ---
+ tools/binman/test/313_capsule_version.dts       | 3 ---
+ tools/binman/test/314_capsule_signed_ver.dts    | 3 ---
+ tools/binman/test/315_capsule_oemflags.dts      | 3 ---
+ tools/binman/test/316_capsule_missing_key.dts   | 3 ---
+ tools/binman/test/317_capsule_missing_index.dts | 3 ---
+ tools/binman/test/318_capsule_missing_guid.dts  | 3 ---
+ 8 files changed, 24 deletions(-)
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 68f9b332d1..f16580e169 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -385,6 +385,23 @@ capsules. Refer :ref:`etype_efi_capsule` for documentation about the
- efi-capsule binman entry type, which describes all the properties that
- can be specified.
+diff --git a/tools/binman/test/311_capsule.dts b/tools/binman/test/311_capsule.dts
+index 8eb4250b14..0a62ef81dd 100644
+--- a/tools/binman/test/311_capsule.dts
++++ b/tools/binman/test/311_capsule.dts
+@@ -3,9 +3,6 @@
+ /dts-v1/;
  
-+Dumping capsule headers
-+***********************
-+
-+The mkeficapsule tool also provides a command-line option to dump the
-+contents of the capsule header. This is a useful functionality when
-+trying to understand the structure of a capsule and is also used in
-+capsule verification. This feature is used in testing the capsule
-+contents in binman's test framework.
-+
-+To check the contents of the capsule headers, the mkeficapsule command
-+can be used.
-+
-+.. code-block:: console
-+
-+    $ mkeficapsule --dump-capsule \
-+      <capsule_file_name>
-+
- Performing the update
- *********************
+ / {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+ 	binman {
+ 		efi-capsule {
+ 			image-index = <0x1>;
+diff --git a/tools/binman/test/312_capsule_signed.dts b/tools/binman/test/312_capsule_signed.dts
+index d1c76e269c..4ab838efed 100644
+--- a/tools/binman/test/312_capsule_signed.dts
++++ b/tools/binman/test/312_capsule_signed.dts
+@@ -3,9 +3,6 @@
+ /dts-v1/;
  
+ / {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+ 	binman {
+ 		efi-capsule {
+ 			image-index = <0x1>;
+diff --git a/tools/binman/test/313_capsule_version.dts b/tools/binman/test/313_capsule_version.dts
+index bafef3609e..19e7e83348 100644
+--- a/tools/binman/test/313_capsule_version.dts
++++ b/tools/binman/test/313_capsule_version.dts
+@@ -3,9 +3,6 @@
+ /dts-v1/;
+ 
+ / {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+ 	binman {
+ 		efi-capsule {
+ 			image-index = <0x1>;
+diff --git a/tools/binman/test/314_capsule_signed_ver.dts b/tools/binman/test/314_capsule_signed_ver.dts
+index 85c784bba4..649b8ccb2d 100644
+--- a/tools/binman/test/314_capsule_signed_ver.dts
++++ b/tools/binman/test/314_capsule_signed_ver.dts
+@@ -3,9 +3,6 @@
+ /dts-v1/;
+ 
+ / {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+ 	binman {
+ 		efi-capsule {
+ 			image-index = <0x1>;
+diff --git a/tools/binman/test/315_capsule_oemflags.dts b/tools/binman/test/315_capsule_oemflags.dts
+index f736e8758f..45853f69c3 100644
+--- a/tools/binman/test/315_capsule_oemflags.dts
++++ b/tools/binman/test/315_capsule_oemflags.dts
+@@ -3,9 +3,6 @@
+ /dts-v1/;
+ 
+ / {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+ 	binman {
+ 		efi-capsule {
+ 			image-index = <0x1>;
+diff --git a/tools/binman/test/316_capsule_missing_key.dts b/tools/binman/test/316_capsule_missing_key.dts
+index 2080b50e3d..a14a74ee77 100644
+--- a/tools/binman/test/316_capsule_missing_key.dts
++++ b/tools/binman/test/316_capsule_missing_key.dts
+@@ -3,9 +3,6 @@
+ /dts-v1/;
+ 
+ / {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+ 	binman {
+ 		efi-capsule {
+ 			image-index = <0x1>;
+diff --git a/tools/binman/test/317_capsule_missing_index.dts b/tools/binman/test/317_capsule_missing_index.dts
+index aadb61f647..99a54d55c3 100644
+--- a/tools/binman/test/317_capsule_missing_index.dts
++++ b/tools/binman/test/317_capsule_missing_index.dts
+@@ -3,9 +3,6 @@
+ /dts-v1/;
+ 
+ / {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+ 	binman {
+ 		efi-capsule {
+ 			/* Image GUID for testing capsule update */
+diff --git a/tools/binman/test/318_capsule_missing_guid.dts b/tools/binman/test/318_capsule_missing_guid.dts
+index d76afba853..85d3317ecb 100644
+--- a/tools/binman/test/318_capsule_missing_guid.dts
++++ b/tools/binman/test/318_capsule_missing_guid.dts
+@@ -3,9 +3,6 @@
+ /dts-v1/;
+ 
+ / {
+-	#address-cells = <1>;
+-	#size-cells = <1>;
+-
+ 	binman {
+ 		efi-capsule {
+ 			image-index = <0x1>;
 -- 
 2.34.1
 
