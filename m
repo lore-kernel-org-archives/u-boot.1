@@ -4,72 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06121CD8CA1
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49318CD8CA3
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 15:01:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 088A286C56;
-	Tue, 10 Oct 2023 16:59:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 1BE4386B79;
+	Tue, 10 Oct 2023 17:01:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AUUkbZrB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y7RRGCHU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 64ECF86CF3; Tue, 10 Oct 2023 16:58:43 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id D372E86BA1; Tue, 10 Oct 2023 17:01:05 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8168886DEE
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:58:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6254A82BBF
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 17:01:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-9b9a494cc59so966584766b.3
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 07:58:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-53b32dca0bfso9004479a12.0
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 08:01:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696949894; x=1697554694; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1696950061; x=1697554861; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=01YxeWVc2qlNz6oqWLNzmEL0GKbpz3LoqGpXxDHIFKY=;
- b=AUUkbZrB/IzcGkY73gjlDcB2RYQe1HnCYsEwCJ1zA6p3Kr966ImlbimHGOt/2r8I/o
- +N06ZGnuqgkzKANfgkLJwf49eH98QNnF00jIUdwKEDvwV7t+WScJPJ0kMZyxNHoNm+QC
- HFcHdra0bh12IRxlDhmiTwAQ/OxJV6YxA6WC0=
+ bh=K8LgCfYIFvr9WsP8VkZMmeGK++MG7aWtztONdwBkPDU=;
+ b=Y7RRGCHUidZvMgU35l2U8GM5lm74Owk7yabmDYDUcG3Eco8t+nAjClUc6Mbc0EWqt6
+ NBcsDXAQZECzO3JFclaqJthxfoPmo8ADt5GavCjKX2JVYlRLlVDnu/iHFqMUCKyrovyd
+ pCCDFih0vFGcwNWf42UA14+LStHdGhpAf0/AqbRetTvuK1cHlU5pDgRHQ+cZ4qJ2+h0p
+ 0SQ/3yUfJvkarmCzvwPWO3xiz0nTslk6rhx7mg5c+5wRKENZ9IyL7SzfGZFKvkoxG7d1
+ 5VT3bAJEMLPT7d5C/mbXVLOlATKqB8ihAAJ/320x51WEPmyKNLhTk2vv/cyp8jj1ED/Q
+ jgYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696949894; x=1697554694;
+ d=1e100.net; s=20230601; t=1696950061; x=1697554861;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=01YxeWVc2qlNz6oqWLNzmEL0GKbpz3LoqGpXxDHIFKY=;
- b=xNyWExXQSP+P+d3SZh0nMUZYpPwL46axMU1bkgBz4UexLQki0JCyD0PmhiNOvv2kLW
- jB/pS7pnPmqseZYWo4rEzw8SeDuZZqQm4jeuy3amvgRdBGY4xII9YkXeMCpCrTT4LLAV
- e3Z0KmouuXbojVLW/QxRM1gQZcd+PCR+F1iAJs2l6bLIZswDzuTaEC+OSBEbWWDbtJkH
- aIFVaQBHg/klhyeFg8ZNrLUWRz0/MdzMcLm8HXz8/WxM8KM6+XO4XJMvTGtxyUCQ6ZXG
- Bc4TCG1Bm/JbeDTVfShRoPS498+TJCaJoLOwBhPkSgNqkk91YVpL17KqxVnug6Yn4T/Y
- 9Wbw==
-X-Gm-Message-State: AOJu0YxQwhGu8w4f9fMbeW30+amL+y/GOIP5P62TuA3GKJ7IqUb9JKS5
- BaxIS3PJwQLJIITxL3OEaiSbkf9pi73kPd82pObZeF1UKIZ3HO2eNhc=
-X-Google-Smtp-Source: AGHT+IFzH+sVHZ1ZxaLlfLzLwAbXg1Z7/W5+9RKhG3AfMYoUBPxCyEcyPbJO00vae3pazgaAkgT0UhKKb5ADzfuc+EU=
-X-Received: by 2002:a17:906:ce:b0:9b2:a078:4461 with SMTP id
- 14-20020a17090600ce00b009b2a0784461mr15404641eji.44.1696949893887; Tue, 10
- Oct 2023 07:58:13 -0700 (PDT)
+ bh=K8LgCfYIFvr9WsP8VkZMmeGK++MG7aWtztONdwBkPDU=;
+ b=HO4dANUwHlC82R+JWJYL81sZx5+OrtG2wJ7xOq0+IumgabaFbhdDKAYFQV0inKUlPQ
+ L1UUbmQiLT4u+/WdhTx4RylE0oBOY8D3ys2B5MwxaTOnjGpe1yZvP17JB2u0VXun1vzv
+ ZKa1cHteeDF3rHWFxl8TzinQWKhdCy6ypwhm6FyAciyq0a1NyTINM8waRRs/ITpfnoVC
+ kQFOb3BDYqyj3CUheOOt5OdPpV7G3No8nBQD4mMp1Q+FN4rGfbrU5T5GH99NwcjFcwoI
+ hDP+doZsGzRpFWtU9PlJZPppIU9h9nbvBH6mux76krQ75nIVY+SIZOxHv6Cja6C3Uuyk
+ Pf2A==
+X-Gm-Message-State: AOJu0YyfC+eXkDnLfNKLuPVN/PuJV81P3/cBFxGmXuI8JC0o3WRn4bKr
+ 3IcpUU7KXSC4Y8ro+Q23yyeSYgBYTZUf2tKFIil5Rg==
+X-Google-Smtp-Source: AGHT+IECfRHOV5g/BJFDJzIT/ynDt+zZ7KDDYshNQ2AJbPWfGoetvrwmcroS6/m1x/8c+59AlxOm3rCOiYAi1brQPwI=
+X-Received: by 2002:a05:6402:4405:b0:536:169a:4ac3 with SMTP id
+ y5-20020a056402440500b00536169a4ac3mr14856840eda.8.1696950061576; Tue, 10 Oct
+ 2023 08:01:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230926084346.2237483-1-bmeng@tinylab.org>
- <20230926084346.2237483-11-bmeng@tinylab.org>
- <CAPnjgZ082BzO4AGXvYqkaZPC_BkF1zc_AAW1zV9k31GnZhwpJQ@mail.gmail.com>
- <CAEUhbmX3hhOkUqj-2bj6BvrmE3zvsbeOtGUMK=mAs+Pg-Ay94A@mail.gmail.com>
-In-Reply-To: <CAEUhbmX3hhOkUqj-2bj6BvrmE3zvsbeOtGUMK=mAs+Pg-Ay94A@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 10 Oct 2023 08:58:04 -0600
-Message-ID: <CAPnjgZ1uaWkf+yWQ2_UiyYca3fNgLw0izRE0-zm0oeWybc4o9A@mail.gmail.com>
-Subject: Re: [PATCH 10/15] cmd: blk_common: Use macros for the return values
-To: Bin Meng <bmeng.cn@gmail.com>
-Cc: Bin Meng <bmeng@tinylab.org>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tobias Waldekranz <tobias@waldekranz.com>
+References: <20231004112722.416877-1-sughosh.ganu@linaro.org>
+ <20231004112722.416877-4-sughosh.ganu@linaro.org>
+ <CAPnjgZ0_8FqJEarNvE6RN218PJWUGu1W0_f3iVjzBTibpQ1KFg@mail.gmail.com>
+ <CADg8p97Xpc6MVs+oviNZ1NnKq4cvAuntb1HpO4K0PnJ7DULj9Q@mail.gmail.com>
+ <CAPnjgZ0HocWeW9eNtXXjVPAyL1bu4YU=CE=iSKsXN5hg7u8Ysw@mail.gmail.com>
+ <CADg8p97YLcGQk50aBwgpRnKc4GzM-rtY=2DzWZYGy9qx95r5hw@mail.gmail.com>
+ <CAPnjgZ2z6Z4Y6FdspH3ap57B044s=BRr72vV8poG53VauP2_mw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ2z6Z4Y6FdspH3ap57B044s=BRr72vV8poG53VauP2_mw@mail.gmail.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 10 Oct 2023 20:30:50 +0530
+Message-ID: <CADg8p95dOdqtonZuOkcz_+xJByS=gPK+uSbjSEYF=jLbq8mvNA@mail.gmail.com>
+Subject: Re: [PATCH 3/5] binman: capsule: Use dumped capsule header contents
+ for verification
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,142 +95,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Bin,
+hi Simon,
 
-On Tue, 10 Oct 2023 at 03:06, Bin Meng <bmeng.cn@gmail.com> wrote:
+On Tue, 10 Oct 2023 at 20:27, Simon Glass <sjg@chromium.org> wrote:
 >
-> Hi Simon,
+> Hi Sughosh,
 >
-> On Mon, Oct 2, 2023 at 9:42=E2=80=AFAM Simon Glass <sjg@chromium.org> wro=
-te:
+> On Mon, 9 Oct 2023 at 13:41, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 > >
-> > Hi Bin,
+> > hi Simon,
 > >
-> > On Tue, 26 Sept 2023 at 02:54, Bin Meng <bmeng@tinylab.org> wrote:
+> > On Mon, 9 Oct 2023 at 23:27, Simon Glass <sjg@chromium.org> wrote:
 > > >
-> > > Avoid using magic number 0/1 for the command result.
+> > > Hi Sughosh,
 > > >
-> > > Signed-off-by: Bin Meng <bmeng@tinylab.org>
-> > > ---
+> > > On Mon, 9 Oct 2023 at 01:46, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > >
+> > > > hi Simon,
+> > > >
+> > > > On Sun, 8 Oct 2023 at 04:41, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Sughosh,
+> > > > >
+> > > > > On Wed, 4 Oct 2023 at 05:27, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > > > > >
+> > > > > > The various fields of a generated capsule are currently verified
+> > > > > > through hard-coded offsets. Use the dump-capsule feature for dumping
+> > > > > > the capsule header contents and use those for capsule verification.
+> > > > > >
+> > > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > > ---
+> > > > > >  tools/binman/ftest.py | 95 ++++++++++++++++++++++++-------------------
+> > > > > >  1 file changed, 54 insertions(+), 41 deletions(-)
+> > > > >
+> > > > > This looks good apart from a few nits below. However, the tests fail for me.
+> > > >
+> > > > Can you please specify which tests fail, and the way to reproduce the
+> > > > failures? I ran the tests before sending the patches, and they ran
+> > > > fine, including the coverage which is 100%. Ci too did not complain.
 > > >
-> > >  cmd/blk_common.c | 14 +++++++-------
-> > >  1 file changed, 7 insertions(+), 7 deletions(-)
+> > > Sure, for example:
 > > >
-> > > diff --git a/cmd/blk_common.c b/cmd/blk_common.c
-> > > index 9f9d4327a9..ad9b16dc09 100644
-> > > --- a/cmd/blk_common.c
-> > > +++ b/cmd/blk_common.c
-> > > @@ -25,18 +25,18 @@ int blk_common_cmd(int argc, char *const argv[],
-enum uclass_id uclass_id,
-> > >         case 2:
-> > >                 if (strncmp(argv[1], "inf", 3) =3D=3D 0) {
-> > >                         blk_list_devices(uclass_id);
-> > > -                       return 0;
-> > > +                       return CMD_RET_SUCCESS;
-> >
-> > I really don't like this...0 is success.
-> >
-> > >                 } else if (strncmp(argv[1], "dev", 3) =3D=3D 0) {
-> > >                         if (blk_print_device_num(uclass_id,
-*cur_devnump)) {
-> > >                                 printf("\nno %s devices available\n",
-if_name);
-> > >                                 return CMD_RET_FAILURE;
-> > >                         }
-> > > -                       return 0;
-> > > +                       return CMD_RET_SUCCESS;
-> > >                 } else if (strncmp(argv[1], "part", 4) =3D=3D 0) {
-> > >                         if (blk_list_part(uclass_id))
-> > >                                 printf("\nno %s partition table
-available\n",
-> > >                                        if_name);
-> > > -                       return 0;
-> > > +                       return CMD_RET_SUCCESS;
-> > >                 }
-> > >                 return CMD_RET_USAGE;
-> > >         case 3:
-> > > @@ -49,7 +49,7 @@ int blk_common_cmd(int argc, char *const argv[],
-enum uclass_id uclass_id,
-> > >                         } else {
-> > >                                 return CMD_RET_FAILURE;
-> > >                         }
-> > > -                       return 0;
-> > > +                       return CMD_RET_SUCCESS;
-> > >                 } else if (strncmp(argv[1], "part", 4) =3D=3D 0) {
-> > >                         int dev =3D (int)dectoul(argv[2], NULL);
+> > > $ binman test testCapsuleGen
+> > > ======================== Running binman tests ========================
+> > > /usr/lib/python3.10/os.py:1030: RuntimeWarning: line buffering (buffering=1) isn't supported in binary mode, the default buffer size will be used
+> > >   return io.open(fd, mode, buffering, encoding, *args, **kwargs)
+> > > /usr/lib/python3.10/os.py:1030: RuntimeWarning: line buffering (buffering=1) isn't supported in binary mode, the default buffer size will be used
+> > >   return io.open(fd, mode, buffering, encoding, *args, **kwargs)
+> > > F
+> > > ======================================================================
+> > > FAIL: binman.ftest.TestFunctional.testCapsuleGen (subunit.RemotedTestCase)
+> > > binman.ftest.TestFunctional.testCapsuleGen
+> > > ----------------------------------------------------------------------
+> > > testtools.testresult.real._StringException: Traceback (most recent call last):
+> > > AssertionError: '6DCBD5ED-E82D-4C44-BDA1-7194199AD92A' != []
 > > >
-> > > @@ -58,7 +58,7 @@ int blk_common_cmd(int argc, char *const argv[],
-enum uclass_id uclass_id,
-> > >                                        if_name, dev);
-> > >                                 return CMD_RET_FAILURE;
-> > >                         }
-> > > -                       return 0;
-> > > +                       return CMD_RET_SUCCESS;
-> > >                 }
-> > >                 return CMD_RET_USAGE;
 > > >
-> > > @@ -80,7 +80,7 @@ int blk_common_cmd(int argc, char *const argv[],
-enum uclass_id uclass_id,
+> > > ----------------------------------------------------------------------
+> > > Ran 1 test in 0.147s
 > > >
-> > >                         printf("%ld blocks read: %s\n", n,
-> > >                                n =3D=3D cnt ? "OK" : "ERROR");
-> > > -                       return n =3D=3D cnt ? 0 : 1;
-> > > +                       return n =3D=3D cnt ? CMD_RET_SUCCESS :
-CMD_RET_FAILURE;
+> > > FAILED (failures=1)
 > >
-> > CMD_RET_FAILURE is OK, but I would prefer not to use CMD_RET_SUCCESS.
-> > It is 0 and always will be.
+> > That is interesting. When I run the tests, they run just fine. I had
+> > tested them before sending the patches. For e.g.
 > >
-> > It encourages people to do things like:
+> > ./tools/binman/binman test testCapsuleGen
+> > ======================== Running binman tests ========================
+> > .
+> > ----------------------------------------------------------------------
+> > Ran 1 test in 0.375s
 > >
-> > if (ret =3D=3D CMD_RET_SUCCESS)
-> >
-> > instead of
-> >
-> > if (!ret)
+> > OK
 >
-> I see your concern. However we don't change the return value type to
-> enum, so people can still use
->
->     if (!ret)
->
-> I would still defend that we should use CMD_RET_SUCCESS.
->
-> This is like EXIT_XXX defined in stdlib.h:
->
-> #define   EXIT_FAILURE   1    /* Failing exit status.  */
-> #define   EXIT_SUCCESS   0    /* Successful exit status.  */
->
-> One should use predefined macros whenever possible.
+> Yes, I'm not sure what that is. Perhaps you have a required tool in your path? But in that case I would expect to get some sort of error.
 
-I agree except for success, where I don't, sorry. It should always be 0 in
-U-Boot.
+I don't have any special tool in my path. Just that I build tools
+before invoking the tests, since the mkeficapsule tool needs to have
+been present. Moreover, the tests are also passing in the CI run. So
+it seems to be something specific in your setup I guess.
 
-People then have to look up the value and also we get things like
-
-if (ret !=3D CMD_RET_SUCCESS)
-
-It is a slippery and I would rather not start down it.
-
->
-> >
-> > It would eventually creep into everything, including our clean error
-handling.
-> >
-> > >                 } else if (strcmp(argv[1], "write") =3D=3D 0) {
-> > >                         phys_addr_t paddr =3D hextoul(argv[2], NULL);
-> > >                         lbaint_t blk =3D hextoul(argv[3], NULL);
-> > > @@ -98,7 +98,7 @@ int blk_common_cmd(int argc, char *const argv[],
-enum uclass_id uclass_id,
-> > >
-> > >                         printf("%ld blocks written: %s\n", n,
-> > >                                n =3D=3D cnt ? "OK" : "ERROR");
-> > > -                       return n =3D=3D cnt ? 0 : 1;
-> > > +                       return n =3D=3D cnt ? CMD_RET_SUCCESS :
-CMD_RET_FAILURE;
-> > >                 } else {
-> > >                         return CMD_RET_USAGE;
-> > >                 }
-> > > --
-
-Regards,
+-sughosh
