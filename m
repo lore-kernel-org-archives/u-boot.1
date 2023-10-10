@@ -4,87 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 726A6E95A97
-	for <u-boot@archiver.kernel.org>; Mon,  9 Oct 2023 23:40:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8549ACD68E3
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 03:05:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 945EF8640F;
-	Tue, 10 Oct 2023 01:40:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2C565864A0;
+	Tue, 10 Oct 2023 05:05:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SBj6iqp/";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="MahVLnEn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FE4A8642D; Tue, 10 Oct 2023 01:40:17 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 289F4864A7; Tue, 10 Oct 2023 05:05:33 +0200 (CEST)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20603.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8a::603])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C606863E3
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 01:40:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 969BC86489
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:05:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-66b024d26e2so25764726d6.0
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 16:40:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696894812; x=1697499612; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=OVvs86DBZhHVA/PAdgyYiiYZBwSNY41SJneeV2xq9oQ=;
- b=SBj6iqp/tugVcnO1zlkMZCbr1RdJXUQ/JalrGhuN9bAlT7cxynfnJyCEk6hU7ATZRy
- YaZlZmpoA7NIxfnyTEdHqmzSYV0FHwOgZzkRntDRopONBj4lzHHHK1sqUa2/K87IHCa9
- r9460F2tNhDWbMI77mBKT6rtg3OS43Kr341nLuZw82op8lJRhInRgkbgdjG84SfTFKn4
- TyAfv57kIFVAsmYhG/V+RvI2baIbJzafP5FIcY2+GyAV0u+vjNxf+mc49NHkbtyoLMOO
- q3qXuCUaCx3G7t9TMG7ZAxuHBz7VJQET58PQiGrPlhOnAlqNDNGsWUI4C965+JACgk6x
- SLTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696894812; x=1697499612;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OVvs86DBZhHVA/PAdgyYiiYZBwSNY41SJneeV2xq9oQ=;
- b=f5VqnqbXWXmaTy+ZAynUBJbf3q/NUPC0nz2hTiT3Grd8L9mBpb1J5xHxIcbsPm6Cjr
- VvqnY6kPkMxWJMu4AJoDmPJIDFbQpLm0s/dvoZJHtmqfDJAHtyoreLXK+CfGlm4oGA0j
- fvFuKQT5c8bVQmBx0tXqwGAfaxTt5TzpXq20fl3sCHLAKTOEVZKc4xKGEvag3F7YclAT
- uWbUQeHMZJAkCTPVp0V7v/XvHU1Ow4WQoCkj2kKplpOp3bgMIt3PrlkSm2kE89E8WKE+
- 7mYne8J7aLVg6BoZDlnHsmFqZoe41pE4WQiS7KQywJX637mmXghoGxkbDWmrSAKzQ1Wu
- P8KQ==
-X-Gm-Message-State: AOJu0YzV/H2pe146WcOCgimrQApXObfph/WLkRdsPZQYSjLubHUcruSB
- GSZEUnseVoCPoM9HpcLB1Zw=
-X-Google-Smtp-Source: AGHT+IE7d1h2sqZNS2j6Wj34bXZX7Z66XCi5CgnECAyYXttKla6o6oaJSlVWj1ltWj/oh3Qsau1/Lg==
-X-Received: by 2002:a05:6214:627:b0:63c:f325:bb03 with SMTP id
- a7-20020a056214062700b0063cf325bb03mr19537556qvx.8.1696894812052; 
- Mon, 09 Oct 2023 16:40:12 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- d16-20020a0caa10000000b0065b17b925d0sm4278692qvb.38.2023.10.09.16.40.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Oct 2023 16:40:11 -0700 (PDT)
-Message-ID: <2ffb2d81-9c63-2ce3-ccba-3d5461008a51@gmail.com>
-Date: Mon, 9 Oct 2023 19:40:10 -0400
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YCf64NSy9pwJNyX+toZPGV/5UAMkI0tjrMpEMIo8vxKUf7y45QHFGlcKODxYgv1JV+86FKs7zHAv/0LTjNEzEzQEM1emYJk+9MUa1hdBM64tbPOvMjYAYYUIx/HDSdl5lPK9e4KUt8uz8sNvJWUED8iMks/ewjg2HJ143WsIz5/D49LxfdRQL5aCI9p2tA44nsAduV78p0H5Vu+tSuVsXo3n5zjAMSXdcJXgzI1vUwkA8kgdRs95qGdviMPKULTPe/G8QUZhX8bM56zQZqzmjoqboMTFgR3TDFPQqparduRHU0Fsfl13EydHmkBNr5miRfI1XISl0iFAXC0HVBR9Tw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QvIVoMmARx1HNw78qRKFQj/EDckxVFTtfLH7nd8isP8=;
+ b=YAajdjMPHFsXnBf8oz7YpNfgLn4IZb3oddpiezgDpeiKiOHDmLQwuu+XZWiNt4zRF6ur6IZpCj2BFQAp8aNe/v0KbGL+iM9n0KHqZFVq7dHOwsPtMERFm0O2yiUTP9WRdgqYVYzvrB+NkeKVPQGmIH4D8iZlm3gguFHhYjQuZE5aj99q1y7Ly8VmBaKwfFWHigfCUuZehr9jagFIaR21Zd31sSjl0EYJxE5rAMPVIayZJRGlltKVDbmQfIPnCR8whmsXk40W9XrFoS1noTl+3m0FZmK3yXxn7LB5AjytO2hslZSH9yDf53Klo4Xj8rDRXp/w9yUoeNYs/CFL01WVEQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QvIVoMmARx1HNw78qRKFQj/EDckxVFTtfLH7nd8isP8=;
+ b=MahVLnEnO2Rh9FTWdcT8Lv3CyCYY2BNsUgnpQExeNreaRRIBV4RXAwiy4LZndn2cqKlmOKgGCTJaG33BbKaa5bMbv5/T3Yem+pLL90DvKyyKaa9jShqp5/kktwm1HSjSbanEL2nxgcs05tChMAECSg5QttAyKhHvOHWHURvye54=
+Received: from MW4PR03CA0230.namprd03.prod.outlook.com (2603:10b6:303:b9::25)
+ by PH7PR12MB7890.namprd12.prod.outlook.com (2603:10b6:510:268::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.37; Tue, 10 Oct
+ 2023 03:05:22 +0000
+Received: from CO1PEPF000044F8.namprd21.prod.outlook.com
+ (2603:10b6:303:b9:cafe::a9) by MW4PR03CA0230.outlook.office365.com
+ (2603:10b6:303:b9::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.37 via Frontend
+ Transport; Tue, 10 Oct 2023 03:05:22 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CO1PEPF000044F8.mail.protection.outlook.com (10.167.241.198) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6907.2 via Frontend Transport; Tue, 10 Oct 2023 03:05:21 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 9 Oct
+ 2023 22:05:15 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 9 Oct
+ 2023 20:04:44 -0700
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
+ Transport; Mon, 9 Oct 2023 22:04:43 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <joe.hershberger@ni.com>, <rfried.dev@gmail.com>, <michal.simek@amd.com>, 
+ <git@xilinx.com>
+Subject: [PATCH v2] net: phy: xilinx_phy: Get rid of using property xlnx,
+ phy-type
+Date: Tue, 10 Oct 2023 08:34:36 +0530
+Message-ID: <20231010030436.11854-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH 07/25] tegra: Change #ifdef for nop
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>, Tom Warren <twarren@nvidia.com>
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-8-sjg@chromium.org>
- <20230925004346.GP305624@bill-the-cat>
- <CAPnjgZ3ieXXhidSeqzMuPBCgy9UrvOt5zSMO671t1KG9zWAGxQ@mail.gmail.com>
- <cad8dcca-eaa5-872b-db9a-86f5438b120c@gmail.com>
- <CAPnjgZ38gfWghmejpQFkJ9y9F8fdC-Wo-YSHT_4_cu8dW1UDGw@mail.gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAPnjgZ38gfWghmejpQFkJ9y9F8fdC-Wo-YSHT_4_cu8dW1UDGw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000044F8:EE_|PH7PR12MB7890:EE_
+X-MS-Office365-Filtering-Correlation-Id: 08daca40-8e8f-4dd5-d766-08dbc93dbda8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: hlICAKC9b4XJCJdHt+jZX/H0hbLh+lk9ydkVB//MafPyL7k8rPimPAvV63Toww51jEzlLOce/x/EgdgqvmCl2N1JNuovUxKtwGgTl4RrseTd/KWk4GOoCFP5L95tnWs8ufDpE+HEn9ijPpVjTQ94tlwYcErXCTVly7Agrq/Q9TZjB3N2uuopeoukc0DkA0mDBERWv7kmYSd1M1zqDoXaogktLtJhvcVinflypGGAxeArRy+nFcbKf3Tf75AML7fLrMEQPe/tLYK1Z5+F2X7tTBYK5N5uiltPjiHkZp+Xf5nkN9BtngnrZKdfFPw9cBfDlh7Mg7XWivMr742sPHtAY/C4Nym57Vr3ESAJ4MKOxcQtJ4zHs62ETcJJnG61CjoBY+ymvITxGdCYE+oBYXpIRLoU8s/D53MoqT/k2mPuwcUBbyoytiU/TwNP5z1WEDIex9d2EiG3h5F180qCL8Xl7vRip8a0g7vXpA+AXgtlVtWcv+L3eafMQrcOwhxE/5BjMuj5LhwWnelZArIIEGn8QXcd4l/Nq0YctZeaKtXh4V5uRvNZSRVexwEakH22qeTIGNpwO+cR6OEjtUtJdbY7gKqP78X7jteHs/W0WNQ4GEqtTsMv7nvHVEn2id7dzGxwaLNvih3LYGEq3kmPtiduHTyKx0HHQFpzi7NmTqzlvnNzRJznUYkCDzEbSAKiUdMUcHo6IBi5LOb6+z5xNW9vs6Mnse551V0iiiusdV1qZ06Pek7dUECOV7fBir6ERiAm/sSARkrS/OojuUJtwYim+BhWEUU8Mep16YLI9gbbrE4=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(376002)(136003)(346002)(396003)(39860400002)(230922051799003)(451199024)(82310400011)(186009)(1800799009)(64100799003)(46966006)(36840700001)(40470700004)(40480700001)(426003)(70206006)(1076003)(336012)(83380400001)(2616005)(107886003)(40460700003)(26005)(47076005)(36860700001)(54906003)(316002)(70586007)(6916009)(4326008)(41300700001)(8936002)(5660300002)(6666004)(8676002)(2906002)(4744005)(82740400003)(478600001)(86362001)(36756003)(81166007)(356005)(26583001)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2023 03:05:21.3798 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 08daca40-8e8f-4dd5-d766-08dbc93dbda8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000044F8.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7890
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,67 +123,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/9/23 11:32, Simon Glass wrote:
-> Hi Sean,
-> 
-> On Sat, 7 Oct 2023 at 17:21, Sean Anderson <seanga2@gmail.com> wrote:
->>
->> On 10/7/23 19:10, Simon Glass wrote:
->>> Hi Tom.
->>>
->>> On Sun, 24 Sept 2023 at 18:43, Tom Rini <trini@konsulko.com> wrote:
->>>>
->>>> On Sun, Sep 24, 2023 at 02:39:25PM -0600, Simon Glass wrote:
->>>>
->>>>> This code is normally compiled for Tegra, but sandbox can also compile
->>>>> it. We should not use UNIT_TEST as a synonym for SANDBOX, since it is
->>>>> possible to disable UNIT_TEST for sandbox.
->>>>>
->>>>> Correct the condition.
->>>>>
->>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>>> ---
->>>>>
->>>>>    include/k210/pll.h | 2 +-
->>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>
->>>>> diff --git a/include/k210/pll.h b/include/k210/pll.h
->>>>> index fd16a89cb203..6dd60b2eb4fc 100644
->>>>> --- a/include/k210/pll.h
->>>>> +++ b/include/k210/pll.h
->>>>> @@ -13,7 +13,7 @@ struct k210_pll_config {
->>>>>         u8 od;
->>>>>    };
->>>>>
->>>>> -#ifdef CONFIG_UNIT_TEST
->>>>> +#ifdef CONFIG_SANDBOX
->>>>>    TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
->>>>>                                      struct k210_pll_config *best);
->>>>>    #ifndef nop
->>>>
->>>> Tegra? Do you mean sifive?  That's where CLK_K210 stuff is... but it
->>>
->>> Oh yes, I got confused.
->>>
->>>> also seems wrong, you can run unit test on real hardware, and this is a
->>>> test that could (should?) be run on that platform.
->>>
->>> Only if it enables UNIT_TEST. You cannot run unit tests without that.
->>> The current tests are designed for sandbox.
->>
->> FWIW I have run this test on actual hardware. My intent here was to allow
->> unit tests to access functions which would otherwise be declared static.
-> 
-> Er, with or without UNIT_TEST enabled? How can it even build if this
-> declaration is only for sandbox?
+As the xlnx,phy-type device tree property is deprecated and phy-mode
+is being used, so removing the code references of xlnx,phy-type.
 
-With UNIT_TEST of course. Although since this is a forward-declaration, the
-UNIT_TEST ifdef isn't really even necessary. If it's on actual hardware, nop
-should already be defined. So maybe this should be something like
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+Changes in v2:
+- Removed phytype variable.
+---
+ drivers/net/phy/xilinx_phy.c | 5 -----
+ 1 file changed, 5 deletions(-)
 
-#if CONFIG_SANDBOX
-#define nop()
-#endif
-
---Sean
+diff --git a/drivers/net/phy/xilinx_phy.c b/drivers/net/phy/xilinx_phy.c
+index 1df639d6f4..c07c780193 100644
+--- a/drivers/net/phy/xilinx_phy.c
++++ b/drivers/net/phy/xilinx_phy.c
+@@ -99,7 +99,6 @@ static int xilinxphy_startup(struct phy_device *phydev)
+ 
+ static int xilinxphy_of_init(struct phy_device *phydev)
+ {
+-	u32 phytype;
+ 	ofnode node;
+ 
+ 	debug("%s\n", __func__);
+@@ -107,10 +106,6 @@ static int xilinxphy_of_init(struct phy_device *phydev)
+ 	if (!ofnode_valid(node))
+ 		return -EINVAL;
+ 
+-	phytype = ofnode_read_u32_default(node, "xlnx,phy-type", -1);
+-	if (phytype == XAE_PHY_TYPE_1000BASE_X)
+-		phydev->flags |= XAE_PHY_TYPE_1000BASE_X;
+-
+ 	return 0;
+ }
+ 
+-- 
+2.17.1
 
