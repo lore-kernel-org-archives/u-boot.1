@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3890CD80C1
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 13:02:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19E91CD80CB
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 13:02:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0F0486E0B;
-	Tue, 10 Oct 2023 14:58:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7618A86E0F;
+	Tue, 10 Oct 2023 14:59:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a18pIpGs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ea9+8Ywg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6C1686D9D; Tue, 10 Oct 2023 14:58:54 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 078FD86D9D; Tue, 10 Oct 2023 14:59:03 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2A6486B79
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:58:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28B1E86DF6
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:58:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-59f6441215dso69012647b3.2
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:58:48 -0700 (PDT)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-d862533ea85so6539494276.0
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:58:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696942727; x=1697547527; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1696942733; x=1697547533; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NgypEbsgnXyMgmjmcjcak3EJh4DyRHE2X+ufA4pmNDk=;
- b=a18pIpGsJvDVBsjGtXT9CEn8DwHIxGrRuk4zqQR9G4gOjK2NtcEh+WuNiXv5xfdpsU
- oHg0p4CN4Abj2Hz5zONRAo9YksoOfGvIO1QSElqY0t1kxBW+HkKC9BRAvp1LhvhdDNJT
- qK/k2sO/mOAOliytkmre93XTPrP3vo5QFwhXQ=
+ bh=Ujd0BMcSK200m4WXCLKqpyT1uQ2b5t4LNf8gLEy8Kc4=;
+ b=ea9+8YwgMtliN/6M8aSsLzVJ5uMncyqCA+qYXRgJlXRd77bkf+MMpydMlu/+VHgm1X
+ ewvkTBL/ghGnKR1kwbqRxIXPIqQwxuNGmji9wNVMFabaZYFwhQuknTrG8XQCNloof6EV
+ D4xps9H/4hoSfrbSbK0oZkZtQ3hsGgX27sB3c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696942727; x=1697547527;
+ d=1e100.net; s=20230601; t=1696942733; x=1697547533;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NgypEbsgnXyMgmjmcjcak3EJh4DyRHE2X+ufA4pmNDk=;
- b=TRySKfXEG9E88ynhM0H8Qoyec81696mfcXYZmlTpJwVrfmZ2DtIP2vKjgeDu993PLi
- DqUkdavMnBGva6SLU+i04pR5ufyGRrovT2rgOn4Uwm+c7scZ6+wSKcmtUxD71myRbL09
- z13zmdBhDUU/nYIOaJeaPJ01HxC1fHPB/VneXjWu4p17BcCSTfBTxE8OsiGcg8DBCjun
- eomvqaSe2150qNkWw1EZCkDTPrF5hlnTdf8kfmNwfQ0sevrb5VexNFEZFWETH68FS6hK
- NAmJSbDxvzaZY/PaJ8Wp3iacDfbxtb6UOBCYycAwSicZm1BwMGh12cPxGE0vCOnfWkAz
- L7VQ==
-X-Gm-Message-State: AOJu0YwSIP2qGum3Yl+p/ZverP/a2jPKuV4yaJAn9L8rRCkuaL41s3CR
- vmBoERa6bza2fr4BwkrC80YxCA==
-X-Google-Smtp-Source: AGHT+IHxn7WKMF16mvA50wpfFpFRxyPOTLSRxYmHSeAzXAoid3/DoLOywbaA8FiAItvCpQc+Jj8edQ==
-X-Received: by 2002:a81:ab42:0:b0:5a1:e4bf:ee5a with SMTP id
- d2-20020a81ab42000000b005a1e4bfee5amr18003985ywk.41.1696942727649; 
- Tue, 10 Oct 2023 05:58:47 -0700 (PDT)
+ bh=Ujd0BMcSK200m4WXCLKqpyT1uQ2b5t4LNf8gLEy8Kc4=;
+ b=ADIjrRIFEJ1UZjC1crdE+FfOzdn4cHdkA7DbvsBjGPGr8/qZfYMBK881bQq8CBB4B5
+ r99qcd49fXnG1lxeHxvFxwTYpIw06K8efl8nt+7xBF0/+oqg354Xv/24+MGGtbhf6qjW
+ YZSioAUWMYIr/RohmCytKQRT+sZ9HShrl1HrKpzia5YYH9bzNbAvGvYLdSwsU2xsUb+9
+ qi997juO6dorivJo3pNRB3XDFoLk8WRdPE7csL2aJzhhpFdcdMdsY1OH7cuGYn+Cf804
+ 9S1gquG/YAqi8xPFqTYB3HxRkA28UBkVS2pZcoOJVa5IfeW17111aC/ytQfDbrO520O4
+ V44w==
+X-Gm-Message-State: AOJu0YwGYE/+9LSrqDvfh1x8+c1taa91aX4j1msSWrrMn7/4luXYfbkA
+ fDPrBXc0QPvTLs9dROWJrMGzBw==
+X-Google-Smtp-Source: AGHT+IEJJTZ4Ks2OgTvROQWd6DMAcJAR5uFHFBrpay4F4TrFKObfVJpKmGVPtLbsddFRNqVKaVwV6w==
+X-Received: by 2002:a25:bcc6:0:b0:d9a:4da4:b793 with SMTP id
+ l6-20020a25bcc6000000b00d9a4da4b793mr2286173ybm.62.1696942733054; 
+ Tue, 10 Oct 2023 05:58:53 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6c43-4eba-c113-e8cd.res6.spectrum.com.
  [2603:6081:7b00:6400:6c43:4eba:c113:e8cd])
  by smtp.gmail.com with ESMTPSA id
- w16-20020a81a210000000b005a0f9718a5fsm4374008ywg.78.2023.10.10.05.58.46
+ n3-20020a254003000000b00d9a68211990sm281106yba.52.2023.10.10.05.58.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 05:58:46 -0700 (PDT)
-Date: Tue, 10 Oct 2023 08:58:45 -0400
+ Tue, 10 Oct 2023 05:58:52 -0700 (PDT)
+Date: Tue, 10 Oct 2023 08:58:50 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Patryk Biel <pbiel7@gmail.com>
-Cc: u-boot@lists.denx.de, Kristian Amlie <kristian.amlie@northern.tech>
-Subject: Re: [PATCH] ARM: vexpress_ca9x4: Add missing flash width config option
-Message-ID: <20231010125845.GD2227687@bill-the-cat>
-References: <20230920074120.394487-1-pbiel7@gmail.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Michal Suchanek <msuchanek@suse.de>,
+ Alexey Brodkin <Alexey.Brodkin@synopsys.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] dm: serial: fix serial_post_probe()
+Message-ID: <20231010125850.GE2227687@bill-the-cat>
+References: <20230929004717.37413-1-heinrich.schuchardt@canonical.com>
+ <20230929004717.37413-2-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="O/XrIlYnL4ojofNe"
+ protocol="application/pgp-signature"; boundary="46ypyQrB59QXXOnS"
 Content-Disposition: inline
-In-Reply-To: <20230920074120.394487-1-pbiel7@gmail.com>
+In-Reply-To: <20230929004717.37413-2-heinrich.schuchardt@canonical.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,55 +94,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---O/XrIlYnL4ojofNe
+--46ypyQrB59QXXOnS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 20, 2023 at 09:41:20AM +0200, Patryk Biel wrote:
+On Fri, Sep 29, 2023 at 02:47:16AM +0200, Heinrich Schuchardt wrote:
 
-> Allow for a proper configuration of CFI flash banks avaialble on the vexp=
-ress_ca9x4
-> board. Without this option, the CFI flash incorrectly detects that the bo=
-ard has two
-> banks of 32MB flash devices, while in reality, the board provides
-> two flash banks, each with 64MB size. As a result, it becomes impossible =
-to e.g. to
-> save u-boot env in flash. According to device tree for this board and
-> its implementation in QEMU, the CFI width should be set to 32 bits.
+> The size of the name of a udevice is not limited.
 >=20
-> After applying this fix, CFI flash will correctly detect both flash
-> banks each with a size of 64MB. As as result the functionality of e.g. sa=
-ving u-boot
-> env will work correctly.
+> When setting the fixed sized name field of a stdio device we must ensure
+> that the target string is NUL terminated to avoid buffer overflows.
 >=20
-> Tested on QEMU 6.2.0.
->=20
-> Cc: Kristian Amlie <kristian.amlie@northern.tech>
-> Signed-off-by: Patryk Biel <pbiel7@gmail.com>
-> Reviewed-by: Kristian Amlie <kristian.amlie@northern.tech>
+> Fixes: 57d92753d4ca ("dm: Add a uclass for serial devices")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---O/XrIlYnL4ojofNe
+--46ypyQrB59QXXOnS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSoUACgkQFHw5/5Y0
-tyyokwwAslYVM4PWzEQZpl+5YPkd3FqlfiVE6sSK0MewNEOq/FZeZko++iV3kq5v
-Y1nC2SMbsggWspwWv4Hn/YQWcXaBK24r6GF4fLD91Mdtx/BhkXIzLhBfYLMPem+K
-acZUkZI79LWk8jKAvKhAa0yoTFEDuG1jiY7lcVX+OU+5oq7JYJf+flnDLzgyvi7w
-+d1zEzR8qsWSVrhvCHrkV12VtlKhALSbjzy9HZkIwQqMZ97wm0pimPzyn7oGxqHp
-hwTf/nppla1mkA1PLNFQawuIB025ZjJk3vlsAcxz/x2/jyy+cuax2HamaKDlpxxX
-bpA29Bo0TMJTmTPwx0xX1dl819YmF1a1Fk5dKJlT0K1hWXafvZQye8Cj/KoGesH+
-76oYPsxbpGgwjEIZGOSkyZ7vZGqKCWB1KaRO8jxbZZ4WX9Es7jGABIl+24bRI3vJ
-LWCHElv59vuQ1zfDdRgGkIFZHpvlHkvVHAuPYdIAYGeo0uxp5CQlNlIoZMDBXDQl
-HzXoSk9Z
-=KMe6
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSooACgkQFHw5/5Y0
+tyy7+Qv+K7huGzqIhP5OBNU3OCzcVWyR6ALJQ7p3Di1mbNVlmn7npnyuxJjXCdFB
+Zw6cArnLjmhphCG5Uhwn7z73FbmnhkUAtZap9u51QWFxwBw51olbpTr15OwqzLSO
+mBe5Wta/XiH7l+VzhS3axLh9Bhcs/AJIPfMvxkE2sB24kpMKhT6mB619YwIHbIid
+lgA/3+vmj5yD/xf/rxDzixseqxPApJInFYkOe24ZiUSrD2tAq1tQzqMFuE/B02mx
+WVI57c+g4EXDQMgeS2HTK8OMgmBHKEaUbngW2DIinaeypm81MjIYbyl9i4hO6Zni
+sGzAvqyM69ltwrWWWLo5UKpvZfsSrtpuSH4R0NoabsDSCtI35U38OhYt+SxGQg+A
+Ky+t/FuTAh1OGslmA7rMfMl0VofzZp3QryPQfpy0GuesZ/aUxrGGL77zr/FxVmSq
+sLVqf0ZQl/f6A7bPnyQW/R3I1u1DtgqmWACLksn/K+4YX9dcdLs+dxbjlbQMswGS
+VsmiqYr4
+=Fh9O
 -----END PGP SIGNATURE-----
 
---O/XrIlYnL4ojofNe--
+--46ypyQrB59QXXOnS--
