@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2CB2CD68E5
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 09:03:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51134CD68E8
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 09:04:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0721C86DC3;
-	Tue, 10 Oct 2023 11:03:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7196486DD3;
+	Tue, 10 Oct 2023 11:03:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="QBbDlj3w";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="CMC9QkKg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79C0786D85; Tue, 10 Oct 2023 11:03:23 +0200 (CEST)
+ id A9B8286DA2; Tue, 10 Oct 2023 11:03:24 +0200 (CEST)
 Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
  [217.70.183.196])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B394186DAF
+ by phobos.denx.de (Postfix) with ESMTPS id B3A2686DC3
  for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 11:03:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 5DCCCE0009;
- Tue, 10 Oct 2023 09:03:07 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 8EECBE0003;
+ Tue, 10 Oct 2023 09:03:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1696928588;
+ t=1696928589;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YWqG/XaeypBiB35sFSuJ4gjOWF7y12bdiSFYRDXk3+s=;
- b=QBbDlj3wui8EFc95QjswqpcNTYehUx4fNKn+hxOzg4SxcCC0EiSeZw/fHpv5Ey405ezxgr
- BVPABDyX36FCFirWpxvK9eaaUtkJ1zVuKhk9ois+Obi+VC4jsRLD1Nb6OmtZSUlMrfe5Ap
- Ajt22ig+ppNFO6GvCn/N5cNYxQjh71ETJ/nEJrOMN7GgEVUz6xuaHqtUv9KUw07L/E1eLL
- TykiEvCJZgnFN3iRadSjq0PUGNE1Hl+M7F7GsfEuOSBk56KTwaxLXPDea98Xzn+uenEWjE
- LVkF06y7CWv9rDi7x38i1mw8/9JsSUzVZ7LLvvQuuUBfFeBn7cGlYOgqi2NrjQ==
+ bh=M8rGg+QF8fMKGbqnCwSYIRNR/kmfhz0BLitM8btU438=;
+ b=CMC9QkKgsMzmhFa/1uP9Xk9/XgAdgUtJ7X33uySI/nyvEkQxCrLx+YvKhhW2x7WNGGY70I
+ yXjyhV+npTZlP2q8vlgD7y6TBxrIY0jCS0xo365Y6wG6d99QWtX9wYltDYfcfWGbEvTGgL
+ WPXU/sBiG5PMoDx0AX46ZJGS/MzdZ5cw3Mqv5Xy0RAoAGHXDN2XN53mLlpUR4tOR37tsSR
+ gF5dTohGqpEsv6edmvXLvj+A9qyfXNxxnResiLYFQTNHUNE8RVI+8jutkD2+SYkCmsoWCj
+ MJKjZQNrLPtf5OzRIkOoR/yhFkvpymeagUxu/DfwUnQ+31/VR62VP00Aa3jx6g==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Marek Vasut <marek.vasut@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 2/3] cmd: bind: Try to improve the (un)bind help
-Date: Tue, 10 Oct 2023 11:03:03 +0200
-Message-Id: <20231010090304.49335-3-miquel.raynal@bootlin.com>
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: [PATCH v3 3/3] usb: udc: Try to clarify an error message
+Date: Tue, 10 Oct 2023 11:03:04 +0200
+Message-Id: <20231010090304.49335-4-miquel.raynal@bootlin.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231010090304.49335-1-miquel.raynal@bootlin.com>
 References: <20231010090304.49335-1-miquel.raynal@bootlin.com>
@@ -70,62 +70,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While it may sound totally obvious for the regular U-Boot developer to
-get the parameters of the bind/unbind commands from the output of 'dm
-tree', it did not felt straightforward to me until I was explicitly
-told to look there. And even when I knew the command, I did not make a
-direct link between the arguments of this command and the columns
-returned by 'dm tree'.
+At some point when trying to use USB gadgets, two situations may arise
+and lead to a failure. Either the UDC (USB Device Controller) is not
+available at all (not described or not probed) or the UDC is already in
+use. For instance, as the USB Ethernet gadget remains bound to the UDC,
+the use of any other USB gadget (fastboot, dfu, etc) *after* will always
+fail with the "couldn't find an available UDC" error.
 
-Several of us lost a lot of time because of that, I would like to kindly
-help other users by slightly improving this textual line. Unfortunately,
-because of how this string is used (like within the 'help' command) I
-cannot detail much more, but at least the pointer is there.
-
-While we add this message, we can also imply CMD_DM when we enable
-CMD_BIND so the debug message does not lead to an unknown command. This
-way the 'dm' command will likely be there unless explicitly disabled.
+Let's give a more helpful message by making a difference between the two
+cases. Let's also hint people who would get this error and grep it into
+the sources a better explanation of what's wrong with their workflow.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- cmd/Kconfig | 1 +
- cmd/bind.c  | 4 ++++
- 2 files changed, 5 insertions(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 6cc3bf6c2d0..668411fd87c 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -996,6 +996,7 @@ config CMD_BCB
- config CMD_BIND
- 	bool "bind/unbind - Bind or unbind a device to/from a driver"
- 	depends on DM
-+	imply CMD_DM
- 	help
- 	  Bind or unbind a device to/from a driver from the command line.
- 	  This is useful in situations where a device may be handled by several
-diff --git a/cmd/bind.c b/cmd/bind.c
-index 4d1b7885e60..be0d4d2a711 100644
---- a/cmd/bind.c
-+++ b/cmd/bind.c
-@@ -246,6 +246,8 @@ U_BOOT_CMD(
- 	"Bind a device to a driver",
- 	"<node path> <driver>\n"
- 	"bind <class> <index> <driver>\n"
-+	"Use 'dm tree' to list all devices registered in the driver model,\n"
-+	"their path, class, index and current driver.\n"
- );
+While doing this I really wanted to add "much more" error comments but I
+faced another reality: often the messages are there but use
+pr_err/log_err which is actually silenced by default with LOGLEVEL=3, so
+I consider this unnecessary, as decreasing the loglevel will make these
+messages appear. I would have expected errors to be displayed, but I
+understand it makes the binaries even bigger.
+---
+ drivers/usb/gadget/udc/udc-core.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/usb/gadget/udc/udc-core.c b/drivers/usb/gadget/udc/udc-core.c
+index 7f73926cb3e..8405b03462e 100644
+--- a/drivers/usb/gadget/udc/udc-core.c
++++ b/drivers/usb/gadget/udc/udc-core.c
+@@ -323,6 +323,7 @@ err1:
+ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
+ {
+ 	struct usb_udc		*udc = NULL;
++	unsigned int		udc_count = 0;
+ 	int			ret;
  
- U_BOOT_CMD(
-@@ -254,4 +256,6 @@ U_BOOT_CMD(
- 	"<node path>\n"
- 	"unbind <class> <index>\n"
- 	"unbind <class> <index> <driver>\n"
-+	"Use 'dm tree' to list all devices registered in the driver model,\n"
-+	"their path, class, index and current driver.\n"
- );
+ 	if (!driver || !driver->bind || !driver->setup)
+@@ -330,12 +331,22 @@ int usb_gadget_probe_driver(struct usb_gadget_driver *driver)
+ 
+ 	mutex_lock(&udc_lock);
+ 	list_for_each_entry(udc, &udc_list, list) {
++		udc_count++;
++
+ 		/* For now we take the first one */
+ 		if (!udc->driver)
+ 			goto found;
+ 	}
+ 
+-	printf("couldn't find an available UDC\n");
++	if (!udc_count)
++		printf("No UDC available in the system\n");
++	else
++		/* When this happens, users should 'unbind <class> <index>'
++		 * using the output of 'dm tree' and looking at the line right
++		 * after the USB peripheral/device controller.
++		 */
++		printf("All UDCs in use (%d available), use the unbind command\n",
++		       udc_count);
+ 	mutex_unlock(&udc_lock);
+ 	return -ENODEV;
+ found:
 -- 
 2.34.1
 
