@@ -4,61 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 240E4CD80B7
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 11:53:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9368DCD80B7
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 11:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F7A786BC8;
-	Tue, 10 Oct 2023 13:53:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 075A886D3D;
+	Tue, 10 Oct 2023 13:53:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ccZGLWgL";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="tubTqHpx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10DAF86DC7; Tue, 10 Oct 2023 12:06:46 +0200 (CEST)
+ id CF32F867F6; Tue, 10 Oct 2023 12:06:48 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B758386940
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 12:06:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8465B86D3E
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 12:06:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=avromanov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 90EBB100010;
- Tue, 10 Oct 2023 13:06:33 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 90EBB100010
+ by mx1.sberdevices.ru (Postfix) with ESMTP id B60AA100003;
+ Tue, 10 Oct 2023 13:06:31 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru B60AA100003
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1696932393;
- bh=Y5nVu+FrxAUa0QuV2owxreQLfkB3cs+zRrLItUKy+JU=;
+ s=mail; t=1696932391;
+ bh=FhJSx0xE7uw3byqpH5VR1ZRAtlK+et3fJ8T6QwjavNQ=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=ccZGLWgLFMykdvH5ubbQdC+/wGWju5IqZA+uN8cpUYNGmgdCU+CJ3oZPS802oTvXs
- EkpeURuLxM89r9ZLx6k9CO+YstD5p4RNzKQo3StkUZvYMzszyuLmFVolvX+nRXLz+Q
- t1wsGvcG0hKiXsObAt3gYNHA+Ey2BOsBwlXoXvQxbp8OTtZthE3yWEzpCc42v2r/qd
- kmfBW44omRHv4zYB7PdlmjScm74TCVWqacIAxo/jO8A2gxZ/OaDuqqSEOzr+GnBaC+
- cr1ohajSyTXOPL8XCptLq7rRvHdyij68RoAK9bqFkk9wbuFCf787sO1CfoCvD2Z0Pk
- wNUWWqpvo334g==
+ b=tubTqHpxV40yG0Gxnah++piMAL9PLJ12g5hsdpbwzAl2chIZ7KKfqG3aKoli2fjRF
+ /XpYIjbf/MgTTlKqiHbhAKPw6ax9aLB0LEiii3Cnfwjrpdo3SSqRM6DRSbIwkaUzmK
+ aujB8upAJMftpNWdQdsDKeGFQV3J7VcyI+sUI93pHwLziMXTHvxuigPPj/AHZj1qxX
+ 4FTcGxGUAnOIndPPbqmrT8qnF5GwIBTeXhiinlxWIQSRzzsNqvJwrI3jblivnaBe/t
+ RxU6H7jdrZeMSTauHjg96PNAoxyew7w6BctpDiinzbTc2VQiSL7wSDfW9/nkji0x58
+ L6seDsc7yylUA==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 10 Oct 2023 13:06:33 +0300 (MSK)
+ Tue, 10 Oct 2023 13:06:30 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.30; Tue, 10 Oct 2023 13:06:33 +0300
+ 15.2.1118.30; Tue, 10 Oct 2023 13:06:30 +0300
 From: Alexey Romanov <avromanov@salutedevices.com>
 To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>
 CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
  <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
-Subject: [PATCH v2 2/2] meson-a1: dts: add ao secure node
-Date: Tue, 10 Oct 2023 13:06:17 +0300
-Message-ID: <20231010100623.74475-3-avromanov@salutedevices.com>
+Subject: [PATCH v2 0/2] Meson A1: add HW RNG and AO Secure nodes
+Date: Tue, 10 Oct 2023 13:06:15 +0300
+Message-ID: <20231010100623.74475-1-avromanov@salutedevices.com>
 X-Mailer: git-send-email 2.41.0
-In-Reply-To: <20231010100623.74475-1-avromanov@salutedevices.com>
-References: <20231010100623.74475-1-avromanov@salutedevices.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -104,34 +102,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ao-secure node can be used to get information about the board,
-so, for example, using show_board_info() we can get following
-information for board with Meson A1 SoC:
+Hello!
 
-SoC: Amlogic Meson A1 (A113L) Revision 2c:a (1:a)
+This patchest adds HW RNG and AO Secure definition
+in device tree for Amlogic A1-series.
 
-Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
----
- arch/arm/dts/meson-a1.dtsi | 6 ++++++
- 1 file changed, 6 insertions(+)
+V2:
 
-diff --git a/arch/arm/dts/meson-a1.dtsi b/arch/arm/dts/meson-a1.dtsi
-index e6e72d4004..e3a42c5b24 100644
---- a/arch/arm/dts/meson-a1.dtsi
-+++ b/arch/arm/dts/meson-a1.dtsi
-@@ -129,6 +129,12 @@
- 				compatible = "amlogic,meson-rng";
- 				reg = <0x0 0x5118 0x0 0x4>;
- 			};
-+
-+			sec_AO: ao-secure@5a20 {
-+				compatible = "amlogic,meson-gx-ao-secure", "syscon";
-+				reg = <0x0 0x5a20 0x0 0x140>;
-+				amlogic,has-chip-id;
-+			};
- 		};
- 
- 		gic: interrupt-controller@ff901000 {
+- Rebased over latest amlogic U-Boot branch.
+
+Alexey Romanov (2):
+  meson-a1: dts: add hw rng node
+  meson-a1: dts: add ao secure node
+
+ arch/arm/dts/meson-a1.dtsi | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
 -- 
 2.25.1
 
