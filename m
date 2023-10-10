@@ -4,70 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C67B5CD8C99
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:57:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93ABACD8C9C
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:58:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1290D86C08;
-	Tue, 10 Oct 2023 16:57:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id B7FDA86C53;
+	Tue, 10 Oct 2023 16:58:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="ZQ81do+Q";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CTIXHF7S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D22486C08; Tue, 10 Oct 2023 16:57:51 +0200 (CEST)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id DA10682BBF; Tue, 10 Oct 2023 16:57:54 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6C8F82BBF
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:57:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7845F86BC8
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:57:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-9936b3d0286so1040470466b.0
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 07:57:47 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-53808d5b774so10327463a12.3
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 07:57:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1696949867; x=1697554667; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696949869; x=1697554669; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=w+q0byOOa3+p/fCAAr6hYh8en5lJmpuMGarCfLXX1S8=;
- b=ZQ81do+QLqcNiQs953XGP4wiccUr/DG653+XXzfL8P/f2bDuTzllQT/0DU1IUCrYfp
- 3RnAWBfwuo6ulX/V9peeqsPxwl4U0Ca1E6HpvjAR1gsB1ROrWFjbh6akhddggqH4Ylcd
- 7f+rcI2zezIBaGiLXa9ynFyqx2Cy0xoeV5w9zveOTyFVTUL/Q8dn9k7fAzuA2FmhB8QM
- EtW0f8BIDlJJ4iNu1SRYOZHTYHYyC0lr0OoxWAwkEgekuJfkYanu4T+T2znqK/RQIsen
- M0xv4E59IQARkuZEmZ5uUSd1C7gQLUixe0TrY3Ec6pn/Cts/xXlo/ORnz7Hsv52TCLFb
- 0b+w==
+ bh=sIU3luLFmYVWZy+Nk41KCRJ2jgUd0i3H6NopASuE5GI=;
+ b=CTIXHF7S9n+UwZdIaelOIzuOiObCdqzy1pYTopAHAP3aAD2y92X5TW49Y7hz+SN4x5
+ CuFRtNx1/B8updwf2oadxtFDpYAeLBYev1B9QpalyNpcbK/CiXZLaJzd9VI/+UBU5uvf
+ bG4KQHXIw/5MH0EQ0YYyHQaOkypfCUZvth4FI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696949867; x=1697554667;
+ d=1e100.net; s=20230601; t=1696949869; x=1697554669;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=w+q0byOOa3+p/fCAAr6hYh8en5lJmpuMGarCfLXX1S8=;
- b=pzVKH8RDDoSrVFTG+zfSBjBsc95641WDtUVcjje1+PKM8e1KEf6eBWbNXNNxuEMWuf
- AGBCaJBTYqRK6qak898Dj66gGDRyaRhZzmWz4FJPk+qbCXFSkozOWX7HBThedmfsDG1v
- IWWWhX4Vnk3/NLmWlp5AJRDjsMLd/GJ4jyf30ZGeHwCYez2ai9fK2FvLtmMZNoxgBNdq
- Paa3cE3feHTTjsrIQdzS3cRB35aXxRF2LVIswAP88DUPCKCAOxEy5bn4ptgFc37VeBi3
- MUnlylI7hz9ppJT6qrX2zL1FRuGkkkY5vQDygdSTZ7347cpbPK3izGzOs0COruQYSgtL
- jElQ==
-X-Gm-Message-State: AOJu0Yzxw5FngJT/draTugbDml7bV+3vG53H6u4LBlvgNHiQ+A1PeURg
- tEiPTj6Wdp1JKfHU53YcnnEK1IMsXQlqVu8SIuhVKA==
-X-Google-Smtp-Source: AGHT+IGm1lt0SdAtN0KTQkUf2YIhU8/naxBWvAGpv/+NPrlos4Fqe9vmRL2kAclZhwTJqzIL/HenVVAkjT6f2dXVjZs=
-X-Received: by 2002:a17:906:cc4b:b0:9ba:fe6:224 with SMTP id
- mm11-20020a170906cc4b00b009ba0fe60224mr8048436ejb.59.1696949866928; Tue, 10
- Oct 2023 07:57:46 -0700 (PDT)
+ bh=sIU3luLFmYVWZy+Nk41KCRJ2jgUd0i3H6NopASuE5GI=;
+ b=HH0sUSzLEgMgNbQ1PWDtQS9yEzn4/HesqA/drRcuc74NdAGKOkjGN0Lncu9h2EVsQr
+ ElD2kZx9qxGnS57B8HUqbZpeIP5eAIB+p2/rDjXllxeHscN0x0lAKOXPbCR0dUgj/MrH
+ /pbfL73FD2S7WCQXh8OlC53ULGi/+f1zlWnLQODabPp9PbDNnD6UGl8wgxihCSCrwVtX
+ HKZgE+aWTlcpLHBreXzpWrqvrkfTtgDS0+gAlzxM8xkolTg3ih+Og+Rjkjx2oV+GHIa/
+ 1GsbUPeKjf6TDvTPdA2pxWhSyGK5FLgJc1dvS++WLxZM77tAM4q1rJvbfFZiPL5IN7Ii
+ WIQg==
+X-Gm-Message-State: AOJu0Yw9XMSrkX2/wmf83F/TnBDbKXkMY8g0VYpNz2K6wo94EIr5tKL/
+ Uc9DSNW8XEUPe34SJf5xVCeZ4FZYxYCSmpJu5faS9f+IySe3EomXe6c=
+X-Google-Smtp-Source: AGHT+IEae3ypVXQ387hEnI1OoA5SOpWbmBcAwlBtbNs0/Dh7dg30eGviCoXp89Pk6k6cTTseL/bET42EsKidsu4Id5g=
+X-Received: by 2002:a17:906:1017:b0:99b:627b:e96d with SMTP id
+ 23-20020a170906101700b0099b627be96dmr14138151ejm.44.1696949868547; Tue, 10
+ Oct 2023 07:57:48 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231008015312.1988866-1-seanga2@gmail.com>
-In-Reply-To: <20231008015312.1988866-1-seanga2@gmail.com>
-From: Simon Glass <sjg@google.com>
-Date: Tue, 10 Oct 2023 08:57:30 -0600
-Message-ID: <CAPnjgZ2K+rHVf1ohmGF2BE74uJFNEu9z00=2botEhfnUEzTc0A@mail.gmail.com>
-Subject: Re: [PATCH] net: Add option for tracing packets
+References: <20231008020156.1990125-1-seanga2@gmail.com>
+In-Reply-To: <20231008020156.1990125-1-seanga2@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 10 Oct 2023 08:57:37 -0600
+Message-ID: <CAPnjgZ0_zAQxozOpEKrr1oHKuJy1rBVQA1H1E1n2s4jXa3QS_g@mail.gmail.com>
+Subject: Re: [PATCH] malloc: Enable assertions if UNIT_TEST is enabled
 To: Sean Anderson <seanga2@gmail.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
@@ -86,21 +81,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 7 Oct 2023 at 20:01, Sean Anderson <seanga2@gmail.com> wrote:
+On Sat, 7 Oct 2023 at 20:02, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> Add an option to trace all packets send/received. This can be helpful when
-> debugging protocol issues, as the packets can then be imported into
-> wireshark [1] and analyzed further.
->
-> [1]
-https://www.wireshark.org/docs/wsug_html_chunked/ChIOImportSection.html
+> dlmalloc has some sanity checks it performs on free() which can help
+detect
+> memory corruption. However, they are only enabled if DEBUG is defined
+before
+> including common.h. Define DEBUG earlier if UNIT_TEST is enabled so that
+> assertions are enabled in sandbox.
 >
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
 >
->  include/net.h | 4 ++++
->  net/net.c     | 3 +++
->  2 files changed, 7 insertions(+)
+>  common/dlmalloc.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
