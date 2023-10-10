@@ -4,73 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D53FFCD8CAB
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 16:19:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E81A2CD8CAF
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 17:06:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11F4B86B75;
-	Tue, 10 Oct 2023 18:19:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 13F2F85423;
+	Tue, 10 Oct 2023 19:06:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H5OKr7bO";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="DyA6xxGA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1D3386B84; Tue, 10 Oct 2023 18:19:51 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id ABB9B86A02; Tue, 10 Oct 2023 19:06:14 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B20586B74
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 18:19:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CADF85423
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 19:06:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=monakov.y@gmail.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-66cef33a4bdso5629446d6.1
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 09:19:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696954785; x=1697559585; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wzqyc44C/N+Bi5nP285ENTzfzE+fKy4jg+WpWPYT67M=;
- b=H5OKr7bOy7uRrIG+Pxd/JFwCLOxzwMWboR3RPui3iZ1GZcU549Im6Mldm+Ct4HCeIv
- 2mbOYqKadQ7dwcP2OnJ7CVVfuGrrY6qneV9wVW8DiEnXXks1Yy3XZ9TJKqhMITUzEE7Q
- Xiw0PcskG6RqweO1/LIjinMwrOKAStNT74c8rFTRSE8x+0yJIoxkTT//4LpLIzZCANvJ
- ZWoCgQz8joDwqO8oePXbvKfzI/APPc6qPCkkNGGF149yZUqgmKK1cw/YY5FEaA/eICGp
- n2VFT24f+RQecCWMRLyI44Xjz9xqX1JbJlMp3Q16cFh4MGQ9AYjFTsprcOVGbGjGdglH
- X3LQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696954785; x=1697559585;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wzqyc44C/N+Bi5nP285ENTzfzE+fKy4jg+WpWPYT67M=;
- b=QyHSmDVUb5il2BGJJ8hZHhy3Wdis02IzZMj/qLILj9PRI94B8N6o2lQOw5SiHmGWjH
- Jdj21AWsZkistQWiqipErx5gNQwj6PbRW3YPOGE6R0aBHjbpSZAAO/RiuiAOagHkz4E2
- BFQ0d/STU9DO9IbA/wjhBq0/tBdFoDf7w6WXCsrYwLCbM43JndIpjR5RXASgYtFF6iIc
- HYcJ1s1dbzaSKjlVxZdZGbNvpvx6BUtasZgwXZanwDuDr8RO+FNXGuQwYfDb+0zg2M79
- L5OMMnm8H9gVTPaoHMjUcoUK1F/3Q4dBF2QT9/gYJLM3iVGerSi0Gd0G1WkCrmkWqbSX
- ZDZw==
-X-Gm-Message-State: AOJu0YyB13hvJInRueSGV9p6l/VarhTuEcHz2P7vrJwBVRsVd9YHr8nV
- aruf0g0pvc2eSyauBMNA8mxmJMJX0wg0iL9tMZrRsmsaP1XIzjrW
-X-Google-Smtp-Source: AGHT+IFxn0ObGFKdJvxgw4ZvVRM2ZjPP4HsjbjRqlW07HCBY9lnKXk9fufVcdo3yiw9Mg1h+eIi/4CkZpbVK8GFlTUA=
-X-Received: by 2002:a05:6214:1907:b0:65b:1ad4:ca7e with SMTP id
- er7-20020a056214190700b0065b1ad4ca7emr17764348qvb.56.1696954785307; Tue, 10
- Oct 2023 09:19:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=rob@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 400EB615AB;
+ Tue, 10 Oct 2023 17:06:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D7EF4C433C7;
+ Tue, 10 Oct 2023 17:06:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1696957563;
+ bh=fQxhBhW+tBsI74bpxoq2WhIg3iV6j9PgVFhC0vGwcw4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=DyA6xxGAjMcq+pqRbop6Hl9L/a7izNrQx+URxcKHk4934m/rfCpF63VFp05pP7x8t
+ oYV5j5bsLcXaK5nEP1CSnbk8TEubM0pjGVGBuDee6xu5DV7Gr21jNks+xxnIEDqSbN
+ l5lHI+PA3HtR260Migd0jbiU0L+XaziHQezq21xNdTpiHcMtB3twWogwuHGGwxauBz
+ ApJxqcjeKTyfLyunkMYYurP+MRGg5Wp2VzbZJ7GiNVpHXbGE4ZtWm9gV3JbmtWAdKA
+ nH7/wVJ1I0ZR8LQfvdlzZ7oxPNQaj38l9ZwSPll8kUSuuy9a1ggijHyDW3aSUBW7x2
+ 666ToubamQsOw==
+Received: (nullmailer pid 1059527 invoked by uid 1000);
+ Tue, 10 Oct 2023 17:06:00 -0000
+Date: Tue, 10 Oct 2023 12:06:00 -0500
+From: Rob Herring <robh@kernel.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>, devicetree@vger.kernel.org,
+ Michael Walle <mwalle@kernel.org>, Richard Weinberger <richard@nod.at>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org,
+ linux-mtd@lists.infradead.org,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Conor Dooley <conor+dt@kernel.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v3 2/3] dt-bindings: mtd: binman-partition: Add binman
+ compatibles
+Message-ID: <20231010170600.GA1046256-robh@kernel.org>
+References: <20231009201005.1964794-1-sjg@chromium.org>
+ <20231009201005.1964794-2-sjg@chromium.org>
+ <169688631230.3255827.3268332902446136449.robh@kernel.org>
+ <CAPnjgZ3-eX5r02K_499wz3dQOs8nOO5o16CL9w1xyNsTXL0L2A@mail.gmail.com>
 MIME-Version: 1.0
-References: <775fa336fa5bfb2b9e1e892ee631bd743ea12364.camel@gmail.com>
- <CAPnjgZ2Zp6cCPxLG7g=F0+FkDLJMheuiw-GeGbsTtH5KoAPGjg@mail.gmail.com>
-In-Reply-To: <CAPnjgZ2Zp6cCPxLG7g=F0+FkDLJMheuiw-GeGbsTtH5KoAPGjg@mail.gmail.com>
-From: Yurii Monakov <monakov.y@gmail.com>
-Date: Tue, 10 Oct 2023 19:19:34 +0300
-Message-ID: <CAM-z4v6y5pRKofG6XaO01fvPkDmqL+1D0sW8fG2_=yOPjUufMQ@mail.gmail.com>
-Subject: Re: [PATCH v3] cli: Consume invalid escape sequences early
-To: Simon Glass <sjg@google.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3-eX5r02K_499wz3dQOs8nOO5o16CL9w1xyNsTXL0L2A@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,70 +79,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon,
+On Mon, Oct 09, 2023 at 04:02:40PM -0600, Simon Glass wrote:
+> Hi Rob,
+> 
+> On Mon, 9 Oct 2023 at 15:18, Rob Herring <robh@kernel.org> wrote:
+> >
+> >
+> > On Mon, 09 Oct 2023 14:10:00 -0600, Simon Glass wrote:
+> > > Add two compatible for binman entries, as a starting point for the
+> > > schema.
+> > >
+> > > Note that, after discussion on v2, we decided to keep the existing
+> > > meaning of label so as not to require changes to existing userspace
+> > > software when moving to use binman nodes to specify the firmware
+> > > layout.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > Changes in v3:
+> > > - Drop fixed-partitions from the example
+> > > - Use compatible instead of label
+> > >
+> > > Changes in v2:
+> > > - Use plain partition@xxx for the node name
+> > >
+> > >  .../mtd/partitions/binman-partition.yaml      | 48 +++++++++++++++++++
+> > >  1 file changed, 48 insertions(+)
+> > >  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml
+> > >
+> >
+> > My bot found errors running 'make DT_CHECKER_FLAGS=-m dt_binding_check'
+> > on your patch (DT_CHECKER_FLAGS is new in v5.13):
+> >
+> > yamllint warnings/errors:
+> >
+> > dtschema/dtc warnings/errors:
+> > /builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/mtd/partitions/binman-partition.yaml: properties:compatible:items: {'enum': ['u-boot', 'atf-bl31']} is not of type 'array'
+> >         from schema $id: http://devicetree.org/meta-schemas/string-array.yaml#
+> >
+> > doc reference errors (make refcheckdocs):
+> >
+> > See https://patchwork.ozlabs.org/project/devicetree-bindings/patch/20231009201005.1964794-2-sjg@chromium.org
+> >
+> > The base for the series is generally the latest rc1. A different dependency
+> > should be noted in *this* patch.
+> >
+> > If you already ran 'make dt_binding_check' and didn't see the above
+> > error(s), then make sure 'yamllint' is installed and dt-schema is up to
+> > date:
+> >
+> > pip3 install dtschema --upgrade
+> >
+> > Please check and re-submit after running the above command yourself. Note
+> > that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+> > your schema. However, it must be unset to test all examples with your schema.
+> >
+> 
+> Oh dear, I didn't notice that output but I see it now. Could the check
+> return a non-zero exit code if something goes wrong?
 
-On Tue, Oct 10, 2023 at 5:58=E2=80=AFPM Simon Glass <sjg@google.com> wrote:
->
-> On Tue, 10 Oct 2023 at 02:16, Yurii Monakov <monakov.y@gmail.com> wrote:
-> >
-> > Unexpected 'Esc' key presses are accumulated internally, even if it is
-> > already clear that the current escape sequence is invalid. This results
-> > in weird behaviour. For example, the next character after 'Esc' key
-> > simply disappears from input and 'Unknown command' is printed
-> > after 'Enter'.
-> >
-> > This commit fixes some issues with extra 'Esc' keys entered by user:
-> >
-> > 1. Sequence <Esc><Esc><Enter> right after autoboot stop gives:
-> > =3D>
-> > nknown command 'ry 'help'
-> > =3D>
-> > 2. Sequence <Esc><p><r><i><Enter> gives:
-> > =3D> ri
-> > Unknown command 'ri' - try 'help'
-> > =3D>
-> > 3. Extra 'Esc' key presses break backspace functionality.
-> >
-> > Signed-off-by: Yurii Monakov <monakov.y@gmail.com>
-> > ---
-> > Changes for v2:
-> > - add tests and reword commit message
-> > Changes for v3:
-> > - fix indentation
-> >
-> >  common/cli_getch.c  |  2 ++
-> >  test/common/cread.c | 12 ++++++++++++
-> >  2 files changed, 14 insertions(+)
->
-> Reviewed-by: Simon Glass <sjg@chromium.org>
->
-> Unfortunately this shows a design flaw, one which is hard to fix in gener=
-al. But this does improve it.
->
-> The flaw is that we assume that character sequences have a time gap betwe=
-en them, which allows figuring out when a sequence has finished.
->
-> But when starting up there may be buffered output with no gaps. I don't t=
-hink there is a general fix for this problem. One option is to have a speci=
-al mode at the start, where escape sequences are ignored. But the user may =
-press an arrow key on startup.
->
-> So I don't have anything much to suggest here. Let's see how this fix goe=
-s. Perhaps it is enough.
->
-> Regards,
-> Simon
+No, because things go wrong too often and then it breaks for everyone. 
+It's better now, but only because of the above reports and 3 
+maintainers.
 
-> One option is to have a special mode at the start, where escape sequences=
- are ignored
-I think that there is no reason to emit parts of invalid escape
-sequences, as current code does.
-There is a very little chance (at least for a human being) to input
-such sequences by intent.
+Also, it is not fatal. The schemas are checked against the DT 
+meta-schema, but are used for validation if they pass just draft2019-09 
+meta-schema. That allows new DT meta-schema checks to not start 
+excluding previously used schema.
 
-> But the user may press an arrow key on startup.
-As a fix, autoboot code can check for 'Esc' and keep it as a part of
-input string.
-
-Best Regards,
-Yurii
+Rob
