@@ -4,77 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5AC0CD80CF
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 12:59:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2B20CD80C1
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 13:00:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEA2A86DC5;
-	Tue, 10 Oct 2023 14:58:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6275286D9C;
+	Tue, 10 Oct 2023 14:58:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uDTxerjv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XR75Wp0n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6075686B87; Tue, 10 Oct 2023 14:58:32 +0200 (CEST)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id D92E486D9C; Tue, 10 Oct 2023 14:58:34 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF94F86DD3
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:58:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C018586D85
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:58:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-d9a3d4b9456so1417295276.3
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:58:27 -0700 (PDT)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-59f82ad1e09so70322027b3.0
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:58:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696942705; x=1697547505; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1696942711; x=1697547511; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nF2oiEhcTdsb3DG9bu1x3ot9Oxs6ktaquG2xXILCDaQ=;
- b=uDTxerjv0lCslOVvFhW53X9gsm9RhyEqidAV4O5j5zywiLAi/f8iqLaRoFIuEqAi8W
- W10eynX2UlUmJo8/NCQkyCkUmV+9VQ3DlNVfq/+qAs0IFyZd4rAJ/w0X3CaWqx9fPvdl
- bm/dezMLO2FurE6VRBAQMlz9vNHVSyxJxjy6U=
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=YF+pi+efNqYMXdutfX5BCHUVuOlTMtILgky47T+oW/M=;
+ b=XR75Wp0ndVZRF6oHJLcVwU7Fx5Ax67T9AUEWeiKt57+NDySIsjqq6R8eoY6eTexwVC
+ J0qmHDfzLcl6ssPPvWnC0KCFI1BYYPTQi0l0V3q3IuJm4U/yZFekbpG6Llx5jd9B4cXa
+ iBzIp9Glhx8/gxyHS7jQLw3g1Nixvkgw6EBvs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696942705; x=1697547505;
+ d=1e100.net; s=20230601; t=1696942711; x=1697547511;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nF2oiEhcTdsb3DG9bu1x3ot9Oxs6ktaquG2xXILCDaQ=;
- b=SRAqT1Y/RAIqPWFDTo6X4pPKywi9lLI8M6iJGh0LFN7APTVs84vBwktHIMXMq9BFzg
- GRzQbIWYd4QeFe+qmK2mCYTbepfhy865cmD7mwK6/BT1KLsmN6f0djB4T/oQDE4aXNLC
- Ydz9g34CGCXT2VDnZwf1zJtkYeDq9WASzKt1wN7pH5mo72Ii6YoptD0gJ6dVMQo+Zvmp
- p/NxO7lOarugC0ia+tVdoa9lvvyKJOmwJRNVmB2ypKKOs04jV7/K3ctW6Gsitn6nazNR
- Dc6SvOYVe6UpcbgFfI5L6u1D/kkg1AmG1aMugzgDWRwguGWXn9aXIQ/+yNutEu00x4EH
- XqTA==
-X-Gm-Message-State: AOJu0Yw2ktocnEyJR8gXh3YPcb6XsvmZ0e7lTuT13by0KNuhQ+Lm4+Ob
- aIMix0za0wDii9QMG/m4A4SJuTzdKterhvu5HMPxcg==
-X-Google-Smtp-Source: AGHT+IE75SYN6+nQ8Y4iMU/z9ThtcuX4wqLVGT72IWwWeHBdmjKbUVZtfL4ZIGNo/q7rTtlFCR0mgA==
-X-Received: by 2002:a25:9986:0:b0:d9a:c1c:1159 with SMTP id
- p6-20020a259986000000b00d9a0c1c1159mr5182475ybo.59.1696942705575; 
- Tue, 10 Oct 2023 05:58:25 -0700 (PDT)
+ bh=YF+pi+efNqYMXdutfX5BCHUVuOlTMtILgky47T+oW/M=;
+ b=YlFcbtvh/ogoLm/f1DAR6LL5CEN9uRkxbjV6d4NFrgg51VQmoSQDKPcZMaCPpuHjFb
+ XpdEmjPq2z0tfAglklTHGiY3q14FUlDh6fh23QL+iL6Bfq6WT4Uw1/AbQyjhoDMQFc6M
+ LQIooGQf8KMY3OoseGB3jei+VhZFJ0s6oi6KPaa3UAqFdl7iPaxs7+DmBMA8Hjch2lrv
+ bX3Djek2WS2jVXJLG8ePRwfTcqGJ48eWLKSkuUD8L+zhX4kdAt8ORL54S6gCSeJQy9T7
+ D0GIWQWaQmOJDDnRyA7Rf1KtoHxRazuxTiTZZLahR/jvPzb+NeEQKz7NVhLYwkk6kFmL
+ rOvQ==
+X-Gm-Message-State: AOJu0Ywwhh7Ice2vkki23FKhGUuKyYkhkPActues5LKBVjiacSbx7cbU
+ welnHSlKUFTQJMlaOy8+SgPwgQ==
+X-Google-Smtp-Source: AGHT+IGxJ2ifh6QOWbSLw0Nqtd4+1R0gfg7zeiwYEHbs6yh6bU0OatGtuGFIRqj2PVADCxTEZ82TqA==
+X-Received: by 2002:a81:af4b:0:b0:5a7:af65:4ec6 with SMTP id
+ x11-20020a81af4b000000b005a7af654ec6mr3133138ywj.32.1696942711527; 
+ Tue, 10 Oct 2023 05:58:31 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6c43-4eba-c113-e8cd.res6.spectrum.com.
  [2603:6081:7b00:6400:6c43:4eba:c113:e8cd])
  by smtp.gmail.com with ESMTPSA id
- v8-20020a05690204c800b00d8514dcbbfdsm3675329ybs.13.2023.10.10.05.58.24
- for <u-boot@lists.denx.de>
+ q65-20020a0de744000000b005a4c2316412sm4457164ywe.137.2023.10.10.05.58.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 05:58:25 -0700 (PDT)
-Date: Tue, 10 Oct 2023 08:58:23 -0400
+ Tue, 10 Oct 2023 05:58:30 -0700 (PDT)
+Date: Tue, 10 Oct 2023 08:58:28 -0400
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Subject: Re: [PATCH 3/3] exynos: Cleanup exynos_init
-Message-ID: <20231010125823.GZ2227687@bill-the-cat>
-References: <20230921233248.159047-1-trini@konsulko.com>
- <20230921233248.159047-3-trini@konsulko.com>
+To: Udit Kumar <u-kumar1@ti.com>
+Cc: nm@ti.com, vigneshr@ti.com, patrick.delaunay@foss.st.com,
+ sjoerd@collabora.com, sjg@google.com, u-boot@lists.denx.de,
+ xypron.glpk@gmx.de, michal.simek@amd.com, dsankouski@gmail.com,
+ kettenis@openbsd.org, sumit.garg@linaro.org, sam.shih@mediatek.com,
+ mark.kettenis@xs4all.nl, sjg@chromium.org, Suman Anna <s-anna@ti.com>
+Subject: Re: [PATCH v2 1/2] lmb: remove overlapping region with next range
+Message-ID: <20231010125828.GA2227687@bill-the-cat>
+References: <20230926112443.4190471-1-u-kumar1@ti.com>
+ <20230926112443.4190471-2-u-kumar1@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="RLWix8MHGOYk6hHX"
+ protocol="application/pgp-signature"; boundary="TvJ5pL82awMLn2E9"
 Content-Disposition: inline
-In-Reply-To: <20230921233248.159047-3-trini@konsulko.com>
+In-Reply-To: <20230926112443.4190471-2-u-kumar1@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,43 +97,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---RLWix8MHGOYk6hHX
+--TvJ5pL82awMLn2E9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 21, 2023 at 07:32:48PM -0400, Tom Rini wrote:
+On Tue, Sep 26, 2023 at 04:54:42PM +0530, Udit Kumar wrote:
 
-> - None of the callers perform error checking and based on the non-empty
->   versions of this function, there's no checking to be done, so make
->   this a void.
-> - Add a default weak version of the function.
-> - Remove the empty versions of exynos_init now that we have a weak
->   version.
+> In case of new memory range to be added is coalesced
+> with any already added non last lmb region.
 >=20
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+> And there is possibility that, then region in which new memory
+> range added is not adjacent to next region. But have some
+> sections are overlapping.
+>=20
+> So along with adjacency check with next lmb region,
+> check for overlap should be done.
+>=20
+> In case overlap  is found, adjust and merge these two lmb
+> region into one.
+>=20
+> Reported-by: Suman Anna <s-anna@ti.com>
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---RLWix8MHGOYk6hHX
+--TvJ5pL82awMLn2E9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSm8ACgkQFHw5/5Y0
-tyyBegv/QXx3Mqe+uTsv489XX/ZvqJsj6Lkri1mC956DJmjbZdXivRFtmrI0cVrL
-2NmQOxYb0E4k8zmq2zSLnEYnNWiZ6I/HJoIdB1XLUg3kKB55MnT2Haqw+4VVB6En
-D63m+Zy+0o9AwqL5os1cHrwC5AXVQmaKGyH3oooUsIIFGjulAfBt++ZBbwImxzyb
-N7ugGhA9ZFyrl+SbzFqqvLCmyPH/rNL3Ycw61FszPEriR7Sct7wS9+ovs4YUUDBl
-YcjE7+Men13IgC7ZcZvqdZUpWIs+GReejtKMD2+KgwOcnmShCuyqc0OOIwYJOBem
-q7eHW0TB7WsKLw2OgNEldXUrIqYY6764zf9GjOf808k26wFp4ef3kMt0ePU0goUc
-z7NTlrwB6RzihC1Eb0D96Xggl9M9p9gOqd09Y8fhCEE7sAvppa6TSW/vn6WScK84
-nabXM6d6i9WZ0829IKtqlKjB8bKYY07+w1/tiRhzl2BRdiXWRViku7NGCU7Gpu5V
-AOWghguf
-=CrwR
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSnQACgkQFHw5/5Y0
+tywKuAv8Dwpc5NuLf+owPLfeOWuWPJ2BwKADU6ErQhFZ9W6S7lxV8nE5PrC/6b3S
+3WsXFlfJGGB9KJCNjBHkDgwldcfz9140l4uKSpQnVkfHDWkI4F5lkUkOm+ES0FYu
+uBGEzioQxYt8HvnsT79QBSm8FQq5J7J0zESh6QnJ+39AmJs0fWicgmigjU5gaqVK
+iSHJKNuHxcnEicp/1eptgJ/u8VrGx1tVHX0kURubrNZ1kW/13MMVl7/c2QDML/DH
+aaIC16WeB6H5MtYFWfjer5WIc+Z7LSNft0R1oHb4z6GdUX62PU1V1N7ZsIkHWebE
+DZGq1SHfsQSDRzA/+GeNsPF/DDNK4ETTXJTr2KLzSxd3+j35+dckQ0AfaKx4G4FF
+CwX33+Wx6/tuPqt3xJa/bXJ5KNwr7BpAk/jNn2yqcopxP5XbfdoBP870gANH5ruG
+VkGpPpFT+A09RnNpn/NLXXF+WahhBJjwzplFNUXKK93GbceSxiJ2Jokhrb3hkQYO
+6MHXdeI6
+=EXQY
 -----END PGP SIGNATURE-----
 
---RLWix8MHGOYk6hHX--
+--TvJ5pL82awMLn2E9--
