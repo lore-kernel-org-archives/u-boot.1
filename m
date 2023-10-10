@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47481CD8C8B
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:15:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A649CD8C89
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:20:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4ACC86C4D;
-	Tue, 10 Oct 2023 16:14:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D43F486B84;
+	Tue, 10 Oct 2023 16:19:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b4vnMocc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="smu0WJJg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A78C86BA1; Tue, 10 Oct 2023 16:14:49 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 4855786459; Tue, 10 Oct 2023 16:19:35 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B95CB86C93
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:14:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5D6486C65
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:19:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1c4456d595cso5646135ad.1
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 07:14:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-59f82ad1e09so71690537b3.0
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 07:19:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696947263; x=1697552063; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Lg817uBSf/h+czd1apIC+lnrjlUIrkjCYcLOYOG9Eas=;
- b=b4vnMoccxO4K/fSX9QN9ZB+fToGNekAvLoItbC7TVEMmYDEas46l5xmGtBYn1+F+2x
- Ka4Bx788ZzH0JpTRFiUG0RNCvN90GGDQ6qtKnSm2HipKMoKqRn/lRbIP0b/TL4dD2i2V
- HbGTGSrYgcMP7G3+Fz5RH2kMMqg6St527pELNzWE7ePP4f8FdnG2iBQmjyWoRZqJVvoy
- d2r9r7ehfYdlPdTyHuY7872n3KAQlESxTbBhx8r6QD4Z28+XUotPo05OQnaKUUOL0dfI
- /Pxj4kV4RNTgMRJcGqHF4EEjUVebT2H+vio+b3ewTePhW8WeyMqOPhKhj/YuTmTkyPQx
- Kq0Q==
+ d=konsulko.com; s=google; t=1696947550; x=1697552350; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=1jWwCd7LmqaMU1w2olihnS0gt7GvzpsdOm6+zFe3xtk=;
+ b=smu0WJJgh4P/DqXLDOIxDrWO8KcL9aMrztKjWADX6VstL82NFeIl39Q/w26jjQdt1M
+ mwAuDefTc4/RF7LU4u5hJ2LuBhgDZx2oU9b0Pr/tEGKNH4L2104G/hmXWwaPYx3sUdhJ
+ KNospFLUy3OJNfWBBiofZtPWEoRMKgU8lEhgo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696947263; x=1697552063;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Lg817uBSf/h+czd1apIC+lnrjlUIrkjCYcLOYOG9Eas=;
- b=EG7EOYnFT1U0DxEt5wQSuvM7CUwQVjz0MUp7DPIs1PJXOTTe39S9W3KKMT+qGURhqY
- 3Fzg9zT8ucy3q3XP2HCMGudSh58qCNtAbSvzkBl6TlfnW7O9Svel4hm+F9hCOAKk0BIC
- ecCbsX+iqS4B3nP+53oEB5Ew//lQ6MeEmlRHkdqxa1noXU2IV6yYGFWoNx6nM8Y9++wc
- fSBwWOmKYfzURdGftipEYEOEKEwwx/E92suMR33Enc45sMkkKaqKWteb/80AVB0WNZW2
- HbbpZRmXbvs9yz316N33HU7hvHsq/sZ0TI2w8i6cONgw/mDRAC2JfZkZPaB7vx8DVp+V
- jRZA==
-X-Gm-Message-State: AOJu0Yxn80+ycdA9iKqdk0gLaTkmBiSMSlnIaI+GUYj4xTA7tO4LXM4w
- 80doUSWvrv4sVtSEJX/jIyY=
-X-Google-Smtp-Source: AGHT+IG8k9vZOU0es5M/VfeJk6XVtALy0ZTFom4TuFmPth2tfQO0fy0Q/EuHcoZXmg2K9xM/mW3RqQ==
-X-Received: by 2002:a17:902:d2c1:b0:1c1:fbec:bc32 with SMTP id
- n1-20020a170902d2c100b001c1fbecbc32mr20585795plc.6.1696947262688; 
- Tue, 10 Oct 2023 07:14:22 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:4e59:4c23:49e8:22bb])
+ d=1e100.net; s=20230601; t=1696947550; x=1697552350;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1jWwCd7LmqaMU1w2olihnS0gt7GvzpsdOm6+zFe3xtk=;
+ b=HcR8UQ2xJT42KoTdPT2haU254NXG3OhcDhYIX/EYayK4YePS1icNyUJPMkfRYyXMRs
+ lt9xmtNVv2fboIGCB5fcXybKRG1hfqUdiWT+QMeJzAZ3c/98BSQT8oqLXnbtI+CQvkpq
+ Ip7ceLfyq34QMiCPfNyG/uj/lelm/3mj1TkT4ULXXIksdo7XmdUiIuBwnx/Xp32FdfRt
+ UfTf9gGkYtmCGkuwusH95mbk/LZNhhmxsB/UOaB3vJ8sEbJyx5h97Shn5yq7HkfCxtgG
+ /PFzKIfDMk1LuPwbEcccbeJ6nbauZqgX2jr0lXvJaeqMG3hiCv5sdx7E5PcMyElAsKGz
+ GLdg==
+X-Gm-Message-State: AOJu0YwHOLzaFYxW1Rxwc2pxkgbTt4OuZcMg6uWPpVvGKTtqd5uNmcYC
+ 66BfXm3e8pAoJDhIpn9Hzu5/fw==
+X-Google-Smtp-Source: AGHT+IGmEdq2JXzq1BJLE1KGgrhKUO4XZQPXJf2ADjhS3vPDbHnXYtG4tUr/z+N5KXZ4Oje5769y6w==
+X-Received: by 2002:a25:2d24:0:b0:d9a:58aa:5807 with SMTP id
+ t36-20020a252d24000000b00d9a58aa5807mr1991387ybt.30.1696947550359; 
+ Tue, 10 Oct 2023 07:19:10 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-6c43-4eba-c113-e8cd.res6.spectrum.com.
+ [2603:6081:7b00:6400:6c43:4eba:c113:e8cd])
  by smtp.gmail.com with ESMTPSA id
- s7-20020a170902988700b001c627413e87sm513385plp.290.2023.10.10.07.14.20
+ n2-20020a25d602000000b00d5d4bae6fdfsm3782802ybg.30.2023.10.10.07.19.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 07:14:22 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: u-boot@lists.denx.de, Eduard Strehlau <eduard@lionizers.com>,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] smegw01: Remove misuse of CONFIG_ENV_IS_NOWHERE
-Date: Tue, 10 Oct 2023 11:14:12 -0300
-Message-Id: <20231010141412.3681919-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ Tue, 10 Oct 2023 07:19:08 -0700 (PDT)
+Date: Tue, 10 Oct 2023 10:19:06 -0400
+From: Tom Rini <trini@konsulko.com>
+To: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Cc: sjg@chromium.org, etienne.carriere@st.com, u-boot@lists.denx.de,
+ Etienne Carriere <etienne.carriere@foss.st.com>
+Subject: Re: [PATCH v5 15/16] doc: cmd: add documentation for scmi
+Message-ID: <20231010141906.GA3119521@bill-the-cat>
+References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
+ <20230926065750.734440-16-takahiro.akashi@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qylMrnz/ZuyjJjhk"
+Content-Disposition: inline
+In-Reply-To: <20230926065750.734440-16-takahiro.akashi@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,59 +93,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Eduard Strehlau <eduard@lionizers.com>
 
-When using a list of writeable variables, the initial values come
-from the built-in default environment since commit 5ab81058364b ("env:
-Complete generic support for writable list").
+--qylMrnz/ZuyjJjhk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Remove unnecessary misuse of CONFIG_ENV_IS_NOWHERE as default environment.
+On Tue, Sep 26, 2023 at 03:57:49PM +0900, AKASHI Takahiro wrote:
 
-Based on the fix done by commit b16fd7f75f6d ("imx6q: acc: Remove misuse
-of env is nowhere driver").
+> This is a help text for scmi command.
+>=20
+> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
+> ---
+> v4
+> * s/tranport/transport/
+> v2
+> * add more descriptions about SCMI
+> ---
+>  doc/usage/cmd/scmi.rst | 126 +++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 126 insertions(+)
+>  create mode 100644 doc/usage/cmd/scmi.rst
 
-Signed-off-by: Eduard Strehlau <eduard@lionizers.com>
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- board/storopack/smegw01/smegw01.c | 15 ---------------
- configs/smegw01_defconfig         |  1 -
- 2 files changed, 16 deletions(-)
+This needs to be included in doc/usage/index.rst in alphabetical order,
+so that "make htmldocs" passes.  Normally I'd fix this up, but given the
+other problem I'm reporting this along.
 
-diff --git a/board/storopack/smegw01/smegw01.c b/board/storopack/smegw01/smegw01.c
-index 7b2c50a61e..345191b31c 100644
---- a/board/storopack/smegw01/smegw01.c
-+++ b/board/storopack/smegw01/smegw01.c
-@@ -111,18 +111,3 @@ uint mmc_get_env_part(struct mmc *mmc)
- 	return part;
- }
- 
--enum env_location env_get_location(enum env_operation op, int prio)
--{
--	if (op == ENVOP_SAVE || op == ENVOP_ERASE)
--		return ENVL_MMC;
--
--	switch (prio) {
--	case 0:
--		return ENVL_NOWHERE;
--
--	case 1:
--		return ENVL_MMC;
--	}
--
--	return ENVL_UNKNOWN;
--}
-diff --git a/configs/smegw01_defconfig b/configs/smegw01_defconfig
-index 5cfd3d2715..13665ecfd3 100644
---- a/configs/smegw01_defconfig
-+++ b/configs/smegw01_defconfig
-@@ -48,7 +48,6 @@ CONFIG_CMD_SQUASHFS=y
- CONFIG_CMD_FS_GENERIC=y
- CONFIG_OF_CONTROL=y
- CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_NOWHERE=y
- CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
--- 
-2.41.0
+--=20
+Tom
 
+--qylMrnz/ZuyjJjhk
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlXVYACgkQFHw5/5Y0
+tyxhhQwAmsqT8jXrjfYzeF/sETN8ySUQUTsqi9xMCrwG4KjEpVIUnvUBICpiFout
+xKKye3tfUbFWPve816rZ2LcFHM1HtHukz4C1QxjE3ZIyvWLL9lUKwQDEc4Pvvc2U
+/+aZ+JZyeDQXXe6QNjlrMIeoxlHchcdq82ySbRdqbE/QyFGaPjceugbRQ6hV5hm7
+CaNuhk1RDWyBEHmohaNY5lftcBhgI1h9ItR790/gUDweh67Ub3qUnstPJ1QlMot/
+i/QC4N/abZKYlquAXAr3uOJyqw4ISxOJNmTVUUbKync9qTXnhnYowgKrBJT243tC
+DrdLjnBQvAZgvwi5/QL4QOZMl814nMT0v2ot+7iw/zVDajNIIKmpw28sVqIcIVvi
+zVqGeCgsjEqi+qHwuoQrplB6Am6FnXPw1vhODeuJk/gGnG0x4rr9/WcS2/0h4KsE
+T8l/WfmCFSuPE6e1axDb6QMhnDo1sSnPRo2nYoZFXERrI9JNzDli3yEt3GwvhjI2
+Rd141PE3
+=nIQr
+-----END PGP SIGNATURE-----
+
+--qylMrnz/ZuyjJjhk--
