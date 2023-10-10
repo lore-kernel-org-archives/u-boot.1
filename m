@@ -4,77 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 338BECD8C89
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:20:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2FADCD8C96
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:38:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99D0286CAC;
-	Tue, 10 Oct 2023 16:19:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DFA1786416;
+	Tue, 10 Oct 2023 16:38:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dpC8YaHV";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="kxzyVhtT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3AF786459; Tue, 10 Oct 2023 16:19:35 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3E8CE8609B; Tue, 10 Oct 2023 16:38:45 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 095F386CAC
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:19:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5B5086B29
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:38:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5a7a77e736dso18922647b3.1
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 07:19:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696947554; x=1697552354; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=n/qdy1F+tWgfGBIBiMShRorVg4YGEIWoctJYKQ+nwZ8=;
- b=dpC8YaHV3wt5L5cFsKium/PNgoSKtcvOmcDOLCftj5DAp523JwUEDziocOsq/nAprW
- qNh8Jinz7RmNcGh70MV+w/i+SDjUOD5YroituEE99exWckmYXPzmwqw91/E+9OfRAgNS
- /MqTBEsqafX56LYHn/jNldjcs/IBbg/k90/DA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696947554; x=1697552354;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=n/qdy1F+tWgfGBIBiMShRorVg4YGEIWoctJYKQ+nwZ8=;
- b=O+C7Z5epgoRUtWvLa2rM64+2REHZSh6D5HiyGZG3K64MuFoEY4nfKAYDrtTMK6f6uG
- J1or8jD/vFlqVs61SKKlNUxaoGyxsOjEg//dkDaj8hEKIr8gd+MvPtUWtELZHDfSq71a
- kztHW3vLQLC8L+o3rRnL5p+hjdzZspvkVitFovd8fhIh5E3ajAamlrM9tabCErS5SVrt
- +UyxLMeg1UnSwm7Jwg9PdBXRQ0h3ET/omccIGBtg5/w7+AHG81l8DYVl8qZ1skWrabf9
- rh3iD3w6oUVnf0MoA2s+fxQYCyn9Z/7VkdwLiOvWFDCqO02kbgvbxFUG46sY32DGUrUB
- vEFA==
-X-Gm-Message-State: AOJu0YxxXKslJc80uoDjgKKwiqwAIgUn9PIGpoVD6iRHufQLcvNRpfu+
- ZAf6cv8pMKRTcm3iixrlgJ0oHT4ZHs0qVOOnn7Xp4w==
-X-Google-Smtp-Source: AGHT+IFu6gOxl5Xvj8LnH4nMU+ddGkn4jmOSLwGyc6ou0hKy9wJu5rI1t/EeD4XXBaGc+3c3lBr0Qg==
-X-Received: by 2002:a81:ab42:0:b0:5a1:e4bf:ee5a with SMTP id
- d2-20020a81ab42000000b005a1e4bfee5amr18252086ywk.41.1696947553767; 
- Tue, 10 Oct 2023 07:19:13 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-6c43-4eba-c113-e8cd.res6.spectrum.com.
- [2603:6081:7b00:6400:6c43:4eba:c113:e8cd])
- by smtp.gmail.com with ESMTPSA id
- h16-20020a816c10000000b005a7bf2aff15sm515868ywc.95.2023.10.10.07.19.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 07:19:12 -0700 (PDT)
-Date: Tue, 10 Oct 2023 10:19:09 -0400
-From: Tom Rini <trini@konsulko.com>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: sjg@chromium.org, etienne.carriere@st.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v5 00/16] firmware: scmi: add SCMI base protocol support
-Message-ID: <20231010141909.GA5325@bill-the-cat>
-References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
+ spf=pass smtp.mailfrom=eugen.hristev@collabora.com
+Received: from [192.168.0.125] (unknown [82.76.24.202])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: ehristev)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id A345866072B6;
+ Tue, 10 Oct 2023 15:38:37 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1696948718;
+ bh=uHaYX97irDpF+R91SEbPwAznAMkK6q6v0j3rUBXw1p4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=kxzyVhtT/O8/coNDSVkTGfVnt6sAa2h4srrkDydHeNHPt0VSFVE7TPMqDifkGovrs
+ nzzqPrOCTpjMLVqqMZY8iNGVlZ/i8oVZtZzEUMOx/m522hsGygWxBZp4vLSlAGHLzA
+ tOk4J9Uk4HU18SuJzGmTB7uV2alulTaGmjDt2vFbC/4qMzi+gU6+C14RO7N6kM4OP3
+ HPAmraSSRWXYCInLKGgZDQsP8uDb63nOid1EIWkXrcAX857zOVyU7A/GjG/JpuTfF6
+ sigalMwORMsQKOpI/JgJ486lT1+Psuz+nnAm6QMuv/HcwM+cFhVskwuYJ+JhgdJ+R7
+ cPqFi/UUMKCkw==
+Message-ID: <fd84028a-72d2-4efb-bd83-68a1553d8031@collabora.com>
+Date: Tue, 10 Oct 2023 17:38:34 +0300
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PVBKZ2aHO+8J4P1+"
-Content-Disposition: inline
-In-Reply-To: <20230926065750.734440-1-takahiro.akashi@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 4/4] board: Add support for Conclusive KSTR-SAMA5D27
+To: Artur Rojek <artur@conclusive.pl>, Simon Glass <sjg@chromium.org>,
+ Jakub Klama <jakub@conclusive.pl>, Marcin Jabrzyk <marcin@conclusive.pl>
+Cc: Wojciech Kloska <wojciech@conclusive.pl>,
+ =?UTF-8?Q?Rados=C5=82aw_Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
+ u-boot@lists.denx.de
+References: <20231009144151.773721-1-artur@conclusive.pl>
+ <20231009144151.773721-5-artur@conclusive.pl>
+Content-Language: en-US
+From: Eugen Hristev <eugen.hristev@collabora.com>
+In-Reply-To: <20231009144151.773721-5-artur@conclusive.pl>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,133 +74,646 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Artur,
 
---PVBKZ2aHO+8J4P1+
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 10/9/23 17:41, Artur Rojek wrote:
+> Introduce support for Conclusive KSTR-SAMA5D27 Single Board Computer.
+> 
+> Co-developed-by: Jakub Klama <jakub@conclusive.pl>
+> Signed-off-by: Jakub Klama <jakub@conclusive.pl>
+> Co-developed-by: Marcin Jabrzyk <marcin@conclusive.pl>
+> Signed-off-by: Marcin Jabrzyk <marcin@conclusive.pl>
+> Signed-off-by: Artur Rojek <artur@conclusive.pl>
+> ---
+> 
+> v4: - utilize EVT_SETTINGS_R in order to read MAC and serial number from
+>        EEPROM
+> 
+> v3: - use CONFIG_ID_EEPROM to read serial number
+>      - as side-effect of using CONFIG_ID_EEPROM, KSTR-SAMA5D27 now also
+>        correctly uses EEPROM embedded MAC addresses (overlooked in v1-v2)
+>      - use CONFIG_DISPLAY_BOARDINFO_LATE for printing the board model and
+>        serial number, and provide the required checkboard() call
+>      - drop CONFIG_BOARD_LATE_INIT, as not needed anymore
+>      - defconfig cleanup
+> 
+> v2: - remove redundant license text from at91-kstr-sama5d27.dts
+>      - when defining properties in .dts, reference nodes by labels
+>      - drop nodes for usb0 and pmic, as these aren't used by drivers
+>      - switch i2c to flexcom driver and make the necessary dts changes
+>      - sort includes in at91-kstr-sama5d27.dts alphabetically
+> 
+>   arch/arm/dts/Makefile                         |   3 +
+>   arch/arm/dts/at91-kstr-sama5d27.dts           | 131 ++++++++++
+>   arch/arm/mach-at91/Kconfig                    |  12 +
+>   board/conclusive/kstr-sama5d27/Kconfig        |  15 ++
+>   board/conclusive/kstr-sama5d27/MAINTAINERS    |   8 +
+>   board/conclusive/kstr-sama5d27/Makefile       |   5 +
+>   .../conclusive/kstr-sama5d27/kstr-sama5d27.c  | 239 ++++++++++++++++++
+>   configs/kstr_sama5d27_defconfig               |  73 ++++++
+>   include/configs/kstr-sama5d27.h               |  15 ++
+>   9 files changed, 501 insertions(+)
+>   create mode 100644 arch/arm/dts/at91-kstr-sama5d27.dts
+>   create mode 100644 board/conclusive/kstr-sama5d27/Kconfig
+>   create mode 100644 board/conclusive/kstr-sama5d27/MAINTAINERS
+>   create mode 100644 board/conclusive/kstr-sama5d27/Makefile
+>   create mode 100644 board/conclusive/kstr-sama5d27/kstr-sama5d27.c
+>   create mode 100644 configs/kstr_sama5d27_defconfig
+>   create mode 100644 include/configs/kstr-sama5d27.h
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index bde2176ec7f6..c0f3525ed4d3 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -1198,6 +1198,9 @@ dtb-$(CONFIG_TARGET_SAMA5D27_SOM1_EK) += \
+>   dtb-$(CONFIG_TARGET_SAMA5D27_WLSOM1_EK) += \
+>   	at91-sama5d27_wlsom1_ek.dtb
+>   
+> +dtb-$(CONFIG_TARGET_KSTR_SAMA5D27) += \
+> +	at91-kstr-sama5d27.dtb
+> +
+>   dtb-$(CONFIG_TARGET_SAMA5D2_ICP) += \
+>   	at91-sama5d2_icp.dtb
+>   
+> diff --git a/arch/arm/dts/at91-kstr-sama5d27.dts b/arch/arm/dts/at91-kstr-sama5d27.dts
+> new file mode 100644
+> index 000000000000..fe9ec7e5bbc3
+> --- /dev/null
+> +++ b/arch/arm/dts/at91-kstr-sama5d27.dts
+> @@ -0,0 +1,131 @@
+> +// SPDX-License-Identifier: GPL-2.0+ OR X11
+> +/*
+> + * at91-kstr-sama5d27.dts - Device Tree file for Conclusive KSTR-SAMA5D27 board
+> + *
+> + *  Copyright (C) 2019-2023 Conclusive Engineering Sp. z o. o.
+> + *
+> + */
+> +/dts-v1/;
+> +
+> +#include "sama5d2.dtsi"
+> +#include "sama5d2-pinfunc.h"
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/interrupt-controller/irq.h>
+> +#include <dt-bindings/mfd/atmel-flexcom.h>
+> +
+> +/ {
+> +	model = "Conclusive KSTR-SAMA5D27";
+> +	compatible = "conclusive,kstr-sama5d27", "atmel,sama5d2", "atmel,sama5";
+> +
+> +	chosen {
+> +		bootph-all;
+> +		stdout-path = &uart1;
+> +	};
+> +};
+> +
+> +&main_xtal {
+> +	clock-frequency = <12000000>;
+> +};
+> +
+> +&sdmmc0 {
+> +	bus-width = <4>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pinctrl_sdmmc0_cmd_dat_default &pinctrl_sdmmc0_ck_cd_default>;
+> +	status = "okay";
+> +	bootph-all;
 
-On Tue, Sep 26, 2023 at 03:57:34PM +0900, AKASHI Takahiro wrote:
+Can you create a separate file named at91-kstr-sama5d27-u-boot.dtsi ( 
+which is automatically included by the Makefile) which would contain the 
+bootph properties
 
-> This patch series allows users to access SCMI base protocol provided by
-> SCMI server (platform). It will also be utilized in separate patches
-> in the future to add sanity/validity checks for other protocols.
-> See SCMI specification document v3.2 beta[1] for more details about SCMI
-> base protocol.
->=20
-> What is currently not implemented is
-> - SCMI_BASE_NOTIFY_ERRORS command and notification callback mechanism
->=20
-> This feature won't be very useful in the current U-Boot environment.
->=20
-> [1] https://developer.arm.com/documentation/den0056/e/?lang=3Den
->=20
->=20
-> Test
-> =3D=3D=3D=3D
-> The patch series was tested on the following platforms:
-> * sandbox
-> * qemu-arm64 with OPTEE as SCMI server
+(Have a look at arch/arm/dts/at91-sama5d29_curiosity-u-boot.dtsi for 
+example )
 
-I have two problems.  The first is that for sandbox, this series is not
-bisectable as a commits fail to build due to needing a definition in the
-test before it's added:
-/home/uboot/work/u-boot/u-boot/test/dm/scmi.c: In function 'dm_test_scmi_cl=
-ocks':
-/home/uboot/work/u-boot/u-boot/test/dm/scmi.c:117:21: warning: implicit dec=
-laration of function 'scmi_get_protocol' [-Wimplicit-function-declaration]
-  117 |         clock_dev =3D scmi_get_protocol(agent_dev, SCMI_PROTOCOL_ID=
-_CLOCK);
-      |                     ^~~~~~~~~~~~~~~~~
-/home/uboot/work/u-boot/u-boot/test/dm/scmi.c:117:50: error: 'SCMI_PROTOCOL=
-_ID_CLOCK' undeclared (first use in this function)
-  117 |         clock_dev =3D scmi_get_protocol(agent_dev, SCMI_PROTOCOL_ID=
-_CLOCK);
-      |                                                  ^~~~~~~~~~~~~~~~~~=
-~~~~
-/home/uboot/work/u-boot/u-boot/test/dm/scmi.c:117:50: note: each undeclared=
- identifier is reported only once for each function it appears in
-/home/uboot/work/u-boot/u-boot/test/dm/scmi.c: In function 'dm_test_scmi_re=
-sets':
-/home/uboot/work/u-boot/u-boot/test/dm/scmi.c:182:50: error: 'SCMI_PROTOCOL=
-_ID_RESET_DOMAIN' undeclared (first use in this function)
-  182 |         reset_dev =3D scmi_get_protocol(agent_dev, SCMI_PROTOCOL_ID=
-_RESET_DOMAIN);
-      |                                                  ^~~~~~~~~~~~~~~~~~=
-~~~~~~~~~~~
-make[4]: *** [/home/uboot/work/u-boot/u-boot/scripts/Makefile.build:256: te=
-st/dm/scmi.o] Error 1
+In theory we would like the board dts file to be identical with Linux ( 
+as much as possible if not identical ), and have specific U-boot props 
+in such a separate file.
 
-Second, the series causes this failure:
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-_______________________________ test_ut[ut_dm_dm_test_scmi_cmd] ___________=
-____________________
-test/py/u_boot_spawn.py:195: in expect
-    c =3D os.read(self.fd, 1024).decode(errors=3D'replace')
-E   OSError: [Errno 5] Input/output error
 
-During handling of the above exception, another exception occurred:
-test/py/tests/test_ut.py:497: in test_ut
-    output =3D u_boot_console.run_command('ut ' + ut_subtest)
-test/py/u_boot_console_base.py:266: in run_command
-    m =3D self.p.expect([self.prompt_compiled] + self.bad_patterns)
-test/py/u_boot_spawn.py:204: in expect
-    raise ValueError('U-Boot exited with %s' % info)
-E   ValueError: U-Boot exited with signal 11 (SIGSEGV)
------------------------------------- Captured stdout call -----------------=
---------------------
-=3D> ut dm dm_test_scmi_cmd
-Test: dm_test_scmi_cmd: scmi.c
-SCMI device: scmi
-  protocol version: 0x20000
-  # of agents: 2
-      0: platform
-    > 1: OSPM
-  # of protocols: 3
-      Clock management
-      Reset domain management
-      Voltage domain management
-  vendor: U-Boot
-  sub vendor: Sandbox
-  impl version: 0x1
-Denying access to device:0 failed (-13)
-Denying access to protocol:0x14 on device:0 failed (-13)
-Reset failed (-13)
-Test: dm_test_scmi_cmd: scmi.c (flat tree)
-SCMI device: ?n
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-FAILED test/py/tests/test_ut.py::test_ut[ut_dm_dm_test_scmi_cmd] - ValueErr=
-or: U-Boot exited...
+> +};
+> +
+> +&uart1 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pinctrl_uart1_default>;
+> +	status = "okay";
+> +	bootph-all;
+> +};
+> +
+> +&macb0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pinctrl_macb0_rmii &pinctrl_macb0_phy_irq>;
+> +	phy-mode = "rmii";
+> +	status = "okay";
+> +
+> +	ethernet-phy@0 {
+> +		reg = <0x0>;
+> +		reset-gpios = <&pioA 44 GPIO_ACTIVE_LOW>;
+> +	};
+> +};
+> +
+> +&flx4 {
+> +	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
+> +	status = "okay";
+> +};
+> +
+> +&i2c6 {
+> +	clock-frequency = <100000>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pinctrl_flx4_i2c>;
+> +	status = "okay";
 
-Which I believe CI will also produce, once the issue with htmldocs is
-fixed.  I can't bisect it exactly as the failure shows up once the new
-test is added.
+Which bus number (in Uboot) is this i2c6 being assigned to ?
+Would it be better , and/or more predictable to add an alias to the 
+desired bus number in DT ?
+e.g. aliases { i2c2 = &i2c6; }
 
---=20
-Tom
 
---PVBKZ2aHO+8J4P1+
-Content-Type: application/pgp-signature; name="signature.asc"
+Thanks,
+Eugen
 
------BEGIN PGP SIGNATURE-----
+> +
+> +	eeprom: eeprom@50 {
+> +		compatible = "microchip,24c32", "atmel,24c32";
+> +		reg = <0x50>;
+> +		read-only;
+> +		pagesize = <32>;
+> +		status = "okay";
+> +	};
+> +};
+> +
+> +&pioA {
+> +	pinctrl {
+> +		pinctrl_uart1_default: uart1_default {
+> +			pinmux = <PIN_PD2__URXD1>,
+> +				 <PIN_PD3__UTXD1>;
+> +			bias-disable;
+> +			bootph-all;
+> +		};
+> +
+> +		pinctrl_macb0_phy_irq: macb0_phy_irq {
+> +			pinmux = <PIN_PB13__GPIO>;
+> +			bias-disable;
+> +			bootph-all;
+> +		};
+> +
+> +		pinctrl_macb0_rmii: macb0_rmii {
+> +			pinmux = <PIN_PB14__GTXCK>,
+> +				 <PIN_PB15__GTXEN>,
+> +				 <PIN_PB16__GRXDV>,
+> +				 <PIN_PB17__GRXER>,
+> +				 <PIN_PB18__GRX0>,
+> +				 <PIN_PB19__GRX1>,
+> +				 <PIN_PB20__GTX0>,
+> +				 <PIN_PB21__GTX1>,
+> +				 <PIN_PB22__GMDC>,
+> +				 <PIN_PB23__GMDIO>;
+> +			bias-disable;
+> +			bootph-all;
+> +		};
+> +
+> +		pinctrl_sdmmc0_cmd_dat_default: sdmmc0_cmd_dat_default {
+> +			pinmux = <PIN_PA1__SDMMC0_CMD>,
+> +				 <PIN_PA2__SDMMC0_DAT0>,
+> +				 <PIN_PA3__SDMMC0_DAT1>,
+> +				 <PIN_PA4__SDMMC0_DAT2>,
+> +				 <PIN_PA5__SDMMC0_DAT3>;
+> +			bias-pull-up;
+> +			bootph-all;
+> +		};
+> +
+> +		pinctrl_sdmmc0_ck_cd_default: sdmmc0_ck_cd_default {
+> +			pinmux = <PIN_PA0__SDMMC0_CK>,
+> +				 <PIN_PA11__SDMMC0_VDDSEL>,
+> +				 <PIN_PA13__SDMMC0_CD>;
+> +			bias-disable;
+> +			bootph-all;
+> +		};
+> +
+> +		pinctrl_flx4_i2c: flx4_i2c {
+> +			pinmux = <PIN_PC28__FLEXCOM4_IO0>,
+> +				 <PIN_PC29__FLEXCOM4_IO1>;
+> +			bias-disable;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
+> index 4c65fc0dbd25..37ef2d691d65 100644
+> --- a/arch/arm/mach-at91/Kconfig
+> +++ b/arch/arm/mach-at91/Kconfig
+> @@ -204,6 +204,17 @@ config TARGET_SAMA5D27_WLSOM1_EK
+>   	  processor-based SAMA5D2 MPU with 2 Gbit LPDDR2-SDRAM
+>   	  in a single package.
+>   
+> +config TARGET_KSTR_SAMA5D27
+> +	bool "Conclusive KSTR-SAMA5D27 board"
+> +	select BOARD_EARLY_INIT_F
+> +	select SAMA5D2
+> +	help
+> +	  The KSTR-SAMA5D27 embeds SAMA5D27 SoC, together with
+> +	  256 MiB SDRAM, 10/100 Mbit/s Ethernet, 96 Mbit/s Wi-Fi b/g/n,
+> +	  Bluetooth 4.1 LE, USB OTG controller w/ type-C USB connector
+> +	  and stackable GPIO headers in an all-in-one SBC form factor:
+> +	  https://conclusive.pl/products/kstr-sama5d27-sbc/
+> +
+>   config TARGET_SAMA5D2_ICP
+>   	bool "SAMA5D2 Industrial Connectivity Platform (ICP)"
+>   	select SAMA5D2
+> @@ -364,6 +375,7 @@ source "board/atmel/sama5d4_xplained/Kconfig"
+>   source "board/atmel/sama5d4ek/Kconfig"
+>   source "board/bluewater/gurnard/Kconfig"
+>   source "board/calao/usb_a9263/Kconfig"
+> +source "board/conclusive/kstr-sama5d27/Kconfig"
+>   source "board/egnite/ethernut5/Kconfig"
+>   source "board/esd/meesc/Kconfig"
+>   source "board/gardena/smart-gateway-at91sam/Kconfig"
+> diff --git a/board/conclusive/kstr-sama5d27/Kconfig b/board/conclusive/kstr-sama5d27/Kconfig
+> new file mode 100644
+> index 000000000000..572551cfda98
+> --- /dev/null
+> +++ b/board/conclusive/kstr-sama5d27/Kconfig
+> @@ -0,0 +1,15 @@
+> +if TARGET_KSTR_SAMA5D27
+> +
+> +config SYS_BOARD
+> +	default "kstr-sama5d27"
+> +
+> +config SYS_VENDOR
+> +	default "conclusive"
+> +
+> +config SYS_SOC
+> +	default "at91"
+> +
+> +config SYS_CONFIG_NAME
+> +	default "kstr-sama5d27"
+> +
+> +endif
+> diff --git a/board/conclusive/kstr-sama5d27/MAINTAINERS b/board/conclusive/kstr-sama5d27/MAINTAINERS
+> new file mode 100644
+> index 000000000000..cb1635cdd280
+> --- /dev/null
+> +++ b/board/conclusive/kstr-sama5d27/MAINTAINERS
+> @@ -0,0 +1,8 @@
+> +CONCLUSIVE KSTR-SAMA5D27 BOARD
+> +M:	Jakub Klama <jakub@conclusive.pl>
+> +M:	Artur Rojek <artur@conclusive.pl>
+> +S:	Maintained
+> +F:	board/conclusive/kstr-sama5d27
+> +F:	include/configs/kstr-sama5d27.h
+> +F:	configs/kstr_sama5d27_defconfig
+> +F:	arch/arm/dts/at91-kstr-sama5d27.dts
+> diff --git a/board/conclusive/kstr-sama5d27/Makefile b/board/conclusive/kstr-sama5d27/Makefile
+> new file mode 100644
+> index 000000000000..edf7d1c93441
+> --- /dev/null
+> +++ b/board/conclusive/kstr-sama5d27/Makefile
+> @@ -0,0 +1,5 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (C) 2019-2023 Conclusive Engineering Sp. z o. o.
+> +
+> +obj-y += kstr-sama5d27.o
+> diff --git a/board/conclusive/kstr-sama5d27/kstr-sama5d27.c b/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
+> new file mode 100644
+> index 000000000000..1b765b113743
+> --- /dev/null
+> +++ b/board/conclusive/kstr-sama5d27/kstr-sama5d27.c
+> @@ -0,0 +1,239 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * kstr-sama5d27.c - Board init file for Conclusive KSTR-SAMA5D27 board
+> + * Copyright (C) 2021-2023 Conclusive Engineering Sp. z o. o.
+> + */
+> +
+> +#include <common.h>
+> +#include <debug_uart.h>
+> +#include <init.h>
+> +#include <env.h>
+> +#include <fdt_support.h>
+> +#include <asm/global_data.h>
+> +#include <asm/io.h>
+> +#include <asm/arch/at91_common.h>
+> +#include <asm/arch/atmel_pio4.h>
+> +#include <asm/arch/atmel_mpddrc.h>
+> +#include <asm/arch/atmel_sdhci.h>
+> +#include <asm/arch/clk.h>
+> +#include <asm/arch/gpio.h>
+> +#include <asm/arch/sama5d2.h>
+> +#include <linux/delay.h>
+> +
+> +#ifdef CONFIG_USB_GADGET_ATMEL_USBA
+> +#include <asm/arch/atmel_usba_udc.h>
+> +#endif
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +#ifdef CONFIG_DEBUG_UART_BOARD_INIT
+> +static void board_uart1_hw_init(void)
+> +{
+> +	/* URXD1 */
+> +	atmel_pio4_set_a_periph(AT91_PIO_PORTD, 2, ATMEL_PIO_PUEN_MASK);
+> +	/* UTXD1 */
+> +	atmel_pio4_set_a_periph(AT91_PIO_PORTD, 3, 0);
+> +	at91_periph_clk_enable(ATMEL_ID_UART1);
+> +}
+> +
+> +void board_debug_uart_init(void)
+> +{
+> +	board_uart1_hw_init();
+> +}
+> +#endif
+> +
+> +void board_lan8720a_init(void)
+> +{
+> +	/* LAN8720A_nRST */
+> +	atmel_pio4_set_pio_output(AT91_PIO_PORTB, 12, 0);
+> +	/*
+> +	 * Force 0 on RXER/PHYAD0. LAN8720A chipset will latch with address 0 on
+> +	 * MDIO bus.
+> +	 */
+> +	atmel_pio4_set_pio_output(AT91_PIO_PORTB, 17, 0);
+> +	/* Minimal delay of reset signal is 25 ms */
+> +	mdelay(30);
+> +	/* LAN8720A_nRST */
+> +	atmel_pio4_set_pio_output(AT91_PIO_PORTB, 12, 1);
+> +}
+> +
+> +void board_usba_init(void)
+> +{
+> +#ifdef CONFIG_USB_GADGET_ATMEL_USBA
+> +	/* USB device peripheral initialization: sama5d2_devices.c */
+> +	at91_udp_hw_init();
+> +	/* USB device controller drivers/usb/gadget/atmel_usba_udc.c */
+> +	usba_udc_probe(&pdata);
+> +#endif
+> +}
+> +
+> +#ifdef CONFIG_BOARD_EARLY_INIT_F
+> +int board_early_init_f(void)
+> +{
+> +#ifdef CONFIG_DEBUG_UART
+> +	debug_uart_init();
+> +#endif
+> +
+> +	return 0;
+> +}
+> +#endif
+> +
+> +int ft_board_setup(void *blob, struct bd_info *bd)
+> +{
+> +	char *wlanaddr = env_get("eth1addr");
+> +
+> +	if (wlanaddr)
+> +		do_fixup_by_compat(blob, "brcm,bcm4329-fmac", "local-mac-address",
+> +				   wlanaddr, strlen(wlanaddr), 1);
+> +	else
+> +		printf("Not setting WIFI mac address. Check if EEPROM TLV is correctly set up.\n");
+> +
+> +	return 0;
+> +}
+> +
+> +int board_init(void)
+> +{
+> +	/* address of boot parameters */
+> +	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
+> +
+> +	board_usba_init();
+> +	board_lan8720a_init();
+> +
+> +	return 0;
+> +}
+> +
+> +static int settings_r(void)
+> +{
+> +	mac_read_from_eeprom();
+> +	serial_read_from_eeprom(0);
+> +
+> +	return 0;
+> +}
+> +EVENT_SPY_SIMPLE(EVT_SETTINGS_R, settings_r);
+> +
+> +#if defined(CONFIG_DISPLAY_BOARDINFO_LATE)
+> +int checkboard(void)
+> +{
+> +	const char *serial_number;
+> +
+> +	serial_number = env_get("serial#");
+> +	if (!serial_number)
+> +		printf("Warning: unknown serial number.\n");
+> +	else
+> +		printf("S/N:   %s\n", serial_number);
+> +
+> +	return 0;
+> +}
+> +#endif
+> +
+> +#ifdef CONFIG_MISC_INIT_R
+> +int misc_init_r(void)
+> +{
+> +	return 0;
+> +}
+> +#endif
+> +
+> +int dram_init(void)
+> +{
+> +	gd->ram_size = get_ram_size((void *)CFG_SYS_SDRAM_BASE,
+> +				    CFG_SYS_SDRAM_SIZE);
+> +	return 0;
+> +}
+> +
+> +/* SPL */
+> +#ifdef CONFIG_SPL_BUILD
+> +void spl_board_init(void)
+> +{
+> +}
+> +
+> +static void ddrc_conf(struct atmel_mpddrc_config *ddrc)
+> +{
+> +	ddrc->md = (ATMEL_MPDDRC_MD_DBW_16_BITS | ATMEL_MPDDRC_MD_DDR2_SDRAM);
+> +
+> +	ddrc->cr = (ATMEL_MPDDRC_CR_NC_COL_10 |
+> +		    ATMEL_MPDDRC_CR_NR_ROW_13 |
+> +		    ATMEL_MPDDRC_CR_CAS_DDR_CAS3 |
+> +		    ATMEL_MPDDRC_CR_DIC_DS |
+> +		    ATMEL_MPDDRC_CR_ZQ_LONG |
+> +		    ATMEL_MPDDRC_CR_NB_8BANKS |
+> +		    ATMEL_MPDDRC_CR_DECOD_INTERLEAVED |
+> +		    ATMEL_MPDDRC_CR_UNAL_SUPPORTED);
+> +
+> +	ddrc->rtr = 0x511;
+> +
+> +	ddrc->tpr0 = ((7 << ATMEL_MPDDRC_TPR0_TRAS_OFFSET) |
+> +		      (3 << ATMEL_MPDDRC_TPR0_TRCD_OFFSET) |
+> +		      (3 << ATMEL_MPDDRC_TPR0_TWR_OFFSET) |
+> +		      (9 << ATMEL_MPDDRC_TPR0_TRC_OFFSET) |
+> +		      (3 << ATMEL_MPDDRC_TPR0_TRP_OFFSET) |
+> +		      (4 << ATMEL_MPDDRC_TPR0_TRRD_OFFSET) |
+> +		      (4 << ATMEL_MPDDRC_TPR0_TWTR_OFFSET) |
+> +		      (2 << ATMEL_MPDDRC_TPR0_TMRD_OFFSET));
+> +
+> +	ddrc->tpr1 = ((22 << ATMEL_MPDDRC_TPR1_TRFC_OFFSET) |
+> +		      (23 << ATMEL_MPDDRC_TPR1_TXSNR_OFFSET) |
+> +		      (200 << ATMEL_MPDDRC_TPR1_TXSRD_OFFSET) |
+> +		      (3 << ATMEL_MPDDRC_TPR1_TXP_OFFSET));
+> +
+> +	ddrc->tpr2 = ((2 << ATMEL_MPDDRC_TPR2_TXARD_OFFSET) |
+> +		      (8 << ATMEL_MPDDRC_TPR2_TXARDS_OFFSET) |
+> +		      (4 << ATMEL_MPDDRC_TPR2_TRPA_OFFSET) |
+> +		      (4 << ATMEL_MPDDRC_TPR2_TRTP_OFFSET) |
+> +		      (8 << ATMEL_MPDDRC_TPR2_TFAW_OFFSET));
+> +}
+> +
+> +void mem_init(void)
+> +{
+> +	struct at91_pmc *pmc = (struct at91_pmc *)ATMEL_BASE_PMC;
+> +	struct atmel_mpddr *mpddrc = (struct atmel_mpddr *)ATMEL_BASE_MPDDRC;
+> +	struct atmel_mpddrc_config ddrc_config;
+> +	u32 reg;
+> +
+> +	ddrc_conf(&ddrc_config);
+> +
+> +	at91_periph_clk_enable(ATMEL_ID_MPDDRC);
+> +	writel(AT91_PMC_DDR, &pmc->scer);
+> +
+> +	reg = readl(&mpddrc->io_calibr);
+> +	reg &= ~ATMEL_MPDDRC_IO_CALIBR_RDIV;
+> +	reg |= ATMEL_MPDDRC_IO_CALIBR_DDR3_RZQ_55;
+> +	reg &= ~ATMEL_MPDDRC_IO_CALIBR_TZQIO;
+> +	reg |= ATMEL_MPDDRC_IO_CALIBR_TZQIO_(101);
+> +	writel(reg, &mpddrc->io_calibr);
+> +
+> +	writel(ATMEL_MPDDRC_RD_DATA_PATH_SHIFT_ONE_CYCLE,
+> +	       &mpddrc->rd_data_path);
+> +
+> +	ddr3_init(ATMEL_BASE_MPDDRC, ATMEL_BASE_DDRCS, &ddrc_config);
+> +
+> +	writel(0x3, &mpddrc->cal_mr4);
+> +	writel(64, &mpddrc->tim_cal);
+> +}
+> +
+> +void at91_pmc_init(void)
+> +{
+> +	u32 tmp;
+> +
+> +	/*
+> +	 * While coming from the ROM code, we run on PLLA @ 492 MHz / 164 MHz,
+> +	 * so we need to slow down and configure MCKR accordingly.
+> +	 * This is why we have a special flavor of the switching function.
+> +	 */
+> +	tmp = AT91_PMC_MCKR_PLLADIV_2 |
+> +	      AT91_PMC_MCKR_MDIV_3 |
+> +	      AT91_PMC_MCKR_CSS_MAIN;
+> +	at91_mck_init_down(tmp);
+> +
+> +	tmp = AT91_PMC_PLLAR_29 |
+> +	      AT91_PMC_PLLXR_PLLCOUNT(0x3f) |
+> +	      AT91_PMC_PLLXR_MUL(40) |
+> +	      AT91_PMC_PLLXR_DIV(1);
+> +	at91_plla_init(tmp);
+> +
+> +	tmp = AT91_PMC_MCKR_H32MXDIV |
+> +	      AT91_PMC_MCKR_PLLADIV_2 |
+> +	      AT91_PMC_MCKR_MDIV_3 |
+> +	      AT91_PMC_MCKR_CSS_PLLA;
+> +	at91_mck_init(tmp);
+> +}
+> +#endif
+> diff --git a/configs/kstr_sama5d27_defconfig b/configs/kstr_sama5d27_defconfig
+> new file mode 100644
+> index 000000000000..cc1419b05ba1
+> --- /dev/null
+> +++ b/configs/kstr_sama5d27_defconfig
+> @@ -0,0 +1,73 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_AT91=y
+> +CONFIG_TEXT_BASE=0x26f00000
+> +CONFIG_TARGET_KSTR_SAMA5D27=y
+> +CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x20003ee0
+> +CONFIG_DM_GPIO=y
+> +CONFIG_DEFAULT_DEVICE_TREE="at91-kstr-sama5d27"
+> +CONFIG_OF_LIBFDT_OVERLAY=y
+> +CONFIG_DM_RESET=y
+> +CONFIG_SYS_MONITOR_LEN=524288
+> +CONFIG_SYS_LOAD_ADDR=0x24000000
+> +CONFIG_FIT=y
+> +CONFIG_OF_BOARD_SETUP=y
+> +CONFIG_DISTRO_DEFAULTS=y
+> +CONFIG_SD_BOOT=y
+> +CONFIG_BOOTDELAY=3
+> +CONFIG_USE_BOOTARGS=y
+> +CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk root=/dev/mmcblk0p2 rw rootwait"
+> +# CONFIG_USE_BOOTCOMMAND is not set
+> +# CONFIG_DISPLAY_BOARDINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_MISC_INIT_R=y
+> +CONFIG_CMD_TLV_EEPROM=y
+> +CONFIG_CMD_DM=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_GPT=y
+> +CONFIG_CMD_I2C=y
+> +# CONFIG_CMD_LOADS is not set
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_USB_MASS_STORAGE=y
+> +# CONFIG_ISO_PARTITION is not set
+> +CONFIG_OF_CONTROL=y
+> +CONFIG_ENV_OVERWRITE=y
+> +CONFIG_ENV_IS_IN_FAT=y
+> +CONFIG_NET_RANDOM_ETHADDR=y
+> +CONFIG_CLK=y
+> +CONFIG_CLK_AT91=y
+> +CONFIG_AT91_UTMI=y
+> +CONFIG_AT91_H32MX=y
+> +CONFIG_AT91_GENERIC_CLK=y
+> +CONFIG_ATMEL_PIO4=y
+> +CONFIG_DM_I2C=y
+> +CONFIG_SYS_I2C_AT91=y
+> +CONFIG_I2C_EEPROM=y
+> +CONFIG_MICROCHIP_FLEXCOM=y
+> +CONFIG_MMC_IO_VOLTAGE=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+> +CONFIG_MMC_SDHCI_ATMEL=y
+> +CONFIG_PHY_MICREL=y
+> +CONFIG_MACB=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCTRL_AT91PIO4=y
+> +CONFIG_RESET_AT91=y
+> +CONFIG_DM_SERIAL=y
+> +CONFIG_ATMEL_USART=y
+> +CONFIG_SYSRESET=y
+> +CONFIG_SYSRESET_AT91=y
+> +CONFIG_TEE=y
+> +CONFIG_OPTEE=y
+> +CONFIG_TIMER=y
+> +CONFIG_ATMEL_PIT_TIMER=y
+> +CONFIG_USB=y
+> +CONFIG_USB_EHCI_HCD=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_USB_GADGET_VENDOR_NUM=0x16c0
+> +CONFIG_USB_GADGET_PRODUCT_NUM=0x03e9
+> +CONFIG_USB_GADGET_ATMEL_USBA=y
+> +CONFIG_USB_GADGET_DOWNLOAD=y
+> +# CONFIG_EFI_LOADER is not set
+> diff --git a/include/configs/kstr-sama5d27.h b/include/configs/kstr-sama5d27.h
+> new file mode 100644
+> index 000000000000..772a073ba209
+> --- /dev/null
+> +++ b/include/configs/kstr-sama5d27.h
+> @@ -0,0 +1,15 @@
+> +/* SPDX-License-Identifier: GPL-2.0+ */
+> +/*
+> + * Copyright (C) 2021-2023 Conclusive Engineering Sp. z o. o.
+> + */
+> +
+> +#ifndef __CONFIG_H
+> +#define __CONFIG_H
+> +
+> +#include "at91-sama5_common.h"
+> +
+> +/* SDRAM */
+> +#define CFG_SYS_SDRAM_BASE           0x20000000
+> +#define CFG_SYS_SDRAM_SIZE           0x10000000
+> +
+> +#endif
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlXV0ACgkQFHw5/5Y0
-tyz/cwwAjoMsH5WY3OAtfLoq+5khcb5xo3yLGJJZlJbuy56Ap8Rx3VYfQT8G/tM2
-rp/a6BYOde8xAGan2ky4rtmeceRLYreHAkMHOcj4IS8VtFlZC91Azcy5ECrPCv7Y
-AVRr85kem1UZ1bR6zZVIoBF9rLVI2CF+WIhfFprfWZxR2hAitQ4FPKOCDNsg7Qv9
-VAMr80DlbJOlji6CriBpe+Huob4XCj/gvSF68SB8fEK0oCmD7VJZCA2Oz07L46i+
-vaHUh5Ksg6rqPbCKdVxxMoELX3bPqXivtgShZVJopoHx83NpjHMYtYPxg4KkUi5e
-wKQT7Lt7mPbswTJojwwSYZxVv2cZGXvuRwRGFnt9VI5N2s5h5pcnlDyXP1TDR/3M
-++x39zWrgQia5m6p5Hm+kmQoZmM00z0sXMR2iabWHS9VIg4IhmVE+eMuTZ4sHz/D
-2+pW4WNWc4uy9BE3s1S2AfX3uA8o9Bs6LYQRJM5bO658cfRMgrlBr8zmv3+g2WQ6
-oyr/ZoZh
-=PUON
------END PGP SIGNATURE-----
-
---PVBKZ2aHO+8J4P1+--
