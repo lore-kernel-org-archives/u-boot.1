@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E0EACD8C99
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 142E4CD8C99
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 14:57:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37BFD84B20;
-	Tue, 10 Oct 2023 16:42:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id ECF5285DEA;
+	Tue, 10 Oct 2023 16:57:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VewMULqO";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I4N2BkIE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FF988071F; Tue, 10 Oct 2023 16:42:29 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id E31C186604; Tue, 10 Oct 2023 16:57:37 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4802F86A24
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:42:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B89AE82BBF
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 16:57:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-533c8f8f91dso10078154a12.0
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 07:42:27 -0700 (PDT)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-9b2f73e3af3so983984666b.3
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 07:57:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1696948947; x=1697553747; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1696949855; x=1697554655; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3vExcQdx6kAOxadZ/p+4Yq1f+IA2BznXNn23bGk5eDA=;
- b=VewMULqOcwfoNEPsYQDiMOr2QHssrTBT4Nlq+vGPsu8WZPr++wKz2Ox7yv/RSdkiug
- Oz4F9YOCJmOm00/lsM1Rh8H7Z0tjcuq+lx4ltAhQhry8f1MyWKDCdNB+uLJLR9De3td+
- jpEwsaMl9SRdn4SNJ4iAQIGyUPhkCUrF6ITjM=
+ bh=OiL7FFIOD3ezaN9KHiv/IaGgYD5flYccB3kviqT3CPI=;
+ b=I4N2BkIEVSmPvYzOq4kfoS2oHOh0bb6lsk00sJCdoPi7RkFKnZv2niJUpAklMJRcJn
+ yIbZflqgEAtCbKkKOA1fvwFRIdyq89e+lLDZzPuxJ7ZF7e4EhOu5a8xp2Jf23uLxCjQF
+ HPtr28neTpzJTxQTGSxmi6YLUFBl1BP4csMVo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696948947; x=1697553747;
+ d=1e100.net; s=20230601; t=1696949855; x=1697554655;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3vExcQdx6kAOxadZ/p+4Yq1f+IA2BznXNn23bGk5eDA=;
- b=EeWxNdCIWmh4KsEpmbbBqdQNk3YgDD1D0j9FkkVCeuZVNukIZkYUAbpVRwQ8C2KM7B
- jzTYMyCH6Jd/+Xpf3/Ags1Vtop0Gvs+c3TBDi8HcNOqmrux6JM01YkjRKxY2tRAdoO2n
- 25LLffo1mq0wMLxzNV/dSdb1V/yILsstYpfECkijilf/OfvRNH4r4OoxLX5ymyDllT67
- ioZcc5301gvf3Xne4N7Kc7rjilS5NadXcqWGzTHqiHtYb9YRw7KWVQN8YB7sKkk+xfpA
- GkMA8FjqMit7ZD3I/e5f63uPLxYhxp6jX3BSJrEtiYwiNVE3Qv1sWk5pLr2ApQq+TAJX
- xmKg==
-X-Gm-Message-State: AOJu0YzefaUrp7UYfdKDq44PkT/FmNrD0oyy8gq3tM8/hhGySx2zMyRO
- 1GxmXpkSTLGM6pDFWoRIn+jG8hfNbTcXcbZ4MlJ7HA==
-X-Google-Smtp-Source: AGHT+IGra4bTUZarMaHn/nXKB/yDaxWqkvpeqZIjY1fG9j8rVhoQDKtBh8HG55mHNKwqwwkRDgmdT+qTJ489w1A6paw=
-X-Received: by 2002:a17:907:7850:b0:9ae:75dc:4589 with SMTP id
- lb16-20020a170907785000b009ae75dc4589mr18426333ejc.64.1696948946486; Tue, 10
- Oct 2023 07:42:26 -0700 (PDT)
+ bh=OiL7FFIOD3ezaN9KHiv/IaGgYD5flYccB3kviqT3CPI=;
+ b=CFsD9aj8O0tan1NoHq+gsPqSYS3b4/6Xf4W6BwjtvAAkC/h+NjdyfzhErM6DuNzmji
+ K8j8BDtFeVtirDXvkHvpcwuvl4XjAykOhK7rsqI2PyX6uZzYACeu1qJ3wY2ghifAHzon
+ 1xYbFgOTl6VHqT6PGjfFqsoVpsDYUB4XbSN216oagh/za0FLa7ERwO5hFT8x1+rFb2NQ
+ CZX3f5rwD6ifLUz1d9D2Mth7NSuWsGz/+/HFkxZaC/inkZwvYNhhIpQLjtbjaB4RgiiT
+ SdixqZUFM75I3JweYVSmYdM9eul40x3+imY/T/g5JH2gCheUoL8ulPCPJ7G9yLewqrS3
+ XxSw==
+X-Gm-Message-State: AOJu0Yzsc97DkNm7lFRZHWYkrsJM31Nyh/c/HbWMTuwtc8c4h7Zp+DDK
+ wUwsbLPxk8dQVXmKaZXiJESVjHs0LVMgR/ljxaSkVg==
+X-Google-Smtp-Source: AGHT+IEKgEEksO42ybWryvM1PRRxQUt8WI7m1DFHj27RXFJLbxVdgLZl4Mm3tv/BTTxims2KUY6/EyvGLkIy6HPEgVY=
+X-Received: by 2002:a17:907:7897:b0:9ae:3c6c:6ecd with SMTP id
+ ku23-20020a170907789700b009ae3c6c6ecdmr17519051ejc.19.1696949854946; Tue, 10
+ Oct 2023 07:57:34 -0700 (PDT)
 MIME-Version: 1.0
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-8-sjg@chromium.org>
- <20230925004346.GP305624@bill-the-cat>
- <CAPnjgZ3ieXXhidSeqzMuPBCgy9UrvOt5zSMO671t1KG9zWAGxQ@mail.gmail.com>
- <cad8dcca-eaa5-872b-db9a-86f5438b120c@gmail.com>
- <CAPnjgZ38gfWghmejpQFkJ9y9F8fdC-Wo-YSHT_4_cu8dW1UDGw@mail.gmail.com>
- <2ffb2d81-9c63-2ce3-ccba-3d5461008a51@gmail.com>
-In-Reply-To: <2ffb2d81-9c63-2ce3-ccba-3d5461008a51@gmail.com>
+References: <20231004112722.416877-1-sughosh.ganu@linaro.org>
+ <20231004112722.416877-4-sughosh.ganu@linaro.org>
+ <CAPnjgZ0_8FqJEarNvE6RN218PJWUGu1W0_f3iVjzBTibpQ1KFg@mail.gmail.com>
+ <CADg8p97Xpc6MVs+oviNZ1NnKq4cvAuntb1HpO4K0PnJ7DULj9Q@mail.gmail.com>
+ <CAPnjgZ0HocWeW9eNtXXjVPAyL1bu4YU=CE=iSKsXN5hg7u8Ysw@mail.gmail.com>
+ <CADg8p97YLcGQk50aBwgpRnKc4GzM-rtY=2DzWZYGy9qx95r5hw@mail.gmail.com>
+In-Reply-To: <CADg8p97YLcGQk50aBwgpRnKc4GzM-rtY=2DzWZYGy9qx95r5hw@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 10 Oct 2023 08:42:13 -0600
-Message-ID: <CAPnjgZ1Goy0Xt=vj6YYeOEPwYO7wkATKawQtOwCW8JTM1ShdcQ@mail.gmail.com>
-Subject: Re: [PATCH 07/25] tegra: Change #ifdef for nop
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>,
- Tom Warren <twarren@nvidia.com>
+Date: Tue, 10 Oct 2023 08:57:23 -0600
+Message-ID: <CAPnjgZ2z6Z4Y6FdspH3ap57B044s=BRr72vV8poG53VauP2_mw@mail.gmail.com>
+Subject: Re: [PATCH 3/5] binman: capsule: Use dumped capsule header contents
+ for verification
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,74 +91,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sean,
+Hi Sughosh,
 
-On Mon, 9 Oct 2023 at 17:40, Sean Anderson <seanga2@gmail.com> wrote:
+On Mon, 9 Oct 2023 at 13:41, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On 10/9/23 11:32, Simon Glass wrote:
-> > Hi Sean,
+> hi Simon,
+>
+> On Mon, 9 Oct 2023 at 23:27, Simon Glass <sjg@chromium.org> wrote:
 > >
-> > On Sat, 7 Oct 2023 at 17:21, Sean Anderson <seanga2@gmail.com> wrote:
-> >>
-> >> On 10/7/23 19:10, Simon Glass wrote:
-> >>> Hi Tom.
-> >>>
-> >>> On Sun, 24 Sept 2023 at 18:43, Tom Rini <trini@konsulko.com> wrote:
-> >>>>
-> >>>> On Sun, Sep 24, 2023 at 02:39:25PM -0600, Simon Glass wrote:
-> >>>>
-> >>>>> This code is normally compiled for Tegra, but sandbox can also compile
-> >>>>> it. We should not use UNIT_TEST as a synonym for SANDBOX, since it is
-> >>>>> possible to disable UNIT_TEST for sandbox.
-> >>>>>
-> >>>>> Correct the condition.
-> >>>>>
-> >>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
-> >>>>> ---
-> >>>>>
-> >>>>>    include/k210/pll.h | 2 +-
-> >>>>>    1 file changed, 1 insertion(+), 1 deletion(-)
-> >>>>>
-> >>>>> diff --git a/include/k210/pll.h b/include/k210/pll.h
-> >>>>> index fd16a89cb203..6dd60b2eb4fc 100644
-> >>>>> --- a/include/k210/pll.h
-> >>>>> +++ b/include/k210/pll.h
-> >>>>> @@ -13,7 +13,7 @@ struct k210_pll_config {
-> >>>>>         u8 od;
-> >>>>>    };
-> >>>>>
-> >>>>> -#ifdef CONFIG_UNIT_TEST
-> >>>>> +#ifdef CONFIG_SANDBOX
-> >>>>>    TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
-> >>>>>                                      struct k210_pll_config *best);
-> >>>>>    #ifndef nop
-> >>>>
-> >>>> Tegra? Do you mean sifive?  That's where CLK_K210 stuff is... but it
-> >>>
-> >>> Oh yes, I got confused.
-> >>>
-> >>>> also seems wrong, you can run unit test on real hardware, and this is a
-> >>>> test that could (should?) be run on that platform.
-> >>>
-> >>> Only if it enables UNIT_TEST. You cannot run unit tests without that.
-> >>> The current tests are designed for sandbox.
-> >>
-> >> FWIW I have run this test on actual hardware. My intent here was to allow
-> >> unit tests to access functions which would otherwise be declared static.
+> > Hi Sughosh,
 > >
-> > Er, with or without UNIT_TEST enabled? How can it even build if this
-> > declaration is only for sandbox?
+> > On Mon, 9 Oct 2023 at 01:46, Sughosh Ganu <sughosh.ganu@linaro.org>
+wrote:
+> > >
+> > > hi Simon,
+> > >
+> > > On Sun, 8 Oct 2023 at 04:41, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Sughosh,
+> > > >
+> > > > On Wed, 4 Oct 2023 at 05:27, Sughosh Ganu <sughosh.ganu@linaro.org>
+wrote:
+> > > > >
+> > > > > The various fields of a generated capsule are currently verified
+> > > > > through hard-coded offsets. Use the dump-capsule feature for
+dumping
+> > > > > the capsule header contents and use those for capsule
+verification.
+> > > > >
+> > > > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > > > ---
+> > > > >  tools/binman/ftest.py | 95
+++++++++++++++++++++++++-------------------
+> > > > >  1 file changed, 54 insertions(+), 41 deletions(-)
+> > > >
+> > > > This looks good apart from a few nits below. However, the tests
+fail for me.
+> > >
+> > > Can you please specify which tests fail, and the way to reproduce the
+> > > failures? I ran the tests before sending the patches, and they ran
+> > > fine, including the coverage which is 100%. Ci too did not complain.
+> >
+> > Sure, for example:
+> >
+> > $ binman test testCapsuleGen
+> > ======================== Running binman tests ========================
+> > /usr/lib/python3.10/os.py:1030: RuntimeWarning: line buffering
+(buffering=1) isn't supported in binary mode, the default buffer size will
+be used
+> >   return io.open(fd, mode, buffering, encoding, *args, **kwargs)
+> > /usr/lib/python3.10/os.py:1030: RuntimeWarning: line buffering
+(buffering=1) isn't supported in binary mode, the default buffer size will
+be used
+> >   return io.open(fd, mode, buffering, encoding, *args, **kwargs)
+> > F
+> > ======================================================================
+> > FAIL: binman.ftest.TestFunctional.testCapsuleGen
+(subunit.RemotedTestCase)
+> > binman.ftest.TestFunctional.testCapsuleGen
+> > ----------------------------------------------------------------------
+> > testtools.testresult.real._StringException: Traceback (most recent call
+last):
+> > AssertionError: '6DCBD5ED-E82D-4C44-BDA1-7194199AD92A' != []
+> >
+> >
+> > ----------------------------------------------------------------------
+> > Ran 1 test in 0.147s
+> >
+> > FAILED (failures=1)
 >
-> With UNIT_TEST of course. Although since this is a forward-declaration, the
-> UNIT_TEST ifdef isn't really even necessary. If it's on actual hardware, nop
-> should already be defined. So maybe this should be something like
+> That is interesting. When I run the tests, they run just fine. I had
+> tested them before sending the patches. For e.g.
 >
-> #if CONFIG_SANDBOX
-> #define nop()
-> #endif
+> ./tools/binman/binman test testCapsuleGen
+> ======================== Running binman tests ========================
+> .
+> ----------------------------------------------------------------------
+> Ran 1 test in 0.375s
+>
+> OK
 
-It is the CONFIG_SANDBOX that I am trying to remove. Can it be
-CONFIG_UNIT_TEST instead?
+Yes, I'm not sure what that is. Perhaps you have a required tool in your
+path? But in that case I would expect to get some sort of error.
+
+[..]
 
 Regards,
 Simon
