@@ -4,77 +4,125 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22001CD68F4
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 06:51:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EF87CD68F5
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 07:08:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45CB585DE0;
-	Tue, 10 Oct 2023 08:51:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C402286D3F;
+	Tue, 10 Oct 2023 09:08:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="b/eImMWD";
+	dkim=pass (1024-bit key; unprotected) header.d=bp.renesas.com header.i=@bp.renesas.com header.b="C8aaU6Nt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC0B6831BE; Tue, 10 Oct 2023 08:51:34 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 798A486D3F; Tue, 10 Oct 2023 09:08:53 +0200 (CEST)
+Received: from JPN01-OS0-obe.outbound.protection.outlook.com
+ (mail-os0jpn01on2070f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:700c::70f])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DB34831BE
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 08:51:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83B4F86489
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 09:08:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1696920679; x=1697525479; i=xypron.glpk@gmx.de;
- bh=0AJvUKeD3cdZQHImZWIbgtp6k8olrgEi7ftOZpd7jvI=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
- b=b/eImMWDd/H7mMTLZFjFZgVE+tVCeRkjuGEdEVKbf4KVSXKQFAPD7pOXJ9WtM56ZNV6djHxRskR
- xOHVbNFDhYBVHkTzKdv3K/YtBiM6oxxJUdtG2EajhWq/cbO05gMEdBwUgvhZRf1Zcztf3eiUnbUoJ
- FJe1ppCnL4lBgl5SGuEa/JzPODAaBHXJ6j1egWysTFliScL2O7UgdFDdO+siZu0sJG4QNIRmoGvhW
- Et2f6soBA7FuoaOvEkaGgfw/qSdI0lMTOORIxyRTdBv+4thnPU+hMAnCHZjhnvWUrbDAjIvPHgOoq
- q5cnHMqsYWcXh22EKBQ6g66ZwIngvaBXN5FA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M42nY-1qq6aN1BSK-00026P; Tue, 10
- Oct 2023 08:51:19 +0200
-Date: Tue, 10 Oct 2023 08:51:15 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-CC: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Ramon Fried <rfried.dev@gmail.com>,
- Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
- Simon Glass <sjg@chromium.org>, Tobias Waldekranz <tobias@waldekranz.com>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH=5D_cmd=3A_mmc=3A_Add_mmc_reg_re?=
- =?US-ASCII?Q?ad_command_for_reading_card_registers?=
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20231009231458.354400-1-marex@denx.de>
-References: <20231009231458.354400-1-marex@denx.de>
-Message-ID: <0881AE45-0209-40C8-B7A8-E9B3B3F22D74@gmx.de>
-MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
+ spf=pass smtp.mailfrom=biju.das.jz@bp.renesas.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Xvi748EVCVpqWHVopqxs+m77YX2Gg5H9g+Lpgw07QzcWPTkw/CXmBYFL2eGNt029mRSh5T1/KsWK4PCllFrge9dejG5j13FjrwJH+1nqx7KDy2Nm2aMJVKrtoYbTBhrBKcYY2b5iJpRb1Zj0hlsrak/vEsXVZnDoSZg840gy2XWGMAfbhs9yjPG/KO9W+fc15ehTueB2Hi0QaXRLeMuGAOST1UexTBYs7D6y1XFPMHLhbMhh5fiWW9gr/eG8R9BeTU0NiM3dFm0U8Vt/vnltGWugtivxzzC8R34cBBT12x1Mp6llRRPQh7TtxMZK90IEUbwKJgwvoAXNIFwU2SoC1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wWZc55/lZrKwBssq3SMkEctfREmrTcyvwWkUvGtjHB0=;
+ b=TUCah12Popziol/xbzJEo6THqPytpou9fBPzbOBaQpjjCB5RziQv3rnSMGSXUPFzDLs7JDdkJRGhb7lgBUaBIdhupmpmlgKL1gYdMZan3a2vij5YWR2g5q2sCACp16B9VZKXketCFFtN0XgeSqMaycyTyusKS+oX64xcNj+YDgFkap8BOScCkyZqCqGR8Hcg5ErAQ2IWIPiIM4esLWfHnwuwT9n8ROci4dQVtSHfy7F7tm4nsBfOvV/xsnceJwHNfOxSdTJ4Rlp3DaVhnI8m3gukc+hscM8dSS8ytqLaGs9ZOeSJNv12DMXedflZWHd/ztjK6YLm5Tm6fNWiHPUfrA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=bp.renesas.com; dmarc=pass action=none
+ header.from=bp.renesas.com; dkim=pass header.d=bp.renesas.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bp.renesas.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wWZc55/lZrKwBssq3SMkEctfREmrTcyvwWkUvGtjHB0=;
+ b=C8aaU6NtyFpOR+iWo3iW5XXoT+/r25DjChyltX5FK04Boeqj5ibxChCqXC+NB71etlS35jAa7D5BJoGPxBL3n95FonDXWvOn91ieSecE3a8LBYO+Rfp0C4tmESLDsgME2zN917MpawXLSObkQNaIFfz11xFo7q2GPYBHgkaKOtw=
+Received: from TYCPR01MB11269.jpnprd01.prod.outlook.com
+ (2603:1096:400:3c0::10) by OS3PR01MB9604.jpnprd01.prod.outlook.com
+ (2603:1096:604:1ca::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.38; Tue, 10 Oct
+ 2023 07:08:43 +0000
+Received: from TYCPR01MB11269.jpnprd01.prod.outlook.com
+ ([fe80::db75:e192:bbfa:78a2]) by TYCPR01MB11269.jpnprd01.prod.outlook.com
+ ([fe80::db75:e192:bbfa:78a2%3]) with mapi id 15.20.6838.040; Tue, 10 Oct 2023
+ 07:08:42 +0000
+From: Biju Das <biju.das.jz@bp.renesas.com>
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+CC: Paul Barker <paul.barker.ct@bp.renesas.com>
+Subject: RE: [PATCH v2 11/19] serial: sh: Fix error handling
+Thread-Topic: [PATCH v2 11/19] serial: sh: Fix error handling
+Thread-Index: AQHZ+tCT+W2BNsHysEakSyEmKwqPE7BCmu7w
+Date: Tue, 10 Oct 2023 07:08:42 +0000
+Message-ID: <TYCPR01MB1126966A9B8444133495FB75186CDA@TYCPR01MB11269.jpnprd01.prod.outlook.com>
+References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
+ <20231009164645.164464-12-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20231009164645.164464-12-paul.barker.ct@bp.renesas.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=bp.renesas.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TYCPR01MB11269:EE_|OS3PR01MB9604:EE_
+x-ms-office365-filtering-correlation-id: 448ec665-83cf-4ad8-c71e-08dbc95fbcb4
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: QHtMy44c2iIIa91Vlp+RcNRhIPDIqQFd7sSAxGtdRzlYcAWclvt8aOV6CgzE2U2SKPxzwQhNGYiQXG+o2IfrrWL64Hu7wiSNWPpD4P7JM4uI4OwtEgtvt9i8KcsmoZtHKyE5KiweZbwfE/e66NKtKWdFZe6HBLyfoebf67m1FhevqloJ0hlTsWNKrA90G14kD1DA+AcSOohrlkKmEyQRt4rIf5Rem0Wwg4jPcPyeEp9vqonXQbQLKU7EfH4H5AWNMPk58Phxnnqs9PoYBNd8BYnPpv9vQ/TQguuNrvKVPV8B6++VprajCh8oOiYi6AUOOLC9tJEoiDKLWFQVp6Aig92FKnFzTiZp0ThAKAym23LXRcmRFjQrKfyjdc/eRCiCKKZYHWsn2phTk7hNULu0UIolxMunE5B7Zc7WXWyHY63bJWiPjGr7W/HNgzsPFx4bFcA4waYzdhkXaTsKKj6UXZZfRcmTPzPYhxWpkpuquLgppPaXewqjPyQh/fbbx5EmPnmejYhVmH3nE0UQWvYGmkGjOnnU977NlzmMEgTGpNzbMrx9gLgY2m5Y+P5Y7q06iXApP5H3JKhemud4CR510OJbi+i46xCn7rIQ2iq62uanjP5gRp96/F+sf7o1dk+R
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYCPR01MB11269.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(39860400002)(396003)(346002)(366004)(376002)(136003)(230922051799003)(451199024)(186009)(1800799009)(64100799003)(478600001)(71200400001)(6506007)(55016003)(7696005)(9686003)(83380400001)(316002)(66446008)(76116006)(64756008)(41300700001)(66556008)(66946007)(38070700005)(38100700002)(66476007)(33656002)(122000001)(52536014)(5660300002)(8676002)(8936002)(4326008)(86362001)(2906002)(110136005)(26005)(107886003);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?rEO5kBydrHNjP26khLyiSOXVcgMwNK2LOck7dc7Nh8bKhb8S+LOdPGpu8cRU?=
+ =?us-ascii?Q?PzrVHHYNzJMlM05PLZ1l43DT498NfS0E4SStIHurtngq++RhNC4MQKJ0k7iP?=
+ =?us-ascii?Q?buXNLmRz4BvIZNnECFw3xA0uDnbmbkpvTJUpNociJuTwov52lxhIB+99kphc?=
+ =?us-ascii?Q?UOSzUKQYtqWq4FmRdxfy2HhMSVOrf2GO0UxF/81eC0c/4BnL3c8jlKbdQL8K?=
+ =?us-ascii?Q?+kBv2iGaeP5tj2A0VCjisBgPUOAuN+jjtXI4HwHQMqWBwU4ZTW2jSslkvb+K?=
+ =?us-ascii?Q?ijaJJf53/ojYo+TnPFwqgDlsxATu75exDzWV/32JopKrkmvhJtJKJZWFiQ8y?=
+ =?us-ascii?Q?bcRkLQJUnWh33+Ocxkqo+Cc7N/S5eaFRe6sEMmwpjVXLtCWk4EaflkFEqtdo?=
+ =?us-ascii?Q?Sx/k2FNFoDf1A3WXdKMji9tC+jCmGnEgrvY5DkouvoSG74bBkbjTfjxPYcuf?=
+ =?us-ascii?Q?Bw2wQ3w9DswH3PHrwdrZ2Yleybb6AlHKqfVFNyTji7ktJkGSkvQLv/O7KQEq?=
+ =?us-ascii?Q?Wy+miEU3OVdC3J+kI9oArT6IUB+3KZ81TE+Q/5odT3TvfdsXxVAE+jcV+ox2?=
+ =?us-ascii?Q?16N1eauprfkQhRzDT0qTh7nE2jjyzMkJ5xT7aP2CgrsYye/Arr7IIGdtIrwl?=
+ =?us-ascii?Q?rVAsUCwbHUf0jrqth8m3wWe7KpC45wIhFkJ8425nKX6itx0SfoudRnK3KU4a?=
+ =?us-ascii?Q?0KFTseE7EAGDip7tPseLOy/5/qrYjYsNBTji/qEfd+vN9U1dcyijtfYB9sQS?=
+ =?us-ascii?Q?ianGMemEQi/mri7LKMKfbyrTXulkm3sUsG1TIkducrJZ5Ell5HNQyyTAA+TI?=
+ =?us-ascii?Q?pGzVp7TsY6om5QkrdS+xNfg2mXRPMF44alnmfrtvMAFhNmmjRyUSkfHnPXTZ?=
+ =?us-ascii?Q?eAhThvjS82uKmVIEpN5KBiAHM5vZ74IKgEBZnxPvX66fJ4Pn2A0vs3Gl0DsP?=
+ =?us-ascii?Q?0dk8OuzTF/kKXEAFP1M6rdQ3fLG1v3+pe8vyZYPPx/KMyZD+eAv+4eE5MyOm?=
+ =?us-ascii?Q?TIe7z6TRPA7MEYwj2UR8Kk4ER1iMwXR25gARR3kEQAjV0DWJSySnHH1wN0x9?=
+ =?us-ascii?Q?MPVsyDaBjn76zjjm5qDh93Ze1iEu9bc/02PU8K7GaBEz8pPSdNAKXbpah8NP?=
+ =?us-ascii?Q?rpodPrrt/ve+j1NqKNH3p1vvaMYTTlbTcM9DYQ7I5vFe7kTIesIzNY/yyH6S?=
+ =?us-ascii?Q?9a815RSBoM+WKyUE+TXiNxl4hrg1j+jUaWkYeimL4a5yOU/tWK6yVfWHlMtu?=
+ =?us-ascii?Q?ws+qwsDE7o2J3MVmpyhk8X/AuCHab9HSNw9TFN3NbvJ9XBi6eq+E3v00lMy1?=
+ =?us-ascii?Q?5MwzwFxCfuXIG+WuoVyqyuJbLFKpn9CL+wYj1ovKh2pkivUSJEjeOJ61J9lj?=
+ =?us-ascii?Q?1B4rJaQLECzpYXj9VZ1GkJF8TL/fJ3wcS9A9hFbEy4GKIarNI8lnsyEJCnyi?=
+ =?us-ascii?Q?JBN5BjpDJgr0ti91pTn6/aWz83KTeZASqvAK3YOL7D37gHOAueUojoVhRrkU?=
+ =?us-ascii?Q?nu2bE0mgiLfAT4olh02aaiCIlHwT2KfR60l48HrrgWI5EWey1PT6zxEotxJn?=
+ =?us-ascii?Q?irZ+15/ndGWNEwlGMuOV5cbZdiArqxjkkI/hAmov14CcRzEtMsS1cx6YwmMt?=
+ =?us-ascii?Q?Yw=3D=3D?=
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:LHKewAgufyHLFPmIAJBgowct1lBJKd5xXW9jlr7GSlAOJ1Bf3as
- jbCIhrEZb2osCSdjUx3/ig2pNASpwoTkRLlnMEG0ZnwZmLoRz+roQ4ImvzWjyA6tNQGs6eo
- E9ByXPcfeNRG6YAoQTcVzrts5PDGB80OVlflfk+DMP8r6eLyHkmH1J5GOqdFcFP7sE6uaxG
- aloIok+1G94uEr4x0Fp3g==
-UI-OutboundReport: notjunk:1;M01:P0:hTMeutb1d5E=;jWFZ92/huyEEPOOmjiNl9hT0Iye
- BcUIt9Dh/A0bzIgP5bC6+Kxq5aHceaudw/407q6EzpA+43/1RlvPn+FrxOtEt08YU9K4SfE6j
- l6euZbRr5NhGkyOrhySWlWsO8KscYvkaqXGx6+W8iy0/Lez77De8/TczXQAXjeTiT9mAmjDtk
- 8i/IAylUvC5ZIjc374A2+MUPz7QQR8peUcB2ne/88nzQ3BqJ7lODH0XQ+Lv+Pgul4C/1RK2RU
- r42qvWvizI5wm7POgRMp74teakZSwqkuX6awp7WyRkWpkTe8RDCbEBce4od/+NZBc3AHwlhCu
- 57sLqmK4KehIWyrFRMRQ7zV0GEy+wwE8GGiV0S6muXlHA+kb836ZOQAiJyNSiPPLpa3V/Y3cg
- 3yBfEMF9M/Qnjx9gcpMwbVgzSzkm4RHpD79sA76fFd1EO5Uh2w+U+6xaPRaWjZEl3yqtEOMDs
- 09ep5FduF9hQjPStmhK0zYQUBSIrMM0zY762GBBVa5v1Na2hQCLWseI8JkPHdBkpwq0zrXV1H
- KeGETdGNJ0DcYggpKJ+pts2yHcXeYHypea5Omz4Wgpn+XSg56ruTw8EPHGIaoSEggSNgXuVdf
- bLsqOoRjzq9elNR9PN26oBfF9tkw4ZDgQ+DaYH1PFM3muLOXJKIUbtEc5xKNw/mj9EVX0rG1T
- BVkCE1o44kQl7D/66A9zd0gxwB3xATzPa3AynSvvjrhTTYSr+m+qyeY+uy2O/NDwkzyjYAfMI
- u/XDGmu9I3d/hIJlzUWLVZ47qlms2MQGlpBRY6+MpT2BmoUyRfu3W3u6L6AwvWJal0VdnlBwn
- s6+BjXVMAxUZEdb7JZC/HS350FjNxz01JlLA+GficoHJjZZkWrAVBgy8vnuGyPu/yISNMz3MS
- zBq/UfvV+oZX+YM2T2H+xcrGJON8zhtKZBXe0bTVdPSti3X1j+bQ+nA27oKKxTvhkyrUf8Z/o
- wxM88A==
+MIME-Version: 1.0
+X-OriginatorOrg: bp.renesas.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TYCPR01MB11269.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 448ec665-83cf-4ad8-c71e-08dbc95fbcb4
+X-MS-Exchange-CrossTenant-originalarrivaltime: 10 Oct 2023 07:08:42.7809 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 53d82571-da19-47e4-9cb4-625a166a4a2a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: Fjmm+BKpLfKQ0EDUig4sx/6TctqqaqAytepxyhld6TJmN2Afnom76TePsuR5cybDXZ/QJuHtgvLGva+JNhzCb4ig/sis6dVKkJpHns2JjWY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS3PR01MB9604
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,180 +139,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Paul,
 
+Thanks for the patch.
 
-Am 10=2E Oktober 2023 01:14:58 MESZ schrieb Marek Vasut <marex@denx=2Ede>:
->Add extension to the 'mmc' command to read out the card registers=2E
->Currently, only the eMMC OCR/CID/CSD/EXTCSD/RCA/DSR register are
->supported=2E A register value can either be displayed or read into
->an environment variable=2E
-
-Hello Marek,
-
-could you, please, update doc/usage/cmd/mmc=2Erst=2E
-
-Best regards
-
-Heinrich
-
->
->Signed-off-by: Marek Vasut <marex@denx=2Ede>
->---
->Cc: Abdellatif El Khlifi <abdellatif=2Eelkhlifi@arm=2Ecom>
->Cc: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
->Cc: Ilias Apalodimas <ilias=2Eapalodimas@linaro=2Eorg>
->Cc: Jaehoon Chung <jh80=2Echung@samsung=2Ecom>
->Cc: Ramon Fried <rfried=2Edev@gmail=2Ecom>
->Cc: Roger Knecht <rknecht@pm=2Eme>
->Cc: Sean Edmond <seanedmond@microsoft=2Ecom>
->Cc: Simon Glass <sjg@chromium=2Eorg>
->Cc: Tobias Waldekranz <tobias@waldekranz=2Ecom>
->---
-> cmd/Kconfig |  8 +++++
-> cmd/mmc=2Ec   | 96 +++++++++++++++++++++++++++++++++++++++++++++++++++++
-> 2 files changed, 104 insertions(+)
->
->diff --git a/cmd/Kconfig b/cmd/Kconfig
->index 6470b138d2f=2E=2Edcd99757a1e 100644
->--- a/cmd/Kconfig
->+++ b/cmd/Kconfig
->@@ -1307,6 +1307,14 @@ config CMD_BKOPS_ENABLE
-> 	  on a eMMC device=2E The feature is optionally available on eMMC devic=
-es
-> 	  conforming to standard >=3D 4=2E41=2E
+> Subject: [PATCH v2 11/19] serial: sh: Fix error handling
 >=20
->+config CMD_MMC_REG
->+	bool "Enable support for reading card registers in the mmc command"
->+	depends on CMD_MMC
->+	default n
->+	help
->+	  Enable the commands for reading card registers=2E This is useful
->+	  mostly for debugging or extracting details from the card=2E
->+
-> config CMD_MMC_RPMB
-> 	bool "Enable support for RPMB in the mmc command"
-> 	depends on SUPPORT_EMMC_RPMB
->diff --git a/cmd/mmc=2Ec b/cmd/mmc=2Ec
->index c6bd81cebbc=2E=2Ec29f44b7a18 100644
->--- a/cmd/mmc=2Ec
->+++ b/cmd/mmc=2Ec
->@@ -1110,6 +1110,93 @@ static int do_mmc_boot_wp(struct cmd_tbl *cmdtp, i=
-nt flag,
-> 	return CMD_RET_SUCCESS;
-> }
+> The current SCIF error handling is broken for the RZ/G2L. After a break
+> condition has been triggered, the current code is unable to clear the err=
+or
+> and serial port output never resumes.
 >=20
->+#if CONFIG_IS_ENABLED(CMD_MMC_REG)
->+static int do_mmc_reg(struct cmd_tbl *cmdtp, int flag,
->+		      int argc, char *const argv[])
->+{
->+	ALLOC_CACHE_ALIGN_BUFFER(u8, ext_csd, MMC_MAX_BLOCK_LEN);
->+	struct mmc *mmc;
->+	int i, ret;
->+	u32 off;
->+
->+	if (argc < 3 || argc > 5)
->+		return CMD_RET_USAGE;
->+
->+	mmc =3D find_mmc_device(curr_device);
->+	if (!mmc) {
->+		printf("no mmc device at slot %x\n", curr_device);
->+		return CMD_RET_FAILURE;
->+	}
->+
->+	if (IS_SD(mmc)) {
->+		printf("SD registers are not supported\n");
->+		return CMD_RET_FAILURE;
->+	}
->+
->+	off =3D simple_strtoul(argv[3], NULL, 10);
->+	if (!strcmp(argv[2], "cid")) {
->+		if (off > 3)
->+			return CMD_RET_USAGE;
->+		printf("CID[%i]: 0x%08x\n", off, mmc->cid[off]);
->+		if (argv[4])
->+			env_set_hex(argv[4], mmc->cid[off]);
->+		return CMD_RET_SUCCESS;
->+	}
->+	if (!strcmp(argv[2], "csd")) {
->+		if (off > 3)
->+			return CMD_RET_USAGE;
->+		printf("CSD[%i]: 0x%08x\n", off, mmc->csd[off]);
->+		if (argv[4])
->+			env_set_hex(argv[4], mmc->csd[off]);
->+		return CMD_RET_SUCCESS;
->+	}
->+	if (!strcmp(argv[2], "dsr")) {
->+		printf("DSR: 0x%08x\n", mmc->dsr);
->+		if (argv[4])
->+			env_set_hex(argv[4], mmc->dsr);
->+		return CMD_RET_SUCCESS;
->+	}
->+	if (!strcmp(argv[2], "ocr")) {
->+		printf("OCR: 0x%08x\n", mmc->ocr);
->+		if (argv[4])
->+			env_set_hex(argv[4], mmc->ocr);
->+		return CMD_RET_SUCCESS;
->+	}
->+	if (!strcmp(argv[2], "rca")) {
->+		printf("RCA: 0x%08x\n", mmc->rca);
->+		if (argv[4])
->+			env_set_hex(argv[4], mmc->rca);
->+		return CMD_RET_SUCCESS;
->+	}
->+	if (!strcmp(argv[2], "extcsd") &&
->+	    mmc->version >=3D MMC_VERSION_4_41) {
->+		ret =3D mmc_send_ext_csd(mmc, ext_csd);
->+		if (ret)
->+			return ret;
->+		if (!strcmp(argv[3], "all")) {
->+			/* Dump the entire register */
->+			printf("EXT_CSD:");
->+			for (i =3D 0; i < MMC_MAX_BLOCK_LEN; i++) {
->+				if (!(i % 10))
->+					printf("\n%03i: ", i);
->+				printf(" %02x", ext_csd[i]);
->+			}
->+			printf("\n");
->+			return CMD_RET_SUCCESS;
->+		}
->+		off =3D simple_strtoul(argv[3], NULL, 10);
->+		if (off > 512)
->+			return CMD_RET_USAGE;
->+		printf("EXT_CSD[%i]: 0x%02x\n", off, ext_csd[off]);
->+		if (argv[4])
->+			env_set_hex(argv[4], ext_csd[off]);
->+		return CMD_RET_SUCCESS;
->+	}
->+
->+	return CMD_RET_FAILURE;
->+}
->+#endif
->+
-> static struct cmd_tbl cmd_mmc[] =3D {
-> 	U_BOOT_CMD_MKENT(info, 1, 0, do_mmcinfo, "", ""),
-> 	U_BOOT_CMD_MKENT(read, 4, 1, do_mmc_read, "", ""),
->@@ -1142,6 +1229,9 @@ static struct cmd_tbl cmd_mmc[] =3D {
-> 	U_BOOT_CMD_MKENT(bkops-enable, 2, 0, do_mmc_bkops_enable, "", ""),
-> 	U_BOOT_CMD_MKENT(bkops, 4, 0, do_mmc_bkops, "", ""),
-> #endif
->+#if CONFIG_IS_ENABLED(CMD_MMC_REG)
->+	U_BOOT_CMD_MKENT(reg, 5, 0, do_mmc_reg, "", ""),
->+#endif
-> };
+> The RZ/G2L datasheet says that most error conditions are cleared by
+> resetting the relevant error bits in the FSR & LSR registers to zero.
+> To clear framing errors, the invalid data also needs to be read out of th=
+e
+> receive FIFO.
 >=20
-> static int do_mmcops(struct cmd_tbl *cmdtp, int flag, int argc,
->@@ -1229,6 +1319,12 @@ U_BOOT_CMD(
-> 	"   WARNING: This is a write-once setting=2E\n"
-> 	"mmc bkops <dev> [auto|manual] [enable|disable]\n"
-> 	" - configure background operations handshake on device\n"
->+#endif
->+#if CONFIG_IS_ENABLED(CMD_MMC_REG)
->+	"mmc reg read <reg> <offset> [env] - read card register <reg> offset <o=
-ffset>\n"
->+	"                                    (optionally into [env] variable)\n=
-"
->+	" - reg: cid/csd/dsr/ocr/rca/extcsd\n"
->+	" - offset: for cid/csd [0=2E=2E3], for extcsd [0=2E=2E511,all]\n"
-> #endif
-> 	);
+> After reviewing datasheets for RZ/G2{H,M,N,E}, R-Car Gen4, R-Car Gen3 and
+> even SH7751 SoCs, it's clear that this is the way to clear errors for all
+> of these SoCs.
 >=20
+> While we're here, annotate the handle_error() function with a couple of
+> comments as the reads and writes themselves don't immediately make it cle=
+ar
+> what we're doing.
+>=20
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> ---
+> v1->v2:
+>   * New patch after discussion with Marek & further investigation.
+>=20
+> I'm not going to put a `Fixes` tag on this, the error handling has been
+> writing ones to clear errors since at least 2007 so maybe it was original=
+ly
+> right for some board. It doesn't seem to apply to any of the current user=
+s
+> of the SCIF driver though.
+>=20
+>  drivers/serial/serial_sh.c | 16 ++++++++++++++--
+>  1 file changed, 14 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c inde=
+x
+> 5e543dbf3d58..2b650d458e71 100644
+> --- a/drivers/serial/serial_sh.c
+> +++ b/drivers/serial/serial_sh.c
+> @@ -79,10 +79,22 @@ sh_serial_setbrg_generic(struct uart_port *port, int
+> clk, int baudrate)
+>=20
+>  static void handle_error(struct uart_port *port)  {
+> -	sci_in(port, SCxSR);
+> -	sci_out(port, SCxSR, SCxSR_ERROR_CLEAR(port));
+> +	/*
+> +	 * Most errors are cleared by resetting the relevant error bits to
+> zero
+> +	 * in the FSR & LSR registers. For each register, a read followed by
+> a
+> +	 * write is needed according to the relevant datasheets.
+> +	 */
+> +	unsigned short status =3D sci_in(port, SCxSR);
+> +	sci_out(port, SCxSR, status & ~SCIF_ERRORS);
+>  	sci_in(port, SCLSR);
+>  	sci_out(port, SCLSR, 0x00);
+> +
+> +	/*
+> +	 * To clear framing errors, we also need to read and discard a
+> +	 * character.
+> +	 */
+> +	if (status & SCIF_FER)
+> +		sci_in(port, SCxRDR);
+
+Do we need to read status again to make sure framing error
+is cleared?
+
+Cheers,
+Biju
+
+>  }
+>=20
+>  static int serial_raw_putc(struct uart_port *port, const char c)
+> --
+> 2.39.2
+
