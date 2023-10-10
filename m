@@ -4,51 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7F54CD68E5
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 09:03:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2CB2CD68E5
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 09:03:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92D1986D85;
-	Tue, 10 Oct 2023 11:03:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0721C86DC3;
+	Tue, 10 Oct 2023 11:03:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="imozZEp6";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="QBbDlj3w";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 007EB86D65; Tue, 10 Oct 2023 11:03:23 +0200 (CEST)
+ id 79C0786D85; Tue, 10 Oct 2023 11:03:23 +0200 (CEST)
 Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
  [217.70.183.196])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A7FF86D78
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 11:03:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B394186DAF
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 11:03:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 3A858E000A;
- Tue, 10 Oct 2023 09:03:06 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 5DCCCE0009;
+ Tue, 10 Oct 2023 09:03:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1696928587;
+ t=1696928588;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=eMLE1EXnnNnrINQDbLNepPgxOCo1o/jRTTgHe7LN2gQ=;
- b=imozZEp6oY3A6al+5K1xlzGpxUQ8z3BfX320FPtEdMkBSSrMX//UK+pIiEiaLjRnHhG6B1
- J/RNa4Cur+vb4MQc0YRG35AE7IpXyD1YNJRcxNfgFb9x/vIt156NV8uylwLC++QfZ9LWdR
- jNG4PsX/ixHt8ckLnc5q/sbVvu9S25j3Fq2qDi/8f+Eo7wj8AndB4ImVWo/N3qgBBOBFTX
- GCiI2QismjfMmixaBuJUC32p45j/vtS9ZksghkuUTrr/of6mxRE0FKKvN2k6+ET/AL5ow/
- snX8BTh2dsbIs+bV3s6mFcHtTltsiBpyhB3gKHcGxUxni0CdIAhth75cPemShg==
+ bh=YWqG/XaeypBiB35sFSuJ4gjOWF7y12bdiSFYRDXk3+s=;
+ b=QBbDlj3wui8EFc95QjswqpcNTYehUx4fNKn+hxOzg4SxcCC0EiSeZw/fHpv5Ey405ezxgr
+ BVPABDyX36FCFirWpxvK9eaaUtkJ1zVuKhk9ois+Obi+VC4jsRLD1Nb6OmtZSUlMrfe5Ap
+ Ajt22ig+ppNFO6GvCn/N5cNYxQjh71ETJ/nEJrOMN7GgEVUz6xuaHqtUv9KUw07L/E1eLL
+ TykiEvCJZgnFN3iRadSjq0PUGNE1Hl+M7F7GsfEuOSBk56KTwaxLXPDea98Xzn+uenEWjE
+ LVkF06y7CWv9rDi7x38i1mw8/9JsSUzVZ7LLvvQuuUBfFeBn7cGlYOgqi2NrjQ==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Marek Vasut <marek.vasut@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Subject: [PATCH v3 1/3] cmd: Change the dependencies between CMD_BIND and
- USB_GADGET
-Date: Tue, 10 Oct 2023 11:03:02 +0200
-Message-Id: <20231010090304.49335-2-miquel.raynal@bootlin.com>
+ Miquel Raynal <miquel.raynal@bootlin.com>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 2/3] cmd: bind: Try to improve the (un)bind help
+Date: Tue, 10 Oct 2023 11:03:03 +0200
+Message-Id: <20231010090304.49335-3-miquel.raynal@bootlin.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231010090304.49335-1-miquel.raynal@bootlin.com>
 References: <20231010090304.49335-1-miquel.raynal@bootlin.com>
@@ -71,41 +70,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Today CMD_BIND defaults to 'y' when USB_ETHER is enabled. In practice,
-CMD_BIND should default to 'y' when any USB gadget is enabled not only
-USB_ETHER. Let's invert the logic of the dependency and use the weak
-'imply' keyword to enforce this.
+While it may sound totally obvious for the regular U-Boot developer to
+get the parameters of the bind/unbind commands from the output of 'dm
+tree', it did not felt straightforward to me until I was explicitly
+told to look there. And even when I knew the command, I did not make a
+direct link between the arguments of this command and the columns
+returned by 'dm tree'.
+
+Several of us lost a lot of time because of that, I would like to kindly
+help other users by slightly improving this textual line. Unfortunately,
+because of how this string is used (like within the 'help' command) I
+cannot detail much more, but at least the pointer is there.
+
+While we add this message, we can also imply CMD_DM when we enable
+CMD_BIND so the debug message does not lead to an unknown command. This
+way the 'dm' command will likely be there unless explicitly disabled.
 
 Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- cmd/Kconfig                | 1 -
- drivers/usb/gadget/Kconfig | 1 +
- 2 files changed, 1 insertion(+), 1 deletion(-)
+ cmd/Kconfig | 1 +
+ cmd/bind.c  | 4 ++++
+ 2 files changed, 5 insertions(+)
 
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 43ca10f69cc..6cc3bf6c2d0 100644
+index 6cc3bf6c2d0..668411fd87c 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -996,7 +996,6 @@ config CMD_BCB
+@@ -996,6 +996,7 @@ config CMD_BCB
  config CMD_BIND
  	bool "bind/unbind - Bind or unbind a device to/from a driver"
  	depends on DM
--	default y if USB_ETHER
++	imply CMD_DM
  	help
  	  Bind or unbind a device to/from a driver from the command line.
  	  This is useful in situations where a device may be handled by several
-diff --git a/drivers/usb/gadget/Kconfig b/drivers/usb/gadget/Kconfig
-index 1cfe6022842..44f47a07207 100644
---- a/drivers/usb/gadget/Kconfig
-+++ b/drivers/usb/gadget/Kconfig
-@@ -17,6 +17,7 @@ menuconfig USB_GADGET
- 	bool "USB Gadget Support"
- 	depends on DM
- 	select DM_USB
-+	imply CMD_BIND
- 	help
- 	   USB is a master/slave protocol, organized with one master
- 	   host (such as a PC) controlling up to 127 peripheral devices.
+diff --git a/cmd/bind.c b/cmd/bind.c
+index 4d1b7885e60..be0d4d2a711 100644
+--- a/cmd/bind.c
++++ b/cmd/bind.c
+@@ -246,6 +246,8 @@ U_BOOT_CMD(
+ 	"Bind a device to a driver",
+ 	"<node path> <driver>\n"
+ 	"bind <class> <index> <driver>\n"
++	"Use 'dm tree' to list all devices registered in the driver model,\n"
++	"their path, class, index and current driver.\n"
+ );
+ 
+ U_BOOT_CMD(
+@@ -254,4 +256,6 @@ U_BOOT_CMD(
+ 	"<node path>\n"
+ 	"unbind <class> <index>\n"
+ 	"unbind <class> <index> <driver>\n"
++	"Use 'dm tree' to list all devices registered in the driver model,\n"
++	"their path, class, index and current driver.\n"
+ );
 -- 
 2.34.1
 
