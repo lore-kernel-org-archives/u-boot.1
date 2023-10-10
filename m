@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C47D0CD80CA
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 12:59:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08ADFCD80CB
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 12:59:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF651869D6;
-	Tue, 10 Oct 2023 14:58:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 40E2786B29;
+	Tue, 10 Oct 2023 14:58:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o3oB16Ug";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rG/I3cph";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 758E586B29; Tue, 10 Oct 2023 14:58:18 +0200 (CEST)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
+ id 626AA863C3; Tue, 10 Oct 2023 14:58:31 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DC2C86591
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:58:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6844A86D9D
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:58:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-59f6441215dso69006447b3.2
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:58:16 -0700 (PDT)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d8164e661abso5926922276.1
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:58:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696942695; x=1697547495; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1696942700; x=1697547500; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Co3ZyEnu3yD++XwDdTFCFUZozrsDNUyat2WHIFrK9/E=;
- b=o3oB16Ugyno+coRcRC5BwZC+kAOf/g/QAE9lc9VgujWbcdjJ8clgq3enJD3ICTV4w3
- moSPR6qMtgrCohS6C2A4PH5wMbiuBLHjBasoGxcja4T5uaQKNM4QuN6fwJ6fzgu3RbOk
- dHYXlUrM8b285dzUbRG7BJecFfu7RbECK907k=
+ bh=o7FKgZKCR3/L5DlJUTVFOi9CK4zaoTQDKk2je9DpIoQ=;
+ b=rG/I3cphsunzbCGHgiujgxHwbkWQkg2NO0fb9wVAWyyBrnxCMf0kxMJ2q7A7zgPXAv
+ 9B37Kw/Xz+lHoHuyT+D1eGAqLTntge3mspu/MNOpvjUiXP+WMh6poBRcwstqrZTxrHhz
+ tHW6hLImuD4oVo8dj56uY4SVRft9ISowXgXuk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696942695; x=1697547495;
+ d=1e100.net; s=20230601; t=1696942700; x=1697547500;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Co3ZyEnu3yD++XwDdTFCFUZozrsDNUyat2WHIFrK9/E=;
- b=rFzxL2Flt15sqbuZYrsSSeydyQ23dx0O25k0ku8eRJCUtQfFrc/YYdiBcndiOeZkWp
- XqIvrPUz3cjqqzxdaXSJrxdEMM6BatmAKjkWaaqgzKEr1XndI8wCrSwG/IioZjYTSY4d
- T6M79wQ6QMj8NEA8dz6CVbyAWcZFaJBMglAUmuqBmEhiegK5Lf+E6MEM4VJLgOHUzd/4
- xF1Lxsb4azVA6hSF3gWhSe0NLh6kU+1ld0c1HXFRnwZrd5fbpEFMCes1teyJ0AGFUBIx
- 3Qn0z8JZe/QAL7XS/DJrfkUHmvOv6JH2gcOcwoe+aXDz5KcKTYrKM6bNPTlC6haG5g/b
- zZhA==
-X-Gm-Message-State: AOJu0YyDJShCB6XLlM75z8H7Ss+nyJttXyj+azgHfQXpbUZCiIPk7tvk
- ewT9IlJNNPIJ2bvwpViR0PtPaNdeuktJTIDXz5iRJQ==
-X-Google-Smtp-Source: AGHT+IEG1BVaHwN22IQcvtY02G4SBcbLxnMIr9f1GbBIlP6bxl7scFDRm/fUDfVY6I7wjqPpHzZZwA==
-X-Received: by 2002:a81:a0d0:0:b0:5a7:c4a7:21c3 with SMTP id
- x199-20020a81a0d0000000b005a7c4a721c3mr1268196ywg.38.1696942694975; 
- Tue, 10 Oct 2023 05:58:14 -0700 (PDT)
+ bh=o7FKgZKCR3/L5DlJUTVFOi9CK4zaoTQDKk2je9DpIoQ=;
+ b=ZU3oBNidNSLb1AwT1HJ+vItM4qliR3vcaK5zzrPoVBiCkpKFUR3MVY480BT+qOfp/N
+ EtwigOI77cxMmHG3oUifm7ArAjlsncv9bgP5Djk9OCqXfOLm/cD1/eZZwS8Xb1emzr3P
+ y2SY/Bf9KCRsqpFlPYrdOsQfm24xDrZtO4H837sJPfFxvL0cCzVFsXemX3E83OhU3Kfj
+ GG0eV3rrOvruwlzSwfz/roZqNuH6HGjesiycwcwQmZuKlOO5bsgojpMkkjL7denPA6+s
+ VWAUQg7jM/FCNi3RnuQbgkXktSjrFhYH4r28LmHv2VOtjsjT7coGGI/ITSkdJKMNa6cZ
+ IKNQ==
+X-Gm-Message-State: AOJu0YwGjyeWzewT3eIZmuvHcegQpj5T8Jyv3P3NFAakCOU1CnTRzRep
+ UntrQpKzbgzyQXsAOUEQrJlxHo+bEMDWZeBgO/1bOg==
+X-Google-Smtp-Source: AGHT+IFFsDukWWgxzrxHX3gp3nnH7DKRDygpWLp1Crf2pgVMfMAiC1VqYFtkFF652dl7RqsJEDwrXg==
+X-Received: by 2002:a25:f309:0:b0:d81:5240:679f with SMTP id
+ c9-20020a25f309000000b00d815240679fmr14483305ybs.16.1696942700225; 
+ Tue, 10 Oct 2023 05:58:20 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6c43-4eba-c113-e8cd.res6.spectrum.com.
  [2603:6081:7b00:6400:6c43:4eba:c113:e8cd])
  by smtp.gmail.com with ESMTPSA id
- u84-20020a816057000000b00583803487ccsm4398710ywb.122.2023.10.10.05.58.13
+ j17-20020a5b0691000000b00d13b72fae3esm3653808ybq.2.2023.10.10.05.58.19
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 05:58:13 -0700 (PDT)
-Date: Tue, 10 Oct 2023 08:58:12 -0400
+ Tue, 10 Oct 2023 05:58:19 -0700 (PDT)
+Date: Tue, 10 Oct 2023 08:58:17 -0400
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/3] Makefile: Allow for board directories to not have a
- Makefile
-Message-ID: <20231010125812.GX2227687@bill-the-cat>
+Subject: Re: [PATCH 2/3] board: Remove essentially empty board files and
+ Makefiles
+Message-ID: <20231010125817.GY2227687@bill-the-cat>
 References: <20230921233248.159047-1-trini@konsulko.com>
+ <20230921233248.159047-2-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="x5ZFEx4NowrkcnuP"
+ protocol="application/pgp-signature"; boundary="WW4SfvLIO94Aipus"
 Content-Disposition: inline
-In-Reply-To: <20230921233248.159047-1-trini@konsulko.com>
+In-Reply-To: <20230921233248.159047-2-trini@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,17 +94,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---x5ZFEx4NowrkcnuP
+--WW4SfvLIO94Aipus
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 21, 2023 at 07:32:46PM -0400, Tom Rini wrote:
+On Thu, Sep 21, 2023 at 07:32:47PM -0400, Tom Rini wrote:
 
-> It is entirely possible at this point to have platforms in U-Boot that
-> do not have board-specific C code (just Kconfig or environment) and so
-> make it optional to have to descend in to and then build in the board
-> directory.
+> As part of reviewing a new platform, Daniel Schwierzeck noted that we
+> can have an empty Makefile in the board directory and don't need an
+> empty board.c file as well.  Further with further cleanup in the
+> Makefile we can now omit the Makefile entirely. Remove a number of now
+> unnecessary board.c and Makefiles.
 >=20
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 
@@ -112,22 +114,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---x5ZFEx4NowrkcnuP
+--WW4SfvLIO94Aipus
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSmMACgkQFHw5/5Y0
-tyx89wwAgu05DfbAS9uihbi+A37fGS5ZaqtyfQIKJtzh0t9TV63OMiSFHLefRxsv
-VKRtG1/CWp8uMI0KbPtU72EXDbeyu8I4W+bc6L82CCyg+9+GVQYXOdPwhvRPnsIS
-/bYbUxMrBgNMCivUpeCYT6EI+d3l4Uhae3jYzVVs9W+F7cubgudLtDxe9dkBIx9h
-E+WrD9eqHgrcmkLVGwGWJ5MM+btZPX2j64cP3lNqijy0GXCI480pHrv3hpwnk17r
-FLWZmiWvPYqJYn2DHvTrW+2TbCcXUWectERTajap3Av2bHwML+wD0cxa43HkdAmO
-Z7p3gtXMv0IaDm63qJ5OrpFmSvsFihPNxCaXqWrzr2qYLH9bTkAyVPNJU5YcfBsy
-m+rp/pV7oVBGkPwD+YcU0h+p1De8oLHOq+F3/j+ltdhSFegM/sP7s/ydpvNVmGis
-mAxFlYEYzjgdA+BERjENV0bWbSQ5eg41XxNTemp2Otsd60qM55BEPqQ+ezB0A2OF
-o6GDTk68
-=Kd8R
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSmkACgkQFHw5/5Y0
+tywhXwv/bsrLqjDtokSPHkI6/YbPV3Hqt+F5JsAq3bXiuPSi81AV5r6QncJrt882
+gHuPz3ev749RKxIKOhnkAoaKRtEbG8kmmSpQ3+jMZ0N0eMdVtjvOSExNEH4eH9SJ
+h8bL7QNMCNMtYj0ptStqHAyqCwb7HsNMdnSeLlI7nlhju5mvPCcsMnaV1csht7t5
+Uo0agAGyKjqA0lBl+NSgpNYs6EytbCAh9pahq9Jyrp7HYt1O0qZtBYjwOxruL2dc
+C8BZ8VSWi/44/X67mhZF2GXk7lLRjLvdfFIGblxOKFn14iXqhHAdnN5hAw5fSuNb
+50vuEqNvCWqjFZi15VTTmF3xRowv9pOqEkec/c4eK1NWyTU/NF/cMkSLDOadC/Kj
+4wX0FIwJ6AAd3sJS8w+PCRtaxhDyfnNbrIYSyMbYb3kBeok3m7gtooDr55qN5Sv6
+89x4+2BuffwsUhey1hhS9cWCWyhlFhZU6qOWWkYlUC74NJ0Xt1nQqQRN2zEEl4ok
+NLr0DOq6
+=oERA
 -----END PGP SIGNATURE-----
 
---x5ZFEx4NowrkcnuP--
+--WW4SfvLIO94Aipus--
