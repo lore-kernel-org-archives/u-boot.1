@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E5ACD68EE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 04:48:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DFF5CD68EC
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 05:00:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B02F864E7;
-	Tue, 10 Oct 2023 06:48:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BE8CC864E7;
+	Tue, 10 Oct 2023 07:00:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N5glfnJW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jXp1uboh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D3BF86741; Tue, 10 Oct 2023 06:48:48 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 98AD686A02; Tue, 10 Oct 2023 07:00:04 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08DED864A6
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 06:48:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A97B864D4
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 06:59:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-690f8e63777so1399623b3a.0
- for <u-boot@lists.denx.de>; Mon, 09 Oct 2023 21:48:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696913324; x=1697518124; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EaDgnJfrTPGteL1pAWRDzzHCeRcedshRmSVZgJqCahI=;
- b=N5glfnJWBhbGNbNkFm6RvROR3zMDtwq6sNJtP/LCh+u+liEN4slGVQhLf6lUiqnqUj
- RvBr2p0OAQ+JeKylOi2EoyI/PECi0MIrPCXT0a7qJcmg2jxrY14kGJaVl2n+KTCOIYPH
- tMVcetoQnOi3kURTzlZZjzlw8E6bjVa8gHykJ1o5sVp1PLyKuZujirVSi0EId8LPx8i4
- 8D+TTEjZ68Px4NuBJ+w+oadT9JfXh5yZoET9IvyTIV3Gc15xfF4qHHmHwaXsx03gv4Wq
- DT3qBnxYRzlgjIGj7YrBX6jeKvLbJ3egCUzpXt5yd3qp1Mnxfcst9uo3EGKxHrrxy8RF
- MYgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696913324; x=1697518124;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EaDgnJfrTPGteL1pAWRDzzHCeRcedshRmSVZgJqCahI=;
- b=L6/LPGUv/UEc6eA9NBcU5yR4C9Kj78uEl3zhrIIKJf+J5Dw/sSvF5fE+WmzFjArkYt
- DcqFGoXeT6L36/YHEHkhKkCYcAyuxPI2oYdHaxpzChYEkyrZgRJtN+gL/J1/oeEEu8iG
- LdS86sApElQva23+X90tgbSAY8b7u3eQRJTsQBgMbQr7XL7Nj2Jz+nBYgMu65vp4q2So
- t0aFLECebxBv/np5wxhVgfDa+AiyTHs+IA4h0h8YVqO8NqbsoQL5fan2qEZn0ES8zCYC
- AX42XDfMM4xslVufmZHcGogYljeoO6RS5GR5pmb8ssixJ1n/jHmBBDxxCJPat/90YTsn
- NBcA==
-X-Gm-Message-State: AOJu0Yxc8YZPU8OQLz8uNNsGsd40LZlH04SE5+LBFyX4DDUzV6noDwSq
- 9k7ygtnKUE0KdirYzEntgNBFLA==
-X-Google-Smtp-Source: AGHT+IEb+3OQNPpSMcPkKL3WeJ25K5Y/OSYpEv3vm4/9gZlEest/ebrJ/Ce7uIDxAbm8STsLqjXt8Q==
-X-Received: by 2002:a17:902:e80a:b0:1c4:1e65:1e5e with SMTP id
- u10-20020a170902e80a00b001c41e651e5emr19562985plg.0.1696913324053; 
- Mon, 09 Oct 2023 21:48:44 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:d26f:f61a:9867:e809])
- by smtp.gmail.com with ESMTPSA id
- g22-20020a1709029f9600b001c61e628e9dsm10540495plq.77.2023.10.09.21.48.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 09 Oct 2023 21:48:43 -0700 (PDT)
-Date: Tue, 10 Oct 2023 13:48:40 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39A4xsrT065726;
+ Mon, 9 Oct 2023 23:59:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1696913994;
+ bh=r+Pkl7fHUfdNFpDFyNoAij5riaa8EBjvUuLKasCeQU8=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=jXp1ubohmQryegLAPH5WRjNo2MLfOYHE0SrbUgG/V1kB+em5atXI+ZowJD1mYWP0j
+ 8IFppDsk0r9tosVhZ+8thJ9JEqGGnq904rYrfKL4D9VE7yV+L4dYqVvhLOUyLgKTvg
+ uByBwblBr/AYHG0+UwAYmEEW8adpRAb2qFEZKJUM=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39A4xsNC100785
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 9 Oct 2023 23:59:54 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 9
+ Oct 2023 23:59:54 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 9 Oct 2023 23:59:54 -0500
+Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
+ by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39A4xrdn021894;
+ Mon, 9 Oct 2023 23:59:54 -0500
+Date: Tue, 10 Oct 2023 10:29:53 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v2 22/27] efi: Depend on CMDLINE for efi_loader
-Message-ID: <ZSTXqCGTzGx6WT7y@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Tom Rini <trini@konsulko.com>
-References: <20231007231255.277623-1-sjg@chromium.org>
- <20231007231255.277623-23-sjg@chromium.org>
+CC: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, U-Boot Mailing List <u-boot@lists.denx.de>, Udit Kumar
+ <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH v3 1/6] binman: ti-secure: Add support for firewalling
+ entities
+Message-ID: <20231010045953.6wuwi77ql22plicv@ula0497581>
+References: <20231004-binman-firewalling-v3-0-e4a102324e1f@ti.com>
+ <20231004-binman-firewalling-v3-1-e4a102324e1f@ti.com>
+ <CAPnjgZ0zULhGofQvoThH1i1Ynjg1r1fT1U6reimbysfAxfNo9Q@mail.gmail.com>
+ <20231009074348.ghpkwvnc4q52ha55@ula0497581>
+ <CAPnjgZ25EEKsjpq63v2Buk=NjCqvF9YQ2+9iGndoxmk9PeB_4A@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231007231255.277623-23-sjg@chromium.org>
+In-Reply-To: <CAPnjgZ25EEKsjpq63v2Buk=NjCqvF9YQ2+9iGndoxmk9PeB_4A@mail.gmail.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,52 +89,301 @@ X-Virus-Status: Clean
 
 Hi Simon,
 
-On Sat, Oct 07, 2023 at 05:12:41PM -0600, Simon Glass wrote:
-> This features currently requires the command line, so make this
-> explicit. Future work could adjust this, but it needs effort within
-> the booting support first, like the bootm command.
-
-I a bit doubt this dependency.
-EFI_LOADER as library functions doesn't rely on command line support.
-What does is, as you mentioned, "bootefi bootmgr" command.
-So a more appropriate dependency would be
-
-CMD_BOOTEFI_BOOTMGR
-    depends on CMDLINE
-
-CMD_BOOTEFI
-    depends on CMDLINE
-
-CMD_EFICONFIG
-    depends on CMD_BOOTEFI_BOOTMGR
-
-# CMD_EFIDEBUG can compile without CMD_BOOTEFI_BOOTMGR.
-
-# In my opinion, CMD_BOOTEFI_BOOTMGR should be split into cmd part
-  and library part.
-
--Takahiro Akashi
-
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
+On 11:56-20231009, Simon Glass wrote:
+> Hi Manorit,
 > 
-> (no changes since v1)
+> On Mon, 9 Oct 2023 at 01:43, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+> >
+> > Hi Simon,
+> >
+> > On 17:10-20231007, Simon Glass wrote:
+> > > Hi Manorit,
+> > >
+> > > On Wed, 4 Oct 2023 at 06:32, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+> > > >
+> > > > We can now firewall entities while loading them through our secure
+> > > > entity TIFS, the required information should be present in the
+> > > > certificate that is being parsed by TIFS.
+> > > >
+> > > > The following commit adds the support to enable the certificates to be
+> > > > generated if the firewall configurations are present in the binman
+> dtsi
+> > > > nodes.
+> > > >
+> > > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > > > ---
+> > > >  tools/binman/btool/openssl.py   | 16 +++++++-
+> > > >  tools/binman/etype/ti_secure.py | 85
+> +++++++++++++++++++++++++++++++++++++++++
+> > > >  tools/binman/etype/x509_cert.py |  3 +-
+> > > >  3 files changed, 101 insertions(+), 3 deletions(-)
+> > > >
+> > > > diff --git a/tools/binman/btool/openssl.py
+> b/tools/binman/btool/openssl.py
+> > > > index aad3b61ae27c..dff439df211f 100644
+> > > > --- a/tools/binman/btool/openssl.py
+> > > > +++ b/tools/binman/btool/openssl.py
+> > > > @@ -82,7 +82,7 @@ imageSize              = INTEGER:{len(indata)}
+> > > >          return self.run_cmd(*args)
+> > > >
+> > > >      def x509_cert_sysfw(self, cert_fname, input_fname, key_fname,
+> sw_rev,
+> > > > -                  config_fname, req_dist_name_dict):
+> > > > +                  config_fname, req_dist_name_dict,
+> firewall_cert_data):
+> > > >          """Create a certificate to be booted by system firmware
+> > > >
+> > > >          Args:
+> > > > @@ -94,6 +94,13 @@ imageSize              = INTEGER:{len(indata)}
+> > > >              req_dist_name_dict (dict): Dictionary containing
+> key-value pairs of
+> > > >              req_distinguished_name section extensions, must contain
+> extensions for
+> > > >              C, ST, L, O, OU, CN and emailAddress
+> > > > +            firewall_cert_data (dict):
+> > > > +              - auth_in_place (int): The Priv ID for copying as the
+> > > > +                specific host in firewall protected region
+> > > > +              - num_firewalls (int): The number of firewalls in the
+> > > > +                extended certificate
+> > > > +              - certificate (str): Extended firewall certificate with
+> > > > +                the information for the firewall configurations.
+> > > >
+> > > >          Returns:
+> > > >              str: Tool output
+> > > > @@ -121,6 +128,7 @@ basicConstraints       = CA:true
+> > > >  1.3.6.1.4.1.294.1.3    = ASN1:SEQUENCE:swrv
+> > > >  1.3.6.1.4.1.294.1.34   = ASN1:SEQUENCE:sysfw_image_integrity
+> > > >  1.3.6.1.4.1.294.1.35   = ASN1:SEQUENCE:sysfw_image_load
+> > > > +1.3.6.1.4.1.294.1.37   = ASN1:SEQUENCE:firewall
+> > > >
+> > > >  [ swrv ]
+> > > >  swrv = INTEGER:{sw_rev}
+> > > > @@ -132,7 +140,11 @@ imageSize              = INTEGER:{len(indata)}
+> > > >
+> > > >  [ sysfw_image_load ]
+> > > >  destAddr = FORMAT:HEX,OCT:00000000
+> > > > -authInPlace = INTEGER:2
+> > > > +authInPlace = INTEGER:{hex(firewall_cert_data['auth_in_place'])}
+> > > > +
+> > > > +[ firewall ]
+> > > > +numFirewallRegions = INTEGER:{firewall_cert_data['num_firewalls']}
+> > > > +{firewall_cert_data['certificate']}
+> > >
+> > > Do we want the text above if there is no firewall info?
+> > >
+> >
+> > Yes, keeping numFirewallRegions = INTEGER:0 is valid. The other way would
+> be
+> > to remove OIDs and everything that we have kept in the certificate when
+> > firewall nodes are not present but that seems a bit more difficult given
+> > that we have an easy fix keeping the numFirewallRegions as 0.
 > 
->  lib/efi_loader/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+> OK
 > 
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index 621ed5e5b0fb..2aef9336034e 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -12,6 +12,7 @@ config EFI_LOADER
->  	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
->  	depends on BLK
->  	depends on !EFI_APP
-> +	depends on CMDLINE
->  	default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
->  	select CHARSET
->  	# We need to send DM events, dynamically, in the EFI block driver
-> -- 
-> 2.42.0.609.gbb76f46606-goog
+> >
+> > > >  ''', file=outf)
+> > > >          args = ['req', '-new', '-x509', '-key', key_fname, '-nodes',
+> > > >                  '-outform', 'DER', '-out', cert_fname, '-config',
+> config_fname,
+> > > > diff --git a/tools/binman/etype/ti_secure.py
+> b/tools/binman/etype/ti_secure.py
+> > > > index d939dce57139..a7409023fa55 100644
+> > > > --- a/tools/binman/etype/ti_secure.py
+> > > > +++ b/tools/binman/etype/ti_secure.py
+> > > > @@ -7,9 +7,35 @@
+> > > >
+> > > >  from binman.entry import EntryArg
+> > > >  from binman.etype.x509_cert import Entry_x509_cert
+> > > > +from dataclasses import dataclass
+> > > >
+> > > >  from dtoc import fdt_util
+> > > >
+> > > > +@dataclass
+> > > > +class Firewall():
+> > > > +    id: int
+> > > > +    region: int
+> > > > +    control : int
+> > > > +    permissions: list[hex]
+> > > > +    start_address: str
+> > > > +    end_address: str
+> > > > +
+> > > > +    def get_certificate(self) -> str:
+> > > > +        unique_identifier = f"{self.id}{self.region}"
+> > > > +        cert = f"""
+> > > > +firewallID{unique_identifier} = INTEGER:{self.id}
+> > > > +region{unique_identifier} = INTEGER:{self.region}
+> > > > +control{unique_identifier} = INTEGER:{hex(self.control)}
+> > > > +nPermissionRegs{unique_identifier} = INTEGER:{len(self.permissions)}
+> > > > +"""
+> > > > +        for index, permission in enumerate(self.permissions):
+> > > > +            cert += f"""permissions{unique_identifier}{index} =
+> INTEGER:{hex(permission)}
+> > > > +"""
+> > > > +        cert += f"""startAddress{unique_identifier} =
+> FORMAT:HEX,OCT:{self.start_address:02x}
+> > > > +endAddress{unique_identifier} = FORMAT:HEX,OCT:{self.end_address:02x}
+> > > > +"""
+> > > > +        return cert
+> > > > +
+> > > >  class Entry_ti_secure(Entry_x509_cert):
+> > > >      """Entry containing a TI x509 certificate binary
+> > > >
+> > > > @@ -17,6 +43,11 @@ class Entry_ti_secure(Entry_x509_cert):
+> > > >          - content: List of phandles to entries to sign
+> > > >          - keyfile: Filename of file containing key to sign binary
+> with
+> > > >          - sha: Hash function to be used for signing
+> > > > +        - auth_in_place: This is an integer field that contains two
+> pieces
+> > > > +          of information
+> > > > +            Lower Byte - Remains 0x02 as per our use case
+> > > > +            ( 0x02: Move the authenticated binary back to the header
+> )
+> > > > +            Upper Byte - The Host ID of the core owning the firewall
+> > > >
+> > > >      Output files:
+> > > >          - input.<unique_name> - input file passed to openssl
+> > > > @@ -25,6 +56,35 @@ class Entry_ti_secure(Entry_x509_cert):
+> > > >          - cert.<unique_name> - output file generated by openssl
+> (which is
+> > > >            used as the entry contents)
+> > > >
+> > > > +    Depending on auth_in_place information in the inputs, we read the
+> > > > +    firewall nodes that describe the configurations of firewall that
+> TIFS
+> > > > +    will be doing after reading the certificate.
+> > > > +
+> > > > +    The syntax of the firewall nodes are as such:
+> > > > +
+> > > > +    firewall-257-0 {
+> > > > +        id = <257>;           /* The ID of the firewall being
+> configured */
+> > > > +        region = <0>;         /* Region number to configure */
+> > > > +
+> > > > +        control =             /* The control register */
+> > > > +            <(FWCTRL_EN | FWCTRL_LOCK | FWCTRL_BG | FWCTRL_CACHE)>;
+> > > > +
+> > > > +        permissions =         /* The permission registers */
+> > > > +            <((FWPRIVID_ALL << FWPRIVID_SHIFT) |
+> > > > +                        FWPERM_SECURE_PRIV_RWCD |
+> > > > +                        FWPERM_SECURE_USER_RWCD |
+> > > > +                        FWPERM_NON_SECURE_PRIV_RWCD |
+> > > > +                        FWPERM_NON_SECURE_USER_RWCD)>;
+> > > > +
+> > > > +        /* More defines can be found in k3-security.h */
+> > > > +
+> > > > +        start_address =        /* The Start Address of the firewall
+> */
+> > > > +            <0x0 0x0>;
+> > > > +        end_address =          /* The End Address of the firewall */
+> > > > +            <0xff 0xffffffff>;
+> > > > +    };
+> > > > +
+> > > > +
+> > > >      openssl signs the provided data, using the TI templated config
+> file and
+> > > >      writes the signature in this entry. This allows verification
+> that the
+> > > >      data is genuine.
+> > > > @@ -32,11 +92,20 @@ class Entry_ti_secure(Entry_x509_cert):
+> > > >      def __init__(self, section, etype, node):
+> > > >          super().__init__(section, etype, node)
+> > > >          self.openssl = None
+> > > > +        self.firewall_cert_data: dict = {
+> > > > +            'auth_in_place': 0x02,
+> > > > +            'num_firewalls': 0,
+> > > > +            'certificate': "",
+> > > > +        }
+> > > >
+> > > >      def ReadNode(self):
+> > > >          super().ReadNode()
+> > > >          self.key_fname = self.GetEntryArgsOrProps([
+> > > >              EntryArg('keyfile', str)], required=True)[0]
+> > > > +        auth_in_place = fdt_util.GetInt(self._node, "auth_in_place")
+> > >
+> > > Please use hyphens in properties. If that is a bool, use GetBool()
+> >
+> > I will use hyphens, the property is supposed to be int. Maybe doesn't
+> > convey what it really is by the name but hoping the documentation around
+> > it makes it clear.
 > 
+> No, but you can't use a property name in the DT called 'auth_in_place'
+> (please use single quotes BTW). It should have hyphens. Of course the
+> Python var will have underscore. but not the property.
+> 
+
+I think there has been some miscommunication but I believe we are both
+in agreement for the change unless I understood something incorrectly,
+would be sending a v4 with the change.
+
+Thanks and Regards,
+Manorit
+
+> >
+> > >
+> > >
+> > > > +        if auth_in_place:
+> > > > +            self.firewall_cert_data['auth_in_place'] = auth_in_place
+> > > > +            self.ReadFirewallNode()
+> > > >          self.sha = fdt_util.GetInt(self._node, 'sha', 512)
+> > > >          self.req_dist_name = {'C': 'US',
+> > > >                  'ST': 'TX',
+> > > > @@ -46,6 +115,22 @@ class Entry_ti_secure(Entry_x509_cert):
+> > > >                  'CN': 'TI Support',
+> > > >                  'emailAddress': 'support@ti.com'}
+> > > >
+> > > > +    def ReadFirewallNode(self):
+> > > > +        self.firewall_cert_data['certificate'] = ""
+> > > > +        self.firewall_cert_data['num_firewalls'] = 0
+> > > > +        for node in self._node.subnodes:
+> > > > +            if 'firewall' in node.name:
+> > > > +                firewall = Firewall(
+> > > > +                     fdt_util.GetInt(node, 'id'),
+> > > > +                     fdt_util.GetInt(node, 'region'),
+> > > > +                     fdt_util.GetInt(node, 'control'),
+> > > > +                     fdt_util.GetPhandleList(node, 'permissions'),
+> > > > +                     fdt_util.GetInt64(node, 'start_address'),
+> > > > +                     fdt_util.GetInt64(node, 'end_address'),
+> > >
+> > > What happens if some of these properties are missing?
+> >
+> > Should be an error as the firewall would'nt be configurable without
+> > these properties. Though am not sure why am not getting an error while
+> > passing None to the dataclass, ideally it should..
+> >
+> > Regards,
+> > Manorit
+> > >
+> > > > +                )
+> > > > +                self.firewall_cert_data['num_firewalls'] += 1
+> > > > +                self.firewall_cert_data['certificate'] +=
+> firewall.get_certificate()
+> > > > +
+> > > >      def GetCertificate(self, required):
+> > > >          """Get the contents of this entry
+> > > >
+> > > > diff --git a/tools/binman/etype/x509_cert.py
+> b/tools/binman/etype/x509_cert.py
+> > > > index d028cfe38cd9..9e1cf479023b 100644
+> > > > --- a/tools/binman/etype/x509_cert.py
+> > > > +++ b/tools/binman/etype/x509_cert.py
+> > > > @@ -98,7 +98,8 @@ class Entry_x509_cert(Entry_collection):
+> > > >                  key_fname=self.key_fname,
+> > > >                  config_fname=config_fname,
+> > > >                  sw_rev=self.sw_rev,
+> > > > -                req_dist_name_dict=self.req_dist_name)
+> > > > +                req_dist_name_dict=self.req_dist_name,
+> > > > +                firewall_cert_data=self.firewall_cert_data)
+> > > >          elif type == 'rom':
+> > > >              stdout = self.openssl.x509_cert_rom(
+> > > >                  cert_fname=output_fname,
+> > > >
+> > > > --
+> > > > 2.41.0
+> > > >
+> > >
+> > > Regards,
+> > > Simon
+> 
+> Regards,
+> Simon
