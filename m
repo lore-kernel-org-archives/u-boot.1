@@ -4,56 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4DEACD80A6
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 11:13:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C130FCD80A9
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 11:27:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D12D86679;
-	Tue, 10 Oct 2023 13:13:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ziswiler.com
+	by phobos.denx.de (Postfix) with ESMTP id 051D686940;
+	Tue, 10 Oct 2023 13:27:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="q0TssRyZ";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF44B86679; Tue, 10 Oct 2023 13:13:22 +0200 (CEST)
-Received: from mout.perfora.net (mout.perfora.net [74.208.4.197])
+ id 1B65486940; Tue, 10 Oct 2023 13:27:00 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B36BC86667
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 13:13:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C400B86725
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 13:26:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ziswiler.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marcel@ziswiler.com
-Received: from toolbox.toradex.int ([31.10.206.125]) by mrelay.perfora.net
- (mreueus003 [74.208.5.2]) with ESMTPSA (Nemesis) id 0MgMDo-1rBg4R2XG2-00NlSH; 
- Tue, 10 Oct 2023 13:13:10 +0200
-From: Marcel Ziswiler <marcel@ziswiler.com>
-To: u-boot@lists.denx.de
-Cc: Nishanth Menon <nm@ti.com>, Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1] arm: dts: k3-am625-verdin: fix boot
-Date: Tue, 10 Oct 2023 13:13:04 +0200
-Message-Id: <20231010111304.200307-1-marcel@ziswiler.com>
-X-Mailer: git-send-email 2.36.1
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=5f6d=FY=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1696937211;
+ bh=jx72uUy7iVfEiWHwk5SqRw7gFKft8g1C2Xz0+71LSjE=;
+ b=q0TssRyZVTxtL+bBWnNEPzHbpn3AOjAIwle3iGnoMxI9v5Quj9INo65POK/ClwT97trwQOPyk
+ hKPHAJqPC7hOySJADJoBg5fQS1Y2KLFBqRcto6OJW7Cx7BKstiohajJPnK/+D1wEpMSU7Ly3u9h
+ 9LSXEy/SYp/te9CS6OuXzHbTBdsbyqlEWEzTelM9XAJGg1c3/3u1E7uDHTf6DjLIEhew9Kbd6PS
+ rDA2I/DvyNjOr+cGr6fw9uAacLYDlkBa1D1AMNxn+Ew06uIPQIuoByizw9jjgJQ/RPvoX++cfLE
+ wAHKp/nMRqw6gvcRHYoagxk0wF6xvhg+V9aeqjdnliIg==
+Message-ID: <2a9eb8a7-461b-807f-f53c-5ef9f7fb7eb9@kwiboo.se>
+Date: Tue, 10 Oct 2023 13:26:46 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Provags-ID: V03:K1:LsZ+afvzPylphtjpmlas9ngJt1+bd02+EvBfIuQnfRiYYuC9R6y
- W991JgerbIv03jS+arN02ASkejIly593Ee95KMtrJnjxdKB2faIE7jqdA99DUJR1YvavhG1
- nHH2okqOg5M/i49UVzWOoXQJmzl/L2kvLvgk4DWZxBEsx1sU9FZ3Ik1OP/DBZmNNPk2saDm
- 8uRFanC6X43o2Plg5AemA==
-UI-OutboundReport: notjunk:1;M01:P0:JA9dnnJwzFw=;lHpqr18aN9PS12WIqZS02I0IGAj
- /FEYO6lbAgoLjzG9O/3oYdokwLBhDYgGkx7NsZBPdB5g7J7T1zbPL5MMziSw/OKSx1Nqq+Hs1
- SMGeoYQXiOBxxtIW1WTKlOvGaO/KVjMSs/diqr6yFIMsL+0RK1pBgUgat3jjjj74uJX9vfikP
- O4iFBJ/Br7NZjXpx0kIa89jbapq4sQAjulgXRDhLS6fPSvu4G84wNrmULgZI1bkJt3ud5bemz
- jJIHI4KLEkv/7BIFqfFzSf2Z2nHcgUht28pMp5Y7lK1R9zJNYNhv8tbFQuX2BjA4pg8Ij7qFA
- xIKfxN97vT40RGenB0xkxSaGFc7NngnqWvTvmbdk/AZiia/eVmZXiy80Vvzwd7vzJzQgcJoy9
- MSY+U0kz2Ut8stwMGj7jVkDBbvoCVegWRN2xoSOC5ZHibdgxGYpx/zZoEAL8PqH+RSrUG7v30
- wZfNbVEkdnoIRCDNiLWx40Aans7Pwzdm3LMsHjo5hrQwZz4Zai6N9kJ3X6QvCcPEiHYjJYWK2
- lxKPoHWwkHnzmk0SkNRyBZdISdfiN2MrY7JRpCjme7gGu5/tgUL34BeQIC876QpKeiH91wlQj
- f69juMWHsa13YbSpHI/GhHvzPZ4HxoHf/1DjraJ2sBaAAOEboqtht/NlX8F448ieDp9mrpNFp
- uriGtsFjWBH4RRM3V3j2ec4lcq+rxeWiaQxI01/K5Mb15fpnbauduJYE0Euj9F682XG6PUCk6
- rvTAJf9ozKYhtBbXVi1eLc04oZK3pi9xKjG2ptS1Jyooc78hJLACeRNqTpJPb4MXhEdmnV4OY
- ECFzZxC3WWvxRy6ZYTdAnuSQNfpIuQ/gZ+01lLYkQbKxt6nk0rxGNaOUnD32+zEncMSZJLjof
- ucowfN1oJ1WvAeA==
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v1 1/7] rockchip: dts: rk3568: Resync from kernel-4.19
+Content-Language: en-US
+To: Elaine Zhang <zhangqing@rock-chips.com>, lukma@denx.de,
+ seanga2@gmail.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
+ kever.yang@rock-chips.com
+Cc: u-boot@lists.denx.de, chenjh@rock-chips.com
+References: <20231010085155.31027-1-zhangqing@rock-chips.com>
+ <20231010085155.31027-2-zhangqing@rock-chips.com>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20231010085155.31027-2-zhangqing@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 652534faefcc9c1ffdbed7be
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,225 +75,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Hi Elaine,
 
-A53 U-Boot proper got broken because nodes marked as 'bootph-pre-ram'
-are no longer available in U-Boot proper before relocation.
+On 2023-10-10 10:51, Elaine Zhang wrote:
+> Resync from kernel-4.19:
+> (a6cf6aca12c0 drivers: rkflash: Ajudst the dll strategy)
 
-Fix this by marking all nodes in u-boot.dtsi as 'bootph-all'.
+bindings should be synced from mainline linux, not vendor kernel.
 
-Fixes: 9e644284ab812 ("dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation")
-Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> 
+> Change-Id: I7b7134946b76dbd8963cfaafdc5b56750622855e
+> Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
+> ---
+>  include/dt-bindings/clock/rk3568-cru.h | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/include/dt-bindings/clock/rk3568-cru.h b/include/dt-bindings/clock/rk3568-cru.h
+> index c1942422a438..251445cf7632 100644
+> --- a/include/dt-bindings/clock/rk3568-cru.h
+> +++ b/include/dt-bindings/clock/rk3568-cru.h
+> @@ -478,6 +478,13 @@
+>  #define CPLL_50M		415
+>  #define CPLL_25M		416
+>  #define CPLL_100M		417
+> +#define SCLK_DDRCLK		418
 
----
+This is the only missing clock that is defined in mainline linux.
 
- .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  | 72 +++++++++----------
- 1 file changed, 36 insertions(+), 36 deletions(-)
+> +#define I2S1_MCLKOUT		419
+> +#define I2S3_MCLKOUT		420
+> +#define I2S1_MCLK_RX_IOE	421
+> +#define I2S1_MCLK_TX_IOE	422
+> +#define I2S2_MCLK_IOE		423
+> +#define I2S3_MCLK_IOE		424
 
-diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-index 5d564603eb2..afa24d07a4c 100644
---- a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-@@ -17,49 +17,49 @@
- 	};
- 
- 	memory@80000000 {
--		bootph-pre-ram;
-+		bootph-all;
- 	};
- };
- 
- &cbass_main {
--	bootph-pre-ram;
-+	bootph-all;
- 
- 	timer@2400000 {
- 		clock-frequency = <25000000>;
--		bootph-pre-ram;
-+		bootph-all;
- 	};
- };
- 
- &cbass_mcu {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &cbass_wakeup {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &chipid {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &cpsw3g {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &cpsw3g_phy0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &cpsw3g_phy1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &cpsw_port1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &cpsw_port2 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- /* MDIO, shared by Verdin ETH_1 (On-module PHY) and Verdin ETH_2_RGMII */
-@@ -67,40 +67,40 @@
- 	/delete-property/ assigned-clocks;
- 	/delete-property/ assigned-clock-parents;
- 	/delete-property/ assigned-clock-rates;
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &dmsc {
--	bootph-pre-ram;
-+	bootph-all;
- 
- 	k3_sysreset: sysreset-controller {
- 		compatible = "ti,sci-sysreset";
--		bootph-pre-ram;
-+		bootph-all;
- 	};
- };
- 
- &dmss {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &fss {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &k3_clks {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &k3_pds {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &k3_reset {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &main_gpio0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- /* On-module I2C - PMIC_I2C */
-@@ -130,53 +130,53 @@
- };
- 
- &main_pmx0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- /* Verdin UART_3, used as the Linux console */
- &main_uart0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- /* Verdin UART_1 */
- &main_uart1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &mcu_pmx0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_ctrl_sleep_moci {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_i2c0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_i2c1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_sdhci0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_uart0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_uart1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_wkup_uart0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &sdhci0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &sdhci2 {
-@@ -184,18 +184,18 @@
- };
- 
- &secure_proxy_main {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &verdin_ctrl_sleep_moci {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &wkup_conf {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- /* Verdin UART_2 */
- &wkup_uart0 {
--	bootph-pre-ram;
-+	bootph-all;
- };
--- 
-2.36.1
+These are missing in mainline linux, please upstream to linux.
+
+Regards,
+Jonas
+
+>  
+>  #define PCLK_CORE_PVTM		450
+>  
 
