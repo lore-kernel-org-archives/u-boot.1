@@ -4,56 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87498CD690A
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 08:53:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B14B0CD68E8
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 09:03:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBBAA86DED;
-	Tue, 10 Oct 2023 10:53:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id B793086C67;
+	Tue, 10 Oct 2023 11:03:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="UGB9AONQ";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="IZFV2pAC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7338A86DED; Tue, 10 Oct 2023 10:53:40 +0200 (CEST)
-Received: from mail-m155115.qiye.163.com (mail-m155115.qiye.163.com
- [101.71.155.115])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 00A7F86DA2; Tue, 10 Oct 2023 11:03:15 +0200 (CEST)
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net
+ [217.70.183.196])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A515D86DCB
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 10:53:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3E7E886459
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 11:03:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=zhangqing@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=UGB9AONQqJsRidcpgtyBeVteLaYaZTCC6iynWSmcKrCK+cVwsTnnLZoHlkaqe6oloyk0L65QCGsz8Ha5zHbwIufTRkPdbZphmV/9VU6JdeOh9v54pLw7xsXjo9lmLF0cJkVaXF+TtCH8USzP20VW909/FXTdk7bT/3VstGdvIH0=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=ihPa+6ojJD5dXFR6MjF/tbjWK443KuJzGtEcn1lpzLg=;
- h=date:mime-version:subject:message-id:from;
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id BB907400401;
- Tue, 10 Oct 2023 16:52:07 +0800 (CST)
-From: Elaine Zhang <zhangqing@rock-chips.com>
-To: lukma@denx.de, seanga2@gmail.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, kever.yang@rock-chips.com
-Cc: u-boot@lists.denx.de, chenjh@rock-chips.com,
- Elaine Zhang <zhangqing@rock-chips.com>
-Subject: [PATCH v1 2/7] clk: rockchip: rk3568: add i2s3 clk
-Date: Tue, 10 Oct 2023 16:51:50 +0800
-Message-Id: <20231010085155.31027-3-zhangqing@rock-chips.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20231010085155.31027-1-zhangqing@rock-chips.com>
-References: <20231010085155.31027-1-zhangqing@rock-chips.com>
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRoYSFZKGUxPS0tCTEkaGUhVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSU5JVUpLS1VKQl
- kG
-X-HM-Tid: 0a8b18c94e892eb3kusnbb907400401
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pgg6Lio5Hjw9OhEeNxILLxoa
- Eg8KCQ1VSlVKTUJNQklMQklDQ0tLVTMWGhIXVQETGhUcChIVHDsJFBgQVhgTEgsIVRgUFkVZV1kS
- C1lBWU5DVUlJVUxVSkpPWVdZCAFZQUpKSk9KNwY+
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id E204AE0003;
+ Tue, 10 Oct 2023 09:03:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1696928586;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Fa+yUscZqtUfCFllY1tDxmAc84T2WVJPl+sgrUhruoM=;
+ b=IZFV2pACM4OLZsdpA7D8AOvrML5CNX6Nxnjtb1ROKfVvjC+ac2XqxNMLZZfukj01jxm2YO
+ 6P1ubuyaIgl/gw+CATeK7P19+QfPp0Wrbr95hMY6vBjK4v/6adMqmM1ojTQiTOKoMXJz/c
+ DZEZd0N3myxhSlpVVMt1I1IEm7jBZdnVz5oeCZBYyp1wxvSyR4LTXVqAelOyHRs5gqVuao
+ XkjA/JTTeFV/O5eykZ5vx4PCmTFTwx3FQ8lSsaz6A9hE7bAL8sOmobuIp37Hthpxwv50kD
+ uv97jhXg2yjXOox7qyNM1BMXD/e2Il2sT0mZ71/rHH20wMrt7lqiT9zEfVoz1g==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Marek Vasut <marek.vasut@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Subject: [PATCH v3 0/3] Improve the experience with USB gadgets
+Date: Tue, 10 Oct 2023 11:03:01 +0200
+Message-Id: <20231010090304.49335-1-miquel.raynal@bootlin.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,330 +67,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change-Id: If20fe16260d2b584d4216d1dbabffcb25478fb1d
-Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
----
- .../include/asm/arch-rockchip/cru_rk3568.h    |  36 +++
- drivers/clk/rockchip/clk_rk3568.c             | 218 ++++++++++++++++++
- 2 files changed, 254 insertions(+)
+Try to ease the use of USB gadgets for people not fully aware of all the
+terms and constraints. With more helpful error messages a little bit of
+guidance anyone should be able to adapt to the bind/unbind game that is
+now necessary with USB gadgets.
 
-diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3568.h b/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
-index 9c7ddd751f72..0306ce57e369 100644
---- a/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
-+++ b/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
-@@ -211,6 +211,31 @@ enum {
- 	ACLK_PERIMID_SEL_100M,
- 	ACLK_PERIMID_SEL_24M,
- 
-+	/* CRU_CLK_SEL21_CON */
-+	I2S3_MCLKOUT_TX_SEL_SHIFT	= 15,
-+	I2S3_MCLKOUT_TX_SEL_MASK	= 1 << I2S3_MCLKOUT_TX_SEL_SHIFT,
-+	I2S3_MCLKOUT_TX_SEL_MCLK	= 0,
-+	I2S3_MCLKOUT_TX_SEL_12M,
-+	CLK_I2S3_SEL_SHIFT		= 10,
-+	CLK_I2S3_SEL_MASK		= 0x3 << CLK_I2S3_SEL_SHIFT,
-+	CLK_I2S3_SEL_SRC		= 0,
-+	CLK_I2S3_SEL_FRAC,
-+	CLK_I2S3_SEL_CLKIN,
-+	CLK_I2S3_SEL_XIN12M,
-+	CLK_I2S3_SRC_SEL_SHIFT		= 8,
-+	CLK_I2S3_SRC_SEL_MASK		= 0x3 << CLK_I2S3_SRC_SEL_SHIFT,
-+	CLK_I2S3_SRC_SEL_GPLL		= 0,
-+	CLK_I2S3_SRC_SEL_CPLL,
-+	CLK_I2S3_SRC_SEL_NPLL,
-+	CLK_I2S3_SRC_DIV_SHIFT		= 0,
-+	CLK_I2S3_SRC_DIV_MASK		= 0x7f << CLK_I2S3_SRC_DIV_SHIFT,
-+
-+	/* CRU_CLK_SEL22_CON */
-+	CLK_I2S3_FRAC_NUMERATOR_SHIFT	= 16,
-+	CLK_I2S3_FRAC_NUMERATOR_MASK	= 0xffff << 16,
-+	CLK_I2S3_FRAC_DENOMINATOR_SHIFT	= 0,
-+	CLK_I2S3_FRAC_DENOMINATOR_MASK	= 0xffff,
-+
- 	/* CRU_CLK_SEL27_CON */
- 	CLK_CRYPTO_PKA_SEL_SHIFT	= 6,
- 	CLK_CRYPTO_PKA_SEL_MASK		= 3 << CLK_CRYPTO_PKA_SEL_SHIFT,
-@@ -502,5 +527,16 @@ enum {
- 	/* CRU_CLK_SEL82_CON */
- 	CPLL_100M_DIV_SHIFT		= 0,
- 	CPLL_100M_DIV_MASK		= 0x1f << CPLL_100M_DIV_SHIFT,
-+
-+	/* GRF_SOC_CON2 */
-+	I2S3_MCLKOUT_SEL_SHIFT		= 15,
-+	I2S3_MCLKOUT_SEL_MASK		= 0x1 << I2S3_MCLKOUT_SEL_SHIFT,
-+	I2S3_MCLKOUT_SEL_RX		= 0,
-+	I2S3_MCLKOUT_SEL_TX,
-+	I2S3_MCLK_IOE_SEL_SHIFT		= 3,
-+	I2S3_MCLK_IOE_SEL_MASK		= 0x1 << I2S3_MCLK_IOE_SEL_SHIFT,
-+	I2S3_MCLK_IOE_SEL_CLKIN		= 0,
-+	I2S3_MCLK_IOE_SEL_CLKOUT,
-+
- };
- #endif
-diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
-index 599b7b130eb9..469014439be4 100644
---- a/drivers/clk/rockchip/clk_rk3568.c
-+++ b/drivers/clk/rockchip/clk_rk3568.c
-@@ -13,6 +13,7 @@
- #include <asm/arch-rockchip/cru_rk3568.h>
- #include <asm/arch-rockchip/clock.h>
- #include <asm/arch-rockchip/hardware.h>
-+#include <asm/arch-rockchip/grf_rk3568.h>
- #include <asm/io.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
-@@ -2326,6 +2327,170 @@ static ulong rk3568_uart_set_rate(struct rk3568_clk_priv *priv,
- 	return rk3568_uart_get_rate(priv, clk_id);
- }
- 
-+#ifndef CONFIG_SPL_BUILD
-+static ulong rk3568_i2s3_get_rate(struct rk3568_clk_priv *priv, ulong clk_id)
-+{
-+	struct rk3568_cru *cru = priv->cru;
-+	struct rk3568_grf *grf = priv->grf;
-+	u32 con, div, src, p_rate;
-+	u32 reg, fracdiv, p_src;
-+	unsigned long m, n;
-+
-+	switch (clk_id) {
-+	case I2S3_MCLKOUT_TX:
-+		con = readl(&cru->clksel_con[21]);
-+		src = (con & I2S3_MCLKOUT_TX_SEL_MASK) >>
-+		      I2S3_MCLKOUT_TX_SEL_SHIFT;
-+		if (src == I2S3_MCLKOUT_TX_SEL_12M)
-+			p_rate = 12000000;
-+		else
-+			p_rate = rk3568_i2s3_get_rate(priv, MCLK_I2S3_2CH_TX);
-+		return p_rate;
-+	case I2S3_MCLKOUT_RX:
-+		con = readl(&cru->clksel_con[83]);
-+		src = (con & I2S3_MCLKOUT_TX_SEL_MASK) >>
-+		      I2S3_MCLKOUT_TX_SEL_SHIFT;
-+		if (src == I2S3_MCLKOUT_TX_SEL_12M)
-+			p_rate = 12000000;
-+		else
-+			p_rate = rk3568_i2s3_get_rate(priv, MCLK_I2S3_2CH_RX);
-+		return p_rate;
-+	case I2S3_MCLKOUT:
-+		con = readl(&grf->soc_con2);
-+		src = (con & I2S3_MCLKOUT_SEL_MASK)
-+		      >> I2S3_MCLKOUT_SEL_SHIFT;
-+		if (src == I2S3_MCLKOUT_SEL_RX)
-+			p_rate = rk3568_i2s3_get_rate(priv, I2S3_MCLKOUT_RX);
-+		else
-+			p_rate = rk3568_i2s3_get_rate(priv, I2S3_MCLKOUT_TX);
-+		return p_rate;
-+	case MCLK_I2S3_2CH_RX:
-+		reg = 83;
-+		break;
-+	case MCLK_I2S3_2CH_TX:
-+		reg = 21;
-+		break;
-+	default:
-+		return -ENOENT;
-+	}
-+
-+	con = readl(&cru->clksel_con[reg]);
-+	src = (con & CLK_I2S3_SEL_MASK) >> CLK_I2S3_SEL_SHIFT;
-+	div = (con & CLK_I2S3_SRC_DIV_MASK) >> CLK_I2S3_SRC_DIV_SHIFT;
-+	p_src = (con & CLK_I2S3_SRC_SEL_MASK) >> CLK_I2S3_SRC_SEL_SHIFT;
-+	if (p_src == CLK_I2S3_SRC_SEL_GPLL)
-+		p_rate = priv->gpll_hz;
-+	else if (p_src == CLK_I2S3_SRC_SEL_CPLL)
-+		p_rate = priv->cpll_hz;
-+	else
-+		p_rate = priv->npll_hz;
-+	if (src == CLK_I2S3_SEL_SRC) {
-+		return DIV_TO_RATE(p_rate, div);
-+	} else if (src == CLK_I2S3_SEL_FRAC) {
-+		fracdiv = readl(&cru->clksel_con[reg + 1]);
-+		n = fracdiv & CLK_I2S3_FRAC_NUMERATOR_MASK;
-+		n >>= CLK_I2S3_FRAC_NUMERATOR_SHIFT;
-+		m = fracdiv & CLK_I2S3_FRAC_DENOMINATOR_MASK;
-+		m >>= CLK_I2S3_FRAC_DENOMINATOR_SHIFT;
-+		return DIV_TO_RATE(p_rate, div) * n / m;
-+	} else {
-+		return OSC_HZ / 2;
-+	}
-+}
-+
-+static ulong rk3568_i2s3_set_rate(struct rk3568_clk_priv *priv,
-+				  ulong clk_id, ulong rate)
-+{
-+	struct rk3568_cru *cru = priv->cru;
-+	struct rk3568_grf *grf = priv->grf;
-+	u32 reg, con, clk_src, i2s_src, div;
-+	unsigned long m = 0, n = 0, val;
-+
-+	if (priv->gpll_hz % rate == 0) {
-+		clk_src = CLK_I2S3_SRC_SEL_GPLL;
-+		i2s_src = CLK_I2S3_SEL_SRC;
-+		div = DIV_ROUND_UP(priv->gpll_hz, rate);
-+	} else if (priv->cpll_hz % rate == 0) {
-+		clk_src = CLK_I2S3_SRC_SEL_CPLL;
-+		i2s_src = CLK_I2S3_SEL_SRC;
-+		div = DIV_ROUND_UP(priv->gpll_hz, rate);
-+	} else if (rate == OSC_HZ / 2) {
-+		clk_src = CLK_I2S3_SRC_SEL_GPLL;
-+		i2s_src = CLK_I2S3_SEL_XIN12M;
-+		div = 1;
-+	} else {
-+		clk_src = CLK_I2S3_SRC_SEL_GPLL;
-+		i2s_src = CLK_I2S3_SEL_FRAC;
-+		div = 1;
-+		rational_best_approximation(rate, priv->gpll_hz / div,
-+					    GENMASK(16 - 1, 0),
-+					    GENMASK(16 - 1, 0),
-+					    &m, &n);
-+	}
-+
-+	switch (clk_id) {
-+	case I2S3_MCLKOUT_TX:
-+		if (rate == 12000000) {
-+			rk_clrsetreg(&cru->clksel_con[21],
-+				     I2S3_MCLKOUT_TX_SEL_MASK,
-+				     I2S3_MCLKOUT_TX_SEL_12M <<
-+				     I2S3_MCLKOUT_TX_SEL_SHIFT);
-+		} else {
-+			rk3568_i2s3_set_rate(priv, MCLK_I2S3_2CH_TX, rate),
-+			rk_clrsetreg(&cru->clksel_con[21],
-+				     I2S3_MCLKOUT_TX_SEL_MASK,
-+				     I2S3_MCLKOUT_TX_SEL_MCLK <<
-+				     I2S3_MCLKOUT_TX_SEL_SHIFT);
-+		}
-+		return rk3568_i2s3_get_rate(priv, clk_id);
-+	case I2S3_MCLKOUT_RX:
-+		if (rate == 12000000) {
-+			rk_clrsetreg(&cru->clksel_con[83],
-+				     I2S3_MCLKOUT_TX_SEL_MASK,
-+				     I2S3_MCLKOUT_TX_SEL_12M <<
-+				     I2S3_MCLKOUT_TX_SEL_SHIFT);
-+		} else {
-+			rk3568_i2s3_set_rate(priv, MCLK_I2S3_2CH_RX, rate),
-+			rk_clrsetreg(&cru->clksel_con[21],
-+				     I2S3_MCLKOUT_TX_SEL_MASK,
-+				     I2S3_MCLKOUT_TX_SEL_MCLK <<
-+				     I2S3_MCLKOUT_TX_SEL_SHIFT);
-+		}
-+		return rk3568_i2s3_get_rate(priv, clk_id);
-+	case I2S3_MCLKOUT:
-+		con = readl(&grf->soc_con2);
-+		clk_src = (con & I2S3_MCLKOUT_SEL_MASK)
-+		      >> I2S3_MCLKOUT_SEL_SHIFT;
-+		if (clk_src == I2S3_MCLKOUT_SEL_RX)
-+			rk3568_i2s3_set_rate(priv, I2S3_MCLKOUT_RX, rate);
-+		else
-+			rk3568_i2s3_set_rate(priv, I2S3_MCLKOUT_TX, rate);
-+		return rk3568_i2s3_get_rate(priv, clk_id);
-+	case MCLK_I2S3_2CH_RX:
-+		reg = 83;
-+		break;
-+	case MCLK_I2S3_2CH_TX:
-+		reg = 21;
-+		break;
-+	default:
-+		return -ENOENT;
-+	}
-+
-+	rk_clrsetreg(&cru->clksel_con[reg],
-+		     CLK_I2S3_SEL_MASK | CLK_I2S3_SRC_SEL_MASK |
-+		     CLK_I2S3_SRC_DIV_MASK,
-+		     (clk_src << CLK_I2S3_SRC_SEL_SHIFT) |
-+		     (i2s_src << CLK_I2S3_SEL_SHIFT) |
-+		     ((div - 1) << CLK_I2S3_SRC_DIV_SHIFT));
-+	if (m && n) {
-+		val = m << CLK_I2S3_FRAC_NUMERATOR_SHIFT | n;
-+		writel(val, &cru->clksel_con[reg + 1]);
-+	}
-+	return rk3568_i2s3_get_rate(priv, clk_id);
-+}
-+
-+#endif
-+
- static ulong rk3568_clk_get_rate(struct clk *clk)
- {
- 	struct rk3568_clk_priv *priv = dev_get_priv(clk->dev);
-@@ -2463,6 +2628,13 @@ static ulong rk3568_clk_get_rate(struct clk *clk)
- 	case TCLK_WDT_NS:
- 		rate = OSC_HZ;
- 		break;
-+	case I2S3_MCLKOUT_RX:
-+	case I2S3_MCLKOUT_TX:
-+	case MCLK_I2S3_2CH_RX:
-+	case MCLK_I2S3_2CH_TX:
-+	case I2S3_MCLKOUT:
-+		rate = rk3568_i2s3_get_rate(priv, clk->id);
-+		break;
- #endif
- 	case SCLK_UART1:
- 	case SCLK_UART2:
-@@ -2648,6 +2820,13 @@ static ulong rk3568_clk_set_rate(struct clk *clk, ulong rate)
- 	case TCLK_WDT_NS:
- 		ret = OSC_HZ;
- 		break;
-+	case I2S3_MCLKOUT_RX:
-+	case I2S3_MCLKOUT_TX:
-+	case MCLK_I2S3_2CH_RX:
-+	case MCLK_I2S3_2CH_TX:
-+	case I2S3_MCLKOUT:
-+		ret = rk3568_i2s3_set_rate(priv, clk->id, rate);
-+		break;
- #endif
- 	case SCLK_UART1:
- 	case SCLK_UART2:
-@@ -2824,6 +3003,42 @@ static int rk3568_rkvdec_set_parent(struct clk *clk, struct clk *parent)
- 	return 0;
- }
- 
-+static int __maybe_unused rk3568_i2s3_set_parent(struct clk *clk,
-+						 struct clk *parent)
-+{
-+	struct rk3568_clk_priv *priv = dev_get_priv(clk->dev);
-+	struct rk3568_grf *grf = priv->grf;
-+
-+	switch (clk->id) {
-+	case I2S3_MCLK_IOE:
-+		if (parent->id == I2S3_MCLKOUT) {
-+			rk_clrsetreg(&grf->soc_con2, I2S3_MCLK_IOE_SEL_MASK,
-+				     I2S3_MCLK_IOE_SEL_CLKOUT <<
-+				     I2S3_MCLK_IOE_SEL_SHIFT);
-+		} else {
-+			rk_clrsetreg(&grf->soc_con2, I2S3_MCLK_IOE_SEL_MASK,
-+				     I2S3_MCLK_IOE_SEL_CLKIN <<
-+				     I2S3_MCLK_IOE_SEL_SHIFT);
-+		}
-+		break;
-+	case I2S3_MCLKOUT:
-+		if (parent->id == I2S3_MCLKOUT_RX) {
-+			rk_clrsetreg(&grf->soc_con2, I2S3_MCLKOUT_SEL_MASK,
-+				     I2S3_MCLKOUT_SEL_RX <<
-+				     I2S3_MCLKOUT_SEL_SHIFT);
-+		} else {
-+			rk_clrsetreg(&grf->soc_con2, I2S3_MCLKOUT_SEL_MASK,
-+				     I2S3_MCLKOUT_SEL_TX <<
-+				     I2S3_MCLKOUT_SEL_SHIFT);
-+		}
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
- static int rk3568_clk_set_parent(struct clk *clk, struct clk *parent)
- {
- 	switch (clk->id) {
-@@ -2848,6 +3063,9 @@ static int rk3568_clk_set_parent(struct clk *clk, struct clk *parent)
- 	case SCLK_GMAC1_RGMII_SPEED:
- 	case SCLK_GMAC1_RMII_SPEED:
- 		break;
-+	case I2S3_MCLK_IOE:
-+	case I2S3_MCLKOUT:
-+		return rk3568_i2s3_set_parent(clk, parent);
- 	default:
- 		return -ENOENT;
- 	}
+The idea is to eventually get proper USB composite gadget support, but
+that is a longer term goal.
+
+Changes in v3:
+* First patch is new.
+* Collected the tags received.
+* Imply CMD_DM from CMD_BIND.
+
+Miquel Raynal (3):
+  cmd: Change the dependencies between CMD_BIND and USB_GADGET
+  cmd: bind: Try to improve the (un)bind help
+  usb: udc: Try to clarify an error message
+
+ cmd/Kconfig                       |  2 +-
+ cmd/bind.c                        |  4 ++++
+ drivers/usb/gadget/Kconfig        |  1 +
+ drivers/usb/gadget/udc/udc-core.c | 13 ++++++++++++-
+ 4 files changed, 18 insertions(+), 2 deletions(-)
+
 -- 
-2.17.1
+2.34.1
 
