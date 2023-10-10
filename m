@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C130FCD80A9
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 11:27:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9957ECD80B0
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 11:39:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 051D686940;
-	Tue, 10 Oct 2023 13:27:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id DC65F8693C;
+	Tue, 10 Oct 2023 13:39:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="q0TssRyZ";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="NaP5Xy/I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B65486940; Tue, 10 Oct 2023 13:27:00 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 3CEAA8690B; Tue, 10 Oct 2023 13:39:31 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C400B86725
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 13:26:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C625E8693C
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 13:39:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=5f6d=FY=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1696937211;
- bh=jx72uUy7iVfEiWHwk5SqRw7gFKft8g1C2Xz0+71LSjE=;
- b=q0TssRyZVTxtL+bBWnNEPzHbpn3AOjAIwle3iGnoMxI9v5Quj9INo65POK/ClwT97trwQOPyk
- hKPHAJqPC7hOySJADJoBg5fQS1Y2KLFBqRcto6OJW7Cx7BKstiohajJPnK/+D1wEpMSU7Ly3u9h
- 9LSXEy/SYp/te9CS6OuXzHbTBdsbyqlEWEzTelM9XAJGg1c3/3u1E7uDHTf6DjLIEhew9Kbd6PS
- rDA2I/DvyNjOr+cGr6fw9uAacLYDlkBa1D1AMNxn+Ew06uIPQIuoByizw9jjgJQ/RPvoX++cfLE
- wAHKp/nMRqw6gvcRHYoagxk0wF6xvhg+V9aeqjdnliIg==
-Message-ID: <2a9eb8a7-461b-807f-f53c-5ef9f7fb7eb9@kwiboo.se>
-Date: Tue, 10 Oct 2023 13:26:46 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: aace31a0-6761-11ee-91e6-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id aace31a0-6761-11ee-91e6-005056994fde;
+ Tue, 10 Oct 2023 13:39:27 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=dqnWCVbSuMkyxVWUsUtDUokm9lMLUbwOSl2nwdBkp2Q=;
+ b=NaP5Xy/IpyQN4DUhK9gskQTDx5SZ4OHcQebhemglZAvWWN2hyOuewuVtoZHhji1GgAXeI7YRS+WPx
+ PSgn41pAmf3HyohClTRH/fBNDwlNMJYLxTKvSDNMNXgT/4nE7/NxoOjtNuL23Asn9KSZG8rSCO7g1M
+ XqEBlfB7hFIB7+MHbxkcZoqPISGdjYv6iCGRaxpTYHgnFlCd4d2aowk1p1EAKjFXotHrP/WN9Vvfla
+ aQ0HfVJDEvMqiaErPBVqeiqJZLbL02j+WJI0bXcr4jzC9V1imkqIy7McZUaK7F7obEU6Z3/qKut4er
+ TgOcW/jP61MmXdO1zO4mfU/ZGFdNKxw==
+X-KPN-MID: 33|2GIEcFsBu4N04mZkbzgk0KedTM5re3cuuZZEwA/YoSt0ZzFe2IHQI0Wnodimi+3
+ ru6rjZWWkJ7PY5XVnhP/JljlChg1kcQoxX+2R4eCBorM=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|n/WJu+GnuUjAsUzkmKnkPAdKSxKMybK9jNtKFfJZCRSowzcA0HyXjFxvn4LDwWJ
+ P16WHvOxKfUEEkkfmnVMsxg==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id aa4073d7-6761-11ee-ad2d-005056998788;
+ Tue, 10 Oct 2023 13:39:26 +0200 (CEST)
+Date: Tue, 10 Oct 2023 13:39:26 +0200
+Message-Id: <878r8ahfkh.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Elaine Zhang <zhangqing@rock-chips.com>
+Cc: lukma@denx.de, seanga2@gmail.com, philipp.tomsich@vrull.eu,
+ sjg@chromium.org, kever.yang@rock-chips.com,
+ u-boot@lists.denx.de, chenjh@rock-chips.com, zhangqing@rock-chips.com
+In-Reply-To: <20231010085155.31027-2-zhangqing@rock-chips.com> (message from
+ Elaine Zhang on Tue, 10 Oct 2023 16:51:49 +0800)
 Subject: Re: [PATCH v1 1/7] rockchip: dts: rk3568: Resync from kernel-4.19
-Content-Language: en-US
-To: Elaine Zhang <zhangqing@rock-chips.com>, lukma@denx.de,
- seanga2@gmail.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
- kever.yang@rock-chips.com
-Cc: u-boot@lists.denx.de, chenjh@rock-chips.com
 References: <20231010085155.31027-1-zhangqing@rock-chips.com>
  <20231010085155.31027-2-zhangqing@rock-chips.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20231010085155.31027-2-zhangqing@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 652534faefcc9c1ffdbed7be
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,15 +76,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Elaine,
-
-On 2023-10-10 10:51, Elaine Zhang wrote:
+> From: Elaine Zhang <zhangqing@rock-chips.com>
+> Date: Tue, 10 Oct 2023 16:51:49 +0800
+> 
 > Resync from kernel-4.19:
 > (a6cf6aca12c0 drivers: rkflash: Ajudst the dll strategy)
 
-bindings should be synced from mainline linux, not vendor kernel.
+Linux 4.19 is ancient; why are you not synching from 6.5 or a 6.6
+release candidate?
 
-> 
 > Change-Id: I7b7134946b76dbd8963cfaafdc5b56750622855e
 > Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
 > ---
@@ -99,22 +100,16 @@ bindings should be synced from mainline linux, not vendor kernel.
 >  #define CPLL_25M		416
 >  #define CPLL_100M		417
 > +#define SCLK_DDRCLK		418
-
-This is the only missing clock that is defined in mainline linux.
-
 > +#define I2S1_MCLKOUT		419
 > +#define I2S3_MCLKOUT		420
 > +#define I2S1_MCLK_RX_IOE	421
 > +#define I2S1_MCLK_TX_IOE	422
 > +#define I2S2_MCLK_IOE		423
 > +#define I2S3_MCLK_IOE		424
-
-These are missing in mainline linux, please upstream to linux.
-
-Regards,
-Jonas
-
 >  
 >  #define PCLK_CORE_PVTM		450
 >  
-
+> -- 
+> 2.17.1
+> 
+> 
