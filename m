@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AAA9CD80C1
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 13:01:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEE8BCD80C1
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 13:02:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6966086D85;
-	Tue, 10 Oct 2023 14:58:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7A51886E00;
+	Tue, 10 Oct 2023 14:58:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rdIVni+u";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bP74AlJU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CB5E86BED; Tue, 10 Oct 2023 14:58:44 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 6727386BED; Tue, 10 Oct 2023 14:58:47 +0200 (CEST)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6F4486DEE
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:58:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA06186DE7
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:58:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a7a77e736dso17507527b3.1
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:58:39 -0700 (PDT)
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-59f4db9e11eso66489597b3.0
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696942716; x=1697547516; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1696942722; x=1697547522; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vTfnTxyc6TXOSidW65lfO63YtBApbwY6Ru6r5s4mmwI=;
- b=rdIVni+uOsXPrbwt+zE7FjIYk1DoxLE/h2Vf+8jkyCmUX/Wu+Zd+0mt9j8d36zTy8j
- h/gWPAi06k4184CKUC/8ol48CBOEaviIBJ4O+KQSTNGK2ZkLf3u0ZfeYij0WuRWSWxBb
- biPvThWUXANq5aPCMrkmoPKS8197WNjz/xs5E=
+ bh=kmJoxZVHR6xFI5tpJF24/RLBsqYPhYnfHJxcb01WbZ8=;
+ b=bP74AlJU8Q+Tk+dsgDq9qacr+86iPiJ6ROyaMVetaCcH+1odvulIbNTuTW/501GJmd
+ RXnQ6pXclLThKsPXeX0+THLFsS3lHc+RvZRJl1z84g8Jc3mcAAdmAJwMcwL5n3NDz6zq
+ r5YqUNvqlAk4K++P5vTptoX0S/YHWOzFz2j/c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696942716; x=1697547516;
+ d=1e100.net; s=20230601; t=1696942722; x=1697547522;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vTfnTxyc6TXOSidW65lfO63YtBApbwY6Ru6r5s4mmwI=;
- b=iXlCHVMQ0a1Z78xvw95IrS9OuxIiZrGUwdXFj1zQP92kjhgFFqjU4kT25HvTJkJWg0
- WBdNvTVFotwr899A+zf0J1WM06ReEOu5K3yeYega78xKP4rSgyaUAlsqpdRmeIq2t+B6
- nrS995B9zKC8ANBTG+44tnK3unnzeb40X8Szrh0rBGVzfoW6HYHgum4J2WtGX55fnH3E
- 6YgF5mXu20NRH0V8sEB4RTbu6MMjT5CeEh6rqgZKjxGDVzwDI2qGPIHzWem3dltoUKFJ
- kSy2tY2twyCN2h0Uz16taNKbDRU4eCrYoc+x8SugV+Rqlfukbwlpj1JUVuNLEdMMoLE6
- gBjg==
-X-Gm-Message-State: AOJu0YwOV5+5xCwATiZbpRxfMmMV2GCiW7NbsPu4vV69+D98Gw8dbQB0
- QXil4s1fFt40JrDvNd1mEWj29g==
-X-Google-Smtp-Source: AGHT+IE/l9d0rET8nAY0TvmqAKcDlWrgJ1h1BKPuF96NrU2LVwFQzrSd87aZ5r3bGy1l+ux3PdfvHA==
-X-Received: by 2002:a81:b620:0:b0:5a7:ba09:e58b with SMTP id
- u32-20020a81b620000000b005a7ba09e58bmr2443759ywh.14.1696942716555; 
- Tue, 10 Oct 2023 05:58:36 -0700 (PDT)
+ bh=kmJoxZVHR6xFI5tpJF24/RLBsqYPhYnfHJxcb01WbZ8=;
+ b=oN6IOeQNLjNrMKnMQ7FlrSwOj4THDRLHr6OQDNUa64d5ymB/K/Ca7G/1KgEuDofeNs
+ FjeOFdtMhZnL5rhEcyk62o7EDxRHoNcoJu7CMwpD25DAdSulr1GegbrPSjVmQGktgzlb
+ lfsf+cfgUBxcdjlvWOvHdpSygQItRqb5cFoXh3aJStbt2HkIR9KKgWb0hGsQQ3/VM52P
+ zJFd16Tl6q6J669o66ARKJh9kPyCE9AQc9Gn6eOGvHTr7WKJOZXuS5p6yIyfrDhuhJ25
+ yj3vuUZBfDhcCFixx9jwF20RRhf+LRk3QFkIyZaiLKOdwtVft6rwpRzOtBWbAKAcvcbR
+ tuLw==
+X-Gm-Message-State: AOJu0Ywvr8X2I5VCL7NOVeBEVLNrR4zvdCH7enw0BSVY39v8tZooGH/x
+ BPFyms0/9lY6QJm2WHxTWNrQ1vOuVT54j2c1Py68Eg==
+X-Google-Smtp-Source: AGHT+IHpJ9DKzKeVgftyLxTQha1VEfrbuMs9nbMvaTe8XuiFVMFXHKpWjD82zN9rUQk73No8x9PbDA==
+X-Received: by 2002:a0d:dc81:0:b0:589:e7c1:96f2 with SMTP id
+ f123-20020a0ddc81000000b00589e7c196f2mr18674160ywe.46.1696942722467; 
+ Tue, 10 Oct 2023 05:58:42 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-6c43-4eba-c113-e8cd.res6.spectrum.com.
  [2603:6081:7b00:6400:6c43:4eba:c113:e8cd])
  by smtp.gmail.com with ESMTPSA id
- o64-20020a0dcc43000000b0059f5828346csm4370046ywd.3.2023.10.10.05.58.35
+ e82-20020a816955000000b0057042405e2csm4389831ywc.71.2023.10.10.05.58.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 05:58:35 -0700 (PDT)
-Date: Tue, 10 Oct 2023 08:58:33 -0400
+ Tue, 10 Oct 2023 05:58:41 -0700 (PDT)
+Date: Tue, 10 Oct 2023 08:58:39 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Udit Kumar <u-kumar1@ti.com>
-Cc: nm@ti.com, vigneshr@ti.com, patrick.delaunay@foss.st.com,
- sjoerd@collabora.com, sjg@google.com, u-boot@lists.denx.de,
- xypron.glpk@gmx.de, michal.simek@amd.com, dsankouski@gmail.com,
- kettenis@openbsd.org, sumit.garg@linaro.org, sam.shih@mediatek.com,
- mark.kettenis@xs4all.nl, sjg@chromium.org
-Subject: Re: [PATCH v2 2/2] test: lmb: Add test for coalescing and overlap
- range
-Message-ID: <20231010125833.GB2227687@bill-the-cat>
-References: <20230926112443.4190471-1-u-kumar1@ti.com>
- <20230926112443.4190471-3-u-kumar1@ti.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH] bootstd: use ARCH_DMA_MINALIGN in memalign() when
+ allocating memory
+Message-ID: <20231010125839.GC2227687@bill-the-cat>
+References: <20230919212722.16216-1-mibodhi@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WO5hweo4U7Bs1K2Y"
+ protocol="application/pgp-signature"; boundary="vhGbjxqF7H4UMq/y"
 Content-Disposition: inline
-In-Reply-To: <20230926112443.4190471-3-u-kumar1@ti.com>
+In-Reply-To: <20230919212722.16216-1-mibodhi@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,18 +94,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---WO5hweo4U7Bs1K2Y
+--vhGbjxqF7H4UMq/y
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 26, 2023 at 04:54:43PM +0530, Udit Kumar wrote:
+On Tue, Sep 19, 2023 at 02:27:21PM -0700, Tony Dinh wrote:
 
-> Add test case for an address range which is coalescing with one of
-> range and overlapping with next range=20
+> Use ARCH_DMA_MINALIGN in memalign() when allocating memory to read the sc=
+ript from the media.
 >=20
-> Cc: Simon Glass <sjg@google.com>
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
+> Ref: https://lore.kernel.org/u-boot/CAJaLiFy05F3Cr4X4G2mVkppXnBEFZrHQ+5Cn=
+gYN8eJPg8ENWkg@mail.gmail.com/T/#m26daadc2463fe653b814a94e6309e5e6bb6be1d1
+>=20
+> Note: this patch depends on the previous patch
+> https://patchwork.ozlabs.org/project/uboot/patch/20230917230649.30357-1-m=
+ibodhi@gmail.com/
+>=20
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/master, thanks!
@@ -117,22 +119,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---WO5hweo4U7Bs1K2Y
+--vhGbjxqF7H4UMq/y
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSnkACgkQFHw5/5Y0
-tyx91wwApAnHq/F6OyrRSkKUdKFA6qTO+rStsfe4hizTyJ4Q45YXvoZ4WDKdGmFc
-W03ex6Rk/cQc+N2+zgLp/TGzsmSSO2QyLYI/u6DP1NTMEn/h6vsHpde2x27TlfmI
-AejYKCk01nbLou7gK7xxtfZBLkpqtiKlflDcHCdozhrBh2On0+/QYKxANh7d8Ux7
-Qs/eEABK6hJtJJTCLDQZ1zebPKnu+CHmrQNwsuQqKcmr6s/shPbs8yZbwDDDXiIB
-BOpVX1pFuy13MMmsiy5HgWzGlwQz4X9uFbUi4jm2eSeZBo7Mv+82Ydo00kwSp95U
-kk0JCZD6FDnjnsHAhnVTSDKFzWoywQzvOB4VL+/tNW4BE7mSlghFip+CEU0CBDkf
-PooFj2FrY1okIkTz3MerDtq8cM5rKDWGRJDIUzjm7egNOaciDoRPaAr/PfS784kp
-JqcrW2/kI2W0WP+Bq1nB7Ls8pkUOuJ2EGmWQw05lEq70kXu3x+31OleqUuRn2HRs
-8+ch8Z3j
-=fp1H
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSn8ACgkQFHw5/5Y0
+tyxvDwwAlv+79whZqP5h9pA7Q2qeJIEVx+oI0qtF/KrrtNTyRC3Jj7EJ6x+V/BOQ
+lurYsnUj9vlsjI4F7ymRaVFz6Bb9dkAxlt7UnTtNjJRXONNA8PCdQk4n9vVRikIQ
+AWpNHMMmWpkoL1KYfPjWXkzpm+bWlHc47EKnWI+rp/CIhE1iQaZqdcIDODiXmICz
+jgq/hpiggJkD2H/FifpgfYvPi4djRJWyDGghxjJS2unhZc5FyX9ksXaDDae0P1UL
+9OrkjN9V76iqFI9/XLs9QX04a4H9GdmIuw2tOHaWQGG1hC/J/eeu3OKceLsJkEfo
+DWQYiVEB2t4zJwd4cP1QpC9tPhDqYY0BkMdY33AjTtEdpKbBA0t42ppOdeUw52bi
+lOpX12DAat6d+o36Cui5+jeT5thnEaqp7Pqyw0k1aEXcT8uhXgvvgmVWWSpjpsBk
+4YDYeHd6DdopEJEkLXweaEEirnBnFClPOkAqUzmPMlrTKMX88PlB5JFl5qshzZ0w
+Xh6Ce7Eg
+=2SB1
 -----END PGP SIGNATURE-----
 
---WO5hweo4U7Bs1K2Y--
+--vhGbjxqF7H4UMq/y--
