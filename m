@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12540CD98CA
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 22:36:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71F48CD98C0
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 22:38:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82B2986B75;
-	Wed, 11 Oct 2023 00:25:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 24EF986C53;
+	Wed, 11 Oct 2023 00:25:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="pfkvqVUC";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="QgIN3RnX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DF3886997; Wed, 11 Oct 2023 00:24:42 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 6E8DE86B33; Wed, 11 Oct 2023 00:24:47 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 06D8E86B79
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 00:24:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BBFD86C53
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 00:24:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,22 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1696976643; bh=JyX4nF/+6gjOLoBrtK8qMQ0SsX/3hXOh+5x9YIRAFhw=;
- b=pfkvqVUCZR309YcgtZzvnvJm092Tmg43+JYQ+8zIPTK+UXmzFmoN/vgTrGMH2kb/w+mJ0yy6S
- loQUctLIC/cfy9v68SZ3kK8zO1IODPirXh1010+LsdLhywhIyfQKnYU5iB5RCjJdJDv5zM0rcl1
- Dvr+jGfr9I4i+tbJAMED6OiBxMHQdsZGTGXMptjq8J4t7RzcJKSzqug17lLl4ItQ73PNO9DGVCL
- UBza1NOUsIZsBIvdImCsdtc82rprpo0k+g95QpLoHxPBHHuVRO6aexM/UtEg3HiranLHH3+HtMQ
- oYc1liDDjWYvIXxPkihfOP0p1UDYGu3EHEcTrqlno1Ng==
+ t=1696976638; bh=ILVoIlNL+amwQ8YKvqefZwI5918Thx0kvvhJPIDoTUQ=;
+ b=QgIN3RnXf/VOraHWAtoI5gWrZxsMqrOSCGRbDtrtwvFPXPpFyZApVe+DLziKoNjZWhSe3nlIs
+ qWwJDJhnrKJu44MMpILq8s9vm87KAB6+WZ3mfDF9NstP8tgkYyoRm0GM+QP4a47TG16H4V8TLds
+ UrQvvNl7WlJEZI5FTsYU5KAy+Q7sMRt5wyjsrLNm0O6NXJMVuG4v3NGX6/xbRdAjdZmwP5Ofiz6
+ eb+s5YLVNBddKFV6U4BTs4mX6zQWuB+8UjdTLe4tUh69GR1WIkEapFvPSkrL1lEBOQW63oAqoHj
+ Ai248PVvZYG9DO2hU0ZSXfRO6Q3oP8jokjb9vPgD2iZQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Eugen Hristev
- <eugen.hristev@collabora.com>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 4/4] usb: dwc3-generic: Use combined glue and ctrl node for
- RK3588
-Date: Tue, 10 Oct 2023 22:23:38 +0000
-Message-ID: <20231010222344.3436526-5-jonas@kwiboo.se>
+ <eugen.hristev@collabora.com>, Marek Vasut <marex@denx.de>, Jonas Karlman
+ <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Christopher Obbard <chris.obbard@collabora.com>
+Subject: [PATCH 2/4] rockchip: rk3588-rock-5b: Enable support for PCIe SATA
+ cards
+Date: Tue, 10 Oct 2023 22:23:36 +0000
+Message-ID: <20231010222344.3436526-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.42.0
 In-Reply-To: <20231010222344.3436526-1-jonas@kwiboo.se>
 References: <20231010222344.3436526-1-jonas@kwiboo.se>
@@ -53,8 +54,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6525cf03dfb1822b4d6ef320
+ 167.172.40.54
+X-ForwardEmail-ID: 6525cefddfb1822b4d6ef306
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,28 +72,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Like Rockchip RK3328 and RK3568, the RK3588 also have single node to
-represent the glue and ctrl for USB 3.0.
+Enable support for PCIe SATA cards and the on-board SATA controller.
 
-Use rk_ops as driver data to select correct ctrl node for RK3588 DWC3.
+This also revert use of CONFIG_PCI_INIT_R in order to speed up boot from
+eMMC or SD-cards. Standard boot will initialize pci after faster boot
+media have been enumerated.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- drivers/usb/dwc3/dwc3-generic.c | 1 +
- 1 file changed, 1 insertion(+)
+Cc: Christopher Obbard <chris.obbard@collabora.com>
+---
+ configs/rock5b-rk3588_defconfig | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 744fde806948..6fb2de8a5ace 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -610,6 +610,7 @@ static const struct udevice_id dwc3_glue_ids[] = {
- 	{ .compatible = "rockchip,rk3328-dwc3", .data = (ulong)&rk_ops },
- 	{ .compatible = "rockchip,rk3399-dwc3" },
- 	{ .compatible = "rockchip,rk3568-dwc3", .data = (ulong)&rk_ops },
-+	{ .compatible = "rockchip,rk3588-dwc3", .data = (ulong)&rk_ops },
- 	{ .compatible = "qcom,dwc3" },
- 	{ .compatible = "fsl,imx8mp-dwc3", .data = (ulong)&imx8mp_ops },
- 	{ .compatible = "fsl,imx8mq-dwc3" },
+diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
+index 447913faccc4..ec22e70033a0 100644
+--- a/configs/rock5b-rk3588_defconfig
++++ b/configs/rock5b-rk3588_defconfig
+@@ -26,6 +26,7 @@ CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0xc00800
+ CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
+ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_FIT_SIGNATURE=y
+@@ -35,7 +36,6 @@ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-rock-5b.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_PCI_INIT_R=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+@@ -63,6 +63,8 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_SPL_DM_SEQ_ALIAS=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_SYSCON=y
++CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
+ CONFIG_SPL_CLK=y
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+@@ -89,6 +91,8 @@ CONFIG_SPL_PINCTRL=y
+ CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
++CONFIG_SCSI=y
++CONFIG_DM_SCSI=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550_MEM32=y
 -- 
 2.42.0
 
