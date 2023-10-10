@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21D58CD80CE
-	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 13:03:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C5A0CD80CA
+	for <u-boot@archiver.kernel.org>; Tue, 10 Oct 2023 13:05:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 705B286E05;
-	Tue, 10 Oct 2023 14:59:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7C97586725;
+	Tue, 10 Oct 2023 15:05:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dMVpG2S1";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="fL6myBY5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06E1586DF6; Tue, 10 Oct 2023 14:59:07 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C383A86D85; Tue, 10 Oct 2023 15:05:23 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DFB886BB3
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 14:59:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A8E1863C3
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 15:05:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5a2379a8b69so68767167b3.2
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 05:59:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696942743; x=1697547543; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=gO0I99AwqIIN61d8j66AXe7naAhEvGOeJqU9B2oj5D0=;
- b=dMVpG2S1xF6qiDnuHEykABUmURNBS0MKeJSCDaoM7S+vibsNCIT1lGb+jZFVS0oAw8
- SFNTA0rMFGugo44rPfikr9YPaNakRYCC9SlnOirq5+vJaN9oBxtesoVwysnm+6bjjyxn
- LIkeGbo79WDnkKtZ6OHfFibkdkj152HmZpL7E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696942743; x=1697547543;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gO0I99AwqIIN61d8j66AXe7naAhEvGOeJqU9B2oj5D0=;
- b=EvSS18RGl6zFLVdREflvKWfmEWNXWA/AK/tcp3G+95XeAU2pI+jIki2kW7MPsOoSBF
- xy1uiTh6PFeSdVS0aEUVzeyDbsqR77nfrZOtnrVzw6DH3YHdFtd4F3d8AU+e/Qe2RmbW
- fx0uvky8lxOvXUqWUsspix0v4VQizNHvKsacTAD+wFtK7hYvzFltrZjayhTV16K/6b2S
- uvIHmYt8ENsazO9NcwhQX35dun8meErYoWV+rR10Wa0h2aBs/BXYAOfUn6cUJn/8fkR6
- /nMGO5cw1D1qJgFHBFtRVBQvyOKz4EphJncRxddOkKoM5QPRlNipYhKVGQAQal9oPpln
- i9bg==
-X-Gm-Message-State: AOJu0YyVucDgr0rje3FciXlNbN5AZzt45c3x1O+kugZAHv8k716y87xR
- 5J1RJHjrzCq6j2+NLtQfb/YHuDRjwZbTPBgJiyxfdg==
-X-Google-Smtp-Source: AGHT+IF+vZjnfsHH7tGRip0pQu9/aT2lE+ssqpfK5vW8AY6oTuKH4H0JY5hY+mUbxvpYJdlttDGIdg==
-X-Received: by 2002:a05:690c:dd2:b0:5a4:f7d3:394e with SMTP id
- db18-20020a05690c0dd200b005a4f7d3394emr24473776ywb.14.1696942742954; 
- Tue, 10 Oct 2023 05:59:02 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-6c43-4eba-c113-e8cd.res6.spectrum.com.
- [2603:6081:7b00:6400:6c43:4eba:c113:e8cd])
- by smtp.gmail.com with ESMTPSA id
- t184-20020a8183c1000000b005a247c18403sm4470038ywf.37.2023.10.10.05.59.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 05:59:02 -0700 (PDT)
-Date: Tue, 10 Oct 2023 08:59:00 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Francois Berder <fberder@outlook.fr>
-Cc: u-boot@lists.denx.de, lusus@denx.de
-Subject: Re: [PATCH] board/km/cent2: Fix buffer overflow when fixing MAC
- address
-Message-ID: <20231010125900.GG2227687@bill-the-cat>
-References: <AM0P191MB06891CA6155F4B995969E9E7DAC0A@AM0P191MB0689.EURP191.PROD.OUTLOOK.COM>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=86470e826c=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.22/8.17.1.22) with ESMTP id
+ 39A87YgX001191; Tue, 10 Oct 2023 15:04:58 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=tX3wUIwEYkd2biYtEscFRw7YXo9Mu+yY4QD0gC1sgHY=; b=fL
+ 6myBY5865kmaxZJ1Ws4ivQDQrubO0GXLFh5U26enBUx4hHw0BqSTabNMojXLZXRB
+ RRoNGnriHhpUqYwisFanYqq7rnUlmf+T5dIOQFX/pAWVWL7yPQOTP6nYa5IJBexi
+ Dn1ESdC3l1HynCKklV1fGS359bR9aEEjsXyJdwQjGtLMd0makdphbdZgWKTCosY6
+ ZsPnlA4x5a355F8apBlh+oNKNyuwSWqF3pSRfh/7WCv0IXbJsPBkUUgYIAHeLQIw
+ 0ikly7aufJLmbvOmuR8eE+N7jOXl34XNPrpiF4oNOG8oFOO11fmi9SJKQLWh50K9
+ hDnORzuSmdjjPBasoD+Q==
+Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3tkhg6245c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 10 Oct 2023 15:04:58 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id E5B1210005E;
+ Tue, 10 Oct 2023 15:04:56 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CD952231532;
+ Tue, 10 Oct 2023 15:04:56 +0200 (CEST)
+Received: from [10.201.20.38] (10.201.20.38) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 10 Oct
+ 2023 15:04:56 +0200
+Message-ID: <83deab6c-7615-80a9-8fad-2073da828e7e@foss.st.com>
+Date: Tue, 10 Oct 2023 15:04:55 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="O2aO8QbroOVlbnTj"
-Content-Disposition: inline
-In-Reply-To: <AM0P191MB06891CA6155F4B995969E9E7DAC0A@AM0P191MB0689.EURP191.PROD.OUTLOOK.COM>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH] ARM: dts: stm32mp: Repair damage from alignment with v6.3
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20231009231551.354425-1-marex@denx.de>
+Content-Language: en-US
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20231009231551.354425-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.201.20.38]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-10_08,2023-10-10_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,41 +90,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/10/23 01:15, Marek Vasut wrote:
+> The patch fixed by this commit renders ST STM32MP15xx EV1 board and
+> all DHSOM SoM based boards unbootable from SPI NOR. Fix the damage
+> by updating -u-boot.dtsi to match the stm32mp15-pinctrl.dtsi update.
+> 
+> Fixes: 08002ffd083d ("ARM: dts: stm32mp: alignment with v6.3")
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> NOTE: It is truly incomprehensible how 08002ffd083d was ever tested
+>       at ST, I can only speculate it never was tested at all, grumb.
 
---O2aO8QbroOVlbnTj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Marek,
 
-On Fri, Sep 29, 2023 at 04:11:00PM +0200, Francois Berder wrote:
+Sorry for that, you are right, SPI NOR boot in SPL is no more tested on our side :-(
+Today we are only tested boot from sdcard with tf-a/optee.
 
-> String "/soc/fman/ethernet@e8000" is 25 bytes long
-> and not 24 due to extra byte for null character at
-> the end.
->=20
-> Signed-off-by: Francois Berder <fberder@outlook.fr>
+Thanks for you fix.
 
-Applied to u-boot/master, thanks!
+Patrice
 
---=20
-Tom
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: u-boot@lists.denx.de
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi   | 16 ++++++++++++----
+>  arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi | 12 +++---------
+>  arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi |  8 ++++++--
+>  3 files changed, 21 insertions(+), 15 deletions(-)
+> 
+> diff --git a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+> index 1f7fdbce530..eb283cacd27 100644
+> --- a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+> @@ -135,20 +135,28 @@
+>  
+>  &qspi_bk1_pins_a {
+>  	bootph-pre-ram;
+> -	pins1 {
+> +	pins {
+>  		bootph-pre-ram;
+>  	};
+> -	pins2 {
+> +};
+> +
+> +&qspi_cs1_pins_a {
+> +	bootph-pre-ram;
+> +	pins {
+>  		bootph-pre-ram;
+>  	};
+>  };
+>  
+>  &qspi_bk2_pins_a {
+>  	bootph-pre-ram;
+> -	pins1 {
+> +	pins {
+>  		bootph-pre-ram;
+>  	};
+> -	pins2 {
+> +};
+> +
+> +&qspi_cs2_pins_a {
+> +	bootph-pre-ram;
+> +	pins {
+>  		bootph-pre-ram;
+>  	};
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> index f12941b05f6..2f70b0690d2 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp15xx-dhcom-u-boot.dtsi
+> @@ -134,20 +134,14 @@
+>  
+>  &qspi_bk1_pins_a {
+>  	bootph-pre-ram;
+> -	pins1 {
+> -		bootph-pre-ram;
+> -	};
+> -	pins2 {
+> +	pins {
+>  		bootph-pre-ram;
+>  	};
+>  };
+>  
+> -&qspi_bk2_pins_a {
+> +&qspi_cs1_pins_a {
+>  	bootph-pre-ram;
+> -	pins1 {
+> -		bootph-pre-ram;
+> -	};
+> -	pins2 {
+> +	pins {
+>  		bootph-pre-ram;
+>  	};
+>  };
+> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
+> index eb905ad2820..552b35db3c7 100644
+> --- a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
+> @@ -98,10 +98,14 @@
+>  
+>  &qspi_bk1_pins_a {
+>  	bootph-pre-ram;
+> -	pins1 {
+> +	pins {
+>  		bootph-pre-ram;
+>  	};
+> -	pins2 {
+> +};
+> +
+> +&qspi_cs1_pins_a {
+> +	bootph-pre-ram;
+> +	pins {
+>  		bootph-pre-ram;
+>  	};
+>  };
 
---O2aO8QbroOVlbnTj
-Content-Type: application/pgp-signature; name="signature.asc"
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUlSpQACgkQFHw5/5Y0
-tyylGAv9Eaj7ndDNg9W90OxzR2rqv7kD/MoXZJkTa2C88y2ST/GUGhvnDJDSwRpg
-EWLY1C85nWnBw9iCWDUdIISpGyZQi/MvGuE3oKnlwmL6lRCMGewxxpaYSNphFMp1
-ODyjVQuiLGKfAa+zoXVF1mTiEztrFspDGNJkgTUc5czKr0P6yML6k2Obaww22rex
-MClKYBxQDLme3OoyC1424oT8YuIIpMpgtdGl0znuDrtsW5E4YozM5GUbXOBq1yN+
-/txBwVWA1EljMCBeQNAycfl9rxz1prrJZv7uECZc+Azwa+5sC2gmci2YB2UawbLy
-aanX83cr4Kbv0Rb0WC7SlOSz4G91tHMnmVhxa+HNGH9hOWsEGvMFBtQbRXr/J4sF
-tIeaDgfK3O2iZEpxbpqwnY4/NM+07qf/QQkuboONqdRSS1qrTCjjbHX+hvzQwjxK
-JOueaocL7dbr8aPK9iNx2TDAOTcTWoNeUfXIJH363S+LWUzpS72b7xDk5W8d2jGg
-aAR0GLqV
-=LE+b
------END PGP SIGNATURE-----
-
---O2aO8QbroOVlbnTj--
+Patrice
