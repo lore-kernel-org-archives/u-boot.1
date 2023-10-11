@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C20B4CD6E54
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 10:09:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C797CD6E56
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 10:09:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D255F86DC7;
-	Wed, 11 Oct 2023 12:07:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 708E986D5E;
+	Wed, 11 Oct 2023 12:08:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FQa9uXNJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aEkAq1yH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27AE386D12; Wed, 11 Oct 2023 12:07:54 +0200 (CEST)
-Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
- [IPv6:2607:f8b0:4864:20::233])
+ id 4A58386D01; Wed, 11 Oct 2023 12:07:55 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 938BB86CF6
+ by phobos.denx.de (Postfix) with ESMTPS id D316586CFD
  for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 12:07:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-oi1-x233.google.com with SMTP id
- 5614622812f47-3a707bc2397so977800b6e.0
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3ae473c0bd6so1173534b6e.0
  for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 03:07:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697018851; x=1697623651; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1697018858; x=1697623658; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E9niEcLvTFyojjLWMgGyRta4gakIEX/Uqr4ljUUPhKU=;
- b=FQa9uXNJvMdHqYDz8O1H1zS2pYI+/y09fviwuosMPVua2oR/BHYVfvXmnt+XRe1tIy
- qCQbTJAoM5AHOctquTybroZdkdP8saqJ9xD6+Kt0TWqz2NOQJw04FI2g+90uKTPVM5vI
- YdCXZ5Sz/e539Vzu2y+ox/+OZM/KH2tLoi9fBeyLQH3z8tnlRVdd7BL1QbNMtfmVztP3
- k/sgSLcjIsXV8COMQunHA/bWyPnQj2/hWR5ETAR6hai7G3xo37w66stRVazc1p2fYNyH
- jSci77Hr556uvkkXwFrowMSADHIrkU6G4NyM6wHtEptYzrHFmYaZ1g4pcI6eLW2NisqC
- Y9GQ==
+ bh=bKQCA4NmtQLw2v1OtVuIkV/l8UfbIwEX1Xgxft/0LvQ=;
+ b=aEkAq1yHxNa5Qbe0T6SPEOgzekI5yoJb/jIX21Rw6XEM++pHDuq6IJD7JqCCjz9il6
+ FBuKtOHjEfWRJkufQjD/O1hw9LzKA2RWSbs1TKQZSWh5bPKVNMT8nuMqwWK+cLjm0m+p
+ 1pn76Bkf5waSI7hLTLjcnnm72wegi2mwTgJKgRReCg37IUf/DHLQqS16LnGQqJKv9shS
+ aWDbSWyyM+Pr8EnqKGWClzMJ+z7V55tyLZfxd+AchRy51Wct7nRdF10ExlsuFYXwg9t9
+ GeFiIqMNvu5yo0I0JjpX/JEuvKsUdAgxUWDysSAa9AtEBNwqDZuPNVWa46qjrXBzVNko
+ xzTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697018851; x=1697623651;
+ d=1e100.net; s=20230601; t=1697018858; x=1697623658;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E9niEcLvTFyojjLWMgGyRta4gakIEX/Uqr4ljUUPhKU=;
- b=EvcdBUSuUMsS5fjV41da2iaDZuS1321nocd813toZo9L64uR/g11O3/3Vb9JEEIPVS
- vkGccOSMEL8IVW+YQ5B389VBJs0iLZYYJ5nbS4ZufkLprR0O35HY80KY7z8McKNt1Dat
- vcHZ9Ub8EdTuMBJp0UIzzfAyBPoa83LEvWD+vqitm+8bZ5od6iau4UIhobwbwEd2fP+2
- vqjlId90aN1RGJsCtk6P0HnLGRQ3Xyv35zMPMbBUCHmK0PHrcIxO1ZMoAwuvw7w00kFf
- rJAA13tK56GG0IJFJY3zC7Jqw9qocw/Z2YOs/ZTxcKfAYvD1TsK22RF4MktWvvqfeUjr
- Nbyw==
-X-Gm-Message-State: AOJu0Yw8lEGAy3pk6Uh/oxD02dlkaYRGg1xYAw0jE4b1fldmGlYlMXxw
- zVBuMvS/gV8nCSqsxdUzcifU1w==
-X-Google-Smtp-Source: AGHT+IHZ90Y8wskUj7B16TaqaPVZUEkoWzDMsV5krefJwjhoNCWs8jM/ZFCEtgF42fl0h15rk3Ru5Q==
-X-Received: by 2002:a05:6359:b9a:b0:147:eb87:3665 with SMTP id
- gf26-20020a0563590b9a00b00147eb873665mr16337030rwb.3.1697018851163; 
- Wed, 11 Oct 2023 03:07:31 -0700 (PDT)
+ bh=bKQCA4NmtQLw2v1OtVuIkV/l8UfbIwEX1Xgxft/0LvQ=;
+ b=hGghDV3M56y7t1kxS2nWHrwg6PgzO+cvb15XITobuxb2/CIrQop9lInAXDzg2vDIJK
+ FXfhNNSgkMmTK1qTaBBe7SS+ucF8KVNDaPIoQoby4asdaG5vCZdqNHkQSYVl4mE+8+3l
+ Y86xsKLRS+mvbjx1zJNZ8DvNYHPtZ3v8sX4NjecPh44u7GvmVHfeliPw34Mw8lh0ii0O
+ TnucjADdTdp+QwnhbMmX4gwhgEvlCLiQTqaz8W8CJbJA+Zt1cBNqieeLMUtcAuDBAPkv
+ Z9vgv954R+ZG++0LsOOiJFuXh1hGN1Bs2W36PgpHiVOEuQdb5VwyVIdM37WEzPpCDcqo
+ cs+Q==
+X-Gm-Message-State: AOJu0YymNbWAQVxhCas8It6+EedvtBoZWbg6KMLnJRXC9A/y5e11vPFK
+ BCUPCZlQ7jR12kiR3yv4XnIlxBpo1smC8RmpnjNQ+Q==
+X-Google-Smtp-Source: AGHT+IGuVALzfpRXv7c9RnJkfujwUpXy5iCaUzQhTb8bwLv4ciyxUZUsUHxqASl9hH9zqHD9vXDmwQ==
+X-Received: by 2002:a05:6808:3008:b0:3ad:af12:2fe0 with SMTP id
+ ay8-20020a056808300800b003adaf122fe0mr23806151oib.3.1697018857755; 
+ Wed, 11 Oct 2023 03:07:37 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:5c6c:b11a:476c:8ebb])
  by smtp.gmail.com with ESMTPSA id
- e4-20020a62ee04000000b006889664aa6csm9663358pfi.5.2023.10.11.03.07.29
+ e4-20020a62ee04000000b006889664aa6csm9663358pfi.5.2023.10.11.03.07.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 03:07:30 -0700 (PDT)
+ Wed, 11 Oct 2023 03:07:37 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v6 03/14] firmware: scmi: support dummy channels for sandbox
- agent
-Date: Wed, 11 Oct 2023 19:06:56 +0900
-Message-Id: <20231011100707.1007417-4-takahiro.akashi@linaro.org>
+Subject: [PATCH v6 06/14] test: dm: add protocol-specific channel test
+Date: Wed, 11 Oct 2023 19:06:59 +0900
+Message-Id: <20231011100707.1007417-7-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231011100707.1007417-1-takahiro.akashi@linaro.org>
 References: <20231011100707.1007417-1-takahiro.akashi@linaro.org>
@@ -95,173 +94,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In sandbox scmi agent, channels are not used at all. But in this patch,
-dummy channels are supported in order to test protocol-specific channels.
+Any SCMI protocol may have its own channel.
+Test this feature on sandbox as the necessary framework was added
+in a prior commit.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
+v6
+* add missing header files (scmi_agent.h, scmi_protocols.h)
 v5
 * new commit
 ---
- arch/sandbox/include/asm/scmi_test.h       | 13 ++++
- drivers/firmware/scmi/sandbox-scmi_agent.c | 90 ++++++++++++++++++++++
- 2 files changed, 103 insertions(+)
+ arch/sandbox/dts/test.dts |  1 +
+ test/dm/scmi.c            | 22 ++++++++++++++++++++--
+ 2 files changed, 21 insertions(+), 2 deletions(-)
 
-diff --git a/arch/sandbox/include/asm/scmi_test.h b/arch/sandbox/include/asm/scmi_test.h
-index c72ec1e1cb25..75cb462a5584 100644
---- a/arch/sandbox/include/asm/scmi_test.h
-+++ b/arch/sandbox/include/asm/scmi_test.h
-@@ -88,6 +88,14 @@ struct sandbox_scmi_devices {
- };
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index 057e1ca1f4a8..73224e385b8a 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -700,6 +700,7 @@
+ 			clk_scmi: protocol@14 {
+ 				reg = <0x14>;
+ 				#clock-cells = <1>;
++				linaro,sandbox-channel-id = <0x14>;
+ 			};
  
- #ifdef CONFIG_SCMI_FIRMWARE
-+/**
-+ * sandbox_scmi_channel_id - Get the channel id
-+ * @dev:	Reference to the SCMI protocol device
-+ *
-+ * Return:	Channel id
-+ */
-+unsigned int sandbox_scmi_channel_id(struct udevice *dev);
-+
- /**
-  * sandbox_scmi_service_ctx - Get the simulated SCMI services context
-  * @return:	Reference to backend simulated resources state
-@@ -101,6 +109,11 @@ struct sandbox_scmi_service *sandbox_scmi_service_ctx(void);
-  */
- struct sandbox_scmi_devices *sandbox_scmi_devices_ctx(struct udevice *dev);
- #else
-+inline unsigned int sandbox_scmi_channel_id(struct udevice *dev);
-+{
-+	return 0;
-+}
-+
- static inline struct sandbox_scmi_service *sandbox_scmi_service_ctx(void)
- {
- 	return NULL;
-diff --git a/drivers/firmware/scmi/sandbox-scmi_agent.c b/drivers/firmware/scmi/sandbox-scmi_agent.c
-index 031882998dfa..394df043918f 100644
---- a/drivers/firmware/scmi/sandbox-scmi_agent.c
-+++ b/drivers/firmware/scmi/sandbox-scmi_agent.c
-@@ -33,6 +33,26 @@
-  * various uclass devices, as clocks and reset controllers.
-  */
+ 			reset_scmi: protocol@16 {
+diff --git a/test/dm/scmi.c b/test/dm/scmi.c
+index d87e2731ce42..8db3ad32f85e 100644
+--- a/test/dm/scmi.c
++++ b/test/dm/scmi.c
+@@ -16,6 +16,8 @@
+ #include <clk.h>
+ #include <dm.h>
+ #include <reset.h>
++#include <scmi_agent.h>
++#include <scmi_protocols.h>
+ #include <asm/scmi_test.h>
+ #include <dm/device-internal.h>
+ #include <dm/test.h>
+@@ -109,7 +111,7 @@ static int dm_test_scmi_clocks(struct unit_test_state *uts)
+ 	struct sandbox_scmi_devices *scmi_devices;
+ 	struct sandbox_scmi_service *scmi_ctx;
+ 	struct sandbox_scmi_agent *agent;
+-	struct udevice *dev;
++	struct udevice *agent_dev, *clock_dev, *dev;
+ 	int ret_dev;
+ 	int ret;
  
-+/**
-+ * struct sandbox_channel - Description of sandbox transport
-+ * @channel_id:		Channel identifier
-+ *
-+ * Dummy channel. This will be used to test if a protocol-specific
-+ * channel is properly used.
-+ * Id 0 means a channel for the sandbox agent.
-+ */
-+struct sandbox_channel {
-+	unsigned int channel_id;
-+};
-+
-+/**
-+ * struct scmi_channel - Channel instance referenced in SCMI drivers
-+ * @ref: Reference to local channel instance
-+ **/
-+struct scmi_channel {
-+	struct sandbox_channel ref;
-+};
-+
- static struct sandbox_scmi_clk scmi_clk[] = {
- 	{ .rate = 333 },
- 	{ .rate = 200 },
-@@ -470,6 +490,73 @@ static int sandbox_scmi_voltd_level_get(struct udevice *dev,
- 	return 0;
- }
+@@ -124,6 +126,14 @@ static int dm_test_scmi_clocks(struct unit_test_state *uts)
+ 	agent = scmi_ctx->agent;
+ 	ut_assertnonnull(agent);
  
-+/**
-+ * sandbox_scmi_of_get_channel - assigne a channel
-+ * @dev:	SCMI agent device
-+ * @protocol:	SCMI protocol device
-+ * @channel:	Pointer to channel info
-+ *
-+ * Assign a channel for the protocol, @protocol, in @channel,
-+ * based on a device tree's property.
-+ *
-+ * Return: 0 on success, error code on failure
-+ */
-+static int sandbox_scmi_of_get_channel(struct udevice *dev,
-+				       struct udevice *protocol,
-+				       struct scmi_channel **channel)
-+{
-+	struct sandbox_channel *agent_chan = dev_get_plat(dev);
-+	struct sandbox_channel *chan;
-+	u32 channel_id;
++	/* Sandbox SCMI clock protocol has its own channel */
++	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
++					      &agent_dev));
++	ut_assertnonnull(agent_dev);
++	clock_dev = scmi_get_protocol(agent_dev, SCMI_PROTOCOL_ID_CLOCK);
++	ut_assertnonnull(clock_dev);
++	ut_asserteq(0x14, sandbox_scmi_channel_id(clock_dev));
 +
-+	if (dev_read_u32(protocol, "linaro,sandbox-channel-id", &channel_id)) {
-+		/* Uses agent channel */
-+		*channel = container_of(agent_chan, struct scmi_channel, ref);
-+
-+		return 0;
-+	}
-+
-+	/* Setup a dedicated channel */
-+	chan = calloc(1, sizeof(*chan));
-+	if (!chan)
-+		return -ENOMEM;
-+
-+	chan->channel_id = channel_id;
-+
-+	*channel = container_of(chan, struct scmi_channel, ref);
-+
-+	return 0;
-+}
-+
-+/**
-+ * sandbox_scmi_of_to_plat - assigne a channel to agent
-+ * @dev:	SCMI agent device
-+ *
-+ * Assign a channel for the agent, @protocol.
-+ *
-+ * Return: always 0
-+ */
-+static int sandbox_scmi_of_to_plat(struct udevice *dev)
-+{
-+	struct sandbox_channel *chan = dev_get_plat(dev);
-+
-+	/* The channel for agent is always 0 */
-+	chan->channel_id = 0;
-+
-+	return 0;
-+}
-+
-+unsigned int sandbox_scmi_channel_id(struct udevice *dev)
-+{
-+	struct scmi_agent_proto_priv *priv;
-+	struct sandbox_channel *chan;
-+
-+	priv = dev_get_parent_priv(dev);
-+	chan = (struct sandbox_channel *)&priv->channel->ref;
-+
-+	return chan->channel_id;
-+}
-+
- static int sandbox_scmi_test_process_msg(struct udevice *dev,
- 					 struct scmi_channel *channel,
- 					 struct scmi_msg *msg)
-@@ -584,6 +671,7 @@ static const struct udevice_id sandbox_scmi_test_ids[] = {
- };
+ 	/* Test SCMI clocks rate manipulation */
+ 	ut_asserteq(333, agent->clk[0].rate);
+ 	ut_asserteq(200, agent->clk[1].rate);
+@@ -172,7 +182,7 @@ static int dm_test_scmi_resets(struct unit_test_state *uts)
+ 	struct sandbox_scmi_devices *scmi_devices;
+ 	struct sandbox_scmi_service *scmi_ctx;
+ 	struct sandbox_scmi_agent *agent;
+-	struct udevice *dev = NULL;
++	struct udevice *agent_dev, *reset_dev, *dev = NULL;
+ 	int ret;
  
- struct scmi_agent_ops sandbox_scmi_test_ops = {
-+	.of_get_channel = sandbox_scmi_of_get_channel,
- 	.process_msg = sandbox_scmi_test_process_msg,
- };
+ 	ret = load_sandbox_scmi_test_devices(uts, &dev);
+@@ -186,6 +196,14 @@ static int dm_test_scmi_resets(struct unit_test_state *uts)
+ 	agent = scmi_ctx->agent;
+ 	ut_assertnonnull(agent);
  
-@@ -592,6 +680,8 @@ U_BOOT_DRIVER(sandbox_scmi_agent) = {
- 	.id = UCLASS_SCMI_AGENT,
- 	.of_match = sandbox_scmi_test_ids,
- 	.priv_auto	= sizeof(struct sandbox_scmi_agent),
-+	.plat_auto	= sizeof(struct sandbox_channel),
-+	.of_to_plat	= sandbox_scmi_of_to_plat,
- 	.probe = sandbox_scmi_test_probe,
- 	.remove = sandbox_scmi_test_remove,
- 	.ops = &sandbox_scmi_test_ops,
++	/* Sandbox SCMI reset protocol doesn't have its own channel */
++	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
++					      &agent_dev));
++	ut_assertnonnull(agent_dev);
++	reset_dev = scmi_get_protocol(agent_dev, SCMI_PROTOCOL_ID_RESET_DOMAIN);
++	ut_assertnonnull(reset_dev);
++	ut_asserteq(0x0, sandbox_scmi_channel_id(reset_dev));
++
+ 	/* Test SCMI resect controller manipulation */
+ 	ut_assert(!agent->reset[0].asserted);
+ 
 -- 
 2.34.1
 
