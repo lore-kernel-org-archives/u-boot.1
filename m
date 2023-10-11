@@ -4,24 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0ACBCDB467
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 16:51:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55ECFCDB468
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 16:52:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C57A486DD9;
-	Wed, 11 Oct 2023 18:50:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 71F7386E16;
+	Wed, 11 Oct 2023 18:52:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="KYV9wint";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="HfHj4UrE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9A3186DCE; Wed, 11 Oct 2023 18:50:57 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk
- [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
+ id 0926786C33; Wed, 11 Oct 2023 18:52:36 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8FE186DD9
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:50:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 197B886D15
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:52:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
 Authentication-Results: phobos.denx.de;
@@ -29,33 +28,34 @@ Authentication-Results: phobos.denx.de;
 Received: from [IPv6:2a00:23c8:b70a:ae01:9fa:2310:80c6:3ab0] (unknown
  [IPv6:2a00:23c8:b70a:ae01:9fa:2310:80c6:3ab0])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits))
- (No client certificate requested) (Authenticated sender: obbardc)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id 6EF9D660730F;
- Wed, 11 Oct 2023 17:50:48 +0100 (BST)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ (Authenticated sender: obbardc)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 8D8FF66072FC;
+ Wed, 11 Oct 2023 17:52:23 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1697043048;
- bh=B20hh9wvIR6kJOwq90oiXq0ic54ARejaScDQ18/i7uc=;
+ s=mail; t=1697043143;
+ bh=l18uQP9l/o3y6Gbds6m3vZf7//6JyeOBjO8jYAGWc0s=;
  h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=KYV9wintZ019Th96IinEF5Dk/smA3mlmFsdgp+3H5OFcEYp+4Hksli2uHq4rQHjct
- c8rt9vnfk33m3cYncFdG28IP/tSGgrvq5HQdCt/36y3FNXIXE9pLPOBJAVKCEMNhQ4
- CfEw6oo8QTFs5hg/miPf8/wiD3bITpAVRz1r9UjpzL1UixoVgsuJoBuRzN44bALCId
- hu2GaILzUalTYDu0LWsf5hhDiUmnY+6Bw9I9Oij5tUt2gCGk67vzZSNdY8k3FVNU3y
- CJ6tdKlpqHJvLw7cLm4b/vhEAP8rNAtdz5kmee2nShtpRQmATHP4mvUazBd7SdI7UN
- P/lhDx8Dbx1PQ==
-Message-ID: <800a54dbc622edcabf80c6c3303a3881cb79e561.camel@collabora.com>
-Subject: Re: [PATCH 1/4] rockchip: rk3588: Sync device tree from linux
- maintainer tree
+ b=HfHj4UrE7nT9RL8q16qPqA0hL/Rm/rJqZRIHGPalC69NW22jL1+STdxW5k3XbYxim
+ TROYQ9mLPHsXpzA6nNtANc+LUtmwg4vzgCzBZjgzzKX87udPYq84wrZix3DKyywVRa
+ n0n6CKlv4uZiBnsd3VKi/lCgPNF6pHomEHyIjmyvS14Dkf0eD2NKEIKVv1hGg7JGct
+ ltKG+FsBHHy+aLX/t7dp/vnSRO0Db81xJ8jTp+/VMywZLzjzZ/KrYr5JqadYnVemaz
+ MiLmAdZ0MDVKh979Hf+oaIRRiQx9bjh6o6L0ZJzv2Ztx/yL03jUDz/LYDV8mVm9Ikc
+ cSoIByJJndiIA==
+Message-ID: <5f8632de8eb8d1f3a31656e1c65ea30c70beb01a.camel@collabora.com>
+Subject: Re: [PATCH 3/4] rockchip: rk3588-rock-5b: Sync USB3 nodes from
+ mainline linux patches
 From: Christopher Obbard <chris.obbard@collabora.com>
 To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
  Simon Glass <sjg@chromium.org>, Philipp Tomsich
  <philipp.tomsich@vrull.eu>, Eugen Hristev <eugen.hristev@collabora.com>,
  Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de
-Date: Wed, 11 Oct 2023 17:50:46 +0100
-In-Reply-To: <20231010222344.3436526-2-jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de, Sebastian Reichel <sebastian.reichel@collabora.com>
+Date: Wed, 11 Oct 2023 17:52:21 +0100
+In-Reply-To: <20231010222344.3436526-4-jonas@kwiboo.se>
 References: <20231010222344.3436526-1-jonas@kwiboo.se>
- <20231010222344.3436526-2-jonas@kwiboo.se>
+ <20231010222344.3436526-4-jonas@kwiboo.se>
 Autocrypt: addr=chris.obbard@collabora.com; prefer-encrypt=mutual;
  keydata=mQINBF7k5dIBEACmD3CqXJiJOtLEjilK2ghCO47y9Fl8+jc8yQPNsp4rMZuzlryL3vLseG0DpR3XE0bK0ojRLhUAqw13epLR5/nWp5ehm8kcy8WyDMBco9DaEyoElKCfelMvTtwmYkJXj8Z831nzzyh1CocFoFStL8HyLHc2/iU1wjczkL0t5hC9KvukV3koQTc9w03sNHeZyZedZIwR/r83k1myJXJsOPXZbmI2KGKq5QV4kTqgQJw3OkSVIQ9Mz2zVZNLKedWr2syrHFgojb7WX5iXbMUgJ8/Ikdttou0B/2xfgKNyKFe0DsbgkcEsJTIsx+C/Ju0+ycEk/7dW69oQLJo0j1oBP+8QfAeAT+M5C0uHC87KAmmy83Sh0xMGAVpcH2lLrE+5SjV3rnB+x/R4B/x7+1uYB5n7MU4/W2lYuAe1hfLtqDbEOyqLzC0FvFiZoDKxexQzcGpSW/LliBEvjjA/LXWADaM+mZezzLSjDwsGVohQrP0ZWOZ1NtC0e1sEt870fa4f+YkZeVHJRDInTcecw6c2QpNH4TzcTMD7bW9YZVqNiT5t9z+BzjJk3LtdrYPQ1SSpov7TB3LVKLIZDxgSlrur0dIklFFYPIx1KStCzqbvOEvlz03iZX4+tqZauNTkVhCoDLG+Z4w3OQdmR/uNqXqsbI04+kM3tOcVnXsosSW6E0TAJQARAQABtCZDaHJpc3RvcGhlciBPYmJhcmQgPG9iYmFyZGNAZ21haWwuY29tPokCUQQTAQgAOwIbAwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgAIZARYhBPGL3ItsJfkKoj1RdGNNxPBocEb4BQJe+22mAAoJEGNNxPBocEb4iUIP+wWXh7bqqLWWo1uYYzMZN9WSnhC1qiD8RyK18DvN8UEOINmvuX2beZjVftZYLyp55bT09VZXY0s4hFVr3PbqIYnkDmXGGnG/fHtmHm4QLNozNRJNXlf+gRvA+
  D2Zc41viquXrwrJEqrfz+g2rlO17jETQCJe5HWcvj3R1nps5MvymQ29KzmfYvMBmDYcYOVSSrqkItIFb9wppHHy8f1+sLM4pjb26OS1MUv02lRaptsV0wB3uVCNpZ8dS1aJdEYlLzKujKdVUG64ktwxboBbLSxa98J3oroHPBJbLPD+OjB9YUa3rkBIqf5JyrPPeQVzmU7rPb43o1vwWEGK1fj0N1riOWTb+v+xD00R+WBNSLYEouB+rd4d1+adBQY7DERemqQG9WlY2HHHbgcpK5SRYffwof3GL2Dgqd+K3KS+3uqenQByPGf5sXjuvo/uoI2TPoW5vYhApozM8voUycL7HA9f8MTZ7YCbPDHBfmioYiJN4y0EuO2JJ34jMZhySjft2JQ839yZP/iIwY3o6Y/ep97VDQqH8WrqfnnAKzw6WcJJ+5O088CANfI9xFsC5P8oPyBx2Ne3/zN/Bmv+3bLpcTPYyqfxZb3MIKAZXzxFU6Gn2MpNcQfMdwpJvd3NpMI7OAvhzgtW0aRe1Mj3m0gugbbOLiBw0SGPTgNwM4T7A2dltC9DaHJpc3RvcGhlciBPYmJhcmQgPGNocmlzLm9iYmFyZEBjb2xsYWJvcmEuY29tPokCTgQTAQgAOAIbAwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBPGL3ItsJfkKoj1RdGNNxPBocEb4BQJe+22uAAoJEGNNxPBocEb4JYwP+gMIrabuXS5llUz8yvICgusThLej0VSEWWF6BkiJdsaid1IbkbStYITE/jb834VdhjEHOT0A1SNVB6Yx38l9VNryyJkPZ38fELSUTI9FVLIfO3CP2qgJisoGh2LozSu9d+50hFIF0E9xQZCqcR7kS6j2xp14BiCoD94HCW9Z5r6gA57vFBupGwlcGxA5Z4MfFulpFaDry0R6ICksHe07vY49opWSXhSdhtv+apzaMC7r+5zJKBf1G4kNrKkauUiehgUB9f
@@ -85,640 +85,454 @@ X-Virus-Status: Clean
 Hi Jonas,
 
 On Tue, 2023-10-10 at 22:23 +0000, Jonas Karlman wrote:
-> Sync rk3588 device tree from linux maintainer tree (v6.7-armsoc/dts64).
-> Adds PCIe nodes to rk3588-evb1-v10 and rk3588-rock-5b boards. Also
-> remove includes from u-boot.dtsi-files that is no longer needed.
+> The device tree for rk3588 and rock-5b contain usb3 nodes that have
+> deviated too much from current state of submitted mainline linux usb3
+> patches, see [1].
 >=20
-> Linux commits:
-> 42145b7a8235 ("arm64: dts: rockchip: add PCIe network controller to rock-=
-5b")
-> 199cbd5f195a ("arm64: dts: rockchip: add PCIe for M.2 M-key to rock-5b")
-> da447ec38780 ("arm64: dts: rockchip: add PCIe for M.2 E-Key to rock-5b")
-> 86a2024d95e2 ("arm64: dts: rockchip: add PCIe2 network controller to rk35=
-88-evb1")
-> 46bb398ea1d8 ("arm64: dts: rockchip: add PCIe3 bus to rk3588-evb1")
-> 1c9a53ff7ece ("arm64: dts: rockchip: Add sdio node to rock-5b")
-> 3eaf2abd11aa ("arm64: dts: rockchip: Add sfc node to rk3588s")
-> bf012368bb0a ("arm64: dts: rockchip: Add I2S2 M0 pin definitions to rk358=
-8s")
-> 3d77a3e51b0f ("arm64: dts: rockchip: Add UART9 M0 pin definitions to rk35=
-88s")
+> Sync usb3 related nodes from latest patches and collaboras rk3588 tree
+> so that dwc3-generic driver can be updated to include support for the
+> rockchip,rk3588-dwc3 compatible.
+>=20
+> [1] https://lore.kernel.org/lkml/20231009172129.43568-1-sebastian.reichel=
+@collabora.com/
 >=20
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-Reviewed-by: Christopher Obbard <chris.obbard@collabora.com>
+These will be upstream shortly. Maybe we can wait until they appear in Heik=
+o's tree?
 
 > ---
-> =C2=A0arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi |=C2=A0 11 +-
-> =C2=A0arch/arm/dts/rk3588-evb1-v10.dts=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 98 ++++++++++++++++
-> =C2=A0arch/arm/dts/rk3588-rock-5b-u-boot.dtsi=C2=A0 |=C2=A0 60 ----------
-> =C2=A0arch/arm/dts/rk3588-rock-5b.dts=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 | 140 +++++++++++++++++++++++
+> Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
+> ---
+> =C2=A0arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 148 +++++++--------------=
+---
 > =C2=A0arch/arm/dts/rk3588-u-boot.dtsi=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 |=C2=A0=C2=A0 1 -
-> =C2=A0arch/arm/dts/rk3588s-pinctrl.dtsi=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 |=C2=A0 44 +++++++
-> =C2=A0arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi |=C2=A0=C2=A0 4 -
+=C2=A0=C2=A0 |=C2=A0 39 +++----
 > =C2=A0arch/arm/dts/rk3588s-u-boot.dtsi=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 10 --
-> =C2=A0arch/arm/dts/rk3588s.dtsi=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 11 ++
-> =C2=A09 files changed, 294 insertions(+), 85 deletions(-)
+=A0=C2=A0 |=C2=A0 68 ++++++-----
+> =C2=A0configs/rock5b-rk3588_defconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
+=C2=A0=C2=A0 |=C2=A0=C2=A0 1 -
+> =C2=A04 files changed, 99 insertions(+), 157 deletions(-)
 >=20
-> diff --git a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi b/arch/arm/dts/rk35=
-88-evb1-v10-u-boot.dtsi
-> index bd2e25948633..e8566785e965 100644
-> --- a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-> @@ -6,16 +6,7 @@
-> =C2=A0#include "rk3588-u-boot.dtsi"
-> =C2=A0
-> =C2=A0/ {
-> -	aliases {
-> -		mmc0 =3D &sdmmc;
-> -		mmc1 =3D &sdhci;
-> -	};
-> -
-> =C2=A0	chosen {
-> -		u-boot,spl-boot-order =3D &sdhci;
-> +		u-boot,spl-boot-order =3D "same-as-spl", &sdhci;
-> =C2=A0	};
-> =C2=A0};
-> -
-> -&sdhci {
-> -	bootph-all;
-> -};
-> diff --git a/arch/arm/dts/rk3588-evb1-v10.dts b/arch/arm/dts/rk3588-evb1-=
-v10.dts
-> index 229a9111f5eb..c3fe58e39e99 100644
-> --- a/arch/arm/dts/rk3588-evb1-v10.dts
-> +++ b/arch/arm/dts/rk3588-evb1-v10.dts
-> @@ -29,6 +29,46 @@
-> =C2=A0		pwms =3D <&pwm2 0 25000 0>;
-> =C2=A0	};
-> =C2=A0
-> +	pcie20_avdd0v85: pcie20-avdd0v85-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		regulator-name =3D "pcie20_avdd0v85";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt =3D <850000>;
-> +		regulator-max-microvolt =3D <850000>;
-> +		vin-supply =3D <&avdd_0v85_s0>;
-> +	};
-> +
-> +	pcie20_avdd1v8: pcie20-avdd1v8-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		regulator-name =3D "pcie20_avdd1v8";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt =3D <1800000>;
-> +		regulator-max-microvolt =3D <1800000>;
-> +		vin-supply =3D <&avcc_1v8_s0>;
-> +	};
-> +
-> +	pcie30_avdd0v75: pcie30-avdd0v75-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		regulator-name =3D "pcie30_avdd0v75";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt =3D <750000>;
-> +		regulator-max-microvolt =3D <750000>;
-> +		vin-supply =3D <&avdd_0v75_s0>;
-> +	};
-> +
-> +	pcie30_avdd1v8: pcie30-avdd1v8-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		regulator-name =3D "pcie30_avdd1v8";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt =3D <1800000>;
-> +		regulator-max-microvolt =3D <1800000>;
-> +		vin-supply =3D <&avcc_1v8_s0>;
-> +	};
-> +
-> =C2=A0	vcc12v_dcin: vcc12v-dcin-regulator {
-> =C2=A0		compatible =3D "regulator-fixed";
-> =C2=A0		regulator-name =3D "vcc12v_dcin";
-> @@ -38,6 +78,19 @@
-> =C2=A0		regulator-max-microvolt =3D <12000000>;
-> =C2=A0	};
-> =C2=A0
-> +	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		regulator-name =3D "vcc3v3_pcie30";
-> +		regulator-min-microvolt =3D <3300000>;
-> +		regulator-max-microvolt =3D <3300000>;
-> +		enable-active-high;
-> +		gpios =3D <&gpio3 RK_PC3 GPIO_ACTIVE_HIGH>;
-> +		startup-delay-us =3D <5000>;
-> +		vin-supply =3D <&vcc12v_dcin>;
-> +		pinctrl-names =3D "default";
-> +		pinctrl-0 =3D <&vcc3v3_pcie30_en>;
-> +	};
-> +
-> =C2=A0	vcc5v0_host: vcc5v0-host-regulator {
-> =C2=A0		compatible =3D "regulator-fixed";
-> =C2=A0		regulator-name =3D "vcc5v0_host";
-> @@ -87,6 +140,10 @@
-> =C2=A0	status =3D "okay";
-> =C2=A0};
-> =C2=A0
-> +&combphy2_psu {
-> +	status =3D "okay";
-> +};
-> +
-> =C2=A0&cpu_b0 {
-> =C2=A0	cpu-supply =3D <&vdd_cpu_big0_s0>;
-> =C2=A0};
-> @@ -163,7 +220,32 @@
-> =C2=A0	};
-> =C2=A0};
-> =C2=A0
-> +&pcie2x1l1 {
-> +	reset-gpios =3D <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&pcie2_1_rst>, <&rtl8111_isolate>;
-> +	status =3D "okay";
-> +};
-> +
-> +&pcie30phy {
-> +	status =3D "okay";
-> +};
-> +
-> +&pcie3x4 {
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&pcie3_reset>;
-> +	reset-gpios =3D <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-> +	vpcie3v3-supply =3D <&vcc3v3_pcie30>;
-> +	status =3D "okay";
-> +};
-> +
-> =C2=A0&pinctrl {
-> +	rtl8111 {
-> +		rtl8111_isolate: rtl8111-isolate {
-> +			rockchip,pins =3D <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>;
-> +		};
-> +	};
-> +
-> =C2=A0	rtl8211f {
-> =C2=A0		rtl8211f_rst: rtl8211f-rst {
-> =C2=A0			rockchip,pins =3D <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
-> @@ -177,6 +259,22 @@
-> =C2=A0		};
-> =C2=A0	};
-> =C2=A0
-> +	pcie2 {
-> +		pcie2_1_rst: pcie2-1-rst {
-> +			rockchip,pins =3D <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> +	pcie3 {
-> +		pcie3_reset: pcie3-reset {
-> +			rockchip,pins =3D <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +
-> +		vcc3v3_pcie30_en: vcc3v3-pcie30-en {
-> +			rockchip,pins =3D <3 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> =C2=A0	usb {
-> =C2=A0		vcc5v0_host_en: vcc5v0-host-en {
-> =C2=A0			rockchip,pins =3D <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
 > diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk358=
 8-rock-5b-u-boot.dtsi
-> index 96cc84e5aac9..3f390ef26a3f 100644
+> index 3f390ef26a3f..b595ddef7028 100644
 > --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
 > +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
-> @@ -4,9 +4,6 @@
-> =C2=A0 */
-> =C2=A0
-> =C2=A0#include "rk3588-u-boot.dtsi"
-> -#include <dt-bindings/pinctrl/rockchip.h>
-> -#include <dt-bindings/input/input.h>
-> -#include <dt-bindings/gpio/gpio.h>
-> =C2=A0#include <dt-bindings/usb/pd.h>
-> =C2=A0
-> =C2=A0/ {
-> @@ -23,19 +20,6 @@
+> @@ -19,38 +19,10 @@
+> =C2=A0		regulator-min-microvolt =3D <12000000>;
 > =C2=A0		regulator-max-microvolt =3D <12000000>;
 > =C2=A0	};
+> +};
 > =C2=A0
-> -	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
+> -	vcc5v0_usbdcin: vcc5v0-usbdcin {
 > -		compatible =3D "regulator-fixed";
-> -		regulator-name =3D "vcc3v3_pcie30";
-> -		regulator-min-microvolt =3D <3300000>;
-> -		regulator-max-microvolt =3D <3300000>;
+> -		regulator-name =3D "vcc5v0_usbdcin";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt =3D <5000000>;
+> -		regulator-max-microvolt =3D <5000000>;
+> -		vin-supply =3D <&vcc12v_dcin>;
+> -	};
+> -
+> -	vcc5v0_usb: vcc5v0-usb {
+> -		compatible =3D "regulator-fixed";
+> -		regulator-name =3D "vcc5v0_usb";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt =3D <5000000>;
+> -		regulator-max-microvolt =3D <5000000>;
+> -		vin-supply =3D <&vcc5v0_usbdcin>;
+> -	};
+> -
+> -	vbus5v0_typec: vbus5v0-typec {
+> -		compatible =3D "regulator-fixed";
+> -		regulator-name =3D "vbus5v0_typec";
+> -		regulator-min-microvolt =3D <5000000>;
+> -		regulator-max-microvolt =3D <5000000>;
 > -		enable-active-high;
-> -		gpios =3D <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
-> -		startup-delay-us =3D <5000>;
-> -		vin-supply =3D <&vcc5v0_sys>;
+> -		gpio =3D <&gpio2 RK_PB6 GPIO_ACTIVE_HIGH>;
+> -		vin-supply =3D <&vcc5v0_usb>;
 > -		pinctrl-names =3D "default";
-> -		pinctrl-0 =3D <&pcie3_vcc3v3_en>;
+> -		pinctrl-0 =3D <&typec5v_pwren>;
 > -	};
-> -
-> =C2=A0	vcc5v0_usbdcin: vcc5v0-usbdcin {
-> =C2=A0		compatible =3D "regulator-fixed";
-> =C2=A0		regulator-name =3D "vcc5v0_usbdcin";
-> @@ -69,53 +53,11 @@
-> =C2=A0	};
+> +&combphy2_psu {
+> +	status =3D "okay";
 > =C2=A0};
 > =C2=A0
-> -&combphy0_ps {
-> -	status =3D "okay";
-> -};
-> -
 > =C2=A0&fspim2_pins {
-> =C2=A0	bootph-all;
+> @@ -58,13 +30,9 @@
 > =C2=A0};
 > =C2=A0
-> -&pcie2x1l2 {
-> -	pinctrl-names =3D "default";
-> -	pinctrl-0 =3D <&pcie2x1l2_pins &pcie_reset_h>;
-> -	reset-gpios =3D <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
-> -	status =3D "okay";
-> -};
-> -
-> -&pcie30phy {
-> -	status =3D "okay";
-> -};
-> -
-> -&pcie3x4 {
-> -	reset-gpios =3D <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-> -	vpcie3v3-supply =3D <&vcc3v3_pcie30>;
-> -	pinctrl-names =3D "default";
-> -	pinctrl-0 =3D <&pcie3_rst>;
-> -	status =3D "okay";
-> -};
-> -
 > =C2=A0&pinctrl {
-> -	pcie {
-> -		pcie_reset_h: pcie-reset-h {
-> -			rockchip,pins =3D <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-> -		};
-> -
-> -		pcie2x1l2_pins: pcie2x1l2-pins {
-> -			rockchip,pins =3D <3 RK_PC7 4 &pcfg_pull_none>,
-> -					<3 RK_PD0 4 &pcfg_pull_none>;
-> -		};
-> -
-> -		pcie3_rst: pcie3-rst {
-> -			rockchip,pins =3D <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
-> -		};
-> -
-> -		pcie3_vcc3v3_en: pcie3-vcc3v3-en {
-> -			rockchip,pins =3D <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
-> -		};
-> -	};
-> -
-> =C2=A0	usb-typec {
+> -	usb-typec {
+> +	usb {
 > =C2=A0		usbc0_int: usbc0-int {
-> =C2=A0			rockchip,pins =3D <3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_up>;
-> @@ -138,8 +80,6 @@
-> =C2=A0	u-boot,spl-sfc-no-dma;
-> =C2=A0	pinctrl-names =3D "default";
-> =C2=A0	pinctrl-0 =3D <&fspim2_pins>;
-> -	#address-cells =3D <1>;
-> -	#size-cells =3D <0>;
-> =C2=A0	status =3D "okay";
-> =C2=A0
-> =C2=A0	flash@0 {
-> diff --git a/arch/arm/dts/rk3588-rock-5b.dts b/arch/arm/dts/rk3588-rock-5=
-b.dts
-> index 8ab60968f275..8618887899d9 100644
-> --- a/arch/arm/dts/rk3588-rock-5b.dts
-> +++ b/arch/arm/dts/rk3588-rock-5b.dts
-> @@ -12,6 +12,7 @@
-> =C2=A0	aliases {
-> =C2=A0		mmc0 =3D &sdhci;
-> =C2=A0		mmc1 =3D &sdmmc;
-> +		mmc2 =3D &sdio;
-> =C2=A0		serial2 =3D &uart2;
-> =C2=A0	};
-> =C2=A0
-> @@ -44,6 +45,43 @@
-> =C2=A0		#cooling-cells =3D <2>;
-> =C2=A0	};
-> =C2=A0
-> +	vcc3v3_pcie2x1l0: vcc3v3-pcie2x1l0-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		enable-active-high;
-> +		gpios =3D <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names =3D "default";
-> +		pinctrl-0 =3D <&pcie2_0_vcc3v3_en>;
-> +		regulator-name =3D "vcc3v3_pcie2x1l0";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt =3D <3300000>;
-> +		regulator-max-microvolt =3D <3300000>;
-> +		startup-delay-us =3D <50000>;
-> +		vin-supply =3D <&vcc5v0_sys>;
-> +	};
-> +
-> +	vcc3v3_pcie2x1l2: vcc3v3-pcie2x1l2-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		regulator-name =3D "vcc3v3_pcie2x1l2";
-> +		regulator-min-microvolt =3D <3300000>;
-> +		regulator-max-microvolt =3D <3300000>;
-> +		startup-delay-us =3D <5000>;
-> +		vin-supply =3D <&vcc_3v3_s3>;
-> +	};
-> +
-> +	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		enable-active-high;
-> +		gpios =3D <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names =3D "default";
-> +		pinctrl-0 =3D <&pcie3_vcc3v3_en>;
-> +		regulator-name =3D "vcc3v3_pcie30";
-> +		regulator-min-microvolt =3D <3300000>;
-> +		regulator-max-microvolt =3D <3300000>;
-> +		startup-delay-us =3D <5000>;
-> +		vin-supply =3D <&vcc5v0_sys>;
-> +	};
-> +
-> =C2=A0	vcc5v0_host: vcc5v0-host-regulator {
-> =C2=A0		compatible =3D "regulator-fixed";
-> =C2=A0		regulator-name =3D "vcc5v0_host";
-> @@ -76,6 +114,29 @@
-> =C2=A0		regulator-max-microvolt =3D <1100000>;
-> =C2=A0		vin-supply =3D <&vcc5v0_sys>;
-> =C2=A0	};
-> +
-> +	vcc3v3_wf: vcc3v3-wf-regulator {
-> +		compatible =3D "regulator-fixed";
-> +		regulator-name =3D "vcc3v3_wf";
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +		regulator-min-microvolt =3D <3300000>;
-> +		regulator-max-microvolt =3D <3300000>;
-> +		enable-active-high;
-> +		gpios =3D <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names =3D "default";
-> +		pinctrl-0 =3D <&vcc3v3_wf_en>;
-> +		startup-delay-us =3D <50000>;
-> +		vin-supply =3D <&vcc5v0_sys>;
-> +	};
-> +};
-> +
-> +&combphy0_ps {
-> +	status =3D "okay";
-> +};
-> +
-> +&combphy1_ps {
-> +	status =3D "okay";
-> =C2=A0};
-> =C2=A0
-> =C2=A0&cpu_b0 {
-> @@ -204,6 +265,34 @@
-> =C2=A0	};
-> =C2=A0};
-> =C2=A0
-> +&pcie2x1l0 {
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&pcie2_0_rst>;
-> +	reset-gpios =3D <&gpio4 RK_PA5 GPIO_ACTIVE_HIGH>;
-> +	vpcie3v3-supply =3D <&vcc3v3_pcie2x1l0>;
-> +	status =3D "okay";
-> +};
-> +
-> +&pcie2x1l2 {
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&pcie2_2_rst>;
-> +	reset-gpios =3D <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
-> +	vpcie3v3-supply =3D <&vcc3v3_pcie2x1l2>;
-> +	status =3D "okay";
-> +};
-> +
-> +&pcie30phy {
-> +	status =3D "okay";
-> +};
-> +
-> +&pcie3x4 {
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&pcie3_rst>;
-> +	reset-gpios =3D <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-> +	vpcie3v3-supply =3D <&vcc3v3_pcie30>;
-> +	status =3D "okay";
-> +};
-> +
-> =C2=A0&pinctrl {
-> =C2=A0	hym8563 {
-> =C2=A0		hym8563_int: hym8563-int {
-> @@ -217,11 +306,41 @@
-> =C2=A0		};
-> =C2=A0	};
-> =C2=A0
-> +	pcie2 {
-> +		pcie2_0_rst: pcie2-0-rst {
-> +			rockchip,pins =3D <4 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +
-> +		pcie2_0_vcc3v3_en: pcie2-0-vcc-en {
-> +			rockchip,pins =3D <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +
-> +		pcie2_2_rst: pcie2-2-rst {
-> +			rockchip,pins =3D <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> +	pcie3 {
-> +		pcie3_rst: pcie3-rst {
-> +			rockchip,pins =3D <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +
-> +		pcie3_vcc3v3_en: pcie3-vcc3v3-en {
-> +			rockchip,pins =3D <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> +
-> =C2=A0	usb {
-> =C2=A0		vcc5v0_host_en: vcc5v0-host-en {
-> =C2=A0			rockchip,pins =3D <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
-> =C2=A0		};
-> =C2=A0	};
-> +
-> +	m2e {
-> +		vcc3v3_wf_en: vcc3v3-wf-en {
-> +			rockchip,pins =3D <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
-> +		};
-> +	};
-> =C2=A0};
-> =C2=A0
-> =C2=A0&pwm1 {
-> @@ -258,6 +377,27 @@
-> =C2=A0	status =3D "okay";
-> =C2=A0};
-> =C2=A0
-> +&sdio {
-> +	max-frequency =3D <200000000>;
-> +	no-sd;
-> +	no-mmc;
-> +	non-removable;
-> +	bus-width =3D <4>;
-> +	cap-sdio-irq;
-> +	disable-wp;
-> +	keep-power-in-suspend;
-> +	wakeup-source;
-> +	sd-uhs-sdr12;
-> +	sd-uhs-sdr25;
-> +	sd-uhs-sdr50;
-> +	sd-uhs-sdr104;
-> +	vmmc-supply =3D <&vcc3v3_wf>;
-> +	vqmmc-supply =3D <&vcc_1v8_s3>;
-> +	pinctrl-names =3D "default";
-> +	pinctrl-0 =3D <&sdiom0_pins>;
-> +	status =3D "okay";
-> +};
-> +
-> =C2=A0&spi2 {
-> =C2=A0	status =3D "okay";
-> =C2=A0	assigned-clocks =3D <&cru CLK_SPI2>;
-> diff --git a/arch/arm/dts/rk3588-u-boot.dtsi b/arch/arm/dts/rk3588-u-boot=
-.dtsi
-> index 68b419f3abd5..15de4706254e 100644
-> --- a/arch/arm/dts/rk3588-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-u-boot.dtsi
-> @@ -3,7 +3,6 @@
-> =C2=A0 * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
-> =C2=A0 */
-> =C2=A0
-> -#include "rockchip-u-boot.dtsi"
-> =C2=A0#include "rk3588s-u-boot.dtsi"
-> =C2=A0
-> =C2=A0/ {
-> diff --git a/arch/arm/dts/rk3588s-pinctrl.dtsi b/arch/arm/dts/rk3588s-pin=
-ctrl.dtsi
-> index 48181671eacb..63151d9d2377 100644
-> --- a/arch/arm/dts/rk3588s-pinctrl.dtsi
-> +++ b/arch/arm/dts/rk3588s-pinctrl.dtsi
-> @@ -1349,6 +1349,41 @@
-> =C2=A0	};
-> =C2=A0
-> =C2=A0	i2s2 {
-> +		/omit-if-no-ref/
-> +		i2s2m0_lrck: i2s2m0-lrck {
-> +			rockchip,pins =3D
-> +				/* i2s2m0_lrck */
-> +				<2 RK_PC0 2 &pcfg_pull_none>;
-> +		};
-> +
-> +		/omit-if-no-ref/
-> +		i2s2m0_mclk: i2s2m0-mclk {
-> +			rockchip,pins =3D
-> +				/* i2s2m0_mclk */
-> +				<2 RK_PB6 2 &pcfg_pull_none>;
-> +		};
-> +
-> +		/omit-if-no-ref/
-> +		i2s2m0_sclk: i2s2m0-sclk {
-> +			rockchip,pins =3D
-> +				/* i2s2m0_sclk */
-> +				<2 RK_PB7 2 &pcfg_pull_none>;
-> +		};
-> +
-> +		/omit-if-no-ref/
-> +		i2s2m0_sdi: i2s2m0-sdi {
-> +			rockchip,pins =3D
-> +				/* i2s2m0_sdi */
-> +				<2 RK_PC3 2 &pcfg_pull_none>;
-> +		};
-> +
-> +		/omit-if-no-ref/
-> +		i2s2m0_sdo: i2s2m0-sdo {
-> +			rockchip,pins =3D
-> +				/* i2s2m0_sdo */
-> +				<4 RK_PC3 2 &pcfg_pull_none>;
-> +		};
-> +
-> =C2=A0		/omit-if-no-ref/
-> =C2=A0		i2s2m1_lrck: i2s2m1-lrck {
-> =C2=A0			rockchip,pins =3D
-> @@ -3307,6 +3342,15 @@
-> =C2=A0	};
-> =C2=A0
-> =C2=A0	uart9 {
-> +		/omit-if-no-ref/
-> +		uart9m0_xfer: uart9m0-xfer {
-> +			rockchip,pins =3D
-> +				/* uart9_rx_m0 */
-> +				<2 RK_PC4 10 &pcfg_pull_up>,
-> +				/* uart9_tx_m0 */
-> +				<2 RK_PC2 10 &pcfg_pull_up>;
-> +		};
-> +
-> =C2=A0		/omit-if-no-ref/
-> =C2=A0		uart9m1_xfer: uart9m1-xfer {
-> =C2=A0			rockchip,pins =3D
-> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk35=
-88s-rock-5a-u-boot.dtsi
-> index c47b0a7112c8..584476f77b13 100644
-> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
-> @@ -4,10 +4,6 @@
-> =C2=A0 */
-> =C2=A0
-> =C2=A0#include "rk3588s-u-boot.dtsi"
-> -#include <dt-bindings/pinctrl/rockchip.h>
-> -#include <dt-bindings/input/input.h>
-> -#include <dt-bindings/gpio/gpio.h>
-> -#include <dt-bindings/usb/pd.h>
-> =C2=A0
-> =C2=A0/ {
-> =C2=A0	chosen {
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-bo=
-ot.dtsi
-> index 27b2d7eff87b..878936fa07d6 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -4,7 +4,6 @@
-> =C2=A0 */
-> =C2=A0
-> =C2=A0#include "rockchip-u-boot.dtsi"
-> -#include <dt-bindings/phy/phy.h>
-> =C2=A0
-> =C2=A0/ {
-> =C2=A0	aliases {
-> @@ -102,15 +101,6 @@
-> =C2=A0		reg =3D <0x0 0xfd5c8000 0x0 0x4000>;
-> =C2=A0	};
-> =C2=A0
-> -	sfc: spi@fe2b0000 {
-> -		compatible =3D "rockchip,sfc";
-> -		reg =3D <0x0 0xfe2b0000 0x0 0x4000>;
-> -		interrupts =3D <GIC_SPI 206 IRQ_TYPE_LEVEL_HIGH 0>;
-> -		clocks =3D <&cru SCLK_SFC>, <&cru HCLK_SFC>;
-> -		clock-names =3D "clk_sfc", "hclk_sfc";
-> -		status =3D "disabled";
-> -	};
+> -			rockchip,pins =3D <3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_up>;
+> -		};
 > -
-> =C2=A0	rng: rng@fe378000 {
-> =C2=A0		compatible =3D "rockchip,trngv1";
-> =C2=A0		reg =3D <0x0 0xfe378000 0x0 0x200>;
-> diff --git a/arch/arm/dts/rk3588s.dtsi b/arch/arm/dts/rk3588s.dtsi
-> index 5544f66c6ff4..1a820a5a51eb 100644
-> --- a/arch/arm/dts/rk3588s.dtsi
-> +++ b/arch/arm/dts/rk3588s.dtsi
-> @@ -1424,6 +1424,17 @@
+> -		typec5v_pwren: typec5v-pwren {
+> -			rockchip,pins =3D <2 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
+> +			rockchip,pins =3D <3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_none>;
 > =C2=A0		};
 > =C2=A0	};
+> =C2=A0};
+> @@ -97,7 +65,6 @@
+> =C2=A0};
 > =C2=A0
-> +	sfc: spi@fe2b0000 {
-> +		compatible =3D "rockchip,sfc";
-> +		reg =3D <0x0 0xfe2b0000 0x0 0x4000>;
-> +		interrupts =3D <GIC_SPI 206 IRQ_TYPE_LEVEL_HIGH 0>;
-> +		clocks =3D <&cru SCLK_SFC>, <&cru HCLK_SFC>;
-> +		clock-names =3D "clk_sfc", "hclk_sfc";
+> =C2=A0&u2phy0_otg {
+> -	rockchip,typec-vbus-det;
+> =C2=A0	status =3D "okay";
+> =C2=A0};
+> =C2=A0
+> @@ -109,25 +76,17 @@
+> =C2=A0	status =3D "okay";
+> =C2=A0};
+> =C2=A0
+> -&usb2phy2_grf {
+> +&usbdp_phy1 {
+> =C2=A0	status =3D "okay";
+> =C2=A0};
+> =C2=A0
+> -&usb2phy3_grf {
+> +&usbdp_phy1_u3 {
+> =C2=A0	status =3D "okay";
+> =C2=A0};
+> =C2=A0
+> -&usb_host0_ehci {
+> -	companion =3D <&usb_host0_ohci>;
+> -};
+> -
+> -&usb_host1_ehci {
+> -	companion =3D <&usb_host1_ohci>;
+> -};
+> -
+> =C2=A0&usbdp_phy0 {
+> =C2=A0	orientation-switch;
+> -	svid =3D <0xff01>;
+> +	mode-switch;
+> =C2=A0	sbu1-dc-gpios =3D <&gpio4 RK_PA6 GPIO_ACTIVE_HIGH>;
+> =C2=A0	sbu2-dc-gpios =3D <&gpio4 RK_PA7 GPIO_ACTIVE_HIGH>;
+> =C2=A0	status =3D "okay";
+> @@ -135,14 +94,15 @@
+> =C2=A0	port {
+> =C2=A0		#address-cells =3D <1>;
+> =C2=A0		#size-cells =3D <0>;
+> -		usbdp_phy0_orientation_switch: endpoint@0 {
+> +
+> +		usbdp_phy0_typec_ss: endpoint@0 {
+> =C2=A0			reg =3D <0>;
+> -			remote-endpoint =3D <&usbc0_orien_sw>;
+> +			remote-endpoint =3D <&usbc0_ss>;
+> =C2=A0		};
+> =C2=A0
+> -		usbdp_phy0_dp_altmode_mux: endpoint@1 {
+> +		usbdp_phy0_typec_sbu: endpoint@1 {
+> =C2=A0			reg =3D <1>;
+> -			remote-endpoint =3D <&dp_altmode_mux>;
+> +			remote-endpoint =3D <&usbc0_sbu>;
+> =C2=A0		};
+> =C2=A0	};
+> =C2=A0};
+> @@ -151,84 +111,53 @@
+> =C2=A0	status =3D "okay";
+> =C2=A0};
+> =C2=A0
+> -&usbdp_phy1 {
+> -	rockchip,dp-lane-mux =3D <2 3>;
+> +&usb_host0_xhci {
+> +	usb-role-switch;
+> =C2=A0	status =3D "okay";
+> -};
+> =C2=A0
+> -&usbdp_phy1_u3 {
+> -	status =3D "okay";
+> -};
+> +	port {
 > +		#address-cells =3D <1>;
 > +		#size-cells =3D <0>;
+> =C2=A0
+> -&usbdrd3_0 {
+> -	status =3D "okay";
+> +		usb_host0_xhci_drd_sw: endpoint {
+> +			remote-endpoint =3D <&usbc0_hs>;
+> +		};
+> +	};
+> =C2=A0};
+> =C2=A0
+> -&usbdrd3_1 {
+> +&usb_host1_xhci {
+> =C2=A0	status =3D "okay";
+> =C2=A0};
+> =C2=A0
+> -&usbdrd_dwc3_0 {
+> -	usb-role-switch;
+> -
+> -	port {
+> -		#address-cells =3D <1>;
+> -		#size-cells =3D <0>;
+> -		dwc3_0_role_switch: endpoint@0 {
+> -			reg =3D <0>;
+> -			remote-endpoint =3D <&usbc0_role_sw>;
+> -		};
+> -	};
+> +&usb_host2_xhci {
+> +	status =3D "okay";
+> =C2=A0};
+> =C2=A0
+> =C2=A0&i2c4 {
+> +	pinctrl-names =3D "default";
+> =C2=A0	pinctrl-0 =3D <&i2c4m1_xfer>;
+> =C2=A0	status =3D "okay";
+> =C2=A0
+> -	usbc0: fusb302@22 {
+> +	usbc0: usb-typec@22 {
+> =C2=A0		compatible =3D "fcs,fusb302";
+> =C2=A0		reg =3D <0x22>;
+> =C2=A0		interrupt-parent =3D <&gpio3>;
+> =C2=A0		interrupts =3D <RK_PB4 IRQ_TYPE_LEVEL_LOW>;
+> =C2=A0		pinctrl-names =3D "default";
+> =C2=A0		pinctrl-0 =3D <&usbc0_int>;
+> -		vbus-supply =3D <&vbus5v0_typec>;
+> +		vbus-supply =3D <&vcc12v_dcin>;
+> =C2=A0		status =3D "okay";
+> =C2=A0
+> -		ports {
+> -			#address-cells =3D <1>;
+> -			#size-cells =3D <0>;
+> -
+> -			port@0 {
+> -				reg =3D <0>;
+> -				usbc0_role_sw: endpoint@0 {
+> -					remote-endpoint =3D <&dwc3_0_role_switch>;
+> -				};
+> -			};
+> -		};
+> -
+> =C2=A0		usb_con: connector {
+> =C2=A0			compatible =3D "usb-c-connector";
+> =C2=A0			label =3D "USB-C";
+> =C2=A0			data-role =3D "dual";
+> -			power-role =3D "dual";
+> +			power-role =3D "sink";
+> =C2=A0			try-power-role =3D "sink";
+> =C2=A0			op-sink-microwatt =3D <1000000>;
+> =C2=A0			sink-pdos =3D
+> -				<PDO_FIXED(5000, 1000, PDO_FIXED_USB_COMM)>;
+> -			source-pdos =3D
+> -				<PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>;
+> -
+> -			altmodes {
+> -				#address-cells =3D <1>;
+> -				#size-cells =3D <0>;
+> -
+> -				altmode@0 {
+> -					reg =3D <0>;
+> -					svid =3D <0xff01>;
+> -					vdo =3D <0xffffffff>;
+> -				};
+> -			};
+> +				<PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM)>,
+> +				<PDO_VAR(5000, 20000, 5000)>;
+> =C2=A0
+> =C2=A0			ports {
+> =C2=A0				#address-cells =3D <1>;
+> @@ -236,15 +165,22 @@
+> =C2=A0
+> =C2=A0				port@0 {
+> =C2=A0					reg =3D <0>;
+> -					usbc0_orien_sw: endpoint {
+> -						remote-endpoint =3D <&usbdp_phy0_orientation_switch>;
+> +					usbc0_hs: endpoint {
+> +						remote-endpoint =3D <&usb_host0_xhci_drd_sw>;
+> =C2=A0					};
+> =C2=A0				};
+> =C2=A0
+> =C2=A0				port@1 {
+> =C2=A0					reg =3D <1>;
+> -					dp_altmode_mux: endpoint {
+> -						remote-endpoint =3D <&usbdp_phy0_dp_altmode_mux>;
+> +					usbc0_ss: endpoint {
+> +						remote-endpoint =3D <&usbdp_phy0_typec_ss>;
+> +					};
+> +				};
+> +
+> +				port@2 {
+> +					reg =3D <2>;
+> +					usbc0_sbu: endpoint {
+> +						remote-endpoint =3D <&usbdp_phy0_typec_sbu>;
+> =C2=A0					};
+> =C2=A0				};
+> =C2=A0			};
+> diff --git a/arch/arm/dts/rk3588-u-boot.dtsi b/arch/arm/dts/rk3588-u-boot=
+.dtsi
+> index 15de4706254e..992f7b5d6637 100644
+> --- a/arch/arm/dts/rk3588-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-u-boot.dtsi
+> @@ -6,32 +6,24 @@
+> =C2=A0#include "rk3588s-u-boot.dtsi"
+> =C2=A0
+> =C2=A0/ {
+> -	usbdrd3_1: usbdrd3_1 {
+> -		compatible =3D "rockchip,rk3588-dwc3", "rockchip,rk3399-dwc3";
+> +	usb_host1_xhci: usb@fc400000 {
+> +		compatible =3D "rockchip,rk3588-dwc3", "snps,dwc3";
+> +		reg =3D <0x0 0xfc400000 0x0 0x400000>;
+> +		interrupts =3D <GIC_SPI 221 IRQ_TYPE_LEVEL_HIGH 0>;
+> =C2=A0		clocks =3D <&cru REF_CLK_USB3OTG1>, <&cru SUSPEND_CLK_USB3OTG1>,
+> =C2=A0			 <&cru ACLK_USB3OTG1>;
+> -		clock-names =3D "ref", "suspend", "bus";
+> -		#address-cells =3D <2>;
+> -		#size-cells =3D <2>;
+> -		ranges;
+> +		clock-names =3D "ref_clk", "suspend_clk", "bus_clk";
+> +		dr_mode =3D "host";
+> +		phys =3D <&u2phy1_otg>, <&usbdp_phy1_u3>;
+> +		phy-names =3D "usb2-phy", "usb3-phy";
+> +		phy_type =3D "utmi_wide";
+> +		power-domains =3D <&power RK3588_PD_USB>;
+> +		resets =3D <&cru SRST_A_USB3OTG1>;
+> +		snps,dis_enblslpm_quirk;
+> +		snps,dis-u2-freeclk-exists-quirk;
+> +		snps,dis-del-phy-power-chg-quirk;
+> +		snps,dis-tx-ipgap-linecheck-quirk;
+> =C2=A0		status =3D "disabled";
+> -
+> -		usbdrd_dwc3_1: usb@fc400000 {
+> -			compatible =3D "snps,dwc3";
+> -			reg =3D <0x0 0xfc400000 0x0 0x400000>;
+> -			interrupts =3D <GIC_SPI 221 IRQ_TYPE_LEVEL_HIGH 0>;
+> -			power-domains =3D <&power RK3588_PD_USB>;
+> -			resets =3D <&cru SRST_A_USB3OTG1>;
+> -			reset-names =3D "usb3-otg";
+> -			dr_mode =3D "host";
+> -			phys =3D <&u2phy1_otg>, <&usbdp_phy1_u3>;
+> -			phy-names =3D "usb2-phy", "usb3-phy";
+> -			phy_type =3D "utmi_wide";
+> -			snps,dis_enblslpm_quirk;
+> -			snps,dis-u2-freeclk-exists-quirk;
+> -			snps,dis-del-phy-power-chg-quirk;
+> -			snps,dis-tx-ipgap-linecheck-quirk;
+> -		};
+> =C2=A0	};
+> =C2=A0
+> =C2=A0	usbdpphy1_grf: syscon@fd5cc000 {
+> @@ -56,7 +48,6 @@
+> =C2=A0			clock-names =3D "phyclk";
+> =C2=A0			clock-output-names =3D "usb480m_phy1";
+> =C2=A0			#clock-cells =3D <0>;
+> -			rockchip,usbctrl-grf =3D <&usb_grf>;
+> =C2=A0			status =3D "disabled";
+> =C2=A0
+> =C2=A0			u2phy1_otg: otg-port {
+> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-bo=
+ot.dtsi
+> index 878936fa07d6..bdba4eb1df32 100644
+> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+> @@ -21,35 +21,47 @@
+> =C2=A0		status =3D "okay";
+> =C2=A0	};
+> =C2=A0
+> -	usbdrd3_0: usbdrd3_0 {
+> -		compatible =3D "rockchip,rk3588-dwc3", "rockchip,rk3399-dwc3";
+> +	usb_host0_xhci: usb@fc000000 {
+> +		compatible =3D "rockchip,rk3588-dwc3", "snps,dwc3";
+> +		reg =3D <0x0 0xfc000000 0x0 0x400000>;
+> +		interrupts =3D <GIC_SPI 220 IRQ_TYPE_LEVEL_HIGH 0>;
+> =C2=A0		clocks =3D <&cru REF_CLK_USB3OTG0>, <&cru SUSPEND_CLK_USB3OTG0>,
+> =C2=A0			 <&cru ACLK_USB3OTG0>;
+> -		clock-names =3D "ref", "suspend", "bus";
+> -		#address-cells =3D <2>;
+> -		#size-cells =3D <2>;
+> -		ranges;
+> +		clock-names =3D "ref_clk", "suspend_clk", "bus_clk";
+> +		dr_mode =3D "otg";
+> +		phys =3D <&u2phy0_otg>, <&usbdp_phy0_u3>;
+> +		phy-names =3D "usb2-phy", "usb3-phy";
+> +		phy_type =3D "utmi_wide";
+> +		power-domains =3D <&power RK3588_PD_USB>;
+> +		resets =3D <&cru SRST_A_USB3OTG0>;
+> +		snps,dis_enblslpm_quirk;
+> +		snps,dis-u1-entry-quirk;
+> +		snps,dis-u2-entry-quirk;
+> +		snps,dis-u2-freeclk-exists-quirk;
+> +		snps,dis-del-phy-power-chg-quirk;
+> +		snps,dis-tx-ipgap-linecheck-quirk;
+> =C2=A0		status =3D "disabled";
+> +	};
+> =C2=A0
+> -		usbdrd_dwc3_0: usb@fc000000 {
+> -			compatible =3D "snps,dwc3";
+> -			reg =3D <0x0 0xfc000000 0x0 0x400000>;
+> -			interrupts =3D <GIC_SPI 220 IRQ_TYPE_LEVEL_HIGH 0>;
+> -			power-domains =3D <&power RK3588_PD_USB>;
+> -			resets =3D <&cru SRST_A_USB3OTG0>;
+> -			reset-names =3D "usb3-otg";
+> -			dr_mode =3D "otg";
+> -			phys =3D <&u2phy0_otg>, <&usbdp_phy0_u3>;
+> -			phy-names =3D "usb2-phy", "usb3-phy";
+> -			phy_type =3D "utmi_wide";
+> -			snps,dis_enblslpm_quirk;
+> -			snps,dis-u1-entry-quirk;
+> -			snps,dis-u2-entry-quirk;
+> -			snps,dis-u2-freeclk-exists-quirk;
+> -			snps,dis-del-phy-power-chg-quirk;
+> -			snps,dis-tx-ipgap-linecheck-quirk;
+> -			quirk-skip-phy-init;
+> -		};
+> +	usb_host2_xhci: usb@fcd00000 {
+> +		compatible =3D "rockchip,rk3588-dwc3", "snps,dwc3";
+> +		reg =3D <0x0 0xfcd00000 0x0 0x400000>;
+> +		interrupts =3D <GIC_SPI 222 IRQ_TYPE_LEVEL_HIGH 0>;
+> +		clocks =3D <&cru REF_CLK_USB3OTG2>, <&cru SUSPEND_CLK_USB3OTG2>,
+> +			 <&cru ACLK_USB3OTG2>, <&cru CLK_UTMI_OTG2>,
+> +			 <&cru CLK_PIPEPHY2_PIPE_U3_G>;
+> +		clock-names =3D "ref_clk", "suspend_clk", "bus_clk", "utmi", "pipe";
+> +		dr_mode =3D "host";
+> +		phys =3D <&combphy2_psu PHY_TYPE_USB3>;
+> +		phy-names =3D "usb3-phy";
+> +		phy_type =3D "utmi_wide";
+> +		resets =3D <&cru SRST_A_USB3OTG2>;
+> +		snps,dis_enblslpm_quirk;
+> +		snps,dis-u2-freeclk-exists-quirk;
+> +		snps,dis-del-phy-power-chg-quirk;
+> +		snps,dis-tx-ipgap-linecheck-quirk;
+> +		snps,dis_rxdet_inp3_quirk;
 > +		status =3D "disabled";
+> =C2=A0	};
+> =C2=A0
+> =C2=A0	pmu1_grf: syscon@fd58a000 {
+> @@ -58,6 +70,11 @@
+> =C2=A0		reg =3D <0x0 0xfd58a000 0x0 0x2000>;
+> =C2=A0	};
+> =C2=A0
+> +	usbdpphy0_grf: syscon@fd5c8000 {
+> +		compatible =3D "rockchip,rk3588-usbdpphy-grf", "syscon";
+> +		reg =3D <0x0 0xfd5c8000 0x0 0x4000>;
 > +	};
 > +
-> =C2=A0	sdmmc: mmc@fe2c0000 {
-> =C2=A0		compatible =3D "rockchip,rk3588-dw-mshc", "rockchip,rk3288-dw-msh=
-c";
-> =C2=A0		reg =3D <0x0 0xfe2c0000 0x0 0x4000>;
+> =C2=A0	usb2phy0_grf: syscon@fd5d0000 {
+> =C2=A0		compatible =3D "rockchip,rk3588-usb2phy-grf", "syscon",
+> =C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0 "simple-mfd";
+> @@ -75,7 +92,6 @@
+> =C2=A0			clock-names =3D "phyclk";
+> =C2=A0			clock-output-names =3D "usb480m_phy0";
+> =C2=A0			#clock-cells =3D <0>;
+> -			rockchip,usbctrl-grf =3D <&usb_grf>;
+> =C2=A0			status =3D "disabled";
+> =C2=A0
+> =C2=A0			u2phy0_otg: otg-port {
+> diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defc=
+onfig
+> index ec22e70033a0..0595325e8107 100644
+> --- a/configs/rock5b-rk3588_defconfig
+> +++ b/configs/rock5b-rk3588_defconfig
+> @@ -101,7 +101,6 @@ CONFIG_SYSRESET=3Dy
+> =C2=A0CONFIG_USB=3Dy
+> =C2=A0CONFIG_DM_USB_GADGET=3Dy
+> =C2=A0CONFIG_USB_XHCI_HCD=3Dy
+> -# CONFIG_USB_XHCI_DWC3_OF_SIMPLE is not set
+> =C2=A0CONFIG_USB_EHCI_HCD=3Dy
+> =C2=A0CONFIG_USB_EHCI_GENERIC=3Dy
+> =C2=A0CONFIG_USB_OHCI_HCD=3Dy
