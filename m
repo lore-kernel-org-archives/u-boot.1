@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC3A5CD6E77
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 14:44:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4639CCD6E7E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 15:31:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 297F086DF7;
-	Wed, 11 Oct 2023 16:44:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7A6E186D12;
+	Wed, 11 Oct 2023 17:30:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iegCuTuV";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="OECM982K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97A5B86D12; Wed, 11 Oct 2023 16:44:14 +0200 (CEST)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id 40D2C86D2E; Wed, 11 Oct 2023 17:30:44 +0200 (CEST)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89F2686D12
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 16:44:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AA2886D12
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 17:30:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-d8195078f69so7454375276.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 07:44:00 -0700 (PDT)
+ spf=pass smtp.mailfrom=mchitale@ventanamicro.com
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-351367c8fcdso26111185ab.3
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 08:30:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697035439; x=1697640239; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZlrEvDzi7eV7lAYKY3vqOlzFKNRo2E9wm/icyLFaGzc=;
- b=iegCuTuViJwNyEWCutfJMBNS45Nmc2iBsEGB//vuZ1+pS1XvxLORQMSg360lX0M/OG
- EeVxSqxrtCPJGu4BRatUh68vwMWlXu1mm1B8kprcISJbKe4cZs+BFqR7p8WlRjow/0i4
- yEYUr1DO4nkG/+oxE2WWiB9JcuSsPqbJsHvAc=
+ d=ventanamicro.com; s=google; t=1697038238; x=1697643038; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4xx4UYuoSVvlhHwNx9pHy3LwEQxdgPl05GDMNscdwus=;
+ b=OECM982K2g5UeQVJbQoOFlMV+wt98MktdQ5MvmGrMBEmvcpe2DH137hHtdlmXHr+Th
+ Ds9IT0wo/RZwRNM6Woh61PEqASK0nzCkEtrB+WhlJeAAMtrr0hituHIZm/ukmoajDtgz
+ R+brLR9TdrVPM3pKZMZDzuR3u05exykRTM52rl8m/XfaMJyeNaBmPrG2WDMJTi5McH88
+ /QuHrkvs5KnIXPi4sq6tImz8U+tfEZ+PCsDP7Xed+7CtQ39HWagCIL+jB9bAX5ldJp2F
+ hDlcVz5Hex5f66J8vTdv97mabMyN+jMVgtV0bra9+kHYTkpGyIt+JGM5vYdxeraMknz8
+ 9x3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697035439; x=1697640239;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZlrEvDzi7eV7lAYKY3vqOlzFKNRo2E9wm/icyLFaGzc=;
- b=MFMFMuZJZO1X8qA6zDQNGngeuoA9XIFhJe+IKcBztFoK3oD8mCJX5/FsSMecr3pbJ1
- Tngb0XEqHkRo5O1SjkeaihtrxeQL1Lkjje7XEttWlPlw3rslM4rEGejIVpevnIAM6WYy
- 6poZQt66OwvpIRpnaNR8CZ44n6FZxUcVT7uV8HWUGO7+htYhDsUm80Jn5mC6qTbkQ2gn
- FX1ohd8Fw/4NHRlkG/Ky4NWevOIR0ADZE79xU4PCEkVRm0HbPO+sZYxdZ8OaAh1iRsU6
- yX2dHEjPxNb34yoYsohC6606tLxkaPPl5MXRzTEminGuofjDQbdsKyKppJu8m5d5jNlW
- aE/Q==
-X-Gm-Message-State: AOJu0YzZOFiJm3tMOWp4/DkOncbbOFUSzijl5GmJvqBhxThhiOP42GPa
- 1ObIVcl0VGzUGQCog4ehHGEGUITigR/AkT7eDE08hQ==
-X-Google-Smtp-Source: AGHT+IFbaOSLA/GWCUC7RGso4N8RN1pDnn9XB+nps372pQXuEX7ueFYE7JXg3p/gVkNF3l80x4jVuQ==
-X-Received: by 2002:a25:e096:0:b0:d9a:5476:20d7 with SMTP id
- x144-20020a25e096000000b00d9a547620d7mr5258055ybg.22.1697035439222; 
- Wed, 11 Oct 2023 07:43:59 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a369-3392-aca4-1f00.res6.spectrum.com.
- [2603:6081:7b00:6400:a369:3392:aca4:1f00])
- by smtp.gmail.com with ESMTPSA id
- g61-20020a25a4c3000000b00d8168e226e6sm4543314ybi.47.2023.10.11.07.43.58
+ d=1e100.net; s=20230601; t=1697038238; x=1697643038;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4xx4UYuoSVvlhHwNx9pHy3LwEQxdgPl05GDMNscdwus=;
+ b=wgGjhTQT7LxbV2/6AHnPAPEi1/wVRmNif5fl9sF4b+6+UY51m4Cmo6TaS5EEWfBbe4
+ qER9drROQfzLUvRP5kVeFEK1O4F/sT/pAALgZmWGydd951DArMs/2dogKenHd1OpN5SE
+ wOipvVhOgbc1acnZXAXnj5U+NWz7AjGjm7zWwsMaCmib7sdK8GH+0zBtH9Qyyo55X75r
+ CuVkkwJuUeRGu0GdhlVU59N17Ibt0GTtz7FCgAQuUP7ORm3CG31VceVY911HkRQxK4M7
+ iDZtCwMSDVpJAXDtQkOb+7/ybgZNKtzPIvzXW5UVgBxzT1D1pCCcssEScsYkKt6jPdRs
+ cC5A==
+X-Gm-Message-State: AOJu0YzNJeQeJ3gwfWmrME1VLhyP/uqGe50CnRO9IjVR7G1pUCgLGWYH
+ 77KC470UQQnlZhFL5nb740zvNw==
+X-Google-Smtp-Source: AGHT+IFT6753SZ+1sNkfvNjXhslgN+feqkRhQ/R8aBsNf5sB/oyCdkgTbaJMIt1XmbvfVlfq7LsmpQ==
+X-Received: by 2002:a05:6e02:1c0c:b0:351:1d53:c770 with SMTP id
+ l12-20020a056e021c0c00b003511d53c770mr27069813ilh.5.1697038238280; 
+ Wed, 11 Oct 2023 08:30:38 -0700 (PDT)
+Received: from ThinkPad-T490.dc1.ventanamicro.com
+ ([2401:4900:561f:d0f6:ce05:7e84:21e5:49c])
+ by smtp.googlemail.com with ESMTPSA id
+ du13-20020a056a002b4d00b0068e4c5a4f3esm10231348pfb.71.2023.10.11.08.30.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 07:43:58 -0700 (PDT)
-Date: Wed, 11 Oct 2023 10:43:56 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v4] bootstd: sata: Add bootstd support for ahci sata
-Message-ID: <20231011144356.GA900529@bill-the-cat>
-References: <20230917230649.30357-1-mibodhi@gmail.com>
+ Wed, 11 Oct 2023 08:30:37 -0700 (PDT)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Simon Glass <sjg@chromium.org>, Yu Chien Peter Lin <peterlin@andestech.com>
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH] riscv: binman: Fix compilation error
+Date: Wed, 11 Oct 2023 21:00:20 +0530
+Message-Id: <20231011153020.1008123-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2iY+Qg70QMaov608"
-Content-Disposition: inline
-In-Reply-To: <20230917230649.30357-1-mibodhi@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,82 +91,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Some platforms may not have any DDR memory below 4G and for such platforms
+the TEXT_BASE and LOAD addresses etc are all 64 bit addresses due to
+which the u-boot build fails with below error:
 
---2iY+Qg70QMaov608
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+u-boot/arch/riscv/dts/binman.dtsi:30.14-25
+Value out of range for 32-bit array element
+u-boot/arch/riscv/dts/binman.dtsi:43.14-25
+Value out of range for 32-bit array element
+u-boot/arch/riscv/dts/binman.dtsi:44.15-26
+Value out of range for 32-bit array element
+FATAL ERROR: Syntax error parsing input tree
 
-On Sun, Sep 17, 2023 at 04:06:48PM -0700, Tony Dinh wrote:
-> Add ahci sata bootdev and corresponding hunting function.
->=20
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> Changes in v4:
-> - Revise logic in bootmeth_script() to set devtype to sata for non-scsi
-> SATA device
-> - Rewrite sata_rescan() logic to properly remove all devices before probi=
-ng
-> - Add description to sata_rescan() header
->=20
-> Changes in v3:
-> - Correct drivers/ata/Makefile to compile sata_bootdev only if
-> ahci sata is enabled.
->=20
-> Changes in v2:
-> - set devtype to sata in bootmeth_script for non-scsi SATA device.
->=20
->  boot/bootmeth_script.c     | 14 +++++++--
->  drivers/ata/Makefile       |  2 +-
->  drivers/ata/sata.c         | 32 ++++++++++++++++++++
->  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
->  include/sata.h             |  6 ++++
->  5 files changed, 112 insertions(+), 4 deletions(-)
->  create mode 100644 drivers/ata/sata_bootdev.c
->=20
-> diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
-> index 58c57a2d4b..96e0ec5efa 100644
-> --- a/boot/bootmeth_script.c
-> +++ b/boot/bootmeth_script.c
-> @@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struct =
-bootflow *bflow)
->  	ulong addr;
->  	int ret;
-> =20
-> -	if (desc->uclass_id =3D=3D UCLASS_USB)
-> +	if (desc->uclass_id =3D=3D UCLASS_USB) {
->  		ret =3D env_set("devtype", "usb");
-> -	else
-> -		ret =3D env_set("devtype", blk_get_devtype(bflow->blk));
-> +	} else {
-> +		/* If the uclass is AHCI, but the driver is ATA
-> +		 * (not scsi), set devtype to sata
-> +		 */
-> +		if (!ret && IS_ENABLED(CONFIG_SATA) &&
+Fix by setting the address-cells property to 2 and converting load
+addresses to 64 bit values.
 
-This is a warning here as ret is uninitalized at this point.
+Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+---
+ arch/riscv/dts/binman.dtsi | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
---=20
-Tom
+diff --git a/arch/riscv/dts/binman.dtsi b/arch/riscv/dts/binman.dtsi
+index 156cb00971..b448b2a712 100644
+--- a/arch/riscv/dts/binman.dtsi
++++ b/arch/riscv/dts/binman.dtsi
+@@ -5,6 +5,9 @@
+ 
+ #include <config.h>
+ 
++#define U64_TO_U32_H(addr)		(((addr) >> 32) & 0xffffffff)
++#define U64_TO_U32_L(addr)		((addr) & 0xffffffff)
++
+ / {
+ 	binman: binman {
+ 		multiple-images;
+@@ -17,7 +20,7 @@
+ 
+ 		fit {
+ 			description = "Configuration to load OpenSBI before U-Boot";
+-			#address-cells = <1>;
++			#address-cells = <2>;
+ 			fit,fdt-list = "of-list";
+ 
+ 			images {
+@@ -27,7 +30,8 @@
+ 					os = "U-Boot";
+ 					arch = "riscv";
+ 					compression = "none";
+-					load = <CONFIG_TEXT_BASE>;
++					load = <U64_TO_U32_H(CONFIG_TEXT_BASE)
++						U64_TO_U32_L(CONFIG_TEXT_BASE)>;
+ 
+ 					uboot_blob: blob-ext {
+ 						filename = "u-boot-nodtb.bin";
+@@ -40,8 +44,10 @@
+ 					os = "opensbi";
+ 					arch = "riscv";
+ 					compression = "none";
+-					load = <CONFIG_SPL_OPENSBI_LOAD_ADDR>;
+-					entry = <CONFIG_SPL_OPENSBI_LOAD_ADDR>;
++					load = <U64_TO_U32_H(CONFIG_SPL_OPENSBI_LOAD_ADDR)
++						U64_TO_U32_L(CONFIG_SPL_OPENSBI_LOAD_ADDR)>;
++					entry = <U64_TO_U32_H(CONFIG_SPL_OPENSBI_LOAD_ADDR)
++						U64_TO_U32_L(CONFIG_SPL_OPENSBI_LOAD_ADDR)>;
+ 
+ 					opensbi_blob: opensbi {
+ 						filename = "fw_dynamic.bin";
+-- 
+2.34.1
 
---2iY+Qg70QMaov608
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUmtKYACgkQFHw5/5Y0
-tyxmJwv/Qsc1PWCJBuhXfMnsUa5+l9ExPphhl/zZPeEgT3il9YbNeWT2mNsxO6ge
-JtpO0223jmyVmPJtd9M+6mcFfXM/09UpJomtc2Y86IQ0v3hHU7H9Se/RP+shhREE
-zfdoAgPsazrFgSxMR/KDAaVMM12r495wd99QUwslGso/uXYHvYt9vKXv8Yzk5kaW
-GzwZvYAPs6X0D1As0CLhJN8mzxLVXlNU+0SVz6lUfEQFs3YwEuY+iA9av/9/q6k6
-JrAm9Fyj/MkJxhGyXR0VFjQmLJsXf9w11Zykz7n1xFy5ffPld7Qeo4XfXCZiX2Uf
-zAfL9+cPcIOvcWSBwGuzekzE9fmkFCEV5GJ+aTcUwntbHNZ6liYTwgAlPeY+DAVu
-bZIkNNGldWIlV/DvKVQ9TMyw1syOfjNLtEgBn3hRUmiwCKmda1swDF8fLgdQZcfB
-IY40fHXODwxrx1ta86iO6AJ42YU2lo6iVOOZDb/WeHiQ8Aqs9992ZzIlfntMXJ8H
-9TH358K/
-=5kev
------END PGP SIGNATURE-----
-
---2iY+Qg70QMaov608--
