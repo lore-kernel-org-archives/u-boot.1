@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E675CDB481
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0DEFCDB481
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4510586ED0;
+	by phobos.denx.de (Postfix) with ESMTP id C682686ED6;
 	Wed, 11 Oct 2023 21:07:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hl3P8iep";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jAcWZxsl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F31D48082A; Wed, 11 Oct 2023 20:41:43 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 023C886E1F; Wed, 11 Oct 2023 20:56:12 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7915686E28
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:38:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09F0D86E47
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:52:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5a7ba0828efso1828277b3.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:38:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-523100882f2so327286a12.2
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:52:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697049512; x=1697654312; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=l9GKD3kvT2ENAQUm4vOxhIis5BmNuv+1TEfoEtVPoqI=;
- b=hl3P8iepnpYv1BwDe23jRXhjPNftHGbHY1xerSNpQ20X1s/DBuHJE8RzXEuo+i4Hen
- BqeHMjac4sdh4h+glQLkiIKA2A/PWNT9AXDZgKnmVzTfuaaGteMLslaXIdgqU/2BRmaL
- 7R0YYpRze2FMHZC97As6u9my0vfVo/8ey6nno=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697049512; x=1697654312;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1697050154; x=1697654954; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=l9GKD3kvT2ENAQUm4vOxhIis5BmNuv+1TEfoEtVPoqI=;
- b=cCGkEV+wbMNBZGfIKPHZRvVyASdUIzQESaIyTaJdPsha3g2pZBrCANjjsWNzkeGtu0
- 3ZqJhx6wVXbEpWXvx9HiZCHqqZ8c1vgOO/zZdcPuz5+kqfAmKG+mruM/M4GISJBI+cdQ
- uxho6Z8kKLcLv/H7U/zbhzoGrlrE0bLANx1LZ/bYeIoqHXayoTJ3CHhCosdAOL1MBqcr
- mvvyT0Wly6qNbLEtpCRvvyf06Tf0FOY+nk9Mplnnb5t1/jq1u+ScRHnfISWek4y5wKe9
- 6rFNcCs7dbx1MZv51wMR8c1uWAWH+8PdZEiSffWqjExxKlblcjx0DN+EXmx4tG34H+bs
- 1q6Q==
-X-Gm-Message-State: AOJu0YwIgHHJzXENFhIydtcdBt5iHi3Ffli9ozIUnw0kigK42DleIL4R
- 2novx/KA/JumFO56Vl9d1NDrvA==
-X-Google-Smtp-Source: AGHT+IGJeW+RF3f99AX0p/jcjY5k52JUdp8fNf7Lnprnrb7K162YUp0tDqvZHH1C+gwh4PkQdhqZ3g==
-X-Received: by 2002:a81:a250:0:b0:5a7:a874:d83e with SMTP id
- z16-20020a81a250000000b005a7a874d83emr8037424ywg.42.1697049512673; 
- Wed, 11 Oct 2023 11:38:32 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
- [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
- by smtp.gmail.com with ESMTPSA id
- q66-20020a0dce45000000b0059bcadded9dsm5349031ywd.116.2023.10.11.11.38.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 11:38:32 -0700 (PDT)
-Date: Wed, 11 Oct 2023 14:38:30 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Joao Marcos Costa <jmcosta944@gmail.com>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, xypron.glpk@gmx.de,
- Y.Moog@phytec.de
-Subject: Re: [PATCH v4 0/8] Port gen_compile_commands.py from Linux to U-Boot
-Message-ID: <20231011183830.GH3119521@bill-the-cat>
-References: <20231001100036.34936-1-jmcosta944@gmail.com>
+ bh=b3cLMwcNgOEZk6x4aU9dWFbpHB6ufLp/CBGLiaFArtk=;
+ b=jAcWZxslhIjTdTLBX2iipWiYXQf1DhqgeaahGxLQNqJfbJWvPP8mVMllJcysbfrClm
+ TxoWaKpMelDHTJlUz0BC+YMk+Eg2YeCDXlpRkQUtsu8Rk8OltCencWWVAbLRxZ8N1hz/
+ LtonJDhxpxQl7L+SHqzCkRl/5HrVqEe4wazy3uaYk903h/xSFXdjmXaUiGbFNP6qsJTQ
+ rOT6RL71ActfY2H6ZwPz4sEhS24nrvslVBQke4iNDl+ru10X+jG7elrAqcY/1QTMenb/
+ 5yADh64kRSyO2dCTxWvtel6T9dlv//l5N6oWwj82OPUDl/GgOX/OY4meqQpCrK4a6m72
+ E61w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697050154; x=1697654954;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=b3cLMwcNgOEZk6x4aU9dWFbpHB6ufLp/CBGLiaFArtk=;
+ b=Q78yb6y1UrqBsdF0IE1+anN6AL23xqyzwQFx+oA/+47YYwBRPIRD4tCLeHyd6TQwZ6
+ fexf/7tn/gwpihZvywO8nZCsFZDWxz6wo4RehXYhSlpty9HnnbIZz9BBoWJbzSEhUG4x
+ SezbXSfVbglwlfF99qSh8gJ+AOFxtg10IKTL7Q3yBj8wm/0fGaQVFXeAGaIK8KLj0z8H
+ S360SlvHlLdd0WHDhZuG54KcoEEhicnSim0r+M+s9H5UUsM4xh5LjEK5x3TkFL7STPyY
+ Wp7Ndc0pG5R5GALy7y9Sbumr8UVR4zSa9zsfv5PviiNpLLVJvYRrPsYYYOUxTyMbzP4z
+ bYgg==
+X-Gm-Message-State: AOJu0YzadzQ/B9xLPmd5VEKAqtjtt/Z7/+3IAhFYNnyQtNZYtllo/E9B
+ 3sibo/UTba5iyiLMkXc+4dxTbGT7HRgePl0bgXU=
+X-Google-Smtp-Source: AGHT+IGCKNvp1UCeAXuuvCgWLKgHWI+8JbcwNeUX23fOPvHi38SalYPDcDbK92TgEbWvRI+AKP2x5h4i6qtfEDcCQiU=
+X-Received: by 2002:a05:6402:3985:b0:53d:bc68:633d with SMTP id
+ fk5-20020a056402398500b0053dbc68633dmr3288904edb.7.1697050153458; Wed, 11 Oct
+ 2023 11:49:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lrBT2AOKTnRH4Cdk"
-Content-Disposition: inline
-In-Reply-To: <20231001100036.34936-1-jmcosta944@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230917230649.30357-1-mibodhi@gmail.com>
+ <20231011144356.GA900529@bill-the-cat>
+In-Reply-To: <20231011144356.GA900529@bill-the-cat>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Wed, 11 Oct 2023 11:49:01 -0700
+Message-ID: <CAJaLiFysP2UPo6BAuuQGSQ15iN1YsWggBk+=j5UYbW2g+=32Eg@mail.gmail.com>
+Subject: Re: [PATCH v4] bootstd: sata: Add bootstd support for ahci sata
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,47 +88,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---lrBT2AOKTnRH4Cdk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, Oct 11, 2023 at 7:43=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Sun, Sep 17, 2023 at 04:06:48PM -0700, Tony Dinh wrote:
+> > Add ahci sata bootdev and corresponding hunting function.
+> >
+> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v4:
+> > - Revise logic in bootmeth_script() to set devtype to sata for non-scsi
+> > SATA device
+> > - Rewrite sata_rescan() logic to properly remove all devices before pro=
+bing
+> > - Add description to sata_rescan() header
+> >
+> > Changes in v3:
+> > - Correct drivers/ata/Makefile to compile sata_bootdev only if
+> > ahci sata is enabled.
+> >
+> > Changes in v2:
+> > - set devtype to sata in bootmeth_script for non-scsi SATA device.
+> >
+> >  boot/bootmeth_script.c     | 14 +++++++--
+> >  drivers/ata/Makefile       |  2 +-
+> >  drivers/ata/sata.c         | 32 ++++++++++++++++++++
+> >  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
+> >  include/sata.h             |  6 ++++
+> >  5 files changed, 112 insertions(+), 4 deletions(-)
+> >  create mode 100644 drivers/ata/sata_bootdev.c
+> >
+> > diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+> > index 58c57a2d4b..96e0ec5efa 100644
+> > --- a/boot/bootmeth_script.c
+> > +++ b/boot/bootmeth_script.c
+> > @@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struc=
+t bootflow *bflow)
+> >       ulong addr;
+> >       int ret;
+> >
+> > -     if (desc->uclass_id =3D=3D UCLASS_USB)
+> > +     if (desc->uclass_id =3D=3D UCLASS_USB) {
+> >               ret =3D env_set("devtype", "usb");
+> > -     else
+> > -             ret =3D env_set("devtype", blk_get_devtype(bflow->blk));
+> > +     } else {
+> > +             /* If the uclass is AHCI, but the driver is ATA
+> > +              * (not scsi), set devtype to sata
+> > +              */
+> > +             if (!ret && IS_ENABLED(CONFIG_SATA) &&
+>
+> This is a warning here as ret is uninitalized at this point.
 
-On Sun, Oct 01, 2023 at 12:00:28PM +0200, Joao Marcos Costa wrote:
+Thanks! I'll send the v5 patch.
 
-> Hello U-Boot community,
->=20
-> I'm submitting a patch series that ports the gen_compile_commands.py
-> script from the Linux kernel's sources to U-Boot. This script, originally
-> located in scripts/clang-tools/gen_compile_commands.py, enables the
-> generation of compile_commands.json file for improved code navigation
-> and analysis. The series consists of the initial script import, the
-> necessary modifications for U-Boot compatibility, and finally some
-> documentation.
->=20
-> Your feedback on these contributions would be greatly appreciated.
+All the best ,
+Tony
 
-For the series, applied to u-boot/master, thanks!
-
---=20
-Tom
-
---lrBT2AOKTnRH4Cdk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm66YACgkQFHw5/5Y0
-tyz/kAv/ay85FfLFJG+09D3LZ6Dw8XjR2rzERDFjvwfmWtqFst8D6NF2cSpGvB6Y
-QHCS6TMg+EuL6Z7BJmMsRuPBasZabxbFKvxpQJUly9fgVDh+hshYUt0x/QyOOGjp
-8Yd2lLXSqpHJ6WymIw20hJAl/0v95bNtQzrD58Tm7wLuR2J23LO4hJMDgp71PTvb
-aHSpPpIyz4xEGdVFbPPtiVsMIyi4ACIBnSLfsJEnAcHeQhZn5xyUHb8kXxhzknEf
-Zul3Pb7YUNekkWgxdFse8AdnW5tagwD0X2xbcXE8SulzFjQPBXNxPzdwZ0/qd3vF
-Ro2eEaxIxHgxyaJifESmoNnNTPYxwEuYh/rxLZNIMFROFKAsUTXcrL37zfWo75Pu
-OwSUROaAOmCwq2QlSJp2WNv6cCkbIV8/A0ud1irXn+p8lV+L64cd0vgOlaks4CHS
-VECrVxm0tPlHSJWdbiu3eTpi9iFq0kSzJbyoymceB+3HW6zc9oqO71dgnmi4SCg3
-U4cdVWUW
-=4oBw
------END PGP SIGNATURE-----
-
---lrBT2AOKTnRH4Cdk--
+>
+> --
+> Tom
