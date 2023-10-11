@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96FFBCD6E42
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 08:48:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48575CD6E42
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 08:48:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E400286C0B;
-	Wed, 11 Oct 2023 10:48:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 999F186C6B;
+	Wed, 11 Oct 2023 10:48:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F5Lc14Hz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PJCA39Yu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08D7886C4D; Wed, 11 Oct 2023 10:48:15 +0200 (CEST)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
+ id E5E4C82BBF; Wed, 11 Oct 2023 10:48:19 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 760CC82BBF
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 10:48:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B688C86C5A
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 10:48:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-6910ea9cca1so4939748b3a.1
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 01:48:06 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-6c7ce16ddfaso3284398a34.3
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 01:48:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697014085; x=1697618885; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jVv9mD1B4OHRRZq+t5mfmdAOivr+k2tqbj5m4jTRVQY=;
- b=F5Lc14Hz7/UbjGihjmzLyN/huqAoWcdlVrq+MMliPfRGBTKfIhHZ55FekjwDGsWFIx
- ietZbsgqpne8UCkt1Dk9iApWE+QXs+CrCtHdd29ruz6liTfxaM0dzK+Ucu00dxPx7fNN
- Mhi0DZV6/1VC6K1wUZUsnaSBeK1y7lek+qwp+Jqx0vUKNLEiXfuyynNknKiUgq/FZfom
- sSA6uRKHgvcq/YDL80VVjtS19Ypb6ys13Bj9BsAZjMFm8Lrv7vo2MEmKh9HPYnz2QyZq
- i+8NU1lMEAz21TcZArmhzFgdMp9EsGYWzumWqeYCB1oWXmS3FSdyxPLJpMlkQYgJUkjI
- pQcg==
+ d=gmail.com; s=20230601; t=1697014095; x=1697618895; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=U/bf5+SbFN6jomIPlNiguOoATaUBUguN5C5gRQCM9YU=;
+ b=PJCA39YuSRcKo/VaMm8OW1bUCkcoOdnhZUvL1THqGHMTxqTgJLAx7xy8c/9IKqYilO
+ 38LQr9aQiJeJf/4oEQxIqp4FPESM3/sYnRQF47014JF9MUIOjxuJ02n16obzidTnbi6f
+ an8/uzKN9CI8FTsJBZ1xLvjOHtOa9JywfxBvry1f0HukcQdj21zMKwZ005YHXVocLVVl
+ E923vphfBMZal/U/dDFX6nV8eEWgwLF2lHOA4Dt99y6KeZMU4CaHizahLJml7Myz5FOy
+ hrunr0wVkOXk9qqDsybQvsaPgy9xMSlslEqai12OnHsQPgDY3bIB2XHF98TmRPamoTwW
+ dhAA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697014085; x=1697618885;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jVv9mD1B4OHRRZq+t5mfmdAOivr+k2tqbj5m4jTRVQY=;
- b=foujDRk0mhRtP7FsopzPRXGWDHOSplOBKVlBTAK6gshgrer+b2+K7pprQx7cpbKGEK
- 7qMhLhUThX9mmsSVC/lWixJ13vnaNMCvtwuK5xpIdSWdUrDitMIZKNmoWqGok62sTf5a
- av0yArxzCdhI0AizJdVRPGDdX2f6Z/X0W5Yzko0GNb0h501LTz2pqQVeJNOLeaYwk6y/
- dQ0r6pEbSm7ISScZFzmqB7MT1GlASVoMqRPCwU2djomEISTNsl/ZsMqLl4UqeOtjyKza
- 9wdUhQNKJoMXvZVAum9GOowblBSehmrGvqphhu5zOM6881UrHkAZJRd0SURNHmr71nTA
- mGoA==
-X-Gm-Message-State: AOJu0YyEbCj3nUyKvEP3N6lkPwBpHW/u6tTfVP0ZGfqvOIa70/gvgGjr
- 0zUYKBphIrOJKbxZuTiHXlg=
-X-Google-Smtp-Source: AGHT+IEmBNiVy4MWzSNFptiG3elJf1Mg9QjK8ZBUpdx2vRLRHqwDInVryk8IWRfHmIPaZEkwg2N++Q==
-X-Received: by 2002:a05:6a20:a121:b0:134:a4e2:4ac8 with SMTP id
- q33-20020a056a20a12100b00134a4e24ac8mr20902967pzk.39.1697014084652; 
- Wed, 11 Oct 2023 01:48:04 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697014095; x=1697618895;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=U/bf5+SbFN6jomIPlNiguOoATaUBUguN5C5gRQCM9YU=;
+ b=S58QPsFUmFcTaqDahnpLa5mxKoXnnNSZgA21Y/pZtv0tWL7CEBom/Ivd+OOu0joUFf
+ ImAA+IBk6B1+HR237021Ht4VwJzDHVodMS8JU6Z3ya+khBCa00UVPgsugJVjFCsd1U8R
+ Vze+riVNj1Cc4rB89NjKN7SU5J0ZdyRXijYhZ9UsZP9S9kRsnojPjx6yvLKaPqZAftHn
+ oiGrJDC5a3kucJra4P4ahVvnJ3EBy+0Gitfo3LzRxbvErbXRGqBvqG+CYoqS31Gr3qNH
+ gdv9yKhmJkY0NpPhuHSXYdaHGvWzDkqUEvGiMbYjW3DGOUR15G8R9XbPOb7N1HERdekP
+ MAmw==
+X-Gm-Message-State: AOJu0YyhJTsOzjrQ02IMVhdpukS9gIhQP5T+sYZL0oByFOar5zB0aLQz
+ VOxhsxjDSeNHXsjKqcjw/CM=
+X-Google-Smtp-Source: AGHT+IEpYMS2ip4BGshK/pbE3BF1tsLWoCkHVedtGDlkxnnSZgwXoJNxai5pCxFaNxDJYusX8SaIzQ==
+X-Received: by 2002:a05:6871:e46:b0:1e9:90ec:140 with SMTP id
+ vk6-20020a0568710e4600b001e990ec0140mr851502oab.58.1697014095206; 
+ Wed, 11 Oct 2023 01:48:15 -0700 (PDT)
 Received: from localhost.localdomain ([1.200.128.112])
  by smtp.gmail.com with ESMTPSA id
- m28-20020a638c1c000000b0059c8fa8f917sm2307940pgd.12.2023.10.11.01.48.02
+ m28-20020a638c1c000000b0059c8fa8f917sm2307940pgd.12.2023.10.11.01.48.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 01:48:04 -0700 (PDT)
+ Wed, 11 Oct 2023 01:48:14 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, KWLIU@nuvoton.com,
  YSCHU@nuvoton.com, trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 0/5] fix npcm bmc error
-Date: Wed, 11 Oct 2023 16:45:28 +0800
-Message-Id: <20231011084533.2325296-1-JJLIU0@nuvoton.com>
+Subject: [PATCH v2 1/5] pinctrl: npcm8xx: add name for gpio function
+Date: Wed, 11 Oct 2023 16:45:29 +0800
+Message-Id: <20231011084533.2325296-2-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231011084533.2325296-1-JJLIU0@nuvoton.com>
+References: <20231011084533.2325296-1-JJLIU0@nuvoton.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,27 +93,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-1. add name for gpio pinctrl function
-2. add baud rate table
-3. fix ecc ram size
-4. add dts
-5. modify configs
+gpio function name is needed in the debug log
 
-Jim Liu (5):
-  pinctrl: npcm8xx: add name for gpio function
-  configs: npcm: support more uart baud rate
-  board: nuvuton: arbel: fix incorrect ram size
-  arm: dts: npcm8xx: add watchdog node
-  configs: nuvoton: npcm8xx: disable CONFIG_SPI_FLASH_USE_4K_SECTORS
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+---
+ drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- arch/arm/dts/nuvoton-common-npcm8xx.dtsi  | 24 +++++++++++++++++++++++
- board/nuvoton/arbel_evb/arbel_evb.c       | 17 ++++++++--------
- configs/arbel_evb_defconfig               |  1 +
- drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c |  1 +
- include/configs/arbel.h                   |  5 ++++-
- include/configs/poleg.h                   |  2 ++
- 6 files changed, 41 insertions(+), 9 deletions(-)
-
+diff --git a/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c b/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
+index 7976e3b3ed..ff49819b58 100644
+--- a/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
++++ b/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
+@@ -329,6 +329,7 @@ struct group_info {
+ 
+ static const struct group_info npcm8xx_groups[] = {
+ 	FUNC_LIST
++	{FN_gpio, "GPIO", NULL, 0, 0, 0}
+ };
+ 
+ /* Pin flags */
 -- 
 2.34.1
 
