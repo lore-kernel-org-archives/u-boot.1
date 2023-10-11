@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90A5BCDB47D
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:13:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65B03CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:14:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAE7586DEE;
-	Wed, 11 Oct 2023 20:49:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4E5D286D94;
+	Wed, 11 Oct 2023 20:49:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lrM3gAkb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HJWta21B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5159D86DC4; Wed, 11 Oct 2023 20:38:04 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id C285F8082A; Wed, 11 Oct 2023 20:36:59 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C216786CF3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:37:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA83E86CE5
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:36:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5a7af52ee31so1851317b3.2
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:37:44 -0700 (PDT)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5a7af52ee31so1850497b3.2
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:36:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697049414; x=1697654214; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697049409; x=1697654209; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nyu8WYcQJ4w9595s+NjRgJoQEeeINV2ZPTXl9KXIwVE=;
- b=lrM3gAkbaliiNzLmMAvG9EwgheuoUoc6Dzg7+qelckhctOtArtlRf9OcCJn/6jIpRH
- TJD1dq06P7UVJwY57X2IWGLhGO49RZvU+fgw5BXSbmd6rYMvEzUUTzMKO7CpNkqTi430
- Xv+BcqrtaJcztiPm9+cyX4b+lIP9jR2a5P/xY=
+ bh=406+NOWqJM5bs9NAMaXkhYQCvBJa6BRW9rYCrp0kT9M=;
+ b=HJWta21B3pS93tKOigx8PARcfZ5Llcpk7yw3Yv56I0wcYdUBbdVTAQVR7LAUsQL7c5
+ 2VpxToIF/ittRbLW10JXjiQrPTzPLuCsR4tBZMWmjshoB9aIBDs3Mq1detzWU5izy3rv
+ eXtRRzyswgSR2eE4p7OjK0I4iEnFIbLphvqXE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697049414; x=1697654214;
+ d=1e100.net; s=20230601; t=1697049409; x=1697654209;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nyu8WYcQJ4w9595s+NjRgJoQEeeINV2ZPTXl9KXIwVE=;
- b=I3Qj02A/YSF1cT39vwzrFUiFBzgQyS/qUYfBhkb55joJrrUdvrD67DrhBMKmDAYCRp
- 4sQtVb2XcyRrc/30qKpl69+twp1BUZhSO/SrgbO98FvXtfYRtcVvsx5IlYpcIdaZCKqn
- 2Z9k623yrWWr3tSeg/JBj6Roh6rnaN+C2FTDP1HpajBmHe1DP7FVofybAoB5L+pVXhXU
- M1XhVOF/W8pW4+T9cbaNat9hRpkbJsKOLWapPP+LwBqFZ5IhU9x1HhbE3i1Lz2YK9g1x
- 4JGFN7wEjzaNKumiCyOZouYDLQ3ZxTH6TklbQGDwkJ8gEp6mUPkZbve8bbeP+6Vs0nbF
- 1LuA==
-X-Gm-Message-State: AOJu0Yzq0/cbdQXLbiYKb89TusAwwI7mpSnmZzUlerga3qqZImiN3cjE
- ptI9IibCG3jZA6XRSlJ4A3DxqQ==
-X-Google-Smtp-Source: AGHT+IFRcBrrtiY5Wn7S/Bhim2Hn+/9OybpigE2mzhKkgPGsNo0wCvuP8bTH4DdI2I788zw5EicMfw==
-X-Received: by 2002:a81:9c02:0:b0:585:ef4e:6d93 with SMTP id
- m2-20020a819c02000000b00585ef4e6d93mr23378631ywa.47.1697049413918; 
- Wed, 11 Oct 2023 11:36:53 -0700 (PDT)
+ bh=406+NOWqJM5bs9NAMaXkhYQCvBJa6BRW9rYCrp0kT9M=;
+ b=Hxg0kc6oNttI0BIgzrieIV8SfuJGUS+uD1zTfEFmTAvnM5/u/ztkNuMm5JG/qKMldk
+ PUOheu/RNf80R7tT8ArGDsYKNz6iCPjBHyJj+KXyufMb+k2y9JCokREZj8t+wQvR0aZ+
+ wb79a2bBNj5XGa51gVxqkF6pLTKcId8YdtZXl/KUl/q+9pJoR5oiKxthGljA8JKfzZgt
+ +VB1GTtBnW6pTkgIG7lgrziPNMSfz8PsnpS5RkgGpydc0TER20/gjq0+hrDxO8ZzzxF3
+ 1QXJq2aY90kLoi61JAmyyRo0x/bvRq+OeuhHoMUqkVwUw37poFWAhst/qlQs2Q+e634S
+ pdew==
+X-Gm-Message-State: AOJu0YwVs8yCiLJhaOYUBOyGupu+CmzdT0rizEs5TAtlsWqBzu9sJFyz
+ vMFkQKUeZoLn86BuueWvo0cs9++q/VLKUo+XHRFd7w==
+X-Google-Smtp-Source: AGHT+IE9ptKIc8eUFvqdGDI8wNqRjIpLdMRRx8lz40iOivp+TI/JlmUZbLfT3uQpVLRJnhUVAOv9IQ==
+X-Received: by 2002:a05:690c:d87:b0:5a5:7ed:cf80 with SMTP id
+ da7-20020a05690c0d8700b005a507edcf80mr25901778ywb.23.1697049409280; 
+ Wed, 11 Oct 2023 11:36:49 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
  [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
  by smtp.gmail.com with ESMTPSA id
- r5-20020a814405000000b0059bc980b1eesm1631548ywa.6.2023.10.11.11.36.52
+ w129-20020a817b87000000b00589c103d00asm5339083ywc.79.2023.10.11.11.36.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 11:36:53 -0700 (PDT)
-Date: Wed, 11 Oct 2023 14:36:51 -0400
+ Wed, 11 Oct 2023 11:36:48 -0700 (PDT)
+Date: Wed, 11 Oct 2023 14:36:46 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, uboot-imx@nxp.com,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH 1/5] arm: dts: imx8mm-cl-iot-gate: rename overlay sources
- to .dtso
-Message-ID: <20231011183651.GM3119521@bill-the-cat>
-References: <20230925080909.365098-1-rasmus.villemoes@prevas.dk>
- <20230925080909.365098-2-rasmus.villemoes@prevas.dk>
+To: Marcel Ziswiler <marcel@ziswiler.com>
+Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH v1] arm: dts: k3-am625-verdin: fix boot
+Message-ID: <20231011183646.GL3119521@bill-the-cat>
+References: <20231010111304.200307-1-marcel@ziswiler.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="mRA8ziOQ4iji9bE2"
+ protocol="application/pgp-signature"; boundary="a3HeHbUUEisugs4F"
 Content-Disposition: inline
-In-Reply-To: <20230925080909.365098-2-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20231010111304.200307-1-marcel@ziswiler.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,46 +94,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---mRA8ziOQ4iji9bE2
+--a3HeHbUUEisugs4F
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 25, 2023 at 10:09:05AM +0200, Rasmus Villemoes wrote:
+On Tue, Oct 10, 2023 at 01:13:04PM +0200, Marcel Ziswiler wrote:
 
-> Distinguish more clearly between source files meant for producing .dtb
-> from those meant for producing .dtbo. No functional change, as we
-> currently have rules for producing a foo.dtbo from either foo.dts or
-> foo.dtso.
+> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 >=20
-> Note that in the linux tree, all device tree overlay sources have been
-> renamed to .dtso, and the .dts->.dtbo rule is gone since v6.5 (commit
-> 81d362732bac). So this is also a step towards staying closer to linux
-> with respect to both Kbuild and device tree sources.
+> A53 U-Boot proper got broken because nodes marked as 'bootph-pre-ram'
+> are no longer available in U-Boot proper before relocation.
 >=20
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Fix this by marking all nodes in u-boot.dtsi as 'bootph-all'.
+>=20
+> Fixes: 9e644284ab812 ("dm: core: Report bootph-pre-ram/sram node as pre-r=
+eloc after relocation")
+> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---mRA8ziOQ4iji9bE2
+--a3HeHbUUEisugs4F
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm60MACgkQFHw5/5Y0
-tyzi8AwAhr6Q1Vg+Z2FBrXEwfdFe9C3u5t2WQ6pQh+DU9lR+XFxgWxCRq/L7z3jm
-xtdhIXx1QgAdz1bVZEpKpgwU83F8/ntzUTrw5ekgTGbuPz4zMBJoYmZ/f0IOBPIB
-WNnzKP6vkGtTHUjStU1TSpbQui6qSJHui02fmZvQEgBJmqoi3tsaqeu9uEQKtTZy
-yZVQS+rKHG5YlRqeTOkJDB3BoeQ+pvlFJVnYNIEpbY7uJbE3zC3DW33TgyEbRt82
-/5eN72+1IR9aqFNRAv0NkHE5sZMj8iq1s0r/n/3CK29lhVoRc183hrOYLdZt0q1z
-22P+bqCYT3fIKlSn2ovPnhSI93m6MagzaNPiaF0XUKeZH3AzX6lzRCF5i2u3+J8a
-OGTDOk2IFp0Aju1aYeH0rAMhddJTUJDUmmS7S6jWNcC9NRyLochX5XV1/2+JP3Ga
-1TOq1AyB80dTcp3S5yzpWcLr5lvMwqhAijdi54+7m+tkOWJiUYU11PwNisz+zeAk
-yyzQlH/K
-=uwva
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm6z4ACgkQFHw5/5Y0
+tyydugv/ahlu4NywL2XbYZffafPhPWRREYm419NOEebG5ypG7hpNv6RdwIcvSMnY
+zseT2sHHvGrUWnRkRWiifiP/Intt05ZAlLIS1R57pp6sLqeSArBJGeutLM9M59Yp
+epSoIF5+knMKVsJ0BTPE/hV6apf0y6ousDM0nsnaQGxb1Tm31/IEnJHo17JsxUfQ
+FcigfAwwxnV8D5xbUPcHSgGqt1Y1HU070SZP/j5E2zeIV3QrDiHnSwTjReAr6jMY
+FjgxKiA4rdD8dZLTPIbx0ZRS0IfzYbEE+3HOpif9dRBZ8FLS1R7TSMxuFqQJ24d5
+BwAggr6XdWHIDuyku2kECwZm351ONaA54+Jt22w0fzYr6tQHvfz1txmv6Iwpvg2P
+pIau/0Mx+nB6pAZdNgP8pjVgafjGbCRDyEqPmQraXMBDZAgVTPtFRTLUNMGP6HHt
+QHCLN+0yu5hQlROIgx0cg1EwQ/1G2Rho1Ji3+fPRxuaipcXRaKC2sb0mMMLNp64o
+i6e2S8gP
+=PIWX
 -----END PGP SIGNATURE-----
 
---mRA8ziOQ4iji9bE2--
+--a3HeHbUUEisugs4F--
