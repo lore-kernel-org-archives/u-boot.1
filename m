@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5B74CDB47F
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:17:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2267CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:18:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23BBC86E7C;
-	Wed, 11 Oct 2023 20:50:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B2AE86E43;
+	Wed, 11 Oct 2023 20:49:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="syYQlYmX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sVMGh8iX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC06386CE8; Wed, 11 Oct 2023 20:39:29 +0200 (CEST)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 14CF186E13; Wed, 11 Oct 2023 20:39:08 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8C7386E3D
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:38:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8579C86D94
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:38:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-d857c8a1d50so113196276.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:38:40 -0700 (PDT)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5a7afd45199so2175257b3.0
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:38:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697049519; x=1697654319; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697049458; x=1697654258; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ije0ZQ+wzJFYoDReAVasD/BVCcdpulAwCLq6emNth04=;
- b=syYQlYmXlfkrBSYS1r8G2F5f7hKGMRwR91fuxIT/GhnZ1kRbpWGm0+MvwT071mnMK+
- BHlKQbIWsJYhwXsMYTV5qLnb5RVX+szocHY0G620qXUIjQvYjog5bTiA8dYAoaNM1FOe
- zd/zvrHq6TQG6nFRoId1DLfjSu/2PZJjF/C3g=
+ bh=aVoW3cxk+/ezCbNZv4OLbhoiLsnHrqmuVaP62OEBwcI=;
+ b=sVMGh8iXezqNnV+R4f7fMAiMe0QbZocTxmaaQPdgSzMrrOapb+GA39YD0X6ph8kCrm
+ 6oYz/jNfOxueT1dAhcBIdpgd2WGrGEv89Cm4qzMc3ZdwB39cPEsFCB7HFZoBY4as96Og
+ 3bmfKQhJsW0ltMnUE9NfyKOwnzUwsUaeH3Azs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697049519; x=1697654319;
+ d=1e100.net; s=20230601; t=1697049458; x=1697654258;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ije0ZQ+wzJFYoDReAVasD/BVCcdpulAwCLq6emNth04=;
- b=c3DR7W7WHVc82ggKVB/ZHXgptL846F/8ITqCaZsd095bD12EY5AAyfaLWlZEqpecO7
- OvVczCsCj58vap5k8uYsi68ScfCxcXdi6fxe7+bsa7U+p6Q9QHeVNL3JESIk8KO/G5fN
- rytJwg/BCTDh9sz4bfmNNrwZfMpx+CldTg9aIMH7VQq7GZDjviEpYF9eV+mYqUXkx7Zx
- Ge/aQBgt1X3bDhZRUJfUBdTrWmJ8hdQULw0KxpZepFhb7MIXQn5iBbMQWbypMp4uc7KI
- aJ6q8DhmJfEjEin1PpD/TuI82nKEyiOncxxQt1fqyvTmfYJPpmF/9SvN6ZRtIFZV8nSp
- GVMA==
-X-Gm-Message-State: AOJu0YwFdFqgmMSj6f50h5EDyork4hKj+h3czGjlY0Fq3lIaflgLRAiZ
- lHn0CvhAKv0izliZ6/h/OEzL0ob2aw4VAuE4wL4jYA==
-X-Google-Smtp-Source: AGHT+IEOPvL1m6EfdIboPwTDMFRCtq4vLEiFO+6MjdZe2QmmsteXvO835DOLyaNqHpRJBZWdXc/epg==
-X-Received: by 2002:a25:ce85:0:b0:d9a:3d01:cea7 with SMTP id
- x127-20020a25ce85000000b00d9a3d01cea7mr7799997ybe.56.1697049519367; 
- Wed, 11 Oct 2023 11:38:39 -0700 (PDT)
+ bh=aVoW3cxk+/ezCbNZv4OLbhoiLsnHrqmuVaP62OEBwcI=;
+ b=dhIlnCGW39qaX74dB7d6TuBIiY/6c2XroaHrCJUtfd1EBybpWkVgIkRou3Dw9Lv9xQ
+ 1JmLdbhfyQn8WEaXjNvxze1n+xVVcHxYUkQiwIN2AqC2tKE4YkxZKkI98bPKpeH/BUUb
+ PyCo+se7NckiB3zNLcCWzut7G52rJA9eSpgLlZ0GIRbVb+CKlQrSzb2logAboVMc+Lsd
+ O/sCWsSBMkCJaf1EauGftRfahtQkSu8+oXHJ4Oo1txxFhb4LFkwv8yCTtAgNWcjYxDJv
+ gDj14rp7fJXcPvNJlZPw51IEXU/Xxxxsomdwd6zi3wL8BxHq19vjjtOfo8jgJxTO9qRg
+ 17zw==
+X-Gm-Message-State: AOJu0YyAPW4iKUsQ0R1qmbG4CwMRj+F52wR9B70zTodNz0jRjJTp9Ypt
+ 4DgzTJw6rnJcveVfEVWimSOJkQ==
+X-Google-Smtp-Source: AGHT+IE8Krr2loxm7SHJt+pmEztyRsEQ8IjkVyPAw81P5jZddbmBn2UxnvGpUuB98Lc9hfJD101Sqw==
+X-Received: by 2002:a81:7255:0:b0:59b:fc99:8e5 with SMTP id
+ n82-20020a817255000000b0059bfc9908e5mr22042395ywc.29.1697049457765; 
+ Wed, 11 Oct 2023 11:37:37 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
  [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
  by smtp.gmail.com with ESMTPSA id
- h128-20020a255386000000b00d748501d9b4sm4641195ybb.21.2023.10.11.11.38.38
+ p65-20020a0dff44000000b005a2245c3506sm5345920ywf.42.2023.10.11.11.37.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 11:38:38 -0700 (PDT)
-Date: Wed, 11 Oct 2023 14:38:36 -0400
+ Wed, 11 Oct 2023 11:37:37 -0700 (PDT)
+Date: Wed, 11 Oct 2023 14:37:35 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Roman Azarenko <roman.azarenko@iopsys.eu>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Massimo Pegorer <massimo.pegorer@vimar.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v2] tools: ensure zeroed padding in external FIT images
-Message-ID: <20231011183836.GI3119521@bill-the-cat>
-References: <20230825081014.341987-1-roman.azarenko@iopsys.eu>
+To: Andrii Chepurnyi <Andrii_Chepurnyi@epam.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "leo.yan@linaro.org" <leo.yan@linaro.org>,
+ "vicooodin@gmail.com" <vicooodin@gmail.com>,
+ "andrii.chepurnyi82@gmail.com" <andrii.chepurnyi82@gmail.com>
+Subject: Re: [PATCH v1 1/1] board: xen: introduce virtio-blk support
+Message-ID: <20231011183735.GW3119521@bill-the-cat>
+References: <20231003085805.2214260-1-andrii_chepurnyi@epam.com>
+ <20231003085805.2214260-2-andrii_chepurnyi@epam.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="JsEYBeUApVkrLqa9"
+ protocol="application/pgp-signature"; boundary="wTYBZbwVELBySsed"
 Content-Disposition: inline
-In-Reply-To: <20230825081014.341987-1-roman.azarenko@iopsys.eu>
+In-Reply-To: <20231003085805.2214260-2-andrii_chepurnyi@epam.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,49 +96,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---JsEYBeUApVkrLqa9
+--wTYBZbwVELBySsed
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 25, 2023 at 10:10:14AM +0200, Roman Azarenko wrote:
+On Tue, Oct 03, 2023 at 08:58:28AM +0000, Andrii Chepurnyi wrote:
 
-> Padding the header of an external FIT image is achieved by truncating
-> the existing temporary FIT file to match the required alignment before
-> appending image data. Reusing an existing file this way means that the
-> padding will likely contain a portion of the original data not
-> overwritten by the new header.
+> Added new xenguest_arm64_virtio_defconfig which
+> enables support for virtio-blk using various types
+> of transport like virtio-pci, vrtio-mmio. Currently
+> supported: up to 2 PCI host bridges and 10 MMIO devices.
+> Note: DT parsing code was partly taken from pci-uclass.c
+> Limitation: All memory regions should be
+> below 4GB address space.
 >=20
-> Zero out any data past the end of the new header, and stop at either
-> the end of the desired padding, or the end of the old FIT file,
-> whichever comes first.
->=20
-> Fixes: 7946a814a319 ("Revert "mkimage: fit: Do not tail-pad fitImage with=
- external data"")
-> Signed-off-by: Roman Azarenko <roman.azarenko@iopsys.eu>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Andrii Chepurnyi <andrii_chepurnyi@epam.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---JsEYBeUApVkrLqa9
+--wTYBZbwVELBySsed
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm66wACgkQFHw5/5Y0
-tywiRAv+OrR5RvLT1/oDF9EiBAHsRSlZbXfNCFKLPRfxqFvp+LJiXyj+LftsYxQQ
-TsV6cTlhHvPSfwxkgzsxkOiFlzeUpiazp1QGI/ySvNXrl3tb4P2Jpy2RO0YMaazW
-ZxfzdVNaFl130K5W5sFoyfqW0akWEuxdz+ddZ7oguCAsyqpau57BkNJrSTqwJbie
-xbQaHmlGoGPSe2tCCDahsFGX+0NUoF8LPHTYbVJiTjq+5LNdIoZYX4x1SANEzR1C
-YpV47WDR3gOhk/jBtjZr8JjgE0QehfFfpKR22YI8J48ddjv6Pfj3EwRHzq5moQPe
-IatZFK75bjdDznySSUvZQIBMlRh5RvtOaDx9mo6mXL412MUoDXfYfW27z6zfJaMQ
-CV/zF7mhYpDdnAUW5N/3X4UuIbIrZ0xZjFnUXraZDB9G56HBr6bZsh5tBbngJ92g
-XWRf/6SW4BbLkUgpLLoFEqSUfJctgCPyeSJulWX8fGeRHWoyaYdvp54BfcHu2shJ
-ZmsQ/d+P
-=xhhc
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm628ACgkQFHw5/5Y0
+tyyqsQwAkRdnAEUS2LIynJy5zLlFxCHAgPVRLy0dAkFlSRrMPjlbbGbXbDDiScHy
+Sb8+k98XnCGb9oks0xCcQaYsi7PivQhOwvdUzgMIJlnLGdsnargakc8Xsju/skrw
+/W/B8jH/lURUx15Z5XDO0wqjvxxsWGYanVYjtVUsBXlMrvBvJ5c8QgPAUSyTLlwx
+rSoxi/YfnxBLbtiNTAxPBaTwAOj53wZ/EPIQPIcSl6ytyVjaJHo67Z3bdC7Ckyq1
+VDFy7cd54NRnKKmvHoFUDHH0e8jNgrwlD5hASdnwSCgU4t8+6omQCycmlmLkMV2D
++YwlvHLlYfHfEkXb0hAVhXEE3DqAZY2T6bEmm9RDo+8fzFH0QndNN6GFw7TFki9C
+KxKxPxnE5kB+xSwCeEk8TGGcTly0KWlQqgF+uxRG9AnjpRpMgEXJhNo9MQl0NbQF
+yI3JB8bgda7Hjwzef/83zPuXv5XyXUBcGV6ZPyBgueZUdYl4FKv0rBedsZHkyk4i
+HcftMAqe
+=fbFj
 -----END PGP SIGNATURE-----
 
---JsEYBeUApVkrLqa9--
+--wTYBZbwVELBySsed--
