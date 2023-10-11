@@ -4,43 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73678CD6E5E
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 11:05:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47801CD6E67
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:06:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C09086D86;
-	Wed, 11 Oct 2023 13:04:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DE0A186D1F;
+	Wed, 11 Oct 2023 15:06:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 595BE86BDB; Wed, 11 Oct 2023 13:04:12 +0200 (CEST)
+ id 1E4F286D21; Wed, 11 Oct 2023 15:06:31 +0200 (CEST)
 Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.154.221.58])
- by phobos.denx.de (Postfix) with SMTP id E722286D86
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 13:03:46 +0200 (CEST)
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 71DCA86C33
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 15:05:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng@tinylab.org
-X-QQ-mid: bizesmtp80t1697022053trerh8cd
-Received: from pek-vx-bsp2.wrs.com ( [60.247.85.88])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 11 Oct 2023 19:00:52 +0800 (CST)
+X-QQ-mid: bizesmtp78t1697029543tjj6eaj9
+Received: from ubuntu.. ( [111.196.129.4]) by bizesmtp.qq.com (ESMTP) with 
+ id ; Wed, 11 Oct 2023 21:05:42 +0800 (CST)
 X-QQ-SSF: 01200000000000F0I000000A0000000
-X-QQ-FEAT: 6TsEncM2xqhCkL+GtQLvADG+bcwNUS9eVnSK0XA8oFa5swRGpIIB2LYdkNW2W
- +MGS+nN5bTX2SqsHhlJnABoQjdety4WnjucZzNPow60EHbbb2+oOjYROFZTdkRq0OBsVRdT
- QAaavKbvu7bKBXx4ZYeYvk0+K5/y3LsOx05b+OKiOxEhsJcfS3Z0CBHdpOBZccr+yuqf/wG
- eCucHeFt4LuPyY2q4iagA1vcYVEXvyofryp4l9ZR6a4Z4zUL+oAfq1lJL0VhA4vD9h1A/BI
- biFop7T/jTOuAB+FZDeWMQzG7wbF567YLVNoQjzEcIQ4cxGnYkUMaKb4LdRywNKTVbuqvK4
- RaSL0i0c8k2y6qpB8E61nBn+ir0O+Pmxv9wMTU2
+X-QQ-FEAT: pnyS5aIGEOaQTvNd54cYbkjRJwIafzlNsFYvHvgNwk/opy+goKF2ErhKToSV6
+ uhcjT4KoYg4BTaJtcy3egTBJE3de0twTK3fGrRlrrqm+v9UuEieS3uu1gweMJU5zQxIAgq5
+ Kwuva5gnFRPPWPrBkdAGASK/glbfr8/nvmLNJnfKPm5izAahROrTEn+Zwpc8nfQWx365r9K
+ WYAbd9loARoPFb0eoVdbOYjDr6GTewSwtT41C6l9jZCjT7gMrGHrqeG/uC1sMcmPhXHm9bF
+ TRVo1YkAvqo+1Pgnp7fuX/3y4IY5Zj/fWXPmGDPznmGnDVRFJsq1aYJYdzjh3XAc72A6Awe
+ Hje0QdWDdx6VrNuKnCwD/Rgyntnxbo0z0aY3vYy
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 15850106743509373208
+X-BIZMAIL-ID: 537775116448123825
 From: Bin Meng <bmeng@tinylab.org>
-To: Jaehoon Chung <jh80.chung@samsung.com>,
-	Peng Fan <peng.fan@nxp.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] mmc: pci: Drop the superfluous cast
-Date: Wed, 11 Oct 2023 19:00:52 +0800
-Message-Id: <20231011110052.2958231-1-bmeng@tinylab.org>
+To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>
+Cc: Simon Glass <sjg@chromium.org>,
+	u-boot@lists.denx.de
+Subject: [PATCH 2/9] ufs: Add a line feed to the end of some dev_xxx() messages
+Date: Wed, 11 Oct 2023 21:05:28 +0800
+Message-Id: <20231011130535.3964-3-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231011130535.3964-1-bmeng@tinylab.org>
+References: <20231011130535.3964-1-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
@@ -61,30 +65,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-dm_pci_map_bar() return a value of (void *) already, hence no need
-to cast it again before assigning to host->ioaddr.
+Add a line feed to improve readability of some dev_xxx() messages.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 ---
 
- drivers/mmc/pci_mmc.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/ufs/ufs.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/mmc/pci_mmc.c b/drivers/mmc/pci_mmc.c
-index 9fb7044029..4d163ccba0 100644
---- a/drivers/mmc/pci_mmc.c
-+++ b/drivers/mmc/pci_mmc.c
-@@ -50,8 +50,8 @@ static int pci_mmc_probe(struct udevice *dev)
- 	desc = mmc_get_blk_desc(&plat->mmc);
- 	desc->removable = !(plat->cfg.host_caps & MMC_CAP_NONREMOVABLE);
+diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+index f534d6e29f..96801866d3 100644
+--- a/drivers/ufs/ufs.c
++++ b/drivers/ufs/ufs.c
+@@ -320,7 +320,7 @@ static int ufshcd_disable_tx_lcc(struct ufs_hba *hba, bool peer)
+ 					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(i)),
+ 					0);
+ 		if (err) {
+-			dev_err(hba->dev, "%s: TX LCC Disable failed, peer = %d, lane = %d, err = %d",
++			dev_err(hba->dev, "%s: TX LCC Disable failed, peer = %d, lane = %d, err = %d\n",
+ 				__func__, peer, i, err);
+ 			break;
+ 		}
+@@ -441,7 +441,7 @@ static int ufshcd_make_hba_operational(struct ufs_hba *hba)
+ 		ufshcd_enable_run_stop_reg(hba);
+ 	} else {
+ 		dev_err(hba->dev,
+-			"Host controller not ready to process requests");
++			"Host controller not ready to process requests\n");
+ 		err = -EIO;
+ 		goto out;
+ 	}
+@@ -930,7 +930,7 @@ static int ufshcd_copy_query_response(struct ufs_hba *hba)
+ 			memcpy(hba->dev_cmd.query.descriptor, descp, resp_len);
+ 		} else {
+ 			dev_warn(hba->dev,
+-				 "%s: Response size is bigger than buffer",
++				 "%s: Response size is bigger than buffer\n",
+ 				 __func__);
+ 			return -EINVAL;
+ 		}
+@@ -1179,11 +1179,11 @@ static int ufshcd_read_desc_length(struct ufs_hba *hba, enum desc_idn desc_id,
+ 					    &header_len);
  
--	host->ioaddr = (void *)dm_pci_map_bar(dev, PCI_BASE_ADDRESS_0, 0, 0, PCI_REGION_TYPE,
--					      PCI_REGION_MEM);
-+	host->ioaddr = dm_pci_map_bar(dev, PCI_BASE_ADDRESS_0, 0, 0,
-+				      PCI_REGION_TYPE, PCI_REGION_MEM);
- 	host->name = dev->name;
- 	host->cd_gpio = priv->cd_gpio;
- 	host->mmc = &plat->mmc;
+ 	if (ret) {
+-		dev_err(hba->dev, "%s: Failed to get descriptor header id %d",
++		dev_err(hba->dev, "%s: Failed to get descriptor header id %d\n",
+ 			__func__, desc_id);
+ 		return ret;
+ 	} else if (desc_id != header[QUERY_DESC_DESC_TYPE_OFFSET]) {
+-		dev_warn(hba->dev, "%s: descriptor header id %d and desc_id %d mismatch",
++		dev_warn(hba->dev, "%s: descriptor header id %d and desc_id %d mismatch\n",
+ 			 __func__, header[QUERY_DESC_DESC_TYPE_OFFSET],
+ 			 desc_id);
+ 		ret = -EINVAL;
+@@ -1302,7 +1302,7 @@ int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
+ 
+ 	/* Sanity checks */
+ 	if (ret || !buff_len) {
+-		dev_err(hba->dev, "%s: Failed to get full descriptor length",
++		dev_err(hba->dev, "%s: Failed to get full descriptor length\n",
+ 			__func__);
+ 		return ret;
+ 	}
+@@ -1323,14 +1323,14 @@ int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
+ 					    &buff_len);
+ 
+ 	if (ret) {
+-		dev_err(hba->dev, "%s: Failed reading descriptor. desc_id %d, desc_index %d, param_offset %d, ret %d",
++		dev_err(hba->dev, "%s: Failed reading descriptor. desc_id %d, desc_index %d, param_offset %d, ret %d\n",
+ 			__func__, desc_id, desc_index, param_offset, ret);
+ 		goto out;
+ 	}
+ 
+ 	/* Sanity check */
+ 	if (desc_buf[QUERY_DESC_DESC_TYPE_OFFSET] != desc_id) {
+-		dev_err(hba->dev, "%s: invalid desc_id %d in descriptor header",
++		dev_err(hba->dev, "%s: invalid desc_id %d in descriptor header\n",
+ 			__func__, desc_buf[QUERY_DESC_DESC_TYPE_OFFSET]);
+ 		ret = -EINVAL;
+ 		goto out;
 -- 
 2.34.1
 
