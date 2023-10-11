@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60872CDB481
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:27:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFFE9CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:28:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0575386EDE;
-	Wed, 11 Oct 2023 21:07:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BEC0186EC9;
+	Wed, 11 Oct 2023 21:07:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eV4x5EUk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jwL0cRc9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9141086D12; Wed, 11 Oct 2023 20:38:49 +0200 (CEST)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id 104EB86E17; Wed, 11 Oct 2023 20:39:27 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84D9C86D5E
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:37:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6AB3686E03
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:38:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-d8a000f6a51so130072276.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:37:59 -0700 (PDT)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-59e88a28b98so753507b3.1
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:38:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697049427; x=1697654227; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697049494; x=1697654294; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RS1Wu9PThAqkQj/tiCZxL48p6Svg8tJHLa4pA2DX8vg=;
- b=eV4x5EUkBUDetdgQslQ1QT/0zrYf0y+tzuWg/kL4bc23Xt0N9+oG6W9TFNtcD99zLs
- wtBQux58fBd7ZlB8W+1URh2qPml6bTUTkJr9J2zf7UavdP3VOVrgTPrc8qhAbizlG2AV
- 4jbbIfKeIox41cjV6Lb0cgI6yTx6Vluo7zdD8=
+ bh=KlZBK4DeZ2cfTyWyoME5HjVJZ3GNCGb4D3Tpk/NkzrI=;
+ b=jwL0cRc95fH9ra1pVQINoUutJbUYhi2XrpF3jDT5Pb+NqsxnWGfFoA1O48Ix+OjMV0
+ z5PF5LdmOZyfWbw6RuFSlVYXHMjP6mQWSINiB/XEhXiyT7IdHieEKez/WOpX7aQitV3v
+ TbZPQYRvFPwJq5bw8kaiLFcjiTm6NH/IvIyTg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697049427; x=1697654227;
+ d=1e100.net; s=20230601; t=1697049494; x=1697654294;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RS1Wu9PThAqkQj/tiCZxL48p6Svg8tJHLa4pA2DX8vg=;
- b=Ym9uEEGOpr2owVQeiTltelioLIQgeb2Dke7C1YmmQcQqrQKBAKgwNwWEgkSdt9FyEN
- 4hZ5GMTknve2UFkL6kk7x5DeYKWMfJPpm7drdCu54Iulp7BmI3NSorpu6uG4mXp+uIuk
- DMeTmNozNs84fRW8RV0I7BOFYlNIEpe+0+y/mFqxre7oMDL+pcVLbJ/XJORL0Ql8Qn4K
- /98zpGihNN1/UfT1p2bxv5A7Yut8e7xptNgJEnqkPtlGyJ2gK3oKqNv0lvsj3gMIcdFT
- ki08lLNCLwkyv24Xymowb+jQD9vXtSoqKyndxcHi27EA7YsOdknYBSSYmdVwCj7/BqxS
- Icdw==
-X-Gm-Message-State: AOJu0YxpV5KbEHngH38vn0ss1WVtQ2ozVrsiRtaBqXp8aKsuIHDoXCP0
- XKkWcefs8jeAzVE8qw1EXJl6mg==
-X-Google-Smtp-Source: AGHT+IEA1gDidbA+3nhLjeKrX+mzg3ro4u3fs4kwKPEyonpFZzfx5uc4V+QhjkzMvN7btPksNHTD5w==
-X-Received: by 2002:a25:b082:0:b0:d9a:39a3:176a with SMTP id
- f2-20020a25b082000000b00d9a39a3176amr7247610ybj.6.1697049427291; 
- Wed, 11 Oct 2023 11:37:07 -0700 (PDT)
+ bh=KlZBK4DeZ2cfTyWyoME5HjVJZ3GNCGb4D3Tpk/NkzrI=;
+ b=j9HGGuzqanNq56Op12wGfoh1Xuhu7R7TO8siUcV2oxFJaHrCnfc10CQxoMalTMZ8Mi
+ 7hw4TUGMpxw2dubFTZPv7uq9dG6MQ1zP3WNCCYVMwqcrsz7eMdnXESvSAlKSGkXOzqj0
+ 5Wnly5cZSebWLjN7leF3UYlOQahL3rTY6m9X8ZqqZxGyMvQANy06YREzYkBI6bnPoRjb
+ oU87wLVb6h9kV17mWciEhwIxvHVDoHy+sHN1Ie2QcwHiVXy86JBh86toiHpekyCmlcrU
+ sgy+aBLRWMiUYa74C0x1GCtdiuK1yChVt21H7Buv6R5vVGhSsq7zZHpPzd84PiyflvvQ
+ 7rVQ==
+X-Gm-Message-State: AOJu0Yz8bzXb9eCsxOKCupNeQGtj6UZrrOV4kaFPVzvDnNlbFnqmHzCQ
+ eqLV4QhVI15j8QqD/1Q3z5vjxw==
+X-Google-Smtp-Source: AGHT+IGn/R8DA0gBBTmpxn7hFwgLmt/rtj/DbKrnv4w/JAbZkm10OZvcCktLBQTKiEF+er29GoO0fw==
+X-Received: by 2002:a81:6dd6:0:b0:5a7:d088:2c5d with SMTP id
+ i205-20020a816dd6000000b005a7d0882c5dmr2580112ywc.26.1697049493858; 
+ Wed, 11 Oct 2023 11:38:13 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
  [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
  by smtp.gmail.com with ESMTPSA id
- 85-20020a250d58000000b00d9a54e9b742sm1394834ybn.55.2023.10.11.11.37.06
+ m4-20020a819c04000000b00595394ba941sm5272703ywa.81.2023.10.11.11.38.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 11:37:06 -0700 (PDT)
-Date: Wed, 11 Oct 2023 14:37:04 -0400
+ Wed, 11 Oct 2023 11:38:13 -0700 (PDT)
+Date: Wed, 11 Oct 2023 14:38:11 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, uboot-imx@nxp.com,
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jan Kiszka <jan.kiszka@siemens.com>
-Subject: Re: [PATCH 4/5] sandbox: rename overlay sources to .dtso
-Message-ID: <20231011183704.GP3119521@bill-the-cat>
-References: <20230925080909.365098-1-rasmus.villemoes@prevas.dk>
- <20230925080909.365098-5-rasmus.villemoes@prevas.dk>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, u-boot@lists.denx.de,
+ Sam Edwards <CFSworks@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] ARM: psci: move GIC address override to Kconfig
+Message-ID: <20231011183811.GD3119521@bill-the-cat>
+References: <20231001225212.19081-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3sH2gjW/GqFQZ7Qi"
+ protocol="application/pgp-signature"; boundary="+FCO70LjrSC6hM8V"
 Content-Disposition: inline
-In-Reply-To: <20230925080909.365098-5-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20231001225212.19081-1-andre.przywara@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,47 +93,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---3sH2gjW/GqFQZ7Qi
+--+FCO70LjrSC6hM8V
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 25, 2023 at 10:09:08AM +0200, Rasmus Villemoes wrote:
+On Sun, Oct 01, 2023 at 11:52:12PM +0100, Andre Przywara wrote:
 
-> Distinguish more clearly between source files meant for producing .dtb
-> from those meant for producing .dtbo. No functional change, as we
-> currently have rules for producing a foo.dtbo from either foo.dts or
-> foo.dtso.
+> As the code to switch an ARM core from secure to the non-secure state
+> needs to know the base address of the Generic Interrupt Controller
+> (GIC), we read an Arm Cortex defined system register that is supposed to
+> hold that base address. However there are SoCs out there that get this
+> wrong, and this CBAR register either reads as 0 or points to the wrong
+> address. To accommodate those systems, so far we use a macro defined in
+> some platform specific header files, for affected boards.
 >=20
-> Note that in the linux tree, all device tree overlay sources have been
-> renamed to .dtso, and the .dts->.dtbo rule is gone since v6.5 (commit
-> 81d362732bac). So this is also a step towards staying closer to linux
-> with respect to both Kbuild and device tree sources.
+> To simplify future extensions, replace that macro with a Kconfig variable
+> that holds this override address, and define a default value for SoCs
+> that need it.
 >=20
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Reviewed-by: Sam Edwards <CFSworks@gmail.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---3sH2gjW/GqFQZ7Qi
+--+FCO70LjrSC6hM8V
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm61AACgkQFHw5/5Y0
-tyxXhAwAopzGoHLLhEIXhytR+JSDByJ2IWsAFV0XiMQCuFVm+rB+5eFZdqY6pnrs
-N9fnE9lmlW23eO7icATJXYyCtDtfgvslvXPk0dvUKmtjAbew6NdFVCm7T7mcJYC1
-tZnX8uFfIXNhySw9ZHsjpCaOv4T5SUkQp99S5i0c+luvcklrQYULSembmYRaOmJf
-UkNDuSz4T291OiJlzg6L1OxN5gC0qCaYSAo2yYULzV7MEjYHh5tCvs71rxykS9zZ
-xRFtklZ7w3Ld2pm0wDUAUwPo0KbAEAdXtWzkrVR1IueAuLYbhT5k1J3mQJxKE5pW
-ox4PVaJiATt4A1thmeTe+59QhZOsR0YWp33K4yUe4J62c9YSFwNcshN/joJ8mN+F
-avxZXPN8CXZ4NPhNJyxzkDg/tvvpN/yL8TS9rDYrQSCPgCXL49KyUnBPp9hl01lS
-Z6mlnFPxtcRsVAoIJ/OAxQOMjgB54q5LQQUykqh5a2tXvORQSFpdC1BYtz5+jBAY
-rMxF5Q3x
-=oRoO
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm65MACgkQFHw5/5Y0
+tyzrawwAkflvdWKhChadw5yk/wgPwsDFerHxMtxLn5XZs8Kmmga9PWoil34kHBbD
+e2DjH6YfZa5WCW993ihEd/jiLwOEhD2l4UQ28YJb/iVNnQonYZtgtismozcbCfRS
+/KzaRArc2HzOCH2bLz6hEnTQ3JwEGK1XcCgPezQahK9f8+Cqpd0yoGm95TwHsR4Q
+t0XED2QmMfyc1Q1sPgkitNX/uRzFwGSbLWbubQRKbuD5cOGYldhzFxmDwvbmirKN
+IFmg1S6QNDR9nXlWZaPaOFmJyFunzibewne3o0rhKSns90PhEW6qcpL/ktLP2Rv0
+4N+MUf5/WKuvlAnN5FE5pMHkr0SziBFQ3PTaWnqTR7up1hNuK2yXBKgR8dqX7+m/
+zf1QVDRHiq6oXyc44xrF4+g7lu4GDa6YLU6kp7PuWRv5SLQaCaK1FWeLTZ38Sj76
+YVRNjeBQqYNjeBb23O/NA+iiVDv0RCx3/uvxuyu0X6zdZadjFhOI7ZHPDkfDmbom
+7yaAIi9g
+=G2Gh
 -----END PGP SIGNATURE-----
 
---3sH2gjW/GqFQZ7Qi--
+--+FCO70LjrSC6hM8V--
