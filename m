@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF2E6CD98E3
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 01:36:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 263C4CD98E4
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 01:49:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAD6F86B57;
-	Wed, 11 Oct 2023 03:36:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 60F2F86BED;
+	Wed, 11 Oct 2023 03:49:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q6M5hZyL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f3XsccV/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5F7586B57; Wed, 11 Oct 2023 03:36:22 +0200 (CEST)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
+ id 99DA386BF8; Wed, 11 Oct 2023 03:49:28 +0200 (CEST)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09ABB86B29
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 03:36:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7744086604
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 03:49:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-6a4ff9d7e86so582824b3a.0
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 18:36:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-d9a6b21d1daso1356313276.3
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 18:49:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1696988175; x=1697592975; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ei/A8ik6V6Khlc+e6DtwgpayIVZ+GnKEweusD1afJIU=;
- b=Q6M5hZyLtv6to+hd7jN2sKDZ3l1yhk7w8C2b2vDFzijNF8HTsiDjlNAuzXgMa8/gFX
- lw2Mp6MtfOGCYb7qdZ/ig3kqH379LoSv33x3TIFSKHViudDB4sysR5OvT30xL832iKPk
- wFJU5fL0lKO6REJJJtpQ8Vlwcys1nqbGYDr0fWLZThjtbXj/MJjzwhB8tcoi+aud6b/y
- RhGh8UNy+AuvKqR883Ye9pJM+/L0zBX30selwj+qAR6JrmKZbzHwqJt7fh7sA3ApMwFk
- nlxps2oahdecbmsLgnxxpYaiM1Sa0y3Pvjhzk241mxZdgt1OsvU+HEskxJjXUKtQLWpG
- qtzQ==
+ d=konsulko.com; s=google; t=1696988965; x=1697593765; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=L7rN3cokvyTTSg0iukAwhN7WHqPLPMx3+1V9BMHAswU=;
+ b=f3XsccV/4rrihdHJskTuPfNobvFM/JKo5uqfsMRho291TTSQMXo45nbHvw5M+MB6iW
+ t/sJPJwvaHsCMlSyKm7Av7XSxw434wc67moNTcTJzNc0QQhxf1axm2zgO8N25twML0AY
+ tndr2nm0oyTxLQtFS7zj8s9OCMjgHzPd9w7Wk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696988175; x=1697592975;
- h=in-reply-to:content-disposition:mime-version:references
- :mail-followup-to:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ei/A8ik6V6Khlc+e6DtwgpayIVZ+GnKEweusD1afJIU=;
- b=gny4dVfUQWeEi/YlRdqt7lKZAO08MClraDlIBiRE3iZ26FMmhPPNsCvxwUnhR8wYjM
- Ymel7TscZ+DzxMVPuTr6o+dcCZZUPoaTKMuaitwbqlMAhf1Ym1Jd48sJto/o7wcH3m2A
- bXyAhBKGw1UGqIz//Uu3uyD1EnIMkW9dOg/s3xazW94ZfmY8oPehLZCb6qOpRXTn4cE2
- URoTSye3gl3vAdr91hS7pbd+2ghduySsA1kymZNwUm9fQcJEBFP+QZqR1qIumjDuVdyc
- tAb7ns7xxaP9NhR5Bq7c3QX40okrvtajwziMitEHyBR8VeoZswYfAnXgYbPyoPDzIT8G
- c5zg==
-X-Gm-Message-State: AOJu0YzbAeDsL88lHByB+7sZ7rNHrA99cMPJVWh2TLU8sASAgik0fPVK
- u8XHPv8WKC4ZsE6ggBQMMgPN5g==
-X-Google-Smtp-Source: AGHT+IGiudG9xoQ5Y704w1rrMrezaE/QNtihqwJBNJmofMjIBv3qsAqO10MrBMjJNSZOyi14O0Ncbg==
-X-Received: by 2002:a17:902:ce84:b0:1c3:a4f2:7c99 with SMTP id
- f4-20020a170902ce8400b001c3a4f27c99mr22400012plg.4.1696988175033; 
- Tue, 10 Oct 2023 18:36:15 -0700 (PDT)
-Received: from octopus ([2400:4050:c3e1:100:5c6c:b11a:476c:8ebb])
+ d=1e100.net; s=20230601; t=1696988965; x=1697593765;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L7rN3cokvyTTSg0iukAwhN7WHqPLPMx3+1V9BMHAswU=;
+ b=FzjdhNhHffqkOIqE8xc0GF3gO87ONGqje3Yz6Bz1762Tc/N7ItDEjk7BFo8SGi/AFM
+ 4ghKRZKGLTh/mPNigulLBZhh21PUaVMdgo/LmBQ7xCoBZd9kzKpYJ8KXdF7mpFB3Wrh5
+ A94DTg2k3FgYPulept+6AnNMz1m+neuaTS1ryrh0SdOIDBG8SHjFOZj2+9V/ZAwn6GqB
+ KyVSLQEvheJyRgwBYar3WwPx06+GzcqFdKebgNrinfuK850gr8xxIbp54uKU9o8sle0z
+ idoLU96Mlo2jh1NkTEyV2sspLc0tZpTbiA8tQcCrsGWYGcoTQ2kvZBYqttuu1i+rDTng
+ uPSw==
+X-Gm-Message-State: AOJu0YxZ7Se36ray93ReusdvknFQQfqkYxv4rQrIf0PD1yU5amXCGS9B
+ HYDMhT1NR9chVCnZJozgQxvlFQ==
+X-Google-Smtp-Source: AGHT+IGNw30nMu9FRRcSS77wwD7UlL50c3GxlXGxxMqXFU5bWlU7DqSpyXsaI5tIlGFj716fHh7HWA==
+X-Received: by 2002:a81:bf54:0:b0:59f:4e6d:b56a with SMTP id
+ s20-20020a81bf54000000b0059f4e6db56amr20843838ywk.2.1696988965049; 
+ Tue, 10 Oct 2023 18:49:25 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-a369-3392-aca4-1f00.res6.spectrum.com.
+ [2603:6081:7b00:6400:a369:3392:aca4:1f00])
  by smtp.gmail.com with ESMTPSA id
- 17-20020a170902c21100b001bbc8d65de0sm2281577pll.67.2023.10.10.18.36.13
+ x189-20020a0dd5c6000000b005a7dd6b7eefsm240203ywd.66.2023.10.10.18.49.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 18:36:14 -0700 (PDT)
-Date: Wed, 11 Oct 2023 10:36:11 +0900
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: sjg@chromium.org, etienne.carriere@st.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v5 00/16] firmware: scmi: add SCMI base protocol support
-Message-ID: <ZSX8CzGFs9+kv1vE@octopus>
-Mail-Followup-To: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Tom Rini <trini@konsulko.com>, sjg@chromium.org,
- etienne.carriere@st.com, u-boot@lists.denx.de
-References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
- <20231010141909.GA5325@bill-the-cat>
+ Tue, 10 Oct 2023 18:49:24 -0700 (PDT)
+Date: Tue, 10 Oct 2023 21:49:22 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Bin Meng <bmeng@tinylab.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Heiko Schocher <hs@denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Johan Jonker <jbx6244@gmail.com>,
+ Joshua Watt <jpewhacker@gmail.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Suchanek <msuchanek@suse.de>, Peng Fan <peng.fan@nxp.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>
+Subject: Re: [PATCH 00/15] blk: sandbox: Support binding a device with a
+ given logical block size
+Message-ID: <20231011014922.GA567787@bill-the-cat>
+References: <20230926084346.2237483-1-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4xBxWpTGpQZ82Hg+"
+ protocol="application/pgp-signature"; boundary="kgQph2Wgk4Ink/DF"
 Content-Disposition: inline
-In-Reply-To: <20231010141909.GA5325@bill-the-cat>
+In-Reply-To: <20230926084346.2237483-1-bmeng@tinylab.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,136 +101,120 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---4xBxWpTGpQZ82Hg+
+--kgQph2Wgk4Ink/DF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi Tom,
+On Tue, Sep 26, 2023 at 04:43:30PM +0800, Bin Meng wrote:
 
-On Tue, Oct 10, 2023 at 10:19:09AM -0400, Tom Rini wrote:
-> On Tue, Sep 26, 2023 at 03:57:34PM +0900, AKASHI Takahiro wrote:
+> At present on Sandbox when binding to a host backing file, the host
+> block device is created with a hard-coded 512 bytes block size.
 >=20
-> > This patch series allows users to access SCMI base protocol provided by
-> > SCMI server (platform). It will also be utilized in separate patches
-> > in the future to add sanity/validity checks for other protocols.
-> > See SCMI specification document v3.2 beta[1] for more details about SCMI
-> > base protocol.
-> >=20
-> > What is currently not implemented is
-> > - SCMI_BASE_NOTIFY_ERRORS command and notification callback mechanism
-> >=20
-> > This feature won't be very useful in the current U-Boot environment.
-> >=20
-> > [1] https://developer.arm.com/documentation/den0056/e/?lang=3Den
-> >=20
-> >=20
-> > Test
-> > =3D=3D=3D=3D
-> > The patch series was tested on the following platforms:
-> > * sandbox
-> > * qemu-arm64 with OPTEE as SCMI server
+> Such assumption works for most cases, but for situation that with a raw
+> image file dump from a pre-formatted GPT partitioned disk image from a
+> 4KiB block size device, when binding this file to a host device and mappi=
+ng
+> this device to a blkmap, "blkmap" command like "blkmap part" won't work
+> correctly, due to block size mismatch during parsing the partition table.
 >=20
-> I have two problems.  The first is that for sandbox, this series is not
-> bisectable as a commits fail to build due to needing a definition in the
-> test before it's added:
-> /home/uboot/work/u-boot/u-boot/test/dm/scmi.c: In function 'dm_test_scmi_=
-clocks':
-> /home/uboot/work/u-boot/u-boot/test/dm/scmi.c:117:21: warning: implicit d=
-eclaration of function 'scmi_get_protocol' [-Wimplicit-function-declaration]
->   117 |         clock_dev =3D scmi_get_protocol(agent_dev, SCMI_PROTOCOL_=
-ID_CLOCK);
->       |                     ^~~~~~~~~~~~~~~~~
-
-[snip]
-
-Ah, I didn't notice this dependency.
-I will fix it by re-ordering the commits.
-
-> Second, the series causes this failure:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> _______________________________ test_ut[ut_dm_dm_test_scmi_cmd] _________=
-______________________
-> test/py/u_boot_spawn.py:195: in expect
->     c =3D os.read(self.fd, 1024).decode(errors=3D'replace')
-> E   OSError: [Errno 5] Input/output error
+> This series updates Sandbox block driver, as well as the blkmap driver,
+> to get rid of the hard-coded 512 bytes block size assumption.
 >=20
-> During handling of the above exception, another exception occurred:
-> test/py/tests/test_ut.py:497: in test_ut
->     output =3D u_boot_console.run_command('ut ' + ut_subtest)
-> test/py/u_boot_console_base.py:266: in run_command
->     m =3D self.p.expect([self.prompt_compiled] + self.bad_patterns)
-> test/py/u_boot_spawn.py:204: in expect
->     raise ValueError('U-Boot exited with %s' % info)
-> E   ValueError: U-Boot exited with signal 11 (SIGSEGV)
-> ------------------------------------ Captured stdout call ---------------=
-----------------------
-> =3D> ut dm dm_test_scmi_cmd
-> Test: dm_test_scmi_cmd: scmi.c
-> SCMI device: scmi
->   protocol version: 0x20000
->   # of agents: 2
->       0: platform
->     > 1: OSPM
->   # of protocols: 3
->       Clock management
->       Reset domain management
->       Voltage domain management
->   vendor: U-Boot
->   sub vendor: Sandbox
->   impl version: 0x1
-> Denying access to device:0 failed (-13)
-> Denying access to protocol:0x14 on device:0 failed (-13)
-> Reset failed (-13)
-> Test: dm_test_scmi_cmd: scmi.c (flat tree)
-> SCMI device: ?n
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D
-> FAILED test/py/tests/test_ut.py::test_ut[ut_dm_dm_test_scmi_cmd] - ValueE=
-rror: U-Boot exited...
-
-This seems to happen in the case of "flat tree", but
-I cannot reproduce it in my local environment with
-  $ pytest test/py/tests/test_ut.py -bd sandbox -k scmi_cmd ...
-
-> Which I believe CI will also produce, once the issue with htmldocs is
-> fixed.  I can't bisect it exactly as the failure shows up once the new
-> test is added.
-
-Anyhow, "scmi" command is more or less a debug tool for my development.
-All the functionality provided by this patch set is tested at "function"
-level with "ut dm scmi_base" and the command is *not* needed.
-To avoid increasing the maintenance cost, I will drop the command
-(patch #14-#16) in the next version.
-
-Thanks,
--Takahiro Akashi
-
-
+> This series is available at u-boot-x86/blk for testing.
 >=20
-> --=20
-> Tom
+> Test log (512 block size):
+>=20
+>   =3D> host bind 0 test.img
+>   =3D> host info
+>   dev       blocks  blksz label           path
+>     0       262144    512 0               test.img
+>   =3D> blkmap create 0
+>   Created "0"
+>   =3D> blkmap map 0 0 40000 linear host 0 0
+>   Block 0x0+0x40000 mapped to block 0x0 of "host 0"
+>   =3D> blkmap info
+>   Device 0: Vendor: U-Boot Rev: 1.0 Prod: blkmap
+>               Type: Hard Disk
+>               Capacity: 128.0 MB =3D 0.1 GB (262144 x 512)
+>   =3D> blkmap part
+>=20
+>   Partition Map for BLKMAP device 0  --   Partition Type: EFI
+>=20
+>   Part    Start LBA       End LBA         Name
+>           Attributes
+>           Type GUID
+>           Partition GUID
+>     1     0x00000022      0x000000bd      "u-boot-spl"
+>           attrs:  0x0000000000000000
+>           type:   5b193300-fc78-40cd-8002-e86c45580b47
+>                   (5b193300-fc78-40cd-8002-e86c45580b47)
+>           guid:   0bb6bb6e-4aac-4c27-be03-016b01e7b941
+>     2     0x00000822      0x00000c84      "u-boot"
+>           attrs:  0x0000000000000000
+>           type:   2e54b353-1271-4842-806f-e436d6af6985
+>                   (2e54b353-1271-4842-806f-e436d6af6985)
+>           guid:   91d50814-8e31-4cc0-97dc-779e1dc59056
+>     3     0x00000c85      0x0000cc84      "rootfs"
+>           attrs:  0x0000000000000004
+>           type:   0fc63daf-8483-4772-8e79-3d69d8477de4
+>                   (linux)
+>           guid:   42799722-6e55-46e6-afa9-529e7af3f03b
+>=20
+> Test log (4096 block size):
+>=20
+>   =3D> host bind 0 test.img 4096
+>   =3D> host info
+>   dev       blocks  blksz label           path
+>     0        32768   4096 0               test.img
+>   =3D> blkmap create 0
+>   Created "0"
+>   =3D> blkmap map 0 0 8000 linear host 0 0
+>   Block 0x0+0x8000 mapped to block 0x0 of "host 0"
+>   =3D> blkmap info
+>   Device 0: Vendor: U-Boot Rev: 1.0 Prod: blkmap
+>               Type: Hard Disk
+>               Capacity: 128.0 MB =3D 0.1 GB (32768 x 4096)
+>   =3D> blkmap part
+>=20
+>   Partition Map for BLKMAP device 0  --   Partition Type: EFI
+>=20
+>   Part    Start LBA       End LBA         Name
+>           Attributes
+>           Type GUID
+>           Partition GUID
+>     1     0x00000100      0x00001fff      "primary"
+>           attrs:  0x0000000000000000
+>           type:   0fc63daf-8483-4772-8e79-3d69d8477de4
+>                   (linux)
+>           guid:   eba904d7-72c1-4dbd-bb4e-36be49cba5e3
+>     2     0x00002000      0x00007ffa      "primary"
+>           attrs:  0x0000000000000000
+>           type:   0fc63daf-8483-4772-8e79-3d69d8477de4
+>                   (linux)
+>           guid:   c48c360e-db47-46da-ab87-26416fad3cd3
 
+With minor changes to apply again, applied to u-boot/master, thanks!
 
+--=20
+Tom
 
---4xBxWpTGpQZ82Hg+
+--kgQph2Wgk4Ink/DF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEjc56F+RxEkavfJvIJ6vpGq1myG0FAmUl/AYACgkQJ6vpGq1m
-yG3rxgf9H3mpCOZsHrwDaUghHLN2G05wc0kG3JeM/zO+kLhHhPUhi1DbkBPoLST9
-yGX3emA0cYBAYwEvQZXez0kVUSPefshJyMnLsrBg7kOEUi98NhFGDIKiKPOqZ0M7
-pTce7ZlFDROJHKPbuIiUUb/en6whjZVnX2aiEb056gOEQm6wV1HmZucxeUnrITuH
-SXAb0dKMnh1PQB+S6+kKQHdQ2BuKbOZTKMYh3UtlA0d75Lg56x7tBazSL7K56f6z
-8LFy7CfUXSXy0JKvTmxOcvCGWsPSo11BHASZ8a0ytg0fDBPQqnqxT1QDEq+TA7pq
-NdcygFaH64/pZz0qPkZpcLcHYceHpQ==
-=IV1z
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUl/x4ACgkQFHw5/5Y0
+tyzYPAwAm1H+eoH0kN2OqzA216CA58ip8YyB1DvkARX2gGU6eGV+4rmTTuRXXm+Y
+VtDkFiQn7jqt6OqRJnUwmD7G7nhifvvZvoTP7T3zd5Ou46aJ2AIg9DSwASlpQYg6
+crC/LhmhSf26k+N3V+uOFYOz/nQs9z/cgm+sjA0mzO6GPA5wAVNKRZ/J4Usg33ox
+tEAE9Xz213e3Gk0Wh+b1TAMlmaC7ES4jDPnyR2sOkUAbHZPeIer90rEvFYGxps8M
+Hx7fcyUyft3rx+3tvT6iL9J8LMz4KuggUvaEUdsugx53rAHhiHYqDwb/vkQzcX4U
+x+8h4XNK3URONELFfDD11jyQe+hpfB5kNyYgYJ7LZXFPuIIT0gP/+CtrZw579lLI
+fRO1tDqKy/VFnN55OPrkct40hixmPyqVHvDh5Ek4V9eN1hGH0o8cV89RL1ctJc1M
+7TE2Fn3zwls/1kTWPa6+8RZZMHOhTqJnkTMy9z/Q5U8i/KRHYv1dsIfffg37LCo+
+4d6XKxYW
+=eJu5
 -----END PGP SIGNATURE-----
 
---4xBxWpTGpQZ82Hg+--
+--kgQph2Wgk4Ink/DF--
