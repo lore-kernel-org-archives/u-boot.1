@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48575CD6E42
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 08:48:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8828CD6E43
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 08:48:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 999F186C6B;
-	Wed, 11 Oct 2023 10:48:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D7FA86C91;
+	Wed, 11 Oct 2023 10:48:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PJCA39Yu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KbkoEhxl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E5E4C82BBF; Wed, 11 Oct 2023 10:48:19 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id 30C2486C66; Wed, 11 Oct 2023 10:48:28 +0200 (CEST)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B688C86C5A
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 10:48:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 194B986C71
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 10:48:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6c7ce16ddfaso3284398a34.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 01:48:16 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-690b7cb71aeso601377b3a.0
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 01:48:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697014095; x=1697618895; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697014099; x=1697618899; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U/bf5+SbFN6jomIPlNiguOoATaUBUguN5C5gRQCM9YU=;
- b=PJCA39YuSRcKo/VaMm8OW1bUCkcoOdnhZUvL1THqGHMTxqTgJLAx7xy8c/9IKqYilO
- 38LQr9aQiJeJf/4oEQxIqp4FPESM3/sYnRQF47014JF9MUIOjxuJ02n16obzidTnbi6f
- an8/uzKN9CI8FTsJBZ1xLvjOHtOa9JywfxBvry1f0HukcQdj21zMKwZ005YHXVocLVVl
- E923vphfBMZal/U/dDFX6nV8eEWgwLF2lHOA4Dt99y6KeZMU4CaHizahLJml7Myz5FOy
- hrunr0wVkOXk9qqDsybQvsaPgy9xMSlslEqai12OnHsQPgDY3bIB2XHF98TmRPamoTwW
- dhAA==
+ bh=wWrPqD+Hg/9Y+6ClL0j/pz2UA00yPY4cN+Rh/IvElu8=;
+ b=KbkoEhxlusjkUR5/9pRegu7RwKYpeM8uak6FM8avTtwFf0j4hyvbYlYrU3okIjsckL
+ k87s2BYfNATh0M510li9urU9xHxhAXmUr9NOxcH6U3R90Y/CRs/ukSSUGCfJSVCcOF/1
+ c4uhOOC2ZbaZpSs9PdRWgMHAURDbwUw3HwrG7UiMWV+XNZqBkKrtjBt1QXyh/XUTAt9X
+ +Hwe+x23siPlIrQRbtNJSAQFgypC+T4ipK1IWGLnwgmMBORQbIIujTXN59Mkw/j9CmfY
+ fK4w6U4UPoOF0WKtqxDPKvbOiwf7ncdZWE/q/x8tvIgAPF+HvwVH/ujMuxiXS2vVX4lB
+ ibCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697014095; x=1697618895;
+ d=1e100.net; s=20230601; t=1697014099; x=1697618899;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=U/bf5+SbFN6jomIPlNiguOoATaUBUguN5C5gRQCM9YU=;
- b=S58QPsFUmFcTaqDahnpLa5mxKoXnnNSZgA21Y/pZtv0tWL7CEBom/Ivd+OOu0joUFf
- ImAA+IBk6B1+HR237021Ht4VwJzDHVodMS8JU6Z3ya+khBCa00UVPgsugJVjFCsd1U8R
- Vze+riVNj1Cc4rB89NjKN7SU5J0ZdyRXijYhZ9UsZP9S9kRsnojPjx6yvLKaPqZAftHn
- oiGrJDC5a3kucJra4P4ahVvnJ3EBy+0Gitfo3LzRxbvErbXRGqBvqG+CYoqS31Gr3qNH
- gdv9yKhmJkY0NpPhuHSXYdaHGvWzDkqUEvGiMbYjW3DGOUR15G8R9XbPOb7N1HERdekP
- MAmw==
-X-Gm-Message-State: AOJu0YyhJTsOzjrQ02IMVhdpukS9gIhQP5T+sYZL0oByFOar5zB0aLQz
- VOxhsxjDSeNHXsjKqcjw/CM=
-X-Google-Smtp-Source: AGHT+IEpYMS2ip4BGshK/pbE3BF1tsLWoCkHVedtGDlkxnnSZgwXoJNxai5pCxFaNxDJYusX8SaIzQ==
-X-Received: by 2002:a05:6871:e46:b0:1e9:90ec:140 with SMTP id
- vk6-20020a0568710e4600b001e990ec0140mr851502oab.58.1697014095206; 
- Wed, 11 Oct 2023 01:48:15 -0700 (PDT)
+ bh=wWrPqD+Hg/9Y+6ClL0j/pz2UA00yPY4cN+Rh/IvElu8=;
+ b=RSWS1Xqfw3r23E++IIW7SZBsLzqHLgPbEHOscNTO9AkTT7qn9wQdVtnbR0Y4KJ4ciz
+ tTD8eO7UPEzj5WNA25ad9GxWzQPnsxYEtZfYDoQ/RfOH+qMYlLfgL9v/0hRoS72PPq+d
+ Vt42I8e5fYhBvl4Du+XIyL1tvlYN0EaXlMG7PwN1TeWvcpT+pBuineKXC1o2JneVdB75
+ hEW05EkSzXsMl1O2oo+Q9m6sL4SHuG2xZexUqrULxwK2BC0gnP9oWaeAQMto4kOqmcoP
+ N2YkWo3eZ33NexMuIJFkZCVYLZkmdoSuVTiuF1E9G2vI6+nxhx/F7v1dRSwt9n5wI7sY
+ 8QAA==
+X-Gm-Message-State: AOJu0YxLchb87LUbrQ8f+YWm4vzuHbptdshPdnfm1oW/mY75oORlMIwt
+ WT8K3xFSPx1cG479sljyHWvkFeKhpDheSw==
+X-Google-Smtp-Source: AGHT+IGWtcaF/QVyYhyL4Tpzf4+8V1tWBK+nVJ2uLvUD2zFzsNWm/1GpOuMdyEvTiBmcNIxdaQ2jUA==
+X-Received: by 2002:a05:6a20:4282:b0:15d:b407:b0a0 with SMTP id
+ o2-20020a056a20428200b0015db407b0a0mr29280842pzj.26.1697014099655; 
+ Wed, 11 Oct 2023 01:48:19 -0700 (PDT)
 Received: from localhost.localdomain ([1.200.128.112])
  by smtp.gmail.com with ESMTPSA id
- m28-20020a638c1c000000b0059c8fa8f917sm2307940pgd.12.2023.10.11.01.48.13
+ m28-20020a638c1c000000b0059c8fa8f917sm2307940pgd.12.2023.10.11.01.48.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 01:48:14 -0700 (PDT)
+ Wed, 11 Oct 2023 01:48:19 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, KWLIU@nuvoton.com,
  YSCHU@nuvoton.com, trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 1/5] pinctrl: npcm8xx: add name for gpio function
-Date: Wed, 11 Oct 2023 16:45:29 +0800
-Message-Id: <20231011084533.2325296-2-JJLIU0@nuvoton.com>
+Subject: [PATCH v2 2/5] configs: npcm: support more uart baud rate
+Date: Wed, 11 Oct 2023 16:45:30 +0800
+Message-Id: <20231011084533.2325296-3-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231011084533.2325296-1-JJLIU0@nuvoton.com>
 References: <20231011084533.2325296-1-JJLIU0@nuvoton.com>
@@ -93,25 +93,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-gpio function name is needed in the debug log
+add uart baud rate table to arbel(npcm8xx) and poleg(npcm7xx)
 
 Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 ---
- drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c | 1 +
- 1 file changed, 1 insertion(+)
+ include/configs/arbel.h | 5 ++++-
+ include/configs/poleg.h | 2 ++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c b/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
-index 7976e3b3ed..ff49819b58 100644
---- a/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
-+++ b/drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c
-@@ -329,6 +329,7 @@ struct group_info {
+diff --git a/include/configs/arbel.h b/include/configs/arbel.h
+index 891257bc93..c45b2ac137 100644
+--- a/include/configs/arbel.h
++++ b/include/configs/arbel.h
+@@ -7,10 +7,13 @@
+ #define __CONFIG_ARBEL_H
  
- static const struct group_info npcm8xx_groups[] = {
- 	FUNC_LIST
-+	{FN_gpio, "GPIO", NULL, 0, 0, 0}
- };
+ #define CFG_SYS_SDRAM_BASE		0x0
+-#define CFG_SYS_BOOTMAPSZ		(30 << 20)
++#define CFG_SYS_BOOTMAPSZ		(128 << 20)
+ #define CFG_SYS_BOOTM_LEN		(20 << 20)
+ #define CFG_SYS_INIT_RAM_ADDR	CFG_SYS_SDRAM_BASE
+ #define CFG_SYS_INIT_RAM_SIZE	0x8000
++#define CONFIG_SYS_BAUDRATE_TABLE	{ 9600, 14400, 19200, 38400, 57600, 115200, 230400, \
++					  380400, 460800, 921600 }
++
  
- /* Pin flags */
+ /* Default environemnt variables */
+ #define CFG_EXTRA_ENV_SETTINGS   "uimage_flash_addr=80400000\0"   \
+diff --git a/include/configs/poleg.h b/include/configs/poleg.h
+index 1e96e838be..fd0e9a7362 100644
+--- a/include/configs/poleg.h
++++ b/include/configs/poleg.h
+@@ -13,6 +13,8 @@
+ #define CFG_SYS_BOOTMAPSZ            (0x30 << 20)
+ #define CFG_SYS_SDRAM_BASE           0x0
+ 
++#define CONFIG_SYS_BAUDRATE_TABLE	{ 57600, 115200, 230400, 460800 }
++
+ /* Default environemnt variables */
+ #define CFG_EXTRA_ENV_SETTINGS   "uimage_flash_addr=80200000\0"   \
+ 		"stdin=serial\0"   \
 -- 
 2.34.1
 
