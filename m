@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E255CCD6E64
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1194CD6E64
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:20:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC14D86D33;
-	Wed, 11 Oct 2023 15:16:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 59C6D86DE7;
+	Wed, 11 Oct 2023 15:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8382D86E01; Wed, 11 Oct 2023 15:16:50 +0200 (CEST)
-Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.155.67.158])
+ id 6DA6886D33; Wed, 11 Oct 2023 15:16:54 +0200 (CEST)
+Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.154.221.58])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D76BB86D33
+ by phobos.denx.de (Postfix) with ESMTPS id CE33386D11
  for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 15:16:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng@tinylab.org
-X-QQ-mid: bizesmtp83t1697030174t89rvyge
+X-QQ-mid: bizesmtp83t1697030172tsj2elof
 Received: from ubuntu.. ( [111.196.129.4]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 11 Oct 2023 21:16:14 +0800 (CST)
+ id ; Wed, 11 Oct 2023 21:16:11 +0800 (CST)
 X-QQ-SSF: 01200000000000F0I000000A0000000
-X-QQ-FEAT: LE7C6P2vL8RQ2k1Z7b9j5oMuh1GrsWegFGw9OgZOVKficUIzwGujNMGhBF2cu
- VEtbt4ZQ4rEpEz5WPvN/MEkgpMnPc0hLcXw+Y4FLCqcSF2ylckwIF7Qzy7FtkZxt98zeO2V
- ZVeeSp+jK2sccVHpsxSq9XdKtuklngQm0nS+iH7OM5xhvalgBgT1B31ybsHMoKNYX8RZnp1
- FmsBrewrpgwJlhqS2bccAzPoXHm6ukYFuVj+BbDabWReJW/gmmRvYEYPMJVM5CFC5i3qnK+
- A/SBoZg07AyG9zaxq/5eVjn9yguPa+qiV7M6dO2HTRotrQE/ChS6uJY8TAmK5KbhIan1rse
- YuWq79D76FMPbidxGfB+bemNE2ICQ8NZBrul6zykeG9gkXvXR5BU/xhBXXM/g==
+X-QQ-FEAT: BYUemv+qiN03r9MGIrmLQE+jbyrteWLu23H2fH0Y3ZCwxA4C8nV/dowx7ozy9
+ TbQFGikGxKr1E3wGYdJqky12XuSAMbuV+kJMwaTA2wPQsvk8Bu6Lhj8DukZahTQziDJCU4P
+ UjIOHhIibNNstw3UOJ5xROw1n7+8EEPIfr9ca7eYsS8NOvaakb43BtIjvSI5KHxjOExf9nX
+ mS6Y5KlPCM7SXI6Lfkfk0ClCccB2dUEqla8X+klIC1lj5e09TiS/x8RDeWXdULffzBWcktm
+ dGm1xMM6l/PU7Fhod38dDB+rt4siofsiKqo5QD8qeUl7MrXC3jq7oghWkKY4Rpbej/n7i/O
+ tdwz2XpwPGpIw1g03tZ6TufQNFxdxDqVLtojXBUimTem71xWdc=
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 10405025696761048569
+X-BIZMAIL-ID: 8452143412141011574
 From: Bin Meng <bmeng@tinylab.org>
 To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>
 Cc: Simon Glass <sjg@chromium.org>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 7/9] ufs: Add a PCI based UFS controller driver
-Date: Wed, 11 Oct 2023 21:15:50 +0800
-Message-Id: <20231011131552.14665-8-bmeng@tinylab.org>
+Subject: [PATCH v2 6/9] ufs: Allow mmio registers on the PCI bus
+Date: Wed, 11 Oct 2023 21:15:49 +0800
+Message-Id: <20231011131552.14665-7-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231011131552.14665-1-bmeng@tinylab.org>
 References: <20231011131552.14665-1-bmeng@tinylab.org>
@@ -65,107 +65,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds a simple PCI based UFS controller driver with a QEMU
-emulated UFS controller on the PCI bus.
-
-Requiring QEMU v8.2+.
+Check if the UFS controller is on the PCI bus, and get its register
+base address accordingly.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
-
 ---
 
-Changes in v2:
-- fix a build warning
+(no changes since v1)
 
- drivers/ufs/Kconfig   | 11 +++++++++++
- drivers/ufs/Makefile  |  1 +
- drivers/ufs/ufs-pci.c | 45 +++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 57 insertions(+)
- create mode 100644 drivers/ufs/ufs-pci.c
+ drivers/ufs/ufs.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
-index 0e0cc58e3d..42797ce052 100644
---- a/drivers/ufs/Kconfig
-+++ b/drivers/ufs/Kconfig
-@@ -15,6 +15,17 @@ config CADENCE_UFS
- 	  This selects the platform driver for the Cadence UFS host
- 	  controller present on present TI's J721e devices.
+diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+index 96801866d3..fb2a607ef1 100644
+--- a/drivers/ufs/ufs.c
++++ b/drivers/ufs/ufs.c
+@@ -1914,6 +1914,7 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
+ 	struct ufs_hba *hba = dev_get_uclass_priv(ufs_dev);
+ 	struct scsi_plat *scsi_plat;
+ 	struct udevice *scsi_dev;
++	void __iomem *mmio_base;
+ 	int err;
  
-+config UFS_PCI
-+	bool "PCI bus based UFS Controller support"
-+	depends on PCI && UFS
-+	help
-+	  This selects the PCI UFS Host Controller Interface. Select this if
-+	  you have UFS Host Controller with PCI Interface.
+ 	device_find_first_child(ufs_dev, &scsi_dev);
+@@ -1927,7 +1928,14 @@ int ufshcd_probe(struct udevice *ufs_dev, struct ufs_hba_ops *hba_ops)
+ 
+ 	hba->dev = ufs_dev;
+ 	hba->ops = hba_ops;
+-	hba->mmio_base = dev_read_addr_ptr(ufs_dev);
 +
-+	  If you have a controller with this interface, say Y here.
-+
-+	  If unsure, say N.
-+
- config TI_J721E_UFS
- 	bool "Glue Layer driver for UFS on TI J721E devices"
- 	help
-diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
-index 4f3344fd4e..13f1e689ef 100644
---- a/drivers/ufs/Makefile
-+++ b/drivers/ufs/Makefile
-@@ -6,4 +6,5 @@
- obj-$(CONFIG_UFS) += ufs.o ufs-uclass.o
- obj-$(CONFIG_CADENCE_UFS) += cdns-platform.o
- obj-$(CONFIG_TI_J721E_UFS) += ti-j721e-ufs.o
-+obj-$(CONFIG_UFS_PCI) += ufs-pci.o
- obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
-diff --git a/drivers/ufs/ufs-pci.c b/drivers/ufs/ufs-pci.c
-new file mode 100644
-index 0000000000..ad41358727
---- /dev/null
-+++ b/drivers/ufs/ufs-pci.c
-@@ -0,0 +1,45 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2023 tinylab.org
-+ * Author: Bin Meng <bmeng@tinylab.org>
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <errno.h>
-+#include <pci.h>
-+#include <ufs.h>
-+#include <dm/device_compat.h>
-+#include "ufs.h"
-+
-+static int ufs_pci_bind(struct udevice *dev)
-+{
-+	struct udevice *scsi_dev;
-+
-+	return ufs_scsi_bind(dev, &scsi_dev);
-+}
-+
-+static int ufs_pci_probe(struct udevice *dev)
-+{
-+	int err;
-+
-+	err = ufshcd_probe(dev, NULL);
-+	if (err)
-+		dev_err(dev, "%s failed (ret=%d)\n", __func__, err);
-+
-+	return err;
-+}
-+
-+U_BOOT_DRIVER(ufs_pci) = {
-+	.name	= "ufs_pci",
-+	.id	= UCLASS_UFS,
-+	.bind	= ufs_pci_bind,
-+	.probe	= ufs_pci_probe,
-+};
-+
-+static struct pci_device_id ufs_supported[] = {
-+	{ PCI_DEVICE(PCI_VENDOR_ID_REDHAT, PCI_DEVICE_ID_REDHAT_UFS) },
-+	{},
-+};
-+
-+U_BOOT_PCI_DEVICE(ufs_pci, ufs_supported);
++	if (device_is_on_pci_bus(ufs_dev)) {
++		mmio_base = dm_pci_map_bar(ufs_dev, PCI_BASE_ADDRESS_0, 0, 0,
++					   PCI_REGION_TYPE, PCI_REGION_MEM);
++	} else {
++		mmio_base = dev_read_addr_ptr(ufs_dev);
++	}
++	hba->mmio_base = mmio_base;
+ 
+ 	/* Set descriptor lengths to specification defaults */
+ 	ufshcd_def_desc_sizes(hba);
 -- 
 2.34.1
 
