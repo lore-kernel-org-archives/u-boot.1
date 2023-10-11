@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A8DCDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:18:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCD46CDB47F
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:20:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A40A086CF3;
-	Wed, 11 Oct 2023 21:02:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A93E86D1F;
+	Wed, 11 Oct 2023 21:03:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dQ361xpr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lBKli6bE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6642F86DB5; Wed, 11 Oct 2023 20:41:20 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 6BFD886E2D; Wed, 11 Oct 2023 20:41:08 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 888ED86DB5
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:38:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 023FE86C53
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:38:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a7a7e9357eso2111857b3.0
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:38:00 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5a7ba0828efso1825757b3.3
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:38:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697049477; x=1697654277; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697049503; x=1697654303; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mv/ZsVZGRij8vy5ZK0LnbTgV3fGBymk4GSZ9GBURKdc=;
- b=dQ361xpreQOR6R7ye5r69/3hx2eeisbqYXZ7a23MJ/RrjNvj0PwAqeqozEweJNNXqq
- V0coeTYVzdVk/XO+dEqbWXlM+7Gsz6AWssq5Hq0AvGtvJujc+bwImivb1SeoDAimy+kb
- jXRws21lbBDeMSzQaCRFFBWTG4ZCYiM/3FEFQ=
+ bh=iwuiEVlWHOY7EWbPGScZuZ+Q2MMOnyUcv3tHRguP4b0=;
+ b=lBKli6bEfUH0XW11GjHcRCrWiVEl6fRH7S1C7dtnEgFfk0Bd++1YLWJjFXgVXXT3DR
+ gaqaUXHMe94Lh5yAoG/TKfl/OZip9gMyLiQ7JuB6bWJ+1NI3JSfYXud4HpzFfq3mT5EY
+ 7n4hcHsW3JeC0LHLutNJPC+m9ZrjxvxSAtcXs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697049477; x=1697654277;
+ d=1e100.net; s=20230601; t=1697049503; x=1697654303;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mv/ZsVZGRij8vy5ZK0LnbTgV3fGBymk4GSZ9GBURKdc=;
- b=bRYaRmnCtnZm4cRlZ6gA/8Jl9JFdsCe2OGEJVAWypvYDSCuqnqDIAiQGXp8SskJFlr
- ow0F/sfjIKEh1CEiTSACtBH4j+6G7ivs9+AUwJMUKUHCnJndivRzZ3/WfMFtRpAiYZn2
- t3hO6nr7mAk5Z6NA0+TGCe517cISlBv5LgRAVAnC8INurhxSEZYdyTTREUlaqIWXpoDA
- AeK7VZ41xfokK7sKFzh1RNFV0Wd3ZA4U/lOw0xX6+9stgJQajiPqn2nksZ+MwUp2KMKc
- Y/BB62vnp+t+IZeUcW/SnN/7BwNWVKMT6cpHdyk4GhkwtRpD9pQUfxG5m1d399Viq59P
- MXmQ==
-X-Gm-Message-State: AOJu0Yza8OZF60VWTxwIJHnQkBzf6obTpU1vE/lbIszWg49mZL0EGNT0
- PnGs6TUvLfHLfrOQI+yi6eWPdw==
-X-Google-Smtp-Source: AGHT+IHv+nQUpXpx6umENWzBADKB4xMTLByqPLKCoZwDtB7UnDvLXu1hB9yOc0B37RDXlHUrU/1Y3Q==
-X-Received: by 2002:a25:e7c2:0:b0:d9a:4d90:feda with SMTP id
- e185-20020a25e7c2000000b00d9a4d90fedamr5844055ybh.62.1697049476808; 
- Wed, 11 Oct 2023 11:37:56 -0700 (PDT)
+ bh=iwuiEVlWHOY7EWbPGScZuZ+Q2MMOnyUcv3tHRguP4b0=;
+ b=laIP5SBFR58SJwhA2yaKp1MvL7pK0hknB+l822bg8TUjn6JfjqtRNWRsvT58sZ+v5T
+ dPRNfOkRUdFXKNB4kMOKXLMuGsUjCgIEMqB8h7AytDxmyaCGzghTTYVQA1mX0vzVkvmM
+ WuTKLSvPk1VTSJzVFsHm9KUTq9Z7S3vIkrF9uvXvzP5sM8dBvpu/Zfwy+DwmtIiyMKjw
+ 1UMcmp3vl4C6FmUzSDs6Y0YVhmoOfXNh6p8tjR7QMaMlJZQN68+VOg8Dp6q032YDUjoR
+ 6UfIGw0t75wjJsPD/8Az4uLPNWmhymGShz6Z1gmlXNP6KulqwCb1ehEWGePD89TVT/4T
+ pfIg==
+X-Gm-Message-State: AOJu0Ywj4mG88C2kO5TQwHBfktiPFQ7uqtBtk6nn31zch3um5vv12Xs1
+ /YqcCEagLxw3M5Zm2GNd3W8hOuk2oV7OGeVGcFjJCQ==
+X-Google-Smtp-Source: AGHT+IETm4bqM/Ik3sEI7yT5FOQF5hj4x1gnrOxmbqKMCh0l0wT/AOPVts2RdxKzEDLZHP878f6IaQ==
+X-Received: by 2002:a0d:f542:0:b0:59f:5361:d18c with SMTP id
+ e63-20020a0df542000000b0059f5361d18cmr22084878ywf.41.1697049502817; 
+ Wed, 11 Oct 2023 11:38:22 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
  [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
  by smtp.gmail.com with ESMTPSA id
- e17-20020a258911000000b00d749bc5b169sm4557816ybl.43.2023.10.11.11.37.55
+ x2-20020a817c02000000b0059f61be458esm5311784ywc.82.2023.10.11.11.38.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 11:37:56 -0700 (PDT)
-Date: Wed, 11 Oct 2023 14:37:54 -0400
+ Wed, 11 Oct 2023 11:38:22 -0700 (PDT)
+Date: Wed, 11 Oct 2023 14:38:20 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>, Peter Hoyes <peter.hoyes@arm.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH] driver: rng: Add DM_RNG interface for ARMv8.5 RNDR
- registers
-Message-ID: <20231011183754.GZ3119521@bill-the-cat>
-References: <20230830113230.3925868-1-andre.przywara@arm.com>
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: u-boot@lists.denx.de, Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Max Krummenacher <max.krummenacher@toradex.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH] Makefile: make u-boot-initial-env target depend
+ explicitly on scripts_basic
+Message-ID: <20231011183820.GF3119521@bill-the-cat>
+References: <20231003100217.3721395-1-rasmus.villemoes@prevas.dk>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="J/Xu+zFdtH5Bu1Nu"
+ protocol="application/pgp-signature"; boundary="QhRf0nRYTGeqvZzt"
 Content-Disposition: inline
-In-Reply-To: <20230830113230.3925868-1-andre.przywara@arm.com>
+In-Reply-To: <20231003100217.3721395-1-rasmus.villemoes@prevas.dk>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,29 +95,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---J/Xu+zFdtH5Bu1Nu
+--QhRf0nRYTGeqvZzt
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 30, 2023 at 12:32:30PM +0100, Andre Przywara wrote:
+On Tue, Oct 03, 2023 at 12:02:17PM +0200, Rasmus Villemoes wrote:
 
-> The ARMv8.5 architecture extension defines architectural RNDR/RNDRRS
-> system registers, that provide 64 bits worth of randomness on every
-> read. Since it's an extension, and implementing it is optional, there is
-> a field in the ID_AA64ISAR0_EL1 ID register to query the availability
-> of those registers.
+> We're seeing sporadic errors like
 >=20
-> Add a UCLASS_RNG driver that returns entropy via repeated reads from
-> those system registers, if the extension is implemented.
-> The driver always binds, but checks the availability in the probe()
-> routine.
+>   ENVC    include/generated/env.txt
+>   HOSTCC  scripts/basic/fixdep
+>   ENVP    include/generated/env.in
+>   ENVT    include/generated/environment.h
+>   HOSTCC  tools/printinitialenv
+> /bin/sh: 1: scripts/basic/fixdep: not found
+> make[1]: *** [scripts/Makefile.host:95: tools/printinitialenv] Error 127
+> make[1]: *** Deleting file 'tools/printinitialenv'
+> make: *** [Makefile:2446: u-boot-initial-env] Error 2
+> make: *** Waiting for unfinished jobs....
 >=20
-> This helps systems which suffer from low boot entropy, since U-Boot can
-> provide entropy via the generic UEFI entropy gathering protocol to the OS,
-> at an early stage.
+> where sometimes the "fixdep: not found" is instead "fixdep: Permission
+> denied" and the Error 127 becomes 126.
 >=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> This smells like a race condition, and indeed it is: Currently,
+> u-boot-initial-env is a prerequisite of the envtools target, which
+> also lists scripts_basic as a prerequisite:
+>=20
+> envtools: u-boot-initial-env scripts_basic $(version_h) $(timestamp_h) to=
+ols/version.h
+> 	$(Q)$(MAKE) $(build)=3Dtools/env
+>=20
+> However, the u-boot-initial-env rule involves building the
+> printinitialenv helper, which in turn is built using an if_changed_dep
+> rule. That means we must ensure scripts/basic/fixdep is built and
+> ready before trying to build printinitialenv, i.e. the
+> u-boot-initial-env rule itself must depend on the phony scripts_basic
+> target.
+>=20
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 > Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/master, thanks!
@@ -126,22 +141,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---J/Xu+zFdtH5Bu1Nu
+--QhRf0nRYTGeqvZzt
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm64IACgkQFHw5/5Y0
-tyxTtQwAnDNdSKriIZ6RCpEBWRxSvdCVnVdbEFPvZjqKsx8zu+M4Oazi+mKu9p4d
-WNFZ9Fyjedck0r6Kj+EOEXmvFjfjXYikaFKilQibdEH70vPwXDh9t6jeqJV3FGEe
-DpJk4JX9Yrb6n0+/BdyooGBuJt9J+yPkEZdYDgoF8lVxWNK9Ru40SoDxl3sFPXFT
-ur56EtzbRdeGlXIo5LWTfTLxW434OtCmhDHmEZYyjIFGO6+QBYYddjUj+/RCbgef
-17F5WMjcGyT1lm4OwSzat+YHzo26gRbb9OrQZOCZdx7CUUjP6Wdal8um5G/JrsNI
-OTO1vmWg/CIW62P+DMuTWQCV2+59J3vEzdVYLRmKJNuTmFqPEe1rTtyNuzepMyyn
-WZE8LtjjqzHtDAiwQdUxqb+HEELvXrxozaGwGvTFIAiQF5A9YJi01/XlgGcp+nAa
-Ya5CREt8G9RN7Z9G6nABe/VVvo3sCj0AwHYv8jEbZOuo6bWin6a8stecKi4UevPT
-Mf3w4MBW
-=6mQ2
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm65wACgkQFHw5/5Y0
+tyzbsAv9F+c6rzykDYbgsExUBtUyACL5L2bgrDLy66d0FeAR1RvL9eU+rF30+/j3
+svfdCnACNIyWXFqPZthmWXdv/LCTW84SWgv8U5kjlpxB9HSpCyDfb/VatVKAGYRH
+CUwOME2HiTwmm3qwtjOnYD3/8WNwl/8mvQN9JZomC3a9SbfVz37jOVSYWfOn2ujY
+rZmMkhnNrGQYLbG88PlQZ7auKLt1hnwT1Ducwq3dQKyuAt33JL25FU4klMEeJlyO
+EZCbfiydT4mXTuxL+EWqAWdJv5xpHyilwSAOJEIUCrOkBQ1pCPsWsNOsHsWdwQKe
+cYtJtFz4Dhit7BPULx8SgWcl824PLztjBE/W2u+0PIc+VgGDhA0DZsjeb2LEgBEy
+3Uwqy17jB/ce2YzblTo1EtiXsfFCY+p0QKoDryJhGlfBfwog6HUuziYIslr0OgEG
+nRZrrEeyKP+NdHmnDWuoZWpP94A3Lrja0gpsjM4SxwJRZfYPzZ2GtJOTJy7O75Iz
+6ILQBumA
+=KD1F
 -----END PGP SIGNATURE-----
 
---J/Xu+zFdtH5Bu1Nu--
+--QhRf0nRYTGeqvZzt--
