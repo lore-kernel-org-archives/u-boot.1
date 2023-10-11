@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15CABCD6E67
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:19:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E255CCD6E64
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:19:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90E0F86DD6;
-	Wed, 11 Oct 2023 15:16:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EC14D86D33;
+	Wed, 11 Oct 2023 15:16:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D38D86DC4; Wed, 11 Oct 2023 15:16:45 +0200 (CEST)
+ id 8382D86E01; Wed, 11 Oct 2023 15:16:50 +0200 (CEST)
 Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.155.67.158])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F08C86DB5
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 15:16:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D76BB86D33
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 15:16:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng@tinylab.org
-X-QQ-mid: bizesmtp83t1697030180tucp95w4
+X-QQ-mid: bizesmtp83t1697030174t89rvyge
 Received: from ubuntu.. ( [111.196.129.4]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 11 Oct 2023 21:16:20 +0800 (CST)
+ id ; Wed, 11 Oct 2023 21:16:14 +0800 (CST)
 X-QQ-SSF: 01200000000000F0I000000A0000000
-X-QQ-FEAT: 5q30pvLz2ift5I+l0OlX7NtlO4omO+DpfLSPdhjwvAd1kYTds6+1zPBQMlkcf
- OtLlxdZoN+00U3i2pwk7u0/oS/kPRDRz6HKfLeVvP4i+FEE5XulhDODCtk9tno+RxNRcis0
- LGfBIONPp0x0Ei3JJp0SqXZelbKJjJa+3hg+lISaXbKm9ImxYl5rdKm53x0EKU1AaAeF7Z0
- x/L2WrYDf3GUnm1pfGZLeXXZtqmndIh1hiV/3+OxXbaq/KBnOXHAUGn/wR697HRP176DluJ
- /6M5Nc/3ni9bsJqP12EeK+l623DSumwJ6Do0E82ePX0prhkwJmronO60dwIwsiaYkT9twLD
- yyxRnaW+ocISAdcTig89iYcZuwsrGBmSZ+Gf9bW9xsO6NkCH6Q=
+X-QQ-FEAT: LE7C6P2vL8RQ2k1Z7b9j5oMuh1GrsWegFGw9OgZOVKficUIzwGujNMGhBF2cu
+ VEtbt4ZQ4rEpEz5WPvN/MEkgpMnPc0hLcXw+Y4FLCqcSF2ylckwIF7Qzy7FtkZxt98zeO2V
+ ZVeeSp+jK2sccVHpsxSq9XdKtuklngQm0nS+iH7OM5xhvalgBgT1B31ybsHMoKNYX8RZnp1
+ FmsBrewrpgwJlhqS2bccAzPoXHm6ukYFuVj+BbDabWReJW/gmmRvYEYPMJVM5CFC5i3qnK+
+ A/SBoZg07AyG9zaxq/5eVjn9yguPa+qiV7M6dO2HTRotrQE/ChS6uJY8TAmK5KbhIan1rse
+ YuWq79D76FMPbidxGfB+bemNE2ICQ8NZBrul6zykeG9gkXvXR5BU/xhBXXM/g==
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 14740807335609082950
+X-BIZMAIL-ID: 10405025696761048569
 From: Bin Meng <bmeng@tinylab.org>
 To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>
 Cc: Simon Glass <sjg@chromium.org>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 9/9] qemu: riscv: Enable UFS support
-Date: Wed, 11 Oct 2023 21:15:52 +0800
-Message-Id: <20231011131552.14665-10-bmeng@tinylab.org>
+Subject: [PATCH v2 7/9] ufs: Add a PCI based UFS controller driver
+Date: Wed, 11 Oct 2023 21:15:50 +0800
+Message-Id: <20231011131552.14665-8-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231011131552.14665-1-bmeng@tinylab.org>
 References: <20231011131552.14665-1-bmeng@tinylab.org>
@@ -65,49 +65,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This enables UFS support for QEMU RISC-V 'virt' machine.
+This adds a simple PCI based UFS controller driver with a QEMU
+emulated UFS controller on the PCI bus.
+
+Requiring QEMU v8.2+.
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 
 ---
 
-(no changes since v1)
+Changes in v2:
+- fix a build warning
 
- board/emulation/qemu-riscv/Kconfig | 2 ++
- doc/board/emulation/qemu-riscv.rst | 8 +++++++-
- 2 files changed, 9 insertions(+), 1 deletion(-)
+ drivers/ufs/Kconfig   | 11 +++++++++++
+ drivers/ufs/Makefile  |  1 +
+ drivers/ufs/ufs-pci.c | 45 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 57 insertions(+)
+ create mode 100644 drivers/ufs/ufs-pci.c
 
-diff --git a/board/emulation/qemu-riscv/Kconfig b/board/emulation/qemu-riscv/Kconfig
-index d56b4b5bc1..f3ee1f6e90 100644
---- a/board/emulation/qemu-riscv/Kconfig
-+++ b/board/emulation/qemu-riscv/Kconfig
-@@ -82,5 +82,7 @@ config BOARD_SPECIFIC_OPTIONS # dummy
- 	imply USB_XHCI_PCI
- 	imply USB_KEYBOARD
- 	imply CMD_USB
-+	imply UFS
-+	imply UFS_PCI
+diff --git a/drivers/ufs/Kconfig b/drivers/ufs/Kconfig
+index 0e0cc58e3d..42797ce052 100644
+--- a/drivers/ufs/Kconfig
++++ b/drivers/ufs/Kconfig
+@@ -15,6 +15,17 @@ config CADENCE_UFS
+ 	  This selects the platform driver for the Cadence UFS host
+ 	  controller present on present TI's J721e devices.
  
- endif
-diff --git a/doc/board/emulation/qemu-riscv.rst b/doc/board/emulation/qemu-riscv.rst
-index 61137bcbf1..8a5eb1eda5 100644
---- a/doc/board/emulation/qemu-riscv.rst
-+++ b/doc/board/emulation/qemu-riscv.rst
-@@ -131,7 +131,13 @@ An attached disk can be emulated in RISC-V virt machine by adding::
-     -drive if=none,file=riscv64.img,format=raw,id=mydisk \
-     -device ide-hd,drive=mydisk,bus=ahci.0
- 
--You will have to run 'scsi scan' to use it.
-+or alternatively attach an emulated UFS::
++config UFS_PCI
++	bool "PCI bus based UFS Controller support"
++	depends on PCI && UFS
++	help
++	  This selects the PCI UFS Host Controller Interface. Select this if
++	  you have UFS Host Controller with PCI Interface.
 +
-+    -device ufs,id=ufs0 \
-+    -drive if=none,file=test.img,format=raw,id=lun0 \
-+    -device ufs-lu,drive=lun0,bus=ufs0
++	  If you have a controller with this interface, say Y here.
 +
-+You will have to run 'scsi scan' to use them.
- 
- A video console can be emulated in RISC-V virt machine by removing "-nographic"
- and adding::
++	  If unsure, say N.
++
+ config TI_J721E_UFS
+ 	bool "Glue Layer driver for UFS on TI J721E devices"
+ 	help
+diff --git a/drivers/ufs/Makefile b/drivers/ufs/Makefile
+index 4f3344fd4e..13f1e689ef 100644
+--- a/drivers/ufs/Makefile
++++ b/drivers/ufs/Makefile
+@@ -6,4 +6,5 @@
+ obj-$(CONFIG_UFS) += ufs.o ufs-uclass.o
+ obj-$(CONFIG_CADENCE_UFS) += cdns-platform.o
+ obj-$(CONFIG_TI_J721E_UFS) += ti-j721e-ufs.o
++obj-$(CONFIG_UFS_PCI) += ufs-pci.o
+ obj-$(CONFIG_UFS_RENESAS) += ufs-renesas.o
+diff --git a/drivers/ufs/ufs-pci.c b/drivers/ufs/ufs-pci.c
+new file mode 100644
+index 0000000000..ad41358727
+--- /dev/null
++++ b/drivers/ufs/ufs-pci.c
+@@ -0,0 +1,45 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2023 tinylab.org
++ * Author: Bin Meng <bmeng@tinylab.org>
++ */
++
++#include <common.h>
++#include <dm.h>
++#include <errno.h>
++#include <pci.h>
++#include <ufs.h>
++#include <dm/device_compat.h>
++#include "ufs.h"
++
++static int ufs_pci_bind(struct udevice *dev)
++{
++	struct udevice *scsi_dev;
++
++	return ufs_scsi_bind(dev, &scsi_dev);
++}
++
++static int ufs_pci_probe(struct udevice *dev)
++{
++	int err;
++
++	err = ufshcd_probe(dev, NULL);
++	if (err)
++		dev_err(dev, "%s failed (ret=%d)\n", __func__, err);
++
++	return err;
++}
++
++U_BOOT_DRIVER(ufs_pci) = {
++	.name	= "ufs_pci",
++	.id	= UCLASS_UFS,
++	.bind	= ufs_pci_bind,
++	.probe	= ufs_pci_probe,
++};
++
++static struct pci_device_id ufs_supported[] = {
++	{ PCI_DEVICE(PCI_VENDOR_ID_REDHAT, PCI_DEVICE_ID_REDHAT_UFS) },
++	{},
++};
++
++U_BOOT_PCI_DEVICE(ufs_pci, ufs_supported);
 -- 
 2.34.1
 
