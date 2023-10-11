@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73289CD6E42
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 08:49:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 078B1CD6E48
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 08:49:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D948086C5E;
-	Wed, 11 Oct 2023 10:48:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9F51986C6E;
+	Wed, 11 Oct 2023 10:48:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SMx2XHbp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lMsovsLD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38A1286CAC; Wed, 11 Oct 2023 10:48:32 +0200 (CEST)
-Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
- [IPv6:2607:f8b0:4864:20::230])
+ id ADBFC86CC1; Wed, 11 Oct 2023 10:48:41 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D92F86C75
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 10:48:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BCD382BBF
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 10:48:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-oi1-x230.google.com with SMTP id
- 5614622812f47-3ae214a077cso5029503b6e.0
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 01:48:25 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-690d2441b95so594254b3a.1
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 01:48:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697014103; x=1697618903; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697014107; x=1697618907; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vRAtl29LIgJX/pRsKKpxJH8V/B8SHy+AwLdZJ6uLZws=;
- b=SMx2XHbpgpwe+eNfHR8lfraDVwZY8em8Zyv1bK/pVy7H+svzRheeGLaydRstaVuLet
- J/L/wrX+CaRM/sfv04ap0Z3XpOcJok8NE6ZiXes5GITv5WGYJWpRHj35O6FFSWRaAnxs
- gENgCTocBVLCItelFtT+WrAm7XsaivyI7LQ8Z8yVw4bSzqBw4L1ZYeITVd97kIk/xNNl
- D+/KEdU+KLrNirUUDSmswD0RUYj0SgW/Gi7JQANrfXcriMOE9KsZNb4AsBXU1N+tOZ4A
- IkQ8t2Cnwele6acLHj1SblElvO8/jowvwbU1VcqF04QChxF3lLnvTgY1oS4WLNttstgA
- u82A==
+ bh=1lIuC0LlaQk3Zov8/qB7awXdM6wdmjV8nZ/ai4ky46A=;
+ b=lMsovsLD/50WPns6n2L7sqdnYs2aoUz/0WSiOHt3VDQcxykLiJOXp6Wftbn2/P5JCy
+ Zy/+lmXRxCjDIh2LGqKs1lQfMxJ+MOR5kIl18ZNK1q1BU/SZAEw5xX2vul9r0Ncc0vRS
+ NfCgCMFi5ZVIhqACDcZZaQnxiDN0JGGU5xTabpYJ+/MXQFsIK8DXA4O0gH+fMd6SJjag
+ dXs7eMLjdGYRLrEFG+9yeL0D8Jzh6827yeRtToSA4V94Lv5ETIXCB+/8bZ1qkzmS0gHA
+ CWiurWc71ki0GQ9evWe0MhorWGLh5irh0v3AK14etha/scfVg/F8GQj/bp0K2PdhNwis
+ zobg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697014103; x=1697618903;
+ d=1e100.net; s=20230601; t=1697014107; x=1697618907;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=vRAtl29LIgJX/pRsKKpxJH8V/B8SHy+AwLdZJ6uLZws=;
- b=nMTy/aPI7OnPHwHmRt7CeDza/4G9h+uxT/xS/eDaV5Xy+5bXfM86HHTwurOeEZbSWq
- Ea9tFrIm0Je5UtTnuonXfnpjsgffM3u+K7AfqHnyYswgQxW5Fjlvamx33Ch0Ndmf4dBh
- shdyYls28/+0bU71ReN11REK8Uxq/IQX3mWLfhBD9k7ihcsepRI/VjN4ZshfY6FP6DAp
- R+rFukswTICJa/VL98IWDvfPBoixheLYOqzJiE069iGoQqyaqdpDX+iogRu6QW7F0AxI
- 1jDAW8X3Y1lb4MdCrdB2J6jPKTsWOcPGd1uE/cakHiDTDM+8vQL1tCtnfDKt9BWeJlzk
- zvgw==
-X-Gm-Message-State: AOJu0Yyelh7cp5z5y0XFvbTpyjie5SXFKbOMQsYWlSUfKwz/rqPelJSY
- 1G/YmulYCF3HMq2AaW172Eg=
-X-Google-Smtp-Source: AGHT+IGGg/G7+14cex5hmOq+rsvNkfS/LndxTsVnFXZipbELMtvMWj64PyHXMY/+UV1VnQa1xUi1Yw==
-X-Received: by 2002:a05:6808:3023:b0:3ae:554b:6c57 with SMTP id
- ay35-20020a056808302300b003ae554b6c57mr24315193oib.11.1697014103528; 
- Wed, 11 Oct 2023 01:48:23 -0700 (PDT)
+ bh=1lIuC0LlaQk3Zov8/qB7awXdM6wdmjV8nZ/ai4ky46A=;
+ b=YArgK7nfNw1U3KKYQbjlzkNSVzmDbIh/oiqrRjSkNf9aaXeRf4I81EASN9iqKVWpyw
+ 0BCPaTfEpal163j5uDmMfpDQX+p3SX1xtguNrg+Bd6Yd0gGLdI3NZ+SX9y7fvwPOcjj0
+ auuw4/b4rgOSLGh4uCPd+nagC10eQXILDjLyeIS7xixuYrUpq5l1CyqK65Jy5fYfBH76
+ Db0E1qkowhyAvvldKUqvGaPWNJ/z8KmN8JPjE/3Suz5A4RoXOdAkiWakvbve5ghSDdtu
+ gfgokJfimDiENd2NtQlN1/lXrVua1HWFQ+IrQb6SrzEK3I2I+OGYenA0vE5+EKLYpYgA
+ Fb1w==
+X-Gm-Message-State: AOJu0YyeJ2vD1IfwNPjPFx/fg0Gf7Af20srfI0gsynadLI1gU8ioIiSy
+ zmw8/anochJfuGC6tjEMF28=
+X-Google-Smtp-Source: AGHT+IHNZb4sgqrhnkSH3BbFKcq8SrlU+luQBKo0tfqRiYW5y1DgEtGf/iF3Ik8Z205f4P6YaQOZQw==
+X-Received: by 2002:a05:6a21:1a5:b0:15d:8366:65b8 with SMTP id
+ le37-20020a056a2101a500b0015d836665b8mr24678693pzb.13.1697014107378; 
+ Wed, 11 Oct 2023 01:48:27 -0700 (PDT)
 Received: from localhost.localdomain ([1.200.128.112])
  by smtp.gmail.com with ESMTPSA id
- m28-20020a638c1c000000b0059c8fa8f917sm2307940pgd.12.2023.10.11.01.48.21
+ m28-20020a638c1c000000b0059c8fa8f917sm2307940pgd.12.2023.10.11.01.48.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 01:48:23 -0700 (PDT)
+ Wed, 11 Oct 2023 01:48:27 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, KWLIU@nuvoton.com,
  YSCHU@nuvoton.com, trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 3/5] board: nuvuton: arbel: fix incorrect ram size
-Date: Wed, 11 Oct 2023 16:45:31 +0800
-Message-Id: <20231011084533.2325296-4-JJLIU0@nuvoton.com>
+Subject: [PATCH v2 4/5] arm: dts: npcm8xx: add watchdog node
+Date: Wed, 11 Oct 2023 16:45:32 +0800
+Message-Id: <20231011084533.2325296-5-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20231011084533.2325296-1-JJLIU0@nuvoton.com>
 References: <20231011084533.2325296-1-JJLIU0@nuvoton.com>
@@ -93,69 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-fix incorrect ram size of 4GB dram with ECC enabled
+add npcm8xx watchdog node
 
 Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
 ---
- board/nuvoton/arbel_evb/arbel_evb.c | 17 +++++++++--------
- 1 file changed, 9 insertions(+), 8 deletions(-)
+ arch/arm/dts/nuvoton-common-npcm8xx.dtsi | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 
-diff --git a/board/nuvoton/arbel_evb/arbel_evb.c b/board/nuvoton/arbel_evb/arbel_evb.c
-index e52e0a59ab..acaafad549 100644
---- a/board/nuvoton/arbel_evb/arbel_evb.c
-+++ b/board/nuvoton/arbel_evb/arbel_evb.c
-@@ -16,7 +16,7 @@
- #define DRAM_1GB_SIZE		0x40000000ULL
- #define DRAM_2GB_ECC_SIZE	0x70000000ULL
- #define DRAM_2GB_SIZE		0x80000000ULL
--#define DRAM_4GB_ECC_SIZE	0xE00000000ULL
-+#define DRAM_4GB_ECC_SIZE	0xE0000000ULL
- #define DRAM_4GB_SIZE		0x100000000ULL
+diff --git a/arch/arm/dts/nuvoton-common-npcm8xx.dtsi b/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
+index fabe5925b7..fb544e5f1a 100644
+--- a/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
++++ b/arch/arm/dts/nuvoton-common-npcm8xx.dtsi
+@@ -154,6 +154,30 @@
+ 				clock-names = "refclk";
+ 			};
  
- DECLARE_GLOBAL_DATA_PTR;
-@@ -29,7 +29,6 @@ int board_init(void)
- int dram_init(void)
- {
- 	struct npcm_gcr *gcr = (struct npcm_gcr *)NPCM_GCR_BA;
--	uint64_t delta = 0ULL;
- 
- 	/*
- 	 * get dram active size value from bootblock.
-@@ -62,26 +61,28 @@ int dram_init(void)
- 		gd->bd->bi_dram[1].size = 0;
- 		break;
- 	case DRAM_4GB_ECC_SIZE:
--		gd->bd->bi_dram[0].size = DRAM_2GB_ECC_SIZE;
-+		gd->bd->bi_dram[0].size = DRAM_2GB_SIZE;
- 		gd->bd->bi_dram[1].start = DRAM_4GB_SIZE;
--		gd->bd->bi_dram[1].size = DRAM_2GB_SIZE;
--		delta = DRAM_4GB_SIZE - DRAM_2GB_ECC_SIZE;
-+		gd->bd->bi_dram[1].size = DRAM_2GB_SIZE -
-+			(DRAM_4GB_SIZE - DRAM_4GB_ECC_SIZE);
-+		/* use bank0 only */
-+		gd->ram_size = DRAM_2GB_SIZE;
- 		break;
- 	case DRAM_4GB_SIZE:
- 		gd->bd->bi_dram[0].size = DRAM_2GB_SIZE;
- 		gd->bd->bi_dram[1].start = DRAM_4GB_SIZE;
- 		gd->bd->bi_dram[1].size = DRAM_2GB_SIZE;
--		delta = DRAM_4GB_SIZE - DRAM_2GB_SIZE;
-+		/* use bank0 only */
-+		gd->ram_size = DRAM_2GB_SIZE;
- 		break;
- 	default:
- 		gd->bd->bi_dram[0].size = DRAM_1GB_SIZE;
- 		gd->bd->bi_dram[1].start = 0;
- 		gd->bd->bi_dram[1].size = 0;
-+		gd->ram_size = DRAM_1GB_SIZE;
- 		break;
- 	}
- 
--	gd->ram_size -= delta;
--
- 	return 0;
- }
- 
++			watchdog0: watchdog@801c {
++				compatible = "nuvoton,npcm750-wdt";
++				clocks = <&clk NPCM8XX_CLK_REFCLK>;
++				reg = <0x801c 0x4>;
++				interrupts = <GIC_SPI 47 IRQ_TYPE_LEVEL_HIGH>;
++				status = "disabled";
++			};
++
++			watchdog1: watchdog@901c {
++				compatible = "nuvoton,npcm750-wdt";
++				clocks = <&clk NPCM8XX_CLK_REFCLK>;
++				reg = <0x901c 0x4>;
++				interrupts = <GIC_SPI 48 IRQ_TYPE_LEVEL_HIGH>;
++				status = "disabled";
++			};
++
++			watchdog2: watchdog@a01c {
++				compatible = "nuvoton,npcm750-wdt";
++				clocks = <&clk NPCM8XX_CLK_REFCLK>;
++				reg = <0xa01c 0x4>;
++				interrupts = <GIC_SPI 49 IRQ_TYPE_LEVEL_HIGH>;
++				status = "disabled";
++			};
++
+ 			serial0: serial@0 {
+ 				compatible = "nuvoton,npcm845-uart", "nuvoton,npcm750-uart";
+ 				reg = <0x0 0x1000>;
 -- 
 2.34.1
 
