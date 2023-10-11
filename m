@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1B57CD6E67
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:20:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392B0CD6E67
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:21:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3AD886E43;
-	Wed, 11 Oct 2023 15:17:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0320886E5E;
+	Wed, 11 Oct 2023 15:17:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FA3D86DE7; Wed, 11 Oct 2023 15:16:56 +0200 (CEST)
+ id B1ED486E00; Wed, 11 Oct 2023 15:17:17 +0200 (CEST)
 Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.155.67.158])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FB1886DD8
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 15:16:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C6DB586DD9
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 15:16:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng@tinylab.org
-X-QQ-mid: bizesmtp83t1697030169t9l1jorp
+X-QQ-mid: bizesmtp83t1697030166tqh1jlu9
 Received: from ubuntu.. ( [111.196.129.4]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 11 Oct 2023 21:16:08 +0800 (CST)
+ id ; Wed, 11 Oct 2023 21:16:05 +0800 (CST)
 X-QQ-SSF: 01200000000000F0I000000A0000000
-X-QQ-FEAT: LE7C6P2vL8QwiBBgtCla3gYf8KdtW6moC5eXrLaWdQqGKSy0lyJ684LgEvOoE
- QHN6pm4Jyi3dCoifXzAKSU+Jd1x4/Rb4+r7kKMqHmZVEpH3SX0P84QxR3lHZNdwcZ9Xbdnd
- 7ryQ8CZmbOlB2zo4avtkawC11BztKPHlPSHoaublZIhVWRy71MjAAUpQTl68AayhMMMi4ns
- haesTn3P4eGxJyh+2Gww+eYPpH8T271aK2I3tYDd61kzh27R5GcdyClY4uSzbb90NTi5VEf
- pi/G2PvOULxLjZTQQHJygs9XwYJ4WaLAB1RNejisdAuHySNFcFmrlFLxApyk/6Qdopc0xqh
- RMK8Xuk2hCyKz5U4UMSs6QtLtf9PpV0AVp3WnQNM5IXmsu8qSHH2MEfiCtK4w==
+X-QQ-FEAT: rZJGTgY0+YOBhz6GwooRdDQpWMFJjLlUc3c7N1X/jBsbhVFL1qyXHZKN/Qvv1
+ yPpdHCHV2DActDuzc9Fwl9NuKAzjVrclC5L/igrZx127UB5RUpjyk9G45gl6+FCmdZKY27Z
+ GLPZk4cjwfHEUiLDBeLao3Wigj75BKKqKbUMvxG3JSPXRvvxzePv0+/Q5esSwPMwqxuOD8r
+ oWsLW7eGPxYbk1p88lt5h+urYYpBgYn44D//367LkjK6tAhn/k8WR55qIkD5UEUsIXa1ZQW
+ 9HGx12hdSXiGG0VJwQnL4it6MT7ei0gphz5Ai9/7J/rC19/bbDdWtO+po8bybzfawAPvflm
+ 8xYAvr/nFXrmwrPcz5M4Z4MDL65a9/HNS5zcbtK
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 17083439545190332072
+X-BIZMAIL-ID: 13930572496564102603
 From: Bin Meng <bmeng@tinylab.org>
 To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>
 Cc: Simon Glass <sjg@chromium.org>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 5/9] pci_ids: Add Red Hat vendor and device IDs
-Date: Wed, 11 Oct 2023 21:15:48 +0800
-Message-Id: <20231011131552.14665-6-bmeng@tinylab.org>
+Subject: [PATCH v2 4/9] cmd: ufs: Correct the help text
+Date: Wed, 11 Oct 2023 21:15:47 +0800
+Message-Id: <20231011131552.14665-5-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231011131552.14665-1-bmeng@tinylab.org>
 References: <20231011131552.14665-1-bmeng@tinylab.org>
@@ -65,38 +65,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Red Hat, Inc. donates a part of its device ID range [1] to QEMU,
-to be used for virtual devices. This commit adds several typical
-devices that are useful in U-Boot.
-
-[1] https://www.qemu.org/docs/master/specs/pci-ids.html
+Remove the additional space and use "sub-system" for consistency
+with other commands like "scsi" and "usb".
 
 Signed-off-by: Bin Meng <bmeng@tinylab.org>
 ---
 
 (no changes since v1)
 
- include/pci_ids.h | 7 +++++++
- 1 file changed, 7 insertions(+)
+ cmd/ufs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/pci_ids.h b/include/pci_ids.h
-index 88b0a64045..b63bf45168 100644
---- a/include/pci_ids.h
-+++ b/include/pci_ids.h
-@@ -1363,6 +1363,13 @@
- #define PCI_DEVICE_ID_XILINX_HAMMERFALL_DSP 0x3fc5
- #define PCI_DEVICE_ID_XILINX_HAMMERFALL_DSP_MADI 0x3fc6
+diff --git a/cmd/ufs.c b/cmd/ufs.c
+index 143e946370..2c8d88df18 100644
+--- a/cmd/ufs.c
++++ b/cmd/ufs.c
+@@ -32,6 +32,6 @@ static int do_ufs(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ }
  
-+/* Per https://www.qemu.org/docs/master/specs/pci-ids.html */
-+#define PCI_VENDOR_ID_REDHAT            0x1b36
-+#define PCI_DEVICE_ID_REDHAT_SDHCI      0x0007
-+#define PCI_DEVICE_ID_REDHAT_XHCI       0x000d
-+#define PCI_DEVICE_ID_REDHAT_NVME       0x0010
-+#define PCI_DEVICE_ID_REDHAT_UFS        0x0013
-+
- #define PCI_VENDOR_ID_INIT		0x1101
- 
- #define PCI_VENDOR_ID_CREATIVE		0x1102 /* duplicate: ECTIVA */
+ U_BOOT_CMD(ufs, 3, 1, do_ufs,
+-	   "UFS  sub system",
++	   "UFS sub-system",
+ 	   "init [dev] - init UFS subsystem\n"
+ );
 -- 
 2.34.1
 
