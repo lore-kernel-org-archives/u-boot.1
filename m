@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15235CDB482
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 20:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 849E5CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 21:13:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A577986B38;
-	Wed, 11 Oct 2023 22:27:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 792C686D85;
+	Wed, 11 Oct 2023 22:45:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qm8DOp8A";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="QrOIIgod";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDAE686B38; Wed, 11 Oct 2023 22:27:18 +0200 (CEST)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 90C5386CA1; Wed, 11 Oct 2023 22:41:58 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B84A86C8B
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 22:27:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24C2D86B7A
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 22:40:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-d81d09d883dso283931276.0
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 13:27:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697056027; x=1697660827; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=XTwiKembhaXL+2HpTvma9a83IOeoYRdUWaSzBEQbvjA=;
- b=Qm8DOp8AO18RbGKtKncRKmT0KuggMA6O5PjhkReIMcm6inLJkBSYmEXBal7KORQygx
- Bko75g+zrt6YvejETI/GyxFVaGlhBSgSUPn8s1V92m0Wvn3u6ahSpAvjAWKb2VQXoPgJ
- g9n2Kbn4tEPVnLkABuArITX/vV81UXA2i25tD+4dkYfkywyxMTE/huyBU6tIBGTNpx7n
- /ZSqMVND6ngsZdn+LKzOC+X+Li9LsuVkQgqXMo8tKKGskjdEivL11l5cNXY3Zjl3eDWL
- 2xhyWFknfLmxyBk0NgvT67C9j+iCH9OvL5ZbIooMCEYl8ySGAsEQ4gZNotw7chB1LuFW
- d4Vg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697056027; x=1697660827;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XTwiKembhaXL+2HpTvma9a83IOeoYRdUWaSzBEQbvjA=;
- b=hoWx+WtWY97QJfBLWyNYwfxBax5VlsXPYqZ7TjFcjjqhPfwfOOETw2KpyPTMUNDXBZ
- cnmX8HF3XgKnytvlTLnjKsTLlHUtB4Qi5nDzgIzoSMgWx0ApF7drBgqEtU9PH4EAMQmI
- t0t5UiQeghmoL2NjRfJvb9fPeTvhCAIJUC7hVtWr0BPPOV/l0p1aTn2SWD/0LoYoGYNW
- v+kA4KEzsvWMu1/pby5yk0dKXPGG2gAHGjAi5ehopmaUcGT4lfEccJgoOXnZze3RqNnS
- CGQPL5DxBqCCd0YIBeNJWw5ZohUAPSK++r3G7eQySJhva7ARGg/whUoDyGDa3qwy1igV
- KDqg==
-X-Gm-Message-State: AOJu0YzdB3nAoy/v/odP6Xpbz7ObeNjW6TO3tGQlBGHguwvfauKDF8u0
- SO18A/l5j0dCWBwalclMs/M=
-X-Google-Smtp-Source: AGHT+IHVGx4xkskN6ecHGEQj2DZOZZPqTHC3QnEqCt2k+8/Q9dzMsrn++0nzpPr8JtWk15K1q1hIZg==
-X-Received: by 2002:a25:b1a0:0:b0:d9a:44dd:fe45 with SMTP id
- h32-20020a25b1a0000000b00d9a44ddfe45mr6757979ybj.49.1697056026722; 
- Wed, 11 Oct 2023 13:27:06 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- j200-20020a2523d1000000b00d9a58aa5806sm1404289ybj.25.2023.10.11.13.27.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 13:27:06 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Stefan Roese <sr@denx.de>,
-	Tony Dinh <mibodhi@gmail.com>
-Subject: [PATCH v5] bootstd: sata: Add bootstd support for ahci sata
-Date: Wed, 11 Oct 2023 13:26:42 -0700
-Message-Id: <20231011202643.9194-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ardb@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id D584161988
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:40:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83AF7C433CB
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:40:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1697056815;
+ bh=8L5mXgJHZV0x1PMI3MCpHodGYPRdonPcTU4tFSKPg/g=;
+ h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+ b=QrOIIgodWJOdpY6O5VZgof/a//29t0nzABmW+7z82j47UpXNZ4GLczHKF08ca2yHV
+ cmFjzuojFU3Apr7fbL4yexD8/yTXJH7qFzBw8t6940OTYB+Gexcdm1/BJDW7Is6Jhs
+ 1AZUuxJjmQBbEQb4Iid/0eI9mRjK7c79dpmx91ZJnW3X1aBh0twEptjaIhwdNTiU+6
+ 1WjMLrDEx/iVfgiujG+M06i/7Ehi/ggxsJCSviXawcYXyye4cf3UE/BE4zKH4dZmCT
+ /tnCUGZQNjAVcBpnFOOZJHN63AuwMVphQB5z+eT4PlTIHKLjI0KtZRTQ6AbKlMk70i
+ QquwesXiDCvfA==
+Received: by mail-lf1-f49.google.com with SMTP id
+ 2adb3069b0e04-5068dab8c00so408613e87.0
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 13:40:15 -0700 (PDT)
+X-Gm-Message-State: AOJu0Ywvf52kDi3VJLnbNjTeD9/Llr2Kn3/fuy6S97K/3uHa0QCpcCns
+ 5SAvBlSVf+Qom4lbwnHtSkSbbO3P+null2rvw78=
+X-Google-Smtp-Source: AGHT+IHQ62Gr7p4zlUczVxkcGxszjmTDmRGC0aE+SwxQcshlalF+lD+86JdoH0aKJLHW5Rbj9z4dRv/jeaZgPWyT1PY=
+X-Received: by 2002:a05:6512:3902:b0:502:fdca:2eab with SMTP id
+ a2-20020a056512390200b00502fdca2eabmr15087253lfu.37.1697056813622; Wed, 11
+ Oct 2023 13:40:13 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20230926194242.2732127-2-sjg@chromium.org>
+ <CAPnjgZ0Xf3U1aj32LbU-xiU1AqwnM3JL1F8xX-wZ18oEmg+irw@mail.gmail.com>
+ <CAMj1kXEXcX7BkDyfy-6_5Vnch=N+onza-yfWfsVaGLE93h2c+Q@mail.gmail.com>
+ <CAPnjgZ2SEby-ndrs=W_afBJH56eqc=-mhp1F1nwkvWks+=B54Q@mail.gmail.com>
+ <CAMj1kXED3S+0cq+VT7naBrmWrUwT=HZAaZOBRMv8Ui1Pey1QNQ@mail.gmail.com>
+ <CAPnjgZ0LrsJ2_ENTYoBrnyFaH3UKdHs3D2XWY=TzBuBpBoTXZA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ0LrsJ2_ENTYoBrnyFaH3UKdHs3D2XWY=TzBuBpBoTXZA@mail.gmail.com>
+From: Ard Biesheuvel <ardb@kernel.org>
+Date: Wed, 11 Oct 2023 22:40:02 +0200
+X-Gmail-Original-Message-ID: <CAMj1kXHSJLHHikB=8q-sAdYV2OsoSod+LDeyLa=YNU1d8998ZA@mail.gmail.com>
+Message-ID: <CAMj1kXHSJLHHikB=8q-sAdYV2OsoSod+LDeyLa=YNU1d8998ZA@mail.gmail.com>
+Subject: Re: [PATCH v7 2/2] schemas: Add some common reserved-memory usages
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, 
+ Rob Herring <robh@kernel.org>, Lean Sheng Tan <sheng.tan@9elements.com>, 
+ lkml <linux-kernel@vger.kernel.org>, Dhaval Sharma <dhaval@rivosinc.com>, 
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Yunhui Cui <cuiyunhui@bytedance.com>, 
+ Guo Dong <guo.dong@intel.com>, Tom Rini <trini@konsulko.com>, 
+ ron minnich <rminnich@gmail.com>, Gua Guo <gua.guo@intel.com>, 
+ Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,211 +91,242 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add ahci sata bootdev and corresponding hunting function.
+On Sat, 7 Oct 2023 at 02:03, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ard,
+>
+> On Fri, 6 Oct 2023 at 17:00, Ard Biesheuvel <ardb@kernel.org> wrote:
+> >
+> > On Fri, 6 Oct 2023 at 20:17, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Ard,
+> > >
+> > > On Fri, 6 Oct 2023 at 11:33, Ard Biesheuvel <ardb@kernel.org> wrote:
+> > > >
+> > > > On Mon, 2 Oct 2023 at 19:54, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > Hi Rob,
+> > > > >
+> > > > > On Tue, 26 Sept 2023 at 13:42, Simon Glass <sjg@chromium.org> wro=
+te:
+> > > > > >
+> > > > > > It is common to split firmware into 'Platform Init', which does=
+ the
+> > > > > > initial hardware setup and a "Payload" which selects the OS to =
+be booted.
+> > > > > > Thus an handover interface is required between these two pieces=
+.
+> > > > > >
+> > > > > > Where UEFI boot-time services are not available, but UEFI firmw=
+are is
+> > > > > > present on either side of this interface, information about mem=
+ory usage
+> > > > > > and attributes must be presented to the "Payload" in some form.
+> > > > > >
+> > > > > > This aims to provide an small schema addition for the memory ma=
+pping
+> > > > > > needed to keep these two pieces working together well.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >
+> > > > > > Changes in v7:
+> > > > > > - Rename acpi-reclaim to acpi
+> > > > > > - Drop individual mention of when memory can be reclaimed
+> > > > > > - Rewrite the item descriptions
+> > > > > > - Add back the UEFI text (with trepidation)
+> > > > >
+> > > > > I am again checking on this series. Can it be applied, please?
+> > > > >
+> > > >
+> > > > Apologies for the delay in response. I have been away.
+> > >
+> > > OK, I hope you had a nice trip.
+> > >
+> >
+> > Thanks, it was wonderful!
+> >
+> > > >
+> > > > >
+> > > > > >
+> > > > > > Changes in v6:
+> > > > > > - Drop mention of UEFI
+> > > > > > - Use compatible strings instead of node names
+> > > > > >
+> > > > > > Changes in v5:
+> > > > > > - Drop the memory-map node (should have done that in v4)
+> > > > > > - Tidy up schema a bit
+> > > > > >
+> > > > > > Changes in v4:
+> > > > > > - Make use of the reserved-memory node instead of creating a ne=
+w one
+> > > > > >
+> > > > > > Changes in v3:
+> > > > > > - Reword commit message again
+> > > > > > - cc a lot more people, from the FFI patch
+> > > > > > - Split out the attributes into the /memory nodes
+> > > > > >
+> > > > > > Changes in v2:
+> > > > > > - Reword commit message
+> > > > > >
+> > > > > >  .../reserved-memory/common-reserved.yaml      | 71 +++++++++++=
+++++++++
+> > > > > >  1 file changed, 71 insertions(+)
+> > > > > >  create mode 100644 dtschema/schemas/reserved-memory/common-res=
+erved.yaml
+> > > > > >
+> > > > > > diff --git a/dtschema/schemas/reserved-memory/common-reserved.y=
+aml b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > > > new file mode 100644
+> > > > > > index 0000000..f7fbdfd
+> > > > > > --- /dev/null
+> > > > > > +++ b/dtschema/schemas/reserved-memory/common-reserved.yaml
+> > > > > > @@ -0,0 +1,71 @@
+> > > > > > +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> > > > > > +%YAML 1.2
+> > > > > > +---
+> > > > > > +$id: http://devicetree.org/schemas/reserved-memory/common-rese=
+rved.yaml#
+> > > > > > +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> > > > > > +
+> > > > > > +title: Common memory reservations
+> > > > > > +
+> > > > > > +description: |
+> > > > > > +  Specifies that the reserved memory region can be used for th=
+e purpose
+> > > > > > +  indicated by its compatible string.
+> > > > > > +
+> > > > > > +  Clients may reuse this reserved memory if they understand wh=
+at it is for,
+> > > > > > +  subject to the notes below.
+> > > > > > +
+> > > > > > +maintainers:
+> > > > > > +  - Simon Glass <sjg@chromium.org>
+> > > > > > +
+> > > > > > +allOf:
+> > > > > > +  - $ref: reserved-memory.yaml
+> > > > > > +
+> > > > > > +properties:
+> > > > > > +  compatible:
+> > > > > > +    description: |
+> > > > > > +      This describes some common memory reservations, with the=
+ compatible
+> > > > > > +      string indicating what it is used for:
+> > > > > > +
+> > > > > > +         acpi: Advanced Configuration and Power Interface (ACP=
+I) tables
+> > > > > > +         acpi-nvs: ACPI Non-Volatile-Sleeping Memory (NVS). Th=
+is is reserved by
+> > > > > > +           the firmware for its use and is required to be save=
+d and restored
+> > > > > > +           across an NVS sleep
+> > > > > > +         boot-code: Contains code used for booting which is no=
+t needed by the OS
+> > > > > > +         boot-code: Contains data used for booting which is no=
+t needed by the OS
+> > > > > > +         runtime-code: Contains code used for interacting with=
+ the system when
+> > > > > > +           running the OS
+> > > > > > +         runtime-data: Contains data used for interacting with=
+ the system when
+> > > > > > +           running the OS
+> > > > > > +
+> > > > > > +    enum:
+> > > > > > +      - acpi
+> > > > > > +      - acpi-nvs
+> > > > > > +      - boot-code
+> > > > > > +      - boot-data
+> > > > > > +      - runtime-code
+> > > > > > +      - runtime-data
+> > > > > > +
+> > > >
+> > > > As I mentioned a few times already, I don't think these compatibles
+> > > > should be introduced here.
+> > > >
+> > > > A reserved region has a specific purpose, and the compatible should=
+ be
+> > > > more descriptive than the enum above. If the consumer does not
+> > > > understand this purpose, it should simply treat the memory as reser=
+ved
+> > > > and not touch it. Alternatively, these regions can be referenced fr=
+om
+> > > > other DT nodes using phandles if needed.
+> > >
+> > > We still need some description of what these regions are used for, so
+> > > that the payload can use the correct regions. I do not have any other
+> > > solution to this problem. We are in v7 at present. At least explain
+> > > where you want the compatible strings to be introduced.
+> > >
+> >
+> > My point is really that by themselves, these regions are not usable by
+> > either a payload or an OS that consumes this information. Unless there
+> > is some other information being provided (via DT I imagine) that
+> > describes how these things are supposed to be used, they are nothing
+> > more than memory reservations that should be honored, and providing
+> > this arbitrary set of labels is unnecessary.
+> >
+> > > What sort of extra detail are you looking for? Please be specific and
+> > > preferably add some suggestions so I can close this out ASAP.
+> > >
+> >
+> > A payload or OS can do nothing with a memory reservation called
+> > 'runtime-code' it it doesn't know what is inside. So there is another
+> > DT node somewhere that describes this, and that can simply point to
+> > this region (via a phandle) if it needs to describe the
+> > correspondence. This is more idiomatic for DT afaik (but I am not the
+> > expert).  But more importantly, it avoids overloading some vague
+> > labels with behavior (e.g., executable permissions for code regions)
+> > that should only be displayed for regions with a particular use,
+> > rather than for a ill defined class of reservations the purpose of
+> > which is not clear.
+> >
+> > What I am trying to avoid is the OS ending up being forced to consume
+> > this information in parallel to the EFI memory map, and having to
+> > reconcile them. I'd be much happier if this gets contributed to a spec
+> > that only covers firmware-to-firmware, and is prevented from leaking
+> > into the OS facing interface.
+>
+> I don't know about "another DT node". We don't have one at present.
+>
+> There is already a note in the DT spec about this:
+>
+> > 3.5.4 /reserved-memory and UEFI
+>
+> > When booting via [UEFI], static /reserved-memory regions must also be l=
+isted in the system memory map obtained
+> > via the GetMemoryMap() UEFI boot time service as defined in [UEFI] =C2=
+=A7 7.2. The reserved memory regions need to be
+> > included in the UEFI memory map to protect against allocations by UEFI =
+applications.
+> >
+> > Reserved regions with the no-map property must be listed in the memory =
+map with type EfiReservedMemoryType. All
+> > other reserved regions must be listed with type EfiBootServicesData.
+> >
+> > Dynamic reserved memory regions must not be listed in the [UEFI] memory=
+ map because they are allocated by the OS
+> > after exiting firmware boot services.
+>
+> I don't fully understand what all that means, but does it cover your conc=
+ern?
+>
 
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
+I don't fully agree with the wording here, but apparently there is
+some awareness here of the concerns I raised.
 
-Changes in v5:
-- In bootmeth_script script_boot(), it's unnecessary to check for ret so
-remove it. While we're here, also initialize ret in declaration.
+Interestingly, 'when booting via UEFI' becomes a bit ambiguous now,
+given that DT is passed from stage to stage, and not every handover is
+booting via UEFI. In general, I think the introduction of bindings
+that cover areas other than the handover from the final boot loader to
+the OS may create some more confusion later on, but I'll leave it up
+to the DT bindings maintainer to reason about that.
 
-Changes in v4:
-- Revise logic in bootmeth_script() to set devtype to sata for non-scsi
-SATA device
-- Rewrite sata_rescan() logic to properly remove all devices before probing
-- Add description to sata_rescan() header
+If you are dead set on introducing these items (and I note that you
+still have not provided an actual example of how a PI -> payload
+handover would make use of runtime-code or boot-code reservations), I
+won't keep standing in your way.
 
-Changes in v3:
-- Correct drivers/ata/Makefile to compile sata_bootdev only if
-ahci sata is enabled.
+Thanks for the discussion, and apologies for dragging this out.
 
-Changes in v2:
-- set devtype to sata in bootmeth_script for non-scsi SATA device.
-
- boot/bootmeth_script.c     | 16 +++++++---
- drivers/ata/Makefile       |  2 +-
- drivers/ata/sata.c         | 32 ++++++++++++++++++++
- drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
- include/sata.h             |  6 ++++
- 5 files changed, 113 insertions(+), 5 deletions(-)
- create mode 100644 drivers/ata/sata_bootdev.c
-
-diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
-index 345114dabf..06340e43d2 100644
---- a/boot/bootmeth_script.c
-+++ b/boot/bootmeth_script.c
-@@ -188,12 +188,20 @@ static int script_boot(struct udevice *dev, struct bootflow *bflow)
- {
- 	struct blk_desc *desc = dev_get_uclass_plat(bflow->blk);
- 	ulong addr;
--	int ret;
-+	int ret = 0;
- 
--	if (desc->uclass_id == UCLASS_USB)
-+	if (desc->uclass_id == UCLASS_USB) {
- 		ret = env_set("devtype", "usb");
--	else
--		ret = env_set("devtype", blk_get_devtype(bflow->blk));
-+	} else {
-+		/* If the uclass is AHCI, but the driver is ATA
-+		 * (not scsi), set devtype to sata
-+		 */
-+		if (IS_ENABLED(CONFIG_SATA) &&
-+		    desc->uclass_id == UCLASS_AHCI)
-+			ret = env_set("devtype", "sata");
-+		else
-+			ret = env_set("devtype", blk_get_devtype(bflow->blk));
-+	}
- 	if (!ret)
- 		ret = env_set_hex("devnum", desc->devnum);
- 	if (!ret)
-diff --git a/drivers/ata/Makefile b/drivers/ata/Makefile
-index 6e30180b8b..0b6f91098a 100644
---- a/drivers/ata/Makefile
-+++ b/drivers/ata/Makefile
-@@ -10,7 +10,7 @@ obj-$(CONFIG_SCSI_AHCI) += ahci.o
- obj-$(CONFIG_DWC_AHSATA) += dwc_ahsata.o
- obj-$(CONFIG_FSL_SATA) += fsl_sata.o
- obj-$(CONFIG_LIBATA) += libata.o
--obj-$(CONFIG_SATA) += sata.o
-+obj-$(CONFIG_SATA) += sata.o sata_bootdev.o
- obj-$(CONFIG_SATA_CEVA) += sata_ceva.o
- obj-$(CONFIG_SATA_MV) += sata_mv.o
- obj-$(CONFIG_SATA_SIL) += sata_sil.o
-diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-index ce3e9b5a40..f126b84e05 100644
---- a/drivers/ata/sata.c
-+++ b/drivers/ata/sata.c
-@@ -15,6 +15,8 @@
- #include <dm.h>
- #include <part.h>
- #include <sata.h>
-+#include <dm/device-internal.h>
-+#include <dm/uclass-internal.h>
- 
- #ifndef CONFIG_AHCI
- struct blk_desc sata_dev_desc[CONFIG_SYS_SATA_MAX_DEVICE];
-@@ -50,6 +52,36 @@ int sata_scan(struct udevice *dev)
- 	return ops->scan(dev);
- }
- 
-+int sata_rescan(bool verbose)
-+{
-+	int ret;
-+	struct udevice *dev;
-+
-+	if (verbose)
-+		printf("Removing devices on SATA bus...\n");
-+
-+	blk_unbind_all(UCLASS_AHCI);
-+
-+	ret = uclass_find_first_device(UCLASS_AHCI, &dev);
-+	if (ret || !dev) {
-+		printf("Cannot find SATA device (err=%d)\n", ret);
-+		return -ENOSYS;
-+	}
-+
-+	ret = device_remove(dev, DM_REMOVE_NORMAL);
-+	if (ret) {
-+		printf("Cannot remove SATA device '%s' (err=%d)\n", dev->name, ret);
-+		return -ENOSYS;
-+	}
-+
-+	if (verbose)
-+		printf("Rescanning SATA bus for devices...\n");
-+
-+	ret = uclass_probe_all(UCLASS_AHCI);
-+
-+	return ret;
-+}
-+
- #ifndef CONFIG_AHCI
- #ifdef CONFIG_PARTITIONS
- struct blk_desc *sata_get_dev(int dev)
-diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
-new file mode 100644
-index 0000000000..f638493ce0
---- /dev/null
-+++ b/drivers/ata/sata_bootdev.c
-@@ -0,0 +1,62 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Bootdev for sata
-+ *
-+ * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
-+ */
-+
-+#include <common.h>
-+#include <ahci.h>
-+#include <bootdev.h>
-+#include <dm.h>
-+#include <init.h>
-+#include <sata.h>
-+
-+static int sata_bootdev_bind(struct udevice *dev)
-+{
-+	struct bootdev_uc_plat *ucp = dev_get_uclass_plat(dev);
-+
-+	ucp->prio = BOOTDEVP_4_SCAN_FAST;
-+
-+	return 0;
-+}
-+
-+static int sata_bootdev_hunt(struct bootdev_hunter *info, bool show)
-+{
-+	int ret;
-+
-+	if (IS_ENABLED(CONFIG_PCI)) {
-+		ret = pci_init();
-+		if (ret)
-+			return ret;
-+	}
-+
-+	ret = sata_rescan(true);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+struct bootdev_ops sata_bootdev_ops = {
-+};
-+
-+static const struct udevice_id sata_bootdev_ids[] = {
-+	{ .compatible = "u-boot,bootdev-sata" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(sata_bootdev) = {
-+	.name		= "sata_bootdev",
-+	.id		= UCLASS_BOOTDEV,
-+	.ops		= &sata_bootdev_ops,
-+	.bind		= sata_bootdev_bind,
-+	.of_match	= sata_bootdev_ids,
-+};
-+
-+BOOTDEV_HUNTER(sata_bootdev_hunter) = {
-+	.prio		= BOOTDEVP_4_SCAN_FAST,
-+	.uclass		= UCLASS_AHCI,
-+	.hunt		= sata_bootdev_hunt,
-+	.drv		= DM_DRIVER_REF(sata_bootdev),
-+};
-diff --git a/include/sata.h b/include/sata.h
-index d89f7a8a29..6111cf65d9 100644
---- a/include/sata.h
-+++ b/include/sata.h
-@@ -21,4 +21,10 @@ extern struct blk_desc sata_dev_desc[];
- int sata_probe(int devnum);
- int sata_remove(int devnum);
- 
-+/*
-+ * Remove existing AHCI SATA device uclass and all of its children,
-+ * if any, and probe it again.
-+ */
-+int sata_rescan(bool verbose);
-+
- #endif
--- 
-2.39.2
-
+--=20
+Ard.
