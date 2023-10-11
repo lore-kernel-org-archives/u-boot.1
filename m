@@ -4,78 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19B92CD98E5
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 02:11:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4EACD98E9
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 02:55:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B34886B29;
-	Wed, 11 Oct 2023 04:11:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F0CB486C0B;
+	Wed, 11 Oct 2023 04:55:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tv11bqpR";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="d4+AD0m5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 381B786B29; Wed, 11 Oct 2023 04:11:41 +0200 (CEST)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7925886B57; Wed, 11 Oct 2023 04:55:13 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10430864E7
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 04:11:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AD3286A24
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 04:55:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-d84d883c1b6so433732276.0
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 19:11:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1696990294; x=1697595094; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VzXQY7H7oOkB3qbBpFQZDIliLcKyLrI1EP0XuUU3LpU=;
- b=tv11bqpRKFOBwrdF9dyAn0nkzR7CN6Hc+jC//lf9xyw+lTz6lE6KYpnWFL4RyBeQOv
- b2l2Ovsh14vMquTwTYXWqNbUy4y3uN2GHqeOsodB3OTQMN4xdzQah77sTgoehkcMehqB
- IiBRT9oLRynzOkTd6eEOZqswTv0oiWAT+hA8I=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 4955D404A1
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 02:55:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1696992905;
+ bh=ukdTZSRd0w0BSG8WV9a0Ml/7B2oopszs9FBigHNEU5I=;
+ h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
+ In-Reply-To:Content-Type;
+ b=d4+AD0m5XSeJ1Qm4IhGImz6tSfA7LUYEwrj0cke+8qmewn17lVoK4c7z4kdSl4X7/
+ 61MEb/KsfXG+Pz72ikt5Jptiob5VRYQ0mniees2geikwrVZ/9RNj8WH5ZFu0I7cuT2
+ 0j2lgwFrKeXbIUvF+w5XBJir8fag+Xj2NxT+Ha2wG7LJA54/dGBCLXffHTNCxCU1xz
+ ZQvDm4fOp/15zaXcnbICpFb/KJ5TSgtNABk7rV98atbG6FnMlLuadPQb6CEutZNFZ4
+ rdPjyVRKZpqdn4bpACPeGxs7c4BsJoBwg7L1QuZE2LJreHzgZsZ08LlLhWV6E0iHlW
+ MUE/dynZhPGrA==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-3172a94b274so4326310f8f.0
+ for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 19:55:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696990294; x=1697595094;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VzXQY7H7oOkB3qbBpFQZDIliLcKyLrI1EP0XuUU3LpU=;
- b=GfHf39eFIj5ELmUxdj1+b0f7LzqoExt2HPbTaBcT9koryggcSsG6ZYs20S7IPNhDod
- DgpKm6aiVmLoD8hg9vACu0bp3MF5mmi7dtIG96ak0r3kXO8ToqBOJiuqE25czyD7G6YK
- Cx74KYVkFL5LamY7JuvIIQKzNQyr5s8pj1qeyOaftMpvuTbEQRe+UFdl441ipB76nZ48
- om62xpDR2JWtT5IqZkv5WZXtqLy1YFQ0yBqyFLD52eB/wuje0TCz16UFvxwBKQkeFeWJ
- PnOhiZs6im9WZLZPC4MBqTW6MtULeTA40FNj1CSH2DWQN1L4vXk1+OifghjgeLhQkvwU
- tBsQ==
-X-Gm-Message-State: AOJu0YxfWrwBHa8czYH1gV1XAJb7wh3bW5TGT0Z8AwQpWvtN8x1PS4J2
- HbR27pizUpuJWiR8kNuRGY2RnA==
-X-Google-Smtp-Source: AGHT+IF1nipv4qYLdVI3Yu75cMz7FJ16d7V7I21+sfY1evrsJfCw6np0/D8/PgxnYOvZQ6bGAeRXcA==
-X-Received: by 2002:a25:c713:0:b0:d86:696d:bc0a with SMTP id
- w19-20020a25c713000000b00d86696dbc0amr10796459ybe.29.1696990293742; 
- Tue, 10 Oct 2023 19:11:33 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-a369-3392-aca4-1f00.res6.spectrum.com.
- [2603:6081:7b00:6400:a369:3392:aca4:1f00])
- by smtp.gmail.com with ESMTPSA id
- v9-20020a25ab89000000b00bcd91bb300esm4196965ybi.54.2023.10.10.19.11.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 10 Oct 2023 19:11:33 -0700 (PDT)
-Date: Tue, 10 Oct 2023 22:11:31 -0400
-From: Tom Rini <trini@konsulko.com>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>, sjg@chromium.org,
- etienne.carriere@st.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v5 00/16] firmware: scmi: add SCMI base protocol support
-Message-ID: <20231011021131.GC3119521@bill-the-cat>
-References: <20230926065750.734440-1-takahiro.akashi@linaro.org>
- <20231010141909.GA5325@bill-the-cat> <ZSX8CzGFs9+kv1vE@octopus>
+ d=1e100.net; s=20230601; t=1696992902; x=1697597702;
+ h=content-transfer-encoding:in-reply-to:from:cc:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ukdTZSRd0w0BSG8WV9a0Ml/7B2oopszs9FBigHNEU5I=;
+ b=s4r7Tj4UKbvlfttz4vsZwK6pXME05vOvy8tx8eVULwf/xFg6mOdo9+wsIM6ivCoTp3
+ j4ofSufuQjnl2VlNuwbfZfqJFDwIfjBUPKjDMVh090NuNIcMkk8OeMrCqTrBwiwls3CM
+ 4VSU8qM0kgz2jwi3+DjWstBLta9HYRDUev8glLb0AAFFda6dSd3X9lONO0lbfOeREZTp
+ P8UmlhE314Fl8kRi9rNCPbUI9rskGAM/gggiklm20Bz4aZV9PNZpXkTKGmkfj8tWHopY
+ tGjQ7xfV8ySIGWarfDlWXsm8weRtLp/7EWDOM1k8EPDt5j/YFD5P5OqOfu5llBi2tuiq
+ hyhQ==
+X-Gm-Message-State: AOJu0YzwyoSLWyIHv8NCBnn1gn+9hzPG5rd/mTWeJM5AeqjnDlVLxrZX
+ UhXgbuCnnuPiQtwmyYS1le9TfJVVi2/wSP6iET+v6n3UoxVManz3/w+dD3XtehXHwXT6/nDuXmu
+ zememdhKLsZT46he29ItvxNcIJSThVdQ=
+X-Received: by 2002:adf:f641:0:b0:31f:b6ea:af48 with SMTP id
+ x1-20020adff641000000b0031fb6eaaf48mr17024988wrp.49.1696992902255; 
+ Tue, 10 Oct 2023 19:55:02 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE+ONsVADmQR9YwwEK/7aZXyYgjlDQN7o/vVb1hTkss6ggNAK46P73YLNLky326d1mqaw3oUg==
+X-Received: by 2002:adf:f641:0:b0:31f:b6ea:af48 with SMTP id
+ x1-20020adff641000000b0031fb6eaaf48mr17024974wrp.49.1696992901110; 
+ Tue, 10 Oct 2023 19:55:01 -0700 (PDT)
+Received: from [192.168.123.67] (ip-178-202-040-247.um47.pools.vodafone-ip.de.
+ [178.202.40.247]) by smtp.gmail.com with ESMTPSA id
+ h12-20020adff18c000000b003232380ffd7sm14090932wro.102.2023.10.10.19.55.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 10 Oct 2023 19:55:00 -0700 (PDT)
+Message-ID: <a62045f4-9f1e-4f53-82f7-587b36a037f7@canonical.com>
+Date: Wed, 11 Oct 2023 04:54:59 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pwUdGY/ieDcvNnXS"
-Content-Disposition: inline
-In-Reply-To: <ZSX8CzGFs9+kv1vE@octopus>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 10/11] ram: starfive: Read memory size information from
+ EEPROM
+Content-Language: en-US
+To: Yanhong Wang <yanhong.wang@starfivetech.com>
+References: <20230615093652.23161-11-yanhong.wang@starfivetech.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
+ Shengyu Qu <wiagn233@outlook.com>, Shiji Yang <yangshiji66@outlook.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20230615093652.23161-11-yanhong.wang@starfivetech.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,142 +107,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 15.06.23 11:36, Yanhong Wang wrote:
+> StarFive VisionFive 2 has two versions, 1.2A and 1.3B, each version of
+> DDR capacity includes 2G/4G/8G, a DT can not support multiple
+> capacities, so the capacity size information is recorded to EEPROM, when
+> DDR initialization required capacity size information is read from
+> EEPROM.
+> 
+> If there is no information in EEPROM, it is initialized with the default
+> size defined in DT.
+> 
+> Signed-off-by: Yanhong Wang <yanhong.wang@starfivetech.com>
+> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+> ---
+>   arch/riscv/cpu/jh7110/spl.c         | 32 ++++++++++++++++++++++++++++-
+>   drivers/ram/starfive/starfive_ddr.c |  2 --
+>   2 files changed, 31 insertions(+), 3 deletions(-)
+> 
+> diff --git a/arch/riscv/cpu/jh7110/spl.c b/arch/riscv/cpu/jh7110/spl.c
+> index 104f0fe949..72adcefa0e 100644
+> --- a/arch/riscv/cpu/jh7110/spl.c
+> +++ b/arch/riscv/cpu/jh7110/spl.c
+> @@ -3,19 +3,49 @@
+>    * Copyright (C) 2022 StarFive Technology Co., Ltd.
+>    * Author: Yanhong Wang<yanhong.wang@starfivetech.com>
+>    */
+> -
+> +#include <common.h>
+> +#include <asm/arch/eeprom.h>
+>   #include <asm/csr.h>
+>   #include <asm/sections.h>
+>   #include <dm.h>
+> +#include <linux/sizes.h>
+>   #include <log.h>
+> +#include <init.h>
+>   
+>   #define CSR_U74_FEATURE_DISABLE	0x7c1
+>   #define L2_LIM_MEM_END	0x81FFFFFUL
+>   
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +static bool check_ddr_size(phys_size_t size)
+> +{
+> +	switch (size) {
+> +	case SZ_2:
+> +	case SZ_4:
+> +	case SZ_8:
+> +	case SZ_16:
+> +		return true;
+> +	default:
+> +		return false;
+> +	}
+> +}
+> +
+>   int spl_soc_init(void)
+>   {
+>   	int ret;
+>   	struct udevice *dev;
+> +	phys_size_t size;
+> +
+> +	ret = fdtdec_setup_mem_size_base();
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Read the definition of the DDR size from eeprom, and if not,
+> +	 * use the definition in DT
+> +	 */
+> +	size = (get_ddr_size_from_eeprom() >> 16) & 0xFF;
 
---pwUdGY/ieDcvNnXS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On origin/master for a 4 GiB board with a serial number 
+VF7110B1-2253-D004E000-4000xxxx this always fails. This results in 
+memory reported as 8 GiB and Linux crashing.
 
-On Wed, Oct 11, 2023 at 10:36:11AM +0900, AKASHI Takahiro wrote:
-> Hi Tom,
->=20
-> On Tue, Oct 10, 2023 at 10:19:09AM -0400, Tom Rini wrote:
-> > On Tue, Sep 26, 2023 at 03:57:34PM +0900, AKASHI Takahiro wrote:
-> >=20
-> > > This patch series allows users to access SCMI base protocol provided =
-by
-> > > SCMI server (platform). It will also be utilized in separate patches
-> > > in the future to add sanity/validity checks for other protocols.
-> > > See SCMI specification document v3.2 beta[1] for more details about S=
-CMI
-> > > base protocol.
-> > >=20
-> > > What is currently not implemented is
-> > > - SCMI_BASE_NOTIFY_ERRORS command and notification callback mechanism
-> > >=20
-> > > This feature won't be very useful in the current U-Boot environment.
-> > >=20
-> > > [1] https://developer.arm.com/documentation/den0056/e/?lang=3Den
-> > >=20
-> > >=20
-> > > Test
-> > > =3D=3D=3D=3D
-> > > The patch series was tested on the following platforms:
-> > > * sandbox
-> > > * qemu-arm64 with OPTEE as SCMI server
-> >=20
-> > I have two problems.  The first is that for sandbox, this series is not
-> > bisectable as a commits fail to build due to needing a definition in the
-> > test before it's added:
-> > /home/uboot/work/u-boot/u-boot/test/dm/scmi.c: In function 'dm_test_scm=
-i_clocks':
-> > /home/uboot/work/u-boot/u-boot/test/dm/scmi.c:117:21: warning: implicit=
- declaration of function 'scmi_get_protocol' [-Wimplicit-function-declarati=
-on]
-> >   117 |         clock_dev =3D scmi_get_protocol(agent_dev, SCMI_PROTOCO=
-L_ID_CLOCK);
-> >       |                     ^~~~~~~~~~~~~~~~~
->=20
-> [snip]
->=20
-> Ah, I didn't notice this dependency.
-> I will fix it by re-ordering the commits.
->=20
-> > Second, the series causes this failure:
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D FAILURES =3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > _______________________________ test_ut[ut_dm_dm_test_scmi_cmd] _______=
-________________________
-> > test/py/u_boot_spawn.py:195: in expect
-> >     c =3D os.read(self.fd, 1024).decode(errors=3D'replace')
-> > E   OSError: [Errno 5] Input/output error
-> >=20
-> > During handling of the above exception, another exception occurred:
-> > test/py/tests/test_ut.py:497: in test_ut
-> >     output =3D u_boot_console.run_command('ut ' + ut_subtest)
-> > test/py/u_boot_console_base.py:266: in run_command
-> >     m =3D self.p.expect([self.prompt_compiled] + self.bad_patterns)
-> > test/py/u_boot_spawn.py:204: in expect
-> >     raise ValueError('U-Boot exited with %s' % info)
-> > E   ValueError: U-Boot exited with signal 11 (SIGSEGV)
-> > ------------------------------------ Captured stdout call -------------=
-------------------------
-> > =3D> ut dm dm_test_scmi_cmd
-> > Test: dm_test_scmi_cmd: scmi.c
-> > SCMI device: scmi
-> >   protocol version: 0x20000
-> >   # of agents: 2
-> >       0: platform
-> >     > 1: OSPM
-> >   # of protocols: 3
-> >       Clock management
-> >       Reset domain management
-> >       Voltage domain management
-> >   vendor: U-Boot
-> >   sub vendor: Sandbox
-> >   impl version: 0x1
-> > Denying access to device:0 failed (-13)
-> > Denying access to protocol:0x14 on device:0 failed (-13)
-> > Reset failed (-13)
-> > Test: dm_test_scmi_cmd: scmi.c (flat tree)
-> > SCMI device: ?n
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D short test summary info =3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-> > FAILED test/py/tests/test_ut.py::test_ut[ut_dm_dm_test_scmi_cmd] - Valu=
-eError: U-Boot exited...
->=20
-> This seems to happen in the case of "flat tree", but
-> I cannot reproduce it in my local environment with
->   $ pytest test/py/tests/test_ut.py -bd sandbox -k scmi_cmd ...
+i2c_get_chip_for_busnum() returns -EINVAL in read_eeprom() 
+[board/starfive/visionfive2/visionfive2-i2c-eeprom.c:335].
 
-How about if you run all of the tests?  That's how I usually do it, and
-CI as well.
+Is the driver model really expected to be fully initialized before 
+setting up memory?
 
-> > Which I believe CI will also produce, once the issue with htmldocs is
-> > fixed.  I can't bisect it exactly as the failure shows up once the new
-> > test is added.
->=20
-> Anyhow, "scmi" command is more or less a debug tool for my development.
-> All the functionality provided by this patch set is tested at "function"
-> level with "ut dm scmi_base" and the command is *not* needed.
-> To avoid increasing the maintenance cost, I will drop the command
-> (patch #14-#16) in the next version.
+Best regards
 
-OK.  Please make sure CI runs and passes as well, thanks.
+Heinrich
 
---=20
-Tom
+> +	if (check_ddr_size(size))
+> +		gd->ram_size = size << 30;
+>   
+>   	/* DDR init */
+>   	ret = uclass_get_device(UCLASS_RAM, 0, &dev);
+> diff --git a/drivers/ram/starfive/starfive_ddr.c b/drivers/ram/starfive/starfive_ddr.c
+> index 553f2ce6f4..a0a3d6b33d 100644
+> --- a/drivers/ram/starfive/starfive_ddr.c
+> +++ b/drivers/ram/starfive/starfive_ddr.c
+> @@ -72,8 +72,6 @@ static int starfive_ddr_probe(struct udevice *dev)
+>   	u64 rate;
+>   	int ret;
+>   
+> -	/* Read memory base and size from DT */
+> -	fdtdec_setup_mem_size_base();
+>   	priv->info.base = gd->ram_base;
+>   	priv->info.size = gd->ram_size;
+>   
 
---pwUdGY/ieDcvNnXS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUmBEoACgkQFHw5/5Y0
-tywHGwwAnYzCm3xZsf40KOOKhh/g8/Jr1dBZs2djXQVzZuK2I1uDqJkUm3XoEqr4
-6Q+9C29n8LFonXw91cfUFCT7JKWwhSROWJzReC/ovyTwNOZjQhnr0WLMATdr/rJs
-QPohHOi7N21PmCFvRLH3zU4WWLwK4rn0rAnhRQO9G8IDUmYJp99li6GenvfLxW5/
-csUM9YcPgCHZlV6qDLhHGPky7fiV4ZkNuAP+7ZYN3hNBegxRBCDHjr/Lgs9KZXGL
-YOxcruoEWMp88ip8ui1D8yKV+2ETh9XOyVIyIsXrL0ccugiNmLrYKQgJZp1yLHSU
-w83pL5QpVeTLHDTOfi6IwJQPl0W2LPjA6G7jh7vOSVDWKMM4HyPPTU+tAydIIahE
-J9jzpYORFhnkE+w4qHIp/P+QW/RLWcXegcsJZqKw7JHhooJfFgHFTpuawX7noZkH
-GYFHX4hr2cgFnrFRu0JynuNhdKhY4/tR+DkPPEfgMLzE3Se0uC16N07GsdKmsm7R
-+8baIBTW
-=gQrN
------END PGP SIGNATURE-----
-
---pwUdGY/ieDcvNnXS--
