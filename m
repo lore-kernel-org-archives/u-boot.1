@@ -4,89 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2348ACD98DD
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 00:03:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E03F9CD98E0
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 00:35:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8638E86C59;
-	Wed, 11 Oct 2023 02:03:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D1B1F863F9;
+	Wed, 11 Oct 2023 02:35:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DqNZjvJZ";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JSjxInoE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 817B886C21; Wed, 11 Oct 2023 02:03:52 +0200 (CEST)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E028386459; Wed, 11 Oct 2023 02:35:12 +0200 (CEST)
+Received: from mail-m15567.qiye.163.com (mail-m15567.qiye.163.com
+ [101.71.155.67])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E5C1886BAC
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 02:03:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E6238615A
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 02:35:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-77433d61155so409724585a.2
- for <u-boot@lists.denx.de>; Tue, 10 Oct 2023 17:03:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1696982620; x=1697587420; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=u6uVU0HlLOqspUpXO9waQVyhNmB9hD6TVAUgYv3V8yE=;
- b=DqNZjvJZQuYORsTViLxklqmubVwhVBPp747HIhRNmXvCrQgElmAjHI2kJK70HPWdAy
- Mrp7J25WDCOTavyT/EZFIMCxCw4k6f3W6/SsRr+VdF33Aqz/d1GheRqGb44Cho5AHafH
- PCV60bCQ7YubNGVHmUdHbRyVcH9lyx9btWtQza1KOF1w/CvydnFMM9rYzuTQ9Dj6v2PP
- Y579i81gXJHkrCa2+GtAQU2QzXpEWdu7bcU9rc2i5xvpLvtedC5LH89+t6rqhniHbEM1
- jp6kJDwakFFblfhx+rmFCQVUpJZb3XlQ68mCBW1P9z7MkfDBYDuAPx7d5bFwdAUDLAtU
- Jhhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1696982620; x=1697587420;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=u6uVU0HlLOqspUpXO9waQVyhNmB9hD6TVAUgYv3V8yE=;
- b=LAjcs48xR4G/m22BKSvd4XYwXFMsI3h55N6FJSkqy2Poz17PFi/AIsHCSF8dLn/L+w
- XHQGKqxZol6fw1NNTfN125wKKz40dN/zr4Qs8cdRHJeH7I61Mlwbqi3HaQBa4XemCqdX
- ixzs/zxUalqVIq+aiKXhfdih+YNQVXKza/+LB1xp/zc++RJI5NhywZ5jDK4vzoNk2FeT
- PcN3MELfqPJabY4PvGGcT99lhpCZ7XN0pn0inq+xLrjr/OQO6JWrdJJ7NppnKAV5u0bn
- E5PSZbQd5rAvqblWntzMu4gWnOz8qNiP7Wy0Jfo1cd3pl6D4cCJIWCn7MGHdbJ6xLrng
- J1Fg==
-X-Gm-Message-State: AOJu0YxAVutfWaIAF3H/UroJibrRkTa3mk0wsgc4SPjrSd7HBTSbyh5R
- 0E9VBjZQauIMnOUc/CGZGdI=
-X-Google-Smtp-Source: AGHT+IF0OHi4gQIHNg5nKiOstFMmtjhpJek2HJ02uxFoRAha/A3YSSN0rExgPJCVeGQGOb87dz4U0A==
-X-Received: by 2002:a0c:f28e:0:b0:66c:f070:2883 with SMTP id
- k14-20020a0cf28e000000b0066cf0702883mr4193537qvl.19.1696982620538; 
- Tue, 10 Oct 2023 17:03:40 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- 2-20020a05620a078200b007742bc74184sm4727611qka.110.2023.10.10.17.03.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 10 Oct 2023 17:03:40 -0700 (PDT)
-Message-ID: <ec7f63e8-f891-ec5f-b1ee-fecd3b5ce77a@gmail.com>
-Date: Tue, 10 Oct 2023 20:03:39 -0400
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=JSjxInoEKdEbIxacJjjnWBXE/AWyI2hyFk7vGbLxGoLygoIav6fcPktqBYcrmp7QLb1PbgVsfZRHmsxK46knQ0Jy3vrL3NphKkyyWZgoBhwomt7JO6p/eMIp9c7N3Va9k0ygoh0XrJiSOe6fiZKAFCDxbOmbDSJ7Xb5ahkZbf0s=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=USwkRxH5Z+u4fVZwHwHJ3y6ZqRwchsSwA6A1KzBNBnQ=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [192.168.60.65] (unknown [103.29.142.67])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 032AF4001D9;
+ Wed, 11 Oct 2023 08:34:51 +0800 (CST)
+Message-ID: <5ec54ea0-23e4-ddc0-1eee-021a0c6c8989@rock-chips.com>
+Date: Wed, 11 Oct 2023 08:34:48 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH 07/25] tegra: Change #ifdef for nop
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v1 2/7] clk: rockchip: rk3568: add i2s3 clk
 Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List
- <u-boot@lists.denx.de>, Stephen Warren <swarren@nvidia.com>,
- Stephen Warren <swarren@wwwdotorg.org>, Tom Warren <twarren@nvidia.com>
-References: <20230924203953.1829820-1-sjg@chromium.org>
- <20230924203953.1829820-8-sjg@chromium.org>
- <20230925004346.GP305624@bill-the-cat>
- <CAPnjgZ3ieXXhidSeqzMuPBCgy9UrvOt5zSMO671t1KG9zWAGxQ@mail.gmail.com>
- <cad8dcca-eaa5-872b-db9a-86f5438b120c@gmail.com>
- <CAPnjgZ38gfWghmejpQFkJ9y9F8fdC-Wo-YSHT_4_cu8dW1UDGw@mail.gmail.com>
- <2ffb2d81-9c63-2ce3-ccba-3d5461008a51@gmail.com>
- <CAPnjgZ1Goy0Xt=vj6YYeOEPwYO7wkATKawQtOwCW8JTM1ShdcQ@mail.gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAPnjgZ1Goy0Xt=vj6YYeOEPwYO7wkATKawQtOwCW8JTM1ShdcQ@mail.gmail.com>
+To: Elaine Zhang <zhangqing@rock-chips.com>, lukma@denx.de,
+ seanga2@gmail.com, philipp.tomsich@vrull.eu, sjg@chromium.org
+Cc: u-boot@lists.denx.de, chenjh@rock-chips.com
+References: <20231010085155.31027-1-zhangqing@rock-chips.com>
+ <20231010085155.31027-3-zhangqing@rock-chips.com>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20231010085155.31027-3-zhangqing@rock-chips.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCT09PVktOGUofQk4ZTkNJGlUTARMWGhIXJBQOD1
+ lXWRgSC1lBWUpLSFVJQlVKT0lVTUxZV1kWGg8SFR0UWUFZT0tIVUpNT0lOSVVKS0tVSkJZBg++
+X-HM-Tid: 0a8b1c286b782eb3kusn032af4001d9
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PDI6Chw5Izw5DBBWNSgKLy40
+ GA4aCyFVSlVKTUJNQkNPT0JITUJJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKS0hVSUJVSk9JVU1MWVdZCAFZQUpJSE5INwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,77 +74,338 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/10/23 10:42, Simon Glass wrote:
-> Hi Sean,
-> 
-> On Mon, 9 Oct 2023 at 17:40, Sean Anderson <seanga2@gmail.com> wrote:
->>
->> On 10/9/23 11:32, Simon Glass wrote:
->>> Hi Sean,
->>>
->>> On Sat, 7 Oct 2023 at 17:21, Sean Anderson <seanga2@gmail.com> wrote:
->>>>
->>>> On 10/7/23 19:10, Simon Glass wrote:
->>>>> Hi Tom.
->>>>>
->>>>> On Sun, 24 Sept 2023 at 18:43, Tom Rini <trini@konsulko.com> wrote:
->>>>>>
->>>>>> On Sun, Sep 24, 2023 at 02:39:25PM -0600, Simon Glass wrote:
->>>>>>
->>>>>>> This code is normally compiled for Tegra, but sandbox can also compile
->>>>>>> it. We should not use UNIT_TEST as a synonym for SANDBOX, since it is
->>>>>>> possible to disable UNIT_TEST for sandbox.
->>>>>>>
->>>>>>> Correct the condition.
->>>>>>>
->>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>>>>> ---
->>>>>>>
->>>>>>>     include/k210/pll.h | 2 +-
->>>>>>>     1 file changed, 1 insertion(+), 1 deletion(-)
->>>>>>>
->>>>>>> diff --git a/include/k210/pll.h b/include/k210/pll.h
->>>>>>> index fd16a89cb203..6dd60b2eb4fc 100644
->>>>>>> --- a/include/k210/pll.h
->>>>>>> +++ b/include/k210/pll.h
->>>>>>> @@ -13,7 +13,7 @@ struct k210_pll_config {
->>>>>>>          u8 od;
->>>>>>>     };
->>>>>>>
->>>>>>> -#ifdef CONFIG_UNIT_TEST
->>>>>>> +#ifdef CONFIG_SANDBOX
->>>>>>>     TEST_STATIC int k210_pll_calc_config(u32 rate, u32 rate_in,
->>>>>>>                                       struct k210_pll_config *best);
->>>>>>>     #ifndef nop
->>>>>>
->>>>>> Tegra? Do you mean sifive?  That's where CLK_K210 stuff is... but it
->>>>>
->>>>> Oh yes, I got confused.
->>>>>
->>>>>> also seems wrong, you can run unit test on real hardware, and this is a
->>>>>> test that could (should?) be run on that platform.
->>>>>
->>>>> Only if it enables UNIT_TEST. You cannot run unit tests without that.
->>>>> The current tests are designed for sandbox.
->>>>
->>>> FWIW I have run this test on actual hardware. My intent here was to allow
->>>> unit tests to access functions which would otherwise be declared static.
->>>
->>> Er, with or without UNIT_TEST enabled? How can it even build if this
->>> declaration is only for sandbox?
->>
->> With UNIT_TEST of course. Although since this is a forward-declaration, the
->> UNIT_TEST ifdef isn't really even necessary. If it's on actual hardware, nop
->> should already be defined. So maybe this should be something like
->>
->> #if CONFIG_SANDBOX
->> #define nop()
->> #endif
-> 
-> It is the CONFIG_SANDBOX that I am trying to remove. Can it be
-> CONFIG_UNIT_TEST instead?
+Hi Elaine,
 
-Well, you can just remove the `ifdef UNIT_TEST` then.
+     Please add commit message, and remove the change id.
 
---Sean
+     same for other patches.
 
+Thanks,
+
+- Kever
+
+On 2023/10/10 16:51, Elaine Zhang wrote:
+> Change-Id: If20fe16260d2b584d4216d1dbabffcb25478fb1d
+> Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
+> ---
+>   .../include/asm/arch-rockchip/cru_rk3568.h    |  36 +++
+>   drivers/clk/rockchip/clk_rk3568.c             | 218 ++++++++++++++++++
+>   2 files changed, 254 insertions(+)
+>
+> diff --git a/arch/arm/include/asm/arch-rockchip/cru_rk3568.h b/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
+> index 9c7ddd751f72..0306ce57e369 100644
+> --- a/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
+> +++ b/arch/arm/include/asm/arch-rockchip/cru_rk3568.h
+> @@ -211,6 +211,31 @@ enum {
+>   	ACLK_PERIMID_SEL_100M,
+>   	ACLK_PERIMID_SEL_24M,
+>   
+> +	/* CRU_CLK_SEL21_CON */
+> +	I2S3_MCLKOUT_TX_SEL_SHIFT	= 15,
+> +	I2S3_MCLKOUT_TX_SEL_MASK	= 1 << I2S3_MCLKOUT_TX_SEL_SHIFT,
+> +	I2S3_MCLKOUT_TX_SEL_MCLK	= 0,
+> +	I2S3_MCLKOUT_TX_SEL_12M,
+> +	CLK_I2S3_SEL_SHIFT		= 10,
+> +	CLK_I2S3_SEL_MASK		= 0x3 << CLK_I2S3_SEL_SHIFT,
+> +	CLK_I2S3_SEL_SRC		= 0,
+> +	CLK_I2S3_SEL_FRAC,
+> +	CLK_I2S3_SEL_CLKIN,
+> +	CLK_I2S3_SEL_XIN12M,
+> +	CLK_I2S3_SRC_SEL_SHIFT		= 8,
+> +	CLK_I2S3_SRC_SEL_MASK		= 0x3 << CLK_I2S3_SRC_SEL_SHIFT,
+> +	CLK_I2S3_SRC_SEL_GPLL		= 0,
+> +	CLK_I2S3_SRC_SEL_CPLL,
+> +	CLK_I2S3_SRC_SEL_NPLL,
+> +	CLK_I2S3_SRC_DIV_SHIFT		= 0,
+> +	CLK_I2S3_SRC_DIV_MASK		= 0x7f << CLK_I2S3_SRC_DIV_SHIFT,
+> +
+> +	/* CRU_CLK_SEL22_CON */
+> +	CLK_I2S3_FRAC_NUMERATOR_SHIFT	= 16,
+> +	CLK_I2S3_FRAC_NUMERATOR_MASK	= 0xffff << 16,
+> +	CLK_I2S3_FRAC_DENOMINATOR_SHIFT	= 0,
+> +	CLK_I2S3_FRAC_DENOMINATOR_MASK	= 0xffff,
+> +
+>   	/* CRU_CLK_SEL27_CON */
+>   	CLK_CRYPTO_PKA_SEL_SHIFT	= 6,
+>   	CLK_CRYPTO_PKA_SEL_MASK		= 3 << CLK_CRYPTO_PKA_SEL_SHIFT,
+> @@ -502,5 +527,16 @@ enum {
+>   	/* CRU_CLK_SEL82_CON */
+>   	CPLL_100M_DIV_SHIFT		= 0,
+>   	CPLL_100M_DIV_MASK		= 0x1f << CPLL_100M_DIV_SHIFT,
+> +
+> +	/* GRF_SOC_CON2 */
+> +	I2S3_MCLKOUT_SEL_SHIFT		= 15,
+> +	I2S3_MCLKOUT_SEL_MASK		= 0x1 << I2S3_MCLKOUT_SEL_SHIFT,
+> +	I2S3_MCLKOUT_SEL_RX		= 0,
+> +	I2S3_MCLKOUT_SEL_TX,
+> +	I2S3_MCLK_IOE_SEL_SHIFT		= 3,
+> +	I2S3_MCLK_IOE_SEL_MASK		= 0x1 << I2S3_MCLK_IOE_SEL_SHIFT,
+> +	I2S3_MCLK_IOE_SEL_CLKIN		= 0,
+> +	I2S3_MCLK_IOE_SEL_CLKOUT,
+> +
+>   };
+>   #endif
+> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
+> index 599b7b130eb9..469014439be4 100644
+> --- a/drivers/clk/rockchip/clk_rk3568.c
+> +++ b/drivers/clk/rockchip/clk_rk3568.c
+> @@ -13,6 +13,7 @@
+>   #include <asm/arch-rockchip/cru_rk3568.h>
+>   #include <asm/arch-rockchip/clock.h>
+>   #include <asm/arch-rockchip/hardware.h>
+> +#include <asm/arch-rockchip/grf_rk3568.h>
+>   #include <asm/io.h>
+>   #include <dm/device-internal.h>
+>   #include <dm/lists.h>
+> @@ -2326,6 +2327,170 @@ static ulong rk3568_uart_set_rate(struct rk3568_clk_priv *priv,
+>   	return rk3568_uart_get_rate(priv, clk_id);
+>   }
+>   
+> +#ifndef CONFIG_SPL_BUILD
+> +static ulong rk3568_i2s3_get_rate(struct rk3568_clk_priv *priv, ulong clk_id)
+> +{
+> +	struct rk3568_cru *cru = priv->cru;
+> +	struct rk3568_grf *grf = priv->grf;
+> +	u32 con, div, src, p_rate;
+> +	u32 reg, fracdiv, p_src;
+> +	unsigned long m, n;
+> +
+> +	switch (clk_id) {
+> +	case I2S3_MCLKOUT_TX:
+> +		con = readl(&cru->clksel_con[21]);
+> +		src = (con & I2S3_MCLKOUT_TX_SEL_MASK) >>
+> +		      I2S3_MCLKOUT_TX_SEL_SHIFT;
+> +		if (src == I2S3_MCLKOUT_TX_SEL_12M)
+> +			p_rate = 12000000;
+> +		else
+> +			p_rate = rk3568_i2s3_get_rate(priv, MCLK_I2S3_2CH_TX);
+> +		return p_rate;
+> +	case I2S3_MCLKOUT_RX:
+> +		con = readl(&cru->clksel_con[83]);
+> +		src = (con & I2S3_MCLKOUT_TX_SEL_MASK) >>
+> +		      I2S3_MCLKOUT_TX_SEL_SHIFT;
+> +		if (src == I2S3_MCLKOUT_TX_SEL_12M)
+> +			p_rate = 12000000;
+> +		else
+> +			p_rate = rk3568_i2s3_get_rate(priv, MCLK_I2S3_2CH_RX);
+> +		return p_rate;
+> +	case I2S3_MCLKOUT:
+> +		con = readl(&grf->soc_con2);
+> +		src = (con & I2S3_MCLKOUT_SEL_MASK)
+> +		      >> I2S3_MCLKOUT_SEL_SHIFT;
+> +		if (src == I2S3_MCLKOUT_SEL_RX)
+> +			p_rate = rk3568_i2s3_get_rate(priv, I2S3_MCLKOUT_RX);
+> +		else
+> +			p_rate = rk3568_i2s3_get_rate(priv, I2S3_MCLKOUT_TX);
+> +		return p_rate;
+> +	case MCLK_I2S3_2CH_RX:
+> +		reg = 83;
+> +		break;
+> +	case MCLK_I2S3_2CH_TX:
+> +		reg = 21;
+> +		break;
+> +	default:
+> +		return -ENOENT;
+> +	}
+> +
+> +	con = readl(&cru->clksel_con[reg]);
+> +	src = (con & CLK_I2S3_SEL_MASK) >> CLK_I2S3_SEL_SHIFT;
+> +	div = (con & CLK_I2S3_SRC_DIV_MASK) >> CLK_I2S3_SRC_DIV_SHIFT;
+> +	p_src = (con & CLK_I2S3_SRC_SEL_MASK) >> CLK_I2S3_SRC_SEL_SHIFT;
+> +	if (p_src == CLK_I2S3_SRC_SEL_GPLL)
+> +		p_rate = priv->gpll_hz;
+> +	else if (p_src == CLK_I2S3_SRC_SEL_CPLL)
+> +		p_rate = priv->cpll_hz;
+> +	else
+> +		p_rate = priv->npll_hz;
+> +	if (src == CLK_I2S3_SEL_SRC) {
+> +		return DIV_TO_RATE(p_rate, div);
+> +	} else if (src == CLK_I2S3_SEL_FRAC) {
+> +		fracdiv = readl(&cru->clksel_con[reg + 1]);
+> +		n = fracdiv & CLK_I2S3_FRAC_NUMERATOR_MASK;
+> +		n >>= CLK_I2S3_FRAC_NUMERATOR_SHIFT;
+> +		m = fracdiv & CLK_I2S3_FRAC_DENOMINATOR_MASK;
+> +		m >>= CLK_I2S3_FRAC_DENOMINATOR_SHIFT;
+> +		return DIV_TO_RATE(p_rate, div) * n / m;
+> +	} else {
+> +		return OSC_HZ / 2;
+> +	}
+> +}
+> +
+> +static ulong rk3568_i2s3_set_rate(struct rk3568_clk_priv *priv,
+> +				  ulong clk_id, ulong rate)
+> +{
+> +	struct rk3568_cru *cru = priv->cru;
+> +	struct rk3568_grf *grf = priv->grf;
+> +	u32 reg, con, clk_src, i2s_src, div;
+> +	unsigned long m = 0, n = 0, val;
+> +
+> +	if (priv->gpll_hz % rate == 0) {
+> +		clk_src = CLK_I2S3_SRC_SEL_GPLL;
+> +		i2s_src = CLK_I2S3_SEL_SRC;
+> +		div = DIV_ROUND_UP(priv->gpll_hz, rate);
+> +	} else if (priv->cpll_hz % rate == 0) {
+> +		clk_src = CLK_I2S3_SRC_SEL_CPLL;
+> +		i2s_src = CLK_I2S3_SEL_SRC;
+> +		div = DIV_ROUND_UP(priv->gpll_hz, rate);
+> +	} else if (rate == OSC_HZ / 2) {
+> +		clk_src = CLK_I2S3_SRC_SEL_GPLL;
+> +		i2s_src = CLK_I2S3_SEL_XIN12M;
+> +		div = 1;
+> +	} else {
+> +		clk_src = CLK_I2S3_SRC_SEL_GPLL;
+> +		i2s_src = CLK_I2S3_SEL_FRAC;
+> +		div = 1;
+> +		rational_best_approximation(rate, priv->gpll_hz / div,
+> +					    GENMASK(16 - 1, 0),
+> +					    GENMASK(16 - 1, 0),
+> +					    &m, &n);
+> +	}
+> +
+> +	switch (clk_id) {
+> +	case I2S3_MCLKOUT_TX:
+> +		if (rate == 12000000) {
+> +			rk_clrsetreg(&cru->clksel_con[21],
+> +				     I2S3_MCLKOUT_TX_SEL_MASK,
+> +				     I2S3_MCLKOUT_TX_SEL_12M <<
+> +				     I2S3_MCLKOUT_TX_SEL_SHIFT);
+> +		} else {
+> +			rk3568_i2s3_set_rate(priv, MCLK_I2S3_2CH_TX, rate),
+> +			rk_clrsetreg(&cru->clksel_con[21],
+> +				     I2S3_MCLKOUT_TX_SEL_MASK,
+> +				     I2S3_MCLKOUT_TX_SEL_MCLK <<
+> +				     I2S3_MCLKOUT_TX_SEL_SHIFT);
+> +		}
+> +		return rk3568_i2s3_get_rate(priv, clk_id);
+> +	case I2S3_MCLKOUT_RX:
+> +		if (rate == 12000000) {
+> +			rk_clrsetreg(&cru->clksel_con[83],
+> +				     I2S3_MCLKOUT_TX_SEL_MASK,
+> +				     I2S3_MCLKOUT_TX_SEL_12M <<
+> +				     I2S3_MCLKOUT_TX_SEL_SHIFT);
+> +		} else {
+> +			rk3568_i2s3_set_rate(priv, MCLK_I2S3_2CH_RX, rate),
+> +			rk_clrsetreg(&cru->clksel_con[21],
+> +				     I2S3_MCLKOUT_TX_SEL_MASK,
+> +				     I2S3_MCLKOUT_TX_SEL_MCLK <<
+> +				     I2S3_MCLKOUT_TX_SEL_SHIFT);
+> +		}
+> +		return rk3568_i2s3_get_rate(priv, clk_id);
+> +	case I2S3_MCLKOUT:
+> +		con = readl(&grf->soc_con2);
+> +		clk_src = (con & I2S3_MCLKOUT_SEL_MASK)
+> +		      >> I2S3_MCLKOUT_SEL_SHIFT;
+> +		if (clk_src == I2S3_MCLKOUT_SEL_RX)
+> +			rk3568_i2s3_set_rate(priv, I2S3_MCLKOUT_RX, rate);
+> +		else
+> +			rk3568_i2s3_set_rate(priv, I2S3_MCLKOUT_TX, rate);
+> +		return rk3568_i2s3_get_rate(priv, clk_id);
+> +	case MCLK_I2S3_2CH_RX:
+> +		reg = 83;
+> +		break;
+> +	case MCLK_I2S3_2CH_TX:
+> +		reg = 21;
+> +		break;
+> +	default:
+> +		return -ENOENT;
+> +	}
+> +
+> +	rk_clrsetreg(&cru->clksel_con[reg],
+> +		     CLK_I2S3_SEL_MASK | CLK_I2S3_SRC_SEL_MASK |
+> +		     CLK_I2S3_SRC_DIV_MASK,
+> +		     (clk_src << CLK_I2S3_SRC_SEL_SHIFT) |
+> +		     (i2s_src << CLK_I2S3_SEL_SHIFT) |
+> +		     ((div - 1) << CLK_I2S3_SRC_DIV_SHIFT));
+> +	if (m && n) {
+> +		val = m << CLK_I2S3_FRAC_NUMERATOR_SHIFT | n;
+> +		writel(val, &cru->clksel_con[reg + 1]);
+> +	}
+> +	return rk3568_i2s3_get_rate(priv, clk_id);
+> +}
+> +
+> +#endif
+> +
+>   static ulong rk3568_clk_get_rate(struct clk *clk)
+>   {
+>   	struct rk3568_clk_priv *priv = dev_get_priv(clk->dev);
+> @@ -2463,6 +2628,13 @@ static ulong rk3568_clk_get_rate(struct clk *clk)
+>   	case TCLK_WDT_NS:
+>   		rate = OSC_HZ;
+>   		break;
+> +	case I2S3_MCLKOUT_RX:
+> +	case I2S3_MCLKOUT_TX:
+> +	case MCLK_I2S3_2CH_RX:
+> +	case MCLK_I2S3_2CH_TX:
+> +	case I2S3_MCLKOUT:
+> +		rate = rk3568_i2s3_get_rate(priv, clk->id);
+> +		break;
+>   #endif
+>   	case SCLK_UART1:
+>   	case SCLK_UART2:
+> @@ -2648,6 +2820,13 @@ static ulong rk3568_clk_set_rate(struct clk *clk, ulong rate)
+>   	case TCLK_WDT_NS:
+>   		ret = OSC_HZ;
+>   		break;
+> +	case I2S3_MCLKOUT_RX:
+> +	case I2S3_MCLKOUT_TX:
+> +	case MCLK_I2S3_2CH_RX:
+> +	case MCLK_I2S3_2CH_TX:
+> +	case I2S3_MCLKOUT:
+> +		ret = rk3568_i2s3_set_rate(priv, clk->id, rate);
+> +		break;
+>   #endif
+>   	case SCLK_UART1:
+>   	case SCLK_UART2:
+> @@ -2824,6 +3003,42 @@ static int rk3568_rkvdec_set_parent(struct clk *clk, struct clk *parent)
+>   	return 0;
+>   }
+>   
+> +static int __maybe_unused rk3568_i2s3_set_parent(struct clk *clk,
+> +						 struct clk *parent)
+> +{
+> +	struct rk3568_clk_priv *priv = dev_get_priv(clk->dev);
+> +	struct rk3568_grf *grf = priv->grf;
+> +
+> +	switch (clk->id) {
+> +	case I2S3_MCLK_IOE:
+> +		if (parent->id == I2S3_MCLKOUT) {
+> +			rk_clrsetreg(&grf->soc_con2, I2S3_MCLK_IOE_SEL_MASK,
+> +				     I2S3_MCLK_IOE_SEL_CLKOUT <<
+> +				     I2S3_MCLK_IOE_SEL_SHIFT);
+> +		} else {
+> +			rk_clrsetreg(&grf->soc_con2, I2S3_MCLK_IOE_SEL_MASK,
+> +				     I2S3_MCLK_IOE_SEL_CLKIN <<
+> +				     I2S3_MCLK_IOE_SEL_SHIFT);
+> +		}
+> +		break;
+> +	case I2S3_MCLKOUT:
+> +		if (parent->id == I2S3_MCLKOUT_RX) {
+> +			rk_clrsetreg(&grf->soc_con2, I2S3_MCLKOUT_SEL_MASK,
+> +				     I2S3_MCLKOUT_SEL_RX <<
+> +				     I2S3_MCLKOUT_SEL_SHIFT);
+> +		} else {
+> +			rk_clrsetreg(&grf->soc_con2, I2S3_MCLKOUT_SEL_MASK,
+> +				     I2S3_MCLKOUT_SEL_TX <<
+> +				     I2S3_MCLKOUT_SEL_SHIFT);
+> +		}
+> +		break;
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>   static int rk3568_clk_set_parent(struct clk *clk, struct clk *parent)
+>   {
+>   	switch (clk->id) {
+> @@ -2848,6 +3063,9 @@ static int rk3568_clk_set_parent(struct clk *clk, struct clk *parent)
+>   	case SCLK_GMAC1_RGMII_SPEED:
+>   	case SCLK_GMAC1_RMII_SPEED:
+>   		break;
+> +	case I2S3_MCLK_IOE:
+> +	case I2S3_MCLKOUT:
+> +		return rk3568_i2s3_set_parent(clk, parent);
+>   	default:
+>   		return -ENOENT;
+>   	}
