@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE682CD6E76
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 14:20:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC3A5CD6E77
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 14:44:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 904FA8071F;
-	Wed, 11 Oct 2023 16:20:24 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 297F086DF7;
+	Wed, 11 Oct 2023 16:44:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qedLq/Vd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iegCuTuV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 269CB80422; Wed, 11 Oct 2023 16:20:23 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 97A5B86D12; Wed, 11 Oct 2023 16:44:14 +0200 (CEST)
+Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
+ [IPv6:2607:f8b0:4864:20::b2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBD0086D12
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 16:20:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89F2686D12
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 16:44:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5a7af52ee31so32357267b3.2
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 07:20:11 -0700 (PDT)
+Received: by mail-yb1-xb2e.google.com with SMTP id
+ 3f1490d57ef6-d8195078f69so7454375276.3
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 07:44:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697034010; x=1697638810; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697035439; x=1697640239; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P+9W2yM2I+1Plrmusm6YQgkIl5zcJjdLDtzFvTO3NM4=;
- b=qedLq/VdIPDo2ZJDWKSGfxARYo2sfWlQ+t4JfVlEGjTb3mP4bG1OMSlEJbQ26INHCa
- x5OOTvakSYjtK6woAbjbUZJrwpPjUmbvQh4eZq7hhY3fEKJDueU4Ildr4ZkiNtvCHvnP
- RWWQ+g7Co+F5X7dRB48gfbOIuhDTvx67vgJOI=
+ bh=ZlrEvDzi7eV7lAYKY3vqOlzFKNRo2E9wm/icyLFaGzc=;
+ b=iegCuTuViJwNyEWCutfJMBNS45Nmc2iBsEGB//vuZ1+pS1XvxLORQMSg360lX0M/OG
+ EeVxSqxrtCPJGu4BRatUh68vwMWlXu1mm1B8kprcISJbKe4cZs+BFqR7p8WlRjow/0i4
+ yEYUr1DO4nkG/+oxE2WWiB9JcuSsPqbJsHvAc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697034010; x=1697638810;
+ d=1e100.net; s=20230601; t=1697035439; x=1697640239;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P+9W2yM2I+1Plrmusm6YQgkIl5zcJjdLDtzFvTO3NM4=;
- b=r74iAJEeocWcrmxuej93xlK5aOKYlCaLdMCf8NITrEPya7xBJo4j7LTjNg/vrXC7Un
- /RctxNQlOtTE5CjnqF8hBqe6YxHr0vdDYP80kXgkDE6vI6QB2iUb7re2SJMz6ogaPS+C
- CZgjZkRkWhwSuItsAdloGcbF6rzNxO7Kh2oPtlIDAt4QKXldBCz5kRLAeS8FnhmIYZk/
- wxe3sKeKVW6aaMOw8qg4i1ECbKegKtqtnx+8u8qMXoRB0cccWiTQgWwQkTwPY0wNvdpv
- LMOtsd+KmD5ak5P8LrulW+K+xpksr/mtHLqftQXY41ynrTM6kkI50ai5CjQ2sMZlxVPw
- MRfg==
-X-Gm-Message-State: AOJu0Yz/UziI8Aisk5lFVChJGfmKwoUuoXcihtLwc0ZKluNDgGvMehKJ
- sz1nRp2Upr/Hs96Ea4uwaon1wA==
-X-Google-Smtp-Source: AGHT+IE3eDshXCUoZfzplCBLStSdflwpOHN5v3kr2j4Ss8E/omofR+DhxZaI0dOUl11uiIs+rn9xdQ==
-X-Received: by 2002:a81:8647:0:b0:595:89b0:6b56 with SMTP id
- w68-20020a818647000000b0059589b06b56mr23765054ywf.28.1697034010554; 
- Wed, 11 Oct 2023 07:20:10 -0700 (PDT)
+ bh=ZlrEvDzi7eV7lAYKY3vqOlzFKNRo2E9wm/icyLFaGzc=;
+ b=MFMFMuZJZO1X8qA6zDQNGngeuoA9XIFhJe+IKcBztFoK3oD8mCJX5/FsSMecr3pbJ1
+ Tngb0XEqHkRo5O1SjkeaihtrxeQL1Lkjje7XEttWlPlw3rslM4rEGejIVpevnIAM6WYy
+ 6poZQt66OwvpIRpnaNR8CZ44n6FZxUcVT7uV8HWUGO7+htYhDsUm80Jn5mC6qTbkQ2gn
+ FX1ohd8Fw/4NHRlkG/Ky4NWevOIR0ADZE79xU4PCEkVRm0HbPO+sZYxdZ8OaAh1iRsU6
+ yX2dHEjPxNb34yoYsohC6606tLxkaPPl5MXRzTEminGuofjDQbdsKyKppJu8m5d5jNlW
+ aE/Q==
+X-Gm-Message-State: AOJu0YzZOFiJm3tMOWp4/DkOncbbOFUSzijl5GmJvqBhxThhiOP42GPa
+ 1ObIVcl0VGzUGQCog4ehHGEGUITigR/AkT7eDE08hQ==
+X-Google-Smtp-Source: AGHT+IFbaOSLA/GWCUC7RGso4N8RN1pDnn9XB+nps372pQXuEX7ueFYE7JXg3p/gVkNF3l80x4jVuQ==
+X-Received: by 2002:a25:e096:0:b0:d9a:5476:20d7 with SMTP id
+ x144-20020a25e096000000b00d9a547620d7mr5258055ybg.22.1697035439222; 
+ Wed, 11 Oct 2023 07:43:59 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-a369-3392-aca4-1f00.res6.spectrum.com.
  [2603:6081:7b00:6400:a369:3392:aca4:1f00])
  by smtp.gmail.com with ESMTPSA id
- q62-20020a0dce41000000b0058427045833sm5210552ywd.133.2023.10.11.07.20.09
+ g61-20020a25a4c3000000b00d8168e226e6sm4543314ybi.47.2023.10.11.07.43.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 07:20:10 -0700 (PDT)
-Date: Wed, 11 Oct 2023 10:20:08 -0400
+ Wed, 11 Oct 2023 07:43:58 -0700 (PDT)
+Date: Wed, 11 Oct 2023 10:43:56 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Jim Liu <jim.t90615@gmail.com>
-Cc: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, YSCHU@nuvoton.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 2/5] configs: npcm: support more uart baud rate
-Message-ID: <20231011142008.GD3119521@bill-the-cat>
-References: <20231011084533.2325296-1-JJLIU0@nuvoton.com>
- <20231011084533.2325296-3-JJLIU0@nuvoton.com>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH v4] bootstd: sata: Add bootstd support for ahci sata
+Message-ID: <20231011144356.GA900529@bill-the-cat>
+References: <20230917230649.30357-1-mibodhi@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PkVMXIYay+CB+vT9"
+ protocol="application/pgp-signature"; boundary="2iY+Qg70QMaov608"
 Content-Disposition: inline
-In-Reply-To: <20231011084533.2325296-3-JJLIU0@nuvoton.com>
+In-Reply-To: <20230917230649.30357-1-mibodhi@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,76 +93,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---PkVMXIYay+CB+vT9
+--2iY+Qg70QMaov608
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 11, 2023 at 04:45:30PM +0800, Jim Liu wrote:
-> add uart baud rate table to arbel(npcm8xx) and poleg(npcm7xx)
+On Sun, Sep 17, 2023 at 04:06:48PM -0700, Tony Dinh wrote:
+> Add ahci sata bootdev and corresponding hunting function.
 >=20
-> Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 > ---
->  include/configs/arbel.h | 5 ++++-
->  include/configs/poleg.h | 2 ++
->  2 files changed, 6 insertions(+), 1 deletion(-)
 >=20
-> diff --git a/include/configs/arbel.h b/include/configs/arbel.h
-> index 891257bc93..c45b2ac137 100644
-> --- a/include/configs/arbel.h
-> +++ b/include/configs/arbel.h
-> @@ -7,10 +7,13 @@
->  #define __CONFIG_ARBEL_H
+> Changes in v4:
+> - Revise logic in bootmeth_script() to set devtype to sata for non-scsi
+> SATA device
+> - Rewrite sata_rescan() logic to properly remove all devices before probi=
+ng
+> - Add description to sata_rescan() header
+>=20
+> Changes in v3:
+> - Correct drivers/ata/Makefile to compile sata_bootdev only if
+> ahci sata is enabled.
+>=20
+> Changes in v2:
+> - set devtype to sata in bootmeth_script for non-scsi SATA device.
+>=20
+>  boot/bootmeth_script.c     | 14 +++++++--
+>  drivers/ata/Makefile       |  2 +-
+>  drivers/ata/sata.c         | 32 ++++++++++++++++++++
+>  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
+>  include/sata.h             |  6 ++++
+>  5 files changed, 112 insertions(+), 4 deletions(-)
+>  create mode 100644 drivers/ata/sata_bootdev.c
+>=20
+> diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
+> index 58c57a2d4b..96e0ec5efa 100644
+> --- a/boot/bootmeth_script.c
+> +++ b/boot/bootmeth_script.c
+> @@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struct =
+bootflow *bflow)
+>  	ulong addr;
+>  	int ret;
 > =20
->  #define CFG_SYS_SDRAM_BASE		0x0
-> -#define CFG_SYS_BOOTMAPSZ		(30 << 20)
-> +#define CFG_SYS_BOOTMAPSZ		(128 << 20)
->  #define CFG_SYS_BOOTM_LEN		(20 << 20)
->  #define CFG_SYS_INIT_RAM_ADDR	CFG_SYS_SDRAM_BASE
->  #define CFG_SYS_INIT_RAM_SIZE	0x8000
-> +#define CONFIG_SYS_BAUDRATE_TABLE	{ 9600, 14400, 19200, 38400, 57600, 11=
-5200, 230400, \
-> +					  380400, 460800, 921600 }
-> +
-> =20
->  /* Default environemnt variables */
->  #define CFG_EXTRA_ENV_SETTINGS   "uimage_flash_addr=3D80400000\0"   \
-> diff --git a/include/configs/poleg.h b/include/configs/poleg.h
-> index 1e96e838be..fd0e9a7362 100644
-> --- a/include/configs/poleg.h
-> +++ b/include/configs/poleg.h
-> @@ -13,6 +13,8 @@
->  #define CFG_SYS_BOOTMAPSZ            (0x30 << 20)
->  #define CFG_SYS_SDRAM_BASE           0x0
-> =20
-> +#define CONFIG_SYS_BAUDRATE_TABLE	{ 57600, 115200, 230400, 460800 }
-> +
->  /* Default environemnt variables */
->  #define CFG_EXTRA_ENV_SETTINGS   "uimage_flash_addr=3D80200000\0"   \
->  		"stdin=3Dserial\0"   \
+> -	if (desc->uclass_id =3D=3D UCLASS_USB)
+> +	if (desc->uclass_id =3D=3D UCLASS_USB) {
+>  		ret =3D env_set("devtype", "usb");
+> -	else
+> -		ret =3D env_set("devtype", blk_get_devtype(bflow->blk));
+> +	} else {
+> +		/* If the uclass is AHCI, but the driver is ATA
+> +		 * (not scsi), set devtype to sata
+> +		 */
+> +		if (!ret && IS_ENABLED(CONFIG_SATA) &&
 
-This is now CFG_SYS_BAUDRATE_TABLE, do you really need something other
-than the default as well?
+This is a warning here as ret is uninitalized at this point.
 
 --=20
 Tom
 
---PkVMXIYay+CB+vT9
+--2iY+Qg70QMaov608
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUmrw4ACgkQFHw5/5Y0
-tyz0ygv/RvawwSHNou3cIp5fJJnavkZ+wm3GWb/uUAyiWiEib9uAMbv8NPbjWg67
-A1KsUsijWcVuXIcfsC1U9AwwAs51HlsSRpNmSfgez7F4vZjKaGxCf8IaEvgEbVi5
-w09d4cEFQRzJqc9jtHalRgm7VfhZXY0xCCAo4yK34Bxk+wiMliu6nBAPoK3rMyDC
-dOHh1m3SMi7qNN4A438WxXfDMKFSrHFjQsRUwnIelw5NUasl66uS2tP5nNhuxpbM
-jK9EV/Wuqag/TD9m4r0wV19RZlJwLF6z3wBxCCRbeXRFzmoqAZzj1XPHA6Js8cru
-Aeq0wde0ULxvpcq9EI+td9WYkN+6UbjwgEWDQbsZmb/Es+huDeKEVySMQHEmNNkr
-macAoAYLg6sx6nFTNbm4rhKJSde4pVns4AVLXqMBvmiu3VtBX1SD3rgnM0JPvRK/
-1fDRpbLp42Ifk82iPdRHj6eaOfPfmYFxxi0YSrs5vwDGJ46LC2eu4RAX0OkgTmUM
-cp1wxcCU
-=7mn0
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUmtKYACgkQFHw5/5Y0
+tyxmJwv/Qsc1PWCJBuhXfMnsUa5+l9ExPphhl/zZPeEgT3il9YbNeWT2mNsxO6ge
+JtpO0223jmyVmPJtd9M+6mcFfXM/09UpJomtc2Y86IQ0v3hHU7H9Se/RP+shhREE
+zfdoAgPsazrFgSxMR/KDAaVMM12r495wd99QUwslGso/uXYHvYt9vKXv8Yzk5kaW
+GzwZvYAPs6X0D1As0CLhJN8mzxLVXlNU+0SVz6lUfEQFs3YwEuY+iA9av/9/q6k6
+JrAm9Fyj/MkJxhGyXR0VFjQmLJsXf9w11Zykz7n1xFy5ffPld7Qeo4XfXCZiX2Uf
+zAfL9+cPcIOvcWSBwGuzekzE9fmkFCEV5GJ+aTcUwntbHNZ6liYTwgAlPeY+DAVu
+bZIkNNGldWIlV/DvKVQ9TMyw1syOfjNLtEgBn3hRUmiwCKmda1swDF8fLgdQZcfB
+IY40fHXODwxrx1ta86iO6AJ42YU2lo6iVOOZDb/WeHiQ8Aqs9992ZzIlfntMXJ8H
+9TH358K/
+=5kev
 -----END PGP SIGNATURE-----
 
---PkVMXIYay+CB+vT9--
+--2iY+Qg70QMaov608--
