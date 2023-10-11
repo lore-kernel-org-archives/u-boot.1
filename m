@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0DEFCDB481
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60872CDB481
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 19:27:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C682686ED6;
-	Wed, 11 Oct 2023 21:07:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0575386EDE;
+	Wed, 11 Oct 2023 21:07:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jAcWZxsl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eV4x5EUk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 023C886E1F; Wed, 11 Oct 2023 20:56:12 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 9141086D12; Wed, 11 Oct 2023 20:38:49 +0200 (CEST)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09F0D86E47
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:52:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84D9C86D5E
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:37:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-523100882f2so327286a12.2
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:52:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-d8a000f6a51so130072276.3
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 11:37:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697050154; x=1697654954; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b3cLMwcNgOEZk6x4aU9dWFbpHB6ufLp/CBGLiaFArtk=;
- b=jAcWZxslhIjTdTLBX2iipWiYXQf1DhqgeaahGxLQNqJfbJWvPP8mVMllJcysbfrClm
- TxoWaKpMelDHTJlUz0BC+YMk+Eg2YeCDXlpRkQUtsu8Rk8OltCencWWVAbLRxZ8N1hz/
- LtonJDhxpxQl7L+SHqzCkRl/5HrVqEe4wazy3uaYk903h/xSFXdjmXaUiGbFNP6qsJTQ
- rOT6RL71ActfY2H6ZwPz4sEhS24nrvslVBQke4iNDl+ru10X+jG7elrAqcY/1QTMenb/
- 5yADh64kRSyO2dCTxWvtel6T9dlv//l5N6oWwj82OPUDl/GgOX/OY4meqQpCrK4a6m72
- E61w==
+ d=konsulko.com; s=google; t=1697049427; x=1697654227; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=RS1Wu9PThAqkQj/tiCZxL48p6Svg8tJHLa4pA2DX8vg=;
+ b=eV4x5EUkBUDetdgQslQ1QT/0zrYf0y+tzuWg/kL4bc23Xt0N9+oG6W9TFNtcD99zLs
+ wtBQux58fBd7ZlB8W+1URh2qPml6bTUTkJr9J2zf7UavdP3VOVrgTPrc8qhAbizlG2AV
+ 4jbbIfKeIox41cjV6Lb0cgI6yTx6Vluo7zdD8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697050154; x=1697654954;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=b3cLMwcNgOEZk6x4aU9dWFbpHB6ufLp/CBGLiaFArtk=;
- b=Q78yb6y1UrqBsdF0IE1+anN6AL23xqyzwQFx+oA/+47YYwBRPIRD4tCLeHyd6TQwZ6
- fexf/7tn/gwpihZvywO8nZCsFZDWxz6wo4RehXYhSlpty9HnnbIZz9BBoWJbzSEhUG4x
- SezbXSfVbglwlfF99qSh8gJ+AOFxtg10IKTL7Q3yBj8wm/0fGaQVFXeAGaIK8KLj0z8H
- S360SlvHlLdd0WHDhZuG54KcoEEhicnSim0r+M+s9H5UUsM4xh5LjEK5x3TkFL7STPyY
- Wp7Ndc0pG5R5GALy7y9Sbumr8UVR4zSa9zsfv5PviiNpLLVJvYRrPsYYYOUxTyMbzP4z
- bYgg==
-X-Gm-Message-State: AOJu0YzadzQ/B9xLPmd5VEKAqtjtt/Z7/+3IAhFYNnyQtNZYtllo/E9B
- 3sibo/UTba5iyiLMkXc+4dxTbGT7HRgePl0bgXU=
-X-Google-Smtp-Source: AGHT+IGCKNvp1UCeAXuuvCgWLKgHWI+8JbcwNeUX23fOPvHi38SalYPDcDbK92TgEbWvRI+AKP2x5h4i6qtfEDcCQiU=
-X-Received: by 2002:a05:6402:3985:b0:53d:bc68:633d with SMTP id
- fk5-20020a056402398500b0053dbc68633dmr3288904edb.7.1697050153458; Wed, 11 Oct
- 2023 11:49:13 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697049427; x=1697654227;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=RS1Wu9PThAqkQj/tiCZxL48p6Svg8tJHLa4pA2DX8vg=;
+ b=Ym9uEEGOpr2owVQeiTltelioLIQgeb2Dke7C1YmmQcQqrQKBAKgwNwWEgkSdt9FyEN
+ 4hZ5GMTknve2UFkL6kk7x5DeYKWMfJPpm7drdCu54Iulp7BmI3NSorpu6uG4mXp+uIuk
+ DMeTmNozNs84fRW8RV0I7BOFYlNIEpe+0+y/mFqxre7oMDL+pcVLbJ/XJORL0Ql8Qn4K
+ /98zpGihNN1/UfT1p2bxv5A7Yut8e7xptNgJEnqkPtlGyJ2gK3oKqNv0lvsj3gMIcdFT
+ ki08lLNCLwkyv24Xymowb+jQD9vXtSoqKyndxcHi27EA7YsOdknYBSSYmdVwCj7/BqxS
+ Icdw==
+X-Gm-Message-State: AOJu0YxpV5KbEHngH38vn0ss1WVtQ2ozVrsiRtaBqXp8aKsuIHDoXCP0
+ XKkWcefs8jeAzVE8qw1EXJl6mg==
+X-Google-Smtp-Source: AGHT+IEA1gDidbA+3nhLjeKrX+mzg3ro4u3fs4kwKPEyonpFZzfx5uc4V+QhjkzMvN7btPksNHTD5w==
+X-Received: by 2002:a25:b082:0:b0:d9a:39a3:176a with SMTP id
+ f2-20020a25b082000000b00d9a39a3176amr7247610ybj.6.1697049427291; 
+ Wed, 11 Oct 2023 11:37:07 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
+ [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
+ by smtp.gmail.com with ESMTPSA id
+ 85-20020a250d58000000b00d9a54e9b742sm1394834ybn.55.2023.10.11.11.37.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Oct 2023 11:37:06 -0700 (PDT)
+Date: Wed, 11 Oct 2023 14:37:04 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, uboot-imx@nxp.com,
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jan Kiszka <jan.kiszka@siemens.com>
+Subject: Re: [PATCH 4/5] sandbox: rename overlay sources to .dtso
+Message-ID: <20231011183704.GP3119521@bill-the-cat>
+References: <20230925080909.365098-1-rasmus.villemoes@prevas.dk>
+ <20230925080909.365098-5-rasmus.villemoes@prevas.dk>
 MIME-Version: 1.0
-References: <20230917230649.30357-1-mibodhi@gmail.com>
- <20231011144356.GA900529@bill-the-cat>
-In-Reply-To: <20231011144356.GA900529@bill-the-cat>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Wed, 11 Oct 2023 11:49:01 -0700
-Message-ID: <CAJaLiFysP2UPo6BAuuQGSQ15iN1YsWggBk+=j5UYbW2g+=32Eg@mail.gmail.com>
-Subject: Re: [PATCH v4] bootstd: sata: Add bootstd support for ahci sata
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3sH2gjW/GqFQZ7Qi"
+Content-Disposition: inline
+In-Reply-To: <20230925080909.365098-5-rasmus.villemoes@prevas.dk>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,67 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-On Wed, Oct 11, 2023 at 7:43=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Sun, Sep 17, 2023 at 04:06:48PM -0700, Tony Dinh wrote:
-> > Add ahci sata bootdev and corresponding hunting function.
-> >
-> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v4:
-> > - Revise logic in bootmeth_script() to set devtype to sata for non-scsi
-> > SATA device
-> > - Rewrite sata_rescan() logic to properly remove all devices before pro=
-bing
-> > - Add description to sata_rescan() header
-> >
-> > Changes in v3:
-> > - Correct drivers/ata/Makefile to compile sata_bootdev only if
-> > ahci sata is enabled.
-> >
-> > Changes in v2:
-> > - set devtype to sata in bootmeth_script for non-scsi SATA device.
-> >
-> >  boot/bootmeth_script.c     | 14 +++++++--
-> >  drivers/ata/Makefile       |  2 +-
-> >  drivers/ata/sata.c         | 32 ++++++++++++++++++++
-> >  drivers/ata/sata_bootdev.c | 62 ++++++++++++++++++++++++++++++++++++++
-> >  include/sata.h             |  6 ++++
-> >  5 files changed, 112 insertions(+), 4 deletions(-)
-> >  create mode 100644 drivers/ata/sata_bootdev.c
-> >
-> > diff --git a/boot/bootmeth_script.c b/boot/bootmeth_script.c
-> > index 58c57a2d4b..96e0ec5efa 100644
-> > --- a/boot/bootmeth_script.c
-> > +++ b/boot/bootmeth_script.c
-> > @@ -190,10 +190,18 @@ static int script_boot(struct udevice *dev, struc=
-t bootflow *bflow)
-> >       ulong addr;
-> >       int ret;
-> >
-> > -     if (desc->uclass_id =3D=3D UCLASS_USB)
-> > +     if (desc->uclass_id =3D=3D UCLASS_USB) {
-> >               ret =3D env_set("devtype", "usb");
-> > -     else
-> > -             ret =3D env_set("devtype", blk_get_devtype(bflow->blk));
-> > +     } else {
-> > +             /* If the uclass is AHCI, but the driver is ATA
-> > +              * (not scsi), set devtype to sata
-> > +              */
-> > +             if (!ret && IS_ENABLED(CONFIG_SATA) &&
->
-> This is a warning here as ret is uninitalized at this point.
+--3sH2gjW/GqFQZ7Qi
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks! I'll send the v5 patch.
+On Mon, Sep 25, 2023 at 10:09:08AM +0200, Rasmus Villemoes wrote:
 
-All the best ,
-Tony
+> Distinguish more clearly between source files meant for producing .dtb
+> from those meant for producing .dtbo. No functional change, as we
+> currently have rules for producing a foo.dtbo from either foo.dts or
+> foo.dtso.
+>=20
+> Note that in the linux tree, all device tree overlay sources have been
+> renamed to .dtso, and the .dts->.dtbo rule is gone since v6.5 (commit
+> 81d362732bac). So this is also a step towards staying closer to linux
+> with respect to both Kbuild and device tree sources.
+>=20
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
->
-> --
-> Tom
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--3sH2gjW/GqFQZ7Qi
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUm61AACgkQFHw5/5Y0
+tyxXhAwAopzGoHLLhEIXhytR+JSDByJ2IWsAFV0XiMQCuFVm+rB+5eFZdqY6pnrs
+N9fnE9lmlW23eO7icATJXYyCtDtfgvslvXPk0dvUKmtjAbew6NdFVCm7T7mcJYC1
+tZnX8uFfIXNhySw9ZHsjpCaOv4T5SUkQp99S5i0c+luvcklrQYULSembmYRaOmJf
+UkNDuSz4T291OiJlzg6L1OxN5gC0qCaYSAo2yYULzV7MEjYHh5tCvs71rxykS9zZ
+xRFtklZ7w3Ld2pm0wDUAUwPo0KbAEAdXtWzkrVR1IueAuLYbhT5k1J3mQJxKE5pW
+ox4PVaJiATt4A1thmeTe+59QhZOsR0YWp33K4yUe4J62c9YSFwNcshN/joJ8mN+F
+avxZXPN8CXZ4NPhNJyxzkDg/tvvpN/yL8TS9rDYrQSCPgCXL49KyUnBPp9hl01lS
+Z6mlnFPxtcRsVAoIJ/OAxQOMjgB54q5LQQUykqh5a2tXvORQSFpdC1BYtz5+jBAY
+rMxF5Q3x
+=oRoO
+-----END PGP SIGNATURE-----
+
+--3sH2gjW/GqFQZ7Qi--
