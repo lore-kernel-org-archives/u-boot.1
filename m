@@ -4,23 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 866C1CDB468
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 16:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0ACBCDB467
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 16:51:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BD6086CEB;
-	Wed, 11 Oct 2023 18:50:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C57A486DD9;
+	Wed, 11 Oct 2023 18:50:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="nWKgDJ5Z";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="KYV9wint";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CBCBD86CEB; Wed, 11 Oct 2023 18:50:28 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk [46.235.227.172])
+ id D9A3186DCE; Wed, 11 Oct 2023 18:50:57 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk
+ [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56BD286D07
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:50:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8FE186DD9
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:50:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=collabora.com
 Authentication-Results: phobos.denx.de;
@@ -28,22 +29,21 @@ Authentication-Results: phobos.denx.de;
 Received: from [IPv6:2a00:23c8:b70a:ae01:9fa:2310:80c6:3ab0] (unknown
  [IPv6:2a00:23c8:b70a:ae01:9fa:2310:80c6:3ab0])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- (Authenticated sender: obbardc)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id AD3EF66072FC;
- Wed, 11 Oct 2023 17:50:25 +0100 (BST)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits))
+ (No client certificate requested) (Authenticated sender: obbardc)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id 6EF9D660730F;
+ Wed, 11 Oct 2023 17:50:48 +0100 (BST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1697043025;
+ s=mail; t=1697043048;
  bh=B20hh9wvIR6kJOwq90oiXq0ic54ARejaScDQ18/i7uc=;
  h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=nWKgDJ5ZJsYRxYvjBffphVhqWZhxc9ePWqXpxg6ykPINSgE1BRzoWugLKaKneOGEf
- iYwcTUKSX+wpAvHuk9WbQactIOTOBap+eOFKeBs08n0REnwuTshqPlxHAcBd1N087l
- HMSGGKt4LpgMWzM9UX08YdWDZbbkxgy4KzwfPjjunS7t4lf/jDVNCJ/3pbrOyO0/hM
- ULBvLFPeNX9LvnIXMOqbfMrZAB8c/ibzXsHZmpkC2jBfZxHENdtyjMYKDMLl/tSfi3
- qEf00ezVJ0CxPHz+cJST01okEm/slSPQBbzH7gQZnMAXZ7aJMAcA9791qYth83GKht
- ZZc1jpGNri16A==
-Message-ID: <32a7756af1243ddf0caa61156d28d7a98701a4de.camel@collabora.com>
+ b=KYV9wintZ019Th96IinEF5Dk/smA3mlmFsdgp+3H5OFcEYp+4Hksli2uHq4rQHjct
+ c8rt9vnfk33m3cYncFdG28IP/tSGgrvq5HQdCt/36y3FNXIXE9pLPOBJAVKCEMNhQ4
+ CfEw6oo8QTFs5hg/miPf8/wiD3bITpAVRz1r9UjpzL1UixoVgsuJoBuRzN44bALCId
+ hu2GaILzUalTYDu0LWsf5hhDiUmnY+6Bw9I9Oij5tUt2gCGk67vzZSNdY8k3FVNU3y
+ CJ6tdKlpqHJvLw7cLm4b/vhEAP8rNAtdz5kmee2nShtpRQmATHP4mvUazBd7SdI7UN
+ P/lhDx8Dbx1PQ==
+Message-ID: <800a54dbc622edcabf80c6c3303a3881cb79e561.camel@collabora.com>
 Subject: Re: [PATCH 1/4] rockchip: rk3588: Sync device tree from linux
  maintainer tree
 From: Christopher Obbard <chris.obbard@collabora.com>
@@ -52,7 +52,7 @@ To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
  <philipp.tomsich@vrull.eu>, Eugen Hristev <eugen.hristev@collabora.com>,
  Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de
-Date: Wed, 11 Oct 2023 17:50:23 +0100
+Date: Wed, 11 Oct 2023 17:50:46 +0100
 In-Reply-To: <20231010222344.3436526-2-jonas@kwiboo.se>
 References: <20231010222344.3436526-1-jonas@kwiboo.se>
  <20231010222344.3436526-2-jonas@kwiboo.se>
