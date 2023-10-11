@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FF8CD6E56
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 10:10:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F013CD6E56
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 10:11:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A03E86DFD;
-	Wed, 11 Oct 2023 12:08:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1385686D0B;
+	Wed, 11 Oct 2023 12:08:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="paBxZM4t";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HkxfjMHM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB99786DE7; Wed, 11 Oct 2023 12:08:04 +0200 (CEST)
+ id AD6F886591; Wed, 11 Oct 2023 12:08:05 +0200 (CEST)
 Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
  [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 864DA86D20
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 12:07:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9384286591
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 12:07:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
 Received: by mail-oi1-x236.google.com with SMTP id
- 5614622812f47-3a707bc2397so977839b6e.0
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 03:07:43 -0700 (PDT)
+ 5614622812f47-3af59a017a5so1172021b6e.1
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 03:07:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697018862; x=1697623662; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1697018853; x=1697623653; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=elX7B9lHvziN8IPqrJUEHKLzx5CF1FboA+ePTZUlIak=;
- b=paBxZM4t5Mz8x7ApK+ULS/0+KPuI5U9E8D8Sx1MhYVJbDY4yhUiFmgIXu4UTyCDPyw
- mOZdi4hlVJMWfun+bZzVH/JP6t/itNJfsm7GN/vTmbI9TwDYvGCyfIt0HJAY62Osi5hU
- EQHpCv48kVKuX1y6CeIsKlvrwMpHbF8eIhXuz3QnboVUNU1CAlCndrAZRYqEx1cw6x6O
- h6FLNgW5zAeMmPqd6orqd6I1tnfBPEeOn/WGqg8+HUMul4vOuPB7oY7SJHaztM/zJBMJ
- ZrVuZyHonnVsz4J9WQxvVD7yAfWXET+pWPmdlFLpcJJyzzDr1AO0qYXLh3nq29Zfy+Ym
- 7bLA==
+ bh=pCRhEiNZjXNhx0qdWTCaYuD1CA83EGtZrc+sEunGweE=;
+ b=HkxfjMHMDdBLhBlta1fFmf4E0D8NjMvCPKBTVzzkXiFDkUB/DPW6C9mhHTQdtJIhYe
+ B2IM4vWB2ND37yk+o++Ie5MR+qjouViPx4Hj4UKEaI0bzgGACw9pCxHv9Xm2T3H1eKkp
+ h4r0tN+x1uA7FhlcAdsw502Ce1MXVBG5zulWvTI37GdUoQRiNl5pqTHE5/fvga+uI4Ar
+ mrEtJ/4I5AyCtZi016rIKHiYyB6c6S1EKtoOd5lub+GIBc2E3WsJdM1pmWnY+OBN/WcD
+ aedzt7JC/NR1mXuAAtph12c8Bp5+wSuytSKwwANZRnN6Eu6Gu0cPmmhR4Va9UHWufecT
+ lJhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697018862; x=1697623662;
+ d=1e100.net; s=20230601; t=1697018853; x=1697623653;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=elX7B9lHvziN8IPqrJUEHKLzx5CF1FboA+ePTZUlIak=;
- b=AcNx4HOUA5POpULoxrqgmlf37Q6wSMXqoWsPO956UjqAp9f331fDtIjI61GXBIQuah
- rY41D9ntNJk96YbhQjE//lW10N1GrvIRhPbqwJE2u6UfJQwpc+0LqxdFJNnlghmj5TG4
- TpRBb4YQVYWKnQANjT48Yp14qslmHdxpqCxK2HztiCvjMQGyfzJ1g0BUIZzpRTG0C87/
- PTodK+bOzi9XOf0odegLiUnCZU/rekziaeuvRlCNq1ZBOsFSEF9+3LnvLCxlHjRpmx9Q
- vYc/adPbQWcFFFZwCBmVwqNptKC2eA4qzt4uX5lEilrKTpcR6El3SRyb3ONT6COtOOXm
- hz7w==
-X-Gm-Message-State: AOJu0YyyGfdNAvWHtJ4AlNfri94qot6X+v37VZmLVlRRm7CSvaEzP08L
- piX1nmEUpfomuORD8r7W/2HLDw==
-X-Google-Smtp-Source: AGHT+IE30Xryskzlh1w2NPh3IKNR8pomgGoBkNsgx8wAj+GuC1Ja2K5zGL0d0F0y2R0Yz8/WGMbSVg==
-X-Received: by 2002:a05:6359:b9a:b0:147:eb87:3665 with SMTP id
- gf26-20020a0563590b9a00b00147eb873665mr16337393rwb.3.1697018861985; 
- Wed, 11 Oct 2023 03:07:41 -0700 (PDT)
+ bh=pCRhEiNZjXNhx0qdWTCaYuD1CA83EGtZrc+sEunGweE=;
+ b=cY4j+hfjQvgY82/bZXXbN/i9SKdDUFP4wbzSjZTZp9rUugqbyWBAMEYHeDH24GgMqk
+ l+MFtQg2T0MMg61H/cFUpw6+0OrLDrBIUoKsjFGnVStg2RXrjMpM45BuTGtF8/Ct0BNg
+ 5iITBs/CVai/RLj3BiPij9szg/QXSGr5cZs1nQf/kPYlW1lvrpwh8wwxH7tUw8zBDCx8
+ 0k1cJ79My5P/UPwYEL29KiLFJVbc7lGxhHZqP3i5TpEKEhuEGeYmBQt3mHZdfiWfKCsB
+ ATrP6i3OYqJrKGAiAQB2nFz/XgFPV8SNd5BiR4rSalokmS6XwmGeKvSLqw7ThbkMLvbp
+ BZVw==
+X-Gm-Message-State: AOJu0YxnsGBB0HjbQoy1QjcRAggQlkEA7sFMRJG5OjhGt3DhgSgq7kIG
+ NtnQHUAWZa7OKqSpZjNhMRAm3g==
+X-Google-Smtp-Source: AGHT+IGwhs5qZu24b/P0zHAP0n471Ob6Lr4BXTj+/+c99K/HDwbjxUN971VNYE362yfE4tWA0yP/ZQ==
+X-Received: by 2002:a05:6358:e908:b0:147:47f2:2d54 with SMTP id
+ gk8-20020a056358e90800b0014747f22d54mr16670058rwb.0.1697018853124; 
+ Wed, 11 Oct 2023 03:07:33 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:5c6c:b11a:476c:8ebb])
  by smtp.gmail.com with ESMTPSA id
- e4-20020a62ee04000000b006889664aa6csm9663358pfi.5.2023.10.11.03.07.40
+ e4-20020a62ee04000000b006889664aa6csm9663358pfi.5.2023.10.11.03.07.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 03:07:41 -0700 (PDT)
+ Wed, 11 Oct 2023 03:07:32 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH v6 08/14] firmware: scmi: add a version check against base
- protocol
-Date: Wed, 11 Oct 2023 19:07:01 +0900
-Message-Id: <20231011100707.1007417-9-takahiro.akashi@linaro.org>
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Etienne Carriere <etienne.carriere@foss.st.com>
+Subject: [PATCH v6 04/14] firmware: scmi: move scmi_bind_protocols() backward
+Date: Wed, 11 Oct 2023 19:06:57 +0900
+Message-Id: <20231011100707.1007417-5-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231011100707.1007417-1-takahiro.akashi@linaro.org>
 References: <20231011100707.1007417-1-takahiro.akashi@linaro.org>
@@ -94,47 +94,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In SCMI base protocol version 2 (0x20000), new interfaces,
-BASE_SET_DEVICE_PERMISSIONS/BASE_SET_PROTOCOL_PERMISSIONS/
-BASE_RESET_AGENT_CONFIGURATION, were added. Moreover, the api of
-BASE_DISCOVER_AGENT was changed to support self-agent discovery.
-
-So the driver expects SCMI firmware support version 2 of base protocol.
+Move the location of scmi_bind_protocols() backward for changes
+in later patches.
+There is no change in functionality.
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 ---
-v6
-* new commit
+v4
+* remove scmi_bind_protocols() from the original place. See patch#1
+* s/depeding/depending/
 ---
- drivers/firmware/scmi/base.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/firmware/scmi/scmi_agent-uclass.c | 118 +++++++++++-----------
+ 1 file changed, 59 insertions(+), 59 deletions(-)
 
-diff --git a/drivers/firmware/scmi/base.c b/drivers/firmware/scmi/base.c
-index ee84e261945a..1d41a8a98fc6 100644
---- a/drivers/firmware/scmi/base.c
-+++ b/drivers/firmware/scmi/base.c
-@@ -481,6 +481,7 @@ static int scmi_base_reset_agent_configuration_int(struct udevice *dev,
-  */
- static int scmi_base_probe(struct udevice *dev)
- {
-+	u32 version;
- 	int ret;
- 
- 	ret = devm_scmi_of_get_channel(dev);
-@@ -488,6 +489,13 @@ static int scmi_base_probe(struct udevice *dev)
- 		dev_err(dev, "get_channel failed\n");
- 		return ret;
- 	}
-+	ret = scmi_base_protocol_version_int(dev, &version);
-+	if (ret) {
-+		dev_err(dev, "getting protocol version failed\n");
-+		return ret;
-+	}
-+	if (version < SCMI_BASE_PROTOCOL_VERSION)
-+		return -EINVAL;
- 
- 	return ret;
+diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
+index a28692f39f4d..1fa1e9eef966 100644
+--- a/drivers/firmware/scmi/scmi_agent-uclass.c
++++ b/drivers/firmware/scmi/scmi_agent-uclass.c
+@@ -52,65 +52,6 @@ int scmi_to_linux_errno(s32 scmi_code)
+ 	return -EPROTO;
  }
+ 
+-/*
+- * SCMI agent devices binds devices of various uclasses depeding on
+- * the FDT description. scmi_bind_protocol() is a generic bind sequence
+- * called by the uclass at bind stage, that is uclass post_bind.
+- */
+-static int scmi_bind_protocols(struct udevice *dev)
+-{
+-	int ret = 0;
+-	ofnode node;
+-	const char *name;
+-
+-	dev_for_each_subnode(node, dev) {
+-		struct driver *drv = NULL;
+-		u32 protocol_id;
+-
+-		if (!ofnode_is_enabled(node))
+-			continue;
+-
+-		if (ofnode_read_u32(node, "reg", &protocol_id))
+-			continue;
+-
+-		name = ofnode_get_name(node);
+-		switch (protocol_id) {
+-		case SCMI_PROTOCOL_ID_CLOCK:
+-			if (CONFIG_IS_ENABLED(CLK_SCMI))
+-				drv = DM_DRIVER_GET(scmi_clock);
+-			break;
+-		case SCMI_PROTOCOL_ID_RESET_DOMAIN:
+-			if (IS_ENABLED(CONFIG_RESET_SCMI))
+-				drv = DM_DRIVER_GET(scmi_reset_domain);
+-			break;
+-		case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
+-			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)) {
+-				node = ofnode_find_subnode(node, "regulators");
+-				if (!ofnode_valid(node)) {
+-					dev_err(dev, "no regulators node\n");
+-					return -ENXIO;
+-				}
+-				drv = DM_DRIVER_GET(scmi_voltage_domain);
+-			}
+-			break;
+-		default:
+-			break;
+-		}
+-
+-		if (!drv) {
+-			dev_dbg(dev, "Ignore unsupported SCMI protocol %#x\n",
+-				protocol_id);
+-			continue;
+-		}
+-
+-		ret = device_bind(dev, drv, name, NULL, node, NULL);
+-		if (ret)
+-			break;
+-	}
+-
+-	return ret;
+-}
+-
+ static struct udevice *find_scmi_protocol_device(struct udevice *dev)
+ {
+ 	struct udevice *parent = NULL, *protocol;
+@@ -217,6 +158,65 @@ int devm_scmi_process_msg(struct udevice *dev, struct scmi_msg *msg)
+ 	return scmi_process_msg(protocol->parent, priv->channel, msg);
+ }
+ 
++/*
++ * SCMI agent devices binds devices of various uclasses depending on
++ * the FDT description. scmi_bind_protocol() is a generic bind sequence
++ * called by the uclass at bind stage, that is uclass post_bind.
++ */
++static int scmi_bind_protocols(struct udevice *dev)
++{
++	int ret = 0;
++	ofnode node;
++	const char *name;
++
++	dev_for_each_subnode(node, dev) {
++		struct driver *drv = NULL;
++		u32 protocol_id;
++
++		if (!ofnode_is_enabled(node))
++			continue;
++
++		if (ofnode_read_u32(node, "reg", &protocol_id))
++			continue;
++
++		name = ofnode_get_name(node);
++		switch (protocol_id) {
++		case SCMI_PROTOCOL_ID_CLOCK:
++			if (CONFIG_IS_ENABLED(CLK_SCMI))
++				drv = DM_DRIVER_GET(scmi_clock);
++			break;
++		case SCMI_PROTOCOL_ID_RESET_DOMAIN:
++			if (IS_ENABLED(CONFIG_RESET_SCMI))
++				drv = DM_DRIVER_GET(scmi_reset_domain);
++			break;
++		case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
++			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)) {
++				node = ofnode_find_subnode(node, "regulators");
++				if (!ofnode_valid(node)) {
++					dev_err(dev, "no regulators node\n");
++					return -ENXIO;
++				}
++				drv = DM_DRIVER_GET(scmi_voltage_domain);
++			}
++			break;
++		default:
++			break;
++		}
++
++		if (!drv) {
++			dev_dbg(dev, "Ignore unsupported SCMI protocol %#x\n",
++				protocol_id);
++			continue;
++		}
++
++		ret = device_bind(dev, drv, name, NULL, node, NULL);
++		if (ret)
++			break;
++	}
++
++	return ret;
++}
++
+ UCLASS_DRIVER(scmi_agent) = {
+ 	.id		= UCLASS_SCMI_AGENT,
+ 	.name		= "scmi_agent",
 -- 
 2.34.1
 
