@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35772CD6E54
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 10:12:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6473ECD6E54
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 10:12:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7540A86E22;
+	by phobos.denx.de (Postfix) with ESMTP id E9CDC86E2F;
 	Wed, 11 Oct 2023 12:08:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Zx8WNuEa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wKx/vE2F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 162C586D77; Wed, 11 Oct 2023 12:08:10 +0200 (CEST)
-Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
- [IPv6:2607:f8b0:4864:20::231])
+ id 2A6C186CFF; Wed, 11 Oct 2023 12:08:15 +0200 (CEST)
+Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
+ [IPv6:2607:f8b0:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10E9F86D1D
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 12:07:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 440D286D20
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 12:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-oi1-x231.google.com with SMTP id
- 5614622812f47-3ae0df6494bso972420b6e.1
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 03:07:55 -0700 (PDT)
+Received: by mail-il1-x12f.google.com with SMTP id
+ e9e14a558f8ab-351610727adso3352085ab.0
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 03:08:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697018873; x=1697623673; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1697018875; x=1697623675; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/nj98gsJlcxoLzaXSFIprsnNSBVTV3jRN9vqJRZp6D0=;
- b=Zx8WNuEaHST98fTpwMmHaKZ6CJEmGbT/YSk6ovqEdoIKrztJWXbLvi7gVxzEYNfK5U
- lzTtS8Wuf4FTr5zaPPOOf94qU3hQCuBhjX+trfDJ5UWbcFZLg+c+EOEPRVG9jkADz602
- ps1E3FplGetCaE3cWt7omQgFIIqhzFqmLs3p8iEJFMA9AqiggXeLNouQByo0IXk1yzNc
- MpesMkRodOdHeKjX98E7JriYu4Rx/ohkiXkJHmv6N0C7UyN7ogpj4yqEo//eeauo94dy
- OGcWV2TA/PTEVxTJo50x3L1Y7f0FibIiUjSb59sswZsXvS4+pn68Blw/YyRVLs58Lnnl
- +Ekw==
+ bh=PumAqkPF3JV1thj0tBRnw6UxrxXN5hm1ojA9b+rWeFA=;
+ b=wKx/vE2Fu+ZZCzKngJBjy1MlGmNMnprJMpKekZnx22wd5pBU6kZr6hH0lmxVbo0NJV
+ ny9+9AV/QpIxgFCHpmYgep+T7NPsN127ZJTN3ozqpBVNI3Zp/q9ZEbxj8sjw9tJvQG4M
+ xdRRWtqfypJ2vT1hXU6mg6b8hfq+srd0eueY+KHgvcJG1Np0R+gISgx93MZqc6IXhGh/
+ wp8x3JGwFGd3o7Pb9Bvm8/NCzal2Wqip/+j+K8+1xtRb7dpAzq0qydjPKQey1OGlUoaT
+ PrDQiWf7VViI7Jg1gNebNtUbnVJkC3xaeTRd5gr2ZkjnnycKPbmQy+Y9lPsKQbHN9zuQ
+ bf9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697018873; x=1697623673;
+ d=1e100.net; s=20230601; t=1697018875; x=1697623675;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/nj98gsJlcxoLzaXSFIprsnNSBVTV3jRN9vqJRZp6D0=;
- b=gYfBHraFth9D1IXxyjF0l61y6pLu3crVR/Y9YIpX8rnjzULYRh2PZV7SoXVwP64iaI
- dqdFPkuz8y3gNWdyHvlQaDZcW7tj1I5rSdNVvTf3gdd8jdhRUqyFhWW8mMYkaQQVTcp8
- xABs1bSZSVG2UPCeThsHYR/Crv+8ub1L+opOBCoaBgMHUwXXhrkORPHlZcJxBWfXHfQw
- f8RGrRWsn8qlxNk93FprEVzhsLeNTXRSbv14UwyOmJVCD5q9aHMSZqJnG0rhcQ3SqKPt
- ZdVphGdQhCnkOB/DRVuIaCa+yjAltD4NhZgRquaLZZt7fJo6SYAbM04NOrRMR59OWZv8
- 5uPg==
-X-Gm-Message-State: AOJu0YwDu4Y4roSg2igjS70h3++Klz0ChAXmq/kUqp1XdEy7GvSUFAND
- 5LncperAsGt57YUnTWcBjil+GQ==
-X-Google-Smtp-Source: AGHT+IGl1zWlO0ap+OZXwdWdBVfUNyQNbA2CR0vFe7gDDGyQCH8/arFS9QmfKzToitYS2AYyrF3xIA==
-X-Received: by 2002:a05:6358:2d94:b0:163:e0a:68a4 with SMTP id
- m20-20020a0563582d9400b001630e0a68a4mr13694548rwn.2.1697018873277; 
- Wed, 11 Oct 2023 03:07:53 -0700 (PDT)
+ bh=PumAqkPF3JV1thj0tBRnw6UxrxXN5hm1ojA9b+rWeFA=;
+ b=VLlBsZ0fV+nHZeSFaVEmQzwXrPV+aI/dazxPJmIuS3Me+ro3m9Ggkpe1Voq5C81TH1
+ bdjldPZdqkZGe738imYzE7CW11dI/dpn2s+TlqmSp3z3YWkXcGuz0VD3zvBwxE4yVePn
+ OBN0y922hQxCV5x7W+kdd36jpBGw0/21bt37iRi4SFzM+xuxcbxuRE1AZcGjG2mDXJv6
+ d4kUIE2xfehgZ3jzFvQjFJiG6P1glOYdzWn4akv+oZ6vHeeQlsUUp0eIN1m/dgHlh9XD
+ t8ZteW/k9bgkWRy8rdF/O57e6gNTvKH8zBaBJdBrux0XqrfsPmgDyZGFAnxnJf/mxGpL
+ ipsQ==
+X-Gm-Message-State: AOJu0Yw9/6XXhc9l0p5b8Zi4zIeY+e5olU3h0FXFGTgMY8qlyQBoNbYY
+ zAcTQ1hQvlnOlz7OKXx/BfyWNA==
+X-Google-Smtp-Source: AGHT+IFuffX8s/AMEUmt3cQR//iMXSop92PFnrMSdeVBSdYImM/YU3/XA2ttV/oJ/x46rCD//ESmgQ==
+X-Received: by 2002:a05:6602:3a05:b0:792:6be4:3dcb with SMTP id
+ by5-20020a0566023a0500b007926be43dcbmr21372237iob.2.1697018875523; 
+ Wed, 11 Oct 2023 03:07:55 -0700 (PDT)
 Received: from octopus.. ([2400:4050:c3e1:100:5c6c:b11a:476c:8ebb])
  by smtp.gmail.com with ESMTPSA id
- e4-20020a62ee04000000b006889664aa6csm9663358pfi.5.2023.10.11.03.07.51
+ e4-20020a62ee04000000b006889664aa6csm9663358pfi.5.2023.10.11.03.07.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 03:07:52 -0700 (PDT)
+ Wed, 11 Oct 2023 03:07:55 -0700 (PDT)
 From: AKASHI Takahiro <takahiro.akashi@linaro.org>
 To: trini@konsulko.com,
 	sjg@chromium.org
 Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
  AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Etienne Carriere <etienne.carriere@foss.st.com>
-Subject: [PATCH v6 13/14] test: dm: add SCMI base protocol test
-Date: Wed, 11 Oct 2023 19:07:06 +0900
-Message-Id: <20231011100707.1007417-14-takahiro.akashi@linaro.org>
+Subject: [PATCH v6 14/14] firmware: scmi: add a check against availability of
+ protocols
+Date: Wed, 11 Oct 2023 19:07:07 +0900
+Message-Id: <20231011100707.1007417-15-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231011100707.1007417-1-takahiro.akashi@linaro.org>
 References: <20231011100707.1007417-1-takahiro.akashi@linaro.org>
@@ -94,154 +95,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added is a new unit test for SCMI base protocol, which will exercise all
-the commands provided by the protocol, except SCMI_BASE_NOTIFY_ERRORS.
-  $ ut dm scmi_base
-It is assumed that test.dtb is used as sandbox's device tree.
+Now that we have Base protocol support, we will be able to check if a given
+protocol is really supported by the SCMI server (firmware).
 
 Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 Reviewed-by: Etienne Carriere <etienne.carriere@foss.st.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-v4
-* fix a typo fix in v3
-  s/scmi_protocol_message_attrs/scmi_base_protocol_message_attrs/
 v3
-* typo: s/scmi_base_protocol_attrs/scmi_base_protocol_message_attrs/
-* modify the code for dynamically allocated vendor/agent names
-v2
-* use helper functions, removing direct uses of ops
+* new; import this patch from my followup patch set
 ---
- test/dm/scmi.c | 109 +++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 109 insertions(+)
+ drivers/firmware/scmi/scmi_agent-uclass.c | 41 +++++++++++++++++++++--
+ 1 file changed, 38 insertions(+), 3 deletions(-)
 
-diff --git a/test/dm/scmi.c b/test/dm/scmi.c
-index a7d05f66b753..d4ff60e00069 100644
---- a/test/dm/scmi.c
-+++ b/test/dm/scmi.c
-@@ -17,6 +17,7 @@
- #include <dm.h>
- #include <reset.h>
- #include <scmi_agent.h>
-+#include <scmi_agent-uclass.h>
- #include <scmi_protocols.h>
- #include <asm/scmi_test.h>
- #include <dm/device-internal.h>
-@@ -97,6 +98,114 @@ static int dm_test_scmi_sandbox_agent(struct unit_test_state *uts)
- }
- DM_TEST(dm_test_scmi_sandbox_agent, UT_TESTF_SCAN_FDT);
+diff --git a/drivers/firmware/scmi/scmi_agent-uclass.c b/drivers/firmware/scmi/scmi_agent-uclass.c
+index b1a9c36310c1..6f585b96f740 100644
+--- a/drivers/firmware/scmi/scmi_agent-uclass.c
++++ b/drivers/firmware/scmi/scmi_agent-uclass.c
+@@ -38,6 +38,38 @@ static const struct error_code scmi_linux_errmap[] = {
+ 	{ .scmi = SCMI_PROTOCOL_ERROR, .errno = -EPROTO, },
+ };
  
-+static int dm_test_scmi_base(struct unit_test_state *uts)
++/**
++ * scmi_protocol_is_supported - check availability of protocol
++ * @dev:	SCMI agent device
++ * @proto_id:	Identifier of protocol
++ *
++ * check if the protocol, @proto_id, is provided by the SCMI agent,
++ * @dev.
++ *
++ * Return:	0 on success, error code otherwise
++ */
++static bool scmi_protocol_is_supported(struct udevice *dev,
++				       enum scmi_std_protocol proto_id)
 +{
-+	struct udevice *agent_dev, *base;
 +	struct scmi_agent_priv *priv;
-+	u32 version, num_agents, num_protocols, impl_version;
-+	u32 attributes, agent_id;
-+	u8 *vendor, *agent_name, *protocols;
-+	int ret;
++	int i;
 +
-+	/* preparation */
-+	ut_assertok(uclass_get_device_by_name(UCLASS_SCMI_AGENT, "scmi",
-+					      &agent_dev));
-+	ut_assertnonnull(agent_dev);
-+	ut_assertnonnull(priv = dev_get_uclass_plat(agent_dev));
-+	ut_assertnonnull(base = scmi_get_protocol(agent_dev,
-+						  SCMI_PROTOCOL_ID_BASE));
++	if (proto_id == SCMI_PROTOCOL_ID_BASE)
++		return true;
 +
-+	/* version */
-+	ret = scmi_base_protocol_version(base, &version);
-+	ut_assertok(ret);
-+	ut_asserteq(priv->version, version);
++	priv = dev_get_uclass_plat(dev);
++	if (!priv) {
++		dev_err(dev, "No priv data found\n");
++		return false;
++	}
 +
-+	/* protocol attributes */
-+	ret = scmi_base_protocol_attrs(base, &num_agents, &num_protocols);
-+	ut_assertok(ret);
-+	ut_asserteq(priv->num_agents, num_agents);
-+	ut_asserteq(priv->num_protocols, num_protocols);
++	for (i = 0; i < priv->num_protocols; i++)
++		if (priv->protocols[i] == proto_id)
++			return true;
 +
-+	/* discover vendor */
-+	ret = scmi_base_discover_vendor(base, &vendor);
-+	ut_assertok(ret);
-+	ut_asserteq_str(priv->vendor, vendor);
-+	free(vendor);
-+
-+	/* message attributes */
-+	ret = scmi_base_protocol_message_attrs(base,
-+					       SCMI_BASE_DISCOVER_SUB_VENDOR,
-+					       &attributes);
-+	ut_assertok(ret);
-+	ut_assertok(attributes);
-+
-+	/* discover sub vendor */
-+	ret = scmi_base_discover_sub_vendor(base, &vendor);
-+	ut_assertok(ret);
-+	ut_asserteq_str(priv->sub_vendor, vendor);
-+	free(vendor);
-+
-+	/* impl version */
-+	ret = scmi_base_discover_impl_version(base, &impl_version);
-+	ut_assertok(ret);
-+	ut_asserteq(priv->impl_version, impl_version);
-+
-+	/* discover agent (my self) */
-+	ret = scmi_base_discover_agent(base, 0xffffffff, &agent_id,
-+				       &agent_name);
-+	ut_assertok(ret);
-+	ut_asserteq(priv->agent_id, agent_id);
-+	ut_asserteq_str(priv->agent_name, agent_name);
-+	free(agent_name);
-+
-+	/* discover protocols */
-+	ret = scmi_base_discover_list_protocols(base, &protocols);
-+	ut_asserteq(num_protocols, ret);
-+	ut_asserteq_mem(priv->protocols, protocols, sizeof(u8) * num_protocols);
-+	free(protocols);
-+
-+	/*
-+	 * NOTE: Sandbox SCMI driver handles device-0 only. It supports setting
-+	 * access and protocol permissions, but doesn't allow unsetting them nor
-+	 * resetting the configurations.
-+	 */
-+	/* set device permissions */
-+	ret = scmi_base_set_device_permissions(base, agent_id, 0,
-+					       SCMI_BASE_SET_DEVICE_PERMISSIONS_ACCESS);
-+	ut_assertok(ret); /* SCMI_SUCCESS */
-+	ret = scmi_base_set_device_permissions(base, agent_id, 1,
-+					       SCMI_BASE_SET_DEVICE_PERMISSIONS_ACCESS);
-+	ut_asserteq(-ENOENT, ret); /* SCMI_NOT_FOUND */
-+	ret = scmi_base_set_device_permissions(base, agent_id, 0, 0);
-+	ut_asserteq(-EACCES, ret); /* SCMI_DENIED */
-+
-+	/* set protocol permissions */
-+	ret = scmi_base_set_protocol_permissions(base, agent_id, 0,
-+						 SCMI_PROTOCOL_ID_CLOCK,
-+						 SCMI_BASE_SET_PROTOCOL_PERMISSIONS_ACCESS);
-+	ut_assertok(ret); /* SCMI_SUCCESS */
-+	ret = scmi_base_set_protocol_permissions(base, agent_id, 1,
-+						 SCMI_PROTOCOL_ID_CLOCK,
-+						 SCMI_BASE_SET_PROTOCOL_PERMISSIONS_ACCESS);
-+	ut_asserteq(-ENOENT, ret); /* SCMI_NOT_FOUND */
-+	ret = scmi_base_set_protocol_permissions(base, agent_id, 0,
-+						 SCMI_PROTOCOL_ID_CLOCK, 0);
-+	ut_asserteq(-EACCES, ret); /* SCMI_DENIED */
-+
-+	/* reset agent configuration */
-+	ret = scmi_base_reset_agent_configuration(base, agent_id, 0);
-+	ut_asserteq(-EACCES, ret); /* SCMI_DENIED */
-+	ret = scmi_base_reset_agent_configuration(base, agent_id,
-+						  SCMI_BASE_RESET_ALL_ACCESS_PERMISSIONS);
-+	ut_asserteq(-EACCES, ret); /* SCMI_DENIED */
-+	ret = scmi_base_reset_agent_configuration(base, agent_id, 0);
-+	ut_asserteq(-EACCES, ret); /* SCMI_DENIED */
-+
-+	return 0;
++	return false;
 +}
 +
-+DM_TEST(dm_test_scmi_base, UT_TESTF_SCAN_FDT);
-+
- static int dm_test_scmi_clocks(struct unit_test_state *uts)
+ struct udevice *scmi_get_protocol(struct udevice *dev,
+ 				  enum scmi_std_protocol id)
  {
- 	struct sandbox_scmi_agent *agent;
+@@ -374,15 +406,18 @@ static int scmi_bind_protocols(struct udevice *dev)
+ 		name = ofnode_get_name(node);
+ 		switch (protocol_id) {
+ 		case SCMI_PROTOCOL_ID_CLOCK:
+-			if (CONFIG_IS_ENABLED(CLK_SCMI))
++			if (CONFIG_IS_ENABLED(CLK_SCMI) &&
++			    scmi_protocol_is_supported(dev, protocol_id))
+ 				drv = DM_DRIVER_GET(scmi_clock);
+ 			break;
+ 		case SCMI_PROTOCOL_ID_RESET_DOMAIN:
+-			if (IS_ENABLED(CONFIG_RESET_SCMI))
++			if (IS_ENABLED(CONFIG_RESET_SCMI) &&
++			    scmi_protocol_is_supported(dev, protocol_id))
+ 				drv = DM_DRIVER_GET(scmi_reset_domain);
+ 			break;
+ 		case SCMI_PROTOCOL_ID_VOLTAGE_DOMAIN:
+-			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI)) {
++			if (IS_ENABLED(CONFIG_DM_REGULATOR_SCMI) &&
++			    scmi_protocol_is_supported(dev, protocol_id)) {
+ 				node = ofnode_find_subnode(node, "regulators");
+ 				if (!ofnode_valid(node)) {
+ 					dev_err(dev, "no regulators node\n");
 -- 
 2.34.1
 
