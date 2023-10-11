@@ -4,45 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 282A1CD6E64
-	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:16:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A63A6CD6E64
+	for <u-boot@archiver.kernel.org>; Wed, 11 Oct 2023 13:18:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B05585423;
-	Wed, 11 Oct 2023 15:16:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4180186D21;
+	Wed, 11 Oct 2023 15:16:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8F92286C33; Wed, 11 Oct 2023 15:16:28 +0200 (CEST)
-Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.155.67.158])
+ id CFC5485423; Wed, 11 Oct 2023 15:16:28 +0200 (CEST)
+Received: from bg4.exmail.qq.com (bg4.exmail.qq.com [43.154.221.58])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2450585423
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 15:16:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B806986C59
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 15:16:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=tinylab.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=bmeng@tinylab.org
-X-QQ-mid: bizesmtp83t1697030154tjl7m69d
+X-QQ-mid: bizesmtp83t1697030160tzw4efsd
 Received: from ubuntu.. ( [111.196.129.4]) by bizesmtp.qq.com (ESMTP) with 
- id ; Wed, 11 Oct 2023 21:15:52 +0800 (CST)
+ id ; Wed, 11 Oct 2023 21:15:59 +0800 (CST)
 X-QQ-SSF: 01200000000000F0I000000A0000000
-X-QQ-FEAT: 3M0okmaRx3hdYyJne62VqnKyXbjoTtl30zLyxtNutB1OKYm1TkGjLYrY3y8kT
- Cdz/y1TOe61XIUGABj6cFMtc3ekrtGhnHi+Dam5TqIDYnmdhj/+9te4boZmcsyHAWERDHgR
- BjFBGs+BnFoNwYz1rmceW0kKyl4BZGsKGNFCshe3j3DMtcUtmBkxNM68qrlhcV3bnDrKmSu
- qOMFXrszoHZ1nf2H6bm7d2JdLWDBmMTXXqpDXEpi7F7i1ylDKVVPXl4vpozP3ZrK1SL5+ST
- uJdr5JVyvlIJIlkmXXuMBnG7YuZbTNXkk/MvTvqEwQMAVj/xDERrXZBuKeIV9i1c9VOTkqc
- Vwr0v1hk5+hafd1xCSeP/2GzKbzfUIkqiIDr0ZyAVwfxoo4lc4=
+X-QQ-FEAT: uGhnJwy6xZLrnwHZlAOhiGfyhyMzjzXdRzLRu7RN4GvtvpiOc0Hj2HDDTTpSF
+ 1X7LjFdmmPqktwY9wxwTpXywpr0cDW558/ALck8POyihLniG0LtX8z/QV6JdjPNV0vr3bGc
+ eDC7DOiHMhd6qltZ0wWBUJchuJ0xpSKZbR/4x7N/G4PZk87v+OHOhg4fefvifC+3oOwOdHc
+ He/5OcqbNdqvOgFUvKmppP6kb69suQHbVoUaseGNwO4LawCTFVeeqxQpklgR3dizDzvkVQn
+ 5cGYAzY6wdQFsNLKU5vqyonUe2njuK5jIJ6UFoPg/FycDuxfWPAUkAMg26Ukae920eM9rVe
+ 2zR8f4QUBsMgDas6SLz/a+5s2EpLuOL4+rwP54xfKjTPtOxvMI=
 X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 16090740394536989669
+X-BIZMAIL-ID: 14302156895766321997
 From: Bin Meng <bmeng@tinylab.org>
 To: Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>
 Cc: Simon Glass <sjg@chromium.org>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 0/9] ufs: Add a PCI UFS controller support
-Date: Wed, 11 Oct 2023 21:15:43 +0800
-Message-Id: <20231011131552.14665-1-bmeng@tinylab.org>
+Subject: [PATCH v2 2/9] ufs: Add a line feed to the end of some dev_xxx()
+ messages
+Date: Wed, 11 Oct 2023 21:15:45 +0800
+Message-Id: <20231011131552.14665-3-bmeng@tinylab.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231011131552.14665-1-bmeng@tinylab.org>
+References: <20231011131552.14665-1-bmeng@tinylab.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-QQ-SENDSIZE: 520
@@ -63,41 +66,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds a PCI UFS controller support and enables the support on
-QEMU RISC-V for testing.
+Add a line feed to improve readability of some dev_xxx() messages.
 
-Requiring QEMU v8.2+.
+Signed-off-by: Bin Meng <bmeng@tinylab.org>
+---
 
-This series is avaiable at u-boot-x86/ufs for testing.
+(no changes since v1)
 
-Changes in v2:
-- fix a build warning
+ drivers/ufs/ufs.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
-Bin Meng (9):
-  ufs: Correct the UFS terminlogy
-  ufs: Add a line feed to the end of some dev_xxx() messages
-  cmd: kconfig: Make ufs prompt look similar to other commands
-  cmd: ufs: Correct the help text
-  pci_ids: Add Red Hat vendor and device IDs
-  ufs: Allow mmio registers on the PCI bus
-  ufs: Add a PCI based UFS controller driver
-  ufs: Handle UFS 3.1 controllers
-  qemu: riscv: Enable UFS support
-
- board/emulation/qemu-riscv/Kconfig |  2 ++
- cmd/Kconfig                        |  2 +-
- cmd/ufs.c                          |  2 +-
- doc/board/emulation/qemu-riscv.rst |  8 +++++-
- drivers/ufs/Kconfig                | 11 ++++++++
- drivers/ufs/Makefile               |  1 +
- drivers/ufs/ufs-pci.c              | 45 ++++++++++++++++++++++++++++++
- drivers/ufs/ufs-uclass.c           |  2 +-
- drivers/ufs/ufs.c                  | 31 ++++++++++++--------
- drivers/ufs/ufs.h                  |  1 +
- include/pci_ids.h                  |  7 +++++
- 11 files changed, 97 insertions(+), 15 deletions(-)
- create mode 100644 drivers/ufs/ufs-pci.c
-
+diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+index f534d6e29f..96801866d3 100644
+--- a/drivers/ufs/ufs.c
++++ b/drivers/ufs/ufs.c
+@@ -320,7 +320,7 @@ static int ufshcd_disable_tx_lcc(struct ufs_hba *hba, bool peer)
+ 					UIC_ARG_MPHY_TX_GEN_SEL_INDEX(i)),
+ 					0);
+ 		if (err) {
+-			dev_err(hba->dev, "%s: TX LCC Disable failed, peer = %d, lane = %d, err = %d",
++			dev_err(hba->dev, "%s: TX LCC Disable failed, peer = %d, lane = %d, err = %d\n",
+ 				__func__, peer, i, err);
+ 			break;
+ 		}
+@@ -441,7 +441,7 @@ static int ufshcd_make_hba_operational(struct ufs_hba *hba)
+ 		ufshcd_enable_run_stop_reg(hba);
+ 	} else {
+ 		dev_err(hba->dev,
+-			"Host controller not ready to process requests");
++			"Host controller not ready to process requests\n");
+ 		err = -EIO;
+ 		goto out;
+ 	}
+@@ -930,7 +930,7 @@ static int ufshcd_copy_query_response(struct ufs_hba *hba)
+ 			memcpy(hba->dev_cmd.query.descriptor, descp, resp_len);
+ 		} else {
+ 			dev_warn(hba->dev,
+-				 "%s: Response size is bigger than buffer",
++				 "%s: Response size is bigger than buffer\n",
+ 				 __func__);
+ 			return -EINVAL;
+ 		}
+@@ -1179,11 +1179,11 @@ static int ufshcd_read_desc_length(struct ufs_hba *hba, enum desc_idn desc_id,
+ 					    &header_len);
+ 
+ 	if (ret) {
+-		dev_err(hba->dev, "%s: Failed to get descriptor header id %d",
++		dev_err(hba->dev, "%s: Failed to get descriptor header id %d\n",
+ 			__func__, desc_id);
+ 		return ret;
+ 	} else if (desc_id != header[QUERY_DESC_DESC_TYPE_OFFSET]) {
+-		dev_warn(hba->dev, "%s: descriptor header id %d and desc_id %d mismatch",
++		dev_warn(hba->dev, "%s: descriptor header id %d and desc_id %d mismatch\n",
+ 			 __func__, header[QUERY_DESC_DESC_TYPE_OFFSET],
+ 			 desc_id);
+ 		ret = -EINVAL;
+@@ -1302,7 +1302,7 @@ int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
+ 
+ 	/* Sanity checks */
+ 	if (ret || !buff_len) {
+-		dev_err(hba->dev, "%s: Failed to get full descriptor length",
++		dev_err(hba->dev, "%s: Failed to get full descriptor length\n",
+ 			__func__);
+ 		return ret;
+ 	}
+@@ -1323,14 +1323,14 @@ int ufshcd_read_desc_param(struct ufs_hba *hba, enum desc_idn desc_id,
+ 					    &buff_len);
+ 
+ 	if (ret) {
+-		dev_err(hba->dev, "%s: Failed reading descriptor. desc_id %d, desc_index %d, param_offset %d, ret %d",
++		dev_err(hba->dev, "%s: Failed reading descriptor. desc_id %d, desc_index %d, param_offset %d, ret %d\n",
+ 			__func__, desc_id, desc_index, param_offset, ret);
+ 		goto out;
+ 	}
+ 
+ 	/* Sanity check */
+ 	if (desc_buf[QUERY_DESC_DESC_TYPE_OFFSET] != desc_id) {
+-		dev_err(hba->dev, "%s: invalid desc_id %d in descriptor header",
++		dev_err(hba->dev, "%s: invalid desc_id %d in descriptor header\n",
+ 			__func__, desc_buf[QUERY_DESC_DESC_TYPE_OFFSET]);
+ 		ret = -EINVAL;
+ 		goto out;
 -- 
 2.34.1
 
