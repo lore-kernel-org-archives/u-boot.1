@@ -4,109 +4,152 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFE4FCDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 14:45:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53E91CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 14:47:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03B5685DE0;
-	Thu, 12 Oct 2023 16:45:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 15F7385DE0;
+	Thu, 12 Oct 2023 16:46:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V4nXX8Nz";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vvQgsVIB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 314FC86C61; Thu, 12 Oct 2023 16:45:54 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 98DB984003; Thu, 12 Oct 2023 16:46:41 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e88::610])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D83E985DE0
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 16:45:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4102F86DCE
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 16:46:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-406650da82bso10690375e9.3
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 07:45:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697121950; x=1697726750; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=RQmvVMs1lpKB7yKsOR+g1RA9u6SfgTKAAqZIoZf4Wcw=;
- b=V4nXX8NzUUF6/lC8vhCwTV7bT95v2g+D/6Kp7brqb8yXQukvU4LHmMSbde3qg4EXYy
- zxQx5827a4+yrOgE556b9bx8meJ2lrE8A9/JtVL3on50dkuCx5+dv7Rbk+O2DBdrlt2o
- O7//TdtLpmWi09kTrz4Moy/PYV80K7JT72eW+KgVgDzjN334bCwyCxRTVzmfkKU9C1lO
- LcUJszutI3eJ86L7AkSG8vTt8NgdMNJmHeWDWlut4cSwDtThVkADtdlZcOXYM04nVvax
- oYtHU2ZjjSplD3X+o264Umw2+j8FlZ/v84IENeQZYsE6imTl8HIXnToXLnTy55KXBEZv
- +y/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697121950; x=1697726750;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :references:cc:to:content-language:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=RQmvVMs1lpKB7yKsOR+g1RA9u6SfgTKAAqZIoZf4Wcw=;
- b=b9UVSTS8qcH3k1RoG0GPdVn7ELkVCcINsj8j1nsfsSWDbY4GBklcE4JqVJJ/ovzUoc
- 2c9zLiz4ZCUBH1fGFSCWruh2sOvTUAbBBOxkHZ9ifKyeeTR3BXcJrE137CaMbnL5XB/P
- 6TLH4lrtwcE3wkXIvMc0VPeOkxEDv+SaWCW0tNkftMhU6o1DQKojOwtO/nkPrbRvCGrY
- /u3H+tjShhlfvx1zbT4Uhu1PTR90LUmy0fpYdV0iaKFZN35b9ADvWz9G9xPDPm8Jt6GP
- Nh4+Ljly3Ql/Qr4ehH9u8qPvuDEDTje7alDTr8Fi5k4xSfkN3oSN3+5BRXBooK3leZ3/
- 1FMQ==
-X-Gm-Message-State: AOJu0Yz4mexkpq16uQ/lIYjbd5dOprUuWHaKoRx9TPrS0wR/Uq2auCqE
- Qh9zznTEApkNL5hOMKJwfon5yA==
-X-Google-Smtp-Source: AGHT+IFFrAJoMELUKze5PydgjoRb5eegygb5r63fmYXvuvBrYrhOHSdpotJG8YBgWfSuMxQJU5ccLg==
-X-Received: by 2002:a5d:484a:0:b0:320:1d1:71c4 with SMTP id
- n10-20020a5d484a000000b0032001d171c4mr21313209wrs.23.1697121950186; 
- Thu, 12 Oct 2023 07:45:50 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:d423:df8b:7f17:7909?
- ([2a01:e0a:982:cbb0:d423:df8b:7f17:7909])
- by smtp.gmail.com with ESMTPSA id
- bq6-20020a5d5a06000000b0032d895d24desm4223559wrb.65.2023.10.12.07.45.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Oct 2023 07:45:49 -0700 (PDT)
-Message-ID: <c6a96994-71f7-4b27-8d95-42f6003512c3@linaro.org>
-Date: Thu, 12 Oct 2023 16:45:48 +0200
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ea1wfcN0VswAkrVjs0xD+GZ+iDGiBN5/hxPG4Xca2pITpMWfzDJ8ppl3pTdUB/2TGBw+PJ3bmE5mwp4xXUsl1fl6rKyLHF02nRErtO+bZsqhwUhzUbGJzUG2zeJqCs8ByL3j1LlOe+eFkUZLGERy7PlI0ekkRRWlh4HBwSAN2lIh2Kuzf/omESUnFQvpPnCvZ0Ml4KSb4vPPZHwe5Y+Qvv35oOaIcDNGiiAyOCleVXCfgFgEp0O6z3eLx1ztaMGJq1tvvezY40vzJcksjtHKM3cdKE7fsUiJlf+mvfiRIEw4Rdv35628Rlyyas3YmH3hDNlfTIiL2ERQOsmFyovJ2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rlR/16yGc/NIqfMLxJTDVQXrV/Ryc4bOVcJvOH4EFOk=;
+ b=gaJ07ZNaPC7nzxk5vMgXYsTDzJTSavLYVjtBq3X07DtuQBpBS2CNdlL45IacyAaENrTUHvfVE6EyHPlwXINp7tp3AzJCdXJDD5eRmFPFmtT2jeiBzzxxVbiDxnO8m3EMefFEYGaxXcLu7+MJcdHtk0ilqrwesAEr9DS9W66MeTu/RJMPGTTq/j/o5oslE1eiA4t3Mp6HCL7YJpKgfwtnnoNgcGhUMbJvP/XtQgoOYTZXtD0n1EJMH/R417i678GDntn1N5NPTFF12Cqe0JhVLbA6orEBHEfclBV968+TNYaXtlloXnU5gW81mYw4nweJElRzFzo5Ib3h+F/k4m2m7w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rlR/16yGc/NIqfMLxJTDVQXrV/Ryc4bOVcJvOH4EFOk=;
+ b=vvQgsVIBoFc9l2vxGzxkxQvorTL293rEpRkFaXCVLUTc7qxVLdHboR8tlC6pYt3t4Lrz75aTqJMiWwWMBcTuwwIPHsgrVNPF9Ctdquja2LQKaneMC2VeMFFR7zoTLNSkvtDJabiS2kCGbi4xWz3/MtxcE1fdVVR1tXKFuXkUBsE=
+Received: from DM6PR02CA0157.namprd02.prod.outlook.com (2603:10b6:5:332::24)
+ by CY5PR12MB6621.namprd12.prod.outlook.com (2603:10b6:930:43::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.45; Thu, 12 Oct
+ 2023 14:46:27 +0000
+Received: from CY4PEPF0000EE3B.namprd03.prod.outlook.com
+ (2603:10b6:5:332:cafe::99) by DM6PR02CA0157.outlook.office365.com
+ (2603:10b6:5:332::24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.28 via Frontend
+ Transport; Thu, 12 Oct 2023 14:46:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000EE3B.mail.protection.outlook.com (10.167.242.15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6838.22 via Frontend Transport; Thu, 12 Oct 2023 14:46:26 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 12 Oct
+ 2023 09:46:24 -0500
+Message-ID: <2d499c70-85be-42fe-8bb6-6fe066de6a05@amd.com>
+Date: Thu, 12 Oct 2023 16:46:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v3 0/8] Add SM uclass and Meson SM driver
-Content-Language: en-US, fr
-To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com,
- sjg@google.com, takahiro.akashi@linaro.org, ilias.apalodimas@linaro.org,
- post@lespocky.de, marex@denx.de, msuchanek@suse.de, sughosh.ganu@linaro.org,
- jh80.chung@samsung.com, paul.barker@sancloud.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
-References: <20230921081346.22157-1-avromanov@salutedevices.com>
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20230921081346.22157-1-avromanov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH] usb: xhci: Workaround to fix the USB halted endpoint
+ issues
+Content-Language: en-US
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ <u-boot@lists.denx.de>
+CC: <marex@denx.de>, <git@xilinx.com>
+References: <20230912035949.30625-1-venkatesh.abbarapu@amd.com>
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20230912035949.30625-1-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3B:EE_|CY5PR12MB6621:EE_
+X-MS-Office365-Filtering-Correlation-Id: e9b6f9e7-3031-4480-75b6-08dbcb32035b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Uek64T1CNQ9gp2Tj57v5EbXNrP9KdFxFZj/IpvYdIxAT2MLINHQdpYQbJQn4A3SFHaUu7nL0h0Rf+hBK15NLqZ1RT1eV73SW7RWbrCTv19AvEvufmZotu1bmNlPPQwkCMqtSwgl+AQCe0mCaoxd0nVMadXgcNBG4N3jVXThrhN9h9D6JkUAJ4uPMCTMCuYhDrfDMyhd47ZqGRGRHwPN7+Ug9m2XCVgoHumjVBrYK/VInx4vWgImRUrpYTx2O895eMJDSckiMXwNL6yP8zjBdggYx8KoF7rrUIAYlqnsO3mgD8DQDD8mvGENufWe62SUPr70BiWQAXB2SUO1hGO7eOZY+Mpyzy2DOcSQ1qfWbSldGxGcxpSvmRboOq+JjmK/WSgH5yZ6QwxQ366nQRXhST1ghruvgyCOx7CYlGYOBErkxG+45V88gYc0eoXnQ8bP/eJN+VXBeE6vnPssZ/RYWmedwh0iRro69R+YdQVWJT1RhVbMSY8uW9X/OrXz0QAoaq6Z3eir/3sXzyU5iO//0eWAxLq9itiBoEU/J+YzB5hFpJl/sDHSwgdbfg1w6h5MEyAssBeBfiy2Z5tAotJDeZudr7xtZye/zgt7vpCdpV6YBQ7hROOq3/Cbhk36I2Zr0vBT/MSK8vScWCwVP+AeiWSCgFAqU6efonn7365+JYe2Z4/AQK2sGPTt2N7gUTfSeVfx4jYj5isoiDd/J3LMMa7LhYylsGESDxUp5vqf5DjB+1iDn+yfqY0v3Cfwh1rWGO9xcjH/oL5lXafTZgqmGFkSym4JKWX28xVLJJAHsr0I=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(39860400002)(376002)(396003)(346002)(230922051799003)(186009)(1800799009)(82310400011)(451199024)(64100799003)(36840700001)(46966006)(40470700004)(966005)(31696002)(2906002)(40460700003)(478600001)(41300700001)(8676002)(4326008)(8936002)(5660300002)(40480700001)(44832011)(70586007)(54906003)(70206006)(16576012)(110136005)(316002)(36756003)(83380400001)(47076005)(26005)(16526019)(82740400003)(336012)(426003)(31686004)(36860700001)(81166007)(2616005)(86362001)(356005)(53546011)(107886003)(36900700001)(43740500002);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2023 14:46:26.7092 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e9b6f9e7-3031-4480-75b6-08dbcb32035b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE3B.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6621
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,140 +161,204 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On 21/09/2023 10:13, Alexey Romanov wrote:
-> Hello!
-> 
-> At the moment, there is no single general approach to using
-> secure monitor in U-Boot, there is only the smc_call() function,
-> over which everyone builds their own add-ons. This patchset
-> is designed to solve this problem by adding a new uclass -
-> SM_UCLASS. This UCLASS export following generic API:
-> 
-> 1. sm_call() - generic SMC call to the secure-monitor
-> 2. sm_call_read() - retrieve data from secure-monitor
-> 3. sm_call_write() - send data to secure-monitor
-> 
-> In the future, it is necessary to completely get rid of raw
-> smc_call() calls, replacing them with the use of SM_UCLASS
-> based drivers.
-> 
-> V2:
-> 
-> - Add SM UCLASS
-> - Add SM sandbox driver
-> - Add test for sandbox driver
-> - Meson Secure Monitor driver now based on SM_UCLASS
-> - Fix include order in arch/arm/mach-meson/sm.c
-> 
-> Also, during the discussion in V1 of this patchset, it was
-> discussed to create MESON_SM_UCLASS, but I considered such
-> a uclass to be too arch-specific. That's why I suggest
-> SM_UCLASS, which is not so arch-specific: secure monitor can
-> used for whole ARM devices, not only for Amlogic SoC's.
-> 
-> V3:
-> 
-> - Fix typos in commit messages
-> - Use uclass_first_device_err() instead of uclass_get_device_by_name()
-> - Return -ENOSYS instead of -EPROTONOSUPPORT if SM_UCLASS option not
-> implemented
-> 
-> Alexey Romanov (8):
->    drivers: introduce Secure Monitor uclass
->    sandbox: add sandbox sm uclass driver
->    sandbox: dts: add meson secure monitor node
->    sandbox: add tests for UCLASS_SM
->    sandbox: defconfig: enable CONFIG_SM option
->    drivers: introduce Meson Secure Monitor driver
->    arch: meson: sm: set correct order of the includes
->    arch: meson: use secure monitor driver
-> 
->   MAINTAINERS                 |   1 +
->   arch/arm/mach-meson/Kconfig |   1 +
->   arch/arm/mach-meson/sm.c    | 116 +++++++++++----------
->   arch/sandbox/dts/test.dts   |   4 +
->   configs/sandbox_defconfig   |   1 +
->   drivers/Kconfig             |   2 +
->   drivers/Makefile            |   1 +
->   drivers/sm/Kconfig          |   9 ++
->   drivers/sm/Makefile         |   5 +
->   drivers/sm/meson-sm.c       | 198 ++++++++++++++++++++++++++++++++++++
->   drivers/sm/sandbox-sm.c     |  76 ++++++++++++++
->   drivers/sm/sm-uclass.c      |  55 ++++++++++
->   include/dm/uclass-id.h      |   1 +
->   include/meson/sm.h          |  19 ++++
->   include/sandbox-sm.h        |  18 ++++
->   include/sm-uclass.h         |  72 +++++++++++++
->   include/sm.h                |  67 ++++++++++++
->   test/dm/Makefile            |   1 +
->   test/dm/sm.c                |  65 ++++++++++++
->   19 files changed, 656 insertions(+), 56 deletions(-)
->   create mode 100644 drivers/sm/Kconfig
->   create mode 100644 drivers/sm/Makefile
->   create mode 100644 drivers/sm/meson-sm.c
->   create mode 100644 drivers/sm/sandbox-sm.c
->   create mode 100644 drivers/sm/sm-uclass.c
->   create mode 100644 include/meson/sm.h
->   create mode 100644 include/sandbox-sm.h
->   create mode 100644 include/sm-uclass.h
->   create mode 100644 include/sm.h
->   create mode 100644 test/dm/sm.c
-> 
 
-This serie breaks other boards:
-+binman: Error 1 running 'mkimage -d ./mkimage-in-simple-bin.mkimage-u-boot-tpl:./mkimage-in-simple-bin.mkimage-u-boot-spl -n px30 -T rksd ./idbloader.img': Error: SPL image is too large (size 0x3000 than 0x2800)
-+Error: Bad parameters for image type
-+Usage: mkimage [-T type] -l image
-+          -l ==> list image header information
-+          -T ==> parse image file as 'type'
-+          -q ==> quiet
-+       mkimage [-x] -A arch -O os -T type -C comp -a addr -e ep -n name -d data_file[:data_file...] image
-+          -A ==> set architecture to 'arch'
-+          -O ==> set operating system to 'os'
-+          -T ==> set image type to 'type'
-+          -C ==> set compression type 'comp'
-+          -a ==> set load address to 'addr' (hex)
-+          -e ==> set entry point to 'ep' (hex)
-+          -n ==> set image name to 'name'
-+          -R ==> set second image name to 'name'
-+          -d ==> use image data from 'datafile'
-+          -x ==> set XIP (execute in place)
-+          -s ==> create an image with no data
-+          -v ==> verbose
-+       mkimage [-D dtc_options] [-f fit-image.its|-f auto|-f auto-conf|-F] [-b <dtb> [-b <dtb>]] [-E] [-B size] [-i <ramdisk.cpio.gz>] fit-image
-+           <dtb> file is used with -f auto, it may occur multiple times.
-+          -D => set all options for device tree compiler
-+          -f => input filename for FIT source
-+          -i => input filename for ramdisk file
-+          -E => place data outside of the FIT structure
-+          -B => align size in hex for FIT structure and, with -E, for the external data
-+          -b => append the device tree binary to the FIT
-+          -t => update the timestamp in the FIT
-+Signing / verified boot options: [-k keydir] [-K dtb] [ -c <comment>] [-p addr] [-r] [-N engine]
-+          -k => set directory containing private keys
-+          -K => write public keys to this .dtb file
-+          -g => set key name hint
-+          -G => use this signing key (in lieu of -k)
-+          -c => add comment in signature node
-+          -F => re-sign existing FIT image
-+          -p => place external data at a static position
-+          -r => mark keys used as 'required' in dtb
-+          -N => openssl engine to use for signing
-+          -o => algorithm to use for signing
-+       mkimage -V ==> print version information and exit
-+Use '-T list' to see a list of available image types
-+Long options are available; read the man page for details
-+make[1]: *** [Makefile:1124: .binman_stamp] Error 1
-+make: *** [Makefile:177: sub-make] Error 2
+On 9/12/23 05:59, Venkatesh Yadav Abbarapu wrote:
+> The xhci host controller driver trying to queue the URB's and it is
+> getting halted at the endpoint, thereby hitting the BUG_ON's.
+> Mostly these kind of random issues are seen on faulty boards.
+> Removing these BUG_ON's from the U-Boot xhci code, as in Linux kernel
+> xhci code BUG_ON/BUG's are removed entirely.
+> Please also note, that BUG_ON() is not recommended any more in the Linux
+> kernel.
+> Similar issue has been observed on TI AM437x board and they created a patch
+> in Linux kernel as below
+> https://patches.linaro.org/project/linux-usb/patch/1390250711-25840-1-git-send-email-balbi@ti.com/
+> 
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   drivers/usb/host/xhci-mem.c  | 17 -----------------
+>   drivers/usb/host/xhci-ring.c | 31 +++++++------------------------
+>   drivers/usb/host/xhci.c      |  6 ------
+>   include/usb/xhci.h           |  2 +-
+>   4 files changed, 8 insertions(+), 48 deletions(-)
+> 
+> diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
+> index 72b7530626..0efb4bd7ba 100644
+> --- a/drivers/usb/host/xhci-mem.c
+> +++ b/drivers/usb/host/xhci-mem.c
+> @@ -36,8 +36,6 @@
+>    */
+>   void xhci_flush_cache(uintptr_t addr, u32 len)
+>   {
+> -	BUG_ON((void *)addr == NULL || len == 0);
+> -
+>   	flush_dcache_range(addr & ~(CACHELINE_SIZE - 1),
+>   				ALIGN(addr + len, CACHELINE_SIZE));
+>   }
+> @@ -51,8 +49,6 @@ void xhci_flush_cache(uintptr_t addr, u32 len)
+>    */
+>   void xhci_inval_cache(uintptr_t addr, u32 len)
+>   {
+> -	BUG_ON((void *)addr == NULL || len == 0);
+> -
+>   	invalidate_dcache_range(addr & ~(CACHELINE_SIZE - 1),
+>   				ALIGN(addr + len, CACHELINE_SIZE));
+>   }
+> @@ -84,8 +80,6 @@ static void xhci_ring_free(struct xhci_ctrl *ctrl, struct xhci_ring *ring)
+>   	struct xhci_segment *seg;
+>   	struct xhci_segment *first_seg;
+>   
+> -	BUG_ON(!ring);
+> -
+>   	first_seg = ring->first_seg;
+>   	seg = first_seg->next;
+>   	while (seg != first_seg) {
+> @@ -210,7 +204,6 @@ static void *xhci_malloc(unsigned int size)
+>   	size_t cacheline_size = max(XHCI_ALIGNMENT, CACHELINE_SIZE);
+>   
+>   	ptr = memalign(cacheline_size, ALIGN(size, cacheline_size));
+> -	BUG_ON(!ptr);
+>   	memset(ptr, '\0', size);
+>   
+>   	xhci_flush_cache((uintptr_t)ptr, size);
+> @@ -291,7 +284,6 @@ static struct xhci_segment *xhci_segment_alloc(struct xhci_ctrl *ctrl)
+>   	struct xhci_segment *seg;
+>   
+>   	seg = malloc(sizeof(struct xhci_segment));
+> -	BUG_ON(!seg);
+>   
+>   	seg->trbs = xhci_malloc(SEGMENT_SIZE);
+>   	seg->dma = xhci_dma_map(ctrl, seg->trbs, SEGMENT_SIZE);
+> @@ -323,13 +315,11 @@ struct xhci_ring *xhci_ring_alloc(struct xhci_ctrl *ctrl, unsigned int num_segs,
+>   	struct xhci_segment *prev;
+>   
+>   	ring = malloc(sizeof(struct xhci_ring));
+> -	BUG_ON(!ring);
+>   
+>   	if (num_segs == 0)
+>   		return ring;
+>   
+>   	ring->first_seg = xhci_segment_alloc(ctrl);
+> -	BUG_ON(!ring->first_seg);
+>   
+>   	num_segs--;
+>   
+> @@ -338,7 +328,6 @@ struct xhci_ring *xhci_ring_alloc(struct xhci_ctrl *ctrl, unsigned int num_segs,
+>   		struct xhci_segment *next;
+>   
+>   		next = xhci_segment_alloc(ctrl);
+> -		BUG_ON(!next);
+>   
+>   		xhci_link_segments(ctrl, prev, next, link_trbs);
+>   
+> @@ -399,7 +388,6 @@ static int xhci_scratchpad_alloc(struct xhci_ctrl *ctrl)
+>   			break;
+>   		page_size = page_size >> 1;
+>   	}
+> -	BUG_ON(i == 16);
+>   
+>   	ctrl->page_size = 1 << (i + 12);
+>   	buf = memalign(ctrl->page_size, num_sp * ctrl->page_size);
+> @@ -444,9 +432,7 @@ static struct xhci_container_ctx
+>   	struct xhci_container_ctx *ctx;
+>   
+>   	ctx = malloc(sizeof(struct xhci_container_ctx));
+> -	BUG_ON(!ctx);
+>   
+> -	BUG_ON((type != XHCI_CTX_TYPE_DEVICE) && (type != XHCI_CTX_TYPE_INPUT));
+>   	ctx->type = type;
+>   	ctx->size = (MAX_EP_CTX_NUM + 1) *
+>   			CTX_SIZE(xhci_readl(&ctrl->hccr->cr_hccparams));
+> @@ -638,7 +624,6 @@ int xhci_mem_init(struct xhci_ctrl *ctrl, struct xhci_hccr *hccr,
+>   struct xhci_input_control_ctx
+>   		*xhci_get_input_control_ctx(struct xhci_container_ctx *ctx)
+>   {
+> -	BUG_ON(ctx->type != XHCI_CTX_TYPE_INPUT);
+>   	return (struct xhci_input_control_ctx *)ctx->bytes;
+>   }
+>   
+> @@ -760,8 +745,6 @@ void xhci_setup_addressable_virt_dev(struct xhci_ctrl *ctrl,
+>   
+>   	virt_dev = ctrl->devs[slot_id];
+>   
+> -	BUG_ON(!virt_dev);
+> -
+>   	/* Extract the EP0 and Slot Ctrl */
+>   	ep0_ctx = xhci_get_ep_ctx(ctrl, virt_dev->in_ctx, 0);
+>   	slot_ctx = xhci_get_slot_ctx(ctrl, virt_dev->in_ctx);
+> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+> index c8260cbdf9..1bde0b9793 100644
+> --- a/drivers/usb/host/xhci-ring.c
+> +++ b/drivers/usb/host/xhci-ring.c
+> @@ -244,6 +244,7 @@ static int prepare_ring(struct xhci_ctrl *ctrl, struct xhci_ring *ep_ring,
+>   		return -EINVAL;
+>   	case EP_STATE_HALTED:
+>   		puts("WARN halted endpoint, queueing URB anyway.\n");
+> +		return -EPIPE;
+>   	case EP_STATE_STOPPED:
+>   	case EP_STATE_RUNNING:
+>   		debug("EP STATE RUNNING.\n");
+> @@ -287,12 +288,15 @@ static int prepare_ring(struct xhci_ctrl *ctrl, struct xhci_ring *ep_ring,
+>    * @param cmd		Command type to enqueue
+>    * Return: none
+>    */
+> -void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
+> +int xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
+>   			u32 ep_index, trb_type cmd)
+>   {
+>   	u32 fields[4];
+> +	int ret;
+>   
+> -	BUG_ON(prepare_ring(ctrl, ctrl->cmd_ring, EP_STATE_RUNNING));
+> +	ret = prepare_ring(ctrl, ctrl->cmd_ring, EP_STATE_RUNNING);
+> +	if (ret < 0)
+> +		return ret;
+>   
+>   	fields[0] = lower_32_bits(addr);
+>   	fields[1] = upper_32_bits(addr);
+> @@ -311,6 +315,7 @@ void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
+>   
+>   	/* Ring the command ring doorbell */
+>   	xhci_writel(&ctrl->dba->doorbell[0], DB_VALUE_HOST);
+> +	return 0;
+>   }
+>   
+>   /*
+> @@ -493,7 +498,6 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected)
+>   		return NULL;
+>   
+>   	printf("XHCI timeout on event type %d... cannot recover.\n", expected);
+> -	BUG();
 
-PLease see: https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/jobs/710823#L2912
+There is compilation warning coming from this.
 
-Neil
+w+../drivers/usb/host/xhci-ring.c: In function ‘xhci_wait_for_event’:
+w+../drivers/usb/host/xhci-ring.c:501:1: warning: control reaches end of 
+non-void function [-Wreturn-type]
+
+you should fix it.
+
+
+diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+index 1bde0b9793c4..087ef63f86a4 100644
+--- a/drivers/usb/host/xhci-ring.c
++++ b/drivers/usb/host/xhci-ring.c
+@@ -498,6 +498,8 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, 
+trb_type expected)
+                 return NULL;
+
+         printf("XHCI timeout on event type %d... cannot recover.\n", expected);
++
++       return NULL;
+  }
+
+Thanks,
+Michal
+
+  /*
