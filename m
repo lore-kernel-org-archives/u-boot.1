@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB6F2CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 16:00:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 078FDCDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 16:04:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F9FF86ED0;
-	Thu, 12 Oct 2023 17:37:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 39AEF86EBF;
+	Thu, 12 Oct 2023 17:37:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="00hrUYMU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hRJmtJj5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CAF986EA8; Thu, 12 Oct 2023 17:31:32 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 8E4E186DDA; Thu, 12 Oct 2023 17:31:19 +0200 (CEST)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E546B86E95
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 17:29:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A43B86EDA
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 17:30:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-53d8320f0easo1914468a12.3
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:29:59 -0700 (PDT)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-9b95622c620so197470766b.0
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:30:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1697124553; x=1697729353; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697124564; x=1697729364; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=eWnSC/eX3bogfxQmjZ4FvoD7yMY/+AouaUlCgLGM7Eg=;
- b=00hrUYMUKMU3Or+l0aS7Ty0bPjfZU9EA9Vp4ydq7H3/JTErLIWqAF4fehV6A2yPjkW
- brCeRGavM4RjNHIBBrkoC8pqzqzvwtzHxCqEk8gaEYW1iGunQcI6ewzL2TX6tgs9yBi7
- UDjiVYfBtw1zP+1hg/aMZ+MpBB78BcGp616s1xC45L25Ba3FPHq6U79MD0HryH6oBMID
- PT7Dza75x6uoYJkN7pPQKNcZCyxYC4x1CSZoIEAQjLLmDQUJhDzOXNUABrPAqJQ13JIc
- EThKlnTNsLVr5krOq4IJtTtmuuRHTFhasrUpXRCMr/j97D9C8jTL8pj/gysIoEKJE99K
- /+cQ==
+ bh=ylt/luQV8hWj3xGvqWC55CfvvLoaFE8yjReVkjVylaA=;
+ b=hRJmtJj58u2cTKM4ZA4ST43K9RtiIpY5k2mlpGjqachUfivw6yPU9EIwOOdGbdI3eg
+ 4vsQQWHSWP7liuttZFy4v/uzPgGxjdmazxKFYZCfaqfSx9TJOFG18D+N+CwePDyQm7NP
+ dGQxFPRAjTjXwVhEchLyLu87KdwKavdFulHos=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697124553; x=1697729353;
+ d=1e100.net; s=20230601; t=1697124564; x=1697729364;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=eWnSC/eX3bogfxQmjZ4FvoD7yMY/+AouaUlCgLGM7Eg=;
- b=jpyOHHeEht9Fkgggi+6VtKP3aRRERwt6RL+rAyNH3oZcxyocVISJq71w6VkUD+pwji
- W7FZqcvE+X7jYKCDhJqyhPVWOV+puFOGTihOabG1kNyTPG9+UhsgrVRtMVx3tbkItoLL
- j24hCLJUfaH5pSjJCN0Ws+cDr3vaXM1kOso/UYqw4HmhkIAioc2odzQrJpPE9soQ9pg3
- 4+BcMdkeJjmCNj/nT08VeVjFxu+KiFqM8r2L5jjYgkIsuVCBY8OR0uD3lKcQ24MvbRO1
- hDPKXKYPldU9oE7y3Ap0gxjAQ1OrN/UUs5yi/3MqIXOHV7L60CHDzN0vpwfOVxpjFjFc
- knaw==
-X-Gm-Message-State: AOJu0YwBsZclKDEGb86qCgabPlDpid84AsFC/zrf/I2ms2i+4Nzb3aC1
- zoHdBkdMNIn7A6A17AmjMuEKeoHodf9Ds50M9WD8Iw==
-X-Google-Smtp-Source: AGHT+IEXuw68fmIbB1PGXktc7B21I+575vTZpaqvjFAVvqMBcID1JuOXLBuSVMHxw0/9tY4xs/u+xivyg3Mf3ZE3lLU=
-X-Received: by 2002:a17:906:31c9:b0:9b6:499a:172d with SMTP id
- f9-20020a17090631c900b009b6499a172dmr22446742ejf.52.1697124553313; Thu, 12
- Oct 2023 08:29:13 -0700 (PDT)
+ bh=ylt/luQV8hWj3xGvqWC55CfvvLoaFE8yjReVkjVylaA=;
+ b=mIJHms+WK8oxPBCbn0S5i/szQMbs/uHavT75C5FABT82Y9n0uwhATr5dXDgzoNks2Q
+ ibuWBjd5gt8Lk8eC0rL8ownoEfCsh8QAK+bArkycfrO1bUanp1j78fB0sWR4Z4O9+jAL
+ g8acAa6qNtoALjKLl8F5RB1hAjXog6Kdq06BiG8at9nPrADOtFoyi0aq2FPIHw8+a3ZP
+ YwGzJMFlkLLd9GO1n5h06LU14vEm7VDGLBC7PX/HrW+CUQxdbikqqYJCrRYwU0zH0eES
+ a46jsAi3tsyblS0rbmfVXh1JaRiSEJECuwMEV0oG2FksimenQZYU773Hpm1307fYE6V4
+ yoOg==
+X-Gm-Message-State: AOJu0YwpFI0NzwpM2xoMm7PbJ1B44+eYa6UP2CHRwaqXiRaY/o+UZ7Jw
+ AqslTUkMoQbnk40YX53cPt1FfSYkOC+8OXJoCctYAA==
+X-Google-Smtp-Source: AGHT+IGiUmTSMQDlIVLmoQfdtLlsj0J1izB4EfJHZFRdiHkE22voKmSW+cBA9JrHgF2XjVBPgVw4tj4Y522ZxQVABS0=
+X-Received: by 2002:a17:906:7387:b0:9ba:a38:f2b2 with SMTP id
+ f7-20020a170906738700b009ba0a38f2b2mr13524839ejl.41.1697124564170; Thu, 12
+ Oct 2023 08:29:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231012063509.2963258-1-randolph@andestech.com>
- <20231012063509.2963258-4-randolph@andestech.com>
-In-Reply-To: <20231012063509.2963258-4-randolph@andestech.com>
-From: Simon Glass <sjg@google.com>
-Date: Thu, 12 Oct 2023 08:28:57 -0700
-Message-ID: <CAPnjgZ0-oH69DpDr334ifkVuNLbfZTatt=azdd83brbRtmX3kg@mail.gmail.com>
-Subject: Re: [PATCH V2 3/7] riscv: dts: binman: add condition for opensbi os
- boot
-To: Randolph <randolph@andestech.com>
-Cc: u-boot@lists.denx.de, randolph.sklin@gmail.com, dylan@andestech.com, 
- tim609@andestech.com, peterlin@andestech.com
+References: <20231011-binman-firewalling-v4-0-a08085d300e9@ti.com>
+ <20231011-binman-firewalling-v4-1-a08085d300e9@ti.com>
+ <CAPnjgZ3NG+8-VLi5i7+h4t1aP_qa1Va1ZJdhiJzfVyd7jrHPmA@mail.gmail.com>
+ <20231012054600.d26hx63xaedl3dsk@ula0497581>
+In-Reply-To: <20231012054600.d26hx63xaedl3dsk@ula0497581>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 12 Oct 2023 08:29:06 -0700
+Message-ID: <CAPnjgZ0uw0AJC55F6hkrMZmwXt=VdKr21ngw_CSP-m_zzgJfmg@mail.gmail.com>
+Subject: Re: [PATCH v4 1/8] binman: ti-secure: Add support for firewalling
+ entities
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Andrew Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ u-boot@lists.denx.de, 
+ Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,21 +89,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Oct 2023 at 23:43, Randolph <randolph@andestech.com> wrote:
->
-> Add condition for OpenSBI OS boot mode, by default it is not enabled.
-> By default, binman creates the output file u-boot.itb.
-> If SPL_OPENSBI_OS_BOOT is enabled, linux.itb will be created
-> after compilation instead of the default u-boot.itb.
->
-> Signed-off-by: Randolph <randolph@andestech.com>
-> ---
->  arch/riscv/dts/binman.dtsi | 24 ++++++++++++++++++++++++
->  1 file changed, 24 insertions(+)
->
+Hi Manorit,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Wed, 11 Oct 2023 at 22:46, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+>
+> Hi Simon,
+>
+> On 20:41-20231011, Simon Glass wrote:
+> > Hi Manorit,
+> >
+> > On Tue, 10 Oct 2023 at 23:25, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+> > >
+> > > We can now firewall entities while loading them through our secure
+> > > entity TIFS, the required information should be present in the
+> > > certificate that is being parsed by TIFS.
+> > >
+> > > The following commit adds the support to enable the certificates to be
+> > > generated if the firewall configurations are present in the binman dtsi
+> > > nodes.
+> > >
+> > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > > ---
+> > >  tools/binman/btool/openssl.py   | 16 +++++++-
+> > >  tools/binman/etype/ti_secure.py | 90 +++++++++++++++++++++++++++++++++++++++++
+> > >  tools/binman/etype/x509_cert.py |  3 +-
+> > >  3 files changed, 106 insertions(+), 3 deletions(-)
+> > >
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > I'm still a little worried about the error reporting if the user
+> > leaves out a property. Does it do the right thing?
+> >
+>
+> I did make a test also along the lines that would check all the
+> firewalling properties and just auth-in-place isn't checked at this
+> stage and people could end up adding the firewalling node without
+> auth-in-place. Do you want to cover that test case as well? Regarding
+> the other firewalling properties ( immitating the test by removing
+> "id"), We get this:
+>
+> [..]
+>   AR      spl/common/spl/built-in.o
+>   LD      spl/u-boot-spl
+>   OBJCOPY spl/u-boot-spl-nodtb.bin
+>   SYM     spl/u-boot-spl.sym
+>   CAT     spl/u-boot-spl-dtb.bin
+>   COPY    spl/u-boot-spl.bin
+>   BINMAN  .binman_stamp
+> binman: id can't be None in firewall node
 
-You do have the option of creating two images, so you can support both
-boot approaches. Then you would need to do the check at runtime,
-somehow.
+That's a bit vague...at least it should show the full path to the node
+that failure, e.g. use self.Raise(). Also, I assume the property is
+missing and the None refers to the Python value for the var. Better to
+provide a nice error.
+
+Any possible user error should ideally be checked, to avoid later confusion.
+
+See Entry.ensure_props()
+
+You could add an optional argument - the list of props to check. If
+present it could use that instead of self.required_props
+
+Hmm better might be to have a new function which tells the user that
+since the firewall property is present, it needs these others ones
+too.
+
+Regards,
+Simon
