@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47663CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:38:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0286CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:42:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 869B286D02;
-	Thu, 12 Oct 2023 08:38:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B441986CE8;
+	Thu, 12 Oct 2023 08:38:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FAEF86D02; Thu, 12 Oct 2023 08:37:57 +0200 (CEST)
+ id 092FB86E39; Thu, 12 Oct 2023 08:38:11 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 276B986CDD
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:37:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5ED686D21
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:38:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 39C6bkii019770;
- Thu, 12 Oct 2023 14:37:46 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 39C6buEl019899;
+ Thu, 12 Oct 2023 14:37:56 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Thu, 12 Oct 2023 14:37:43 +0800
+ Thu, 12 Oct 2023 14:37:52 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
  <peterlin@andestech.com>, Randolph <randolph@andestech.com>
-Subject: [PATCH V2 0/7] riscv: spl: OpenSBI OS boot mode
-Date: Thu, 12 Oct 2023 14:35:02 +0800
-Message-ID: <20231012063509.2963258-1-randolph@andestech.com>
+Subject: [PATCH V2 2/7] riscv: kconfig: introduce SPL_LOAD_FIT_OPENSBI_OS_BOOT
+ symbol
+Date: Thu, 12 Oct 2023 14:35:04 +0800
+Message-ID: <20231012063509.2963258-3-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231012063509.2963258-1-randolph@andestech.com>
+References: <20231012063509.2963258-1-randolph@andestech.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 39C6bkii019770
+X-MAIL: Atcsqr.andestech.com 39C6buEl019899
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,63 +63,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a shortcut boot mode for RISC-V. 
+Introduce common Kconfig symbol for riscv architecture.
+This symbol SPL_LOAD_FIT_OPENSBI_OS_BOOT is like falcon mode on ARM,
+the Falcon boot is a shortcut boot method for SD/eMMC targets. It
+skips the loading the RAM version U-Boot. Instead, it will loads
+the FIT image and boots directly to Linux.
 
-As we know, in ARM architecture has the Falcon mode to do the shortcut
-boot to the Linux kernel. (by enabling CONFIG_SPL_OS_BOOT)
-ARM Falcon mode boot flow would be as follows:
-u-boot SPL -> Linux kernel
+When SPL_OPENSBI_OS_BOOT is enabled, linux.itb is created after
+compilation instead of the default u-boot.itb. It initialises memory
+with the U-Boot SPL at the first stage, just as a normal boot process
+does at the beginning. Instead of jumping to the U-Boot proper from
+OpenSBI before booting the Linux kernel, the RISC-V falcon mode
+process jumps directly to the Linux kernel to gain shorter booting time.
 
-But for RISC-V, OpenSBI is required to allows the supervisor to execute
-some privileged operations.
-The RISC-V Normal boot flow as follows:
-u-boot SPL -> OpenSBI -> u-boot proper -> Linux kernel
+Signed-off-by: Randolph <randolph@andestech.com>
+---
+ arch/riscv/Kconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Quoting the same ideas as ARM's Falcon mode,
-OpenSBI OS boot flow as follows:
-u-boot SPL -> OpenSBI -> Linux kernel
-
-An important part of OpenSBI OS boot mode is to prepare the device tree. 
-A normal U-Boot does FDT fixups when booting Linux. 
-For OpenSBI OS boot mode, Linux boots directly from SPL, 
-skipping the normal U-Boot. 
-The device tree has to be prepared in advance.
-The device tree in memory is the one needed for OpenSBI OS boot mode.
-
-The Linux kernel image will also need to be provided for the generation
-of the FIT file.
-
-Changes in v2:
-- change the order from Patch 3/7 in V1 to Patch 1/7 in V2
-- merge the OPENSBI_OS_BOOT related logic into binman.dtsi
-- change by suggestions 
-- add a new patch to delete the output file when make clean.
-
-Randolph (7):
-  spl: riscv: opensbi: change the default os_type as varible
-  riscv: kconfig: introduce SPL_LOAD_FIT_OPENSBI_OS_BOOT symbol
-  riscv: dts: binman: add condition for opensbi os boot
-  Makefile: delete file *.itb when make clean
-  spl: riscv: add os type for next booting stage
-  andes: config: add riscv falcon mode for ae350 platform
-  riscv: spl: andes: Move the DTB in front of kernel
-
- Makefile                                |  2 +-
- arch/riscv/Kconfig                      |  8 ++++
- arch/riscv/dts/binman.dtsi              | 24 ++++++++++
- board/AndesTech/ae350/ae350.c           | 25 ++++++++++
- common/spl/spl_fit.c                    |  3 +-
- common/spl/spl_opensbi.c                | 31 +++++++++----
- configs/ae350_rv32_falcon_defconfig     | 60 ++++++++++++++++++++++++
- configs/ae350_rv32_falcon_xip_defconfig | 61 +++++++++++++++++++++++++
- configs/ae350_rv64_falcon_defconfig     | 60 ++++++++++++++++++++++++
- configs/ae350_rv64_falcon_xip_defconfig | 61 +++++++++++++++++++++++++
- 10 files changed, 323 insertions(+), 12 deletions(-)
- create mode 100644 configs/ae350_rv32_falcon_defconfig
- create mode 100644 configs/ae350_rv32_falcon_xip_defconfig
- create mode 100644 configs/ae350_rv64_falcon_defconfig
- create mode 100644 configs/ae350_rv64_falcon_xip_defconfig
-
+diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
+index 183885ebe7..49b6e1a4d6 100644
+--- a/arch/riscv/Kconfig
++++ b/arch/riscv/Kconfig
+@@ -424,4 +424,12 @@ config TPL_USE_ARCH_MEMSET
+ 
+ endmenu
+ 
++config SPL_LOAD_FIT_OPENSBI_OS_BOOT
++	bool "Enable SPL (OpenSBI OS boot mode) applying linux from FIT"
++	depends on SPL_LOAD_FIT
++	help
++	  Use fw_dynamic from the FIT image, and u-boot SPL will invoke it directly.
++	  This is a shortcut boot flow, from u-boot SPL -> OpenSBI -> u-boot proper
++	  -> linux to u-boot SPL -> OpenSBI -> linux.
++
+ endmenu
 -- 
 2.34.1
 
