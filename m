@@ -4,107 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16ADDCDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 07:25:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AA80CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 07:29:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D11D186D85;
-	Thu, 12 Oct 2023 09:25:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 833DD86E39;
+	Thu, 12 Oct 2023 09:27:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gH/7ZA9b";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="cT8XwIms";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 057FA86D62; Thu, 12 Oct 2023 09:25:05 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 205E986E07; Thu, 12 Oct 2023 09:26:53 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 408E186E3D
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 09:24:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7112586E6C
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 09:26:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-50435ad51bbso880468e87.2
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 00:24:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-51e28cac164so3765304a12.1
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 00:26:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697095463; x=1697700263; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=9cPCDR1LNByf7pFqbKQgMF5hUul43mQVN8swXPpciFE=;
- b=gH/7ZA9bZ4K944jWBam4p/xnZj/IgvKIFNngs8m56NV5jhAfQfsmCd4kYX/e/Csymx
- NPLfVLopa2Gf3B4tszusdGS2JRwrfqR6evu6dwIDMXGabxvth8tYsE6VylaVBGyRr9Ka
- ul+vRd66RDHLCgeFSUctbIdryyojL3OlZO+WbM5+XaZgzbgMJr4PdBS15luERFtcqcYs
- jLxnbK1R7Lw3fX6b03BuTB9FUfCtSjgXsesQAuc/aPEwDhYXcyyTpQDh3U6w28AjRAFA
- MBLVAxVwA1IHTEzCrcwW4NCdRMOhx+GZtrVSPy8QSqyduZ4iu6nvAkNzT4bnrGqSuBQl
- NWAw==
+ d=amarulasolutions.com; s=google; t=1697095587; x=1697700387;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=j++DnANz+fG0784AhBLZ/mXfqFHgwoMrJzt+FvvqMrY=;
+ b=cT8XwIms6vHB16RNxGdlu8gbQ4zETN+EpxiTezGeS9Wi+CzHz7aWHz6FDhOacY7nBw
+ 3tdyAdhQ2QWortiKSxRWugxYgJbCoGFVkR5FT4Phfarxrp3hnFDtTuWcpfTemphxrC7S
+ 9/CPyeHYv1PBRGvmEQhGkm1JFz7zWnqL/oyi4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697095463; x=1697700263;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=9cPCDR1LNByf7pFqbKQgMF5hUul43mQVN8swXPpciFE=;
- b=aevaY5F+krsM8voSVahINoAWhK3PGO18YMP+UHp32QBRpTDOXEXNdH73gc678S30pk
- hmATrFSmeQVHVyXaPWVUrqLksYBgKouDhiC5vwN0H1ITuRtigV5SFl7mk6GJAo3xfgTY
- WBjNxSMF2OSk3eqIyDhYjnLunsYK6mwagjyJ95ZmbUHzIBwg6dDg5+wp20xVt02f2qtZ
- 7Ee6I8zgF8q8c+jHqL1hAZRDzC/6zeYg06jpyxc62o5jBDCXZtMtga+aPKi5EsxP3uxH
- Kp4tYL8eMnVKV/axexhijN1ny5bFWM8p2VN6oMjWZRV0MUZMXEfvTzihvRVvjSH6l8QY
- 9S6g==
-X-Gm-Message-State: AOJu0YzvNLE6ogav6pKltYY6JA6C4fOFgnXXkP166ZsFBtNUhtKy6R2f
- /BpU0rMi0KCBbk3xxilpcX2O1A==
-X-Google-Smtp-Source: AGHT+IHSmmCP2HS7X6hvAoTz0WdyCNdmh5x6hj3nm4JXPi41Lz2UorjyS2zJnlq9VAiTKktFY0mJSg==
-X-Received: by 2002:a05:6512:e99:b0:500:86b4:5282 with SMTP id
- bi25-20020a0565120e9900b0050086b45282mr22613591lfb.34.1697095463328; 
- Thu, 12 Oct 2023 00:24:23 -0700 (PDT)
-Received: from [192.168.7.21] (679773502.box.freepro.com. [212.114.21.58])
- by smtp.gmail.com with ESMTPSA id
- n26-20020a05600c3b9a00b004068def185asm19144085wms.28.2023.10.12.00.24.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Oct 2023 00:24:22 -0700 (PDT)
-Message-ID: <a4ee2c60-2176-43be-87d4-dcd32a1173a2@linaro.org>
-Date: Thu, 12 Oct 2023 09:24:20 +0200
+ d=1e100.net; s=20230601; t=1697095587; x=1697700387;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=j++DnANz+fG0784AhBLZ/mXfqFHgwoMrJzt+FvvqMrY=;
+ b=AiWx60D6SJJuAVM8UT117jZXH4dLiKyaydWEOmChIubwy1+H2PzE5PcOVwSIBHzpYE
+ 5THJ0YWA9Y3DooIYrY5YO2ry1mfJuMGsMbrIW81V2oqAqSReEiuPKClVSm1Bbg/RK2PR
+ 2ZWpWGyYDAtKLuQO6g5bxngaV13hxuzCXaCEXI9WZmncVW7ERhw/rxC45VD/I+tmMkDQ
+ T8wWenONwL7J7kCqFysBVJ7KNJ/NCAw+nidUTFYWOEBKwG7PwZFitQeMaEAssm0CFhxL
+ AuUf/ipMblrIEbM2uGdivzvHJT79AlF8N4YqMaON485CyXj7SBQy3IyFYLVT0w5UPcoO
+ WQPA==
+X-Gm-Message-State: AOJu0YzMpNlRaGyN4lpzA5udUNMUqIodnQvw+3o7BBLMi69vB8nv7GkU
+ iMHWoWytsTXT5trfNP3F0NPaVsrHjMhX/HHqQGE8LA==
+X-Google-Smtp-Source: AGHT+IGxIT/bUP49Eeby5q3gnUxhvYc5Z6B+WOfiCE4ztSxo1xhNsRpSmDg9E43UA2iSFFlxEfvDIV7Qa057lUKL8a4=
+X-Received: by 2002:a17:907:7204:b0:98e:4f1:f987 with SMTP id
+ dr4-20020a170907720400b0098e04f1f987mr16433263ejc.3.1697095587164; Thu, 12
+ Oct 2023 00:26:27 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH v2 1/1] drivers: rng: add support for Meson S4
-To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com,
- sughosh.ganu@linaro.org, xypron.glpk@gmx.de
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
-References: <20231010111344.77563-1-avromanov@salutedevices.com>
- <20231010111344.77563-2-avromanov@salutedevices.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-In-Reply-To: <20231010111344.77563-2-avromanov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-3-seanga2@gmail.com>
+ <CAPnjgZ3yH1G13F1r2U00r=sD1mTEn+sY3G0-ggpRvfpLaUxNDA@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3yH1G13F1r2U00r=sD1mTEn+sY3G0-ggpRvfpLaUxNDA@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 12 Oct 2023 09:26:15 +0200
+Message-ID: <CAOf5uw=p=o_50ZzeECEgcqYnaRqJgcRutMQHkyK6dWgUHEEBZg@mail.gmail.com>
+Subject: Re: [PATCH 02/26] spl: nor: Don't allocate header on stack
+To: Simon Glass <sjg@chromium.org>
+Cc: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ Roger Quadros <rogerq@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,151 +84,42 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Thu, Oct 12, 2023 at 5:45=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
+e:
+>
+> On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
+> >
+> > spl_image_info.name contains a reference to legacy_img_hdr. If we alloc=
+ate
+> > the latter on the stack, it will be clobbered after we return. This was
+> > addressed for NAND back in 06377c5a1fc ("spl: spl_legacy: Fix NAND boot=
+ on
+> > OMAP3 BeagleBoard"), but that commit didn't fix NOR.
+> >
+> > Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> > ---
+> >
+> >  common/spl/spl_nor.c | 11 ++++-------
+> >  1 file changed, 4 insertions(+), 7 deletions(-)
+>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+ Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
-On 10/10/2023 13:13, Alexey Romanov wrote:
-> For some Amlogic SOC's, mechanism to obtain random number
-> has been changed. For example, S4 now uses status bit waiting algo.
-> 
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> ---
->   drivers/rng/meson-rng.c | 72 ++++++++++++++++++++++++++++++++++++++++-
->   1 file changed, 71 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/rng/meson-rng.c b/drivers/rng/meson-rng.c
-> index e0a1e8c7e0..ba60325b94 100644
-> --- a/drivers/rng/meson-rng.c
-> +++ b/drivers/rng/meson-rng.c
-> @@ -10,10 +10,23 @@
->   #include <dm.h>
->   #include <rng.h>
->   #include <asm/io.h>
-> +#include <linux/iopoll.h>
-> +
-> +#define RNG_DATA	0x00
-> +#define RNG_S4_DATA	0x08
-> +#define RNG_S4_CFG	0x00
-> +
-> +#define RUN_BIT		BIT(0)
-> +#define SEED_READY_STS_BIT	BIT(31)
-> +
-> +struct meson_rng_priv {
-> +	u32 (*read)(fdt_addr_t base);
-> +};
->   
->   struct meson_rng_plat {
->   	fdt_addr_t base;
->   	struct clk clk;
-> +	struct meson_rng_priv *priv;
->   };
->   
->   /**
-> @@ -27,10 +40,11 @@ struct meson_rng_plat {
->   static int meson_rng_read(struct udevice *dev, void *data, size_t len)
->   {
->   	struct meson_rng_plat *pdata = dev_get_plat(dev);
-> +	struct meson_rng_priv *priv = pdata->priv;
->   	char *buffer = (char *)data;
->   
->   	while (len) {
-> -		u32 rand = readl(pdata->base);
-> +		u32 rand = priv->read(pdata->base);
->   		size_t step;
->   
->   		if (len >= 4)
-> @@ -44,6 +58,47 @@ static int meson_rng_read(struct udevice *dev, void *data, size_t len)
->   	return 0;
->   }
->   
-> +static int meson_rng_wait_status(void __iomem *cfg_addr, int bit)
-> +{
-> +	u32 status = 0;
-> +	int ret;
-> +
-> +	ret = readl_relaxed_poll_timeout(cfg_addr,
-> +					 status, !(status & bit),
-> +					 10000);
-> +	if (ret)
-> +		return -EBUSY;
-> +
-> +	return 0;
-> +}
-> +
-> +static u32 meson_common_rng_read(fdt_addr_t base)
-> +{
-> +	return readl(base);
-> +}
-> +
-> +static u32 meson_s4_rng_read(fdt_addr_t base)
-> +{
-> +	void __iomem *cfg_addr = (void *)base + RNG_S4_CFG;
-> +	int err;
-> +
-> +	writel_relaxed(readl_relaxed(cfg_addr) | SEED_READY_STS_BIT, cfg_addr);
-> +
-> +	err = meson_rng_wait_status(cfg_addr, SEED_READY_STS_BIT);
-> +	if (err) {
-> +		pr_err("Seed isn't ready, try again\n");
-> +		return err;
-> +	}
-> +
-> +	err = meson_rng_wait_status(cfg_addr, RUN_BIT);
-> +	if (err) {
-> +		pr_err("Can't get random number, try again\n");
-> +		return err;
-> +	}
-> +
-> +	return readl_relaxed(base + RNG_S4_DATA);
-> +}
-> +
->   /**
->    * meson_rng_probe() - probe rng device
->    *
-> @@ -59,6 +114,8 @@ static int meson_rng_probe(struct udevice *dev)
->   	if (err)
->   		return err;
->   
-> +	pdata->priv = dev_get_driver_data(dev);
-> +
->   	return 0;
->   }
->   
-> @@ -102,9 +159,22 @@ static const struct dm_rng_ops meson_rng_ops = {
->   	.read = meson_rng_read,
->   };
->   
-> +static const struct meson_rng_priv meson_rng_priv = {
-> +	.read = meson_common_rng_read,
-> +};
-> +
-> +static const struct meson_rng_priv meson_rng_priv_s4 = {
-> +	.read = meson_s4_rng_read,
-> +};
-> +
->   static const struct udevice_id meson_rng_match[] = {
->   	{
->   		.compatible = "amlogic,meson-rng",
-> +		.data = (ulong)&meson_rng_priv,
-> +	},
-> +	{
-> +		.compatible = "amlogic,meson-s4-rng",
-> +		.data = (ulong)&meson_rng_priv_s4,
->   	},
->   	{},
->   };
 
-I get:
-+drivers/rng/meson-rng.c: In function 'meson_rng_probe':
-+drivers/rng/meson-rng.c:117:21: error: assignment to 'struct meson_rng_priv *' from 'ulong' {aka 'long unsigned int'} makes pointer from integer without a cast [-Werror=int-conversion]
-+  117 |         pdata->priv = dev_get_driver_data(dev);
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
 
-while building in CI.
-
-Thanks,
-Neil
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
