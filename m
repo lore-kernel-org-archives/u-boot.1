@@ -4,92 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AF0CCDB465
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 333D4CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:37:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C28D86EE0;
-	Thu, 12 Oct 2023 04:04:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CA6E86B0A;
+	Thu, 12 Oct 2023 04:18:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VcPxTYwJ";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kdvwwIEh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D28686E5D; Thu, 12 Oct 2023 04:02:07 +0200 (CEST)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3D73786287; Thu, 12 Oct 2023 04:18:05 +0200 (CEST)
+Received: from mail-m155115.qiye.163.com (mail-m155115.qiye.163.com
+ [101.71.155.115])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10FA586E2F
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:59:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E14BD85DE0
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 04:17:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-419cc494824so3349891cf.2
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:59:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697075977; x=1697680777; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=3Jwiy12iT3vCIhs7fccubTcPbAIbNpRTt8cm/lcS+Mk=;
- b=VcPxTYwJ6ru/2qRSRxzsnqytJnDAOTZVU9iJQy5FuF5fZdO6XO9I7IRP5E4yhDIXku
- EAD2MJLRyroU9BgNM7K5FUr1QFMqppLz5WJws2GxzUnFSto6r+GiXfDTnkAGnPaxPU1B
- 5g+msU8GS75A4c0x3psLFJjkKTtrJ5vm6tBZN2ykxGYMjgtf1R1RyRXjfgEfyj2wE4LL
- 3ok2UbsH54ruBs5fYqIHmkHrEGB6y4se0TnHO5YpHncjHqJP7WcnMruVq9/sgw7s8+D3
- WK/lqJjDsfuEzjaOTLbi0w9PU7a9DRHxMBIVkaTEsX3gv8JsMAWIYlKnvxoyYMOIZKk9
- Zi6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697075977; x=1697680777;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=3Jwiy12iT3vCIhs7fccubTcPbAIbNpRTt8cm/lcS+Mk=;
- b=LbJtgs12by3jNQlqubAyVYANXWrijMShNo6TMULtV1RbScQ6p3Xo6ha5Vuh0DE8I/A
- 1sfwjY7tvm21VYBKNGpN3p7YrQgoZEjOYSbMaykifsmtYZph+WVh2CMnj5v/vA+63e+X
- iZfwYMkrNj0HEOTwTTYRZX0psPXdebYl7jEPStsKMVwiOzBaZKIeTJnfnT50lde+iEEL
- T6glVH0VvzOYMeRlvju/WUTSY1d0QcZ43XZ02Xu+n6N51ewKpk3k26zQPtWIDniXpIyK
- zOl+pKZqb0jWCMQXbjG9klfExrPErpRjHQ1moipLc3aFvCNC+Abfl9WbAGrHaCwnbn1I
- lM7w==
-X-Gm-Message-State: AOJu0YwO28zUI/miOA+0157scNsCLmtCZVb8rsinMvGgu03Vton6Jj0O
- lEYPdqc+GttMjw2S5bm1SCmtB1V2sxMl8W8c
-X-Google-Smtp-Source: AGHT+IFSMy2o28fK9p/j3iQ/yEuxq01F/fiNy2BO5w8hIKZU29K7230T1CfIo15zchoa7vETS3LrCQ==
-X-Received: by 2002:a05:622a:188c:b0:418:224:db06 with SMTP id
- v12-20020a05622a188c00b004180224db06mr26974952qtc.50.1697075976766; 
- Wed, 11 Oct 2023 18:59:36 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- e6-20020ac845c6000000b004181234dd1dsm5743433qto.96.2023.10.11.18.59.35
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 18:59:36 -0700 (PDT)
-Message-ID: <aad2d454-239f-af42-acd7-867da9f99484@gmail.com>
-Date: Wed, 11 Oct 2023 21:59:35 -0400
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=kdvwwIEhaYAyiLRLN7XnPK3gCJyP2If1hWW81G3/KQXNXOo6EvRyeeHSaNL4zGucc4D12KA80WOz+8ofA8SaEDd6qaQdT+BGrgKdzENCkXwUQgstXXq/uQNC7ntIN2b5wUC/xiN8H46MDFCnI03b9mps3b3TXNs29DbF+yBogVg=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=uezTKq2ZqvVsBlOlqyPa3fn8qxBaGWD8bQwVelYmWEc=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 3E6C1400279;
+ Thu, 12 Oct 2023 10:16:32 +0800 (CST)
+Message-ID: <863412e4-9ec5-fac4-83e4-e1253af7cca5@rock-chips.com>
+Date: Thu, 12 Oct 2023 10:16:32 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH 00/26] test: spl: Test some load methods
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 1/4] rockchip: rk3588: Sync device tree from linux
+ maintainer tree
 Content-Language: en-US
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Simon Glass <sjg@chromium.org>, uboot-imx@nxp.com,
- Anatolij Gustschin <agust@denx.de>, Fabio Estevam <festevam@denx.de>,
- Fabio Estevam <festevam@gmail.com>, Heiko Schocher <hs@denx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Marek Vasut <marex@denx.de>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Nitin Garg <nitin.garg@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Ramon Fried <rfried.dev@gmail.com>, Roger Quadros <rogerq@kernel.org>,
- Stefano Babic <sbabic@denx.de>, Vignesh R <vigneshr@ti.com>,
- Ye Li <ye.li@nxp.com>
-References: <20231012015626.3487451-1-seanga2@gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20231012015626.3487451-1-seanga2@gmail.com>
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
+References: <20231010222344.3436526-1-jonas@kwiboo.se>
+ <20231010222344.3436526-2-jonas@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20231010222344.3436526-2-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhlIHVZNTBpIGUNMHx8YQ0JVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8b21abdaac2eb3kusn3e6c1400279
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PDo6Mjo5Fjw4OhRRKT8ZKyoJ
+ ETkaFA9VSlVKTUJMS0xNQkJITEJNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKQ0NOSTcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,44 +77,624 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/11/23 21:56, Sean Anderson wrote:
-> This series adds some tests for various SPL load methods, with the intent of
-> helping debug v6 of [1]. With that in mind, notable omissions include NAND and
-> ROMAPI, which both lack sandbox implementations, and OS_BOOT, which I have
-> deferred due to its complexity. Semihosting is also omitted, but I think we can
-> test that with qemu.
-> 
-> In order to test all of these methods, we must first generate suitable images,
-> possibly on filesystems. While other tests have historically generated these
-> images using external tools (e.g. mkimage, mkfs, etc.), I have chosen to
-> generate them on the fly. This is for a few reasons:
-> 
-> - By removing external dependencies on pytest to create certain files, the tests
->    become self-contained. This makes them easier to iterate on and debug.
-> - By generating tests at runtime, we can dynamically vary the content. This
->    helps detect test failures, as even if tests are loaded to the same location,
->    the expected content will be different.
-> - We are not testing the image parsers themselves (e.g. spl_load_simple_fit or
->    fs_read) but rather the load methods (e.g. spl_mmc_load_image). It is
->    unnecessary to exercise full functionality or generate 100% correct images.
-> - By reducing functionality to only what is necessary, the complexity of various
->    formats can often be greatly reduced.
-> 
-> This series depends on [2-3], which are small fixes identified through this
-> patch set. The organization of patches in this series is as follows:
-> 
-> - General fixes for bugs which are unlikely to be triggered outside of this
->    series
-> - Changes to IMX8 container images to facilitate testing
-> - General prep. work, particularly regarding linker issues
-> - The tests themselves
-> 
-> Mostly-passing CI at [4]; I have since fixed the typo/missing cast.
 
-CI run for the series as-sent:
+On 2023/10/11 06:23, Jonas Karlman wrote:
+> Sync rk3588 device tree from linux maintainer tree (v6.7-armsoc/dts64).
+> Adds PCIe nodes to rk3588-evb1-v10 and rk3588-rock-5b boards. Also
+> remove includes from u-boot.dtsi-files that is no longer needed.
+>
+> Linux commits:
+> 42145b7a8235 ("arm64: dts: rockchip: add PCIe network controller to rock-5b")
+> 199cbd5f195a ("arm64: dts: rockchip: add PCIe for M.2 M-key to rock-5b")
+> da447ec38780 ("arm64: dts: rockchip: add PCIe for M.2 E-Key to rock-5b")
+> 86a2024d95e2 ("arm64: dts: rockchip: add PCIe2 network controller to rk3588-evb1")
+> 46bb398ea1d8 ("arm64: dts: rockchip: add PCIe3 bus to rk3588-evb1")
+> 1c9a53ff7ece ("arm64: dts: rockchip: Add sdio node to rock-5b")
+> 3eaf2abd11aa ("arm64: dts: rockchip: Add sfc node to rk3588s")
+> bf012368bb0a ("arm64: dts: rockchip: Add I2S2 M0 pin definitions to rk3588s")
+> 3d77a3e51b0f ("arm64: dts: rockchip: Add UART9 M0 pin definitions to rk3588s")
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-https://source.denx.de/u-boot/custodians/u-boot-clk/-/pipelines/18092
-
-(hopefully by the time you read this it will have passed)
-
---Sean
+Thanks,
+- Kever
+> ---
+>   arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi |  11 +-
+>   arch/arm/dts/rk3588-evb1-v10.dts         |  98 ++++++++++++++++
+>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi  |  60 ----------
+>   arch/arm/dts/rk3588-rock-5b.dts          | 140 +++++++++++++++++++++++
+>   arch/arm/dts/rk3588-u-boot.dtsi          |   1 -
+>   arch/arm/dts/rk3588s-pinctrl.dtsi        |  44 +++++++
+>   arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi |   4 -
+>   arch/arm/dts/rk3588s-u-boot.dtsi         |  10 --
+>   arch/arm/dts/rk3588s.dtsi                |  11 ++
+>   9 files changed, 294 insertions(+), 85 deletions(-)
+>
+> diff --git a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
+> index bd2e25948633..e8566785e965 100644
+> --- a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
+> @@ -6,16 +6,7 @@
+>   #include "rk3588-u-boot.dtsi"
+>   
+>   / {
+> -	aliases {
+> -		mmc0 = &sdmmc;
+> -		mmc1 = &sdhci;
+> -	};
+> -
+>   	chosen {
+> -		u-boot,spl-boot-order = &sdhci;
+> +		u-boot,spl-boot-order = "same-as-spl", &sdhci;
+>   	};
+>   };
+> -
+> -&sdhci {
+> -	bootph-all;
+> -};
+> diff --git a/arch/arm/dts/rk3588-evb1-v10.dts b/arch/arm/dts/rk3588-evb1-v10.dts
+> index 229a9111f5eb..c3fe58e39e99 100644
+> --- a/arch/arm/dts/rk3588-evb1-v10.dts
+> +++ b/arch/arm/dts/rk3588-evb1-v10.dts
+> @@ -29,6 +29,46 @@
+>   		pwms = <&pwm2 0 25000 0>;
+>   	};
+>   
+> +	pcie20_avdd0v85: pcie20-avdd0v85-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "pcie20_avdd0v85";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <850000>;
+> +		regulator-max-microvolt = <850000>;
+> +		vin-supply = <&avdd_0v85_s0>;
+> +	};
+> +
+> +	pcie20_avdd1v8: pcie20-avdd1v8-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "pcie20_avdd1v8";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <1800000>;
+> +		vin-supply = <&avcc_1v8_s0>;
+> +	};
+> +
+> +	pcie30_avdd0v75: pcie30-avdd0v75-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "pcie30_avdd0v75";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <750000>;
+> +		regulator-max-microvolt = <750000>;
+> +		vin-supply = <&avdd_0v75_s0>;
+> +	};
+> +
+> +	pcie30_avdd1v8: pcie30-avdd1v8-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "pcie30_avdd1v8";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <1800000>;
+> +		vin-supply = <&avcc_1v8_s0>;
+> +	};
+> +
+>   	vcc12v_dcin: vcc12v-dcin-regulator {
+>   		compatible = "regulator-fixed";
+>   		regulator-name = "vcc12v_dcin";
+> @@ -38,6 +78,19 @@
+>   		regulator-max-microvolt = <12000000>;
+>   	};
+>   
+> +	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_pcie30";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		enable-active-high;
+> +		gpios = <&gpio3 RK_PC3 GPIO_ACTIVE_HIGH>;
+> +		startup-delay-us = <5000>;
+> +		vin-supply = <&vcc12v_dcin>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&vcc3v3_pcie30_en>;
+> +	};
+> +
+>   	vcc5v0_host: vcc5v0-host-regulator {
+>   		compatible = "regulator-fixed";
+>   		regulator-name = "vcc5v0_host";
+> @@ -87,6 +140,10 @@
+>   	status = "okay";
+>   };
+>   
+> +&combphy2_psu {
+> +	status = "okay";
+> +};
+> +
+>   &cpu_b0 {
+>   	cpu-supply = <&vdd_cpu_big0_s0>;
+>   };
+> @@ -163,7 +220,32 @@
+>   	};
+>   };
+>   
+> +&pcie2x1l1 {
+> +	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie2_1_rst>, <&rtl8111_isolate>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie30phy {
+> +	status = "okay";
+> +};
+> +
+> +&pcie3x4 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie3_reset>;
+> +	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_pcie30>;
+> +	status = "okay";
+> +};
+> +
+>   &pinctrl {
+> +	rtl8111 {
+> +		rtl8111_isolate: rtl8111-isolate {
+> +			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>;
+> +		};
+> +	};
+> +
+>   	rtl8211f {
+>   		rtl8211f_rst: rtl8211f-rst {
+>   			rockchip,pins = <4 RK_PB3 RK_FUNC_GPIO &pcfg_pull_none>;
+> @@ -177,6 +259,22 @@
+>   		};
+>   	};
+>   
+> +	pcie2 {
+> +		pcie2_1_rst: pcie2-1-rst {
+> +			rockchip,pins = <4 RK_PA2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	pcie3 {
+> +		pcie3_reset: pcie3-reset {
+> +			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		vcc3v3_pcie30_en: vcc3v3-pcie30-en {
+> +			rockchip,pins = <3 RK_PC3 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+>   	usb {
+>   		vcc5v0_host_en: vcc5v0-host-en {
+>   			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> index 96cc84e5aac9..3f390ef26a3f 100644
+> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> @@ -4,9 +4,6 @@
+>    */
+>   
+>   #include "rk3588-u-boot.dtsi"
+> -#include <dt-bindings/pinctrl/rockchip.h>
+> -#include <dt-bindings/input/input.h>
+> -#include <dt-bindings/gpio/gpio.h>
+>   #include <dt-bindings/usb/pd.h>
+>   
+>   / {
+> @@ -23,19 +20,6 @@
+>   		regulator-max-microvolt = <12000000>;
+>   	};
+>   
+> -	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
+> -		compatible = "regulator-fixed";
+> -		regulator-name = "vcc3v3_pcie30";
+> -		regulator-min-microvolt = <3300000>;
+> -		regulator-max-microvolt = <3300000>;
+> -		enable-active-high;
+> -		gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
+> -		startup-delay-us = <5000>;
+> -		vin-supply = <&vcc5v0_sys>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&pcie3_vcc3v3_en>;
+> -	};
+> -
+>   	vcc5v0_usbdcin: vcc5v0-usbdcin {
+>   		compatible = "regulator-fixed";
+>   		regulator-name = "vcc5v0_usbdcin";
+> @@ -69,53 +53,11 @@
+>   	};
+>   };
+>   
+> -&combphy0_ps {
+> -	status = "okay";
+> -};
+> -
+>   &fspim2_pins {
+>   	bootph-all;
+>   };
+>   
+> -&pcie2x1l2 {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&pcie2x1l2_pins &pcie_reset_h>;
+> -	reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
+> -	status = "okay";
+> -};
+> -
+> -&pcie30phy {
+> -	status = "okay";
+> -};
+> -
+> -&pcie3x4 {
+> -	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+> -	vpcie3v3-supply = <&vcc3v3_pcie30>;
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&pcie3_rst>;
+> -	status = "okay";
+> -};
+> -
+>   &pinctrl {
+> -	pcie {
+> -		pcie_reset_h: pcie-reset-h {
+> -			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		pcie2x1l2_pins: pcie2x1l2-pins {
+> -			rockchip,pins = <3 RK_PC7 4 &pcfg_pull_none>,
+> -					<3 RK_PD0 4 &pcfg_pull_none>;
+> -		};
+> -
+> -		pcie3_rst: pcie3-rst {
+> -			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -
+> -		pcie3_vcc3v3_en: pcie3-vcc3v3-en {
+> -			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+> -		};
+> -	};
+> -
+>   	usb-typec {
+>   		usbc0_int: usbc0-int {
+>   			rockchip,pins = <3 RK_PB4 RK_FUNC_GPIO &pcfg_pull_up>;
+> @@ -138,8 +80,6 @@
+>   	u-boot,spl-sfc-no-dma;
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&fspim2_pins>;
+> -	#address-cells = <1>;
+> -	#size-cells = <0>;
+>   	status = "okay";
+>   
+>   	flash@0 {
+> diff --git a/arch/arm/dts/rk3588-rock-5b.dts b/arch/arm/dts/rk3588-rock-5b.dts
+> index 8ab60968f275..8618887899d9 100644
+> --- a/arch/arm/dts/rk3588-rock-5b.dts
+> +++ b/arch/arm/dts/rk3588-rock-5b.dts
+> @@ -12,6 +12,7 @@
+>   	aliases {
+>   		mmc0 = &sdhci;
+>   		mmc1 = &sdmmc;
+> +		mmc2 = &sdio;
+>   		serial2 = &uart2;
+>   	};
+>   
+> @@ -44,6 +45,43 @@
+>   		#cooling-cells = <2>;
+>   	};
+>   
+> +	vcc3v3_pcie2x1l0: vcc3v3-pcie2x1l0-regulator {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpios = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pcie2_0_vcc3v3_en>;
+> +		regulator-name = "vcc3v3_pcie2x1l0";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		startup-delay-us = <50000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+> +	vcc3v3_pcie2x1l2: vcc3v3-pcie2x1l2-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_pcie2x1l2";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		startup-delay-us = <5000>;
+> +		vin-supply = <&vcc_3v3_s3>;
+> +	};
+> +
+> +	vcc3v3_pcie30: vcc3v3-pcie30-regulator {
+> +		compatible = "regulator-fixed";
+> +		enable-active-high;
+> +		gpios = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pcie3_vcc3v3_en>;
+> +		regulator-name = "vcc3v3_pcie30";
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		startup-delay-us = <5000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +
+>   	vcc5v0_host: vcc5v0-host-regulator {
+>   		compatible = "regulator-fixed";
+>   		regulator-name = "vcc5v0_host";
+> @@ -76,6 +114,29 @@
+>   		regulator-max-microvolt = <1100000>;
+>   		vin-supply = <&vcc5v0_sys>;
+>   	};
+> +
+> +	vcc3v3_wf: vcc3v3-wf-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vcc3v3_wf";
+> +		regulator-always-on;
+> +		regulator-boot-on;
+> +		regulator-min-microvolt = <3300000>;
+> +		regulator-max-microvolt = <3300000>;
+> +		enable-active-high;
+> +		gpios = <&gpio1 RK_PD2 GPIO_ACTIVE_HIGH>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&vcc3v3_wf_en>;
+> +		startup-delay-us = <50000>;
+> +		vin-supply = <&vcc5v0_sys>;
+> +	};
+> +};
+> +
+> +&combphy0_ps {
+> +	status = "okay";
+> +};
+> +
+> +&combphy1_ps {
+> +	status = "okay";
+>   };
+>   
+>   &cpu_b0 {
+> @@ -204,6 +265,34 @@
+>   	};
+>   };
+>   
+> +&pcie2x1l0 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie2_0_rst>;
+> +	reset-gpios = <&gpio4 RK_PA5 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_pcie2x1l0>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie2x1l2 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie2_2_rst>;
+> +	reset-gpios = <&gpio3 RK_PB0 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_pcie2x1l2>;
+> +	status = "okay";
+> +};
+> +
+> +&pcie30phy {
+> +	status = "okay";
+> +};
+> +
+> +&pcie3x4 {
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&pcie3_rst>;
+> +	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+> +	vpcie3v3-supply = <&vcc3v3_pcie30>;
+> +	status = "okay";
+> +};
+> +
+>   &pinctrl {
+>   	hym8563 {
+>   		hym8563_int: hym8563-int {
+> @@ -217,11 +306,41 @@
+>   		};
+>   	};
+>   
+> +	pcie2 {
+> +		pcie2_0_rst: pcie2-0-rst {
+> +			rockchip,pins = <4 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie2_0_vcc3v3_en: pcie2-0-vcc-en {
+> +			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie2_2_rst: pcie2-2-rst {
+> +			rockchip,pins = <3 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+> +	pcie3 {
+> +		pcie3_rst: pcie3-rst {
+> +			rockchip,pins = <4 RK_PB6 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +
+> +		pcie3_vcc3v3_en: pcie3-vcc3v3-en {
+> +			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+> +
+>   	usb {
+>   		vcc5v0_host_en: vcc5v0-host-en {
+>   			rockchip,pins = <4 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+>   		};
+>   	};
+> +
+> +	m2e {
+> +		vcc3v3_wf_en: vcc3v3-wf-en {
+> +			rockchip,pins = <1 RK_PD2 RK_FUNC_GPIO &pcfg_pull_none>;
+> +		};
+> +	};
+>   };
+>   
+>   &pwm1 {
+> @@ -258,6 +377,27 @@
+>   	status = "okay";
+>   };
+>   
+> +&sdio {
+> +	max-frequency = <200000000>;
+> +	no-sd;
+> +	no-mmc;
+> +	non-removable;
+> +	bus-width = <4>;
+> +	cap-sdio-irq;
+> +	disable-wp;
+> +	keep-power-in-suspend;
+> +	wakeup-source;
+> +	sd-uhs-sdr12;
+> +	sd-uhs-sdr25;
+> +	sd-uhs-sdr50;
+> +	sd-uhs-sdr104;
+> +	vmmc-supply = <&vcc3v3_wf>;
+> +	vqmmc-supply = <&vcc_1v8_s3>;
+> +	pinctrl-names = "default";
+> +	pinctrl-0 = <&sdiom0_pins>;
+> +	status = "okay";
+> +};
+> +
+>   &spi2 {
+>   	status = "okay";
+>   	assigned-clocks = <&cru CLK_SPI2>;
+> diff --git a/arch/arm/dts/rk3588-u-boot.dtsi b/arch/arm/dts/rk3588-u-boot.dtsi
+> index 68b419f3abd5..15de4706254e 100644
+> --- a/arch/arm/dts/rk3588-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-u-boot.dtsi
+> @@ -3,7 +3,6 @@
+>    * Copyright (c) 2022 Edgeble AI Technologies Pvt. Ltd.
+>    */
+>   
+> -#include "rockchip-u-boot.dtsi"
+>   #include "rk3588s-u-boot.dtsi"
+>   
+>   / {
+> diff --git a/arch/arm/dts/rk3588s-pinctrl.dtsi b/arch/arm/dts/rk3588s-pinctrl.dtsi
+> index 48181671eacb..63151d9d2377 100644
+> --- a/arch/arm/dts/rk3588s-pinctrl.dtsi
+> +++ b/arch/arm/dts/rk3588s-pinctrl.dtsi
+> @@ -1349,6 +1349,41 @@
+>   	};
+>   
+>   	i2s2 {
+> +		/omit-if-no-ref/
+> +		i2s2m0_lrck: i2s2m0-lrck {
+> +			rockchip,pins =
+> +				/* i2s2m0_lrck */
+> +				<2 RK_PC0 2 &pcfg_pull_none>;
+> +		};
+> +
+> +		/omit-if-no-ref/
+> +		i2s2m0_mclk: i2s2m0-mclk {
+> +			rockchip,pins =
+> +				/* i2s2m0_mclk */
+> +				<2 RK_PB6 2 &pcfg_pull_none>;
+> +		};
+> +
+> +		/omit-if-no-ref/
+> +		i2s2m0_sclk: i2s2m0-sclk {
+> +			rockchip,pins =
+> +				/* i2s2m0_sclk */
+> +				<2 RK_PB7 2 &pcfg_pull_none>;
+> +		};
+> +
+> +		/omit-if-no-ref/
+> +		i2s2m0_sdi: i2s2m0-sdi {
+> +			rockchip,pins =
+> +				/* i2s2m0_sdi */
+> +				<2 RK_PC3 2 &pcfg_pull_none>;
+> +		};
+> +
+> +		/omit-if-no-ref/
+> +		i2s2m0_sdo: i2s2m0-sdo {
+> +			rockchip,pins =
+> +				/* i2s2m0_sdo */
+> +				<4 RK_PC3 2 &pcfg_pull_none>;
+> +		};
+> +
+>   		/omit-if-no-ref/
+>   		i2s2m1_lrck: i2s2m1-lrck {
+>   			rockchip,pins =
+> @@ -3307,6 +3342,15 @@
+>   	};
+>   
+>   	uart9 {
+> +		/omit-if-no-ref/
+> +		uart9m0_xfer: uart9m0-xfer {
+> +			rockchip,pins =
+> +				/* uart9_rx_m0 */
+> +				<2 RK_PC4 10 &pcfg_pull_up>,
+> +				/* uart9_tx_m0 */
+> +				<2 RK_PC2 10 &pcfg_pull_up>;
+> +		};
+> +
+>   		/omit-if-no-ref/
+>   		uart9m1_xfer: uart9m1-xfer {
+>   			rockchip,pins =
+> diff --git a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> index c47b0a7112c8..584476f77b13 100644
+> --- a/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-rock-5a-u-boot.dtsi
+> @@ -4,10 +4,6 @@
+>    */
+>   
+>   #include "rk3588s-u-boot.dtsi"
+> -#include <dt-bindings/pinctrl/rockchip.h>
+> -#include <dt-bindings/input/input.h>
+> -#include <dt-bindings/gpio/gpio.h>
+> -#include <dt-bindings/usb/pd.h>
+>   
+>   / {
+>   	chosen {
+> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
+> index 27b2d7eff87b..878936fa07d6 100644
+> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+> @@ -4,7 +4,6 @@
+>    */
+>   
+>   #include "rockchip-u-boot.dtsi"
+> -#include <dt-bindings/phy/phy.h>
+>   
+>   / {
+>   	aliases {
+> @@ -102,15 +101,6 @@
+>   		reg = <0x0 0xfd5c8000 0x0 0x4000>;
+>   	};
+>   
+> -	sfc: spi@fe2b0000 {
+> -		compatible = "rockchip,sfc";
+> -		reg = <0x0 0xfe2b0000 0x0 0x4000>;
+> -		interrupts = <GIC_SPI 206 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		clocks = <&cru SCLK_SFC>, <&cru HCLK_SFC>;
+> -		clock-names = "clk_sfc", "hclk_sfc";
+> -		status = "disabled";
+> -	};
+> -
+>   	rng: rng@fe378000 {
+>   		compatible = "rockchip,trngv1";
+>   		reg = <0x0 0xfe378000 0x0 0x200>;
+> diff --git a/arch/arm/dts/rk3588s.dtsi b/arch/arm/dts/rk3588s.dtsi
+> index 5544f66c6ff4..1a820a5a51eb 100644
+> --- a/arch/arm/dts/rk3588s.dtsi
+> +++ b/arch/arm/dts/rk3588s.dtsi
+> @@ -1424,6 +1424,17 @@
+>   		};
+>   	};
+>   
+> +	sfc: spi@fe2b0000 {
+> +		compatible = "rockchip,sfc";
+> +		reg = <0x0 0xfe2b0000 0x0 0x4000>;
+> +		interrupts = <GIC_SPI 206 IRQ_TYPE_LEVEL_HIGH 0>;
+> +		clocks = <&cru SCLK_SFC>, <&cru HCLK_SFC>;
+> +		clock-names = "clk_sfc", "hclk_sfc";
+> +		#address-cells = <1>;
+> +		#size-cells = <0>;
+> +		status = "disabled";
+> +	};
+> +
+>   	sdmmc: mmc@fe2c0000 {
+>   		compatible = "rockchip,rk3588-dw-mshc", "rockchip,rk3288-dw-mshc";
+>   		reg = <0x0 0xfe2c0000 0x0 0x4000>;
