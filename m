@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80BE2CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA94CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:28:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35D0C86B36;
-	Thu, 12 Oct 2023 04:03:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 474EB86EAA;
+	Thu, 12 Oct 2023 04:03:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CVfnY2eA";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M9LZKqBg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06EFB86E75; Thu, 12 Oct 2023 04:01:22 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 1D9AF86E4B; Thu, 12 Oct 2023 04:01:30 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6075C86E75
+ by phobos.denx.de (Postfix) with ESMTPS id 4F34D86E8F
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:58:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-59f6441215dso6141087b3.2
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-66d060aa2a4so2600106d6.2
  for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:58:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697075811; x=1697680611; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697075814; x=1697680614; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xfVfhB0gai03kpRDF6gwvv4XwBnKSad8IOk1Q5LlH08=;
- b=CVfnY2eA1Ces3OaAvcW4UEp9H19oHPx7gl+SWLCUc4xLK0kWojHoV3GohcR3e6gW2m
- l1YGhpt9uTNIp9fEIAXURpsVaUEd5kLzMRzUZGD47JCdPAXyEn6joqwJOZSLGWoIXHn4
- GhiG1VmUxgayvIc0BqZEw+eddcZ5tB0Fw45RIkjcHsuvNZrCDZb1jZ9WKNofmPJdvPdz
- bxpZETlyG9bRaLItwBei444u7G3QZhXgn2pN2iceY5nC5y69jD0J6dQRFg6Ve7qH+p6l
- Rgwd11KCtyTYmi9xcldkuYncVId6gccRwKR+R5zzzKanf+VeLaGGA1dI3z6O7vfMxzLL
- EqRQ==
+ bh=pZzjezKApISn0uSMHAPaorKbAXrIvzZcpuJxuZ56kWo=;
+ b=M9LZKqBg8KSfdz9nG8rnfaUS0b5lqj1PXfqvoKlXiVjU+lypl0aZk1R7nW7Uf1vL4g
+ ca+/i5HiOpi90otxq6PJztWhZzzh06eTHv454V6B7ZLKAfLo+bES7wXq8WN/WDA/j1Qx
+ QqpU/PnoMafBRxES8dxG7ZItMddzTYUaoZjM/aWGenALlEa7tlSL7MoWjZdZeaEbXYfp
+ 9GL+yFHcFq8dZCQrQDUV+Z8pobthZ99a/JO2ndvSxCDqBor6B5d9scdj/xdrwEO1QhPZ
+ fOKNDLA1Kazw8J2qMGcZ57QF2S/upoHzKRxPewZTE5X/hb7UivAp3Rz1TMwxdlLpET2t
+ FKNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697075811; x=1697680611;
+ d=1e100.net; s=20230601; t=1697075814; x=1697680614;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xfVfhB0gai03kpRDF6gwvv4XwBnKSad8IOk1Q5LlH08=;
- b=O/sNaGZNHSzeqvxX3cFOutnc5HUNB4cf88ucY31i1+vMGSeQ/Fs6MjvAkekfIvNWId
- DZ4cFrp4NdMtUn4yBAb2al3HC3XLab3qhobi5dD0RFqufpgF8zhx7ILCD2bi1mnrTpkh
- wJGkKIecG1I+M4vzJodHgLR6sRRYqU/FFR1vmqq1TOCl5N5Y06ryzhsFmSFQmnx8HI9R
- Jc0r4ZxnUooBYI3+2cvXApdTDJSw6EWNrGBs9V28Rul5UA2Uo3oHo11cQjBnMoubpc4w
- 781NlmA+1g1kU/qc/sb/lnbKy8rpUh74cfbwF/xzZHcF9M7Bpx6dT9saaSZUynVfaQVO
- +XjA==
-X-Gm-Message-State: AOJu0YztW0ZcE2vjqY89l1DZp0ssk8SCXZ9mc7g9Zim05r73zEwVCJlT
- x46E56Y5FFSaLPD9LUhMuj6+Li962Lp1ow==
-X-Google-Smtp-Source: AGHT+IGvw6F0Uh7OWsSK9ccdGA4Ovj+Pd3R/oriBARWjMKHnxyfavuU2EBnHAUXe6IaAPVXfU8qiSw==
-X-Received: by 2002:a81:7103:0:b0:59b:586c:c65e with SMTP id
- m3-20020a817103000000b0059b586cc65emr27216847ywc.36.1697075810897; 
- Wed, 11 Oct 2023 18:56:50 -0700 (PDT)
+ bh=pZzjezKApISn0uSMHAPaorKbAXrIvzZcpuJxuZ56kWo=;
+ b=Vz7nvR32CdchL46LGPth2DlcDN/OgX5d3nWlCcpUlp4TlGKeMciNf481gvq/0znYp0
+ H2rvqDRFc2YidddHL48rHkEKNtrKfGDmnvao47xTQWg+qr46I88FC/VutMDUnnyfflKQ
+ eQMhI7UHFkKihlk0NwGyWZBWLaVNrakofz23w+Ms+okqlzIAkGFreE6beOVMNRzfO0ie
+ lH97kqSTm4fKBmFFAejMd/hjTXyReX8TaKv4zzMAZlp84QaVZLlLzT/oIj7mcVPsz+q/
+ ZPS5Qg4TbDGBlemO2kcqoASVmYmCOi4aaeloBqmMvwol0Suah9iZ92f1Pgh5yOIGQdf2
+ 6zVw==
+X-Gm-Message-State: AOJu0Yz+4DiP476lFGfAZmvj4WjIJAFzSUZc3DYO6qlJw+z2uz6JvrxB
+ CGQyWdRKCXtLouEW0XHXsHbAAY8X7Gd09Q==
+X-Google-Smtp-Source: AGHT+IHqzkofFNb5ZVBFb7RdOO6E8JllRbiqs6jQZNOqnrorNUnE/gDomiRf4mE05KkaQy+Y8IFRZQ==
+X-Received: by 2002:a0c:e34a:0:b0:66d:9d2:8312 with SMTP id
+ a10-20020a0ce34a000000b0066d09d28312mr3054269qvm.49.1697075814245; 
+ Wed, 11 Oct 2023 18:56:54 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- os22-20020a05620a811600b007757acf488esm5665768qkn.39.2023.10.11.18.56.50
+ t7-20020a0cde07000000b006624e9d51d9sm6103181qvk.76.2023.10.11.18.56.53
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 18:56:50 -0700 (PDT)
+ Wed, 11 Oct 2023 18:56:53 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 19/26] test: spl: Fix spl_test_load not failing if fname
- doesn't exist
-Date: Wed, 11 Oct 2023 21:56:19 -0400
-Message-Id: <20231012015626.3487451-20-seanga2@gmail.com>
+ Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>
+Subject: [PATCH 22/26] test: spl: Add a test for spl_blk_load_image
+Date: Wed, 11 Oct 2023 21:56:22 -0400
+Message-Id: <20231012015626.3487451-23-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231012015626.3487451-1-seanga2@gmail.com>
 References: <20231012015626.3487451-1-seanga2@gmail.com>
@@ -94,47 +94,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Returning a negative value from a unit test doesn't automatically fail the
-test.  We have to fail an assertion. Modify the test to do so.
-
-This now causes the test to count as a failure on VPL. This is because the
-fname of SPL (and U-Boot) is generated with make_exec in os_jump_to_image.
-The original name of SPL is gone, and we can't determine the name of U-Boot
-from the generated name.
+Add a test for spl_blk_load_image, currently used only by NVMe. Because
+there is no sandbox NVMe driver, just use MMC instead. Avoid falling back
+to raw images to make failures more obvious.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- configs/sandbox_vpl_defconfig | 1 +
- test/image/spl_load_os.c      | 6 ++----
- 2 files changed, 3 insertions(+), 4 deletions(-)
+ configs/sandbox_noinst_defconfig |  2 ++
+ test/image/Kconfig               |  3 +-
+ test/image/spl_load_fs.c         | 62 ++++++++++++++++++++++++++++++++
+ 3 files changed, 66 insertions(+), 1 deletion(-)
 
-diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
-index 8d76f19729b..5bd0281796d 100644
---- a/configs/sandbox_vpl_defconfig
-+++ b/configs/sandbox_vpl_defconfig
-@@ -262,3 +262,4 @@ CONFIG_UNIT_TEST=y
- CONFIG_SPL_UNIT_TEST=y
- CONFIG_UT_TIME=y
- CONFIG_UT_DM=y
-+# CONFIG_SPL_UT_LOAD_OS is not set
-diff --git a/test/image/spl_load_os.c b/test/image/spl_load_os.c
-index 06daa3700b8..500867ffd49 100644
---- a/test/image/spl_load_os.c
-+++ b/test/image/spl_load_os.c
-@@ -59,10 +59,8 @@ static int spl_test_load(struct unit_test_state *uts)
- 	load.read = read_fit_image;
+diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
+index 0a542cfb6aa..11be2dccf7d 100644
+--- a/configs/sandbox_noinst_defconfig
++++ b/configs/sandbox_noinst_defconfig
+@@ -34,6 +34,7 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_NO_BSS_LIMIT=y
+ CONFIG_HANDOFF=y
+ CONFIG_SPL_BOARD_INIT=y
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
+ CONFIG_SPL_LOAD_IMX_CONTAINER=y
+ CONFIG_SPL_SYS_MALLOC=y
+@@ -123,6 +124,7 @@ CONFIG_ADC=y
+ CONFIG_ADC_SANDBOX=y
+ CONFIG_AXI=y
+ CONFIG_AXI_SANDBOX=y
++CONFIG_SPL_BLK_FS=y
+ CONFIG_SYS_IDE_MAXBUS=1
+ CONFIG_SYS_ATA_BASE_ADDR=0x100
+ CONFIG_SYS_ATA_STRIDE=4
+diff --git a/test/image/Kconfig b/test/image/Kconfig
+index 963c86cc290..a52766b77d4 100644
+--- a/test/image/Kconfig
++++ b/test/image/Kconfig
+@@ -14,12 +14,13 @@ config SPL_UT_LOAD_FS
+ 	bool "Unit tests for filesystems"
+ 	depends on SANDBOX && SPL_OF_REAL
+ 	depends on FS_LOADER
++	depends on SPL_BLK_FS
+ 	depends on SPL_FS_FAT
+ 	depends on SPL_FS_EXT4
+ 	depends on SPL_MMC_WRITE
+ 	default y
+ 	help
+-	  Test filesystems in SPL.
++	  Test filesystems and the various load methods which use them.
  
- 	ret = sandbox_find_next_phase(fname, sizeof(fname), true);
--	if (ret) {
--		printf("(%s not found, error %d)\n", fname, ret);
--		return ret;
--	}
-+	if (ret)
-+		ut_assertf(0, "%s not found, error %d\n", fname, ret);
- 	load.filename = fname;
- 
- 	header = spl_get_load_buffer(-sizeof(*header), sizeof(*header));
+ config SPL_UT_LOAD_OS
+ 	bool "Test loading from the host OS"
+diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
+index 8cd90b73518..45059f91999 100644
+--- a/test/image/spl_load_fs.c
++++ b/test/image/spl_load_fs.c
+@@ -10,6 +10,7 @@
+ #include <fat.h>
+ #include <fs.h>
+ #include <memalign.h>
++#include <spl.h>
+ #include <asm/io.h>
+ #include <linux/stat.h>
+ #include <test/spl.h>
+@@ -303,3 +304,64 @@ static int spl_test_fat(struct unit_test_state *uts)
+ 	return spl_test_fs(uts, __func__, create_fat);
+ }
+ SPL_TEST(spl_test_fat, DM_FLAGS);
++
++static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
++			   enum spl_test_image type, create_fs_t create_fs)
++{
++	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
++	struct blk_desc *dev_desc;
++	size_t fs_size, fs_data, img_size, img_data,
++	       data_size = SPL_TEST_DATA_SIZE;
++	struct spl_image_info info_write = {
++		.name = test_name,
++		.size = data_size,
++	}, info_read = { };
++	struct disk_partition part = {
++		.start = 1,
++		.sys_ind = 0x83,
++	};
++	struct spl_boot_device bootdev = { };
++	void *fs;
++	char *data;
++
++	img_size = create_image(NULL, type, &info_write, &img_data);
++	ut_assert(img_size);
++	fs_size = create_fs(NULL, img_size, filename, &fs_data);
++	ut_assert(fs_size);
++	fs = calloc(fs_size, 1);
++	ut_assertnonnull(fs);
++
++	data = fs + fs_data + img_data;
++	generate_data(data, data_size, test_name);
++	ut_asserteq(img_size, create_image(fs + fs_data, type, &info_write,
++					   NULL));
++	ut_asserteq(fs_size, create_fs(fs, img_size, filename, NULL));
++
++	dev_desc = blk_get_devnum_by_uclass_id(UCLASS_MMC, 0);
++	ut_assertnonnull(dev_desc);
++
++	ut_asserteq(512, dev_desc->blksz);
++	part.size = fs_size / dev_desc->blksz;
++	ut_assertok(write_mbr_partitions(dev_desc, &part, 1, 0));
++	ut_asserteq(part.size, blk_dwrite(dev_desc, part.start, part.size, fs));
++
++	ut_assertok(spl_blk_load_image(&info_read, &bootdev, UCLASS_MMC, 0, 1));
++	if (check_image_info(uts, &info_write, &info_read))
++		return CMD_RET_FAILURE;
++	ut_asserteq_mem(data, phys_to_virt(info_write.load_addr), data_size);
++
++	free(fs);
++	return 0;
++}
++
++static int spl_test_blk(struct unit_test_state *uts, const char *test_name,
++			enum spl_test_image type)
++{
++	if (spl_test_mmc_fs(uts, test_name, type, create_fat))
++		return CMD_RET_FAILURE;
++
++	return spl_test_mmc_fs(uts, test_name, type, create_ext2);
++}
++SPL_IMG_TEST(spl_test_blk, LEGACY, DM_FLAGS);
++SPL_IMG_TEST(spl_test_blk, FIT_EXTERNAL, DM_FLAGS);
++SPL_IMG_TEST(spl_test_blk, FIT_INTERNAL, DM_FLAGS);
 -- 
 2.37.1
 
