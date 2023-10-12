@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D208FCDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B478CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:24:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7380686E0E;
-	Thu, 12 Oct 2023 04:02:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B6B886E4F;
+	Thu, 12 Oct 2023 04:02:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gb6WWk3b";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="igZ78b4Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB5D686E39; Thu, 12 Oct 2023 03:59:52 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 0B4CB86EC0; Thu, 12 Oct 2023 03:59:39 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 575CE86E43
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:57:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A8D7C86E69
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:58:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-66cfef11a25so2689516d6.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:57:56 -0700 (PDT)
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-66d0ceba445so2805366d6.0
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:58:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697075800; x=1697680600; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697075804; x=1697680604; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=up8zM5vYcSt5mZpHG7aN2sfP2VndAxb0B4KmNoGvH+0=;
- b=gb6WWk3bkaYhb9gukM4EJseWvdWSx5z251OX14RXre7B8YYQwnTciTSfcwOc4mAUnM
- Fht/JeWFbO0lpSn3bKfFLTqST8G2W97cfh6mjitxaccI3wCMGMKb6YoR8DOS448igZec
- jKXa6qZIMsyCKTgCiCoD7MPV8JpitUzAgnm+j+wzUwsxqp4wua5GM8K/actAS50Rhalj
- GxRaDhhCMvI0FQ/6HXRvoC3abeXQNrra6XWH68bmKKHUMg0ZUFgu9Pd43kJ5AeqvvwqZ
- /GoU/ycnnElYAknwLwz7wxlIBWVDjk2oY69+OHwTbbxCKI6G/NTZ6aztSQbu3WurQVz5
- WXLA==
+ bh=WFBvNGiRBVrGSy4pKBGElDLBRNXx8tGH7zTLsTFx2lM=;
+ b=igZ78b4Zoqzhmtkq3+X6beTwOmOtSzYlVWW+xzAvoHuqUWJi1syqjhwoQaMF4rtjc/
+ 8QuRumnZRK0E+8E8zJ8L4zwD4is6d5fTuQU/eOgLE9jTUfIULAbuH1Ia9TRk3cnJTSd2
+ 1FQ4hiJBo61KeAagQYIrFydhQTAq9NhFJI3cCtqVGBnW+LNPlrU8kjxJZ87PAgG1m3Wv
+ gfO2vAdyEq+GFsdZl9BCmPvxWUPcWaiqYB5HGeSaHL/Rtn8W0V6ZDOK/WVORPNQclPGj
+ vBbqo6JwC6dwbu1j9wgQUqQ63Tf4hMBZpJw9eKdGFE95PntViuygEeKJno2N/ejH2os/
+ ok3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697075800; x=1697680600;
+ d=1e100.net; s=20230601; t=1697075804; x=1697680604;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=up8zM5vYcSt5mZpHG7aN2sfP2VndAxb0B4KmNoGvH+0=;
- b=mP9SW6QIUEP2BS0XM2O6xxKq1T1cdA1nIj0zMOQp0WkSVzlA3Fhfp2jIou4d/ZGNZo
- Ifo5d6ZeKbm69bOZagIMsfEbVpX6fSj8fAb33IeJhB+URJzDDwTfqjuYMvUmXjd1vQOs
- 9ybITz0b+1dJJhhByvCCFfMgkgPe3IweVqlcrtOu/Kv6TcD8/MJA2YsXIlrTbT8MfQAg
- yVe8SXDgUFcMr+0vPgQOCQCB3+5s8G5JQVWCjVSMVYw+yXWo9q8ZLUh1+4zVSIov937g
- ooUO6FDWoOQHjgtBQnvWq/fShyva4QStzAjzebPkJPQuNykSwdKG0Trm0pw6t33+2ffD
- 8H2A==
-X-Gm-Message-State: AOJu0YziG5IxEPk7mFCRU8txdhnvSZRErqH/GtHKTBg4LFJC0Ora4G1w
- 6qpyvCIItIC9uMZsnb9AbkWH20PlaAElBg==
-X-Google-Smtp-Source: AGHT+IHti1MsGuL37ZdC/zysWMXw6+aoDt+IwXLeZFmnQM16qD9Q4ahclOYe0YcsQgRD7/6MYqTHSA==
-X-Received: by 2002:a0c:b35c:0:b0:656:3046:28ab with SMTP id
- a28-20020a0cb35c000000b00656304628abmr18465514qvf.45.1697075800380; 
- Wed, 11 Oct 2023 18:56:40 -0700 (PDT)
+ bh=WFBvNGiRBVrGSy4pKBGElDLBRNXx8tGH7zTLsTFx2lM=;
+ b=W9Fm6pTfZ+OFWncDoWuvUJ/zBL2YjBwxmbfVJvU7lkADYBtG+CeDzVmXcaUOCnwxlq
+ /ERMRzGb5lv+L8j7huZB7muIbi6N0hKVb2gy+gUYl1YSHbIaR5IT5gJ61jC9WKEJqF5D
+ jspvkRx7el9BJcPPdqWhuya15pjDnFTlWgFfGkRcLUfsr+S/gGJKnxJ2ooJw85DP1+/K
+ YTsYKvtM4KyFnhnLBUPqp2VTPhuXsMhMKUznYgZ87PYggUxsv8hQjLrLeFbtVvTzWMj1
+ n+siKim2+us/oMBjznHQRCXuqRKEt+cdkf4MnGUru6d6UrvnCMi83U0EOFuisCjHGO9F
+ zFHQ==
+X-Gm-Message-State: AOJu0YwxRKP/UpGmOBnlQNgCqp5y3HhPse3Tp8Lns+bA/nkYEXARbKDL
+ ac6g3B0tuyf1wr2lFp7AODD2hAK68xziVA==
+X-Google-Smtp-Source: AGHT+IESWzzLc8VQu9wBymfIvr5m7eZ+x2ZwLEWCF21KlMp5wm9e5aGmz6vT2YbTyAhJSZvOwcH1uQ==
+X-Received: by 2002:a0c:f4cf:0:b0:65b:11b3:6ef5 with SMTP id
+ o15-20020a0cf4cf000000b0065b11b36ef5mr19945053qvm.17.1697075804217; 
+ Wed, 11 Oct 2023 18:56:44 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- p17-20020a0ccb91000000b006360931c12fsm6128422qvk.96.2023.10.11.18.56.39
+ l12-20020a0ce08c000000b0066d0f35554asm587541qvk.79.2023.10.11.18.56.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 18:56:40 -0700 (PDT)
+ Wed, 11 Oct 2023 18:56:43 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Heiko Schocher <hs@denx.de>
-Subject: [PATCH 10/26] lib: acpi: Fix linking SPL when ACPIGEN is enabled
-Date: Wed, 11 Oct 2023 21:56:10 -0400
-Message-Id: <20231012015626.3487451-11-seanga2@gmail.com>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH 13/26] net: Fix compiling SPL when fastboot is enabled
+Date: Wed, 11 Oct 2023 21:56:13 -0400
+Message-Id: <20231012015626.3487451-14-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231012015626.3487451-1-seanga2@gmail.com>
 References: <20231012015626.3487451-1-seanga2@gmail.com>
@@ -94,42 +95,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-lib/acpi/acpigen.o is only compiled into SPL when SPL_ACPIGEN is enabled.
-Update several files which reference these functions accordingly.
+When fastboot is enabled in U-Boot proper and SPL_NET is enabled, we will
+try to (unsuccessfully) reference it in SPL. Fix these linker errors by
+conditioning on SPL_UDP/TCP_FUNCTION_FASTBOOT.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- drivers/core/root.c  | 2 +-
- drivers/i2c/Makefile | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ net/Makefile | 4 ++--
+ net/net.c    | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/core/root.c b/drivers/core/root.c
-index 126b3140666..d4ae652bcfb 100644
---- a/drivers/core/root.c
-+++ b/drivers/core/root.c
-@@ -426,7 +426,7 @@ void dm_get_mem(struct dm_stats *stats)
- 		stats->tag_size;
- }
- 
--#ifdef CONFIG_ACPIGEN
-+#if CONFIG_IS_ENABLED(ACPIGEN)
- static int root_acpi_get_name(const struct udevice *dev, char *out_name)
- {
- 	return acpi_copy_name(out_name, "\\_SB");
-diff --git a/drivers/i2c/Makefile b/drivers/i2c/Makefile
-index d5b85f398db..a96a8c7e955 100644
---- a/drivers/i2c/Makefile
-+++ b/drivers/i2c/Makefile
-@@ -3,7 +3,7 @@
- # (C) Copyright 2000-2007
- # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
- obj-$(CONFIG_$(SPL_)DM_I2C) += i2c-uclass.o
--ifdef CONFIG_ACPIGEN
-+ifdef CONFIG_$(SPL_)ACPIGEN
- obj-$(CONFIG_$(SPL_)DM_I2C) += acpi_i2c.o
- endif
- obj-$(CONFIG_$(SPL_)DM_I2C_GPIO) += i2c-gpio.o
+diff --git a/net/Makefile b/net/Makefile
+index 3e2d061338d..5ea58eef7e4 100644
+--- a/net/Makefile
++++ b/net/Makefile
+@@ -27,8 +27,8 @@ obj-$(CONFIG_CMD_PCAP) += pcap.o
+ obj-$(CONFIG_CMD_RARP) += rarp.o
+ obj-$(CONFIG_CMD_SNTP) += sntp.o
+ obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
+-obj-$(CONFIG_UDP_FUNCTION_FASTBOOT)  += fastboot_udp.o
+-obj-$(CONFIG_TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
++obj-$(CONFIG_$(SPL_)UDP_FUNCTION_FASTBOOT)  += fastboot_udp.o
++obj-$(CONFIG_$(SPL_)TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
+ obj-$(CONFIG_CMD_WOL)  += wol.o
+ obj-$(CONFIG_PROT_UDP) += udp.o
+ obj-$(CONFIG_PROT_TCP) += tcp.o
+diff --git a/net/net.c b/net/net.c
+index e6f61f0f8f6..8357f084101 100644
+--- a/net/net.c
++++ b/net/net.c
+@@ -511,12 +511,12 @@ restart:
+ 			tftp_start_server();
+ 			break;
+ #endif
+-#if defined(CONFIG_UDP_FUNCTION_FASTBOOT)
++#if CONFIG_IS_ENABLED(UDP_FUNCTION_FASTBOOT)
+ 		case FASTBOOT_UDP:
+ 			fastboot_udp_start_server();
+ 			break;
+ #endif
+-#if defined(CONFIG_TCP_FUNCTION_FASTBOOT)
++#if CONFIG_IS_ENABLED(TCP_FUNCTION_FASTBOOT)
+ 		case FASTBOOT_TCP:
+ 			fastboot_tcp_start_server();
+ 			break;
 -- 
 2.37.1
 
