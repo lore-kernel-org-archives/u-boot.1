@@ -4,84 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10A31CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 04:30:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3BF1CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 05:33:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0269C86E0F;
-	Thu, 12 Oct 2023 06:30:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DFA986E0E;
+	Thu, 12 Oct 2023 07:33:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eU2Ge1RW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CGt41Tck";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8593C86D80; Thu, 12 Oct 2023 06:30:19 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 7CA0886E0B; Thu, 12 Oct 2023 07:33:37 +0200 (CEST)
+Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
+ [IPv6:2607:f8b0:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B4B186E0F
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 06:30:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DADF786E13
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 07:33:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-417f872fb94so4076841cf.0
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 21:30:15 -0700 (PDT)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pf1-x430.google.com with SMTP id
+ d2e1a72fcca58-694f3444f94so457327b3a.2
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 22:33:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697085014; x=1697689814; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=d7wxEsy7f5GztuJ8S+Buy53wrG3bL7T/mwrR4uENxDQ=;
- b=eU2Ge1RWPl5MSMRoBQMb6MTjjMlHu2XhHWv/0jfOZCk5bz7VjVqNiYCG6oVFzeB7J6
- Voupy8AU3172zfM5D0+v7bYeA4ZvpHZvBha+6kpwB0q/FrciYl/k3TDhV+agMjOEoDYU
- YAp0YHAv6ymrchRfgrJS/iuY1MyD/RuhQwGOsuVtyx8I0LZiNa1CngAloIXCpIUJHwIU
- E1DnCfn5R07RxxaSW2ajRiF9qeaHSKo2iMp8Yr1z/aVK2fq5FwrCE21jcXmXu72e0rmC
- qrzosQXv369Cy4aL72E4aScqbD1NqlMWM+slnuZKQyc/Z2eeKKu63VeEgWx3+Y1aWetY
- spLw==
+ d=linaro.org; s=google; t=1697088811; x=1697693611; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=USp9ZiaqlqmZ7QzOzuM58XasadBRx+KZKC/rPBPErZ4=;
+ b=CGt41TcketPyZ8lg7DFTMTASeQ7slqO0ce76vuNcZvMWKEAskHo9YW0skCAAmCXxwx
+ tUO5TMCJdTnFgGCkgmPSKAiNLQsfQksKG2TFlizKr9xK6KkT42MlwtX0NL28iIUfCOX1
+ Csq/Dl5+OXMH7JnQEXgsFsA0CdNC0brrafYorbvCUwYW2bzfD8i1NrfjyU9jEepr9ePk
+ YRHUu4DkS7cY8DUJ6veojHIfgk4mbs9il2I3FqKYE5+5ltdlItcvdSTP7ZjrzEk6SLmD
+ jDVyAkRW7ZXPxLfC4j4TqTYrcVlTOqn4cPyg5qaZzAy4FqdveYJ/kazQ9knasd/WOZws
+ 7mbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697085014; x=1697689814;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=d7wxEsy7f5GztuJ8S+Buy53wrG3bL7T/mwrR4uENxDQ=;
- b=WS7lAjfNVC83pXvunxKsOwfMdpzkNhdr97AnC4KEOPI9BlPIfHoUxCHV7fUD6MvxEk
- NdSlfxA4Jx3EExuM8kHT3wn6/JD8fcc9gJ+H7hr4lNoxA9tO84x32aiNuBNhFf0pBtuz
- wdrHcDTqEbOGZF0C7Ofxq9H713r7LJ9TjIvYVsZPUVu1zgNVwmhoEOVFbinbThe6BQgw
- u8spaZh0seKIKkHFNTJQhwDEslvzABL5NiRBjkRrpviFIDiItFkkXl7R9D1v8csI8TTb
- jtZkGJ1+mvdhpW6vimw6GJIk1o142xsvA0TpJh8EA+tC3BAB8w66wfvsqOqxdUb3yF/p
- 8zUA==
-X-Gm-Message-State: AOJu0YxGsrnseVJLaCIsr7hlvBocxj6+qeVBKTB1jYFZ/e/nv30FSPjR
- 280W9fZrWYhgdgHXw1zpozs=
-X-Google-Smtp-Source: AGHT+IH5GgoPOlJW8Uc3TGPLszppVp4t8YB6xK8NCdFafNXxlRINx4PDmaUdHmj4R1N6Riz/GAoPnw==
-X-Received: by 2002:a05:622a:1001:b0:417:922b:f05f with SMTP id
- d1-20020a05622a100100b00417922bf05fmr25969569qte.57.1697085013986; 
- Wed, 11 Oct 2023 21:30:13 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- r5-20020ac85205000000b004181aa90b46sm5910957qtn.89.2023.10.11.21.30.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 21:30:13 -0700 (PDT)
-Message-ID: <8611e3da-7232-1149-8f7b-7106b6cc9d0b@gmail.com>
-Date: Thu, 12 Oct 2023 00:30:12 -0400
+ d=1e100.net; s=20230601; t=1697088811; x=1697693611;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=USp9ZiaqlqmZ7QzOzuM58XasadBRx+KZKC/rPBPErZ4=;
+ b=Dgp+pAiBmkKBR0fxZg6PAM5VwsB3caEbyU+CNdkmH5q2GJko7bFxyrVNqQv8W8QfGd
+ mWJYRgg5PSgK1NoP9DyImdJLYYcpRKMdJVYtoYhk3QujAnA1cIRPY024EGZlfeHC5TMC
+ 6CV+A47XW42ce75L4xMlaG9LvurqT8dKm/TshF9RxbTz9V2kkUtw8ZZBaLiD14N63z10
+ ed4KTWh3xaO1abOcGdu9ZiRfc4vnUNQpTMKvl8APBHJJG6My7t6loRzN6MXf3jpREBhH
+ cNLJ3Wh6JiHY4npUNfdoSw7uqKLhVhOkxiUxU3BNNui1hfCKKZ3Og1WmdjQ2vW49D8J5
+ PM5g==
+X-Gm-Message-State: AOJu0YwoEp4kjP3tEofcvMVrfQ+Y9D6+8AwjnhoHUH0ppeofWFrVN1wy
+ Dogd4VH1vtERAjjNrBQxuKOEoUKW1DANTyLGGyk=
+X-Google-Smtp-Source: AGHT+IFRFIBkRcTQ9dZrs/ieKMe7L7ou7KLHgAuBYUg4jz+oWe8548DaLTfld+/++G/5N9nb19I5Rw==
+X-Received: by 2002:a05:6a00:1687:b0:68a:5395:7aa5 with SMTP id
+ k7-20020a056a00168700b0068a53957aa5mr26057553pfc.17.1697088810913; 
+ Wed, 11 Oct 2023 22:33:30 -0700 (PDT)
+Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
+ n26-20020aa7905a000000b0068fc48fcaa8sm11040294pfo.155.2023.10.11.22.33.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Oct 2023 22:33:30 -0700 (PDT)
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>
+Subject: [PATCH] efi_loader: use well-known guid for auto-created boot option
+Date: Thu, 12 Oct 2023 14:31:59 +0900
+Message-Id: <20231012053200.2337061-1-masahisa.kojima@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH 01/26] spl: legacy: Fix referencing _image_binary_end
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Fabio Estevam <festevam@denx.de>, Marek Vasut <marex@denx.de>
-References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-2-seanga2@gmail.com>
- <CAPnjgZ07k1UeQDT6Ci9Dhtz6oKajGKoP5zr3-55UNHaJsN28=A@mail.gmail.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAPnjgZ07k1UeQDT6Ci9Dhtz6oKajGKoP5zr3-55UNHaJsN28=A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,46 +89,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/11/23 23:41, Simon Glass wrote:
-> On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
->>
->> On non-arm architectures, _image_binary_end is defined as a ulong and not a
->> char[]. Dereference it when accessing it, which is correct for both.
-> 
-> Is 'dereference' the right word?
+The boot option automatically created by efibootmgr is identified
+by the special guid appended in the optional data of boot option.
+The same mechanism is implemented in the EDK II reference
+implementation, it uses the different guid from the one currently
+U-Boot uses.
+The guid indicating auto-created boot option is not defined in the
+UEFI specification, but some userspace tools such as 'efivar' package
+are aware of the guid used in EDK II as auto-created boot option.
 
-Yeah...
+So let's use the same guid as EDK II reference implementation.
 
-"Take the address of it when accessing it"?
+Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+---
+ include/efi_loader.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---Sean
-
->>
->> Fixes: 1b8a1be1a1f ("spl: spl_legacy: Fix spl_end address")
->> Signed-off-by: Sean Anderson <seanga2@gmail.com>
->> ---
->>
->>   common/spl/spl_legacy.c | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> 
->>
->> diff --git a/common/spl/spl_legacy.c b/common/spl/spl_legacy.c
->> index 095443c63d8..e9564e5c2a5 100644
->> --- a/common/spl/spl_legacy.c
->> +++ b/common/spl/spl_legacy.c
->> @@ -19,7 +19,7 @@
->>   static void spl_parse_legacy_validate(uintptr_t start, uintptr_t size)
->>   {
->>          uintptr_t spl_start = (uintptr_t)_start;
->> -       uintptr_t spl_end = (uintptr_t)_image_binary_end;
->> +       uintptr_t spl_end = (uintptr_t)&_image_binary_end;
->>          uintptr_t end = start + size;
->>
->>          if ((start >= spl_start && start < spl_end) ||
->> --
->> 2.37.1
->>
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index c4207edc91..106006127b 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -149,8 +149,8 @@ static inline efi_status_t efi_launch_capsules(void)
+ 
+ /* GUID for the auto generated boot menu entry */
+ #define EFICONFIG_AUTO_GENERATED_ENTRY_GUID \
+-	EFI_GUID(0x38c1acc1, 0x9fc0, 0x41f0, \
+-		 0xb9, 0x01, 0xfa, 0x74, 0xd6, 0xd6, 0xe4, 0xde)
++	EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
++		 0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+ 
+ /* Use internal device tree when starting UEFI application */
+ #define EFI_FDT_USE_INTERNAL NULL
+-- 
+2.34.1
 
