@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC90CC46CA1
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68381CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:52:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9FAA86F47;
-	Thu, 12 Oct 2023 05:46:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 836F186F4F;
+	Thu, 12 Oct 2023 05:46:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DXbwGPG3";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZhbcPNqp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24B4086E51; Thu, 12 Oct 2023 05:46:28 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 068B586F0D; Thu, 12 Oct 2023 05:46:30 +0200 (CEST)
+Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
+ [IPv6:2607:f8b0:4864:20::112e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F34E586EBC
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:46:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FBFB86EFF
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:46:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a2536adaf3so7549297b3.2
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:46:25 -0700 (PDT)
+Received: by mail-yw1-x112e.google.com with SMTP id
+ 00721157ae682-5a7af20c488so6658847b3.1
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:46:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1697082385; x=1697687185; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=F5YP9U39QEWIYWeRZ8VQpcnVfFYx9GPdx0sDtaZdV3E=;
- b=DXbwGPG3Zxv5hHQzxdet9DhmzlyiwIPOTMZxXj1VSfVgC0MlPJ6gqofJv+jdv4ciFw
- SJLKqGMz0Y+nYSSSvUGXYCTIl2kPBIkVAHtB7QSLVgxcBXpzJTsE1RTuarpZaKzTa6T6
- cFpQmerawS2sYKQlXL91XQZW0VOPtkIZ7aRGw=
+ bh=zzQgyo22Y3R5niRb9QGFAhiWdJUxRfzSaHUbVoIa7aM=;
+ b=ZhbcPNqpE/em81WSUbqyqRre3En986wcA4WNu7B13Rs8H5r7PWSIQqDYX+htnN8aKc
+ 2m7OnPFH9V5gO6fKeyV+A08+NtfdHLffPgX/PfwZTkVkY2oK65F9txLHUANQPY01XjDb
+ pnZeHbl25ffKh2zFHjrZ6WGjnUOgf/sv5bRew=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1697082385; x=1697687185;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=F5YP9U39QEWIYWeRZ8VQpcnVfFYx9GPdx0sDtaZdV3E=;
- b=ROlHI3jB5cbr4Ue4I5vR6ibHX4rFbdA4vyndq+Q2OuL3l3Xl3KDvx0q3blhAQ4pgLl
- vuR09qELtStZNdBFcqHo18htqVblbm4f4dCzBtESZkYRpB7VMOR/ixsyrZTYgntaJbgn
- Qusaa+2J/20WGH4LI1SWa8NS+juYxc+Fj4zBDzoN75gL6Opam4LadQCCYpuMYdZJATby
- ds3gny5M1piRkQopM+WM1Z2T3rmxMkeomcpQpPfnzShscCeneUJI4+yQRsnTUMsJLnMq
- IOCKUwpy03tiAipb89mhlHpHd9eOMFGlBW/V/OsKzP4pJUyBcQ54l7xPyxprE0BR6LgV
- FQHw==
-X-Gm-Message-State: AOJu0Yw7rZfbO3vHpBYg4w/MftCiRAQKnmpaBEDLy4kyCtM2iXfp96gS
- u6HAovJYCdSHWwhmJcC/B5p52nsbGSUqEkXHM8QO5yE2DOkvJC36fTo=
-X-Google-Smtp-Source: AGHT+IH9bz16VdgflRguIociYTEiGz9pW+bx3JWEoCb+KowdjtfHgFd7fShndJ/4nP88/Qp0Pg4St87ySzf7mqHTCgI=
-X-Received: by 2002:a0d:dfc6:0:b0:57a:2e83:4daf with SMTP id
- i189-20020a0ddfc6000000b0057a2e834dafmr23366913ywe.32.1697082384598; Wed, 11
+ bh=zzQgyo22Y3R5niRb9QGFAhiWdJUxRfzSaHUbVoIa7aM=;
+ b=umC2iumRRZY2jF7eFuOZsScyJj6JtpVoKe6e6BSKRdr+OFvYMkc6QqSlB/UTHD8MVy
+ yrm4RCwGWJj34kq+myX6KzVuTeUDv8Ie+l9Wo0x7RtHScZTTKOpuU/vEtIW4ZPOVnuHk
+ oNGzs73einoMywCVOjd2neDBLEKtFXtC+tWw+CCrGB4vjHjfaMkzwFWVphGCDqBd0Hqr
+ 9f9xh6af7dlEHC2ZpNJt655D2x6wt3yckACR2o4Z1y2Lm9mAYejkvRqTMWAAfHc7IXE8
+ STCgszx7Yn4CSDtUCH2qF40lxIfDFnSV4rql0oh+R2G+0wOx2NXe5eSI9fL7n1HH3WeQ
+ lIyA==
+X-Gm-Message-State: AOJu0YxL7LXwsPXPaCHu0sogOxp566uJjDxovdnoCJxbDLUTlCXl5CoT
+ /iwkBcGSLnNaQrXnJHnKf4ZgwR8Wv0414k9LlPIZZw==
+X-Google-Smtp-Source: AGHT+IHT4q8hi4Xa6TFfaXfceH14MqehsUfXus67GMFT3hfgz1I/zCaQSkulSGrSyWb+8/HpPKBI1Nx/gvRNxYIBhHY=
+X-Received: by 2002:a0d:cac6:0:b0:5a7:dbd6:14ae with SMTP id
+ m189-20020a0dcac6000000b005a7dbd614aemr4187709ywd.29.1697082384602; Wed, 11
  Oct 2023 20:46:24 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231011153020.1008123-1-mchitale@ventanamicro.com>
-In-Reply-To: <20231011153020.1008123-1-mchitale@ventanamicro.com>
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-21-seanga2@gmail.com>
+In-Reply-To: <20231012015626.3487451-21-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Oct 2023 20:45:22 -0700
-Message-ID: <CAPnjgZ2kv4V5NGBdTTMfBXPJm9wyFOwbnCz87HurRTQc=eQZTw@mail.gmail.com>
-Subject: Re: [PATCH] riscv: binman: Fix compilation error
-To: Mayuresh Chitale <mchitale@ventanamicro.com>
-Cc: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Yu Chien Peter Lin <peterlin@andestech.com>, u-boot@lists.denx.de
+Date: Wed, 11 Oct 2023 20:41:12 -0700
+Message-ID: <CAPnjgZ3GmCq6OJZy9=Dcd49oW0T9fqsyYufNAWX1cHcuZi0UXg@mail.gmail.com>
+Subject: Re: [PATCH 20/26] test: spl: Add functions to create images
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ uboot-imx@nxp.com, 
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,28 +85,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Oct 2023 at 08:30, Mayuresh Chitale
-<mchitale@ventanamicro.com> wrote:
+On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> Some platforms may not have any DDR memory below 4G and for such platforms
-> the TEXT_BASE and LOAD addresses etc are all 64 bit addresses due to
-> which the u-boot build fails with below error:
+> This add some basic functions to create images, and a test for said
+> functions. This is not intended to be a test of the image parsing
+> functions, but rather a framework for creating minimal images for testing
+> load methods. That said, it does do an OK job at finding bugs in the image
+> parsing directly.
 >
-> u-boot/arch/riscv/dts/binman.dtsi:30.14-25
-> Value out of range for 32-bit array element
-> u-boot/arch/riscv/dts/binman.dtsi:43.14-25
-> Value out of range for 32-bit array element
-> u-boot/arch/riscv/dts/binman.dtsi:44.15-26
-> Value out of range for 32-bit array element
-> FATAL ERROR: Syntax error parsing input tree
+> Since we have two methods for loading/parsing FIT images, add LOAD_FIT_FULL
+> as a separate CI run.
 >
-> Fix by setting the address-cells property to 2 and converting load
-> addresses to 64 bit values.
->
-> Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
->  arch/riscv/dts/binman.dtsi | 14 ++++++++++----
->  1 file changed, 10 insertions(+), 4 deletions(-)
 >
+>  .azure-pipelines.yml             |   4 +
+>  .gitlab-ci.yml                   |   7 +
+>  arch/sandbox/cpu/u-boot-spl.lds  |   2 +
+>  configs/sandbox_noinst_defconfig |   6 +
+>  configs/sandbox_spl_defconfig    |   6 +
+>  include/test/spl.h               | 117 ++++++++++
+>  test/image/spl_load.c            | 352 +++++++++++++++++++++++++++++++
+>  test/image/spl_load_os.c         |   5 +-
+>  8 files changed, 495 insertions(+), 4 deletions(-)
+>  create mode 100644 include/test/spl.h
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+
+The error handling for the FDT creation is a bit unusual, but it is
+test code, so if it fails all bets are off. So OK.
