@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 533EFCDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:43:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76DC5CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D1DC86E81;
-	Thu, 12 Oct 2023 05:42:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 3704886D3F;
+	Thu, 12 Oct 2023 05:43:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y69BxJPY";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="2ik2JGeH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3803186E0E; Thu, 12 Oct 2023 05:42:29 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id EC7F386DED; Thu, 12 Oct 2023 05:43:17 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EAA786DE7
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:42:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BD02886E0E
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5a505762c9dso6498697b3.2
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:42:27 -0700 (PDT)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-59e88a28b98so4153067b3.1
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:42:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697082146; x=1697686946; darn=lists.denx.de;
+ d=google.com; s=20230601; t=1697082157; x=1697686957; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3+6EwElypQqehvXEAPEMH4KXWWN0YWQFvLehe8nyTaU=;
- b=Y69BxJPYIOOsKRBfvdAB0pASLPdFGxXh8T/LoqPICpGvXD8uU1pgAT5V1RFyViwL4V
- hL9x3bDh4mDB6dheKUNIVkeh4XRebBsVeO21wx2CWyiUPErDemAa2HqEGnMlJqDgQkYo
- Ga4DuMOUHfkhVWYOl1oy5ZAqtOBqbfYvhC0mM=
+ bh=rrceUh8S5ZVcikh9IXp1SmEqVdh6uXXG9GSo6+xCtEg=;
+ b=2ik2JGeHxjhlo+qQpNBgBbNLf6NZU/Sovq5otpewuCThLpJtr9YiipCOEINMr52ceN
+ bUVd7EVzYZP4qoKukYQ3UNOWi7hhdqHU6AVjhvWg5zRyfv7eBp2p+0d1I7r/uixhkwiu
+ 3LSacqT0UCuAcTjdRPGt1xLYKt5E3cSj+sEkJanrWz1KIwaEFolbQzBfMsjow3lNAjNH
+ ngA2zP34k7k3nD+jwOQcinA+Rtx4R6eY070F79TLsPubwIvKn+ua/tGbJKKuynidgX1f
+ 0ScfmKLC/g8EP30AEDB46YlVdC4Hxbi32jyNAOiv52DSUaGQWAlZcAHfhCRujJzFAq45
+ 0fvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697082146; x=1697686946;
+ d=1e100.net; s=20230601; t=1697082157; x=1697686957;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3+6EwElypQqehvXEAPEMH4KXWWN0YWQFvLehe8nyTaU=;
- b=Q080L8waq+GM8RNwlgRQzC1tSna3HsuyalxzReaOGjj3C5Zckpo3SwkZoAXhJ0/qZm
- 0BmZhlfMGp14iKpw6/OAG3DSB2mkNlmflpvZLpbsR15smenNUFWhbjVwqa1AWvNrqC9H
- IveAAgdDmkiYcg3/zSXV2rBPb8tswsVEOY74WKWYJcdY/aNrFnCJixitAIPfkl/nCGQz
- FB3ntRhzhfnip9F6EsR+EA7qL1OagQEBt6NR/obsEWs0ZIAjXTXkVEqnanCq+RggmhEs
- 26JClWAX/KHZLMtFqZ461+5HUv//kESGRadllF2jT7GKXCbH6MlmjydD9zbFkiPTQthl
- HBjQ==
-X-Gm-Message-State: AOJu0YxYXTKQuoSy2xppj+b+uZzWGEJHV+kEuqBBvRs8z0TIUe4C3uxH
- 2AlzoNR7Q32qBawryq+fndQo7BW3LlfQQGLXQYNRvg==
-X-Google-Smtp-Source: AGHT+IH8AhfbSsqjMx4oCI/qso585i/uwjYWlcYT90LKSG6A6oIsxphlI+k/fnY9TsDNm63T0JJ3KFEL6l7Ku5e2L2c=
-X-Received: by 2002:a0d:cccc:0:b0:5a7:cfc7:7b31 with SMTP id
- o195-20020a0dcccc000000b005a7cfc77b31mr6193313ywd.24.1697082145660; Wed, 11
- Oct 2023 20:42:25 -0700 (PDT)
+ bh=rrceUh8S5ZVcikh9IXp1SmEqVdh6uXXG9GSo6+xCtEg=;
+ b=A+tJz/fCGCSPDBaK7dYEZzKo62oHi1Tr5DUCo2gRGhZkGy0Fv4c4Jfx9NhDIlSOVAm
+ 5ESgCQjH6J3QuXl6MJLtBeuX3u/IPSt8HdaDUeQ5Sme/YHF6t4FmZ4oTS6qn1ebeZkWh
+ n3YgvbFxlLd/2EyZf//zGAcsaL0E+R0jiUyO6ZGriLMrV3U2eZanZwTG79/JgKIraK9h
+ 0xSrihe+bW/2qVQ1dLw5wl4kA4n98bmESooG9DdLi4xK9ZpGLHIW7BgzV9RMb6dU2uGf
+ yP3eAEqudpBH9nZB0WwV/VNGqVg0ietBwgqH3iz8XhsCsuVnTXnv8oyxoE6wOgK7NKtH
+ mk7Q==
+X-Gm-Message-State: AOJu0Yzp9ulldiSfF97HNah8V2KsUcRCx2I1dKcS7L1hRBnTjWOMn2S6
+ djsCf7HbUACdN41Qru4tn6YMmDnZrPDP2Gq7GYFj0tCx4rGSBq4M6U0=
+X-Google-Smtp-Source: AGHT+IE6UYiVjYBb9CQHlssME8zvrWzCC6agg1rdN1NeP/4uTLgY5CDngfLR62wqGpVP2dS/nRlnWqcTlWjSmaGPlVU=
+X-Received: by 2002:a81:9254:0:b0:5a7:dac8:2fa with SMTP id
+ j81-20020a819254000000b005a7dac802famr2920138ywg.24.1697082156820; Wed, 11
+ Oct 2023 20:42:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-11-seanga2@gmail.com>
-In-Reply-To: <20231012015626.3487451-11-seanga2@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Oct 2023 20:41:24 -0700
-Message-ID: <CAPnjgZ015780NUha9bz817scqeUpQNc=4sxB-AmgvnWRXAygGw@mail.gmail.com>
-Subject: Re: [PATCH 10/26] lib: acpi: Fix linking SPL when ACPIGEN is enabled
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Heiko Schocher <hs@denx.de>
+References: <20231011110052.2958231-1-bmeng@tinylab.org>
+In-Reply-To: <20231011110052.2958231-1-bmeng@tinylab.org>
+From: Simon Glass <sjg@google.com>
+Date: Wed, 11 Oct 2023 20:41:00 -0700
+Message-ID: <CAPnjgZ28PL-ikWSATgj0PnRC-F-f66n415R6_pEiFtNtFjja2A@mail.gmail.com>
+Subject: Re: [PATCH] mmc: pci: Drop the superfluous cast
+To: Bin Meng <bmeng@tinylab.org>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,17 +84,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
+On Wed, 11 Oct 2023 at 04:05, Bin Meng <bmeng@tinylab.org> wrote:
 >
-> lib/acpi/acpigen.o is only compiled into SPL when SPL_ACPIGEN is enabled.
-> Update several files which reference these functions accordingly.
+> dm_pci_map_bar() return a value of (void *) already, hence no need
+> to cast it again before assigning to host->ioaddr.
 >
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> Signed-off-by: Bin Meng <bmeng@tinylab.org>
 > ---
 >
->  drivers/core/root.c  | 2 +-
->  drivers/i2c/Makefile | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+>  drivers/mmc/pci_mmc.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
