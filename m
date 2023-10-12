@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49CA2CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:46:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A3A8CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:46:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 864CC86ED6;
-	Thu, 12 Oct 2023 05:44:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D2EFB86E5D;
+	Thu, 12 Oct 2023 05:44:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="m7sSOF/k";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D6BZz+3c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02BDB86E5B; Thu, 12 Oct 2023 05:44:34 +0200 (CEST)
+ id 5CB8D86E29; Thu, 12 Oct 2023 05:44:33 +0200 (CEST)
 Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
  [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD11E86E5A
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:44:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DC0186E54
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:44:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
 Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-5a7ac4c3666so6821227b3.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:44:26 -0700 (PDT)
+ 00721157ae682-5a7d532da4bso6853177b3.2
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:44:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697082264; x=1697687064; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697082260; x=1697687060; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WGtdEQiES+cCDUh33Cf5pnQMDlQ0kkiMsjk2w9FHmdM=;
- b=m7sSOF/ka1SHB6WFDFaR+gbJds0JNguXhO+uCuGpiRIHE+DdyJ7zxgM9wZFxAzDQs5
- S6f/VCzVnxQYt1G+q1+/gREaLVAyron6WH9zTCjT96l5dhbzB/rEQSNuUwYkRbHggfy0
- sqhzZdcVrf6/5rVIXzL/9LjFqupOesVrW5K6w=
+ bh=57fsVnEC7PeNblN7yMSq4QpP6ti1/8yG5SU/flYLusY=;
+ b=D6BZz+3cybrz793sIgFVtfAwwW6xWikK0D5Gu6IHmOIaVL/rxdo8qPncY8aN79UDZC
+ qmG3c2tgZ9uJn/N8LKB14H63gcfHDP1SeZ5vIjmr0gqPlwEamxatnp8jO9Yzu9Qz+A5A
+ qgMRe1wowKG0z9SAwIkgO9avWZgWPNzAvRjjI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697082264; x=1697687064;
+ d=1e100.net; s=20230601; t=1697082260; x=1697687060;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WGtdEQiES+cCDUh33Cf5pnQMDlQ0kkiMsjk2w9FHmdM=;
- b=r48Tm0S3Xqw+sEeNsLe6lFz0jTNseF6MeRfFJ8fmLzPOW/POmvkc+oENR2HEnc2Wp9
- MJxIEcz2+niQeV13P++caZDSd9O4+Zpm1Pa1B9hpdhxBRC7x4Eitb77ceJoo17zHoCQX
- kUp3UDgEp8IFwaC01yVd9pW8E7W7HqWtKf2g9wTVHHu+CyXZtQtGA4AIvT7GVJE9NbbY
- nlCzdGxK9Jakp7TOGB1X7CyRLfxa7D4yd2+cqv7N47+flxlNeBxDeoSzIA5+r6NLkfTm
- UiX7fmQh8E6wsUxEN4n9kMFMkmAdoaZINh1isjaPVvTxSF5dvqW9HOwCYlHQazTA6qM5
- ApvQ==
-X-Gm-Message-State: AOJu0YwBoejQHp14zEE1Qx5vWMRXlUDHAZOVwt3ImB7/K1wAdMkWlm7B
- 8msJLjpPLZZeir6QBdZvnOUkCx/cDRhmmd6qTDVCkDaOLPVcLvdhvrs=
-X-Google-Smtp-Source: AGHT+IE147tRBabLwIN4ro9EA3MOGYluCvIKlIgHN5zMQ+EHL9/8567ZK8kjCm/rtZ4aMs8OlheNx4FvETzw6q1dHgE=
-X-Received: by 2002:a0d:ca4f:0:b0:5a7:bcac:7d3 with SMTP id
- m76-20020a0dca4f000000b005a7bcac07d3mr8848580ywd.9.1697082263668; Wed, 11 Oct
- 2023 20:44:23 -0700 (PDT)
+ bh=57fsVnEC7PeNblN7yMSq4QpP6ti1/8yG5SU/flYLusY=;
+ b=B/BLbod91MMv4HEGRx5QuWfC+mYmbGGbObi7DkkXNoBlanOkGGU/HuVf7CHepjcFGU
+ FGdNe1eDRWuxWBYXgI+HEvk7DQR5Og/nuXp9/5SHugg1xOHBugjzXuOIglJTC53Ovruw
+ KbBLEi6csTJdIq7E8nHK3i5iOLrvtaq+PoZ573EvdDw3e0TVhWmTWlksiecxKp7UdV9X
+ yucoQWxQvAIqkMBijDUHIamqqwmFeEjdsQll/URnf+bo6WQWWZ797yeqQK+gIl1+jk6N
+ b9hY+h33cG3DXGxQ73OWUdB3OWCo6ENDHZ/462dRR65cJM2njGS8/2E8HovmxSSNMKih
+ Y0+Q==
+X-Gm-Message-State: AOJu0YzWHkryH+OWHQ3vB8zieiDFYfUq8cCXeU+sONjEeE5Q6BeZVWAK
+ s7q1azXDmW0DLhzev861hE5IPtP0DSG77EHJfvfGBg==
+X-Google-Smtp-Source: AGHT+IEsr9oj4Fuy4ugD1qiCRGR73/GP/1THoOWCnNfLTY4Yu4GpH2XzWIJ0bFtQ8kFNE1FmMHfhT2thinn6uTnp6hs=
+X-Received: by 2002:a0d:c104:0:b0:571:11ea:b2dd with SMTP id
+ c4-20020a0dc104000000b0057111eab2ddmr23593231ywd.32.1697082259829; Wed, 11
+ Oct 2023 20:44:19 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231011131552.14665-1-bmeng@tinylab.org>
- <20231011131552.14665-4-bmeng@tinylab.org>
-In-Reply-To: <20231011131552.14665-4-bmeng@tinylab.org>
+ <20231011131552.14665-3-bmeng@tinylab.org>
+In-Reply-To: <20231011131552.14665-3-bmeng@tinylab.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Oct 2023 20:41:34 -0700
-Message-ID: <CAPnjgZ3px+_fWaiU+vXgSZD6pgSmiW-GMuXVXvKBVmfpjTsbWg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/9] cmd: kconfig: Make ufs prompt look similar to
- other commands
+Date: Wed, 11 Oct 2023 20:41:33 -0700
+Message-ID: <CAPnjgZ2ndYDp-gRC+_fHMFmwbMchD1jHLvJ0YGSVNzA6uHhLqw@mail.gmail.com>
+Subject: Re: [PATCH v2 2/9] ufs: Add a line feed to the end of some dev_xxx()
+ messages
 To: bmeng@tinylab.org
 Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>,
  Neha Malcom Francis <n-francis@ti.com>, u-boot@lists.denx.de
@@ -85,16 +85,14 @@ X-Virus-Status: Clean
 
 On Wed, 11 Oct 2023 at 06:16, Bin Meng <bmeng@tinylab.org> wrote:
 >
-> At present the 'ufs' command prompt does not look similar like other
-> commands. Update it.
+> Add a line feed to improve readability of some dev_xxx() messages.
 >
 > Signed-off-by: Bin Meng <bmeng@tinylab.org>
 > ---
 >
 > (no changes since v1)
 >
->  cmd/Kconfig | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
+>  drivers/ufs/ufs.c | 16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
