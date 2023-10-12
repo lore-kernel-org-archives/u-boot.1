@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AA80CDB482
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 07:29:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBE00CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 07:41:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 833DD86E39;
-	Thu, 12 Oct 2023 09:27:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 6155286D30;
+	Thu, 12 Oct 2023 09:33:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="cT8XwIms";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="ivQMN1QX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 205E986E07; Thu, 12 Oct 2023 09:26:53 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0F17286D3D; Thu, 12 Oct 2023 09:33:28 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7112586E6C
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 09:26:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 284E686D62
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 09:33:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so3765304a12.1
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 00:26:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1697095587; x=1697700387;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j++DnANz+fG0784AhBLZ/mXfqFHgwoMrJzt+FvvqMrY=;
- b=cT8XwIms6vHB16RNxGdlu8gbQ4zETN+EpxiTezGeS9Wi+CzHz7aWHz6FDhOacY7nBw
- 3tdyAdhQ2QWortiKSxRWugxYgJbCoGFVkR5FT4Phfarxrp3hnFDtTuWcpfTemphxrC7S
- 9/CPyeHYv1PBRGvmEQhGkm1JFz7zWnqL/oyi4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697095587; x=1697700387;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=j++DnANz+fG0784AhBLZ/mXfqFHgwoMrJzt+FvvqMrY=;
- b=AiWx60D6SJJuAVM8UT117jZXH4dLiKyaydWEOmChIubwy1+H2PzE5PcOVwSIBHzpYE
- 5THJ0YWA9Y3DooIYrY5YO2ry1mfJuMGsMbrIW81V2oqAqSReEiuPKClVSm1Bbg/RK2PR
- 2ZWpWGyYDAtKLuQO6g5bxngaV13hxuzCXaCEXI9WZmncVW7ERhw/rxC45VD/I+tmMkDQ
- T8wWenONwL7J7kCqFysBVJ7KNJ/NCAw+nidUTFYWOEBKwG7PwZFitQeMaEAssm0CFhxL
- AuUf/ipMblrIEbM2uGdivzvHJT79AlF8N4YqMaON485CyXj7SBQy3IyFYLVT0w5UPcoO
- WQPA==
-X-Gm-Message-State: AOJu0YzMpNlRaGyN4lpzA5udUNMUqIodnQvw+3o7BBLMi69vB8nv7GkU
- iMHWoWytsTXT5trfNP3F0NPaVsrHjMhX/HHqQGE8LA==
-X-Google-Smtp-Source: AGHT+IGxIT/bUP49Eeby5q3gnUxhvYc5Z6B+WOfiCE4ztSxo1xhNsRpSmDg9E43UA2iSFFlxEfvDIV7Qa057lUKL8a4=
-X-Received: by 2002:a17:907:7204:b0:98e:4f1:f987 with SMTP id
- dr4-20020a170907720400b0098e04f1f987mr16433263ejc.3.1697095587164; Thu, 12
- Oct 2023 00:26:27 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1697095996; x=1697700796; i=xypron.glpk@gmx.de;
+ bh=QkTG6GxutOCioRrk5ynX0PAhjuSPaKtF/ernuOlh80Y=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=ivQMN1QX+AveGQA9qwXfsotBwZbmOVrLlf0ATMaodcKcy+XY9j4LKGOP17w6EspVB3b7SQqH52w
+ 2hm4uZbW5StV/0EF7Qif1fswYEsj5ws+nNdytmr5WlyBa0RXQ2H5Qozz7sogEd4P6ESQT1G/02gT/
+ GvZh4VA0fkgZfgJEa/mk8cTsaY0HZNez+JPXEjzmZQs8qYJ/SONHLSMPiKHLPtOeLQNnCkEzIoVk/
+ H72y0kf2yI+a7SHGg2HcY+T44JqtA1dc5KKKZtozl/xACbWLLeNruZh/fDsCAQnm3xHgA2fuGcojh
+ TTYs/NmbA4jKRfym40uNjJzc7SteuW65gDQQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MXGvG-1r4elm3Zrq-00Yfmx; Thu, 12
+ Oct 2023 09:33:16 +0200
+Message-ID: <a5d7450d-92cc-4687-86bd-b6636749dd6e@gmx.de>
+Date: Thu, 12 Oct 2023 09:33:16 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/26] arm: imx: Add newlines after error messages
+Content-Language: en-US, de-DE
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ uboot-imx@nxp.com, Fabio Estevam <festevam@gmail.com>,
+ Nitin Garg <nitin.garg@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@denx.de>, Ye Li <ye.li@nxp.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
 References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-3-seanga2@gmail.com>
- <CAPnjgZ3yH1G13F1r2U00r=sD1mTEn+sY3G0-ggpRvfpLaUxNDA@mail.gmail.com>
-In-Reply-To: <CAPnjgZ3yH1G13F1r2U00r=sD1mTEn+sY3G0-ggpRvfpLaUxNDA@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 12 Oct 2023 09:26:15 +0200
-Message-ID: <CAOf5uw=p=o_50ZzeECEgcqYnaRqJgcRutMQHkyK6dWgUHEEBZg@mail.gmail.com>
-Subject: Re: [PATCH 02/26] spl: nor: Don't allocate header on stack
-To: Simon Glass <sjg@chromium.org>
-Cc: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
- Roger Quadros <rogerq@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+ <20231012015626.3487451-6-seanga2@gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231012015626.3487451-6-seanga2@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:ob0PtTR+5V+1UqIi2megaD45L4UhB4PEc+k6FrbtFbR7bDQGEXq
+ 1GgzxPMtWP82H72kO9q3TOf6QN7yRyZLRMlEj/1pAg8YWqnX5Gg0heokfAmGqx6UAPwANA6
+ cJTedL9IXF/pV+UWWC/haWcqlzWDRBXNrq+BjFqN+Kagnxlm+VcRsrJ0wRFPvyz/LkHexys
+ qRcq/G2OPTxkLP8WeCkiQ==
+UI-OutboundReport: notjunk:1;M01:P0:DudBjTq4lhE=;Hr9qgQga7GGS5NlNZCPLxcGIx5L
+ LyCGwl1BNy3YNhbrMmch+l3P8vh64yUb64mEWQne3cnWoyJbfMMkE+AhN1gBgpjvaqTKrQ2Zg
+ aWfrX76G1d8d9H3XrBpArpA5z5woeZZMYhdf4jLO3grUR/Jwz+W279EZkSZJDo50YQkAc+M+o
+ NGTy1VGce0CxeJYhXGCAuplq2CGdiZGw2dMCwAAvecXfnXXBQfz6V/d/r6SR9CZXO1rzolIe9
+ f1X2K6BAppqEaWH9cN5KiVPMLDE1tj2co0YO0Y5pEHE4VNEvqivQ3z+Gbgb5GV69zHrBOhzO7
+ TWltoIOFSmOqDE3/iB/iFdHYejHgd+twbnjXTeZvPXnxu3K5psjhaCfFfGSSUXBBviHF8FTnk
+ oUowQZ+CUCXYKW5XSeUk6rHlHXM+zR4rWFCJRPWX4se7RTi3qdDoyWyHIMfJdM+AyGERBDbD+
+ ktqYmEPWK16zZA4t3dIR+2gXHQkGO/GL0LKC4Swod6kNWdNJhUv41a7EutHQHcs3MQcA2zlAQ
+ cQ/6pLZLe7UENTpSTH0LONOxt2FNoCIaCx48+F1PYmnh5c9+D948faFg9mAHHpsPYG4mTemtw
+ 7fRzbEWI0DGK2xgiGev9SyWc7voF6umvcRvSdbwA+qiQ2S+wIwiEivoqPMiyZmBtOgQW0d1lZ
+ vXbBNInrLOxAp7E+pm37mzPWygcuqSMtyuqtT7vaeCZBp4RPehg55A73y0Tu09auyR7DI1qP6
+ PtRoq73GbIZHOZxtCCAV4qLSEI/n1FMaB6RbK5Tqgj6s6/MBxxvawJq5z3wAJQqixpZOyPZY1
+ qvXFVZB0dORuVDhA0Ihyoa/A5ASHIBBPMM0h4p5Ejw3r36WPpNA0apgEoxrIXpu5g4CM7JBAl
+ l0RwNwubPUzlc6peIDqx+bt40FYXbnhoqbn4zXNYsFhmNuGj98a4m+zalJbB58pN4hFy4TMcs
+ Ubb7zrljsxIFGVfwzswlkJGf9DA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,37 +91,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 12, 2023 at 5:45=E2=80=AFAM Simon Glass <sjg@chromium.org> wrot=
-e:
+On 10/12/23 03:56, Sean Anderson wrote:
+> These error messages are missing newlines. Add them.
 >
-> On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
-> >
-> > spl_image_info.name contains a reference to legacy_img_hdr. If we alloc=
-ate
-> > the latter on the stack, it will be clobbered after we return. This was
-> > addressed for NAND back in 06377c5a1fc ("spl: spl_legacy: Fix NAND boot=
- on
-> > OMAP3 BeagleBoard"), but that commit didn't fix NOR.
-> >
-> > Signed-off-by: Sean Anderson <seanga2@gmail.com>
-> > ---
-> >
-> >  common/spl/spl_nor.c | 11 ++++-------
-> >  1 file changed, 4 insertions(+), 7 deletions(-)
+> Fixes: 6e81ca220e0 ("imx: parse-container: Use malloc for container proc=
+essing")
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> ---
 >
-> Reviewed-by: Simon Glass <sjg@chromium.org>
- Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+>   arch/arm/mach-imx/parse-container.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm/mach-imx/parse-container.c b/arch/arm/mach-imx/par=
+se-container.c
+> index d7275a58c17..c5df78d1c58 100644
+> --- a/arch/arm/mach-imx/parse-container.c
+> +++ b/arch/arm/mach-imx/parse-container.c
+> @@ -85,13 +85,13 @@ static int read_auth_container(struct spl_image_info=
+ *spl_image,
+>   	}
+>
+>   	if (container->tag !=3D 0x87 && container->version !=3D 0x0) {
+> -		printf("Wrong container header");
+> +		printf("Wrong container header\n");
 
+Please, use log_err() and add
 
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
+    #define LOG_CATEGORY LOGC_ARCH
 
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+to the top of the file.
+
+Best regards
+
+Heinrich
+
+>   		ret =3D -ENOENT;
+>   		goto end;
+>   	}
+>
+>   	if (!container->num_images) {
+> -		printf("Wrong container, no image found");
+> +		printf("Wrong container, no image found\n");
+>   		ret =3D -ENOENT;
+>   		goto end;
+>   	}
+
