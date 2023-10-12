@@ -4,67 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D576CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:49:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE499CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:49:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7611486EA3;
-	Thu, 12 Oct 2023 05:46:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FA3C86EDE;
+	Thu, 12 Oct 2023 05:46:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kiJpkvlJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Q5JsCBIy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8751586F09; Thu, 12 Oct 2023 05:45:02 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 856BB86EBF; Thu, 12 Oct 2023 05:45:00 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2A9386EE6
+ by phobos.denx.de (Postfix) with ESMTPS id A786186E8C
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:44:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-5a7ac4c3666so6823487b3.3
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5a2536adaf3so7538607b3.2
  for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:44:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697082287; x=1697687087; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697082286; x=1697687086; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ymumAyVlSRfaKrBAtsQd3Kq5hydW4MtfQH5cnkCqZmM=;
- b=kiJpkvlJzWaMiDiMEqZWIq9hpSkBdvEas31lANNdEzhtQNhQtznFnQv6L9IpXgVSbC
- hj3YGpbIlcCTThPBpY5LwuZNVzmLM023zqm0QF4ycCJfCfkyukzA9WBnjXdGPiVKmqUL
- cCpCGaeoyzU1Z9o2ID8j06m4qw40O6E0EGI4I=
+ bh=irR+wUcZMecBBuQj3nEUNNDKREuFzidtQ31Stq9iBkM=;
+ b=Q5JsCBIy0mAw3BFvRtDBl8bLQXDr6R5wrJl0vRoCefSUhlnFDN5INz/6Ymv6bceHfj
+ ppO3PI3cNkuzZor0XaJSUWVrmYSR3DjxG4ZTQbPa5qY8slhLJoKDuxwYX9JBS4Ua8KkE
+ zj+4BZcCASeHJpcIoq/bUWTKYdwiz/j9BsS3M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697082287; x=1697687087;
+ d=1e100.net; s=20230601; t=1697082286; x=1697687086;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ymumAyVlSRfaKrBAtsQd3Kq5hydW4MtfQH5cnkCqZmM=;
- b=dQz1QyEweuWbuBoZuQrjdYbkwvxhRHyxI02iwZQET/revlAfBXq6XqG2KCO2JUfiW0
- 06JnFzz/wBFGUrPB9I5+kc1Czb+SDNXMUUEgjFcMruC5OA4rFxjiSg184cgUa+9AYWLk
- 6sJPsP/MWnsUqLEnPP1Ilj3BitOsjno5COx/LldzubZ/kYu6KFDQtuJDWgjZGyzY63YP
- /XksTwOCqEOsi2bbiGZcbSXNPIPocAmkHfgNQaLcqEHebCq29cqBX7Thq1a1mYAyN11L
- kpSA29TmgwKNUuMKzPeDrFexxb3ZgN/Z55ut4BaeKwkj2JYxzdykVAAmFF3ceFQJ7Mgi
- bnKw==
-X-Gm-Message-State: AOJu0YxhcpghhyuL09jAvw9BdkYGCA6Dp28QTVND6g/Id/SB9KS1n2JZ
- 8fl504H2RJ9ciEs8Xw7OCPJcfiBQavuJiM48ywz30Q3nd6eRQMc4MY0=
-X-Google-Smtp-Source: AGHT+IHAPV7/9FxfAn27u+viA25NqrYEcSXEXjB/emoEgZbP/JxKjtK1GGKKrNZRiz/aVIq/QPiN6mpueFZHHpPRNgE=
-X-Received: by 2002:a81:6c4a:0:b0:5a7:bf52:8bcf with SMTP id
- h71-20020a816c4a000000b005a7bf528bcfmr7117991ywc.5.1697082286558; Wed, 11 Oct
- 2023 20:44:46 -0700 (PDT)
+ bh=irR+wUcZMecBBuQj3nEUNNDKREuFzidtQ31Stq9iBkM=;
+ b=F/rrciOA21p7g1Z5n3VYh8p+GrOmsuJ6Ucwi87CL3DZdlmctW8e4e1wDDjpRsFFYxy
+ eJgn+kkf/EBxRestbDYmapZTmFGxEMSs3oTS1dytSRuH1EA35wfHP/HpP3hL0A2dTP0e
+ 8HhShCWW6IQSi0+ebzPSsTUyj0yaHVBNrJZhb9CS/1ETsWZz7DGFmfOK3vXJq95qGkiG
+ YckHwLrOW3ICleeV4c64HuS5wiVBp7pyY92c+wvjUk3mdMXZ6HJCzrlhNJHyL1WWrEkE
+ Hw/FaEG3jgjan5zaVXLZc2WUTEntPdw3ML2//qYDHWcb6MG4q2j7a9CSedxkQDAo0fWa
+ zeCA==
+X-Gm-Message-State: AOJu0Yz83NaFhCf9HGd81rwOnRvFFxjj6mshEMa70ZZ+LYsWH+f0LHrz
+ OaQFYDspTrW1MZtnRXXk45Rc+HT1O8EXRV1tc/+tHQ==
+X-Google-Smtp-Source: AGHT+IG8dMdqq0bU4xNWuYQv+ip7Faxz6S4atgNiDz6VLYwSfeOnW1bwn5p73lhFLMTetcCRZqHlNYRiPIyIPcU2QqQ=
+X-Received: by 2002:a0d:d183:0:b0:59b:5170:a0f3 with SMTP id
+ t125-20020a0dd183000000b0059b5170a0f3mr26582960ywd.36.1697082285972; Wed, 11
+ Oct 2023 20:44:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-19-seanga2@gmail.com>
-In-Reply-To: <20231012015626.3487451-19-seanga2@gmail.com>
+ <20231012015626.3487451-15-seanga2@gmail.com>
+In-Reply-To: <20231012015626.3487451-15-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Oct 2023 20:41:10 -0700
-Message-ID: <CAPnjgZ0b3WVfDYsL7CSswYb28FXecezM51c7Rzt1h6BNeT8TxA@mail.gmail.com>
-Subject: Re: [PATCH 18/26] test: spl: Split tests up and use some configs
+Date: Wed, 11 Oct 2023 20:41:08 -0700
+Message-ID: <CAPnjgZ27NXN1Z_tTRtpaqBWs4SjCp+9Y-GjpS4CcK60-L-pyqQ@mail.gmail.com>
+Subject: Re: [PATCH 14/26] net: bootp: Move port numbers to header
 To: Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,23 +85,14 @@ X-Virus-Status: Clean
 
 On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> In order to make adding new spl unit tests easier, especially when they may
-> have many dependencies, add some Kconfigs for the existing image test.
-> Split it into the parts which are generic (such as callbacks) and the
-> test-specific parts.
+> These defines are useful when testing bootp.
 >
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
 >
->  test/Kconfig             |  1 +
->  test/Makefile            |  5 +--
->  test/image/Kconfig       | 20 ++++++++++
->  test/image/Makefile      |  3 +-
->  test/image/spl_load.c    | 76 +------------------------------------
->  test/image/spl_load_os.c | 81 ++++++++++++++++++++++++++++++++++++++++
->  6 files changed, 107 insertions(+), 79 deletions(-)
->  create mode 100644 test/image/Kconfig
->  create mode 100644 test/image/spl_load_os.c
+>  net/bootp.c | 3 ---
+>  net/bootp.h | 3 +++
+>  2 files changed, 3 insertions(+), 3 deletions(-)
 >
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
