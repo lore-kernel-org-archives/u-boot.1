@@ -4,41 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E490CCDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:43:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFCC7C46CA1
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:44:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93C5186E47;
-	Thu, 12 Oct 2023 08:38:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DEFE386E82;
+	Thu, 12 Oct 2023 08:40:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CC0F86CE8; Thu, 12 Oct 2023 08:38:13 +0200 (CEST)
+ id D945286E77; Thu, 12 Oct 2023 08:38:57 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 953D986CDD
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:38:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE03886E54
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:38:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 39C6bpZw019788;
- Thu, 12 Oct 2023 14:37:51 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 39C6c6oC019951;
+ Thu, 12 Oct 2023 14:38:06 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Thu, 12 Oct 2023 14:37:47 +0800
+ Thu, 12 Oct 2023 14:38:02 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
- <peterlin@andestech.com>, Randolph <randolph@andestech.com>, Simon Glass
- <sjg@chromium.org>
-Subject: [PATCH V2 1/7] spl: riscv: opensbi: change the default os_type as
- varible
-Date: Thu, 12 Oct 2023 14:35:03 +0800
-Message-ID: <20231012063509.2963258-2-randolph@andestech.com>
+ <peterlin@andestech.com>, Randolph <randolph@andestech.com>
+Subject: [PATCH V2 4/7] Makefile: delete file *.itb when make clean
+Date: Thu, 12 Oct 2023 14:35:06 +0800
+Message-ID: <20231012063509.2963258-5-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231012063509.2963258-1-randolph@andestech.com>
 References: <20231012063509.2963258-1-randolph@andestech.com>
@@ -47,7 +45,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 39C6bpZw019788
+X-MAIL: Atcsqr.andestech.com 39C6c6oC019951
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,83 +62,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In order to introduce the Opensbi OS boot mode, the next stage boot
-image of OpenSBI should be configurable.
+Delete the output file *.itb
 
 Signed-off-by: Randolph <randolph@andestech.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
- common/spl/spl_opensbi.c | 26 ++++++++++++++++----------
- 1 file changed, 16 insertions(+), 10 deletions(-)
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
-index 0df611623a..6583b31953 100644
---- a/common/spl/spl_opensbi.c
-+++ b/common/spl/spl_opensbi.c
-@@ -21,7 +21,7 @@ DECLARE_GLOBAL_DATA_PTR;
+diff --git a/Makefile b/Makefile
+index 9d2e31e494..a7aa8c02a0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2165,7 +2165,7 @@ CLEAN_FILES += include/bmp_logo.h include/bmp_logo_data.h \
+ 	       mkimage-out.spl.mkimage mkimage.spl.mkimage imx-boot.map \
+ 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
+ 	       mkimage.rom.mkimage rom.map simple-bin.map simple-bin-spi.map \
+-	       idbloader-spi.img lib/efi_loader/helloworld_efi.S
++	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb
  
- struct fw_dynamic_info opensbi_info;
- 
--static int spl_opensbi_find_uboot_node(void *blob, int *uboot_node)
-+static int spl_opensbi_find_os_node(void *blob, int *uboot_node, int os_type)
- {
- 	int fit_images_node, node;
- 	const char *fit_os;
-@@ -35,7 +35,7 @@ static int spl_opensbi_find_uboot_node(void *blob, int *uboot_node)
- 		if (!fit_os)
- 			continue;
- 
--		if (genimg_get_os_id(fit_os) == IH_OS_U_BOOT) {
-+		if (genimg_get_os_id(fit_os) == os_type) {
- 			*uboot_node = node;
- 			return 0;
- 		}
-@@ -46,8 +46,9 @@ static int spl_opensbi_find_uboot_node(void *blob, int *uboot_node)
- 
- void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
- {
--	int ret, uboot_node;
--	ulong uboot_entry;
-+	int ret, os_node;
-+	ulong os_entry;
-+	int os_type;
- 	typedef void __noreturn (*opensbi_entry_t)(ulong hartid, ulong dtb, ulong info);
- 	opensbi_entry_t opensbi_entry;
- 
-@@ -56,22 +57,27 @@ void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
- 		hang();
- 	}
- 
--	/* Find U-Boot image in /fit-images */
--	ret = spl_opensbi_find_uboot_node(spl_image->fdt_addr, &uboot_node);
-+	/*
-+	 * Find next os image in /fit-images
-+	 * The next os image default is u-boot proper
-+	 */
-+	os_type = IH_OS_U_BOOT;
-+	ret = spl_opensbi_find_os_node(spl_image->fdt_addr, &os_node, os_type);
- 	if (ret) {
--		pr_err("Can't find U-Boot node, %d\n", ret);
-+		pr_err("Can't find %s node for opensbi, %d\n",
-+		       genimg_get_os_name(os_type), ret);
- 		hang();
- 	}
- 
- 	/* Get U-Boot entry point */
--	ret = fit_image_get_entry(spl_image->fdt_addr, uboot_node, &uboot_entry);
-+	ret = fit_image_get_entry(spl_image->fdt_addr, os_node, &os_entry);
- 	if (ret)
--		ret = fit_image_get_load(spl_image->fdt_addr, uboot_node, &uboot_entry);
-+		ret = fit_image_get_load(spl_image->fdt_addr, os_node, &os_entry);
- 
- 	/* Prepare opensbi_info object */
- 	opensbi_info.magic = FW_DYNAMIC_INFO_MAGIC_VALUE;
- 	opensbi_info.version = FW_DYNAMIC_INFO_VERSION;
--	opensbi_info.next_addr = uboot_entry;
-+	opensbi_info.next_addr = os_entry;
- 	opensbi_info.next_mode = FW_DYNAMIC_INFO_NEXT_MODE_S;
- 	opensbi_info.options = CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS;
- 	opensbi_info.boot_hart = gd->arch.boot_hart;
+ # Directories & files removed with 'make mrproper'
+ MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
 -- 
 2.34.1
 
