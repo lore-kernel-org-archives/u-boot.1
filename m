@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA75CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:10:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05693CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:10:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A073E86D41;
-	Thu, 12 Oct 2023 03:57:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 618CB86D85;
+	Thu, 12 Oct 2023 03:57:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b6w2pnBa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ni757Otj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1972186E04; Thu, 12 Oct 2023 03:56:52 +0200 (CEST)
+ id A82A286CE8; Thu, 12 Oct 2023 03:56:58 +0200 (CEST)
 Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
  [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FC9686DC7
+ by phobos.denx.de (Postfix) with ESMTPS id 6480A86DD6
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:56:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
 Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-41983b83e53so3163221cf.2
+ d75a77b69052e-41959feaae2so3076091cf.0
  for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:56:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697075790; x=1697680590; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697075793; x=1697680593; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=moVLIGzXOPbIp4sST+cIh4hm5MWF6ijM99/5TMpmj/M=;
- b=b6w2pnBal7UETLeZdga89WNvN+BfNDL5isAPgaK4oqB1oI4NHx5L+J4JwR+VcRDzFP
- JVvd8yEQ4ixC1q66PSmTGkKVIMvqJI92zTO4jgJuIYkAECXyJtWk0czRt8cYZ4fkgQJS
- ajDIWaG/sj6wiQBZdNB9B7GjVmdr2GLGhtX4yBfOYFgzEP0j/Ao/wpuadFXTGP0M0PqA
- o1mh0wLm5DGY+ChkVjNsuVoxaJx0Cko1bhXUVd84QhE5mZJGIXN/SUQ5jMM0pq7rvLNk
- /olSkEdxtVJjbApGhWsIyHll1+dKVz5EbI/pavKCorOUBFw16j7PRLRCtS+4mPsnbeN8
- Qtcw==
+ bh=A97MTcBKZXcYrBBFTME0+V9M9hq8+zEzRrrjccgQoyQ=;
+ b=ni757OtjgZJUE55yW6O6xJ7iahd7CwmEiXuHwHVRxmgcvDjafwnqhJANqmiXFAbNHf
+ P7VdMmlmqRJmtS/L6wuJ5+a32Ju9BccF7l/bCvRF06ag3feCDfUGGmSzw7/cbf6bFxly
+ vLeH/KzLlKifsYZhNiLtdlNmPCeuSO29UfQBEGwd8aX2+meoApleFPx1ke0QtnJAWOx4
+ 0SUNSX1q8JU20W/OytYQ0h4OlKGVozoVJnMTskzr3rTLxrb9jcS01vzen56aVxPKoI4I
+ Q3D+IFzp4bf7peiQ7SbuJ15r6pKPBjmvepO8O7AnjM6p+SnzTVVu2OtG0wTznzeot09B
+ 93Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697075790; x=1697680590;
+ d=1e100.net; s=20230601; t=1697075793; x=1697680593;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=moVLIGzXOPbIp4sST+cIh4hm5MWF6ijM99/5TMpmj/M=;
- b=AeptV6IYJfM9xrhxFeV8kJASP5jBQdXEKyBLIgPO3/NTKCQzi/JzAr2m7/IKrbrtul
- HBdvhDl/atrCRhAwTwbdvQIu9u9gWkjHQE4nbaCJRS9Zd0oGsUFSrTyfXssVrZmFHrNT
- TcRY0s01iQmjBVG0rkaQIZ6D6NoN4PDDtnCLRimJsWdV4Nrae/DjKpOcRBMNI62ntZmp
- Uy8DnGdZa1WMmxtgNs3jdW7OQsHNaJgvV/3kLQWpWzjC+owZ/iC7q6lYG8YBMrIrL7/I
- rc/Voqs7NOjkOr2l7AJKD1YLNrMTbpCsuFPURNL/PngST+w2osQ7IU9Mj2SO6wzuiElp
- ggTQ==
-X-Gm-Message-State: AOJu0Yzbn4SrfGYZ8u+TiywAlh5BqNDLD6bThxQ4MpFS+ZtCRMrI7BOh
- pNnk3jO92qh4gnI0LpSdsD7Bnf7bSnV0Xg==
-X-Google-Smtp-Source: AGHT+IE2E4nJbp7jF6+FnjtgbgrNd10n3ubaVHmzLfO8r5Y81sY2kI3c5M2+OJnPKeAlauKMSfyUxQ==
-X-Received: by 2002:ac8:5c4b:0:b0:418:f4c:937b with SMTP id
- j11-20020ac85c4b000000b004180f4c937bmr28799695qtj.44.1697075790006; 
- Wed, 11 Oct 2023 18:56:30 -0700 (PDT)
+ bh=A97MTcBKZXcYrBBFTME0+V9M9hq8+zEzRrrjccgQoyQ=;
+ b=D9Ty2rJzIUS99Cu34QEr/FjONgx1x+4B6+ncIPDylaVn+qg4CI4LBaix3B27IImotl
+ 1Fs5gZ7RV1phGHHUKUJFhfYd0CcJX3F49pTCqfXJW1qaDrD4HWSiWh2VCdeORAUlGyWl
+ ULKtXbyMGCnduG6Vm0608caoZaJ/0p5DmM7W4HMeTodE4mD/pWy7VU8/hP4sj0zsBhV4
+ GrOgLkn9rv9vwcchPfB5qGYMQ3C8PBLH0nmsZRkgrzDSwdHCWiOx3tuLbhI8IMB0L6T3
+ ibxsWG/GY1ZAqlY/8hyfjyxTcBMLKdBwqpJkFfHapMjdnNUnrNskFcD1HMRP9DvU0kgN
+ OQjg==
+X-Gm-Message-State: AOJu0YwDyB7Qfw2fwMiujg0Lei0Ggsp8JcrxuXfz6VcLLzHEbtjHrmgB
+ IDqbf9nGuMWIE1Pb9EGF1Sz3Z7JPkhakiQ==
+X-Google-Smtp-Source: AGHT+IFE3Bz90XndlvwGSCyIduCe8/vPcHJMqm+rG3LAYHuQ7rWRAnPo0FzUcoOH48BQ++3Qz/iX4g==
+X-Received: by 2002:ac8:4e55:0:b0:419:9975:8096 with SMTP id
+ e21-20020ac84e55000000b0041999758096mr29012382qtw.49.1697075793400; 
+ Wed, 11 Oct 2023 18:56:33 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- e6-20020ac845c6000000b004181234dd1dsm5741763qto.96.2023.10.11.18.56.29
+ m13-20020ac866cd000000b003f6ac526568sm5827585qtp.39.2023.10.11.18.56.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 18:56:29 -0700 (PDT)
+ Wed, 11 Oct 2023 18:56:33 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Fabio Estevam <festevam@denx.de>, Marek Vasut <marex@denx.de>
-Subject: [PATCH 01/26] spl: legacy: Fix referencing _image_binary_end
-Date: Wed, 11 Oct 2023 21:56:01 -0400
-Message-Id: <20231012015626.3487451-2-seanga2@gmail.com>
+ uboot-imx@nxp.com, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH 04/26] arm: imx: Fix i.MX8 container load address
+Date: Wed, 11 Oct 2023 21:56:04 -0400
+Message-Id: <20231012015626.3487451-5-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231012015626.3487451-1-seanga2@gmail.com>
 References: <20231012015626.3487451-1-seanga2@gmail.com>
@@ -94,29 +95,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On non-arm architectures, _image_binary_end is defined as a ulong and not a
-char[]. Dereference it when accessing it, which is correct for both.
+We should load images to their destination, not their entry point.
 
-Fixes: 1b8a1be1a1f ("spl: spl_legacy: Fix spl_end address")
+Fixes: 7b86cd4274e ("imx8: support parsing i.MX8 Container file")
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- common/spl/spl_legacy.c | 2 +-
+ arch/arm/mach-imx/parse-container.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/spl/spl_legacy.c b/common/spl/spl_legacy.c
-index 095443c63d8..e9564e5c2a5 100644
---- a/common/spl/spl_legacy.c
-+++ b/common/spl/spl_legacy.c
-@@ -19,7 +19,7 @@
- static void spl_parse_legacy_validate(uintptr_t start, uintptr_t size)
- {
- 	uintptr_t spl_start = (uintptr_t)_start;
--	uintptr_t spl_end = (uintptr_t)_image_binary_end;
-+	uintptr_t spl_end = (uintptr_t)&_image_binary_end;
- 	uintptr_t end = start + size;
- 
- 	if ((start >= spl_start && start < spl_end) ||
+diff --git a/arch/arm/mach-imx/parse-container.c b/arch/arm/mach-imx/parse-container.c
+index e2a9e2b2732..d7275a58c17 100644
+--- a/arch/arm/mach-imx/parse-container.c
++++ b/arch/arm/mach-imx/parse-container.c
+@@ -45,7 +45,7 @@ static struct boot_img_t *read_auth_image(struct spl_image_info *spl_image,
+ 	debug("%s: container: %p sector: %lu sectors: %u\n", __func__,
+ 	      container, sector, sectors);
+ 	if (info->read(info, sector, sectors,
+-		       (void *)images[image_index].entry) != sectors) {
++		       (void *)images[image_index].dst) != sectors) {
+ 		printf("%s wrong\n", __func__);
+ 		return NULL;
+ 	}
 -- 
 2.37.1
 
