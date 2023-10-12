@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD41CCDB474
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 20:50:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45C82CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 20:52:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A400986B18;
-	Thu, 12 Oct 2023 22:49:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D45886D80;
+	Thu, 12 Oct 2023 22:52:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A++Nl6gk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LlyrCykK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7F5B86B36; Thu, 12 Oct 2023 22:49:39 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 370AD86D41; Thu, 12 Oct 2023 22:52:03 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7270484003
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 22:49:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36D6A86D3F
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 22:51:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-533c5d10dc7so2532009a12.3
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 13:49:31 -0700 (PDT)
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-53e08b60febso1926840a12.1
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 13:51:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697143771; x=1697748571; darn=lists.denx.de;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Jc5d+on9l1HY694SQifPzaYJgKufqWgp9ash1w47VT8=;
- b=A++Nl6gkLILQvv2kwhSQdvukdhf6vPrd8UqoIN3/pD9sa/RhS/aKpB6KINMkh/4d8F
- Xy4uCTF9jYSF0GzjgueIrzrbEzzR2RCDDN28lZwenfXJmpQDl28mHhSat3tZ77v4zE4E
- wgaOpvrC7yC0Bpz0cEa+cmt6GIMu3KO/yvIribUyYQmzOM8QEmFU6+m0uqTF/z7PClSv
- OyUiSZAK0BhV0IOArqhHmQmoKjf8fozIC9LCx/zVRSVknDE9Zs8n2Th/EPUBm6MLrYl3
- sY4hdh5VJy0chrfBTdoTF1hGx/SZi4su6uswM1Liv7MVK7r4Uv6Ge88a3oua/KoiO4NG
- NoNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697143771; x=1697748571;
- h=content-transfer-encoding:content-language:cc:to:subject:from
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ d=gmail.com; s=20230601; t=1697143875; x=1697748675; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=Jc5d+on9l1HY694SQifPzaYJgKufqWgp9ash1w47VT8=;
- b=Ma66GGegmGDTGSbB9hF3WF6gOdvW/7T/OLOFNIzXNji1RlIU0XnIw0viV6QIJvFUqN
- mS6rz2o3Gy+0hg1OQ+AbzjJwgfyv5hFjPWrfYOyZFhP1KYCdKxaG/Vfvf2ni8jZy12bX
- gvFo+eb/+Ke8TUc0lQkxOOhFHRyfNXlw53bKSbMmnHvb489YhHsv1ae8HmVP/BvSKg/x
- m0RLkkbyd9JJmk2WoDLE6fYQXpf5fv9aLn3gz99Ch+BYwKJEPLXmuj7Arv8x++L9OxpP
- cvIFwL8roGgUz2/EyV/+xpqpgq2T077+dWdHddhU6UqC+Kn+Y65hiq8kly0VaBZ9LVi5
- dmBw==
-X-Gm-Message-State: AOJu0YxyS1Eos52Dd1+qxS5lm71arabf1zyX7QYTwj2HF2MW5lUll+lf
- 58fEpJYNzP6motv0uTVsojg=
-X-Google-Smtp-Source: AGHT+IEtyaBtXC/JUdYJeP0E2ENTPfYEqeBo6d3dnawnGlkSFJQJDiHcK2RSBNEE0UUWzxeSeIj6GA==
-X-Received: by 2002:a17:906:3050:b0:9b2:be5e:7545 with SMTP id
- d16-20020a170906305000b009b2be5e7545mr21370658ejd.36.1697143770613; 
- Thu, 12 Oct 2023 13:49:30 -0700 (PDT)
+ bh=5Xgm6nyt0SC0nGF1LiYJaxPwMuub2nN0P/uAew4uR5Y=;
+ b=LlyrCykKoSE4VVIiDKbH0KhzQUyKlFMxvGB6uHBBf5PDSvheCwHCSRC8+/GWJh+9gE
+ tlaXqevVWhQU21n5y4Hl+/LN0YQOumPvBZKhd4puak6S0wyTeZcNDB0vp4cx7nU4HkK0
+ Lv72UlLfTIKX68lBblkU5vtjXnPa/O5ENfpwOhYwAl9jkgEaSnAuQPLBIXbh+HuDmZTA
+ NLPT7nYLKuITbkTDpyM/9EfgAqay8t8UdIcMvoor52FRMKVHhiZGN31YhxWRB6rZuXNV
+ Yx2SGlV/mOCQIeuMLcoX5ZdDTQKB6uys01Y/lJQCPtywbXT6EKorXr9H5qKCwXNv/kNH
+ ieFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697143875; x=1697748675;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5Xgm6nyt0SC0nGF1LiYJaxPwMuub2nN0P/uAew4uR5Y=;
+ b=rsTEHd/yeh00l/FcY/4q96Q2zk8a0Oo0XbUU1aOu0OSzQ8QplMdqmOyRwViULDHq+w
+ Ucbua7mzlc0wCI2DHTuai5rYEgFgOq4ziihoo1dS5ZyjDORQAbNCZRQmpPvxgMZHCs7+
+ YW183LirSA4K8NG5mvNDaqBWMuJywqMYTxVfkAcvOJ31rSbUfn1O/vtUhQN5uXlPo5dJ
+ RGADtnEiX8ckz8GsxXwK8+YzHKgND81YnY+sRwYJTN1Cse3fpNbXUn20MSTDleZyu9Xa
+ J/qOCQzSdWxuOiU/yDgJ51bnWkw0uOaZ27QGgy25i3ENuTJ79Kp5RoDzP+iVVLT8W4Cj
+ BpSg==
+X-Gm-Message-State: AOJu0Yzk4Cx615YsYBXfquZhTOdttZBpmR5O+ak8a1DbWTHs2ts0zqNY
+ 7ptbbj1t+tRMFphZLOWBWcs=
+X-Google-Smtp-Source: AGHT+IFS2fQfyrPj4Gb6sEKEFY+VNMX0F0zftspX+X0WDg77dHKqLp+dXpU2F7Zf02cSdhZlxesRmA==
+X-Received: by 2002:a17:907:75e2:b0:9ba:14a3:7218 with SMTP id
+ jz2-20020a17090775e200b009ba14a37218mr10899347ejc.25.1697143874814; 
+ Thu, 12 Oct 2023 13:51:14 -0700 (PDT)
 Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
  by smtp.gmail.com with ESMTPSA id
- kf24-20020a17090776d800b009b95787eb6dsm11412922ejc.48.2023.10.12.13.49.29
+ ks8-20020a170906f84800b0099b6becb107sm11621439ejb.95.2023.10.12.13.51.14
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Oct 2023 13:49:30 -0700 (PDT)
-Message-ID: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
-Date: Thu, 12 Oct 2023 22:49:29 +0200
+ Thu, 12 Oct 2023 13:51:14 -0700 (PDT)
+Message-ID: <94255fe4-ee9d-2e31-1bfa-d6270ebcd104@gmail.com>
+Date: Thu, 12 Oct 2023 22:51:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 0/7] Add rkmtd command
+Subject: [PATCH v3 2/7] rockchip: dm: prepare rkmtd UCLASS
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
  dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
  u-boot@lists.denx.de
+References: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
 Content-Language: en-US
+In-Reply-To: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,63 +96,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The command rkmtd creates a virtual block device to transfer
-Rockchip boot block data to and from NAND with block orientated
-tools like "ums" and "rockusb".
+Prepare a rkmtd UCLASS in use for writing Rockchip boot blocks
+in combination with existing userspace tools and rockusb command.
 
-It uses the Rockchip MTD driver to scan for boot blocks and copies
-data from the first block in a GPT formatted virtual disk.
-Data must be written in U-boot "idbloader.img" format and start at
-partition "loader1" offset 64. The data header is parsed
-for length and offset. When the last sector is received
-it erases up to 5 erase blocks on NAND and writes boot blocks
-in a pattern depending on the NAND ID. Data is then verified.
-When a block turns out bad the block header is discarded.
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+---
+ disk/part.c                | 4 ++++
+ drivers/block/blk-uclass.c | 1 +
+ include/dm/uclass-id.h     | 1 +
+ 3 files changed, 6 insertions(+)
 
-Changed V3:
-  Add documetation
-  Add test
-  Split driver from command
-  Split header
-  Use devm_kzalloc
-  Remove out of memory debug
-  Restyle
+diff --git a/disk/part.c b/disk/part.c
+index 85244b09f359..36b88205eca7 100644
+--- a/disk/part.c
++++ b/disk/part.c
+@@ -197,6 +197,7 @@ void dev_print(struct blk_desc *desc)
+ 	case UCLASS_PVBLOCK:
+ 	case UCLASS_HOST:
+ 	case UCLASS_BLKMAP:
++	case UCLASS_RKMTD:
+ 		printf ("Vendor: %s Rev: %s Prod: %s\n",
+ 			desc->vendor,
+ 			desc->revision,
+@@ -330,6 +331,9 @@ static void print_part_header(const char *type, struct blk_desc *desc)
+ 	case UCLASS_PVBLOCK:
+ 		puts("PV BLOCK");
+ 		break;
++	case UCLASS_RKMTD:
++		puts("RKMTD");
++		break;
+ 	case UCLASS_VIRTIO:
+ 		puts("VirtIO");
+ 		break;
+diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+index f126547cc7e6..30ad5bbb0024 100644
+--- a/drivers/block/blk-uclass.c
++++ b/drivers/block/blk-uclass.c
+@@ -36,6 +36,7 @@ static struct {
+ 	{ UCLASS_VIRTIO, "virtio" },
+ 	{ UCLASS_PVBLOCK, "pvblock" },
+ 	{ UCLASS_BLKMAP, "blkmap" },
++	{ UCLASS_RKMTD, "rkmtd" },
+ };
 
-Changed V2:
-  Rename to rkmtd
-
-Johan Jonker (7):
-  mtd: nand: raw: rockchip_nfc: add NAND_SKIP_BBTSCAN option
-  rockchip: dm: prepare rkmtd UCLASS
-  rockchip: block: add rkmtd class and drivers
-  rockchip: block: blk-uclass: disable bounce buffer support for rkmtd
-  rockchip: cmd: add rkmtd command
-  rockchip: test: dm: add rkmtd test
-  rockchip: doc: add rkmtd.rst
-
- cmd/Kconfig                         |    8 +
- cmd/Makefile                        |    1 +
- cmd/rkmtd.c                         |  204 +++++
- disk/part.c                         |    4 +
- doc/board/rockchip/index.rst        |    1 +
- doc/board/rockchip/rkmtd.rst        |  105 +++
- drivers/block/Kconfig               |    7 +
- drivers/block/Makefile              |    2 +
- drivers/block/blk-uclass.c          |    7 +-
- drivers/block/rkmtd.c               | 1138 +++++++++++++++++++++++++++
- drivers/mtd/nand/raw/Kconfig        |    9 +
- drivers/mtd/nand/raw/rockchip_nfc.c |    3 +
- include/dm/uclass-id.h              |    1 +
- include/rkmtd.h                     |  190 +++++
- test/dm/Makefile                    |    1 +
- test/dm/rkmtd.c                     |  201 +++++
- 16 files changed, 1879 insertions(+), 3 deletions(-)
- create mode 100644 cmd/rkmtd.c
- create mode 100644 doc/board/rockchip/rkmtd.rst
- create mode 100644 drivers/block/rkmtd.c
- create mode 100644 include/rkmtd.h
- create mode 100644 test/dm/rkmtd.c
-
+ static enum uclass_id uclass_name_to_iftype(const char *uclass_idname)
+diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
+index 0432c95c9edc..2fc672df0a3a 100644
+--- a/include/dm/uclass-id.h
++++ b/include/dm/uclass-id.h
+@@ -120,6 +120,7 @@ enum uclass_id {
+ 	UCLASS_REGULATOR,	/* Regulator device */
+ 	UCLASS_REMOTEPROC,	/* Remote Processor device */
+ 	UCLASS_RESET,		/* Reset controller device */
++	UCLASS_RKMTD,		/* Rockchip MTD device */
+ 	UCLASS_RNG,		/* Random Number Generator */
+ 	UCLASS_RTC,		/* Real time clock device */
+ 	UCLASS_SCMI_AGENT,	/* Interface with an SCMI server */
 --
 2.39.2
 
