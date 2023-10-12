@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C610CDB474
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 23:11:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC7CCCDB474
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 23:12:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E18A86E5D;
-	Fri, 13 Oct 2023 01:08:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2BFA786E29;
+	Fri, 13 Oct 2023 01:09:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qOlP/ZrG";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ujODQEP5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8666386D41; Fri, 13 Oct 2023 01:04:58 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1EA4A86EA8; Fri, 13 Oct 2023 01:06:54 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE35686E2F
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 01:04:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C2A386E5D
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 01:06:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-5a7ab31fb8bso17915437b3.1
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 16:04:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697151844; x=1697756644; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dtFD3tWyDFRWcXgCw9Jkw0wGOIvWaUR+FYfNfCf6VWw=;
- b=qOlP/ZrGGj3A/NKrZ0CtXi9jTxUI/9XwbbgQozHP7yAEtcHWo1VTZ3/taDHoRzqNml
- Xpw6QKoTjy6lqRvGSLPcJzVwcHwXx2jG7WTKDqGpzlfWGcCOBNYj/sK2tGb48Zhg6Nzw
- sgw2qv0vZp1R9JKXW6i2cMfhLEdX/4yhQvqXs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697151844; x=1697756644;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dtFD3tWyDFRWcXgCw9Jkw0wGOIvWaUR+FYfNfCf6VWw=;
- b=Sa6afeoY8pxftoMa4O+HTitSaZSCkiGDzKyjQ1YubIgUjSYWEHVkp5cEf/RQJnlJrZ
- Jeh4dV20h/9M6l2KNi1BvxhFZSwXIJ45L6ZUzi/M17D3GMtpjBSUGXVnSmFdDk3P+brD
- 3AoPClE4bprDvDnjQtAggWw9uM9qrC/UIdncT3vjAubrcTgjvIPmyNc2VI5tMFSe+K41
- t6lckzVzrqHthamQEedus6VV3sdRhcvdsEmaPetmlEMYGpC4xQvEhaF7Ek0lurkf6us6
- /s2bb7Lo8MbNrgXzhYyE4Srci9V/ewx9IvnOY1qzqQT1ge6/40M8AZHCVFgTolXF2BJ+
- 6/9Q==
-X-Gm-Message-State: AOJu0YxkfmKrWAqD6OyqlLLidgeiPrbf1sEkaGwhtDHoeesHJFih9crA
- sKYSRyDqtHRQF54k+39wxK7i8H7Y1JYVDtACs3JRgQ==
-X-Google-Smtp-Source: AGHT+IG0Ijj7MgfG78vaEFDJfYNK+O2d20iA2K54dLEYITb/LwzjjZV8br+RYt5YGy04z/Kwsb0Frw==
-X-Received: by 2002:a05:690c:fd3:b0:5a8:17d4:aea1 with SMTP id
- dg19-20020a05690c0fd300b005a817d4aea1mr1145513ywb.28.1697151843531; 
- Thu, 12 Oct 2023 16:04:03 -0700 (PDT)
-Received: from bill-the-cat.lan
- (2603-6081-7b00-6400-5647-4a14-f04e-8d8d.res6.spectrum.com.
- [2603:6081:7b00:6400:5647:4a14:f04e:8d8d])
- by smtp.gmail.com with ESMTPSA id
- k7-20020a816f07000000b005925765aa30sm278730ywc.135.2023.10.12.16.04.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 16:04:03 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Angelo Dureghello <angelo@kernel-space.org>
-Subject: [PATCH 4/7] m68k: Remove common.h usage
-Date: Thu, 12 Oct 2023 19:03:56 -0400
-Message-Id: <20231012230359.2005249-4-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231012230359.2005249-1-trini@konsulko.com>
-References: <20231012230359.2005249-1-trini@konsulko.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39CN6JZ6099042;
+ Thu, 12 Oct 2023 18:06:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1697151979;
+ bh=I2rpegGi2xbz6rJWssQ5KaqQBG0tDVBuND1PFHLa5CI=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=ujODQEP5K1NVGk1TTADs6eWZTwl/G+1MqZ1b9jaRusBvDD0OqguPQjhRK8odeaHbB
+ UyT/i4oEKIdxGo9qGJ4tTjwMvVmZkxNzho2qvzJNKjuL50crYirpDtZkX6yTVxgpto
+ c/jDtpjRsLJwjm7ZfZwr1aKzFihV8zGifwmIagZU=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39CN6JNN048432
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 12 Oct 2023 18:06:19 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
+ Oct 2023 18:06:19 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 12 Oct 2023 18:06:19 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39CN6Jv6038866;
+ Thu, 12 Oct 2023 18:06:19 -0500
+From: Bryan Brattlof <bb@ti.com>
+To: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Hari
+ Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
+ <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>
+CC: UBoot Mailing List <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>,
+ Nishanth Menon <nm@ti.com>, Bryan Brattlof <bb@ti.com>
+Subject: [PATCH 10/11] configs: introduce configs needed for the am62px
+Date: Thu, 12 Oct 2023 18:06:27 -0500
+Message-ID: <20231012230616.2101992-23-bb@ti.com>
+X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231012230616.2101992-13-bb@ti.com>
+References: <20231012230616.2101992-13-bb@ti.com>
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=10292; i=bb@ti.com;
+ h=from:subject; bh=Dqm8yuBpxGRNCrIeZzMIiWrp1IsdVjsp1Dad0cbVbRc=;
+ b=owNCWmg5MUFZJlNZ3rnrhwAAaP////fLf/13TwGff/+z+1vP3ny7ewz+effVedpfx3V+t/awA
+ RtWCHqGjQGmQDQNAAMmmgA0AAAADQAaAAAAB6j1AAeao00Bo9NINPUeU/KhkmTTQZNABiNAZA00
+ aDRk0aNPUNDEBoMTEMjRoAyAekME0ANNAaZGQNMI0GHTJtTJkaZMjCBhBtQNGQBkDJo0NGQABpk
+ YQAMjIANMT1MRkA0GjIZMgACRPON7NZLpC6JcKj8ChHpJE6TmhY52Ijd5gpCbEAxYkEHeBhQdf+
+ sk+YUkPCIFwqqUhBEO0S2l2KZ8ux5mC4aAu7AkKdTjhDEqBecAC1Ue/YpvEOkQu6BtJNQgaPdBA
+ NcQTj5pwALNP0dRaCQAti7Mf9pfr1M4RNq6+BC+wHNZef4wWk8SZsMHxSt4GfU+sCiM6eaKlQMq
+ 9CwbN1X9atvG5h3G1jr7n9O7R2gHmqr4iU+D+9Tu2Ai/mqnl20UUOcwjWTWJcqLIYXJLqk3aKwl
+ +YhQn7TR8+FLJcT7tLQyIRgBXqZtQh74he/C+gLDHhJTmFg3ESG9WaLtknffgz1ZTU9HCDKVCQG
+ PgaT9GNYtPPfsmIyM21UoDYGjCN8W4E01ZrY7xLOPRBTjgap3HEfIBwiT3NKmbkYzMP8EglaKJF
+ t/4u5IpwoSG9c9cOA==
+X-Developer-Key: i=bb@ti.com; a=openpgp;
+ fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,539 +95,367 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We can remove common.h from most cases of the code here, and only a few
-places need an additional header instead.
+Introduce the initial configs needed to support the am62px SoC family
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Bryan Brattlof <bb@ti.com>
 ---
-Cc: Angelo Dureghello <angelo@kernel-space.org>
----
- arch/m68k/cpu/mcf523x/cpu.c         | 1 -
- arch/m68k/cpu/mcf523x/cpu_init.c    | 1 -
- arch/m68k/cpu/mcf523x/interrupts.c  | 1 -
- arch/m68k/cpu/mcf523x/speed.c       | 1 -
- arch/m68k/cpu/mcf52x2/cpu.c         | 1 -
- arch/m68k/cpu/mcf52x2/cpu_init.c    | 3 +--
- arch/m68k/cpu/mcf52x2/interrupts.c  | 1 -
- arch/m68k/cpu/mcf52x2/speed.c       | 1 -
- arch/m68k/cpu/mcf530x/cpu.c         | 1 -
- arch/m68k/cpu/mcf530x/cpu_init.c    | 1 -
- arch/m68k/cpu/mcf530x/interrupts.c  | 1 -
- arch/m68k/cpu/mcf530x/speed.c       | 1 -
- arch/m68k/cpu/mcf532x/cpu.c         | 1 -
- arch/m68k/cpu/mcf532x/cpu_init.c    | 1 -
- arch/m68k/cpu/mcf532x/interrupts.c  | 1 -
- arch/m68k/cpu/mcf532x/speed.c       | 1 -
- arch/m68k/cpu/mcf5445x/cpu.c        | 1 -
- arch/m68k/cpu/mcf5445x/cpu_init.c   | 1 -
- arch/m68k/cpu/mcf5445x/dspi.c       | 1 -
- arch/m68k/cpu/mcf5445x/interrupts.c | 1 -
- arch/m68k/cpu/mcf5445x/speed.c      | 1 -
- arch/m68k/cpu/mcf5445x/start.S      | 1 -
- arch/m68k/include/asm/immap.h       | 1 +
- arch/m68k/include/asm/immap_520x.h  | 1 +
- arch/m68k/include/asm/immap_5235.h  | 1 +
- arch/m68k/include/asm/immap_5272.h  | 1 +
- arch/m68k/include/asm/immap_5275.h  | 1 +
- arch/m68k/include/asm/immap_5282.h  | 1 +
- arch/m68k/include/asm/immap_5301x.h | 1 +
- arch/m68k/include/asm/immap_5307.h  | 2 ++
- arch/m68k/include/asm/immap_5329.h  | 1 +
- arch/m68k/include/asm/immap_5441x.h | 1 +
- arch/m68k/lib/bdinfo.c              | 3 ++-
- arch/m68k/lib/bootm.c               | 1 -
- arch/m68k/lib/cache.c               | 2 +-
- arch/m68k/lib/fec.c                 | 2 +-
- arch/m68k/lib/interrupts.c          | 2 +-
- arch/m68k/lib/time.c                | 1 -
- arch/m68k/lib/traps.c               | 1 -
- 39 files changed, 17 insertions(+), 30 deletions(-)
+ configs/am62px_evm_a53_defconfig | 176 +++++++++++++++++++++++++++++++
+ configs/am62px_evm_r5_defconfig  | 137 ++++++++++++++++++++++++
+ include/configs/am62px_evm.h     |  18 ++++
+ 3 files changed, 331 insertions(+)
+ create mode 100644 configs/am62px_evm_a53_defconfig
+ create mode 100644 configs/am62px_evm_r5_defconfig
+ create mode 100644 include/configs/am62px_evm.h
 
-diff --git a/arch/m68k/cpu/mcf523x/cpu.c b/arch/m68k/cpu/mcf523x/cpu.c
-index bef67767b425..c843a381ea1f 100644
---- a/arch/m68k/cpu/mcf523x/cpu.c
-+++ b/arch/m68k/cpu/mcf523x/cpu.c
-@@ -8,7 +8,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <net.h>
- #include <vsprintf.h>
-diff --git a/arch/m68k/cpu/mcf523x/cpu_init.c b/arch/m68k/cpu/mcf523x/cpu_init.c
-index 10be73822fa5..a05cbdcb3852 100644
---- a/arch/m68k/cpu/mcf523x/cpu_init.c
-+++ b/arch/m68k/cpu/mcf523x/cpu_init.c
-@@ -8,7 +8,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <init.h>
- #include <watchdog.h>
-diff --git a/arch/m68k/cpu/mcf523x/interrupts.c b/arch/m68k/cpu/mcf523x/interrupts.c
-index 09c7f9e67cc7..46c9207a93bb 100644
---- a/arch/m68k/cpu/mcf523x/interrupts.c
-+++ b/arch/m68k/cpu/mcf523x/interrupts.c
-@@ -6,7 +6,6 @@
-  */
- 
- /* CPU specific interrupt routine */
--#include <common.h>
- #include <irq_func.h>
- #include <asm/immap.h>
- #include <asm/io.h>
-diff --git a/arch/m68k/cpu/mcf523x/speed.c b/arch/m68k/cpu/mcf523x/speed.c
-index 6b08a12af0b6..2eb43cc7eb9a 100644
---- a/arch/m68k/cpu/mcf523x/speed.c
-+++ b/arch/m68k/cpu/mcf523x/speed.c
-@@ -8,7 +8,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <clock_legacy.h>
- #include <asm/global_data.h>
- #include <asm/processor.h>
-diff --git a/arch/m68k/cpu/mcf52x2/cpu.c b/arch/m68k/cpu/mcf52x2/cpu.c
-index 5042a38b3e9e..6bfde5e9bd70 100644
---- a/arch/m68k/cpu/mcf52x2/cpu.c
-+++ b/arch/m68k/cpu/mcf52x2/cpu.c
-@@ -13,7 +13,6 @@
-  * Copyright (C) 2012 Freescale Semiconductor, Inc. All Rights Reserved.
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <net.h>
- #include <vsprintf.h>
-diff --git a/arch/m68k/cpu/mcf52x2/cpu_init.c b/arch/m68k/cpu/mcf52x2/cpu_init.c
-index 99eb61f16758..4506eb39edfc 100644
---- a/arch/m68k/cpu/mcf52x2/cpu_init.c
-+++ b/arch/m68k/cpu/mcf52x2/cpu_init.c
-@@ -17,7 +17,7 @@
-  * Copyright (C) 2008 Arthur Shipkowski (art@videon-central.com)
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <cpu_func.h>
- #include <init.h>
- #include <watchdog.h>
-@@ -25,7 +25,6 @@
- #include <asm/io.h>
- 
- #if defined(CONFIG_CMD_NET)
--#include <config.h>
- #include <net.h>
- #include <asm/fec.h>
- #endif
-diff --git a/arch/m68k/cpu/mcf52x2/interrupts.c b/arch/m68k/cpu/mcf52x2/interrupts.c
-index c5ed06007369..264bdc7d6c7e 100644
---- a/arch/m68k/cpu/mcf52x2/interrupts.c
-+++ b/arch/m68k/cpu/mcf52x2/interrupts.c
-@@ -7,7 +7,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <irq_func.h>
- #include <watchdog.h>
- #include <asm/processor.h>
-diff --git a/arch/m68k/cpu/mcf52x2/speed.c b/arch/m68k/cpu/mcf52x2/speed.c
-index 6c7628252b59..538e4c623d42 100644
---- a/arch/m68k/cpu/mcf52x2/speed.c
-+++ b/arch/m68k/cpu/mcf52x2/speed.c
-@@ -7,7 +7,6 @@
-  * Hayden Fraser (Hayden.Fraser@freescale.com)
-  */
- 
--#include <common.h>
- #include <clock_legacy.h>
- #include <asm/global_data.h>
- #include <asm/processor.h>
-diff --git a/arch/m68k/cpu/mcf530x/cpu.c b/arch/m68k/cpu/mcf530x/cpu.c
-index 53a25d8362cd..92a0ef76895c 100644
---- a/arch/m68k/cpu/mcf530x/cpu.c
-+++ b/arch/m68k/cpu/mcf530x/cpu.c
-@@ -4,7 +4,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <command.h>
- #include <init.h>
- #include <vsprintf.h>
-diff --git a/arch/m68k/cpu/mcf530x/cpu_init.c b/arch/m68k/cpu/mcf530x/cpu_init.c
-index dad47d87ab31..8f6e668d103a 100644
---- a/arch/m68k/cpu/mcf530x/cpu_init.c
-+++ b/arch/m68k/cpu/mcf530x/cpu_init.c
-@@ -4,7 +4,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <init.h>
- #include <watchdog.h>
-diff --git a/arch/m68k/cpu/mcf530x/interrupts.c b/arch/m68k/cpu/mcf530x/interrupts.c
-index 11686202dc73..99cf86385037 100644
---- a/arch/m68k/cpu/mcf530x/interrupts.c
-+++ b/arch/m68k/cpu/mcf530x/interrupts.c
-@@ -4,7 +4,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <irq_func.h>
- #include <asm/immap.h>
- #include <asm/io.h>
-diff --git a/arch/m68k/cpu/mcf530x/speed.c b/arch/m68k/cpu/mcf530x/speed.c
-index c8d079016f2e..6542fc43ab10 100644
---- a/arch/m68k/cpu/mcf530x/speed.c
-+++ b/arch/m68k/cpu/mcf530x/speed.c
-@@ -4,7 +4,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <clock_legacy.h>
- #include <asm/global_data.h>
- #include <asm/processor.h>
-diff --git a/arch/m68k/cpu/mcf532x/cpu.c b/arch/m68k/cpu/mcf532x/cpu.c
-index 18d20a892655..6973af9d045d 100644
---- a/arch/m68k/cpu/mcf532x/cpu.c
-+++ b/arch/m68k/cpu/mcf532x/cpu.c
-@@ -8,7 +8,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <net.h>
- #include <vsprintf.h>
-diff --git a/arch/m68k/cpu/mcf532x/cpu_init.c b/arch/m68k/cpu/mcf532x/cpu_init.c
-index 844d2cd7600f..62a45f96314d 100644
---- a/arch/m68k/cpu/mcf532x/cpu_init.c
-+++ b/arch/m68k/cpu/mcf532x/cpu_init.c
-@@ -8,7 +8,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <init.h>
- #include <watchdog.h>
-diff --git a/arch/m68k/cpu/mcf532x/interrupts.c b/arch/m68k/cpu/mcf532x/interrupts.c
-index 4f72fa88e58c..e37893c3e535 100644
---- a/arch/m68k/cpu/mcf532x/interrupts.c
-+++ b/arch/m68k/cpu/mcf532x/interrupts.c
-@@ -6,7 +6,6 @@
-  */
- 
- /* CPU specific interrupt routine */
--#include <common.h>
- #include <irq_func.h>
- #include <asm/immap.h>
- #include <asm/io.h>
-diff --git a/arch/m68k/cpu/mcf532x/speed.c b/arch/m68k/cpu/mcf532x/speed.c
-index 32ffac08135d..166916526eb9 100644
---- a/arch/m68k/cpu/mcf532x/speed.c
-+++ b/arch/m68k/cpu/mcf532x/speed.c
-@@ -8,7 +8,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <clock_legacy.h>
- #include <asm/global_data.h>
- #include <asm/processor.h>
-diff --git a/arch/m68k/cpu/mcf5445x/cpu.c b/arch/m68k/cpu/mcf5445x/cpu.c
-index d9a71c6b920d..b811ac355e4d 100644
---- a/arch/m68k/cpu/mcf5445x/cpu.c
-+++ b/arch/m68k/cpu/mcf5445x/cpu.c
-@@ -8,7 +8,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <net.h>
- #include <vsprintf.h>
-diff --git a/arch/m68k/cpu/mcf5445x/cpu_init.c b/arch/m68k/cpu/mcf5445x/cpu_init.c
-index bc3a2f3aed63..3277617120c7 100644
---- a/arch/m68k/cpu/mcf5445x/cpu_init.c
-+++ b/arch/m68k/cpu/mcf5445x/cpu_init.c
-@@ -8,7 +8,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <init.h>
- #include <watchdog.h>
-diff --git a/arch/m68k/cpu/mcf5445x/dspi.c b/arch/m68k/cpu/mcf5445x/dspi.c
-index 456af171a4e2..13eb6ecee101 100644
---- a/arch/m68k/cpu/mcf5445x/dspi.c
-+++ b/arch/m68k/cpu/mcf5445x/dspi.c
-@@ -6,7 +6,6 @@
-  * CPU specific dspi routines
-  */
- 
--#include <common.h>
- #include <asm/immap.h>
- #include <asm/io.h>
- 
-diff --git a/arch/m68k/cpu/mcf5445x/interrupts.c b/arch/m68k/cpu/mcf5445x/interrupts.c
-index 400f3dee879e..913290086dca 100644
---- a/arch/m68k/cpu/mcf5445x/interrupts.c
-+++ b/arch/m68k/cpu/mcf5445x/interrupts.c
-@@ -9,7 +9,6 @@
-  */
- 
- /* CPU specific interrupt routine */
--#include <common.h>
- #include <irq_func.h>
- #include <asm/immap.h>
- #include <asm/io.h>
-diff --git a/arch/m68k/cpu/mcf5445x/speed.c b/arch/m68k/cpu/mcf5445x/speed.c
-index 5c78eb983496..41cb9e999adc 100644
---- a/arch/m68k/cpu/mcf5445x/speed.c
-+++ b/arch/m68k/cpu/mcf5445x/speed.c
-@@ -5,7 +5,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <clock_legacy.h>
- #include <asm/global_data.h>
- #include <asm/processor.h>
-diff --git a/arch/m68k/cpu/mcf5445x/start.S b/arch/m68k/cpu/mcf5445x/start.S
-index 5c3bfff79183..f0264671d386 100644
---- a/arch/m68k/cpu/mcf5445x/start.S
-+++ b/arch/m68k/cpu/mcf5445x/start.S
-@@ -7,7 +7,6 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
- #include <asm-offsets.h>
- #include <config.h>
- #include <asm/cache.h>
-diff --git a/arch/m68k/include/asm/immap.h b/arch/m68k/include/asm/immap.h
-index aafa4f40cb35..411b00899c25 100644
---- a/arch/m68k/include/asm/immap.h
-+++ b/arch/m68k/include/asm/immap.h
-@@ -9,6 +9,7 @@
- #ifndef __IMMAP_H
- #define __IMMAP_H
- 
-+#include <config.h>
- #if defined(CONFIG_MCF520x)
- #include <asm/immap_520x.h>
- #include <asm/m520x.h>
-diff --git a/arch/m68k/include/asm/immap_520x.h b/arch/m68k/include/asm/immap_520x.h
-index 7c7443b96885..d3c2f4a4091d 100644
---- a/arch/m68k/include/asm/immap_520x.h
-+++ b/arch/m68k/include/asm/immap_520x.h
-@@ -36,6 +36,7 @@
- #define MMAP_GPIO	(CFG_SYS_MBAR + 0x000A4000)
- #define MMAP_SDRAM	(CFG_SYS_MBAR + 0x000A8000)
- 
-+#include <linux/types.h>
- #include <asm/coldfire/crossbar.h>
- #include <asm/coldfire/edma.h>
- #include <asm/coldfire/eport.h>
-diff --git a/arch/m68k/include/asm/immap_5235.h b/arch/m68k/include/asm/immap_5235.h
-index a1825c2a944f..d9b0be1d7d41 100644
---- a/arch/m68k/include/asm/immap_5235.h
-+++ b/arch/m68k/include/asm/immap_5235.h
-@@ -46,6 +46,7 @@
- #define MMAP_ETPU	(CFG_SYS_MBAR + 0x001D0000)
- #define MMAP_CAN2	(CFG_SYS_MBAR + 0x001F0000)
- 
-+#include <linux/types.h>
- #include <asm/coldfire/eport.h>
- #include <asm/coldfire/flexbus.h>
- #include <asm/coldfire/flexcan.h>
-diff --git a/arch/m68k/include/asm/immap_5272.h b/arch/m68k/include/asm/immap_5272.h
-index c5c3cc751258..5378ed1aac16 100644
---- a/arch/m68k/include/asm/immap_5272.h
-+++ b/arch/m68k/include/asm/immap_5272.h
-@@ -27,6 +27,7 @@
- #define MMAP_FEC	(CFG_SYS_MBAR + 0x00000840)
- #define MMAP_USB	(CFG_SYS_MBAR + 0x00001000)
- 
-+#include <linux/types.h>
- #include <asm/coldfire/pwm.h>
- 
- /* System configuration registers */
-diff --git a/arch/m68k/include/asm/immap_5275.h b/arch/m68k/include/asm/immap_5275.h
-index 9b8d71d30d44..c4cce3f94f14 100644
---- a/arch/m68k/include/asm/immap_5275.h
-+++ b/arch/m68k/include/asm/immap_5275.h
-@@ -49,6 +49,7 @@
- #define MMAP_USB	(CFG_SYS_MBAR + 0x001C0000)
- #define MMAP_PWM0	(CFG_SYS_MBAR + 0x001D0000)
- 
-+#include <linux/types.h>
- #include <asm/coldfire/eport.h>
- #include <asm/coldfire/flexbus.h>
- #include <asm/coldfire/intctrl.h>
-diff --git a/arch/m68k/include/asm/immap_5282.h b/arch/m68k/include/asm/immap_5282.h
-index f810a4dd5cb5..e5f400e6ae32 100644
---- a/arch/m68k/include/asm/immap_5282.h
-+++ b/arch/m68k/include/asm/immap_5282.h
-@@ -45,6 +45,7 @@
- #define MMAP_CFMC	(CFG_SYS_MBAR + 0x001D0000)
- #define MMAP_CFMMEM	(CFG_SYS_MBAR + 0x04000000)
- 
-+#include <linux/types.h>
- #include <asm/coldfire/eport.h>
- #include <asm/coldfire/flexbus.h>
- #include <asm/coldfire/flexcan.h>
-diff --git a/arch/m68k/include/asm/immap_5301x.h b/arch/m68k/include/asm/immap_5301x.h
-index e1f7858b1007..3ade4f04756c 100644
---- a/arch/m68k/include/asm/immap_5301x.h
-+++ b/arch/m68k/include/asm/immap_5301x.h
-@@ -50,6 +50,7 @@
- #define MMAP_IIM	(CFG_SYS_MBAR + 0x000C8000)
- #define MMAP_ESDHC	(CFG_SYS_MBAR + 0x000CC000)
- 
-+#include <linux/types.h>
- #include <asm/coldfire/crossbar.h>
- #include <asm/coldfire/dspi.h>
- #include <asm/coldfire/edma.h>
-diff --git a/arch/m68k/include/asm/immap_5307.h b/arch/m68k/include/asm/immap_5307.h
-index d6442d95b4ba..d96dd146efb0 100644
---- a/arch/m68k/include/asm/immap_5307.h
-+++ b/arch/m68k/include/asm/immap_5307.h
-@@ -17,6 +17,8 @@
- #define MMAP_UART1	(CFG_SYS_MBAR + 0x00000200)
- #define MMAP_GPIO	(CFG_SYS_MBAR + 0x00000244)
- 
-+#include <linux/types.h>
+diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
+new file mode 100644
+index 0000000000000..f17bbbd6f417f
+--- /dev/null
++++ b/configs/am62px_evm_a53_defconfig
+@@ -0,0 +1,176 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_TI_SECURE_DEVICE=y
++CONFIG_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_GPIO=y
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_NR_DRAM_BANKS=2
++CONFIG_SOC_K3_AM62P5=y
++CONFIG_K3_ATF_LOAD_ADDR=0x9e780000
++CONFIG_TARGET_AM62P5_A53_EVM=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
++CONFIG_SF_DEFAULT_SPEED=25000000
++CONFIG_ENV_SIZE=0x40000
++CONFIG_DM_GPIO=y
++CONFIG_SPL_DM_SPI=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am62p5-sk"
++CONFIG_SPL_TEXT_BASE=0x80080000
++CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTCOMMAND="run envboot; run distro_bootcmd;"
++CONFIG_SPL_MAX_SIZE=0x58000
++CONFIG_SPL_PAD_TO=0x0
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x80a00000
++CONFIG_SPL_BSS_MAX_SIZE=0x80000
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
++CONFIG_SPL_I2C=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++# CONFIG_SPL_SPI_FLASH_TINY is not set
++CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_SYS_MAXARGS=64
++CONFIG_CMD_CLK=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_DM=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_MTD=y
++CONFIG_CMD_REMOTEPROC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_MTDPARTS=y
++CONFIG_CMD_UBI=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT=y
++CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
++CONFIG_NET_RANDOM_ETHADDR=y
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_DEVICE_REMOVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_SYSCON=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_CLK_TI_SCI=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_MTD=y
++CONFIG_DFU_RAM=y
++CONFIG_DFU_SF=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
++CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
++CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
++CONFIG_TI_SCI_PROTOCOL=y
++CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
++CONFIG_DA8XX_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_SPL_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_I2C_EEPROM=y
++CONFIG_SPL_I2C_EEPROM=y
++CONFIG_FS_LOADER=y
++CONFIG_SUPPORT_EMMC_BOOT=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_SPL_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_SPI_NAND=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_S28HX_T=y
++CONFIG_PHY_TI_DP83867=y
++CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_PINCTRL=y
++CONFIG_SPL_PINCTRL=y
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_SCI_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_SPL_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_SPL_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_SPL_DM_REGULATOR_GPIO=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_REMOTEPROC_TI_K3_ARM64=y
++CONFIG_REMOTEPROC_TI_K3_DSP=y
++CONFIG_REMOTEPROC_TI_K3_R5F=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_CADENCE_QSPI=y
++CONFIG_SYSRESET=y
++CONFIG_SPL_SYSRESET=y
++CONFIG_SYSRESET_TI_SCI=y
++CONFIG_DM_THERMAL=y
++CONFIG_USB=y
++CONFIG_DM_USB_GADGET=y
++CONFIG_SPL_DM_USB_GADGET=y
++CONFIG_SPL_USB_HOST=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_DWC3_GENERIC=y
++CONFIG_SPL_USB_STORAGE=y
++CONFIG_USB_GADGET=y
++CONFIG_SPL_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0451
++CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
++CONFIG_SPL_DFU=y
++CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+diff --git a/configs/am62px_evm_r5_defconfig b/configs/am62px_evm_r5_defconfig
+new file mode 100644
+index 0000000000000..25505167f018b
+--- /dev/null
++++ b/configs/am62px_evm_r5_defconfig
+@@ -0,0 +1,137 @@
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_TI_SECURE_DEVICE=y
++CONFIG_SYS_MALLOC_F_LEN=0x9000
++CONFIG_SPL_LIBCOMMON_SUPPORT=y
++CONFIG_SPL_LIBGENERIC_SUPPORT=y
++CONFIG_SOC_K3_AM62P5=y
++CONFIG_TARGET_AM62P5_R5_EVM=y
++CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
++CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x43c4a7f0
++CONFIG_SF_DEFAULT_SPEED=25000000
++CONFIG_SF_DEFAULT_MODE=0
++CONFIG_ENV_SIZE=0x20000
++CONFIG_ENV_OFFSET=0x680000
++CONFIG_SPL_DM_SPI=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am62p5-r5-sk"
++CONFIG_SPL_TEXT_BASE=0x43c00000
++CONFIG_DM_RESET=y
++CONFIG_SPL_MMC=y
++CONFIG_SPL_SERIAL=y
++CONFIG_SPL_STACK_R_ADDR=0x82000000
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
++CONFIG_SPL_SIZE_LIMIT=0x3C000
++CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x5000
++CONFIG_SPL_FS_FAT=y
++CONFIG_SPL_LIBDISK_SUPPORT=y
++CONFIG_SPL_SPI_FLASH_SUPPORT=y
++CONFIG_SPL_SPI=y
++CONFIG_SPL_LOAD_FIT=y
++CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
++CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
++CONFIG_SPL_MAX_SIZE=0x3B000
++CONFIG_SPL_PAD_TO=0x0
++CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
++CONFIG_SPL_BSS_START_ADDR=0x43c4b000
++CONFIG_SPL_BSS_MAX_SIZE=0x3000
++CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
++CONFIG_SPL_SYS_MALLOC_SIMPLE=y
++CONFIG_SPL_STACK_R=y
++CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
++CONFIG_SPL_SEPARATE_BSS=y
++CONFIG_SYS_SPL_MALLOC=y
++CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
++CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x84000000
++CONFIG_SYS_SPL_MALLOC_SIZE=0x1000000
++CONFIG_SPL_EARLY_BSS=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
++CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
++CONFIG_SPL_DMA=y
++CONFIG_SPL_DM_MAILBOX=y
++CONFIG_SPL_MTD_SUPPORT=y
++CONFIG_SPL_DM_SPI_FLASH=y
++CONFIG_SPL_DM_RESET=y
++CONFIG_SPL_POWER_DOMAIN=y
++CONFIG_SPL_RAM_SUPPORT=y
++CONFIG_SPL_RAM_DEVICE=y
++CONFIG_SPL_REMOTEPROC=y
++# CONFIG_SPL_SPI_FLASH_TINY is not set
++CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPL_SPI_LOAD=y
++CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
++CONFIG_SPL_THERMAL=y
++CONFIG_SPL_YMODEM_SUPPORT=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_ASKENV=y
++CONFIG_CMD_DFU=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_REMOTEPROC=y
++# CONFIG_CMD_SETEXPR is not set
++CONFIG_CMD_TIME=y
++CONFIG_CMD_FAT=y
++CONFIG_OF_CONTROL=y
++CONFIG_SPL_OF_CONTROL=y
++CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SYS_MMC_ENV_PART=1
++# CONFIG_NET is not set
++CONFIG_SPL_DM=y
++CONFIG_SPL_DM_DEVICE_REMOVE=y
++CONFIG_SPL_DM_SEQ_ALIAS=y
++CONFIG_REGMAP=y
++CONFIG_SPL_REGMAP=y
++CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_CLK=y
++CONFIG_SPL_CLK=y
++CONFIG_SPL_CLK_CCF=y
++CONFIG_SPL_CLK_K3_PLL=y
++CONFIG_SPL_CLK_K3=y
++CONFIG_DMA_CHANNELS=y
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_TI_SCI_PROTOCOL=y
++# CONFIG_GPIO is not set
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_OMAP24XX=y
++CONFIG_DM_MAILBOX=y
++CONFIG_K3_SEC_PROXY=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_SPL_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_AM654=y
++CONFIG_MTD=y
++CONFIG_DM_MTD=y
++CONFIG_MTD_SPI_NAND=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH_SFDP_SUPPORT=y
++CONFIG_SPI_FLASH_SOFT_RESET=y
++CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_S28HX_T=y
++CONFIG_PINCTRL=y
++# CONFIG_PINCTRL_GENERIC is not set
++CONFIG_SPL_PINCTRL=y
++# CONFIG_SPL_PINCTRL_GENERIC is not set
++CONFIG_PINCTRL_SINGLE=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_TI_POWER_DOMAIN=y
++CONFIG_K3_SYSTEM_CONTROLLER=y
++CONFIG_REMOTEPROC_TI_K3_ARM64=y
++CONFIG_RESET_TI_SCI=y
++CONFIG_SPECIFY_CONSOLE_INDEX=y
++CONFIG_DM_SERIAL=y
++CONFIG_SOC_DEVICE=y
++CONFIG_SOC_DEVICE_TI_K3=y
++CONFIG_SOC_TI=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_CADENCE_QSPI=y
++CONFIG_TIMER=y
++CONFIG_SPL_TIMER=y
++CONFIG_OMAP_TIMER=y
++CONFIG_LIB_RATIONAL=y
++CONFIG_SPL_LIB_RATIONAL=y
+diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
+new file mode 100644
+index 0000000000000..f09ef2af0103d
+--- /dev/null
++++ b/include/configs/am62px_evm.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Configuration header file for K3 AM62Px SoC family
++ *
++ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
++ */
 +
- typedef struct sim {
- 	u8  rsr;
- 	u8  sypcr;
-diff --git a/arch/m68k/include/asm/immap_5329.h b/arch/m68k/include/asm/immap_5329.h
-index dbf3a2260eed..6f1795a207a1 100644
---- a/arch/m68k/include/asm/immap_5329.h
-+++ b/arch/m68k/include/asm/immap_5329.h
-@@ -51,6 +51,7 @@
- #define MMAP_SSI	0xFC0BC000
- #define MMAP_PLL	0xFC0C0000
- 
-+#include <linux/types.h>
- #include <asm/coldfire/crossbar.h>
- #include <asm/coldfire/edma.h>
- #include <asm/coldfire/eport.h>
-diff --git a/arch/m68k/include/asm/immap_5441x.h b/arch/m68k/include/asm/immap_5441x.h
-index 708d0db755a8..c8f3effe2407 100644
---- a/arch/m68k/include/asm/immap_5441x.h
-+++ b/arch/m68k/include/asm/immap_5441x.h
-@@ -76,6 +76,7 @@
- #define MMAP_CCM	0xEC090000
- #define MMAP_GPIO	0xEC094000
- 
-+#include <linux/types.h>
- #include <asm/coldfire/crossbar.h>
- #include <asm/coldfire/dspi.h>
- #include <asm/coldfire/edma.h>
-diff --git a/arch/m68k/lib/bdinfo.c b/arch/m68k/lib/bdinfo.c
-index 0b4629f1c8a7..3719f11c03c6 100644
---- a/arch/m68k/lib/bdinfo.c
-+++ b/arch/m68k/lib/bdinfo.c
-@@ -6,8 +6,9 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <init.h>
-+#include <asm/u-boot.h>
- #include <asm/global_data.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
-diff --git a/arch/m68k/lib/bootm.c b/arch/m68k/lib/bootm.c
-index f18bed235d45..79d8b34c0d56 100644
---- a/arch/m68k/lib/bootm.c
-+++ b/arch/m68k/lib/bootm.c
-@@ -4,7 +4,6 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--#include <common.h>
- #include <bootstage.h>
- #include <command.h>
- #include <env.h>
-diff --git a/arch/m68k/lib/cache.c b/arch/m68k/lib/cache.c
-index 57e5632fdb5b..de04124404cf 100644
---- a/arch/m68k/lib/cache.c
-+++ b/arch/m68k/lib/cache.c
-@@ -4,7 +4,7 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <cpu_func.h>
- #include <asm/immap.h>
- #include <asm/cache.h>
-diff --git a/arch/m68k/lib/fec.c b/arch/m68k/lib/fec.c
-index eecea7a02354..d6f238e4b347 100644
---- a/arch/m68k/lib/fec.c
-+++ b/arch/m68k/lib/fec.c
-@@ -3,8 +3,8 @@
-  * (C) 2019 Angelo Dureghello <angelo.dureghello@timesys.com>
-  */
- 
--#include <common.h>
- #include <asm/global_data.h>
-+#include <linux/errno.h>
- #include <linux/libfdt.h>
- #include <fdt_support.h>
- 
-diff --git a/arch/m68k/lib/interrupts.c b/arch/m68k/lib/interrupts.c
-index 799daab5612d..175ec689533e 100644
---- a/arch/m68k/lib/interrupts.c
-+++ b/arch/m68k/lib/interrupts.c
-@@ -7,7 +7,7 @@
-  * TsiChung Liew (Tsi-Chung.Liew@freescale.com)
-  */
- 
--#include <common.h>
-+#include <stdio.h>
- #include <irq_func.h>
- #include <watchdog.h>
- #include <asm/processor.h>
-diff --git a/arch/m68k/lib/time.c b/arch/m68k/lib/time.c
-index 61db1e6c5002..4249488c01d1 100644
---- a/arch/m68k/lib/time.c
-+++ b/arch/m68k/lib/time.c
-@@ -6,7 +6,6 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <irq_func.h>
- #include <time.h>
-diff --git a/arch/m68k/lib/traps.c b/arch/m68k/lib/traps.c
-index 28fe803928ea..c283351181d8 100644
---- a/arch/m68k/lib/traps.c
-+++ b/arch/m68k/lib/traps.c
-@@ -7,7 +7,6 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <watchdog.h>
- #include <command.h>
++#ifndef __CONFIG_AM62PX_EVM_H
++#define __CONFIG_AM62PX_EVM_H
++
++#include <linux/sizes.h>
++#include <env/ti/mmc.h>
++#include <env/ti/k3_dfu.h>
++
++/* Now for the remaining common defines */
++#include <configs/ti_armv7_common.h>
++
++#endif /* __CONFIG_AM62PX_EVM_H */
 -- 
-2.34.1
+2.42.0
 
