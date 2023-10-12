@@ -4,99 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEB0FCDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 14:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0AC8CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 14:52:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3564C86E39;
-	Thu, 12 Oct 2023 16:49:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
+	by phobos.denx.de (Postfix) with ESMTP id 2D91F86E14;
+	Thu, 12 Oct 2023 16:51:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="UIfwdF4O";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ou3AFYEc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 35A0586C9E; Thu, 12 Oct 2023 16:49:26 +0200 (CEST)
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 80E6986E0E; Thu, 12 Oct 2023 16:51:46 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E25886CDD
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 16:49:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 00DA986E39
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 16:51:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=linux.ibm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eajames@linux.ibm.com
-Received: from pps.filterd (m0353727.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39CER82l031211; Thu, 12 Oct 2023 14:49:16 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=pp1;
- bh=2z+3X8g+FuPAkQ4+zlYddtGA7IJM56nBufIxxEJoXO8=;
- b=UIfwdF4OqsVy8V783sopQn7GkAyp/UV+N6HMpi27O7BvJrRYVqLYMFZtwoU0dtPNDOsE
- dL7h46gtnkN+sjqJzAxL17TSu5jxZ92ehLW7ycZTdjzq1EQlHkfRDXmHSQAOVHkcgkPY
- OC1zf6wvy/3uOa5pEpmnWvAe5lJj92tjghNAO5iI3lriFQr0J2iDa4ZNLChdky8+0NXI
- 3/ZOXkspGh4yfAcggK2U8gRAy4xHeV0Xhdh7sR548MfxTh/iBFw5igLP7eXfFzsQTzM1
- i7N3hREGWxvnu68S1yO9mWCX83inhk5T4KgZm7uqPwvC/7CldQdN1JUtqZCWcPOMB6ov PA== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tpjjxgrqv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Oct 2023 14:49:13 +0000
-Received: from m0353727.ppops.net (m0353727.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39CESc2r004290;
- Thu, 12 Oct 2023 14:48:00 GMT
-Received: from ppma13.dal12v.mail.ibm.com
- (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tpjjxghp8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Oct 2023 14:47:59 +0000
-Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
- by ppma13.dal12v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39CDp9Ut001239; Thu, 12 Oct 2023 14:45:53 GMT
-Received: from smtprelay04.wdc07v.mail.ibm.com ([172.16.1.71])
- by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 3tkkvk7q7d-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Oct 2023 14:45:53 +0000
-Received: from smtpav04.dal12v.mail.ibm.com (smtpav04.dal12v.mail.ibm.com
- [10.241.53.103])
- by smtprelay04.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 39CEjqC950659692
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 12 Oct 2023 14:45:53 GMT
-Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id C3D3658063;
- Thu, 12 Oct 2023 14:45:52 +0000 (GMT)
-Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 9E88258062;
- Thu, 12 Oct 2023 14:45:52 +0000 (GMT)
-Received: from slate16.aus.stglabs.ibm.com (unknown [9.61.148.23])
- by smtpav04.dal12v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 12 Oct 2023 14:45:52 +0000 (GMT)
-From: Eddie James <eajames@linux.ibm.com>
-To: u-boot@lists.denx.de
-Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
- eajames@linux.ibm.com
-Subject: [PATCH v12 5/8] test: Add sandbox TPM boot measurement
-Date: Thu, 12 Oct 2023 09:45:48 -0500
-Message-Id: <20231012144551.679551-6-eajames@linux.ibm.com>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20231012144551.679551-1-eajames@linux.ibm.com>
-References: <20231012144551.679551-1-eajames@linux.ibm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-d9a4c0d89f7so1133690276.1
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 07:51:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1697122257; x=1697727057; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=/CyVqx27Hazbx+sDxk7djjarqeDHThLbBNKfA0JXbvU=;
+ b=Ou3AFYEcuo83nXV5bzY8Z639oE3jJNM4AUomZyzVBgT1z3TolZRo38UprQTTHn1CHZ
+ tS4dHpSOCmOObWKWslLHklDBAeuUs/4gRV4x9gZ2YQ1oHFzx2B1ncIM23/tKa0oB1br8
+ qjxkXfKmce4RWrQ+iCTFHU+eDpbZ9W60wRNy0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697122257; x=1697727057;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/CyVqx27Hazbx+sDxk7djjarqeDHThLbBNKfA0JXbvU=;
+ b=m41YzD14TDUHDDXILIF0NJyBxnTAbCfuUYDF7k14HmhTy21RZMV/6Fj7FWgKNBXCnU
+ Jg7qbqt9wV0B+QvrsKXv/zoHoGY0y+i55Si6zPOOJWRjcnST/t6Gn7tKH3ZQ0UX70KG0
+ LrOZnD+1WWKf9+tY/s9Veil0KQFkYSTT2qrxLeZ4nDHPkL35k9MSkSRCywifpafsgrw/
+ oLmkxUPegZGPqyavF4dCkZ84o1UGeOrdiAakamhpkTMy02h62MXp8HQBvtAZ/Am+KrAx
+ QhzNyF8ockyfucSVJ5OXgis2dYohFDy1SeHX0sskJpyJjSVXMwmtyffTQ1gyoeYlQ54v
+ iAew==
+X-Gm-Message-State: AOJu0YzK6gP4L3AB2YJyEYkGESgW63DdoDH35j6O0K3MRKBxayuyP5ae
+ gxlJcTpNPO+/DNS0JwyNGk+26w==
+X-Google-Smtp-Source: AGHT+IF07/3qbeXq54fiH+ymXMoZLctNLomoxG4k7eYq619gVtTgJBq22ZwhKGyk6Zqhl/BPSqd5Vg==
+X-Received: by 2002:a5b:343:0:b0:d42:d029:ff99 with SMTP id
+ q3-20020a5b0343000000b00d42d029ff99mr21116891ybp.55.1697122257131; 
+ Thu, 12 Oct 2023 07:50:57 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
+ [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
+ by smtp.gmail.com with ESMTPSA id
+ j4-20020a25fb04000000b00d818ced8939sm10329ybe.1.2023.10.12.07.50.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Oct 2023 07:50:56 -0700 (PDT)
+Date: Thu, 12 Oct 2023 10:50:54 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 12/26] fs: Compile in sandbox filesystem in SPL if it is
+ enabled
+Message-ID: <20231012145054.GL3119521@bill-the-cat>
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-13-seanga2@gmail.com>
+ <d1014630-c1fd-4443-9a2e-c7ae2d029bf2@gmx.de>
+ <1cd1d618-ed29-2678-bca3-817c2ce18fba@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: D8Vq9lqoFde3wX1SGiSD-7eQ_MbBh8Ap
-X-Proofpoint-ORIG-GUID: sRQ6XIKG8DX-TxxieFv7Aiz-3-ZK2nUA
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-12_05,2023-10-12_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 mlxscore=0
- spamscore=0 priorityscore=1501 suspectscore=0 phishscore=0 clxscore=1011
- impostorscore=0 bulkscore=0 mlxlogscore=999 malwarescore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2309180000 definitions=main-2310120122
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="J0qtQCux27IL726f"
+Content-Disposition: inline
+In-Reply-To: <1cd1d618-ed29-2678-bca3-817c2ce18fba@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,221 +96,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the sandbox TPM driver to measure some boot images in a unit
-test case.
 
-Signed-off-by: Eddie James <eajames@linux.ibm.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
-Changes since v5:
- - Only compile in the measurement u-boot command when
-   CONFIG_MEASURED_BOOT is enabled.
+--J0qtQCux27IL726f
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- arch/sandbox/dts/sandbox.dtsi | 13 +++++++
- arch/sandbox/dts/test.dts     | 13 +++++++
- configs/sandbox_defconfig     |  1 +
- include/test/suites.h         |  1 +
- test/boot/Makefile            |  1 +
- test/boot/measurement.c       | 66 +++++++++++++++++++++++++++++++++++
- test/cmd_ut.c                 |  4 +++
- 7 files changed, 99 insertions(+)
- create mode 100644 test/boot/measurement.c
+On Thu, Oct 12, 2023 at 10:15:45AM -0400, Sean Anderson wrote:
+> On 10/12/23 02:39, Heinrich Schuchardt wrote:
+> > On 10/12/23 03:56, Sean Anderson wrote:
+> > > fs.c thinks that the sandbox filesystem is available if SANDBOX is en=
+abled,
+> > > but it is not in SPL. Compile it in SPL to avoid linker errors.
+> > >=20
+> > > Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> > > ---
+> > >=20
+> > > =A0 fs/Makefile | 1 +
+> > > =A0 1 file changed, 1 insertion(+)
+> > >=20
+> > > diff --git a/fs/Makefile b/fs/Makefile
+> > > index 4bed2ff2d99..592c7542bde 100644
+> > > --- a/fs/Makefile
+> > > +++ b/fs/Makefile
+> > > @@ -9,6 +9,7 @@ obj-$(CONFIG_FS_LOADER) +=3D fs.o
+> > > =A0 obj-$(CONFIG_SPL_FS_FAT) +=3D fat/
+> > > =A0 obj-$(CONFIG_SPL_FS_EXT4) +=3D ext4/
+> > > =A0 obj-$(CONFIG_SPL_FS_CBFS) +=3D cbfs/
+> > > +obj-$(CONFIG_SANDBOX) +=3D sandbox/
+> >=20
+> > Why wouldn't you use CONFIG_SANDBOX_SPL here?
+>=20
+> Because that's what the check is in fs.c. Maybe it should be
+> CONFIG_IS_ENABLED(SANDBOX) in there.
 
-diff --git a/arch/sandbox/dts/sandbox.dtsi b/arch/sandbox/dts/sandbox.dtsi
-index ff7e5584c5..241f397ba6 100644
---- a/arch/sandbox/dts/sandbox.dtsi
-+++ b/arch/sandbox/dts/sandbox.dtsi
-@@ -4,11 +4,23 @@
-  * and sandbox64 builds.
-  */
- 
-+#include <config.h>
- #include <dt-bindings/input/input.h>
- 
- #define USB_CLASS_HUB			9
- 
- / {
-+	reserved-memory {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges;
-+
-+		event_log: tcg_event_log {
-+			no-map;
-+			reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
-+		};
-+	};
-+
- 	binman {
- 	};
- 
-@@ -342,6 +354,7 @@
- 
- 	tpm2 {
- 		compatible = "sandbox,tpm2";
-+		memory-region = <&event_log>;
- 	};
- 
- 	triangle {
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index 9a863ea732..bb2ddd9bf2 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -9,6 +9,7 @@
- 
- /dts-v1/;
- 
-+#include <config.h>
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/gpio/sandbox-gpio.h>
- #include <dt-bindings/input/input.h>
-@@ -68,6 +69,17 @@
- 		osd0 = "/osd";
- 	};
- 
-+	reserved-memory {
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		ranges;
-+
-+		event_log: tcg_event_log {
-+			no-map;
-+			reg = <(CFG_SYS_SDRAM_SIZE - 0x2000) 0x2000>;
-+		};
-+	};
-+
- 	binman: binman {
- 	};
- 
-@@ -1422,6 +1434,7 @@
- 
- 	tpm2 {
- 		compatible = "sandbox,tpm2";
-+		memory-region = <&event_log>;
- 	};
- 
- 	tpm {
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index d667cb9ae4..12c387a77e 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -349,3 +349,4 @@ CONFIG_UNIT_TEST=y
- CONFIG_UT_TIME=y
- CONFIG_UT_DM=y
- CONFIG_ARM_FFA_TRANSPORT=y
-+CONFIG_MEASURED_BOOT=y
-diff --git a/include/test/suites.h b/include/test/suites.h
-index 1c7dc65966..48ed549c13 100644
---- a/include/test/suites.h
-+++ b/include/test/suites.h
-@@ -45,6 +45,7 @@ int do_ut_font(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_lib(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_loadm(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_log(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
-+int do_ut_measurement(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[]);
- int do_ut_mem(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
- int do_ut_overlay(struct cmd_tbl *cmdtp, int flag, int argc,
-diff --git a/test/boot/Makefile b/test/boot/Makefile
-index 52947580ae..068522cb9e 100644
---- a/test/boot/Makefile
-+++ b/test/boot/Makefile
-@@ -4,6 +4,7 @@
- 
- obj-$(CONFIG_BOOTSTD) += bootdev.o bootstd_common.o bootflow.o bootmeth.o
- obj-$(CONFIG_FIT) += image.o
-+obj-$(CONFIG_MEASURED_BOOT) += measurement.o
- 
- obj-$(CONFIG_EXPO) += expo.o
- obj-$(CONFIG_CEDIT) += cedit.o
-diff --git a/test/boot/measurement.c b/test/boot/measurement.c
-new file mode 100644
-index 0000000000..9db2ed324c
---- /dev/null
-+++ b/test/boot/measurement.c
-@@ -0,0 +1,66 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Test for measured boot functions
-+ *
-+ * Copyright 2023 IBM Corp.
-+ * Written by Eddie James <eajames@linux.ibm.com>
-+ */
-+
-+#include <common.h>
-+#include <bootm.h>
-+#include <malloc.h>
-+#include <test/suites.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+#include <asm/io.h>
-+
-+#define MEASUREMENT_TEST(_name, _flags)	\
-+	UNIT_TEST(_name, _flags, measurement_test)
-+
-+static int measure(struct unit_test_state *uts)
-+{
-+	struct bootm_headers images;
-+	const size_t size = 1024;
-+	u8 *kernel;
-+	u8 *initrd;
-+	size_t i;
-+
-+	kernel = malloc(size);
-+	initrd = malloc(size);
-+
-+	images.os.image_start = map_to_sysmem(kernel);
-+	images.os.image_len = size;
-+
-+	images.rd_start = map_to_sysmem(initrd);
-+	images.rd_end = images.rd_start + size;
-+
-+	images.ft_addr = malloc(size);
-+	images.ft_len = size;
-+
-+	env_set("bootargs", "measurement testing");
-+
-+	for (i = 0; i < size; ++i) {
-+		kernel[i] = 0xf0 | (i & 0xf);
-+		initrd[i] = (i & 0xf0) | 0xf;
-+		images.ft_addr[i] = i & 0xff;
-+	}
-+
-+	ut_assertok(bootm_measure(&images));
-+
-+	free(images.ft_addr);
-+	free(initrd);
-+	free(kernel);
-+
-+	return 0;
-+}
-+MEASUREMENT_TEST(measure, 0);
-+
-+int do_ut_measurement(struct cmd_tbl *cmdtp, int flag, int argc,
-+		      char *const argv[])
-+{
-+	struct unit_test *tests = UNIT_TEST_SUITE_START(measurement_test);
-+	const int n_ents = UNIT_TEST_SUITE_COUNT(measurement_test);
-+
-+	return cmd_ut_category("measurement", "measurement_test_", tests,
-+			       n_ents, argc, argv);
-+}
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 0f56409e80..e87adcb71e 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -99,6 +99,10 @@ static struct cmd_tbl cmd_ut_sub[] = {
- #if CONFIG_IS_ENABLED(UT_UNICODE) && !defined(API_BUILD)
- 	U_BOOT_CMD_MKENT(unicode, CONFIG_SYS_MAXARGS, 1, do_ut_unicode, "", ""),
- #endif
-+#ifdef CONFIG_MEASURED_BOOT
-+	U_BOOT_CMD_MKENT(measurement, CONFIG_SYS_MAXARGS, 1, do_ut_measurement,
-+			 "", ""),
-+#endif
- #ifdef CONFIG_SANDBOX
- 	U_BOOT_CMD_MKENT(compression, CONFIG_SYS_MAXARGS, 1, do_ut_compression,
- 			 "", ""),
--- 
-2.39.3
+"CONFIG_SANDBOX_SPL" is not "CONFIG_SPL_SANDBOX", so CONFIG_IS_ENABLED
+doesn't work.  I would suggest that fs/Makefile needs a bit of cleaning
+to make use of obj-$(CONFIG_$(SPL_)_... logic instead of ifdef
+CONFIG_SPL_BUILD, but I think Simon dislikes that form.  We could just
+move the existing line outside of the SPL/else conditional.
 
+--=20
+Tom
+
+--J0qtQCux27IL726f
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGyBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoB8sACgkQFHw5/5Y0
+tyy9Hgv4lHRFknZImoVsNtgctXptJfnWWcuFdzrgxjhYOhP+gDACBI2ixnBPysBU
+OKmO0WyDOb5X6PfKksFsP3LG+jGNxrlyedqOv8rME+wMIeAYd4WVB/XhgIPhuc6U
+6+hIkrNTVOixzQZU97982WrOlE/GQKbL5RRC1LGY7fisklQuY2H/DRZ6RNrd8OBo
+PnXS8u0s7ODcqq/BCRE3MfAfl3d42RhAgh2dKKG2vY6aNtgrQKbfCS5lmglIC28Q
+pfTzHjOY5/vb5W/2TFUwhif5Cy8Qfox/0rIwq1ox+ch7/9+c1vQzohsN6qRg1onv
+GciL7uDW8SsoPB82H16WNbddzfixXrW/0cK+y656ZtLTNUTTZSRdRKe3tJjMBcns
+g2npZE2jMZqE4RTSss5lzCWXOUqTxjEhg4ZkG4wJbeMbVrKkJZEMQZOs0IPSud4U
+4Zmf2xBCxd4Om7Uj4RM4ssoRnkjv71KysEtznpCdSiy5I6ug+09P4uE+4UB7bLSV
+wkSSZ10=
+=RH4Z
+-----END PGP SIGNATURE-----
+
+--J0qtQCux27IL726f--
