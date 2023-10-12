@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51FCBCDB474
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 23:18:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08240CDB474
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 23:24:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A5D686E2C;
-	Fri, 13 Oct 2023 01:14:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 42CB586EC5;
+	Fri, 13 Oct 2023 01:14:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="yusATIDz";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fr9KhAV4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3BD686AE6; Fri, 13 Oct 2023 01:09:40 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9BDFF86D3F; Fri, 13 Oct 2023 01:04:50 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82F6086E95
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 01:06:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4DDE86E42
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 01:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39CN6Jdv034158;
- Thu, 12 Oct 2023 18:06:19 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1697151979;
- bh=wDpZTyxqfpGAFI8+gh2vYZOpjFctMGCVrd7JCSZGsoM=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=yusATIDz9bYWACQfDe7nLQ+SRqNozHXFedS2Je3Bx8mRf4NcOgrnPOe8V/yFiIZHX
- akjcdrnbF4ECQZbBnofSni6qIhvwUuhi9s7eM2436tlSGyMtR9ytSVOHWjIqBQi7Yz
- 059EmcWnryKOMfjgYIjrS+PjqR9rwCvupGtx/OKE=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39CN6JkI062787
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 12 Oct 2023 18:06:19 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
- Oct 2023 18:06:19 -0500
-Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 12 Oct 2023 18:06:19 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39CN6JqY032143;
- Thu, 12 Oct 2023 18:06:19 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Hari
- Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>
-CC: UBoot Mailing List <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 06/11] board: ti: introduce basic board files for the am62px
- family
-Date: Thu, 12 Oct 2023 18:06:23 -0500
-Message-ID: <20231012230616.2101992-19-bb@ti.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231012230616.2101992-13-bb@ti.com>
-References: <20231012230616.2101992-13-bb@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5a7be61fe74so19601787b3.2
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 16:04:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1697151845; x=1697756645; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=We9n4I/AhHSllFzQJ6yhqbkBuIxLBQgVcxL+OoVwbCI=;
+ b=fr9KhAV4qEv0dJ9vJHGWXg/wn8tCptBxfRn0PFw0lBpwQ8tnxLXVRBVzfIKwLqJqxR
+ gGwASIexHzaFJVv6QKpApBPG/ttr5473mgCHGrGcb5Wf4a19R+4z79cMd6EMztC6/Jfi
+ lJhLxBmgEVJaOZ5XTksn/c6SPXY5w3p72q+7k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697151845; x=1697756645;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=We9n4I/AhHSllFzQJ6yhqbkBuIxLBQgVcxL+OoVwbCI=;
+ b=j99a5vexhnFemRVuBj2z5k4fZXaNryJ/w6KpPlUCkYOdjvr6/Q3WsybP9SWaYuXe/C
+ Uz4fhyK2i5uVaGCcFnTNiFDQ3JitEIGCQ3Fx9Y5EDZrM4AXwkFE6AzSX8fED6LW1pSN/
+ 0DwSqo1Fwti25AsWsTQLthrJQFNbl3ln1bThnPu+G/mbuEnt9RmTFpgipNxubIfdAvq5
+ YvGzmUxsHij/jLF+y22ox6m0t+d56Bx0sc/l6PiiZphV1xlzeqNQThyogyvB06txjV6L
+ 2tpkTxForlw0Pl9Ij5aycr9h5FsP8UGJgQRy3ED/EdXzcM9Ep1Y3vzjpV/xheOyq8cXx
+ voWA==
+X-Gm-Message-State: AOJu0YxzKMgzU68dm42kVnDfXbusJDxUNbaKGXKzq0bbyGoTriMwWRYk
+ KdJwrORFA0cLsb2OOuf8P0ERpm1syBiCuFnt33IvVg==
+X-Google-Smtp-Source: AGHT+IFYTJzs+xDXqrs73YNXA9inCDMORB5dpxq8rIWTUJ/zTTnJOwKQG/8fy9Ka0f62YBlOkK09Jw==
+X-Received: by 2002:a0d:e2c6:0:b0:5a7:cadb:c721 with SMTP id
+ l189-20020a0de2c6000000b005a7cadbc721mr8680645ywe.12.1697151845227; 
+ Thu, 12 Oct 2023 16:04:05 -0700 (PDT)
+Received: from bill-the-cat.lan
+ (2603-6081-7b00-6400-5647-4a14-f04e-8d8d.res6.spectrum.com.
+ [2603:6081:7b00:6400:5647:4a14:f04e:8d8d])
+ by smtp.gmail.com with ESMTPSA id
+ k7-20020a816f07000000b005925765aa30sm278730ywc.135.2023.10.12.16.04.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Oct 2023 16:04:04 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+Subject: [PATCH 6/7] mips: Remove common.h usage
+Date: Thu, 12 Oct 2023 19:03:58 -0400
+Message-Id: <20231012230359.2005249-6-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231012230359.2005249-1-trini@konsulko.com>
+References: <20231012230359.2005249-1-trini@konsulko.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=79053; i=bb@ti.com;
- h=from:subject; bh=LqMaHPmpP1KGRFl6544RzL4HpOJ4LZWKlQ977gW4mfE=;
- b=owNCWmg5MUFZJlNZKl1dzQAAZ3/////79jdtzdffmdnX+7zf3d+30na/vvc/67v96tnO/newA
- RsxRyaaA2oAAAAABoGgABoAABppoAAaNAAD1AAMmgAMah4o0aZqekejFDtQBpoaBpo0AADQ0DQa
- bUAADQAGg0PU0ZMTJpiMmgGjQZDQDQPUAyB6g2o09IHCaA0DTTJoxGQDRgTQaYQaaNAZNNAGJgj
- EAYIyANAAaAAyZAA0ADQAIEchaiXfl2K+hqqjhfoRbFrKUgZ8p0EIygcBj4sSAq/fnAAwTJkzkh
- JxO85ngFEaRGFCfwgLGuJz89Qc77oqOoIdm2jBlzLxQ8A4XvCuuxpJwQ8rN04/91ZBIeIcSE1iJ
- GxBmdD9PNxCdCo5gtgzAJe3X63SSxiL0DqFGa7jP5HjsrHmlXJWW8sE3sFVdn1KfvtJqT2ERfck
- lRP7WV7Zj27R9NYNOKE0VA+8O+lIx1CJKMe7PtYqTioBwbFKQEjrgfEMI5CMfklDSYR9tTEEPxR
- lbciGJGe0aHfrAzdE9pHgXKIOIFaFdJdJoVjoMBVt+Gp43EAQ6+LyT34O4Ll3rZhXvn9O4EoYGf
- wUDAz+gbi+MaAfTaozEbnyEnAMKHqnIDJYii3xFADJoCb+3jCQSlaP+1Yx0ZpWAWx+URpYgk6aB
- KLLN/4u5IpwoSBUurua
-X-Developer-Key: i=bb@ti.com; a=openpgp;
- fpr=D3D177E40A38DF4D1853FEEF41B90D5D71D56CE0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,2810 +91,624 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the basic files needed to support the am62px family of SoCs
+We can remove common.h from most cases of the code here, and only a few
+places need an additional header instead.
 
-Co-developed-by: Hari Hagalla <hnagalla@ti.com>
-Signed-off-by: Hari Hagalla <hnagalla@ti.com>
-Signed-off-by: Bryan Brattlof <bb@ti.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/arm/mach-k3/Kconfig         |    1 +
- board/ti/am62px/Kconfig          |   52 ++
- board/ti/am62px/MAINTAINERS      |    9 +
- board/ti/am62px/Makefile         |    7 +
- board/ti/am62px/am62px.env       |   18 +
- board/ti/am62px/board-cfg.yaml   |   37 +
- board/ti/am62px/evm.c            |   30 +
- board/ti/am62px/pm-cfg.yaml      |   12 +
- board/ti/am62px/rm-cfg.yaml      | 1150 ++++++++++++++++++++++++++++++
- board/ti/am62px/sec-cfg.yaml     |  378 ++++++++++
- board/ti/am62px/tifs-rm-cfg.yaml | 1010 ++++++++++++++++++++++++++
- 11 files changed, 2704 insertions(+)
- create mode 100644 board/ti/am62px/Kconfig
- create mode 100644 board/ti/am62px/MAINTAINERS
- create mode 100644 board/ti/am62px/Makefile
- create mode 100644 board/ti/am62px/am62px.env
- create mode 100644 board/ti/am62px/board-cfg.yaml
- create mode 100644 board/ti/am62px/evm.c
- create mode 100644 board/ti/am62px/pm-cfg.yaml
- create mode 100644 board/ti/am62px/rm-cfg.yaml
- create mode 100644 board/ti/am62px/sec-cfg.yaml
- create mode 100644 board/ti/am62px/tifs-rm-cfg.yaml
+Cc: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
+---
+ arch/mips/cpu/cpu.c                    | 1 -
+ arch/mips/cpu/interrupts.c             | 1 -
+ arch/mips/cpu/time.c                   | 1 -
+ arch/mips/include/asm/cacheops.h       | 1 +
+ arch/mips/lib/boot.c                   | 1 -
+ arch/mips/lib/bootm.c                  | 1 -
+ arch/mips/lib/cache.c                  | 1 -
+ arch/mips/lib/reloc.c                  | 1 -
+ arch/mips/lib/spl.c                    | 1 -
+ arch/mips/lib/stack.c                  | 1 -
+ arch/mips/lib/traps.c                  | 3 ++-
+ arch/mips/mach-ath79/ar933x/clk.c      | 1 -
+ arch/mips/mach-ath79/ar933x/ddr.c      | 1 -
+ arch/mips/mach-ath79/ar934x/clk.c      | 1 -
+ arch/mips/mach-ath79/ar934x/cpu.c      | 2 --
+ arch/mips/mach-ath79/ar934x/ddr.c      | 1 -
+ arch/mips/mach-ath79/cpu.c             | 1 -
+ arch/mips/mach-ath79/dram.c            | 1 -
+ arch/mips/mach-ath79/qca953x/clk.c     | 1 -
+ arch/mips/mach-ath79/qca953x/ddr.c     | 1 -
+ arch/mips/mach-ath79/qca956x/clk.c     | 1 -
+ arch/mips/mach-ath79/qca956x/cpu.c     | 2 --
+ arch/mips/mach-ath79/qca956x/ddr.c     | 1 -
+ arch/mips/mach-ath79/reset.c           | 1 -
+ arch/mips/mach-bmips/dram.c            | 1 -
+ arch/mips/mach-jz47xx/jz4780/gpio.c    | 1 -
+ arch/mips/mach-jz47xx/jz4780/jz4780.c  | 1 -
+ arch/mips/mach-jz47xx/jz4780/pll.c     | 1 -
+ arch/mips/mach-jz47xx/jz4780/reset.c   | 1 -
+ arch/mips/mach-jz47xx/jz4780/sdram.c   | 1 -
+ arch/mips/mach-jz47xx/jz4780/timer.c   | 1 -
+ arch/mips/mach-mscc/cpu.c              | 1 -
+ arch/mips/mach-mscc/dram.c             | 1 -
+ arch/mips/mach-mscc/gpio.c             | 1 -
+ arch/mips/mach-mscc/include/mach/ddr.h | 1 +
+ arch/mips/mach-mscc/phy.c              | 1 -
+ arch/mips/mach-mscc/reset.c            | 2 --
+ arch/mips/mach-mtmips/cpu.c            | 1 -
+ arch/mips/mach-mtmips/ddr_cal.c        | 1 -
+ arch/mips/mach-mtmips/ddr_init.c       | 1 -
+ arch/mips/mach-mtmips/mt7628/ddr.c     | 1 -
+ arch/mips/mach-mtmips/mt7628/init.c    | 1 -
+ arch/mips/mach-mtmips/mt7628/serial.c  | 1 -
+ arch/mips/mach-mtmips/spl.c            | 1 -
+ arch/mips/mach-pic32/cpu.c             | 1 -
+ arch/mips/mach-pic32/reset.c           | 1 -
+ 46 files changed, 4 insertions(+), 47 deletions(-)
 
-diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
-index 5af567a24a2ba..26749acfaecd9 100644
---- a/arch/arm/mach-k3/Kconfig
-+++ b/arch/arm/mach-k3/Kconfig
-@@ -195,6 +195,7 @@ source "board/ti/am65x/Kconfig"
- source "board/ti/am64x/Kconfig"
- source "board/ti/am62x/Kconfig"
- source "board/ti/am62ax/Kconfig"
-+source "board/ti/am62px/Kconfig"
- source "board/ti/j721e/Kconfig"
- source "board/siemens/iot2050/Kconfig"
- source "board/ti/j721s2/Kconfig"
-diff --git a/board/ti/am62px/Kconfig b/board/ti/am62px/Kconfig
-new file mode 100644
-index 0000000000000..3ef1ff113ab00
---- /dev/null
-+++ b/board/ti/am62px/Kconfig
-@@ -0,0 +1,52 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+
-+choice
-+	prompt "TI K3 AM62Px based boards"
-+	optional
-+
-+config TARGET_AM62P5_A53_EVM
-+	bool "TI K3 based AM62P5 EVM running on A53"
-+	select ARM64
-+	select BINMAN
-+	imply BOARD
-+	imply SPL_BOARD
-+	imply TI_I2C_BOARD_DETECT
-+
-+config TARGET_AM62P5_R5_EVM
-+	bool "TI K3 based AM62P5 EVM running on R5"
-+	select CPU_V7R
-+	select SYS_THUMB_BUILD
-+	select K3_LOAD_SYSFW
-+	select RAM
-+	select SPL_RAM
-+	select K3_DDRSS
-+	select BINMAN
-+	imply SYS_K3_SPL_ATF
-+	imply TI_I2C_BOARD_DETECT
-+
-+endchoice
-+
-+if TARGET_AM62P5_R5_EVM || TARGET_AM62P5_A53_EVM
-+
-+config SYS_BOARD
-+       default "am62px"
-+
-+config SYS_VENDOR
-+       default "ti"
-+
-+config SYS_CONFIG_NAME
-+       default "am62px_evm"
-+
-+source "board/ti/common/Kconfig"
-+
-+endif
-+
-+if TARGET_AM62P5_R5_EVM
-+
-+config SPL_LDSCRIPT
-+	default "arch/arm/mach-omap2/u-boot-spl.lds"
-+
-+endif
-diff --git a/board/ti/am62px/MAINTAINERS b/board/ti/am62px/MAINTAINERS
-new file mode 100644
-index 0000000000000..57c86ddbc4aef
---- /dev/null
-+++ b/board/ti/am62px/MAINTAINERS
-@@ -0,0 +1,9 @@
-+AM62Px BOARD
-+M:	Vignesh Raghavendra <vigneshr@ti.com>
-+M:	Bryan Brattlof <bb@ti.com>
-+M:	Tom Rini <trini@konsulko.com>
-+S:	Maintained
-+F:	board/ti/am62px/
-+F:	include/configs/am62p5_evm.h
-+F:	configs/am62px_evm_r5_defconfig
-+F:	configs/am62px_evm_a53_defconfig
-diff --git a/board/ti/am62px/Makefile b/board/ti/am62px/Makefile
-new file mode 100644
-index 0000000000000..921afdff27a24
---- /dev/null
-+++ b/board/ti/am62px/Makefile
-@@ -0,0 +1,7 @@
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# SPDX-License-Identifier:     GPL-2.0+
-+#
-+
-+obj-y	+= evm.o
-diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
-new file mode 100644
-index 0000000000000..a7ac6d0a588a8
---- /dev/null
-+++ b/board/ti/am62px/am62px.env
-@@ -0,0 +1,18 @@
-+#include <env/ti/ti_common.env>
-+#include <env/ti/mmc.env>
-+
-+default_device_tree=ti/k3-am62p5-sk.dtb
-+findfdt=
-+	setenv name_fdt ${default_device_tree};
-+	setenv fdtfile ${name_fdt}
-+name_kern=Image
-+console=ttyS2,115200n8
-+args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
-+	${mtdparts}
-+run_kern=booti ${loadaddr} ${rd_spec} ${fdtaddr}
-+
-+boot=mmc
-+mmcdev=1
-+bootpart=1:2
-+bootdir=/boot
-+rd_spec=-
-diff --git a/board/ti/am62px/board-cfg.yaml b/board/ti/am62px/board-cfg.yaml
-new file mode 100644
-index 0000000000000..de4a438c27826
---- /dev/null
-+++ b/board/ti/am62px/board-cfg.yaml
-@@ -0,0 +1,37 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Board configuration for AM62Px SoCs
-+#
-+
-+---
-+board-cfg:
-+    rev:
-+        boardcfg_abi_maj: 0x0
-+        boardcfg_abi_min: 0x1
-+    control:
-+        subhdr:
-+            magic: 0xC1D3
-+            size: 7
-+        main_isolation_enable: 0x5A
-+        main_isolation_hostid: 0x2
-+    secproxy:
-+        subhdr:
-+            magic: 0x1207
-+            size: 7
-+        scaling_factor: 0x1
-+        scaling_profile: 0x1
-+        disable_main_nav_secure_proxy: 0
-+    msmc:
-+        subhdr:
-+            magic: 0xA5C3
-+            size: 5
-+        msmc_cache_size: 0x10
-+    debug_cfg:
-+        subhdr:
-+            magic: 0x020C
-+            size: 8
-+        trace_dst_enables: 0x00
-+        trace_src_enables: 0x00
-+
-diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
-new file mode 100644
-index 0000000000000..44793cbed6536
---- /dev/null
-+++ b/board/ti/am62px/evm.c
-@@ -0,0 +1,30 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Board specific initialization for AM62Px platforms
-+ *
-+ * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+ *
-+ */
-+
-+#include <asm/arch/hardware.h>
-+#include <asm/io.h>
-+#include <common.h>
-+#include <dm/uclass.h>
-+#include <env.h>
-+#include <fdt_support.h>
-+#include <spl.h>
-+
-+int board_init(void)
-+{
-+	return 0;
-+}
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
-diff --git a/board/ti/am62px/pm-cfg.yaml b/board/ti/am62px/pm-cfg.yaml
-new file mode 100644
-index 0000000000000..3ff27ce702c26
---- /dev/null
-+++ b/board/ti/am62px/pm-cfg.yaml
-@@ -0,0 +1,12 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Power management configuration for AM62Px
-+#
-+#
-+---
-+pm-cfg:
-+    rev:
-+        boardcfg_abi_maj: 0x0
-+        boardcfg_abi_min: 0x1
-diff --git a/board/ti/am62px/rm-cfg.yaml b/board/ti/am62px/rm-cfg.yaml
-new file mode 100644
-index 0000000000000..59f31f6090c4e
---- /dev/null
-+++ b/board/ti/am62px/rm-cfg.yaml
-@@ -0,0 +1,1150 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Resource management configuration for AM62Px
-+#
-+---
-+rm-cfg:
-+    rm_boardcfg:
-+        rev:
-+            boardcfg_abi_maj: 0x0
-+            boardcfg_abi_min: 0x1
-+        host_cfg:
-+            subhdr:
-+                magic: 0x4C41
-+                size: 356
-+            host_cfg_entries:
-+                - #1
-+                    host_id: 12
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #2
-+                    host_id: 30
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #3
-+                    host_id: 36
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #4
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #5
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #6
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #7
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #8
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #9
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #10
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #11
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #12
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #13
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #14
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #15
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #16
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #17
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #18
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #19
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #20
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #21
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #22
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #23
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #24
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #25
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #26
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #27
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #28
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #29
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #30
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #31
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #32
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+        resasg:
-+            subhdr:
-+                magic: 0x7B25
-+                size: 8
-+            resasg_entries_size: 1032
-+            reserved: 0
-+    resasg_entries:
-+        -
-+                start_resource: 0
-+                num_resource: 16
-+                type: 64
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 4
-+                type: 64
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 4
-+                type: 64
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 20
-+                num_resource: 22
-+                type: 64
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 16
-+                type: 192
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 34
-+                num_resource: 2
-+                type: 192
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 4
-+                type: 320
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 4
-+                num_resource: 4
-+                type: 320
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 26
-+                type: 384
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 50176
-+                num_resource: 164
-+                type: 1666
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 1
-+                type: 1667
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1677
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1677
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1677
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 24
-+                num_resource: 2
-+                type: 1677
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 26
-+                num_resource: 6
-+                type: 1677
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 54
-+                num_resource: 18
-+                type: 1678
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 72
-+                num_resource: 6
-+                type: 1678
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 72
-+                num_resource: 6
-+                type: 1678
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 78
-+                num_resource: 2
-+                type: 1678
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 80
-+                num_resource: 2
-+                type: 1678
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 32
-+                num_resource: 12
-+                type: 1679
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 44
-+                num_resource: 6
-+                type: 1679
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 44
-+                num_resource: 6
-+                type: 1679
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 50
-+                num_resource: 2
-+                type: 1679
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 52
-+                num_resource: 2
-+                type: 1679
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1696
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1696
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1696
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 24
-+                num_resource: 2
-+                type: 1696
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 26
-+                num_resource: 6
-+                type: 1696
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1697
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1697
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1697
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 24
-+                num_resource: 2
-+                type: 1697
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 26
-+                num_resource: 2
-+                type: 1697
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 12
-+                type: 1698
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 12
-+                num_resource: 6
-+                type: 1698
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 12
-+                num_resource: 6
-+                type: 1698
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 2
-+                type: 1698
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 20
-+                num_resource: 2
-+                type: 1698
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 6
-+                num_resource: 34
-+                type: 1802
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 44
-+                num_resource: 36
-+                type: 1802
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 44
-+                num_resource: 36
-+                type: 1802
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 168
-+                num_resource: 8
-+                type: 1802
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 14
-+                num_resource: 512
-+                type: 1805
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 526
-+                num_resource: 256
-+                type: 1805
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 526
-+                num_resource: 256
-+                type: 1805
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 782
-+                num_resource: 128
-+                type: 1805
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 910
-+                num_resource: 626
-+                type: 1805
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 1024
-+                type: 1807
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 4096
-+                num_resource: 29
-+                type: 1808
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 4608
-+                num_resource: 99
-+                type: 1809
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 5120
-+                num_resource: 24
-+                type: 1810
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 5632
-+                num_resource: 51
-+                type: 1811
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 6144
-+                num_resource: 51
-+                type: 1812
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 6656
-+                num_resource: 51
-+                type: 1813
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 8192
-+                num_resource: 32
-+                type: 1814
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 8704
-+                num_resource: 32
-+                type: 1815
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 9216
-+                num_resource: 32
-+                type: 1816
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 9728
-+                num_resource: 22
-+                type: 1817
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 10240
-+                num_resource: 22
-+                type: 1818
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 10752
-+                num_resource: 22
-+                type: 1819
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 11264
-+                num_resource: 28
-+                type: 1820
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 11776
-+                num_resource: 28
-+                type: 1821
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 12288
-+                num_resource: 28
-+                type: 1822
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 1
-+                type: 1923
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1936
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1936
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1936
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1936
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1936
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 64
-+                type: 1937
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 64
-+                type: 1937
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 83
-+                num_resource: 8
-+                type: 1938
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 91
-+                num_resource: 8
-+                type: 1939
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 99
-+                num_resource: 10
-+                type: 1942
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 109
-+                num_resource: 3
-+                type: 1942
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 109
-+                num_resource: 3
-+                type: 1942
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 112
-+                num_resource: 3
-+                type: 1942
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 115
-+                num_resource: 3
-+                type: 1942
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 118
-+                num_resource: 16
-+                type: 1943
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 118
-+                num_resource: 16
-+                type: 1943
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 134
-+                num_resource: 8
-+                type: 1944
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 134
-+                num_resource: 8
-+                type: 1945
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 142
-+                num_resource: 8
-+                type: 1946
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 142
-+                num_resource: 8
-+                type: 1947
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1955
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1955
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1955
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1955
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1955
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 8
-+                type: 1956
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 8
-+                type: 1956
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 27
-+                num_resource: 1
-+                type: 1957
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 28
-+                num_resource: 1
-+                type: 1958
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1961
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1961
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1961
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1961
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1961
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1962
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1962
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1962
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1962
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1962
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 1
-+                type: 1963
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 1
-+                type: 1963
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 16
-+                type: 1964
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 16
-+                type: 1964
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 20
-+                num_resource: 1
-+                type: 1965
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 35
-+                num_resource: 8
-+                type: 1966
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 21
-+                num_resource: 1
-+                type: 1967
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 35
-+                num_resource: 8
-+                type: 1968
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 22
-+                num_resource: 1
-+                type: 1969
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 43
-+                num_resource: 8
-+                type: 1970
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 23
-+                num_resource: 1
-+                type: 1971
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 43
-+                num_resource: 8
-+                type: 1972
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 1
-+                type: 2112
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 2
-+                num_resource: 2
-+                type: 2122
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 51200
-+                num_resource: 12
-+                type: 12738
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 1
-+                type: 12739
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 6
-+                type: 12750
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 6
-+                type: 12769
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 8
-+                type: 12810
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 12288
-+                num_resource: 128
-+                type: 12813
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 3072
-+                num_resource: 6
-+                type: 12828
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 3584
-+                num_resource: 6
-+                type: 12829
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 4096
-+                num_resource: 6
-+                type: 12830
-+                host_id: 128
-+                reserved: 0
-diff --git a/board/ti/am62px/sec-cfg.yaml b/board/ti/am62px/sec-cfg.yaml
-new file mode 100644
-index 0000000000000..9a6e52136d1c5
---- /dev/null
-+++ b/board/ti/am62px/sec-cfg.yaml
-@@ -0,0 +1,378 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Security configuration for AM62Px
-+#
-+---
-+sec-cfg:
-+    rev:
-+        boardcfg_abi_maj: 0x0
-+        boardcfg_abi_min: 0x1
-+    processor_acl_list:
-+        subhdr:
-+            magic: 0xF1EA
-+            size: 164
-+        proc_acl_entries:
-+            - #1
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #2
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #3
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #4
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #5
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #6
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #7
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #8
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #9
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #10
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #11
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #12
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #13
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #14
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #15
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #16
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #17
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #18
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #19
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #20
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #21
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #22
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #23
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #24
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #25
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #26
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #27
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #28
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #29
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #30
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #31
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+            - #32
-+                processor_id: 0
-+                proc_access_master: 0
-+                proc_access_secondary: [0, 0, 0]
-+    host_hierarchy:
-+        subhdr:
-+            magic: 0x8D27
-+            size: 68
-+        host_hierarchy_entries:
-+            - #1
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #2
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #3
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #4
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #5
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #6
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #7
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #8
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #9
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #10
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #11
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #12
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #13
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #14
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #15
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #16
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #17
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #18
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #19
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #20
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #21
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #22
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #23
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #24
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #25
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #26
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #27
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #28
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #29
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #30
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #31
-+                host_id: 0
-+                supervisor_host_id: 0
-+            - #32
-+                host_id: 0
-+                supervisor_host_id: 0
-+    otp_config:
-+        subhdr:
-+            magic: 0x4081
-+            size: 69
-+        write_host_id: 0
-+        otp_entry:
-+            - #1
-+                host_id: 0
-+                host_perms: 0
-+            - #2
-+                host_id: 0
-+                host_perms: 0
-+            - #3
-+                host_id: 0
-+                host_perms: 0
-+            - #4
-+                host_id: 0
-+                host_perms: 0
-+            - #5
-+                host_id: 0
-+                host_perms: 0
-+            - #6
-+                host_id: 0
-+                host_perms: 0
-+            - #7
-+                host_id: 0
-+                host_perms: 0
-+            - #8
-+                host_id: 0
-+                host_perms: 0
-+            - #9
-+                host_id: 0
-+                host_perms: 0
-+            - #10
-+                host_id: 0
-+                host_perms: 0
-+            - #11
-+                host_id: 0
-+                host_perms: 0
-+            - #12
-+                host_id: 0
-+                host_perms: 0
-+            - #13
-+                host_id: 0
-+                host_perms: 0
-+            - #14
-+                host_id: 0
-+                host_perms: 0
-+            - #15
-+                host_id: 0
-+                host_perms: 0
-+            - #16
-+                host_id: 0
-+                host_perms: 0
-+            - #17
-+                host_id: 0
-+                host_perms: 0
-+            - #18
-+                host_id: 0
-+                host_perms: 0
-+            - #19
-+                host_id: 0
-+                host_perms: 0
-+            - #20
-+                host_id: 0
-+                host_perms: 0
-+            - #21
-+                host_id: 0
-+                host_perms: 0
-+            - #22
-+                host_id: 0
-+                host_perms: 0
-+            - #23
-+                host_id: 0
-+                host_perms: 0
-+            - #24
-+                host_id: 0
-+                host_perms: 0
-+            - #25
-+                host_id: 0
-+                host_perms: 0
-+            - #26
-+                host_id: 0
-+                host_perms: 0
-+            - #27
-+                host_id: 0
-+                host_perms: 0
-+            - #28
-+                host_id: 0
-+                host_perms: 0
-+            - #29
-+                host_id: 0
-+                host_perms: 0
-+            - #30
-+                host_id: 0
-+                host_perms: 0
-+            - #31
-+                host_id: 0
-+                host_perms: 0
-+            - #32
-+                host_id: 0
-+                host_perms: 0
-+    dkek_config:
-+        subhdr:
-+            magic: 0x5170
-+            size: 12
-+        allowed_hosts: [128, 0, 0, 0]
-+        allow_dkek_export_tisci: 0x5A
-+        rsvd: [0, 0, 0]
-+    sa2ul_cfg:
-+        subhdr:
-+            magic: 0x23BE
-+            size: 0
-+        auth_resource_owner: 0
-+        enable_saul_psil_global_config_writes: 0x5A
-+        rsvd: [0, 0]
-+    sec_dbg_config:
-+        subhdr:
-+            magic: 0x42AF
-+            size: 16
-+        allow_jtag_unlock: 0x5A
-+        allow_wildcard_unlock: 0x5A
-+        allowed_debug_level_rsvd: 0
-+        rsvd: 0
-+        min_cert_rev: 0x0
-+        jtag_unlock_hosts: [0, 0, 0, 0]
-+    sec_handover_cfg:
-+        subhdr:
-+            magic: 0x608F
-+            size: 10
-+        handover_msg_sender: 0
-+        handover_to_host_id: 0
-+        rsvd: [0, 0, 0, 0]
-diff --git a/board/ti/am62px/tifs-rm-cfg.yaml b/board/ti/am62px/tifs-rm-cfg.yaml
-new file mode 100644
-index 0000000000000..f2ec18efc980c
---- /dev/null
-+++ b/board/ti/am62px/tifs-rm-cfg.yaml
-@@ -0,0 +1,1010 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-+#
-+# Resource management configuration for AM62Px
-+#
-+---
-+tifs-rm-cfg:
-+    rm_boardcfg:
-+        rev:
-+            boardcfg_abi_maj: 0x0
-+            boardcfg_abi_min: 0x1
-+        host_cfg:
-+            subhdr:
-+                magic: 0x4C41
-+                size: 356
-+            host_cfg_entries:
-+                - #1
-+                    host_id: 12
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #2
-+                    host_id: 30
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #3
-+                    host_id: 36
-+                    allowed_atype: 0x2A
-+                    allowed_qos: 0xAAAA
-+                    allowed_orderid: 0xAAAAAAAA
-+                    allowed_priority: 0xAAAA
-+                    allowed_sched_priority: 0xAA
-+                - #4
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #5
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #6
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #7
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #8
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #9
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #10
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #11
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #12
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #13
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #14
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #15
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #16
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #17
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #18
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #19
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #20
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #21
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #22
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #23
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #24
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #25
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #26
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #27
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #28
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #29
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #30
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #31
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+                - #32
-+                    host_id: 0
-+                    allowed_atype: 0
-+                    allowed_qos: 0
-+                    allowed_orderid: 0
-+                    allowed_priority: 0
-+                    allowed_sched_priority: 0
-+        resasg:
-+            subhdr:
-+                magic: 0x7B25
-+                size: 8
-+            resasg_entries_size: 872
-+            reserved: 0
-+    resasg_entries:
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1677
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1677
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1677
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 24
-+                num_resource: 2
-+                type: 1677
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 26
-+                num_resource: 6
-+                type: 1677
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 54
-+                num_resource: 18
-+                type: 1678
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 72
-+                num_resource: 6
-+                type: 1678
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 72
-+                num_resource: 6
-+                type: 1678
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 78
-+                num_resource: 2
-+                type: 1678
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 80
-+                num_resource: 2
-+                type: 1678
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 32
-+                num_resource: 12
-+                type: 1679
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 44
-+                num_resource: 6
-+                type: 1679
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 44
-+                num_resource: 6
-+                type: 1679
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 50
-+                num_resource: 2
-+                type: 1679
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 52
-+                num_resource: 2
-+                type: 1679
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1696
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1696
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1696
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 24
-+                num_resource: 2
-+                type: 1696
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 26
-+                num_resource: 6
-+                type: 1696
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 18
-+                type: 1697
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1697
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 6
-+                type: 1697
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 24
-+                num_resource: 2
-+                type: 1697
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 26
-+                num_resource: 2
-+                type: 1697
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 12
-+                type: 1698
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 12
-+                num_resource: 6
-+                type: 1698
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 12
-+                num_resource: 6
-+                type: 1698
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 18
-+                num_resource: 2
-+                type: 1698
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 20
-+                num_resource: 2
-+                type: 1698
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 6
-+                num_resource: 34
-+                type: 1802
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 44
-+                num_resource: 36
-+                type: 1802
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 44
-+                num_resource: 36
-+                type: 1802
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 168
-+                num_resource: 8
-+                type: 1802
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 1024
-+                type: 1807
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 4096
-+                num_resource: 29
-+                type: 1808
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 4608
-+                num_resource: 99
-+                type: 1809
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 5120
-+                num_resource: 24
-+                type: 1810
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 5632
-+                num_resource: 51
-+                type: 1811
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 6144
-+                num_resource: 51
-+                type: 1812
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 6656
-+                num_resource: 51
-+                type: 1813
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 8192
-+                num_resource: 32
-+                type: 1814
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 8704
-+                num_resource: 32
-+                type: 1815
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 9216
-+                num_resource: 32
-+                type: 1816
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 9728
-+                num_resource: 22
-+                type: 1817
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 10240
-+                num_resource: 22
-+                type: 1818
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 10752
-+                num_resource: 22
-+                type: 1819
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 11264
-+                num_resource: 28
-+                type: 1820
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 11776
-+                num_resource: 28
-+                type: 1821
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 12288
-+                num_resource: 28
-+                type: 1822
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1936
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1936
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1936
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1936
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1936
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 64
-+                type: 1937
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 64
-+                type: 1937
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 83
-+                num_resource: 8
-+                type: 1938
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 91
-+                num_resource: 8
-+                type: 1939
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 99
-+                num_resource: 10
-+                type: 1942
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 109
-+                num_resource: 3
-+                type: 1942
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 109
-+                num_resource: 3
-+                type: 1942
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 112
-+                num_resource: 3
-+                type: 1942
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 115
-+                num_resource: 3
-+                type: 1942
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 118
-+                num_resource: 16
-+                type: 1943
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 118
-+                num_resource: 16
-+                type: 1943
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 134
-+                num_resource: 8
-+                type: 1944
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 134
-+                num_resource: 8
-+                type: 1945
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 142
-+                num_resource: 8
-+                type: 1946
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 142
-+                num_resource: 8
-+                type: 1947
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1955
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1955
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1955
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1955
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1955
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 8
-+                type: 1956
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 8
-+                type: 1956
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 27
-+                num_resource: 1
-+                type: 1957
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 28
-+                num_resource: 1
-+                type: 1958
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1961
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1961
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1961
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1961
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1961
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 10
-+                type: 1962
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1962
-+                host_id: 35
-+                reserved: 0
-+
-+        -
-+                start_resource: 10
-+                num_resource: 3
-+                type: 1962
-+                host_id: 36
-+                reserved: 0
-+
-+        -
-+                start_resource: 13
-+                num_resource: 3
-+                type: 1962
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 16
-+                num_resource: 3
-+                type: 1962
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 1
-+                type: 1963
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 1
-+                type: 1963
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 16
-+                type: 1964
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 19
-+                num_resource: 16
-+                type: 1964
-+                host_id: 30
-+                reserved: 0
-+
-+        -
-+                start_resource: 20
-+                num_resource: 1
-+                type: 1965
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 35
-+                num_resource: 8
-+                type: 1966
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 21
-+                num_resource: 1
-+                type: 1967
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 35
-+                num_resource: 8
-+                type: 1968
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 22
-+                num_resource: 1
-+                type: 1969
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 43
-+                num_resource: 8
-+                type: 1970
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 23
-+                num_resource: 1
-+                type: 1971
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 43
-+                num_resource: 8
-+                type: 1972
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 1
-+                type: 2112
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 2
-+                num_resource: 2
-+                type: 2122
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 6
-+                type: 12750
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 6
-+                type: 12769
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 0
-+                num_resource: 8
-+                type: 12810
-+                host_id: 12
-+                reserved: 0
-+
-+        -
-+                start_resource: 3072
-+                num_resource: 6
-+                type: 12828
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 3584
-+                num_resource: 6
-+                type: 12829
-+                host_id: 128
-+                reserved: 0
-+
-+        -
-+                start_resource: 4096
-+                num_resource: 6
-+                type: 12830
-+                host_id: 128
-+                reserved: 0
+diff --git a/arch/mips/cpu/cpu.c b/arch/mips/cpu/cpu.c
+index f0e20da28f76..acfc9dc43f17 100644
+--- a/arch/mips/cpu/cpu.c
++++ b/arch/mips/cpu/cpu.c
+@@ -4,7 +4,6 @@
+  * Wolfgang Denk, DENX Software Engineering, <wd@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ #include <init.h>
+ #include <linux/compiler.h>
+diff --git a/arch/mips/cpu/interrupts.c b/arch/mips/cpu/interrupts.c
+index b3ba9aaeae1e..f7f9a185ed49 100644
+--- a/arch/mips/cpu/interrupts.c
++++ b/arch/mips/cpu/interrupts.c
+@@ -4,7 +4,6 @@
+  * Wolfgang Denk, DENX Software Engineering, <wd@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <irq_func.h>
+ 
+ int interrupt_init(void)
+diff --git a/arch/mips/cpu/time.c b/arch/mips/cpu/time.c
+index 5e7a7144d027..210709d3b81d 100644
+--- a/arch/mips/cpu/time.c
++++ b/arch/mips/cpu/time.c
+@@ -4,7 +4,6 @@
+  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+  */
+ 
+-#include <common.h>
+ #include <time.h>
+ #include <asm/mipsregs.h>
+ 
+diff --git a/arch/mips/include/asm/cacheops.h b/arch/mips/include/asm/cacheops.h
+index 641e2ad58dec..c1015c885e14 100644
+--- a/arch/mips/include/asm/cacheops.h
++++ b/arch/mips/include/asm/cacheops.h
+@@ -11,6 +11,7 @@
+ #include <asm/cache.h>
+ 
+ #ifndef __ASSEMBLY__
++#include <linux/types.h>
+ 
+ static inline void mips_cache(int op, const volatile void *addr)
+ {
+diff --git a/arch/mips/lib/boot.c b/arch/mips/lib/boot.c
+index 1b29d637ce9b..749625aa9748 100644
+--- a/arch/mips/lib/boot.c
++++ b/arch/mips/lib/boot.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2020 Stefan Roese <sr@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ #include <cpu_func.h>
+ #include <asm/global_data.h>
+diff --git a/arch/mips/lib/bootm.c b/arch/mips/lib/bootm.c
+index ab92bd06b0ee..d6d2f7d9d031 100644
+--- a/arch/mips/lib/bootm.c
++++ b/arch/mips/lib/bootm.c
+@@ -4,7 +4,6 @@
+  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+  */
+ 
+-#include <common.h>
+ #include <bootstage.h>
+ #include <env.h>
+ #include <image.h>
+diff --git a/arch/mips/lib/cache.c b/arch/mips/lib/cache.c
+index d23b38d6b93f..d365578b926c 100644
+--- a/arch/mips/lib/cache.c
++++ b/arch/mips/lib/cache.c
+@@ -4,7 +4,6 @@
+  * Wolfgang Denk, DENX Software Engineering, <wd@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <cpu_func.h>
+ #include <malloc.h>
+ #include <asm/cache.h>
+diff --git a/arch/mips/lib/reloc.c b/arch/mips/lib/reloc.c
+index 9cf6809f4068..69dd63a31d21 100644
+--- a/arch/mips/lib/reloc.c
++++ b/arch/mips/lib/reloc.c
+@@ -26,7 +26,6 @@
+  * terminating R_MIPS_NONE reloc includes no offset.
+  */
+ 
+-#include <common.h>
+ #include <cpu_func.h>
+ #include <init.h>
+ #include <asm/relocs.h>
+diff --git a/arch/mips/lib/spl.c b/arch/mips/lib/spl.c
+index f96fda5b2de9..b4087546dd1d 100644
+--- a/arch/mips/lib/spl.c
++++ b/arch/mips/lib/spl.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2020 Stefan Roese <sr@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <cpu_func.h>
+ #include <log.h>
+ #include <spl.h>
+diff --git a/arch/mips/lib/stack.c b/arch/mips/lib/stack.c
+index 930d21856d90..5797271ae94e 100644
+--- a/arch/mips/lib/stack.c
++++ b/arch/mips/lib/stack.c
+@@ -1,6 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <log.h>
+ #include <asm/global_data.h>
+diff --git a/arch/mips/lib/traps.c b/arch/mips/lib/traps.c
+index 7a682f256a65..40469d1be090 100644
+--- a/arch/mips/lib/traps.c
++++ b/arch/mips/lib/traps.c
+@@ -10,9 +10,9 @@
+  * Copyright (C) 2014, Imagination Technologies Ltd.
+  */
+ 
+-#include <common.h>
+ #include <asm/global_data.h>
+ #include <asm/ptrace.h>
++#include <config.h>
+ #include <cpu_func.h>
+ #include <hang.h>
+ #include <init.h>
+@@ -20,6 +20,7 @@
+ #include <asm/mipsregs.h>
+ #include <asm/addrspace.h>
+ #include <asm/system.h>
++#include <asm/u-boot.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+diff --git a/arch/mips/mach-ath79/ar933x/clk.c b/arch/mips/mach-ath79/ar933x/clk.c
+index 68d48939d7d2..86fc40a657e1 100644
+--- a/arch/mips/mach-ath79/ar933x/clk.c
++++ b/arch/mips/mach-ath79/ar933x/clk.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015-2016 Wills Wang <wills.wang@live.com>
+  */
+ 
+-#include <common.h>
+ #include <clock_legacy.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+diff --git a/arch/mips/mach-ath79/ar933x/ddr.c b/arch/mips/mach-ath79/ar933x/ddr.c
+index 09166ecf8f07..a932efbfbd79 100644
+--- a/arch/mips/mach-ath79/ar933x/ddr.c
++++ b/arch/mips/mach-ath79/ar933x/ddr.c
+@@ -4,7 +4,6 @@
+  * Based on Atheros LSDK/QSDK
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <asm/addrspace.h>
+ #include <asm/types.h>
+diff --git a/arch/mips/mach-ath79/ar934x/clk.c b/arch/mips/mach-ath79/ar934x/clk.c
+index 6ed4057353a8..bdaa6839a2bd 100644
+--- a/arch/mips/mach-ath79/ar934x/clk.c
++++ b/arch/mips/mach-ath79/ar934x/clk.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2016 Marek Vasut <marex@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <clock_legacy.h>
+ #include <command.h>
+ #include <hang.h>
+diff --git a/arch/mips/mach-ath79/ar934x/cpu.c b/arch/mips/mach-ath79/ar934x/cpu.c
+index 7daac0367149..f2e4ef191eb5 100644
+--- a/arch/mips/mach-ath79/ar934x/cpu.c
++++ b/arch/mips/mach-ath79/ar934x/cpu.c
+@@ -3,7 +3,5 @@
+  * Copyright (C) 2016 Marek Vasut <marex@denx.de>
+  */
+ 
+-#include <common.h>
+-
+ /* The lowlevel_init() is not needed on AR934x */
+ void lowlevel_init(void) {}
+diff --git a/arch/mips/mach-ath79/ar934x/ddr.c b/arch/mips/mach-ath79/ar934x/ddr.c
+index 9df48b97ef46..e260783d9597 100644
+--- a/arch/mips/mach-ath79/ar934x/ddr.c
++++ b/arch/mips/mach-ath79/ar934x/ddr.c
+@@ -5,7 +5,6 @@
+  * Based on RAM init sequence by Piotr Dymacz <pepe2k@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm/addrspace.h>
+diff --git a/arch/mips/mach-ath79/cpu.c b/arch/mips/mach-ath79/cpu.c
+index 79f419088a99..24160ef11521 100644
+--- a/arch/mips/mach-ath79/cpu.c
++++ b/arch/mips/mach-ath79/cpu.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015-2016 Wills Wang <wills.wang@live.com>
+  */
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <asm/io.h>
+ #include <asm/addrspace.h>
+diff --git a/arch/mips/mach-ath79/dram.c b/arch/mips/mach-ath79/dram.c
+index 545b1199e106..247691d3378f 100644
+--- a/arch/mips/mach-ath79/dram.c
++++ b/arch/mips/mach-ath79/dram.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015-2016 Wills Wang <wills.wang@live.com>
+  */
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+ #include <linux/sizes.h>
+diff --git a/arch/mips/mach-ath79/qca953x/clk.c b/arch/mips/mach-ath79/qca953x/clk.c
+index f5438ef1c8d9..379085f1ff7f 100644
+--- a/arch/mips/mach-ath79/qca953x/clk.c
++++ b/arch/mips/mach-ath79/qca953x/clk.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015-2016 Wills Wang <wills.wang@live.com>
+  */
+ 
+-#include <common.h>
+ #include <clock_legacy.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+diff --git a/arch/mips/mach-ath79/qca953x/ddr.c b/arch/mips/mach-ath79/qca953x/ddr.c
+index 78f2370e09ce..0eb69d3a0fb1 100644
+--- a/arch/mips/mach-ath79/qca953x/ddr.c
++++ b/arch/mips/mach-ath79/qca953x/ddr.c
+@@ -4,7 +4,6 @@
+  * Based on Atheros LSDK/QSDK
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <asm/addrspace.h>
+ #include <asm/types.h>
+diff --git a/arch/mips/mach-ath79/qca956x/clk.c b/arch/mips/mach-ath79/qca956x/clk.c
+index 6a58dba91f3f..6138a915efcd 100644
+--- a/arch/mips/mach-ath79/qca956x/clk.c
++++ b/arch/mips/mach-ath79/qca956x/clk.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2019 Rosy Song <rosysong@rosinson.com>
+  */
+ 
+-#include <common.h>
+ #include <clock_legacy.h>
+ #include <log.h>
+ #include <asm/global_data.h>
+diff --git a/arch/mips/mach-ath79/qca956x/cpu.c b/arch/mips/mach-ath79/qca956x/cpu.c
+index 08a8c84e72dd..7da8d0e60f19 100644
+--- a/arch/mips/mach-ath79/qca956x/cpu.c
++++ b/arch/mips/mach-ath79/qca956x/cpu.c
+@@ -3,7 +3,5 @@
+  * Copyright (C) 2019 Rosy Song <rosysong@rosinson.com>
+  */
+ 
+-#include <common.h>
+-
+ /* The lowlevel_init() is not needed on QCA956X */
+ void lowlevel_init(void) {}
+diff --git a/arch/mips/mach-ath79/qca956x/ddr.c b/arch/mips/mach-ath79/qca956x/ddr.c
+index f9cf8daa2242..2e46e24f4830 100644
+--- a/arch/mips/mach-ath79/qca956x/ddr.c
++++ b/arch/mips/mach-ath79/qca956x/ddr.c
+@@ -5,7 +5,6 @@
+  * Based on QSDK
+  */
+ 
+-#include <common.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <asm/addrspace.h>
+diff --git a/arch/mips/mach-ath79/reset.c b/arch/mips/mach-ath79/reset.c
+index 6cd5e77fd15a..62da8b92a7d4 100644
+--- a/arch/mips/mach-ath79/reset.c
++++ b/arch/mips/mach-ath79/reset.c
+@@ -4,7 +4,6 @@
+  * Copyright (C) 2018-2019 Rosy Song <rosysong@rosinson.com>
+  */
+ 
+-#include <common.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+diff --git a/arch/mips/mach-bmips/dram.c b/arch/mips/mach-bmips/dram.c
+index bba6cd6f4aaf..eec8b44e47ea 100644
+--- a/arch/mips/mach-bmips/dram.c
++++ b/arch/mips/mach-bmips/dram.c
+@@ -4,7 +4,6 @@
+  * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <log.h>
+ #include <ram.h>
+diff --git a/arch/mips/mach-jz47xx/jz4780/gpio.c b/arch/mips/mach-jz47xx/jz4780/gpio.c
+index d4884e7fa9f1..7f6717efc16f 100644
+--- a/arch/mips/mach-jz47xx/jz4780/gpio.c
++++ b/arch/mips/mach-jz47xx/jz4780/gpio.c
+@@ -1,7 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+ #include <config.h>
+-#include <common.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+ #include <mach/jz4780.h>
+diff --git a/arch/mips/mach-jz47xx/jz4780/jz4780.c b/arch/mips/mach-jz47xx/jz4780/jz4780.c
+index 56fdf04bca9d..1d6fb6a4e27c 100644
+--- a/arch/mips/mach-jz47xx/jz4780/jz4780.c
++++ b/arch/mips/mach-jz47xx/jz4780/jz4780.c
+@@ -7,7 +7,6 @@
+  */
+ 
+ #include <config.h>
+-#include <common.h>
+ #include <cpu_func.h>
+ #include <hang.h>
+ #include <image.h>
+diff --git a/arch/mips/mach-jz47xx/jz4780/pll.c b/arch/mips/mach-jz47xx/jz4780/pll.c
+index 4519b478ccb0..8ef00f99a106 100644
+--- a/arch/mips/mach-jz47xx/jz4780/pll.c
++++ b/arch/mips/mach-jz47xx/jz4780/pll.c
+@@ -7,7 +7,6 @@
+  */
+ 
+ #include <config.h>
+-#include <common.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+diff --git a/arch/mips/mach-jz47xx/jz4780/reset.c b/arch/mips/mach-jz47xx/jz4780/reset.c
+index bf6addccb5de..d2e9eb79e6df 100644
+--- a/arch/mips/mach-jz47xx/jz4780/reset.c
++++ b/arch/mips/mach-jz47xx/jz4780/reset.c
+@@ -7,7 +7,6 @@
+  */
+ 
+ #include <config.h>
+-#include <common.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+ #include <mach/jz4780.h>
+diff --git a/arch/mips/mach-jz47xx/jz4780/sdram.c b/arch/mips/mach-jz47xx/jz4780/sdram.c
+index 690f3c5601da..09296ee21ada 100644
+--- a/arch/mips/mach-jz47xx/jz4780/sdram.c
++++ b/arch/mips/mach-jz47xx/jz4780/sdram.c
+@@ -9,7 +9,6 @@
+  * Copyright (c) 2006-2013 Ingenic Semiconductor
+  */
+ 
+-#include <common.h>
+ #include <hang.h>
+ #include <init.h>
+ #include <asm/io.h>
+diff --git a/arch/mips/mach-jz47xx/jz4780/timer.c b/arch/mips/mach-jz47xx/jz4780/timer.c
+index 82bb9e8c3bfa..94ef505f18fe 100644
+--- a/arch/mips/mach-jz47xx/jz4780/timer.c
++++ b/arch/mips/mach-jz47xx/jz4780/timer.c
+@@ -7,7 +7,6 @@
+  */
+ 
+ #include <config.h>
+-#include <common.h>
+ #include <div64.h>
+ #include <init.h>
+ #include <irq_func.h>
+diff --git a/arch/mips/mach-mscc/cpu.c b/arch/mips/mach-mscc/cpu.c
+index d484eb92c419..22b1b98e0ef4 100644
+--- a/arch/mips/mach-mscc/cpu.c
++++ b/arch/mips/mach-mscc/cpu.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+ #include <linux/bitops.h>
+diff --git a/arch/mips/mach-mscc/dram.c b/arch/mips/mach-mscc/dram.c
+index f7fbd33cc4b9..c7c2040a11ab 100644
+--- a/arch/mips/mach-mscc/dram.c
++++ b/arch/mips/mach-mscc/dram.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+ 
+diff --git a/arch/mips/mach-mscc/gpio.c b/arch/mips/mach-mscc/gpio.c
+index d6b4c5d7684b..6cd0e2436e78 100644
+--- a/arch/mips/mach-mscc/gpio.c
++++ b/arch/mips/mach-mscc/gpio.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <linux/bitops.h>
+ 
+diff --git a/arch/mips/mach-mscc/include/mach/ddr.h b/arch/mips/mach-mscc/include/mach/ddr.h
+index 75fb3ca00d2c..3ba33d27c178 100644
+--- a/arch/mips/mach-mscc/include/mach/ddr.h
++++ b/arch/mips/mach-mscc/include/mach/ddr.h
+@@ -6,6 +6,7 @@
+ #ifndef __ASM_MACH_DDR_H
+ #define __ASM_MACH_DDR_H
+ 
++#include <config.h>
+ #include <asm/cacheops.h>
+ #include <asm/io.h>
+ #include <asm/reboot.h>
+diff --git a/arch/mips/mach-mscc/phy.c b/arch/mips/mach-mscc/phy.c
+index 83d3e5bdd28f..444d1f5315d5 100644
+--- a/arch/mips/mach-mscc/phy.c
++++ b/arch/mips/mach-mscc/phy.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <asm/io.h>
+ 
+diff --git a/arch/mips/mach-mscc/reset.c b/arch/mips/mach-mscc/reset.c
+index a1214573b51a..ca9a7c679d94 100644
+--- a/arch/mips/mach-mscc/reset.c
++++ b/arch/mips/mach-mscc/reset.c
+@@ -3,8 +3,6 @@
+  * Copyright (c) 2018 Microsemi Corporation
+  */
+ 
+-#include <common.h>
+-
+ #include <asm/sections.h>
+ #include <asm/io.h>
+ 
+diff --git a/arch/mips/mach-mtmips/cpu.c b/arch/mips/mach-mtmips/cpu.c
+index e88dab10c76e..243938a0ebb7 100644
+--- a/arch/mips/mach-mtmips/cpu.c
++++ b/arch/mips/mach-mtmips/cpu.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2018 Stefan Roese <sr@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <event.h>
+ #include <init.h>
+ #include <malloc.h>
+diff --git a/arch/mips/mach-mtmips/ddr_cal.c b/arch/mips/mach-mtmips/ddr_cal.c
+index 762619a960f3..e2e1760a6468 100644
+--- a/arch/mips/mach-mtmips/ddr_cal.c
++++ b/arch/mips/mach-mtmips/ddr_cal.c
+@@ -5,7 +5,6 @@
+  * Author:  Weijie Gao <weijie.gao@mediatek.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/addrspace.h>
+ #include <asm/cacheops.h>
+ #include <asm/global_data.h>
+diff --git a/arch/mips/mach-mtmips/ddr_init.c b/arch/mips/mach-mtmips/ddr_init.c
+index 9c986daea6f5..cab53561e42e 100644
+--- a/arch/mips/mach-mtmips/ddr_init.c
++++ b/arch/mips/mach-mtmips/ddr_init.c
+@@ -5,7 +5,6 @@
+  * Author:  Weijie Gao <weijie.gao@mediatek.com>
+  */
+ 
+-#include <common.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/io.h>
+diff --git a/arch/mips/mach-mtmips/mt7628/ddr.c b/arch/mips/mach-mtmips/mt7628/ddr.c
+index 4e72459906e8..198bf262f92b 100644
+--- a/arch/mips/mach-mtmips/mt7628/ddr.c
++++ b/arch/mips/mach-mtmips/mt7628/ddr.c
+@@ -5,7 +5,6 @@
+  * Author:  Weijie Gao <weijie.gao@mediatek.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/addrspace.h>
+ #include <asm/global_data.h>
+ #include <linux/bitops.h>
+diff --git a/arch/mips/mach-mtmips/mt7628/init.c b/arch/mips/mach-mtmips/mt7628/init.c
+index 6b535129df12..2996fd9ef4ee 100644
+--- a/arch/mips/mach-mtmips/mt7628/init.c
++++ b/arch/mips/mach-mtmips/mt7628/init.c
+@@ -5,7 +5,6 @@
+  * Author:  Weijie Gao <weijie.gao@mediatek.com>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <asm/global_data.h>
+diff --git a/arch/mips/mach-mtmips/mt7628/serial.c b/arch/mips/mach-mtmips/mt7628/serial.c
+index e5f3f87a6737..11a2149e1273 100644
+--- a/arch/mips/mach-mtmips/mt7628/serial.c
++++ b/arch/mips/mach-mtmips/mt7628/serial.c
+@@ -5,7 +5,6 @@
+  * Author:  Weijie Gao <weijie.gao@mediatek.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include "mt7628.h"
+ 
+diff --git a/arch/mips/mach-mtmips/spl.c b/arch/mips/mach-mtmips/spl.c
+index fe5b49e702f1..0208bc423dfb 100644
+--- a/arch/mips/mach-mtmips/spl.c
++++ b/arch/mips/mach-mtmips/spl.c
+@@ -5,7 +5,6 @@
+  * Author: Weijie Gao <weijie.gao@mediatek.com>
+  */
+ 
+-#include <common.h>
+ #include <init.h>
+ #include <spl.h>
+ #include <asm/sections.h>
+diff --git a/arch/mips/mach-pic32/cpu.c b/arch/mips/mach-pic32/cpu.c
+index 7ed306e045ea..dbf8c9cd221d 100644
+--- a/arch/mips/mach-pic32/cpu.c
++++ b/arch/mips/mach-pic32/cpu.c
+@@ -4,7 +4,6 @@
+  * Purna Chandra Mandal <purna.mandal@microchip.com>
+  *
+  */
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <event.h>
+diff --git a/arch/mips/mach-pic32/reset.c b/arch/mips/mach-pic32/reset.c
+index 8071b13f7b48..efd6985b44a1 100644
+--- a/arch/mips/mach-pic32/reset.c
++++ b/arch/mips/mach-pic32/reset.c
+@@ -4,7 +4,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <mach/pic32.h>
+ 
 -- 
-2.42.0
+2.34.1
 
