@@ -4,95 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9032CDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 17:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD41CCDB474
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 20:50:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDC8C86B9E;
-	Thu, 12 Oct 2023 19:55:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A400986B18;
+	Thu, 12 Oct 2023 22:49:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rHK3Dlr3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A++Nl6gk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C00E86C78; Thu, 12 Oct 2023 19:55:16 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id A7F5B86B36; Thu, 12 Oct 2023 22:49:39 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C60C86A4C
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 19:55:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7270484003
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 22:49:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-5a7af45084eso16534777b3.0
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 10:55:06 -0700 (PDT)
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-533c5d10dc7so2532009a12.3
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 13:49:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697133305; x=1697738105; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=9tsarRcW9RkBewLVQ8vwfX86XJ3S30a8ogfzukXN6DI=;
- b=rHK3Dlr3iLrpSbqiu8e6H+7BL3tBSbdJ0d7WHbryRb0yhGPhMIbGyYQ26H/fpl/YRF
- LeoAR0WgvhFo2IFHEXddlr28Fq6hyN50PA/gQaBYIWI24uuaIAj6hTkNMt6EDKvzbk49
- gd98mmRud64T8jyZ359c4UnAkZQch9Qo8bLaA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697133305; x=1697738105;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1697143771; x=1697748571; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9tsarRcW9RkBewLVQ8vwfX86XJ3S30a8ogfzukXN6DI=;
- b=kB2LX1KNXB1tkq8vehltiE7lYdw3i2WMP3e1KQ5ZVwGpH0rXYQXURvP2eYLa4iDkaY
- FVw2niZkN9OpkMX6u7p+Hz6Cr1Te8tsn/NUV8ADbTVETbgOtiv8KPPHhJ2BeWaoBrSyU
- WbIl6kVkCFLhfJXXXAJMxrRgrtvf1bdkZ4eQ/KM0CSNYtiV/KdEChUsfANIi4gqQapNY
- ecieIOPRFuUw7z/5H2mqGkhnfPCxeUmaUIL6ljtiOfwoQoyRONqzIGWW7/vzHSQM1t1H
- ygd0Xw35n7anK4r98DkU0L/zqTSbiqqLR5yv3ISkF03znUlYs193zOP2QRF5sJY9U83S
- lqPA==
-X-Gm-Message-State: AOJu0Yx5F+43Foc203aC88sgdJ/KaVSFPmQvGW41rg0jmgYqr3GtH3BH
- IOiq4Gtch5QIsPjFZPQdDAgkiQ==
-X-Google-Smtp-Source: AGHT+IF7woRDK4EiX7o3wAGBAocE6xZedPMiP3NjZExm3GuBj90p/huxb62gaY0ZWG87XFJ66p6XUA==
-X-Received: by 2002:a81:6e88:0:b0:5a2:15bc:b32c with SMTP id
- j130-20020a816e88000000b005a215bcb32cmr27064418ywc.42.1697133305120; 
- Thu, 12 Oct 2023 10:55:05 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-5647-4a14-f04e-8d8d.res6.spectrum.com.
- [2603:6081:7b00:6400:5647:4a14:f04e:8d8d])
+ bh=Jc5d+on9l1HY694SQifPzaYJgKufqWgp9ash1w47VT8=;
+ b=A++Nl6gkLILQvv2kwhSQdvukdhf6vPrd8UqoIN3/pD9sa/RhS/aKpB6KINMkh/4d8F
+ Xy4uCTF9jYSF0GzjgueIrzrbEzzR2RCDDN28lZwenfXJmpQDl28mHhSat3tZ77v4zE4E
+ wgaOpvrC7yC0Bpz0cEa+cmt6GIMu3KO/yvIribUyYQmzOM8QEmFU6+m0uqTF/z7PClSv
+ OyUiSZAK0BhV0IOArqhHmQmoKjf8fozIC9LCx/zVRSVknDE9Zs8n2Th/EPUBm6MLrYl3
+ sY4hdh5VJy0chrfBTdoTF1hGx/SZi4su6uswM1Liv7MVK7r4Uv6Ge88a3oua/KoiO4NG
+ NoNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697143771; x=1697748571;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Jc5d+on9l1HY694SQifPzaYJgKufqWgp9ash1w47VT8=;
+ b=Ma66GGegmGDTGSbB9hF3WF6gOdvW/7T/OLOFNIzXNji1RlIU0XnIw0viV6QIJvFUqN
+ mS6rz2o3Gy+0hg1OQ+AbzjJwgfyv5hFjPWrfYOyZFhP1KYCdKxaG/Vfvf2ni8jZy12bX
+ gvFo+eb/+Ke8TUc0lQkxOOhFHRyfNXlw53bKSbMmnHvb489YhHsv1ae8HmVP/BvSKg/x
+ m0RLkkbyd9JJmk2WoDLE6fYQXpf5fv9aLn3gz99Ch+BYwKJEPLXmuj7Arv8x++L9OxpP
+ cvIFwL8roGgUz2/EyV/+xpqpgq2T077+dWdHddhU6UqC+Kn+Y65hiq8kly0VaBZ9LVi5
+ dmBw==
+X-Gm-Message-State: AOJu0YxyS1Eos52Dd1+qxS5lm71arabf1zyX7QYTwj2HF2MW5lUll+lf
+ 58fEpJYNzP6motv0uTVsojg=
+X-Google-Smtp-Source: AGHT+IEtyaBtXC/JUdYJeP0E2ENTPfYEqeBo6d3dnawnGlkSFJQJDiHcK2RSBNEE0UUWzxeSeIj6GA==
+X-Received: by 2002:a17:906:3050:b0:9b2:be5e:7545 with SMTP id
+ d16-20020a170906305000b009b2be5e7545mr21370658ejd.36.1697143770613; 
+ Thu, 12 Oct 2023 13:49:30 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
  by smtp.gmail.com with ESMTPSA id
- b63-20020a0dc042000000b005a815346d95sm113594ywd.71.2023.10.12.10.55.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 10:55:04 -0700 (PDT)
-Date: Thu, 12 Oct 2023 13:55:02 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Apurva Nandan <a-nandan@ti.com>
-Cc: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
- Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
- Udit Kumar <u-kumar1@ti.com>
-Subject: Re: [PATCH v4 09/16] board: ti: j784s4: Add board support for J784S4
- EVM
-Message-ID: <20231012175502.GS3119521@bill-the-cat>
-References: <20231001165545.494212-1-a-nandan@ti.com>
- <20231001165545.494212-10-a-nandan@ti.com>
+ kf24-20020a17090776d800b009b95787eb6dsm11412922ejc.48.2023.10.12.13.49.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Oct 2023 13:49:30 -0700 (PDT)
+Message-ID: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
+Date: Thu, 12 Oct 2023 22:49:29 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sO0MYiWBplDnPCXv"
-Content-Disposition: inline
-In-Reply-To: <20231001165545.494212-10-a-nandan@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v3 0/7] Add rkmtd command
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ u-boot@lists.denx.de
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,139 +94,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The command rkmtd creates a virtual block device to transfer
+Rockchip boot block data to and from NAND with block orientated
+tools like "ums" and "rockusb".
 
---sO0MYiWBplDnPCXv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It uses the Rockchip MTD driver to scan for boot blocks and copies
+data from the first block in a GPT formatted virtual disk.
+Data must be written in U-boot "idbloader.img" format and start at
+partition "loader1" offset 64. The data header is parsed
+for length and offset. When the last sector is received
+it erases up to 5 erase blocks on NAND and writes boot blocks
+in a pattern depending on the NAND ID. Data is then verified.
+When a block turns out bad the block header is discarded.
 
-On Sun, Oct 01, 2023 at 10:25:38PM +0530, Apurva Nandan wrote:
+Changed V3:
+  Add documetation
+  Add test
+  Split driver from command
+  Split header
+  Use devm_kzalloc
+  Remove out of memory debug
+  Restyle
 
-> Add board files for J784S4 EVM.
-[snip]
-> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-> new file mode 100644
-> index 0000000000..025079c6a8
-> --- /dev/null
-> +++ b/board/ti/j784s4/evm.c
-> @@ -0,0 +1,82 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +/*
-> + * Board specific initialization for J784S4 EVM
-> + *
-> + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.co=
-m/
-> + *	Hari Nagalla <hnagalla@ti.com>
-> + *
-> + */
-> +
-> +#include <common.h>
+Changed V2:
+  Rename to rkmtd
 
-Here and elsewhere, do not add common.h and instead add what headers you
-need.
+Johan Jonker (7):
+  mtd: nand: raw: rockchip_nfc: add NAND_SKIP_BBTSCAN option
+  rockchip: dm: prepare rkmtd UCLASS
+  rockchip: block: add rkmtd class and drivers
+  rockchip: block: blk-uclass: disable bounce buffer support for rkmtd
+  rockchip: cmd: add rkmtd command
+  rockchip: test: dm: add rkmtd test
+  rockchip: doc: add rkmtd.rst
 
-> +#include <env.h>
-> +#include <fdt_support.h>
-> +#include <generic-phy.h>
-> +#include <image.h>
-> +#include <init.h>
-> +#include <log.h>
-> +#include <net.h>
-> +#include <asm/arch/hardware.h>
-> +#include <asm/gpio.h>
-> +#include <asm/io.h>
-> +#include <spl.h>
-> +#include <dm.h>
-> +#include <dm/uclass-internal.h>
+ cmd/Kconfig                         |    8 +
+ cmd/Makefile                        |    1 +
+ cmd/rkmtd.c                         |  204 +++++
+ disk/part.c                         |    4 +
+ doc/board/rockchip/index.rst        |    1 +
+ doc/board/rockchip/rkmtd.rst        |  105 +++
+ drivers/block/Kconfig               |    7 +
+ drivers/block/Makefile              |    2 +
+ drivers/block/blk-uclass.c          |    7 +-
+ drivers/block/rkmtd.c               | 1138 +++++++++++++++++++++++++++
+ drivers/mtd/nand/raw/Kconfig        |    9 +
+ drivers/mtd/nand/raw/rockchip_nfc.c |    3 +
+ include/dm/uclass-id.h              |    1 +
+ include/rkmtd.h                     |  190 +++++
+ test/dm/Makefile                    |    1 +
+ test/dm/rkmtd.c                     |  201 +++++
+ 16 files changed, 1879 insertions(+), 3 deletions(-)
+ create mode 100644 cmd/rkmtd.c
+ create mode 100644 doc/board/rockchip/rkmtd.rst
+ create mode 100644 drivers/block/rkmtd.c
+ create mode 100644 include/rkmtd.h
+ create mode 100644 test/dm/rkmtd.c
 
-This is a huge list for such little code, please see what's actually
-needed.
+--
+2.39.2
 
-> +#include "../common/board_detect.h"
-> +
-> +#define board_is_j784s4_evm()	board_ti_k3_is("J784S4-EVM")
-> +
-> +DECLARE_GLOBAL_DATA_PTR;
-> +
-> +int board_init(void)
-> +{
-> +	return 0;
-> +}
-> +
-> +int dram_init(void)
-> +{
-> +#ifdef CONFIG_PHYS_64BIT
-> +	gd->ram_size =3D 0x100000000;
-> +#else
-> +	gd->ram_size =3D 0x80000000;
-> +#endif
-> +
-> +	return 0;
-> +}
-> +
-> +phys_size_t board_get_usable_ram_top(phys_size_t total_size)
-> +{
-> +#ifdef CONFIG_PHYS_64BIT
-> +	/* Limit RAM used by U-Boot to the DDR low region */
-> +	if (gd->ram_top > 0x100000000)
-> +		return 0x100000000;
-> +#endif
-> +
-> +	return gd->ram_top;
-> +}
-> +
-> +int dram_init_banksize(void)
-> +{
-> +	/* Bank 0 declares the memory available in the DDR low region */
-> +	gd->bd->bi_dram[0].start =3D CFG_SYS_SDRAM_BASE;
-> +	gd->bd->bi_dram[0].size =3D 0x7fffffff;
-> +	gd->ram_size =3D 0x80000000;
-> +
-> +#ifdef CONFIG_PHYS_64BIT
-> +	/* Bank 1 declares the memory available in the DDR high region */
-> +	gd->bd->bi_dram[1].start =3D CFG_SYS_SDRAM_BASE1;
-> +	gd->bd->bi_dram[1].size =3D 0x77fffffff;
-> +	gd->ram_size =3D 0x800000000;
-> +#endif
-> +
-> +	return 0;
-> +}
-> +
-> +int board_late_init(void)
-> +{
-> +	return 0;
-> +}
-> +
-> +void spl_board_init(void)
-> +{
-> +}
-
-So, lets split this in to two files, to make life easier on future
-J784S4-based platforms.  The basically dummy functions (empty/return 0)
-should go in "base.c" and everything that's about the EVM itself should
-go in evm.c.  This will make it easier to rm evm.c and add
-custom-platform.c that just sets the memory size and anything else
-that's really board specific.
-
---=20
-Tom
-
---sO0MYiWBplDnPCXv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoMvIACgkQFHw5/5Y0
-tyzIUgv/dO32gxPRUkc/Lax7n7b8kwqCOsvgxmbIKKSaLfKMvXuM5PUCkFkr+0zG
-nzBiyWmevFW6bHRmfnf6fN19vgAww+u+e/Fro7lX6FLEzY4kQNvJARmDpeJWyBgG
-qZy480ytshZFuVo/qLE0X5JOzvt6wnuJvxmszQGLLCJtm6qG8Bm6ulbnUTSZSfm6
-pgIJOsVSDNoJ6yhFIPaIJyzaTMrAod28Ux2Mz7qjZmPDc4poGijFuzJPSH7sOOvt
-htUcr+OZn4enhN4VmKcIyP1zh+hzmLDE0IXlLUT1EIIfnMYwoTw8pXb8nrOWfp/g
-Ka31pOIpjsNJeaIZ4smoeh/5riWGLVekeM68HLjPXwStNOm2QjjPn2ufBqSVXwSV
-cbAFS9wSNKltLavjdFZEYHrzME8Qrr5QsGjjwhR5YbI2uDt1Yd8k5khTBtCwId8T
-1j+QJXhH48sfi3VSwcT2iFubNYHd8dWeFeTlK7IWz0PvpjrGFjQvfAvShnsWxebF
-t2xMXaZT
-=C3BF
------END PGP SIGNATURE-----
-
---sO0MYiWBplDnPCXv--
