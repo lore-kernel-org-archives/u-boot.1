@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFCC7C46CA1
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:44:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3F9CCDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:44:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEFE386E82;
-	Thu, 12 Oct 2023 08:40:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 756CB86E54;
+	Thu, 12 Oct 2023 08:40:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D945286E77; Thu, 12 Oct 2023 08:38:57 +0200 (CEST)
+ id EA2A586E82; Thu, 12 Oct 2023 08:38:55 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE03886E54
+ by phobos.denx.de (Postfix) with ESMTPS id EE59986E5D
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:38:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=randolph@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 39C6c6oC019951;
- Thu, 12 Oct 2023 14:38:06 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 39C6cBda019968;
+ Thu, 12 Oct 2023 14:38:11 +0800 (+08)
  (envelope-from randolph@andestech.com)
 Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
  (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Thu, 12 Oct 2023 14:38:02 +0800
+ Thu, 12 Oct 2023 14:38:07 +0800
 From: Randolph <randolph@andestech.com>
 To: <u-boot@lists.denx.de>
 CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
  <peterlin@andestech.com>, Randolph <randolph@andestech.com>
-Subject: [PATCH V2 4/7] Makefile: delete file *.itb when make clean
-Date: Thu, 12 Oct 2023 14:35:06 +0800
-Message-ID: <20231012063509.2963258-5-randolph@andestech.com>
+Subject: [PATCH V2 5/7] spl: riscv: add os type for next booting stage
+Date: Thu, 12 Oct 2023 14:35:07 +0800
+Message-ID: <20231012063509.2963258-6-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231012063509.2963258-1-randolph@andestech.com>
 References: <20231012063509.2963258-1-randolph@andestech.com>
@@ -45,7 +45,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 39C6c6oC019951
+X-MAIL: Atcsqr.andestech.com 39C6cBda019968
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,26 +62,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Delete the output file *.itb
+If SPL_LOAD_FIT_OPENSBI_OS_BOOT is enabled, the function
+spl_invoke_opensbi should change the target OS type to IH_OS_LINUX.
+OpenSBI will load the Linux image as the next boot stage.
+The os_takes_devicetree function returns a value of true or false
+depending on whether or not SPL_LOAD_FIT_OPENSBI_OS_BOOT is enabled.
 
 Signed-off-by: Randolph <randolph@andestech.com>
 ---
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ common/spl/spl_fit.c     | 3 ++-
+ common/spl/spl_opensbi.c | 9 +++++++--
+ 2 files changed, 9 insertions(+), 3 deletions(-)
 
-diff --git a/Makefile b/Makefile
-index 9d2e31e494..a7aa8c02a0 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2165,7 +2165,7 @@ CLEAN_FILES += include/bmp_logo.h include/bmp_logo_data.h \
- 	       mkimage-out.spl.mkimage mkimage.spl.mkimage imx-boot.map \
- 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
- 	       mkimage.rom.mkimage rom.map simple-bin.map simple-bin-spi.map \
--	       idbloader-spi.img lib/efi_loader/helloworld_efi.S
-+	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb
+diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
+index ce6b8aa370..e9126f07f7 100644
+--- a/common/spl/spl_fit.c
++++ b/common/spl/spl_fit.c
+@@ -366,7 +366,8 @@ static bool os_takes_devicetree(uint8_t os)
+ 	case IH_OS_U_BOOT:
+ 		return true;
+ 	case IH_OS_LINUX:
+-		return IS_ENABLED(CONFIG_SPL_OS_BOOT);
++		return IS_ENABLED(CONFIG_SPL_OS_BOOT) ||
++		       IS_ENABLED(CONFIG_SPL_OPENSBI);
+ 	default:
+ 		return false;
+ 	}
+diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
+index 6583b31953..9801d38c0b 100644
+--- a/common/spl/spl_opensbi.c
++++ b/common/spl/spl_opensbi.c
+@@ -59,9 +59,14 @@ void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
  
- # Directories & files removed with 'make mrproper'
- MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
+ 	/*
+ 	 * Find next os image in /fit-images
+-	 * The next os image default is u-boot proper
++	 * The next os image default is u-boot proper, once enable
++	 * OpenSBI OS boot mode, the OS image should be linux.
+ 	 */
+-	os_type = IH_OS_U_BOOT;
++	if (CONFIG_IS_ENABLED(LOAD_FIT_OPENSBI_OS_BOOT))
++		os_type = IH_OS_LINUX;
++	else
++		os_type = IH_OS_U_BOOT;
++
+ 	ret = spl_opensbi_find_os_node(spl_image->fdt_addr, &os_node, os_type);
+ 	if (ret) {
+ 		pr_err("Can't find %s node for opensbi, %d\n",
 -- 
 2.34.1
 
