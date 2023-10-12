@@ -4,99 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA349CDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 15:19:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DFD8CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 15:22:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68AE886A9F;
-	Thu, 12 Oct 2023 17:19:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
+	by phobos.denx.de (Postfix) with ESMTP id 5994486E73;
+	Thu, 12 Oct 2023 17:20:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="sOT1QYAE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TXHcNePe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3E4686A6B; Thu, 12 Oct 2023 17:19:34 +0200 (CEST)
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C26EC86E54; Thu, 12 Oct 2023 17:20:51 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AEED286DD9
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 17:19:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 595D586E4F
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 17:20:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=linux.ibm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eajames@linux.ibm.com
-Received: from pps.filterd (m0353723.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39CFFSBN022843; Thu, 12 Oct 2023 15:19:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=from : to : cc : subject
- : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=pp1;
- bh=9ofSYSCEOjtlae9Kix7hxiopmr3DTmymhm67aDPzdck=;
- b=sOT1QYAEgJO8ZJzvDJLyRoHaMUi7YRzK/JJgihmRi00e6FShzcbW3/tHmCc6bAH4O8ga
- sBMszYXjzWcFbd22ejVRotj89Zj+pcCkjaA3VKNeugNz8xRPaXeK1ee4K6m1+zTXDeuu
- 6XbSPy13Xm7dTRytkyneYu1RZDUZsSE9SU2wqj9byYQ4P6BYqxHZES+PcyDsNXw44FV0
- 4DaKj9R0mobsJu0lnK6iGe/ak8bz+JcoInsFiyQQ19hyGxJiucvudbzw5hP69URmkrZb
- ZaY9FcZlGfw9AWUqtA2/oIlYUU1CohZCJAb5oAU2JEFv/M5PiLcqevNJibOz2MM/0uqf RA== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tpk9fr50y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Oct 2023 15:19:28 +0000
-Received: from m0353723.ppops.net (m0353723.ppops.net [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39CFFk2Y023448;
- Thu, 12 Oct 2023 15:19:28 GMT
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tpk9fr2wx-11
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Oct 2023 15:19:27 +0000
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39CCc1BI025907; Thu, 12 Oct 2023 14:45:54 GMT
-Received: from smtprelay05.wdc07v.mail.ibm.com ([172.16.1.72])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3tkjnnr43b-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 12 Oct 2023 14:45:54 +0000
-Received: from smtpav04.dal12v.mail.ibm.com (smtpav04.dal12v.mail.ibm.com
- [10.241.53.103])
- by smtprelay05.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 39CEjrV823855752
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 12 Oct 2023 14:45:53 GMT
-Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 617DA58063;
- Thu, 12 Oct 2023 14:45:53 +0000 (GMT)
-Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 3CCF25805A;
- Thu, 12 Oct 2023 14:45:53 +0000 (GMT)
-Received: from slate16.aus.stglabs.ibm.com (unknown [9.61.148.23])
- by smtpav04.dal12v.mail.ibm.com (Postfix) with ESMTP;
- Thu, 12 Oct 2023 14:45:53 +0000 (GMT)
-From: Eddie James <eajames@linux.ibm.com>
-To: u-boot@lists.denx.de
-Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
- eajames@linux.ibm.com
-Subject: [PATCH v12 8/8] test: use a non system PCR for testing PCR extend
-Date: Thu, 12 Oct 2023 09:45:51 -0500
-Message-Id: <20231012144551.679551-9-eajames@linux.ibm.com>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20231012144551.679551-1-eajames@linux.ibm.com>
-References: <20231012144551.679551-1-eajames@linux.ibm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-59f6492b415so9229557b3.0
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:20:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1697124019; x=1697728819; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=k9BpA+GNTjgofFPrKqsQv89bdNIMvlRdPdaBw55iEjA=;
+ b=TXHcNePe6iUx/Z5zWNiDe256y/GewepPymrV49dRb2G2ZjfB1ofcLwqF+56ndWzE/u
+ QTYxunUlD0ws/RAK0yddOv6oLjZjfSOT8jN2PTXM1Yve4h0EvPEL9Eg50E4lI8fTRAg0
+ bttPGkcbjHJYDe+tRZ8FeiG3rhdXKD1CqceuU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697124019; x=1697728819;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=k9BpA+GNTjgofFPrKqsQv89bdNIMvlRdPdaBw55iEjA=;
+ b=AAjDhGHbEh+IS0VPmk3VkqOOryXvMoxPv2nALXEL/eSLsz24Nw720L3ZPA/DmBHTk4
+ JiV/q3oDSZh4ukmOetPUjD+Y35lQZd1J/RaYq3WD6e3zB8Q+wOD8Pwlo7FvC0ZL7alWs
+ vPILLrz41EokA0oClNnpSzqp2FvBlJIRCHxjJyoZFRwEog2P3aK2jDZKi5u2L3BGtqfN
+ nmWOtLrQ4Q3N4vi/G26l7QB/0C8ws6seWCAqsYVSFdLieko9RfXzdAZTEF6Qif8jL+Pd
+ Tbwu1uAfmDZso/F8bJIaFIL29WgYeA458Zlu7BEhf1RZccVKV0ceuiEH50eqapdZaE7b
+ nbXQ==
+X-Gm-Message-State: AOJu0YzG/uyxEIrpN9AKKZBDBf5bjb0jkhOZNGDDd5nrGH8HZn/CN+Lc
+ 8fObS9mu9LZUdWpQ2KlTnpMKbw==
+X-Google-Smtp-Source: AGHT+IEyOe5Lnfw6oGT2w2mgq/J/osvL1IJRXb16uR8s+FqUqeqktJ4a9cQUhBf6dF4qj82WIibO4A==
+X-Received: by 2002:a0d:d5c2:0:b0:59b:d33e:40e3 with SMTP id
+ x185-20020a0dd5c2000000b0059bd33e40e3mr13680796ywd.11.1697124019003; 
+ Thu, 12 Oct 2023 08:20:19 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
+ [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
+ by smtp.gmail.com with ESMTPSA id
+ t6-20020a81c246000000b00582fae92aa7sm22951ywg.93.2023.10.12.08.20.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Oct 2023 08:20:18 -0700 (PDT)
+Date: Thu, 12 Oct 2023 11:20:16 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Harald Seiler <hws@denx.de>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH 03/26] spl: fit: Fix entry point for SPL_LOAD_FIT_FULL
+Message-ID: <20231012152016.GO3119521@bill-the-cat>
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-4-seanga2@gmail.com>
+ <CAPnjgZ2RWZZbQMfF9_KUN+FsoVGoHKPq_sJ9=1GorNkrftwmbA@mail.gmail.com>
+ <96125bdb-8363-62a6-1702-53b4bb63dea2@gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: pxdHLgcxeTKbzZHSpnT-3Wly_mF2MdRX
-X-Proofpoint-ORIG-GUID: _dY247u5vbqhyFzudaddLKVw4Oo5RdyM
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-12_05,2023-10-12_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0
- mlxlogscore=999 priorityscore=1501 lowpriorityscore=0 suspectscore=0
- bulkscore=0 mlxscore=0 phishscore=0 malwarescore=0 impostorscore=0
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2309180000 definitions=main-2310120126
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="B1SYkk2Fh87Lg3fH"
+Content-Disposition: inline
+In-Reply-To: <96125bdb-8363-62a6-1702-53b4bb63dea2@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,91 +96,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-We currently use PCR 0 for testing the PCR read/extend functionality in
-our selftests.  How ever those PCRs are defined by the TCG spec for
-platform use.  For example if the tests run *after* the efi subsystem
-initialization, which extends PCRs 0 & 7 it will give a false positive.
+--B1SYkk2Fh87Lg3fH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-So let's switch over to a PCR which is more suitable and is defined for
-OS use.  It's worth noting that we are using PCR10 here, since PCR9 is
-used internally by U-Boot if we choose to measure the loaded DTB
+On Thu, Oct 12, 2023 at 12:28:22AM -0400, Sean Anderson wrote:
+> On 10/11/23 23:41, Simon Glass wrote:
+> > On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
+> > >=20
+> > > The entry point is not always the same as the load address. Use the v=
+alue
+> > > of the entrypoint property if it exists and is nonzero (following the
+> > > example of spl_load_simple_fit).
+> > >=20
+> > > Fixes: 8a9dc16e4d0 ("spl: Add full fitImage support")
+> > > Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> > > ---
+> > >=20
+> > >   common/spl/spl_fit.c | 4 +++-
+> > >   1 file changed, 3 insertions(+), 1 deletion(-)
+> >=20
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >=20
+> > The check for 0 makes me uneasy, but I can't imagine it being valid in =
+practice.
+>=20
+> This is mostly to match spl_load_simple_fit:
+>=20
+> 	/*
+> 	 * If a platform does not provide CONFIG_SYS_UBOOT_START, U-Boot's
+> 	 * Makefile will set it to 0 and it will end up as the entry point
+> 	 * here. What it actually means is: use the load address.
+> 	 */
+>=20
+> SYS_UBOOT_START doesn't seem to be set very often and defaults to TEXT_BA=
+SE. That
+> appears to be undefined on
+>=20
+> 	efi-x86_app64 efi-x86_app32 xtfpga 3c120 10m50
+>=20
+> but none of these platforms define SPL_LOAD_FIT. So maybe this is moot?
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- test/py/tests/test_tpm2.py | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+Moot for the last 3 there yes.  Not sure about the U-Boot as EFI app
+builds.
 
-diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
-index c2579fa02c..47392b87a9 100644
---- a/test/py/tests/test_tpm2.py
-+++ b/test/py/tests/test_tpm2.py
-@@ -239,7 +239,7 @@ def test_tpm2_dam_parameters(u_boot_console):
- def test_tpm2_pcr_read(u_boot_console):
-     """Execute a TPM2_PCR_Read command.
- 
--    Perform a PCR read of the 0th PCR. Must be zero.
-+    Perform a PCR read of the 10th PCR. Must be zero.
-     """
-     if is_sandbox(u_boot_console):
-         tpm2_sandbox_init(u_boot_console)
-@@ -247,7 +247,7 @@ def test_tpm2_pcr_read(u_boot_console):
-     force_init(u_boot_console)
-     ram = u_boot_utils.find_ram_base(u_boot_console)
- 
--    read_pcr = u_boot_console.run_command('tpm2 pcr_read 0 0x%x' % ram)
-+    read_pcr = u_boot_console.run_command('tpm2 pcr_read 10 0x%x' % ram)
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
- 
-@@ -257,7 +257,7 @@ def test_tpm2_pcr_read(u_boot_console):
-     updates = int(re.findall(r'\d+', str)[0])
- 
-     # Check the output value
--    assert 'PCR #0 content' in read_pcr
-+    assert 'PCR #10 content' in read_pcr
-     assert '00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00' in read_pcr
- 
- @pytest.mark.buildconfigspec('cmd_tpm_v2')
-@@ -275,19 +275,19 @@ def test_tpm2_pcr_extend(u_boot_console):
-     force_init(u_boot_console)
-     ram = u_boot_utils.find_ram_base(u_boot_console)
- 
--    read_pcr = u_boot_console.run_command('tpm2 pcr_read 0 0x%x' % (ram + 0x20))
-+    read_pcr = u_boot_console.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
-     str = re.findall(r'\d+ known updates', read_pcr)[0]
-     updates = int(re.findall(r'\d+', str)[0])
- 
--    u_boot_console.run_command('tpm2 pcr_extend 0 0x%x' % ram)
-+    u_boot_console.run_command('tpm2 pcr_extend 10 0x%x' % ram)
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
- 
-     # Read the value back into a different place so we can still use 'ram' as
-     # our zero bytes
--    read_pcr = u_boot_console.run_command('tpm2 pcr_read 0 0x%x' % (ram + 0x20))
-+    read_pcr = u_boot_console.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
-     assert 'f5 a5 fd 42 d1 6a 20 30 27 98 ef 6e d3 09 97 9b' in read_pcr
-@@ -297,11 +297,11 @@ def test_tpm2_pcr_extend(u_boot_console):
-     new_updates = int(re.findall(r'\d+', str)[0])
-     assert (updates + 1) == new_updates
- 
--    u_boot_console.run_command('tpm2 pcr_extend 0 0x%x' % ram)
-+    u_boot_console.run_command('tpm2 pcr_extend 10 0x%x' % ram)
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
- 
--    read_pcr = u_boot_console.run_command('tpm2 pcr_read 0 0x%x' % (ram + 0x20))
-+    read_pcr = u_boot_console.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
-     output = u_boot_console.run_command('echo $?')
-     assert output.endswith('0')
-     assert '7a 05 01 f5 95 7b df 9c b3 a8 ff 49 66 f0 22 65' in read_pcr
--- 
-2.39.3
+--=20
+Tom
 
+--B1SYkk2Fh87Lg3fH
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoDpUACgkQFHw5/5Y0
+tyxPhQv8CNZKLk4lO9BNHAeMW29NEZy6LdeY43sHX27fW5ddQS/CDuMyN+YupOpl
+27prgObMBHdjW0XXqHaTqFtBtWT89zScRwQD9zGjx8ahHS8FQldeXkHZegTE/gpl
+0AExvUTf+uv12QtD4Nwq1H4OuejuDX+G4ub/saAtZwoeybrUuTstvTcY+Z6Zm+M8
+i1/em8HB3Lf+0U32y6j0R4d8Rx6OP7HcaeHcEjaCI0inoHgPBa3zYpe1nNLRcuFJ
+gNRtzHo1dMXPmf/QNMC/QLNXFRz0KOzGxZPbWNP6RHj/wYeE4ql6RTYoX0+CKj19
+g26vg8cX5KrIWpbnKbuAPGPU79K1QjEdvwExDXFFD59NEA8Qus5iqJbdt8gxPHIZ
+eccPjT7dgnPTFNIE/4eqQ/rWuRe5gCKxQUAMEOXCkBLgEQmNBTnQos/czr1XYSfo
+RRwEa8AsHW90Rr7oMnkLtZqKcmmdKA0pT3LdSM0xInk2/VOady/rR9CAN/hnH3tw
+naEkXjtl
+=ojjb
+-----END PGP SIGNATURE-----
+
+--B1SYkk2Fh87Lg3fH--
