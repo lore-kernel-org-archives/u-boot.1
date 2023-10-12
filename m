@@ -4,82 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5423CDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 16:42:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9032CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 17:55:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 05BBD86689;
-	Thu, 12 Oct 2023 18:40:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EDC8C86B9E;
+	Thu, 12 Oct 2023 19:55:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aBr96cUx";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rHK3Dlr3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3774865A5; Thu, 12 Oct 2023 18:40:46 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 4C00E86C78; Thu, 12 Oct 2023 19:55:16 +0200 (CEST)
+Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
+ [IPv6:2607:f8b0:4864:20::112d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E05F86B7A
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 18:40:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C60C86A4C
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 19:55:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a7b3d33663so15844767b3.3
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 09:40:10 -0700 (PDT)
+Received: by mail-yw1-x112d.google.com with SMTP id
+ 00721157ae682-5a7af45084eso16534777b3.0
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 10:55:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697128809; x=1697733609; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697133305; x=1697738105; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XqzCwrEse8HbM/o+P6/7in/PxZoohmvLXO8yPin1WRg=;
- b=aBr96cUxWSliACz3Vgkz/XteFCY3ieOWsWcq5qQ4ATVrAAAwOXO6LVPtJNZX4m84eR
- xKb/anQAdUmkK8QfQjnR9Fpsrbv1exsMNVUcb/hYdoBBbAwifgUpTrx+c3cUzYeB+XgW
- gckdWX8clyrN7j1ZrurnFpSlTn6iEwBxM2eL0=
+ bh=9tsarRcW9RkBewLVQ8vwfX86XJ3S30a8ogfzukXN6DI=;
+ b=rHK3Dlr3iLrpSbqiu8e6H+7BL3tBSbdJ0d7WHbryRb0yhGPhMIbGyYQ26H/fpl/YRF
+ LeoAR0WgvhFo2IFHEXddlr28Fq6hyN50PA/gQaBYIWI24uuaIAj6hTkNMt6EDKvzbk49
+ gd98mmRud64T8jyZ359c4UnAkZQch9Qo8bLaA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697128809; x=1697733609;
+ d=1e100.net; s=20230601; t=1697133305; x=1697738105;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XqzCwrEse8HbM/o+P6/7in/PxZoohmvLXO8yPin1WRg=;
- b=QLxD0yeUO1PnkBix+Pl1RzGAcmT0Qyr2ugPHrJc5WAZoiaIwLW1WgtrP5jxMNaSjZk
- Ud09+90nLLnt8kSRDb7Z5bzBozn461OzzuH+ydaEcb721SELWPldKj2HdgznfHUS3rk1
- cEjPpj3lmic3If0HzjI+CD/yaY9I4yH6ntIA8ZqucWVJ1grHzEC75FB/D5AR8Qp/Xc/q
- LyWVKmlgLrkAe+/JPRRIcTOzP7HCQcE8Laa17A80pStQf6QbQi9vs7gCdpkdcpDFKP4I
- zeNv32b4mhbfoK8L0jrpqNJgjcI1FSPg2enYALNm6BXrH9jFvBHrRmdum+NHGOp0/Ivb
- 15uA==
-X-Gm-Message-State: AOJu0YxFbnnOtovGxRwBwyKfQEqq/yF4wb9IPxxhe6P+0C8e80fSuMnf
- 6c41jVJWiwS1bu8AugYi/6vtrA==
-X-Google-Smtp-Source: AGHT+IG8d+lburT5fcOVnNCFbZLTl2ekoxBDuZ34z840E63iFNamKLXVBfumlC2maoAiqxyf/JYCQg==
-X-Received: by 2002:a05:690c:f92:b0:5a7:e6fb:39b with SMTP id
- df18-20020a05690c0f9200b005a7e6fb039bmr5907968ywb.1.1697128809643; 
- Thu, 12 Oct 2023 09:40:09 -0700 (PDT)
+ bh=9tsarRcW9RkBewLVQ8vwfX86XJ3S30a8ogfzukXN6DI=;
+ b=kB2LX1KNXB1tkq8vehltiE7lYdw3i2WMP3e1KQ5ZVwGpH0rXYQXURvP2eYLa4iDkaY
+ FVw2niZkN9OpkMX6u7p+Hz6Cr1Te8tsn/NUV8ADbTVETbgOtiv8KPPHhJ2BeWaoBrSyU
+ WbIl6kVkCFLhfJXXXAJMxrRgrtvf1bdkZ4eQ/KM0CSNYtiV/KdEChUsfANIi4gqQapNY
+ ecieIOPRFuUw7z/5H2mqGkhnfPCxeUmaUIL6ljtiOfwoQoyRONqzIGWW7/vzHSQM1t1H
+ ygd0Xw35n7anK4r98DkU0L/zqTSbiqqLR5yv3ISkF03znUlYs193zOP2QRF5sJY9U83S
+ lqPA==
+X-Gm-Message-State: AOJu0Yx5F+43Foc203aC88sgdJ/KaVSFPmQvGW41rg0jmgYqr3GtH3BH
+ IOiq4Gtch5QIsPjFZPQdDAgkiQ==
+X-Google-Smtp-Source: AGHT+IF7woRDK4EiX7o3wAGBAocE6xZedPMiP3NjZExm3GuBj90p/huxb62gaY0ZWG87XFJ66p6XUA==
+X-Received: by 2002:a81:6e88:0:b0:5a2:15bc:b32c with SMTP id
+ j130-20020a816e88000000b005a215bcb32cmr27064418ywc.42.1697133305120; 
+ Thu, 12 Oct 2023 10:55:05 -0700 (PDT)
 Received: from bill-the-cat
- (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
- [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
+ (2603-6081-7b00-6400-5647-4a14-f04e-8d8d.res6.spectrum.com.
+ [2603:6081:7b00:6400:5647:4a14:f04e:8d8d])
  by smtp.gmail.com with ESMTPSA id
- w83-20020a0dd456000000b005a1cc37aff1sm72742ywd.20.2023.10.12.09.40.08
+ b63-20020a0dc042000000b005a815346d95sm113594ywd.71.2023.10.12.10.55.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 09:40:09 -0700 (PDT)
-Date: Thu, 12 Oct 2023 12:40:07 -0400
+ Thu, 12 Oct 2023 10:55:04 -0700 (PDT)
+Date: Thu, 12 Oct 2023 13:55:02 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- uboot-imx@nxp.com, Anatolij Gustschin <agust@denx.de>,
- Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
- Stefano Babic <sbabic@denx.de>
-Subject: Re: [PATCH 07/26] arm: imx: Check header before calling
- spl_load_imx_container
-Message-ID: <20231012164007.GP3119521@bill-the-cat>
-References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-8-seanga2@gmail.com>
+To: Apurva Nandan <a-nandan@ti.com>
+Cc: Hari Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Simon Glass <sjg@chromium.org>, Andrew Davis <afd@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Dasnavis Sabiya <sabiya.d@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Aradhya Bhatia <a-bhatia1@ti.com>, Bryan Brattlof <bb@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Roger Quadros <rogerq@kernel.org>, Jayesh Choudhary <j-choudhary@ti.com>,
+ Ralph Siemsen <ralph.siemsen@linaro.org>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, u-boot@lists.denx.de,
+ Sinthu Raja M <sinthu.raja@mistralsolutions.com>,
+ Udit Kumar <u-kumar1@ti.com>
+Subject: Re: [PATCH v4 09/16] board: ti: j784s4: Add board support for J784S4
+ EVM
+Message-ID: <20231012175502.GS3119521@bill-the-cat>
+References: <20231001165545.494212-1-a-nandan@ti.com>
+ <20231001165545.494212-10-a-nandan@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="yK1t2CK3l7/szin1"
+ protocol="application/pgp-signature"; boundary="sO0MYiWBplDnPCXv"
 Content-Disposition: inline
-In-Reply-To: <20231012015626.3487451-8-seanga2@gmail.com>
+In-Reply-To: <20231001165545.494212-10-a-nandan@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,49 +110,138 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---yK1t2CK3l7/szin1
+--sO0MYiWBplDnPCXv
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 11, 2023 at 09:56:07PM -0400, Sean Anderson wrote:
-> Make sure we have an IMX header before calling spl_load_imx_container,
-> since if we don't it will fail with -ENOENT. This allows us to fall back =
-to
-> legacy/raw images if they are also enabled.
->=20
-> To avoid too much bloat, Legacy/Raw images are disabled for the four
-> configs which only boot from raw MMC.
->=20
-> Future work could include merging imx_container.h with imx8image.h, since
-> they appear to define mostly the same structures.
->=20
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+On Sun, Oct 01, 2023 at 10:25:38PM +0530, Apurva Nandan wrote:
 
-So, since you mention bloat, this sounds like it's making functional
-changes here, but that's not intentional, yes?  Or to ask another way,
-is deneb disabling features here, to save space now that it can, or
-because they're growing "a bunch" and this reduces the growth?
+> Add board files for J784S4 EVM.
+[snip]
+> diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
+> new file mode 100644
+> index 0000000000..025079c6a8
+> --- /dev/null
+> +++ b/board/ti/j784s4/evm.c
+> @@ -0,0 +1,82 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Board specific initialization for J784S4 EVM
+> + *
+> + * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.co=
+m/
+> + *	Hari Nagalla <hnagalla@ti.com>
+> + *
+> + */
+> +
+> +#include <common.h>
+
+Here and elsewhere, do not add common.h and instead add what headers you
+need.
+
+> +#include <env.h>
+> +#include <fdt_support.h>
+> +#include <generic-phy.h>
+> +#include <image.h>
+> +#include <init.h>
+> +#include <log.h>
+> +#include <net.h>
+> +#include <asm/arch/hardware.h>
+> +#include <asm/gpio.h>
+> +#include <asm/io.h>
+> +#include <spl.h>
+> +#include <dm.h>
+> +#include <dm/uclass-internal.h>
+
+This is a huge list for such little code, please see what's actually
+needed.
+
+> +#include "../common/board_detect.h"
+> +
+> +#define board_is_j784s4_evm()	board_ti_k3_is("J784S4-EVM")
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +int board_init(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +int dram_init(void)
+> +{
+> +#ifdef CONFIG_PHYS_64BIT
+> +	gd->ram_size =3D 0x100000000;
+> +#else
+> +	gd->ram_size =3D 0x80000000;
+> +#endif
+> +
+> +	return 0;
+> +}
+> +
+> +phys_size_t board_get_usable_ram_top(phys_size_t total_size)
+> +{
+> +#ifdef CONFIG_PHYS_64BIT
+> +	/* Limit RAM used by U-Boot to the DDR low region */
+> +	if (gd->ram_top > 0x100000000)
+> +		return 0x100000000;
+> +#endif
+> +
+> +	return gd->ram_top;
+> +}
+> +
+> +int dram_init_banksize(void)
+> +{
+> +	/* Bank 0 declares the memory available in the DDR low region */
+> +	gd->bd->bi_dram[0].start =3D CFG_SYS_SDRAM_BASE;
+> +	gd->bd->bi_dram[0].size =3D 0x7fffffff;
+> +	gd->ram_size =3D 0x80000000;
+> +
+> +#ifdef CONFIG_PHYS_64BIT
+> +	/* Bank 1 declares the memory available in the DDR high region */
+> +	gd->bd->bi_dram[1].start =3D CFG_SYS_SDRAM_BASE1;
+> +	gd->bd->bi_dram[1].size =3D 0x77fffffff;
+> +	gd->ram_size =3D 0x800000000;
+> +#endif
+> +
+> +	return 0;
+> +}
+> +
+> +int board_late_init(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +void spl_board_init(void)
+> +{
+> +}
+
+So, lets split this in to two files, to make life easier on future
+J784S4-based platforms.  The basically dummy functions (empty/return 0)
+should go in "base.c" and everything that's about the EVM itself should
+go in evm.c.  This will make it easier to rm evm.c and add
+custom-platform.c that just sets the memory size and anything else
+that's really board specific.
 
 --=20
 Tom
 
---yK1t2CK3l7/szin1
+--sO0MYiWBplDnPCXv
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoIWMACgkQFHw5/5Y0
-tywd2gwAthj6mja9JzTSPCBQTJrfK2jq0ZRA57KroxE3Ulhpp0uHAxkAw0Vtq3BD
-iZzWR6h77bsNZ6dXoiTAkpK/pXopRHgDlf8xrXIsKFpLDh4EVhgIi2kFnEtSMv/o
-80nZZ2Gad3JWKkxoye3I8wBrh974/vM/CAmhQjgKQpAhQPZJc2QSfOSHgJm5m8kf
-eVcz6SZxGsoZIQkGavPWnuDMSzT/XcZ9b2G3gZkbSPobsqCqF8Bxdns78KXPCRry
-8Yn0ls+dUWOOigE6Oo32b0c67z2ZlHY8e+9p9UMweZ8bQNgxRmkWguHgZmQG4YNI
-QOwtQFVAlUAFTjQ/PLYZMKUL95qD+qAKn/JkIra0mUfYXHgsGq3J6ocA0RATncQ2
-J8aWG2lq3/wE155rVCbkbjf6ZE8QEss+79mVh1IFwKM+zz0i1YCuDO++bh73bkCj
-OrVvCjy1Jh7jk6X7035ZU9rMpri54adIgoL9u7rqn6xM+iJNxybATyvUE3mxGxge
-FPOt8g0j
-=VlEU
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoMvIACgkQFHw5/5Y0
+tyzIUgv/dO32gxPRUkc/Lax7n7b8kwqCOsvgxmbIKKSaLfKMvXuM5PUCkFkr+0zG
+nzBiyWmevFW6bHRmfnf6fN19vgAww+u+e/Fro7lX6FLEzY4kQNvJARmDpeJWyBgG
+qZy480ytshZFuVo/qLE0X5JOzvt6wnuJvxmszQGLLCJtm6qG8Bm6ulbnUTSZSfm6
+pgIJOsVSDNoJ6yhFIPaIJyzaTMrAod28Ux2Mz7qjZmPDc4poGijFuzJPSH7sOOvt
+htUcr+OZn4enhN4VmKcIyP1zh+hzmLDE0IXlLUT1EIIfnMYwoTw8pXb8nrOWfp/g
+Ka31pOIpjsNJeaIZ4smoeh/5riWGLVekeM68HLjPXwStNOm2QjjPn2ufBqSVXwSV
+cbAFS9wSNKltLavjdFZEYHrzME8Qrr5QsGjjwhR5YbI2uDt1Yd8k5khTBtCwId8T
+1j+QJXhH48sfi3VSwcT2iFubNYHd8dWeFeTlK7IWz0PvpjrGFjQvfAvShnsWxebF
+t2xMXaZT
+=C3BF
 -----END PGP SIGNATURE-----
 
---yK1t2CK3l7/szin1--
+--sO0MYiWBplDnPCXv--
