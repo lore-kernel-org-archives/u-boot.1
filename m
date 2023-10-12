@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45C82CDB482
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 20:52:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49DE0CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 20:57:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D45886D80;
-	Thu, 12 Oct 2023 22:52:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AFE7E86E08;
+	Thu, 12 Oct 2023 22:53:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LlyrCykK";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SosSrOv+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 370AD86D41; Thu, 12 Oct 2023 22:52:03 +0200 (CEST)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
+ id 2B76786E08; Thu, 12 Oct 2023 22:52:03 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36D6A86D3F
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 22:51:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 556CC86D2E
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 22:51:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-53e08b60febso1926840a12.1
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 13:51:34 -0700 (PDT)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-53de0d1dc46so2494266a12.3
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 13:51:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697143875; x=1697748675; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697143856; x=1697748656; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=5Xgm6nyt0SC0nGF1LiYJaxPwMuub2nN0P/uAew4uR5Y=;
- b=LlyrCykKoSE4VVIiDKbH0KhzQUyKlFMxvGB6uHBBf5PDSvheCwHCSRC8+/GWJh+9gE
- tlaXqevVWhQU21n5y4Hl+/LN0YQOumPvBZKhd4puak6S0wyTeZcNDB0vp4cx7nU4HkK0
- Lv72UlLfTIKX68lBblkU5vtjXnPa/O5ENfpwOhYwAl9jkgEaSnAuQPLBIXbh+HuDmZTA
- NLPT7nYLKuITbkTDpyM/9EfgAqay8t8UdIcMvoor52FRMKVHhiZGN31YhxWRB6rZuXNV
- Yx2SGlV/mOCQIeuMLcoX5ZdDTQKB6uys01Y/lJQCPtywbXT6EKorXr9H5qKCwXNv/kNH
- ieFg==
+ bh=qTUbnPiF/Ep1N8+qimp+9xfavR04lYwCdoD7i4NBlGY=;
+ b=SosSrOv+FrgRkASrDSLWXZEV3EKle/4JQo91zQJ8+aOOYv90BsOl5+L6y5+OHh61u+
+ fD8S6FRcfCT1LmHHJszoEBaIwRI3FOTZMEuJEnwOoN5kCA4vvGWmBTEjvJD48mhCp25/
+ FtbUH5Pl+s494nkkYILsORTqAHX8d52SyGa6cQFyxJpqmKz3ksY7wIWgEldG2gW0u12z
+ 3GIW6lYhFbEAdCoejxvKkpEA/HC4C03VPPgjO4FsOJ+SJrj574/pTHc1FKYRL3wltQ87
+ vtL0cSuTfvbiC8h6scn/jI+jbtGmHXod8s4qBdKHBHXFtHGasZnsbZvMhG4fpM4ZTlEO
+ Co8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697143875; x=1697748675;
+ d=1e100.net; s=20230601; t=1697143856; x=1697748656;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=5Xgm6nyt0SC0nGF1LiYJaxPwMuub2nN0P/uAew4uR5Y=;
- b=rsTEHd/yeh00l/FcY/4q96Q2zk8a0Oo0XbUU1aOu0OSzQ8QplMdqmOyRwViULDHq+w
- Ucbua7mzlc0wCI2DHTuai5rYEgFgOq4ziihoo1dS5ZyjDORQAbNCZRQmpPvxgMZHCs7+
- YW183LirSA4K8NG5mvNDaqBWMuJywqMYTxVfkAcvOJ31rSbUfn1O/vtUhQN5uXlPo5dJ
- RGADtnEiX8ckz8GsxXwK8+YzHKgND81YnY+sRwYJTN1Cse3fpNbXUn20MSTDleZyu9Xa
- J/qOCQzSdWxuOiU/yDgJ51bnWkw0uOaZ27QGgy25i3ENuTJ79Kp5RoDzP+iVVLT8W4Cj
- BpSg==
-X-Gm-Message-State: AOJu0Yzk4Cx615YsYBXfquZhTOdttZBpmR5O+ak8a1DbWTHs2ts0zqNY
- 7ptbbj1t+tRMFphZLOWBWcs=
-X-Google-Smtp-Source: AGHT+IFS2fQfyrPj4Gb6sEKEFY+VNMX0F0zftspX+X0WDg77dHKqLp+dXpU2F7Zf02cSdhZlxesRmA==
-X-Received: by 2002:a17:907:75e2:b0:9ba:14a3:7218 with SMTP id
- jz2-20020a17090775e200b009ba14a37218mr10899347ejc.25.1697143874814; 
- Thu, 12 Oct 2023 13:51:14 -0700 (PDT)
+ bh=qTUbnPiF/Ep1N8+qimp+9xfavR04lYwCdoD7i4NBlGY=;
+ b=s3LLTNprghNDj7HNiqCE4RAV00zDgAjGSttsPNkKWInFfWW3p+UCSL+2qFKpT/8FDL
+ alnQbg9wCSPvnEY1ekxfV99RD5W1J+qZTjHSUB3FBEK0XaS3COT+Zf6PaDURZ+nZGeMi
+ RGM7i76qp2/INtyUPnkSjwJW/Zfg/QMjg+Hm48T0q+SA07Hj6kTh7cVFuLyotu6UmfBI
+ lXwKKFMh0klQrSlZ13fGQVjnTKdP3ee81heALuX/yuwHUqgtlWjDlsW3cCm9rmM4r9iG
+ 2CqApP0/VZG0t/nA21xrWz44Mk4GECV7C2hmd3T/i/ENJiD/xQyXefJEcndN54jJa/my
+ GjMA==
+X-Gm-Message-State: AOJu0YyK4TZtgXv56ADiY+s7uALSdW6GtX8fq+b9S3IjzJVgGURH5mfi
+ /GYaI3mgy8i7yrUqeDV8XivHrQBoWMKw8Q==
+X-Google-Smtp-Source: AGHT+IGXqaAg3NQcopGUsD9a3ccFLYf+6rJKSFIj2kAC/xT79vo+lMY7Ziup/SA7GbV+MAP1QRXFkw==
+X-Received: by 2002:a17:906:109e:b0:9b2:a7f2:f819 with SMTP id
+ u30-20020a170906109e00b009b2a7f2f819mr21317796eju.31.1697143856351; 
+ Thu, 12 Oct 2023 13:50:56 -0700 (PDT)
 Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
  by smtp.gmail.com with ESMTPSA id
- ks8-20020a170906f84800b0099b6becb107sm11621439ejb.95.2023.10.12.13.51.14
+ p16-20020a17090628d000b0099bd5d28dc4sm11543349ejd.195.2023.10.12.13.50.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Oct 2023 13:51:14 -0700 (PDT)
-Message-ID: <94255fe4-ee9d-2e31-1bfa-d6270ebcd104@gmail.com>
-Date: Thu, 12 Oct 2023 22:51:13 +0200
+ Thu, 12 Oct 2023 13:50:56 -0700 (PDT)
+Message-ID: <2824a577-02f9-5904-d7af-cb4b23223b45@gmail.com>
+Date: Thu, 12 Oct 2023 22:50:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 2/7] rockchip: dm: prepare rkmtd UCLASS
+Subject: [PATCH v3 1/7] mtd: nand: raw: rockchip_nfc: add NAND_SKIP_BBTSCAN
+ option
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
  dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
  u-boot@lists.denx.de
-References: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
+References: <>
 Content-Language: en-US
-In-Reply-To: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
+In-Reply-To: <>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,63 +97,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Prepare a rkmtd UCLASS in use for writing Rockchip boot blocks
-in combination with existing userspace tools and rockusb command.
+On Rockchip SoCs the first boot stages are written on NAND
+with help of manufacturer software that uses a different format
+then the MTD framework. Skip the automatic BBT scan with the
+NAND_SKIP_BBTSCAN option to be able to pass the driver probe
+function and to let the original data unchanged.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
- disk/part.c                | 4 ++++
- drivers/block/blk-uclass.c | 1 +
- include/dm/uclass-id.h     | 1 +
- 3 files changed, 6 insertions(+)
+ drivers/mtd/nand/raw/Kconfig        | 9 +++++++++
+ drivers/mtd/nand/raw/rockchip_nfc.c | 3 +++
+ 2 files changed, 12 insertions(+)
 
-diff --git a/disk/part.c b/disk/part.c
-index 85244b09f359..36b88205eca7 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -197,6 +197,7 @@ void dev_print(struct blk_desc *desc)
- 	case UCLASS_PVBLOCK:
- 	case UCLASS_HOST:
- 	case UCLASS_BLKMAP:
-+	case UCLASS_RKMTD:
- 		printf ("Vendor: %s Rev: %s Prod: %s\n",
- 			desc->vendor,
- 			desc->revision,
-@@ -330,6 +331,9 @@ static void print_part_header(const char *type, struct blk_desc *desc)
- 	case UCLASS_PVBLOCK:
- 		puts("PV BLOCK");
- 		break;
-+	case UCLASS_RKMTD:
-+		puts("RKMTD");
-+		break;
- 	case UCLASS_VIRTIO:
- 		puts("VirtIO");
- 		break;
-diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-index f126547cc7e6..30ad5bbb0024 100644
---- a/drivers/block/blk-uclass.c
-+++ b/drivers/block/blk-uclass.c
-@@ -36,6 +36,7 @@ static struct {
- 	{ UCLASS_VIRTIO, "virtio" },
- 	{ UCLASS_PVBLOCK, "pvblock" },
- 	{ UCLASS_BLKMAP, "blkmap" },
-+	{ UCLASS_RKMTD, "rkmtd" },
- };
+diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index d624589a892b..72547f00fbec 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -611,6 +611,15 @@ config ROCKCHIP_NAND
+ 	    NFC v800: RK3308, RV1108
+ 	    NFC v900: PX30, RK3326
 
- static enum uclass_id uclass_name_to_iftype(const char *uclass_idname)
-diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-index 0432c95c9edc..2fc672df0a3a 100644
---- a/include/dm/uclass-id.h
-+++ b/include/dm/uclass-id.h
-@@ -120,6 +120,7 @@ enum uclass_id {
- 	UCLASS_REGULATOR,	/* Regulator device */
- 	UCLASS_REMOTEPROC,	/* Remote Processor device */
- 	UCLASS_RESET,		/* Reset controller device */
-+	UCLASS_RKMTD,		/* Rockchip MTD device */
- 	UCLASS_RNG,		/* Random Number Generator */
- 	UCLASS_RTC,		/* Real time clock device */
- 	UCLASS_SCMI_AGENT,	/* Interface with an SCMI server */
++config ROCKCHIP_NAND_SKIP_BBTSCAN
++	bool "Skip the automatic BBT scan with Rockchip NAND controllers"
++	depends on ROCKCHIP_NAND
++	default n
++	help
++	  Skip the automatic BBT scan with the NAND_SKIP_BBTSCAN
++	  option when data content is not in MTD format or
++	  must remain unchanged.
++
+ config TEGRA_NAND
+ 	bool "Support for NAND controller on Tegra SoCs"
+ 	depends on ARCH_TEGRA
+diff --git a/drivers/mtd/nand/raw/rockchip_nfc.c b/drivers/mtd/nand/raw/rockchip_nfc.c
+index 6ad51df4acff..df6742c2f9bb 100644
+--- a/drivers/mtd/nand/raw/rockchip_nfc.c
++++ b/drivers/mtd/nand/raw/rockchip_nfc.c
+@@ -981,6 +981,9 @@ static int rk_nfc_nand_chip_init(ofnode node, struct rk_nfc *nfc, int devnum)
+ 	chip->bbt_options = NAND_BBT_USE_FLASH | NAND_BBT_NO_OOB;
+ 	chip->options |= NAND_NO_SUBPAGE_WRITE | NAND_USE_BOUNCE_BUFFER;
+
++	if (IS_ENABLED(CONFIG_ROCKCHIP_NAND_SKIP_BBTSCAN))
++		chip->options |= NAND_SKIP_BBTSCAN;
++
+ 	rk_nfc_hw_init(nfc);
+ 	ret = nand_scan_ident(mtd, nsels, NULL);
+ 	if (ret)
 --
 2.39.2
 
