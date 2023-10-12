@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AE7BCDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CE28CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:15:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A83786E16;
+	by phobos.denx.de (Postfix) with ESMTP id E0FBF86E29;
 	Thu, 12 Oct 2023 03:57:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VbSqUvyG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H0aDHTLN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 946E786DD6; Thu, 12 Oct 2023 03:57:01 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 0B69580422; Thu, 12 Oct 2023 03:57:15 +0200 (CEST)
+Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
+ [IPv6:2607:f8b0:4864:20::a31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B8FF86DB1
+ by phobos.denx.de (Postfix) with ESMTPS id 65F8186DD9
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:56:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-773ac11de71so28018085a.2
+Received: by mail-vk1-xa31.google.com with SMTP id
+ 71dfb90a1353d-49ab0641e77so180813e0c.0
  for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:56:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697075791; x=1697680591; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697075794; x=1697680594; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=f/wM0vKc1u1bRKoFxFA8aALHzY064sRXE1bRPQ5N9I4=;
- b=VbSqUvyGJS6DrnoXRtaQ0zzeCBYZyqXw90C7leOSIF+CUjC5PQ9FZpzFbFz9By05Gw
- 2c0Mp3hd4hsyBDhbWcMlzzGY/i5LEBEdQGh/7K0xZxvJXfa97pvKMjRsbxZSnA+g4WFl
- aKDWDlQse4krqf1uXgu18IMcJK9EiBR1JuusCWwG8gp1kPBze0t+mEt/ZrEjnRxTRJKa
- 3q8M4S9MFexWIr1j6pMZV2SQUBj1KSEP8v8KqiwsRV9GbF3vbcQ9sHzOZG0ghzXfa6aZ
- 2k3ys8iWWRdQQBxf+f68OZqZrApEgxioi/gWISbkzCeBOKnydC9tM/s4WLCtTGxhC4OY
- YmXA==
+ bh=XD7DLONNYdZgFVBf1518puCx11kL7h9mKg+F6CpzGpo=;
+ b=H0aDHTLNuerkhaeYVAA20Yd8t39FLz9H1BL+7+9vNBMK+ggIibKwS/6znK31r/cRf5
+ 685rrBBQr6uHtuOiP9WV/UW9go0tUfmxl2PCyQeT1vNIcdKK4H0O+FrHLHN7jOdxFtqd
+ VqCqs+utNHgFP8ZPL2rCeL0RBhk6pf4hrFHwFGMY4ZnjQAmeCsu9piBI3yWcXbXcR0hE
+ uX4EeA5sXJUc45GsYsZ3p0fmAv8bQYdFleSVdOY4t8Frr6mVQuN5DF42f9hrnJBtRCJX
+ QxYtYh8Vth1x5rzcVoac/L5DWO4qgJs0jUDc2toRAlLEgBhlqn5Xafc6bDfoORdouzXu
+ 319Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697075791; x=1697680591;
+ d=1e100.net; s=20230601; t=1697075794; x=1697680594;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=f/wM0vKc1u1bRKoFxFA8aALHzY064sRXE1bRPQ5N9I4=;
- b=t29WTWpecRFM7WdnX1rPMXJjUpYKyLM0PLD+vs0BUpObfOJG3y1PsL6J3rtmEwqDfp
- K2GhwbwhC1NGuX4DKxXaRDuS+zCARRfmALwqcy+wLs3TkWz4Erfvl+A91hj2V4UHlJFv
- 4UY/TR+i3+AwM8zBBBebU8nQSDwM3K/3ETLMC2/AoieUbVUZ+hsLeHXVb09mR/qQzZgZ
- PKWsxrseVs2i3keETBADlOH1MNrWtLx0uTgwp2VtsXHJjHggV1m1ho1AnYBPAoq/liMf
- txL/5BDYriood83gaMmW9YUgmvYVfZ85gHkSYKS7pYCCJdt9ma9P7wPlwkHsKZSBwWjk
- N1OQ==
-X-Gm-Message-State: AOJu0YyB/rgaG4FesamgOp5nLQmS0QZ4oAGLToEmQMh9uLqUaSpY6yn/
- ysiwyeXPpP8D8fU3HkS7SvVS2yU7dOBVWw==
-X-Google-Smtp-Source: AGHT+IFQppmvY2C12HnK2cvZ7egyZy9sLj01gNWdpdu3rFcPAgbIwsh4dyOnrQkMsz+gURyDffbBFg==
-X-Received: by 2002:a05:620a:4791:b0:775:c335:1ee8 with SMTP id
- dt17-20020a05620a479100b00775c3351ee8mr24173894qkb.54.1697075791136; 
- Wed, 11 Oct 2023 18:56:31 -0700 (PDT)
+ bh=XD7DLONNYdZgFVBf1518puCx11kL7h9mKg+F6CpzGpo=;
+ b=SKdJLQ3vi+DBlQQYncLwAFNbaW9I9Ameiv2FaTwyYvZus2HKm04G/QnaBjWpv1PI58
+ P8vnd05+BQuWIk2svok2iyxqCRMCaaBd8KTUqqU4O07etquYk2SUoZWViUle4h78L15a
+ Z3BJ65r02BtOtIdVEFrSRxeLS3SdY9HQjiWkH/9dQUvFseF4T0RfVW8fS+wwIdRBeJXX
+ jvI5WV6uxUba8bEqGRK9SiguHZQXOn+rcuModVoBNF9W53je0xE+5Qm+98JQuLwF7r2m
+ A0029D6gAgzGW+A1k83uQRMjpigFwVR0d9Y1nXodRZez8RRBXfw0KvOMv7+q/hOPiA6O
+ EASw==
+X-Gm-Message-State: AOJu0YybB4+rmDJWVOD7mwRrAlGOY/zroZIhSUov9IUlxXrd4xyVKbGw
+ muLo4QRPoq3Bdc2IHqNDu2MofPVTtcGMww==
+X-Google-Smtp-Source: AGHT+IH2qaKOM0hC+vY4pqCtsU1Do87hLwi9UQqTmljBtXXvuESCBxGeDTj/HA8c4Ozw55D1XACcJQ==
+X-Received: by 2002:a1f:ebc4:0:b0:49d:c216:8736 with SMTP id
+ j187-20020a1febc4000000b0049dc2168736mr19827110vkh.3.1697075794560; 
+ Wed, 11 Oct 2023 18:56:34 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- pj40-20020a05620a1da800b007743360b3fasm5666775qkn.34.2023.10.11.18.56.30
+ 19-20020a05620a06d300b0076f18be9a64sm5661802qky.81.2023.10.11.18.56.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 18:56:30 -0700 (PDT)
+ Wed, 11 Oct 2023 18:56:34 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Roger Quadros <rogerq@kernel.org>
-Subject: [PATCH 02/26] spl: nor: Don't allocate header on stack
-Date: Wed, 11 Oct 2023 21:56:02 -0400
-Message-Id: <20231012015626.3487451-3-seanga2@gmail.com>
+ uboot-imx@nxp.com, Fabio Estevam <festevam@gmail.com>,
+ Nitin Garg <nitin.garg@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@denx.de>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH 05/26] arm: imx: Add newlines after error messages
+Date: Wed, 11 Oct 2023 21:56:05 -0400
+Message-Id: <20231012015626.3487451-6-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231012015626.3487451-1-seanga2@gmail.com>
 References: <20231012015626.3487451-1-seanga2@gmail.com>
@@ -95,65 +96,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-spl_image_info.name contains a reference to legacy_img_hdr. If we allocate
-the latter on the stack, it will be clobbered after we return. This was
-addressed for NAND back in 06377c5a1fc ("spl: spl_legacy: Fix NAND boot on
-OMAP3 BeagleBoard"), but that commit didn't fix NOR.
+These error messages are missing newlines. Add them.
 
+Fixes: 6e81ca220e0 ("imx: parse-container: Use malloc for container processing")
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- common/spl/spl_nor.c | 11 ++++-------
- 1 file changed, 4 insertions(+), 7 deletions(-)
+ arch/arm/mach-imx/parse-container.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/common/spl/spl_nor.c b/common/spl/spl_nor.c
-index 79d4f1d7aa8..c141a9ae629 100644
---- a/common/spl/spl_nor.c
-+++ b/common/spl/spl_nor.c
-@@ -26,7 +26,7 @@ unsigned long __weak spl_nor_get_uboot_base(void)
- static int spl_nor_load_image(struct spl_image_info *spl_image,
- 			      struct spl_boot_device *bootdev)
- {
--	__maybe_unused const struct legacy_img_hdr *header;
-+	struct legacy_img_hdr *header;
- 	__maybe_unused struct spl_load_info load;
- 
- 	/*
-@@ -41,7 +41,7 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- 		 * Load Linux from its location in NOR flash to its defined
- 		 * location in SDRAM
- 		 */
--		header = (const struct legacy_img_hdr *)CONFIG_SYS_OS_BASE;
-+		header = (void *)CONFIG_SYS_OS_BASE;
- #ifdef CONFIG_SPL_LOAD_FIT
- 		if (image_get_magic(header) == FDT_MAGIC) {
- 			int ret;
-@@ -91,8 +91,8 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- 	 * Load real U-Boot from its location in NOR flash to its
- 	 * defined location in SDRAM
- 	 */
--#ifdef CONFIG_SPL_LOAD_FIT
- 	header = (const struct legacy_img_hdr *)spl_nor_get_uboot_base();
-+#ifdef CONFIG_SPL_LOAD_FIT
- 	if (image_get_magic(header) == FDT_MAGIC) {
- 		debug("Found FIT format U-Boot\n");
- 		load.bl_len = 1;
-@@ -111,14 +111,11 @@ static int spl_nor_load_image(struct spl_image_info *spl_image,
- 
- 	/* Legacy image handling */
- 	if (IS_ENABLED(CONFIG_SPL_LEGACY_IMAGE_FORMAT)) {
--		struct legacy_img_hdr hdr;
--
- 		load.bl_len = 1;
- 		load.read = spl_nor_load_read;
--		spl_nor_load_read(&load, spl_nor_get_uboot_base(), sizeof(hdr), &hdr);
- 		return spl_load_legacy_img(spl_image, bootdev, &load,
- 					   spl_nor_get_uboot_base(),
--					   &hdr);
-+					   header);
+diff --git a/arch/arm/mach-imx/parse-container.c b/arch/arm/mach-imx/parse-container.c
+index d7275a58c17..c5df78d1c58 100644
+--- a/arch/arm/mach-imx/parse-container.c
++++ b/arch/arm/mach-imx/parse-container.c
+@@ -85,13 +85,13 @@ static int read_auth_container(struct spl_image_info *spl_image,
  	}
  
- 	return -EINVAL;
+ 	if (container->tag != 0x87 && container->version != 0x0) {
+-		printf("Wrong container header");
++		printf("Wrong container header\n");
+ 		ret = -ENOENT;
+ 		goto end;
+ 	}
+ 
+ 	if (!container->num_images) {
+-		printf("Wrong container, no image found");
++		printf("Wrong container, no image found\n");
+ 		ret = -ENOENT;
+ 		goto end;
+ 	}
 -- 
 2.37.1
 
