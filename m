@@ -4,47 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98AE3CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 05:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAE4ECDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 05:46:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4362486E3D;
-	Thu, 12 Oct 2023 07:38:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id A254B86DC7;
+	Thu, 12 Oct 2023 07:46:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C4E4F86E40; Thu, 12 Oct 2023 07:38:23 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9114586D3D
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 07:38:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=randolph@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 39C5cCEU074513;
- Thu, 12 Oct 2023 13:38:12 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Thu, 12 Oct 2023 13:38:08 +0800
-From: Randolph <randolph@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
- <peterlin@andestech.com>, Randolph <randolph@andestech.com>
-Subject: [PATCH] riscv: andes: Rearrange Andes PLICSW to single-bit-per-hart
- strategy
-Date: Thu, 12 Oct 2023 13:35:34 +0800
-Message-ID: <20231012053534.2859887-1-randolph@andestech.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AqIoPujq";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 260F286D3D; Thu, 12 Oct 2023 07:46:22 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D6BF086DC7
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 07:46:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39C5k1co101333;
+ Thu, 12 Oct 2023 00:46:01 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1697089561;
+ bh=ahp+NzXTYH0kfNrp7Sj+kTAkA+vYijcBgaGcJvTdjPw=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=AqIoPujqCRU3uRg0Av5FgJDRjsI3F9yWTJKuippGboXFy22AE0NN0JY+6u4v3erqZ
+ Ji4N40wyTNw0nCx8Uvz3RjxfghPE77YIKnjVVWUHxOJOcb1BnKX41T21EURd9bnGze
+ QeH7cy0gkIUxe21hp8GRvVOKobdzn7GiCB1N/2Cc=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39C5k1Mh032104
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 12 Oct 2023 00:46:01 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
+ Oct 2023 00:46:01 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 12 Oct 2023 00:46:01 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39C5k0G6114446;
+ Thu, 12 Oct 2023 00:46:01 -0500
+Date: Thu, 12 Oct 2023 11:16:00 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Simon Glass <sjg@chromium.org>
+CC: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, <u-boot@lists.denx.de>,
+ Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri <praneeth@ti.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon <nm@ti.com>
+Subject: Re: [PATCH v4 1/8] binman: ti-secure: Add support for firewalling
+ entities
+Message-ID: <20231012054600.d26hx63xaedl3dsk@ula0497581>
+References: <20231011-binman-firewalling-v4-0-a08085d300e9@ti.com>
+ <20231011-binman-firewalling-v4-1-a08085d300e9@ti.com>
+ <CAPnjgZ3NG+8-VLi5i7+h4t1aP_qa1Va1ZJdhiJzfVyd7jrHPmA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 39C5cCEU074513
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3NG+8-VLi5i7+h4t1aP_qa1Va1ZJdhiJzfVyd7jrHPmA@mail.gmail.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,92 +85,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Source hart information is not necessary in IPI, so we could
-use single-bit-per-hart strategy to rearrange PLICSW mapping.
+Hi Simon,
 
-Bit 0 of Interrupt Pending Bits is hardwired to 0.
-Therefore, we use bit 1 to send IPI to hart 0,
-bit 2 to hart 1, ..., and so on.
+On 20:41-20231011, Simon Glass wrote:
+> Hi Manorit,
+> 
+> On Tue, 10 Oct 2023 at 23:25, Manorit Chawdhry <m-chawdhry@ti.com> wrote:
+> >
+> > We can now firewall entities while loading them through our secure
+> > entity TIFS, the required information should be present in the
+> > certificate that is being parsed by TIFS.
+> >
+> > The following commit adds the support to enable the certificates to be
+> > generated if the firewall configurations are present in the binman dtsi
+> > nodes.
+> >
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> >  tools/binman/btool/openssl.py   | 16 +++++++-
+> >  tools/binman/etype/ti_secure.py | 90 +++++++++++++++++++++++++++++++++++++++++
+> >  tools/binman/etype/x509_cert.py |  3 +-
+> >  3 files changed, 106 insertions(+), 3 deletions(-)
+> >
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> I'm still a little worried about the error reporting if the user
+> leaves out a property. Does it do the right thing?
+> 
 
-Signed-off-by: Randolph <randolph@andestech.com>
----
- arch/riscv/lib/andes_plicsw.c | 24 +++++++++++-------------
- 1 file changed, 11 insertions(+), 13 deletions(-)
+I did make a test also along the lines that would check all the
+firewalling properties and just auth-in-place isn't checked at this
+stage and people could end up adding the firewalling node without
+auth-in-place. Do you want to cover that test case as well? Regarding
+the other firewalling properties ( immitating the test by removing
+"id"), We get this: 
 
-diff --git a/arch/riscv/lib/andes_plicsw.c b/arch/riscv/lib/andes_plicsw.c
-index 7518408089..6fd49e873b 100644
---- a/arch/riscv/lib/andes_plicsw.c
-+++ b/arch/riscv/lib/andes_plicsw.c
-@@ -22,7 +22,7 @@
- #include <linux/err.h>
- 
- /* pending register */
--#define PENDING_REG(base, hart)	((ulong)(base) + 0x1000 + ((hart) / 4) * 4)
-+#define PENDING_REG(base)	((ulong)(base) + 0x1000)
- /* enable register */
- #define ENABLE_REG(base, hart)	((ulong)(base) + 0x2000 + (hart) * 0x80)
- /* claim register */
-@@ -30,10 +30,11 @@
- /* priority register */
- #define PRIORITY_REG(base)	((ulong)(base) + PLICSW_PRIORITY_BASE)
- 
--#define ENABLE_HART_IPI         (0x01010101)
--#define SEND_IPI_TO_HART(hart)  (0x1 << (hart))
-+/* Bit 0 of PLIC-SW pending array is hardwired to zero, so we start from bit 1 */
-+#define FIRST_AVAILABLE_BIT	0x2
-+#define SEND_IPI_TO_HART(hart)	(FIRST_AVAILABLE_BIT << (hart))
- #define PLICSW_PRIORITY_BASE        0x4
--#define PLICSW_INTERRUPT_PER_HART   0x8
-+#define PLICSW_INTERRUPT_PER_HART   0x1
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -41,9 +42,8 @@ static int enable_ipi(int hart)
- {
- 	unsigned int en;
- 
--	en = ENABLE_HART_IPI << hart;
-+	en = FIRST_AVAILABLE_BIT << hart;
- 	writel(en, (void __iomem *)ENABLE_REG(gd->arch.plicsw, hart));
--	writel(en, (void __iomem *)ENABLE_REG(gd->arch.plicsw + 0x4, hart));
- 
- 	return 0;
- }
-@@ -75,7 +75,7 @@ int riscv_init_ipi(void)
- 	ret = uclass_find_first_device(UCLASS_CPU, &dev);
- 	if (ret)
- 		return ret;
--	else if (!dev)
-+	if (!dev)
- 		return -ENODEV;
- 
- 	ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
-@@ -105,10 +105,9 @@ int riscv_init_ipi(void)
- 
- int riscv_send_ipi(int hart)
- {
--	unsigned int ipi = (SEND_IPI_TO_HART(hart) << (8 * gd->arch.boot_hart));
-+	unsigned int ipi = SEND_IPI_TO_HART(hart);
- 
--	writel(ipi, (void __iomem *)PENDING_REG(gd->arch.plicsw,
--				gd->arch.boot_hart));
-+	writel(ipi, (void __iomem *)PENDING_REG(gd->arch.plicsw));
- 
- 	return 0;
- }
-@@ -125,10 +124,9 @@ int riscv_clear_ipi(int hart)
- 
- int riscv_get_ipi(int hart, int *pending)
- {
--	unsigned int ipi = (SEND_IPI_TO_HART(hart) << (8 * gd->arch.boot_hart));
-+	unsigned int ipi = SEND_IPI_TO_HART(hart);
- 
--	*pending = readl((void __iomem *)PENDING_REG(gd->arch.plicsw,
--						     gd->arch.boot_hart));
-+	*pending = readl((void __iomem *)PENDING_REG(gd->arch.plicsw));
- 	*pending = !!(*pending & ipi);
- 
- 	return 0;
--- 
-2.34.1
+[..]
+  AR      spl/common/spl/built-in.o
+  LD      spl/u-boot-spl
+  OBJCOPY spl/u-boot-spl-nodtb.bin
+  SYM     spl/u-boot-spl.sym
+  CAT     spl/u-boot-spl-dtb.bin
+  COPY    spl/u-boot-spl.bin
+  BINMAN  .binman_stamp
+binman: id can't be None in firewall node
 
+> Regards,
+> Simon
