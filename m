@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DB5DCDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 15:44:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E87ECDB482
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 15:44:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4773186E54;
-	Thu, 12 Oct 2023 17:37:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3AF9A86E6C;
+	Thu, 12 Oct 2023 17:37:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PFfbOdOT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xp9BMaJ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D154286DC7; Thu, 12 Oct 2023 17:30:43 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id D920386EC7; Thu, 12 Oct 2023 17:30:47 +0200 (CEST)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABDE786EB3
+ by phobos.denx.de (Postfix) with ESMTPS id ABAE986EBB
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 17:30:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-9b64b98656bso180028666b.0
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5347e657a11so1793700a12.2
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:30:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697124564; x=1697729364; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697124553; x=1697729353; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z2MoENPAX7DcvpCw/M+xay2reb29o0LBofFZ/Oc5UJM=;
- b=PFfbOdOTml9DW0tYrJPSkb2+n+IbGgq2KfLrtcBpOSAmMPLYNMekLLhyjuneYQ9Uom
- 68+WIdegXT7nrHM/CaAq5b3jQ1s3ymNhFNVwAr3cFNhDhEKGSrB4EvagTHBIPNNHKrNs
- jLOwU0XQT6WddsihU7vzFL1UQeqY1Tb9PbevA=
+ bh=TxcREo6TACB2HoVvP1NZcnSTlM9wgAmYYWMzJk17Vjo=;
+ b=Xp9BMaJ2Q2GKISCeNxk0YCMWHFAkeem65Ah0OpgcPfKBkJnhtmY8l8UuaivS7aaE84
+ GdEBJUxTyIzYVX7iEAEtfcDQlc+3X/7ErY9kKP/tjPKHArI+0O+FaAMzi8dzUkY2tVss
+ m9GorrnS8v+CeOLr1B4d2ni40U8Jgz2JZhDis=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697124564; x=1697729364;
+ d=1e100.net; s=20230601; t=1697124553; x=1697729353;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=z2MoENPAX7DcvpCw/M+xay2reb29o0LBofFZ/Oc5UJM=;
- b=HjS8xi1KkjkodbsITLMMSt02uIAGV4eF4Q9/aeIrbbahi25SP8hm7YVm0FtSyGmroE
- XAdNFCK0wtfirHc/HaDLl5ZKxPe6hbDAyQ6IKwghlPEpc2ggOW6qD/J+wEaVmt/yrcQk
- +EqUekjiCxx1LdiXsvWqjqWQxV2cCvn2V4x0HYtqWOptvYK4ellorJMkbmxLbY8cLTbD
- 02kMC3SFJYWDGtjN71XAgmgZXEdEB3ehBrM53AtCfZNwNGFsz+k/Q8PCOq1AQR7NaGwP
- nR89JKmJjd2M22ZOBaRLinyvMZY2xgKfk9C4A7NjReyIPQrsD12lhgNyJtYO7Um088NA
- 7+xQ==
-X-Gm-Message-State: AOJu0YxAijlMrx26mMjflnHEn6/Jz+i3pTiermOmyIOQzSMHF5nIg0tC
- Zg9vLbd5eA7BYpn3/hJ1ETCGcYAPJMmDUpcvhG6mwA==
-X-Google-Smtp-Source: AGHT+IHDRno205rRz6zO+ppfcndi9tLuU05EMwis7SVgh49E+pyD/Aq81b3XN1q8c428I4ePA+vwTYSEBi5q5+x9eQY=
-X-Received: by 2002:a17:906:220f:b0:9ba:fb9:d334 with SMTP id
- s15-20020a170906220f00b009ba0fb9d334mr13956686ejs.13.1697124564113; Thu, 12
- Oct 2023 08:29:24 -0700 (PDT)
+ bh=TxcREo6TACB2HoVvP1NZcnSTlM9wgAmYYWMzJk17Vjo=;
+ b=YeRQWBNDQmny4kd9Ol/zNbAXn1iE0goRtDDNq+oIuPHG1p0llHjJvpo35kvyYDsZy4
+ uRTIdZyazFqcOaMRj/BXWFlXLuiZFqVLzg+qMb/1PADVHaYhwDk2vXxbe4n8kzUsRkMj
+ x78iLzrFPBbwym0APp4xRA67fz0BV3NQIaSRuFrgSDzLURkUQiPIjLCc4oyfCNMfuF0s
+ x9wjVEYdF/9KlYwvxazxomYzQoWEaDxFgGn1284tVAobe2EItpAQONoXXs5k71JvUlRQ
+ nw/skSyQyXNrP5P+makTBnA4aZcM3yyHp4t0WTDTrrtx3o4t5vcXGJXI/s5e+ezLMVEv
+ +c3w==
+X-Gm-Message-State: AOJu0YwirzjiIFxBYVOUblojBlGH+YtdZhWLJT33oeNgZhVTIJQlvL2y
+ cTaUnWTQ0TzFU+I4ZED/dAG9vPa5qdmsQLKiBJfpkYBZv2+B+7vvKOs=
+X-Google-Smtp-Source: AGHT+IEEpjxdL1tXIClxH59TvA1wOFMQwnFJTUvkjMvP2SYljj97zwr4XBTs9hiqkE3PEILAS75Nlc9bsMGzpRsXmJM=
+X-Received: by 2002:a17:906:1011:b0:9ae:513d:47bd with SMTP id
+ 17-20020a170906101100b009ae513d47bdmr24314863ejm.26.1697124553319; Thu, 12
+ Oct 2023 08:29:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231012144551.679551-1-eajames@linux.ibm.com>
- <20231012144551.679551-7-eajames@linux.ibm.com>
-In-Reply-To: <20231012144551.679551-7-eajames@linux.ibm.com>
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-2-seanga2@gmail.com>
+ <CAPnjgZ07k1UeQDT6Ci9Dhtz6oKajGKoP5zr3-55UNHaJsN28=A@mail.gmail.com>
+ <8611e3da-7232-1149-8f7b-7106b6cc9d0b@gmail.com>
+In-Reply-To: <8611e3da-7232-1149-8f7b-7106b6cc9d0b@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 12 Oct 2023 08:29:01 -0700
-Message-ID: <CAPnjgZ3ZTwTa3ROfkRZgsVDUkD1MhHBwcoceSGCgKTxeT+Gm+w@mail.gmail.com>
-Subject: Re: [PATCH v12 6/8] doc: Add measured boot documentation
-To: Eddie James <eajames@linux.ibm.com>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, xypron.glpk@gmx.de
+Date: Thu, 12 Oct 2023 08:28:53 -0700
+Message-ID: <CAPnjgZ3K4s7ZbFnn=P39pjHXNFHEy-Bs-Qbjxi+3powCUrBKrA@mail.gmail.com>
+Subject: Re: [PATCH 01/26] spl: legacy: Fix referencing _image_binary_end
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ Fabio Estevam <festevam@denx.de>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -81,67 +85,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Eddie,
+Hi Sean,
 
-On Thu, 12 Oct 2023 at 08:08, Eddie James <eajames@linux.ibm.com> wrote:
+On Wed, 11 Oct 2023 at 21:30, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> Briefly describe the feature and specify the requirements.
+> On 10/11/23 23:41, Simon Glass wrote:
+> > On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
+> >>
+> >> On non-arm architectures, _image_binary_end is defined as a ulong and not a
+> >> char[]. Dereference it when accessing it, which is correct for both.
+> >
+> > Is 'dereference' the right word?
 >
-> Signed-off-by: Eddie James <eajames@linux.ibm.com>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
+> Yeah...
+>
+> "Take the address of it when accessing it"?
 
-This could use a bit more detail. What pieces are measured? What DT
-binding is used for the TPM? How is the info checked by the OS or
-whatever?
-
-
-> ---
->  doc/usage/index.rst         |  1 +
->  doc/usage/measured_boot.rst | 23 +++++++++++++++++++++++
->  2 files changed, 24 insertions(+)
->  create mode 100644 doc/usage/measured_boot.rst
->
-> diff --git a/doc/usage/index.rst b/doc/usage/index.rst
-> index fa702920fa..fb043a8923 100644
-> --- a/doc/usage/index.rst
-> +++ b/doc/usage/index.rst
-> @@ -14,6 +14,7 @@ Use U-Boot
->     partitions
->     cmdline
->     semihosting
-> +   measured_boot
->
->  Shell commands
->  --------------
-> diff --git a/doc/usage/measured_boot.rst b/doc/usage/measured_boot.rst
-> new file mode 100644
-> index 0000000000..8357b1f480
-> --- /dev/null
-> +++ b/doc/usage/measured_boot.rst
-> @@ -0,0 +1,23 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +
-> +Measured Boot
-> +=====================
-> +
-> +U-Boot can perform a measured boot, the process of hashing various components
-> +of the boot process, extending the results in the TPM and logging the
-> +component's measurement in memory for the operating system to consume.
-> +
-> +Requirements
-> +---------------------
-> +
-> +* A hardware TPM 2.0 supported by the U-Boot drivers
-> +* CONFIG_TPM=y
-> +* CONFIG_MEASURED_BOOT=y
-> +* Device-tree configuration of the TPM device to specify the memory area
-> +  for event logging. The TPM device node must either contain a phandle to
-> +  a reserved memory region or "linux,sml-base" and "linux,sml-size"
-> +  indicating the address and size of the memory region. An example can be
-> +  found in arch/sandbox/dts/test.dts
-> +* The operating system must also be configured to use the memory regions
-> +  specified in the U-Boot device-tree in order to make use of the event
-> +  log.
+That seems better.
 
 Regards,
 Simon
+
+
+>
+> --Sean
+>
+> >>
+> >> Fixes: 1b8a1be1a1f ("spl: spl_legacy: Fix spl_end address")
+> >> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> >> ---
+> >>
+> >>   common/spl/spl_legacy.c | 2 +-
+> >>   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> >
+> >>
+> >> diff --git a/common/spl/spl_legacy.c b/common/spl/spl_legacy.c
+> >> index 095443c63d8..e9564e5c2a5 100644
+> >> --- a/common/spl/spl_legacy.c
+> >> +++ b/common/spl/spl_legacy.c
+> >> @@ -19,7 +19,7 @@
+> >>   static void spl_parse_legacy_validate(uintptr_t start, uintptr_t size)
+> >>   {
+> >>          uintptr_t spl_start = (uintptr_t)_start;
+> >> -       uintptr_t spl_end = (uintptr_t)_image_binary_end;
+> >> +       uintptr_t spl_end = (uintptr_t)&_image_binary_end;
+> >>          uintptr_t end = start + size;
+> >>
+> >>          if ((start >= spl_start && start < spl_end) ||
+> >> --
+> >> 2.37.1
+> >>
+>
