@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43DBFCDB482
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 21:17:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8834CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 21:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D571186E43;
-	Thu, 12 Oct 2023 22:54:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 90A6286A4C;
+	Thu, 12 Oct 2023 22:54:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ua1mrwMD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e7lF2vzw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A51986E4F; Thu, 12 Oct 2023 22:54:00 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id 2F24986D3F; Thu, 12 Oct 2023 22:53:56 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD85886E39
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 22:52:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6E8C86E14
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 22:53:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-53e0d21a4easo1904030a12.1
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 13:52:25 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-9b275afb6abso542230566b.1
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 13:53:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697143931; x=1697748731; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697143967; x=1697748767; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=j4T/Pfyx7FsHu+wAyY/YmE3f4AqZCzqsks03Z1CFisw=;
- b=Ua1mrwMDM+NbPfdpbdeG6glexTxaHRozFSjtnvzwRHLzO1gDmdH00/eebqVql9TcQa
- jxeoNEEQkY0Ro2rtEtvD+dLfQbVg4UrB7TSTbkj0yn2pCdfABzAyZz8FsZpogLH/5/89
- LRSRZKm5o/2SU2b1Ima3A8svkznVc4IZ4cZ5HNTKbvZ63USQAfOIILiaxc2vF4KzqOdV
- un+tSuzs+YQV/4AzxndaRc1MrGWOdLZWZ1mufrSH1BX4sjMVlkHYdFJRb2LqMUnl7Qyl
- ZcaZRuSGqAXfcweLU9biqNW8uef4mJAtOf6ewU8QEnykfyZxcfHHS+C0m63R2TGPPsuN
- KYWg==
+ bh=Jl751q0sFvIf5oWY1rIL11jpyfLpoxcoyN8WZ2zG6GE=;
+ b=e7lF2vzw+sLomtSczV7q5AYcw/ijYD5GCyPrtD+2b57qpVaQLyvPnuD2Ug08tlsjJ6
+ eKHjvKn51SapjwQjhGZkUql0novYNM9/zyX9A9OrzpctmNZAn/EoKZE5zNS4FKT+S2RC
+ IzCRfHF1PcDN8O48Uf8rS1U/+gtX3MVsw5wNk2gaKleFegJyxop9IqmpioNuhDwApm56
+ MeX4ONgkK3+jQ3iVzj/dM+aCUG0sTJOvsndwzygcLFUk4YdPK2a+bzNbY5FXXefs1/2H
+ +tNWvqx7kbdt/Guf/393qBSW4GGTt8YD6XM07KnE4qPfbWdgCT0mMAy0M5qNqsB8mUi8
+ g3Bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697143931; x=1697748731;
+ d=1e100.net; s=20230601; t=1697143967; x=1697748767;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j4T/Pfyx7FsHu+wAyY/YmE3f4AqZCzqsks03Z1CFisw=;
- b=M1btOetxTtsIWAEGfzqETLRS8Q7nSlSkgIXvfhDXKfp/Z1IEVR2nRv8h5gpUKXnm86
- NtS+2ArfLMZ9KEUzLnwaKWgGIxell/DwfXW+a9x9K3/IxqcaX4/b92oAYDtu/+StuEGU
- KTrbcyZAAt93kc4DFe3Zrg/vKBBTi7v1k3Mdb4gd8Fgjl0JVW7Yb73fOidlRa6Esbvv1
- Yv5neaabQ/TsWLYfaAhh6thHCzsG6Fqgh1lLV+eiCU5t0pFTMVcKEHhRIZtjBbDztAtM
- LmxPA/fEvb/YdXorkrvHp53W0cC9aD1ifD6qZqbYsk0wyj674J5YqZT/F6UorvYDSe+4
- KqZg==
-X-Gm-Message-State: AOJu0YzYeorJRkAN5c+TPoo2BfPBArqh5pqfE43I8wJwiburpy8fGQzr
- /mO8QXL4yHSW6KUFVycPPZs=
-X-Google-Smtp-Source: AGHT+IFCB0U5Q/F4Dd8uYMeSyb0YbbTiCWo+Zm/Fk8nGzobVmQhJLQnkiLHlZxb0xTIuRYmA0wS/dw==
-X-Received: by 2002:a05:6402:1e89:b0:53e:12dd:b9d0 with SMTP id
- f9-20020a0564021e8900b0053e12ddb9d0mr3403881edf.36.1697143930671; 
- Thu, 12 Oct 2023 13:52:10 -0700 (PDT)
+ bh=Jl751q0sFvIf5oWY1rIL11jpyfLpoxcoyN8WZ2zG6GE=;
+ b=DvwgP6coB7/exOgVTNqsfiPy5mCdj8DzXpgckvsSGyeHrRFDy6P7QYYgqL8LMKh0nF
+ 8OOy7MAkoBaBuK2RqXC4QjeI1Aa0zRhOGmX+UUbJC8ub/zlz5chlsuKm/O7QEnlgCCYO
+ Ro9AN0aKY+cKeRQ8f9O1QWO5FKQ2B5S9ZByHp2+61ik0Ur6TkkubO/zKItG66VZgIwIz
+ LwQk02eglDVd3TdpmLHBHujCXyhHD1k64E088BPeHJOpoZQTiHVcpNvtgqNw051nvnYD
+ Hn8jSFNcAYH7RsI0i4ouQEMPCTXN0m2j/U1g3xWuCwZvtkPRJB67qS7sNQ2blFb5VHEP
+ r8kQ==
+X-Gm-Message-State: AOJu0Yy6A9txhsBXBd1GATw+7SuXgTXj+55zNYVyhMTqCevFWHIkkckj
+ z8QBDRLV1f1/t2q0X61gkpc=
+X-Google-Smtp-Source: AGHT+IEJHzUFcWzmVT4Myl6Qpltks6bDw73uZ6ZaKkLGvjeFzqKvVSsijCsyRo+pkfnHUUilVOB58A==
+X-Received: by 2002:a17:907:7daa:b0:9b2:b37d:17ff with SMTP id
+ oz42-20020a1709077daa00b009b2b37d17ffmr19768735ejc.19.1697143967238; 
+ Thu, 12 Oct 2023 13:52:47 -0700 (PDT)
 Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
  by smtp.gmail.com with ESMTPSA id
- cn25-20020a0564020cb900b0053e0395059csm1375697edb.21.2023.10.12.13.52.10
+ ci24-20020a170906c35800b00992ea405a79sm11395455ejb.166.2023.10.12.13.52.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 12 Oct 2023 13:52:10 -0700 (PDT)
-Message-ID: <490f2c07-8aa9-3559-0b6e-04a45f98a671@gmail.com>
-Date: Thu, 12 Oct 2023 22:52:09 +0200
+ Thu, 12 Oct 2023 13:52:46 -0700 (PDT)
+Message-ID: <95fbbaee-2c74-a788-e016-52b269730b2e@gmail.com>
+Date: Thu, 12 Oct 2023 22:52:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v3 5/7] rockchip: cmd: add rkmtd command
+Subject: [PATCH v3 7/7] rockchip: doc: add rkmtd.rst
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
  dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
@@ -96,274 +96,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The command rkmtd creates a virtual block device to transfer
-Rockchip boot block data to and from NAND with block orientated
-tools like "ums" and "rockusb".
-
-It uses the Rockchip MTD driver to scan for boot blocks and copies
-data from the first block in a GPT formated virtual disk.
-Data must be written in U-boot "idbloader.img" format and start at
-partition "loader1" offset 64. The data header is parsed
-for length and offset. When the last sector is received
-it erases up to 5 erase blocks on NAND and writes bootblocks
-in a pattern depending on the NAND ID. Data is then verified.
-When a block turns out bad the block header is discarded.
+Add documention for Rockchip rkmtd virtual block device.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
 ---
 
 Changed V3:
-  Split driver from command
-  Split header
-  Restyle
+  New patch
 ---
- cmd/Kconfig  |   8 ++
- cmd/Makefile |   1 +
- cmd/rkmtd.c  | 204 +++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 213 insertions(+)
- create mode 100644 cmd/rkmtd.c
+ doc/board/rockchip/index.rst |   1 +
+ doc/board/rockchip/rkmtd.rst | 105 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 106 insertions(+)
+ create mode 100644 doc/board/rockchip/rkmtd.rst
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 6470b138d2f8..1979c6c62aa7 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1561,6 +1561,14 @@ config CMD_USB_SDP
- 	  Enables the command "sdp" which is used to have U-Boot emulating the
- 	  Serial Download Protocol (SDP) via USB.
+diff --git a/doc/board/rockchip/index.rst b/doc/board/rockchip/index.rst
+index 0c377e9bbba0..9a87a035e95e 100644
+--- a/doc/board/rockchip/index.rst
++++ b/doc/board/rockchip/index.rst
+@@ -8,3 +8,4 @@ Rockchip
+    :maxdepth: 2
 
-+config CMD_RKMTD
-+	bool "rkmtd"
-+	select RKMTD
-+	help
-+	  Enable the command "rkmtd" to create a virtual block device to transfer
-+	  Rockchip boot block data to and from NAND with block orientated tools
-+	  like "ums" and "rockusb".
-+
- config CMD_ROCKUSB
- 	bool "rockusb"
- 	depends on USB_FUNCTION_ROCKUSB
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 9bebf321c397..11927a5904e6 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -151,6 +151,7 @@ obj-$(CONFIG_CMD_REISER) += reiser.o
- obj-$(CONFIG_CMD_REMOTEPROC) += remoteproc.o
- obj-$(CONFIG_CMD_RNG) += rng.o
- obj-$(CONFIG_CMD_KASLRSEED) += kaslrseed.o
-+obj-$(CONFIG_CMD_RKMTD) += rkmtd.o
- obj-$(CONFIG_CMD_ROCKUSB) += rockusb.o
- obj-$(CONFIG_CMD_RTC) += rtc.o
- obj-$(CONFIG_SANDBOX) += host.o
-diff --git a/cmd/rkmtd.c b/cmd/rkmtd.c
+    rockchip
++   rkmtd
+diff --git a/doc/board/rockchip/rkmtd.rst b/doc/board/rockchip/rkmtd.rst
 new file mode 100644
-index 000000000000..bf01bf43e4dc
+index 000000000000..1481380ba6c5
 --- /dev/null
-+++ b/cmd/rkmtd.c
-@@ -0,0 +1,204 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ *
-+ * Driver interface derived from:
-+ * /cmd/host.c
-+ * Copyright (c) 2012, Google Inc.
-+ *
-+ * Copyright (C) 2023 Johan Jonker <jbx6244@gmail.com>
-+ */
++++ b/doc/board/rockchip/rkmtd.rst
+@@ -0,0 +1,105 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. Copyright (C) 2023 Johan Jonker <jbx6244@gmail.com>
 +
-+#include <blk.h>
-+#include <command.h>
-+#include <common.h>
-+#include <dm.h>
-+#include <dm/device-internal.h>
-+#include <dm/uclass-internal.h>
-+#include <rkmtd.h>
-+#include <stdio.h>
++RKMTD
++=====
 +
-+static int do_rkmtd_bind(struct cmd_tbl *cmdtp, int flag, int argc,
-+			 char *const argv[])
-+{
-+	struct udevice *dev;
-+	const char *label;
-+	int ret;
++Info
++----
 +
-+	argc--;
-+	argv++;
++The command rkmtd creates a virtual block device to transfer
++Rockchip boot block data to and from NAND with block orientated
++tools like "ums" and "rockusb".
 +
-+	if (argc < 1)
-+		return CMD_RET_USAGE;
++It uses the Rockchip MTD driver to scan for boot blocks and copies
++data from the first block in a GPT formatted virtual disk.
++Data must be written in U-boot "idbloader.img" format and start at
++partition "loader1" offset 64. The data header is parsed
++for length and offset. When the last sector is received
++it erases up to 5 erase blocks on NAND and writes boot blocks
++in a pattern depending on the NAND ID. Data is then verified.
++When a block turns out bad the block header is discarded.
 +
-+	if (argc > 1)
-+		return CMD_RET_USAGE;
++Limitations
++-----------
 +
-+	label = argv[0];
-+	ret = rkmtd_create_attach_mtd(label, &dev);
-+	if (ret) {
-+		printf("Cannot create device / bind mtd\n");
-+		return CMD_RET_FAILURE;
-+	}
++- Support with CONFIG_ROCKCHIP_NAND MTD driver only.
++- Support for Rockchip boot block header type 1 only.
++- Pattern for listed NAND IDs only. (Logic still not disclosed by Rockchip)
++- The MTD framework driver data and NAND ID must be extracted at a lower level.
 +
-+	return 0;
-+}
++Available rkmtd commands
++------------------------
 +
-+static struct udevice *parse_rkmtd_label(const char *label)
-+{
-+	struct udevice *dev;
++.. code-block:: bash
 +
-+	dev = rkmtd_find_by_label(label);
-+	if (!dev) {
-+		int devnum;
-+		char *ep;
++        rkmtd bind <label>      - bind RKMTD device
++        rkmtd unbind <label>    - unbind RKMTD device
++        rkmtd info [<label>]    - show all available RKMTD devices
++        rkmtd dev [<label>]     - show or set current RKMTD device
 +
-+		devnum = hextoul(label, &ep);
-+		if (*ep ||
-+		    uclass_find_device_by_seq(UCLASS_RKMTD, devnum, &dev)) {
-+			printf("No such device '%s'\n", label);
-+			return NULL;
-+		}
-+	}
++U-boot settings
++---------------
 +
-+	return dev;
-+}
++Config to enable Rockchip MTD support:
 +
-+static int do_rkmtd_unbind(struct cmd_tbl *cmdtp, int flag, int argc,
-+			   char *const argv[])
-+{
-+	struct udevice *dev;
-+	const char *label;
-+	int ret;
++.. code-block:: bash
 +
-+	if (argc < 2)
-+		return CMD_RET_USAGE;
++        CONFIG_MTD=y
++        CONFIG_MTD_RAW_NAND=y
++        CONFIG_SYS_NAND_DRIVER_ECC_LAYOUT=y
++        CONFIG_SYS_NAND_USE_FLASH_BBT=y
++        CONFIG_ROCKCHIP_NAND=y
 +
-+	label = argv[1];
-+	dev = parse_rkmtd_label(label);
-+	if (!dev)
-+		return CMD_RET_FAILURE;
++Option to keep existing NAND data unchanged:
 +
-+	ret = rkmtd_detach(dev);
-+	if (ret) {
-+		printf("Cannot detach mtd\n");
-+		return CMD_RET_FAILURE;
-+	}
++.. code-block:: bash
 +
-+	ret = device_unbind(dev);
-+	if (ret) {
-+		printf("Cannot unbind device '%s'\n", dev->name);
-+		return CMD_RET_FAILURE;
-+	}
++        CONFIG_ROCKCHIP_NAND_SKIP_BBTSCAN=y
 +
-+	return 0;
-+}
++Commands to enable:
 +
-+static void show_rkmtd_dev(struct udevice *dev)
-+{
-+	struct rkmtd_dev *plat = dev_get_plat(dev);
-+	struct blk_desc *desc;
-+	struct udevice *blk;
-+	int ret;
++.. code-block:: bash
 +
-+	printf("%3d ", dev_seq(dev));
++        CONFIG_CMD_USB=y
++        CONFIG_CMD_RKMTD=y
++        CONFIG_CMD_ROCKUSB=y
++        CONFIG_CMD_USB_MASS_STORAGE=y
 +
-+	ret = blk_get_from_parent(dev, &blk);
-+	if (ret)
-+		return;
++Linux Host (PC) tool commands combinations that work
++----------------------------------------------------
 +
-+	desc = dev_get_uclass_plat(blk);
-+	printf("%12lu %-15s\n", (unsigned long)desc->lba, plat->label);
-+}
++.. table::
++   :widths: 20 44
 +
-+static int do_rkmtd_info(struct cmd_tbl *cmdtp, int flag, int argc,
-+			 char *const argv[])
-+{
-+	struct udevice *dev;
++   ==================== ============================================
++   U-boot               Linux
++   ==================== ============================================
++   rkmtd bind 0
++   rockusb 0 rkmtd 0
++                        upgrade_tool pl
 +
-+	if (argc < 1)
-+		return CMD_RET_USAGE;
++                        upgrade_tool rl 64 512 idbloader_backup.img
 +
-+	dev = NULL;
-+	if (argc >= 2) {
-+		dev = parse_rkmtd_label(argv[1]);
-+		if (!dev)
-+			return CMD_RET_FAILURE;
-+	}
++                        upgrade_tool wl 64 idbloader.img
 +
-+	printf("%3s %12s %-15s\n", "dev", "blocks", "label");
-+	if (dev) {
-+		show_rkmtd_dev(dev);
-+	} else {
-+		struct uclass *uc;
++                        upgrade_tool rd
 +
-+		uclass_id_foreach_dev(UCLASS_RKMTD, dev, uc)
-+			show_rkmtd_dev(dev);
-+	}
++                        rkdeveloptool ppt
 +
-+	return 0;
-+}
++                        rkdeveloptool rl 64 512 idbloader_backup.img
 +
-+static int do_rkmtd_dev(struct cmd_tbl *cmdtp, int flag, int argc,
-+			char *const argv[])
-+{
-+	struct udevice *dev;
-+	const char *label;
++                        rkdeveloptool wlx loader1 idbloader.img
 +
-+	if (argc < 1 || argc > 3)
-+		return CMD_RET_USAGE;
++                        rkdeveloptool wl 64 idbloader.img
 +
-+	if (argc == 1) {
-+		struct rkmtd_dev *plat;
++                        rkdeveloptool rd
 +
-+		dev = rkmtd_get_cur_dev();
-+		if (!dev) {
-+			printf("No current rkmtd device\n");
-+			return CMD_RET_FAILURE;
-+		}
-+		plat = dev_get_plat(dev);
-+		printf("Current rkmtd device: %d: %s\n", dev_seq(dev),
-+		       plat->label);
-+		return 0;
-+	}
++                        rkflashtool r 64 512 > idbloader_backup.img
 +
-+	label = argv[1];
-+	dev = parse_rkmtd_label(argv[1]);
-+	if (!dev)
-+		return CMD_RET_FAILURE;
++                        rkflashtool w 64 512 < idbloader.img
++   ums 0 rkmtd 0
++                        dd if=/dev/sda1 of=idbloader_backup.img
 +
-+	rkmtd_set_cur_dev(dev);
-+
-+	return 0;
-+}
-+
-+static struct cmd_tbl cmd_rkmtd_sub[] = {
-+	U_BOOT_CMD_MKENT(bind, 4, 0, do_rkmtd_bind, "", ""),
-+	U_BOOT_CMD_MKENT(unbind, 4, 0, do_rkmtd_unbind, "", ""),
-+	U_BOOT_CMD_MKENT(info, 3, 0, do_rkmtd_info, "", ""),
-+	U_BOOT_CMD_MKENT(dev, 0, 1, do_rkmtd_dev, "", ""),
-+};
-+
-+static int do_rkmtd(struct cmd_tbl *cmdtp, int flag, int argc,
-+		    char *const argv[])
-+{
-+	struct cmd_tbl *c;
-+
-+	argc--;
-+	argv++;
-+
-+	c = find_cmd_tbl(argv[0], cmd_rkmtd_sub, ARRAY_SIZE(cmd_rkmtd_sub));
-+
-+	if (c)
-+		return c->cmd(cmdtp, flag, argc, argv);
-+	else
-+		return CMD_RET_USAGE;
-+}
-+
-+U_BOOT_CMD(
-+	rkmtd, 8, 1, do_rkmtd,
-+	"Rockchip MTD sub-system",
-+	"bind <label>      - bind RKMTD device\n"
-+	"rkmtd unbind <label>    - unbind RKMTD device\n"
-+	"rkmtd info [<label>]    - show all available RKMTD devices\n"
-+	"rkmtd dev [<label>]     - show or set current RKMTD device\n"
-+);
++                        dd if=idbloader.img of=/dev/sda1
++   ==================== ============================================
 --
 2.39.2
 
