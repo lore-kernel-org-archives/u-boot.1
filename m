@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54919CDB474
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 21:52:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E70CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 21:53:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E4C6C83414;
-	Thu, 12 Oct 2023 23:48:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C10DB86E5A;
+	Thu, 12 Oct 2023 23:48:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A672sYOE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rshsdIDl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EE0E86EA8; Thu, 12 Oct 2023 23:08:31 +0200 (CEST)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id 463DE86E75; Thu, 12 Oct 2023 23:11:03 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE64486EA4
+ by phobos.denx.de (Postfix) with ESMTPS id AE58F86E87
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 23:06:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-5a7bbcc099fso18296647b3.3
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-59e88a28b98so12179497b3.1
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 14:06:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697144637; x=1697749437; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697144633; x=1697749433; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=geUUjA1M279C/83qje5Q7yQa2J94AerzIW4sSiybi9w=;
- b=A672sYOEAo9I6e4CAGtGKbTnhssNlF/KTn/aabhQObR74xjfqgesYI5/aJo7c6lO/q
- K6IGVxA6uQC79FELbSLHe3LGKfIcTpGEIA14vwpAfJilDS/h6PoidRNRnDqgMyMIKL/J
- NcTXAXr9JnvtorfDncPxQsuGYOy77V0x9rLfY=
+ bh=3gPyBDjy6bT7KUJ4xKYcnIwBgDKIISrwphRwtmSXctc=;
+ b=rshsdIDlEcnV0kp25skXIwNYXfJEdoH+HNokY9hDfdefBxPwZfiAvAlhB11fpljUDU
+ IICEHINt6gJP17a6c7qySMETPMErtXDapgKoHOrSm1BcBHr//L/L5nygPaziDS73z92f
+ cblxnVsaR5NuI3yvZfyiYq69vW0BIJwQBMKH0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697144637; x=1697749437;
+ d=1e100.net; s=20230601; t=1697144633; x=1697749433;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=geUUjA1M279C/83qje5Q7yQa2J94AerzIW4sSiybi9w=;
- b=ulrBXOwxF2u24JMTw2USeWb2AkGWZQr/x5ZR78uhEqC1dc0xcLmYh5aIjs7WvMMdut
- 1q6YYbHlREjU0B3nQGudOIXyAcOZGGBlPVgJ0WDSXKc7AIVFzQq4yEGzyFwKYiqTJ4Nc
- kGsqWDsv1SHqneASfLF3sIJkWmPEV+ZGGsqbQx6oaXOzfI1VkRRSHOEBx0uRFAIy7ZrM
- Ie3eQk9Tk22Q+1YdJA925ijAVCKKx+UsslaWLRY4MLMlyuMjHapGaNcV5TUHcWyHOldn
- 3Wb2e8ozZ01C4VpDGwAE86Yn5s/AMIiHWQOPn78Ttl/1UvOM1xH806d31WDQ/BkBfbMI
- t2Vw==
-X-Gm-Message-State: AOJu0YyAsHJ52H3PzpMuXOntS3mtj1ijVfGAE8V2uWZ3f/QlkuKTHPtx
- rBusE32NvNgTPr7fbnMuu6AxzA==
-X-Google-Smtp-Source: AGHT+IHzOJcdBow7tyyOZ801KmdR4r7LGNXUuFHjn24bp0othIkPSghb5nvi9jxcqCfHhz8NkJDMVg==
-X-Received: by 2002:a81:62d7:0:b0:576:fc3a:3ef5 with SMTP id
- w206-20020a8162d7000000b00576fc3a3ef5mr28058987ywb.47.1697144637662; 
- Thu, 12 Oct 2023 14:03:57 -0700 (PDT)
+ bh=3gPyBDjy6bT7KUJ4xKYcnIwBgDKIISrwphRwtmSXctc=;
+ b=UjiEaJe2VUQdvqIyacBFtUgP8mY80TYCivJtOyiS9/dZUPCtiWKRBV3pn86KuBhRfu
+ fc3klcWL0oKPbsLJX4jLVy8PSBSYqAz2wAGwfTTv9J/U0ne91qEPLEOhclh5JkpYUieK
+ pUrbr8PL1hnPd+7sM9lo6iqNAmIsbdyKCFgCPi+31MdDTvgCpQWhsf977Of5Ts+lcz2Q
+ Fcz60l9sQM0SkqzChc4mfmNVM6xfNt1MdWXZSVf095rCKZER1aGQjJ+4QlCyLHdLYsRs
+ 0mOmujA5KTfzU43F+4dl/TxvGSWhn5kuhyOe+t59EO18lk28F5ooF+gjJys04ePCZKf1
+ ld1g==
+X-Gm-Message-State: AOJu0YyyeW5GkagZvHOwQ7fEgER8jWU8BVgADu3ZWHeCs/XRNCu5UuqU
+ TVIDWxidBxtG2yyGf4F8v7o/4A==
+X-Google-Smtp-Source: AGHT+IHK+N6/topsWAqSBxy6I2djrIJw7N5Ugv+3Yc/ZsmhB9MUCadNVPwUqqp/YonC3IDlR69gJEw==
+X-Received: by 2002:a0d:d491:0:b0:5a7:fbac:4ffe with SMTP id
+ w139-20020a0dd491000000b005a7fbac4ffemr1953414ywd.22.1697144633026; 
+ Thu, 12 Oct 2023 14:03:53 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5647-4a14-f04e-8d8d.res6.spectrum.com.
  [2603:6081:7b00:6400:5647:4a14:f04e:8d8d])
  by smtp.gmail.com with ESMTPSA id
- w83-20020a0dd456000000b005a1cc37aff1sm218601ywd.20.2023.10.12.14.03.56
+ z6-20020a816506000000b005845e6f9b50sm216320ywb.113.2023.10.12.14.03.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 14:03:57 -0700 (PDT)
-Date: Thu, 12 Oct 2023 17:03:55 -0400
+ Thu, 12 Oct 2023 14:03:52 -0700 (PDT)
+Date: Thu, 12 Oct 2023 17:03:50 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Reid Tonking <reidt@ti.com>
-Cc: u-boot@lists.denx.de, n-francis@ti.com, u-kumar1@ti.com, nm@ti.com,
- vigneshr@ti.com, m-chawdhry@ti.com
-Subject: Re: [PATCH v5 1/2] arm: mach-k3: j7200: Add mcu_timer0 id to the dev
- list
-Message-ID: <20231012210355.GY3119521@bill-the-cat>
-References: <20231005181258.1004539-1-reidt@ti.com>
- <20231005181258.1004539-2-reidt@ti.com>
+To: Roger Quadros <rogerq@kernel.org>
+Cc: nm@ti.com, vigneshr@ti.com, m-chawdhry@ti.com, sjg@chromium.org,
+ jonas@kwiboo.se, srk@ti.com, afd@ti.com, bb@ti.com, praneeth@ti.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH v2 2/2] board: ti: am64x: Switch to standard boot flow
+Message-ID: <20231012210350.GX3119521@bill-the-cat>
+References: <20231005130642.21402-1-rogerq@kernel.org>
+ <20231005130642.21402-3-rogerq@kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="/XeqZ8NuQqsWpr5c"
+ protocol="application/pgp-signature"; boundary="usgKFSbymszu+9Q4"
 Content-Disposition: inline
-In-Reply-To: <20231005181258.1004539-2-reidt@ti.com>
+In-Reply-To: <20231005130642.21402-3-rogerq@kernel.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,41 +95,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---/XeqZ8NuQqsWpr5c
+--usgKFSbymszu+9Q4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Oct 05, 2023 at 01:12:57PM -0500, Reid Tonking wrote:
+On Thu, Oct 05, 2023 at 04:06:42PM +0300, Roger Quadros wrote:
 
-> mcu_timer0 is now used as the tick timer in u-boot, so this adds the
-> timer to the soc device list so it can be enabled via the k3 power
-> controller.
+> Switch to using bootstd. Note with this change, we will stop using
+> distro_bootcmd and instead depend entirely on bootflow method of
+> starting the system up.
 >=20
+> Drop header files that are no longer needed in am64x_evm.h.
+> k3_dfu.h is available via k3_dfu.env in am64x.env.
+>=20
+> Drop unused macro CFG_SYS_SDRAM_BASE1.
+>=20
+> Signed-off-by: Roger Quadros <rogerq@kernel.org>
 > Reviewed-by: Nishanth Menon <nm@ti.com>
-> Signed-off-by: Reid Tonking <reidt@ti.com>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---/XeqZ8NuQqsWpr5c
+--usgKFSbymszu+9Q4
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoXzsACgkQFHw5/5Y0
-tyzH+AwAo7r2DUvGoO7YSN/OqlwLA/Tc3h+wN0vujkZuLRIdR/bTeon+x36h1fmk
-40FcQDnjYE7DDXzm/GQmq7BnV4O30DwQIcI1n1pP7z1dOGax8XglhGs0ZhSKMhTC
-57Dflon/P76ff5yWcuW1M0ipes7TKUX4qv4e3FDPqIADl109fqU+SvxntnMtNsFR
-04M/1w+Ksza2/hWzMSPkmvrDLxROoze7uUqARnGIg9XFu2J3Q4frYqTgFymTIbdE
-EmOOFhOHlQ+sYV1OKR3babjl3d/CgIqUgZ2GkRhRV6w2mVu/4b8OKtFVXX6r5DIX
-32SGDMu+G9JK2vcPEPzfQg+//2HdTCFdIrUSmf5V81obhkmz7mjxZxsqu99F4dvb
-bnpijjJM7sikGANO7WQrwrdXwA/86AMC3TpADCsDfwh5BuLtfRHRjQ5TNxI4C7qq
-tNd9krJb/luN5lEpRSk9zuGgVcvz1riVOlj77v/nfEBtd9/J/PtbTs2GGPymStry
-VzskseU/
-=qCvF
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoXzYACgkQFHw5/5Y0
+tyyrrQv+NF+ECOq5tZpSNhFu/95QXbxMBbVOXCHpQ1yV/j7sg89npzbM+9B+iPAe
+zc4vVMPMgEPL2rArVL6S0QbhkcUZtYAb5oX/GuMwhstEeS80zmHmusxB/dceqeby
+GKaYtdeRxdKStKwC2inF9cvu5FKv2A+6O01KbYg2xKgIYRasoMOyv0G7JbECbvZO
+KyvPmLRQ1xTR7Px1CxMSuOSr9TQb1X7pIHqhLqNtPPjchQyMtkEwRdFeS5XlHDiD
+/qV/AdrYeNQJol4DNu5aIDF8tKH7NNGjisbYxyYZALSdTxl+DvFClx+0vmBVnvov
+055genib2Mt7jrr34qq9YFmWUYYXRR/D/Fn/khHo3J21xFs58IC4NA+etFMHSs2u
+2gASuotr8ajG4DhgoqR/fNGZ2aLbxXRsSzLsIC5PYbzSlgV+pp4SDVPI+uxJam40
+grUCz6LFXkZUbLY9kFhLty/TrdoxqE59GmjEPNZINrxINubsf1LUobS9X5QIv4tK
+fsFsH1KA
+=8URy
 -----END PGP SIGNATURE-----
 
---/XeqZ8NuQqsWpr5c--
+--usgKFSbymszu+9Q4--
