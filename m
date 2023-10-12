@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F56CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:02:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB2FCDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:28:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B763D86E3B;
-	Thu, 12 Oct 2023 08:02:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1881A86C9E;
+	Thu, 12 Oct 2023 08:28:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="auSQNDnJ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="F7RqD5Cy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A5FB86DB1; Thu, 12 Oct 2023 08:02:26 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AD89E86B7A; Thu, 12 Oct 2023 08:28:00 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 706EF86D41
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:02:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 617B886B7A
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:27:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39C62AKk067539;
- Thu, 12 Oct 2023 01:02:10 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1697090531;
- bh=Y4PgvB+gZhmAdW09Pt6IbGD1ebP+wTATlswwlZVbHE0=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=auSQNDnJrUbq7p8eKv2YPIi3JI9ZTxUDknMtKmOwL5OcLhnh/MXXWDYHdjWot1Z2z
- RcqaEJNbowjsiEGMU1aRcMnOFjlQ+/4+pMfHEmsQVoP1M1QKZCGsXRy0p++VvtBEsW
- +uadKm+cWl/tDMUyr8pgloD1/5FOUIHDAyxRtgaQ=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39C62AQR057207
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 12 Oct 2023 01:02:10 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
- Oct 2023 01:02:10 -0500
-Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 12 Oct 2023 01:02:10 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39C629SA024219;
- Thu, 12 Oct 2023 01:02:10 -0500
-Date: Thu, 12 Oct 2023 11:32:09 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Neha Malcom Francis <n-francis@ti.com>, Andrew
- Davis <afd@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-CC: <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>, Praneeth Bajjuri
- <praneeth@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, Nishanth Menon
- <nm@ti.com>
-Subject: Re: [PATCH v4 1/8] binman: ti-secure: Add support for firewalling
- entities
-Message-ID: <20231012060209.ufdhnpqnxjcetx75@ula0497581>
-References: <20231011-binman-firewalling-v4-0-a08085d300e9@ti.com>
- <20231011-binman-firewalling-v4-1-a08085d300e9@ti.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1697092077; x=1697696877; i=xypron.glpk@gmx.de;
+ bh=KwwOGtAnd0hfgu4fS+Gtoq8kalqBbj3CZk+Xk3dr+Mg=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=F7RqD5CyvFv53gabmCJmIvIqn1Nc7Nu7Bweze7Jxdx23CSrR29EOJmYw0daUfGWqC87CkmtKqgd
+ b142edKf/H62N2jEvWngVVkY6Wh+yXQkDV/0wWNs8MCQhFZmQMgZ6jw752cTr18RL2uidxVuFvqvN
+ kytWCPuFEa51esbYG7jOAtGVtLKfMrLIBK+deYCC37hBOtsTkDHU/RptXcoUcewbaTfAUYjzBH3g8
+ A1ul7XEV5yQ61AYQ+VQnYOQ/eM05aw/dTZ0QtVmMrVgDUiF4nto3afkSz+Esx5rPWAxlffwdOR5J+
+ n8NTzZ7ZlntSx39DbJhM3mElmycm9G0SHIBQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MdefJ-1rPblE1FcP-00Zgod; Thu, 12
+ Oct 2023 08:27:57 +0200
+Message-ID: <227b7449-8327-4748-9bf6-10d6b8dc1435@gmx.de>
+Date: Thu, 12 Oct 2023 08:27:52 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20231011-binman-firewalling-v4-1-a08085d300e9@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: use well-known guid for auto-created boot
+ option
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20231012053200.2337061-1-masahisa.kojima@linaro.org>
+Content-Language: en-US, de-DE
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231012053200.2337061-1-masahisa.kojima@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Zgu7viYpHzQ7GescgPg2TJ+jKRwAeA7lpKBv3nJtBVCI3Wf632Q
+ w1WI+C8onmhZZ7/U375c+SqYXBm8P+HXE3NEQBXfoJYr000CPL6sXcQ13rU1j7DvmW0bs3p
+ L8p319n5C70W3fkQ+FSKLwXB5esezMrtKWJuJi4xhinwcQ13jP18fBqufsla+gzvsmJTIxC
+ FJZP5cowvahGZVNPF2C3A==
+UI-OutboundReport: notjunk:1;M01:P0:K0u7GEc2TyE=;J4h4eRDhn4zAf8lDzLtCsjvWf11
+ X1ABNmTnaAXef11DYNtXIa/D0M533RPd31DV0C2cV8KcqYb22bzpOp4AdeRdjSDCXj/YoKdr3
+ TV8phUmIlrGFIsxenyF3SztJ3FeRJ6tdqWzvSYWea+X7//Gn4QzBogpuVUKJG8ixolQYM0dQ0
+ JVsrp4NJEvshLICT/1OspuEuRiADcLIEocByMM4kEfhzisTs4tjgkdKbtO6+7sGn//T38QY4T
+ UUMHMsfWBXMeUolBnEMC+wDDdSLM4zAeoxrANGMOg8DWezZKfe8uXPb0qOpey5LoT7qis43NH
+ jKsGMKCgBbgVPbr/996awzQHW/DuKJ60Ur6iJg/acCt0NviwV0GQvRXaI+DjZn5uNL6AS4x5H
+ iUrSSCrHolCRtCN7NmGLtmn5fb5SMxMFiRuFzk5sTTFOrGXHOS3FD2mjsVytYw2YMY/I/ozFw
+ 5ftwFOzS6Q8myoDhA2Dsez5qDQk3OTIdFwKyXA89lX/wQ5OVxGP01wl57YdJbcX/4Rp2uyU8q
+ wvWlsah7ToADOEQj/jokGG1kYlB/U8dX0NVt9D8Owi/1zqBdQV5Jkssb60KZnP2ouoxUAJu/H
+ xrEfnAwQTGEGkSkebF9gwmzO8XdqiAG2Vm9IbyTndNXcdgkWPqCoLbTE2uALUGrRfxeDXlIer
+ nhEQtCP36tSGyMmpACZgdE9vhBPeMLi12VdBHRf+vWCEN8yJEZZRn1Fd8ZSIZ9Rum7El8ey84
+ TOd/Zowt3YbwNE7IbVSQZ+rFx5X4vLNXljAMZX+Uo/rzvLk4hZJ/uMNIslE9J59jevj6/q5R2
+ nQMO0XsoeT2UdxW+vwyU2kRvXVCTFzb4VJ01qKmvJnuhqVP0pO8EFRlzs9WNoHkRT04S5g+vV
+ Vp/uqMPENsuDdXtSfs1tGdJMgL4rhQmH8XPhX2lXprDb/gaTa2DH3mMFblTrwxjWbtC8DWLny
+ anAIXv3juztVDUY+ZT4wYoTfd90=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,33 +87,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+On 10/12/23 07:31, Masahisa Kojima wrote:
+> The boot option automatically created by efibootmgr is identified
+> by the special guid appended in the optional data of boot option.
+> The same mechanism is implemented in the EDK II reference
+> implementation, it uses the different guid from the one currently
+> U-Boot uses.
+> The guid indicating auto-created boot option is not defined in the
+> UEFI specification, but some userspace tools such as 'efivar' package
+> are aware of the guid used in EDK II as auto-created boot option.
+>
+> So let's use the same guid as EDK II reference implementation.
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
 
-On 11:54-20231011, Manorit Chawdhry wrote:
-> We can now firewall entities while loading them through our secure
-> entity TIFS, the required information should be present in the
-> certificate that is being parsed by TIFS.
-> 
-> The following commit adds the support to enable the certificates to be
-> generated if the firewall configurations are present in the binman dtsi
-> nodes.
-> 
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
-[..]
->  tools/binman/btool/openssl.py   | 16 +++++++-
->  tools/binman/etype/ti_secure.py | 90 +++++++++++++++++++++++++++++++++++++++++
->  tools/binman/etype/x509_cert.py |  3 +-
->  3 files changed, 106 insertions(+), 3 deletions(-)
-> 
->  from binman.entry import EntryArg
->  from binman.etype.x509_cert import Entry_x509_cert
-> +from dataclasses import dataclass
+>   include/efi_loader.h | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index c4207edc91..106006127b 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -149,8 +149,8 @@ static inline efi_status_t efi_launch_capsules(void)
+>
+>   /* GUID for the auto generated boot menu entry */
+>   #define EFICONFIG_AUTO_GENERATED_ENTRY_GUID \
+> -	EFI_GUID(0x38c1acc1, 0x9fc0, 0x41f0, \
+> -		 0xb9, 0x01, 0xfa, 0x74, 0xd6, 0xd6, 0xe4, 0xde)
+> +	EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
+> +		 0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+>
+>   /* Use internal device tree when starting UEFI application */
+>   #define EFI_FDT_USE_INTERNAL NULL
 
-What all python versions do we support in u-boot? I see that dataclasses
-are in-built from python3.7 but for older versions we would need to
-install them separately, do I need to add this in buildman requirements
-for those versions?
-
-Regards,
-Manorit
