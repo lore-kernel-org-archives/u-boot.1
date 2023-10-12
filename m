@@ -4,86 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F92CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 193B8CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:38:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E958486E39;
-	Thu, 12 Oct 2023 04:19:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id F31B686EA1;
+	Thu, 12 Oct 2023 04:20:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D9SqvzWd";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="QEXkqD9N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 108C786E09; Thu, 12 Oct 2023 04:18:57 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8645F86E0B
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 04:18:21 +0200 (CEST)
+ id CD5F986DAF; Thu, 12 Oct 2023 04:20:08 +0200 (CEST)
+Received: from mail-m12798.qiye.163.com (mail-m12798.qiye.163.com
+ [115.236.127.98])
+ by phobos.denx.de (Postfix) with ESMTP id 48E5786E37
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 04:19:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7740c8509c8so30511185a.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 19:18:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697077071; x=1697681871; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8pU4ZP2knDbCkNnHNuWueGLSlkqCFMsNcevCDfuCH4M=;
- b=D9SqvzWdjGosdNNjW5POgi9BQ8GXrONMkqOQ/PvE55Ue+Wmjz7Xldz2efQpuNvE76U
- 1vs+JTwKvS9ZQ0Q8L9xEnU0ugxHF4XER7uQVoWMzEz5uvyTv8DcZAdovpuUhBS0WN07a
- culzR7YOPeBtiAPUUHSfA+idWY990TfyqYNJKjFGUZLmmzUN6KpgVGgjFvsiQNi6J94K
- v033kT39SX3TqsxJnPZVXgHEqbWhKSkOumx9q2RZzt1lSVfXbtrGAO4MiQeJymcJ71Jd
- ehmtteJgTyFpoHAA2Xg0Tf8DTeprNq3MPbEmc1qf8WNbAMKlhPOamMwvPEd/qjgznyUS
- awKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697077071; x=1697681871;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8pU4ZP2knDbCkNnHNuWueGLSlkqCFMsNcevCDfuCH4M=;
- b=A8cpBAuDwz3GWysjMLQEhsg5/K1t9Z3t/T9yRLkzAU3XzD1sY6Gmmac2in//veN9JR
- eOE/wwySUK9HjOpLLrSu+KPAtl+IePuIoGg3JPgNNNwYuNnrRmP6o7dv4EqVSddA8jxH
- l625c0arqYUCqk44sMIbDrKhifB8oI3X2IqVz5ZEoobA3BDpmQjrZhkNCqNAxvm0bDgB
- ONwYu71S292j5YCC0RkTCOziaJ8sx9shgCSGUPbVWalqF1pRAioCH7GghU8TtwcFwPUp
- JY6Kg5Of4NohNLHybjQwr1nDDfSb2GxLx9voZhLncuCz6sw6cqLTNn43NngfM2mVMlZ7
- pi3A==
-X-Gm-Message-State: AOJu0Yz5QSLpvBSn7Ek05npqfUmPqJfF5nKL2DP/i6/UK0sLfeiFG04i
- UYNH1BemtZnNKv2l934vlzg=
-X-Google-Smtp-Source: AGHT+IEZrBE+/AHQOhVotx6yLaVibgH5aymA70DJmHxium4C8CQIL6nlS/3VLytY13Yzdfb1zogjMg==
-X-Received: by 2002:a05:620a:2848:b0:76f:22f7:408f with SMTP id
- h8-20020a05620a284800b0076f22f7408fmr23596002qkp.34.1697077071450; 
- Wed, 11 Oct 2023 19:17:51 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- x13-20020a05620a14ad00b007756736aed7sm5657257qkj.106.2023.10.11.19.17.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 19:17:50 -0700 (PDT)
-Message-ID: <15b9b0dc-ed38-5b15-f9a4-411e412f3c25@gmail.com>
-Date: Wed, 11 Oct 2023 22:17:50 -0400
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=QEXkqD9Nh40oP9qiF7RM8C2ibq4Of/mnTRhcPkK++i9ikkZ3TLl78enthqiP2KPRLqKqhWqx0goh8cNAUxEd5eCePBC9Wif4VZZCHDlxVZ17RdYcy8YImugF4tyKAXrjw9LqwLnWeP/BieYGisLhh9bQFamvnSxdVn7pNV28di4=;
+ c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
+ bh=95R5zu+rnIhOcZtKdLy5xSvQpzxz9hqNYK5JVgba3fg=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.93] (unknown [58.22.7.114])
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 65837400291;
+ Thu, 12 Oct 2023 10:18:19 +0800 (CST)
+Message-ID: <b7bd9415-3611-ab9e-f65c-d879319377b0@rock-chips.com>
+Date: Thu, 12 Oct 2023 10:18:19 +0800
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH 5/4] mkimage: update man page and -h output
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH 4/4] usb: dwc3-generic: Use combined glue and ctrl node
+ for RK3588
 Content-Language: en-US
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Kever Yang <kever.yang@rock-chips.com>
-References: <20230919113705.109639-1-rasmus.villemoes@prevas.dk>
- <20230928080257.2650461-1-rasmus.villemoes@prevas.dk>
- <20231011183722.GT3119521@bill-the-cat>
- <5801c81b-8bfa-6e65-6176-f94299520a62@prevas.dk>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <5801c81b-8bfa-6e65-6176-f94299520a62@prevas.dk>
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de
+References: <20231010222344.3436526-1-jonas@kwiboo.se>
+ <20231010222344.3436526-5-jonas@kwiboo.se>
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20231010222344.3436526-5-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkxIS1ZNGU5LQ01JHR9PHxpVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8b21ad7c532eb3kusn65837400291
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NhQ6Nyo6PTw8DBQLEz1MFw0i
+ Iz8aFBVVSlVKTUJMS0xMSktLSEtKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTU9CNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,47 +75,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Rasmus,
 
-On 10/11/23 15:07, Rasmus Villemoes wrote:
-> On 11/10/2023 20.37, Tom Rini wrote:
->> On Thu, Sep 28, 2023 at 10:02:57AM +0200, Rasmus Villemoes wrote:
->>
->>> The man page correctly said that -B was ignored without -E, while the
->>> `mkimage -h` output suggested otherwise. Now that -B can actually be
->>> used by itself, update the man page.
->>>
->>> While at it, also amend the `mkimage -h` line to mention the
->>> connection with -E.
->>>
->>> The FDT header is a fixed 40 bytes, so its size cannot (and is not)
->>> modified, while its alignment is a property of the address in RAM one
->>> loads the FIT to, so not something mkimage can affect in any way. (In
->>> the file itself, the header is of course at offset 0, which has all
->>> possible alignments already.)
->>>
->>> Reported-by: Sean Anderson <seanga2@gmail.com>
->>> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
->>> Reviewed-by: Simon Glass <sjg@chromium.org>
->>
->> Applied to u-boot/master, thanks!
->>
-> 
-> Thanks, but I'm afraid that was premature.
-> 
-> The original series which this was a fixup/followup for hasn't been
-> applied, and Sean had reservations. I'm leaving it to Simon or Tom or
-> whoever has final say to decide if they should eventually go in, but it
-> would probably be good to get a verdict soonish (it really shouldn't be
-> too controversial), and if it's a no, this should just be reverted.
+On 2023/10/11 06:23, Jonas Karlman wrote:
+> Like Rockchip RK3328 and RK3568, the RK3588 also have single node to
+> represent the glue and ctrl for USB 3.0.
+>
+> Use rk_ops as driver data to select correct ctrl node for RK3588 DWC3.
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-I was hoping you would respond to my most-recent email regarding this series.
-In particular:
-
-| Why does mkimage have to do this? Can't you just use truncate or, in a
-| binman context, align-size?
-
-Presumably you have some reason for wanting this in mkimage rather than using
-existing tooling.
-
---Sean
+Thanks,
+- Kever
+> ---
+>   drivers/usb/dwc3/dwc3-generic.c | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+> index 744fde806948..6fb2de8a5ace 100644
+> --- a/drivers/usb/dwc3/dwc3-generic.c
+> +++ b/drivers/usb/dwc3/dwc3-generic.c
+> @@ -610,6 +610,7 @@ static const struct udevice_id dwc3_glue_ids[] = {
+>   	{ .compatible = "rockchip,rk3328-dwc3", .data = (ulong)&rk_ops },
+>   	{ .compatible = "rockchip,rk3399-dwc3" },
+>   	{ .compatible = "rockchip,rk3568-dwc3", .data = (ulong)&rk_ops },
+> +	{ .compatible = "rockchip,rk3588-dwc3", .data = (ulong)&rk_ops },
+>   	{ .compatible = "qcom,dwc3" },
+>   	{ .compatible = "fsl,imx8mp-dwc3", .data = (ulong)&imx8mp_ops },
+>   	{ .compatible = "fsl,imx8mq-dwc3" },
