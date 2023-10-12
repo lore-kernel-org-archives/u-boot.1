@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E480CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:42:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC914CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:42:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99D3186D86;
-	Thu, 12 Oct 2023 05:41:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D509486D3F;
+	Thu, 12 Oct 2023 05:41:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y8FfwJnt";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="POAAM1yo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F68386DE7; Thu, 12 Oct 2023 05:41:34 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 71DE586DFA; Thu, 12 Oct 2023 05:41:34 +0200 (CEST)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 36E1886DB5
+ by phobos.denx.de (Postfix) with ESMTPS id 45E9D86DD6
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:41:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-9b64b98656bso79083866b.0
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-53e16f076b3so54692a12.0
  for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:41:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=chromium.org; s=google; t=1697082091; x=1697686891; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=M/j4R4j+MEE9O2kP93XCPqLpd9m+6ianNSjvEuRyS1E=;
- b=Y8FfwJntp/EI8ifHhVmVeETO2YU5+Uf7ucLLtCDGjk+WHZ4Hkw1tk8CsAFLLtWzwF5
- eLdL0JCvdui9A89ZSvk2u+XzYlBF1zegF9k4+WkltnHb4rxraCZXWARuh6aMz+pXDDM+
- UqjTdZOhu623jXfm/Jsg/iZn4MMmJ1PC1WjBE=
+ bh=mv/6TcJXGP0t2MAuYHAfmOimCzFkLsEgFaVZ6D1eVdI=;
+ b=POAAM1yooTY6+JiINL0QE4vDqxFovh6Mzi6/wRTUin8E7NlgRNlQUCmXrTOfQjIeDf
+ OhzUhRxmOrKXgFlfJ6vd9gzDPgaM5P0A+jwGvQHOD4jByMkdd1sqJe5KBnnHeZ5fKhDv
+ PmIwl/IM+Ce1P/Gu1vDeJIIegal9hFW1eyWyM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1697082091; x=1697686891;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=M/j4R4j+MEE9O2kP93XCPqLpd9m+6ianNSjvEuRyS1E=;
- b=s74fSVayXDhx7XrPkow/77OyMfNohz5hcA6EyeSfeQ3pK5CUitPjioIDeky5abnZem
- cW8JNZfYDFWW69DBuOlX872VpK2ipw+B/TLNLA+JA/P4KkembCLYhHXLZ0vPJdc16Z39
- KAhOgYUOq8QThDlEY9fkqbh6JSbEmKBfijkdhKClJezIFoXezSEdj45kvkI+ZhajSvwH
- ctlLBH8Dx4oSoF7JClbBHi1QI8zrU+UVdAHmNF5IocjqOFaGH8p9LaaZq3yFpRX/AJ9P
- Adjobly7hOE/HXtlEhL34umW4aGo2K2NGZ/VjD5WKi+23MeHhqaX6NOaXb5xK6waFi9q
- K6iQ==
-X-Gm-Message-State: AOJu0YzPL9MU+qPYRL9JrCtwx9HSsyjpQVmZk8kRLSL+TKOrK+BR3UVt
- D4lra/Mvy3qIGbYLO+DO5k7s4w9riaczqRFZGZqTlw==
-X-Google-Smtp-Source: AGHT+IH4PiDaHSkI7Qa7lY/CIoeLy8r5ZpbplQ0zZi+oTJvNDAbnE4pkpSn+qlaqGzUb+eb2yRnRNPVvLSWM/hC/ZXg=
-X-Received: by 2002:a17:907:75da:b0:9ad:a46c:2936 with SMTP id
- jl26-20020a17090775da00b009ada46c2936mr21566237ejc.8.1697082090722; Wed, 11
+ bh=mv/6TcJXGP0t2MAuYHAfmOimCzFkLsEgFaVZ6D1eVdI=;
+ b=djz/TM4+H8HqAa0cLJPXfuB987c9wqgzDWyqb/Vgxg+MgbQavKx5oQYA7OhoO6Se05
+ OFH2v6lOCaBcV0FYDuxEIsJs+Ru9Hz9neqPC3RMl6Q/LfoM6XXgrbkGe1zDWGMpGp/k2
+ TAMS6TiW5CxIaqBuocUlWZpL+IP6+M+P0PXDnppG0L+nmd6T7IW05F5ylZ84USXS2Qx5
+ SwHwthELzMIDqa+q+7OcnawCmw1H8Dz01Nd1NWcR2C1ZCEImBef2+Fn0Cpv3ZbGfT20a
+ 0UtXV9C7QAaeekQM+RtqAXcxS/inc7Ca6IzyN15juA0BmOIskyRJHe+wW24fDLF8Zjap
+ GGEQ==
+X-Gm-Message-State: AOJu0YyWkmd/riI1DYOdvW68pSiRTq0d0t3f8Lb9e6B1Niaq2Gg8Jt/e
+ BeV+p2g9huxpO2HcY8m0H4zB2+4MjtGjrwrBSGsu7Q==
+X-Google-Smtp-Source: AGHT+IFj1uO8YpKLgN7zdh12PJUTzTpBuaGLu6gRvis0Bt8XtIfgZprADbB9J5Y7MZ5yHK/9qHr+Dg7nAL70wReisJk=
+X-Received: by 2002:a17:907:72c1:b0:9a1:b85d:c952 with SMTP id
+ du1-20020a17090772c100b009a1b85dc952mr22194845ejc.12.1697082090721; Wed, 11
  Oct 2023 20:41:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-16-seanga2@gmail.com>
-In-Reply-To: <20231012015626.3487451-16-seanga2@gmail.com>
+ <20231012015626.3487451-12-seanga2@gmail.com>
+In-Reply-To: <20231012015626.3487451-12-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Oct 2023 20:41:09 -0700
-Message-ID: <CAPnjgZ37EYOWfLKnG+B2Ef-CR29tSE+RTta5nP1tgvfF-Y6VVw@mail.gmail.com>
-Subject: Re: [PATCH 15/26] net: bootp: Fall back to BOOTP from DHCP when unit
- testing
+Date: Wed, 11 Oct 2023 20:41:04 -0700
+Message-ID: <CAPnjgZ00hx_6ZyuTLM452==Wd3smxKtguQX48a-ot3qNe3y2gA@mail.gmail.com>
+Subject: Re: [PATCH 11/26] fs: ext4: Fix building ext4 in SPL if write is
+ enabled
 To: Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,17 +85,15 @@ X-Virus-Status: Clean
 
 On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> If we sent a DHCP packet and get a BOOTP response from the server, we
-> shouldn't try to send a DHCPREQUEST packet, since it won't be DHCPACKed.
-> Transition straight to BIND. This is only enabled for UNIT_TEST to avoid
-> bloat, since I suspect the number of BOOTP servers in the wild is
-> vanishingly small.
+> If EXT4_WRITE is enabled, write capabilities will be compiled into SPL, but
+> not CRC16. Add an option to enable CRC16 to avoid linker errors.
 >
 > Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
 >
->  net/bootp.c | 6 ++++++
->  1 file changed, 6 insertions(+)
->
+>  common/spl/Kconfig | 1 +
+>  lib/Kconfig        | 6 ++++++
+>  lib/Makefile       | 1 +
+>  3 files changed, 8 insertions(+)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
