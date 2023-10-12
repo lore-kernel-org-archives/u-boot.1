@@ -4,48 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA61BCDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:45:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A349CDB482
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:46:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D2AB86E98;
-	Thu, 12 Oct 2023 08:40:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id A97C386EB1;
+	Thu, 12 Oct 2023 08:41:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E90DA86E8E; Thu, 12 Oct 2023 08:38:56 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE5DC86E60
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:38:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=randolph@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 39C6cGmQ019985;
- Thu, 12 Oct 2023 14:38:16 +0800 (+08)
- (envelope-from randolph@andestech.com)
-Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
- Thu, 12 Oct 2023 14:38:12 +0800
-From: Randolph <randolph@andestech.com>
-To: <u-boot@lists.denx.de>
-CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
- <peterlin@andestech.com>, Randolph <randolph@andestech.com>
-Subject: [PATCH V2 6/7] andes: config: add riscv falcon mode for ae350 platform
-Date: Thu, 12 Oct 2023 14:35:08 +0800
-Message-ID: <20231012063509.2963258-7-randolph@andestech.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231012063509.2963258-1-randolph@andestech.com>
-References: <20231012063509.2963258-1-randolph@andestech.com>
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="p0bH98A4";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1DF4D86CDD; Thu, 12 Oct 2023 08:40:59 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ by phobos.denx.de (Postfix) with ESMTP id 9B25586E75
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:40:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1697092752; x=1697697552; i=xypron.glpk@gmx.de;
+ bh=94pJ7Xscl9eyB7fiVU2nZOneYPrej0I/G70bansmK4g=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=p0bH98A4M72zKjKRYjmHM29CdKG7znKM5DkA2de/3uzq2Hf8fJCwc3rvBfZwZwTD39LJjw1tyaf
+ 1LBxV7lKkZ0M7ak2yPREWTGiRYal7ljliPgysEGobniMdHYa0grdXsDJQ82lMyGC9qZCRQrwQLGxG
+ z9cbHQFFI85xp1DnU5X7bFJtFIyvjK26UKHsKEA4jPjD0eeoAQ/Dl3ku2PyKRMuXTComFKaBGgQT8
+ dsB1+IvQ9WHuW7aUqDjNKlwUcunSrN6/1bf0TG3Bimc6ky/nVrEaZuttzAXLQTUD2rcIyf0vnB6qH
+ jXn4EzMaLe0/C6zgX4ivTzHl0ecqOsMY4crg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N7i8Y-1rccn749nG-014kGV; Thu, 12
+ Oct 2023 08:39:12 +0200
+Message-ID: <d1014630-c1fd-4443-9a2e-c7ae2d029bf2@gmx.de>
+Date: Thu, 12 Oct 2023 08:39:12 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 39C6cGmQ019985
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 12/26] fs: Compile in sandbox filesystem in SPL if it is
+ enabled
+Content-Language: en-US, de-DE
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-13-seanga2@gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231012015626.3487451-13-seanga2@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:TchTO75hyfZR3VuXQ7oNcb+1VBa8KT6bNU57Xsfy6dA7zCzy+4p
+ HGC8Pr6n2fS+LuTasr8CduW6WFWKotq8PKsBCUi+dYWQ4fAJzBMHxI8d/bWhhm0pw3zmnkn
+ bo4gcOg8ymgkIRRgdEw9Q/D5JeDfkywepVCR/ia3UCUbwSmKq6rxV334eLN3UU83/ufBtRk
+ RUtm7aEA8FRPKYz9J51Nw==
+UI-OutboundReport: notjunk:1;M01:P0:uM7kwbQJgZI=;V5ShtKWws3mg9y5EWzO4e1q3EWR
+ o5JlTOmdHE2EVftZ3Jm7rcHFuulUOXL2p0AWUkMTWG6Btsf4PTmROg1YMQgpNZ+tykwnCdyRs
+ 9ryLnM9xahMElE5unEuji+AneEcrz1aeA5gn7vT7wtncYTmW+mR+N4Tf5AxhwSokHcRhPz6GP
+ Womo1gCuQ0E/G2kciXhu1cEbGyFdOKlRCgsgzrzQ17VSfi6DGgcFBvPpIpbd+TINYL6kFZ/wM
+ nv0efmIPLYD5bdr8fMABLat3vCtcRgXcplTimqvDPD25z7GIGMX+cOtBlCPbkERNrgvTIVDId
+ 1uQ5SDW/i393q7bD4hLtoTTYps9Hd3Kt7nUHxx4fpnf1RZSwtdJANUmuYl1bF3nEU9d7bCGWz
+ 47PlSOQBriTGE+zXweeUprKz4zhjNm58XT//x/abkt7/7chti86Sw576Xlllqf+Mn9oP9g8E5
+ CMaiJDvYWCuu0TXcujU4nyuVjubDl/C0PIiYz5TpvphbIkHPDx2h7STcdXiGk7Va9Zxe8z2kS
+ a2wDFMTZ6Mo9nyjy5gocFU3KGG5jkWwLDhtbt8Dly8ud1m36AAXqKc2h+mQZhf5Q8F8ULjzb3
+ y5AOu562xQp0qvEbfpmw/zKkBtIKspcyEd3ELLkeI4Z+7OKx63MV6eIZsPgXlWsvGIHU9UdtM
+ 0AHqNxr9VluycpUgyQsYsswCEga+w7bmm8IgjwSYdf3dixSD3kfG3PyolewkGmq2SnnkzTy/C
+ 8H0fVG/axOCPKPzkqDu3cUL5zaiKyBM6FerEPFLTB5cgvFcqZdsUkyuuvSiIeh/QZdxzRnhZ1
+ OjOtZEcMAlDbHO7BarZELwgb0sZeIeZV+P8zUTHZj3J0hjvwN73IZySjtt4vQeAFbqPBcRD4Y
+ VkafcB60oKURQfkzMGLt8NDubgWS9WqIPTeJeP0Doy7JmPPgAhpi5n4Qt1otXZ4u4osF9qL6d
+ r9pG5f6ThCq+ptBvFhWl8ZyIWi4=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -62,291 +87,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fork from ae350_rv[32/64]_spl_[xip]_defconfig and
-append CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
+On 10/12/23 03:56, Sean Anderson wrote:
+> fs.c thinks that the sandbox filesystem is available if SANDBOX is enabl=
+ed,
+> but it is not in SPL. Compile it in SPL to avoid linker errors.
+>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> ---
+>
+>   fs/Makefile | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/fs/Makefile b/fs/Makefile
+> index 4bed2ff2d99..592c7542bde 100644
+> --- a/fs/Makefile
+> +++ b/fs/Makefile
+> @@ -9,6 +9,7 @@ obj-$(CONFIG_FS_LOADER) +=3D fs.o
+>   obj-$(CONFIG_SPL_FS_FAT) +=3D fat/
+>   obj-$(CONFIG_SPL_FS_EXT4) +=3D ext4/
+>   obj-$(CONFIG_SPL_FS_CBFS) +=3D cbfs/
+> +obj-$(CONFIG_SANDBOX) +=3D sandbox/
 
-Signed-off-by: Randolph <randolph@andestech.com>
----
- configs/ae350_rv32_falcon_defconfig     | 60 ++++++++++++++++++++++++
- configs/ae350_rv32_falcon_xip_defconfig | 61 +++++++++++++++++++++++++
- configs/ae350_rv64_falcon_defconfig     | 60 ++++++++++++++++++++++++
- configs/ae350_rv64_falcon_xip_defconfig | 61 +++++++++++++++++++++++++
- 4 files changed, 242 insertions(+)
- create mode 100644 configs/ae350_rv32_falcon_defconfig
- create mode 100644 configs/ae350_rv32_falcon_xip_defconfig
- create mode 100644 configs/ae350_rv64_falcon_defconfig
- create mode 100644 configs/ae350_rv64_falcon_xip_defconfig
+Why wouldn't you use CONFIG_SANDBOX_SPL here?
 
-diff --git a/configs/ae350_rv32_falcon_defconfig b/configs/ae350_rv32_falcon_defconfig
-new file mode 100644
-index 0000000000..8f796d88e3
---- /dev/null
-+++ b/configs/ae350_rv32_falcon_defconfig
-@@ -0,0 +1,60 @@
-+CONFIG_RISCV=y
-+CONFIG_TEXT_BASE=0x01800000
-+CONFIG_SYS_MALLOC_LEN=0x80000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
-+CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
-+CONFIG_SYS_PROMPT="RISC-V # "
-+CONFIG_SYS_MONITOR_LEN=786432
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
-+CONFIG_SPL=y
-+CONFIG_SYS_LOAD_ADDR=0x100000
-+CONFIG_TARGET_ANDES_AE350=y
-+CONFIG_RISCV_SMODE=y
-+# CONFIG_AVAILABLE_HARTS is not set
-+CONFIG_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
-+CONFIG_SYS_MONITOR_BASE=0x88000000
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DISPLAY_CPUINFO=y
-+CONFIG_DISPLAY_BOARDINFO=y
-+CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_SPL_MAX_SIZE=0x100000
-+CONFIG_SPL_BSS_START_ADDR=0x400000
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_CACHE=y
-+CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
-+CONFIG_SYS_PBSIZE=1050
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_CMD_IMLS=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_SF_TEST=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_BOOTP_PREFER_SERVERIP=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_BOOTP_SEND_HOSTNAME=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_MMC=y
-+CONFIG_FTSDC010=y
-+CONFIG_FTSDC010_SDIO=y
-+CONFIG_MTD_NOR_FLASH=y
-+CONFIG_FLASH_CFI_DRIVER=y
-+CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
-+CONFIG_FLASH_SHOW_PROGRESS=0
-+CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
-+CONFIG_SYS_FLASH_CFI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_FTMAC100=y
-+CONFIG_BAUDRATE=38400
-+CONFIG_SYS_NS16550=y
-+CONFIG_SPI=y
-+CONFIG_ATCSPI200_SPI=y
-+# CONFIG_BINMAN_FDT is not set
-+CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
-\ No newline at end of file
-diff --git a/configs/ae350_rv32_falcon_xip_defconfig b/configs/ae350_rv32_falcon_xip_defconfig
-new file mode 100644
-index 0000000000..e01dd6fc51
---- /dev/null
-+++ b/configs/ae350_rv32_falcon_xip_defconfig
-@@ -0,0 +1,61 @@
-+CONFIG_RISCV=y
-+CONFIG_TEXT_BASE=0x01800000
-+CONFIG_SYS_MALLOC_LEN=0x80000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
-+CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_DEFAULT_DEVICE_TREE="ae350_32"
-+CONFIG_SPL_TEXT_BASE=0x80000000
-+CONFIG_SYS_PROMPT="RISC-V # "
-+CONFIG_SYS_MONITOR_LEN=786432
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
-+CONFIG_SPL=y
-+CONFIG_SYS_LOAD_ADDR=0x100000
-+CONFIG_TARGET_ANDES_AE350=y
-+CONFIG_RISCV_SMODE=y
-+CONFIG_SPL_XIP=y
-+CONFIG_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x80010000
-+CONFIG_SYS_MONITOR_BASE=0x88000000
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DISPLAY_CPUINFO=y
-+CONFIG_DISPLAY_BOARDINFO=y
-+CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_SPL_MAX_SIZE=0x100000
-+CONFIG_SPL_BSS_START_ADDR=0x400000
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_CACHE=y
-+CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
-+CONFIG_SYS_PBSIZE=1050
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_CMD_IMLS=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_SF_TEST=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_BOOTP_PREFER_SERVERIP=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_BOOTP_SEND_HOSTNAME=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_MMC=y
-+CONFIG_FTSDC010=y
-+CONFIG_FTSDC010_SDIO=y
-+CONFIG_MTD_NOR_FLASH=y
-+CONFIG_FLASH_CFI_DRIVER=y
-+CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
-+CONFIG_FLASH_SHOW_PROGRESS=0
-+CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
-+CONFIG_SYS_FLASH_CFI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_FTMAC100=y
-+CONFIG_BAUDRATE=38400
-+CONFIG_SYS_NS16550=y
-+CONFIG_SPI=y
-+CONFIG_ATCSPI200_SPI=y
-+# CONFIG_BINMAN_FDT is not set
-+CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
-\ No newline at end of file
-diff --git a/configs/ae350_rv64_falcon_defconfig b/configs/ae350_rv64_falcon_defconfig
-new file mode 100644
-index 0000000000..d11be976de
---- /dev/null
-+++ b/configs/ae350_rv64_falcon_defconfig
-@@ -0,0 +1,60 @@
-+CONFIG_RISCV=y
-+CONFIG_TEXT_BASE=0x01800000
-+CONFIG_SYS_MALLOC_LEN=0x80000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
-+CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
-+CONFIG_SYS_PROMPT="RISC-V # "
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
-+CONFIG_SPL=y
-+CONFIG_SYS_LOAD_ADDR=0x100000
-+CONFIG_TARGET_ANDES_AE350=y
-+CONFIG_ARCH_RV64I=y
-+CONFIG_RISCV_SMODE=y
-+# CONFIG_AVAILABLE_HARTS is not set
-+CONFIG_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x10000000
-+CONFIG_SYS_MONITOR_BASE=0x88000000
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DISPLAY_CPUINFO=y
-+CONFIG_DISPLAY_BOARDINFO=y
-+CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_SPL_MAX_SIZE=0x100000
-+CONFIG_SPL_BSS_START_ADDR=0x400000
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_CACHE=y
-+CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
-+CONFIG_SYS_PBSIZE=1050
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_CMD_IMLS=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_SF_TEST=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_BOOTP_PREFER_SERVERIP=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_BOOTP_SEND_HOSTNAME=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_MMC=y
-+CONFIG_FTSDC010=y
-+CONFIG_FTSDC010_SDIO=y
-+CONFIG_MTD_NOR_FLASH=y
-+CONFIG_FLASH_CFI_DRIVER=y
-+CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
-+CONFIG_FLASH_SHOW_PROGRESS=0
-+CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
-+CONFIG_SYS_FLASH_CFI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_FTMAC100=y
-+CONFIG_BAUDRATE=38400
-+CONFIG_SYS_NS16550=y
-+CONFIG_SPI=y
-+CONFIG_ATCSPI200_SPI=y
-+# CONFIG_BINMAN_FDT is not set
-+CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
-\ No newline at end of file
-diff --git a/configs/ae350_rv64_falcon_xip_defconfig b/configs/ae350_rv64_falcon_xip_defconfig
-new file mode 100644
-index 0000000000..492451ecf1
---- /dev/null
-+++ b/configs/ae350_rv64_falcon_xip_defconfig
-@@ -0,0 +1,61 @@
-+CONFIG_RISCV=y
-+CONFIG_TEXT_BASE=0x01800000
-+CONFIG_SYS_MALLOC_LEN=0x80000
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000000
-+CONFIG_ENV_SECT_SIZE=0x1000
-+CONFIG_DEFAULT_DEVICE_TREE="ae350_64"
-+CONFIG_SPL_TEXT_BASE=0x80000000
-+CONFIG_SYS_PROMPT="RISC-V # "
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000000
-+CONFIG_SPL=y
-+CONFIG_SYS_LOAD_ADDR=0x100000
-+CONFIG_TARGET_ANDES_AE350=y
-+CONFIG_ARCH_RV64I=y
-+CONFIG_RISCV_SMODE=y
-+CONFIG_SPL_XIP=y
-+CONFIG_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x80010000
-+CONFIG_SYS_MONITOR_BASE=0x88000000
-+CONFIG_DISTRO_DEFAULTS=y
-+CONFIG_BOOTDELAY=3
-+CONFIG_DISPLAY_CPUINFO=y
-+CONFIG_DISPLAY_BOARDINFO=y
-+CONFIG_BOARD_EARLY_INIT_F=y
-+CONFIG_SPL_MAX_SIZE=0x100000
-+CONFIG_SPL_BSS_START_ADDR=0x400000
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_CACHE=y
-+CONFIG_SPL_OPENSBI_SCRATCH_OPTIONS=0x0
-+CONFIG_SYS_PBSIZE=1050
-+CONFIG_SYS_BOOTM_LEN=0x4000000
-+CONFIG_CMD_IMLS=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_SF_TEST=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_BOOTP_PREFER_SERVERIP=y
-+CONFIG_CMD_CACHE=y
-+CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_SPI_FLASH=y
-+CONFIG_NET_RETRY_COUNT=50
-+CONFIG_BOOTP_SEND_HOSTNAME=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_MMC=y
-+CONFIG_FTSDC010=y
-+CONFIG_FTSDC010_SDIO=y
-+CONFIG_MTD_NOR_FLASH=y
-+CONFIG_FLASH_CFI_DRIVER=y
-+CONFIG_SYS_FLASH_CFI_WIDTH_16BIT=y
-+CONFIG_FLASH_SHOW_PROGRESS=0
-+CONFIG_SYS_CFI_FLASH_STATUS_POLL=y
-+CONFIG_SYS_FLASH_USE_BUFFER_WRITE=y
-+CONFIG_SYS_FLASH_CFI=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_FTMAC100=y
-+CONFIG_BAUDRATE=38400
-+CONFIG_SYS_NS16550=y
-+CONFIG_SPI=y
-+CONFIG_ATCSPI200_SPI=y
-+# CONFIG_BINMAN_FDT is not set
-+CONFIG_SPL_LOAD_FIT_OPENSBI_OS_BOOT=y
-\ No newline at end of file
--- 
-2.34.1
+Best regards
+
+Heinrich
+
+>   obj-$(CONFIG_SPL_FS_SQUASHFS) +=3D squashfs/
+>   else
+>   obj-y				+=3D fs.o
 
