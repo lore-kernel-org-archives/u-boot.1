@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BA94CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:28:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8892ACDB465
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:28:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 474EB86EAA;
-	Thu, 12 Oct 2023 04:03:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F096086E5B;
+	Thu, 12 Oct 2023 04:03:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="M9LZKqBg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DNVrOQNO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D9AF86E4B; Thu, 12 Oct 2023 04:01:30 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id A6BC286EDE; Thu, 12 Oct 2023 04:01:02 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F34D86E8F
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:58:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 350FD86EAA
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:58:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-66d060aa2a4so2600106d6.2
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:58:52 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-773ac11de71so28034385a.2
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:58:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697075814; x=1697680614; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697075816; x=1697680616; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pZzjezKApISn0uSMHAPaorKbAXrIvzZcpuJxuZ56kWo=;
- b=M9LZKqBg8KSfdz9nG8rnfaUS0b5lqj1PXfqvoKlXiVjU+lypl0aZk1R7nW7Uf1vL4g
- ca+/i5HiOpi90otxq6PJztWhZzzh06eTHv454V6B7ZLKAfLo+bES7wXq8WN/WDA/j1Qx
- QqpU/PnoMafBRxES8dxG7ZItMddzTYUaoZjM/aWGenALlEa7tlSL7MoWjZdZeaEbXYfp
- 9GL+yFHcFq8dZCQrQDUV+Z8pobthZ99a/JO2ndvSxCDqBor6B5d9scdj/xdrwEO1QhPZ
- fOKNDLA1Kazw8J2qMGcZ57QF2S/upoHzKRxPewZTE5X/hb7UivAp3Rz1TMwxdlLpET2t
- FKNQ==
+ bh=k++kXJDnsS42yMVXN9BxH9tuE8PxYf4XWR5puBPWCyw=;
+ b=DNVrOQNOgae62m4MsD19U+ujJrOTx/K3OwwEgAYilPjn5zX9xnYgkGOVyTpbXx/0Yj
+ xu542iBkcP5E7ou0astLHtyuoFK89WQGo5DEkaDrj3KpIGo3dVJTQzjbNZ2+szSVWlzw
+ YFdzgzHiQCGrpyb7S8p0fipp5Szedw9nqbAdN3uR1jRYARum1MQmK5UCMf47xd26xNYY
+ K4gmQhWRkvyPS2scF9d2awi2WbqzkxWC1FNInjQAb2eTbA+QfbM/GzM6ZXAK5B39pkVl
+ BcUnvqSb413HHTA+O/DITzQxLWGepY+S6GwFaiB7pzX42uhM00Umi+3v75hfF/k3CCqS
+ 6P5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697075814; x=1697680614;
+ d=1e100.net; s=20230601; t=1697075816; x=1697680616;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pZzjezKApISn0uSMHAPaorKbAXrIvzZcpuJxuZ56kWo=;
- b=Vz7nvR32CdchL46LGPth2DlcDN/OgX5d3nWlCcpUlp4TlGKeMciNf481gvq/0znYp0
- H2rvqDRFc2YidddHL48rHkEKNtrKfGDmnvao47xTQWg+qr46I88FC/VutMDUnnyfflKQ
- eQMhI7UHFkKihlk0NwGyWZBWLaVNrakofz23w+Ms+okqlzIAkGFreE6beOVMNRzfO0ie
- lH97kqSTm4fKBmFFAejMd/hjTXyReX8TaKv4zzMAZlp84QaVZLlLzT/oIj7mcVPsz+q/
- ZPS5Qg4TbDGBlemO2kcqoASVmYmCOi4aaeloBqmMvwol0Suah9iZ92f1Pgh5yOIGQdf2
- 6zVw==
-X-Gm-Message-State: AOJu0Yz+4DiP476lFGfAZmvj4WjIJAFzSUZc3DYO6qlJw+z2uz6JvrxB
- CGQyWdRKCXtLouEW0XHXsHbAAY8X7Gd09Q==
-X-Google-Smtp-Source: AGHT+IHqzkofFNb5ZVBFb7RdOO6E8JllRbiqs6jQZNOqnrorNUnE/gDomiRf4mE05KkaQy+Y8IFRZQ==
-X-Received: by 2002:a0c:e34a:0:b0:66d:9d2:8312 with SMTP id
- a10-20020a0ce34a000000b0066d09d28312mr3054269qvm.49.1697075814245; 
- Wed, 11 Oct 2023 18:56:54 -0700 (PDT)
+ bh=k++kXJDnsS42yMVXN9BxH9tuE8PxYf4XWR5puBPWCyw=;
+ b=bwriCsDp/w5fzjg43W34C8vRqjSGM++KSTHJQWYe9DSD75o+Mg8GIZih80k6TA46EQ
+ zu/ugBGhCXCnqQxbJap1nalzDKzj4bYxpdseFtbn0zAIok9HQnsPEZZKkIw8BMeogh3I
+ TYfv4PeSdjYvic9WjWg7pFR8+frsK12g7ZdfVCpAt+BdkK1PxbQCI3w1n1dtBaDQY8gz
+ l2MDBZpg++NGXhMZkWh8YNKMbjR5QsY3VzNVIbFoQWZ/N8jBClQCErKT5THUL5gzfLLD
+ GoEQS3aR5GMiPSL5TUAUAFyeraGN1c/wuWUiChJWdSSPKDvWKt9HQAON8WLbQSVF1+Rd
+ UzZw==
+X-Gm-Message-State: AOJu0YyZTqDxR02ZlSK32WUF56Nsz1zPDEBBwKIPVfGqvDGuEmVmwWCw
+ II1JYkPq8zxax0Iw17LSn26PFVUkLI0JDQ==
+X-Google-Smtp-Source: AGHT+IEHRZLMq5bRS0xJd56AExH71BYcaxGAt4hfwns3NcgMjSkRlbnq0ZHxw3Q8csR4dFGgEvcmZA==
+X-Received: by 2002:a05:620a:1377:b0:76f:93e:4b30 with SMTP id
+ d23-20020a05620a137700b0076f093e4b30mr22262509qkl.67.1697075816435; 
+ Wed, 11 Oct 2023 18:56:56 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- t7-20020a0cde07000000b006624e9d51d9sm6103181qvk.76.2023.10.11.18.56.53
+ b27-20020a05620a127b00b0077568327b54sm5627891qkl.123.2023.10.11.18.56.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 18:56:53 -0700 (PDT)
+ Wed, 11 Oct 2023 18:56:56 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>
-Subject: [PATCH 22/26] test: spl: Add a test for spl_blk_load_image
-Date: Wed, 11 Oct 2023 21:56:22 -0400
-Message-Id: <20231012015626.3487451-23-seanga2@gmail.com>
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH 24/26] test: spl: Add a test for the NET load method
+Date: Wed, 11 Oct 2023 21:56:24 -0400
+Message-Id: <20231012015626.3487451-25-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231012015626.3487451-1-seanga2@gmail.com>
 References: <20231012015626.3487451-1-seanga2@gmail.com>
@@ -94,134 +95,378 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test for spl_blk_load_image, currently used only by NVMe. Because
-there is no sandbox NVMe driver, just use MMC instead. Avoid falling back
-to raw images to make failures more obvious.
+Add a test for loading U-Boot over TFTP. As with other sandbox net
+routines, we need to initialize our packets manually since things like
+net_set_ether and net_set_udp_header always use "our" addresses. We use
+BOOTP instead of DHCP, since DHCP has a tag/length-based format which is
+harder to parse. Our TFTP implementation doesn't define as many constants
+as I'd like, so I create some here. Note that the TFTP block size is
+one-based, but offsets are zero-based.
+
+In order to avoid address errors, we need to set up/define some additional
+address information settings. dram_init_banksize would be a good candidate
+for settig up bi_dram, but it gets called too late in board_init_r.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- configs/sandbox_noinst_defconfig |  2 ++
- test/image/Kconfig               |  3 +-
- test/image/spl_load_fs.c         | 62 ++++++++++++++++++++++++++++++++
- 3 files changed, 66 insertions(+), 1 deletion(-)
+ arch/sandbox/cpu/spl.c           |   3 +
+ arch/sandbox/include/asm/spl.h   |   1 +
+ configs/sandbox_noinst_defconfig |   6 +-
+ test/image/Kconfig               |   9 ++
+ test/image/Makefile              |   1 +
+ test/image/spl_load_net.c        | 252 +++++++++++++++++++++++++++++++
+ 6 files changed, 271 insertions(+), 1 deletion(-)
+ create mode 100644 test/image/spl_load_net.c
 
+diff --git a/arch/sandbox/cpu/spl.c b/arch/sandbox/cpu/spl.c
+index 09e3d10d6a5..8153df18d68 100644
+--- a/arch/sandbox/cpu/spl.c
++++ b/arch/sandbox/cpu/spl.c
+@@ -126,6 +126,9 @@ void spl_board_init(void)
+ {
+ 	struct sandbox_state *state = state_get_current();
+ 
++	gd->bd->bi_dram[0].start = gd->ram_base;
++	gd->bd->bi_dram[0].size = get_effective_memsize();
++
+ 	if (state->run_unittests) {
+ 		struct unit_test *tests = UNIT_TEST_ALL_START();
+ 		const int count = UNIT_TEST_ALL_COUNT();
+diff --git a/arch/sandbox/include/asm/spl.h b/arch/sandbox/include/asm/spl.h
+index 2f8b5fcfcfe..ab9475567e0 100644
+--- a/arch/sandbox/include/asm/spl.h
++++ b/arch/sandbox/include/asm/spl.h
+@@ -12,6 +12,7 @@ enum {
+ 	BOOT_DEVICE_MMC2_2,
+ 	BOOT_DEVICE_BOARD,
+ 	BOOT_DEVICE_VBE,
++	BOOT_DEVICE_CPGMAC,
+ };
+ 
+ /**
 diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index 0a542cfb6aa..11be2dccf7d 100644
+index 4f16d9860d2..57cbadedb7d 100644
 --- a/configs/sandbox_noinst_defconfig
 +++ b/configs/sandbox_noinst_defconfig
-@@ -34,6 +34,7 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_HANDOFF=y
- CONFIG_SPL_BOARD_INIT=y
-+# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
- CONFIG_SPL_LEGACY_IMAGE_FORMAT=y
- CONFIG_SPL_LOAD_IMX_CONTAINER=y
- CONFIG_SPL_SYS_MALLOC=y
-@@ -123,6 +124,7 @@ CONFIG_ADC=y
- CONFIG_ADC_SANDBOX=y
- CONFIG_AXI=y
- CONFIG_AXI_SANDBOX=y
-+CONFIG_SPL_BLK_FS=y
- CONFIG_SYS_IDE_MAXBUS=1
- CONFIG_SYS_ATA_BASE_ADDR=0x100
- CONFIG_SYS_ATA_STRIDE=4
+@@ -12,7 +12,7 @@ CONFIG_SPL_DRIVERS_MISC=y
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+ CONFIG_SPL=y
+ CONFIG_SPL_FS_FAT=y
+-CONFIG_SYS_LOAD_ADDR=0x0
++CONFIG_SYS_LOAD_ADDR=0x1000000
+ CONFIG_PCI=y
+ CONFIG_SANDBOX_SPL=y
+ CONFIG_DEBUG_UART=y
+@@ -44,9 +44,11 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x4000000
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x0
+ CONFIG_SPL_ENV_SUPPORT=y
++CONFIG_SPL_ETH=y
+ CONFIG_SPL_FS_EXT4=y
+ CONFIG_SPL_I2C=y
+ CONFIG_SPL_MMC_WRITE=y
++CONFIG_SPL_NET=y
+ CONFIG_SPL_RTC=y
+ CONFIG_CMD_CPU=y
+ CONFIG_CMD_LICENSE=y
+@@ -109,6 +111,8 @@ CONFIG_ENV_IS_NOWHERE=y
+ CONFIG_ENV_IS_IN_EXT4=y
+ CONFIG_ENV_EXT4_INTERFACE="host"
+ CONFIG_ENV_EXT4_DEVICE_AND_PART="0:0"
++CONFIG_USE_BOOTFILE=y
++CONFIG_BOOTFILE="uImage"
+ CONFIG_BOOTP_SEND_HOSTNAME=y
+ CONFIG_NETCONSOLE=y
+ CONFIG_IP_DEFRAG=y
 diff --git a/test/image/Kconfig b/test/image/Kconfig
-index 963c86cc290..a52766b77d4 100644
+index e6be1b829f3..99c50787816 100644
 --- a/test/image/Kconfig
 +++ b/test/image/Kconfig
-@@ -14,12 +14,13 @@ config SPL_UT_LOAD_FS
- 	bool "Unit tests for filesystems"
- 	depends on SANDBOX && SPL_OF_REAL
- 	depends on FS_LOADER
-+	depends on SPL_BLK_FS
- 	depends on SPL_FS_FAT
- 	depends on SPL_FS_EXT4
- 	depends on SPL_MMC_WRITE
- 	default y
+@@ -23,6 +23,15 @@ config SPL_UT_LOAD_FS
  	help
--	  Test filesystems in SPL.
-+	  Test filesystems and the various load methods which use them.
+ 	  Test filesystems and the various load methods which use them.
  
++config SPL_UT_LOAD_NET
++	bool "Test loading over TFTP"
++	depends on SANDBOX && SPL_OF_REAL
++	depends on SPL_ETH
++	depends on USE_BOOTFILE
++	default y
++	help
++	  Test loading images over TFTP using the NET image load method.
++
  config SPL_UT_LOAD_OS
  	bool "Test loading from the host OS"
-diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
-index 8cd90b73518..45059f91999 100644
---- a/test/image/spl_load_fs.c
-+++ b/test/image/spl_load_fs.c
-@@ -10,6 +10,7 @@
- #include <fat.h>
- #include <fs.h>
- #include <memalign.h>
+ 	depends on SANDBOX && SPL_LOAD_FIT
+diff --git a/test/image/Makefile b/test/image/Makefile
+index 9427e69bd3b..ddbc39bf959 100644
+--- a/test/image/Makefile
++++ b/test/image/Makefile
+@@ -4,4 +4,5 @@
+ 
+ obj-$(CONFIG_SPL_UT_LOAD) += spl_load.o
+ obj-$(CONFIG_SPL_UT_LOAD_FS) += spl_load_fs.o
++obj-$(CONFIG_SPL_UT_LOAD_NET) += spl_load_net.o
+ obj-$(CONFIG_SPL_UT_LOAD_OS) += spl_load_os.o
+diff --git a/test/image/spl_load_net.c b/test/image/spl_load_net.c
+new file mode 100644
+index 00000000000..f570cef163f
+--- /dev/null
++++ b/test/image/spl_load_net.c
+@@ -0,0 +1,252 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2023 Sean Anderson <seanga2@gmail.com>
++ */
++
++#include <common.h>
++#include <dm.h>
 +#include <spl.h>
- #include <asm/io.h>
- #include <linux/stat.h>
- #include <test/spl.h>
-@@ -303,3 +304,64 @@ static int spl_test_fat(struct unit_test_state *uts)
- 	return spl_test_fs(uts, __func__, create_fat);
- }
- SPL_TEST(spl_test_fat, DM_FLAGS);
++#include <test/spl.h>
++#include <asm/eth.h>
++#include <test/ut.h>
++#include "../../net/bootp.h"
 +
-+static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
-+			   enum spl_test_image type, create_fs_t create_fs)
++/*
++ * sandbox_eth_bootp_req_to_reply()
++ *
++ * Check if a BOOTP request was sent. If so, inject a reply
++ *
++ * returns 0 if injected, -EAGAIN if not
++ */
++static int sandbox_eth_bootp_req_to_reply(struct udevice *dev, void *packet,
++					  unsigned int len)
 +{
-+	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
-+	struct blk_desc *dev_desc;
-+	size_t fs_size, fs_data, img_size, img_data,
-+	       data_size = SPL_TEST_DATA_SIZE;
-+	struct spl_image_info info_write = {
-+		.name = test_name,
-+		.size = data_size,
-+	}, info_read = { };
-+	struct disk_partition part = {
-+		.start = 1,
-+		.sys_ind = 0x83,
-+	};
-+	struct spl_boot_device bootdev = { };
-+	void *fs;
-+	char *data;
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct ethernet_hdr *eth = packet;
++	struct ip_udp_hdr *ip;
++	struct bootp_hdr *bp;
++	struct ethernet_hdr *eth_recv;
++	struct ip_udp_hdr *ipr;
++	struct bootp_hdr *bpr;
 +
-+	img_size = create_image(NULL, type, &info_write, &img_data);
-+	ut_assert(img_size);
-+	fs_size = create_fs(NULL, img_size, filename, &fs_data);
-+	ut_assert(fs_size);
-+	fs = calloc(fs_size, 1);
-+	ut_assertnonnull(fs);
++	if (ntohs(eth->et_protlen) != PROT_IP)
++		return -EAGAIN;
 +
-+	data = fs + fs_data + img_data;
-+	generate_data(data, data_size, test_name);
-+	ut_asserteq(img_size, create_image(fs + fs_data, type, &info_write,
-+					   NULL));
-+	ut_asserteq(fs_size, create_fs(fs, img_size, filename, NULL));
++	ip = packet + ETHER_HDR_SIZE;
++	if (ip->ip_p != IPPROTO_UDP)
++		return -EAGAIN;
 +
-+	dev_desc = blk_get_devnum_by_uclass_id(UCLASS_MMC, 0);
-+	ut_assertnonnull(dev_desc);
++	if (ntohs(ip->udp_dst) != PORT_BOOTPS)
++		return -EAGAIN;
 +
-+	ut_asserteq(512, dev_desc->blksz);
-+	part.size = fs_size / dev_desc->blksz;
-+	ut_assertok(write_mbr_partitions(dev_desc, &part, 1, 0));
-+	ut_asserteq(part.size, blk_dwrite(dev_desc, part.start, part.size, fs));
++	bp = (void *)ip + IP_UDP_HDR_SIZE;
++	if (bp->bp_op != OP_BOOTREQUEST)
++		return -EAGAIN;
 +
-+	ut_assertok(spl_blk_load_image(&info_read, &bootdev, UCLASS_MMC, 0, 1));
-+	if (check_image_info(uts, &info_write, &info_read))
-+		return CMD_RET_FAILURE;
-+	ut_asserteq_mem(data, phys_to_virt(info_write.load_addr), data_size);
++	/* Don't allow the buffer to overrun */
++	if (priv->recv_packets >= PKTBUFSRX)
++		return 0;
 +
-+	free(fs);
++	/* reply to the request */
++	eth_recv = (void *)priv->recv_packet_buffer[priv->recv_packets];
++	memcpy(eth_recv, packet, len);
++	ipr = (void *)eth_recv + ETHER_HDR_SIZE;
++	bpr = (void *)ipr + IP_UDP_HDR_SIZE;
++	memcpy(eth_recv->et_dest, eth->et_src, ARP_HLEN);
++	memcpy(eth_recv->et_src, priv->fake_host_hwaddr, ARP_HLEN);
++	ipr->ip_sum = 0;
++	ipr->ip_off = 0;
++	net_write_ip(&ipr->ip_dst, net_ip);
++	net_write_ip(&ipr->ip_src, priv->fake_host_ipaddr);
++	ipr->ip_sum = compute_ip_checksum(ipr, IP_HDR_SIZE);
++	ipr->udp_src = ip->udp_dst;
++	ipr->udp_dst = ip->udp_src;
++
++	bpr->bp_op = OP_BOOTREPLY;
++	net_write_ip(&bpr->bp_yiaddr, net_ip);
++	net_write_ip(&bpr->bp_siaddr, priv->fake_host_ipaddr);
++	copy_filename(bpr->bp_file, CONFIG_BOOTFILE, sizeof(CONFIG_BOOTFILE));
++	memset(&bpr->bp_vend, 0, sizeof(bpr->bp_vend));
++
++	priv->recv_packet_length[priv->recv_packets] = len;
++	++priv->recv_packets;
++
 +	return 0;
 +}
 +
-+static int spl_test_blk(struct unit_test_state *uts, const char *test_name,
++struct spl_test_net_priv {
++	struct unit_test_state *uts;
++	void *img;
++	size_t img_size;
++	u16 port;
++};
++
++/* Well known TFTP port # */
++#define TFTP_PORT	69
++/* Transaction ID, chosen at random */
++#define	TFTP_TID	21313
++
++/*
++ *	TFTP operations.
++ */
++#define TFTP_RRQ	1
++#define TFTP_DATA	3
++#define TFTP_ACK	4
++
++/* default TFTP block size */
++#define TFTP_BLOCK_SIZE		512
++
++struct tftp_hdr {
++	u16 opcode;
++	u16 block;
++};
++
++#define TFTP_HDR_SIZE sizeof(struct tftp_hdr)
++
++/*
++ * sandbox_eth_tftp_req_to_reply()
++ *
++ * Check if a TFTP request was sent. If so, inject a reply. We don't support
++ * options, and we don't check for rollover, so we are limited files of less
++ * than 32M.
++ *
++ * returns 0 if injected, -EAGAIN if not
++ */
++static int sandbox_eth_tftp_req_to_reply(struct udevice *dev, void *packet,
++					 unsigned int len)
++{
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	struct spl_test_net_priv *test_priv = priv->priv;
++	struct ethernet_hdr *eth = packet;
++	struct ip_udp_hdr *ip;
++	struct tftp_hdr *tftp;
++	struct ethernet_hdr *eth_recv;
++	struct ip_udp_hdr *ipr;
++	struct tftp_hdr *tftpr;
++	size_t size;
++	u16 block;
++
++	if (ntohs(eth->et_protlen) != PROT_IP)
++		return -EAGAIN;
++
++	ip = packet + ETHER_HDR_SIZE;
++	if (ip->ip_p != IPPROTO_UDP)
++		return -EAGAIN;
++
++	if (ntohs(ip->udp_dst) == TFTP_PORT) {
++		tftp = (void *)ip + IP_UDP_HDR_SIZE;
++		if (htons(tftp->opcode) != TFTP_RRQ)
++			return -EAGAIN;
++
++		block = 0;
++	} else if (ntohs(ip->udp_dst) == TFTP_TID) {
++		tftp = (void *)ip + IP_UDP_HDR_SIZE;
++		if (htons(tftp->opcode) != TFTP_ACK)
++			return -EAGAIN;
++
++		block = htons(tftp->block);
++	} else {
++		return -EAGAIN;
++	}
++
++	if (block * TFTP_BLOCK_SIZE > test_priv->img_size)
++		return 0;
++
++	size = min(test_priv->img_size - block * TFTP_BLOCK_SIZE,
++		   (size_t)TFTP_BLOCK_SIZE);
++
++	/* Don't allow the buffer to overrun */
++	if (priv->recv_packets >= PKTBUFSRX)
++		return 0;
++
++	/* reply to the request */
++	eth_recv = (void *)priv->recv_packet_buffer[priv->recv_packets];
++	memcpy(eth_recv->et_dest, eth->et_src, ARP_HLEN);
++	memcpy(eth_recv->et_src, priv->fake_host_hwaddr, ARP_HLEN);
++	eth_recv->et_protlen = htons(PROT_IP);
++
++	ipr = (void *)eth_recv + ETHER_HDR_SIZE;
++	ipr->ip_hl_v = 0x45;
++	ipr->ip_len = htons(IP_UDP_HDR_SIZE + TFTP_HDR_SIZE + size);
++	ipr->ip_off = htons(IP_FLAGS_DFRAG);
++	ipr->ip_ttl = 255;
++	ipr->ip_p = IPPROTO_UDP;
++	ipr->ip_sum = 0;
++	net_copy_ip(&ipr->ip_dst, &ip->ip_src);
++	net_copy_ip(&ipr->ip_src, &ip->ip_dst);
++	ipr->ip_sum = compute_ip_checksum(ipr, IP_HDR_SIZE);
++
++	ipr->udp_src = htons(TFTP_TID);
++	ipr->udp_dst = ip->udp_src;
++	ipr->udp_len = htons(UDP_HDR_SIZE + TFTP_HDR_SIZE + size);
++	ipr->udp_xsum = 0;
++
++	tftpr = (void *)ipr + IP_UDP_HDR_SIZE;
++	tftpr->opcode = htons(TFTP_DATA);
++	tftpr->block = htons(block + 1);
++	memcpy((void *)tftpr + TFTP_HDR_SIZE,
++	       test_priv->img + block * TFTP_BLOCK_SIZE, size);
++
++	priv->recv_packet_length[priv->recv_packets] =
++		ETHER_HDR_SIZE + IP_UDP_HDR_SIZE + TFTP_HDR_SIZE + size;
++	++priv->recv_packets;
++
++	return 0;
++}
++
++static int spl_net_handler(struct udevice *dev, void *packet,
++			   unsigned int len)
++{
++	struct eth_sandbox_priv *priv = dev_get_priv(dev);
++	int old_packets = priv->recv_packets;
++
++	priv->fake_host_ipaddr = string_to_ip("1.1.2.4");
++	net_ip = string_to_ip("1.1.2.2");
++
++	sandbox_eth_arp_req_to_reply(dev, packet, len);
++	sandbox_eth_bootp_req_to_reply(dev, packet, len);
++	sandbox_eth_tftp_req_to_reply(dev, packet, len);
++
++	if (old_packets == priv->recv_packets)
++		return 0;
++
++	return 0;
++}
++
++static int spl_test_net_write_image(struct unit_test_state *uts, void *img,
++				    size_t img_size)
++{
++	struct spl_test_net_priv *test_priv = malloc(sizeof(*test_priv));
++
++	ut_assertnonnull(test_priv);
++	test_priv->uts = uts;
++	test_priv->img = img;
++	test_priv->img_size = img_size;
++
++	sandbox_eth_set_tx_handler(0, spl_net_handler);
++	sandbox_eth_set_priv(0, test_priv);
++	return 0;
++}
++
++static int spl_test_net(struct unit_test_state *uts, const char *test_name,
 +			enum spl_test_image type)
 +{
-+	if (spl_test_mmc_fs(uts, test_name, type, create_fat))
-+		return CMD_RET_FAILURE;
++	struct eth_sandbox_priv *priv;
++	struct udevice *dev;
++	int ret;
 +
-+	return spl_test_mmc_fs(uts, test_name, type, create_ext2);
++	net_server_ip = string_to_ip("1.1.2.4");
++	ret = do_spl_test_load(uts, test_name, type,
++			       SPL_LOAD_IMAGE_GET(0, BOOT_DEVICE_CPGMAC,
++						  spl_net_load_image_cpgmac),
++			       spl_test_net_write_image);
++
++	sandbox_eth_set_tx_handler(0, NULL);
++	ut_assertok(uclass_get_device(UCLASS_ETH, 0, &dev));
++	priv = dev_get_priv(dev);
++	free(priv->priv);
++	return ret;
 +}
-+SPL_IMG_TEST(spl_test_blk, LEGACY, DM_FLAGS);
-+SPL_IMG_TEST(spl_test_blk, FIT_EXTERNAL, DM_FLAGS);
-+SPL_IMG_TEST(spl_test_blk, FIT_INTERNAL, DM_FLAGS);
++SPL_IMG_TEST(spl_test_net, LEGACY, DM_FLAGS);
++SPL_IMG_TEST(spl_test_net, FIT_INTERNAL, DM_FLAGS);
++SPL_IMG_TEST(spl_test_net, FIT_EXTERNAL, DM_FLAGS);
 -- 
 2.37.1
 
