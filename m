@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA2D5C41513
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 04:17:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF412CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 04:18:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54DBB86CE8;
-	Thu, 12 Oct 2023 06:16:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2E6C286E54;
+	Thu, 12 Oct 2023 06:18:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fxQon1ih";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q7I9kdCk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26EE686E4B; Thu, 12 Oct 2023 06:16:32 +0200 (CEST)
-Received: from mail-vk1-xa31.google.com (mail-vk1-xa31.google.com
- [IPv6:2607:f8b0:4864:20::a31])
+ id 84BCF86D4D; Thu, 12 Oct 2023 06:18:49 +0200 (CEST)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E25886B0A
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 06:16:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56C5586D4D
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 06:18:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-vk1-xa31.google.com with SMTP id
- 71dfb90a1353d-495d687b138so195879e0c.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 21:16:28 -0700 (PDT)
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-41810cfc569so3599631cf.2
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 21:18:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697084187; x=1697688987; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697084326; x=1697689126; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=pNaWSSGpxBaBXJWWR32lmuxAfLKJZc3jiZottTuyT/M=;
- b=fxQon1ihTq4MNWSSgCB/enUwLsH74tzZXxe5TPcWakVqO3jtFiuHAUYfP+1blZdfrs
- WCIpoWs+1cCghiUKmVrbBA+rmxTxxkuYwcBtRTAU1VdigdpkC0WLGqTS9S7W7giL32+L
- zKoh8uLNh0UQLGFD11Bg5OOzKREkl7V1Y2n9vkJbxSe5AwxgSlLUNFguvIJlJMkYOAJ4
- +vzGxYrqLtdJNcaP3Zalr62qwHyq+kEPIsvGJWtwRtB4uQQetC+BSPoAamuy13sfQoNY
- JkMStB86S7MuDGT40y5W32/W6/4juzVwZ3h8hhYKgWWyAcvsdx3QoaFGBtTW1V1y9r3K
- ze4A==
+ bh=W2tcmVoHggu64NpuiSKD4rrpwdCHtBlI5DQcVLboOV4=;
+ b=Q7I9kdCknqynAzTnj/IBqRAlFzXoxawt3wMVFLfUN5gd8rrDFuHomCnOSA3PKugI+3
+ +G6/l9ZxLoftXdRvvBkujzN8Pvzt2PzyYfhG6MGS/My6IC9ctjUZ6lkUN/2jEGw+GDS4
+ wlb7vux2R36D6B7oL9MN/QQHzR28xD43JJfZRIJu8GaOeTw/qAjVz+3wgtYZlZ0jtX8U
+ oe2WjsHu+g17v2olcI+ttdzeuYVDL1zrw+1ckksC887JZ+sg3zY0Sd0qcI/Awxjp0y+R
+ fwY8HnQRlJ8yvFB3AR1LNMK3+eCh2QWqrFG0DaaGSE4h40hpPKurlyLX1O6UzNCatr5/
+ b5Ow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697084187; x=1697688987;
+ d=1e100.net; s=20230601; t=1697084326; x=1697689126;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=pNaWSSGpxBaBXJWWR32lmuxAfLKJZc3jiZottTuyT/M=;
- b=Z+ydcbLVMzS07Az9+LIeC19+wfJ5oEZh879GW3Ac7AC1ehsfxOcySuWOTqHLUuwTI2
- NFWrqPGhqhQAQoScN5tjr8FG/4t8lKxtPPcuZPFpX6uB9oF6dkK0y4oQtiDi9B8W9uPy
- Xc8iUBYeiG+ytrVUWv5NVaKkNWwTQLnZgGA8WKYnrK/IYeeOk53K2Dy0VPZrzhNxqgBY
- dVU/iEZpBj/r/KpkkHGHZX6VLGrdxjgCqJ9CHFG5gOnh9e3vNBWzF3+rZt4EMtMO+Z15
- fhsMeBUsKPpvzM85DaqSB7/afhbCUAjC+78s3pdStpMadBQ2LWL0eQENMbZPvfUlxPJq
- mhmQ==
-X-Gm-Message-State: AOJu0Yx/grP1f9miYAq7jICXmraQNnKW31wBMzxcuaAvRExhB0hYk4s6
- HNI1LNzr33HwqSTRCVURLtA=
-X-Google-Smtp-Source: AGHT+IGDGB4ckXD7vTq2g0Ps0z8g1/iJzK4N3PzJAhSJQJ7bdy8dv9yY8cKEIRlePCRHkgrunK/B2A==
-X-Received: by 2002:a1f:df43:0:b0:48f:f026:27de with SMTP id
- w64-20020a1fdf43000000b0048ff02627demr14265579vkg.15.1697084186882; 
- Wed, 11 Oct 2023 21:16:26 -0700 (PDT)
+ bh=W2tcmVoHggu64NpuiSKD4rrpwdCHtBlI5DQcVLboOV4=;
+ b=v+lE8/0ejs6VDm4lYDUkDyMv13RHHrnN7IZdbq7tpkGSJMNN47f+5mbQWsswxfUs1E
+ oOxY9imnf2k/i6UTcwubW7FhwURq2LkTmZY4i5OyPpWTudMIarLJLFFsplBBFunSSNIi
+ SL5A7I+X4KgRZAy5rhL0v+NYvVOVO6FEiBAlk4eLtnod6Cl+CrLq2BJASsU+QIcH0F5H
+ 8y5yO4FLacHmGBnr+k3kYuHKAIv8DQGZw3/cx9H92o6MJlqucVwPRwOLjdVLFvZ4ZH6V
+ z1eifcpTTRZCLnkkgFKwJ1lh24Fl2Bphi2u3BLczNS71jGska2PcQGvbU131X1zSRRlh
+ Mzyg==
+X-Gm-Message-State: AOJu0Yy5rGhQwgUrpIgepcGvYttJco/zYK2pr/TfdpqyuHRx9fOF0ngd
+ Tar5zMATTXIFRlnKZ//NzXk=
+X-Google-Smtp-Source: AGHT+IFGmUDksFUpIHubedMYPAPdBRlAUnMjijpieArJsJ5yh7rBiV/TZXQ5+gPhwkyZ/Doy0n63tQ==
+X-Received: by 2002:a05:622a:512:b0:419:52a9:9ffc with SMTP id
+ l18-20020a05622a051200b0041952a99ffcmr26980281qtx.35.1697084326073; 
+ Wed, 11 Oct 2023 21:18:46 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- a14-20020a0cca8e000000b00655e4f57732sm6216910qvk.35.2023.10.11.21.16.26
+ z1-20020ac86b81000000b004198f248e8dsm5896705qts.76.2023.10.11.21.18.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 21:16:26 -0700 (PDT)
-Message-ID: <a2e0be4f-5305-a471-a0c7-5b31c6dc97a9@gmail.com>
-Date: Thu, 12 Oct 2023 00:16:25 -0400
+ Wed, 11 Oct 2023 21:18:45 -0700 (PDT)
+Message-ID: <c8fd9934-279a-1e4c-fd4c-8388f9ebb348@gmail.com>
+Date: Thu, 12 Oct 2023 00:18:44 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH 25/26] test: spl: Add a test for the NOR load method
+Subject: Re: [PATCH 16/26] spl: Don't cache devices when UNIT_TEST is enabled
 Content-Language: en-US
 To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>
 References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-26-seanga2@gmail.com>
- <CAPnjgZ3YcC+AO2TU2syYOYCzKHpRDY90Gpi_RmTLYW00WiN5aw@mail.gmail.com>
+ <20231012015626.3487451-17-seanga2@gmail.com>
+ <CAPnjgZ1_cS9ABEr=2zgZVjhkdk=XWgdkWZiAMT__C_E2QozA7g@mail.gmail.com>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <CAPnjgZ3YcC+AO2TU2syYOYCzKHpRDY90Gpi_RmTLYW00WiN5aw@mail.gmail.com>
+In-Reply-To: <CAPnjgZ1_cS9ABEr=2zgZVjhkdk=XWgdkWZiAMT__C_E2QozA7g@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,207 +100,63 @@ X-Virus-Status: Clean
 On 10/11/23 23:41, Simon Glass wrote:
 > Hi Sean,
 > 
-> On Wed, 11 Oct 2023 at 18:57, Sean Anderson <seanga2@gmail.com> wrote:
+> On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
 >>
->> Add a test for the NOR load method. Since NOR is memory-mapped we can
->> substitute a buffer instead. The only major complication is testing LZMA
->> decompression.  It's too complex to implement LZMA compression in a test,
->> so we just include some pre-compressed data.
-> 
-> How about using the in-tree compression code?
-
-We have that for LZMA? From what I could tell we only have decompression
-in-tree.
-
+>> Several SPL functions try to avoid performing initialization twice by
+>> caching devices. This is fine for regular boot, but does not work with
+>> UNIT_TEST, since all devices are torn down after each test. Disable caching
+>> so we don't use stale devices.
 >>
 >> Signed-off-by: Sean Anderson <seanga2@gmail.com>
 >> ---
 >>
->>   arch/sandbox/include/asm/spl.h   |   1 +
->>   configs/sandbox_noinst_defconfig |   2 +
->>   configs/sandbox_spl_defconfig    |   2 +
->>   include/configs/sandbox.h        |   3 +
->>   include/test/spl.h               |   5 +
->>   test/image/Makefile              |   1 +
->>   test/image/spl_load.c            | 269 ++++++++++++++++++++++++++++++-
->>   test/image/spl_load_nor.c        |  39 +++++
->>   8 files changed, 316 insertions(+), 6 deletions(-)
->>   create mode 100644 test/image/spl_load_nor.c
-> 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
+>>   common/spl/spl_fat.c | 2 +-
+>>   common/spl/spl_mmc.c | 3 ++-
+>>   2 files changed, 3 insertions(+), 2 deletions(-)
 >>
->> diff --git a/arch/sandbox/include/asm/spl.h b/arch/sandbox/include/asm/spl.h
->> index ab9475567e0..cf16af5278a 100644
->> --- a/arch/sandbox/include/asm/spl.h
->> +++ b/arch/sandbox/include/asm/spl.h
->> @@ -13,6 +13,7 @@ enum {
->>          BOOT_DEVICE_BOARD,
->>          BOOT_DEVICE_VBE,
->>          BOOT_DEVICE_CPGMAC,
->> +       BOOT_DEVICE_NOR,
->>   };
->>
->>   /**
->> diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
->> index 57cbadedb7d..085cc30c1e2 100644
->> --- a/configs/sandbox_noinst_defconfig
->> +++ b/configs/sandbox_noinst_defconfig
->> @@ -49,6 +49,7 @@ CONFIG_SPL_FS_EXT4=y
->>   CONFIG_SPL_I2C=y
->>   CONFIG_SPL_MMC_WRITE=y
->>   CONFIG_SPL_NET=y
->> +CONFIG_SPL_NOR_SUPPORT=y
->>   CONFIG_SPL_RTC=y
->>   CONFIG_CMD_CPU=y
->>   CONFIG_CMD_LICENSE=y
->> @@ -257,6 +258,7 @@ CONFIG_RSA_VERIFY_WITH_PKEY=y
->>   CONFIG_TPM=y
->>   CONFIG_LZ4=y
->>   CONFIG_ZSTD=y
->> +CONFIG_SPL_LZMA=y
->>   CONFIG_ERRNO_STR=y
->>   CONFIG_EFI_CAPSULE_ON_DISK=y
->>   CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
->> diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
->> index b578cc8e443..56072b15ad2 100644
->> --- a/configs/sandbox_spl_defconfig
->> +++ b/configs/sandbox_spl_defconfig
->> @@ -41,6 +41,7 @@ CONFIG_SPL_SYS_MALLOC_SIZE=0x4000000
->>   CONFIG_SPL_ENV_SUPPORT=y
->>   CONFIG_SPL_FPGA=y
->>   CONFIG_SPL_I2C=y
->> +CONFIG_SPL_NOR_SUPPORT=y
->>   CONFIG_SPL_RTC=y
->>   CONFIG_CMD_CPU=y
->>   CONFIG_CMD_LICENSE=y
->> @@ -249,6 +250,7 @@ CONFIG_TPM=y
->>   CONFIG_SPL_CRC8=y
->>   CONFIG_LZ4=y
->>   CONFIG_ZSTD=y
->> +CONFIG_SPL_LZMA=y
->>   CONFIG_ERRNO_STR=y
->>   CONFIG_SPL_HEXDUMP=y
->>   CONFIG_EFI_CAPSULE_ON_DISK=y
->> diff --git a/include/configs/sandbox.h b/include/configs/sandbox.h
->> index 4e5653dc886..2372485c84e 100644
->> --- a/include/configs/sandbox.h
->> +++ b/include/configs/sandbox.h
->> @@ -18,4 +18,7 @@
->>   #define CFG_SYS_BAUDRATE_TABLE {4800, 9600, 19200, 38400, 57600,\
->>                                          115200}
->>
->> +/* Unused but necessary to build */
->> +#define CFG_SYS_UBOOT_BASE     CONFIG_TEXT_BASE
->> +
->>   #endif
->> diff --git a/include/test/spl.h b/include/test/spl.h
->> index cfb52c90855..82325702d4a 100644
->> --- a/include/test/spl.h
->> +++ b/include/test/spl.h
->> @@ -27,12 +27,14 @@ void generate_data(char *data, size_t size, const char *test_name);
->>   /**
->>    * enum spl_test_image - Image types for testing
->>    * @LEGACY: "Legacy" uImages
->> + * @LEGACY_LZMA: "Legacy" uImages, LZMA compressed
->>    * @IMX8: i.MX8 Container images
->>    * @FIT_INTERNAL: FITs with internal data
->>    * @FIT_EXTERNAL: FITs with external data
->>    */
->>   enum spl_test_image {
->>          LEGACY,
->> +       LEGACY_LZMA,
->>          IMX8,
->>          FIT_INTERNAL,
->>          FIT_EXTERNAL,
->> @@ -118,6 +120,9 @@ int do_spl_test_load(struct unit_test_state *uts, const char *test_name,
->>   static inline bool image_supported(enum spl_test_image type)
+>> diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+>> index c6e2526ade1..8bec9cce5ca 100644
+>> --- a/common/spl/spl_fat.c
+>> +++ b/common/spl/spl_fat.c
+>> @@ -24,7 +24,7 @@ static int spl_register_fat_device(struct blk_desc *block_dev, int partition)
 >>   {
->>          switch (type) {
->> +       case LEGACY_LZMA:
->> +               if (!IS_ENABLED(CONFIG_SPL_LZMA))
->> +                       return false;
->>          case LEGACY:
->>                  return IS_ENABLED(CONFIG_SPL_LEGACY_IMAGE_FORMAT);
->>          case IMX8:
->> diff --git a/test/image/Makefile b/test/image/Makefile
->> index ddbc39bf959..41b29995993 100644
->> --- a/test/image/Makefile
->> +++ b/test/image/Makefile
->> @@ -5,4 +5,5 @@
->>   obj-$(CONFIG_SPL_UT_LOAD) += spl_load.o
->>   obj-$(CONFIG_SPL_UT_LOAD_FS) += spl_load_fs.o
->>   obj-$(CONFIG_SPL_UT_LOAD_NET) += spl_load_net.o
->> +obj-$(CONFIG_SPL_NOR_SUPPORT) += spl_load_nor.o
->>   obj-$(CONFIG_SPL_UT_LOAD_OS) += spl_load_os.o
->> diff --git a/test/image/spl_load.c b/test/image/spl_load.c
->> index 06249044f9b..3f69e652630 100644
->> --- a/test/image/spl_load.c
->> +++ b/test/image/spl_load.c
->> @@ -43,6 +43,7 @@ void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
+>>          int err = 0;
 >>
->>   /* Local flags for spl_image; start from the "top" to avoid conflicts */
->>   #define SPL_IMX_CONTAINER      0x80000000
->> +#define SPL_COMP_LZMA          0x40000000
->>
->>   void generate_data(char *data, size_t size, const char *test_name)
->>   {
->> @@ -79,7 +80,8 @@ static size_t create_legacy(void *dst, struct spl_image_info *spl_image,
->>          image_set_os(hdr, spl_image->os);
->>          image_set_arch(hdr, IH_ARCH_DEFAULT);
->>          image_set_type(hdr, IH_TYPE_FIRMWARE);
->> -       image_set_comp(hdr, IH_COMP_NONE);
->> +       image_set_comp(hdr, spl_image->flags & SPL_COMP_LZMA ? IH_COMP_LZMA :
->> +                                                              IH_COMP_NONE);
->>          image_set_name(hdr, spl_image->name);
->>          image_set_hcrc(hdr, crc32(0, (void *)hdr, sizeof(*hdr)));
->>
->> @@ -252,6 +254,8 @@ size_t create_image(void *dst, enum spl_test_image type,
->>          info->flags = 0;
->>
->>          switch (type) {
->> +       case LEGACY_LZMA:
->> +               info->flags = SPL_COMP_LZMA;
->>          case LEGACY:
->>                  return create_legacy(dst, info, data_offset);
->>          case IMX8:
->> @@ -296,7 +300,7 @@ int check_image_info(struct unit_test_state *uts, struct spl_image_info *info1,
->>                  ut_asserteq(info1->load_addr, info2->load_addr);
->>                  if (info1->flags & SPL_IMX_CONTAINER)
->>                          ut_asserteq(0, info2->size);
->> -               else
->> +               else if (!(info1->flags & SPL_COMP_LZMA))
->>                          ut_asserteq(info1->size, info2->size);
->>          } else {
->>                  ut_asserteq(info1->load_addr - sizeof(struct legacy_img_hdr),
->> @@ -369,6 +373,246 @@ SPL_IMG_TEST(spl_test_image, IMX8, 0);
->>   SPL_IMG_TEST(spl_test_image, FIT_INTERNAL, 0);
->>   SPL_IMG_TEST(spl_test_image, FIT_EXTERNAL, 0);
->>
->> +/*
->> + * LZMA is too complex to generate on the fly, so let's use some data I put in
->> + * the oven^H^H^H^H compressed earlier
+>> -       if (fat_registered)
+>> +       if (!CONFIG_IS_ENABLED(UNIT_TEST) && fat_registered)
 > 
-> How would one create this data?
+> These sort of things worry me, since we are bringing test code /
+> conditions into the 'real' code. Is it possible to pass this as a
+> parameter, or adjust the value of fat_registered?
 
-Same as test/compression.c. I modified this test to hexdump the output of
-generate_data(plain, plain_size, "lzma") and then piped it to lzma. I massaged the
-output somewhat in vim (mostly to adjust the number of columns). You could probably
-script this, but it was a one-off thing.
+At the moment these variables are static, and I would like to keep them that way
+to avoid size growth. We really are doing an unusual thing with UNIT_TEST where
+devices which were previously valid can be free'd and then recreated later. This
+is why I decided on using UNIT_TEST as the determiner here, since nothing else
+should cause this situation.
 
 --Sean
 
->> + */
->> +static const char lzma_compressed[] = {
->> +       0x5d, 0x00, 0x00, 0x80, 0x00, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
->> +       0xff, 0x00, 0x02, 0x05, 0x55, 0x4e, 0x82, 0xbc, 0xc2, 0x42, 0xf6, 0x88,
->> +       0x6c, 0x99, 0xd6, 0x82, 0x48, 0xa6, 0x06, 0x67, 0xf8, 0x46, 0x7c, 0xe9,
->> +       0x41, 0x79, 0xfe, 0x90, 0x0b, 0x31, 0x7b, 0x79, 0x91, 0xb8, 0x5f, 0x33,
->> +       0x11, 0x04, 0xc3, 0x4f, 0xf5, 0x71, 0xd1, 0xfb, 0x94, 0x6b, 0x5f, 0x78,
->> +       0xe2, 0xfa, 0x6a, 0x21, 0xb6, 0x1d, 0x11, 0x0e, 0x5b, 0x56, 0x6a, 0x5b,
->> +       0xe9, 0x56, 0x5f, 0x8b, 0x87, 0x61, 0x96, 0x6d, 0xce, 0x66, 0xbb, 0xb6,
-> 
-> [..]
+>>                  return err;
+>>
+>>          err = fat_register_device(block_dev, partition);
+>> diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+>> index 67c7ae34a58..a8579e29dee 100644
+>> --- a/common/spl/spl_mmc.c
+>> +++ b/common/spl/spl_mmc.c
+>> @@ -417,7 +417,8 @@ int spl_mmc_load(struct spl_image_info *spl_image,
+>>
+>>          /* Perform peripheral init only once for an mmc device */
+>>          mmc_dev = spl_mmc_get_device_index(bootdev->boot_device);
+>> -       if (!mmc || spl_mmc_get_mmc_devnum(mmc) != mmc_dev) {
+>> +       if (CONFIG_IS_ENABLED(UNIT_TEST) || !mmc ||
+>> +           spl_mmc_get_mmc_devnum(mmc) != mmc_dev) {
+>>                  err = spl_mmc_find_device(&mmc, bootdev->boot_device);
+>>                  if (err)
+>>                          return err;
+>> --
+>> 2.37.1
+>>
 > 
 > Regards,
 > Simon
