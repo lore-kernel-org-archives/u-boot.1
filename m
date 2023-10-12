@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C9F9CDB474
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 21:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F885CDB474
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 21:56:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EBE386EC0;
-	Thu, 12 Oct 2023 23:49:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CC51E86EB9;
+	Thu, 12 Oct 2023 23:49:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Hn+g1l//";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="niXh9L0E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3EE3786EAA; Thu, 12 Oct 2023 23:24:29 +0200 (CEST)
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
- [IPv6:2607:f8b0:4864:20::82c])
+ id 3E7F686E7E; Thu, 12 Oct 2023 23:24:29 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D05D686E75
+ by phobos.denx.de (Postfix) with ESMTPS id CA3C986E4F
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 23:24:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82c.google.com with SMTP id
- d75a77b69052e-4180f5c51f8so11749031cf.1
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-5a7bbcc099fso18458587b3.3
  for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 14:24:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697145690; x=1697750490; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697145615; x=1697750415; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3VIJWAoe9wrNQv/ONUiws4BOC2xjVDIZAwji4BQFjoI=;
- b=Hn+g1l//vDZlV2QiT77R7B95m9BZJGeF+mqWZzn/XXd5XfKgF5jh94EUOmR+TD6s5n
- jQCUB6VauR1ip8Z6SPiZso2c5t5PHWEjTNpuEaEFWxtdhBf0eYWaI2MZorSjkWTqVJzD
- G3moWKN5jUDKIfqO4wzF9l+1GqCd0R87ESkns=
+ bh=+HSJRj3rSfQmGqAZn6b8P1ngG3XmX/c+wO+yGeEKDoA=;
+ b=niXh9L0Ea9Lpw4/A9SnZDgqGjNQ/7q3Yq0FCOyCJ4sqvUCqX15uMPQdXsNz8+w2uui
+ MfT3hWGzDGyjps/XpxPtPxdsjPhGWbnT2YuVROOU8MeTl4mZaCd9tKF2oVT7RAZoovdZ
+ b/2/JF6ckTG8VBrDp0+uaKFjPiZEyt5RA1RzE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697145690; x=1697750490;
+ d=1e100.net; s=20230601; t=1697145615; x=1697750415;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3VIJWAoe9wrNQv/ONUiws4BOC2xjVDIZAwji4BQFjoI=;
- b=FBcjhTqTzL6tGTIJj4IE9BD+/xeJvWP6WsrxGt5JMWQaqcoGQoj4uGqJcJLq/Re7JS
- EzaY5mWN9r/VlDUKq9FPnZUMC7AjXVfZLJ7ZNSE6KcMLGixx/phgABwMq+4XqiD5LtSF
- 4J42ZC10kn2aFd7RGF2ifQtjt65drYlStNQJLHDzoMiuzH2tD9U1NTiW65RNZJVaQn+l
- d9XL//KD/FR9PIDEdcNxtergiXymolg+oVpr2PpVBwA7Zh+s3BJtwAuRDNjMlYZLe+3Z
- BzsXHvdIikhevY8GnD/VxxJPh8l21qHUanwgvypOr7YXSGEeABY2Gft8sD2kIuC/va6L
- EUsA==
-X-Gm-Message-State: AOJu0YxOlxBmRGs8KNAzAN6urSEdM7B5m8cOpojH7Oj4hOMgOvSRUAai
- Zn8JoGzdz5nF3AwWjP7VwDaYhSJvj7QbxnHJ9XtcnA==
-X-Google-Smtp-Source: AGHT+IGFjimVLupxb+8yiz7E8taHqiSd0CRcQdeMOBM4palzn+zy0Zeon27rFKKJlP312MpLJDwlCw==
-X-Received: by 2002:a05:690c:88c:b0:570:2542:cc9b with SMTP id
- cd12-20020a05690c088c00b005702542cc9bmr15176455ywb.18.1697144674572; 
- Thu, 12 Oct 2023 14:04:34 -0700 (PDT)
+ bh=+HSJRj3rSfQmGqAZn6b8P1ngG3XmX/c+wO+yGeEKDoA=;
+ b=Ssl4TVVZZXm4NV26TrsXtRqeQoVR4QnZft/1xbCw9NqFcwKVeTRxUICv/FdjbQohwS
+ EuZerPhL+4NP5eegPQL3g79eVYY+yS1kknVSWyGJ0Fz8gEhzSnyRJsneHw1/QslSevQR
+ iGxkESEYUjoi+mLaDqtYqCMYDILKF3BgwdMAavaKzOqTO7KD61Bg0WHw5NoWtqNTdApR
+ w+gpFGUHR53XddC0Jf7xDqSen36svco2ooUtOQgDUrI/GBcl+jsYHKHty1dp+8oBiLJP
+ y+c3Cb+bQ5Tf5TGXunhmr43U6Px7lTEmoN+r4AE1Yb6IeQ6uPugYcdm5EvJvdHFiOU5S
+ Hcig==
+X-Gm-Message-State: AOJu0Yz9t0gh8mqW/UOdHH0QgoroAGgld0TwW1DfpJExhIu1rtZiaJwI
+ ITSWkxKWewVrLStZVwKP8fBjI9hdZzd5q7Ja477Y/g==
+X-Google-Smtp-Source: AGHT+IEqspgMiUI6O/KjkwNuiRNwP2uyfSrG0sbRRXY7Pac+m0xRzpjmPcX0qOjZYRA+DqT5jvPxnw==
+X-Received: by 2002:a81:6902:0:b0:59f:4dcd:227e with SMTP id
+ e2-20020a816902000000b0059f4dcd227emr25865340ywc.37.1697144662796; 
+ Thu, 12 Oct 2023 14:04:22 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-5647-4a14-f04e-8d8d.res6.spectrum.com.
  [2603:6081:7b00:6400:5647:4a14:f04e:8d8d])
  by smtp.gmail.com with ESMTPSA id
- y130-20020a0dd688000000b005a7a92a62besm222225ywd.8.2023.10.12.14.04.33
+ w4-20020a0ded04000000b005a42740fcd4sm217365ywe.94.2023.10.12.14.04.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 14:04:34 -0700 (PDT)
-Date: Thu, 12 Oct 2023 17:04:32 -0400
+ Thu, 12 Oct 2023 14:04:22 -0700 (PDT)
+Date: Thu, 12 Oct 2023 17:04:20 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Manorit Chawdhry <m-chawdhry@ti.com>
 Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>,
@@ -70,15 +70,15 @@ Cc: u-boot@lists.denx.de, Nishanth Menon <nm@ti.com>,
  Neha Malcom Francis <n-francis@ti.com>,
  Udit Kumar <u-kumar1@ti.com>, Reid Tonking <reidt@ti.com>,
  Apurva Nandan <a-nandan@ti.com>, Andrew Davis <afd@ti.com>
-Subject: Re: [PATCH v7 6/7] docs: board: ti: Add j721s2_evm documentation
-Message-ID: <20231012210432.GF3119521@bill-the-cat>
+Subject: Re: [PATCH v7 4/7] arm: dts: k3-j721s2: Sync from Linux tag v6.6-rc1
+Message-ID: <20231012210420.GD3119521@bill-the-cat>
 References: <20231006-b4-upstream-j721s2-r5-pinmux-v7-0-5d31f765dd2c@ti.com>
- <20231006-b4-upstream-j721s2-r5-pinmux-v7-6-5d31f765dd2c@ti.com>
+ <20231006-b4-upstream-j721s2-r5-pinmux-v7-4-5d31f765dd2c@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="R9VFWP4pkwQUpidF"
+ protocol="application/pgp-signature"; boundary="/nDFHZRcbCExpEIR"
 Content-Disposition: inline
-In-Reply-To: <20231006-b4-upstream-j721s2-r5-pinmux-v7-6-5d31f765dd2c@ti.com>
+In-Reply-To: <20231006-b4-upstream-j721s2-r5-pinmux-v7-4-5d31f765dd2c@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,18 +97,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---R9VFWP4pkwQUpidF
+--/nDFHZRcbCExpEIR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 06, 2023 at 10:16:00AM +0530, Manorit Chawdhry wrote:
+On Fri, Oct 06, 2023 at 10:15:58AM +0530, Manorit Chawdhry wrote:
 
-> Add the documentation for J721S2-EVM and SK-AM68
+> The following commit syncs the device tree from Linux tag
+> v6.6-rc1 to U-boot and fixes the following to be compatible with
+> the future syncs -
 >=20
-> TRM for J721S2/AM68: https://www.ti.com/lit/pdf/spruj28
-> Product Page for J721S2: https://www.ti.com/tool/J721S2XSOMXEVM
-> Product Page for AM68: https://www.ti.com/tool/SK-AM68
+> - Include k3-j721s2-common-proc-board.dts file
+>=20
+>     Remove the duplicated pinmuxes from r5 and -u-boot.dtsi files and
+>     include k3-j721s2-common-proc-board.dts for Linux fixes to propagate
+>     to U-boot.
+>=20
+> - Fixing the mcu_timer0
+>=20
+>     Remove timer0 and use the mcu_timer0 defined in mcu-wakeup.dtsi
+>=20
+> - Fixing secure proxy nodes
+>=20
+>     Linux DT now have these nodes defined so remove them and rename to
+>     use the Linux DT ones.
+>=20
+> - Remove cpsw node
+>=20
+>     The compatible is now fixed and the node is not required in
+>     -u-boot specifically
+>=20
+> - Remove aliases and chosen node
+>=20
+>     Use these from Linux and don't override when not required.
+>=20
+> - Remove /delete-property/ from sdhci nodes
+>=20
+>     We have the necessary clock and dev data so remove these.
+>=20
+> - Remove dummy_clocks and fs_loader0
+>=20
+>     These weren't being used anywhere so remove it.
+>=20
+> - Remove mcu_ringacc override
+>=20
+> All these have been put in a single commit to not break the
+> bisectability.
 >=20
 > Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
 > Reviewed-by: Nishanth Menon <nm@ti.com>
@@ -119,22 +154,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---R9VFWP4pkwQUpidF
+--/nDFHZRcbCExpEIR
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoX2AACgkQFHw5/5Y0
-tyxEbgv+OY9A7b4M/+iIccJiFFenPNBlMJy6P6TtVLsI8K8MvUDEGvWzY46lE7hq
-rL0LnXzL2i0vePmizaX0TbshmU8tK+a6U8DrxWJS763EFu56TTLwLsLpgi9/ZlY3
-GuUtGsTzyEU7mqCvbMj0yN0WD+GdDRhhxIRNTP/anD8bZYbOBR5qI49XBEX1AuAX
-9RK2fEos2ZE8wb2OPhoSj/4116cbMP045OGZTbDm/CwX9WF8JOnqdmF3jnde4XDM
-5fAik0eToDmZ/c7bj/Gy++fPRTBQBPLzTCyLF2kmAU0Zs3FysIoV6DJ3MPdfGgj8
-8PB7Fu7df8NPBIsaMIxxMJHD8yzyDiMeCRc94EA4H9D7Ec5iQx0PS92qXMbCnNqy
-LSIV4BxwQa/TraiGPsdoUIEiwa0J4Zm3/QhiZ1im1yhZpo3OBNFoiMuYI7rbA3Mo
-3vT6lue/BFCUOybq4putpaFXzCc3Sr/2J3dU+pRsDVnMf/EVVIih7BIMV6KLQzt2
-rMyKQufd
-=pxni
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoX1QACgkQFHw5/5Y0
+tywVEQwAolv3haLUGXgpNrE6dpSNgq7zwe83ANhLzZWT4kFK8HxD+Q6ZaZrSy0Qr
+yJozeQOwVN05sg/g85ml1Ys1vkPjjEODjxRQ7TXIBCj2pDpivEMM3ly7l+OkFlNe
+4/CbsIzJdKNQb60QCR+hyEvYPv6WyD586NHa8xqZjNpYvDUKkOQ5A5FXveg1+7+S
+Y/QU4m0rl3n4n052eZQjmZm0IcWZ0hq/2TkobVJP2Ful7qHc4ksDxKXVYuKN1E0n
+ampGncq92wdNbVkTYd95Ke99rQJ04XQqRIL5MMc6sNIB3NXgX+4gyd4hEM4wuirv
+xkWKEmRua02reu2Q+VbTdr0glmPYEeeSIAaVqw/Rw7YyyqOAV2cKClPX1daYQlTB
+WNVG88ynfhFbAtS6RbGF+RUZX4+rTpWeNz7foZ0N9NncPH9bH3Zd7gmgJ8wqfZcY
+axlGY8XMCmYGVQGbw5y5CcfwnIdxHWlx/o8F1HBySqf6i848Mfmdr8pJkkrVPpOB
+mlGAPjx6
+=cnO4
 -----END PGP SIGNATURE-----
 
---R9VFWP4pkwQUpidF--
+--/nDFHZRcbCExpEIR--
