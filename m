@@ -4,75 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3BF1CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 05:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98AE3CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 05:38:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DFA986E0E;
-	Thu, 12 Oct 2023 07:33:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4362486E3D;
+	Thu, 12 Oct 2023 07:38:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CGt41Tck";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CA0886E0B; Thu, 12 Oct 2023 07:33:37 +0200 (CEST)
-Received: from mail-pf1-x430.google.com (mail-pf1-x430.google.com
- [IPv6:2607:f8b0:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C4E4F86E40; Thu, 12 Oct 2023 07:38:23 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DADF786E13
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 07:33:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9114586D3D
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 07:38:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pf1-x430.google.com with SMTP id
- d2e1a72fcca58-694f3444f94so457327b3a.2
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 22:33:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697088811; x=1697693611; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=USp9ZiaqlqmZ7QzOzuM58XasadBRx+KZKC/rPBPErZ4=;
- b=CGt41TcketPyZ8lg7DFTMTASeQ7slqO0ce76vuNcZvMWKEAskHo9YW0skCAAmCXxwx
- tUO5TMCJdTnFgGCkgmPSKAiNLQsfQksKG2TFlizKr9xK6KkT42MlwtX0NL28iIUfCOX1
- Csq/Dl5+OXMH7JnQEXgsFsA0CdNC0brrafYorbvCUwYW2bzfD8i1NrfjyU9jEepr9ePk
- YRHUu4DkS7cY8DUJ6veojHIfgk4mbs9il2I3FqKYE5+5ltdlItcvdSTP7ZjrzEk6SLmD
- jDVyAkRW7ZXPxLfC4j4TqTYrcVlTOqn4cPyg5qaZzAy4FqdveYJ/kazQ9knasd/WOZws
- 7mbQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697088811; x=1697693611;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=USp9ZiaqlqmZ7QzOzuM58XasadBRx+KZKC/rPBPErZ4=;
- b=Dgp+pAiBmkKBR0fxZg6PAM5VwsB3caEbyU+CNdkmH5q2GJko7bFxyrVNqQv8W8QfGd
- mWJYRgg5PSgK1NoP9DyImdJLYYcpRKMdJVYtoYhk3QujAnA1cIRPY024EGZlfeHC5TMC
- 6CV+A47XW42ce75L4xMlaG9LvurqT8dKm/TshF9RxbTz9V2kkUtw8ZZBaLiD14N63z10
- ed4KTWh3xaO1abOcGdu9ZiRfc4vnUNQpTMKvl8APBHJJG6My7t6loRzN6MXf3jpREBhH
- cNLJ3Wh6JiHY4npUNfdoSw7uqKLhVhOkxiUxU3BNNui1hfCKKZ3Og1WmdjQ2vW49D8J5
- PM5g==
-X-Gm-Message-State: AOJu0YwoEp4kjP3tEofcvMVrfQ+Y9D6+8AwjnhoHUH0ppeofWFrVN1wy
- Dogd4VH1vtERAjjNrBQxuKOEoUKW1DANTyLGGyk=
-X-Google-Smtp-Source: AGHT+IFRFIBkRcTQ9dZrs/ieKMe7L7ou7KLHgAuBYUg4jz+oWe8548DaLTfld+/++G/5N9nb19I5Rw==
-X-Received: by 2002:a05:6a00:1687:b0:68a:5395:7aa5 with SMTP id
- k7-20020a056a00168700b0068a53957aa5mr26057553pfc.17.1697088810913; 
- Wed, 11 Oct 2023 22:33:30 -0700 (PDT)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- n26-20020aa7905a000000b0068fc48fcaa8sm11040294pfo.155.2023.10.11.22.33.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Oct 2023 22:33:30 -0700 (PDT)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH] efi_loader: use well-known guid for auto-created boot option
-Date: Thu, 12 Oct 2023 14:31:59 +0900
-Message-Id: <20231012053200.2337061-1-masahisa.kojima@linaro.org>
+ spf=pass smtp.mailfrom=randolph@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 39C5cCEU074513;
+ Thu, 12 Oct 2023 13:38:12 +0800 (+08)
+ (envelope-from randolph@andestech.com)
+Received: from swlinux02.andestech.com (10.0.15.183) by ATCPCS16.andestech.com
+ (10.0.1.222) with Microsoft SMTP Server id 14.3.498.0;
+ Thu, 12 Oct 2023 13:38:08 +0800
+From: Randolph <randolph@andestech.com>
+To: <u-boot@lists.denx.de>
+CC: <randolph.sklin@gmail.com>, <dylan@andestech.com>, <tim609@andestech.com>, 
+ <peterlin@andestech.com>, Randolph <randolph@andestech.com>
+Subject: [PATCH] riscv: andes: Rearrange Andes PLICSW to single-bit-per-hart
+ strategy
+Date: Thu, 12 Oct 2023 13:35:34 +0800
+Message-ID: <20231012053534.2859887-1-randolph@andestech.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 39C5cCEU074513
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,37 +61,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The boot option automatically created by efibootmgr is identified
-by the special guid appended in the optional data of boot option.
-The same mechanism is implemented in the EDK II reference
-implementation, it uses the different guid from the one currently
-U-Boot uses.
-The guid indicating auto-created boot option is not defined in the
-UEFI specification, but some userspace tools such as 'efivar' package
-are aware of the guid used in EDK II as auto-created boot option.
+Source hart information is not necessary in IPI, so we could
+use single-bit-per-hart strategy to rearrange PLICSW mapping.
 
-So let's use the same guid as EDK II reference implementation.
+Bit 0 of Interrupt Pending Bits is hardwired to 0.
+Therefore, we use bit 1 to send IPI to hart 0,
+bit 2 to hart 1, ..., and so on.
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+Signed-off-by: Randolph <randolph@andestech.com>
 ---
- include/efi_loader.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/riscv/lib/andes_plicsw.c | 24 +++++++++++-------------
+ 1 file changed, 11 insertions(+), 13 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index c4207edc91..106006127b 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -149,8 +149,8 @@ static inline efi_status_t efi_launch_capsules(void)
+diff --git a/arch/riscv/lib/andes_plicsw.c b/arch/riscv/lib/andes_plicsw.c
+index 7518408089..6fd49e873b 100644
+--- a/arch/riscv/lib/andes_plicsw.c
++++ b/arch/riscv/lib/andes_plicsw.c
+@@ -22,7 +22,7 @@
+ #include <linux/err.h>
  
- /* GUID for the auto generated boot menu entry */
- #define EFICONFIG_AUTO_GENERATED_ENTRY_GUID \
--	EFI_GUID(0x38c1acc1, 0x9fc0, 0x41f0, \
--		 0xb9, 0x01, 0xfa, 0x74, 0xd6, 0xd6, 0xe4, 0xde)
-+	EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
-+		 0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+ /* pending register */
+-#define PENDING_REG(base, hart)	((ulong)(base) + 0x1000 + ((hart) / 4) * 4)
++#define PENDING_REG(base)	((ulong)(base) + 0x1000)
+ /* enable register */
+ #define ENABLE_REG(base, hart)	((ulong)(base) + 0x2000 + (hart) * 0x80)
+ /* claim register */
+@@ -30,10 +30,11 @@
+ /* priority register */
+ #define PRIORITY_REG(base)	((ulong)(base) + PLICSW_PRIORITY_BASE)
  
- /* Use internal device tree when starting UEFI application */
- #define EFI_FDT_USE_INTERNAL NULL
+-#define ENABLE_HART_IPI         (0x01010101)
+-#define SEND_IPI_TO_HART(hart)  (0x1 << (hart))
++/* Bit 0 of PLIC-SW pending array is hardwired to zero, so we start from bit 1 */
++#define FIRST_AVAILABLE_BIT	0x2
++#define SEND_IPI_TO_HART(hart)	(FIRST_AVAILABLE_BIT << (hart))
+ #define PLICSW_PRIORITY_BASE        0x4
+-#define PLICSW_INTERRUPT_PER_HART   0x8
++#define PLICSW_INTERRUPT_PER_HART   0x1
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -41,9 +42,8 @@ static int enable_ipi(int hart)
+ {
+ 	unsigned int en;
+ 
+-	en = ENABLE_HART_IPI << hart;
++	en = FIRST_AVAILABLE_BIT << hart;
+ 	writel(en, (void __iomem *)ENABLE_REG(gd->arch.plicsw, hart));
+-	writel(en, (void __iomem *)ENABLE_REG(gd->arch.plicsw + 0x4, hart));
+ 
+ 	return 0;
+ }
+@@ -75,7 +75,7 @@ int riscv_init_ipi(void)
+ 	ret = uclass_find_first_device(UCLASS_CPU, &dev);
+ 	if (ret)
+ 		return ret;
+-	else if (!dev)
++	if (!dev)
+ 		return -ENODEV;
+ 
+ 	ofnode_for_each_subnode(node, dev_ofnode(dev->parent)) {
+@@ -105,10 +105,9 @@ int riscv_init_ipi(void)
+ 
+ int riscv_send_ipi(int hart)
+ {
+-	unsigned int ipi = (SEND_IPI_TO_HART(hart) << (8 * gd->arch.boot_hart));
++	unsigned int ipi = SEND_IPI_TO_HART(hart);
+ 
+-	writel(ipi, (void __iomem *)PENDING_REG(gd->arch.plicsw,
+-				gd->arch.boot_hart));
++	writel(ipi, (void __iomem *)PENDING_REG(gd->arch.plicsw));
+ 
+ 	return 0;
+ }
+@@ -125,10 +124,9 @@ int riscv_clear_ipi(int hart)
+ 
+ int riscv_get_ipi(int hart, int *pending)
+ {
+-	unsigned int ipi = (SEND_IPI_TO_HART(hart) << (8 * gd->arch.boot_hart));
++	unsigned int ipi = SEND_IPI_TO_HART(hart);
+ 
+-	*pending = readl((void __iomem *)PENDING_REG(gd->arch.plicsw,
+-						     gd->arch.boot_hart));
++	*pending = readl((void __iomem *)PENDING_REG(gd->arch.plicsw));
+ 	*pending = !!(*pending & ipi);
+ 
+ 	return 0;
 -- 
 2.34.1
 
