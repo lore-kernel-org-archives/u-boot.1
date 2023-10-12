@@ -4,69 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A01CDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:51:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4308CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:51:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4E54586F36;
-	Thu, 12 Oct 2023 05:46:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E7CC286F2A;
+	Thu, 12 Oct 2023 05:46:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="A7NNr1f0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aqhy98iW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C33786E0F; Thu, 12 Oct 2023 05:46:21 +0200 (CEST)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
+ id B4DC286E0E; Thu, 12 Oct 2023 05:46:21 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BBDD86E81
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:46:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E29A286ED3
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-d9a5adc8cefso592911276.0
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:46:08 -0700 (PDT)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-5a7d9d357faso7169567b3.0
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:46:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697082368; x=1697687168; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U46/NCeR/m8GfSqllz3+3aNCHJe7W1oqN0SLnvDz9f4=;
- b=A7NNr1f0g6QUZjHxDFOBv9Oqoyw2KVzOGiyF5n2bHrHrv7/CujoohPk/KcKh4HqNl1
- SupDlBxkRruJnCW1CFwKpqEqqf6EtZpyRlzK8kz4COHItPBCm2HZi3YeS2YlR04qYbYr
- 7I10Llg2Nj3FTVpeKpFpXVfzdPnzIjMb+3YSE=
+ d=chromium.org; s=google; t=1697082360; x=1697687160; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oqh7eOUTAOA04BSPdQA92u0SLc4J6o+4mm7Lbd6lWUs=;
+ b=aqhy98iWk/Y8Ew+QvZ0IOPXRG8NsNOCyCfdG0iGa1lgZinYjitsYfrUdN8pOHDTSv1
+ peTFSGWKo7stMh4dYI7W2d3ZlD0BmGq3hqDtzRJzCw6JX6lhmNr6ImwuJDG5rvoLn07J
+ jXh3YmKA0jcYyUrmPwCFRMXdjZi9QIZoltM4I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697082368; x=1697687168;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U46/NCeR/m8GfSqllz3+3aNCHJe7W1oqN0SLnvDz9f4=;
- b=djKIVPw/vfAT3GGA+B3L7w4PirsQJJrgD/LvhIfSaFAqm1XBVRxPstXJy5wVRKNQe4
- pHuBfl6lXlNzKUolyASOsOp0V6EBuW1i4CZlewzmWjmp+N3HcsYCsIramqdmWLp2kgqQ
- qtod62psztjTG6XxGdU5YGmLe0j+PfFjIGqq+IYZlrrcCPgj40qAGbvSXV0bsRrfeVsc
- FxRnRcFWFJD5XvNST8dY9eL9q0clcR6cetSf1K0DZPctGO6mrRjQswno1b7nvyXUTuiI
- 95T6a8kngAT3CL/e8+0DLKCdMpdGw5bZCbVTtr3LuZn21IlG8KJDvoozhVhliJngvDS7
- QoFw==
-X-Gm-Message-State: AOJu0YzM2mGvKOHoUwHdrKXFgV37CkefcRu/YVSbrxjxN7x60BX5QorS
- PFwiN0HEAfZ+YWhcIVzPCWhl9Np/7xSxjXB85HX8pNZErI1TXrB5/8k=
-X-Google-Smtp-Source: AGHT+IGCiBIB3qATbPwO61yXab9Pp6K2xFOcpr67/oMH5hGSZHFPw1BJQqvqgcZJnqitKNiHwqipZUn55AjEOJFiC9M=
-X-Received: by 2002:a25:a2cc:0:b0:d9a:560a:fbaa with SMTP id
- c12-20020a25a2cc000000b00d9a560afbaamr6115234ybn.0.1697082367522; Wed, 11 Oct
- 2023 20:46:07 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697082360; x=1697687160;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oqh7eOUTAOA04BSPdQA92u0SLc4J6o+4mm7Lbd6lWUs=;
+ b=f2SitYij1VnCYJviAJn/xZKuJEEwC75MGrB0uLAzEmzh0+g+29eBkoRxZRKKbhUJw9
+ eQKruJgdGw28Hy+rCt2o7/idMtVM8ZCQ2aPRHTRDTHGAUKfKtw4QJdmUeThQ/W7A7MOz
+ QeYNOrz4pxDl/Noq1DpIAztLJRf+p09qdUHzlWFcg41JqrbIW+hKfbXIry/N80qhz+xE
+ PA23H0MTTBq7rmI7wFFaGOGJBuSKdRgiye1OfMEkQdEYmARkCCVhikycl02RMH+BCFAp
+ QhcOUGuHlTg3tDhhC/RRv0kQx/wFMsypi7EwsBf/7Hwtu07mcJNT6gsJyYYW6XWB2C3Q
+ SW6g==
+X-Gm-Message-State: AOJu0Yz8CHMIau/Exl6+5CLWdNxMH9T8UUC6lqLfMZs4NDAYDCM3YzcT
+ 3Zocuqr9pEngNU+WfjE3cKsNrIIK7q8q0cSC47lohTwth0rgDhM+BAU=
+X-Google-Smtp-Source: AGHT+IEErVt1XfCO5nTAxk3Yp5LbfwYfUnHJoFV0wSoE5sKk4cTsZwAz11e2mUZWm4mWRAlKldTL1bg00kB0PmAv56Q=
+X-Received: by 2002:a05:690c:4513:b0:5a7:e3f9:a1fb with SMTP id
+ gt19-20020a05690c451300b005a7e3f9a1fbmr3660296ywb.42.1697082359618; Wed, 11
+ Oct 2023 20:45:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231008213646.622002-1-sjg@chromium.org>
- <20231008213646.622002-4-sjg@chromium.org>
- <4295df86-0a0b-420f-b8d2-ed5c930ea9ee@gmx.de>
-In-Reply-To: <4295df86-0a0b-420f-b8d2-ed5c930ea9ee@gmx.de>
+References: <DM6PR22MB22626D184E4A7038A3648C97BBD3A@DM6PR22MB2262.namprd22.prod.outlook.com>
+In-Reply-To: <DM6PR22MB22626D184E4A7038A3648C97BBD3A@DM6PR22MB2262.namprd22.prod.outlook.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Oct 2023 20:45:24 -0700
-Message-ID: <CAPnjgZ2Tt-=Botwz7QotJYJ9SxKBvS7Tx=C35+j+CRWOLD9ZbA@mail.gmail.com>
-Subject: Re: [PATCH 3/5] smbios: Use SMBIOS 3.0 to support an address above 4GB
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 11 Oct 2023 20:45:19 -0700
+Message-ID: <CAPnjgZ28JE+8Tb4ft-B73fey_TOiWuJ1tyrxgOSwAMEud==iEQ@mail.gmail.com>
+Subject: Re: coreboot 4.11 + U-boot master
+To: Jay Talbott <JayTalbott@sysproconsulting.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,99 +82,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Jay,
 
-On Sun, 8 Oct 2023 at 19:48, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Wed, 11 Oct 2023 at 19:03, Jay Talbott
+<JayTalbott@sysproconsulting.com> wrote:
 >
-> On 10/8/23 23:36, Simon Glass wrote:
-> > When the SMBIOS table is written to an address above 4GB a 32-bit table
-> > address is not large enough.
-> >
-> > Use an SMBIOS3 table in that case.
-> >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >   include/smbios.h | 22 +++++++++++++++++++++-
-> >   lib/smbios.c     | 22 ++++++++++++++++++----
-> >   2 files changed, 39 insertions(+), 5 deletions(-)
-> >
-> > diff --git a/include/smbios.h b/include/smbios.h
-> > index c9df2706f5a6..ddabb558299e 100644
-> > --- a/include/smbios.h
-> > +++ b/include/smbios.h
-> > @@ -12,7 +12,8 @@
-> >
-> >   /* SMBIOS spec version implemented */
-> >   #define SMBIOS_MAJOR_VER    3
-> > -#define SMBIOS_MINOR_VER     0
-> > +#define SMBIOS_MINOR_VER     7
-> > +
-> >
-> >   enum {
-> >       SMBIOS_STR_MAX  = 64,   /* Maximum length allowed for a string */
-> > @@ -54,6 +55,25 @@ struct __packed smbios_entry {
-> >       u8 bcd_rev;
-> >   };
-> >
-> > +struct __packed smbios3_entry {
-> > +     u8 anchor[5];
-> > +     u8 checksum;
-> > +     u8 length;
-> > +     u8 major_ver;
-> > +
-> > +     u8 minor_ver;
-> > +     u8 docrev;
-> > +     u8 entry_point_rev;
-> > +     u8 reserved;
-> > +     u32 max_struct_size;
-> > +
-> > +     u64 struct_table_address;
-> > +};
-> > +
-> > +/* These two structures should use the same amount of 16-byte-aligned space */
-> > +static_assert(ALIGN(16, sizeof(struct smbios_entry)) ==
-> > +           ALIGN(16, sizeof(struct smbios3_entry)));
-> > +
-> >   /* BIOS characteristics */
-> >   #define BIOS_CHARACTERISTICS_PCI_SUPPORTED  (1 << 7)
-> >   #define BIOS_CHARACTERISTICS_UPGRADEABLE    (1 << 11)
-> > diff --git a/lib/smbios.c b/lib/smbios.c
-> > index c7a557bc9b7b..82e259f31791 100644
-> > --- a/lib/smbios.c
-> > +++ b/lib/smbios.c
-> > @@ -487,7 +487,11 @@ ulong write_smbios_table(ulong addr)
-> >       addr = ALIGN(addr, 16);
-> >       start_addr = addr;
-> >
-> > -     addr += sizeof(struct smbios_entry);
-> > +     /*
-> > +      * So far we don't know which struct will be used, but they both end
-> > +      * up using the same amount of 16-bit-aligned space
-> > +      */
-> > +     addr += max(sizeof(struct smbios_entry), sizeof(struct smbios3_entry));
-> >       addr = ALIGN(addr, 16);
-> >       tables = addr;
-> >
-> > @@ -513,13 +517,23 @@ ulong write_smbios_table(ulong addr)
-> >        */
-> >       table_addr = (ulong)map_sysmem(tables, 0);
-> >       if (sizeof(table_addr) > sizeof(u32) && table_addr > (ulong)UINT_MAX) {
+> Hi Simon,
 >
-> You have to check the end address of the table not the start address here.
 >
-> The SMBIOS specification says that you should always supply a 32bit
-> SMBIOS entry point. Of course this is not possible on boards that don't
-> have low memory.
 >
-> In install_smbios_table() this can be achieved by calling
-> efi_allocate_pages() with EFI_MAX_ALLOCATE_TYPE and a maximum address of
-> 4 GiB - 1. Only if this fails use high memory.
+> So I gave it a whirl to do a build of coreboot (on the 4.11 branch) with =
+the U-boot payload, specifying U-boot master to get the latest version of U=
+-boot.
+>
+>
+>
+> Unfortunately, it failed to build the payload:
+>
+>
+>
+>     Cloning U-Boot from Git
+>
+> Cloning into 'u-boot'...
+>
+> warning: redirecting to https://source.denx.de/u-boot/u-boot.git/
+>
+> remote: Enumerating objects: 945927, done.
+>
+> remote: Counting objects: 100% (6622/6622), done.
+>
+> remote: Compressing objects: 100% (2418/2418), done.
+>
+> remote: Total 945927 (delta 4232), reused 6496 (delta 4159), pack-reused =
+939305
+>
+> Receiving objects: 100% (945927/945927), 190.29 MiB | 6.01 MiB/s, done.
+>
+> Resolving deltas: 100% (793720/793720), done.
+>
+> Updating files: 100% (20136/20136), done.
+>
+>     Fetching new commits from the U-Boot git repo
+>
+>     Checking out U-Boot revision origin/master
+>
+> Already on 'master'
+>
+> Your branch is up to date with 'origin/master'.
+>
+> Branch 'coreboot' set up to track remote branch 'master' from 'origin'.
+>
+> Switched to a new branch 'coreboot'
+>
+>     MAKE       U-Boot origin/master
+>
+> In file included from tools/imagetool.h:24,
+>
+>                  from tools/aisimage.c:7:
+>
+> include/image.h:1396:12: fatal error: openssl/evp.h: No such file or dire=
+ctory
+>
+> 1396 | #  include <openssl/evp.h>
+>
+>       |            ^~~~~~~~~~~~~~~
+>
+> compilation terminated.
+>
+> make[3]: *** [scripts/Makefile.host:112: tools/aisimage.o] Error 1
+>
+> make[2]: *** [Makefile:1858: tools] Error 2
+>
+> make[1]: *** [Makefile:75: build] Error 2
+>
+> make: *** [payloads/external/Makefile.inc:187: payloads/external/U-Boot/u=
+-boot/u-boot-dtb.bin] Error 2
+>
+>
+>
+> Looks like it needs openssl to get pulled in as part of the build. Is the=
+re something I=E2=80=99m missing that I need to do to get that to happen au=
+tomatically? Or is there a manual step I need to do to get it pulled in?
 
-Hmm perhaps we need a way to allocate memory below 4GB in U-Boot? How
-does this EFI function work?
+For Debian this is:
 
-I don't think EFI has been set up by the time this function is called.
+sudo apt install libssl-dev
 
-Regards,
-Simon
+You can see all the pre-reqs at [1]
+
+
+>
+>
+>
+> Also, in coreboot=E2=80=99s make menuconfig, there=E2=80=99s a place for =
+specifying a U-boot config file. For the first go at it I didn=E2=80=99t sp=
+ecify one, but I=E2=80=99m guessing that maybe I need to at some point. If =
+so, can you point me to what I=E2=80=99ll need to put in there?
+
+Nothing in particular. At some point if you want to build a particular
+U-Boot version from a separate checkout, you can manually replace
+U-Boot in coreboot.rom:
+
+# update u-boot
+cbfstool $BUILD_DIR/coreboot.rom remove -n fallback/payload || true
+cbfstool $BUILD_DIR/coreboot.rom add-flat-binary \
+   -f u-boot.bin \
+    -n fallback/payload -c LZMA -l 0x1110000 -e 0x1110000
+
+If you want the 64-bit U-Boot then instead of u-boot.bin you need
+u-boot-x86-with-spl.bin (and you must use 'make coreboot64_defconfig'
+to configure U-Boot). In fact, that option is not available in
+coreboot yet, so I should send a patch!
+
+
+[1] https://u-boot.readthedocs.io/en/latest/build/gcc.html
