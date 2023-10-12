@@ -4,56 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7384CDB47E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 10:19:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C2E1CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 11:19:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A556186DD6;
-	Thu, 12 Oct 2023 12:19:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B9EB86E22;
+	Thu, 12 Oct 2023 13:19:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gpLjvE+X";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OPa65Asn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E77AC86DD6; Thu, 12 Oct 2023 12:19:18 +0200 (CEST)
-Received: from mail-m12774.qiye.163.com (mail-m12774.qiye.163.com
- [115.236.127.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5AAEB86DB5; Thu, 12 Oct 2023 13:19:18 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10AB686E0F
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 12:19:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id EDBA286E2F
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 13:19:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=zhangqing@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=gpLjvE+XLOh+rncB9KyOl78V0uE3Ev17vlnzt3WRlsjTilX1Q4YeycthRZPQSM8uKI3IXhKxTIq+LafJ7Qx1gva3lJ5qSiVG+J9cZvl34opXgw1Q1FUA8cayXzf8qZCs1VJmVMoJW47AQEUX+DcOT73hTM3ot5NBuDGNgZuZWFo=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=u8YofGLSIUx51vseZM3JHn1I0aLHcjBly0EnU37V6PU=;
- h=date:mime-version:subject:message-id:from;
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id EC864400395;
- Thu, 12 Oct 2023 18:18:29 +0800 (CST)
-From: Elaine Zhang <zhangqing@rock-chips.com>
-To: lukma@denx.de, seanga2@gmail.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, kever.yang@rock-chips.com
-Cc: u-boot@lists.denx.de, chenjh@rock-chips.com,
- Elaine Zhang <zhangqing@rock-chips.com>
-Subject: [PATCH v2 5/5] clk: rockchip: rk3588: fix up the frac pll calculation
-Date: Thu, 12 Oct 2023 18:18:28 +0800
-Message-Id: <20231012101828.27195-1-zhangqing@rock-chips.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20231011102947.21188-1-zhangqing@rock-chips.com>
-References: <20231011102947.21188-1-zhangqing@rock-chips.com>
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU0fS1ZLHRoZTUkYGE1MSh5VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8b236519712eb3kusnec864400395
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Py46OQw6GDwyUQsDCjVNT05C
- LTYKCQNVSlVKTUJMSktOQkpLQ0pNVTMWGhIXVQETGhUcChIVHDsJFBgQVhgTEgsIVRgUFkVZV1kS
- C1lBWU5DVUlJVUxVSkpPWVdZCAFZQU5KSkM3Bg++
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-53b32dca0bfso1718799a12.0
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 04:19:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697109540; x=1697714340; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=rdU40PxLeoGAJVSJmCjVjE0n5kR98vuf34bTjJ9QAlU=;
+ b=OPa65AsnvHk/0OAw1eiIdPFMbC3GcCUMPyMwpFxwY3P63rpakO9Jexk8Aa6OqCDzoF
+ 8aHxVCfzoBFtRSzw0MpWz7jv0QayNGWZKOMy6oBIs875xjPay2TfvdPqPbYUgz8r52eY
+ 49uM5l7qP8YyreLtLPLs+2QXCwr7aYLnYcMxyfh6wCTPFB7B/nAPmVLGzfGEk/pgRbfI
+ yFB8B2MJVazFOHZ20ALAB6JxVrlbLsodsjnUKZ18YPWOkfYexeax6aJrvuTg3nQ0LN/W
+ moF/WA5awomKEwp+cNCHq3mrUPalUSCg4NaSEUDBWjg9tBoBLXC/R0nZ0ShN0o+b5ITq
+ evEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697109540; x=1697714340;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=rdU40PxLeoGAJVSJmCjVjE0n5kR98vuf34bTjJ9QAlU=;
+ b=LVZZ75DZaAzAw36wRxeC6JJtbPk3P/oGK2tMFrXPcB3g6ttiuUU1RdcfWDJsQhL9FK
+ V/8VbLsCEW45kbFnHNW/5BSE+rN4zineyTRl6kTY3wMO07U2WM6OiCW3fuHYCsnQlZi8
+ +ZnTEX4YaiBCs5wYYmynHPma0Vd5h9kRx1YnGz3Zv6ToRuoDdteaKVttGm2JkNl/mvqg
+ ciP2DewKvgZ1OWVkc3+3Fu0QYc0CDShM/wEEsdrxeupqcnBUAcvwS18GvHov47itnpKz
+ 4EKTWyUtsLFV46u3mYhlLfipiN5jIcnahvK8kqb8meUEbsoVI3q948tn93AjpY44lWZG
+ QaFw==
+X-Gm-Message-State: AOJu0YxG7f7B471PjklPBXJ4wA7Gc3xlsjQbX6aQJP3WDWc6l4JiApb6
+ ZuHZOlIMXv3eL8BlVPqWm+o=
+X-Google-Smtp-Source: AGHT+IE/8jsBWI0+4MfYnl0KiOo8tjbyTgW9A/0Vu1j1v39Dt6FAP6nz4qYgSD9gszbA6y8njuv84w==
+X-Received: by 2002:a05:6402:5207:b0:53e:264d:be1f with SMTP id
+ s7-20020a056402520700b0053e264dbe1fmr437316edd.2.1697109539874; 
+ Thu, 12 Oct 2023 04:18:59 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ by smtp.gmail.com with ESMTPSA id
+ u1-20020a05640207c100b005311e934765sm9979748edy.27.2023.10.12.04.18.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Oct 2023 04:18:59 -0700 (PDT)
+Message-ID: <e5ea6ffc-afe2-1002-5806-113d05c0cb24@gmail.com>
+Date: Thu, 12 Oct 2023 13:18:58 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v2 2/3] dm: prepare rkmtd UCLASS
+To: Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>
+Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, u-boot@lists.denx.de,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ dario.binacchi@amarulasolutions.com
+References: <9dd66b67-e372-fcb9-ed38-7ad24d83edbb@gmail.com>
+ <c2acc0c6-0a8b-f4e1-7877-73fa5eef404b@gmail.com>
+ <CAPnjgZ2EMus-Q9DY+-7dn-P5+VSLELd8nnp4NOxR0XxHzZfamw@mail.gmail.com>
+Content-Language: en-US
+From: Johan Jonker <jbx6244@gmail.com>
+In-Reply-To: <CAPnjgZ2EMus-Q9DY+-7dn-P5+VSLELd8nnp4NOxR0XxHzZfamw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,154 +98,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-rk3588 frac pll:
-FFVCO = ((m + k / 65536) * FFIN) / p
-FFOUT = ((m + k / 65536) * FFIN) / (p * 2s)
-k is the original code, but the K[15:0] is complement code
-(6'b1000_0000_0000_0000 <= K[15:0] <= 16'b0111_1111_1111_1111),
-need to be converted.
 
-Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
----
- drivers/clk/rockchip/clk_pll.c | 102 +++++++++++++++++++++++++--------
- 1 file changed, 78 insertions(+), 24 deletions(-)
 
-diff --git a/drivers/clk/rockchip/clk_pll.c b/drivers/clk/rockchip/clk_pll.c
-index d657ef38f3c6..1bb31b3313b5 100644
---- a/drivers/clk/rockchip/clk_pll.c
-+++ b/drivers/clk/rockchip/clk_pll.c
-@@ -168,13 +168,71 @@ rockchip_pll_clk_set_by_auto(ulong fin_hz,
- 	return rate_table;
- }
- 
-+static u32
-+rockchip_rk3588_pll_k_get(u32 m, u32 p, u32 s, u64 fin_hz, u64 fvco)
-+{
-+	u64 fref, fout, ffrac;
-+	u32 k = 0;
-+
-+	fref = fin_hz / p;
-+	ffrac = fvco - (m * fref);
-+	fout = ffrac * 65536;
-+	k = fout / fref;
-+	if (k > 32767) {
-+		fref = fin_hz / p;
-+		ffrac = ((m + 1) * fref) - fvco;
-+		fout = ffrac * 65536;
-+		k = ((fout * 10 / fref) + 7) / 10;
-+		if (k > 32767)
-+			k = 0;
-+		else
-+			k = ~k + 1;
-+	}
-+	return k;
-+}
-+
-+static struct rockchip_pll_rate_table *
-+rockchip_rk3588_pll_frac_by_auto(unsigned long fin_hz, unsigned long fout_hz)
-+{
-+	struct rockchip_pll_rate_table *rate_table = &rockchip_auto_table;
-+	u32 p, m, s, k;
-+	u64 fvco;
-+
-+	for (s = 0; s <= 6; s++) {
-+		fvco = (u64)fout_hz << s;
-+		if (fvco < RK3588_VCO_MIN_HZ || fvco > RK3588_VCO_MAX_HZ)
-+			continue;
-+		for (p = 1; p <= 4; p++) {
-+			for (m = 64; m <= 1023; m++) {
-+				if ((fvco >= m * fin_hz / p) &&
-+				    (fvco < (m + 1) * fin_hz / p)) {
-+					k = rockchip_rk3588_pll_k_get(m, p, s,
-+								      fin_hz,
-+								      fvco);
-+					if (!k)
-+						continue;
-+					rate_table->p = p;
-+					rate_table->s = s;
-+					rate_table->k = k;
-+					if (k > 32767)
-+						rate_table->m = m + 1;
-+					else
-+						rate_table->m = m;
-+					return rate_table;
-+				}
-+			}
-+		}
-+	}
-+	return NULL;
-+}
-+
- static struct rockchip_pll_rate_table *
- rk3588_pll_clk_set_by_auto(unsigned long fin_hz,
- 			   unsigned long fout_hz)
- {
- 	struct rockchip_pll_rate_table *rate_table = &rockchip_auto_table;
- 	u32 p, m, s;
--	ulong fvco, fref, fout, ffrac;
-+	ulong fvco;
- 
- 	if (fin_hz == 0 || fout_hz == 0 || fout_hz == fin_hz)
- 		return NULL;
-@@ -202,27 +260,12 @@ rk3588_pll_clk_set_by_auto(unsigned long fin_hz,
- 		}
- 		pr_err("CANNOT FIND Fout by auto,fout = %lu\n", fout_hz);
- 	} else {
--		for (s = 0; s <= 6; s++) {
--			fvco = fout_hz << s;
--			if (fvco < RK3588_VCO_MIN_HZ ||
--			    fvco > RK3588_VCO_MAX_HZ)
--				continue;
--			for (p = 1; p <= 4; p++) {
--				for (m = 64; m <= 1023; m++) {
--					if ((fvco >= m * fin_hz / p) && (fvco < (m + 1) * fin_hz / p)) {
--						rate_table->p = p;
--						rate_table->m = m;
--						rate_table->s = s;
--						fref = fin_hz / p;
--						ffrac = fvco - (m * fref);
--						fout = ffrac * 65536;
--						rate_table->k = fout / fref;
--						return rate_table;
--					}
--				}
--			}
--		}
--		pr_err("CANNOT FIND Fout by auto,fout = %lu\n", fout_hz);
-+		rate_table = rockchip_rk3588_pll_frac_by_auto(fin_hz, fout_hz);
-+		if (!rate_table)
-+			pr_err("CANNOT FIND Fout by auto,fout = %lu\n",
-+			       fout_hz);
-+		else
-+			return rate_table;
- 	}
- 	return NULL;
- }
-@@ -533,11 +576,22 @@ static ulong rk3588_pll_get_rate(struct rockchip_pll_clock *pll,
- 
- 		rate = OSC_HZ / p;
- 		rate *= m;
--		if (k) {
-+		if (k & BIT(15)) {
-+			/* fractional mode */
-+			u64 frac_rate64;
-+
-+			k = (~(k - 1)) & RK3588_PLLCON2_K_MASK;
-+			frac_rate64 = OSC_HZ * k;
-+			postdiv = p;
-+			postdiv *= 65536;
-+			do_div(frac_rate64, postdiv);
-+			rate -= frac_rate64;
-+		} else {
- 			/* fractional mode */
- 			u64 frac_rate64 = OSC_HZ * k;
- 
--			postdiv = p * 65536;
-+			postdiv = p;
-+			postdiv *= 65536;
- 			do_div(frac_rate64, postdiv);
- 			rate += frac_rate64;
- 		}
--- 
-2.17.1
+On 10/2/23 03:16, Simon Glass wrote:
+> Hi Johan,
+> 
+> On Thu, 28 Sept 2023 at 12:51, Johan Jonker <jbx6244@gmail.com> wrote:
+>>
+>> Prepare a rkmtd UCLASS in use for writing Rockchip boot blocks
+>> in combination with existing userspace tools and rockusb command.
+>>
+>> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+>> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+>> ---
+>>  disk/part.c                | 4 ++++
+>>  drivers/block/blk-uclass.c | 1 +
+>>  include/dm/uclass-id.h     | 1 +
+>>  3 files changed, 6 insertions(+)
+>>
+> 
+> A new uclass should have a sandbox test and a header file or some
+> other docs describing it.
 
+Hi Simon, Mark,
+
+Found by git bisect. This serie worked fine till this patch was applied:
+
+blk: Add bounce buffer support to read/write operations
+https://source.denx.de/u-boot/u-boot/-/commit/75191f75bce45f3b9aff607c88f17778d3805c61
+
+On Rockchip boards CONFIG_BOUNCE_BUFFER is selected by CONFIG_MMC_DW.
+These DW controllers have there own DMA interface.
+However Rockchip boards CONFIG_DM_DMA is not enabled.
+A virtual disk driver doesn't work with that extra buffer.
+
+This patch is there. What route should we take to get rid of it.
+
+Please advise,
+
+Johan
+
+
+
+> 
+> REgards,
+> Simon
