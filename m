@@ -4,70 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6911ACDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:50:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6E58CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:51:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0184786F27;
+	by phobos.denx.de (Postfix) with ESMTP id 6923A86F2B;
 	Thu, 12 Oct 2023 05:46:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kBxUlSka";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ezblauMo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C94B686F10; Thu, 12 Oct 2023 05:45:54 +0200 (CEST)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
+ id 9BB9E86EC0; Thu, 12 Oct 2023 05:45:57 +0200 (CEST)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A18186E0E
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:45:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CF5386EBC
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:45:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-59f6492b415so4391757b3.0
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:45:31 -0700 (PDT)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-5a7be61fe74so7067657b3.2
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:45:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697082330; x=1697687130; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697082311; x=1697687111; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cQFcQT/p/9JtTLgPcw0aLSUmMHRzp1021fjtOf1YC1E=;
- b=kBxUlSkalLaT2uQHZwH6Nv85qOraqm1382PtZCbTyeCZJxMESUaSMezMNzbqJatSQa
- r6ATAAE/IHxbksbrzwgp/iw7g4kdKS3D2ikptpjkcEAJr1FzAciTcR9haZP3YaEm50yq
- cFmw1EAty400oWsB7BN8aLLN9DvGc9W6ym6S4=
+ bh=x4MUmRcp81HiMlvyG+EaEgyKF974iljwe89li+2tmPY=;
+ b=ezblauMoR16+9WXFLwjViy1j3HlXiTwP68OKtPt1+4U5JrFD559yqyFEmTEZpf5Gax
+ G7JUnpVqFHbH9rshUPGyx0914BZPTnyBlbTQBBuqoePIe+bnteBhmUnv8QcnJ4l0B0Dx
+ OKybVLyuCvI1I4/f9ccUUOJl8xOlDyASFImV4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697082330; x=1697687130;
+ d=1e100.net; s=20230601; t=1697082311; x=1697687111;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cQFcQT/p/9JtTLgPcw0aLSUmMHRzp1021fjtOf1YC1E=;
- b=pxueu5vagvpqkpu9lDQdJCBao0+ttsyUSVZmed1E3NsL3FHmIb6eQk4q7tCLVkW3Vz
- J8ychACBWRFIq3OJu7FOAlzKQwd2XkiRvKiLek/hL/0vT4FzNDPxVkpujJ94U9nvvsi9
- +1P6/y9P5SbVJ974CMhAcboyAghekNX0NR9cvKwBbA138BMg2kVXvh/XmaxB/Iv3/4wW
- n0F8DXV4xq2kPsmXycLRSlMLimDOYEUzesc5mw5U/hc+O4szhxNWEw+hM6GWdTfgGsrI
- jscOfHlVEzLwyQvkuzBD017q6NpJoJfOzK6Ec8oAejahDQBTStfkdtgZOUMvA+BwIUxH
- 1+Qw==
-X-Gm-Message-State: AOJu0YxBP1Mru9P1uv2mEhah41PSuCbeDggDo9Wf4tx2qJe9yG+/8lL8
- kfdSKsQVEDhE4yqeXbJ4skZjmvwRBDDGoZW79zXerQ==
-X-Google-Smtp-Source: AGHT+IGqkp+SGg18ZMVuZcfo9Fzj59J5JmhtXYvsPckc2G25IJ0IqhXYl11CGQ1HmTWo12wlEszSmdE+4brwvjyHdvQ=
-X-Received: by 2002:a81:6dd6:0:b0:5a7:d088:2c5d with SMTP id
- i205-20020a816dd6000000b005a7d0882c5dmr3165878ywc.26.1697082329785; Wed, 11
- Oct 2023 20:45:29 -0700 (PDT)
+ bh=x4MUmRcp81HiMlvyG+EaEgyKF974iljwe89li+2tmPY=;
+ b=VO/KRcqGelkZZiUthYwmwpXqGKMAupnBEmxh93dybC03TzPccUxwCBuVEFB1UWqJRT
+ 3ZnB1gSoL5n1jjnOfQHNo57evzHCPI5cHQZqN4cHSRKqdBMvno1L/tOZ+Ii4BuzB8+jO
+ +cfscZnSLvg6CwwYw+fR8ticwbEjhIpSy67MctpbGHtY/CG7TZq0BDiy+PHSQnwQhZ8i
+ OrbLIht9cNlWsyG53GStOwj/6mlvRiuHgDJiUL+xus9rmgHFZSYtrbEO1BuIoWM4RKyx
+ tjmDvtxZMKP9Gh1asczsdR3ZbGuI2wMwIOCEK+LH6s5Bw3HWqKW9dpmrptmdsuDxx22S
+ Mf5A==
+X-Gm-Message-State: AOJu0Yy+oBVwmVUZqvqf8Hr18Zg4i7yntVLlwYkgLCb06fv4whKISiYW
+ mPS4OObje9gbSGhLRqpxaa6s8CLCfUvYhjtz8A7gGg==
+X-Google-Smtp-Source: AGHT+IHSmmbK7qkRnWIUTkHrIygxoIQUagfDY/RgTJFcxGC5TUQsr3PyX4nmUv37bIsyV46Ury95JpJbgoZZFXVf8zY=
+X-Received: by 2002:a0d:c646:0:b0:59b:f899:7bd6 with SMTP id
+ i67-20020a0dc646000000b0059bf8997bd6mr23280055ywd.36.1697082311103; Wed, 11
+ Oct 2023 20:45:11 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231010091059.375036-1-sughosh.ganu@linaro.org>
- <20231010091059.375036-6-sughosh.ganu@linaro.org>
-In-Reply-To: <20231010091059.375036-6-sughosh.ganu@linaro.org>
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-20-seanga2@gmail.com>
+In-Reply-To: <20231012015626.3487451-20-seanga2@gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 11 Oct 2023 20:45:16 -0700
-Message-ID: <CAPnjgZ1rz-QO4TVqS9_bp1uGq_wk0SXKe5U0pDMi5FUPt-Kq5w@mail.gmail.com>
-Subject: Re: [PATCH v2 5/6] btool: mkeficapsule: Add support for EFI empty
- capsule generation
-To: sughosh.ganu@linaro.org
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Tom Rini <trini@konsulko.com>
+Date: Wed, 11 Oct 2023 20:41:28 -0700
+Message-ID: <CAPnjgZ3yoUOWkrji_i3a26foTotrKedRZ6PF=bLs60mekEC_hA@mail.gmail.com>
+Subject: Re: [PATCH 19/26] test: spl: Fix spl_test_load not failing if fname
+ doesn't exist
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,21 +83,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 10 Oct 2023 at 02:12, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> Add a method to the mkeficapsule bintool to generate empty
-> capsules. These are capsules needed for the FWU A/B update feature.
+> Returning a negative value from a unit test doesn't automatically fail the
+> test.  We have to fail an assertion. Modify the test to do so.
 >
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> This now causes the test to count as a failure on VPL. This is because the
+> fname of SPL (and U-Boot) is generated with make_exec in os_jump_to_image.
+> The original name of SPL is gone, and we can't determine the name of U-Boot
+> from the generated name.
+>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
-> Changes since V1:
-> * Use a single boolean value to indicate the generation of either of
->   accept/revert capsule.
-> * Move the parameters added to the list on the same line in a couple
->   of places.
 >
->  tools/binman/btool/mkeficapsule.py | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
->
+>  configs/sandbox_vpl_defconfig | 1 +
+>  test/image/spl_load_os.c      | 6 ++----
+>  2 files changed, 3 insertions(+), 4 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
