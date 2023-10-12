@@ -4,82 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DFD8CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 15:22:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D197CDB483
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 15:28:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5994486E73;
-	Thu, 12 Oct 2023 17:20:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E0DED86E14;
+	Thu, 12 Oct 2023 17:28:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TXHcNePe";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KeckuzQL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C26EC86E54; Thu, 12 Oct 2023 17:20:51 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
+ id 05BDD86DC7; Thu, 12 Oct 2023 17:28:38 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 595D586E4F
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 17:20:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7230486A6B
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 17:28:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-59f6492b415so9229557b3.0
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:20:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9ba081173a3so185396366b.1
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:28:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697124019; x=1697728819; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=k9BpA+GNTjgofFPrKqsQv89bdNIMvlRdPdaBw55iEjA=;
- b=TXHcNePe6iUx/Z5zWNiDe256y/GewepPymrV49dRb2G2ZjfB1ofcLwqF+56ndWzE/u
- QTYxunUlD0ws/RAK0yddOv6oLjZjfSOT8jN2PTXM1Yve4h0EvPEL9Eg50E4lI8fTRAg0
- bttPGkcbjHJYDe+tRZ8FeiG3rhdXKD1CqceuU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697124019; x=1697728819;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=chromium.org; s=google; t=1697124492; x=1697729292; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=k9BpA+GNTjgofFPrKqsQv89bdNIMvlRdPdaBw55iEjA=;
- b=AAjDhGHbEh+IS0VPmk3VkqOOryXvMoxPv2nALXEL/eSLsz24Nw720L3ZPA/DmBHTk4
- JiV/q3oDSZh4ukmOetPUjD+Y35lQZd1J/RaYq3WD6e3zB8Q+wOD8Pwlo7FvC0ZL7alWs
- vPILLrz41EokA0oClNnpSzqp2FvBlJIRCHxjJyoZFRwEog2P3aK2jDZKi5u2L3BGtqfN
- nmWOtLrQ4Q3N4vi/G26l7QB/0C8ws6seWCAqsYVSFdLieko9RfXzdAZTEF6Qif8jL+Pd
- Tbwu1uAfmDZso/F8bJIaFIL29WgYeA458Zlu7BEhf1RZccVKV0ceuiEH50eqapdZaE7b
- nbXQ==
-X-Gm-Message-State: AOJu0YzG/uyxEIrpN9AKKZBDBf5bjb0jkhOZNGDDd5nrGH8HZn/CN+Lc
- 8fObS9mu9LZUdWpQ2KlTnpMKbw==
-X-Google-Smtp-Source: AGHT+IEyOe5Lnfw6oGT2w2mgq/J/osvL1IJRXb16uR8s+FqUqeqktJ4a9cQUhBf6dF4qj82WIibO4A==
-X-Received: by 2002:a0d:d5c2:0:b0:59b:d33e:40e3 with SMTP id
- x185-20020a0dd5c2000000b0059bd33e40e3mr13680796ywd.11.1697124019003; 
- Thu, 12 Oct 2023 08:20:19 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-2621-cda6-b3e1-0b3d.res6.spectrum.com.
- [2603:6081:7b00:6400:2621:cda6:b3e1:b3d])
- by smtp.gmail.com with ESMTPSA id
- t6-20020a81c246000000b00582fae92aa7sm22951ywg.93.2023.10.12.08.20.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 12 Oct 2023 08:20:18 -0700 (PDT)
-Date: Thu, 12 Oct 2023 11:20:16 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Sean Anderson <seanga2@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Harald Seiler <hws@denx.de>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH 03/26] spl: fit: Fix entry point for SPL_LOAD_FIT_FULL
-Message-ID: <20231012152016.GO3119521@bill-the-cat>
-References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-4-seanga2@gmail.com>
- <CAPnjgZ2RWZZbQMfF9_KUN+FsoVGoHKPq_sJ9=1GorNkrftwmbA@mail.gmail.com>
- <96125bdb-8363-62a6-1702-53b4bb63dea2@gmail.com>
+ bh=oSN//LiSum67HisSr3psyONLTzfZs01JKAo1iy5uAW4=;
+ b=KeckuzQLAMrO/3M8eZNeL5LnFBkX14m9jeyYelDp8ekM1CPre1rxJHt7C36DEjBGVX
+ Md3maif8vvlTgCZPlbKRcOG3ozQWr6Tc4QJ9WCvfBSQz/njthE9bxXU2rJa/JVczSK+F
+ eb5B5Z+ilQn4yj8g2kwQ4XNiAvU/gTfyBw6o4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697124492; x=1697729292;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oSN//LiSum67HisSr3psyONLTzfZs01JKAo1iy5uAW4=;
+ b=hKsGWBftoRxnbzBzNG2C1uzdO+PyC7/+08NN0da4Y9COw8Fta5O6AVJH0GpypLT/0c
+ 1dNxA9yBKREylbLVu6e0QyE17iFZwFln5G9bPwmBPqVlPr3/jKswaLG/FruSus6t3tEL
+ S3shINxlV7iwPhqDhkO4PqN/JyJH/b5tlofliy1l52EQYpbQGq99OCnSAGLIhGSLRfSI
+ AbIM0fzZ6ffcgGQiSDFzlQSdliYrPDnx9CM8z2SY+ITeSKluDpyx3x14PhexAkjs8yQw
+ 6ySMkwLqOmN+Aj5Bv+j3BRmUpMBjEz79UVkP4OYaLN0vljCWaUXDcPh9PV4GGUiGUJRj
+ /Bww==
+X-Gm-Message-State: AOJu0YyomScJGsZqntXVztFScTajbkr7KeM9lpxhz8DqcwRjn27heOJ7
+ Uee7JmQ7gkLsPrme8fqip1Lp+E8YKUXHLSIbL09w+L3iMi/1Zbw1mDPKyg==
+X-Google-Smtp-Source: AGHT+IEeOoTRwvkDzqa9QEihx2XVtTvLJcGMeovSMy5FtJnbcWvNsSvTYV6ahZBSLSCHOhZhacHPoT5n7vgsBcKW7NQ=
+X-Received: by 2002:a17:906:20d8:b0:9b9:f990:c701 with SMTP id
+ c24-20020a17090620d800b009b9f990c701mr16171700ejc.52.1697124491862; Thu, 12
+ Oct 2023 08:28:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="B1SYkk2Fh87Lg3fH"
-Content-Disposition: inline
-In-Reply-To: <96125bdb-8363-62a6-1702-53b4bb63dea2@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <DM6PR22MB22626D184E4A7038A3648C97BBD3A@DM6PR22MB2262.namprd22.prod.outlook.com>
+ <CAPnjgZ28JE+8Tb4ft-B73fey_TOiWuJ1tyrxgOSwAMEud==iEQ@mail.gmail.com>
+ <DM6PR22MB226237E796813B4981D73827BBD3A@DM6PR22MB2262.namprd22.prod.outlook.com>
+In-Reply-To: <DM6PR22MB226237E796813B4981D73827BBD3A@DM6PR22MB2262.namprd22.prod.outlook.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 12 Oct 2023 08:27:52 -0700
+Message-ID: <CAPnjgZ0Xib632FQmbqfHNwagH3R-5qrwQSnWJMxQxy15QO3q9g@mail.gmail.com>
+Subject: Re: coreboot 4.11 + U-boot master
+To: Jay Talbott <JayTalbott@sysproconsulting.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,71 +84,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jay,
 
---B1SYkk2Fh87Lg3fH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Wed, 11 Oct 2023 at 21:03, Jay Talbott
+<JayTalbott@sysproconsulting.com> wrote:
+>
+> Hi Simon,
+>
+> I had openssl installed, but apparently not libssl-dev. But when I added =
+that, it still failed in the same spot. So then I just installed all the pr=
+erequisites (cut/paste from [1]), even though many of them were already ins=
+talled, and then it finally built. So at least I have something building at=
+ this point.
 
-On Thu, Oct 12, 2023 at 12:28:22AM -0400, Sean Anderson wrote:
-> On 10/11/23 23:41, Simon Glass wrote:
-> > On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
-> > >=20
-> > > The entry point is not always the same as the load address. Use the v=
-alue
-> > > of the entrypoint property if it exists and is nonzero (following the
-> > > example of spl_load_simple_fit).
-> > >=20
-> > > Fixes: 8a9dc16e4d0 ("spl: Add full fitImage support")
-> > > Signed-off-by: Sean Anderson <seanga2@gmail.com>
-> > > ---
-> > >=20
-> > >   common/spl/spl_fit.c | 4 +++-
-> > >   1 file changed, 3 insertions(+), 1 deletion(-)
-> >=20
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >=20
-> > The check for 0 makes me uneasy, but I can't imagine it being valid in =
-practice.
->=20
-> This is mostly to match spl_load_simple_fit:
->=20
-> 	/*
-> 	 * If a platform does not provide CONFIG_SYS_UBOOT_START, U-Boot's
-> 	 * Makefile will set it to 0 and it will end up as the entry point
-> 	 * here. What it actually means is: use the load address.
-> 	 */
->=20
-> SYS_UBOOT_START doesn't seem to be set very often and defaults to TEXT_BA=
-SE. That
-> appears to be undefined on
->=20
-> 	efi-x86_app64 efi-x86_app32 xtfpga 3c120 10m50
->=20
-> but none of these platforms define SPL_LOAD_FIT. So maybe this is moot?
+OK good.
 
-Moot for the last 3 there yes.  Not sure about the U-Boot as EFI app
-builds.
+>
+> We will need the 64-bit build. Not sure if it was the right thing to do, =
+but I did put coreboot64_defconfig in make menuconfig for the U-boot config=
+ file.
+>
+> If you have a patch for making the 64-bit build an option, I'll need to a=
+pply that to the 4.11 branch for this build.
 
---=20
-Tom
+There are some pending patches in U-Boot for distro tweaks:
 
---B1SYkk2Fh87Lg3fH
-Content-Type: application/pgp-signature; name="signature.asc"
+https://patchwork.ozlabs.org/project/uboot/list/?series=3D375672
 
------BEGIN PGP SIGNATURE-----
+I pushed a tree to my github (sjg20) in branch 'cmos' if that helps.
+That is what I used for the talk this week.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUoDpUACgkQFHw5/5Y0
-tyxPhQv8CNZKLk4lO9BNHAeMW29NEZy6LdeY43sHX27fW5ddQS/CDuMyN+YupOpl
-27prgObMBHdjW0XXqHaTqFtBtWT89zScRwQD9zGjx8ahHS8FQldeXkHZegTE/gpl
-0AExvUTf+uv12QtD4Nwq1H4OuejuDX+G4ub/saAtZwoeybrUuTstvTcY+Z6Zm+M8
-i1/em8HB3Lf+0U32y6j0R4d8Rx6OP7HcaeHcEjaCI0inoHgPBa3zYpe1nNLRcuFJ
-gNRtzHo1dMXPmf/QNMC/QLNXFRz0KOzGxZPbWNP6RHj/wYeE4ql6RTYoX0+CKj19
-g26vg8cX5KrIWpbnKbuAPGPU79K1QjEdvwExDXFFD59NEA8Qus5iqJbdt8gxPHIZ
-eccPjT7dgnPTFNIE/4eqQ/rWuRe5gCKxQUAMEOXCkBLgEQmNBTnQos/czr1XYSfo
-RRwEa8AsHW90Rr7oMnkLtZqKcmmdKA0pT3LdSM0xInk2/VOady/rR9CAN/hnH3tw
-naEkXjtl
-=ojjb
------END PGP SIGNATURE-----
+For 64-bit you need to use u-boot-x86-with-spl.bin instead of u-boot.bin
 
---B1SYkk2Fh87Lg3fH--
+Regards,
+Simon
