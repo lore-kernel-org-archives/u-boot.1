@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BC7CCDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 511F8CDB47E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 06:56:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C6F9986D02;
-	Thu, 12 Oct 2023 08:53:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 66E7B86DE7;
+	Thu, 12 Oct 2023 08:56:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="e13idn6P";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N2tFRjl0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8F9F86D02; Thu, 12 Oct 2023 08:53:55 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D2DE386DE7; Thu, 12 Oct 2023 08:56:12 +0200 (CEST)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC24B86CE8
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:53:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E8FDA86CE8
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 08:56:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1697093622; x=1697698422; i=xypron.glpk@gmx.de;
- bh=crCIDlQi8ewz0A89BrIeG32YsuSbmRr9kvfD+KSXyAQ=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
- b=e13idn6PC4lYv/lFX2fQWUJUc8OOo8e9mZfoFgC28gzTgrfxZ8cmCLnAXLJsHpqU8aCUEzvWXje
- 3FW1PX8VAL9mpifXHoPKKE+GHep1w+LJy8jwRmq9MKqyjd+x8RcF/wpK8CmBIoEBCfiofng1C+NHi
- k56F1bmPnniGdKG+IEODY0vEgJ1bXBQev141XuAcMvEjrZkUpoac0T6MfFQ9v3oUm6AetEjDOiZ4h
- zhjEeS1vGywV90CA0ofKH69NmBw085u7VjF3p5/JR35V0MPPThiOu7k0YF72juocJXCzWFGwIpirb
- vMkTPz/cpI6vnVEr0E9nSBAz+Cz/KPM+E23A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N9dsb-1rbnLX0ZID-015WnZ; Thu, 12
- Oct 2023 08:53:42 +0200
-Message-ID: <0df59181-0462-4abf-9dae-26dc293c9a32@gmx.de>
-Date: Thu, 12 Oct 2023 08:53:42 +0200
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1c0ecb9a075so5499515ad.2
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 23:56:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697093767; x=1697698567; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=2Dd8R0ulBME9x/682OVzv59SSI8i2CmNe9yzlpj+Q0s=;
+ b=N2tFRjl0a3ewCMcFN+yjVhe+7hxJX8L3ZKtwL8mejpGXccMOVN21bH4DDyYRbtnU69
+ USveTu1BdZXSbhdKMrflQ08yuJ909hdRuhqPd8gTpN2hRmA3Y6df2K9pMPDTEKoOLsIE
+ TTvE4wZqa0XgB9lTNIFB+m+bKMtnaU4CvVtpWlrFHGKwIIJq+m/QCkn9/fODleXnmLFR
+ dy1hGLRskHJi9hEcBZs3NGXUQKBI55wpCeIxtbPXrljb0VOE/3gdWBdZ/Bza6CqKiXNw
+ q46xfGuIg8dhyHjMPGqJI/mm+Yi+0AKdvx2FuPo3wSX5TIFDIlP0eZDbm5+rNWz01KyT
+ 624Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697093767; x=1697698567;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=2Dd8R0ulBME9x/682OVzv59SSI8i2CmNe9yzlpj+Q0s=;
+ b=Io5kx3B+qhKWnuery+nmMIlxAffc+lFs98tWCYmhq7+VHOBRek8UDEjXx+/XvwoLSx
+ tMtea39Qg0Q1CIIYCUru6kt5LhVQvwy6EZSd/2HjLXl2elLy9tJJ6T2TBuDH6L2QMOdh
+ kM6leLdtXvpf75/sR+zaUixan9w3WG56O7Xhaaxv7VgbMl4CxYX1r2xTINif8v7JGe0I
+ RVft3Ruh8s1766b1shV5BxcrHN03DFk7wY8WoknnhKNRrZV/Mh4UMwEikpXFmMtQ/c61
+ mWckcrbKaQjuwmQ1cjxxofGvugwgOiEA4+zLCd7QUdPCrmcksdE+6xI1Wg2GDA74Nk4Q
+ QTjQ==
+X-Gm-Message-State: AOJu0YzlcWVyxbvFrXZaqWIIzlidqKAw+av40gl3j1gS1Wn6OZZRCKlr
+ JyKZ7nSAYE4R+Z+S1pKQnE6gxgtoR6k=
+X-Google-Smtp-Source: AGHT+IHNWpDIvQTMqS1AGSwDlXLkTN8qqsAFQRTvzd3K7a0M9N8jRMgXNyxll1G/vvVZUKUEebENGg==
+X-Received: by 2002:a17:902:cecb:b0:1c8:7d41:5b87 with SMTP id
+ d11-20020a170902cecb00b001c87d415b87mr21467112plg.50.1697093767255; 
+ Wed, 11 Oct 2023 23:56:07 -0700 (PDT)
+Received: from cs20-buildserver.lan ([1.200.128.112])
+ by smtp.gmail.com with ESMTPSA id
+ s19-20020a170902c65300b001bc68602e54sm1096977pls.142.2023.10.11.23.56.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 11 Oct 2023 23:56:06 -0700 (PDT)
+From: Jim Liu <jim.t90615@gmail.com>
+X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
+To: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com,
+ trini@konsulko.com, jim.t90615@gmail.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v3 0/4] fix npcm bmc error
+Date: Thu, 12 Oct 2023 14:53:19 +0800
+Message-Id: <20231012065323.2709121-1-JJLIU0@nuvoton.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/26] net: bootp: Move port numbers to header
-Content-Language: en-US, de-DE
-To: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
-References: <20231012015626.3487451-1-seanga2@gmail.com>
- <20231012015626.3487451-15-seanga2@gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20231012015626.3487451-15-seanga2@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:uc8lIJSj5nx4c0Y7lcORx/LJemREw8PS8U6IyqFcDCTzFRPWsbK
- GfPzD0kCbLOQ+lgE1u5mj/mpZ9qmsyjfjTFKW8L7IEjjjOKOKUlD3tblc+h7Rb4qB/wF62Y
- taVQ5SAiPpfwKcEXH6Y7O997kXYRe7FmPiWzh/AD0GdNu7soq1b8KYIIAAB94m5hXell7z0
- QnXj1SoMsKKNabcsbe8mw==
-UI-OutboundReport: notjunk:1;M01:P0:05n2lOWX8ys=;81oBhqQcaeH1KvzZAmTxkxvZrxl
- XfWi7MGBHnFJC/D4kWZZo1zk/dTqdqpU14DfKaZpD/QZ6jCQf7zwThFeV6RpGDDZJSQxfM+H5
- DLZK13WdTZbFo0oh6MquxIUsbQFhnr4ZA3exAqAhB5Gz6/o1uBC9uSIzYIYb/oC1f1OVmk8ab
- nsplL8nIFCFfMfywAODleOS0gx63K/fOMejPx68UtYJ+KJpiSCrvuL2bFuvjk/axiC51iRLlQ
- 5G0Kv+Rx1aoMbOZtF+MUzc+kxZzL87qvTROqC6eKXGZfW2FPbwQu64+02L7eNlsQZSvTDP3fj
- 5vfqB8aofc082MDBRnUV5EgpM7sOpV9wfcM2ZtbJ93xhAsaHxOladTDj6rifMdGcSe6uHH4kH
- mm/jgKJXt/z2SF/HB64977q2OK6OXyP2vzfos981iOL8wdKfug+PA+xsVSXvfl93ZXXCZBuG9
- NPxu0DebLGg34JJC37JW1XBFmIgpPit9C9qYfP4mTw8HQkq6nKMVwsW2BB5kKJyFGgVoLFuNV
- +21mxsK7ig4CA/X4v7VxAVxEk3f9iOOjKLUckaZqWhBrXv4AB9uQXD2ZRe9J8uwiDZz06sYzf
- fQixgl14mtsOxrgw43nwr3+U/cU/xCSdG+X7Duy+O1wCtkZm/ndLEp0Lh1Lry0o9YNclWk4rK
- ZFZeJBE+BQ4JFZDOPy7FjrDn5ZIbGABT7vZGUM00YLygUwEQ3BX7iahIwSNIn8OjbdgYvydrd
- U94zPnznfSC3ADiHglSGrRAOidnpZ0r7EZmSIqxJixi9u2mbN+p4kiDSSR0jlyZedwSfGH+ba
- ibp81uauckosL0aAaYJ7CvM1lsuIEVD6E7P3QkU7i45+4zYouWjaxiqzDKJXR82qHeqQHGakE
- 17/MiwgKVLV/W8uTVO37GvZduIabdOEIMslC33uChqm3H35Py9Rv4T1c1n2hnWhWXeplUQ+5E
- VUsRqtduc5ZCCsqQg1FiyqplrzU=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,46 +90,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/12/23 03:56, Sean Anderson wrote:
-> These defines are useful when testing bootp.
->
-> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+1. add name for gpio pinctrl function
+2. add baud rate table
+3. fix ecc ram size
+4. modify configs
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Jim Liu (4):
+  pinctrl: npcm8xx: add name for gpio function
+  configs: npcm: support more uart baud rate
+  board: nuvuton: arbel: fix incorrect ram size
+  configs: nuvoton: npcm8xx: disable CONFIG_SPI_FLASH_USE_4K_SECTORS
 
-> ---
->
->   net/bootp.c | 3 ---
->   net/bootp.h | 3 +++
->   2 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/net/bootp.c b/net/bootp.c
-> index 8b1a4ae2ef8..2053cce88c6 100644
-> --- a/net/bootp.c
-> +++ b/net/bootp.c
-> @@ -41,9 +41,6 @@
->    */
->   #define TIMEOUT_MS	((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
->
-> -#define PORT_BOOTPS	67		/* BOOTP server UDP port */
-> -#define PORT_BOOTPC	68		/* BOOTP client UDP port */
-> -
->   #ifndef CFG_DHCP_MIN_EXT_LEN		/* minimal length of extension list */
->   #define CFG_DHCP_MIN_EXT_LEN 64
->   #endif
-> diff --git a/net/bootp.h b/net/bootp.h
-> index 567340ec5d4..4e32b19d424 100644
-> --- a/net/bootp.h
-> +++ b/net/bootp.h
-> @@ -15,6 +15,9 @@
->
->   /*********************************************************************=
-*/
->
-> +#define PORT_BOOTPS	67		/* BOOTP server UDP port */
-> +#define PORT_BOOTPC	68		/* BOOTP client UDP port */
-> +
->   /*
->    *	BOOTP header.
->    */
+ board/nuvoton/arbel_evb/arbel_evb.c       | 17 +++++++++--------
+ configs/arbel_evb_defconfig               |  1 +
+ drivers/pinctrl/nuvoton/pinctrl-npcm8xx.c |  1 +
+ include/configs/arbel.h                   |  5 ++++-
+ include/configs/poleg.h                   |  2 ++
+ 5 files changed, 17 insertions(+), 9 deletions(-)
+
+-- 
+2.34.1
 
