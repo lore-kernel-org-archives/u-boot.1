@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0568ACDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E480CDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 03:42:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 570CF86E1F;
-	Thu, 12 Oct 2023 05:41:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
+	by phobos.denx.de (Postfix) with ESMTP id 99D3186D86;
+	Thu, 12 Oct 2023 05:41:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="1iNK/vdz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y8FfwJnt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 903F186E0F; Thu, 12 Oct 2023 05:41:32 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 6F68386DE7; Thu, 12 Oct 2023 05:41:34 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7207286C0B
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:41:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 36E1886DB5
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 05:41:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=google.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-9a645e54806so77251166b.0
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:41:30 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-9b64b98656bso79083866b.0
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 20:41:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=google.com; s=20230601; t=1697082090; x=1697686890; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697082091; x=1697686891; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=13H9ldlffZnGHRAEHO1o8w1suUwvpWLHdIzoWV9JBEY=;
- b=1iNK/vdzqWqUYrm78BjqZ27sUvz85CDtKy1jgREgvs9r5JrXxC9vuulHbSFeSc6NnY
- nUiwl4IMo5+vT19U/8xvPK7MowksDiYo4BPFmMtsERbwsOmqDqLSpncG5ngE2KW/eIYV
- YT96je0mDDEQnTQFkOHVkOopBZt3VLbgf9YSWJLSa7x4xciSYL+CEmyYO0C08qeZu5Ek
- GAZeyxSP8ip+xXtPAe06sGM6MF0FcurywD52zXb0Q9L8LBJpRU0QBprcmMt6OmPA4Ed2
- 7yNQjGfTFr2aM5m7r6pLca7NOgxH9EfpmiXCoii9JgUqbjmEXFJAYDtrdajbR+u5xURf
- x2Dg==
+ bh=M/j4R4j+MEE9O2kP93XCPqLpd9m+6ianNSjvEuRyS1E=;
+ b=Y8FfwJntp/EI8ifHhVmVeETO2YU5+Uf7ucLLtCDGjk+WHZ4Hkw1tk8CsAFLLtWzwF5
+ eLdL0JCvdui9A89ZSvk2u+XzYlBF1zegF9k4+WkltnHb4rxraCZXWARuh6aMz+pXDDM+
+ UqjTdZOhu623jXfm/Jsg/iZn4MMmJ1PC1WjBE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697082090; x=1697686890;
+ d=1e100.net; s=20230601; t=1697082091; x=1697686891;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=13H9ldlffZnGHRAEHO1o8w1suUwvpWLHdIzoWV9JBEY=;
- b=j372qtNZwoK1zh/0pXVdsX4YjafUrw6NVyL4AFdNVn6d6D7OGJffLpuxBka0wJFM9T
- qByrMO5GhYhl4WfVjlGegDuwaXzfD3Dwd6dJAuw88s3hTub7EyOustgasrk1BY8ubDiQ
- BCcIoHUqgSwYryHnT2wBMySeJbIcUXTqmOYRszBVBMeuxplsT5DM57ruIwpTiheOaWdb
- Mioy7nhgu2ED/Fh7HR6H8zg7r21DSmGhHkxJWllpLsaiM8ZUdm/B9lRnIFpkfhJjBwCn
- dg77fS/NDdWFRqkdpmmYhHfS4NKm8PlIW/MCp4ilAwWXa1MookHBIEmVROD4K2tz1pkQ
- HPWQ==
-X-Gm-Message-State: AOJu0YxCngqy/0uxFXpzB8QoVZ4nNwQFvvFNAG26iATpJO5gzAi+8Mkg
- S9G/2pHhpL9sfJ21Cw4YUFadrDodVgwIuviVyyzRf8Px/abk0syZD7k=
-X-Google-Smtp-Source: AGHT+IFNEey2lgtWqw23ne9VxfHvG/KwI4hZ0gg0D/vdEpAPAj89Vjdnw6dIAzyB5J97c2w00hzlFhRBTflMjDyM6OA=
-X-Received: by 2002:a17:907:7850:b0:9a2:474:4aa0 with SMTP id
- lb16-20020a170907785000b009a204744aa0mr21038992ejc.48.1697082089852; Wed, 11
- Oct 2023 20:41:29 -0700 (PDT)
+ bh=M/j4R4j+MEE9O2kP93XCPqLpd9m+6ianNSjvEuRyS1E=;
+ b=s74fSVayXDhx7XrPkow/77OyMfNohz5hcA6EyeSfeQ3pK5CUitPjioIDeky5abnZem
+ cW8JNZfYDFWW69DBuOlX872VpK2ipw+B/TLNLA+JA/P4KkembCLYhHXLZ0vPJdc16Z39
+ KAhOgYUOq8QThDlEY9fkqbh6JSbEmKBfijkdhKClJezIFoXezSEdj45kvkI+ZhajSvwH
+ ctlLBH8Dx4oSoF7JClbBHi1QI8zrU+UVdAHmNF5IocjqOFaGH8p9LaaZq3yFpRX/AJ9P
+ Adjobly7hOE/HXtlEhL34umW4aGo2K2NGZ/VjD5WKi+23MeHhqaX6NOaXb5xK6waFi9q
+ K6iQ==
+X-Gm-Message-State: AOJu0YzPL9MU+qPYRL9JrCtwx9HSsyjpQVmZk8kRLSL+TKOrK+BR3UVt
+ D4lra/Mvy3qIGbYLO+DO5k7s4w9riaczqRFZGZqTlw==
+X-Google-Smtp-Source: AGHT+IH4PiDaHSkI7Qa7lY/CIoeLy8r5ZpbplQ0zZi+oTJvNDAbnE4pkpSn+qlaqGzUb+eb2yRnRNPVvLSWM/hC/ZXg=
+X-Received: by 2002:a17:907:75da:b0:9ad:a46c:2936 with SMTP id
+ jl26-20020a17090775da00b009ada46c2936mr21566237ejc.8.1697082090722; Wed, 11
+ Oct 2023 20:41:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20231011105825.2956485-1-bmeng@tinylab.org>
-In-Reply-To: <20231011105825.2956485-1-bmeng@tinylab.org>
-From: Simon Glass <sjg@google.com>
-Date: Wed, 11 Oct 2023 20:40:59 -0700
-Message-ID: <CAPnjgZ146sWENJ-zwSyxAL4jQZOdnPoshg9cGv62ER2c4mWM_A@mail.gmail.com>
-Subject: Re: [PATCH] net: e1000: Drop e1000_eth_ids[]
-To: Bin Meng <bmeng@tinylab.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-16-seanga2@gmail.com>
+In-Reply-To: <20231012015626.3487451-16-seanga2@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 11 Oct 2023 20:41:09 -0700
+Message-ID: <CAPnjgZ37EYOWfLKnG+B2Ef-CR29tSE+RTta5nP1tgvfF-Y6VVw@mail.gmail.com>
+Subject: Re: [PATCH 15/26] net: bootp: Fall back to BOOTP from DHCP when unit
+ testing
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,18 +84,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 11 Oct 2023 at 03:59, Bin Meng <bmeng@tinylab.org> wrote:
+On Wed, 11 Oct 2023 at 18:56, Sean Anderson <seanga2@gmail.com> wrote:
 >
-> e1000_eth_ids holds compatible strings for e1000 devices, but it
-> is meaningless as e1000 is a PCI device and there is no such
-> compatible string assigned to e1000 by the DT bindings community.
+> If we sent a DHCP packet and get a BOOTP response from the server, we
+> shouldn't try to send a DHCPREQUEST packet, since it won't be DHCPACKed.
+> Transition straight to BIND. This is only enabled for UNIT_TEST to avoid
+> bloat, since I suspect the number of BOOTP servers in the wild is
+> vanishingly small.
 >
-> Drop it.
->
-> Signed-off-by: Bin Meng <bmeng@tinylab.org>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > ---
 >
->  drivers/net/e1000.c | 6 ------
->  1 file changed, 6 deletions(-)
+>  net/bootp.c | 6 ++++++
+>  1 file changed, 6 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
