@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7EAF2CDB465
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:31:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08765CDB465
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 02:31:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D27286E77;
-	Thu, 12 Oct 2023 04:04:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DBD6686EBB;
+	Thu, 12 Oct 2023 04:04:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SzU/9j+9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C9V6yvAG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C23B786E65; Thu, 12 Oct 2023 03:59:36 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 1A4D286ED5; Thu, 12 Oct 2023 03:59:51 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A52E086E71
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:58:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5759886E40
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 03:57:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-66d0169cf43so2658826d6.3
- for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:58:34 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-7741c2e76a3so28478285a.1
+ for <u-boot@lists.denx.de>; Wed, 11 Oct 2023 18:57:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697075805; x=1697680605; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697075798; x=1697680598; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XTIipH2Q6nQ48JP/D7WlUdjJsrJiVUyUJaHpADXhjtU=;
- b=SzU/9j+9oIuRDtxEj7BpDbB1mRBSYZHgj/0M3OtEyXhipva2dikiIrfBUIHVZt8Eax
- R40nieW5unCY895fTctfqRTELHc1ln6ysRfDD7Wd6A8o4PCx3eFLm0+7MzxGH/Ye+5Jd
- JTCH0zTbX0jwbBD7fSTXoxIRM1PePetfYWT1VfBq9PgLpfKEQDAUH9+wfwwr+6+RdRuI
- 1Dzz8lwheszWeNrmxkKewk0C8+ESnU8oimwZNRTrS1SgxYxydMPJWTB6USc0//eKYooW
- 20tk2k5xfX75Hfr5boKZhJ7kb76L4YnsLmSr7o/vIghLjMq9DDDz3GAuccMhbsVyNo/U
- Zo/Q==
+ bh=DaEy5PGOWXgr4E8RR7zVU64g143y+yhbPqBmwcYb+lo=;
+ b=C9V6yvAG/ur+oR74pdrEtmTN45RT+8EBNVfHQQKaEiNBH+h2TijtsNILzZoGjmU57Z
+ L1uHHr4DCg/W70fFUuv9y3oUc1JnMnngiqTT7wKp2H66bNWezsI+ChvIpvgqKM9E1t9l
+ L9krIHKSVI7u5ahVL0XdSiijSHmQCZF+yk6Wr0avPje3sTAllZgmqzph5UPvQ6NLJ17V
+ 8jYQifsNkV0oajpnmMiy+NqD4h0YvDY6hk+5shQz15xnriEyfZJeBu/Cbf/S6LqyT5Fc
+ OLjgoaxB+jr+FwoUfyhvEq7wiIrNT5I2bk0d806E7MQ4sgUAEdBNFftzY+fQVlOcVQgi
+ STkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697075805; x=1697680605;
+ d=1e100.net; s=20230601; t=1697075798; x=1697680598;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XTIipH2Q6nQ48JP/D7WlUdjJsrJiVUyUJaHpADXhjtU=;
- b=wKi+uzWNEk5XYHuD2c/wEQ9MFsC8rVhizxGSlAqRrC5Yk4JcU9VBEUJWOre4eu94vN
- /EMBs32CpjrgkuZU7nLUgs/67L1BD0QEs/xdvenzhOwlJ6bRStXzgTLn/aaYHlYJM/9m
- tsuVvvRir3N++a+BSJpfM6FW7CmksRZPHKLvOBxG8DW9TlRQjh6Bf63R93cQn+HwjIdi
- Jo+B0v98UBmsBqv9SfDC1lOiD9qZYUK8BjExW5WERUQgmofKPTUmylBWXHXTZ2eaJIy2
- k0xGv9apDv+T+WbPskJAh2qrIZmDSbjEKm88/e9jBvo88Win0wlP0i65kp4piphgEiwi
- EWEA==
-X-Gm-Message-State: AOJu0Yx0GlsIaj2mMq2iRTjG9oT+sjhhyA3hWdA36lsItDODGzckblvr
- UmGhYZ0oDRWjLvNj+lBUadcoEiWvzDiJfA==
-X-Google-Smtp-Source: AGHT+IHNV3kbc8+rC179TMTGzRuYv0p17TASxYVFOQKlA06tgudZijUAWS/DId0u4MblHVZ815NGhQ==
-X-Received: by 2002:a05:6214:c8d:b0:66d:12cd:7136 with SMTP id
- r13-20020a0562140c8d00b0066d12cd7136mr1130200qvr.2.1697075805304; 
- Wed, 11 Oct 2023 18:56:45 -0700 (PDT)
+ bh=DaEy5PGOWXgr4E8RR7zVU64g143y+yhbPqBmwcYb+lo=;
+ b=uAFyQNZQ9DP/R0pxCF20nDvYbB0HWsQY7iA/1nNY5IY2EJQaJ30aZEvBd7KgcDaUCY
+ 0r3/yUOYlzNSoxhlCr0lSsofKCUAOJEc0l1NqILRMTtVfbTnJqDKvIGlsQdL+K6nE/vs
+ 2hA8n4XtvmHaU/b6Hr4WF5SF1spWifOFBA85J0s/HLkBzDeDWhkjaT1dJ4bj28V38KIL
+ W8xGKwKj1ITRETUkobKbyMDj2LZmuNnwHPMkgYx82jl8Xrud0PYpBqo1AdrEMqvipwqj
+ yra3T74/N4rK7wCoxTRAEEV2baTE9w0JYjm+Akcrey/kscWMfb0a2zXcxBi9a6M+vV7g
+ 3JxQ==
+X-Gm-Message-State: AOJu0YzI1Elm+9ETOkGkGKWkY4VeExWf9jZf+DRbubT0MWA5uoNIdleF
+ TodsXdAhiJtyK0Wp4g/zIBYielspXyRfew==
+X-Google-Smtp-Source: AGHT+IF9F8mir8Nv8T7iulfYwpSpmYeXm/UardbiGgyjVgev4oF/NqXM+3wHQ2UKw591HE2cvzmAvA==
+X-Received: by 2002:a05:620a:450b:b0:777:326d:83de with SMTP id
+ t11-20020a05620a450b00b00777326d83demr4965878qkp.56.1697075798193; 
+ Wed, 11 Oct 2023 18:56:38 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- e30-20020a0caa5e000000b0065b1b5cd70csm6239149qvb.31.2023.10.11.18.56.44
+ i10-20020a37c20a000000b0077589913a8bsm5586435qkm.132.2023.10.11.18.56.37
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 11 Oct 2023 18:56:45 -0700 (PDT)
+ Wed, 11 Oct 2023 18:56:37 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de,
 	Tom Rini <trini@konsulko.com>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
  Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH 14/26] net: bootp: Move port numbers to header
-Date: Wed, 11 Oct 2023 21:56:14 -0400
-Message-Id: <20231012015626.3487451-15-seanga2@gmail.com>
+ uboot-imx@nxp.com, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@denx.de>
+Subject: [PATCH 08/26] Move i.MX8 container image loading support to common/spl
+Date: Wed, 11 Oct 2023 21:56:08 -0400
+Message-Id: <20231012015626.3487451-9-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20231012015626.3487451-1-seanga2@gmail.com>
 References: <20231012015626.3487451-1-seanga2@gmail.com>
@@ -95,43 +95,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These defines are useful when testing bootp.
+To facilitate testing loading i.MX8 container images, move the
+parse-container code to common/spl.
 
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- net/bootp.c | 3 ---
- net/bootp.h | 3 +++
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ MAINTAINERS                                        |  1 +
+ arch/arm/mach-imx/Kconfig                          | 13 -------------
+ arch/arm/mach-imx/Makefile                         |  2 +-
+ common/spl/Kconfig                                 | 14 ++++++++++++++
+ common/spl/Makefile                                |  1 +
+ .../spl/spl_imx_container.c                        |  0
+ 6 files changed, 17 insertions(+), 14 deletions(-)
+ rename arch/arm/mach-imx/parse-container.c => common/spl/spl_imx_container.c (100%)
 
-diff --git a/net/bootp.c b/net/bootp.c
-index 8b1a4ae2ef8..2053cce88c6 100644
---- a/net/bootp.c
-+++ b/net/bootp.c
-@@ -41,9 +41,6 @@
-  */
- #define TIMEOUT_MS	((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 35209e73af5..dd6bb558dc4 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -299,6 +299,7 @@ F:	arch/arm/include/asm/arch-vf610/
+ F:	arch/arm/include/asm/mach-imx/
+ F:	board/freescale/*mx*/
+ F:	board/freescale/common/
++F:	common/spl/spl_imx_container.c
+ F:	drivers/serial/serial_mxc.c
+ F:	include/imx_container.h
  
--#define PORT_BOOTPS	67		/* BOOTP server UDP port */
--#define PORT_BOOTPC	68		/* BOOTP client UDP port */
+diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
+index 266bb20df9d..08ab7069187 100644
+--- a/arch/arm/mach-imx/Kconfig
++++ b/arch/arm/mach-imx/Kconfig
+@@ -194,19 +194,6 @@ config IMX_DCD_ADDR
+ 	  This information is shared with the user via mkimage -l just so the
+ 	  image can be signed.
+ 
+-config SPL_LOAD_IMX_CONTAINER
+-	bool "Enable SPL loading U-Boot as a i.MX Container image"
+-	depends on SPL
+-	help
+-	  This is to let SPL could load i.MX Container image
 -
- #ifndef CFG_DHCP_MIN_EXT_LEN		/* minimal length of extension list */
- #define CFG_DHCP_MIN_EXT_LEN 64
- #endif
-diff --git a/net/bootp.h b/net/bootp.h
-index 567340ec5d4..4e32b19d424 100644
---- a/net/bootp.h
-+++ b/net/bootp.h
-@@ -15,6 +15,9 @@
+-config IMX_CONTAINER_CFG
+-	string "i.MX Container config file"
+-	depends on SPL
+-	help
+-	  This is to specific the cfg file for generating container
+-	  image which will be loaded by SPL.
+-
+ config IOMUX_LPSR
+ 	bool
  
- /**********************************************************************/
+diff --git a/arch/arm/mach-imx/Makefile b/arch/arm/mach-imx/Makefile
+index aebfa6517bd..7c4e03278e3 100644
+--- a/arch/arm/mach-imx/Makefile
++++ b/arch/arm/mach-imx/Makefile
+@@ -79,7 +79,7 @@ obj-$(CONFIG_CMD_NANDBCB) += cmd_nandbcb.o
+ endif
  
-+#define PORT_BOOTPS	67		/* BOOTP server UDP port */
-+#define PORT_BOOTPC	68		/* BOOTP client UDP port */
+ ifeq ($(CONFIG_SPL_BUILD),y)
+-obj-$(CONFIG_SPL_LOAD_IMX_CONTAINER) += image-container.o parse-container.o
++obj-$(CONFIG_SPL_LOAD_IMX_CONTAINER) += image-container.o
+ endif
+ 
+ ifeq ($(SOC),$(filter $(SOC),imx8ulp imx9))
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 46323597942..ad574a600e3 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -330,6 +330,20 @@ config SPL_LEGACY_IMAGE_CRC_CHECK
+ 	  If disabled, Legacy images are booted if the image magic and size
+ 	  are correct, without further integrity checks.
+ 
++config SPL_LOAD_IMX_CONTAINER
++	bool "Enable SPL loading and booting of i.MX8 Containers"
++	depends on SPL
++	help
++	  Support booting U-Boot from an i.MX8 container image. If you are not
++	  using i.MX8, say 'n'.
 +
- /*
-  *	BOOTP header.
-  */
++config IMX_CONTAINER_CFG
++	string "i.MX8 Container config file"
++	depends on SPL && SPL_LOAD_IMX_CONTAINER
++	help
++	  Specify the cfg file for generating the container image which will be
++	  loaded by SPL.
++
+ config SPL_SYS_MALLOC_SIMPLE
+ 	bool "Only use malloc_simple functions in the SPL"
+ 	help
+diff --git a/common/spl/Makefile b/common/spl/Makefile
+index bad2bbf6cf1..4f8eb2ec0ca 100644
+--- a/common/spl/Makefile
++++ b/common/spl/Makefile
+@@ -28,6 +28,7 @@ obj-$(CONFIG_$(SPL_TPL_)OPENSBI) += spl_opensbi.o
+ obj-$(CONFIG_$(SPL_TPL_)USB_STORAGE) += spl_usb.o
+ obj-$(CONFIG_$(SPL_TPL_)FS_FAT) += spl_fat.o
+ obj-$(CONFIG_$(SPL_TPL_)FS_EXT4) += spl_ext.o
++obj-$(CONFIG_$(SPL_TPL_)LOAD_IMX_CONTAINER) += spl_imx_container.o
+ obj-$(CONFIG_$(SPL_TPL_)SATA) += spl_sata.o
+ obj-$(CONFIG_$(SPL_TPL_)NVME) += spl_nvme.o
+ obj-$(CONFIG_$(SPL_TPL_)SEMIHOSTING) += spl_semihosting.o
+diff --git a/arch/arm/mach-imx/parse-container.c b/common/spl/spl_imx_container.c
+similarity index 100%
+rename from arch/arm/mach-imx/parse-container.c
+rename to common/spl/spl_imx_container.c
 -- 
 2.37.1
 
