@@ -4,152 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53E91CDB46E
-	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 14:47:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DCEACDB46E
+	for <u-boot@archiver.kernel.org>; Thu, 12 Oct 2023 14:49:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15F7385DE0;
-	Thu, 12 Oct 2023 16:46:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CA4A86D0C;
+	Thu, 12 Oct 2023 16:49:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vvQgsVIB";
+	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="YCsppbed";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98DB984003; Thu, 12 Oct 2023 16:46:41 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20610.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::610])
+ id 4685686DF6; Thu, 12 Oct 2023 16:49:25 +0200 (CEST)
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4102F86DCE
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 16:46:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DBD886D0C
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 16:49:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=linux.ibm.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ea1wfcN0VswAkrVjs0xD+GZ+iDGiBN5/hxPG4Xca2pITpMWfzDJ8ppl3pTdUB/2TGBw+PJ3bmE5mwp4xXUsl1fl6rKyLHF02nRErtO+bZsqhwUhzUbGJzUG2zeJqCs8ByL3j1LlOe+eFkUZLGERy7PlI0ekkRRWlh4HBwSAN2lIh2Kuzf/omESUnFQvpPnCvZ0Ml4KSb4vPPZHwe5Y+Qvv35oOaIcDNGiiAyOCleVXCfgFgEp0O6z3eLx1ztaMGJq1tvvezY40vzJcksjtHKM3cdKE7fsUiJlf+mvfiRIEw4Rdv35628Rlyyas3YmH3hDNlfTIiL2ERQOsmFyovJ2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rlR/16yGc/NIqfMLxJTDVQXrV/Ryc4bOVcJvOH4EFOk=;
- b=gaJ07ZNaPC7nzxk5vMgXYsTDzJTSavLYVjtBq3X07DtuQBpBS2CNdlL45IacyAaENrTUHvfVE6EyHPlwXINp7tp3AzJCdXJDD5eRmFPFmtT2jeiBzzxxVbiDxnO8m3EMefFEYGaxXcLu7+MJcdHtk0ilqrwesAEr9DS9W66MeTu/RJMPGTTq/j/o5oslE1eiA4t3Mp6HCL7YJpKgfwtnnoNgcGhUMbJvP/XtQgoOYTZXtD0n1EJMH/R417i678GDntn1N5NPTFF12Cqe0JhVLbA6orEBHEfclBV968+TNYaXtlloXnU5gW81mYw4nweJElRzFzo5Ib3h+F/k4m2m7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rlR/16yGc/NIqfMLxJTDVQXrV/Ryc4bOVcJvOH4EFOk=;
- b=vvQgsVIBoFc9l2vxGzxkxQvorTL293rEpRkFaXCVLUTc7qxVLdHboR8tlC6pYt3t4Lrz75aTqJMiWwWMBcTuwwIPHsgrVNPF9Ctdquja2LQKaneMC2VeMFFR7zoTLNSkvtDJabiS2kCGbi4xWz3/MtxcE1fdVVR1tXKFuXkUBsE=
-Received: from DM6PR02CA0157.namprd02.prod.outlook.com (2603:10b6:5:332::24)
- by CY5PR12MB6621.namprd12.prod.outlook.com (2603:10b6:930:43::15) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.45; Thu, 12 Oct
- 2023 14:46:27 +0000
-Received: from CY4PEPF0000EE3B.namprd03.prod.outlook.com
- (2603:10b6:5:332:cafe::99) by DM6PR02CA0157.outlook.office365.com
- (2603:10b6:5:332::24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.28 via Frontend
- Transport; Thu, 12 Oct 2023 14:46:27 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CY4PEPF0000EE3B.mail.protection.outlook.com (10.167.242.15) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.22 via Frontend Transport; Thu, 12 Oct 2023 14:46:26 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 12 Oct
- 2023 09:46:24 -0500
-Message-ID: <2d499c70-85be-42fe-8bb6-6fe066de6a05@amd.com>
-Date: Thu, 12 Oct 2023 16:46:24 +0200
+ spf=pass smtp.mailfrom=eajames@linux.ibm.com
+Received: from pps.filterd (m0353727.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39CERJgc032031; Thu, 12 Oct 2023 14:49:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
+ h=from : to : cc : subject
+ : date : message-id : mime-version : content-transfer-encoding; s=pp1;
+ bh=Z1vp6BP2HP458bZnaZEWM9nOrWaaww7QwogW7HU1E2s=;
+ b=YCsppbedcPamMp9n+WK6hay3lhScAH6jQ4dGhW0Qnps3WqsssUlA8mhFa75XYexGSP9U
+ SFsNVs34xRefM5kTdEAGXd9LLxW0HsHoSNua9Z0hGUyvNJnznqsO9kvx3ryPaKAv3zXl
+ kXYCktYMB+F1uufLGbb6LX+O7Qos5z+2umPLB06MuNOGjK5XNQxNwPV5H6vvs2JZURdd
+ kg0r1XAATCol9n0e6kdhZZpeBA0ij6BU2XGtSp9CbCU/x1kt0Ynp/PiWlIZXAVS8Uvc9
+ NhzHaVRAUJb4oX6p/YBhP3xc5pcOlHETaijN7GLVv4dN3w+hDdRat2CzeP0ZTwzeC436 Ug== 
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tpjjxgrqf-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Oct 2023 14:49:13 +0000
+Received: from m0353727.ppops.net (m0353727.ppops.net [127.0.0.1])
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 39CETSWZ006573;
+ Thu, 12 Oct 2023 14:47:58 GMT
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3tpjjxghhc-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Oct 2023 14:47:58 +0000
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39CE8CjD001170; Thu, 12 Oct 2023 14:45:52 GMT
+Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 3tkkvk7q7c-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 12 Oct 2023 14:45:52 +0000
+Received: from smtpav04.dal12v.mail.ibm.com (smtpav04.dal12v.mail.ibm.com
+ [10.241.53.103])
+ by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 39CEjp0720972116
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 12 Oct 2023 14:45:52 GMT
+Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id AFFEE5805E;
+ Thu, 12 Oct 2023 14:45:51 +0000 (GMT)
+Received: from smtpav04.dal12v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 8951B58052;
+ Thu, 12 Oct 2023 14:45:51 +0000 (GMT)
+Received: from slate16.aus.stglabs.ibm.com (unknown [9.61.148.23])
+ by smtpav04.dal12v.mail.ibm.com (Postfix) with ESMTP;
+ Thu, 12 Oct 2023 14:45:51 +0000 (GMT)
+From: Eddie James <eajames@linux.ibm.com>
+To: u-boot@lists.denx.de
+Cc: ilias.apalodimas@linaro.org, sjg@chromium.org, xypron.glpk@gmx.de,
+ eajames@linux.ibm.com
+Subject: [PATCH v12 0/8] tpm: Support boot measurements
+Date: Thu, 12 Oct 2023 09:45:43 -0500
+Message-Id: <20231012144551.679551-1-eajames@linux.ibm.com>
+X-Mailer: git-send-email 2.39.3
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: xhci: Workaround to fix the USB halted endpoint
- issues
-Content-Language: en-US
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- <u-boot@lists.denx.de>
-CC: <marex@denx.de>, <git@xilinx.com>
-References: <20230912035949.30625-1-venkatesh.abbarapu@amd.com>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20230912035949.30625-1-venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE3B:EE_|CY5PR12MB6621:EE_
-X-MS-Office365-Filtering-Correlation-Id: e9b6f9e7-3031-4480-75b6-08dbcb32035b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Uek64T1CNQ9gp2Tj57v5EbXNrP9KdFxFZj/IpvYdIxAT2MLINHQdpYQbJQn4A3SFHaUu7nL0h0Rf+hBK15NLqZ1RT1eV73SW7RWbrCTv19AvEvufmZotu1bmNlPPQwkCMqtSwgl+AQCe0mCaoxd0nVMadXgcNBG4N3jVXThrhN9h9D6JkUAJ4uPMCTMCuYhDrfDMyhd47ZqGRGRHwPN7+Ug9m2XCVgoHumjVBrYK/VInx4vWgImRUrpYTx2O895eMJDSckiMXwNL6yP8zjBdggYx8KoF7rrUIAYlqnsO3mgD8DQDD8mvGENufWe62SUPr70BiWQAXB2SUO1hGO7eOZY+Mpyzy2DOcSQ1qfWbSldGxGcxpSvmRboOq+JjmK/WSgH5yZ6QwxQ366nQRXhST1ghruvgyCOx7CYlGYOBErkxG+45V88gYc0eoXnQ8bP/eJN+VXBeE6vnPssZ/RYWmedwh0iRro69R+YdQVWJT1RhVbMSY8uW9X/OrXz0QAoaq6Z3eir/3sXzyU5iO//0eWAxLq9itiBoEU/J+YzB5hFpJl/sDHSwgdbfg1w6h5MEyAssBeBfiy2Z5tAotJDeZudr7xtZye/zgt7vpCdpV6YBQ7hROOq3/Cbhk36I2Zr0vBT/MSK8vScWCwVP+AeiWSCgFAqU6efonn7365+JYe2Z4/AQK2sGPTt2N7gUTfSeVfx4jYj5isoiDd/J3LMMa7LhYylsGESDxUp5vqf5DjB+1iDn+yfqY0v3Cfwh1rWGO9xcjH/oL5lXafTZgqmGFkSym4JKWX28xVLJJAHsr0I=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(136003)(39860400002)(376002)(396003)(346002)(230922051799003)(186009)(1800799009)(82310400011)(451199024)(64100799003)(36840700001)(46966006)(40470700004)(966005)(31696002)(2906002)(40460700003)(478600001)(41300700001)(8676002)(4326008)(8936002)(5660300002)(40480700001)(44832011)(70586007)(54906003)(70206006)(16576012)(110136005)(316002)(36756003)(83380400001)(47076005)(26005)(16526019)(82740400003)(336012)(426003)(31686004)(36860700001)(81166007)(2616005)(86362001)(356005)(53546011)(107886003)(36900700001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2023 14:46:26.7092 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e9b6f9e7-3031-4480-75b6-08dbcb32035b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE3B.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6621
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: OSeOkCZAwA5YRGfzVkLuT9kbMZb0Z0dW
+X-Proofpoint-ORIG-GUID: LMNVyop8O9ghAy1CmDbVZnVunBJI8jDS
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.267,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-12_05,2023-10-12_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 mlxscore=0
+ spamscore=0 priorityscore=1501 suspectscore=0 phishscore=0 clxscore=1015
+ impostorscore=0 bulkscore=0 mlxlogscore=999 malwarescore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2309180000 definitions=main-2310120122
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -166,199 +110,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series adds support for measuring the boot images more generically
+than the existing EFI support. Several EFI functions have been moved to
+the TPM layer. The series includes optional measurement from the bootm 
+command.
+A new test case has been added for the bootm measurement to test the new
+path, and the sandbox TPM2 driver has been updated to support this use
+case.
 
+Changes since v11:
+ - Rebase on next. Sorry for the delay (been on leave).
 
-On 9/12/23 05:59, Venkatesh Yadav Abbarapu wrote:
-> The xhci host controller driver trying to queue the URB's and it is
-> getting halted at the endpoint, thereby hitting the BUG_ON's.
-> Mostly these kind of random issues are seen on faulty boards.
-> Removing these BUG_ON's from the U-Boot xhci code, as in Linux kernel
-> xhci code BUG_ON/BUG's are removed entirely.
-> Please also note, that BUG_ON() is not recommended any more in the Linux
-> kernel.
-> Similar issue has been observed on TI AM437x board and they created a patch
-> in Linux kernel as below
-> https://patches.linaro.org/project/linux-usb/patch/1390250711-25840-1-git-send-email-balbi@ti.com/
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-> ---
->   drivers/usb/host/xhci-mem.c  | 17 -----------------
->   drivers/usb/host/xhci-ring.c | 31 +++++++------------------------
->   drivers/usb/host/xhci.c      |  6 ------
->   include/usb/xhci.h           |  2 +-
->   4 files changed, 8 insertions(+), 48 deletions(-)
-> 
-> diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
-> index 72b7530626..0efb4bd7ba 100644
-> --- a/drivers/usb/host/xhci-mem.c
-> +++ b/drivers/usb/host/xhci-mem.c
-> @@ -36,8 +36,6 @@
->    */
->   void xhci_flush_cache(uintptr_t addr, u32 len)
->   {
-> -	BUG_ON((void *)addr == NULL || len == 0);
-> -
->   	flush_dcache_range(addr & ~(CACHELINE_SIZE - 1),
->   				ALIGN(addr + len, CACHELINE_SIZE));
->   }
-> @@ -51,8 +49,6 @@ void xhci_flush_cache(uintptr_t addr, u32 len)
->    */
->   void xhci_inval_cache(uintptr_t addr, u32 len)
->   {
-> -	BUG_ON((void *)addr == NULL || len == 0);
-> -
->   	invalidate_dcache_range(addr & ~(CACHELINE_SIZE - 1),
->   				ALIGN(addr + len, CACHELINE_SIZE));
->   }
-> @@ -84,8 +80,6 @@ static void xhci_ring_free(struct xhci_ctrl *ctrl, struct xhci_ring *ring)
->   	struct xhci_segment *seg;
->   	struct xhci_segment *first_seg;
->   
-> -	BUG_ON(!ring);
-> -
->   	first_seg = ring->first_seg;
->   	seg = first_seg->next;
->   	while (seg != first_seg) {
-> @@ -210,7 +204,6 @@ static void *xhci_malloc(unsigned int size)
->   	size_t cacheline_size = max(XHCI_ALIGNMENT, CACHELINE_SIZE);
->   
->   	ptr = memalign(cacheline_size, ALIGN(size, cacheline_size));
-> -	BUG_ON(!ptr);
->   	memset(ptr, '\0', size);
->   
->   	xhci_flush_cache((uintptr_t)ptr, size);
-> @@ -291,7 +284,6 @@ static struct xhci_segment *xhci_segment_alloc(struct xhci_ctrl *ctrl)
->   	struct xhci_segment *seg;
->   
->   	seg = malloc(sizeof(struct xhci_segment));
-> -	BUG_ON(!seg);
->   
->   	seg->trbs = xhci_malloc(SEGMENT_SIZE);
->   	seg->dma = xhci_dma_map(ctrl, seg->trbs, SEGMENT_SIZE);
-> @@ -323,13 +315,11 @@ struct xhci_ring *xhci_ring_alloc(struct xhci_ctrl *ctrl, unsigned int num_segs,
->   	struct xhci_segment *prev;
->   
->   	ring = malloc(sizeof(struct xhci_ring));
-> -	BUG_ON(!ring);
->   
->   	if (num_segs == 0)
->   		return ring;
->   
->   	ring->first_seg = xhci_segment_alloc(ctrl);
-> -	BUG_ON(!ring->first_seg);
->   
->   	num_segs--;
->   
-> @@ -338,7 +328,6 @@ struct xhci_ring *xhci_ring_alloc(struct xhci_ctrl *ctrl, unsigned int num_segs,
->   		struct xhci_segment *next;
->   
->   		next = xhci_segment_alloc(ctrl);
-> -		BUG_ON(!next);
->   
->   		xhci_link_segments(ctrl, prev, next, link_trbs);
->   
-> @@ -399,7 +388,6 @@ static int xhci_scratchpad_alloc(struct xhci_ctrl *ctrl)
->   			break;
->   		page_size = page_size >> 1;
->   	}
-> -	BUG_ON(i == 16);
->   
->   	ctrl->page_size = 1 << (i + 12);
->   	buf = memalign(ctrl->page_size, num_sp * ctrl->page_size);
-> @@ -444,9 +432,7 @@ static struct xhci_container_ctx
->   	struct xhci_container_ctx *ctx;
->   
->   	ctx = malloc(sizeof(struct xhci_container_ctx));
-> -	BUG_ON(!ctx);
->   
-> -	BUG_ON((type != XHCI_CTX_TYPE_DEVICE) && (type != XHCI_CTX_TYPE_INPUT));
->   	ctx->type = type;
->   	ctx->size = (MAX_EP_CTX_NUM + 1) *
->   			CTX_SIZE(xhci_readl(&ctrl->hccr->cr_hccparams));
-> @@ -638,7 +624,6 @@ int xhci_mem_init(struct xhci_ctrl *ctrl, struct xhci_hccr *hccr,
->   struct xhci_input_control_ctx
->   		*xhci_get_input_control_ctx(struct xhci_container_ctx *ctx)
->   {
-> -	BUG_ON(ctx->type != XHCI_CTX_TYPE_INPUT);
->   	return (struct xhci_input_control_ctx *)ctx->bytes;
->   }
->   
-> @@ -760,8 +745,6 @@ void xhci_setup_addressable_virt_dev(struct xhci_ctrl *ctrl,
->   
->   	virt_dev = ctrl->devs[slot_id];
->   
-> -	BUG_ON(!virt_dev);
-> -
->   	/* Extract the EP0 and Slot Ctrl */
->   	ep0_ctx = xhci_get_ep_ctx(ctrl, virt_dev->in_ctx, 0);
->   	slot_ctx = xhci_get_slot_ctx(ctrl, virt_dev->in_ctx);
-> diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-> index c8260cbdf9..1bde0b9793 100644
-> --- a/drivers/usb/host/xhci-ring.c
-> +++ b/drivers/usb/host/xhci-ring.c
-> @@ -244,6 +244,7 @@ static int prepare_ring(struct xhci_ctrl *ctrl, struct xhci_ring *ep_ring,
->   		return -EINVAL;
->   	case EP_STATE_HALTED:
->   		puts("WARN halted endpoint, queueing URB anyway.\n");
-> +		return -EPIPE;
->   	case EP_STATE_STOPPED:
->   	case EP_STATE_RUNNING:
->   		debug("EP STATE RUNNING.\n");
-> @@ -287,12 +288,15 @@ static int prepare_ring(struct xhci_ctrl *ctrl, struct xhci_ring *ep_ring,
->    * @param cmd		Command type to enqueue
->    * Return: none
->    */
-> -void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
-> +int xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
->   			u32 ep_index, trb_type cmd)
->   {
->   	u32 fields[4];
-> +	int ret;
->   
-> -	BUG_ON(prepare_ring(ctrl, ctrl->cmd_ring, EP_STATE_RUNNING));
-> +	ret = prepare_ring(ctrl, ctrl->cmd_ring, EP_STATE_RUNNING);
-> +	if (ret < 0)
-> +		return ret;
->   
->   	fields[0] = lower_32_bits(addr);
->   	fields[1] = upper_32_bits(addr);
-> @@ -311,6 +315,7 @@ void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
->   
->   	/* Ring the command ring doorbell */
->   	xhci_writel(&ctrl->dba->doorbell[0], DB_VALUE_HOST);
-> +	return 0;
->   }
->   
->   /*
-> @@ -493,7 +498,6 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected)
->   		return NULL;
->   
->   	printf("XHCI timeout on event type %d... cannot recover.\n", expected);
-> -	BUG();
+Changes since v10:
+ - Fix commit message on efi_loader change
+ - Drop python test change
+ - Squash armv7 fix from Ilias
 
-There is compilation warning coming from this.
+Changes since v9:
+ - Rebase and add Ilias' fixes (thanks!)
 
-w+../drivers/usb/host/xhci-ring.c: In function ‘xhci_wait_for_event’:
-w+../drivers/usb/host/xhci-ring.c:501:1: warning: control reaches end of 
-non-void function [-Wreturn-type]
+Changes since v8:
+ - Fix a sandbox driver off-by-one error in checking the property type.
+ - Fix log parsing again - any data corruption seen while replaying the
+   event log was failing the entire measurement.
+ - Added an option to ignore the existing log and a configuration option
+   for systems to select that for the bootm measurement. This would only
+   be selected for systems that know that U-Boot is the first stage
+   bootloader. This is necessary because the reserved memory region may
+   persist through resets and so U-Boot attempts to append to the
+   previous boot's log.
 
-you should fix it.
+Changes since v7:
+ - Change name of tcg2_init_log and add more documentation
+ - Add a check, when parsing the event log header, to ensure that the
+   previous stage bootloader used all the active PCRs.
+ - Change name of tcg2_log_find_end
+ - Fix the greater than or equal to check to exit the log parsing
+ - Make sure log_position is 0 if there is any error discovering the log
+ - Return errors parsing the log if the data is corrupt so that we don't
+   end up with half a log
 
+Changes since v6:
+ - Added comment for bootm_measure
+ - Fixed line length in bootm_measure
+ - Added Linaro copyright for all the EFI moved code
+ - Changed tcg2_init_log (and by extension, tcg2_measurement_init) to
+   copy any discovered event log to the user's log if passed in.
 
-diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index 1bde0b9793c4..087ef63f86a4 100644
---- a/drivers/usb/host/xhci-ring.c
-+++ b/drivers/usb/host/xhci-ring.c
-@@ -498,6 +498,8 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, 
-trb_type expected)
-                 return NULL;
+Changes since v5:
+ - Re-ordered the patches to put the sandbox TPM driver patch second
+ - Remove unused platform_get_eventlog in efi_tcg2.c
+ - First look for tpm_event_log_* properties instead of linux,sml-*
+ - Fix efi_tcg2.c compilation
+ - Select SHA* configs
+ - Remove the !SANDBOX dependency for EFI TCG2
+ - Only compile in the measurement u-boot command when CONFIG_MEASURED_BOOT
+   is enabled
 
-         printf("XHCI timeout on event type %d... cannot recover.\n", expected);
-+
-+       return NULL;
-  }
+Changes since v4:
+ - Remove tcg2_measure_event function and check for NULL data in
+   tcg2_measure_data
+ - Use tpm_auto_startup
+ - Fix efi_tcg2.c compilation for removing tcg2_pcr_read function
+ - Change PCR indexes for initrd and dtb
+ - Drop u8 casting in measurement test
+ - Use bullets in documentation
 
-Thanks,
-Michal
+Changes since v3:
+ - Reordered headers
+ - Refactored more of EFI code into common code
+    Removed digest_info structure and instead used the common alg_to_mask
+      and alg_to_len
+    Improved event log parsing in common code to get it equivalent to EFI
+      Common code now extends PCR if previous bootloader stage couldn't
+      No need to allocate memory in the common code, so EFI copies the
+      discovered buffer like it did before
+    Rename efi measure_event function
 
-  /*
+Changes since v2:
+ - Add documentation.
+ - Changed reserved memory address to the top of the RAM for sandbox dts.
+ - Add measure state to booti and bootz.
+ - Skip measurement for EFI images that should be measured
+
+Changes since v1:
+ - Refactor TPM layer functions to allow EFI system to use them, and
+   remove duplicate EFI functions.
+ - Add test case
+ - Drop #ifdefs for bootm
+ - Add devicetree measurement config option
+ - Update sandbox TPM driver
+
+Eddie James (6):
+  tpm: Fix spelling for tpmu_ha union
+  tpm: sandbox: Update for needed TPM2 capabilities
+  tpm: Support boot measurements
+  bootm: Support boot measurement
+  test: Add sandbox TPM boot measurement
+  doc: Add measured boot documentation
+
+Ilias Apalodimas (2):
+  efi_loader: fix EFI_ENTRY point on get_active_pcr_banks
+  test: use a non system PCR for testing PCR extend
+
+ arch/sandbox/dts/sandbox.dtsi  |  13 +
+ arch/sandbox/dts/test.dts      |  13 +
+ boot/Kconfig                   |  32 ++
+ boot/bootm.c                   |  74 +++
+ cmd/booti.c                    |   1 +
+ cmd/bootm.c                    |   2 +
+ cmd/bootz.c                    |   1 +
+ configs/sandbox_defconfig      |   1 +
+ doc/usage/index.rst            |   1 +
+ doc/usage/measured_boot.rst    |  23 +
+ drivers/tpm/tpm2_tis_sandbox.c | 100 ++--
+ include/bootm.h                |  11 +
+ include/efi_tcg2.h             |  44 --
+ include/image.h                |   1 +
+ include/test/suites.h          |   1 +
+ include/tpm-v2.h               | 263 ++++++++++-
+ lib/Kconfig                    |   4 +
+ lib/efi_loader/Kconfig         |   2 -
+ lib/efi_loader/efi_tcg2.c      | 823 ++++-----------------------------
+ lib/tpm-v2.c                   | 814 ++++++++++++++++++++++++++++++++
+ test/boot/Makefile             |   1 +
+ test/boot/measurement.c        |  66 +++
+ test/cmd_ut.c                  |   4 +
+ test/py/tests/test_tpm2.py     |  16 +-
+ 24 files changed, 1482 insertions(+), 829 deletions(-)
+ create mode 100644 doc/usage/measured_boot.rst
+ create mode 100644 test/boot/measurement.c
+
+-- 
+2.39.3
+
