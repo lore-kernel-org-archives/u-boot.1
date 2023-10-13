@@ -4,68 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7699CDB482
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 15:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45673CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 15:16:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A571186E81;
-	Fri, 13 Oct 2023 17:15:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BE6FB86D62;
+	Fri, 13 Oct 2023 17:16:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fz9THo8F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TrHxt/9u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A97E86E47; Fri, 13 Oct 2023 17:15:10 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id F14C586EE0; Fri, 13 Oct 2023 17:15:26 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB14F86D62
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 17:15:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C65B986EDB
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 17:15:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-99c3d3c3db9so357411266b.3
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 08:15:05 -0700 (PDT)
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-9b9faf05f51so345408566b.2
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 08:15:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697210105; x=1697814905; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697210113; x=1697814913; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4o4LRx5Xo7FMk69fLoiF6fSvMHp2g/BRWGIjIKGtQ8M=;
- b=fz9THo8Fqh+7aydvdqTi96fWMnbIPExZGeaZgMgumQfgxOB3DOhKKXy9zgXi3AYvYW
- mO4EyQu4J1pdZ/ohgV0yoazFGkPKV8mGCKYB66Ni/7fOx+1f3CMc5zuguWMpDfDBTFg9
- smjbOQPn5HGaxJtiwPIQ1JCwHiuSE8BmKzj+U=
+ bh=/2fvHORxI2jW4iN7X+Mz9DTct8wfcRsNL966iY5VoX0=;
+ b=TrHxt/9ugqtizGeL79jHqRt9QTtI9z0uNHKUmv0D/cE8Ma7UV3bhBvCGWkt8WYzAWD
+ dPLfaacuGhtxzfFsHOwhA+Vb6VdrpI37hu8giO978qY7shVAWMrfVIa3zAnEOiNfAXFE
+ JfjAO7EU07M1zkgUMHAFeK08RJs+1xNnXoK/o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697210105; x=1697814905;
+ d=1e100.net; s=20230601; t=1697210113; x=1697814913;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4o4LRx5Xo7FMk69fLoiF6fSvMHp2g/BRWGIjIKGtQ8M=;
- b=d9d9ySlUl9YyGsPM2wGt/w0HRuEXljthOOsWZmAqsIFIbQrS8OD/7hIwqsvDSGpZMu
- jT09UUGP5zWFkaqa/O0YRiC20aTeTME3Z/65hH+3pAU3/EQqsGybUtkiEgPLcUlTqsXR
- Oxo5GYtoVbuoSrfUdeaJ+qQkc27Xh866Vruu6Nn3MCaq0KTAMCDJPbmWRPXBDW5zNM2e
- 2OdCBNdxSeAsJYcBhp3vgbwifE6g76GcUN+tmbLzglBImHXyOtsU7ytZz2pEy9RrAwD6
- +owX9NHCiSWtLjk44dCqWoV/WzM8ipUfAamyQgzhe+k6vTcqqvehOQiqa2I3fgsziCNc
- 17KA==
-X-Gm-Message-State: AOJu0YzzQwEdkcbr17BjwgCMU79BAqc/z2SkwYm+QIaLPgF8wcaVUVh1
- AJ1LzRO8/dBFlYml/Ne8cfTstrUO/NbXMz2Xrifqkw==
-X-Google-Smtp-Source: AGHT+IGui0iNWxwoLkPp3fRLnv6Ua1gMag7EvBYo6N5yyuzVj6bkDxQlGF5Ap6oy/J6q72zl92L9gxXrBAau/goRzE8=
-X-Received: by 2002:a17:907:7787:b0:9b2:6f52:586d with SMTP id
- ky7-20020a170907778700b009b26f52586dmr24394415ejc.50.1697210105188; Fri, 13
- Oct 2023 08:15:05 -0700 (PDT)
+ bh=/2fvHORxI2jW4iN7X+Mz9DTct8wfcRsNL966iY5VoX0=;
+ b=duuuYVuDJRsLQnk+pokh1zovMOjaKb90pRESrNDLm3xnl3URTeKKmVOjXNlQ4R/8vu
+ K1/OhL9ntfN/bvDZo/m/tl5nq6Vbxe1b/rcGRRm9cx2iWR2xsRkUyLLNZyXRlg5pGtbg
+ HjjrmqpLsQjAS7cCVOK6aE6LF/8D6/ZteDqY8NCZnLZx4miLa829z4VOdgUqKggIVwA0
+ y8NzTeSIkYtMlVfAu021q83PPdkOai3wRavTut2RSrWeyrvTxLorVP87R6iGf0TgMHET
+ iibT/cIlLOyP9F9/YexgivnSPB4+ivRrBfZsdCY6MvsrD/EIoZAapL5RppleVcQLuw3N
+ WJZg==
+X-Gm-Message-State: AOJu0Yx1+tByaXiZqKyrYYfRGukiRGN25gpNBuSA0ObEwMUarOI/9x96
+ V6rt+15wwzTg1fnPCc6vD8Pcyf4o0otAgtEOOOJmaw==
+X-Google-Smtp-Source: AGHT+IEj8pgYU9iHvxqRXtkKJQomUwbyU8W4p4Stf6lhzbmCGarl7uTVRlrMjYCyo2fnPgD7m478AtLdaZ2osGUyh48=
+X-Received: by 2002:a17:907:2cd4:b0:9ba:3f18:8ae5 with SMTP id
+ hg20-20020a1709072cd400b009ba3f188ae5mr8532245ejc.60.1697210113103; Fri, 13
+ Oct 2023 08:15:13 -0700 (PDT)
 MIME-Version: 1.0
-References: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
- <490f2c07-8aa9-3559-0b6e-04a45f98a671@gmail.com>
-In-Reply-To: <490f2c07-8aa9-3559-0b6e-04a45f98a671@gmail.com>
+References: <20231012230359.2005249-1-trini@konsulko.com>
+ <20231012230359.2005249-2-trini@konsulko.com>
+In-Reply-To: <20231012230359.2005249-2-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Oct 2023 08:14:44 -0700
-Message-ID: <CAPnjgZ1z+Lc6FUY+YSpB3n2eCOQkTBb_Ei0CsL_jQX-AvUSrTA@mail.gmail.com>
-Subject: Re: [PATCH v3 5/7] rockchip: cmd: add rkmtd command
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, 
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com, 
- u-boot@lists.denx.de
+Date: Fri, 13 Oct 2023 08:14:59 -0700
+Message-ID: <CAPnjgZ21qUp46c5mUBQNN6pXL2fKepFRjORhKZrz=N9MTGh3_w@mail.gmail.com>
+Subject: Re: [PATCH 2/7] include: Add <linux/types.h> in a few places
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,33 +81,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 12 Oct 2023 at 13:52, Johan Jonker <jbx6244@gmail.com> wrote:
+On Thu, 12 Oct 2023 at 16:04, Tom Rini <trini@konsulko.com> wrote:
 >
-> The command rkmtd creates a virtual block device to transfer
-> Rockchip boot block data to and from NAND with block orientated
-> tools like "ums" and "rockusb".
+> These files references a number of types that are defined in
+> <linux/types.h> (and so forth), so include it here rather than rely on
+> indirect inclusion.
 >
-> It uses the Rockchip MTD driver to scan for boot blocks and copies
-> data from the first block in a GPT formated virtual disk.
-> Data must be written in U-boot "idbloader.img" format and start at
-> partition "loader1" offset 64. The data header is parsed
-> for length and offset. When the last sector is received
-> it erases up to 5 erase blocks on NAND and writes bootblocks
-> in a pattern depending on the NAND ID. Data is then verified.
-> When a block turns out bad the block header is discarded.
->
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->
-> Changed V3:
->   Split driver from command
->   Split header
->   Restyle
+> Cc: Simon Glass <sjg@chromium.org>
 > ---
->  cmd/Kconfig  |   8 ++
->  cmd/Makefile |   1 +
->  cmd/rkmtd.c  | 204 +++++++++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 213 insertions(+)
->  create mode 100644 cmd/rkmtd.c
+>  include/bootstage.h | 1 +
+>  include/cache.h     | 2 ++
+>  include/cpu.h       | 2 ++
+>  3 files changed, 5 insertions(+)
+>
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
