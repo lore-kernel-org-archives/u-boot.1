@@ -4,62 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E2F5CDB482
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 07:18:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB93CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 07:20:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BBE786E7E;
-	Fri, 13 Oct 2023 09:18:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E40886DD8;
+	Fri, 13 Oct 2023 09:20:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="S/e8EGrU";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="YKnKLqb4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1FDBF86E4B; Fri, 13 Oct 2023 09:17:22 +0200 (CEST)
-Received: from mail-m11887.qiye.163.com (mail-m11887.qiye.163.com
- [115.236.118.87])
+ id 318A686E22; Fri, 13 Oct 2023 09:20:40 +0200 (CEST)
+Received: from mail-m127155.qiye.163.com (mail-m127155.qiye.163.com
+ [115.236.127.155])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08B4586E51
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:17:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B74086D20
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:20:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=S/e8EGrUiEpmoGdQRbO0SpJza7E9xBommmKyE4mxHhc36/mFmJ2Kh/e8NjxKBYEmgsJNX/iodr0LJ9meOpyrD025O4O7mp6IYuUQiOq983U96HczIb7otsHaJ06ychTdZpyCJE3t/lG0mk7WPJTo10RcanulqakkX8rl+O+aEDE=;
+ b=YKnKLqb4xPS1KSoVcri/bZput8oZLXtVQgywwdfMfC2FXG2fc6yhH/kOEEiMxx2WvYyYM9PLzaq6vzAQRr5SVtk6pHPF4pRUmB2O+1ddXh57SEq5sviaZOOORtj9r9MNp585wlcCvPDK7wnmkK6XhoryHI32LmyYUNlrdlJk9mo=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=Cgdw3vgxZS9qu8bsCgZhDuXuMDIcsgT+kne+8iMiDPQ=;
+ bh=zD0Sr812rvT/N3hoOJ5NecxNcuXHFU/4Kve4HQeTH8E=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id C81764001B1;
- Fri, 13 Oct 2023 15:16:04 +0800 (CST)
-Message-ID: <bdac1e9b-ae0c-6457-dbb5-f7552308d327@rock-chips.com>
-Date: Fri, 13 Oct 2023 15:16:04 +0800
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 77BBF400365;
+ Fri, 13 Oct 2023 15:19:50 +0800 (CST)
+Message-ID: <10f744e9-e7a3-d110-c6fc-4b9426a65183@rock-chips.com>
+Date: Fri, 13 Oct 2023 15:19:50 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH v3 7/7] rockchip: doc: add rkmtd.rst
+Subject: Re: [PATCH] rockchip: dts: rk3328: Sync rock64 device tree file from
+ Linux
 Content-Language: en-US
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- u-boot@lists.denx.de
-References: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
- <95fbbaee-2c74-a788-e016-52b269730b2e@gmail.com>
+To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>, sjg@chromium.org,
+ philipp.tomsich@vrull.eu
+Cc: u-boot@lists.denx.de
+References: <20231010182738.31929-1-matwey.kornilov@gmail.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <95fbbaee-2c74-a788-e016-52b269730b2e@gmail.com>
+In-Reply-To: <20231010182738.31929-1-matwey.kornilov@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUJMH1ZNTBkdSEoaGRhJH0pVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ01JTVYZTUJIT0pCSUweGEJVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
  kG
-X-HM-Tid: 0a8b27e472d02eb3kusnc81764001b1
+X-HM-Tid: 0a8b27e7e4312eb3kusn77bbf400365
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pk06Pjo4ITw2OglRNy1CFxUQ
- DEsKC0NVSlVKTUJMSkNKSE1OT01MVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOQ0JCNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORw6Ojo6ETw6OgkMGRQtPzoh
+ KDNPCQtVSlVKTUJMSkNKTkJKSktIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJQ0lLNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,147 +76,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2023/10/13 04:52, Johan Jonker wrote:
-> Add documention for Rockchip rkmtd virtual block device.
+On 2023/10/11 02:27, Matwey V. Kornilov wrote:
+> Sync the rk3328-rock64 dts from v6.6-rc5.
 >
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-
-
+> See Linux kernel commit for details:
+>
+>      03633c4ef1fb ("arm64: dts: rockchip: fix USB regulator on ROCK64")
+>
+> Signed-off-by: Matwey V. Kornilov <matwey.kornilov@gmail.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
-
 > ---
+>   arch/arm/dts/rk3328-rock64.dts | 14 ++------------
+>   1 file changed, 2 insertions(+), 12 deletions(-)
 >
-> Changed V3:
->    New patch
-> ---
->   doc/board/rockchip/index.rst |   1 +
->   doc/board/rockchip/rkmtd.rst | 105 +++++++++++++++++++++++++++++++++++
->   2 files changed, 106 insertions(+)
->   create mode 100644 doc/board/rockchip/rkmtd.rst
->
-> diff --git a/doc/board/rockchip/index.rst b/doc/board/rockchip/index.rst
-> index 0c377e9bbba0..9a87a035e95e 100644
-> --- a/doc/board/rockchip/index.rst
-> +++ b/doc/board/rockchip/index.rst
-> @@ -8,3 +8,4 @@ Rockchip
->      :maxdepth: 2
->
->      rockchip
-> +   rkmtd
-> diff --git a/doc/board/rockchip/rkmtd.rst b/doc/board/rockchip/rkmtd.rst
-> new file mode 100644
-> index 000000000000..1481380ba6c5
-> --- /dev/null
-> +++ b/doc/board/rockchip/rkmtd.rst
-> @@ -0,0 +1,105 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
-> +.. Copyright (C) 2023 Johan Jonker <jbx6244@gmail.com>
-> +
-> +RKMTD
-> +=====
-> +
-> +Info
-> +----
-> +
-> +The command rkmtd creates a virtual block device to transfer
-> +Rockchip boot block data to and from NAND with block orientated
-> +tools like "ums" and "rockusb".
-> +
-> +It uses the Rockchip MTD driver to scan for boot blocks and copies
-> +data from the first block in a GPT formatted virtual disk.
-> +Data must be written in U-boot "idbloader.img" format and start at
-> +partition "loader1" offset 64. The data header is parsed
-> +for length and offset. When the last sector is received
-> +it erases up to 5 erase blocks on NAND and writes boot blocks
-> +in a pattern depending on the NAND ID. Data is then verified.
-> +When a block turns out bad the block header is discarded.
-> +
-> +Limitations
-> +-----------
-> +
-> +- Support with CONFIG_ROCKCHIP_NAND MTD driver only.
-> +- Support for Rockchip boot block header type 1 only.
-> +- Pattern for listed NAND IDs only. (Logic still not disclosed by Rockchip)
-> +- The MTD framework driver data and NAND ID must be extracted at a lower level.
-> +
-> +Available rkmtd commands
-> +------------------------
-> +
-> +.. code-block:: bash
-> +
-> +        rkmtd bind <label>      - bind RKMTD device
-> +        rkmtd unbind <label>    - unbind RKMTD device
-> +        rkmtd info [<label>]    - show all available RKMTD devices
-> +        rkmtd dev [<label>]     - show or set current RKMTD device
-> +
-> +U-boot settings
-> +---------------
-> +
-> +Config to enable Rockchip MTD support:
-> +
-> +.. code-block:: bash
-> +
-> +        CONFIG_MTD=y
-> +        CONFIG_MTD_RAW_NAND=y
-> +        CONFIG_SYS_NAND_DRIVER_ECC_LAYOUT=y
-> +        CONFIG_SYS_NAND_USE_FLASH_BBT=y
-> +        CONFIG_ROCKCHIP_NAND=y
-> +
-> +Option to keep existing NAND data unchanged:
-> +
-> +.. code-block:: bash
-> +
-> +        CONFIG_ROCKCHIP_NAND_SKIP_BBTSCAN=y
-> +
-> +Commands to enable:
-> +
-> +.. code-block:: bash
-> +
-> +        CONFIG_CMD_USB=y
-> +        CONFIG_CMD_RKMTD=y
-> +        CONFIG_CMD_ROCKUSB=y
-> +        CONFIG_CMD_USB_MASS_STORAGE=y
-> +
-> +Linux Host (PC) tool commands combinations that work
-> +----------------------------------------------------
-> +
-> +.. table::
-> +   :widths: 20 44
-> +
-> +   ==================== ============================================
-> +   U-boot               Linux
-> +   ==================== ============================================
-> +   rkmtd bind 0
-> +   rockusb 0 rkmtd 0
-> +                        upgrade_tool pl
-> +
-> +                        upgrade_tool rl 64 512 idbloader_backup.img
-> +
-> +                        upgrade_tool wl 64 idbloader.img
-> +
-> +                        upgrade_tool rd
-> +
-> +                        rkdeveloptool ppt
-> +
-> +                        rkdeveloptool rl 64 512 idbloader_backup.img
-> +
-> +                        rkdeveloptool wlx loader1 idbloader.img
-> +
-> +                        rkdeveloptool wl 64 idbloader.img
-> +
-> +                        rkdeveloptool rd
-> +
-> +                        rkflashtool r 64 512 > idbloader_backup.img
-> +
-> +                        rkflashtool w 64 512 < idbloader.img
-> +   ums 0 rkmtd 0
-> +                        dd if=/dev/sda1 of=idbloader_backup.img
-> +
-> +                        dd if=idbloader.img of=/dev/sda1
-> +   ==================== ============================================
-> --
-> 2.39.2
->
+> diff --git a/arch/arm/dts/rk3328-rock64.dts b/arch/arm/dts/rk3328-rock64.dts
+> index f69a38f42d..0a27fa5271 100644
+> --- a/arch/arm/dts/rk3328-rock64.dts
+> +++ b/arch/arm/dts/rk3328-rock64.dts
+> @@ -37,7 +37,8 @@
+>   		vin-supply = <&vcc_io>;
+>   	};
+>   
+> -	vcc_host_5v: vcc-host-5v-regulator {
+> +	/* Common enable line for all of the rails mentioned in the labels */
+> +	vcc_host_5v: vcc_host1_5v: vcc_otg_5v: vcc-host-5v-regulator {
+>   		compatible = "regulator-fixed";
+>   		gpio = <&gpio0 RK_PA2 GPIO_ACTIVE_LOW>;
+>   		pinctrl-names = "default";
+> @@ -48,17 +49,6 @@
+>   		vin-supply = <&vcc_sys>;
+>   	};
+>   
+> -	vcc_host1_5v: vcc_otg_5v: vcc-host1-5v-regulator {
+> -		compatible = "regulator-fixed";
+> -		gpio = <&gpio0 RK_PA2 GPIO_ACTIVE_LOW>;
+> -		pinctrl-names = "default";
+> -		pinctrl-0 = <&usb20_host_drv>;
+> -		regulator-name = "vcc_host1_5v";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		vin-supply = <&vcc_sys>;
+> -	};
+> -
+>   	vcc_sys: vcc-sys {
+>   		compatible = "regulator-fixed";
+>   		regulator-name = "vcc_sys";
