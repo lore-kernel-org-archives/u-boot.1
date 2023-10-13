@@ -4,81 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281B6CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:53:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E0EDCDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:55:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 122EC86EF6;
-	Fri, 13 Oct 2023 18:53:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BA86186D62;
+	Fri, 13 Oct 2023 18:55:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eD4xKbGr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rw+j+60V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5184686D62; Fri, 13 Oct 2023 18:53:10 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id D285686EA8; Fri, 13 Oct 2023 18:55:22 +0200 (CEST)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7345E86B95
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:53:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90B0786B95
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:55:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-66d0c777bf0so12018726d6.3
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:53:05 -0700 (PDT)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-5a7ab31fb8bso27036217b3.1
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:55:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697215984; x=1697820784; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6TF1gagVcrxU9ufwicMrILpwQDPxr+sUdLX3UHr1S14=;
- b=eD4xKbGrAduWQeoMX6o87ufuURdUsDolVD0DjoQsMrsC3VE1zEYr+Uz/beCXyt23PS
- 9da+M9iy1W/UUS9MiUwxKqMUIjBGujCozQy3/bpg/pJYH3RkA17QRq5ACwWSFs87cKoF
- FcHXe9LhwsGnLvxO+vZN7EQOjpB+Vvx8X3f0E=
+ d=konsulko.com; s=google; t=1697216117; x=1697820917; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Vj2E5KnB4XrNxJfUQ2iCqfDbq5GxjdrnUFy01eQDaJQ=;
+ b=rw+j+60VtJQ+EOHKSLH7svxbloJFxz5jqiFXPkJP1Vlnuqr+E+9oebxjRSut4+29R3
+ khUesZSmbo8SXhlGjM4O8IHU/XSbZbimUmMv07g2qVA7s8h9fYQlsYOAJtm/Ezvbh2Lh
+ a4pLwBW8nl+AV20d1tM2syRWHHN7F7A9tLVEk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697215984; x=1697820784;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6TF1gagVcrxU9ufwicMrILpwQDPxr+sUdLX3UHr1S14=;
- b=fRfNEg8nmHEvJNUfyYyyVG0jqmGL3DZLjOONwXxdzQbfYfs1o1wJv8/Y252bxjJBnf
- MJoLnxf6y7xQTLjTKKFybBRLwlKSldtMP93OLvqbczkaE4QnrXY14YBgzn2a15FHKGLE
- JWZ888YSfgF7+ZDRRg/DLHPGJJzPdTXrOcrqICZITHVNfOD4a2Rj9D/tLi7D8t433tMp
- RbQyMZbWeGohc3BcNKx2OWXXUb0w0ebRdd22ajg7qiAh14oXwO69i8fArtW+KeQ6XmER
- 5uLSl2Y0PCMs8lrOwaCVAvzxP3g14/fh1CJBBvs2bGTP6/idHfCK/tvMY9QObE48PbFx
- P0Hw==
-X-Gm-Message-State: AOJu0YyfN8wK/TciAkF41Bg+TxQcoPnY3Crdopv3U7gbp3tpOm9UKvc5
- /+co9UsObW5tfeqvdcKxypv19w==
-X-Google-Smtp-Source: AGHT+IFfHM7nvSOh3QvSm7NFaHId5N5v9A1bF69ZFKb1rnSpCrhCqXWD7NIlgJ55UZMiAtpyk3U9aQ==
-X-Received: by 2002:a05:6214:5c06:b0:65b:2008:8a3e with SMTP id
- ly6-20020a0562145c0600b0065b20088a3emr28944719qvb.46.1697215984251; 
- Fri, 13 Oct 2023 09:53:04 -0700 (PDT)
-Received: from bill-the-cat
+ d=1e100.net; s=20230601; t=1697216117; x=1697820917;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Vj2E5KnB4XrNxJfUQ2iCqfDbq5GxjdrnUFy01eQDaJQ=;
+ b=K3Fz3c1bFs5bq4XcSuTPV15EiKgwGCM9Y/UIoSdkrzgZUu4tFkOgTXmlxUwHc4vnM+
+ nEH/Y8miufqMzGt7zeP4bRVZAjmMHxq0R0XB3a7Ub7gXH+oQrIP1cgUBwdVd9JrCawdh
+ zKRcB5lPFODvQ3glZNH/j3JwgnDmkK8U4OcJ8089tpUJZlYr9J0DHTXTyr8H004zwVf1
+ LdFc9g4fWSK29hRX+XOSIrBI2fJW5jqd36U7XuUfADJ4gbzbl+L/2meZvijnNawreScq
+ wdBgqW5pAKZ0Rgl5fOjGy42kklhbp7fBxZ+JwGfOZn7dxSmSWbPyfPqbx0ZIIudzqwMv
+ QYvg==
+X-Gm-Message-State: AOJu0YyJvHIhS8SyZHDta/kYnHIeFRkhBcjHy5RrG7FPd474W9i0WyJs
+ s4F7hZzhvQ9szpEgg8T+VXB/Oeqom4Qa/Pl1RgD2Dw==
+X-Google-Smtp-Source: AGHT+IFnQzgy8jnTLG8ZAAe4Set30Ssp94Ue03gissVUGqLZqwo673ocd5MdLGBV7g93Gc60xnBxIg==
+X-Received: by 2002:a25:ac5f:0:b0:d9a:c4cf:a06a with SMTP id
+ r31-20020a25ac5f000000b00d9ac4cfa06amr5646117ybd.36.1697216117097; 
+ Fri, 13 Oct 2023 09:55:17 -0700 (PDT)
+Received: from bill-the-cat.lan
  (2603-6081-7b00-6400-b33e-4d05-2330-607e.res6.spectrum.com.
  [2603:6081:7b00:6400:b33e:4d05:2330:607e])
  by smtp.gmail.com with ESMTPSA id
- dz1-20020ad45881000000b0064906cfe430sm793637qvb.135.2023.10.13.09.53.03
+ w12-20020a0562140b2c00b0065b21f1b687sm804007qvj.80.2023.10.13.09.55.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Oct 2023 09:53:03 -0700 (PDT)
-Date: Fri, 13 Oct 2023 12:53:00 -0400
+ Fri, 13 Oct 2023 09:55:16 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Paul Barker <paul.barker@sancloud.com>, Simon Glass <sjg@chromium.org>,
- Weizhao Ouyang <o451686892@gmail.com>
-Subject: Re: Pull request efi-2024-01-rc1
-Message-ID: <20231013165300.GQ3119521@bill-the-cat>
-References: <090248a1-7ff1-41b9-91d6-270f53031b10@gmx.de>
+To: u-boot@lists.denx.de
+Cc: Udit Agarwal <udit.agarwal@nxp.com>
+Subject: [PATCH] ls1088a: Move maintainership over to Udit Agarwal
+Date: Fri, 13 Oct 2023 12:55:15 -0400
+Message-Id: <20231013165515.3257221-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1UD1xGQUPhiwoegc"
-Content-Disposition: inline
-In-Reply-To: <090248a1-7ff1-41b9-91d6-270f53031b10@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,57 +87,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+As Ashish Kumar's email address is no longer valid, move these platforms
+over to Udit as they are the maintainer for some of the other similar
+platforms already.
 
---1UD1xGQUPhiwoegc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Udit Agarwal <udit.agarwal@nxp.com>
+---
+ board/freescale/ls1088a/MAINTAINERS | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Fri, Oct 13, 2023 at 04:51:31PM +0200, Heinrich Schuchardt wrote:
+diff --git a/board/freescale/ls1088a/MAINTAINERS b/board/freescale/ls1088a/MAINTAINERS
+index 95a14149e4fb..1707ce9ca02b 100644
+--- a/board/freescale/ls1088a/MAINTAINERS
++++ b/board/freescale/ls1088a/MAINTAINERS
+@@ -1,5 +1,5 @@
+ LS1088ARDB BOARD
+-M:	Ashish Kumar <Ashish.Kumar@nxp.com>
++M:	Udit Agarwal <udit.agarwal@nxp.com>
+ S:	Maintained
+ F:	board/freescale/ls1088a/
+ F:	include/configs/ls1088ardb.h
+@@ -9,7 +9,7 @@ F:	configs/ls1088ardb_tfa_defconfig
+ F:	configs/ls1088ardb_tfa_SECURE_BOOT_defconfig
+ 
+ LS1088AQDS BOARD
+-M:	Ashish Kumar <Ashish.Kumar@nxp.com>
++M:	Udit Agarwal <udit.agarwal@nxp.com>
+ S:	Maintained
+ F:	board/freescale/ls1088a/
+ F:	include/configs/ls1088aqds.h
+-- 
+2.34.1
 
-> Dear Tom,
->=20
-> The following changes since commit 997bef3c6d22d12c7fd092fb831bf94d114c9f=
-6f:
->=20
->   Merge branch '2023-10-11-port-gen_compile_commands_py' (2023-10-11
-> 13:25:01 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/efi-2024-01-rc1
->=20
-> for you to fetch changes up to c1ab04626d6b05c6e82dfe4d97d3f62f7310d612:
->=20
->   efi_loader: use well-known guid for auto-created boot option
-> (2023-10-12 08:32:27 +0200)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18093
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---1UD1xGQUPhiwoegc
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUpdewACgkQFHw5/5Y0
-tyybKQv/RnTlle2602yrdIjEYuj/y0kUhUov/OUc7vNIPwhCMvVdDdOVEFXS0snf
-+YMnfql9OzHf/nqEBLVdLeIT5f++BRUXllnMB9BvpdTlityGHRCH9AIueUMmj79X
-mDfwYzsWgeX5FuJYviwsS5+Te13NFiJFHRg0SiX0QZwc4SUinf5zNs+ItSFVxTvQ
-JvAWufVPXItAd5G6B8M3XQYIzSCojtikqlnranaPEDzJu+DzPAMl6AuR6BUwUxVY
-qzOL+WQd6hjN61DQqNn1nJVUhhd7Cwxg5NqGzLAIULnAfIaD0qiCUS2KoeUqq4pS
-iDzOXMCD9otXH2AeCDvDOBaRCEVXPrOn+Y2cy7cpn8Z9Fvyj/zMoxEpu9YCnCzoc
-cUcaK+oeajDFQ2ehGJKMMFcSh+CSXqN9rSl00S4If2uT7z0Nm8KRabCWqyLKYeGi
-fImyOiX30GHNBBhiPvtZR8zagaBpWCNOLnbIqOjkdG1oQ9Rdt170+gkF9SpKIdeM
-CSJNvYqd
-=7HB5
------END PGP SIGNATURE-----
-
---1UD1xGQUPhiwoegc--
