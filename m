@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7C33CDB483
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:59:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B184CCDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:59:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B068C86F16;
-	Fri, 13 Oct 2023 18:58:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4CE3286F14;
+	Fri, 13 Oct 2023 18:58:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="h4/H1td3";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="cSAO3rNE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04F07869DA; Fri, 13 Oct 2023 18:58:13 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id B0B3A86F1B; Fri, 13 Oct 2023 18:58:20 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F6C086F15
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C8E486B95
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:58:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-9be1ee3dc86so38574566b.1
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:58:04 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5a7eef0b931so29053857b3.0
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:58:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697216284; x=1697821084; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pjRLYV9vXQqIbM6Q6fqinI1FT24cV3Ipaczh4JYdYYk=;
- b=h4/H1td3bh/JQZTTfqge9xvY0we31va2A6KiTDQdQ1q3E4Yrz8HfZqpyIWRszcbyz4
- s1DIi8BSxYheBMy49q35b7yMbmt3f+4WvaHbyR75DcpgWcLKAuKY4rLhDbb9lJUPdBF5
- xIVTRH4wHPvTXO5LR/4Cf4VZnF2WesZX6yGo8=
+ d=google.com; s=20230601; t=1697216293; x=1697821093; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=u3K+YbABNUAl6+/cSLMT5/lC+SfRKudOMBfcL9udcps=;
+ b=cSAO3rNEM/TjW8JWgrwvfnMc5FWN6a4RBVqJ6N4R0HnWEC0kxWdt5vhHbBALJoHGhh
+ hjUX4am+0WPwxaGmbI40WmvPLPdbttrEWmOa5BrMKGcmE68bH/ac3RD5OC6EpAF5Ieoa
+ 0TbyxIdrmdtW/4hyAKURyvoTeQi3vUoC4kx0RSUQvWkixESjUYtDb5nhclXWJFK6WHLl
+ 4rozzARbgRKcsRk0S1xnpkqEcjNwQrKu+xCam/1s1S6qgnnjJcplyxKw0BDTc2he1biP
+ bQlDjWv85HDXyxVXZNOzvlBWasU3/GSTvofsOOBGERrM6+ST2EGUfx97IuSFJrWEVoHK
+ 1gog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697216284; x=1697821084;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pjRLYV9vXQqIbM6Q6fqinI1FT24cV3Ipaczh4JYdYYk=;
- b=eOOYbE3n7HlI3JksJNe31+LfFFAb/Ol0SaHyhyzA15jh+0x/S+gWdCehz1/Pyz7QLY
- +Jtku0eYkIcRJlZfqu5/OiFQjmwjWYsIO/hpFSpIMI6LSajr2xA0H8wRjxdWt3rpN6Sf
- OARjXuls6TYT0tpcwoPdZHTAp0nE6dKxB32rFJwKyGTL3MeWgx5YLtVYxTkJmpqD0MDE
- YFz44F+xKFK9Rvp/IqglcZTMEanMdmD5xmTW4hNnHmbO9EE77SfXtU2S20lk++m0jlqM
- 6fGVOs8zHd2wCq3LI7JAqIszCh7OSP+5JikvPmlLTnPFlJrhmJoLZIAAeJjfRSR20Oa0
- Pa2A==
-X-Gm-Message-State: AOJu0YydNat8c6VVDUZixUNSYdkzL+g1r6aUu7eWigLhaiMjERfC3P0h
- g+j3rHdhFMNfCW+Y/qw9fIvjOtiwm0E7yo6zODdo7w==
-X-Google-Smtp-Source: AGHT+IFgok6KhNoIQCMnJPT6jkoxCkUuKPeTtw1FQGfjUti51nQUyncnH9OTnUddLg1VeXvEoY3V5l9Te+SecD+Ue90=
-X-Received: by 2002:a17:907:75da:b0:9ae:40d1:999b with SMTP id
- jl26-20020a17090775da00b009ae40d1999bmr27282230ejc.16.1697216283841; Fri, 13
- Oct 2023 09:58:03 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697216293; x=1697821093;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=u3K+YbABNUAl6+/cSLMT5/lC+SfRKudOMBfcL9udcps=;
+ b=pdWu8M1fqE6amJ0LSZ7LwEkLSPZd/fFoQVae8EQ/8nOvHCbRoqrReKgjNMh0r1zgMM
+ Nbhw3cfeJAxDg9H4V0UN1yBo8mPkHw4eIOaVqxkvAyDL1F/CkhzGkTxzaDgqgPceutdw
+ w72VYM6VP6/Xd9mFWA/xYxBg52zQtOD62GYvy65RnvUwh/dglOEa2vwWMzSOVw2U7QIf
+ roR4crfLET+S84CUQBGaSguNIPD0snPNyAAABmnw9X/mfxvGfbnNEwayvrbD3NEkGXli
+ 56WMh4IZw11ZawJtwSNRf/2NZ0po1aZ3trKXKPL7ONec46KbMxZjRAdoc1n7H1oAIV+h
+ uRmQ==
+X-Gm-Message-State: AOJu0YxJz7L6rx7hcJcnZdhp05aYqiXrXi2xEOh7ZUC1x3VRMU43dKPU
+ alCotnpCI7qQbpyi+eEpcB38QQEqM4PXRJcaZmTDs9OohQFJ13Eus24=
+X-Google-Smtp-Source: AGHT+IEHC5JySGSbbM1oHoo8iLZE566YMBy3AdXG/FmG9p5Kr3//wRL/XuO/l/kAe5K4wA6LZtfHR+IA0xZFdKXx/5g=
+X-Received: by 2002:a81:9255:0:b0:5a7:af97:c787 with SMTP id
+ j82-20020a819255000000b005a7af97c787mr13589145ywg.11.1697216292722; Fri, 13
+ Oct 2023 09:58:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <VI1PR08MB2847E276099DF7263424F70083CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
- <CALeDE9N6nhRBwtYqJ=7nqYuCsmbw03j3RBXRQ8jYsD=OMY=gBw@mail.gmail.com>
- <VI1PR08MB28474179AFB989B308072B1E83CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
- <CAPnjgZ3t9-trzoLGc7Jcj0=J0sQLQcHSGN3_Pf+3=iZ6=rPPqA@mail.gmail.com>
- <CALeDE9Oh9c+X5tG9RswuE=a=yQRW-j93q2oHJeOehLHHY2bSgw@mail.gmail.com>
- <CALeDE9MnMuHSH4sgAC+Z2_+71QgToHt8e8rib3igxFDKV+DYWw@mail.gmail.com>
-In-Reply-To: <CALeDE9MnMuHSH4sgAC+Z2_+71QgToHt8e8rib3igxFDKV+DYWw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Oct 2023 09:57:37 -0700
-Message-ID: <CAPnjgZ2qOaP+u=LoMZUZN8pS0MJd=FrwpfWST0so-hszH75qEg@mail.gmail.com>
-Subject: Re: U-Boot 2023.10 does not boot from uSD on RPi4
-To: Peter Robinson <pbrobinson@gmail.com>
-Cc: Guillaume Gardet <Guillaume.Gardet@arm.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Ivan Ivanov <ivan.ivanov@suse.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231012230359.2005249-1-trini@konsulko.com>
+ <20231012230359.2005249-4-trini@konsulko.com>
+ <CAPnjgZ1cSJNXZTdRu3LG_Ojo6t_93s+yRfTAoKi+YkJg7_LdFw@mail.gmail.com>
+ <20231013151705.GL3119521@bill-the-cat>
+In-Reply-To: <20231013151705.GL3119521@bill-the-cat>
+From: Simon Glass <sjg@google.com>
+Date: Fri, 13 Oct 2023 09:57:32 -0700
+Message-ID: <CAPnjgZ1XbnjDQqX49GSvuo7y3mU6Vuq5ghFKp9sAmzATVKD1zw@mail.gmail.com>
+Subject: Re: [PATCH 4/7] m68k: Remove common.h usage
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Angelo Dureghello <angelo@kernel-space.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,89 +86,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peter,
+Hi Tom,
 
-On Fri, 13 Oct 2023 at 09:22, Peter Robinson <pbrobinson@gmail.com> wrote:
+On Fri, 13 Oct 2023 at 08:17, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Fri, Oct 13, 2023 at 5:09=E2=80=AFPM Peter Robinson <pbrobinson@gmail.=
-com> wrote:
+> On Fri, Oct 13, 2023 at 08:14:57AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Tue, Oct 10, 2023 at 3:58=E2=80=AFPM Simon Glass <sjg@chromium.org> =
-wrote:
+> > On Thu, 12 Oct 2023 at 16:11, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > Hi,
+> > > We can remove common.h from most cases of the code here, and only a few
+> > > places need an additional header instead.
 > > >
-> > > On Tue, 10 Oct 2023 at 04:39, Guillaume Gardet <Guillaume.Gardet@arm.=
-com> wrote:
-> > > >
-> > > >
-> > > >
-> > > > > -----Original Message-----
-> > > > > From: Peter Robinson <pbrobinson@gmail.com>
-> > > > > Sent: Tuesday, October 10, 2023 12:22 PM
-> > > > > To: Guillaume Gardet <Guillaume.Gardet@arm.com>
-> > > > > Cc: mbrugger@suse.com; Ivan Ivanov <ivan.ivanov@suse.com>; Simon =
-Glass
-> > > > > <sjg@chromium.org>; u-boot@lists.denx.de
-> > > > > Subject: Re: U-Boot 2023.10 does not boot from uSD on RPi4
-> > > > >
-> > > > > On Tue, Oct 10, 2023 at 10:26=E2=80=AFAM Guillaume Gardet
-> > > > > <Guillaume.Gardet@arm.com> wrote:
-> > > > > >
-> > > > > > Hi,
-> > > > > >
-> > > > > > U-Boot 2023.10 does not boot from uSD on RPi4.
-> > > > > > This has been found on openSUSE Tumbleweed. The only diff we ne=
-ed is:
-> > > > > >   -CONFIG_OF_EMBED=3Dy
-> > > > > >   +CONFIG_OF_BOARD=3Dy
-> > > > > > To use firmware provided Device Tree. But that should not affec=
-t the mmc
-> > > > > behavior too much, I think.
-> > > > >
-> > > > > I've been booting Fedora fine on a RPi4 BUT there's issues with t=
-he display
-> > > > > turning off [1] when the accelerated display modules load
-> > > > > (vc4) as a result of this patch set. Can you confirm if that's th=
-e same problem
-> > > > > you're seeing?
-> > > >
-> > > > No, that's not my problem. My issue is grub was not loaded by u-boo=
-t from uSD.
-> > > > It seems more like Simon's problem: https://lists.denx.de/pipermail=
-/u-boot/2023-October/533162.html
-> > > >
-> > > > @Simon, can you check if the patch below fixes your boot problem on=
- RPi4, please?
-> > >
-> > > This has been reported at least twice before. There is a fix [2] whic=
-h is in my queue to apply.
+> > > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > > ---
+> > > Cc: Angelo Dureghello <angelo@kernel-space.org>
+> > > ---
+> > >  arch/m68k/cpu/mcf523x/cpu.c         | 1 -
+> > >  arch/m68k/cpu/mcf523x/cpu_init.c    | 1 -
+> > >  arch/m68k/cpu/mcf523x/interrupts.c  | 1 -
+> > >  arch/m68k/cpu/mcf523x/speed.c       | 1 -
+> > >  arch/m68k/cpu/mcf52x2/cpu.c         | 1 -
+> > >  arch/m68k/cpu/mcf52x2/cpu_init.c    | 3 +--
+> > >  arch/m68k/cpu/mcf52x2/interrupts.c  | 1 -
+> > >  arch/m68k/cpu/mcf52x2/speed.c       | 1 -
+> > >  arch/m68k/cpu/mcf530x/cpu.c         | 1 -
+> > >  arch/m68k/cpu/mcf530x/cpu_init.c    | 1 -
+> > >  arch/m68k/cpu/mcf530x/interrupts.c  | 1 -
+> > >  arch/m68k/cpu/mcf530x/speed.c       | 1 -
+> > >  arch/m68k/cpu/mcf532x/cpu.c         | 1 -
+> > >  arch/m68k/cpu/mcf532x/cpu_init.c    | 1 -
+> > >  arch/m68k/cpu/mcf532x/interrupts.c  | 1 -
+> > >  arch/m68k/cpu/mcf532x/speed.c       | 1 -
+> > >  arch/m68k/cpu/mcf5445x/cpu.c        | 1 -
+> > >  arch/m68k/cpu/mcf5445x/cpu_init.c   | 1 -
+> > >  arch/m68k/cpu/mcf5445x/dspi.c       | 1 -
+> > >  arch/m68k/cpu/mcf5445x/interrupts.c | 1 -
+> > >  arch/m68k/cpu/mcf5445x/speed.c      | 1 -
+> > >  arch/m68k/cpu/mcf5445x/start.S      | 1 -
+> > >  arch/m68k/include/asm/immap.h       | 1 +
+> > >  arch/m68k/include/asm/immap_520x.h  | 1 +
+> > >  arch/m68k/include/asm/immap_5235.h  | 1 +
+> > >  arch/m68k/include/asm/immap_5272.h  | 1 +
+> > >  arch/m68k/include/asm/immap_5275.h  | 1 +
+> > >  arch/m68k/include/asm/immap_5282.h  | 1 +
+> > >  arch/m68k/include/asm/immap_5301x.h | 1 +
+> > >  arch/m68k/include/asm/immap_5307.h  | 2 ++
+> > >  arch/m68k/include/asm/immap_5329.h  | 1 +
+> > >  arch/m68k/include/asm/immap_5441x.h | 1 +
+> > >  arch/m68k/lib/bdinfo.c              | 3 ++-
+> > >  arch/m68k/lib/bootm.c               | 1 -
+> > >  arch/m68k/lib/cache.c               | 2 +-
+> > >  arch/m68k/lib/fec.c                 | 2 +-
+> > >  arch/m68k/lib/interrupts.c          | 2 +-
+> > >  arch/m68k/lib/time.c                | 1 -
+> > >  arch/m68k/lib/traps.c               | 1 -
+> > >  39 files changed, 17 insertions(+), 30 deletions(-)
 > >
-> > Looking at that patch it scans the first 3 devices, how does it handle
-> > non storage devices like SDIO WiFi modules? It shouldn't be trying to
-> > scan those.
+> > I just wondered what we do about '#ifdef CFG_...' which presumably is
+> > not included without common.h ? How does that work?
 >
-> And in the case of the RPi the other enabled SDHCI interface is the
-> WiFi, why would we even be trying to boot off a non storage interface,
-> something here just feels broken/wrong in general.
->
-> The patch does make it work with pure upstream, and I'm not sure why
-> the Fedora build boots it fine out of the box, but the patch just
-> feels like it's hacking around some other underlying problem with
-> bootstd, we didn't have this problem with the previous method and
-> trying to boot off non storage interfaces feels like it could cause
-> other problems.
+> The first header in common.h is config.h which is where many CFG_...
+> instances are.
 
-Does U-Boot assume that any SDHCI interface holds storage? Does it use
-a different compatible string for WiFi?
-
-The call to bootdev_setup_for_sibling_blk() in mmc_bind() is what sets
-up the bootdev, so I suppose there could be a condition there.
-
-Having said that, I doubt it would cause any problems.
-
-If your comment is about my patch, then could you please reply there,
-to avoid confusion?
+OK, so that comes later...
 
 Regards,
 Simon
