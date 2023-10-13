@@ -4,76 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB44FC41513
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:56:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FB76CDB482
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:57:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63B2E86E2F;
-	Fri, 13 Oct 2023 18:56:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A1BB886F08;
+	Fri, 13 Oct 2023 18:57:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LT48hIix";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Y1xjaPki";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 416C986E2F; Fri, 13 Oct 2023 18:56:39 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 63A2986EC9; Fri, 13 Oct 2023 15:04:31 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09D8186B95
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:56:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5BEE86E5E
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 15:04:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-77575531382so150064985a.3
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:56:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697216195; x=1697820995; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=L9IAod0VjDhXGjQp8AKWoYb18ic7RuMrixqvQ3SP9UE=;
- b=LT48hIixPvfCfwXdzDjgHQ08Kl3fpxdVJTdwITCeTl0EnliYtU8fF/AfJqN5bOTybb
- 79FrXo4neZF8+4tKUWVm2IMHW+xd5sLRSJxJ6sryn1dXh9FGLkvCFTIdN9iQFxWRBKZm
- vm2f937sk2EOC3jnzyawHExR0WpKjDM1L/XpM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697216195; x=1697820995;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L9IAod0VjDhXGjQp8AKWoYb18ic7RuMrixqvQ3SP9UE=;
- b=MpFtQXbOmOSgCQ0JSPpNMdj7vbOLSuXLUEnK9pWoRrVoFdaYhEYvB5vaZhbBkaVK1M
- 2tjJ9jYGFqGsdBOpgURhc7sSi2627swfx+9hn3D5q4dt5IQgGtt0RqVw4uA42CVMB2Vj
- pRRvPYnI4eagSj2R3GQezU3avU2oNx78FcGj0l7xeDHRjV2053aTHxh+jfl7/yJ1gV0Z
- LxQaHEw47k/45990C0po0JU2oxsj3EahJk86uUwuBWIlHm2XnRillg3BqQOGp8FgEAlR
- s4OJFNDDrSbSj79V67MAJZ33OgKh+TZzPw/PmVX18ICO+jnLGN8D2g3fFcRRznrLT+cC
- BfAQ==
-X-Gm-Message-State: AOJu0YyMfiFX9+zJUh6rpkYjPZhjApDjM+OXahN1sk1ogZvFWVSsN6OQ
- LApt+0139CPMl0t74H6ynTxsGzzT25vLd6vGylhAnw==
-X-Google-Smtp-Source: AGHT+IHxT3XfEaIxzPTPY5YIdXAPIglDBhZqadc+4FYNeKFJQscmRCK76CjzNx/gppbKVmEF43dUTg==
-X-Received: by 2002:a05:620a:2889:b0:76c:d007:b544 with SMTP id
- j9-20020a05620a288900b0076cd007b544mr28833266qkp.26.1697216195618; 
- Fri, 13 Oct 2023 09:56:35 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-b33e-4d05-2330-607e.res6.spectrum.com.
- [2603:6081:7b00:6400:b33e:4d05:2330:607e])
- by smtp.gmail.com with ESMTPSA id
- vv3-20020a05620a562300b007758b25ac3bsm774772qkn.82.2023.10.13.09.56.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Oct 2023 09:56:35 -0700 (PDT)
-Date: Fri, 13 Oct 2023 12:56:33 -0400
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH] ls1088a: Move maintainership over to Udit Agarwal
-Message-ID: <20231013165633.GS3119521@bill-the-cat>
-References: <20231013165515.3257221-1-trini@konsulko.com>
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 0EEB3100004;
+ Fri, 13 Oct 2023 16:04:27 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 0EEB3100004
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1697202267;
+ bh=M+uca6A3XS8cmTCBFBNTYRBGkgwnSIoUtkdIDbyV3bA=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=Y1xjaPkiuZLuQb3hAfVL2lhEMYrL1JajHBX7ffHMy/3/PVLZKx5MgcvrplBJWmSGx
+ I3f9jcpcjCCQ7BjH5nhWBJr39JPzbMsZyc68j0yk+DhtkYn2Q07cOBfCmtbCrfJAu6
+ 2yyTQcheTW2YN3GadLpAYKc2DlEh4W5ckO3qHIrhmc0YRch09W2s6goj0JqTr0sFqN
+ qnmjW+3Ly1aE+ceTsihj8QJgZhilm7t3/qf5YOCbg5eOuMbdvk2bLkLJE0wy9FKFJW
+ 8rkFi1B7qg/7akjGZ0KVbXSkXLqJ6YygTYxeZls8eaGpm/GenqOw54Qrb9ddEHBUay
+ 37aKXt3H4kRnQ==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Fri, 13 Oct 2023 16:04:26 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.30; Fri, 13 Oct 2023 16:04:26 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: <neil.armstrong@linaro.org>, <narmstrong@baylibre.com>
+CC: <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>,
+ <kernel@sberdevices.ru>, Alexey Romanov <avromanov@salutedevices.com>
+Subject: [PATCH v1] drivers: don't compile Secure Monitor UCLASS
+ unconditionally
+Date: Fri, 13 Oct 2023 16:04:09 +0300
+Message-ID: <20231013130411.46569-1-avromanov@salutedevices.com>
+X-Mailer: git-send-email 2.41.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zr0luqwuBHYuDILJ"
-Content-Disposition: inline
-In-Reply-To: <20231013165515.3257221-1-trini@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180607 [Oct 13 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 539 539
+ 807534d9021bfe9ca369c363d15ac993cd93d4d9,
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ 100.64.160.123:7.1.2; 127.0.0.199:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
+ ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/13 12:24:00 #22181924
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Mailman-Approved-At: Fri, 13 Oct 2023 18:57:00 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,43 +104,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+It makes no sense to compile Secure Monitor unconditionally.
+For example, this break the SPL build on boards with a small
+allowed SPL image size.
 
---zr0luqwuBHYuDILJ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: 126fbbefd89e ("drivers: introduce Secure Monitor uclass")
 
-On Fri, Oct 13, 2023 at 12:55:15PM -0400, Tom Rini wrote:
+Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+---
+ drivers/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> As Ashish Kumar's email address is no longer valid, move these platforms
-> over to Udit as they are the maintainer for some of the other similar
-> platforms already.
->=20
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Udit Agarwal <udit.agarwal@nxp.com>
+diff --git a/drivers/Makefile b/drivers/Makefile
+index b7bd3633b1..1a768fed2b 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -34,6 +34,7 @@ obj-$(CONFIG_$(SPL_TPL_)VIRTIO) += virtio/
+ obj-$(CONFIG_$(SPL_)DM_MAILBOX) += mailbox/
+ obj-$(CONFIG_$(SPL_)REMOTEPROC) += remoteproc/
+ obj-$(CONFIG_$(SPL_)SYSINFO) += sysinfo/
++obj-$(CONFIG_$(SPL_TPL_)SM) += sm/
+ obj-$(CONFIG_$(SPL_TPL_)TPM) += tpm/
+ obj-$(CONFIG_XEN) += xen/
+ obj-$(CONFIG_$(SPL_)FPGA) += fpga/
+@@ -124,4 +125,3 @@ obj-$(CONFIG_DM_RNG) += rng/
+ endif
+ 
+ obj-y += soc/
+-obj-y += sm/
+-- 
+2.25.1
 
-Well, NAK this as Udit is also bouncing.  Peng?
-
---=20
-Tom
-
---zr0luqwuBHYuDILJ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUpdsEACgkQFHw5/5Y0
-tyzfNAwAkvqPmuLyJKNORwnR+Bk7ey7zDOfHSQgeSc1Q7ZN+WXyz4dfBVu2r5pI8
-PsSwuG0UMm7UdUQXePwQy44d73hwx+Ikq/fRcJCBDoskrV+BU1W+ptyRCiYQ5dUb
-qeL7u2PUdZsoIu5V0Y4a1HbYIh3wmn0IOfbZphNLG0TurfoyHuca8s3JXRXBvhlL
-r1jQSvjsZVYqwIvhhFVS+X0Bfyr+gH1fD3xh8feeog+ivXpzyro8qI9MYuYsUNhg
-5EnMRsFx2jDjJh9v//Ov6srEgKFz7En//CbuS/BZFZL7D7VyzTW8iAOUrqWRpo/j
-eTvQg2T9Yzlk/BQBVXwd/BIGMUl1hfFaP7SVdW2rU2MEzVqWP55wKXFgoXfXyHcZ
-mWq4iMLbCHJSzfH3wJgMt0nEjInVF3NBkiKz2DOMD6YpCFwXvar4eOLMd8vGdoI7
-dtdDp6crwFBOk8MHWwPIYcFue3mRRFaDfCMotjb9Iy38/56Tck5xl8O+ZpDfQxvw
-BwdDenbS
-=e+vx
------END PGP SIGNATURE-----
-
---zr0luqwuBHYuDILJ--
