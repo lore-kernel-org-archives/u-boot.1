@@ -4,69 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63AE0CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 02:58:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E614CDB474
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 03:06:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B7B786A4C;
-	Fri, 13 Oct 2023 03:59:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E251086E87;
+	Fri, 13 Oct 2023 04:31:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="e4m7TCTe";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Sl2OTnMq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4775D86CE5; Fri, 13 Oct 2023 03:33:13 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3C3ED86ED5; Fri, 13 Oct 2023 04:15:06 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B042885423
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 03:28:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E73C386EDA
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 03:56:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39D1S6I5129259;
- Thu, 12 Oct 2023 20:28:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1697160486;
- bh=y580FiCRsNgazpHKX8SulE69/MwIPOan7nZ1xXN/TLw=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=e4m7TCTeiDVlez2e5FUMivBrCjg2NCaK8q1EUONRRYFoUTSDj86rQrtaPcK2E509g
- X6LNrqOm9kdqX31C6FHu02ZCUwzNEnxwf9+FwAvgLs4F8NZmmX4TpA3GVP6NFz2cg4
- 88wOa9l9gqCixH0O+NGcdS/2Qu4OjNzkSfilOT9c=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39D1S6mc008246
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 12 Oct 2023 20:28:06 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 12
- Oct 2023 20:28:06 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 12 Oct 2023 20:28:06 -0500
-Received: from localhost (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39D1S6FL093275;
- Thu, 12 Oct 2023 20:28:06 -0500
-Date: Thu, 12 Oct 2023 20:28:06 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Hari
- Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
- <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>
-CC: UBoot Mailing List <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>,
- Nishanth Menon <nm@ti.com>
-Subject: Re: [PATCH 05/11] arch: mach-k3: introduce basic files to support
- the am62px SoC family
-Message-ID: <20231013012806.cpxe5qnsztcyasv5@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20231012230616.2101992-13-bb@ti.com>
- <20231012230616.2101992-18-bb@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-419c8911049so10325531cf.1
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 18:56:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697162011; x=1697766811; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=lXtfqnx/qcDDDoDNCvMLJ7+sp881mh5ZigerZyEbKtM=;
+ b=Sl2OTnMq3XwLU7Xxurp4ZQTmnl29U+zTiv+zbHwwOn0pKrt3yQzH8rcnPNqFnC8llz
+ qDMNrfI4C//+4CfpOufY6fVm680rMJg6g3hruchql7FgOFOcyoMHGgXEgcUOtSFjG2RM
+ MoyqcV3NM0Z62pgWyhZx8WhTyIGeWwDJkuU+dhzYPxpnTzK+jj68Hu2BYiDbe8BqJNvo
+ Msgf9jlaLhnfbqNWdgtkGC1RlxA+6kqoV+4WrX9F+F0PCMGrEtCoRUbkgWlCfL8B0yCY
+ sAneJnwXCBt843V5Wjdz6McRYUvJQBG4u5jWfa7LYQzHWBh4UW/3igRoj6mue0W3uEmE
+ Fn6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697162011; x=1697766811;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=lXtfqnx/qcDDDoDNCvMLJ7+sp881mh5ZigerZyEbKtM=;
+ b=LIg7R9vSNwrTxZjVYedhLrTVTwCn5Fm0Y91y7QW1a+mr+6Vb7Sj1pMrBze4cZ6qyAz
+ g4dCIzxyDSP2mjthfRikb57IcyQ7BOEryxhgOW3eGixzokNmUEsbFjFgJnWNRLWvayBs
+ J0NwJNn4LxrmtRawxLiZZmJ4kXfNdXztcdMHqBByR/MwQWVpl8rhKp6qXPaI0FDLNVTY
+ RIMuSextEFQTSjrxxC2+9WQyVfUe5mgpX1UeXjZvtjmuQ4WvHxjX/6Jm7syP2hPFjkrG
+ ihSTc1a8xzMY4RaQ02M1kFlAgtUuJO+rF3aOXWt1wqxaCFCtN5mIe3B0Zl7+s49eGvsO
+ 4ODA==
+X-Gm-Message-State: AOJu0YxuNJDZ9gFkuJ6/0KKfOa+cS5AzzCeNEM1Ug+y6mJv0HYHy1jbw
+ 1eLL6WByvApdrxMGvB6mKRQjuudYZtZpOw==
+X-Google-Smtp-Source: AGHT+IEg3Slxr3MOVUAFufN4HzrLtuy6QH0QbuDE5YQghja7BL3/EUsCTcrblUgbfvAm3N6oJuQMEw==
+X-Received: by 2002:a81:5285:0:b0:5a7:d412:af32 with SMTP id
+ g127-20020a815285000000b005a7d412af32mr9430765ywb.10.1697161164006; 
+ Thu, 12 Oct 2023 18:39:24 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ w10-20020a0cc24a000000b0065b229ecb8dsm271787qvh.3.2023.10.12.18.39.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 12 Oct 2023 18:39:23 -0700 (PDT)
+Message-ID: <3f66c0fc-712d-6c91-47b1-cc01aabbe1e0@gmail.com>
+Date: Thu, 12 Oct 2023 21:39:22 -0400
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20231012230616.2101992-18-bb@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH 07/26] arm: imx: Check header before calling
+ spl_load_imx_container
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ uboot-imx@nxp.com, Anatolij Gustschin <agust@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Stefano Babic <sbabic@denx.de>
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-8-seanga2@gmail.com>
+ <20231012164007.GP3119521@bill-the-cat>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20231012164007.GP3119521@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,30 +101,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On October 12, 2023 thus sayeth Bryan Brattlof:
-> Introduce the basic functions and definitions needed to properly
-> initialize TI's am62p family of SoCs
+On 10/12/23 12:40, Tom Rini wrote:
+> On Wed, Oct 11, 2023 at 09:56:07PM -0400, Sean Anderson wrote:
+>> Make sure we have an IMX header before calling spl_load_imx_container,
+>> since if we don't it will fail with -ENOENT. This allows us to fall back to
+>> legacy/raw images if they are also enabled.
+>>
+>> To avoid too much bloat, Legacy/Raw images are disabled for the four
+>> configs which only boot from raw MMC.
+>>
+>> Future work could include merging imx_container.h with imx8image.h, since
+>> they appear to define mostly the same structures.
+>>
+>> Signed-off-by: Sean Anderson <seanga2@gmail.com>
 > 
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
-> ---
->  arch/arm/mach-k3/Kconfig                      |   6 +-
->  arch/arm/mach-k3/Makefile                     |   2 +
->  arch/arm/mach-k3/am62p5_init.c                | 261 ++++++++++++++++++
->  arch/arm/mach-k3/am62px/clk-data.c            |  10 +
->  arch/arm/mach-k3/am62px/dev-data.c            |  50 ++--
-
-These clk and dev file changes should have gone into 02/11 where I added 
-everything else.
-
-~Bryan
-
->  arch/arm/mach-k3/arm64-mmu.c                  |   5 +-
->  .../arm/mach-k3/include/mach/am62p_hardware.h |  83 ++++++
->  arch/arm/mach-k3/include/mach/am62p_spl.h     |  49 ++++
->  arch/arm/mach-k3/include/mach/hardware.h      |   4 +
->  arch/arm/mach-k3/include/mach/spl.h           |   4 +
->  10 files changed, 447 insertions(+), 27 deletions(-)
->  create mode 100644 arch/arm/mach-k3/am62p5_init.c
->  create mode 100644 arch/arm/mach-k3/include/mach/am62p_hardware.h
->  create mode 100644 arch/arm/mach-k3/include/mach/am62p_spl.h
+> So, since you mention bloat, this sounds like it's making functional
+> changes here, but that's not intentional, yes?  Or to ask another way,
+> is deneb disabling features here, to save space now that it can, or
+> because they're growing "a bunch" and this reduces the growth?
 > 
+
+This is a functional change, one which likely should have been in place from
+the start, but a functional change nonetheless. Previously, all non-IMX8 images
+(except FITs without FIT_FULL) would be optimized out if the only image load
+method supported IMX8 images. With this change, support for these image types
+now has an effect.
+
+There are seven boards with SPL_LOAD_IMX_CONTAINER enabled:
+
+imx93_11x11_evk_ld imx8qm_mek imx8qxp_mek giedi imx93_11x11_evk imx8ulp_evk deneb
+
+All of these boards also have SPL_RAW_IMAGE_SUPPORT and SPL_LEGACY_IMAGE_FORMAT
+enabled as well. However, none have FIT support enabled. Of the six load methods
+affected by this patch, only SPL_MMC and SPL_BOOTROM_SUPPORT are enabled with
+SPL_LOAD_IMX_CONTAINER. spl_romapi_load_image_seekable does not support legacy
+or raw images, so there is no growth. However, mmc_load_image_raw_sector does
+support loading legacy/raw images. Since these images could not have been booted
+before, I have disabled support for legacy/raw images on these four boards. This
+reduces bloat from around 800 bytes to around 200.
+
+--Sean
