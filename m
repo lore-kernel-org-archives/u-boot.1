@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B2D3CDB474
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 03:08:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05D09CDB474
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 03:12:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 45047868BF;
-	Fri, 13 Oct 2023 04:48:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 25FFE86B35;
+	Fri, 13 Oct 2023 05:04:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K04HvcT6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="baphGBSb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2091986AE6; Fri, 13 Oct 2023 04:44:25 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
+ id 3009F86D0F; Fri, 13 Oct 2023 05:03:48 +0200 (CEST)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD2A586EA1
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 04:40:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BD2C8653E
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 05:03:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=judge.packham@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-50435a9f800so2170518e87.2
- for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 19:40:57 -0700 (PDT)
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-690d8c05784so1367794b3a.2
+ for <u-boot@lists.denx.de>; Thu, 12 Oct 2023 20:03:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697164836; x=1697769636; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vtoChQc8CAxwtrNDhhDdnBk+69qcpr9iVX9ibw+AeZs=;
- b=K04HvcT6ZzUXf62kPUHxw/7HR3DD7jfBFhY34cgl5cf+hyTeR5QPtJvNWDsXzP7KKU
- hu55vzkeJNZDY2B8ubkeh/2d0s4mp5uRO+Biz/SKZ3P8MH6cMoxNCMp8z4GPgcRYyDK8
- 1VflQISydwrjvGUqfFZX+Gm7UCafcY8FhphpDuhLkA7Ui0mFgZbeeUd+j5nlet2y7pNq
- ocg6WpZBRlsuUCbkCAFW8qegm5C7cbg1XXfCAOiVsD5jqLcJ9p/svGIYE0SNmkDItr3e
- hAZc/nn5jRwnhCd+4FdwhyOgS8ZEOoMMMpxbGM6AhKsZZldq8lAXwa7P140CoY/9SFZH
- VQfw==
+ d=gmail.com; s=20230601; t=1697166028; x=1697770828; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pbU6nMq0DJQfxozc2wHNcRIEoaItXybKbZY58G17w4c=;
+ b=baphGBSbJ74vEm2m2l+mFk8dGCa9jj+KwS1GIYOmy6oj4zPY8NtGtxfXPfWgY+9w8/
+ 34sPXINxR6j0nZa1u1c4iZle/ITCD1TQtuVbpYF2NKRVXUtEao+jwg1c/KIfreFo6fsE
+ FiQmHf2ZNmF0qblj8OsAJp5xCj1EQEKOMml9H7WHrf0p7M+iH1RwD6yZXsWqp7YSZYz6
+ YyLO6Kram+UfYGtvyPORWg4bLl9Gm1FyHa9IjQqet/0Mxpko4VFZhNnwsU4B6PMfCGse
+ 9UC6bNqoiuLZR4ORUP30tlodj7ZYuZyaufwOmuBerYJg3PuDRWqiqmYUQzmZ/JPrrHLa
+ Cb+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697164836; x=1697769636;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vtoChQc8CAxwtrNDhhDdnBk+69qcpr9iVX9ibw+AeZs=;
- b=AgjXy+8Tg701GVbXQDepTjWGWp+7lG5ZkWFs+yDC7a196hJoHG/5DxpplPUQT0dm23
- fZEjFj1jJVo8x2aVjlJ0WNrcfGlf99PUafy5Q2bX9Vj72xkT9RwcMjcJiurugZcGP862
- B1GpwxvKegvez61/sDPMGNnHuySij3421f+Tz18fLjem9SAREt6qBHyU/Lde7USw9xhT
- KbtefEZcgPhIKCA0G+3IJa4hDrZA5BhvWZGydCOYy7QlhVPRHzC0DzJfti6JMsKgTI3z
- abRcHF9+/av14WGOAJxC3KZwT8XZh72Uu09lht6IoeEHIK5XNZoFQikZ94abQVmMF/Pm
- giAQ==
-X-Gm-Message-State: AOJu0YzfHm3hgfgx9wkowJsacJ/iIPsHh0+xQZKoAxpivoPUj7Bs0pU6
- UTsqWueMcGSQCs7su5suPmG22L1PmOGlsdqryWY=
-X-Google-Smtp-Source: AGHT+IElZ+SWC+vHqH/WUzk/ZOonSAPkgQ240459S7Fmtk4gTPIFTrhF0Tfzrv7vb9stf5X+VL5pU5DhOfpTF7+tv6c=
-X-Received: by 2002:ac2:44af:0:b0:505:7ac4:239 with SMTP id
- c15-20020ac244af000000b005057ac40239mr18805144lfm.1.1697164835859; Thu, 12
- Oct 2023 19:40:35 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230317162253.1049446-1-paul.liu@linaro.org>
- <20230317162253.1049446-2-paul.liu@linaro.org>
-In-Reply-To: <20230317162253.1049446-2-paul.liu@linaro.org>
+ d=1e100.net; s=20230601; t=1697166028; x=1697770828;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pbU6nMq0DJQfxozc2wHNcRIEoaItXybKbZY58G17w4c=;
+ b=cDMkZpi6drU99TA7DFibhHH0JYZUW632zoR8Gc3cb6tdhKVNGu4T1rSKcgVVHdk0gI
+ 2c1n/LQMO3eGOPqx3e0ElAzd+7hXLDI8/vreqPA5pp3cyx5pq3decwGIu51Me1Qa8+jU
+ iAXvKMf0o0tLeUeddWnU/Z9uBOWziP4hcZpi5kVITqOHUQu/GjXme53OU+xcHvDGQemI
+ BlXuRjwnNBKRPv6YMZn2MOTEaqvYnlAxZln4kg6NGmuNpg/rP+H3Mt/hy1j+MaP4IZHG
+ Hg83oO0TSa5vwjUXAJNA3ucWJ6s2GzsKzVPjmYCZ0XhKVnIF8blSIs71tjfWgcmOI6uC
+ oWvA==
+X-Gm-Message-State: AOJu0Yx/8OGWg/ryUYyL78jM8K+g9PLEcxEMYFdsbe0aV4Zx9SE0KGmk
+ dGUif2yUfNBU7r33cXnbBpeBnhTp5Hl45g==
+X-Google-Smtp-Source: AGHT+IFeFrW5jwIuQsiIAPiEqIUwOWsOWD5cFveF0L6lzBU/HJTqfPgj0mnAACLIbka/dl0K9CmcOQ==
+X-Received: by 2002:a05:6a00:1a0e:b0:68e:43ed:d30b with SMTP id
+ g14-20020a056a001a0e00b0068e43edd30bmr25240491pfv.21.1697166027732; 
+ Thu, 12 Oct 2023 20:00:27 -0700 (PDT)
+Received: from chrisp-dl.atlnz.lc ([2001:df5:b000:22:b1c3:cd38:628c:82ea])
+ by smtp.gmail.com with ESMTPSA id
+ n26-20020aa7905a000000b0068fc48fcaa8sm12505653pfo.155.2023.10.12.20.00.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 12 Oct 2023 20:00:27 -0700 (PDT)
 From: Chris Packham <judge.packham@gmail.com>
-Date: Fri, 13 Oct 2023 15:40:24 +1300
-Message-ID: <CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=J0oHyvN75bTaCUw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] arm64: Use FEAT_HAFDBS to track dirty pages when
- available
-To: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Cc: u-boot@lists.denx.de, Marc Zyngier <maz@kernel.org>,
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: u-boot@lists.denx.de
+Cc: Chris Packham <judge.packham@gmail.com>,
+ Chris Packham <chris.packham@alliedtelesis.co.nz>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm: mvebu: AC5/AC5X: Disable SMBIOS
+Date: Fri, 13 Oct 2023 16:00:11 +1300
+Message-ID: <20231013030016.3307423-1-judge.packham@gmail.com>
+X-Mailer: git-send-email 2.42.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,140 +90,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marc, Paul,
+The RD-AC5X doesn't make use of EFI or SMBIOS. Recently we started seeing
+boot failures such as
 
-On Sat, Mar 18, 2023 at 5:23=E2=80=AFAM Ying-Chun Liu (PaulLiu)
-<paul.liu@linaro.org> wrote:
->
-> From: Marc Zyngier <maz@kernel.org>
->
-> Some recent arm64 cores have a facility that allows the page
-> table walker to track the dirty state of a page. This makes it
-> really efficient to perform CMOs by VA as we only need to look
-> at dirty pages.
->
-> Signed-off-by: Marc Zyngier <maz@kernel.org>
-> [ Paul: pick from the Android tree. Rebase to the upstream ]
-> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Link: https://android.googlesource.com/platform/external/u-boot/+/3c43372=
-4e6f830a6b2edd5ec3d4a504794887263
+    WARNING: SMBIOS table_address overflow 27f60f020
+    Failed to write SMBIOS table
+    initcall failed at event 10/(unknown) (err=-22)
+    ### ERROR ### Please RESET the board ###
 
-I think this may have caused a regression for the Marvell AC5X
-board(s). I found that v2023.07 locked up at boot but v2023.01 was
-fine. The lockup seemed to be in the 'Net:' init probably just as the
-mvneta driver was being initialised.
+The error is because the physical address of the RAM on the AC5X SoC is
+above the 32GiB boundary. As we don't need SMBIOS or EFI this can be
+safely disabled.
 
-A git bisect led me to this change although for this specific change
-instead of the lockup I get a crash so maybe I'm actually hitting a
-different issue.
+Signed-off-by: Chris Packham <judge.packham@gmail.com>
+---
+This probably should have been part of the series I sent as
+https://lore.kernel.org/u-boot/20231003035800.2626121-1-judge.packham@gmail.com/
+but I didn't have the RD-AC5X board at the time. There is another issue
+that's stopping the RD-AC5X board from booting with current master but
+with the suspect commit reverted you can see the same SMBIOS issue I was
+seeing on the x240.
 
-Any thoughts as to why this may have caused problems?
+ configs/mvebu_ac5_rd_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-> ---
->  arch/arm/cpu/armv8/cache_v8.c      | 16 +++++++++++++++-
->  arch/arm/include/asm/armv8/mmu.h   | 14 ++++++++++----
->  arch/arm/include/asm/global_data.h |  1 +
->  3 files changed, 26 insertions(+), 5 deletions(-)
->
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.=
-c
-> index 697334086f..4760064ee1 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -93,6 +93,8 @@ u64 get_tcr(u64 *pips, u64 *pva_bits)
->
->         if (el =3D=3D 1) {
->                 tcr =3D TCR_EL1_RSVD | (ips << 32) | TCR_EPD1_DISABLE;
-> +               if (gd->arch.has_hafdbs)
-> +                       tcr |=3D TCR_HA | TCR_HD;
->         } else if (el =3D=3D 2) {
->                 tcr =3D TCR_EL2_RSVD | (ips << 16);
->         } else {
-> @@ -200,6 +202,9 @@ static void __cmo_on_leaves(void (*cmo_fn)(unsigned l=
-ong, unsigned long),
->                     attrs !=3D PTE_BLOCK_MEMTYPE(MT_NORMAL_NC))
->                         continue;
->
-> +               if (gd->arch.has_hafdbs && (pte & (PTE_RDONLY | PTE_DBM))=
- !=3D PTE_DBM)
-> +                       continue;
-> +
->                 end =3D va + BIT(level2shift(level)) - 1;
->
->                 /* No intersection with RAM? */
-> @@ -348,6 +353,9 @@ static void add_map(struct mm_region *map)
->         if (va_bits < 39)
->                 level =3D 1;
->
-> +       if (gd->arch.has_hafdbs)
-> +               attrs |=3D PTE_DBM | PTE_RDONLY;
-> +
->         map_range(map->virt, map->phys, map->size, level,
->                   (u64 *)gd->arch.tlb_addr, attrs);
->  }
-> @@ -399,7 +407,13 @@ static int count_ranges(void)
->  __weak u64 get_page_table_size(void)
->  {
->         u64 one_pt =3D MAX_PTE_ENTRIES * sizeof(u64);
-> -       u64 size;
-> +       u64 size, mmfr1;
-> +
-> +       asm volatile("mrs %0, id_aa64mmfr1_el1" : "=3Dr" (mmfr1));
-> +       if ((mmfr1 & 0xf) =3D=3D 2)
-> +               gd->arch.has_hafdbs =3D true;
-> +       else
-> +               gd->arch.has_hafdbs =3D false;
->
->         /* Account for all page tables we would need to cover our memory =
-map */
->         size =3D one_pt * count_ranges();
-> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv=
-8/mmu.h
-> index 9f58cedb65..98a27db316 100644
-> --- a/arch/arm/include/asm/armv8/mmu.h
-> +++ b/arch/arm/include/asm/armv8/mmu.h
-> @@ -49,10 +49,13 @@
->  #define PTE_TYPE_BLOCK         (1 << 0)
->  #define PTE_TYPE_VALID         (1 << 0)
->
-> -#define PTE_TABLE_PXN          (1UL << 59)
-> -#define PTE_TABLE_XN           (1UL << 60)
-> -#define PTE_TABLE_AP           (1UL << 61)
-> -#define PTE_TABLE_NS           (1UL << 63)
-> +#define PTE_RDONLY             BIT(7)
-> +#define PTE_DBM                        BIT(51)
-> +
-> +#define PTE_TABLE_PXN          BIT(59)
-> +#define PTE_TABLE_XN           BIT(60)
-> +#define PTE_TABLE_AP           BIT(61)
-> +#define PTE_TABLE_NS           BIT(63)
->
->  /*
->   * Block
-> @@ -99,6 +102,9 @@
->  #define TCR_TG0_16K            (2 << 14)
->  #define TCR_EPD1_DISABLE       (1 << 23)
->
-> +#define TCR_HA                 BIT(39)
-> +#define TCR_HD                 BIT(40)
-> +
->  #define TCR_EL1_RSVD           (1U << 31)
->  #define TCR_EL2_RSVD           (1U << 31 | 1 << 23)
->  #define TCR_EL3_RSVD           (1U << 31 | 1 << 23)
-> diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/gl=
-obal_data.h
-> index 9e746e380a..eda99b5b41 100644
-> --- a/arch/arm/include/asm/global_data.h
-> +++ b/arch/arm/include/asm/global_data.h
-> @@ -52,6 +52,7 @@ struct arch_global_data {
->  #if defined(CONFIG_ARM64)
->         unsigned long tlb_fillptr;
->         unsigned long tlb_emerg;
-> +       bool has_hafdbs;
->  #endif
->  #endif
->  #ifdef CFG_SYS_MEM_RESERVE_SECURE
-> --
-> 2.39.2
->
+diff --git a/configs/mvebu_ac5_rd_defconfig b/configs/mvebu_ac5_rd_defconfig
+index dbf1e3136cdf..e8fa22b648be 100644
+--- a/configs/mvebu_ac5_rd_defconfig
++++ b/configs/mvebu_ac5_rd_defconfig
+@@ -85,3 +85,4 @@ CONFIG_USB_ETHER_ASIX88179=y
+ CONFIG_USB_ETHER_MCS7830=y
+ CONFIG_USB_ETHER_RTL8152=y
+ CONFIG_USB_ETHER_SMSC95XX=y
++# CONFIG_SMBIOS is not set
+-- 
+2.42.0
+
