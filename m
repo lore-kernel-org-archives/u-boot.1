@@ -4,107 +4,150 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45680CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 04:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5198ECDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 07:11:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1C1786D33;
-	Fri, 13 Oct 2023 06:54:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0896C86DD8;
+	Fri, 13 Oct 2023 09:11:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="Nrsi3IY0";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="a25x7Uar";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A503F869F5; Fri, 13 Oct 2023 06:54:30 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e89::600])
+ id 5992186E03; Fri, 13 Oct 2023 09:11:31 +0200 (CEST)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on2061f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e8a::61f])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE07D86D3F
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 06:54:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 732B586D20
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YOH6D3CJcayOwLPkh762f6v5NdLXv/0X7lhrHBeyfxhwO6ji89vkcHhi8HuOOSOZ2OduGNwuUCKlGewCa9RpDv2qH7vjUFVg9WK83rbdMGZEWFet0ePzOVbvcZHKZtrmQY9PkcEjSnCNEasjP+ALgMz5JUOBMcmZsZUhODTpiXkYhpmDDl4MUNfZLcoAUPaV9pb+tEOJP5lVBEAMYUTuDIyDJFXtlMlWZ+9M2UsyidaicuDY9/0rHLAujvcGbvTLb4qgvEJLUVWq1BDQx2yFoxTeZT4uC/VsDA8TNGIOWmEHJ5R6/r9fdFRcFZE0dTLOVbh1ggccDsmbpsOCK6qCZg==
+ b=Lp/mN3r+UBqvidUtxJIAefV5gUamef5UvZueuLiztoX09vO0/K6rpd33oUrYeOWdPM7WP1jLG5+QgexI78dwFMfHFGWgl3OSKS2I2ZGCu6UalRBmLj5vSklYNlQX/isljJbfUDIatSotkJ0QOmhrooheALqS4vWBrkmp7qu4TZpMUwqajP4Ig9exQOWXGbnc/1YnBq0aPVJW1Ri4Czj5VrlFz+WX3sEhaftFPxtIGj+CJkKaaa/wLKxL3g1OcIK9TqvaohEcxF7ZZCpYeASXeY0TMvAXMTIJg0hi8RpeOMDS85LrrhKrBtylM1z+0hYknTeIfSUJ/AWh+78+qb5gww==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Zjr8FkGLaoRmdLkcKHYR6lIT4+Jzut06ZfDYGfOzEqU=;
- b=JjfGFG18me/+8wefW46LitlgtX6a5mdQVNrP4pLL9OsaXkEQlv+6aYnREvvk4QgfXWC5qDkTgJa6JLK4hstMxTNVdgVLYStuj8LzFsDzQlIi25lFAUaZ1E9c5AsKlz7QrYAem2nXlGvob/prA0loTmSBGB5ugi/tZ8BrWUc9fbN6aRTM98K5rddoq7wCLKLMRILAcKj1mpajc/zJYHIJb4HpMt+fKVooqIgv+tSA+vxQNr5Ds3UUsOs47cCsKp57BljsxooaKXkmO/KSOEs4vSnn7PEI7/ylwu5ST62eOpC1hQb9xcJWFk4G7W68cUP/mJOOgXtRVfHR5sAksdT81A==
+ bh=aYeEtJFyebdDzsmZ0lt+w50DbjSN77rjr+0OJBlp3Zk=;
+ b=lCD6lRAHs3Eg9DZSxLJsqLUwelw3yv9x4i/pemQa9ayrAoqZmM7qIJySL57b4DK9htcVUXssxDPZv36qbhq6gJ/aJhaeu/YKfoIRkrd+i4cO8Av9iZnKzSwbGXkKwaVbt6BCiSBVxhsrDLcnZu8v1e4jInm1jejEu4cSbGrwfxwsjrctz8mfZEAaIIlcXXEGxKDk3kcP8k/51XJagGC7NEqEq8ZT8DXbTGBO5fOWSZfLZa6BGgB0p/Lqi3kaoOqjVBm0k2/Ys9X9PJVeiamffyvv/2WbjQ9JmSMz5nxtqYvxm2xQScYdurokpiN+8lxMs1sS1n+OEzkTTHmsPgOlSQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ 165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Zjr8FkGLaoRmdLkcKHYR6lIT4+Jzut06ZfDYGfOzEqU=;
- b=Nrsi3IY01HOhloPDBBPtwu5eKhAPcMwkiFYKLRPRVkOc1WrvV4znzzIttJJSygXHWF7jgvIQmvKq0eOm7avVxv33ftld8dbe1Z3AeiWRf7rPAAtcBTKP0O2xdonVHPbXSUQ+DV22t8QHhPkv6QrDYlqgiss+kalhl8QXoHLSZVo=
-Received: from BL0PR0102CA0062.prod.exchangelabs.com (2603:10b6:208:25::39) by
- SN7PR12MB6814.namprd12.prod.outlook.com (2603:10b6:806:266::6) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6863.45; Fri, 13 Oct 2023 04:54:11 +0000
-Received: from BL6PEPF0001AB50.namprd04.prod.outlook.com
- (2603:10b6:208:25:cafe::73) by BL0PR0102CA0062.outlook.office365.com
- (2603:10b6:208:25::39) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.27 via Frontend
- Transport; Fri, 13 Oct 2023 04:54:11 +0000
+ bh=aYeEtJFyebdDzsmZ0lt+w50DbjSN77rjr+0OJBlp3Zk=;
+ b=a25x7UarvzgBdWMLLYqLfF7e8R1zHNZDzsVVWPDVsUNht77fdDmAvNgmd7kHA0QyzCD5ADzxh6bGCHxyyi+6Nz8fwiSI6XcaCTlXOctQ6AFZRP4q5qmr3HBdlQHbW7NtGshUVGqzHja8N95PO6+qXmEyr6Ca5T950QzwK1+xpZc=
+Received: from DS7PR03CA0205.namprd03.prod.outlook.com (2603:10b6:5:3b6::30)
+ by SA1PR12MB6893.namprd12.prod.outlook.com (2603:10b6:806:24c::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.37; Fri, 13 Oct
+ 2023 07:11:19 +0000
+Received: from DS3PEPF000099D7.namprd04.prod.outlook.com
+ (2603:10b6:5:3b6:cafe::8) by DS7PR03CA0205.outlook.office365.com
+ (2603:10b6:5:3b6::30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6863.46 via Frontend
+ Transport; Fri, 13 Oct 2023 07:11:19 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL6PEPF0001AB50.mail.protection.outlook.com (10.167.242.74) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.22 via Frontend Transport; Fri, 13 Oct 2023 04:54:10 +0000
-Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 12 Oct
- 2023 23:54:10 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
- (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Thu, 12 Oct
- 2023 23:54:09 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Thu, 12 Oct 2023 23:54:08 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <git@xilinx.com>
-Subject: [PATCH v2] usb: xhci: Workaround to fix the USB halted endpoint issues
-Date: Fri, 13 Oct 2023 10:23:56 +0530
-Message-ID: <20231013045356.25789-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS3PEPF000099D7.mail.protection.outlook.com (10.167.17.8) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6838.22 via Frontend Transport; Fri, 13 Oct 2023 07:11:18 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 13 Oct
+ 2023 02:11:17 -0500
+Message-ID: <0ca51bb4-0e20-4cb4-bd00-ea3c6b06fb08@amd.com>
+Date: Fri, 13 Oct 2023 09:11:15 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/7] microblaze: Remove common.h usage
+To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+References: <20231012230359.2005249-1-trini@konsulko.com>
+ <20231012230359.2005249-5-trini@konsulko.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20231012230359.2005249-5-trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB50:EE_|SN7PR12MB6814:EE_
-X-MS-Office365-Filtering-Correlation-Id: d2c0da66-7194-458f-d535-08dbcba8708e
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099D7:EE_|SA1PR12MB6893:EE_
+X-MS-Office365-Filtering-Correlation-Id: b3562d95-258a-4161-014c-08dbcbbb98e0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: fGljmQzbXNBc31J2WoCp92nOfK3JdDuARR94FLtcDs0g4hzWJZyBdAyOYlY6cLPt1KYcEhUgjDrz5sSH27yyJZ+xPb0idgjgnoYJMrA9D3JJi8t1CVErPJBl0+DtXkP0O62oPWT7N+O1zjTKGE+Q4RerZjjh7HTemofJ9W0rgLtn6+FrKStgbCKQJP+ytbsKMVK/Xw+cf+o/PA0BTilc5TjyImkhZ9mMK2b8Lj1+vCpDBvRqDIjo5tF17qU9jonyNyhJOi330bHQ4S7bjmOzKRDuIFY5QbTF/VOwDkXzjawoXIsVyS2BkI1H0fpepvhIWgGt5npBvPuSj5oS+eV+yMH6J59QDkqK3RwHEGP118lx6pFAv5A7Ry5pQy7AZqLVqVxWo9ILs+hcrRzC4S40kA9QaQhhXEdbTDd/ou7PIxVLmDNuW36EP+UhqLBTRjacm03sKkKJ0mPWQyj44SoNKhltZYL/ykhjKdDFaPss/C0RWKUtxSBUTLbx4n/WaeXw1KmPBG+Ns337ry0mOvAC9G5bVIp1GI+DkiRJMUZoy1yt+cI00EcNt+Ypgu7sF3S3tB5Plrz0N/DoEU5SEZOX7LX/GoZoeII670gAint68nH0tT5rG1QqQ9KE8qZaZ+XEkr1J5ybvx7kf+JJDe7mcnXnRr4CUpm/6OFTxOB664A5o8KOCmrGlkL3aya1HcUF5tpuXz32H3i/3cfTaTdWivI31Mu115ogj0KgK8zXHJoUMYJWWIoz89ofD2JgC2XXR
+X-Microsoft-Antispam-Message-Info: 1h0Ut/ocr+HORhmyLV9Oxa3rV7xrbPHhCPyFRZEI77t+gJ3iQh5uRWrARl5xz+gVF+yQeJgplmW7pBcf6glwGouJ3l0YsueE/teZLKa2b22YWepgQuLSRWBjn9zi94j77c0yTrvkMOfyg+O8QlrrPozj3l8YwY0ZDh2A1i7RkcdwYUY+rAUhRf2CfrSVyCzq3X1UhNI8LqOdQvOvto240dD7HaJW/ZjRzS5roltQv56iRUFguGVp1Q3js1EEawhjwmDw0ComAF4en5uI0llPeVSZewe7wcdxxUG30GW5kEBDM2BvxNfitRJM6jRivw7hscpm+UibVjsf7eHlPwmmryN4MHOdIKs8DKZsSU9rYlHxU8t5Wt1/3RezQHidB5QSVWm45PNPv77VWu0QrpAxIKROgXLM23h65Muk72tHeKGcs/YJ16n3TDIfn2eCNRpsHWqPkK6nX5oNtsNzEHARTVXlIoqw1hw6bnvEY4YQdyp1FIyFlXYw+HWpEeQLC0nr4S2Z665R8eTMU/6PC+WTRDhHVWnBGeMY+Qrk/o66CFp8v53YNjeQ3vm9rYao811/GA1Q2xM+9PSjwMQmFFjrPDur3/DjJdS18cEKu4U7jkt0vEgUlI4iie/GSaAYlmAHpgN8Sgsu5epBGXkO5EkTrZlGSk2TV0DFfTv9wEHF4yDdMZfkoWUrdwHCCWfXPMX398L3YdeU/Ze7d6WLIx6rpN9j4pRAEaaWlfbTUsqytxXklwTwr9xXFeQ9CBtp+e6hmWWorNQnmdNKZHn+GczGzP3sOAJEnWwRSAQBsErLUTnLXmDbsFuq0g1PLkebUi2l
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(396003)(39860400002)(346002)(136003)(376002)(230922051799003)(186009)(451199024)(82310400011)(64100799003)(1800799009)(36840700001)(46966006)(40470700004)(40480700001)(40460700003)(26005)(426003)(336012)(2616005)(82740400003)(81166007)(1076003)(356005)(107886003)(41300700001)(5660300002)(8676002)(8936002)(4326008)(30864003)(86362001)(2906002)(54906003)(316002)(6916009)(70586007)(36756003)(966005)(70206006)(6666004)(478600001)(47076005)(36860700001)(83380400001)(36900700001);
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(4636009)(136003)(39860400002)(376002)(346002)(396003)(230922051799003)(64100799003)(186009)(82310400011)(451199024)(1800799009)(40470700004)(46966006)(36840700001)(36860700001)(82740400003)(8936002)(356005)(2906002)(8676002)(81166007)(31686004)(44832011)(47076005)(426003)(5660300002)(336012)(478600001)(31696002)(53546011)(86362001)(41300700001)(36756003)(316002)(16526019)(16576012)(83380400001)(26005)(70586007)(70206006)(110136005)(40460700003)(2616005)(40480700001)(36900700001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2023 04:54:10.5941 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d2c0da66-7194-458f-d535-08dbcba8708e
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2023 07:11:18.6415 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b3562d95-258a-4161-014c-08dbcbbb98e0
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB50.namprd04.prod.outlook.com
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D7.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6814
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6893
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,301 +164,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The xhci host controller driver trying to queue the URB's and it is
-getting halted at the endpoint, thereby hitting the BUG_ON's.
-Mostly these kind of random issues are seen on faulty boards.
-Removing these BUG_ON's from the U-Boot xhci code, as in Linux kernel
-xhci code BUG_ON/BUG's are removed entirely.
-Please also note, that BUG_ON() is not recommended any more in the Linux
-kernel.
-Similar issue has been observed on TI AM437x board and they created a patch
-in Linux kernel as below
-https://patches.linaro.org/project/linux-usb/patch/1390250711-25840-1-git-send-email-balbi@ti.com/
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
-Changes in v2:
- -Fixed the compilation warning.
----
- drivers/usb/host/xhci-mem.c  | 17 -----------------
- drivers/usb/host/xhci-ring.c | 32 ++++++++------------------------
- drivers/usb/host/xhci.c      |  6 ------
- include/usb/xhci.h           |  2 +-
- 4 files changed, 9 insertions(+), 48 deletions(-)
 
-diff --git a/drivers/usb/host/xhci-mem.c b/drivers/usb/host/xhci-mem.c
-index 72b7530626..0efb4bd7ba 100644
---- a/drivers/usb/host/xhci-mem.c
-+++ b/drivers/usb/host/xhci-mem.c
-@@ -36,8 +36,6 @@
-  */
- void xhci_flush_cache(uintptr_t addr, u32 len)
- {
--	BUG_ON((void *)addr == NULL || len == 0);
--
- 	flush_dcache_range(addr & ~(CACHELINE_SIZE - 1),
- 				ALIGN(addr + len, CACHELINE_SIZE));
- }
-@@ -51,8 +49,6 @@ void xhci_flush_cache(uintptr_t addr, u32 len)
-  */
- void xhci_inval_cache(uintptr_t addr, u32 len)
- {
--	BUG_ON((void *)addr == NULL || len == 0);
--
- 	invalidate_dcache_range(addr & ~(CACHELINE_SIZE - 1),
- 				ALIGN(addr + len, CACHELINE_SIZE));
- }
-@@ -84,8 +80,6 @@ static void xhci_ring_free(struct xhci_ctrl *ctrl, struct xhci_ring *ring)
- 	struct xhci_segment *seg;
- 	struct xhci_segment *first_seg;
- 
--	BUG_ON(!ring);
--
- 	first_seg = ring->first_seg;
- 	seg = first_seg->next;
- 	while (seg != first_seg) {
-@@ -210,7 +204,6 @@ static void *xhci_malloc(unsigned int size)
- 	size_t cacheline_size = max(XHCI_ALIGNMENT, CACHELINE_SIZE);
- 
- 	ptr = memalign(cacheline_size, ALIGN(size, cacheline_size));
--	BUG_ON(!ptr);
- 	memset(ptr, '\0', size);
- 
- 	xhci_flush_cache((uintptr_t)ptr, size);
-@@ -291,7 +284,6 @@ static struct xhci_segment *xhci_segment_alloc(struct xhci_ctrl *ctrl)
- 	struct xhci_segment *seg;
- 
- 	seg = malloc(sizeof(struct xhci_segment));
--	BUG_ON(!seg);
- 
- 	seg->trbs = xhci_malloc(SEGMENT_SIZE);
- 	seg->dma = xhci_dma_map(ctrl, seg->trbs, SEGMENT_SIZE);
-@@ -323,13 +315,11 @@ struct xhci_ring *xhci_ring_alloc(struct xhci_ctrl *ctrl, unsigned int num_segs,
- 	struct xhci_segment *prev;
- 
- 	ring = malloc(sizeof(struct xhci_ring));
--	BUG_ON(!ring);
- 
- 	if (num_segs == 0)
- 		return ring;
- 
- 	ring->first_seg = xhci_segment_alloc(ctrl);
--	BUG_ON(!ring->first_seg);
- 
- 	num_segs--;
- 
-@@ -338,7 +328,6 @@ struct xhci_ring *xhci_ring_alloc(struct xhci_ctrl *ctrl, unsigned int num_segs,
- 		struct xhci_segment *next;
- 
- 		next = xhci_segment_alloc(ctrl);
--		BUG_ON(!next);
- 
- 		xhci_link_segments(ctrl, prev, next, link_trbs);
- 
-@@ -399,7 +388,6 @@ static int xhci_scratchpad_alloc(struct xhci_ctrl *ctrl)
- 			break;
- 		page_size = page_size >> 1;
- 	}
--	BUG_ON(i == 16);
- 
- 	ctrl->page_size = 1 << (i + 12);
- 	buf = memalign(ctrl->page_size, num_sp * ctrl->page_size);
-@@ -444,9 +432,7 @@ static struct xhci_container_ctx
- 	struct xhci_container_ctx *ctx;
- 
- 	ctx = malloc(sizeof(struct xhci_container_ctx));
--	BUG_ON(!ctx);
- 
--	BUG_ON((type != XHCI_CTX_TYPE_DEVICE) && (type != XHCI_CTX_TYPE_INPUT));
- 	ctx->type = type;
- 	ctx->size = (MAX_EP_CTX_NUM + 1) *
- 			CTX_SIZE(xhci_readl(&ctrl->hccr->cr_hccparams));
-@@ -638,7 +624,6 @@ int xhci_mem_init(struct xhci_ctrl *ctrl, struct xhci_hccr *hccr,
- struct xhci_input_control_ctx
- 		*xhci_get_input_control_ctx(struct xhci_container_ctx *ctx)
- {
--	BUG_ON(ctx->type != XHCI_CTX_TYPE_INPUT);
- 	return (struct xhci_input_control_ctx *)ctx->bytes;
- }
- 
-@@ -760,8 +745,6 @@ void xhci_setup_addressable_virt_dev(struct xhci_ctrl *ctrl,
- 
- 	virt_dev = ctrl->devs[slot_id];
- 
--	BUG_ON(!virt_dev);
--
- 	/* Extract the EP0 and Slot Ctrl */
- 	ep0_ctx = xhci_get_ep_ctx(ctrl, virt_dev->in_ctx, 0);
- 	slot_ctx = xhci_get_slot_ctx(ctrl, virt_dev->in_ctx);
-diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
-index c8260cbdf9..5e9273c5a6 100644
---- a/drivers/usb/host/xhci-ring.c
-+++ b/drivers/usb/host/xhci-ring.c
-@@ -244,6 +244,7 @@ static int prepare_ring(struct xhci_ctrl *ctrl, struct xhci_ring *ep_ring,
- 		return -EINVAL;
- 	case EP_STATE_HALTED:
- 		puts("WARN halted endpoint, queueing URB anyway.\n");
-+		return -EPIPE;
- 	case EP_STATE_STOPPED:
- 	case EP_STATE_RUNNING:
- 		debug("EP STATE RUNNING.\n");
-@@ -287,12 +288,15 @@ static int prepare_ring(struct xhci_ctrl *ctrl, struct xhci_ring *ep_ring,
-  * @param cmd		Command type to enqueue
-  * Return: none
-  */
--void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
-+int xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
- 			u32 ep_index, trb_type cmd)
- {
- 	u32 fields[4];
-+	int ret;
- 
--	BUG_ON(prepare_ring(ctrl, ctrl->cmd_ring, EP_STATE_RUNNING));
-+	ret = prepare_ring(ctrl, ctrl->cmd_ring, EP_STATE_RUNNING);
-+	if (ret < 0)
-+		return ret;
- 
- 	fields[0] = lower_32_bits(addr);
- 	fields[1] = upper_32_bits(addr);
-@@ -311,6 +315,7 @@ void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr, u32 slot_id,
- 
- 	/* Ring the command ring doorbell */
- 	xhci_writel(&ctrl->dba->doorbell[0], DB_VALUE_HOST);
-+	return 0;
- }
- 
- /*
-@@ -493,7 +498,7 @@ union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected)
- 		return NULL;
- 
- 	printf("XHCI timeout on event type %d... cannot recover.\n", expected);
--	BUG();
-+	return NULL;
- }
- 
- /*
-@@ -512,16 +517,12 @@ static void reset_ep(struct usb_device *udev, int ep_index)
- 	xhci_queue_command(ctrl, 0, udev->slot_id, ep_index, TRB_RESET_EP);
- 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
- 	field = le32_to_cpu(event->trans_event.flags);
--	BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
- 	xhci_acknowledge_event(ctrl);
- 
- 	addr = xhci_trb_virt_to_dma(ring->enq_seg,
- 		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
- 	xhci_queue_command(ctrl, addr, udev->slot_id, ep_index, TRB_SET_DEQ);
- 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
--	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
--		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
--		event->event_cmd.status)) != COMP_SUCCESS);
- 	xhci_acknowledge_event(ctrl);
- }
- 
-@@ -545,25 +546,15 @@ static void abort_td(struct usb_device *udev, int ep_index)
- 
- 	event = xhci_wait_for_event(ctrl, TRB_TRANSFER);
- 	field = le32_to_cpu(event->trans_event.flags);
--	BUG_ON(TRB_TO_SLOT_ID(field) != udev->slot_id);
--	BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
--	BUG_ON(GET_COMP_CODE(le32_to_cpu(event->trans_event.transfer_len
--		!= COMP_STOP)));
- 	xhci_acknowledge_event(ctrl);
- 
- 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
--	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
--		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
--		event->event_cmd.status)) != COMP_SUCCESS);
- 	xhci_acknowledge_event(ctrl);
- 
- 	addr = xhci_trb_virt_to_dma(ring->enq_seg,
- 		(void *)((uintptr_t)ring->enqueue | ring->cycle_state));
- 	xhci_queue_command(ctrl, addr, udev->slot_id, ep_index, TRB_SET_DEQ);
- 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
--	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
--		!= udev->slot_id || GET_COMP_CODE(le32_to_cpu(
--		event->event_cmd.status)) != COMP_SUCCESS);
- 	xhci_acknowledge_event(ctrl);
- }
- 
-@@ -781,8 +772,6 @@ again:
- 	}
- 
- 	field = le32_to_cpu(event->trans_event.flags);
--	BUG_ON(TRB_TO_SLOT_ID(field) != slot_id);
--	BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
- 
- 	record_transfer_result(udev, event, available_length);
- 	xhci_acknowledge_event(ctrl);
-@@ -970,9 +959,6 @@ int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
- 		goto abort;
- 	field = le32_to_cpu(event->trans_event.flags);
- 
--	BUG_ON(TRB_TO_SLOT_ID(field) != slot_id);
--	BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
--
- 	record_transfer_result(udev, event, length);
- 	xhci_acknowledge_event(ctrl);
- 	if (udev->status == USB_ST_STALLED) {
-@@ -992,8 +978,6 @@ int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
- 		event = xhci_wait_for_event(ctrl, TRB_TRANSFER);
- 		if (!event)
- 			goto abort;
--		BUG_ON(TRB_TO_SLOT_ID(field) != slot_id);
--		BUG_ON(TRB_TO_EP_INDEX(field) != ep_index);
- 		xhci_acknowledge_event(ctrl);
- 	}
- 
-diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
-index 5cacf0769e..13b226a3f5 100644
---- a/drivers/usb/host/xhci.c
-+++ b/drivers/usb/host/xhci.c
-@@ -451,8 +451,6 @@ static int xhci_configure_endpoints(struct usb_device *udev, bool ctx_change)
- 	xhci_queue_command(ctrl, in_ctx->dma, udev->slot_id, 0,
- 			   ctx_change ? TRB_EVAL_CONTEXT : TRB_CONFIG_EP);
- 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
--	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags))
--		!= udev->slot_id);
- 
- 	switch (GET_COMP_CODE(le32_to_cpu(event->event_cmd.status))) {
- 	case COMP_SUCCESS:
-@@ -647,7 +645,6 @@ static int xhci_address_device(struct usb_device *udev, int root_portnr)
- 	xhci_queue_command(ctrl, virt_dev->in_ctx->dma,
- 			   slot_id, 0, TRB_ADDR_DEV);
- 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
--	BUG_ON(TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags)) != slot_id);
- 
- 	switch (GET_COMP_CODE(le32_to_cpu(event->event_cmd.status))) {
- 	case COMP_CTX_STATE:
-@@ -722,8 +719,6 @@ static int _xhci_alloc_device(struct usb_device *udev)
- 
- 	xhci_queue_command(ctrl, 0, 0, 0, TRB_ENABLE_SLOT);
- 	event = xhci_wait_for_event(ctrl, TRB_COMPLETION);
--	BUG_ON(GET_COMP_CODE(le32_to_cpu(event->event_cmd.status))
--		!= COMP_SUCCESS);
- 
- 	udev->slot_id = TRB_TO_SLOT_ID(le32_to_cpu(event->event_cmd.flags));
- 
-@@ -1325,7 +1320,6 @@ static int xhci_update_hub_device(struct udevice *dev, struct usb_device *udev)
- 		return 0;
- 
- 	virt_dev = ctrl->devs[slot_id];
--	BUG_ON(!virt_dev);
- 
- 	out_ctx = virt_dev->out_ctx;
- 	in_ctx = virt_dev->in_ctx;
-diff --git a/include/usb/xhci.h b/include/usb/xhci.h
-index 4a4ac10229..3046b9e411 100644
---- a/include/usb/xhci.h
-+++ b/include/usb/xhci.h
-@@ -1253,7 +1253,7 @@ void xhci_slot_copy(struct xhci_ctrl *ctrl,
- 		    struct xhci_container_ctx *out_ctx);
- void xhci_setup_addressable_virt_dev(struct xhci_ctrl *ctrl,
- 				     struct usb_device *udev, int hop_portnr);
--void xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr,
-+int xhci_queue_command(struct xhci_ctrl *ctrl, dma_addr_t addr,
- 			u32 slot_id, u32 ep_index, trb_type cmd);
- void xhci_acknowledge_event(struct xhci_ctrl *ctrl);
- union xhci_trb *xhci_wait_for_event(struct xhci_ctrl *ctrl, trb_type expected);
--- 
-2.17.1
+On 10/13/23 01:03, Tom Rini wrote:
+> We can remove common.h from most cases of the code here, and only a few
+> places need an additional header instead.
+> 
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Michal Simek <michal.simek@amd.com>
+> ---
+>   arch/microblaze/cpu/cache.c                          | 1 -
+>   arch/microblaze/cpu/cpuinfo.c                        | 1 -
+>   arch/microblaze/cpu/exception.c                      | 2 +-
+>   arch/microblaze/cpu/interrupts.c                     | 3 ++-
+>   arch/microblaze/cpu/pvr.c                            | 1 -
+>   arch/microblaze/cpu/relocate.c                       | 3 ++-
+>   arch/microblaze/cpu/spl.c                            | 1 -
+>   arch/microblaze/include/asm/cpuinfo.h                | 2 ++
+>   arch/microblaze/lib/bootm.c                          | 1 -
+>   board/xilinx/microblaze-generic/microblaze-generic.c | 1 -
+>   10 files changed, 7 insertions(+), 9 deletions(-)
+> 
+> diff --git a/arch/microblaze/cpu/cache.c b/arch/microblaze/cpu/cache.c
+> index 829e6c7ae605..75ec0a8fd24f 100644
+> --- a/arch/microblaze/cpu/cache.c
+> +++ b/arch/microblaze/cpu/cache.c
+> @@ -5,7 +5,6 @@
+>    * Michal SIMEK <monstr@monstr.eu>
+>    */
+>   
+> -#include <common.h>
+>   #include <cpu_func.h>
+>   #include <asm/asm.h>
+>   #include <asm/cache.h>
+> diff --git a/arch/microblaze/cpu/cpuinfo.c b/arch/microblaze/cpu/cpuinfo.c
+> index 6b15d6ca41c0..2bfdf767f3a5 100644
+> --- a/arch/microblaze/cpu/cpuinfo.c
+> +++ b/arch/microblaze/cpu/cpuinfo.c
+> @@ -2,7 +2,6 @@
+>   /*
+>    * Copyright (C) 2022, Ovidiu Panait <ovpanait@gmail.com>
+>    */
+> -#include <common.h>
+>   #include <asm/cpuinfo.h>
+>   #include <asm/global_data.h>
+>   
+> diff --git a/arch/microblaze/cpu/exception.c b/arch/microblaze/cpu/exception.c
+> index 9414776afa7f..6b329fc7b3a2 100644
+> --- a/arch/microblaze/cpu/exception.c
+> +++ b/arch/microblaze/cpu/exception.c
+> @@ -5,8 +5,8 @@
+>    * Michal  SIMEK <monstr@monstr.eu>
+>    */
+>   
+> -#include <common.h>
+>   #include <hang.h>
+> +#include <stdio.h>
+>   #include <asm/asm.h>
+>   
+>   void _hw_exception_handler (void)
+> diff --git a/arch/microblaze/cpu/interrupts.c b/arch/microblaze/cpu/interrupts.c
+> index ac53208bda67..244f7fd15eba 100644
+> --- a/arch/microblaze/cpu/interrupts.c
+> +++ b/arch/microblaze/cpu/interrupts.c
+> @@ -7,7 +7,8 @@
+>    * Yasushi SHOJI <yashi@atmark-techno.com>
+>    */
+>   
+> -#include <common.h>
+> +#include <log.h>
+> +#include <vsprintf.h>
+>   #include <asm/asm.h>
+>   
+>   void enable_interrupts(void)
+> diff --git a/arch/microblaze/cpu/pvr.c b/arch/microblaze/cpu/pvr.c
+> index 23c0f912d435..71aea0b9380c 100644
+> --- a/arch/microblaze/cpu/pvr.c
+> +++ b/arch/microblaze/cpu/pvr.c
+> @@ -2,7 +2,6 @@
+>   /*
+>    * Copyright (C) 2022, Ovidiu Panait <ovpanait@gmail.com>
+>    */
+> -#include <common.h>
+>   #include <asm/asm.h>
+>   #include <asm/pvr.h>
+>   
+> diff --git a/arch/microblaze/cpu/relocate.c b/arch/microblaze/cpu/relocate.c
+> index 7a15fb2ec397..e46fe5bdd5d7 100644
+> --- a/arch/microblaze/cpu/relocate.c
+> +++ b/arch/microblaze/cpu/relocate.c
+> @@ -4,8 +4,9 @@
+>    * Michal Simek <michal.simek@amd.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <elf.h>
+> +#include <log.h>
+> +#include <linux/types.h>
+>   
+>   #define R_MICROBLAZE_NONE	0
+>   #define R_MICROBLAZE_32		1
+> diff --git a/arch/microblaze/cpu/spl.c b/arch/microblaze/cpu/spl.c
+> index c21beafdb810..cb224bd25423 100644
+> --- a/arch/microblaze/cpu/spl.c
+> +++ b/arch/microblaze/cpu/spl.c
+> @@ -5,7 +5,6 @@
+>    * Michal Simek <michal.simek@amd.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <command.h>
+>   #include <image.h>
+>   #include <log.h>
+> diff --git a/arch/microblaze/include/asm/cpuinfo.h b/arch/microblaze/include/asm/cpuinfo.h
+> index 3c58e52217c4..fbd9418a2f8b 100644
+> --- a/arch/microblaze/include/asm/cpuinfo.h
+> +++ b/arch/microblaze/include/asm/cpuinfo.h
+> @@ -6,6 +6,8 @@
+>   #ifndef __ASM_MICROBLAZE_CPUINFO_H
+>   #define __ASM_MICROBLAZE_CPUINFO_H
+>   
+> +#include <linux/types.h>
+> +
+>   /**
+>    * struct microblaze_cpuinfo - CPU info for microblaze processor core.
+>    *
+> diff --git a/arch/microblaze/lib/bootm.c b/arch/microblaze/lib/bootm.c
+> index 930384f4015f..f3ec4b741b88 100644
+> --- a/arch/microblaze/lib/bootm.c
+> +++ b/arch/microblaze/lib/bootm.c
+> @@ -7,7 +7,6 @@
+>    * Yasushi SHOJI <yashi@atmark-techno.com>
+>    */
+>   
+> -#include <common.h>
+>   #include <bootstage.h>
+>   #include <command.h>
+>   #include <cpu_func.h>
+> diff --git a/board/xilinx/microblaze-generic/microblaze-generic.c b/board/xilinx/microblaze-generic/microblaze-generic.c
+> index a427ac94a170..2b035d535892 100644
+> --- a/board/xilinx/microblaze-generic/microblaze-generic.c
+> +++ b/board/xilinx/microblaze-generic/microblaze-generic.c
+> @@ -10,7 +10,6 @@
+>    * header files
+>    */
+>   
+> -#include <common.h>
+>   #include <config.h>
+>   #include <env.h>
+>   #include <init.h>
 
+I build it and no problem seen that's why.
+Acked-by: Michal Simek <michal.simek@amd.com>
+
+If you want me to take it via my tree please let me know but I expect you will 
+take it directly.
+
+Thanks,
+Michal
