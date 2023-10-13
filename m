@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45673CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 15:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3998CCDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 15:17:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE6FB86D62;
-	Fri, 13 Oct 2023 17:16:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3EDF286EB8;
+	Fri, 13 Oct 2023 17:16:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TrHxt/9u";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aEq8+ZQQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F14C586EE0; Fri, 13 Oct 2023 17:15:26 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 9A72886EE4; Fri, 13 Oct 2023 17:15:45 +0200 (CEST)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C65B986EDB
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 17:15:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24B9F86D62
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 17:15:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-9b9faf05f51so345408566b.2
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 08:15:13 -0700 (PDT)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-51e28cac164so6945639a12.1
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 08:15:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697210113; x=1697814913; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697210115; x=1697814915; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/2fvHORxI2jW4iN7X+Mz9DTct8wfcRsNL966iY5VoX0=;
- b=TrHxt/9ugqtizGeL79jHqRt9QTtI9z0uNHKUmv0D/cE8Ma7UV3bhBvCGWkt8WYzAWD
- dPLfaacuGhtxzfFsHOwhA+Vb6VdrpI37hu8giO978qY7shVAWMrfVIa3zAnEOiNfAXFE
- JfjAO7EU07M1zkgUMHAFeK08RJs+1xNnXoK/o=
+ bh=wfmjW2Q0iCzoAVC3etv/frQLHIeT1tox0zi056VabAw=;
+ b=aEq8+ZQQqk4Sj3en3NTbC3DU62G2v8BfYqad6aJTnsNEHTG6xh07t/C4lvyJ5vqKGy
+ 61xOwKslryWQWYQtOfvA8i2i0HiMXNB1FktnqOXpmKZpuYh1E83DKyfN1t9BUUo6ZNOt
+ xm+6118Wgn0GE0ATT64xauJRG4u3B0YCqWLrU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697210113; x=1697814913;
+ d=1e100.net; s=20230601; t=1697210115; x=1697814915;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/2fvHORxI2jW4iN7X+Mz9DTct8wfcRsNL966iY5VoX0=;
- b=duuuYVuDJRsLQnk+pokh1zovMOjaKb90pRESrNDLm3xnl3URTeKKmVOjXNlQ4R/8vu
- K1/OhL9ntfN/bvDZo/m/tl5nq6Vbxe1b/rcGRRm9cx2iWR2xsRkUyLLNZyXRlg5pGtbg
- HjjrmqpLsQjAS7cCVOK6aE6LF/8D6/ZteDqY8NCZnLZx4miLa829z4VOdgUqKggIVwA0
- y8NzTeSIkYtMlVfAu021q83PPdkOai3wRavTut2RSrWeyrvTxLorVP87R6iGf0TgMHET
- iibT/cIlLOyP9F9/YexgivnSPB4+ivRrBfZsdCY6MvsrD/EIoZAapL5RppleVcQLuw3N
- WJZg==
-X-Gm-Message-State: AOJu0Yx1+tByaXiZqKyrYYfRGukiRGN25gpNBuSA0ObEwMUarOI/9x96
- V6rt+15wwzTg1fnPCc6vD8Pcyf4o0otAgtEOOOJmaw==
-X-Google-Smtp-Source: AGHT+IEj8pgYU9iHvxqRXtkKJQomUwbyU8W4p4Stf6lhzbmCGarl7uTVRlrMjYCyo2fnPgD7m478AtLdaZ2osGUyh48=
-X-Received: by 2002:a17:907:2cd4:b0:9ba:3f18:8ae5 with SMTP id
- hg20-20020a1709072cd400b009ba3f188ae5mr8532245ejc.60.1697210113103; Fri, 13
- Oct 2023 08:15:13 -0700 (PDT)
+ bh=wfmjW2Q0iCzoAVC3etv/frQLHIeT1tox0zi056VabAw=;
+ b=sGfy3a9yDE0kqnnyMGb8iaSa33FJii757zMFTqWWwNxvc8MthXQoxwmaX6Y2EBVm+T
+ 4Afk4MDxOx1c7r4AzRDxVKqrFEjtVnu+MN6q9I7woXWicQbDFSqNmY7wZKCaqrAr7zkJ
+ 1A8hTGmKHT5vesAasg8JJKob+zkbLv6dvUPyyjNHYjJdaFuH9qu0GSA2OF3apb65+7VS
+ J00zjUTDreMTTWFws3eIvPGYwUZuvU7r4+sBoilmYn4G5/W7oX9YAzD0l6TtzHC0cyyw
+ EFIT0kEdy5KKsrSHVDSRy4iej4xJKgsd7qz0eo0HeeeRBCq/WBlXFqc8ehzYY5WE5g/8
+ aclQ==
+X-Gm-Message-State: AOJu0YzXJeDnjMiKJuPVa97aAPIpWge60nmVw3jwOCKZG9WBzT3kZJqV
+ pnOi1tw5GTVwrfxAyfxEuItV7WO/MX6x7UWfaH7UHOFitNPMloM3Xek=
+X-Google-Smtp-Source: AGHT+IGa7EssYnxUUHOgtPksff/tK4nMwiAb/QRJg+zGBebmxJIk1Zltb6X14bJW8WozAdsbBu4Dew9ZGZ3seu7bIOE=
+X-Received: by 2002:aa7:cf8a:0:b0:534:6b86:eda2 with SMTP id
+ z10-20020aa7cf8a000000b005346b86eda2mr294745edx.21.1697210114979; Fri, 13 Oct
+ 2023 08:15:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231012230359.2005249-1-trini@konsulko.com>
- <20231012230359.2005249-2-trini@konsulko.com>
-In-Reply-To: <20231012230359.2005249-2-trini@konsulko.com>
+In-Reply-To: <20231012230359.2005249-1-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 13 Oct 2023 08:14:59 -0700
-Message-ID: <CAPnjgZ21qUp46c5mUBQNN6pXL2fKepFRjORhKZrz=N9MTGh3_w@mail.gmail.com>
-Subject: Re: [PATCH 2/7] include: Add <linux/types.h> in a few places
+Date: Fri, 13 Oct 2023 08:15:00 -0700
+Message-ID: <CAPnjgZ0dHBBAAYLx-jLr7nHSMBcTonH2cHgMJpb1KasbY=V55A@mail.gmail.com>
+Subject: Re: [PATCH 1/7] checkpatch.pl: Make common.h check boarder
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -83,18 +82,19 @@ X-Virus-Status: Clean
 
 On Thu, 12 Oct 2023 at 16:04, Tom Rini <trini@konsulko.com> wrote:
 >
-> These files references a number of types that are defined in
-> <linux/types.h> (and so forth), so include it here rather than rely on
-> indirect inclusion.
+> At this point in time we should not add common.h to any new files, so
+> make checkpatch.pl complain.
 >
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
 > Cc: Simon Glass <sjg@chromium.org>
-> ---
->  include/bootstage.h | 1 +
->  include/cache.h     | 2 ++
->  include/cpu.h       | 2 ++
->  3 files changed, 5 insertions(+)
 >
+> This causes a bunch of patman tests, for checkpatch, to now fail and I
+> don't really understand why, at all.  And that was before I added a test
+> for the new error, which I had hoped would clear up the problem.
+> ---
+>  scripts/checkpatch.pl           | 8 +++++++-
+>  tools/patman/test_checkpatch.py | 7 ++++++-
+>  2 files changed, 13 insertions(+), 2 deletions(-)
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
