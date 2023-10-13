@@ -4,54 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16AE1CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 12:59:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CE9CDB483
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 13:05:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B488286E77;
-	Fri, 13 Oct 2023 14:59:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D291A86E77;
+	Fri, 13 Oct 2023 15:05:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697201972;
-	bh=V+cj1IO6p2k/lAVA+zuX/8Iktz7Y/u1/W0FAA30MI78=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=FYNfhPIGrtie57AfKFYchqbAbTElGryRN1EYnTkEhvU0UobE+LZlVFD4HNRDMTcdv
-	 rB0LyqbY8GidD0nLc36DK35RABtoi7CGUYX6Jdp3d69hkvJNQQK+Xin5NOGv0Ejheb
-	 FGdyXwwRkOYxtrx1TRzbYC6CfZSBq5Io58/gVWuDBSxuZ/RYhSJlUHiGQ/TlzmCNW8
-	 Ol09TTFODC0JF+KhZ/7/3tlnl68WzBd2brFjLUqIc23yB94n7EZYxEkDKaOzwx0owt
-	 6gzMCV4DY0oIN1Z/0BznNbJ4a/uZEE9UtA/nHJ08F5qu3Sx3WEXKE9736mOk1JNdSG
-	 sFZXNHPx37UJA==
-Received: from eryximachos.home (unknown
- [IPv6:2a01:cb18:989:a700:7e7a:91ff:feeb:a1bd])
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7BCC386E5E; Fri, 13 Oct 2023 15:05:25 +0200 (CEST)
+Received: from 8.mo576.mail-out.ovh.net (8.mo576.mail-out.ovh.net
+ [46.105.56.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested) (Authenticated sender: pro@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D8B4186E5E;
- Fri, 13 Oct 2023 14:59:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697201970;
- bh=V+cj1IO6p2k/lAVA+zuX/8Iktz7Y/u1/W0FAA30MI78=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=OxxE7Q6/vk/0Iazwl/JBXBAl+sB9EkeqyFvQ9pYi4xCsQw3GAANVfhtCcG1Z7wOj1
- OrtyZ/UFlw6Bo3oEqPP6TH/QGiWOdbejy6UWGm4d2MuWHjlBq9IQyRhFjipaiwMn9R
- e90Q0ANG9pSEMsjP9DkMXX60/7jxuSmQOtQbxoIdi2aoLnETHTLontArXjFR2/57P7
- j1BfwA8MqRCHM20nExbxXfUsgVMuAE8nI2ZyxKHKl81pyY4/WvRmwQOjnRRIy9lKIg
- 7ycrcj/A0dPvl2+zH6ib4x/wRYCto7BpDTz0V5+OXxckpBVSN4i2s/3qkqiqsDk6z9
- ez1np1/AJc8yA==
-Date: Fri, 13 Oct 2023 14:58:02 +0200
-From: Philip Oberfichtner <pro@denx.de>
-To: Heiko Schocher <hs@denx.de>
-Cc: u-boot@lists.denx.de, sjg@chromium.org, trini@konsulko.com
-Subject: Re: [PATCH 2/2] bootcount: Add driver model I2C driver
-Message-ID: <ZSk-2lBrLW5Bel_X@eryximachos.home>
-References: <20231013094302.28944-1-pro@denx.de>
- <20231013094302.28944-3-pro@denx.de>
- <037dac45-eee4-c0f1-b72e-ee0a2bfe3807@denx.de>
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 51C6786ED0
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 15:05:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=armadeus.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=sebastien.szymanski@armadeus.com
+Received: from director1.ghost.mail-out.ovh.net (unknown [10.108.1.202])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id DDEBC23BF4
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 13:05:18 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-bm8bq (unknown [10.111.172.111])
+ by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 32A921FE9D;
+ Fri, 13 Oct 2023 13:05:18 +0000 (UTC)
+Received: from armadeus.com ([37.59.142.101])
+ by ghost-submission-6684bf9d7b-bm8bq with ESMTPSA
+ id g/JHB45AKWVKNQAAKSu0LQ
+ (envelope-from <sebastien.szymanski@armadeus.com>);
+ Fri, 13 Oct 2023 13:05:18 +0000
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-101G00456f55dc4-3929-46ae-8e4b-25432a9021a5,
+ 7C22F39476E699F77263983D1F603F73B3003938)
+ smtp.auth=sebastien.szymanski@armadeus.com
+X-OVh-ClientIp: 92.148.253.243
+Message-ID: <05121e6e-5c0f-4083-9be9-2bd542f47c01@armadeus.com>
+Date: Fri, 13 Oct 2023 15:04:45 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <037dac45-eee4-c0f1-b72e-ee0a2bfe3807@denx.de>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] clk: imx: add i.MX93 CCF driver
+Content-Language: en-US
+To: u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>
+References: <20230725080856.26567-1-sebastien.szymanski@armadeus.com>
+From: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
+Autocrypt: addr=sebastien.szymanski@armadeus.com; keydata=
+ xsBNBFNfZLEBCACv1lqSePHJNpRgcnER+3emy+Arjz84zFax3XkogjY/e3ZneihIgWrVKe5M
+ ql16pX4KTkzNgMUKz4bG/XwT3kjcrXshxFLlg7KrHMl287C+W+QOUjnjVeRi/su+SPmjz8VD
+ yr11h+ZkVLAWhS+uQJ93jy1NwG8M4t1kBLAVHHD5Vw4FJ+3ouaVYIp1X1Cr8bVKQw33Q1aTd
+ ro0kMBb96B9vNu7ciJZ3gvlaBzUEKOgNnq9KaywuLnqrqr4HUIn5JuxZjCjJzt9kTAKcTfp2
+ cJM8qpp+2FF5qtbkse9fZ6M64qozgOPr9Tk4Amf9fZEUQ6UNw14mmBZuXSzoHe75gI7TABEB
+ AAHNN1PDqWJhc3RpZW4gU1pZTUFOU0tJIDxzZWJhc3RpZW4uc3p5bWFuc2tpQGFybWFkZXVz
+ LmNvbT7CwJAEEwEIADoCGyMHCwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgBYhBJwGygpYm/1C
+ /GCmwbCaKeiBMmTiBQJdhIHLAAoJELCaKeiBMmTixXIH/2W3kbzRG0UF81jtRRnp0H83rjDT
+ v0H+8fgFMRL/7HCJ1QPArkfRJlM2wlJkN+ChP09CCarYfUEHfRCHlTb7At6Yyrz1jziD7ZwX
+ 8IWHYRXnZkY5eZc5DsiUgq6JH49kt+GPzK8UVP9MTa6zkBpPCUf7LzZ4pD3FihdkT52BU3gI
+ d9P49fSI0TYySlb/VKn815aOhvwEr7+Dh3mZUjSh7saofbRmVUOr7p+R3MvvGI19/IJZjeOE
+ ZWliODDOt6HnBOtoGSXMcNIFF6snH52D5N5gY88njZjTwhgGGUBix1bsgf/EY0v4R5itZBXB
+ B/Ze4Tm++YHaB75hZK6PQu/YRv7OwE0EU19ksQEIALo7jhXddrXBTRu5SAjelV53jyHBJTX/
+ vN4nL/VbbW/saca+NJjDSxx5DBmotZbQdWIyZiSIjU/xnTREvtDrl6ZeSsKWd7ZqiuiY4fSR
+ zwuQp9rd0yqRuxesrWeyJB1zCSdEvLyKASERt+nxkOA+IzJ4y1qLtvnWr+SL1AXgTMw+Tkyw
+ KIDCRWHTIYas11ldGj82gOIpYeXnapeNLHfT4EQwg0NeWYHynJxAQWiX5aPlw0uSpAQSsBXQ
+ FIe3fpoveMSnXK+PG2BBOzexYv7r4S70a6sF9sgTTPpfKqUaqqC+u1+bUX6alTAKhGKJywaF
+ 6ViqLlgY8PfwohSyAlqlTRMAEQEAAcLAdgQYAQgAIAIbDBYhBJwGygpYm/1C/GCmwbCaKeiB
+ MmTiBQJdhIHSAAoJELCaKeiBMmTitU8IAK7NQM3fEwaF5XaKtepYWsVka44CD8A9e4r7NVK9
+ ugirKvXirIxBSDmN/Db862NmVpITsZ6ERNSNZLm/7k55N+TexKYiFZeU7G92TEfAM6qPElvx
+ DLEcrkNMq9r08YZeUloacsq31AL5fK4LW+xdvXudkdiKRMJsdTpmff3x5kIziGOHjwFP9wve
+ ZgEH52gpbRsP8Whx/Z2lNX/BBRmFM8OnEXFsjjqDzYThdxTq85wGPpkgvvUGyPNRD7TpbB1C
+ pajOUUkPxgj5LKt77HD1afeZNudWhgcdkbtT5PMQTT0WY6wvMEj9S1+bGPeXRGWLYB7gHQ+L
+ JNoSD7Kz6Y9qnKo=
+In-Reply-To: <20230725080856.26567-1-sebastien.szymanski@armadeus.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 4651655467520813989
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrieefgdefjecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfuvfevfhfhjggtgfesthekredttddvjeenucfhrhhomhepuforsggrshhtihgvnhcuufiihihmrghnshhkihcuoehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomheqnecuggftrfgrthhtvghrnhepgeegffegfeeileehueehudelteefgfdtjeduudfhledvjeeggefguefgkedtfefgnecuffhomhgrihhnpehprghsthgvsghinhdrtghomhenucfkphepuddvjedrtddrtddruddpledvrddugeekrddvheefrddvgeefpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheejiedpmhhouggvpehsmhhtphhouhht
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,86 +100,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Heiko,
+Hello,
 
-On Fri, Oct 13, 2023 at 01:28:47PM +0200, Heiko Schocher wrote:
-> [...]
-> > 
-> > 	bootcount {
-> > 		compatible = "u-boot,bootcount-i2c";
-> > 		i2c-bus = <&i2c1>;
-> > 		address = <0x52>;
+On 7/25/23 10:08, Sébastien Szymanski wrote:
+> This series adds i.MX93 CCF driver, modifed from Linux kernel 6.5-rc2
+> and adapted for U-Boot.
 > 
-> Hmm.. do we really need this here with DTS. Why not using a phandle
-> to a real i2c device? Something like this for example:
+> Patches 2 and 3 come from NXP U-Boot.
 > 
-> 		i2cbcdev = &i2c_rtc;
+> A boot log and a dump of the clock tree are available at the following
+> URL:
+> https://pastebin.com/7WbubSXK
 > 
-> with
+> Alice Guo (1):
+>    arm: dts: imx93: add a per clock for LPUART1
 > 
-> &i2c1 {
->         i2c_rtc: rtc@68 {
-> [...]
+> Sébastien Szymanski (2):
+>    clk: imx: add i.MX93 CCF driver
+>    imx93_evk: defconfig: enable clock driver
 > 
-> and so there is no need for knowing the bus and address ...
+> Ye Li (1):
+>    serial: lpuart: Enable IPG clock
 > 
 
-Yeah I agree that would be much better, but ...
+gentle ping.
+Maybe someone at NXP can help review this patchset?
 
-> [...]
+Regards,
+
+>   arch/arm/dts/imx93-11x11-evk-u-boot.dtsi |  23 ++
+>   arch/arm/dts/imx93.dtsi                  |   4 +-
+>   board/freescale/imx93_evk/imx93_evk.c    |   2 -
+>   configs/imx93_11x11_evk_defconfig        |   2 +
+>   drivers/clk/imx/Kconfig                  |  18 ++
+>   drivers/clk/imx/Makefile                 |   2 +
+>   drivers/clk/imx/clk-composite-93.c       | 142 +++++++++
+>   drivers/clk/imx/clk-fracn-gppll.c        | 382 +++++++++++++++++++++++
+>   drivers/clk/imx/clk-gate-93.c            | 148 +++++++++
+>   drivers/clk/imx/clk-imx93.c              | 343 ++++++++++++++++++++
+>   drivers/clk/imx/clk.h                    |  42 +++
+>   drivers/serial/serial_lpuart.c           |  14 +-
+>   include/dt-bindings/clock/imx93-clock.h  |   6 +-
+>   13 files changed, 1122 insertions(+), 6 deletions(-)
+>   create mode 100644 drivers/clk/imx/clk-composite-93.c
+>   create mode 100644 drivers/clk/imx/clk-fracn-gppll.c
+>   create mode 100644 drivers/clk/imx/clk-gate-93.c
+>   create mode 100644 drivers/clk/imx/clk-imx93.c
 > 
-> when you use a phandle, you can replace the part from reading "offset"
-> with this:
-> 
-> 	uclass_get_device_by_phandle(UCLASS_I2C, dev, "i2cbcdev", &priv->bcdev);
-> 
-> of course plus error checking...
 
-This does not work, UCLASS_I2C is used for the *bus above* the device we
-actually want.
+-- 
+Sébastien Szymanski, Armadeus Systems
+Software engineer
 
-Next thing I thougt about: Why not use the UCLASS_I2C_GENERIC. But this
-expects a "i2c-chip" compatible string, which our rtc or whatever device
-obviously does not have.
-
-I think using UCLASS_I2C_GENERIC might indeed be the best approach.
-Maybe using something like 'device_bind_driver()'. But again, this
-expects the parent device to be there already as far as I can tell.
-
-Any suggestions?
-
-Best regards,
-Philip
-
-
-> 
-> > +
-> > +	return 0;
-> > +}
-> > +
-> > +static const struct bootcount_ops bootcount_i2c_ops = {
-> > +	.get = bootcount_i2c_get,
-> > +	.set = bootcount_i2c_set,
-> > +};
-> > +
-> > +static const struct udevice_id bootcount_i2c_ids[] = {
-> > +	{ .compatible = "u-boot,bootcount-i2c" },
-> > +	{ }
-> > +};
-> > +
-> > +U_BOOT_DRIVER(bootcount_i2c) = {
-> > +	.name		= "bootcount-i2c",
-> > +	.id		= UCLASS_BOOTCOUNT,
-> > +	.priv_auto	= sizeof(struct bootcount_i2c_priv),
-> > +	.probe		= bootcount_i2c_probe,
-> > +	.of_match	= bootcount_i2c_ids,
-> > +	.ops		= &bootcount_i2c_ops,
-> > +};
-> > 
-> 
-> bye,
-> Heiko
-> -- 
-> DENX Software Engineering GmbH,      Managing Director: Erika Unter
-> HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-> Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
