@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCE8DCDB482
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 07:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FC1CDB482
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 07:44:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95D8C86E77;
-	Fri, 13 Oct 2023 09:43:54 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9DA0E86E88;
+	Fri, 13 Oct 2023 09:44:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="gpreQQGk";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="ApkoWaWQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5527286B35; Fri, 13 Oct 2023 09:43:53 +0200 (CEST)
-Received: from mail-m155105.qiye.163.com (mail-m155105.qiye.163.com
- [101.71.155.105])
+ id AF02B86B35; Fri, 13 Oct 2023 09:44:15 +0200 (CEST)
+Received: from mail-m49246.qiye.163.com (mail-m49246.qiye.163.com
+ [45.254.49.246])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3445B86E7C
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:43:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 521AF86E84
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:44:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=gpreQQGk+Ycb7d8wznw6dSpcUySTsGTwr+4Z4H/2aJa3kXYh2vj3vBU88Xn2TbiFHCImrCrjl+AKnbx96lDx2XGNTQOK/pL+mmqYvRy/BffiUHUFjTaTz8de3Trw5e79mGmBD8i714TMxbbMX9+XmFXs2dmhJ1opRZm5TwSVYiY=;
+ b=ApkoWaWQKqJhoJCGdGNLDaBRj/CD+9khzixoRPTt5oaELj2zwW9GIJjiQCvdyelyc80eBLyT4bYaInNraKo0yL16Yi2TJsGBuhd6mrvHMe65GppVX9PFdeS9Rzgus9oXVj9huajyUGRbGQCiCdy4UQCkMSHPjPDjH6VRQREI+k8=;
  c=relaxed/relaxed; s=default; d=rock-chips.com; v=1;
- bh=/epUjV2LlnO6aevdaxaRID6eq/mnVjQ5iQN+simVlKM=;
+ bh=SMbEyfW2uYa9LmJVLdLayZEreMvgJ3vhKmL7pXhqJKc=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.93] (unknown [58.22.7.114])
- by mail-m11877.qiye.163.com (Hmail) with ESMTPA id 47FFA400316;
- Fri, 13 Oct 2023 15:43:09 +0800 (CST)
-Message-ID: <cc94f286-4d6a-e4a6-4064-8d0d61fb4eca@rock-chips.com>
-Date: Fri, 13 Oct 2023 15:43:09 +0800
+ by mail-m11877.qiye.163.com (Hmail) with ESMTPA id A7C3A40031B;
+ Fri, 13 Oct 2023 15:43:29 +0800 (CST)
+Message-ID: <c9fdddc9-89e1-052a-841c-dbe7864d7187@rock-chips.com>
+Date: Fri, 13 Oct 2023 15:43:29 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.15.1
-Subject: Re: [PATCH v2 1/5] clk: rockchip: rk3568: support dclk_vop select
- more parent clks
+Subject: Re: [PATCH v2 2/5] clk: rk3588: Add 742.5M parameter for PLL
 Content-Language: en-US
 To: Elaine Zhang <zhangqing@rock-chips.com>, lukma@denx.de,
  seanga2@gmail.com, philipp.tomsich@vrull.eu, sjg@chromium.org
-Cc: u-boot@lists.denx.de, chenjh@rock-chips.com
+Cc: u-boot@lists.denx.de, chenjh@rock-chips.com,
+ Guochun Huang <hero.huang@rock-chips.com>
 References: <20231011102947.21188-1-zhangqing@rock-chips.com>
- <20231011102947.21188-2-zhangqing@rock-chips.com>
+ <20231011102947.21188-3-zhangqing@rock-chips.com>
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20231011102947.21188-2-zhangqing@rock-chips.com>
+In-Reply-To: <20231011102947.21188-3-zhangqing@rock-chips.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGU5DQ1ZOT0MeSh1OGEhNTktVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ01DSFZLQ0wZGk4aQhkdGkpVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
  kG
-X-HM-Tid: 0a8b27fd3c9a2eb3kusn47ffa400316
+X-HM-Tid: 0a8b27fd8d872eb3kusna7c3a40031b
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Pjo6Cyo4PTwzUQk2NThNTygz
- Qk1PCk1VSlVKTUJMSkNJQkNCQkhCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISkNKNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MjY6Tzo5DzwxEAkCHzALFTg3
+ PBgaC0JVSlVKTUJMSkNIS0pLTEJPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTk1JNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,44 +78,29 @@ X-Virus-Status: Clean
 
 
 On 2023/10/11 18:29, Elaine Zhang wrote:
-> For dclk_vop to support more frequencies.
+> From: Guochun Huang <hero.huang@rock-chips.com>
 >
+> For a specific frequency.
+>
+> Signed-off-by: Guochun Huang <hero.huang@rock-chips.com>
 > Signed-off-by: Elaine Zhang <zhangqing@rock-chips.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   drivers/clk/rockchip/clk_rk3568.c | 10 ++++++++--
->   1 file changed, 8 insertions(+), 2 deletions(-)
+>   drivers/clk/rockchip/clk_rk3588.c | 1 +
+>   1 file changed, 1 insertion(+)
 >
-> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
-> index 599b7b130eb9..68f5bbbb9e57 100644
-> --- a/drivers/clk/rockchip/clk_rk3568.c
-> +++ b/drivers/clk/rockchip/clk_rk3568.c
-> @@ -1838,7 +1838,7 @@ static ulong rk3568_dclk_vop_set_clk(struct rk3568_clk_priv *priv,
->   		rockchip_pll_set_rate(&rk3568_pll_clks[VPLL],
->   				      priv->cru, VPLL, div * rate);
->   	} else {
-> -		for (i = 0; i <= DCLK_VOP_SEL_CPLL; i++) {
-> +		for (i = sel; i <= DCLK_VOP_SEL_CPLL; i++) {
->   			switch (i) {
->   			case DCLK_VOP_SEL_GPLL:
->   				pll_rate = priv->gpll_hz;
-> @@ -2785,9 +2785,15 @@ static int rk3568_dclk_vop_set_parent(struct clk *clk, struct clk *parent)
->   	if (parent->id == PLL_VPLL) {
->   		rk_clrsetreg(&cru->clksel_con[con_id], DCLK0_VOP_SEL_MASK,
->   			     DCLK_VOP_SEL_VPLL << DCLK0_VOP_SEL_SHIFT);
-> -	} else {
-> +	} else if (parent->id == PLL_HPLL) {
->   		rk_clrsetreg(&cru->clksel_con[con_id], DCLK0_VOP_SEL_MASK,
->   			     DCLK_VOP_SEL_HPLL << DCLK0_VOP_SEL_SHIFT);
-> +	} else if (parent->id == PLL_CPLL) {
-> +		rk_clrsetreg(&cru->clksel_con[con_id], DCLK0_VOP_SEL_MASK,
-> +			     DCLK_VOP_SEL_CPLL << DCLK0_VOP_SEL_SHIFT);
-> +	} else {
-> +		rk_clrsetreg(&cru->clksel_con[con_id], DCLK0_VOP_SEL_MASK,
-> +			     DCLK_VOP_SEL_GPLL << DCLK0_VOP_SEL_SHIFT);
->   	}
->   
->   	return 0;
+> diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
+> index 119b1337bdf2..c86176264147 100644
+> --- a/drivers/clk/rockchip/clk_rk3588.c
+> +++ b/drivers/clk/rockchip/clk_rk3588.c
+> @@ -36,6 +36,7 @@ static struct rockchip_pll_rate_table rk3588_pll_rates[] = {
+>   	RK3588_PLL_RATE(816000000, 2, 272, 2, 0),
+>   	RK3588_PLL_RATE(786432000, 2, 262, 2, 9437),
+>   	RK3588_PLL_RATE(786000000, 1, 131, 2, 0),
+> +	RK3588_PLL_RATE(742500000, 4, 495, 2, 0),
+>   	RK3588_PLL_RATE(722534400, 8, 963, 2, 24850),
+>   	RK3588_PLL_RATE(600000000, 2, 200, 2, 0),
+>   	RK3588_PLL_RATE(594000000, 2, 198, 2, 0),
