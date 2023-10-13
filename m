@@ -4,84 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1829BCDB483
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 17:33:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18295CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 17:49:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2323386EB9;
-	Fri, 13 Oct 2023 19:29:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 52FFF86E22;
+	Fri, 13 Oct 2023 19:49:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lu8gJ9AI";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oAcIscKj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AC5A86EDF; Fri, 13 Oct 2023 19:28:38 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 700C986E7C; Fri, 13 Oct 2023 19:48:58 +0200 (CEST)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7CD086ECA
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 19:28:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D16EE86E0E
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 19:48:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-98377c5d53eso363307766b.0
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 10:28:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7740aa4b545so151965785a.3
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 10:48:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697218064; x=1697822864; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=SEmdA8s+HIEq7Jlqf903zVYCSokXInJTwxgZUduN6D0=;
- b=lu8gJ9AIurb+ZUWvy2Yhnzcw45OPdOupU8BMvP8SNjFKndFfdWpaX+GO3rYtbGhnWE
- vnUhcsbk2a77e7thgXxZOrB8S1xQ6BRpv+pwcePCHYmtS0/I6NKE+6M7TyevSPDtO5SM
- iGkoN3nXSMMnfXM7oqaWV6HyjFRIs001qUs9Sl2RIcVQVNLEKpKBoXEm9y7EyDG1+JDF
- S5g5kesVC6InnkCsMJp9oiwQ2Lc7QxON/TgDlpJUryZKBxypUCByGrmlRnWPVjpZT3Zp
- qhZnLnn5W8kJsFaUu7Vg/1yfTb0hwuwr6gKWdiK2dBV9oK6pucwz3M1GVx6J/6Knp8Zx
- ddtg==
+ d=konsulko.com; s=google; t=1697219332; x=1697824132; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=oZpIAyfqXOktSRawczAUNLmMCkDa5UWfYkkaTaMN6kY=;
+ b=oAcIscKjOhsgyPz8FJQWYMYPNXdo6AzAwyiJx+1x7Q4z3PEPotF+S+TSsuabuuWOeQ
+ xkLCxmtrBetCilz/CPmC5L/GnNLsnwqInfLibETozP9Tkgo5rajWMZf+7BuClfsPyFzr
+ Q0FOnQ+PIbBtTFSgKrnQtXaKGiFxTA8vJfgnk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697218064; x=1697822864;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=SEmdA8s+HIEq7Jlqf903zVYCSokXInJTwxgZUduN6D0=;
- b=JoYB2OkUNVDNpY4lL8DYlBlkTH3XdEvFJpU/gBBdX6+enEwKoBzQVahQUGHZLjClMG
- 3geCZJpQRnSPVPQjuw3FCO/j+KNF9eq6Dp2iZaZsZbTqGyzKDG3kPqv62pU+x+FcDs/m
- DvgIWNCHYkYJ7JejxOamMiTGW0/5S/XXN7vPcsZbyyHrXJmftc+vszTa1850N+CHbxry
- N+12YFBX5/7ZYcuyxYY3EbHQsQRlNwppi1oHt2oMdwYs0bs8xebVXud0ICdE/+VORgFj
- 75WP4boJDE8cQ3vXezm5coZ9vAykq/EsJMajko7G7Hj59FdRvxWiN/kub27HwQoMv7QX
- 8FYQ==
-X-Gm-Message-State: AOJu0YzuK/3DHxtVGMtylsDfy4PfALwb9hEfj975GCYNdvM92AoM9s2f
- 03ZZHqZXQn/NN66i49ozYqE=
-X-Google-Smtp-Source: AGHT+IGloaTffSI51vhkj0OnZQ1gHwuIdKGiAxCVKV6msZePzAOby0PMotWF7t37Cw790sLGdutWeQ==
-X-Received: by 2002:a17:907:98b:b0:9be:16ba:19a8 with SMTP id
- bf11-20020a170907098b00b009be16ba19a8mr805287ejc.19.1697218063452; 
- Fri, 13 Oct 2023 10:27:43 -0700 (PDT)
-Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ d=1e100.net; s=20230601; t=1697219332; x=1697824132;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oZpIAyfqXOktSRawczAUNLmMCkDa5UWfYkkaTaMN6kY=;
+ b=Pu9xjx75lEVwPUggimGJQMBketSvWYTVazbXXl9IZnGRQ07W1ZhLMhUSvV8vKvs/bF
+ MbxOJk3SFr2fKAzjCD6CL6IuTVDw6q3u6rwerNLofzq1GJsEIHnm9/8Zy6mcSETYvj4p
+ MMtNeMI5K9II1d1+kU4EqBinzBdjqg9Sq+gXj78ZFpqfzlCf8vBiTnC3EEKSflRqAL6o
+ rZrjHpp3worsPuOov2EKQV+lKIGw46rJajwvwEDfjPzFNV+jl9++GkxTEiYYEqYpfe99
+ S/RX1UbuTZ7elFT/ntnoMm1b8O3hz+XJJVQczZUa+L0T4J/x4v5FgQKD9UKBG+t0hZSd
+ WBnw==
+X-Gm-Message-State: AOJu0YzLs4MW5InqXkkV4lY+2HMHeZUhclOXwVy2/A9h2PhyTS8lM02w
+ 6qv+8vVorDd6wH3YU0irhDv7Rw==
+X-Google-Smtp-Source: AGHT+IFtdhnnrvIogckQz084Lxul1NxEtsdUgI/4XfL6+5KaYv9F1WyMBJ/i/oICsahz8wqoxZEZ2g==
+X-Received: by 2002:a05:620a:2802:b0:776:f8b5:c4c with SMTP id
+ f2-20020a05620a280200b00776f8b50c4cmr27945334qkp.20.1697219332585; 
+ Fri, 13 Oct 2023 10:48:52 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-b33e-4d05-2330-607e.res6.spectrum.com.
+ [2603:6081:7b00:6400:b33e:4d05:2330:607e])
  by smtp.gmail.com with ESMTPSA id
- a6-20020a1709062b0600b009ae57888718sm12545486ejg.207.2023.10.13.10.27.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 13 Oct 2023 10:27:43 -0700 (PDT)
-Message-ID: <1eb0af86-a08d-4e97-ada5-110b71a6614a@gmail.com>
-Date: Fri, 13 Oct 2023 19:27:42 +0200
+ vv3-20020a05620a562300b007758b25ac3bsm811186qkn.82.2023.10.13.10.48.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Oct 2023 10:48:51 -0700 (PDT)
+Date: Fri, 13 Oct 2023 13:48:50 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Peter Robinson <pbrobinson@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Guillaume Gardet <Guillaume.Gardet@arm.com>,
+ Matthias Brugger <mbrugger@suse.com>, Ivan Ivanov <ivan.ivanov@suse.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: U-Boot 2023.10 does not boot from uSD on RPi4
+Message-ID: <20231013174850.GT3119521@bill-the-cat>
+References: <VI1PR08MB2847E276099DF7263424F70083CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
+ <CALeDE9N6nhRBwtYqJ=7nqYuCsmbw03j3RBXRQ8jYsD=OMY=gBw@mail.gmail.com>
+ <VI1PR08MB28474179AFB989B308072B1E83CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
+ <CAPnjgZ3t9-trzoLGc7Jcj0=J0sQLQcHSGN3_Pf+3=iZ6=rPPqA@mail.gmail.com>
+ <CALeDE9Oh9c+X5tG9RswuE=a=yQRW-j93q2oHJeOehLHHY2bSgw@mail.gmail.com>
+ <CALeDE9MnMuHSH4sgAC+Z2_+71QgToHt8e8rib3igxFDKV+DYWw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.13.0
-Subject: Re: [PATCH v3 2/7] rockchip: dm: prepare rkmtd UCLASS
-To: Simon Glass <sjg@chromium.org>
-Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
- u-boot@lists.denx.de
-References: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
- <94255fe4-ee9d-2e31-1bfa-d6270ebcd104@gmail.com>
- <CAPnjgZ3ANGiRecirTy7P1Sp61xWevO2PkkOq46dhW8iGDhrQ9w@mail.gmail.com>
-Content-Language: en-US
-From: Johan Jonker <jbx6244@gmail.com>
-In-Reply-To: <CAPnjgZ3ANGiRecirTy7P1Sp61xWevO2PkkOq46dhW8iGDhrQ9w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="knPl3o89f5A6Atx6"
+Content-Disposition: inline
+In-Reply-To: <CALeDE9MnMuHSH4sgAC+Z2_+71QgToHt8e8rib3igxFDKV+DYWw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,88 +100,110 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--knPl3o89f5A6Atx6
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 10/13/23 18:57, Simon Glass wrote:
-> Hi Johan,
-> 
-> On Thu, 12 Oct 2023 at 13:51, Johan Jonker <jbx6244@gmail.com> wrote:
->>
->> Prepare a rkmtd UCLASS in use for writing Rockchip boot blocks
->> in combination with existing userspace tools and rockusb command.
->>
->> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
->> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
->> ---
->>  disk/part.c                | 4 ++++
->>  drivers/block/blk-uclass.c | 1 +
->>  include/dm/uclass-id.h     | 1 +
->>  3 files changed, 6 insertions(+)
-> 
+On Fri, Oct 13, 2023 at 05:22:03PM +0100, Peter Robinson wrote:
+> On Fri, Oct 13, 2023 at 5:09=E2=80=AFPM Peter Robinson <pbrobinson@gmail.=
+com> wrote:
+> >
+> > On Tue, Oct 10, 2023 at 3:58=E2=80=AFPM Simon Glass <sjg@chromium.org> =
+wrote:
+> > >
+> > > Hi,
+> > >
+> > > On Tue, 10 Oct 2023 at 04:39, Guillaume Gardet <Guillaume.Gardet@arm.=
+com> wrote:
+> > > >
+> > > >
+> > > >
+> > > > > -----Original Message-----
+> > > > > From: Peter Robinson <pbrobinson@gmail.com>
+> > > > > Sent: Tuesday, October 10, 2023 12:22 PM
+> > > > > To: Guillaume Gardet <Guillaume.Gardet@arm.com>
+> > > > > Cc: mbrugger@suse.com; Ivan Ivanov <ivan.ivanov@suse.com>; Simon =
+Glass
+> > > > > <sjg@chromium.org>; u-boot@lists.denx.de
+> > > > > Subject: Re: U-Boot 2023.10 does not boot from uSD on RPi4
+> > > > >
+> > > > > On Tue, Oct 10, 2023 at 10:26=E2=80=AFAM Guillaume Gardet
+> > > > > <Guillaume.Gardet@arm.com> wrote:
+> > > > > >
+> > > > > > Hi,
+> > > > > >
+> > > > > > U-Boot 2023.10 does not boot from uSD on RPi4.
+> > > > > > This has been found on openSUSE Tumbleweed. The only diff we ne=
+ed is:
+> > > > > >   -CONFIG_OF_EMBED=3Dy
+> > > > > >   +CONFIG_OF_BOARD=3Dy
+> > > > > > To use firmware provided Device Tree. But that should not affec=
+t the mmc
+> > > > > behavior too much, I think.
+> > > > >
+> > > > > I've been booting Fedora fine on a RPi4 BUT there's issues with t=
+he display
+> > > > > turning off [1] when the accelerated display modules load
+> > > > > (vc4) as a result of this patch set. Can you confirm if that's th=
+e same problem
+> > > > > you're seeing?
+> > > >
+> > > > No, that's not my problem. My issue is grub was not loaded by u-boo=
+t from uSD.
+> > > > It seems more like Simon's problem: https://lists.denx.de/pipermail=
+/u-boot/2023-October/533162.html
+> > > >
+> > > > @Simon, can you check if the patch below fixes your boot problem on=
+ RPi4, please?
+> > >
+> > > This has been reported at least twice before. There is a fix [2] whic=
+h is in my queue to apply.
+> >
+> > Looking at that patch it scans the first 3 devices, how does it handle
+> > non storage devices like SDIO WiFi modules? It shouldn't be trying to
+> > scan those.
+>=20
+> And in the case of the RPi the other enabled SDHCI interface is the
+> WiFi, why would we even be trying to boot off a non storage interface,
+> something here just feels broken/wrong in general.
+>=20
+> The patch does make it work with pure upstream, and I'm not sure why
+> the Fedora build boots it fine out of the box, but the patch just
+> feels like it's hacking around some other underlying problem with
+> bootstd, we didn't have this problem with the previous method and
+> trying to boot off non storage interfaces feels like it could cause
+> other problems.
 
-> Do you have a sandbox test for this somewhere?
+I think the answer here is that we're doing the best we can given that
+we just don't know until run time what we have. In the case where sdhci
+is something other than storage, we get as far as asking "are you a
+block device?" which then fails when sdhci is a WiFi an not an eMMC.
+This does mean the user could notice "Card did not respond to voltage
+select! : -110" being printed, and I don't know if we should do
+anything about that (it's a handy message when your uSD isn't fully
+inserted, etc).  But since we (can) support everything on a single
+build, we just have to figure it out at run time.
 
-Maybe have a look at:
-[PATCH v3 6/7] rockchip: test: dm: add rkmtd test
+--=20
+Tom
 
-The CONFIG_SANDBOX is used to select as much of the driver functionality for testing without MTD driver hardware.
+--knPl3o89f5A6Atx6
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Config CMD_RKMTD will select RKMTD, but is not added to a sandbox_defconfig file yet.
+-----BEGIN PGP SIGNATURE-----
 
-Not sure what is preferred. Please advise what patch I should produce.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUpgv4ACgkQFHw5/5Y0
+tyzfEgwAnj8ODUAUU1PIrZ4cFMQ8Zp1QrAtfMI5zJoPwjqjWSa4zpjescBWdei2n
+nMxEBZ8zgn4Cu0K75JwnETSzoA0HeNdV5szn8M3U0bjb5vQnf32Vvi2Y4rcepj8P
+9Ff7/8cG2+phjBVDBiT5LeemyOeCYCCXG7oY/I8LjLzFHIuet3wpZDJjY1TDmdRh
+Yg0tKpKRrKE67IU/FErcA3Aw5GArVrcrZxOWvYUgNqJt1aS6D0K8Kw15OfpDYOrA
+qfElybRC/cNgwgZqo4ioOL+eX3sv2Dz6uB5RqNQ0Gf/QEd9iHg9uw086pGr+yyrZ
+hlB3ep5gs4+1McganY0Gu14ZUEokX+UpjWm7J7Zf28UiTCxDaXSYtKuLoyUybm4r
+QOwkFStHiOF2xJJ9wjdVQQfb1xLx30jctD/3uCOK+WQ0B5V6yNjo/TYXMhR7pY5l
+0pNoPityiOs47hxSdqBHjfsYvs0Kh4Y8UxXcSC19eNPbAjn4MsUkWo3TrPLqlVK3
+jDYe5KVg
+=YkBY
+-----END PGP SIGNATURE-----
 
-Johan
-
-> 
->>
->> diff --git a/disk/part.c b/disk/part.c
->> index 85244b09f359..36b88205eca7 100644
->> --- a/disk/part.c
->> +++ b/disk/part.c
->> @@ -197,6 +197,7 @@ void dev_print(struct blk_desc *desc)
->>         case UCLASS_PVBLOCK:
->>         case UCLASS_HOST:
->>         case UCLASS_BLKMAP:
->> +       case UCLASS_RKMTD:
->>                 printf ("Vendor: %s Rev: %s Prod: %s\n",
->>                         desc->vendor,
->>                         desc->revision,
->> @@ -330,6 +331,9 @@ static void print_part_header(const char *type, struct blk_desc *desc)
->>         case UCLASS_PVBLOCK:
->>                 puts("PV BLOCK");
->>                 break;
->> +       case UCLASS_RKMTD:
->> +               puts("RKMTD");
->> +               break;
->>         case UCLASS_VIRTIO:
->>                 puts("VirtIO");
->>                 break;
->> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
->> index f126547cc7e6..30ad5bbb0024 100644
->> --- a/drivers/block/blk-uclass.c
->> +++ b/drivers/block/blk-uclass.c
->> @@ -36,6 +36,7 @@ static struct {
->>         { UCLASS_VIRTIO, "virtio" },
->>         { UCLASS_PVBLOCK, "pvblock" },
->>         { UCLASS_BLKMAP, "blkmap" },
->> +       { UCLASS_RKMTD, "rkmtd" },
->>  };
->>
->>  static enum uclass_id uclass_name_to_iftype(const char *uclass_idname)
->> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
->> index 0432c95c9edc..2fc672df0a3a 100644
->> --- a/include/dm/uclass-id.h
->> +++ b/include/dm/uclass-id.h
->> @@ -120,6 +120,7 @@ enum uclass_id {
->>         UCLASS_REGULATOR,       /* Regulator device */
->>         UCLASS_REMOTEPROC,      /* Remote Processor device */
->>         UCLASS_RESET,           /* Reset controller device */
->> +       UCLASS_RKMTD,           /* Rockchip MTD device */
->>         UCLASS_RNG,             /* Random Number Generator */
->>         UCLASS_RTC,             /* Real time clock device */
->>         UCLASS_SCMI_AGENT,      /* Interface with an SCMI server */
->> --
->> 2.39.2
->>
-> 
-> Regards,
-> Simon
+--knPl3o89f5A6Atx6--
