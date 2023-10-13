@@ -4,70 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 749F1CDB47E
-	for <u-boot@archiver.kernel.org>; Sat, 14 Oct 2023 01:49:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEFBBCDB47E
+	for <u-boot@archiver.kernel.org>; Sat, 14 Oct 2023 02:10:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6348E86EF3;
-	Sat, 14 Oct 2023 03:06:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6C81886F26;
+	Sat, 14 Oct 2023 03:06:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cHD6e0Eq";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KRcn3Q1N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F6CC86F40; Sat, 14 Oct 2023 00:07:52 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C0A6186F28; Sat, 14 Oct 2023 00:07:03 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0D4B86F62
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 00:04:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14C7D86F28
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 00:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=maz@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 720DACE3298;
- Fri, 13 Oct 2023 22:04:14 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AB42CC433C8;
- Fri, 13 Oct 2023 22:04:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1697234653;
- bh=9+QMDwVGbGuovGj/Xd0/vzCQ8WsYpT+1dSJKf03l14I=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=cHD6e0EqxYtSxfoCr+LrpJLxH28vCikAnWNO1XcFyaxiK80RvYGJ0St+FqjN+tuU8
- nh7jv0DZhVTJwp8DtQlMFLth3TYJezM+T/Y7JVoKWVMF7zl4pOeK+eI9bqgPpAS8DT
- +5g+raDxc7toPX8+4Dn6J2u6zmECXtTbzeVNcEUeGHb/xg8e4QX/sK4fr+ttjLiCoo
- UsQRQFJdK+C2z/BX9r/N49ChaHou7ho4pFEbjjcqhfVdT+HmNV9TH/CDWLuUfpYiR5
- DYtbMnmQ0Duzrg9Muqbw5dD4JTj/okxTUjbUz+S4R+m81Z7gia5KwJcQaCshFtJRvM
- syJbDlRbNnEAw==
-Received: from disco-boy.misterjones.org ([217.182.43.188] helo=www.loen.fr)
- by disco-boy.misterjones.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
- (envelope-from <maz@kernel.org>) id 1qrQGR-0040h7-7V;
- Fri, 13 Oct 2023 23:04:11 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-53df747cfe5so4713521a12.2
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 15:00:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1697234440; x=1697839240; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xzC3gqISvG0H62dr0ERTzrsCx7rcC7CUoUAeGiL65vA=;
+ b=KRcn3Q1N4funNlYBtlaunnKUU/AMcEt7TdrdsKAw0W8yz9aOH4PG9zYdGf6I1uoVqY
+ nYW9uQsNnq6zBbm2apihEBTvi7c1viOOLNNJlf+BDj9lQG9Zolb/YmBBvZxqIRLR5LZr
+ WuB4BCiCQ/x6kBLkQQyZlUbDKpPHWJcO1rdMQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697234440; x=1697839240;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xzC3gqISvG0H62dr0ERTzrsCx7rcC7CUoUAeGiL65vA=;
+ b=t29QSdQAswGZCjqLuBumRKxgy0WO2/Y0TUVgptw92FRT4g9RTppnSOBO+USZU0FUI1
+ SAzAp7afMRTwYW8/FZJGgMiazbqTUdEhu+eboN3ylMDW5zswHNH/rqIjZyON8PST7MHu
+ iBnFZc7ppf8Ev17UQ8nTLLhg0jD4TaP2t1JXevNR5PZzf+FM0gvDz7Jylsx9mI2pa8Sq
+ IvgB6+mNm2/w08dIRY8otB/dtcdIYN2qe5KZIx/TMlQxNBllZIcobzXHhpHrKoopNrOb
+ s/mSjhecvbYOuVADRCroM2BTGdgC/WpKhn26k3SaZSg0fvdrA5y8kRkTIiqiNsSvbWqi
+ V8xg==
+X-Gm-Message-State: AOJu0YwTkuc7rJGLSjFqMN41rqO3RfXSq1WYtrb2zB6u1hHAIfZSdH5V
+ 5W/1OAaSpgbx4vx6ijE1hVtSKhupqfgxMDviHTErFA==
+X-Google-Smtp-Source: AGHT+IFW+d6eGNYBQ4zTElGP9A6HZ/AE2GpIfA7ooCvWwVYHN5LM6JIeZRag/mqHl3dP9wo5Ud8NYJOMcmynRGcnUxQ=
+X-Received: by 2002:a50:c058:0:b0:53e:455c:6273 with SMTP id
+ u24-20020a50c058000000b0053e455c6273mr2453924edd.2.1697234440259; Fri, 13 Oct
+ 2023 15:00:40 -0700 (PDT)
+Received: from 480794996271 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 13 Oct 2023 15:00:38 -0700
 MIME-Version: 1.0
-Date: Fri, 13 Oct 2023 23:04:10 +0100
-From: Marc Zyngier <maz@kernel.org>
-To: Chris Packham <judge.packham@gmail.com>
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 1/3] arm64: Use FEAT_HAFDBS to track dirty pages when
- available
-In-Reply-To: <CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=J0oHyvN75bTaCUw@mail.gmail.com>
-References: <20230317162253.1049446-1-paul.liu@linaro.org>
- <20230317162253.1049446-2-paul.liu@linaro.org>
- <CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=J0oHyvN75bTaCUw@mail.gmail.com>
-User-Agent: Roundcube Webmail/1.4.14
-Message-ID: <fac6ef1747ec318787f90a6d0c81163b@kernel.org>
-X-Sender: maz@kernel.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 217.182.43.188
-X-SA-Exim-Rcpt-To: judge.packham@gmail.com, paul.liu@linaro.org,
- u-boot@lists.denx.de, trini@konsulko.com
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
- SAEximRunCond expanded to false
+From: Simon Glass <sjg@chromium.org>
+In-Reply-To: <20231010091059.375036-2-sughosh.ganu@linaro.org>
+References: <20231010091059.375036-2-sughosh.ganu@linaro.org>
+ <20231010091059.375036-1-sughosh.ganu@linaro.org>
+Date: Fri, 13 Oct 2023 15:00:38 -0700
+X-Google-Sender-Auth: JHplku3io6o09vFoMMAtQKGQ-ak
+Message-ID: <CAPnjgZ2H3+t9zdoYq7gqbczRGwxQ4Nii50ZyiNNcaaNWaPgvxQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/6] tools: mkeficapsule: Add support to print capsule
+ headers
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,41 +88,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-10-13 03:40, Chris Packham wrote:
-> Hi Marc, Paul,
-> 
-> On Sat, Mar 18, 2023 at 5:23 AM Ying-Chun Liu (PaulLiu)
-> <paul.liu@linaro.org> wrote:
->> 
->> From: Marc Zyngier <maz@kernel.org>
->> 
->> Some recent arm64 cores have a facility that allows the page
->> table walker to track the dirty state of a page. This makes it
->> really efficient to perform CMOs by VA as we only need to look
->> at dirty pages.
->> 
->> Signed-off-by: Marc Zyngier <maz@kernel.org>
->> [ Paul: pick from the Android tree. Rebase to the upstream ]
->> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Link: 
->> https://android.googlesource.com/platform/external/u-boot/+/3c433724e6f830a6b2edd5ec3d4a504794887263
-> 
-> I think this may have caused a regression for the Marvell AC5X
-> board(s). I found that v2023.07 locked up at boot but v2023.01 was
-> fine. The lockup seemed to be in the 'Net:' init probably just as the
-> mvneta driver was being initialised.
-> 
-> A git bisect led me to this change although for this specific change
-> instead of the lockup I get a crash so maybe I'm actually hitting a
-> different issue.
-> 
-> Any thoughts as to why this may have caused problems?
+Add support to dump the contents of capsule headers. This is useful as
+a debug feature for checking the contents of the capsule headers, and
+can also be used in capsule verification.
 
-Not really. What CPUs does this platform have? What is the offending
-driver doing to trigger the issue? Can you provide some level of
-tracing?
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
+Changes since V1:
+* Get rid of the superfluous hdr_size variable in the
+  dump_fmp_payload_header() function
 
-         M.
--- 
-Jazz is not dead. It just smells funny...
+ tools/eficapsule.h   |   2 +
+ tools/mkeficapsule.c | 227 ++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 228 insertions(+), 1 deletion(-)
+
+Applied to u-boot-dm, thanks!
