@@ -4,86 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CE9CDB483
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 13:05:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76CB1CDB482
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 13:10:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D291A86E77;
-	Fri, 13 Oct 2023 15:05:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
+	by phobos.denx.de (Postfix) with ESMTP id AE53586E77;
+	Fri, 13 Oct 2023 15:09:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="WyANcHCa";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BCC386E5E; Fri, 13 Oct 2023 15:05:25 +0200 (CEST)
-Received: from 8.mo576.mail-out.ovh.net (8.mo576.mail-out.ovh.net
- [46.105.56.233])
+ id 5D97386EDC; Fri, 13 Oct 2023 15:09:56 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51C6786ED0
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 15:05:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3017486E77
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 15:09:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=armadeus.com
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=sebastien.szymanski@armadeus.com
-Received: from director1.ghost.mail-out.ovh.net (unknown [10.108.1.202])
- by mo576.mail-out.ovh.net (Postfix) with ESMTP id DDEBC23BF4
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 13:05:18 +0000 (UTC)
-Received: from ghost-submission-6684bf9d7b-bm8bq (unknown [10.111.172.111])
- by director1.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 32A921FE9D;
- Fri, 13 Oct 2023 13:05:18 +0000 (UTC)
-Received: from armadeus.com ([37.59.142.101])
- by ghost-submission-6684bf9d7b-bm8bq with ESMTPSA
- id g/JHB45AKWVKNQAAKSu0LQ
- (envelope-from <sebastien.szymanski@armadeus.com>);
- Fri, 13 Oct 2023 13:05:18 +0000
-Authentication-Results: garm.ovh; auth=pass
- (GARM-101G00456f55dc4-3929-46ae-8e4b-25432a9021a5,
- 7C22F39476E699F77263983D1F603F73B3003938)
- smtp.auth=sebastien.szymanski@armadeus.com
-X-OVh-ClientIp: 92.148.253.243
-Message-ID: <05121e6e-5c0f-4083-9be9-2bd542f47c01@armadeus.com>
-Date: Fri, 13 Oct 2023 15:04:45 +0200
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C2DFD3F6E0; 
+ Fri, 13 Oct 2023 13:09:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1697202588;
+ bh=vshkPJmdbsGLeAjvFT1MtithFzjZInxSlUQWrFLUPG4=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=WyANcHCaZEjPwGfi8iotLf4AiwEMl7X9siawr695bFKLiJa6CURzzG5Zz1nlYnalS
+ rSX3i9/xnNVZOSJrKiWtO+BpzACkv+6x2cigTQ6zYR7DNXnGFy++yaTlqgj8WRTjhV
+ H56Q7dmjNCMMCW7+LO3zv5a3sT0vFy+sz7CdNSE3iELWTGIxQ4rNdcsdt5Cg1rsF8X
+ adZigTGJ0W6357VMwHkprCcbgKQ/pwrNNol2G7cDnIG7eHuhzp49Sf/nJXtkCc8zoR
+ zJxpjsyNm6t5JnW5pxH+bFsm0A/So1NevRZtlIdkfborccgYiov0VNFRhs8E1C3wqQ
+ JIBfmqAZ3cvaw==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Heiko Schocher <hs@denx.de>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2] i2c: designware_i2c: adjust timing calculation
+Date: Fri, 13 Oct 2023 15:09:39 +0200
+Message-Id: <20231013130939.19803-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/4] clk: imx: add i.MX93 CCF driver
-Content-Language: en-US
-To: u-boot@lists.denx.de
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>
-References: <20230725080856.26567-1-sebastien.szymanski@armadeus.com>
-From: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>
-Autocrypt: addr=sebastien.szymanski@armadeus.com; keydata=
- xsBNBFNfZLEBCACv1lqSePHJNpRgcnER+3emy+Arjz84zFax3XkogjY/e3ZneihIgWrVKe5M
- ql16pX4KTkzNgMUKz4bG/XwT3kjcrXshxFLlg7KrHMl287C+W+QOUjnjVeRi/su+SPmjz8VD
- yr11h+ZkVLAWhS+uQJ93jy1NwG8M4t1kBLAVHHD5Vw4FJ+3ouaVYIp1X1Cr8bVKQw33Q1aTd
- ro0kMBb96B9vNu7ciJZ3gvlaBzUEKOgNnq9KaywuLnqrqr4HUIn5JuxZjCjJzt9kTAKcTfp2
- cJM8qpp+2FF5qtbkse9fZ6M64qozgOPr9Tk4Amf9fZEUQ6UNw14mmBZuXSzoHe75gI7TABEB
- AAHNN1PDqWJhc3RpZW4gU1pZTUFOU0tJIDxzZWJhc3RpZW4uc3p5bWFuc2tpQGFybWFkZXVz
- LmNvbT7CwJAEEwEIADoCGyMHCwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgBYhBJwGygpYm/1C
- /GCmwbCaKeiBMmTiBQJdhIHLAAoJELCaKeiBMmTixXIH/2W3kbzRG0UF81jtRRnp0H83rjDT
- v0H+8fgFMRL/7HCJ1QPArkfRJlM2wlJkN+ChP09CCarYfUEHfRCHlTb7At6Yyrz1jziD7ZwX
- 8IWHYRXnZkY5eZc5DsiUgq6JH49kt+GPzK8UVP9MTa6zkBpPCUf7LzZ4pD3FihdkT52BU3gI
- d9P49fSI0TYySlb/VKn815aOhvwEr7+Dh3mZUjSh7saofbRmVUOr7p+R3MvvGI19/IJZjeOE
- ZWliODDOt6HnBOtoGSXMcNIFF6snH52D5N5gY88njZjTwhgGGUBix1bsgf/EY0v4R5itZBXB
- B/Ze4Tm++YHaB75hZK6PQu/YRv7OwE0EU19ksQEIALo7jhXddrXBTRu5SAjelV53jyHBJTX/
- vN4nL/VbbW/saca+NJjDSxx5DBmotZbQdWIyZiSIjU/xnTREvtDrl6ZeSsKWd7ZqiuiY4fSR
- zwuQp9rd0yqRuxesrWeyJB1zCSdEvLyKASERt+nxkOA+IzJ4y1qLtvnWr+SL1AXgTMw+Tkyw
- KIDCRWHTIYas11ldGj82gOIpYeXnapeNLHfT4EQwg0NeWYHynJxAQWiX5aPlw0uSpAQSsBXQ
- FIe3fpoveMSnXK+PG2BBOzexYv7r4S70a6sF9sgTTPpfKqUaqqC+u1+bUX6alTAKhGKJywaF
- 6ViqLlgY8PfwohSyAlqlTRMAEQEAAcLAdgQYAQgAIAIbDBYhBJwGygpYm/1C/GCmwbCaKeiB
- MmTiBQJdhIHSAAoJELCaKeiBMmTitU8IAK7NQM3fEwaF5XaKtepYWsVka44CD8A9e4r7NVK9
- ugirKvXirIxBSDmN/Db862NmVpITsZ6ERNSNZLm/7k55N+TexKYiFZeU7G92TEfAM6qPElvx
- DLEcrkNMq9r08YZeUloacsq31AL5fK4LW+xdvXudkdiKRMJsdTpmff3x5kIziGOHjwFP9wve
- ZgEH52gpbRsP8Whx/Z2lNX/BBRmFM8OnEXFsjjqDzYThdxTq85wGPpkgvvUGyPNRD7TpbB1C
- pajOUUkPxgj5LKt77HD1afeZNudWhgcdkbtT5PMQTT0WY6wvMEj9S1+bGPeXRGWLYB7gHQ+L
- JNoSD7Kz6Y9qnKo=
-In-Reply-To: <20230725080856.26567-1-sebastien.szymanski@armadeus.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 4651655467520813989
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvkedrieefgdefjecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefkffggfgfuvfevfhfhjggtgfesthekredttddvjeenucfhrhhomhepuforsggrshhtihgvnhcuufiihihmrghnshhkihcuoehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomheqnecuggftrfgrthhtvghrnhepgeegffegfeeileehueehudelteefgfdtjeduudfhledvjeeggefguefgkedtfefgnecuffhomhgrihhnpehprghsthgvsghinhdrtghomhenucfkphepuddvjedrtddrtddruddpledvrddugeekrddvheefrddvgeefpdefjedrheelrddugedvrddutddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpeeoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqedpnhgspghrtghpthhtohepuddprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheejiedpmhhouggvpehsmhhtphhouhht
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,55 +69,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+In SPL probing of the designware_i2c device on the StarFive VisionFive 2
+board fails with
 
-On 7/25/23 10:08, Sébastien Szymanski wrote:
-> This series adds i.MX93 CCF driver, modifed from Linux kernel 6.5-rc2
-> and adapted for U-Boot.
-> 
-> Patches 2 and 3 come from NXP U-Boot.
-> 
-> A boot log and a dump of the clock tree are available at the following
-> URL:
-> https://pastebin.com/7WbubSXK
-> 
-> Alice Guo (1):
->    arm: dts: imx93: add a per clock for LPUART1
-> 
-> Sébastien Szymanski (2):
->    clk: imx: add i.MX93 CCF driver
->    imx93_evk: defconfig: enable clock driver
-> 
-> Ye Li (1):
->    serial: lpuart: Enable IPG clock
-> 
+    dw_i2c: mode 0, ic_clk 1000000, speed 100000,
+    period 10 rise 1 fall 1 tlow 5 thigh 4 spk 0
+    dw_i2c: bad counts. hcnt = -4 lcnt = 4
+    device_probe: i2c@12050000 failed to probe -22
 
-gentle ping.
-Maybe someone at NXP can help review this patchset?
+When changing the offset for the high phase from 7 to 3 the device is
+probed correctly. This now matches the value from the Linux driver.
 
-Regards,
+Without this fix the memory size of the StarFive VisionFive 2 board cannot
+be read from EEPROM.
 
->   arch/arm/dts/imx93-11x11-evk-u-boot.dtsi |  23 ++
->   arch/arm/dts/imx93.dtsi                  |   4 +-
->   board/freescale/imx93_evk/imx93_evk.c    |   2 -
->   configs/imx93_11x11_evk_defconfig        |   2 +
->   drivers/clk/imx/Kconfig                  |  18 ++
->   drivers/clk/imx/Makefile                 |   2 +
->   drivers/clk/imx/clk-composite-93.c       | 142 +++++++++
->   drivers/clk/imx/clk-fracn-gppll.c        | 382 +++++++++++++++++++++++
->   drivers/clk/imx/clk-gate-93.c            | 148 +++++++++
->   drivers/clk/imx/clk-imx93.c              | 343 ++++++++++++++++++++
->   drivers/clk/imx/clk.h                    |  42 +++
->   drivers/serial/serial_lpuart.c           |  14 +-
->   include/dt-bindings/clock/imx93-clock.h  |   6 +-
->   13 files changed, 1122 insertions(+), 6 deletions(-)
->   create mode 100644 drivers/clk/imx/clk-composite-93.c
->   create mode 100644 drivers/clk/imx/clk-fracn-gppll.c
->   create mode 100644 drivers/clk/imx/clk-gate-93.c
->   create mode 100644 drivers/clk/imx/clk-imx93.c
-> 
+Fixes: e71b6f6622d6 ("i2c: designware_i2c: Rewrite timing calculation")
 
--- 
-Sébastien Szymanski, Armadeus Systems
-Software engineer
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	use the same timing offset at Linux
+	provide a descriptive comment for the constant
+---
+ drivers/i2c/designware_i2c.c | 19 +++++++++++++++----
+ 1 file changed, 15 insertions(+), 4 deletions(-)
 
+diff --git a/drivers/i2c/designware_i2c.c b/drivers/i2c/designware_i2c.c
+index e54de42abc..215ce010cb 100644
+--- a/drivers/i2c/designware_i2c.c
++++ b/drivers/i2c/designware_i2c.c
+@@ -24,6 +24,17 @@
+  */
+ #define DW_I2C_COMP_TYPE	0x44570140
+ 
++/*
++ * This constant is used to calculate when during the clock high phase the data
++ * bit shall be read. The value was copied from the Linux v6.5 function
++ * i2c_dw_scl_hcnt() which provides the following explanation:
++ *
++ * "This is just an experimental rule: the tHD;STA period turned out to be
++ * proportinal to (_HCNT + 3). With this setting, we could meet both tHIGH and
++ * tHD;STA timing specs."
++ */
++#define T_HD_STA_OFFSET 3
++
+ static int dw_i2c_enable(struct i2c_regs *i2c_base, bool enable)
+ {
+ 	u32 ena = enable ? IC_ENABLE_0B : 0;
+@@ -155,10 +166,10 @@ static int dw_i2c_calc_timing(struct dw_i2c *priv, enum i2c_speed_mode mode,
+ 
+ 	/*
+ 	 * Back-solve for hcnt and lcnt according to the following equations:
+-	 * SCL_High_time = [(HCNT + IC_*_SPKLEN + 7) * ic_clk] + SCL_Fall_time
++	 * SCL_High_time = [(HCNT + IC_*_SPKLEN + T_HD_STA_OFFSET) * ic_clk] + SCL_Fall_time
+ 	 * SCL_Low_time = [(LCNT + 1) * ic_clk] - SCL_Fall_time + SCL_Rise_time
+ 	 */
+-	hcnt = min_thigh_cnt - fall_cnt - 7 - spk_cnt;
++	hcnt = min_thigh_cnt - fall_cnt - T_HD_STA_OFFSET - spk_cnt;
+ 	lcnt = min_tlow_cnt - rise_cnt + fall_cnt - 1;
+ 
+ 	if (hcnt < 0 || lcnt < 0) {
+@@ -170,13 +181,13 @@ static int dw_i2c_calc_timing(struct dw_i2c *priv, enum i2c_speed_mode mode,
+ 	 * Now add things back up to ensure the period is hit. If it is off,
+ 	 * split the difference and bias to lcnt for remainder
+ 	 */
+-	tot = hcnt + lcnt + 7 + spk_cnt + rise_cnt + 1;
++	tot = hcnt + lcnt + T_HD_STA_OFFSET + spk_cnt + rise_cnt + 1;
+ 
+ 	if (tot < period_cnt) {
+ 		diff = (period_cnt - tot) / 2;
+ 		hcnt += diff;
+ 		lcnt += diff;
+-		tot = hcnt + lcnt + 7 + spk_cnt + rise_cnt + 1;
++		tot = hcnt + lcnt + T_HD_STA_OFFSET + spk_cnt + rise_cnt + 1;
+ 		lcnt += period_cnt - tot;
+ 	}
+ 
