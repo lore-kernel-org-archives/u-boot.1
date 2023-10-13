@@ -4,53 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76CB1CDB482
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 13:10:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97B08CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 13:24:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE53586E77;
-	Fri, 13 Oct 2023 15:09:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 4F9B486E04;
+	Fri, 13 Oct 2023 15:24:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="WyANcHCa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZbzH/bbE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D97386EDC; Fri, 13 Oct 2023 15:09:56 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1005086E5E; Fri, 13 Oct 2023 15:24:19 +0200 (CEST)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3017486E77
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 15:09:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABC98868BF
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 15:24:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from workstation5.fritz.box
- (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id C2DFD3F6E0; 
- Fri, 13 Oct 2023 13:09:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1697202588;
- bh=vshkPJmdbsGLeAjvFT1MtithFzjZInxSlUQWrFLUPG4=;
- h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
- b=WyANcHCaZEjPwGfi8iotLf4AiwEMl7X9siawr695bFKLiJa6CURzzG5Zz1nlYnalS
- rSX3i9/xnNVZOSJrKiWtO+BpzACkv+6x2cigTQ6zYR7DNXnGFy++yaTlqgj8WRTjhV
- H56Q7dmjNCMMCW7+LO3zv5a3sT0vFy+sz7CdNSE3iELWTGIxQ4rNdcsdt5Cg1rsF8X
- adZigTGJ0W6357VMwHkprCcbgKQ/pwrNNol2G7cDnIG7eHuhzp49Sf/nJXtkCc8zoR
- zJxpjsyNm6t5JnW5pxH+bFsm0A/So1NevRZtlIdkfborccgYiov0VNFRhs8E1C3wqQ
- JIBfmqAZ3cvaw==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Heiko Schocher <hs@denx.de>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2] i2c: designware_i2c: adjust timing calculation
-Date: Fri, 13 Oct 2023 15:09:39 +0200
-Message-Id: <20231013130939.19803-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.40.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=inindev@gmail.com
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-774141bb415so133060785a.3
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 06:24:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697203448; x=1697808248; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9MpgcERVMqM2QiDIKxrnCZ05ZmkMykKlh0aAySFJjkI=;
+ b=ZbzH/bbEF+06+lePYFGM4q8DCsyLY2Pi2T5WkUioeaPqUK5brLWYI4FHsZskstgWqF
+ eCNz9rzgxoL9xhzno+y6dk2xGdbzC6WKXeC9YcMfHFKoAYjzv4X01OGDwPgYdwnrNGKf
+ hl0UN17jBpl55Gv8qj3fjn0LavMVIcU5jVq9IpZ8zIT7qNH+bxp14DsgVfb9fKVZE/ur
+ /odnV8FLs2WazyMcb5bObSBSTDeEV6qda3f0HLQFgdMVIkwz5Zbg8QrKKaSEermh72AG
+ 2pBus0PjrLx90eeeH41Lwzy7Zlwenzv0q/KTXU4H/ZbjUmydRkpsbHTVeIq3VbBlDBys
+ NVwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697203448; x=1697808248;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9MpgcERVMqM2QiDIKxrnCZ05ZmkMykKlh0aAySFJjkI=;
+ b=vpH6vI8g9SiqCtiqTR+U7wW2Yi0a9ukvHgHVdhHT4YWH5xim0phRtaq/G2/UFpKsgk
+ XU/CHLmi6cALIMC5VXJjamz5iloJQe5vpLSwCNhuOcTF+lviiwCOd3NRguHu6y55Iz+o
+ /FINFCccYSkczCBMQeVKXH8VNRU8jg2Ldes23pVTdUsffq7LiNzwHpBhlQusdNe+ZVos
+ 9DAJZnQkMU+dvbHH8USqZfPVs261r/5zBmIpQ9S3J2eD2WZU18QsLFc7IUMsBfSqSazQ
+ sr/iS3e29xf+ToABF2JCq9VdE7yGASyXiNm2SsSxO0i5qf0F7Y/ngI/sBnXX7uLep0sA
+ g6dw==
+X-Gm-Message-State: AOJu0YxzSnIKBjVoexvP9c3w4udtDGygUINJ2ZfPOQfsp/CyDtrLU7OE
+ eB6g5e7RY8Hf11UFBG+a1cg=
+X-Google-Smtp-Source: AGHT+IEdG77yylS++F9/5e1oe1MbdeUwU4Zok+WkRg8VBXroneqbTNVM1ca7vVecDM7FhOnv2nk5JQ==
+X-Received: by 2002:a05:620a:2847:b0:775:ce3e:7bff with SMTP id
+ h7-20020a05620a284700b00775ce3e7bffmr27563450qkp.32.1697203448055; 
+ Fri, 13 Oct 2023 06:24:08 -0700 (PDT)
+Received: from localhost.localdomain (cpe-107-15-246-199.nc.res.rr.com.
+ [107.15.246.199]) by smtp.gmail.com with ESMTPSA id
+ d11-20020a05620a140b00b0076cda7eab11sm611960qkj.133.2023.10.13.06.24.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Oct 2023 06:24:07 -0700 (PDT)
+From: John Clark <inindev@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: John Clark <inindev@gmail.com>, Jesse Taube <mr.bossman075@gmail.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH] Makefile: remove misc include and simple-bin build artifacts
+ on clean
+Date: Fri, 13 Oct 2023 13:23:07 +0000
+Message-ID: <20231013132338.42127-1-inindev@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -69,79 +90,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In SPL probing of the designware_i2c device on the StarFive VisionFive 2
-board fails with
+make rock5b-rk3588_defconfig
+make
+make clean
+git status
 
-    dw_i2c: mode 0, ic_clk 1000000, speed 100000,
-    period 10 rise 1 fall 1 tlow 5 thigh 4 spk 0
-    dw_i2c: bad counts. hcnt = -4 lcnt = 4
-    device_probe: i2c@12050000 failed to probe -22
+before
+~~~~~~~
+On branch master
+Your branch is up to date with 'origin/master'.
 
-When changing the offset for the high phase from 7 to 3 the device is
-probed correctly. This now matches the value from the Linux driver.
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	include/autoconf.mk
+	include/autoconf.mk.dep
+	include/config.h
+	mkimage-in-simple-bin-spi.mkimage-rockchip-tpl
+	mkimage-in-simple-bin-spi.mkimage-u-boot-spl
+	mkimage-in-simple-bin.mkimage-rockchip-tpl
+	mkimage-in-simple-bin.mkimage-u-boot-spl
+	simple-bin.fit.fit
+	simple-bin.fit.itb
 
-Without this fix the memory size of the StarFive VisionFive 2 board cannot
-be read from EEPROM.
+after
+~~~~~~~
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
 
-Fixes: e71b6f6622d6 ("i2c: designware_i2c: Rewrite timing calculation")
+nothing to commit, working tree clean
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: John Clark <inindev@gmail.com>
+
 ---
-v2:
-	use the same timing offset at Linux
-	provide a descriptive comment for the constant
----
- drivers/i2c/designware_i2c.c | 19 +++++++++++++++----
- 1 file changed, 15 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/i2c/designware_i2c.c b/drivers/i2c/designware_i2c.c
-index e54de42abc..215ce010cb 100644
---- a/drivers/i2c/designware_i2c.c
-+++ b/drivers/i2c/designware_i2c.c
-@@ -24,6 +24,17 @@
-  */
- #define DW_I2C_COMP_TYPE	0x44570140
+ Makefile | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index b204a50043..7ba4ad45c8 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2156,15 +2156,15 @@ CLEAN_DIRS  += $(MODVERDIR) \
+ 	       $(foreach d, spl tpl vpl, $(patsubst %,$d/%, \
+ 			$(filter-out include, $(shell ls -1 $d 2>/dev/null))))
  
-+/*
-+ * This constant is used to calculate when during the clock high phase the data
-+ * bit shall be read. The value was copied from the Linux v6.5 function
-+ * i2c_dw_scl_hcnt() which provides the following explanation:
-+ *
-+ * "This is just an experimental rule: the tHD;STA period turned out to be
-+ * proportinal to (_HCNT + 3). With this setting, we could meet both tHIGH and
-+ * tHD;STA timing specs."
-+ */
-+#define T_HD_STA_OFFSET 3
-+
- static int dw_i2c_enable(struct i2c_regs *i2c_base, bool enable)
- {
- 	u32 ena = enable ? IC_ENABLE_0B : 0;
-@@ -155,10 +166,10 @@ static int dw_i2c_calc_timing(struct dw_i2c *priv, enum i2c_speed_mode mode,
+-CLEAN_FILES += include/bmp_logo.h include/bmp_logo_data.h \
+-	       include/generated/env.* drivers/video/u_boot_logo.S \
++CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
++	       include/config.h include/generated/env.* drivers/video/u_boot_logo.S \
+ 	       tools/version.h u-boot* MLO* SPL System.map fit-dtb.blob* \
+ 	       u-boot-ivt.img.log u-boot-dtb.imx.log SPL.log u-boot.imx.log \
+ 	       lpc32xx-* bl31.c bl31.elf bl31_*.bin image.map tispl.bin* \
+ 	       idbloader.img flash.bin flash.log defconfig keep-syms-lto.c \
+ 	       mkimage-out.spl.mkimage mkimage.spl.mkimage imx-boot.map \
+ 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
+-	       mkimage.rom.mkimage rom.map simple-bin.map simple-bin-spi.map \
++	       mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
+ 	       idbloader-spi.img lib/efi_loader/helloworld_efi.S
  
- 	/*
- 	 * Back-solve for hcnt and lcnt according to the following equations:
--	 * SCL_High_time = [(HCNT + IC_*_SPKLEN + 7) * ic_clk] + SCL_Fall_time
-+	 * SCL_High_time = [(HCNT + IC_*_SPKLEN + T_HD_STA_OFFSET) * ic_clk] + SCL_Fall_time
- 	 * SCL_Low_time = [(LCNT + 1) * ic_clk] - SCL_Fall_time + SCL_Rise_time
- 	 */
--	hcnt = min_thigh_cnt - fall_cnt - 7 - spk_cnt;
-+	hcnt = min_thigh_cnt - fall_cnt - T_HD_STA_OFFSET - spk_cnt;
- 	lcnt = min_tlow_cnt - rise_cnt + fall_cnt - 1;
- 
- 	if (hcnt < 0 || lcnt < 0) {
-@@ -170,13 +181,13 @@ static int dw_i2c_calc_timing(struct dw_i2c *priv, enum i2c_speed_mode mode,
- 	 * Now add things back up to ensure the period is hit. If it is off,
- 	 * split the difference and bias to lcnt for remainder
- 	 */
--	tot = hcnt + lcnt + 7 + spk_cnt + rise_cnt + 1;
-+	tot = hcnt + lcnt + T_HD_STA_OFFSET + spk_cnt + rise_cnt + 1;
- 
- 	if (tot < period_cnt) {
- 		diff = (period_cnt - tot) / 2;
- 		hcnt += diff;
- 		lcnt += diff;
--		tot = hcnt + lcnt + 7 + spk_cnt + rise_cnt + 1;
-+		tot = hcnt + lcnt + T_HD_STA_OFFSET + spk_cnt + rise_cnt + 1;
- 		lcnt += period_cnt - tot;
- 	}
- 
+ # Directories & files removed with 'make mrproper'
+-- 
+2.42.0
+
