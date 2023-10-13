@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA5A2CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 14:51:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2FC8CDB483
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 15:11:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8687686D62;
-	Fri, 13 Oct 2023 16:51:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8015B86E65;
+	Fri, 13 Oct 2023 17:11:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=lessconfused.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="aZ/cgfep";
+	dkim=pass (1024-bit key; unprotected) header.d=lessconfused.com header.i=@lessconfused.com header.b="i1HZApO+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AF7886E39; Fri, 13 Oct 2023 16:51:49 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 73CCF86E65; Fri, 13 Oct 2023 17:11:30 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C00E86B95
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 16:51:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F0A586E7E
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 17:11:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=lessconfused.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
- t=1697208700; x=1697813500; i=xypron.glpk@gmx.de;
- bh=xzJYGl/k+hjysbF41kW0ifSA1JpRhuRfhRf6oSvnlJQ=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=aZ/cgfepOjPk6wbh7heK+UQW+HZTDFLWfoSWwc6dmJDdltalOebxV2AizIvOkUFPdvyrEGQxHVF
- miOxLNmjDILZjJC8vvA2IJF2cA5c66CO3sWb0uT0kwiDhiEmdcNcUq0w/fbJ7y4kvta2UTdbqKeBY
- 9fEJqLilEmmOqMSBATC7lJTO8UoePMMxfxTbSPYe8GmBIVU8oiiwlOhKcba9MZAvxuBRwecOJipC9
- 3hXSd8y2wI/IgqDigVjHx4ahHv6bbCh4SY94mWktNf9Zb8SHXztctusi4kC3xCj3R5XL11DjCzDlw
- IGCcPYV+dzfid3YCm0YjC4sQYs+i1lm7sLAA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.67] ([178.202.40.247]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N79u8-1rcgzI2vD2-017ULu; Fri, 13
- Oct 2023 16:51:40 +0200
-Message-ID: <090248a1-7ff1-41b9-91d6-270f53031b10@gmx.de>
-Date: Fri, 13 Oct 2023 16:51:31 +0200
+ spf=pass smtp.mailfrom=da@lessconfused.com
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-27d0acd0903so1574819a91.1
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 08:11:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=lessconfused.com; s=lessconfused; t=1697209876; x=1697814676;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=N6mTvtk+2ipUj4KKSvEv/tNOV6C0AnSirPNEJYWQ9No=;
+ b=i1HZApO+/6qkcNA2CraR6WJe5G3r+MrYtHgVQYrz/GT/a2+0z7kOBxL54Q9OrY7jeK
+ f7hKZk9VlkdK3DK6rYOwVZTXWMTlIuCWJRpK/jawI2hYwPesvtQJ7rxgneAftt+MFnbr
+ CPJvx8JVrG/MQd4xCxxrlhLVl0p/8RcYfGt7k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697209876; x=1697814676;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=N6mTvtk+2ipUj4KKSvEv/tNOV6C0AnSirPNEJYWQ9No=;
+ b=dyPA1KVqz5z5YTq3uwdRZnHFCtyXbvEZxgqPaJ2MPNS29KjkM2SHbs/ZI7uggAzRnZ
+ cfvRRoUrlHSqWPTaxfJAzLEofryBfm9aN6ZxHOGrJebXIe1VyIJ3157IWTJsrejpT0I/
+ LyU8TTDPGyeIIXspi8OWQW3euLaf0MWAWqUj6e3tM+y5wReiY2ekkby/1q8LzsaA6e3E
+ 5H2msTsFJv9U8R4xZHjDwJ4Wm+S4vpCNUfxadnakojartkTlT5iBQGrPd6dTSYuJ9CZy
+ QZAoiBi8rvGxdpe9qqyUXfwADS7igadd98xL1CpTSKpk3IzcosiTjg/lXaiomXsFjEI8
+ FKzQ==
+X-Gm-Message-State: AOJu0Yyka5HkZmj9ST73N6qM7Pdgqn5qFnLC3RpalohZhNWzUmL7i85f
+ 9U3owTK8jFXuBbgGLvplh06sflJxZCznQ7+y32x2ew==
+X-Google-Smtp-Source: AGHT+IFC78Sjha8LUByGMnwXwA8lAw8/lg/ETOq9VPj31H0+B7WAj1qqG7qIznmyym76D5xMv5JyMZsa1SoqMBnbPho=
+X-Received: by 2002:a17:90a:a018:b0:27d:c2d:94e8 with SMTP id
+ q24-20020a17090aa01800b0027d0c2d94e8mr7709095pjp.28.1697209876409; Fri, 13
+ Oct 2023 08:11:16 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Paul Barker <paul.barker@sancloud.com>, Simon Glass <sjg@chromium.org>,
- Weizhao Ouyang <o451686892@gmail.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2024-01-rc1
-Content-Type: text/plain; charset=UTF-8; format=flowed
+References: <20231013045356.25789-1-venkatesh.abbarapu@amd.com>
+ <2016c1bc-dfe0-416e-a910-75e6cf25036c@denx.de>
+In-Reply-To: <2016c1bc-dfe0-416e-a910-75e6cf25036c@denx.de>
+From: Da Xue <da@lessconfused.com>
+Date: Fri, 13 Oct 2023 11:11:04 -0400
+Message-ID: <CACdvmAju3wDL0yCJtVdEf47u+L5R3AvRpcuJ+ruKFXDTcQ-TBw@mail.gmail.com>
+Subject: Re: [PATCH v2] usb: xhci: Workaround to fix the USB halted endpoint
+ issues
+To: Marek Vasut <marex@denx.de>
+Cc: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de,
+ michal.simek@amd.com, git@xilinx.com, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:/z5oEqvjsJz0/UotmH9c/UdCHho/KurHrSRpUOvVar9RjtSlivs
- SRFYLf6YcY3JknCtmhAclyH3gm42zBBXzP2Zj/tvn5R21VbUQWliHAegtfWayI/huqdptSa
- e3Xo0XVdWOyH9yyaUHeqPCYmBh1SuFd1KXdCni5qSEhSlN67w1JPnqDB9E6YVipTaGG3G+J
- Jzk6Km/XIJtAriyKD2D1w==
-UI-OutboundReport: notjunk:1;M01:P0:u2DbcDH4jiM=;YA3XV9yKFGGhC7w8tJyZcVZTo+I
- wOEmtcuJ7NXaref4S1BRGOcPIrVl/0OtuV2LPKuXl9qT6d037HybaTBtRFWbC8POfQr57YPmR
- cb2wCfxHTRV6hMSG3Pniy+giGuwuMjHAzKKVkxT2OpBR2M1TCC9BClhJ5c9f95NiFV7tGxViT
- tf/Z4RRYam5nxg39nfcYStIwA9T/DT7IodGlcP4xuKO/z2gwC4X1F1v6RSpThKGBC2+FALjYy
- kHkNM+1qqtrJdGO7mh+kr3DXFrB7+iVSJiH9funJBSAKutJ0531VVyLlQpBYe81IipZu6JwmO
- ojk4fEj4xsjOjEgyA93mAy/JfakiqLXTumXxOJqRcye31iM6+tgZmlrlSFAoUX9Wl/1lgNEOU
- A/Fim2TXqwwQxhhSqTDa//bGk8ZXnM/X+K1N8riNpM0iq4j+cqYwMZvIcfgKoJ3tRiV/upkxf
- M2mfWSX2tSj+lp07Y8ycL+bgYvVwSqitqRKbrOMM4tWpR07ve0jNO2kn8kzIIhdfOv1+/n1BX
- 0mnwhShh/hdsSwfYGCewefC9JC2i3f3+Hgrq4KYXLI75LQu1gFFNtFXOgqAFDCJUOEshgRHEE
- ijv5agJQxIoBFbtRaUYsQVnlcFJWrkY2BEhT7yfanTENbHcbjMjgwTI5VuR2oBAQ2TlfhSI1U
- b7zGFJQina77fyVLZjRT6Xlq3//qzLHt+97GXnu2P/fm+C36IzPvYQfFLtaTyUPfSo386maYF
- kxephw93qVees6KB8M3tfbTH67E3HYpsE52yHeVEngYsG3BqNt8aiy4Gs87I6yDgzmPTOMi88
- uUvbcC4bKlzFTMdtQ0SAOxacHN1GUBpGpVF6AE4yTTBUWnvI1Yh7V3NSuOiXy6dc4+c3c0BXw
- 5V9EbFWSDALo91b5+gEA4tbyCRwGSpzXUuBTMBno6c2/l7oVePHkfDv0sjYtiXlVuqQ0abjjc
- U1LSZ8LGSmSDhfv7mfDxvcEJA1U=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,67 +87,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On Fri, Oct 13, 2023 at 7:47=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
+>
+> On 10/13/23 06:53, Venkatesh Yadav Abbarapu wrote:
+> > The xhci host controller driver trying to queue the URB's and it is
+> > getting halted at the endpoint, thereby hitting the BUG_ON's.
+> > Mostly these kind of random issues are seen on faulty boards.
+> > Removing these BUG_ON's from the U-Boot xhci code, as in Linux kernel
+> > xhci code BUG_ON/BUG's are removed entirely.
+> > Please also note, that BUG_ON() is not recommended any more in the Linu=
+x
+> > kernel.
+> > Similar issue has been observed on TI AM437x board and they created a p=
+atch
+> > in Linux kernel as below
+> > https://patches.linaro.org/project/linux-usb/patch/1390250711-25840-1-g=
+it-send-email-balbi@ti.com/
+> >
+> > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+>
+> I already explained to Xilinx how to sync the driver with Linux and why
+> this is needed to move forward, multiple times, and even provided a
+> script which does most of the work automatically, since it is basically
+> automated process. Xilinx did not even bother to test the script and
+> provide any feedback.
+>
+> Until that happens, this patch is rejected.
 
-The following changes since commit 997bef3c6d22d12c7fd092fb831bf94d114c9f6=
-f:
+This patch also causes all of the USB devices on certain platforms to
+not be detected:
 
-   Merge branch '2023-10-11-port-gen_compile_commands_py' (2023-10-11
-13:25:01 -0400)
+scanning bus usb@c9000000 for devices... Device not responding to set addre=
+ss.
 
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2024-01-rc1
-
-for you to fetch changes up to c1ab04626d6b05c6e82dfe4d97d3f62f7310d612:
-
-   efi_loader: use well-known guid for auto-created boot option
-(2023-10-12 08:32:27 +0200)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/18093
-
-=2D---------------------------------------------------------------
-Pull request efi-2024-01-rc1
-
-Documentation:
-
-* Bump urllib3 version
-* Migrate Renesas board docs to rst
-* Link an introduction video
-
-UEFI
-
-* Use same GUID as EDK II for auto-created boot options
-* Clean up BitBlt test
-
-=2D---------------------------------------------------------------
-Heinrich Schuchardt (1):
-       efi_selftest: BitBlt test
-
-Masahisa Kojima (1):
-       efi_loader: use well-known guid for auto-created boot option
-
-Paul Barker (1):
-       doc: Migrate Renesas board docs to rst
-
-Simon Glass (1):
-       doc: Add a short intro video
-
-Tom Rini (1):
-       sphinx: Bump urllib3 version
-
-Weizhao Ouyang (1):
-       cyclic: doc: Update documentation for CONFIG_CYCLIC_MAX_CPU_TIME_US
-
-  doc/README.rmobile                     |  99 -------------
-  doc/board/renesas/renesas.rst          | 255
-+++++++++++++++++++++++++++++----
-  doc/develop/cyclic.rst                 |  10 +-
-  doc/learn/talks.rst                    |   3 +
-  doc/sphinx/requirements.txt            |   2 +-
-  include/efi_loader.h                   |   4 +-
-  lib/efi_selftest/efi_selftest_bitblt.c |  83 ++++++++---
-  7 files changed, 298 insertions(+), 158 deletions(-)
-  delete mode 100644 doc/README.rmobile
+      USB device not accepting new address (error=3D80000000)
