@@ -4,69 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46AC2CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:29:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B5E0CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:30:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A711686E5E;
-	Fri, 13 Oct 2023 18:29:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3965586EE2;
+	Fri, 13 Oct 2023 18:29:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SAWElfMf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QQyjZRbM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5424A86E5E; Fri, 13 Oct 2023 18:29:08 +0200 (CEST)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id B9A5486EE2; Fri, 13 Oct 2023 18:29:29 +0200 (CEST)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5169286A4C
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:29:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5359586A6B
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:29:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-79f82b26abfso81943939f.1
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:29:02 -0700 (PDT)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-79faba5fe12so83341339f.3
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:29:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697214541; x=1697819341; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=4uIJWVfIJ2bSoGhpMTZcVJe265wVB0CVztI/dvEFhUA=;
- b=SAWElfMfTTXCL2vNikPGYdwm7GhyaX4Jt6nQ9T/4N2esvf6sGzSvaewej0JMkvAvnD
- bieW8I6+zlT7MWjjBAy0h5tCaxwjdFNBEhNkSeHlmRDlJPv2S7QtIozlvBBSUdhVjcFy
- N48/aGlZkm4RC4BpsnyL2WFc9M6STm2kt5gb4=
+ d=chromium.org; s=google; t=1697214547; x=1697819347; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jYByFnkimg7UbixGJQsfaawTPUFS60YFdE08zkQpaQo=;
+ b=QQyjZRbM1e+JeaYHc8RVd4KgisfBqRV8G+curWpzvhK8L1FkHivL+q9kiVT7l76U/O
+ YYPNL5iW9GmQwNg6f7S3kMU5kSu6UIXX8jBF61Xf60hkpYGk+N/yiKwvIqoAodo8OKf7
+ KnHOphcXAi0ALx4U92N/ds9cyS50DCD83ZgWU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697214541; x=1697819341;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4uIJWVfIJ2bSoGhpMTZcVJe265wVB0CVztI/dvEFhUA=;
- b=EM+yHFvSlPbVZP12He0dRvfOXYHix64ToYkCtAsf60PW/BWW5m/stgPhsprWXmWm15
- k6q+R1iRXnUn2VYCdnfAd3Kk3ovmRtvKF85EBKbSbVn9qGdXPKW+h9c7qT03zjrRBTkG
- oCl65u7jtIpRPnfxUrrkwuIq233ozbUqle9lMZNz/jQfz1JjkIWKEG5cpLWbvb1ibgHl
- DYMn3L9HwU2a0E3aiRVwTjGlHjYIvkJje508Up6tsxuVXbuD3rTkqgz/Ptn2DAjmm7AA
- 771KXBWko/HYcYs5qYFDnt3eP2rmUtEjlva87OzP+mptLwPNzm+/OlqMAvnz4WX5HdZN
- wlew==
-X-Gm-Message-State: AOJu0Yx801K3JCvsdcC87rCXUaRPqSTBqPnb1za9u+sGNO0FpcoRjY8e
- /puUB4t3X/QjMVFW4Nrj/R/p67o46V+ElHWXmJMlGg==
-X-Google-Smtp-Source: AGHT+IHcPTv4jmh41NLYhruXJUgI0zUcCRARJ213e92pxX4SwaR292WP2GCUhDqkZ3w2mnvmjyoKJg==
-X-Received: by 2002:a5d:9946:0:b0:79f:dbec:ac4d with SMTP id
- v6-20020a5d9946000000b0079fdbecac4dmr30482638ios.19.1697214540780; 
- Fri, 13 Oct 2023 09:29:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697214547; x=1697819347;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jYByFnkimg7UbixGJQsfaawTPUFS60YFdE08zkQpaQo=;
+ b=oD2ac2B7n41hcJQZZvdettJrMjigH0mmbiIyceGWwHKuQLF4+uKhnUpaE1EPIDqdJ8
+ UaEH6uM6KOZia8pc5WVf5i/+EESPR6+qvp3VshZfA8/DOms9XPDcp0i/DTj/1wY1tayd
+ ui5KqBLoy/ohzCyTc38zoUBaexvVD+ldzhTwNDj1cdL7xTHnnm9XIi77/PELWeeelbPH
+ RP06NJSDPUG1LpIn1MmeAvm08ywVVFS2UAF7/VRX5m2JUAi0b6hAMIJuteoJoJAmFIOm
+ yd6i5HlOq8+Y3yOoPxB4JpqB/lZJLlvYJlOVa9U95a9kc/0btSCndZNVuEPkPuBfterQ
+ j9LA==
+X-Gm-Message-State: AOJu0Yxpg8JKtsIoayB3miWrv0khVBrRe9qCxkHXMYexg6onJ+8d8nZW
+ ohCVF0/Ag61zTwjytBEu4F6GqYLF86haQBWdl3Gs4w==
+X-Google-Smtp-Source: AGHT+IE0ovS9w6aq1LPuLAVvn/8w7stEguRpzgAsH6H89CqC+focMOMlQzJGLwYlC+7Ssx3A+iqMKQ==
+X-Received: by 2002:a6b:919:0:b0:790:6629:b222 with SMTP id
+ t25-20020a6b0919000000b007906629b222mr29924034ioi.5.1697214546946; 
+ Fri, 13 Oct 2023 09:29:06 -0700 (PDT)
 Received: from sjg1.www.unitedwifi.com ([75.104.104.107])
  by smtp.gmail.com with ESMTPSA id
- u2-20020a5edd42000000b0077a1d1029fcsm4816757iop.28.2023.10.13.09.28.56
+ u2-20020a5edd42000000b0077a1d1029fcsm4816757iop.28.2023.10.13.09.29.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Oct 2023 09:29:00 -0700 (PDT)
+ Fri, 13 Oct 2023 09:29:06 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Lars Feyaerts <lars@bitbiz.be>
-Subject: [PATCH v2 1/2] checkpatch.pl: Make common.h check boarder
-Date: Fri, 13 Oct 2023 09:28:32 -0700
-Message-ID: <20231013162836.1911982-1-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 2/2] patman: Add a little documentation on the checkpatch
+ tests
+Date: Fri, 13 Oct 2023 09:28:33 -0700
+Message-ID: <20231013162836.1911982-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
+In-Reply-To: <20231013162836.1911982-1-sjg@chromium.org>
+References: <20231013162836.1911982-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -85,77 +89,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Tom Rini <trini@konsulko.com>
+These texts lack comments. Add some so that it is clearer what is going
+on.
 
-At this point in time we should not add common.h to any new files, so
-make checkpatch.pl complain.
-
-Signed-off-by: Tom Rini <trini@konsulko.com>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Only check one header at a time in checkpatch.pl
+(no changes since v1)
 
- scripts/checkpatch.pl           | 10 ++++++++--
- tools/patman/test_checkpatch.py |  9 +++++++--
- 2 files changed, 15 insertions(+), 4 deletions(-)
+ tools/patman/test_checkpatch.py | 49 +++++++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
 
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index 488d73a0ed77..b8eb57f38c74 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -2636,12 +2636,18 @@ sub u_boot_line {
- 		      "All CONFIG symbols are managed by Kconfig\n" . $herecurr);
- 	}
- 
--	# Don't put common.h and dm.h in header files
--	if ($realfile =~ /\.h$/ && $rawline =~ /^\+#include\s*<(common|dm)\.h>*/) {
-+	# Don't put dm.h in header files
-+	if ($realfile =~ /\.h$/ && $rawline =~ /^\+#include\s*<dm\.h>*/) {
- 		ERROR("BARRED_INCLUDE_IN_HDR",
- 		      "Avoid including common.h and dm.h in header files\n" . $herecurr);
- 	}
- 
-+	# Don't add common.h to files
-+	if ($rawline =~ /^\+#include\s*<common\.h>*/) {
-+		ERROR("BARRED_INCLUDE_COMMON_H",
-+		      "Do not add common.h to files\n" . $herecurr);
-+	}
-+
- 	# Do not disable fdt / initrd relocation
- 	if ($rawline =~ /^\+.*(fdt|initrd)_high=0xffffffff/) {
- 		ERROR("DISABLE_FDT_OR_INITRD_RELOC",
 diff --git a/tools/patman/test_checkpatch.py b/tools/patman/test_checkpatch.py
-index a8bb364e42b2..f8117460ced2 100644
+index f8117460ced2..0a8f7408f146 100644
 --- a/tools/patman/test_checkpatch.py
 +++ b/tools/patman/test_checkpatch.py
-@@ -238,7 +238,7 @@ index 0000000..2234c87
- + * passed to kernel in the ATAGs
- + */
- +
--+#include <common.h>
-++#include <config.h>
- +
- +struct bootstage_record {
- +	u32 time_us;
-@@ -401,10 +401,15 @@ index 0000000..2234c87
-     def test_barred_include_in_hdr(self):
-         """Test for using a barred include in a header file"""
-         pm = PatchMaker()
--        #pm.add_line('include/myfile.h', '#include <common.h>')
-         pm.add_line('include/myfile.h', '#include <dm.h>')
-         self.check_single_message(pm, 'BARRED_INCLUDE_IN_HDR', 'error')
+@@ -18,19 +18,47 @@ from patman import commit
  
-+    def test_barred_include_common_h(self):
-+        """Test for adding common.h to a file"""
-+        pm = PatchMaker()
-+        pm.add_line('include/myfile.h', '#include <common.h>')
-+        self.check_single_message(pm, 'BARRED_INCLUDE_COMMON_H', 'error')
+ 
+ class Line:
++    """Single changed line in one file in a patch
 +
-     def test_config_is_enabled_config(self):
-         """Test for accidental CONFIG_IS_ENABLED(CONFIG_*) calls"""
-         pm = PatchMaker()
++    Args:
++        fname (str): Filename containing the added line
++        text (str): Text of the added line
++    """
+     def __init__(self, fname, text):
+         self.fname = fname
+         self.text = text
+ 
+ 
+ class PatchMaker:
++    """Makes a patch for checking with checkpatch.pl
++
++    The idea here is to create a patch which adds one line in one file,
++    intended to provoke a checkpatch error or warning. The base patch is empty
++    (i.e. invalid), so you should call add_line() to add at least one line.
++    """
+     def __init__(self):
++        """Set up the PatchMaker object
++
++        Properties:
++            lines (list of Line): List of lines to add to the patch. Note that
++                each line has both a file and some text associated with it,
++                since for simplicity we just add a single line for each file
++        """
+         self.lines = []
+ 
+     def add_line(self, fname, text):
++        """Add to the list of filename/line pairs"""
+         self.lines.append(Line(fname, text))
+ 
+     def get_patch_text(self):
++        """Build the patch text
++
++        Takes a base patch and adds a diffstat and patch for each filename/line
++        pair in the list.
++
++        Returns:
++            str: Patch text ready for submission to checkpatch
++        """
+         base = '''From 125b77450f4c66b8fd9654319520bbe795c9ef31 Mon Sep 17 00:00:00 2001
+ From: Simon Glass <sjg@chromium.org>
+ Date: Sun, 14 Jun 2020 09:45:14 -0600
+@@ -75,6 +103,11 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
+         return '\n'.join(lines)
+ 
+     def get_patch(self):
++        """Get the patch text and write it into a temporary file
++
++        Returns:
++            str: Filename containing the patch
++        """
+         inhandle, inname = tempfile.mkstemp()
+         infd = os.fdopen(inhandle, 'w')
+         infd.write(self.get_patch_text())
+@@ -82,6 +115,22 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
+         return inname
+ 
+     def run_checkpatch(self):
++        """Run checkpatch on the patch file
++
++        Returns:
++            namedtuple containing:
++                ok: False=failure, True=ok
++                problems: List of problems, each a dict:
++                    'type'; error or warning
++                    'msg': text message
++                    'file' : filename
++                    'line': line number
++                errors: Number of errors
++                warnings: Number of warnings
++                checks: Number of checks
++                lines: Number of lines
++                stdout: Full output of checkpatch
++        """
+         return checkpatch.check_patch(self.get_patch(), show_types=True)
+ 
+ 
 -- 
 2.42.0.655.g421f12c284-goog
 
