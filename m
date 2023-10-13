@@ -4,78 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89331CDB47E
-	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:23:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46AC2CDB47E
+	for <u-boot@archiver.kernel.org>; Fri, 13 Oct 2023 16:29:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED41A86EDA;
-	Fri, 13 Oct 2023 18:22:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A711686E5E;
+	Fri, 13 Oct 2023 18:29:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ksF8s1T8";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SAWElfMf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAF0E86A4C; Fri, 13 Oct 2023 18:22:34 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 5424A86E5E; Fri, 13 Oct 2023 18:29:08 +0200 (CEST)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF0BA86EF4
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:22:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5169286A4C
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:29:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-53de8fc1ad8so3992122a12.0
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:22:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-79f82b26abfso81943939f.1
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 09:29:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697214134; x=1697818934; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xyvpM8nkMQ8htUoVfPnABWOwQu/gpZPhhDtuXQjqcbg=;
- b=ksF8s1T8RetSZEw0zCoRoWZcn/um6skVy8ffkVQV8UZHwZ1KT8wk74lq8Zkh8e6z8V
- uYJaqcyNehUFK75HEjCSCeFxOO0AWiXs8761UrJqmq/wVrIakl+iaWMQk7SOHdxzaV5k
- 8EN3IkN1HLnnuTRCoHcy2SehqfFpR7EXjjono30XpqbEj683vOSI5gAwU4ZnA5BCZZvR
- TlYIBfSvW2Kb80uog7EWj5r+zcum+6kyRcl0HDZK2kqlzgzKr+p55Y46RJrQB/KnBnW3
- wOgo7km2Y9BLxmpBcJU1ySlxr1jtBKBbg9wX9mNLF1yrFyldAXl6hD2WXDWFNR4cbKFx
- Tw1g==
+ d=chromium.org; s=google; t=1697214541; x=1697819341; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4uIJWVfIJ2bSoGhpMTZcVJe265wVB0CVztI/dvEFhUA=;
+ b=SAWElfMfTTXCL2vNikPGYdwm7GhyaX4Jt6nQ9T/4N2esvf6sGzSvaewej0JMkvAvnD
+ bieW8I6+zlT7MWjjBAy0h5tCaxwjdFNBEhNkSeHlmRDlJPv2S7QtIozlvBBSUdhVjcFy
+ N48/aGlZkm4RC4BpsnyL2WFc9M6STm2kt5gb4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697214134; x=1697818934;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xyvpM8nkMQ8htUoVfPnABWOwQu/gpZPhhDtuXQjqcbg=;
- b=lzzVa/+9ZbEWJjfb1mFv2DKiPQ0hx4yI6Jg06kUmaPXpWfCPFwS0NZgvxod27zEAnT
- vLKgeOxW2s6UmR0/sZeUSojAPjwDEnTTFN0UArCKdRyjWWDNLdDr3r/ntEJliOxzk87s
- tutTw09HvfVyI1rvPQ0IRLqcpwI9AAm4ItbPVG63x4gR3Nkh3XrOVhl2ILXqSiXG+oip
- gnkPWtcW31JW8f1k28JTbMY2XxRtJXkKGUUZWPo/FnJiJ3i+mDKSlrag12M5rQibb7qF
- HTS0WUp2Ca5zlupppwKTg/cKXWKkJQJqcMAFwmkfjON6Xj7elk8WX4oKXGqqIrJG3Hw8
- yzJw==
-X-Gm-Message-State: AOJu0Yy+gEDp+K4iSAX5zzk+zNDj4cZEhYOsm9Yyb6RINHGde/GAfUja
- 48tSIRHimJkUe8GYYlgdgnjpUMcWO05GiWq2F98=
-X-Google-Smtp-Source: AGHT+IGGcaHDY01N3rwfcRQX+w9Kgbu1DqocZByn2DI6ofzjai51UitgdllpWIf0j8HvG3rl1GjnpP1IMwnoeFSUOZE=
-X-Received: by 2002:a50:858d:0:b0:53b:9948:cc1f with SMTP id
- a13-20020a50858d000000b0053b9948cc1fmr13952447edh.12.1697214134051; Fri, 13
- Oct 2023 09:22:14 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697214541; x=1697819341;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4uIJWVfIJ2bSoGhpMTZcVJe265wVB0CVztI/dvEFhUA=;
+ b=EM+yHFvSlPbVZP12He0dRvfOXYHix64ToYkCtAsf60PW/BWW5m/stgPhsprWXmWm15
+ k6q+R1iRXnUn2VYCdnfAd3Kk3ovmRtvKF85EBKbSbVn9qGdXPKW+h9c7qT03zjrRBTkG
+ oCl65u7jtIpRPnfxUrrkwuIq233ozbUqle9lMZNz/jQfz1JjkIWKEG5cpLWbvb1ibgHl
+ DYMn3L9HwU2a0E3aiRVwTjGlHjYIvkJje508Up6tsxuVXbuD3rTkqgz/Ptn2DAjmm7AA
+ 771KXBWko/HYcYs5qYFDnt3eP2rmUtEjlva87OzP+mptLwPNzm+/OlqMAvnz4WX5HdZN
+ wlew==
+X-Gm-Message-State: AOJu0Yx801K3JCvsdcC87rCXUaRPqSTBqPnb1za9u+sGNO0FpcoRjY8e
+ /puUB4t3X/QjMVFW4Nrj/R/p67o46V+ElHWXmJMlGg==
+X-Google-Smtp-Source: AGHT+IHcPTv4jmh41NLYhruXJUgI0zUcCRARJ213e92pxX4SwaR292WP2GCUhDqkZ3w2mnvmjyoKJg==
+X-Received: by 2002:a5d:9946:0:b0:79f:dbec:ac4d with SMTP id
+ v6-20020a5d9946000000b0079fdbecac4dmr30482638ios.19.1697214540780; 
+ Fri, 13 Oct 2023 09:29:00 -0700 (PDT)
+Received: from sjg1.www.unitedwifi.com ([75.104.104.107])
+ by smtp.gmail.com with ESMTPSA id
+ u2-20020a5edd42000000b0077a1d1029fcsm4816757iop.28.2023.10.13.09.28.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 13 Oct 2023 09:29:00 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Lars Feyaerts <lars@bitbiz.be>
+Subject: [PATCH v2 1/2] checkpatch.pl: Make common.h check boarder
+Date: Fri, 13 Oct 2023 09:28:32 -0700
+Message-ID: <20231013162836.1911982-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 MIME-Version: 1.0
-References: <VI1PR08MB2847E276099DF7263424F70083CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
- <CALeDE9N6nhRBwtYqJ=7nqYuCsmbw03j3RBXRQ8jYsD=OMY=gBw@mail.gmail.com>
- <VI1PR08MB28474179AFB989B308072B1E83CDA@VI1PR08MB2847.eurprd08.prod.outlook.com>
- <CAPnjgZ3t9-trzoLGc7Jcj0=J0sQLQcHSGN3_Pf+3=iZ6=rPPqA@mail.gmail.com>
- <CALeDE9Oh9c+X5tG9RswuE=a=yQRW-j93q2oHJeOehLHHY2bSgw@mail.gmail.com>
-In-Reply-To: <CALeDE9Oh9c+X5tG9RswuE=a=yQRW-j93q2oHJeOehLHHY2bSgw@mail.gmail.com>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Fri, 13 Oct 2023 17:22:03 +0100
-Message-ID: <CALeDE9MnMuHSH4sgAC+Z2_+71QgToHt8e8rib3igxFDKV+DYWw@mail.gmail.com>
-Subject: Re: U-Boot 2023.10 does not boot from uSD on RPi4
-To: Simon Glass <sjg@chromium.org>
-Cc: Guillaume Gardet <Guillaume.Gardet@arm.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Ivan Ivanov <ivan.ivanov@suse.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,71 +85,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Oct 13, 2023 at 5:09=E2=80=AFPM Peter Robinson <pbrobinson@gmail.co=
-m> wrote:
->
-> On Tue, Oct 10, 2023 at 3:58=E2=80=AFPM Simon Glass <sjg@chromium.org> wr=
-ote:
-> >
-> > Hi,
-> >
-> > On Tue, 10 Oct 2023 at 04:39, Guillaume Gardet <Guillaume.Gardet@arm.co=
-m> wrote:
-> > >
-> > >
-> > >
-> > > > -----Original Message-----
-> > > > From: Peter Robinson <pbrobinson@gmail.com>
-> > > > Sent: Tuesday, October 10, 2023 12:22 PM
-> > > > To: Guillaume Gardet <Guillaume.Gardet@arm.com>
-> > > > Cc: mbrugger@suse.com; Ivan Ivanov <ivan.ivanov@suse.com>; Simon Gl=
-ass
-> > > > <sjg@chromium.org>; u-boot@lists.denx.de
-> > > > Subject: Re: U-Boot 2023.10 does not boot from uSD on RPi4
-> > > >
-> > > > On Tue, Oct 10, 2023 at 10:26=E2=80=AFAM Guillaume Gardet
-> > > > <Guillaume.Gardet@arm.com> wrote:
-> > > > >
-> > > > > Hi,
-> > > > >
-> > > > > U-Boot 2023.10 does not boot from uSD on RPi4.
-> > > > > This has been found on openSUSE Tumbleweed. The only diff we need=
- is:
-> > > > >   -CONFIG_OF_EMBED=3Dy
-> > > > >   +CONFIG_OF_BOARD=3Dy
-> > > > > To use firmware provided Device Tree. But that should not affect =
-the mmc
-> > > > behavior too much, I think.
-> > > >
-> > > > I've been booting Fedora fine on a RPi4 BUT there's issues with the=
- display
-> > > > turning off [1] when the accelerated display modules load
-> > > > (vc4) as a result of this patch set. Can you confirm if that's the =
-same problem
-> > > > you're seeing?
-> > >
-> > > No, that's not my problem. My issue is grub was not loaded by u-boot =
-from uSD.
-> > > It seems more like Simon's problem: https://lists.denx.de/pipermail/u=
--boot/2023-October/533162.html
-> > >
-> > > @Simon, can you check if the patch below fixes your boot problem on R=
-Pi4, please?
-> >
-> > This has been reported at least twice before. There is a fix [2] which =
-is in my queue to apply.
->
-> Looking at that patch it scans the first 3 devices, how does it handle
-> non storage devices like SDIO WiFi modules? It shouldn't be trying to
-> scan those.
+From: Tom Rini <trini@konsulko.com>
 
-And in the case of the RPi the other enabled SDHCI interface is the
-WiFi, why would we even be trying to boot off a non storage interface,
-something here just feels broken/wrong in general.
+At this point in time we should not add common.h to any new files, so
+make checkpatch.pl complain.
 
-The patch does make it work with pure upstream, and I'm not sure why
-the Fedora build boots it fine out of the box, but the patch just
-feels like it's hacking around some other underlying problem with
-bootstd, we didn't have this problem with the previous method and
-trying to boot off non storage interfaces feels like it could cause
-other problems.
+Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+Changes in v2:
+- Only check one header at a time in checkpatch.pl
+
+ scripts/checkpatch.pl           | 10 ++++++++--
+ tools/patman/test_checkpatch.py |  9 +++++++--
+ 2 files changed, 15 insertions(+), 4 deletions(-)
+
+diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+index 488d73a0ed77..b8eb57f38c74 100755
+--- a/scripts/checkpatch.pl
++++ b/scripts/checkpatch.pl
+@@ -2636,12 +2636,18 @@ sub u_boot_line {
+ 		      "All CONFIG symbols are managed by Kconfig\n" . $herecurr);
+ 	}
+ 
+-	# Don't put common.h and dm.h in header files
+-	if ($realfile =~ /\.h$/ && $rawline =~ /^\+#include\s*<(common|dm)\.h>*/) {
++	# Don't put dm.h in header files
++	if ($realfile =~ /\.h$/ && $rawline =~ /^\+#include\s*<dm\.h>*/) {
+ 		ERROR("BARRED_INCLUDE_IN_HDR",
+ 		      "Avoid including common.h and dm.h in header files\n" . $herecurr);
+ 	}
+ 
++	# Don't add common.h to files
++	if ($rawline =~ /^\+#include\s*<common\.h>*/) {
++		ERROR("BARRED_INCLUDE_COMMON_H",
++		      "Do not add common.h to files\n" . $herecurr);
++	}
++
+ 	# Do not disable fdt / initrd relocation
+ 	if ($rawline =~ /^\+.*(fdt|initrd)_high=0xffffffff/) {
+ 		ERROR("DISABLE_FDT_OR_INITRD_RELOC",
+diff --git a/tools/patman/test_checkpatch.py b/tools/patman/test_checkpatch.py
+index a8bb364e42b2..f8117460ced2 100644
+--- a/tools/patman/test_checkpatch.py
++++ b/tools/patman/test_checkpatch.py
+@@ -238,7 +238,7 @@ index 0000000..2234c87
+ + * passed to kernel in the ATAGs
+ + */
+ +
+-+#include <common.h>
+++#include <config.h>
+ +
+ +struct bootstage_record {
+ +	u32 time_us;
+@@ -401,10 +401,15 @@ index 0000000..2234c87
+     def test_barred_include_in_hdr(self):
+         """Test for using a barred include in a header file"""
+         pm = PatchMaker()
+-        #pm.add_line('include/myfile.h', '#include <common.h>')
+         pm.add_line('include/myfile.h', '#include <dm.h>')
+         self.check_single_message(pm, 'BARRED_INCLUDE_IN_HDR', 'error')
+ 
++    def test_barred_include_common_h(self):
++        """Test for adding common.h to a file"""
++        pm = PatchMaker()
++        pm.add_line('include/myfile.h', '#include <common.h>')
++        self.check_single_message(pm, 'BARRED_INCLUDE_COMMON_H', 'error')
++
+     def test_config_is_enabled_config(self):
+         """Test for accidental CONFIG_IS_ENABLED(CONFIG_*) calls"""
+         pm = PatchMaker()
+-- 
+2.42.0.655.g421f12c284-goog
+
