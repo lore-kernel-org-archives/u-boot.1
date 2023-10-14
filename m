@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04ADACDB482
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:15:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7323CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:22:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D56286EA8;
-	Sun, 15 Oct 2023 08:38:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 68F7786F61;
+	Sun, 15 Oct 2023 08:41:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="txW0VXan";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="l63mBAdJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="klzsP/fk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A806786529; Sun, 15 Oct 2023 08:37:50 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
- [IPv6:2001:67c:2050:0:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6C0EB86E22; Sun, 15 Oct 2023 08:38:53 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CD7386F33
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:35:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EEDE86ECF
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:38:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4S7Dk44hXWz9sm2;
- Sat, 14 Oct 2023 21:59:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697313596;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Ay1YRNF/oOwExzd41jfomkvZoofLPlmYZY+xpV9ZIjA=;
- b=txW0VXanaJJm0AK4qWD5delFAQqmvnjvYIIsshSFrBPOcuYwYEBDqg6o6W6hP24t7eWr9C
- uZBTDqj+mtMNHe64EV+QMTyPWUYDQD57w0CES1TNqHX+oQkjt/JLktsHkU6XqZxCAJdqcl
- vs47yV0ckGT44vQtdx1MUfANLT5P5BybKw2/Z9/4QKNvZZXq/WthsjEmsKncy9J/Q6eGkK
- 1u3OVPYkYlA2+A5d0i/ma9kXQVPpqaM+XGF7J8jnVibZCUWPxn7rOzAhDL4NiYklc3jfF4
- wqIRs7OJ2EdGEWqTDxrj+H7WZXvZRdYUJjHH4xphNl8Bt8Rqrusr6E6msl1NHg==
-Message-ID: <96d9bc00-9f48-4545-b43a-a94c9439164c@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697313594;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Ay1YRNF/oOwExzd41jfomkvZoofLPlmYZY+xpV9ZIjA=;
- b=l63mBAdJXF/XdMVUe3egdxzgo1ve2Lcab62N09ALf5PIVM4/AKsye2xCvO6LtdEuVCbU2b
- HUPqEBBF0LbkHQC8qClzyFO5mlCBHp5VtVEf1w45N45CCnjHpQ1yV1ykux++xRVv3SnjeT
- 7yUsMIoYuZCslDkheCYyYYquAZHP/brKCutDZFEqZBG4Z6WWgd7pF0aauJn0ITJrs0bFhk
- EGNJ/HrLwdYwQwAjOxU152Itj8ZU9HTIDAJz99c/VuDO36BY9GkfHeHjSvfgXeF0HPmB1p
- B8Iuk8jP8bEueW6FI0//gxzVzRKSGDKkWxjhzMQYWQXUJKvgR18RsYQdvWdjNA==
-Date: Sat, 14 Oct 2023 21:59:51 +0200
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1c746bc3bceso10004515ad.1
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:38:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697351881; x=1697956681; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=4IDRB0BVYUmVGhtZwCOmtVxBqCrISgG1GedIhCB4QGs=;
+ b=klzsP/fklTB8K/2EHyZfQnEgnUttcGUXM8+eF6/Gc5Ph1+pdNoxrpf0RbP6DFYcDGB
+ 9bIM/TilfS6dhXKn4w5HQ5sOr6gjEmR8IqNuSWtrTvl+DwqLbqyVnzeQ94gN+26Sw8WB
+ aWlqiq79ZdSxJTWwwzCqFhd0Hw3k/oC3vHLfRDk9ESmeZ6q74gZTRby0WyGBa+UKXspB
+ XCPKmbg3ZvRQqLGtovWZvYnd2UZiYWcZC8VqfEL04OAgZnK5LG7ADsq/dsmRWIr6UPkP
+ 9c5Q2YpKlwswfVOD88JkK6wK+TePU+7JLrzS23LwOdrs9s2/m0ca6Baj+ElAWeafid/q
+ sDWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697351881; x=1697956681;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4IDRB0BVYUmVGhtZwCOmtVxBqCrISgG1GedIhCB4QGs=;
+ b=bkELihOYfbXNOmT6yDu5dutqazIjI2QdW74OfwpzCndBnaQ/TktXBuauCgNJxawugH
+ CKfinbeBnhy7lPO+gvMLOpgXJDnGd6IM224VDkeYqd7VX1vAGvr07FlT42uKhwo6bUHT
+ 8vqGjaumaX1ERd7Y15z93M/uVgVlY7UyJrwLhGSijWxXPvOmhoqWeZeK2KW3CnTrEHKI
+ gpfFtV0iY+oIq92nNX2AaPu75fcs87r3JV2q2EuBxvYQWCVJNi9njoXlxGeFFHIcuFFE
+ 6ClShy5J3N7+OjJFPlB2A2zJZW65BgPVTv8/Zh4wn5hfr7LoDI2hNkJieXlCl0UmeMdW
+ Vwpw==
+X-Gm-Message-State: AOJu0YxOLnEmOy+ndC1ekjhjczz95E4xb5N417Ht83uQD51RCP9iDHgo
+ vBObT6C2PcnlJURtSv7vQmUG8Rvokz4=
+X-Google-Smtp-Source: AGHT+IFqlwQgdHIYPHZpyKatojQmdzpIOVA2IZQvzHVUwSGgI/d1qWYzM2ZkcBiL3ZtUURBNV3DZgw==
+X-Received: by 2002:a05:6870:509:b0:1bf:9fa2:bfa3 with SMTP id
+ j9-20020a056870050900b001bf9fa2bfa3mr32478434oao.1.1697310435503; 
+ Sat, 14 Oct 2023 12:07:15 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:a2cf:5352:29eb:c2bb])
+ by smtp.gmail.com with ESMTPSA id
+ l18-20020a656812000000b00563590be25esm1119296pgt.29.2023.10.14.12.07.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 14 Oct 2023 12:07:14 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: sbabic@denx.de
+Cc: marex@denx.de, peng.fan@nxp.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] imx8mp-evk: Add USB0 OTG support
+Date: Sat, 14 Oct 2023 16:07:09 -0300
+Message-Id: <20231014190709.500334-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 19/19] board: rzg2l: Add RZ/G2L SMARC EVK board
-Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
- <20231009164645.164464-20-paul.barker.ct@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231009164645.164464-20-paul.barker.ct@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: t1tyyxbswenc8ixtsou71dh5b7mp7of4
-X-MBO-RS-ID: a4b8ad3f61015cdcf5c
-X-Rspamd-Queue-Id: 4S7Dk44hXWz9sm2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,122 +89,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/9/23 18:46, Paul Barker wrote:
-> The Renesas RZ/G2L SMARC Evaluation Board Kit consists of the RZ/G2L
-> System-on-Module (SOM) based on the R9A07G044L2 SoC, and a common SMARC
-> carrier board.
-> 
-> The ARM TrustedFirmware code for the Renesas RZ/G2L SoC family passes a
-> devicetree blob to the bootloader as an argument in the same was
-> previous R-Car gen3/gen4 SoCs. This blob contains a compatible string
-> which can be used to identify the particular SoC we are running on and
-> this is used to select the appropriate device tree to load.
-> 
-> The configuration renesas_rzg2l_smarc_defconfig is added to support
-> building for this target. In the future this defconfig will be extended
-> to support other SoCs and evaluation boards from the RZ/G2L family.
-> 
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
-> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> ---
-> v1->v2:
->   * Move dram_init() & dram_init_banksize() to memmap-rzg2l.c
->   * Add a TODO note for reset support.
-> 
->   arch/arm/mach-rmobile/Kconfig.rzg2l   | 14 ++++++
->   arch/arm/mach-rmobile/memmap-rzg2l.c  | 12 +++++
->   board/renesas/rzg2l/Kconfig           | 18 +++++++
->   board/renesas/rzg2l/MAINTAINERS       |  6 +++
->   board/renesas/rzg2l/Makefile          |  4 ++
->   board/renesas/rzg2l/rzg2l.c           | 67 +++++++++++++++++++++++++++
->   configs/renesas_rzg2l_smarc_defconfig | 52 +++++++++++++++++++++
->   include/configs/rzg2l-smarc.h         | 14 ++++++
->   8 files changed, 187 insertions(+)
->   create mode 100644 board/renesas/rzg2l/Kconfig
->   create mode 100644 board/renesas/rzg2l/MAINTAINERS
->   create mode 100644 board/renesas/rzg2l/Makefile
->   create mode 100644 board/renesas/rzg2l/rzg2l.c
->   create mode 100644 configs/renesas_rzg2l_smarc_defconfig
->   create mode 100644 include/configs/rzg2l-smarc.h
-> 
-> diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-rmobile/Kconfig.rzg2l
-> index 039d6b0a45aa..dc30bdf3e5c2 100644
-> --- a/arch/arm/mach-rmobile/Kconfig.rzg2l
-> +++ b/arch/arm/mach-rmobile/Kconfig.rzg2l
-> @@ -9,6 +9,20 @@ config R9A07G044L
->   	help
->   	  Enable support for the Renesas R9A07G044L (RZ/G2L) SoC.
->   
-> +choice
-> +	prompt "Renesas RZ/G2L Family Board selection"
-> +	default TARGET_RZG2L_SMARC_EVK
-> +
-> +config TARGET_RZG2L_SMARC_EVK
-> +	bool "Renesas RZ/G2L SMARC EVK"
-> +	imply R9A07G044L
-> +	help
-> +	  Enable support for the RZ/G2L SMARC evaluation board.
-> +
-> +source "board/renesas/rzg2l/Kconfig"
-> +
-> +endchoice
-> +
->   config MULTI_DTB_FIT_UNCOMPRESS_SZ
->   	default 0x80000 if TARGET_RZG2L_SMARC_EVK
->   
-> diff --git a/arch/arm/mach-rmobile/memmap-rzg2l.c b/arch/arm/mach-rmobile/memmap-rzg2l.c
-> index d0509424fb73..a08d0ea08fc0 100644
-> --- a/arch/arm/mach-rmobile/memmap-rzg2l.c
-> +++ b/arch/arm/mach-rmobile/memmap-rzg2l.c
-> @@ -113,3 +113,15 @@ void enable_caches(void)
->   
->   	dcache_enable();
->   }
-> +
-> +int dram_init(void)
-> +{
-> +	return fdtdec_setup_mem_size_base();
-> +}
-> +
-> +int dram_init_banksize(void)
-> +{
-> +	fdtdec_setup_memory_banksize();
-> +
-> +	return 0;
-> +}
+From: Fabio Estevam <festevam@denx.de>
 
+Add USB0 OTG support.
 
-You could add this piece ^ in patch 17/19 already.
+Currently, the USB0 OTG nodes are not enabled in the Linux kernel
+devicetree.
 
-[...]
+For this reason, enable the USB0 OTG nodes inside imx8mp-evk-u-boot.dtsi
+for now.
 
-> diff --git a/board/renesas/rzg2l/rzg2l.c b/board/renesas/rzg2l/rzg2l.c
-> new file mode 100644
-> index 000000000000..5b919f0b495a
+Also select several useful options such as USB gadget and fastboot.
 
-[...]
+Tested by running "ums 0 mmc 2".
 
-> +int ft_board_setup(void *blob, struct bd_info *bd)
-> +{
-> +	return 0;
-> +}
-> +
-> +int __weak board_init(void)
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ arch/arm/dts/imx8mp-evk-u-boot.dtsi | 14 ++++++++++++++
+ configs/imx8mp_evk_defconfig        | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 43 insertions(+)
 
-This one shouldn't be __weak anymore, DTTO for the reset_cpu().
-The board specific functions are the final ones.
+diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
+index 6784ed2e7c..43f13a9c22 100644
+--- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
+@@ -111,6 +111,20 @@
+ 	bootph-pre-ram;
+ };
+ 
++&usb3_phy0 {
++	status = "okay";
++};
++
++&usb3_0 {
++	status = "okay";
++};
++
++&usb_dwc3_0 {
++	pinctrl-names = "default";
++	dr_mode = "peripheral";
++	status = "okay";
++};
++
+ &usdhc1 {
+ 	bootph-pre-ram;
+ };
+diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
+index da1f5d1ad2..88ec41a196 100644
+--- a/configs/imx8mp_evk_defconfig
++++ b/configs/imx8mp_evk_defconfig
+@@ -59,6 +59,9 @@ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_SDP=y
++CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_EXT4_WRITE=y
+@@ -74,6 +77,14 @@ CONFIG_ETHPRIME="eth1"
+ CONFIG_SPL_DM=y
+ CONFIG_CLK_COMPOSITE_CCF=y
+ CONFIG_CLK_IMX8MP=y
++CONFIG_USB_FUNCTION_FASTBOOT=y
++CONFIG_FASTBOOT_BUF_ADDR=0x42800000
++CONFIG_FASTBOOT_BUF_SIZE=0x20000000
++CONFIG_FASTBOOT_FLASH=y
++CONFIG_FASTBOOT_UUU_SUPPORT=y
++CONFIG_FASTBOOT_FLASH_MMC_DEV=2
++CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
++CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_PCA953X=y
+ CONFIG_DM_I2C=y
+@@ -98,6 +109,9 @@ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
+ CONFIG_SPL_POWER_LEGACY=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_IMX8M_POWER_DOMAIN=y
++CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
+ CONFIG_POWER_PCA9450=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+@@ -109,4 +123,19 @@ CONFIG_SYSRESET=y
+ CONFIG_SPL_SYSRESET=y
+ CONFIG_SYSRESET_PSCI=y
+ CONFIG_SYSRESET_WATCHDOG=y
++CONFIG_USB=y
++# CONFIG_SPL_DM_USB is not set
++CONFIG_DM_USB_GADGET=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_XHCI_DWC3=y
++CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
++CONFIG_USB_EHCI_HCD=y
++# CONFIG_USB_EHCI_MX7 is not set
++CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="FSL"
++CONFIG_USB_GADGET_VENDOR_NUM=0x0525
++CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
++CONFIG_SDP_LOADADDR=0x0
+ CONFIG_IMX_WATCHDOG=y
+-- 
+2.34.1
 
-> +{
-> +	return 0;
-> +}
-> +
-> +void __weak reset_cpu(void)
-> +{
-> +	/*
-> +	 * TODO: Implement reset support once TrustedFirmware supports
-> +	 * the appropriate call.
-> +	 */
-> +}
-
-[...]
