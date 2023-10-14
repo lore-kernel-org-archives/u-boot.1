@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D086CDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:08:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5656CDB482
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:08:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A2D28691E;
-	Sun, 15 Oct 2023 08:32:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B150786EE4;
+	Sun, 15 Oct 2023 08:32:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Mjkgns3H";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="sLcYeNhI";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="m3473Gqo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6954F86F23; Sun, 15 Oct 2023 08:30:19 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2A5D286AB9; Sun, 15 Oct 2023 08:32:08 +0200 (CEST)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D09C986E47
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:28:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F394586F36
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:30:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-77575233633so252354185a.0
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:28:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697351323; x=1697956123; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=CvmZTk5YTi7gnPGDGI9sWYuu6pT46H5qOElQH1AQeug=;
- b=Mjkgns3HnmPcaL02hJ/z3BTUe1CC5bw52vNl52MuRVWRf3o4WwZCuZ5vrCuEgqtkDN
- z2FT6q68WZRPgXCZ+lbDU1AQM3WUgxY+a3FwVAYbIfN7WNa7Z7pL1+KoR6xj5DROA+D5
- sp+wNla9c8I2QszwiytG7iX0/aLYz5MJRBVOkjXVCcu37etSbvFxaW/P43gW/DMXgTRW
- 5jEKSynHC3D6VwEUurveS2kVMvuXbpOajQzJEZtpDjCQrFal6LqrLrKvRVr0qIIs+fHY
- dTUN4Vg59arNn8nWLDWEdx8EMkRS1xGP8NBuBixzndhGdgxKgVkRpp/XrPE9EZMqm8QL
- q+MA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697351323; x=1697956123;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CvmZTk5YTi7gnPGDGI9sWYuu6pT46H5qOElQH1AQeug=;
- b=aqB6gi1Gd3u+IFUU7B/X7cMk9YCi45TI7WlXfz9Cal5VR3YD3/hVTDqMykqkNnQNKI
- F9HghuP7l5EUfEeNXQ2qlJGnSu4Xvd2xy6ump+NBXxuxkV1wCsJZFR0ynseiS96v6XhD
- nkU/qXYzv6dcZdMeFzEAVXmwxeMHILtqHIm1nPxrSDOt2E2FnXySViSnXlaCZbq85u7E
- F31UIU+DZqeDdCUxT9UIkVK2s5cYxgaomsJSNu66W17IICL0fTGKiXmnMYC2vn+VFhfD
- tOO8nG+rSzSmiPuTyVMk/oiJAPKEmumUa0xpt8xLk4k72EchYU3jKwp7/xcqMyCxDrIK
- 5bWA==
-X-Gm-Message-State: AOJu0YyREyZBZ+k4pwDDPGfCDN1g3w4iwo0WQIbs8Gkl/bLsxdiR/kiX
- 28dh2Ohgi5T1AmNmUWr1ic93Rk0t8wKD0Q==
-X-Google-Smtp-Source: AGHT+IH6aSTcniFzB/zHnyUqYUT70MXhrk+biwAReg3qjOncf87Aoq5yOMDc78r5LKEMJNfBtVnE5Q==
-X-Received: by 2002:a05:620a:7e9:b0:773:b2b1:6f62 with SMTP id
- k9-20020a05620a07e900b00773b2b16f62mr28220584qkk.34.1697318655200; 
- Sat, 14 Oct 2023 14:24:15 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- m15-20020ae9e70f000000b007742218dc42sm1726212qka.119.2023.10.14.14.24.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Oct 2023 14:24:01 -0700 (PDT)
-Message-ID: <e5d6293e-d855-247f-4b70-eaaecfb7f651@gmail.com>
-Date: Sat, 14 Oct 2023 17:24:01 -0400
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4S7DZq3TCBz9sd5;
+ Sat, 14 Oct 2023 21:53:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697313219;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JP1GpKmn2UepVBmNm22qYZVUpbgdUhEUUbupyqgVQOI=;
+ b=sLcYeNhIqGgYijOUt0lEogfSn4PbYlMqhST8vQVdeYB5FWR5fW3wJfIiUKAlfJARnQWzqf
+ SB/m8ibvOKEKkIZNKT3Etr3YoRhWkGrp0Kkyxl2TaedEg9hsXzEWTW0RStKWr4qQYVWeEM
+ AuFVzjC7odGRWdty18apo3SoXjYYQLdRD4jq5kjxl34P+5M8KH5CcdhP/w8XQUYBqXRLN4
+ Em1D4bp/RcC/p0Tz/SuxKO8lnSe04wFAqd/tpnA/nsg5mN4hJMpyR1MGRdFvB4IgMevxeG
+ nnSoiQBx5iP1Ra/GoC380MwefQabCjbSdH6RojRYQ0wRraZm0cN0pAj7RNWwbQ==
+Message-ID: <f1a825ff-a6e9-4b53-b270-ccaf42bc1250@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697313217;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=JP1GpKmn2UepVBmNm22qYZVUpbgdUhEUUbupyqgVQOI=;
+ b=m3473GqoW5ybWTIAx5OPwncOQpwyGmmQ4Vl0BpSAsEs1WGC1pJkwrVsKH903WbZ4LVCPeb
+ wz29SbTpuJa/9cq91zKBW33gWRspQohf5eApyaiVzWq4a5MX+xbUKWNx16Ym7kzkIJWZQ6
+ N6Bv9NJQh3CBOfKoh6GXvp0w6BM7GYtbhqdvueOCHakXFi9o8zE0DwFVWZMMYl5ZxB2HIT
+ NxV1e5LUmKgOT3wpS6lsbjnoB0uTzkZdMwGmY4pw+smkuBOQCqmedsJbmt8uPxfuly5t3a
+ nnU4KbJ6ifZMLhJLgYC2/VS3xGPebwh3ICZdoNO2GiWC47iwZMoLCrjAne3I2w==
+Date: Sat, 14 Oct 2023 21:53:35 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2 12/29] fs: Disable sandbox filesystem in SPL
+Subject: Re: [PATCH v2 12/19] serial: sh: Add RZ/G2L SCIF support
 Content-Language: en-US
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>
-References: <20231014204805.439009-1-seanga2@gmail.com>
- <20231014204805.439009-13-seanga2@gmail.com>
- <4D6EDFC2-8A1D-406F-A492-3F1715C23731@gmx.de>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <4D6EDFC2-8A1D-406F-A492-3F1715C23731@gmx.de>
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
+ <20231009164645.164464-13-paul.barker.ct@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20231009164645.164464-13-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 658626fa3bd1e5822a2
+X-MBO-RS-META: ica8xrrouuusarn7bu64a48hca4f4pzk
+X-Rspamd-Queue-Id: 4S7DZq3TCBz9sd5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,43 +93,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/14/23 17:14, Heinrich Schuchardt wrote:
+On 10/9/23 18:46, Paul Barker wrote:
+> Extend the existing driver to support the SCIF serial ports on the
+> Renesas RZ/G2L (R9A07G044) SoC. This also requires us to ensure that the
+> relevant reset signal is de-asserted before we try to talk to the SCIF
+> module.
 > 
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> ---
+> v1->v2:
+>    * Moved handle_error() changes out to a separate patch earlier in the
+>      series.
+>    * Unconditionally de-assert the module reset during probe.
 > 
-> Am 14. Oktober 2023 22:47:48 MESZ schrieb Sean Anderson <seanga2@gmail.com>:
->  >Don't bother compiling the sandbox filesystem in SPL for now, as it is not
->  >needed.
->  >
->  >Signed-off-by: Sean Anderson <seanga2@gmail.com>
->  >---
->  >
->  >Changes in v2:
->  >- Disable sandbox filesystem in SPL instead of compiling it in
->  >
->  > fs/fs.c | 2 +-
->  > 1 file changed, 1 insertion(+), 1 deletion(-)
->  >
->  >diff --git a/fs/fs.c b/fs/fs.c
->  >index cfc781bbb8d..4cb4310c9cc 100644
->  >--- a/fs/fs.c
->  >+++ b/fs/fs.c
->  >@@ -237,7 +237,7 @@ static struct fstype_info fstypes[] = {
->  > .mkdir = fs_mkdir_unsupported,
->  > },
->  > #endif
->  >-#ifdef CONFIG_SANDBOX
->  >+#if IS_ENABLED(CONFIG_SANDBOX) && !IS_ENABLED(CONFIG_SPL_BUILD)
+>   arch/arm/mach-rmobile/Kconfig |  1 +
+>   drivers/serial/serial_sh.c    | 17 +++++++++++++++++
+>   drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
+>   3 files changed, 36 insertions(+), 1 deletion(-)
 > 
-> Why do would you disable the sandbox file system in SPL for CONFIG_SANDBOX_SPL=y?
+> diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
+> index c30ff2caad17..c421181c89cf 100644
+> --- a/arch/arm/mach-rmobile/Kconfig
+> +++ b/arch/arm/mach-rmobile/Kconfig
+> @@ -77,6 +77,7 @@ config RZG2L
+>   	imply MULTI_DTB_FIT_USER_DEFINED_AREA
+>   	imply PINCTRL_RZG2L
+>   	imply RENESAS_SDHI
+> +	imply SCIF_CONSOLE
+>   	imply SYS_MALLOC_F
+>   	help
+>   	  Enable support for the Renesas RZ/G2L family of SoCs. Currently
+> diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
+> index 2b650d458e71..6ea8da34d434 100644
+> --- a/drivers/serial/serial_sh.c
+> +++ b/drivers/serial/serial_sh.c
+> @@ -17,6 +17,8 @@
+>   #include <linux/compiler.h>
+>   #include <dm/platform_data/serial_sh.h>
+>   #include <linux/delay.h>
+> +#include <dm/device_compat.h>
+> +#include <reset.h>
+>   #include "serial_sh.h"
+>   
+>   DECLARE_GLOBAL_DATA_PTR;
+> @@ -199,12 +201,26 @@ static int sh_serial_probe(struct udevice *dev)
+>   {
+>   	struct sh_serial_plat *plat = dev_get_plat(dev);
+>   	struct uart_port *priv = dev_get_priv(dev);
+> +	struct reset_ctl rst;
+> +	int ret;
+>   
+>   	priv->membase	= (unsigned char *)plat->base;
+>   	priv->mapbase	= plat->base;
+>   	priv->type	= plat->type;
+>   	priv->clk_mode	= plat->clk_mode;
+>   
+> +	ret = reset_get_by_index(dev, 0, &rst);
+> +	if (ret < 0) {
+> +		dev_err(dev, "failed to get reset line\n");
+> +		return ret;
+> +	}
+> +
+> +	ret = reset_deassert(&rst);
+> +	if (ret < 0) {
+> +		dev_err(dev, "failed to de-assert reset line\n");
+> +		return ret;
+> +	}
+> +
+>   	sh_serial_init_generic(priv);
+>   
+>   	return 0;
+> @@ -223,6 +239,7 @@ static const struct udevice_id sh_serial_id[] ={
+>   	{.compatible = "renesas,scif", .data = PORT_SCIF},
+>   	{.compatible = "renesas,scifa", .data = PORT_SCIFA},
 
-It was never enabled in the first place, since we never had fs.c compiled in SPL
-before. This just fixes linking.
+Please keep the list sorted, the entry should be here.
 
-> I cannot see that this is necessary to enable the unit tests you are striving for. Instead we should extend the SPL unit tests to sandbox_spl_defconfig in the long run.
+>   	{.compatible = "renesas,hscif", .data = PORT_HSCIF},
+> +	{.compatible = "renesas,scif-r9a07g044", .data = PORT_SCIFA},
+>   	{}
+>   };
 
-The purpose of the sandbox filesystem is to test routines which use the filesystem
-API in U-Boot. However, there are very few which do so in SPL. SPL_FS_LOADER is the
-only one I know of off the top of my head. However, FS_LOADER is tested in U-Boot
-proper. I don't think there is a pressing need to enable the sandbox filesystem in SPL.
+With that fixed:
 
---Sean
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
