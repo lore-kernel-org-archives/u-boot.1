@@ -4,65 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 022D6CDB482
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:07:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4CD7CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:25:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 416CC86EF4;
-	Sun, 15 Oct 2023 08:00:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 090A78657B;
+	Sun, 15 Oct 2023 08:25:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="QdvTiwqf";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E10EC867EF; Sun, 15 Oct 2023 07:59:15 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B816A869D1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 07:56:39 +0200 (CEST)
+ id D6EE486529; Sun, 15 Oct 2023 08:04:38 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 4777586E22
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:03:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=eb25=F5=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1697349395;
- bh=3i/Rrxs2i7qgoMRvubA/mexjP61e7NLeQmrB5tUscRc=;
- b=QdvTiwqfcwm38ZxKC2E6VjjGyT7WsaaMpAfQpkuYmAlrH9tI1iMmPdrxZTNj+A+ijDuB6wfdy
- xG+OKyRkBptmWuWr9/9hQKPKGOvsA5Nd5oJgyxa5qN0o5IOvd4A/eotOE32mGWz3V3yI6/YUFt3
- 0iP8fvFkwZFuSEUoSQEbNC/ZKKL7mGZUKDGJ0PLXrWfsfQ/AJIjLOPc4H84ejVKDBvbelBIhsuE
- p8RbW84J5f/6iHzk0OMEmmhADPRRbhCp7zsswOaGzpD8zf/awvrhZhmkT48wsTZ50aichlFL0Bv
- +lf5xCJz9YSCRW8peo0XIzRlNq0aISXgHFky11EzesFw==
-Message-ID: <c4fd9d1b-d938-e00c-30f7-331713bf85f8@kwiboo.se>
-Date: Sat, 14 Oct 2023 21:12:29 +0200
+ dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E39D2F4;
+ Sat, 14 Oct 2023 10:04:25 -0700 (PDT)
+Received: from localhost.localdomain (unknown [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 37AA83F5A1;
+ Sat, 14 Oct 2023 10:03:44 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>
+Subject: [PATCH] sunxi: H616: DRAM: refactor mctl_phy_configure_odt()
+Date: Sat, 14 Oct 2023 18:02:36 +0100
+Message-Id: <20231014170236.16211-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.35.8
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH 3/4] rockchip: rk3588-rock-5b: Sync USB3 nodes from
- mainline linux patches
-Content-Language: en-US
-To: Christopher Obbard <chris.obbard@collabora.com>, Kever Yang
- <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, Philipp
- Tomsich <philipp.tomsich@vrull.eu>, Eugen Hristev
- <eugen.hristev@collabora.com>
-Cc: u-boot@lists.denx.de, Sebastian Reichel
- <sebastian.reichel@collabora.com>, Marek Vasut <marex@denx.de>
-References: <20231010222344.3436526-1-jonas@kwiboo.se>
- <20231010222344.3436526-4-jonas@kwiboo.se>
- <5f8632de8eb8d1f3a31656e1c65ea30c70beb01a.camel@collabora.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <5f8632de8eb8d1f3a31656e1c65ea30c70beb01a.camel@collabora.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 652ae821048a763a5fcc82ad
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,47 +52,124 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2023-10-11 18:52, Christopher Obbard wrote:
-> Hi Jonas,
-> 
-> On Tue, 2023-10-10 at 22:23 +0000, Jonas Karlman wrote:
->> The device tree for rk3588 and rock-5b contain usb3 nodes that have
->> deviated too much from current state of submitted mainline linux usb3
->> patches, see [1].
->>
->> Sync usb3 related nodes from latest patches and collaboras rk3588 tree
->> so that dwc3-generic driver can be updated to include support for the
->> rockchip,rk3588-dwc3 compatible.
->>
->> [1] https://lore.kernel.org/lkml/20231009172129.43568-1-sebastian.reichel@collabora.com/
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> 
-> These will be upstream shortly. Maybe we can wait until they appear in Heiko's tree?
+The original H616 DDR3 ODT configuration code wrote board specific values
+into a sequence of paired registers.
+For LPDDR3 support we needed to special-case one group of registers,
+because for that DRAM type we need to write 0 into the lower register of
+each pair. That already made the code less readable.
 
-My understanding was that the binding and only one usb3 node have been
-submitted so far. So may take some time until all usb3 nodes fully reach
-Heiko's tree.
+LPDDR4 support will make things even messier, so let's refactor that
+code now: We allow to write different values into the lower and upper
+half of each pair. The masking is moved into a macro, and used in each
+write statement.
 
-I think we have two options for usb3 nodes, 1. remove them completely
-until they are fully merged in linux, or 2. sync them to current pending
-state and later sync to final state once they are fully merged in linux.
+The effect is not as obvious yet, as we don't need the full flexibility at
+the moment, but the motivation will become clearer with LPDDR4 support.
 
-With this patch I went with option 2, can instead include a patch that
-remove current usb3 nodes if that is preferred?
+The generated binary is identical with and without the patch.
 
-Regards,
-Jonas
+Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+---
+ arch/arm/mach-sunxi/dram_sun50i_h616.c | 84 ++++++++++----------------
+ 1 file changed, 31 insertions(+), 53 deletions(-)
 
-> 
->> ---
->> Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
->> ---
->>  arch/arm/dts/rk3588-rock-5b-u-boot.dtsi | 148 +++++++-----------------
->>  arch/arm/dts/rk3588-u-boot.dtsi         |  39 +++----
->>  arch/arm/dts/rk3588s-u-boot.dtsi        |  68 ++++++-----
->>  configs/rock5b-rk3588_defconfig         |   1 -
->>  4 files changed, 99 insertions(+), 157 deletions(-)
->>
+diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+index 7e580b62dca..ba5659d4094 100644
+--- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
++++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+@@ -241,61 +241,39 @@ static const u8 phy_init[] = {
+ #endif
+ };
+ 
++#define MASK_BYTE(reg, nr) (((reg) >> ((nr) * 8)) & 0x1f)
+ static void mctl_phy_configure_odt(const struct dram_para *para)
+ {
+-	unsigned int val;
+-
+-	val = para->dx_dri & 0x1f;
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x388);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x38c);
+-
+-	val = (para->dx_dri >> 8) & 0x1f;
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x3c8);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x3cc);
+-
+-	val = (para->dx_dri >> 16) & 0x1f;
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x408);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x40c);
+-
+-	val = (para->dx_dri >> 24) & 0x1f;
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x448);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x44c);
+-
+-	val = para->ca_dri & 0x1f;
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x340);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x344);
+-
+-	val = (para->ca_dri >> 8) & 0x1f;
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x348);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x34c);
+-
+-	val = para->dx_odt & 0x1f;
+-	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
+-		writel_relaxed(0, SUNXI_DRAM_PHY0_BASE + 0x380);
+-	else
+-		writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x380);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x384);
+-
+-	val = (para->dx_odt >> 8) & 0x1f;
+-	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
+-		writel_relaxed(0, SUNXI_DRAM_PHY0_BASE + 0x3c0);
+-	else
+-		writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x3c0);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x3c4);
+-
+-	val = (para->dx_odt >> 16) & 0x1f;
+-	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
+-		writel_relaxed(0, SUNXI_DRAM_PHY0_BASE + 0x400);
+-	else
+-		writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x400);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x404);
+-
+-	val = (para->dx_odt >> 24) & 0x1f;
+-	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
+-		writel_relaxed(0, SUNXI_DRAM_PHY0_BASE + 0x440);
+-	else
+-		writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x440);
+-	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x444);
++	uint32_t val_lo, val_hi;
++
++	val_lo = para->dx_dri;
++	val_hi = para->dx_dri;
++	writel_relaxed(MASK_BYTE(val_lo, 0), SUNXI_DRAM_PHY0_BASE + 0x388);
++	writel_relaxed(MASK_BYTE(val_hi, 0), SUNXI_DRAM_PHY0_BASE + 0x38c);
++	writel_relaxed(MASK_BYTE(val_lo, 1), SUNXI_DRAM_PHY0_BASE + 0x3c8);
++	writel_relaxed(MASK_BYTE(val_hi, 1), SUNXI_DRAM_PHY0_BASE + 0x3cc);
++	writel_relaxed(MASK_BYTE(val_lo, 2), SUNXI_DRAM_PHY0_BASE + 0x408);
++	writel_relaxed(MASK_BYTE(val_hi, 2), SUNXI_DRAM_PHY0_BASE + 0x40c);
++	writel_relaxed(MASK_BYTE(val_lo, 3), SUNXI_DRAM_PHY0_BASE + 0x448);
++	writel_relaxed(MASK_BYTE(val_hi, 3), SUNXI_DRAM_PHY0_BASE + 0x44c);
++
++	val_lo = para->ca_dri;
++	val_hi = para->ca_dri;
++	writel_relaxed(MASK_BYTE(val_lo, 0), SUNXI_DRAM_PHY0_BASE + 0x340);
++	writel_relaxed(MASK_BYTE(val_hi, 0), SUNXI_DRAM_PHY0_BASE + 0x344);
++	writel_relaxed(MASK_BYTE(val_lo, 1), SUNXI_DRAM_PHY0_BASE + 0x348);
++	writel_relaxed(MASK_BYTE(val_hi, 1), SUNXI_DRAM_PHY0_BASE + 0x34c);
++
++	val_lo = (para->type == SUNXI_DRAM_TYPE_LPDDR3) ? 0 : para->dx_odt;
++	val_hi = para->dx_odt;
++	writel_relaxed(MASK_BYTE(val_lo, 0), SUNXI_DRAM_PHY0_BASE + 0x380);
++	writel_relaxed(MASK_BYTE(val_hi, 0), SUNXI_DRAM_PHY0_BASE + 0x384);
++	writel_relaxed(MASK_BYTE(val_lo, 1), SUNXI_DRAM_PHY0_BASE + 0x3c0);
++	writel_relaxed(MASK_BYTE(val_hi, 1), SUNXI_DRAM_PHY0_BASE + 0x3c4);
++	writel_relaxed(MASK_BYTE(val_lo, 2), SUNXI_DRAM_PHY0_BASE + 0x400);
++	writel_relaxed(MASK_BYTE(val_hi, 2), SUNXI_DRAM_PHY0_BASE + 0x404);
++	writel_relaxed(MASK_BYTE(val_lo, 3), SUNXI_DRAM_PHY0_BASE + 0x440);
++	writel_relaxed(MASK_BYTE(val_hi, 3), SUNXI_DRAM_PHY0_BASE + 0x444);
+ 
+ 	dmb();
+ }
+-- 
+2.35.8
 
-[...]
