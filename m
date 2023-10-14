@@ -4,75 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55E6ACDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:24:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC81ACDB482
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:24:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1F2186ED1;
-	Sun, 15 Oct 2023 08:42:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C7FE886B68;
+	Sun, 15 Oct 2023 08:45:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XOBp+dnj";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="L9MPqYTZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Me4G+9NX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6BFC86E47; Sun, 15 Oct 2023 08:41:57 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F1E1986E47; Sun, 15 Oct 2023 08:42:46 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9062586F5E
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:41:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B74DA86F68
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:41:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S7Drj2Bnjz9sSP;
- Sat, 14 Oct 2023 22:05:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697313941;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=413MB3rGXvWTw+2LNuClV50YsSeuBHoSs2GoLaOZX4E=;
- b=XOBp+dnjkH6yxEbwHNB8gtTQX1+CUExhBTZtaJGkyqH94zDn/VZQwJK4UaHsvp90DtGcwo
- oATES4Zt1MukRvJ6uYKkyXhJ4slweLAGGOBaO3LCWCCA/mbql1seLW7MH6C1MD4X/AJAYc
- F9GJcYoW3sdDxcLKiP0Cl+me+LB7gX+LFuf+jgXrhOHw+kRrQSaGp6AKFXv3O+b7eVMFck
- KcGYQPLgw/yxF1NKdZY1T5X8AYLlfY4zCIHgXd+6dGPoqvYQ6knbSPB9+yDqTuSCECErxn
- N8WlY7yxODTYg+POCdxEvtYDaQhB9+hS8UX9Mxjunk7erzOZpsmdqN60zSvoBA==
-Message-ID: <8fed1a92-ccbf-43c7-ab89-840d0b73f3be@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697313939;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=413MB3rGXvWTw+2LNuClV50YsSeuBHoSs2GoLaOZX4E=;
- b=L9MPqYTZwNAGheV8kVVx6tnJjNKD5KDU+Q835vj1ZcVcoVCBxexVea4Idv2E1PA0WhxVVn
- SyUXTqxt9Osgodl2aGaAChhZBffwBHSIiL7Pde/wqozTt6oH5Ei3g4t9/egkkXXfifAQJR
- Rz9S0zbmlg8CU2Vscc6wfNeq21fSPfPtT+M0x6UB9VwJa67Qy1xUvMXe6jbGELnDHKPXNz
- X9VWwSYkhXQu+2Sz31cdSbDW6nLAzuXM7Dy+2N81JVRgXkfNSvwbFxBVte8uDdN9YOPwKK
- Je1CeD1aKfxezBTZo95SVcW9OtLFf0l1LRkFdr2taDGSLTZLbiSMeewxwVhvTA==
-Date: Sat, 14 Oct 2023 22:05:37 +0200
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3b0dcbf3672so2111474b6e.1
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:41:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697352117; x=1697956917; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=0XUgE0fj2gUC6mx0oCpXiSIOPuGkN6snCJqnAu76lZE=;
+ b=Me4G+9NXv0E0uOra0uPgB01999ofu7jfQTcBzEcfQHa0QMKlcT/jhpmFu2KWI9Rvkz
+ ZTvnMUjUB5JO7GpHS/2zACQLskaS1/JvvvEC/SQTLfdtGQENEQtOpsslpkIwVmWgik/R
+ 7xW9/Ym0OoNPMxMv2u7lHhtpjDJqpTL3WcAEFFM0/OUiePgZ3Mwk/tAK3k9xv1epd/rZ
+ MWJvYzfTutj9pe2tMnypOyZ69Zxpe1AvG7ssNjTvqmYaL4bk72/1/go3gvpyhEJJC8MS
+ lVILHSAjfqVXlActiTtw8molNap9033jYEt7B1iqXOU1folyk5gET6VgtUgwaR1dUjQK
+ lbew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697352117; x=1697956917;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=0XUgE0fj2gUC6mx0oCpXiSIOPuGkN6snCJqnAu76lZE=;
+ b=bvv88SDaEqSYRrVLm7F80aNMOuEYuXfOHaiKnmYzOXqwNCPqr+FRmiTXEPvyXz7y69
+ zfZ04XBclNfkhvRQhPw8Zihbxo/1hMz64suI0zg9UD9X/ez9M7OEGnUDWmYIC1IXzOH2
+ gp7GlHGV4fR4MCo2AzNAH7GxZgkcnGc5cDexr5u4Iz6NDnQFKFVhc0qi7op7BP9UwG6T
+ hVdQCuY0bcVVC8FcAdcYR2TWCgnO2a3PJp5KZ6NG4PFpDw6IadV1RsbqhcbVWQhVGGjO
+ jMCDYKqe9LSuFSLFRGDljfSba7rzfc0rvTY1eLahZjx2LioCyGXTcTgHm+YgiVHKKAz/
+ o5TQ==
+X-Gm-Message-State: AOJu0YyVTcx9ClLIItXmn6b5SHKtkFfggJ4SRrVCE/KyFgxDq1PcP2Xz
+ RolaWTGOqfGVIVsOwxLtrRT08qUTv4gqGw==
+X-Google-Smtp-Source: AGHT+IH/AraGmfqvX9IH2UQWmTE6CQvgliw/w42xXRZTtMdFzip5IyRWX0L4jCc3gjjzJftHKwCrlw==
+X-Received: by 2002:a05:620a:4048:b0:775:cf5e:a66d with SMTP id
+ i8-20020a05620a404800b00775cf5ea66dmr37035821qko.24.1697318876463; 
+ Sat, 14 Oct 2023 14:27:56 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ c1-20020ae9e201000000b0076d25b11b62sm1754310qkc.38.2023.10.14.14.27.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 14 Oct 2023 14:27:56 -0700 (PDT)
+Message-ID: <f3fa804c-0c6b-f31d-6bd6-d5e3408a3861@gmail.com>
+Date: Sat, 14 Oct 2023 17:27:55 -0400
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] doc: Migrate Renesas board docs to rst
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v2 17/29] net: bootp: Fall back to BOOTP from DHCP when
+ unit testing
 Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ralph Siemsen <ralph.siemsen@linaro.org>
-References: <20231009111136.79646-1-paul.barker.ct@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231009111136.79646-1-paul.barker.ct@bp.renesas.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+References: <20231014204805.439009-1-seanga2@gmail.com>
+ <20231014204805.439009-18-seanga2@gmail.com>
+ <1365B46D-6CCA-4064-ABC1-97CF581564C7@gmx.de>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <1365B46D-6CCA-4064-ABC1-97CF581564C7@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: d7060fda31131fcee79
-X-MBO-RS-META: c3uu8dt5ih8ps8bazp7fg3914dcgztzu
-X-Rspamd-Queue-Id: 4S7Drj2Bnjz9sSP
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,26 +99,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/9/23 13:11, Paul Barker wrote:
-> Some of the information in README.rmobile is obsolete, references
-> defconfigs which no longer exist in u-boot or has broken links. The
-> information which is still relevant is moved into the reStructuredText
-> documentation under `doc/board/renesas`, and `doc/README.rmobile` is
-> dropped.
+On 10/14/23 17:22, Heinrich Schuchardt wrote:
 > 
-> The list of boards in `doc/board/renesas` is converted into a table so
-> it's easier to see which defconfig to use. The list is expanded based on
-> reviewing the current u-boot code and the contents of the eLinux wiki
-> [1] [2].
 > 
-> [1]: https://elinux.org/R-Car
-> [2]: https://elinux.org/RZ-G
+> Am 14. Oktober 2023 22:47:53 MESZ schrieb Sean Anderson <seanga2@gmail.com>:
+>> If we sent a DHCP packet and get a BOOTP response from the server, we
+>> shouldn't try to send a DHCPREQUEST packet, since it won't be DHCPACKed.
+>> Transition straight to BIND. This is only enabled for UNIT_TEST to avoid
+>> bloat, since I suspect the number of BOOTP servers in the wild is
+>> vanishingly small.
+>>
+>> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+>> Reviewed-by: Simon Glass <sjg@chromium.org>
+>> ---
+>>
+>> (no changes since v1)
+>>
+>> net/bootp.c | 6 ++++++
+>> 1 file changed, 6 insertions(+)
+>>
+>> diff --git a/net/bootp.c b/net/bootp.c
+>> index 2053cce88c6..7b0f45e18a9 100644
+>> --- a/net/bootp.c
+>> +++ b/net/bootp.c
+>> @@ -1073,6 +1073,11 @@ static void dhcp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
+>> 			    CONFIG_SYS_BOOTFILE_PREFIX,
+>> 			    strlen(CONFIG_SYS_BOOTFILE_PREFIX)) == 0) {
+>> #endif	/* CONFIG_SYS_BOOTFILE_PREFIX */
+>> +			if (CONFIG_IS_ENABLED(UNIT_TEST) &&
+>> +			    dhcp_message_type((u8 *)bp->bp_vend) == -1) {
 > 
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> As written before, please, do not add unit test specific code paths.
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+While it is convenient for tests to implement a BOOTP server, there are
+effectively no BOOTP servers in the wild. However, BOOTP is commonly enabled
+in U-Boot. In an effort to avoid growing most U-Boots for testing purposes,
+I enabled this path just for unit tests. That said, only 6 boards enable SPL_ETH,
+so maybe it is not too bad.
 
--- 
-Best regards,
-Marek Vasut
-
+--Sean
