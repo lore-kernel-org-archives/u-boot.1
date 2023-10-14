@@ -4,74 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE76CCDB482
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:38:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3166BCDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:39:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E76286CF9;
-	Sun, 15 Oct 2023 09:04:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 34A3786FAE;
+	Sun, 15 Oct 2023 09:04:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OGw7zrbZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JpVgjZZg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5744286F9F; Sun, 15 Oct 2023 09:04:15 +0200 (CEST)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id 53E7086FBF; Sun, 15 Oct 2023 09:02:25 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0970686FBC
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:02:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4091A86F9D
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:00:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-57bca5b9b0aso1865507eaf.3
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:02:24 -0700 (PDT)
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-53e2dc8fa02so4317528a12.2
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697353343; x=1697958143; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Zim9k0ZneoNtxvh41Boqy8R1/zGCsYn0qtRpTVPi5/g=;
- b=OGw7zrbZl5gY75B5UpdPvARWQ37P8uMQVN7pr9H+K2/kObVaykBPfr1ir/hPunfZCv
- 0kIKU2gsFGmBh/FYdwwpaUXbbt61Spm1w43gGZIQMhvJJWrsTBlu4zwrPNsCZDA+VZx7
- a65KPIDQsaGninpJ7b/wt3JrJS2BmX9+UceVM=
+ d=chromium.org; s=google; t=1697353249; x=1697958049; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ui+cKwrxnW53vKgV6U6hAAsXUY12pw3hfzb+8Hio6gY=;
+ b=JpVgjZZgU1gMBanAfDftM51glXp9td34TeNU8GtIk59PJ30p62zDKZ/KNuq6UToFgC
+ UAtkpg1NGqXCsYTu2N2+svFKOXS2TAsB0XxVIvP8Y4dli/9FEPbiETmqnnuX57VkZ7Xl
+ 8c2X3VgrPiaXVi9QGauG4qR7Ai9ZB/DyDzbg0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697353343; x=1697958143;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Zim9k0ZneoNtxvh41Boqy8R1/zGCsYn0qtRpTVPi5/g=;
- b=J2gWze2bWpp/NXoL6MiJowPr285/7qkjMB1nscMgKhGDaeltyMrsPEuEjs2j9svH+0
- O5UkBmT6ETbKm1Fk+jNu/1wYLTl3/zLiE8yn4KO+yXx4MlVyDCbV08HCJsXzodTzG71S
- IOip8UU0LTyqRTtPKgW1MZ6Uanizu/ivSO1W+ayLQ62xEwcXBVnBqP7qonLwjQRmUrNb
- vIEP9pEP2qYC0393wXNLxDXqQGno2wTnqcTua+K2YmcrwF2hgkolKfg11geynv6tu1fm
- OEPex0/nwGmpZTeeUjURHJfiSQMoQZnXe8esIAU53d5H14dZZXMsVkazCS0IEHvXUGPe
- StLw==
-X-Gm-Message-State: AOJu0YyXkaBf4cLjgf9UnrOp529E+loAPhLev9IKoFrNlbMvGW6/wOpO
- C2HUxTFC4mUrNSmppyCQclQHZSClphDbG63lsPbSow==
-X-Google-Smtp-Source: AGHT+IGc/W/BEgVorP4kqxeQTPDenQMwDvOHar10w807QMnVyv4lKHfQvArAPcyE4hV9UCyErdREyg==
-X-Received: by 2002:a05:6e02:1a0e:b0:352:6f88:9818 with SMTP id
- s14-20020a056e021a0e00b003526f889818mr35884115ild.11.1697337918662; 
- Sat, 14 Oct 2023 19:45:18 -0700 (PDT)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- v6-20020a92cd46000000b003497ced3fa1sm2462842ilq.29.2023.10.14.19.45.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Oct 2023 19:45:18 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 5/6] efi: Use the correct GUID for the SMBIOS table
-Date: Sat, 14 Oct 2023 20:45:07 -0600
-Message-ID: <20231015024511.3995580-6-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
-In-Reply-To: <20231015024511.3995580-1-sjg@chromium.org>
-References: <20231015024511.3995580-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1697353249; x=1697958049;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ui+cKwrxnW53vKgV6U6hAAsXUY12pw3hfzb+8Hio6gY=;
+ b=f7z4XSeWEmXOIjkPrxLm5Kub1uz1TWwr8ZwL3S+Ym5Fl5pBMzuOZMQRn/Hr+J4D0bT
+ 3Vpd6Gs9Kaww9Heh4/CcG/XO1OMKbE8Ax16/QLiE8KmFB602GTz6srRjCP4Q0/4e5S9v
+ c/eGsPIC9P9gMieMLpGExycuXkXbx/GkhOiy5ASuvWAnL+4prr50xzeiTj7V4A9wI64B
+ MbL2CLLGi9bMoKOr/NzbStM/fhbmlamh0vK7MwE7ddFvgl6zs7DsNesCbyHcNpx6V4Jb
+ 28jML5NpAJ74mh7hIPKsCtbXc1eoxdiLcJFpdROjHRIVcYNAXqvYIi/bvY+cuKJz1QGR
+ L7BA==
+X-Gm-Message-State: AOJu0Yx06zppTkrJ8GB6xBecWwVgTbh5L17chBusSyR9n9WXSAI8rH+w
+ aDTRD/OJiFVWcMLDX87PZO+6LPnUG6ZuF+8FuEsqvUux26VKUvR+FwA=
+X-Google-Smtp-Source: AGHT+IFjqjfLdDkRSlsKm3Kn5UMFkFGR2YpV3gsaEcF/QXsqe/YqWZVVVvD8MJXc9Zx/u2rX54ayvRC+zchOEnvWDRI=
+X-Received: by 2002:a17:906:144:b0:9ae:54c3:c627 with SMTP id
+ 4-20020a170906014400b009ae54c3c627mr24983475ejh.71.1697326519808; Sat, 14 Oct
+ 2023 16:35:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231014204805.439009-1-seanga2@gmail.com>
+ <20231014204805.439009-25-seanga2@gmail.com>
+In-Reply-To: <20231014204805.439009-25-seanga2@gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 14 Oct 2023 17:35:06 -0600
+Message-ID: <CAPnjgZ25a7uNVPW7tQ3g5LJ=LC4SWx-scGqAH6Xub5iUga2zrQ@mail.gmail.com>
+Subject: Re: [PATCH v2 24/29] test: spl: Add functions to create filesystems
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Harald Seiler <hws@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,76 +82,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-EFI does not use the 'anchor string' to determine the SMBIOS table
-version, instead preferring to have two separate GUIDs. Use the correct
-one, depending on the table version.
+On Sat, 14 Oct 2023 at 14:48, Sean Anderson <seanga2@gmail.com> wrote:
+>
+> Add some functions for creating fat/ext2 filesystems with a single file and
+> a test for them. Filesystems require block devices, and it is easiest to
+> just use MMC for this. To get an MMC, we must also pull in the test device
+> tree. SPL_TIMER is necessary for SPL_MMC, perhaps because it uses a timeout.
+>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> ---
+>
+> Changes in v2:
+> - Explicitly invalidate FAT block device cache before testing
+> - Remove unused dm.h include in spl_load.c
+> - Add note about why we enable SPL_TIMER
+> - Split off ext/-T changes into their own commits
+>
+>  configs/sandbox_noinst_defconfig |   7 +
+>  include/test/spl.h               |   3 +
+>  test/image/Kconfig               |  11 ++
+>  test/image/Makefile              |   1 +
+>  test/image/spl_load_fs.c         | 306 +++++++++++++++++++++++++++++++
+>  5 files changed, 328 insertions(+)
+>  create mode 100644 test/image/spl_load_fs.c
 
-Call unmap_system() to balance to the use of map_sysmem()
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
-Changes in v2:
-- Add a note about why unmap_system() is called
-
- include/efi_api.h           |  4 ++++
- lib/efi_loader/efi_smbios.c | 12 ++++++++++--
- 2 files changed, 14 insertions(+), 2 deletions(-)
-
-diff --git a/include/efi_api.h b/include/efi_api.h
-index 8f5ef5f680f3..1abac2ed7563 100644
---- a/include/efi_api.h
-+++ b/include/efi_api.h
-@@ -430,6 +430,10 @@ struct efi_runtime_services {
- 	EFI_GUID(0xeb9d2d31, 0x2d88, 0x11d3,  \
- 		 0x9a, 0x16, 0x00, 0x90, 0x27, 0x3f, 0xc1, 0x4d)
- 
-+#define SMBIOS3_TABLE_GUID \
-+	EFI_GUID(0xf2fd1544, 0x9794, 0x4a2c, \
-+		 0x99, 0x2e, 0xe5, 0xbb, 0xcf, 0x20, 0xe3, 0x94)
-+
- #define EFI_LOAD_FILE_PROTOCOL_GUID \
- 	EFI_GUID(0x56ec3091, 0x954c, 0x11d2, \
- 		 0x8e, 0x3f, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b)
-diff --git a/lib/efi_loader/efi_smbios.c b/lib/efi_loader/efi_smbios.c
-index 4ae4e4a7c236..80f38d78d877 100644
---- a/lib/efi_loader/efi_smbios.c
-+++ b/lib/efi_loader/efi_smbios.c
-@@ -15,6 +15,8 @@
- #include <smbios.h>
- #include <linux/sizes.h>
- 
-+const efi_guid_t smbios3_guid = SMBIOS3_TABLE_GUID;
-+
- enum {
- 	TABLE_SIZE	= SZ_4K,
- };
-@@ -26,8 +28,10 @@ enum {
-  */
- efi_status_t efi_smbios_register(void)
- {
-+	const efi_guid_t *guid;
- 	ulong addr;
- 	efi_status_t ret;
-+	void *buf;
- 
- 	addr = gd_smbios_start();
- 	if (!addr) {
-@@ -43,8 +47,12 @@ efi_status_t efi_smbios_register(void)
- 	log_debug("EFI using SMBIOS tables at %lx\n", addr);
- 
- 	/* Install SMBIOS information as configuration table */
--	return efi_install_configuration_table(&smbios_guid,
--					       map_sysmem(addr, 0));
-+	buf = map_sysmem(addr, 0);
-+	guid = !memcmp(buf, "_SM_", 4) ? &smbios_guid : &smbios3_guid;
-+	ret = efi_install_configuration_table(guid, buf);
-+	unmap_sysmem(buf);
-+
-+	return ret;
- }
- 
- static int install_smbios_table(void)
--- 
-2.42.0.655.g421f12c284-goog
-
+Reviewed-by: Simon Glass <sjg@chromium.org>
