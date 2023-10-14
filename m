@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3884CCDB482
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E975ECDB47E
 	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D75F86F34;
-	Sun, 15 Oct 2023 08:33:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 8302C86F20;
+	Sun, 15 Oct 2023 08:33:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Bw5zcwxj";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="eT8wDxIs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PPQJVCTu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF54F8691E; Sun, 15 Oct 2023 08:31:52 +0200 (CEST)
-Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org [80.241.56.152])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8190D86EF2; Sun, 15 Oct 2023 08:30:49 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3A1086F37
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:30:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C21B86F11
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:29:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4S7Db85LqTz9sdh;
- Sat, 14 Oct 2023 21:53:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697313236;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6UyjlHyrmaBfBXazfirkkRSqHcyQ20PeZSTLJZyaZI0=;
- b=Bw5zcwxjexjyUizjs+IMkS20xhjIWpXoXVBX0LSeL7Llv4EvJt9fITPz9l8RJlSfTbEkXU
- I6eCMqS6HWuo+lyA/cQJadOCFEvnKQSyctwpgKg6MKmks+i0Td6RhL1anFmjv8oNZt4gFE
- vbiyZ+849FL3sjnNbMnyjrqPqoX9uAEGM+XXc90bKpR8Nap4YG87U8bE+HwfqwU/gxIeUM
- jQM9W5BwCttMOY9/+tUT6dhkmU+hJaCGAco7CGel2W2izhIGE8eHjYjMP6dS++YlEGc7Fh
- 5MA9IhmTWmGnmPvoG3yXUxdSkKv2wWmMtzVl8Y9nLJXS1MLF8bUo9usRX9Iw0g==
-Message-ID: <4beeef07-6cdc-4f34-8ed1-5ba31c36f04c@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697313234;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6UyjlHyrmaBfBXazfirkkRSqHcyQ20PeZSTLJZyaZI0=;
- b=eT8wDxIs6jdBj3hHP1HmCOI4JJJiegsVrvY5ZQExVMevceXLmUpEljfVviqzodcJWtJrot
- BelVKH7sYUSdQadq7c7S6cTCLZXXQvNVesH6P00tNo1hGXQXijn9Lv+0F+93yKwX7UCoHW
- jnr0p5JWKYsxCZo3dcHaObhAWCr9BywDzvJQd+frlD3Hb5Md4SUZpFO6xy40g0IYKghAs9
- sj1zlO+h06alrikFmhM8zixfZ13wZwe6c+smQfqidvTo5mksjpcUgCpIHyrK75xBuIkLpx
- AOGKI1oZ9MljXi6BwfSzReaWuhyrO0IQDcWtck3DUJLwRJaE2TmLMPX901QejA==
-Date: Sat, 14 Oct 2023 21:53:53 +0200
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-66d264e67d8so10535536d6.1
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:29:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697351357; x=1697956157; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9C6u71drnjJHR44OU1ghdmvknOKdd2zKnAtSq9Vd/go=;
+ b=PPQJVCTupM/h7YDEBSCTeXPRTD4ZQKeKKZUoBe4MfWeJrdxX1XMY7mXuehK2fGFtEA
+ 902LF3trwW3NFgPdjvTTomnN3GcIkfpr51tiJXFrIvXAqKSccVwjue5UGCakpdD/4pD7
+ sPxxD4YRfiepV8rZW+BVP76CWCTADkd0/AcM01K6ClfJAzKEEPvkGQjuQco8l71nCmnL
+ fZ8qUZOXalICXS+wJgevmgNN5gaHd2UsQUvrtbZTjonwtYUaushA2fv+258QOU0G+oAZ
+ naqPcEtreHiXE1pPNZ76ofURrrE7hHejMjaFZG1jmsO/pEc6Gi2ZQSw/mbMjIiDl9rKX
+ xfHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697351357; x=1697956157;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9C6u71drnjJHR44OU1ghdmvknOKdd2zKnAtSq9Vd/go=;
+ b=k7HDbaza0JpTYf3QbzxZKmsgy2znPS/UNhoEGh0NLP+5y9TVwP4Qu6lEa3cPzDd815
+ F+OCV109I/jstsO+z0j2B5Z3erIYWhfGBmS7PPASa1slnPAJfhqXrK3g1TLgzTW/Lqt/
+ 4Cq5b4FkURaC/1eXZZOleDvVhIEsvA5NJzQfTDEmPJZKsEd6xI7D1K0Dw8KfkDHG7x6r
+ GL6LME3GDk5FPRYONy8hvAv1B+FHKdinOTeVKF9j3XKHArTWs/RxqZHlWaELMqih2YUk
+ NICYy1yI+vAC9QKXH4HE6cchaMoQsW2J5alZH9rgdGxhGFQD+uQS3jINIQdg6KXerPS8
+ auSg==
+X-Gm-Message-State: AOJu0YxvxY1hW8TYKF5fLTaeq1BOyuAcuAAN69SibNjCb2MgzrfISkM2
+ SSiRIs5hZNvoK24wLAyHCghuLr1cUnr5mA==
+X-Google-Smtp-Source: AGHT+IFdnvZCn9yj86DoKYWFzXtqUD+T+Bzlt9UQSOlRQNNhuLe1kzMk32XyMU7cel+tjJnM6iIS+w==
+X-Received: by 2002:a0c:cd0b:0:b0:66d:375:4b8d with SMTP id
+ b11-20020a0ccd0b000000b0066d03754b8dmr10346519qvm.46.1697316505978; 
+ Sat, 14 Oct 2023 13:48:25 -0700 (PDT)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ bo15-20020a05621414af00b006624e9d51d9sm1950230qvb.76.2023.10.14.13.48.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 14 Oct 2023 13:48:25 -0700 (PDT)
+From: Sean Anderson <seanga2@gmail.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sean Anderson <seanga2@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: [PATCH v2 16/29] net: bootp: Move port numbers to header
+Date: Sat, 14 Oct 2023 16:47:52 -0400
+Message-Id: <20231014204805.439009-17-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20231014204805.439009-1-seanga2@gmail.com>
+References: <20231014204805.439009-1-seanga2@gmail.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 12/19] serial: sh: Add RZ/G2L SCIF support
-Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
- <20231009164645.164464-13-paul.barker.ct@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231009164645.164464-13-paul.barker.ct@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: b5311f7d38eba4f3ef9
-X-MBO-RS-META: wbmwxgxu9mwop5jw6fmsjikxp4okxgpi
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,47 +96,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/9/23 18:46, Paul Barker wrote:
-> Extend the existing driver to support the SCIF serial ports on the
-> Renesas RZ/G2L (R9A07G044) SoC. This also requires us to ensure that the
-> relevant reset signal is de-asserted before we try to talk to the SCIF
-> module.
-> 
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
-> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> ---
-> v1->v2:
->    * Moved handle_error() changes out to a separate patch earlier in the
->      series.
->    * Unconditionally de-assert the module reset during probe.
-> 
->   arch/arm/mach-rmobile/Kconfig |  1 +
->   drivers/serial/serial_sh.c    | 17 +++++++++++++++++
->   drivers/serial/serial_sh.h    | 19 ++++++++++++++++++-
->   3 files changed, 36 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
-> index c30ff2caad17..c421181c89cf 100644
-> --- a/arch/arm/mach-rmobile/Kconfig
-> +++ b/arch/arm/mach-rmobile/Kconfig
-> @@ -77,6 +77,7 @@ config RZG2L
->   	imply MULTI_DTB_FIT_USER_DEFINED_AREA
->   	imply PINCTRL_RZG2L
->   	imply RENESAS_SDHI
-> +	imply SCIF_CONSOLE
->   	imply SYS_MALLOC_F
->   	help
->   	  Enable support for the Renesas RZ/G2L family of SoCs. Currently
-> diff --git a/drivers/serial/serial_sh.c b/drivers/serial/serial_sh.c
-> index 2b650d458e71..6ea8da34d434 100644
-> --- a/drivers/serial/serial_sh.c
-> +++ b/drivers/serial/serial_sh.c
-> @@ -17,6 +17,8 @@
->   #include <linux/compiler.h>
->   #include <dm/platform_data/serial_sh.h>
->   #include <linux/delay.h>
-> +#include <dm/device_compat.h>
-> +#include <reset.h>
+These defines are useful when testing bootp.
 
-Please keep the list sorted.
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+---
+
+(no changes since v1)
+
+ net/bootp.c | 3 ---
+ net/bootp.h | 3 +++
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/net/bootp.c b/net/bootp.c
+index 8b1a4ae2ef8..2053cce88c6 100644
+--- a/net/bootp.c
++++ b/net/bootp.c
+@@ -41,9 +41,6 @@
+  */
+ #define TIMEOUT_MS	((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
+ 
+-#define PORT_BOOTPS	67		/* BOOTP server UDP port */
+-#define PORT_BOOTPC	68		/* BOOTP client UDP port */
+-
+ #ifndef CFG_DHCP_MIN_EXT_LEN		/* minimal length of extension list */
+ #define CFG_DHCP_MIN_EXT_LEN 64
+ #endif
+diff --git a/net/bootp.h b/net/bootp.h
+index 567340ec5d4..4e32b19d424 100644
+--- a/net/bootp.h
++++ b/net/bootp.h
+@@ -15,6 +15,9 @@
+ 
+ /**********************************************************************/
+ 
++#define PORT_BOOTPS	67		/* BOOTP server UDP port */
++#define PORT_BOOTPC	68		/* BOOTP client UDP port */
++
+ /*
+  *	BOOTP header.
+  */
+-- 
+2.37.1
+
