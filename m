@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 750EBCDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:51:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60646CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:01:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCB5F86F16;
-	Sun, 15 Oct 2023 08:26:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3381C86EC4;
+	Sun, 15 Oct 2023 08:25:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O/SqUjeh";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="fvT+irA2";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ckQUZFKv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B693869D1; Sun, 15 Oct 2023 08:00:21 +0200 (CEST)
-Received: from mail-ot1-x330.google.com (mail-ot1-x330.google.com
- [IPv6:2607:f8b0:4864:20::330])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9242A8657B; Sun, 15 Oct 2023 08:19:20 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E3B886E14
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 07:58:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8740F86529
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:19:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-ot1-x330.google.com with SMTP id
- 46e09a7af769-6c620883559so2349269a34.0
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 22:58:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697349479; x=1697954279; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=o59Dj/4LoqreSRd8KDqmGyNYINT0BekWTO3ZzORg+Q4=;
- b=O/SqUjehM42qHZSpFW1Pv5qqibdrATbL1D62qzXJ0Q2zet/PY6xUJODrIoJ07iP2ba
- A9CRpC/OP/e93YHw0bKYYNHwR4sXpfHfCqmElp3zgJskoRxovhLZ04F4XAOk5b4t+TIz
- MEsBDq1wykZZRktug69wIiqNQU0e+Dzy5YFFwid8TMyHlcCDoYTNbtlPh9qm7Od+qfD0
- XhNmO1BsRhjwTRsHN3mbOV3SQNsZD9D/ja773Wmq4amefK9jxY1uV1974VMWmpOCiyl1
- jkZwMAMiEist1aAZaEKqT8KXGrGayn73Z9bKKOyhjRRXahbfccVv7ldA/thoNVxBb2Fv
- 844g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697349479; x=1697954279;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=o59Dj/4LoqreSRd8KDqmGyNYINT0BekWTO3ZzORg+Q4=;
- b=WATTecwbqfnCAWbWctbBD98ZmLzIZVwwcldyEoOm/KTbXY2clW7HvWkYuVDisUQkoy
- 5/N+x+FgsR7pKr1X4Yjg6ABvpSD1MggCoIjcLJ+yf3vPJYIodYTFchmZ/ErFDWvTAgxl
- LVol0Q1gS7E8pfqbjVWiIs6b7GxIZFbkOYEZYytacdAmNtS/svwAVHo45WX0Llp5EgOk
- 7i06ncawSbbQnF/m0NfPODzL0SGVV2U12/W/2SPYgrPRTlmtE8Zl6c9Mv/6d0QDt+WcW
- 1C2UOl6RkxU3YlLW/jsCqmJhmKauHMkSu0Fjz59x4xpJGXJmK8xtRqcAfZz/AeblcZNO
- vB3w==
-X-Gm-Message-State: AOJu0YzUEZn50g7vEDHpwggrKhZYLcC8T976UlI2N2120qmLNemkkaZZ
- lEb37hIf59/O0hGDFhG3mkGkfcxDDjLcAA==
-X-Google-Smtp-Source: AGHT+IGrMD26Sdsfxwl+2irl125ZUDvbqOduI5EDSHJYXRCJAF5342tbKxbpY3+7p6GPj9TtovbLZg==
-X-Received: by 2002:a5b:a86:0:b0:d0a:8973:b1c with SMTP id
- h6-20020a5b0a86000000b00d0a89730b1cmr26330776ybq.12.1697316504917; 
- Sat, 14 Oct 2023 13:48:24 -0700 (PDT)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- y10-20020a0ceaca000000b0066d20f29e5fsm1946088qvp.35.2023.10.14.13.48.24
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Oct 2023 13:48:24 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Anderson <seanga2@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [PATCH v2 15/29] net: Fix compiling SPL when fastboot is enabled
-Date: Sat, 14 Oct 2023 16:47:51 -0400
-Message-Id: <20231014204805.439009-16-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231014204805.439009-1-seanga2@gmail.com>
-References: <20231014204805.439009-1-seanga2@gmail.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4S7DMh3zGYz9ssw;
+ Sat, 14 Oct 2023 21:44:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697312640;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=EPY4bIv3Sfcft8c0nkHUlBwn6U7Wn3zE1KJs0NrJaQ4=;
+ b=fvT+irA2Z7v5p+E9oq20kj9VLWipSAocdnh68jKmeKxCzIgD949XYq7+QXCTNswHhYdET9
+ FVZsCkK6V2LLqEpY3OOIm/gtkZcSItiZHF0NCxZi1QxytuoPUgnAqUiSn/2Llk6SkZmeCi
+ 0W1P90Owj78B0d/hsFfau2mKveQ9MBJmha0hvHe+3hnfT/MS8xMK95UhDdguHq/1Z8Ffsh
+ PhbCsWx9MzMZyYAv1MEJwdfFsDlI6k3g5/+4qw/eJCALDPWzM5plWAl4uuyLQqhPCAy00Z
+ zYdU3MCiykvgzrls45BW7QhyTsOTFngzAzKSFj9JBt7jPQxD9GndYCONl8YfBQ==
+Message-ID: <45c559dc-5800-4ce4-9cd4-b4b8f37355a4@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697312638;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=EPY4bIv3Sfcft8c0nkHUlBwn6U7Wn3zE1KJs0NrJaQ4=;
+ b=ckQUZFKvFhNPdxESPBeB8XjA2BAMPP5VvuZD+hogTCZlED2+IdQt83mZ0mfxnFYq/r4f+F
+ Zx5CiXQanpRMDcpWAF9N+kDG2x2izI0NBY37sf1Dox6RWNuPRB3cU7fzcvTMx+C36F+9LQ
+ 0lnTDSkLUn7aH6C3V9aQHVQn1zA3hTgyp58avTCgIYPfUaKHGHi3tcxNq1SBVQshwQO+o0
+ YJjn2w6kFjkm/vHkXrCMEBKAA0E5Zv7KGvMpZXsdqqh1LbpaN2Csc6Iz2ErbiTOKrnH+3o
+ UDGu9q7Sx/O10PXLJIhL0Q/xpzeYZthuuVhC0vIDg2JjtkAu4mFilOK1rM/QIw==
+Date: Sat, 14 Oct 2023 21:43:55 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 06/19] arm: rmobile: Add basic R9A07G044L SoC support
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
+ <20231009164645.164464-7-paul.barker.ct@bp.renesas.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20231009164645.164464-7-paul.barker.ct@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: a25310a293e3308eb77
+X-MBO-RS-META: kg8me5oepowwqdm7p667pothoxqpx9nk
+X-Rspamd-Queue-Id: 4S7DMh3zGYz9ssw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,56 +93,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When fastboot is enabled in U-Boot proper and SPL_NET is enabled, we will
-try to (unsuccessfully) reference it in SPL. Fix these linker errors by
-conditioning on SPL_UDP/TCP_FUNCTION_FASTBOOT.
+On 10/9/23 18:46, Paul Barker wrote:
+> Add a config option for the R9A07G044L SoC used in the RZ/G2L so that we
+> can make use of this in the subsequent driver patches.
+> 
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
----
-
-Changes in v2:
-- Use SPL_TPL_ for compiling fastboot functions
-
- net/Makefile | 4 ++--
- net/net.c    | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/net/Makefile b/net/Makefile
-index 3e2d061338d..64ab7ec740a 100644
---- a/net/Makefile
-+++ b/net/Makefile
-@@ -27,8 +27,8 @@ obj-$(CONFIG_CMD_PCAP) += pcap.o
- obj-$(CONFIG_CMD_RARP) += rarp.o
- obj-$(CONFIG_CMD_SNTP) += sntp.o
- obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
--obj-$(CONFIG_UDP_FUNCTION_FASTBOOT)  += fastboot_udp.o
--obj-$(CONFIG_TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
-+obj-$(CONFIG_$(SPL_TPL_)UDP_FUNCTION_FASTBOOT)  += fastboot_udp.o
-+obj-$(CONFIG_$(SPL_TPL_)TCP_FUNCTION_FASTBOOT)  += fastboot_tcp.o
- obj-$(CONFIG_CMD_WOL)  += wol.o
- obj-$(CONFIG_PROT_UDP) += udp.o
- obj-$(CONFIG_PROT_TCP) += tcp.o
-diff --git a/net/net.c b/net/net.c
-index e6f61f0f8f6..8357f084101 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -511,12 +511,12 @@ restart:
- 			tftp_start_server();
- 			break;
- #endif
--#if defined(CONFIG_UDP_FUNCTION_FASTBOOT)
-+#if CONFIG_IS_ENABLED(UDP_FUNCTION_FASTBOOT)
- 		case FASTBOOT_UDP:
- 			fastboot_udp_start_server();
- 			break;
- #endif
--#if defined(CONFIG_TCP_FUNCTION_FASTBOOT)
-+#if CONFIG_IS_ENABLED(TCP_FUNCTION_FASTBOOT)
- 		case FASTBOOT_TCP:
- 			fastboot_tcp_start_server();
- 			break;
--- 
-2.37.1
-
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
