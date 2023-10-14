@@ -4,69 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 496E7CDB483
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:54:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DCFBCDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:58:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72CAA867EF;
-	Sun, 15 Oct 2023 09:54:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7A4A686501;
+	Sun, 15 Oct 2023 09:58:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RsnHSd88";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JwZq0DcX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6527286F3A; Sun, 15 Oct 2023 09:54:20 +0200 (CEST)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id E0E3D8071F; Sun, 15 Oct 2023 09:58:34 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64DC686F32
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:54:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D30E8071F
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:58:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-53db3811d8fso7094431a12.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:54:15 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-77575233633so256220485a.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:58:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697356455; x=1697961255; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YG9x5llxPVbRbwADArm/RDfVsWmzbNQePp4Zh3ab6Jc=;
- b=RsnHSd88PbCEb1XWKRq7sgI/9Q7+GFlbY2KxInH661cMumR2WrQXZicBLXau26Dz2U
- 8Wu7QVfhy3fG0bKxL0NSAciNy8C25BTpXDcoUCWKtoKb4nj+z+P6vqmfNmyjInYNc5Zh
- 1tpfzkAV+cTKkX4qYcRGiqJC0ZiTOuO482zto=
+ d=gmail.com; s=20230601; t=1697356710; x=1697961510; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KwOXVTETS9AXgAZYe2CykrfJiB9rPPPB9f/a8PCWRbc=;
+ b=JwZq0DcX8qTgh8jTTjolYGu6xtFtrQetgEE7HlqHUs+m9IYxWdOvzWAs0XeHd6FCVO
+ X+WOR/OO450MbScFH48hEKMX22s8hJgKu4kcwf6w3V71rMpdkQ4IwrR5fhrb79PO9RP4
+ /H9fDsPVzT3bgbggXWLvvvm5TKooMuZNKAfB47tfXwZ/qcYOZuq0MHESX8Snhe4RYM3z
+ Lcb2c8a90BFxSa8Pg7Eue/EwPqEqdakUknLmhzL9PHk8G7NOBTN41t5Y/GDk343DJsJw
+ la3YSOQEjVhfz6AyfYywOA10177PVEjRaSL0Bna3DFkR0LsTT5/4XdKwbndPkDNU1Hvg
+ LZUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697356455; x=1697961255;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YG9x5llxPVbRbwADArm/RDfVsWmzbNQePp4Zh3ab6Jc=;
- b=aScBD4J13lPuw/zz2sbL+AdYO+drLlAOvlUPniuJ9FpQBUnhO7bEd2bn1ipRCbl8gf
- OLT22w8rIkRqetd1ZnN3J0WDKp66bQyoXbmmqmFSotMzsi9KCQ3f9eYcm6tm3bVXdhkP
- 1oedboDxUxiEEz4YmgcP9dph7ePNAax5M9FGJL9OjooXvEcs+fi+J/FwxVa065bfSrnn
- z22sRpjLPwFIi8rlachz5pqKz0aJZHpt6LUfdC39yhPN4d1Q4NVodwji58mCOsNNUvI9
- tWZrVHbShKVRavkBo3AwRANJp+y0H0Uk+92Pl+tyuzf3tbOMSnFx1wTnRJi4XQu2HtKN
- Hjcw==
-X-Gm-Message-State: AOJu0Yx3+xvy1NAhifLWv93sSHdivid1QAzZcRST+l+/z/Yb7vbcLUrF
- ouowMeeVp8W7lAM8cwo3KtAQPa1WGc86JIHfxybHhii/n6WiP+yTN6YhNg==
-X-Google-Smtp-Source: AGHT+IH6UuzvFY0e8fdqff1AaEfngYJSRgFkooXrDv9DF+yxDTGeSvBXRQQ6GwLs0UmmAJrNKjc/jyj0bvVkqwAyO74=
-X-Received: by 2002:a17:906:ee84:b0:9bb:a243:e6fb with SMTP id
- wt4-20020a170906ee8400b009bba243e6fbmr2667381ejb.3.1697307649651; Sat, 14 Oct
- 2023 11:20:49 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697356710; x=1697961510;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KwOXVTETS9AXgAZYe2CykrfJiB9rPPPB9f/a8PCWRbc=;
+ b=rsx+C1a5UN9LDI1Oaj3WsXyOZsXlE/2b06GFXG1jApZjilFKeohwn0O+7V1GAI0Orj
+ 5GlUNR2x7yigO4O7UsATMgqQJgZcvI38s16aNVyfq4Z8J1Z/R8UQRktikBbyCz+FPBJ5
+ h/atpM0ENEBGyR1RByDFBldxq2Oo3lYOsoWoFnCxwE/V9VYGr9co+RKl11jpbNTilVoY
+ 9n+/4cRMVHjj20qfGPOGHJUPesmC+AlyyXO0v58Lfk+qsnKFoYbjOhe/SSs+7F/3AVRh
+ DKZ5MDFGM40SzFMlMjDL7r2xXvyIPRPYoBtXv1mlShNbwK0m48sO2TDoZMwDqxGWokI+
+ YECQ==
+X-Gm-Message-State: AOJu0YyZ4uAqrq7GaXFITGXPGcBxKUbcS3NZds1djnbpylDK3ZCBYJGk
+ ieHc1jqg2vDPKHb8msqeRIMHCQT3CViOjg==
+X-Google-Smtp-Source: AGHT+IGjNC+lEVdqRwhZWC1AzFhKIdzXKrQRnna/TBgJi53ldLLXmXTJl110JWpI/SVMXuIHAVrU8g==
+X-Received: by 2002:a05:622a:42:b0:418:1071:7303 with SMTP id
+ y2-20020a05622a004200b0041810717303mr37743783qtw.31.1697316510348; 
+ Sat, 14 Oct 2023 13:48:30 -0700 (PDT)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ z10-20020ac87caa000000b00419cce4a5ffsm1739101qtv.82.2023.10.14.13.48.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 14 Oct 2023 13:48:30 -0700 (PDT)
+From: Sean Anderson <seanga2@gmail.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v2 20/29] sandbox: Support -T in spl
+Date: Sat, 14 Oct 2023 16:47:56 -0400
+Message-Id: <20231014204805.439009-21-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20231014204805.439009-1-seanga2@gmail.com>
+References: <20231014204805.439009-1-seanga2@gmail.com>
 MIME-Version: 1.0
-References: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
- <6736fbdd-4ac6-fdc2-10aa-193b574ecb99@gmail.com>
-In-Reply-To: <6736fbdd-4ac6-fdc2-10aa-193b574ecb99@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 14 Oct 2023 12:20:38 -0600
-Message-ID: <CAPnjgZ0=TREY6qmaytEKHWje3CcvQn5eJG_qNWZu9KRGEYDZ7w@mail.gmail.com>
-Subject: Re: [PATCH v3] rockchip: configs: sandbox: enable rkmtd command
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, 
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,15 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 13 Oct 2023 at 22:21, Johan Jonker <jbx6244@gmail.com> wrote:
->
-> Enable rkmtd command for testing with sandbox_defconfig
-> and sandbox64_defconfig.
->
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> ---
->  configs/sandbox64_defconfig | 1 +
->  configs/sandbox_defconfig   | 1 +
->  2 files changed, 2 insertions(+)
+The test devicetree is only compiled for U-Boot proper. When accessing it in
+SPL we need to go up one directory.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
+---
+
+Changes in v2:
+- Compare to PHASE_SPL in sandbox_cmdline_cb_test_fdt for clarity
+- Split off from fs test
+
+ arch/sandbox/cpu/start.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/arch/sandbox/cpu/start.c b/arch/sandbox/cpu/start.c
+index 2c8a72590b5..2589c2eba73 100644
+--- a/arch/sandbox/cpu/start.c
++++ b/arch/sandbox/cpu/start.c
+@@ -13,6 +13,7 @@
+ #include <log.h>
+ #include <os.h>
+ #include <sort.h>
++#include <spl.h>
+ #include <asm/getopt.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+@@ -202,10 +203,14 @@ static int sandbox_cmdline_cb_test_fdt(struct sandbox_state *state,
+ {
+ 	char buf[256];
+ 	char *fname;
++	char *relname;
+ 	int len;
+ 
+-	len = state_get_rel_filename("arch/sandbox/dts/test.dtb", buf,
+-				     sizeof(buf));
++	if (spl_phase() <= PHASE_SPL)
++		relname = "../arch/sandbox/dts/test.dtb";
++	else
++		relname = "arch/sandbox/dts/test.dtb";
++	len = state_get_rel_filename(relname, buf, sizeof(buf));
+ 	if (len < 0)
+ 		return len;
+ 
+-- 
+2.37.1
+
