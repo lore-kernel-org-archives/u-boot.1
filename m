@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 747A7CDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:14:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 438DFCDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:15:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0CED86F56;
-	Sun, 15 Oct 2023 08:39:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 19BED86F4B;
+	Sun, 15 Oct 2023 08:38:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KHLtZ1F9";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oO+rD1dM";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="P6LEyE+l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C35586EA8; Sun, 15 Oct 2023 08:37:50 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3BF0786DCA; Sun, 15 Oct 2023 08:37:50 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2117986E22
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:36:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B5FB86F47
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:36:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-41954a3e282so20896891cf.2
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:36:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697351812; x=1697956612; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8MJ8I816eGLNe5RbeVnfFu5DVrL8DFgV03WxjpfObU0=;
- b=KHLtZ1F9xK84aqsSNV94jEAtzNwakVRkRRuFUegrJtYJOr8WdTsTvU4LctV9Zsii9Y
- kD55CqnwGOV1O+PrZpGpzVb1lRPYZwId71lyN4vi4oepSKhZBwhHOILX8FfByqSAqC6w
- zCQKuKJGCMDx+ZsTJ6xCDZxUL/8T2aZDOOtJc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697351812; x=1697956612;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8MJ8I816eGLNe5RbeVnfFu5DVrL8DFgV03WxjpfObU0=;
- b=esJqM0REuiLXuWZJw2iELvp4v4DzaAFedvwYBq61iDGySQWolhiUr/oZ+yaJrWE9iv
- Nmkc4vFqu4Ae7J+6+c6s7/sPypg8ibb3AAv4SxVHpA+RRozyCPWRgEUKvvusJaJmzb+Y
- pahxoox4sk49EsfW2IStkRA1le9epE8krglb1jApYpi6Yyatt5JmHC7xCu+QlG3zZP4O
- iGbsKahoOLy0dBVccxB8y2Op35OWccgPj4xBiFdUCtMSTg5a43tgMHnaoNck6v9LgHxv
- kukISFqNpZVqZfH9Tl8wLzTqn+qMbCC0+6uRxQTsXkumfPZEC5Yy16Lj+EauW+RW6+IU
- sVNA==
-X-Gm-Message-State: AOJu0YxawawLJVY3/J2Qw0/CGeOdOcQBE7MeC9ut8bnW4cauy+5AvwzG
- P3Quwvg+Iaejfq8d8dBQFseBbEhEWw7ZWnfbwUC2dA==
-X-Google-Smtp-Source: AGHT+IEhnHn1IsKAFlVonpPlN0Q0CmWaTwPE9WvHh1oVQgxTyqvlgPB/6Mfa3gxy6IFx32WXoxsjmg==
-X-Received: by 2002:a5e:8811:0:b0:792:4cfc:178f with SMTP id
- l17-20020a5e8811000000b007924cfc178fmr32595132ioj.16.1697316038964; 
- Sat, 14 Oct 2023 13:40:38 -0700 (PDT)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- j27-20020a02cb1b000000b0042b14d9be7bsm5424649jap.22.2023.10.14.13.40.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Oct 2023 13:40:38 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: [PATCH 1/6] binman: Reset missing bintools after testing
-Date: Sat, 14 Oct 2023 14:40:25 -0600
-Message-ID: <20231014204033.3077052-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
-In-Reply-To: <20231014204033.3077052-1-sjg@chromium.org>
-References: <20231014204033.3077052-1-sjg@chromium.org>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S7DgH0yfpz9sbf;
+ Sat, 14 Oct 2023 21:57:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697313451;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zfWKWL1sHAsScth/ot6g+OMTX6iyAB1FV3EPPNTFNE0=;
+ b=oO+rD1dM7PeD3XSxbR79f/VGklsCwUw0kb9jVPx9YutgwFaRrgbTPNI7uaa+yAp33cUwCq
+ p2YNXtcc1AL0ZvRgZcUciVJAta4rFE0ryB5B8zw/soMosZwJNdVcYx633CB8Da0m+rk8cz
+ xuuvPRU8H8lRVCcC7J1kW9c8lnNuphN2+F1oUllArREnMChYbpyI0zQSQFsMghuIUdKGEk
+ QdfyssBi0E3tu9p2vLVSyiKXZFY3kPQXAn5Y0MbGq11oDPMFS/zrPW9hVnswfNecbkc7SX
+ W18vRV4xAX8O/heVKyR75i6me0J1n9qNkUtYFrjzGBw11vW5j3m/6xLErtg3CQ==
+Message-ID: <6bb972d4-7015-4ddd-8466-dc92d061dd8b@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697313449;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=zfWKWL1sHAsScth/ot6g+OMTX6iyAB1FV3EPPNTFNE0=;
+ b=P6LEyE+lJGeKFeYeWKzWi/YV11OxD33A3ivBiJhSzoRHDdaWQeOGg4oQ9QtTVx42lt8TRJ
+ N08HQ+3scTIYHt9wCIQSt+8GKmUBRCmyypoXgISXZRpTl/2e4EOxqrb6k3HnJ+/XW5OqAG
+ qkMR3Nox0TYX3tzpRYbdI9WYtLAOl3jOORFTT9qNJWqi2tjmXkRy0M+bOJeBw0a0wn70mF
+ 20AT0ANQNUMdwKdNx8UfkUjmy8XUYUptblhEL7DDGSfrxy1wiKXA3otC0Q8or063/4GVNe
+ 9CIuy49PxgT2O2xMLgfBe6qJJneBs68UgbBvp5kwk3JNdOp6abHuB4DdddsnIQ==
+Date: Sat, 14 Oct 2023 21:57:28 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 16/19] arm: rmobile: Add CPU detection for RZ/G2L
+Content-Language: en-US
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
+ <20231009164645.164464-17-paul.barker.ct@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20231009164645.164464-17-paul.barker.ct@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: pfjjxziuheradatfq5n68ew4okfwn7q9
+X-MBO-RS-ID: 8fce7a3eab36cc0a65a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,31 +91,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For tests which fake bintools being missing, we need to reset the list
-afterwards, to ensure that future tests do not also see the bintools as
-missing.
+On 10/9/23 18:46, Paul Barker wrote:
+> The ARM TrustedFirmware code for the Renesas RZ/G2L SoC family passes a
+> devicetree blob to the bootloader as an argument in the same was
+> previous R-Car Gen3/Gen4 SoCs. This blob contains a compatible string
+> which can be used to identify the particular SoC we are running on.
+> 
+> We do this as reading the DEVID & PRR registers from u-boot is not
+> sufficient to differentiate between the R9A07G044L (RZ/G2L) and
+> R9A07G044C (RZ/G2LC) SoCs. An additional read from offset 0x11861178 is
+> needed but this address is in the OTP region which can only be read from
+> the secure world (i.e. TrustedFirmware). So we have to rely on
+> TrustedFirmware to determine the SoC and pass this information to u-boot
+> via an fdt blob.
+> 
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 
-Reset the list when processing is complete.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
-
- tools/binman/control.py | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/tools/binman/control.py b/tools/binman/control.py
-index c6d3205b8c25..2f00279232b8 100644
---- a/tools/binman/control.py
-+++ b/tools/binman/control.py
-@@ -858,6 +858,8 @@ def Binman(args):
-                 data = state.GetFdtForEtype('u-boot-dtb').GetContents()
-                 elf.UpdateFile(*elf_params, data)
- 
-+            bintool.Bintool.set_missing_list(None)
-+
-             # This can only be True if -M is provided, since otherwise binman
-             # would have raised an error already
-             if invalid:
--- 
-2.42.0.655.g421f12c284-goog
-
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
