@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72D3CDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:29:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00447CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09AE686F16;
-	Sun, 15 Oct 2023 08:56:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 99E1186F50;
+	Sun, 15 Oct 2023 08:56:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bbl9R0j5";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UvbbaPPq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BCEF86DF5; Sun, 15 Oct 2023 08:53:36 +0200 (CEST)
-Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
- [IPv6:2607:f8b0:4864:20::1129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73DFC86F82
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:51:22 +0200 (CEST)
+ id 5D34D86F7D; Sun, 15 Oct 2023 08:53:27 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ by phobos.denx.de (Postfix) with ESMTP id F279886FA7
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:52:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x1129.google.com with SMTP id
- 00721157ae682-5a7bbcc099fso43562837b3.3
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:51:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697352675; x=1697957475; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=v5jie/1oEQRfU5RgB7exxwq+S6EA9EIjPdFKQ/83sz4=;
- b=Bbl9R0j5IM+t6+29RKjIUpcs8ith1cunn6JvkoyEB3by1l+7irl2HHwATGuZP5Gcg+
- bDXxNd8wHdLSWcyfamI14MfL47lwxl2O4KGMEuA3YUCbtaUeawhvaxt1iSipLKh5Q/Xj
- 6OohFSR6JJKlNQGCF7A/PTHAMhvcwectVXbpA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697352675; x=1697957475;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=v5jie/1oEQRfU5RgB7exxwq+S6EA9EIjPdFKQ/83sz4=;
- b=kyKMkMwKJhoe1kOFziVohA4QxdIeNQYavotOGlT44G6FLFX5OCiEhGywnIwM4E4cJi
- 0MoGT1uIARcA1lt0SCU7wx+C36MYgo09xmbaauPKjzYKxo7qM1b0jBmzxymrNf4WK8lh
- nOHgqnTyNCFVsPnVmvPHMaUTVaRb5IUQVG4wyYIQd1zRcWF4j404VoY9dJ6o/Xiaxr07
- fksyFB5/kPfp1cosAj7aLKT5wDxE5oxKfvllJDT8jHeUpRr8tiCkVA3DQSxwC3RUv+hv
- Yw4Kswu17ZDW2GDnb3zxdVHR2aPcEH8v+WexJSd0nrlpESY8jnK2pi4O05sF8VPJJuJo
- 0FvA==
-X-Gm-Message-State: AOJu0YxtiuxA1D23fn2oiAJWzKPkryl1SGw5AG7sxuh7WTjcMCGlJbWx
- DD1FfVxnwhPZ0RXR/2hntuxE1aAIihInYwdQrYlOIw==
-X-Google-Smtp-Source: AGHT+IGxLT6M3OBYiGy9W3zG/bOYlpLPfJ6woFF8evS5XbjoUUJsFNAgr3VDePHKNK1YfHlxggcUHQ==
-X-Received: by 2002:a92:c885:0:b0:357:5e06:a49b with SMTP id
- w5-20020a92c885000000b003575e06a49bmr6569265ilo.2.1697337916458; 
- Sat, 14 Oct 2023 19:45:16 -0700 (PDT)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- v6-20020a92cd46000000b003497ced3fa1sm2462842ilq.29.2023.10.14.19.45.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Oct 2023 19:45:16 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 2/6] smbios: Move the rest of the SMBIOS2 code
-Date: Sat, 14 Oct 2023 20:45:04 -0600
-Message-ID: <20231015024511.3995580-3-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
-In-Reply-To: <20231015024511.3995580-1-sjg@chromium.org>
-References: <20231015024511.3995580-1-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1697352718; x=1697957518; i=xypron.glpk@gmx.de;
+ bh=3UCku1ME1CTwbxxG6K2j6dPm/0G1unJqDI8GZan9rBw=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
+ b=UvbbaPPq4Q8KKIBCYzDrTD/HShWulNzd8kbwpELwQd3j6d3cMlg6VYGBC1/x6dDGaNNUEcXT4S3
+ h5QG3aUUgco/slOc6FSnb4vwInlpzJ3g+oMZcow6eZU1/oOVSWj3jnwkFen9wJD9cLlAr1PFVPQbX
+ r5shw/44p/hLGaMUrqSD64SgX+Uuj8g5Mv0UIET8Il90ihXNLBl1L+exTCrACuy6fJRihstDO+Id6
+ scjomjtsBK2FbGvrivMattyZFOCMYLwYoKO0T90Qi2yKIG5gJIlfDxZ9j1pCkS6rffK9I8m8uXObT
+ 5mom5PT1X4f8VbRlkDzHniwdFvhPkvYzIsyA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MAfYm-1qgolE3W36-00B53K; Sat, 14
+ Oct 2023 23:20:32 +0200
+Date: Sat, 14 Oct 2023 23:20:31 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+CC: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH v2 16/29] net: bootp: Move port numbers to header
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20231014204805.439009-17-seanga2@gmail.com>
+References: <20231014204805.439009-1-seanga2@gmail.com>
+ <20231014204805.439009-17-seanga2@gmail.com>
+Message-ID: <70B2C086-30BC-4CAC-B4DC-C1B7B32BB95C@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:X3/5dLb80JQhDVzZufaRL+BSacKfTqvfp7WvDLGvP1lnT1ihcDC
+ P94XVl8xopHBeekE5YzaBk5niKERK3pjjtddmL85QS3z5cetZDqhAzYZdO1YoqvLIjTu7LJ
+ HwNmPVnDMbi7+wbzcaS88evmE0j6hwKnB3rBU+4YxEZ6OzHE3kgRkdGzZWu39zOGXCWW30r
+ Eh5C7yGStXdATLV088Opg==
+UI-OutboundReport: notjunk:1;M01:P0:7bBe36yePqM=;nVAg1EIhVw+XXBIbUfisIfkTVKk
+ 7gesEoHb53bFENTSLBCXFvAVUrQdBGaQzxbYghFKsUW77Ud/cm4t6oYr3+l2mVcIrCyYXzkIl
+ yjJZ7k6cv7ta+8dcFTloSHx1zfQtVE3f+69821iHCA5W54MfpgGty3za+t6PjhZiG0O8YW4B+
+ ZHaEyavdRlbneoWxS3dohcQXuqXGE/KWeUxY2YjwgM5HedhGiTPnCjhBo9OQVA1W3W1fnV0LF
+ 44XDojHw73y8+5ykKkgNtavYKZunScaHi9Z3Q+Li0EahFdeI5IQpvcetkh3yey5AgCF9NOF+2
+ R9K09s+aUZroMq6vCE8MRFpXDBCOowbvvPGtQKel8e9u0a/5YC93C+KRNnmq43Cg6Q+uDcQj+
+ 1HHzh4QxKVv7ExmAUbBCGD1+m5y8YrQGenq1lVyfNp+UcsZ367Hx0FsBy47kcJkUN5HjShTjs
+ cOlELX2bSIWvopXRRplE24G31t/OyQRlqTtpVxfpUVJhbK6xzBbl/r+C5AQkVP3DMK6qKR/DD
+ 4yh9cDFlPCrJ07y2x2fJWX2YY7GCK95DFRNjijGAP1N/Sixc/mibQ2yCWtSPClghQDxcP4mVD
+ 209RMkPeyRWqWFsFB/MkeotGCo5FaQ3HdMCbT0XyY/h80BPf/+32QsuReDlYDerBpJ93+hOyK
+ z8YIa7rVrrYZH7KcVPQMEFevbnpoUYWuWV9Fw1f98DyPRR3e3pK3EhG1sUUU5a+NtWBpI2KQU
+ BA6U/sHEkHvBYxRF/pJEIAANZc+Ppk/7Ct41uGgCihowqeRkRKiSewp7DJUEPwxHiPXuAEjg1
+ DwBhYtXOSUPi33h78JBvVr9Y86AIkjBGcWOgZ5lWfWcH2LEHhr/3VDpmZNehPjzy+JSSbVxWP
+ AlG6TZJJtcFEAi5G5LF1h7aJg1HZn5NdfJEC+ETzxTqz5bA9P0V1MZyHRgdJE7DeqGX0w4klO
+ WN4ZolA3vdMKHlJ6o2OgqjB0YDI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,67 +87,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move all of this logic into the else clause, since it will not be used
-for SMBIOS3
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
 
-(no changes since v1)
+Am 14=2E Oktober 2023 22:47:52 MESZ schrieb Sean Anderson <seanga2@gmail=
+=2Ecom>:
+>These defines are useful when testing bootp=2E
+>
+>Signed-off-by: Sean Anderson <seanga2@gmail=2Ecom>
+>Reviewed-by: Simon Glass <sjg@chromium=2Eorg>
+>Reviewed-by: Heinrich Schuchardt <xypron=2Eglpk@gmx=2Ede>
+>---
+>
+>(no changes since v1)
+>
+> net/bootp=2Ec | 3 ---
+> net/bootp=2Eh | 3 +++
+> 2 files changed, 3 insertions(+), 3 deletions(-)
+>
+>diff --git a/net/bootp=2Ec b/net/bootp=2Ec
+>index 8b1a4ae2ef8=2E=2E2053cce88c6 100644
+>--- a/net/bootp=2Ec
+>+++ b/net/bootp=2Ec
+>@@ -41,9 +41,6 @@
+>  */
+> #define TIMEOUT_MS	((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
+>=20
+>-#define PORT_BOOTPS	67		/* BOOTP server UDP port */
+>-#define PORT_BOOTPC	68		/* BOOTP client UDP port */
+>-
+> #ifndef CFG_DHCP_MIN_EXT_LEN		/* minimal length of extension list */
+> #define CFG_DHCP_MIN_EXT_LEN 64
+> #endif
+>diff --git a/net/bootp=2Eh b/net/bootp=2Eh
+>index 567340ec5d4=2E=2E4e32b19d424 100644
+>--- a/net/bootp=2Eh
+>+++ b/net/bootp=2Eh
+>@@ -15,6 +15,9 @@
+>=20
+> /**********************************************************************/
+>=20
+>+#define PORT_BOOTPS	67		/* BOOTP server UDP port */
 
- lib/smbios.c | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+Reading code I would have a hard time to immediately see what this constan=
+t name stands for=2E
 
-diff --git a/lib/smbios.c b/lib/smbios.c
-index 96f67cd6ad7b..c7a557bc9b7b 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -464,9 +464,8 @@ static struct smbios_write_method smbios_write_funcs[] = {
- ulong write_smbios_table(ulong addr)
- {
- 	ofnode parent_node = ofnode_null();
--	struct smbios_entry *se;
-+	ulong table_addr, start_addr;
- 	struct smbios_ctx ctx;
--	ulong table_addr;
- 	ulong tables;
- 	int len = 0;
- 	int max_struct_size = 0;
-@@ -486,9 +485,7 @@ ulong write_smbios_table(ulong addr)
- 
- 	/* 16 byte align the table address */
- 	addr = ALIGN(addr, 16);
--
--	se = map_sysmem(addr, sizeof(struct smbios_entry));
--	memset(se, 0, sizeof(struct smbios_entry));
-+	start_addr = addr;
- 
- 	addr += sizeof(struct smbios_entry);
- 	addr = ALIGN(addr, 16);
-@@ -523,8 +520,11 @@ ulong write_smbios_table(ulong addr)
- 		printf("WARNING: SMBIOS table_address overflow %llx\n",
- 		       (unsigned long long)table_addr);
- 		addr = 0;
--		goto out;
- 	} else {
-+		struct smbios_entry *se;
-+
-+		se = map_sysmem(start_addr, sizeof(struct smbios_entry));
-+		memset(se, '\0', sizeof(struct smbios_entry));
- 		memcpy(se->anchor, "_SM_", 4);
- 		se->length = sizeof(struct smbios_entry);
- 		se->major_ver = SMBIOS_MAJOR_VER;
-@@ -545,9 +545,8 @@ ulong write_smbios_table(ulong addr)
- 								   isize);
- 		se->checksum = table_compute_checksum(se,
- 					      sizeof(struct smbios_entry));
-+		unmap_sysmem(se);
- 	}
--out:
--	unmap_sysmem(se);
- 
- 	return addr;
- }
--- 
-2.42.0.655.g421f12c284-goog
+Shouldn't this be renamed BOOTP_SERVER_PORT to create readable code?
 
+Regards Heinrich
+
+>+#define PORT_BOOTPC	68		/* BOOTP client UDP port */
+>+
+> /*
+>  *	BOOTP header=2E
+>  */
