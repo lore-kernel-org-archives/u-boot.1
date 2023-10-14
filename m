@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E66CBCDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:28:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A925CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:28:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2361686529;
-	Sun, 15 Oct 2023 08:25:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C698C86867;
+	Sun, 15 Oct 2023 08:25:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Cuv5bpVq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FJwqHsVk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5E5C867D6; Sun, 15 Oct 2023 08:10:22 +0200 (CEST)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id D8407869C8; Sun, 15 Oct 2023 08:10:22 +0200 (CEST)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F146E86BCD
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:07:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4413F86538
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:08:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-27d129e2e7cso2598724a91.3
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:07:45 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-35749078a59so13852595ab.3
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:08:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697350064; x=1697954864; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697350090; x=1697954890; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BJ5e7IKwEAKkXWVFFI8NTffUpT2A+VAQXOE1ihzZbNs=;
- b=Cuv5bpVqbDGRYi52XSZ1HpL9MdOiKIE8lbanvGUPmw8/m1TEjtSHSrNGqub20FQlB/
- ORZDYDAAQye2JxMiwadiVw/F3vNBYniG2XIO5Xi8JYefoWz+6ApOFj3vnm0GAMePnv72
- ZX+qfLYdTii0TN6Teumq378urYI4xGDdBkzbPs7xd9yOD919rbZ1ffc3yD8wapQh0CYb
- 0HTVoWoZyoVFUVJfwvj3y/2GNdq5Kh9HqzlmR4vT/mzzAlmbXeauojHaW34OqUBRbwlS
- G+LKqXZFZKJY5AYS7pwnjVx+zZ5U9U99tMcOEmZ3P7b0j3AoB3sfBGovTxirm2G4+ToH
- qj7A==
+ bh=ad3djbM3/XwnAajI5FtppVgBUAF6ntTIr4iFMjyTz+I=;
+ b=FJwqHsVkr/F45rjugaTaxKP8Dn1eMjbI1+4V4to4Jq8Ma8Be3QSJFMxV0EXz1w5QiT
+ /kkl+B9PSUb3xBOO8m9K44D/lrd+1nlZHet8TwN275GT915e+996pS4WLxqufRhYSvV4
+ C7DAPYxZM+7TXvYgrvOtRM0n8ubg/bVcF5X2A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697350064; x=1697954864;
+ d=1e100.net; s=20230601; t=1697350090; x=1697954890;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BJ5e7IKwEAKkXWVFFI8NTffUpT2A+VAQXOE1ihzZbNs=;
- b=G4a3xexxLxfc1Nu0bzgMRzCWE78y1oBFHX0WbseXTLR/vboTLyaCSgiU0O1PV1RhsJ
- r5ZEXdjgEBY++3+L2RySpvUenrkr02UOQJatB4CBOGG0bjZSGFCJqmnz1G2L3pg4LFV1
- OncwD10X/YMtuJhu+QZwcb9UqU5ni1AKyWYNudsrtJVcA0WV/4iUMvaLw+t7SYKgAiku
- ut3tUwAN5oYh3f/3P/0QIC5vjMoYOJG7MwN9w8Ko632O5E47v7qR+6QuMCPmSUf4tTEA
- 3PiFYOpr9iQoYV+0JpxEXz8gNQdKpBybr/GC3wBL3n5lN7xPX6KTELrlDhf/V3QgmMqS
- SSSw==
-X-Gm-Message-State: AOJu0YzVVXwKlXJXJ0nAeeCVCpUGKBI+5r02oahMTANH/84eZ7UiRUWc
- k/qJuegY3o6y7Sf+jm8mjoM+M6vbp7FccA==
-X-Google-Smtp-Source: AGHT+IGwzlxyCg1QC7XVPusH19LyaPxcyKzNLAuSHDAI2pIGM8ffhYgOJio/O67ZuXkA/xv3gUiOMg==
-X-Received: by 2002:ad4:5aac:0:b0:66d:42d9:fc83 with SMTP id
- u12-20020ad45aac000000b0066d42d9fc83mr1556771qvg.10.1697316516745; 
- Sat, 14 Oct 2023 13:48:36 -0700 (PDT)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- bo1-20020a05621414a100b0066d15724feesm1925252qvb.68.2023.10.14.13.48.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Oct 2023 13:48:36 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Anderson <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v2 26/29] test: spl: Add a test for the MMC load method
-Date: Sat, 14 Oct 2023 16:48:02 -0400
-Message-Id: <20231014204805.439009-27-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231014204805.439009-1-seanga2@gmail.com>
-References: <20231014204805.439009-1-seanga2@gmail.com>
+ bh=ad3djbM3/XwnAajI5FtppVgBUAF6ntTIr4iFMjyTz+I=;
+ b=BbsgBopbwiBbMEOr7sgYeige6o9+sIjBPoti7S31qZK049pW7uIX8MRguacnm6x1eH
+ GWm0L2FliOIhBZW+nLwKiR4p5JvS4sqWSjUk6iF7my6ZxZrHMTaqxf5Uf2oZtfKbL7pl
+ ZtA+KKs/hMrgbOFL/h0gJ6oAjTMY+S0bZvGUjXVQM/EBUYkqvEMa2vlfSY5/m3mBYvE4
+ TTXXtQBXQuBrrixjf+YKLGEfpCqmSEVC+iYszXhyUZD/awigGrNgxzZNG2S2fu2RcstB
+ 7UdoU39c6OxQkU/nBp+WOG6hQVfE/RxWR+FgmjjlgRApogfeRg7eX3gdxzhuyzJXaRs0
+ 8yJQ==
+X-Gm-Message-State: AOJu0Yxinv6JeE7Rzf/IYt4qbkZN4MuswmSYHg31qz1MDN1VNZPU+bIP
+ km1zqRNDp3KBubQRw4HhWtr0KMXix2tqAsfWpWBw1A==
+X-Google-Smtp-Source: AGHT+IGPuAVYxGT92Z0ouSPXA29rcGIDKswi7hM0UOqil+ZzkgbgdbQbniUnwDFhXSM/7YXFU76N9Q==
+X-Received: by 2002:a5e:a61a:0:b0:799:178c:7be5 with SMTP id
+ q26-20020a5ea61a000000b00799178c7be5mr36651046ioi.17.1697316041306; 
+ Sat, 14 Oct 2023 13:40:41 -0700 (PDT)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ j27-20020a02cb1b000000b0042b14d9be7bsm5424649jap.22.2023.10.14.13.40.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 14 Oct 2023 13:40:41 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Subject: [PATCH 4/6] binman: Replace FILENAME_ALIGN 16 with ATTRIBUTE_ALIGN 4
+Date: Sat, 14 Oct 2023 14:40:28 -0600
+Message-ID: <20231014204033.3077052-5-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
+In-Reply-To: <20231014204033.3077052-1-sjg@chromium.org>
+References: <20231014204033.3077052-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,256 +91,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a test for the MMC load method. This shows the general shape of tests
-to come: The main test function calls do_spl_test_load with an appropriate
-callback to write the image to the medium.
+cbfsutil changed to 4-byte alignment for filenames instead of 16.
+Adjust the binman implementation to do the same.
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
+This mirrors commit 5779ca718c in coreboot.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Correct return value documentation for do_spl_test_load
-- Explicitly invalidate FAT and MMC caches before testing
+ tools/binman/cbfs_util.py      | 10 +++++-----
+ tools/binman/cbfs_util_test.py | 19 ++++++++++---------
+ tools/binman/ftest.py          | 10 +++++-----
+ 3 files changed, 20 insertions(+), 19 deletions(-)
 
- configs/sandbox_noinst_defconfig |  2 +
- include/spl.h                    |  4 ++
- include/test/spl.h               | 30 ++++++++++++++
- test/image/Kconfig               |  1 +
- test/image/spl_load.c            | 36 +++++++++++++++++
- test/image/spl_load_fs.c         | 69 +++++++++++++++++++++++++++++---
- 6 files changed, 137 insertions(+), 5 deletions(-)
-
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index 11be2dccf7d..4f16d9860d2 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -41,6 +41,8 @@ CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
- CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0xa000000
- CONFIG_SPL_SYS_MALLOC_SIZE=0x4000000
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x0
- CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_FS_EXT4=y
- CONFIG_SPL_I2C=y
-diff --git a/include/spl.h b/include/spl.h
-index 5b051ef2aae..708b15a0c7f 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -673,6 +673,10 @@ static inline const char *spl_loader_name(const struct spl_image_loader *loader)
- 	}
- #endif
+diff --git a/tools/binman/cbfs_util.py b/tools/binman/cbfs_util.py
+index 9ac38d8e4c1a..076768ae839b 100644
+--- a/tools/binman/cbfs_util.py
++++ b/tools/binman/cbfs_util.py
+@@ -42,7 +42,7 @@ HEADER_VERSION2    = 0x31313132
+ FILE_HEADER_FORMAT = b'>8sIIII'
+ FILE_HEADER_LEN    = 0x18
+ FILE_MAGIC         = b'LARCHIVE'
+-FILENAME_ALIGN     = 16  # Filename lengths are aligned to this
++ATTRIBUTE_ALIGN    = 4   # All attribute sizes must be divisible by this
  
-+#define SPL_LOAD_IMAGE_GET(_priority, _boot_device, _method) \
-+	ll_entry_get(struct spl_image_loader, \
-+		     _boot_device ## _priority ## _method, spl_image_loader)
-+
- /* SPL FAT image functions */
+ # A stage header containing information about 'stage' files
+ # Yes this is correct: this header is in litte-endian format
+@@ -186,7 +186,7 @@ def _pack_string(instr):
+         String with required padding (at least one 0x00 byte) at the end
+     """
+     val = tools.to_bytes(instr)
+-    pad_len = align_int(len(val) + 1, FILENAME_ALIGN)
++    pad_len = align_int(len(val) + 1, ATTRIBUTE_ALIGN)
+     return val + tools.get_bytes(0, pad_len - len(val))
  
- /**
-diff --git a/include/test/spl.h b/include/test/spl.h
-index 7dba3f03d07..009c6b35462 100644
---- a/include/test/spl.h
-+++ b/include/test/spl.h
-@@ -79,6 +79,36 @@ size_t create_image(void *dst, enum spl_test_image type,
- int check_image_info(struct unit_test_state *uts, struct spl_image_info *info1,
- 		     struct spl_image_info *info2);
  
-+/**
-+ * typedef write_image_t - Callback for writing an image
-+ * @uts: Current unit test state
-+ * @img: Image to write
-+ * @size: Size of @img
-+ *
-+ * Write @img to a location which will be read by a &struct spl_image_loader.
-+ *
-+ * Return: 0 on success or 1 on failure
-+ */
-+typedef int write_image_t(struct unit_test_state *its, void *img, size_t size);
-+
-+/**
-+ * do_spl_test_load() - Test loading with an SPL image loader
-+ * @uts: Current unit test state
-+ * @test_name: Name of the current test
-+ * @type: Type of image to try loading
-+ * @loader: The loader to test
-+ * @write_image: Callback to write the image to the backing storage
-+ *
-+ * Test @loader, performing the common tasks of setting up the image and
-+ * checking it was loaded correctly. The caller must supply a @write_image
-+ * callback to write the image to a location which will be read by @loader.
-+ *
-+ * Return: 0 on success or 1 on failure
-+ */
-+int do_spl_test_load(struct unit_test_state *uts, const char *test_name,
-+		     enum spl_test_image type, struct spl_image_loader *loader,
-+		     write_image_t write_image);
-+
- /**
-  * image_supported() - Determine whether an image type is supported
-  * @type: The image type to check
-diff --git a/test/image/Kconfig b/test/image/Kconfig
-index a52766b77d4..e6be1b829f3 100644
---- a/test/image/Kconfig
-+++ b/test/image/Kconfig
-@@ -18,6 +18,7 @@ config SPL_UT_LOAD_FS
- 	depends on SPL_FS_FAT
- 	depends on SPL_FS_EXT4
- 	depends on SPL_MMC_WRITE
-+	depends on SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
- 	default y
- 	help
- 	  Test filesystems and the various load methods which use them.
-diff --git a/test/image/spl_load.c b/test/image/spl_load.c
-index de2fddae359..d2ce66071bc 100644
---- a/test/image/spl_load.c
-+++ b/test/image/spl_load.c
-@@ -365,3 +365,39 @@ SPL_IMG_TEST(spl_test_image, LEGACY, 0);
- SPL_IMG_TEST(spl_test_image, IMX8, 0);
- SPL_IMG_TEST(spl_test_image, FIT_INTERNAL, 0);
- SPL_IMG_TEST(spl_test_image, FIT_EXTERNAL, 0);
-+
-+int do_spl_test_load(struct unit_test_state *uts, const char *test_name,
-+		     enum spl_test_image type, struct spl_image_loader *loader,
-+		     int (*write_image)(struct unit_test_state *, void *, size_t))
-+{
-+	size_t img_size, img_data, plain_size = SPL_TEST_DATA_SIZE;
-+	struct spl_image_info info_write = {
-+		.name = test_name,
-+		.size = plain_size,
-+	}, info_read = { };
-+	struct spl_boot_device bootdev = {
-+		.boot_device = loader->boot_device,
-+	};
-+	char *plain;
-+	void *img;
-+
-+	img_size = create_image(NULL, type, &info_write, &img_data);
-+	ut_assert(img_size);
-+	img = calloc(img_size, 1);
-+	ut_assertnonnull(img);
-+
-+	plain = img + img_data;
-+	generate_data(plain, plain_size, test_name);
-+	ut_asserteq(img_size, create_image(img, type, &info_write, NULL));
-+
-+	if (write_image(uts, img, img_size))
-+		return CMD_RET_FAILURE;
-+
-+	ut_assertok(loader->load_image(&info_read, &bootdev));
-+	if (check_image_info(uts, &info_write, &info_read))
-+		return CMD_RET_FAILURE;
-+	ut_asserteq_mem(plain, phys_to_virt(info_write.load_addr), plain_size);
-+
-+	free(img);
-+	return 0;
-+}
-diff --git a/test/image/spl_load_fs.c b/test/image/spl_load_fs.c
-index a8b45bdbc49..297ab08a820 100644
---- a/test/image/spl_load_fs.c
-+++ b/test/image/spl_load_fs.c
-@@ -306,8 +306,16 @@ static int spl_test_fat(struct unit_test_state *uts)
- }
- SPL_TEST(spl_test_fat, DM_FLAGS);
+@@ -300,7 +300,7 @@ class CbfsFile(object):
+             CbfsFile object containing the file information
+         """
+         cfile = CbfsFile('', TYPE_EMPTY, b'', None)
+-        cfile.size = space_to_use - FILE_HEADER_LEN - FILENAME_ALIGN
++        cfile.size = space_to_use - FILE_HEADER_LEN - ATTRIBUTE_ALIGN
+         cfile.erase_byte = erase_byte
+         return cfile
  
-+static bool spl_mmc_raw;
-+
-+u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
-+{
-+	return spl_mmc_raw ? MMCSD_MODE_RAW : MMCSD_MODE_FS;
-+}
-+
- static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
--			   enum spl_test_image type, create_fs_t create_fs)
-+			   enum spl_test_image type, create_fs_t create_fs,
-+			   bool blk_mode)
- {
- 	const char *filename = CONFIG_SPL_FS_LOAD_PAYLOAD_NAME;
- 	struct blk_desc *dev_desc;
-@@ -321,7 +329,11 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
- 		.start = 1,
- 		.sys_ind = 0x83,
- 	};
--	struct spl_boot_device bootdev = { };
-+	struct spl_image_loader *loader =
-+		SPL_LOAD_IMAGE_GET(0, BOOT_DEVICE_MMC1, spl_mmc_load_image);
-+	struct spl_boot_device bootdev = {
-+		.boot_device = loader->boot_device,
-+	};
- 	void *fs;
- 	char *data;
+@@ -859,8 +859,8 @@ class CbfsReader(object):
+         """
+         val = b''
+         while True:
+-            data = fd.read(FILENAME_ALIGN)
+-            if len(data) < FILENAME_ALIGN:
++            data = fd.read(ATTRIBUTE_ALIGN)
++            if len(data) < ATTRIBUTE_ALIGN:
+                 return None
+             pos = data.find(b'\0')
+             if pos == -1:
+diff --git a/tools/binman/cbfs_util_test.py b/tools/binman/cbfs_util_test.py
+index c3babbc64e78..64592525ec7d 100755
+--- a/tools/binman/cbfs_util_test.py
++++ b/tools/binman/cbfs_util_test.py
+@@ -96,7 +96,7 @@ class TestCbfs(unittest.TestCase):
+         self.assertEqual(arch, cbfs.arch)
+         return cbfs
  
-@@ -346,7 +358,12 @@ static int spl_test_mmc_fs(struct unit_test_state *uts, const char *test_name,
- 	ut_assertok(write_mbr_partitions(dev_desc, &part, 1, 0));
- 	ut_asserteq(part.size, blk_dwrite(dev_desc, part.start, part.size, fs));
+-    def _check_uboot(self, cbfs, ftype=cbfs_util.TYPE_RAW, offset=0x28,
++    def _check_uboot(self, cbfs, ftype=cbfs_util.TYPE_RAW, offset=0x20,
+                      data=U_BOOT_DATA, cbfs_offset=None):
+         """Check that the U-Boot file is as expected
  
--	ut_assertok(spl_blk_load_image(&info_read, &bootdev, UCLASS_MMC, 0, 1));
-+	spl_mmc_raw = false;
-+	if (blk_mode)
-+		ut_assertok(spl_blk_load_image(&info_read, &bootdev, UCLASS_MMC,
-+					       0, 1));
-+	else
-+		ut_assertok(loader->load_image(&info_read, &bootdev));
- 	if (check_image_info(uts, &info_write, &info_read))
- 		return CMD_RET_FAILURE;
- 	ut_asserteq_mem(data, phys_to_virt(info_write.load_addr), data_size);
-@@ -359,11 +376,53 @@ static int spl_test_blk(struct unit_test_state *uts, const char *test_name,
- 			enum spl_test_image type)
- {
- 	spl_fat_force_reregister();
--	if (spl_test_mmc_fs(uts, test_name, type, create_fat))
-+	if (spl_test_mmc_fs(uts, test_name, type, create_fat, true))
- 		return CMD_RET_FAILURE;
+@@ -122,7 +122,7 @@ class TestCbfs(unittest.TestCase):
+         self.assertEqual(len(data), cfile.memlen)
+         return cfile
  
--	return spl_test_mmc_fs(uts, test_name, type, create_ext2);
-+	return spl_test_mmc_fs(uts, test_name, type, create_ext2, true);
- }
- SPL_IMG_TEST(spl_test_blk, LEGACY, DM_FLAGS);
- SPL_IMG_TEST(spl_test_blk, FIT_EXTERNAL, DM_FLAGS);
- SPL_IMG_TEST(spl_test_blk, FIT_INTERNAL, DM_FLAGS);
-+
-+static int spl_test_mmc_write_image(struct unit_test_state *uts, void *img,
-+				    size_t img_size)
-+{
-+	struct blk_desc *dev_desc;
-+	size_t img_blocks;
-+
-+	dev_desc = blk_get_devnum_by_uclass_id(UCLASS_MMC, 0);
-+	ut_assertnonnull(dev_desc);
-+
-+	img_blocks = DIV_ROUND_UP(img_size, dev_desc->blksz);
-+	ut_asserteq(img_blocks, blk_dwrite(dev_desc,
-+					   CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR,
-+					   img_blocks, img));
-+
-+	spl_mmc_raw = true;
-+	return 0;
-+}
-+
-+static int spl_test_mmc(struct unit_test_state *uts, const char *test_name,
-+			enum spl_test_image type)
-+{
-+	spl_mmc_clear_cache();
-+	spl_fat_force_reregister();
-+
-+	if (type == LEGACY &&
-+	    spl_test_mmc_fs(uts, test_name, type, create_ext2, false))
-+		return CMD_RET_FAILURE;
-+
-+	if (type != IMX8 &&
-+	    spl_test_mmc_fs(uts, test_name, type, create_fat, false))
-+		return CMD_RET_FAILURE;
-+
-+	return do_spl_test_load(uts, test_name, type,
-+				SPL_LOAD_IMAGE_GET(0, BOOT_DEVICE_MMC1,
-+						   spl_mmc_load_image),
-+				spl_test_mmc_write_image);
-+}
-+SPL_IMG_TEST(spl_test_mmc, LEGACY, DM_FLAGS);
-+SPL_IMG_TEST(spl_test_mmc, IMX8, DM_FLAGS);
-+SPL_IMG_TEST(spl_test_mmc, FIT_EXTERNAL, DM_FLAGS);
-+SPL_IMG_TEST(spl_test_mmc, FIT_INTERNAL, DM_FLAGS);
+-    def _check_dtb(self, cbfs, offset=0x28, data=U_BOOT_DTB_DATA,
++    def _check_dtb(self, cbfs, offset=0x24, data=U_BOOT_DTB_DATA,
+                    cbfs_offset=None):
+         """Check that the U-Boot dtb file is as expected
+ 
+@@ -437,8 +437,9 @@ class TestCbfs(unittest.TestCase):
+             pos = fd.tell()
+ 
+         # Create a new CBFS with only the first 4 bytes of the compression tag,
+-        # then try to read the file
+-        tag_pos = pos + cbfs_util.FILE_HEADER_LEN + cbfs_util.FILENAME_ALIGN
++        # then try to read the file. Note that the tag gets pushed out 4 bytes
++        tag_pos = (4 + pos + cbfs_util.FILE_HEADER_LEN +
++                   cbfs_util.ATTRIBUTE_ALIGN)
+         newdata = data[:tag_pos + 4]
+         with test_util.capture_sys_output() as (stdout, _stderr):
+             with io.BytesIO(newdata) as fd:
+@@ -489,7 +490,7 @@ class TestCbfs(unittest.TestCase):
+         load = 0xfef20000
+         entry = load + 2
+ 
+-        cfile = self._check_uboot(cbfs, cbfs_util.TYPE_STAGE, offset=0x28,
++        cfile = self._check_uboot(cbfs, cbfs_util.TYPE_STAGE, offset=0x20,
+                                   data=U_BOOT_DATA + U_BOOT_DTB_DATA)
+ 
+         self.assertEqual(entry, cfile.entry)
+@@ -520,7 +521,7 @@ class TestCbfs(unittest.TestCase):
+         self.assertIn('u-boot', cbfs.files)
+         cfile = cbfs.files['u-boot']
+         self.assertEqual(cfile.name, 'u-boot')
+-        self.assertEqual(cfile.offset, 56)
++        self.assertEqual(cfile.offset, 0x30)
+         self.assertEqual(cfile.data, COMPRESS_DATA)
+         self.assertEqual(cfile.ftype, cbfs_util.TYPE_RAW)
+         self.assertEqual(cfile.compress, cbfs_util.COMPRESS_LZ4)
+@@ -529,7 +530,7 @@ class TestCbfs(unittest.TestCase):
+         self.assertIn('u-boot-dtb', cbfs.files)
+         cfile = cbfs.files['u-boot-dtb']
+         self.assertEqual(cfile.name, 'u-boot-dtb')
+-        self.assertEqual(cfile.offset, 56)
++        self.assertEqual(cfile.offset, 0x34)
+         self.assertEqual(cfile.data, COMPRESS_DATA)
+         self.assertEqual(cfile.ftype, cbfs_util.TYPE_RAW)
+         self.assertEqual(cfile.compress, cbfs_util.COMPRESS_LZMA)
+@@ -598,8 +599,8 @@ class TestCbfs(unittest.TestCase):
+         data = cbw.get_data()
+ 
+         cbfs = cbfs_util.CbfsReader(data)
+-        self.assertEqual(0x28, cbfs.files['u-boot'].cbfs_offset)
+-        self.assertEqual(0x68, cbfs.files['u-boot-dtb'].cbfs_offset)
++        self.assertEqual(0x20, cbfs.files['u-boot'].cbfs_offset)
++        self.assertEqual(0x64, cbfs.files['u-boot-dtb'].cbfs_offset)
+ 
+ 
+ if __name__ == '__main__':
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index 2875194d750e..5ace2a825dc5 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -2667,12 +2667,12 @@ class TestFunctional(unittest.TestCase):
+             'cbfs:offset': 0,
+             'cbfs:size': len(data),
+             'cbfs:image-pos': 0,
+-            'cbfs/u-boot:offset': 0x38,
++            'cbfs/u-boot:offset': 0x30,
+             'cbfs/u-boot:uncomp-size': len(U_BOOT_DATA),
+-            'cbfs/u-boot:image-pos': 0x38,
+-            'cbfs/u-boot-dtb:offset': 0xa8,
++            'cbfs/u-boot:image-pos': 0x30,
++            'cbfs/u-boot-dtb:offset': 0xa4,
+             'cbfs/u-boot-dtb:size': len(U_BOOT_DATA),
+-            'cbfs/u-boot-dtb:image-pos': 0xa8,
++            'cbfs/u-boot-dtb:image-pos': 0xa4,
+             }, props)
+ 
+     def testCbfsBadType(self):
+@@ -2854,7 +2854,7 @@ class TestFunctional(unittest.TestCase):
+ '  u-boot                  0     4  u-boot             0',
+ '  section               100   %x  section          100' % section_size,
+ '    cbfs                100   400  cbfs               0',
+-'      u-boot            128     4  u-boot            28',
++'      u-boot            120     4  u-boot            20',
+ '      u-boot-dtb        180   105  u-boot-dtb        80          3c9',
+ '    u-boot-dtb          500   %x  u-boot-dtb       400          3c9' % fdt_size,
+ '  fdtmap                %x   3bd  fdtmap           %x' %
 -- 
-2.37.1
+2.42.0.655.g421f12c284-goog
 
