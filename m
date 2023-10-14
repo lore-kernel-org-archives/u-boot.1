@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7387ACDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:44:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD04CDB483
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:44:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7DF586F9E;
+	by phobos.denx.de (Postfix) with ESMTP id 3A8A886F85;
 	Sun, 15 Oct 2023 09:17:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IFwjZaHj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kdGnFMXv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D89B86F1E; Sun, 15 Oct 2023 09:16:10 +0200 (CEST)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 4A72186F33; Sun, 15 Oct 2023 09:16:05 +0200 (CEST)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA34186F3A
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:15:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B35A086F20
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:15:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-66d190a8f87so19432696d6.0
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:15:31 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3af5b26d599so2609039b6e.2
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:15:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697354130; x=1697958930; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LJv8YBoSQtp8nnnCIVzZZkuzYLJGuElzWm0jPnVSgQ4=;
- b=IFwjZaHj1XSQWcIwD5qf9z2K7jCZTkKX8m22L5yds7ZkPNutvRye0GqbGiNUOeqx0F
- sINU79lFbxnGVDu62S8+CNavxYb7cCMB4h3wLixFg/5dZvuWL6hib552xGSk5s7tkvK6
- OTNm0O76BcYzsV/P89BhJRDMtsBN2lfpaTOIj22UYr+zQvQdZKtphav/ZwYjuyuCfM5T
- ZIw8Yt8h2kHrPlIRMe0TsWx2wW+16a41pLQRWq9/zp+Hq6l0/ri9cqfM1PfKjyaOunwg
- gsn5MNGRQbAUo2T1kqAkSxGHIgIibxyRD0SLp4EBe39O6TC2steuJ1l/tAM9Wc25pEib
- gyjQ==
+ d=konsulko.com; s=google; t=1697354119; x=1697958919; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=nNu/ct6T6u4JR6shPM8jCnM4HeaXMIDAgQ94bZlrOtc=;
+ b=kdGnFMXvd+BPhHOrFNduhEuT6Lm0dk03QF6/dEqZIlcEEfa+OWhULMxkofBbq3vm5Y
+ AnDTYvR58xj7KcYgX+8VOoSovr+3sOKL/bZqkjLmg+U1tOWhZ8BAiAbYT1UWmXMi+J89
+ aq23vdMte2tdD/+D8i5rutpzMrvSOEYiYk0B8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697354130; x=1697958930;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LJv8YBoSQtp8nnnCIVzZZkuzYLJGuElzWm0jPnVSgQ4=;
- b=XFUf+kjqGh2czFmJw/VGLj1eQ4hvJwp1+Jz3LX8ROuozX9A90Z9mArf3L6GN+HtxrT
- xAdRpfRWL2osv6K2QbF9iXkOVQQAGM/7yQYrS/77r1stxawVChJYhzOdL59F6psKmroi
- r2v9s3iPqwz/8Q1wH+fSn3QSIY3/KTRO5DJWrfCx36yOpJtPXt81IMKwivsX/fXiDOki
- /FVtdBu6VTf8yNIkhj2VHFu1yTVGCStUhoZyFCldqembdIqf0XwFcLLcgKS3qENRh8uE
- WZnTyVs2xDkMHRc+fbMw8Z5Jna18GHsPFDRshuvcI7RgShTNubAtB4bEN653DsJHLiv5
- znGQ==
-X-Gm-Message-State: AOJu0YwqxKDZhqyr7u1SrYvpYWAItR4jCjAWXwY5XS4BBNx/NA53PeQa
- 0UxK4QicXmq6wkxcoeJNncLZVr2vu0H3vg==
-X-Google-Smtp-Source: AGHT+IEzudiSG/jxu9EqVPvamHD88Lpx5mA9qD7Z4pVHvi+ma59wVVHYaRQfgvMEB4XE99SR8qFThA==
-X-Received: by 2002:ac8:5784:0:b0:400:9896:b0fa with SMTP id
- v4-20020ac85784000000b004009896b0famr36788482qta.64.1697316491344; 
- Sat, 14 Oct 2023 13:48:11 -0700 (PDT)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- kk1-20020a05622a2c0100b004181c32dcc3sm1747002qtb.16.2023.10.14.13.48.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Oct 2023 13:48:11 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Anderson <seanga2@gmail.com>, Marek Vasut <marex@denx.de>
-Subject: [PATCH v2 03/29] spl: fit: Fix entry point for SPL_LOAD_FIT_FULL
-Date: Sat, 14 Oct 2023 16:47:39 -0400
-Message-Id: <20231014204805.439009-4-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231014204805.439009-1-seanga2@gmail.com>
-References: <20231014204805.439009-1-seanga2@gmail.com>
+ d=1e100.net; s=20230601; t=1697354119; x=1697958919;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=nNu/ct6T6u4JR6shPM8jCnM4HeaXMIDAgQ94bZlrOtc=;
+ b=GfV4+V48tuW9sRGDetUfodKCzMLb6citek/D5XQ0oHfXn37lZ3jsWvCoIqDf8S83yk
+ KfxipKhJ5o3j0xv/J5WwNQfJKXJ9/wEiNA7NfmoZ4QkLahKEU+a14qMkuZP3+XqF7xL1
+ ZgLGUlckyEUDQw3xTDRGBC9K8AsP6VdRT+9f6bznjq9cyKmoX3CoerMKOuSepyRj2WPx
+ MK4cyH7ndYYHJ0fC0m94bhK+zem3RvsMLu8H1Tw+XW7JtaY1toQfFE/SqAULpWW6Y7P8
+ pwPaZQh6e2QA0Rt46nt6LSwmpXjcNRQzBuobKpmFGCga3Gsx9RrjtCTzJBapjJ5oX9U0
+ QY+w==
+X-Gm-Message-State: AOJu0YxrIt9mLV17+K9a4+uIdEj10PYQ/Z1XAw1wmEcJGL5bejYlg+PK
+ IFxSX63P95RaTl3MXkx87nBOGIQuKbFyJFLyrmD9Sw==
+X-Google-Smtp-Source: AGHT+IEH+eP1JIJBXuLTA5h4/oI7+dgWTDNVi6GGD5L3P7TC3tcuWXg2FvOLpVFaHLwh+9SxwTD2lg==
+X-Received: by 2002:a05:620a:390d:b0:770:f24a:68e6 with SMTP id
+ qr13-20020a05620a390d00b00770f24a68e6mr35264178qkn.55.1697318355406; 
+ Sat, 14 Oct 2023 14:19:15 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
+ [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
+ mx11-20020a0562142e0b00b006564afc5908sm1965598qvb.111.2023.10.14.14.19.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 14 Oct 2023 14:19:14 -0700 (PDT)
+Date: Sat, 14 Oct 2023 17:19:12 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: Please pull u-boot-dm
+Message-ID: <20231014211912.GA3119521@bill-the-cat>
+References: <CAPnjgZ3GrxALQ12Ne3fAZT_dWRbCJu93+0L185z5T2KD9FoLaQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1dAa1EZIYvM8CJDb"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ3GrxALQ12Ne3fAZT_dWRbCJu93+0L185z5T2KD9FoLaQ@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,35 +90,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The entry point is not always the same as the load address. Use the value
-of the entry property if it exists.
 
-Fixes: 8a9dc16e4d0 ("spl: Add full fitImage support")
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
----
+--1dAa1EZIYvM8CJDb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Changes in v2:
-- Remove check for zero entry point in spl_load_fit_image
+On Fri, Oct 13, 2023 at 03:01:12PM -0700, Simon Glass wrote:
 
- common/spl/spl_fit.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+> Hi Tom,
+>=20
+>=20
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/18115
+>=20
+> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D53&view=
+=3Dresults
+>=20
+>=20
+> The following changes since commit d5d24e2e0a3f54175e458d89acd626da939e11=
+30:
+>=20
+>   Merge tag 'efi-2024-01-rc1' of
+> https://source.denx.de/u-boot/custodians/u-boot-efi (2023-10-13
+> 11:08:10 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://git.denx.de/u-boot-dm.git tags/dm-pull-13oct23
+>=20
+> for you to fetch changes up to 74aae507bc4d5726308c191d3191d9cd624ba0d2:
+>=20
+>   binman: capsule: Add support for generating EFI empty capsules
+> (2023-10-13 14:01:42 -0600)
+>=20
 
-diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-index ce6b8aa370a..4f8b951efe2 100644
---- a/common/spl/spl_fit.c
-+++ b/common/spl/spl_fit.c
-@@ -884,8 +884,9 @@ int spl_load_fit_image(struct spl_image_info *spl_image,
- 		return ret;
- 
- 	spl_image->size = fw_len;
--	spl_image->entry_point = fw_data;
- 	spl_image->load_addr = fw_data;
-+	if (fit_image_get_entry(header, ret, &spl_image->entry_point))
-+		spl_image->entry_point = fw_data;
- 	if (fit_image_get_os(header, ret, &spl_image->os))
- 		spl_image->os = IH_OS_INVALID;
- 	spl_image->name = genimg_get_os_name(spl_image->os);
--- 
-2.37.1
+Applied to u-boot/master, thanks!
 
+--=20
+Tom
+
+--1dAa1EZIYvM8CJDb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUrBc0ACgkQFHw5/5Y0
+tywDkQwAs06zwdO8zNwLgbtHFwkfWOmFgXFsxcc7IuBI5gIiqaCVGC3tDb+ON6Ma
+ckvZPFTCn1G1kHrqGs8aSdWX5/15mm42Oq6CGwui6OhYRK47WvtIRBXBbRHr0Zq6
+9sCZok3bg6kYP9S2O1/AKDkKh8h+JeWAC5RDZ1FPuMCER03LSMQsveo7FRWPyYl2
+Z91BeH4zmzW6CTkyHPYV0DuRt4IzbKr614IccvVL/hJaYf2Dj0eCwH65Uxz+SdNf
+8++4lFSyQRfgfKA/4lijsmAeuBJCpdOrwAC2vu+CCOqSn1UZntRbQg3tP6Vy2Qdk
+kFNIWf4JO04vVeiYefARuvPCbAo9zwDR2bZPwJ6nydN6VTIZt8ied5MHGCH2gNUM
+TNtAb+4hHoKhZVx7CRJFsWE6+WwBPkD2+of+YrL6kIogBhIa4TU1ce1BxCVzcWRl
+2TRNQZ9N9+n7Qw3ZxlVgx9gE3ls0mLAtSzXFnnOP/LnJiOcIKr1Tjekhl8VnWTp0
+W2/rWBUi
+=DONU
+-----END PGP SIGNATURE-----
+
+--1dAa1EZIYvM8CJDb--
