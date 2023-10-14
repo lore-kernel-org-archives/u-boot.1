@@ -4,76 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45CDBCDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:25:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB9AFCDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:26:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92D6086E22;
-	Sun, 15 Oct 2023 08:45:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 3FD3786F52;
+	Sun, 15 Oct 2023 08:45:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DjC29NjL";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sr+x1msT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qhZ+182D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26CB786867; Sun, 15 Oct 2023 08:43:36 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 58C6086BD3; Sun, 15 Oct 2023 08:42:56 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E37E86F5E
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:43:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5BE7986F6C
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:41:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4S7Dp93Pv8z9slg;
- Sat, 14 Oct 2023 22:03:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697313809;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kqq4hq73wx8x0J+mIf83HFsS7UWl8B5DtrpKJgA3an0=;
- b=DjC29NjLa1VgYfXSBYs0xYCPfq+kGk9o6lx90yamP+h1dRiC0UXzYMLpfi12ZW5vKqYt+a
- UIl0OKjbm4VkBFSWydfA0XJ6O7pa85rzXv/ZmCbBrrqd99zNDI5cv10+BcWbhyrWp69Sb+
- B30heSPqPDwhin5Qp6kEPeYcpXCqiqwRhm7w0jzJMIEsYJyKeyxnhJJUYoIAVn8zqb7oo4
- pThaQmgEmlYoW9RgaLqxNj9dg7gJMYzYsCChNVvNdnffSFjOp+EysdU29+g9z7tfCp3qIc
- pe6dzf6fK6Ee0AXUkzwAG8Mv11zT/yvuRzfPDmT99jU6Rz0NktAhVskBhrbjXQ==
-Message-ID: <80ad144b-d90f-4029-9a05-b52991965a0c@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697313807;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=kqq4hq73wx8x0J+mIf83HFsS7UWl8B5DtrpKJgA3an0=;
- b=sr+x1msTW173lmNc8XYJJGMHVmuyGyTxaeyLB7VIgz37ECWs47zBXzdspXz4IiPdXhgMFR
- RUeSWD7ioee/08z0ibb5p/rTsm9Jx/KxDd4kHLXgz17GKDvYWiPEkicCp8SdSAIKjjXHKd
- aJIs4j+eMRmze7UbkH9otl/U9Y8qvFiN7lAOm1OlftS/GUf5/2p+aFaxvvVHN/jh/gq/Qx
- F/+60Od4rQWcPI9XWnY9o9OAc8TBFGxIgseQSnUBi+qK8GvXgMGcBrayfUDVAzqWbBB/XG
- SUrp0QwMDBXBRHeArY8J97zTAFcOY7f2ZmH4N5YbHpX3AdMZ3QeZEGpkAL0wuw==
-Date: Sat, 14 Oct 2023 22:03:25 +0200
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-41819a68143so24665011cf.3
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:41:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1697352104; x=1697956904; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=i0PgxlVWi+UiptpmIj6Vdz5hUqkwOJ6GZykG8LjUoq8=;
+ b=qhZ+182DumOmgsCX0ami/+mfBb4XFhDeioXbLGSP4SakDzmFeWHb904Hz7fmjvS90g
+ XUXKfFj0WIwnD6lQqpmGTovpsOdk7LdjPX2rkFASDiXjIbL0UJweifEHvIuzz2pTS2vB
+ vVyC6pZ+IpS2cVQNnRISYA5lgj6K2uXwmt5yw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697352104; x=1697956904;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i0PgxlVWi+UiptpmIj6Vdz5hUqkwOJ6GZykG8LjUoq8=;
+ b=kgSlJFrf6X8mu+f8Wm6BXEr5frKNPZGsVduUJ5LHL/r6sfI1Tgd3kZfqO2UneDRqLV
+ pXsnfimI/7v4laE/og/6wWlMxYwaUPFHflMj3tJqsvxp1oqUUn7MahpeIX5S8ClcmvRN
+ 6bKHFBy0iNqEAUwnYpURRqH54fZAjR9xnVxh1y/m+Q/gwQPf4L2T2a5evYJ8awKNl8DP
+ D+7NQS4c60F2cYPlrQd3hTiZ/pjil6/P7KdcH4XHAzy8fu4B3n9sRaZN4/e2ADe7ehMB
+ h59Uh6EhTvzxTOzQckMFuhLc1EVm/nWa7kDjqYSutlKy5/uYllHm4Vd2hrubdkUUzxyA
+ f/+A==
+X-Gm-Message-State: AOJu0YzerRt1S+G5hurEHzu5F5naRm/1Q16FlCb01xtnHGktSXIe1zro
+ WlQGxWaO/Tj076uZQ7bJYs9L2rfwq/kX9QSytojXLA==
+X-Google-Smtp-Source: AGHT+IEDaB8v6z11M70FlW6wQPXD22cghufJ6bwq1vV40pg/obHDDbTESWeA6KCoB0tAuT1Bw3xrog==
+X-Received: by 2002:ad4:4eac:0:b0:66d:1a62:4109 with SMTP id
+ ed12-20020ad44eac000000b0066d1a624109mr10301513qvb.1.1697318552884; 
+ Sat, 14 Oct 2023 14:22:32 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
+ [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
+ y2-20020a0cec02000000b0065b29403540sm1977352qvo.127.2023.10.14.14.22.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 14 Oct 2023 14:22:31 -0700 (PDT)
+Date: Sat, 14 Oct 2023 17:22:29 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH v2 16/29] net: bootp: Move port numbers to header
+Message-ID: <20231014212229.GB3119521@bill-the-cat>
+References: <20231014204805.439009-1-seanga2@gmail.com>
+ <20231014204805.439009-17-seanga2@gmail.com>
+ <70B2C086-30BC-4CAC-B4DC-C1B7B32BB95C@gmx.de>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 10/19] pinctrl: renesas: Add RZ/G2L PFC driver
-Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
- <20231009164645.164464-11-paul.barker.ct@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231009164645.164464-11-paul.barker.ct@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: c17788d9db79143a9d9
-X-MBO-RS-META: g3z49psrw9sm8xeirw4in5h855pohbnz
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="nIZBizC2iclUH8pY"
+Content-Disposition: inline
+In-Reply-To: <70B2C086-30BC-4CAC-B4DC-C1B7B32BB95C@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,44 +95,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/9/23 18:46, Paul Barker wrote:
-> This driver provides pinctrl and gpio control for the Renesas RZ/G2L
-> (R9A07G044) SoC.
-> 
-> This patch is based on the corresponding Linux v6.5 driver.
-> 
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
-> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-> ---
-> v1->v2:
->    * Split GPIO into separate file.
->    * Drop unnecessary parenthesis in defines.
->    * Keep Kconfig list sorted.
->    * Drop pfc_enabled flag.
->    * Use const where possible.
->    * Use clrbits/setbits/clrsetbits functions.
->    * Return -ENOENT to skip invalid GPIO offsets.
->    * Include ofnode_parse_phandle_with_args() return code in err print.
->    * Use macro instal of port + 0x10.
->    * Add TODO comment re Ethernet PIN_CFG.
-> 
->   arch/arm/mach-rmobile/Kconfig       |   2 +
->   drivers/gpio/Kconfig                |   7 +
->   drivers/gpio/Makefile               |   1 +
->   drivers/gpio/rzg2l-gpio.c           | 170 ++++++++
 
-This GPIO and pinctrl driver addition should be two patches, really.
+--nIZBizC2iclUH8pY
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->   drivers/pinctrl/renesas/Kconfig     |  10 +
->   drivers/pinctrl/renesas/Makefile    |   1 +
->   drivers/pinctrl/renesas/rzg2l-pfc.c | 625 ++++++++++++++++++++++++++++
->   include/renesas/rzg2l-pfc.h         | 110 +++++
->   8 files changed, 926 insertions(+)
->   create mode 100644 drivers/gpio/rzg2l-gpio.c
->   create mode 100644 drivers/pinctrl/renesas/rzg2l-pfc.c
->   create mode 100644 include/renesas/rzg2l-pfc.h
+On Sat, Oct 14, 2023 at 11:20:31PM +0200, Heinrich Schuchardt wrote:
+>=20
+>=20
+> Am 14. Oktober 2023 22:47:52 MESZ schrieb Sean Anderson <seanga2@gmail.co=
+m>:
+> >These defines are useful when testing bootp.
+> >
+> >Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> >Reviewed-by: Simon Glass <sjg@chromium.org>
+> >Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> >---
+> >
+> >(no changes since v1)
+> >
+> > net/bootp.c | 3 ---
+> > net/bootp.h | 3 +++
+> > 2 files changed, 3 insertions(+), 3 deletions(-)
+> >
+> >diff --git a/net/bootp.c b/net/bootp.c
+> >index 8b1a4ae2ef8..2053cce88c6 100644
+> >--- a/net/bootp.c
+> >+++ b/net/bootp.c
+> >@@ -41,9 +41,6 @@
+> >  */
+> > #define TIMEOUT_MS	((3 + (CONFIG_NET_RETRY_COUNT * 5)) * 1000)
+> >=20
+> >-#define PORT_BOOTPS	67		/* BOOTP server UDP port */
+> >-#define PORT_BOOTPC	68		/* BOOTP client UDP port */
+> >-
+> > #ifndef CFG_DHCP_MIN_EXT_LEN		/* minimal length of extension list */
+> > #define CFG_DHCP_MIN_EXT_LEN 64
+> > #endif
+> >diff --git a/net/bootp.h b/net/bootp.h
+> >index 567340ec5d4..4e32b19d424 100644
+> >--- a/net/bootp.h
+> >+++ b/net/bootp.h
+> >@@ -15,6 +15,9 @@
+> >=20
+> > /**********************************************************************/
+> >=20
+> >+#define PORT_BOOTPS	67		/* BOOTP server UDP port */
+>=20
+> Reading code I would have a hard time to immediately see what this consta=
+nt name stands for.
+>=20
+> Shouldn't this be renamed BOOTP_SERVER_PORT to create readable code?
 
-Otherwise
+We're just moving the code around for now, and this should get replaced
+by lwip in time.
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+--=20
+Tom
+
+--nIZBizC2iclUH8pY
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUrBpUACgkQFHw5/5Y0
+tyxn4gwApq4MX3HafxEcSv6I4zV8uzz0IWM1bDyn4tJXOUZergmUHq2YS00equ7a
+spqQxXmuCRTcHJBPjQ6WG74O0wZjNy9JY/Q4K7pE1B2kNkg/QM3JfNNCCDWmtkxZ
+BTKicGOhdpg/6cUT4rfIhi2vqz6EOpBREvoYR6mCkXez8ZjqTqHTSd08rOMBMlvc
+I3al+70vYkIjTn/FuQChZ6swINRhtyXEczc4jvIzH12fUnYzIg1QR9BEdb4xqEXJ
+c3ZJKJU67uLaaneM1Ke3g6X633jWhGX+K2sHInINjNYLjScL8tXtJmX72taFctl/
+1koCqrhoWvCYZNGM4XciO1fPkZKRHnqMyJBf8VZ/50uKp0KFG2lm4BUqDF6qnvYQ
+0NcLAczPDLYizSxati60g9ui0lTiYDBd9SBhb8U2oMQL2ayqdqTl9hwVeWKoTclP
+Pq+t9dAPIQUjW4l1M1WmD4X4BEl3rcRUSKnJok5l5GIj+S3bS6QSeOuPrJDDTuTx
+WuAaKzS6
+=eGo5
+-----END PGP SIGNATURE-----
+
+--nIZBizC2iclUH8pY--
