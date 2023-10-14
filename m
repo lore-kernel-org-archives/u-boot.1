@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD04CDB483
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:44:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 545D5CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:44:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A8A886F85;
-	Sun, 15 Oct 2023 09:17:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 71C1086ECF;
+	Sun, 15 Oct 2023 09:17:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kdGnFMXv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jATJcVoF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4A72186F33; Sun, 15 Oct 2023 09:16:05 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id EE00F86F1B; Sun, 15 Oct 2023 09:15:18 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B35A086F20
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:15:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6930E86FA5
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:14:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3af5b26d599so2609039b6e.2
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:15:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-405524e6768so33468275e9.2
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:14:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697354119; x=1697958919; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nNu/ct6T6u4JR6shPM8jCnM4HeaXMIDAgQ94bZlrOtc=;
- b=kdGnFMXvd+BPhHOrFNduhEuT6Lm0dk03QF6/dEqZIlcEEfa+OWhULMxkofBbq3vm5Y
- AnDTYvR58xj7KcYgX+8VOoSovr+3sOKL/bZqkjLmg+U1tOWhZ8BAiAbYT1UWmXMi+J89
- aq23vdMte2tdD/+D8i5rutpzMrvSOEYiYk0B8=
+ d=gmail.com; s=20230601; t=1697354084; x=1697958884; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=q0BMNOwiB3zbq2/uMdIPD0BSOla7R1dXW5DnpXXfJQM=;
+ b=jATJcVoFeyVskV28miGEf1X9WQzru6FRseixa39n/cRtthvzl4lKHsoxvUNKySAGys
+ /bAn5Z4z9cQC7N34PklkxHmN8XERrmTFLYmTYHFqkRmjDmRzDyiUs8cOWlZeiZbcW8SC
+ FWDKOgkVU2hsLUXdCBJSDCrkrkvJTEz4dSAen8S0eClXZw2McxxP7Y7Rw6m8lVPvYNZ7
+ iq6HvxHd3YvJfmC0VRwewfVpEc4CL6q515OlROrUob9UoIH2YbCXfTEFJGxcP1rqxOh0
+ nPwFaS7r+TLmtdEnpKD8sSDA0MSSLYEDDVIYe7l6D4oe9g5cSmACdyLeL4iLP+8E575O
+ DCcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697354119; x=1697958919;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nNu/ct6T6u4JR6shPM8jCnM4HeaXMIDAgQ94bZlrOtc=;
- b=GfV4+V48tuW9sRGDetUfodKCzMLb6citek/D5XQ0oHfXn37lZ3jsWvCoIqDf8S83yk
- KfxipKhJ5o3j0xv/J5WwNQfJKXJ9/wEiNA7NfmoZ4QkLahKEU+a14qMkuZP3+XqF7xL1
- ZgLGUlckyEUDQw3xTDRGBC9K8AsP6VdRT+9f6bznjq9cyKmoX3CoerMKOuSepyRj2WPx
- MK4cyH7ndYYHJ0fC0m94bhK+zem3RvsMLu8H1Tw+XW7JtaY1toQfFE/SqAULpWW6Y7P8
- pwPaZQh6e2QA0Rt46nt6LSwmpXjcNRQzBuobKpmFGCga3Gsx9RrjtCTzJBapjJ5oX9U0
- QY+w==
-X-Gm-Message-State: AOJu0YxrIt9mLV17+K9a4+uIdEj10PYQ/Z1XAw1wmEcJGL5bejYlg+PK
- IFxSX63P95RaTl3MXkx87nBOGIQuKbFyJFLyrmD9Sw==
-X-Google-Smtp-Source: AGHT+IEH+eP1JIJBXuLTA5h4/oI7+dgWTDNVi6GGD5L3P7TC3tcuWXg2FvOLpVFaHLwh+9SxwTD2lg==
-X-Received: by 2002:a05:620a:390d:b0:770:f24a:68e6 with SMTP id
- qr13-20020a05620a390d00b00770f24a68e6mr35264178qkn.55.1697318355406; 
- Sat, 14 Oct 2023 14:19:15 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- mx11-20020a0562142e0b00b006564afc5908sm1965598qvb.111.2023.10.14.14.19.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Oct 2023 14:19:14 -0700 (PDT)
-Date: Sat, 14 Oct 2023 17:19:12 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-dm
-Message-ID: <20231014211912.GA3119521@bill-the-cat>
-References: <CAPnjgZ3GrxALQ12Ne3fAZT_dWRbCJu93+0L185z5T2KD9FoLaQ@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1697354084; x=1697958884;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=q0BMNOwiB3zbq2/uMdIPD0BSOla7R1dXW5DnpXXfJQM=;
+ b=XuUmDk1k//jZ5ifX+raE+hm2lnMh+6vURUPMohzVOnFcFE3JQcuzUSAEw5HLbEUYes
+ tknhiYDUVY+1xnufO+KhoVS2rhCnkKQjwTdhsILdHT6rNeN04biIBcBa9iK44YCWV0WV
+ 17EiTh1cA6NNgPcmgDbtP1eByNghBkfItG6Gvi0TjCpUNfovaovV75jjCs7fWCQaoSr6
+ RI8lNfAZ1T9fRO4+UZcFL8G7Gr6AfJDn6gEcfiNXVJ5LratgwAzBLSCSfH+M4reEvkuO
+ 9oC+WbwXmAlbd0Kz+4qZlaSnfdP0yNz8GdWGbPEI5sb7KQdPkAJM764jLUf7JJfISD5v
+ 8TDg==
+X-Gm-Message-State: AOJu0Yy/pxBtOPoB25FFfIFhT8sjWytpkFYTS3vXUI7+OlZ2DRXQALcc
+ TQfk9lLNHGNZANoyKUo4JDi3C9G7z1h2ykEv3hw5aCjH
+X-Google-Smtp-Source: AGHT+IFbiHLZ6t+2DVCy9IGqq2uT0xt1s0X0+f6frcXe3fkqPhLJ09ibyz/VE2SlXiboDxSXrUnKu6Kh+eacfQ11iN4=
+X-Received: by 2002:a17:907:7d8b:b0:9bf:4915:22c9 with SMTP id
+ oz11-20020a1709077d8b00b009bf491522c9mr1069718ejc.32.1697318961767; Sat, 14
+ Oct 2023 14:29:21 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="1dAa1EZIYvM8CJDb"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ3GrxALQ12Ne3fAZT_dWRbCJu93+0L185z5T2KD9FoLaQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230317162253.1049446-1-paul.liu@linaro.org>
+ <20230317162253.1049446-2-paul.liu@linaro.org>
+ <CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=J0oHyvN75bTaCUw@mail.gmail.com>
+ <fac6ef1747ec318787f90a6d0c81163b@kernel.org>
+In-Reply-To: <fac6ef1747ec318787f90a6d0c81163b@kernel.org>
+From: Chris Packham <judge.packham@gmail.com>
+Date: Sun, 15 Oct 2023 10:29:08 +1300
+Message-ID: <CAFOYHZAmWj6cgXib+m3Dy+mABcwEmPWAHLUgxeBe=2JVLsgaYQ@mail.gmail.com>
+Subject: Re: [PATCH 1/3] arm64: Use FEAT_HAFDBS to track dirty pages when
+ available
+To: Marc Zyngier <maz@kernel.org>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ u-boot <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,61 +91,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sat, 14 Oct 2023, 11:04 am Marc Zyngier, <maz@kernel.org> wrote:
 
---1dAa1EZIYvM8CJDb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> On 2023-10-13 03:40, Chris Packham wrote:
+> > Hi Marc, Paul,
+> >
+> > On Sat, Mar 18, 2023 at 5:23=E2=80=AFAM Ying-Chun Liu (PaulLiu)
+> > <paul.liu@linaro.org> wrote:
+> >>
+> >> From: Marc Zyngier <maz@kernel.org>
+> >>
+> >> Some recent arm64 cores have a facility that allows the page
+> >> table walker to track the dirty state of a page. This makes it
+> >> really efficient to perform CMOs by VA as we only need to look
+> >> at dirty pages.
+> >>
+> >> Signed-off-by: Marc Zyngier <maz@kernel.org>
+> >> [ Paul: pick from the Android tree. Rebase to the upstream ]
+> >> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> >> Cc: Tom Rini <trini@konsulko.com>
+> >> Link:
+> >>
+> https://android.googlesource.com/platform/external/u-boot/+/3c433724e6f83=
+0a6b2edd5ec3d4a504794887263
+> >
+> > I think this may have caused a regression for the Marvell AC5X
+> > board(s). I found that v2023.07 locked up at boot but v2023.01 was
+> > fine. The lockup seemed to be in the 'Net:' init probably just as the
+> > mvneta driver was being initialised.
+> >
+> > A git bisect led me to this change although for this specific change
+> > instead of the lockup I get a crash so maybe I'm actually hitting a
+> > different issue.
+> >
+> > Any thoughts as to why this may have caused problems?
+>
+> Not really. What CPUs does this platform have? What is the offending
+> driver doing to trigger the issue? Can you provide some level of
+> tracing?
+>
 
-On Fri, Oct 13, 2023 at 03:01:12PM -0700, Simon Glass wrote:
+The Marvell AC5X is a network switch ASIC with an integrated ARMv8 CPU (8.1
+specifically I think).
 
-> Hi Tom,
->=20
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/18115
->=20
-> https://dev.azure.com/simon0972/u-boot/_build/results?buildId=3D53&view=
-=3Dresults
->=20
->=20
-> The following changes since commit d5d24e2e0a3f54175e458d89acd626da939e11=
-30:
->=20
->   Merge tag 'efi-2024-01-rc1' of
-> https://source.denx.de/u-boot/custodians/u-boot-efi (2023-10-13
-> 11:08:10 -0400)
->=20
-> are available in the Git repository at:
->=20
->   git://git.denx.de/u-boot-dm.git tags/dm-pull-13oct23
->=20
-> for you to fetch changes up to 74aae507bc4d5726308c191d3191d9cd624ba0d2:
->=20
->   binman: capsule: Add support for generating EFI empty capsules
-> (2023-10-13 14:01:42 -0600)
->=20
+I think there is something that the mvneta driver is doing triggering the
+issue. I have another AC5X based board without an Ethernet port that boots
+just fine (this is also why I didn't notice earlier).
 
-Applied to u-boot/master, thanks!
+I'll try and get some more debug out when I'm back in the office
 
---=20
-Tom
 
---1dAa1EZIYvM8CJDb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUrBc0ACgkQFHw5/5Y0
-tywDkQwAs06zwdO8zNwLgbtHFwkfWOmFgXFsxcc7IuBI5gIiqaCVGC3tDb+ON6Ma
-ckvZPFTCn1G1kHrqGs8aSdWX5/15mm42Oq6CGwui6OhYRK47WvtIRBXBbRHr0Zq6
-9sCZok3bg6kYP9S2O1/AKDkKh8h+JeWAC5RDZ1FPuMCER03LSMQsveo7FRWPyYl2
-Z91BeH4zmzW6CTkyHPYV0DuRt4IzbKr614IccvVL/hJaYf2Dj0eCwH65Uxz+SdNf
-8++4lFSyQRfgfKA/4lijsmAeuBJCpdOrwAC2vu+CCOqSn1UZntRbQg3tP6Vy2Qdk
-kFNIWf4JO04vVeiYefARuvPCbAo9zwDR2bZPwJ6nydN6VTIZt8ied5MHGCH2gNUM
-TNtAb+4hHoKhZVx7CRJFsWE6+WwBPkD2+of+YrL6kIogBhIa4TU1ce1BxCVzcWRl
-2TRNQZ9N9+n7Qw3ZxlVgx9gE3ls0mLAtSzXFnnOP/LnJiOcIKr1Tjekhl8VnWTp0
-W2/rWBUi
-=DONU
------END PGP SIGNATURE-----
-
---1dAa1EZIYvM8CJDb--
+>          M.
+> --
+> Jazz is not dead. It just smells funny...
+>
