@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70E7ECDB47E
-	for <u-boot@archiver.kernel.org>; Sat, 14 Oct 2023 02:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93504CDB465
+	for <u-boot@archiver.kernel.org>; Sat, 14 Oct 2023 04:26:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEB6086EA8;
-	Sat, 14 Oct 2023 03:27:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0330280090;
+	Sat, 14 Oct 2023 06:25:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NRoq4eYr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bwRdaSI4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9F8986DCC; Sat, 14 Oct 2023 03:25:10 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id DE97486EF1; Sat, 14 Oct 2023 06:23:11 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BE0386EA8
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 03:24:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 201EC86611
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 06:21:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-d81dd7d76e0so2796549276.1
- for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 18:24:20 -0700 (PDT)
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-53e3b8f906fso2431534a12.2
+ for <u-boot@lists.denx.de>; Fri, 13 Oct 2023 21:21:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697246451; x=1697851251; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=eXOvcFvbZ7KDwc7rVVC4advHsXwz9OYV83jaje49PeE=;
- b=NRoq4eYr9oQKwlu6RwTJvu/hWUDXLzlxTepH/aUb7oEiOTQH5NSzffDHeW2i+Fm7xu
- 79p6qd3Dr4/K7QKyNIdfBz0quQeLJa1B4661wMneh6kDlCphDyCsXJW1d4VLchgCJokB
- H1z58qdOIzHsrtex0mKKhySmyTCwo6poPwgRY=
+ d=gmail.com; s=20230601; t=1697257277; x=1697862077; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=SKi8W0SqVsZ2309h+O02h0w08+poAR/Saiq0CHhTSEM=;
+ b=bwRdaSI4cJytwC+WqLNRjFTIC22o0wtRoNiBOWrZMldgKW7yy3e+GN/Ckheva/M9OZ
+ WnOxk5Dj3Ag4Mozz24PQMCjGYCBv5Q0K05LMAuctV7gKhvmza+eD94ygAUlDHzGXP5d2
+ Sz0h0UvnMYNpkWQKwG4xdkZUvCD49Hcd9TmVPmOeCdH10l8uPjNi00Nx8XSXF6grmcRs
+ YlUQwn+dLAs6xNsX2Tk6/R74H49mg1o6pBuELhD+/toEuhk/2/NjvL/t9yqqZb+x0DAs
+ Ced8O2w77sDtwh+S0MNBhPewAHaeLBN1i+L4D/pDrASFON+dBrJRDjQLqBwzOp+sAxNn
+ Lvyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697246451; x=1697851251;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=eXOvcFvbZ7KDwc7rVVC4advHsXwz9OYV83jaje49PeE=;
- b=ZLmVRgWmqvZNe2XNpQB/CVbHDqvjG5GZAAyQm5YMbADquxnffLHUe2QNAPyiOE8PEF
- kZ9piRy3qjsV4qMG7JVcHTRSnjRT4w1ZZmcn4QwKRtc2TcF7edzMPHxvnDY8E01aoxxx
- WOntNRWawAlCu/qzRC60PpZiS8Zm6zcTIx29zTwK2zWuksIq6HFrsPHtocMTdCAa3NY9
- DniW8z8UuSAyOD5QHjiGhw96S4t+SUnlx6/1XOWZJkBrhJTTWoxFSIfPS8IIaLaMTWUN
- OkejgiTDw3/K3LbqsG2upMGRNlOfJacQdo2/yPpqD6n3h3MZLW9iCSP/h3FnY033fQqJ
- taQg==
-X-Gm-Message-State: AOJu0Yyrc3T1aNgxR77HO4g8wSm2m7TsR3qv2OHN/Y3+TeKaUu25De6H
- j6tOxnc7PmCN1M5NjINya2QK5A==
-X-Google-Smtp-Source: AGHT+IG56c/LLh8PFKrtFDOLW2i4xkA+tF+ike+ML50sJTwU5V+XGi1YWkQ2BXMNIfN9SEA4mU+0EA==
-X-Received: by 2002:a05:6902:4a:b0:d9a:3708:f7f3 with SMTP id
- m10-20020a056902004a00b00d9a3708f7f3mr13788086ybh.42.1697246451572; 
- Fri, 13 Oct 2023 18:20:51 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-b33e-4d05-2330-607e.res6.spectrum.com.
- [2603:6081:7b00:6400:b33e:4d05:2330:607e])
+ d=1e100.net; s=20230601; t=1697257277; x=1697862077;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:subject:from:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=SKi8W0SqVsZ2309h+O02h0w08+poAR/Saiq0CHhTSEM=;
+ b=nEE6WrUOVwLyI6TJlWdIyceunAaOWgq8c5jjlFKKBqu1HB9r0OC1MtVO1IO/2f1DP1
+ ddl+5ieXMfI7u6qxAWDx8tRXGJiPE7T93YEwvBGQ1H46+nFqDTP/sqeoDku2urg+p+LT
+ LlM3c2h+w3VZd7snPkCLjI8SOKzFu/mhXuTpvVTvA7uLQoSK23nVrmuI9EJOPZWVktwz
+ YQeyd6GpgfYMj486XO4EEnJb4MMPqJskcO4Jf/O9m9ahXZN2s1x9DzSd55GxCUIZ9BzR
+ nOhdmC9qu2/sVZAoY25TmQTr/bJrncH/uQmJSFFnZUOb9hD+UMK30D88qCIc6yKcFWJK
+ 2I2Q==
+X-Gm-Message-State: AOJu0YwlzY0Vz75E9L6SvU4olel2wJ+WMnfSAuoOpyVeaMwef+2NeQXy
+ SSTfMRbXK4DQunAnuJcDQhk=
+X-Google-Smtp-Source: AGHT+IGUntfSy59J4jFuOOAYvocNAXQeViq+3qG2MciIER1uzhLAafKj8et630wb4iQqaqfKUogWWg==
+X-Received: by 2002:a17:906:7949:b0:9be:2be:e6f6 with SMTP id
+ l9-20020a170906794900b009be02bee6f6mr2187507ejo.12.1697257276890; 
+ Fri, 13 Oct 2023 21:21:16 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
  by smtp.gmail.com with ESMTPSA id
- l12-20020a25ad4c000000b00d677aec54ffsm859463ybe.60.2023.10.13.18.20.50
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 13 Oct 2023 18:20:50 -0700 (PDT)
-Date: Fri, 13 Oct 2023 21:20:48 -0400
-From: Tom Rini <trini@konsulko.com>
-To: AKASHI Takahiro <takahiro.akashi@linaro.org>
-Cc: sjg@chromium.org, etienne.carriere@st.com, u-boot@lists.denx.de
-Subject: Re: [PATCH 4/4] test: dm: add SCMI power domain protocol test
-Message-ID: <20231014012048.GA2472471@bill-the-cat>
-References: <20230926070043.738340-1-takahiro.akashi@linaro.org>
- <20230926070043.738340-5-takahiro.akashi@linaro.org>
+ z15-20020a17090655cf00b0099d45ed589csm406651ejp.125.2023.10.13.21.21.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 13 Oct 2023 21:21:16 -0700 (PDT)
+Message-ID: <6736fbdd-4ac6-fdc2-10aa-193b574ecb99@gmail.com>
+Date: Sat, 14 Oct 2023 06:21:15 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="K8JIcqr2MFRF1RW5"
-Content-Disposition: inline
-In-Reply-To: <20230926070043.738340-5-takahiro.akashi@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v3] rockchip: configs: sandbox: enable rkmtd command
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ u-boot@lists.denx.de
+References: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
+Content-Language: en-US
+In-Reply-To: <9fffc997-fd13-eba2-3a73-a8e86816667c@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,45 +96,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable rkmtd command for testing with sandbox_defconfig
+and sandbox64_defconfig.
 
---K8JIcqr2MFRF1RW5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+---
+ configs/sandbox64_defconfig | 1 +
+ configs/sandbox_defconfig   | 1 +
+ 2 files changed, 2 insertions(+)
 
-On Tue, Sep 26, 2023 at 04:00:43PM +0900, AKASHI Takahiro wrote:
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 1a033b22018b..1a01f51a0b75 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -58,6 +58,7 @@ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_TEMPERATURE=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_RKMTD=y
+ CONFIG_CMD_WDT=y
+ CONFIG_CMD_WRITE=y
+ CONFIG_CMD_CAT=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 01830c7bd255..cc54e6dec5af 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -84,6 +84,7 @@ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_TEMPERATURE=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_RKMTD=y
+ CONFIG_CMD_WDT=y
+ CONFIG_CMD_WRITE=y
+ CONFIG_CMD_AXI=y
+--
+2.39.2
 
-> This ut has tests for the SCMI power domain protocol as well as DM
-> interfaces for power domain devices.
->=20
-> Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> ---
->  test/dm/scmi.c | 107 ++++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 106 insertions(+), 1 deletion(-)
-
-With v6 of the required series there is no scmi command, so, how do we
-test this support now?
-
---=20
-Tom
-
---K8JIcqr2MFRF1RW5
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUp7O0ACgkQFHw5/5Y0
-tywVngv9EkQsMujqNzp+BHeIaE7dGWtGGlmjMCOJywFv4s9YkkzPqbja1AgQUI1+
-6GbJ7/La2XysVuAzRR9pyx2zPRWQ6fM0xImDurkJ9AHSoZ6w3JZzPJGrnjJJCWqU
-YXie10dUdHVwd7UyJVAbakq/89ija5tD1/46jTROpDK/AaB9SWO99ZplSEa9cSd8
-zXdg/fRl71Uedhw7+CiRSKEWGVEqZ1C/vGb4wMxsrHalcOWjC1DBekFibKZIgIB5
-/4QR/FRyastlpfELvSSzJH1xntYNy+l045N0WO2PFyFuJ52GoJfFWJtP20Rw0XVV
-S7t2TjemNkVMEUsTgjTkB+61bfGXclYvLOUaRbOS6AfvqeSpFSe5ArEYpaVOwSxw
-bA9vppxfPXJcRvNVR7sutaDB8hnlyOigigCiXekGlACbjwTuuC79Nu9WnD6E3yXU
-jsqc+6Cur37qpsCOikAhuSCHr+wT7/rT7OS7bygmbjjPbyHdFtKyVsDxY93Eu04I
-WTBOYSno
-=LVCF
------END PGP SIGNATURE-----
-
---K8JIcqr2MFRF1RW5--
