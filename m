@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC81ACDB482
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:24:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45CDBCDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:25:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7FE886B68;
-	Sun, 15 Oct 2023 08:45:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 92D6086E22;
+	Sun, 15 Oct 2023 08:45:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Me4G+9NX";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="DjC29NjL";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sr+x1msT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1E1986E47; Sun, 15 Oct 2023 08:42:46 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 26CB786867; Sun, 15 Oct 2023 08:43:36 +0200 (CEST)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B74DA86F68
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:41:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E37E86F5E
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:43:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3b0dcbf3672so2111474b6e.1
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:41:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697352117; x=1697956917; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=0XUgE0fj2gUC6mx0oCpXiSIOPuGkN6snCJqnAu76lZE=;
- b=Me4G+9NXv0E0uOra0uPgB01999ofu7jfQTcBzEcfQHa0QMKlcT/jhpmFu2KWI9Rvkz
- ZTvnMUjUB5JO7GpHS/2zACQLskaS1/JvvvEC/SQTLfdtGQENEQtOpsslpkIwVmWgik/R
- 7xW9/Ym0OoNPMxMv2u7lHhtpjDJqpTL3WcAEFFM0/OUiePgZ3Mwk/tAK3k9xv1epd/rZ
- MWJvYzfTutj9pe2tMnypOyZ69Zxpe1AvG7ssNjTvqmYaL4bk72/1/go3gvpyhEJJC8MS
- lVILHSAjfqVXlActiTtw8molNap9033jYEt7B1iqXOU1folyk5gET6VgtUgwaR1dUjQK
- lbew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697352117; x=1697956917;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=0XUgE0fj2gUC6mx0oCpXiSIOPuGkN6snCJqnAu76lZE=;
- b=bvv88SDaEqSYRrVLm7F80aNMOuEYuXfOHaiKnmYzOXqwNCPqr+FRmiTXEPvyXz7y69
- zfZ04XBclNfkhvRQhPw8Zihbxo/1hMz64suI0zg9UD9X/ez9M7OEGnUDWmYIC1IXzOH2
- gp7GlHGV4fR4MCo2AzNAH7GxZgkcnGc5cDexr5u4Iz6NDnQFKFVhc0qi7op7BP9UwG6T
- hVdQCuY0bcVVC8FcAdcYR2TWCgnO2a3PJp5KZ6NG4PFpDw6IadV1RsbqhcbVWQhVGGjO
- jMCDYKqe9LSuFSLFRGDljfSba7rzfc0rvTY1eLahZjx2LioCyGXTcTgHm+YgiVHKKAz/
- o5TQ==
-X-Gm-Message-State: AOJu0YyVTcx9ClLIItXmn6b5SHKtkFfggJ4SRrVCE/KyFgxDq1PcP2Xz
- RolaWTGOqfGVIVsOwxLtrRT08qUTv4gqGw==
-X-Google-Smtp-Source: AGHT+IH/AraGmfqvX9IH2UQWmTE6CQvgliw/w42xXRZTtMdFzip5IyRWX0L4jCc3gjjzJftHKwCrlw==
-X-Received: by 2002:a05:620a:4048:b0:775:cf5e:a66d with SMTP id
- i8-20020a05620a404800b00775cf5ea66dmr37035821qko.24.1697318876463; 
- Sat, 14 Oct 2023 14:27:56 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- c1-20020ae9e201000000b0076d25b11b62sm1754310qkc.38.2023.10.14.14.27.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Oct 2023 14:27:56 -0700 (PDT)
-Message-ID: <f3fa804c-0c6b-f31d-6bd6-d5e3408a3861@gmail.com>
-Date: Sat, 14 Oct 2023 17:27:55 -0400
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4S7Dp93Pv8z9slg;
+ Sat, 14 Oct 2023 22:03:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697313809;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kqq4hq73wx8x0J+mIf83HFsS7UWl8B5DtrpKJgA3an0=;
+ b=DjC29NjLa1VgYfXSBYs0xYCPfq+kGk9o6lx90yamP+h1dRiC0UXzYMLpfi12ZW5vKqYt+a
+ UIl0OKjbm4VkBFSWydfA0XJ6O7pa85rzXv/ZmCbBrrqd99zNDI5cv10+BcWbhyrWp69Sb+
+ B30heSPqPDwhin5Qp6kEPeYcpXCqiqwRhm7w0jzJMIEsYJyKeyxnhJJUYoIAVn8zqb7oo4
+ pThaQmgEmlYoW9RgaLqxNj9dg7gJMYzYsCChNVvNdnffSFjOp+EysdU29+g9z7tfCp3qIc
+ pe6dzf6fK6Ee0AXUkzwAG8Mv11zT/yvuRzfPDmT99jU6Rz0NktAhVskBhrbjXQ==
+Message-ID: <80ad144b-d90f-4029-9a05-b52991965a0c@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697313807;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kqq4hq73wx8x0J+mIf83HFsS7UWl8B5DtrpKJgA3an0=;
+ b=sr+x1msTW173lmNc8XYJJGMHVmuyGyTxaeyLB7VIgz37ECWs47zBXzdspXz4IiPdXhgMFR
+ RUeSWD7ioee/08z0ibb5p/rTsm9Jx/KxDd4kHLXgz17GKDvYWiPEkicCp8SdSAIKjjXHKd
+ aJIs4j+eMRmze7UbkH9otl/U9Y8qvFiN7lAOm1OlftS/GUf5/2p+aFaxvvVHN/jh/gq/Qx
+ F/+60Od4rQWcPI9XWnY9o9OAc8TBFGxIgseQSnUBi+qK8GvXgMGcBrayfUDVAzqWbBB/XG
+ SUrp0QwMDBXBRHeArY8J97zTAFcOY7f2ZmH4N5YbHpX3AdMZ3QeZEGpkAL0wuw==
+Date: Sat, 14 Oct 2023 22:03:25 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2 17/29] net: bootp: Fall back to BOOTP from DHCP when
- unit testing
+Subject: Re: [PATCH v2 10/19] pinctrl: renesas: Add RZ/G2L PFC driver
 Content-Language: en-US
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
-References: <20231014204805.439009-1-seanga2@gmail.com>
- <20231014204805.439009-18-seanga2@gmail.com>
- <1365B46D-6CCA-4064-ABC1-97CF581564C7@gmx.de>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <1365B46D-6CCA-4064-ABC1-97CF581564C7@gmx.de>
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
+ <20231009164645.164464-11-paul.barker.ct@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20231009164645.164464-11-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: c17788d9db79143a9d9
+X-MBO-RS-META: g3z49psrw9sm8xeirw4in5h855pohbnz
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,42 +90,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/14/23 17:22, Heinrich Schuchardt wrote:
+On 10/9/23 18:46, Paul Barker wrote:
+> This driver provides pinctrl and gpio control for the Renesas RZ/G2L
+> (R9A07G044) SoC.
 > 
+> This patch is based on the corresponding Linux v6.5 driver.
 > 
-> Am 14. Oktober 2023 22:47:53 MESZ schrieb Sean Anderson <seanga2@gmail.com>:
->> If we sent a DHCP packet and get a BOOTP response from the server, we
->> shouldn't try to send a DHCPREQUEST packet, since it won't be DHCPACKed.
->> Transition straight to BIND. This is only enabled for UNIT_TEST to avoid
->> bloat, since I suspect the number of BOOTP servers in the wild is
->> vanishingly small.
->>
->> Signed-off-by: Sean Anderson <seanga2@gmail.com>
->> Reviewed-by: Simon Glass <sjg@chromium.org>
->> ---
->>
->> (no changes since v1)
->>
->> net/bootp.c | 6 ++++++
->> 1 file changed, 6 insertions(+)
->>
->> diff --git a/net/bootp.c b/net/bootp.c
->> index 2053cce88c6..7b0f45e18a9 100644
->> --- a/net/bootp.c
->> +++ b/net/bootp.c
->> @@ -1073,6 +1073,11 @@ static void dhcp_handler(uchar *pkt, unsigned dest, struct in_addr sip,
->> 			    CONFIG_SYS_BOOTFILE_PREFIX,
->> 			    strlen(CONFIG_SYS_BOOTFILE_PREFIX)) == 0) {
->> #endif	/* CONFIG_SYS_BOOTFILE_PREFIX */
->> +			if (CONFIG_IS_ENABLED(UNIT_TEST) &&
->> +			    dhcp_message_type((u8 *)bp->bp_vend) == -1) {
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+> ---
+> v1->v2:
+>    * Split GPIO into separate file.
+>    * Drop unnecessary parenthesis in defines.
+>    * Keep Kconfig list sorted.
+>    * Drop pfc_enabled flag.
+>    * Use const where possible.
+>    * Use clrbits/setbits/clrsetbits functions.
+>    * Return -ENOENT to skip invalid GPIO offsets.
+>    * Include ofnode_parse_phandle_with_args() return code in err print.
+>    * Use macro instal of port + 0x10.
+>    * Add TODO comment re Ethernet PIN_CFG.
 > 
-> As written before, please, do not add unit test specific code paths.
+>   arch/arm/mach-rmobile/Kconfig       |   2 +
+>   drivers/gpio/Kconfig                |   7 +
+>   drivers/gpio/Makefile               |   1 +
+>   drivers/gpio/rzg2l-gpio.c           | 170 ++++++++
 
-While it is convenient for tests to implement a BOOTP server, there are
-effectively no BOOTP servers in the wild. However, BOOTP is commonly enabled
-in U-Boot. In an effort to avoid growing most U-Boots for testing purposes,
-I enabled this path just for unit tests. That said, only 6 boards enable SPL_ETH,
-so maybe it is not too bad.
+This GPIO and pinctrl driver addition should be two patches, really.
 
---Sean
+>   drivers/pinctrl/renesas/Kconfig     |  10 +
+>   drivers/pinctrl/renesas/Makefile    |   1 +
+>   drivers/pinctrl/renesas/rzg2l-pfc.c | 625 ++++++++++++++++++++++++++++
+>   include/renesas/rzg2l-pfc.h         | 110 +++++
+>   8 files changed, 926 insertions(+)
+>   create mode 100644 drivers/gpio/rzg2l-gpio.c
+>   create mode 100644 drivers/pinctrl/renesas/rzg2l-pfc.c
+>   create mode 100644 include/renesas/rzg2l-pfc.h
+
+Otherwise
+
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
