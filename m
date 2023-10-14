@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8968CCDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:43:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73F42CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:44:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5999086E4F;
-	Sun, 15 Oct 2023 08:25:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id E159986EED;
+	Sun, 15 Oct 2023 08:26:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PyVWdz0H";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QzERl7O7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11A5B86611; Sun, 15 Oct 2023 08:18:14 +0200 (CEST)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id 0C7E486867; Sun, 15 Oct 2023 08:00:21 +0200 (CEST)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BDEB86C3F
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:17:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 362E186E03
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 07:58:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-57e3c2adbf0so1928219eaf.2
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:17:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-352a3a95271so12959115ab.0
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 22:58:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697350631; x=1697955431; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697349504; x=1697954304; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=A5Zt9jTqVlu4834j/UfyThdiRhb1To3H9mV2+I8039E=;
- b=PyVWdz0HKwvacWZ10cQ0XXsnHISG+bD7n8HlcuofDaU1d12ZroDQJWzvaIx9F31F0D
- MUhlUcpxA60l71QsuWmV/LqrAF6CwSlKhdiKYT6GxRMAWYnqMmRzILw8DFo4/yts3adC
- fCtNi0c49ijjWvGWpraUEFeKfoDxvVBBZn1vE=
+ bh=XVF52gpBhJ/MJgCreuAWhUa3YFXZaO1z4KdXqinsYcI=;
+ b=QzERl7O7SfiT5TvgR04cZJnvRuVBjildYlhNTCRI0uMC0p2h/X7DmMz60KvwYOdNS8
+ S7jL9X2wIacqdbgVRQeB5Q/wg6kWtrmyZNcT1q5za2cmySwV6dIMlCNnINVqCVrCFjht
+ qoPlwNJ0XwznaQq6ntYDSsMtbqCROngf49GxbbBLMn5U604wlm9r3vHqZM99ASe4rz+P
+ cp/PCc53jUoMnhUstJiz57gZYeZPNN22gRk6eIutVfKffX2VJ8NZ7PpEQR2T0/H/lRe/
+ P8/N5sM+/raHzxgoVDQrnydXFveZ27P5sg+2TNuqNTtcQ+chHZVg2pNkfkvnBbMHMCVP
+ ClBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697350631; x=1697955431;
+ d=1e100.net; s=20230601; t=1697349504; x=1697954304;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=A5Zt9jTqVlu4834j/UfyThdiRhb1To3H9mV2+I8039E=;
- b=acOTyC19nm7xMY0UGQOVD4fd/3twJ9uhc3W7c1+Fufeig9Gz6kDEFhPsykSHiNmxdE
- Gb0ed/yJsJshDvE+DR9PAvXfHyh6N02pnBJwq2OZMY6FSEaeIYrg7zV2/9hrj5KEyh6+
- Fv4fxM1BjQLAQy1oAkglpuBV5KdpUgIYYMdon7xiIyaOL/8QyrAVO+FQqRCwXxkaEg81
- q9JhoxGlqZIdVMmS48gkxsa2sg26zhlq6HcGV3yGKFkxFkiCVXuOlrBarRSAjzUdcMNq
- 7lC7+4AiU79yW3mpnDtuXKmcMQbHyrW67cu61mSZNQ6j2Yc4VrmXQ6eNZqvxfrKtDYM1
- SsYA==
-X-Gm-Message-State: AOJu0YxLwQCUM05HxsUVetZt3LedQ0czGZgG6KGHZ4fiL6Vl9+m9Qr2b
- vE+1e+c70pXFl62j1Qqlzqh1Dtcmi23ZF3yrJdCuZA==
-X-Google-Smtp-Source: AGHT+IFRP2RzUHaQz873o9qTXPehhzg3o50g9fTBCJ7BlIfVjeX0WTd2jwsNg5Oik2ozWM2OUGMbrQ==
-X-Received: by 2002:a6b:f319:0:b0:783:63d6:4c5 with SMTP id
- m25-20020a6bf319000000b0078363d604c5mr35209920ioh.12.1697316039720; 
- Sat, 14 Oct 2023 13:40:39 -0700 (PDT)
-Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
- by smtp.gmail.com with ESMTPSA id
- j27-20020a02cb1b000000b0042b14d9be7bsm5424649jap.22.2023.10.14.13.40.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 14 Oct 2023 13:40:39 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: [PATCH 2/6] binman: Don't add compression attribute for uncompressed
- files
-Date: Sat, 14 Oct 2023 14:40:26 -0600
-Message-ID: <20231014204033.3077052-3-sjg@chromium.org>
-X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
-In-Reply-To: <20231014204033.3077052-1-sjg@chromium.org>
-References: <20231014204033.3077052-1-sjg@chromium.org>
+ bh=XVF52gpBhJ/MJgCreuAWhUa3YFXZaO1z4KdXqinsYcI=;
+ b=F+luVhSrXOvqXz6Jjh00pHmfPFn897pJlRMiRgE1A50WFc6TUAoljf00Mi6bPkM1ut
+ YfguNa+7643TxvGtthjq0ASpoj4k5odkb99yHuZX6nM8+Xa2gexk7bRutCJ8EE+ucC3l
+ NXZFIdY8wzAxI9TBTvnvhwEkixcgFicI+hMUKzQz45j2YXy8kdNzA6ER6JhbXEER4VVa
+ Xdo/9JuT7xB3zveyg2i1MthVDX3hSkwgj+jahAPzWw5E4H0wVJ8VsqDuo2iC1AHLVhon
+ yr2uNO7Ju733G63hcHtNBJW0xWIETAK9DQ94tmMGL06wZ5HTociBnmysTFXtNawZ3GC1
+ OGdQ==
+X-Gm-Message-State: AOJu0YxFr3oI7GjVNIw3RT0kHN/q4fYS5oNhtVKLh3njaMK338uYNRtu
+ PcmZDHFI9lQE8EaVDnQgOs7MJLVt7CMsdg==
+X-Google-Smtp-Source: AGHT+IF0lfWHfPtN4BB9MZKJHglzzqV2/L6Na5jU/9y7PW5totCaRgEAEa6qiWEblo5J8gcTYYUJTw==
+X-Received: by 2002:a05:620a:2452:b0:76c:b293:84f with SMTP id
+ h18-20020a05620a245200b0076cb293084fmr37776990qkn.21.1697316503811; 
+ Sat, 14 Oct 2023 13:48:23 -0700 (PDT)
+Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
+ f2-20020a05620a12e200b007770d47c621sm1720643qkl.66.2023.10.14.13.48.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 14 Oct 2023 13:48:23 -0700 (PDT)
+From: Sean Anderson <seanga2@gmail.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH v2 14/29] fs: ext4: Add some defines for testing
+Date: Sat, 14 Oct 2023 16:47:50 -0400
+Message-Id: <20231014204805.439009-15-seanga2@gmail.com>
+X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20231014204805.439009-1-seanga2@gmail.com>
+References: <20231014204805.439009-1-seanga2@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,115 +93,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-cbfsutil changed to skip adding a compression attribute if there is no
-compression. Adjust the binman implementation to do the same.
+Add various defines which are not necessary for reading/writing
+filesystems, but which are useful for creating them. These mostly come from
+Linux v6.5-rc2 (what I had checked out).
 
-This mirrors commit 105cdf5625 in coreboot.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- tools/binman/cbfs_util.py      | 13 ++++++++-----
- tools/binman/cbfs_util_test.py |  8 ++++----
- tools/binman/ftest.py          |  6 +++---
- 3 files changed, 15 insertions(+), 12 deletions(-)
+Changes in v2:
+- Split off from fs test
 
-diff --git a/tools/binman/cbfs_util.py b/tools/binman/cbfs_util.py
-index fc56b40b7531..92d2add25146 100644
---- a/tools/binman/cbfs_util.py
-+++ b/tools/binman/cbfs_util.py
-@@ -333,7 +333,8 @@ class CbfsFile(object):
-         if self.ftype == TYPE_STAGE:
-             pass
-         elif self.ftype == TYPE_RAW:
--            hdr_len += ATTR_COMPRESSION_LEN
-+            if self.compress:
-+                hdr_len += ATTR_COMPRESSION_LEN
-         elif self.ftype == TYPE_EMPTY:
-             pass
-         else:
-@@ -369,9 +370,11 @@ class CbfsFile(object):
-                 data = self.comp_bintool.compress(orig_data)
-             self.memlen = len(orig_data)
-             self.data_len = len(data)
--            attr = struct.pack(ATTR_COMPRESSION_FORMAT,
--                               FILE_ATTR_TAG_COMPRESSION, ATTR_COMPRESSION_LEN,
--                               self.compress, self.memlen)
-+            if self.compress:
-+                attr = struct.pack(ATTR_COMPRESSION_FORMAT,
-+                                   FILE_ATTR_TAG_COMPRESSION,
-+                                   ATTR_COMPRESSION_LEN, self.compress,
-+                                   self.memlen)
-         elif self.ftype == TYPE_EMPTY:
-             data = tools.get_bytes(self.erase_byte, self.size)
-         else:
-@@ -405,7 +408,7 @@ class CbfsFile(object):
-         if expected_len != actual_len:  # pragma: no cover
-             # Test coverage of this is not available since this should never
-             # happen. It probably indicates that get_header_len() is broken.
--            raise ValueError("Internal error: CBFS file '%s': Expected headers of %#x bytes, got %#d" %
-+            raise ValueError("Internal error: CBFS file '%s': Expected headers of %#x bytes, got %#x" %
-                              (self.name, expected_len, actual_len))
-         return hdr + name + attr + pad + content + data, hdr_len
+ include/ext4fs.h     |  1 +
+ include/ext_common.h | 14 ++++++++++++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/include/ext4fs.h b/include/ext4fs.h
+index cb5d9cc0a5c..dd66d27f776 100644
+--- a/include/ext4fs.h
++++ b/include/ext4fs.h
+@@ -31,6 +31,7 @@
+ struct disk_partition;
  
-diff --git a/tools/binman/cbfs_util_test.py b/tools/binman/cbfs_util_test.py
-index ee951d10cf3b..c3babbc64e78 100755
---- a/tools/binman/cbfs_util_test.py
-+++ b/tools/binman/cbfs_util_test.py
-@@ -96,7 +96,7 @@ class TestCbfs(unittest.TestCase):
-         self.assertEqual(arch, cbfs.arch)
-         return cbfs
+ #define EXT4_INDEX_FL		0x00001000 /* Inode uses hash tree index */
++#define EXT4_TOPDIR_FL		0x00020000 /* Top of directory hierarchies*/
+ #define EXT4_EXTENTS_FL		0x00080000 /* Inode uses extents */
+ #define EXT4_EXT_MAGIC			0xf30a
+ #define EXT4_FEATURE_RO_COMPAT_GDT_CSUM	0x0010
+diff --git a/include/ext_common.h b/include/ext_common.h
+index 30a0c248414..b09bbde116a 100644
+--- a/include/ext_common.h
++++ b/include/ext_common.h
+@@ -35,6 +35,16 @@ struct cmd_tbl;
+ #define EXT2_PATH_MAX				4096
+ /* Maximum nesting of symlinks, used to prevent a loop.  */
+ #define	EXT2_MAX_SYMLINKCNT		8
++/* Maximum file name length */
++#define EXT2_NAME_LEN 255
++
++/*
++ * Revision levels
++ */
++#define EXT2_GOOD_OLD_REV	0	/* The good old (original) format */
++#define EXT2_DYNAMIC_REV	1	/* V2 format w/ dynamic inode sizes */
++
++#define EXT2_GOOD_OLD_INODE_SIZE 128
  
--    def _check_uboot(self, cbfs, ftype=cbfs_util.TYPE_RAW, offset=0x38,
-+    def _check_uboot(self, cbfs, ftype=cbfs_util.TYPE_RAW, offset=0x28,
-                      data=U_BOOT_DATA, cbfs_offset=None):
-         """Check that the U-Boot file is as expected
+ /* Filetype used in directory entry.  */
+ #define	FILETYPE_UNKNOWN		0
+@@ -48,6 +58,10 @@ struct cmd_tbl;
+ #define FILETYPE_INO_DIRECTORY		0040000
+ #define FILETYPE_INO_SYMLINK		0120000
+ #define EXT2_ROOT_INO			2 /* Root inode */
++#define EXT2_BOOT_LOADER_INO		5 /* Boot loader inode */
++
++/* First non-reserved inode for old ext2 filesystems */
++#define EXT2_GOOD_OLD_FIRST_INO	11
  
-@@ -122,7 +122,7 @@ class TestCbfs(unittest.TestCase):
-         self.assertEqual(len(data), cfile.memlen)
-         return cfile
- 
--    def _check_dtb(self, cbfs, offset=0x38, data=U_BOOT_DTB_DATA,
-+    def _check_dtb(self, cbfs, offset=0x28, data=U_BOOT_DTB_DATA,
-                    cbfs_offset=None):
-         """Check that the U-Boot dtb file is as expected
- 
-@@ -598,8 +598,8 @@ class TestCbfs(unittest.TestCase):
-         data = cbw.get_data()
- 
-         cbfs = cbfs_util.CbfsReader(data)
--        self.assertEqual(0x38, cbfs.files['u-boot'].cbfs_offset)
--        self.assertEqual(0x78, cbfs.files['u-boot-dtb'].cbfs_offset)
-+        self.assertEqual(0x28, cbfs.files['u-boot'].cbfs_offset)
-+        self.assertEqual(0x68, cbfs.files['u-boot-dtb'].cbfs_offset)
- 
- 
- if __name__ == '__main__':
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 16156b741052..2875194d750e 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -2670,9 +2670,9 @@ class TestFunctional(unittest.TestCase):
-             'cbfs/u-boot:offset': 0x38,
-             'cbfs/u-boot:uncomp-size': len(U_BOOT_DATA),
-             'cbfs/u-boot:image-pos': 0x38,
--            'cbfs/u-boot-dtb:offset': 0xb8,
-+            'cbfs/u-boot-dtb:offset': 0xa8,
-             'cbfs/u-boot-dtb:size': len(U_BOOT_DATA),
--            'cbfs/u-boot-dtb:image-pos': 0xb8,
-+            'cbfs/u-boot-dtb:image-pos': 0xa8,
-             }, props)
- 
-     def testCbfsBadType(self):
-@@ -2854,7 +2854,7 @@ class TestFunctional(unittest.TestCase):
- '  u-boot                  0     4  u-boot             0',
- '  section               100   %x  section          100' % section_size,
- '    cbfs                100   400  cbfs               0',
--'      u-boot            138     4  u-boot            38',
-+'      u-boot            128     4  u-boot            28',
- '      u-boot-dtb        180   105  u-boot-dtb        80          3c9',
- '    u-boot-dtb          500   %x  u-boot-dtb       400          3c9' % fdt_size,
- '  fdtmap                %x   3bd  fdtmap           %x' %
+ /* The size of an ext2 block in bytes.  */
+ #define EXT2_BLOCK_SIZE(data)	   (1 << LOG2_BLOCK_SIZE(data))
 -- 
-2.42.0.655.g421f12c284-goog
+2.37.1
 
