@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4D4ACDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 08:18:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C74A4CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 08:25:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49B54846DF;
-	Sun, 15 Oct 2023 10:18:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D0D3886ED1;
+	Sun, 15 Oct 2023 10:25:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DkyJS7QJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="korLb1tP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F257386EE2; Sun, 15 Oct 2023 10:18:41 +0200 (CEST)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id 4E1AD86EDD; Sun, 15 Oct 2023 10:25:32 +0200 (CEST)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6F32863F8
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 10:18:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1F859869C8
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 10:25:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-d9ad67058fcso3361754276.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 01:18:39 -0700 (PDT)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-d9ac9573274so3594335276.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 01:25:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697357918; x=1697962718; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lbAvrdYSk5sBa33b8hWYB8LPlT4TxLLWVKh2r/hocgM=;
- b=DkyJS7QJfdU/BG9BhpBq7suKr3Q1L9jOy2jbUGh7TcPZreKlJ9TT84vkxfs/fVyZId
- 2RYNpOBELqwzbknY3Uliq+6nr/1pJuLWu7DjcHG4abSd+BKfR2YG5abK6y46il9IYNGg
- m+jBlqgpeKURAzV4CTUr+k8ASfkB0RJSvLoZaHi1toQxiNqWHtwQEofJXdiqg7bEmKwg
- fCdTkfdcj8vvgT0bEHlztHLXcvT+kshL2kWvl8XGk+LdDe5nXbLYlOIU6LK84m5mfY28
- 2tYJVFpxIGaEQY37SwXGYvtKgZ6t/+unH0oKqPe8wEgt+LyxV7NZs+pf5wax8BMJjckr
- XO3Q==
+ d=gmail.com; s=20230601; t=1697358329; x=1697963129; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=rhcvSvDM5nUQ25FjQrMJb7AvonQFbcKG5q490z3lUgg=;
+ b=korLb1tPsfw1dl7sKfdcAAu3R95kR6+I7AfVv2UfK7NY5VGcB1crye0BcuBO1TzEV1
+ ZzrzQTUmR55RqtiZE5Y49dDxcgwc6x3Y+Hir/H36YfglgIZ8MkrnDy+xJXl535R9f6Pb
+ HOzIOu3Ldpn2q/KJxlRNQJRrNmWL28uLIFK42e6kUQxTErQhe9tc0m+dSezcQl0/D9VB
+ 3WDXEZbod/DBrXwI2wkBvJyhRQ6ipBYIQORIPkUX8KcnEMbQKWWHY79gsrFDehI+9gLO
+ gJWSlkLgemIMp8oLfZJGL3ILtbQBhf2JtP1/KWGpK0BWUFSvFu1DqrJJL8x5Crkr97Ys
+ 6a4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697357918; x=1697962718;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=lbAvrdYSk5sBa33b8hWYB8LPlT4TxLLWVKh2r/hocgM=;
- b=VIMuEmW6KX4iSVDpnr9Ea0MCFx+PdYAzxYRq2HAxDlREDQONSuELVyR2g33j3XKFVu
- iLpaaCNzBC9h6VpkDmqPLuRePpJA9vhCAX8J29no86Xm2aEmW7H+AypMFjol8EfqfgJY
- eQTCUWd5Or4RXY7QSEkbZLpa9++clWywD2eIHeqDtT5YXz3au4NNNT7gjdaedU5N9X70
- nphTSakS90WeYqqPE1BsGv6gjhpOp8+L393MO3t6XfAn8/juACgdo4RXQ5Q1dwBbvuDD
- FNp4jpgyJpjH5eor6OfRaId2eadpALz8pbUCj6IuDf51g6tHORmLuReFCSydk2l+LhJ/
- JoEA==
-X-Gm-Message-State: AOJu0YydgaD/JqKIscdwBsBlC/SRyH+EkR9ejvYy7ChMe3MiUq34uVZc
- zmrdpdE190BX6Y+RcuWCXgvRsMFvDZlatQ==
-X-Google-Smtp-Source: AGHT+IFuPL+/qHQeLtVyeioQXtJ6kcm6AuBRSmb1FmCAqbwMkyNxI69RUzqRoLVUMRjeug8WRVe52A==
-X-Received: by 2002:a05:622a:5:b0:417:d68d:2b24 with SMTP id
- x5-20020a05622a000500b00417d68d2b24mr39121949qtw.33.1697316496254; 
- Sat, 14 Oct 2023 13:48:16 -0700 (PDT)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- g16-20020ad45110000000b0065b12c7a48dsm1943496qvp.133.2023.10.14.13.48.15
+ d=1e100.net; s=20230601; t=1697358329; x=1697963129;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=rhcvSvDM5nUQ25FjQrMJb7AvonQFbcKG5q490z3lUgg=;
+ b=diS4ivRQsQeZmVezITt7Rbt7h+eEr/rdedwewjG1BDgrQqLWTGyWblho5fpbYRJhne
+ 5KYwgDlr3gQA6f1EKARVB0XwIVfCWapwaZBjJdaWx/+UbTGIWEG5C3SPFaj/3gd9arEW
+ 9OI2IFTIJ9CS5xM/Zfy8Ekanc+pkNmS/+vPj+bcEMn2Q827ZhV/31ajP+VQbc/OT9Y1R
+ EGIziem908FapnD9riLdKZiJc4bSSY30PLtTtIbbiQMHE/NhTF3Z9O5Bs84D2eagkIra
+ 8WDu2cCKy+4f7kkMaqBuCWks3BoutmuABAea92jFw+iGUkSEpzNr5Xy37V+NoNPYpdMI
+ yMfA==
+X-Gm-Message-State: AOJu0YzvAB5EuGUGOUg8KQXoN4b0qIXlzd5gxc1PQ4+lQiBxOFDX0Lbc
+ YwA4w+FAfwDD1Bs2fOvyV9ntKbeLVc2ExA==
+X-Google-Smtp-Source: AGHT+IGgDv2H9MYyUOsn333CLaJkcKLRJzcPRpE9fckVuFHAwQ/fNARMPYc/Z0a4PETsId7W8pvC7Q==
+X-Received: by 2002:a05:622a:3cc:b0:41b:6627:2046 with SMTP id
+ k12-20020a05622a03cc00b0041b66272046mr1389651qtx.17.1697294265169; 
+ Sat, 14 Oct 2023 07:37:45 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ h4-20020ac87444000000b004179e79069asm1518926qtr.21.2023.10.14.07.37.44
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Oct 2023 13:48:15 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Sean Anderson <seanga2@gmail.com>, uboot-imx@nxp.com,
+ Sat, 14 Oct 2023 07:37:44 -0700 (PDT)
+Message-ID: <e6129aa4-9bec-fec0-2177-9c45ec7d3095@gmail.com>
+Date: Sat, 14 Oct 2023 10:37:43 -0400
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [SPAM] [PATCH 20/26] test: spl: Add functions to create images
+Content-Language: en-US
+To: Xavier Drudis Ferran <xdrudis@tinet.cat>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Harald Seiler <hws@denx.de>,
+ Simon Glass <sjg@chromium.org>, uboot-imx@nxp.com,
  Fabio Estevam <festevam@gmail.com>, Peng Fan <peng.fan@nxp.com>,
  Stefano Babic <sbabic@denx.de>
-Subject: [PATCH v2 07/29] arm: imx: Add function to validate i.MX8 containers
-Date: Sat, 14 Oct 2023 16:47:43 -0400
-Message-Id: <20231014204805.439009-8-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231014204805.439009-1-seanga2@gmail.com>
-References: <20231014204805.439009-1-seanga2@gmail.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20231012015626.3487451-1-seanga2@gmail.com>
+ <20231012015626.3487451-21-seanga2@gmail.com>
+ <ZSmeAWkQl1f2F-JS@xdrudis.tinet.cat>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <ZSmeAWkQl1f2F-JS@xdrudis.tinet.cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,113 +100,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a function to abstract the common task of validating i.MX8 container
-image headers.
+On 10/13/23 15:44, Xavier Drudis Ferran wrote:
+> El Wed, Oct 11, 2023 at 09:56:20PM -0400, Sean Anderson deia:
+>> This add some basic functions to create images, and a test for said
+>> functions. This is not intended to be a test of the image parsing
+>> functions, but rather a framework for creating minimal images for testing
+>> load methods. That said, it does do an OK job at finding bugs in the image
+>> parsing directly.
+>>
+>> Since we have two methods for loading/parsing FIT images, add LOAD_FIT_FULL
+>> as a separate CI run.
+>>
+>> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+>> ---
+>>
+>>   .azure-pipelines.yml             |   4 +
+>>   .gitlab-ci.yml                   |   7 +
+>>   arch/sandbox/cpu/u-boot-spl.lds  |   2 +
+>>   configs/sandbox_noinst_defconfig |   6 +
+>>   configs/sandbox_spl_defconfig    |   6 +
+>>   include/test/spl.h               | 117 ++++++++++
+>>   test/image/spl_load.c            | 352 +++++++++++++++++++++++++++++++
+>>   test/image/spl_load_os.c         |   5 +-
+>>   8 files changed, 495 insertions(+), 4 deletions(-)
+>>   create mode 100644 include/test/spl.h
+>>
+> [...]
+>> diff --git a/test/image/spl_load.c b/test/image/spl_load.c
+>> index 1a57bf846d2..ca3777cab37 100644
+>> --- a/test/image/spl_load.c
+>> +++ b/test/image/spl_load.c
+>> @@ -4,7 +4,15 @@
+>>    */
+>>   
+>>   #include <common.h>
+>> +#include <image.h>
+>> +#include <imx_container.h>
+>>   #include <mapmem.h>
+>> +#include <memalign.h>
+>> +#include <rand.h>
+>> +#include <spl.h>
+>> +#include <test/spl.h>
+>> +#include <test/ut.h>
+>> +#include <u-boot/crc.h>
+>>   
+>>   int board_fit_config_name_match(const char *name)
+>>   {
+>> @@ -15,3 +23,347 @@ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
+>>   {
+>>   	return map_sysmem(0x100000, 0);
+>>   }
+>> +
+>> +/* Try to reuse the load buffer to conserve memory */
+>> +void *board_spl_fit_buffer_addr(ulong fit_size, int sectors, int bl_len)
+>> +{
+>> +	static void *buf;
+>> +	static size_t size;
+>> +	static bool invalid = true;
+>> +
+>> +	if (invalid || size < sectors * bl_len) {
+>> +		if (!invalid)
+>> +			free(buf);
+>> +		buf = malloc_cache_aligned(sectors * bl_len);
+>> +		invalid = false;
+> 
+> Should size be updated here or am I being thick ?
+>                  size = ALIGN(sectors * bl_len, ARCH_DMA_MINALIGN);
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
----
+It should.
 
-(no changes since v1)
-
- arch/arm/include/asm/mach-imx/image.h | 9 +++++++++
- arch/arm/mach-imx/ele_ahab.c          | 2 +-
- arch/arm/mach-imx/image-container.c   | 2 +-
- arch/arm/mach-imx/imx8/ahab.c         | 2 +-
- arch/arm/mach-imx/parse-container.c   | 2 +-
- arch/arm/mach-imx/spl_imx_romapi.c    | 3 ++-
- 6 files changed, 15 insertions(+), 5 deletions(-)
-
-diff --git a/arch/arm/include/asm/mach-imx/image.h b/arch/arm/include/asm/mach-imx/image.h
-index ee67ca96f4c..54cd684e35d 100644
---- a/arch/arm/include/asm/mach-imx/image.h
-+++ b/arch/arm/include/asm/mach-imx/image.h
-@@ -18,6 +18,9 @@
- #define CONTAINER_HDR_QSPI_OFFSET SZ_4K
- #define CONTAINER_HDR_NAND_OFFSET SZ_128M
- 
-+#define CONTAINER_HDR_TAG 0x87
-+#define CONTAINER_HDR_VERSION 0
-+
- struct container_hdr {
- 	u8 version;
- 	u8 length_lsb;
-@@ -66,4 +69,10 @@ struct generate_key_blob_hdr {
- } __packed;
- 
- int get_container_size(ulong addr, u16 *header_length);
-+
-+static inline bool valid_container_hdr(struct container_hdr *container)
-+{
-+	return container->tag == CONTAINER_HDR_TAG &&
-+	       container->version == CONTAINER_HDR_VERSION;
-+}
- #endif
-diff --git a/arch/arm/mach-imx/ele_ahab.c b/arch/arm/mach-imx/ele_ahab.c
-index 785b0d6ec3c..6a1ad198f89 100644
---- a/arch/arm/mach-imx/ele_ahab.c
-+++ b/arch/arm/mach-imx/ele_ahab.c
-@@ -343,7 +343,7 @@ int authenticate_os_container(ulong addr)
- 	}
- 
- 	phdr = (struct container_hdr *)addr;
--	if (phdr->tag != 0x87 || phdr->version != 0x0) {
-+	if (!valid_container_hdr(phdr)) {
- 		printf("Error: Wrong container header\n");
- 		return -EFAULT;
- 	}
-diff --git a/arch/arm/mach-imx/image-container.c b/arch/arm/mach-imx/image-container.c
-index 5f188ab32d1..eff9e0c4597 100644
---- a/arch/arm/mach-imx/image-container.c
-+++ b/arch/arm/mach-imx/image-container.c
-@@ -50,7 +50,7 @@ int get_container_size(ulong addr, u16 *header_length)
- 	u32 max_offset = 0, img_end;
- 
- 	phdr = (struct container_hdr *)addr;
--	if (phdr->tag != 0x87 || phdr->version != 0x0) {
-+	if (!valid_container_hdr(phdr)) {
- 		debug("Wrong container header\n");
- 		return -EFAULT;
- 	}
-diff --git a/arch/arm/mach-imx/imx8/ahab.c b/arch/arm/mach-imx/imx8/ahab.c
-index b58b14ca9b4..44ea63584aa 100644
---- a/arch/arm/mach-imx/imx8/ahab.c
-+++ b/arch/arm/mach-imx/imx8/ahab.c
-@@ -146,7 +146,7 @@ int authenticate_os_container(ulong addr)
- 	}
- 
- 	phdr = (struct container_hdr *)addr;
--	if (phdr->tag != 0x87 && phdr->version != 0x0) {
-+	if (!valid_container_hdr(phdr)) {
- 		printf("Error: Wrong container header\n");
- 		return -EFAULT;
- 	}
-diff --git a/arch/arm/mach-imx/parse-container.c b/arch/arm/mach-imx/parse-container.c
-index 48cffb3ab4d..d57f25df6dc 100644
---- a/arch/arm/mach-imx/parse-container.c
-+++ b/arch/arm/mach-imx/parse-container.c
-@@ -85,7 +85,7 @@ static int read_auth_container(struct spl_image_info *spl_image,
- 		goto end;
- 	}
- 
--	if (container->tag != 0x87 && container->version != 0x0) {
-+	if (!valid_container_hdr(container)) {
- 		log_err("Wrong container header\n");
- 		ret = -ENOENT;
- 		goto end;
-diff --git a/arch/arm/mach-imx/spl_imx_romapi.c b/arch/arm/mach-imx/spl_imx_romapi.c
-index 4af41699678..b51061b987b 100644
---- a/arch/arm/mach-imx/spl_imx_romapi.c
-+++ b/arch/arm/mach-imx/spl_imx_romapi.c
-@@ -184,7 +184,8 @@ static u8 *search_container_header(u8 *p, int size)
- 
- 	for (i = 0; i < size; i += 4) {
- 		hdr = p + i;
--		if (*(hdr + 3) == 0x87 && *hdr == 0 && (*(hdr + 1) != 0 || *(hdr + 2) != 0))
-+		if (valid_container_hdr((void *)hdr) &&
-+		    (*(hdr + 1) != 0 || *(hdr + 2) != 0))
- 			return p + i;
- 	}
- 
--- 
-2.37.1
+--Sean
 
