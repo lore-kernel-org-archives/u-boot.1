@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73F42CDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:44:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D06CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 06:44:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E159986EED;
-	Sun, 15 Oct 2023 08:26:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0705286F04;
+	Sun, 15 Oct 2023 08:26:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QzERl7O7";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xuJyPATH";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="iXmXJyCR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0C7E486867; Sun, 15 Oct 2023 08:00:21 +0200 (CEST)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6CAF88652F; Sun, 15 Oct 2023 08:24:18 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 362E186E03
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 07:58:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D46BF86529
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:24:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-352a3a95271so12959115ab.0
- for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 22:58:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697349504; x=1697954304; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XVF52gpBhJ/MJgCreuAWhUa3YFXZaO1z4KdXqinsYcI=;
- b=QzERl7O7SfiT5TvgR04cZJnvRuVBjildYlhNTCRI0uMC0p2h/X7DmMz60KvwYOdNS8
- S7jL9X2wIacqdbgVRQeB5Q/wg6kWtrmyZNcT1q5za2cmySwV6dIMlCNnINVqCVrCFjht
- qoPlwNJ0XwznaQq6ntYDSsMtbqCROngf49GxbbBLMn5U604wlm9r3vHqZM99ASe4rz+P
- cp/PCc53jUoMnhUstJiz57gZYeZPNN22gRk6eIutVfKffX2VJ8NZ7PpEQR2T0/H/lRe/
- P8/N5sM+/raHzxgoVDQrnydXFveZ27P5sg+2TNuqNTtcQ+chHZVg2pNkfkvnBbMHMCVP
- ClBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697349504; x=1697954304;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=XVF52gpBhJ/MJgCreuAWhUa3YFXZaO1z4KdXqinsYcI=;
- b=F+luVhSrXOvqXz6Jjh00pHmfPFn897pJlRMiRgE1A50WFc6TUAoljf00Mi6bPkM1ut
- YfguNa+7643TxvGtthjq0ASpoj4k5odkb99yHuZX6nM8+Xa2gexk7bRutCJ8EE+ucC3l
- NXZFIdY8wzAxI9TBTvnvhwEkixcgFicI+hMUKzQz45j2YXy8kdNzA6ER6JhbXEER4VVa
- Xdo/9JuT7xB3zveyg2i1MthVDX3hSkwgj+jahAPzWw5E4H0wVJ8VsqDuo2iC1AHLVhon
- yr2uNO7Ju733G63hcHtNBJW0xWIETAK9DQ94tmMGL06wZ5HTociBnmysTFXtNawZ3GC1
- OGdQ==
-X-Gm-Message-State: AOJu0YxFr3oI7GjVNIw3RT0kHN/q4fYS5oNhtVKLh3njaMK338uYNRtu
- PcmZDHFI9lQE8EaVDnQgOs7MJLVt7CMsdg==
-X-Google-Smtp-Source: AGHT+IF0lfWHfPtN4BB9MZKJHglzzqV2/L6Na5jU/9y7PW5totCaRgEAEa6qiWEblo5J8gcTYYUJTw==
-X-Received: by 2002:a05:620a:2452:b0:76c:b293:84f with SMTP id
- h18-20020a05620a245200b0076cb293084fmr37776990qkn.21.1697316503811; 
- Sat, 14 Oct 2023 13:48:23 -0700 (PDT)
-Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- f2-20020a05620a12e200b007770d47c621sm1720643qkl.66.2023.10.14.13.48.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Oct 2023 13:48:23 -0700 (PDT)
-From: Sean Anderson <seanga2@gmail.com>
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Harald Seiler <hws@denx.de>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH v2 14/29] fs: ext4: Add some defines for testing
-Date: Sat, 14 Oct 2023 16:47:50 -0400
-Message-Id: <20231014204805.439009-15-seanga2@gmail.com>
-X-Mailer: git-send-email 2.37.1
-In-Reply-To: <20231014204805.439009-1-seanga2@gmail.com>
-References: <20231014204805.439009-1-seanga2@gmail.com>
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4S7DRH62NMz9sWZ;
+ Sat, 14 Oct 2023 21:47:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697312827;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pQ0ic/Fxf4pl9YZvHZ3pRYALI9ngqzZgAgDMk4+7xwM=;
+ b=xuJyPATHACum2d8Q9o0+f+e79+ArCuMxVXd1IkglWY1YDa42qSlQGinJNqIG0eo+Fp39F5
+ WJ1ve0k2KU8eGVqYHf16aNzUZJQI8IsdJ9dcz5JtnoPlkTpNbvghFR2Yj3bjgR61OOgy7B
+ j78aEtAMWy7bj/+I6u7UkSY7N0cCiiugvy79kFFZ7vXKW5oUtqiH0+cTa4s5at9NVt/I8c
+ BiW7CU34jcJKfmSFqcaYosTtgisy9/58hjeaoxfWSZwvKTT9KC2ljNJZ+FEa0p/zrkns2R
+ FnIAjnJZLROwzzdwn7kxZhqjtsoY9XBYpJvIitozE8VHdbph9IOu3FqhabQMOw==
+Message-ID: <45c7a2ae-bde8-42d9-a0fd-c38101e5b57b@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1697312826;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pQ0ic/Fxf4pl9YZvHZ3pRYALI9ngqzZgAgDMk4+7xwM=;
+ b=iXmXJyCRog6DZFyW69JSbpLrIFwXxfNH0yIYZlVsg7YCGlbpHpzQ6hd5ZGxoJGAArkF9HS
+ ao7CT4j8cV3b+NyV5pARPvwTKcxEh1Ym5HNE7HBGbduQ+vS7CIxT7Pmm+FY4dO1d5w+ybh
+ 6TLFXvbvSk7ziiWyi9awELI0TpL0t8yNuN/nVsE8uZbkjYNnW2xRP1ykNSC7JhtUGLeEW0
+ zJFTNP36qUWSjee8LHOPD24k8emV2LGW6KT9yUmYe6lidowMKxtOUEeuCZ4/X9ejxVOwxa
+ Rp/gd82c+GdEP5tBruySxmzYOjhQJ9GUfzgv/hAHPGf8NTqWPxtT8ni68qPB1g==
+Date: Sat, 14 Oct 2023 21:47:04 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 07/19] clk: renesas: Add RZ/G2L & RZ/G2LC CPG driver
+Content-Language: en-US
+To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
+Cc: Biju Das <biju.das.jz@bp.renesas.com>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
+ <20231009164645.164464-8-paul.barker.ct@bp.renesas.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20231009164645.164464-8-paul.barker.ct@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 4194c1844e3f5db505d
+X-MBO-RS-META: aakddawzofunk67htqauk1ryofyqhmmx
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,64 +91,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add various defines which are not necessary for reading/writing
-filesystems, but which are useful for creating them. These mostly come from
-Linux v6.5-rc2 (what I had checked out).
+On 10/9/23 18:46, Paul Barker wrote:
+> This driver provides clock and reset control for the Renesas R9A07G044L
+> (RZ/G2L) and R9A07G044C (RZ/G2LC) SoC. It consists of two parts:
+> 
+> * driver code which is applicable to all SoCs in the RZ/G2L family.
+> 
+> * static data describing the clocks and resets which are specific to the
+>    R9A07G044{L,C} SoCs. The identifier r9a07g044 (without a final letter)
+>    is used to indicate that both SoCs are supported.
+> 
+> clk_set_rate() and clk_get_rate() are implemented only for the clocks
+> that are actually used in u-boot.
+> 
+> The CPG driver is marked with DM_FLAG_PRE_RELOC to ensure that its bind
+> function is called before the SCIF (serial port) driver is probed. This
+> is required so that we can de-assert the relevant reset signal during
+> the serial driver probe function.
+> 
+> This patch is based on the corresponding Linux v6.5 driver
+> (commit 52e12027d50affbf60c6c9c64db8017391b0c22e).
+> 
+> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
+> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 
-Signed-off-by: Sean Anderson <seanga2@gmail.com>
----
-
-Changes in v2:
-- Split off from fs test
-
- include/ext4fs.h     |  1 +
- include/ext_common.h | 14 ++++++++++++++
- 2 files changed, 15 insertions(+)
-
-diff --git a/include/ext4fs.h b/include/ext4fs.h
-index cb5d9cc0a5c..dd66d27f776 100644
---- a/include/ext4fs.h
-+++ b/include/ext4fs.h
-@@ -31,6 +31,7 @@
- struct disk_partition;
- 
- #define EXT4_INDEX_FL		0x00001000 /* Inode uses hash tree index */
-+#define EXT4_TOPDIR_FL		0x00020000 /* Top of directory hierarchies*/
- #define EXT4_EXTENTS_FL		0x00080000 /* Inode uses extents */
- #define EXT4_EXT_MAGIC			0xf30a
- #define EXT4_FEATURE_RO_COMPAT_GDT_CSUM	0x0010
-diff --git a/include/ext_common.h b/include/ext_common.h
-index 30a0c248414..b09bbde116a 100644
---- a/include/ext_common.h
-+++ b/include/ext_common.h
-@@ -35,6 +35,16 @@ struct cmd_tbl;
- #define EXT2_PATH_MAX				4096
- /* Maximum nesting of symlinks, used to prevent a loop.  */
- #define	EXT2_MAX_SYMLINKCNT		8
-+/* Maximum file name length */
-+#define EXT2_NAME_LEN 255
-+
-+/*
-+ * Revision levels
-+ */
-+#define EXT2_GOOD_OLD_REV	0	/* The good old (original) format */
-+#define EXT2_DYNAMIC_REV	1	/* V2 format w/ dynamic inode sizes */
-+
-+#define EXT2_GOOD_OLD_INODE_SIZE 128
- 
- /* Filetype used in directory entry.  */
- #define	FILETYPE_UNKNOWN		0
-@@ -48,6 +58,10 @@ struct cmd_tbl;
- #define FILETYPE_INO_DIRECTORY		0040000
- #define FILETYPE_INO_SYMLINK		0120000
- #define EXT2_ROOT_INO			2 /* Root inode */
-+#define EXT2_BOOT_LOADER_INO		5 /* Boot loader inode */
-+
-+/* First non-reserved inode for old ext2 filesystems */
-+#define EXT2_GOOD_OLD_FIRST_INO	11
- 
- /* The size of an ext2 block in bytes.  */
- #define EXT2_BLOCK_SIZE(data)	   (1 << LOG2_BLOCK_SIZE(data))
--- 
-2.37.1
-
+Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
