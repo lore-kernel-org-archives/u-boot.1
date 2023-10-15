@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F93CDB482
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 19:06:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06386CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 19:20:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FA10865A8;
-	Sun, 15 Oct 2023 21:05:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 62D2C86BA4;
+	Sun, 15 Oct 2023 21:10:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hkbyVNve";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="oARSzMQL";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="mprS0Gl/";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="s+7WS9bk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3737C8657B; Sun, 15 Oct 2023 21:05:11 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id 5555B8657B; Sun, 15 Oct 2023 21:05:52 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8FCFF8652F
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 21:04:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 284278652F
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 21:05:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -32,34 +31,34 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S7qS815pTz9smn;
- Sun, 15 Oct 2023 21:04:56 +0200 (CEST)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S7qSS5zyKz9sn1;
+ Sun, 15 Oct 2023 21:05:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697396696;
+ s=mail20150812; t=1697396712;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iq8Rd8dVbOX4rq8WQhyEHQWCZxEsxzGQA5WqwWc/ipQ=;
- b=hkbyVNve461arhVutSsl1HVqqkUfSQNVhfgoLHDIo0/rRTP3rDvj3GxSKg36OazgSVp/u0
- SzrdP3SNbxkvkvH1qIUrcvBqIZhhNJOl5mIzEpfB3Bfmi0/WzoGg/IvxRErc7bZ790EcZF
- OBHmfrxV1+heGNYU1kZMxOFXs8pWnrmV+84ctAG4XguSf/cthMV3CjU9ay6Baz1Xoe37k/
- u7u8BiKL9sTrpoQZipz+fPnkfXciDrbjX9ysoakGLAYYmRB4l1QR8EbjCmHPnvfIayF5iG
- jOa/DJu7q3qxNYPLfjvsh47k5cGu+q8SqJ/fIjVamNrxh3J6I+cB568X9s8b1Q==
-Message-ID: <6925efc1-0ffb-4ce3-b284-f670158a4f43@mailbox.org>
+ bh=GAfw2eklyF1T5ovlRjyHV2K5A6HfEgwHRXdaX4fRKiw=;
+ b=mprS0Gl/vd/cBSyqAFNj5oePGwsgwXB3EzzPvBWzKEL3JfGURPuEOLhDrb5SBT+LtzDz9N
+ v+LUwFLed+hFnhx6CSvK6F1QZbatZetFBWSMq24vUqGl7K0/gg9sTggkuIlYgQEKw4ltnr
+ BtnOps3dQJCoVfo8zq9jd7/J8+ljbj0ZblXr68cktBaLIAjk0f6cocQ/CG7qM0SQG2FxHb
+ CTqWoEtxs3fPUMpqlcpDB0NLwvWinLiD58v/oreGaZIDdk+UwUwV7DglWWpLwIAFgkk1hL
+ y07Dy5Cjuxv5GNr1XIXI7J/uWarl2TqF9Np2g8rRUkkrQDvFelBA6MEfh/AIHA==
+Message-ID: <5fb89b3c-322d-49e2-b71f-a4289d925bd6@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697396694;
+ s=mail20150812; t=1697396711;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iq8Rd8dVbOX4rq8WQhyEHQWCZxEsxzGQA5WqwWc/ipQ=;
- b=oARSzMQLp9i682ZH2O/oO4HSegJ9PhDx2cTrnqL5QmPhNft8lGWhdZ7uewdDbJ888VDQq/
- ZstrvjC1ylBcs3BX12MTyYpWABXEnQXivPbQGsqifzmXSsEbKZ1OF0lDBXwR3lLLrTWNjh
- UF0uXhQLgradtlXM0dwbA9OHlTQ8YttDHLLbEAyv008FslR4jj8t2Hethm3gM8p0s9nYxW
- KvgI1d7WQR98nNEcIrxRMFffF+zF/GvTsmDIXaDbL2RFg/I19yL/lQxBvoSoy64e/zw/my
- GWu8mz6BtZKkMoNHctF0PiM8lvmu8qlGzAB9lKPg92AOrWs8lGWXKeVznl7KfQ==
-Date: Sun, 15 Oct 2023 21:04:51 +0200
+ bh=GAfw2eklyF1T5ovlRjyHV2K5A6HfEgwHRXdaX4fRKiw=;
+ b=s+7WS9bk8Se7bzSaOsPRYI67OJAxc5y2IH16a/0A8u1vOGEj89p79I9LT5pY52dIyNMr/f
+ PQPlQIiulA5MZcePT/37PT0ZXUB5J9RwL4a6PyvNkWe+Y7ELndiTzN5zA5+xzlZdepaTVh
+ 0ePmVKF4wJizEYO3eDLVJ15tsExURcWbs5byExROZlNauaMbrht4wg2MmS72kffLCXGw4N
+ FrKiHis2Hx+lXTml3N8ohd5D9AUp2sjAUJAsNttvzYHEu1ScupktgQJw9l38cQSn/nJDHB
+ kE0mRID6Eo19PQIuRCq+Eqw4zhVXpKInpoflQYaukQ+/f67pYlW6tGl9za2Xew==
+Date: Sun, 15 Oct 2023 21:05:09 +0200
 MIME-Version: 1.0
 Subject: Re: [PATCH v2 12/19] serial: sh: Add RZ/G2L SCIF support
 Content-Language: en-US
@@ -76,9 +75,9 @@ From: Marek Vasut <marek.vasut@mailbox.org>
 In-Reply-To: <20231015175938.rf2wnvpgpyrn56cz@GBR-5CG2373LKG.adwin.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 1jp99a5s47wxzxkwhf4oj3oj7s5hpthy
-X-MBO-RS-ID: 451f30d44dfb92d14ac
-X-Rspamd-Queue-Id: 4S7qS815pTz9smn
+X-MBO-RS-META: sjq5cjsusjmu5gy1qg4dr9p54two3ij6
+X-MBO-RS-ID: 1789eb8fa0c9b3183d0
+X-Rspamd-Queue-Id: 4S7qSS5zyKz9sn1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,4 +144,4 @@ On 10/15/23 19:59, Paul Barker wrote:
 > The existing include list isn't sorted, so in v3 I'll add a patch to
 > sort the list first. Then these two can be added in the right places.
 
-Thanks !
+Much appreciated, thanks !
