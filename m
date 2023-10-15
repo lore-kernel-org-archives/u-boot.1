@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26F92CDB483
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 22:39:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21F3ECDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 22:41:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E5B786D56;
-	Mon, 16 Oct 2023 00:36:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 78B4286DDE;
+	Mon, 16 Oct 2023 00:36:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Bo+lp41N";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kBYf1rvo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A00AF86BB4; Mon, 16 Oct 2023 00:34:25 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id D59D886C2D; Mon, 16 Oct 2023 00:34:54 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F5F6803AC
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 00:33:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EF9786BA4
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 00:34:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jbx6244@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-53e3b8f906fso4302138a12.2
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 15:33:50 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-522bd411679so6520780a12.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 15:34:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697409226; x=1698014026; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697409257; x=1698014057; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id:from:to
  :cc:subject:date:message-id:reply-to;
- bh=b3IJLujxp0SLHAD4nPHU3zw38oe62kuRWeVLfnXnN+w=;
- b=Bo+lp41N8x66PuK3Lm30kzWOldNiAv+pi6tYMscSR53QFpecZBbo2S9LjChKpR9kUA
- 5vvb8EVo+ExdgDMYLWPhu983BxpwrUJZj+uPMtbROWNvd7qEXrzlnvozaZsJ4kwWNeAU
- EiDf9w3oZJG3ysL7MnA9PjhDo7u5BgfMRN9sPBdl3vAYA7Tl62bXMQTy8bpkYdeCIo5v
- /stNbs1ydGAM7AxA+s+IUrS+FAtZ1PlNFprABwtb6n0zAFlNIaB49lF+nC7QOjeBfWxq
- l6VU+Keg/C6r6nHBaRc5ZP9mF8cfJBfvAUpLZ0bL2Zu3S1/Q0YXqOslyL3Fg7mYzfGsj
- 4OcQ==
+ bh=n8i/wjqdC71ztvySiOjCLW5YIxJJAW1Xh2eZaF5DKIY=;
+ b=kBYf1rvoWACCoqOGY5tFvE0h961gynuVjFGIrG5L5udYgW+p3MJHjhczKCisnf5vqw
+ JXdmIWcjj6aneF5E+o1kreemMNOdJA3nQb3KeISklTAMDCYF4o3a9wluQtpvtm4wD7tj
+ XBnGy0KEV7JwngNLZiKeXogfpAoApB6P4FnZny1okXxLs5Tlwr97DfUOIp81oUhz4rba
+ Ta89E0fUqkZBLAKawlLXFzbnym+uT29sO+0fHLSiDePlQ957GXpLe2kr6TpjA1eGoRcX
+ H/TXIvpeQ1EFmTt/oIyxVBx0ctOfRbgU4uyKxGBu8C62F/yZe5uSiXy0fnRprKKFvL2u
+ zlsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697409226; x=1698014026;
+ d=1e100.net; s=20230601; t=1697409257; x=1698014057;
  h=content-transfer-encoding:in-reply-to:content-language:references
  :cc:to:subject:from:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=b3IJLujxp0SLHAD4nPHU3zw38oe62kuRWeVLfnXnN+w=;
- b=ivuh9yQlH0ijFvRf9HGWXiKKcOE/Iy/MFR5trZgCCIzbZcnZ63Iz2Ekf+Tdy10OBUO
- 8S7pBYPUJjWm3FqZCSwbFR6z+3BTCyoxp/MggwpInW6mfajACQPcXa++dYtGVZO1/0ld
- O7xLi6zrl4NrFdpBwTbgL2Vqd4chcZ9j7S+qOpigeK2bb34lZFk6hcCGcRRs/hmlIHus
- eGBWsxeaCaIQsHV4xkjIX8vzh3XSPbgoF2g82ZzgnrZv7qJAgSGP27NrFLMB5plTAjGp
- U1ISM6TZqe4G4mChqOo1jXHSj1EBpmr1pZ+JA0di93yGnraN/dQ8gl98v5r9hlp+juCN
- AWjQ==
-X-Gm-Message-State: AOJu0YwKF5o+jc4vBzdQY+hL6Du6f6ukvqVqzCEYoYJvZV8CzNe6VzXu
- m0h54sWklQCbjZziZsX+ed8=
-X-Google-Smtp-Source: AGHT+IGJ1VxQJMUR7rOrQCduNapPDqUu8HgZCCwG4DxofxRHg7cYUfolePcoQYJtJE6I6BgoxJME3g==
-X-Received: by 2002:a17:907:da8:b0:9be:c852:bfb5 with SMTP id
- go40-20020a1709070da800b009bec852bfb5mr4336166ejc.61.1697409225716; 
- Sun, 15 Oct 2023 15:33:45 -0700 (PDT)
+ bh=n8i/wjqdC71ztvySiOjCLW5YIxJJAW1Xh2eZaF5DKIY=;
+ b=ExTvvOZBR2n7ad1TNf3WOji1rKjmUg4Tx3/o64WfmaXMb3HFM0FRIjm43rdjvEizF1
+ su+zdTOzNmoVzxkAn2vwawxeAkzw8LG0EsBC7NsYrARPrOE3Vh8v3L02wZHpBdLvjbV3
+ 8f2CfrpRVZqZErfXDy+p0RKBVdn2wEOtjeu80Kj3bPvppVSXlPERn8cg+F80EGBh5gJG
+ H/IybazPqee+b87prk1Lo5hYZd3+KghclF8yhJbIEKcRmnABrbTNT47ck19Yer+f/kb3
+ 3owSzFKXA85NRz9EfKdI5e4KvPF+lKGzZWhd8E8S27l4+ulo1sTTRU1o0QnMi1QRTKgq
+ +o7g==
+X-Gm-Message-State: AOJu0YyClGj7s+PiDbyCcwVvGJdjvYjd1r+vyqZXR3A9o0OZ6CAqsK/d
+ 3CskEd8T2VGz05b7HpEo52c=
+X-Google-Smtp-Source: AGHT+IHHkl1YYHnQuOXajKCNSThXJABkUe2coTSWtvFJyb4uoAITqj346pgyWWWeUzsW606ycdLN1Q==
+X-Received: by 2002:a05:6402:3550:b0:53d:ff75:9c38 with SMTP id
+ f16-20020a056402355000b0053dff759c38mr10524578edd.39.1697409256773; 
+ Sun, 15 Oct 2023 15:34:16 -0700 (PDT)
 Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
  by smtp.gmail.com with ESMTPSA id
- nc30-20020a1709071c1e00b009b65a834dd6sm2810897ejc.215.2023.10.15.15.33.44
+ cx16-20020a05640222b000b0053dbb214d96sm6621584edb.13.2023.10.15.15.34.16
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Oct 2023 15:33:45 -0700 (PDT)
-Message-ID: <08be133a-9781-77c7-706e-62d5decd1450@gmail.com>
-Date: Mon, 16 Oct 2023 00:33:44 +0200
+ Sun, 15 Oct 2023 15:34:16 -0700 (PDT)
+Message-ID: <47780c6a-6e51-501d-b146-3cd637854612@gmail.com>
+Date: Mon, 16 Oct 2023 00:34:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.13.0
 From: Johan Jonker <jbx6244@gmail.com>
-Subject: [PATCH v4 6/8] rockchip: test: dm: add rkmtd test
+Subject: [PATCH v4 8/8] rockchip: configs: sandbox: enable rkmtd command
 To: kever.yang@rock-chips.com
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
  dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
@@ -96,250 +96,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Rockchip rkmtd test:
-Create/attach/detach RKMTD device.
-Send/read data with Rockchip boot block header.
-Test that reusing the same label should work.
-Basic test of 'rkmtd' commands.
+Enable rkmtd command for testing with sandbox_defconfig
+and sandbox64_defconfig.
 
 Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Reviewed-by: Simon Glass <sjg@chromium.org>
 ---
-
-Changed V4:
-  sort includes
-  rename define
-  use '\0'
-  use UT_TESTF_CONSOLE_REC flag
-  check RC4 result
 
 Changed V3:
   New patch
 ---
- test/dm/Makefile |   1 +
- test/dm/rkmtd.c  | 200 +++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 201 insertions(+)
- create mode 100644 test/dm/rkmtd.c
+ configs/sandbox64_defconfig | 1 +
+ configs/sandbox_defconfig   | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/test/dm/Makefile b/test/dm/Makefile
-index 7ed00733c1a6..a5e0a2744375 100644
---- a/test/dm/Makefile
-+++ b/test/dm/Makefile
-@@ -100,6 +100,7 @@ obj-$(CONFIG_REMOTEPROC) += remoteproc.o
- obj-$(CONFIG_DM_RESET) += reset.o
- obj-$(CONFIG_SYSRESET) += sysreset.o
- obj-$(CONFIG_DM_REGULATOR) += regulator.o
-+obj-$(CONFIG_CMD_RKMTD) += rkmtd.o
- obj-$(CONFIG_DM_RNG) += rng.o
- obj-$(CONFIG_DM_RTC) += rtc.o
- obj-$(CONFIG_SCMI_FIRMWARE) += scmi.o
-diff --git a/test/dm/rkmtd.c b/test/dm/rkmtd.c
-new file mode 100644
-index 000000000000..3c3e8efa92f2
---- /dev/null
-+++ b/test/dm/rkmtd.c
-@@ -0,0 +1,200 @@
-+// SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+/*
-+ * Test derived from:
-+ * /test/dm/host.c
-+ * Copyright 2022 Google LLC
-+ * Written by Simon Glass <sjg@chromium.org>
-+ *
-+ * Copyright (C) 2023 Johan Jonker <jbx6244@gmail.com>
-+ */
-+
-+#include <common.h>
-+#include <blk.h>
-+#include <dm.h>
-+#include <fs.h>
-+#include <rkmtd.h>
-+#include <asm/test.h>
-+#include <dm/device-internal.h>
-+#include <dm/test.h>
-+#include <test/test.h>
-+#include <test/ut.h>
-+
-+#define RW_BUF_SIZE	12 * 512
-+
-+/* Basic test of the RKMTD interface */
-+static int dm_test_rkmtd(struct unit_test_state *uts)
-+{
-+	struct udevice *dev, *part, *chk, *blk;
-+	char write[RW_BUF_SIZE], read[RW_BUF_SIZE];
-+	static const char label[] = "test";
-+	struct rkmtd_dev *plat;
-+	struct blk_desc *desc;
-+	struct sector0 *sec0;
-+	int i;
-+
-+	ut_asserteq(-ENODEV, uclass_first_device_err(UCLASS_RKMTD, &dev));
-+	ut_asserteq(-ENODEV, uclass_first_device_err(UCLASS_PARTITION, &part));
-+
-+	ut_assertok(rkmtd_create_device(label, &dev));
-+
-+	/* Check that the plat data has been allocated */
-+	plat = dev_get_plat(dev);
-+	ut_asserteq_str("test", plat->label);
-+	ut_assert(label != plat->label);
-+
-+	/* Attach RKMTD driver */
-+	ut_assertok(rkmtd_attach(dev));
-+	ut_assertok(uclass_first_device_err(UCLASS_RKMTD, &chk));
-+	ut_asserteq_ptr(chk, dev);
-+
-+	/* Get RKMTD block device */
-+	ut_assertok(blk_get_from_parent(dev, &blk));
-+	ut_assertok(device_probe(blk));
-+
-+	/* There should be a GPT partition table in this device */
-+	ut_asserteq(0, uclass_first_device_err(UCLASS_PARTITION, &part));
-+
-+	/* Write a boot block and verify that we get the same data back */
-+	desc = dev_get_uclass_plat(blk);
-+	ut_asserteq(true, desc->removable);
-+	ut_asserteq(LBA, desc->lba);
-+
-+	memset(write, '\0', BLK_SIZE);
-+
-+	for (i = BLK_SIZE; i < sizeof(write); i++)
-+		write[i] = i;
-+
-+	sec0 = (struct sector0 *)write;
-+	sec0->magic = 0x0FF0AA55;
-+	sec0->rc4_flag = 0;
-+	sec0->boot_code1_offset = 4;
-+	sec0->boot_code2_offset = 4;
-+	sec0->flash_data_size = 4;
-+	sec0->flash_boot_size = 8;
-+
-+	rkmtd_rc4(write, 512);
-+	ut_asserteq(RK_TAG, sec0->magic);
-+
-+	ut_asserteq(12, blk_dwrite(desc, 64, 12, write));
-+	ut_asserteq(12, blk_dread(desc, 64, 12, read));
-+	ut_asserteq_mem(write, read, RW_BUF_SIZE);
-+
-+	ut_assertok(rkmtd_detach(dev));
-+
-+	ut_asserteq(-ENODEV, blk_get_from_parent(dev, &blk));
-+	ut_assertok(device_unbind(dev));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_rkmtd, UT_TESTF_SCAN_FDT);
-+
-+/* Reusing the same label should work */
-+static int dm_test_rkmtd_dup(struct unit_test_state *uts)
-+{
-+	static const char label[] = "test";
-+	struct udevice *dev, *chk;
-+
-+	/* Create a RKMTD device with label "test" */
-+	ut_asserteq(0, uclass_id_count(UCLASS_RKMTD));
-+	ut_assertok(rkmtd_create_device(label, &dev));
-+	ut_assertok(rkmtd_attach(dev));
-+	ut_assertok(uclass_first_device_err(UCLASS_RKMTD, &chk));
-+	ut_asserteq_ptr(chk, dev);
-+	ut_asserteq(1, uclass_id_count(UCLASS_RKMTD));
-+
-+	/* Create another device with the same label (should remove old one) */
-+	ut_assertok(rkmtd_create_device(label, &dev));
-+	ut_assertok(rkmtd_attach(dev));
-+	ut_assertok(uclass_first_device_err(UCLASS_RKMTD, &chk));
-+	ut_asserteq_ptr(chk, dev);
-+
-+	/* Make sure there is still only one device */
-+	ut_asserteq(1, uclass_id_count(UCLASS_RKMTD));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_rkmtd_dup, UT_TESTF_SCAN_FDT);
-+
-+/* Basic test of the 'rkmtd' command */
-+static int dm_test_rkmtd_cmd(struct unit_test_state *uts)
-+{
-+	struct udevice *dev, *blk;
-+	struct blk_desc *desc;
-+
-+	/* First check 'rkmtd info' with binding */
-+	ut_assertok(run_command("rkmtd info", 0));
-+	ut_assert_nextline("dev       blocks label          ");
-+	ut_assert_console_end();
-+
-+	/* Bind device 1 */
-+	ut_assertok(run_commandf("rkmtd bind test1"));
-+	ut_assertok(uclass_first_device_err(UCLASS_RKMTD, &dev));
-+	ut_assertok(blk_get_from_parent(dev, &blk));
-+	desc = dev_get_uclass_plat(blk);
-+
-+	ut_assertok(run_command("rkmtd info", 0));
-+	ut_assert_nextline("dev       blocks label          ");
-+	ut_assert_nextline("  0          609 test1          ");
-+	ut_assert_console_end();
-+
-+	/* Bind device 2 */
-+	ut_assertok(run_commandf("rkmtd bind test2"));
-+	ut_assertok(uclass_next_device_err(&dev));
-+	ut_assertok(blk_get_from_parent(dev, &blk));
-+	desc = dev_get_uclass_plat(blk);
-+
-+	ut_assertok(run_command("rkmtd info", 0));
-+	ut_assert_nextline("dev       blocks label          ");
-+	ut_assert_nextline("  0          609 test1          ");
-+	ut_assert_nextline("  1          609 test2          ");
-+	ut_assert_console_end();
-+
-+	ut_asserteq(1, run_command("rkmtd info test", 0));
-+	ut_assert_nextline("No such device 'test'");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("rkmtd info test2", 0));
-+	ut_assert_nextline("dev       blocks label          ");
-+	ut_assert_nextline("  1          609 test2          ");
-+	ut_assert_console_end();
-+
-+	/* Check 'rkmtd dev' */
-+	ut_asserteq(1, run_command("rkmtd dev", 0));
-+	ut_assert_nextline("No current rkmtd device");
-+	ut_assert_console_end();
-+
-+	ut_asserteq(1, run_command("rkmtd dev missing", 0));
-+	ut_assert_nextline("No such device 'missing'");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("rkmtd dev test2", 0));
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("rkmtd dev", 0));
-+	ut_assert_nextline("Current rkmtd device: 1: test2");
-+	ut_assert_console_end();
-+
-+	/* Try a numerical label */
-+	ut_assertok(run_command("rkmtd dev 0", 0));
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("rkmtd dev", 0));
-+	ut_assert_nextline("Current rkmtd device: 0: test1");
-+	ut_assert_console_end();
-+
-+	/* Remove one of the bindings */
-+	ut_assertok(run_commandf("rkmtd unbind test1"));
-+
-+	/* There should now be no current device */
-+	ut_asserteq(1, run_command("rkmtd dev", 0));
-+	ut_assert_nextline("No current rkmtd device");
-+	ut_assert_console_end();
-+
-+	ut_assertok(run_command("rkmtd info", 0));
-+	ut_assert_nextline("dev       blocks label          ");
-+	ut_assert_nextline("  1          609 test2          ");
-+	ut_assert_console_end();
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_rkmtd_cmd, UT_TESTF_SCAN_FDT | UT_TESTF_CONSOLE_REC);
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 1a033b22018b..1a01f51a0b75 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -58,6 +58,7 @@ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_TEMPERATURE=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_RKMTD=y
+ CONFIG_CMD_WDT=y
+ CONFIG_CMD_WRITE=y
+ CONFIG_CMD_CAT=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 01830c7bd255..cc54e6dec5af 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -84,6 +84,7 @@ CONFIG_CMD_REMOTEPROC=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_TEMPERATURE=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_RKMTD=y
+ CONFIG_CMD_WDT=y
+ CONFIG_CMD_WRITE=y
+ CONFIG_CMD_AXI=y
 --
 2.39.2
 
