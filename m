@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D8F8CDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 23:50:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85FB0CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 23:52:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64CAB86BB3;
-	Mon, 16 Oct 2023 01:50:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DFE4986AE9;
+	Mon, 16 Oct 2023 01:52:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Kywo59Xk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JJcnXuDv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCC84869D1; Mon, 16 Oct 2023 01:50:30 +0200 (CEST)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id E295986BCF; Mon, 16 Oct 2023 01:50:58 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7914F864AA
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 01:50:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E00AB868AE
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 01:50:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1c9daca2b85so28348975ad.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 16:50:25 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1ca82f015e4so751325ad.1
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 16:50:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697413822; x=1698018622; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1697413834; x=1698018634; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AqNZNjqQYhADk2f9LcxrecaAQ0zvQd04y6QhLiDYaOs=;
- b=Kywo59XkoQawqB0zqsC+iQN9L7+/9jWTWWGxZ9dZ7vE3lFFFZo0QZ3al3k2Th7mm9z
- kib0cDme/qi8pZaq0d1aMQuUDaB5PdgpkBKryHIyvNU/iV9O23I7OvOygoLmA3v3nAYv
- ZrtRHxALTTSZ83qCr7zhEY5kqc7W93Kt236oLjdmW8sWFix0u0cn2wjwQRbyisQXSW8Q
- TMoAnmHS1u1mr6kFNuQSLrkSxZE4Au7EXEDPXv3VWTONteGGygK7BX+c/vwLARLM3n/4
- wLfEmLwNsCCfGY9DSTy+9aGXPs5etM8BvCoAXDRDsFDDVLHfnMaRHGYBfm2pkodhUf0/
- EdBQ==
+ bh=h+uhty0GdC8R49rdJSut4WnZ0t+PDDOC92B5xrfeuT0=;
+ b=JJcnXuDvDgMUJR2msvAFK4RvfvusrNf07/+Aai/jTQ3egXrMBRttgYDlbvOSRfkDKj
+ DxBwXkZ6TBmS22CLPfpy7JExWvurYZOqx9wFfzfoZ7UdsL/YhS5B91sx2uG9i4mcYnp1
+ BTBYdkKKR5TvjcP6XsvmLBb7oSJzUxTZdvwMI6AuL3Rh41scKlpzbsBRsuJFqW4q0B1e
+ uyrhqmofwbWgJv7AMWc5TZdB91om5rGEuT4ynIzv+6KRWPuM56iL6qbapcOu/ENSGXP7
+ vsSpfuCEKJ+uw2Z5YGdkmlmXPbLZePkZNGZ5u4qBNuKTb4mOUotQtUbfZGV8Kp9xAABU
+ StUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697413822; x=1698018622;
+ d=1e100.net; s=20230601; t=1697413834; x=1698018634;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AqNZNjqQYhADk2f9LcxrecaAQ0zvQd04y6QhLiDYaOs=;
- b=XIs8qaQuXJF9o7a1nM8v8PKSpPx7pbflxvqsAl778bEa+qWbmoLsHJZQuwQz3j32z7
- FHiijaGQ5OdyTXh95K3CRXci4koKjQlE5Gd82e3uDCEO3J1dsQdc7fCuIZ/AUL5gFeit
- KWPx6ScY7uPaPxvBB8B5D4wy0jZe7+a6HHDL6XFh79MLAOtuDBJ8lg9cRyl46mCLi/Ah
- BlLpBUauK+oedkwFsn9yBWboufqFuZI2AmxxJepCPvbRxaKpfUs2WLqeXJikbKydlU4B
- Nf0UX6DAVWcLdL4PHwRjoNcHK25ukTEMGtDx5OLavxjf9Pg0PnL76UsDrWK5LuZorPd3
- xVlA==
-X-Gm-Message-State: AOJu0YykhhYxNkZX1az8hbIr5OZEoSvn+dEkUtdaCj7FhG5N1yghvKG2
- ZZdJvdt07+Lht1+Ha/KbLmdqzqeu492e8Dc+qZI=
-X-Google-Smtp-Source: AGHT+IHH9gd7NYJBaH17VPwjzX6LyWkiyTdqFC3poKSwZJZVFCx187U7uMOJ19gpPca7nVAXEmSzmw==
-X-Received: by 2002:a17:903:2347:b0:1bc:edd:e891 with SMTP id
- c7-20020a170903234700b001bc0edde891mr9063971plh.1.1697413821941; 
- Sun, 15 Oct 2023 16:50:21 -0700 (PDT)
+ bh=h+uhty0GdC8R49rdJSut4WnZ0t+PDDOC92B5xrfeuT0=;
+ b=FzuRhpVp1RIFKXime177pK13H/gYvZUdFDh9xc98k+/FabpvfmGGhW66WZFplONjqv
+ jQZ2H2ZVy7erBsgNfqCvykpLlsXPjNF4PaWKQzzKfwT7Hln/q+oL92CaH1QRlG5p1SL6
+ /qCrbJ9nwLtpY1ujE1a362a8YRr6L/kX9fSFViwhORgqGBveZj+04Vdz7fGfP5omTAxv
+ MnYVcTrnRNHK83IZtVouplJdFaQttVn1Yj4SPSgMi25C83zQLn35rJfAcnlWVxPayKjz
+ eyfboMHh+3q3q7Yh0g08McNnmuWhrBjKDbzSrgoD1YUx+XrcZbThC1e02T5Vq7XoDqMy
+ 1Y+g==
+X-Gm-Message-State: AOJu0YwV6gjGSV4qL0E5UCnRCD12s9RDnHq1mmvbkybav+1R69V5aXRc
+ MH7QufKnLPiIdy2tIe8hkd55egnUQcsPEEB4W2w=
+X-Google-Smtp-Source: AGHT+IHJYnUi8eMwN7LYzSsrWba8Xig9sGAOfn6Trcd3P6S9sFZxswEhwc7RHR9/TQedJQcn0xHI6w==
+X-Received: by 2002:a17:903:41c1:b0:1c6:30d1:7214 with SMTP id
+ u1-20020a17090341c100b001c630d17214mr31839834ple.55.1697413834264; 
+ Sun, 15 Oct 2023 16:50:34 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- y10-20020a170902b48a00b001c60e7bf5besm7208228plr.281.2023.10.15.16.50.21
+ 21-20020a170902c21500b001c771740da4sm6045570pll.195.2023.10.15.16.50.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Oct 2023 16:50:21 -0700 (PDT)
+ Sun, 15 Oct 2023 16:50:33 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -71,11 +71,11 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <masahisa.kojima@linaro.org>,
- Ramon Fried <rfried.dev@gmail.com>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: [PATCH v6 1/9] net: wget: prevent overwriting reserved memory
-Date: Mon, 16 Oct 2023 08:48:59 +0900
-Message-Id: <20231015234907.2362717-2-masahisa.kojima@linaro.org>
+ Tobias Waldekranz <tobias@waldekranz.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH v6 3/9] blk: blkmap: add ramdisk creation utility function
+Date: Mon, 16 Oct 2023 08:49:01 +0900
+Message-Id: <20231015234907.2362717-4-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231015234907.2362717-1-masahisa.kojima@linaro.org>
 References: <20231015234907.2362717-1-masahisa.kojima@linaro.org>
@@ -97,169 +97,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This introduces the valid range check to store the received
-blocks using lmb. The same logic is implemented in tftp.
+User needs to call several functions to create the ramdisk
+with blkmap.
+This adds the utility function to create blkmap device and
+mount the ramdisk.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Reviewed-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- net/wget.c | 80 +++++++++++++++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 73 insertions(+), 7 deletions(-)
+ drivers/block/Makefile        |  3 +-
+ drivers/block/blkmap.c        | 15 ----------
+ drivers/block/blkmap_helper.c | 53 +++++++++++++++++++++++++++++++++++
+ include/blkmap.h              | 29 +++++++++++++++++++
+ 4 files changed, 84 insertions(+), 16 deletions(-)
+ create mode 100644 drivers/block/blkmap_helper.c
 
-diff --git a/net/wget.c b/net/wget.c
-index 8bb4d72db1..6f97eb1d12 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -4,16 +4,20 @@
-  * Copyright Duncan Hare <dh@synoia.com> 2017
-  */
+diff --git a/drivers/block/Makefile b/drivers/block/Makefile
+index a161d145fd..ec0575d135 100644
+--- a/drivers/block/Makefile
++++ b/drivers/block/Makefile
+@@ -14,7 +14,8 @@ obj-$(CONFIG_IDE) += ide.o
+ endif
+ obj-$(CONFIG_SANDBOX) += sandbox.o host-uclass.o host_dev.o
+ obj-$(CONFIG_$(SPL_TPL_)BLOCK_CACHE) += blkcache.o
+-obj-$(CONFIG_BLKMAP) += blkmap.o
++obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap.o
++obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap_helper.o
  
-+#include <asm/global_data.h>
- #include <command.h>
- #include <common.h>
- #include <display_options.h>
- #include <env.h>
- #include <image.h>
-+#include <lmb.h>
- #include <mapmem.h>
- #include <net.h>
- #include <net/tcp.h>
- #include <net/wget.h>
+ obj-$(CONFIG_EFI_MEDIA) += efi-media-uclass.o
+ obj-$(CONFIG_EFI_MEDIA_SANDBOX) += sb_efi_media.o
+diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+index 149a4cac3e..21201409ed 100644
+--- a/drivers/block/blkmap.c
++++ b/drivers/block/blkmap.c
+@@ -66,21 +66,6 @@ struct blkmap_slice {
+ 	void (*destroy)(struct blkmap *bm, struct blkmap_slice *bms);
+ };
  
-+DECLARE_GLOBAL_DATA_PTR;
-+
- static const char bootfile1[] = "GET ";
- static const char bootfile3[] = " HTTP/1.0\r\n\r\n";
- static const char http_eom[] = "\r\n\r\n";
-@@ -56,6 +60,29 @@ static unsigned int retry_tcp_ack_num;	/* TCP retry acknowledge number*/
- static unsigned int retry_tcp_seq_num;	/* TCP retry sequence number */
- static int retry_len;			/* TCP retry length */
- 
-+static ulong wget_load_size;
-+
-+/**
-+ * wget_init_max_size() - initialize maximum load size
+-/**
+- * struct blkmap - Block map
+- *
+- * Data associated with a blkmap.
+- *
+- * @label: Human readable name of this blkmap
+- * @blk: Underlying block device
+- * @slices: List of slices associated with this blkmap
+- */
+-struct blkmap {
+-	char *label;
+-	struct udevice *blk;
+-	struct list_head slices;
+-};
+-
+ static bool blkmap_slice_contains(struct blkmap_slice *bms, lbaint_t blknr)
+ {
+ 	return (blknr >= bms->blknr) && (blknr < (bms->blknr + bms->blkcnt));
+diff --git a/drivers/block/blkmap_helper.c b/drivers/block/blkmap_helper.c
+new file mode 100644
+index 0000000000..0f80035f57
+--- /dev/null
++++ b/drivers/block/blkmap_helper.c
+@@ -0,0 +1,53 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * blkmap helper function
 + *
-+ * Return:	0 if success, -1 if fails
++ * Copyright (c) 2023, Linaro Limited
 + */
-+static int wget_init_load_size(void)
++
++#include <blk.h>
++#include <blkmap.h>
++#include <dm/device.h>
++#include <dm/device-internal.h>
++
++int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
++			  struct udevice **devp)
 +{
-+	struct lmb lmb;
-+	phys_size_t max_size;
++	int ret;
++	lbaint_t blknum;
++	struct blkmap *bm;
++	struct blk_desc *desc;
++	struct udevice *bm_dev;
 +
-+	lmb_init_and_reserve(&lmb, gd->bd, (void *)gd->fdt_blob);
++	ret = blkmap_create(label, &bm_dev);
++	if (ret) {
++		log_err("failed to create blkmap\n");
++		return ret;
++	}
 +
-+	max_size = lmb_get_free_size(&lmb, image_load_addr);
-+	if (!max_size)
-+		return -1;
++	bm = dev_get_plat(bm_dev);
++	desc = dev_get_uclass_plat(bm->blk);
++	blknum = image_size >> desc->log2blksz;
++	ret = blkmap_map_pmem(bm_dev, 0, blknum, image_addr);
++	if (ret) {
++		log_err("Unable to map %#llx at block %d : %d\n",
++			(unsigned long long)image_addr, 0, ret);
++		goto err;
++	}
++	log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
++		 (unsigned long long)image_addr);
 +
-+	wget_load_size = max_size;
++	ret = device_probe(bm->blk);
++	if (ret)
++		goto err;
++
++	if (devp)
++		*devp = bm_dev;
 +
 +	return 0;
++
++err:
++	blkmap_destroy(bm_dev);
++
++	return ret;
 +}
+diff --git a/include/blkmap.h b/include/blkmap.h
+index af54583c7d..0d87e6db6b 100644
+--- a/include/blkmap.h
++++ b/include/blkmap.h
+@@ -7,6 +7,23 @@
+ #ifndef _BLKMAP_H
+ #define _BLKMAP_H
+ 
++#include <dm/lists.h>
++
++/**
++ * struct blkmap - Block map
++ *
++ * Data associated with a blkmap.
++ *
++ * @label: Human readable name of this blkmap
++ * @blk: Underlying block device
++ * @slices: List of slices associated with this blkmap
++ */
++struct blkmap {
++	char *label;
++	struct udevice *blk;
++	struct list_head slices;
++};
 +
  /**
-  * store_block() - store block in memory
-  * @src: source of data
-@@ -64,10 +91,25 @@ static int retry_len;			/* TCP retry length */
+  * blkmap_map_linear() - Map region of other block device
+  *
+@@ -74,4 +91,16 @@ int blkmap_create(const char *label, struct udevice **devp);
   */
- static inline int store_block(uchar *src, unsigned int offset, unsigned int len)
- {
-+	ulong store_addr = image_load_addr + offset;
- 	ulong newsize = offset + len;
- 	uchar *ptr;
+ int blkmap_destroy(struct udevice *dev);
  
--	ptr = map_sysmem(image_load_addr + offset, len);
-+	if (IS_ENABLED(CONFIG_LMB)) {
-+		ulong end_addr = image_load_addr + wget_load_size;
++/**
++ * blkmap_create_ramdisk() - Create new ramdisk with blkmap
++ *
++ * @label: Label of the new blkmap
++ * @image_addr: Target memory start address of this mapping
++ * @image_size: Target memory size of this mapping
++ * @devp: Updated with the address of the created blkmap device
++ * Returns: 0 on success, negative error code on failure
++ */
++int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
++			  struct udevice **devp);
 +
-+		if (!end_addr)
-+			end_addr = ULONG_MAX;
-+
-+		if (store_addr < image_load_addr ||
-+		    store_addr + len > end_addr) {
-+			printf("\nwget error: ");
-+			printf("trying to overwrite reserved memory...\n");
-+			return -1;
-+		}
-+	}
-+
-+	ptr = map_sysmem(store_addr, len);
- 	memcpy(ptr, src, len);
- 	unmap_sysmem(ptr);
- 
-@@ -248,25 +290,39 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
- 
- 			net_boot_file_size = 0;
- 
--			if (len > hlen)
--				store_block(pkt + hlen, 0, len - hlen);
-+			if (len > hlen) {
-+				if (store_block(pkt + hlen, 0, len - hlen) != 0) {
-+					wget_loop_state = NETLOOP_FAIL;
-+					wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
-+					net_set_state(NETLOOP_FAIL);
-+					return;
-+				}
-+			}
- 
- 			debug_cond(DEBUG_WGET,
- 				   "wget: Connected Pkt %p hlen %x\n",
- 				   pkt, hlen);
- 
- 			for (i = 0; i < pkt_q_idx; i++) {
-+				int err;
-+
- 				ptr1 = map_sysmem(
- 					(phys_addr_t)(pkt_q[i].pkt),
- 					pkt_q[i].len);
--				store_block(ptr1,
--					    pkt_q[i].tcp_seq_num -
--					    initial_data_seq_num,
--					    pkt_q[i].len);
-+				err = store_block(ptr1,
-+					  pkt_q[i].tcp_seq_num -
-+					  initial_data_seq_num,
-+					  pkt_q[i].len);
- 				unmap_sysmem(ptr1);
- 				debug_cond(DEBUG_WGET,
- 					   "wget: Connctd pkt Q %p len %x\n",
- 					   pkt_q[i].pkt, pkt_q[i].len);
-+				if (err) {
-+					wget_loop_state = NETLOOP_FAIL;
-+					wget_fail("wget: store error\n", tcp_seq_num, tcp_ack_num, action);
-+					net_set_state(NETLOOP_FAIL);
-+					return;
-+				}
- 			}
- 		}
- 	}
-@@ -338,6 +394,7 @@ static void wget_handler(uchar *pkt, u16 dport,
- 				len) != 0) {
- 			wget_fail("wget: store error\n",
- 				  tcp_seq_num, tcp_ack_num, action);
-+			net_set_state(NETLOOP_FAIL);
- 			return;
- 		}
- 
-@@ -428,6 +485,15 @@ void wget_start(void)
- 	debug_cond(DEBUG_WGET,
- 		   "\nwget:Load address: 0x%lx\nLoading: *\b", image_load_addr);
- 
-+	if (IS_ENABLED(CONFIG_LMB)) {
-+		if (wget_init_load_size()) {
-+			printf("\nwget error: ");
-+			printf("trying to overwrite reserved memory...\n");
-+			net_set_state(NETLOOP_FAIL);
-+			return;
-+		}
-+	}
-+
- 	net_set_timeout_handler(wget_timeout, wget_timeout_handler);
- 	tcp_set_tcp_handler(wget_handler);
- 
+ #endif	/* _BLKMAP_H */
 -- 
 2.34.1
 
