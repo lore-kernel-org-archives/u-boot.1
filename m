@@ -4,84 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83E54CDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 19:28:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A700CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 19:49:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BDE586524;
-	Sun, 15 Oct 2023 21:24:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8125D86B8F;
+	Sun, 15 Oct 2023 21:49:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="orlfG2Iz";
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="sIgrjoTk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B4C3863C9; Sun, 15 Oct 2023 21:22:43 +0200 (CEST)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 12B0C8691E; Sun, 15 Oct 2023 21:49:42 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBD39864F3
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 21:21:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF40F8692B
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 21:49:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-5a84204e7aeso17116617b3.0
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 12:21:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697397603; x=1698002403; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pzMMMLXQLEDfyqkHehidDuDro1uFIpgOwtu7QORPKyI=;
- b=orlfG2IzJQcZgZ4d3Jggbtlc8y92QAStl3+z20/uBt3C97TqVx1aSXYsV/N+GPrSHR
- mC5bUpgZWNCqz1KiOoPZtXR3+JPmDqIEfFafiDOHvSPLDqmAA1uszSqchGXyRv+EyEzr
- AWilM+HmJS/9iKvnj1nCkuM4toSLatwTeSC8w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697397603; x=1698002403;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pzMMMLXQLEDfyqkHehidDuDro1uFIpgOwtu7QORPKyI=;
- b=vIjTrWAlJpkjjBwQT+QDLTXRLza02gg2FEFFPhinNzpiGTTsXvzTpLRfa6yRtj1gE6
- HS6RtAhINJXtrd/aL7GqN5XuMEC5COIzj1vhUVDPusTpljm/CoNiXEUQA5x7MBm2DzuL
- wn3HaSD6QftBd7kzSMeaWcYU/VY4to1sz8B/DnEa2MNj5586h61l3SjboToTE2FyOgTq
- ThqjiCsl3/6bW9JDHkx2p+RjJde54+ZnASjOxhKdpy67Q1n4YYPMaW1qwNwG2LXYFNne
- Bp883U/SROBVmlGYgMDgHN9gaMIvo/OJKRAJmCBiDCCVuABsnpAFhmmWqXHgzk+aw+PV
- t2pA==
-X-Gm-Message-State: AOJu0YyT+AfCtNWXO57jlj10nKSuDosxAf6EN/aXknaVF6sO4eIJgBIg
- gINEltr46EJWAuDvT886VGjxPA==
-X-Google-Smtp-Source: AGHT+IE5yT+k+i8gJIgfXLQ/whxav2c5sRWc4RlDiTCIFz/SLk2xhWpy1d+OL7vPTMXGSFqTjibr+g==
-X-Received: by 2002:a81:4a55:0:b0:599:8bd:5bdf with SMTP id
- x82-20020a814a55000000b0059908bd5bdfmr36058313ywa.50.1697397603536; 
- Sun, 15 Oct 2023 12:20:03 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- d11-20020a05620a140b00b0076cda7eab11sm2430273qkj.133.2023.10.15.12.20.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Oct 2023 12:20:02 -0700 (PDT)
-Date: Sun, 15 Oct 2023 15:20:00 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: Sean Anderson <seanga2@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
- Harald Seiler <hws@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: Re: [PATCH v2 17/29] net: bootp: Fall back to BOOTP from DHCP when
- unit testing
-Message-ID: <20231015192000.GC3119521@bill-the-cat>
-References: <20231014204805.439009-1-seanga2@gmail.com>
- <20231014204805.439009-18-seanga2@gmail.com>
- <1365B46D-6CCA-4064-ABC1-97CF581564C7@gmx.de>
- <f3fa804c-0c6b-f31d-6bd6-d5e3408a3861@gmail.com>
- <CAPnjgZ06ULY5335j-7JpBU75nDV52Rbyevj0FdPyvVwRds47wg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="I7Z1J0IAuYYHPmRS"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ06ULY5335j-7JpBU75nDV52Rbyevj0FdPyvVwRds47wg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: ee18aa29-6b93-11ee-90ec-00505699b430
+Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id ee18aa29-6b93-11ee-90ec-00505699b430;
+ Sun, 15 Oct 2023 21:49:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=Sgp5Pa3f1vCciIUrgNDGnPsyeAn581tr5+NO9KXM2Xg=;
+ b=sIgrjoTkNQXnBVdJPQNvXuFxnMB386z6C5O53mBaXsNSsQFdsXK/WUH1EUPvZIanrgAdY/hQmU/tn
+ mMc980YFUx1/HS47Ne2lBZW659PZMWdaqUJtgTeNkYySqA+0P8v2Dv1jLvv6vXu/BS3DTOXSgLPeV9
+ +uV7y5agY3hsROzEYWwVueLvuFf/T9Yf342ocWS9xGOLQ6TSHJnYVe/abaopTp7JkykOMSS/7oC3ft
+ 9bZvso9SVBULnupseRcPW55lDTgR2ypHtQRu6Got/sDk8Is2LL0YU9O70fzdiJiEVI+I6DRbLjBwm9
+ WGPldrjFMgIB+F24eoQbF8ltsCHcGhA==
+X-KPN-MID: 33|NmdNRcOa7lfaH16OpsbCdDV4DyI4bMgef4EZUFfOe7GUgl8QNZZpSTW906O9xr0
+ heAd0XqCuhCGQDG94z34wrguHVD+6lkAoz/cXfbKPSpo=
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|SOPrTxRWPWBCaJ3puo1KxPB7svoq4Vs3rTQaNxqdi3BKv7F3i2BltCIYFaFKYXW
+ o2Ad8iAjKN+8fuH/jWW0kow==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id f1962be0-6b93-11ee-ac7a-00505699b758;
+ Sun, 15 Oct 2023 21:49:25 +0200 (CEST)
+Date: Sun, 15 Oct 2023 21:49:25 +0200
+Message-Id: <87zg0jr7i2.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Ivaylo Ivanov <ivo.ivanov@null.net>
+Cc: u-boot@lists.denx.de, kettenis@openbsd.org
+In-Reply-To: <8699bfe7-af80-eaeb-c6af-5d97a598f1ec@null.net> (message from
+ Ivaylo Ivanov on Wed, 11 Oct 2023 07:42:39 +0300)
+Subject: Re: [PATCH] arm: mach-apple: Move M1/M2 specifics into a separate
+ folder
+References: <20230829172519.72803-1-ivo.ivanov@null.net>
+ <878r9trbfn.fsf@bloch.sibelius.xs4all.nl>
+ <0c9cea14-cb3f-d3bb-98f6-2d0907b7cb79@null.net>
+ <87wmvufa8f.fsf@bloch.sibelius.xs4all.nl>
+ <8699bfe7-af80-eaeb-c6af-5d97a598f1ec@null.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,90 +78,257 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+> Date: Wed, 11 Oct 2023 07:42:39 +0300
+> From: Ivaylo Ivanov <ivo.ivanov@null.net>
+> 
+> S5L8950X is definitely belongs to the mach-apple folder, since it's the
+> first truly apple-made SoC: it uses AIC, DART, Apple GPIO, etc etc. I
+> might be wrong but I haven't seen any references of RTKit on S5L8950X.
 
---I7Z1J0IAuYYHPmRS
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Yes your device tree has:
 
-On Sun, Oct 15, 2023 at 08:39:50AM -0600, Simon Glass wrote:
-> Hi Sean,
->=20
-> On Sat, 14 Oct 2023 at 15:27, Sean Anderson <seanga2@gmail.com> wrote:
+    compatible = "samsung,s5l8950", "samsung,s5l89xx";
+
+I do understand that it is hard to tell when Apple hardware changed
+from being a Samsung SoC with some Apple hardware blocks into an Apple
+SoC with some Samsung hardware blocks.  U-Boot typically follows the
+precedent set by the Linux kernel.  So if you're also planning to
+upstream Linux support for these devices, it probably is best to sort
+this out with the Linux maintainers first.
+
+The U-Boot support for mach-apple was never intended to be
+M1-specific.  The goal was always to support a wider range with a
+single board.c file as long as that makes sense.  That probably
+doesn't make sense for 32-bit SoCs like yours.  And if there are
+significant differences in the way U-Boot is started on iPhone/iPad
+platforms we probably need a different set of files and configs as
+well.
+
+So my preferred approach would be to park this diff until a later
+stage where it is more obvious what the best way to split things up
+is.
+
+> I have already have gotten u-boot working with AIC timer and partial
+> dwc2 support (plug-in detection works, not sure yet why it doesn't
+> expose a USB interface to my PC) on the iPhone 5. It's confirmed to also
+> work on the 5c, and with a few changes addresses-wise it also works on
+> A5. Here's a rough link to my changes (which are still to-be-improved)
+> on my github u-boot repo:
+> https://github.com/ivoszbg/u-boot/commit/e20958e142cb881488602b7e864c00073dfe32db
+
+Most of the stuff in your board.c file probably doesn't belong there,
+but in separate clock and USB glue drivers.
+
+> In my opinion, M1 support shouldn't have been placed in the mach-apple
+> folder like that in the first place. It's disrupting the work for a ton
+> of Apple SoCs, as if M1 is the only apple SoC in existence.
+> 
+> On 10/11/23 00:17, Mark Kettenis wrote:
+> >> Date: Tue, 29 Aug 2023 22:13:53 +0300
+> >> From: Ivaylo Ivanov <ivo.ivanov@null.net>
+> >>
+> >> I'm currently working on S5L8950X. I also have some T7000 and T8010
+> >> devices that I'll work on in the future.
+> >>
+> >> There's a project called freemyipod that has a fork of U-Boot working on
+> >> iPod Nano's (specifically the S5L8730 in the iPod Nano 5). I've read
+> >> that they're planning on upstreaming it in the near future.
 > >
-> > On 10/14/23 17:22, Heinrich Schuchardt wrote:
-> > >
-> > >
-> > > Am 14. Oktober 2023 22:47:53 MESZ schrieb Sean Anderson <seanga2@gmai=
-l.com>:
-> > >> If we sent a DHCP packet and get a BOOTP response from the server, we
-> > >> shouldn't try to send a DHCPREQUEST packet, since it won't be DHCPAC=
-Ked.
-> > >> Transition straight to BIND. This is only enabled for UNIT_TEST to a=
-void
-> > >> bloat, since I suspect the number of BOOTP servers in the wild is
-> > >> vanishingly small.
-> > >>
-> > >> Signed-off-by: Sean Anderson <seanga2@gmail.com>
-> > >> Reviewed-by: Simon Glass <sjg@chromium.org>
-> > >> ---
-> > >>
-> > >> (no changes since v1)
-> > >>
-> > >> net/bootp.c | 6 ++++++
-> > >> 1 file changed, 6 insertions(+)
-> > >>
-> > >> diff --git a/net/bootp.c b/net/bootp.c
-> > >> index 2053cce88c6..7b0f45e18a9 100644
-> > >> --- a/net/bootp.c
-> > >> +++ b/net/bootp.c
-> > >> @@ -1073,6 +1073,11 @@ static void dhcp_handler(uchar *pkt, unsigned=
- dest, struct in_addr sip,
-> > >>                          CONFIG_SYS_BOOTFILE_PREFIX,
-> > >>                          strlen(CONFIG_SYS_BOOTFILE_PREFIX)) =3D=3D =
-0) {
-> > >> #endif       /* CONFIG_SYS_BOOTFILE_PREFIX */
-> > >> +                    if (CONFIG_IS_ENABLED(UNIT_TEST) &&
-> > >> +                        dhcp_message_type((u8 *)bp->bp_vend) =3D=3D=
- -1) {
-> > >
-> > > As written before, please, do not add unit test specific code paths.
+> > ok, well, most of the code you're moving isn't really M1/M2 specific.
+> > Apple uses RTKit all over the place.  And some of the SoCs you mention
+> > are really close to M1/M2.  And the older ones have a lot of Samsung
+> > heritage so I'm not sure they belong under mach-apple ...
 > >
-> > While it is convenient for tests to implement a BOOTP server, there are
-> > effectively no BOOTP servers in the wild. However, BOOTP is commonly en=
-abled
-> > in U-Boot. In an effort to avoid growing most U-Boots for testing purpo=
-ses,
-> > I enabled this path just for unit tests. That said, only 6 boards enabl=
-e SPL_ETH,
-> > so maybe it is not too bad.
->=20
-> Yes, also if you are using networking in SPL, you can expect it to add
-> quite a bit to code size.
-
-And so long as this doesn't lead to overflowing them, OK.  But size is
-not infinite there, am335x_evm and am43xx_hs_evm are both a bit
-constrained.
-
---=20
-Tom
-
---I7Z1J0IAuYYHPmRS
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUsO1wACgkQFHw5/5Y0
-tyxATAv9Fg5DZHKF2b34iVvpxPxRMzt2ieanw8GeSe5BqEwmq29tKy98vQeQ1Mji
-J7/jpv5fpqDrfrKyQUFnJZzJKnRp3Oyhoa5CiraiEtDxN2fs28in9DNWifqsqMlz
-8btdsg2LLZMaF445Qzl6v8qR+8r40dgUaBnbPYD058blTqHrc7g5DHvk6/mpKFvE
-Hghbf3KYgQflYbKHHRoXQ0X+mXguJkOa/v0FqZ+O5CRnoMvxxQKnfGp587k3nd27
-+UqSQoqEet2CIvpx1wIjTTR2/Rh7HN4J+09cHoqJpSF4PQRnUTxmtqDaW6vn9H9n
-y7k5UDtSxRI3+HyaIec5YpYnyWRD7PtsfvqA/tS2pwOMhr7vGZvwTicBKuF9fHFJ
-9hNhyDtLpyrN3N7ACjtpE4M3JtjwvwKSc3ufXVP6pmT6UaGAt/GvvLh62XzKu0Hn
-+BGqfji+7jQaYjAU1af/aueEjNBEQ7dUdpNKYOPGuYcQn0fLFmRryNf/ocvu2/ya
-g29shLj9
-=wYql
------END PGP SIGNATURE-----
-
---I7Z1J0IAuYYHPmRS--
+> > Also, unless you actually have code to support other Apple SoCs, this
+> > just causes disruption for upstreaming more of the M1/M2 code.  So I
+> > think this is best left alone until you actually show your code and we
+> > can see how to integrate it.
+> >
+> >>
+> >> On 8/29/23 20:43, Mark Kettenis wrote:
+> >>>> From: ivo.ivanov@null.net
+> >>>> Date: Tue, 29 Aug 2023 20:25:19 +0300
+> >>>>
+> >>>> From: Ivaylo Ivanov <ivo.ivanov@null.net>
+> >>>>
+> >>>> Currently, mach-apple assumes we're working with M1/M2. Make room for
+> >>>> adding support for other Apple SoCs by moving everything from the M1/M2
+> >>>> SoC family in "mach-apple/" into "mach-apple/m1/".
+> >>>
+> >>> Which other Apple SoCs?
+> >>>
+> >>>> Signed-off-by: Ivaylo Ivanov <ivo.ivanov@null.net>
+> >>>> ---
+> >>>>  arch/arm/Kconfig                             | 29 --------------
+> >>>>  arch/arm/mach-apple/Kconfig                  | 42 ++++++++++++++++++++
+> >>>>  arch/arm/mach-apple/Makefile                 |  5 +--
+> >>>>  arch/arm/mach-apple/m1/Makefile              |  6 +++
+> >>>>  arch/arm/mach-apple/{ => m1}/board.c         |  0
+> >>>>  arch/arm/mach-apple/{ => m1}/lowlevel_init.S |  0
+> >>>>  arch/arm/mach-apple/{ => m1}/rtkit.c         |  0
+> >>>>  arch/arm/mach-apple/{ => m1}/sart.c          |  0
+> >>>>  configs/apple_m1_defconfig                   |  1 +
+> >>>>  9 files changed, 50 insertions(+), 33 deletions(-)
+> >>>>  create mode 100644 arch/arm/mach-apple/m1/Makefile
+> >>>>  rename arch/arm/mach-apple/{ => m1}/board.c (100%)
+> >>>>  rename arch/arm/mach-apple/{ => m1}/lowlevel_init.S (100%)
+> >>>>  rename arch/arm/mach-apple/{ => m1}/rtkit.c (100%)
+> >>>>  rename arch/arm/mach-apple/{ => m1}/sart.c (100%)
+> >>>>
+> >>>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> >>>> index 97c25b4f14..5339da370c 100644
+> >>>> --- a/arch/arm/Kconfig
+> >>>> +++ b/arch/arm/Kconfig
+> >>>> @@ -980,38 +980,9 @@ config ARCH_NPCM
+> >>>>
+> >>>>  config ARCH_APPLE
+> >>>>  	bool "Apple SoCs"
+> >>>> -	select ARM64
+> >>>> -	select CLK
+> >>>> -	select CMD_PCI
+> >>>> -	select CMD_USB
+> >>>>  	select DM
+> >>>> -	select DM_GPIO
+> >>>> -	select DM_KEYBOARD
+> >>>> -	select DM_MAILBOX
+> >>>>  	select DM_RESET
+> >>>>  	select DM_SERIAL
+> >>>> -	select DM_SPI
+> >>>> -	select DM_USB
+> >>>> -	select VIDEO
+> >>>> -	select IOMMU
+> >>>> -	select LINUX_KERNEL_IMAGE_HEADER
+> >>>> -	select OF_BOARD_SETUP
+> >>>> -	select OF_CONTROL
+> >>>> -	select PCI
+> >>>> -	select PINCTRL
+> >>>> -	select POSITION_INDEPENDENT
+> >>>> -	select POWER_DOMAIN
+> >>>> -	select REGMAP
+> >>>> -	select SPI
+> >>>> -	select SYSCON
+> >>>> -	select SYSRESET
+> >>>> -	select SYSRESET_WATCHDOG
+> >>>> -	select SYSRESET_WATCHDOG_AUTO
+> >>>> -	select USB
+> >>>> -	imply CMD_DM
+> >>>> -	imply CMD_GPT
+> >>>> -	imply DISTRO_DEFAULTS
+> >>>> -	imply OF_HAS_PRIOR_STAGE
+> >>>>
+> >>>>  config ARCH_OWL
+> >>>>  	bool "Actions Semi OWL SoCs"
+> >>>> diff --git a/arch/arm/mach-apple/Kconfig b/arch/arm/mach-apple/Kconfig
+> >>>> index 294690ec0e..a38779b387 100644
+> >>>> --- a/arch/arm/mach-apple/Kconfig
+> >>>> +++ b/arch/arm/mach-apple/Kconfig
+> >>>> @@ -3,6 +3,46 @@ if ARCH_APPLE
+> >>>>  config TEXT_BASE
+> >>>>  	default 0x00000000
+> >>>>
+> >>>> +choice
+> >>>> +	prompt "Apple Silicon architecture type select"
+> >>>> +	optional
+> >>>> +
+> >>>> +config ARCH_APPLE_M1
+> >>>> +	bool "Apple M1/M2 SoC family"
+> >>>> +	select ARM64
+> >>>> +	select CLK
+> >>>> +	select CMD_PCI
+> >>>> +	select CMD_USB
+> >>>> +	select DM_GPIO
+> >>>> +	select DM_KEYBOARD
+> >>>> +	select DM_MAILBOX
+> >>>> +	select DM_SPI
+> >>>> +	select DM_USB
+> >>>> +	select VIDEO
+> >>>> +	select IOMMU
+> >>>> +	select LINUX_KERNEL_IMAGE_HEADER
+> >>>> +	select OF_BOARD_SETUP
+> >>>> +	select OF_CONTROL
+> >>>> +	select PCI
+> >>>> +	select PINCTRL
+> >>>> +	select POSITION_INDEPENDENT
+> >>>> +	select POWER_DOMAIN
+> >>>> +	select REGMAP
+> >>>> +	select SPI
+> >>>> +	select SYSCON
+> >>>> +	select SYSRESET
+> >>>> +	select SYSRESET_WATCHDOG
+> >>>> +	select SYSRESET_WATCHDOG_AUTO
+> >>>> +	select USB
+> >>>> +	imply CMD_DM
+> >>>> +	imply CMD_GPT
+> >>>> +	imply DISTRO_DEFAULTS
+> >>>> +	imply OF_HAS_PRIOR_STAGE
+> >>>> +
+> >>>> +endchoice
+> >>>> +
+> >>>> +if ARCH_APPLE_M1
+> >>>> +
+> >>>>  config SYS_CONFIG_NAME
+> >>>>  	default "apple"
+> >>>>
+> >>>> @@ -19,3 +59,5 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+> >>>>  	default TEXT_BASE
+> >>>>
+> >>>>  endif
+> >>>> +
+> >>>> +endif
+> >>>> diff --git a/arch/arm/mach-apple/Makefile b/arch/arm/mach-apple/Makefile
+> >>>> index 50b465b947..d147ccdde2 100644
+> >>>> --- a/arch/arm/mach-apple/Makefile
+> >>>> +++ b/arch/arm/mach-apple/Makefile
+> >>>> @@ -1,6 +1,3 @@
+> >>>>  # SPDX-License-Identifier: GPL-2.0+
+> >>>>
+> >>>> -obj-y += board.o
+> >>>> -obj-y += lowlevel_init.o
+> >>>> -obj-y += rtkit.o
+> >>>> -obj-$(CONFIG_NVME_APPLE) += sart.o
+> >>>> +obj-$(CONFIG_ARCH_APPLE_M1) += m1/
+> >>>> diff --git a/arch/arm/mach-apple/m1/Makefile b/arch/arm/mach-apple/m1/Makefile
+> >>>> new file mode 100644
+> >>>> index 0000000000..50b465b947
+> >>>> --- /dev/null
+> >>>> +++ b/arch/arm/mach-apple/m1/Makefile
+> >>>> @@ -0,0 +1,6 @@
+> >>>> +# SPDX-License-Identifier: GPL-2.0+
+> >>>> +
+> >>>> +obj-y += board.o
+> >>>> +obj-y += lowlevel_init.o
+> >>>> +obj-y += rtkit.o
+> >>>> +obj-$(CONFIG_NVME_APPLE) += sart.o
+> >>>> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/m1/board.c
+> >>>> similarity index 100%
+> >>>> rename from arch/arm/mach-apple/board.c
+> >>>> rename to arch/arm/mach-apple/m1/board.c
+> >>>> diff --git a/arch/arm/mach-apple/lowlevel_init.S b/arch/arm/mach-apple/m1/lowlevel_init.S
+> >>>> similarity index 100%
+> >>>> rename from arch/arm/mach-apple/lowlevel_init.S
+> >>>> rename to arch/arm/mach-apple/m1/lowlevel_init.S
+> >>>> diff --git a/arch/arm/mach-apple/rtkit.c b/arch/arm/mach-apple/m1/rtkit.c
+> >>>> similarity index 100%
+> >>>> rename from arch/arm/mach-apple/rtkit.c
+> >>>> rename to arch/arm/mach-apple/m1/rtkit.c
+> >>>> diff --git a/arch/arm/mach-apple/sart.c b/arch/arm/mach-apple/m1/sart.c
+> >>>> similarity index 100%
+> >>>> rename from arch/arm/mach-apple/sart.c
+> >>>> rename to arch/arm/mach-apple/m1/sart.c
+> >>>> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
+> >>>> index 755560971e..bd723881da 100644
+> >>>> --- a/configs/apple_m1_defconfig
+> >>>> +++ b/configs/apple_m1_defconfig
+> >>>> @@ -1,5 +1,6 @@
+> >>>>  CONFIG_ARM=y
+> >>>>  CONFIG_ARCH_APPLE=y
+> >>>> +CONFIG_ARCH_APPLE_M1=y
+> >>>>  CONFIG_DEFAULT_DEVICE_TREE="t8103-j274"
+> >>>>  CONFIG_SYS_LOAD_ADDR=0x0
+> >>>>  CONFIG_USE_PREBOOT=y
+> >>>> --
+> >>>> 2.34.1
+> >>>>
+> >>>>
+> >>
+> 
