@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96453CDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 10:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98934CDB483
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 10:31:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0EEA86BCD;
-	Sun, 15 Oct 2023 12:30:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5871F86BCD;
+	Sun, 15 Oct 2023 12:31:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aYKuiuX8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ve9Mjai9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9F0A86BCF; Sun, 15 Oct 2023 12:30:46 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id BFFE586BCF; Sun, 15 Oct 2023 12:31:41 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6D2F86B73
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 12:30:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5E7586D56
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 12:31:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-405417465aaso34947675e9.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 03:30:43 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-32d9effe314so1651794f8f.3
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 03:31:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697365842; x=1697970642; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ZJ8+lB8xjkrKXuhw6KX+exudZ5+xHXE/3ru6Cc9nRT8=;
- b=aYKuiuX8Wp6S6Lyi0Tq2YlZBJFFQa/UFpVpInhqCorWLPWuxBzrvt/mwqNDjIjiZTQ
- mz+fIxdtl5xSdLFm8BhsrXAe+upCrIPpaP2E2SjkowapIK6JzJXyLYzokbxHOQjKEehQ
- oA11UZASsVxvewuIfNBpGJsxmLgzLruyEqWEdtYoG3x0XTPa2PwcGt+1CVV3HU5tFMgf
- /8U3aUPiLYw+RjsReujj8v8h9PCIvfIRPdA3u9oPOgqeTFvA1RSuDYiq8AaXp5ISQv6R
- 545ZdLvd2Bm4Rrl65zFVfLPVcoLvvAl/wR6SVy0wgCQYubmNG2JhBRAQSt9SeYwhg+NW
- 45gQ==
+ d=linaro.org; s=google; t=1697365888; x=1697970688; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ksqc97RrvA//9JSdIWQdCwkwNxbdnSEeDi9p0bEPXJE=;
+ b=Ve9Mjai9AzgjwrIs+OERtddw8XyfKOEjYjqy7vUayjrs9Y1LPdNvUV5CfC9nXOjwZF
+ 5W0c5Pf0OsGd07E2/3TBmUGLkzNz/2FoUSrDVzuqdvfRiUDPDmsFKrzXuESB7GAhXVik
+ Y8vU5PReSsLVikiNW+B+tbez9ZhXqO4LWxYLIDfKIO8iBpHUx5SJ4RwVvDvOrCw3pjgU
+ PP8jR5K8Igd1QLpSkWHaezN7vftHL97P2mg1TFEDwgJ1AdfryhVuY8PH4VLd4hvrl2dC
+ 71ypiNGr7rrCtr8Rs6r8wtKrVeO8Af4LM6Bpx+LWukFNu8WFu3qLPE08fNTbmrYGucd0
+ vHlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697365842; x=1697970642;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZJ8+lB8xjkrKXuhw6KX+exudZ5+xHXE/3ru6Cc9nRT8=;
- b=cyi+nV7YXmiPffCWryx1bUWcUb/4WwtBfDO4hqCRZ9A7KdthLXUDSEpNsOD9fvfwxX
- R58uxjM6bNvj/5f475X4t5NQai8Eu4xbZcUjeAAEToiezeNt+TXWGGDKt4MpgvZlvXeJ
- hDjsCQ87lukNqkG2r8VGTKoLz2TMOwn2wflexdDE/dQoNRaDCn++58KnGGuHlTeRIdNn
- XwztmsIzdA5TYHa5ErmhsszScjEpzte44K0E3bVvdJta+7ITg0Sw5pwPVE3sVBVZ6a1w
- JPeZPDB8lFax2QkaAuh1Yscn/nT6miaxvn0ADvM0ybj0WubOxjF7pCZx25wTEbOPZIw9
- q+7Q==
-X-Gm-Message-State: AOJu0Yxkjui+q5asyvPA5p4lw/mptraOxtIN/TIZMxhWBu1aqcv2cOL6
- 5t5/w3g3OWKASIFJmADDoXEBwQ==
-X-Google-Smtp-Source: AGHT+IEtwWzqQSbk98K0SnnEqvAngBwDd8fdPRIDIWuY6E049qTIrPboZQ2Yl1NZA5cnm6al7/TaEg==
-X-Received: by 2002:a7b:c4cb:0:b0:401:cb45:3fb8 with SMTP id
- g11-20020a7bc4cb000000b00401cb453fb8mr27605244wmk.38.1697365841782; 
- Sun, 15 Oct 2023 03:30:41 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:4847:ec26:6b78:66be?
- ([2a01:e0a:982:cbb0:4847:ec26:6b78:66be])
+ d=1e100.net; s=20230601; t=1697365888; x=1697970688;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ksqc97RrvA//9JSdIWQdCwkwNxbdnSEeDi9p0bEPXJE=;
+ b=BM5MldYqv0W+yVijQAEFCIT43rjIx/+FdzQdrw2kHhkt8lENKArYRXj2TBNEkS9NhO
+ qS9xW6XeolH9EVQyeuqoiWvUPCRiq8l1UUh6MqqH6SONedvk+iFXrGiuhUmiuSFt9pN8
+ SfCsopCLKgG+qbE3D345JNmQk0ee1zW+vBV6IpxsgqIn9oYSI9BBsMJO6LiUDUpCFs/w
+ vPaF9VM2ch8CPnXVJRz+fk33lXp+bbw2PA9unGDit0g2v/XRKvASDoKLeoHR2S3Ymx2P
+ E/znTL51HxMzW2XzQJOOAYYwK0eE0YgFRcxeLl6X7fMxSff2PY5dvZ9+YIhpNgZJk7QK
+ 1XRg==
+X-Gm-Message-State: AOJu0Ywrmm091wPKA/BEt0bfwgoxXwoAEpbdVU2hahKkmz7MqzZ3K70K
+ PecNGI0CwlgWdOxvB0PkH7iX/Q==
+X-Google-Smtp-Source: AGHT+IFtUCymwK6lX4GLZ+oqA/8/baJmwSEr1Rbtb+18gD3piSQWpU6XJsrBKGzQLXzIRNzaxFQlFA==
+X-Received: by 2002:a5d:5b0d:0:b0:32d:8401:404a with SMTP id
+ bx13-20020a5d5b0d000000b0032d8401404amr11571241wrb.10.1697365887687; 
+ Sun, 15 Oct 2023 03:31:27 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- ay15-20020a05600c1e0f00b004063977eccesm4207607wmb.42.2023.10.15.03.30.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Oct 2023 03:30:41 -0700 (PDT)
-Message-ID: <25322756-2d1a-f14d-134b-8e394f2979d3@linaro.org>
-Date: Sun, 15 Oct 2023 12:30:40 +0200
+ v9-20020a5d6109000000b0031f3ad17b2csm5820598wrt.52.2023.10.15.03.31.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Oct 2023 03:31:27 -0700 (PDT)
+From: neil.armstrong@linaro.org
+To: sughosh.ganu@linaro.org, xypron.glpk@gmx.de,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>
+Cc: u-boot-amlogic@groups.io,
+	u-boot@lists.denx.de,
+	kernel@sberdevices.ru
+Subject: Re: [PATCH v3 0/1] hwrng: meson - add support for S4
+Date: Sun, 15 Oct 2023 12:31:21 +0200
+Message-Id: <169736585436.4181364.7854441987940465829.b4-ty@linaro.org>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231012075828.22685-1-avromanov@salutedevices.com>
+References: <20231012075828.22685-1-avromanov@salutedevices.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0)
- Gecko/20100101 Thunderbird/102.15.1
-Subject: Re: [PATCH v1] drivers: don't compile Secure Monitor UCLASS
- unconditionally
-Content-Language: en-GB
-To: Alexey Romanov <avromanov@salutedevices.com>, narmstrong@baylibre.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, kernel@sberdevices.ru
-References: <20231013130411.46569-1-avromanov@salutedevices.com>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-In-Reply-To: <20231013130411.46569-1-avromanov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,36 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Le 13/10/2023 à 15:04, Alexey Romanov a écrit :
-> It makes no sense to compile Secure Monitor unconditionally.
-> For example, this break the SPL build on boards with a small
-> allowed SPL image size.
-> 
-> Fixes: 126fbbefd89e ("drivers: introduce Secure Monitor uclass")
-> 
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> ---
->   drivers/Makefile | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/Makefile b/drivers/Makefile
-> index b7bd3633b1..1a768fed2b 100644
-> --- a/drivers/Makefile
-> +++ b/drivers/Makefile
-> @@ -34,6 +34,7 @@ obj-$(CONFIG_$(SPL_TPL_)VIRTIO) += virtio/
->   obj-$(CONFIG_$(SPL_)DM_MAILBOX) += mailbox/
->   obj-$(CONFIG_$(SPL_)REMOTEPROC) += remoteproc/
->   obj-$(CONFIG_$(SPL_)SYSINFO) += sysinfo/
-> +obj-$(CONFIG_$(SPL_TPL_)SM) += sm/
->   obj-$(CONFIG_$(SPL_TPL_)TPM) += tpm/
->   obj-$(CONFIG_XEN) += xen/
->   obj-$(CONFIG_$(SPL_)FPGA) += fpga/
-> @@ -124,4 +125,3 @@ obj-$(CONFIG_DM_RNG) += rng/
->   endif
->   
->   obj-y += soc/
-> -obj-y += sm/
+From: Neil Armstrong <neil.armstrong@linaro.org>
 
-Thanks, squashed into 126fbbefd89e ("drivers: introduce Secure Monitor uclass")
+Hi,
 
+On Thu, 12 Oct 2023 10:58:24 +0300, Alexey Romanov wrote:
+> This patch adds support for Meson S4 series
+> hardware number generator using new algo.
+> 
+> V2:
+> 
+> - Sync with Linux version.
+> 
+> [...]
+
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic)
+
+[1/1] drivers: rng: add support for Meson S4
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/a92345610ed3596bc25de08b17cb29c86b508e6c
+
+-- 
 Neil
