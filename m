@@ -4,64 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A700CDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 19:49:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91B15CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 22:30:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8125D86B8F;
-	Sun, 15 Oct 2023 21:49:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 5B4538692B;
+	Mon, 16 Oct 2023 00:30:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="sIgrjoTk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ROvPrp11";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12B0C8691E; Sun, 15 Oct 2023 21:49:42 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3D73886940; Mon, 16 Oct 2023 00:30:13 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF40F8692B
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 21:49:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D744803AC
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 00:30:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: ee18aa29-6b93-11ee-90ec-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id ee18aa29-6b93-11ee-90ec-00505699b430;
- Sun, 15 Oct 2023 21:49:19 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=Sgp5Pa3f1vCciIUrgNDGnPsyeAn581tr5+NO9KXM2Xg=;
- b=sIgrjoTkNQXnBVdJPQNvXuFxnMB386z6C5O53mBaXsNSsQFdsXK/WUH1EUPvZIanrgAdY/hQmU/tn
- mMc980YFUx1/HS47Ne2lBZW659PZMWdaqUJtgTeNkYySqA+0P8v2Dv1jLvv6vXu/BS3DTOXSgLPeV9
- +uV7y5agY3hsROzEYWwVueLvuFf/T9Yf342ocWS9xGOLQ6TSHJnYVe/abaopTp7JkykOMSS/7oC3ft
- 9bZvso9SVBULnupseRcPW55lDTgR2ypHtQRu6Got/sDk8Is2LL0YU9O70fzdiJiEVI+I6DRbLjBwm9
- WGPldrjFMgIB+F24eoQbF8ltsCHcGhA==
-X-KPN-MID: 33|NmdNRcOa7lfaH16OpsbCdDV4DyI4bMgef4EZUFfOe7GUgl8QNZZpSTW906O9xr0
- heAd0XqCuhCGQDG94z34wrguHVD+6lkAoz/cXfbKPSpo=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|SOPrTxRWPWBCaJ3puo1KxPB7svoq4Vs3rTQaNxqdi3BKv7F3i2BltCIYFaFKYXW
- o2Ad8iAjKN+8fuH/jWW0kow==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id f1962be0-6b93-11ee-ac7a-00505699b758;
- Sun, 15 Oct 2023 21:49:25 +0200 (CEST)
-Date: Sun, 15 Oct 2023 21:49:25 +0200
-Message-Id: <87zg0jr7i2.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Ivaylo Ivanov <ivo.ivanov@null.net>
-Cc: u-boot@lists.denx.de, kettenis@openbsd.org
-In-Reply-To: <8699bfe7-af80-eaeb-c6af-5d97a598f1ec@null.net> (message from
- Ivaylo Ivanov on Wed, 11 Oct 2023 07:42:39 +0300)
-Subject: Re: [PATCH] arm: mach-apple: Move M1/M2 specifics into a separate
- folder
-References: <20230829172519.72803-1-ivo.ivanov@null.net>
- <878r9trbfn.fsf@bloch.sibelius.xs4all.nl>
- <0c9cea14-cb3f-d3bb-98f6-2d0907b7cb79@null.net>
- <87wmvufa8f.fsf@bloch.sibelius.xs4all.nl>
- <8699bfe7-af80-eaeb-c6af-5d97a598f1ec@null.net>
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-53e16f076b3so6915748a12.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 15:30:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697409003; x=1698013803; darn=lists.denx.de;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Z0A9SBabl2K2Up6gZJx7gFSsvpRvPlL+YY1T3jqXqs8=;
+ b=ROvPrp11z7J0aYJA9uek8nf6Sg5MvWGKxYeT7Iu9GCbR88aHbsOeufiJgAypCeml/I
+ d0yojwrvu7Tk4crMm2N4Cuf03J+krb3TG+5/yIWY2fPUBXnH7ealwzhtHJHCC3x8Z7Jr
+ kRD8RKdAWVdC2+P5o00RCeSDrnq3v62SM/hQpmJrfqxgHXPfxvCsQc079cnH4SdExy7o
+ cVivcBunTA6lvxnu8QRsmMukhJEVMDo7CrtZOmWLahHZGjkeM3YyBHCfeinbHPCcLH6I
+ DnQfq0p8L7A6L3DI0Fyjdms+Y8CBTZ8gClfe9Be92d9mooYg5QsII8Cqcdhet1/TcpXA
+ kA1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697409003; x=1698013803;
+ h=content-transfer-encoding:content-language:cc:to:subject:from
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Z0A9SBabl2K2Up6gZJx7gFSsvpRvPlL+YY1T3jqXqs8=;
+ b=cX27R4QN4w8jys8RG7yLE8CRZKDn0aYrbFv+zEjuyhvniQe/HM2KgEgY5KlER0jzq5
+ W3m24Lmd8ycNi21M/Ads5HvdF3sE6CdwZgUuRob6QhP6j0c8/yIFolvgm9n4j3bFJlOB
+ F3kY7uwiHSk7swzpBEhk5wzvsGDER2AqTRIt6DXK4wggOUYTLbjy+AY1/RtR3dEtO9TF
+ OgkAhMBGrBb8o/K/XZ3HZAYvaplDuvdHr8k22SkCJvsT9nHiVnTnd1Q4BTA8Xxrjd/r+
+ HB7RWtcaK+7XLjkQIim2dbrfyLYBLI73yiERYClw35zDZWSUaocVZleSRVCIP8leIdDM
+ EKaA==
+X-Gm-Message-State: AOJu0YwpJ8cXJoDCWGWNdZBLp8HAMaHhdc00YYkfJCE6eJcoLTFPMY8C
+ GaL2U8Mhg1jPUGNidUVwsxE=
+X-Google-Smtp-Source: AGHT+IE564hCWcSqX5Wnx8em2r/pXSRBqb78R8+dqsgix9GH8BeyhIInmw8rZD6YLkgfa7StUMG7qA==
+X-Received: by 2002:a50:c318:0:b0:533:c3d9:767a with SMTP id
+ a24-20020a50c318000000b00533c3d9767amr5506429edb.3.1697409002538; 
+ Sun, 15 Oct 2023 15:30:02 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ by smtp.gmail.com with ESMTPSA id
+ c26-20020a056402101a00b00533e915923asm14395825edu.49.2023.10.15.15.30.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 15 Oct 2023 15:30:02 -0700 (PDT)
+Message-ID: <8c0f5bb6-0110-b7b5-3c40-2d8d98a94dfa@gmail.com>
+Date: Mon, 16 Oct 2023 00:30:01 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+From: Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH v4 0/8] Add rkmtd command
+To: kever.yang@rock-chips.com
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ u-boot@lists.denx.de
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,257 +94,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Date: Wed, 11 Oct 2023 07:42:39 +0300
-> From: Ivaylo Ivanov <ivo.ivanov@null.net>
-> 
-> S5L8950X is definitely belongs to the mach-apple folder, since it's the
-> first truly apple-made SoC: it uses AIC, DART, Apple GPIO, etc etc. I
-> might be wrong but I haven't seen any references of RTKit on S5L8950X.
+The command rkmtd creates a virtual block device to transfer
+Rockchip boot block data to and from NAND with block orientated
+tools like "ums" and "rockusb".
 
-Yes your device tree has:
+It uses the Rockchip MTD driver to scan for boot blocks and copies
+data from the first block in a GPT formatted virtual disk.
+Data must be written in U-boot "idbloader.img" format and start at
+partition "loader1" offset 64. The data header is parsed
+for length and offset. When the last sector is received
+it erases up to 5 erase blocks on NAND and writes boot blocks
+in a pattern depending on the NAND ID. Data is then verified.
+When a block turns out bad the block header is discarded.
 
-    compatible = "samsung,s5l8950", "samsung,s5l89xx";
+Changed V4:
+  Sort includes
+  Replace constant by define
+  Enable rkmtd command in sandbox defconfig
+  Fix minor things in test
 
-I do understand that it is hard to tell when Apple hardware changed
-from being a Samsung SoC with some Apple hardware blocks into an Apple
-SoC with some Samsung hardware blocks.  U-Boot typically follows the
-precedent set by the Linux kernel.  So if you're also planning to
-upstream Linux support for these devices, it probably is best to sort
-this out with the Linux maintainers first.
+Changed V3:
+  Add documetation
+  Add test
+  Split driver from command
+  Split header
+  Use devm_kzalloc
+  Remove out of memory debug
+  Restyle
 
-The U-Boot support for mach-apple was never intended to be
-M1-specific.  The goal was always to support a wider range with a
-single board.c file as long as that makes sense.  That probably
-doesn't make sense for 32-bit SoCs like yours.  And if there are
-significant differences in the way U-Boot is started on iPhone/iPad
-platforms we probably need a different set of files and configs as
-well.
+Changed V2:
+  Rename to rkmtd
 
-So my preferred approach would be to park this diff until a later
-stage where it is more obvious what the best way to split things up
-is.
+Johan Jonker (8):
+  mtd: nand: raw: rockchip_nfc: add NAND_SKIP_BBTSCAN option
+  rockchip: dm: prepare rkmtd UCLASS
+  rockchip: block: add rkmtd class and drivers
+  rockchip: block: blk-uclass: disable bounce buffer support for rkmtd
+  rockchip: cmd: add rkmtd command
+  rockchip: test: dm: add rkmtd test
+  rockchip: doc: add rkmtd.rst
+  rockchip: configs: sandbox: enable rkmtd command
 
-> I have already have gotten u-boot working with AIC timer and partial
-> dwc2 support (plug-in detection works, not sure yet why it doesn't
-> expose a USB interface to my PC) on the iPhone 5. It's confirmed to also
-> work on the 5c, and with a few changes addresses-wise it also works on
-> A5. Here's a rough link to my changes (which are still to-be-improved)
-> on my github u-boot repo:
-> https://github.com/ivoszbg/u-boot/commit/e20958e142cb881488602b7e864c00073dfe32db
+ cmd/Kconfig                         |    8 +
+ cmd/Makefile                        |    1 +
+ cmd/rkmtd.c                         |  204 +++++
+ configs/sandbox64_defconfig         |    1 +
+ configs/sandbox_defconfig           |    1 +
+ disk/part.c                         |    4 +
+ doc/board/rockchip/index.rst        |    1 +
+ doc/board/rockchip/rkmtd.rst        |  105 +++
+ drivers/block/Kconfig               |    7 +
+ drivers/block/Makefile              |    2 +
+ drivers/block/blk-uclass.c          |    7 +-
+ drivers/block/rkmtd.c               | 1135 +++++++++++++++++++++++++++
+ drivers/mtd/nand/raw/Kconfig        |    9 +
+ drivers/mtd/nand/raw/rockchip_nfc.c |    3 +
+ include/dm/uclass-id.h              |    1 +
+ include/rkmtd.h                     |  191 +++++
+ test/dm/Makefile                    |    1 +
+ test/dm/rkmtd.c                     |  200 +++++
+ 18 files changed, 1878 insertions(+), 3 deletions(-)
+ create mode 100644 cmd/rkmtd.c
+ create mode 100644 doc/board/rockchip/rkmtd.rst
+ create mode 100644 drivers/block/rkmtd.c
+ create mode 100644 include/rkmtd.h
+ create mode 100644 test/dm/rkmtd.c
 
-Most of the stuff in your board.c file probably doesn't belong there,
-but in separate clock and USB glue drivers.
+--
+2.39.2
 
-> In my opinion, M1 support shouldn't have been placed in the mach-apple
-> folder like that in the first place. It's disrupting the work for a ton
-> of Apple SoCs, as if M1 is the only apple SoC in existence.
-> 
-> On 10/11/23 00:17, Mark Kettenis wrote:
-> >> Date: Tue, 29 Aug 2023 22:13:53 +0300
-> >> From: Ivaylo Ivanov <ivo.ivanov@null.net>
-> >>
-> >> I'm currently working on S5L8950X. I also have some T7000 and T8010
-> >> devices that I'll work on in the future.
-> >>
-> >> There's a project called freemyipod that has a fork of U-Boot working on
-> >> iPod Nano's (specifically the S5L8730 in the iPod Nano 5). I've read
-> >> that they're planning on upstreaming it in the near future.
-> >
-> > ok, well, most of the code you're moving isn't really M1/M2 specific.
-> > Apple uses RTKit all over the place.  And some of the SoCs you mention
-> > are really close to M1/M2.  And the older ones have a lot of Samsung
-> > heritage so I'm not sure they belong under mach-apple ...
-> >
-> > Also, unless you actually have code to support other Apple SoCs, this
-> > just causes disruption for upstreaming more of the M1/M2 code.  So I
-> > think this is best left alone until you actually show your code and we
-> > can see how to integrate it.
-> >
-> >>
-> >> On 8/29/23 20:43, Mark Kettenis wrote:
-> >>>> From: ivo.ivanov@null.net
-> >>>> Date: Tue, 29 Aug 2023 20:25:19 +0300
-> >>>>
-> >>>> From: Ivaylo Ivanov <ivo.ivanov@null.net>
-> >>>>
-> >>>> Currently, mach-apple assumes we're working with M1/M2. Make room for
-> >>>> adding support for other Apple SoCs by moving everything from the M1/M2
-> >>>> SoC family in "mach-apple/" into "mach-apple/m1/".
-> >>>
-> >>> Which other Apple SoCs?
-> >>>
-> >>>> Signed-off-by: Ivaylo Ivanov <ivo.ivanov@null.net>
-> >>>> ---
-> >>>>  arch/arm/Kconfig                             | 29 --------------
-> >>>>  arch/arm/mach-apple/Kconfig                  | 42 ++++++++++++++++++++
-> >>>>  arch/arm/mach-apple/Makefile                 |  5 +--
-> >>>>  arch/arm/mach-apple/m1/Makefile              |  6 +++
-> >>>>  arch/arm/mach-apple/{ => m1}/board.c         |  0
-> >>>>  arch/arm/mach-apple/{ => m1}/lowlevel_init.S |  0
-> >>>>  arch/arm/mach-apple/{ => m1}/rtkit.c         |  0
-> >>>>  arch/arm/mach-apple/{ => m1}/sart.c          |  0
-> >>>>  configs/apple_m1_defconfig                   |  1 +
-> >>>>  9 files changed, 50 insertions(+), 33 deletions(-)
-> >>>>  create mode 100644 arch/arm/mach-apple/m1/Makefile
-> >>>>  rename arch/arm/mach-apple/{ => m1}/board.c (100%)
-> >>>>  rename arch/arm/mach-apple/{ => m1}/lowlevel_init.S (100%)
-> >>>>  rename arch/arm/mach-apple/{ => m1}/rtkit.c (100%)
-> >>>>  rename arch/arm/mach-apple/{ => m1}/sart.c (100%)
-> >>>>
-> >>>> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> >>>> index 97c25b4f14..5339da370c 100644
-> >>>> --- a/arch/arm/Kconfig
-> >>>> +++ b/arch/arm/Kconfig
-> >>>> @@ -980,38 +980,9 @@ config ARCH_NPCM
-> >>>>
-> >>>>  config ARCH_APPLE
-> >>>>  	bool "Apple SoCs"
-> >>>> -	select ARM64
-> >>>> -	select CLK
-> >>>> -	select CMD_PCI
-> >>>> -	select CMD_USB
-> >>>>  	select DM
-> >>>> -	select DM_GPIO
-> >>>> -	select DM_KEYBOARD
-> >>>> -	select DM_MAILBOX
-> >>>>  	select DM_RESET
-> >>>>  	select DM_SERIAL
-> >>>> -	select DM_SPI
-> >>>> -	select DM_USB
-> >>>> -	select VIDEO
-> >>>> -	select IOMMU
-> >>>> -	select LINUX_KERNEL_IMAGE_HEADER
-> >>>> -	select OF_BOARD_SETUP
-> >>>> -	select OF_CONTROL
-> >>>> -	select PCI
-> >>>> -	select PINCTRL
-> >>>> -	select POSITION_INDEPENDENT
-> >>>> -	select POWER_DOMAIN
-> >>>> -	select REGMAP
-> >>>> -	select SPI
-> >>>> -	select SYSCON
-> >>>> -	select SYSRESET
-> >>>> -	select SYSRESET_WATCHDOG
-> >>>> -	select SYSRESET_WATCHDOG_AUTO
-> >>>> -	select USB
-> >>>> -	imply CMD_DM
-> >>>> -	imply CMD_GPT
-> >>>> -	imply DISTRO_DEFAULTS
-> >>>> -	imply OF_HAS_PRIOR_STAGE
-> >>>>
-> >>>>  config ARCH_OWL
-> >>>>  	bool "Actions Semi OWL SoCs"
-> >>>> diff --git a/arch/arm/mach-apple/Kconfig b/arch/arm/mach-apple/Kconfig
-> >>>> index 294690ec0e..a38779b387 100644
-> >>>> --- a/arch/arm/mach-apple/Kconfig
-> >>>> +++ b/arch/arm/mach-apple/Kconfig
-> >>>> @@ -3,6 +3,46 @@ if ARCH_APPLE
-> >>>>  config TEXT_BASE
-> >>>>  	default 0x00000000
-> >>>>
-> >>>> +choice
-> >>>> +	prompt "Apple Silicon architecture type select"
-> >>>> +	optional
-> >>>> +
-> >>>> +config ARCH_APPLE_M1
-> >>>> +	bool "Apple M1/M2 SoC family"
-> >>>> +	select ARM64
-> >>>> +	select CLK
-> >>>> +	select CMD_PCI
-> >>>> +	select CMD_USB
-> >>>> +	select DM_GPIO
-> >>>> +	select DM_KEYBOARD
-> >>>> +	select DM_MAILBOX
-> >>>> +	select DM_SPI
-> >>>> +	select DM_USB
-> >>>> +	select VIDEO
-> >>>> +	select IOMMU
-> >>>> +	select LINUX_KERNEL_IMAGE_HEADER
-> >>>> +	select OF_BOARD_SETUP
-> >>>> +	select OF_CONTROL
-> >>>> +	select PCI
-> >>>> +	select PINCTRL
-> >>>> +	select POSITION_INDEPENDENT
-> >>>> +	select POWER_DOMAIN
-> >>>> +	select REGMAP
-> >>>> +	select SPI
-> >>>> +	select SYSCON
-> >>>> +	select SYSRESET
-> >>>> +	select SYSRESET_WATCHDOG
-> >>>> +	select SYSRESET_WATCHDOG_AUTO
-> >>>> +	select USB
-> >>>> +	imply CMD_DM
-> >>>> +	imply CMD_GPT
-> >>>> +	imply DISTRO_DEFAULTS
-> >>>> +	imply OF_HAS_PRIOR_STAGE
-> >>>> +
-> >>>> +endchoice
-> >>>> +
-> >>>> +if ARCH_APPLE_M1
-> >>>> +
-> >>>>  config SYS_CONFIG_NAME
-> >>>>  	default "apple"
-> >>>>
-> >>>> @@ -19,3 +59,5 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
-> >>>>  	default TEXT_BASE
-> >>>>
-> >>>>  endif
-> >>>> +
-> >>>> +endif
-> >>>> diff --git a/arch/arm/mach-apple/Makefile b/arch/arm/mach-apple/Makefile
-> >>>> index 50b465b947..d147ccdde2 100644
-> >>>> --- a/arch/arm/mach-apple/Makefile
-> >>>> +++ b/arch/arm/mach-apple/Makefile
-> >>>> @@ -1,6 +1,3 @@
-> >>>>  # SPDX-License-Identifier: GPL-2.0+
-> >>>>
-> >>>> -obj-y += board.o
-> >>>> -obj-y += lowlevel_init.o
-> >>>> -obj-y += rtkit.o
-> >>>> -obj-$(CONFIG_NVME_APPLE) += sart.o
-> >>>> +obj-$(CONFIG_ARCH_APPLE_M1) += m1/
-> >>>> diff --git a/arch/arm/mach-apple/m1/Makefile b/arch/arm/mach-apple/m1/Makefile
-> >>>> new file mode 100644
-> >>>> index 0000000000..50b465b947
-> >>>> --- /dev/null
-> >>>> +++ b/arch/arm/mach-apple/m1/Makefile
-> >>>> @@ -0,0 +1,6 @@
-> >>>> +# SPDX-License-Identifier: GPL-2.0+
-> >>>> +
-> >>>> +obj-y += board.o
-> >>>> +obj-y += lowlevel_init.o
-> >>>> +obj-y += rtkit.o
-> >>>> +obj-$(CONFIG_NVME_APPLE) += sart.o
-> >>>> diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/m1/board.c
-> >>>> similarity index 100%
-> >>>> rename from arch/arm/mach-apple/board.c
-> >>>> rename to arch/arm/mach-apple/m1/board.c
-> >>>> diff --git a/arch/arm/mach-apple/lowlevel_init.S b/arch/arm/mach-apple/m1/lowlevel_init.S
-> >>>> similarity index 100%
-> >>>> rename from arch/arm/mach-apple/lowlevel_init.S
-> >>>> rename to arch/arm/mach-apple/m1/lowlevel_init.S
-> >>>> diff --git a/arch/arm/mach-apple/rtkit.c b/arch/arm/mach-apple/m1/rtkit.c
-> >>>> similarity index 100%
-> >>>> rename from arch/arm/mach-apple/rtkit.c
-> >>>> rename to arch/arm/mach-apple/m1/rtkit.c
-> >>>> diff --git a/arch/arm/mach-apple/sart.c b/arch/arm/mach-apple/m1/sart.c
-> >>>> similarity index 100%
-> >>>> rename from arch/arm/mach-apple/sart.c
-> >>>> rename to arch/arm/mach-apple/m1/sart.c
-> >>>> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-> >>>> index 755560971e..bd723881da 100644
-> >>>> --- a/configs/apple_m1_defconfig
-> >>>> +++ b/configs/apple_m1_defconfig
-> >>>> @@ -1,5 +1,6 @@
-> >>>>  CONFIG_ARM=y
-> >>>>  CONFIG_ARCH_APPLE=y
-> >>>> +CONFIG_ARCH_APPLE_M1=y
-> >>>>  CONFIG_DEFAULT_DEVICE_TREE="t8103-j274"
-> >>>>  CONFIG_SYS_LOAD_ADDR=0x0
-> >>>>  CONFIG_USE_PREBOOT=y
-> >>>> --
-> >>>> 2.34.1
-> >>>>
-> >>>>
-> >>
-> 
