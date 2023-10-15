@@ -4,81 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7063ACDB47E
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 13:11:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAF16CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 14:41:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D102686689;
-	Sun, 15 Oct 2023 15:11:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B018865A8;
+	Sun, 15 Oct 2023 16:40:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KpXRn2kT";
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="cF/3TvjW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7EA68071F; Sun, 15 Oct 2023 09:15:51 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 2CB4F865A8; Sun, 15 Oct 2023 16:40:48 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A002686FA7
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 09:15:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F136886529
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 16:40:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=iuncuim@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-9ba081173a3so563001566b.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 00:15:13 -0700 (PDT)
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-9b95622c620so638058566b.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 07:40:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697354113; x=1697958913; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QU5gOTVF7zIwy0IiPCx5N3x2Sa8P8OPrCTYwmCDO+hk=;
- b=KpXRn2kT6Pqa1meH/RvcqWT6jJjBpEmZ7WpREvlSJhlgEesBet/yfi6UxeQLWjXSee
- XyDowyjZobKe/867xXU/HMK3sI2g71tyljZEDUh5Vqrwbyb8bm1voDkaAvTETce/QHPp
- ygMjg4EOubNCSnF83rCoKfQBDdaf7SWUSsVgUkkOv13Y1ROsIgWSfnYBpmHih3Wjk5iA
- DEKt7UPZ5qCSlKLk8943laI62QAuCtQSrAjc1uRaLveqVBC7Xz7d/+D9e0g/Vwwu2dGp
- e4qo3rVi6mE1Mgk1XeUR7XzcVYppFO4mp3uZf9zMVdTwu/jtb2iSTeC2MUD7+FznRR9v
- 2kVg==
+ d=google.com; s=20230601; t=1697380801; x=1697985601; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6bwQCEEKgZav3FERCenSxhvwqsES9Clty+YQiA1gRQc=;
+ b=cF/3TvjWwGEaPA9mK1lC21TXttMgCspbRVt72hTEsfTdksVXE7r5+q/aqDfmtoVUOQ
+ EYOkGRL276sqO69GpU7SJY9HGj2v+N7ichYoJkDEBYKx3S6ttDUhLGjJuWQ65ufHra8V
+ pdGLxHfkxqD4mvVvX3cHIV6I5HKyKtTabdG0Jd1VJdj57OEoqVZGrZfcMb/r9lrabkez
+ OBOzdLZ780X56/PJ1Yl/Qla/fP42WDsNDEAITE2RwN+Lu0rWzVOWUjiuodG/0j1Ojkms
+ wdkiv7QE5RIh5i4qkMh9+DbFz8TLWB2Yf1JzVg+rXh6oaG7OD1vE393w5lVfk2OzVwPy
+ GsGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697354113; x=1697958913;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QU5gOTVF7zIwy0IiPCx5N3x2Sa8P8OPrCTYwmCDO+hk=;
- b=Samw2n5A6JOv2kVQXKCxW9YCrPVZ9hiq5yWl73fwMHhn+J5wOn0gPlXxST5DTHyLbL
- EuogPyNPwWTAT4ht4hQs5nKXf6U85QWk+Mb1vFZ+AgB/gaAB/4TRyVX7JEZ9p3/KMutP
- F1lmUDJXzRkI2rAsVRCTMTUHoHOciXNz7PYxj1JkwHzV8sUl92bAeHcW0tr0XISFdh8c
- iHR7SLYZCeGUiU4VvJ12KoO9VXgoZW9bGs8+i6wvWuUh+eVGGbxVfkEAU9n9zUX+Xf1+
- U2uAZklF790WyM75/lOWthjUe/LZ6e9uJZ8GEjSTJSRQ4RvEaHhGkRsrkN8RKxvEOIja
- teLg==
-X-Gm-Message-State: AOJu0YwQRjdpSBdiTPXrIdduRhAIDE62NM48utOZU57GocdUd0FKhq1w
- kD+VQd2A6U9IVMnbW5I2j9yBTM1i31w=
-X-Google-Smtp-Source: AGHT+IH8KGedVSbRbiTxY4wF4sUlQWBRjvmf6Oq0dBhQHentN2WibMAM9QgZR0R8BKgZYDNlBRFs1g==
-X-Received: by 2002:a05:651c:2127:b0:2c5:56b:cbd1 with SMTP id
- a39-20020a05651c212700b002c5056bcbd1mr5449367ljq.10.1697312358680; 
- Sat, 14 Oct 2023 12:39:18 -0700 (PDT)
-Received: from [192.168.100.248] ([46.251.195.245])
- by smtp.gmail.com with ESMTPSA id
- z25-20020a2e9659000000b002bce77e4ddfsm481795ljh.97.2023.10.14.12.39.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 14 Oct 2023 12:39:18 -0700 (PDT)
-Message-ID: <8ce0f3f5-226f-44cb-bd09-ea5033761309@gmail.com>
-Date: Sat, 14 Oct 2023 22:39:14 +0300
+ d=1e100.net; s=20230601; t=1697380801; x=1697985601;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6bwQCEEKgZav3FERCenSxhvwqsES9Clty+YQiA1gRQc=;
+ b=g5eEtyvZA6TDuTa6J2zVd3q28E22g7djX+xy8PblSF/UJGUeBxB0go6Ob35aMSRh+E
+ /CZalV49Q6OoZHMk6qITwdIY3q0E88Ri8aLog6w7wZ8kUkNQCQjvK20DJ/9bBs83grcK
+ Wby7vIV6IirfL8XyiDBsCxxfxRfr/Y8Rrr0sYsgl9FEDnhhP/4a+2kszo398KDJGlBTE
+ N/S9o5oyYGE2EDVlsLx+rU+8yGdANaOXO8rMDJRIjzjAayHNUs+tl7CQl16TCR+pts8R
+ 04glWBFCjW4HeeYNF+y0dbZ2XycapwYO1i3yuZ8Uzx9YLrRZ2wS+0f6eyY+3qR4P0deZ
+ sA8Q==
+X-Gm-Message-State: AOJu0YzmNy/2J906Szqje6a9TqMuYvP3m/u4B5RWj5YFGGy7c/+2KZaX
+ fro0hkXL9caXRGK3d1GlfrVjC4sez18OzMmKNG6MNfO5UuuIcj/a4pI=
+X-Google-Smtp-Source: AGHT+IEnhMnyqYHYs3kM7b65QkBaKNOdGdV7uHctnCjUaNShTuoRQHrOEjhZs9dzzElUM2hVBAbD859sNjqYnLjidHk=
+X-Received: by 2002:a17:906:7387:b0:9ba:a38:f2b2 with SMTP id
+ f7-20020a170906738700b009ba0a38f2b2mr18849404ejl.41.1697380801179; Sun, 15
+ Oct 2023 07:40:01 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] sunxi: H616: DRAM: refactor mctl_phy_configure_odt()
-Content-Language: en-US
-To: Andre Przywara <andre.przywara@arm.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, Jernej Skrabec <jernej.skrabec@gmail.com>
-References: <20231014170236.16211-1-andre.przywara@arm.com>
-From: Mikhail Kalashnikov <iuncuim@gmail.com>
-In-Reply-To: <20231014170236.16211-1-andre.przywara@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Sun, 15 Oct 2023 15:11:20 +0200
+References: <20231007191308.2222470-1-trini@konsulko.com>
+In-Reply-To: <20231007191308.2222470-1-trini@konsulko.com>
+From: Simon Glass <sjg@google.com>
+Date: Sun, 15 Oct 2023 08:39:44 -0600
+Message-ID: <CAPnjgZ0wo3pcTOgJ+9s53kNwnuxK0pHApmJbbmv7eJe_XDhrAA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] command.h: Add a U_BOOT_LONGHELP macro
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,129 +83,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Yes, this patch allows to reduce code size and make it easier to read.
+Hi Tom,
 
-To further integrate the code for LPDDR4, will need to change two lines 
-instead of adding 24 lines.
-
-Reviewed-by: Mikhail Kalashnikov <iuncuim@gmail.com>
-
-On 14.10.2023 20:02, Andre Przywara wrote:
-> The original H616 DDR3 ODT configuration code wrote board specific values
-> into a sequence of paired registers.
-> For LPDDR3 support we needed to special-case one group of registers,
-> because for that DRAM type we need to write 0 into the lower register of
-> each pair. That already made the code less readable.
+On Sat, 7 Oct 2023 at 13:13, Tom Rini <trini@konsulko.com> wrote:
 >
-> LPDDR4 support will make things even messier, so let's refactor that
-> code now: We allow to write different values into the lower and upper
-> half of each pair. The masking is moved into a macro, and used in each
-> write statement.
+> In order to be able to discard unused long help texts without further
+> linker lists, add a macro for defining the long help messages which uses
+> __maybe_unused.  This allows us to discard them as unreferenced as part
+> of the link.
 >
-> The effect is not as obvious yet, as we don't need the full flexibility at
-> the moment, but the motivation will become clearer with LPDDR4 support.
->
-> The generated binary is identical with and without the patch.
->
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->   arch/arm/mach-sunxi/dram_sun50i_h616.c | 84 ++++++++++----------------
->   1 file changed, 31 insertions(+), 53 deletions(-)
+>  include/command.h | 3 +++
+>  1 file changed, 3 insertions(+)
 >
-> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> index 7e580b62dca..ba5659d4094 100644
-> --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> @@ -241,61 +241,39 @@ static const u8 phy_init[] = {
->   #endif
->   };
->   
-> +#define MASK_BYTE(reg, nr) (((reg) >> ((nr) * 8)) & 0x1f)
->   static void mctl_phy_configure_odt(const struct dram_para *para)
->   {
-> -	unsigned int val;
-> -
-> -	val = para->dx_dri & 0x1f;
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x388);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x38c);
-> -
-> -	val = (para->dx_dri >> 8) & 0x1f;
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x3c8);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x3cc);
-> -
-> -	val = (para->dx_dri >> 16) & 0x1f;
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x408);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x40c);
-> -
-> -	val = (para->dx_dri >> 24) & 0x1f;
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x448);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x44c);
-> -
-> -	val = para->ca_dri & 0x1f;
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x340);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x344);
-> -
-> -	val = (para->ca_dri >> 8) & 0x1f;
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x348);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x34c);
-> -
-> -	val = para->dx_odt & 0x1f;
-> -	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
-> -		writel_relaxed(0, SUNXI_DRAM_PHY0_BASE + 0x380);
-> -	else
-> -		writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x380);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x384);
-> -
-> -	val = (para->dx_odt >> 8) & 0x1f;
-> -	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
-> -		writel_relaxed(0, SUNXI_DRAM_PHY0_BASE + 0x3c0);
-> -	else
-> -		writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x3c0);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x3c4);
-> -
-> -	val = (para->dx_odt >> 16) & 0x1f;
-> -	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
-> -		writel_relaxed(0, SUNXI_DRAM_PHY0_BASE + 0x400);
-> -	else
-> -		writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x400);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x404);
-> -
-> -	val = (para->dx_odt >> 24) & 0x1f;
-> -	if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
-> -		writel_relaxed(0, SUNXI_DRAM_PHY0_BASE + 0x440);
-> -	else
-> -		writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x440);
-> -	writel_relaxed(val, SUNXI_DRAM_PHY0_BASE + 0x444);
-> +	uint32_t val_lo, val_hi;
+> diff --git a/include/command.h b/include/command.h
+> index 34ea989b39b4..a836ea795ab6 100644
+> --- a/include/command.h
+> +++ b/include/command.h
+> @@ -322,6 +322,9 @@ int cmd_source_script(ulong addr, const char *fit_uname, const char *confname);
+>  # define _CMD_HELP(x)
+>  #endif
+>
+> +#define U_BOOT_LONGHELP(_cmdname, text)                                        \
+> +       static __maybe_unused const char _cmdname##_help_text[] = text;
+
+I just noticed this...do you really want the ; at the end? The only
+purpose I can see is if you want the macro to compile to nothing.
+Otherwise it is more normal to put it on the invocations, isn't it?
+
 > +
-> +	val_lo = para->dx_dri;
-> +	val_hi = para->dx_dri;
-> +	writel_relaxed(MASK_BYTE(val_lo, 0), SUNXI_DRAM_PHY0_BASE + 0x388);
-> +	writel_relaxed(MASK_BYTE(val_hi, 0), SUNXI_DRAM_PHY0_BASE + 0x38c);
-> +	writel_relaxed(MASK_BYTE(val_lo, 1), SUNXI_DRAM_PHY0_BASE + 0x3c8);
-> +	writel_relaxed(MASK_BYTE(val_hi, 1), SUNXI_DRAM_PHY0_BASE + 0x3cc);
-> +	writel_relaxed(MASK_BYTE(val_lo, 2), SUNXI_DRAM_PHY0_BASE + 0x408);
-> +	writel_relaxed(MASK_BYTE(val_hi, 2), SUNXI_DRAM_PHY0_BASE + 0x40c);
-> +	writel_relaxed(MASK_BYTE(val_lo, 3), SUNXI_DRAM_PHY0_BASE + 0x448);
-> +	writel_relaxed(MASK_BYTE(val_hi, 3), SUNXI_DRAM_PHY0_BASE + 0x44c);
-> +
-> +	val_lo = para->ca_dri;
-> +	val_hi = para->ca_dri;
-> +	writel_relaxed(MASK_BYTE(val_lo, 0), SUNXI_DRAM_PHY0_BASE + 0x340);
-> +	writel_relaxed(MASK_BYTE(val_hi, 0), SUNXI_DRAM_PHY0_BASE + 0x344);
-> +	writel_relaxed(MASK_BYTE(val_lo, 1), SUNXI_DRAM_PHY0_BASE + 0x348);
-> +	writel_relaxed(MASK_BYTE(val_hi, 1), SUNXI_DRAM_PHY0_BASE + 0x34c);
-> +
-> +	val_lo = (para->type == SUNXI_DRAM_TYPE_LPDDR3) ? 0 : para->dx_odt;
-> +	val_hi = para->dx_odt;
-> +	writel_relaxed(MASK_BYTE(val_lo, 0), SUNXI_DRAM_PHY0_BASE + 0x380);
-> +	writel_relaxed(MASK_BYTE(val_hi, 0), SUNXI_DRAM_PHY0_BASE + 0x384);
-> +	writel_relaxed(MASK_BYTE(val_lo, 1), SUNXI_DRAM_PHY0_BASE + 0x3c0);
-> +	writel_relaxed(MASK_BYTE(val_hi, 1), SUNXI_DRAM_PHY0_BASE + 0x3c4);
-> +	writel_relaxed(MASK_BYTE(val_lo, 2), SUNXI_DRAM_PHY0_BASE + 0x400);
-> +	writel_relaxed(MASK_BYTE(val_hi, 2), SUNXI_DRAM_PHY0_BASE + 0x404);
-> +	writel_relaxed(MASK_BYTE(val_lo, 3), SUNXI_DRAM_PHY0_BASE + 0x440);
-> +	writel_relaxed(MASK_BYTE(val_hi, 3), SUNXI_DRAM_PHY0_BASE + 0x444);
->   
->   	dmb();
->   }
+>  #define U_BOOT_SUBCMDS_DO_CMD(_cmdname)                                        \
+>         static int do_##_cmdname(struct cmd_tbl *cmdtp, int flag,       \
+>                                  int argc, char *const argv[],          \
+> --
+> 2.34.1
+>
+
+Regards,
+Simon
