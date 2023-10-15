@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A6CCCDB482
-	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:28:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C72D3CDB47E
+	for <u-boot@archiver.kernel.org>; Sun, 15 Oct 2023 07:29:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68F7D86F8C;
-	Sun, 15 Oct 2023 08:53:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 09AE686F16;
+	Sun, 15 Oct 2023 08:56:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="pf42yfJo";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EeS9vCEd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Bbl9R0j5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1505F86DF5; Sun, 15 Oct 2023 08:52:11 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5BCEF86DF5; Sun, 15 Oct 2023 08:53:36 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1351886F97
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:51:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73DFC86F82
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 08:51:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S7GdQ2Hrpz9t2H;
- Sat, 14 Oct 2023 23:26:02 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697318762;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2soEuGvvXwvpWubuFxDpHlHxgOrbHxtFxW6YJo5MkW0=;
- b=pf42yfJo1hI0muj8zevIcZE8kEVcjlvXMU1sXWRY0m/9r93Y5pEZkKo13bVKTBdjzG27Hk
- paFsOnBoU2qBRp4lz15D14YVno8MbaVKQHVpuaw4lDy24qPsCx9bhleGk92p5igZ2tomvT
- WOsV1Ur+RG0wZLzyhXiO3zgp+6wwLJObgTv8lQ9qrQG9xX8d0wH0s6DB08Q+x8+SifKyry
- oRXS7KhBs+quXSIyyKVm56O4idhl3GcbNUiAGXNV+5NIhz7oWP8tHAaEmcZNsRXxCa2NCM
- nOCc4DwaMxLkhV2kNEECQaxsWB6/Dmun3c+sZHxSDDaKpGRZWvOfdO+zIf2yew==
-Message-ID: <be63b3a4-99c8-41c8-b0ea-72e45b003dec@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697318760;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=2soEuGvvXwvpWubuFxDpHlHxgOrbHxtFxW6YJo5MkW0=;
- b=EeS9vCEdBeCf6bLsqCOFDS/iV4uT4BsRAL8lEswIUxBmGo7/j9YXzq3h1xNYdvkUBA0/p6
- bR2GTGbkN5vUgmIleTpediLrNkZjq0AY1eIQFNrjRMg4gIZvOWGGimBzi04yryHYw+doCH
- dZDs1PJSB1CN8ZDQUH988Bh3ttXoBjJ0+J9iBlEfae8owYL0YltKp9iqxYToQuvypwO38F
- gjXTBUBXel/5MK9tz6wLPLT7Kth8vg0eM4p3754MtWxhPMrnZn14aX4EofIEnncPYqaGDn
- p4fmsXl20xo2C4Epj5oW8/zMVf9XpYgcLuFCrgqcjQM5RoyVBRb/DayaRFQZug==
-Date: Sat, 14 Oct 2023 23:25:57 +0200
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5a7bbcc099fso43562837b3.3
+ for <u-boot@lists.denx.de>; Sat, 14 Oct 2023 23:51:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1697352675; x=1697957475; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=v5jie/1oEQRfU5RgB7exxwq+S6EA9EIjPdFKQ/83sz4=;
+ b=Bbl9R0j5IM+t6+29RKjIUpcs8ith1cunn6JvkoyEB3by1l+7irl2HHwATGuZP5Gcg+
+ bDXxNd8wHdLSWcyfamI14MfL47lwxl2O4KGMEuA3YUCbtaUeawhvaxt1iSipLKh5Q/Xj
+ 6OohFSR6JJKlNQGCF7A/PTHAMhvcwectVXbpA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697352675; x=1697957475;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=v5jie/1oEQRfU5RgB7exxwq+S6EA9EIjPdFKQ/83sz4=;
+ b=kyKMkMwKJhoe1kOFziVohA4QxdIeNQYavotOGlT44G6FLFX5OCiEhGywnIwM4E4cJi
+ 0MoGT1uIARcA1lt0SCU7wx+C36MYgo09xmbaauPKjzYKxo7qM1b0jBmzxymrNf4WK8lh
+ nOHgqnTyNCFVsPnVmvPHMaUTVaRb5IUQVG4wyYIQd1zRcWF4j404VoY9dJ6o/Xiaxr07
+ fksyFB5/kPfp1cosAj7aLKT5wDxE5oxKfvllJDT8jHeUpRr8tiCkVA3DQSxwC3RUv+hv
+ Yw4Kswu17ZDW2GDnb3zxdVHR2aPcEH8v+WexJSd0nrlpESY8jnK2pi4O05sF8VPJJuJo
+ 0FvA==
+X-Gm-Message-State: AOJu0YxtiuxA1D23fn2oiAJWzKPkryl1SGw5AG7sxuh7WTjcMCGlJbWx
+ DD1FfVxnwhPZ0RXR/2hntuxE1aAIihInYwdQrYlOIw==
+X-Google-Smtp-Source: AGHT+IGxLT6M3OBYiGy9W3zG/bOYlpLPfJ6woFF8evS5XbjoUUJsFNAgr3VDePHKNK1YfHlxggcUHQ==
+X-Received: by 2002:a92:c885:0:b0:357:5e06:a49b with SMTP id
+ w5-20020a92c885000000b003575e06a49bmr6569265ilo.2.1697337916458; 
+ Sat, 14 Oct 2023 19:45:16 -0700 (PDT)
+Received: from sjg1.lan (c-73-14-173-85.hsd1.co.comcast.net. [73.14.173.85])
+ by smtp.gmail.com with ESMTPSA id
+ v6-20020a92cd46000000b003497ced3fa1sm2462842ilq.29.2023.10.14.19.45.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 14 Oct 2023 19:45:16 -0700 (PDT)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 2/6] smbios: Move the rest of the SMBIOS2 code
+Date: Sat, 14 Oct 2023 20:45:04 -0600
+Message-ID: <20231015024511.3995580-3-sjg@chromium.org>
+X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
+In-Reply-To: <20231015024511.3995580-1-sjg@chromium.org>
+References: <20231015024511.3995580-1-sjg@chromium.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 12/19] serial: sh: Add RZ/G2L SCIF support
-Content-Language: en-US
-To: Paul Barker <paul.barker.ct@bp.renesas.com>, u-boot@lists.denx.de,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Hai Pham <hai.pham.ud@renesas.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-References: <20231009164645.164464-1-paul.barker.ct@bp.renesas.com>
- <20231009164645.164464-13-paul.barker.ct@bp.renesas.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20231009164645.164464-13-paul.barker.ct@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: cfd81666d7c259ca61f
-X-MBO-RS-META: sa33mitj6sffjknuwjtghz1dgec4c7ry
-X-Rspamd-Queue-Id: 4S7GdQ2Hrpz9t2H
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,15 +88,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/9/23 18:46, Paul Barker wrote:
-> Extend the existing driver to support the SCIF serial ports on the
-> Renesas RZ/G2L (R9A07G044) SoC. This also requires us to ensure that the
-> relevant reset signal is de-asserted before we try to talk to the SCIF
-> module.
-> 
-> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
-> Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
+Move all of this logic into the else clause, since it will not be used
+for SMBIOS3
 
-Tested-by: Marek Vasut <marek.vasut+renesas@mailbox.org> # R-Car H3 
-Salvator-XS
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
+
+(no changes since v1)
+
+ lib/smbios.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
+
+diff --git a/lib/smbios.c b/lib/smbios.c
+index 96f67cd6ad7b..c7a557bc9b7b 100644
+--- a/lib/smbios.c
++++ b/lib/smbios.c
+@@ -464,9 +464,8 @@ static struct smbios_write_method smbios_write_funcs[] = {
+ ulong write_smbios_table(ulong addr)
+ {
+ 	ofnode parent_node = ofnode_null();
+-	struct smbios_entry *se;
++	ulong table_addr, start_addr;
+ 	struct smbios_ctx ctx;
+-	ulong table_addr;
+ 	ulong tables;
+ 	int len = 0;
+ 	int max_struct_size = 0;
+@@ -486,9 +485,7 @@ ulong write_smbios_table(ulong addr)
+ 
+ 	/* 16 byte align the table address */
+ 	addr = ALIGN(addr, 16);
+-
+-	se = map_sysmem(addr, sizeof(struct smbios_entry));
+-	memset(se, 0, sizeof(struct smbios_entry));
++	start_addr = addr;
+ 
+ 	addr += sizeof(struct smbios_entry);
+ 	addr = ALIGN(addr, 16);
+@@ -523,8 +520,11 @@ ulong write_smbios_table(ulong addr)
+ 		printf("WARNING: SMBIOS table_address overflow %llx\n",
+ 		       (unsigned long long)table_addr);
+ 		addr = 0;
+-		goto out;
+ 	} else {
++		struct smbios_entry *se;
++
++		se = map_sysmem(start_addr, sizeof(struct smbios_entry));
++		memset(se, '\0', sizeof(struct smbios_entry));
+ 		memcpy(se->anchor, "_SM_", 4);
+ 		se->length = sizeof(struct smbios_entry);
+ 		se->major_ver = SMBIOS_MAJOR_VER;
+@@ -545,9 +545,8 @@ ulong write_smbios_table(ulong addr)
+ 								   isize);
+ 		se->checksum = table_compute_checksum(se,
+ 					      sizeof(struct smbios_entry));
++		unmap_sysmem(se);
+ 	}
+-out:
+-	unmap_sysmem(se);
+ 
+ 	return addr;
+ }
+-- 
+2.42.0.655.g421f12c284-goog
+
