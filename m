@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A42ACDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D60DCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:17:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9593586CE3;
-	Mon, 16 Oct 2023 16:15:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0DE7686E03;
+	Mon, 16 Oct 2023 16:16:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="bI+CXGb7";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Bg6zig1f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EB5486B73; Mon, 16 Oct 2023 16:14:19 +0200 (CEST)
+ id 0385586BD5; Mon, 16 Oct 2023 16:14:36 +0200 (CEST)
 Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [217.70.183.200])
+ [IPv6:2001:4b98:dc4:8::227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E88286484
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEB8886BA4
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 874FE20018;
- Mon, 16 Oct 2023 14:14:16 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id B971C2000F;
+ Mon, 16 Oct 2023 14:14:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1697465657;
+ t=1697465669;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wsNH4q+2p9UwkgnPXVkFLeyDFNT/tJKDMzIpJzcudgU=;
- b=bI+CXGb7l2hku3Kz3xVo2tYOJZ+LLbm3ObZ7A2bI2yGqT7WQxjiLWpsW4vkX2AW6LUnwPZ
- dnqFC6xXCkm6kezyY+DbNPbU81mU9dgHs65A6tyCHmFCbRAuvqR6Kf7gRiTTAhfQ5aXPZZ
- FcTzytKAxB6YtVwB/dh88XM5o+8m2xFR+9h+FTtm+j3I44VA4+BbuAFgnoOolW/QsTcEh/
- bDrFh5tu+rmBniFg2R/rC2RmfT5Zovg/AyIUQeRrqL80hbxPeWMgh6a6KLkZAKnU0KgMKJ
- jf5CqiaaBeLc9Al3Vc1CMFg13douJ4pCbEz4ipeIPBpmwuicV9p5X49w5RcSMQ==
+ bh=DlfEKk/c4PpuRYvtz2ffUMSEpgxv3NMGR3TH6CgdQlc=;
+ b=Bg6zig1fUYs49Gt5n+U+9FaqhUCtBvK/PTJWD2sFJC/T3hOdoURUPjAZdZIshjdrbLah6b
+ UxvCtaLERhxaoMZF3SJaGSnqqno+RnYIrnyTZXw1wHOK9zPIYd89VsXT1erFzwPlFGh6oz
+ WhK3STQ4u4UYH9drEupFnaEWNUM9py3P5AZnKo+PfdaYza142qSylypA50bLsSg7ZjN9BT
+ pJcH5ZyVexBmoV1noM/TDyVh7CLa6zZl605NWlJdZg1ZlYkc8YbEIj/OI3c0djyuWMzBBn
+ ywrCuOFiV0Tgz4JJfW91/yi1oZPK6USLhCQnsQ3uJlrcAJErH9XLh2m6Q2snbA==
 From: Thomas Richard <thomas.richard@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: nm@ti.com, thomas.petazzoni@bootlin.com, thomas.richard@bootlin.com,
- gregory.clement@bootlin.com, u-kumar1@ti.com
-Subject: [PATCH 2/9] configs: j7200_evm_r5: Used reserved memory in DDR for
- stack
-Date: Mon, 16 Oct 2023 16:11:28 +0200
-Message-Id: <20231016141135.325698-3-thomas.richard@bootlin.com>
+ gregory.clement@bootlin.com, u-kumar1@ti.com, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 4/9] board: ti: j721e: Add resume detection for J7200
+Date: Mon, 16 Oct 2023 16:11:30 +0200
+Message-Id: <20231016141135.325698-5-thomas.richard@bootlin.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231016141135.325698-1-thomas.richard@bootlin.com>
 References: <20231016141135.325698-1-thomas.richard@bootlin.com>
@@ -71,36 +70,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Gregory CLEMENT <gregory.clement@bootlin.com>
+Add the capability to detect a resume.
+To detect the resume, SPL searches a magic value (0xBA) in a register
+of PMICA.
+This value is set by DM-Firmware during the suspend sequence.
 
-When resuming from suspend to ram, we load again the DM firmware.
-However, we have to be sure to not modify the memory used by
-Linux.
+Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
 
-Currently the SPL stack in DDR was in place that could be used by
-Linux. Instead of it use a memory address that is located in a
-reserved location that won't be used by Linux.
-
-Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
 Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
+Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
 ---
 
- configs/j7200_evm_r5_defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/ti/j721e/evm.c | 54 ++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 54 insertions(+)
 
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index c4dd33627b..7450529d66 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -20,7 +20,7 @@ CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK_R_ADDR=0x82000000
-+CONFIG_SPL_STACK_R_ADDR=0xa5300000
- CONFIG_SPL_FS_FAT=y
- CONFIG_SPL_LIBDISK_SUPPORT=y
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index 38fe447d8f..b4b94c8c69 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -22,6 +22,9 @@
+ #include <spl.h>
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
++#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
++#include <power/pmic.h>
++#endif
+ 
+ #include "../common/board_detect.h"
+ 
+@@ -528,6 +531,57 @@ err_free_gpio:
+ 	}
+ }
+ 
++#if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
++
++#define SCRATCH_PAD_REG_3 0xCB
++
++#define MAGIC_SUSPEND 0xBA
++
++static int resuming = -1;
++
++int board_is_resuming(void)
++{
++	struct udevice *pmica, *pmicb;
++	int ret;
++
++	if (resuming >= 0)
++		goto end;
++
++	ret = uclass_get_device_by_name(UCLASS_PMIC,
++					"tps659413@48", &pmica);
++	if (ret) {
++		printf("Getting PMICA init failed: %d\n", ret);
++		resuming = 0;
++		goto end;
++	}
++	debug("%s: PMICA is detected (%s)\n", __func__, pmica->name);
++
++	ret = uclass_get_device_by_name(UCLASS_PMIC,
++					"lp876441@4c", &pmicb);
++	if (ret) {
++		printf("Getting PMICB init failed: %d\n", ret);
++		resuming = 0;
++		goto end;
++	}
++	debug("%s: PMICB is detected (%s)\n", __func__, pmicb->name);
++
++	if ((pmic_reg_read(pmica, SCRATCH_PAD_REG_3) == MAGIC_SUSPEND)) {
++		resuming = 1;
++		debug("%s: board is resuming\n", __func__);
++
++		/* clean magic suspend */
++		if (pmic_reg_write(pmica, SCRATCH_PAD_REG_3, 0))
++			printf("Failed to clean magic value for suspend detection in PMICA\n");
++	} else {
++		resuming = 0;
++		debug("%s: board is booting (no resume detected)\n", __func__);
++	}
++end:
++	return resuming;
++}
++
++#endif /* CONFIG_SPL_BUILD && CONFIG_TARGET_J7200_R5_EVM */
++
+ void spl_board_init(void)
+ {
+ #if defined(CONFIG_ESM_K3) || defined(CONFIG_ESM_PMIC)
 -- 
 2.39.2
 
