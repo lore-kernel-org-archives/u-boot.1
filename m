@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F83BCDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 19:57:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6DC4CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 20:02:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1B818071F;
-	Mon, 16 Oct 2023 21:57:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id B8A9B86BA4;
+	Mon, 16 Oct 2023 22:02:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j1M8qPcJ";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA56086BA4; Mon, 16 Oct 2023 21:57:34 +0200 (CEST)
-Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com
- [209.85.210.45])
+ id 7603386DE3; Mon, 16 Oct 2023 22:02:04 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3975186D4A
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 21:57:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E4F886DF5
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 22:01:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robherring2@gmail.com
-Received: by mail-ot1-f45.google.com with SMTP id
- 46e09a7af769-6c65d096c96so2581145a34.1
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 12:57:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5a822f96aedso41869327b3.2
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 13:01:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697486517; x=1698091317; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z4Y4C3MQfxnSMvZ/JMau4D34NbrVrmmZl9x62tY9Bec=;
+ b=j1M8qPcJYEvkoO2exFmP2locDrI4Cwi0k3KXTDiZAiWEEsDWth4relhARo4ajoR6u9
+ al1+aqKyuo82gqRX+7V+9rxhLuoyGmU4gqwa2DhJpi7SyHrWzWiGvSDtQaiHLlXLPzuH
+ n1tf82IKxmqtnyOw2XJ0imqlSwShF758H2Uuq4QHzVGg7o3LW6iuAoxyMLDZMy+jtdgS
+ 7+RkxKcRssHXmPhTia0bHITK4vQtm0VACCdGfiRbO2LRCHBTk8ZjuuRRo5ck2ZCCacYp
+ +zKcXinsYCQyq2oMjnrMpo1NuGPdvlCOoGsbJgQ8rnqBK9ErJNp6aKsBtRBpnsc/TD8r
+ 5uhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697486251; x=1698091051;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XgQIgwOXkE8+0o51RaJzdyOkFFFWSreK0o8H4z9cVpQ=;
- b=lxBTRTnJJYa0cuSojIgCYeJUvojO+NyAgWO9IHrdbPqN9RyyuChPbwl1HcGi72MOQ3
- EZY2w2ZAycaaEwGyXg9auB6ZvPIRPtNNkkfzXloCpIJjJIhGQTb9abNzob2jp7Pqvoj0
- Fyh0GDY9ExBgBEkcVyiZdUmoqOQlU60nX/cxIphA7tM3b0FPQ0TjJQM2AJhwf2xpNTvI
- QMAgPuctoqhfYfPKgHyREdYBtUeARFggWnPxVDdCfnOxOcP266iz3wDMLy0q+bHroAjB
- W8oomUz5eoLlcJOYBSDwySoK3GVxJV/hchNzzJXc3IIqhZLBYBS39rIT0N8d978xoN8O
- D7Hw==
-X-Gm-Message-State: AOJu0Yw+1ZOkbRWH+T3gsEsY8o1jQfvieLRmodiigC0ix9iVuzG/s861
- Iwb/O92CuLGKNieO6OMQnA==
-X-Google-Smtp-Source: AGHT+IGoyMGj6H9sD/fs05ifW6mHn46aUoo5Qt+hMR2U+JvUvpzoojkGcwQxcXOLaOmM0ug4oQUITg==
-X-Received: by 2002:a9d:4d17:0:b0:6b9:cfc3:65d1 with SMTP id
- n23-20020a9d4d17000000b006b9cfc365d1mr218237otf.17.1697486250789; 
- Mon, 16 Oct 2023 12:57:30 -0700 (PDT)
-Received: from robh_at_kernel.org (66-90-144-107.dyn.grandenetworks.net.
- [66.90.144.107]) by smtp.gmail.com with ESMTPSA id
- d26-20020a0568301b7a00b006b9348b6f51sm1813787ote.54.2023.10.16.12.57.29
+ d=1e100.net; s=20230601; t=1697486517; x=1698091317;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Z4Y4C3MQfxnSMvZ/JMau4D34NbrVrmmZl9x62tY9Bec=;
+ b=MzYHqpfI3lo0NCK4zT6D/+KP33ZLNy0lvwlwd9FW98vnpG/drq806j5N0Rsp8tJfj0
+ 19t8fBVcIfcsDeklqIG1Tv5+rN2CYqvdt86HlZbmsVfXqeYzVOviAvA2ePJk0lhTca4h
+ 4QXuvI61C01tAX+jndRmojPoRZuOgalTV/D3fQUbOsWQEDSbIvdYEk14LkpYHstZiwXN
+ T8pe5LP9NzbfISJD7MTinYBTE1wkakIu1z7wJsoWQuk3DEj0jmSdz4QB+BoYNJMd4av4
+ 5rhOB2GlaYRELuB57zr5MgtxViUKJ8G0ENOejmpMZiCqS3LipwWXMtu7FTL3fHqzAxQm
+ qpuQ==
+X-Gm-Message-State: AOJu0YzQ07GkHCBR9QOMDV+3LpSt4TzIa+zBCa6JJJm7vY6y+lBVF0/V
+ 711XER//iwq6MtVHVE/sHp5omQN8obg=
+X-Google-Smtp-Source: AGHT+IFUJDOIFeYjUThk1jHIozIU3sITmBQfJof7ikZPCkQd3+ITzk0LvToZH2NuC8+mPU49EGk2CA==
+X-Received: by 2002:a05:690c:fd4:b0:5a8:1973:190a with SMTP id
+ dg20-20020a05690c0fd400b005a81973190amr227558ywb.8.1697486517361; 
+ Mon, 16 Oct 2023 13:01:57 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
+ by smtp.gmail.com with ESMTPSA id
+ r5-20020a0de805000000b0059bc980b1eesm2445654ywe.6.2023.10.16.13.01.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 12:57:30 -0700 (PDT)
-Received: (nullmailer pid 3575170 invoked by uid 1000);
- Mon, 16 Oct 2023 19:57:28 -0000
-Date: Mon, 16 Oct 2023 14:57:28 -0500
-From: Rob Herring <robh@kernel.org>
-To: Simon Glass <sjg@chromium.org>
-Cc: devicetree@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>,
- Lean Sheng Tan <sheng.tan@9elements.com>, lkml <linux-kernel@vger.kernel.org>,
- Dhaval Sharma <dhaval@rivosinc.com>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Yunhui Cui <cuiyunhui@bytedance.com>, Guo Dong <guo.dong@intel.com>,
- Tom Rini <trini@konsulko.com>, ron minnich <rminnich@gmail.com>,
- Gua Guo <gua.guo@intel.com>, Chiu Chasel <chasel.chiu@intel.com>,
- linux-acpi@vger.kernel.org, U-Boot Mailing List <u-boot@lists.denx.de>,
- Ard Biesheuvel <ardb@kernel.org>
-Subject: Re: [PATCH v7 1/2] schemas: memory: Add ECC properties
-Message-ID: <20231016195728.GA3574754-robh@kernel.org>
-References: <20230926194242.2732127-1-sjg@chromium.org>
+ Mon, 16 Oct 2023 13:01:56 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>,
+	Stefan Roese <sr@denx.de>
+Cc: Tom Rini <trini@konsulko.com>,
+	Tony Dinh <mibodhi@gmail.com>
+Subject: [RESEND PATCH] arm: kirkwood: Pogo v4: Enable LTO
+Date: Mon, 16 Oct 2023 13:01:41 -0700
+Message-Id: <20231016200142.21631-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20230926194242.2732127-1-sjg@chromium.org>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,35 +91,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Sep 26, 2023 at 01:42:38PM -0600, Simon Glass wrote:
-> Some memories provide ECC detection and/or correction. For software which
-> wants to check memory, it is helpful to see which regions provide this
-> feature.
-> 
-> Add this as a property of the /memory nodes, since it presumably follows
-> the hardware-level memory system.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
-> Changes in v7:
-> - Drop unnecessary |
-> - Add a blank line between properties
-> 
-> Changes in v6:
-> - Use a number of bits instead of a string property
-> - Fix inidcates typo
-> 
-> Changes in v5:
-> - Redo to make this property specific to ECC
-> - Provide properties both for detection and correction
-> 
-> Changes in v3:
-> - Add new patch to update the /memory nodes
-> 
->  dtschema/schemas/memory.yaml | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
+Enable building Pogo V4 u-boot image with LTO, which results in about 30K
+reduction in size.
 
-Applied this patch.
+Rebased to latest master and resend.
 
-Rob
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+---
+
+ configs/pogo_v4_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
+index cbbade3c0c..fd62146ed3 100644
+--- a/configs/pogo_v4_defconfig
++++ b/configs/pogo_v4_defconfig
+@@ -15,6 +15,7 @@ CONFIG_ENV_OFFSET=0xC0000
+ CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogoplug-series-4"
+ CONFIG_IDENT_STRING="\nPogoplug V4"
+ CONFIG_SYS_LOAD_ADDR=0x800000
++CONFIG_LTO=y
+ CONFIG_PCI=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
+-- 
+2.39.2
+
