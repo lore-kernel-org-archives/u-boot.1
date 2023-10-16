@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7422CDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:17:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0DF1CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:17:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F47086E37;
-	Mon, 16 Oct 2023 16:16:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 33B6486DC6;
+	Mon, 16 Oct 2023 16:15:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="d32dCK2K";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JbOYn77R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D5F686BD5; Mon, 16 Oct 2023 16:14:36 +0200 (CEST)
+ id 0DC9F86BA6; Mon, 16 Oct 2023 16:14:30 +0200 (CEST)
 Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [217.70.183.200])
+ [IPv6:2001:4b98:dc4:8::227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D61C886484
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E30886484
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id CE64920017;
- Mon, 16 Oct 2023 14:14:30 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id A6DD22000C;
+ Mon, 16 Oct 2023 14:14:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1697465671;
+ t=1697465666;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=TSoHOo1ug9AFfAYFhP+gKqeO5sAz7ummc1/cHT4ZO5k=;
- b=d32dCK2KT8iCVwwR9s+rYzH23vNhKUE68sa0myFyZfxesdGp8rOs6ATmyARVX94a7gM+km
- CppCxBsLqlbUKusHS+RoQIdE7zKeQKfu3lnWN4J4B9v/IeRMcYrwpbGttntyVJ3wbnijkQ
- HyU9eJSh7FTjp7X5NHWWWoAX+a/D95Gz76DVLEqR+jV12E0eO7NsaC/oAYKt42xLvuholb
- 8kuXsnrJyxWw6vPa0GyMKuoK30/OnHwYCnyw+k241/KQrlSFbCU8DLhX1DJ+netOsc3f88
- H7Mwr2CWwfQqimFjoDHK+F7hAuzjSFcM/P7louI/4htTgCiBZcWWggkqF9cmzg==
+ bh=DC84mpvvDDfUM9MGRNHuWKp8Fa28+FWHka88pMHmR3M=;
+ b=JbOYn77RwKcG3PiJzb6DbU8Gk0fp9WlP8gKSld5MmzZ/o6taPAmIpXA4S7+V5Q3C397pjc
+ cZO79C3XDXbatJv5OgoaVcWHdQ0Q2HhGSm8hvHOvXNHFQ6U/yepG+9QKhx56IQOajyzZGL
+ 8/jBebHHiedPfUSsgrmTyxW8K+oHk9d3e2mW++cs5awLjNM4OOwsEAM13k/YCU6ZgK80FL
+ IlII3+icxWGIDji2HawEyig4A8yh4VYq2OPbZFfR8Lka0PFX6vtJ2SIeJ+S62np7tiWayp
+ 0s+UhEcRM07yRD/2GL9Uhz26MxkPwHPEIH2vez8/1yI3XdHs+qrcHgWXi20u/Q==
 From: Thomas Richard <thomas.richard@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: nm@ti.com, thomas.petazzoni@bootlin.com, thomas.richard@bootlin.com,
- gregory.clement@bootlin.com, u-kumar1@ti.com, Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 5/9] ram: k3-ddrss: Add exit retention support
-Date: Mon, 16 Oct 2023 16:11:31 +0200
-Message-Id: <20231016141135.325698-6-thomas.richard@bootlin.com>
+ gregory.clement@bootlin.com, u-kumar1@ti.com
+Subject: [PATCH 3/9] configs: j7200_evm_r5: Move address used for allocation
+ in the reserved space
+Date: Mon, 16 Oct 2023 16:11:29 +0200
+Message-Id: <20231016141135.325698-4-thomas.richard@bootlin.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231016141135.325698-1-thomas.richard@bootlin.com>
 References: <20231016141135.325698-1-thomas.richard@bootlin.com>
@@ -70,340 +71,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the exit retention support.
-The enter retention is done by DM-Firmware.
-A part of the exit retention sequence is specific to the board.
-It is done in board_k3_ddrss_lpddr4_release_retention.
+From: Gregory CLEMENT <gregory.clement@bootlin.com>
 
-Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
+Else it could corrupt the memory of Linux when exiting suspend to ram.
 
-Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
 Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
+Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
 ---
 
- drivers/ram/k3-ddrss/k3-ddrss.c | 302 ++++++++++++++++++++++++++++++++
- 1 file changed, 302 insertions(+)
+ configs/j7200_evm_r5_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/ram/k3-ddrss/k3-ddrss.c b/drivers/ram/k3-ddrss/k3-ddrss.c
-index b54557f02c..77f3405d9b 100644
---- a/drivers/ram/k3-ddrss/k3-ddrss.c
-+++ b/drivers/ram/k3-ddrss/k3-ddrss.c
-@@ -413,6 +413,303 @@ static int k3_ddrss_ofdata_to_priv(struct udevice *dev)
- 	return ret;
- }
- 
-+void __weak board_k3_ddrss_lpddr4_release_retention(void) {}
-+
-+int __weak board_is_resuming(void)
-+{
-+	return 0;
-+}
-+
-+#define PLL12_CTRL  0x0068C020
-+
-+#define k3_ddrss_readreg(k3_ddrss, block, shift, reg, pt) do {		\
-+		u32 offset = 0U;					\
-+		u32 result = 0U;					\
-+		TH_OFFSET_FROM_REG(reg, shift, offset);			\
-+		result = k3_ddrss->driverdt->readreg(&k3_ddrss->pd, block, offset, pt); \
-+		if (result > 0U) {					\
-+			printf("%s: Failed to read %s\n", __func__, xstr(reg));	\
-+			hang();						\
-+		}							\
-+	} while (0)
-+
-+#define k3_ddrss_writereg(k3_ddrss, block, shift, reg, value) do {	\
-+		u32 offset = 0U;					\
-+		u32 result = 0U;					\
-+		TH_OFFSET_FROM_REG(reg, shift, offset);			\
-+		result = k3_ddrss->driverdt->writereg(&k3_ddrss->pd, block, offset, value); \
-+		if (result > 0U) {					\
-+			printf("%s: Failed to write %s\n", __func__, xstr(reg)); \
-+			hang();						\
-+		}							\
-+	} while (0)
-+
-+#define k3_ddrss_readreg_ctl(ddrss, reg, pt) \
-+	k3_ddrss_readreg(ddrss, LPDDR4_CTL_REGS, CTL_SHIFT, reg, pt)
-+
-+#define k3_ddrss_readreg_pi(ddrss, reg, pt) \
-+	k3_ddrss_readreg(ddrss, LPDDR4_PHY_INDEP_REGS, PI_SHIFT, reg, pt)
-+
-+#define k3_ddrss_readreg_phy(ddrss, reg, pt) \
-+	k3_ddrss_readreg(ddrss, LPDDR4_PHY_REGS, PHY_SHIFT, reg, pt)
-+
-+#define k3_ddrss_writereg_ctl(ddrss, reg, value) \
-+	k3_ddrss_writereg(ddrss, LPDDR4_CTL_REGS, CTL_SHIFT, reg, value)
-+
-+#define k3_ddrss_writereg_pi(ddrss, reg, value) \
-+	k3_ddrss_writereg(ddrss, LPDDR4_PHY_INDEP_REGS, PI_SHIFT, reg, value)
-+
-+#define k3_ddrss_writereg_phy(ddrss, reg, value) \
-+	k3_ddrss_writereg(ddrss, LPDDR4_PHY_REGS, PHY_SHIFT, reg, value)
-+
-+#define k3_ddrss_set_ctl(k3_ddrss, reg, mask) do {	\
-+	u32 val;					\
-+	k3_ddrss_readreg_ctl(ddrss, reg, &val);		\
-+	val |= mask;					\
-+	k3_ddrss_writereg_ctl(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_clr_ctl(k3_ddrss, reg, mask) do {		\
-+		u32 val;					\
-+		k3_ddrss_readreg_ctl(ddrss, reg, &val);		\
-+		val &= ~(mask);					\
-+		k3_ddrss_writereg_ctl(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_set_pi(k3_ddrss, reg, mask) do {		\
-+		u32 val;					\
-+		k3_ddrss_readreg_pi(ddrss, reg, &val);		\
-+		val |= mask;					\
-+		k3_ddrss_writereg_pi(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_clr_pi(k3_ddrss, reg, mask) do {		\
-+		u32 val;					\
-+		k3_ddrss_readreg_pi(ddrss, reg, &val);		\
-+		val &= ~(mask);					\
-+		k3_ddrss_writereg_pi(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_set_phy(ddrss, reg, mask) do {		\
-+	u32 val;					\
-+	k3_ddrss_readreg_phy(ddrss, reg, &val);		\
-+	val |= mask;					\
-+	k3_ddrss_writereg_phy(ddrss, reg, val);		\
-+	} while (0)
-+
-+#define k3_ddrss_clr_phy(ddrss, reg, mask) do {		\
-+	u32 val;					\
-+	k3_ddrss_readreg_phy(ddrss, reg, &val);		\
-+	val &= ~(mask);					\
-+	k3_ddrss_writereg_phy(ddrss, reg, val);		\
-+	} while (0)
-+
-+static void k3_ddrss_lpddr4_exit_retention(struct k3_ddrss_desc *ddrss)
-+{
-+	u32 regval;
-+	unsigned long tmo;
-+	volatile unsigned int val;
-+
-+	/* disable auto entry / exit */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, (0xF << 24) | (0xF << 16));
-+
-+	/* Configure DFI Interface, DDR retention exit occurs through PHY */
-+	k3_ddrss_readreg_phy(ddrss, LPDDR4__PHY_SET_DFI_INPUT_0__REG, &regval);
-+	regval &= ~0xF0F; // Set DFI_Input_1 = 0
-+	regval |= 0x01;   // Set DFI Input_0 = 1
-+	k3_ddrss_writereg_phy(ddrss, LPDDR4__PHY_SET_DFI_INPUT_0__REG, regval);
-+
-+	/* PWRUP_SREFRESH_EXIT = 1 */
-+	k3_ddrss_set_ctl(ddrss, LPDDR4__PWRUP_SREFRESH_EXIT__REG, 0x1);
-+
-+	/* PI_PWRUP_SREFRESH_EXIT = 0 */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__PI_COL_DIFF__REG, 0x1 << 16);
-+
-+	/* DFIBUS_BOOT_FREQ = 0 */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__DFIBUS_BOOT_FREQ__REG, 0x3);
-+
-+	/* DFIBUS_FREQ_INIT = 2 */
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, &regval);
-+	regval &= ~(0x3 << 24);
-+	regval |= (0x1 << 24);
-+	k3_ddrss_writereg_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, regval);
-+
-+	/* Force Leveling during Initialization, Enable Link Training */
-+
-+	/* PI_INIT_LVL_EN = 1 */
-+	k3_ddrss_set_pi(ddrss, LPDDR4__PI_NORMAL_LVL_SEQ__REG, (1 << 8));
-+
-+	/* PI_DRAM_INIT_EN = 0 */
-+	k3_ddrss_clr_pi(ddrss, LPDDR4__PI_DLL_RST__REG, (0x1 << 8));
-+
-+	/* PI_DFI_PHYMSTR_STATE_SEL_R = 1  (force memory into self-refresh) */
-+	k3_ddrss_set_pi(ddrss, LPDDR4__PI_DFI_VERSION__REG, (1 << 24));
-+
-+	/*  PHY_INDEP_INIT_MODE = 0 */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, (0x1 << 16));
-+	/* PHY_INDEP_TRAIN_MODE = 1 */
-+	k3_ddrss_set_ctl(ddrss, LPDDR4__PHY_INDEP_TRAIN_MODE__REG, 0x1);
-+
-+	/* PI_INIT_WORK_FREQ = 1 */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INIT_WORK_FREQ__REG, &regval);
-+	regval &= ~0x1F;
-+	regval |= 0x01;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_INIT_WORK_FREQ__REG, regval);
-+
-+	/* PI_FREQ_MAP[2:0] */
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_FREQ_MAP__REG, 0x03);
-+
-+	/* Training/leveling configurations for different frequency set points */
-+
-+	/* PI_CALVL_EN_F0 = 01b; PI_CALVL_EN_F1 = 01b; PI_CALVL_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_CALVL_EN_F0__REG, &regval);
-+	regval &= ~0x030303;
-+	regval |= 0x010101;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_CALVL_EN_F0__REG, regval);
-+
-+	/* PI_WRLVL_EN_F0 = 00b; PI_WRLVL_EN_F1 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_TDFI_CTRL_DELAY_F1__REG, &regval);
-+	regval &= ~0x03030000;
-+	regval |= 0x01000000;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_TDFI_CTRL_DELAY_F1__REG, regval);
-+
-+	/* PI_WRLVL_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WRLVL_EN_F2__REG, &regval);
-+	regval &= ~0x03;
-+	regval |= 0x01;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WRLVL_EN_F2__REG, regval);
-+
-+	/* PI_RDLVL_EN_F0 = 00b; PI_RDLVL_EN_F1 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, &regval);
-+	regval &= ~0x030003;
-+	regval |= 0x010000;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, regval);
-+
-+	/* PI_RDLVL_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, &regval);
-+	regval &= ~0x03;
-+	regval |= 0x01;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, regval);
-+
-+	/* PI_RDLVL_GATE_EN_F0 = 00b; PI_RDLVL_GATE_EN_F1 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, &regval);
-+	regval &= ~0x03000300;
-+	regval |= 0x01000000;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F0__REG, regval);
-+
-+	/* PI_RDLVL_GATE_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, &regval);
-+	regval &= ~0x0300;
-+	regval |= 0x0100;
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_RDLVL_EN_F2__REG, regval);
-+
-+	/* PI_WDQLVL_EN_F0 = 00b */
-+	k3_ddrss_clr_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F0__REG, (0x3 << 8));
-+
-+	/* PI_WDQLVL_EN_F1 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F1__REG, &regval);
-+	regval &= ~(0x3 << 24);
-+	regval |= (0x1 << 24);
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F1__REG, regval);
-+
-+	/* PI_WDQLVL_EN_F2 = 01b */
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F2__REG, &regval);
-+	regval &= ~(0x3 << 8);
-+	regval |= (0x1 << 8);
-+	k3_ddrss_writereg_pi(ddrss, LPDDR4__PI_WDQLVL_VREF_DELTA_F2__REG, regval);
-+
-+	*(unsigned int *)PLL12_CTRL |= 0x80000000;
-+	val = *(volatile unsigned int *)PLL12_CTRL;
-+
-+	if ((val & 0x80000000) != 0x80000000)
-+		val = *(volatile unsigned int *)PLL12_CTRL;
-+
-+	board_k3_ddrss_lpddr4_release_retention();
-+
-+	/* LPC_SR_PHYMSTR_EN */
-+	k3_ddrss_clr_ctl(ddrss, LPDDR4__LPC_SR_CTRLUPD_EN__REG, (0x1 << 16));
-+	/* PI_START=1 */
-+	k3_ddrss_set_pi(ddrss, LPDDR4__PI_START__REG, 0x01);
-+	/* START=1 */
-+	k3_ddrss_set_ctl(ddrss, LPDDR4__START__REG, 0x01);
-+
-+	debug("%s: PPL12 = %x\n", __func__, *(volatile unsigned int *)PLL12_CTRL);
-+	ddrss->ddr_fhs_cnt = 5;
-+	k3_lpddr4_freq_update(ddrss);
-+	debug("%s: PPL12 = %x\n", __func__, *(volatile unsigned int *)PLL12_CTRL);
-+
-+	tmo = timer_get_us() + 100000;
-+	do {
-+		k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INT_STATUS__REG, &regval);
-+		debug("%s: DDRSS_PI_79 = %x\n", __func__, regval);
-+		if (timer_get_us() > tmo) {
-+			printf("%s:%d timeout error\n", __func__, __LINE__);
-+			hang();
-+		}
-+	} while ((regval & (1 << 0)) == 0x00);
-+
-+	tmo = timer_get_us() + 4000;
-+	do {
-+		k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
-+		if (timer_get_us() > tmo) {
-+			printf("%s:%d timeout error\n", __func__, __LINE__);
-+			hang();
-+		}
-+	} while ((regval & (1 << 9)) == 0x00);
-+
-+	k3_ddrss_readreg_pi(ddrss, LPDDR4__PI_INT_STATUS__REG, &regval);
-+	debug("%s: PI interrupt status: 0x%08x\n", __func__, regval);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
-+	debug("%s: Controller interrupt status: 0x%08x\n", __func__, regval);
-+
-+	debug("%s: Successfully exited Retention\n", __func__);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+	debug("%s: LP State: 0x%08x\n", __func__, regval);
-+
-+	k3_ddrss_writereg_ctl(ddrss, LPDDR4__INT_ACK_0__REG, (0x1 << 10));
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__CKSRX_F1__REG, &regval);
-+	regval &= ~(0x7F << 24);
-+	regval |= (0x2 << 24); // set low power mode exit
-+	k3_ddrss_writereg_ctl(ddrss, LPDDR4__CKSRX_F1__REG, regval);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+	debug("%s: LP State: 0x%08x\n", __func__, regval);
-+
-+	/* wait until low power operation has been completed */
-+	tmo = timer_get_us() + 4000;
-+	do {
-+		k3_ddrss_readreg_ctl(ddrss, LPDDR4__INT_STATUS_0__REG, &regval);
-+		if (timer_get_us() > tmo) {
-+			printf("%s:%d timeout error\n", __func__, __LINE__);
-+			hang();
-+		}
-+	} while ((regval & (0x1 << 10)) == 0);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+	debug("%s: LP State: 0x%08x\n", __func__, regval);
-+
-+	k3_ddrss_writereg_ctl(ddrss, LPDDR4__INT_ACK_0__REG, (0x1 << 10));
-+
-+	/*
-+	 * bit 6 / 14 -- lp_state valid
-+	 * bits 13:8 / 5:0 0x0F SRPD Long with Mem and Controller Clk Gating
-+	 */
-+	tmo = timer_get_us() + 4000;
-+	do {
-+		k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+		if (timer_get_us() > tmo) {
-+			printf("%s:%d timeout error\n", __func__, __LINE__);
-+			hang();
-+		}
-+	} while ((regval & 0x4F4F) != 0x4040);
-+
-+	k3_ddrss_readreg_ctl(ddrss, LPDDR4__LP_STATE_CS0__REG, &regval);
-+	debug("%s: LP State: 0x%08x\n", __func__, regval);
-+}
-+
- void k3_lpddr4_probe(struct k3_ddrss_desc *ddrss)
- {
- 	u32 status = 0U;
-@@ -637,6 +934,11 @@ static int k3_ddrss_probe(struct udevice *dev)
- 	if (ret)
- 		return ret;
- 
-+	if (board_is_resuming()) {
-+		k3_ddrss_lpddr4_exit_retention(ddrss);
-+		return 0;
-+	}
-+
- 	k3_lpddr4_start(ddrss);
- 
- 	if (ddrss->ti_ecc_enabled) {
+diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
+index 7450529d66..1e7daf9b4a 100644
+--- a/configs/j7200_evm_r5_defconfig
++++ b/configs/j7200_evm_r5_defconfig
+@@ -39,7 +39,7 @@ CONFIG_SPL_STACK_R=y
+ CONFIG_SPL_SEPARATE_BSS=y
+ CONFIG_SYS_SPL_MALLOC=y
+ CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
+-CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x84000000
++CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0xa5400000
+ CONFIG_SYS_SPL_MALLOC_SIZE=0x1000000
+ CONFIG_SPL_EARLY_BSS=y
+ CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
 -- 
 2.39.2
 
