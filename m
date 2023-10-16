@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA09CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:43:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D094ACDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:43:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04B928071F;
+	by phobos.denx.de (Postfix) with ESMTP id 9BC6586F4F;
 	Tue, 17 Oct 2023 00:35:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FNWDKdC2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Heelsq+y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D511186F2A; Tue, 17 Oct 2023 00:33:55 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id 6363586F62; Tue, 17 Oct 2023 00:33:40 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A60686F5B
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:33:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9417D86F51
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:33:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7741c2e76a3so331255485a.1
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:33:31 -0700 (PDT)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-773ac11de71so330379785a.2
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:33:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495604; x=1698100404; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697495585; x=1698100385; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Xe56samjdLDK74Do6/rxWsABE5Nwjp1bKdGcoIXUNUQ=;
- b=FNWDKdC2yH4K8HY+52SPsLHDdK9azwCTrbNyBQTLSxdjUZD8S2leS5DKafbsY4syEH
- ZnEgL2K9Nzv0xJpwslo6gRiHoGcy3frENdj2HpcndvC4L0J1RaBkV32Q98J0pF5hGkUA
- fkNDZP6tYItEcAEDcld1ODQd0u4JkZB9h+HfA=
+ bh=PH/2BVT1cp4JUVxMCuS0SVUcP3RxLcuSvnnHG54ue8Y=;
+ b=Heelsq+ybCINlz1RFBD/+ukAn7BKipUWXwEtNgELKZj92vLDh+9NkysR4L079pkgKS
+ sd1dlaaiSLhI6LZy/rdl7vChRXsxTDuUwWOKQKlEySd7H5IC1cD70Mw4EY9TIvuIvgIg
+ DjHS8vVtid66Es/AKQA/fxYcmsG2XYedteeVg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495604; x=1698100404;
+ d=1e100.net; s=20230601; t=1697495585; x=1698100385;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Xe56samjdLDK74Do6/rxWsABE5Nwjp1bKdGcoIXUNUQ=;
- b=sVvC76ArcvTfMvXAKEH83y8DRR59sqFbFlL4qfgEbhFeOpZQb2/V+YQ6q44tJX49+z
- 4TxHf7/3BZvkNgOJDgMrLJVOURvu+y1kXyslNxj6pB5iIzuxSzLw70dYFAKbzW5jzebx
- rxNQlbo3Z6mSPIva9GulosDcmt9H1qR9d+tzLqRM3rIoWySIfd9K5o9wUFLVNYn9YXKN
- lehH1tJ9rFzoI+bWFJeoK8gSWR9kOGGlSBpvJdIkfpERJ2VgH+SdZWCenYusY+Y2thEz
- AQuDnenb0HyfYkxUMo6Eh/wO31CM/rcKSXfMTTsELyzU/1m5O++2k7btnTTpuDQ/KRW0
- CPvg==
-X-Gm-Message-State: AOJu0Yy93gNwkCWj3+mIw9v8i5gMBW1nbTGvc1cz8pcTdDCawmB67JtT
- neYf7NBSZhMARvmH/o9nAAQOIEwsT65/wvoozT8A5Q==
-X-Google-Smtp-Source: AGHT+IEqu1wnrBMgTpZhv2Br+8clixuRwhtS6AwyiYyz8tv9Ae2qkMorkWNCnfb+IiJJMaliH6gFNw==
-X-Received: by 2002:a05:620a:248c:b0:774:32a7:fe91 with SMTP id
- i12-20020a05620a248c00b0077432a7fe91mr569093qkn.48.1697495604538; 
- Mon, 16 Oct 2023 15:33:24 -0700 (PDT)
+ bh=PH/2BVT1cp4JUVxMCuS0SVUcP3RxLcuSvnnHG54ue8Y=;
+ b=aHcVlB9SoNoMvtu/ICq8jfOkiQ1nDi6k1NgEyG1w4tYQkl0qxlJIddXeAOwdxrX/j9
+ GqhZctFPAB5RVN48VZSNFFYUcB+QtuXxlZAGj5PSey3Ty859z2VhcEXTuUDgUSIIlHmx
+ gfxtRc433gQ9VT6lefUy0E/nkkD1SZDQZnPSBmgiXCWyxzTeo5C92/KX82q5BRVV1LGE
+ 6xFfohkYX6dvEnILU+DWHbyvYBsYchL8P4tzjTP+xQ7zb15gwQtdqHx00FfcKVtvrXNE
+ ADu2tK7JrS94fb6r7UhSTKxbKbCVgoDohUxvohHVB6FgSZw7RBc3wvOGY0OuFDFcrxxs
+ L1dQ==
+X-Gm-Message-State: AOJu0YxhFh3YPARMDTDCry3nIDIfJpogHw0Pd8YodOk8RI6XTXpfaEqm
+ 1VTWnduy2ijqCjkbFJw9EFOxDVraMHntc4m/F8k/0Q==
+X-Google-Smtp-Source: AGHT+IEQGADjaEJBVscNiCGQfNXbEPqq+u2TRKAO7CmsdMjcfDxiuZKyeJAfxYf+MjEJHWJbjM7hnw==
+X-Received: by 2002:a05:620a:4414:b0:772:6400:f111 with SMTP id
+ v20-20020a05620a441400b007726400f111mr638174qkp.47.1697495585425; 
+ Mon, 16 Oct 2023 15:33:05 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.33.18
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.32.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:33:24 -0700 (PDT)
+ Mon, 16 Oct 2023 15:33:05 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 31/32] treewide: Tidy up semicolon after command macros
-Date: Mon, 16 Oct 2023 16:28:22 -0600
-Message-ID: <20231016222835.596572-32-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>
+Subject: [PATCH v3 29/32] arm: x86: Drop discarding of command linker-lists
+Date: Mon, 16 Oct 2023 16:28:20 -0600
+Message-ID: <20231016222835.596572-30-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
 References: <20231016222835.596572-1-sjg@chromium.org>
@@ -88,183 +88,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The U_BOOT_CMD_COMPLETE() macro has a semicolon at the end, perhaps
-inadvertently. Some code has taken advantage of this.
-
-Tidy this up by dropping the semicolon from the macro and adding it to
-macro invocations as required.
+Since we can now cleanly disable CMDLINE when needed, drop the rules
+which discard the command code.  It will not be built in the first
+place.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Add new patch to tidy up semicolon after command macros
+(no changes since v2)
 
- board/freescale/common/vid.c | 2 +-
- board/xilinx/common/fru.c    | 2 +-
- board/xilinx/versal/cmds.c   | 2 +-
- board/xilinx/zynqmp/cmds.c   | 2 +-
- cmd/btrfs.c                  | 2 +-
- cmd/eeprom.c                 | 2 +-
- cmd/ext2.c                   | 4 ++--
- cmd/fs.c                     | 8 ++++----
- cmd/pinmux.c                 | 2 +-
- cmd/qfw.c                    | 2 +-
- include/command.h            | 2 +-
- 11 files changed, 15 insertions(+), 15 deletions(-)
+Changes in v2:
+- Add new patch to drop discarding of command linker-lists
 
-diff --git a/board/freescale/common/vid.c b/board/freescale/common/vid.c
-index 5ec3f2a76b19..fc5d400cfe18 100644
---- a/board/freescale/common/vid.c
-+++ b/board/freescale/common/vid.c
-@@ -793,4 +793,4 @@ U_BOOT_CMD(
- 	vdd_read, 1, 0, do_vdd_read,
- 	"read VDD",
- 	" - Read the voltage specified in mV"
--)
-+);
-diff --git a/board/xilinx/common/fru.c b/board/xilinx/common/fru.c
-index c916c3d6b4c8..12b21317496a 100644
---- a/board/xilinx/common/fru.c
-+++ b/board/xilinx/common/fru.c
-@@ -85,4 +85,4 @@ U_BOOT_CMD(
- 	fru, 8, 1, do_fru,
- 	"FRU table info",
- 	fru_help_text
--)
-+);
-diff --git a/board/xilinx/versal/cmds.c b/board/xilinx/versal/cmds.c
-index 9cc2cdcebf1c..2a74e49aedec 100644
---- a/board/xilinx/versal/cmds.c
-+++ b/board/xilinx/versal/cmds.c
-@@ -98,4 +98,4 @@ U_BOOT_LONGHELP(versal,
- U_BOOT_CMD(versal, 4, 1, do_versal,
- 	   "versal sub-system",
- 	   versal_help_text
--)
-+);
-diff --git a/board/xilinx/zynqmp/cmds.c b/board/xilinx/zynqmp/cmds.c
-index f1f3eff501e1..9524688f27d9 100644
---- a/board/xilinx/zynqmp/cmds.c
-+++ b/board/xilinx/zynqmp/cmds.c
-@@ -427,4 +427,4 @@ U_BOOT_CMD(
- 	zynqmp, 9, 1, do_zynqmp,
- 	"ZynqMP sub-system",
- 	zynqmp_help_text
--)
-+);
-diff --git a/cmd/btrfs.c b/cmd/btrfs.c
-index 98daea99e9ed..2843835d08b8 100644
---- a/cmd/btrfs.c
-+++ b/cmd/btrfs.c
-@@ -24,4 +24,4 @@ U_BOOT_CMD(btrsubvol, 3, 1, do_btrsubvol,
- 	"list subvolumes of a BTRFS filesystem",
- 	"<interface> <dev[:part]>\n"
- 	"     - List subvolumes of a BTRFS filesystem."
--)
-+);
-diff --git a/cmd/eeprom.c b/cmd/eeprom.c
-index 0b6ca8c505fb..322765ad02a0 100644
---- a/cmd/eeprom.c
-+++ b/cmd/eeprom.c
-@@ -435,4 +435,4 @@ U_BOOT_CMD(
- 	"The values which can be provided with the -l option are:\n"
- 	CONFIG_EEPROM_LAYOUT_HELP_STRING"\n"
+ arch/arm/cpu/u-boot.lds     | 3 ---
+ arch/x86/cpu/u-boot-64.lds  | 4 ----
+ arch/x86/cpu/u-boot-spl.lds | 4 ----
+ arch/x86/cpu/u-boot.lds     | 4 ----
+ 4 files changed, 15 deletions(-)
+
+diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+index fc4f63d83489..7724c9332c3b 100644
+--- a/arch/arm/cpu/u-boot.lds
++++ b/arch/arm/cpu/u-boot.lds
+@@ -14,9 +14,6 @@ OUTPUT_ARCH(arm)
+ ENTRY(_start)
+ SECTIONS
+ {
+-#ifndef CONFIG_CMDLINE
+-	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+-#endif
+ #if defined(CONFIG_ARMV7_SECURE_BASE) && defined(CONFIG_ARMV7_NONSEC)
+ 	/*
+ 	 * If CONFIG_ARMV7_SECURE_BASE is true, secure code will not
+diff --git a/arch/x86/cpu/u-boot-64.lds b/arch/x86/cpu/u-boot-64.lds
+index d0398ff00d71..00a6d8691211 100644
+--- a/arch/x86/cpu/u-boot-64.lds
++++ b/arch/x86/cpu/u-boot-64.lds
+@@ -11,10 +11,6 @@ ENTRY(_start)
+ 
+ SECTIONS
+ {
+-#ifndef CONFIG_CMDLINE
+-	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+-#endif
+-
+ #ifdef CONFIG_TEXT_BASE
+ 	. = CONFIG_TEXT_BASE;	/* Location of bootcode in flash */
  #endif
--)
-+);
-diff --git a/cmd/ext2.c b/cmd/ext2.c
-index 57a99516a6ac..a0ce0cf5796b 100644
---- a/cmd/ext2.c
-+++ b/cmd/ext2.c
-@@ -42,7 +42,7 @@ U_BOOT_CMD(
- 	"list files in a directory (default /)",
- 	"<interface> <dev[:part]> [directory]\n"
- 	"    - list files from 'dev' on 'interface' in a 'directory'"
--)
-+);
+diff --git a/arch/x86/cpu/u-boot-spl.lds b/arch/x86/cpu/u-boot-spl.lds
+index a0a2a06a18cd..50b4b1608552 100644
+--- a/arch/x86/cpu/u-boot-spl.lds
++++ b/arch/x86/cpu/u-boot-spl.lds
+@@ -11,10 +11,6 @@ ENTRY(_start)
  
- U_BOOT_CMD(
- 	ext2load,	6,	0,	do_ext2load,
-@@ -50,4 +50,4 @@ U_BOOT_CMD(
- 	"<interface> [<dev[:part]> [addr [filename [bytes [pos]]]]]\n"
- 	"    - load binary file 'filename' from 'dev' on 'interface'\n"
- 	"      to address 'addr' from ext2 filesystem."
--)
-+);
-diff --git a/cmd/fs.c b/cmd/fs.c
-index 6044f73af5b4..46cb43dcdb5b 100644
---- a/cmd/fs.c
-+++ b/cmd/fs.c
-@@ -39,7 +39,7 @@ U_BOOT_CMD(
- 	"      If 'bytes' is 0 or omitted, the file is read until the end.\n"
- 	"      'pos' gives the file byte position to start reading from.\n"
- 	"      If 'pos' is 0 or omitted, the file is read from the start."
--)
-+);
+ SECTIONS
+ {
+-#ifndef CONFIG_CMDLINE
+-	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+-#endif
+-
+ 	. = IMAGE_TEXT_BASE;	/* Location of bootcode in flash */
+ 	__text_start = .;
+ 	.text  : {
+diff --git a/arch/x86/cpu/u-boot.lds b/arch/x86/cpu/u-boot.lds
+index a31f4220a000..c418ff44aa08 100644
+--- a/arch/x86/cpu/u-boot.lds
++++ b/arch/x86/cpu/u-boot.lds
+@@ -11,10 +11,6 @@ ENTRY(_start)
  
- static int do_save_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
- 			   char *const argv[])
-@@ -56,7 +56,7 @@ U_BOOT_CMD(
- 	"      'bytes' gives the size to save in bytes and is mandatory.\n"
- 	"      'pos' gives the file byte position to start writing to.\n"
- 	"      If 'pos' is 0 or omitted, the file is written from the start."
--)
-+);
+ SECTIONS
+ {
+-#ifndef CONFIG_CMDLINE
+-	/DISCARD/ : { *(__u_boot_list_2_cmd_*) }
+-#endif
+-
+ 	. = CONFIG_TEXT_BASE;	/* Location of bootcode in flash */
+ 	__text_start = .;
  
- static int do_ls_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 char *const argv[])
-@@ -70,7 +70,7 @@ U_BOOT_CMD(
- 	"<interface> [<dev[:part]> [directory]]\n"
- 	"    - List files in directory 'directory' of partition 'part' on\n"
- 	"      device type 'interface' instance 'dev'."
--)
-+);
- 
- static int do_ln_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 char *const argv[])
-@@ -84,7 +84,7 @@ U_BOOT_CMD(
- 	"<interface> <dev[:part]> target linkname\n"
- 	"    - create a symbolic link to 'target' with the name 'linkname' on\n"
- 	"      device type 'interface' instance 'dev'."
--)
-+);
- 
- static int do_fstype_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
- 			     char *const argv[])
-diff --git a/cmd/pinmux.c b/cmd/pinmux.c
-index f17cf4110d9f..105f01eaafff 100644
---- a/cmd/pinmux.c
-+++ b/cmd/pinmux.c
-@@ -178,4 +178,4 @@ U_BOOT_CMD(pinmux, CONFIG_SYS_MAXARGS, 1, do_pinmux,
- 	   "list                     - list UCLASS_PINCTRL devices\n"
- 	   "pinmux dev [pincontroller-name] - select pin-controller device\n"
- 	   "pinmux status [-a | pin-name]   - print pin-controller muxing [for all | for pin-name]\n"
--)
-+);
-diff --git a/cmd/qfw.c b/cmd/qfw.c
-index d6ecfa60d5a7..1b8c775ebf5a 100644
---- a/cmd/qfw.c
-+++ b/cmd/qfw.c
-@@ -121,4 +121,4 @@ U_BOOT_CMD(
- 	"    - list                             : print firmware(s) currently loaded\n"
- 	"    - cpus                             : print online cpu number\n"
- 	"    - load <kernel addr> <initrd addr> : load kernel and initrd (if any), and setup for zboot\n"
--)
-+);
-diff --git a/include/command.h b/include/command.h
-index 6262365e128f..5bd3ecbe8f91 100644
---- a/include/command.h
-+++ b/include/command.h
-@@ -390,7 +390,7 @@ int cmd_source_script(ulong addr, const char *fit_uname, const char *confname);
- #define U_BOOT_CMD_COMPLETE(_name, _maxargs, _rep, _cmd, _usage, _help, _comp) \
- 	ll_entry_declare(struct cmd_tbl, _name, cmd) =			\
- 		U_BOOT_CMD_MKENT_COMPLETE(_name, _maxargs, _rep, _cmd,	\
--						_usage, _help, _comp);
-+						_usage, _help, _comp)
- 
- #define U_BOOT_CMDREP_COMPLETE(_name, _maxargs, _cmd_rep, _usage,	\
- 			       _help, _comp)				\
 -- 
 2.42.0.655.g421f12c284-goog
 
