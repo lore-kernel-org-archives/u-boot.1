@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A39CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:42:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50EB0CDB482
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:42:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6953186F5F;
-	Tue, 17 Oct 2023 00:33:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CF79386F48;
+	Tue, 17 Oct 2023 00:33:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NnHOUDT0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vm8j2jpT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7A2B803AE; Tue, 17 Oct 2023 00:32:54 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 6517486E7C; Tue, 17 Oct 2023 00:33:20 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DB7586EE3
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:32:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E8D586F38
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:32:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-77575233633so362630785a.0
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:32:51 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-66d1ef93284so27987986d6.3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:32:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495567; x=1698100367; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697495555; x=1698100355; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yXFqehmLVhNeOJtN5biaVlaeQwlKgxrcWw0bs/J9Yis=;
- b=NnHOUDT0SBm8GplrpNO3vm8fjEwzdJ8MdSJgzryLyxMbs9KlHetlu6r17DpfYfybul
- O5B959dWBd/guYjA86AfZ8MqqkR5QPRbPwben44QUD3O0Gqdd1egOzBfTttkWlkRcu++
- GGTyD1ftrfeDml5LnVhvSXXDxGzpbjxD4E5Ps=
+ bh=cHJY0VPCR645CVpau8EtYSrLiLuHSgNRjiQaLHCkawY=;
+ b=Vm8j2jpThT62v+5zV0chIH1tOqQs7tGgkcue5q9z1VCAcoW2DiKPU+4mq/de1wp2Wk
+ cAAZZEIvPl2LCBfIDz2rSgSB7Zpboo3HE76MSfXi7RFYWE5BHFkF7eD+4nw5JCybCA9r
+ 3nRa+lfT0eluvMBZPW3H4mZIrlDqzHm78e9Xw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495567; x=1698100367;
+ d=1e100.net; s=20230601; t=1697495555; x=1698100355;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yXFqehmLVhNeOJtN5biaVlaeQwlKgxrcWw0bs/J9Yis=;
- b=iEGDK+IR3wcjAqpMMCihJatyYvVULeHhcFoiju3gW/XTE8mQ5zTfHKiFzCFxQLAkGv
- eHcOXjX+/2OTHXOTKo2sWm2DXfjqopw6bbqwLiIuEw6Zuo3W71y3G3HOeRTxUz3hIG03
- h2ChMBK4IlbAr0r/43GSbQEkUIzZo+Z5F1QTzNSJjdBHwzvMMiNWqujOprXjoMJl+wAv
- wLDVh1LU22DChc8hxwLQd7z9N3h8MVdHbRIuxhTzHAC9qwTdDYI2bw1lXmmR0UCtZqso
- kBEN//fjEx7mFkPwSEGzA8nkuAYZV1f4qUAvoMLUbdXKQz96RiSMRTlTe0/l+xrlYuOx
- N2Og==
-X-Gm-Message-State: AOJu0YwAqpwyLX8d2m5YMqcnpvCMJMqlJtYvr1madp+9NAtX5ZQdAlkE
- QqmlxJJa9FcXwb52w1c3hAW+tkCW78h7CfOBt9txmg==
-X-Google-Smtp-Source: AGHT+IF51mpIqxlYza5fdje81FL00tYA8Xs7OIwFIKzGbGfXsd4NdmEyh8irfvTiATg/DVZPtUd83w==
-X-Received: by 2002:a05:620a:459e:b0:774:2e8f:2170 with SMTP id
- bp30-20020a05620a459e00b007742e8f2170mr616312qkb.4.1697495567031; 
- Mon, 16 Oct 2023 15:32:47 -0700 (PDT)
+ bh=cHJY0VPCR645CVpau8EtYSrLiLuHSgNRjiQaLHCkawY=;
+ b=Z3MOBMKPNaqXP+nbpmZoMdRqtHyWkxazrcO0z+GPPxDJMzh9uLq3dAGw6ljRh2Q9DT
+ XA9nrQVIWJZGSgTeOMN1ikrmKNC1sy2EgXZBqu1GCy+SP4x9ZfQr1w9UkyuE+7bivWah
+ q/4e2yGryuIwh4g+K04V5+ISbyz6KGIFgDij00sjRYuUhZja0KuqSF7KncCbHL553hvD
+ 3sN2mqY5F2tHtJ17piyZM1nQlxtZBtFAv0kBgHwrYpmlGSANXTsWbjM6yY+FQMiA04vg
+ IhNpzedR8vJClxuSqyev6gFpjH1GOpOjiQKcD0HYyrxGfUktvwz4EzDqDZDYl26Y7Vk0
+ faAw==
+X-Gm-Message-State: AOJu0Yy+4aZZ4CnorE8L9HSJ9iZl66kDzq2hqn2HQHYzva7GG8zm2Me8
+ wip8KxGrYXaV5S6+nqTHSx8PeG1X2KXzdavA0zlv9w==
+X-Google-Smtp-Source: AGHT+IG8rTn7OJoCmDvX90FaYMJQIPq5GEU3qXVVYQACBSUrXXSl/w5FKDCrJbbu5sEEtezKMf7iWA==
+X-Received: by 2002:a05:6214:300a:b0:658:49bb:f78f with SMTP id
+ ke10-20020a056214300a00b0065849bbf78fmr751549qvb.39.1697495555599; 
+ Mon, 16 Oct 2023 15:32:35 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.32.37
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.32.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:32:46 -0700 (PDT)
+ Mon, 16 Oct 2023 15:32:35 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 27/32] cmd: Make all commands depend on CMDLINE
-Date: Mon, 16 Oct 2023 16:28:18 -0600
-Message-ID: <20231016222835.596572-28-sjg@chromium.org>
+Subject: [PATCH v3 26/32] sandbox: Disable CONFIG_DISTRO_DEFAULTS
+Date: Mon, 16 Oct 2023 16:28:17 -0600
+Message-ID: <20231016222835.596572-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
 References: <20231016222835.596572-1-sjg@chromium.org>
@@ -88,166 +88,151 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If this option is disabled, commands should not be available. Convert
-the CMDLINE option into a menuconfig and make every command in
-cmd/Kconfig depend on it.
+This is not used for sandbox, so drop it. Enable the things that it
+controls to avoid dstrastic changes in the config settings for
+sandbox builds.
+
+The end result is that these are enabled:
+
+   BOOTMETH_DISTRO
+   BOOTSTD_DEFAULTS
+
+and these are disabled:
+
+   USE_BOOTCOMMAND
+   BOOTCOMMAND (was "run distro_bootcmd")
+   DISTRO_DEFAULTS
+
+Note that the tools-only build has already disabled DISTRO_DEFAULTS
+and BOOTSTD_FULL
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- cmd/Kconfig | 31 +++++++++----------------------
- 1 file changed, 9 insertions(+), 22 deletions(-)
+ arch/Kconfig                       | 5 +++++
+ boot/Kconfig                       | 6 +++---
+ configs/sandbox64_defconfig        | 1 -
+ configs/sandbox_defconfig          | 1 -
+ configs/sandbox_flattree_defconfig | 1 -
+ configs/sandbox_noinst_defconfig   | 1 -
+ configs/sandbox_spl_defconfig      | 1 -
+ configs/sandbox_vpl_defconfig      | 1 -
+ 8 files changed, 8 insertions(+), 9 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 491737ca8ba7..b6fdbc6ff3b1 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1,7 +1,5 @@
--menu "Command line interface"
--
--config CMDLINE
--	bool "Support U-Boot commands"
-+menuconfig CMDLINE
-+	bool "Command line interface"
- 	default y
- 	select CLI_READLINE
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 19f2891ba1c5..64d0a5548942 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -208,6 +208,11 @@ config SANDBOX
+ 	imply PHYSMEM
+ 	imply GENERATE_ACPI_TABLE
+ 	imply BINMAN
++	imply SYSRESET_CMD_POWEROFF
++	imply SUPPORT_EXTENSION_SCAN
++	imply BOOTSTD_DEFAULTS if BOOTSTD_FULL && CMDLINE
++	imply BOOTMETH_DISTRO if BOOTSTD_FULL && CMDLINE
++	imply CMD_SYSBOOT if BOOTSTD_FULL
+ 
+ config SH
+ 	bool "SuperH architecture"
+diff --git a/boot/Kconfig b/boot/Kconfig
+index e71de0647bc5..bab646bcac34 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -433,8 +433,8 @@ config BOOTSTD_FULL
+ config BOOTSTD_DEFAULTS
+ 	bool "Select some common defaults for standard boot"
+ 	depends on BOOTSTD
+-	imply USE_BOOTCOMMAND
+-	select BOOT_DEFAULTS
++	imply USE_BOOTCOMMAND if !SANDBOX
++	select BOOT_DEFAULTS if CMDLINE
+ 	select BOOTMETH_DISTRO
  	help
-@@ -12,9 +10,10 @@ config CMDLINE
- 	  Depending on the number of commands enabled, this can add
- 	  substantially to the size of U-Boot.
+ 	  These are not required but are commonly needed to support a good
+@@ -443,7 +443,7 @@ config BOOTSTD_DEFAULTS
  
-+if CMDLINE
-+
- config HUSH_PARSER
- 	bool "Use hush shell"
--	depends on CMDLINE
+ config BOOTSTD_BOOTCOMMAND
+ 	bool "Use bootstd to boot"
+-	default y if !DISTRO_DEFAULTS
++	default y if !DISTRO_DEFAULTS && !SANDBOX
  	help
- 	  This option enables the "hush" shell (from Busybox) as command line
- 	  interpreter, thus enabling powerful command line syntax like
-@@ -26,7 +25,6 @@ config HUSH_PARSER
- 
- config CMDLINE_EDITING
- 	bool "Enable command line editing"
--	depends on CMDLINE
- 	default y
- 	help
- 	  Enable an editing function for interactive, command-line-input
-@@ -52,15 +50,13 @@ config CMDLINE_PS_SUPPORT
- 
- config AUTO_COMPLETE
- 	bool "Enable auto complete using TAB"
--	depends on CMDLINE
- 	default y
- 	help
- 	  Enable auto completion of commands using TAB.
- 
- config SYS_LONGHELP
- 	bool "Enable long help messages"
--	depends on CMDLINE
--	default y if CMDLINE
-+	default y
- 	help
- 	  Defined when you want long help messages included
- 	  Do not set this option when short of memory.
-@@ -98,8 +94,7 @@ config SYS_CBSIZE
- 
- config SYS_XTRACE
- 	bool "Command execution tracer"
--	depends on CMDLINE
--	default y if CMDLINE
-+	default y
- 	help
- 	  This option enables the possiblity to print all commands before
- 	  executing them and after all variables are evaluated (similar
-@@ -238,7 +233,6 @@ menu "Boot commands"
- 
- config CMD_BOOTD
- 	bool "bootd"
--	depends on CMDLINE
- 	default y
- 	help
- 	  Run the command stored in the environment "bootcmd", i.e.
-@@ -405,7 +399,7 @@ config SYS_BOOTM_LEN
- 
- config CMD_BOOTEFI
- 	bool "bootefi"
--	depends on EFI_LOADER && CMDLINE
-+	depends on EFI_LOADER
- 	default y
- 	help
- 	  Boot an EFI image from memory.
-@@ -437,7 +431,6 @@ source lib/efi_selftest/Kconfig
- 
- config CMD_BOOTMENU
- 	bool "bootmenu"
--	depends on CMDLINE
- 	select MENU
- 	select CHARSET
- 	help
-@@ -504,7 +497,6 @@ config CMD_GO
- 
- config CMD_RUN
- 	bool "run"
--	depends on CMDLINE
- 	default y
- 	help
- 	  Run the command in the given environment variable.
-@@ -595,7 +587,6 @@ menu "Environment commands"
- 
- config CMD_ASKENV
- 	bool "ask for env variable"
--	depends on CMDLINE
- 	help
- 	  Ask for environment variable
- 
-@@ -1715,7 +1706,6 @@ if NET
- 
- menuconfig CMD_NET
- 	bool "Network commands"
--	depends on CMDLINE
- 	default y
- 	imply NETDEVICES
- 
-@@ -2019,7 +2009,6 @@ config CMD_ETHSW
- 
- config CMD_PXE
- 	bool "pxe"
--	depends on CMDLINE
- 	select PXE_UTILS
- 	help
- 	  Boot image via network using PXE protocol
-@@ -2154,7 +2143,6 @@ config CMD_EFICONFIG
- 
- config CMD_EXCEPTION
- 	bool "exception - raise exception"
--	depends on CMDLINE
- 	depends on ARM || RISCV || SANDBOX || X86
- 	help
- 	  Enable the 'exception' command which allows to raise an exception.
-@@ -2255,14 +2243,12 @@ config CMD_SOUND
- 
- config CMD_SYSBOOT
- 	bool "sysboot"
--	depends on CMDLINE
- 	select PXE_UTILS
- 	help
- 	  Boot image via local extlinux.conf file
- 
- config CMD_QFW
- 	bool "qfw"
--	depends on CMDLINE
- 	select QFW
- 	help
- 	  This provides access to the QEMU firmware interface.  The main
-@@ -2911,4 +2897,5 @@ config CMD_MESON
- 	default y
- 	help
- 	  Enable useful commands for the Meson Soc family developed by Amlogic Inc.
--endmenu
-+
-+endif # CMDLINE
+ 	  Enable this to select a default boot-command suitable for booting
+ 	  with standard boot. This can be overridden by the board if needed,
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 1a033b22018b..ff895b930170 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -14,7 +14,6 @@ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+-CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
+index 47417cb0391d..5230b81be2c4 100644
+--- a/configs/sandbox_defconfig
++++ b/configs/sandbox_defconfig
+@@ -14,7 +14,6 @@ CONFIG_FIT_RSASSA_PSS=y
+ CONFIG_FIT_CIPHER=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+-CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
+index 29ae4532c508..8df2a82c521c 100644
+--- a/configs/sandbox_flattree_defconfig
++++ b/configs/sandbox_flattree_defconfig
+@@ -12,7 +12,6 @@ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+-CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
+index d39e54f98d25..263cc013d68e 100644
+--- a/configs/sandbox_noinst_defconfig
++++ b/configs/sandbox_noinst_defconfig
+@@ -20,7 +20,6 @@ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_LOAD_FIT=y
+-CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
+index 4a67af2f088f..a84c6d2ba248 100644
+--- a/configs/sandbox_spl_defconfig
++++ b/configs/sandbox_spl_defconfig
+@@ -20,7 +20,6 @@ CONFIG_FIT=y
+ CONFIG_FIT_SIGNATURE=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_LOAD_FIT=y
+-CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
+diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
+index 8d76f19729b9..60fb1701708a 100644
+--- a/configs/sandbox_vpl_defconfig
++++ b/configs/sandbox_vpl_defconfig
+@@ -27,7 +27,6 @@ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_FIT_BEST_MATCH=y
+ CONFIG_SPL_LOAD_FIT=y
+-CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_BOOTSTAGE_FDT=y
 -- 
 2.42.0.655.g421f12c284-goog
 
