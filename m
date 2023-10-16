@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9F1CCDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 21:33:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E670CCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 21:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CE3F86D2D;
-	Mon, 16 Oct 2023 23:32:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 036E786E37;
+	Mon, 16 Oct 2023 23:32:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="I9148xvk";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hGJyu+bx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6ADB886B79; Mon, 16 Oct 2023 23:32:13 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 2FDF386C39; Mon, 16 Oct 2023 23:32:16 +0200 (CEST)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BF0F86E2F
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 23:32:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1C9486E04
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 23:32:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5a7af52ee31so60888577b3.2
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:32:02 -0700 (PDT)
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-5a7af45084eso64383447b3.0
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:32:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697491921; x=1698096721; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697491930; x=1698096730; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FsA59635c7onPnB5CEmmXLiAG8ZjI2vui4Th0RFojqE=;
- b=I9148xvkcAGa3vdZR3WqtG8PqoUmwK733EnNc3w7J42BHSPACX9+RVVgkPr03fAEJK
- xrETmimMbQvJCzIjHYRV8xe6Me921qrso1BU7FkNdsXZ0ws1mRO2zrpOKSauko0kOX+2
- S0MnDN9woZAo5K8jgdsKAeulSqat66QQktkDQ=
+ :subject:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=p+oIK89zh9rnmfNJ8n7h84IuB4KLNuVSquEwTc9eKGM=;
+ b=hGJyu+bxSMHbEwaV7l9SmqnQJf/Px79MJ+wPSO8s5n0KYKtT4sfn2cSxZEnMDQU8Yb
+ YKfiOnt1AcQStpzHlBZEN1TcSrP3wmzexqXzfl3gRL0RuvCLZcuMHJHAIeMhqZ0Kopuw
+ mFqC+6iMRgJoqGECsck4T3Smv+aF0nibpvIqc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697491921; x=1698096721;
+ d=1e100.net; s=20230601; t=1697491930; x=1698096730;
  h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :subject:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FsA59635c7onPnB5CEmmXLiAG8ZjI2vui4Th0RFojqE=;
- b=Pxk3iKnG7btxYXwTbrbHXihg9ajYE7t9wx+G9YTTZaUj1kyEaVUM9SsyBV+Pp+WHLF
- J9RZ1qHXVSrNVYB7TsSdzHg0b+29LAk6eGY2lLbMuL9gQ/2zcaQl4ptt9o0QePn84ics
- XAQ2fqoSV+r//DKyQIYk521mVKh4saG7hX6+IEVHcdrM6Sbr+GBi+8NDUrmSdERZcVTD
- bzlAM2/IddtkPORHGpDygIs+yCSJVojGhObX2hjBA8VAfPIqJzW2Ohe2IaTVYGvg5UWv
- MnfSbS5eB5bXTvYzRhAvrUiHlLCAoVcbiPubHqIdirtrtUD3+VZpXtxoUN3C791G8dKE
- Gp+w==
-X-Gm-Message-State: AOJu0YzKgn65LXlIOIUVX4wPwskhzJhiDlIkyCAG/aobfDEx5LysAnqN
- OtWZWnMWBmL1mvLX+hziuapEfA==
-X-Google-Smtp-Source: AGHT+IHSVNsRnxoJVSCOheyb0IwgYngD7rsp2kaCiNwFVSqQyQM+6AMI8Sk/vsZ9j/IvVayI+MAE5Q==
-X-Received: by 2002:a05:690c:fc1:b0:5a7:fc84:4314 with SMTP id
- dg1-20020a05690c0fc100b005a7fc844314mr427609ywb.40.1697491921062; 
- Mon, 16 Oct 2023 14:32:01 -0700 (PDT)
+ bh=p+oIK89zh9rnmfNJ8n7h84IuB4KLNuVSquEwTc9eKGM=;
+ b=T4aEJRIqSLG5TlcsD3glPxUemTbnvqyAa7y5p3GyMAioKwsJZVVOFuJn0dVqgOf4O5
+ AXYdF7AG+W83M6WHqbxq61E2fpJCt8v+EkjlWSeGVjEIb97fIS0sKGlOXkJYQsnmDjIc
+ kXgJNqoO7SRo6aKihZNBEgjGZCeMxBm2bXhbynnqle2qp4y/9zooRdyohM/yhokQGPLI
+ y9oIKYRolivD3nxlZ70AcHg7y/hyqXRAWwGoeB//LtemAGooZIIPvf8d7P9ldiNeTIhC
+ jRFgQsmycrtr555k1pxABetbbCmyYNteYPmlf70yishXQ/g5MTsVoTek32DHNZ0m0JQv
+ c4Ww==
+X-Gm-Message-State: AOJu0YwWoP1YFSjKhgAe4WVE+0CdZjW5rn8rbZW974cbX+s9FQ+UB2OW
+ DywugVvhon7lXxVdPoEEnjNCO/U7Elf9RKzbPXVuMg==
+X-Google-Smtp-Source: AGHT+IGUNWUrRUXqSD+cL0/keldFJ4ieaeF00soQMPCzK+/1q7ap1fwpq4wH06eczkBhEeNg57PjIw==
+X-Received: by 2002:a0d:cf43:0:b0:5a2:15bc:b32c with SMTP id
+ r64-20020a0dcf43000000b005a215bcb32cmr330963ywd.42.1697491930421; 
+ Mon, 16 Oct 2023 14:32:10 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- v5-20020a81a545000000b0054bfc94a10dsm34083ywg.47.2023.10.16.14.31.59
+ q4-20020a0de704000000b005a4d922cf77sm28820ywe.119.2023.10.16.14.32.09
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 14:32:00 -0700 (PDT)
-Date: Mon, 16 Oct 2023 17:31:58 -0400
+ Mon, 16 Oct 2023 14:32:09 -0700 (PDT)
+Date: Mon, 16 Oct 2023 17:32:08 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Paul Walmsley <paul.walmsley@sifive.com>, Green Wan <green.wan@sifive.com>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
- Simon Glass <sjg@chromium.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Roger Knecht <rknecht@pm.me>, Neil Armstrong <neil.armstrong@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Alexey Romanov <avromanov@sberdevices.ru>,
- Dzmitry Sankouski <dsankouski@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 6/6] eeprom: starfive: add 'mac raw' command
-Message-ID: <20231016213158.GM3119521@bill-the-cat>
-References: <20230930120147.59482-1-heinrich.schuchardt@canonical.com>
- <20230930120147.59482-7-heinrich.schuchardt@canonical.com>
+To: u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] cmd: Convert existing long help messages to the new
+ macro
+Message-ID: <20231016213208.GO3119521@bill-the-cat>
+References: <20231007191308.2222470-1-trini@konsulko.com>
+ <20231007191308.2222470-2-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="A1d8R3+Pzse8UTdm"
+ protocol="application/pgp-signature"; boundary="ZD5J9V6YN2vkgWlJ"
 Content-Disposition: inline
-In-Reply-To: <20230930120147.59482-7-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231007191308.2222470-2-trini@konsulko.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,38 +93,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---A1d8R3+Pzse8UTdm
+--ZD5J9V6YN2vkgWlJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Sep 30, 2023 at 02:01:47PM +0200, Heinrich Schuchardt wrote:
+On Sat, Oct 07, 2023 at 03:13:08PM -0400, Tom Rini wrote:
 
-> Add a sub-command to print a hexdump of the EEPROM content.
+> - Generally we just drop the #ifdef CONFIG_SYS_LONGHELP and endif lines
+>   and use U_BOOT_LONGHELP to declare the same variable name as before
+> - In a few places, either rename the variable to follow convention or
+>   introduce the variable as it was being done inline before.
 >=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---A1d8R3+Pzse8UTdm
+--ZD5J9V6YN2vkgWlJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUtq84ACgkQFHw5/5Y0
-tyz4pQwAsFUhIYK5m4x/t9nsQujcBIOTM3tKNw4DXXRWs/22ZZLnsrITaUedn9RB
-D+QYSmF+tnXygKnJYKdO5yvJftc9yKY3a0w9iDXJAqsjsxwfFiChJhyq3QrbkxeN
-HmM+rlbUnkbLueZ1UZOAWxd+QUNaAf8av4CM3gO3iqoNKQCctbB9bSzzsx+1pdmb
-hV4dNGciX1Vznru5Sex6Qw1ZtLaPCG/eBF/gVKHhWpJC+YW2UiNTgvS/72ObXwJK
-o1kB3Ui42azzJjEmk1LkkbsoszS2LwV4z/6Ll/SLTOIpHl5/IdfMmFuRB4wQ/uU6
-YzAaLx08SpbhF0aBSu6N/1alT7E8ud8AriC56HqIkSqWmxDb7L9eRKDVgPXnBOvK
-xcC7M6UITtO0aANgLJBfMJcB7ap18Cjx5+mBgWR1uAm8dL/sfx8r445ZS/GwDzIu
-r/7bOji5ma+ccUfTk0nQXcTnm78edyC6+9JVwZKJbk8wi4QM9e18vFNdDaff3eN7
-VRgSC1ch
-=S4wm
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUtq9gACgkQFHw5/5Y0
+tyxt0gv+OcigVloRw+IYdOfVxKRPdcswH4lMVreowDZWFMpbmJm8O2tHfrxv0vfr
+m18x/C4m/3qz9oSTPU+Oi837JNCbmrxCwUfXaAxUwfhhPQG6303piNbTEHbwCrgp
+sRfRsdFh2+EYoZl8dYtWDREHx7fXZM7brhxkTuwx8r9uXX0GfcRtmj5FY/bSfJHB
+HUI8eo4X0m8c/seleqrt1Va0682MZuYe5Rvbu36Z6CMQtq78DQu9AYzEgFCRzyUa
+hN3pgl6iTPNgWR+ASZbsHwn+oK4rfG+Phc68AnQ2irr2MFok28Ah7G6nSKsqObGA
+QVlRg2DfQmC615ag3EymQYXbcqxu5xQghI1FPScuF/xFNFVTmDRsXfZodiBGNqqe
+FYjRg0Qz4ZDj8rTdJ6QsWAafM5TssR4H4KojvEjc/4WH2MJouATiZMn4btsVKOR8
+vsh2sEm/mMoKEWPSoAyDh/KYeLuq+y4QVXwqywx+k1NqIZn8/72GAVRa9GAExDWF
+ywwsO46G
+=Eokh
 -----END PGP SIGNATURE-----
 
---A1d8R3+Pzse8UTdm--
+--ZD5J9V6YN2vkgWlJ--
