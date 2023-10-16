@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55ED8CDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:41:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55A39CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:42:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5693F86F60;
-	Tue, 17 Oct 2023 00:33:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6953186F5F;
+	Tue, 17 Oct 2023 00:33:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="db/aZduk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NnHOUDT0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AADC086EE3; Tue, 17 Oct 2023 00:32:34 +0200 (CEST)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id C7A2B803AE; Tue, 17 Oct 2023 00:32:54 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A531803AE
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:32:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5DB7586EE3
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:32:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-5a7ad24b3aaso62309807b3.2
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:32:22 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-77575233633so362630785a.0
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:32:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495538; x=1698100338; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697495567; x=1698100367; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/wjs53QFL3yvc4NqV7Tx92CS+xTzb2wHc3+DCn+jYLY=;
- b=db/aZdukC7wpL1xTaO6Rns09cr2d4WX2DrqKxnUxp0CTPeHuvkY2LhhP/OLQeECkm9
- UEkSJ61Kpn6ijY2WmyUQmtGLTrrKRJwVkSkkPMYqel2+bUGnRbTgCEhGpXmelzp6UR1L
- OHFg+rfzJM01Dk2VlEsGIUzsVv+R3HfZFUutc=
+ bh=yXFqehmLVhNeOJtN5biaVlaeQwlKgxrcWw0bs/J9Yis=;
+ b=NnHOUDT0SBm8GplrpNO3vm8fjEwzdJ8MdSJgzryLyxMbs9KlHetlu6r17DpfYfybul
+ O5B959dWBd/guYjA86AfZ8MqqkR5QPRbPwben44QUD3O0Gqdd1egOzBfTttkWlkRcu++
+ GGTyD1ftrfeDml5LnVhvSXXDxGzpbjxD4E5Ps=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495538; x=1698100338;
+ d=1e100.net; s=20230601; t=1697495567; x=1698100367;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/wjs53QFL3yvc4NqV7Tx92CS+xTzb2wHc3+DCn+jYLY=;
- b=NotOQf5dM2nWoyy1opcU4hgFyrY4pg5lOcwVrbedTqVeQTsIClkX/Lkp5eOaQ1+Lol
- X/nsTAlhtIjeRqEC2BQzw1Z1L2VTdFKJEE4RqophFwpTw6eR6PM3OmLUVjam0uGk+ZyI
- yEHkktWZ0ZJ3CD7ggHaYU8xEcsj0NJ/LNPzK1+Eq90u/BtUlMmE0SlK7nUhPgU1YQYFY
- 6IlGKBIodOC3hHDb6X3oAAp/dFOwSXhgXJzpLQSe8se1CpBY9w5cfQhULtQC5zgk0eZ9
- XgpGKZrbodayShRC8LJINzOOSAi43WCufWFi4qSBAbasckuTdwURfP6f1uAqzkdxHRNC
- qrVg==
-X-Gm-Message-State: AOJu0YyqfYWu+P5i3Y6wQ9x1t/cTXloHS1A/mez9OPj9Of1mpo5FepVc
- 0lBJ4AaqPg9PFuU7SRi6PXaRXCXQXkSG1CwiNG4SNw==
-X-Google-Smtp-Source: AGHT+IE3HwDNGOa9NdZRrR2M5Gv/jHy016WdGoB8Cf2UGfmcvi4xy8YOHTfBKb1RKs/qwunLBAEEVA==
-X-Received: by 2002:a0d:eac6:0:b0:59f:61b6:f584 with SMTP id
- t189-20020a0deac6000000b0059f61b6f584mr536293ywe.9.1697495538718; 
- Mon, 16 Oct 2023 15:32:18 -0700 (PDT)
+ bh=yXFqehmLVhNeOJtN5biaVlaeQwlKgxrcWw0bs/J9Yis=;
+ b=iEGDK+IR3wcjAqpMMCihJatyYvVULeHhcFoiju3gW/XTE8mQ5zTfHKiFzCFxQLAkGv
+ eHcOXjX+/2OTHXOTKo2sWm2DXfjqopw6bbqwLiIuEw6Zuo3W71y3G3HOeRTxUz3hIG03
+ h2ChMBK4IlbAr0r/43GSbQEkUIzZo+Z5F1QTzNSJjdBHwzvMMiNWqujOprXjoMJl+wAv
+ wLDVh1LU22DChc8hxwLQd7z9N3h8MVdHbRIuxhTzHAC9qwTdDYI2bw1lXmmR0UCtZqso
+ kBEN//fjEx7mFkPwSEGzA8nkuAYZV1f4qUAvoMLUbdXKQz96RiSMRTlTe0/l+xrlYuOx
+ N2Og==
+X-Gm-Message-State: AOJu0YwAqpwyLX8d2m5YMqcnpvCMJMqlJtYvr1madp+9NAtX5ZQdAlkE
+ QqmlxJJa9FcXwb52w1c3hAW+tkCW78h7CfOBt9txmg==
+X-Google-Smtp-Source: AGHT+IF51mpIqxlYza5fdje81FL00tYA8Xs7OIwFIKzGbGfXsd4NdmEyh8irfvTiATg/DVZPtUd83w==
+X-Received: by 2002:a05:620a:459e:b0:774:2e8f:2170 with SMTP id
+ bp30-20020a05620a459e00b007742e8f2170mr616312qkb.4.1697495567031; 
+ Mon, 16 Oct 2023 15:32:47 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.32.11
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.32.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:32:18 -0700 (PDT)
+ Mon, 16 Oct 2023 15:32:46 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 24/32] Add a new Kconfig for command-line entry
-Date: Mon, 16 Oct 2023 16:28:15 -0600
-Message-ID: <20231016222835.596572-25-sjg@chromium.org>
+Subject: [PATCH v3 27/32] cmd: Make all commands depend on CMDLINE
+Date: Mon, 16 Oct 2023 16:28:18 -0600
+Message-ID: <20231016222835.596572-28-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
 References: <20231016222835.596572-1-sjg@chromium.org>
@@ -88,76 +88,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present EXPO requires CMDLINE since it uses cli_readline, which is
-enabled by CMDLINE. It should be possible to enter lines of text to an
-expo without having CMDLINE available.
-
-Fix this dependency by creating a new Kconfig for cli_readline
+If this option is disabled, commands should not be available. Convert
+the CMDLINE option into a menuconfig and make every command in
+cmd/Kconfig depend on it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Add new patch with a Kconfig for command-line entry
+(no changes since v1)
 
- boot/Kconfig    | 1 +
- cmd/Kconfig     | 1 +
- common/Kconfig  | 7 +++++++
- common/Makefile | 2 +-
- 4 files changed, 10 insertions(+), 1 deletion(-)
+ cmd/Kconfig | 31 +++++++++----------------------
+ 1 file changed, 9 insertions(+), 22 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 2fbe70245ec9..e71de0647bc5 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -649,6 +649,7 @@ config EXPO
- 	bool "Support for expos - groups of scenes displaying a UI"
- 	depends on VIDEO
- 	default y if BOOTMETH_VBE
-+	select CLI_READLINE
- 	help
- 	  An expo is a way of presenting and collecting information from the
- 	  user. It consists of a collection of 'scenes' of which only one is
 diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 3b4112d9f319..5cb45f9c025e 100644
+index 491737ca8ba7..b6fdbc6ff3b1 100644
 --- a/cmd/Kconfig
 +++ b/cmd/Kconfig
-@@ -3,6 +3,7 @@ menu "Command line interface"
- config CMDLINE
- 	bool "Support U-Boot commands"
+@@ -1,7 +1,5 @@
+-menu "Command line interface"
+-
+-config CMDLINE
+-	bool "Support U-Boot commands"
++menuconfig CMDLINE
++	bool "Command line interface"
  	default y
-+	select CLI_READLINE
+ 	select CLI_READLINE
  	help
- 	  Enable U-Boot's command-line functions. This provides a means
- 	  to enter commands into U-Boot for a wide variety of purposes. It
-diff --git a/common/Kconfig b/common/Kconfig
-index 1ffb055744d9..df5bac646491 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1164,3 +1164,10 @@ endif
+@@ -12,9 +10,10 @@ config CMDLINE
+ 	  Depending on the number of commands enabled, this can add
+ 	  substantially to the size of U-Boot.
  
- config IO_TRACE
- 	bool
++if CMDLINE
 +
-+config CLI_READLINE
-+	bool
-+	help
-+	  Enables support for reading a line of text from the user, This
-+	  feature is used by the command-line interpreter and also by expo,
-+	  which needs to read text when textline objects are used.
-diff --git a/common/Makefile b/common/Makefile
-index e22ced0c507f..a9c18c61895c 100644
---- a/common/Makefile
-+++ b/common/Makefile
-@@ -38,7 +38,7 @@ obj-$(CONFIG_SPLASH_SOURCE) += splash_source.o
- obj-$(CONFIG_MENU) += menu.o
- obj-$(CONFIG_UPDATE_COMMON) += update.o
- obj-$(CONFIG_USB_KEYBOARD) += usb_kbd.o
--obj-$(CONFIG_CMDLINE_EDITING) += cli_cread.o
-+obj-$(CONFIG_CLI_READLINE) += cli_cread.o
- obj-$(CONFIG_CMDLINE) += cli_readline.o cli_simple.o
+ config HUSH_PARSER
+ 	bool "Use hush shell"
+-	depends on CMDLINE
+ 	help
+ 	  This option enables the "hush" shell (from Busybox) as command line
+ 	  interpreter, thus enabling powerful command line syntax like
+@@ -26,7 +25,6 @@ config HUSH_PARSER
  
- endif # !CONFIG_SPL_BUILD
+ config CMDLINE_EDITING
+ 	bool "Enable command line editing"
+-	depends on CMDLINE
+ 	default y
+ 	help
+ 	  Enable an editing function for interactive, command-line-input
+@@ -52,15 +50,13 @@ config CMDLINE_PS_SUPPORT
+ 
+ config AUTO_COMPLETE
+ 	bool "Enable auto complete using TAB"
+-	depends on CMDLINE
+ 	default y
+ 	help
+ 	  Enable auto completion of commands using TAB.
+ 
+ config SYS_LONGHELP
+ 	bool "Enable long help messages"
+-	depends on CMDLINE
+-	default y if CMDLINE
++	default y
+ 	help
+ 	  Defined when you want long help messages included
+ 	  Do not set this option when short of memory.
+@@ -98,8 +94,7 @@ config SYS_CBSIZE
+ 
+ config SYS_XTRACE
+ 	bool "Command execution tracer"
+-	depends on CMDLINE
+-	default y if CMDLINE
++	default y
+ 	help
+ 	  This option enables the possiblity to print all commands before
+ 	  executing them and after all variables are evaluated (similar
+@@ -238,7 +233,6 @@ menu "Boot commands"
+ 
+ config CMD_BOOTD
+ 	bool "bootd"
+-	depends on CMDLINE
+ 	default y
+ 	help
+ 	  Run the command stored in the environment "bootcmd", i.e.
+@@ -405,7 +399,7 @@ config SYS_BOOTM_LEN
+ 
+ config CMD_BOOTEFI
+ 	bool "bootefi"
+-	depends on EFI_LOADER && CMDLINE
++	depends on EFI_LOADER
+ 	default y
+ 	help
+ 	  Boot an EFI image from memory.
+@@ -437,7 +431,6 @@ source lib/efi_selftest/Kconfig
+ 
+ config CMD_BOOTMENU
+ 	bool "bootmenu"
+-	depends on CMDLINE
+ 	select MENU
+ 	select CHARSET
+ 	help
+@@ -504,7 +497,6 @@ config CMD_GO
+ 
+ config CMD_RUN
+ 	bool "run"
+-	depends on CMDLINE
+ 	default y
+ 	help
+ 	  Run the command in the given environment variable.
+@@ -595,7 +587,6 @@ menu "Environment commands"
+ 
+ config CMD_ASKENV
+ 	bool "ask for env variable"
+-	depends on CMDLINE
+ 	help
+ 	  Ask for environment variable
+ 
+@@ -1715,7 +1706,6 @@ if NET
+ 
+ menuconfig CMD_NET
+ 	bool "Network commands"
+-	depends on CMDLINE
+ 	default y
+ 	imply NETDEVICES
+ 
+@@ -2019,7 +2009,6 @@ config CMD_ETHSW
+ 
+ config CMD_PXE
+ 	bool "pxe"
+-	depends on CMDLINE
+ 	select PXE_UTILS
+ 	help
+ 	  Boot image via network using PXE protocol
+@@ -2154,7 +2143,6 @@ config CMD_EFICONFIG
+ 
+ config CMD_EXCEPTION
+ 	bool "exception - raise exception"
+-	depends on CMDLINE
+ 	depends on ARM || RISCV || SANDBOX || X86
+ 	help
+ 	  Enable the 'exception' command which allows to raise an exception.
+@@ -2255,14 +2243,12 @@ config CMD_SOUND
+ 
+ config CMD_SYSBOOT
+ 	bool "sysboot"
+-	depends on CMDLINE
+ 	select PXE_UTILS
+ 	help
+ 	  Boot image via local extlinux.conf file
+ 
+ config CMD_QFW
+ 	bool "qfw"
+-	depends on CMDLINE
+ 	select QFW
+ 	help
+ 	  This provides access to the QEMU firmware interface.  The main
+@@ -2911,4 +2897,5 @@ config CMD_MESON
+ 	default y
+ 	help
+ 	  Enable useful commands for the Meson Soc family developed by Amlogic Inc.
+-endmenu
++
++endif # CMDLINE
 -- 
 2.42.0.655.g421f12c284-goog
 
