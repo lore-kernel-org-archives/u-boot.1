@@ -4,53 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 224F3CDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 08:31:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92901CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 08:32:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93AA48652F;
-	Mon, 16 Oct 2023 10:31:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B1585865D0;
+	Mon, 16 Oct 2023 10:31:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697445094;
-	bh=v/TJs2cEqDmddDDd+TF/Ru2Ej5abWHvR5Tg4p8PJ524=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1697445118;
+	bh=ilKhawlNrxvD5eyCbrnl170hsbf7q0E87lkfgCk+utU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=zyTLBRrqbHfStrXOCfEPSkkUgLu7xtWelbyDeiIkDLcwBWuPQejKzgqO+OAPYkh6m
-	 q9gL91XbCOLpGw6Q61N+J2brMGV2iIHmrpjjxzIMWgt5fcrWCeQS1t5eZwu+qBMFp/
-	 pIDYGjGggpH5YfYAmu5vRj6RB4ycenCNr6ss1Rjx2+gyNvoxi6mTPaVlyKUwDgbVbP
-	 LChPW3ePBMP5Zp4rMTa+TXRIdsPdfPId2j9fb1+49VDeh5NvmAT7vgI1NgTEuQU46V
-	 S1T6TM1ArwUIJYzFBpPDnyILaIkxplTrF68V0r6HF/9sbTBTm76Tnx/QdoVSRj+dz3
-	 Q1gfIWeElBTmg==
+	b=JfDCGqbDzcJCHGoYO7wNf5+klm8qQ5lZx4FOzZsWxrdQy5e0s1GgLn3ing4SiTYtf
+	 OfqMHP9I2JeRPGmme+0SmaxmjKnPUmht1YuxhoA/d2mJ+XgkGJDfj6JZePhc9fxloH
+	 6yxlH0dDrazhfuNOezwuF+3LDQeebrItZA6ng7aT23JV5TdEBXmw6AISfgxy4oqPjd
+	 7zUblfQxJOVqOkxadKPzKFcX9AOb8M0OmoDWVs5iAgoiWQDsEbMdBlYPq1Hzz7vAK+
+	 csInjJ7EwUdUEX8aCh9ti2Qzjf4chqzmcJYyqggAZrszGCo/e3WMc8Awc1L2A6bM0l
+	 8q9Eo77F0Zgzg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF4BF86784; Mon, 16 Oct 2023 10:31:24 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id 724588644E; Mon, 16 Oct 2023 10:31:55 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E23C68656E
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 10:31:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF37786C3E
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 10:31:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4S89Lc6jpbz9sZS;
- Mon, 16 Oct 2023 10:31:20 +0200 (CEST)
-Message-ID: <4f447979-49e9-4873-905d-52b965f90892@denx.de>
-Date: Mon, 16 Oct 2023 10:31:20 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4S89M345Tgz9slp;
+ Mon, 16 Oct 2023 10:31:43 +0200 (CEST)
+Message-ID: <2d6f7df3-481a-4c95-99d0-0337c48675e5@denx.de>
+Date: Mon, 16 Oct 2023 10:31:43 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] cyclic: doc: Update documentation for
- CONFIG_CYCLIC_MAX_CPU_TIME_US
+Subject: Re: [PATCH] arm: mvebu: Enable bootstd for Synology DS116 board
 Content-Language: en-US
-To: Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
-References: <20231007105236.155361-1-o451686892@gmail.com>
+To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+References: <20231007213548.20276-1-mibodhi@gmail.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231007105236.155361-1-o451686892@gmail.com>
+In-Reply-To: <20231007213548.20276-1-mibodhi@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4S89M345Tgz9slp
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,12 +69,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/7/23 12:52, Weizhao Ouyang wrote:
-> Cyclic now just print a warning once instead of disabling the cyclic
-> function when the cyclic function upon exceeding CPU time usage.
+On 10/7/23 23:35, Tony Dinh wrote:
+> Enable bootstd for Synology DS116 board, and remove distroboot.
 > 
-> Fixes: ddc8d36a7455 ("cyclic: Don't disable cylic function upon exceeding CPU time")
-> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 
 Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -80,24 +80,61 @@ Thanks,
 Stefan
 
 > ---
->   doc/develop/cyclic.rst | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
 > 
-> diff --git a/doc/develop/cyclic.rst b/doc/develop/cyclic.rst
-> index 43bedacb9f..be70a54f67 100644
-> --- a/doc/develop/cyclic.rst
-> +++ b/doc/develop/cyclic.rst
-> @@ -11,8 +11,8 @@ on a high frequent polling (e.g. UART rx char ready check) might be
->   delayed too much. To detect cyclic functions with a too long execution
->   time, the Kconfig option `CONFIG_CYCLIC_MAX_CPU_TIME_US` is introduced,
->   which configures the max allowed time for such a cyclic function. If it's
-> -execution time exceeds this time, this cyclic function will get removed
-> -from the cyclic list.
-> +execution time exceeds this time, cyclic will print a warning once to show
-> +this potential problem to the user.
+>   configs/ds116_defconfig |  3 ++-
+>   include/configs/ds116.h | 12 +-----------
+>   2 files changed, 3 insertions(+), 12 deletions(-)
+> 
+> diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
+> index 0cd546c223..2437be73cd 100644
+> --- a/configs/ds116_defconfig
+> +++ b/configs/ds116_defconfig
+> @@ -28,7 +28,8 @@ CONFIG_SYS_LOAD_ADDR=0x800000
+>   CONFIG_PCI=y
+>   CONFIG_DEBUG_UART=y
+>   CONFIG_AHCI=y
+> -CONFIG_DISTRO_DEFAULTS=y
+> +CONFIG_BOOTSTD_FULL=y
+> +CONFIG_BOOTSTD_DEFAULTS=y
+>   CONFIG_BOOTDELAY=10
+>   CONFIG_USE_PREBOOT=y
+>   CONFIG_SYS_CONSOLE_INFO_QUIET=y
+> diff --git a/include/configs/ds116.h b/include/configs/ds116.h
+> index 031f4f6afc..0883ec4d53 100644
+> --- a/include/configs/ds116.h
+> +++ b/include/configs/ds116.h
+> @@ -20,15 +20,8 @@
+>    */
+>   #include "mv-common.h"
 >   
->   Registering a cyclic function
->   -----------------------------
+> -/* Include the common distro boot environment */
+>   #ifndef CONFIG_SPL_BUILD
+>   
+> -#define BOOT_TARGET_DEVICES(func) \
+> -	func(USB, usb, 0) \
+> -	func(SCSI, scsi, 0) \
+> -	func(PXE, pxe, na) \
+> -	func(DHCP, dhcp, na)
+> -
+>   #define KERNEL_ADDR_R	__stringify(0x1000000)
+>   #define FDT_ADDR_R	__stringify(0x2000000)
+>   #define RAMDISK_ADDR_R	__stringify(0x2200000)
+> @@ -42,14 +35,11 @@
+>   	"scriptaddr=" SCRIPT_ADDR_R "\0" \
+>   	"pxefile_addr_r=" PXEFILE_ADDR_R "\0"
+>   
+> -#include <config_distro_bootcmd.h>
+> -
+>   #define CFG_EXTRA_ENV_SETTINGS \
+>   	RELOCATION_LIMITS_ENV_SETTINGS \
+>   	LOAD_ADDRESS_ENV_SETTINGS \
+>   	"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
+> -	"console=ttyS0,115200\0" \
+> -	BOOTENV
+> +	"console=ttyS0,115200\0"
+>   
+>   #endif /* CONFIG_SPL_BUILD */
+>   
 
 Viele Grüße,
 Stefan Roese
