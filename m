@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01132CDB47E
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 00:24:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60488CDB47E
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 01:42:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA77086958;
-	Mon, 16 Oct 2023 02:24:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C60F864AA;
+	Mon, 16 Oct 2023 03:42:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nodpC5Hu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eP/jiwQI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFFDB86BCD; Mon, 16 Oct 2023 02:24:46 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
+ id B0BA08656E; Mon, 16 Oct 2023 03:42:33 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF780867D6
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 02:24:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CCA0E86380
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 03:42:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6c61dd1c229so755216a34.0
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 17:24:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-99bdcade7fbso601605466b.1
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 18:42:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697415883; x=1698020683; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=h5o/UyDgPpyiZLWQba4p+eRXq+ZZeZBMpfME4g8zRVA=;
- b=nodpC5HuBd2zIrkbgTgqVGC68pHPkGOfxPfK9oTIuVH1w3ojUOxLFVCzkIc0gPGaXf
- GVItjctTb2/S3WHlm6xTnxbKswUnVqCkjKijVuPfrInvM4/7vWxCOWD26fXIRINEYAS6
- CZrV1dqmESObcqcP6ltafZwrJKfMGnPnjhLxW/OJ4hWPXzdk1OtG/SVNDVRXcyYyF2hM
- pVN35rQvNiO8GUyKlNBPjdh3UIVVTfJGvF5F3+rREGHVCd4/cRsOh2GdUn4DdCYeCeK+
- A2RBvTrp4+jF3qnmbFwxjZJxqUhlEICKJn5L1vBMsYVD1j01dWey/redHNLyciZZeo+X
- S2Ag==
+ d=gmail.com; s=20230601; t=1697420540; x=1698025340; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=PDIoV2s44MCzjQ2lzRCimtojFMLoL8Wtz1W//3/IP4A=;
+ b=eP/jiwQI0eUGmOYMjSnkkOokNUnWB4SpCispb/Osxf2PmNGZRYqan9JHfiR+IWPNMl
+ gfV7+5HZ2PKE7srj8SwPXqG8bIwlckDG/3uFqTFnoVVlOnQspOHP+Ig53DmhnzoTHj9V
+ 3t61y1gIOSHp0twlUb58m8SHrnzIITYS9PIn3kO7TA2XjlHtKmiJG/9WY+7i47MTN/zb
+ sUDAfAUc8Hx5mChJKUaPOS0DN4YZQ6HuBiDagc1nyiV6tGNZypQy/aZQSPKcKSb6h5gd
+ EccMI+CjzrIRcKzuFes1vtg+0JsOWsZRh1v+HcWedwdUT0aShBWo7BC62PPW2fnl8JSb
+ 00Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697415883; x=1698020683;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=h5o/UyDgPpyiZLWQba4p+eRXq+ZZeZBMpfME4g8zRVA=;
- b=lqO2Z3hTYAKVUSrYgoYSViI8KQ2BvF7+tIosW8F0hL9tSA8NwRw+hHnJxp/o8tyZ0M
- zH/Wqh0XR4sBjsngRMHQ2Qzjo3sFqSfNEplhr+7rKDMKtqiHCtBxyh6CHbskYeDkG8RS
- 5VmtXFierhjKHSxskehml+oMqXGvczPxv4QmaEGIILB2Qo1ebdvK6FB3qHZAMb4e+quj
- elCD9ZiuYbFP4ge1w0iZS0YMKGitH13SSOAsOLWKYHXg4ISAWG1skkx4H7+0q50ZoUHb
- YUXMBzW5/Aq6/9eQVrKXSSytOAa274I8bIGNP1gHu3LaU6rnVUPu+24sqcCV8DvMSZkR
- bZjg==
-X-Gm-Message-State: AOJu0YwNDsZ1aFNDhxomnu+YWm2HDBHBCa3BQzX/OZxoqS1g5Mpcvmop
- BPNqYKvi/rSDaAI3XV3y2dc=
-X-Google-Smtp-Source: AGHT+IE7+G7ER0GA1vprVv3ohpib4zKUCO3uuo4UHCl+Tw4ucqQCNUG+mIspXhFCrtEw/TEJhiDBiw==
-X-Received: by 2002:a05:6830:43ab:b0:6b8:7653:dd66 with SMTP id
- s43-20020a05683043ab00b006b87653dd66mr41277159otv.0.1697415883377; 
- Sun, 15 Oct 2023 17:24:43 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:8216:dd32:2c9d:bf33])
- by smtp.gmail.com with ESMTPSA id
- o27-20020aa7979b000000b006bde8e1f0adsm1369891pfp.98.2023.10.15.17.24.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Oct 2023 17:24:42 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: marex@denx.de, peng.fan@nxp.com, u-boot@lists.denx.de,
- Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v4] imx8mp-evk: Add USB0 OTG support
-Date: Sun, 15 Oct 2023 21:24:37 -0300
-Message-Id: <20231016002437.641898-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1697420540; x=1698025340;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PDIoV2s44MCzjQ2lzRCimtojFMLoL8Wtz1W//3/IP4A=;
+ b=ExKrj559rNjW4wB4mVQfsv5Ze9yRKU0EdGiHJJj86BW+Jj1G7FOrj7zESg38bLz6DK
+ XROAkLRd2vPaBIhT00uSmbbYwLdpukGMRnGoqpiWtr7T1Tz/52UHk9gXu6OSGEDU6K67
+ p5HP9bWg9rkMURK99Pw1JNhNgtdKuBhJRAhwUGxpdPAv7vgqVoHNprfE+1araYBWOL9n
+ HTcrv0FWxi7BPlOiF4eHupingRKCNYK506om5VVj/IK0G1zgRgxA3yON0kZ0ElMuIS1/
+ cm8HMnDJn3QXhHsXDSy/Fhb0kOxJkupRVN6IDdMlsb0dU8WiYcOVgx5VVhy7+wi9Obs5
+ OQlg==
+X-Gm-Message-State: AOJu0YzhDyAM+7d64xTnJGYU8ZP0pakaO3S6sddYjTB+iiyPWsDu1ged
+ eajUDffA+O6b5PgHPS09j1nj8W3u+0PdSWm/sg8=
+X-Google-Smtp-Source: AGHT+IHYI3nlYkdCMdxJYMtIh7gAive7Aww4Ed3AwDmO1UjiF02nWVDouHbtLq5KDF7FSc+onchsBmA+VdA9NNJ09to=
+X-Received: by 2002:a17:907:a088:b0:9c3:f1e3:3b4b with SMTP id
+ hu8-20020a170907a08800b009c3f1e33b4bmr1659127ejc.49.1697420540017; Sun, 15
+ Oct 2023 18:42:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20230317162253.1049446-1-paul.liu@linaro.org>
+ <20230317162253.1049446-2-paul.liu@linaro.org>
+ <CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=J0oHyvN75bTaCUw@mail.gmail.com>
+ <fac6ef1747ec318787f90a6d0c81163b@kernel.org>
+ <CAFOYHZAmWj6cgXib+m3Dy+mABcwEmPWAHLUgxeBe=2JVLsgaYQ@mail.gmail.com>
+In-Reply-To: <CAFOYHZAmWj6cgXib+m3Dy+mABcwEmPWAHLUgxeBe=2JVLsgaYQ@mail.gmail.com>
+From: Chris Packham <judge.packham@gmail.com>
+Date: Mon, 16 Oct 2023 14:42:08 +1300
+Message-ID: <CAFOYHZCNKJBv+J7dkoOjmPrfjr2TXB_vLqzKB2X4u0iwRpOCgA@mail.gmail.com>
+Subject: Re: [PATCH 1/3] arm64: Use FEAT_HAFDBS to track dirty pages when
+ available
+To: Marc Zyngier <maz@kernel.org>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ u-boot <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,119 +92,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On Sun, Oct 15, 2023 at 10:29=E2=80=AFAM Chris Packham <judge.packham@gmail=
+.com> wrote:
+>
+>
+>
+> On Sat, 14 Oct 2023, 11:04 am Marc Zyngier, <maz@kernel.org> wrote:
+>>
+>> On 2023-10-13 03:40, Chris Packham wrote:
+>> > Hi Marc, Paul,
+>> >
+>> > On Sat, Mar 18, 2023 at 5:23=E2=80=AFAM Ying-Chun Liu (PaulLiu)
+>> > <paul.liu@linaro.org> wrote:
+>> >>
+>> >> From: Marc Zyngier <maz@kernel.org>
+>> >>
+>> >> Some recent arm64 cores have a facility that allows the page
+>> >> table walker to track the dirty state of a page. This makes it
+>> >> really efficient to perform CMOs by VA as we only need to look
+>> >> at dirty pages.
+>> >>
+>> >> Signed-off-by: Marc Zyngier <maz@kernel.org>
+>> >> [ Paul: pick from the Android tree. Rebase to the upstream ]
+>> >> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+>> >> Cc: Tom Rini <trini@konsulko.com>
+>> >> Link:
+>> >> https://android.googlesource.com/platform/external/u-boot/+/3c433724e=
+6f830a6b2edd5ec3d4a504794887263
+>> >
+>> > I think this may have caused a regression for the Marvell AC5X
+>> > board(s). I found that v2023.07 locked up at boot but v2023.01 was
+>> > fine. The lockup seemed to be in the 'Net:' init probably just as the
+>> > mvneta driver was being initialised.
+>> >
+>> > A git bisect led me to this change although for this specific change
+>> > instead of the lockup I get a crash so maybe I'm actually hitting a
+>> > different issue.
+>> >
+>> > Any thoughts as to why this may have caused problems?
+>>
+>> Not really. What CPUs does this platform have? What is the offending
+>> driver doing to trigger the issue? Can you provide some level of
+>> tracing?
+>
+>
+> The Marvell AC5X is a network switch ASIC with an integrated ARMv8 CPU (8=
+.1 specifically I think).
+>
+> I think there is something that the mvneta driver is doing triggering the=
+ issue. I have another AC5X based board without an Ethernet port that boots=
+ just fine (this is also why I didn't notice earlier).
+>
+> I'll try and get some more debug out when I'm back in the office
+>
 
-Add USB0 OTG support.
+The thing the mvneta driver does that upsets things appears to be
 
-Currently, the USB0 OTG nodes are not enabled in the Linux kernel
-devicetree.
+    mmu_set_region_dcache_behaviour((phys_addr_t)bd_space, BD_SPACE,
+                                                          DCACHE_OFF);
 
-For this reason, enable the USB0 OTG nodes inside imx8mp-evk-u-boot.dtsi
-for now.
-
-Also select several useful options such as USB gadget and fastboot.
-
-Tested by running "ums 0 mmc 2".
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
-Reviewed-by: Marek Vasut <marex@denx.de>
----
-Changes since v3:
-- Fixed the alphabetical order once again.
-
- arch/arm/dts/imx8mp-evk-u-boot.dtsi | 13 ++++++++++++
- configs/imx8mp_evk_defconfig        | 31 +++++++++++++++++++++++++++++
- 2 files changed, 44 insertions(+)
-
-diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-index 6784ed2e7c92..f4fd2432ca8f 100644
---- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-@@ -111,6 +111,19 @@
- 	bootph-pre-ram;
- };
- 
-+&usb_dwc3_0 {
-+	dr_mode = "peripheral";
-+	status = "okay";
-+};
-+
-+&usb3_0 {
-+	status = "okay";
-+};
-+
-+&usb3_phy0 {
-+	status = "okay";
-+};
-+
- &usdhc1 {
- 	bootph-pre-ram;
- };
-diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-index 14c749f44308..820dc36e9cdd 100644
---- a/configs/imx8mp_evk_defconfig
-+++ b/configs/imx8mp_evk_defconfig
-@@ -59,6 +59,9 @@ CONFIG_CMD_FUSE=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_SDP=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_CACHE=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_CMD_EXT4_WRITE=y
-@@ -74,6 +77,14 @@ CONFIG_ETHPRIME="eth1"
- CONFIG_SPL_DM=y
- CONFIG_CLK_COMPOSITE_CCF=y
- CONFIG_CLK_IMX8MP=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0x42800000
-+CONFIG_FASTBOOT_BUF_SIZE=0x20000000
-+CONFIG_FASTBOOT_FLASH=y
-+CONFIG_FASTBOOT_UUU_SUPPORT=y
-+CONFIG_FASTBOOT_FLASH_MMC_DEV=2
-+CONFIG_FASTBOOT_MMC_BOOT_SUPPORT=y
-+CONFIG_FASTBOOT_MMC_USER_SUPPORT=y
- CONFIG_MXC_GPIO=y
- CONFIG_DM_PCA953X=y
- CONFIG_DM_I2C=y
-@@ -94,10 +105,15 @@ CONFIG_DWC_ETH_QOS=y
- CONFIG_DWC_ETH_QOS_IMX=y
- CONFIG_FEC_MXC=y
- CONFIG_MII=y
-+CONFIG_PHY=y
-+CONFIG_PHY_IMX8MQ_USB=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_IMX8M=y
- CONFIG_SPL_POWER_LEGACY=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_IMX8M_POWER_DOMAIN=y
-+CONFIG_IMX8MP_HSIOMIX_BLKCTRL=y
- CONFIG_POWER_PCA9450=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
-@@ -109,4 +125,19 @@ CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_PSCI=y
- CONFIG_SYSRESET_WATCHDOG=y
-+CONFIG_USB=y
-+# CONFIG_SPL_DM_USB is not set
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_XHCI_DWC3=y
-+CONFIG_USB_XHCI_DWC3_OF_SIMPLE=y
-+CONFIG_USB_EHCI_HCD=y
-+# CONFIG_USB_EHCI_MX7 is not set
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="FSL"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0525
-+CONFIG_USB_GADGET_PRODUCT_NUM=0xa4a5
-+CONFIG_SDP_LOADADDR=0x0
- CONFIG_IMX_WATCHDOG=y
--- 
-2.34.1
-
+I can comment that line out and everything works.
