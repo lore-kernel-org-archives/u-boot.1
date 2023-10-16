@@ -4,70 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD961CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 11:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D86ECDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 11:49:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7C5E8667B;
-	Mon, 16 Oct 2023 13:45:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6FD128667B;
+	Mon, 16 Oct 2023 13:49:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cQoA0hTh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HuxWwmTR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0191A867D6; Mon, 16 Oct 2023 13:45:44 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A404586BF7; Mon, 16 Oct 2023 07:35:18 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3270286335
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 13:45:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F85B86801
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 07:35:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39GBjZZR084882;
- Mon, 16 Oct 2023 06:45:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1697456735;
- bh=DAPoemc9HhEb1IIETRLi8ZM09YnM2uYnPhP0zCnrOuM=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=cQoA0hThI6GvexdExwqd2amiPl6pHQEnBjsjBrX+lFk1ui1zpLxkEvrFPTXJw6eIL
- q+eEK8X/GLOWTWvegOt+6HxX51IDhQtlNTXqIt26G6GJy75t41yqj+k4J0tAB1nPPz
- O2ZMdxl09QI8sUMVnSCuIpPSjBx3keBr7JKt7Ucw=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39GBjZjX093470
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 16 Oct 2023 06:45:35 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 16
- Oct 2023 06:45:34 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 16 Oct 2023 06:45:35 -0500
-Received: from [10.24.68.114] (ileaxei01-snat.itg.ti.com [10.180.69.5])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39GBjWgJ105799;
- Mon, 16 Oct 2023 06:45:33 -0500
-Message-ID: <ee189e3a-7ba2-4367-9ba4-4a959bf8bdf9@ti.com>
-Date: Mon, 16 Oct 2023 17:15:31 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=iuncuim@gmail.com
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-507a3b8b113so1752633e87.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 22:35:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697434510; x=1698039310; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RX5oUMTvXjyALKUlW8ByqYU+GsWMab76MLfoc4SlNs0=;
+ b=HuxWwmTRJ1827R2HyiYP/uFgcwrN8+FUXtJWXOCIv/kUzchBlRmPq1J462h18euOVg
+ NCCigiXDA5yyKLu/MUJ3OIrSwhqy+jyQFf4soIucyj0BwgXCedIdULZoDyHVQckIItZl
+ 0RBTuFuUzNR6GZoJgXwiNawx52wMIkAkH/iaBvrtbO6H7Q/27TLRrOuxlawGzOoQRtSa
+ Nhpc39bgW9boZdtauwmGkQSXo4mLcP3fOksle6/7wrXVm+hCVMifzLeOhngu8O2KNPTc
+ gJSjpNg7aCCVcgNPTndfdjeQCF1t+deLqytP5KuPKHyUBsKeMSAxuHQ2lfLrda5wTUF3
+ ntew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697434510; x=1698039310;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RX5oUMTvXjyALKUlW8ByqYU+GsWMab76MLfoc4SlNs0=;
+ b=qaUiv4U3miosBCiSjLCZPCu+4ciiVhBHmMhZB2otX+1q4MLlRYQJH1QzMukh2kJX5X
+ HnbrJ1uT+mONMBp4/g7p06ybu3sPce7hF0F2EJVfOHeZo7Za1fbX0E0j5mAWFBSIKT2n
+ PdJiaF6049Mjoz/b/J+5oARGv8eo8jkVmtt6vhj9ETZ+HyP3+dLyujZ4A2mgZMESTRCS
+ pSkZ/tS+Cx41W3X0np6uiSirdEFjBatKOmzFi6FpNtMoKc8r8WgGurnB3R7HEmnWz8WO
+ V75Qd2rs7HK9Py18Uy1HV4aJsjDLOqYD2EcE2vrxa0coiHJfWLktoPY9UtihAW2Iia3s
+ gM6Q==
+X-Gm-Message-State: AOJu0YzrYlAk+qFRLbrb3KX8hKhR4+rJ7WhnzrFrCj+E49KOvfokDxEL
+ tfqisxhvzc3H6JdlkuatOKY=
+X-Google-Smtp-Source: AGHT+IGy1WZi3rRSrgv0cf5sRB3Gepqcu2zAG/Ouc5aIHlegv0f34O7lfQEA2rihysGiLI39G4nDHA==
+X-Received: by 2002:a19:9111:0:b0:507:9e56:5b1c with SMTP id
+ t17-20020a199111000000b005079e565b1cmr5041919lfd.13.1697434510009; 
+ Sun, 15 Oct 2023 22:35:10 -0700 (PDT)
+Received: from SerialExperiment.lan ([46.251.195.25])
+ by smtp.gmail.com with ESMTPSA id
+ n14-20020a05651203ee00b00507987edd22sm1527031lfq.156.2023.10.15.22.35.07
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 15 Oct 2023 22:35:09 -0700 (PDT)
+From: Mikhail Kalashnikov <iuncuim@gmail.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 0/1] sunxi: H616: add LPDDR4 support
+Date: Mon, 16 Oct 2023 08:34:40 +0300
+Message-ID: <20231016053441.3197087-1-iuncuim@gmail.com>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] binman: Don't add compression attribute for
- uncompressed files
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Bin Meng <bmeng.cn@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Philippe Reynes
- <philippe.reynes@softathome.com>, Stefan Herbrechtsmeier
- <stefan.herbrechtsmeier@weidmueller.com>
-References: <20231014204033.3077052-1-sjg@chromium.org>
- <20231014204033.3077052-3-sjg@chromium.org>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20231014204033.3077052-3-sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Mon, 16 Oct 2023 13:49:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,121 +92,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon
+From: iuncuim <iuncuim@gmail.com>
 
-On 15/10/23 02:10, Simon Glass wrote:
-> cbfsutil changed to skip adding a compression attribute if there is no
-> compression. Adjust the binman implementation to do the same.
-> 
-> This mirrors commit 105cdf5625 in coreboot.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->   tools/binman/cbfs_util.py      | 13 ++++++++-----
->   tools/binman/cbfs_util_test.py |  8 ++++----
->   tools/binman/ftest.py          |  6 +++---
->   3 files changed, 15 insertions(+), 12 deletions(-)
-> 
-> diff --git a/tools/binman/cbfs_util.py b/tools/binman/cbfs_util.py
-> index fc56b40b7531..92d2add25146 100644
-> --- a/tools/binman/cbfs_util.py
-> +++ b/tools/binman/cbfs_util.py
-> @@ -333,7 +333,8 @@ class CbfsFile(object):
->           if self.ftype == TYPE_STAGE:
->               pass
->           elif self.ftype == TYPE_RAW:
-> -            hdr_len += ATTR_COMPRESSION_LEN
-> +            if self.compress:
-> +                hdr_len += ATTR_COMPRESSION_LEN
->           elif self.ftype == TYPE_EMPTY:
->               pass
->           else:
-> @@ -369,9 +370,11 @@ class CbfsFile(object):
->                   data = self.comp_bintool.compress(orig_data)
->               self.memlen = len(orig_data)
->               self.data_len = len(data)
-> -            attr = struct.pack(ATTR_COMPRESSION_FORMAT,
-> -                               FILE_ATTR_TAG_COMPRESSION, ATTR_COMPRESSION_LEN,
-> -                               self.compress, self.memlen)
-> +            if self.compress:
-> +                attr = struct.pack(ATTR_COMPRESSION_FORMAT,
-> +                                   FILE_ATTR_TAG_COMPRESSION,
-> +                                   ATTR_COMPRESSION_LEN, self.compress,
-> +                                   self.memlen)
->           elif self.ftype == TYPE_EMPTY:
->               data = tools.get_bytes(self.erase_byte, self.size)
->           else:
-> @@ -405,7 +408,7 @@ class CbfsFile(object):
->           if expected_len != actual_len:  # pragma: no cover
->               # Test coverage of this is not available since this should never
->               # happen. It probably indicates that get_header_len() is broken.
-> -            raise ValueError("Internal error: CBFS file '%s': Expected headers of %#x bytes, got %#d" %
-> +            raise ValueError("Internal error: CBFS file '%s': Expected headers of %#x bytes, got %#x" %
->                                (self.name, expected_len, actual_len))
->           return hdr + name + attr + pad + content + data, hdr_len
->   
-> diff --git a/tools/binman/cbfs_util_test.py b/tools/binman/cbfs_util_test.py
-> index ee951d10cf3b..c3babbc64e78 100755
-> --- a/tools/binman/cbfs_util_test.py
-> +++ b/tools/binman/cbfs_util_test.py
-> @@ -96,7 +96,7 @@ class TestCbfs(unittest.TestCase):
->           self.assertEqual(arch, cbfs.arch)
->           return cbfs
->   
-> -    def _check_uboot(self, cbfs, ftype=cbfs_util.TYPE_RAW, offset=0x38,
-> +    def _check_uboot(self, cbfs, ftype=cbfs_util.TYPE_RAW, offset=0x28,
->                        data=U_BOOT_DATA, cbfs_offset=None):
->           """Check that the U-Boot file is as expected
->   
-> @@ -122,7 +122,7 @@ class TestCbfs(unittest.TestCase):
->           self.assertEqual(len(data), cfile.memlen)
->           return cfile
->   
-> -    def _check_dtb(self, cbfs, offset=0x38, data=U_BOOT_DTB_DATA,
-> +    def _check_dtb(self, cbfs, offset=0x28, data=U_BOOT_DTB_DATA,
->                      cbfs_offset=None):
->           """Check that the U-Boot dtb file is as expected
->   
-> @@ -598,8 +598,8 @@ class TestCbfs(unittest.TestCase):
->           data = cbw.get_data()
->   
->           cbfs = cbfs_util.CbfsReader(data)
-> -        self.assertEqual(0x38, cbfs.files['u-boot'].cbfs_offset)
-> -        self.assertEqual(0x78, cbfs.files['u-boot-dtb'].cbfs_offset)
-> +        self.assertEqual(0x28, cbfs.files['u-boot'].cbfs_offset)
-> +        self.assertEqual(0x68, cbfs.files['u-boot-dtb'].cbfs_offset)
->   
->   
->   if __name__ == '__main__':
-> diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-> index 16156b741052..2875194d750e 100644
-> --- a/tools/binman/ftest.py
-> +++ b/tools/binman/ftest.py
-> @@ -2670,9 +2670,9 @@ class TestFunctional(unittest.TestCase):
->               'cbfs/u-boot:offset': 0x38,
->               'cbfs/u-boot:uncomp-size': len(U_BOOT_DATA),
->               'cbfs/u-boot:image-pos': 0x38,
-> -            'cbfs/u-boot-dtb:offset': 0xb8,
-> +            'cbfs/u-boot-dtb:offset': 0xa8,
->               'cbfs/u-boot-dtb:size': len(U_BOOT_DATA),
-> -            'cbfs/u-boot-dtb:image-pos': 0xb8,
-> +            'cbfs/u-boot-dtb:image-pos': 0xa8,
->               }, props)
->   
->       def testCbfsBadType(self):
-> @@ -2854,7 +2854,7 @@ class TestFunctional(unittest.TestCase):
->   '  u-boot                  0     4  u-boot             0',
->   '  section               100   %x  section          100' % section_size,
->   '    cbfs                100   400  cbfs               0',
-> -'      u-boot            138     4  u-boot            38',
-> +'      u-boot            128     4  u-boot            28',
->   '      u-boot-dtb        180   105  u-boot-dtb        80          3c9',
->   '    u-boot-dtb          500   %x  u-boot-dtb       400          3c9' % fdt_size,
->   '  fdtmap                %x   3bd  fdtmap           %x' %
+At the moment, the driver only supports DDR3 and LPDDR3 memory.
+Add support for a new type DRAM.
+These changes have been successfully tested by me with orangepi
+zero3 4GB (DRAM: Rayson RS1G32LO4D2BDS-53BT).
+This patch should be applied after this:
+https://lore.kernel.org/all/20231014170236.16211-1-andre.przywara@arm.com/
 
-Reviewed-by: Neha Malcom Francis
+Changes from v1:
+ * replaced the phy_init array with one compatible with opizero3
+ * added DRAM TPR6 parameter
+ * adaptation to new mctl_phy_configure_odt()
+ * added timings for the board orangepi zero3 4GB 
+https://lore.kernel.org/u-boot/20230729111331.173768-2-iuncuim@gmail.com/
+
+Signed-off-by: Mikhail Kalashnikov <iuncuim@gmail.com>
+
+iuncuim (1):
+  sunxi: H616: add LPDDR4 DRAM support
+
+ .../include/asm/arch-sunxi/dram_sun50i_h616.h |   2 +
+ arch/arm/mach-sunxi/Kconfig                   |  16 ++
+ arch/arm/mach-sunxi/dram_sun50i_h616.c        | 176 ++++++++++++++----
+ arch/arm/mach-sunxi/dram_timings/Makefile     |   1 +
+ .../dram_timings/h616_lpddr4_2133.c           |  97 ++++++++++
+ 5 files changed, 258 insertions(+), 34 deletions(-)
+ create mode 100644 arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
 
 -- 
-Thanking You
-Neha Malcom Francis
+2.42.0
+
