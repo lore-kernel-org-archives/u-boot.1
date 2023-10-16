@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA2DFCDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92DDBCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:31:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DF8C868C1;
-	Tue, 17 Oct 2023 00:29:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4745F86E11;
+	Tue, 17 Oct 2023 00:29:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CCjd3wlf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Zs5SmXip";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FF9986DEB; Tue, 17 Oct 2023 00:29:10 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 6FE8D86DEB; Tue, 17 Oct 2023 00:29:33 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04A3B803AE
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:29:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19FA086E11
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:29:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-7741c5bac51so290473085a.1
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:29:03 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-777506ccc6cso234296685a.3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:29:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495342; x=1698100142; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=mLiY86zZAt8qjqATvugju+FGcGr9LW7TOJwkF0ThZAY=;
- b=CCjd3wlfgyqdR2kZ6C/mgaHLUsiUDFWzgfqhQR37tTWzUs7h/yOB7WIiEPTkkn3z9K
- rafsmLyaMNBYqZRCkrTscGfNWwTkF/lO4hNojF1JeV/5wEy7Vd+myGYUWKOpujO+PCtU
- +plDCYKDMPPvfd5FyNrEd7/+P5EffybWNjiCQ=
+ d=chromium.org; s=google; t=1697495355; x=1698100155; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pAguHdyktXjPmGTZPVhtMyyU325vYwu/cAeHxTw1AK8=;
+ b=Zs5SmXipDBIx48F1yt6KE5Ohvp0C9/ospV1LjpBnPrnaL7H5ak9UI0KoNZ6b10na8+
+ OQzqiTtO1JnR5vvBzLyNb8FW3Gj0zfBt6aShQSsndCik0ElS2feHfRsI9Z6m4QFm9xgS
+ l2n5P/+XKKUyzt3YDu2mu9b8k56fmvbyW+iTI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495342; x=1698100142;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=mLiY86zZAt8qjqATvugju+FGcGr9LW7TOJwkF0ThZAY=;
- b=T2w0CkltRYH+yDeP0KDpvFSUra08FFJtFGYR0v1YSVSelJ82T0m/w8TiOe07tlzt6B
- vPaiiFVTlB+8xPCr2YYstTXMdEbCcVHOeqa9St82dNopNasuwrFEzyjiUbaNzWPfvWmj
- DUUg/vpBdPrPPZReapBl6mn/TXki/5Cv4MtvYJRZ6aGO3x2Ioqm+CQqKFCGTCIOoKP/q
- 3FVecnLgszaZQtA2V8UYKASDvXClw8NJm54j/AwAqZgmdBcdN0M41xiMIo8K/5Ur/pri
- Y7/chC0UssEyFgiYQyIdfvytYHnI0FpTCnwFzF2UPzcGhNxFGAgzwobY2bNk9jrb39Pc
- hg6Q==
-X-Gm-Message-State: AOJu0YyiZe7iE3swNZEzUt+8bTgin0SCU37t9JXzI1rygiVxc3VdnQP6
- +/fob97hNGza1AmEMDGhXGtJbDllnAKdAfKbKDkIIQ==
-X-Google-Smtp-Source: AGHT+IH+ruPLDFDx8i8TqFtZnoftkwxWKLRbZcH1BNQUsupPosiDkCtpIZbVyG8DAqh3hzSwqGSs/w==
-X-Received: by 2002:ae9:e30b:0:b0:765:aa35:f03f with SMTP id
- v11-20020ae9e30b000000b00765aa35f03fmr488224qkf.37.1697495342388; 
- Mon, 16 Oct 2023 15:29:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697495355; x=1698100155;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pAguHdyktXjPmGTZPVhtMyyU325vYwu/cAeHxTw1AK8=;
+ b=ldBXVfDGUL2h03ehkPuUGC5XB1Pmzh9QPMZmYXJ8MCH8wKExKxIrO2oGh1Drm3QAr0
+ RfG6ZmVvzf3NJQb9AmcmAZZubh9vHfupt+waq0MnX6LoqP8BwKpgqexrEPtnfW0LtK/5
+ oFZDPX1pgozXoH1urHhteNxqIfV9jPgPCVbkm9GHn4Y/1/Ssg8t74X8nKipC+FNdGKKO
+ Ml7JBUYZJohSXYrekMLk4+EQOnMlzqczEy7jQ69OIZYGXaW3IBv5N9MAFXeJ2yKwDEXz
+ HNJ+vevDSEmOzAOzqlW2B4ZmKroJHvuSEE76M6O3dYDKiwjhcRKq7ZIRNK+H0TXViDkS
+ JhJQ==
+X-Gm-Message-State: AOJu0Yxd/D4pccVO8/n0JFeDG1MJ0HpI5TxRoreiJL4KJsx4qTFIKbo1
+ 8CiSAFbScA/2UwC3j3DVATUE9X5mM3SBVh1AOgyopg==
+X-Google-Smtp-Source: AGHT+IEGPS4HVDT2tCqxPBPwfoMyi7sHPx1+PppM8TfbkwOOqPXdvKlHx/XQXWeS/SZwZ5oMNGu9rw==
+X-Received: by 2002:a05:620a:4446:b0:776:fb0c:6b5c with SMTP id
+ w6-20020a05620a444600b00776fb0c6b5cmr658137qkp.13.1697495355731; 
+ Mon, 16 Oct 2023 15:29:15 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.28.46
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.29.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:29:02 -0700 (PDT)
+ Mon, 16 Oct 2023 15:29:15 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Anatolij Gustschin <agust@denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jerry Van Baren <vanbaren@cideas.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v3 00/32] Tidy up use of CONFIG_CMDLINE
-Date: Mon, 16 Oct 2023 16:27:51 -0600
-Message-ID: <20231016222835.596572-1-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 01/32] buildman: Use oldconfig when adjusting the config
+Date: Mon, 16 Oct 2023 16:27:52 -0600
+Message-ID: <20231016222835.596572-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
+In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
+References: <20231016222835.596572-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,137 +88,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It should be possible to disable CONFIG_CMDLINE and have all commands
-and related functionality dropped from U-Boot. This is useful when
-trying to reduce the size of U-Boot.
+We cannot be sure that the new config is consistent, particularly when
+changing a major item like CONFIG_CMDLINE. Use 'make oldconfig' to
+check that and avoid any such problems.
 
-Recent changes have stopped this from working.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-This series repairs the feature for sandbox and adds a test to stop it
-breaking again.
+(no changes since v1)
 
-Note that quite a lot of functionality is lost if CONFIG_CMDLINE is
-disabled, e.g. networking and most booting options. Further work is
-needed to make the option more generally useful.
+ tools/buildman/builder.py       | 2 +-
+ tools/buildman/builderthread.py | 6 ++++++
+ tools/buildman/func_test.py     | 4 +++-
+ 3 files changed, 10 insertions(+), 2 deletions(-)
 
-Changes in v3:
-- Reword commit message slightly
-- Add an explation as to why this patch is here
-- Fix 'ut' typo
-- Just drop the condition instead
-- Add new patch to rearrange the Kconfig for CMD_BOOTEFI_BOOTMGR
-- Add new patch with a Kconfig for command-line entry
-- Add new patch with a Kconfig for command-line entry
-- Reorder the Kconfig options a little
-- Add new patch to tidy up semicolon after command macros
-- Rebase on Tom's LONGHELP series
-- Correct 'of' typo
-
-Changes in v2:
-- Move AUTOBOOT_USE_MENUKEY under AUTOBOOT
-- Change this to use a Kconfig dependency instead of code failing
-- Adjust the depends on the commands, instead of EFI_LOADER
-- Add new patch to update EFI_LOADER to depend on DM_ETH
-- Add new patch to drop discarding of command linker-lists
-- Add new patch to unify the U_BOOT_ENV_LOCATION conditions
-
-Simon Glass (32):
-  buildman: Use oldconfig when adjusting the config
-  bootstd: Correct dependencies on CMDLINE
-  autoboot: Correct dependencies on CMDLINE
-  cmd: Add a few more dependencies on CMDLINE
-  test: Make UNIT_TEST depend on CMDLINE
-  sifive: Drop an unnecessary #ifdef
-  fastboot: Declare a dependency on CMDLINE
-  cli: Always build cli_getch
-  cmd: Use an #ifdef around run_commandf()
-  Move bootmenu_conv_key() into its own file
-  pxe: Depend on CMDLINE
-  env: Split out non-command code into a new file
-  console: Move SYS_PBSIZE into common/
-  bootm: Allow building when cleanup functions are missing
-  fdt: Move working_fdt into fdt_support
-  net: Depend on CONFIG_CMDLINE
-  log: Allow use without CONFIG_CMDLINE
-  video: Allow use without CONFIG_CMDLINE
-  video: Dont require the font command
-  efi: Make commands depend on CMDLINE
-  efi: Rearrange the Kconfig for CMD_BOOTEFI_BOOTMGR
-  efi: Update EFI_LOADER to depend on DM_ETH
-  cli: Split command-line-editing into its own file
-  Add a new Kconfig for command-line entry
-  Add a new Kconfig for command-line history
-  sandbox: Disable CONFIG_DISTRO_DEFAULTS
-  cmd: Make all commands depend on CMDLINE
-  sandbox: Avoid requiring cmdline
-  arm: x86: Drop discarding of command linker-lists
-  mmc: env: Unify the U_BOOT_ENV_LOCATION conditions
-  treewide: Tidy up semicolon after command macros
-  sandbox: Add a test for disabling CONFIG_CMDLINE
-
- arch/Kconfig                       |  11 +-
- arch/arm/cpu/u-boot.lds            |   3 -
- arch/arm/lib/bootm.c               |   2 +
- arch/x86/cpu/u-boot-64.lds         |   4 -
- arch/x86/cpu/u-boot-spl.lds        |   4 -
- arch/x86/cpu/u-boot.lds            |   4 -
- board/freescale/common/vid.c       |   2 +-
- board/xilinx/common/fru.c          |   2 +-
- board/xilinx/versal/cmds.c         |   2 +-
- board/xilinx/zynqmp/cmds.c         |   2 +-
- boot/Kconfig                       |  58 ++--
- boot/bootm.c                       |  10 +-
- boot/fdt_support.c                 |   5 +
- cmd/Kconfig                        |  50 ++--
- cmd/Makefile                       |   2 +-
- cmd/btrfs.c                        |   2 +-
- cmd/eeprom.c                       |   2 +-
- cmd/ext2.c                         |   4 +-
- cmd/fdt.c                          |   5 -
- cmd/fs.c                           |   8 +-
- cmd/nvedit.c                       | 122 +--------
- cmd/pinmux.c                       |   2 +-
- cmd/qfw.c                          |   2 +-
- common/Kconfig                     |  12 +
- common/Makefile                    |  10 +-
- common/cli.c                       |   2 +
- common/cli_cread.c                 | 407 +++++++++++++++++++++++++++++
- common/cli_getch.c                 |   1 +
- common/cli_readline.c              | 384 +--------------------------
- common/log.c                       |   4 +-
- common/menu.c                      |  40 ---
- common/menu_key.c                  |  49 ++++
- configs/sandbox64_defconfig        |   1 -
- configs/sandbox_defconfig          |   1 -
- configs/sandbox_flattree_defconfig |   1 -
- configs/sandbox_noinst_defconfig   |   1 -
- configs/sandbox_spl_defconfig      |   1 -
- configs/sandbox_vpl_defconfig      |   1 -
- drivers/fastboot/Kconfig           |   1 +
- drivers/video/Kconfig              |   2 +-
- drivers/video/console_truetype.c   |   4 +
- env/Makefile                       |   1 +
- env/env_set.c                      | 132 ++++++++++
- env/mmc.c                          |   2 +-
- include/bootm.h                    |  15 +-
- include/cli.h                      |  31 +++
- include/command.h                  |   2 +-
- include/env_internal.h             |  23 ++
- include/k210/pll.h                 |   2 +-
- lib/efi_loader/Kconfig             |   7 +-
- lib/efi_loader/Makefile            |   2 +-
- net/Kconfig                        |   1 +
- test/Kconfig                       |   1 +
- test/py/tests/test_sandbox_opts.py |  20 ++
- tools/buildman/builder.py          |   2 +-
- tools/buildman/builderthread.py    |   6 +
- tools/buildman/func_test.py        |   4 +-
- 57 files changed, 833 insertions(+), 648 deletions(-)
- create mode 100644 common/cli_cread.c
- create mode 100644 common/menu_key.c
- create mode 100644 env/env_set.c
- create mode 100644 test/py/tests/test_sandbox_opts.py
-
+diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
+index 5305477c5be6..782e59dd5cca 100644
+--- a/tools/buildman/builder.py
++++ b/tools/buildman/builder.py
+@@ -476,7 +476,7 @@ class Builder:
+         Args:
+             commit: Commit object that is being built
+             brd: Board object that is being built
+-            stage: Stage that we are at (mrproper, config, build)
++            stage: Stage that we are at (mrproper, config, oldconfig, build)
+             cwd: Directory where make should be run
+             args: Arguments to pass to make
+             kwargs: Arguments to pass to command.run_pipe()
+diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
+index 6a61f64da1d4..a8599c0bb2a8 100644
+--- a/tools/buildman/builderthread.py
++++ b/tools/buildman/builderthread.py
+@@ -426,6 +426,12 @@ class BuilderThread(threading.Thread):
+ 
+         # Now do the build, if everything looks OK
+         if result.return_code == 0:
++            if adjust_cfg:
++                oldc_args = list(args) + ['oldconfig']
++                oldc_result = self.make(commit, brd, 'oldconfig', cwd,
++                                        *oldc_args, env=env)
++                if oldc_result.return_code:
++                    return oldc_result
+             result = self._build(commit, brd, cwd, args, env, cmd_list,
+                                  config_only)
+             if adjust_cfg:
+diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
+index 55dd494fe8ee..6b88ed815d65 100644
+--- a/tools/buildman/func_test.py
++++ b/tools/buildman/func_test.py
+@@ -439,6 +439,8 @@ class TestFunctional(unittest.TestCase):
+             tools.write_file(fname, b'CONFIG_SOMETHING=1')
+             return command.CommandResult(return_code=0,
+                     combined='Test configuration complete')
++        elif stage == 'oldconfig':
++            return command.CommandResult(return_code=0)
+         elif stage == 'build':
+             stderr = ''
+             fname = os.path.join(cwd or '', out_dir, 'u-boot')
+@@ -461,7 +463,7 @@ Some images are invalid'''
+             return command.CommandResult(return_code=0)
+ 
+         # Not handled, so abort
+-        print('make', stage)
++        print('_HandleMake failure: make', stage)
+         sys.exit(1)
+ 
+     # Example function to print output lines
 -- 
 2.42.0.655.g421f12c284-goog
 
