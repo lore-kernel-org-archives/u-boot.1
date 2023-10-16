@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38F0BCDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:38:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10E4BCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:38:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59CC186DE6;
-	Tue, 17 Oct 2023 00:33:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26FD286F18;
+	Tue, 17 Oct 2023 00:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EFff+npp";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OFYvPljI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D0DF803AE; Tue, 17 Oct 2023 00:32:01 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 3DEB0868C1; Tue, 17 Oct 2023 00:32:02 +0200 (CEST)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31EAD86F2D
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:31:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92C0E86E2F
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:31:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-77063481352so515130585a.1
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:31:38 -0700 (PDT)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-777754138bdso1536685a.1
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:31:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495491; x=1698100291; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697495500; x=1698100300; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hRJze8gIw4hCic8YfZI8lr5I4nBlA2/69lBmFD6Cx8w=;
- b=EFff+nppkVxX8N9IQJnNW5fH3zmzFcxv22PbBJ5BgjdGBpQqmrzRKOI2WCqLyrzkTG
- BNPlX2mfc2PuJAP+cgat73pri17th8dj0Z18XJDYWbIhm3DJAX67w0fUDxL/QLvN01SB
- XH3GB1mC6gwr3yTiZdGhK5vnf3Fxg3nekKB8A=
+ bh=Sd0DCqtFfkJTWG/sbLJRWZvb77dJYwFyWwVYjXwgOQo=;
+ b=OFYvPljIhtoI5m3hhuoJBVRnL5u805Ag71Mrik+nirKRyoDTnZrDn4c1pgfMdJAgDD
+ siF7uYIoGFnTCBqSIr/qsiske3zfd8XOZ57ChlFX0rW6bc5ZUl7UEQCTvw9XDUGUObD3
+ yDGgegqw2EfpdswPLx338xuObG7ORgWbbIqGs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495491; x=1698100291;
+ d=1e100.net; s=20230601; t=1697495500; x=1698100300;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hRJze8gIw4hCic8YfZI8lr5I4nBlA2/69lBmFD6Cx8w=;
- b=G0KZvBhlx8/iazy1saVQFIjXUKlZ6HAyH2DuUoNwo4wQp89u0zK14tnHuIVXmtkrbP
- JFJalq6cPf3xutDXEahOAAYejoV48YFph2emUM+VHViaBaDZo+2pZ2ofYwCVxhs6zjca
- U1R2pOVccthZwbMzO6xsBnlDoOtmF8iMwND8OhtN9Tb9kUPF5cARVZs8bKiY8HDA/Iqq
- Sg6eJGskm5ZN1Z6c3J22zmcDMjTGJiIEtaumpi7kS0qPmYNud+n06O2w/AMeUGD4wz9+
- Jc4fa4Lhe7v55O23Gd1Cg19/xeHrkcEAnCAuf2vSv9SrVRMRRzIJTW0rjlRf70x+yNPq
- o+RA==
-X-Gm-Message-State: AOJu0YyjTLnrQ2y7AUqvKVyI/SBYcWoE4fyPajkqZUwFVVj89h+Ho3UE
- D4tSGLV+wStAav8+Sgub0BeuYja4fpCKpBpKK0W6+w==
-X-Google-Smtp-Source: AGHT+IGgptgfo+BtKGAxDp3CJmnZSeLTFWg79zWCaICdNq0EVQ8dRDuUxg3/8/LJiERxupIjzUoIAA==
-X-Received: by 2002:a05:620a:1aa0:b0:774:21d8:b0bb with SMTP id
- bl32-20020a05620a1aa000b0077421d8b0bbmr179903qkb.24.1697495491116; 
- Mon, 16 Oct 2023 15:31:31 -0700 (PDT)
+ bh=Sd0DCqtFfkJTWG/sbLJRWZvb77dJYwFyWwVYjXwgOQo=;
+ b=RL02sbmvBANFveph1hWa0KD1Gzvdd9k4EJ7vUE5dWuCbpVMEWmENR+/eQlZVPcEERb
+ 8n84CZUHqN11iaM3CkgtUue4IdnkeGKpTYHJvvKJguZokBYfx6jK1fZLAagVpo9n3O4+
+ l2s5l5jTo5rOBOF0b6pxDMjc2qVeG75AwsDjY1ZCylUlKIkuUFRflEcgxyUuzvL1fKGm
+ 0Uj3/r9OI3Auw7XuM3/vZQ1YtFOT9L20O9bFf8Cjg9brlrlwGnRaA1E1rTHZAJlZ1xY/
+ 1UhRKF4F9PhkPKU3gdGJif0rVOR6skwCuMfoFeujWuf9GbW1xkWQjpSavbJf6Uu4kV33
+ 08hw==
+X-Gm-Message-State: AOJu0YySIMJpY3Xl76oVOLBYT3KsebO7vNUtYy6PXxbZWsN+qPLOmGlP
+ 2x1rN79VkrXwZCcsLkaoJRhgjdCxw1Tlwd6wt87w5w==
+X-Google-Smtp-Source: AGHT+IF0kAyuc5qrGlgoziiKshBs0lWeay730oo8Ur+XfMA/9AGJADDB+gJpZf+gCM1nT1NJvRTbtQ==
+X-Received: by 2002:a05:620a:1712:b0:774:13e:71cd with SMTP id
+ az18-20020a05620a171200b00774013e71cdmr594515qkb.56.1697495500455; 
+ Mon, 16 Oct 2023 15:31:40 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.31.25
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.31.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:31:30 -0700 (PDT)
+ Mon, 16 Oct 2023 15:31:40 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Anatolij Gustschin <agust@denx.de>
-Subject: [PATCH v3 19/32] video: Dont require the font command
-Date: Mon, 16 Oct 2023 16:28:10 -0600
-Message-ID: <20231016222835.596572-20-sjg@chromium.org>
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH v3 20/32] efi: Make commands depend on CMDLINE
+Date: Mon, 16 Oct 2023 16:28:11 -0600
+Message-ID: <20231016222835.596572-21-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
 References: <20231016222835.596572-1-sjg@chromium.org>
@@ -88,31 +88,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While it is nice to have the font command, using 'select' makes it
-impossible to build the console code without it. Change this to use
-'imply' instead.
+Most of the EFI functionality requires the command line, so make this
+explicit. Future work could adjust this, but it needs effort within
+the booting support first, like the bootm command.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Suggested-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- drivers/video/Kconfig | 2 +-
+Changes in v2:
+- Adjust the depends on the commands, instead of EFI_LOADER
+
+ cmd/Kconfig | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-index ab927641bb7a..21ea5c860cca 100644
---- a/drivers/video/Kconfig
-+++ b/drivers/video/Kconfig
-@@ -180,7 +180,7 @@ config CONSOLE_ROTATION
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index c6ea5c860e33..46e484fc08b6 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -384,7 +384,7 @@ config SYS_BOOTM_LEN
  
- config CONSOLE_TRUETYPE
- 	bool "Support a console that uses TrueType fonts"
--	select CMD_SELECT_FONT
-+	imply CMD_SELECT_FONT
+ config CMD_BOOTEFI
+ 	bool "bootefi"
+-	depends on EFI_LOADER
++	depends on EFI_LOADER && CMDLINE
+ 	default y
  	help
- 	  TrueTrype fonts can provide outline-drawing capability rather than
- 	  needing to provide a bitmap for each font and size that is needed.
+ 	  Boot an EFI image from memory.
 -- 
 2.42.0.655.g421f12c284-goog
 
