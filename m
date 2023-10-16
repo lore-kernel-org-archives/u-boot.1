@@ -4,69 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60A7CCDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 21:56:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 099D0CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 21:56:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 749AC868C0;
+	by phobos.denx.de (Postfix) with ESMTP id CCB7686E11;
 	Mon, 16 Oct 2023 23:55:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mP1zmL0w";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="e7Ms4XKN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A300586BB3; Mon, 16 Oct 2023 23:55:00 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 5B55886BB3; Mon, 16 Oct 2023 23:55:09 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEDB385423
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 23:54:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FB638669F
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 23:55:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-9b1ebc80d0aso789523566b.0
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:54:58 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-9a58dbd5daeso815098766b.2
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:55:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697493298; x=1698098098; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697493302; x=1698098102; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=k3hN5Xjt+IfYP8zsxCP72ubYri3Xc/VQERrpWTDDUso=;
- b=mP1zmL0wWKv5yDvdymRqmEcZszqHr4TYjGZw1UDw4SgJqthIHV3x/YqxW2enaEinNa
- gkjFj0MgaOEe7+2QsgIC1SGbq4+rF1RlATOTNS9G0tUNEAWMO3TqhmNzCgHFHhpTqeB/
- Kl0qZFtdn1PTrV2L2x6pVxkqKRTXYSFeU8G50=
+ bh=3YWkWP3Owg3i41gWopwE0/+zhmjQO0vcIbH3BO7MAoM=;
+ b=e7Ms4XKNzUPDZnbg6HOwmY5byFC72/EGXdPSfOfVAvhVfdzowwZAF16PejrwKGBZ93
+ WUuzKaFt+1+FD6mlM7oJ99VUKBjoDhBOtc+2U9W5i5i31jqrfV9Z9WSJf7ain4UN//LI
+ L4esze1HI8n1wgPe2sI3JOkTJX2am5n64xU5Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697493298; x=1698098098;
+ d=1e100.net; s=20230601; t=1697493302; x=1698098102;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=k3hN5Xjt+IfYP8zsxCP72ubYri3Xc/VQERrpWTDDUso=;
- b=F+ddtVF2ELn0672IZ0QXEtMx4OnOAsDCHJhEQh5opWsRjqhv1Wo4tSv6oD2eRd1L6P
- R0Cj4NL2Nc3lZOg9zsoxwMzHn4gxJgGtcE9wBjInSvRkY8/tfsedw8ZYWV+3AxXnVp4Z
- ug8x4pWsA01DW+4cnrexTX9n/QWX7CV8RzAckbswp3AHMuxX1ctjs3CI70Sl8ETvSLz0
- eQ0GhpEyRLzswm+kwIJzCVNrlnLIAqA/S4/kjeE0haSzLh9w+zpeyk/d7xDpe2xm8ZVH
- IoLEYlpgwNM6KEuxkvp8TBAxAm5xl7e4f0z8cGMhDJrkvHZx0uPGkgfifiQPfpBEJYfM
- BcWw==
-X-Gm-Message-State: AOJu0YwuN5Wjvt9uU5aVEYJ6cdgtYqhEGz7OCzTPFoey56xaSfcuV2qY
- Nz7l+un0K8l7qtw41z3Td+hh8nyiAeD2A8lfUGrkxSo9Xl9pELNyOrE=
-X-Google-Smtp-Source: AGHT+IEuDUQDTjTihWES9i5a2RrcX4u1LNeAHRnP4n0yA1jrPREVPzz7uRUem3hJNGWXuvkrpan/mnSqv7fjYs1JVp0=
-X-Received: by 2002:a17:906:ef08:b0:9ba:65e:7529 with SMTP id
- f8-20020a170906ef0800b009ba065e7529mr239505ejs.68.1697493297937; Mon, 16 Oct
- 2023 14:54:57 -0700 (PDT)
+ bh=3YWkWP3Owg3i41gWopwE0/+zhmjQO0vcIbH3BO7MAoM=;
+ b=mTrkdpH4ne3Ejf49DULWKD/7IWFiYNKyxmajbYoN5zwEX+QLCYaLLcyVynmVRENCi5
+ 4DlUJHG/tOEOcbsWpBcmiUWLeunZ3mdE7nbktci3VtnQ8cx2+N+ZweFkn5XChYDZOIgh
+ YBMYZAaJ0pP+8Q5zkZh1Ohb8Zvw+R2jeLJ3qInTX1Y/uJkTaicxcHDvM88DCVZfYjNU4
+ FF1xpYFsEKPwZ5qR4h6qbBXv66Pv3TRrCcqfMh/6uHqWwi8l5WLl5Y0S8QGOOfudlkGp
+ ksWA90y+l0N6RsKFXtYRYSOotxYgygwclvCDXZ5h4AuKtJhXvnC87ut52YAf6zIX+UMd
+ 90+A==
+X-Gm-Message-State: AOJu0YyH0UK7aTtJvy5eJrZAGfWXhKoFd7eFrQ8Yvm4XMS5mnH6KIjtf
+ A3pxz8fPFgSLjTFhu4F//zZLBubJ9HBgfyaMTla/2Q==
+X-Google-Smtp-Source: AGHT+IHAmqOPQrxyKuFnx8OxPn+i6XHCY/fekvnXEaPGA1dgJCKjekL5jGeRx565wf58P51KaGSoRw3i4rMnBFEMrLk=
+X-Received: by 2002:a17:906:fe43:b0:9c3:70d5:dc57 with SMTP id
+ wz3-20020a170906fe4300b009c370d5dc57mr297993ejb.40.1697493301910; Mon, 16 Oct
+ 2023 14:55:01 -0700 (PDT)
 MIME-Version: 1.0
-References: <8c0f5bb6-0110-b7b5-3c40-2d8d98a94dfa@gmail.com>
- <fd206328-2ffa-c174-179c-85f6428e5d9f@gmail.com>
-In-Reply-To: <fd206328-2ffa-c174-179c-85f6428e5d9f@gmail.com>
+References: <20231016083522.945453-1-rasmus.villemoes@prevas.dk>
+ <20231016083522.945453-3-rasmus.villemoes@prevas.dk>
+In-Reply-To: <20231016083522.945453-3-rasmus.villemoes@prevas.dk>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 16 Oct 2023 15:54:45 -0600
-Message-ID: <CAPnjgZ2bs2ZE87W71h_4V91M3gyCtCV7vbHVnGwGE+Hmt2LfuQ@mail.gmail.com>
-Subject: Re: [PATCH v4 4/8] rockchip: block: blk-uclass: disable bounce buffer
- support for rkmtd
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, 
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com, 
- u-boot@lists.denx.de
+Date: Mon, 16 Oct 2023 15:54:49 -0600
+Message-ID: <CAPnjgZ2=5VLHvkr1fNQBDE=3FGPG8gzYjYDbz9yt+WtvH=BrHA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] serial: introduce CONFIG_CONSOLE_FLUSH_ON_NEWLINE
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Michal Suchanek <msuchanek@suse.de>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,60 +82,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
-
-On Sun, 15 Oct 2023 at 16:33, Johan Jonker <jbx6244@gmail.com> wrote:
+On Mon, 16 Oct 2023 at 02:36, Rasmus Villemoes
+<rasmus.villemoes@prevas.dk> wrote:
 >
-> Disable bounce buffer support for rkmtd.
+> When debugging, one sometimes only gets partial output lines or
+> nothing at all from the last printf, because the uart has a largish
+> buffer, and the code after the printf() may cause the CPU to hang
+> before the uart IP has time to actually emit all the characters. That
+> can be very confusing, because one doesn't then know exactly where the
+> hang happens.
 >
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+> Introduce a config knob allowing one to wait for the uart fifo to
+> drain whenever a newline character is printed, roughly corresponding
+> to the effect of setvbuf(..., _IOLBF, ...) in ordinary C programs.
+>
+> Since this uses IS_ENABLED() instead of cpp ifdef, we can remove the
+> ifdef around the _serial_flush() definition - if neither
+> CONSOLE_FLUSH_SUPPORT or CONSOLE_FLUSH_ON_NEWLINE are enabled, the
+> compiler elides _serial_flush(), but it won't warn about it being
+> unused.
+>
+> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 > ---
->
-> Changed V3:
->   New patch
-> ---
->  drivers/block/blk-uclass.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-> index 30ad5bbb0024..ac1b43d757d8 100644
-> --- a/drivers/block/blk-uclass.c
-> +++ b/drivers/block/blk-uclass.c
-> @@ -415,7 +415,7 @@ struct blk_bounce_buffer {
->
->  static int blk_buffer_aligned(struct bounce_buffer *state)
->  {
-> -#if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
-> +#if IS_ENABLED(CONFIG_BOUNCE_BUFFER) && !IS_ENABLED(CONFIG_RKMTD)
+>  common/Kconfig                 | 10 ++++++++++
+>  drivers/serial/serial-uclass.c |  8 ++++++--
+>  2 files changed, 16 insertions(+), 2 deletions(-)
 
-We should not have arch-specific code in a generic file. Can you make
-BOUNCE_BUFFER depend on !RKMTD ?
-
->         struct blk_bounce_buffer *bbstate =
->                 container_of(state, struct blk_bounce_buffer, state);
->         struct udevice *dev = bbstate->dev;
-> @@ -441,7 +441,7 @@ long blk_read(struct udevice *dev, lbaint_t start, lbaint_t blkcnt, void *buf)
->                           start, blkcnt, desc->blksz, buf))
->                 return blkcnt;
->
-> -       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER)) {
-> +       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && !IS_ENABLED(CONFIG_RKMTD)) {
->                 struct blk_bounce_buffer bbstate = { .dev = dev };
->                 int ret;
->
-> @@ -478,7 +478,7 @@ long blk_write(struct udevice *dev, lbaint_t start, lbaint_t blkcnt,
->
->         blkcache_invalidate(desc->uclass_id, desc->devnum);
->
-> -       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER)) {
-> +       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && !IS_ENABLED(CONFIG_RKMTD)) {
->                 struct blk_bounce_buffer bbstate = { .dev = dev };
->                 int ret;
->
-> --
-> 2.39.2
->
-
-Regards,
-Simon
+Reviewed-by: Simon Glass <sjg@chromium.org>
