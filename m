@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50EB0CDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:42:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46897CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:42:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF79386F48;
+	by phobos.denx.de (Postfix) with ESMTP id 3B3EA86F79;
 	Tue, 17 Oct 2023 00:33:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vm8j2jpT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="R7LoLCbU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6517486E7C; Tue, 17 Oct 2023 00:33:20 +0200 (CEST)
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
- [IPv6:2607:f8b0:4864:20::f30])
+ id 8C4F4803AE; Tue, 17 Oct 2023 00:33:02 +0200 (CEST)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E8D586F38
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:32:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0764D86DE6
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qv1-xf30.google.com with SMTP id
- 6a1803df08f44-66d1ef93284so27987986d6.3
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:32:50 -0700 (PDT)
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7740aa4b545so343610685a.3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:32:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495555; x=1698100355; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697495549; x=1698100349; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cHJY0VPCR645CVpau8EtYSrLiLuHSgNRjiQaLHCkawY=;
- b=Vm8j2jpThT62v+5zV0chIH1tOqQs7tGgkcue5q9z1VCAcoW2DiKPU+4mq/de1wp2Wk
- cAAZZEIvPl2LCBfIDz2rSgSB7Zpboo3HE76MSfXi7RFYWE5BHFkF7eD+4nw5JCybCA9r
- 3nRa+lfT0eluvMBZPW3H4mZIrlDqzHm78e9Xw=
+ bh=+/GPz9OHpCzTtjXcfC3UFckfJh1DsJSGo9tpNks8mnU=;
+ b=R7LoLCbUxGN7rRuosMqCoogZ+UvhBue0fw0GCSDcn+jg4Ib4XSNojqpV3aHl2V9aQ9
+ iLL/4PV5xPEGosfY0kmBl+9rEZcL9qcfS9HoRT6sMjFYg0d5GF5f61mwDpFOolaESlFE
+ Hh7XOrmfvhVKawHYFJ0ShiPofaQOiwL+cniVg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495555; x=1698100355;
+ d=1e100.net; s=20230601; t=1697495549; x=1698100349;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cHJY0VPCR645CVpau8EtYSrLiLuHSgNRjiQaLHCkawY=;
- b=Z3MOBMKPNaqXP+nbpmZoMdRqtHyWkxazrcO0z+GPPxDJMzh9uLq3dAGw6ljRh2Q9DT
- XA9nrQVIWJZGSgTeOMN1ikrmKNC1sy2EgXZBqu1GCy+SP4x9ZfQr1w9UkyuE+7bivWah
- q/4e2yGryuIwh4g+K04V5+ISbyz6KGIFgDij00sjRYuUhZja0KuqSF7KncCbHL553hvD
- 3sN2mqY5F2tHtJ17piyZM1nQlxtZBtFAv0kBgHwrYpmlGSANXTsWbjM6yY+FQMiA04vg
- IhNpzedR8vJClxuSqyev6gFpjH1GOpOjiQKcD0HYyrxGfUktvwz4EzDqDZDYl26Y7Vk0
- faAw==
-X-Gm-Message-State: AOJu0Yy+4aZZ4CnorE8L9HSJ9iZl66kDzq2hqn2HQHYzva7GG8zm2Me8
- wip8KxGrYXaV5S6+nqTHSx8PeG1X2KXzdavA0zlv9w==
-X-Google-Smtp-Source: AGHT+IG8rTn7OJoCmDvX90FaYMJQIPq5GEU3qXVVYQACBSUrXXSl/w5FKDCrJbbu5sEEtezKMf7iWA==
-X-Received: by 2002:a05:6214:300a:b0:658:49bb:f78f with SMTP id
- ke10-20020a056214300a00b0065849bbf78fmr751549qvb.39.1697495555599; 
- Mon, 16 Oct 2023 15:32:35 -0700 (PDT)
+ bh=+/GPz9OHpCzTtjXcfC3UFckfJh1DsJSGo9tpNks8mnU=;
+ b=L3aQOmGGhLHCsNxVB81QxfVWWgMJqFsdevxNtGNijR+k4vTiL4MQc13ZnYGZWFM9Nk
+ Kd2//mXJYDxs3+IodTL+IFk4+ZOA+m9ptMO2MTQJB37QFot82ZyQSp0EcXsDeWWCfWPe
+ XCP3X1rcF/7NbAmpoIdMYJOcpG0qiBwXMLcraLNypeQSg5dpu6QoRHagP33xeCyD4Jn+
+ Kf67wqrzHDJX1z2yDJg1MplgqbENBBEcRfFI3jG1ySDTV6tfhy78DShaGfL3hE5JYb0i
+ iwMFn09KIAYSiZGB1E/iYqDVpbd8gdGi4J8CdIzjiUyaAD4/FEkP0H8CVnm6YXBqgukl
+ Hg4w==
+X-Gm-Message-State: AOJu0YyrXGujZwjBHi0n6UIMZp/T89uSl3QdSz3FnZyltN0tk2F7JEGU
+ neTHxxLiFbXgQ8MjUh0tcVQI6rLrTjHccprWSHoJhQ==
+X-Google-Smtp-Source: AGHT+IEc6oBlBkj9qBqx4fY+C5WCo5+12ln11j3eazefk9aCEY+3S+revvkX3DVaghMDPUoniITu0Q==
+X-Received: by 2002:a05:620a:29d4:b0:76d:984c:9d01 with SMTP id
+ s20-20020a05620a29d400b0076d984c9d01mr583419qkp.33.1697495549355; 
+ Mon, 16 Oct 2023 15:32:29 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.32.30
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.32.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:32:35 -0700 (PDT)
+ Mon, 16 Oct 2023 15:32:29 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 26/32] sandbox: Disable CONFIG_DISTRO_DEFAULTS
-Date: Mon, 16 Oct 2023 16:28:17 -0600
-Message-ID: <20231016222835.596572-27-sjg@chromium.org>
+Subject: [PATCH v3 25/32] Add a new Kconfig for command-line history
+Date: Mon, 16 Oct 2023 16:28:16 -0600
+Message-ID: <20231016222835.596572-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
 References: <20231016222835.596572-1-sjg@chromium.org>
@@ -88,151 +88,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is not used for sandbox, so drop it. Enable the things that it
-controls to avoid dstrastic changes in the config settings for
-sandbox builds.
+At present EXPO requires CMDLINE since it uses cli_readline, which
+needs history enabled. It should be possible to enter lines of text
+into an expo without having history available.
 
-The end result is that these are enabled:
-
-   BOOTMETH_DISTRO
-   BOOTSTD_DEFAULTS
-
-and these are disabled:
-
-   USE_BOOTCOMMAND
-   BOOTCOMMAND (was "run distro_bootcmd")
-   DISTRO_DEFAULTS
-
-Note that the tools-only build has already disabled DISTRO_DEFAULTS
-and BOOTSTD_FULL
+Fix this dependency by creating a new Kconfig for cmdline history.
+Adjust the code to use the correct condiition.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v3:
+- Add new patch with a Kconfig for command-line entry
 
- arch/Kconfig                       | 5 +++++
- boot/Kconfig                       | 6 +++---
- configs/sandbox64_defconfig        | 1 -
- configs/sandbox_defconfig          | 1 -
- configs/sandbox_flattree_defconfig | 1 -
- configs/sandbox_noinst_defconfig   | 1 -
- configs/sandbox_spl_defconfig      | 1 -
- configs/sandbox_vpl_defconfig      | 1 -
- 8 files changed, 8 insertions(+), 9 deletions(-)
+ cmd/Kconfig        | 15 +++++++++++++--
+ common/cli_cread.c | 24 ++++++++++++++----------
+ include/cli.h      |  3 ++-
+ 3 files changed, 29 insertions(+), 13 deletions(-)
 
-diff --git a/arch/Kconfig b/arch/Kconfig
-index 19f2891ba1c5..64d0a5548942 100644
---- a/arch/Kconfig
-+++ b/arch/Kconfig
-@@ -208,6 +208,11 @@ config SANDBOX
- 	imply PHYSMEM
- 	imply GENERATE_ACPI_TABLE
- 	imply BINMAN
-+	imply SYSRESET_CMD_POWEROFF
-+	imply SUPPORT_EXTENSION_SCAN
-+	imply BOOTSTD_DEFAULTS if BOOTSTD_FULL && CMDLINE
-+	imply BOOTMETH_DISTRO if BOOTSTD_FULL && CMDLINE
-+	imply CMD_SYSBOOT if BOOTSTD_FULL
- 
- config SH
- 	bool "SuperH architecture"
-diff --git a/boot/Kconfig b/boot/Kconfig
-index e71de0647bc5..bab646bcac34 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -433,8 +433,8 @@ config BOOTSTD_FULL
- config BOOTSTD_DEFAULTS
- 	bool "Select some common defaults for standard boot"
- 	depends on BOOTSTD
--	imply USE_BOOTCOMMAND
--	select BOOT_DEFAULTS
-+	imply USE_BOOTCOMMAND if !SANDBOX
-+	select BOOT_DEFAULTS if CMDLINE
- 	select BOOTMETH_DISTRO
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index 5cb45f9c025e..491737ca8ba7 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -29,8 +29,19 @@ config CMDLINE_EDITING
+ 	depends on CMDLINE
+ 	default y
  	help
- 	  These are not required but are commonly needed to support a good
-@@ -443,7 +443,7 @@ config BOOTSTD_DEFAULTS
+-	  Enable editing and History functions for interactive command line
+-	  input operations
++	  Enable an editing function for interactive, command-line-input
++	  operations. This allows moving the cursor back and forth within
++	  the line, inserting and deleting characters, etc.
++
++config CMDLINE_HISTORY
++	bool "Enable command-line history"
++	depends on CMDLINE_EDITING
++	default y
++	help
++	  Enable a history function for interactive, command-line-input
++	  operations. This maintains a small buffer of previously entered
++	  commands, allowing the user to enter or edit old commands without
++	  having to retype them.
  
- config BOOTSTD_BOOTCOMMAND
- 	bool "Use bootstd to boot"
--	default y if !DISTRO_DEFAULTS
-+	default y if !DISTRO_DEFAULTS && !SANDBOX
- 	help
- 	  Enable this to select a default boot-command suitable for booting
- 	  with standard boot. This can be overridden by the board if needed,
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index 1a033b22018b..ff895b930170 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -14,7 +14,6 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-index 47417cb0391d..5230b81be2c4 100644
---- a/configs/sandbox_defconfig
-+++ b/configs/sandbox_defconfig
-@@ -14,7 +14,6 @@ CONFIG_FIT_RSASSA_PSS=y
- CONFIG_FIT_CIPHER=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-index 29ae4532c508..8df2a82c521c 100644
---- a/configs/sandbox_flattree_defconfig
-+++ b/configs/sandbox_flattree_defconfig
-@@ -12,7 +12,6 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_LEGACY_IMAGE_FORMAT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index d39e54f98d25..263cc013d68e 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -20,7 +20,6 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_LOAD_FIT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index 4a67af2f088f..a84c6d2ba248 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -20,7 +20,6 @@ CONFIG_FIT=y
- CONFIG_FIT_SIGNATURE=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_LOAD_FIT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
-diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
-index 8d76f19729b9..60fb1701708a 100644
---- a/configs/sandbox_vpl_defconfig
-+++ b/configs/sandbox_vpl_defconfig
-@@ -27,7 +27,6 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_FIT_BEST_MATCH=y
- CONFIG_SPL_LOAD_FIT=y
--CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTSTAGE=y
- CONFIG_BOOTSTAGE_REPORT=y
- CONFIG_BOOTSTAGE_FDT=y
+ config CMDLINE_PS_SUPPORT
+ 	bool "Enable support for changing the command prompt string at run-time"
+diff --git a/common/cli_cread.c b/common/cli_cread.c
+index 19af27303cfc..33c678e89f3d 100644
+--- a/common/cli_cread.c
++++ b/common/cli_cread.c
+@@ -28,11 +28,12 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define CTL_BACKSPACE		('\b')
+ #define DEL			((char)255)
+ #define DEL7			((char)127)
+-#define CREAD_HIST_CHAR		('!')
+ 
+ #define getcmd_putch(ch)	putc(ch)
+ #define getcmd_cbeep()		getcmd_putch('\a')
+ 
++#define CREAD_HIST_CHAR		('!')
++
+ #ifdef CONFIG_SPL_BUILD
+ #define HIST_MAX		3
+ #define HIST_SIZE		32
+@@ -41,14 +42,6 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define HIST_SIZE		CONFIG_SYS_CBSIZE
+ #endif
+ 
+-static int hist_max;
+-static int hist_add_idx;
+-static int hist_cur = -1;
+-static uint hist_num;
+-
+-static char *hist_list[HIST_MAX];
+-static char hist_lines[HIST_MAX][HIST_SIZE + 1];	/* Save room for NULL */
+-
+ static void getcmd_putchars(int count, int ch)
+ {
+ 	int i;
+@@ -57,6 +50,16 @@ static void getcmd_putchars(int count, int ch)
+ 		getcmd_putch(ch);
+ }
+ 
++#ifdef CONFIG_CMDLINE_HISTORY
++
++static int hist_max;
++static int hist_add_idx;
++static int hist_cur = -1;
++static uint hist_num;
++
++static char *hist_list[HIST_MAX];
++static char hist_lines[HIST_MAX][HIST_SIZE + 1];	/* Save room for NULL */
++
+ void hist_init(void)
+ {
+ 	int i;
+@@ -150,6 +153,7 @@ void cread_print_hist_list(void)
+ 		i++;
+ 	}
+ }
++#endif /* CMDLINE_HISTORY */
+ 
+ #define BEGINNING_OF_LINE() {			\
+ 	while (cls->num) {			\
+@@ -325,7 +329,7 @@ int cread_line_process_ch(struct cli_line_state *cls, char ichar)
+ 		break;
+ 	case CTL_CH('p'):
+ 	case CTL_CH('n'):
+-		if (cls->history) {
++		if (IS_ENABLED(CONFIG_CMDLINE_HISTORY) && cls->history) {
+ 			char *hline;
+ 
+ 			if (ichar == CTL_CH('p'))
+diff --git a/include/cli.h b/include/cli.h
+index bca24c8c565f..45a338f709f7 100644
+--- a/include/cli.h
++++ b/include/cli.h
+@@ -294,6 +294,7 @@ char *hist_prev(void);
+  */
+ char *hist_next(void);
+ 
++#ifdef CONFIG_CMDLINE_HISTORY
+ /**
+  * cread_add_to_hist() - Add a line to the history buffer
+  *
+@@ -304,10 +305,10 @@ char *hist_next(void);
+  */
+ void cread_add_to_hist(char *line);
+ 
+-#ifdef CONFIG_CMDLINE_EDITING
+ void hist_init(void);
+ #else
+ static inline void hist_init(void) {}
++static inline void cread_add_to_hist(char *line) {}
+ #endif
+ 
+ #endif
 -- 
 2.42.0.655.g421f12c284-goog
 
