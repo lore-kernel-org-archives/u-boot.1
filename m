@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53BD6CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:43:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CA09CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:43:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1914586F4B;
-	Tue, 17 Oct 2023 00:35:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 04B928071F;
+	Tue, 17 Oct 2023 00:35:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V30Zigmq";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FNWDKdC2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C610A86F4B; Tue, 17 Oct 2023 00:33:49 +0200 (CEST)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id D511186F2A; Tue, 17 Oct 2023 00:33:55 +0200 (CEST)
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 939A186F50
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:33:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A60686F5B
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:33:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-777506c6109so219860185a.3
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:33:25 -0700 (PDT)
+Received: by mail-qk1-x736.google.com with SMTP id
+ af79cd13be357-7741c2e76a3so331255485a.1
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:33:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495596; x=1698100396; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697495604; x=1698100404; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9gDbcfTI61ws6D2saOzD/8wqhW1K1Zkfqly2aKI2kts=;
- b=V30ZigmqZnewZaq6127x5Mtd63uKqoOsY9qk21YfOMc9gZe8QHEWkXJO2pHqg3n7BH
- XYRFGXwcbqrykfeEk/S0pzorWQYExQChj74sUxKOAO7dBQQHsRvbqw+YWNQG2YsCyJCX
- ztwY8vt8fQKr13hmDJ/ja6O9KbAYME9XX6ikk=
+ bh=Xe56samjdLDK74Do6/rxWsABE5Nwjp1bKdGcoIXUNUQ=;
+ b=FNWDKdC2yH4K8HY+52SPsLHDdK9azwCTrbNyBQTLSxdjUZD8S2leS5DKafbsY4syEH
+ ZnEgL2K9Nzv0xJpwslo6gRiHoGcy3frENdj2HpcndvC4L0J1RaBkV32Q98J0pF5hGkUA
+ fkNDZP6tYItEcAEDcld1ODQd0u4JkZB9h+HfA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495596; x=1698100396;
+ d=1e100.net; s=20230601; t=1697495604; x=1698100404;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9gDbcfTI61ws6D2saOzD/8wqhW1K1Zkfqly2aKI2kts=;
- b=G2xOur/CFKVzG3CSY4J/doxcxK1wVAlMQ5XNFOA/uzATziE21JHt+l2hcxLlfU+L63
- FIJi1y3JEMqyGNxAgY8OwTiSbxLbJ/y3x33MfxAS1EiBz+qpKDSs0UD++PYTCUeXCiHL
- wlf64G2Pe6ABmPo5n3MKdSpfnl9OadVKqakenw6Vp91ECSMCmx1zURHaOVWKXfyR5mSg
- M1mAW/DfMhAakbF16o4YL+wZkzlajqDJzUogXgT3iuWX2cDeI89LJtNVCw3jsb+CGzJN
- zukAbpM2ZmxU/SWTSVdxl7q4Eco0Ut0A2pfacLKnAMMLYt35orJZp6HmiHH6DRXJKhxq
- MIug==
-X-Gm-Message-State: AOJu0YyN9xijrL5zYhd9VsBCelZC67qa7nUTdOqkbzW7/5+CYoAHdQ2v
- /gyM0pIH4LcF6OPjG6yg2AOFbZ1ZjAWHtRMTbpK8AQ==
-X-Google-Smtp-Source: AGHT+IH9fP1FbIHdXJQ+SqV+pqwLfEIxBRnH7g4HaWdpqFn6mDpRUTHsgc8tJsOtTT7DsPDuMqk+3Q==
-X-Received: by 2002:a05:620a:318b:b0:76d:a110:856d with SMTP id
- bi11-20020a05620a318b00b0076da110856dmr710792qkb.0.1697495596232; 
- Mon, 16 Oct 2023 15:33:16 -0700 (PDT)
+ bh=Xe56samjdLDK74Do6/rxWsABE5Nwjp1bKdGcoIXUNUQ=;
+ b=sVvC76ArcvTfMvXAKEH83y8DRR59sqFbFlL4qfgEbhFeOpZQb2/V+YQ6q44tJX49+z
+ 4TxHf7/3BZvkNgOJDgMrLJVOURvu+y1kXyslNxj6pB5iIzuxSzLw70dYFAKbzW5jzebx
+ rxNQlbo3Z6mSPIva9GulosDcmt9H1qR9d+tzLqRM3rIoWySIfd9K5o9wUFLVNYn9YXKN
+ lehH1tJ9rFzoI+bWFJeoK8gSWR9kOGGlSBpvJdIkfpERJ2VgH+SdZWCenYusY+Y2thEz
+ AQuDnenb0HyfYkxUMo6Eh/wO31CM/rcKSXfMTTsELyzU/1m5O++2k7btnTTpuDQ/KRW0
+ CPvg==
+X-Gm-Message-State: AOJu0Yy93gNwkCWj3+mIw9v8i5gMBW1nbTGvc1cz8pcTdDCawmB67JtT
+ neYf7NBSZhMARvmH/o9nAAQOIEwsT65/wvoozT8A5Q==
+X-Google-Smtp-Source: AGHT+IEqu1wnrBMgTpZhv2Br+8clixuRwhtS6AwyiYyz8tv9Ae2qkMorkWNCnfb+IiJJMaliH6gFNw==
+X-Received: by 2002:a05:620a:248c:b0:774:32a7:fe91 with SMTP id
+ i12-20020a05620a248c00b0077432a7fe91mr569093qkn.48.1697495604538; 
+ Mon, 16 Oct 2023 15:33:24 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.33.06
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.33.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:33:16 -0700 (PDT)
+ Mon, 16 Oct 2023 15:33:24 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Joe Hershberger <joe.hershberger@ni.com>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH v3 30/32] mmc: env: Unify the U_BOOT_ENV_LOCATION conditions
-Date: Mon, 16 Oct 2023 16:28:21 -0600
-Message-ID: <20231016222835.596572-31-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 31/32] treewide: Tidy up semicolon after command macros
+Date: Mon, 16 Oct 2023 16:28:22 -0600
+Message-ID: <20231016222835.596572-32-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
 References: <20231016222835.596572-1-sjg@chromium.org>
@@ -89,34 +88,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The declaration of U_BOOT_ENV_LOCATION() uses a different #ifdef
-condition from the code it calls. Use the same condition to avoid a
-build warning if CONFIG_CMD_SAVEENV is disabled.
+The U_BOOT_CMD_COMPLETE() macro has a semicolon at the end, perhaps
+inadvertently. Some code has taken advantage of this.
+
+Tidy this up by dropping the semicolon from the macro and adding it to
+macro invocations as required.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Add new patch to tidy up semicolon after command macros
 
-Changes in v2:
-- Add new patch to unify the U_BOOT_ENV_LOCATION conditions
+ board/freescale/common/vid.c | 2 +-
+ board/xilinx/common/fru.c    | 2 +-
+ board/xilinx/versal/cmds.c   | 2 +-
+ board/xilinx/zynqmp/cmds.c   | 2 +-
+ cmd/btrfs.c                  | 2 +-
+ cmd/eeprom.c                 | 2 +-
+ cmd/ext2.c                   | 4 ++--
+ cmd/fs.c                     | 8 ++++----
+ cmd/pinmux.c                 | 2 +-
+ cmd/qfw.c                    | 2 +-
+ include/command.h            | 2 +-
+ 11 files changed, 15 insertions(+), 15 deletions(-)
 
- env/mmc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/env/mmc.c b/env/mmc.c
-index cb14bbb58f13..da84cddd74f0 100644
---- a/env/mmc.c
-+++ b/env/mmc.c
-@@ -495,7 +495,7 @@ U_BOOT_ENV_LOCATION(mmc) = {
- 	.location	= ENVL_MMC,
- 	ENV_NAME("MMC")
- 	.load		= env_mmc_load,
--#ifndef CONFIG_SPL_BUILD
-+#if defined(CONFIG_CMD_SAVEENV) && !defined(CONFIG_SPL_BUILD)
- 	.save		= env_save_ptr(env_mmc_save),
- 	.erase		= ENV_ERASE_PTR(env_mmc_erase)
+diff --git a/board/freescale/common/vid.c b/board/freescale/common/vid.c
+index 5ec3f2a76b19..fc5d400cfe18 100644
+--- a/board/freescale/common/vid.c
++++ b/board/freescale/common/vid.c
+@@ -793,4 +793,4 @@ U_BOOT_CMD(
+ 	vdd_read, 1, 0, do_vdd_read,
+ 	"read VDD",
+ 	" - Read the voltage specified in mV"
+-)
++);
+diff --git a/board/xilinx/common/fru.c b/board/xilinx/common/fru.c
+index c916c3d6b4c8..12b21317496a 100644
+--- a/board/xilinx/common/fru.c
++++ b/board/xilinx/common/fru.c
+@@ -85,4 +85,4 @@ U_BOOT_CMD(
+ 	fru, 8, 1, do_fru,
+ 	"FRU table info",
+ 	fru_help_text
+-)
++);
+diff --git a/board/xilinx/versal/cmds.c b/board/xilinx/versal/cmds.c
+index 9cc2cdcebf1c..2a74e49aedec 100644
+--- a/board/xilinx/versal/cmds.c
++++ b/board/xilinx/versal/cmds.c
+@@ -98,4 +98,4 @@ U_BOOT_LONGHELP(versal,
+ U_BOOT_CMD(versal, 4, 1, do_versal,
+ 	   "versal sub-system",
+ 	   versal_help_text
+-)
++);
+diff --git a/board/xilinx/zynqmp/cmds.c b/board/xilinx/zynqmp/cmds.c
+index f1f3eff501e1..9524688f27d9 100644
+--- a/board/xilinx/zynqmp/cmds.c
++++ b/board/xilinx/zynqmp/cmds.c
+@@ -427,4 +427,4 @@ U_BOOT_CMD(
+ 	zynqmp, 9, 1, do_zynqmp,
+ 	"ZynqMP sub-system",
+ 	zynqmp_help_text
+-)
++);
+diff --git a/cmd/btrfs.c b/cmd/btrfs.c
+index 98daea99e9ed..2843835d08b8 100644
+--- a/cmd/btrfs.c
++++ b/cmd/btrfs.c
+@@ -24,4 +24,4 @@ U_BOOT_CMD(btrsubvol, 3, 1, do_btrsubvol,
+ 	"list subvolumes of a BTRFS filesystem",
+ 	"<interface> <dev[:part]>\n"
+ 	"     - List subvolumes of a BTRFS filesystem."
+-)
++);
+diff --git a/cmd/eeprom.c b/cmd/eeprom.c
+index 0b6ca8c505fb..322765ad02a0 100644
+--- a/cmd/eeprom.c
++++ b/cmd/eeprom.c
+@@ -435,4 +435,4 @@ U_BOOT_CMD(
+ 	"The values which can be provided with the -l option are:\n"
+ 	CONFIG_EEPROM_LAYOUT_HELP_STRING"\n"
  #endif
+-)
++);
+diff --git a/cmd/ext2.c b/cmd/ext2.c
+index 57a99516a6ac..a0ce0cf5796b 100644
+--- a/cmd/ext2.c
++++ b/cmd/ext2.c
+@@ -42,7 +42,7 @@ U_BOOT_CMD(
+ 	"list files in a directory (default /)",
+ 	"<interface> <dev[:part]> [directory]\n"
+ 	"    - list files from 'dev' on 'interface' in a 'directory'"
+-)
++);
+ 
+ U_BOOT_CMD(
+ 	ext2load,	6,	0,	do_ext2load,
+@@ -50,4 +50,4 @@ U_BOOT_CMD(
+ 	"<interface> [<dev[:part]> [addr [filename [bytes [pos]]]]]\n"
+ 	"    - load binary file 'filename' from 'dev' on 'interface'\n"
+ 	"      to address 'addr' from ext2 filesystem."
+-)
++);
+diff --git a/cmd/fs.c b/cmd/fs.c
+index 6044f73af5b4..46cb43dcdb5b 100644
+--- a/cmd/fs.c
++++ b/cmd/fs.c
+@@ -39,7 +39,7 @@ U_BOOT_CMD(
+ 	"      If 'bytes' is 0 or omitted, the file is read until the end.\n"
+ 	"      'pos' gives the file byte position to start reading from.\n"
+ 	"      If 'pos' is 0 or omitted, the file is read from the start."
+-)
++);
+ 
+ static int do_save_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			   char *const argv[])
+@@ -56,7 +56,7 @@ U_BOOT_CMD(
+ 	"      'bytes' gives the size to save in bytes and is mandatory.\n"
+ 	"      'pos' gives the file byte position to start writing to.\n"
+ 	"      If 'pos' is 0 or omitted, the file is written from the start."
+-)
++);
+ 
+ static int do_ls_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			 char *const argv[])
+@@ -70,7 +70,7 @@ U_BOOT_CMD(
+ 	"<interface> [<dev[:part]> [directory]]\n"
+ 	"    - List files in directory 'directory' of partition 'part' on\n"
+ 	"      device type 'interface' instance 'dev'."
+-)
++);
+ 
+ static int do_ln_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			 char *const argv[])
+@@ -84,7 +84,7 @@ U_BOOT_CMD(
+ 	"<interface> <dev[:part]> target linkname\n"
+ 	"    - create a symbolic link to 'target' with the name 'linkname' on\n"
+ 	"      device type 'interface' instance 'dev'."
+-)
++);
+ 
+ static int do_fstype_wrapper(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			     char *const argv[])
+diff --git a/cmd/pinmux.c b/cmd/pinmux.c
+index f17cf4110d9f..105f01eaafff 100644
+--- a/cmd/pinmux.c
++++ b/cmd/pinmux.c
+@@ -178,4 +178,4 @@ U_BOOT_CMD(pinmux, CONFIG_SYS_MAXARGS, 1, do_pinmux,
+ 	   "list                     - list UCLASS_PINCTRL devices\n"
+ 	   "pinmux dev [pincontroller-name] - select pin-controller device\n"
+ 	   "pinmux status [-a | pin-name]   - print pin-controller muxing [for all | for pin-name]\n"
+-)
++);
+diff --git a/cmd/qfw.c b/cmd/qfw.c
+index d6ecfa60d5a7..1b8c775ebf5a 100644
+--- a/cmd/qfw.c
++++ b/cmd/qfw.c
+@@ -121,4 +121,4 @@ U_BOOT_CMD(
+ 	"    - list                             : print firmware(s) currently loaded\n"
+ 	"    - cpus                             : print online cpu number\n"
+ 	"    - load <kernel addr> <initrd addr> : load kernel and initrd (if any), and setup for zboot\n"
+-)
++);
+diff --git a/include/command.h b/include/command.h
+index 6262365e128f..5bd3ecbe8f91 100644
+--- a/include/command.h
++++ b/include/command.h
+@@ -390,7 +390,7 @@ int cmd_source_script(ulong addr, const char *fit_uname, const char *confname);
+ #define U_BOOT_CMD_COMPLETE(_name, _maxargs, _rep, _cmd, _usage, _help, _comp) \
+ 	ll_entry_declare(struct cmd_tbl, _name, cmd) =			\
+ 		U_BOOT_CMD_MKENT_COMPLETE(_name, _maxargs, _rep, _cmd,	\
+-						_usage, _help, _comp);
++						_usage, _help, _comp)
+ 
+ #define U_BOOT_CMDREP_COMPLETE(_name, _maxargs, _cmd_rep, _usage,	\
+ 			       _help, _comp)				\
 -- 
 2.42.0.655.g421f12c284-goog
 
