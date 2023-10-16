@@ -4,63 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BCB4CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:18:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42DCACDB482
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:21:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3AF686EF3;
-	Mon, 16 Oct 2023 16:16:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id D058186B71;
+	Mon, 16 Oct 2023 16:21:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="Km5HEN5B";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="NDqnZngd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC46C86801; Mon, 16 Oct 2023 16:14:44 +0200 (CEST)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [217.70.183.200])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2C5AD86BA1; Mon, 16 Oct 2023 16:21:44 +0200 (CEST)
+Received: from madras.collabora.co.uk (madras.collabora.co.uk
+ [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C220486BF2
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5C8286823
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:21:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 0F7E920011;
- Mon, 16 Oct 2023 14:14:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1697465681;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ifiXwy7qK2cBwBiji0/3qQs0iZdGamB+huPQXYSi+t4=;
- b=Km5HEN5B4BdBUADTMlJuJOXrA5NoOuexFOGIo6CpFe77i48VIjmjQglLboZjKg4G4GN9NM
- Av6ORrhWCapDyMbe9HMpMTVZtJqNGWcn/E8mPj4o/zOZYw99TZiJ2vVLFHqYO5aPcr06vY
- ax7V8mBWyyugG5Azokx3bx3Lz6i31rQ9ubi+A+Rc1XpsCv3OqVyacKCs24XrM08IVDjbgX
- qAC7Wdv9oWKxBwd55a5CkRvBug7mdh2TxFuBrxIPjC77/HOmtDQbfRI541cd9EUh6wJGhf
- kQ4qRkV+Rfky6Pv/pkPvyKCSrVidOpK6rGu4G3tTi7b5aZ46FO7aMK3HSqW+1w==
-From: Thomas Richard <thomas.richard@bootlin.com>
-To: u-boot@lists.denx.de
-Cc: nm@ti.com, thomas.petazzoni@bootlin.com, thomas.richard@bootlin.com,
- gregory.clement@bootlin.com, u-kumar1@ti.com,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Ramon Fried <rfried.dev@gmail.com>,
- Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Subject: [PATCH 9/9] cmd: test_enter_suspend: Add test_enter_suspend command
-Date: Mon, 16 Oct 2023 16:11:35 +0200
-Message-Id: <20231016141135.325698-10-thomas.richard@bootlin.com>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20231016141135.325698-1-thomas.richard@bootlin.com>
-References: <20231016141135.325698-1-thomas.richard@bootlin.com>
+ spf=pass smtp.mailfrom=detlev.casanova@collabora.com
+Received: from arisu.localnet (mtl.collabora.ca [66.171.169.34])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: detlev)
+ by madras.collabora.co.uk (Postfix) with ESMTPSA id C0FBF66071C7;
+ Mon, 16 Oct 2023 15:21:39 +0100 (BST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1697466100;
+ bh=JS3+9rmYCLVYVJ4yRCDpVEkNSJozTgCGj2nfNddx9g4=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=NDqnZngdM5RC6KMNv9G8ulSz9pZ5eLm86BI5yQ5cXBZmRRlAVMZ//ca+W7lXhGGsI
+ YXWV16xImp8dy7IS54IrdqsOYGnG4fbttM1V0cihRJoKky5XwtrCiDAVPz6wvVr6gy
+ QdFfvk6Z3irkOfAt+3swz+fzdYikdCgAE1r4lWtUTc4qDY1B5RoiXbtNRa/QrQv8Gs
+ WX5dGTUqYeqnd7vgwm8wqCK1Xeq0vHEEsWmj6XbhIXoJti0yZlGfThYezhFpdihaJg
+ ECcaAi9c468xSvS2SufBFeFBgQNXF7SPummXVwPwIThAli40NYX+E2f7jsUueBUyEE
+ xG/rPBe7BittA==
+From: Detlev Casanova <detlev.casanova@collabora.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Hai Pham <hai.pham.ud@renesas.com>, Tam Nguyen <tam.nguyen.xa@renesas.com>
+Subject: Re: [PATCH v5 2/6] cmd: Add a sysinfo command
+Date: Mon, 16 Oct 2023 10:21:49 -0400
+Message-ID: <12366510.O9o76ZdvQC@arisu>
+In-Reply-To: <CAPnjgZ1s3OP6cq94qLF3mzkK6YwrjEFc91LOiUQWadj0NBZSqA@mail.gmail.com>
+References: <20231002152142.76516-1-detlev.casanova@collabora.com>
+ <20231002152142.76516-3-detlev.casanova@collabora.com>
+ <CAPnjgZ1s3OP6cq94qLF3mzkK6YwrjEFc91LOiUQWadj0NBZSqA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-GND-Sasl: thomas.richard@bootlin.com
-X-Mailman-Approved-At: Mon, 16 Oct 2023 16:15:29 +0200
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,111 +72,220 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Gregory CLEMENT <gregory.clement@bootlin.com>
+On Monday, October 2, 2023 2:56:28 P.M. EDT Simon Glass wrote:
+> On Mon, 2 Oct 2023 at 09:21, Detlev Casanova
+> 
+> <detlev.casanova@collabora.com> wrote:
+> > The command is able to show different information for the running
+> > system:
+> > * Model name
+> > * Board ID
+> > * Revision
+> > 
+> > This command can be used by boot shell scripts to select configurations
+> > depending on the specific running system.
+> > 
+> > Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
+> > ---
+> > 
+> >  cmd/Kconfig   |   6 +++
+> >  cmd/Makefile  |   1 +
+> >  cmd/sysinfo.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++++
+> >  3 files changed, 140 insertions(+)
+> >  create mode 100644 cmd/sysinfo.c
+> 
+> Reviewed-by: Simon Glass <sjg@chromium.org>
+> 
+> Would prefer more help text in the Kconfig as this is pretty vague
 
-Add test_enter_suspend command using PSCI.
-This command is only to test suspend sequence from U-Boot.
-The resume will not work.
+Indeed, how would that sound ?
 
-Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
-Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
+Display information to identify the system. It supports showing a board id, a 
+revision number as well as a human readable name.
 
----
+> > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > index 43ca10f69cc..67d019aa795 100644
+> > --- a/cmd/Kconfig
+> > +++ b/cmd/Kconfig
+> > @@ -218,6 +218,12 @@ config CMD_SBI
+> > 
+> >         help
+> >         
+> >           Display information about the SBI implementation.
+> > 
+> > +config CMD_SYSINFO
+> > +       bool "sysinfo"
+> > +       depends on SYSINFO
+> > +       help
+> > +         Display information about the system.
+> > +
+> > 
+> >  endmenu
+> >  
+> >  menu "Boot commands"
+> > 
+> > diff --git a/cmd/Makefile b/cmd/Makefile
+> > index 9bebf321c39..972f3a4720e 100644
+> > --- a/cmd/Makefile
+> > +++ b/cmd/Makefile
+> > @@ -167,6 +167,7 @@ obj-$(CONFIG_CMD_SPI) += spi.o
+> > 
+> >  obj-$(CONFIG_CMD_STRINGS) += strings.o
+> >  obj-$(CONFIG_CMD_SMC) += smccc.o
+> >  obj-$(CONFIG_CMD_SYSBOOT) += sysboot.o
+> > 
+> > +obj-$(CONFIG_CMD_SYSINFO) += sysinfo.o
+> > 
+> >  obj-$(CONFIG_CMD_STACKPROTECTOR_TEST) += stackprot_test.o
+> >  obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
+> >  obj-$(CONFIG_CMD_TERMINAL) += terminal.o
+> > 
+> > diff --git a/cmd/sysinfo.c b/cmd/sysinfo.c
+> > new file mode 100644
+> > index 00000000000..46369ff9ac7
+> > --- /dev/null
+> > +++ b/cmd/sysinfo.c
+> > @@ -0,0 +1,133 @@
+> > +// SPDX-License-Identifier: GPL-2.0+
+> > +/*
+> > + * Copyright 2023
+> > + * Detlev Casanova <detlev.casanova@collabora.com>
+> > + */
+> > +
+> > +#include <command.h>
+> > +#include <env.h>
+> > +#include <sysinfo.h>
+> > +#include <exports.h>
+> > +
+> > +static int get_sysinfo(struct udevice **devp)
+> > +{
+> > +       int ret = sysinfo_get(devp);
+> > +
+> > +       if (ret) {
+> > +               printf("Cannot get sysinfo: %d\n", ret);
+> > +               return ret;
+> > +       }
+> > +
+> > +       ret = sysinfo_detect(*devp);
+> > +       if (ret) {
+> > +               printf("Cannot detect sysinfo: %d\n", ret);
+> > +               return ret;
+> > +       }
+> > +
+> > +       return 0;
+> > +}
+> > +
+> > +static int do_sysinfo_model(struct cmd_tbl *cmdtp, int flag, int argc,
+> > +                           char *const argv[])
+> > +{
+> > +       struct udevice *dev;
+> > +       char model[64];
+> > +       int ret = get_sysinfo(&dev);
+> > +
+> > +       if (ret)
+> > +               return CMD_RET_FAILURE;
+> > +
+> > +       ret = sysinfo_get_str(dev,
+> > +                             SYSINFO_ID_BOARD_MODEL,
+> > +                             sizeof(model),
+> > +                             model);
+> > +       if (ret) {
+> > +               printf("Cannot get sysinfo str: %d\n", ret);
+> > +               return CMD_RET_FAILURE;
+> > +       }
+> > +
+> > +       if (argc == 2)
+> > +               ret = env_set(argv[1], model);
+> > +       else
+> > +               printf("%s\n", model);
+> > +
+> > +       if (ret)
+> > +               return CMD_RET_FAILURE;
+> > +       else
+> > +               return CMD_RET_SUCCESS;
+> > +}
+> > +
+> > +static int do_sysinfo_id(struct cmd_tbl *cmdtp, int flag, int argc,
+> > +                        char *const argv[])
+> > +{
+> > +       struct udevice *dev;
+> > +       u32 board_id;
+> > +       int ret = get_sysinfo(&dev);
+> > +
+> > +       if (ret)
+> > +               return CMD_RET_FAILURE;
+> > +
+> > +       ret = sysinfo_get_int(dev, SYSINFO_ID_BOARD_ID, &board_id);
+> > +       if (ret) {
+> > +               printf("Cannot get sysinfo int: %d\n", ret);
+> > +               return CMD_RET_FAILURE;
+> > +       }
+> > +
+> > +       if (argc == 2)
+> > +               ret = env_set_hex(argv[1], board_id);
+> > +       else
+> > +               printf("0x%02x\n", board_id);
+> > +
+> > +       if (ret)
+> > +               return CMD_RET_FAILURE;
+> > +       else
+> > +               return CMD_RET_SUCCESS;
+> > +}
+> > +
+> > +static int do_sysinfo_revision(struct cmd_tbl *cmdtp, int flag, int argc,
+> > +                              char *const argv[])
+> > +{
+> > +       struct udevice *dev;
+> > +       int rev_major;
+> > +       int rev_minor;
+> > +       char rev[64];
+> > +       int ret = get_sysinfo(&dev);
+> > +
+> > +       if (ret)
+> > +               return CMD_RET_FAILURE;
+> > +
+> > +       ret = sysinfo_get_int(dev, SYSINFO_ID_BOARD_REV_MAJOR,
+> > &rev_major);
+> > +       if (ret) {
+> > +               printf("Cannot get sysinfo int: %d\n", ret);
+> > +               return CMD_RET_FAILURE;
+> > +       }
+> > +
+> > +       ret = sysinfo_get_int(dev, SYSINFO_ID_BOARD_REV_MINOR,
+> > &rev_minor);
+> > +       if (ret) {
+> > +               printf("Cannot get sysinfo int: %d\n", ret);
+> > +               return CMD_RET_FAILURE;
+> > +       }
+> > +
+> > +       snprintf(rev, sizeof(rev), "%d.%d", rev_major, rev_minor);
+> > +
+> > +       if (argc == 2)
+> > +               ret = env_set(argv[1], rev);
+> > +       else
+> > +               printf("%s\n", rev);
+> > +
+> > +       if (ret)
+> > +               return CMD_RET_FAILURE;
+> > +       else
+> > +               return CMD_RET_SUCCESS;
+> > +}
+> > +
+> > +static char sysinfo_help_text[] =
+> > +       "model <varname>     - Show or set the board model in varname\n"
+> > +       "sysinfo id <varname>        - Show or set the board id in varname
+> > (in format 0xHH)\n" +       "sysinfo revision <varname>  - Show or set
+> > the board revision in varname"; +
+> > +U_BOOT_CMD_WITH_SUBCMDS(sysinfo, "System information", sysinfo_help_text,
+> > +                       U_BOOT_SUBCMD_MKENT(model, 2, 1,
+> > do_sysinfo_model),
+> > +                       U_BOOT_SUBCMD_MKENT(id, 2, 1, do_sysinfo_id),
+> > +                       U_BOOT_SUBCMD_MKENT(revision, 2, 1,
+> > do_sysinfo_revision), +);
+> > --
+> > 2.41.0
 
- cmd/Kconfig             |  7 +++++++
- cmd/boot.c              |  8 ++++++++
- drivers/firmware/psci.c | 23 +++++++++++++++++++++++
- include/command.h       |  2 ++
- 4 files changed, 40 insertions(+)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 43ca10f69c..54e7d4b0e6 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1450,6 +1450,13 @@ config CMD_POWEROFF
- 	help
- 	  Poweroff/Shutdown the system
- 
-+config CMD_TEST_ENTER_SUSPEND
-+	bool "test enter suspend"
-+	depends on ARM
-+	select ARM_SMCCC
-+	help
-+	  Command to test the suspend sequence (only for test)
-+
- config CMD_READ
- 	bool "read - Read binary data from a partition"
- 	help
-diff --git a/cmd/boot.c b/cmd/boot.c
-index 14839c1ced..609c07a5a5 100644
---- a/cmd/boot.c
-+++ b/cmd/boot.c
-@@ -70,3 +70,11 @@ U_BOOT_CMD(
- 	""
- );
- #endif
-+
-+#if IS_ENABLED(CONFIG_CMD_TEST_ENTER_SUSPEND)
-+U_BOOT_CMD(
-+	test_enter_suspend, 1, 0, do_test_enter_suspend,
-+	"Test the enter SUSPEND sequence of the device",
-+	""
-+);
-+#endif
-diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
-index c6b9efab41..591ad1869d 100644
---- a/drivers/firmware/psci.c
-+++ b/drivers/firmware/psci.c
-@@ -23,6 +23,9 @@
- #include <linux/libfdt.h>
- #include <linux/printk.h>
- #include <linux/psci.h>
-+#if IS_ENABLED(CONFIG_CMD_TEST_ENTER_SUSPEND)
-+#include <cpu_func.h>
-+#endif
- 
- #define DRIVER_NAME "psci"
- 
-@@ -303,6 +306,26 @@ int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- }
- #endif
- 
-+#if IS_ENABLED(CONFIG_CMD_TEST_ENTER_SUSPEND)
-+int do_test_enter_suspend(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-+{
-+	do_psci_probe();
-+
-+	puts("suspend ...\n");
-+	puts("disable dcache\n");
-+
-+	dcache_disable();
-+
-+	/* ARM_PSCI_1_0_FN64_SYSTEM_SUSPEND */
-+	invoke_psci_fn(PSCI_0_2_FN64(14), (unsigned long)do_test_enter_suspend, 0, 0);
-+
-+	dcache_enable();
-+
-+	log_err("Suspend failed or not supported on this platform\n");
-+	return CMD_RET_FAILURE;
-+}
-+#endif
-+
- static const struct udevice_id psci_of_match[] = {
- 	{ .compatible = "arm,psci" },
- 	{ .compatible = "arm,psci-0.2" },
-diff --git a/include/command.h b/include/command.h
-index c4e3170967..0126da6b37 100644
---- a/include/command.h
-+++ b/include/command.h
-@@ -177,6 +177,8 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int argc,
- 	     char *const argv[]);
- int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc,
- 		char *const argv[]);
-+int do_test_enter_suspend(struct cmd_tbl *cmdtp, int flag, int argc,
-+			  char *const argv[]);
- 
- unsigned long do_go_exec(ulong (*entry)(int, char * const []), int argc,
- 			 char *const argv[]);
--- 
-2.39.2
+
 
