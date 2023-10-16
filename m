@@ -4,56 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 467D0CDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 09:19:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8806FCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 09:21:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B91C86801;
-	Mon, 16 Oct 2023 11:19:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E30AC86BA6;
+	Mon, 16 Oct 2023 11:21:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697447984;
-	bh=ELAtUIgqY77xvkCiM3UlKXYtR3FeGrB7IivdtWuK/r4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=LkolQqlcvL2FeJD1Zgg0SqVut8+Pglrq/16Fdg2wNUMh7LdvSouheSSKSPJC/o9g5
-	 kRmrVV7pCZm2tTG81tBIjQm/vdQ55m/rcxFHeHGOkczv5h50kVknKIVOyyJeC2cRoB
-	 QPLU/Fs+Vmn61Q3Wa0nKjqGgJ2MxBodvYMVVLncykAnBPDejgX1WEu37jTLmfiI5SP
-	 Rd3Z+2CljDyLmwYA2CBUMlDNpKh+A1QN+333hYQWFfa3s4cBBwmCcD0GVw5gglz78k
-	 DwWNUzBIbvHNS0kOLQSQHipk4SigYLcHcx35idfviveFp4jV7WFeoAYLTFFcsqKeWo
-	 27rxjnnpHpUzA==
+	s=phobos-20191101; t=1697448075;
+	bh=rKAALl90Brc6QrMaaUntcR9jX4dygEjJaEPKbrmuldQ=;
+	h=From:To:Subject:In-reply-to:Date:List-Id:List-Unsubscribe:
+	 List-Archive:List-Post:List-Help:List-Subscribe:From;
+	b=oOgdUMR+Mw/9LD+3HIhqEhhJpHrcm+Lc3x94uIK60xDEIHdF1RxhROjwburdQB6IW
+	 3cn1CyQxlqZ8PZOohLAREPwTfmgN0K3QwlTg+Wb1V1z+JTeWYLM3TyFX7LH29DfZUZ
+	 VbSl5dPngEVawWZ5quWuN+9LW73PoVJ7D/W7F84ro56+dUHEoRkV2MbnbVcPwl3Dx8
+	 m6RWAV4bomkFnkSlrpIUvSKkCf4HFZCK+fqFVScm8FLKtObOt7UiOLtTf6DUha9Iv5
+	 hupJKHWbGS426v0KOH3ztsRNCJiAMcZ3OzPsck/LcJAaAv/YLKU9Q/V57Cpm/Kqp6E
+	 cj95HDhDVf/8A==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CA79867D6; Mon, 16 Oct 2023 11:19:41 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DF87A86BA4; Mon, 16 Oct 2023 11:21:14 +0200 (CEST)
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C014D86801
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 11:19:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D99A186823
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 11:21:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4S8BQJ6tK8z9sqy;
- Mon, 16 Oct 2023 11:19:36 +0200 (CEST)
-Message-ID: <57553cee-7e70-4b77-ac80-cee49c84c792@denx.de>
-Date: Mon, 16 Oct 2023 11:19:36 +0200
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+ by mail-out.m-online.net (Postfix) with ESMTP id 4S8BS83hH8z1sCJ3;
+ Mon, 16 Oct 2023 11:21:12 +0200 (CEST)
+Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
+ by mail.m-online.net (Postfix) with ESMTP id 4S8BS83MsKz1qqlS;
+ Mon, 16 Oct 2023 11:21:12 +0200 (CEST)
+X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
+Received: from mail.mnet-online.de ([192.168.8.182])
+ by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
+ with ESMTP id T5SYOl5h4Qtp; Mon, 16 Oct 2023 11:21:11 +0200 (CEST)
+Received: from papero (host-88-217-136-221.customer.m-online.net
+ [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
+ Mon, 16 Oct 2023 11:21:10 +0200 (CEST)
+From: sbabic@denx.de
+X-Patchwork-Submitter: Fabio Estevam <festevam@gmail.com>
+X-Patchwork-Id: 1845249
+X-Patchwork-Delegate: sbabic@denx.de
+To: Fabio Estevam <festevam@gmail.com>,u-boot@lists.denx.de
+Subject: [PATCH v3 3/3] mx28evk: Add USB Mass Storage support
+In-reply-to: <20231009131536.3475878-3-festevam@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: kirkwood: Pogo v4: Enable LTO
-Content-Language: en-US
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20230824190713.30866-1-mibodhi@gmail.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20230824190713.30866-1-mibodhi@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4S8BQJ6tK8z9sqy
+Message-Id: <20231016092114.DF87A86BA4@phobos.denx.de>
+Date: Mon, 16 Oct 2023 11:21:13 +0200 (CEST)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,39 +73,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 8/24/23 21:07, Tony Dinh wrote:
-> Enable building Pogo V4 u-boot image with LTO, which results in about 30K
-> reduction in size.
-> 
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+> From: Fabio Estevam <festevam@denx.de>
+> Select the USB options to allow running "ums 0 mmc 0".
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> Reviewed-by: Marek Vasut <marex@denx.de>
+Applied to u-boot-imx, master, thanks !
 
-Does not apply to latest master. Please rebase and resend.
-
-Thanks,
-Stefan
-
-> ---
-> 
->   configs/pogo_v4_defconfig | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
-> index 3e3e811543..ad36da712b 100644
-> --- a/configs/pogo_v4_defconfig
-> +++ b/configs/pogo_v4_defconfig
-> @@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogoplug-series-4"
->   CONFIG_SYS_PROMPT="Pogo_V4> "
->   CONFIG_IDENT_STRING="\nPogoplug V4"
->   CONFIG_SYS_LOAD_ADDR=0x800000
-> +CONFIG_LTO=y
->   CONFIG_PCI=y
->   CONFIG_DISTRO_DEFAULTS=y
->   CONFIG_BOOTSTAGE=y
-
-Viele Grüße,
-Stefan Roese
+Best regards,
+Stefano Babic
 
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+=====================================================================
+DENX Software Engineering GmbH,        Managing Director: Erika Unter  
+HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
+Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
+=====================================================================
