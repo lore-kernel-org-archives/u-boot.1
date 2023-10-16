@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02F79C41513
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 09:28:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3E30C46CA1
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 09:28:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5102A86F28;
-	Mon, 16 Oct 2023 11:23:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D3D0186F09;
+	Mon, 16 Oct 2023 11:23:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697448198;
-	bh=HI+PvKRjUuvJT9ma5otMLhRIH+ida9o6yaC1bJQK0N4=;
+	s=phobos-20191101; t=1697448186;
+	bh=uHLyGL7iqrmdqiLN+TP1T0A9zBI3UabIN6V3WhDgaAM=;
 	h=From:To:Subject:In-reply-to:Date:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:From;
-	b=CXjl42jKF4FxGKTTQrNiOxALNZYoEnsFL3lsWtUGe8dh4NTN5Fzx7TFsbMGHqBz/R
-	 lYJ+RI8RIn/nDOZzPiYqAECDGMgLwKLJ2wzOJmUUWNwuZHsANqOn4rFktEdH0pLDmQ
-	 b58/EO8dI2E92nwu8BjWRmp04NzxLzx7LuFPRFp6U5snOKsxaA0S0tuihH5IlyL2/s
-	 OF5KpvWsy+uU6UhdathCePCEMN6uQ9iBn8sHsBJWNz/W/sBfpSv6/7BjkwoULeTX14
-	 DbI+T/fLJCt/d+E5M4XndP2HbrkpQJ/QoFWZ3/D0yDfATU3yNe6AXjb0GUyzYJBf3E
-	 FGlMazVJcnuvA==
+	b=R83E5ofKWn8gDThiPuUuPQNOpXAurI33NW1lperY2EFK1LJnEtPuQB8Au2VLEYBhp
+	 0JZJ20sDKtporIQgSM1F0/NrgS9FiKtpI4jIYlqPardUZft9FD1gpFs4t4ZJrqhVR4
+	 a8HqFH7/vl0fZMGVnl63ETfzaWwd/189SWE9qhBD0tPrEj/XixzWiUULrznrYSHUTD
+	 gvPQZ+1+pbi59s5sXsBgPc+ilXps7+oFQxbMZcBcRhCEcpgCnkAF/bqbPOP+bPx7MU
+	 IX6W1eHSuvWT7PYot/WwYW+//RIDghRDIrxKrofn6XFH8nQbJVeisyjwu45seIcl9P
+	 7k+d/YEToXYOQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBC2F86DCA; Mon, 16 Oct 2023 11:22:35 +0200 (CEST)
+ id DC7EE86EE7; Mon, 16 Oct 2023 11:22:18 +0200 (CEST)
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5BEE286EF2
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 11:22:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7D58986BB3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 11:22:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4S8BTX6p0Kz1sClY;
- Mon, 16 Oct 2023 11:22:24 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 4S8BTB20tmz1sCln;
+ Mon, 16 Oct 2023 11:22:06 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
- by mail.m-online.net (Postfix) with ESMTP id 4S8BTX6hz5z1qqlb;
- Mon, 16 Oct 2023 11:22:24 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 4S8BTB1kTZz1qqlS;
+ Mon, 16 Oct 2023 11:22:06 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
- with ESMTP id 4ox1k2RrCZe3; Mon, 16 Oct 2023 11:22:24 +0200 (CEST)
+ with ESMTP id f_Rz-NrOQ1oH; Mon, 16 Oct 2023 11:22:05 +0200 (CEST)
 Received: from papero (host-88-217-136-221.customer.m-online.net
  [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
- Mon, 16 Oct 2023 11:22:24 +0200 (CEST)
+ Mon, 16 Oct 2023 11:22:05 +0200 (CEST)
 From: sbabic@denx.de
-X-Patchwork-Submitter: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-X-Patchwork-Id: 1837172
+X-Patchwork-Submitter: Hiago De Franco <hiagofranco@gmail.com>
+X-Patchwork-Id: 1842106
 X-Patchwork-Delegate: sbabic@denx.de
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,u-boot@lists.denx.de
-Subject: [PATCH v2] mx8m: csf.sh: pad csf blob for u-boot.itb to CSF_SIZE
- minus IVT header
-In-reply-to: <20230920103352.154366-1-rasmus.villemoes@prevas.dk>
+To: Hiago De Franco <hiagofranco@gmail.com>,u-boot@lists.denx.de
+Subject: [PATCH] toradex: colibri_imx7: Enable nand/emmc detection and set
+ boot variant
+In-reply-to: <20231002115749.15160-1-hiagofranco@gmail.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-Message-Id: <20231016092235.EBC2F86DCA@phobos.denx.de>
-Date: Mon, 16 Oct 2023 11:22:25 +0200 (CEST)
+Message-Id: <20231016092221.DC7EE86EE7@phobos.denx.de>
+Date: Mon, 16 Oct 2023 11:22:06 +0200 (CEST)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,20 +74,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> When built with CONFIG_IMX_HAB, the full FIT image, including stuff
-> tacked on beyond the end of the fdt structure, is expected to be (fdt
-> size rounded up to 0x1000 boundary)+CONFIG_CSF_SIZE.
-> Now, when the FIT image is loaded from a storage device, it doesn't
-> really matter that the flash.bin that gets written to target isn't
-> quite that big - we will just load some garbage bytes that are never
-> read or used for anything. But when flash.bin is uploaded via uuu,
-> it's important that we actually serve at least as many bytes as the
-> target expects, or we will hang in rom_api_download_image().
-> Extend the logic in the csf.sh script so that the csf blob is padded
-> to CONFIG_CSF_SIZE minus the size of the IVT header.
-> Signed-off-by: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> Reviewed-by: Fabio Estevam <festevam@denx.de>
-> Reviewed-by: Marek Vasut <marex@denx.de>
+> From: Hiago De Franco <hiago.franco@toradex.com>
+> Add detection of eMMC vs NAND devices on the Colibri iMX7
+> board. A GPIO is configured to detect the presence of an on-board resistor
+> that is configured differently based on the flash memory used. Depending on
+> the detection result, the 'variant' environment variable is set to '-emmc'
+> or cleared, indicating the type of storage device.
+> This enhancement improves variant detection during system initialization
+> through USB recovery mode, where U-Boot is loaded directly to RAM. This
+> allows variant detection for an accurate device tree selection.
+> Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
+> Acked-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
 Applied to u-boot-imx, master, thanks !
 
 Best regards,
