@@ -4,155 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB127CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 06:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61B9CCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 06:36:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00F11869D1;
-	Mon, 16 Oct 2023 08:34:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id CDDD586B79;
+	Mon, 16 Oct 2023 08:35:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="JDxAhSRo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XDO9Z7c/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84BEA86B79; Mon, 16 Oct 2023 08:34:27 +0200 (CEST)
-Received: from NAM04-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam04on2061e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e8b::61e])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4C32E86BD5; Mon, 16 Oct 2023 08:35:56 +0200 (CEST)
+Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
+ [IPv6:2607:f8b0:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A5928692B
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 08:34:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25A0E869D1
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 08:35:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hrrmJXNhREW7Q2nMhUESYURTuwi4EoCMk3VQ8GiBoY6yJFGcrh+kcCeN5qB6Unyyxx8kKBQya2i59bPwk3ucDuMyqG6cuuwdaIqQ+p9O9uFFaYQv8h0nN+pEK8EclguWPeHgfNLFX5KVF7MWz2XrhPLKMPAMgNHj7L0Jci/p1e1cvY0jHunjto2+t1pwbq4lmBiwmYfRTDYeO/sdKkymtk+0COOI73+e4d6529p2WACsryQQ72hDpjZ8ZtmlXQBVHddNwlT7FZ2YaejL9U9jcfK5YKrxIwbkUSNsAAA7JW9PJoTloF9dXWjtjjlWCYjT/cn3gO2AGjGFmlEiq8/3xA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JBarXb+vIBwQiSQKeOi9xIQIz5rWyEZl3XOui1b2Ic8=;
- b=ksf3ehhheplBvEHBk9GpRuVM8CrPDNUMRHoqf0bqGc8gg5/TOJiqQlWpy+D3yxyclCTk6vP+h3psghovwrS+aIjjaQcypNmhN9zDyR1icQzv/mfDO1zZA5coXRVy0EKkXimt3K0iup70bwGcj7PRniYzIN7rZMMa3cRRd0MR1VYgijL1a5kdFTN6bsaebzc3CQyXpaRso5b8ACgeIudBpgX4HtU7+cuBBqCynN2Bjl5U/rkO0fSb+Ns1VdDQMAubN1dwLebFZSK/VEwU0M4xjT7ZgNjkELgCFJMvNfUzul3SRXbhqud3kvNX+UCfPM4gu7b11VoDkVTMR6xGgb6MuQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=konsulko.com smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JBarXb+vIBwQiSQKeOi9xIQIz5rWyEZl3XOui1b2Ic8=;
- b=JDxAhSRoHkmfq9hd/J3TZAjDnhVpbTsAVfwBcw6QJpRzBDvxNWFnp9xjewly/fWsH/v1bMkJWT07E1nzYeXH2Nim4Q6pVpOy91iFpPIREy7mmBGkRrOEEGjs9o0kVeffbpN120L6ccypC9kFIg/FazprHypvfqpiO4M2v93tJck=
-Received: from MW4PR03CA0321.namprd03.prod.outlook.com (2603:10b6:303:dd::26)
- by DM4PR12MB5245.namprd12.prod.outlook.com (2603:10b6:5:398::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.34; Mon, 16 Oct
- 2023 06:34:20 +0000
-Received: from MWH0EPF000971E6.namprd02.prod.outlook.com
- (2603:10b6:303:dd:cafe::b1) by MW4PR03CA0321.outlook.office365.com
- (2603:10b6:303:dd::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.35 via Frontend
- Transport; Mon, 16 Oct 2023 06:34:20 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MWH0EPF000971E6.mail.protection.outlook.com (10.167.243.74) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.22 via Frontend Transport; Mon, 16 Oct 2023 06:34:20 +0000
-Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 16 Oct
- 2023 01:34:18 -0500
-Message-ID: <041b37d4-777a-4c02-b8fd-9985c2cfa938@amd.com>
-Date: Mon, 16 Oct 2023 08:34:16 +0200
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pg1-x529.google.com with SMTP id
+ 41be03b00d2f7-5859d13f73dso2456317a12.1
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 23:35:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697438151; x=1698042951; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RyVqMq38b2b4q90E5O5V120UhZwN7d5NtwR/xxKajWY=;
+ b=XDO9Z7c/qOT8jsHtkBvYzzFybmlyVUUoDQQhmoSoGkLBE5r7H7OSoj9cW86OIOwlAf
+ HCDGD1XxnIAS1LFKFpoY6QbucsxEdNsyWj/VUUy9dEwIe7dietfjNXkN7C+/TkG3/n0E
+ KnBQKUxqMWKBRodLH1WotX8gJmWrTqQaYR0xzN3f6p1Bq2FGh6h00NrICnyjaj4GE7Ko
+ YqJhRvBy1yCHS7gnhre7bvOuyhzjK3HpBkJuhBRNtv1bVOvO3eeDvmy943sfBUw4lT6W
+ HHx7SsicQf50kxEQaFbYrOsUIlqhWsIZFQSqO1jki5U6fDVbmvFCu0VJfuBjMaitvB3N
+ UCCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697438151; x=1698042951;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RyVqMq38b2b4q90E5O5V120UhZwN7d5NtwR/xxKajWY=;
+ b=UBreNDCnE56QUMPjToCnuaCNYy9KlR8FSDCZz8N0hmKs8rXdES3v75ZqbbXGkz/yin
+ D2atef/gE1VJhQrIqmFdNywJq41b2POXVo24Q3iVmcoIogOFPDTLlbW849zI3Gx7EzNf
+ fL9WkToGtqAmDfLo174NJOwAr2iR/yBg5VpgyTuHTjUX54573hGnriH57jrq9dHojecx
+ wu1wcDRqhPSi2Qpgfq3M/8qU0Dl507lVnepeYhU1xmZ2DTtbvRLuiSfHTfvVMT58Yeyi
+ pateGHMjmYBbtO/L2p3qRTZ0+VFB4EF+KGoLelF+QpLvfc2FDb8/DCIxZApi8AhTYMh2
+ eRKw==
+X-Gm-Message-State: AOJu0Yz1ThHL4pHHgQlYAyz6JVi9y7qssw8RsurNZ9fRn7A7nMOjZV5n
+ rrEz4xwZQ12neiyDU9CRF6/eur2N+1jse0JwLH/fGw==
+X-Google-Smtp-Source: AGHT+IHs3U52IrgvWIRfXsuzEW4K1HZK4RlhECfKYfhgYSsYay0moCR6SBaTTWzelMr+qjtsG+D4ss3x9iH3Yoq/Zgg=
+X-Received: by 2002:a17:90a:4584:b0:273:b0bd:343b with SMTP id
+ v4-20020a17090a458400b00273b0bd343bmr27593429pjg.41.1697438151331; Sun, 15
+ Oct 2023 23:35:51 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: xhci: Workaround to fix the USB halted endpoint
- issues
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Da Xue <da@lessconfused.com>
-CC: Marek Vasut <marex@denx.de>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>, <u-boot@lists.denx.de>, <git@xilinx.com>
-References: <20231013045356.25789-1-venkatesh.abbarapu@amd.com>
- <2016c1bc-dfe0-416e-a910-75e6cf25036c@denx.de>
- <CACdvmAju3wDL0yCJtVdEf47u+L5R3AvRpcuJ+ruKFXDTcQ-TBw@mail.gmail.com>
- <20231013151540.GJ3119521@bill-the-cat>
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20231013151540.GJ3119521@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000971E6:EE_|DM4PR12MB5245:EE_
-X-MS-Office365-Filtering-Correlation-Id: a838ddf9-a946-4a43-d16f-08dbce11ee14
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: vgQ3IiWIaqr1RuZgvN/gy3ko+i8slTCOet8aN3KkYq5oTHgIAa/1ykuWjXuf2AKmwQadziB6I+6UAOIEYgHqSLpGkyrI4ZZ6AkI3c4KEtiVsopypEN6Lv0DMz0L1vGC+2TwSey1Y2aoSX3JOwzlwUycFPeN/WQ9jfNbvAZRNxedzj/lCffO/IaFft6B1m5LV9Uj8eLMHOMFlCvBkvl3rTXqrn2LRNqHsDczxlsAi+7sqr+FMwu7UQK5auEKTlYusLJ690oGn18Oc3Za4PZbqV8KDjqb6gm1lNd4IWJIO5wIb8CMQIUcfDZSEiNNAxNKHgWi+XRWpKyjUfwRwt0NNvrAjdROKbgfWjkmgq6ISeahLYz1QqWOaGVJNCH1ytjU9ZdzHnxk3iOprRPOgBl+qnJXOjBc6p3rWQkEXgFN1tXPa9XpDTU044qeoZlDwTrYixb4tF7vvAiuOAPhEnG53Hn/jvwxWu7KrVMZlQ5va42PLWmuXKcvCFGadKdTmUwQbvZvCgwO0zOJmgxFxNrqKzeu8AFOK19IE3tTEPyYJoa1Xj4YALsdVtZzEZnC4FmYfarJogg4PDlA9wovr0KrADiNTq8ur8QfOQP6E1mFMFRC09nwcwN9V4031mYC4iVQalTwS/JEmUYqMv0VMC/7aSjujMkPMDXEeEKXgkyjsFZiP0VOMVx5sDdK1OFY0tKfi9s4/oSWE5CDleyAbMiDX65KG96EVpaCvAAJrNeBE1AHb3cZYFaaWPI26AXbWXjyZB6dWxRfU5pNeSIIzHrUgFdStv9LWqO/WFdB5gQ+KVtE=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(346002)(136003)(396003)(39860400002)(230922051799003)(1800799009)(451199024)(82310400011)(64100799003)(186009)(40470700004)(36840700001)(46966006)(31686004)(40480700001)(36756003)(40460700003)(70586007)(70206006)(54906003)(41300700001)(16576012)(110136005)(31696002)(82740400003)(86362001)(356005)(81166007)(36860700001)(83380400001)(2616005)(426003)(16526019)(336012)(26005)(53546011)(107886003)(966005)(2906002)(478600001)(316002)(4326008)(47076005)(8676002)(5660300002)(44832011)(8936002)(36900700001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2023 06:34:20.5289 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a838ddf9-a946-4a43-d16f-08dbce11ee14
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000971E6.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5245
+References: <20231015234907.2362717-1-masahisa.kojima@linaro.org>
+ <CADQ0-X-=4q7dCeny2F_J6DqY9bVxQ01p-zLyu4rnwVXmE=iiEA@mail.gmail.com>
+ <c3dfae22-94a0-4d64-9175-dde259c421ef@amd.com>
+In-Reply-To: <c3dfae22-94a0-4d64-9175-dde259c421ef@amd.com>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Mon, 16 Oct 2023 15:35:40 +0900
+Message-ID: <CADQ0-X_-5VfP2EmApHQrvDaXbBZHeUUuPk4wbaD5FnZRP75Q_Q@mail.gmail.com>
+Subject: Re: [PATCH v6 0/9] Add EFI HTTP boot support
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -169,50 +88,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Michal,
 
+On Mon, 16 Oct 2023 at 15:25, Michal Simek <michal.simek@amd.com> wrote:
+>
+>
+>
+> On 10/16/23 04:39, Masahisa Kojima wrote:
+> > On Mon, 16 Oct 2023 at 08:50, Masahisa Kojima
+> > <masahisa.kojima@linaro.org> wrote:
+> >>
+> >> This series adds the EFI HTTP boot support.
+> >> User can add the URI device path with "efidebug boot add" command.
+> >> efibootmgr handles the URI device path, download the
+> >> specified file using wget, mount the downloaded image with
+> >> blkmap, then boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI)
+> >> by selecting automatically created boot option when the new disk is
+> >> detected.
+> >>
+> >> This version still does not include the test.
+> >>
+> >> To enable EFI HTTP boot, we need to enable the following Kconfig options.
+> >>   CONFIG_CMD_DNS
+> >>   CONFIG_CMD_WGET
+> >>   CONFIG_BLKMAP
+> >>   CONFIG_EFI_HTTP_BOOT
+> >>
+> >> On the Socionext Developerbox, enter the following commands then
+> >> debian installer is downloaded into "loadaddr" and installer
+> >> automatically starts.
+> >>   => dhcp
+> >>   => setenv serverip 192.168.1.1
+> >>   => efidebug boot add -u 3 debian-netinst http://ftp.riken.jp/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+> >>   => efidebug boot order 3
+> >>   => bootefi bootmgr
+> >>
+> >> Note that this debian installer can not proceed the installation
+> >> bacause RAM disk of installer image is not recogniged by the kernel.
+> >> I'm still investigating this issue, but drivers/nvdimm/of_pmem.c in linux
+> >> will be one of the solution to recognize RAM disk from kernel.
+> >> (In EDK2, the equivalent solution is called ACPI NFIT.)
+> >>
+> >> On QEMU, I can not make DNS work from the QEMU guest.
+> >> The following commands work on qemu_arm64(manually set the http server ip in URI).
+> >>    => dhcp
+> >>    => setenv gatewayip 10.0.2.2
+> >>    => setenv httpserverip 134.160.38.1
+> >>    => efidebug boot add -u 3 debian-netinst http://134.160.38.1/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+> >>    => efidebug boot order 3
+> >>    => bootefi bootmgr
+> >>
+> >> [TODO]
+> >> - add test
+> >> - stricter wget uri check
+> >> - omit the dns process if the given uri has ip address
+> >>     -> this will be supported when the lwip migration completes
+> >> - uri device path support in eficonfig
+> >>
+> >> [change log]
+> >> v5 -> v6
+> >> - add patch #4 "Boot var automatic management for removable medias"
+> >> - boot from automatically created boot option
+> >>    rather than searching default file on the fly
+> >> - introduce new CONFIG_EFI_HTTP_BOOT Kconfig option
+> >> - comment in one place
+> >> - use log_err() rather than printf()
+> >> - use env_get_hex("filesize", 0) instead of return value of net_loop()
+> >> - use more suitable error code
+> >> - blkmap can be build for SPL/TPL
+> >> - add CDROM short-form device path support
+> >
+> > Sorry but I forgot to include the necessary changes.
+> > I will resend this series soon.
+>
+> Which pretty much means that that next series is v7. If not you will confuse
+> tools like b4.
 
-On 10/13/23 17:15, Tom Rini wrote:
-> On Fri, Oct 13, 2023 at 11:11:04AM -0400, Da Xue wrote:
->> On Fri, Oct 13, 2023 at 7:47 AM Marek Vasut <marex@denx.de> wrote:
->>>
->>> On 10/13/23 06:53, Venkatesh Yadav Abbarapu wrote:
->>>> The xhci host controller driver trying to queue the URB's and it is
->>>> getting halted at the endpoint, thereby hitting the BUG_ON's.
->>>> Mostly these kind of random issues are seen on faulty boards.
->>>> Removing these BUG_ON's from the U-Boot xhci code, as in Linux kernel
->>>> xhci code BUG_ON/BUG's are removed entirely.
->>>> Please also note, that BUG_ON() is not recommended any more in the Linux
->>>> kernel.
->>>> Similar issue has been observed on TI AM437x board and they created a patch
->>>> in Linux kernel as below
->>>> https://patches.linaro.org/project/linux-usb/patch/1390250711-25840-1-git-send-email-balbi@ti.com/
->>>>
->>>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->>>
->>> I already explained to Xilinx how to sync the driver with Linux and why
->>> this is needed to move forward, multiple times, and even provided a
->>> script which does most of the work automatically, since it is basically
->>> automated process. Xilinx did not even bother to test the script and
->>> provide any feedback.
->>>
->>> Until that happens, this patch is rejected.
->>
->> This patch also causes all of the USB devices on certain platforms to
->> not be detected:
->>
->> scanning bus usb@c9000000 for devices... Device not responding to set address.
->>
->>        USB device not accepting new address (error=80000000)
-> 
-> Yes, we are stuck at the impasse where the custodian is asking for
-> someone to try and do the re-sync, and everyone else will assist with
-> testing on other platforms, but the re-sync hasn't happened.  Can we
-> please get someone from AMD to attempt the re-sync?
-
-I would like to say that we have someone to do it. But I simply don't have that 
-person.
+Thank you, yes, I will send the updated version as v7.
+Sorry for sending so many emails.
 
 Thanks,
-Michal
+Masahisa Kojima
 
-
+>
+> Thanks,
+> Michal
+>
