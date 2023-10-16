@@ -4,81 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C1EC41513
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 04:30:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87190CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 05:40:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82F2486DD5;
-	Mon, 16 Oct 2023 06:30:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 516AE86BA4;
+	Mon, 16 Oct 2023 07:40:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RP2uyRU4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U42qox8s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BEA586524; Mon, 16 Oct 2023 06:25:36 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id 4EA7B86B43; Mon, 16 Oct 2023 07:40:09 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5141D86E22
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 06:24:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 588D586958
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 07:40:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-58e119bb28eso3877170a12.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 21:24:57 -0700 (PDT)
+ spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-27d51a57062so242326a91.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 22:40:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697430295; x=1698035095; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ix7OkLuT2UMlsZ+CYDlpWbnES/L/lF+FUZtbgDuoIRo=;
- b=RP2uyRU4WNmviYjpjtKrJLYWiPxo3MqM5ekqaMJMEyPGMbVTaU6a98WD8/SBvQhOar
- H+I5Vholo7PmrYdNjfVfWu8CxKtT+BFKQ5y+5QBo6Dk3MKxHJoFa7KZYjLvPEh/gxPRK
- kEzFO5VQuYzkd3VIkJPb9mPiC2D/Vg0VRUOpJC541F5XOdaEaSa75mAZKN5tsjNL6bNy
- 982bAPx9hIzK0eJNi9+cGcuBCUb4q5x4R3ZuCy6RFndQYI0fB9mgP6/W9nH+77Ka16yR
- o84MtPVWOkJONAfHWWBw4Zg1kVoXtVNnC2vK3LgzdIQW0KrijD9HExzAGAzSvq6Cc+CY
- HfpA==
+ d=linaro.org; s=google; t=1697434801; x=1698039601; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=FRQEuXX7ivKCVYN5xxBpNzRwVSKSsqbFHY8lkMn2sYY=;
+ b=U42qox8sCP/FCw6yWuqG3DzfowEMAlLyQ6hlk0T7zmd3hO9/QfEzJx8InK6tA9v8uU
+ k/GB3gI3N2BXArJ0kapcGggAdJntC3EyzUDll18x8U7iHf52ldx3LArSV+TCSf7StIU/
+ kwmqYu5WBXUnMCulGSwAPAeB3+g7IJ6sxNgiyFhkuvBbgjtbX0NsZsVXOtrUuQTwxTHY
+ 7BlJmkGx1Ez2EfkkwGuoxpmYLJab0pfapejNieMwPk9qPW/EkqNxllqm+WkO5h1ZgJyw
+ ZtfeC8BJnrkrzncA4YqraSQmJn0BCt6rU1yqPPU3pjx/1S13eh5qo4CZyobNgTXnGy0H
+ uPRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697430295; x=1698035095;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Ix7OkLuT2UMlsZ+CYDlpWbnES/L/lF+FUZtbgDuoIRo=;
- b=APnRJ2omboQkiOEJbMg+gJLUPl4cswLKlisjE85SgB3uPcvs8Gf6lvI6/7gckJy3fp
- HKFcUfNxunhDlWn51rdTSdWpVbhfolzjz6wnvAUrH+nFSlHoSo5xFv0XetXSnO0JJkPX
- RrwCLiFagHbc3RcT6MpzWye3GVIvokXE1nD3/OPTSicfbfoztrAFJj2p/mRdxP8R/R4V
- LBhwH9F+0BnXYajR7mMXIYUCJlK9z09fq2gXaNAxgZ8c2jdo/FNuFKHIVET4WSOv+xH6
- 9jT5FU6JNovmO0XPchvkbJHUWoaZxd+KdcuvAIY1MFv7+qf3GQswtBa3VzCZWyNGtMzb
- gaPA==
-X-Gm-Message-State: AOJu0YwtoPJKxtshUw91wf9K+F4KQ7hem9PXpNK/R4FF1lWBpyemRw3j
- 7n9DZpeM01wR4PV725yWjVWGdAlNMS/sUjR3Ssw=
-X-Google-Smtp-Source: AGHT+IFo32QhafUGw9vd9szhgPrWfhStNHWfVGjbxSPO59h0tw6VOdE3Mi8FSdQlRPxIyh/UUXir4w==
-X-Received: by 2002:a05:6a20:9150:b0:140:d536:d434 with SMTP id
- x16-20020a056a20915000b00140d536d434mr9432129pzc.10.1697430295444; 
- Sun, 15 Oct 2023 21:24:55 -0700 (PDT)
-Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- y123-20020a636481000000b005b628aa2a8dsm1769166pgb.69.2023.10.15.21.24.54
+ d=1e100.net; s=20230601; t=1697434801; x=1698039601;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FRQEuXX7ivKCVYN5xxBpNzRwVSKSsqbFHY8lkMn2sYY=;
+ b=qX6WwjjImP3xoVt8LsEWSbYwxmM2cA8K344mR/vA3G1JfWT4MECg/jD585wY4RQ0Vu
+ DCH4XgUHCQpbV7BKEC+09CeYD5mpu75iMXTmZqZeX2Gj4BFnkRd0Vk3pdNSOTJbwam1i
+ Yk79L7UVn4YUigRAsKgMU62s7w/Zn2LGYKQn5Xw8PkbI7DEf0OodJ+6ZJDV8tM+ugvvt
+ G/zN0N4Fa7enm5WhS7MkyEeqPk5Wqa4GNaOu86+nwBk5rhcIQE9/IqcTHSIFNu9ZgWQB
+ g94C+wRKHbwZP+Pvf/4glEYzOuR2tyR9bJkoBqgmfpI4wEws98/g2BEgRDjGHwkT51Mp
+ WZIA==
+X-Gm-Message-State: AOJu0YzDCzYdF32rQNhhHUDksqkytRYy4olellGBoHEL089fgQKDPkTR
+ oA/MxZvEV3VBP9xQSo7HZHMtZQ==
+X-Google-Smtp-Source: AGHT+IH1TlabGkkbd9tbfM/Gloqxp2UTgTl5WmXi9jKhn+zTkLxzpq3iGZ0/Oba+h/4SnBARYWNlBA==
+X-Received: by 2002:a17:90b:4f4d:b0:27d:9b6:ec1b with SMTP id
+ pj13-20020a17090b4f4d00b0027d09b6ec1bmr13699121pjb.4.1697434800797; 
+ Sun, 15 Oct 2023 22:40:00 -0700 (PDT)
+Received: from octopus.. ([2400:4050:c3e1:100:4c30:a6e6:b316:7d31])
+ by smtp.gmail.com with ESMTPSA id
+ lb18-20020a17090b4a5200b002636dfcc6f5sm3878134pjb.3.2023.10.15.22.39.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Oct 2023 21:24:54 -0700 (PDT)
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: [RESEND PATCH v6 8/9] cmd: efidebug: add uri device path
-Date: Mon, 16 Oct 2023 13:23:07 +0900
-Message-Id: <20231016042309.2386387-9-masahisa.kojima@linaro.org>
+ Sun, 15 Oct 2023 22:40:00 -0700 (PDT)
+From: AKASHI Takahiro <takahiro.akashi@linaro.org>
+To: trini@konsulko.com,
+	sjg@chromium.org
+Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
+Subject: [PATCH v2 0/4] firmware: scmi: add SCMI power domain protocol support
+Date: Mon, 16 Oct 2023 14:39:42 +0900
+Message-Id: <20231016053946.470458-1-takahiro.akashi@linaro.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231016042309.2386387-1-masahisa.kojima@linaro.org>
-References: <20231016042309.2386387-1-masahisa.kojima@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,188 +90,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the URI device path option for 'boot add' subcommand.
-User can add the URI load option for downloading ISO image file
-or EFI application through network. Currently HTTP is only supported.
+This patch series allows users to access SCMI power domain protocol
+provided by SCMI server (platform). See SCMI specification document
+v3.2 beta 2[1] for more details about SCMI power domain protocol.
 
-Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
----
- cmd/efidebug.c | 50 +++++++++++++++++++++++++++++++++++
- include/net.h  |  8 ++++++
- net/wget.c     | 71 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 129 insertions(+)
+The implementation consists of two layers:
+- basic helper functions for SCMI power domain protocol
+  in drivers/firmware/scmi/pwdom.c (patch#1)
+- DM-compliant power domain driver, which utilizes the helper functions,
+  in drivers/power/domain/scmi-power-domain.c (patch#2)
 
-diff --git a/cmd/efidebug.c b/cmd/efidebug.c
-index 0be3af3e76..5f392d2ffd 100644
---- a/cmd/efidebug.c
-+++ b/cmd/efidebug.c
-@@ -19,6 +19,7 @@
- #include <log.h>
- #include <malloc.h>
- #include <mapmem.h>
-+#include <net.h>
- #include <part.h>
- #include <search.h>
- #include <linux/ctype.h>
-@@ -829,6 +830,52 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
- 			argc -= 1;
- 			argv += 1;
- 			break;
-+#if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
-+		case 'u':
-+		{
-+			char *pos;
-+			int uridp_len;
-+			struct efi_device_path_uri *uridp;
-+
-+			if (argc <  3 || lo.label) {
-+				r = CMD_RET_USAGE;
-+				goto out;
-+			}
-+			id = (int)hextoul(argv[1], &endp);
-+			if (*endp != '\0' || id > 0xffff)
-+				return CMD_RET_USAGE;
-+
-+			efi_create_indexed_name(var_name16, sizeof(var_name16),
-+						"Boot", id);
-+
-+			label = efi_convert_string(argv[2]);
-+			if (!label)
-+				return CMD_RET_FAILURE;
-+			lo.label = label;
-+
-+			uridp_len = sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
-+			fp_free = efi_alloc(uridp_len + sizeof(END));
-+			uridp = (struct efi_device_path_uri *)fp_free;
-+			uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-+			uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
-+			uridp->dp.length = uridp_len;
-+			if (!wget_validate_uri(argv[3])) {
-+				printf("ERROR: invalid URI\n");
-+				r = CMD_RET_FAILURE;
-+				goto out;
-+			}
-+
-+			strcpy(uridp->uri, argv[3]);
-+			pos = (char *)uridp + uridp_len;
-+			memcpy(pos, &END, sizeof(END));
-+			fp_size += uridp_len + sizeof(END);
-+			file_path = (struct efi_device_path *)uridp;
-+			argc -= 3;
-+			argv += 3;
-+			break;
-+		}
-+#endif
-+
- 		default:
- 			r = CMD_RET_USAGE;
- 			goto out;
-@@ -1492,6 +1539,9 @@ static char efidebug_help_text[] =
- 	"  -b|-B <bootid> <label> <interface> <devnum>[:<part>] <file path>\n"
- 	"  -i|-I <interface> <devnum>[:<part>] <initrd file path>\n"
- 	"  (-b, -i for short form device path)\n"
-+#if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
-+	"  -u <bootid> <label> <uri>\n"
-+#endif
- 	"  -s '<optional data>'\n"
- 	"efidebug boot rm <bootid#1> [<bootid#2> [<bootid#3> [...]]]\n"
- 	"  - delete UEFI BootXXXX variables\n"
-diff --git a/include/net.h b/include/net.h
-index 57889d8b7a..c748974573 100644
---- a/include/net.h
-+++ b/include/net.h
-@@ -935,4 +935,12 @@ static inline void eth_set_enable_bootdevs(bool enable) {}
-  */
- int wget_with_dns(ulong dst_addr, char *uri);
- 
-+/**
-+ * wget_validate_uri() - varidate the uri
-+ *
-+ * @uri:	uri string of target file of wget
-+ * Return:	true if uri is valid, false if uri is invalid
-+ */
-+bool wget_validate_uri(char *uri);
-+
- #endif /* __NET_H__ */
-diff --git a/net/wget.c b/net/wget.c
-index 2087146b37..6ae2237a0a 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -566,3 +566,74 @@ out:
- 	return ret;
- }
- #endif
-+
-+/**
-+ * wget_validate_uri() - validate the uri for wget
-+ *
-+ * @uri:	uri string
-+ *
-+ * This function follows the current U-Boot wget implementation.
-+ * scheme: only "http:" is supported
-+ * authority:
-+ *   - user information: not supported
-+ *   - host: supported
-+ *   - port: not supported(always use the default port)
-+ *
-+ * Uri is expected to be correctly percent encoded.
-+ * This is the minimum check, control codes(0x1-0x19, 0x7F, except '\0')
-+ * and space character(0x20) are not allowed.
-+ *
-+ * TODO: stricter uri conformance check
-+ *
-+ * Return:	true on success, false on failure
-+ */
-+bool wget_validate_uri(char *uri)
-+{
-+	char c;
-+	bool ret = true;
-+	char *str_copy, *s, *authority;
-+
-+	for (c = 0x1; c < 0x21; c++) {
-+		if (strchr(uri, c)) {
-+			log_err("invalid character is used\n");
-+			return false;
-+		}
-+	}
-+	if (strchr(uri, 0x7f)) {
-+		log_err("invalid character is used\n");
-+		return false;
-+	}
-+
-+	if (strncmp(uri, "http://", 7)) {
-+		log_err("only http:// is supported\n");
-+		return false;
-+	}
-+	str_copy = strdup(uri);
-+	if (!str_copy)
-+		return false;
-+
-+	s = str_copy + strlen("http://");
-+	authority = strsep(&s, "/");
-+	if (!s) {
-+		log_err("invalid uri, no file path\n");
-+		ret = false;
-+		goto out;
-+	}
-+	s = strchr(authority, '@');
-+	if (s) {
-+		log_err("user information is not supported\n");
-+		ret = false;
-+		goto out;
-+	}
-+	s = strchr(authority, ':');
-+	if (s) {
-+		log_err("user defined port is not supported\n");
-+		ret = false;
-+		goto out;
-+	}
-+
-+out:
-+	free(str_copy);
-+
-+	return ret;
-+}
+[1] https://developer.arm.com/documentation/den0056/e/?lang=en
+
+DT bindings
+===========
+Standard bindings are applied, i.e.
+
+scmi {
+    ...
+    pwrdom_scmi: protocol@11 {
+        regs = <0x11>;
+        #power-domain-cells = <1>;
+    }
+    ...
+}
+
+som-device {
+    ...
+    power-domains = <&pwrdom_scmi 2>;
+}
+
+Test
+====
+The patch series was tested on the following platform:
+* sandbox ("ut dm scmi_power_domains")
+
+
+Prerequisite:
+=============
+* This patch series is based on the master which now includes my "Base
+  protocol support" patches v6[2]
+
+[2] https://lists.denx.de/pipermail/u-boot/2023-September/531623.html
+
+Patches:
+========
+Patch#1: Add SCMI power domain protocol helpers
+Patch#2: Add power domain driver
+Patch#3-#4: Test related
+
+
+Change history:
+===============
+v2 (Oct 16, 2023)
+* remove a change on "test_scmi_cmd" because "scmi" command is no longer
+  provided with base protocol v6
+* some cleanup
+v1 (Sep 26, 2023)
+* initial release
+
+AKASHI Takahiro (4):
+  firmware: scmi: add power domain protocol support
+  power: domain: add SCMI driver
+  sandbox: add SCMI power domain protocol support for testing
+  test: dm: add SCMI power domain protocol test
+
+ arch/sandbox/dts/test.dts                    |   6 +
+ arch/sandbox/include/asm/scmi_test.h         |  21 ++
+ configs/sandbox_defconfig                    |   1 +
+ drivers/firmware/scmi/Makefile               |   1 +
+ drivers/firmware/scmi/pwdom.c                | 189 +++++++++++++
+ drivers/firmware/scmi/sandbox-scmi_agent.c   | 265 ++++++++++++++++++-
+ drivers/firmware/scmi/sandbox-scmi_devices.c |  10 +
+ drivers/firmware/scmi/scmi_agent-uclass.c    |  11 +
+ drivers/power/domain/Kconfig                 |   7 +
+ drivers/power/domain/Makefile                |   1 +
+ drivers/power/domain/scmi-power-domain.c     | 193 ++++++++++++++
+ include/scmi_agent-uclass.h                  |   2 +
+ include/scmi_protocols.h                     | 178 +++++++++++++
+ test/dm/scmi.c                               | 103 +++++++
+ 14 files changed, 987 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/firmware/scmi/pwdom.c
+ create mode 100644 drivers/power/domain/scmi-power-domain.c
+
 -- 
 2.34.1
 
