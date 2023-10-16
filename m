@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72591CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 16:47:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE7BFCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 16:48:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D762786E2F;
-	Mon, 16 Oct 2023 18:46:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5025086F0D;
+	Mon, 16 Oct 2023 18:46:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697474793;
-	bh=Fy+aDZEW1Qk3NY14rpwVjRjmITTsDiR+pDPzpwDQgDg=;
+	s=phobos-20191101; t=1697474794;
+	bh=BuHakO2uxdK6FdBkSBlMEPGoY6ACb3AtRxzvJJlYZCg=;
 	h=From:To:Subject:In-reply-to:Date:List-Id:List-Unsubscribe:
 	 List-Archive:List-Post:List-Help:List-Subscribe:From;
-	b=KDPOPFBsDmQV95Uve8pDZBpmLtuDY3prTQVeaaKDWsD9OuoKP3dKYlNebd6ravuoy
-	 wdSbt3FyYRZsl+8GglUQRdhCQ2pRaYLTqwSSnwyZM2ADJ7c+t2e/ifn66P1VIgwVG4
-	 ghITlPmRDBGtmt84AoLP9sHZR7EI6V+fgyCuO6g+6CRaM3hwdUiGiCqOKWARAd2tmd
-	 LS8vDFklvlElKJyCA0gM4Qh8mAhExquBtOnVK40oC/7zeVywErs6XslbulhjUFZkLS
-	 uXZqR4hCgZklVqCExDZSERYzKssWxjiBZ0O241hFhuUVx24T7bUQNAd5VTwxteaY/w
-	 sFhzDFgacv3ow==
+	b=D0rSnv8RWSzPfPepWRCq3GQmH8BM8/KYibqOhYKOZhqtd7LF4J08DQb5LU4HEv6Uj
+	 RUjIhVPAru+HnoPRvf9XlCcxAbGNKnWTPETvJZuOwecydwrjVNwgv/31vYv5C8CYHk
+	 M113ZGPi1DED4+nhshbVKLIDP8Th5iCvfnUKSGzW5/xJXhxs3fzzfVDDetlrtfsT0z
+	 bBi1VX8A0jeXrqEsCNLDvhOrMBQZG9g1/DfWCrqztYjBc0R9KR8CvhcZTqQTYzKuqa
+	 7hxfB6D37svrb9MuJT9EHy4dloj3aNg6EhYzu0/N6nMlzYSy+y1lVSeDNgoUj0lSCK
+	 QtOW6pcUljArQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3B43486F0F; Mon, 16 Oct 2023 18:46:24 +0200 (CEST)
+ id DF47A86DDE; Mon, 16 Oct 2023 18:46:26 +0200 (CEST)
 Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01F5686E1A
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 18:46:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9D6D869EB
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 18:46:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4S8NKW5Zjbz1r1sM;
- Mon, 16 Oct 2023 18:46:07 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 4S8NKp4kRqz1r1sW;
+ Mon, 16 Oct 2023 18:46:22 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
- by mail.m-online.net (Postfix) with ESMTP id 4S8NKW5V5tz1qqlS;
- Mon, 16 Oct 2023 18:46:07 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 4S8NKp4bpzz1qqlS;
+ Mon, 16 Oct 2023 18:46:22 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
- with ESMTP id dcqjNp4RI-4v; Mon, 16 Oct 2023 18:46:07 +0200 (CEST)
+ with ESMTP id moCNRlyL04j0; Mon, 16 Oct 2023 18:46:22 +0200 (CEST)
 Received: from papero (host-88-217-136-221.customer.m-online.net
  [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
- Mon, 16 Oct 2023 18:46:07 +0200 (CEST)
+ Mon, 16 Oct 2023 18:46:22 +0200 (CEST)
 From: sbabic@denx.de
-X-Patchwork-Submitter: Marek Vasut <marex@denx.de>
-X-Patchwork-Id: 1837757
+X-Patchwork-Submitter: Fabio Estevam <festevam@gmail.com>
+X-Patchwork-Id: 1819033
 X-Patchwork-Delegate: sbabic@denx.de
-To: Marek Vasut <marex@denx.de>,u-boot@lists.denx.de
-Subject: [PATCH 4/5] arm64: dts: imx8mp: Drop i.MX8MP DHCOM rev.100 PHY
- address workaround from PDK3 DT
-In-reply-to: <20230921184420.45186-4-marex@denx.de>
+To: Fabio Estevam <festevam@gmail.com>,u-boot@lists.denx.de
+Subject: [PATCH 2/3] mx7dsabresd: Convert to watchdog driver model
+In-reply-to: <20230808214040.1382330-2-festevam@gmail.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-Message-Id: <20231016164624.3B43486F0F@phobos.denx.de>
-Date: Mon, 16 Oct 2023 18:46:08 +0200 (CEST)
+Message-Id: <20231016164626.DF47A86DDE@phobos.denx.de>
+Date: Mon, 16 Oct 2023 18:46:22 +0200 (CEST)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,12 +73,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> In case the i.MX8MP DHCOM rev.100 has been populated on the PDK3
-> carrier board, the on-SoM PHY PHYAD1 signal has been pulled high
-> by the carrier board and changed the PHY MDIO address from 5 to 7.
-> This has been fixed on production rev.200 SoM by additional buffer
-> on the SoM PHYAD/LED signals, remove the workaround.
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> From: Fabio Estevam <festevam@denx.de>
+> Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+> the 'reset' command in U-Boot to not cause a board reset.
+> Fix it by switching to the watchdog driver model via sysreset, which
+> is the preferred method for implementing the watchdog reset.
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> Reviewed-by: Marek Vasut <marex@denx.de>
 Applied to u-boot-imx, master, thanks !
 
 Best regards,
