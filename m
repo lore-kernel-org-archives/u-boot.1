@@ -4,50 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22ED8C46CA1
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:50:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E59EFCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 15:52:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 779E786BA4;
-	Mon, 16 Oct 2023 16:50:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 0693C86BB3;
+	Mon, 16 Oct 2023 17:52:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697467836;
-	bh=SFQcx5YxVunuswRMwKIsL4iDX+Gai5CHseHoWlOx1yw=;
-	h=Date:To:Cc:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=tBFMklUCoMWGutRzHJzTcbT9tP/SyRhaDqkr1jizwC7oxl4niFU+GFYQxRVLS6Rjw
-	 YnGXdXMlJuHGwRmGXuZcnkuCIz7DbecVoRgPpP5e/gQmXTYQpF+vzztqi39o/8gFPh
-	 thc5bj3GGtuG07yuoXsuDjS8/eF7JkJwDmjayFjIUt3xv8VX0DmTd32gDy/yGNtnDB
-	 lzHPACGtBqa+iqUFgrVaKotIwKQpskHR5fmYrPOSqodfFHO9igR4vqMsjz5tzuhgNv
-	 6wN+RPcvCNBJvwLMT8bKUjgvQZa9zqnUYnGjpt5LWBVqcgo4A/Imo9V7Xms8c4BifF
-	 f8dI+MXLsoGNw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C90D386BF2; Mon, 16 Oct 2023 16:50:31 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9770286B73
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:50:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rCvgucMU";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8CDE986AE9; Mon, 16 Oct 2023 17:52:28 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4S8Km32fvKz9sq7;
- Mon, 16 Oct 2023 16:50:27 +0200 (CEST)
-Message-ID: <ddd355c2-344e-4fbd-ace9-29d10f3966d3@denx.de>
-Date: Mon, 16 Oct 2023 16:50:26 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 156F586D4A
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 17:52:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39GFqAi7039369;
+ Mon, 16 Oct 2023 10:52:10 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1697471530;
+ bh=X8i3lB1xZ8bcyDTdvbdTsZ5s7fhJcSfvs4FDRa2P4gc=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=rCvgucMUs5DeHOE9YSUFj3ohsxmTFulA5Q852uxg7mS6iDyxdvoBc3+4di1vdqBmU
+ +eDXmIlV8zvu8uHNXn2mfuTsGIx8M9IH6fmxuGEr+fnRA6jPqIYubep4XMIxsaIXcy
+ scf2FMUHKs0jJd8Xzq2fSLX00NjAQckLKc6Xpt9M=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39GFqAjj093734
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 16 Oct 2023 10:52:10 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 16
+ Oct 2023 10:52:10 -0500
+Received: from fllv0040.itg.ti.com (10.64.41.20) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 16 Oct 2023 10:52:10 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by fllv0040.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39GFqAmE000879;
+ Mon, 16 Oct 2023 10:52:10 -0500
+Date: Mon, 16 Oct 2023 10:52:10 -0500
+From: Nishanth Menon <nm@ti.com>
+To: Bryan Brattlof <bb@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Vignesh Raghavendra <vigneshr@ti.com>, Hari
+ Nagalla <hnagalla@ti.com>, Lukasz Majewski <lukma@denx.de>, Sean Anderson
+ <seanga2@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>, UBoot Mailing
+ List <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: Re: [PATCH 00/11] Introduce basic support for TI's AM62Px SoC family
+Message-ID: <20231016155210.22rlldfh56pjwc23@designed>
+References: <20231012230616.2101992-13-bb@ti.com>
 MIME-Version: 1.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Stefan Roese <sr@denx.de>
-Subject: Please pull u-boot-marvell/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20231012230616.2101992-13-bb@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,101 +80,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 18:06-20231012, Bryan Brattlof wrote:
+> Hello Everyone!
+> 
+> The AM62Px is an extension of the existing Sitara AM62x low-cost family
+> of application processors built for Automotive and Linux Application
+> development. Scalable Arm Cortex-A53 performance and embedded features,
+> such as: multi high-definition display support, 3D-graphics
+> acceleration, 4K video acceleration, and extensive peripherals make the
+> AM62Px well-suited for a broad range of automation and industrial
+> application, including automotive digital instrumentation, automotive
+> displays, industrial HMI, and more.
+> 
+> Some highlights of AM62P SoC are:
+> 
 
-please pull this first batch of Marvell related patches:
+This is Nice, BUT, I suggest cleaning up AM65 and AM62A prior to
+attacking AM62P.
 
-----------------------------------------------------------------
-- dns325: Enable 2nd harddrive (Peter & Stefan)
-- marvell: cn9310-crb: Misc fixes to SPI / pincntrl in DTS (Chris)
-- kirkwood: Add support for ZyXEL NSA325 board (Tony)
-- sata_mv: Add bootstd hook to enable sata_bootdev (Tony)
-- x240/AC5/AC5X: Disable SMBIOS (Chris)
-- Revert "arm: mvebu: x240: Use i2c-gpio instead of built in controller" 
-(Chris)
-- DS116/N2350: Enable bootstd (Tony)
-- clearfog: Support multiple DDR sizes (Josua)
-----------------------------------------------------------------
+I would like to see:
+a) dt sync
+b) maintain the bootph - so that the boards finally boot
+c) switch to stdboot.
 
-Here the Azure build, without any issues:
-
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=317&view=results
-
-Thanks,
-Stefan
-
-The following changes since commit 3c3f1626919cd93cbe6c56e3849937de5be18dbb:
-
-   Merge tag 'dm-pull-13oct23' of 
-https://source.denx.de/u-boot/custodians/u-boot-dm (2023-10-14 10:50:20 
--0400)
-
-are available in the Git repository at:
-
-   git@source.denx.de:u-boot/custodians/u-boot-marvell.git
-
-for you to fetch changes up to d2387c6227715eee8fd07466ed4eeffdcc9f86d2:
-
-   arm: mvebu: AC5/AC5X: Disable SMBIOS (2023-10-16 14:00:45 +0200)
-
-----------------------------------------------------------------
-Chris Packham (5):
-       ARM64: dts: marvell: cn9310: Use appropriate label for spi1 pins
-       ARM64: dts: marvell: cn9310-crb: Remove duplicate pinctrl
-       arm: mvebu: x240: Disable SMBIOS
-       Revert "arm: mvebu: x240: Use i2c-gpio instead of built in 
-controller"
-       arm: mvebu: AC5/AC5X: Disable SMBIOS
-
-Josua Mayer (2):
-       arm: mvebu: clearfog: read number of ddr channels from tlv data
-       arm: mvebu: clearfog: support 512MB memory size from tlv eeprom
-
-Stefan Roese (1):
-       kirkwood: dns325: Enable 2nd harddrive
-
-Tony Dinh (4):
-       arm: kirkwood: Add support for ZyXEL NSA325 board
-       arm: mvebu: sata_mv: Add bootstd hook to enable sata_bootdev
-       arm: mvebu: Enable bootstd for Synology DS116 board
-       arm: mvebu: Enable bootstd for Thecus N2350 board
-
-  arch/arm/dts/Makefile                    |   1 +
-  arch/arm/dts/ac5-98dx35xx-atl-x240.dts   |  30 +---
-  arch/arm/dts/cn9130-crb.dtsi             |   7 +-
-  arch/arm/dts/cn9130-db.dtsi              |   2 +-
-  arch/arm/dts/cn9130.dtsi                 |   2 +-
-  arch/arm/dts/kirkwood-6282.dtsi          | 161 +++++++++++++++++++++
-  arch/arm/dts/kirkwood-nsa325.dts         | 231 
-+++++++++++++++++++++++++++++++
-  arch/arm/dts/kirkwood-nsa3x0-common.dtsi | 157 +++++++++++++++++++++
-  arch/arm/mach-kirkwood/Kconfig           |   7 +
-  board/d-link/dns325/dns325.c             |   1 +
-  board/solidrun/clearfog/clearfog.c       |  17 ++-
-  board/solidrun/common/tlv_data.c         |   7 +-
-  board/solidrun/common/tlv_data.h         |   1 +
-  board/zyxel/nsa325/Kconfig               |  12 ++
-  board/zyxel/nsa325/MAINTAINERS           |   9 ++
-  board/zyxel/nsa325/Makefile              |  11 ++
-  board/zyxel/nsa325/kwbimage.cfg          |  55 ++++++++
-  board/zyxel/nsa325/nsa325.c              | 196 ++++++++++++++++++++++++++
-  configs/ds116_defconfig                  |   3 +-
-  configs/mvebu_ac5_rd_defconfig           |   1 +
-  configs/n2350_defconfig                  |   3 +-
-  configs/nsa325_defconfig                 |  81 +++++++++++
-  configs/x240_defconfig                   |   2 +-
-  drivers/ata/sata_mv.c                    |   8 +-
-  include/configs/ds116.h                  |  12 +-
-  include/configs/n2350.h                  |  12 +-
-  include/configs/nsa325.h                 |  37 +++++
-  27 files changed, 1007 insertions(+), 59 deletions(-)
-  create mode 100644 arch/arm/dts/kirkwood-6282.dtsi
-  create mode 100644 arch/arm/dts/kirkwood-nsa325.dts
-  create mode 100644 arch/arm/dts/kirkwood-nsa3x0-common.dtsi
-  create mode 100644 board/zyxel/nsa325/Kconfig
-  create mode 100644 board/zyxel/nsa325/MAINTAINERS
-  create mode 100644 board/zyxel/nsa325/Makefile
-  create mode 100644 board/zyxel/nsa325/kwbimage.cfg
-  create mode 100644 board/zyxel/nsa325/nsa325.c
-  create mode 100644 configs/nsa325_defconfig
-  create mode 100644 include/configs/nsa325.h
+-- 
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
