@@ -4,74 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61B9CCDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 06:36:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E4A8CDB482
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 06:44:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDDD586B79;
-	Mon, 16 Oct 2023 08:35:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7263386484;
+	Mon, 16 Oct 2023 08:44:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XDO9Z7c/";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C32E86BD5; Mon, 16 Oct 2023 08:35:56 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1697438663;
+	bh=nlRK67rlJsRx/PgYhZ4MDTxPqEHcA1n/1I8GXENxDLU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=LATWlQZcM/4KuAhGaq+nVVHVc1eE7p6uK6tF/B2X8Se0jzYilI1DfKTc1/ZqeZEm+
+	 vOTJdDN//KJTnsRXntfUt2z4CH+F9agQgF2/QMMKfaqdJcuTjg9Zqv8MzikmagkZzP
+	 FdUojHwpk8rCeFrxI0pstCcnw6gouy6FcRhFn6ybFoWM0XfcMx0LwyDHL5SIRCRGsT
+	 nV3B0i6eEtcPpGu0YsMPG6NmBhHuA1LJ6PnZptPRnkKku494p+c8fJhR1HisjRZXOv
+	 p3QJ5P0zrHqAwabhWq+KTKRC+nD3BWXLh5vyOtvUjWHjLClSzp8/DlNBPiHtUMUIg6
+	 i/YFDKWLCXBRQ==
+Received: from [IPV6:2001:a61:606e:f301:e05a:af60:e9cd:8baa] (unknown
+ [IPv6:2001:a61:606e:f301:e05a:af60:e9cd:8baa])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25A0E869D1
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 08:35:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-5859d13f73dso2456317a12.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 23:35:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697438151; x=1698042951; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RyVqMq38b2b4q90E5O5V120UhZwN7d5NtwR/xxKajWY=;
- b=XDO9Z7c/qOT8jsHtkBvYzzFybmlyVUUoDQQhmoSoGkLBE5r7H7OSoj9cW86OIOwlAf
- HCDGD1XxnIAS1LFKFpoY6QbucsxEdNsyWj/VUUy9dEwIe7dietfjNXkN7C+/TkG3/n0E
- KnBQKUxqMWKBRodLH1WotX8gJmWrTqQaYR0xzN3f6p1Bq2FGh6h00NrICnyjaj4GE7Ko
- YqJhRvBy1yCHS7gnhre7bvOuyhzjK3HpBkJuhBRNtv1bVOvO3eeDvmy943sfBUw4lT6W
- HHx7SsicQf50kxEQaFbYrOsUIlqhWsIZFQSqO1jki5U6fDVbmvFCu0VJfuBjMaitvB3N
- UCCQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697438151; x=1698042951;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=RyVqMq38b2b4q90E5O5V120UhZwN7d5NtwR/xxKajWY=;
- b=UBreNDCnE56QUMPjToCnuaCNYy9KlR8FSDCZz8N0hmKs8rXdES3v75ZqbbXGkz/yin
- D2atef/gE1VJhQrIqmFdNywJq41b2POXVo24Q3iVmcoIogOFPDTLlbW849zI3Gx7EzNf
- fL9WkToGtqAmDfLo174NJOwAr2iR/yBg5VpgyTuHTjUX54573hGnriH57jrq9dHojecx
- wu1wcDRqhPSi2Qpgfq3M/8qU0Dl507lVnepeYhU1xmZ2DTtbvRLuiSfHTfvVMT58Yeyi
- pateGHMjmYBbtO/L2p3qRTZ0+VFB4EF+KGoLelF+QpLvfc2FDb8/DCIxZApi8AhTYMh2
- eRKw==
-X-Gm-Message-State: AOJu0Yz1ThHL4pHHgQlYAyz6JVi9y7qssw8RsurNZ9fRn7A7nMOjZV5n
- rrEz4xwZQ12neiyDU9CRF6/eur2N+1jse0JwLH/fGw==
-X-Google-Smtp-Source: AGHT+IHs3U52IrgvWIRfXsuzEW4K1HZK4RlhECfKYfhgYSsYay0moCR6SBaTTWzelMr+qjtsG+D4ss3x9iH3Yoq/Zgg=
-X-Received: by 2002:a17:90a:4584:b0:273:b0bd:343b with SMTP id
- v4-20020a17090a458400b00273b0bd343bmr27593429pjg.41.1697438151331; Sun, 15
- Oct 2023 23:35:51 -0700 (PDT)
+ (Authenticated sender: sbabic@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 0290086479;
+ Mon, 16 Oct 2023 08:44:20 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1697438661;
+ bh=nlRK67rlJsRx/PgYhZ4MDTxPqEHcA1n/1I8GXENxDLU=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=i32XAsbror6+z5TTfMsjdvwbw3K7eiaA0yQE6SEbjBTlk7Eg4BkTBWQleSXpDYqt4
+ +hXV82Yp7bGrWoJOJ+juMPeJudLgYHZTgai48lJr54UhAKUOHAjhvZPz9LKx/LQM9y
+ UyvJL38g+toukmFCBOPDOz3KCNKWog89gp57lxq03zmixXbgv3HXpl0KaEZ7JBDKdn
+ g1UKxCokQMpSZatQTOCVpbGZr2lruby4IDfPC5rbOFwV8Gqlktp2r9ShwlCkUarxF3
+ WnATFkMdgulPpkL8WgZ2+0wUMY/WqIjgn7SGPsea/S+RoKJV5T6nukqAOUV1iKccFl
+ TnVVMTpuMAtBA==
+Message-ID: <f0e2bb0e-a1e6-45ce-81f1-1a026f125068@denx.de>
+Date: Mon, 16 Oct 2023 08:44:19 +0200
 MIME-Version: 1.0
-References: <20231015234907.2362717-1-masahisa.kojima@linaro.org>
- <CADQ0-X-=4q7dCeny2F_J6DqY9bVxQ01p-zLyu4rnwVXmE=iiEA@mail.gmail.com>
- <c3dfae22-94a0-4d64-9175-dde259c421ef@amd.com>
-In-Reply-To: <c3dfae22-94a0-4d64-9175-dde259c421ef@amd.com>
-From: Masahisa Kojima <masahisa.kojima@linaro.org>
-Date: Mon, 16 Oct 2023 15:35:40 +0900
-Message-ID: <CADQ0-X_-5VfP2EmApHQrvDaXbBZHeUUuPk4wbaD5FnZRP75Q_Q@mail.gmail.com>
-Subject: Re: [PATCH v6 0/9] Add EFI HTTP boot support
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] ARM: imx: Add support for detecting primary/secondary
+ bmode on MX8M
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Fedor Ross <fedor.ross@ifm.com>, Fabio Estevam <festevam@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, Stefano Babic <sbabic@denx.de>
+References: <20230729150946.214878-1-marex@denx.de>
+ <20230729150946.214878-3-marex@denx.de>
+Content-Language: en-US
+From: Stefano Babic <sbabic@denx.de>
+In-Reply-To: <20230729150946.214878-3-marex@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,89 +72,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Fedor, Marek,
 
-On Mon, 16 Oct 2023 at 15:25, Michal Simek <michal.simek@amd.com> wrote:
->
->
->
-> On 10/16/23 04:39, Masahisa Kojima wrote:
-> > On Mon, 16 Oct 2023 at 08:50, Masahisa Kojima
-> > <masahisa.kojima@linaro.org> wrote:
-> >>
-> >> This series adds the EFI HTTP boot support.
-> >> User can add the URI device path with "efidebug boot add" command.
-> >> efibootmgr handles the URI device path, download the
-> >> specified file using wget, mount the downloaded image with
-> >> blkmap, then boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI)
-> >> by selecting automatically created boot option when the new disk is
-> >> detected.
-> >>
-> >> This version still does not include the test.
-> >>
-> >> To enable EFI HTTP boot, we need to enable the following Kconfig options.
-> >>   CONFIG_CMD_DNS
-> >>   CONFIG_CMD_WGET
-> >>   CONFIG_BLKMAP
-> >>   CONFIG_EFI_HTTP_BOOT
-> >>
-> >> On the Socionext Developerbox, enter the following commands then
-> >> debian installer is downloaded into "loadaddr" and installer
-> >> automatically starts.
-> >>   => dhcp
-> >>   => setenv serverip 192.168.1.1
-> >>   => efidebug boot add -u 3 debian-netinst http://ftp.riken.jp/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
-> >>   => efidebug boot order 3
-> >>   => bootefi bootmgr
-> >>
-> >> Note that this debian installer can not proceed the installation
-> >> bacause RAM disk of installer image is not recogniged by the kernel.
-> >> I'm still investigating this issue, but drivers/nvdimm/of_pmem.c in linux
-> >> will be one of the solution to recognize RAM disk from kernel.
-> >> (In EDK2, the equivalent solution is called ACPI NFIT.)
-> >>
-> >> On QEMU, I can not make DNS work from the QEMU guest.
-> >> The following commands work on qemu_arm64(manually set the http server ip in URI).
-> >>    => dhcp
-> >>    => setenv gatewayip 10.0.2.2
-> >>    => setenv httpserverip 134.160.38.1
-> >>    => efidebug boot add -u 3 debian-netinst http://134.160.38.1/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
-> >>    => efidebug boot order 3
-> >>    => bootefi bootmgr
-> >>
-> >> [TODO]
-> >> - add test
-> >> - stricter wget uri check
-> >> - omit the dns process if the given uri has ip address
-> >>     -> this will be supported when the lwip migration completes
-> >> - uri device path support in eficonfig
-> >>
-> >> [change log]
-> >> v5 -> v6
-> >> - add patch #4 "Boot var automatic management for removable medias"
-> >> - boot from automatically created boot option
-> >>    rather than searching default file on the fly
-> >> - introduce new CONFIG_EFI_HTTP_BOOT Kconfig option
-> >> - comment in one place
-> >> - use log_err() rather than printf()
-> >> - use env_get_hex("filesize", 0) instead of return value of net_loop()
-> >> - use more suitable error code
-> >> - blkmap can be build for SPL/TPL
-> >> - add CDROM short-form device path support
-> >
-> > Sorry but I forgot to include the necessary changes.
-> > I will resend this series soon.
->
-> Which pretty much means that that next series is v7. If not you will confuse
-> tools like b4.
+On 29.07.23 17:09, Marek Vasut wrote:
+> From: Fedor Ross <fedor.ross@ifm.com>
+> 
+> Implement the 'getprisec' subcommand of 'bmode' command for i.MX8M by
+> reading out the ROM log events. This event is set by the BootROM if it
+> switched to the secondary copy due to primary copy being corrupted.
+> 
+> Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Fabio Estevam <festevam@gmail.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Stefano Babic <sbabic@denx.de>
+> ---
+>   arch/arm/mach-imx/Kconfig     | 2 +-
+>   arch/arm/mach-imx/imx8m/soc.c | 5 +++++
+>   2 files changed, 6 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
+> index d94b5828d0d..982d542b1c8 100644
+> --- a/arch/arm/mach-imx/Kconfig
+> +++ b/arch/arm/mach-imx/Kconfig
+> @@ -70,7 +70,7 @@ config CSF_SIZE
+>   config CMD_BMODE
+>   	bool "Support the 'bmode' command"
+>   	default y
+> -	depends on ARCH_MX7 || ARCH_MX6 || ARCH_MX5
+> +	depends on ARCH_IMX8M || ARCH_MX7 || ARCH_MX6 || ARCH_MX5
+>   	help
+>   	  This enables the 'bmode' (bootmode) command for forcing
+>   	  a boot from specific media.
+> diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
+> index 2234ef947a1..10e5aeb48a2 100644
+> --- a/arch/arm/mach-imx/imx8m/soc.c
+> +++ b/arch/arm/mach-imx/imx8m/soc.c
+> @@ -726,6 +726,11 @@ int spl_mmc_emmc_boot_partition(struct mmc *mmc)
+>   
+>   	return part;
+>   }
+> +
+> +int boot_mode_getprisec(void)
+> +{
+> +	return !!imx8m_detect_secondary_image_boot();
+> +}
+>   #endif
+>   
+>   #if defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MP)
 
-Thank you, yes, I will send the updated version as v7.
-Sorry for sending so many emails.
 
-Thanks,
-Masahisa Kojima
+This breaks several board, I bisected imx8mm-cl-iot-gate because those 
+boards don't define boot_mode_apply:
 
->
-> Thanks,
-> Michal
->
++arch/arm/mach-imx/cmd_bmode.c:86: undefined reference to `boot_mode_apply'
++make[1]: *** [Makefile:1765: u-boot] Error 139
+
+I cannot apply this, please check and repost, thanks.
+
+Best regards,
+Stefano
+
+-- 
+=====================================================================
+DENX Software Engineering GmbH,        Managing Director: Erika Unter
+HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
+Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
+=====================================================================
