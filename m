@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A43B8CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18C31CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:43:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 699CD86E17;
-	Mon, 16 Oct 2023 16:42:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8896486E64;
+	Mon, 16 Oct 2023 16:43:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697467375;
-	bh=LjRlPnqOfpyKN/7Op7iVxLQBY5k54Mm1ZI1aexsP23I=;
+	s=phobos-20191101; t=1697467403;
+	bh=VqurEb97PbSFJuprWpjUKIn7ekKy7wkfwIe0Llw1PSY=;
 	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=U1JWzER91zmTi7egw2+2oUpdzQIRif40+mmoxXth6PluaAunE609RuEqjddK868XQ
-	 jGuk30/fJIp2DsK+zvXFQnMZMJPWfcd5kGX8YLs0nrb+IP9RUyclRwyVpjg9pA+uO1
-	 cZs+dbf6PDofg6cK1GMB6ZzypkxUHiqLwM39npFm4y02psd8EZPPZ9iK8qT/cd+pmd
-	 J87j5CCHsFcAUHRAG9TrzeB5QrIhb8YFT421cQBEeMQdBBOPqc5o/4ZTVQ3oL/f2oB
-	 JByKtbYrxVvroMenQpynpmcWb/nxHCl/EmBQ6+kpm4l0jfz6IFqTDY8SUEFstDAQ5R
-	 7wxp3NbEd0AuA==
+	b=MIDf+JAhhM2a6Kfx3fdRoEk0HCrFeW2LDdadcy1tJr0Vq/76VBZ6sDgIMM+51lQEj
+	 4um6ni0sAWtTEsZRxGlcVqfrcQwdUnipWSzAKzQ8RYVV6gf6oz0UcdIXQhWm+nXBZ3
+	 dds22Isj8zAn2vlDf4K5g0n8lMok9hyH530t0BjhFxRj5j+HhiKSAqhy3dcVQ7bz1G
+	 UUPRCI7f1z6vs2BgWAq74DP0XrfuhRimMzFLZMOReyuNzzHe9Z26BOZV17+Zn2sfZy
+	 ie7t8Gzon/k2csyzs+aTUdUvCFqeYFJ5OeFjZXgD8fhg7cnZW+Ly5MnEnEEY1IO2xj
+	 dJwnouxnTfFhw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5687186E33; Mon, 16 Oct 2023 16:42:54 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id 89D3D86B71; Mon, 16 Oct 2023 16:43:20 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D304A86B71
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:42:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94ADA86ECA
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:43:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -39,24 +38,23 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4S8KbC0PGQz9sW7;
- Mon, 16 Oct 2023 16:42:47 +0200 (CEST)
-Message-ID: <0a645bf8-fe86-4cb8-b30f-fcf50fc39418@denx.de>
-Date: Mon, 16 Oct 2023 16:42:46 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4S8Kbk47Fxz9sZt;
+ Mon, 16 Oct 2023 16:43:14 +0200 (CEST)
+Message-ID: <c45ecafb-014a-4d70-9d17-8e53e85fcb79@denx.de>
+Date: Mon, 16 Oct 2023 16:43:12 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: mvebu: sata_mv: Add bootstd hook to enable
- sata_bootdev
+Subject: Re: [PATCH 1/2] arm: mvebu: x240: Disable SMBIOS
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-To: Tony Dinh <mibodhi@gmail.com>, Simon Glass <sjg@chromium.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20230906052242.21568-1-mibodhi@gmail.com>
- <e5f5a68d-9f2f-9c39-b969-508275da454f@denx.de>
-In-Reply-To: <e5f5a68d-9f2f-9c39-b969-508275da454f@denx.de>
+To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
+Cc: Chris Packham <chris.packham@alliedtelesis.co.nz>,
+ Tom Rini <trini@konsulko.com>
+References: <20231003035800.2626121-1-judge.packham@gmail.com>
+ <584ce229-7673-4c58-9459-7c63b32a903b@denx.de>
+In-Reply-To: <584ce229-7673-4c58-9459-7c63b32a903b@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4S8KbC0PGQz9sW7
+X-Rspamd-Queue-Id: 4S8Kbk47Fxz9sZt
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,14 +71,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 9/25/23 10:14, Stefan Roese wrote:
-> On 9/6/23 07:22, Tony Dinh wrote:
->> Add hook in sata_mv probe to enable bootstd bootdev.
+On 10/5/23 09:54, Stefan Roese wrote:
+> On 10/3/23 05:57, Chris Packham wrote:
+>> The x240 doesn't make use of EFI or SMBIOS. Recently we started seeing
+>> boot failures such as
 >>
->> Note: bootdev_setup_for_sibling_blk() invocation is a noop if bootsd is
->> not enabled for ahci sata yet.
+>>      WARNING: SMBIOS table_address overflow 23f60c020
+>>      Failed to write SMBIOS table
+>>      initcall failed at event 10/(unknown) (err=-22)
+>>      ### ERROR ### Please RESET the board ###
 >>
->> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+>> The error is because the physical address of the RAM on the AC5X SoC is
+>> above the 32GiB boundary. As we don't need SMBIOS or EFI this can be
+>> safely disabled.
+>>
+>> Signed-off-by: Chris Packham <judge.packham@gmail.com>
 > 
 > Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -95,40 +100,18 @@ Stefan
 > 
 >> ---
 >>
->>   drivers/ata/sata_mv.c | 8 +++++++-
->>   1 file changed, 7 insertions(+), 1 deletion(-)
+>>   configs/x240_defconfig | 1 +
+>>   1 file changed, 1 insertion(+)
 >>
->> diff --git a/drivers/ata/sata_mv.c b/drivers/ata/sata_mv.c
->> index 18c7a66db1..55a5365b5a 100644
->> --- a/drivers/ata/sata_mv.c
->> +++ b/drivers/ata/sata_mv.c
->> @@ -34,6 +34,7 @@
->>   #include <common.h>
->>   #include <ahci.h>
->>   #include <blk.h>
->> +#include <bootdev.h>
->>   #include <cpu_func.h>
->>   #include <dm.h>
->>   #include <log.h>
->> @@ -1104,6 +1105,12 @@ static int sata_mv_probe(struct udevice *dev)
->>               /* TODO: undo create */
->>               continue;
->> +        ret = bootdev_setup_for_sibling_blk(blk, "sata_bootdev");
->> +        if (ret) {
->> +            printf("%s: Failed to create bootdev\n", __func__);
->> +            continue;
->> +        }
->> +
->>           /* If we got here, the current SATA port was probed
->>            * successfully, so set the probe status to successful.
->>            */
->> @@ -1116,7 +1123,6 @@ static int sata_mv_probe(struct udevice *dev)
->>   static int sata_mv_scan(struct udevice *dev)
->>   {
->>       /* Nothing to do here */
->> -
->>       return 0;
->>   }
+>> diff --git a/configs/x240_defconfig b/configs/x240_defconfig
+>> index 7d2b8603e6f4..0d5a19df25aa 100644
+>> --- a/configs/x240_defconfig
+>> +++ b/configs/x240_defconfig
+>> @@ -84,3 +84,4 @@ CONFIG_USB_ETHER_MCS7830=y
+>>   CONFIG_USB_ETHER_RTL8152=y
+>>   CONFIG_USB_ETHER_SMSC95XX=y
+>>   # CONFIG_FAT_WRITE is not set
+>> +# CONFIG_SMBIOS is not set
 > 
 > Viele Grüße,
 > Stefan Roese
