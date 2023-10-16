@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E7C7CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:17:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E4ACDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:18:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CEEB86E7C;
-	Mon, 16 Oct 2023 16:16:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3749D86EE7;
+	Mon, 16 Oct 2023 16:16:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="F2b1b4hD";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="B6PWuSej";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C679A86335; Mon, 16 Oct 2023 16:14:41 +0200 (CEST)
+ id 13D0D86823; Mon, 16 Oct 2023 16:14:44 +0200 (CEST)
 Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
  [217.70.183.200])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B0F86BD7
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4F7086BA4
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id A10CC2000B;
- Mon, 16 Oct 2023 14:14:32 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id BD6CA2000D;
+ Mon, 16 Oct 2023 14:14:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1697465673;
+ t=1697465678;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=IIGcbfM9cWDCBx53qjPcCxYqgnJscFJdSuWQvvQY8SU=;
- b=F2b1b4hDjnS9IukkQDnhk93kjakoETKiEB92yfm7ZYqebRbpqXNCoRLtQG8mYCUtSn/F+X
- a+KcE79VyDDFP+GaVafCevUIP7+6JTXvDCzqVC1fJSju0XZT2x9X4IFBKjdZTg1NIm4qZ1
- bb/R1ImCCx37X80TGiZlvIYpd0zrKLeUzRUpO3QhUDX0A12mjHzyBHIWp+s8UY17lySTcS
- qplubcitlz8GBI2eEb8/foJHGQScECbLdn76QsVYkal2e0vA5ZgFnZANeHNXIc0wReK1/s
- dNahkb3YWuhv9JQM7CXm60X5AwaX/NdCqxgqKWuqYIhXO0hUO2NLkISEGwwQvw==
+ bh=23M0wps2yvzekYEDqTrHngufgqV9TWRS7a0fS8mjXo0=;
+ b=B6PWuSejBLEbK5f22TOuoiPw+9ri453eP6jJE1xYADhcj8gDecKS0pzyY4lE4JA9h0Ey2P
+ pMJHbOHz4Bej1SXzKuUGEdoPEhv/fiogNwf6Da3qOAzkE1/oVVRlQNUd+Kkdi43EhddZFn
+ VtMJiO0/xyjAfSOPQq1X/NS8mVnqtdvtL6NuBWg8lhEoFDlJQq5qrxgxARPXVVpfp5fX1h
+ M6IX9ZN5p4iANgbfTeFVpN28hq5ZDEx4yCTcKgA3GoYCEYUmuZJtK+riiQG4u722OW4wda
+ zuGNtOnKi/DEUUhCb3KqH9ipn800ke8+kSuf++EGObB8XBJ7aR36tzH6YYtCgQ==
 From: Thomas Richard <thomas.richard@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: nm@ti.com, thomas.petazzoni@bootlin.com, thomas.richard@bootlin.com,
  gregory.clement@bootlin.com, u-kumar1@ti.com, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 6/9] board: ti: j721e: Add the missing part of exit retention
- for k3-ddrss (J7200)
-Date: Mon, 16 Oct 2023 16:11:32 +0200
-Message-Id: <20231016141135.325698-7-thomas.richard@bootlin.com>
+Subject: [PATCH 8/9] arm: mach-k3: j7200: Skip fit processing when resuming
+Date: Mon, 16 Oct 2023 16:11:34 +0200
+Message-Id: <20231016141135.325698-9-thomas.richard@bootlin.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231016141135.325698-1-thomas.richard@bootlin.com>
 References: <20231016141135.325698-1-thomas.richard@bootlin.com>
@@ -71,7 +70,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the board specific part of the exit retention sequence for k3-ddrss
+No need to process fit image during resume.
+All needed parts are already available in DRAM.
 
 Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
 
@@ -79,62 +79,34 @@ Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
 Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
 ---
 
- board/ti/j721e/evm.c | 27 ++++++++++++++++++++++++++-
- 1 file changed, 26 insertions(+), 1 deletion(-)
+ arch/arm/mach-k3/sysfw-loader.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index b4b94c8c69..e6f46f911a 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -533,15 +533,22 @@ err_free_gpio:
- 
- #if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
- 
-+static struct udevice *pmica;
-+static struct udevice *pmicb;
-+
-+#define GPIO_OUT_1        0x3D
-+
- #define SCRATCH_PAD_REG_3 0xCB
- 
- #define MAGIC_SUSPEND 0xBA
- 
-+#define DDR_RET_VAL BIT(1)
-+#define DDR_RET_CLK BIT(2)
-+
- static int resuming = -1;
- 
- int board_is_resuming(void)
- {
--	struct udevice *pmica, *pmicb;
- 	int ret;
- 
- 	if (resuming >= 0)
-@@ -580,6 +587,24 @@ end:
- 	return resuming;
+diff --git a/arch/arm/mach-k3/sysfw-loader.c b/arch/arm/mach-k3/sysfw-loader.c
+index e6d452e590..89daf9b7f8 100644
+--- a/arch/arm/mach-k3/sysfw-loader.c
++++ b/arch/arm/mach-k3/sysfw-loader.c
+@@ -100,6 +100,11 @@ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
+ 		panic("SYSFW load address not defined!");
  }
  
-+void board_k3_ddrss_lpddr4_release_retention(void)
++__weak int board_is_resuming(void)
 +{
-+	int regval;
-+
-+	/* Set DDR_RET Signal Low on PMIC B */
-+	regval = pmic_reg_read(pmicb, GPIO_OUT_1) & ~DDR_RET_VAL;
-+
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval);
-+
-+	/* Now toggle the CLK of the latch for DDR ret */
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval | DDR_RET_CLK);
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval & ~(DDR_RET_CLK));
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval | DDR_RET_CLK);
-+	pmic_reg_write(pmicb, GPIO_OUT_1, regval & ~(DDR_RET_CLK));
-+
-+	pmic_reg_write(pmica, 0x86, 0x3);
++	return 0;
 +}
 +
- #endif /* CONFIG_SPL_BUILD && CONFIG_TARGET_J7200_R5_EVM */
+ /*
+  * Populate SPL hook to skip the default SPL loader FIT post-processing steps
+  * during SYSFW loading and return to the calling function so we can perform
+@@ -107,7 +112,7 @@ struct legacy_img_hdr *spl_get_load_buffer(ssize_t offset, size_t size)
+  */
+ bool spl_load_simple_fit_skip_processing(void)
+ {
+-	return !sysfw_loaded;
++	return board_is_resuming() ? true : !sysfw_loaded;
+ }
  
- void spl_board_init(void)
+ static int fit_get_data_by_name(const void *fit, int images, const char *name,
 -- 
 2.39.2
 
