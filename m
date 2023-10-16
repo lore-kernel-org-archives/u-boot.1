@@ -4,84 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07845CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 16:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEA68CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 16:16:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4667886C26;
-	Mon, 16 Oct 2023 18:15:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 425CA86E37;
+	Mon, 16 Oct 2023 18:16:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZWygsRQ/";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 47FF786C26; Mon, 16 Oct 2023 18:15:20 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1697473000;
+	bh=gFBHqIA5GCiMwGkXcptTyTt0vOSJgBNT5NfKpHR1YJw=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=fMdD2LQ2KKxaB8LqRXtGoDbpjfaj1v+M0LuNqn4ZWULZlvtjnT9CwqROPHQ1V96zC
+	 ZY4zRn4kXZ/Rp5hdWPk+EUMKBOKNlMICuV4qCySEchDHlOceBc4cG0d+lYXEZoAkbh
+	 KqNYSk9zqIdkI1e/q8akeWvg30fhgnjdJ5fW9g0aDv8zMJQ4XlkNB3TLb8z4Ta+qUd
+	 O2w/a2VvU5a7M9SuKJO/X5UZ5pEpheKDdfkcNtuwEsBZMB9rASVUNRA/Yvhcim8+D+
+	 oWaf+D1/DgpntU+ltxu0ZGoIstBUSyyjuPqy6LtB0UVQ/tLi6yM86fAPXFg8JXg7aO
+	 +j80TkHXd2PhA==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AADA86DC6
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 18:15:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39GGF6oB100754;
- Mon, 16 Oct 2023 11:15:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1697472906;
- bh=7LTCIUSmLR8Nv6kM54ZoeSlFk7z9hMHOaq/x2ztsIY8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=ZWygsRQ/ufKKjswmfx3Sk9Rm/mtsq7RxmZUsDN4H8SK42v6KowDy1IFwjqnDFqISa
- xyhHh67kTNmlBuhLeX2w2yRhqbEOWV0YTED8wCIgXga5rDZMEgfO9gV+RTI5dMrPaa
- mNufe/jWtpm4nz/TDuNBj7nNdDiSYB57pYBXKMZU=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39GGF69N004166
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 16 Oct 2023 11:15:06 -0500
-Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 16
- Oct 2023 11:15:06 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 16 Oct 2023 11:15:06 -0500
-Received: from [172.24.227.6] (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39GGF2Aw106716;
- Mon, 16 Oct 2023 11:15:03 -0500
-Message-ID: <d4e8c8b2-c429-c28c-a9de-81165f668e3c@ti.com>
-Date: Mon, 16 Oct 2023 21:45:01 +0530
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6DE4886C26;
+ Mon, 16 Oct 2023 18:16:36 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1697472997;
+ bh=gFBHqIA5GCiMwGkXcptTyTt0vOSJgBNT5NfKpHR1YJw=;
+ h=From:To:Cc:Subject:Date:From;
+ b=UssJKgrReJ9QUMjclyKILS0njMla/weARttZxPjh2C2Dop5hokemucmPDK7pcraaZ
+ eu+pziQwhUcOeziO4U203opFAJtK4chN5rYhpPT/jFsXf6xoq9AJVgX3e9TXay7pCD
+ W5MKZfJGQmCxiYV3x6fMlSsoijStDNWLJUuaF3c1cx+nwABEJ0BNFCnITwD0p0TYdd
+ gqLJlKBQfPr737bjDJaf1Ob975z9Wb+wn/aT+WXDPzyXtw0xBolH2Zh9MI5w4XUmp3
+ QMdlbgx467jAFkCYTDpEyIffCnjIQyH23su6gRLlFPyLa3A0dIK8mvRILnnCaq7shA
+ WCHpqmi7y67OQ==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Chanho Park <chanho61.park@samsung.com>, Elena Popa <elena.popa@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Fedor Ross <fedor.ross@ifm.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Qu Wenruo <wqu@suse.com>, Roger Quadros <rogerq@kernel.org>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v2 1/4] spl: mmc: Introduce proper layering for
+ spl_mmc_get_uboot_raw_sector()
+Date: Mon, 16 Oct 2023 18:16:12 +0200
+Message-ID: <20231016161619.50744-1-marex@denx.de>
+X-Mailer: git-send-email 2.42.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v3 5/9] board_f: Fix corruption of relocaddr
-Content-Language: en-US
-To: Simon Glass <sjg@chromium.org>
-CC: Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>, U-Boot
- Mailing List <u-boot@lists.denx.de>,
- Nikhil M Jain <n-jain1@ti.com>, Anatolij Gustschin <agust@denx.de>,
- Michal Suchanek <msuchanek@suse.de>, Ovidiu Panait <ovpanait@gmail.com>,
- =?UTF-8?Q?Pali_Roh=c3=a1r?= <pali@kernel.org>, Rasmus
- Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>
-References: <20230731160008.82342-5-sjg@chromium.org>
- <CAEUhbmXn0VQ6B8Qfs+XWEBuPKQ0mtVbzNeH7ZmT+V1Yh1r5qWw@mail.gmail.com>
- <CAEUhbmU14kY-DpNEZyXJEWX4vbqFY-ANgEZZskqY_gxVv4rD5Q@mail.gmail.com>
- <CAEUhbmXMfoiKa7UXoLQNVPN0w59_Y+4Q4U6HzHoq63mH8930vA@mail.gmail.com>
- <CAPnjgZ1zSe6dL0Y5bKPPp_7VFXVqGzHTdm-rcgDvJo+iM-YrkA@mail.gmail.com>
- <99f81e66-9295-8e4c-1693-86e3d81a302c@ti.com>
- <CAPnjgZ2EjOn86eQ-BdGH5F67Op3bSwG0BZb-LAbPOw955Srg0g@mail.gmail.com>
- <328fb0cf-5f98-019f-49f8-30674c9d34e1@ti.com>
- <20230817151032.GG1515023@bill-the-cat>
- <CAPnjgZ0Mb-4Fcq+j-nRJbpN9gr9=SFsTtDQUx2WqVzbjAqFPXw@mail.gmail.com>
- <ece7bb9b-29da-93d6-2aa9-746b296b1464@ti.com>
- <CAPnjgZ3Y5oKMuQ1jsNUyARw8MniEt4g8ebiU1-o81M0Tkoopiw@mail.gmail.com>
- <38dfe981-4c61-4abe-a33b-db6eab53f1d7@ti.com>
- <CAPnjgZ3xSoe_G3yrqwuAvoiVjUfZ+YQgkOR0ZTVXGT9VK8TwJg@mail.gmail.com>
-From: Devarsh Thakkar <devarsht@ti.com>
-In-Reply-To: <CAPnjgZ3xSoe_G3yrqwuAvoiVjUfZ+YQgkOR0ZTVXGT9VK8TwJg@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,330 +78,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon, Tom,
+Introduce two new weak functions, arch_spl_mmc_get_uboot_raw_sector() and
+board_spl_mmc_get_uboot_raw_sector(), each of which can be overridden at
+a matching level, that is arch/ and board/ , in addition to the existing
+weak function spl_mmc_get_uboot_raw_sector().
 
-On 10/10/23 20:27, Simon Glass wrote:
-> Hi Devarsh,
-> 
-> On Fri, 22 Sept 2023 at 15:49, Devarsh Thakkar <devarsht@ti.com> wrote:
->>
->> Hi Simon,
->>
->> On 22/09/23 23:57, Simon Glass wrote:
->>> Hi Devarsh,
->>>
->>> On Tue, 12 Sept 2023 at 08:35, Devarsh Thakkar <devarsht@ti.com> wrote:
->>>>
->>>> Hi Simon,
->>>>
->>>> On 11/09/23 04:44, Simon Glass wrote:
->>>>> Hi Devarsh,
->>>>>
->>>>> On Thu, 17 Aug 2023 at 09:10, Tom Rini <trini@konsulko.com> wrote:
->>>>>>
->>>>>> On Wed, Aug 16, 2023 at 09:16:05PM +0530, Devarsh Thakkar wrote:
->>>>>>> Hi Simon,
->>>>>>>
->>>>>>> On 15/08/23 20:14, Simon Glass wrote:
->>>>>>>> Hi Devarsh,
->>>>>>>>
->>>>>>>> On Tue, 15 Aug 2023 at 03:23, Devarsh Thakkar <devarsht@ti.com>
-> wrote:
->>>>>>>>>
->>>>>>>>> Hi Simon, Tom,
->>>>>>>>>
->>>>>>>>> On 15/08/23 04:13, Simon Glass wrote:
->>>>>>>>>> Hi Devarsh, Nikhil, Tom,
->>>>>>>>>>
->>>>>>>>>> On Wed, 9 Aug 2023 at 09:29, Bin Meng <bmeng.cn@gmail.com> wrote:
->>>>>>>>>>>
->>>>>>>>>>> On Thu, Aug 3, 2023 at 7:03 PM Bin Meng <bmeng.cn@gmail.com>
-> wrote:
->>>>>>>>>>>>
->>>>>>>>>>>> On Thu, Aug 3, 2023 at 6:37 PM Bin Meng <bmeng.cn@gmail.com>
-> wrote:
->>>>>>>>>>>>>
->>>>>>>>>>>>> On Tue, Aug 1, 2023 at 12:00 AM Simon Glass <sjg@chromium.org>
-> wrote:
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> When the video framebuffer comes from the bloblist, we
-> should not change
->>>>>>>>>>>>>> relocaddr to this address, since it interfers with the
-> normal memory
->>>>>>>>>>>>>
->>>>>>>>>>>>> typo: interferes
->>>>>>>>>>>>>
->>>>>>>>>>>>>> allocation.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> This fixes a boot loop in qemu-x86_64
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>>>>>>>>>>>> Fixes: 5bc610a7d9d ("common: board_f: Pass frame buffer info
-> from SPL to u-boot")
->>>>>>>>>>>>>> Suggested-by: Nikhil M Jain <n-jain1@ti.com>
->>>>>>>>>>>>>> ---
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> Changes in v3:
->>>>>>>>>>>>>> - Reword the Kconfig help as suggested
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> Changes in v2:
->>>>>>>>>>>>>> - Add a Kconfig as the suggested conditional did not work
->>>>>>>>>>>>>>
->>>>>>>>>>>>>>    common/board_f.c      | 3 ++-
->>>>>>>>>>>>>>    drivers/video/Kconfig | 9 +++++++++
->>>>>>>>>>>>>>    2 files changed, 11 insertions(+), 1 deletion(-)
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> diff --git a/common/board_f.c b/common/board_f.c
->>>>>>>>>>>>>> index 7d2c380e91e..5173d0a0c2d 100644
->>>>>>>>>>>>>> --- a/common/board_f.c
->>>>>>>>>>>>>> +++ b/common/board_f.c
->>>>>>>>>>>>>> @@ -419,7 +419,8 @@ static int reserve_video(void)
->>>>>>>>>>>>>>                   if (!ho)
->>>>>>>>>>>>>>                           return log_msg_ret("blf", -ENOENT);
->>>>>>>>>>>>>>                   video_reserve_from_bloblist(ho);
->>>>>>>>>>>>>> -               gd->relocaddr = ho->fb;
->>>>>>>>>>>>>> +               if (IS_ENABLED(CONFIG_VIDEO_RESERVE_SPL))
->>>>>>>>>>>>>> +                       gd->relocaddr = ho->fb;
->>>>>>>>>>>>>>           } else if (CONFIG_IS_ENABLED(VIDEO)) {
->>>>>>>>>>>>>>                   ulong addr;
->>>>>>>>>>>>>>                   int ret;
->>>>>>>>>>>>>> diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
->>>>>>>>>>>>>> index b41dc60cec5..f2e56204d52 100644
->>>>>>>>>>>>>> --- a/drivers/video/Kconfig
->>>>>>>>>>>>>> +++ b/drivers/video/Kconfig
->>>>>>>>>>>>>> @@ -1106,6 +1106,15 @@ config SPL_VIDEO_REMOVE
->>>>>>>>>>>>>>             if this  option is enabled video driver will be
-> removed at the end of
->>>>>>>>>>>>>>             SPL stage, beforeloading the next stage.
->>>>>>>>>>>>>>
->>>>>>>>>>>>>> +config VIDEO_RESERVE_SPL
->>>>>>>>>>>>>> +       bool
->>>>>>>>>>>>>> +       help
->>>>>>>>>>>>>> +         This adjusts reserve_video() to redirect memory
-> reservation when it
->>>>>>>>>>>>>> +         sees a video handoff blob
-> (BLOBLISTT_U_BOOT_VIDEO). This avoids the
->>>>>>>>>>>>>> +         memory used for framebuffer from being allocated
-> by U-Boot proper,
->>>>>>>>>>>>>> +         thus preventing any further memory reservations
-> done by U-Boot proper
->>>>>>>>>>>>>> +         from overwriting the framebuffer.
->>>>>>>>>>>>>> +
->>>>>>>>>>>>>>    if SPL_SPLASH_SCREEN
->>>>>>>>>>>>>>
->>>>>>>>>>>>>>    config SPL_SPLASH_SCREEN_ALIGN
->>>>>>>>>>>>>
->>>>>>>>>>>>> Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
->>>>>>>>>>>>
->>>>>>>>>>>> applied to u-boot-x86, thanks!
->>>>>>>>>>>
->>>>>>>>>>> Dropped this one from the x86 queue per the discussion.
->>>>>>>>>>
->>>>>>>>>> I just wanted to come back to this discussion.
->>>>>>>>>>
->>>>>>>>>> Do we have an agreed way forward? Who is waiting for who?
->>>>>>>>>>
->>>>>>>>>
->>>>>>>>> I was waiting on feedback on
->>>>>>>>>
-> https://lore.kernel.org/all/3b1e8005-f161-8058-13e7-3de2316aac34@ti.com/
->>>>>>>>> but per my opinion, I would prefer to go with "Approach 2" with a
->>>>>>>>> Kconfig as it looks simpler to me. It would look something like
-> below :
->>>>>>>>>
->>>>>>>>> if (gd->relocaddr > (unsigned long)ho->fb) {
->>>>>>>>>        ulong fb_reloc_gap = gd->relocaddr - gd->ho->fb;
->>>>>>>>>
->>>>>>>>>        /* Relocate after framebuffer area if nearing too close to
-> it */
->>>>>>>>>        if (fb_reloc_gap < CONFIG_BLOBLIST_FB_RELOC_MIN_GAP)
->>>>>>>>>               gd->relocaddr = ho->fb;
->>>>>>>>> }
->>>>>>>>>
->>>>>>>>> Regarding CONFIG_BLOBLIST_FB_RELOC_MIN_GAP
->>>>>>>>> -> This describes minimum gap to keep between framebuffer address
-> and
->>>>>>>>> relocation address to avoid overlap when framebuffer address used
-> by
->>>>>>>>> blob is below the current relocation address
->>>>>>>>>
->>>>>>>>> -> It would be selected as default when CONFIG_BLOBLIST is
-> selected with
->>>>>>>>>    default value set to 100Mb
->>>>>>>>>
->>>>>>>>> -> SoC specific Vendors can override this in their defconfigs to a
->>>>>>>>> custom value if they feel 100Mb is not enough
->>>>>>>>>
->>>>>>>>> Also probably we can have some debug/error prints in the code to
-> show
->>>>>>>>> overlap happened (or is going happen) so that users can fine tune
-> this
->>>>>>>>> Kconfig if they got it wrong at first place.
->>>>>>>>>
->>>>>>>>> I can re-spin updated patch if we are aligned on this,
->>>>>>>>> Kindly let me know your opinion.
->>>>>>>>
->>>>>>>> I'm just nervous about the whole idea, TBH. Perhaps I am missing
-> some
->>>>>>>> documentation on how people are supposed to lay out memory in SPL
-> and
->>>>>>>> U-Boot properr, but I'm not really aware of any guidance we give.
->>>>>>>>
->>>>>>>> Perhaps we should say that the SPL frame buffer should be at the
-> top
->>>>>>>> of memory, and U-Boot's reserve area should start below that?
->>>>>>>
->>>>>>> 1) As per my personal opinion, I don't like putting such
-> constraints and would
->>>>>>> instead like to give some flexibility to end user for choosing
->>>>>>> framebuffer area as I earlier mentioned, as for that matter if we
-> are using a
->>>>>>> predefined address then there is no need of using framebuffer
-> address on
->>>>>>> videoblob,
->>>>>>
->>>>>> I think this is the wrong direction.  We need to offer strong
-> defaults
->>>>>> that shouldn't be deviated without good reason, rather than "pick
-> what
->>>>>> you want".  Very few cases will deviate from the defaults, and of
-> those
->>>>>> it's hard to know if they're being changed for the best, or because
->>>>>> someone didn't fully understand the implications and breaks something
->>>>>> else.
->>>>>
->>>>> So what is next with this? I would like to clean it up...I feel that
->>>>> having SPL pass the top of usable RAM (below the framebuffer) is a
->>>>> reasonable solution. Does constraining things in that way cause any
->>>>> problems for TI?
->>>>
->>>> TBH, I am not fully able to visualize how this fits current arch :
->>>>
->>>> So instead of blob address will we be passing ram_top inside the video
-> blob ?
->>>> .Or we will be using separate ram_top blob passing from SPL to u-boot ?
->>>
->>> Yes, a separate ram_top in the bloblist, not in the video blob.
->>>
->>
->> Ok, but we still need to have video blob too for conveying frame-buffer
->> information, right ?
-> 
-> Yes
-> 
->>
->> Also, just wanted to check if we really require a ram_top blob to be
->> passed b/w SPL to u-boot, I thought ram_top addr is know by both stages
->> before-hand if so then, why pass the ram_top blob separately?
-> 
-> I don't believe it can be known at build time, if that is what you mean. At
-> least not in general.
-> 
->>
->>>>
->>>> Are we planning to enforce some restriction/hardcoding for framebuffer
-> to be
->>>> reserved at specific address (near top of RAM) or it would be just a
-> general
->>>> guideline to keep framebuffer near the RAM top ?
->>>
->>> Well it makes sense to put it at the top, since U-Boot relocations
->>> itself to the top. >
->>>>
->>>> Currently don't see video_reserve API put such constraint and user is
-> free to
->>>> call it anywhere and it just reserve after previously reserved areas.
-> Now,
->>>> with this approach I guess we would deviate from the agnostic behavior
-> of
->>>> video_reserve API then if we plan to update the same API ?
->>>>
->>>> Also u-boot proper starts reserving regions for MMU and few other
-> stuff much
->>>> before reserving framebuffers so by the time we receive the blob
-> containing
->>>> updated ram_top, we would have already reserved those regions from old
-> ram_top
->>>>   so moving the ram_top here seems little counter-intuitive to me. In
-> such
->>>> scenario, as per my opinion better option seems to be moving he
-> gd->relocaddr
->>>> instead.
->>>>
->>>> Lastly, I think as much the user keep framebuffer way from ram_top
-> that much
->>>> memory will be lost even with this approach (as ram_top will be moved
-> after
->>>> framebuffer for u-boot proper) and same behavior will be observed with
->>>> https://lore.kernel.org/all/20230801140414.76216-1-devarsht@ti.com/ too
->>>>
->>>> but if we are planning to put just a general guideline to user to keep
->>>> framebuffer near the RAM top then to me above patch looks much simpler
-> than
->>>> moving the ram_top.
->>>
->>> I don't really have any more to say here. This is all just confusing
->>> and I don't think it needs to be. If SPL allocs stuff, I believe it
->>> should do so at the top of memory, then tell U-Boot about it, so
->>> U-Boot's reservations can happen below that address.
->>>
->>
->> Ok, thanks for explaining your design, I understand your suggestion here
->> and the design you are proposing i.e. of putting framebuffer at the
->> ram_top, I am just thinking on that if we are to go with this then what
->> is the simplest way to fit it with current u-boot architecture where we
->> are using same API i.e. video_reserve at SPL stage and u-boot proper for
->> both reserving the memory, passing the blob and catching the blob for
->> simplicity.
->>
->>
->> I think we can probably achieve the same thing what you are proposing,
->> if at u-boot proper also we follow the same paradigm i.e. reserve the
->> video memory first (or for that matter any region which is reserve-able
->> by SPL), this way if u-boot call reserve_video function first in this
->> sequence
->>
-> https://source.denx.de/u-boot/u-boot/-/blob/v2023.10-rc4/common/board_f.c?ref_type=tags#L943
->> then it will also trigger a call to video_reserve function which can
->> read the blob and move the relocaddr as it is already doing (which is
->> actually the ram_top since reserve_video is getting called at the start
->> with this) after the reserved video area thus avoiding any gaps between
->> reservations. This way we don't require to pass ram_top via blob.
->>
->> Is that possible to update sequence at
->>
-> https://source.denx.de/u-boot/u-boot/-/blob/v2023.10-rc4/common/board_f.c?ref_type=tags#L943
->> to reserve video memory first since it is also shared/reserve-able with
->> previous stage ?
->> If so then I think we probably don't require much change there-after as
->> blob will be read first and further reservation will only start below
->> the frame-buffer area even with current video_reserve API.
->>
->> Kindly let me know your opinion.
-> 
-> Sure, it is worth a try. I don't see any problem with rearranging the
-> memory reservations.
-> 
-> Regards,
-> Simon
-> 
+This way, architecture code can define a default architecture specific
+implementation of arch_spl_mmc_get_uboot_raw_sector(), while the board
+code can override that using board_spl_mmc_get_uboot_raw_sector() which
+takes precedence over the architecture code. In some sort of unlikely
+special case where code has to take precedence over board code too, the
+spl_mmc_get_uboot_raw_sector() is still left out to be a weak function,
+but it should be unlikely that this is ever needed to be overridden.
 
-Thanks for the feedback, as suggested and discussed, I moved the fb allocation
-at the end of RAM for SPL and catching bloblist at the start in u-boot proper
-so that it doesn't impact u-boot's
-reservation sequence and posted
-https://lore.kernel.org/all/20231016160611.1353458-1-devarsht@ti.com/
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
+Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Chanho Park <chanho61.park@samsung.com>
+Cc: Elena Popa <elena.popa@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Fedor Ross <fedor.ross@ifm.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Qu Wenruo <wqu@suse.com>
+Cc: Roger Quadros <rogerq@kernel.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Stefan Roese <sr@denx.de>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tim Harvey <tharvey@gateworks.com>
+---
+V2: New patch
+---
+ arch/arm/mach-imx/image-container.c           |  4 +--
+ arch/arm/mach-mvebu/spl.c                     |  4 +--
+ arch/arm/mach-sunxi/board.c                   |  4 +--
+ .../imx8mp_rsb3720a1/imx8mp_rsb3720a1.c       |  2 +-
+ board/data_modul/imx8mp_edm_sbc/spl.c         |  2 +-
+ board/gateworks/venice/spl.c                  |  2 +-
+ common/spl/spl_mmc.c                          | 14 +++++++++-
+ include/spl.h                                 | 26 +++++++++++++++++++
+ 8 files changed, 48 insertions(+), 10 deletions(-)
 
-Could you please have a look at these series and share your opinion ?
+diff --git a/arch/arm/mach-imx/image-container.c b/arch/arm/mach-imx/image-container.c
+index 5f188ab32d1..0285bbdaf20 100644
+--- a/arch/arm/mach-imx/image-container.c
++++ b/arch/arm/mach-imx/image-container.c
+@@ -276,8 +276,8 @@ unsigned long spl_spi_get_uboot_offs(struct spi_flash *flash)
+ #endif
+ 
+ #ifdef CONFIG_SPL_MMC
+-unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+-					   unsigned long raw_sect)
++unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++						unsigned long raw_sect)
+ {
+ 	int end;
+ 
+diff --git a/arch/arm/mach-mvebu/spl.c b/arch/arm/mach-mvebu/spl.c
+index 379daa88a4d..eaaa68a8564 100644
+--- a/arch/arm/mach-mvebu/spl.c
++++ b/arch/arm/mach-mvebu/spl.c
+@@ -123,8 +123,8 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+ {
+ 	return IS_SD(mmc) ? MMCSD_MODE_RAW : MMCSD_MODE_EMMCBOOT;
+ }
+-unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+-					   unsigned long raw_sect)
++unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++						unsigned long raw_sect)
+ {
+ 	return IS_SD(mmc) ? 1 : 0;
+ }
+diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+index 78597ad932c..61a4245c499 100644
+--- a/arch/arm/mach-sunxi/board.c
++++ b/arch/arm/mach-sunxi/board.c
+@@ -323,8 +323,8 @@ uint32_t sunxi_get_spl_size(void)
+  * Also U-Boot proper is located at least 32KB after the SPL, but will
+  * immediately follow the SPL if that is bigger than that.
+  */
+-unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+-					   unsigned long raw_sect)
++unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++						 unsigned long raw_sect)
+ {
+ 	unsigned long spl_size = sunxi_get_spl_size();
+ 	unsigned long sector;
+diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+index b79a2380aa5..d87fe3606f6 100644
+--- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
++++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
+@@ -193,7 +193,7 @@ int board_late_init(void)
+ 
+ #ifdef CONFIG_SPL_MMC
+ #define UBOOT_RAW_SECTOR_OFFSET 0x40
+-unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+ 					   unsigned long raw_sector)
+ {
+ 	u32 boot_dev = spl_boot_device();
+diff --git a/board/data_modul/imx8mp_edm_sbc/spl.c b/board/data_modul/imx8mp_edm_sbc/spl.c
+index 2fdd95a730c..cfc4b65e0f9 100644
+--- a/board/data_modul/imx8mp_edm_sbc/spl.c
++++ b/board/data_modul/imx8mp_edm_sbc/spl.c
+@@ -107,7 +107,7 @@ void board_boot_order(u32 *spl_boot_list)
+ 	spl_boot_list[4] = BOOT_DEVICE_NONE;
+ }
+ 
+-unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long sect)
++unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long sect)
+ {
+ 	const u32 boot_dev = spl_boot_device();
+ 	int part;
+diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
+index 774a99041c8..4851dc1c53f 100644
+--- a/board/gateworks/venice/spl.c
++++ b/board/gateworks/venice/spl.c
+@@ -346,7 +346,7 @@ int spl_board_boot_device(enum boot_device boot_dev_spl)
+ 	}
+ }
+ 
+-unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long raw_sect)
++unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long raw_sect)
+ {
+ 	if (!IS_SD(mmc)) {
+ 		switch (EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config)) {
+diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
+index 0ab85d2168c..612b11ef5b9 100644
+--- a/common/spl/spl_mmc.c
++++ b/common/spl/spl_mmc.c
+@@ -361,10 +361,22 @@ int __weak spl_mmc_boot_partition(const u32 boot_device)
+ }
+ #endif
+ 
++unsigned long __weak arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++						       unsigned long raw_sect)
++{
++	return raw_sect;
++}
++
++unsigned long __weak board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++						  unsigned long raw_sect)
++{
++	return arch_spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
++}
++
+ unsigned long __weak spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+ 						  unsigned long raw_sect)
+ {
+-	return raw_sect;
++	return board_spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
+ }
+ 
+ int default_spl_mmc_emmc_boot_partition(struct mmc *mmc)
+diff --git a/include/spl.h b/include/spl.h
+index 7d30fb57dac..7ff1518f55c 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -486,6 +486,32 @@ int spl_mmc_emmc_boot_partition(struct mmc *mmc);
+ 
+ void spl_set_bd(void);
+ 
++/**
++ * spl_mmc_get_uboot_raw_sector() - Provide raw sector of the start of U-Boot (architecture override)
++ *
++ * This is a weak function which by default will provide the raw sector that is
++ * where the start of the U-Boot image has been written to.
++ *
++ * @mmc: struct mmc that describes the devie where U-Boot resides
++ * @raw_sect: The raw sector number where U-Boot is by default.
++ * Return: The raw sector location that U-Boot resides at
++ */
++unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++						unsigned long raw_sect);
++
++/**
++ * spl_mmc_get_uboot_raw_sector() - Provide raw sector of the start of U-Boot (board override)
++ *
++ * This is a weak function which by default will provide the raw sector that is
++ * where the start of the U-Boot image has been written to.
++ *
++ * @mmc: struct mmc that describes the devie where U-Boot resides
++ * @raw_sect: The raw sector number where U-Boot is by default.
++ * Return: The raw sector location that U-Boot resides at
++ */
++unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
++						 unsigned long raw_sect);
++
+ /**
+  * spl_mmc_get_uboot_raw_sector() - Provide raw sector of the start of U-Boot
+  *
+-- 
+2.42.0
 
-P.S I decided against changing reservation sequence at u-boot proper though as
-thought that this might potentially break backward compatibility with various
-device-trees in linux kernel which are reserving hard-coded framebuffer
-addresses based on current sequence of reservation (i.e. video memory being
-reserved after page table)
-
-If the approach looks good, then I will do some more testing before sending
-out again.
-
-Regards
-Devarsh
