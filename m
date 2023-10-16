@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0DF1CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E7C7CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:17:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33B6486DC6;
-	Mon, 16 Oct 2023 16:15:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4CEEB86E7C;
+	Mon, 16 Oct 2023 16:16:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JbOYn77R";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="F2b1b4hD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DC9F86BA6; Mon, 16 Oct 2023 16:14:30 +0200 (CEST)
+ id C679A86335; Mon, 16 Oct 2023 16:14:41 +0200 (CEST)
 Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::227])
+ [217.70.183.200])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E30886484
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92B0F86BD7
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thomas.richard@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id A6DD22000C;
- Mon, 16 Oct 2023 14:14:25 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id A10CC2000B;
+ Mon, 16 Oct 2023 14:14:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1697465666;
+ t=1697465673;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DC84mpvvDDfUM9MGRNHuWKp8Fa28+FWHka88pMHmR3M=;
- b=JbOYn77RwKcG3PiJzb6DbU8Gk0fp9WlP8gKSld5MmzZ/o6taPAmIpXA4S7+V5Q3C397pjc
- cZO79C3XDXbatJv5OgoaVcWHdQ0Q2HhGSm8hvHOvXNHFQ6U/yepG+9QKhx56IQOajyzZGL
- 8/jBebHHiedPfUSsgrmTyxW8K+oHk9d3e2mW++cs5awLjNM4OOwsEAM13k/YCU6ZgK80FL
- IlII3+icxWGIDji2HawEyig4A8yh4VYq2OPbZFfR8Lka0PFX6vtJ2SIeJ+S62np7tiWayp
- 0s+UhEcRM07yRD/2GL9Uhz26MxkPwHPEIH2vez8/1yI3XdHs+qrcHgWXi20u/Q==
+ bh=IIGcbfM9cWDCBx53qjPcCxYqgnJscFJdSuWQvvQY8SU=;
+ b=F2b1b4hDjnS9IukkQDnhk93kjakoETKiEB92yfm7ZYqebRbpqXNCoRLtQG8mYCUtSn/F+X
+ a+KcE79VyDDFP+GaVafCevUIP7+6JTXvDCzqVC1fJSju0XZT2x9X4IFBKjdZTg1NIm4qZ1
+ bb/R1ImCCx37X80TGiZlvIYpd0zrKLeUzRUpO3QhUDX0A12mjHzyBHIWp+s8UY17lySTcS
+ qplubcitlz8GBI2eEb8/foJHGQScECbLdn76QsVYkal2e0vA5ZgFnZANeHNXIc0wReK1/s
+ dNahkb3YWuhv9JQM7CXm60X5AwaX/NdCqxgqKWuqYIhXO0hUO2NLkISEGwwQvw==
 From: Thomas Richard <thomas.richard@bootlin.com>
 To: u-boot@lists.denx.de
 Cc: nm@ti.com, thomas.petazzoni@bootlin.com, thomas.richard@bootlin.com,
- gregory.clement@bootlin.com, u-kumar1@ti.com
-Subject: [PATCH 3/9] configs: j7200_evm_r5: Move address used for allocation
- in the reserved space
-Date: Mon, 16 Oct 2023 16:11:29 +0200
-Message-Id: <20231016141135.325698-4-thomas.richard@bootlin.com>
+ gregory.clement@bootlin.com, u-kumar1@ti.com, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 6/9] board: ti: j721e: Add the missing part of exit retention
+ for k3-ddrss (J7200)
+Date: Mon, 16 Oct 2023 16:11:32 +0200
+Message-Id: <20231016141135.325698-7-thomas.richard@bootlin.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231016141135.325698-1-thomas.richard@bootlin.com>
 References: <20231016141135.325698-1-thomas.richard@bootlin.com>
@@ -71,30 +71,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Gregory CLEMENT <gregory.clement@bootlin.com>
+Add the board specific part of the exit retention sequence for k3-ddrss
 
-Else it could corrupt the memory of Linux when exiting suspend to ram.
+Based on the work of Gregory CLEMENT <gregory.clement@bootlin.com>
 
-Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
 Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
+Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
 ---
 
- configs/j7200_evm_r5_defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/ti/j721e/evm.c | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
 
-diff --git a/configs/j7200_evm_r5_defconfig b/configs/j7200_evm_r5_defconfig
-index 7450529d66..1e7daf9b4a 100644
---- a/configs/j7200_evm_r5_defconfig
-+++ b/configs/j7200_evm_r5_defconfig
-@@ -39,7 +39,7 @@ CONFIG_SPL_STACK_R=y
- CONFIG_SPL_SEPARATE_BSS=y
- CONFIG_SYS_SPL_MALLOC=y
- CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
--CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x84000000
-+CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0xa5400000
- CONFIG_SYS_SPL_MALLOC_SIZE=0x1000000
- CONFIG_SPL_EARLY_BSS=y
- CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
+diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
+index b4b94c8c69..e6f46f911a 100644
+--- a/board/ti/j721e/evm.c
++++ b/board/ti/j721e/evm.c
+@@ -533,15 +533,22 @@ err_free_gpio:
+ 
+ #if (IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_TARGET_J7200_R5_EVM))
+ 
++static struct udevice *pmica;
++static struct udevice *pmicb;
++
++#define GPIO_OUT_1        0x3D
++
+ #define SCRATCH_PAD_REG_3 0xCB
+ 
+ #define MAGIC_SUSPEND 0xBA
+ 
++#define DDR_RET_VAL BIT(1)
++#define DDR_RET_CLK BIT(2)
++
+ static int resuming = -1;
+ 
+ int board_is_resuming(void)
+ {
+-	struct udevice *pmica, *pmicb;
+ 	int ret;
+ 
+ 	if (resuming >= 0)
+@@ -580,6 +587,24 @@ end:
+ 	return resuming;
+ }
+ 
++void board_k3_ddrss_lpddr4_release_retention(void)
++{
++	int regval;
++
++	/* Set DDR_RET Signal Low on PMIC B */
++	regval = pmic_reg_read(pmicb, GPIO_OUT_1) & ~DDR_RET_VAL;
++
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval);
++
++	/* Now toggle the CLK of the latch for DDR ret */
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval | DDR_RET_CLK);
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval & ~(DDR_RET_CLK));
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval | DDR_RET_CLK);
++	pmic_reg_write(pmicb, GPIO_OUT_1, regval & ~(DDR_RET_CLK));
++
++	pmic_reg_write(pmica, 0x86, 0x3);
++}
++
+ #endif /* CONFIG_SPL_BUILD && CONFIG_TARGET_J7200_R5_EVM */
+ 
+ void spl_board_init(void)
 -- 
 2.39.2
 
