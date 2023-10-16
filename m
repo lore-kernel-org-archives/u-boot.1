@@ -4,81 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99117CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 11:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 258E2CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 11:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2455D86B1D;
+	by phobos.denx.de (Postfix) with ESMTP id D201E86B81;
 	Mon, 16 Oct 2023 13:49:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WGrQ2Iwv";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eLHR26XF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DF3286801; Mon, 16 Oct 2023 07:35:28 +0200 (CEST)
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
+ id 35EF5865A2; Mon, 16 Oct 2023 12:39:08 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AE0A86DCA
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 07:35:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0356868AE
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 12:39:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=iuncuim@gmail.com
-Received: by mail-lf1-x132.google.com with SMTP id
- 2adb3069b0e04-507a772ed97so1561088e87.3
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 22:35:14 -0700 (PDT)
+ spf=pass smtp.mailfrom=cppcoffee@gmail.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1c888b3a25aso25618015ad.0
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 03:39:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697434513; x=1698039313; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PVQgbK3QiHQCoRMbVqRlolJd3s2uohTXfLpVDXwAqgs=;
- b=WGrQ2Iwv3o25ploC9ToLvVHa3YQ9TffnyskRWAJiJxh1fItPRSR9o0eWi3QxTV8htQ
- MvBKJLjqH3R/TwDKvnaZpLWQ40x5WQed47KzxGkccTtdOIj/Fnlm8b7Ts0UjVSW+EZac
- qZQfKu3JZLPhLPvgCfv9coq74LcswuDxpOD/EYBg32OwrQ5OoTyA7mg4GLO5/CIEzWpi
- cARzOkXE0/qVSGucKal5xvyD+/2qRdcUXNsd5XMSgFILBkGCrdwzPL0Tco/OyIGShwBR
- oe6E7SgqQxPMsuqGVXJM34iibSRR/QClx1Cq4vwLMK4Vt34l3Z8RJ6gPS2V8fg8ipW25
- Nz4A==
+ d=gmail.com; s=20230601; t=1697452741; x=1698057541; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=mkPINW9KVZmaZqeuANTy7mnCEcMJzH4W+xQ0aWgnzKc=;
+ b=eLHR26XFjoZZhHLduJoDPBUzu+rdSNyAlljz3mABNvgxjCCZpYDh1qL+3kcpv7UYjd
+ mVkUrvJDMxNYXaHGq+LZFpceqF8sXB3sZtYgXMJAS47RvtHmVXtL5xgbjDanMiznze5e
+ Is3iFJt2zEett2iTOzwI+0Sn0RDCb/USxNPWZqtBiYRRnPiBiqVMCyf/1BhQiSV5RBhr
+ ngPApb8Ja0W2P2+wzBgGzkady4tFSdnkP5ea0XRUDB75CpKrTvd3XYbhTwwx7AO5tplL
+ zPP9EhdjibSAZ/ky7Kyxi9KXYpYAjT1+TTzlzurlvUo/OVs9eA/+VXGHCO6xC64qgp9M
+ q7eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697434513; x=1698039313;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PVQgbK3QiHQCoRMbVqRlolJd3s2uohTXfLpVDXwAqgs=;
- b=I5kSlwGL5Xguzsf5qcgAz8/HsszwqvgJhN9iBUgm6DrWJm+5yGJYhLnDR4j/lPgZk3
- TkngbG3LjlDwX/19mcOCHAg1iAXQ6EuhtLNFxT0zsz3ao5IHPY+ZRGF1R/BZYlw/Zi8A
- KfoNtG4kzpFav/2eol9TCDNI9hyuraFH1FerA2bOE8c8bQqd/qNVX3wNo/rJgWvOSYHy
- Ek0nUUtB0ArxrS/V/YYac+nlqj0PnHOplcX5sf4fExdUyFElYa+j81lsnMAcSztdTAGW
- ZB3cYNDnP7eqBed4ZKloAxEOLx/g5aeTkcbSiemZDieMIYg6FYyvkhVTF79XFgxihfRq
- Wvhg==
-X-Gm-Message-State: AOJu0YzAy6NAdVSPAh97OAPT/vGVab/GHcVCWk+WrkVi/wEvvzW7X32t
- odEDv7G9u7xRHP+7Lr28uUc=
-X-Google-Smtp-Source: AGHT+IHdMHrGfJuV2NFin3xmSUemhbB5EIx6Fk9y7Ht4UBxDOcVo1+Ig7mKYXJwvn27+/0/a+rQfCw==
-X-Received: by 2002:ac2:528a:0:b0:507:9625:5fd3 with SMTP id
- q10-20020ac2528a000000b0050796255fd3mr7246406lfm.32.1697434512807; 
- Sun, 15 Oct 2023 22:35:12 -0700 (PDT)
-Received: from SerialExperiment.lan ([46.251.195.25])
- by smtp.gmail.com with ESMTPSA id
- n14-20020a05651203ee00b00507987edd22sm1527031lfq.156.2023.10.15.22.35.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Oct 2023 22:35:12 -0700 (PDT)
-From: Mikhail Kalashnikov <iuncuim@gmail.com>
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>
-Cc: Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>,
- Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 1/1] sunxi: H616: add LPDDR4 DRAM support
-Date: Mon, 16 Oct 2023 08:34:41 +0300
-Message-ID: <20231016053441.3197087-2-iuncuim@gmail.com>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231016053441.3197087-1-iuncuim@gmail.com>
-References: <20231016053441.3197087-1-iuncuim@gmail.com>
+ d=1e100.net; s=20230601; t=1697452741; x=1698057541;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mkPINW9KVZmaZqeuANTy7mnCEcMJzH4W+xQ0aWgnzKc=;
+ b=xDhHfz0L+3iMF53Ad6vHzmnER9SSy58rwVd3+JYINkZjKN63qC+TAC1EH/pq273VYw
+ OtClD204yDoerhDVQ1BNctGfZ4fBqP2XdrinYaFmr2sFrCVYb+OuUmlnkleSeEH79U9E
+ SF2BR/KjR8QGZbbW4aH3vC4oIIbwBWX5Cw/E+1ugByXXPeTTYAkGU1OCPCVE3GIuns4q
+ +aMOOn13bvFGm+Ce/Pksxc/A+4A+zxn3apF8JEjYJk4cGBq5nX19CoRCTmEw3XlTVmR4
+ 5lVxCn7IiF7gD9LNUXqlq4Gj4rs/J0/56jmnfCcYn2tUEvNNI086dQlDDfYda3ScdWEN
+ tV1w==
+X-Gm-Message-State: AOJu0Yw8fQwK6ecJCRrEz7i2ainQBQCe6OyvvacZfmaKKvV00UAE1Wpi
+ bzRxVxhd/JEqjGuDmsP7xNIwQW7r8DXSSKoohfK7iu9USA/hzLFjqMw=
+X-Google-Smtp-Source: AGHT+IGEUeDs1tZ8QRRX4UXmO/I2oJGV5K+e1G/ODrOAfc9D6EeZlnt8hzA/uR/6/SgrfjdAehy9cpHOYs/GmXN7MSE=
+X-Received: by 2002:a17:902:f944:b0:1c9:dac0:fbb3 with SMTP id
+ kx4-20020a170902f94400b001c9dac0fbb3mr9014071plb.31.1697452740888; Mon, 16
+ Oct 2023 03:39:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Xiaobo Liu <cppcoffee@gmail.com>
+Date: Mon, 16 Oct 2023 18:38:50 +0800
+Message-ID: <CAJeqHvL8xNKOZ=WD3PVjQVGz_S-EU3qDRCV1LwY4auOWxTq1dQ@mail.gmail.com>
+Subject: failed to build u-boot mt7621_rfb_defconfig
+To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Mon, 16 Oct 2023 13:49:12 +0200
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,527 +82,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: iuncuim <iuncuim@gmail.com>
+I checkout u-boot tag: v2023.10
 
-The H616 SoC family has support for several types of DRAM: DDR3,
-LPDDR3, DDR4 and LPDDR4.
-At the moment, the driver only supports DDR3 and LPDDR3 memory.
-Let's extend the driver to support the LPDDR4 memory. This type
-of memory widely used in device with T507(-H) SoC and new orangepi
-zero3 with H618.
-The compatibility with T507 is not yet complete, because there
-is difference in the phy_init array.
-The LPDDR4-2133 timings correspond to DRAM Rayson RS1G32LO4D2BDS-53BT
-found on the Orangepi Zero 3 4GB.
+https://github.com/u-boot/u-boot/tree/v2023.10
 
-Signed-off-by: Mikhail Kalashnikov <iuncuim@gmail.com>
+run build:
 
----
- .../include/asm/arch-sunxi/dram_sun50i_h616.h |   2 +
- arch/arm/mach-sunxi/Kconfig                   |  16 ++
- arch/arm/mach-sunxi/dram_sun50i_h616.c        | 176 ++++++++++++++----
- arch/arm/mach-sunxi/dram_timings/Makefile     |   1 +
- .../dram_timings/h616_lpddr4_2133.c           |  97 ++++++++++
- 5 files changed, 258 insertions(+), 34 deletions(-)
- create mode 100644 arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
+```shell
+export
+STAGING_DIR=/home/foo/openwrt-toolchain-22.03.4-ramips-mt7621_gcc-11.2.0_musl.Linux-x86_64/
 
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-index 11774deded..a8fdda124a 100644
---- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-+++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-@@ -130,6 +130,7 @@ check_member(sunxi_mctl_ctl_reg, unk_0x4240, 0x4240);
- #define MSTR_DEVICETYPE_LPDDR2	BIT(2)
- #define MSTR_DEVICETYPE_LPDDR3	BIT(3)
- #define MSTR_DEVICETYPE_DDR4	BIT(4)
-+#define MSTR_DEVICETYPE_LPDDR4	BIT(5)
- #define MSTR_DEVICETYPE_MASK	GENMASK(5, 0)
- #define MSTR_2TMODE		BIT(10)
- #define MSTR_BUSWIDTH_FULL	(0 << 12)
-@@ -154,6 +155,7 @@ struct dram_para {
- 	u32 odt_en;
- 	u32 tpr0;
- 	u32 tpr2;
-+	u32 tpr6;
- 	u32 tpr10;
- 	u32 tpr11;
- 	u32 tpr12;
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index 9d5df2c102..71e2f40b9e 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -85,6 +85,11 @@ config DRAM_SUN50I_H616_TPR2
- 	help
- 	  TPR2 value from vendor DRAM settings.
- 
-+config DRAM_SUN50I_H616_TPR6
-+	hex "H616 DRAM TPR6 parameter"
-+	help
-+	  TPR6 value from vendor DRAM settings.
-+
- config DRAM_SUN50I_H616_TPR10
- 	hex "H616 DRAM TPR10 parameter"
- 	help
-@@ -441,6 +446,9 @@ config SUNXI_DRAM_DDR2
- config SUNXI_DRAM_LPDDR3
- 	bool
- 
-+config SUNXI_DRAM_LPDDR4
-+	bool
-+
- choice
- 	prompt "DRAM Type and Timing"
- 	default SUNXI_DRAM_DDR3_1333 if !MACH_SUN8I_V3S
-@@ -484,6 +492,14 @@ config SUNXI_DRAM_H616_LPDDR3
- 	  This option is the LPDDR3 timing used by the stock boot0 by
- 	  Allwinner.
- 
-+config SUNXI_DRAM_H616_LPDDR4
-+	bool "LPDDR4 DRAM chips on the H616 DRAM controller"
-+	select SUNXI_DRAM_LPDDR4
-+	depends on DRAM_SUN50I_H616
-+	help
-+	  This option is the LPDDR4 timing used by the stock boot0 by
-+	  Allwinner.
-+
- config SUNXI_DRAM_H616_DDR3_1333
- 	bool "DDR3-1333 boot0 timings on the H616 DRAM controller"
- 	select SUNXI_DRAM_DDR3
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index ba5659d409..2c4b47bae7 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -238,6 +238,11 @@ static const u8 phy_init[] = {
- 	0x08, 0x01, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
- 	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x07,
- 	0x17, 0x19, 0x1a
-+#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
-+	0x02, 0x00, 0x17, 0x05, 0x04, 0x19, 0x06, 0x07,
-+	0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f,
-+	0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x01,
-+	0x18, 0x03, 0x1a
- #endif
- };
- 
-@@ -246,8 +251,13 @@ static void mctl_phy_configure_odt(const struct dram_para *para)
- {
- 	uint32_t val_lo, val_hi;
- 
-+	clrsetbits_le32(SUNXI_DRAM_PHY0_BASE + 0x390, BIT(5), BIT(4));
-+	clrsetbits_le32(SUNXI_DRAM_PHY0_BASE + 0x3d0, BIT(5), BIT(4));
-+	clrsetbits_le32(SUNXI_DRAM_PHY0_BASE + 0x410, BIT(5), BIT(4));
-+	clrsetbits_le32(SUNXI_DRAM_PHY0_BASE + 0x450, BIT(5), BIT(4));
-+
- 	val_lo = para->dx_dri;
--	val_hi = para->dx_dri;
-+	val_hi = (para->type == SUNXI_DRAM_TYPE_LPDDR4) ? 0x04040404 : para->dx_dri;
- 	writel_relaxed(MASK_BYTE(val_lo, 0), SUNXI_DRAM_PHY0_BASE + 0x388);
- 	writel_relaxed(MASK_BYTE(val_hi, 0), SUNXI_DRAM_PHY0_BASE + 0x38c);
- 	writel_relaxed(MASK_BYTE(val_lo, 1), SUNXI_DRAM_PHY0_BASE + 0x3c8);
-@@ -265,7 +275,7 @@ static void mctl_phy_configure_odt(const struct dram_para *para)
- 	writel_relaxed(MASK_BYTE(val_hi, 1), SUNXI_DRAM_PHY0_BASE + 0x34c);
- 
- 	val_lo = (para->type == SUNXI_DRAM_TYPE_LPDDR3) ? 0 : para->dx_odt;
--	val_hi = para->dx_odt;
-+	val_hi = (para->type == SUNXI_DRAM_TYPE_LPDDR4) ? 0 : para->dx_odt;
- 	writel_relaxed(MASK_BYTE(val_lo, 0), SUNXI_DRAM_PHY0_BASE + 0x380);
- 	writel_relaxed(MASK_BYTE(val_hi, 0), SUNXI_DRAM_PHY0_BASE + 0x384);
- 	writel_relaxed(MASK_BYTE(val_lo, 1), SUNXI_DRAM_PHY0_BASE + 0x3c0);
-@@ -791,8 +801,9 @@ static void mctl_phy_ca_bit_delay_compensation(const struct dram_para *para,
- 	writel(val, SUNXI_DRAM_PHY0_BASE + 0x7e0);
- 	writel(val, SUNXI_DRAM_PHY0_BASE + 0x7f4);
- 
--	if (para->type == SUNXI_DRAM_TYPE_DDR3) {
--		val = (para->tpr10 >> 7) & 0x1e;
-+	val = (para->tpr10 >> 7) & 0x1e;
-+	switch (para->type) {
-+	case SUNXI_DRAM_TYPE_DDR3:
- 		if (para->tpr2 & 1) {
- 			writel(val, SUNXI_DRAM_PHY0_BASE + 0x794);
- 			if (config->ranks == 2) {
-@@ -818,8 +829,8 @@ static void mctl_phy_ca_bit_delay_compensation(const struct dram_para *para,
- 				writel(val, SUNXI_DRAM_PHY0_BASE + 0x7b8);
- 			}
- 		}
--	} else if (para->type == SUNXI_DRAM_TYPE_LPDDR3) {
--		val = (para->tpr10 >> 7) & 0x1e;
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR3:
- 		if (para->tpr2 & 1) {
- 			writel(val, SUNXI_DRAM_PHY0_BASE + 0x7a0);
- 			if (config->ranks == 2) {
-@@ -833,7 +844,15 @@ static void mctl_phy_ca_bit_delay_compensation(const struct dram_para *para,
- 				writel(val, SUNXI_DRAM_PHY0_BASE + 0x7f8);
- 			}
- 		}
--	}
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR4:
-+		if (para->tpr2 & 1) {
-+			writel(val, SUNXI_DRAM_PHY0_BASE + 0x788);
-+		} else {
-+			writel(val, SUNXI_DRAM_PHY0_BASE + 0x794);
-+		};
-+		break;
-+	};
- }
- 
- static bool mctl_phy_init(const struct dram_para *para,
-@@ -846,30 +865,39 @@ static bool mctl_phy_init(const struct dram_para *para,
- 	u32 val, val2, *ptr, mr0, mr2;
- 	int i;
- 
-+	if (para->type == SUNXI_DRAM_TYPE_LPDDR4)
-+		clrbits_le32(SUNXI_DRAM_PHY0_BASE + 0x4,0x80);
-+
- 	if (config->bus_full_width)
- 		val = 0xf;
- 	else
- 		val = 3;
- 	clrsetbits_le32(SUNXI_DRAM_PHY0_BASE + 0x3c, 0xf, val);
- 
--	if (para->tpr2 & 0x100) {
--		if (para->type == SUNXI_DRAM_TYPE_DDR3) {
-+	switch (para->type) {
-+	case SUNXI_DRAM_TYPE_DDR3:
-+		if (para->tpr2 & 0x100) {
- 			val = 9;
- 			val2 = 7;
--		} else if (para->type == SUNXI_DRAM_TYPE_LPDDR3) {
--			// untested setup: use some values for now
--			val = 14;
--			val2 = 8;
--		}
--	} else {
--		if (para->type == SUNXI_DRAM_TYPE_DDR3) {
-+		} else {
- 			val = 13;
- 			val2 = 9;
--		} else if (para->type == SUNXI_DRAM_TYPE_LPDDR3) {
-+		}
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR3:
-+		if (para->tpr2 & 0x100) {
-+			val = 12;
-+			val2 = 6;
-+		} else {
- 			val = 14;
- 			val2 = 8;
- 		}
--	}
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR4:
-+		val = 20;
-+		val2 = 10;
-+		break;
-+	};
- 
- 	writel(val, SUNXI_DRAM_PHY0_BASE + 0x14);
- 	writel(val, SUNXI_DRAM_PHY0_BASE + 0x35c);
-@@ -893,19 +921,37 @@ static bool mctl_phy_init(const struct dram_para *para,
- 	if (para->tpr10 & TPR10_CA_BIT_DELAY)
- 		mctl_phy_ca_bit_delay_compensation(para, config);
- 
--	if (para->type == SUNXI_DRAM_TYPE_DDR3)
-+	switch (para->type) {
-+	case SUNXI_DRAM_TYPE_DDR3:
-+		val = para->tpr6 & 0xff;
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR3:
-+		val = para->tpr6 >> 8 & 0xff;
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR4:
-+		val = para->tpr6 >> 24 & 0xff;
-+		if (val == 0)
-+			val = 0x33;
-+		break;
-+	};
-+	if (val == 0)
- 		val = 0x80;
--	else if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
--		val = 0xc0;
- 	writel(val, SUNXI_DRAM_PHY0_BASE + 0x3dc);
- 	writel(val, SUNXI_DRAM_PHY0_BASE + 0x45c);
- 
- 	mctl_phy_configure_odt(para);
- 
--	if (para->type == SUNXI_DRAM_TYPE_DDR3)
-+	switch (para->type) {
-+	case SUNXI_DRAM_TYPE_DDR3:
- 		val = 0x0a;
--	else if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR3:
- 		val = 0x0b;
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR4:
-+		val = 0x0d;
-+		break;
-+	};
- 	clrsetbits_le32(SUNXI_DRAM_PHY0_BASE + 4, 0x7, val);
- 
- 	if (para->clk <= 672)
-@@ -955,8 +1001,8 @@ static bool mctl_phy_init(const struct dram_para *para,
- 		mr0 = 0x1f14;
- 		mr2 = 0x20;
- 	}
--
--	if (para->type == SUNXI_DRAM_TYPE_DDR3) {
-+	switch (para->type) {
-+	case SUNXI_DRAM_TYPE_DDR3:
- 		writel(mr0, &mctl_ctl->mrctrl1);
- 		writel(0x80000030, &mctl_ctl->mrctrl0);
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-@@ -972,7 +1018,8 @@ static bool mctl_phy_init(const struct dram_para *para,
- 		writel(0, &mctl_ctl->mrctrl1);
- 		writel(0x80003030, &mctl_ctl->mrctrl0);
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
--	} else if (para->type == SUNXI_DRAM_TYPE_LPDDR3) {
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR3:
- 		writel(mr0, &mctl_ctl->mrctrl1);
- 		writel(0x800000f0, &mctl_ctl->mrctrl0);
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-@@ -988,7 +1035,45 @@ static bool mctl_phy_init(const struct dram_para *para,
- 		writel(0x301, &mctl_ctl->mrctrl1);
- 		writel(0x800000f0, &mctl_ctl->mrctrl0);
- 		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
--	}
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR4:
-+		writel(0x0, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+
-+		writel(0x134, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+
-+		writel(0x21b, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+
-+		writel(0x333, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+
-+		writel(0x403, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+
-+		writel(0xb04, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+
-+		writel(0xc72, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+
-+		writel(0xe09, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+
-+		writel(0x1624, &mctl_ctl->mrctrl1);
-+		writel(0x80000030, &mctl_ctl->mrctrl0);
-+		mctl_await_completion(&mctl_ctl->mrctrl0, BIT(31), 0);
-+		break;
-+	};
- 
- 	writel(0, SUNXI_DRAM_PHY0_BASE + 0x54);
- 
-@@ -1055,6 +1140,9 @@ static bool mctl_ctrl_init(const struct dram_para *para,
- 	clrsetbits_le32(&mctl_com->unk_0x500, BIT(24), 0x200);
- 	writel(0x8000, &mctl_ctl->clken);
- 
-+	if (para->type == SUNXI_DRAM_TYPE_LPDDR4)
-+		writel(1, SUNXI_DRAM_COM_BASE + 0x50);
-+
- 	setbits_le32(&mctl_com->unk_0x008, 0xff00);
- 
- 	clrsetbits_le32(&mctl_ctl->sched[0], 0xff00, 0x3000);
-@@ -1063,11 +1151,18 @@ static bool mctl_ctrl_init(const struct dram_para *para,
- 
- 	setbits_le32(&mctl_com->unk_0x008, 0xff00);
- 
--	reg_val = MSTR_BURST_LENGTH(8) | MSTR_ACTIVE_RANKS(config->ranks);
--	if (para->type == SUNXI_DRAM_TYPE_DDR3)
--		reg_val |= MSTR_DEVICETYPE_DDR3 | MSTR_2TMODE;
--	else if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
--		reg_val |= MSTR_DEVICETYPE_LPDDR3;
-+	reg_val = MSTR_ACTIVE_RANKS(config->ranks);
-+	switch (para->type) {
-+	case SUNXI_DRAM_TYPE_DDR3:
-+		reg_val |= MSTR_BURST_LENGTH(8) | MSTR_DEVICETYPE_DDR3 | MSTR_2TMODE;
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR3:
-+		reg_val |= MSTR_BURST_LENGTH(8) | MSTR_DEVICETYPE_LPDDR3;
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR4:
-+		reg_val |= MSTR_BURST_LENGTH(16) | MSTR_DEVICETYPE_LPDDR4;
-+		break;
-+	};
- 	if (config->bus_full_width)
- 		reg_val |= MSTR_BUSWIDTH_FULL;
- 	else
-@@ -1079,10 +1174,17 @@ static bool mctl_ctrl_init(const struct dram_para *para,
- 	else
- 		writel(0x0201, &mctl_ctl->odtmap);
- 
--	if (para->type == SUNXI_DRAM_TYPE_DDR3)
-+	switch (para->type) {
-+	case SUNXI_DRAM_TYPE_DDR3:
- 		reg_val = 0x06000400;
--	else if (para->type == SUNXI_DRAM_TYPE_LPDDR3)
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR3:
- 		reg_val = 0x09020400;
-+		break;
-+	case SUNXI_DRAM_TYPE_LPDDR4:
-+		reg_val = 0x04000400;
-+		break;
-+	};
- 	writel(reg_val, &mctl_ctl->odtcfg);
- 	writel(reg_val, &mctl_ctl->unk_0x2240);
- 	writel(reg_val, &mctl_ctl->unk_0x3240);
-@@ -1102,6 +1204,9 @@ static bool mctl_ctrl_init(const struct dram_para *para,
- 	setbits_le32(&mctl_ctl->unk_0x3180, BIT(31) | BIT(30));
- 	setbits_le32(&mctl_ctl->unk_0x4180, BIT(31) | BIT(30));
- 
-+	if (para->type == SUNXI_DRAM_TYPE_LPDDR4)
-+		setbits_le32(&mctl_ctl->dbictl, 0x1);
-+
- 	setbits_le32(&mctl_ctl->rfshctl3, BIT(0));
- 	clrbits_le32(&mctl_ctl->dfimisc, BIT(0));
- 
-@@ -1224,6 +1329,8 @@ static const struct dram_para para = {
- 	.type = SUNXI_DRAM_TYPE_DDR3,
- #elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR3)
- 	.type = SUNXI_DRAM_TYPE_LPDDR3,
-+#elif defined(CONFIG_SUNXI_DRAM_H616_LPDDR4)
-+	.type = SUNXI_DRAM_TYPE_LPDDR4,
- #endif
- 	.dx_odt = CONFIG_DRAM_SUN50I_H616_DX_ODT,
- 	.dx_dri = CONFIG_DRAM_SUN50I_H616_DX_DRI,
-@@ -1231,6 +1338,7 @@ static const struct dram_para para = {
- 	.odt_en = CONFIG_DRAM_SUN50I_H616_ODT_EN,
- 	.tpr0 = CONFIG_DRAM_SUN50I_H616_TPR0,
- 	.tpr2 = CONFIG_DRAM_SUN50I_H616_TPR2,
-+	.tpr6 = CONFIG_DRAM_SUN50I_H616_TPR6,
- 	.tpr10 = CONFIG_DRAM_SUN50I_H616_TPR10,
- 	.tpr11 = CONFIG_DRAM_SUN50I_H616_TPR11,
- 	.tpr12 = CONFIG_DRAM_SUN50I_H616_TPR12,
-diff --git a/arch/arm/mach-sunxi/dram_timings/Makefile b/arch/arm/mach-sunxi/dram_timings/Makefile
-index 8bfd99448a..5f20341924 100644
---- a/arch/arm/mach-sunxi/dram_timings/Makefile
-+++ b/arch/arm/mach-sunxi/dram_timings/Makefile
-@@ -5,3 +5,4 @@ obj-$(CONFIG_SUNXI_DRAM_H6_LPDDR3)	+= h6_lpddr3.o
- obj-$(CONFIG_SUNXI_DRAM_H6_DDR3_1333)	+= h6_ddr3_1333.o
- obj-$(CONFIG_SUNXI_DRAM_H616_DDR3_1333)	+= h616_ddr3_1333.o
- obj-$(CONFIG_SUNXI_DRAM_H616_LPDDR3)	+= h616_lpddr3.o
-+obj-$(CONFIG_SUNXI_DRAM_H616_LPDDR4)	+= h616_lpddr4_2133.o
-diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-new file mode 100644
-index 0000000000..cfb938af12
---- /dev/null
-+++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-@@ -0,0 +1,97 @@
-+/*
-+ * sun50i H616 LPDDR4-2133 timings, as programmed by Allwinner's boot0
-+ *
-+ * The chips are probably able to be driven by a faster clock, but boot0
-+ * uses a more conservative timing (as usual).
-+ *
-+ * (C) Copyright 2020 Jernej Skrabec <jernej.skrabec@siol.net>
-+ * Based on H6 DDR3 timings:
-+ * (C) Copyright 2018,2019 Arm Ltd.
-+ *
-+ * SPDX-License-Identifier:	GPL-2.0+
-+ */
-+
-+#include <common.h>
-+#include <asm/arch/dram.h>
-+#include <asm/arch/cpu.h>
-+
-+void mctl_set_timing_params(const struct dram_para *para)
-+{
-+	struct sunxi_mctl_ctl_reg * const mctl_ctl =
-+			(struct sunxi_mctl_ctl_reg *)SUNXI_DRAM_CTL0_BASE;
-+
-+	u8 tccd		= 4;			/* JEDEC: 4nCK */
-+	u8 tfaw		= ns_to_t(40);		/* JEDEC: 40 ns w/ 1K pages */
-+	u8 trrd		= max(ns_to_t(10), 2);	/* JEDEC: max(10 ns, 2nCK) */
-+	u8 trcd		= max(ns_to_t(18), 2);	/* JEDEC: 13.5 ns */
-+	u8 trc		= ns_to_t(65);		/* JEDEC: 49.5 ns */
-+	u8 txp		= max(ns_to_t(8), 2);	/* JEDEC: max(6 ns, 3nCK) */
-+	u8 trtp		= max(ns_to_t(8), 4);	/* JEDEC: max(7.5 ns, 4nCK) */
-+	u8 trp		= ns_to_t(21);		/* JEDEC: >= 13.75 ns */
-+	u8 tras		= ns_to_t(42);		/* JEDEC >= 36 ns, <= 9*trefi */
-+	u16 trefi	= ns_to_t(3904) / 32;	/* JEDEC: 7.8us@Tcase <= 85C */
-+	u16 trfc	= ns_to_t(280);		/* JEDEC: 160 ns for 2Gb */
-+	u16 txsr	= ns_to_t(190);		/* ? */
-+
-+	u8 tmrw		= max(ns_to_t(14), 5);	/* ? */
-+	u8 tmrd		= tmrw;			/* JEDEC: 4nCK */
-+	u8 tmod		= 12;			/* JEDEC: max(15 ns, 12nCK) */
-+	u8 tcke		= max(ns_to_t(15), 2);	/* JEDEC: max(5.625 ns, 3nCK) */
-+	u8 tcksrx	= max(ns_to_t(2), 2);	/* JEDEC: max(10 ns, 5nCK) */
-+	u8 tcksre	= max(ns_to_t(5), 2);	/* JEDEC: max(10 ns, 5nCK) */
-+	u8 tckesr	= tcke;		/* JEDEC: tCKE(min) + 1nCK */
-+	u8 trasmax	= (trefi * 9) / 32;	/* JEDEC: tREFI * 9 */
-+	u8 txs		= 4;			/* JEDEC: max(5nCK,tRFC+10ns) */
-+	u8 txsdll	= 16;			/* JEDEC: 512 nCK */
-+	u8 txsabort	= 4;			/* ? */
-+	u8 txsfast	= 4;			/* ? */
-+	u8 tcl		= 10;			/* JEDEC: CL / 2 => 6 */
-+	u8 tcwl		= 5;			/* JEDEC: 8 */
-+	u8 t_rdata_en	= 17;			/* ? */
-+	u8 tphy_wrlat	= 5;
-+
-+	u8 twtp		= 24;			/* (WL + BL / 2 + tWR) / 2 */
-+	u8 twr2rd	= max(trrd, (u8)4) + 14;/* (WL + BL / 2 + tWTR) / 2 */
-+	u8 trd2wr	= (ns_to_t(4) + 17) - ns_to_t(1);/* (RL + BL / 2 + 2 - WL) / 2 */
-+
-+	/* set DRAM timing */
-+	writel((twtp << 24) | (tfaw << 16) | (trasmax << 8) | tras,
-+	       &mctl_ctl->dramtmg[0]);
-+	writel((txp << 16) | (trtp << 8) | trc, &mctl_ctl->dramtmg[1]);
-+	writel((tcwl << 24) | (tcl << 16) | (trd2wr << 8) | twr2rd,
-+	       &mctl_ctl->dramtmg[2]);
-+	writel((tmrw << 20) | (tmrd << 12) | tmod, &mctl_ctl->dramtmg[3]);
-+	writel((trcd << 24) | (tccd << 16) | (trrd << 8) | trp,
-+	       &mctl_ctl->dramtmg[4]);
-+	writel((tcksrx << 24) | (tcksre << 16) | (tckesr << 8) | tcke,
-+	       &mctl_ctl->dramtmg[5]);
-+	/* Value suggested by ZynqMP manual and used by libdram */
-+	writel((txp + 2) | 0x02020000, &mctl_ctl->dramtmg[6]);
-+	writel((txsfast << 24) | (txsabort << 16) | (txsdll << 8) | txs,
-+	       &mctl_ctl->dramtmg[8]);
-+	writel(0x00020208, &mctl_ctl->dramtmg[9]);
-+	writel(0xE0C05, &mctl_ctl->dramtmg[10]);
-+	writel(0x440C021C, &mctl_ctl->dramtmg[11]);
-+	writel(8, &mctl_ctl->dramtmg[12]);
-+	writel(0xA100002, &mctl_ctl->dramtmg[13]);
-+	writel(txsr, &mctl_ctl->dramtmg[14]);
-+
-+	clrsetbits_le32(&mctl_ctl->init[0], 0xC0000FFF, 0x3f0);
-+	writel(0x01f20000, &mctl_ctl->init[1]);
-+	writel(0x00000d05, &mctl_ctl->init[2]);
-+	writel(0, &mctl_ctl->dfimisc);
-+	writel(0x0034001b, &mctl_ctl->init[3]);
-+	writel(0x00330000, &mctl_ctl->init[4]);
-+	writel(0x00040072, &mctl_ctl->init[6]);
-+	writel(0x00240009, &mctl_ctl->init[7]);
-+
-+	clrsetbits_le32(&mctl_ctl->rankctl, 0xff0, 0x660);
-+
-+	/* Configure DFI timing */
-+	writel(tphy_wrlat | 0x2000000 | (t_rdata_en << 16) | 0x808000,
-+	       &mctl_ctl->dfitmg0);
-+	writel(0x100202, &mctl_ctl->dfitmg1);
-+
-+	/* set refresh timing */
-+	writel((trefi << 16) | trfc, &mctl_ctl->rfshtmg);
-+}
-\ No newline at end of file
--- 
-2.42.0
+make mt7621_rfb_defconfig
+make
+CROSS_COMPILE=/home/foo/openwrt-toolchain-22.03.4-ramips-mt7621_gcc-11.2.0_musl.Linux-x86_64/toolchain-mipsel_24kc_gcc-11.2.0_musl/bin/mipsel-openwrt-linux-musl-
+```
 
+build failed:
+
+```shell
+  CC      spl/common/spl/spl.o
+  AR      spl/common/spl/built-in.o
+  LD      spl/u-boot-spl
+  OBJCOPY spl/u-boot-spl-nodtb.bin
+  COPY    spl/u-boot-spl.bin
+  SYM     spl/u-boot-spl.sym
+  MKIMAGE u-boot.img
+  MKIMAGE u-boot-dtb.img
+  LZMA    u-boot.bin.lzma
+  MKIMAGE u-boot-lzma.img
+  BINMAN  .binman_stamp
+Image 'u-boot-spl-ddr' is missing external blobs and is non-functional:
+stage_bin
+
+/binman/u-boot-spl-ddr/stage_bin (mt7621_stage_sram.bin):
+   Missing blob
+
+Some images are invalid
+make: *** [Makefile:1115: .binman_stamp] Error 103
+```
+
+Is there a step I'm missing that's causing this?
