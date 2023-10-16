@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C799CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:39:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13725CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:40:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B0C386E11;
-	Tue, 17 Oct 2023 00:33:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01D0D86F47;
+	Tue, 17 Oct 2023 00:33:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AmG+//Jy";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jGCbt2w+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADC2686E11; Tue, 17 Oct 2023 00:32:14 +0200 (CEST)
-Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
- [IPv6:2607:f8b0:4864:20::72d])
+ id DF9C186F0B; Tue, 17 Oct 2023 00:31:43 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8B9486E37
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:32:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DA50186EE3
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:31:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-qk1-x72d.google.com with SMTP id
- af79cd13be357-777506ccc6cso234405385a.3
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:32:01 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-7741c2e76a3so331171085a.1
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:31:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495519; x=1698100319; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697495478; x=1698100278; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HcUfBsrY5qpvOwpHFoiq+dgCocPub4fQAua/5fgTArs=;
- b=AmG+//Jy7MlB67+gkGXbzyyGw30e99izbV0uP0eGw1gp5bD1E5VNxZxU3cNQbif4gp
- sOlkYzAHm6S20C/LNQRHE9JNg353zOXLlmPuf84klJ7F0+5kyo4yD5QPBwLUUCzsNoWD
- XXqjjpkorrRO8Ge0iT6OMcUFvG0wM5jW7DLW0=
+ bh=igc0MjeaFEqfKXvw44tmzZrS222b/nE4xNlJFGf09Lo=;
+ b=jGCbt2w+v/JuyPPUxN+5RVQ/CA/kVA16Y7OUTHMvQRX6wGjJOj4nYwMQKxllC0Y0f7
+ n27sqz4S0uA1/UTBTAn+jhw4/UEC7g7VNgfrFhYRv+4ii0mqssPqlT5349XElJ7cHI9i
+ JA1qEHjd+bFO+dgXTyt2rzSlZHg/pAptg6TvU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495519; x=1698100319;
+ d=1e100.net; s=20230601; t=1697495478; x=1698100278;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HcUfBsrY5qpvOwpHFoiq+dgCocPub4fQAua/5fgTArs=;
- b=qyfEUL+1c1p/5TRgDwrZJRy+wqxQamv90nSZxQsQoS8IW5RIrC0UjVB4h/pUgZjIyC
- yFK/OTGBQ3FFPLfkkpPZtVLRnMXsCg+PnEfyulMGj0vs4BKUCJa/gUsoC1sOg/h1FnKj
- 8XgdrW14skkabPWRLOkNYdUf0t9FNkPj2OPFSfmIiBOeHi9/+L+2CBoH7mKKcY0psVKT
- TnRyOaGUxi7iEoTg816IT1ZzBeXDAEc2xQ5rXQAJjWLSDUXj9m9JrlYguij1SvovfgPn
- PCHEkig9BfUujEWqX6VW68NP6C8HfFCJzdepbBuuSeiwZtiD2L69GVn0YnAK5pOGfxcw
- Jqrw==
-X-Gm-Message-State: AOJu0YzvfQimZ+seYLBnlJpyDHPzvec4ILlAIFGQJdUzUSckGJCdWPkJ
- SNuLpQslWUQ3eNq18eeFU+Gge7gtkL19Oq1V7cOXSA==
-X-Google-Smtp-Source: AGHT+IFeo7XvZWcLqLi9gi4fj188PiKTxXn1CMaXeSMbLEkP9jlEWZ6gkcIjtB4lAmxUloJBtspaHA==
-X-Received: by 2002:a05:620a:4045:b0:775:6a78:5f9a with SMTP id
- i5-20020a05620a404500b007756a785f9amr568641qko.6.1697495518786; 
- Mon, 16 Oct 2023 15:31:58 -0700 (PDT)
+ bh=igc0MjeaFEqfKXvw44tmzZrS222b/nE4xNlJFGf09Lo=;
+ b=juTLcTZjfEgbs2VCBxalQH9QJHgwlEU5jzsD/dIukSDwemeoXm4SbYW/PHp2S/2g7f
+ xGOLQkz1YEgbHun4QnWq0KFtckvdKXLEZGpynCx9r+BsabAO/O3rnwOegrJApCYynfwk
+ C2bZN3iqmPgTdZbY+DMcX+3PcgVdrqdzdOcFprBzlopafQBwHs0c1wGxP9XCF8D75vlb
+ uwq4BwBkq2VSWyqU/J1RrVhC3EtrUaE+oC2Yztc5jkw0UNZBd5BKj31kCNc6MQ0phZIE
+ KZKMvWwmDMFQGiOAxHcjDQhGsJGxaCxgls9i3bvLWKQJ/E0nyC41nKW9a8Yj0Z0KKTcA
+ WBrg==
+X-Gm-Message-State: AOJu0Ywk3fMrm156NikC9AjYQ5+3euZURhzKNfuZFgpPeDbedx7G+cE6
+ V7IPA0bRCWEfiEVE4qfuxdk+enQplHIybLkpzdRNBQ==
+X-Google-Smtp-Source: AGHT+IFArxF8cczfxOcyVj9wqWlOv5xWe9jl1U3Ul+RzIbHOLV9dYcofzomwYZJOyi+W4Q2jKvLytw==
+X-Received: by 2002:a05:6214:b6d:b0:66d:a40:13a7 with SMTP id
+ ey13-20020a0562140b6d00b0066d0a4013a7mr817773qvb.47.1697495478358; 
+ Mon, 16 Oct 2023 15:31:18 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.31.54
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.31.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:31:58 -0700 (PDT)
+ Mon, 16 Oct 2023 15:31:18 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
-Date: Mon, 16 Oct 2023 16:28:13 -0600
-Message-ID: <20231016222835.596572-23-sjg@chromium.org>
+Subject: [PATCH v3 17/32] log: Allow use without CONFIG_CMDLINE
+Date: Mon, 16 Oct 2023 16:28:08 -0600
+Message-ID: <20231016222835.596572-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
 References: <20231016222835.596572-1-sjg@chromium.org>
@@ -88,32 +88,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet is
-available, add it as an explicit dependency.
+When CONFIG_SYS_CBSIZE is not used we need an alternative. For logging
+it seems that CONFIG_SYS_PBSIZE is a better choice anyway, so update
+this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Add new patch to update EFI_LOADER to depend on DM_ETH
+ common/log.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- lib/efi_loader/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index 13cad6342c36..fca4b3eef270 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -11,6 +11,7 @@ config EFI_LOADER
- 	# We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
- 	depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
- 	depends on BLK
-+	depends on DM_ETH
- 	depends on !EFI_APP
- 	default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
- 	select CHARSET
+diff --git a/common/log.c b/common/log.c
+index b2de57fcb3b8..72a4de3274c7 100644
+--- a/common/log.c
++++ b/common/log.c
+@@ -206,7 +206,7 @@ static bool log_passes_filters(struct log_device *ldev, struct log_rec *rec)
+ static int log_dispatch(struct log_rec *rec, const char *fmt, va_list args)
+ {
+ 	struct log_device *ldev;
+-	char buf[CONFIG_SYS_CBSIZE];
++	char buf[CONFIG_SYS_PBSIZE];
+ 
+ 	/*
+ 	 * When a log driver writes messages (e.g. via the network stack) this
+@@ -268,7 +268,7 @@ int _log(enum log_category_t cat, enum log_level_t level, const char *file,
+ 		/* display dropped traces with console puts and DEBUG_UART */
+ 		if (rec.level <= CONFIG_LOG_DEFAULT_LEVEL ||
+ 		    rec.flags & LOGRECF_FORCE_DEBUG) {
+-			char buf[CONFIG_SYS_CBSIZE];
++			char buf[CONFIG_SYS_PBSIZE];
+ 
+ 			va_start(args, fmt);
+ 			vsnprintf(buf, sizeof(buf), fmt, args);
 -- 
 2.42.0.655.g421f12c284-goog
 
