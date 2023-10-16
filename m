@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A431DCDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:43:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30D4CCDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:44:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E27D86EE3;
-	Mon, 16 Oct 2023 16:43:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 959CD86EDB;
+	Mon, 16 Oct 2023 16:44:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697467423;
-	bh=1LlGEdRVsWP/3fWLDGKEzL7V6AJQKDJFSYyMaqjwIyo=;
+	s=phobos-20191101; t=1697467443;
+	bh=0v80lfBjSiST6WnkoCNiN8dRPNNaCq8M8YfemmoBjCk=;
 	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=TXYc89v0c37b158C7CyKBMeFslgk2ZjOvIm1yh8f5YTvYCF/0aBKXTBM0Eqif/egk
-	 hq1E0Efh3DTQScwQ7wCJlcJp5PduHgvNxN1uHxkCbrWMJ2N0Dw1BkQApyl9EOF+V1E
-	 0LlSRX9ywpRW2Kgfc8SLfh3gOf58cLV2LvGFhb1pPXzcukd8aI6eTRC/g3WVSuUPDC
-	 df8s+XBtfA3bJXut2zosdojduplqjCQtTHXWPQ8XuDZsGBqTr5WFdVmJxn8hU+8x8v
-	 G6dP1cMV4W6NEv43BlVAaGRN+tV6gBafNTHZjuxfYvz/EuIJKs+JIgq4DcnnGLfJ7q
-	 BUztedvpxXedA==
+	b=G85sYBZsKPV8F96okX0isx6v7z8oQulzAm1H2CNsKkINItnum+WilqCDbFdfDzqf/
+	 lFYXZKkTWL44k2DfKtT1zOL90vT9/piZ5yJ2+IEuoHBc1cVm4SiQlr9X4uFZVNKFeV
+	 N/9WvRY2QzFRTxtlSxm4uC5OGFENQDV6o2UKsA/sBXYN15gfqgyhHUA+OWWvJNChsd
+	 n/e4LKJ5U54FUMWGklE/15Wy1gTcqDzPRaQCRdvitLeap6vn9C9xiKh/fSCHCGCANn
+	 ayKk0lGfd5J3pzqJWb8zkl6uDy6gwbh9Fry3zGZgNIh5RRDBRf/J5znNqCBxHRopYB
+	 dLTteJtIw4oqQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 292F486EE3; Mon, 16 Oct 2023 16:43:42 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id 5637386E64; Mon, 16 Oct 2023 16:44:01 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E70886EDD
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:43:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C44A86B71
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:43:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -38,21 +38,19 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4S8Kc85KYNz9sW7;
- Mon, 16 Oct 2023 16:43:36 +0200 (CEST)
-Message-ID: <1e2a0771-610d-4dc4-af2c-a3e4957262ca@denx.de>
-Date: Mon, 16 Oct 2023 16:43:36 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4S8KcY3v7Cz9sZt;
+ Mon, 16 Oct 2023 16:43:57 +0200 (CEST)
+Message-ID: <8e17601b-61b8-4680-bca4-14c784882f36@denx.de>
+Date: Mon, 16 Oct 2023 16:43:57 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/2] Revert "arm: mvebu: x240: Use i2c-gpio instead of
- built in controller"
+Subject: Re: [PATCH] arm: mvebu: Enable bootstd for Synology DS116 board
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
-Cc: Chris Packham <chris.packham@alliedtelesis.co.nz>
-References: <20231003035800.2626121-1-judge.packham@gmail.com>
- <20231003035800.2626121-2-judge.packham@gmail.com>
- <99db8b85-b47d-450c-b525-743f379fecf6@denx.de>
-In-Reply-To: <99db8b85-b47d-450c-b525-743f379fecf6@denx.de>
+To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+References: <20231007213548.20276-1-mibodhi@gmail.com>
+ <2d6f7df3-481a-4c95-99d0-0337c48675e5@denx.de>
+In-Reply-To: <2d6f7df3-481a-4c95-99d0-0337c48675e5@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -71,23 +69,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/5/23 09:54, Stefan Roese wrote:
-> On 10/3/23 05:57, Chris Packham wrote:
->> This reverts commit 5c1c6b7306f2b4c0fd50c7cb5d757e245b93606e. The reason
->> for switching to i2c-gpio was due to an issue we were seeing in the
->> Linux kernel where the CPU would lock up on certain adverse I2C bus
->> conditions. We were never able to reproduce the lockup in U-Boot but
->> assumed that was probably just luck.
+On 10/16/23 10:31, Stefan Roese wrote:
+> On 10/7/23 23:35, Tony Dinh wrote:
+>> Enable bootstd for Synology DS116 board, and remove distroboot.
 >>
->> Since then we have discovered that the lock up was due to the I2C
->> transaction offload engine in the I2C controller not coping with the
->> adverse bus conditions (basically it thinks there's another master and
->> waits for a STOP condition that never comes). U-Boot doesn't use the I2C
->> offload feature so is not susceptible to the lockup.
->>
->> We can therefore safely return to using the built-in I2C controller.
->>
->> Signed-off-by: Chris Packham <judge.packham@gmail.com>
+>> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 > 
 > Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -102,96 +88,55 @@ Stefan
 > 
 >> ---
 >>
->>   arch/arm/dts/ac5-98dx35xx-atl-x240.dts | 30 ++++++--------------------
->>   configs/x240_defconfig                 |  1 -
->>   2 files changed, 7 insertions(+), 24 deletions(-)
+>>   configs/ds116_defconfig |  3 ++-
+>>   include/configs/ds116.h | 12 +-----------
+>>   2 files changed, 3 insertions(+), 12 deletions(-)
 >>
->> diff --git a/arch/arm/dts/ac5-98dx35xx-atl-x240.dts 
->> b/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
->> index c19b25925ba2..820ec18b4355 100644
->> --- a/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
->> +++ b/arch/arm/dts/ac5-98dx35xx-atl-x240.dts
->> @@ -16,7 +16,7 @@
->>           gpio0 = &gpio0;
->>           gpio1 = &gpio1;
->>           spi0 = &spi0;
->> -        i2c0 = &i2cgpio;
->> +        i2c0 = &i2c0;
->>           usb0 = &usb0;
->>           pinctrl0 = &pinctrl0;
->>       };
->> @@ -40,19 +40,6 @@
->>               default-state = "on";
->>           };
->>       };
+>> diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
+>> index 0cd546c223..2437be73cd 100644
+>> --- a/configs/ds116_defconfig
+>> +++ b/configs/ds116_defconfig
+>> @@ -28,7 +28,8 @@ CONFIG_SYS_LOAD_ADDR=0x800000
+>>   CONFIG_PCI=y
+>>   CONFIG_DEBUG_UART=y
+>>   CONFIG_AHCI=y
+>> -CONFIG_DISTRO_DEFAULTS=y
+>> +CONFIG_BOOTSTD_FULL=y
+>> +CONFIG_BOOTSTD_DEFAULTS=y
+>>   CONFIG_BOOTDELAY=10
+>>   CONFIG_USE_PREBOOT=y
+>>   CONFIG_SYS_CONSOLE_INFO_QUIET=y
+>> diff --git a/include/configs/ds116.h b/include/configs/ds116.h
+>> index 031f4f6afc..0883ec4d53 100644
+>> --- a/include/configs/ds116.h
+>> +++ b/include/configs/ds116.h
+>> @@ -20,15 +20,8 @@
+>>    */
+>>   #include "mv-common.h"
+>> -/* Include the common distro boot environment */
+>>   #ifndef CONFIG_SPL_BUILD
+>> -#define BOOT_TARGET_DEVICES(func) \
+>> -    func(USB, usb, 0) \
+>> -    func(SCSI, scsi, 0) \
+>> -    func(PXE, pxe, na) \
+>> -    func(DHCP, dhcp, na)
 >> -
->> -    i2cgpio: i2c-gpio-0 {
->> -            compatible = "i2c-gpio";
->> -            #address-cells = <1>;
->> -            #size-cells = <0>;
+>>   #define KERNEL_ADDR_R    __stringify(0x1000000)
+>>   #define FDT_ADDR_R    __stringify(0x2000000)
+>>   #define RAMDISK_ADDR_R    __stringify(0x2200000)
+>> @@ -42,14 +35,11 @@
+>>       "scriptaddr=" SCRIPT_ADDR_R "\0" \
+>>       "pxefile_addr_r=" PXEFILE_ADDR_R "\0"
+>> -#include <config_distro_bootcmd.h>
 >> -
->> -            pinctrl-names = "default";
->> -            pinctrl-0 =  <&i2c0_gpio>;
->> -            scl-gpios = <&gpio0 26 (GPIO_ACTIVE_HIGH | 
->> GPIO_OPEN_DRAIN)>;
->> -            sda-gpios = <&gpio0 27 (GPIO_ACTIVE_HIGH | 
->> GPIO_OPEN_DRAIN)>;
->> -            i2c-gpio,delay-us = <2>;
->> -            status = "okay";
->> -         };
->>   };
->>   &nand {
->> @@ -83,7 +70,9 @@
->>       status = "okay";
->>   };
->> -&i2cgpio {
->> +&i2c0 {
->> +    status = "okay";
->> +
->>       mux@71 {
->>           #address-cells = <1>;
->>           #size-cells = <0>;
->> @@ -188,8 +177,8 @@
->>        * LED_OE_N              [23]
->>        * USB_PWR_FLT_N         [24]
->>        * SFP_INT_N             [25]
->> -     * I2C0_SCL              [26] (GPIO)
->> -     * I2C0_SDA              [27] (GPIO)
->> +     * I2C0_SCL              [26]
->> +     * I2C0_SDA              [27]
->>        * USB_EN                [28]
->>        * MONITOR_INT_N         [29]
->>        * XM1_MDC               [30]
->> @@ -212,7 +201,7 @@
->>       /*         0    1    2    3    4    5    6    7    8    9 */
->>       pin-func = < 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff 0xff
->>                0xff 0xff 1    1    1    1    0xff 0xff 0    0
->> -             0    0    0    0    0    0    0xff 0xff 0    0
->> +             0    0    0    0    0    0    1    1    0    0
->>                1    1    1    1    0    0    0    0    0    0
->>                0    0    0    1    1    1    >;
->> @@ -220,9 +209,4 @@
->>           marvell,pins = <0 1 2 3 4 5 6 7 8 9 10 11 16 17>;
->>           marvell,function = <2>;
->>       };
->> -
->> -    i2c0_gpio: i2c0-gpio-pins {
->> -        marvell,pins = <26 27>;
->> -        marvell,function = <0>;
->> -    };
->>   };
->> diff --git a/configs/x240_defconfig b/configs/x240_defconfig
->> index 0d5a19df25aa..4b1a761a9086 100644
->> --- a/configs/x240_defconfig
->> +++ b/configs/x240_defconfig
->> @@ -42,7 +42,6 @@ CONFIG_CLK_MVEBU=y
->>   CONFIG_GPIO_HOG=y
->>   CONFIG_DM_PCA953X=y
->>   CONFIG_DM_I2C=y
->> -CONFIG_DM_I2C_GPIO=y
->>   CONFIG_SYS_I2C_MVTWSI=y
->>   CONFIG_I2C_MUX=y
->>   CONFIG_I2C_MUX_PCA954x=y
+>>   #define CFG_EXTRA_ENV_SETTINGS \
+>>       RELOCATION_LIMITS_ENV_SETTINGS \
+>>       LOAD_ADDRESS_ENV_SETTINGS \
+>>       "fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
+>> -    "console=ttyS0,115200\0" \
+>> -    BOOTENV
+>> +    "console=ttyS0,115200\0"
+>>   #endif /* CONFIG_SPL_BUILD */
 > 
 > Viele Grüße,
 > Stefan Roese
