@@ -4,58 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42DCACDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:21:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D22CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:22:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D058186B71;
-	Mon, 16 Oct 2023 16:21:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id E9DFF86823;
+	Mon, 16 Oct 2023 16:22:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="NDqnZngd";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C5AD86BA1; Mon, 16 Oct 2023 16:21:44 +0200 (CEST)
-Received: from madras.collabora.co.uk (madras.collabora.co.uk
- [IPv6:2a00:1098:0:82:1000:25:2eeb:e5ab])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1697466126;
+	bh=KAtptBOUZKv90CViAOJy1O2xwJUOj7UAbq6JGykb1Yo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=SGdjQw7RZih4Mv+l50yDcM5sBCtMb0VMbhrl460d+tmPuiBDcuosgCVi9JKtjk5Q0
+	 AcfYtfzQ46lsnWgJ401aRVWo5V5YcNmQFhvbXCjnqcltgElMyudy8Jeeumk8j2MwCF
+	 2VIoa5+YWwZYFSuPgN6jVz0DUMkYoj6ZyQcgQcEIhnHthJzE1WHAp+JFiXnSogWTKP
+	 Kbqi54FI+3vzg6WYU+FuqibgyTzWyV0uURuWY3niEXbl559BNcujLK+/Mj+Uf9ZV0J
+	 HWYuIqrkzHjwLKLB5yC7GLEV1HPn+qlSF/RoQoiE6dCUk5eYh3NRwuf+n0hxKB84S3
+	 L/fbPMrM44k7A==
+Received: from [IPV6:2001:a61:606e:f301:54d3:fa40:6980:4d01] (unknown
+ [IPv6:2001:a61:606e:f301:54d3:fa40:6980:4d01])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5C8286823
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:21:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=detlev.casanova@collabora.com
-Received: from arisu.localnet (mtl.collabora.ca [66.171.169.34])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested) (Authenticated sender: detlev)
- by madras.collabora.co.uk (Postfix) with ESMTPSA id C0FBF66071C7;
- Mon, 16 Oct 2023 15:21:39 +0100 (BST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1697466100;
- bh=JS3+9rmYCLVYVJ4yRCDpVEkNSJozTgCGj2nfNddx9g4=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=NDqnZngdM5RC6KMNv9G8ulSz9pZ5eLm86BI5yQ5cXBZmRRlAVMZ//ca+W7lXhGGsI
- YXWV16xImp8dy7IS54IrdqsOYGnG4fbttM1V0cihRJoKky5XwtrCiDAVPz6wvVr6gy
- QdFfvk6Z3irkOfAt+3swz+fzdYikdCgAE1r4lWtUTc4qDY1B5RoiXbtNRa/QrQv8Gs
- WX5dGTUqYeqnd7vgwm8wqCK1Xeq0vHEEsWmj6XbhIXoJti0yZlGfThYezhFpdihaJg
- ECcaAi9c468xSvS2SufBFeFBgQNXF7SPummXVwPwIThAli40NYX+E2f7jsUueBUyEE
- xG/rPBe7BittA==
-From: Detlev Casanova <detlev.casanova@collabora.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>, Tam Nguyen <tam.nguyen.xa@renesas.com>
-Subject: Re: [PATCH v5 2/6] cmd: Add a sysinfo command
-Date: Mon, 16 Oct 2023 10:21:49 -0400
-Message-ID: <12366510.O9o76ZdvQC@arisu>
-In-Reply-To: <CAPnjgZ1s3OP6cq94qLF3mzkK6YwrjEFc91LOiUQWadj0NBZSqA@mail.gmail.com>
-References: <20231002152142.76516-1-detlev.casanova@collabora.com>
- <20231002152142.76516-3-detlev.casanova@collabora.com>
- <CAPnjgZ1s3OP6cq94qLF3mzkK6YwrjEFc91LOiUQWadj0NBZSqA@mail.gmail.com>
+ (Authenticated sender: sbabic@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id EFCEB86823;
+ Mon, 16 Oct 2023 16:22:02 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1697466123;
+ bh=KAtptBOUZKv90CViAOJy1O2xwJUOj7UAbq6JGykb1Yo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=YqTBFA6cq2PnQvIw2FdeCaGiTMW3jiqBiajAi9DhZ7cuDeUu6zY95v1w+Obn6vaAs
+ Un5v4nzQU7U3x7ztKWzO5MKrb6J9hIfOrJwgKJq4GreJimf+NOUF8qXl17RI/AyNFp
+ gJVetTpMFT8poLfilprlpl3mxclmkBmhNas/41lXzv4Wp8OXi07NzwU4TfjwC8Dw4b
+ VePOgV5UsIAxHqE58AgxoESiKaiZnJD61MlDnuoEUmqt4DMCDuEk2e1wI8/nZjqvjh
+ BnAOcJXY2KIRGgPOXxQcnX/i2ESh5uEgDLe9u7ZeuL7awPPJ+KWRPqkUqUknvFHng7
+ +dzLHeThFLFGg==
+Message-ID: <d52e94bb-1da4-41af-a329-4b49799f17c2@denx.de>
+Date: Mon, 16 Oct 2023 16:22:02 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] net: dwc_eth_qos: add i.MX93 support
+Content-Language: de-DE
+To: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
+ u-boot@lists.denx.de
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>
+References: <20230727083336.15301-1-sebastien.szymanski@armadeus.com>
+ <20230727083336.15301-2-sebastien.szymanski@armadeus.com>
+From: Stefano Babic <sbabic@denx.de>
+In-Reply-To: <20230727083336.15301-2-sebastien.szymanski@armadeus.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,220 +73,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Monday, October 2, 2023 2:56:28 P.M. EDT Simon Glass wrote:
-> On Mon, 2 Oct 2023 at 09:21, Detlev Casanova
+Hi Sebastian,
+
+On 27.07.23 10:33, Sébastien Szymanski wrote:
+> Add support for DWC EQoS MAC on i.MX93.
 > 
-> <detlev.casanova@collabora.com> wrote:
-> > The command is able to show different information for the running
-> > system:
-> > * Model name
-> > * Board ID
-> > * Revision
-> > 
-> > This command can be used by boot shell scripts to select configurations
-> > depending on the specific running system.
-> > 
-> > Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> > Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
-> > ---
-> > 
-> >  cmd/Kconfig   |   6 +++
-> >  cmd/Makefile  |   1 +
-> >  cmd/sysinfo.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++++
-> >  3 files changed, 140 insertions(+)
-> >  create mode 100644 cmd/sysinfo.c
+> Signed-off-by: Sébastien Szymanski <sebastien.szymanski@armadeus.com>
+> ---
+>   drivers/net/dwc_eth_qos.c     | 4 ++++
+>   drivers/net/dwc_eth_qos_imx.c | 3 +++
+>   2 files changed, 7 insertions(+)
 > 
-> Reviewed-by: Simon Glass <sjg@chromium.org>
-> 
-> Would prefer more help text in the Kconfig as this is pretty vague
+> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+> index 1e92bd9ca9c0..f70f8afe5831 100644
+> --- a/drivers/net/dwc_eth_qos.c
+> +++ b/drivers/net/dwc_eth_qos.c
+> @@ -1717,6 +1717,10 @@ static const struct udevice_id eqos_ids[] = {
+>   		.compatible = "nxp,imx8mp-dwmac-eqos",
+>   		.data = (ulong)&eqos_imx_config
+>   	},
+> +	{
+> +		.compatible = "nxp,imx93-dwmac-eqos",
+> +		.data = (ulong)&eqos_imx_config
+> +	},
+>   #endif
+>   
+>   #if IS_ENABLED(CONFIG_DWC_ETH_QOS_QCOM)
+> diff --git a/drivers/net/dwc_eth_qos_imx.c b/drivers/net/dwc_eth_qos_imx.c
+> index 60f3f3f5a10f..e3f55dd98173 100644
+> --- a/drivers/net/dwc_eth_qos_imx.c
+> +++ b/drivers/net/dwc_eth_qos_imx.c
+> @@ -181,6 +181,9 @@ static int eqos_set_tx_clk_speed_imx(struct udevice *dev)
+>   	ulong rate;
+>   	int ret;
+>   
+> +	if (device_is_compatible(dev, "nxp,imx93-dwmac-eqos"))
+> +		return 0;
+> +
+>   	debug("%s(dev=%p):\n", __func__, dev);
+>   
+>   	if (eqos->phy->interface == PHY_INTERFACE_MODE_RMII)
 
-Indeed, how would that sound ?
+Your series breaks Rockchip's boards. For example:
 
-Display information to identify the system. It supports showing a board id, a 
-revision number as well as a human readable name.
++aarch64-linux-ld.bfd: 
+drivers/net/dwc_eth_qos.o:(.rodata.eqos_ids+0x28): undefined reference 
+to `eqos_imx_config'
++make[1]: *** [Makefile:1765: u-boot] Error 1
++make: *** [Makefile:177: sub-make] Error 2
+    aarch64:  w+   rock-4c-plus-rk3399
 
-> > diff --git a/cmd/Kconfig b/cmd/Kconfig
-> > index 43ca10f69cc..67d019aa795 100644
-> > --- a/cmd/Kconfig
-> > +++ b/cmd/Kconfig
-> > @@ -218,6 +218,12 @@ config CMD_SBI
-> > 
-> >         help
-> >         
-> >           Display information about the SBI implementation.
-> > 
-> > +config CMD_SYSINFO
-> > +       bool "sysinfo"
-> > +       depends on SYSINFO
-> > +       help
-> > +         Display information about the system.
-> > +
-> > 
-> >  endmenu
-> >  
-> >  menu "Boot commands"
-> > 
-> > diff --git a/cmd/Makefile b/cmd/Makefile
-> > index 9bebf321c39..972f3a4720e 100644
-> > --- a/cmd/Makefile
-> > +++ b/cmd/Makefile
-> > @@ -167,6 +167,7 @@ obj-$(CONFIG_CMD_SPI) += spi.o
-> > 
-> >  obj-$(CONFIG_CMD_STRINGS) += strings.o
-> >  obj-$(CONFIG_CMD_SMC) += smccc.o
-> >  obj-$(CONFIG_CMD_SYSBOOT) += sysboot.o
-> > 
-> > +obj-$(CONFIG_CMD_SYSINFO) += sysinfo.o
-> > 
-> >  obj-$(CONFIG_CMD_STACKPROTECTOR_TEST) += stackprot_test.o
-> >  obj-$(CONFIG_CMD_TEMPERATURE) += temperature.o
-> >  obj-$(CONFIG_CMD_TERMINAL) += terminal.o
-> > 
-> > diff --git a/cmd/sysinfo.c b/cmd/sysinfo.c
-> > new file mode 100644
-> > index 00000000000..46369ff9ac7
-> > --- /dev/null
-> > +++ b/cmd/sysinfo.c
-> > @@ -0,0 +1,133 @@
-> > +// SPDX-License-Identifier: GPL-2.0+
-> > +/*
-> > + * Copyright 2023
-> > + * Detlev Casanova <detlev.casanova@collabora.com>
-> > + */
-> > +
-> > +#include <command.h>
-> > +#include <env.h>
-> > +#include <sysinfo.h>
-> > +#include <exports.h>
-> > +
-> > +static int get_sysinfo(struct udevice **devp)
-> > +{
-> > +       int ret = sysinfo_get(devp);
-> > +
-> > +       if (ret) {
-> > +               printf("Cannot get sysinfo: %d\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       ret = sysinfo_detect(*devp);
-> > +       if (ret) {
-> > +               printf("Cannot detect sysinfo: %d\n", ret);
-> > +               return ret;
-> > +       }
-> > +
-> > +       return 0;
-> > +}
-> > +
-> > +static int do_sysinfo_model(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +                           char *const argv[])
-> > +{
-> > +       struct udevice *dev;
-> > +       char model[64];
-> > +       int ret = get_sysinfo(&dev);
-> > +
-> > +       if (ret)
-> > +               return CMD_RET_FAILURE;
-> > +
-> > +       ret = sysinfo_get_str(dev,
-> > +                             SYSINFO_ID_BOARD_MODEL,
-> > +                             sizeof(model),
-> > +                             model);
-> > +       if (ret) {
-> > +               printf("Cannot get sysinfo str: %d\n", ret);
-> > +               return CMD_RET_FAILURE;
-> > +       }
-> > +
-> > +       if (argc == 2)
-> > +               ret = env_set(argv[1], model);
-> > +       else
-> > +               printf("%s\n", model);
-> > +
-> > +       if (ret)
-> > +               return CMD_RET_FAILURE;
-> > +       else
-> > +               return CMD_RET_SUCCESS;
-> > +}
-> > +
-> > +static int do_sysinfo_id(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +                        char *const argv[])
-> > +{
-> > +       struct udevice *dev;
-> > +       u32 board_id;
-> > +       int ret = get_sysinfo(&dev);
-> > +
-> > +       if (ret)
-> > +               return CMD_RET_FAILURE;
-> > +
-> > +       ret = sysinfo_get_int(dev, SYSINFO_ID_BOARD_ID, &board_id);
-> > +       if (ret) {
-> > +               printf("Cannot get sysinfo int: %d\n", ret);
-> > +               return CMD_RET_FAILURE;
-> > +       }
-> > +
-> > +       if (argc == 2)
-> > +               ret = env_set_hex(argv[1], board_id);
-> > +       else
-> > +               printf("0x%02x\n", board_id);
-> > +
-> > +       if (ret)
-> > +               return CMD_RET_FAILURE;
-> > +       else
-> > +               return CMD_RET_SUCCESS;
-> > +}
-> > +
-> > +static int do_sysinfo_revision(struct cmd_tbl *cmdtp, int flag, int argc,
-> > +                              char *const argv[])
-> > +{
-> > +       struct udevice *dev;
-> > +       int rev_major;
-> > +       int rev_minor;
-> > +       char rev[64];
-> > +       int ret = get_sysinfo(&dev);
-> > +
-> > +       if (ret)
-> > +               return CMD_RET_FAILURE;
-> > +
-> > +       ret = sysinfo_get_int(dev, SYSINFO_ID_BOARD_REV_MAJOR,
-> > &rev_major);
-> > +       if (ret) {
-> > +               printf("Cannot get sysinfo int: %d\n", ret);
-> > +               return CMD_RET_FAILURE;
-> > +       }
-> > +
-> > +       ret = sysinfo_get_int(dev, SYSINFO_ID_BOARD_REV_MINOR,
-> > &rev_minor);
-> > +       if (ret) {
-> > +               printf("Cannot get sysinfo int: %d\n", ret);
-> > +               return CMD_RET_FAILURE;
-> > +       }
-> > +
-> > +       snprintf(rev, sizeof(rev), "%d.%d", rev_major, rev_minor);
-> > +
-> > +       if (argc == 2)
-> > +               ret = env_set(argv[1], rev);
-> > +       else
-> > +               printf("%s\n", rev);
-> > +
-> > +       if (ret)
-> > +               return CMD_RET_FAILURE;
-> > +       else
-> > +               return CMD_RET_SUCCESS;
-> > +}
-> > +
-> > +static char sysinfo_help_text[] =
-> > +       "model <varname>     - Show or set the board model in varname\n"
-> > +       "sysinfo id <varname>        - Show or set the board id in varname
-> > (in format 0xHH)\n" +       "sysinfo revision <varname>  - Show or set
-> > the board revision in varname"; +
-> > +U_BOOT_CMD_WITH_SUBCMDS(sysinfo, "System information", sysinfo_help_text,
-> > +                       U_BOOT_SUBCMD_MKENT(model, 2, 1,
-> > do_sysinfo_model),
-> > +                       U_BOOT_SUBCMD_MKENT(id, 2, 1, do_sysinfo_id),
-> > +                       U_BOOT_SUBCMD_MKENT(revision, 2, 1,
-> > do_sysinfo_revision), +);
-> > --
-> > 2.41.0
+But it is just an example, quite all boards are broken. Please check 
+this and repost, thanks !
 
+Best regards,
+Stefano
 
-
+-- 
+=====================================================================
+DENX Software Engineering GmbH,        Managing Director: Erika Unter
+HRB 165235 Munich,   Office: Kirchenstr.5, 82194 Groebenzell, Germany
+Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
+=====================================================================
 
