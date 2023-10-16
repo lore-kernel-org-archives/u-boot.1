@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E37BBCDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 00:18:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01132CDB47E
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 00:24:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 169C8867D6;
-	Mon, 16 Oct 2023 02:18:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DA77086958;
+	Mon, 16 Oct 2023 02:24:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NnxKbe8B";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nodpC5Hu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C16286B84; Mon, 16 Oct 2023 02:18:41 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id EFFDB86BCD; Mon, 16 Oct 2023 02:24:46 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45D7D86529
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 02:18:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF780867D6
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 02:24:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6bcdfcde944so279771b3a.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 17:18:39 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-6c61dd1c229so755216a34.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 17:24:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697415517; x=1698020317; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1697415883; x=1698020683; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kkQUNvKqMmGS0IljmkG3mW9dNMmLCvnauVYRyDM1RhY=;
- b=NnxKbe8BIlSoQ5YHT6igPtMyV6Kaqjfydi3rbZkJxffPy59/2949lQ7gb28NAzvO52
- 3HbmAjXtHVnm1IfYIqu+90G762Y8wVoqGLkrIFbLTdGUq2soKqe5JvtGpVopIgJV1LKp
- DKUSKkC0s0MOvf2lVOlk2Rq+Zh+nNF+e4Fe8TYI6qWkty54hOsRggUqM6cGtT9y/+dgF
- MmDDQ7ED8Z+A/7uxWNbhV883bkHvIpLWI3OgRD/kZGx31/LG74njctjXaOkRSlnaW87X
- 4JYTWIpdW1yrEWZ41BEA+QV85sESIwUOr0y0r9CNmYX5TJHUCe9UnJ6nxCYbkRZKgeVE
- Csmg==
+ bh=h5o/UyDgPpyiZLWQba4p+eRXq+ZZeZBMpfME4g8zRVA=;
+ b=nodpC5HuBd2zIrkbgTgqVGC68pHPkGOfxPfK9oTIuVH1w3ojUOxLFVCzkIc0gPGaXf
+ GVItjctTb2/S3WHlm6xTnxbKswUnVqCkjKijVuPfrInvM4/7vWxCOWD26fXIRINEYAS6
+ CZrV1dqmESObcqcP6ltafZwrJKfMGnPnjhLxW/OJ4hWPXzdk1OtG/SVNDVRXcyYyF2hM
+ pVN35rQvNiO8GUyKlNBPjdh3UIVVTfJGvF5F3+rREGHVCd4/cRsOh2GdUn4DdCYeCeK+
+ A2RBvTrp4+jF3qnmbFwxjZJxqUhlEICKJn5L1vBMsYVD1j01dWey/redHNLyciZZeo+X
+ S2Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697415517; x=1698020317;
+ d=1e100.net; s=20230601; t=1697415883; x=1698020683;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kkQUNvKqMmGS0IljmkG3mW9dNMmLCvnauVYRyDM1RhY=;
- b=tixHCBQ9yW6fLmw58YvrYp8PJ/YlW3yn9KEQuOmUJi6Z8ODpbLy4fQyTuwnRU+EguX
- 1NM6GkN8NHyFtL3OxI/k07BeI0H5MtWQUyYP0wp1r04HUK8+X6lQIdgIhPqIB6Irpxa7
- rdg2bLRtVesiQDer/5zc/z5X8h+27DWx5McGgU5imv8qTuA03tQUFohn5Q8VIk4ibV4s
- R5GhmZqJDQPk7f40/v7/7HATw5G8GsJINv14zeerXwq9BQoFc3nTujAa8mYlhlKQgrcY
- OnGxKXjcCR4zBYRiXSmy4hzaspVidHk4ttolomcThn6WW1saOmkUy+QUNTG79i1tIpcN
- cCow==
-X-Gm-Message-State: AOJu0YzJFT5filj8FZcroPxGDVTXMnHHWYUgr+FbiRiAg160Ed7Ec+ZU
- XfPToJODh1g4urP9WJAyX1cqZPx7guY=
-X-Google-Smtp-Source: AGHT+IFHDGd9xFic10/l69SDfTefa9SEJPFioJlgRq3LFWwcacT+OghOzMblpd6tpUdxBb9RtHsO4w==
-X-Received: by 2002:a05:6a20:1595:b0:163:ab09:195d with SMTP id
- h21-20020a056a20159500b00163ab09195dmr37514706pzj.0.1697415517594; 
- Sun, 15 Oct 2023 17:18:37 -0700 (PDT)
+ bh=h5o/UyDgPpyiZLWQba4p+eRXq+ZZeZBMpfME4g8zRVA=;
+ b=lqO2Z3hTYAKVUSrYgoYSViI8KQ2BvF7+tIosW8F0hL9tSA8NwRw+hHnJxp/o8tyZ0M
+ zH/Wqh0XR4sBjsngRMHQ2Qzjo3sFqSfNEplhr+7rKDMKtqiHCtBxyh6CHbskYeDkG8RS
+ 5VmtXFierhjKHSxskehml+oMqXGvczPxv4QmaEGIILB2Qo1ebdvK6FB3qHZAMb4e+quj
+ elCD9ZiuYbFP4ge1w0iZS0YMKGitH13SSOAsOLWKYHXg4ISAWG1skkx4H7+0q50ZoUHb
+ YUXMBzW5/Aq6/9eQVrKXSSytOAa274I8bIGNP1gHu3LaU6rnVUPu+24sqcCV8DvMSZkR
+ bZjg==
+X-Gm-Message-State: AOJu0YwNDsZ1aFNDhxomnu+YWm2HDBHBCa3BQzX/OZxoqS1g5Mpcvmop
+ BPNqYKvi/rSDaAI3XV3y2dc=
+X-Google-Smtp-Source: AGHT+IE7+G7ER0GA1vprVv3ohpib4zKUCO3uuo4UHCl+Tw4ucqQCNUG+mIspXhFCrtEw/TEJhiDBiw==
+X-Received: by 2002:a05:6830:43ab:b0:6b8:7653:dd66 with SMTP id
+ s43-20020a05683043ab00b006b87653dd66mr41277159otv.0.1697415883377; 
+ Sun, 15 Oct 2023 17:24:43 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:8216:dd32:2c9d:bf33])
  by smtp.gmail.com with ESMTPSA id
- jf20-20020a170903269400b001c60635c13esm7277216plb.115.2023.10.15.17.18.35
+ o27-20020aa7979b000000b006bde8e1f0adsm1369891pfp.98.2023.10.15.17.24.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Oct 2023 17:18:36 -0700 (PDT)
+ Sun, 15 Oct 2023 17:24:42 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: sbabic@denx.de
 Cc: marex@denx.de, peng.fan@nxp.com, u-boot@lists.denx.de,
  Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v3] imx8mp-evk: Add USB0 OTG support
-Date: Sun, 15 Oct 2023 21:18:31 -0300
-Message-Id: <20231016001831.641024-1-festevam@gmail.com>
+Subject: [PATCH v4] imx8mp-evk: Add USB0 OTG support
+Date: Sun, 15 Oct 2023 21:24:37 -0300
+Message-Id: <20231016002437.641898-1-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -106,28 +106,27 @@ Tested by running "ums 0 mmc 2".
 Signed-off-by: Fabio Estevam <festevam@denx.de>
 Reviewed-by: Marek Vasut <marex@denx.de>
 ---
-Changes since v2:
-- Put the USB nodes in alphabetical order. (Marek)
-- Remove unneeded pinctrl entry. (Marek)
+Changes since v3:
+- Fixed the alphabetical order once again.
 
  arch/arm/dts/imx8mp-evk-u-boot.dtsi | 13 ++++++++++++
  configs/imx8mp_evk_defconfig        | 31 +++++++++++++++++++++++++++++
  2 files changed, 44 insertions(+)
 
 diff --git a/arch/arm/dts/imx8mp-evk-u-boot.dtsi b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
-index 6784ed2e7c..0d2c9a83db 100644
+index 6784ed2e7c92..f4fd2432ca8f 100644
 --- a/arch/arm/dts/imx8mp-evk-u-boot.dtsi
 +++ b/arch/arm/dts/imx8mp-evk-u-boot.dtsi
 @@ -111,6 +111,19 @@
  	bootph-pre-ram;
  };
  
-+&usb3_0 {
++&usb_dwc3_0 {
++	dr_mode = "peripheral";
 +	status = "okay";
 +};
 +
-+&usb_dwc3_0 {
-+	dr_mode = "peripheral";
++&usb3_0 {
 +	status = "okay";
 +};
 +
@@ -139,7 +138,7 @@ index 6784ed2e7c..0d2c9a83db 100644
  	bootph-pre-ram;
  };
 diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-index 14c749f443..820dc36e9c 100644
+index 14c749f44308..820dc36e9cdd 100644
 --- a/configs/imx8mp_evk_defconfig
 +++ b/configs/imx8mp_evk_defconfig
 @@ -59,6 +59,9 @@ CONFIG_CMD_FUSE=y
