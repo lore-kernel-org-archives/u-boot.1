@@ -4,99 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0E6ECDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 12:24:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3879CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 12:31:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E57F786958;
-	Mon, 16 Oct 2023 14:24:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 04F198667B;
+	Mon, 16 Oct 2023 14:31:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bv+eVImm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ggao9dBz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31EA085423; Mon, 16 Oct 2023 14:24:06 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 2AA2186958; Mon, 16 Oct 2023 14:31:45 +0200 (CEST)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2387885423
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:24:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 52C18863CF
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:31:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andrej.skvortzov@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2c50ec238aeso30811711fa.0
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 05:24:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-507a772ed97so2045726e87.3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 05:31:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697459041; x=1698063841; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:mail-followup-to:message-id:subject:cc:to
- :from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RSB6Eov0bh9yboIWU60Xlk3MvdAjlOJ75BPPk8VCexc=;
- b=bv+eVImmOeT3U+JMZeeDeVqnrnTSuXMH3aH4Bvf2+HkNjAeJW1oR6b6h/qH2LmKLcK
- 5AFU5XMmPH5xiTc0nJfNJkDrgU6ZlbKo6gEqMvbACondU9DhbHg9QVv+meD81G4o0nSd
- jObCVpYwRsi/GqDHcYQ/UFPOr7QQf8Quc+Mrb5fhSxpOtpqdKl8o25Q7dKvagS46u+nH
- U5bb/CiM3ElYItZ32fUrJn48+CgebcPCyiI6SLV5F2cswZBN7Bpt80W/CPIuC5g1a7dz
- XGBJg7b2hNR+AlFeSMIU3B00W5i1mi0KoBKeydJsBuRAV+5vbSesOpsrelfEjesU8pE4
- NN1A==
+ d=linaro.org; s=google; t=1697459501; x=1698064301; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=D4prcgOrL6LV4Vpwg2g69A1f6g5w94nU0HFIcD+czso=;
+ b=Ggao9dBz5aSB9/yaMBVCkjd88kCjmxlf54o4T2lAIlg0EKA0LZlk5lEWBOcODBuLFr
+ ymJLGOUQjbfX/hgmGTOrDmRYqulx7isXjaVN9Oy9USBzh3c6zfqn8IKr3C9s4EArSuUX
+ zbYELpLDACfNhQWNCSeqt5bxcICUwEbqaPYixQUzCAqbjfZR8vOKoRDmvyUkn8IJg+pN
+ Q/zR5nEIeNIznNTtqvwUfvkwFy3rW5bapKzfx4MPCMXrz7kgY3IPhjnsYg90PsC8fgcY
+ 39aE+XWbBuPUPLJ8qhEFQi4BpRMld6caxcIYm6QwNjMUnIxxpLsk7ZSzGG+/EhqObI33
+ 2s5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697459041; x=1698063841;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:mail-followup-to:message-id:subject:cc:to
- :from:date:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1697459501; x=1698064301;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RSB6Eov0bh9yboIWU60Xlk3MvdAjlOJ75BPPk8VCexc=;
- b=wdyUNwCDUDkVL95e9BXkwD4ccVceEtPrXRscYsg9UbWHkeUlZq9mCYOJ2yVgqHT0KZ
- UiyYn9v0d/3K6k0HYpP/bcd20YFmRZrNHu+X8a4xAEmRmGMgoTa4bobhauhPzBGobT2h
- WAVFEFHPo1bk985f12Qj62mr0twA6+SG4iZ3k96DLu352WHG8VaYidT2N02GUm0dJp58
- Zay+GZxWDvOpqk1Go1ywOLc9S10yPLnwg4H6FPRah/GWppTHoacGHzgtybnCab4Z1hIc
- hmpFEklH2e289QEG26GzB4GeawltK5tmwuwf2nVTaV/QNYCPbj/YBR6JCVG/pvYIxmye
- qbMw==
-X-Gm-Message-State: AOJu0Yxx49rp9hzMNxoS44OkzHZjSd0k/t8vRusBBqv3wesQOWqq5JGq
- 0CtRQowmr3MB1eW3CIOBU1s=
-X-Google-Smtp-Source: AGHT+IHUjjRegAYtdZUS3s/vX61Hfc5KGpZSfqx5ukNpUT22rSLElfycOdTeO0MbJ25FEOOQ9eB7AQ==
-X-Received: by 2002:a2e:9d58:0:b0:2c1:3d9f:1f4d with SMTP id
- y24-20020a2e9d58000000b002c13d9f1f4dmr30903767ljj.9.1697459040861; 
- Mon, 16 Oct 2023 05:24:00 -0700 (PDT)
-Received: from localhost ([2a05:3580:f312:6c00:826c:ae47:61a7:8af8])
- by smtp.gmail.com with ESMTPSA id
- t17-20020a05651c205100b002c50ba4a047sm1295185ljo.80.2023.10.16.05.23.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 05:23:59 -0700 (PDT)
-Date: Mon, 16 Oct 2023 15:23:58 +0300
-From: Andrey Skvortsov <andrej.skvortzov@gmail.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>, Jarrah Gosbell <kernel@undef.tools>,
- Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Pavel Machek <pavel@ucw.cz>, u-boot@lists.denx.de,
- Detlev Casanova <detlev.casanova@collabora.com>,
- =?utf-8?B?RnLDqWTDqXJpYw==?= Danis <frederic.danis@collabora.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] pstore: Use root address-cells/size-cells as defaults
- for reserved-memory
-Message-ID: <ZS0rXlNfPjP5dLEa@skv.local>
-Mail-Followup-To: Andre Przywara <andre.przywara@arm.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jernej Skrabec <jernej.skrabec@gmail.com>,
- Samuel Holland <samuel@sholland.org>,
- Jarrah Gosbell <kernel@undef.tools>,
- Arnaud Ferraris <arnaud.ferraris@collabora.com>,
- Pavel Machek <pavel@ucw.cz>, u-boot@lists.denx.de,
- Detlev Casanova <detlev.casanova@collabora.com>,
- =?utf-8?B?RnLDqWTDqXJpYw==?= Danis <frederic.danis@collabora.com>,
- Tom Rini <trini@konsulko.com>
-References: <20230826121652.2487643-1-andrej.skvortzov@gmail.com>
- <f9fc81a5-1505-4cb3-8b65-798ddf16e1aa@gmx.de>
- <20230826194127.30117656@slackpad.lan>
+ bh=D4prcgOrL6LV4Vpwg2g69A1f6g5w94nU0HFIcD+czso=;
+ b=sLYDqeLi04CJ3DQMWp7L1T3uFWxNEXcqo/leXGrqHXFxvDWhw0eHeL7ilznIKrmYUF
+ DFodEgLmlwWqu5o4U4kTFi4QvkF+O7KIPH3ClT/+LQuCwDEb+TY0rXHQ6ek0jZ4zvgOq
+ O7lNMG+vgja8M6Lq9rtYae5HflWrOLvd9iY1+S7cW5fFaCwQqucrrPo1gSy90Uw3oAiF
+ Dia6r8JQ8zmAkTD91jeLpD3v9SpAe93Pa9E5DNzogn7jc6eXhyRKw3aWJjTaI47cQinn
+ 0zr3bH/lzlRoC7kcqgDd13Zw7HnHp85SsQvDJDPpEynuyM4CGIn6UmrchfAPyZWZsclM
+ BVDg==
+X-Gm-Message-State: AOJu0YwMeB+keK9xSEb77phJo1Psqo859Q1XwswyWsEblhFDgHyeqd4s
+ YVBGYh4DuwxdHciblPOh1UUbAWbMkaZHHrIIJMzlzA==
+X-Google-Smtp-Source: AGHT+IFCT09BGDxNyEKK31xzzuma38bQTeKkbNioVb4eVTxjNUa0GcaVL2D24TValw+asmJQGAwwkBI3cdIopdmZO7c=
+X-Received: by 2002:ac2:4949:0:b0:507:aa44:28fc with SMTP id
+ o9-20020ac24949000000b00507aa4428fcmr2926210lfi.53.1697459501563; Mon, 16 Oct
+ 2023 05:31:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20230826194127.30117656@slackpad.lan>
+References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
+ <20231016064526.2410856-5-masahisa.kojima@linaro.org>
+ <A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de>
+In-Reply-To: <A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 16 Oct 2023 15:31:05 +0300
+Message-ID: <CAC_iWj+koNjVBR7TCJH_u_PvY5xDHgtBGRTHBRRgAx_aDeC8-A@mail.gmail.com>
+Subject: Re: [PATCH v7 4/9] efi_loader: create default file boot option
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,82 +88,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Heinrich,
 
-On 23-08-26 19:41, Andre Przywara wrote:
-> On Sat, 26 Aug 2023 15:10:10 +0200
-> Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> 
-> Hi,
-> 
-> > On 8/26/23 14:16, Andrey Skvortsov wrote:
-> > > u-boot adds reserve-memory node, if it's missing, with following
-> > > properties:
-> > >
-> > > ```
-> > >      reserved-memory {
-> > >           #address-cells = <2>;
-> > >           #size-cells = <2>;  
-> > 
-> > This defines the size of cells for the children of reserved-memory and
-> > and for the ranges property. If you set the cell sizes to 1 you can no
-> > longer encode 64 bit addresses.
-> 
-> Yes, this is expected in this case, the Allwinner A64 SoC has its memory
-> map (including DRAM) completely below 4GB, hence the root node can go
-> with 1/1.
-> 
-> > 
-> > >           ranges;
-> > >      }
-> > > ```
-> > >
-> > > But with these default address-cells and size-cells values, pstore
-> > > isn't working on A64. Root node for A64 defines 'address-cells' and
-> > > 'size-cells' as 1.
-> > >
-> > > dtc complains if reserved-memory has different address-cells and
-> > > size-cells.
-> > >
-> > > ```
-> > >       Warning (ranges_format): /reserved-memory:ranges: empty "ranges"
-> > >       property but its #address-cells (2) differs from / (1)  
-> > 
-> > I cannot find any such requirement in the Devicetree Specification 1.4.
-> > Is this a dtc bug?
-> 
-> I think the culprit here is the *empty* ranges property:
-> "If the property is deﬁned with an <empty> value, it speciﬁes that the
-> parent and child address space is identical, and no address translation
-> is required."
-> As this is contradicted by the differing #a-c/#s-z properties, it looks
-> like dtc has good reasons to warn.
-> 
-> > 
-> > > ```
-> > >
-> > > This patch takes into account address-cells and size-cells of the root
-> > > node and uses them as values for new reserved-memory node.  
-> > 
-> > Reservations may be above 4 GiB. How does your patch consider this?
-> 
-> If the root #a-c/#s-c don't allow for more than 4GB, then it's for a
-> reason (in this case, the A64 being 32-bit only, even with AArch64
-> capable cores), and keeping it isn't restricting it further. So I think
-> copying the root properties is the right thing to do. I think almost
-> every other 64-bit core uses 2/2 anyway, so it's just the odd outlier
-> here.
-> 
-> Cheers,
-> Andre
+On Mon, 16 Oct 2023 at 10:06, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+>
+>
+> Am 16. Oktober 2023 08:45:21 MESZ schrieb Masahisa Kojima <masahisa.kojima@linaro.org>:
+> >Current efibootmgr automatically creates the
+> >boot options of all disks and partitions installing
+> >EFI_SIMPLE_FILE_SYSTEM_PROTOCOL.
+> >Some of the automatically created boot options are
+> >useless if the disk and partition does not have
+> >the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> >
+> >This commit only creates the boot option if the disk and
+> >partition have the default file so that system can directly
+> >boot from it.
+>
+> I don't directly see the user benefit.
 
-Are there any comments I should fix to get this change merged or maybe
-another way of solving this problem?
+The user can add an HTTP boot option now and the installer will
+automatically start.  That would allow products to ship with a single
+boot option provisioned and run an installer on first boot
 
-I see, that patch requires review from Tom Rini currently on patchwork [1].
+>
+> Reading all file systems will increase the boot time. Shouldn't we avoid this?
 
-1. https://patchwork.ozlabs.org/project/uboot/patch/20230826121652.2487643-1-andrej.skvortzov@gmail.com/
+Any idea what would be an alternative?  But when we added the
+automatic boot options we said we should avoid dynamic scanning and
+store results in a file.  This is doing a similar thing.  The only
+difference is that it mounts the iso image before adding the boot
+option.
 
--- 
-Best regards,
-Andrey Skvortsov
+>
+> What does EDK II do?
+
+No Idea :)
+
+Thanks
+/Ilias
+>
+> Does the UEFI specification warrant this change?
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> >Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> >---
+> > lib/efi_loader/efi_bootmgr.c | 86 ++++++++++++++++++++++++++----------
+> > 1 file changed, 63 insertions(+), 23 deletions(-)
+> >
+> >diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> >index a40762c74c..c8cf1c5506 100644
+> >--- a/lib/efi_loader/efi_bootmgr.c
+> >+++ b/lib/efi_loader/efi_bootmgr.c
+> >@@ -355,40 +355,70 @@ error:
+> >  */
+> > static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boot_option *opt,
+> >                                                     efi_handle_t *volume_handles,
+> >-                                                    efi_status_t count)
+> >+                                                    efi_uintn_t *count)
+> > {
+> >-      u32 i;
+> >+      u32 i, num = 0;
+> >       struct efi_handler *handler;
+> >       efi_status_t ret = EFI_SUCCESS;
+> >
+> >-      for (i = 0; i < count; i++) {
+> >+      for (i = 0; i < *count; i++) {
+> >               u16 *p;
+> >               u16 dev_name[BOOTMENU_DEVICE_NAME_MAX];
+> >               char *optional_data;
+> >               struct efi_load_option lo;
+> >               char buf[BOOTMENU_DEVICE_NAME_MAX];
+> >-              struct efi_device_path *device_path;
+> >+              struct efi_device_path *device_path, *full_path, *dp, *fp;
+> >               struct efi_device_path *short_dp;
+> >+              struct efi_file_handle *root, *f;
+> >+              struct efi_simple_file_system_protocol *file_system;
+> >+              u16 *default_file_path = NULL;
+> >
+> >-              ret = efi_search_protocol(volume_handles[i], &efi_guid_device_path, &handler);
+> >+              ret = efi_search_protocol(volume_handles[i],
+> >+                                        &efi_guid_device_path, &handler);
+> >               if (ret != EFI_SUCCESS)
+> >                       continue;
+> >-              ret = efi_protocol_open(handler, (void **)&device_path,
+> >-                                      efi_root, NULL, EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> >+
+> >+              device_path = handler->protocol_interface;
+> >+              full_path = efi_dp_from_file(device_path,
+> >+                                           "/EFI/BOOT/" BOOTEFI_NAME);
+> >+
+> >+              /* check whether the partition or disk have the default file */
+> >+              ret = efi_dp_split_file_path(full_path, &dp, &fp);
+> >+              if (ret != EFI_SUCCESS || !fp)
+> >+                      goto next_entry;
+> >+
+> >+              default_file_path = efi_dp_str(fp);
+> >+              if (!default_file_path)
+> >+                      goto next_entry;
+> >+
+> >+              ret = efi_search_protocol(volume_handles[i],
+> >+                                        &efi_simple_file_system_protocol_guid,
+> >+                                        &handler);
+> >               if (ret != EFI_SUCCESS)
+> >-                      continue;
+> >+                      goto next_entry;
+> >+
+> >+              file_system = handler->protocol_interface;
+> >+              ret = EFI_CALL(file_system->open_volume(file_system, &root));
+> >+              if (ret != EFI_SUCCESS)
+> >+                      goto next_entry;
+> >+
+> >+              ret = EFI_CALL(root->open(root, &f, default_file_path,
+> >+                                        EFI_FILE_MODE_READ, 0));
+> >+              if (ret != EFI_SUCCESS)
+> >+                      goto next_entry;
+> >+
+> >+              EFI_CALL(f->close(f));
+> >
+> >               ret = efi_disk_get_device_name(volume_handles[i], buf, BOOTMENU_DEVICE_NAME_MAX);
+> >               if (ret != EFI_SUCCESS)
+> >-                      continue;
+> >+                      goto next_entry;
+> >
+> >               p = dev_name;
+> >               utf8_utf16_strncpy(&p, buf, strlen(buf));
+> >
+> >               /* prefer to short form device path */
+> >-              short_dp = efi_dp_shorten(device_path);
+> >-              if (short_dp)
+> >-                      device_path = short_dp;
+> >+              short_dp = efi_dp_shorten(full_path);
+> >+              device_path = short_dp ? short_dp : full_path;
+> >
+> >               lo.label = dev_name;
+> >               lo.attributes = LOAD_OPTION_ACTIVE;
+> >@@ -396,24 +426,35 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
+> >               lo.file_path_length = efi_dp_size(device_path) + sizeof(END);
+> >               /*
+> >                * Set the dedicated guid to optional_data, it is used to identify
+> >-               * the boot option that automatically generated by the bootmenu.
+> >+               * the boot option that automatically generated by the efibootmgr.
+> >                * efi_serialize_load_option() expects optional_data is null-terminated
+> >                * utf8 string, so set the "1234567" string to allocate enough space
+> >                * to store guid, instead of realloc the load_option.
+> >                */
+> >               lo.optional_data = "1234567";
+> >-              opt[i].size = efi_serialize_load_option(&lo, (u8 **)&opt[i].lo);
+> >-              if (!opt[i].size) {
+> >-                      ret = EFI_OUT_OF_RESOURCES;
+> >-                      goto out;
+> >+              opt[num].size = efi_serialize_load_option(&lo, (u8 **)&opt[num].lo);
+> >+              if (!opt[num].size) {
+> >+                      efi_free_pool(full_path);
+> >+                      efi_free_pool(dp);
+> >+                      efi_free_pool(fp);
+> >+                      efi_free_pool(default_file_path);
+> >+                      return EFI_OUT_OF_RESOURCES;
+> >               }
+> >               /* set the guid */
+> >-              optional_data = (char *)opt[i].lo + (opt[i].size - u16_strsize(u"1234567"));
+> >+              optional_data = (char *)opt[num].lo + (opt[num].size - u16_strsize(u"1234567"));
+> >               memcpy(optional_data, &efi_guid_bootmenu_auto_generated, sizeof(efi_guid_t));
+> >+              num++;
+> >+
+> >+next_entry:
+> >+              efi_free_pool(full_path);
+> >+              efi_free_pool(dp);
+> >+              efi_free_pool(fp);
+> >+              efi_free_pool(default_file_path);
+> >       }
+> >
+> >-out:
+> >-      return ret;
+> >+      *count = num;
+> >+
+> >+      return EFI_SUCCESS;
+> > }
+> >
+> > /**
+> >@@ -642,7 +683,7 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index)
+> >  * efi_bootmgr_update_media_device_boot_option() - generate the media device boot option
+> >  *
+> >  * This function enumerates all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
+> >- * and generate the bootmenu entries.
+> >+ * and create the boot option with default file if the file exists.
+> >  * This function also provide the BOOT#### variable maintenance for
+> >  * the media device entries.
+> >  * - Automatically create the BOOT#### variable for the newly detected device,
+> >@@ -674,8 +715,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+> >               goto out;
+> >       }
+> >
+> >-      /* enumerate all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL */
+> >-      ret = efi_bootmgr_enumerate_boot_option(opt, volume_handles, count);
+> >+      ret = efi_bootmgr_enumerate_boot_option(opt, volume_handles, &count);
+> >       if (ret != EFI_SUCCESS)
+> >               goto out;
+> >
