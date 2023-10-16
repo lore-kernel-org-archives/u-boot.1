@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 105E1CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 18:13:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DC3FCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 18:14:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64CF086DE4;
-	Mon, 16 Oct 2023 20:13:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A2C9486D2D;
+	Mon, 16 Oct 2023 20:14:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="VflIKZ/w";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="xZSpUs0A";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="lP3xZmoL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58A36867F6; Mon, 16 Oct 2023 20:12:59 +0200 (CEST)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id 89D4686DE3; Mon, 16 Oct 2023 20:14:32 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7F58F86DE3
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 20:12:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55753867F6
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 20:14:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4S8QFb61GNz9srN;
- Mon, 16 Oct 2023 20:12:51 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697479971;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=aADkVU4c/zwwWhglTCA/vwU52vPquijgG4+DXcgbO04=;
- b=VflIKZ/wUEB9dwwQCuDtQPbe88SnKJ55TSoVJWQBeR/6yG9DuSCavf9dF+pc6qN3j0wmDB
- oDiPut8j8XvsfbWw0F31SgV/Hg/okDiJj77TitKFu44ExIh4fqMsuPhVOCCFSKCpJEF4lw
- 2PxgWUJiCboB+T77sYkXEg/mAv+Q8S6VbdB8+6W4oMo8qZxladFG73xyJlUVpRBhmHfuem
- +k+m13wvp7xm2tKuvvcQYJX6POmkR9HOiaxtUwV1bCRb+iwMoSAkd4BcqMbm4+dYqBJJK2
- WPB9ZgjUccaTLCXt7qxsTCmmW7yz/zB55EJBGtYD4PA0JnOK3pm3m0NQ9TSCfA==
-Message-ID: <93a8c8e3-9e3f-43b1-9a29-00636cc7533c@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1697479970;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=aADkVU4c/zwwWhglTCA/vwU52vPquijgG4+DXcgbO04=;
- b=xZSpUs0Atc2o/rJeE0EiCycdBsBkiGtjifLj2jDZdqQsCvxTodHA5SERNTaCousjhguObV
- C8b2OTXRoKX5BZ3tdqjVLkx/wbtmgb5a1B3fenyX0ocZmYv1V2auqyC5NvUnAUc8CCuO6d
- 0IcyjREBNdYy+yWVA+QehpAGjopx+mxAYdxG9UcvGB0cos+/ALwj2JrUNT68GagO7ZmFhd
- /fHC7dkv21S43ljCILpmwB4+71PCuRaXhAohDmbJnQuy2BwQdSdalq/ptZXUB6sUILPfUA
- 2G/VZq62Q+DFZzgzXjTaKbCXnAqSnZ3MVQHfAobSbZ6pWnPusBmgKxkvIlathA==
-Date: Mon, 16 Oct 2023 20:12:48 +0200
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1697480060; x=1698084860; i=xypron.glpk@gmx.de;
+ bh=l5ttqy3IjtNmbSBVjg/oVLjqnMu3qxbILgVoAei6UA0=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=lP3xZmoLQeSpe74PXBNHhkL8lr15P9DwVNXyQANHDsQF0wJIRSg9MsGfauY0ZNdn7Z4HCZtodjp
+ BQlgFvB98cDCXQxNHm532SpedG6C7U8g6LiTLWkEJWoiPXOhKk9kl9DbnRWfXCi3bFqmjwb2jnBsr
+ 4/pl2fX6SeiNjvWNcHkETqFZp176JcHORuvMeDQxj/YjPjYusomHIzBztxEL78t86kisXjm6Z3xho
+ tVJ+oG/hqi20JspVnCBoNmJFFBws/wD96PFvegND4Nw8oMLvlSlaf8I0JZ88Qbpwchk3t5iPpwF2A
+ d2x195a/QhOqDM8ZJtVFsHNeuv7k8vtibyhw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MN5if-1r8bNe3Z7V-00IyvE; Mon, 16
+ Oct 2023 20:14:19 +0200
+Message-ID: <c7018872-cd6a-4668-a556-814f1c7d2557@gmx.de>
+Date: Mon, 16 Oct 2023 20:14:22 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v5 6/6] sysinfo: rcar3: Implement BOARD_ID and BOARD_REV_*
-Content-Language: en-US
-To: Detlev Casanova <detlev.casanova@collabora.com>, u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Hai Pham <hai.pham.ud@renesas.com>, Tam Nguyen <tam.nguyen.xa@renesas.com>,
- Simon Glass <sjg@chromium.org>
-References: <20231002152142.76516-1-detlev.casanova@collabora.com>
- <20231002152142.76516-7-detlev.casanova@collabora.com>
- <affa00c1-b6ae-4ef0-9f5f-8a6d6d74d0d8@mailbox.org> <6050643.DvuYhMxLoT@arisu>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <6050643.DvuYhMxLoT@arisu>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 9/9] cmd: test_enter_suspend: Add test_enter_suspend
+ command
+Content-Language: en-US, de-DE
+To: Thomas Richard <thomas.richard@bootlin.com>
+Cc: nm@ti.com, thomas.petazzoni@bootlin.com, gregory.clement@bootlin.com,
+ u-kumar1@ti.com, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tobias Waldekranz <tobias@waldekranz.com>,
+ u-boot@lists.denx.de
+References: <20231016141135.325698-1-thomas.richard@bootlin.com>
+ <20231016141135.325698-10-thomas.richard@bootlin.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231016141135.325698-10-thomas.richard@bootlin.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 8xbd6nbwmd4id7tuwbqeaf6hfk6cgr74
-X-MBO-RS-ID: c44788d187fdca99c73
-X-Rspamd-Queue-Id: 4S8QFb61GNz9srN
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:G62OFaKfpgFN4QqMZwP4Sty6eVpTIvYnfVEe5VhFNrqCtE6zhDu
+ qHcqRajqIICiAFAYuOTyXoVMxlV8sD89qhYswv6SOtOay0afCqsvkoCTDufz4CxDLkHJhHn
+ IEAC4MqX8vQfr0cJRzeTA6C+5dSP/g5DgwBPTMgv2yJuEd+Ig7PJ8693BDzWj4xk855xp3z
+ rdIDFNwNkvWFQY8poRP2g==
+UI-OutboundReport: notjunk:1;M01:P0:a0HdGznbnW8=;cSDXz7ZWzbCnuxIHHVkY8QcxPbm
+ NyvwGhmHR+CMiYTKNvPtYHDkLKzHnJX4Ycd1YKDWftOJe6nmLRNCNlgRi8Q5KYH3z82T9qHC1
+ t38irgjT1ehf09JFoWimRMTsLs9ey+yYx6KyCIzFFY3Agi8BmupCDMNYRpK6diSSsAqnSm5yW
+ PYsOrgeCm8rhWkzn39aGK/Kjsz66zFwJOCbB30NKNdjG54yOlbSKYaIfN7+8fOxVRYnLshjYy
+ I0iVZhS3efXu5eA4Q25UjH4BmMvQQ+Xfgm0f/YGBL+DPOk7JaIYvI8CU13j9yE/NTymoLNcs+
+ CZfAujc/cdVVmt4VydGGR+F1q93Cg+0QDgZLbaSN7IXQiwxqcVkfovWQ9Uc3rGqTwEA2KuZMo
+ nqP3kafwItvGujUQBFEYCq1Jp/rkhMyjDnFmImXHRy5xiY5ccBtKOogZuqa8miMbbUcV8hWEV
+ HA3VQipL97sSseFCoev97rguPHASQlPDfJzO6FLTvrVZuEZghjSm3qV4CaNk7Wfr1hLxRlEn5
+ xsQrapCyHctqoQQbbZmx27scGEQU7xJhuU16LbJlJ0EWmRT3Uv+JxfSRE8mPsKztGGxCARiwO
+ +sgY6hD/MfqXKpZAjGBmKYRolORIKjXPaNMzgIZi0FbN2s+IlGtQbnI4Td/MQRkhIxaH+g/5f
+ pHx06wYa1/XmQAPpDC6DPZR0NbQV20RUfDEQ4XuQ2ACWKi12GCETCDZt6VyBhINF40X03nLQ5
+ u3mB22lolCFFTD7uVOoKLrjtsMqiBb/LhtGwNtM52ZhYAJCvYG8wL1W8oWfJ00LASfsIuBdjq
+ HgF04cGmIX2V2hcgYV4mZJ24bU9NYfIKsTaU4GZOQjn7t+hhabHv8lvFHO8MpjDSg9LbXftk9
+ nWfeK7cpa3HVnd+sjzEDflu+VUoWIWxwbakBXmYQBlI6wRiHDfdUxpQrjpXV/SciMZQrnyUrj
+ jDpwFT8SiqXhI4etoEOUm1D0jxM=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,104 +95,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/16/23 19:03, Detlev Casanova wrote:
-> On Saturday, October 7, 2023 5:35:27 P.M. EDT Marek Vasut wrote:
->> On 10/2/23 17:20, Detlev Casanova wrote:
->>> Expose that information to the sysinfo command to let scripts make
->>> decisions based on the board id and revision.
->>>
->>> Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
->>> ---
->>>
->>>    drivers/sysinfo/rcar3.c | 89 +++++++++++++++++++++++++++++------------
->>>    1 file changed, 63 insertions(+), 26 deletions(-)
->>>
->>> diff --git a/drivers/sysinfo/rcar3.c b/drivers/sysinfo/rcar3.c
->>> index 633e80bc19b..a554323506a 100644
->>> --- a/drivers/sysinfo/rcar3.c
->>> +++ b/drivers/sysinfo/rcar3.c
->>> @@ -32,6 +32,10 @@
->>>
->>>     */
->>>    
->>>    struct sysinfo_rcar_priv {
->>>    
->>>    	char	boardmodel[64];
->>>
->>> +	u8	id;
->>> +	u8	rev_major;
->>> +	u8	rev_minor;
->>> +	bool	has_rev;
->>>
->>>    	u8	val;
->>>    
->>>    };
->>>
->>> @@ -56,9 +60,33 @@ static int sysinfo_rcar_get_str(struct udevice *dev,
->>> int id, size_t size, char *>
->>>    	};
->>>    
->>>    }
->>>
->>> +static int sysinfo_rcar_get_int(struct udevice *dev, int id, int *val)
->>> +{
->>> +	struct sysinfo_rcar_priv *priv = dev_get_priv(dev);
->>> +
->>> +	switch (id) {
->>> +	case SYSINFO_ID_BOARD_ID:
->>> +		*val = priv->id;
->>> +		return 0;
->>> +	case SYSINFO_ID_BOARD_REV_MAJOR:
->>> +		if (!priv->has_rev)
->>> +			return -EINVAL;
->>> +		*val = priv->rev_major;
->>> +		return 0;
->>> +	case SYSINFO_ID_BOARD_REV_MINOR:
->>> +		if (!priv->has_rev)
->>> +			return -EINVAL;
->>> +		*val = priv->rev_minor;
->>> +		return 0;
->>> +	default:
->>> +		return -EINVAL;
->>> +	};
->>> +}
->>> +
->>>
->>>    static const struct sysinfo_ops sysinfo_rcar_ops = {
->>>    
->>>    	.detect = sysinfo_rcar_detect,
->>>    	.get_str = sysinfo_rcar_get_str,
->>>
->>> +	.get_int = sysinfo_rcar_get_int,
->>>
->>>    };
->>>    
->>>    static void sysinfo_rcar_parse(struct sysinfo_rcar_priv *priv)
->>>
->>> @@ -69,8 +97,9 @@ static void sysinfo_rcar_parse(struct sysinfo_rcar_priv
->>> *priv)>
->>>    	bool ebisu_4d = false;
->>>    	bool condor_i = false;
->>>    	char rev[4] = "?.?";
->>>
->>> -	u8 rev_major = 0;
->>> -	u8 rev_minor = 0;
->>> +
->>> +	priv->id = board_id;
->>> +	priv->has_rev = false;
->>
->> Would it make more sense to assign
->>
->> priv->rev_major = 1;
->> priv->rev_minor = 0;
->>
->> And get rid of priv->has_rev entirely ?
->>
->> Basically say that the default case is rev. 1.0 board.
->>
->> [...]
-> 
-> I'm not really sure about this has it doesn't differentiate between rev 1.0 and
-> unknown revision.
+On 10/16/23 16:11, Thomas Richard wrote:
+> From: Gregory CLEMENT <gregory.clement@bootlin.com>
+>
+> Add test_enter_suspend command using PSCI.
+> This command is only to test suspend sequence from U-Boot.
+> The resume will not work.
+>
+> Signed-off-by: Gregory CLEMENT <gregory.clement@bootlin.com>
+> Signed-off-by: Thomas Richard <thomas.richard@bootlin.com>
+>
+> ---
+>
+>   cmd/Kconfig             |  7 +++++++
+>   cmd/boot.c              |  8 ++++++++
+>   drivers/firmware/psci.c | 23 +++++++++++++++++++++++
+>   include/command.h       |  2 ++
+>   4 files changed, 40 insertions(+)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 43ca10f69c..54e7d4b0e6 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1450,6 +1450,13 @@ config CMD_POWEROFF
+>   	help
+>   	  Poweroff/Shutdown the system
+>
+> +config CMD_TEST_ENTER_SUSPEND
+> +	bool "test enter suspend"
+> +	depends on ARM
+> +	select ARM_SMCCC
+> +	help
+> +	  Command to test the suspend sequence (only for test)
+> +
+>   config CMD_READ
+>   	bool "read - Read binary data from a partition"
+>   	help
+> diff --git a/cmd/boot.c b/cmd/boot.c
+> index 14839c1ced..609c07a5a5 100644
+> --- a/cmd/boot.c
+> +++ b/cmd/boot.c
+> @@ -70,3 +70,11 @@ U_BOOT_CMD(
+>   	""
+>   );
+>   #endif
+> +
+> +#if IS_ENABLED(CONFIG_CMD_TEST_ENTER_SUSPEND)
+> +U_BOOT_CMD(
+> +	test_enter_suspend, 1, 0, do_test_enter_suspend,
+> +	"Test the enter SUSPEND sequence of the device",
+> +	""
+> +);
+> +#endif
+> diff --git a/drivers/firmware/psci.c b/drivers/firmware/psci.c
+> index c6b9efab41..591ad1869d 100644
+> --- a/drivers/firmware/psci.c
+> +++ b/drivers/firmware/psci.c
+> @@ -23,6 +23,9 @@
+>   #include <linux/libfdt.h>
+>   #include <linux/printk.h>
+>   #include <linux/psci.h>
+> +#if IS_ENABLED(CONFIG_CMD_TEST_ENTER_SUSPEND)
+> +#include <cpu_func.h>
+> +#endif
+>
+>   #define DRIVER_NAME "psci"
+>
+> @@ -303,6 +306,26 @@ int do_poweroff(struct cmd_tbl *cmdtp, int flag, in=
+t argc, char *const argv[])
+>   }
+>   #endif
+>
+> +#if IS_ENABLED(CONFIG_CMD_TEST_ENTER_SUSPEND)
+> +int do_test_enter_suspend(struct cmd_tbl *cmdtp, int flag, int argc, ch=
+ar *const argv[])
+> +{
+> +	do_psci_probe();
+> +
+> +	puts("suspend ...\n");
+> +	puts("disable dcache\n");
+> +
+> +	dcache_disable();
+> +
+> +	/* ARM_PSCI_1_0_FN64_SYSTEM_SUSPEND */
+> +	invoke_psci_fn(PSCI_0_2_FN64(14), (unsigned long)do_test_enter_suspend=
+, 0, 0);
 
-Good point, please document this in the commit message.
+Suspend exists on other architectures, too. E.g. OpenSBI provides an
+implementation for RISC-V. It would be preferable to add suspend as a
+value to enum enum sysreset_t. Then that functionality can be
+implemented in sysreset_psci.c sysreset_sbi.c, and others.
+
+The command should simply be called 'suspend'.
+
+Best regards
+
+Heinrich
+
+> +
+> +	dcache_enable();
+> +
+> +	log_err("Suspend failed or not supported on this platform\n");
+> +	return CMD_RET_FAILURE;
+> +}
+> +#endif
+> +
+>   static const struct udevice_id psci_of_match[] =3D {
+>   	{ .compatible =3D "arm,psci" },
+>   	{ .compatible =3D "arm,psci-0.2" },
+> diff --git a/include/command.h b/include/command.h
+> index c4e3170967..0126da6b37 100644
+> --- a/include/command.h
+> +++ b/include/command.h
+> @@ -177,6 +177,8 @@ int do_reset(struct cmd_tbl *cmdtp, int flag, int ar=
+gc,
+>   	     char *const argv[]);
+>   int do_poweroff(struct cmd_tbl *cmdtp, int flag, int argc,
+>   		char *const argv[]);
+> +int do_test_enter_suspend(struct cmd_tbl *cmdtp, int flag, int argc,
+> +			  char *const argv[]);
+>
+>   unsigned long do_go_exec(ulong (*entry)(int, char * const []), int arg=
+c,
+>   			 char *const argv[]);
+
