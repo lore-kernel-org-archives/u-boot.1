@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D7C7CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 06:47:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17048CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 06:47:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 224178477A;
+	by phobos.denx.de (Postfix) with ESMTP id 7ACF186DC6;
 	Mon, 16 Oct 2023 08:47:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UNla7tw0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uxJZkQGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF86286DB3; Mon, 16 Oct 2023 08:47:10 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 189C786DE8; Mon, 16 Oct 2023 08:47:08 +0200 (CEST)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7B5386D2D
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 08:46:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 191118477A
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 08:46:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1c5c91bec75so26083685ad.3
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 23:46:52 -0700 (PDT)
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6b201a93c9cso2045296b3a.0
+ for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 23:46:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697438811; x=1698043611; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1697438805; x=1698043605; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iAmFUGgEnR04lMoIFR98JXoRfIMyvt0aJ08PywRnLXU=;
- b=UNla7tw0hZ9ESUAJmU4pProgivs4StZ5YAmWTT8guiKWSld1Fcb17ofpZ4nQMr5UPY
- dljy95GdUcCpK9K8uubH3zGvDkTdzZsa9804hbb22sPmzhUI3V6FT4vH2CablNAfrH3O
- KaFUe6fYTAJCViUXg5BnHKSVb07HkzvU32g5NH58KNB3d4OV4WiW7dOofuNOWiUOR4Wo
- lnTDuzm/+689lIdQRHQ5N5bpnTK8cEUcaLPYAbe2m/QocCSftSATE9SiyydU5s/BPhOX
- nPH7Z6pJNHDUBOtY2MtMw+90xaPzwH6EcRypB/wWmscgMMTJW0X9Qfe5rrtfMzETbowo
- /7og==
+ bh=h+uhty0GdC8R49rdJSut4WnZ0t+PDDOC92B5xrfeuT0=;
+ b=uxJZkQGiINWYoTBGvoAKQauFg6+NdfGhiu7AqNf7qPzTX+ag2Mssau2GW+oVY+PKTQ
+ k6DnTnVK85Ui2xAbTaO6h96KmJnpd9V1sVf1MQpj+ExuXM9IzW/UuP8IVcaaeqmNtz/e
+ VRQxZYFVn5/sOEM6sA4y/1y8Buh8+hANXDwP/zeUYQSNfaPeTy5nggA2+JxGLqrBm9Ts
+ 9VNO/rih96UsUig1hz/4rrNANUFEOsZniMOEmZpRaWiw0jP65cXjkRfZ1LkMo60NYBI3
+ S+8TJHyDMhwDSXAFOFqh8TlLtQr5OEU9HKqiWO1sm7kcEbR3J0rPgP6oQnzxozpFCW47
+ RiIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697438811; x=1698043611;
+ d=1e100.net; s=20230601; t=1697438805; x=1698043605;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iAmFUGgEnR04lMoIFR98JXoRfIMyvt0aJ08PywRnLXU=;
- b=DwmgkDp4jI/VTRxwhjp0I6xWjTFCpkRRx1qikMnN3h/KrsEdg1XRF0Va4Tog9oUo0V
- gbMuBYAMz4i04wdjSky/c6bqwGiVz21dr+q6swZteD5Kkhe+2F0TlFI8u4tD1fQ2FRHs
- DQrg+U58l/Uf+5pXobvbHyUGFdF4+I8DaPJPNFeHe8+z2cHhT2TPlDCvH1kn//suTKFh
- IumVJ6n3WV6FWzF5peP/JMpqHU40c0CyPi4oRsclt4cRml1LHRAt1O1zi0pKdcGt+5lj
- w8WeRWSsDF7Zn5DL3rXflUfLlLMFa+S5VY/jjmZx9Gkru7qOIhaQf8zEtMeh4S+Dakc4
- BW8g==
-X-Gm-Message-State: AOJu0YweLYhwQrPJlJk2ukmMPldQr5heYzgvGnlv05xD1ykIhhpDqyz2
- bKBqy680XgvGFFYDz9QUxOtdxIpfywBs5/rGZoU=
-X-Google-Smtp-Source: AGHT+IFswMpXdlGO63ADfXHzwuq0ksnHJyYmN+1EW1b3R4TZNBdBKHT9DsLAizDrvL/qx9OksLaidw==
-X-Received: by 2002:a17:902:b48b:b0:1c4:4462:f1bd with SMTP id
- y11-20020a170902b48b00b001c44462f1bdmr24988052plr.35.1697438810714; 
- Sun, 15 Oct 2023 23:46:50 -0700 (PDT)
+ bh=h+uhty0GdC8R49rdJSut4WnZ0t+PDDOC92B5xrfeuT0=;
+ b=NXTGzQtf04g9ZIdkTc3z71lH3mzeoZl2FvILvOoWI+LlFVqctYWcbsPG8z6kfX8h/F
+ VdJY5GJd/mK+3ljgomzflcKvKrZVYvCkTcA4Yp8gXvbCEN06aypQtVAbYwvbaSmG5f6R
+ NEoaM0+c0LopIfd9oPCd12du80scg2zE113DJUk3U4Hoaa1TybJMLva8snlUnNksMqi8
+ 38iJAq3JHPMK49OVLNGbzjT5eAms9ULJV6gqCzKiXsi24Bh+2nS1e1Jo03Myu5uhZHu0
+ k5e2t+sE1xmeY64YaLoEJyIFXuIYqvO2h613a47VTnYfzun5xHHA96YkQWNKjhSM186E
+ P6qw==
+X-Gm-Message-State: AOJu0YwxqoUYy6rDDb7a0ToFmzH3Al+EmGtNbWh3wmBTBf0cz4cmDumW
+ 62XnzUy7O9dyQ6/kwYRHfrWrAb2akSXoxS1TdZ0=
+X-Google-Smtp-Source: AGHT+IFIpXRKXqJ947BUjusQck0UIhF01dxtTLF5IZmG2CXKbNoFXUeuE1CPOFPTGrRnEb3RAHoUxA==
+X-Received: by 2002:a05:6a20:d41e:b0:16b:74bb:e57e with SMTP id
+ il30-20020a056a20d41e00b0016b74bbe57emr21518838pzb.12.1697438805210; 
+ Sun, 15 Oct 2023 23:46:45 -0700 (PDT)
 Received: from localhost ([164.70.16.189]) by smtp.gmail.com with ESMTPSA id
- b2-20020a170902650200b001b898595be7sm7904538plk.291.2023.10.15.23.46.49
+ h24-20020a170902ac9800b001c3be750900sm7760826plr.163.2023.10.15.23.46.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Oct 2023 23:46:50 -0700 (PDT)
+ Sun, 15 Oct 2023 23:46:44 -0700 (PDT)
 From: Masahisa Kojima <masahisa.kojima@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -70,10 +70,12 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Simon Glass <sjg@chromium.org>,
  Takahiro Akashi <takahiro.akashi@linaro.org>,
  Michal Simek <michal.simek@amd.com>,
- Masahisa Kojima <masahisa.kojima@linaro.org>
-Subject: [PATCH v7 4/9] efi_loader: create default file boot option
-Date: Mon, 16 Oct 2023 15:45:21 +0900
-Message-Id: <20231016064526.2410856-5-masahisa.kojima@linaro.org>
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Tobias Waldekranz <tobias@waldekranz.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH v7 3/9] blk: blkmap: add ramdisk creation utility function
+Date: Mon, 16 Oct 2023 15:45:20 +0900
+Message-Id: <20231016064526.2410856-4-masahisa.kojima@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
 References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
@@ -95,172 +97,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Current efibootmgr automatically creates the
-boot options of all disks and partitions installing
-EFI_SIMPLE_FILE_SYSTEM_PROTOCOL.
-Some of the automatically created boot options are
-useless if the disk and partition does not have
-the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-
-This commit only creates the boot option if the disk and
-partition have the default file so that system can directly
-boot from it.
+User needs to call several functions to create the ramdisk
+with blkmap.
+This adds the utility function to create blkmap device and
+mount the ramdisk.
 
 Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- lib/efi_loader/efi_bootmgr.c | 86 ++++++++++++++++++++++++++----------
- 1 file changed, 63 insertions(+), 23 deletions(-)
+ drivers/block/Makefile        |  3 +-
+ drivers/block/blkmap.c        | 15 ----------
+ drivers/block/blkmap_helper.c | 53 +++++++++++++++++++++++++++++++++++
+ include/blkmap.h              | 29 +++++++++++++++++++
+ 4 files changed, 84 insertions(+), 16 deletions(-)
+ create mode 100644 drivers/block/blkmap_helper.c
 
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index a40762c74c..c8cf1c5506 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -355,40 +355,70 @@ error:
-  */
- static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boot_option *opt,
- 						      efi_handle_t *volume_handles,
--						      efi_status_t count)
-+						      efi_uintn_t *count)
+diff --git a/drivers/block/Makefile b/drivers/block/Makefile
+index a161d145fd..ec0575d135 100644
+--- a/drivers/block/Makefile
++++ b/drivers/block/Makefile
+@@ -14,7 +14,8 @@ obj-$(CONFIG_IDE) += ide.o
+ endif
+ obj-$(CONFIG_SANDBOX) += sandbox.o host-uclass.o host_dev.o
+ obj-$(CONFIG_$(SPL_TPL_)BLOCK_CACHE) += blkcache.o
+-obj-$(CONFIG_BLKMAP) += blkmap.o
++obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap.o
++obj-$(CONFIG_$(SPL_TPL_)BLKMAP) += blkmap_helper.o
+ 
+ obj-$(CONFIG_EFI_MEDIA) += efi-media-uclass.o
+ obj-$(CONFIG_EFI_MEDIA_SANDBOX) += sb_efi_media.o
+diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+index 149a4cac3e..21201409ed 100644
+--- a/drivers/block/blkmap.c
++++ b/drivers/block/blkmap.c
+@@ -66,21 +66,6 @@ struct blkmap_slice {
+ 	void (*destroy)(struct blkmap *bm, struct blkmap_slice *bms);
+ };
+ 
+-/**
+- * struct blkmap - Block map
+- *
+- * Data associated with a blkmap.
+- *
+- * @label: Human readable name of this blkmap
+- * @blk: Underlying block device
+- * @slices: List of slices associated with this blkmap
+- */
+-struct blkmap {
+-	char *label;
+-	struct udevice *blk;
+-	struct list_head slices;
+-};
+-
+ static bool blkmap_slice_contains(struct blkmap_slice *bms, lbaint_t blknr)
  {
--	u32 i;
-+	u32 i, num = 0;
- 	struct efi_handler *handler;
- 	efi_status_t ret = EFI_SUCCESS;
+ 	return (blknr >= bms->blknr) && (blknr < (bms->blknr + bms->blkcnt));
+diff --git a/drivers/block/blkmap_helper.c b/drivers/block/blkmap_helper.c
+new file mode 100644
+index 0000000000..0f80035f57
+--- /dev/null
++++ b/drivers/block/blkmap_helper.c
+@@ -0,0 +1,53 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * blkmap helper function
++ *
++ * Copyright (c) 2023, Linaro Limited
++ */
++
++#include <blk.h>
++#include <blkmap.h>
++#include <dm/device.h>
++#include <dm/device-internal.h>
++
++int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
++			  struct udevice **devp)
++{
++	int ret;
++	lbaint_t blknum;
++	struct blkmap *bm;
++	struct blk_desc *desc;
++	struct udevice *bm_dev;
++
++	ret = blkmap_create(label, &bm_dev);
++	if (ret) {
++		log_err("failed to create blkmap\n");
++		return ret;
++	}
++
++	bm = dev_get_plat(bm_dev);
++	desc = dev_get_uclass_plat(bm->blk);
++	blknum = image_size >> desc->log2blksz;
++	ret = blkmap_map_pmem(bm_dev, 0, blknum, image_addr);
++	if (ret) {
++		log_err("Unable to map %#llx at block %d : %d\n",
++			(unsigned long long)image_addr, 0, ret);
++		goto err;
++	}
++	log_info("Block %d+0x" LBAF " mapped to %#llx\n", 0, blknum,
++		 (unsigned long long)image_addr);
++
++	ret = device_probe(bm->blk);
++	if (ret)
++		goto err;
++
++	if (devp)
++		*devp = bm_dev;
++
++	return 0;
++
++err:
++	blkmap_destroy(bm_dev);
++
++	return ret;
++}
+diff --git a/include/blkmap.h b/include/blkmap.h
+index af54583c7d..0d87e6db6b 100644
+--- a/include/blkmap.h
++++ b/include/blkmap.h
+@@ -7,6 +7,23 @@
+ #ifndef _BLKMAP_H
+ #define _BLKMAP_H
  
--	for (i = 0; i < count; i++) {
-+	for (i = 0; i < *count; i++) {
- 		u16 *p;
- 		u16 dev_name[BOOTMENU_DEVICE_NAME_MAX];
- 		char *optional_data;
- 		struct efi_load_option lo;
- 		char buf[BOOTMENU_DEVICE_NAME_MAX];
--		struct efi_device_path *device_path;
-+		struct efi_device_path *device_path, *full_path, *dp, *fp;
- 		struct efi_device_path *short_dp;
-+		struct efi_file_handle *root, *f;
-+		struct efi_simple_file_system_protocol *file_system;
-+		u16 *default_file_path = NULL;
- 
--		ret = efi_search_protocol(volume_handles[i], &efi_guid_device_path, &handler);
-+		ret = efi_search_protocol(volume_handles[i],
-+					  &efi_guid_device_path, &handler);
- 		if (ret != EFI_SUCCESS)
- 			continue;
--		ret = efi_protocol_open(handler, (void **)&device_path,
--					efi_root, NULL, EFI_OPEN_PROTOCOL_GET_PROTOCOL);
++#include <dm/lists.h>
 +
-+		device_path = handler->protocol_interface;
-+		full_path = efi_dp_from_file(device_path,
-+					     "/EFI/BOOT/" BOOTEFI_NAME);
++/**
++ * struct blkmap - Block map
++ *
++ * Data associated with a blkmap.
++ *
++ * @label: Human readable name of this blkmap
++ * @blk: Underlying block device
++ * @slices: List of slices associated with this blkmap
++ */
++struct blkmap {
++	char *label;
++	struct udevice *blk;
++	struct list_head slices;
++};
 +
-+		/* check whether the partition or disk have the default file */
-+		ret = efi_dp_split_file_path(full_path, &dp, &fp);
-+		if (ret != EFI_SUCCESS || !fp)
-+			goto next_entry;
-+
-+		default_file_path = efi_dp_str(fp);
-+		if (!default_file_path)
-+			goto next_entry;
-+
-+		ret = efi_search_protocol(volume_handles[i],
-+					  &efi_simple_file_system_protocol_guid,
-+					  &handler);
- 		if (ret != EFI_SUCCESS)
--			continue;
-+			goto next_entry;
-+
-+		file_system = handler->protocol_interface;
-+		ret = EFI_CALL(file_system->open_volume(file_system, &root));
-+		if (ret != EFI_SUCCESS)
-+			goto next_entry;
-+
-+		ret = EFI_CALL(root->open(root, &f, default_file_path,
-+					  EFI_FILE_MODE_READ, 0));
-+		if (ret != EFI_SUCCESS)
-+			goto next_entry;
-+
-+		EFI_CALL(f->close(f));
- 
- 		ret = efi_disk_get_device_name(volume_handles[i], buf, BOOTMENU_DEVICE_NAME_MAX);
- 		if (ret != EFI_SUCCESS)
--			continue;
-+			goto next_entry;
- 
- 		p = dev_name;
- 		utf8_utf16_strncpy(&p, buf, strlen(buf));
- 
- 		/* prefer to short form device path */
--		short_dp = efi_dp_shorten(device_path);
--		if (short_dp)
--			device_path = short_dp;
-+		short_dp = efi_dp_shorten(full_path);
-+		device_path = short_dp ? short_dp : full_path;
- 
- 		lo.label = dev_name;
- 		lo.attributes = LOAD_OPTION_ACTIVE;
-@@ -396,24 +426,35 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
- 		lo.file_path_length = efi_dp_size(device_path) + sizeof(END);
- 		/*
- 		 * Set the dedicated guid to optional_data, it is used to identify
--		 * the boot option that automatically generated by the bootmenu.
-+		 * the boot option that automatically generated by the efibootmgr.
- 		 * efi_serialize_load_option() expects optional_data is null-terminated
- 		 * utf8 string, so set the "1234567" string to allocate enough space
- 		 * to store guid, instead of realloc the load_option.
- 		 */
- 		lo.optional_data = "1234567";
--		opt[i].size = efi_serialize_load_option(&lo, (u8 **)&opt[i].lo);
--		if (!opt[i].size) {
--			ret = EFI_OUT_OF_RESOURCES;
--			goto out;
-+		opt[num].size = efi_serialize_load_option(&lo, (u8 **)&opt[num].lo);
-+		if (!opt[num].size) {
-+			efi_free_pool(full_path);
-+			efi_free_pool(dp);
-+			efi_free_pool(fp);
-+			efi_free_pool(default_file_path);
-+			return EFI_OUT_OF_RESOURCES;
- 		}
- 		/* set the guid */
--		optional_data = (char *)opt[i].lo + (opt[i].size - u16_strsize(u"1234567"));
-+		optional_data = (char *)opt[num].lo + (opt[num].size - u16_strsize(u"1234567"));
- 		memcpy(optional_data, &efi_guid_bootmenu_auto_generated, sizeof(efi_guid_t));
-+		num++;
-+
-+next_entry:
-+		efi_free_pool(full_path);
-+		efi_free_pool(dp);
-+		efi_free_pool(fp);
-+		efi_free_pool(default_file_path);
- 	}
- 
--out:
--	return ret;
-+	*count = num;
-+
-+	return EFI_SUCCESS;
- }
- 
  /**
-@@ -642,7 +683,7 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index)
-  * efi_bootmgr_update_media_device_boot_option() - generate the media device boot option
+  * blkmap_map_linear() - Map region of other block device
   *
-  * This function enumerates all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
-- * and generate the bootmenu entries.
-+ * and create the boot option with default file if the file exists.
-  * This function also provide the BOOT#### variable maintenance for
-  * the media device entries.
-  * - Automatically create the BOOT#### variable for the newly detected device,
-@@ -674,8 +715,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
- 		goto out;
- 	}
+@@ -74,4 +91,16 @@ int blkmap_create(const char *label, struct udevice **devp);
+  */
+ int blkmap_destroy(struct udevice *dev);
  
--	/* enumerate all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL */
--	ret = efi_bootmgr_enumerate_boot_option(opt, volume_handles, count);
-+	ret = efi_bootmgr_enumerate_boot_option(opt, volume_handles, &count);
- 	if (ret != EFI_SUCCESS)
- 		goto out;
- 
++/**
++ * blkmap_create_ramdisk() - Create new ramdisk with blkmap
++ *
++ * @label: Label of the new blkmap
++ * @image_addr: Target memory start address of this mapping
++ * @image_size: Target memory size of this mapping
++ * @devp: Updated with the address of the created blkmap device
++ * Returns: 0 on success, negative error code on failure
++ */
++int blkmap_create_ramdisk(const char *label, ulong image_addr, int image_size,
++			  struct udevice **devp);
++
+ #endif	/* _BLKMAP_H */
 -- 
 2.34.1
 
