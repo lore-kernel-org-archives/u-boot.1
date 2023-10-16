@@ -4,68 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A84CCCDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 16:17:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC42DCDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 16:22:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A59486DCA;
-	Mon, 16 Oct 2023 18:16:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C660D86DCA;
+	Mon, 16 Oct 2023 18:22:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697473012;
-	bh=YocRv59V1sqcC8mrdr44FB2FAdtm2MSDhX2vqBebGTY=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=vLFMO8bjwAJkcycXT475518yTdmevcgvlSIO6Of1TpXuFfuY7k3CmF2C4WtVLdtZz
-	 AgEzb7Cr87akK2yAGmS0He6pumiCKPUgKqQepq+9EskfM1RQefGYCVcJ/LaT/Ac+dE
-	 o20oBhUVU6voGJIApO/yXp+S36NWd8kmKC/i9vPZ7fL6U/Mp1yw61z9yzXjWsM3ajX
-	 Qip/TzeKBAFdlT62gex1ko3UZJH4vd9o9xzsid4/GKTzhYk6yKBJm2oiH1O0KaVPdo
-	 LzBUm/kg9hnHpB9zINWaKTgP/4dutUCmqnSIYeae1hpSHMIpB5fg2fYIm8sPuWeO6C
-	 fjkXsK4RT2kpQ==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gtgQlL14";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D03EB86DDE; Mon, 16 Oct 2023 18:22:35 +0200 (CEST)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3E08286EB9;
- Mon, 16 Oct 2023 18:16:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697473002;
- bh=YocRv59V1sqcC8mrdr44FB2FAdtm2MSDhX2vqBebGTY=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=BhPuiC3oGvtBMlkDTbALl6iWR/QkbXwJ4Lzchfl9V2ZQc8HokPuR/HcqXlrw48PB0
- 4o1TUtryp7K1t5bvvnHzd9xe5NlcmlO74Mx7a/NmWOU1zTX/4h3MuMJ2ESPjh2J2Ml
- S9Qm7sW1ePy6yrISGwU80j4Jk97GN4BkNSiNVORlGQfNhtWI82eXLY/edTZPDo4qkf
- UBW54DBHLl56cixrZtOm4LRrLIH0EZr6aonKhi2uJpx/4xGUh/irbOY1LPmlmwu1x0
- wbbM1uw/1zshrp1iE3DpLR+zuKJtAHapYrfPJywSB9GZ9GOo6E6vFKlxJ/4YZ1uWtz
- yyW+Sbmkk+3FA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Fedor Ross <fedor.ross@ifm.com>, Marek Vasut <marex@denx.de>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Chanho Park <chanho61.park@samsung.com>, Elena Popa <elena.popa@nxp.com>,
- Fabio Estevam <festevam@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Qu Wenruo <wqu@suse.com>, Roger Quadros <rogerq@kernel.org>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v2 4/4] ARM: imx: Add support for detecting primary/secondary
- bmode on MX8M
-Date: Mon, 16 Oct 2023 18:16:15 +0200
-Message-ID: <20231016161619.50744-4-marex@denx.de>
-X-Mailer: git-send-email 2.42.0
-In-Reply-To: <20231016161619.50744-1-marex@denx.de>
-References: <20231016161619.50744-1-marex@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id CD29086BF2
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 18:22:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-53d8320f0easo8066508a12.3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 09:22:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1697473352; x=1698078152; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=qFPp+n3hM8QyWBaeGcrQis758YckWGK7ehncWQiUObI=;
+ b=gtgQlL14QdYrTpOEHCXyXNnUC/HAW8s/SDwilBTz+UGGsd5MSGA4/qWaBNwpfb5M0D
+ T/stuZ7xbwO/vJzx/3gI5rEi/Wk/6718hvGzbUPu6cEN4Zi/5783dB7XuI+WggLRTSdy
+ 8uugkFOV3/cf5w9ruWDwraDabLY0i29Wox9f0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697473352; x=1698078152;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qFPp+n3hM8QyWBaeGcrQis758YckWGK7ehncWQiUObI=;
+ b=mx2wB7eo1yZtuLSdhrWRqOM/l7FBU0g8PTz4EgVX8KAt1LAZQrFmUIyOmcvmCYp6Hh
+ 2mCPzQlNGnRp4271Zrne5mmPku3cyLerBDMsdikL+gtKzo/4fqSmh9n2Lj60RmYzM4MH
+ dtIGlGkKmL7yiU5ANUFWX5HYwBASXeCc8rLbk5URbNnlWlFpOW9eNPpuMBKOZPu/GDKB
+ CLC4n9PFOSZp/2xRbNgWp1Ww0l1EJjeIrabusRDogW70geajzPWrpmdnW/NosFDNozXK
+ 3zDlagQ0hq6rMzzFnL11wzVAQvxvjqW8T93QRLxb7T4eVzSUS3DNhadepSbmK9Xf7Nc2
+ nF3g==
+X-Gm-Message-State: AOJu0YxwmYs51LlkmH08NpjdcEf19K0PvnVMw6qeJcBSyYLLq1WDPgb+
+ fPoZYMXzQ64oV9Es6qsxcQJIrac2JxIbMn7oLgR2Wg==
+X-Google-Smtp-Source: AGHT+IEmPP4128gOvHBXv/dkI5sjqXwM5oHpdUfMUPkAMaXk+RWO2octppKMEitr2LrE2j3ohRlgo5ImBFHY6Zi8ZQ4=
+X-Received: by 2002:a17:907:eab:b0:9c2:a072:78c4 with SMTP id
+ ho43-20020a1709070eab00b009c2a07278c4mr4725145ejc.25.1697473351721; Mon, 16
+ Oct 2023 09:22:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <ZSCw7eCcnSRpgkBN@alg-gentoo>
+ <CAPnjgZ1jyvKku8V5UKqVxBHC4qEy7EtHN+yBuUNQW0pxxHpwkg@mail.gmail.com>
+ <ZSNWVGTjPEt2jXn5@alg-gentoo> <20231016161424.GE3119521@bill-the-cat>
+In-Reply-To: <20231016161424.GE3119521@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 16 Oct 2023 10:22:12 -0600
+Message-ID: <CAPnjgZ0v1QbPJLPz89HuhWwY5fzWfCKpVqHLmvYAn-wJgAb5aA@mail.gmail.com>
+Subject: Re: [PATCH v2] cmd: mbr: Allow 4 MBR partitions without need for
+ extended
+To: Tom Rini <trini@konsulko.com>
+Cc: Alexander Gendin <agendin@matrox.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,90 +84,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fedor Ross <fedor.ross@ifm.com>
+Hi,
 
-Implement the 'getprisec' subcommand of 'bmode' command for i.MX8M by
-reading out the ROM log events. This event is set by the BootROM if it
-switched to the secondary copy due to primary copy being corrupted.
+On Mon, 16 Oct 2023 at 10:14, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Oct 09, 2023 at 01:24:36AM +0000, Alexander Gendin wrote:
+>
+> > Current code allows up to 3 MBR partitions without extended one.
+> > If more than 3 partitions are required, then extended partition(s)
+> > must be used.
+> > This commit allows up to 4 primary MBR partitions without the
+> > need for extended partition.
+> >
+> > Add mbr test unit. In order to run the test manually, mmc6.img file
+> > of size 12 MiB or greater is required in the same directory as u-boot.
+> > Test also runs automatically via ./test/py/test.py tool.
+> > Running mbr test is only supported in sandbox mode.
+> >
+> > Signed-off-by: Alex Gendin <agendin@matrox.com>
+> > ---
+> > Changes for v2:
+> > - Cleanup coding style
+> > - Adjust commit message to the changes in v2
+> > - Add mmc6 device to sandbox device tree
+> > - Adjust boot/bootdev.c and dm/blk.c tests to include mmc6 in tests
+> > - Auto-create mmc6.img in test_ut_dm_init()
+> > - Add mbr test to the list of tests run by test.py. Test can be run manually
+> >   too via 'ut mbr'.
+> > - Change mbr test to use mmc6.img dedicated to the test, instead of mmc1.img.
+> > - Clear read buffer before reading data from test file.
+> >
+> >  arch/sandbox/dts/test.dts |   7 +
+> >  disk/part_dos.c           |   2 +-
+> >  include/test/suites.h     |   1 +
+> >  test/boot/bootdev.c       |   2 +-
+> >  test/cmd/Makefile         |   1 +
+> >  test/cmd/mbr.c            | 471 ++++++++++++++++++++++++++++++++++++++
+> >  test/cmd_ut.c             |   4 +
+> >  test/dm/blk.c             |  44 ++--
+>
+> So, in addition to the changes to test/dm/blk.c I had gotten as far as:
+> diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+> index 66c151131edb..33babdcf699c 100644
+> --- a/test/boot/bootdev.c
+> +++ b/test/boot/bootdev.c
+> @@ -43,8 +43,10 @@ static int bootdev_test_cmd_list(struct unit_test_state *uts)
+>                                    "mmc", "mmc1.bootdev");
+>                 ut_assert_nextline("%3x   [ %c ]  %6s  %-8s  %s", 2, probe_ch, "OK",
+>                                    "mmc", "mmc0.bootdev");
+> +               ut_assert_nextline("%3x   [ %c ]  %6s  %-8s  %s", 3, probe_ch, "OK",
+> +                                  "mmc", "mmc6.bootdev");
+>                 ut_assert_nextlinen("---");
+> -               ut_assert_nextline("(3 bootdevs)");
+> +               ut_assert_nextline("(4 bootdevs)");
+>                 ut_assert_console_end();
+>         }
+>
+> @@ -225,10 +227,11 @@ static int bootdev_test_order(struct unit_test_state *uts)
+>         ut_assertok(env_set("boot_targets", "mmc spi"));
+>         ut_asserteq(0, bootflow_scan_first(NULL, NULL, &iter, 0, &bflow));
+>         ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
+> -       ut_asserteq(3, iter.num_devs);
+> +       ut_asserteq(4, iter.num_devs);
+>         ut_asserteq_str("mmc2.bootdev", iter.dev_used[0]->name);
+>         ut_asserteq_str("mmc1.bootdev", iter.dev_used[1]->name);
+>         ut_asserteq_str("mmc0.bootdev", iter.dev_used[2]->name);
+> +       ut_asserteq_str("mmc6.bootdev", iter.dev_used[3]->name);
+>         bootflow_iter_uninit(&iter);
+>
+>         return 0;
+> @@ -254,7 +257,7 @@ static int bootdev_test_order_default(struct unit_test_state *uts)
+>         ut_asserteq_str("mmc1.bootdev", iter.dev_used[1]->name);
+>
+>         ut_asserteq(-ENODEV, bootflow_scan_next(&iter, &bflow));
+> -       ut_asserteq(3, iter.num_devs);
+> +       ut_asserteq(4, iter.num_devs);
+>         ut_asserteq_str("mmc0.bootdev", iter.dev_used[2]->name);
+>         bootflow_iter_uninit(&iter);
+>
+> @@ -693,6 +696,10 @@ static int bootdev_test_next_prio(struct unit_test_state *uts)
+>         ut_asserteq_str("mmc0.bootdev", dev->name);
+>         ut_assert_console_end();
+>
+> +       ut_assertok(bootdev_next_prio(&iter, &dev));
+> +       ut_asserteq_str("mmc6.bootdev", dev->name);
+> +       ut_assert_console_end();
+> +
+>         ut_assertok(bootdev_next_prio(&iter, &dev));
+>         ut_asserteq_str("spi.bin@0.bootdev", dev->name);
+>         ut_assert_skip_to_line("Hunting with: spi_flash");
+>
+> To make the bootdev test pass (and they still don't with the above)
+> before deciding that it seems like there's a bigger problem here, and
+> maybe Simon can help explain or figure out what to do?  Is there no way
+> to drop mmc6 once we've completed the new test here?
 
-Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Chanho Park <chanho61.park@samsung.com>
-Cc: Elena Popa <elena.popa@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Fedor Ross <fedor.ross@ifm.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Manoj Sai <abbaraju.manojsai@amarulasolutions.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Qu Wenruo <wqu@suse.com>
-Cc: Roger Quadros <rogerq@kernel.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefan Roese <sr@denx.de>
-Cc: Stefano Babic <sbabic@denx.de>
-Cc: Tim Harvey <tharvey@gateworks.com>
----
-V2: Mask out boot_mode_apply() on MX8M and newer,
-    since this functionality is not available.
----
- arch/arm/mach-imx/Kconfig     | 2 +-
- arch/arm/mach-imx/cmd_bmode.c | 4 ++++
- arch/arm/mach-imx/imx8m/soc.c | 5 +++++
- 3 files changed, 10 insertions(+), 1 deletion(-)
+I did start looking at this. See u-boot-dm/mbr-working
 
-diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
-index 266bb20df9d..44e1e1628ba 100644
---- a/arch/arm/mach-imx/Kconfig
-+++ b/arch/arm/mach-imx/Kconfig
-@@ -71,7 +71,7 @@ config CSF_SIZE
- config CMD_BMODE
- 	bool "Support the 'bmode' command"
- 	default y
--	depends on ARCH_MX7 || ARCH_MX6 || ARCH_MX5
-+	depends on ARCH_IMX8M || ARCH_MX7 || ARCH_MX6 || ARCH_MX5
- 	help
- 	  This enables the 'bmode' (bootmode) command for forcing
- 	  a boot from specific media.
-diff --git a/arch/arm/mach-imx/cmd_bmode.c b/arch/arm/mach-imx/cmd_bmode.c
-index cb317499d54..5b2f4686230 100644
---- a/arch/arm/mach-imx/cmd_bmode.c
-+++ b/arch/arm/mach-imx/cmd_bmode.c
-@@ -83,7 +83,11 @@ static int do_boot_mode(struct cmd_tbl *cmdtp, int flag, int argc,
- 		reset_requested = 0;
- 	}
- 
-+/* No longer applicable to i.MX8M */
-+#if IS_ENABLED(CONFIG_MX53) || IS_ENABLED(CONFIG_MX6) || IS_ENABLED(CONFIG_MX7)
- 	boot_mode_apply(p->cfg_val);
-+#endif
-+
- 	if (reset_requested && p->cfg_val)
- 		do_reset(NULL, 0, 0, NULL);
- 	return 0;
-diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
-index d33ac06cab4..556611a04e7 100644
---- a/arch/arm/mach-imx/imx8m/soc.c
-+++ b/arch/arm/mach-imx/imx8m/soc.c
-@@ -727,6 +727,11 @@ int spl_mmc_emmc_boot_partition(struct mmc *mmc)
- 
- 	return part;
- }
-+
-+int boot_mode_getprisec(void)
-+{
-+	return !!imx8m_detect_secondary_image_boot();
-+}
- #endif
- 
- #if defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MP)
--- 
-2.42.0
+In short you set status = "disabled" for mmc6 and then manually bind
+it in the test.
 
+But it still has one failure which I was trying to get to.
+
+Regards,
+Simon
