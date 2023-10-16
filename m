@@ -4,65 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8429CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 09:37:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 912F5CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 11:21:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8006686FA2;
-	Mon, 16 Oct 2023 11:28:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+	by phobos.denx.de (Postfix) with ESMTP id E57CF8667B;
+	Mon, 16 Oct 2023 13:21:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="ZmUG2+xx";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="D9LP+byp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEBB386FA2; Mon, 16 Oct 2023 11:28:53 +0200 (CEST)
-Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
- [217.70.183.200])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 2C03C86335; Mon, 16 Oct 2023 13:21:46 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B29386E03
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 11:28:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 71BFD868C0
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 13:21:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id 63B2E2000A;
- Mon, 16 Oct 2023 09:28:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1697448521;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cB9YyJFPekauMqmT5IAfFQ+DrU/FcfXGDjW4V8YqQOQ=;
- b=ZmUG2+xx/8stKeIvalFYCjLGa0Vx4XxQo+/vbnIEaF4Nzqkq22FzfVZmpnt+OrwOkiV1QJ
- C24m9desM9hQpy+4l0VxMvxZjQFcmFO3tPOAQql+AOGWznNldzthNENtHf6aqUmn5lvTzl
- l/Z8sgAlWza+RiV5TaqDdAtp8wBUreQ9hfgmv2TTT5NHtN3ASy4TFuAKLgODrAuaTAhoz0
- eiStWnLxYCrGxKxyJ2HmbKNfA5UYOGLV+TxZ/40uWu+HtQLaiVBYtd5vR78BKpNkCGr4fI
- QuapSCnWa7Zh2GE85q1Gka7v0rLX3F8gYCxK+GDo2iPcwJXmnp4FvL8pAmUJDg==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Simon Glass <sjg@chromium.org>,
-	devicetree@vger.kernel.org
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>, linux-mtd@lists.infradead.org,
- U-Boot Mailing List <u-boot@lists.denx.de>, Rob Herring <robh@kernel.org>,
- Tom Rini <trini@konsulko.com>, Conor Dooley <conor+dt@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
- Nick Terrell <terrelln@fb.com>,
- =?utf-8?b?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
- Richard Weinberger <richard@nod.at>, Rob Herring <robh+dt@kernel.org>,
- Vignesh Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4] dt-bindings: mtd: fixed-partitions: Add compression
- property
-Date: Mon, 16 Oct 2023 11:28:36 +0200
-Message-Id: <20231016092836.288939-1-miquel.raynal@bootlin.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230927180545.3522628-1-sjg@chromium.org>
-References: 
-MIME-Version: 1.0
-X-linux-mtd-patch-notification: thanks
-X-linux-mtd-patch-commit: b'8baba8d52ff5081e8c3c383132af269ba8e2f458'
-Content-Transfer-Encoding: 8bit
-X-GND-Sasl: miquel.raynal@bootlin.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=maz@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id E1DA9CE1383;
+ Mon, 16 Oct 2023 11:21:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2A787C433C7;
+ Mon, 16 Oct 2023 11:21:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1697455289;
+ bh=xxOpRLO4floU+li1KPFnvPrPFk7qkbCfZKe9LbWpoNk=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=D9LP+bypBPcQHBJSdZC+kKmtnWTyxpgPHTHTpe37duAHrz3zWlMDHZgXyMQYtnioC
+ uXNhAmgT2z61Lcff1oVneM84x59s3y15GePFcklSwX199vrnpgWiAG1OzE0OyAWbGb
+ WwnExyk6LWgnJrkEbJvqKn0nq5EEnd8GGxtmuJa5TENDq6RXLzMyn/uBsR1ysgR4Xd
+ 8ep20VQvVKdhY3F9jwMpFS/d0t0QEEpH5HQyDPP6ORTZADiNyn1YGC49jfJrrPe2fO
+ kkakZ6Zepe3X3nMS6ZYyl9VZxKGApZ/VWlLeghXJmVlUNhdOun0OKXx0WxDBkpd18B
+ jq98vcBF5OM3w==
+Received: from sofa.misterjones.org ([185.219.108.64]
+ helo=wait-a-minute.misterjones.org)
+ by disco-boy.misterjones.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.95)
+ (envelope-from <maz@kernel.org>) id 1qsLf4-004Ypd-T3;
+ Mon, 16 Oct 2023 12:21:27 +0100
+Date: Mon, 16 Oct 2023 12:21:19 +0100
+Message-ID: <87y1g2lsnk.wl-maz@kernel.org>
+From: Marc Zyngier <maz@kernel.org>
+To: Chris Packham <judge.packham@gmail.com>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ u-boot <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 1/3] arm64: Use FEAT_HAFDBS to track dirty pages when
+ available
+In-Reply-To: <CAFOYHZCNKJBv+J7dkoOjmPrfjr2TXB_vLqzKB2X4u0iwRpOCgA@mail.gmail.com>
+References: <20230317162253.1049446-1-paul.liu@linaro.org>
+ <20230317162253.1049446-2-paul.liu@linaro.org>
+ <CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=J0oHyvN75bTaCUw@mail.gmail.com>
+ <fac6ef1747ec318787f90a6d0c81163b@kernel.org>
+ <CAFOYHZAmWj6cgXib+m3Dy+mABcwEmPWAHLUgxeBe=2JVLsgaYQ@mail.gmail.com>
+ <CAFOYHZCNKJBv+J7dkoOjmPrfjr2TXB_vLqzKB2X4u0iwRpOCgA@mail.gmail.com>
+User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI-EPG/1.14.7 (Harue)
+ FLIM-LB/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL-LB/10.8 EasyPG/1.0.0 Emacs/28.2
+ (x86_64-pc-linux-gnu) MULE/6.0 (HANACHIRUSATO)
+MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-SA-Exim-Connect-IP: 185.219.108.64
+X-SA-Exim-Rcpt-To: judge.packham@gmail.com, paul.liu@linaro.org,
+ u-boot@lists.denx.de, trini@konsulko.com
+X-SA-Exim-Mail-From: maz@kernel.org
+X-SA-Exim-Scanned: No (on disco-boy.misterjones.org);
+ SAEximRunCond expanded to false
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,12 +89,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 2023-09-27 at 18:05:43 UTC, Simon Glass wrote:
-> Sometimes the contents of a partition are compressed. Add a property to
-> express this and define the algorithm used.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+On Mon, 16 Oct 2023 02:42:08 +0100,
+Chris Packham <judge.packham@gmail.com> wrote:
+>=20
+> On Sun, Oct 15, 2023 at 10:29=E2=80=AFAM Chris Packham <judge.packham@gma=
+il.com> wrote:
+> >
+> >
+> >
+> > On Sat, 14 Oct 2023, 11:04 am Marc Zyngier, <maz@kernel.org> wrote:
+> >>
+> >> On 2023-10-13 03:40, Chris Packham wrote:
+> >> > Hi Marc, Paul,
+> >> >
+> >> > On Sat, Mar 18, 2023 at 5:23=E2=80=AFAM Ying-Chun Liu (PaulLiu)
+> >> > <paul.liu@linaro.org> wrote:
+> >> >>
+> >> >> From: Marc Zyngier <maz@kernel.org>
+> >> >>
+> >> >> Some recent arm64 cores have a facility that allows the page
+> >> >> table walker to track the dirty state of a page. This makes it
+> >> >> really efficient to perform CMOs by VA as we only need to look
+> >> >> at dirty pages.
+> >> >>
+> >> >> Signed-off-by: Marc Zyngier <maz@kernel.org>
+> >> >> [ Paul: pick from the Android tree. Rebase to the upstream ]
+> >> >> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> >> >> Cc: Tom Rini <trini@konsulko.com>
+> >> >> Link:
+> >> >> https://android.googlesource.com/platform/external/u-boot/+/3c43372=
+4e6f830a6b2edd5ec3d4a504794887263
+> >> >
+> >> > I think this may have caused a regression for the Marvell AC5X
+> >> > board(s). I found that v2023.07 locked up at boot but v2023.01 was
+> >> > fine. The lockup seemed to be in the 'Net:' init probably just as the
+> >> > mvneta driver was being initialised.
+> >> >
+> >> > A git bisect led me to this change although for this specific change
+> >> > instead of the lockup I get a crash so maybe I'm actually hitting a
+> >> > different issue.
+> >> >
+> >> > Any thoughts as to why this may have caused problems?
+> >>
+> >> Not really. What CPUs does this platform have? What is the offending
+> >> driver doing to trigger the issue? Can you provide some level of
+> >> tracing?
+> >
+> >
+> > The Marvell AC5X is a network switch ASIC with an integrated ARMv8 CPU =
+(8.1 specifically I think).
+> >
+> > I think there is something that the mvneta driver is doing triggering t=
+he issue. I have another AC5X based board without an Ethernet port that boo=
+ts just fine (this is also why I didn't notice earlier).
+> >
+> > I'll try and get some more debug out when I'm back in the office
+> >
+>=20
+> The thing the mvneta driver does that upsets things appears to be
+>=20
+>     mmu_set_region_dcache_behaviour((phys_addr_t)bd_space, BD_SPACE,
+>                                                           DCACHE_OFF);
+>=20
+> I can comment that line out and everything works.
 
-Applied to https://git.kernel.org/pub/scm/linux/kernel/git/mtd/linux.git mtd/next, thanks.
+This leads to two questions:
 
-Miquel
+- is the device cache coherent, in which case it doesn't need the
+  memory being non-cacheable? If everything is OK, then why the switch
+  to device memory?
+
+- what goes wrong when these attributes are applied? do we have to
+  split a block mapping?
+
+Instrumenting the MMU code would certainly help understanding what
+goes wrong here.
+
+Thanks,
+
+	M.
+
+--=20
+Without deviation from the norm, progress is not possible.
