@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6381DCDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:44:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 714EFCDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:44:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E124486EDD;
-	Mon, 16 Oct 2023 16:44:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7851186B71;
+	Mon, 16 Oct 2023 16:44:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697467465;
-	bh=l1ZhPzJwEl700OWC+T3HCWlUjMXgrKJ0d5UArN/MIC0=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1697467488;
+	bh=2Q1nP90lHKpSccnXZhsMHtwGby5ybPNkkNenI57do+0=;
+	h=Date:Subject:From:To:References:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=NiDndh6ezIT5L0fyG2EW+z+uhxmS7ele/n3Hn3YtEsBTtuACoUGpz0S6qFpJ3iMxO
-	 HIVJc9uCNhEM+p4ktmqOan9E+HqbosKKYa2kR1sXVxujYIOg6N8ruRkeUssSvW30Az
-	 hKh236WfxfqCf6Urnny2nUvG2l6NBbemt//UEoGJI+E/qpCd0aMz5+DdQeNNbjHuTc
-	 3yEI+5xnLzZYVJGxvjThyfjieP6aCR09PeSalIVDcsMKMHjA4MySy9ffpJL3VhOqWw
-	 AKAeia7nm4pbRCU3sBHhBoZ++pvScT2AHhZ2y+IfHxbzPWeMaqMRV5fSQ+cCFfu6aZ
-	 Ntla5dqWvSGUA==
+	b=JpmPL/ry2AtpKQYxQJ6m+QgGWRwnc0gpGOtLBhJ6+IiIkCb/XZXZUJtWoJ3T8HaA7
+	 bAku98uX5cNS9AmPNp/eyInhKz28aFpO0VtVb+pX5eug0PvCo0yR6P39Xx7IMTTZWU
+	 YA8PQ4a6e9spSHDBGiwf9zQoHlfWN0bvW9YJPzxKxWfOBgSFSoQiWacug6URsF+xwM
+	 OjD0qtHOqNEmj3DzO2tG3Z00apUKQb0t+CBbrHjKjr3muz2Ilq42NOyhFNigJ09D5e
+	 dE1A/PPqvOfwrrFGUnPa6KffK8KugLrjIZ/3qn7MWAguSir1gukmHTA2zi1Hskrg89
+	 Ob0ziEVoLrRcw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF18D86F16; Mon, 16 Oct 2023 16:44:24 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id 0632E86B71; Mon, 16 Oct 2023 16:44:47 +0200 (CEST)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 039C186EFB
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:44:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F452863FD
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:44:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -38,22 +38,23 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4S8Kcy404Cz9sW7;
- Mon, 16 Oct 2023 16:44:18 +0200 (CEST)
-Message-ID: <a58f7c4a-1074-4d42-b1e5-9f8e22adda2e@denx.de>
-Date: Mon, 16 Oct 2023 16:44:18 +0200
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4S8KdR0w7Qz9sRy;
+ Mon, 16 Oct 2023 16:44:43 +0200 (CEST)
+Message-ID: <8fd3c8b9-0ff7-41b2-85b2-ed8df7a388cd@denx.de>
+Date: Mon, 16 Oct 2023 16:44:42 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: mvebu: Enable bootstd for Thecus N2350 board
+Subject: Re: [PATCH 1/2] arm: mvebu: clearfog: read number of ddr channels
+ from tlv data
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>
-References: <20231007220814.30783-1-mibodhi@gmail.com>
- <1e0e0b8a-eae0-43c9-b150-3ba911971645@denx.de>
-In-Reply-To: <1e0e0b8a-eae0-43c9-b150-3ba911971645@denx.de>
+To: Josua Mayer <josua@solid-run.com>, u-boot@lists.denx.de
+References: <20231008145804.25567-1-josua@solid-run.com>
+ <20231008145804.25567-2-josua@solid-run.com>
+ <da63f8b4-b57a-41ce-b581-10f377c3020f@denx.de>
+In-Reply-To: <da63f8b4-b57a-41ce-b581-10f377c3020f@denx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4S8Kcy404Cz9sW7
+X-Rspamd-Queue-Id: 4S8KdR0w7Qz9sRy
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,11 +71,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/16/23 10:31, Stefan Roese wrote:
-> On 10/8/23 00:08, Tony Dinh wrote:
->> Enable bootstd for Thecus N2350 board, and remove distroboot.
+On 10/16/23 11:00, Stefan Roese wrote:
+> On 10/8/23 16:58, Josua Mayer wrote:
+>> Extend the existing tlv vendor extension used for ram size by one byte to
+>> also store the number of ddr channels.
+>> The length of the tlv entry can indicate whether the new information is
+>> present. If not default to single channel.
 >>
->> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
+>> Signed-off-by: Josua Mayer <josua@solid-run.com>
 > 
 > Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -88,56 +92,75 @@ Stefan
 > Stefan
 > 
 >> ---
+>>   board/solidrun/clearfog/clearfog.c | 14 +++++++++++++-
+>>   board/solidrun/common/tlv_data.c   |  7 ++++++-
+>>   board/solidrun/common/tlv_data.h   |  1 +
+>>   3 files changed, 20 insertions(+), 2 deletions(-)
 >>
->>   configs/n2350_defconfig |  3 ++-
->>   include/configs/n2350.h | 12 +-----------
->>   2 files changed, 3 insertions(+), 12 deletions(-)
->>
->> diff --git a/configs/n2350_defconfig b/configs/n2350_defconfig
->> index 109f0e10e9..07135742d3 100644
->> --- a/configs/n2350_defconfig
->> +++ b/configs/n2350_defconfig
->> @@ -29,7 +29,8 @@ CONFIG_ENV_ADDR=0x100000
->>   CONFIG_PCI=y
->>   CONFIG_DEBUG_UART=y
->>   CONFIG_AHCI=y
->> -CONFIG_DISTRO_DEFAULTS=y
->> +CONFIG_BOOTSTD_FULL=y
->> +CONFIG_BOOTSTD_DEFAULTS=y
->>   CONFIG_BOOTDELAY=10
->>   CONFIG_USE_PREBOOT=y
->>   CONFIG_SYS_CONSOLE_INFO_QUIET=y
->> diff --git a/include/configs/n2350.h b/include/configs/n2350.h
->> index 92b2270236..d8a9814d3e 100644
->> --- a/include/configs/n2350.h
->> +++ b/include/configs/n2350.h
->> @@ -20,15 +20,8 @@
->>    */
->>   #include "mv-common.h"
->> -/* Include the common distro boot environment */
->>   #ifndef CONFIG_SPL_BUILD
->> -#define BOOT_TARGET_DEVICES(func) \
->> -    func(SCSI, scsi, 0) \
->> -    func(USB, usb, 0) \
->> -    func(PXE, pxe, na) \
->> -    func(DHCP, dhcp, na)
->> -
->>   #define KERNEL_ADDR_R    __stringify(0x1000000)
->>   #define FDT_ADDR_R    __stringify(0x2000000)
->>   #define RAMDISK_ADDR_R    __stringify(0x2200000)
->> @@ -42,14 +35,11 @@
->>       "scriptaddr=" SCRIPT_ADDR_R "\0" \
->>       "pxefile_addr_r=" PXEFILE_ADDR_R "\0"
->> -#include <config_distro_bootcmd.h>
->> -
->>   #define CFG_EXTRA_ENV_SETTINGS \
->>       RELOCATION_LIMITS_ENV_SETTINGS \
->>       LOAD_ADDRESS_ENV_SETTINGS \
->>       "fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
->> -    "console=ttyS0,115200\0" \
->> -    BOOTENV
->> +    "console=ttyS0,115200\0"
->>   #endif /* CONFIG_SPL_BUILD */
+>> diff --git a/board/solidrun/clearfog/clearfog.c 
+>> b/board/solidrun/clearfog/clearfog.c
+>> index 6edb4221551..4f4532b537e 100644
+>> --- a/board/solidrun/clearfog/clearfog.c
+>> +++ b/board/solidrun/clearfog/clearfog.c
+>> @@ -36,7 +36,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>>   #define BOARD_GPP_POL_LOW    0x0
+>>   #define BOARD_GPP_POL_MID    0x0
+>> -static struct tlv_data cf_tlv_data;
+>> +static struct tlv_data cf_tlv_data = { 0 };
+>>   static void cf_read_tlv_data(void)
+>>   {
+>> @@ -168,6 +168,18 @@ struct mv_ddr_topology_map 
+>> *mv_ddr_topology_map_get(void)
+>>           break;
+>>       }
+>> +    switch (cf_tlv_data.ram_channels) {
+>> +    default:
+>> +    case 1:
+>> +        for (uint8_t i = 0; i < 5; i++)
+>> +            ifp->as_bus_params[i].cs_bitmask = 0x1;
+>> +        break;
+>> +    case 2:
+>> +        for (uint8_t i = 0; i < 5; i++)
+>> +            ifp->as_bus_params[i].cs_bitmask = 0x3;
+>> +        break;
+>> +    }
+>> +
+>>       /* Return the board topology as defined in the board code */
+>>       return &board_topology_map;
+>>   }
+>> diff --git a/board/solidrun/common/tlv_data.c 
+>> b/board/solidrun/common/tlv_data.c
+>> index 11d6e4a1380..cf5824886c3 100644
+>> --- a/board/solidrun/common/tlv_data.c
+>> +++ b/board/solidrun/common/tlv_data.c
+>> @@ -45,9 +45,14 @@ static void parse_tlv_vendor_ext(struct tlvinfo_tlv 
+>> *tlv_entry,
+>>       if (val[4] != SR_TLV_CODE_RAM_SIZE)
+>>           return;
+>> -    if (tlv_entry->length != 6)
+>> +    if (tlv_entry->length < 6)
+>>           return;
+>>       td->ram_size = val[5];
+>> +
+>> +    /* extension with additional data field for number of ddr 
+>> channels */
+>> +    if (tlv_entry->length >= 7) {
+>> +        td->ram_channels = val[6];
+>> +    }
+>>   }
+>>   static void parse_tlv_data(u8 *eeprom, struct tlvinfo_header *hdr,
+>> diff --git a/board/solidrun/common/tlv_data.h 
+>> b/board/solidrun/common/tlv_data.h
+>> index a1432e4b8e1..be3f782ac4a 100644
+>> --- a/board/solidrun/common/tlv_data.h
+>> +++ b/board/solidrun/common/tlv_data.h
+>> @@ -10,6 +10,7 @@ struct tlv_data {
+>>       /* Store product name of both SOM and carrier */
+>>       char tlv_product_name[2][32];
+>>       unsigned int ram_size;
+>> +    uint8_t ram_channels;
+>>   };
+>>   void read_tlv_data(struct tlv_data *td);
 > 
 > Viele Grüße,
 > Stefan Roese
