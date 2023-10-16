@@ -4,58 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF0D6CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 11:51:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0AB5CDB483
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 11:51:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C8DB86D56;
-	Mon, 16 Oct 2023 13:51:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 079B986B1D;
+	Mon, 16 Oct 2023 13:51:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697457071;
-	bh=kXsRjQkKB+3yvVYjbyi0HLOZEYFjF5q38iAnsy75PFU=;
+	s=phobos-20191101; t=1697457073;
+	bh=DC0FtFFw6la7HwfVVErKwkVkJWAY22q90g0yW2uNG2s=;
 	h=From:To:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=Cf7/Tv00ODNRNwJbV9iDAcZDDKJt4q6qcz9PBiGjF7ajL4I5Yd/7gUXoyex9ib4d2
-	 qtWUGSJ0UpCs6nB9JsdqfpD4AkywGy4l30LJol6wuxJt4259wuWG89kqEIz/f0lnix
-	 XZsxgS/LwCsFylnXX00WlKsF5NVErtvnRQXZBEjbwOAa8GCNCMbbqUULVAUxjCv3TH
-	 5/zYEztYDP33E4pqNu6jDweks87yzyPmjoIx4VkSobZESU9d2TB51Y5Fp8eOkpC/nF
-	 8dBggcA7DcpVsKclv3AfHM2NnopPqpf+qEt9kXQ3OOvyjQyKRFqBZOdebVvuFrmTv+
-	 YZx5uAJ9pzHJA==
+	b=fzTbRdEzqr5K90QZFbSw6ZTMvPXJd7GsXezRb6f1zqqRofX1qwF6/TeIsnFHIIcx1
+	 AyK2yH1f3W8iEmmNgMerklB5quhdSBJ2Cj24hkWeMScpUBRWuRHAuiyK2JMzrmu95q
+	 hgZMBQvbwFaKGQEyRM6CGtsrJZwZA8tK5xYLDAUqQJKWMYuGwiV7UViZLyW+H2ivY+
+	 XVomk4lwFXzyPvPkrD15g/ap/b4iliTb855mApFdylOesucQxUxozyGZrOjSaaPRZI
+	 KLKcHJoophDWUW27xpqWPfMwsiwdQkk44yfAyCRyBlU2Nimp4y8hr6aN6eUmLIJcjH
+	 akqEMJoO3c8EA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A994B86BE0; Mon, 16 Oct 2023 13:51:07 +0200 (CEST)
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+ id 77E0E86CE3; Mon, 16 Oct 2023 13:51:10 +0200 (CEST)
+Received: from mail-out.m-online.net (mail-out.m-online.net
+ [IPv6:2001:a60:0:28:0:1:25:1])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7807980090
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 13:51:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A988A86BD3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 13:51:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sbabic@denx.de
 Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
- by mail-out.m-online.net (Postfix) with ESMTP id 4S8Fn36sYnz1r3wp;
- Mon, 16 Oct 2023 13:51:03 +0200 (CEST)
+ by mail-out.m-online.net (Postfix) with ESMTP id 4S8Fn75JRkz1sClr;
+ Mon, 16 Oct 2023 13:51:07 +0200 (CEST)
 Received: from localhost (dynscan1.mnet-online.de [192.168.6.68])
- by mail.m-online.net (Postfix) with ESMTP id 4S8Fn36mZQz1qqlS;
- Mon, 16 Oct 2023 13:51:03 +0200 (CEST)
+ by mail.m-online.net (Postfix) with ESMTP id 4S8Fn751s4z1qqlS;
+ Mon, 16 Oct 2023 13:51:07 +0200 (CEST)
 X-Amavis-Alert: BAD HEADER SECTION, Missing required header field: "Date"
 Received: from mail.mnet-online.de ([192.168.8.182])
  by localhost (dynscan1.mail.m-online.net [192.168.6.68]) (amavis, port 10024)
- with ESMTP id LIPnBgjGQvbh; Mon, 16 Oct 2023 13:51:03 +0200 (CEST)
+ with ESMTP id UaDqq7fj50vk; Mon, 16 Oct 2023 13:51:07 +0200 (CEST)
 Received: from papero (host-88-217-136-221.customer.m-online.net
  [88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
- Mon, 16 Oct 2023 13:51:03 +0200 (CEST)
+ Mon, 16 Oct 2023 13:51:07 +0200 (CEST)
 From: sbabic@denx.de
 X-Patchwork-Submitter: Teresa Remmet <t.remmet@phytec.de>
-X-Patchwork-Id: 1822209
+X-Patchwork-Id: 1822208
 X-Patchwork-Delegate: sbabic@denx.de
 To: Teresa Remmet <t.remmet@phytec.de>,u-boot@lists.denx.de
-Subject: [PATCH v2 4/6] board: phytec: phycore_imx8mp: Update 2GB RAM Timings
+Subject: [PATCH v2 3/6] board: phytec: phycore-imx8mp: Add EEPROM detection
+ initialisation
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 MIME-Version: 1.0
-Message-Id: <20231016115108.A994B86BE0@phobos.denx.de>
-Date: Mon, 16 Oct 2023 13:51:04 +0200 (CEST)
+Message-Id: <20231016115110.77E0E86CE3@phobos.denx.de>
+Date: Mon, 16 Oct 2023 13:51:08 +0200 (CEST)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,9 +74,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> Due to PCB layout constraints in PCB revisions until including 1549.2,
-> a RAM frequency of 2 GHz can cause rare instabilities. Set the RAM
-> frequency to 1.5 GHz to achieve a stable system under all conditions.
+> Add EEPROM detection initialisation for phyCORE-i.MX8MM and
+> print SoM information during boot when successful.
 > Signed-off-by: Teresa Remmet <t.remmet@phytec.de>
 > Reviewed-by: Yannic Moog <y.moog@phytec.de>
 > Tested-by: Yannic Moog <y.moog@phytec.de>
