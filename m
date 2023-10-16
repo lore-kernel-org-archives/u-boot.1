@@ -4,47 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEA68CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 16:16:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8ED58CDB482
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 16:16:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 425CA86E37;
-	Mon, 16 Oct 2023 18:16:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C209C86EDD;
+	Mon, 16 Oct 2023 18:16:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697473000;
-	bh=gFBHqIA5GCiMwGkXcptTyTt0vOSJgBNT5NfKpHR1YJw=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=fMdD2LQ2KKxaB8LqRXtGoDbpjfaj1v+M0LuNqn4ZWULZlvtjnT9CwqROPHQ1V96zC
-	 ZY4zRn4kXZ/Rp5hdWPk+EUMKBOKNlMICuV4qCySEchDHlOceBc4cG0d+lYXEZoAkbh
-	 KqNYSk9zqIdkI1e/q8akeWvg30fhgnjdJ5fW9g0aDv8zMJQ4XlkNB3TLb8z4Ta+qUd
-	 O2w/a2VvU5a7M9SuKJO/X5UZ5pEpheKDdfkcNtuwEsBZMB9rASVUNRA/Yvhcim8+D+
-	 oWaf+D1/DgpntU+ltxu0ZGoIstBUSyyjuPqy6LtB0UVQ/tLi6yM86fAPXFg8JXg7aO
-	 +j80TkHXd2PhA==
+	s=phobos-20191101; t=1697473001;
+	bh=cZ8NIS2tcPucmK0dq/VP+40NOO82nXr8MX3xV+N2G80=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=aEic79x+4cVO1OUlQo/iXlogBzkLGbSbYz1rccQsr7jusqt+WrXx7sonay0Ufw1FH
+	 +860uP7jWqHIA5mUi6KzbiiY9BKAZdII4b9NAxunCmadUCiVyxrEVwTigttT47GyK/
+	 LBWNGZgZivfmfKEBnkb0U6C7OwQGAIEz3RvkAmv7kWdlnxzdI0KXvhs3rSwQG14JBX
+	 0vw+sHbe1LwQfn2Kg+y88o62g07CsfGSqOUIJHQO2sLMVrozraOQq1z75tYNGS0GnH
+	 84u5Oj6xgo31i5tFYpWIvMM5DwR2jcg1hD3UXOGMvqSnk06tMVQ1XQ1yaFXYCPrvLZ
+	 PVy9hq1Y5Zwtg==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6DE4886C26;
- Mon, 16 Oct 2023 18:16:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8E4FE86C68;
+ Mon, 16 Oct 2023 18:16:37 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697472997;
- bh=gFBHqIA5GCiMwGkXcptTyTt0vOSJgBNT5NfKpHR1YJw=;
- h=From:To:Cc:Subject:Date:From;
- b=UssJKgrReJ9QUMjclyKILS0njMla/weARttZxPjh2C2Dop5hokemucmPDK7pcraaZ
- eu+pziQwhUcOeziO4U203opFAJtK4chN5rYhpPT/jFsXf6xoq9AJVgX3e9TXay7pCD
- W5MKZfJGQmCxiYV3x6fMlSsoijStDNWLJUuaF3c1cx+nwABEJ0BNFCnITwD0p0TYdd
- gqLJlKBQfPr737bjDJaf1Ob975z9Wb+wn/aT+WXDPzyXtw0xBolH2Zh9MI5w4XUmp3
- QMdlbgx467jAFkCYTDpEyIffCnjIQyH23su6gRLlFPyLa3A0dIK8mvRILnnCaq7shA
- WCHpqmi7y67OQ==
+ s=phobos-20191101; t=1697472999;
+ bh=cZ8NIS2tcPucmK0dq/VP+40NOO82nXr8MX3xV+N2G80=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=q9iBCwloQNCtEW3QPEykVlfYcyxOHPGN7wlMjHNFQsIR6oMJiLwp93med50Foa8q4
+ rhrTVTRPJ/gHwd8Hs335/QvEQgmN4azTLz7KYpGYc88Nf6uJi3wrqteziSIBIzKhLb
+ 3GQdhWLklcyIgcbEb5gO7Sp+X+tK1Sm7O/fFAQAitX0nU2d590UZpbEE6Oyi6IDgc2
+ 5RbUOkjKqaXLegTwrhqft18hhJpMPDd45GYQpX07NLce3F4OsVxwTBrnGfWPA9p2pS
+ Egvc+cgeqK7ytX1BQb1sUYCTMj59vc4VNJootH7ZciK/nlsGDREQW23SLhK29gpD/u
+ C5rKRECwIHxvA==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+Cc: Fedor Ross <fedor.ross@ifm.com>, Marek Vasut <marex@denx.de>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
  Andre Przywara <andre.przywara@arm.com>,
  Chanho Park <chanho61.park@samsung.com>, Elena Popa <elena.popa@nxp.com>,
- Fabio Estevam <festevam@gmail.com>, Fedor Ross <fedor.ross@ifm.com>,
+ Fabio Estevam <festevam@gmail.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Hugo Villeneuve <hvilleneuve@dimonoff.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
@@ -55,11 +57,12 @@ Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Qu Wenruo <wqu@suse.com>, Roger Quadros <rogerq@kernel.org>,
  Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
  Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v2 1/4] spl: mmc: Introduce proper layering for
- spl_mmc_get_uboot_raw_sector()
-Date: Mon, 16 Oct 2023 18:16:12 +0200
-Message-ID: <20231016161619.50744-1-marex@denx.de>
+Subject: [PATCH v2 2/4] ARM: imx: Factor out parsing of ROM log
+Date: Mon, 16 Oct 2023 18:16:13 +0200
+Message-ID: <20231016161619.50744-2-marex@denx.de>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231016161619.50744-1-marex@denx.de>
+References: <20231016161619.50744-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -78,19 +81,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce two new weak functions, arch_spl_mmc_get_uboot_raw_sector() and
-board_spl_mmc_get_uboot_raw_sector(), each of which can be overridden at
-a matching level, that is arch/ and board/ , in addition to the existing
-weak function spl_mmc_get_uboot_raw_sector().
+From: Fedor Ross <fedor.ross@ifm.com>
 
-This way, architecture code can define a default architecture specific
-implementation of arch_spl_mmc_get_uboot_raw_sector(), while the board
-code can override that using board_spl_mmc_get_uboot_raw_sector() which
-takes precedence over the architecture code. In some sort of unlikely
-special case where code has to take precedence over board code too, the
-spl_mmc_get_uboot_raw_sector() is still left out to be a weak function,
-but it should be unlikely that this is ever needed to be overridden.
+Factor out parsing of ROM log in function spl_mmc_emmc_boot_partition().
+This can be helpful to detect a secondary image boot without fiddling
+around with MMC partitions. This way for example, U-Boot is able to
+detect a secondary image boot and can enter some fallback scenario like
+starting a recovery mode.
 
+Signed-off-by: Fedor Ross <fedor.ross@ifm.com>
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
 Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
@@ -115,167 +114,105 @@ Cc: Stefan Roese <sr@denx.de>
 Cc: Stefano Babic <sbabic@denx.de>
 Cc: Tim Harvey <tharvey@gateworks.com>
 ---
-V2: New patch
+V2: No change
 ---
- arch/arm/mach-imx/image-container.c           |  4 +--
- arch/arm/mach-mvebu/spl.c                     |  4 +--
- arch/arm/mach-sunxi/board.c                   |  4 +--
- .../imx8mp_rsb3720a1/imx8mp_rsb3720a1.c       |  2 +-
- board/data_modul/imx8mp_edm_sbc/spl.c         |  2 +-
- board/gateworks/venice/spl.c                  |  2 +-
- common/spl/spl_mmc.c                          | 14 +++++++++-
- include/spl.h                                 | 26 +++++++++++++++++++
- 8 files changed, 48 insertions(+), 10 deletions(-)
+ arch/arm/mach-imx/imx8m/soc.c | 55 +++++++++++++++++++++++------------
+ 1 file changed, 37 insertions(+), 18 deletions(-)
 
-diff --git a/arch/arm/mach-imx/image-container.c b/arch/arm/mach-imx/image-container.c
-index 5f188ab32d1..0285bbdaf20 100644
---- a/arch/arm/mach-imx/image-container.c
-+++ b/arch/arm/mach-imx/image-container.c
-@@ -276,8 +276,8 @@ unsigned long spl_spi_get_uboot_offs(struct spi_flash *flash)
- #endif
+diff --git a/arch/arm/mach-imx/imx8m/soc.c b/arch/arm/mach-imx/imx8m/soc.c
+index fc829588ce8..930ee5f59f9 100644
+--- a/arch/arm/mach-imx/imx8m/soc.c
++++ b/arch/arm/mach-imx/imx8m/soc.c
+@@ -648,19 +648,17 @@ struct rom_api *g_rom_api = (struct rom_api *)0x980;
  
- #ifdef CONFIG_SPL_MMC
--unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
--					   unsigned long raw_sect)
-+unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						unsigned long raw_sect)
+ #if defined(CONFIG_IMX8M)
+ #include <spl.h>
+-int spl_mmc_emmc_boot_partition(struct mmc *mmc)
++int imx8m_detect_secondary_image_boot(void)
  {
- 	int end;
+ 	u32 *rom_log_addr = (u32 *)0x9e0;
+ 	u32 *rom_log;
+ 	u8 event_id;
+-	int i, part;
+-
+-	part = default_spl_mmc_emmc_boot_partition(mmc);
++	int i, boot_secondary = 0;
  
-diff --git a/arch/arm/mach-mvebu/spl.c b/arch/arm/mach-mvebu/spl.c
-index 379daa88a4d..eaaa68a8564 100644
---- a/arch/arm/mach-mvebu/spl.c
-+++ b/arch/arm/mach-mvebu/spl.c
-@@ -123,8 +123,8 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- {
- 	return IS_SD(mmc) ? MMCSD_MODE_RAW : MMCSD_MODE_EMMCBOOT;
- }
--unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
--					   unsigned long raw_sect)
-+unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						unsigned long raw_sect)
- {
- 	return IS_SD(mmc) ? 1 : 0;
- }
-diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-index 78597ad932c..61a4245c499 100644
---- a/arch/arm/mach-sunxi/board.c
-+++ b/arch/arm/mach-sunxi/board.c
-@@ -323,8 +323,8 @@ uint32_t sunxi_get_spl_size(void)
-  * Also U-Boot proper is located at least 32KB after the SPL, but will
-  * immediately follow the SPL if that is bigger than that.
-  */
--unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
--					   unsigned long raw_sect)
-+unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						 unsigned long raw_sect)
- {
- 	unsigned long spl_size = sunxi_get_spl_size();
- 	unsigned long sector;
-diff --git a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-index b79a2380aa5..d87fe3606f6 100644
---- a/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-+++ b/board/advantech/imx8mp_rsb3720a1/imx8mp_rsb3720a1.c
-@@ -193,7 +193,7 @@ int board_late_init(void)
+ 	/* If the ROM event log pointer is not valid. */
+ 	if (*rom_log_addr < 0x900000 || *rom_log_addr >= 0xb00000 ||
+ 	    *rom_log_addr & 0x3)
+-		return part;
++		return -EINVAL;
  
- #ifdef CONFIG_SPL_MMC
- #define UBOOT_RAW_SECTOR_OFFSET 0x40
--unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
- 					   unsigned long raw_sector)
- {
- 	u32 boot_dev = spl_boot_device();
-diff --git a/board/data_modul/imx8mp_edm_sbc/spl.c b/board/data_modul/imx8mp_edm_sbc/spl.c
-index 2fdd95a730c..cfc4b65e0f9 100644
---- a/board/data_modul/imx8mp_edm_sbc/spl.c
-+++ b/board/data_modul/imx8mp_edm_sbc/spl.c
-@@ -107,7 +107,7 @@ void board_boot_order(u32 *spl_boot_list)
- 	spl_boot_list[4] = BOOT_DEVICE_NONE;
- }
- 
--unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long sect)
-+unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long sect)
- {
- 	const u32 boot_dev = spl_boot_device();
- 	int part;
-diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
-index 774a99041c8..4851dc1c53f 100644
---- a/board/gateworks/venice/spl.c
-+++ b/board/gateworks/venice/spl.c
-@@ -346,7 +346,7 @@ int spl_board_boot_device(enum boot_device boot_dev_spl)
+ 	/* Parse the ROM event ID version 2 log */
+ 	rom_log = (u32 *)(uintptr_t)(*rom_log_addr);
+@@ -668,7 +666,7 @@ int spl_mmc_emmc_boot_partition(struct mmc *mmc)
+ 		event_id = rom_log[i] >> 24;
+ 		switch (event_id) {
+ 		case 0x00: /* End of list */
+-			return part;
++			return boot_secondary;
+ 		/* Log entries with 1 parameter, skip 1 */
+ 		case 0x80: /* Start to perform the device initialization */
+ 		case 0x81: /* The boot device initialization completes */
+@@ -686,24 +684,45 @@ int spl_mmc_emmc_boot_partition(struct mmc *mmc)
+ 			continue;
+ 		/* Boot from the secondary boot image */
+ 		case 0x51:
+-			/*
+-			 * Swap the eMMC boot partitions in case there was a
+-			 * fallback event (i.e. primary image was corrupted
+-			 * and that corruption was recognized by the BootROM),
+-			 * so the SPL loads the rest of the U-Boot from the
+-			 * correct eMMC boot partition, since the BootROM
+-			 * leaves the boot partition set to the corrupted one.
+-			 */
+-			if (part == 1)
+-				part = 2;
+-			else if (part == 2)
+-				part = 1;
++			boot_secondary = 1;
+ 			continue;
+ 		default:
+ 			continue;
+ 		}
  	}
- }
  
--unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long raw_sect)
-+unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long raw_sect)
- {
- 	if (!IS_SD(mmc)) {
- 		switch (EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config)) {
-diff --git a/common/spl/spl_mmc.c b/common/spl/spl_mmc.c
-index 0ab85d2168c..612b11ef5b9 100644
---- a/common/spl/spl_mmc.c
-+++ b/common/spl/spl_mmc.c
-@@ -361,10 +361,22 @@ int __weak spl_mmc_boot_partition(const u32 boot_device)
++	return boot_secondary;
++}
++
++int spl_mmc_emmc_boot_partition(struct mmc *mmc)
++{
++	int part, ret;
++
++	part = default_spl_mmc_emmc_boot_partition(mmc);
++	if (part == 0)
++		return part;
++
++	ret = imx8m_detect_secondary_image_boot();
++	if (ret < 0) {
++		printf("Could not get boot partition! Using %d\n", part);
++		return part;
++	}
++
++	if (ret == 1) {
++		/*
++		 * Swap the eMMC boot partitions in case there was a
++		 * fallback event (i.e. primary image was corrupted
++		 * and that corruption was recognized by the BootROM),
++		 * so the SPL loads the rest of the U-Boot from the
++		 * correct eMMC boot partition, since the BootROM
++		 * leaves the boot partition set to the corrupted one.
++		 */
++		if (part == 1)
++			part = 2;
++		else if (part == 2)
++			part = 1;
++	}
++
+ 	return part;
  }
  #endif
- 
-+unsigned long __weak arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						       unsigned long raw_sect)
-+{
-+	return raw_sect;
-+}
-+
-+unsigned long __weak board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						  unsigned long raw_sect)
-+{
-+	return arch_spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
-+}
-+
- unsigned long __weak spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
- 						  unsigned long raw_sect)
- {
--	return raw_sect;
-+	return board_spl_mmc_get_uboot_raw_sector(mmc, raw_sect);
- }
- 
- int default_spl_mmc_emmc_boot_partition(struct mmc *mmc)
-diff --git a/include/spl.h b/include/spl.h
-index 7d30fb57dac..7ff1518f55c 100644
---- a/include/spl.h
-+++ b/include/spl.h
-@@ -486,6 +486,32 @@ int spl_mmc_emmc_boot_partition(struct mmc *mmc);
- 
- void spl_set_bd(void);
- 
-+/**
-+ * spl_mmc_get_uboot_raw_sector() - Provide raw sector of the start of U-Boot (architecture override)
-+ *
-+ * This is a weak function which by default will provide the raw sector that is
-+ * where the start of the U-Boot image has been written to.
-+ *
-+ * @mmc: struct mmc that describes the devie where U-Boot resides
-+ * @raw_sect: The raw sector number where U-Boot is by default.
-+ * Return: The raw sector location that U-Boot resides at
-+ */
-+unsigned long arch_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						unsigned long raw_sect);
-+
-+/**
-+ * spl_mmc_get_uboot_raw_sector() - Provide raw sector of the start of U-Boot (board override)
-+ *
-+ * This is a weak function which by default will provide the raw sector that is
-+ * where the start of the U-Boot image has been written to.
-+ *
-+ * @mmc: struct mmc that describes the devie where U-Boot resides
-+ * @raw_sect: The raw sector number where U-Boot is by default.
-+ * Return: The raw sector location that U-Boot resides at
-+ */
-+unsigned long board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
-+						 unsigned long raw_sect);
-+
- /**
-  * spl_mmc_get_uboot_raw_sector() - Provide raw sector of the start of U-Boot
-  *
 -- 
 2.42.0
 
