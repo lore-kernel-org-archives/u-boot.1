@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E471CDB482
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 21:55:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF4E9CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 21:55:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 86CA286E16;
-	Mon, 16 Oct 2023 23:55:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E760686DEC;
+	Mon, 16 Oct 2023 23:55:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d1oOMvMf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D/8QuEth";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC65185423; Mon, 16 Oct 2023 23:54:57 +0200 (CEST)
-Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
- [IPv6:2a00:1450:4864:20::52e])
+ id 1405C86DF5; Mon, 16 Oct 2023 23:55:03 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F3ED868C0
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 23:54:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AFEB186D18
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 23:55:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52e.google.com with SMTP id
- 4fb4d7f45d1cf-53dd3f169d8so8521884a12.3
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:54:56 -0700 (PDT)
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2c50fbc218bso37470081fa.3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:55:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697493295; x=1698098095; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697493300; x=1698098100; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=UwoENVq1Stkme0zA0e2LXckG1W94d5TwYu4Du5g4+NY=;
- b=d1oOMvMfVH5MIvK2AtIjCWLsXlJMOdKbeygCu63B2Epd9KWqyYl5dEIKQmAqKk9OZD
- T5dvh1Li0QMVu7UOYCymUcQyZVoQU/iMDs1QkaTiesSTV+X2nCV6O94WM/E/DyUx6wBV
- bLgszPxYcFVGycNQPCpv04OKc6vFmuDLaKbOM=
+ bh=C0xz2tzwX3CiIRNNpCZxgz1SaiPQj7pjqviAVLTiMh0=;
+ b=D/8QuEthdrjcAVflN//GHSPTJox77LGoBk+Qrqf2ipNz0SLMl26BJllT13VTkXW7MK
+ RGkUq4UX832eYa28ARa3Kq2K6J6+SzvLAINSA70ik+yjtioODfEkKsw4CMBYUyGiSsib
+ 7nDsJnyL/D8A85wkkdaZwEsA25KIE5ZQRPS28=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697493295; x=1698098095;
+ d=1e100.net; s=20230601; t=1697493300; x=1698098100;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=UwoENVq1Stkme0zA0e2LXckG1W94d5TwYu4Du5g4+NY=;
- b=GXqFz19eheGMwE8BDMymlCmltI77IPxpTggsHn8DGCKn3X/Kx7eOBloPc1bLZ0xRIl
- +r5uyHNSQBjfyXAKdd7h/VDUzjv52BLaas9zotFFO3tx35iREChTarriqSko11CpWR66
- nWMXp6y2nP6Ex8cK/Vodpp20MgbJ4PYjeJTj+6n1NCGGKuwsCZhHu3ibTPxf2XgAbh6N
- OZYVXK9DTqOa2Xa6UhiDbPKLvwjbcXi7qLZlR3WXrZYDRX/gO6ZgC4P2hhsnN8PS4bqW
- ZeYJiJ5H+xgKUm22u6Pc5mixMQyS8z2LOvtHICZbvPSVBfuI6E64VYjrjOy27Q5NdtFG
- 4BEw==
-X-Gm-Message-State: AOJu0YyDHMetIWmqTa7bMtlUJGbvtjPeboWhjrLTmTg9S+LOmAvS9w2D
- YK9xAe37IcmnZ+pNDIBHnTsBx+WbV9KbxuV2uVE5ew==
-X-Google-Smtp-Source: AGHT+IFchksVmpLV34Tp8S/I5r7tZ6TqYpxCucFJqdRkWqpZ/jjVHYh+SkVB65CUyWFbTTIydXKEtF0vA44y+XwFrbk=
-X-Received: by 2002:a05:6402:26c4:b0:53d:ed7a:11f2 with SMTP id
- x4-20020a05640226c400b0053ded7a11f2mr444199edd.38.1697493295383; Mon, 16 Oct
- 2023 14:54:55 -0700 (PDT)
+ bh=C0xz2tzwX3CiIRNNpCZxgz1SaiPQj7pjqviAVLTiMh0=;
+ b=aTCQcN4K7e40j51PDDNxtDeKO9rBOX1InSXnuKTPt4htG37N1OL2XBbTmJQ7sFb+jg
+ lFWKPDHRvailIlT9ysBzLwgZpzn0ltvPnCvQ1lriaQnfZEYxoRxU6yK/bnZUam2rCHdu
+ 0cf5b9PNStMeJ/BP5mI5zaTsdO+b/PrE56fxPvubPaRDIB4hXaymIy4TtMIFqFK5DrXu
+ G7Ss2lPjYKsZokI43LutYzCoLLIzoaOrF/0fHuvQVCpYI/9fxuBaLVD7I468Nz9Lridk
+ eftBiVZX7k3ZTR4lvWfVHeX+TBl60somIZV+kokAuER4NC/DdGqN26SblSOXge4KXpUz
+ zaSg==
+X-Gm-Message-State: AOJu0Yyaz3reAx5rt/BKUefUf5CHLz68D/OiST1cuOAkoK28JG+zaR5Z
+ errCfjGXvMoj10agsqHu0EQxrdTP5FuUv/5As6jy1g==
+X-Google-Smtp-Source: AGHT+IHreGF89jGtyvhDGGKHKIvFey1Qk1HfMAPmDQsc5v1rzv0NoFG/h+L9Pxk9zFOO0WeFHkSc4vdTaSJ/w7+tHGM=
+X-Received: by 2002:a19:5055:0:b0:503:95b:db0a with SMTP id
+ z21-20020a195055000000b00503095bdb0amr448628lfj.12.1697493299639; Mon, 16 Oct
+ 2023 14:54:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <8c0f5bb6-0110-b7b5-3c40-2d8d98a94dfa@gmail.com>
- <abd6a9d8-7e38-a48a-b298-08f19444b5fe@gmail.com>
-In-Reply-To: <abd6a9d8-7e38-a48a-b298-08f19444b5fe@gmail.com>
+References: <20231002152142.76516-1-detlev.casanova@collabora.com>
+ <20231002152142.76516-3-detlev.casanova@collabora.com>
+ <CAPnjgZ1s3OP6cq94qLF3mzkK6YwrjEFc91LOiUQWadj0NBZSqA@mail.gmail.com>
+ <12366510.O9o76ZdvQC@arisu>
+In-Reply-To: <12366510.O9o76ZdvQC@arisu>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 16 Oct 2023 15:54:43 -0600
-Message-ID: <CAPnjgZ2mW8V29sxzxB=JeCXkqPiD0A-jFa-78WZi+Nv5HyJhvw@mail.gmail.com>
-Subject: Re: [PATCH v4 2/8] rockchip: dm: prepare rkmtd UCLASS
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, 
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com, 
- u-boot@lists.denx.de
+Date: Mon, 16 Oct 2023 15:54:47 -0600
+Message-ID: <CAPnjgZ0Aa9Rw2gPuwYMnWTaPPpZvzusa_48emJgfXX9BDKK78w@mail.gmail.com>
+Subject: Re: [PATCH v5 2/6] cmd: Add a sysinfo command
+To: Detlev Casanova <detlev.casanova@collabora.com>
+Cc: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Hai Pham <hai.pham.ud@renesas.com>, Tam Nguyen <tam.nguyen.xa@renesas.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,17 +84,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 15 Oct 2023 at 16:32, Johan Jonker <jbx6244@gmail.com> wrote:
->
-> Prepare a rkmtd UCLASS in use for writing Rockchip boot blocks
-> in combination with existing userspace tools and rockusb command.
->
-> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-> ---
->  disk/part.c                | 4 ++++
->  drivers/block/blk-uclass.c | 1 +
->  include/dm/uclass-id.h     | 1 +
->  3 files changed, 6 insertions(+)
+Hi Detlev,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Mon, 16 Oct 2023 at 08:21, Detlev Casanova
+<detlev.casanova@collabora.com> wrote:
+>
+> On Monday, October 2, 2023 2:56:28 P.M. EDT Simon Glass wrote:
+> > On Mon, 2 Oct 2023 at 09:21, Detlev Casanova
+> >
+> > <detlev.casanova@collabora.com> wrote:
+> > > The command is able to show different information for the running
+> > > system:
+> > > * Model name
+> > > * Board ID
+> > > * Revision
+> > >
+> > > This command can be used by boot shell scripts to select configurations
+> > > depending on the specific running system.
+> > >
+> > > Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> > > Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
+> > > ---
+> > >
+> > >  cmd/Kconfig   |   6 +++
+> > >  cmd/Makefile  |   1 +
+> > >  cmd/sysinfo.c | 133 ++++++++++++++++++++++++++++++++++++++++++++++++++
+> > >  3 files changed, 140 insertions(+)
+> > >  create mode 100644 cmd/sysinfo.c
+> >
+> > Reviewed-by: Simon Glass <sjg@chromium.org>
+> >
+> > Would prefer more help text in the Kconfig as this is pretty vague
+>
+> Indeed, how would that sound ?
+>
+> Display information to identify the system. It supports showing a board id, a
+> revision number as well as a human readable name.
+
+Also it uses the sysinfo driver for your board to get the information.
+You could link to the sysinfo docs or header file.
+
+Regards,
+Simon
