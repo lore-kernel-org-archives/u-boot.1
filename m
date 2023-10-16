@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65BB7CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 21:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6E9CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 21:54:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E4D686EED;
-	Mon, 16 Oct 2023 23:33:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0312C8669F;
+	Mon, 16 Oct 2023 23:54:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZNa62JQT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VdK01hvu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 69DEB86C2D; Mon, 16 Oct 2023 23:32:59 +0200 (CEST)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id B6B9E86B97; Mon, 16 Oct 2023 23:54:25 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47BDD86A3C
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 23:32:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C5C9868C0
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 23:54:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-d9ac31cb051so5334093276.3
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:32:53 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-53d9f001b35so8687372a12.2
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 14:54:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697491971; x=1698096771; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zo2TKSTBwmXnvf0PRhKWijFvi/rfDBgNrupVVM74Tf8=;
- b=ZNa62JQT31NsPqBYYUgIjyfHZgexVrny92Jo+kFDz+NFt+EANFPB2luZ9Y9cQH0jzo
- Ib6RL3HFM3XU7zTqZbrEfDlRv0G1iMn+DAcpqiUhsj9cEIoTukV12h5DZ4WRwO6Kfoae
- 3uP3oqTCAymV6VL/rafUDkyeDKLmoWPeEXd/Q=
+ d=chromium.org; s=google; t=1697493262; x=1698098062; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sFyszUAKH1Bi59GLrKaH1xZ412ynyNyWfhIyPM619dM=;
+ b=VdK01hvuJ+9EGpawmKPvivrUe1HiUNVSqBkUS1m3ttwNLpbkC0yctUwAQ/nZlscMEu
+ kJKQrqWKUgeDZIm5sMcvyesxXBH1M8CWsB6ZjpbWhTTR4wx52wsxpIePQUQf55o/jik/
+ jzrgYuu+k8RrECvL5VJqRUE+vu5ps7Ut/5OMg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697491971; x=1698096771;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zo2TKSTBwmXnvf0PRhKWijFvi/rfDBgNrupVVM74Tf8=;
- b=ihuvPnu7jYnxq3FL4x4jIGfMqlyJX4oDy7bCMOISzryGiwXKbtI93g1UPZjv6lRv2Q
- CGvkfk8vaC7OCmjM+BpWrjPxwXyN3S1nbECLK+DYCPOSTVaSWvcyp5nK2TS21ClbgylH
- 5a5aVxui4kYlVc/A37PPQpObwpkUq4f7RBUD4531yDdRgfRLKx9YPv74eg2CMGM9Oj1P
- MHppiFpFdnvUJGigJADmhp6Ix8wnu9kLtseZ5eA3hHIpclhh493JotPRTQzluzCIasmO
- tPQpQHrPW2LmV3+ddACreuN2Ru9NYZq++Tj3pP2eIdNqQ6cXor/1vw0hx6xuM+5fguah
- GFCw==
-X-Gm-Message-State: AOJu0YyzExsyg709+nZYfQUCbqEjT7oaUUCKj8Z+Hm4YJGQOAFAhyo2Q
- NOhM9T6e5yKXaMyJV4O0oxnRbQ==
-X-Google-Smtp-Source: AGHT+IEHKiz01nZC+Frz5WRW/D4kLWvqVeEXyQoiulJ8eCe172AdyUQKVdMPoeHImgH6rLdoQ9FTwg==
-X-Received: by 2002:a25:cbd0:0:b0:d9a:e337:b6a with SMTP id
- b199-20020a25cbd0000000b00d9ae3370b6amr247963ybg.61.1697491971371; 
- Mon, 16 Oct 2023 14:32:51 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- x17-20020a5b0f11000000b00d9abce6acf2sm3458ybr.59.2023.10.16.14.32.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 14:32:49 -0700 (PDT)
-Date: Mon, 16 Oct 2023 17:32:48 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Stefan Roese <sr@denx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: Please pull u-boot-marvell/master
-Message-ID: <20231016213248.GQ3119521@bill-the-cat>
-References: <ddd355c2-344e-4fbd-ace9-29d10f3966d3@denx.de>
+ d=1e100.net; s=20230601; t=1697493262; x=1698098062;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sFyszUAKH1Bi59GLrKaH1xZ412ynyNyWfhIyPM619dM=;
+ b=b28j6oi8WUVzBh9oRN9xzI+GXtUJbmaXTteCGTh90KMdkYYIWto1bRBmlTKIzUtZP7
+ SXkH5+hEEwzU2NRR3o8Z6aNCQXXRo8qHJBffdk9OmtCQKQG4XOwzZay697Aan3gRjuR/
+ hSqAbaTWi1lKq437uMbR2fOlfqA5m1XWrsza7AIhxLIFt7DhaQyYJMtUWSBECWW8K0cw
+ fNnsuBKvJAS67Jy6RL0VOBNv+i3xD27MgIA426Z6b9uNUp1gpy1Kh6JDa82ZKC9/isHG
+ FTORO/zynn+Mljmn1w4P0kDjUM5A3D0VFCEYfjYRf+/R2evoyfIVUGwM8DHIVM4bMRqF
+ UkBQ==
+X-Gm-Message-State: AOJu0Yz4X9f9dCJ8KXfWn7+Kq+ABNcRQOj+Ipw3pe9whw0FUv/WLZwJf
+ XwXP9VAF6q1Cprl2NipgKl8e90DI//0AHzBrmKh0tw==
+X-Google-Smtp-Source: AGHT+IGZoGGJeNshHE+uBukBw1GOLWeEgu2vwWq8BjnV21H2X6/a8NzxZphGstDjGzZP8Yp311u7fu7RX+UlFVrwkP0=
+X-Received: by 2002:a05:6402:34d3:b0:53e:467c:33f1 with SMTP id
+ w19-20020a05640234d300b0053e467c33f1mr440773edc.8.1697493262341; Mon, 16 Oct
+ 2023 14:54:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="wVo4xUuL79izNmSd"
-Content-Disposition: inline
-In-Reply-To: <ddd355c2-344e-4fbd-ace9-29d10f3966d3@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20230926194242.2732127-1-sjg@chromium.org>
+ <20231016195728.GA3574754-robh@kernel.org>
+In-Reply-To: <20231016195728.GA3574754-robh@kernel.org>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 16 Oct 2023 15:54:10 -0600
+Message-ID: <CAPnjgZ3xo6Rz8dGe+UtNxv9O96sbaphx0DYkKcRNd1m2nozQ3A@mail.gmail.com>
+Subject: Re: [PATCH v7 1/2] schemas: memory: Add ECC properties
+To: Rob Herring <robh@kernel.org>
+Cc: devicetree@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>, 
+ Lean Sheng Tan <sheng.tan@9elements.com>, lkml <linux-kernel@vger.kernel.org>, 
+ Dhaval Sharma <dhaval@rivosinc.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>, 
+ Yunhui Cui <cuiyunhui@bytedance.com>, Guo Dong <guo.dong@intel.com>, 
+ Tom Rini <trini@konsulko.com>, ron minnich <rminnich@gmail.com>,
+ Gua Guo <gua.guo@intel.com>, 
+ Chiu Chasel <chasel.chiu@intel.com>, linux-acpi@vger.kernel.org, 
+ U-Boot Mailing List <u-boot@lists.denx.de>, Ard Biesheuvel <ardb@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,40 +89,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Rob,
 
---wVo4xUuL79izNmSd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 16 Oct 2023 at 13:57, Rob Herring <robh@kernel.org> wrote:
+>
+> On Tue, Sep 26, 2023 at 01:42:38PM -0600, Simon Glass wrote:
+> > Some memories provide ECC detection and/or correction. For software which
+> > wants to check memory, it is helpful to see which regions provide this
+> > feature.
+> >
+> > Add this as a property of the /memory nodes, since it presumably follows
+> > the hardware-level memory system.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v7:
+> > - Drop unnecessary |
+> > - Add a blank line between properties
+> >
+> > Changes in v6:
+> > - Use a number of bits instead of a string property
+> > - Fix inidcates typo
+> >
+> > Changes in v5:
+> > - Redo to make this property specific to ECC
+> > - Provide properties both for detection and correction
+> >
+> > Changes in v3:
+> > - Add new patch to update the /memory nodes
+> >
+> >  dtschema/schemas/memory.yaml | 13 +++++++++++++
+> >  1 file changed, 13 insertions(+)
+>
+> Applied this patch.
 
-On Mon, Oct 16, 2023 at 04:50:26PM +0200, Stefan Roese wrote:
+Thank you for your help and guidance on this.
 
-> Hi Tom,
->=20
-> please pull this first batch of Marvell related patches:
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---wVo4xUuL79izNmSd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUtrAAACgkQFHw5/5Y0
-tyxxjwwAtHXpHf7ww3c6rVm7CsPlmrucAyGjRsErmAEW/22jX5dYSkvBy+D2I0Lw
-WWxw/wItrycRha/dI9ZyxHIlvNJWsXPuwQg5dZGXkfgKT7KK5XwYbpAivUaBkrte
-kvoKkpIeHftWSo4kIWkeHNlKCABipvR6cGEHGM7v/t9OE5o8i7N/nM5ClLvk7W6p
-LAWmNB8pKkNBeciAyUOzIFXBRLeXZvTfOqOA+FRmT4Q6sezxoqG8BILUAXDE8qzE
-HFyA3tsynoBGaTiu2Cs+MySUGMTglTOwKzvheEskRX0ZIAdXjLIOSGU26CSZvc/J
-GxMewA8HcRddhxY7eS+ldK+xZ86r10PiZqD5TKeaeHtXmcj2DMxNJL7pkGwIK549
-rkSMuHSJjFeA6mLEoe+PZ14nhuKJxQz4sGCTuI9DN1J4RoxphqbNoLL4INresRS8
-CCNvaVH6BOwObxxdzAI9Pdcp9YXSelIM9YZ6/WvJ1sSqt+90IqRXgBG3tmq8sZ/r
-ZR77Dwc7
-=Rhvy
------END PGP SIGNATURE-----
-
---wVo4xUuL79izNmSd--
+Regards,
+Simon
