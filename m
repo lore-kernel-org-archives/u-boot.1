@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92901CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 08:32:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F48CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 08:32:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1585865D0;
-	Mon, 16 Oct 2023 10:31:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48A5E868AE;
+	Mon, 16 Oct 2023 10:32:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697445118;
-	bh=ilKhawlNrxvD5eyCbrnl170hsbf7q0E87lkfgCk+utU=;
+	s=phobos-20191101; t=1697445147;
+	bh=pob0tD67XmMONeDdbAkWAZWa+N0faYDXGS9Zqrte2mQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=JfDCGqbDzcJCHGoYO7wNf5+klm8qQ5lZx4FOzZsWxrdQy5e0s1GgLn3ing4SiTYtf
-	 OfqMHP9I2JeRPGmme+0SmaxmjKnPUmht1YuxhoA/d2mJ+XgkGJDfj6JZePhc9fxloH
-	 6yxlH0dDrazhfuNOezwuF+3LDQeebrItZA6ng7aT23JV5TdEBXmw6AISfgxy4oqPjd
-	 7zUblfQxJOVqOkxadKPzKFcX9AOb8M0OmoDWVs5iAgoiWQDsEbMdBlYPq1Hzz7vAK+
-	 csInjJ7EwUdUEX8aCh9ti2Qzjf4chqzmcJYyqggAZrszGCo/e3WMc8Awc1L2A6bM0l
-	 8q9Eo77F0Zgzg==
+	b=KEAuwbh17iAz5RG+5fYb4e97T9anf8yKi9culEtSqzoLiwKUy2GyTWDuRLuzAoOdk
+	 UHDDMfeuUGwXZ7BJwFOEjw+Ba18p1iFFvwmW1WxK4wd6rpotilPc3UdEVMr3twCohD
+	 XZn1eQPGpgtuXVYFktE3v4ME3o7oHGKKTLk5hF4znyG9Nv7/ViorVv3cqshaNCqOcP
+	 gFmlULCNuoVW+tpMzSzvCDXwHogd9Ov1BuljeORoBJnXG1l9QHqMjbCKGCvJEBGQWi
+	 yEa8tvhB+7KhRKFhpLwxSTBM0AZpCuljkOrVHiTk1THg0iAHXjUnqOICZShLo7ULL9
+	 4R/RRyXImI15g==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 724588644E; Mon, 16 Oct 2023 10:31:55 +0200 (CEST)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id AACBE8644E; Mon, 16 Oct 2023 10:32:01 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF37786C3E
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 10:31:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAC65868AE
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 10:31:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -38,21 +39,21 @@ Received: from smtp2.mailbox.org (smtp2.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4S89M345Tgz9slp;
- Mon, 16 Oct 2023 10:31:43 +0200 (CEST)
-Message-ID: <2d6f7df3-481a-4c95-99d0-0337c48675e5@denx.de>
-Date: Mon, 16 Oct 2023 10:31:43 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4S89MK5cQZz9sZS;
+ Mon, 16 Oct 2023 10:31:57 +0200 (CEST)
+Message-ID: <1e0e0b8a-eae0-43c9-b150-3ba911971645@denx.de>
+Date: Mon, 16 Oct 2023 10:31:57 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: mvebu: Enable bootstd for Synology DS116 board
+Subject: Re: [PATCH] arm: mvebu: Enable bootstd for Thecus N2350 board
 Content-Language: en-US
 To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>
-References: <20231007213548.20276-1-mibodhi@gmail.com>
+References: <20231007220814.30783-1-mibodhi@gmail.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231007213548.20276-1-mibodhi@gmail.com>
+In-Reply-To: <20231007220814.30783-1-mibodhi@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4S89M345Tgz9slp
+X-Rspamd-Queue-Id: 4S89MK5cQZz9sZS
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,8 +70,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/7/23 23:35, Tony Dinh wrote:
-> Enable bootstd for Synology DS116 board, and remove distroboot.
+On 10/8/23 00:08, Tony Dinh wrote:
+> Enable bootstd for Thecus N2350 board, and remove distroboot.
 > 
 > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 
@@ -81,15 +82,15 @@ Stefan
 
 > ---
 > 
->   configs/ds116_defconfig |  3 ++-
->   include/configs/ds116.h | 12 +-----------
+>   configs/n2350_defconfig |  3 ++-
+>   include/configs/n2350.h | 12 +-----------
 >   2 files changed, 3 insertions(+), 12 deletions(-)
 > 
-> diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
-> index 0cd546c223..2437be73cd 100644
-> --- a/configs/ds116_defconfig
-> +++ b/configs/ds116_defconfig
-> @@ -28,7 +28,8 @@ CONFIG_SYS_LOAD_ADDR=0x800000
+> diff --git a/configs/n2350_defconfig b/configs/n2350_defconfig
+> index 109f0e10e9..07135742d3 100644
+> --- a/configs/n2350_defconfig
+> +++ b/configs/n2350_defconfig
+> @@ -29,7 +29,8 @@ CONFIG_ENV_ADDR=0x100000
 >   CONFIG_PCI=y
 >   CONFIG_DEBUG_UART=y
 >   CONFIG_AHCI=y
@@ -99,10 +100,10 @@ Stefan
 >   CONFIG_BOOTDELAY=10
 >   CONFIG_USE_PREBOOT=y
 >   CONFIG_SYS_CONSOLE_INFO_QUIET=y
-> diff --git a/include/configs/ds116.h b/include/configs/ds116.h
-> index 031f4f6afc..0883ec4d53 100644
-> --- a/include/configs/ds116.h
-> +++ b/include/configs/ds116.h
+> diff --git a/include/configs/n2350.h b/include/configs/n2350.h
+> index 92b2270236..d8a9814d3e 100644
+> --- a/include/configs/n2350.h
+> +++ b/include/configs/n2350.h
 > @@ -20,15 +20,8 @@
 >    */
 >   #include "mv-common.h"
@@ -111,8 +112,8 @@ Stefan
 >   #ifndef CONFIG_SPL_BUILD
 >   
 > -#define BOOT_TARGET_DEVICES(func) \
-> -	func(USB, usb, 0) \
 > -	func(SCSI, scsi, 0) \
+> -	func(USB, usb, 0) \
 > -	func(PXE, pxe, na) \
 > -	func(DHCP, dhcp, na)
 > -
