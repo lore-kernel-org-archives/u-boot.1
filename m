@@ -4,29 +4,29 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E227CDB474
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 09:33:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E669CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 09:33:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 792F886F5E;
-	Mon, 16 Oct 2023 11:26:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id DF69286F35;
+	Mon, 16 Oct 2023 11:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CD1286823; Mon, 16 Oct 2023 11:26:23 +0200 (CEST)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id C9AA986B84
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 11:26:14 +0200 (CEST)
+ id 6176B86F4B; Mon, 16 Oct 2023 11:26:26 +0200 (CEST)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 5778C86F36
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 11:26:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-IronPort-AV: E=Sophos;i="6.03,229,1694703600"; d="scan'208";a="179418366"
+X-IronPort-AV: E=Sophos;i="6.03,228,1694703600"; d="scan'208";a="183211882"
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 16 Oct 2023 18:26:14 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 16 Oct 2023 18:26:21 +0900
 Received: from GBR-5CG2373LKG.adwin.renesas.com (unknown [10.226.93.82])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 0A05741F99C3;
- Mon, 16 Oct 2023 18:26:11 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id E6ABC41F9E08;
+ Mon, 16 Oct 2023 18:26:18 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
@@ -34,9 +34,10 @@ To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>,
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
  Biju Das <biju.das.jz@bp.renesas.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Subject: [PATCH v3 06/21] arm: rmobile: Add basic R9A07G044L SoC support
-Date: Mon, 16 Oct 2023 10:25:28 +0100
-Message-Id: <20231016092543.3833-7-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v3 08/21] arm: rmobile: Restrict PINCTRL_PFC selection to
+ R-Car gen3/gen4
+Date: Mon, 16 Oct 2023 10:25:30 +0100
+Message-Id: <20231016092543.3833-9-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20231016092543.3833-1-paul.barker.ct@bp.renesas.com>
 References: <20231016092543.3833-1-paul.barker.ct@bp.renesas.com>
@@ -58,38 +59,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a config option for the R9A07G044L SoC used in the RZ/G2L so that we
-can make use of this in the subsequent driver patches.
+The RZ/G2L family uses CONFIG_RCAR_64 but does not share a common PFC
+driver with the R-Car gen3 & gen4 boards.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 Reviewed-by: Biju Das <biju.das.jz@bp.renesas.com>
 Reviewed-by: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
 Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-v2->v3:
-  * Added Marek's Reviewed-by.
+v2->v3: No changes.
 v1->v2:
-  * Reword config R9A07G044L description to improve clarity.
+  * Added Marek's Reviewed-by.
 
- arch/arm/mach-rmobile/Kconfig.rzg2l | 5 +++++
- 1 file changed, 5 insertions(+)
+ arch/arm/mach-rmobile/Kconfig | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/mach-rmobile/Kconfig.rzg2l b/arch/arm/mach-rmobile/Kconfig.rzg2l
-index 37ff6cd34160..eda04df5c619 100644
---- a/arch/arm/mach-rmobile/Kconfig.rzg2l
-+++ b/arch/arm/mach-rmobile/Kconfig.rzg2l
-@@ -3,6 +3,11 @@
+diff --git a/arch/arm/mach-rmobile/Kconfig b/arch/arm/mach-rmobile/Kconfig
+index c5419e8d69c0..af1f99197d9f 100644
+--- a/arch/arm/mach-rmobile/Kconfig
++++ b/arch/arm/mach-rmobile/Kconfig
+@@ -9,7 +9,6 @@ config RCAR_64
+ 	select PHY
+ 	select PINCONF
+ 	select PINCTRL
+-	select PINCTRL_PFC
+ 	select POSITION_INDEPENDENT
+ 	imply CMD_FS_UUID
+ 	imply CMD_GPT
+@@ -29,6 +28,7 @@ config RCAR_GEN3
+ 	bool "Renesas ARM SoCs R-Car Gen3 (64bit)"
+ 	select RCAR_64
+ 	select SUPPORT_SPL
++	select PINCTRL_PFC
+ 	imply SPL
+ 	imply SPL_BOARD_INIT
+ 	imply SPL_GZIP
+@@ -43,6 +43,7 @@ config RCAR_GEN3
+ config RCAR_GEN4
+ 	bool "Renesas ARM SoCs R-Car Gen4 (64bit)"
+ 	select RCAR_64
++	select PINCTRL_PFC
  
- if RZG2L
- 
-+config R9A07G044L
-+	bool "Renesas R9A07G044L SoC"
-+	help
-+	  Enable support for the Renesas R9A07G044L (RZ/G2L) SoC.
-+
- config MULTI_DTB_FIT_UNCOMPRESS_SZ
- 	default 0x80000 if TARGET_RZG2L_SMARC_EVK
- 
+ config RZA1
+ 	prompt "Renesas ARM SoCs RZ/A1 (32bit)"
 -- 
 2.39.2
 
