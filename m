@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F48CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 08:32:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE1ECDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 08:32:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48A5E868AE;
-	Mon, 16 Oct 2023 10:32:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 094F286BB4;
+	Mon, 16 Oct 2023 10:32:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697445147;
-	bh=pob0tD67XmMONeDdbAkWAZWa+N0faYDXGS9Zqrte2mQ=;
+	s=phobos-20191101; t=1697445171;
+	bh=uqaMNcuqkOpySuY1W0aORcQICVkPsc0VDIxqJPsiZPU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=KEAuwbh17iAz5RG+5fYb4e97T9anf8yKi9culEtSqzoLiwKUy2GyTWDuRLuzAoOdk
-	 UHDDMfeuUGwXZ7BJwFOEjw+Ba18p1iFFvwmW1WxK4wd6rpotilPc3UdEVMr3twCohD
-	 XZn1eQPGpgtuXVYFktE3v4ME3o7oHGKKTLk5hF4znyG9Nv7/ViorVv3cqshaNCqOcP
-	 gFmlULCNuoVW+tpMzSzvCDXwHogd9Ov1BuljeORoBJnXG1l9QHqMjbCKGCvJEBGQWi
-	 yEa8tvhB+7KhRKFhpLwxSTBM0AZpCuljkOrVHiTk1THg0iAHXjUnqOICZShLo7ULL9
-	 4R/RRyXImI15g==
+	b=x6EH137Y8vbv2PLMz3q2Kog8wTLziDPZKGzlJpaF9/ZX2jvJJkEKFkj1guIEs7G1+
+	 JcdTfzBaQThbTOt2r7cBKUdh03JR1Ts+9p4QtOrya0ocb9bkSR7BnYkKPQSVymuQHm
+	 KLxlHe47g8ENo5BfdE4qYpenAokkOocjk8OvL30/JE+MzKEdX/s7D2ZrWB0ghq+TTA
+	 ej1+6kZpGcgPKAXuhHuExTb/RI7Ji8xlY1XzbnS2cq7LCzgxesKkGWmd+3VKXOWN9R
+	 E3dwOHzboPvZ/VPWQhMBMxBAoOAH8qIxce3GW6fkyQe1TqE/zbrCogo5n+s/yAP9g7
+	 22pYYPAq5hNJA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AACBE8644E; Mon, 16 Oct 2023 10:32:01 +0200 (CEST)
+ id DA6DD86B1D; Mon, 16 Oct 2023 10:32:31 +0200 (CEST)
 Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
  [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAC65868AE
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 10:31:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7A9C86B79
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 10:32:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4S89MK5cQZz9sZS;
- Mon, 16 Oct 2023 10:31:57 +0200 (CEST)
-Message-ID: <1e0e0b8a-eae0-43c9-b150-3ba911971645@denx.de>
-Date: Mon, 16 Oct 2023 10:31:57 +0200
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4S89Mv500yz9sTS;
+ Mon, 16 Oct 2023 10:32:27 +0200 (CEST)
+Message-ID: <5e93d3d4-39ee-4ab9-92e1-1dd7aa4ff68a@denx.de>
+Date: Mon, 16 Oct 2023 10:32:27 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: mvebu: Enable bootstd for Thecus N2350 board
+Subject: Re: [RESEND PATCH] bootstd: sata: bootdev scanning for ahci sata with
+ no drive attached
 Content-Language: en-US
-To: Tony Dinh <mibodhi@gmail.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+To: Tony Dinh <mibodhi@gmail.com>, Simon Glass <sjg@chromium.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>
-References: <20231007220814.30783-1-mibodhi@gmail.com>
+References: <20231007033429.25109-1-mibodhi@gmail.com>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20231007220814.30783-1-mibodhi@gmail.com>
+In-Reply-To: <20231007033429.25109-1-mibodhi@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4S89MK5cQZz9sZS
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,8 +70,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/8/23 00:08, Tony Dinh wrote:
-> Enable bootstd for Thecus N2350 board, and remove distroboot.
+On 10/7/23 05:34, Tony Dinh wrote:
+> It's normal to have no SATA drive attached to the controller, so return a
+> successful status when there is no block device found after probing.
+> 
+> Note: this patch depends on the previous patch
+> https://patchwork.ozlabs.org/project/uboot/patch/20230917230649.30357-1-mibodhi@gmail.com/
+> 
+> Resend the right patch.
 > 
 > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 
@@ -82,59 +88,25 @@ Stefan
 
 > ---
 > 
->   configs/n2350_defconfig |  3 ++-
->   include/configs/n2350.h | 12 +-----------
->   2 files changed, 3 insertions(+), 12 deletions(-)
+>   drivers/ata/sata.c | 6 ++++++
+>   1 file changed, 6 insertions(+)
 > 
-> diff --git a/configs/n2350_defconfig b/configs/n2350_defconfig
-> index 109f0e10e9..07135742d3 100644
-> --- a/configs/n2350_defconfig
-> +++ b/configs/n2350_defconfig
-> @@ -29,7 +29,8 @@ CONFIG_ENV_ADDR=0x100000
->   CONFIG_PCI=y
->   CONFIG_DEBUG_UART=y
->   CONFIG_AHCI=y
-> -CONFIG_DISTRO_DEFAULTS=y
-> +CONFIG_BOOTSTD_FULL=y
-> +CONFIG_BOOTSTD_DEFAULTS=y
->   CONFIG_BOOTDELAY=10
->   CONFIG_USE_PREBOOT=y
->   CONFIG_SYS_CONSOLE_INFO_QUIET=y
-> diff --git a/include/configs/n2350.h b/include/configs/n2350.h
-> index 92b2270236..d8a9814d3e 100644
-> --- a/include/configs/n2350.h
-> +++ b/include/configs/n2350.h
-> @@ -20,15 +20,8 @@
->    */
->   #include "mv-common.h"
+> diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
+> index f126b84e05..dcb5fcf476 100644
+> --- a/drivers/ata/sata.c
+> +++ b/drivers/ata/sata.c
+> @@ -79,6 +79,12 @@ int sata_rescan(bool verbose)
 >   
-> -/* Include the common distro boot environment */
->   #ifndef CONFIG_SPL_BUILD
+>   	ret = uclass_probe_all(UCLASS_AHCI);
 >   
-> -#define BOOT_TARGET_DEVICES(func) \
-> -	func(SCSI, scsi, 0) \
-> -	func(USB, usb, 0) \
-> -	func(PXE, pxe, na) \
-> -	func(DHCP, dhcp, na)
-> -
->   #define KERNEL_ADDR_R	__stringify(0x1000000)
->   #define FDT_ADDR_R	__stringify(0x2000000)
->   #define RAMDISK_ADDR_R	__stringify(0x2200000)
-> @@ -42,14 +35,11 @@
->   	"scriptaddr=" SCRIPT_ADDR_R "\0" \
->   	"pxefile_addr_r=" PXEFILE_ADDR_R "\0"
->   
-> -#include <config_distro_bootcmd.h>
-> -
->   #define CFG_EXTRA_ENV_SETTINGS \
->   	RELOCATION_LIMITS_ENV_SETTINGS \
->   	LOAD_ADDRESS_ENV_SETTINGS \
->   	"fdtfile=" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-> -	"console=ttyS0,115200\0" \
-> -	BOOTENV
-> +	"console=ttyS0,115200\0"
->   
->   #endif /* CONFIG_SPL_BUILD */
+> +	if (ret == -ENODEV) {
+> +		if (verbose)
+> +			printf("No SATA block device found\n");
+> +		return 0;
+> +	}
+> +
+>   	return ret;
+>   }
 >   
 
 Viele Grüße,
