@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A6F8CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:37:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D83FCDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 22:37:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 017B286F24;
+	by phobos.denx.de (Postfix) with ESMTP id EC0C286F2B;
 	Tue, 17 Oct 2023 00:32:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NdOc1Dy7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G58VqdP+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E753B86F18; Tue, 17 Oct 2023 00:31:24 +0200 (CEST)
-Received: from mail-vs1-xe2e.google.com (mail-vs1-xe2e.google.com
- [IPv6:2607:f8b0:4864:20::e2e])
+ id B7C2886E7C; Tue, 17 Oct 2023 00:31:27 +0200 (CEST)
+Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
+ [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9548E86E7C
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:30:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7687803AE
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 00:30:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-vs1-xe2e.google.com with SMTP id
- ada2fe7eead31-457c82cd837so1392341137.2
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:30:50 -0700 (PDT)
+Received: by mail-qk1-x735.google.com with SMTP id
+ af79cd13be357-7740729ae12so349359185a.1
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:30:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697495438; x=1698100238; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697495454; x=1698100254; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5Wlrzaj1r7TDzEyEemHE75UqQSuystY+CReHJtnmVjc=;
- b=NdOc1Dy7R2ptxhRKVL8qB3JNUtBf8LLt5KLRw1SKasyDm6WggB23BCUiPJ2YMpk3bM
- dOtGrTwQJriQ3hL2IMIBERsiV1gp5g+gi3zpRotAmELRHpKADtD6rDnnrkvC/NErpVGS
- n/HChGz0QFhBov7A/sd/UXn9MQ9GUozZtDikk=
+ bh=FTUMJLDV8nw50l5ysq5oOxl26SGsMcZWTpxU5FFTW0U=;
+ b=G58VqdP+R7k1ptxOJ49shornIymtZYNt7+/5W2ctVTl9j5TUmUJLbH+GM5FMtOdCXB
+ yQDbR8TmthRHSmM5cLed6pG0bgPozF+pO897tiYrKrog2ac1VGqZJ+2Z9pmIw2ob64VS
+ OTT18pp2xviEAZmGpZt9wEo0g4YsyuE4pIqBM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697495438; x=1698100238;
+ d=1e100.net; s=20230601; t=1697495454; x=1698100254;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5Wlrzaj1r7TDzEyEemHE75UqQSuystY+CReHJtnmVjc=;
- b=O0KT4zOlunF5tdVBhWt+i1x4N1LFGlbHAyI6sWqHCL7TeON9tbYEpGImbzff7Y+9tr
- AoRCj9hkN48C6ohmquYABINCcil+l5OiqkGMOmwsY551qIktw/m8fGbdkr0adutycweZ
- HTmUMVDV0qiakfOC6Gy9OE9efMHYkKX+hP8+gdFVfpACOdxP9qznm7Dm1+nLG19DTTg/
- egL2nXjCvmksdJjwFW3XEhxlqTMcoYu7+SC6JdcOsARpt6iVoZocGSs5S6fF4sV1qcO7
- MXVJAjWSDnVqiGaL6p05yJKBbuslc2RMTKkv8oSpPnQJd2deFmlQCeGVckIaCCqVJF6n
- nupQ==
-X-Gm-Message-State: AOJu0Yz/ngtVKsNqxC2W6i2sSQEEPZ1ivj90Z3WHxk1SLL9dGwrNSq0L
- qzTWfFb+vad6BIlYBYXqnF5PK1bQxuccRdsZALavEg==
-X-Google-Smtp-Source: AGHT+IEnaf+E+wB/FlYsFwhGldjt9EpgRlpL4Bs/adjX2+XOEzW+9hcOyMQ6NOK0dmTWzn1jFGzd3w==
-X-Received: by 2002:a67:cc04:0:b0:452:8423:e957 with SMTP id
- q4-20020a67cc04000000b004528423e957mr699442vsl.28.1697495438177; 
- Mon, 16 Oct 2023 15:30:38 -0700 (PDT)
+ bh=FTUMJLDV8nw50l5ysq5oOxl26SGsMcZWTpxU5FFTW0U=;
+ b=kZApW6B0ow+k0vAFHD2qeZyCA1cXVaxGAHjDIODm7vKikJr21KzviqC+Fysucm8ZIn
+ orB9vXawxpCHP7EUnBnvQdBG4jfWnwTl7vtDFUEvZDAjNbIjhj4lMoRjRuYLmC1ffY4P
+ fjs8jt0HpY45DK2fqNNPcnhsz8Ll1N2QASLAiBqSGnxjvTlVmPV46D4h+55ohAVkIqG+
+ 82Qv4VOa/8QAr9Yx4sofQ6XyJQRR4AvLEXuYPbzBK9JBIlzXueoLrHq+rsxOy4geU+Pt
+ iWtmaxssTtXiB3xCEE5x1jh/a+tj3KGHmNp3biNPGgQ1LeiM4o26QP8c3TjeDMdmXdKg
+ Bfww==
+X-Gm-Message-State: AOJu0YyGvtMcGh7YHiFWBGkKm10rIbS5IB1ENo07JaOI+jBeMa9tYmce
+ 0VNH2jTjfRr5cOqoaxFtPkglEkewYa4Vmqj1P+MyCA==
+X-Google-Smtp-Source: AGHT+IHKLsVZZXW8DQ/yxuSQYZTLNCSDIvpQTQz5wf+iVmEgH+8Tg3APpW+pqr+vJvpfmH4wzSk1AA==
+X-Received: by 2002:a05:620a:4008:b0:774:c7e:4306 with SMTP id
+ h8-20020a05620a400800b007740c7e4306mr607809qko.68.1697495454705; 
+ Mon, 16 Oct 2023 15:30:54 -0700 (PDT)
 Received: from sjg1.unitedwifi.com ([205.220.129.18])
  by smtp.gmail.com with ESMTPSA id
- z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.30.32
+ z14-20020a05620a08ce00b007671cfe8a18sm101802qkz.13.2023.10.16.15.30.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 15:30:37 -0700 (PDT)
+ Mon, 16 Oct 2023 15:30:54 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: [PATCH v3 12/32] env: Split out non-command code into a new file
-Date: Mon, 16 Oct 2023 16:28:03 -0600
-Message-ID: <20231016222835.596572-13-sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>,
+	Simon Glass <sjg@chromium.org>
+Subject: [PATCH v3 14/32] bootm: Allow building when cleanup functions are
+ missing
+Date: Mon, 16 Oct 2023 16:28:05 -0600
+Message-ID: <20231016222835.596572-15-sjg@chromium.org>
 X-Mailer: git-send-email 2.42.0.655.g421f12c284-goog
 In-Reply-To: <20231016222835.596572-1-sjg@chromium.org>
 References: <20231016222835.596572-1-sjg@chromium.org>
@@ -88,389 +89,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is not possible to set environment variables without having
-CONFIG_CMD_NVEDIT enabled. When CONFIG_CMDLINE is disabled, we need a
-way to set variables.
+There are two cleanup functions needed during boot which depend on
+CMD_BOOTM: bootm_disable_interrupts() and board_quiesce_devices()
 
-Split the setting code out into its own file, so that env_set() is
-available even when CONFIG_CMDLINE is not. If it is never called, the
-code will be dropped at link time.
-
-Update the Makefile rule to only include the env commands when
-CONFIG_CMD_NVEDIT is enabled.
+Provide static inline versions of these for when commands are not
+enabled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- cmd/Makefile           |   2 +-
- cmd/nvedit.c           | 122 ++-----------------------------------
- env/Makefile           |   1 +
- env/env_set.c          | 132 +++++++++++++++++++++++++++++++++++++++++
- include/env_internal.h |  23 +++++++
- 5 files changed, 161 insertions(+), 119 deletions(-)
- create mode 100644 env/env_set.c
+ arch/arm/lib/bootm.c |  2 ++
+ boot/bootm.c         | 10 ++++------
+ include/bootm.h      | 15 +++++++++++++--
+ 3 files changed, 19 insertions(+), 8 deletions(-)
 
-diff --git a/cmd/Makefile b/cmd/Makefile
-index 44db5f22861e..29d7c500c66e 100644
---- a/cmd/Makefile
-+++ b/cmd/Makefile
-@@ -245,7 +245,7 @@ endif # !CONFIG_SPL_BUILD
- obj-$(CONFIG_$(SPL_)CMD_TLV_EEPROM) += tlv_eeprom.o
+diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
+index c56285738a26..db8df57cb56e 100644
+--- a/arch/arm/lib/bootm.c
++++ b/arch/arm/lib/bootm.c
+@@ -42,9 +42,11 @@ DECLARE_GLOBAL_DATA_PTR;
  
- # core command
--obj-y += nvedit.o
-+obj-$(CONFIG_$(SPL_)CMDLINE) += nvedit.o
+ static struct tag *params;
  
- obj-$(CONFIG_CMD_BCM_EXT_UTILS) += broadcom/
- 
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index daf1ad37f9be..812d82b157f4 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -49,20 +49,6 @@ DECLARE_GLOBAL_DATA_PTR;
-  */
- #define	MAX_ENV_SIZE	(1 << 20)	/* 1 MiB */
- 
--/*
-- * This variable is incremented on each do_env_set(), so it can
-- * be used via env_get_id() as an indication, if the environment
-- * has changed or not. So it is possible to reread an environment
-- * variable only if the environment was changed ... done so for
-- * example in NetInitLoop()
-- */
--static int env_id = 1;
--
--int env_get_id(void)
--{
--	return env_id;
--}
--
- #ifndef CONFIG_SPL_BUILD
- /*
-  * Command interface: print one or all environment variables
-@@ -195,108 +181,8 @@ DONE:
- 
- 	return 0;
- }
--#endif
--#endif /* CONFIG_SPL_BUILD */
--
--/*
-- * Set a new environment variable,
-- * or replace or delete an existing one.
-- */
--static int _do_env_set(int flag, int argc, char *const argv[], int env_flag)
--{
--	int   i, len;
--	char  *name, *value, *s;
--	struct env_entry e, *ep;
--
--	debug("Initial value for argc=%d\n", argc);
--
--#if !IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_CMD_NVEDIT_EFI)
--	if (argc > 1 && argv[1][0] == '-' && argv[1][1] == 'e')
--		return do_env_set_efi(NULL, flag, --argc, ++argv);
--#endif
--
--	while (argc > 1 && **(argv + 1) == '-') {
--		char *arg = *++argv;
--
--		--argc;
--		while (*++arg) {
--			switch (*arg) {
--			case 'f':		/* force */
--				env_flag |= H_FORCE;
--				break;
--			default:
--				return CMD_RET_USAGE;
--			}
--		}
--	}
--	debug("Final value for argc=%d\n", argc);
--	name = argv[1];
--
--	if (strchr(name, '=')) {
--		printf("## Error: illegal character '='"
--		       "in variable name \"%s\"\n", name);
--		return 1;
--	}
--
--	env_id++;
--
--	/* Delete only ? */
--	if (argc < 3 || argv[2] == NULL) {
--		int rc = hdelete_r(name, &env_htab, env_flag);
--
--		/* If the variable didn't exist, don't report an error */
--		return rc && rc != -ENOENT ? 1 : 0;
--	}
--
--	/*
--	 * Insert / replace new value
--	 */
--	for (i = 2, len = 0; i < argc; ++i)
--		len += strlen(argv[i]) + 1;
--
--	value = malloc(len);
--	if (value == NULL) {
--		printf("## Can't malloc %d bytes\n", len);
--		return 1;
--	}
--	for (i = 2, s = value; i < argc; ++i) {
--		char *v = argv[i];
--
--		while ((*s++ = *v++) != '\0')
--			;
--		*(s - 1) = ' ';
--	}
--	if (s != value)
--		*--s = '\0';
--
--	e.key	= name;
--	e.data	= value;
--	hsearch_r(e, ENV_ENTER, &ep, &env_htab, env_flag);
--	free(value);
--	if (!ep) {
--		printf("## Error inserting \"%s\" variable, errno=%d\n",
--			name, errno);
--		return 1;
--	}
--
--	return 0;
--}
--
--int env_set(const char *varname, const char *varvalue)
--{
--	const char * const argv[4] = { "setenv", varname, varvalue, NULL };
--
--	/* before import into hashtable */
--	if (!(gd->flags & GD_FLG_ENV_READY))
--		return 1;
--
--	if (varvalue == NULL || varvalue[0] == '\0')
--		return _do_env_set(0, 2, (char * const *)argv, H_PROGRAMMATIC);
--	else
--		return _do_env_set(0, 3, (char * const *)argv, H_PROGRAMMATIC);
--}
-+#endif /* CONFIG_CMD_GREPENV */
- 
--#ifndef CONFIG_SPL_BUILD
- static int do_env_set(struct cmd_tbl *cmdtp, int flag, int argc,
- 		      char *const argv[])
++#ifdef CONFIG_CMD_BOOTM
+ __weak void board_quiesce_devices(void)
  {
-@@ -456,7 +342,7 @@ int do_env_callback(struct cmd_tbl *cmdtp, int flag, int argc,
- 	hwalk_r(&env_htab, print_active_callback);
- 	return 0;
  }
--#endif
-+#endif /* CONFIG_CMD_ENV_CALLBACK */
- 
- #if defined(CONFIG_CMD_ENV_FLAGS)
- static int print_static_flags(const char *var_name, const char *flags,
-@@ -529,7 +415,7 @@ int do_env_flags(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 	hwalk_r(&env_htab, print_active_flags);
- 	return 0;
- }
--#endif
-+#endif /* CONFIG_CMD_ENV_FLAGS */
- 
- /*
-  * Interactively edit an environment variable
-@@ -679,7 +565,7 @@ static int do_env_delete(struct cmd_tbl *cmdtp, int flag,
- 	}
- 	debug("Final value for argc=%d\n", argc);
- 
--	env_id++;
-+	env_inc_id();
- 
- 	while (--argc > 0) {
- 		char *name = *++argv;
-diff --git a/env/Makefile b/env/Makefile
-index 673b979fdfa9..5250b6df2cfc 100644
---- a/env/Makefile
-+++ b/env/Makefile
-@@ -5,6 +5,7 @@
- 
- obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += common.o
- obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += env.o
-+obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += env_set.o
- obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += attr.o
- obj-$(CONFIG_$(SPL_TPL_)ENV_SUPPORT) += flags.o
- 
-diff --git a/env/env_set.c b/env/env_set.c
-new file mode 100644
-index 000000000000..eccbda6a791c
---- /dev/null
-+++ b/env/env_set.c
-@@ -0,0 +1,132 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2000-2013
-+ * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-+ *
-+ * (C) Copyright 2001 Sysgo Real-Time Solutions, GmbH <www.elinos.com>
-+ * Andreas Heppel <aheppel@sysgo.de>
-+ *
-+ * Copyright 2011 Freescale Semiconductor, Inc.
-+ */
-+
-+#include <common.h>
-+#include <command.h>
-+#include <env.h>
-+#include <env_internal.h>
-+#include <malloc.h>
-+#include <asm/global_data.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+/*
-+ * This variable is incremented on each do_env_set(), so it can
-+ * be used via env_get_id() as an indication, if the environment
-+ * has changed or not. So it is possible to reread an environment
-+ * variable only if the environment was changed ... done so for
-+ * example in NetInitLoop()
-+ */
-+static int env_id = 1;
-+
-+int env_get_id(void)
-+{
-+	return env_id;
-+}
-+
-+void env_inc_id(void)
-+{
-+	env_id++;
-+}
-+
-+int _do_env_set(int flag, int argc, char *const argv[], int env_flag)
-+{
-+	int   i, len;
-+	char  *name, *value, *s;
-+	struct env_entry e, *ep;
-+
-+	debug("Initial value for argc=%d\n", argc);
-+
-+#if !IS_ENABLED(CONFIG_SPL_BUILD) && IS_ENABLED(CONFIG_CMD_NVEDIT_EFI)
-+	if (argc > 1 && argv[1][0] == '-' && argv[1][1] == 'e')
-+		return do_env_set_efi(NULL, flag, --argc, ++argv);
 +#endif
-+
-+	while (argc > 1 && **(argv + 1) == '-') {
-+		char *arg = *++argv;
-+
-+		--argc;
-+		while (*++arg) {
-+			switch (*arg) {
-+			case 'f':		/* force */
-+				env_flag |= H_FORCE;
-+				break;
-+			default:
-+				return CMD_RET_USAGE;
-+			}
-+		}
-+	}
-+	debug("Final value for argc=%d\n", argc);
-+	name = argv[1];
-+
-+	if (strchr(name, '=')) {
-+		printf("## Error: illegal character '=' in variable name \"%s\"\n",
-+		       name);
-+		return 1;
-+	}
-+
-+	env_id++;
-+
-+	/* Delete only ? */
-+	if (argc < 3 || !argv[2]) {
-+		int rc = hdelete_r(name, &env_htab, env_flag);
-+
-+		/* If the variable didn't exist, don't report an error */
-+		return rc && rc != -ENOENT ? 1 : 0;
-+	}
-+
-+	/*
-+	 * Insert / replace new value
-+	 */
-+	for (i = 2, len = 0; i < argc; ++i)
-+		len += strlen(argv[i]) + 1;
-+
-+	value = malloc(len);
-+	if (!value) {
-+		printf("## Can't malloc %d bytes\n", len);
-+		return 1;
-+	}
-+	for (i = 2, s = value; i < argc; ++i) {
-+		char *v = argv[i];
-+
-+		while ((*s++ = *v++) != '\0')
-+			;
-+		*(s - 1) = ' ';
-+	}
-+	if (s != value)
-+		*--s = '\0';
-+
-+	e.key	= name;
-+	e.data	= value;
-+	hsearch_r(e, ENV_ENTER, &ep, &env_htab, env_flag);
-+	free(value);
-+	if (!ep) {
-+		printf("## Error inserting \"%s\" variable, errno=%d\n",
-+		       name, errno);
-+		return 1;
-+	}
-+
-+	return 0;
-+}
-+
-+int env_set(const char *varname, const char *varvalue)
-+{
-+	const char * const argv[4] = { "setenv", varname, varvalue, NULL };
-+
-+	/* before import into hashtable */
-+	if (!(gd->flags & GD_FLG_ENV_READY))
-+		return 1;
-+
-+	if (!varvalue || !varvalue[0])
-+		return _do_env_set(0, 2, (char * const *)argv, H_PROGRAMMATIC);
-+	else
-+		return _do_env_set(0, 3, (char * const *)argv, H_PROGRAMMATIC);
-+}
-diff --git a/include/env_internal.h b/include/env_internal.h
-index 6a6949464689..99e358b6d8a5 100644
---- a/include/env_internal.h
-+++ b/include/env_internal.h
-@@ -260,6 +260,29 @@ const char *env_fat_get_intf(void);
-  * Return: string of device and partition
-  */
- char *env_fat_get_dev_part(void);
-+
-+/*
-+ * _do_env_set() - Add / replace / delete an environment variable
-+ *
-+ * This implements the bulk of the 'env set' command:
-+ *
-+ *	env set [-f] name [value]
-+ *
-+ * Sets the value of variable <name>
-+ * If <value> is NULL, it removes the variable
-+ * Use the -f flag to overwrite read-only/write-once variables
-+ *
-+ * @flag: CMD_FLAG_... value
-+ * @argc: Number of arguments
-+ * @args: List of arguments
-+ * @env_flag: H_... flags from search.h
-+ * Return: 0 if OK, 1 on failure, or CMD_RET_USAGE for invalid flag
-+ */
-+int _do_env_set(int flag, int argc, char *const argv[], int env_flag);
-+
-+/** env_inc_id() - Increment the environment ID */
-+void env_inc_id(void);
-+
- #endif /* DO_DEPS_ONLY */
  
- #endif /* _ENV_INTERNAL_H_ */
+ /**
+  * announce_and_cleanup() - Print message and prepare for kernel boot
+diff --git a/boot/bootm.c b/boot/bootm.c
+index 8f96a80d4259..7deae058552a 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -47,9 +47,11 @@ static const void *boot_get_kernel(struct cmd_tbl *cmdtp, int flag, int argc,
+ 				   char *const argv[], struct bootm_headers *images,
+ 				   ulong *os_data, ulong *os_len);
+ 
++#ifdef CONFIG_CMD_BOOTM
+ __weak void board_quiesce_devices(void)
+ {
+ }
++#endif
+ 
+ #ifdef CONFIG_LMB
+ static void boot_start_lmb(struct bootm_headers *images)
+@@ -470,12 +472,7 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
+ 	return 0;
+ }
+ 
+-/**
+- * bootm_disable_interrupts() - Disable interrupts in preparation for load/boot
+- *
+- * Return: interrupt flag (0 if interrupts were disabled, non-zero if they were
+- *	enabled)
+- */
++#ifdef CONFIG_CMD_BOOTM
+ ulong bootm_disable_interrupts(void)
+ {
+ 	ulong iflag;
+@@ -505,6 +502,7 @@ ulong bootm_disable_interrupts(void)
+ #endif
+ 	return iflag;
+ }
++#endif
+ 
+ #define CONSOLE_ARG		"console="
+ #define NULL_CONSOLE		(CONSOLE_ARG "ttynull")
+diff --git a/include/bootm.h b/include/bootm.h
+index c3c7336207b1..17c740449efd 100644
+--- a/include/bootm.h
++++ b/include/bootm.h
+@@ -50,8 +50,6 @@ int bootm_host_load_images(const void *fit, int cfg_noffset);
+ int boot_selected_os(int argc, char *const argv[], int state,
+ 		     struct bootm_headers *images, boot_os_fn *boot_fn);
+ 
+-ulong bootm_disable_interrupts(void);
+-
+ /* This is a special function used by booti/bootz */
+ int bootm_find_images(int flag, int argc, char *const argv[], ulong start,
+ 		      ulong size);
+@@ -62,6 +60,15 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, int argc,
+ 
+ void arch_preboot_os(void);
+ 
++#ifdef CONFIG_CMD_BOOTM
++/**
++ * bootm_disable_interrupts() - Disable interrupts, stop Ethernet and USB
++ *
++ * Return: interrupt flag (0 if interrupts were disabled, non-zero if they were
++ *	enabled)
++ */
++ulong bootm_disable_interrupts(void);
++
+ /*
+  * boards should define this to disable devices when EFI exits from boot
+  * services.
+@@ -69,6 +76,10 @@ void arch_preboot_os(void);
+  * TODO(sjg@chromium.org>): Update this to use driver model's device_remove().
+  */
+ void board_quiesce_devices(void);
++#else
++static inline ulong bootm_disable_interrupts(void) { return 0; }
++static inline void board_quiesce_devices(void) {}
++#endif
+ 
+ /**
+  * switch_to_non_secure_mode() - switch to non-secure mode
 -- 
 2.42.0.655.g421f12c284-goog
 
