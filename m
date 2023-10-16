@@ -4,77 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 251F3CDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 13:09:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E111CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 14:15:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6436E86BB3;
-	Mon, 16 Oct 2023 15:09:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D95A86BA4;
+	Mon, 16 Oct 2023 16:15:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C+8MuLe7";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="fn5rrBVA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDD6186BC8; Mon, 16 Oct 2023 15:09:22 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B429586823; Mon, 16 Oct 2023 16:14:15 +0200 (CEST)
+Received: from relay7-d.mail.gandi.net (relay7-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::227])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8598A865A2
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 15:09:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC3EF86C26
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 16:14:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-77575233633so327756585a.0
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 06:09:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697461758; x=1698066558; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iP3e6Xdld8PdmVh5YHRqiYgwxjKlxs504TMkGa4v1I0=;
- b=C+8MuLe7JJskgZAu46MtU90xlGuk+4EdbLTWvtc+FK+7xVvv+CkSpREdJD5n3Q3Z8I
- nu5E4QXn/PcqGwPYsqVXRz00ipWsw5cpxGGmWodKL+i7Gz0kfuvlz/lVNN75bnD/rWUL
- ZFNhpfX1lklvW+LzlDiJ7pjcCEIGf29aTWyQ8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697461758; x=1698066558;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iP3e6Xdld8PdmVh5YHRqiYgwxjKlxs504TMkGa4v1I0=;
- b=U7RRDmgSArxVeHZ8jxOyesVM8XDKkH43uD0HhUlSFB9gi/JepiDo3QW8mKytQUN860
- x8P/S/OxRr4wvLZ6BHu0v+mGKiMaqqcg1EwJdex+0IU6auO40Wg9srlCcqol5lzmdN6f
- /4acHhNolsCxn6g5HXRR44w3apeS3NUBGQS/idoJ1eyDAdEn+4Z1yMXjNIHEidlV6aYV
- UAEtSMBa69smbXbGmT/qGa+WNAmXD4S4M5MtMwRUHrIMu/udDYunWGPw1gX2W86nSQ85
- i/MVbOs6lkhmn25X0r6e89lkZ3/uDrXwh1oUWIiXbHbYa30oAggrcPTulqgzQ+GSZtkM
- OaDQ==
-X-Gm-Message-State: AOJu0YwOA/h0cDjMAImFLqLQlI/I4b3j+aOEPIWipsjw9T1HkbbFS2HJ
- MCWJqKdweewknwf4Yn2FjBWWbg==
-X-Google-Smtp-Source: AGHT+IEzathFEvCslS3MX44gOMhxEUeZvsXbs3A5fczjemOK6/Kn6IyeiGE34dKgzq9cHSk52N+y7g==
-X-Received: by 2002:a05:620a:1350:b0:76f:2214:e2c3 with SMTP id
- c16-20020a05620a135000b0076f2214e2c3mr33583432qkl.64.1697461757947; 
- Mon, 16 Oct 2023 06:09:17 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- v20-20020a05620a123400b0076f1d8b1c2dsm2954702qkj.12.2023.10.16.06.09.17
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 16 Oct 2023 06:09:17 -0700 (PDT)
-Date: Mon, 16 Oct 2023 09:09:15 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@google.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] command.h: Add a U_BOOT_LONGHELP macro
-Message-ID: <20231016130915.GD3119521@bill-the-cat>
-References: <20231007191308.2222470-1-trini@konsulko.com>
- <CAPnjgZ0wo3pcTOgJ+9s53kNwnuxK0pHApmJbbmv7eJe_XDhrAA@mail.gmail.com>
+ spf=pass smtp.mailfrom=thomas.richard@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 5B53220007;
+ Mon, 16 Oct 2023 14:14:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1697465651;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ajd+LGh9aWWXu9Q4FuoK1tmp+xhBFYVskTFDBwohTlg=;
+ b=fn5rrBVAPKgsWJOTuuMmO21yD2bueP1isik6OkvrcHJ4PqBMXhZClgRp3strlQb89iakr8
+ RUjNSHb4E1s/c3lU+QkQ4qAEiNLbk5qlgj6LQ9OE324IrxMMg9IACg82cesKHCZsgqFe5a
+ 7bGmDJ7Mbf4zk+tgTCRvj/X9+ZwVVFiY7xWLdcSPxQVb0xhY+mskgLcQyX0wMEaSaf4ihK
+ HDjpnx18rZkz2KV487ihRXpSimKyRl0IxDGbjMVy4fnVH6GKP5hOsE9T1qe8Ua4nIQvpRq
+ yThx2yXLkXFK0vXqnjtzFtrIsTXP/s9S7UCmEduUp/7AOpB3V6X/SHPFv8inpg==
+From: Thomas Richard <thomas.richard@bootlin.com>
+To: u-boot@lists.denx.de
+Cc: nm@ti.com, thomas.petazzoni@bootlin.com, thomas.richard@bootlin.com,
+ gregory.clement@bootlin.com, u-kumar1@ti.com,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bryan Brattlof <bb@ti.com>, Evgeny Bachinin <EABachinin@sberdevices.ru>,
+ Gowtham Tammana <g-tammana@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, Tobias Waldekranz <tobias@waldekranz.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/9] Suspend to RAM support for K3 J7200
+Date: Mon, 16 Oct 2023 16:11:26 +0200
+Message-Id: <20231016141135.325698-1-thomas.richard@bootlin.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Xeqegm9PRvBCFSf6"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ0wo3pcTOgJ+9s53kNwnuxK0pHApmJbbmv7eJe_XDhrAA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-GND-Sasl: thomas.richard@bootlin.com
+X-Mailman-Approved-At: Mon, 16 Oct 2023 16:15:24 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,66 +77,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This series is the U-Boot part of the work to add the suspend to RAM
+support for the K3 J7200 EVM board.
 
---Xeqegm9PRvBCFSf6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+During the boot R5 SPL makes a copy of DM-Firmware in memory.
+Resume detection is done by reading a magic value in a pmic register
+(set by DM-Firmware).
 
-On Sun, Oct 15, 2023 at 08:39:44AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sat, 7 Oct 2023 at 13:13, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > In order to be able to discard unused long help texts without further
-> > linker lists, add a macro for defining the long help messages which uses
-> > __maybe_unused.  This allows us to discard them as unreferenced as part
-> > of the link.
-> >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >  include/command.h | 3 +++
-> >  1 file changed, 3 insertions(+)
-> >
-> > diff --git a/include/command.h b/include/command.h
-> > index 34ea989b39b4..a836ea795ab6 100644
-> > --- a/include/command.h
-> > +++ b/include/command.h
-> > @@ -322,6 +322,9 @@ int cmd_source_script(ulong addr, const char *fit_u=
-name, const char *confname);
-> >  # define _CMD_HELP(x)
-> >  #endif
-> >
-> > +#define U_BOOT_LONGHELP(_cmdname, text)                               =
-         \
-> > +       static __maybe_unused const char _cmdname##_help_text[] =3D tex=
-t;
->=20
-> I just noticed this...do you really want the ; at the end? The only
-> purpose I can see is if you want the macro to compile to nothing.
-> Otherwise it is more normal to put it on the invocations, isn't it?
+If a resume is detected, R5 SPL run the exit retention sequence of the
+DDR. Then it restores TF-A in SRAM (it saved itself to DDR), and load
+DM-Firmware using the copy done during the boot (fit image processing
+is skipped).
 
-I'll drop that when I apply it.
+The copy of TF-A/DM-Firmware, the SPL stack and malloc are located in a
+reserved memory region (for the kernel point of view) to avoid any
+memory corruption.
 
---=20
-Tom
+A test_enter_sleep command was implemented to be able to test the
+suspend sequence from U-Boot. It is only for test, the resume will not
+work.
 
---Xeqegm9PRvBCFSf6
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+Gowtham Tammana (1):
+  DO NOT MERGE: arm: dts: k3-j7200-r5-common: Add pmic node for esm
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUtNfgACgkQFHw5/5Y0
-tyxOmwv+KRR9t1pGxshvM4z6tL+qMXjcIvVDxZ18BDPKu/uZbbFTThyjl4ilHpy5
-XR1ysSOFhTtKJnV7maCV9jaFqj0Yjr0p6wbPH6nEmL/EIx7IFMUGz6Q8Ok/Jqted
-Mp3gKhtjjWPey3VNMDv38A+qbWRzvOYPRv+k/ymkweX+1rj7KiLFOWguzFFz9b5B
-xLNsv4oGPYDaJIAyX8wn8PJtHc+ILHgl4zaIxrOOKYxQ7ctx5aykzndOeEQ9WIiS
-sj+ncLFA2wNDjr8QABCeE7Jy51OgDdWuKR91tidzTCjjO4zWSJ8EgAFBSzPF7BWt
-TYadX+2XXwrN4O9jVgc4HAQ0aLvzBVSumaBU24cdwepuGwZLO3pqeKQ6NJykUAZz
-aWS96curXGsUQVkTomLeHzPWn9BLekCle5Uy5gcV+AUM2LSGWNrU3zki+4hESG/E
-me3PeroQUG7VOMsrwDNzMST/8nAoAwcxKDdNXvNKs3fqMDINWQW6VGr5QQsnbz5A
-fAqHq19J
-=DHGT
------END PGP SIGNATURE-----
+Gregory CLEMENT (3):
+  configs: j7200_evm_r5: Used reserved memory in DDR for stack
+  configs: j7200_evm_r5: Move address used for allocation in the
+    reserved space
+  cmd: test_enter_suspend: Add test_enter_suspend command
 
---Xeqegm9PRvBCFSf6--
+Thomas Richard (5):
+  board: ti: j721e: Add resume detection for J7200
+  ram: k3-ddrss: Add exit retention support
+  board: ti: j721e: Add the missing part of exit retention for k3-ddrss
+    (J7200)
+  board: ti: j721e: During resume spl restores TF-A and DM-Firmware
+  arm: mach-k3: j7200: Skip fit processing when resuming
+
+ .../arm/dts/k3-j7200-r5-common-proc-board.dts |  17 +-
+ arch/arm/mach-k3/common.c                     |  37 ++-
+ arch/arm/mach-k3/include/mach/j721e_spl.h     |  29 ++
+ arch/arm/mach-k3/sysfw-loader.c               |  16 +-
+ board/ti/j721e/evm.c                          |  79 +++++
+ cmd/Kconfig                                   |   7 +
+ cmd/boot.c                                    |   8 +
+ configs/j7200_evm_r5_defconfig                |   4 +-
+ drivers/firmware/psci.c                       |  23 ++
+ drivers/ram/k3-ddrss/k3-ddrss.c               | 302 ++++++++++++++++++
+ include/command.h                             |   2 +
+ 11 files changed, 514 insertions(+), 10 deletions(-)
+
+-- 
+2.39.2
+
