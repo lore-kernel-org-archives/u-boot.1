@@ -4,79 +4,153 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFBABCDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 05:42:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54706CDB474
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 06:25:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4CCD86DE8;
-	Mon, 16 Oct 2023 07:41:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4F4778692B;
+	Mon, 16 Oct 2023 08:25:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U8lrAWBI";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="BEI6tXGo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E78386B1D; Mon, 16 Oct 2023 07:40:40 +0200 (CEST)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DCB9A8692B; Mon, 16 Oct 2023 08:25:20 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20623.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e88::623])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FEB386D56
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 07:40:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E38786B49
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 08:25:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=takahiro.akashi@linaro.org
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-27d797f349fso99554a91.1
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 22:40:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697434806; x=1698039606; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jOvqY0RnTst/In7C37erk0JvDxg/cYhTxqWiCN5Q5U0=;
- b=U8lrAWBIf5I4homE98kpsZ9AqWWmRCZtZX2gC49TG34VQ7YCbrR8MO+71OTwvn4FpI
- ghJDYYrLgbFPO8p2Z2vK8MsieG6wJAj/9xsUOxtYQVK7yG0B95F4IksiOEVNhpgWz/di
- deDHvE0qR0CnKj3unyckccHRP2Jjd0BsrEOuFUIxJz0/6IsLDxtdaY+VbR7kBNiGMWWD
- uwUIqaM16ZFLgr88JDP7hKAxdkB6j0oiQRyJqLJAIXx2fYNed9ThIT2xqBjeHafQjfhb
- zxe2Kqu7f4roA3heRbv8aShFVYVoMUYp1x6w7FOReJxGfW1s9TWM0z70+U2LuYQjqkf4
- 8SEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697434806; x=1698039606;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jOvqY0RnTst/In7C37erk0JvDxg/cYhTxqWiCN5Q5U0=;
- b=Rb8KLx4mhAeQ6gkPShHnkDS0a5LmRRaZ5i/OXU36TB3TBYrw2ryzqgp/FFIW8JPOqs
- Kn+pkRgFLX1Jgx3h1nSrS4k68Fj9gk+ePgpMezU0BVJOog/rvYSI3lRnR4BrMVEJUHGw
- idbIvEMw7kcirv+EJAR5dRATkRpDXk/xCcexp/90+1RgD3oe1bQuneC+WvBotJBG8Bmb
- zhty2kh8YJYG1K1+73BUgRY5qbcqo/oEbuf4N+9W6kmtLKHMCb7U6ZVSmMsN4ZflF6Ze
- cSQ5Kf40z/4ENw29WWED9cKCQWqpoXjVSmfSSVf9THWzTsrNilqeJT7wykingW0KxaaC
- M9hg==
-X-Gm-Message-State: AOJu0YwZEkjDkSGE0y/2s/stfCipV0F7alA+Hgrd5wUfofG9leLXilya
- DshOTDCuG7Z01nIZE5AV8PH0Eg==
-X-Google-Smtp-Source: AGHT+IHLOvfcn+0mc5BKfX1THo1C4+cSZ3JO2y6dWwIKPoW9pUKMAs+ZEyM50mInVWrAuSr+8FjLnQ==
-X-Received: by 2002:a17:90b:1d12:b0:27d:55b4:e72 with SMTP id
- on18-20020a17090b1d1200b0027d55b40e72mr6049065pjb.2.1697434806330; 
- Sun, 15 Oct 2023 22:40:06 -0700 (PDT)
-Received: from octopus.. ([2400:4050:c3e1:100:4c30:a6e6:b316:7d31])
- by smtp.gmail.com with ESMTPSA id
- lb18-20020a17090b4a5200b002636dfcc6f5sm3878134pjb.3.2023.10.15.22.40.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 15 Oct 2023 22:40:06 -0700 (PDT)
-From: AKASHI Takahiro <takahiro.akashi@linaro.org>
-To: trini@konsulko.com,
-	sjg@chromium.org
-Cc: etienne.carriere@st.com, u-boot@lists.denx.de,
- AKASHI Takahiro <takahiro.akashi@linaro.org>
-Subject: [PATCH v2 1/4] firmware: scmi: add power domain protocol support
-Date: Mon, 16 Oct 2023 14:39:43 +0900
-Message-Id: <20231016053946.470458-2-takahiro.akashi@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231016053946.470458-1-takahiro.akashi@linaro.org>
-References: <20231016053946.470458-1-takahiro.akashi@linaro.org>
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Yq9PS4VjA/Gk0csKsNSGJd7j5UQR1gW2SW+IS01GI2AULidHtAn2V4MU2Nv7cqOGcJd4hZnH5xrYFIpJ0QJDs/vr0w8h1BH4/IikHYbafYhBD/k4VOVODdMcXc4bSpLJ7EJpEI5HvE59SyyBLntwpgelGA5oUYxJOEstQ/+Wh/I12qoTI1leiQI9FffzmQ/r52k0EfSLTDhODfSrtXygrZxKAB+N35tsSsDyZzrZkGUu6SnNsaq3GeBcOvREgeQoE3wKiBL04dRLaUzg5IKf4lL0u7Ibp9Ac2y4zPdBHYiXK8+51C8zNyLDO7EAskDcXUg6vWerhWF2tyhhCiI0e0Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0CppqI0woyKVFyawXXWiVKZdgcinPxJVz44eIHyaDtE=;
+ b=PhahVu97+DZI0xCEJlkzXqOQ36vw8q8+Wry3poGXDI9ydNPTssAtQ848Z/v3fnIu2JRZmjwBzPsv/K4Z8vkKt39OHHyHtippt3NU95trBvOQrFBF7br/xsEuBPcvc6V4DK1lvMlMqkNcsO3XNFeE/hhdW4ngF8RvpPRVmyop7H7S1dmx9nc0asYC3ICu+XN+0C1iej1hlPhaFT/uAUxY8KfjtIk5W3CX0YyrZXlPONmIst6PpDJqgBH3o1bhAfg73rX2sqlfHsTis/LIxc+6ihpIC1QCh+QYfiZgmFaGMuW+hTQFo7XQqx75Lqb2YhwM56fP1MphPVOzYtIFYBQUrg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=linaro.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0CppqI0woyKVFyawXXWiVKZdgcinPxJVz44eIHyaDtE=;
+ b=BEI6tXGo1wc9vzZaYaHvMZJaaH7jMd5xlTVSsdSrEKe8VWhuSGXGrlDSa3p4gXOGwpTxSwMUo25Tfvs0NIw0XUiqmO62K3GK6PmRnGQYCGMXHS8D91HaE3InZzmzM73ji/UTI3QWXut4Nurh+jaO/VxQIcazv6gVMxp09LTU6Io=
+Received: from MN2PR16CA0025.namprd16.prod.outlook.com (2603:10b6:208:134::38)
+ by LV2PR12MB5990.namprd12.prod.outlook.com (2603:10b6:408:170::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.34; Mon, 16 Oct
+ 2023 06:25:12 +0000
+Received: from BL02EPF0001A0FE.namprd03.prod.outlook.com
+ (2603:10b6:208:134:cafe::7a) by MN2PR16CA0025.outlook.office365.com
+ (2603:10b6:208:134::38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6838.30 via Frontend
+ Transport; Mon, 16 Oct 2023 06:25:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL02EPF0001A0FE.mail.protection.outlook.com (10.167.242.105) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6838.22 via Frontend Transport; Mon, 16 Oct 2023 06:25:12 +0000
+Received: from [192.168.137.2] (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 16 Oct
+ 2023 01:25:07 -0500
+Message-ID: <c3dfae22-94a0-4d64-9175-dde259c421ef@amd.com>
+Date: Mon, 16 Oct 2023 08:24:34 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 0/9] Add EFI HTTP boot support
+To: Masahisa Kojima <masahisa.kojima@linaro.org>, <u-boot@lists.denx.de>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>, Takahiro
+ Akashi <takahiro.akashi@linaro.org>
+References: <20231015234907.2362717-1-masahisa.kojima@linaro.org>
+ <CADQ0-X-=4q7dCeny2F_J6DqY9bVxQ01p-zLyu4rnwVXmE=iiEA@mail.gmail.com>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <CADQ0-X-=4q7dCeny2F_J6DqY9bVxQ01p-zLyu4rnwVXmE=iiEA@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FE:EE_|LV2PR12MB5990:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4ded4867-02d3-4454-2516-08dbce10a71c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: WVcYil/A900TdkUjoy/J2h2JcgMLkYFTp9lJH2Yps5MDB/rgYs2ztNd31K/ZkMoQa3OKzZuWDcqUL46Zy6pZtcBtxCR+AS/UZT1dGHhiuBcvR+FtaVuSvOHjBqeWr/JHe0FOHBgB1Iv1mDkMusjN5KNcOcQWRlqws4XkKi/8hYeqSCwytm1sJ+C/qdvhvKv2QuraEKRaEoWcQ8JPQ1H/a6SWIxfJ/4a0VP8AKPCvmElWZJrtdVDAgwjp63E0G6RGdy0JuOJ/XBbEEgzck/AJA6ZffVrVXtVjONzOjVj4r19mU6u3jlimxpaFuZ7zxINYjS8YpftTT1i5Iqof8t9llmRFpbrF+6HJClQ51yrXKI3Ah/vojXYLakNoeq5gTUjB2ftzbplZHnkZNl48dTOQAF/jlIL/xY+AiZ+fnUfG19KDW+5RM9sRszk0Q9NAfiD0y5bVFqBLMbx3H9it1qCVutu9oXLHMFUqP/2DE9H+ewSSfAlk3s5/q+WdcbLHIeVzDqGwctC8hOxLWSV0R5BN7Jq+uNXQkahWAH2dC2pXqit8zJpvNmG4HdIoZBvUWJhFvLAuFjl5X5NCxeJVcE0PyHsN+Op6IU9Q9HXTxMJvPoojBA7WTm8Tl9OmHgzaskv2T13oUU5+mYtj3FLPsFq10mK3bRWO54p7f2YHrSqeFyZQELIZljGYK78eGyaNm9HhSNwdWrM2AM7FZVPdSuuEH0v0dpyw/EaC8bMhsXWehGN18hLUxIb/5Q5py7qF0RMEp3z5Gmlf50yFRMHdURF1PTzOXgbX9kQEgfMO0UzjagVeX5DePVE5uWK2g7JJ031b
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(6019001)(4636009)(346002)(39860400002)(136003)(396003)(376002)(269900001)(230922051799003)(1800799009)(82310400011)(64100799003)(451199024)(186009)(36840700001)(46966006)(40480700001)(82740400003)(26005)(16526019)(336012)(426003)(81166007)(2616005)(356005)(478600001)(966005)(44832011)(5660300002)(8676002)(8936002)(4326008)(86362001)(31696002)(2906002)(316002)(16576012)(54906003)(36756003)(41300700001)(70586007)(70206006)(110136005)(6666004)(53546011)(47076005)(31686004)(36860700001)(83380400001)(43740500002)(36900700001)(10721665004)(344275003);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2023 06:25:12.1026 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4ded4867-02d3-4454-2516-08dbce10a71c
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FE.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5990
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,413 +167,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In this patch, added are helper functions to directly manipulate
-SCMI power domain management protocol. DM compliant power domain
-driver will be implemented on top of those interfaces in a succeeding
-patch.
 
-Signed-off-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
----
- drivers/firmware/scmi/Makefile |   1 +
- drivers/firmware/scmi/pwdom.c  | 189 +++++++++++++++++++++++++++++++++
- include/scmi_protocols.h       | 178 +++++++++++++++++++++++++++++++
- 3 files changed, 368 insertions(+)
- create mode 100644 drivers/firmware/scmi/pwdom.c
 
-diff --git a/drivers/firmware/scmi/Makefile b/drivers/firmware/scmi/Makefile
-index 1a23d4981709..dae42863589a 100644
---- a/drivers/firmware/scmi/Makefile
-+++ b/drivers/firmware/scmi/Makefile
-@@ -4,4 +4,5 @@ obj-y	+= smt.o
- obj-$(CONFIG_SCMI_AGENT_SMCCC)		+= smccc_agent.o
- obj-$(CONFIG_SCMI_AGENT_MAILBOX)	+= mailbox_agent.o
- obj-$(CONFIG_SCMI_AGENT_OPTEE)	+= optee_agent.o
-+obj-$(CONFIG_SCMI_POWER_DOMAIN)		+= pwdom.o
- obj-$(CONFIG_SANDBOX)		+= sandbox-scmi_agent.o sandbox-scmi_devices.o
-diff --git a/drivers/firmware/scmi/pwdom.c b/drivers/firmware/scmi/pwdom.c
-new file mode 100644
-index 000000000000..61b4338663de
---- /dev/null
-+++ b/drivers/firmware/scmi/pwdom.c
-@@ -0,0 +1,189 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * SCMI Power domain management protocol
-+ *
-+ * Copyright (C) 2023 Linaro Limited
-+ *		author: AKASHI Takahiro <takahiro.akashi@linaro.org>
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <malloc.h>
-+#include <scmi_agent.h>
-+#include <scmi_protocols.h>
-+#include <string.h>
-+#include <asm/types.h>
-+
-+int scmi_pwd_protocol_attrs(struct udevice *dev, int *num_pwdoms,
-+			    u64 *stats_addr, size_t *stats_len)
-+{
-+	struct scmi_pwd_protocol_attrs_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_POWER_DOMAIN,
-+		.message_id = SCMI_PROTOCOL_ATTRIBUTES,
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!dev || !num_pwdoms || !stats_addr || !stats_len)
-+		return -EINVAL;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*num_pwdoms = SCMI_PWD_PROTO_ATTRS_NUM_PWD(out.attributes);
-+	*stats_addr = ((u64)out.stats_addr_high << 32) + out.stats_addr_low;
-+	*stats_len = out.stats_len;
-+
-+	return 0;
-+}
-+
-+int scmi_pwd_protocol_message_attrs(struct udevice *dev, s32 message_id,
-+				    u32 *attributes)
-+{
-+	struct scmi_pwd_protocol_msg_attrs_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_POWER_DOMAIN,
-+		.message_id = SCMI_PROTOCOL_MESSAGE_ATTRIBUTES,
-+		.in_msg = (u8 *)&message_id,
-+		.in_msg_sz = sizeof(message_id),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!dev || !attributes)
-+		return -EINVAL;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*attributes = out.attributes;
-+
-+	return 0;
-+}
-+
-+int scmi_pwd_attrs(struct udevice *dev, u32 domain_id, u32 *attributes,
-+		   u8 **name)
-+{
-+	struct scmi_pwd_attrs_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_POWER_DOMAIN,
-+		.message_id = SCMI_PWD_ATTRIBUTES,
-+		.in_msg = (u8 *)&domain_id,
-+		.in_msg_sz = sizeof(domain_id),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!dev || !attributes || !name)
-+		return -EINVAL;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*name = strdup(out.name);
-+	if (!*name)
-+		return -ENOMEM;
-+
-+	*attributes = out.attributes;
-+
-+	return 0;
-+}
-+
-+int scmi_pwd_state_set(struct udevice *dev, u32 flags, u32 domain_id,
-+		       u32 pstate)
-+{
-+	struct scmi_pwd_state_set_in in;
-+	s32 status;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_POWER_DOMAIN,
-+		.message_id = SCMI_PWD_STATE_SET,
-+		.in_msg = (u8 *)&in,
-+		.in_msg_sz = sizeof(in),
-+		.out_msg = (u8 *)&status,
-+		.out_msg_sz = sizeof(status),
-+	};
-+	int ret;
-+
-+	if (!dev)
-+		return -EINVAL;
-+
-+	in.flags = flags;
-+	in.domain_id = domain_id;
-+	in.pstate = pstate;
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (status)
-+		return scmi_to_linux_errno(status);
-+
-+	return 0;
-+}
-+
-+int scmi_pwd_state_get(struct udevice *dev, u32 domain_id, u32 *pstate)
-+{
-+	struct scmi_pwd_state_get_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_POWER_DOMAIN,
-+		.message_id = SCMI_PWD_STATE_GET,
-+		.in_msg = (u8 *)&domain_id,
-+		.in_msg_sz = sizeof(domain_id),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!dev || !pstate)
-+		return -EINVAL;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*pstate = out.pstate;
-+
-+	return 0;
-+}
-+
-+int scmi_pwd_name_get(struct udevice *dev, u32 domain_id, u8 **name)
-+{
-+	struct scmi_pwd_name_get_out out;
-+	struct scmi_msg msg = {
-+		.protocol_id = SCMI_PROTOCOL_ID_POWER_DOMAIN,
-+		.message_id = SCMI_PWD_NAME_GET,
-+		.in_msg = (u8 *)&domain_id,
-+		.in_msg_sz = sizeof(domain_id),
-+		.out_msg = (u8 *)&out,
-+		.out_msg_sz = sizeof(out),
-+	};
-+	int ret;
-+
-+	if (!dev || !name)
-+		return -EINVAL;
-+
-+	ret = devm_scmi_process_msg(dev, &msg);
-+	if (ret)
-+		return ret;
-+	if (out.status)
-+		return scmi_to_linux_errno(out.status);
-+
-+	*name = strdup(out.extended_name);
-+	if (!*name)
-+		return -ENOMEM;
-+
-+	return 0;
-+}
-diff --git a/include/scmi_protocols.h b/include/scmi_protocols.h
-index 163647a57b95..7abb2a6f36ba 100644
---- a/include/scmi_protocols.h
-+++ b/include/scmi_protocols.h
-@@ -544,6 +544,184 @@ int scmi_base_set_protocol_permissions(struct udevice *dev,
- int scmi_base_reset_agent_configuration(struct udevice *dev, u32 agent_id,
- 					u32 flags);
- 
-+/*
-+ * SCMI Power Domain Management Protocol
-+ */
-+
-+#define SCMI_PWD_PROTOCOL_VERSION 0x30000
-+#define SCMI_PWD_PSTATE_TYPE_LOST BIT(30)
-+#define SCMI_PWD_PSTATE_ID GENMASK(27, 0)
-+
-+enum scmi_power_domain_message_id {
-+	SCMI_PWD_ATTRIBUTES = 0x3,
-+	SCMI_PWD_STATE_SET = 0x4,
-+	SCMI_PWD_STATE_GET = 0x5,
-+	SCMI_PWD_STATE_NOTIFY = 0x6,
-+	SCMI_PWD_STATE_CHANGE_REQUESTED_NOTIFY = 0x7,
-+	SCMI_PWD_NAME_GET = 0x8,
-+};
-+
-+/**
-+ * struct scmi_pwd_protocol_attrs_out
-+ * @status:		SCMI command status
-+ * @attributes:		Protocol attributes
-+ * @stats_addr_low:	Lower 32 bits of address of statistics memory region
-+ * @stats_addr_high:	Higher 32 bits of address of statistics memory region
-+ * @stats_len:		Length of statistics memory region
-+ */
-+struct scmi_pwd_protocol_attrs_out {
-+	s32 status;
-+	u32 attributes;
-+	u32 stats_addr_low;
-+	u32 stats_addr_high;
-+	u32 stats_len;
-+};
-+
-+#define SCMI_PWD_PROTO_ATTRS_NUM_PWD(attributes) ((attributes) & GENMASK(15, 0))
-+
-+/**
-+ * struct scmi_pwd_protocol_msg_attrs_out
-+ * @status:		SCMI command status
-+ * @attributes:		Message-specific attributes
-+ */
-+struct scmi_pwd_protocol_msg_attrs_out {
-+	s32 status;
-+	u32 attributes;
-+};
-+
-+#define SCMI_PWD_NAME_LENGTH_MAX 16
-+
-+/**
-+ * struct scmi_pwd_attrs_out
-+ * @status:	SCMI command status
-+ * @attributes:	Power domain attributes
-+ * @name:	Name of power domain
-+ */
-+struct scmi_pwd_attrs_out {
-+	s32 status;
-+	u32 attributes;
-+	u8 name[SCMI_PWD_NAME_LENGTH_MAX];
-+};
-+
-+#define SCMI_PWD_ATTR_PSTATE_CHANGE_NOTIFY	BIT(31)
-+#define SCMI_PWD_ATTR_PSTATE_ASYNC		BIT(30)
-+#define SCMI_PWD_ATTR_PSTATE_SYNC		BIT(29)
-+#define SCMI_PWD_ATTR_PSTATE_CHANGE_RQ_NOTIFY	BIT(28)
-+#define SCMI_PWD_ATTR_EXTENDED_NAME		BIT(27)
-+
-+/**
-+ * struct scmi_pwd_state_set_in
-+ * @flags:	Flags
-+ * @domain_id:	Identifier of power domain
-+ * @pstate:	Power state of the domain
-+ */
-+struct scmi_pwd_state_set_in {
-+	u32 flags;
-+	u32 domain_id;
-+	u32 pstate;
-+};
-+
-+#define SCMI_PWD_SET_FLAGS_ASYNC BIT(0)
-+
-+/**
-+ * struct scmi_pwd_state_get_out
-+ * @status:	SCMI command status
-+ * @pstate:	Power state of the domain
-+ */
-+struct scmi_pwd_state_get_out {
-+	s32 status;
-+	u32 pstate;
-+};
-+
-+#define SCMI_PWD_EXTENDED_NAME_MAX 64
-+/**
-+ * struct scmi_pwd_name_get_out
-+ * @status:		SCMI command status
-+ * @flags:		Parameter flags
-+ * @extended_name:	Extended name of power domain
-+ */
-+struct scmi_pwd_name_get_out {
-+	s32 status;
-+	u32 flags;
-+	u8 extended_name[SCMI_PWD_EXTENDED_NAME_MAX];
-+};
-+
-+/**
-+ * scmi_pwd_protocol_attrs - get protocol attributes
-+ * @dev:	SCMI protocol device
-+ * @num_pwdoms:	Number of power domains
-+ * @stats_addr:	Address of statistics memory region
-+ * @stats_len:	Length of statistics memory region
-+ *
-+ * Obtain the protocol attributes, the number of power domains and
-+ * the information of statistics memory region.
-+ *
-+ * Return: 0 on success, error code on failure
-+ */
-+int scmi_pwd_protocol_attrs(struct udevice *dev, int *num_pwdoms,
-+			    u64 *stats_addr, size_t *stats_len);
-+/**
-+ * scmi_pwd_protocol_message_attrs - get message-specific attributes
-+ * @dev:		SCMI protocol device
-+ * @message_id:		SCMI message ID
-+ * @attributes:		Message-specific attributes
-+ *
-+ * Obtain the message-specific attributes in @attributes.
-+ *
-+ * Return: 0 on success, error code on failure
-+ */
-+int scmi_pwd_protocol_message_attrs(struct udevice *dev, s32 message_id,
-+				    u32 *attributes);
-+/**
-+ * scmi_pwd_attrs - get power domain attributes
-+ * @dev:	SCMI protocol device
-+ * @domain_id:	Identifier of power domain
-+ * @attributes:	Power domain attributes
-+ * @name:	Name of power domain
-+ *
-+ * Obtain the attributes of the given power domain, @domain_id, in @attributes
-+ * as well as its name in @name.
-+ *
-+ * Return: 0 on success, error code on failure
-+ */
-+int scmi_pwd_attrs(struct udevice *dev, u32 message_id, u32 *attributes,
-+		   u8 **name);
-+/**
-+ * scmi_pwd_state_set - set power state
-+ * @dev:	SCMI protocol device
-+ * @flags:	Parameter flags
-+ * @domain_id:	Identifier of power domain
-+ * @pstate:	Power state
-+ *
-+ * Change the power state of the given power domain, @domain_id.
-+ *
-+ * Return: 0 on success, error code on failure
-+ */
-+int scmi_pwd_state_set(struct udevice *dev, u32 flags, u32 domain_id,
-+		       u32 pstate);
-+/**
-+ * scmi_pwd_state_get - get power state
-+ * @dev:	SCMI protocol device
-+ * @domain_id:	Identifier of power domain
-+ * @pstate:	Power state
-+ *
-+ * Obtain the power state of the given power domain, @domain_id.
-+ *
-+ * Return: 0 on success, error code on failure
-+ */
-+int scmi_pwd_state_get(struct udevice *dev, u32 domain_id, u32 *pstate);
-+/**
-+ * scmi_pwd_name_get - get extended name
-+ * @dev:	SCMI protocol device
-+ * @domain_id:	Identifier of power domain
-+ * @name:	Extended name of the domain
-+ *
-+ * Obtain the extended name of the given power domain, @domain_id, in @name.
-+ *
-+ * Return: 0 on success, error code on failure
-+ */
-+int scmi_pwd_name_get(struct udevice *dev, u32 domain_id, u8 **name);
-+
- /*
-  * SCMI Clock Protocol
-  */
--- 
-2.34.1
+On 10/16/23 04:39, Masahisa Kojima wrote:
+> On Mon, 16 Oct 2023 at 08:50, Masahisa Kojima
+> <masahisa.kojima@linaro.org> wrote:
+>>
+>> This series adds the EFI HTTP boot support.
+>> User can add the URI device path with "efidebug boot add" command.
+>> efibootmgr handles the URI device path, download the
+>> specified file using wget, mount the downloaded image with
+>> blkmap, then boot with the default file(e.g. EFI/BOOT/BOOTAA64.EFI)
+>> by selecting automatically created boot option when the new disk is
+>> detected.
+>>
+>> This version still does not include the test.
+>>
+>> To enable EFI HTTP boot, we need to enable the following Kconfig options.
+>>   CONFIG_CMD_DNS
+>>   CONFIG_CMD_WGET
+>>   CONFIG_BLKMAP
+>>   CONFIG_EFI_HTTP_BOOT
+>>
+>> On the Socionext Developerbox, enter the following commands then
+>> debian installer is downloaded into "loadaddr" and installer
+>> automatically starts.
+>>   => dhcp
+>>   => setenv serverip 192.168.1.1
+>>   => efidebug boot add -u 3 debian-netinst http://ftp.riken.jp/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+>>   => efidebug boot order 3
+>>   => bootefi bootmgr
+>>
+>> Note that this debian installer can not proceed the installation
+>> bacause RAM disk of installer image is not recogniged by the kernel.
+>> I'm still investigating this issue, but drivers/nvdimm/of_pmem.c in linux
+>> will be one of the solution to recognize RAM disk from kernel.
+>> (In EDK2, the equivalent solution is called ACPI NFIT.)
+>>
+>> On QEMU, I can not make DNS work from the QEMU guest.
+>> The following commands work on qemu_arm64(manually set the http server ip in URI).
+>>    => dhcp
+>>    => setenv gatewayip 10.0.2.2
+>>    => setenv httpserverip 134.160.38.1
+>>    => efidebug boot add -u 3 debian-netinst http://134.160.38.1/Linux/debian/debian-cd/12.1.0/arm64/iso-cd/debian-12.1.0-arm64-netinst.iso
+>>    => efidebug boot order 3
+>>    => bootefi bootmgr
+>>
+>> [TODO]
+>> - add test
+>> - stricter wget uri check
+>> - omit the dns process if the given uri has ip address
+>>     -> this will be supported when the lwip migration completes
+>> - uri device path support in eficonfig
+>>
+>> [change log]
+>> v5 -> v6
+>> - add patch #4 "Boot var automatic management for removable medias"
+>> - boot from automatically created boot option
+>>    rather than searching default file on the fly
+>> - introduce new CONFIG_EFI_HTTP_BOOT Kconfig option
+>> - comment in one place
+>> - use log_err() rather than printf()
+>> - use env_get_hex("filesize", 0) instead of return value of net_loop()
+>> - use more suitable error code
+>> - blkmap can be build for SPL/TPL
+>> - add CDROM short-form device path support
+> 
+> Sorry but I forgot to include the necessary changes.
+> I will resend this series soon.
+
+Which pretty much means that that next series is v7. If not you will confuse 
+tools like b4.
+
+Thanks,
+Michal
 
