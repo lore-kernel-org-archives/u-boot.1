@@ -4,103 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36FECCDB465
-	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 06:49:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC86CDB465
+	for <u-boot@archiver.kernel.org>; Mon, 16 Oct 2023 07:06:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 124AA8477A;
-	Mon, 16 Oct 2023 08:48:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A3AAC86BD5;
+	Mon, 16 Oct 2023 09:06:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qw+R7UIk";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="CB0ii1ij";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ED1D868C0; Mon, 16 Oct 2023 08:48:14 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2307886C1D; Mon, 16 Oct 2023 09:06:15 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B02D86DB3
- for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 08:48:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0FB586B4E
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 09:06:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-32d9cb5e0fcso2406418f8f.0
- for <u-boot@lists.denx.de>; Sun, 15 Oct 2023 23:48:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697438888; x=1698043688; darn=lists.denx.de;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dG3EozR2YbBz5CU77OJ09WvCXbTkaKIOcH++cobCu3Q=;
- b=qw+R7UIkv1Eh89NmV18fgISD3ErCuGa5G+HKA5eN8cwAyh4pnKVZyqcr3Ifll2nSLQ
- higrpBUoOJjBo7NqmCdnVGaNzUQvoLdL6qxyhJU93GHNv4qS0hbxJoZ363d9lxCPES08
- DP8L4Vx7lsM+JQj+4Jy0O1Bkmt50tjZ7Eucz7oeYah5xLLaCLTHancrYytaahxMlF+p7
- EPI/Caelh2S3cnOiYhzoZDCh4I5UnoaF9rViTpKKQ2bnK8Gjv+n8/FCD6/y2wlyDcye5
- Eq3muCe3ivcp/4hPrbIRSyYRYZWfenuTcclzWPAU5J2vcNyhKhb7T5d85qCF2OnSSEru
- RzoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697438888; x=1698043688;
- h=content-transfer-encoding:organization:autocrypt:content-language
- :cc:to:reply-to:subject:from:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dG3EozR2YbBz5CU77OJ09WvCXbTkaKIOcH++cobCu3Q=;
- b=ROaT6Dg8mXe4Saw3atNRuHj7WZPJlbh/Q6ZKwK30ok3OSfOPgKDsOpiZ9cZnvgBniO
- KjDEtVCYo+5PWt29y8E88UnTt7yoVZuXzOqjLLUtd0jI+FcPVUkSWo1Aswr8FHW0NuVZ
- +ls7nBnQlcl6HFEFitFQrC4yHoKVSVUwbht0g/njQ0deEyHL9z1vCb/ZE6w7c6TCUYja
- IO1b7okmR8eyVdwU9w/LrhFV7gUJyb3y07WCJaY1D4YBobhPlIVncAJ2Wi1sabqRvqxE
- /EeKo1L8Z4EOsuSm/9Uxokjz8P4+Zo20JAdZ+HY15QqBAhwjL8iPPlwmUGpBnNZWYlXE
- glLg==
-X-Gm-Message-State: AOJu0YzMGj+zm8ILP3TCfNoc3ddl3T+aL8aVS3Cgf7EY99lHN1HNSo6q
- mS/LACCGGEmuLE9Y9cEOHfZGfA==
-X-Google-Smtp-Source: AGHT+IEM2q/GdnT+0quhIXgKdqJEXtDYrHZ1Ck8Mx3R9lsMzoEqAZ4gozdC4nbknV2jkm4uRztA22w==
-X-Received: by 2002:a5d:620f:0:b0:31f:ef77:67e4 with SMTP id
- y15-20020a5d620f000000b0031fef7767e4mr24493727wru.37.1697438887721; 
- Sun, 15 Oct 2023 23:48:07 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:b5ab:4a16:fd45:8130?
- ([2a01:e0a:982:cbb0:b5ab:4a16:fd45:8130])
- by smtp.gmail.com with ESMTPSA id
- dj16-20020a0560000b1000b003198a9d758dsm9575932wrb.78.2023.10.15.23.48.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 15 Oct 2023 23:48:07 -0700 (PDT)
-Message-ID: <555f51df-c50f-4118-bf74-3619965cd828@linaro.org>
-Date: Mon, 16 Oct 2023 08:48:06 +0200
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1697439965; x=1698044765; i=xypron.glpk@gmx.de;
+ bh=10sKkqBjWsLjQKTKfnkfmp76vHwj/jW0e+4yME3ZU3E=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References;
+ b=CB0ii1ijtdTgNF7e4gKrcSo9bOxuKOYwZsMgNreuvB00hpFZ8c5DO5LSvG/oIhbnq1yfWVbgQte
+ GxXFCNqPb9OQHY7CztBTh8Qjm+30IY+djWWySywc4FXKKTH8Qx6GBCZIihgeLqsgnOWo4/xATvALG
+ g1eArGTZZ8a0vhsOl2ueVJXhytx+pAvqAc2JJxzwHXD4CNHS35xxTCZ1T2J61gC65gRHUBkKmqnCo
+ DgtgwAy+dkQAK017RVZ2ew8+052UPSztvBEyv6Ja+aqdcgpEQZ7I+js4fuK+gaTDXy9ocopQ3z5aN
+ KpNsP1DdOHGnIwNhyIiRcsVlzBPSKirzIrog==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([178.202.40.247]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MybGh-1rkHOi1IJ3-00z0I3; Mon, 16
+ Oct 2023 09:06:05 +0200
+Date: Mon, 16 Oct 2023 09:06:03 +0200
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>, u-boot@lists.denx.de
+CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: [PATCH v7 4/9] efi_loader: create default file boot option
+User-Agent: K-9 Mail for Android
+In-Reply-To: <20231016064526.2410856-5-masahisa.kojima@linaro.org>
+References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
+ <20231016064526.2410856-5-masahisa.kojima@linaro.org>
+Message-ID: <A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [GIT PULL] Please pull u-boot-amlogic-20231015
-To: trini@konsulko.com
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro Developer Services
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:OjIWWEhACjHD38c1D7JNTZ9kHG5JOlYx+k7hjk85U0ThG5gDPUt
+ /DOlHNOJEa6Ll+UcKapPvyPsMoh5KL5fgByifEhRg5B5spjGV0FFusziSeictB/IOWrYBfv
+ YpLosom+s+4lmhVge0ZtLseyWjligyBcqfNnC8yAcClTlICvJ0LOH5fgd1LcowN7Ct/L320
+ zlo8tzOvThMBeHJpajUkg==
+UI-OutboundReport: notjunk:1;M01:P0:tlfm3kYml1I=;YSOOoBSt9B2FjO9LZGYVNG4oe3Y
+ 9C70egVev/YyvanS2J0zUfIRQB932mhrKsgCLhlOa8d8ieZuOCFiRpX+NlXjhMZ0+UP1nijdR
+ 2sVswsyUnwZSV9Vf7nUorz8wyb8jgP8rJH73MJtGLP8Zt/krAdmPRfrI9Yyvbhi5yfa1AzaI0
+ XjnaL+lbUlpydRjaWmpOllh8Zw1vmLH82zK0MlFPnrok5evhdFEZiiwgK3wGdC2Jq8EQRpcqo
+ a956iknU+7uMvO/9symDtr4Kt3DRNQ5oEb5hI5YPK/73MiFL9dgpWDMC14qdb53/Pw9d9+eG0
+ 00KLQQUEGSaaJZA3SVAQ4vIwyp85tGa3TqIpGN3mrI+4TvaPAuo1oVlmhdp5Jz4e+SY0w506n
+ fN5A2fR/vVZgLgJ6Z7Sg10ezXtlwAoKAhUVL4s+U4rfJFvsx2cgn/w7qzub9T7AEuP7DumvKQ
+ JfzmdP4CqBl8deVC4pn3+Hlw1kVQTcUnUjN4F4GWOCaZtre5V5wNQoNcODn8pVZWIlqq4bdDb
+ x8+3s3m6E6nCYZgw9XL/g677JPsEaARbjhrzX7SZeY/eQF8W+TtGiVRwFp8rgdYPbdYJTUXcS
+ LqHZ6/3hdHDKH6MSwygmJJL9+cRAK/2Yl8C3HjIqKx30JZyErJNncK6cWVbTTK5J3cdL7V7dT
+ Gqvp93ESXZ18+gsUfxJyWeay95Vh3U9Fec9svz+wW9kwssmKDEpwRitzaSM7GjTQR9dxZ22md
+ 3BXchor0Rmto9aBXkHGsqkTvMHfNYwJFXgI+jLB0pJAahIjaOq9r+5snkDznFLssvLbOYxR0Z
+ v2c78zdPUj14cTcOLb608nYJSq+ZsPM0I2n3sbqNGq+DKCrGhGBbIuJI/Mojogp9UCCoFi5Nx
+ 8VPvpWrqP4ARVUt+7jCIFXYBzV46T34+3JLYmRAiub3LSd4oRqBEjk6fMeaONClcfqnHoYcAb
+ 8PBK14q1vtLBshjY2NwwpDuzx7I=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,114 +84,207 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-A set of changes mostly concerning Amlogic A1 & S4 SoCs for USB, Secure Monitor
-and RNG bringup.
 
 
-The CI job is at https://source.denx.de/u-boot/custodians/u-boot-amlogic/pipelines/18138
+Am 16=2E Oktober 2023 08:45:21 MESZ schrieb Masahisa Kojima <masahisa=2Eko=
+jima@linaro=2Eorg>:
+>Current efibootmgr automatically creates the
+>boot options of all disks and partitions installing
+>EFI_SIMPLE_FILE_SYSTEM_PROTOCOL=2E
+>Some of the automatically created boot options are
+>useless if the disk and partition does not have
+>the default file(e=2Eg=2E EFI/BOOT/BOOTAA64=2EEFI)=2E
+>
+>This commit only creates the boot option if the disk and
+>partition have the default file so that system can directly
+>boot from it=2E
 
-Thanks,
-Neil
+I don't directly see the user benefit=2E
 
-The following changes since commit 997bef3c6d22d12c7fd092fb831bf94d114c9f6f:
+Reading all file systems will increase the boot time=2E Shouldn't we avoid=
+ this?
 
-   Merge branch '2023-10-11-port-gen_compile_commands_py' (2023-10-11 13:25:01 -0400)
+What does EDK II do?
 
-are available in the Git repository at:
+Does the UEFI specification warrant this change?
 
-   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot-amlogic-20231015
+Best regards
 
-for you to fetch changes up to 7cd53e0d5203f8e25bb69d2e675769888fcbc754:
+Heinrich
 
-   arch: meson: use secure monitor driver (2023-10-15 12:23:48 +0200)
-
-----------------------------------------------------------------
-- add Amlogic A1 clock driver
-- add Amlogic A1 reset support
-- add USB Device support for Amlogic A1
-- enable RNG on Amlogic A1 & Amlogic S4
-- move Amlogic Secure Monitor to standalone driver
-
-----------------------------------------------------------------
-Alexey Romanov (18):
-       dt-bindings: reset: add Meson A1 reset bindings
-       reset: add support for Amlogic A1 family
-       phy: get rid of raw hex values
-       phy: move clk enable/disable in init/exit
-       phy: support Amlogic A1 family
-       dwc3: add support for Amlogic A1 family
-       ad401: enable USB stack
-       meson-a1: dts: add hw rng node
-       meson-a1: dts: add ao secure node
-       drivers: rng: add support for Meson S4
-       drivers: introduce Secure Monitor uclass
-       sandbox: add sandbox sm uclass driver
-       sandbox: dts: add meson secure monitor node
-       sandbox: add tests for UCLASS_SM
-       sandbox: defconfig: enable CONFIG_SM option
-       drivers: introduce Meson Secure Monitor driver
-       arch: meson: sm: set correct order of the includes
-       arch: meson: use secure monitor driver
-
-Igor Prusov (3):
-       dt-bindings: clock: Add Amlogic A1 clock bindings
-       clk: Add clock driver for Amlogic A1
-       a1: clk: Add missing USB_PHY_IN and USB_PHY gates
-
-  MAINTAINERS                                        |   1 +
-  arch/arm/dts/meson-a1.dtsi                         |  11 +
-  arch/arm/include/asm/arch-meson/clock-a1.h         |  23 +
-  arch/arm/mach-meson/Kconfig                        |   1 +
-  arch/arm/mach-meson/sm.c                           | 116 ++--
-  arch/sandbox/dts/test.dts                          |   4 +
-  configs/ad401_defconfig                            |   3 +
-  configs/sandbox_defconfig                          |   1 +
-  drivers/Kconfig                                    |   2 +
-  drivers/Makefile                                   |   1 +
-  drivers/clk/meson/Kconfig                          |   8 +
-  drivers/clk/meson/Makefile                         |   1 +
-  drivers/clk/meson/a1.c                             | 729 +++++++++++++++++++++
-  drivers/phy/Kconfig                                |   2 +-
-  drivers/phy/meson-g12a-usb2.c                      | 235 ++++++-
-  drivers/reset/reset-meson.c                        |  42 +-
-  drivers/rng/meson-rng.c                            |  72 +-
-  drivers/sm/Kconfig                                 |   9 +
-  drivers/sm/Makefile                                |   5 +
-  drivers/sm/meson-sm.c                              | 198 ++++++
-  drivers/sm/sandbox-sm.c                            |  76 +++
-  drivers/sm/sm-uclass.c                             |  55 ++
-  drivers/usb/dwc3/dwc3-meson-g12a.c                 |  79 ++-
-  include/dm/uclass-id.h                             |   1 +
-  .../clock/amlogic,a1-peripherals-clkc.h            | 168 +++++
-  include/dt-bindings/clock/amlogic,a1-pll-clkc.h    |  25 +
-  include/dt-bindings/reset/amlogic,meson-a1-reset.h |  76 +++
-  include/meson/sm.h                                 |  19 +
-  include/sandbox-sm.h                               |  18 +
-  include/sm-uclass.h                                |  72 ++
-  include/sm.h                                       |  67 ++
-  test/dm/Makefile                                   |   1 +
-  test/dm/sm.c                                       |  65 ++
-  33 files changed, 2095 insertions(+), 91 deletions(-)
-  create mode 100644 arch/arm/include/asm/arch-meson/clock-a1.h
-  create mode 100644 drivers/clk/meson/a1.c
-  create mode 100644 drivers/sm/Kconfig
-  create mode 100644 drivers/sm/Makefile
-  create mode 100644 drivers/sm/meson-sm.c
-  create mode 100644 drivers/sm/sandbox-sm.c
-  create mode 100644 drivers/sm/sm-uclass.c
-  create mode 100644 include/dt-bindings/clock/amlogic,a1-peripherals-clkc.h
-  create mode 100644 include/dt-bindings/clock/amlogic,a1-pll-clkc.h
-  create mode 100644 include/dt-bindings/reset/amlogic,meson-a1-reset.h
-  create mode 100644 include/meson/sm.h
-  create mode 100644 include/sandbox-sm.h
-  create mode 100644 include/sm-uclass.h
-  create mode 100644 include/sm.h
-  create mode 100644 test/dm/sm.c
+>
+>Signed-off-by: Masahisa Kojima <masahisa=2Ekojima@linaro=2Eorg>
+>---
+> lib/efi_loader/efi_bootmgr=2Ec | 86 ++++++++++++++++++++++++++----------
+> 1 file changed, 63 insertions(+), 23 deletions(-)
+>
+>diff --git a/lib/efi_loader/efi_bootmgr=2Ec b/lib/efi_loader/efi_bootmgr=
+=2Ec
+>index a40762c74c=2E=2Ec8cf1c5506 100644
+>--- a/lib/efi_loader/efi_bootmgr=2Ec
+>+++ b/lib/efi_loader/efi_bootmgr=2Ec
+>@@ -355,40 +355,70 @@ error:
+>  */
+> static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_m=
+edia_boot_option *opt,
+> 						      efi_handle_t *volume_handles,
+>-						      efi_status_t count)
+>+						      efi_uintn_t *count)
+> {
+>-	u32 i;
+>+	u32 i, num =3D 0;
+> 	struct efi_handler *handler;
+> 	efi_status_t ret =3D EFI_SUCCESS;
+>=20
+>-	for (i =3D 0; i < count; i++) {
+>+	for (i =3D 0; i < *count; i++) {
+> 		u16 *p;
+> 		u16 dev_name[BOOTMENU_DEVICE_NAME_MAX];
+> 		char *optional_data;
+> 		struct efi_load_option lo;
+> 		char buf[BOOTMENU_DEVICE_NAME_MAX];
+>-		struct efi_device_path *device_path;
+>+		struct efi_device_path *device_path, *full_path, *dp, *fp;
+> 		struct efi_device_path *short_dp;
+>+		struct efi_file_handle *root, *f;
+>+		struct efi_simple_file_system_protocol *file_system;
+>+		u16 *default_file_path =3D NULL;
+>=20
+>-		ret =3D efi_search_protocol(volume_handles[i], &efi_guid_device_path, =
+&handler);
+>+		ret =3D efi_search_protocol(volume_handles[i],
+>+					  &efi_guid_device_path, &handler);
+> 		if (ret !=3D EFI_SUCCESS)
+> 			continue;
+>-		ret =3D efi_protocol_open(handler, (void **)&device_path,
+>-					efi_root, NULL, EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+>+
+>+		device_path =3D handler->protocol_interface;
+>+		full_path =3D efi_dp_from_file(device_path,
+>+					     "/EFI/BOOT/" BOOTEFI_NAME);
+>+
+>+		/* check whether the partition or disk have the default file */
+>+		ret =3D efi_dp_split_file_path(full_path, &dp, &fp);
+>+		if (ret !=3D EFI_SUCCESS || !fp)
+>+			goto next_entry;
+>+
+>+		default_file_path =3D efi_dp_str(fp);
+>+		if (!default_file_path)
+>+			goto next_entry;
+>+
+>+		ret =3D efi_search_protocol(volume_handles[i],
+>+					  &efi_simple_file_system_protocol_guid,
+>+					  &handler);
+> 		if (ret !=3D EFI_SUCCESS)
+>-			continue;
+>+			goto next_entry;
+>+
+>+		file_system =3D handler->protocol_interface;
+>+		ret =3D EFI_CALL(file_system->open_volume(file_system, &root));
+>+		if (ret !=3D EFI_SUCCESS)
+>+			goto next_entry;
+>+
+>+		ret =3D EFI_CALL(root->open(root, &f, default_file_path,
+>+					  EFI_FILE_MODE_READ, 0));
+>+		if (ret !=3D EFI_SUCCESS)
+>+			goto next_entry;
+>+
+>+		EFI_CALL(f->close(f));
+>=20
+> 		ret =3D efi_disk_get_device_name(volume_handles[i], buf, BOOTMENU_DEVI=
+CE_NAME_MAX);
+> 		if (ret !=3D EFI_SUCCESS)
+>-			continue;
+>+			goto next_entry;
+>=20
+> 		p =3D dev_name;
+> 		utf8_utf16_strncpy(&p, buf, strlen(buf));
+>=20
+> 		/* prefer to short form device path */
+>-		short_dp =3D efi_dp_shorten(device_path);
+>-		if (short_dp)
+>-			device_path =3D short_dp;
+>+		short_dp =3D efi_dp_shorten(full_path);
+>+		device_path =3D short_dp ? short_dp : full_path;
+>=20
+> 		lo=2Elabel =3D dev_name;
+> 		lo=2Eattributes =3D LOAD_OPTION_ACTIVE;
+>@@ -396,24 +426,35 @@ static efi_status_t efi_bootmgr_enumerate_boot_opti=
+on(struct eficonfig_media_boo
+> 		lo=2Efile_path_length =3D efi_dp_size(device_path) + sizeof(END);
+> 		/*
+> 		 * Set the dedicated guid to optional_data, it is used to identify
+>-		 * the boot option that automatically generated by the bootmenu=2E
+>+		 * the boot option that automatically generated by the efibootmgr=2E
+> 		 * efi_serialize_load_option() expects optional_data is null-terminate=
+d
+> 		 * utf8 string, so set the "1234567" string to allocate enough space
+> 		 * to store guid, instead of realloc the load_option=2E
+> 		 */
+> 		lo=2Eoptional_data =3D "1234567";
+>-		opt[i]=2Esize =3D efi_serialize_load_option(&lo, (u8 **)&opt[i]=2Elo);
+>-		if (!opt[i]=2Esize) {
+>-			ret =3D EFI_OUT_OF_RESOURCES;
+>-			goto out;
+>+		opt[num]=2Esize =3D efi_serialize_load_option(&lo, (u8 **)&opt[num]=2E=
+lo);
+>+		if (!opt[num]=2Esize) {
+>+			efi_free_pool(full_path);
+>+			efi_free_pool(dp);
+>+			efi_free_pool(fp);
+>+			efi_free_pool(default_file_path);
+>+			return EFI_OUT_OF_RESOURCES;
+> 		}
+> 		/* set the guid */
+>-		optional_data =3D (char *)opt[i]=2Elo + (opt[i]=2Esize - u16_strsize(u=
+"1234567"));
+>+		optional_data =3D (char *)opt[num]=2Elo + (opt[num]=2Esize - u16_strsi=
+ze(u"1234567"));
+> 		memcpy(optional_data, &efi_guid_bootmenu_auto_generated, sizeof(efi_gu=
+id_t));
+>+		num++;
+>+
+>+next_entry:
+>+		efi_free_pool(full_path);
+>+		efi_free_pool(dp);
+>+		efi_free_pool(fp);
+>+		efi_free_pool(default_file_path);
+> 	}
+>=20
+>-out:
+>-	return ret;
+>+	*count =3D num;
+>+
+>+	return EFI_SUCCESS;
+> }
+>=20
+> /**
+>@@ -642,7 +683,7 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_=
+index)
+>  * efi_bootmgr_update_media_device_boot_option() - generate the media de=
+vice boot option
+>  *
+>  * This function enumerates all devices supporting EFI_SIMPLE_FILE_SYSTE=
+M_PROTOCOL
+>- * and generate the bootmenu entries=2E
+>+ * and create the boot option with default file if the file exists=2E
+>  * This function also provide the BOOT#### variable maintenance for
+>  * the media device entries=2E
+>  * - Automatically create the BOOT#### variable for the newly detected d=
+evice,
+>@@ -674,8 +715,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_opt=
+ion(void)
+> 		goto out;
+> 	}
+>=20
+>-	/* enumerate all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL */
+>-	ret =3D efi_bootmgr_enumerate_boot_option(opt, volume_handles, count);
+>+	ret =3D efi_bootmgr_enumerate_boot_option(opt, volume_handles, &count);
+> 	if (ret !=3D EFI_SUCCESS)
+> 		goto out;
+>=20
