@@ -4,78 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D28CCDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 18:24:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32870CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 18:53:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65B6686F34;
-	Tue, 17 Oct 2023 20:24:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B90086D9C;
+	Tue, 17 Oct 2023 20:53:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LedLaXH6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pjiygLi3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBCFD865A2; Tue, 17 Oct 2023 20:24:27 +0200 (CEST)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3F62886C6E; Tue, 17 Oct 2023 20:53:45 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CFDB86F1C
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:24:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CB61786EE2
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:53:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3b2b1af964dso3276660b6e.1
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 11:24:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697567062; x=1698171862; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=893hWjbk+KdBBlRdHAVhS7raASGGpiSzZ6yApKUOMVs=;
- b=LedLaXH6OZAEWRD03vkwkILKJXak0BcHadd2R6AzG46aDudG7nfdofVw831jSQ0g3Z
- MTvAh+pHJ851ySpLF9Z6Nq4ia2pHAyDNOXRwoUpzkMCYaZg7vYFhMzsOvYc6YFvOQL3j
- wkGIAE7y5ATsQR4yBcRMeZ621/CbWUbDEmAzQolb/XNDNChxXgIQipPsPGFJA9xhwhD5
- IfSqzCkDwV4p4LxN1V46rDfGpEVPOecKh9lssXygxE8eNSodA/Wir4KgsQHrXedDiuH5
- 3JV8NhXe4qT5uzRXj8vmsNUqVK5meVY6uwPREUsITB9A6a/cyZbdCgT9rHakXHU3nbRL
- /f9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697567062; x=1698171862;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=893hWjbk+KdBBlRdHAVhS7raASGGpiSzZ6yApKUOMVs=;
- b=gVGtAtMfoRFjzXsa+SQPuOUXP9eYw4hGpS7IcJDeylQrY6m6EzvXsNh6y+hsJD9vDK
- zg4T274tESvlKqxBxzFyBtsOhx5py9VVIr5IbPhZsYBO70hhUBlZTRxaLHPv0yAMgYzM
- qlm1Gawjb46xkYyI8FxNeDh6uRNy2Wsd2vFaOAn7r80H1x1HNfPQIOQyAYX1BYR40UC1
- yX2itT34I84DqEkcW27bV9/Ce12V0XyE2PWCgo0wzZfB2zLzApF+LrL/jlwZYIXYWQzm
- N5G9Icbsdnh5fIntslfZltsaIgcIqlBjaFT6uqcxfNTrHCVy05/tTnnc7dJNwNOLnH1S
- RXpg==
-X-Gm-Message-State: AOJu0Yxi4D/BZGOHlzQD4F+XP54sTLwR6zsR4zH7xu7cCXZkCHj6u2dH
- qngT4hb1cuw4yq/YRtttP2DM4ifdUI0=
-X-Google-Smtp-Source: AGHT+IG147XMrxfy7lQmJdwrW6IAi3CZtLF7gphuTH9xa/l7F/KjgMpjGtRVFEgW+jhxSWeX1V1X3g==
-X-Received: by 2002:a05:6808:3b5:b0:3ae:21d1:8040 with SMTP id
- n21-20020a05680803b500b003ae21d18040mr3074782oie.36.1697567062402; 
- Tue, 17 Oct 2023 11:24:22 -0700 (PDT)
-Received: from localhost.localdomain ([75.28.21.198])
- by smtp.gmail.com with ESMTPSA id
- 6-20020aca0b06000000b003a3860b375esm340312oil.34.2023.10.17.11.24.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Oct 2023 11:24:22 -0700 (PDT)
-From: Chris Morgan <macroalpha82@gmail.com>
-To: u-boot@lists.denx.de
-Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, sjg@chromium.org,
- Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH 3/3] board: rockchip: Add support for RGB30 and RK2023 to RGxx3
-Date: Tue, 17 Oct 2023 13:24:14 -0500
-Message-Id: <20231017182414.321411-4-macroalpha82@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20231017182414.321411-1-macroalpha82@gmail.com>
-References: <20231017182414.321411-1-macroalpha82@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39HIrd65126448;
+ Tue, 17 Oct 2023 13:53:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1697568819;
+ bh=GxPCUDVT59cLmqdsh/sA9Q2ZxOxjGUoFKTQkV0KZZqc=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=pjiygLi3JylWpKU1N5Cw2lzf1lsrfbE7dT5HaLeqXXfPuHbU6CpD3afelqrfAdl6G
+ uMrusMu/lN3dC4lMu9IT9ZBbdbyoQAPznvo8Wx6ykmsGsxErky8pfkcpijWV75b27r
+ ZQl2sXGHmKoj0hr/l8NcHqE+fCQOWi9fb0cv4XNU=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39HIrd5n029148
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 17 Oct 2023 13:53:39 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
+ Oct 2023 13:53:38 -0500
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 17 Oct 2023 13:53:38 -0500
+Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
+ by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39HIrc0N063759;
+ Tue, 17 Oct 2023 13:53:38 -0500
+Date: Tue, 17 Oct 2023 13:53:38 -0500
+From: Nishanth Menon <nm@ti.com>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+CC: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>,
+ <u-boot@lists.denx.de>, <vigneshr@ti.com>, <m-chawdhry@ti.com>
+Subject: Re: [PATCH] arm: dts: k3-j721e-mcu-wakeup: Add MCU domain ESM instance
+Message-ID: <20231017185338.yeetp7iwn52o756e@snazzy>
+References: <20231013102941.548209-1-n-francis@ti.com>
+ <454562f1-d120-9719-62c3-7ef64861307c@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <454562f1-d120-9719-62c3-7ef64861307c@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,51 +79,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chris Morgan <macromorgan@hotmail.com>
+On 16:35-20231013, Kumar, Udit wrote:
+> 
+> On 10/13/2023 3:59 PM, Neha Malcom Francis wrote:
+> > Currently J721E defines only the main_esm in DTS. Add node for mcu_esm
+> > as well.
+> > 
+> > According to J721E TRM (12.11.2.2 ESM Environment) [1], we see that the
+> > interrupt line from ESMi (main_esm) is routed to MCU_ESM (mcu_esm). This
+> > is MCU_ESM0_LVL_IN_95 with interrupt ID 95. Configure mcu_esm
+> > accordingly so that errors from main_esm are routed to mcu_esm and
+> > handled.
+> > 
+> > [1] https://www.ti.com/lit/zip/spruil1
+> > 
+> > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> > ---
+> > Upstream kernel effort:
+> > https://lore.kernel.org/lkml/20230926142810.602384-1-n-francis@ti.com/
+> 
+> 
+> should part of next u-boot, kernel sync, no?
+> 
 
-Add support for the Powkiddy RK2023 and RGB30 to the Anbernic RGxx3.
-While these devices are manufactured by Powkiddy instead of Anbernic,
-the hardware is so similar they can all use the same bootloader.
-
-Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
----
- board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
-
-diff --git a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-index a93b11cd47..dae9dc87c2 100644
---- a/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-+++ b/board/anbernic/rgxx3_rk3566/rgxx3-rk3566.c
-@@ -60,6 +60,8 @@ enum rgxx3_device_id {
- 	RG353P,
- 	RG353V,
- 	RG503,
-+	RGB30,
-+	RK2023,
- 	/* Devices with duplicate ADC value */
- 	RG353PS,
- 	RG353VS,
-@@ -95,6 +97,20 @@ static const struct rg3xx_model rg3xx_model_details[] = {
- 		.fdtfile = DTB_DIR "rk3566-anbernic-rg503.dtb",
- 		.detect_panel = 0,
- 	},
-+	[RGB30] = {
-+		.adc_value = 383, /* Gathered from second hand information */
-+		.board = "rk3566-powkiddy-rgb30",
-+		.board_name = "RGB30",
-+		.fdtfile = DTB_DIR "rk3566-powkiddy-rgb30.dtb",
-+		.detect_panel = 0,
-+	},
-+	[RK2023] = {
-+		.adc_value = 635, /* Observed average from device */
-+		.board = "rk3566-powkiddy-rk2023",
-+		.board_name = "RK2023",
-+		.fdtfile = DTB_DIR "rk3566-powkiddy-rk2023.dtb",
-+		.detect_panel = 0,
-+	},
- 	/* Devices with duplicate ADC value */
- 	[RG353PS] = {
- 		.adc_value = 860, /* Observed average from device */
+That is correct, this should come in via upstream kernel sync.
 -- 
-2.34.1
-
+Regards,
+Nishanth Menon
+Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
