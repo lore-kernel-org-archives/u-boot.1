@@ -4,129 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18ADCCDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 05:20:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01CDACDB482
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 05:33:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EB6C86BC8;
-	Tue, 17 Oct 2023 07:20:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id D070986BD7;
+	Tue, 17 Oct 2023 07:33:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="lNytOJsi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Pr5BaCDm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51E9886B67; Tue, 17 Oct 2023 07:20:21 +0200 (CEST)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20603.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1b::603])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DAF2A86BE0; Tue, 17 Oct 2023 07:33:05 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04B3B869EB
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 07:20:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7853F86BD6
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 07:33:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jan.kiszka@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=LBrymc0ndeea5U9hVh00QyHrwL2Sa5wIDs16snP2jabocmeAn0YIJIETN2WJxUby1xBUM4vamCYJFY1CNXPTQFiTmL8A73pALdIb4e3IT2au+Y0nMRqrmPghgZxtVww/gI49YFoqTC+YnkoC6A1/bYINP05HEIm8LRzRsooVprM/bQxuN5Yl721A3GNqwGifuLcrvicTdwk7Mgc/Hb3GzeHLJj8DGScNXYEgEJ+QuFXUETV1bZvG9Vfj0Woi2K9T2GvwucFXBfQqX1CFCkOv0o6O+O45U5WSNpx3UMfT9wP4NZ28rz5tkbs2g6R1Pgh38cJtkkM0ocm3iv0bz1HIfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VX08gBvhPS/ncwYTqQ6iNaYYcXF9RffAXzlgB479uTY=;
- b=Ahw4/zbyYlwHMupAIZM5XYzQHA+lpuBP/Aik/AsHG68OMuVj5ko5hb/NmI/jftWJ8mWT3gbXJdLngYbinv/wfxfg7LCnGLXHn0vFCs2frvc4g47FKKYcomNO9Mhhvuwt1xZoZUCrbChwgIzhJMDy9ca3tlOGSEuyGuwbTQG5yPLLcfmi0/xwRxKyQ3yg44z2XZiv+1P2cP9HghRonAKCrumG/e/4EtbsiMmnc/KwEZoOXyvhYtZ8KGnStUfk2TCpESP0quPib2HouwHxCb0JxPXX4Rq+pynnMad89f1vW9GwUGJrwNOVzxvgBBORgeKCqNMFzXNqoQJfoqQaa7C+XQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VX08gBvhPS/ncwYTqQ6iNaYYcXF9RffAXzlgB479uTY=;
- b=lNytOJsiTowRdo1rN6vOk+Zq/AK+ARHUwMyJRHYnJen1rxWYnC7FbwyLL1GuHbTwVq8VwA+csbLFNbqYonFI+d9gAOpReGUoIP27gPYmaxJcTxRXb0e/GGXjELxBW/A6PD1G29v0N/cCPET4jc+J+71UpjQLILl1mJMACVAaFlABSRkkPYiQmswvEUQagX/nDa+/hfP6ytAeQEymze0kU1Zp4zdK2q1lVgpUsZKBdD02JiG+ycKJAIvagJztksrSCaybVmFRQVgxtenKsc+1IK5NqFMvmbYDxab+y0DS0l4NVRbOcq2SeFxVuMX8Jn5K8vfIvORg5XzJlH5Lmx9AJw==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:588::19)
- by AS8PR10MB6362.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:536::5)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6886.36; Tue, 17 Oct
- 2023 05:20:17 +0000
-Received: from AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::2a90:96cb:b3f:6e5]) by AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::2a90:96cb:b3f:6e5%2]) with mapi id 15.20.6886.034; Tue, 17 Oct 2023
- 05:20:17 +0000
-Message-ID: <31bb24cb-2d84-4524-bb25-263f8fbe16ab@siemens.com>
-Date: Tue, 17 Oct 2023 07:20:14 +0200
-User-Agent: Mozilla Thunderbird
-From: Jan Kiszka <jan.kiszka@siemens.com>
-Subject: [PATCH] board: siemens: iot2050: Fix M.2 detection
-Content-Language: en-US
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: "Su, Bao Cheng (RC-CN DF FA R&D)" <baocheng.su@siemens.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0122.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9d::11) To AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:20b:588::19)
+ spf=pass smtp.mailfrom=masahisa.kojima@linaro.org
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-5892832f8daso4864860a12.0
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 22:33:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697520780; x=1698125580; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=d8xSFrxW4dkiNqbnZQ7DjymtdHMkVbvI+Mymal37k00=;
+ b=Pr5BaCDms/BVpwxpzIHhkB0bik2BbD2jV73rSmSq6a2zF5FJMTMwSiNLrDJcQzI5Hf
+ HXeqSWA6FB1VaGFrHzzvsfwHWArObIVjhwz6tvT2JcQ+0fCmzwmqEpNYXH2m4Ew9lpRd
+ GUB3+TENueO2N1l08Vn7cr6jeUMU9gzV6seZi0Y//fIPVOdSmT22cWJizu9Jo2d0aSkG
+ 2PKPqg8pJSP5ENpURCFMRGfA+/5GgM2c4wOofmWCmiKh/pbc0PpKgMdDFse2tf04vrVN
+ B3dBY32tJxJ/U1m0i3WA6Uyxb1X8uHRm/nJoPJ4WLZ0V11FFEUjMrx2SGrIkRsNnvLEh
+ zEFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697520780; x=1698125580;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=d8xSFrxW4dkiNqbnZQ7DjymtdHMkVbvI+Mymal37k00=;
+ b=Vi8VYavAS2s8NThMMroOTUGubKnNLt5NXlkfVs9zQDYYh0hCbzV4m5sLWOkIU4AM6S
+ m6fADfxamuZZJ81gX5ii/z5oiC7x5d99n215RXMtrs+UVoWzcJIQ+HFVeTgxf+2LR59G
+ 6C58grFabAsGwEMD3fkhiMb8j66nYJD/Ce/td1l7EME8wEDZcgLhqq55qzVoTHtyujSP
+ VIH5hbKdu2V7v+JF7+whbgDbEe2BRLt5O/WyuRUH1B7puQ6jP7xIfupGhIVFq/ui64P/
+ SoWW5DNd0gXNuF7eNtKBVpVwIG1Lj5x5pQBHvMNhybo0IJY+b8+BBOLNiPqhR035n8MA
+ +6gQ==
+X-Gm-Message-State: AOJu0YzGBawAYw3RH6jZ4slw4k/q8DY3/IVpefxKONsbHIA2Mh6dHOMD
+ DlmXOzpoccTYS4n1q3h31h94iQ0Iu/qdPwtD+0prtg==
+X-Google-Smtp-Source: AGHT+IHIM7WdGFxltYZ9vge51lcPTbFjlS82vvqgTeRQbftcHQ59qConBuGA3hHJQCIk6TfezuMrKXQt5aXhjE2NzE8=
+X-Received: by 2002:a17:90a:5:b0:27d:237b:5592 with SMTP id
+ 5-20020a17090a000500b0027d237b5592mr1337288pja.13.1697520779377; Mon, 16 Oct
+ 2023 22:32:59 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS4PR10MB6181:EE_|AS8PR10MB6362:EE_
-X-MS-Office365-Filtering-Correlation-Id: 35ea4c65-0376-4b60-87ff-08dbced0bfb6
-X-LD-Processed: 38ae3bcd-9579-4fd4-adda-b42e1495d55a,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: D9ThD0yFdvrAc6VoXjJuTzXo9Tgt4Kst6W2PyHcYLYIoWu574cWxV7mL/5eDuHyyBCSy1foUJG9val2O0jA1Sffsr1wxv4MQry4o16DrA43dXBhEZhXFlkOhEhDPQTeCf8OlOegT0qNhHF8YgupR6HvAJM930ikcToPP/J7jcKqx3pNmPHQ84Cx3gaxa7Q189O7xIhsXohvfd5W9FAh2xVQuEv4ZbI/SsFAoVE5QfTKe5NcmRwqhFo67496MFu1a6leahx5mUjHBhy9PDlWEkIJwlQCj/gAHgVB/gkenGBgWd5GZt4gxkOjdn2au1SASsxKuuA3k40MgTV07voPmAupyx0ryMcYKtkBBEU5NI9WAUhyHIpxoR27wqvLlb6YpU7G4/I1RxjmdJUqWmS6H9p7Fh33LBszQC8Vn1vH/xT/LLa/CvdKp/u4rtNKYw820GP8ZUWms1XAqOU+5PUB8v46ReRZ0ZdOBjMJqUrMyp96L4MX6qPNAXGw6SRNpvrjZOhDr6c3gEumbSs5Y3nmckVC5+dwGf3VmaDtsPJRZoMsYJ3vTi9gaSoJVC0TDeylwDj1ZkGREF9NE3hl3FHngrKTCG8Pk9R/KiR+UQLWgTgsgOceP3TvpS/zLA1odrH7HTVAW6b86r6xlODiSvz1WYQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(366004)(396003)(346002)(376002)(39860400002)(136003)(230922051799003)(186009)(1800799009)(64100799003)(451199024)(36756003)(31686004)(66556008)(66946007)(6916009)(66476007)(316002)(31696002)(86362001)(38100700002)(82960400001)(83380400001)(26005)(107886003)(2616005)(6512007)(6506007)(6666004)(8936002)(2906002)(6486002)(478600001)(41300700001)(5660300002)(8676002)(44832011)(4326008)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ck9zMjJXa1Fkd243VDE0UFBIU2lOZ0hITFk1NFlVeGpmRWhOOXEvcC9IUmtR?=
- =?utf-8?B?ZTNQeHFRbjRManJvRWNLY1JCZU8yaTIvcDYyeGR4dXo0RXdXQldCdjl1YlZ2?=
- =?utf-8?B?QTlVa0xDZ2FWSTR5VzB1aTZmZ1k2T3I3R0pCNzl1Tkdxc09saGdLb0JOUThX?=
- =?utf-8?B?b3hKdGE1Z3lWV20xNkZRMzVHV1k2N0NINGUzY2lQcUVqSDJmejYrM0liNzdK?=
- =?utf-8?B?ZFdXODJ6eXJ3WVE5Mi9IdE5YQUs5b3VrWW9qZ0RyTjBNVmNrQ0d6akZHMEVG?=
- =?utf-8?B?REVFREU1MCs1TnEyTWNnMm4vSTNjTHg0N3FxZG9qTkxUWXVIZmdXaWhENGlN?=
- =?utf-8?B?WGo3MGZFZmFZNmRCY09rNGpZcnpHckg0RUxJenBQVDNmckFsMUxQZUNTWFBV?=
- =?utf-8?B?OCs5QTVqOFo3L3MvTFUwQStubDg5dkN6RVltMlpVWUpaTHloQldKaVdrMUcy?=
- =?utf-8?B?YjBwamdwbXI2ZWE0WDFHaU0wR2pINEtSdlJHWDhISE4vUUljOExWZDZzMXRS?=
- =?utf-8?B?ZURLOEE5MTVxblRlUGsyMFBJQjZjRStHREdIOUZlM1ZpeGMrZVdWMTNxdGlE?=
- =?utf-8?B?MUtwTFBrdTR1MjJvTnhmSE1VSVowbXFPRXdsYnBIMFBMYXNyR0hPRjd5cDIx?=
- =?utf-8?B?RW9wK0JYUWlNQlpPRXZrM1NmWjd3VGoxd2NzWGoyREc0c29GSHlCK29rK0xV?=
- =?utf-8?B?UTNMdG5tcld5dy9OMW1neGtSNFQxdFo5OFNiYklHeEhuajZuWVhJSDJTbWQv?=
- =?utf-8?B?WDJPV2tMeVZ6V3NSYzlwSVQxQlZNWFFEL1pvTmNnbVZ2aUQzQWRxVXdMMWJI?=
- =?utf-8?B?NERITHA0U2NCemM2OGh3azV5cTBUeldYWXE3SVEwNjlCVERDMzBCR1dYblVX?=
- =?utf-8?B?V1hCUW1rZi9vSWRseTg4MkxDWkpZWElJU3JnTUo0SUkxOG9FTXo0UFppSGFo?=
- =?utf-8?B?WTVqckRiMkdublJDMHZCSUdQbXN3M0lKd1JQNWNsOEg0NXYyOGlBYnFsMHc2?=
- =?utf-8?B?ejR4QUw5VHBpRGxWcHFCd3RUdGtVL096UkkwZVZKRnJJb0IzU3puSk56cVc3?=
- =?utf-8?B?aFJ6OU5zQkpGWmIyYnFNQ09BVHM2RGhSL3JVaVF4N0pwWW95MEZVWlBaWk8w?=
- =?utf-8?B?ckN2bklPa0d6ZmhFSDNQMk9GbTZMM2tzZzhqYzNhUm4rT3ZDTTZKOVZuWHpR?=
- =?utf-8?B?eG12eVhlamFmWjNtNFNzWC81Q1BQZmtkODBaZ3NZandTc2RvLzdZR0tlME1X?=
- =?utf-8?B?Ump5S0w4QUJrbmgvbm50aGZNejM0dm94Y3l4SnBNeWlNc1I0RzN4UHJmZnFZ?=
- =?utf-8?B?enUyaWgrMzZwVS94YU91bWc3ckhpOXlCODVwaDZaTW1xcDM1Yy9TeWFpaDFC?=
- =?utf-8?B?Ym5nZGlsY2VPOGhIQlN6b2NrUWRjZjY3WEFwbUlCS3JTaUhmcHJmclc4Z3lG?=
- =?utf-8?B?d0dvTEtGdDRvZnd2NExVdHRXcTlKT1dqRmRVS09SQXBPYXRsS25YNjZHajFX?=
- =?utf-8?B?QmsxZ25tdDVaOGdxV25qdDRYVy9YMlFMaHJyTGpITGM4cm93VitHMGNRQlZi?=
- =?utf-8?B?MmRNLy91U2x3N3VmanBIRld4eUF6d2NoTmNCcFRXQkZJQmV6RzRrK2lPUFNR?=
- =?utf-8?B?Q2FRWFZLWlphNzJMYm4yQmU0TlZCT3ZJNlpWR1RtOFFiNXFyOVI3RTBqT3dm?=
- =?utf-8?B?KzgwamZJR1hPOVpVL2tLY01zNURGVEVsekU5cUhOVkl6TnF4WDRlSk5pS1ZP?=
- =?utf-8?B?N2VTSVdKTEpUQURrQk92cW1wNGE0L0lOeEFjbXk0UmsxR3prRDhjb2lKYkhz?=
- =?utf-8?B?aFhsclRtRld4YVpTODMyQ29GdlA4YzI5Wk04akRKZFNrakNzMTRZU2cwbXRt?=
- =?utf-8?B?eUdwd2lYWGpUQ2ZnQm4rZ3hnbEZ0QXFKcEp0RjhNMGZQRnpKbnpyRjY2VGZp?=
- =?utf-8?B?dzBZaFNnVWFZRlZMMDRER3lRSmo5TFdCQzhHaW9jNHdSOC81dlJMdkV3WUNy?=
- =?utf-8?B?dU1rMEpsWm54KzhpSm5CTWlXMGJrSVd1VkhGK2NaT3ZWYUNZSmJ5UVYwTEtX?=
- =?utf-8?B?QVpQeWZPdWFIRkNUa0QvL0tXZUNlTGU0bUkyVzZzdTdMUkxzaFZHS21LaERx?=
- =?utf-8?B?SzRZdnNzSU4vWG5XeGNSN1BXOVk2K3ljcHRLR0ZJK21mVHdjSDJxTW5nY0Jn?=
- =?utf-8?B?UFE9PQ==?=
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 35ea4c65-0376-4b60-87ff-08dbced0bfb6
-X-MS-Exchange-CrossTenant-AuthSource: AS4PR10MB6181.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2023 05:20:16.9643 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qVyaLDQbgryBx8QssbfZBzhNvzWfCx47beOe3sMmcec43CNTEKf/nI2zuiU/wR9jxE7WH6Y4X0G/E6CbSH5Cxg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR10MB6362
+References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
+ <20231016064526.2410856-5-masahisa.kojima@linaro.org>
+ <A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de>
+ <CAC_iWj+koNjVBR7TCJH_u_PvY5xDHgtBGRTHBRRgAx_aDeC8-A@mail.gmail.com>
+ <ae12d900-fe7f-4f7b-9eb1-018aa719174f@gmx.de>
+ <CADQ0-X8XGiek9oBEFeDtXaR2vcBsQS-NhJK5mL9TRLK+9gTJ2A@mail.gmail.com>
+ <050e8bea-771b-491d-8d66-14fadcff0487@gmx.de>
+In-Reply-To: <050e8bea-771b-491d-8d66-14fadcff0487@gmx.de>
+From: Masahisa Kojima <masahisa.kojima@linaro.org>
+Date: Tue, 17 Oct 2023 14:32:48 +0900
+Message-ID: <CADQ0-X9n24HVJ_AoMszTUQy1wk+q=TfZG915mzd3gd=GScxjMA@mail.gmail.com>
+Subject: Re: [PATCH v7 4/9] efi_loader: create default file boot option
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,68 +92,285 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jan Kiszka <jan.kiszka@siemens.com>
+Hi Heinrich,
 
-The "simpler" the logic, the higher the probability to not test and get
-things wrong, again: The absence of a "-PG2" suffix is not sufficient to
-derive that we are on PG1. There is also "IOT2050-ADVANCED-M2".
+On Mon, 16 Oct 2023 at 23:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 16.10.23 15:00, Masahisa Kojima wrote:
+> > On Mon, 16 Oct 2023 at 21:46, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >>
+> >> On 16.10.23 14:31, Ilias Apalodimas wrote:
+> >>> Hi Heinrich,
+> >>>
+> >>> On Mon, 16 Oct 2023 at 10:06, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >>>>
+> >>>>
+> >>>>
+> >>>> Am 16. Oktober 2023 08:45:21 MESZ schrieb Masahisa Kojima <masahisa.kojima@linaro.org>:
+> >>>>> Current efibootmgr automatically creates the
+> >>>>> boot options of all disks and partitions installing
+> >>>>> EFI_SIMPLE_FILE_SYSTEM_PROTOCOL.
+> >>>>> Some of the automatically created boot options are
+> >>>>> useless if the disk and partition does not have
+> >>>>> the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
+> >>>>>
+> >>>>> This commit only creates the boot option if the disk and
+> >>>>> partition have the default file so that system can directly
+> >>>>> boot from it.
+> >>>>
+> >>>> I don't directly see the user benefit.
+> >>>
+> >>> The user can add an HTTP boot option now and the installer will
+> >>> automatically start.  That would allow products to ship with a single
+> >>> boot option provisioned and run an installer on first boot
+> >>
+> >> This commit is not about HTTP. It changes how boot options for block
+> >> devices are created.
+> >>
+> >>>
+> >>>>
+> >>>> Reading all file systems will increase the boot time. Shouldn't we avoid this?
+> >>>
+> >>> Any idea what would be an alternative?  But when we added the
+> >>> automatic boot options we said we should avoid dynamic scanning and
+> >>> store results in a file.  This is doing a similar thing.  The only
+> >>> difference is that it mounts the iso image before adding the boot
+> >>> option.
+> >>
+> >> The alternative is to keep showing boot options for block devices even
+> >> if there is no BOOTxxxx.EFI file.
+> >>
+> >>>
+> >>>>
+> >>>> What does EDK II do?
+> >>>
+> >>> No Idea :)
+> >>
+> >>
+> >> On my workstation I get generated boot options
+> >>
+> >> Boot0001* UEFI:CD/DVD Drive     BBS(129,,0x0)
+> >> Boot0003* UEFI:Removable Device BBS(130,,0x0)
+> >> Boot0004* UEFI:Network Device   BBS(131,,0x0)
+> >>
+> >> without any media inserted and without any PXE server available.
+> >
+> > It is just information about how the EDK2 works.
+> > When I attach the Fedora installation media on EDK2(OVMF),
+> > the automatically generated boot option is as follows.
+> >
+> > UEFI QEMU HARDDISK QM00001 : PciRoot(0x0)/Pci(0x1,0x1)/Ata(Primary,Master,0x0)
+>
+> An ATAPI drive typically is not removable. So I wonder why it is listed.
+> Did you set the removable flag on the command line?
 
-Finally fix that by exactly matching against the two PG1 device names.
+I guess it is not removable(actually I don't know how to set the
+device as removable).
+I just attached the iso image to QEMU with something like '-hda
+Fedora_netinst.iso".
 
-While changing this, we can also drop the not really needed check for
-!board_is_sr1 in board_is_m2 and call the boards by their names
-("board_is_pg1").
+According to the EDK II implementation[1], the boot option is
+enumerated with the following order.
+  1. Removable BlockIo
+  2. Fixed BlockIo
+  3. Non-BlockIo SimpleFileSystem
+  4. LoadFile
+So boot option for the fixed device such as HDD is also automatically created.
 
-Reported-and-tested-by: Bao Cheng Su <baocheng.su@siemens.com>
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
----
- board/siemens/iot2050/board.c | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
+[1] https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Library/UefiBootManagerLib/BmBoot.c#L2150
 
-diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
-index e35e55fb5de..0b0686e2628 100644
---- a/board/siemens/iot2050/board.c
-+++ b/board/siemens/iot2050/board.c
-@@ -155,19 +155,20 @@ static bool board_is_advanced(void)
- 		strstr((char *)info->name, "IOT2050-ADVANCED") != NULL;
- }
- 
--static bool board_is_sr1(void)
-+static bool board_is_pg1(void)
- {
- 	struct iot2050_info *info = IOT2050_INFO_DATA;
- 
- 	return info->magic == IOT2050_INFO_MAGIC &&
--		strstr((char *)info->name, "-PG2") == NULL;
-+		(strcmp((char *)info->name, "IOT2050-BASIC") == 0 ||
-+		 strcmp((char *)info->name, "IOT2050-ADVANCED") == 0);
- }
- 
- static bool board_is_m2(void)
- {
- 	struct iot2050_info *info = IOT2050_INFO_DATA;
- 
--	return !board_is_sr1() && info->magic == IOT2050_INFO_MAGIC &&
-+	return info->magic == IOT2050_INFO_MAGIC &&
- 		strcmp((char *)info->name, "IOT2050-ADVANCED-M2") == 0;
- }
- 
-@@ -217,14 +218,14 @@ void set_board_info_env(void)
- 	}
- 
- 	if (board_is_advanced()) {
--		if (board_is_sr1())
-+		if (board_is_pg1())
- 			fdtfile = "ti/k3-am6548-iot2050-advanced.dtb";
- 		else if(board_is_m2())
- 			fdtfile = "ti/k3-am6548-iot2050-advanced-m2.dtb";
- 		else
- 			fdtfile = "ti/k3-am6548-iot2050-advanced-pg2.dtb";
- 	} else {
--		if (board_is_sr1())
-+		if (board_is_pg1())
- 			fdtfile = "ti/k3-am6528-iot2050-basic.dtb";
- 		else
- 			fdtfile = "ti/k3-am6528-iot2050-basic-pg2.dtb";
--- 
-2.35.3
+>
+> >
+> > When this boot option is selected, Fedora installer automatically starts.
+> > So EDK II is searching the default file on the fly.
+>
+> What is shown if you attach a medium without Bootaa64.efi?
+
+The same boot option is created.
+UEFI QEMU HARDDISK QM00001 : PciRoot(0x0)/Pci(0x1,0x1)/Ata(Primary,Master,0x0)
+
+Thanks,
+Masahisa Kojima
+
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > Thanks,
+> > Masahisa Kojima
+> >
+> >>
+> >> Best regards
+> >>
+> >> Heinrich
+> >>
+> >>>
+> >>> Thanks
+> >>> /Ilias
+> >>>>
+> >>>> Does the UEFI specification warrant this change?
+> >>>>
+> >>>> Best regards
+> >>>>
+> >>>> Heinrich
+> >>>>
+> >>>>>
+> >>>>> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> >>>>> ---
+> >>>>> lib/efi_loader/efi_bootmgr.c | 86 ++++++++++++++++++++++++++----------
+> >>>>> 1 file changed, 63 insertions(+), 23 deletions(-)
+> >>>>>
+> >>>>> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> >>>>> index a40762c74c..c8cf1c5506 100644
+> >>>>> --- a/lib/efi_loader/efi_bootmgr.c
+> >>>>> +++ b/lib/efi_loader/efi_bootmgr.c
+> >>>>> @@ -355,40 +355,70 @@ error:
+> >>>>>    */
+> >>>>> static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boot_option *opt,
+> >>>>>                                                       efi_handle_t *volume_handles,
+> >>>>> -                                                    efi_status_t count)
+> >>>>> +                                                    efi_uintn_t *count)
+> >>>>> {
+> >>>>> -      u32 i;
+> >>>>> +      u32 i, num = 0;
+> >>>>>         struct efi_handler *handler;
+> >>>>>         efi_status_t ret = EFI_SUCCESS;
+> >>>>>
+> >>>>> -      for (i = 0; i < count; i++) {
+> >>>>> +      for (i = 0; i < *count; i++) {
+> >>>>>                 u16 *p;
+> >>>>>                 u16 dev_name[BOOTMENU_DEVICE_NAME_MAX];
+> >>>>>                 char *optional_data;
+> >>>>>                 struct efi_load_option lo;
+> >>>>>                 char buf[BOOTMENU_DEVICE_NAME_MAX];
+> >>>>> -              struct efi_device_path *device_path;
+> >>>>> +              struct efi_device_path *device_path, *full_path, *dp, *fp;
+> >>>>>                 struct efi_device_path *short_dp;
+> >>>>> +              struct efi_file_handle *root, *f;
+> >>>>> +              struct efi_simple_file_system_protocol *file_system;
+> >>>>> +              u16 *default_file_path = NULL;
+> >>>>>
+> >>>>> -              ret = efi_search_protocol(volume_handles[i], &efi_guid_device_path, &handler);
+> >>>>> +              ret = efi_search_protocol(volume_handles[i],
+> >>>>> +                                        &efi_guid_device_path, &handler);
+> >>>>>                 if (ret != EFI_SUCCESS)
+> >>>>>                         continue;
+> >>>>> -              ret = efi_protocol_open(handler, (void **)&device_path,
+> >>>>> -                                      efi_root, NULL, EFI_OPEN_PROTOCOL_GET_PROTOCOL);
+> >>>>> +
+> >>>>> +              device_path = handler->protocol_interface;
+> >>>>> +              full_path = efi_dp_from_file(device_path,
+> >>>>> +                                           "/EFI/BOOT/" BOOTEFI_NAME);
+> >>>>> +
+> >>>>> +              /* check whether the partition or disk have the default file */
+> >>>>> +              ret = efi_dp_split_file_path(full_path, &dp, &fp);
+> >>>>> +              if (ret != EFI_SUCCESS || !fp)
+> >>>>> +                      goto next_entry;
+> >>>>> +
+> >>>>> +              default_file_path = efi_dp_str(fp);
+> >>>>> +              if (!default_file_path)
+> >>>>> +                      goto next_entry;
+> >>>>> +
+> >>>>> +              ret = efi_search_protocol(volume_handles[i],
+> >>>>> +                                        &efi_simple_file_system_protocol_guid,
+> >>>>> +                                        &handler);
+> >>>>>                 if (ret != EFI_SUCCESS)
+> >>>>> -                      continue;
+> >>>>> +                      goto next_entry;
+> >>>>> +
+> >>>>> +              file_system = handler->protocol_interface;
+> >>>>> +              ret = EFI_CALL(file_system->open_volume(file_system, &root));
+> >>>>> +              if (ret != EFI_SUCCESS)
+> >>>>> +                      goto next_entry;
+> >>>>> +
+> >>>>> +              ret = EFI_CALL(root->open(root, &f, default_file_path,
+> >>>>> +                                        EFI_FILE_MODE_READ, 0));
+> >>>>> +              if (ret != EFI_SUCCESS)
+> >>>>> +                      goto next_entry;
+> >>>>> +
+> >>>>> +              EFI_CALL(f->close(f));
+> >>>>>
+> >>>>>                 ret = efi_disk_get_device_name(volume_handles[i], buf, BOOTMENU_DEVICE_NAME_MAX);
+> >>>>>                 if (ret != EFI_SUCCESS)
+> >>>>> -                      continue;
+> >>>>> +                      goto next_entry;
+> >>>>>
+> >>>>>                 p = dev_name;
+> >>>>>                 utf8_utf16_strncpy(&p, buf, strlen(buf));
+> >>>>>
+> >>>>>                 /* prefer to short form device path */
+> >>>>> -              short_dp = efi_dp_shorten(device_path);
+> >>>>> -              if (short_dp)
+> >>>>> -                      device_path = short_dp;
+> >>>>> +              short_dp = efi_dp_shorten(full_path);
+> >>>>> +              device_path = short_dp ? short_dp : full_path;
+> >>>>>
+> >>>>>                 lo.label = dev_name;
+> >>>>>                 lo.attributes = LOAD_OPTION_ACTIVE;
+> >>>>> @@ -396,24 +426,35 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
+> >>>>>                 lo.file_path_length = efi_dp_size(device_path) + sizeof(END);
+> >>>>>                 /*
+> >>>>>                  * Set the dedicated guid to optional_data, it is used to identify
+> >>>>> -               * the boot option that automatically generated by the bootmenu.
+> >>>>> +               * the boot option that automatically generated by the efibootmgr.
+> >>>>>                  * efi_serialize_load_option() expects optional_data is null-terminated
+> >>>>>                  * utf8 string, so set the "1234567" string to allocate enough space
+> >>>>>                  * to store guid, instead of realloc the load_option.
+> >>>>>                  */
+> >>>>>                 lo.optional_data = "1234567";
+> >>>>> -              opt[i].size = efi_serialize_load_option(&lo, (u8 **)&opt[i].lo);
+> >>>>> -              if (!opt[i].size) {
+> >>>>> -                      ret = EFI_OUT_OF_RESOURCES;
+> >>>>> -                      goto out;
+> >>>>> +              opt[num].size = efi_serialize_load_option(&lo, (u8 **)&opt[num].lo);
+> >>>>> +              if (!opt[num].size) {
+> >>>>> +                      efi_free_pool(full_path);
+> >>>>> +                      efi_free_pool(dp);
+> >>>>> +                      efi_free_pool(fp);
+> >>>>> +                      efi_free_pool(default_file_path);
+> >>>>> +                      return EFI_OUT_OF_RESOURCES;
+> >>>>>                 }
+> >>>>>                 /* set the guid */
+> >>>>> -              optional_data = (char *)opt[i].lo + (opt[i].size - u16_strsize(u"1234567"));
+> >>>>> +              optional_data = (char *)opt[num].lo + (opt[num].size - u16_strsize(u"1234567"));
+> >>>>>                 memcpy(optional_data, &efi_guid_bootmenu_auto_generated, sizeof(efi_guid_t));
+> >>>>> +              num++;
+> >>>>> +
+> >>>>> +next_entry:
+> >>>>> +              efi_free_pool(full_path);
+> >>>>> +              efi_free_pool(dp);
+> >>>>> +              efi_free_pool(fp);
+> >>>>> +              efi_free_pool(default_file_path);
+> >>>>>         }
+> >>>>>
+> >>>>> -out:
+> >>>>> -      return ret;
+> >>>>> +      *count = num;
+> >>>>> +
+> >>>>> +      return EFI_SUCCESS;
+> >>>>> }
+> >>>>>
+> >>>>> /**
+> >>>>> @@ -642,7 +683,7 @@ efi_status_t efi_bootmgr_delete_boot_option(u16 boot_index)
+> >>>>>    * efi_bootmgr_update_media_device_boot_option() - generate the media device boot option
+> >>>>>    *
+> >>>>>    * This function enumerates all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
+> >>>>> - * and generate the bootmenu entries.
+> >>>>> + * and create the boot option with default file if the file exists.
+> >>>>>    * This function also provide the BOOT#### variable maintenance for
+> >>>>>    * the media device entries.
+> >>>>>    * - Automatically create the BOOT#### variable for the newly detected device,
+> >>>>> @@ -674,8 +715,7 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
+> >>>>>                 goto out;
+> >>>>>         }
+> >>>>>
+> >>>>> -      /* enumerate all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL */
+> >>>>> -      ret = efi_bootmgr_enumerate_boot_option(opt, volume_handles, count);
+> >>>>> +      ret = efi_bootmgr_enumerate_boot_option(opt, volume_handles, &count);
+> >>>>>         if (ret != EFI_SUCCESS)
+> >>>>>                 goto out;
+> >>>>>
+> >>
+>
