@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61768CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 13:32:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBDA2CDB482
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 13:35:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4024086F03;
-	Tue, 17 Oct 2023 15:32:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BE3986D9C;
+	Tue, 17 Oct 2023 15:35:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LX6SSBNV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JdlLmb0x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9506386F0D; Tue, 17 Oct 2023 15:32:39 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id D4C7A86EE0; Tue, 17 Oct 2023 15:35:49 +0200 (CEST)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17ACC86ECA
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 15:32:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AA80D86BB4
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 15:35:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5a7a80a96dbso57142217b3.0
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 06:32:35 -0700 (PDT)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-5a7af45084eso72810857b3.0
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 06:35:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697549554; x=1698154354; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697549746; x=1698154546; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wSC6H/+t+nQhFnyc56tN7N+88DAFtOkwQDKcY2ZpGpU=;
- b=LX6SSBNVzIshddaw/4GvQG9pytr4umFjc8yrlgOqDD00IsGztlzTk8oGqttqtIIHe4
- UsPNiqPzypdgg6/PPPsJxdfBwRqr/+EJMjnyuD18HIceac6bOdim/4gJIma5QFYyc0kB
- kxU/tQ8SZ+BBrT7j/Xg01FtgZbit+VhSvMAzQ=
+ bh=WA1/bjXXqD2JT1SWdLFiy/zmCK+H45KUM77SH7aVVPg=;
+ b=JdlLmb0xyjpyARi3y4+dwZFoRCKVDHg7S3ZwSKndn/Aipbfc3X0G/jtQD5vPqcg0us
+ 4GgTMpsZHiwv0UYauJj70lAaA5usJtqpdupsEOraoksa5huIuprdL02lIH/mJR0k0pXo
+ +uiBjcJBqE2nSaQZ/PHpZa1FrPNQGSUI2svJ8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697549554; x=1698154354;
+ d=1e100.net; s=20230601; t=1697549746; x=1698154546;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wSC6H/+t+nQhFnyc56tN7N+88DAFtOkwQDKcY2ZpGpU=;
- b=fzmAcanKWnJK2W80dtb7xTyZWvu71xdMXxu1Ex7dvzUUgKLnhqKdfe1t9uFNhofQJv
- fJm5Ja98De2RMhgag4dZJOdW2SOa+cfaStECLnAt0d4r1TjBJCP8fxsv7yOJacOL4wVO
- BBoMkJB43FlLkT6eV7xDE6g4SvSXBSkbMBkRcEJqDgtUTF1NClEEFkj2RnYM5q9DGhMo
- VAZhxY0EaLhaL8p3r3+ynO73uIG1Qi6n2W+09N5+8dvcFbfong3RBNub0PQmpLCX2huI
- 05wpCDTHH9GEa/5yNB2LfLz77U02cnkJhOCGmeSMtSHD0NfUx7ki+zETaA+3HoYksyxf
- EtCw==
-X-Gm-Message-State: AOJu0Yw7QZRRfx9hjl8CIwKh+zR6kz5JWXJIILzp4KIInA0WIpAwvMlK
- KaIAD6tbmz5SgBv1qLnSITxVRg==
-X-Google-Smtp-Source: AGHT+IEc/POMKe8szqyocgYqVDOPFvX4iVmbAVY6w7MTj1QiRFebfSbxA4gyQ48FUEj65l3u+LPnRw==
-X-Received: by 2002:a81:9282:0:b0:5a7:ba3e:d1d1 with SMTP id
- j124-20020a819282000000b005a7ba3ed1d1mr1270718ywg.25.1697549553810; 
- Tue, 17 Oct 2023 06:32:33 -0700 (PDT)
+ bh=WA1/bjXXqD2JT1SWdLFiy/zmCK+H45KUM77SH7aVVPg=;
+ b=XwXRYAVjarv2W77z1ZTriY18NgmnPwFf1HUHypYl3zaKQVX3rPpzYFaaNWxHLI2VPo
+ KD7iW/uoQDZgtTi6O7B47PcVbMQAll+fzu0bx+bJ7inHqSqYbM+OVclpQaX0xhE6fwEa
+ SI+YPWko0fuN3MsU7teWhNpnERtbizNSUGIMI+mHP9w9Cnbxz5+vxltguZSHuZTEk3fC
+ KpZMk4Nm0s6TnNliSMHEEE+UJb+EcxVBWfhCEPA5k4ZDPwHo0Y4MMzKS3BobeGUd4bOC
+ o3B1ior9Edug3tsslZgigOaTRdRMdCtyQ/7Nwa2jV5fF0YpIG6/USTsN5w6pmCAulG4u
+ XT6Q==
+X-Gm-Message-State: AOJu0Yw/8PN2DdmyYU1jIgZXCWgBX/k+I2aMQuVx8AuXDivrhx3SX1mh
+ OQXpu53/MrMZSzjLNFiDGz/FE7z40WlMiHCKwYLNfg==
+X-Google-Smtp-Source: AGHT+IFp9Q4LFrT/OUhOSF5b+mZLfR+omI/HSxxk0a9Crv4/XjV2Rz0Drngjfp+nhPzYJLE+4HbiWg==
+X-Received: by 2002:a05:690c:f0b:b0:579:f5c2:b16e with SMTP id
+ dc11-20020a05690c0f0b00b00579f5c2b16emr3370907ywb.31.1697549746463; 
+ Tue, 17 Oct 2023 06:35:46 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- t83-20020a0dea56000000b0059b547b167esm618762ywe.98.2023.10.17.06.32.33
+ g145-20020a0ddd97000000b00579e5c4982fsm621456ywe.36.2023.10.17.06.35.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Oct 2023 06:32:33 -0700 (PDT)
-Date: Tue, 17 Oct 2023 09:32:31 -0400
+ Tue, 17 Oct 2023 06:35:46 -0700 (PDT)
+Date: Tue, 17 Oct 2023 09:35:44 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 04/32] cmd: Add a few more dependencies on CMDLINE
-Message-ID: <20231017133231.GT3119521@bill-the-cat>
+Subject: Re: [PATCH v3 09/32] cmd: Use an #ifdef around run_commandf()
+Message-ID: <20231017133544.GU3119521@bill-the-cat>
 References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-5-sjg@chromium.org>
+ <20231016222835.596572-10-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YMwsBkeensHYC3l1"
+ protocol="application/pgp-signature"; boundary="bK1tXdJEoDjK+RE/"
 Content-Disposition: inline
-In-Reply-To: <20231016222835.596572-5-sjg@chromium.org>
+In-Reply-To: <20231016222835.596572-10-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,43 +92,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YMwsBkeensHYC3l1
+--bK1tXdJEoDjK+RE/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 16, 2023 at 04:27:55PM -0600, Simon Glass wrote:
+On Mon, Oct 16, 2023 at 04:28:00PM -0600, Simon Glass wrote:
 
-> Add this to some more commands to avoid build errors with sandbox.
->=20
-> Note that this is a temporary solution to expose more problems. A later
-> patch puts these behind an 'if CMDLINE'
+> This is not available if CMDLINE is disabled, so add an #ifdef to correct
+> this.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> (no changes since v1)
+>=20
+>  common/cli.c | 2 ++
+>  1 file changed, 2 insertions(+)
 
-We're doing a bunch of churn here that I'd rather just get done at once,
-make the current #27 which guards all commands with if CMDLINE happen
-earlier in the series instead.
+NAK, please tease this file apart in to CMDLINE code, and whatever
+inadvertent utility code is also in there.
 
 --=20
 Tom
 
---YMwsBkeensHYC3l1
+--bK1tXdJEoDjK+RE/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUujO8ACgkQFHw5/5Y0
-tywVLgwAnv+LgFN7sz6alIk8rLtIy35ML7/Z0DsIfTpPDWyReymuJ5FnEEdULFlq
-qZ0K+nXUUdeUYkSzN5YmUsGFJOeI8kXn1HXZ9ulz6abzarzzVAlynycq91LvVOol
-fEKx+n3+bp6cw2bb3nOXgBIb/wmCvPdPE3boqj4LtutO6MKAQMRQ/9G43eyuDeOM
-RxPJsWoYkAErRYnSqkxQs3OG9xnjmbY4nHVGvN0puAAacrAkFlsZ2sCHTWIXANWm
-9hD6hh3SzTqk6w7By5lEmI3eHeP5kd2qShBwN8sHKe+7LlYwA5Ld+zhWG1BowMTu
-qifQxRHD9tQkPvs6nRrry2ENbqJp4XHq4RTgzg/ktE9hOTaJssDfuhtsW+k2fraQ
-lf4JoI3KRvnaWgNMwoXoBamVwxy/JSXVkh9tj4Ah+346zi+lLgbolLxQCsKv08+K
-zm/vELZ6romnpUXsqsa6U4SC+l+QVpmiRIMkxK7bBDPLF8WJ43Cp9ho77+yyOVAQ
-K1RaYzrZ
-=ChW9
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUujbAACgkQFHw5/5Y0
+tyyVGAv/TAMYsgPaRgQGXSVZUO8ikyIXopauYFBjawCjUjXhM8gjGHKDHZqjxopp
+AVcwPDa+VzzBOY7HPmSuPdfYJJGFiwjk3c9bpYlCmveZOI8lk4sbmuWRHQQopwUa
+M3xvOgqkaHP535l1ryarQlfdyFAiMBfd9N/D1sBDO/wTqPVvdLO9InWHB2kdfhlV
+UTnGpFRxILBg1jxVAjPPPOWjYuoVXpzVP3WgCorLjY9EAc/9rNjT2nzBsbWOPTMI
+WpApsDN3AmHWrSBsE7LIUFzt72zhkzJ7q58lKTksvAEYNvyEjtsimQpwWhEbj1lv
+/32c7D/T1YcDgoo1iuco4g3Wrhhtxg4lVm/YXnNWVas4mdZfnBGuJbSXxzK86opR
+oD+ja3NnAq9o0sqFi5HJcqPWpdFwdDhkWwbVXGxaUC9o2VteEzGhMCyR983czJuY
+guVZlf6sm7RfWgirjfji2P2feAdNoCrnZWoi7hKozhpxdhSUaoc+j+dO60Cdo/95
+ZLkdSV6U
+=t+Uy
 -----END PGP SIGNATURE-----
 
---YMwsBkeensHYC3l1--
+--bK1tXdJEoDjK+RE/--
