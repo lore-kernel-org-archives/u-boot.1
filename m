@@ -4,61 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41520CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 19:25:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8897BCDB482
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 19:27:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B364686F3A;
-	Tue, 17 Oct 2023 21:25:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 9E8FA86F42;
+	Tue, 17 Oct 2023 21:27:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="E6Isj3Cp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JTFq8Y2l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1F1486F15; Tue, 17 Oct 2023 21:25:53 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9013F86F45; Tue, 17 Oct 2023 21:27:08 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B19DB86F42
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 21:25:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 65F6F86F20
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 21:27:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: f6171b78-6d22-11ee-90ec-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id f6171b78-6d22-11ee-90ec-00505699b430;
- Tue, 17 Oct 2023 21:25:42 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=wetHedKhmzeeCfnq+9y/UycJ4jaDfl1SZ3Hu3YzceNk=;
- b=E6Isj3CpjCwG3RVT8FCsaENSJDmRYjdkijN64iyqHFxoDXdIH+a133DERhUBoQ7EWJyvqVgB63QYF
- ItYQqSlHnxstDApePXNgOklUnRsMLmkZc21irCuLdpSEQ2LbmfWpTxXCa+KrnD6ouSn16ndM09Flqz
- fDuuNIowvL5qhaSOLxRvz+leSZydW2sEOxmxkW9XvjSoFbBBTnow8ICCEuDc+BW9XAUTzVnLb2Plvk
- ND+sY1SBZPQGd7Wgqq2p0/8LOhrrjbJ9+Wwa2e2QOAEglfCdjHFw2BxZbO+VksaIb5GRSkjhwEJTgT
- mlhFyTbknobVy+zwf2EaBvyDSbdkEhw==
-X-KPN-MID: 33|v+u1sENyWPnHs6oxK9DyH2qDK9BDqzu6Pz0s9SQJJ9+fRIe+xY3gbCQp++kxSlN
- aU62AnIGufx1aftf7dyDJ+EJozKOeDBBfMovUX/PKxwE=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|9HPIt4z1YYs1Pf46DPwzgj0IQLBKCz6rrCiJeMxfrVLUNhuLvhubbfLlrSnHxGk
- x4AIJb2wBC5wEnz2DsBzv3Q==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id fa286e61-6d22-11ee-acaa-00505699d6e5;
- Tue, 17 Oct 2023 21:25:49 +0200 (CEST)
-Date: Tue, 17 Oct 2023 21:25:48 +0200
-Message-Id: <87v8b5qceb.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: ilias.apalodimas@linaro.org, masahisa.kojima@linaro.org,
- raymond.mao@linaro.org, u-boot@lists.denx.de,
- heinrich.schuchardt@canonical.com
-In-Reply-To: <20231017175148.75215-1-heinrich.schuchardt@canonical.com>
- (message from Heinrich Schuchardt on Tue, 17 Oct 2023 19:51:48 +0200)
-Subject: Re: [PATCH] efi_loader: fix efi_bootmgr_enumerate_boot_option
-References: <20231017175148.75215-1-heinrich.schuchardt@canonical.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-9ad8a822508so988505066b.0
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 12:27:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697570824; x=1698175624; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=vLlMofsUEW76Z8UTNsjmIS9G13WGGRg6rmJmQI5o7SA=;
+ b=JTFq8Y2lB4Rrl27lNwdk4R//tCOUzqlnKlIqZx4bWdIe2E+RyH/eYVY1HwYwUFllEw
+ 8691bNM5tDcwxYG0oUMIpq6YTC7NManiTaiDziUUieUmsvIAsfeYyQMMx6wEy576YvoF
+ PR26wH1dWARGaeUgwDyHjBZ+sMz/Ww2pfM00RS6kopYMZfPzulV43lDTq4t1ajXYq3tC
+ LKrd+cDB/eAk1XOXNI90GLSPBPis3iz4IspQWl/byM10w73I1QI8Kd/bvnizjV9GMw1c
+ FoTN+EZPB5wcZFa2Rbe0Bx0BrOhjCSQW3rzIckxYSfjvcIuvX/a/0xcYVNYazlKI89vK
+ wZcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697570824; x=1698175624;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vLlMofsUEW76Z8UTNsjmIS9G13WGGRg6rmJmQI5o7SA=;
+ b=rVUE92FpDNHq70iyQbPvGLFQFiY36yB/4rVuzw8ycIIMe1tTRb1hGFARrJ4ffMruLA
+ L84VyDZAh2C4KpQyiHyhr0GVv1AuBADuOlyJbB6F6DaGsnzwDbW21STqZqBmXDjD6yoF
+ 6UxxB5O1RrtheEjCIH9QRsAXYd2MoEJDegtABXCz5mGC+ZL6H+ljzb4sybRsvW4qUeL3
+ CakZEv3BsEm5pZD6pP3eRuPHNsgSY1CI6kP0DMm1uInNhpEzfeng/s9239+1Fkiavw5t
+ QLROq7uvUaJUCLh/vVjJ1+cmd6WsHrSG/lKrQ2cshFDmixYO9YLQmdB/ardXgjnDMsIT
+ N9Cw==
+X-Gm-Message-State: AOJu0YzjBXIf8FgtlWQ3I1NBhlr9GvLM9b3hgk3scIC09lb5bqikW0gp
+ P0hXHYVBELdwJ2vnRwmBtaPMQw==
+X-Google-Smtp-Source: AGHT+IHmQPkRN+hv8q5/2fT0viVYUNyl2GpFR68fcqVcndjdHn96TdGWz2z5xmjupzth3qq57kwuMA==
+X-Received: by 2002:a17:907:70a:b0:9b7:2a13:160c with SMTP id
+ xb10-20020a170907070a00b009b72a13160cmr2440661ejb.69.1697570823841; 
+ Tue, 17 Oct 2023 12:27:03 -0700 (PDT)
+Received: from hades (ppp046103219117.access.hol.gr. [46.103.219.117])
+ by smtp.gmail.com with ESMTPSA id
+ i27-20020a170906115b00b009b2ba067b37sm277234eja.202.2023.10.17.12.27.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Oct 2023 12:27:03 -0700 (PDT)
+Date: Tue, 17 Oct 2023 22:27:00 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>,
+ Takahiro Akashi <takahiro.akashi@linaro.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
+Subject: Re: [PATCH v7 8/9] cmd: efidebug: add uri device path
+Message-ID: <ZS7gBMES7sBTbUu+@hades>
+References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
+ <20231016064526.2410856-9-masahisa.kojima@linaro.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20231016064526.2410856-9-masahisa.kojima@linaro.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,75 +96,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Date: Tue, 17 Oct 2023 19:51:48 +0200
-> 
-> Only auto-generate boot options for removable media.
-> 
-> For testing the different handling of removable and non-removable devices
-> an emulated USB device can be used:
-> 
->     make qemu-riscv64_smode_defconfig; make
->     qemu-system-riscv64 -M virt -kernel u-boot.bin -nographic \
->     -device qemu-xhci -drive if=none,file=disk.img,format=raw,id=USB1 \
->     -device usb-storage,drive=USB1,removable=on
+Hi Kojima-san,
 
-Unless I misunderstand what this patch does, this may result in
-systems that don't boot after installation.
+[...]
 
-On most boards U-Boot does not provide a way to create persistent EFI
-variables after ExitBootServices() is called.  This means that an OS
-installer cannot create a boot entry for the OS installation it just
-created.  Therefore the EFI boot manager will not boot the newly
-installed system.
-
-Now as long as the traditional distro boot mechanism or the EFI distro
-boot bootmeth is enabled the system will probobly still attempt to
-boot the installed system.  But do want to rely on that?
-
-> Fixes: c416f1c0bcab ("bootmenu: add removable media entries")
-> Fixes: 339b527bd450 ("Move bootorder and bootoption apis to lib")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_bootmgr.c | 10 ++++++++--
->  1 file changed, 8 insertions(+), 2 deletions(-)
-> 
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index a40762c74c..96d45157b3 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -346,7 +346,7 @@ error:
->  }
->  
->  /**
-> - * efi_bootmgr_enumerate_boot_option() - enumerate the possible bootable media
-> + * efi_bootmgr_enumerate_boot_option() - boot options for removable boot media
->   *
->   * @opt:		pointer to the media boot option structure
->   * @volume_handles:	pointer to the efi handles
-> @@ -370,6 +370,9 @@ static efi_status_t efi_bootmgr_enumerate_boot_option(struct eficonfig_media_boo
->  		struct efi_device_path *device_path;
->  		struct efi_device_path *short_dp;
->  
-> +		if (!efi_disk_is_removable(volume_handles[i]))
-> +			continue;
+> +			id = (int)hextoul(argv[1], &endp);
+> +			if (*endp != '\0' || id > 0xffff)
+> +				return CMD_RET_USAGE;
 > +
->  		ret = efi_search_protocol(volume_handles[i], &efi_guid_device_path, &handler);
->  		if (ret != EFI_SUCCESS)
->  			continue;
-> @@ -674,7 +677,10 @@ efi_status_t efi_bootmgr_update_media_device_boot_option(void)
->  		goto out;
->  	}
->  
-> -	/* enumerate all devices supporting EFI_SIMPLE_FILE_SYSTEM_PROTOCOL */
-> +	/*
-> +	 * Enumerate all removable devices supporting the
-> +	 * EFI_SIMPLE_FILE_SYSTEM_PROTOCOL.
-> +	 */
->  	ret = efi_bootmgr_enumerate_boot_option(opt, volume_handles, count);
->  	if (ret != EFI_SUCCESS)
->  		goto out;
-> -- 
-> 2.40.1
-> 
-> 
+> +			efi_create_indexed_name(var_name16, sizeof(var_name16),
+> +						"Boot", id);
+> +
+> +			label = efi_convert_string(argv[2]);
+> +			if (!label)
+> +				return CMD_RET_FAILURE;
+> +			lo.label = label;
+> +
+> +			uridp_len = sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
+> +			fp_free = efi_alloc(uridp_len + sizeof(END));
+> +			uridp = (struct efi_device_path_uri *)fp_free;
+> +			uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
+> +			uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
+> +			uridp->dp.length = uridp_len;
+> +			if (!wget_validate_uri(argv[3])) {
+> +				printf("ERROR: invalid URI\n");
+> +				r = CMD_RET_FAILURE;
+> +				goto out;
+> +			}
+
+This needs to be moved right under label = efi_convert_string(argv[2]);
+and group all the checks together early.  You won't have to allocate and
+free the memory as well 
+
+> +
+> +			strcpy(uridp->uri, argv[3]);
+> +			pos = (char *)uridp + uridp_len;
+> +			memcpy(pos, &END, sizeof(END));
+> +			fp_size += uridp_len + sizeof(END);
+
+Assign this earlier and use it on fp_free = efi_alloc(...)
+
+> +			file_path = (struct efi_device_path *)uridp;
+> +			argc -= 3;
+
+[...]
+
+> + *
+> + * @uri:	uri string of target file of wget
+> + * Return:	true if uri is valid, false if uri is invalid
+> + */
+> +bool wget_validate_uri(char *uri);
+> +
+>  #endif /* __NET_H__ */
+> diff --git a/net/wget.c b/net/wget.c
+> index 2087146b37..6ae2237a0a 100644
+> --- a/net/wget.c
+> +++ b/net/wget.c
+> @@ -566,3 +566,74 @@ out:
+>  	return ret;
+>  }
+>  #endif
+> +
+ 
+Regards
+/Ilias
