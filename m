@@ -4,79 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A49B1CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 19:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA648CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 20:26:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E06B86F59;
-	Tue, 17 Oct 2023 21:47:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A071E86EF6;
+	Tue, 17 Oct 2023 22:26:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iAXHdWlp";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iotf2nQm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D2EF86308; Tue, 17 Oct 2023 21:47:12 +0200 (CEST)
-Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
- [IPv6:2a00:1450:4864:20::12f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 246C386F36; Tue, 17 Oct 2023 22:26:56 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BED9E86F40
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 21:47:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D7A886BB4
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 22:26:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12f.google.com with SMTP id
- 2adb3069b0e04-507a62d4788so4988775e87.0
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 12:47:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697572029; x=1698176829; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=rt9YpblNIfMF4ZpdMZ+Q72EWloFlS/AUCdZQ05nNlmM=;
- b=iAXHdWlpqcp/xKG+FXo5MZTLzYsp5my9lKdTkjci0VCbN3Qa3bjJfC7HKrRBkoBVVL
- 2stHSEfP6oZBLdDszyAnF5OxxBC7aNQfygisSXxDm3q7ZVpdhx3jxuH86Ar//LiWAIJY
- x7KpQsnCMatCcpTt+4C2Yd4VQIVQhQEJXZoDsscLBMAHK7C05A9/iNKnrVrGIKeD2OC5
- yfjTXrRvpSlec/agJ2IdBYN1yQf9GzIjpmW0bLkDhjSq09vrL+e80jsx7yn8j8iPzjIN
- 0faWlXE2PW1Xqs9CBssCsmz+/uIIwMQcjNPCRzHYw6aok7iHx7yTkh2Uuhb5D1wygACf
- BqvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697572029; x=1698176829;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rt9YpblNIfMF4ZpdMZ+Q72EWloFlS/AUCdZQ05nNlmM=;
- b=E9M5kFC4rRvZDfPeN8vOiJOvbKmBBkRqcrivDgvMIhp8V9aNEcpJG3DhDqQyMbkjva
- Cqla4cSfV9B6eLgZyOVgff3GlYLodtTna9/f++9QS59Cr5mZbKPNPdjidtrOSHt5RnKF
- /MQrer3BdHEW+q9wDnh/JolxiRSTzLxCB+62yLmW3NajFzxGRZ0LQxEHTVd7gXN6WNRH
- VDqalbJmyhKvsl4/4QHkJ375CEXXSbFtqMGTn7jPXHuf8NQDArnxhi2wJaSdgdrVIjg1
- 1rsckNq0Re67R13lhmZOlz/dpy+euQa2kjCm6VC7/l64/6XWcVHbLeVkWo3BvHdkJOMj
- 2drA==
-X-Gm-Message-State: AOJu0Yz2JK/jXVJHLUy9f3Up9u2EJnFgK1NqBPezeiWL9MkkiSLsKckR
- LjINW2R7pyw6HtPRwC0mQNB0ZwWDrs9IhKGRn4w8CQ==
-X-Google-Smtp-Source: AGHT+IGNd2ime1CL6dOh7Rvygnra+X5yV5EYggRT5F+q6ARepDvjjvFeRZDtX1uv+Ne1gEKle3IiFgMADV9ViX4JT5Y=
-X-Received: by 2002:ac2:5f4d:0:b0:507:9d71:2a77 with SMTP id
- 13-20020ac25f4d000000b005079d712a77mr2277785lfz.17.1697572029015; Tue, 17 Oct
- 2023 12:47:09 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=165c=GA=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1697574394;
+ bh=36eI+SM91cTdZ5OfReU++iyvA6efjnxoIUI3S9vikHM=;
+ b=iotf2nQmpzOCH4v3hZwKFnZrL20W5fuwEv+RKcgwBurjpGQf2XoOmO+ZC4HBYorVgymSKUr6a
+ sy5sHRjuzbwg+FtxsD645k6wM60dPLIuRqiPjnrqKrap8VDUPE9ZZQea10iUU5oUbpQzh8YfrQp
+ 2PxH+86iXiyymzQiP8fIcH0zUQVugPx7Sj6mqPIpvVUPa0etCKHyU89X2+5nQ0U/V3g+fCpQ5Tv
+ 0Ygr+Us70R8JQbJva08meov1XkxZrj438H1+rEA5o028g0S+tG8w3xvz7W8oRcOORZUIO7N9paL
+ UkCXg3NdKWtLcM2T+9rQsm0qj00jwY388YlCg7Cs0+EA==
+Message-ID: <db5ccffe-fd4d-a402-8d2a-a4e77f8fa587@kwiboo.se>
+Date: Tue, 17 Oct 2023 22:26:27 +0200
 MIME-Version: 1.0
-References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
- <20231016064526.2410856-5-masahisa.kojima@linaro.org>
- <A2082A91-A1CC-43E8-B151-968D7746B906@gmx.de>
- <CAC_iWj+koNjVBR7TCJH_u_PvY5xDHgtBGRTHBRRgAx_aDeC8-A@mail.gmail.com>
- <ae12d900-fe7f-4f7b-9eb1-018aa719174f@gmx.de>
- <CADQ0-X8XGiek9oBEFeDtXaR2vcBsQS-NhJK5mL9TRLK+9gTJ2A@mail.gmail.com>
- <050e8bea-771b-491d-8d66-14fadcff0487@gmx.de>
- <CADQ0-X9n24HVJ_AoMszTUQy1wk+q=TfZG915mzd3gd=GScxjMA@mail.gmail.com>
-In-Reply-To: <CADQ0-X9n24HVJ_AoMszTUQy1wk+q=TfZG915mzd3gd=GScxjMA@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 17 Oct 2023 22:46:33 +0300
-Message-ID: <CAC_iWjJccjJPEWpiBKOA+ue21JAcosVHsgQH7QJvMzcRBASkAw@mail.gmail.com>
-Subject: Re: [PATCH v7 4/9] efi_loader: create default file boot option
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Takahiro Akashi <takahiro.akashi@linaro.org>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.15.1
+Subject: Re: [PATCH v4 1/1] board: rockchip: add FriendlyElec NanoPC-T6 rk3588
+ board
+To: John Clark <inindev@gmail.com>, Kever Yang <kever.yang@rock-chips.com>
+Cc: Chris Morgan <macromorgan@hotmail.com>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Jagan Teki <jagan@edgeble.ai>, Johan Jonker
+ <jbx6244@gmail.com>, Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, Nicolas Frattaroli
+ <frattaroli.nicolas@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20231013012025.11694-1-inindev@gmail.com>
+ <20231013012025.11694-2-inindev@gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20231013012025.11694-2-inindev@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 652eedf9c9fb5c43838aba79
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,123 +79,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+On 2023-10-13 03:19, John Clark wrote:
+> The NanoPC-T6 is a Rockchip RK3588 based SBC by FriendlyElec.
+> 
+> There are four variants depending on the DRAM size: 4G/32GB eMMC,
+> 8G/64GB eMMC, 16G/16MB SPI NOR, and 16G/256GB eMMC/16MB SPI NOR
+> 
+> Specifications:
+>     CPU: Rockchip RK3588, 4x Cortex-A76 (up to 2.4GHz)
+>                         + 4x Cortex-A55 (up to 1.8GHz)
+>     GPU: Mali-G610 MP4
+>     VPU: 8K@60fps H.265 and VP9 decoder, 8K@30fps H.264 decoder,
+>          4K@60fps AV1 decoder, 8K@30fps H.264 and H.265 encoder
+>     NPU: 6TOPs, supports INT4/INT8/INT16/FP16
+>     RAM: 64-bit 4GB/8GB/16GB LPDDR4X at 2133MHz
+>     eMMC: 0GB/32GB/64GB/256GB HS400
+>     MicroSD Slot: MicroSD SDR104
+>     PCIe 3.0: M.2 M-Key x1, PCIe 3.0 x4 for NVMe SSDs up to 2,500 MB/s
+>     Ethernet: PCIe 2.5G 2x Ethernet (RTL8125BG)
+>     PCIe 2.1: M.2 E-Key x1, PCIe 2.1 x1 and USB2.0 Host,
+>               supports M.2 WiFi and Bluetooth
+>     4G Module: MiniPCIe x1, MicroSIM Card Slot x1
+>     Audio Out: 3.5mm jack for stereo headphone output
+>     Audio In: 2.0mm PH-2A connector for analog microphone input
+>     Video Input: standard HDMI input port, up to 4Kp60
+>     2x 4-lane MIPI-CSI, compatible with MIPI V1.2
+>     Video Output: 2x standard HDMI output ports compatible with HDMI2.1,
+>                   HDMI2.0, and HDMI1.4
+>     2x 4-lane MIPI-DSI, compatible with MIPI DPHY 2.0 or CPHY 1.1
+>     USB-A: USB 3.0, Type A
+>     USB-C: Full function USB Type‑C port, DP display up to 4Kp60, USB 3.0
+>     40-pin 2.54mm header connector: up to 2x SPIs, 6x UARTs, 1x I2Cs,
+>                                     8x PWMs, 2x I2Ss, 28x GPIOs
+>     Debug UART: 3 Pin 2.54mm header, 3V level, 1500000bps
+>     Onboard IR receiver: 38KHz carrier frequency
+>     RTC Battery: 2 Pin 1.27/1.25mm RTC battery connector for low power
+>                  RTC IC HYM8563TS
+>     5V Fan connector
+>     Working Temperature: 0C to 70C
+>     Power: 5.5*2.1mm DC Jack, 12VDC input
+>     Dimensions: 110x80x1.6mm (without case) / 86x114.5x30mm (with case)
+> 
+> Kernel commits:
+> 893c17716d0c ("arm64: dts: rockchip: Add NanoPC T6")
+> a721e28dfad2 ("arm64: dts: rockchip: Add NanoPC T6 PCIe Ethernet support")
+> ac76b786cc37 ("arm64: dts: rockchip: Add NanoPC T6 PCIe e-key support")
+> 
+> Signed-off-by: John Clark <inindev@gmail.com>
 
-On Tue, 17 Oct 2023 at 08:33, Masahisa Kojima
-<masahisa.kojima@linaro.org> wrote:
->
-> Hi Heinrich,
->
-> On Mon, 16 Oct 2023 at 23:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > On 16.10.23 15:00, Masahisa Kojima wrote:
-> > > On Mon, 16 Oct 2023 at 21:46, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >>
-> > >> On 16.10.23 14:31, Ilias Apalodimas wrote:
-> > >>> Hi Heinrich,
-> > >>>
-> > >>> On Mon, 16 Oct 2023 at 10:06, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> > >>>>
-> > >>>>
-> > >>>>
-> > >>>> Am 16. Oktober 2023 08:45:21 MESZ schrieb Masahisa Kojima <masahisa.kojima@linaro.org>:
-> > >>>>> Current efibootmgr automatically creates the
-> > >>>>> boot options of all disks and partitions installing
-> > >>>>> EFI_SIMPLE_FILE_SYSTEM_PROTOCOL.
-> > >>>>> Some of the automatically created boot options are
-> > >>>>> useless if the disk and partition does not have
-> > >>>>> the default file(e.g. EFI/BOOT/BOOTAA64.EFI).
-> > >>>>>
-> > >>>>> This commit only creates the boot option if the disk and
-> > >>>>> partition have the default file so that system can directly
-> > >>>>> boot from it.
-> > >>>>
-> > >>>> I don't directly see the user benefit.
-> > >>>
-> > >>> The user can add an HTTP boot option now and the installer will
-> > >>> automatically start.  That would allow products to ship with a single
-> > >>> boot option provisioned and run an installer on first boot
-> > >>
-> > >> This commit is not about HTTP. It changes how boot options for block
-> > >> devices are created.
-> > >>
-> > >>>
-> > >>>>
-> > >>>> Reading all file systems will increase the boot time. Shouldn't we avoid this?
-> > >>>
-> > >>> Any idea what would be an alternative?  But when we added the
-> > >>> automatic boot options we said we should avoid dynamic scanning and
-> > >>> store results in a file.  This is doing a similar thing.  The only
-> > >>> difference is that it mounts the iso image before adding the boot
-> > >>> option.
-> > >>
-> > >> The alternative is to keep showing boot options for block devices even
-> > >> if there is no BOOTxxxx.EFI file.
-> > >>
-> > >>>
-> > >>>>
-> > >>>> What does EDK II do?
-> > >>>
-> > >>> No Idea :)
-> > >>
-> > >>
-> > >> On my workstation I get generated boot options
-> > >>
-> > >> Boot0001* UEFI:CD/DVD Drive     BBS(129,,0x0)
-> > >> Boot0003* UEFI:Removable Device BBS(130,,0x0)
-> > >> Boot0004* UEFI:Network Device   BBS(131,,0x0)
-> > >>
-> > >> without any media inserted and without any PXE server available.
-> > >
-> > > It is just information about how the EDK2 works.
-> > > When I attach the Fedora installation media on EDK2(OVMF),
-> > > the automatically generated boot option is as follows.
-> > >
-> > > UEFI QEMU HARDDISK QM00001 : PciRoot(0x0)/Pci(0x1,0x1)/Ata(Primary,Master,0x0)
-> >
-> > An ATAPI drive typically is not removable. So I wonder why it is listed.
-> > Did you set the removable flag on the command line?
->
-> I guess it is not removable(actually I don't know how to set the
-> device as removable).
-> I just attached the iso image to QEMU with something like '-hda
-> Fedora_netinst.iso".
->
-> According to the EDK II implementation[1], the boot option is
-> enumerated with the following order.
->   1. Removable BlockIo
->   2. Fixed BlockIo
->   3. Non-BlockIo SimpleFileSystem
->   4. LoadFile
-> So boot option for the fixed device such as HDD is also automatically created.
->
-> [1] https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Library/UefiBootManagerLib/BmBoot.c#L2150
->
-> >
-> > >
-> > > When this boot option is selected, Fedora installer automatically starts.
-> > > So EDK II is searching the default file on the fly.
-> >
-> > What is shown if you attach a medium without Bootaa64.efi?
->
-> The same boot option is created.
-> UEFI QEMU HARDDISK QM00001 : PciRoot(0x0)/Pci(0x1,0x1)/Ata(Primary,Master,0x0)
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+Tested-by: Jonas Karlman <jonas@kwiboo.se>
 
-I went back to reading the spec and I think Heinrich is right.  We
-don't need that check at all. Going through [0] paragraph 4 says
-" This search occurs when the device path of the boot image listed in
-any boot option points directly to an EFI_SIMPLE_FILE_SYSTEM_PROTOCOL
-device and does not specify the exact file to load"
-
-So we should *only* add an automatic variable without the default
-application.  Our code in try_load_entry() will search for that
-
-[0] https://uefi.org/specs/UEFI/2.10/03_Boot_Manager.html#load-option-processing
-
-Regards
-/Ilias
->
-> Thanks,
-> Masahisa Kojima
->
-> >
+Regards,
+Jonas
