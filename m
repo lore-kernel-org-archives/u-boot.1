@@ -4,60 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79C3BCDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 15:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0BFFCDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 15:33:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A92E684FEB;
-	Tue, 17 Oct 2023 17:17:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id DF66586E64;
+	Tue, 17 Oct 2023 17:33:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="tSpNkEXb";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id BE3E084FEB; Tue, 17 Oct 2023 17:17:18 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1697556786;
+	bh=AfgqcEn8pDUuamYc3afAliWGav1zwPrx5Sl7zYhWb0o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qCgpYpsMlOjaml5cneaiSsi0e2zFYGYFZA3qLr55ltp7cpYzpKTCOFgVQAnUtM6Gz
+	 U/+lcbwvQGln47G7duyHLpeRhsx+VIFIS8aJIV7pdncyF8nSumwy/dSjOlmjQvzJON
+	 Y93ueCwJLfIUy73f60HvLDFWy+1g3Re6mev2xAT24ZGbs7ZiJlmxcRDfTdGcr84nrS
+	 jx4K338Y/MfOEoyqUynzmJliYhNNqkWj9okIy9PdABZYJyoaTsDaO7mekmvNf/OdFe
+	 kqkEseH6wCvT4QciWlYFvo2pW+pvXmYJBnPYeBz28YPRXbJKgF5FdxmTNQuga/QUzq
+	 aj1xjfdjmGr6A==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B25E8074B
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 17:17:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 40b7e1a3-6d00-11ee-91e6-005056994fde
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 40b7e1a3-6d00-11ee-91e6-005056994fde;
- Tue, 17 Oct 2023 17:17:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=/0VN5H3OziAw3aRw/63JzabvDXwKcImRk4q+ZnNxLwY=;
- b=tSpNkEXbax0zllyVmW5USnHvrd+b4xEEsA5Npy7z7KHJFJ+69Pd/kW5uUeu/LOTjLpa9AnbP/JXoY
- SzaeT1yTTNbwhAiwa7lo22t89aeugQDKip06770XOuiJbTJjXuovjnxbfenF+pna1W9tovRFcqrOky
- yilZk+gj2PbUSAQI5JrR+kivc+uDeWc8Zsp5SwNWlhWSttOKESTpI7+zk1OxJA5tKVgN+p82GFG02P
- 3jjLtRM/7YQsHZtE3tAqw4uwMlB7SSSjdcthyO19Pzd5HgOoBzP+/2thg8WzV6nIz74JzIZD/JUoC/
- u/z2bXm4qz6m7IKUy7gn9US0miAp4Yw==
-X-KPN-MID: 33|YXlPodofLReTbv7+PyRf3MF3h8qAxCFtfiwtgzCRtpeWolIkKQUzHiX/ucm+mUt
- uUGzV8p0xDtFaWYqbLzB6Rg==
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|vV0/GK42wol37e8hcYtfbXfih3BtQT63RPnVPpqiu5Sm5LRcyuaRUPKf66MSxns
- GHguYyOrgDc8ilVn0L+IbpQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 408ee007-6d00-11ee-9dc8-00505699772e;
- Tue, 17 Oct 2023 17:17:15 +0200 (CEST)
-Date: Tue, 17 Oct 2023 17:17:14 +0200
-Message-Id: <87wmvlqnwl.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: ilias.apalodimas@linaro.org, u-boot@lists.denx.de,
- heinrich.schuchardt@canonical.com
-In-Reply-To: <20231017085507.12094-1-heinrich.schuchardt@canonical.com>
- (message from Heinrich Schuchardt on Tue, 17 Oct 2023 10:55:07 +0200)
-Subject: Re: [PATCH 1/1] efi_loader: expose the device-tree file name
-References: <20231017085507.12094-1-heinrich.schuchardt@canonical.com>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E186A86CB1;
+ Tue, 17 Oct 2023 17:33:04 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1697556785;
+ bh=AfgqcEn8pDUuamYc3afAliWGav1zwPrx5Sl7zYhWb0o=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=V3+CLoAHcrwF09E5QTbLH4jhtrNIFCTyMzXRsAQt/6HQAK0IWdipQB51R1S/cSdPZ
+ cqnckEkbACXolqibiW4b9XT4yRGVsxRwt66U8ek7WFHP01X3jSCAA3fI/9sTS9GLOm
+ VjkOaWxIYuAOcgWR7+zyPfjCLnSpHS4OuP/UP0E0Ouc9ed9iopOnQmvIOt4ojQOfJF
+ UlA/LOy+g+BhYfswa0SquXw9vHcKH0au9psSjh7VJgUA+QtwqJao5b9bslEr3zIF7/
+ cJ711wTY8qSI3IU5xdPZySXWaZb3M/JFMD3m5R1LLRn7kLOn259qQfuYRSvPu7TYPi
+ cT0N43buF/5hQ==
+Message-ID: <485cdc88-6898-43b9-9079-f9fe58e26848@denx.de>
+Date: Tue, 17 Oct 2023 17:33:04 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: commit 83c63f0d118 (led: Move OF "label" property parsing to core)
+Content-Language: en-US
+To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ u-boot <u-boot@lists.denx.de>
+Cc: Philippe Reynes <philippe.reynes@softathome.com>
+References: <d588fefd-45ec-4642-bf6d-73fcc652591d@prevas.dk>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <d588fefd-45ec-4642-bf6d-73fcc652591d@prevas.dk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,85 +69,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Date: Tue, 17 Oct 2023 10:55:07 +0200
+On 10/17/23 15:29, Rasmus Villemoes wrote:
+> Hi,
+
+Hi,
+
+> I'm trying to resurrect an old submission of a driver for ti,lp5562, so
+> had occasion to dig into drivers/led/. And I think commit 83c63f0d118 is
+> buggy or at least incomplete.
 > 
-> Forward and backward compatibility of Linux kernel device-trees is
-> sometimes missing. One solution approach is to load a kernel specific
-> device-tree. This can either be done via a U-Boot scripts (like the one
-> generated by Debian package flash-kernel or by a boot loader like GRUB.
-> The boot loader approach currently requires to know the device-tree name
-> before first boot which makes it unusable for generic images.
-
-Even if the device trees are compatile, we often see that additonal
-nodes get added at a later stage.  So the ability to load a more
-complete device tree for the OS is useful and means a user doesn't
-necessarily need to update U-Boot to make additional devices work in
-their OS.
-
-> Expose the device-tree file name as EFI variable FdtFile.
-> This will allow bootloaders to load a kernel specific device-tree.
-
-Right.  I'm considering adding support for loading device trees to the
-OpenBSD bootloader and this feature would be really useful since it
-would allow me to automagically load the right device tree from the
-root filesystem of the OS.
-
-Is my understanding right that this is a null-terminated (8-bit) ASCII
-string?  Can this variable be documented somewhere, maybe together
-with the EFI_DT_FIXUP_PROTOCOL?
-
-
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_setup.c | 26 ++++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
+> Many of the drivers that were subsequently modified to not do that
+> "label" parsing rely, in their .probe method, on the top node being
+> distinguished by not having a ->label. And led-uclass itself does that
 > 
-> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-> index e6de685e87..b24feb94dc 100644
-> --- a/lib/efi_loader/efi_setup.c
-> +++ b/lib/efi_loader/efi_setup.c
-> @@ -26,6 +26,27 @@ void __weak allow_unaligned(void)
->  {
->  }
->  
-> +/**
-> + * efi_init_fdtfile() - set EFI variable FdtFile
-> + *
-> + * Return:	status code
-> + */
-> +static efi_status_t efi_init_fdtfile(void)
-> +{
-> +	char *val;
-> +
-> +	val = env_get("fdtfile");
-> +	if (!val)
-> +		return EFI_SUCCESS;
-> +
-> +	return efi_set_variable_int(u"FdtFile",
-> +				    &efi_u_boot_guid,
-> +				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +				    EFI_VARIABLE_RUNTIME_ACCESS |
-> +				    EFI_VARIABLE_READ_ONLY,
-> +				    strlen(val) + 1, val, false);
-> +}
-> +
->  /**
->   * efi_init_platform_lang() - define supported languages
->   *
-> @@ -250,6 +271,11 @@ efi_status_t efi_init_obj_list(void)
->  	if (ret != EFI_SUCCESS)
->  		goto out;
->  
-> +	/* Define EFI variable FdtFile */
-> +	ret = efi_init_fdtfile();
-> +	if (ret != EFI_SUCCESS)
-> +		goto out;
-> +
->  	/* Indicate supported features */
->  	ret = efi_init_os_indications();
->  	if (ret != EFI_SUCCESS)
-> -- 
-> 2.40.1
+>                  /* Ignore the top-level LED node */
+>                  if (uc_plat->label && !strcmp(label, uc_plat->label))
+>                          return uclass_get_device_tail(dev, 0, devp);
 > 
+> The drivers used to only do that label-parsing for subnodes of the top
+> node, so that worked, but the new code assigns some ->label for anything
+> bound to a LED uclass driver. There have been at least two patches to
+> individual drivers to fix this up since (the current top two patches
+> touching drivers/led/), but I think that's the wrong way to handle this.
 > 
+> At the same time, I actually think 83c63f0d118 didn't go far enough in
+> deduplicating, since all drivers are left with essentially the same loop:
+> 
+> static int led_gpio_bind(struct udevice *parent)
+> {
+> 	struct udevice *dev;
+> 	ofnode node;
+> 	int ret;
+> 
+> 	dev_for_each_subnode(node, parent) {
+> 		ret = device_bind_driver_to_node(parent, "gpio_led",
+> 						 ofnode_get_name(node),
+> 						 node, &dev);
+> 		if (ret)
+> 			return ret;
+> 	}
+> 
+> 	return 0;
+> }
+> 
+> static int bcm6753_led_bind(struct udevice *parent)
+> {
+> 	ofnode node;
+> 
+> 	dev_for_each_subnode(node, parent) {
+> 		struct udevice *dev;
+> 		int ret;
+> 
+> 		ret = device_bind_driver_to_node(parent, "bcm6753-led",
+> 						 ofnode_get_name(node),
+> 						 node, &dev);
+> 		if (ret)
+> 			return ret;
+> 	}
+> 
+> 	return 0;
+> }
+> 
+> and that string can, if I'm not mistaken, be gotten from
+> parent->driver->name.
+
+Which string ? The "bcm6753-led" is driver name , so that would have to 
+be parametrized.
+
+> So we really should be able to create a
+> generic_led_bind() that does exactly this loop + the "label" parsing,
+> remove the label parsing from post_bind (so it doesn't apply to the top
+> nodes)
+
+Make sure you test the 'led' command. The LEDs might be bound, but not 
+probed (so label parsing in LED probe would be too late), and if I 
+recall it right, the label parsing has to be in post-bind for the labels 
+to correctly show in the 'led' command listing.
+
+> , and switch all drivers over to this generic_led_bind().
+> 
+> Alternatively, we can still create a generic_led_bind() that just does
+> the loop as above, but then somehow prevent the top nodes from gaining
+> ->label, say by not adding the nodename fallback if the node has a
+> "compatible" property (though that seems like a hack, maybe there's a
+> cleaner way).
+
+I am all for generic_led_bind() .
