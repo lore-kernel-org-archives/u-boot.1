@@ -4,55 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0BFFCDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 15:33:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C45EECDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 15:38:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF66586E64;
-	Tue, 17 Oct 2023 17:33:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2D73D84FEB;
+	Tue, 17 Oct 2023 17:38:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697556786;
-	bh=AfgqcEn8pDUuamYc3afAliWGav1zwPrx5Sl7zYhWb0o=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=qCgpYpsMlOjaml5cneaiSsi0e2zFYGYFZA3qLr55ltp7cpYzpKTCOFgVQAnUtM6Gz
-	 U/+lcbwvQGln47G7duyHLpeRhsx+VIFIS8aJIV7pdncyF8nSumwy/dSjOlmjQvzJON
-	 Y93ueCwJLfIUy73f60HvLDFWy+1g3Re6mev2xAT24ZGbs7ZiJlmxcRDfTdGcr84nrS
-	 jx4K338Y/MfOEoyqUynzmJliYhNNqkWj9okIy9PdABZYJyoaTsDaO7mekmvNf/OdFe
-	 kqkEseH6wCvT4QciWlYFvo2pW+pvXmYJBnPYeBz28YPRXbJKgF5FdxmTNQuga/QUzq
-	 aj1xjfdjmGr6A==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UeBtV2sX";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 88A7785DE0; Tue, 17 Oct 2023 17:38:51 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id E186A86CB1;
- Tue, 17 Oct 2023 17:33:04 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697556785;
- bh=AfgqcEn8pDUuamYc3afAliWGav1zwPrx5Sl7zYhWb0o=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=V3+CLoAHcrwF09E5QTbLH4jhtrNIFCTyMzXRsAQt/6HQAK0IWdipQB51R1S/cSdPZ
- cqnckEkbACXolqibiW4b9XT4yRGVsxRwt66U8ek7WFHP01X3jSCAA3fI/9sTS9GLOm
- VjkOaWxIYuAOcgWR7+zyPfjCLnSpHS4OuP/UP0E0Ouc9ed9iopOnQmvIOt4ojQOfJF
- UlA/LOy+g+BhYfswa0SquXw9vHcKH0au9psSjh7VJgUA+QtwqJao5b9bslEr3zIF7/
- cJ711wTY8qSI3IU5xdPZySXWaZb3M/JFMD3m5R1LLRn7kLOn259qQfuYRSvPu7TYPi
- cT0N43buF/5hQ==
-Message-ID: <485cdc88-6898-43b9-9079-f9fe58e26848@denx.de>
-Date: Tue, 17 Oct 2023 17:33:04 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id C7112803AC
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 17:38:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5a7cc03dee5so71331497b3.3
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 08:38:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1697557127; x=1698161927; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=o5GGxyVU4PEM5WgrQQuFIr/Ah6EBRqmYRhBDxhJ2HYg=;
+ b=UeBtV2sXs78NBWzeCgxmeYb8Ni3Fz6TwRwtcTogdjCiZcFmrQ47jfdVmSoiCRJAF7/
+ HQSEC+Hjjz7EnTQ/8QE/dIB0RNe8eHiC1J1segZpkgDvM3bZ2PBB190LtmMHWXViYxP/
+ fbJebn+m3NU1zoZpkXmEcZ+xWqKDDW+sgHorw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697557127; x=1698161927;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o5GGxyVU4PEM5WgrQQuFIr/Ah6EBRqmYRhBDxhJ2HYg=;
+ b=LXwjGogZchOy6ZMqo+5cK1SUbjItA8g5zn5VcYgcoZaCbM8W0066fzTKYcVeerdBWg
+ FXXpzMcgXchd6IYbL3HzOaoYYK5doz40BrCTU5G4IOEb6z6wGOS2/VLpRvRnn4DMkjPj
+ bbY2ygnUA2MOG9FSBsq9O0kTnINoj1QLgusdn1umBFi1ua/ELUqO/m7TYhwGK3gMbAba
+ 9nPlC4FojpjSGmBZlz6t5Bx+uV/01wZfEbK11729F23fyXcDTrCcX71q7tc6j/jZGar4
+ VrE9ll0CUTS1aHZa+iPt+0vgyTHuY9Au2lvHB4mANw/BeR8Auh9HeIlnE5ECcY137g4F
+ QrCg==
+X-Gm-Message-State: AOJu0Yyb19UCYGRfEiWQ0w5Nbedozq60gJr6JX9mOK1/5HKjddaBj4eg
+ aI8u6O2Ncc+ExzW4SwI5Tq+qZw==
+X-Google-Smtp-Source: AGHT+IELe10rcU/+GtKdemT5gycI3d8tQjTGMsr7w/kzuI+mhmHC+O4W4zBDps/U1VK0rniujQK3Lg==
+X-Received: by 2002:a0d:ebd5:0:b0:5a7:fbd5:8c1 with SMTP id
+ u204-20020a0debd5000000b005a7fbd508c1mr2874585ywe.17.1697557127555; 
+ Tue, 17 Oct 2023 08:38:47 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
+ [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
+ v194-20020a8148cb000000b0057a918d6644sm694175ywa.128.2023.10.17.08.38.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Oct 2023 08:38:47 -0700 (PDT)
+Date: Tue, 17 Oct 2023 11:38:45 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Yu Chien Peter Lin <peterlin@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com, ycliang@andestech.com,
+ kconsul@ventanamicro.com, bmeng@tinylab.org
+Subject: Re: [PATCH] riscv: Add Zbb support for building U-Boot
+Message-ID: <20231017153845.GJ3119521@bill-the-cat>
+References: <20230809104930.7462-1-peterlin@andestech.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: commit 83c63f0d118 (led: Move OF "label" property parsing to core)
-Content-Language: en-US
-To: Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- u-boot <u-boot@lists.denx.de>
-Cc: Philippe Reynes <philippe.reynes@softathome.com>
-References: <d588fefd-45ec-4642-bf6d-73fcc652591d@prevas.dk>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <d588fefd-45ec-4642-bf6d-73fcc652591d@prevas.dk>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2U9ZZOL+NKePaazS"
+Content-Disposition: inline
+In-Reply-To: <20230809104930.7462-1-peterlin@andestech.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,89 +91,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/17/23 15:29, Rasmus Villemoes wrote:
-> Hi,
 
-Hi,
+--2U9ZZOL+NKePaazS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> I'm trying to resurrect an old submission of a driver for ti,lp5562, so
-> had occasion to dig into drivers/led/. And I think commit 83c63f0d118 is
-> buggy or at least incomplete.
-> 
-> Many of the drivers that were subsequently modified to not do that
-> "label" parsing rely, in their .probe method, on the top node being
-> distinguished by not having a ->label. And led-uclass itself does that
-> 
->                  /* Ignore the top-level LED node */
->                  if (uc_plat->label && !strcmp(label, uc_plat->label))
->                          return uclass_get_device_tail(dev, 0, devp);
-> 
-> The drivers used to only do that label-parsing for subnodes of the top
-> node, so that worked, but the new code assigns some ->label for anything
-> bound to a LED uclass driver. There have been at least two patches to
-> individual drivers to fix this up since (the current top two patches
-> touching drivers/led/), but I think that's the wrong way to handle this.
-> 
-> At the same time, I actually think 83c63f0d118 didn't go far enough in
-> deduplicating, since all drivers are left with essentially the same loop:
-> 
-> static int led_gpio_bind(struct udevice *parent)
-> {
-> 	struct udevice *dev;
-> 	ofnode node;
-> 	int ret;
-> 
-> 	dev_for_each_subnode(node, parent) {
-> 		ret = device_bind_driver_to_node(parent, "gpio_led",
-> 						 ofnode_get_name(node),
-> 						 node, &dev);
-> 		if (ret)
-> 			return ret;
-> 	}
-> 
-> 	return 0;
-> }
-> 
-> static int bcm6753_led_bind(struct udevice *parent)
-> {
-> 	ofnode node;
-> 
-> 	dev_for_each_subnode(node, parent) {
-> 		struct udevice *dev;
-> 		int ret;
-> 
-> 		ret = device_bind_driver_to_node(parent, "bcm6753-led",
-> 						 ofnode_get_name(node),
-> 						 node, &dev);
-> 		if (ret)
-> 			return ret;
-> 	}
-> 
-> 	return 0;
-> }
-> 
-> and that string can, if I'm not mistaken, be gotten from
-> parent->driver->name.
+On Wed, Aug 09, 2023 at 06:49:30PM +0800, Yu Chien Peter Lin wrote:
 
-Which string ? The "bcm6753-led" is driver name , so that would have to 
-be parametrized.
+> This patch adds ISA string to the -march to generate zbb instructions
+> for U-Boot binaries, along with optimized string functions introduced
+> from Linux kernel.
+>=20
+> Signed-off-by: Yu Chien Peter Lin <peterlin@andestech.com>
+[snip]
+> +config RISCV_ISA_ZBB
+> +	bool "Zbb extension support for bit manipulation instructions"
+> +	default n
 
-> So we really should be able to create a
-> generic_led_bind() that does exactly this loop + the "label" parsing,
-> remove the label parsing from post_bind (so it doesn't apply to the top
-> nodes)
+The default is 'n' so we don't need this line.  This can be fixed
+in-line while applying if there's no other feedback, thanks.
 
-Make sure you test the 'led' command. The LEDs might be bound, but not 
-probed (so label parsing in LED probe would be too late), and if I 
-recall it right, the label parsing has to be in post-bind for the labels 
-to correctly show in the 'led' command listing.
+--
+Tom
 
-> , and switch all drivers over to this generic_led_bind().
-> 
-> Alternatively, we can still create a generic_led_bind() that just does
-> the loop as above, but then somehow prevent the top nodes from gaining
-> ->label, say by not adding the nodename fallback if the node has a
-> "compatible" property (though that seems like a hack, maybe there's a
-> cleaner way).
+--2U9ZZOL+NKePaazS
+Content-Type: application/pgp-signature; name="signature.asc"
 
-I am all for generic_led_bind() .
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUuqoIACgkQFHw5/5Y0
+tyxY1Qv/bZb698d6zxWezeuUaIW/Owa6CTqxH8OAtePMitaQqjToHY9vobyzWxl9
+LWQSn0XAbQ14d5rhu9YqhSKICXbXJirULFgQiB4vH1essTjjRLtmtG7wm94UYabZ
+0yS5su8SuTynw/Vwx9ZyeaJN4pCyfRr5LDsRo0uAKyg5EVmITl/D7VOU+thb08ih
+vfnhCkaXs6tQSgZjfFg9vncUgwAknzw//FnKpY2Z73MeGotmi3HRPCYkkchjaffX
+5a1W9xcVzv3avXhbkHju5ad5ZStFWtUvtF4omZ1OfElL39dIjxUgznDKe4aa17wk
+I/DpkbxgrRYs8IVPQEiZpW2bVUoOJHXOqevJxJNrZ1Uo31KwAajTAC+EskwTFBpe
+Cv3dKk9uOMqR80osDpaYGeD0oYp1zokSM04XYT6/VEx8Dx/e6bZeGwm/QdxYyQaz
+bnbjks1EgHdnU/SQ/2/YZj45HZldOUXC8VhyJyDba5ptCAujlHREcETO4lB/n7V2
+4mJdhWlT
+=/rtq
+-----END PGP SIGNATURE-----
+
+--2U9ZZOL+NKePaazS--
