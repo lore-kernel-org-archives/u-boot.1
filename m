@@ -4,76 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE44CDB483
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 16:35:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17E4ECDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 16:57:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6942886CB1;
-	Tue, 17 Oct 2023 18:35:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A73B86F1E;
+	Tue, 17 Oct 2023 18:57:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n72G8a89";
+	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="NXNOFVxw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1646B86EE2; Tue, 17 Oct 2023 18:35:54 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D424186F18; Tue, 17 Oct 2023 18:57:09 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67BCF86489
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 18:35:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29FF386489
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 18:57:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-5a7dd65052aso80308847b3.0
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 09:35:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697560550; x=1698165350; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=QN7MvF748DTi0mGFB/Xi/0kWzkxagwrA7OqS6IJG3/M=;
- b=n72G8a89X0QLoZBUUGKiBPISa0dzy02r/kfNc/Ze0vLB4CtM2g/0SQpVDYFzeYrxYA
- s8pW7bm7w1vU1BFa5Zas3mzYAMZ7tNAi7BxqWTSyGPUnn8OH54YGzzP53KPbDJH15+Ah
- 8iGhEjzYSs5apziT7MO+xotizbkGGoEuZOdWw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697560550; x=1698165350;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QN7MvF748DTi0mGFB/Xi/0kWzkxagwrA7OqS6IJG3/M=;
- b=m4EyNpKJdsYggoYWZCSmtm1ZeD/gGCBf/ACP/woYz6S4kZ3Ccghu+GnPoBQVEBel0N
- w6Br5XWLm6yq0ykyRr3kKYZ6guQdfgx36EDxmJwyhF+GXUqZeJA78Esx2zwP9aPgvgDD
- 1hWC2efNalRluQQ25OUBGmQJeQh0RezjpbO7YAiUOIjEgupij6XLBgOvo6lhW6geA529
- IGciDSDWC7BuKNW0ZiCW5jySxWjdeksWYZXZ7dbnDeEaZVI9838YX4lvVTb24zy245kH
- vgCnJ5AqYChlOJPX67XMTlrkEBOiQb3e+V20ygFUFPltJKJbEvGfq7mcAIR0IdvP6fsu
- tO9w==
-X-Gm-Message-State: AOJu0YwxShueJi9Jb4+D3/R+4medPav0fWx0TrTFPl6rpXyNZIdrLKek
- rYL2lDL4dR+1Wl0EwHa/Ru3zpQ==
-X-Google-Smtp-Source: AGHT+IH1wlg3jazm1m7UaCP6QcHgNrDjBxqF188HUbtsz3KiDcr7pSXGXtlR7W5abbJeG+A2FtKhLg==
-X-Received: by 2002:a81:8384:0:b0:5a7:bd2b:d4ec with SMTP id
- t126-20020a818384000000b005a7bd2bd4ecmr3268871ywf.3.1697560550142; 
- Tue, 17 Oct 2023 09:35:50 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- v186-20020a0dd3c3000000b0057736c436f1sm727149ywd.141.2023.10.17.09.35.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Oct 2023 09:35:49 -0700 (PDT)
-Date: Tue, 17 Oct 2023 12:35:47 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Piotr Kubik <piotr.kubik@iopsys.eu>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] bootm: Fix flags used for bootargs string substitution
-Message-ID: <20231017163547.GL3119521@bill-the-cat>
-References: <20231017105305.417338-1-piotr.kubik@iopsys.eu>
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 168EE120008;
+ Tue, 17 Oct 2023 19:57:05 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 168EE120008
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
+ s=mail; t=1697561825;
+ bh=IqKNktyVLhcA8Aw87Pu2NltAWnBVQN+KKg5tD/A4MOM=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=NXNOFVxw4GCDb8OyB3GNB5+WLfBvY2Gaoj0m1dpOXB/7PNs1oNdT1SiQNPWxdbQuO
+ AVmUYUu52dTGpVENmadKoRszLE7chtlWlsRqvnzIgEgf9G4B1qQ3Q83PFBOFlaQRrq
+ zBTIitghfpy0cRrL+9PVYOdC7qrI58FEKibb3+Y+OIbLHgZ0J1bNWOIsmggD/usTTQ
+ 9/pVVOP7bVoIjkq/TeRxIkBLu2lAZdbNk4T8yNyxzwORngFAYTYlfIXcYmSpBwTBdR
+ T0EbsyJhY7fElLUU6Q+AyVva4pA14EzF8vgRrcLSk7Y0E4o/Wt/lauH5NFIiFjy/MR
+ EQSSsYIiy8GPQ==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 17 Oct 2023 19:57:04 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.37; Tue, 17 Oct 2023 19:57:04 +0300
+From: Igor Prusov <ivprusov@sberdevices.ru>
+To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
+ <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>, Sean
+ Anderson <seanga2@gmail.com>, Ryan Chen <ryan_chen@aspeedtech.com>, Chia-Wei
+ Wang <chiawei_wang@aspeedtech.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Patrice Chotard <patrice.chotard@foss.st.com>
+CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
+ <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
+ Stanley <joel@jms.id.au>, <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, 
+ <uboot-stm32@st-md-mailman.stormreply.com>
+Subject: [PATCH v4 1/8] clk: zynq: Move soc_clk_dump to Zynq clock driver
+Date: Tue, 17 Oct 2023 19:56:42 +0300
+Message-ID: <20231017165649.1492-2-ivprusov@sberdevices.ru>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231017165649.1492-1-ivprusov@sberdevices.ru>
+References: <20231017165649.1492-1-ivprusov@sberdevices.ru>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Gyx/G194tVhAADrw"
-Content-Disposition: inline
-In-Reply-To: <20231017105305.417338-1-piotr.kubik@iopsys.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180684 [Oct 17 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 540 540
+ 2509a3fe0f7fdc802e7154a32be7c2dd394ab987, {Tracking_smtp_not_equal_from},
+ {Tracking_from_domain_doesnt_match_to}, salutedevices.com:7.1.1;
+ p-i-exch-sc-m01.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
+ sberdevices.ru:5.0.1,7.1.1, FromAlignment: n, {Tracking_smtp_domain_mismatch},
+ {Tracking_smtp_domain_2level_mismatch}, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/17 15:08:00 #22212325
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,74 +111,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Move clock dump function in preparation for switching to dump function
+in clk_ops.
 
---Gyx/G194tVhAADrw
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+Acked-by: Michal Simek <michal.simek@amd.com>
+---
+ arch/arm/mach-zynq/clk.c | 57 ---------------------------------------
+ drivers/clk/clk_zynq.c   | 58 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 58 insertions(+), 57 deletions(-)
 
-On Tue, Oct 17, 2023 at 12:53:05PM +0200, Piotr Kubik wrote:
+diff --git a/arch/arm/mach-zynq/clk.c b/arch/arm/mach-zynq/clk.c
+index 1945f60e08..e6a67326dd 100644
+--- a/arch/arm/mach-zynq/clk.c
++++ b/arch/arm/mach-zynq/clk.c
+@@ -13,20 +13,6 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-static const char * const clk_names[clk_max] = {
+-	"armpll", "ddrpll", "iopll",
+-	"cpu_6or4x", "cpu_3or2x", "cpu_2x", "cpu_1x",
+-	"ddr2x", "ddr3x", "dci",
+-	"lqspi", "smc", "pcap", "gem0", "gem1",
+-	"fclk0", "fclk1", "fclk2", "fclk3", "can0", "can1",
+-	"sdio0", "sdio1", "uart0", "uart1", "spi0", "spi1", "dma",
+-	"usb0_aper", "usb1_aper", "gem0_aper", "gem1_aper",
+-	"sdio0_aper", "sdio1_aper", "spi0_aper", "spi1_aper",
+-	"can0_aper", "can1_aper", "i2c0_aper", "i2c1_aper",
+-	"uart0_aper", "uart1_aper", "gpio_aper", "lqspi_aper",
+-	"smc_aper", "swdt", "dbg_trc", "dbg_apb"
+-};
+-
+ /**
+  * set_cpu_clk_info() - Setup clock information
+  *
+@@ -65,46 +51,3 @@ int set_cpu_clk_info(void)
+ 
+ 	return 0;
+ }
+-
+-/**
+- * soc_clk_dump() - Print clock frequencies
+- * Returns zero on success
+- *
+- * Implementation for the clk dump command.
+- */
+-int soc_clk_dump(void)
+-{
+-	struct udevice *dev;
+-	int i, ret;
+-
+-	ret = uclass_get_device_by_driver(UCLASS_CLK,
+-		DM_DRIVER_GET(zynq_clk), &dev);
+-	if (ret)
+-		return ret;
+-
+-	printf("clk\t\tfrequency\n");
+-	for (i = 0; i < clk_max; i++) {
+-		const char *name = clk_names[i];
+-		if (name) {
+-			struct clk clk;
+-			unsigned long rate;
+-
+-			clk.id = i;
+-			ret = clk_request(dev, &clk);
+-			if (ret < 0)
+-				return ret;
+-
+-			rate = clk_get_rate(&clk);
+-
+-			clk_free(&clk);
+-
+-			if ((rate == (unsigned long)-ENOSYS) ||
+-			    (rate == (unsigned long)-ENXIO))
+-				printf("%10s%20s\n", name, "unknown");
+-			else
+-				printf("%10s%20lu\n", name, rate);
+-		}
+-	}
+-
+-	return 0;
+-}
+diff --git a/drivers/clk/clk_zynq.c b/drivers/clk/clk_zynq.c
+index e80500e382..be5226175f 100644
+--- a/drivers/clk/clk_zynq.c
++++ b/drivers/clk/clk_zynq.c
+@@ -454,6 +454,64 @@ static int dummy_enable(struct clk *clk)
+ 	return 0;
+ }
+ 
++static const char * const clk_names[clk_max] = {
++	"armpll", "ddrpll", "iopll",
++	"cpu_6or4x", "cpu_3or2x", "cpu_2x", "cpu_1x",
++	"ddr2x", "ddr3x", "dci",
++	"lqspi", "smc", "pcap", "gem0", "gem1",
++	"fclk0", "fclk1", "fclk2", "fclk3", "can0", "can1",
++	"sdio0", "sdio1", "uart0", "uart1", "spi0", "spi1", "dma",
++	"usb0_aper", "usb1_aper", "gem0_aper", "gem1_aper",
++	"sdio0_aper", "sdio1_aper", "spi0_aper", "spi1_aper",
++	"can0_aper", "can1_aper", "i2c0_aper", "i2c1_aper",
++	"uart0_aper", "uart1_aper", "gpio_aper", "lqspi_aper",
++	"smc_aper", "swdt", "dbg_trc", "dbg_apb"
++};
++
++/**
++ * soc_clk_dump() - Print clock frequencies
++ * Returns zero on success
++ *
++ * Implementation for the clk dump command.
++ */
++int soc_clk_dump(void)
++{
++	struct udevice *dev;
++	int i, ret;
++
++	ret = uclass_get_device_by_driver(UCLASS_CLK,
++					  DM_DRIVER_GET(zynq_clk), &dev);
++	if (ret)
++		return ret;
++
++	printf("clk\t\tfrequency\n");
++	for (i = 0; i < clk_max; i++) {
++		const char *name = clk_names[i];
++
++		if (name) {
++			struct clk clk;
++			unsigned long rate;
++
++			clk.id = i;
++			ret = clk_request(dev, &clk);
++			if (ret < 0)
++				return ret;
++
++			rate = clk_get_rate(&clk);
++
++			clk_free(&clk);
++
++			if ((rate == (unsigned long)-ENOSYS) ||
++			    (rate == (unsigned long)-ENXIO))
++				printf("%10s%20s\n", name, "unknown");
++			else
++				printf("%10s%20lu\n", name, rate);
++		}
++	}
++
++	return 0;
++}
++
+ static struct clk_ops zynq_clk_ops = {
+ 	.get_rate = zynq_clk_get_rate,
+ #ifndef CONFIG_SPL_BUILD
+-- 
+2.34.1
 
-> Commit <51bb33846ad2> introduced a feature of bootargs
-
-Checkpatch will complain that this should be:
-In commit 51bb33846ad2 ("bootm: Support string substitution in
-bootargs")
-And this is the kind of thing I would fixup on applying if there was no
-other feedback.  However:
-
-> string substitution and changed a flag used in
-> bootm_process_cmdline_env() call to be either true or false.
-> With this flag value, condition in bootm_process_cmdline()
-> `if (flags & BOOTM_CL_SUBST)` is never true
-> and process_subst() is never called.
->=20
-> Signed-off-by: Piotr Kubik <piotr.kubik@iopsys.eu>
-> ---
->  boot/bootm.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
->=20
-> diff --git a/boot/bootm.c b/boot/bootm.c
-> index 8f96a80d42..e96489e549 100644
-> --- a/boot/bootm.c
-> +++ b/boot/bootm.c
-> @@ -778,7 +778,8 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, =
-int argc,
->  	if (!ret && (states & BOOTM_STATE_OS_BD_T))
->  		ret =3D boot_fn(BOOTM_STATE_OS_BD_T, argc, argv, images);
->  	if (!ret && (states & BOOTM_STATE_OS_PREP)) {
-> -		ret =3D bootm_process_cmdline_env(images->os.os =3D=3D IH_OS_LINUX);
-> +		ret =3D bootm_process_cmdline_env(images->os.os =3D=3D IH_OS_LINUX ?
-> +										BOOTM_CL_ALL : 0);
-
-This gets hard to read. I would prefer a comment and something like:
-int flags =3D 0;
-if (images->os.os =3D=3D IH_OS_LINUX)
-  flags =3D BOOTM_CL_ALL;
-ret =3D bootm_process_cmdline_env(flags);
-
-As the compiler should be just as smart, and that'll be clear about
-what's going on.  Thanks.
-
---=20
-Tom
-
---Gyx/G194tVhAADrw
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUut+AACgkQFHw5/5Y0
-tyy53Av/Q2NzPN55+etA0EnqRypD9KVH3O0FJQ03SqwFE+ntXJzjdUVtaRlKR9wj
-K0FWvoiXNwluQ5IIOriSjUcnZ5/b0yA8Yn5cDNmY/Kn9Oc/dmxZuFNUqiDrRq9Jp
-gvALFUKZKnBjMPuoGq4TKwPqPGQ7h+I6YhjjWiBcD1RqnkLJsxPH1U/gAVAh+O9A
-6JpphcMVIzHjQKcRVEsLl5XuzZ4VAh9uAdH5zpaKsE2qc6jdKCLW2+UmegVqoJGT
-Gzr9TsdO7I150/YwRZ85asRiqoMMWFdwslCIN+7THg1flBEtKNTU9qjR2dswFjtZ
-pO6ADdjRVwTQZt0+drjZ6A+GixGQuPx05zzxrYvxQYdI1miVee5oIqWuU4+Aoplr
-rTjKVwsiAsPU0Jzuo1xpeRe3BhdTgY1DPLLA/1hfvB4O+D963JnOpdMsQrPZOEA3
-H4Pk5LrActWEjgF/vt2lBPJpjeT5sz+EAuxs1cR0N1ab1oU2aqTyt1pYyISCr0S6
-4k/D2CB4
-=OD1y
------END PGP SIGNATURE-----
-
---Gyx/G194tVhAADrw--
