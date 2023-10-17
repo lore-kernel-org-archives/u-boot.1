@@ -4,107 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2146C41513
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 03:33:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDD16CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 04:22:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97A2686DB3;
-	Tue, 17 Oct 2023 05:33:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 031B786A3C;
+	Tue, 17 Oct 2023 06:22:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kGJePR3R";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E/m7WiSd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BAF4B86D15; Tue, 17 Oct 2023 05:32:59 +0200 (CEST)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20609.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe5a::609])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5C45586A3C; Tue, 17 Oct 2023 06:22:38 +0200 (CEST)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87E0486C8B
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 05:32:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C8BE86940
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 06:22:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=HhXpa3QqrKADAq+98psre33zOzltHEA/nhNRyVrjf4SXVjrnGTN6LiyktbHdG3vZxEsbxcATVBnyq+EYLsdUheeZSsAqeH8v8+VfE4GeUsNSEtkTDbyCYGIQlDe8uWi85H7ofO5f3RU5HufgEMvy+MOed3Tldj4PjFZ6kzFUzFXR2qalDTNV3wneySeT+8sOwCLn69wY4kORCAmJBJ6L6m8qGrLJV627KH8twMRgaYGEmpJOcQERTLIl6JMvF90R1np0NzH7tJPvJPaQn5VUL0cTp3EmMoc5LBO9tHIyWQhyYpmXJQgA/33JMdqtpVRyq0jEKO52IAYnj7PyZPHQTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/bKGOpiCDSXsbzUCvWTYZ0eXwwKa4DaOxB6Ob4YFySg=;
- b=A9jYY0PyGPf33+1vHGE/Yvl+VAnf4yfJaNqFFDdhn/Ej9p2CiA9whYK4qeSuo/ycbQWdZJR4wsIgburizjPfC6HKK6uNNKpNdcZbu7iJMq8B8TpynvFQJt2Ayvl4E3JiD/Zfj3maPfQhqL3CvQIvqL5IDcTewdGfFVv4mJk68W5w+N0pmP3avjm5iOgZYR7JrFWTnZpon6HxhqnDObTF+/9w03GMUMq1G96fd8E7GCsrnAi14f7mjfnJSq1UUsNAp/n7m8vnzkQYUH4hqSBdBFaxJF1eDKUumoWBCgHiTq3ZlFQzYxah3HJSkBhWrPI3h3OVWAuiNGTjTI+24k67Xg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/bKGOpiCDSXsbzUCvWTYZ0eXwwKa4DaOxB6Ob4YFySg=;
- b=kGJePR3RJAWBGJ36sG0PVWuBZOaJ/zlOiHJh6iCUKKBDAVCKHU4faLrZC/d0AA2C1YmTVM5mmc+OfhgCq4fcfsn2tjrDzt2eC+z79kph0p8p6MntADoft/DzaTTL3mUdHO+tYMsBvSFl0avexLkC9WnJWh//HaSdyPbpDdf4xgE=
-Received: from DS7PR05CA0045.namprd05.prod.outlook.com (2603:10b6:8:2f::7) by
- PH7PR12MB7281.namprd12.prod.outlook.com (2603:10b6:510:208::6) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6886.36; Tue, 17 Oct 2023 03:32:52 +0000
-Received: from DS1PEPF00017094.namprd03.prod.outlook.com
- (2603:10b6:8:2f:cafe::9a) by DS7PR05CA0045.outlook.office365.com
- (2603:10b6:8:2f::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.18 via Frontend
- Transport; Tue, 17 Oct 2023 03:32:52 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS1PEPF00017094.mail.protection.outlook.com (10.167.17.137) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6838.22 via Frontend Transport; Tue, 17 Oct 2023 03:32:52 +0000
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 16 Oct
- 2023 22:32:51 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27 via Frontend
- Transport; Mon, 16 Oct 2023 22:32:49 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <git@xilinx.com>, Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Subject: [PATCH v2 6/6] spi: zynq_qspi: Add parallel memories support in QSPI
- driver
-Date: Tue, 17 Oct 2023 09:01:58 +0530
-Message-ID: <20231017033158.27740-7-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20231017033158.27740-1-venkatesh.abbarapu@amd.com>
-References: <20231017033158.27740-1-venkatesh.abbarapu@amd.com>
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-53db360294fso9254136a12.3
+ for <u-boot@lists.denx.de>; Mon, 16 Oct 2023 21:22:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697516555; x=1698121355; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cJlzgG8bk+1yt3k5qQATacv+TVM3E6pS8XLFCVuFWCE=;
+ b=E/m7WiSdrppse1uDSiRaHKdeh+hCc5AKizQPzabodx+kILsQmNupbcXLMDEZz8K/qV
+ oAhN3vVZbw9YnxDwkGterWx3dAz1HYFsd5G70c+zLqin5lF1F1ZgyD/fTBlaLMXckxOr
+ dhLMmUiaJO5LC0EIAxK+ZDtt0lPlwp5UXxO9pKNNkMj6nFF8mVJBx8Q1gmvCsHYwuRLX
+ 5ORl6d7LnFzDX7zBrCLuOoTIZbJx21RB9j++L1gxk1vNfC3VPVqYGpeLjBVuvaP2d/nh
+ 2fNQ1ernMiveTHX3ruRVhmNByeGTuAjCHAifQOeCSvS6VJOhepa/fPSzr4TYNVjCBbWo
+ l2ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697516555; x=1698121355;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=cJlzgG8bk+1yt3k5qQATacv+TVM3E6pS8XLFCVuFWCE=;
+ b=ALcG7O0VnUuHWDrwtUMkKSoyaPCdd4bDv4uikMtj+SSCFVZ7GQM7DndkgR7f3qXUtS
+ E9MoxK67KpQyWt5rnBY12yy7KasOD7PBFMQn0IEkpDHIi9oEIjztdSVXMckvhJzBoFpx
+ Uowo7UNJZKencWDwGY3sy6Oe4gKXC/e8/mtr+IAr5LDhn5cj2XB3Gz90ReQQJdwL/htd
+ LCw0W2E01VF5XtWP0oOxkE2aEPiC3zhQ2heHDk/Ad0q93yvKwXfejWVBU5XKp8QWLAcH
+ EoJGo71fvgnesMrrajPKyXPzoAwmIenZ1F2pAOkg3MXTQlE9SUQJY7Rgkdj6+GFFJmFu
+ qSng==
+X-Gm-Message-State: AOJu0YyQ1znVFHPF9uB8Csu24ZVjRaQrjx3xMEP0ua/6yVjuUHn4EG6d
+ Tz2d3Rppf36eIerFAPOVxA3HezAc4wN6ZP0STLA=
+X-Google-Smtp-Source: AGHT+IEl5lLsNsrqCxgrg/D0wYl61SnaMuAvJE++88qIeTe6RlSt/5xfjsU2obRVNoHqnFhcjZV7Z7VtktyYqLgy804=
+X-Received: by 2002:a50:9fe3:0:b0:53d:a1c0:410e with SMTP id
+ c90-20020a509fe3000000b0053da1c0410emr1060874edf.7.1697516555308; Mon, 16 Oct
+ 2023 21:22:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF00017094:EE_|PH7PR12MB7281:EE_
-X-MS-Office365-Filtering-Correlation-Id: 061a65ef-e8a9-4a98-52de-08dbcec1be70
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 9lJEnEE35Oleqsl01K+1Bq7ROEVE9i1vN4mA2XLXKDodzb0FcIikvODJYZxMSiQd//pDk4CblO0U5pJF0aDX5LmJ0r5V1+1ydaM6AayZ0KWisFUkdFIoIaiZ7W/1Wa/PmBJq2ipaxWDHp5OG75E/csVV4ITAiDJbbozMU0214LM9Z7eDGJOIRH+/2HGkZZ3tPqa+MF31QtHP924P6xFA1FLSIDpUAnprtyv83duJz1bZZ4qLkkYXxOss1gZrxtYXTEw5BYzhhwDPoRRWloKGM/hITCZNVxVV90RUyUPp+qRfbNwYpFA7yrnrYTkyXYEWuqf+RiOxgJ4Ep8oTerdrAIalyTOn2ho4XQlmvm79x0NNYvVNL4KUJeEzDZd+kZLO8pTElvvVFkVUayQ+7lSs40Meb7BlvL5EHEZXDsVrRjglVBIewLsTSrkXy0SS8S9VDpFXnm1nsAxf8loyxwM/5bjQ5jctf8tMye4cUJtcpzEA1TM2FFJHOqc91BF1V3EQw8WYvk4Whbnq2HjW0DcfjH/hvqu4q+Y1WZxjL3G5oUOBSKi0/pnUEtJZXeiFYIfsOgVzTMyLVWuQQvXYJ9H2xCsI02v0UmtBKCHWs6jtkluNYSVlJyhy1PU2RSb7TAj8gUAUPYgoJwphPtfHK1ZXH17w0Eb0+nHfTnkCeawcEzgzVOberkrfHU48WvTN3c77B2fnA4eW3HAMyMN+zdbGhUGH/Lpl24t8UnPqBnwJkjhgLnAsp6QTAApwt9QZu7s/s1eSrpEF3ct4X2pITLUGrg==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(4636009)(376002)(136003)(346002)(396003)(39860400002)(230922051799003)(82310400011)(1800799009)(64100799003)(186009)(451199024)(40470700004)(46966006)(36840700001)(40480700001)(40460700003)(47076005)(83380400001)(86362001)(5660300002)(36756003)(4326008)(82740400003)(81166007)(356005)(2906002)(316002)(41300700001)(70586007)(70206006)(6666004)(36860700001)(8676002)(8936002)(1076003)(478600001)(26005)(6916009)(2616005)(336012)(54906003)(426003)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2023 03:32:52.1474 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 061a65ef-e8a9-4a98-52de-08dbcec1be70
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF00017094.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7281
+References: <20230317162253.1049446-1-paul.liu@linaro.org>
+ <20230317162253.1049446-2-paul.liu@linaro.org>
+ <CAFOYHZC_Dveax85n0fLr5BFyZcLqsvUssn=J0oHyvN75bTaCUw@mail.gmail.com>
+ <fac6ef1747ec318787f90a6d0c81163b@kernel.org>
+ <CAFOYHZAmWj6cgXib+m3Dy+mABcwEmPWAHLUgxeBe=2JVLsgaYQ@mail.gmail.com>
+ <CAFOYHZCNKJBv+J7dkoOjmPrfjr2TXB_vLqzKB2X4u0iwRpOCgA@mail.gmail.com>
+ <87y1g2lsnk.wl-maz@kernel.org>
+In-Reply-To: <87y1g2lsnk.wl-maz@kernel.org>
+From: Chris Packham <judge.packham@gmail.com>
+Date: Tue, 17 Oct 2023 17:22:23 +1300
+Message-ID: <CAFOYHZBuc-tkg8jZ3wfg-8hGOY=eRxdhfMEFF_nz2LuJgRQfMQ@mail.gmail.com>
+Subject: Re: [PATCH 1/3] arm64: Use FEAT_HAFDBS to track dirty pages when
+ available
+To: Marc Zyngier <maz@kernel.org>
+Cc: "Ying-Chun Liu (PaulLiu)" <paul.liu@linaro.org>,
+ u-boot <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,334 +94,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for parallel memories in zynq_qspi.c driver. In case of
-parallel memories STRIPE bit is set and sent to the qspi ip, which will
-send data bits to both the flashes in parallel. However for few commands
-we should not use stripe, instead send same data to both the flashes.
-Those commands are exclueded by using zynqmp_qspi_update_stripe().
+On Tue, Oct 17, 2023 at 12:21=E2=80=AFAM Marc Zyngier <maz@kernel.org> wrot=
+e:
+>
+> On Mon, 16 Oct 2023 02:42:08 +0100,
+> Chris Packham <judge.packham@gmail.com> wrote:
+> >
+> > On Sun, Oct 15, 2023 at 10:29=E2=80=AFAM Chris Packham <judge.packham@g=
+mail.com> wrote:
+> > >
+> > >
+> > >
+> > > On Sat, 14 Oct 2023, 11:04 am Marc Zyngier, <maz@kernel.org> wrote:
+> > >>
+> > >> On 2023-10-13 03:40, Chris Packham wrote:
+> > >> > Hi Marc, Paul,
+> > >> >
+> > >> > On Sat, Mar 18, 2023 at 5:23=E2=80=AFAM Ying-Chun Liu (PaulLiu)
+> > >> > <paul.liu@linaro.org> wrote:
+> > >> >>
+> > >> >> From: Marc Zyngier <maz@kernel.org>
+> > >> >>
+> > >> >> Some recent arm64 cores have a facility that allows the page
+> > >> >> table walker to track the dirty state of a page. This makes it
+> > >> >> really efficient to perform CMOs by VA as we only need to look
+> > >> >> at dirty pages.
+> > >> >>
+> > >> >> Signed-off-by: Marc Zyngier <maz@kernel.org>
+> > >> >> [ Paul: pick from the Android tree. Rebase to the upstream ]
+> > >> >> Signed-off-by: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> > >> >> Cc: Tom Rini <trini@konsulko.com>
+> > >> >> Link:
+> > >> >> https://android.googlesource.com/platform/external/u-boot/+/3c433=
+724e6f830a6b2edd5ec3d4a504794887263
+> > >> >
+> > >> > I think this may have caused a regression for the Marvell AC5X
+> > >> > board(s). I found that v2023.07 locked up at boot but v2023.01 was
+> > >> > fine. The lockup seemed to be in the 'Net:' init probably just as =
+the
+> > >> > mvneta driver was being initialised.
+> > >> >
+> > >> > A git bisect led me to this change although for this specific chan=
+ge
+> > >> > instead of the lockup I get a crash so maybe I'm actually hitting =
+a
+> > >> > different issue.
+> > >> >
+> > >> > Any thoughts as to why this may have caused problems?
+> > >>
+> > >> Not really. What CPUs does this platform have? What is the offending
+> > >> driver doing to trigger the issue? Can you provide some level of
+> > >> tracing?
+> > >
+> > >
+> > > The Marvell AC5X is a network switch ASIC with an integrated ARMv8 CP=
+U (8.1 specifically I think).
+> > >
+> > > I think there is something that the mvneta driver is doing triggering=
+ the issue. I have another AC5X based board without an Ethernet port that b=
+oots just fine (this is also why I didn't notice earlier).
+> > >
+> > > I'll try and get some more debug out when I'm back in the office
+> > >
+> >
+> > The thing the mvneta driver does that upsets things appears to be
+> >
+> >     mmu_set_region_dcache_behaviour((phys_addr_t)bd_space, BD_SPACE,
+> >                                                           DCACHE_OFF);
+> >
+> > I can comment that line out and everything works.
+>
+> This leads to two questions:
+>
+> - is the device cache coherent, in which case it doesn't need the
+>   memory being non-cacheable? If everything is OK, then why the switch
+>   to device memory?
 
-Also update copyright info for this file.
+I'll be honest and say I understand less than 50% of that. The network
+transfer does seem to work without the call so perhaps the device is
+cache coherent but this seems to be a common thing in many drivers so
+I'd assume that on such platforms this should be innocuous. It's
+totally possible I haven't done a good job of setting up the CPU or
+informing the rest of the system about it. I did just take a lot of
+the code from the Marvell SDK and clean it up without really
+understanding what most of it did.
 
-Signed-off-by: Ashok Reddy Soma <ashok.reddy.soma@amd.com>
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/spi/zynq_qspi.c | 140 ++++++++++++++++++++++++++++++++++++----
- include/spi.h           |   4 ++
- 2 files changed, 131 insertions(+), 13 deletions(-)
+>
+> - what goes wrong when these attributes are applied? do we have to
+>   split a block mapping?
+>
+> Instrumenting the MMU code would certainly help understanding what
+> goes wrong here.
 
-diff --git a/drivers/spi/zynq_qspi.c b/drivers/spi/zynq_qspi.c
-index 069d2a77de..3471c301bf 100644
---- a/drivers/spi/zynq_qspi.c
-+++ b/drivers/spi/zynq_qspi.c
-@@ -1,7 +1,8 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * (C) Copyright 2013 Xilinx, Inc.
-+ * (C) Copyright 2013 - 2022, Xilinx, Inc.
-  * (C) Copyright 2015 Jagan Teki <jteki@openedev.com>
-+ * (C) Copyright 2023, Advanced Micro Devices, Inc.
-  *
-  * Xilinx Zynq Quad-SPI(QSPI) controller driver (master mode only)
-  */
-@@ -13,10 +14,12 @@
- #include <log.h>
- #include <malloc.h>
- #include <spi.h>
-+#include <spi_flash.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
- #include <spi-mem.h>
-+#include "../mtd/spi/sf_internal.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -42,6 +45,22 @@ DECLARE_GLOBAL_DATA_PTR;
- #define ZYNQ_QSPI_TXD_00_01_OFFSET	0x80	/* Transmit 1-byte inst */
- #define ZYNQ_QSPI_TXD_00_10_OFFSET	0x84	/* Transmit 2-byte inst */
- #define ZYNQ_QSPI_TXD_00_11_OFFSET	0x88	/* Transmit 3-byte inst */
-+#define ZYNQ_QSPI_FR_QOUT_CODE		0x6B    /* read instruction code */
-+#define ZYNQ_QSPI_FR_DUALIO_CODE	0xBB
-+
-+#define QSPI_SELECT_LOWER_CS		BIT(0)
-+#define QSPI_SELECT_UPPER_CS		BIT(1)
-+
-+/*
-+ * QSPI Linear Configuration Register
-+ *
-+ * It is named Linear Configuration but it controls other modes when not in
-+ * linear mode also.
-+ */
-+#define ZYNQ_QSPI_LCFG_TWO_MEM_MASK	0x40000000 /* QSPI Enable Bit Mask */
-+#define ZYNQ_QSPI_LCFG_SEP_BUS_MASK	0x20000000 /* QSPI Enable Bit Mask */
-+#define ZYNQ_QSPI_LCFG_U_PAGE		0x10000000 /* QSPI Upper memory set */
-+#define ZYNQ_QSPI_LCFG_DUMMY_SHIFT	8
- 
- #define ZYNQ_QSPI_TXFIFO_THRESHOLD	1	/* Tx FIFO threshold level*/
- #define ZYNQ_QSPI_RXFIFO_THRESHOLD	32	/* Rx FIFO threshold level */
-@@ -101,7 +120,12 @@ struct zynq_qspi_priv {
- 	int bytes_to_transfer;
- 	int bytes_to_receive;
- 	unsigned int is_inst;
-+	unsigned int is_parallel;
-+	unsigned int is_stacked;
-+	unsigned int is_dio;
-+	unsigned int u_page;
- 	unsigned cs_change:1;
-+	unsigned is_strip:1;
- };
- 
- static int zynq_qspi_of_to_plat(struct udevice *bus)
-@@ -112,7 +136,6 @@ static int zynq_qspi_of_to_plat(struct udevice *bus)
- 
- 	plat->regs = (struct zynq_qspi_regs *)fdtdec_get_addr(blob,
- 							      node, "reg");
--
- 	return 0;
- }
- 
-@@ -147,6 +170,9 @@ static void zynq_qspi_init_hw(struct zynq_qspi_priv *priv)
- 	/* Disable Interrupts */
- 	writel(ZYNQ_QSPI_IXR_ALL_MASK, &regs->idr);
- 
-+	/* Disable linear mode as the boot loader may have used it */
-+	writel(0x0, &regs->lqspicfg);
-+
- 	/* Clear the TX and RX threshold reg */
- 	writel(ZYNQ_QSPI_TXFIFO_THRESHOLD, &regs->txftr);
- 	writel(ZYNQ_QSPI_RXFIFO_THRESHOLD, &regs->rxftr);
-@@ -164,12 +190,11 @@ static void zynq_qspi_init_hw(struct zynq_qspi_priv *priv)
- 	confr |= ZYNQ_QSPI_CR_IFMODE_MASK | ZYNQ_QSPI_CR_MCS_MASK |
- 		ZYNQ_QSPI_CR_PCS_MASK | ZYNQ_QSPI_CR_FW_MASK |
- 		ZYNQ_QSPI_CR_MSTREN_MASK;
--	writel(confr, &regs->cr);
- 
--	/* Disable the LQSPI feature */
--	confr = readl(&regs->lqspicfg);
--	confr &= ~ZYNQ_QSPI_LQSPICFG_LQMODE_MASK;
--	writel(confr, &regs->lqspicfg);
-+	if (priv->is_stacked)
-+		confr |= 0x10;
-+
-+	writel(confr, &regs->cr);
- 
- 	/* Enable SPI */
- 	writel(ZYNQ_QSPI_ENR_SPI_EN_MASK, &regs->enr);
-@@ -180,6 +205,8 @@ static int zynq_qspi_child_pre_probe(struct udevice *bus)
- 	struct spi_slave *slave = dev_get_parent_priv(bus);
- 	struct zynq_qspi_priv *priv = dev_get_priv(bus->parent);
- 
-+	slave->multi_cs_cap = true;
-+	slave->dio = priv->is_dio;
- 	priv->max_hz = slave->max_hz;
- 
- 	return 0;
-@@ -363,8 +390,8 @@ static void zynq_qspi_fill_tx_fifo(struct zynq_qspi_priv *priv, u32 size)
- 	unsigned len, offset;
- 	struct zynq_qspi_regs *regs = priv->regs;
- 	static const unsigned offsets[4] = {
--		ZYNQ_QSPI_TXD_00_00_OFFSET, ZYNQ_QSPI_TXD_00_01_OFFSET,
--		ZYNQ_QSPI_TXD_00_10_OFFSET, ZYNQ_QSPI_TXD_00_11_OFFSET };
-+		ZYNQ_QSPI_TXD_00_01_OFFSET, ZYNQ_QSPI_TXD_00_10_OFFSET,
-+		ZYNQ_QSPI_TXD_00_11_OFFSET, ZYNQ_QSPI_TXD_00_00_OFFSET };
- 
- 	while ((fifocount < size) &&
- 			(priv->bytes_to_transfer > 0)) {
-@@ -386,7 +413,11 @@ static void zynq_qspi_fill_tx_fifo(struct zynq_qspi_priv *priv, u32 size)
- 				return;
- 			len = priv->bytes_to_transfer;
- 			zynq_qspi_write_data(priv, &data, len);
--			offset = (priv->rx_buf) ? offsets[0] : offsets[len];
-+			if ((priv->is_parallel || priv->is_stacked) &&
-+                            !priv->is_inst && (len % 2))
-+                                len++;
-+                        offset = (priv->rx_buf) ?
-+                                  offsets[3] : offsets[len - 1];
- 			writel(data, &regs->cr + (offset / 4));
- 		}
- 	}
-@@ -491,6 +522,7 @@ static int zynq_qspi_irq_poll(struct zynq_qspi_priv *priv)
-  */
- static int zynq_qspi_start_transfer(struct zynq_qspi_priv *priv)
- {
-+	static u8 current_u_page;
- 	u32 data = 0;
- 	struct zynq_qspi_regs *regs = priv->regs;
- 
-@@ -500,6 +532,47 @@ static int zynq_qspi_start_transfer(struct zynq_qspi_priv *priv)
- 	priv->bytes_to_transfer = priv->len;
- 	priv->bytes_to_receive = priv->len;
- 
-+	if (priv->is_parallel)
-+		writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+			ZYNQ_QSPI_LCFG_SEP_BUS_MASK |
-+			(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+			ZYNQ_QSPI_FR_QOUT_CODE), &regs->lqspicfg);
-+
-+	if (priv->is_inst && priv->is_stacked && current_u_page != priv->u_page) {
-+		if (priv->u_page) {
-+			if (priv->is_dio == SF_DUALIO_FLASH)
-+				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+					ZYNQ_QSPI_LCFG_U_PAGE |
-+					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+					ZYNQ_QSPI_FR_DUALIO_CODE),
-+					&regs->lqspicfg);
-+			else
-+				/* Configure two memories on shared bus
-+				 * by enabling upper mem
-+				 */
-+				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+					ZYNQ_QSPI_LCFG_U_PAGE |
-+					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+					ZYNQ_QSPI_FR_QOUT_CODE),
-+					&regs->lqspicfg);
-+		} else {
-+			if (priv->is_dio == SF_DUALIO_FLASH)
-+				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+					ZYNQ_QSPI_FR_DUALIO_CODE),
-+					&regs->lqspicfg);
-+			else
-+				/* Configure two memories on shared bus
-+				 * by enabling lower mem
-+				 */
-+				writel((ZYNQ_QSPI_LCFG_TWO_MEM_MASK |
-+					(1 << ZYNQ_QSPI_LCFG_DUMMY_SHIFT) |
-+					ZYNQ_QSPI_FR_QOUT_CODE),
-+					&regs->lqspicfg);
-+		}
-+		current_u_page = priv->u_page;
-+	}
-+
- 	if (priv->len < 4)
- 		zynq_qspi_fill_tx_fifo(priv, priv->len);
- 	else
-@@ -599,7 +672,8 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	 * Assume that the beginning of a transfer with bits to
- 	 * transmit must contain a device command.
- 	 */
--	if (dout && flags & SPI_XFER_BEGIN)
-+	if ((dout && flags & SPI_XFER_BEGIN) ||
-+	    (flags & SPI_XFER_END && !priv->is_strip))
- 		priv->is_inst = 1;
- 	else
- 		priv->is_inst = 0;
-@@ -609,6 +683,11 @@ static int zynq_qspi_xfer(struct udevice *dev, unsigned int bitlen,
- 	else
- 		priv->cs_change = 0;
- 
-+	if (flags & SPI_XFER_U_PAGE)
-+		priv->u_page = 1;
-+	else
-+		priv->u_page = 0;
-+
- 	zynq_qspi_transfer(priv);
- 
- 	return 0;
-@@ -672,14 +751,35 @@ static int zynq_qspi_set_mode(struct udevice *bus, uint mode)
- 	return 0;
- }
- 
-+bool update_stripe(const struct spi_mem_op *op)
-+{
-+	if (op->cmd.opcode == SPINOR_OP_BE_4K ||
-+	    op->cmd.opcode == SPINOR_OP_CHIP_ERASE ||
-+	    op->cmd.opcode == SPINOR_OP_SE ||
-+	    op->cmd.opcode == SPINOR_OP_WREAR
-+	)
-+		return false;
-+
-+	return true;
-+}
-+
- static int zynq_qspi_exec_op(struct spi_slave *slave,
- 			     const struct spi_mem_op *op)
- {
-+	struct udevice *bus = slave->dev->parent;
-+	struct zynq_qspi_priv *priv = dev_get_priv(bus);
- 	int op_len, pos = 0, ret, i;
-+	u32 dummy_bytes = 0;
- 	unsigned int flag = 0;
- 	const u8 *tx_buf = NULL;
- 	u8 *rx_buf = NULL;
- 
-+	if ((slave->flags & QSPI_SELECT_LOWER_CS) &&
-+	    (slave->flags & QSPI_SELECT_UPPER_CS))
-+		priv->is_parallel = true;
-+	if (slave->flags & SPI_XFER_STACKED)
-+		priv->is_stacked = true;
-+
- 	if (op->data.nbytes) {
- 		if (op->data.dir == SPI_MEM_DATA_IN)
- 			rx_buf = op->data.buf.in;
-@@ -688,6 +788,11 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 	}
- 
- 	op_len = op->cmd.nbytes + op->addr.nbytes + op->dummy.nbytes;
-+	if (op->dummy.nbytes) {
-+		op_len = op->cmd.nbytes + op->addr.nbytes +
-+			 op->dummy.nbytes / op->dummy.buswidth;
-+		dummy_bytes = op->dummy.nbytes / op->dummy.buswidth;
-+	}
- 
- 	u8 op_buf[op_len];
- 
-@@ -701,8 +806,11 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 		pos += op->addr.nbytes;
- 	}
- 
--	if (op->dummy.nbytes)
--		memset(op_buf + pos, 0xff, op->dummy.nbytes);
-+	if (dummy_bytes)
-+		memset(op_buf + pos, 0xff, dummy_bytes);
-+
-+	if (slave->flags & SPI_XFER_U_PAGE)
-+		flag |= SPI_XFER_U_PAGE;
- 
- 	/* 1st transfer: opcode + address + dummy cycles */
- 	/* Make sure to set END bit if no tx or rx data messages follow */
-@@ -714,6 +822,9 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 	if (ret)
- 		return ret;
- 
-+	slave->dummy_bytes = 0;
-+	priv->is_strip = update_stripe(op);
-+
- 	/* 2nd transfer: rx or tx data path */
- 	if (tx_buf || rx_buf) {
- 		ret = zynq_qspi_xfer(slave->dev, op->data.nbytes * 8, tx_buf,
-@@ -722,6 +833,9 @@ static int zynq_qspi_exec_op(struct spi_slave *slave,
- 			return ret;
- 	}
- 
-+	priv->is_parallel = false;
-+	priv->is_stacked = false;
-+	slave->flags &= ~SPI_XFER_MASK;
- 	spi_release_bus(slave);
- 
- 	return 0;
-diff --git a/include/spi.h b/include/spi.h
-index c33acd9eac..0c5f4c1739 100644
---- a/include/spi.h
-+++ b/include/spi.h
-@@ -42,6 +42,8 @@
- #define SPI_3BYTE_MODE 0x0
- #define SPI_4BYTE_MODE 0x1
- 
-+#define SF_DUALIO_FLASH        0x1
-+
- /* SPI transfer flags */
- #define SPI_XFER_STRIPE	(1 << 6)
- #define SPI_XFER_MASK	(3 << 8)
-@@ -172,6 +174,8 @@ struct spi_slave {
- #define SPI_XFER_U_PAGE		BIT(4)
- #define SPI_XFER_STACKED	BIT(5)
- 
-+	u8 dio;
-+	u8 dummy_bytes;
- 	u32 bytemode;
- 
- 	/*
--- 
-2.17.1
+I did do that a little bit. At first I thought there was a possible
+infinite loop in mmu_set_region_dcache_behaviour(). Squinting at
+things you could naively say that if set_one_region() failed to find
+an entry then it would loop forever but if that happened I'd have some
+debug saying that it failed. Things seem to go south after
+__asm_switch_ttbr(gd->arch.tlb_emerg) which did get me thinking that
+perhaps the emergency tables aren't setup (or at least aren't set up
+in a way that allows debug output). That's about as far as I got
+debugging wise, I'll try and spend some more time digging into the MMU
+code.
 
+>
+> Thanks,
+>
+>         M.
+>
+> --
+> Without deviation from the norm, progress is not possible.
