@@ -4,65 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32870CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 18:53:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD66DCDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 18:57:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B90086D9C;
-	Tue, 17 Oct 2023 20:53:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 133DA86C6E;
+	Tue, 17 Oct 2023 20:57:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pjiygLi3";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="s3m1NIfS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F62886C6E; Tue, 17 Oct 2023 20:53:45 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AE92186DD5; Tue, 17 Oct 2023 20:57:28 +0200 (CEST)
+Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
+ [IPv6:2a00:1450:4864:20::236])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB61786EE2
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:53:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A9ABF8074B
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:57:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 39HIrd65126448;
- Tue, 17 Oct 2023 13:53:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1697568819;
- bh=GxPCUDVT59cLmqdsh/sA9Q2ZxOxjGUoFKTQkV0KZZqc=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=pjiygLi3JylWpKU1N5Cw2lzf1lsrfbE7dT5HaLeqXXfPuHbU6CpD3afelqrfAdl6G
- uMrusMu/lN3dC4lMu9IT9ZBbdbyoQAPznvo8Wx6ykmsGsxErky8pfkcpijWV75b27r
- ZQl2sXGHmKoj0hr/l8NcHqE+fCQOWi9fb0cv4XNU=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 39HIrd5n029148
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 17 Oct 2023 13:53:39 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 17
- Oct 2023 13:53:38 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 17 Oct 2023 13:53:38 -0500
-Received: from localhost (ileaxei01-snat2.itg.ti.com [10.180.69.6])
- by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 39HIrc0N063759;
- Tue, 17 Oct 2023 13:53:38 -0500
-Date: Tue, 17 Oct 2023 13:53:38 -0500
-From: Nishanth Menon <nm@ti.com>
-To: "Kumar, Udit" <u-kumar1@ti.com>
-CC: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>,
- <u-boot@lists.denx.de>, <vigneshr@ti.com>, <m-chawdhry@ti.com>
-Subject: Re: [PATCH] arm: dts: k3-j721e-mcu-wakeup: Add MCU domain ESM instance
-Message-ID: <20231017185338.yeetp7iwn52o756e@snazzy>
-References: <20231013102941.548209-1-n-francis@ti.com>
- <454562f1-d120-9719-62c3-7ef64861307c@ti.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=glaroque@baylibre.com
+Received: by mail-lj1-x236.google.com with SMTP id
+ 38308e7fff4ca-2c5039d4e88so69781891fa.3
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 11:57:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1697569046; x=1698173846;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Onq5Ei9HhL/jY+JPRrJ/vO8LYK4BUfmy7FZQoeAmEfc=;
+ b=s3m1NIfS5fGRtkwQC9PIfP/yTq9NavmX+JHvvMQw+XzZHVFs5ZpwBRLsot/cMtNxVE
+ +tputP+ut6ha9CXCTWqEAJhbx7wmlPd767Q7niJD3pwargSIegteN9krEBVeYSqpREft
+ zBvqt0dDJF2RVHDGST9pdYWZEAhyN298PkV6Q7hSVf2+2vovFaqrmkB9FAJC8eUGkOuB
+ TkxNckKhkEJd0oDqDNO5Pvj/BQPfRVktZGErXIriY7j7h8dr6V0VV57O88XUyuYmFWng
+ FzbUHRZ2X9DpB6jDOmUAGNg3C/HU/5M9WIRXIOWF1BpNq1Wt7qj3PqJd3hhi37Tp1Xlb
+ raDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697569046; x=1698173846;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Onq5Ei9HhL/jY+JPRrJ/vO8LYK4BUfmy7FZQoeAmEfc=;
+ b=f8v9Mgwk+/tJwYzLG+98vCRVBde5iE6kBvE1+OT/uTmULxqVzYJOToYUwRe6lAKOKi
+ 0y0aIjuc8eBd7sjNxgEIxJwBTCRsD9DY6+DJuBFDuy6BUP92YgEP9uXTFLh6NxPyz9FZ
+ dCTH73GSgxGwUNYtA3lIQq4RkmFvbOsOG+XoAA0j5xYMszjAy7Leot2gJFO0PxG5mX1R
+ EOVRD4wsAZWmtLCz+rQPtZqXj2vhDBWjLB5O48WIczC8cLPwzYBTdZQmdlLd7T7kuczt
+ 5rmtEL/psMycoG3ltO4SuNQGgyalQOFgFbiVtPXsQqp2LsqqWdgCEYeM8d0jEClq4eDc
+ sKow==
+X-Gm-Message-State: AOJu0YyMTTcYMjNkBW6h4bhlrKeMco0m0tM1Edq+W7wmhd0WUrI9+1l8
+ 61lCJO8+ZYZu9FGqNh/gkms4MA==
+X-Google-Smtp-Source: AGHT+IHdMiN7anAX9QOx7OWWEnUmsThrgZGMF5RQpxq34B6mMx91q2+zdej7S6jlDhpYb9hKQ9AWUg==
+X-Received: by 2002:a2e:b531:0:b0:2c5:3261:615e with SMTP id
+ z17-20020a2eb531000000b002c53261615emr2082372ljm.35.1697569045855; 
+ Tue, 17 Oct 2023 11:57:25 -0700 (PDT)
+Received: from glaroque-desktop.box.freepro.com
+ ([2a05:6e02:10a5:e010:ece4:111a:47e2:bab0])
+ by smtp.gmail.com with ESMTPSA id
+ fl17-20020a05600c0b9100b0040776008abdsm2579530wmb.40.2023.10.17.11.57.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 17 Oct 2023 11:57:25 -0700 (PDT)
+From: Guillaume La Roque <glaroque@baylibre.com>
+To: neil.armstrong@linaro.org
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, avromanov@salutedevices.com
+Subject: [PATCH] phy: meson-g12a-usb2: fix ret check on power_domain_get
+Date: Tue, 17 Oct 2023 20:57:25 +0200
+Message-Id: <20231017185725.809524-1-glaroque@baylibre.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <454562f1-d120-9719-62c3-7ef64861307c@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,31 +90,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 16:35-20231013, Kumar, Udit wrote:
-> 
-> On 10/13/2023 3:59 PM, Neha Malcom Francis wrote:
-> > Currently J721E defines only the main_esm in DTS. Add node for mcu_esm
-> > as well.
-> > 
-> > According to J721E TRM (12.11.2.2 ESM Environment) [1], we see that the
-> > interrupt line from ESMi (main_esm) is routed to MCU_ESM (mcu_esm). This
-> > is MCU_ESM0_LVL_IN_95 with interrupt ID 95. Configure mcu_esm
-> > accordingly so that errors from main_esm are routed to mcu_esm and
-> > handled.
-> > 
-> > [1] https://www.ti.com/lit/zip/spruil1
-> > 
-> > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> > ---
-> > Upstream kernel effort:
-> > https://lore.kernel.org/lkml/20230926142810.602384-1-n-francis@ti.com/
-> 
-> 
-> should part of next u-boot, kernel sync, no?
-> 
+Patch which add A1 SoC support create a regression on khadas vim3/vim3l
+boards when we try to use fastboot command:
 
-That is correct, this should come in via upstream kernel sync.
+  => fastboot usb 0
+  failed to get power domain
+  failed to get power domain
+  No USB device found
+  USB init failed: -19
+
+Add ENOENT check on ret in probe function.
+
+Fixes: 5533c883ce10 ("phy: support Amlogic A1 family")
+
+Signed-off-by: Guillaume La Roque <glaroque@baylibre.com>
+---
+ drivers/phy/meson-g12a-usb2.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/phy/meson-g12a-usb2.c b/drivers/phy/meson-g12a-usb2.c
+index 4ba3992bda70..3958d2404b85 100644
+--- a/drivers/phy/meson-g12a-usb2.c
++++ b/drivers/phy/meson-g12a-usb2.c
+@@ -328,12 +328,12 @@ int meson_g12a_usb2_phy_probe(struct udevice *dev)
+ 
+ #if CONFIG_IS_ENABLED(POWER_DOMAIN)
+ 	ret = power_domain_get(dev, &priv->pwrdm);
+-	if (ret < 0 && ret != -ENODEV) {
+-		pr_err("failed to get power domain\n");
++	if (ret < 0 && ret != -ENODEV && ret != -ENOENT) {
++		pr_err("failed to get power domain : %d\n", ret);
+ 		return ret;
+ 	}
+ 
+-	if (ret != -ENODEV) {
++	if (ret != -ENODEV && ret != -ENOENT) {
+ 		ret = power_domain_on(&priv->pwrdm);
+ 		if (ret < 0) {
+ 			pr_err("failed to enable power domain\n");
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
+2.34.1
+
