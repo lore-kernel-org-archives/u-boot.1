@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF63ACDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 16:57:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C2BCCDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 16:57:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A55286F22;
+	by phobos.denx.de (Postfix) with ESMTP id 7D1F986F2F;
 	Tue, 17 Oct 2023 18:57:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="WUfc9JUG";
+	dkim=pass (2048-bit key; unprotected) header.d=sberdevices.ru header.i=@sberdevices.ru header.b="HTsJTB7M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3BC986F25; Tue, 17 Oct 2023 18:57:11 +0200 (CEST)
+ id C700B86F18; Tue, 17 Oct 2023 18:57:13 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05CBE86F0D
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 18:57:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89D8D86F1A
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 18:57:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=sberdevices.ru
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id CBEB1100005;
- Tue, 17 Oct 2023 19:57:04 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru CBEB1100005
+ by mx1.sberdevices.ru (Postfix) with ESMTP id A87FD100009;
+ Tue, 17 Oct 2023 19:57:09 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru A87FD100009
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sberdevices.ru;
- s=mail; t=1697561824;
- bh=H9vgNEIQKKRwgCv/vanqO91ndyd1olHRBgPQWnAJGRA=;
+ s=mail; t=1697561829;
+ bh=7p/bN1DzPCIL/rTdFYGycVLh75cot7xaVTxaPs0zNtc=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=WUfc9JUGbWMRQvdDejpUlnmTIOPv8KbpWacTRfl77PBGMMnbItb0deyjy63rIrRR1
- 343fVrm5GBozgrAIIrLKAKp5dDm0QyGuoBej9NbDPvUlSn0erVYRi0PvX8D0Lo7/iW
- 9o9RNi6vbpMqEHvq4n/49w2Z95lqY1buEwNG68B6nwIz4ieGRSzhI9ueRK4ti19vSr
- wqUMeUKwEIH4lDWHMWfvlGukhlQihMk4cYndhZwMzRFcIzsLHjPpT8aAnPTTje0wk7
- jDk4sHYM3fOzr4Iw/YDPKoyEOo1eO6eb2MvfZIpafocHZrX5UqgD10yl5jGqYYnVjH
- pSTe17UZnXd9Q==
+ b=HTsJTB7MUYwGtGn2yH+BhnC4WQWMzjIA5Vsya1ipSL8V13+GA5PmU5b3TIu+R/uV4
+ BMSOCBUriP6WajvQpLocRNKmfHt2jVuoR5IvgwHHbfj+A2cIicVeKxL0VLJYZeTD87
+ 7Oq890nkuPbzTk8lCFCAq5uFEMqtDdjtfZrayr9tftCrJt9o+iS5rLpDqrnlLrE6eJ
+ ObEj3Lm3V/FxizQiJCY3TkPVnCBu4SmtsJuc3gw8TyOiRihktQUQwwrJLrglsf1AvB
+ esrp4ca0eikm6dWndkFS88wDn9ftuEghWHGGjR+bz3wsqhwQ2ZZp8JPtOOAeqaS6HJ
+ WJYjEQJjJFa5g==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 17 Oct 2023 19:57:03 +0300 (MSK)
+ Tue, 17 Oct 2023 19:57:09 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Tue, 17 Oct 2023 19:57:02 +0300
+ 15.2.1118.37; Tue, 17 Oct 2023 19:57:09 +0300
 From: Igor Prusov <ivprusov@sberdevices.ru>
 To: Michal Simek <michal.simek@amd.com>, Daniel Schwierzeck
  <daniel.schwierzeck@gmail.com>, Lukasz Majewski <lukma@denx.de>, Sean
@@ -60,10 +60,12 @@ CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
  <ivprusov@sberdevices.ru>, Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel
  Stanley <joel@jms.id.au>, <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>, 
  <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: [PATCH v4 0/8] clk: Switch from soc_clk_dump to clk_ops function
-Date: Tue, 17 Oct 2023 19:56:41 +0300
-Message-ID: <20231017165649.1492-1-ivprusov@sberdevices.ru>
+Subject: [PATCH v4 4/8] clk: amlogic: Move driver and ops structs
+Date: Tue, 17 Oct 2023 19:56:45 +0300
+Message-ID: <20231017165649.1492-5-ivprusov@sberdevices.ru>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231017165649.1492-1-ivprusov@sberdevices.ru>
+References: <20231017165649.1492-1-ivprusov@sberdevices.ru>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -109,50 +111,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently clock providers may override default implementation of
-soc_clk_dump function to replace clk dump command output. This causes
-confusing behaviour when u-boot is built with one of such drivers
-enabled but still has clocks defined using CCF. For example, enabling
-CMD_CLK and using clk dump on sandbox target will not show CCF clocks
-because k210 driver overrides common soc_clk_dump.
+Move driver and ops structs to avoid forward declaration after switching
+to dump in clk_ops.
 
-Changelog:
- v1 -> v2:
- - Add missing static to dump functions
+Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+---
+ drivers/clk/meson/a1.c | 34 +++++++++++++++++-----------------
+ 1 file changed, 17 insertions(+), 17 deletions(-)
 
- v2 -> v3:
- - Make soc_clk_dump in cmd/clk.c static instead of removing __weak
-
- v3 -> v4:
- - Rebase and refactor dump for new Amlogic A1 clock controller driver
-
-Igor Prusov (8):
-  clk: zynq: Move soc_clk_dump to Zynq clock driver
-  clk: ast2600: Move soc_clk_dump function
-  clk: k210: Move soc_clk_dump function
-  clk: amlogic: Move driver and ops structs
-  clk: Add dump operation to clk_ops
-  cmd: clk: Use dump function from clk_ops
-  clk: treewide: switch to clock dump from clk_ops
-  cmd: clk: Make soc_clk_dump static
-
- arch/arm/mach-zynq/clk.c               |  57 --------------
- arch/mips/mach-pic32/cpu.c             |  23 ------
- cmd/clk.c                              |  13 +++-
- drivers/clk/aspeed/clk_ast2600.c       |  83 ++++++++++----------
- drivers/clk/clk_k210.c                 | 103 ++++++++++++-------------
- drivers/clk/clk_pic32.c                |  39 ++++++++++
- drivers/clk/clk_versal.c               |   7 +-
- drivers/clk/clk_zynq.c                 |  51 ++++++++++++
- drivers/clk/clk_zynqmp.c               |  13 ++--
- drivers/clk/imx/clk-imx8.c             |  11 +--
- drivers/clk/meson/a1.c                 |  54 +++++--------
- drivers/clk/mvebu/armada-37xx-periph.c |   5 +-
- drivers/clk/stm32/clk-stm32mp1.c       |  29 ++-----
- include/clk-uclass.h                   |   3 +
- include/clk.h                          |   2 -
- 15 files changed, 244 insertions(+), 249 deletions(-)
-
+diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
+index 1075ba7333..e3fa9db7d0 100644
+--- a/drivers/clk/meson/a1.c
++++ b/drivers/clk/meson/a1.c
+@@ -601,14 +601,6 @@ static int meson_clk_set_parent(struct clk *clk, struct clk *parent_clk)
+ 	return meson_mux_set_parent_by_id(clk, parent_clk->id);
+ }
+ 
+-static struct clk_ops meson_clk_ops = {
+-	.disable	= meson_clk_disable,
+-	.enable		= meson_clk_enable,
+-	.get_rate	= meson_clk_get_rate,
+-	.set_rate	= meson_clk_set_rate,
+-	.set_parent	= meson_clk_set_parent,
+-};
+-
+ static int meson_clk_probe(struct udevice *dev)
+ {
+ 	struct meson_clk *priv = dev_get_priv(dev);
+@@ -638,15 +630,6 @@ static const struct udevice_id meson_clk_ids[] = {
+ 	{ }
+ };
+ 
+-U_BOOT_DRIVER(meson_clk) = {
+-	.name		= "meson-clk-a1",
+-	.id		= UCLASS_CLK,
+-	.of_match	= meson_clk_ids,
+-	.priv_auto	= sizeof(struct meson_clk),
+-	.ops		= &meson_clk_ops,
+-	.probe		= meson_clk_probe,
+-};
+-
+ static const char *meson_clk_get_name(struct clk *clk, int id)
+ {
+ 	const struct meson_clk_info *info;
+@@ -727,3 +710,20 @@ int soc_clk_dump(void)
+ 
+ 	return 0;
+ }
++
++static struct clk_ops meson_clk_ops = {
++	.disable	= meson_clk_disable,
++	.enable		= meson_clk_enable,
++	.get_rate	= meson_clk_get_rate,
++	.set_rate	= meson_clk_set_rate,
++	.set_parent	= meson_clk_set_parent,
++};
++
++U_BOOT_DRIVER(meson_clk) = {
++	.name		= "meson-clk-a1",
++	.id		= UCLASS_CLK,
++	.of_match	= meson_clk_ids,
++	.priv_auto	= sizeof(struct meson_clk),
++	.ops		= &meson_clk_ops,
++	.probe		= meson_clk_probe,
++};
 -- 
 2.34.1
 
