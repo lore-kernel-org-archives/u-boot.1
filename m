@@ -4,90 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A6D6CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 19:21:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D8A7CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 19:22:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F056586F27;
-	Tue, 17 Oct 2023 21:21:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 8547286F25;
+	Tue, 17 Oct 2023 21:22:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks-com.20230601.gappssmtp.com header.i=@gateworks-com.20230601.gappssmtp.com header.b="0eWy/Gdk";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="NH4CJbRy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7762386F33; Tue, 17 Oct 2023 21:21:40 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9CEDB86F26; Tue, 17 Oct 2023 21:22:21 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B6BB86F20
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 21:21:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 297A886F20
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 21:22:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-99c1c66876aso981792966b.2
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 12:21:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks-com.20230601.gappssmtp.com; s=20230601; t=1697570496; x=1698175296;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oHYPaRz4W4RHcKNaZpSzpM26q/F+SHWiG2riuyWiP9M=;
- b=0eWy/Gdktfk2HgPNAi+WkA6UCIMKiVOAK3ahBveAhmgc5OnDOGT4WgsWY63/QlcHK1
- yMMUqv8l0Yh3ZNVt52KT4j4tpZwVD0c3g4eXFVvqgrdec+jVqsoudx5CjI3JpJgAqO16
- 6Jbb2/TR2163QPnZqUMpXCgUn6ynnEY04GDk6NsstVhA013JQ7BRFhIafgKEZ+I2+mJm
- QWKoTGGMNbC8z4tbY53dsfCWuYsKXXko0lrDxNiMoRQsSr1V7y9FDgjIGz2mVXy2Hgzg
- SIcBC1MadBV8uaBy+Pacfc5xlBEhT+uiIcP5WrkJiH0jM7+Ezfna4vRGv/PZAbhhBkhB
- sASg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697570496; x=1698175296;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oHYPaRz4W4RHcKNaZpSzpM26q/F+SHWiG2riuyWiP9M=;
- b=YAWsJFWo7KsgwKtkRK8eUTiBPeANTsZFk5ceKgPz27H1Sg4huNvnj9qYrCqMwye9bU
- fiIaxy3hJ/IEQ8xUcH7BlyJqRNX0LD1oOswdx5z8NchrmWuha5uwegvVd6ZRoYJQoUWg
- nZZsSfzLld+DFOFDUOmIWUO9kSa5xfafevFIQM3Bz88ocVbgJ2Z0e4yW0WkLHTkUUzup
- ti9Ogyd33CfLTjKL7Ul+I0pRi0EeW5aREPhmOnFo4h6zcS0pwBnb0y9xldhWWOpPFi60
- toIZO1oIpxjwsrfHPjGqmKawiaWK2Xe3rEK2bP4FcG8rGnFEwxp+Zx63PHhSKvWBY7X9
- /6vA==
-X-Gm-Message-State: AOJu0Yz0tpWzoGJT8ibt+JCj2NF4jnDqTHGLDJhL7/TiKSpYTqzZrH7w
- t+bsYSCHSXzWM4eOOTRpsRK8wJ+gd1yJ6RG1XKIWSQ==
-X-Google-Smtp-Source: AGHT+IEX1+4ycFJx3KpxkNLZSCMYLebaB2qVLVWxoZd8U8X7DuiYj++x5I+bei0J0BDF8PX+QOA4SYad4OamC8ef5Ug=
-X-Received: by 2002:a17:907:368b:b0:9ae:695a:fed0 with SMTP id
- bi11-20020a170907368b00b009ae695afed0mr2579451ejc.11.1697570495418; Tue, 17
- Oct 2023 12:21:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 3F32A120004;
+ Tue, 17 Oct 2023 22:22:18 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 3F32A120004
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1697570538;
+ bh=ZcYwkmTnvyCivN00HeKhDff5T3P/9DZ+LZaQw/EZsKQ=;
+ h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type:From;
+ b=NH4CJbRy5IFOx9xdbKek+D14l5+oBZTHIK8h74PqTpCLMwM38edSu0NWB46zJEs/z
+ k9JvfSi3SdjaaxFNjdRrook0SXPjkpTSlAjQlkAonegFNv4UJ8euWuZTFt7WnNuxle
+ kAIzbj5EfkXpeWVagdpALUzWl+FB2ZNIWTl7OGhDeWujONTrXEIOfRD8xAmbx4c9GG
+ pSsJWUOQKS0keiMSehJhVpQz/znZYgzjmd+36Q4c2ZDuI3Yo4JruWCUVEj7WKSlQUR
+ I1kh04/yReGdjzsZlzXL1Sy5G905A7jq/QJ5JT1M81hwA307kcHNRDwXDbJ+BLamwD
+ 37/C/fQYJNgig==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 17 Oct 2023 22:22:17 +0300 (MSK)
+Received: from pc (100.64.160.123) by p-i-exch-sc-m01.sberdevices.ru
+ (172.16.192.107) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.1118.37; Tue, 17 Oct
+ 2023 22:22:16 +0300
+Date: Tue, 17 Oct 2023 22:22:15 +0300
+From: Igor Prusov <ivprusov@salutedevices.com>
+To: Frieder Schrempf <frieder.schrempf@kontron.de>
+CC: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>, Martin Kurbanov <mmkurbanov@sberdevices.ru>,
+ Chuanhong Guo <gch981213@gmail.com>, Dmitry Rokosov
+ <ddrokosov@sberdevices.ru>, Simon Glass <sjg@chromium.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, <prusovigor@gmail.com>,
+ <kernel@sberdevices.ru>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH v1 1/2] mtd: spinand: rework detect procedure for
+ different READ_ID operation
+Message-ID: <20231017192215.txwy7xkb3ax57yj6@pc>
+References: <20231004150704.49945-1-ivprusov@salutedevices.com>
+ <20231004150704.49945-2-ivprusov@salutedevices.com>
+ <cd1bc5f7-b8b1-41ec-ac0e-849ef3eece73@kontron.de>
 MIME-Version: 1.0
-References: <20230427180845.127439-1-festevam@gmail.com>
- <CAJ+vNU1C24pLqxVKbcEYTP+g5zXWz4ARSg-mUxJt9izdSSieVw@mail.gmail.com>
- <CAOMZO5BPRNoPhNtawQ1UzbQ1v=vhHF3TcYYPgKWyR4MzTOLy0w@mail.gmail.com>
- <CAJ+vNU1m+jC3Yn6zUpxdW89G+Lmh1SnAKVPb17TePJL8eK6fZA@mail.gmail.com>
- <CAHCN7xKdjjmtO_ipY5UGYqQ=bcP3wsYmPXNonJAJ2EPM5d7Rvg@mail.gmail.com>
- <CAJ+vNU0QTAtVYzJG4q2=njc5dSzDHVj4Ce4VaPnFYAkyjz6yyA@mail.gmail.com>
- <CAHCN7xLUFOVcQbDWO3OjrEyQzLhnWJUeFHGZ1ebSFPRU4ohPXQ@mail.gmail.com>
- <CAJ+vNU3MqMDhGwAo1O_KKcdwQFPmpTrXV1X0e4O5teaVU4oMTA@mail.gmail.com>
- <CAOMZO5B4oDDN8ZwAMM_DUY25_BebmkNZR2pohGSpmrOJcy2p1A@mail.gmail.com>
- <CAHCN7xL0BFfZuY1pREWjbmqXkPUaC1UZBEZcMKaR7hQTU+rDqQ@mail.gmail.com>
- <CAJ+vNU0JPBu2Q5Cdc5O+Oh+eCmqQ_qtoAZaz4DHVcqsBeg41Tg@mail.gmail.com>
- <CAOMZO5DG3hwi9gTs7DYGfa8NexapU99v03pD9mGoYj5LkwqodQ@mail.gmail.com>
- <CAJ+vNU1SKHPiPwF5P9+G=fMysoEHEnsJ=EBA8=MExOEOec=aYA@mail.gmail.com>
- <CAJ+vNU1zE7rmKzQWwziPtwG5MKAnx0NE94CCLF8y-_iVYwub2g@mail.gmail.com>
- <339b69d6-c586-d85d-64de-92cd1469d017@denx.de>
-In-Reply-To: <339b69d6-c586-d85d-64de-92cd1469d017@denx.de>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Tue, 17 Oct 2023 12:21:23 -0700
-Message-ID: <CAJ+vNU3ZtGNOz4nUpiS2O1Q4c8=kZmMjK=TWvaCT-uKFkr1Uhg@mail.gmail.com>
-Subject: Re: [PATCH 1/3] arm: dts: imx8mm: Sync with Linux 6.3
-To: Stefano Babic <sbabic@denx.de>
-Cc: Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>,
- Ye Li <ye.li@nxp.com>, 
- Peng Fan <peng.fan@nxp.com>, Li Jun <jun.li@nxp.com>, u-boot@lists.denx.de, 
- Fabio Estevam <festevam@denx.de>, Fabio Estevam <festevam@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <cd1bc5f7-b8b1-41ec-ac0e-849ef3eece73@kontron.de>
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180688 [Oct 17 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 540 540
+ 2509a3fe0f7fdc802e7154a32be7c2dd394ab987, {Tracking_uf_ne_domains},
+ {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1; 100.64.160.123:7.1.2;
+ salutedevices.com:7.1.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ 127.0.0.199:7.1.2; source.denx.de:7.1.1;
+ patchwork.ozlabs.org:7.1.1, FromAlignment: s, ApMailHostAddress:
+ 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2023/10/17 18:29:00
+X-KSMG-LinksScanning: Clean, bases: 2023/10/17 18:29:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/17 18:30:00 #22213411
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,67 +111,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Jul 13, 2023 at 10:17=E2=80=AFPM Stefano Babic <sbabic@denx.de> wro=
-te:
->
-> Hi Tim, Fabio,
->
-> On 14.07.23 02:42, Tim Harvey wrote:
-> > On Wed, May 3, 2023 at 9:11=E2=80=AFAM Tim Harvey <tharvey@gateworks.co=
-m> wrote:
-> >>
-> >> On Fri, Apr 28, 2023 at 11:19=E2=80=AFAM Fabio Estevam <festevam@gmail=
-.com> wrote:
-> >>>
-> >>> Hi Tim,
-> >>>
-> >>> On Fri, Apr 28, 2023 at 2:59=E2=80=AFPM Tim Harvey <tharvey@gateworks=
-.com> wrote:
-> >>>
-> >>>> I believe the fix we need is the following which moves phy setup
-> >>>> before the register access (where it should have been along with the
-> >>>> case for !defined(CONFIG_PHY):
-> >>> ...
-> >>>> If everyone agrees here I'll submit a formal patch which should get
-> >>>> applied through Marek via the usb tree before the dt sync.
-> >>>
-> >>> This works for me, thanks.
-> >>>
-> >>> When you submit it, feel free to add:
-> >>>
-> >>> Tested-by: Fabio Estevam <festevam@denx.de>
-> >>
-> >> Fabio,
-> >>
-> >> with commit bb6ea0fe9290 ("usb: ehci-mx6: move phy setup before
-> >> register access") now in imx/master:
-> >> Tested-by: Tim Harvey <tharvey@gateworks.com> #imx8mm-venice-gw73xx-0x
-> >>
-> >
-> > Stefano,
-> >
-> > It doesn't look like this got picked up in your latest tree for some re=
-ason.
-> >
->
-> Series disappeared from my list in patchworks, maybe because I
-> erroneously thought that a V2 will be sent. I will pick up the series,
-> thanks for advising.
->
-> Best regards,
-> Stefano
->
+Hi Frieder,
 
-Hi Stefano,
+On Mon, Oct 09, 2023 at 10:23:53AM +0200, Frieder Schrempf wrote:
+> On 04.10.23 17:07, Igor Prusov wrote:
+> > Adaptation of Linux commit f1541773af49.
+> > 
+> > Currently there are 3 different variants of read_id implementation:
+> > 1. opcode only. Found in GD5FxGQ4xF.
+> > 2. opcode + 1 addr byte. Found in GD5GxGQ4xA/E
+> > 3. opcode + 1 dummy byte. Found in other currently supported chips.
+> > 
+> > Original implementation was for variant 1 and let detect function
+> > of chips with variant 2 and 3 to ignore the first byte. This isn't
+> > robust:
+> > 
+> > 1. For chips of variant 2, if SPI master doesn't keep MOSI low
+> > during read, chip will get a random id offset, and the entire id
+> > buffer will shift by that offset, causing detect failure.
+> > 
+> > 2. For chips of variant 1, if it happens to get a devid that equals
+> > to manufacture id of variant 2 or 3 chips, it'll get incorrectly
+> > detected.
+> > 
+> > This patch reworks detect procedure to address problems above. New
+> > logic do detection for all variants separatedly, in 1-2-3 order.
+> > Since all current detect methods do exactly the same id matching
+> > procedure, unify them into core.c and remove detect method from
+> > manufacture_ops.
+> > 
+> > Signed-off-by: Chuanhong Guo <gch981213@gmail.com>
+> > Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
+> 
+> An adaptation of this patch was already sent long ago [1] and Dario also
+> picked it up in nand-next [2]. Though it looks like this was never
+> merged upstream as there wasn't any pull request sent to Tom, right?
 
-This series [1] is still missing - can you pick it up?
+Thanks for pointing this out, looks like this rework made it to
+upstream, so I'll drop it in v2.
 
-[PATCH 1/3] arm: dts: imx8mm: Sync with Linux 6.3
-[PATCH 2/3] arm: dts: imx8mn: Sync with Linux 6.3
-[PATCH 3/3] arm: dts: imx8mp: Sync with Linux 6.3
+> Dario, as you already seem to have rebased nand-next recently, can you
+> please sent the changes to Tom for picking them up? As the merge window
+> is open at the moment it would be good to get it done soon. Thanks!
+> 
+> [1]
+> https://patchwork.ozlabs.org/project/uboot/patch/20230110115843.391630-1-frieder@fris.de/
+> [2]
+> https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/commits/nand-next/
 
+-- 
 Best Regards,
-
-Tim
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=3D352685&state=
-=3D*
+Igor Prusov
