@@ -4,82 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8897BCDB482
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 19:27:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 933D8CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 19:29:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E8FA86F42;
-	Tue, 17 Oct 2023 21:27:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9CD0E86F4C;
+	Tue, 17 Oct 2023 21:29:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JTFq8Y2l";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="KOMDV+l2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9013F86F45; Tue, 17 Oct 2023 21:27:08 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D192D86F46; Tue, 17 Oct 2023 21:29:39 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65F6F86F20
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 21:27:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D2B7086F20
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 21:29:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-9ad8a822508so988505066b.0
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 12:27:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697570824; x=1698175624; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vLlMofsUEW76Z8UTNsjmIS9G13WGGRg6rmJmQI5o7SA=;
- b=JTFq8Y2lB4Rrl27lNwdk4R//tCOUzqlnKlIqZx4bWdIe2E+RyH/eYVY1HwYwUFllEw
- 8691bNM5tDcwxYG0oUMIpq6YTC7NManiTaiDziUUieUmsvIAsfeYyQMMx6wEy576YvoF
- PR26wH1dWARGaeUgwDyHjBZ+sMz/Ww2pfM00RS6kopYMZfPzulV43lDTq4t1ajXYq3tC
- LKrd+cDB/eAk1XOXNI90GLSPBPis3iz4IspQWl/byM10w73I1QI8Kd/bvnizjV9GMw1c
- FoTN+EZPB5wcZFa2Rbe0Bx0BrOhjCSQW3rzIckxYSfjvcIuvX/a/0xcYVNYazlKI89vK
- wZcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697570824; x=1698175624;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vLlMofsUEW76Z8UTNsjmIS9G13WGGRg6rmJmQI5o7SA=;
- b=rVUE92FpDNHq70iyQbPvGLFQFiY36yB/4rVuzw8ycIIMe1tTRb1hGFARrJ4ffMruLA
- L84VyDZAh2C4KpQyiHyhr0GVv1AuBADuOlyJbB6F6DaGsnzwDbW21STqZqBmXDjD6yoF
- 6UxxB5O1RrtheEjCIH9QRsAXYd2MoEJDegtABXCz5mGC+ZL6H+ljzb4sybRsvW4qUeL3
- CakZEv3BsEm5pZD6pP3eRuPHNsgSY1CI6kP0DMm1uInNhpEzfeng/s9239+1Fkiavw5t
- QLROq7uvUaJUCLh/vVjJ1+cmd6WsHrSG/lKrQ2cshFDmixYO9YLQmdB/ardXgjnDMsIT
- N9Cw==
-X-Gm-Message-State: AOJu0YzjBXIf8FgtlWQ3I1NBhlr9GvLM9b3hgk3scIC09lb5bqikW0gp
- P0hXHYVBELdwJ2vnRwmBtaPMQw==
-X-Google-Smtp-Source: AGHT+IHmQPkRN+hv8q5/2fT0viVYUNyl2GpFR68fcqVcndjdHn96TdGWz2z5xmjupzth3qq57kwuMA==
-X-Received: by 2002:a17:907:70a:b0:9b7:2a13:160c with SMTP id
- xb10-20020a170907070a00b009b72a13160cmr2440661ejb.69.1697570823841; 
- Tue, 17 Oct 2023 12:27:03 -0700 (PDT)
-Received: from hades (ppp046103219117.access.hol.gr. [46.103.219.117])
- by smtp.gmail.com with ESMTPSA id
- i27-20020a170906115b00b009b2ba067b37sm277234eja.202.2023.10.17.12.27.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Oct 2023 12:27:03 -0700 (PDT)
-Date: Tue, 17 Oct 2023 22:27:00 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Simon Glass <sjg@chromium.org>,
- Takahiro Akashi <takahiro.akashi@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Subject: Re: [PATCH v7 8/9] cmd: efidebug: add uri device path
-Message-ID: <ZS7gBMES7sBTbUu+@hades>
-References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
- <20231016064526.2410856-9-masahisa.kojima@linaro.org>
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 47D85120004;
+ Tue, 17 Oct 2023 22:29:37 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 47D85120004
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1697570977;
+ bh=CXf7OrsoOq8yADF0vswt+gPR10Ha7FCARkOQibmE51M=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=KOMDV+l29evlwD7O94g7pGUeew7TBMTfcGUYRhcgEpHqCTubwpYgo2I1HwdutmRFe
+ ulynusnfEsN71mt39zKjhE/LX/Utd27VoVMT3RYKVByZgWmsv7MzpGfHF1fOOCOQSA
+ WV8UCDcgvi0kzoC0YSMBQIhnINMBKwD3uzPMF3Hr8QgNZvw+a9erz2pi+4o54cobWj
+ 76qaT1Be/GidhsUwiGopTaQHUN3OgQ81/ARhnvca+E+vAoud2i/uUC/u3Cmju/mzqz
+ q3XCXSNHalNXMANBhb4sSv9FktbehXivj5rtBmj+72AjSeGmro19VI5KTi17NTbgFp
+ eY/z0HFIgijgQ==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Tue, 17 Oct 2023 22:29:37 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.37; Tue, 17 Oct 2023 22:29:36 +0300
+From: Igor Prusov <ivprusov@salutedevices.com>
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>, Michael Trimarchi
+ <michael@amarulasolutions.com>
+CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
+ <ivprusov@salutedevices.com>, Frieder Schrempf <frieder.schrempf@kontron.de>, 
+ <u-boot@lists.denx.de>
+Subject: [PATCH v2 0/1] mtd: spinand: add support for ESMT F50x1G41LB
+Date: Tue, 17 Oct 2023 22:29:25 +0300
+Message-ID: <20231017192926.54397-1-ivprusov@salutedevices.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231016064526.2410856-9-masahisa.kojima@linaro.org>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180688 [Oct 17 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 540 540
+ 2509a3fe0f7fdc802e7154a32be7c2dd394ab987,
+ {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
+ 127.0.0.199:7.1.2;
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1, FromAlignment: s,
+ ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/17 18:30:00 #22213411
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,67 +104,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kojima-san,
+This series ports ESMT NAND support from Linux.
 
-[...]
+Changes in v2:
+	- Dropped detect procedure rework patch, since similar one was
+	  already applied to u-boot in commit b20913e3cb.
+	- Updated NAND_MEMORG values, so that they are correct after
+	  mbb parameter was added in 8acaec923b.
 
-> +			id = (int)hextoul(argv[1], &endp);
-> +			if (*endp != '\0' || id > 0xffff)
-> +				return CMD_RET_USAGE;
-> +
-> +			efi_create_indexed_name(var_name16, sizeof(var_name16),
-> +						"Boot", id);
-> +
-> +			label = efi_convert_string(argv[2]);
-> +			if (!label)
-> +				return CMD_RET_FAILURE;
-> +			lo.label = label;
-> +
-> +			uridp_len = sizeof(struct efi_device_path) + strlen(argv[3]) + 1;
-> +			fp_free = efi_alloc(uridp_len + sizeof(END));
-> +			uridp = (struct efi_device_path_uri *)fp_free;
-> +			uridp->dp.type = DEVICE_PATH_TYPE_MESSAGING_DEVICE;
-> +			uridp->dp.sub_type = DEVICE_PATH_SUB_TYPE_MSG_URI;
-> +			uridp->dp.length = uridp_len;
-> +			if (!wget_validate_uri(argv[3])) {
-> +				printf("ERROR: invalid URI\n");
-> +				r = CMD_RET_FAILURE;
-> +				goto out;
-> +			}
+Igor Prusov (1):
+  mtd: spinand: add support for ESMT F50x1G41LB
 
-This needs to be moved right under label = efi_convert_string(argv[2]);
-and group all the checks together early.  You won't have to allocate and
-free the memory as well 
+ drivers/mtd/nand/spi/Makefile |   3 +-
+ drivers/mtd/nand/spi/core.c   |   1 +
+ drivers/mtd/nand/spi/esmt.c   | 137 ++++++++++++++++++++++++++++++++++
+ include/linux/mtd/spinand.h   |   1 +
+ 4 files changed, 141 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/mtd/nand/spi/esmt.c
 
-> +
-> +			strcpy(uridp->uri, argv[3]);
-> +			pos = (char *)uridp + uridp_len;
-> +			memcpy(pos, &END, sizeof(END));
-> +			fp_size += uridp_len + sizeof(END);
+-- 
+2.34.1
 
-Assign this earlier and use it on fp_free = efi_alloc(...)
-
-> +			file_path = (struct efi_device_path *)uridp;
-> +			argc -= 3;
-
-[...]
-
-> + *
-> + * @uri:	uri string of target file of wget
-> + * Return:	true if uri is valid, false if uri is invalid
-> + */
-> +bool wget_validate_uri(char *uri);
-> +
->  #endif /* __NET_H__ */
-> diff --git a/net/wget.c b/net/wget.c
-> index 2087146b37..6ae2237a0a 100644
-> --- a/net/wget.c
-> +++ b/net/wget.c
-> @@ -566,3 +566,74 @@ out:
->  	return ret;
->  }
->  #endif
-> +
- 
-Regards
-/Ilias
