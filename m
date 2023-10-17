@@ -4,86 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC64CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 14:16:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8942BCDB482
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 14:16:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A5F6A86BA1;
-	Tue, 17 Oct 2023 16:16:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7D2E186F12;
+	Tue, 17 Oct 2023 16:16:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Lv85E/Cs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aPaNk+r2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90B0C86BA1; Tue, 17 Oct 2023 16:16:19 +0200 (CEST)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id 4D3E986F12; Tue, 17 Oct 2023 16:16:42 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6159286380
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 16:16:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D637B86380
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 16:16:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-5a7dd65052aso78114327b3.0
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 07:16:16 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-507b9408c61so1655528e87.0
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 07:16:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697552175; x=1698156975; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bmH4wkFU4zTHE5sO5AX0WHjSnRGA1oWrcdGikc1Ch/Y=;
- b=Lv85E/Cslrrj3uZaEa821S2/3ngY2zGP8wT0AgsSZ78O+PYojZLRlnX6o9RNoIgEDz
- H44CWt1DThJinRzvsg+yOK9xwEIm+hQCi9d+hCllTX0xJtWLU2fNuOVfK9RxEGCwHKoo
- bIVXMICed6fezFXRg1ilPHO0pnblivG12pQ1k=
+ d=linaro.org; s=google; t=1697552196; x=1698156996; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PFwoZyDHXInIdNRXwskaWymeIepujt49Om8cK7Mev6M=;
+ b=aPaNk+r2gry9paRFBuQKOefhp0liLXn3K/UuxlwR4dym5O2PLykkq4nlSVkq30WY4l
+ NtJKcq0CHLm9mc/9fqKgG32WGPLKqlAaseA0rulYozDCVhQli567vMsoX1Qq6FJge3Lj
+ THuAjflsL+NEc2LDwsCMSqt6MEtuVLDPhhwNuUWan3dwwWNOvrpZ0lrRe6xFz+BMd/i3
+ TazCN07PuEIncmlA8RT4y4xXQCXbvT1YYwXeQriK2n/G5n6mZ92REhv9BdrDAXQsvjg0
+ djbheDXtPV0MDpqasy7dT2sbSXziQB2+BE6TPgbVafzn+fswqWOwnTACKIC//kcLlJXS
+ JqFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697552175; x=1698156975;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=bmH4wkFU4zTHE5sO5AX0WHjSnRGA1oWrcdGikc1Ch/Y=;
- b=LEVAHEDtRvQKSSlHl0Q7RYMN+YBCuCBm1brxmbyVe+Kplw4OMC++xRYf/xDw8tAbKT
- VHvnf56l3rclNIJMAnK1HN5lVJyYmzjKNy2rKgEDn/mipizsME8CSlGJ5XztkFaRv/bL
- VJk8wc9//C7teWhs8b0FHtK59+mFA1Yz92ScuB54l/D5VpFpMZLmueob37AdGKpRPC4R
- F7rmrB1UohjHMEte5TkcXJoPf9xSeNKKqW8t3guzCYWwujWHLe+5ao6dMqMsc8kOGIYJ
- n5Ax2MQrnTN2aF/Pu/kcWkg+oSwtXdrk7FlJQTKwO78PjZAZG4OvkO16i+mm6c527B24
- p3pw==
-X-Gm-Message-State: AOJu0YyKvjmT+/kOCklNDyKSsjhrjHb5eDgxiTfT0LNe5gaQc74jLlLy
- ha9xqzqt+WicFChBdPf7g7E/sw==
-X-Google-Smtp-Source: AGHT+IFAJhmUen4jiuUei1q3aagSU2tMVZJI8jE7zac5WdW0c89SuzdihheVKsFvHlZKsbcyUD+7XQ==
-X-Received: by 2002:a0d:f701:0:b0:5a7:b481:4dd2 with SMTP id
- h1-20020a0df701000000b005a7b4814dd2mr2388656ywf.47.1697552175142; 
- Tue, 17 Oct 2023 07:16:15 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- n69-20020a0dcb48000000b0059f8120ee4dsm649790ywd.30.2023.10.17.07.16.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Oct 2023 07:16:14 -0700 (PDT)
-Date: Tue, 17 Oct 2023 10:16:12 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: Michal Simek <michal.simek@amd.com>, Da Xue <da@lessconfused.com>,
- Marek Vasut <marex@denx.de>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- u-boot@lists.denx.de, git@xilinx.com
-Subject: Re: [PATCH v2] usb: xhci: Workaround to fix the USB halted endpoint
- issues
-Message-ID: <20231017141612.GE3119521@bill-the-cat>
-References: <20231013045356.25789-1-venkatesh.abbarapu@amd.com>
- <2016c1bc-dfe0-416e-a910-75e6cf25036c@denx.de>
- <CACdvmAju3wDL0yCJtVdEf47u+L5R3AvRpcuJ+ruKFXDTcQ-TBw@mail.gmail.com>
- <20231013151540.GJ3119521@bill-the-cat>
- <041b37d4-777a-4c02-b8fd-9985c2cfa938@amd.com>
- <20231016193052.GF3119521@bill-the-cat>
- <e8501850-b440-4e2c-a120-875924f59453@collabora.com>
+ d=1e100.net; s=20230601; t=1697552196; x=1698156996;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=PFwoZyDHXInIdNRXwskaWymeIepujt49Om8cK7Mev6M=;
+ b=JtXmo8T+F87Jx97kcp48OdnUycPOIG+uWGyONKh+3AIsOEP3KTGJTk01E3wx5isYt2
+ P5yoNrsIQNvm8cmGZOs0QtV84RcRZOjYvz9ITs5T6zd7QYgkk0Yj+veFamaNe5Vnue0e
+ q1G8kVbrNp8ori95aiePyChjRzYzotfiuIEfZYYMSZCMuVJJxzt6TFcKq5/ndJDLkGQL
+ /HZ6lhfQcZDl11oviQjlgYuukxwDYSz9CyI8B4VAzuptzX09DQ7xVhlX958Ng8474ZBd
+ Te68xzMZ3ADrevWRboy94oEex2OjXf+DjvQsd+VH/T6xd3ci/rWvKXYv/RxmZumlPk76
+ MZQg==
+X-Gm-Message-State: AOJu0Yyh4jwUmeis7fX9Uuf5DBFivm5c92AFemUy1Hnh9nhvPAfPgXKP
+ XvJMnZzfCMmLTYH9+OPu7xXx9haLSnBOQ0Gc1bnA1A==
+X-Google-Smtp-Source: AGHT+IHoLRq59fTJf66iHAQOu0cpSFG6EQxMva1bf1w+8K5LMpCv7dLCKI9ksQpBbFN1ZI26JzKumwmBXHL8qEXseZY=
+X-Received: by 2002:ac2:52b3:0:b0:502:afea:dfdd with SMTP id
+ r19-20020ac252b3000000b00502afeadfddmr1724111lfm.13.1697552196092; Tue, 17
+ Oct 2023 07:16:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="i0PnDn+i+HjNnMh3"
-Content-Disposition: inline
-In-Reply-To: <e8501850-b440-4e2c-a120-875924f59453@collabora.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 17 Oct 2023 17:15:59 +0300
+Message-ID: <CAC_iWjL_qXo8Mhv6MdMKxDSzrDa2a79iU4G7kSLnQ=FW8+GdhA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] efi_loader: expose the device-tree file name
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,116 +84,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---i0PnDn+i+HjNnMh3
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Oct 17, 2023 at 03:48:37PM +0300, Eugen Hristev wrote:
-> On 10/16/23 22:30, Tom Rini wrote:
-> > On Mon, Oct 16, 2023 at 08:34:16AM +0200, Michal Simek wrote:
-> > >=20
-> > >=20
-> > > On 10/13/23 17:15, Tom Rini wrote:
-> > > > On Fri, Oct 13, 2023 at 11:11:04AM -0400, Da Xue wrote:
-> > > > > On Fri, Oct 13, 2023 at 7:47=E2=80=AFAM Marek Vasut <marex@denx.d=
-e> wrote:
-> > > > > >=20
-> > > > > > On 10/13/23 06:53, Venkatesh Yadav Abbarapu wrote:
-> > > > > > > The xhci host controller driver trying to queue the URB's and=
- it is
-> > > > > > > getting halted at the endpoint, thereby hitting the BUG_ON's.
-> > > > > > > Mostly these kind of random issues are seen on faulty boards.
-> > > > > > > Removing these BUG_ON's from the U-Boot xhci code, as in Linu=
-x kernel
-> > > > > > > xhci code BUG_ON/BUG's are removed entirely.
-> > > > > > > Please also note, that BUG_ON() is not recommended any more i=
-n the Linux
-> > > > > > > kernel.
-> > > > > > > Similar issue has been observed on TI AM437x board and they c=
-reated a patch
-> > > > > > > in Linux kernel as below
-> > > > > > > https://patches.linaro.org/project/linux-usb/patch/1390250711=
--25840-1-git-send-email-balbi@ti.com/
-> > > > > > >=20
-> > > > > > > Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@a=
-md.com>
-> > > > > >=20
-> > > > > > I already explained to Xilinx how to sync the driver with Linux=
- and why
-> > > > > > this is needed to move forward, multiple times, and even provid=
-ed a
-> > > > > > script which does most of the work automatically, since it is b=
-asically
-> > > > > > automated process. Xilinx did not even bother to test the scrip=
-t and
-> > > > > > provide any feedback.
-> > > > > >=20
-> > > > > > Until that happens, this patch is rejected.
-> > > > >=20
-> > > > > This patch also causes all of the USB devices on certain platform=
-s to
-> > > > > not be detected:
-> > > > >=20
-> > > > > scanning bus usb@c9000000 for devices... Device not responding to=
- set address.
-> > > > >=20
-> > > > >         USB device not accepting new address (error=3D80000000)
-> > > >=20
-> > > > Yes, we are stuck at the impasse where the custodian is asking for
-> > > > someone to try and do the re-sync, and everyone else will assist wi=
-th
-> > > > testing on other platforms, but the re-sync hasn't happened.  Can we
-> > > > please get someone from AMD to attempt the re-sync?
-> > >=20
-> > > I would like to say that we have someone to do it. But I simply don't=
- have
-> > > that person.
-> >=20
-> > That is the big problem we face, yes.  Eugen, I think you said you were
-> > going to try and find time to do a re-sync, did you end up getting any?
-> >=20
->=20
->=20
-> Hi Tom,
->=20
-> Unfortunately at the moment I am working on a different project, so I do =
-not
-> see any perspective to do this in the near future, although I would like =
-to
-> do it and to help.
-> It may be the case that a company investing into an engineer to work on t=
-his
-> would be the only way.
->=20
-> In any case, do you think Marek would accept doing this incrementally , e=
-=2Eg.
-> now the driver is synced with 3.10, it would be easier to increment to 4.1
-> as a first step ?
-
-Incremental updates feels like it might be less of a daunting path to
-me, so I'd be agreeable.  Marek?
-
---=20
-Tom
-
---i0PnDn+i+HjNnMh3
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUulywACgkQFHw5/5Y0
-tyyF1wwAgH96NO+GBiYJ5xH8rE8sCRYX8XG6QzeL+QA2HzexMPgfnBLy3DhWeDhc
-CByclS39sLLq1pNgG2KuPOxGhi4iGHSrt30G90fY6ss0QJtogtj9tKk/JAOmO3W1
-gSFtU3Jjq3SL2/w3/LsxTWlcScJX3tgo5P+CkMB4xBlyX6qogwQkSRl/vn8pP03Q
-2eGFD0qZlI15TuBCxvDwA2oCJIhEj1ohjWL2FmpRDzPQvvg2VIX5fR5w1yjOE5pj
-2IG/Tnl9IR6f+mpLETPwhx2zpX0NETm3i0JUKeyPTZ8XVF2QdcMtTKmaKYyD6hz0
-u54fTKkg4ij6RLqie0Q0o+/nA/8Rxoeu02hnFPHi7OdjL2KT0JeCXkrhwdOSp/kD
-tv+tOFGK8Ru08VFOuqp5CPqpm4Sve0mMWZTDaruOZZlItFVdRPIz+kSbt/pMHay8
-SEMs77jBrXeGZvRr1JOThA4fQH26UV9vxjjHBLJlqr87CBr/0VIG7RVIycdjeVR2
-2KQW6P6B
-=QU1a
------END PGP SIGNATURE-----
-
---i0PnDn+i+HjNnMh3--
+On Tue, 17 Oct 2023 at 16:50, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Forward and backward compatibility of Linux kernel device-trees is
+> sometimes missing. One solution approach is to load a kernel specific
+> device-tree. This can either be done via a U-Boot scripts (like the one
+> generated by Debian package flash-kernel or by a boot loader like GRUB.
+> The boot loader approach currently requires to know the device-tree name
+> before first boot which makes it unusable for generic images.
+>
+> Expose the device-tree file name as EFI variable FdtFile.
+> This will allow bootloaders to load a kernel specific device-tree.
+>
+> The variable will not be exposed on ACPI based systems or if the
+> environment variable fdtfile is not defined.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+> v2:
+>         Use a unique GUID to enable future U-Boot independent
+>         standardization.
+>         Do not try to add the variable on ACPI based systems.
+> ---
+>  include/efi_loader.h       |  5 +++++
+>  lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+>  2 files changed, 35 insertions(+)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index e24410505f..2faa1c191c 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -152,6 +152,11 @@ static inline efi_status_t efi_launch_capsules(void)
+>         EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
+>                  0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+>
+> +/* Vendor GUID for the FdtFile variable */
+> +#define VENDOR_FDTFILE_GUID \
+> +       EFI_GUID(d45dde69, 0x3bd6, 0x40e0, \
+> +                0x90, 0xd5, 0x6b, 0x60, 0x6a, 0xa5, 0x77, 0x30)
+> +
+>  /* Use internal device tree when starting UEFI application */
+>  #define EFI_FDT_USE_INTERNAL NULL
+>
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index e6de685e87..71bcde645b 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -17,6 +17,8 @@
+>
+>  efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
+>
+> +efi_guid_t vendor_fdtfile_guid = VENDOR_FDTFILE_GUID;
+> +
+>  /*
+>   * Allow unaligned memory access.
+>   *
+> @@ -26,6 +28,27 @@ void __weak allow_unaligned(void)
+>  {
+>  }
+>
+> +/**
+> + * efi_init_fdtfile() - set EFI variable FdtFile
+> + *
+> + * Return:     status code
+> + */
+> +static efi_status_t efi_init_fdtfile(void)
+> +{
+> +       char *val;
+> +
+> +       val = env_get("fdtfile");
+> +       if (!val)
+> +               return EFI_SUCCESS;
+> +
+> +       return efi_set_variable_int(u"FdtFile",
+> +                                   &vendor_fdtfile_guid,
+> +                                   EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> +                                   EFI_VARIABLE_RUNTIME_ACCESS |
+> +                                   EFI_VARIABLE_READ_ONLY,
+> +                                   strlen(val) + 1, val, false);
+> +}
+> +
+>  /**
+>   * efi_init_platform_lang() - define supported languages
+>   *
+> @@ -250,6 +273,13 @@ efi_status_t efi_init_obj_list(void)
+>         if (ret != EFI_SUCCESS)
+>                 goto out;
+>
+> +       /* Define EFI variable FdtFile */
+> +       if (!CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)) {
+> +               ret = efi_init_fdtfile();
+> +               if (ret != EFI_SUCCESS)
+> +                       goto out;
+> +       }
+> +
+>         /* Indicate supported features */
+>         ret = efi_init_os_indications();
+>         if (ret != EFI_SUCCESS)
+> --
+> 2.40.1
+>
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
