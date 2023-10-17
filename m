@@ -4,49 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 932C4CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 07:23:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C573CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 07:33:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F368F86BE0;
-	Tue, 17 Oct 2023 09:23:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1AFA586BD7;
+	Tue, 17 Oct 2023 09:33:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFB5386C91; Tue, 17 Oct 2023 09:23:07 +0200 (CEST)
+ id A8D9B86C2D; Tue, 17 Oct 2023 09:33:22 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A785186BD7
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 09:23:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B1D386AA8
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 09:33:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 39H7Mw5g071226;
- Tue, 17 Oct 2023 15:22:58 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 39H7XBZT078909;
+ Tue, 17 Oct 2023 15:33:11 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Tue, 17 Oct 2023 15:22:54 +0800
-Date: Tue, 17 Oct 2023 15:20:05 +0800
+ Tue, 17 Oct 2023 15:33:11 +0800
+Date: Tue, 17 Oct 2023 15:30:22 +0800
 From: Leo Liang <ycliang@andestech.com>
-To: Randolph <randolph@andestech.com>
-CC: <u-boot@lists.denx.de>, <randolph.sklin@gmail.com>, <dylan@andestech.com>, 
- <tim609@andestech.com>, <peterlin@andestech.com>
-Subject: Re: [PATCH V2 7/7] riscv: spl: andes: Move the DTB in front of kernel
-Message-ID: <ZS41pbe4IF97CCA8@swlinux02>
-References: <20231012063509.2963258-1-randolph@andestech.com>
- <20231012063509.2963258-8-randolph@andestech.com>
+To: Yu Chien Peter Lin <peterlin@andestech.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <kconsul@ventanamicro.com>, 
+ <bmeng@tinylab.org>
+Subject: Re: [PATCH] riscv: Add Zbb support for building U-Boot
+Message-ID: <ZS43-GLCq0P75odV@swlinux02>
+References: <20230809104930.7462-1-peterlin@andestech.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20231012063509.2963258-8-randolph@andestech.com>
+In-Reply-To: <20230809104930.7462-1-peterlin@andestech.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 39H7Mw5g071226
+X-MAIL: Atcsqr.andestech.com 39H7XBZT078909
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,17 +62,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Oct 12, 2023 at 02:35:09PM +0800, Randolph wrote:
-> Originally, u-boot SPL will place the DTB directly after the kernel,
-> but the size of the kernel does not include the BSS section, This
-> means that u-boot SPL places the DTB in the kernel BSS section causing
-> the DTB to be cleared by the kernel BSS initialisation.
+On Wed, Aug 09, 2023 at 06:49:30PM +0800, Yu Chien Peter Lin wrote:
+> This patch adds ISA string to the -march to generate zbb instructions
+> for U-Boot binaries, along with optimized string functions introduced
+> from Linux kernel.
 > 
-> Moving the DTB in front of the kernel can avoid this error.
-> 
-> Signed-off-by: Randolph <randolph@andestech.com>
+> Signed-off-by: Yu Chien Peter Lin <peterlin@andestech.com>
 > ---
->  board/AndesTech/ae350/ae350.c | 25 +++++++++++++++++++++++++
->  1 file changed, 25 insertions(+)
+>  arch/riscv/Kconfig              |  92 +++++++++++++++++++++++++++++
+>  arch/riscv/Makefile             |   5 +-
+>  arch/riscv/include/asm/string.h |  18 ++++++
+>  arch/riscv/lib/Makefile         |   3 +
+>  arch/riscv/lib/strcmp_zbb.S     |  81 +++++++++++++++++++++++++
+>  arch/riscv/lib/strlen_zbb.S     | 101 ++++++++++++++++++++++++++++++++
+>  arch/riscv/lib/strncmp_zbb.S    |  94 +++++++++++++++++++++++++++++
+>  7 files changed, 393 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/riscv/lib/strcmp_zbb.S
+>  create mode 100644 arch/riscv/lib/strlen_zbb.S
+>  create mode 100644 arch/riscv/lib/strncmp_zbb.S
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
