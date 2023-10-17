@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F0BCDB483
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 15:50:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BE44CDB483
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 16:35:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D9B786E64;
-	Tue, 17 Oct 2023 17:50:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6942886CB1;
+	Tue, 17 Oct 2023 18:35:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DFqjBEVq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n72G8a89";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ECCD86E64; Tue, 17 Oct 2023 17:50:10 +0200 (CEST)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id 1646B86EE2; Tue, 17 Oct 2023 18:35:54 +0200 (CEST)
+Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
+ [IPv6:2607:f8b0:4864:20::1133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33A2686EE2
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 17:50:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 67BCF86489
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 18:35:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-5a7af52ee31so70820377b3.2
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 08:50:05 -0700 (PDT)
+Received: by mail-yw1-x1133.google.com with SMTP id
+ 00721157ae682-5a7dd65052aso80308847b3.0
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 09:35:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697557805; x=1698162605; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697560550; x=1698165350; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kX2jPZZnq6l60jF9sCjRFc62Wz9RazcDUbjGlrx/Jek=;
- b=DFqjBEVqvTjO7vZbVSNk0SATUC8jVIcei9nc1susZcdaZWF3/O+2Y2qp+/mCmaVWJP
- VEvAf5BU1DG0Prxi4o/M7ioc/95E5MUeSe4FpxXXDIjjIFXHIHmpmlsdkPa+9TN2h/49
- H4kUMDqN4QtLnLACMOI7cfZHClsVF+msffpR0=
+ bh=QN7MvF748DTi0mGFB/Xi/0kWzkxagwrA7OqS6IJG3/M=;
+ b=n72G8a89X0QLoZBUUGKiBPISa0dzy02r/kfNc/Ze0vLB4CtM2g/0SQpVDYFzeYrxYA
+ s8pW7bm7w1vU1BFa5Zas3mzYAMZ7tNAi7BxqWTSyGPUnn8OH54YGzzP53KPbDJH15+Ah
+ 8iGhEjzYSs5apziT7MO+xotizbkGGoEuZOdWw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697557805; x=1698162605;
+ d=1e100.net; s=20230601; t=1697560550; x=1698165350;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kX2jPZZnq6l60jF9sCjRFc62Wz9RazcDUbjGlrx/Jek=;
- b=NMgtZ/Dm0ihtQgJ5PbGHOe9wR8tXWt6gUSyphHnSGJuiJqKlASgiiVUcMmvhVoEZWu
- JJ1+mQ7p8RmneYegQCbeYoeG8G6Kr8DnfKBeIHUag61m/4Ojomi6RUh0yGy2FwgpVTKV
- B71VLBSN4d0T7r/Hxi0JTZxbF4bQZzmNZ/GNqHj+tDPzFSIK/RE87UvMMs+o4lzANW/A
- 30KQYPxBEKv/bcqGwwFFyXXw0Jmw5nKAWULWSOovjpteUrX7GpdyetHVeZh6UjSR21KW
- QYvFCMsbeFHCIeUpaufJmjFyjm3sLTymnaG1TmxQxA/wOc+3T5FoG8lv6j5rJjmyBkJy
- 0Mlg==
-X-Gm-Message-State: AOJu0YyCcn2PpoIVmc9c0RucaKQOIwjfueHLVI4y3yUg3MzJLJ18puQI
- wogpDoeiXNaQ5DNqUw9/FV16Ig==
-X-Google-Smtp-Source: AGHT+IEiqyaxul9P1YLsM2hBCmLMPOmEple9FLSdle6SIMUjpgHNUhbSOoTEL2K7fgkJ8CYpfh1tIQ==
-X-Received: by 2002:a0d:d4ce:0:b0:5a7:ba54:aef5 with SMTP id
- w197-20020a0dd4ce000000b005a7ba54aef5mr2804394ywd.21.1697557804803; 
- Tue, 17 Oct 2023 08:50:04 -0700 (PDT)
+ bh=QN7MvF748DTi0mGFB/Xi/0kWzkxagwrA7OqS6IJG3/M=;
+ b=m4EyNpKJdsYggoYWZCSmtm1ZeD/gGCBf/ACP/woYz6S4kZ3Ccghu+GnPoBQVEBel0N
+ w6Br5XWLm6yq0ykyRr3kKYZ6guQdfgx36EDxmJwyhF+GXUqZeJA78Esx2zwP9aPgvgDD
+ 1hWC2efNalRluQQ25OUBGmQJeQh0RezjpbO7YAiUOIjEgupij6XLBgOvo6lhW6geA529
+ IGciDSDWC7BuKNW0ZiCW5jySxWjdeksWYZXZ7dbnDeEaZVI9838YX4lvVTb24zy245kH
+ vgCnJ5AqYChlOJPX67XMTlrkEBOiQb3e+V20ygFUFPltJKJbEvGfq7mcAIR0IdvP6fsu
+ tO9w==
+X-Gm-Message-State: AOJu0YwxShueJi9Jb4+D3/R+4medPav0fWx0TrTFPl6rpXyNZIdrLKek
+ rYL2lDL4dR+1Wl0EwHa/Ru3zpQ==
+X-Google-Smtp-Source: AGHT+IH1wlg3jazm1m7UaCP6QcHgNrDjBxqF188HUbtsz3KiDcr7pSXGXtlR7W5abbJeG+A2FtKhLg==
+X-Received: by 2002:a81:8384:0:b0:5a7:bd2b:d4ec with SMTP id
+ t126-20020a818384000000b005a7bd2bd4ecmr3268871ywf.3.1697560550142; 
+ Tue, 17 Oct 2023 09:35:50 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- q4-20020a0de704000000b005a4d922cf77sm707653ywe.119.2023.10.17.08.50.04
+ v186-20020a0dd3c3000000b0057736c436f1sm727149ywd.141.2023.10.17.09.35.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Oct 2023 08:50:04 -0700 (PDT)
-Date: Tue, 17 Oct 2023 11:50:02 -0400
+ Tue, 17 Oct 2023 09:35:49 -0700 (PDT)
+Date: Tue, 17 Oct 2023 12:35:47 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Wojciech =?utf-8?B?Tml6acWEc2tp?= <niziak@spox.org>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
-Subject: Re: env: Allow U-Boot scripts to be placed in a .env file
-Message-ID: <20231017155002.GK3119521@bill-the-cat>
-References: <6591c92d-6ea7-4434-89bb-d64f0ac68068@spox.org>
+To: Piotr Kubik <piotr.kubik@iopsys.eu>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] bootm: Fix flags used for bootargs string substitution
+Message-ID: <20231017163547.GL3119521@bill-the-cat>
+References: <20231017105305.417338-1-piotr.kubik@iopsys.eu>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zY7W7UT6zzmr8mxV"
+ protocol="application/pgp-signature"; boundary="Gyx/G194tVhAADrw"
 Content-Disposition: inline
-In-Reply-To: <6591c92d-6ea7-4434-89bb-d64f0ac68068@spox.org>
+In-Reply-To: <20231017105305.417338-1-piotr.kubik@iopsys.eu>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,97 +91,73 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---zY7W7UT6zzmr8mxV
-Content-Type: text/plain; charset=utf-8
+--Gyx/G194tVhAADrw
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 17, 2023 at 10:14:13AM +0200, Wojciech Nizi=C5=84ski wrote:
-> Hello.
->=20
-> Very nice feature was introduced in commit:
->=20
-> =C2=A0=C2=A0=C2=A0 86b9c3e4e48ba47ef28781d06b97846aca74bc8e|
-> =C2=A0=C2=A0=C2=A0 env: Allow U-Boot scripts to be placed in a .env file
->=20
-> This feature works as extension for old CFG_EXTRA_ENV_SETTINGS and make me
-> confused why it doesn't work for configured default env file.
->=20
-> Now in U-Boot config we have two features related to external environment
-> file:
->=20
-> 1st feature (introduced by mentioned commit):
->=20
-> =C2=A0=C2=A0=C2=A0 CONFIG_ENV_SOURCE_FILE "Environment file to use"
->=20
-> 2nd feature
->=20
-> =C2=A0=C2=A0=C2=A0 CONFIG_USE_DEFAULT_ENV_FILE "Create default environmen=
-t from file"
->=20
-> =C2=A0=C2=A0=C2=A0 CONFIG_DEFAULT_ENV_FILE "Path to default environment f=
-ile"
->=20
-> In 1st feature only basename of .env file can be specified. So env file c=
-an
-> be located only in board dir which is a limitation for this nice feature:
->=20
-> =C2=A0=C2=A0=C2=A0 "The file must be in the board directory and have a .e=
-nv extension, so
-> =C2=A0=C2=A0=C2=A0 the resulting filename is typically
-> board/<vendor>/<board>/<CONFIG_ENV_SOURCE_FILE>.env"
->=20
-> In 2nd feature I can specify default env file as full path so it can be
-> located everywhere - even outside U-Boot source - which is very nice when
-> U-Boot is built by Buildroot. I can easily set path as system environment
-> variable and it works:
->=20
-> =C2=A0=C2=A0=C2=A0 CONFIG_USE_DEFAULT_ENV_FILE=3Dy
-> CONFIG_DEFAULT_ENV_FILE=3D"$(BR2_EXTERNAL_FOO_PATH)/board/foo/u-boot.env"
->=20
-> Unfortunately I cannot do the same for 1st feature without patching U-Boot
-> sources to put my custom env file into board dir.
->=20
-> I can see two way of improving features:
-> =C2=A01st: to extend 1st feature with ability to specify full patch to en=
-v file,
-> or
-> =C2=A02nd one: run the same parsing mechanism also for 2nd feature (defau=
-lt env
-> file).
+On Tue, Oct 17, 2023 at 12:53:05PM +0200, Piotr Kubik wrote:
 
-Your analysis of how things work is correct.  The intention is that, as
-you noted, is that the plain text environment and CONFIG_ENV_SOURCE_FILE
-replace the older default environment found in include/env_default.h and
-often augmented by the board.h file via (formerly CONFIG now CFG)
-EXTRA_ENV_SETTINGS and CONFIG_USE_DEFAULT_ENV_FILE to be the complete
-replacement of the environment option.  So I think the next reasonable
-step would be to be able to have plain text environment style files work
-for CONFIG_USE_DEFAULT_ENV_FILE which I think you're saying doesn't
-today.  But I think that yes, a patch to parse the new-style plain text
-files for CONFIG_USE_DEFAULT_ENV_FILE would be good, and I suspect
-buildroot has enough users of that feature that any corner cases with
-trying to parse older files could be caught and fixed?
+> Commit <51bb33846ad2> introduced a feature of bootargs
+
+Checkpatch will complain that this should be:
+In commit 51bb33846ad2 ("bootm: Support string substitution in
+bootargs")
+And this is the kind of thing I would fixup on applying if there was no
+other feedback.  However:
+
+> string substitution and changed a flag used in
+> bootm_process_cmdline_env() call to be either true or false.
+> With this flag value, condition in bootm_process_cmdline()
+> `if (flags & BOOTM_CL_SUBST)` is never true
+> and process_subst() is never called.
+>=20
+> Signed-off-by: Piotr Kubik <piotr.kubik@iopsys.eu>
+> ---
+>  boot/bootm.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/boot/bootm.c b/boot/bootm.c
+> index 8f96a80d42..e96489e549 100644
+> --- a/boot/bootm.c
+> +++ b/boot/bootm.c
+> @@ -778,7 +778,8 @@ int do_bootm_states(struct cmd_tbl *cmdtp, int flag, =
+int argc,
+>  	if (!ret && (states & BOOTM_STATE_OS_BD_T))
+>  		ret =3D boot_fn(BOOTM_STATE_OS_BD_T, argc, argv, images);
+>  	if (!ret && (states & BOOTM_STATE_OS_PREP)) {
+> -		ret =3D bootm_process_cmdline_env(images->os.os =3D=3D IH_OS_LINUX);
+> +		ret =3D bootm_process_cmdline_env(images->os.os =3D=3D IH_OS_LINUX ?
+> +										BOOTM_CL_ALL : 0);
+
+This gets hard to read. I would prefer a comment and something like:
+int flags =3D 0;
+if (images->os.os =3D=3D IH_OS_LINUX)
+  flags =3D BOOTM_CL_ALL;
+ret =3D bootm_process_cmdline_env(flags);
+
+As the compiler should be just as smart, and that'll be clear about
+what's going on.  Thanks.
 
 --=20
 Tom
 
---zY7W7UT6zzmr8mxV
+--Gyx/G194tVhAADrw
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUurSEACgkQFHw5/5Y0
-tyxRpgv/Tj92sqi3DnSpDKGzyt0FkTv1jVgoX9qhYR38ULuVMN5UzxWkrPZ10uqN
-VbZVAfIRlWpgDQqF/o/QbJoIUf1GciKEH2Z2ltLv18z1wFp1xFb/9QmDvOWg+L96
-BtYs5MnX/GBEen/75QZ0xajr01DuI43htM4TA5p5ckQzIe1hgY6vvPthUVZcjNd/
-Z6sHFJIVxS4LytKaVRFNVQqUHWjPUldx2dXZpNJToiiFO01ghM5NcqNHOV2gTuMY
-V7EtuYUcZpf1Ixml4Qe2VXSpPQ3zdks3xntLUEU4qEotgXoh5l/27JmX4V8XIyQI
-r5NONbea28xcI/MxXUQnOCbVHwqjKWNjcI28BnBcGwpHxF7JhNZL6QRS06jUcPPz
-LYmH5yulvRd8RwtE1fYSf/xSNKWX6UqEwG6JiiTooLQpia6KH058pWzgNRRsZqbd
-JzoVB6OhC4wEo5pEBDf+bABF7yNF+9cQ/byezz3w36uB435pYgGgPfD0YWTEgK82
-3wDjh5LV
-=DT7E
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUut+AACgkQFHw5/5Y0
+tyy53Av/Q2NzPN55+etA0EnqRypD9KVH3O0FJQ03SqwFE+ntXJzjdUVtaRlKR9wj
+K0FWvoiXNwluQ5IIOriSjUcnZ5/b0yA8Yn5cDNmY/Kn9Oc/dmxZuFNUqiDrRq9Jp
+gvALFUKZKnBjMPuoGq4TKwPqPGQ7h+I6YhjjWiBcD1RqnkLJsxPH1U/gAVAh+O9A
+6JpphcMVIzHjQKcRVEsLl5XuzZ4VAh9uAdH5zpaKsE2qc6jdKCLW2+UmegVqoJGT
+Gzr9TsdO7I150/YwRZ85asRiqoMMWFdwslCIN+7THg1flBEtKNTU9qjR2dswFjtZ
+pO6ADdjRVwTQZt0+drjZ6A+GixGQuPx05zzxrYvxQYdI1miVee5oIqWuU4+Aoplr
+rTjKVwsiAsPU0Jzuo1xpeRe3BhdTgY1DPLLA/1hfvB4O+D963JnOpdMsQrPZOEA3
+H4Pk5LrActWEjgF/vt2lBPJpjeT5sz+EAuxs1cR0N1ab1oU2aqTyt1pYyISCr0S6
+4k/D2CB4
+=OD1y
 -----END PGP SIGNATURE-----
 
---zY7W7UT6zzmr8mxV--
+--Gyx/G194tVhAADrw--
