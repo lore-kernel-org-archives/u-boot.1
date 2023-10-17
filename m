@@ -4,73 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1093CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 21:00:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA24BCDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 21:32:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B681E86F51;
-	Tue, 17 Oct 2023 23:00:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 9C02086F01;
+	Tue, 17 Oct 2023 23:32:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P6w0t6Rt";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ZZDWSDAk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8AD886F54; Tue, 17 Oct 2023 23:00:27 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 07FB886F2A; Tue, 17 Oct 2023 23:32:31 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1564B86EE0
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 23:00:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D09C486940
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 23:32:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=minecraft2048@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2c50fbc218bso54825991fa.3
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 14:00:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697576423; x=1698181223; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fuVMn98iKp53vXbVj3IASYsK5qhOR2w16K/X8r1Ry38=;
- b=P6w0t6RtrmC4UIV4Px1zod0VC4knNferzyVJ9kzvq7s4oo9nxN32EG8ks2keBJhMQb
- VnCgIPwUnA3t9pAi9EXD/s6qPg9+SQfP4R535n00TKoNQkHNW2/+GxDfTzVWHJPaeXNd
- 7edkmQNMcAatMOsRCn2H9qKgcvGOaTI2kJaVdOfXChaCI1tp4L9LzmpOQrLFLabSTp4R
- WybuosLQx/cjZP5zsVXTf9/3Cn92t2fUSWAKwRBb45+IaDin8q3mC5/dxcOrxaw6CNYZ
- dhaUxc221WLwTATu3XXqYu99o+XoryGp4BFfibAUZZJ1u4NppZ39ub/IxIcgm6ROGjSs
- /1eA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697576423; x=1698181223;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fuVMn98iKp53vXbVj3IASYsK5qhOR2w16K/X8r1Ry38=;
- b=W194OQyxk2n1JrlpSYKhyPUFs8Z6wRPKw0pfpQaM7WPLAWla817BcQm3JiFIFVpBjR
- 8RHwWlx1ZL2mStNXUL2S11tumi5F9CxXsXK8q1+kf+v4nK5+tWJ6T1sw6AuYrphhBtn1
- mCeIjYQOhZzDaYKJo7IMj1WOMDIpsL/MXRMNRKbXv84LqqOoW1BNJWUdwRaIT0QBQMmO
- XErsCejoU7LvcABPgRFeTsQ8WSVhTACnLMy6TwCR9JzE2LQSy2w3QUrBcAi/Yj7VW3kF
- vtzfE6KOn02MOp6dp9KbkegEPdt694RFEqSG/DMmuhYX8XS6GEXG7v84KzzLwcI7NN2H
- 8PHg==
-X-Gm-Message-State: AOJu0YxEz9NKAmABP4lZV74kLm87QfgH06IFIRo7R6GhxJlQHNNVPWly
- 8wEC6vhlZnDQKaRKWS/u3mIN1VuUQQerc/2TdDM=
-X-Google-Smtp-Source: AGHT+IHKCVKImY4UsbX2W34nkTcxNCLrGW1JRkf1su71UCq/ZmqxgCNqedQfk6/hjhpQffv/ko2Ihu4Jv6wS9Izr8Xs=
-X-Received: by 2002:a19:7616:0:b0:503:17fd:76bb with SMTP id
- c22-20020a197616000000b0050317fd76bbmr2631084lff.39.1697576422799; Tue, 17
- Oct 2023 14:00:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=ivprusov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id E4E81100005;
+ Wed, 18 Oct 2023 00:32:27 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru E4E81100005
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1697578347;
+ bh=xeFXirU7Euf/DHfyJxS2ypqqcH3aLEy/x2vL/aMxcs8=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=ZZDWSDAkVFczKas996Dh2eqJLIU1NggnkuUiS/NmUR9ul+ZS28xODvc2/CObCNkVB
+ 2x6l+ddpmqEgEClkQLYH6d05aNGStEf0MVN1JP9AC/56MYkuob1T/LogriGOhNoJYU
+ 1l0VBvxPSVmEPFQOcf9YRGxER8ql3OjqUl4gGT1bzR9E1CacJq6j8LPDFEUpCF+rgT
+ POxcDWajL2mlRuHsqxQqgyTC1VPZfu8iFx35b7IU85HhoFfNe+uVj3eetahck5hfmG
+ fpmSHHhJoABk+pCuXPqtD3/Vr6Qew7+rYfsqMjc4zdszpsGj5M8mVoLGG6uxjdVKma
+ G5oyj955JeeYA==
+Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
+ [172.16.192.107])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Wed, 18 Oct 2023 00:32:27 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.37; Wed, 18 Oct 2023 00:32:27 +0300
+From: Igor Prusov <ivprusov@salutedevices.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
+ <ivprusov@salutedevices.com>, <u-boot-amlogic@groups.io>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH v1 0/2] arm: dts: meson-a1 Sync DT with Linux
+Date: Wed, 18 Oct 2023 00:32:09 +0300
+Message-ID: <20231017213211.121550-1-ivprusov@salutedevices.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <CAJ1CVWj3zLjK=tJr=T73JzOyNbJgMjrPdchsxVk0bMsAPQ7d8w@mail.gmail.com>
- <20231017081731.2u7qdmvj4a6bd724@GBR-5CG2373LKG.adwin.renesas.com>
-In-Reply-To: <20231017081731.2u7qdmvj4a6bd724@GBR-5CG2373LKG.adwin.renesas.com>
-From: Ignatius Rivaldi <minecraft2048@gmail.com>
-Date: Wed, 18 Oct 2023 08:00:10 +1100
-Message-ID: <CAJ1CVWhb9ZNd_hpmcogDXhzAFYw7BJrW01uSwrp=ys8FhvwLhg@mail.gmail.com>
-Subject: Re: Understanding how .config for uboot is generated in buildroot
-To: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: u-boot@lists.denx.de, xdrudis@tinet.cat
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m01.sberdevices.ru (172.16.192.107)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 180688 [Oct 17 2023]
+X-KSMG-AntiSpam-Version: 6.0.0.2
+X-KSMG-AntiSpam-Envelope-From: ivprusov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 540 540
+ 2509a3fe0f7fdc802e7154a32be7c2dd394ab987,
+ {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
+ 100.64.160.123:7.1.2; salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ p-i-exch-sc-m01.sberdevices.ru:7.1.1,5.0.1, FromAlignment: s,
+ ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2023/10/17 19:51:00 #22214563
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,49 +103,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Oct 17, 2023 at 7:17=E2=80=AFPM Paul Barker <paul.barker.ct@bp.rene=
-sas.com>
-wrote:
+This series syncs Device Tree for Amlogic A1 with Linux. Currently
+DTS in Linix has different compatible string for serial devices, which
+is not recognized by serial_meson driver, so new compatible is added to
+driver as well. Additional driver changes are not required because new
+compatible only differentiates between ttyAML and ttyS names for serial
+console devices.
 
-> On Tue, Oct 17, 2023 at 04:35:20PM +1100, Ignatius Rivaldi wrote:
-> > Hi all,
-> >
-> > When I edit the config file in BR2_TARGET_UBOOT_CUSTOM_CONFIG_FILE in a
-> > buildroot recipe, how does the config statements from that file got
-> > converted into .config file in u-boot?
-> >
-> > The background is that we're using a custom buildroot config file at
-> here:
-> > https://github.com/kubos/kubos-linux-build/tree/master to build u-boot
-> for
-> > a space grade computer. When I added a new config statement
-> > (CONFIG_SD_SWITCH=3Dy) in the BR2_TARGET_UBOOT_CUSTOM_CONFIG_FILE, it
-> doesn't
-> > write the config statement to the .config file in the uboot build repo.
-> >
-> >  Unfortunately the company that owns that has been acquired several tim=
-es
-> > and all the engineers there already left, so I can't just ask them
->
-> You're probably better off asking this on the buildroot mailing list.
-> See https://lists.buildroot.org/mailman/listinfo/buildroot.
->
-> Best regards,
-> Paul
->
+Igor Prusov (2):
+  serial: amlogic: Add UART compatible for A1 board
+  arm: meson-a1: dts: Sync DT with Linux
 
-Thanks for the pointer, I kind of solved this by adding CONFIG_SD_SWITCH to
-uboot kconfig definition file, and now when I added CONFIG_SD_SWITCH to the
-_config file it works.
-I'll ask about buildroot stuff on the buildroot mailing list after this.
+ arch/arm/dts/meson-a1.dtsi    | 356 +++++++++++++++++++++++++++++++++-
+ drivers/serial/serial_meson.c |   1 +
+ 2 files changed, 352 insertions(+), 5 deletions(-)
 
-The next problem is that the way Kubos implemented SD card slot switching
-is by calling into their own proprietary(?) binary blob through the
-standalone application thing:
-https://www.emblogic.com/blog/12/u-boot-standalone-applications/. What
-happens now is that Uboot is stuck at ## Starting application at
-0=C3=9721800000. What are the possible causes of this, and how do I start
-debugging this?
+-- 
+2.34.1
 
-Fortunately Kubos gave us the source code for that binary blob before they
-go bankrupt, so we can tweak it
