@@ -4,62 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50D32CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 20:48:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D55CCDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 20:58:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69A6A86F15;
-	Tue, 17 Oct 2023 22:48:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 1938C86F38;
+	Tue, 17 Oct 2023 22:58:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="qNcNmImc";
+	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="x+hBbnLC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 29EAC86F2C; Tue, 17 Oct 2023 22:48:09 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id ABEEB86F3B; Tue, 17 Oct 2023 22:58:28 +0200 (CEST)
+Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1F2A86F06
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 22:48:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D1B5486F07
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 22:58:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=165c=GA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1697575679;
- bh=BGOFYJrIuYdY4Ln9KKzyuShdy4G2F8hd41ao4bq8D/c=;
- b=qNcNmImcLL4z/g0th/mnzKuOomZ+Fd0LJ36f6GIvmQOZq3jfGybjcNbizYF+9Faa9idHCOHjr
- QaAbQ2ViNvfu477gnKQLiPvSygWPXyD3dlEk+Uta/w2gHCWNVFASbpNo9VPXe9lu/7pYg62hPMd
- aeacxO5Xd70t/NNRxBzed8DrMRkKxON8pkEaEaAnfw6Flvhdj12Dj1MAy+1StwbKAOEY8eGiYqZ
- Ru3I9kH7xkPLwMCqwke53jfd6cX0GKpHkV+2PpnEXyPgQiweFJyGnhdGaIp7zTMd+ti+K8LFQnD
- wQBrCjqOtg7uQVcCGMaxr3AX7RAqnml+V0yCcbJICdeA==
-Message-ID: <b82c02c0-0a37-8553-f498-b03f85394d59@kwiboo.se>
-Date: Tue, 17 Oct 2023 22:47:54 +0200
+ dmarc=none (p=none dis=none) header.from=hugovil.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
+ ; s=x;
+ h=Subject:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Cc:To
+ :From:subject:date:message-id:reply-to;
+ bh=PADb4eImSEkwEJqXicm6Ily61SWvVtITfvP5qDrAbTo=; b=x+hBbnLCESVG69Pz0ucLa9lF7i
+ JPKjP909slQa1dMtog45/A/ge0Em+M5h/8ajJzE034mgRgu+K4CgxpgZd04nd3Osy5Is/YU8enU2c
+ /zncUcyKwUQo0fWkEh+d7Ybwm/F8B14gMjqwYJxjiySK8t+dQXapV+2j+5fkLu2YJVrA=;
+Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:54398
+ helo=pettiford.lan) by mail.hugovil.com with esmtpa (Exim 4.92)
+ (envelope-from <hugo@hugovil.com>)
+ id 1qsr8r-0001E1-BY; Tue, 17 Oct 2023 16:58:18 -0400
+From: Hugo Villeneuve <hugo@hugovil.com>
+To: "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: hugo@hugovil.com, Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ u-boot@lists.denx.de
+Date: Tue, 17 Oct 2023 16:58:15 -0400
+Message-Id: <20231017205816.318531-1-hugo@hugovil.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.15.1
-Subject: Re: [PATCH] board: rockchip: add FriendlyElec NanoPC-T6 rk3588 board
-Content-Language: en-US
-To: Kever Yang <kever.yang@rock-chips.com>, John Clark <inindev@gmail.com>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>, Jagan Teki
- <jagan@edgeble.ai>, Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- chenfen <chenfen@rock-chips.com>, "=?UTF-8?B?6LW15Luq5bOw?="
- <zyf@rock-chips.com>
-References: <20231007212552.11109-1-inindev@gmail.com>
- <3145ccc9-d6d6-ee81-4158-9ac576f1a236@rock-chips.com>
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <3145ccc9-d6d6-ee81-4158-9ac576f1a236@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 652ef2ff90b186ea678a965a
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 70.80.174.168
+X-SA-Exim-Mail-From: hugo@hugovil.com
+Subject: [PATCH] arm: dts: imx8mn-var-som: Fix broken EEPROM read
+X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
+X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,75 +68,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
 
-On 2023-10-08 11:09, Kever Yang wrote:
-> 
-> On 2023/10/8 05:25, John Clark wrote:
->> NanoPC-T6 is a Rockchip RK3588 based SBC by FriendlyElec.
->>
->> There are four variants depending on the DRAM size: 4G/32GB eMMC, 8G/64GB eMMC,
->> 16G/16MB SPI NOR, and 16G/256GB eMMC/16MB SPI NOR
-> 
-> So the board is using SPI NOR flash.
-> 
-> 
-> [...]
-> 
->> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
->> index b1f535fad5..e08ebfa39b 100644
->> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
->> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
->> @@ -40,6 +40,7 @@ DECLARE_GLOBAL_DATA_PTR;
->>   const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
->>   	[BROM_BOOTSOURCE_EMMC] = "/mmc@fe2e0000",
->>   	[BROM_BOOTSOURCE_SPINOR] = "/spi@fe2b0000/flash@0",
->> +	[BROM_BOOTSOURCE_SPINAND] = "/spi@fe2b0000/flash@0",
-> 
-> Why need a SPI NAND?
-> 
-> If this is really needed, will be a separate patch to support a new boot 
-> source from bootrom.
+On branch WIP/17Oct2023, the EEPROM can no longer be read:
 
-I have done spi boot testing on a few rk3588 boards with SPI NOR flash,
-and there seem to be a correlation between the bootsource/bootdevice id
-written to reg by the bootrom and the fspi iomux used by the board.
+    U-Boot 2023.10-latest (Oct 17 2023 - 15:53:43 -0400)
+    CPU:   Freescale i.MX8MNano Quad rev1.0 at 1200 MHz
+    Reset cause: POR
+    Model: Variscite VAR-SOM-MX8MN Symphony evaluation board
+    var_read_som_eeprom: uclass_get_device_by_of_offset() failed: -19
+    initcall failed at call 000000004022207c (err=-19)
 
-Following bootsource/bootdevice value can be read from reg,
+Convert EEPROM-related properties to bootph-all so that the EEPROM can
+also be read outside of SPL.
 
-- FSPI (M0): 3
-- FSPI (M1): 4
-- FSPI (M2): 6
+Fixes: 9e644284ab81 ("dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation")
+Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+---
+ arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-based on testing on the following boards:
+diff --git a/arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi b/arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi
+index e0caf3179ea..2bbc4a49418 100644
+--- a/arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi
++++ b/arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi
+@@ -39,11 +39,11 @@
+ };
+ 
+ &i2c1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &pinctrl_i2c1 {
+-	bootph-pre-ram;
++	bootph-all;
+ };
+ 
+ &pinctrl_pmic {
+@@ -83,5 +83,5 @@
+ };
+ 
+ &eeprom_som {
+-	bootph-pre-ram;
++	bootph-all;
+ };
 
-- Radxa ROCK 5 Model A - fspim0_pins - rk3588s
-- Xunlong Orange Pi 5 - fspim0_pins - rk3588s
-    brom_bootdevice_id: 3
-
-- FriendlyElec NanoPC-T6 - fspim1_pins - rk3588
-- Xunlong Orange Pi 5 Plus - fspim1_pins - rk3588
-    brom_bootdevice_id: 4
-
-- Radxa ROCK 5 Model B - fspim2_pins - rk3588
-    brom_bootdevice_id: 6
-
-Can these observations be correct? And if so, maybe we should use
-following constants for RK3588?
-
-  BROM_BOOTSOURCE_FSPI_M0 = 3
-  BROM_BOOTSOURCE_FSPI_M1 = 4
-  BROM_BOOTSOURCE_FSPI_M2 = 6
-
-Any insights into what values bootrom will write to reg would be very
-helpful.
-
-Regards,
-Jonas
-
-> 
-> 
-> Thanks,
-> - Kever
-> 
+base-commit: e65b5d35c9116485366bb08138043d51220551da
+-- 
+2.39.2
 
