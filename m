@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5266BCDB482
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 17:17:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC09ECDB482
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 17:18:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2564286F14;
-	Tue, 17 Oct 2023 19:17:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D73386EDB;
+	Tue, 17 Oct 2023 19:17:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="IluzTUr/";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="ivVz8u70";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAC1486EE7; Tue, 17 Oct 2023 19:17:54 +0200 (CEST)
+ id 2880886F1E; Tue, 17 Oct 2023 19:17:58 +0200 (CEST)
 Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95BF286D51
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 19:17:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D424686D51
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 19:17:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ivprusov@salutedevices.com
 Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id F2F4F120004;
- Tue, 17 Oct 2023 20:17:51 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru F2F4F120004
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 59023120008;
+ Tue, 17 Oct 2023 20:17:55 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 59023120008
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1697563071;
- bh=s6jeEFzjsBh+weEvalez4WeFgPIWUdsftv18ab+XHc8=;
+ s=mail; t=1697563075;
+ bh=BIVcjYEKyj7vDJ7qis/08LMbHfMP9l3p23k1sqnFmMg=;
  h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=IluzTUr/7dBYOsLNeMH6p5nVawlYg6A73IOFQBIX7uFQJam5ZN4WrHbjU4059/Y0d
- rZ6Qq01VP8NaavEf5qgh7eMU2Rqup0gt3gY/JwhXzvUIAybz/uEi2LEnzeIIl7iS4m
- H0h7lhU3ocloNSmVY5Q1Sk0iNbULBjPLgK3oPY/aH2yFvk4jtn0DcZGTpzMI3Ub7mM
- oAStPXinPckcAXLm7+yIS58/rhZYgKxBwxBr+vcahbT9EicEjOIznZpScE2bn9U2ML
- cNSMD3T1+eHOY/hD54G5nHrD55ixBY2Lz8C8AT1JdF+MpPt5JR7zQDM5Rr4uGlpHli
- 8rxOyUnJvQLCw==
+ b=ivVz8u70dlnbC6K4e+DeMNyIjqIINAY0cd4MeGGKulsNNQlqUTk+fhp6aGYnADZH4
+ xJdNNS2+/+BucUSropSOhu8pDxDUcwkaStQFf7CFJZGashRuhURkacod42J5LtU+lb
+ Rsb1tDivHBKxTJjkqTCXoZsx6jbFDJIL4+G7mt/4s28hMIwtl3WYw6GHGN9WztQxdE
+ C2FaGj4KrRlTLg6bHwTEerNzvPV9OMB5qivvHY5ACTmzIHo1Ih7gGnYGvDPMWd3aaL
+ 1AjdzXYul3K9ahnngopV0KPdnJFZBtFeP0dyCa1+Ojogho4C8V812LznfPrxjU+yqq
+ jelIVkDpLsBBA==
 Received: from p-i-exch-sc-m01.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
  [172.16.192.107])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
  by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Tue, 17 Oct 2023 20:17:51 +0300 (MSK)
+ Tue, 17 Oct 2023 20:17:55 +0300 (MSK)
 Received: from localhost.localdomain (100.64.160.123) by
  p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.37; Tue, 17 Oct 2023 20:17:51 +0300
+ 15.2.1118.37; Tue, 17 Oct 2023 20:17:54 +0300
 From: Igor Prusov <ivprusov@salutedevices.com>
 To: Neil Armstrong <neil.armstrong@linaro.org>, Jagan Teki
  <jagan@amarulasolutions.com>
 CC: <prusovigor@gmail.com>, <kernel@sberdevices.ru>, Igor Prusov
- <ivprusov@salutedevices.com>, <u-boot-amlogic@groups.io>,
- <u-boot@lists.denx.de>
-Subject: [RESEND PATCH v1 0/2] ARM: amlogic: Add A1 SPIFC support
-Date: Tue, 17 Oct 2023 20:17:31 +0300
-Message-ID: <20231017171733.3989-1-ivprusov@salutedevices.com>
+ <ivprusov@sberdevices.ru>, <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>
+Subject: [RESEND PATCH v1 2/2] ARM: amlogic: ad401: enable SPIFC
+Date: Tue, 17 Oct 2023 20:17:33 +0300
+Message-ID: <20231017171733.3989-3-ivprusov@salutedevices.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20231017171733.3989-1-ivprusov@salutedevices.com>
+References: <20231017171733.3989-1-ivprusov@salutedevices.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -103,21 +104,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A1 family boards have new version of SPIFC controller, that is
-incompatible with meson_spifc driver. This series ports A1 SPIFC driver
-from Linux and enables it for ad401 board.
+From: Igor Prusov <ivprusov@sberdevices.ru>
 
-Igor Prusov (2):
-  spi: add support for Amlogic A1 SPI Flash Controller
-  ARM: amlogic: ad401: enable SPIFC
+Enable Amlogic A1 SPI FLash Controller support.
 
- configs/ad401_defconfig      |   1 +
- drivers/spi/Kconfig          |   8 +
- drivers/spi/Makefile         |   1 +
- drivers/spi/meson_spifc_a1.c | 384 +++++++++++++++++++++++++++++++++++
- 4 files changed, 394 insertions(+)
- create mode 100644 drivers/spi/meson_spifc_a1.c
+Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ configs/ad401_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
+diff --git a/configs/ad401_defconfig b/configs/ad401_defconfig
+index b9aca3ab0d..b44b9c63e8 100644
+--- a/configs/ad401_defconfig
++++ b/configs/ad401_defconfig
+@@ -51,6 +51,7 @@ CONFIG_DEBUG_UART_SKIP_INIT=y
+ CONFIG_MESON_SERIAL=y
+ CONFIG_SPI=y
+ CONFIG_DM_SPI=y
++CONFIG_MESON_SPIFC_A1=y
+ CONFIG_USB=y
+ CONFIG_DM_USB_GADGET=y
+ CONFIG_USB_GADGET=y
 -- 
 2.34.1
 
