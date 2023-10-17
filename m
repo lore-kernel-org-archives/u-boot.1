@@ -4,64 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1138ECDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 14:54:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79C3BCDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 15:17:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0B9FF864D4;
-	Tue, 17 Oct 2023 16:54:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A92E684FEB;
+	Tue, 17 Oct 2023 17:17:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697554474;
-	bh=FgRm8M5ZJJ1OQEjP8iDEfwwD5R5apkchfULxy+TnQcg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=rFMBlZ1jLRsxvAn28J8VaRHLUZffytp3zMmnItO2y4Duys6DSf3Zxw+hwjdhpGHWa
-	 XF8ic9sCgdSfZZrH12TWl1HzMSW17Pcbz32lTS+QRfqKeafIgNhnY9U52wRYs6KK8z
-	 x0nmcpncS3zG9EoonhlCGJaCQgUOvM5HYEemFenR3Jx/PvtE5BUOhxXw8VV5MJ6S+J
-	 svuPW7xxFneEOvBOFrewL7w3vXqkF25DHtL33B+3kJprDbKZdlnaOWRpJrwk1nUzsi
-	 9e8vZpaXcjybbmbdMvj+jDqdeI6irmUuhdWyL8H3TX0xY4Ho2lB0iEWlwJSP5htWmp
-	 R6APtEez5VwEQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="tSpNkEXb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BE3E084FEB; Tue, 17 Oct 2023 17:17:18 +0200 (CEST)
+Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3A0C486EE2;
- Tue, 17 Oct 2023 16:54:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697554472;
- bh=FgRm8M5ZJJ1OQEjP8iDEfwwD5R5apkchfULxy+TnQcg=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=OxVk5PL+LnxZmiwageS9qXOS5cg8klGbSb1LBoDpwuG7CmoqBTP58YtybznG7f7Oz
- uUtjh52oDR6hiQ63h4sOVHw7IKALOF8w6Sy1NA9I95jxuBsI3ONAGCqO5c7ayfFDeP
- d7TEuSv4aGcmBV3rkHk9BasDiJw3SkxRtgT0PaFxT8DfUsCciUI5agpk6XXZGCTTh1
- dFlCt8EAmeujGjgc83eJdme/ItUg+kQIeMwcSy0hJ6fUYenTyG3HjcKpixMHzmab6G
- KZlkjnVVx61Jk5ZbK2WUyNH4wiYCVtLkd4Fyc7pwXtlPV58/6QAZRXTna6MAAqkZDX
- 43Nh8XrLSkuuQ==
-Message-ID: <361b19c0-229c-4fb5-9835-d952e877baee@denx.de>
-Date: Tue, 17 Oct 2023 16:54:31 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] usb: xhci: Workaround to fix the USB halted endpoint
- issues
-To: Tom Rini <trini@konsulko.com>, Eugen Hristev <eugen.hristev@collabora.com>
-Cc: Michal Simek <michal.simek@amd.com>, Da Xue <da@lessconfused.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de,
- git@xilinx.com
-References: <20231013045356.25789-1-venkatesh.abbarapu@amd.com>
- <2016c1bc-dfe0-416e-a910-75e6cf25036c@denx.de>
- <CACdvmAju3wDL0yCJtVdEf47u+L5R3AvRpcuJ+ruKFXDTcQ-TBw@mail.gmail.com>
- <20231013151540.GJ3119521@bill-the-cat>
- <041b37d4-777a-4c02-b8fd-9985c2cfa938@amd.com>
- <20231016193052.GF3119521@bill-the-cat>
- <e8501850-b440-4e2c-a120-875924f59453@collabora.com>
- <20231017141612.GE3119521@bill-the-cat>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231017141612.GE3119521@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+ by phobos.denx.de (Postfix) with ESMTPS id 2B25E8074B
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 17:17:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=xs4all.nl
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
+X-KPN-MessageId: 40b7e1a3-6d00-11ee-91e6-005056994fde
+Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
+ by ewsoutbound.so.kpn.org (Halon) with ESMTPS
+ id 40b7e1a3-6d00-11ee-91e6-005056994fde;
+ Tue, 17 Oct 2023 17:17:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
+ h=subject:to:from:message-id:date;
+ bh=/0VN5H3OziAw3aRw/63JzabvDXwKcImRk4q+ZnNxLwY=;
+ b=tSpNkEXbax0zllyVmW5USnHvrd+b4xEEsA5Npy7z7KHJFJ+69Pd/kW5uUeu/LOTjLpa9AnbP/JXoY
+ SzaeT1yTTNbwhAiwa7lo22t89aeugQDKip06770XOuiJbTJjXuovjnxbfenF+pna1W9tovRFcqrOky
+ yilZk+gj2PbUSAQI5JrR+kivc+uDeWc8Zsp5SwNWlhWSttOKESTpI7+zk1OxJA5tKVgN+p82GFG02P
+ 3jjLtRM/7YQsHZtE3tAqw4uwMlB7SSSjdcthyO19Pzd5HgOoBzP+/2thg8WzV6nIz74JzIZD/JUoC/
+ u/z2bXm4qz6m7IKUy7gn9US0miAp4Yw==
+X-KPN-MID: 33|YXlPodofLReTbv7+PyRf3MF3h8qAxCFtfiwtgzCRtpeWolIkKQUzHiX/ucm+mUt
+ uUGzV8p0xDtFaWYqbLzB6Rg==
+X-KPN-VerifiedSender: Yes
+X-CMASSUN: 33|vV0/GK42wol37e8hcYtfbXfih3BtQT63RPnVPpqiu5Sm5LRcyuaRUPKf66MSxns
+ GHguYyOrgDc8ilVn0L+IbpQ==
+X-Originating-IP: 80.61.163.207
+Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
+ [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
+ id 408ee007-6d00-11ee-9dc8-00505699772e;
+ Tue, 17 Oct 2023 17:17:15 +0200 (CEST)
+Date: Tue, 17 Oct 2023 17:17:14 +0200
+Message-Id: <87wmvlqnwl.fsf@bloch.sibelius.xs4all.nl>
+From: Mark Kettenis <mark.kettenis@xs4all.nl>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: ilias.apalodimas@linaro.org, u-boot@lists.denx.de,
+ heinrich.schuchardt@canonical.com
+In-Reply-To: <20231017085507.12094-1-heinrich.schuchardt@canonical.com>
+ (message from Heinrich Schuchardt on Tue, 17 Oct 2023 10:55:07 +0200)
+Subject: Re: [PATCH 1/1] efi_loader: expose the device-tree file name
+References: <20231017085507.12094-1-heinrich.schuchardt@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,73 +74,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/17/23 16:16, Tom Rini wrote:
-> On Tue, Oct 17, 2023 at 03:48:37PM +0300, Eugen Hristev wrote:
->> On 10/16/23 22:30, Tom Rini wrote:
->>> On Mon, Oct 16, 2023 at 08:34:16AM +0200, Michal Simek wrote:
->>>>
->>>>
->>>> On 10/13/23 17:15, Tom Rini wrote:
->>>>> On Fri, Oct 13, 2023 at 11:11:04AM -0400, Da Xue wrote:
->>>>>> On Fri, Oct 13, 2023 at 7:47 AM Marek Vasut <marex@denx.de> wrote:
->>>>>>>
->>>>>>> On 10/13/23 06:53, Venkatesh Yadav Abbarapu wrote:
->>>>>>>> The xhci host controller driver trying to queue the URB's and it is
->>>>>>>> getting halted at the endpoint, thereby hitting the BUG_ON's.
->>>>>>>> Mostly these kind of random issues are seen on faulty boards.
->>>>>>>> Removing these BUG_ON's from the U-Boot xhci code, as in Linux kernel
->>>>>>>> xhci code BUG_ON/BUG's are removed entirely.
->>>>>>>> Please also note, that BUG_ON() is not recommended any more in the Linux
->>>>>>>> kernel.
->>>>>>>> Similar issue has been observed on TI AM437x board and they created a patch
->>>>>>>> in Linux kernel as below
->>>>>>>> https://patches.linaro.org/project/linux-usb/patch/1390250711-25840-1-git-send-email-balbi@ti.com/
->>>>>>>>
->>>>>>>> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
->>>>>>>
->>>>>>> I already explained to Xilinx how to sync the driver with Linux and why
->>>>>>> this is needed to move forward, multiple times, and even provided a
->>>>>>> script which does most of the work automatically, since it is basically
->>>>>>> automated process. Xilinx did not even bother to test the script and
->>>>>>> provide any feedback.
->>>>>>>
->>>>>>> Until that happens, this patch is rejected.
->>>>>>
->>>>>> This patch also causes all of the USB devices on certain platforms to
->>>>>> not be detected:
->>>>>>
->>>>>> scanning bus usb@c9000000 for devices... Device not responding to set address.
->>>>>>
->>>>>>          USB device not accepting new address (error=80000000)
->>>>>
->>>>> Yes, we are stuck at the impasse where the custodian is asking for
->>>>> someone to try and do the re-sync, and everyone else will assist with
->>>>> testing on other platforms, but the re-sync hasn't happened.  Can we
->>>>> please get someone from AMD to attempt the re-sync?
->>>>
->>>> I would like to say that we have someone to do it. But I simply don't have
->>>> that person.
->>>
->>> That is the big problem we face, yes.  Eugen, I think you said you were
->>> going to try and find time to do a re-sync, did you end up getting any?
->>>
->>
->>
->> Hi Tom,
->>
->> Unfortunately at the moment I am working on a different project, so I do not
->> see any perspective to do this in the near future, although I would like to
->> do it and to help.
->> It may be the case that a company investing into an engineer to work on this
->> would be the only way.
->>
->> In any case, do you think Marek would accept doing this incrementally , e.g.
->> now the driver is synced with 3.10, it would be easier to increment to 4.1
->> as a first step ?
+> From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Date: Tue, 17 Oct 2023 10:55:07 +0200
 > 
-> Incremental updates feels like it might be less of a daunting path to
-> me, so I'd be agreeable.  Marek?
+> Forward and backward compatibility of Linux kernel device-trees is
+> sometimes missing. One solution approach is to load a kernel specific
+> device-tree. This can either be done via a U-Boot scripts (like the one
+> generated by Debian package flash-kernel or by a boot loader like GRUB.
+> The boot loader approach currently requires to know the device-tree name
+> before first boot which makes it unusable for generic images.
 
-I am fine with that obviously, in fact, I am fine with anything which is 
-not "pick a random patch from the middle of kernel git log, submit it, 
-make the driver into a mess of partial patch backports".
+Even if the device trees are compatile, we often see that additonal
+nodes get added at a later stage.  So the ability to load a more
+complete device tree for the OS is useful and means a user doesn't
+necessarily need to update U-Boot to make additional devices work in
+their OS.
+
+> Expose the device-tree file name as EFI variable FdtFile.
+> This will allow bootloaders to load a kernel specific device-tree.
+
+Right.  I'm considering adding support for loading device trees to the
+OpenBSD bootloader and this feature would be really useful since it
+would allow me to automagically load the right device tree from the
+root filesystem of the OS.
+
+Is my understanding right that this is a null-terminated (8-bit) ASCII
+string?  Can this variable be documented somewhere, maybe together
+with the EFI_DT_FIXUP_PROTOCOL?
+
+
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_loader/efi_setup.c | 26 ++++++++++++++++++++++++++
+>  1 file changed, 26 insertions(+)
+> 
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index e6de685e87..b24feb94dc 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -26,6 +26,27 @@ void __weak allow_unaligned(void)
+>  {
+>  }
+>  
+> +/**
+> + * efi_init_fdtfile() - set EFI variable FdtFile
+> + *
+> + * Return:	status code
+> + */
+> +static efi_status_t efi_init_fdtfile(void)
+> +{
+> +	char *val;
+> +
+> +	val = env_get("fdtfile");
+> +	if (!val)
+> +		return EFI_SUCCESS;
+> +
+> +	return efi_set_variable_int(u"FdtFile",
+> +				    &efi_u_boot_guid,
+> +				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> +				    EFI_VARIABLE_RUNTIME_ACCESS |
+> +				    EFI_VARIABLE_READ_ONLY,
+> +				    strlen(val) + 1, val, false);
+> +}
+> +
+>  /**
+>   * efi_init_platform_lang() - define supported languages
+>   *
+> @@ -250,6 +271,11 @@ efi_status_t efi_init_obj_list(void)
+>  	if (ret != EFI_SUCCESS)
+>  		goto out;
+>  
+> +	/* Define EFI variable FdtFile */
+> +	ret = efi_init_fdtfile();
+> +	if (ret != EFI_SUCCESS)
+> +		goto out;
+> +
+>  	/* Indicate supported features */
+>  	ret = efi_init_os_indications();
+>  	if (ret != EFI_SUCCESS)
+> -- 
+> 2.40.1
+> 
+> 
