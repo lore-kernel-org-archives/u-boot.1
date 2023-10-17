@@ -4,78 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7D98CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 13:40:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B31ECDB482
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 13:50:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A57B86D9C;
-	Tue, 17 Oct 2023 15:40:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 73792865D0;
+	Tue, 17 Oct 2023 15:50:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UZaZhhgA";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Rx46krBV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B8A5486D9C; Tue, 17 Oct 2023 15:40:15 +0200 (CEST)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9D98386BB4; Tue, 17 Oct 2023 15:50:10 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9F6B86E14
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 15:40:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3A63865A2
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 15:50:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-d9a3d737d66so6006296276.2
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 06:40:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697550007; x=1698154807; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iCvcgJO0TrWaHDAUV+nLw9r2CSqAT0gz3074j7eyhkM=;
- b=UZaZhhgA0lyDpFVTWT70qrfMuTMdeWH7TQaR4bPx3R/IrNZVVKQisOcMCh24DC5cTN
- QQNRv9hSKFubDnt/+SmdWRp5hG0k6H2PzCg+S9lItC30jph5kKUfg+FW6JcPYEod0FrZ
- WQ8im3OGPL7JwiVp8i8Ottm7O8S0j2edkMFgc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697550007; x=1698154807;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iCvcgJO0TrWaHDAUV+nLw9r2CSqAT0gz3074j7eyhkM=;
- b=bY9G7ha1ZxoN/sHMwalEsBJ91TFpYDT9bZ5kFrL6NrYZlNymFVudlUVHa1ub6R1vez
- QmehE68w62D8tTEK4vzqrzxdoMtGp1Xh6sI+DqAlQRYqKz1n551R5z+JfxuPu85pEtqq
- kg01LLK5+sJniBncOZPY+jfw3hbB5myBZbMou4CrYOJunyVm8UUT4ttuQKVVEbpQtCSq
- fK4fzgMJV4nmJR/t8qexECYTdI6cRgEVVUa3tL2g7NvWtjXjCoLUh1SzEi5pMfJQVLp6
- MPnABAsygjQZ261X8qMTVMshawc54FgDdZSTsn8FLrM6OYc6wkQ9ozll6RUPoU0qSASg
- L3tw==
-X-Gm-Message-State: AOJu0YyCCP0hE/w6oAvnyPegwSGAUcPSaVzcZvFdo3xUL7LmLOYFfIuQ
- fOmD+AbHeRh4xV6uN4q0I4RCWg==
-X-Google-Smtp-Source: AGHT+IHDRO8g3rZEErj5X2yBBcOdklfzpKxtIshgJqTB3mUaKcj2yF5bYypIqOtkvzGq5MNOGnNsaw==
-X-Received: by 2002:a5b:d44:0:b0:d9a:c391:503 with SMTP id
- f4-20020a5b0d44000000b00d9ac3910503mr1967544ybr.3.1697550007346; 
- Tue, 17 Oct 2023 06:40:07 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- u13-20020a258f8d000000b00d8140b7e641sm508074ybl.18.2023.10.17.06.40.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 Oct 2023 06:40:06 -0700 (PDT)
-Date: Tue, 17 Oct 2023 09:40:05 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [PATCH v3 12/32] env: Split out non-command code into a new file
-Message-ID: <20231017134005.GV3119521@bill-the-cat>
-References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-13-sjg@chromium.org>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from workstation5.fritz.box
+ (ip-178-202-040-247.um47.pools.vodafone-ip.de [178.202.40.247])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id BFA693F6F5; 
+ Tue, 17 Oct 2023 13:50:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1697550604;
+ bh=e4J2Q8Z7R1AYpQogEZcCaQHzgC2+Gk51WEjO+1kg68k=;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version;
+ b=Rx46krBVLHSQUPIxiB2mGXH+pXz7gggeWoxdtkEwSYpv2ucT/J2ZgczAqe5hJcutQ
+ Tl3lJ9n+i7dLy4oaHQd+KFyLn2TZlMQ4p5+lDv9BQBcaJxlXcoML6vtwWc/HNmSDpd
+ KUTRnqn00sqXI8jkNP2+shiKKlnHqbnSSOwZW1RLNKJceRe0+Pl2keZmoBIGRCHpYr
+ IJ3pqGeZWctlDJEFjXskp9Zf2xAWawvI8bKwJVJf8KFZUyEVgDsnuFwfXEC0sqXsRi
+ nUJ/DW+OCwbfIg2G19Rkvpa9pt6lPG1yIK/UpqVwBx162CYcPlb4B0HCKfrohmvPGK
+ QZu3Hn3YcNSwQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 1/1] efi_loader: expose the device-tree file name
+Date: Tue, 17 Oct 2023 15:49:51 +0200
+Message-Id: <20231017134951.26672-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uCY11sA0L5EQnJkn"
-Content-Disposition: inline
-In-Reply-To: <20231016222835.596572-13-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,61 +69,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Forward and backward compatibility of Linux kernel device-trees is
+sometimes missing. One solution approach is to load a kernel specific
+device-tree. This can either be done via a U-Boot scripts (like the one
+generated by Debian package flash-kernel or by a boot loader like GRUB.
+The boot loader approach currently requires to know the device-tree name
+before first boot which makes it unusable for generic images.
 
---uCY11sA0L5EQnJkn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Expose the device-tree file name as EFI variable FdtFile.
+This will allow bootloaders to load a kernel specific device-tree.
 
-On Mon, Oct 16, 2023 at 04:28:03PM -0600, Simon Glass wrote:
+The variable will not be exposed on ACPI based systems or if the
+environment variable fdtfile is not defined.
 
-> It is not possible to set environment variables without having
-> CONFIG_CMD_NVEDIT enabled. When CONFIG_CMDLINE is disabled, we need a
-> way to set variables.
->=20
-> Split the setting code out into its own file, so that env_set() is
-> available even when CONFIG_CMDLINE is not. If it is never called, the
-> code will be dropped at link time.
->=20
-> Update the Makefile rule to only include the env commands when
-> CONFIG_CMD_NVEDIT is enabled.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> (no changes since v1)
->=20
->  cmd/Makefile           |   2 +-
->  cmd/nvedit.c           | 122 ++-----------------------------------
->  env/Makefile           |   1 +
->  env/env_set.c          | 132 +++++++++++++++++++++++++++++++++++++++++
->  include/env_internal.h |  23 +++++++
->  5 files changed, 161 insertions(+), 119 deletions(-)
->  create mode 100644 env/env_set.c
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	Use a unique GUID to enable future U-Boot independent
+	standardization.
+	Do not try to add the variable on ACPI based systems.
+---
+ include/efi_loader.h       |  5 +++++
+ lib/efi_loader/efi_setup.c | 30 ++++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+)
 
-This feels like it's partly but not entirely correct.  We need to split
-cmd/nvedit.c in to cmd/env.c and env/nvedit.c instead I think.  And keep
-in mind that SPL + ENV (and so - CMDLINE I believe) does work today.
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index e24410505f..2faa1c191c 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -152,6 +152,11 @@ static inline efi_status_t efi_launch_capsules(void)
+ 	EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
+ 		 0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
+ 
++/* Vendor GUID for the FdtFile variable */
++#define VENDOR_FDTFILE_GUID \
++	EFI_GUID(d45dde69, 0x3bd6, 0x40e0, \
++		 0x90, 0xd5, 0x6b, 0x60, 0x6a, 0xa5, 0x77, 0x30)
++
+ /* Use internal device tree when starting UEFI application */
+ #define EFI_FDT_USE_INTERNAL NULL
+ 
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index e6de685e87..71bcde645b 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -17,6 +17,8 @@
+ 
+ efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
+ 
++efi_guid_t vendor_fdtfile_guid = VENDOR_FDTFILE_GUID;
++
+ /*
+  * Allow unaligned memory access.
+  *
+@@ -26,6 +28,27 @@ void __weak allow_unaligned(void)
+ {
+ }
+ 
++/**
++ * efi_init_fdtfile() - set EFI variable FdtFile
++ *
++ * Return:	status code
++ */
++static efi_status_t efi_init_fdtfile(void)
++{
++	char *val;
++
++	val = env_get("fdtfile");
++	if (!val)
++		return EFI_SUCCESS;
++
++	return efi_set_variable_int(u"FdtFile",
++				    &vendor_fdtfile_guid,
++				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
++				    EFI_VARIABLE_RUNTIME_ACCESS |
++				    EFI_VARIABLE_READ_ONLY,
++				    strlen(val) + 1, val, false);
++}
++
+ /**
+  * efi_init_platform_lang() - define supported languages
+  *
+@@ -250,6 +273,13 @@ efi_status_t efi_init_obj_list(void)
+ 	if (ret != EFI_SUCCESS)
+ 		goto out;
+ 
++	/* Define EFI variable FdtFile */
++	if (!CONFIG_IS_ENABLED(GENERATE_ACPI_TABLE)) {
++		ret = efi_init_fdtfile();
++		if (ret != EFI_SUCCESS)
++			goto out;
++	}
++
+ 	/* Indicate supported features */
+ 	ret = efi_init_os_indications();
+ 	if (ret != EFI_SUCCESS)
+-- 
+2.40.1
 
---=20
-Tom
-
---uCY11sA0L5EQnJkn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUujrQACgkQFHw5/5Y0
-tywLRQv+KU3JCxqgfyxIRxlVuEfO3zQq8LaEV/J+Z55rkyRiu6Uv6AlCronc/DnT
-v4etBW0Jyy4q3QqH1p/ZtKiNJojxyzMOmUCyah/wtke1uCH4ylioicx2EwpVQJV1
-XfPG36Rh51LacDcqbax+hFJvYdGUi5v3mIImIWeTS+8zasfvEJDIQdbCwZM/DSYA
-gt8JejVFMcNDFwtwGCnzTGIjSiNHAezB7et0qgawm4gAskCIM1R1pWwMfi2sLaX8
-B3+YSEDLO3qFw+Kpl+b401uaY3AhMAHKr/IBtf7AxJ/oxTm2gPguNr9JOzlc7IP3
-Xljj7YcXuqnSMV2LgJ7kTBOAFpw7sgRcTi0eFMjjfrMSiMYnr/Btf12uDhD8Hzt/
-cuRixy7iW4HfXJ5OeRrmmragqgYFQGwtPF35U3YLyEPfM+3LKO6SqZjxxCZG38oT
-lXomfduND2spPibNqA7DoMH8RYPcI2GsILQS2SEATKRrG9vdINzC3tVvR3zD3mNH
-QAtsRR5W
-=NY1B
------END PGP SIGNATURE-----
-
---uCY11sA0L5EQnJkn--
