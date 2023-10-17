@@ -4,129 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2A11CDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 11:27:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 477B2CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 12:00:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C76C86E1C;
-	Tue, 17 Oct 2023 13:27:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 3A80386BA6;
+	Tue, 17 Oct 2023 14:00:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="MmtoiEee";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c3//Rqns";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 982B886E47; Tue, 17 Oct 2023 13:27:43 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20702.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7d00::702])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 32A1386B05; Tue, 17 Oct 2023 14:00:24 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5942B86DF5
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 13:27:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3B7886BF2
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 14:00:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=FgNGttMMU+kvijqOCdyF5qhJ/b7HDYZJOh/qBBHerWBdkTXZNNiA2B+7WiLEICbzcxpDm12WKbnp+t7tMsDklpxGOl8snjl+gWoqLe7u3q4M1xszlLeg1/b6VmQulcFfbPnNJVj4tBGifjTVGJ7b38Xeu34CgMLwpWJ/txHC6j0WuLicp9Aqo/hVjej7pTj8cLGRYmwI7hyalMA2Q3eTyL3epTY97gNaVLXhqLZQ8zsWeFtlbYrtrhupbmDZOM2yP8GGnqeXJh4didU5BwGi7XG3m7n8IAm2pNCqsnooSLUOkotJ8hVKWTz4ME6P0IOk0rwVSDIUi3IatPPZ75LRCA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VqfEHxlH7NWJm1bm7aAaelTzvgRMQAFrt8hDZtpNRcI=;
- b=eBxLftioPZ7CDtdGldKeuX40ZgzkRc5cQZqdf9O12ZQBvgR6jG6Vlq31Dp8DdXYPwNw7oa0BCP0UM8nAs6sIJUAsWu2iDzcdZbVKTIsgR/MS9ZBw6Sgsb8TQ2ac4AWrIC97UJ7+IK9t/XpJgao7rc/4FyuU5twF9NjBGOmn0lgkql+aYQpQcaufEDOuX+KRbx7JwsuiPOAQ6grYUoHVuS8Dy3fhhy8uDxjPxrk8afP/mwSrdUxVarpPkkZVyjf5BzEO5vdQJBEDJ1PG9y6RTHvvkYf2tFWl6Pa6bDT6dY9yXhGxfeqpVN1YS1LgWAnaIh3MdxfUS6Pzmc8KG8f2yTA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VqfEHxlH7NWJm1bm7aAaelTzvgRMQAFrt8hDZtpNRcI=;
- b=MmtoiEeenf9HFpFpeZEknBx7l4gozHiie4fW4shm7SoKdGW7FNvrpbslfdFmFKmnOBD7ADitNDPOSFCV53dB7IpdKjy1sUsUnXiRh+MruuSussvk8oWmp6aNXOpwz4psFzncKyFaOX+OfqWdkEh1zTm7Wr+odKRcCtjTCg//ibw=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:45a::14)
- by AS2PR10MB7156.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:60c::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6907.21; Tue, 17 Oct
- 2023 11:27:39 +0000
-Received: from DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5]) by DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::52ba:4d74:6ab:aa5%7]) with mapi id 15.20.6886.034; Tue, 17 Oct 2023
- 11:27:38 +0000
-Message-ID: <1eae0688-cda0-4537-a1f7-a11f61a27146@prevas.dk>
-Date: Tue, 17 Oct 2023 13:27:35 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] kbuild: use which $(DTC) as a dependency
-Content-Language: en-US, da
-To: Richard Marko <srk@48.io>, u-boot@lists.denx.de,
- Tom Rini <trini@konsulko.com>
-References: <20231017104453.2121276-1-srk@48.io>
-From: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-In-Reply-To: <20231017104453.2121276-1-srk@48.io>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AM8P191CA0021.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:20b:21a::26) To DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:45a::14)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-5079f9ec8d9so4247804e87.0
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 05:00:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697544021; x=1698148821; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=omShJlaERikxCHbMhQbx0vL7spls/aqnlOsjUSeGuME=;
+ b=c3//Rqns3u4va2SJWD8/pjX8w9XHKXE2NKYgg/29RM0U5cUzMP8L6DT31H06bm0Gce
+ 5eWp1Xd/mrFJWCh40Qxy7l2mYbIsWBRwWR5cmdkVn3pQRsaANcUshCu7t115Kv3Wc18h
+ OAP2nXf65ZcDpofdXpdkFTlW89/XXf7Q85eYHuGex8dLY6SZxVdK++JGESe0g4up2AfI
+ knBAJBPCEW5puxhvKQ8ikdrcgLzndkKjhONM0tOUIJB5FO6osfRVIItaBF3/vvFsng5A
+ aegLcHY6+/o6ItpTVFdph6j3BqYp+HzqCLFrJBsgwZockHl1qB+OsYLJnb9WZ3414fYZ
+ KYeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697544021; x=1698148821;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=omShJlaERikxCHbMhQbx0vL7spls/aqnlOsjUSeGuME=;
+ b=jVcll38nOCApmdPbQRvwX78pHHmHzZnF1xuJAQZHaIr+V1Q+WdoewLqEzv3JUokv+2
+ PLpoAmZBgV5mDqlUD9vqRSdSo7J6OoD83AIowAXzaHnew3H1Dqe7mdAoPlmjZEJ7dtRH
+ gSMw2jklAkOQ/rxntHQu0hMrtsBsMMiUQjbfNQGgmfc4ZNFrf3tcxeqNe/smYoxgnpG5
+ y/kN7mdkkkGIKL+jsrLonViieePzJaPXypjh9w2WDXVWmfALi0fPX0wQZR/Vr7USg4vA
+ t7ZN61COpUqDx8Ve2LPq1VTjAULsFVCK22pNPDgG5fd1JvxWFeQ7aOlNPS9EVsuWY31b
+ bO7Q==
+X-Gm-Message-State: AOJu0YwKW6GMSbv9v8WgTH50xoyT3bnHEdKZofMylPU8CGk24DtlGXct
+ OuGb3TQxu1G8ejpKlnGzAM5Y9BWD6RWbpn7qG/nzUQYaNl5n8FqN7nSuMQ==
+X-Google-Smtp-Source: AGHT+IHpBhvQdb9gVSjd5CSF6XdeIwMy7aplRiscDQbXtDrODg1Dpf9d30/TNzqeLkuc3hi5h/+KUrC75rEpA1rTIqg=
+X-Received: by 2002:a05:6512:1106:b0:502:e0dd:628b with SMTP id
+ l6-20020a056512110600b00502e0dd628bmr736606lfg.32.1697544020714; Tue, 17 Oct
+ 2023 05:00:20 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB9PR10MB7100:EE_|AS2PR10MB7156:EE_
-X-MS-Office365-Filtering-Correlation-Id: d54bcee0-d8b3-4ea9-6af7-08dbcf0411a7
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: xtS89RksKg4QTmlphYpq1ycBjBmMMVmJAm8tHbuHRQoF6Q0Xh7SB03AeP6ydDCerIr3CiAe2Ok+V5x+pcN+LtRUEw7A1qKHMKuvkM6w6XGBqqSV5JeAjkJLzyj9+q1RBgieGDPGR2XxJZKiFzpEe+t9kk3ayskODEYzJp7lf0RtcJ5MPHywPePIJzzTOCWWOx6p80GePKBz6VId3c87LAvXA7oDN7KNGsbFTXuAWS6XAVEXpiaegNx5PPC3UyXD5G/DGZ65aLGIPrfolZFi8vUB5Vpuayza8NhSW3xc/0x7apK8UHZxu8dYmMJGVVydvWYaaJLiqqKacl4X491PiynaOWvfnL3T4jZKEtmk1Zb1KL9HNrVpzLkX9pmFcgdwG5z39oOgrAAaOjN7iq2BRyrkQmd2HulDiCCLXRJMn+BQjxMLTEv68oz0sbREocLerm79f+NbMBQXXHq/lNObdfFRzaBcCBA1JDLRW4M50R1Uo4DxNrb/jgH0+p3GtMNiyMOY3noooxcMY8vVIWn7PIPU+S1TsQCapHhweBAx0koC9x0RgD90hxzT9IuqX+9/CjvgBhTGnnQiHhca7ONbIMHInL+A7D4iXcXnB20yYT/s6nESKKWex/H2rluDXf+fYjyaOkmbe11RBJDnLf/SXqA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(136003)(396003)(366004)(376002)(39850400004)(346002)(230922051799003)(1800799009)(451199024)(186009)(64100799003)(6666004)(38100700002)(6506007)(6512007)(2616005)(26005)(478600001)(31686004)(66556008)(66476007)(316002)(8976002)(8936002)(110136005)(41300700001)(8676002)(66946007)(6486002)(2906002)(86362001)(31696002)(5660300002)(44832011)(36756003)(45980500001)(43740500002);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZzhwcmxWQTFGY1JPbWl6bTVZRWxxVFFtMVFhZTdPZkVjaWVIZXEwL29lRUhq?=
- =?utf-8?B?UWhhdmlLMFZ3c3ZmdEVEVWYyYTZDeHhHUmJYQm92TlBuQmRzNVpNUFRhR0o2?=
- =?utf-8?B?alVzaTd6dUJmYnhxUjhMeE5kdEliRVV5ODY3U0x0ckRYckQvZEI3KytMZmlU?=
- =?utf-8?B?cXRZZzk0MmZmdWRXMDhTUWh5WEw5a3YydXNLaDlIWHl4cjFMNU5EQ0pXS05u?=
- =?utf-8?B?cjhUaVpWRG9CVnZOVWgzU0twRW5ZMWhvd1dXV2VVQzVGZ0pncExBNEwxbm9s?=
- =?utf-8?B?N3NmazdEYUtYV2lCRTI5bERmcEt4RzdYVldHT0VycVlZUWExSnVqR1BxM28y?=
- =?utf-8?B?blZQOXhHTEdseG9RODFhc1JJTkVHZUU0aEQrc2piOWFxTUFpMkNtYUxoZmg1?=
- =?utf-8?B?aktLTmhod0wrWDlOUnhPREx2WmVmdWlMOEtObk1sYjBjZUhsTGdQR3FoK3lv?=
- =?utf-8?B?UHFwaTZMaHY5L1hodEdoRUg3bURkL1ZIaXNSQnhFQXZodk1ncDdiV3UzRCs2?=
- =?utf-8?B?ZlNNNU5HU04yY2IwMHpBaWRvQjBtR3dlUENHY0NRbVVMcVJjSzJhRm9mb2pV?=
- =?utf-8?B?QmVTcGRBOUFnay9uSTltdEo3YXI5WFdkL3VsMllXbEFJeTlZazZVSUxRNUox?=
- =?utf-8?B?RGhXMkZIUU51SGNGTHZ6dkxiOHFYemRndzZwMytWbEZSaVFFNmU2SmIwZms3?=
- =?utf-8?B?T1RQOWhva2V0WWxnd2NsRGZqRFBqV1hTVDUxZHpBMjZMM2oyaWxibDZXSjVs?=
- =?utf-8?B?cUhGTzVEU3kzeTRjM1YyVWVDTTkxU0pGY3gwSEtNZlFYUlk1UngvbkU0UUQx?=
- =?utf-8?B?VEl6ZitKQ2VkZWpoQzE0akI2eWhEeHBTY0VpVmV4cHJzaDlpWW1QQnRNSUJo?=
- =?utf-8?B?WW5ob3VsdktYR1IvNUR5K1pNUlBtcVIvRHQyNnZpNlhZVFpwTTROK3hlbEUz?=
- =?utf-8?B?cS9vTC83cnFDNk8zMlZyYWtaRFlud3VkbUh4dk9BRnBGSTc5VGdaT3pYdVF6?=
- =?utf-8?B?K3JtSWNIZ09GSlg3T0czbEJMYzQ1ZlBpOVBXWktueE93Nm0yWXFaSDF0VWxI?=
- =?utf-8?B?ZWxiSjd2SkdGcW9ZcXNSYmlnSVdRci9KSU42Zm5HY1haeXJQKzJ3R0tXNVU2?=
- =?utf-8?B?TEl0VlI2TVFFV0ozdjBXQnFyZmp2bXhNcU1uV1A4YTdiNGRISlJjc01SN2Np?=
- =?utf-8?B?b1Y3VGNhQ2ZZWG9oOUk1czZLTGsvemszUEpiVUtFaTkvTGlRVHIyWVdIQWRF?=
- =?utf-8?B?UkhEd0lBZ25iazdyOHhhSWc1NGlmZ3ZtRVpqY2pwenpJOWYxVzFTY3pVWnRC?=
- =?utf-8?B?a1JSTmlUZkpxdkhUWVd6d3NuZ3EzbmFPcHVid2Fxc0xNajMwZkIwd2psalJm?=
- =?utf-8?B?TXZ2bW1CNFptUUxKYkxmOHROSW14WXlGa0hkWFE1eGZMbzZUYm5kTWhaYlBG?=
- =?utf-8?B?ZGc4T3ZUcU9ETXNZdWMyeitFT0djYXdydmp0ZDVrblIveTNWUFhzSm1MVFdO?=
- =?utf-8?B?eGRLVEFBamM3YXludXFQUHV1bDNQL01PUnlEWFJFZjRTeFJqeTJ2SDY4aWtE?=
- =?utf-8?B?MmFGY1FTKzFEQUt5SXkwLzQ0WWNhN2gza0tqNEJ4c3Jkb2dCVXdEdVlGMStX?=
- =?utf-8?B?RS9Ldzk5dlVrTWJyWWVuK0hRWkVmNHZGenY3bXJucG5hQk5RR3NvRng3SXJm?=
- =?utf-8?B?M2VZclJ4Q2Y1ZTZrc1ZxSVRteGJieEUrWmMybUlEdmhLam55Q0FHUUhkTUtn?=
- =?utf-8?B?M25odFJtdWowN0VpZytoR3RCWWVpR21Gb2Z5MGMvUmI2Znh3M1RJSTBxN2lu?=
- =?utf-8?B?NVFCSGhocnJpdFNQY3BqR0RyQVBnY1pib0l5eVVBTk5PVlhoVEFJUk52aExB?=
- =?utf-8?B?dE5OMXN2L2kzek15ZU9veWpLRk5ISkdPNjY3RzlrUGJkeEhwdkVmRGs2TmpX?=
- =?utf-8?B?dmN1L28vV2Eyb0cvWlBZdmk5YVJEMUpsdk1mQUVkdjdDZFU4Tnh6eFB6bXI3?=
- =?utf-8?B?elI1WXpEbEhtNHVuWCttdVR0NUdlVzdtdWtRdUpiOGlRbWEzNG5tdDI3NFJH?=
- =?utf-8?B?aThiOWFTU3c5MHUxVzR0UGd6VWlVT28xQmZPZVZVcWQ2TnFHYzJBS09qanNF?=
- =?utf-8?B?SzdaTXpaSUNTazFvYTMrRzY5TUlVN0F6WDZQVmRtU1pPMm9IR09pUkhra0F1?=
- =?utf-8?B?bWc9PQ==?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: d54bcee0-d8b3-4ea9-6af7-08dbcf0411a7
-X-MS-Exchange-CrossTenant-AuthSource: DB9PR10MB7100.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Oct 2023 11:27:38.7423 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YEnVBXS5gkTULOjLJmDzhGCcg7X+hY7sqGkWcWEl3FaaaZVqmuJTS5raA9RAvAQJUfq788CPsx0CN3PHgSv/Y/aQway76hN5Sbb931lFuLA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB7156
+References: <20231017085507.12094-1-heinrich.schuchardt@canonical.com>
+ <CAC_iWjLgt0USVOQxp6WE_1edxMYMdGzfhvEFM67e91m-_iYn-A@mail.gmail.com>
+ <cf0e5002-223e-4777-ab6f-654747c516b1@canonical.com>
+ <CAC_iWjJ41LUzR-1GV4MCvgBADqB9Ba-hHT+7M2BEsQC_uz3-Lg@mail.gmail.com>
+ <794f1510-72bb-4463-b1f1-18c9e06d2d94@canonical.com>
+In-Reply-To: <794f1510-72bb-4463-b1f1-18c9e06d2d94@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 17 Oct 2023 14:59:44 +0300
+Message-ID: <CAC_iWjLgCvk-FRBgLNtPUgGX3KRjcBGFS8YEX0aor6bArRhzJQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: expose the device-tree file name
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -143,49 +89,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17/10/2023 12.44, Richard Marko wrote:
-> If we try to build using external dtc using
-> 
->> make DTC=dtc
-> 
-> we get a confusing error like
-> 
->> make[2]: *** No rule to make target 'arch/x86/dts/bayleybay.dtb',
->> needed by 'dtbs'.  Stop.
-> 
-> Workaround is to use
-> 
->> make DTC=$( which dtc )
-> 
-> which gives make a full path, so the dependency
-> is satisfied.
-> 
-> This was introduced by commit
-> d50af66 kbuild: add dtc as dependency on .dtb files
-> 
-> and we extend it so it calls which automatically
-> (similar to scripts/dtc-version.sh)
+Hi Heinrich,
 
+On Tue, 17 Oct 2023 at 13:12, Heinrich Schuchardt <
+heinrich.schuchardt@canonical.com> wrote:
 
-Let's please not deviate from linux Kbuild unless we absolutely have to.
-In this case, passing an absolute path works just fine, and is AFAICT
-the only documented way to pass DTC. E.g. doc/build/gcc.rst has
+> On 17.10.23 11:49, Ilias Apalodimas wrote:
+> >
+> >
+> > On Tue, 17 Oct 2023 at 12:23, Heinrich Schuchardt
+> > <heinrich.schuchardt@canonical.com
+> > <mailto:heinrich.schuchardt@canonical.com>> wrote:
+> >
+> >     On 17.10.23 11:14, Ilias Apalodimas wrote:
+> >      > Hi Heinrich,
+> >      >
+> >      > On Tue, 17 Oct 2023 at 11:55, Heinrich Schuchardt
+> >      > <heinrich.schuchardt@canonical.com
+> >     <mailto:heinrich.schuchardt@canonical.com>
+> >      > <mailto:heinrich.schuchardt@canonical.com
+> >     <mailto:heinrich.schuchardt@canonical.com>>> wrote:
+> >      >
+> >      >     Forward and backward compatibility of Linux kernel
+> >     device-trees is
+> >      >     sometimes missing. One solution approach is to load a kernel
+> >     specific
+> >      >     device-tree. This can either be done via a U-Boot scripts
+> >     (like the one
+> >      >     generated by Debian package flash-kernel or by a boot loader
+> >     like GRUB.
+> >      >     The boot loader approach currently requires to know the
+> >     device-tree name
+> >      >     before first boot which makes it unusable for generic images.
+> >      >
+> >      >     Expose the device-tree file name as EFI variable FdtFile.
+> >      >     This will allow bootloaders to load a kernel specific
+> >     device-tree.
+> >      >
+> >      >     Signed-off-by: Heinrich Schuchardt
+> >      >     <heinrich.schuchardt@canonical.com
+> >     <mailto:heinrich.schuchardt@canonical.com>
+> >      >     <mailto:heinrich.schuchardt@canonical.com
+> >     <mailto:heinrich.schuchardt@canonical.com>>>
+> >      >     ---
+> >      >       lib/efi_loader/efi_setup.c | 26 ++++++++++++++++++++++++++
+> >      >       1 file changed, 26 insertions(+)
+> >      >
+> >      >     diff --git a/lib/efi_loader/efi_setup.c
+> >     b/lib/efi_loader/efi_setup.c
+> >      >     index e6de685e87..b24feb94dc 100644
+> >      >     --- a/lib/efi_loader/efi_setup.c
+> >      >     +++ b/lib/efi_loader/efi_setup.c
+> >      >     @@ -26,6 +26,27 @@ void __weak allow_unaligned(void)
+> >      >       {
+> >      >       }
+> >      >
+> >      >     +/**
+> >      >     + * efi_init_fdtfile() - set EFI variable FdtFile
+> >      >     + *
+> >      >     + * Return:     status code
+> >      >     + */
+> >      >     +static efi_status_t efi_init_fdtfile(void)
+> >      >     +{
+> >      >     +       char *val;
+> >      >     +
+> >      >     +       val = env_get("fdtfile");
+> >      >     +       if (!val)
+> >      >     +               return EFI_SUCCESS;
+> >      >     +
+> >      >     +       return efi_set_variable_int(u"FdtFile",
+> >      >     +                                   &efi_u_boot_guid,
+> >      >     +
+> >       EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> >      >     +
+>  EFI_VARIABLE_RUNTIME_ACCESS |
+> >      >
+> >      >
+> >      > Why is runtime access needed?  Wouldn't the choice be done before
+> >      > ExitBootServices?
+> >
+> >
+> >     Having runtime access will allow to use the content of the variable
+> to
+> >     write a devicetree command to grub.cfg or to copy the relevant
+> >     device-tree to a predefined location.
+> >
+> >     As GRUB cannot read EFI variables, yet, this would be the easiest
+> >     short-term approach.
+> >
+> > Do you mean to write EFI variables?  If you want GRUB to be able to do
+> > that, wouldn't it be better to use a generic GUID instead of the U-Boot
+> one?
+>
+> No, I meant read. It is U-Boot writing the variable.
+>
+> Concerning the GUID the UEFI 2.10 specification requires a unique
+> VendorGuid other than EFI_GLOBAL_VARIABLE.
+>
+> If we think about adding a recommendation to the EBBR, it might make
+> sense to use a GUID other than a U-Boot specific one (at the expense of
+> 16 bytes of code).
+>
+> Best regards
+>
+> Heinrich
+>
 
-    DTC=/usr/bin/dtc make
+Ok, I like the idea of standardizing it, since GRUB needs to pick this up
+eventually.
+I guess we can use the u-boot GUID until is there, so
 
-as example.
-
-[And if we do this, then at the very least this should also be done for
-the .dtbo rule and wherever else $(DTC) is used. But I'm really not a
-fan of calling out to $(shell which ...) in the rule itself. Perhaps if
-it was done just once, near DTC/DTC_IN_TREE, something like (not real
-make syntax I think)
-
-ifneq ($(DTC), $(DTC_IN_TREE))
-DTC := $(shell which $(DTC))
-endif
-
-But I don't think we should be doing this at all.]
-
-Rasmus
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
