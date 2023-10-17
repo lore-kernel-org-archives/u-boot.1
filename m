@@ -4,49 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9A0ECDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 04:54:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEF59CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 04:54:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 138C3865A2;
+	by phobos.denx.de (Postfix) with ESMTP id 92DAF86C65;
 	Tue, 17 Oct 2023 06:54:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20DB386C47; Tue, 17 Oct 2023 06:53:51 +0200 (CEST)
-Received: from fd01.gateway.ufhost.com (fd01.gateway.ufhost.com
- [61.152.239.71]) by phobos.denx.de (Postfix) with ESMTP id 8DF4E86BC8
+ id 393D186BD6; Tue, 17 Oct 2023 06:53:52 +0200 (CEST)
+Received: from ex01.ufhost.com (ex01.ufhost.com [61.152.239.75])
+ by phobos.denx.de (Postfix) with ESMTP id 8AAA6865A2
  for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 06:53:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kuanlim.lee@starfivetech.com
-Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
+Received: from EXMBX165.cuchost.com (unknown [175.102.18.54])
  (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
- by fd01.gateway.ufhost.com (Postfix) with ESMTP id 14F1324DFFB;
- Tue, 17 Oct 2023 12:53:42 +0800 (CST)
-Received: from EXMBX168.cuchost.com (172.16.6.78) by EXMBX166.cuchost.com
- (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 17 Oct
- 2023 12:53:42 +0800
-Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX168.cuchost.com
- (172.16.6.78) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 17 Oct
+ (Client CN "EXMBX165", Issuer "EXMBX165" (not verified))
+ by ex01.ufhost.com (Postfix) with ESMTP id 4555224E26D
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 12:53:41 +0800 (CST)
+Received: from EXMBX167.cuchost.com (172.16.6.77) by EXMBX165.cuchost.com
+ (172.16.6.75) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 17 Oct
  2023 12:53:41 +0800
+Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX167.cuchost.com
+ (172.16.6.77) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Tue, 17 Oct
+ 2023 12:53:40 +0800
 Received: from EXMBX066.cuchost.com ([fe80::5947:9245:907e:339f]) by
  EXMBX066.cuchost.com ([fe80::5947:9245:907e:339f%17]) with mapi id
- 15.00.1497.044; Tue, 17 Oct 2023 12:53:41 +0800
+ 15.00.1497.044; Tue, 17 Oct 2023 12:53:40 +0800
 From: KuanLim.Lee <kuanlim.lee@starfivetech.com>
-To: Simon Glass <sjg@google.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, WeiLiang Lim
+To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Yuklin Soo <yuklin.soo@starfivetech.com>, WeiLiang Lim
  <weiliang.lim@starfivetech.com>
-Subject: RE: [PATCH] timer: starfive: Add Starfive timer support
-Thread-Topic: [PATCH] timer: starfive: Add Starfive timer support
-Thread-Index: AQHZ6stHTX8h/cMJ4kWKnVQw6HRiBbA4dEuAgADxmiCAFC+hEA==
-Date: Tue, 17 Oct 2023 04:53:41 +0000
-Message-ID: <865c077aa69e4a3fa47b3b138f63b54d@EXMBX066.cuchost.com>
-References: <20230919073049.1418-1-kuanlim.lee@starfivetech.com>
- <CAPnjgZ0L++Mc+P3xOBetaiB_ziXVQ5JAnSHjKunYqODQRMrwSA@mail.gmail.com>
- <ee1bf93e2a0a40c9b46cce9f7672433a@EXMBX066.cuchost.com>
-In-Reply-To: <ee1bf93e2a0a40c9b46cce9f7672433a@EXMBX066.cuchost.com>
+Subject: RE: [PATCH] mmc: sdhci-cadence: Add support for Cadence sdmmc v6
+Thread-Topic: [PATCH] mmc: sdhci-cadence: Add support for Cadence sdmmc v6
+Thread-Index: AQHZ9cqKI7p0yL84mEWNYHgjCJAB3LBNfxQQ
+Date: Tue, 17 Oct 2023 04:53:40 +0000
+Message-ID: <dc2b29d1903746038737ba5ff8c3ccc9@EXMBX066.cuchost.com>
+References: <20231003072320.2008-1-kuanlim.lee@starfivetech.com>
+In-Reply-To: <20231003072320.2008-1-kuanlim.lee@starfivetech.com>
 Accept-Language: en-US, zh-CN
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -54,8 +52,8 @@ X-MS-TNEF-Correlator:
 x-ms-exchange-transport-fromentityheader: Hosted
 x-originating-ip: [202.190.98.67]
 x-yovoleruleagent: yovoleflag
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -73,135 +71,590 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgU2ltb24sDQoNClBsZWFzZSBiZSByZW1pbmRlZCB0aGF0IHRvIGdpdmUgc29tZSByZXZpZXcg
-aWYgaXQgc3RpbGwgaGFzIHNvbWUgaXNzdWVzLg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
-LS0tDQo+IEZyb206IEt1YW5MaW0uTGVlDQo+IFNlbnQ6IFdlZG5lc2RheSwgT2N0b2JlciA0LCAy
-MDIzIDU6NDkgUE0NCj4gVG86ICdTaW1vbiBHbGFzcycgPHNqZ0Bnb29nbGUuY29tPg0KPiBDYzog
-dS1ib290QGxpc3RzLmRlbnguZGU7IFdlaUxpYW5nIExpbSA8d2VpbGlhbmcubGltQHN0YXJmaXZl
-dGVjaC5jb20+DQo+IFN1YmplY3Q6IFJFOiBbUEFUQ0hdIHRpbWVyOiBzdGFyZml2ZTogQWRkIFN0
-YXJmaXZlIHRpbWVyIHN1cHBvcnQNCj4gDQo+IEhpIFNpbW9uLA0KPiANCj4gPiAtLS0tLU9yaWdp
-bmFsIE1lc3NhZ2UtLS0tLQ0KPiA+IEZyb206IFNpbW9uIEdsYXNzIDxzamdAZ29vZ2xlLmNvbT4N
-Cj4gPiBTZW50OiBXZWRuZXNkYXksIE9jdG9iZXIgNCwgMjAyMyAxMDoxMSBBTQ0KPiA+IFRvOiBL
-dWFuTGltLkxlZSA8a3VhbmxpbS5sZWVAc3RhcmZpdmV0ZWNoLmNvbT4NCj4gPiBDYzogdS1ib290
-QGxpc3RzLmRlbnguZGU7IFdlaUxpYW5nIExpbSA8d2VpbGlhbmcubGltQHN0YXJmaXZldGVjaC5j
-b20+DQo+ID4gU3ViamVjdDogUmU6IFtQQVRDSF0gdGltZXI6IHN0YXJmaXZlOiBBZGQgU3RhcmZp
-dmUgdGltZXIgc3VwcG9ydA0KPiA+DQo+ID4gT24gVHVlLCAxOSBTZXB0IDIwMjMgYXQgMDY6MDgs
-IEt1YW4gTGltIExlZQ0KPiA+IDxrdWFubGltLmxlZUBzdGFyZml2ZXRlY2guY29tPg0KPiA+IHdy
-b3RlOg0KPiA+ID4NCj4gPiA+IEFkZCB0aW1lciBkcml2ZXIgaW4gU3RhcmZpdmUgU29DLiBJdCBp
-cyBhbiB0aW1lciB0aGF0IG91dHNpZGUgb2YgQ1BVDQo+ID4gPiBjb3JlIGFuZCBpbnNpZGUgU3Rh
-cmZpdmUgU29DLg0KPiA+ID4NCj4gPiA+IFNpZ25lZC1vZmYtYnk6IEt1YW4gTGltIExlZSA8a3Vh
-bmxpbS5sZWVAc3RhcmZpdmV0ZWNoLmNvbT4NCj4gPiA+IFJldmlld2VkLWJ5OiBXZWkgTGlhbmcg
-TGltIDx3ZWlsaWFuZy5saW1Ac3RhcmZpdmV0ZWNoLmNvbT4NCj4gPiA+IC0tLQ0KPiA+ID4gIGRy
-aXZlcnMvdGltZXIvS2NvbmZpZyAgICAgICAgICB8ICA3ICsrKw0KPiA+ID4gIGRyaXZlcnMvdGlt
-ZXIvTWFrZWZpbGUgICAgICAgICB8ICAxICsNCj4gPiA+ICBkcml2ZXJzL3RpbWVyL3N0YXJmaXZl
-LXRpbWVyLmMgfCA5NA0KPiA+ID4gKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKw0K
-PiA+ID4gIDMgZmlsZXMgY2hhbmdlZCwgMTAyIGluc2VydGlvbnMoKykNCj4gPiA+ICBjcmVhdGUg
-bW9kZSAxMDA2NDQgZHJpdmVycy90aW1lci9zdGFyZml2ZS10aW1lci5jDQo+ID4NCj4gPiBSZXZp
-ZXdlZC1ieTogU2ltb24gR2xhc3MgPHNqZ0BjaHJvbWl1bS5vcmc+DQo+ID4NCj4gPiBuaXRzIGJl
-bG93DQo+IFdoYXQgYXJlIHRoZSBuaXRzPw0KPiBIb3cgZG8gdGhlIG5pdHMgdG8gYmUgc29sdmVk
-Pw0KPiA+DQo+ID4gPg0KPiA+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdGltZXIvS2NvbmZpZyBi
-L2RyaXZlcnMvdGltZXIvS2NvbmZpZyBpbmRleA0KPiA+ID4gOTE1YjJhZjE2MC4uYTk4YmU5ZGZh
-ZSAxMDA2NDQNCj4gPiA+IC0tLSBhL2RyaXZlcnMvdGltZXIvS2NvbmZpZw0KPiA+ID4gKysrIGIv
-ZHJpdmVycy90aW1lci9LY29uZmlnDQo+ID4gPiBAQCAtMzI2LDQgKzMyNiwxMSBAQCBjb25maWcg
-WElMSU5YX1RJTUVSDQo+ID4gPiAgICAgICAgICAgU2VsZWN0IHRoaXMgdG8gZW5hYmxlIHN1cHBv
-cnQgZm9yIHRoZSB0aW1lciBmb3VuZCBvbg0KPiA+ID4gICAgICAgICAgIGFueSBYaWxpbnggYm9h
-cmRzIChheGkgdGltZXIpLg0KPiA+ID4NCj4gPiA+ICtjb25maWcgU1RBUkZJVkVfVElNRVINCj4g
-PiA+ICsgICAgICAgYm9vbCAiU3RhcmZpdmUgdGltZXIgc3VwcG9ydCINCj4gPiA+ICsgICAgICAg
-ZGVwZW5kcyBvbiBUSU1FUg0KPiA+ID4gKyAgICAgICBoZWxwDQo+ID4gPiArICAgICAgICAgU2Vs
-ZWN0IHRoaXMgdG8gZW5hYmxlIHN1cHBvcnQgZm9yIHRoZSB0aW1lciBmb3VuZCBvbg0KPiA+ID4g
-KyAgICAgICAgIFN0YXJmaXZlIFNvQy4NCj4gPg0KPiA+IFdoYXQgcmVzb2x1dGlvbiBpcyB0aGUg
-dGltZXI/IEhvdyBpcyBpdCBjbG9ja2VkPyBJcyB0aGVyZSBvbmx5IG9uZSBjaGFubmVsPw0KPiBU
-aW1lciB3aWxsIGJlIGRyaXZlbiBieSBjbG9jayBwdWxzZXMgZnJvbSBjbG9ja3MuIFRoZSBjbG9j
-a3MgYXJlIGRlZmluZWQgaW4NCj4gZGV2aWNlIHRyZWUuDQo+IEZvdXIgY2hhbm5lbHMgdGltZXIs
-IGVhY2ggdGltZXIgaGFzIG93biBjbG9jayBzb3VyY2UuDQo+IENsb2NrIHNvdXJjZSBmcmVxdWVu
-Y3kgaXMgZ290dGVuIGJ5IGNsa19nZXRfYnlfaW5kZXggKCkgYW5kIGNsa19nZXRfcmF0ZSgpLg0K
-PiBUaGUgdGltZXIgY291bnRlciByZWdpc3RlciBpcyBhIDMyYml0cyBzaXplIHJlZ2lzdGVyLg0K
-PiA+DQo+ID4gPiArDQo+ID4gPiAgZW5kbWVudQ0KPiA+ID4gZGlmZiAtLWdpdCBhL2RyaXZlcnMv
-dGltZXIvTWFrZWZpbGUgYi9kcml2ZXJzL3RpbWVyL01ha2VmaWxlIGluZGV4DQo+ID4gPiAxY2E3
-NDgwNWZkLi4xZWY4MTQ5NzBiIDEwMDY0NA0KPiA+ID4gLS0tIGEvZHJpdmVycy90aW1lci9NYWtl
-ZmlsZQ0KPiA+ID4gKysrIGIvZHJpdmVycy90aW1lci9NYWtlZmlsZQ0KPiA+ID4gQEAgLTM0LDMg
-KzM0LDQgQEAgb2JqLSQoQ09ORklHX01US19USU1FUikgICAgICAgICAgICAgICArPSBtdGtfdGlt
-ZXIubw0KPiA+ID4gIG9iai0kKENPTkZJR19NQ0hQX1BJVDY0Ql9USU1FUikgICAgICAgICs9IG1j
-aHAtcGl0NjRiLXRpbWVyLm8NCj4gPiA+ICBvYmotJChDT05GSUdfSU1YX0dQVF9USU1FUikgICAg
-Kz0gaW14LWdwdC10aW1lci5vDQo+ID4gPiAgb2JqLSQoQ09ORklHX1hJTElOWF9USU1FUikgICAg
-ICs9IHhpbGlueC10aW1lci5vDQo+ID4gPiArb2JqLSQoQ09ORklHX1NUQVJGSVZFX1RJTUVSKSAg
-ICs9IHN0YXJmaXZlLXRpbWVyLm8NCj4gPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3RpbWVyL3N0
-YXJmaXZlLXRpbWVyLmMNCj4gPiA+IGIvZHJpdmVycy90aW1lci9zdGFyZml2ZS10aW1lci5jIG5l
-dyBmaWxlIG1vZGUgMTAwNjQ0IGluZGV4DQo+ID4gPiAwMDAwMDAwMDAwLi44MTY0MDJmZGJmDQo+
-ID4gPiAtLS0gL2Rldi9udWxsDQo+ID4gPiArKysgYi9kcml2ZXJzL3RpbWVyL3N0YXJmaXZlLXRp
-bWVyLmMNCj4gPiA+IEBAIC0wLDAgKzEsOTQgQEANCj4gPiA+ICsvLyBTUERYLUxpY2Vuc2UtSWRl
-bnRpZmllcjogR1BMLTIuMCsNCj4gPiA+ICsvKg0KPiA+ID4gKyAqIENvcHlyaWdodCAyMDIyIFN0
-YXJGaXZlLCBJbmMuIEFsbCByaWdodHMgcmVzZXJ2ZWQuDQo+ID4gPiArICogICBBdXRob3I6IExl
-ZSBLdWFuIExpbSA8a3VhbmxpbS5sZWVAc3RhcmZpdmV0ZWNoLmNvbT4NCj4gPiA+ICsgKi8NCj4g
-PiA+ICsNCj4gPiA+ICsjaW5jbHVkZSA8Y29tbW9uLmg+DQo+ID4gPiArI2luY2x1ZGUgPGNsay5o
-Pg0KPiA+ID4gKyNpbmNsdWRlIDxkbS5oPg0KPiA+ID4gKyNpbmNsdWRlIDx0aW1lLmg+DQo+ID4g
-PiArI2luY2x1ZGUgPHRpbWVyLmg+DQo+ID4gPiArI2luY2x1ZGUgPGFzbS9pby5oPg0KPiA+ID4g
-KyNpbmNsdWRlIDxkbS9kZXZpY2UtaW50ZXJuYWwuaD4NCj4gPiA+ICsjaW5jbHVkZSA8bGludXgv
-ZXJyLmg+DQo+ID4gPiArDQo+ID4gPiArI2RlZmluZSAgICAgICAgU1RGX1RJTUVSX0lOVF9TVEFU
-VVMgICAgMHgwMA0KPiA+ID4gKyNkZWZpbmUgU1RGX1RJTUVSX0NUTCAgICAgICAgICAweDA0DQo+
-ID4gPiArI2RlZmluZSBTVEZfVElNRVJfTE9BRCAgICAgICAgIDB4MDgNCj4gPiA+ICsjZGVmaW5l
-IFNURl9USU1FUl9FTkFCTEUgICAgICAgMHgxMA0KPiA+ID4gKyNkZWZpbmUgU1RGX1RJTUVSX1JF
-TE9BRCAgICAgICAweDE0DQo+ID4gPiArI2RlZmluZSBTVEZfVElNRVJfVkFMVUUgICAgICAgICAg
-ICAgICAgMHgxOA0KPiA+ID4gKyNkZWZpbmUgU1RGX1RJTUVSX0lOVF9DTFIgICAgICAweDIwDQo+
-ID4gPiArI2RlZmluZSBTVEZfVElNRVJfSU5UX01BU0sgICAgIDB4MjQNCj4gPiA+ICsNCj4gPiA+
-ICtzdHJ1Y3Qgc3RhcmZpdmVfdGltZXJfcHJpdiB7DQo+ID4gPiArICAgICAgIHZvaWQgX19pb21l
-bSAqYmFzZTsNCj4gPiA+ICsgICAgICAgdTMyIHRpbWVyX3NpemU7DQo+ID4gPiArfTsNCj4gPiA+
-ICsNCj4gPiA+ICtzdGF0aWMgdTY0IG5vdHJhY2Ugc3RhcmZpdmVfZ2V0X2NvdW50KHN0cnVjdCB1
-ZGV2aWNlICpkZXYpIHsNCj4gPiA+ICsgICAgICAgc3RydWN0IHN0YXJmaXZlX3RpbWVyX3ByaXYg
-KnByaXYgPSBkZXZfZ2V0X3ByaXYoZGV2KTsNCj4gPiA+ICsNCj4gPiA+ICsgICAgICAgLyogUmVh
-ZCBkZWNyZW1lbnQgdGltZXIgdmFsdWUgYW5kIGNvbnZlcnQgdG8gaW5jcmVtZW50IHZhbHVlICov
-DQo+ID4gPiArICAgICAgIHJldHVybiBwcml2LT50aW1lcl9zaXplIC0gcmVhZGwocHJpdi0+YmFz
-ZSArDQo+ID4gPiArU1RGX1RJTUVSX1ZBTFVFKTsgfQ0KPiA+DQo+ID4gQXMgYW4gZW5oYW5jZW1l
-bnQsIHlvdSBjb3VsZCBwcm92aWRlIGEgdGltZXJfZWFybHlfZ2V0X2NvdW50KCkNCj4gPiBmdW5j
-dGlvbiBhbmQgYW4gZWFzbHkgc2V0dXAsIHNvIHlvdSBjYW4gdXNlIGJvb3RzdGFnZS4NCj4gPg0K
-PiBJcyB0aGlzIGEgbXVzdD8gSWYgc28sIEkgbXVzdCBkZWZpbmUgc29tZSBmaXhlZCBhZGRyZXNz
-IHRvIGdldCB0aGUgdGltZXIgY291bnQsDQo+IGVuYWJsZSB0aW1lciwgY2xvY2sgc291cmNlIGZy
-ZXF1ZW5jeSBiZWNhdXNlIEkgY2FuJ3QgZ2V0IGJhc2UgYWRkcmVzcyBhbmQNCj4gZnJlcXVlbmN5
-IGZyb20gdGhlIGRldmljZSB0cmVlIGluIGVhcmx5IHN0YWdlLg0KPiA+ID4gKw0KPiA+ID4gK3N0
-YXRpYyBjb25zdCBzdHJ1Y3QgdGltZXJfb3BzIHN0YXJmaXZlX29wcyA9IHsNCj4gPiA+ICsgICAg
-ICAgLmdldF9jb3VudCA9IHN0YXJmaXZlX2dldF9jb3VudCwgfTsNCj4gPiA+ICsNCj4gPiA+ICtz
-dGF0aWMgaW50IHN0YXJmaXZlX3Byb2JlKHN0cnVjdCB1ZGV2aWNlICpkZXYpIHsNCj4gPiA+ICsg
-ICAgICAgc3RydWN0IHRpbWVyX2Rldl9wcml2ICp1Y19wcml2ID0gZGV2X2dldF91Y2xhc3NfcHJp
-dihkZXYpOw0KPiA+ID4gKyAgICAgICBzdHJ1Y3Qgc3RhcmZpdmVfdGltZXJfcHJpdiAqcHJpdiA9
-IGRldl9nZXRfcHJpdihkZXYpOw0KPiA+ID4gKyAgICAgICBpbnQgdGltZXJfY2hhbm5lbDsNCj4g
-PiA+ICsgICAgICAgc3RydWN0IGNsayBjbGs7DQo+ID4gPiArICAgICAgIGludCByZXQ7DQo+ID4g
-PiArDQo+ID4gPiArICAgICAgIHByaXYtPmJhc2UgPSBkZXZfcmVhZF9hZGRyX3B0cihkZXYpOw0K
-PiA+ID4gKyAgICAgICBpZiAoSVNfRVJSKHByaXYtPmJhc2UpKQ0KPiA+DQo+ID4gaWYgKCFwcml2
-LT5iYXNlKQ0KPiA+ICAgICByZXR1cm4gLUVJTlZBTA0KPiA+DQo+IE5vdGVkLg0KPiA+ID4gKyAg
-ICAgICAgICAgICAgIHJldHVybiBQVFJfRVJSKHByaXYtPmJhc2UpOw0KPiA+ID4gKw0KPiA+ID4g
-KyAgICAgICB0aW1lcl9jaGFubmVsID0gZGV2X3JlYWRfdTMyX2RlZmF1bHQoZGV2LCAiY2hhbm5l
-bCIsIDApOw0KPiA+ID4gKyAgICAgICBwcml2LT5iYXNlID0gcHJpdi0+YmFzZSArICgweDQwICog
-dGltZXJfY2hhbm5lbCk7DQo+ID4gPiArDQo+ID4gPiArICAgICAgIC8qIEdldCBjbG9jayByYXRl
-IGZyb20gY2hhbm5lbCBzZWxlY3RlY2QqLw0KPiA+ID4gKyAgICAgICByZXQgPSBjbGtfZ2V0X2J5
-X2luZGV4KGRldiwgdGltZXJfY2hhbm5lbCwgJmNsayk7DQo+ID4gPiArICAgICAgIGlmIChyZXQp
-DQo+ID4gPiArICAgICAgICAgICAgICAgcmV0dXJuIHJldDsNCj4gPiA+ICsNCj4gPiA+ICsgICAg
-ICAgcmV0ID0gY2xrX2VuYWJsZSgmY2xrKTsNCj4gPiA+ICsgICAgICAgaWYgKHJldCkNCj4gPiA+
-ICsgICAgICAgICAgICAgICByZXR1cm4gcmV0Ow0KPiA+ID4gKyAgICAgICB1Y19wcml2LT5jbG9j
-a19yYXRlID0gY2xrX2dldF9yYXRlKCZjbGspOw0KPiA+ID4gKw0KPiA+ID4gKyAgICAgICAvKiBJ
-bml0aWF0ZSB0aW1lciwgY2hhbm5lbCAwICovDQo+ID4gPiArICAgICAgIC8qIFVubWFzayBJbnRl
-cnJ1cHQgTWFzayAqLw0KPiA+DQo+ID4gbXVsdGktbGluZSBjb21tZW50IHN0eWxlIGlzOg0KPiA+
-DQo+ID4gIC8qDQo+ID4gICAqIGxpbmUgMQ0KPiA+ICAgKiBsaW5lIDINCj4gPiAgICovDQo+ID4N
-Cj4gTm90ZWQuDQo+ID4gPiArICAgICAgIHdyaXRlbCgwLCBwcml2LT5iYXNlICsgU1RGX1RJTUVS
-X0lOVF9NQVNLKTsNCj4gPiA+ICsgICAgICAgLyogU2luZ2xlIHJ1biBtb2RlIFNldHRpbmcgKi8N
-Cj4gPiA+ICsgICAgICAgaWYgKGRldl9yZWFkX2Jvb2woZGV2LCAic2luZ2xlLXJ1biIpKQ0KPiA+
-ID4gKyAgICAgICAgICAgICAgIHdyaXRlbCgxLCBwcml2LT5iYXNlICsgU1RGX1RJTUVSX0NUTCk7
-DQo+ID4gPiArICAgICAgIC8qIFNldCBSZWxvYWQgdmFsdWUgKi8NCj4gPiA+ICsgICAgICAgcHJp
-di0+dGltZXJfc2l6ZSA9IGRldl9yZWFkX3UzMl9kZWZhdWx0KGRldiwgInRpbWVyLXNpemUiLA0K
-PiA+ID4gKyAweGZmZmZmZmZmKTsNCj4gPg0KPiA+IC0xVSAgPw0KPiA+DQo+IFdpbGwgcmVwbGFj
-ZSAweGZmZmZmZmZmIHRvIC0xVQ0KPiA+ID4gKyAgICAgICB3cml0ZWwocHJpdi0+dGltZXJfc2l6
-ZSwgcHJpdi0+YmFzZSArIFNURl9USU1FUl9MT0FEKTsNCj4gPiA+ICsgICAgICAgLyogRW5hYmxl
-IHRvIHN0YXJ0IHRpbWVyICovDQo+ID4gPiArICAgICAgIHdyaXRlbCgxLCBwcml2LT5iYXNlICsg
-U1RGX1RJTUVSX0VOQUJMRSk7DQo+ID4gPiArDQo+ID4gPiArICAgICAgIHJldHVybiAwOw0KPiA+
-ID4gK30NCj4gPiA+ICsNCj4gPiA+ICtzdGF0aWMgY29uc3Qgc3RydWN0IHVkZXZpY2VfaWQgc3Rh
-cmZpdmVfaWRzW10gPSB7DQo+ID4gPiArICAgICAgIHsgLmNvbXBhdGlibGUgPSAic3RhcmZpdmUs
-amg4MTAwLXRpbWVycyIgfSwNCj4gPiA+ICsgICAgICAgeyB9DQo+ID4gPiArfTsNCj4gPiA+ICsN
-Cj4gPiA+ICtVX0JPT1RfRFJJVkVSKGpoODEwMF9zdGFyZml2ZV90aW1lcikgPSB7DQo+ID4gPiAr
-ICAgICAgIC5uYW1lICAgICAgICAgICA9ICJqaDgxMDBfc3RhcmZpdmVfdGltZXIiLA0KPiA+DQo+
-IFdpbGwgdXNlIG5hbWUgIiBzdGFyZml2ZV90aW1lciIgaW5zdGVhZCBvZiAiamg4MTAwX3N0YXJm
-aXZlX3RpbWVyIg0KPiA+IFdoYXQgaXMgamg4MTAwID8gRG8geW91IG5lZWQgdGhhdD8NCj4gPg0K
-PiA+ID4gKyAgICAgICAuaWQgICAgICAgICAgICAgPSBVQ0xBU1NfVElNRVIsDQo+ID4gPiArICAg
-ICAgIC5vZl9tYXRjaCAgICAgICA9IHN0YXJmaXZlX2lkcywNCj4gPiA+ICsgICAgICAgLnByb2Jl
-ICAgICAgICAgID0gc3RhcmZpdmVfcHJvYmUsDQo+ID4gPiArICAgICAgIC5vcHMgICAgICAgICAg
-ICA9ICZzdGFyZml2ZV9vcHMsDQo+ID4gPiArICAgICAgIC5wcml2X2F1dG8gICAgICA9IHNpemVv
-ZihzdHJ1Y3Qgc3RhcmZpdmVfdGltZXJfcHJpdiksDQo+ID4gPiArfTsNCj4gPiA+IC0tDQo+ID4g
-PiAyLjM0LjENCj4gPiA+DQo+ID4NCj4gPiBSZWdhcmRzLA0KPiA+IFNpbW9uDQo=
+Hi maintainers,
+
+Could anyone of you help to review the patch?
+
+
+> -----Original Message-----
+> From: KuanLim.Lee <kuanlim.lee@starfivetech.com>
+> Sent: Tuesday, October 3, 2023 3:23 PM
+> To: u-boot@lists.denx.de
+> Cc: Yuklin Soo <yuklin.soo@starfivetech.com>; WeiLiang Lim
+> <weiliang.lim@starfivetech.com>; Kuan Lim Lee
+> <kuanlim.lee@linux.starfivetech.com>; KuanLim.Lee
+> <kuanlim.lee@starfivetech.com>
+> Subject: [PATCH] mmc: sdhci-cadence: Add support for Cadence sdmmc v6
+>=20
+> From: Kuan Lim Lee <kuanlim.lee@linux.starfivetech.com>
+>=20
+> Cadence SDMMC v6 controller has a lot of changes on initialize compared t=
+o v4
+> controller. PHY is needed by v6 controller.
+>=20
+> Signed-off-by: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+> Reviewed-by: Alex Soo <yuklin.soo@starfivetech.com>
+> Reviewed-by: Wei Liang Lim <weiliang.lim@starfivetech.com>
+> ---
+>  drivers/mmc/Kconfig              |  13 ++
+>  drivers/mmc/Makefile             |   1 +
+>  drivers/mmc/sdhci-cadence.c      |  63 ++-----
+>  drivers/mmc/sdhci-cadence.h      |  68 +++++++
+>  drivers/mmc/sdhci-cadence6-phy.c | 302
+> +++++++++++++++++++++++++++++++
+>  5 files changed, 396 insertions(+), 51 deletions(-)  create mode 100644
+> drivers/mmc/sdhci-cadence.h  create mode 100644 drivers/mmc/sdhci-
+> cadence6-phy.c
+>=20
+> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig index
+> de01b9687b..cec881d862 100644
+> --- a/drivers/mmc/Kconfig
+> +++ b/drivers/mmc/Kconfig
+> @@ -573,6 +573,19 @@ config MMC_SDHCI_CADENCE
+>=20
+>  	  If unsure, say N.
+>=20
+> +config MMC_SDHCI_CADENCE_V6
+> +	bool "SDHCI support for the Cadence SD/SDIO/eMMC controller &
+> driver version 6"
+> +	depends on BLK && DM_MMC
+> +	depends on MMC_SDHCI
+> +	depends on OF_CONTROL
+> +	select MMC_SDHCI_CADENCE
+> +	help
+> +	  This selects the Cadence SD/SDIO/eMMC driver version 6.
+> +
+> +	  If you have a controller with this interface, say Y here.
+> +
+> +	  If unsure, say N.
+> +
+>  config MMC_SDHCI_AM654
+>  	bool "SDHCI Controller on TI's Am654 devices"
+>  	depends on ARCH_K3
+> diff --git a/drivers/mmc/Makefile b/drivers/mmc/Makefile index
+> 2c65c4765a..cdcce55b8b 100644
+> --- a/drivers/mmc/Makefile
+> +++ b/drivers/mmc/Makefile
+> @@ -61,6 +61,7 @@ obj-$(CONFIG_MMC_SDHCI_ATMEL)		+=3D
+> atmel_sdhci.o
+>  obj-$(CONFIG_MMC_SDHCI_BCM2835)		+=3D bcm2835_sdhci.o
+>  obj-$(CONFIG_MMC_SDHCI_BCMSTB)		+=3D bcmstb_sdhci.o
+>  obj-$(CONFIG_MMC_SDHCI_CADENCE)		+=3D sdhci-cadence.o
+> +obj-$(CONFIG_MMC_SDHCI_CADENCE_V6)	+=3D sdhci-cadence6-phy.o
+>  obj-$(CONFIG_MMC_SDHCI_AM654)		+=3D am654_sdhci.o
+>  obj-$(CONFIG_MMC_SDHCI_IPROC)		+=3D iproc_sdhci.o
+>  obj-$(CONFIG_MMC_SDHCI_KONA)		+=3D kona_sdhci.o
+> diff --git a/drivers/mmc/sdhci-cadence.c b/drivers/mmc/sdhci-cadence.c in=
+dex
+> 327a05ad11..d7a270e74c 100644
+> --- a/drivers/mmc/sdhci-cadence.c
+> +++ b/drivers/mmc/sdhci-cadence.c
+> @@ -17,56 +17,7 @@
+>  #include <linux/libfdt.h>
+>  #include <mmc.h>
+>  #include <sdhci.h>
+> -
+> -/* HRS - Host Register Set (specific to Cadence) */
+> -#define SDHCI_CDNS_HRS04		0x10		/* PHY access port */
+> -#define   SDHCI_CDNS_HRS04_ACK			BIT(26)
+> -#define   SDHCI_CDNS_HRS04_RD			BIT(25)
+> -#define   SDHCI_CDNS_HRS04_WR			BIT(24)
+> -#define   SDHCI_CDNS_HRS04_RDATA		GENMASK(23, 16)
+> -#define   SDHCI_CDNS_HRS04_WDATA		GENMASK(15, 8)
+> -#define   SDHCI_CDNS_HRS04_ADDR			GENMASK(5, 0)
+> -
+> -#define SDHCI_CDNS_HRS06		0x18		/* eMMC control */
+> -#define   SDHCI_CDNS_HRS06_TUNE_UP		BIT(15)
+> -#define   SDHCI_CDNS_HRS06_TUNE			GENMASK(13, 8)
+> -#define   SDHCI_CDNS_HRS06_MODE			GENMASK(2, 0)
+> -#define   SDHCI_CDNS_HRS06_MODE_SD		0x0
+> -#define   SDHCI_CDNS_HRS06_MODE_MMC_SDR		0x2
+> -#define   SDHCI_CDNS_HRS06_MODE_MMC_DDR		0x3
+> -#define   SDHCI_CDNS_HRS06_MODE_MMC_HS200	0x4
+> -#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400	0x5
+> -#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400ES	0x6
+> -
+> -/* SRS - Slot Register Set (SDHCI-compatible) */
+> -#define SDHCI_CDNS_SRS_BASE		0x200
+> -
+> -/* PHY */
+> -#define SDHCI_CDNS_PHY_DLY_SD_HS	0x00
+> -#define SDHCI_CDNS_PHY_DLY_SD_DEFAULT	0x01
+> -#define SDHCI_CDNS_PHY_DLY_UHS_SDR12	0x02
+> -#define SDHCI_CDNS_PHY_DLY_UHS_SDR25	0x03
+> -#define SDHCI_CDNS_PHY_DLY_UHS_SDR50	0x04
+> -#define SDHCI_CDNS_PHY_DLY_UHS_DDR50	0x05
+> -#define SDHCI_CDNS_PHY_DLY_EMMC_LEGACY	0x06
+> -#define SDHCI_CDNS_PHY_DLY_EMMC_SDR	0x07
+> -#define SDHCI_CDNS_PHY_DLY_EMMC_DDR	0x08
+> -#define SDHCI_CDNS_PHY_DLY_SDCLK	0x0b
+> -#define SDHCI_CDNS_PHY_DLY_HSMMC	0x0c
+> -#define SDHCI_CDNS_PHY_DLY_STROBE	0x0d
+> -
+> -/*
+> - * The tuned val register is 6 bit-wide, but not the whole of the range =
+is
+> - * available.  The range 0-42 seems to be available (then 43 wraps aroun=
+d to 0)
+> - * but I am not quite sure if it is official.  Use only 0 to 39 for safe=
+ty.
+> - */
+> -#define SDHCI_CDNS_MAX_TUNING_LOOP	40
+> -
+> -struct sdhci_cdns_plat {
+> -	struct mmc_config cfg;
+> -	struct mmc mmc;
+> -	void __iomem *hrs_addr;
+> -};
+> +#include "sdhci-cadence.h"
+>=20
+>  struct sdhci_cdns_phy_cfg {
+>  	const char *property;
+> @@ -112,8 +63,11 @@ static int sdhci_cdns_write_phy_reg(struct
+> sdhci_cdns_plat *plat,  }
+>=20
+>  static int sdhci_cdns_phy_init(struct sdhci_cdns_plat *plat,
+> -				const void *fdt, int nodeoffset)
+> +			       const void *fdt, int nodeoffset)
+>  {
+> +	if (IS_ENABLED(CONFIG_MMC_SDHCI_CADENCE_V6))
+> +		return sdhci_cdns6_phy_init(plat,
+> SDHCI_CDNS_HRS06_MODE_SD);
+> +
+>  	const fdt32_t *prop;
+>  	int ret, i;
+>=20
+> @@ -163,6 +117,9 @@ static void sdhci_cdns_set_control_reg(struct
+> sdhci_host *host)
+>  	tmp &=3D ~SDHCI_CDNS_HRS06_MODE;
+>  	tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS06_MODE, mode);
+>  	writel(tmp, plat->hrs_addr + SDHCI_CDNS_HRS06);
+> +
+> +	if (IS_ENABLED(CONFIG_MMC_SDHCI_CADENCE_V6))
+> +		sdhci_cdns6_phy_init(plat, mode);
+>  }
+>=20
+>  static const struct sdhci_ops sdhci_cdns_ops =3D { @@ -172,6 +129,9 @@ s=
+tatic
+> const struct sdhci_ops sdhci_cdns_ops =3D {  static int
+> sdhci_cdns_set_tune_val(struct sdhci_cdns_plat *plat,
+>  				   unsigned int val)
+>  {
+> +	if (IS_ENABLED(CONFIG_MMC_SDHCI_CADENCE_V6))
+> +		return sdhci_cdns6_set_tune_val(plat, val);
+> +
+>  	void __iomem *reg =3D plat->hrs_addr + SDHCI_CDNS_HRS06;
+>  	u32 tmp;
+>  	int i, ret;
+> @@ -301,6 +261,7 @@ static int sdhci_cdns_probe(struct udevice *dev)  sta=
+tic
+> const struct udevice_id sdhci_cdns_match[] =3D {
+>  	{ .compatible =3D "socionext,uniphier-sd4hc" },
+>  	{ .compatible =3D "cdns,sd4hc" },
+> +	{ .compatible =3D "cdns,sd6hc" },
+>  	{ /* sentinel */ }
+>  };
+>=20
+> diff --git a/drivers/mmc/sdhci-cadence.h b/drivers/mmc/sdhci-cadence.h ne=
+w
+> file mode 100644 index 0000000000..2c42cff2f3
+> --- /dev/null
+> +++ b/drivers/mmc/sdhci-cadence.h
+> @@ -0,0 +1,68 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Copyright (C) 2022 Starfive.
+> + *   Author: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+> + */
+> +
+> +#ifndef SDHCI_CADENCE_H_
+> +#define SDHCI_CADENCE_H_
+> +
+> +/* HRS - Host Register Set (specific to Cadence) */
+> +/* PHY access port */
+> +#define SDHCI_CDNS_HRS04		0x10
+> +/* Cadence V4 HRS04 Description*/
+> +#define   SDHCI_CDNS_HRS04_ACK			BIT(26)
+> +#define   SDHCI_CDNS_HRS04_RD			BIT(25)
+> +#define   SDHCI_CDNS_HRS04_WR			BIT(24)
+> +#define   SDHCI_CDNS_HRS04_RDATA		GENMASK(23, 16)
+> +#define   SDHCI_CDNS_HRS04_WDATA		GENMASK(15, 8)
+> +#define   SDHCI_CDNS_HRS04_ADDR			GENMASK(5, 0)
+> +
+> +#define SDHCI_CDNS_HRS05		0x14
+> +
+> +/* eMMC control */
+> +#define SDHCI_CDNS_HRS06		0x18
+> +#define   SDHCI_CDNS_HRS06_TUNE_UP		BIT(15)
+> +#define   SDHCI_CDNS_HRS06_TUNE			GENMASK(13, 8)
+> +#define   SDHCI_CDNS_HRS06_MODE			GENMASK(2, 0)
+> +#define   SDHCI_CDNS_HRS06_MODE_SD		0x0
+> +#define   SDHCI_CDNS_HRS06_MODE_MMC_SDR		0x2
+> +#define   SDHCI_CDNS_HRS06_MODE_MMC_DDR		0x3
+> +#define   SDHCI_CDNS_HRS06_MODE_MMC_HS200	0x4
+> +#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400	0x5
+> +#define   SDHCI_CDNS_HRS06_MODE_MMC_HS400ES	0x6
+> +
+> +/* SRS - Slot Register Set (SDHCI-compatible) */
+> +#define SDHCI_CDNS_SRS_BASE		0x200
+> +
+> +/* Cadence V4 PHY Setting*/
+> +#define SDHCI_CDNS_PHY_DLY_SD_HS	0x00
+> +#define SDHCI_CDNS_PHY_DLY_SD_DEFAULT	0x01
+> +#define SDHCI_CDNS_PHY_DLY_UHS_SDR12	0x02
+> +#define SDHCI_CDNS_PHY_DLY_UHS_SDR25	0x03
+> +#define SDHCI_CDNS_PHY_DLY_UHS_SDR50	0x04
+> +#define SDHCI_CDNS_PHY_DLY_UHS_DDR50	0x05
+> +#define SDHCI_CDNS_PHY_DLY_EMMC_LEGACY	0x06
+> +#define SDHCI_CDNS_PHY_DLY_EMMC_SDR	0x07
+> +#define SDHCI_CDNS_PHY_DLY_EMMC_DDR	0x08
+> +#define SDHCI_CDNS_PHY_DLY_SDCLK	0x0b
+> +#define SDHCI_CDNS_PHY_DLY_HSMMC	0x0c
+> +#define SDHCI_CDNS_PHY_DLY_STROBE	0x0d
+> +
+> +/*
+> + * The tuned val register is 6 bit-wide, but not the whole of the range
+> +is
+> + * available.  The range 0-42 seems to be available (then 43 wraps
+> +around to 0)
+> + * but I am not quite sure if it is official.  Use only 0 to 39 for safe=
+ty.
+> + */
+> +#define SDHCI_CDNS_MAX_TUNING_LOOP	40
+> +
+> +struct sdhci_cdns_plat {
+> +	struct mmc_config cfg;
+> +	struct mmc mmc;
+> +	void __iomem *hrs_addr;
+> +};
+> +
+> +int sdhci_cdns6_phy_init(struct sdhci_cdns_plat *plat, u32 mode); int
+> +sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat, unsigned int
+> +val);
+> +
+> +#endif
+> diff --git a/drivers/mmc/sdhci-cadence6-phy.c b/drivers/mmc/sdhci-cadence=
+6-
+> phy.c
+> new file mode 100644
+> index 0000000000..dd3df27dc8
+> --- /dev/null
+> +++ b/drivers/mmc/sdhci-cadence6-phy.c
+> @@ -0,0 +1,302 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-platform_driver
+> +/*
+> + * Copyright (C) 2022 Starfive.
+> + *   Author: Kuan Lim Lee <kuanlim.lee@starfivetech.com>
+> + */
+> +
+> +#include <common.h>
+> +#include <dm.h>
+> +#include <asm/global_data.h>
+> +#include <dm/device_compat.h>
+> +#include <linux/bitfield.h>
+> +#include <linux/bitops.h>
+> +#include <linux/bug.h>
+> +#include <linux/io.h>
+> +#include <linux/iopoll.h>
+> +#include <linux/sizes.h>
+> +#include <linux/libfdt.h>
+> +#include <mmc.h>
+> +#include <sdhci.h>
+> +#include "sdhci-cadence.h"
+> +
+> +/* IO Delay Information */
+> +#define SDHCI_CDNS_HRS07		0X1C
+> +#define   SDHCI_CDNS_HRS07_RW_COMPENSATE		GENMASK(20,
+> 16)
+> +#define   SDHCI_CDNS_HRS07_IDELAY_VAL			GENMASK(4,
+> 0)
+> +
+> +#define SDHCI_CDNS_HRS09		0x24		/* PHY Control and
+> Status */
+> +#define   SDHCI_CDNS_HRS09_RDDATA_EN		BIT(16)
+> +#define   SDHCI_CDNS_HRS09_RDCMD_EN		BIT(15)
+> +#define   SDHCI_CDNS_HRS09_EXTENDED_WR_MODE	BIT(3)
+> +#define   SDHCI_CDNS_HRS09_EXTENDED_RD_MODE	BIT(2)
+> +#define   SDHCI_CDNS_HRS09_PHY_INIT_COMPLETE	BIT(1)
+> +#define   SDHCI_CDNS_HRS09_PHY_SW_RESET		BIT(0)
+> +
+> +#define SDHCI_CDNS_HRS10		0x28		/* SDCLK adjustment
+> */
+> +#define   SDHCI_CDNS_HRS10_HCSDCLKADJ		GENMASK(19, 16)
+> +
+> +#define SDHCI_CDNS_HRS16		0x40		/* CMD/DAT output
+> delay */
+> +
+> +/* PHY Special Function Registers */
+> +//#define DLL_PHY_REG_BASE		0x2000
+> +
+> +/* register to control the DQ related timing */
+> +#define PHY_DQ_TIMING_REG_ADDR		0x2000
+> +
+> +/* register to control the DQS related timing */
+> +#define PHY_DQS_TIMING_REG_ADDR		0x2004
+> +
+> +/* register to control the gate and loopback control related timing */
+> +#define PHY_GATE_LPBK_CTRL_REG_ADDR	0x2008
+> +
+> +/* register to control the Master DLL logic */
+> +#define PHY_DLL_MASTER_CTRL_REG_ADDR	0x200C
+> +
+> +/* register to control the Slave DLL logic */
+> +#define PHY_DLL_SLAVE_CTRL_REG_ADDR	0x2010
+> +#define PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY	GENMASK(31,
+> 24)
+> +#define PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY
+> 	GENMASK(7, 0)
+> +
+> +/* register to control the global settings for PHY */
+> +#define PHY_CTRL_REG_ADDR		0x2080
+> +
+> +struct phy_reg {
+> +	u32 phy_dqs_timing;
+> +	u32 phy_gate_lpbk_ctrl;
+> +	//u32 phy_dll_master_ctrl;
+> +	u32 phy_dll_slave_ctrl;
+> +	//u32 phy_ctrl;
+> +	u32 phy_dq_timing;
+> +	//cp_sw_half_cycle_shift; ASIC
+> +};
+> +
+> +struct controller_reg {
+> +	u32 hrs07;
+> +	u32 hrs09;
+> +	u32 hrs10;
+> +	u32 hrs16;
+> +};
+> +
+> +static struct phy_reg sd_ds_phy_cfg =3D {
+> +	0x00380004,
+> +	0x01A00040,
+> +	0x00000000,
+> +	0x00000001,
+> +};
+> +
+> +static struct phy_reg emmc_sdr_phy_cfg =3D {
+> +	0x00380004,
+> +	0x01A00040,
+> +	0x00000000,
+> +	0x00000001,
+> +};
+> +
+> +static struct phy_reg emmc_ddr_phy_cfg =3D {
+> +	0x00380004,
+> +	0x01A00040,
+> +	0x00000000,
+> +	0x10000001,
+> +};
+> +
+> +static struct phy_reg emmc_hs200_phy_cfg =3D {
+> +	0x00380004,
+> +	0x01A00040,
+> +	0x00DADA00,
+> +	0x00000001,
+> +};
+> +
+> +static struct phy_reg emmc_hs400_phy_cfg =3D {
+> +	0x00280004,
+> +	0x01A00040,
+> +	0x00DAD800,
+> +	0x00000001,
+> +};
+> +
+> +static struct controller_reg sd_ds_ctrl_cfg =3D {
+> +	0x00080000,
+> +	0x0001800C,
+> +	0x00020000,
+> +	0x00000000,
+> +};
+> +
+> +static struct controller_reg emmc_sdr_ctrl_cfg =3D {
+> +	0x00080000,
+> +	0x0001800C,
+> +	0x00030000,
+> +	0x00000000,
+> +};
+> +
+> +static struct controller_reg emmc_ddr_ctrl_cfg =3D {
+> +	0x00090001,
+> +	0x0001800C,
+> +	0x00020000,
+> +	0x11000001,
+> +};
+> +
+> +static struct controller_reg emmc_hs200_ctrl_cfg =3D {
+> +	0x00090000,
+> +	0x00018000,
+> +	0x00080000,
+> +	0x00000000,
+> +};
+> +
+> +static struct controller_reg emmc_hs400_ctrl_cfg =3D {
+> +	0x00080000,
+> +	0x00018000,
+> +	0x00080000,
+> +	0x11000000,
+> +};
+> +
+> +static unsigned int sdhci_cdns6_read_phy_reg(struct sdhci_cdns_plat *pla=
+t,
+> +					     u32 addr)
+> +{
+> +	u32 data =3D 0;
+> +
+> +	writel(addr, plat->hrs_addr + SDHCI_CDNS_HRS04);
+> +	data =3D readl(plat->hrs_addr + SDHCI_CDNS_HRS05);
+> +	return data;
+> +}
+> +
+> +static void sdhci_cdns6_write_phy_reg(struct sdhci_cdns_plat *plat,
+> +				      u32 addr, u32 data)
+> +{
+> +	u32 readdat =3D 0;
+> +
+> +	writel(addr, plat->hrs_addr + SDHCI_CDNS_HRS04);
+> +	writel(data, plat->hrs_addr + SDHCI_CDNS_HRS05);
+> +	readdat =3D readl(plat->hrs_addr + SDHCI_CDNS_HRS05);
+> +
+> +	if (readdat !=3D data) {
+> +		pr_err("Error, %s: Writing failed!: address: 0x%x, value : 0x%x,
+> +		       readval: 0x%x\n", __func__, addr, data, readdat);
+> +	}
+> +}
+> +
+> +static int sdhci_cdns6_reset_phy_dll(struct sdhci_cdns_plat *plat,
+> +				     unsigned int reset)
+> +{
+> +	void __iomem *reg =3D plat->hrs_addr + SDHCI_CDNS_HRS09;
+> +	u32 tmp;
+> +	int ret;
+> +
+> +	tmp =3D readl(reg);
+> +	tmp &=3D ~SDHCI_CDNS_HRS09_PHY_SW_RESET;
+> +
+> +	if (reset)	/* Switch On DLL Reset */
+> +		tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS09_PHY_SW_RESET, 0);
+> +	else		/* Switch Off DLL Reset */
+> +		tmp |=3D FIELD_PREP(SDHCI_CDNS_HRS09_PHY_SW_RESET, 1);
+> +
+> +	writel(tmp, reg);
+> +
+> +	if (!reset) {
+> +		ret =3D readl_poll_timeout(reg, tmp,
+> +					 (tmp &
+> SDHCI_CDNS_HRS09_PHY_INIT_COMPLETE),
+> +					 3000);
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +int sdhci_cdns6_phy_init(struct sdhci_cdns_plat *plat, u32 mode) {
+> +	struct phy_reg *phy_cfgs;
+> +	struct controller_reg *ctrl_cfgs;
+> +	void __iomem *reg =3D NULL;
+> +	u32 tmp;
+> +	int ret;
+> +
+> +	switch (mode) {
+> +	case SDHCI_CDNS_HRS06_MODE_SD:
+> +		phy_cfgs =3D &sd_ds_phy_cfg;
+> +		ctrl_cfgs =3D &sd_ds_ctrl_cfg;
+> +		break;
+> +
+> +	case SDHCI_CDNS_HRS06_MODE_MMC_SDR:
+> +		phy_cfgs =3D &emmc_sdr_phy_cfg;
+> +		ctrl_cfgs =3D &emmc_sdr_ctrl_cfg;
+> +		break;
+> +
+> +	case SDHCI_CDNS_HRS06_MODE_MMC_DDR:
+> +		phy_cfgs =3D &emmc_ddr_phy_cfg;
+> +		ctrl_cfgs =3D &emmc_ddr_ctrl_cfg;
+> +		break;
+> +
+> +	case SDHCI_CDNS_HRS06_MODE_MMC_HS200:
+> +		phy_cfgs =3D &emmc_hs200_phy_cfg;
+> +		ctrl_cfgs =3D &emmc_hs200_ctrl_cfg;
+> +		break;
+> +
+> +	case SDHCI_CDNS_HRS06_MODE_MMC_HS400:
+> +		phy_cfgs =3D &emmc_hs400_phy_cfg;
+> +		ctrl_cfgs =3D &emmc_hs400_ctrl_cfg;
+> +		break;
+> +	}
+> +
+> +	/* Switch On the DLL Reset */
+> +	sdhci_cdns6_reset_phy_dll(plat, 1);
+> +
+> +	sdhci_cdns6_write_phy_reg(plat, PHY_DQS_TIMING_REG_ADDR,
+> +				  phy_cfgs->phy_dqs_timing);
+> +	sdhci_cdns6_write_phy_reg(plat, PHY_GATE_LPBK_CTRL_REG_ADDR,
+> +				  phy_cfgs->phy_gate_lpbk_ctrl);
+> +	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,
+> +				  phy_cfgs->phy_dll_slave_ctrl);
+> +
+> +	/* Switch Off the DLL Reset */
+> +	ret =3D sdhci_cdns6_reset_phy_dll(plat, 0);
+> +	if (ret) {
+> +		printf("sdhci_cdns6_reset_phy is not completed\n");
+> +		return ret;
+> +	}
+> +
+> +	/* Set PHY DQ TIMING control register */
+> +	sdhci_cdns6_write_phy_reg(plat, PHY_DQ_TIMING_REG_ADDR,
+> +				  phy_cfgs->phy_dq_timing);
+> +
+> +	/* Set HRS09 register */
+> +	reg =3D plat->hrs_addr + SDHCI_CDNS_HRS09;
+> +	tmp =3D readl(reg);
+> +	tmp &=3D ~(SDHCI_CDNS_HRS09_EXTENDED_WR_MODE |
+> +		 SDHCI_CDNS_HRS09_EXTENDED_RD_MODE |
+> +		 SDHCI_CDNS_HRS09_RDDATA_EN |
+> +		 SDHCI_CDNS_HRS09_RDCMD_EN);
+> +	tmp |=3D ctrl_cfgs->hrs09;
+> +	writel(tmp, reg);
+> +
+> +	/* Set HRS10 register */
+> +	reg =3D plat->hrs_addr + SDHCI_CDNS_HRS10;
+> +	tmp =3D readl(reg);
+> +	tmp &=3D ~SDHCI_CDNS_HRS10_HCSDCLKADJ;
+> +	tmp |=3D ctrl_cfgs->hrs10;
+> +	writel(tmp, reg);
+> +
+> +	/* Set HRS16 register */
+> +	reg =3D plat->hrs_addr + SDHCI_CDNS_HRS16;
+> +	tmp =3D ctrl_cfgs->hrs16;
+> +	writel(tmp, reg);
+> +
+> +	/* Set HRS07 register */
+> +	reg =3D plat->hrs_addr + SDHCI_CDNS_HRS07;
+> +	tmp =3D ctrl_cfgs->hrs07;
+> +	writel(tmp, reg);
+> +
+> +	return 0;
+> +}
+> +
+> +int sdhci_cdns6_set_tune_val(struct sdhci_cdns_plat *plat,
+> +			     unsigned int val)
+> +{
+> +	u32 tmp, tuneval;
+> +
+> +	tuneval =3D (val * 256) / SDHCI_CDNS_MAX_TUNING_LOOP;
+> +
+> +	tmp =3D sdhci_cdns6_read_phy_reg(plat,
+> PHY_DLL_SLAVE_CTRL_REG_ADDR);
+> +	tmp &=3D ~(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY |
+> +		 PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY);
+> +	tmp |=3D
+> FIELD_PREP(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_CMD_DELAY, tuneval) |
+> +		FIELD_PREP(PHY_DLL_SLAVE_CTRL_REG_READ_DQS_DELAY,
+> tuneval);
+> +	sdhci_cdns6_write_phy_reg(plat, PHY_DLL_SLAVE_CTRL_REG_ADDR,
+> tmp);
+> +
+> +	return 0;
+> +}
+> --
+> 2.34.1
+
