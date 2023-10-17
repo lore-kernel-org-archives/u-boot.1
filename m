@@ -4,54 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D55CCDB474
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 20:58:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1093CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 21:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1938C86F38;
-	Tue, 17 Oct 2023 22:58:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=hugovil.com
+	by phobos.denx.de (Postfix) with ESMTP id B681E86F51;
+	Tue, 17 Oct 2023 23:00:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=hugovil.com header.i=@hugovil.com header.b="x+hBbnLC";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P6w0t6Rt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABEEB86F3B; Tue, 17 Oct 2023 22:58:28 +0200 (CEST)
-Received: from mail.hugovil.com (mail.hugovil.com [162.243.120.170])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B8AD886F54; Tue, 17 Oct 2023 23:00:27 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1B5486F07
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 22:58:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1564B86EE0
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 23:00:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=hugovil.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hugo@hugovil.com
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=hugovil.com
- ; s=x;
- h=Subject:Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Cc:To
- :From:subject:date:message-id:reply-to;
- bh=PADb4eImSEkwEJqXicm6Ily61SWvVtITfvP5qDrAbTo=; b=x+hBbnLCESVG69Pz0ucLa9lF7i
- JPKjP909slQa1dMtog45/A/ge0Em+M5h/8ajJzE034mgRgu+K4CgxpgZd04nd3Osy5Is/YU8enU2c
- /zncUcyKwUQo0fWkEh+d7Ybwm/F8B14gMjqwYJxjiySK8t+dQXapV+2j+5fkLu2YJVrA=;
-Received: from modemcable168.174-80-70.mc.videotron.ca ([70.80.174.168]:54398
- helo=pettiford.lan) by mail.hugovil.com with esmtpa (Exim 4.92)
- (envelope-from <hugo@hugovil.com>)
- id 1qsr8r-0001E1-BY; Tue, 17 Oct 2023 16:58:18 -0400
-From: Hugo Villeneuve <hugo@hugovil.com>
-To: "Ariel D'Alessandro" <ariel.dalessandro@collabora.com>,
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: hugo@hugovil.com, Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- u-boot@lists.denx.de
-Date: Tue, 17 Oct 2023 16:58:15 -0400
-Message-Id: <20231017205816.318531-1-hugo@hugovil.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=minecraft2048@gmail.com
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2c50fbc218bso54825991fa.3
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 14:00:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697576423; x=1698181223; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fuVMn98iKp53vXbVj3IASYsK5qhOR2w16K/X8r1Ry38=;
+ b=P6w0t6RtrmC4UIV4Px1zod0VC4knNferzyVJ9kzvq7s4oo9nxN32EG8ks2keBJhMQb
+ VnCgIPwUnA3t9pAi9EXD/s6qPg9+SQfP4R535n00TKoNQkHNW2/+GxDfTzVWHJPaeXNd
+ 7edkmQNMcAatMOsRCn2H9qKgcvGOaTI2kJaVdOfXChaCI1tp4L9LzmpOQrLFLabSTp4R
+ WybuosLQx/cjZP5zsVXTf9/3Cn92t2fUSWAKwRBb45+IaDin8q3mC5/dxcOrxaw6CNYZ
+ dhaUxc221WLwTATu3XXqYu99o+XoryGp4BFfibAUZZJ1u4NppZ39ub/IxIcgm6ROGjSs
+ /1eA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697576423; x=1698181223;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fuVMn98iKp53vXbVj3IASYsK5qhOR2w16K/X8r1Ry38=;
+ b=W194OQyxk2n1JrlpSYKhyPUFs8Z6wRPKw0pfpQaM7WPLAWla817BcQm3JiFIFVpBjR
+ 8RHwWlx1ZL2mStNXUL2S11tumi5F9CxXsXK8q1+kf+v4nK5+tWJ6T1sw6AuYrphhBtn1
+ mCeIjYQOhZzDaYKJo7IMj1WOMDIpsL/MXRMNRKbXv84LqqOoW1BNJWUdwRaIT0QBQMmO
+ XErsCejoU7LvcABPgRFeTsQ8WSVhTACnLMy6TwCR9JzE2LQSy2w3QUrBcAi/Yj7VW3kF
+ vtzfE6KOn02MOp6dp9KbkegEPdt694RFEqSG/DMmuhYX8XS6GEXG7v84KzzLwcI7NN2H
+ 8PHg==
+X-Gm-Message-State: AOJu0YxEz9NKAmABP4lZV74kLm87QfgH06IFIRo7R6GhxJlQHNNVPWly
+ 8wEC6vhlZnDQKaRKWS/u3mIN1VuUQQerc/2TdDM=
+X-Google-Smtp-Source: AGHT+IHKCVKImY4UsbX2W34nkTcxNCLrGW1JRkf1su71UCq/ZmqxgCNqedQfk6/hjhpQffv/ko2Ihu4Jv6wS9Izr8Xs=
+X-Received: by 2002:a19:7616:0:b0:503:17fd:76bb with SMTP id
+ c22-20020a197616000000b0050317fd76bbmr2631084lff.39.1697576422799; Tue, 17
+ Oct 2023 14:00:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SA-Exim-Connect-IP: 70.80.174.168
-X-SA-Exim-Mail-From: hugo@hugovil.com
-Subject: [PATCH] arm: dts: imx8mn-var-som: Fix broken EEPROM read
-X-SA-Exim-Version: 4.2.1 (built Wed, 08 May 2019 21:11:16 +0000)
-X-SA-Exim-Scanned: Yes (on mail.hugovil.com)
+References: <CAJ1CVWj3zLjK=tJr=T73JzOyNbJgMjrPdchsxVk0bMsAPQ7d8w@mail.gmail.com>
+ <20231017081731.2u7qdmvj4a6bd724@GBR-5CG2373LKG.adwin.renesas.com>
+In-Reply-To: <20231017081731.2u7qdmvj4a6bd724@GBR-5CG2373LKG.adwin.renesas.com>
+From: Ignatius Rivaldi <minecraft2048@gmail.com>
+Date: Wed, 18 Oct 2023 08:00:10 +1100
+Message-ID: <CAJ1CVWhb9ZNd_hpmcogDXhzAFYw7BJrW01uSwrp=ys8FhvwLhg@mail.gmail.com>
+Subject: Re: Understanding how .config for uboot is generated in buildroot
+To: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: u-boot@lists.denx.de, xdrudis@tinet.cat
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,53 +87,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+On Tue, Oct 17, 2023 at 7:17=E2=80=AFPM Paul Barker <paul.barker.ct@bp.rene=
+sas.com>
+wrote:
 
-On branch WIP/17Oct2023, the EEPROM can no longer be read:
+> On Tue, Oct 17, 2023 at 04:35:20PM +1100, Ignatius Rivaldi wrote:
+> > Hi all,
+> >
+> > When I edit the config file in BR2_TARGET_UBOOT_CUSTOM_CONFIG_FILE in a
+> > buildroot recipe, how does the config statements from that file got
+> > converted into .config file in u-boot?
+> >
+> > The background is that we're using a custom buildroot config file at
+> here:
+> > https://github.com/kubos/kubos-linux-build/tree/master to build u-boot
+> for
+> > a space grade computer. When I added a new config statement
+> > (CONFIG_SD_SWITCH=3Dy) in the BR2_TARGET_UBOOT_CUSTOM_CONFIG_FILE, it
+> doesn't
+> > write the config statement to the .config file in the uboot build repo.
+> >
+> >  Unfortunately the company that owns that has been acquired several tim=
+es
+> > and all the engineers there already left, so I can't just ask them
+>
+> You're probably better off asking this on the buildroot mailing list.
+> See https://lists.buildroot.org/mailman/listinfo/buildroot.
+>
+> Best regards,
+> Paul
+>
 
-    U-Boot 2023.10-latest (Oct 17 2023 - 15:53:43 -0400)
-    CPU:   Freescale i.MX8MNano Quad rev1.0 at 1200 MHz
-    Reset cause: POR
-    Model: Variscite VAR-SOM-MX8MN Symphony evaluation board
-    var_read_som_eeprom: uclass_get_device_by_of_offset() failed: -19
-    initcall failed at call 000000004022207c (err=-19)
+Thanks for the pointer, I kind of solved this by adding CONFIG_SD_SWITCH to
+uboot kconfig definition file, and now when I added CONFIG_SD_SWITCH to the
+_config file it works.
+I'll ask about buildroot stuff on the buildroot mailing list after this.
 
-Convert EEPROM-related properties to bootph-all so that the EEPROM can
-also be read outside of SPL.
+The next problem is that the way Kubos implemented SD card slot switching
+is by calling into their own proprietary(?) binary blob through the
+standalone application thing:
+https://www.emblogic.com/blog/12/u-boot-standalone-applications/. What
+happens now is that Uboot is stuck at ## Starting application at
+0=C3=9721800000. What are the possible causes of this, and how do I start
+debugging this?
 
-Fixes: 9e644284ab81 ("dm: core: Report bootph-pre-ram/sram node as pre-reloc after relocation")
-Signed-off-by: Hugo Villeneuve <hvilleneuve@dimonoff.com>
----
- arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi b/arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi
-index e0caf3179ea..2bbc4a49418 100644
---- a/arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi
-+++ b/arch/arm/dts/imx8mn-var-som-symphony-u-boot.dtsi
-@@ -39,11 +39,11 @@
- };
- 
- &i2c1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_i2c1 {
--	bootph-pre-ram;
-+	bootph-all;
- };
- 
- &pinctrl_pmic {
-@@ -83,5 +83,5 @@
- };
- 
- &eeprom_som {
--	bootph-pre-ram;
-+	bootph-all;
- };
-
-base-commit: e65b5d35c9116485366bb08138043d51220551da
--- 
-2.39.2
-
+Fortunately Kubos gave us the source code for that binary blob before they
+go bankrupt, so we can tweak it
