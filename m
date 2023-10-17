@@ -4,59 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B947CDB482
-	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 12:35:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B49C0CDB474
+	for <u-boot@archiver.kernel.org>; Tue, 17 Oct 2023 12:45:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA8BD86C6E;
-	Tue, 17 Oct 2023 14:35:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2FDA686BAA;
+	Tue, 17 Oct 2023 14:44:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697546154;
-	bh=v5i9N4RqaEuq0//mpmfyVqw8sOnuBINvFwG4prSaZR4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Ne38rf63V3X1kh4S0sVqC+FrjRv6HeATX5FBY+D5idx7YMdNMwoXD3TBnv/3AowBi
-	 PfXZUcxgSkn90gz4depMPQ24LyPJjMaNFsQuvF+HXIt0PKpUZnagHZsR6U2EL1MTSr
-	 rIe8Si0ryR4SpBHXGNzkesL7YXOl0VFvJlPHljYI63t/h8/f93zw03mUvPM6TKBPHH
-	 FDbYt/1FzNNw0uXqLLpkDjwcCAfiA2WxJtJu8AX2sbXKkHHQImpKh6qgrKJwz4Tzqr
-	 mKVwrVUSm63I0KZpcH/E1X4ULxsEBwuzI1ML++k2preB7UX2B+HyojiTxPM2IUuVJN
-	 jSfyw5ZpgM9ug==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EA82486C6E; Tue, 17 Oct 2023 14:35:50 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C019586B81
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 14:35:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FlOyDO/k";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 5CDD686E37; Tue, 17 Oct 2023 14:44:58 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4S8tkB5zbwz9sZt;
- Tue, 17 Oct 2023 14:35:46 +0200 (CEST)
-Message-ID: <055092cc-3723-48fe-92a7-be7746274f71@denx.de>
-Date: Tue, 17 Oct 2023 14:35:45 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 2EAAA86BAA
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 14:44:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jbx6244@gmail.com
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-538e8eca9c1so9726907a12.3
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 05:44:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1697546695; x=1698151495; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NcJV99SNOv/PQ0DkkMQ0BekJnz0bz1POt6UAzQQb5wI=;
+ b=FlOyDO/k2PuUn0PClSnSI7lpMeCCKCFrL01pUVNC6ENah4XahVmNYiVrdG4+DbgsCW
+ LSt1KQ6SIqK3dZc0k7Pj0e1BZF6opLmKdTAIYLZEaQEyqDjDTDN2GsjeINjEU/NQ5J7C
+ UjyvI6CijDVUbNvGCNvHsW4n8Emw23FY+RxttlKp9XG1rnvgRlIjMjU5vSQdifa7Nu/S
+ xCHFNbJxUfo3biqv2JRh4rywBDImuI1BAON4XkSAdjUnwpJAh2a7PVGw8XPtmJA/y1b1
+ FFCOX0t6swNSXGRxUUPncP7wnoaJ9OcqxRGOfdy2gSOX9vINCl5A6EzJaDQKdne1nUY9
+ MUzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697546695; x=1698151495;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=NcJV99SNOv/PQ0DkkMQ0BekJnz0bz1POt6UAzQQb5wI=;
+ b=jMmYw3HOj7bRw2mXogbghiwSIw8kEyqLVO6yEHkAmWObhkoIM5tOXtwzcOx2WY6Ksg
+ 5DODYgg8vyQO8WEE+IEgBNrzcfs3SG7+rJrkWJFgqSxmmHmR4JK7CfVhsAbQJqSFmNMV
+ fODOqk8aHRu3WVCkYrvdyrkBxMHsvjmpNiNysLMnppZjL021UcIZy2z9M1zmZZ1au4KJ
+ iNNb/SzkZMR3Dl6FGpnuVWmjHTxiudroA2gTjaev2e5EftR77FDnr4qmRltDWj2J+ZsX
+ HzGWiE2e2PcFuzbrJ4MBr+gelPbqN0zUop6vnlSNNubVEjDapTGVmjwrV8TTyYrgjXhY
+ NVWQ==
+X-Gm-Message-State: AOJu0Yz8JjbvMUU04sjs0GjRds0CIL351IeY9SjMbfD10Qis6IJ4FgoA
+ TeNGDSKaIHpV0opWa5oY5YI=
+X-Google-Smtp-Source: AGHT+IF/SNKGSNRfSw/3NPslIVZnaJhbud28hSdTeei2cuXYdR4Zs21tSHrOxFSWWz25nLBwyFj/yQ==
+X-Received: by 2002:a05:6402:26cc:b0:53e:3584:d395 with SMTP id
+ x12-20020a05640226cc00b0053e3584d395mr1701555edd.34.1697546695478; 
+ Tue, 17 Oct 2023 05:44:55 -0700 (PDT)
+Received: from [192.168.2.1] (81-204-249-205.fixed.kpn.net. [81.204.249.205])
+ by smtp.gmail.com with ESMTPSA id
+ v23-20020a50d597000000b0053e2a64b5f8sm1159490edi.14.2023.10.17.05.44.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 17 Oct 2023 05:44:54 -0700 (PDT)
+Message-ID: <64400549-5a62-8079-cbd6-2a099c2b06ec@gmail.com>
+Date: Tue, 17 Oct 2023 14:44:53 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH 3/3] arm: mvebu: clearfog: Add defconfigs for eMMC booting
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.13.0
+Subject: Re: [PATCH v4 4/8] rockchip: block: blk-uclass: disable bounce buffer
+ support for rkmtd
+To: Simon Glass <sjg@chromium.org>
+Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
+References: <8c0f5bb6-0110-b7b5-3c40-2d8d98a94dfa@gmail.com>
+ <fd206328-2ffa-c174-179c-85f6428e5d9f@gmail.com>
+ <CAPnjgZ2bs2ZE87W71h_4V91M3gyCtCV7vbHVnGwGE+Hmt2LfuQ@mail.gmail.com>
 Content-Language: en-US
-To: Josua Mayer <josua@solid-run.com>, u-boot@lists.denx.de
-Cc: sjg@chromium.org, kabel@kernel.org
-References: <20231008124621.18803-1-josua@solid-run.com>
- <20231008124621.18803-4-josua@solid-run.com>
- <d9801245-eeba-4b54-9b38-7f3b25cdb6fd@denx.de>
- <54198537-f7ed-41d8-9395-8689cbb86b76@solid-run.com>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <54198537-f7ed-41d8-9395-8689cbb86b76@solid-run.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4S8tkB5zbwz9sZt
+From: Johan Jonker <jbx6244@gmail.com>
+In-Reply-To: <CAPnjgZ2bs2ZE87W71h_4V91M3gyCtCV7vbHVnGwGE+Hmt2LfuQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,353 +99,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Josua,
 
-On 10/17/23 09:51, Josua Mayer wrote:
-> Hi Stefan,
+
+On 10/16/23 23:54, Simon Glass wrote:
+> Hi Johan,
 > 
-> Am 16.10.23 um 10:37 schrieb Stefan Roese:
->> Hi Josua,
+> On Sun, 15 Oct 2023 at 16:33, Johan Jonker <jbx6244@gmail.com> wrote:
 >>
->> On 10/8/23 14:46, Josua Mayer wrote:
->>> Armada 388 can boot from either eMMC data, boot0 or boot1 partitions.
->>>
->>> data partition requires booting from LBA-4096 to avoid conflict with
->>> MBR. When booting from boot0/boot1 environment should be stored there
->>> respectively, too.
->>>
->>> Add 3 new defconfigs, for each eMMC partition:
->>> - clearfog_emmcboot0_defconfig
->>> - clearfog_emmcboot1_defconfig
->>> - clearfog_emmcdata_defconfig
+>> Disable bounce buffer support for rkmtd.
 >>
->> Do we really need new, separate defconfig files for those very similar
->> configurations? Or is there a way to detect this at runtime
-> I do not know, Pali Rohár might know.
-
-Pali is unfortunately not participating in U-Boot development any more.
-
-> We can skip patch 3 until some research has been done.
-
-Ok. Let's use this option for now.
-
->> or if not
->> possible to include a common defconfig file?
-> So, if the boot partition used to load u-boot by the boot-rom can be 
-> detected at runtime,
-> the specialisation of boot0/boot1 configs could be dropped.
-> That would still leave special case of u-boot offset on eMMC,
-> which is different between boot and data partitions, and also different 
-> to SD configuration.
+>> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
+>> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+>> ---
+>>
+>> Changed V3:
+>>   New patch
+>> ---
+>>  drivers/block/blk-uclass.c | 6 +++---
+>>  1 file changed, 3 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+>> index 30ad5bbb0024..ac1b43d757d8 100644
+>> --- a/drivers/block/blk-uclass.c
+>> +++ b/drivers/block/blk-uclass.c
+>> @@ -415,7 +415,7 @@ struct blk_bounce_buffer {
+>>
+>>  static int blk_buffer_aligned(struct bounce_buffer *state)
+>>  {
+>> -#if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
+>> +#if IS_ENABLED(CONFIG_BOUNCE_BUFFER) && !IS_ENABLED(CONFIG_RKMTD)
 > 
-> IMO it could be unified by using LBA-4096 as the general default, for 
-> every place.
-> But that changes everyones default, and there is no good way to update 
-> an existing system
-> (see overlap with MBR partitions).
 
-Agreed. This is not a good "solution".
+> We should not have arch-specific code in a generic file. Can you make
+> BOUNCE_BUFFER depend on !RKMTD ?
 
-Could you please double-check that the first 2 patches apply clean on
-latest master and if not, please send a v2.
+Hi Simon, Marek,
 
-Thanks,
-Stefan
+No that doesn't work that way.
 
+On Rockchip mainline boards MMC_DW is always our boot device BOOT_DEVICE_MMCx.
+Therefore BOUNCE_BUFFER is also standard enabled.
+
+The solution in this patch below is wrong as it assumes that if BOUNCE_BUFFER is enabled it must be used all over the place.
+
+blk: Add bounce buffer support to read/write operations
+https://source.denx.de/u-boot/u-boot/-/commit/75191f75bce45f3b9aff607c88f17778d3805c61
+
+All implementations of bounce_buffer_start and bounce_buffer_start_extalign are located in the individual drivers  
+
+https://elixir.bootlin.com/u-boot/latest/C/ident/bounce_buffer_start
+https://elixir.bootlin.com/u-boot/latest/C/ident/bounce_buffer_start_extalign
+
+The use of a bounce_buffer in block devices should only be allowed if needed.
+Lack of "ops->buffer_aligned" does not prevent the creation of a bounce_buffer and is not a good selector yet.
+
+	if (ops->buffer_aligned)
+		return ops->buffer_aligned(dev, state);
+
+Current blk_ops has no option to communicate the needed resources.
+Please advise how to select the creation of a bounce buffer per device or other solution.
+
+Johan
+
+===
+config MMC_DW
+	bool "Synopsys DesignWare Memory Card Interface"
+	select BOUNCE_BUFFER
+
+Without BOUNCE_BUFFER selected /drivers/mmc/dw_mmc.c does not compile even rk3066 only uses "fifo_mode".
+
+arm-linux-gnueabihf-ld.bfd: drivers/mmc/dw_mmc.o: in function `dwmci_send_cmd':
+/drivers/mmc/dw_mmc.c:285: undefined reference to `bounce_buffer_start'
+
+
+		if (host->fifo_mode) {
+			dwmci_writel(host, DWMCI_BLKSIZ, data->blocksize);
+			dwmci_writel(host, DWMCI_BYTCNT,
+				     data->blocksize * data->blocks);
+			dwmci_wait_reset(host, DWMCI_CTRL_FIFO_RESET);
+		} else {
+			if (data->flags == MMC_DATA_READ) {
+				ret = bounce_buffer_start(&bbstate,
+						(void*)data->dest,
+						data->blocksize *
+						data->blocks, GEN_BB_WRITE);
+			} else {
+				ret = bounce_buffer_start(&bbstate,
+						(void*)data->src,
+						data->blocksize *
+						data->blocks, GEN_BB_READ);
+			}
+[..]
+		}
+
+arm-linux-gnueabihf-ld.bfd: /drivers/mmc/dw_mmc.c:393: undefined reference to `bounce_buffer_stop'
+
+
+		/* only dma mode need it */
+		if (!host->fifo_mode) {
+[..]
+			bounce_buffer_stop(&bbstate);
+		}
+
+> 
+>>         struct blk_bounce_buffer *bbstate =
+>>                 container_of(state, struct blk_bounce_buffer, state);
+>>         struct udevice *dev = bbstate->dev;
+>> @@ -441,7 +441,7 @@ long blk_read(struct udevice *dev, lbaint_t start, lbaint_t blkcnt, void *buf)
+>>                           start, blkcnt, desc->blksz, buf))
+>>                 return blkcnt;
 >>
->> Just checking...
+>> -       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER)) {
+>> +       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && !IS_ENABLED(CONFIG_RKMTD)) {
+>>                 struct blk_bounce_buffer bbstate = { .dev = dev };
+>>                 int ret;
 >>
->> Thanks,
->> Stefan
-> br
-> Josua
+>> @@ -478,7 +478,7 @@ long blk_write(struct udevice *dev, lbaint_t start, lbaint_t blkcnt,
 >>
->>> Signed-off-by: Josua Mayer <josua@solid-run.com>
->>> ---
->>>   configs/clearfog_emmcboot0_defconfig | 82 ++++++++++++++++++++++++++++
->>>   configs/clearfog_emmcboot1_defconfig | 82 ++++++++++++++++++++++++++++
->>>   configs/clearfog_emmcdata_defconfig  | 82 ++++++++++++++++++++++++++++
->>>   3 files changed, 246 insertions(+)
->>>   create mode 100644 configs/clearfog_emmcboot0_defconfig
->>>   create mode 100644 configs/clearfog_emmcboot1_defconfig
->>>   create mode 100644 configs/clearfog_emmcdata_defconfig
->>>
->>> diff --git a/configs/clearfog_emmcboot0_defconfig 
->>> b/configs/clearfog_emmcboot0_defconfig
->>> new file mode 100644
->>> index 00000000000..215b7708a0d
->>> --- /dev/null
->>> +++ b/configs/clearfog_emmcboot0_defconfig
->>> @@ -0,0 +1,82 @@
->>> +CONFIG_ARM=y
->>> +CONFIG_ARCH_CPU_INIT=y
->>> +CONFIG_SYS_THUMB_BUILD=y
->>> +CONFIG_ARCH_MVEBU=y
->>> +CONFIG_TEXT_BASE=0x00800000
->>> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
->>> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
->>> +CONFIG_NR_DRAM_BANKS=2
->>> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->>> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
->>> +CONFIG_TARGET_CLEARFOG=y
->>> +CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
->>> +CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
->>> +CONFIG_SPL_TEXT_BASE=0x40000030
->>> +CONFIG_SPL_SERIAL=y
->>> +CONFIG_SPL_STACK=0x4002c000
->>> +CONFIG_SPL=y
->>> +CONFIG_DEBUG_UART_BASE=0xf1012000
->>> +CONFIG_DEBUG_UART_CLOCK=250000000
->>> +CONFIG_SYS_LOAD_ADDR=0x800000
->>> +CONFIG_PCI=y
->>> +CONFIG_DEBUG_UART=y
->>> +CONFIG_AHCI=y
->>> +CONFIG_DISTRO_DEFAULTS=y
->>> +CONFIG_BOOTDELAY=3
->>> +CONFIG_USE_PREBOOT=y
->>> +CONFIG_SYS_CONSOLE_INFO_QUIET=y
->>> +# CONFIG_DISPLAY_BOARDINFO is not set
->>> +CONFIG_DISPLAY_BOARDINFO_LATE=y
->>> +CONFIG_SPL_MAX_SIZE=0x22fd0
->>> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->>> +CONFIG_SPL_BSS_START_ADDR=0x40023000
->>> +CONFIG_SPL_BSS_MAX_SIZE=0x4000
->>> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
->>> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->>> +CONFIG_SPL_I2C=y
->>> +CONFIG_SYS_MAXARGS=32
->>> +CONFIG_CMD_TLV_EEPROM=y
->>> +CONFIG_SPL_CMD_TLV_EEPROM=y
->>> +# CONFIG_CMD_FLASH is not set
->>> +CONFIG_CMD_GPIO=y
->>> +CONFIG_CMD_I2C=y
->>> +CONFIG_CMD_MMC=y
->>> +CONFIG_CMD_PCI=y
->>> +CONFIG_CMD_SPI=y
->>> +CONFIG_CMD_USB=y
->>> +CONFIG_CMD_TFTPPUT=y
->>> +CONFIG_CMD_CACHE=y
->>> +CONFIG_CMD_TIME=y
->>> +CONFIG_ENV_OVERWRITE=y
->>> +CONFIG_ENV_MIN_ENTRIES=128
->>> +CONFIG_SYS_MMC_ENV_PART=1
->>> +CONFIG_ARP_TIMEOUT=200
->>> +CONFIG_NET_RETRY_COUNT=50
->>> +CONFIG_NET_RANDOM_ETHADDR=y
->>> +CONFIG_SPL_OF_TRANSLATE=y
->>> +CONFIG_AHCI_MVEBU=y
->>> +CONFIG_DM_PCA953X=y
->>> +CONFIG_DM_I2C=y
->>> +CONFIG_SYS_I2C_MVTWSI=y
->>> +CONFIG_I2C_EEPROM=y
->>> +CONFIG_SPL_I2C_EEPROM=y
->>> +CONFIG_MMC_SDHCI=y
->>> +CONFIG_MMC_SDHCI_SDMA=y
->>> +CONFIG_MMC_SDHCI_MV=y
->>> +CONFIG_MTD=y
->>> +CONFIG_SF_DEFAULT_BUS=1
->>> +CONFIG_SPI_FLASH_WINBOND=y
->>> +CONFIG_SPI_FLASH_MTD=y
->>> +CONFIG_PHY_MARVELL=y
->>> +CONFIG_PHY_GIGE=y
->>> +CONFIG_MVNETA=y
->>> +CONFIG_MII=y
->>> +CONFIG_MVMDIO=y
->>> +CONFIG_PCI_MVEBU=y
->>> +CONFIG_SCSI=y
->>> +CONFIG_SPL_DEBUG_UART_BASE=0xd0012000
->>> +CONFIG_DEBUG_UART_SHIFT=2
->>> +CONFIG_SYS_NS16550=y
->>> +CONFIG_KIRKWOOD_SPI=y
->>> +CONFIG_USB=y
->>> +CONFIG_USB_XHCI_HCD=y
->>> diff --git a/configs/clearfog_emmcboot1_defconfig 
->>> b/configs/clearfog_emmcboot1_defconfig
->>> new file mode 100644
->>> index 00000000000..59f88c64a2e
->>> --- /dev/null
->>> +++ b/configs/clearfog_emmcboot1_defconfig
->>> @@ -0,0 +1,82 @@
->>> +CONFIG_ARM=y
->>> +CONFIG_ARCH_CPU_INIT=y
->>> +CONFIG_SYS_THUMB_BUILD=y
->>> +CONFIG_ARCH_MVEBU=y
->>> +CONFIG_TEXT_BASE=0x00800000
->>> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
->>> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
->>> +CONFIG_NR_DRAM_BANKS=2
->>> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->>> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
->>> +CONFIG_TARGET_CLEARFOG=y
->>> +CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
->>> +CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
->>> +CONFIG_SPL_TEXT_BASE=0x40000030
->>> +CONFIG_SPL_SERIAL=y
->>> +CONFIG_SPL_STACK=0x4002c000
->>> +CONFIG_SPL=y
->>> +CONFIG_DEBUG_UART_BASE=0xf1012000
->>> +CONFIG_DEBUG_UART_CLOCK=250000000
->>> +CONFIG_SYS_LOAD_ADDR=0x800000
->>> +CONFIG_PCI=y
->>> +CONFIG_DEBUG_UART=y
->>> +CONFIG_AHCI=y
->>> +CONFIG_DISTRO_DEFAULTS=y
->>> +CONFIG_BOOTDELAY=3
->>> +CONFIG_USE_PREBOOT=y
->>> +CONFIG_SYS_CONSOLE_INFO_QUIET=y
->>> +# CONFIG_DISPLAY_BOARDINFO is not set
->>> +CONFIG_DISPLAY_BOARDINFO_LATE=y
->>> +CONFIG_SPL_MAX_SIZE=0x22fd0
->>> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->>> +CONFIG_SPL_BSS_START_ADDR=0x40023000
->>> +CONFIG_SPL_BSS_MAX_SIZE=0x4000
->>> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
->>> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->>> +CONFIG_SPL_I2C=y
->>> +CONFIG_SYS_MAXARGS=32
->>> +CONFIG_CMD_TLV_EEPROM=y
->>> +CONFIG_SPL_CMD_TLV_EEPROM=y
->>> +# CONFIG_CMD_FLASH is not set
->>> +CONFIG_CMD_GPIO=y
->>> +CONFIG_CMD_I2C=y
->>> +CONFIG_CMD_MMC=y
->>> +CONFIG_CMD_PCI=y
->>> +CONFIG_CMD_SPI=y
->>> +CONFIG_CMD_USB=y
->>> +CONFIG_CMD_TFTPPUT=y
->>> +CONFIG_CMD_CACHE=y
->>> +CONFIG_CMD_TIME=y
->>> +CONFIG_ENV_OVERWRITE=y
->>> +CONFIG_ENV_MIN_ENTRIES=128
->>> +CONFIG_SYS_MMC_ENV_PART=2
->>> +CONFIG_ARP_TIMEOUT=200
->>> +CONFIG_NET_RETRY_COUNT=50
->>> +CONFIG_NET_RANDOM_ETHADDR=y
->>> +CONFIG_SPL_OF_TRANSLATE=y
->>> +CONFIG_AHCI_MVEBU=y
->>> +CONFIG_DM_PCA953X=y
->>> +CONFIG_DM_I2C=y
->>> +CONFIG_SYS_I2C_MVTWSI=y
->>> +CONFIG_I2C_EEPROM=y
->>> +CONFIG_SPL_I2C_EEPROM=y
->>> +CONFIG_MMC_SDHCI=y
->>> +CONFIG_MMC_SDHCI_SDMA=y
->>> +CONFIG_MMC_SDHCI_MV=y
->>> +CONFIG_MTD=y
->>> +CONFIG_SF_DEFAULT_BUS=1
->>> +CONFIG_SPI_FLASH_WINBOND=y
->>> +CONFIG_SPI_FLASH_MTD=y
->>> +CONFIG_PHY_MARVELL=y
->>> +CONFIG_PHY_GIGE=y
->>> +CONFIG_MVNETA=y
->>> +CONFIG_MII=y
->>> +CONFIG_MVMDIO=y
->>> +CONFIG_PCI_MVEBU=y
->>> +CONFIG_SCSI=y
->>> +CONFIG_SPL_DEBUG_UART_BASE=0xd0012000
->>> +CONFIG_DEBUG_UART_SHIFT=2
->>> +CONFIG_SYS_NS16550=y
->>> +CONFIG_KIRKWOOD_SPI=y
->>> +CONFIG_USB=y
->>> +CONFIG_USB_XHCI_HCD=y
->>> diff --git a/configs/clearfog_emmcdata_defconfig 
->>> b/configs/clearfog_emmcdata_defconfig
->>> new file mode 100644
->>> index 00000000000..335b50e3c48
->>> --- /dev/null
->>> +++ b/configs/clearfog_emmcdata_defconfig
->>> @@ -0,0 +1,82 @@
->>> +CONFIG_ARM=y
->>> +CONFIG_ARCH_CPU_INIT=y
->>> +CONFIG_SYS_THUMB_BUILD=y
->>> +CONFIG_ARCH_MVEBU=y
->>> +CONFIG_TEXT_BASE=0x00800000
->>> +CONFIG_SPL_LIBCOMMON_SUPPORT=y
->>> +CONFIG_SPL_LIBGENERIC_SUPPORT=y
->>> +CONFIG_NR_DRAM_BANKS=2
->>> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->>> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
->>> +CONFIG_TARGET_CLEARFOG=y
->>> +CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
->>> +CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
->>> +CONFIG_SPL_TEXT_BASE=0x40000030
->>> +CONFIG_SPL_SERIAL=y
->>> +CONFIG_SPL_STACK=0x4002c000
->>> +CONFIG_SPL=y
->>> +CONFIG_DEBUG_UART_BASE=0xf1012000
->>> +CONFIG_DEBUG_UART_CLOCK=250000000
->>> +CONFIG_SYS_LOAD_ADDR=0x800000
->>> +CONFIG_PCI=y
->>> +CONFIG_DEBUG_UART=y
->>> +CONFIG_AHCI=y
->>> +CONFIG_DISTRO_DEFAULTS=y
->>> +CONFIG_BOOTDELAY=3
->>> +CONFIG_USE_PREBOOT=y
->>> +CONFIG_SYS_CONSOLE_INFO_QUIET=y
->>> +# CONFIG_DISPLAY_BOARDINFO is not set
->>> +CONFIG_DISPLAY_BOARDINFO_LATE=y
->>> +CONFIG_SPL_MAX_SIZE=0x22fd0
->>> +CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
->>> +CONFIG_SPL_BSS_START_ADDR=0x40023000
->>> +CONFIG_SPL_BSS_MAX_SIZE=0x4000
->>> +CONFIG_SPL_SYS_MALLOC_SIMPLE=y
->>> +# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->>> +CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_DATA_PART_OFFSET=0x1000
->>> +CONFIG_SPL_I2C=y
->>> +CONFIG_SYS_MAXARGS=32
->>> +CONFIG_CMD_TLV_EEPROM=y
->>> +CONFIG_SPL_CMD_TLV_EEPROM=y
->>> +# CONFIG_CMD_FLASH is not set
->>> +CONFIG_CMD_GPIO=y
->>> +CONFIG_CMD_I2C=y
->>> +CONFIG_CMD_MMC=y
->>> +CONFIG_CMD_PCI=y
->>> +CONFIG_CMD_SPI=y
->>> +CONFIG_CMD_USB=y
->>> +CONFIG_CMD_TFTPPUT=y
->>> +CONFIG_CMD_CACHE=y
->>> +CONFIG_CMD_TIME=y
->>> +CONFIG_ENV_OVERWRITE=y
->>> +CONFIG_ENV_MIN_ENTRIES=128
->>> +CONFIG_ARP_TIMEOUT=200
->>> +CONFIG_NET_RETRY_COUNT=50
->>> +CONFIG_NET_RANDOM_ETHADDR=y
->>> +CONFIG_SPL_OF_TRANSLATE=y
->>> +CONFIG_AHCI_MVEBU=y
->>> +CONFIG_DM_PCA953X=y
->>> +CONFIG_DM_I2C=y
->>> +CONFIG_SYS_I2C_MVTWSI=y
->>> +CONFIG_I2C_EEPROM=y
->>> +CONFIG_SPL_I2C_EEPROM=y
->>> +CONFIG_MMC_SDHCI=y
->>> +CONFIG_MMC_SDHCI_SDMA=y
->>> +CONFIG_MMC_SDHCI_MV=y
->>> +CONFIG_MTD=y
->>> +CONFIG_SF_DEFAULT_BUS=1
->>> +CONFIG_SPI_FLASH_WINBOND=y
->>> +CONFIG_SPI_FLASH_MTD=y
->>> +CONFIG_PHY_MARVELL=y
->>> +CONFIG_PHY_GIGE=y
->>> +CONFIG_MVNETA=y
->>> +CONFIG_MII=y
->>> +CONFIG_MVMDIO=y
->>> +CONFIG_PCI_MVEBU=y
->>> +CONFIG_SCSI=y
->>> +CONFIG_SPL_DEBUG_UART_BASE=0xd0012000
->>> +CONFIG_DEBUG_UART_SHIFT=2
->>> +CONFIG_SYS_NS16550=y
->>> +CONFIG_KIRKWOOD_SPI=y
->>> +CONFIG_USB=y
->>> +CONFIG_USB_XHCI_HCD=y
+>>         blkcache_invalidate(desc->uclass_id, desc->devnum);
 >>
->> Viele Grüße,
->> Stefan Roese
+>> -       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER)) {
+>> +       if (IS_ENABLED(CONFIG_BOUNCE_BUFFER) && !IS_ENABLED(CONFIG_RKMTD)) {
+>>                 struct blk_bounce_buffer bbstate = { .dev = dev };
+>>                 int ret;
 >>
-
-Viele Grüße,
-Stefan Roese
-
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+>> --
+>> 2.39.2
+>>
+> 
+> Regards,
+> Simon
