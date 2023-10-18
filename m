@@ -4,79 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECCEFCDB482
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 15:27:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BDBCCDB482
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 15:50:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6781786FB8;
-	Wed, 18 Oct 2023 17:27:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F5AE86FC2;
+	Wed, 18 Oct 2023 17:50:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="idocb+rQ";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1028A86F40; Wed, 18 Oct 2023 17:27:19 +0200 (CEST)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E69DE86FC1
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 17:27:16 +0200 (CEST)
+ id C9DB186FC6; Wed, 18 Oct 2023 17:50:23 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id D5A6186FA9
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 17:50:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-d857c8a1d50so7118306276.3
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:27:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697642835; x=1698247635; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=MusqOzZ/P4VJoihlB9SfJhWKKWSN2Tblc0J3Cuqz/LY=;
- b=idocb+rQLGbOWe7v35pb3lNzTjWb/8VGDzziEp1nB+cjE+1Skr0EXzqj48H6rTQKWw
- MZCOby7tK2e48Skxn+0udatTvkrHa0BUM+4zimqWkDs4EGxI7gRPgrvpX29w47J+zFqZ
- otVP94rTzs2qsrUnfy1+Qbo+wW5xQZugj381k=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697642835; x=1698247635;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=MusqOzZ/P4VJoihlB9SfJhWKKWSN2Tblc0J3Cuqz/LY=;
- b=nsi+FL5H1+JJywLSXhzZweHucdI+yRLlsZMUoOrtweeUyHmghhLuSFh73VsoWEKseN
- b28rgwmqAfS+vraRaBuR5FanhZNAnmBP+//XKs6UnxJHf0cwnfFmLa6bafK1aoh0rcSD
- fVMaQEaJxyCEJYL5IZiEgxKdwwYY5py+CYiG4Ruw0y+o4OrkCyfy8QJfliEZuezhl5Ai
- Q9eb84v25MSqvnuIjUYUML5BRQbCUvO03l4q2ifYXcQ5dhfESDNwXD16W6xqvQuSuW2G
- fqKO8HHU1xlD6kyN9X2+ySOj0VaK49CwQ7bJGAmHsKi8ZkJRAS8TV6RgF6va7etY/BE/
- vBkQ==
-X-Gm-Message-State: AOJu0YxW82VYyaBjaxlH52+Y9TX9n2+fUl/juBpQfft4Ot4S3bnNmedx
- WKZCp9VusG1VBW3WkkVcbDC0DbxRXs4+Um3yFXo8JQ==
-X-Google-Smtp-Source: AGHT+IF2Yb+FieDUbzTGQnG5JCmu9rTAucx6PEb6sduJn6UT8iD35QPX7WJxSfWPIeXrus+5v8Oamg==
-X-Received: by 2002:a25:abd3:0:b0:d9a:68db:7f96 with SMTP id
- v77-20020a25abd3000000b00d9a68db7f96mr5450265ybi.21.1697642835564; 
- Wed, 18 Oct 2023 08:27:15 -0700 (PDT)
-Received: from bill-the-cat
- (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
- [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- 128-20020a251186000000b00d9ab95777ecsm1369990ybr.49.2023.10.18.08.27.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 08:27:15 -0700 (PDT)
-Date: Wed, 18 Oct 2023 11:27:13 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
-Message-ID: <20231018152713.GT3119521@bill-the-cat>
-References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-23-sjg@chromium.org>
- <20231018133709.GA3765642@bill-the-cat>
- <CAPnjgZ2qG7XgcbYyrpZaTef21MJA-B7SMm9jGMzk8G7M=mVv1w@mail.gmail.com>
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1A7892F4;
+ Wed, 18 Oct 2023 08:51:01 -0700 (PDT)
+Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.101.43])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9DD263F64C;
+ Wed, 18 Oct 2023 08:50:18 -0700 (PDT)
+From: Andre Przywara <andre.przywara@arm.com>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Samuel Holland <samuel@sholland.org>,
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ SASANO Takayoshi <uaa@mx5.nisiq.net>,
+ Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Piotr Oniszczuk <piotr.oniszczuk@gmail.com>, u-boot@lists.denx.de,
+ linux-sunxi@lists.linux.dev
+Subject: [PATCH 0/3] power: add AXP313 PMIC support
+Date: Wed, 18 Oct 2023 16:50:11 +0100
+Message-Id: <20231018155014.383566-1-andre.przywara@arm.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2pVdNDyWLf8HNV83"
-Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2qG7XgcbYyrpZaTef21MJA-B7SMm9jGMzk8G7M=mVv1w@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,102 +57,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The X-Powers AXP313 is a small PMIC that is controlled via I2C and
+provides just three buck converters and three LDOs, plus a power button.
+It is used on many newer boards using the Allwinner H616 or H618 SoCs.
 
---2pVdNDyWLf8HNV83
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Mostly all rails need to be always on, since each of them supplies an
+essential part of the system, consequentially the reset default is to have
+all of them enabled.
+However the voltages need to be adjusted, especially the DRAM rail is
+typically at 900mV, for instance, which is too low.
 
-On Wed, Oct 18, 2023 at 09:23:42AM -0600, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Wed, 18 Oct 2023 at 07:37, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
-> >
-> > > Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet=
- is
-> > > available, add it as an explicit dependency.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v2)
-> > >
-> > > Changes in v2:
-> > > - Add new patch to update EFI_LOADER to depend on DM_ETH
-> > >
-> > >  lib/efi_loader/Kconfig | 1 +
-> > >  1 file changed, 1 insertion(+)
-> > >
-> > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > > index 13cad6342c36..fca4b3eef270 100644
-> > > --- a/lib/efi_loader/Kconfig
-> > > +++ b/lib/efi_loader/Kconfig
-> > > @@ -11,6 +11,7 @@ config EFI_LOADER
-> > >       # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
-> > >       depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
-> > >       depends on BLK
-> > > +     depends on DM_ETH
-> > >       depends on !EFI_APP
-> > >       default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
-> > >       select CHARSET
-> >
-> > I don't think this is needed.  After reconfiguring qemu_arm64 to be able
-> > to disable networking entirely, we still are able to build with
-> > EFI_LOADER enabled, and no warning / link errors.
->=20
-> Fair enough.
->=20
-> As of this patch the following errors are generated with -a ~CMDLINE :
->=20
-> +lib/efi_loader/efi_device_path.c:985:(.text+0xca4): undefined
-> reference to `eth_get_dev'
-> +/bin/ld: lib/efi_loader/efi_device_path.c:987:(.text+0xca9):
-> undefined reference to `eth_get_dev'
-> +/bin/ld: lib/efi_loader/efi_device_path.c:993:(.text+0xcc9):
-> undefined reference to `eth_get_dev'
-> +/bin/ld: lib/efi_loader/efi_device_path.o: in function `efi_dp_from_name=
-':
-> +lib/efi_loader/efi_device_path.c:1095:(.text+0xe00): undefined
-> reference to `efi_get_image_parameters'
->=20
-> which is why I added this patch. A later patch disables networking
-> entirely with ~CMDLINE so that is why this problem goes away.
->=20
-> This series was basically built up by disabling CMDLINE and then
-> fixing the errors one by one. I didn't go back and check whether (at
-> the end) all the patches were needed.
+This series adds support for the proper DM AXP PMIC driver (patch 3/3),
+but also adds a small driver to be used in (our non-DM) SPL, to adjust
+the DRAM voltage before the DRAM initialisation starts (patch 2/3).
 
-Yes, part of the issue with the series is that you didn't go and rework
-things after getting CMDLINE to link for sandbox, to see what else is or
-is not still needed.
+This also uses the opportunity to clean up an #ifdef nightmare in our
+board.c (patch 1/3), which was actually duplicating some dependencies
+already described in Kconfig.
 
-> I could do that and send a v4, if your more general concerns can be sorte=
-d out.
+This is one part of the enablement of many newer boards with the
+H616/H618 SoC: without the DRAM voltage increased to 1.1V they won't boot.
 
-Don't worry about a v4 currently please, I'm working through the issues
-now picking out parts of v3 and re-working others.
+Cheers,
+Andre
 
---=20
-Tom
+Andre Przywara (3):
+  sunxi: board: simplify early PMIC setup conditions
+  power: pmic: sunxi: add AXP313 SPL driver
+  power: regulator: add AXP313 support
 
---2pVdNDyWLf8HNV83
-Content-Type: application/pgp-signature; name="signature.asc"
+ arch/arm/mach-sunxi/pmic_bus.c          |   3 +
+ board/sunxi/board.c                     |  35 +++----
+ drivers/power/Kconfig                   |  19 +++-
+ drivers/power/Makefile                  |   1 +
+ drivers/power/axp313.c                  | 134 ++++++++++++++++++++++++
+ drivers/power/pmic/axp.c                |   1 +
+ drivers/power/regulator/axp_regulator.c |  17 +++
+ include/axp_pmic.h                      |   1 +
+ 8 files changed, 189 insertions(+), 22 deletions(-)
+ create mode 100644 drivers/power/axp313.c
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.25.1
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUv+U4ACgkQFHw5/5Y0
-tyw3/gwAuv5Z2jDUobSX/RlVoQO8IorbuCznYskPUNifPOTCFNbaSlH8EYmQ7TET
-NLH+zJU1i8rGhm9iAWZ/7uCwIU3yqBi6DHNOExbh+jLgzvYnUvpXpNnTD0wJiT1N
-awJPq50e/cHEQl6wWg0QWHL97EEtHxGFyhbGi8b4wwV+Zm+cqwnWCtqUpknULcjb
-o6XOxIs+nR81WNH0KL5jxbpl+Gj0wjAMdwGIHaSL4eZgaH432cRoUBczzzxaxFEf
-XwbiNgM5ijTFT+t8m2HRwY49k7lEmrlLEGJRpqrO0+0yKHh08NvKh1jF0a0Pa8iW
-eBh0HifsjJbPxJ48LP8r0xSa2pNM55wyO7a/4rtmYeinqHfEYaNAUYXwuGYFyfKi
-SHGak/QzyrfPMvC9MbNqnnawCdRzVa+AFXOeb6MLkjLTX6b8Myuqna1/8LRzUXIg
-UAvoOsRqrxrM9mNoR5pP5GTiKQ3ffVzqsCy/vSh4MWlwwengBV4QSe3VSamvm55E
-x403nA3B
-=nfhl
------END PGP SIGNATURE-----
-
---2pVdNDyWLf8HNV83--
