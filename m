@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53835CDB483
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 10:51:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA7A4CDB483
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 10:52:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E69886380;
-	Wed, 18 Oct 2023 12:51:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 21AB086F60;
+	Wed, 18 Oct 2023 12:52:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697626293;
-	bh=6xa8+MEnlikDM5EFrCOGha/EFm7lp7cCH+sIonxwPSY=;
+	s=phobos-20191101; t=1697626321;
+	bh=nQSEbYO6PBsdgPHyBFKsAhLUJG6CgpEfN8mNyLmuHxo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=LXJJsgkEW1076cNYsynysCSSXLW2e6ouMHU0DgYupUoCUj57xdzVgOLDfFGvPEhrZ
-	 bIUrQI6bvZDs9N9llslSN4h4Sv/rLvn+S9AlU+cblcMvFupTZcGsN0Wd/SxJ6F27Nf
-	 cJ98j0KM5NGQXNxdcJhOh3k7Uu0vyjJpfRLZfPlHP8EIkZlp4xUJyjrMP8iMsx2oxK
-	 7aTo7/VP/qZfUWu+8nQMDu7QrhZ3Wz4/kDl/3nEbYMY/CAOQK4fsYG27+PeSI47JAe
-	 dOpBmcXRjuRXPzrtAxj3I7ta4iysgIr5q29tYVTLzIbv6uLHuUh9x4W8EVjtROSZhK
-	 pOo1oEZ2s4Zhw==
+	b=uVcHfoyrM1aclB5aZQ6idRyIGd5PfyX0doh48eL/XClaX/nX+DxdLZbzp8JE+lAp1
+	 ZLViZf0DX1ZheULZ6VF/7MWm7jlx8Oq24WGQ1FgIpA/rByA74GlJvXa8UNauwD2wGj
+	 CakkJWD6FMGfNoTjoT8LWzISAxWQb6d39lP0KlQvbn3v3iiXa/PUCQtUhePkEisE6O
+	 SLVtGSqjvpfa54esO70rgQ141+7zFjlcALXj8JQrI8+gn2VhShXLFwxe0AoDei6aoo
+	 JEJZgkMYVxa4IJblT0mPJyqpmy4zF5ZpvLYQPEKY2VGyKj7UBog0b16/4xnYEuPE0m
+	 a56PVNubuDHAQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9B5F386F65;
- Wed, 18 Oct 2023 12:51:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 745788269F;
+ Wed, 18 Oct 2023 12:52:00 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697626291;
- bh=6xa8+MEnlikDM5EFrCOGha/EFm7lp7cCH+sIonxwPSY=;
+ s=phobos-20191101; t=1697626320;
+ bh=nQSEbYO6PBsdgPHyBFKsAhLUJG6CgpEfN8mNyLmuHxo=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=zkOAQT5JEEAswaW5UhNuo5X47x5wsMK6Y4P6cGUbk2COPWXBbhyoZWXclJRQt2WbN
- /rnz/RVhuVfWHMgbotCXbuV2SpZ2l9NYYHIuCYLCds1QEtGo7P8KB0k0xZe/GQ+zOB
- X3rW3+C1sVlPqYr2P0JSwWxwRexl/8ytDb9L3nv0LRscARu5VDNX2HqC2FnMP71RcY
- qrEmH3/qZwH5RT78v/B/Zw6tvmP+tUGaRCJhFYOqLhLerFV4AbI7yt5onV0K4zWTjo
- T74WP6QDXvr4xreC3k1jRVdIsTDyq6Zag0xdgMaOcYtaw18oYCCYdoXPgkAiutqHGL
- liBfdNiZFbMlg==
-Message-ID: <39894d06-4bbc-4d8b-9b85-940159b614b3@denx.de>
-Date: Wed, 18 Oct 2023 12:51:30 +0200
+ b=tXL4q+g/5VLLrxIGYhK1yCVi2Zb/a5vD63L4VKONNkTwyYgMDBDbcBjHI0QJaRmYN
+ 3A2tO2O0qY65mjlmWrJsfCAdjeuIar4O2P3k9sGlMFiBT98Eem7CCdBr0AzUpmkLok
+ gHkyR+oPX5I7kR5igJ32kJ9UA7POpng9ooUaWoADyVyuVosMYSA7oISIaCqddXhz0h
+ l2GjRNUU7Ck1Vbg1NUlUwkPe9YRi+b6NQXudEqdAmqecjfbYzzemBZv83VRIP0MmVk
+ Mb77Z2drM9qo0nK/vhfn4uJtn0qYhqzIkorVBCsAaYosyX+ZmMTFA7o04OvH/T4oFw
+ 7mHxnHHHfzb3g==
+Message-ID: <f169a8a9-1b7c-4e9d-b443-9f1f5983ee27@denx.de>
+Date: Wed, 18 Oct 2023 12:52:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] MAINTAINERS: usb gadget: add Mattijs
+Subject: Re: [PATCH 0/2] MAINTAINERS: Add Mattijs to USB/fastboot maintainers
 Content-Language: en-US
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Cc: Lukasz Majewski <lukma@denx.de>, u-boot@lists.denx.de
 References: <20231005-mattijs-usb-v1-0-7e79ab31ca49@baylibre.com>
- <20231005-mattijs-usb-v1-1-7e79ab31ca49@baylibre.com>
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20231005-mattijs-usb-v1-1-7e79ab31ca49@baylibre.com>
+In-Reply-To: <20231005-mattijs-usb-v1-0-7e79ab31ca49@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -70,11 +69,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 10/5/23 15:04, Mattijs Korpershoek wrote:
-> It seems that Lukasz and Marek could get some help in maintaining the
-> usb gadget drivers.
+>>From discussions with Marek at Kernel Recipes, it seems that the USB
+> subsystem in U-boot need some help.
 > 
-> Assign myself as maintainer.
+> Since I've been asked and I'm willing to help, I've added myself to the
+> maintainers entry.
+> 
+> I have also added myself for fastboot since I'm interested in keeping
+> that functional as well.
+> 
+> Note that I have no previous (open-source) maintainer experience so I
+> will do my best to learn.
 > 
 > Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-Acked-by: Marek Vasut <marex@denx.de>
+Thanks. I expect Lukasz to chime in in a bit too.
