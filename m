@@ -4,36 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6E8CDB482
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 11:30:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4606CCDB483
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 11:31:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7560C86F7A;
-	Wed, 18 Oct 2023 13:30:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BB26B86F80;
+	Wed, 18 Oct 2023 13:30:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE2F386D2E; Wed, 18 Oct 2023 08:28:01 +0200 (CEST)
+ id BEA8986BB8; Wed, 18 Oct 2023 08:28:03 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3C53A86BB4
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:27:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id BBD3E86D82
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:28:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=qi.feng@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5B3592F4;
- Tue, 17 Oct 2023 23:28:38 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id ACEEA1007;
+ Tue, 17 Oct 2023 23:28:41 -0700 (PDT)
 Received: from a015967.shanghai.arm.com (a015967.shanghai.arm.com
  [10.169.190.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 99C063F64C;
- Tue, 17 Oct 2023 23:27:54 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id F2F623F64C;
+ Tue, 17 Oct 2023 23:27:57 -0700 (PDT)
 From: Qi Feng <qi.feng@arm.com>
 To: u-boot@lists.denx.de
 Cc: liviu.dudau@foss.arm.com, fenghua@phytium.com.cn, linus.walleij@linaro.org,
  Peter.Hoyes@arm.com, wei.chen@arm.com, Robbie.Cao@arm.com, qi.feng@arm.com
-Subject: [PATCH 0/2] vexpress64: Add MMC card to the BOOT_TARGET_DEVICES of FVP
-Date: Wed, 18 Oct 2023 14:27:43 +0800
-Message-Id: <20231018062745.3153436-1-qi.feng@arm.com>
+Subject: [PATCH 1/2] misc: vexpress_config: Use member .priv_auto to set the
+ private data
+Date: Wed, 18 Oct 2023 14:27:44 +0800
+Message-Id: <20231018062745.3153436-2-qi.feng@arm.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20231018062745.3153436-1-qi.feng@arm.com>
+References: <20231018062745.3153436-1-qi.feng@arm.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 18 Oct 2023 13:30:29 +0200
@@ -53,20 +56,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add MMC disk to FVP's BOOT_TARGET_DEVICES. This allows the user to boot
-from MMC devices.
+From: Wei Chen <wei.chen@arm.com>
 
-While working on that, one compilation error has been observed and
-fixed.
+In current vexpress_config_probe code, it sets the uclass private data
+directly. This will cause one compilation error:
+drivers/misc/vexpress_config.c:114:27: error: lvalue required as left operand of assignment
+  114 |  dev_get_uclass_priv(dev) = priv;
+      |                           ^
 
-Wei Chen (2):
-  misc: vexpress_config: Use member .priv_auto to set the private data
-  vexpress64: Add MMC card to the BOOT_TARGET_DEVICES of FVP
+In this patch we set the uclass private data through struct member
+.priv_auto, and this compilation error disappears.
 
- drivers/misc/vexpress_config.c   | 5 ++---
- include/configs/vexpress_aemv8.h | 7 +++++++
- 2 files changed, 9 insertions(+), 3 deletions(-)
+Signed-off-by: Wei Chen <wei.chen@arm.com>
+Signed-off-by: Qi Feng <qi.feng@arm.com>
+---
+ drivers/misc/vexpress_config.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
+diff --git a/drivers/misc/vexpress_config.c b/drivers/misc/vexpress_config.c
+index 2baca48109f..99aad1412ae 100644
+--- a/drivers/misc/vexpress_config.c
++++ b/drivers/misc/vexpress_config.c
+@@ -92,7 +92,7 @@ static struct misc_ops vexpress_config_ops = {
+ static int vexpress_config_probe(struct udevice *dev)
+ {
+ 	struct ofnode_phandle_args args;
+-	struct vexpress_config_sysreg *priv;
++	struct vexpress_config_sysreg *priv = dev_get_priv(dev);
+ 	const char *prop;
+ 	int err, prop_size;
+ 
+@@ -105,11 +105,9 @@ static int vexpress_config_probe(struct udevice *dev)
+ 	if (!prop || (strncmp(prop, "arm,vexpress-sysreg", 19) != 0))
+ 		return -ENOENT;
+ 
+-	priv = calloc(1, sizeof(*priv));
+ 	if (!priv)
+ 		return -ENOMEM;
+ 
+-	dev_get_uclass_priv(dev) = priv;
+ 	priv->addr = ofnode_get_addr(args.node);
+ 
+ 	return dev_read_u32(dev, "arm,vexpress,site", &priv->site);
+@@ -127,4 +125,5 @@ U_BOOT_DRIVER(vexpress_config_drv) = {
+ 	.bind = dm_scan_fdt_dev,
+ 	.probe = vexpress_config_probe,
+ 	.ops = &vexpress_config_ops,
++	.priv_auto = sizeof(struct vexpress_config_sysreg),
+ };
 -- 
 2.25.1
 
