@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A83CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 03:31:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F84DCDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 03:31:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64E8D86F29;
-	Wed, 18 Oct 2023 05:31:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD83F86F22;
+	Wed, 18 Oct 2023 05:31:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PDA/vOWW";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hLyeumrf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6F8986F29; Wed, 18 Oct 2023 05:31:24 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id 34CA386B05; Wed, 18 Oct 2023 05:31:30 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A519586F27
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 05:31:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C61A86F27
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 05:31:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-507a3b8b113so4937828e87.0
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:31:22 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-9be7e3fa1daso638764466b.3
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:31:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697599882; x=1698204682; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697599888; x=1698204688; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AyJ2avMWX9NAsSve9jQoJ/nU+TrfKhJ0BzfCyPp1TuQ=;
- b=PDA/vOWWiQFX3e7EO76JdWqoi3O6tuiqu9RAMXqzitPy9e/sEpCxPSmGG1tkVdupAY
- jTQ4MYVuDv4sj2+iFWQFdXCqcPFgN5Nh/FOyQUXqyvt4taqlnrQSXQF2Dv/tcDcqIAfw
- aykgvo5iKZDBbVMWXf8cUbWDyAjmTJy8kOTfM=
+ bh=DFtvQ3X14QNC4T9wd/IxRahgmtc0F6hjvt1Jhs2Q5+s=;
+ b=hLyeumrfgopejdpS3Jto7UktEkPlkqV7UlMzZxIDURooZFUN5mpEnkg57BMF/g88lr
+ 3YfA/ITml51VUfomu32o86lGd9jIV81+aItQcUrB02io2jhVPF0K07wkr8Ik4KbCbrmd
+ RFYbeCz6inLCsl85fxxiMwwlyWkDcr1EojvjY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697599882; x=1698204682;
+ d=1e100.net; s=20230601; t=1697599888; x=1698204688;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=AyJ2avMWX9NAsSve9jQoJ/nU+TrfKhJ0BzfCyPp1TuQ=;
- b=Hj9yO23lRARuHcMWKKApus5okNcHnx3Tx+UR6SkJeMPp0ODYJgM96PtlTeOckZszcs
- RO5oGYGTcU2qq1/h+KSyGdvuj6YPfdsMeXiRqmpJI9YKGrohYv/x1wKFUJKmAxRVNV03
- 6OW7U2T0C8lNMIlc+bBW3AYlXPfYvfKf6DVVcgotkt0YFagtQKGpvth5FND+/xvCsO8e
- K21wRy/D/Z2tP3b3Z+//eWGCdSXx+I/j1gFTMCs1+tLQUI3bnhsfTeACfM00TtnU7mzR
- cCWme8t/5lDy4vsS5pSRyO/kKHKYR2dWCQS/9ngO+hjzZu6SNwIrzsckwiGaFtSx+q4A
- Chvw==
-X-Gm-Message-State: AOJu0YwH6yRlFUAbSSIMv+HOHOhRxzyyn3Y9AXHGa8q1VBG6RAJ7rK4s
- 0PtB/DO2uacV/2lZz6YnY/aKF2XG3qmrsqdG193RSA==
-X-Google-Smtp-Source: AGHT+IGuruSthHKvQAZG6u5wbSmNKcXGNA5mJXy/dpzxu/5Ms/jarNOdNFUxMihXIUU1z4J/b+JWWtO5v2tDqcM2+KI=
-X-Received: by 2002:ac2:544c:0:b0:504:7f2e:9391 with SMTP id
- d12-20020ac2544c000000b005047f2e9391mr3149848lfn.34.1697599881774; Tue, 17
- Oct 2023 20:31:21 -0700 (PDT)
+ bh=DFtvQ3X14QNC4T9wd/IxRahgmtc0F6hjvt1Jhs2Q5+s=;
+ b=axKArpaFIWMI59OI14FkaW4qqpsgxMHt5P6zoUCwFcS72c9geAC+RqDocQun77+vGN
+ BnrBokBiGU4ALUKRbMVjQhMgz+yTK+sWZbysm1vE6t2b3xFnPvAiJYb7ekifxB5mI0Un
+ rJ3Qh5FYLmJJnX0V2ER5T0rc1hnD5TToY09SdI0EJ5cYtl0iAH4G8XXFnO0M5kziCxnz
+ rWfjB9SQcNn8m/MoDAgGmFeQZXeRNAV9ZiksZ0ff/sI3wbg2b7qhYAbMsWaN2iF5PTT8
+ VOlCtzQTtLRlszZAh4lYSyV30Ia1aGr0XF/Ju648vBN1nfULUWqh2sEoJmESn+mhoxV2
+ XuMw==
+X-Gm-Message-State: AOJu0YzMgwvJz8NcVVeube1luNi7NLM0/+/rDl1XTcT57PqP9IH93qaL
+ SrGqcQDEYRpVdLFnVODlV5bFERbenZhq5bUhTrLJBQ==
+X-Google-Smtp-Source: AGHT+IFnh3X3hZLdfXYNXULChswWoBe7H3AmIIPo0J8AXHj0ZB9Jno2lSkx3ilHbu+AXqrd2x+6uMr6Q1zH+K9uqrvs=
+X-Received: by 2002:a17:907:1b22:b0:9c4:bb5f:970f with SMTP id
+ mp34-20020a1709071b2200b009c4bb5f970fmr2837843ejc.32.1697599887771; Tue, 17
+ Oct 2023 20:31:27 -0700 (PDT)
 MIME-Version: 1.0
-References: <8c0f5bb6-0110-b7b5-3c40-2d8d98a94dfa@gmail.com>
- <fd206328-2ffa-c174-179c-85f6428e5d9f@gmail.com>
- <CAPnjgZ2bs2ZE87W71h_4V91M3gyCtCV7vbHVnGwGE+Hmt2LfuQ@mail.gmail.com>
- <64400549-5a62-8079-cbd6-2a099c2b06ec@gmail.com>
-In-Reply-To: <64400549-5a62-8079-cbd6-2a099c2b06ec@gmail.com>
+References: <20231016222835.596572-1-sjg@chromium.org>
+ <20231016222835.596572-17-sjg@chromium.org>
+ <20231017140354.GX3119521@bill-the-cat>
+In-Reply-To: <20231017140354.GX3119521@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 17 Oct 2023 21:31:10 -0600
-Message-ID: <CAPnjgZ2HB+Sf=Zpby8pFrnLmkuGW_b31sqdjoATerG-4Xa5zMQ@mail.gmail.com>
-Subject: Re: [PATCH v4 4/8] rockchip: block: blk-uclass: disable bounce buffer
- support for rkmtd
-To: Johan Jonker <jbx6244@gmail.com>
-Cc: kever.yang@rock-chips.com, philipp.tomsich@vrull.eu, 
- dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com, 
- u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
+Date: Tue, 17 Oct 2023 21:31:15 -0600
+Message-ID: <CAPnjgZ2bvsGsOieQSCMuyF1ZDQuu0+udL5Q4UpxmLcP0qPKiQA@mail.gmail.com>
+Subject: Re: [PATCH v3 16/32] net: Depend on CONFIG_CMDLINE
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,74 +84,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Johan,
+Hi Tom,
 
-On Tue, 17 Oct 2023 at 06:44, Johan Jonker <jbx6244@gmail.com> wrote:
+On Tue, 17 Oct 2023 at 08:04, Tom Rini <trini@konsulko.com> wrote:
 >
+> On Mon, Oct 16, 2023 at 04:28:07PM -0600, Simon Glass wrote:
 >
->
-> On 10/16/23 23:54, Simon Glass wrote:
-> > Hi Johan,
+> > At present it isn't possible to use networking without the command line
+> > enabled. Add this as a condition.
 > >
-> > On Sun, 15 Oct 2023 at 16:33, Johan Jonker <jbx6244@gmail.com> wrote:
-> >>
-> >> Disable bounce buffer support for rkmtd.
-> >>
-> >> Signed-off-by: Johan Jonker <jbx6244@gmail.com>
-> >> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
-> >> ---
-> >>
-> >> Changed V3:
-> >>   New patch
-> >> ---
-> >>  drivers/block/blk-uclass.c | 6 +++---
-> >>  1 file changed, 3 insertions(+), 3 deletions(-)
-> >>
-> >> diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
-> >> index 30ad5bbb0024..ac1b43d757d8 100644
-> >> --- a/drivers/block/blk-uclass.c
-> >> +++ b/drivers/block/blk-uclass.c
-> >> @@ -415,7 +415,7 @@ struct blk_bounce_buffer {
-> >>
-> >>  static int blk_buffer_aligned(struct bounce_buffer *state)
-> >>  {
-> >> -#if IS_ENABLED(CONFIG_BOUNCE_BUFFER)
-> >> +#if IS_ENABLED(CONFIG_BOUNCE_BUFFER) && !IS_ENABLED(CONFIG_RKMTD)
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Reviewed-by: Ramon Fried <rfried.dev@gmail.com>
+> > ---
 > >
+> > (no changes since v1)
+> >
+> >  cmd/Kconfig | 1 +
+> >  net/Kconfig | 1 +
+> >  2 files changed, 2 insertions(+)
+> >
+> > diff --git a/cmd/Kconfig b/cmd/Kconfig
+> > index 148414f011df..c6ea5c860e33 100644
+> > --- a/cmd/Kconfig
+> > +++ b/cmd/Kconfig
+> > @@ -1694,6 +1694,7 @@ if NET
+> >
+> >  menuconfig CMD_NET
+> >       bool "Network commands"
+> > +     depends on CMDLINE
+> >       default y
+> >       imply NETDEVICES
+> >
+> > diff --git a/net/Kconfig b/net/Kconfig
+> > index 4215889127c9..25d494e1db46 100644
+> > --- a/net/Kconfig
+> > +++ b/net/Kconfig
+> > @@ -4,6 +4,7 @@
+> >
+> >  menuconfig NET
+> >       bool "Networking support"
+> > +     depends on CMDLINE
+> >       default y
+> >
+> >  if NET
 >
-> > We should not have arch-specific code in a generic file. Can you make
-> > BOUNCE_BUFFER depend on !RKMTD ?
->
-> Hi Simon, Marek,
->
-> No that doesn't work that way.
->
-> On Rockchip mainline boards MMC_DW is always our boot device BOOT_DEVICE_MMCx.
-> Therefore BOUNCE_BUFFER is also standard enabled.
->
-> The solution in this patch below is wrong as it assumes that if BOUNCE_BUFFER is enabled it must be used all over the place.
->
-> blk: Add bounce buffer support to read/write operations
-> https://source.denx.de/u-boot/u-boot/-/commit/75191f75bce45f3b9aff607c88f17778d3805c61
->
-> All implementations of bounce_buffer_start and bounce_buffer_start_extalign are located in the individual drivers
->
-> https://elixir.bootlin.com/u-boot/latest/C/ident/bounce_buffer_start
-> https://elixir.bootlin.com/u-boot/latest/C/ident/bounce_buffer_start_extalign
->
-> The use of a bounce_buffer in block devices should only be allowed if needed.
-> Lack of "ops->buffer_aligned" does not prevent the creation of a bounce_buffer and is not a good selector yet.
->
->         if (ops->buffer_aligned)
->                 return ops->buffer_aligned(dev, state);
->
-> Current blk_ops has no option to communicate the needed resources.
-> Please advise how to select the creation of a bounce buffer per device or other solution.
+> Please unwind this in the other direction.  What in network is depending
+> on cmdline in a non-trivial way?
 
-OK, I thought you might say that. So what about a flag in blk_desc
-which you can set for this driver, after the block device is created?
-
-[..]
+I can look at this as a follow-on, but I need a starting point. See my
+other comment.
 
 Regards,
 Simon
