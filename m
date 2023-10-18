@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE34CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 03:32:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E8E5CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 03:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9D0F86F44;
-	Wed, 18 Oct 2023 05:31:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3132E86F1E;
+	Wed, 18 Oct 2023 05:31:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BuafAPVG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JqZwJN81";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D063586F46; Wed, 18 Oct 2023 05:31:49 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id D1B2686F45; Wed, 18 Oct 2023 05:31:56 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0490586F44
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 05:31:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02E1886F1E
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 05:31:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-9c603e2354fso291037166b.1
- for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:31:48 -0700 (PDT)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-523100882f2so10554998a12.2
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:31:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697599907; x=1698204707; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1697599914; x=1698204714; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TOqat2Of3ESGEKBOrdPthgRdP73wDqsyJL30GS9Pe5A=;
- b=BuafAPVGjHn/FqyeALBeuf8SDIfm9oba4CVPOnmC/ZG7HL2t/apGYAoOBza0x4awaX
- wBlO7YWBiNcrhsm6f4RLmVYpqj7LHlDFH+6m4IBrM2b4abwc2Xrh5A16jrKqSLiI9wMp
- Can81NcWT+bDk9f2tCgVNH3HizlIaNx9DBH60=
+ bh=zACopg5I2b4fzvkrrnKj4NzJNZpmdcNooY4JTVI/SvE=;
+ b=JqZwJN81kkm5BUlNhEyhEMxjWJM9MxlhHDwH65FQtQWss0zMwBrDp2w6h7efdlnxDD
+ Ka3nRtHfwRMIW7SFxpo08ULmelOsFc9wotSLUU9OGS+yKDQ2Z2GtF9LTz+scg34nUl6l
+ eZoM2UCnaB3sPS8cqey/UyqVKg8ZRJoRJg7Ig=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697599907; x=1698204707;
+ d=1e100.net; s=20230601; t=1697599914; x=1698204714;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TOqat2Of3ESGEKBOrdPthgRdP73wDqsyJL30GS9Pe5A=;
- b=cRd09jc/cq280aiSLgFFXm+fRBUgpqU6iOhfBBDzMqa8Sm+Qlpb8EUgI4X56zLMBa9
- MZXCLzTShQ9CJ91mtG9NsnMuxQshRnFNQ2RTyr4CP/tL28nniyBaFxW4F/XoptGfqRmR
- 9ChaVl17ib3/64jNCAF7zRlmJRIYbjwWvy4h5s3Ziq7rNTrYdR7+/0xGED12w78O+ANk
- 08EckkU9RpcXSDQ8SrTSe8sWZpEsZC72U+dc74AomWZFbrqN3rW79PV8r0LQTt++z4jK
- zr1igUMatFtjlpSUAAn6ARYST+oCPIZjhMTt34lm+HJeGQwMDKptzuE8S+ABmWmqO/4L
- QT0w==
-X-Gm-Message-State: AOJu0Yxu+Pj7N/H4JjQrpW6gjSBdMwwVUFzHl2ZNF81dZxxGkLQEQq8l
- fionomVoyJmhWc6Sm2XvWEZpO4p46yie+qg0LVmbDE91H5toACsFQcc=
-X-Google-Smtp-Source: AGHT+IHp+ZbJHPWJJLZudJOe/DHye6hCiJyyrQlZ+9sT++hiHo+fNlNhjY0njzj83X6GkxY7MJuU6Lh5mQ3A2xCePTQ=
-X-Received: by 2002:a17:907:7eaa:b0:9c3:ba22:4d65 with SMTP id
- qb42-20020a1709077eaa00b009c3ba224d65mr3650917ejc.4.1697599907534; Tue, 17
- Oct 2023 20:31:47 -0700 (PDT)
+ bh=zACopg5I2b4fzvkrrnKj4NzJNZpmdcNooY4JTVI/SvE=;
+ b=Mv1zkTcLXV68cG970SSHE7xYBlgZmpb4DmkuC2rQdCR36ICCEgc/GzB6DEAddwlvhV
+ LbpnacAiO5ppjwtzg+/HWPoPPTMg3Hqf/PaF+hj07eovOr5ejfalndvGNqbCTLvh0MG4
+ KjCcW2rMtU4F1093+AvwgFV9VIeTIH+1SQnWfPb8ZTORM3VVXWO30IBO/lzE6GFhRYTq
+ yGWk2g400LXfaDiBNMtW7M3Gljifi/Z+GiE3NmfugR1V8c6Pj2JmVrJ8o9w0RjaZg611
+ 9GiQW9NKwikHYAWWMqW4QBX9kIwQWoOSH+0Y5T7hL1lZqLZfPI0ZJOJp9IR9ecDLYanN
+ yHYQ==
+X-Gm-Message-State: AOJu0Yw1BFapyBXrHE/Bx+60atrsLKFpVtoInZL8Ug5a9Vs9qBpsAf6s
+ o7PP1U5oXV6lrqjSjMLXTGd0m5NKnYRJtY4m0/0AbvHlxTy4qK9GbDc=
+X-Google-Smtp-Source: AGHT+IGgmU1c+KKW+Yi18ZbRA11SR+8POIGl6wGY95eqo6OG64l/jS8gfhnkgMnWDAs+RZt0CaMdkxnXxs+OMJv0wFI=
+X-Received: by 2002:a17:907:97c3:b0:9c5:8a6b:29e with SMTP id
+ js3-20020a17090797c300b009c58a6b029emr3199481ejc.13.1697599914371; Tue, 17
+ Oct 2023 20:31:54 -0700 (PDT)
 MIME-Version: 1.0
 References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-23-sjg@chromium.org>
- <20231017140925.GB3119521@bill-the-cat>
-In-Reply-To: <20231017140925.GB3119521@bill-the-cat>
+ <20231016222835.596572-22-sjg@chromium.org>
+ <20231017141320.GD3119521@bill-the-cat>
+In-Reply-To: <20231017141320.GD3119521@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 17 Oct 2023 21:31:34 -0600
-Message-ID: <CAPnjgZ3QDBJSmdOc=DMOUur0NgbytfWC6SQMNLs9_zX4WCFDqA@mail.gmail.com>
-Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+Date: Tue, 17 Oct 2023 21:31:43 -0600
+Message-ID: <CAPnjgZ39eOwfTOoGi1uNJPNZqJcuKfnVNhVxha7DDE=Mh8rkhQ@mail.gmail.com>
+Subject: Re: [PATCH v3 21/32] efi: Rearrange the Kconfig for
+ CMD_BOOTEFI_BOOTMGR
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,44 +84,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tom,
 
-On Tue, 17 Oct 2023 at 08:09, Tom Rini <trini@konsulko.com> wrote:
+On Tue, Oct 17, 2023, 07:13 Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
->
-> > Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet is
-> > available, add it as an explicit dependency.
+> On Mon, Oct 16, 2023 at 04:28:12PM -0600, Simon Glass wrote:
+> > The command should not be used to enable library functionality. Add a
+> > new BOOTEFI_BOOTMGR Kconfig for that. Adjust the conditions so that the
+> > same code is built.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > (no changes since v2)
-> >
-> > Changes in v2:
-> > - Add new patch to update EFI_LOADER to depend on DM_ETH
-> >
-> >  lib/efi_loader/Kconfig | 1 +
-> >  1 file changed, 1 insertion(+)
-> >
+> > Suggested-by: AKASHI Takahiro <takahiro.akashi@linaro.org>
+> [snip]
 > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> > index 13cad6342c36..fca4b3eef270 100644
+> > index 621ed5e5b0fb..13cad6342c36 100644
 > > --- a/lib/efi_loader/Kconfig
 > > +++ b/lib/efi_loader/Kconfig
-> > @@ -11,6 +11,7 @@ config EFI_LOADER
-> >       # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
-> >       depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
-> >       depends on BLK
-> > +     depends on DM_ETH
-> >       depends on !EFI_APP
-> >       default y if !ARM || SYS_CPU = armv7 || SYS_CPU = armv8
-> >       select CHARSET
+> > @@ -32,15 +32,14 @@ config EFI_LOADER
+> >
+> >  if EFI_LOADER
+> >
+> > -config CMD_BOOTEFI_BOOTMGR
+> > +config BOOTEFI_BOOTMGR
+> >       bool "UEFI Boot Manager"
+> > -     depends on CMDLINE
 >
-> Does this work for you Heinrich, or do you want to clarify the
-> dependencies (and re-organize the code as needed) around networking?
+> This is another example of why I'm asking for re-ordering things so that
+> first you clean / re-order things then you make all of CMD depend on
+> CMDLINE.  This patch, aside from other feedback, is standalone, if you
+> do that.
 
-It would be great to tidy up networking in lots of ways...perhaps we
-should add ~CMDLINE support to the list of post-lwip tasks if it lands
+This patch is before the one that makes all of CMD depend on CMDLINE.
 
 Regards,
 Simon
