@@ -4,88 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C9DBCDB483
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:42:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5B8ACDB483
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:43:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BA46805F5;
-	Wed, 18 Oct 2023 09:42:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A070480F06;
+	Wed, 18 Oct 2023 09:43:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RIUZaj7V";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XVBumOhU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD82B80310; Wed, 18 Oct 2023 09:42:43 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 614A980F06; Wed, 18 Oct 2023 09:43:34 +0200 (CEST)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B0EC4805F5
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:42:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B285805F5
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:43:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-32d569e73acso5664994f8f.1
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 00:42:40 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-323ef9a8b59so5999500f8f.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 00:43:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1697614960; x=1698219760; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1697615011; x=1698219811; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=PRTgNSOsXG0F9aLy2A/XE7NkoPOUWrEtgTPGGPgARJc=;
- b=RIUZaj7VVDf0f2S//PrsdPFiA08gcSlk0SJSHkit5caftedagwiL3iikRRe5Ev/fiI
- ix05VMWmi4fvlKew8atYfGGzHg2MhbIO8luc6AQ6u/e4zeflH/gS+ByqS9FWWfUDLZUb
- N1ci3vFOtwYoO/wZnoSwGf2UgneHbjPRN3dW5oen7teaB4r0Iu5owzJJkOMJ1Cu5lzqx
- crlNWGmkNpD7g+9ICkUtkgvMiNSuJdfBsVPoWZd0aF0BOmax7LJIEN++wXKraOnpt87o
- Q2jsLs/Y9Asm+mYFr9AswtdhXBtzutH/+gLrmc8tghIdW/GkpyPNgak0nR7+fl4GLPog
- uxtA==
+ :reply-to; bh=i0vCf29nLDwhqFZbNKESsa8maKdStWsuI7dK+fyv8HM=;
+ b=XVBumOhUnCkXsAqtM4IeMRAAFVW1Wp190L8UzDUo8dItWj6AtnxbC3HlgcilXkeJBN
+ 1Gmmt4fasffILCjJidEb7+5HKNYRG5XlM6YwU8U6UdXJbYtzj+mUjw/crz+58QvsSInn
+ iN5kC6y82vzVxLo0NbnG8tkasV9T6dwrkCknm7HY07T4GSpxum51Vy9Eem/zJ+K6T/D9
+ izvigzT5Y5nuNuWKDVKY3GhODJSqV5Hw2CWm1UE4eeAwSRyUhOFvZ/B/oCrWAvVYPj81
+ j+X6AFSnnlaTUe7n0tr3Kg3wThAOISo1BSeK+z8Zj4bvap3VYff91pBzm4VRWsk/T5YY
+ OL/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697614960; x=1698219760;
+ d=1e100.net; s=20230601; t=1697615011; x=1698219811;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :references:cc:to:content-language:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=PRTgNSOsXG0F9aLy2A/XE7NkoPOUWrEtgTPGGPgARJc=;
- b=S9FVKOkTFxZjr6OMAJSm9rXM8p93LyLS5mrawjjrBhmAkKNovuC7rgheKZ9IekPNHM
- SZYiBIhJRGG6jTZX5lBOHBN8OojMVsGcq0hXJ99Lbcpnkv5Pne/0EVr3w/TySC6A7oKQ
- ebQS5pyMydLPSIE2ChaHBiNtUgL+0l64XwhWTnL46Kef/50tXlGDhH6fe5FZTPxGI2ld
- /MQbeNmlo0kNylNwtVXiPmX7aofJop86RyDlHydU3YCJj5VaAPCHcTKWNjxcgPflC0hY
- Z3rFuk7zJSIp8frQjUjAeRlHGO6U9brvU6ZbBYH+IkPEwNEPEBVEgYIhtKOXtS7SGfCP
- Lw4Q==
-X-Gm-Message-State: AOJu0Yw45/N7JJ9iJM6XeihvszBnT2Txyhv8fnXAfTtlweIgFWWJvOEM
- x04ptee3z0zvscV3H3YsVo7Q3A==
-X-Google-Smtp-Source: AGHT+IFiMpUuxGLmnXBwvD/drZlOEpAchJMyhKaL9bfQNVx829Dm25kk6dI8KZmZfEjwb96fX66SSg==
-X-Received: by 2002:adf:ec0f:0:b0:317:67bf:3376 with SMTP id
- x15-20020adfec0f000000b0031767bf3376mr3658884wrn.57.1697614960106; 
- Wed, 18 Oct 2023 00:42:40 -0700 (PDT)
+ bh=i0vCf29nLDwhqFZbNKESsa8maKdStWsuI7dK+fyv8HM=;
+ b=WtiV+swClNQYtieeiWjzyLyoG+t3RRXDl0Olo7mw25fuAjY6z3cvChHAHoTOeth1sM
+ omrYB/fw0k5mPPzaPCcKgcSFJsxjik3eM2ML3muH6JcMlFYjIhVJSSbL4+GrEBNVU0ym
+ VrkwDjgffhd23plSpOiItf+vFxzq7ORsukU3xDXl3S89hjVRxRRRV+F0QBOjQy9/8r+L
+ HN1TG+UDIY8GZWIkv02WMssC9Cl9L9UZpxSkC4+PTLR/SF1XUZw740/BeUOSiTL7QDP5
+ mvXrkw29K4JzfUUc4lDwuLxGUG7apRF+aPCyojM4GcKi3apZ5NhNQB1nctwyXtzbCN8D
+ fY1g==
+X-Gm-Message-State: AOJu0YzWS3ymcNLY2TQzDD01KV6R9GrNWIefzkqw1/ONXXAofYAyvAZp
+ 1x/r99aB5cDFaKuy6+6ASNHq1g==
+X-Google-Smtp-Source: AGHT+IGUGZp1xd2h62gSe7PHhS+N9Sy5XgZABjdi0pGyFp31gW/ywAhxeyKHoHICJL0fbHnebjtQXQ==
+X-Received: by 2002:adf:e691:0:b0:31a:d9bc:47a2 with SMTP id
+ r17-20020adfe691000000b0031ad9bc47a2mr3825023wrm.53.1697615011648; 
+ Wed, 18 Oct 2023 00:43:31 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:5d8f:701:423:3d05?
  ([2a01:e0a:982:cbb0:5d8f:701:423:3d05])
  by smtp.gmail.com with ESMTPSA id
- f4-20020a056000128400b0031c5e9c2ed7sm1457010wrx.92.2023.10.18.00.42.39
+ f4-20020a056000128400b0031c5e9c2ed7sm1457010wrx.92.2023.10.18.00.43.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 18 Oct 2023 00:42:39 -0700 (PDT)
-Message-ID: <d4fa0c3a-a6a1-4c06-8f9e-f59086201069@linaro.org>
-Date: Wed, 18 Oct 2023 09:42:37 +0200
+ Wed, 18 Oct 2023 00:43:31 -0700 (PDT)
+Message-ID: <ca225ffe-c524-4312-8a65-30e0c36c4ae7@linaro.org>
+Date: Wed, 18 Oct 2023 09:43:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v4 4/8] clk: amlogic: Move driver and ops structs
+Subject: Re: [PATCH v1 1/2] serial: amlogic: Add UART compatible for A1 board
 Content-Language: en-US, fr
-To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek
- <michal.simek@amd.com>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Stefan Roese <sr@denx.de>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: prusovigor@gmail.com, kernel@sberdevices.ru,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20231017165649.1492-1-ivprusov@sberdevices.ru>
- <20231017165649.1492-5-ivprusov@sberdevices.ru>
+To: Igor Prusov <ivprusov@salutedevices.com>
+Cc: prusovigor@gmail.com, kernel@sberdevices.ru, u-boot-amlogic@groups.io,
+ u-boot@lists.denx.de
+References: <20231017213211.121550-1-ivprusov@salutedevices.com>
+ <20231017213211.121550-2-ivprusov@salutedevices.com>
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
  GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
@@ -111,7 +103,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro Developer Services
-In-Reply-To: <20231017165649.1492-5-ivprusov@sberdevices.ru>
+In-Reply-To: <20231017213211.121550-2-ivprusov@salutedevices.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -131,70 +123,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17/10/2023 18:56, Igor Prusov wrote:
-> Move driver and ops structs to avoid forward declaration after switching
-> to dump in clk_ops.
+On 17/10/2023 23:32, Igor Prusov wrote:
+> Add additional compatible to allow using serial driver with A1 board.
+> After compatible change in DTS [1], serial_meson driver should still be
+> able to work with console device.
 > 
-> Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+> [1] https://lore.kernel.org/all/20230705181833.16137-8-ddrokosov@sberdevices.ru/
+> 
+> Signed-off-by: Igor Prusov <ivprusov@salutedevices.com>
 > ---
->   drivers/clk/meson/a1.c | 34 +++++++++++++++++-----------------
->   1 file changed, 17 insertions(+), 17 deletions(-)
+>   drivers/serial/serial_meson.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
-> index 1075ba7333..e3fa9db7d0 100644
-> --- a/drivers/clk/meson/a1.c
-> +++ b/drivers/clk/meson/a1.c
-> @@ -601,14 +601,6 @@ static int meson_clk_set_parent(struct clk *clk, struct clk *parent_clk)
->   	return meson_mux_set_parent_by_id(clk, parent_clk->id);
->   }
->   
-> -static struct clk_ops meson_clk_ops = {
-> -	.disable	= meson_clk_disable,
-> -	.enable		= meson_clk_enable,
-> -	.get_rate	= meson_clk_get_rate,
-> -	.set_rate	= meson_clk_set_rate,
-> -	.set_parent	= meson_clk_set_parent,
-> -};
-> -
->   static int meson_clk_probe(struct udevice *dev)
->   {
->   	struct meson_clk *priv = dev_get_priv(dev);
-> @@ -638,15 +630,6 @@ static const struct udevice_id meson_clk_ids[] = {
+> diff --git a/drivers/serial/serial_meson.c b/drivers/serial/serial_meson.c
+> index 934de2ab23..be5f380f85 100644
+> --- a/drivers/serial/serial_meson.c
+> +++ b/drivers/serial/serial_meson.c
+> @@ -232,6 +232,7 @@ static const struct dm_serial_ops meson_serial_ops = {
+>   static const struct udevice_id meson_serial_ids[] = {
+>   	{ .compatible = "amlogic,meson-uart" },
+>   	{ .compatible = "amlogic,meson-gx-uart" },
+> +	{ .compatible = "amlogic,meson-a1-uart" },
 >   	{ }
 >   };
 >   
-> -U_BOOT_DRIVER(meson_clk) = {
-> -	.name		= "meson-clk-a1",
-> -	.id		= UCLASS_CLK,
-> -	.of_match	= meson_clk_ids,
-> -	.priv_auto	= sizeof(struct meson_clk),
-> -	.ops		= &meson_clk_ops,
-> -	.probe		= meson_clk_probe,
-> -};
-> -
->   static const char *meson_clk_get_name(struct clk *clk, int id)
->   {
->   	const struct meson_clk_info *info;
-> @@ -727,3 +710,20 @@ int soc_clk_dump(void)
->   
->   	return 0;
->   }
-> +
-> +static struct clk_ops meson_clk_ops = {
-> +	.disable	= meson_clk_disable,
-> +	.enable		= meson_clk_enable,
-> +	.get_rate	= meson_clk_get_rate,
-> +	.set_rate	= meson_clk_set_rate,
-> +	.set_parent	= meson_clk_set_parent,
-> +};
-> +
-> +U_BOOT_DRIVER(meson_clk) = {
-> +	.name		= "meson-clk-a1",
-> +	.id		= UCLASS_CLK,
-> +	.of_match	= meson_clk_ids,
-> +	.priv_auto	= sizeof(struct meson_clk),
-> +	.ops		= &meson_clk_ops,
-> +	.probe		= meson_clk_probe,
-> +};
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
