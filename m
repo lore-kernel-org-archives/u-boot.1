@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C277CDB482
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:01:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 214E4CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 14:01:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7EEB786FB8;
+	by phobos.denx.de (Postfix) with ESMTP id D794B86FC5;
 	Wed, 18 Oct 2023 16:01:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=conclusive.pl
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="Jo5zyhcR";
+	dkim=pass (2048-bit key; unprotected) header.d=conclusive.pl header.i=@conclusive.pl header.b="ITb5qS/h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CE1D86FBA; Wed, 18 Oct 2023 16:01:41 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id A003986F94; Wed, 18 Oct 2023 16:01:41 +0200 (CEST)
+Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
+ [IPv6:2a00:1450:4864:20::22b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E786886F94
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AC24C86FB7
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 16:01:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=conclusive.pl
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=artur@conclusive.pl
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2c509d5ab43so76768411fa.0
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:38 -0700 (PDT)
+Received: by mail-lj1-x22b.google.com with SMTP id
+ 38308e7fff4ca-2b9d07a8d84so85134581fa.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 07:01:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=conclusive.pl; s=google; t=1697637698; x=1698242498; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pMjnT9FAv0SobZQArQB7Tio/DeuRbWjYE7GkzZ/1NLE=;
- b=Jo5zyhcR2wUXEFfRrVKN9NmLNA8I6uVcr8st6cFmfVLAlIR3KGmFMZJ4ea1LSxRJlg
- YK2OimgA3FDEHkR+d8r6KFtz4kJ8EKDg4EX8xElbW3g7vrmOPwDI222SZf6sSia74E7Q
- +sGMzUaAjNImfd6OQqktmt5mzMO8RML2QjS+QAHyST75Tda0HoOpfNVure52Wv9pzeXC
- 0+Q4GSr1jWQ6I6MPXHmrcjaE8gM33YL8l8kv62H2/IzDi5HP9lGpYr8oFgz0qesrReah
- dWa806fU6oGs0yB5UhNKi1We3hWJSdDFLg6e2X+A1/+9NeviV2o1Eq0EHl6kwhqdSGYq
- W8LQ==
+ d=conclusive.pl; s=google; t=1697637699; x=1698242499; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZywHXq0DKOY4kDhAaecXD0ZweSv5orAU+XUoe/Z7gt8=;
+ b=ITb5qS/haaoAH14DxmVGbwSzS+1nojP59uLhUzka2tcwcHaPRwGVyITKphKbHVevIi
+ 0gs6wai49WZQrODmRgiXToZIj3e61VUHXFoTPbecfi2JPYSclikZPpyKzVnW1oTYnQbZ
+ rrWDjQ+rtLR6QrTCA13aunUqEPNoEhXXpF+ujDzWfHSoIhf8r54HXbAoDiI+0Zc97sGj
+ ZcLYutBz4z9ytNEnTgjQ0cf2Imqh1zUBhdaaEa2z0gF0wOYOdT3XqoYmwkRtl9RP2e0X
+ G8QEF+x7kn/JUO58on8LJXGs3ByaqBOn3W5vI4h/4WcZ+fFfhYH87Aa+E4s1xCE5Q08F
+ zg7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697637698; x=1698242498;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pMjnT9FAv0SobZQArQB7Tio/DeuRbWjYE7GkzZ/1NLE=;
- b=kBa12jK9g9owggSOxmIoC/HXTD3Vvre0PC83nzpWUEaT80ieOwbFvoY8RiPTY1WRFV
- svharThoYSEJ7cY3n1lEgdTXB7KGNx0O6d0TXmq7csVFMThBeZ8jlqXiYbl4RNlMxvyN
- lluuE5UDYGmeX55zHw2r6UuveV6v7UT60ZMqmeDYKNeXdpnHA0+w9ltQKuB1FdXMPLfa
- QOMlDWRIAKeecaR9bLiJz1MLfxVOLwV1LPSv3bjyGIYZ8mM6MAZYQ/sVfNVPnFZWBU5C
- M4iYpAxTLkDAEqH2giLw747rynDu16sVqm9y11U502WAxJsdohxT8fTXC+29gFNylCpc
- jpNg==
-X-Gm-Message-State: AOJu0YzqsNsgti/91oyqKeFw9myVeQkw7zvZ17w838yBsXNI+M0herqm
- I2NgS8xKmqVKAWL4q2ptQ4SXHA==
-X-Google-Smtp-Source: AGHT+IF8x/GFeMGGq6gigqKacPF3evoLoCIZ1rD3C7+esQ2yYXJq3oEAYrk7ZP4pIjeX/wzMtvGq5Q==
-X-Received: by 2002:a2e:7a05:0:b0:2c0:e7c:bf74 with SMTP id
- v5-20020a2e7a05000000b002c00e7cbf74mr4526746ljc.12.1697637697925; 
- Wed, 18 Oct 2023 07:01:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697637699; x=1698242499;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZywHXq0DKOY4kDhAaecXD0ZweSv5orAU+XUoe/Z7gt8=;
+ b=KYm3TovFrO53EjpoQb6PzBKqqKqck6UhYd+E1bUGB6bdVNFI8bItlBli33+/LT7e3s
+ lurJ8NkCtf4Vvsor6dWOKqrTINmBA7PyKTo7OeRu7SEnAYxv1oSjihVBIMhAfGwqBVge
+ u1p+3tAYCSC33nebtD06vTDk7C0wu0yHs2O5C/Lbr1ho53G5acdNGxPf4jTECFF7tSI4
+ O6ks65SUeq1+QLKMhTLhI0LKIvtIZqsSLjz6f4rY+JelbZ0sqAGmHIlwRiX02jz5SJyN
+ zS3hl7/9btdaEJ5Ta47EbijrCcI+ATrYNMvXxwrzPJxy36XxXUb1icrpCkCXoFVaRjo6
+ DnEA==
+X-Gm-Message-State: AOJu0Yw7GOxdrb5+9j4iu8RnoWt1IUkuvhyC05aVJ27RVsiOWE3z91Cf
+ Q5N3gdbufxFPpq3AOqRgGONgxKfRmqLVdx1h9duTGA==
+X-Google-Smtp-Source: AGHT+IE+gODW8d0XcXK9g2AXZAjV2XfKfWTuZKTqqczsBNUUrxbmjNHOnZ/JjKImC0vuDjmbn8IR8Q==
+X-Received: by 2002:a2e:95c4:0:b0:2bc:c28c:a2b8 with SMTP id
+ y4-20020a2e95c4000000b002bcc28ca2b8mr3847780ljh.27.1697637698829; 
+ Wed, 18 Oct 2023 07:01:38 -0700 (PDT)
 Received: from localhost.localdomain (host-89.25.128.123.static.3s.pl.
  [89.25.128.123]) by smtp.gmail.com with ESMTPSA id
- f2-20020a05651c03c200b002b9bf5b071bsm718692ljp.20.2023.10.18.07.01.36
+ f2-20020a05651c03c200b002b9bf5b071bsm718692ljp.20.2023.10.18.07.01.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 07:01:37 -0700 (PDT)
+ Wed, 18 Oct 2023 07:01:38 -0700 (PDT)
 From: Artur Rojek <artur@conclusive.pl>
 To: Eugen Hristev <eugen.hristev@collabora.com>,
  Simon Glass <sjg@chromium.org>, Jakub Klama <jakub@conclusive.pl>,
@@ -70,10 +71,12 @@ To: Eugen Hristev <eugen.hristev@collabora.com>,
 Cc: Wojciech Kloska <wojciech@conclusive.pl>,
  =?UTF-8?q?Rados=C5=82aw=20Adamczyk?= <radoslaw.adamczyk@conclusive.pl>,
  u-boot@lists.denx.de, Artur Rojek <artur@conclusive.pl>
-Subject: [PATCH v5 0/4] Conclusive KSTR-SAMA5D27 support
-Date: Wed, 18 Oct 2023 16:00:55 +0200
-Message-ID: <20231018140059.161169-1-artur@conclusive.pl>
+Subject: [PATCH v5 1/4] common: add prototype & rename populate_serial_number()
+Date: Wed, 18 Oct 2023 16:00:56 +0200
+Message-ID: <20231018140059.161169-2-artur@conclusive.pl>
 X-Mailer: git-send-email 2.42.0
+In-Reply-To: <20231018140059.161169-1-artur@conclusive.pl>
+References: <20231018140059.161169-1-artur@conclusive.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,51 +95,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+Rename populate_serial_number() to a more descriptive
+serial_read_from_eeprom() and provide the missing function prototype.
 
-this is v5 of the Conclusive KSTR-SAMA5D27 support series.
+This is useful for boards that wish to read their serial number from
+EEPROM at init.
 
-Patches [1/4], [2/4] and [3/4] remain unchanged.
+Signed-off-by: Artur Rojek <artur@conclusive.pl>
+Reviewed-by: Simon Glass <sjg@chromium.org>
+---
 
-In patch [4/4], a new dtsi file has been added in order to keep U-Boot
-specific properties separate from the main dts. As such, MAINTAINERS has
-been modified to feature the new file.
+v5: no change
 
-An alias to the i2c node holding the EEPROM has also been explicitly
-added, so that it always enumerates at bus 2.
+v4: - revert to the approach found in v2
+    - keep the new serial_read_from_eeprom() name
 
-Artur Rojek (4):
-  common: add prototype & rename populate_serial_number()
-  event: add new EVT_SETTINGS_R event
-  arm: dts: at91: sama5: Add flexcom4 node
-  board: Add support for Conclusive KSTR-SAMA5D27
+v3: - restore original function name and make it static
+    - provide a generic function for reading EEPROM serial number and
+      wrap it around the existing tlv logic
+    - move the env var check out of populate_serial_number() and into
+      the new serial_read_from_eeprom() in order to stay consistent with
+      the documentation
 
- arch/arm/dts/Makefile                         |   3 +
- arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi   |  42 +++
- arch/arm/dts/at91-kstr-sama5d27.dts           | 127 ++++++++++
- arch/arm/dts/sama5d2.dtsi                     |  20 ++
- arch/arm/mach-at91/Kconfig                    |  12 +
- board/conclusive/kstr-sama5d27/Kconfig        |  15 ++
- board/conclusive/kstr-sama5d27/MAINTAINERS    |   9 +
- board/conclusive/kstr-sama5d27/Makefile       |   5 +
- .../conclusive/kstr-sama5d27/kstr-sama5d27.c  | 239 ++++++++++++++++++
- cmd/tlv_eeprom.c                              |  14 +-
- common/board_r.c                              |   1 +
- common/event.c                                |   1 +
- configs/kstr_sama5d27_defconfig               |  73 ++++++
- include/configs/kstr-sama5d27.h               |  15 ++
- include/event.h                               |   9 +
- include/init.h                                |  14 +
- 16 files changed, 586 insertions(+), 13 deletions(-)
- create mode 100644 arch/arm/dts/at91-kstr-sama5d27-u-boot.dtsi
- create mode 100644 arch/arm/dts/at91-kstr-sama5d27.dts
- create mode 100644 board/conclusive/kstr-sama5d27/Kconfig
- create mode 100644 board/conclusive/kstr-sama5d27/MAINTAINERS
- create mode 100644 board/conclusive/kstr-sama5d27/Makefile
- create mode 100644 board/conclusive/kstr-sama5d27/kstr-sama5d27.c
- create mode 100644 configs/kstr_sama5d27_defconfig
- create mode 100644 include/configs/kstr-sama5d27.h
+v2: - rename the function
+    - move function documentation from .c file to the prototype location
 
+ cmd/tlv_eeprom.c | 14 +-------------
+ include/init.h   | 14 ++++++++++++++
+ 2 files changed, 15 insertions(+), 13 deletions(-)
+
+diff --git a/cmd/tlv_eeprom.c b/cmd/tlv_eeprom.c
+index 79796394c5c8..57cfd355df1b 100644
+--- a/cmd/tlv_eeprom.c
++++ b/cmd/tlv_eeprom.c
+@@ -1088,19 +1088,7 @@ int mac_read_from_eeprom(void)
+ 	return 0;
+ }
+ 
+-/**
+- *  populate_serial_number - read the serial number from EEPROM
+- *
+- *  This function reads the serial number from the EEPROM and sets the
+- *  appropriate environment variable.
+- *
+- *  The environment variable is only set if it has not been set
+- *  already.  This ensures that any user-saved variables are never
+- *  overwritten.
+- *
+- *  This function must be called after relocation.
+- */
+-int populate_serial_number(int devnum)
++int serial_read_from_eeprom(int devnum)
+ {
+ 	char serialstr[257];
+ 	int eeprom_index;
+diff --git a/include/init.h b/include/init.h
+index 4e7fe26c2004..d57a24fd00dd 100644
+--- a/include/init.h
++++ b/include/init.h
+@@ -271,6 +271,20 @@ void board_init_r(struct global_data *id, ulong dest_addr)
+ 
+ int cpu_init_r(void);
+ int mac_read_from_eeprom(void);
++
++/**
++ *  serial_read_from_eeprom - read the serial number from EEPROM
++ *
++ *  This function reads the serial number from the EEPROM and sets the
++ *  appropriate environment variable.
++ *
++ *  The environment variable is only set if it has not been set
++ *  already. This ensures that any user-saved variables are never
++ *  overwritten.
++ *
++ *  This function must be called after relocation.
++ */
++int serial_read_from_eeprom(int devnum);
+ int set_cpu_clk_info(void);
+ int update_flash_size(int flash_size);
+ int arch_early_init_r(void);
 -- 
 2.42.0
 
