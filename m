@@ -4,57 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65FA6CDB474
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 02:35:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FB91CDB482
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 03:29:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FA7486EDD;
-	Wed, 18 Oct 2023 04:35:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E7CE086D51;
+	Wed, 18 Oct 2023 05:29:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=google.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1697596525;
-	bh=Hx3Eywvn1F+d6WQaalFrrZ7/5zMtCScrWUtgbFG9BLE=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=EeNztFSC8DEYDUsFhGKGinfkUNGdugfVlrdn0PBD93F8fXFidsoMdVbPqf5yeHg92
-	 wglU0nXDg7TFwvHKMSp001Kg6VPb5c0i9mXWci7A8zxI0d8LY7WZJ9o08Mtih2Hhwp
-	 0oShpImFfDnAk1fO9VCpjsRSRr8ZwloSy2Wx3nt9bLp0H6huCg3fytdtruICGCnbS/
-	 T7y0Hx6bhuxUqJvlwNKriBt8/1IGFoezi89ttjXowy6HbC/VNcwfdRSQ9AQqhcpUD2
-	 HMM5sRBehpE0A0KYMum8WC7VpTGy9Ud2E+YyRZt7+EQs5udm2mDE4etP3VvRWqlwzy
-	 pDCHFecmaFpZw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="FH8SXb7r";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 687F586E6C; Wed, 18 Oct 2023 05:29:00 +0200 (CEST)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5CF3886D48;
- Wed, 18 Oct 2023 04:35:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1697596523;
- bh=Hx3Eywvn1F+d6WQaalFrrZ7/5zMtCScrWUtgbFG9BLE=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=V/opjQEZGgX0k5QSMoHakcsShJrrV/6h6lgWV1ymeFIiYRMNqgQPgRo9BBJpGX6m+
- RdFiOewRl7wQR5jMUPGwj6q4Q0c6Ko1qOMTTzaD5Wn6cm2s69Ay4dTS9o72g//3Mn5
- L3WUnejGA3xcuc77I1wTrGoyPgZmkUh/29TV6J0fTEh/tkJ6jRRUz3Vx223cpQV+VK
- OSUC9Wjn/n2jW4UXn4CZC6jUkcgyaLAKRGMzjC60ZxsxQva94f1gTzagglmErUSdad
- uzjC31fMakPrAIHRKBYhiOxfNYfvHdxM70AQpP3udOzCG8+/b6T/fOsyOKBH1FzPoM
- X7zxIieOMFMHg==
-Message-ID: <55da21fd-2a9b-4b48-a0bb-d8f07ad362ea@denx.de>
-Date: Wed, 18 Oct 2023 04:35:22 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 818C186D51
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 05:28:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2c5071165d5so256961fa.0
+ for <u-boot@lists.denx.de>; Tue, 17 Oct 2023 20:28:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=google.com; s=20230601; t=1697599738; x=1698204538; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=iDdGyUFuqIm4bdN7TOouAxTGC4bTsIzlTOhzqDvnf+Y=;
+ b=FH8SXb7rSjUm+aqEKRxQWwOVG38zrWG77aXF5SqXIjzOiAk+b7l0oEeLR33C4hzfsS
+ qYPj7qEXtAec3gaOK60DlIZpVpq8LunQN9HWE1z2CiMDh4dwxYz5np4qnDbjKhZOrxQY
+ l5G59qCqo+EmkhkQDksA52uN0XsoxJ7qjbwnnqAem9xYDG9FcGeh1ujWuBraJ7w44rhn
+ u2VoaRHbXqFY6ds+QOo/8oAslNriOQuLpxQ/t0UlePYq9JXR2c+wEemVW9Pfmj/LC+dT
+ 2Cc3N+uDbiUziBUUBdfI3DgVllE5gmlNyYpjWov2GyoRy9eUul2qe72F6t7sT7bGo1kd
+ UiIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697599738; x=1698204538;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=iDdGyUFuqIm4bdN7TOouAxTGC4bTsIzlTOhzqDvnf+Y=;
+ b=GryQr31Y8N+GrTAJZ3ApHUyDu9+XoCRqe2/Q7geARth6BPCKHHszLWQA4X3grYPQdC
+ CEjwBlT2pNBgIyoahOkhGMA01/PynOgzum1eSSUViWu3nQOaSmWPuQ9moXviZ5eRIRnX
+ dPI1EvmsRB1VxayenfVY01ARN/i7XUjgWsQYkvSPFSFNXYBR7XQ3KH7MfAl/CMFzLL2q
+ K0zax5B0ovHiYf9jenWNpsaGhnFG7mJHn0gXlDS7NaqCTZ2B8itEmRENHYXB5Q6wswJJ
+ vidGHmTjwl1M0TXbf2yz9qxJ3fHllfqbuZ6yl6i4A/Rt0xjwfpBMgcS8PE+1sX3vTZHf
+ QdOg==
+X-Gm-Message-State: AOJu0Yz3fWlLybITcc2tkYXTlyCdoojPkJDZGWTOx2qUXLOvtlYOWk2N
+ 0mcay7K+490bXkhp8KA/vL/gueYJtnFBonYn3FoBeQ==
+X-Google-Smtp-Source: AGHT+IHHfMCeTtS60ZLnJNLmeOB9gz1rfTzPfh7OMu1bqVfWhvWyWON5OhhXeqcUiPOtAPKxrayGVLBsDL0nGBiZrog=
+X-Received: by 2002:a05:651c:1a09:b0:2c0:20e3:990f with SMTP id
+ by9-20020a05651c1a0900b002c020e3990fmr3143244ljb.10.1697599737470; Tue, 17
+ Oct 2023 20:28:57 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] usb: xhci: Check return value of wait for TRB_TRANSFER
- event
-Content-Language: en-US
-To: Minda Chen <minda.chen@starfivetech.com>, Bin Meng <bmeng.cn@gmail.com>
-Cc: u-boot@lists.denx.de
-References: <20231017062016.51682-1-minda.chen@starfivetech.com>
- <aa649c6d-5992-492a-bd39-d1f4389e773f@denx.de>
- <2313a5f6-30a2-46ed-923f-a6f8699452c6@starfivetech.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <2313a5f6-30a2-46ed-923f-a6f8699452c6@starfivetech.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20231016215445.5970-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20231016215445.5970-1-heinrich.schuchardt@canonical.com>
+From: Simon Glass <sjg@google.com>
+Date: Tue, 17 Oct 2023 21:28:39 -0600
+Message-ID: <CAPnjgZ1g-WiSgLx28Q-LaXoXFNsZ4F2H3np=K3-Y8D6zkXK=Tg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] config: qemu: relax print and console buffer size
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Alexander Graf <agraf@csgraf.de>, 
+ Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,73 +84,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/18/23 03:22, Minda Chen wrote:
-> 
-> 
-> On 2023/10/17 19:20, Marek Vasut wrote:
->> On 10/17/23 08:20, Minda Chen wrote:
->>> xhci_wait_for_event() waiting TRB_TRANSFER event may return
->>> NULL. Checking the return value to avoid crash.
->>>
->>> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
->>
->> How did you trigger this error ? Is there a reproducer ? Details please ...
-> 
-> While Scanning a lenovo usb2.0 udisk， not 100 % reproduce
+On Mon, 16 Oct 2023 at 15:55, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> QEMU print and console buffer sizes have been restricted on QEMU below
+> their default values.
+>
+> One of the side effects of the print buffer size restriction is output
+> truncation of the 'efidebug dh' command.
+>
+> As QEMU does not have special memory size restrictions remove the settings
+> from the defconfig files and go with the generic defaults.
+>
+> Fixes: d0ee7f295d74 ("Convert CONFIG_SYS_PBSIZE to Kconfig")
+> Fixes: d31466b382dd ("Convert CONFIG_SYS_CBSIZE to Kconfig")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  configs/qemu-ppce500_defconfig       | 1 -
+>  configs/qemu-riscv32_defconfig       | 2 --
+>  configs/qemu-riscv32_smode_defconfig | 2 --
+>  configs/qemu-riscv32_spl_defconfig   | 2 --
+>  configs/qemu-riscv64_defconfig       | 2 --
+>  configs/qemu-riscv64_smode_defconfig | 2 --
+>  configs/qemu-riscv64_spl_defconfig   | 2 --
+>  configs/qemu-x86_64_defconfig        | 1 -
+>  configs/qemu-x86_defconfig           | 1 -
+>  configs/qemu_arm64_defconfig         | 2 --
+>  configs/qemu_arm_defconfig           | 2 --
+>  11 files changed, 19 deletions(-)
 
-Can you include Linux
-
-lsusb -vvv
-
-output for this device and include that information in the commit 
-message ? (or the U-Boot info below, that works too, just please add it 
-into the commit message, it is important for future reference).
-
-> This is log.
-> 
-> StarFive # usb reset
-> resetting USB...
-> Bus xhci_pci: Register 5000420 NbrPorts 5
-> Starting the controller
-> USB XHCI 1.00
-> scanning bus xhci_pci for devices... WARN halted endpoint, queueing URB anyway.
-> Unexpected XHCI event TRB, skipping... (f77141f0 00000000 13000000 02008401)
-> Unhandled exception: Load access fault
-> EPC: 00000000f7f563c6 RA: 00000000f7f563c6 TVAL: 000000000000000c
-> EPC: 000000004024a3c6 RA: 000000004024a3c6 reloc adjusted
-
-Where does the crash point to in code, can you disassemble the PC 
-pointer ? (or maybe you can use scripts/decodecode I think)
-
-> SP:  00000000f76f9a60 GP:  00000000f76fbdd0 TP:  0000000000000001
-> T0:  00000000f76fa168 T1:  00000000000000ff T2:  0000000000000016
-> S0:  00000000f7712fc0 S1:  00000000f76fb100 A0:  0000000000000000
-> A1:  0000000000000000 A2:  00000000f77145d0 A3:  00000000f7714590
-> A4:  0000000000000000 A5:  0000000000000020 A6:  000000000000000f
-> A7:  0000000000000100 S2:  0000000000000000 S3:  0000000000000000
-> S4:  00000000f7717050 S5:  00000000f7717050 S6:  0000000080000383
-> S7:  00000000f76f9dc0 S8:  00000000000000ff S9:  0000000000000001
-> S10: 00000000f76f9ba0 S11: 0000000000010c04 T3:  0000000000000010
-> T4:  0000000000000006 T5:  0000000000000080 T6:  00000000f76fa231
-
-[...]
-
-> 3: Mass Storage,  USB Revision 2.0
->   - Generic Mass Storage 31097778XB15113405
->   - Class: (from Interface) Mass Storage
->   - PacketSize: 64  Configurations: 1
->   - Vendor: 0x17ef  Product 0x38ac Version 1.0
->     Configuration: 1
->     - Interfaces: 1 Bus Powered 200mA
->       Interface: 0
->       - Alternate Setting 0, Endpoints: 2
->       - Class Mass Storage, Transp. SCSI, Bulk only
->       - Endpoint 1 Out Bulk MaxPacket 512
->       - Endpoint 2 In Bulk MaxPacket 512
-> 
-> StarFive # usb storage
->    Device 0: Vendor:          Rev: 8.07 Prod: Lenovo SX1 64G
->              Type: Removable Hard Disk
->              Capacity: 60000.0 MB = 58.5 GB (122880000 x 512)
-
-[...]
+Reviewed-by: Simon Glass <sjg@chromium.org>
