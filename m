@@ -4,86 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED2BCDB482
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 15:27:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECCEFCDB482
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 15:27:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E15D286FBA;
-	Wed, 18 Oct 2023 17:26:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6781786FB8;
+	Wed, 18 Oct 2023 17:27:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ClJ6KumB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="idocb+rQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58F0986FC1; Wed, 18 Oct 2023 17:26:57 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 1028A86F40; Wed, 18 Oct 2023 17:27:19 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B989086FB8
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 17:26:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E69DE86FC1
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 17:27:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@google.com
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-51e28cac164so16751243a12.1
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:26:54 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-d857c8a1d50so7118306276.3
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 08:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1697642814; x=1698247614; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O6fKug459xVV7ZiCKTumTGd3fN6ho88DGNksAwz07nU=;
- b=ClJ6KumBhsFVlCzAGS2s7XZBWtwMULwyFT/KDO53Svplk001oOFL1Jwz5kVuk70di8
- qF6Abzlf5h6dVX/g1C6Px65M2pQAMO+tV2R6bQkVYd7lVw9rvqugIruEXglS1gHLrZ7s
- MkgM+B/GP97Z9Gqp9qmEim4/t8UJVwNyCxrqs=
+ d=konsulko.com; s=google; t=1697642835; x=1698247635; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=MusqOzZ/P4VJoihlB9SfJhWKKWSN2Tblc0J3Cuqz/LY=;
+ b=idocb+rQLGbOWe7v35pb3lNzTjWb/8VGDzziEp1nB+cjE+1Skr0EXzqj48H6rTQKWw
+ MZCOby7tK2e48Skxn+0udatTvkrHa0BUM+4zimqWkDs4EGxI7gRPgrvpX29w47J+zFqZ
+ otVP94rTzs2qsrUnfy1+Qbo+wW5xQZugj381k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697642814; x=1698247614;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=O6fKug459xVV7ZiCKTumTGd3fN6ho88DGNksAwz07nU=;
- b=d0S190RWCaiRRIiA6BM9pJgIoGGlWQXhVJ/epdVsfruqPlbk+l+9cBHd7QvUH0Cto5
- ItNuvP+QoDxeIEcNIwk2SqrYne4gc6HbPTZVJcK72SU3Urv/2YIb0N1nxqmAnK643ZVq
- K3XDmHrSDb7d7K/T6fSpboEU5zU+Z9CMr7GsBLsuqZk0nSo7VARjunQJn43/dDtpQ8NA
- nKXKu01WgEUh/Im+0JVJE5gwWKxYMhJxhsEheKyGWZ/KDs53ZCy46D4Gf+aUUfFiocz5
- eFjSIG20RTqQyXv+wGCwHZZEdHivNmVKR2hpWCw9XU0jOWpIqUZ6W2Cf+r/wzY+0GGb8
- fyjg==
-X-Gm-Message-State: AOJu0YzMHUIq6EWZ3WHW00/tyVCDgNUloHcJF6FikKCzJDAsV/0uyAUH
- 1GcJr3iyqv4F8ywQqY7DVUI23F5l/RQnaewQ2b8ytQ==
-X-Google-Smtp-Source: AGHT+IHSl9L0P4/S9LiPlbyS2V8k82+GKv3HK36EDXVPH43oSNCTjYIZsh10jPiPJQnmcOu2bD/E0FJ/1BHQ7boxbko=
-X-Received: by 2002:a05:6402:1485:b0:53e:1207:5b69 with SMTP id
- e5-20020a056402148500b0053e12075b69mr4975319edv.10.1697642813976; Wed, 18 Oct
- 2023 08:26:53 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1697642835; x=1698247635;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MusqOzZ/P4VJoihlB9SfJhWKKWSN2Tblc0J3Cuqz/LY=;
+ b=nsi+FL5H1+JJywLSXhzZweHucdI+yRLlsZMUoOrtweeUyHmghhLuSFh73VsoWEKseN
+ b28rgwmqAfS+vraRaBuR5FanhZNAnmBP+//XKs6UnxJHf0cwnfFmLa6bafK1aoh0rcSD
+ fVMaQEaJxyCEJYL5IZiEgxKdwwYY5py+CYiG4Ruw0y+o4OrkCyfy8QJfliEZuezhl5Ai
+ Q9eb84v25MSqvnuIjUYUML5BRQbCUvO03l4q2ifYXcQ5dhfESDNwXD16W6xqvQuSuW2G
+ fqKO8HHU1xlD6kyN9X2+ySOj0VaK49CwQ7bJGAmHsKi8ZkJRAS8TV6RgF6va7etY/BE/
+ vBkQ==
+X-Gm-Message-State: AOJu0YxW82VYyaBjaxlH52+Y9TX9n2+fUl/juBpQfft4Ot4S3bnNmedx
+ WKZCp9VusG1VBW3WkkVcbDC0DbxRXs4+Um3yFXo8JQ==
+X-Google-Smtp-Source: AGHT+IF2Yb+FieDUbzTGQnG5JCmu9rTAucx6PEb6sduJn6UT8iD35QPX7WJxSfWPIeXrus+5v8Oamg==
+X-Received: by 2002:a25:abd3:0:b0:d9a:68db:7f96 with SMTP id
+ v77-20020a25abd3000000b00d9a68db7f96mr5450265ybi.21.1697642835564; 
+ Wed, 18 Oct 2023 08:27:15 -0700 (PDT)
+Received: from bill-the-cat
+ (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
+ [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
+ 128-20020a251186000000b00d9ab95777ecsm1369990ybr.49.2023.10.18.08.27.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 18 Oct 2023 08:27:15 -0700 (PDT)
+Date: Wed, 18 Oct 2023 11:27:13 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+Message-ID: <20231018152713.GT3119521@bill-the-cat>
+References: <20231016222835.596572-1-sjg@chromium.org>
+ <20231016222835.596572-23-sjg@chromium.org>
+ <20231018133709.GA3765642@bill-the-cat>
+ <CAPnjgZ2qG7XgcbYyrpZaTef21MJA-B7SMm9jGMzk8G7M=mVv1w@mail.gmail.com>
 MIME-Version: 1.0
-References: <20230830180524.315916-1-sjg@chromium.org>
- <20230830180524.315916-31-sjg@chromium.org>
- <ZPA8AtGOel8pko6y@hades>
- <CAPnjgZ1gat+g=dRUO4Akk2YMp_=wy7agQM2CuwaRB7J-C6u=kw@mail.gmail.com>
- <CAC_iWj+HQSGfntZV_5ccUXfi8w6AGp3ETxUUORtm+bhXBuX3gQ@mail.gmail.com>
- <CAPnjgZ0JkXkr+0ZPt5Om1-XzjY3rWjjDd8B5grqmUqGUxf7u_Q@mail.gmail.com>
- <CAC_iWjL-F7Vo+oL0aJG=A4a3es__8S-krt7dBs77Snh1pFkPHQ@mail.gmail.com>
- <CAPnjgZ2QV3t9FnY_7VBJ4NAYW8zPL9p1bktfcEP86AnXrFoA1w@mail.gmail.com>
- <CAC_iWjKd60b2pPdQf195ef+a8_3jEHtXh085Sd7uPAik1mCu+Q@mail.gmail.com>
- <700c3677-6fc1-40b0-9ca2-9f9e2cc824b0@amd.com>
- <CAC_iWjJUbads2Trqxm_chnhypyZ+tTT2mXUw56z0Py9bgyBhZg@mail.gmail.com>
- <8528ca89-16a7-48ba-95d3-72e7f3b107eb@amd.com>
- <CAC_iWj+-Om7Aqh7YQf1LhSZOSETeZgtBMRZKp4_AaixA5RfbHA@mail.gmail.com>
- <CAPnjgZ1ydE7y4UZPmvyaDTBVZdeQr=ftCnR1QtXB9TtewFkbxw@mail.gmail.com>
- <CAC_iWjLyupx5XUUm99qJg2Zt-G4KeZpTBoxWKOeXZ9nNw8roeg@mail.gmail.com>
-In-Reply-To: <CAC_iWjLyupx5XUUm99qJg2Zt-G4KeZpTBoxWKOeXZ9nNw8roeg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Wed, 18 Oct 2023 09:26:42 -0600
-Message-ID: <CAPnjgZ1GGz6v8FzKOfNqqkZsVpQOzoM=Zz9hKcxpKgOt7oNssA@mail.gmail.com>
-Subject: Re: [PATCH 30/32] fdt: Allow the devicetree to come from a bloblist
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Michal Simek <michal.simek@amd.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Baruch Siach <baruch@tkos.co.il>, 
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Nikhil M Jain <n-jain1@ti.com>, 
- Qu Wenruo <wqu@suse.com>, Stefan Roese <sr@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2pVdNDyWLf8HNV83"
+Content-Disposition: inline
+In-Reply-To: <CAPnjgZ2qG7XgcbYyrpZaTef21MJA-B7SMm9jGMzk8G7M=mVv1w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,142 +93,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
 
-On Mon, 25 Sept 2023 at 04:19, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Simon,
->
-> [...]
->
-> > > > >>>>>>>>>> +config OF_BLOBLIST
-> > > > >>>>>>>>>> +     bool "DTB is provided by a bloblist"
-> > > > >>>>>>>>>> +     help
-> > > > >>>>>>>>>> +       Select this to read the devicetree from the bloblist. This allows
-> > > > >>>>>>>>>> +       using a bloblist to transfer the devicetree between  U-Boot phases.
-> > > > >>>>>>>>>> +       The devicetree is stored in the bloblist by an early phase so that
-> > > > >>>>>>>>>> +       U-Boot can read it.
-> > > > >>>>>>>>>> +
-> > > > >>>>>>>>>
-> > > > >>>>>>>>> I dont think this is a good idea.  We used to have 4-5 different options
-> > > > >>>>>>>>> here, which we tried to clean up and ended up with two very discrete
-> > > > >>>>>>>>> options.  Why do we have to reintroduce a new one?  Doesn't that bloblist
-> > > > >>>>>>>>> have a header of some sort?  The bloblist literally comes from a previous
-> > > > >>>>>>>>> stage bootloader which is what OF_BOARD is here for. So why can't we just
-> > > > >>>>>>>>> read the header and figure out if the magic of the bloblist matches?
-> > > > >>>>>>>>
-> > > > >>>>>>>> No, OF_BOARD is a hack to allow boards to do what they like with the FDT.
-> > > > >>>>>>>>
-> > > > >>>>>>>> This patch is a standard mechanism to pass the DT from one firmware
-> > > > >>>>>>>> phase to the next. We have spent quite a bit of time creating a spec
-> > > > >>>>>>>> for it, and we should use it.
-> > > > >>>>>>>
-> > > > >>>>>>> Where exactly am I objecting using the spec?   Can you please re-read my email?
-> > > > >>>>>>> I am actually pointing out we should use the spec *properly*.  So
-> > > > >>>>>>> instead of having a Kconfig option for the DT, which is pretty
-> > > > >>>>>>> pointless,  we should parse the bloblist.  If the header defined by
-> > > > >>>>>>> the *spec* is found, we should just search for the DT in there.
-> > > > >>>>>>> What you are doing here, is take the spec, pick a very specific item
-> > > > >>>>>>> that the list contains, and create a Kconfig option out of it.  Which
-> > > > >>>>>>> basically ignores the discoverable options of the bloblist.  For
-> > > > >>>>>>> example, that bloblist can also contain an entry to a TPM eventlog.
-> > > > >>>>>>> Should we start creating Kconfig options for all the firmware handoff
-> > > > >>>>>>> entries that are defined on that spec?
-> > > > >>>>>>
-> > > > >>>>>> OK so that is a different thing. What should it do if it expects to find a bloblist but cannot? I want it to throw an error, because I am trying to make the boot deterministic. What do you think?
-> > > > >>>>>
-> > > > >>>>> That's fine by me.  You can even put that under IS_ENABLED for the
-> > > > >>>>> bloblist inside the existing OF_BOARD check.  So I was thinking
-> > > > >>>>> - If no bloblist is required in Kconfig options we do the hacks we used to
-> > > > >>>>> - if bloblist is selected and the config option is OF_BOARD, throw an
-> > > > >>>>> error and mention that the previous stage loader should hand over a DT
-> > > > >>>>>
-> > > > >>>>> Is that what you had in mind?
-> > > > >>>>
-> > > > >>>> Yes, that sounds good to me.
-> > > > >>>>
-> > > > >>>> But I still think we need an OF_BLOBLIST option to control whether the
-> > > > >>>> devicetree comes from there.
-> > > > >>>>    Otherwise we will end up with people
-> > > > >>>> using OF_BOARD to work around it. We also have the SPL case which does
-> > > > >>>> not pass the DT in a bloblist...in fact SPL typically doesn't even
-> > > > >>>> have the full DT.
-> > > > >>>
-> > > > >>> Wouldn't IS_ENABLED(BLOBLIST) || IS_ENABLED(SPL_BLOBLIST) be enough?
-> > > > >>> Inside the OF_BOARD portion of the function, search for a bloblist if
-> > > > >>> the option is enabled.  If you can't find a bloblist and the DT within
-> > > > >>> that bloblist, then error out
-> > > > >>
-> > > > >> Just my 2c here.
-> > > > >> I think all options should be possible to disable. It means I can imagine to
-> > > > >> disable u-boot not to take care about DT provided from previous stage. The same
-> > > > >> is for TPM event log. IMHO every stage should have an option to simply ignore
-> > > > >> data pass from previous stage. I don't really mind how it is done but there
-> > > > >> should be an option to by purpose say to ignore the part of pass data.
-> > > > >
-> > > > > That would be done by disabling BLOBLIST.  I don't think having a Kconfig to say
-> > > > > "I want a bloblist, but I only want the DT from there" is reasonable
-> > > > > (or for any other item the bloblist can carry).   OF_BOARD means the
-> > > > > DT will come from a previous stage loader. If bloblist is enabled then
-> > > > > the DT must come from there.
-> > > >
-> > > > I don't agree on this. If bloblist is enabled and DT is passed SW should have a
-> > > > freedom to ignore it.
-> > > >
-> > > > At start everything is likely in sync but later stages before U-Boot can stay at
-> > > > certain version but there could be a need to update u-boot where DT from
-> > > > previous stage could be broken.
+--2pVdNDyWLf8HNV83
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Oct 18, 2023 at 09:23:42AM -0600, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Wed, 18 Oct 2023 at 07:37, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
+> >
+> > > Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet=
+ is
+> > > available, add it as an explicit dependency.
 > > >
-> > > But you *can* ignore it and load a different one later.  The only
-> > > restriction is that if you compile u-boot with the assumption an early
-> > > stage bootloader provides a DT you *must* find it.  But we will still
-> > > just keep 2 options in U-Boot of how you get a DT.
-> > > A previous loader provided it or U-Boot provided it.  Whether that
-> > > comes from a bloblist or a register is irrelevant no ?
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > > (no changes since v2)
+> > >
+> > > Changes in v2:
+> > > - Add new patch to update EFI_LOADER to depend on DM_ETH
+> > >
+> > >  lib/efi_loader/Kconfig | 1 +
+> > >  1 file changed, 1 insertion(+)
+> > >
+> > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > index 13cad6342c36..fca4b3eef270 100644
+> > > --- a/lib/efi_loader/Kconfig
+> > > +++ b/lib/efi_loader/Kconfig
+> > > @@ -11,6 +11,7 @@ config EFI_LOADER
+> > >       # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
+> > >       depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
+> > >       depends on BLK
+> > > +     depends on DM_ETH
+> > >       depends on !EFI_APP
+> > >       default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
+> > >       select CHARSET
 > >
-> > I'm not sure what is being requested here, so I'll leave this as is for v2.
->
-> Please don't.   A few mails above there's a discussion of how I'd
-> prefer things to look like, please have a look and let me know if
-> something isn't clear.
-> tl;dr
->  "That's fine by me.  You can even put that under IS_ENABLED for the
->  bloblist inside the existing OF_BOARD check.  So I was thinking
->  - If no bloblist is required in Kconfig options we do the hacks we used to
->  - if bloblist is selected and the config option is OF_BOARD, throw an
-> error and mention that the previous stage loader should hand over a DT"
->
-> >
-> > The main struggle I have is how to tell whether you expect to
-> > *receive* the DT in the bloblist, or expect it to be attached to the
-> > image and be *sent* to the next phase.
->
-> bloblist
->
-> >
-> > SPL - attached to image, send in bloblist
-> > U-Boot proper - not attached to image, receive it from bloblist
-> >
-> > This is exactly the problem that is solved by the 'standard passage'
-> > stuff [1] but that depends on Firmware Handoff and [2] which are not
-> > ready yet...
-> >
-> > So I think what I have is the best we can do for now.
->
-> We can avoid the extra complication in Kconfigs.  The DT either comes
-> from u-boot itself or from a previous stage loader. we don't need the
-> extra "it comes from a bloblist".
-> If they come from a previous stage loader and BLOBLIST *is* enabled,
-> then just scan for the DT, if you don't find it error out.
+> > I don't think this is needed.  After reconfiguring qemu_arm64 to be able
+> > to disable networking entirely, we still are able to build with
+> > EFI_LOADER enabled, and no warning / link errors.
+>=20
+> Fair enough.
+>=20
+> As of this patch the following errors are generated with -a ~CMDLINE :
+>=20
+> +lib/efi_loader/efi_device_path.c:985:(.text+0xca4): undefined
+> reference to `eth_get_dev'
+> +/bin/ld: lib/efi_loader/efi_device_path.c:987:(.text+0xca9):
+> undefined reference to `eth_get_dev'
+> +/bin/ld: lib/efi_loader/efi_device_path.c:993:(.text+0xcc9):
+> undefined reference to `eth_get_dev'
+> +/bin/ld: lib/efi_loader/efi_device_path.o: in function `efi_dp_from_name=
+':
+> +lib/efi_loader/efi_device_path.c:1095:(.text+0xe00): undefined
+> reference to `efi_get_image_parameters'
+>=20
+> which is why I added this patch. A later patch disables networking
+> entirely with ~CMDLINE so that is why this problem goes away.
+>=20
+> This series was basically built up by disabling CMDLINE and then
+> fixing the errors one by one. I didn't go back and check whether (at
+> the end) all the patches were needed.
 
-Are you planning to send a patch for this? Otherwise, what do you
-think about going with this one and dealing with OF_BOARD board by
-board?
+Yes, part of the issue with the series is that you didn't go and rework
+things after getting CMDLINE to link for sandbox, to see what else is or
+is not still needed.
 
-> > [1] https://patchwork.ozlabs.org/project/uboot/list/?series=281465&state=*
-> > [2] https://patchwork.ozlabs.org/project/uboot/list/?series=365719
+> I could do that and send a v4, if your more general concerns can be sorte=
+d out.
 
+Don't worry about a v4 currently please, I'm working through the issues
+now picking out parts of v3 and re-working others.
 
-Regards,
-Simon
+--=20
+Tom
+
+--2pVdNDyWLf8HNV83
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUv+U4ACgkQFHw5/5Y0
+tyw3/gwAuv5Z2jDUobSX/RlVoQO8IorbuCznYskPUNifPOTCFNbaSlH8EYmQ7TET
+NLH+zJU1i8rGhm9iAWZ/7uCwIU3yqBi6DHNOExbh+jLgzvYnUvpXpNnTD0wJiT1N
+awJPq50e/cHEQl6wWg0QWHL97EEtHxGFyhbGi8b4wwV+Zm+cqwnWCtqUpknULcjb
+o6XOxIs+nR81WNH0KL5jxbpl+Gj0wjAMdwGIHaSL4eZgaH432cRoUBczzzxaxFEf
+XwbiNgM5ijTFT+t8m2HRwY49k7lEmrlLEGJRpqrO0+0yKHh08NvKh1jF0a0Pa8iW
+eBh0HifsjJbPxJ48LP8r0xSa2pNM55wyO7a/4rtmYeinqHfEYaNAUYXwuGYFyfKi
+SHGak/QzyrfPMvC9MbNqnnawCdRzVa+AFXOeb6MLkjLTX6b8Myuqna1/8LRzUXIg
+UAvoOsRqrxrM9mNoR5pP5GTiKQ3ffVzqsCy/vSh4MWlwwengBV4QSe3VSamvm55E
+x403nA3B
+=nfhl
+-----END PGP SIGNATURE-----
+
+--2pVdNDyWLf8HNV83--
