@@ -4,62 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 282C3CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:17:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C9DBCDB483
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 07:42:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EBB786BEB;
-	Wed, 18 Oct 2023 09:17:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BA46805F5;
+	Wed, 18 Oct 2023 09:42:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 46AEC86D82; Wed, 18 Oct 2023 09:17:26 +0200 (CEST)
-Received: from ex01.ufhost.com (ex01.ufhost.com [61.152.239.75])
- by phobos.denx.de (Postfix) with ESMTP id F310F86A3C
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:17:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kuanlim.lee@starfivetech.com
-Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
- (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
- by ex01.ufhost.com (Postfix) with ESMTP id 154CA24E15D;
- Wed, 18 Oct 2023 15:17:20 +0800 (CST)
-Received: from EXMBX067.cuchost.com (172.16.6.67) by EXMBX166.cuchost.com
- (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 18 Oct
- 2023 15:17:20 +0800
-Received: from EXMBX066.cuchost.com (172.16.7.66) by EXMBX067.cuchost.com
- (172.16.6.67) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 18 Oct
- 2023 15:17:19 +0800
-Received: from EXMBX066.cuchost.com ([fe80::5947:9245:907e:339f]) by
- EXMBX066.cuchost.com ([fe80::5947:9245:907e:339f%17]) with mapi id
- 15.00.1497.044; Wed, 18 Oct 2023 15:17:19 +0800
-From: KuanLim.Lee <kuanlim.lee@starfivetech.com>
-To: Sean Anderson <seanga2@gmail.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Cheehong Ang <cheehong.ang@starfivetech.com>, WeiLiang Lim
- <weiliang.lim@starfivetech.com>
-Subject: RE: [PATCH] spl: mmc: Resolve emmc not load image after switched hw
- partition
-Thread-Topic: [PATCH] spl: mmc: Resolve emmc not load image after switched hw
- partition
-Thread-Index: AQHZ9bCNy1u6JRMnxUuVKA8o7Cp387BOlhCAgACMjeCAABZ2QA==
-Date: Wed, 18 Oct 2023 07:17:19 +0000
-Message-ID: <70a168dc02544085bebf7a9b958e3e37@EXMBX066.cuchost.com>
-References: <20231003041720.893-1-kuanlim.lee@starfivetech.com>
- <cf37d9b4-e896-5109-ae03-b8ddfbf8d913@gmail.com>
- <c5bdd703f65c4bb6b627a299678573db@EXMBX066.cuchost.com>
-In-Reply-To: <c5bdd703f65c4bb6b627a299678573db@EXMBX066.cuchost.com>
-Accept-Language: en-US, zh-CN
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [202.188.176.82]
-x-yovoleruleagent: yovoleflag
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RIUZaj7V";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id DD82B80310; Wed, 18 Oct 2023 09:42:43 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B0EC4805F5
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 09:42:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-32d569e73acso5664994f8f.1
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 00:42:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1697614960; x=1698219760; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=PRTgNSOsXG0F9aLy2A/XE7NkoPOUWrEtgTPGGPgARJc=;
+ b=RIUZaj7VVDf0f2S//PrsdPFiA08gcSlk0SJSHkit5caftedagwiL3iikRRe5Ev/fiI
+ ix05VMWmi4fvlKew8atYfGGzHg2MhbIO8luc6AQ6u/e4zeflH/gS+ByqS9FWWfUDLZUb
+ N1ci3vFOtwYoO/wZnoSwGf2UgneHbjPRN3dW5oen7teaB4r0Iu5owzJJkOMJ1Cu5lzqx
+ crlNWGmkNpD7g+9ICkUtkgvMiNSuJdfBsVPoWZd0aF0BOmax7LJIEN++wXKraOnpt87o
+ Q2jsLs/Y9Asm+mYFr9AswtdhXBtzutH/+gLrmc8tghIdW/GkpyPNgak0nR7+fl4GLPog
+ uxtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1697614960; x=1698219760;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :references:cc:to:content-language:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=PRTgNSOsXG0F9aLy2A/XE7NkoPOUWrEtgTPGGPgARJc=;
+ b=S9FVKOkTFxZjr6OMAJSm9rXM8p93LyLS5mrawjjrBhmAkKNovuC7rgheKZ9IekPNHM
+ SZYiBIhJRGG6jTZX5lBOHBN8OojMVsGcq0hXJ99Lbcpnkv5Pne/0EVr3w/TySC6A7oKQ
+ ebQS5pyMydLPSIE2ChaHBiNtUgL+0l64XwhWTnL46Kef/50tXlGDhH6fe5FZTPxGI2ld
+ /MQbeNmlo0kNylNwtVXiPmX7aofJop86RyDlHydU3YCJj5VaAPCHcTKWNjxcgPflC0hY
+ Z3rFuk7zJSIp8frQjUjAeRlHGO6U9brvU6ZbBYH+IkPEwNEPEBVEgYIhtKOXtS7SGfCP
+ Lw4Q==
+X-Gm-Message-State: AOJu0Yw45/N7JJ9iJM6XeihvszBnT2Txyhv8fnXAfTtlweIgFWWJvOEM
+ x04ptee3z0zvscV3H3YsVo7Q3A==
+X-Google-Smtp-Source: AGHT+IFiMpUuxGLmnXBwvD/drZlOEpAchJMyhKaL9bfQNVx829Dm25kk6dI8KZmZfEjwb96fX66SSg==
+X-Received: by 2002:adf:ec0f:0:b0:317:67bf:3376 with SMTP id
+ x15-20020adfec0f000000b0031767bf3376mr3658884wrn.57.1697614960106; 
+ Wed, 18 Oct 2023 00:42:40 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:5d8f:701:423:3d05?
+ ([2a01:e0a:982:cbb0:5d8f:701:423:3d05])
+ by smtp.gmail.com with ESMTPSA id
+ f4-20020a056000128400b0031c5e9c2ed7sm1457010wrx.92.2023.10.18.00.42.39
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Oct 2023 00:42:39 -0700 (PDT)
+Message-ID: <d4fa0c3a-a6a1-4c06-8f9e-f59086201069@linaro.org>
+Date: Wed, 18 Oct 2023 09:42:37 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v4 4/8] clk: amlogic: Move driver and ops structs
+Content-Language: en-US, fr
+To: Igor Prusov <ivprusov@sberdevices.ru>, Michal Simek
+ <michal.simek@amd.com>, Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Stefan Roese <sr@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: prusovigor@gmail.com, kernel@sberdevices.ru,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20231017165649.1492-1-ivprusov@sberdevices.ru>
+ <20231017165649.1492-5-ivprusov@sberdevices.ru>
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro Developer Services
+In-Reply-To: <20231017165649.1492-5-ivprusov@sberdevices.ru>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,42 +125,76 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgQW5kZXJzb24sDQoNClRoYW5rcyBmb3IgeW91ciBmZWVkYmFjay4gDQpQbGVhc2UgaWdub3Jl
-IHRoaXMgcGF0Y2guDQoNCkJlc3QgUmVnYXJkcywNCkt1YW5MaW0NCg0KT24gMTAvMy8yMyAxNDoy
-MSwgS3VhbiBMaW0gTGVlIHdyb3RlOg0KPiBPbiAxMC8xOC8yMyAxMzoyNywgU2VhbiBBbmRlcnNv
-biB3cm90ZToNCj4gPiBPbiAxMC8zLzIzIDAwOjE2LCBLdWFuIExpbSBMZWUgd3JvdGU6DQo+ID4g
-PiBXaGVuIHNlbGVjdGluZyBNTUNTRF9NT0RFX0VNTUNCT09UIGFzIGJvb3RfbW9kZSwgZW1tYyBk
-byBub3QNCj4gPiBsb2FkDQo+ID4gPiBVLWJvb3QgcHJvcGVyIGltYWdlIGFmdGVyIHN3aXRjaGVk
-IGhhcmR3YXJlIHBhcnRpdGlvbi4NCj4gPiA+DQo+ID4gPiBTaWduZWQtb2ZmLWJ5OiBLdWFuIExp
-bSBMZWUgPGt1YW5saW0ubGVlQHN0YXJmaXZldGVjaC5jb20+DQo+ID4gPiBSZXZpZXdlZC1ieTog
-Q2hlZSBIb25nIEFuZyA8Y2hlZWhvbmcuYW5nQHN0YXJmaXZldGVjaC5jb20+DQo+ID4gPiBSZXZp
-ZXdlZC1ieTogV2VpIExpYW5nIExpbSA8d2VpbGlhbmcubGltQHN0YXJmaXZldGVjaC5jb20+DQo+
-ID4gPiAtLS0NCj4gPiA+ICAgY29tbW9uL3NwbC9zcGxfbW1jLmMgfCAzICsrKw0KPiA+ID4gICAx
-IGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspDQo+ID4gPg0KPiA+ID4gZGlmZiAtLWdpdCBh
-L2NvbW1vbi9zcGwvc3BsX21tYy5jIGIvY29tbW9uL3NwbC9zcGxfbW1jLmMgaW5kZXgNCj4gPiA+
-IDIwZjY4N2UxMzguLmRjOGE0NTIyMmIgMTAwNjQ0DQo+ID4gPiAtLS0gYS9jb21tb24vc3BsL3Nw
-bF9tbWMuYw0KPiA+ID4gKysrIGIvY29tbW9uL3NwbC9zcGxfbW1jLmMNCj4gPiA+IEBAIC00NDcs
-NiArNDQ3LDkgQEAgaW50IHNwbF9tbWNfbG9hZChzdHJ1Y3Qgc3BsX2ltYWdlX2luZm8NCj4gKnNw
-bF9pbWFnZSwNCj4gPiA+ICAgI2VuZGlmDQo+ID4gPiAgIAkJCXJldHVybiBlcnI7DQo+ID4gPiAg
-IAkJfQ0KPiA+ID4gKwkJZXJyID0gbW1jX2xvYWRfaW1hZ2VfcmF3X3NlY3RvcihzcGxfaW1hZ2Us
-IGJvb3RkZXYsIG1tYywNCj4gPiAwKTsNCj4gPiA+ICsJCWlmICghZXJyKQ0KPiA+ID4gKwkJCXJl
-dHVybiBlcnI7DQo+ID4gPiAgIAkJLyogRmFsbCB0aHJvdWdoICovDQo+ID4gPiAgIAljYXNlIE1N
-Q1NEX01PREVfUkFXOg0KPiA+ID4gICAJCWRlYnVnKCJzcGw6IG1tYyBib290IG1vZGU6IHJhd1xu
-Iik7DQo+ID4NCj4gPiBTbyB3aHkgZG9lc24ndCB0aGUgbW1jX2xvYWRfaW1hZ2VfcmF3X3NlY3Rv
-ciBiZWxvdyAobGluZSA0NzUgb3Igc28pDQo+IHdvcms/DQo+IGJvb3RfbW9kZSB0aGF0ICBJIGNo
-b29zZSBpcyBNTUNTRF9NT0RFX0VNTUNCT09ULiBUaGlzIGlzIGEgc3dpdGNoIGNhc2UNCj4gbWV0
-aG9kLg0KPiBJZiB0aGUgY2FzZSBmaW5pc2hlZCBleGVjdXRpb24sIHByb2dyYW0gd2lsbCBqdW1w
-IHRvICdyZXR1cm4gZXJyb3I7JyBpbiBsaW5lIDQ5Mi4NCj4gU2luY2UgdGhlcmUgYXJlIG5vIGxv
-YWQgaW1hZ2UgZnVuY3Rpb24sIGluIGJvb3RfbW9kZToNCj4gTU1DU0RfTU9ERV9FTU1DQk9PVCwg
-aXQgd2lsbCBqdXN0IHN3aXRjaCB0aGUgaHdwYXJ0aXRpb24gYW5kIHF1aXQgdGhlDQo+IHByb2Nl
-c3MgJiBmYWlsIHRvIGJvb3QuDQo+IA0KPiAJY2FzZSBNTUNTRF9NT0RFX0VNTUNCT09UOg0KPiAq
-KiogIGhlcmUgaXMgdGhlIGNhc2UgSSBhZGQgbW1jX2xvYWRfaW1hZ2VfcmF3X3NlY3RvcigpDQo+
-IC8qIEZhbGwgdGhyb3VnaCAqLw0KPiAJY2FzZSBNTUNTRF9NT0RFX1JBVzoNCj4gKioqICBoZXJl
-IGlzIHRoZSBjYXNlIHdoaWNoIGV4ZWN1dGUgbW1jX2xvYWRfaW1hZ2VfcmF3X3NlY3RvcigpIGlu
-IGxpbmUgNDcwLg0KPiA+DQo+ID4gLS1TZWFuDQo+IFBsZWFzZSBjb3JyZWN0IG1lIGlmIEkgYW0g
-d3JvbmcuDQo+IC0tS3VhbkxpbQ0K
+On 17/10/2023 18:56, Igor Prusov wrote:
+> Move driver and ops structs to avoid forward declaration after switching
+> to dump in clk_ops.
+> 
+> Signed-off-by: Igor Prusov <ivprusov@sberdevices.ru>
+> ---
+>   drivers/clk/meson/a1.c | 34 +++++++++++++++++-----------------
+>   1 file changed, 17 insertions(+), 17 deletions(-)
+> 
+> diff --git a/drivers/clk/meson/a1.c b/drivers/clk/meson/a1.c
+> index 1075ba7333..e3fa9db7d0 100644
+> --- a/drivers/clk/meson/a1.c
+> +++ b/drivers/clk/meson/a1.c
+> @@ -601,14 +601,6 @@ static int meson_clk_set_parent(struct clk *clk, struct clk *parent_clk)
+>   	return meson_mux_set_parent_by_id(clk, parent_clk->id);
+>   }
+>   
+> -static struct clk_ops meson_clk_ops = {
+> -	.disable	= meson_clk_disable,
+> -	.enable		= meson_clk_enable,
+> -	.get_rate	= meson_clk_get_rate,
+> -	.set_rate	= meson_clk_set_rate,
+> -	.set_parent	= meson_clk_set_parent,
+> -};
+> -
+>   static int meson_clk_probe(struct udevice *dev)
+>   {
+>   	struct meson_clk *priv = dev_get_priv(dev);
+> @@ -638,15 +630,6 @@ static const struct udevice_id meson_clk_ids[] = {
+>   	{ }
+>   };
+>   
+> -U_BOOT_DRIVER(meson_clk) = {
+> -	.name		= "meson-clk-a1",
+> -	.id		= UCLASS_CLK,
+> -	.of_match	= meson_clk_ids,
+> -	.priv_auto	= sizeof(struct meson_clk),
+> -	.ops		= &meson_clk_ops,
+> -	.probe		= meson_clk_probe,
+> -};
+> -
+>   static const char *meson_clk_get_name(struct clk *clk, int id)
+>   {
+>   	const struct meson_clk_info *info;
+> @@ -727,3 +710,20 @@ int soc_clk_dump(void)
+>   
+>   	return 0;
+>   }
+> +
+> +static struct clk_ops meson_clk_ops = {
+> +	.disable	= meson_clk_disable,
+> +	.enable		= meson_clk_enable,
+> +	.get_rate	= meson_clk_get_rate,
+> +	.set_rate	= meson_clk_set_rate,
+> +	.set_parent	= meson_clk_set_parent,
+> +};
+> +
+> +U_BOOT_DRIVER(meson_clk) = {
+> +	.name		= "meson-clk-a1",
+> +	.id		= UCLASS_CLK,
+> +	.of_match	= meson_clk_ids,
+> +	.priv_auto	= sizeof(struct meson_clk),
+> +	.ops		= &meson_clk_ops,
+> +	.probe		= meson_clk_probe,
+> +};
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
