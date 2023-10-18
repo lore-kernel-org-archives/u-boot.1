@@ -4,56 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52620CDB483
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 10:16:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D80CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 10:20:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A0A5386C87;
-	Wed, 18 Oct 2023 12:16:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+	by phobos.denx.de (Postfix) with ESMTP id 269EE86D82;
+	Wed, 18 Oct 2023 12:20:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B99086611; Wed, 18 Oct 2023 12:16:27 +0200 (CEST)
-Received: from ex01.ufhost.com (ex01.ufhost.com [61.152.239.75])
- by phobos.denx.de (Postfix) with ESMTP id 0013786C87
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 12:16:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=minda.chen@starfivetech.com
-Received: from EXMBX166.cuchost.com (unknown [175.102.18.54])
- (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
- (Client CN "EXMBX166", Issuer "EXMBX166" (not verified))
- by ex01.ufhost.com (Postfix) with ESMTP id 9D1FD24E30A;
- Wed, 18 Oct 2023 18:16:19 +0800 (CST)
-Received: from EXMBX171.cuchost.com (172.16.6.91) by EXMBX166.cuchost.com
- (172.16.6.76) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 18 Oct
- 2023 18:16:19 +0800
-Received: from [192.168.125.85] (183.27.98.194) by EXMBX171.cuchost.com
- (172.16.6.91) with Microsoft SMTP Server (TLS) id 15.0.1497.42; Wed, 18 Oct
- 2023 18:16:18 +0800
-Message-ID: <c354d3df-189e-4506-8ccb-f07cf3ec56ab@starfivetech.com>
-Date: Wed, 18 Oct 2023 18:16:18 +0800
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Hs0Uc6mp";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6E37B86C87; Wed, 18 Oct 2023 12:20:00 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4962E86F2A
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 12:19:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.de; s=s31663417;
+ t=1697624393; x=1698229193; i=xypron.glpk@gmx.de;
+ bh=EJbL4e04X49RbRh0ptyyaeP4HGqzYIKn/PqtNhk271o=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:In-Reply-To;
+ b=Hs0Uc6mpWtmOQ1KB4HhXUczHrs6SZAGYnd07SqLgvASuquPcRswdJQvYWYX2G/hfy8aMvlqTGtr
+ DYjs+KljAyOSWtOchvnyD6tBshlz0LkHk+smdIpuOSYRcwaLJqRt6yaWn89DPYhjxEKsl+mnXn1fL
+ vCCrvyxBKDKtrODgITzK9NqHdufWiYeC4mlcA6oEJHcIH09sYadLDemnFrhsNsjctOHtfc9+e/6Kf
+ /NpRTHD7eNB0FnVIG9bn3pfFJoRU5p6trapI1/G/z07aXQ2HHtoyAC6QBAofmx6OBpg7yLCQFaIvL
+ flzsZ/5U1PdjsnAoxxoKSpZqXP5Xmdqx+tow==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.94] ([178.202.40.247]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MvK0X-1rjVgO0wvB-00rG08; Wed, 18
+ Oct 2023 12:19:53 +0200
+Message-ID: <13131882-9007-4322-ad4a-5c8b505a5328@gmx.de>
+Date: Wed, 18 Oct 2023 12:19:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] usb: xhci: Check return value of wait for TRB_TRANSFER
- event
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, Bin Meng <bmeng.cn@gmail.com>
-CC: <u-boot@lists.denx.de>
-References: <20231017062016.51682-1-minda.chen@starfivetech.com>
- <aa649c6d-5992-492a-bd39-d1f4389e773f@denx.de>
- <2313a5f6-30a2-46ed-923f-a6f8699452c6@starfivetech.com>
- <55da21fd-2a9b-4b48-a0bb-d8f07ad362ea@denx.de>
- <2a9821ea-68aa-4997-8779-b2e374627a0e@starfivetech.com>
- <775eb415-1dd3-4aed-b1c7-a6b118c3bad1@denx.de>
-From: Minda Chen <minda.chen@starfivetech.com>
-In-Reply-To: <775eb415-1dd3-4aed-b1c7-a6b118c3bad1@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Originating-IP: [183.27.98.194]
-X-ClientProxiedBy: EXCAS061.cuchost.com (172.16.6.21) To EXMBX171.cuchost.com
- (172.16.6.91)
-X-YovoleRuleAgent: yovoleflag
+Subject: Re: [PATCH v7 6/9] efi_loader: add CDROM short-form device path
+Content-Language: en-US, de-DE
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Takahiro Akashi
+ <takahiro.akashi@linaro.org>, Michal Simek <michal.simek@amd.com>,
+ u-boot@lists.denx.de
+References: <20231016064526.2410856-1-masahisa.kojima@linaro.org>
+ <20231016064526.2410856-7-masahisa.kojima@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20231016064526.2410856-7-masahisa.kojima@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:A7YUEJKH0Wk1jZDRmewTIqRUB+OY+KF2JUjJ7JegSr/3pW/3P7Z
+ 50WjYRAH2QwZqqtXamvHsCbnyzVbq0cqOj2q7JpJRO46uLhdL6eMtGaHU21nXG2lgxQ1ZLO
+ MAE13BAPDqDr84q03gClJVQ4UhvIsaxCUVDudXAYmGN5gKincvlZGqhRZ7RBeYUx9UGVRDb
+ pdMhwghj/tnMpDqVYBZuA==
+UI-OutboundReport: notjunk:1;M01:P0:JbMLkL4KhGU=;jSzOGLf6eUXaK9sOudkUcQN0TVO
+ diaf9zupxLoimAAHTxpwNKcDBf6ezAd3xUBoKX2JYOi8/RN101Y3jCerx5SBCio6N+2Z5CEEp
+ tu+Mai5nuFBRLLphPhuBQB6KwK5fIO1kzO4CTKH93qQw3/+yoI/WGJRhGExI1eYFQPobdOS3L
+ 6j0L5HpjGlBUCNWkUr5dAsFXmEUhbBTCAzkakaR7+a9ljYIBiyc9t2hkhGD+7/DMUdqnheCX9
+ xfmJ8+Y+j3jx7ZqgTJWz/e5cUh/i91Asd2Buwltr6gSkMO2s8s0ty90W1dNuDvJrRs9vYxv4C
+ emUCG+b7hTbMBXHeqIv/dnEmtOE7xjCIFKsR1czUT3LH/e4sgb8j/Z8tzuMt48eX3diLxKbdP
+ wD6zU/F0NHUV7T1dK2rluy0ndceGmX7vzfVpd0jsVbfaSArzMa+1YOWWeSs3rsN70H5Jvgi5C
+ bItB469lcUo1AyR+pQbb8edFSAuvI7ib20RnXJ4JNiPXLvpuguMsx8RPa7j5Dgu2UH1qMK6KB
+ I1YiruQo3uQTRYyCqf6D2dmeiG8xnzVCYm7GwpqL3cIdtJSmuQBxMcWGJhszbXT04v0zcwbcS
+ qe9aL56qIaoPZ3gYYOM2BLc+8Na5Oq+ZzOtJCBHolnXext25EAWGR5WIB8jMUhjCtxcy1C6FC
+ a8MdMAkxwYc8QIl5pmUasIncxYIPWOQdePJXrjKfp8u/7/9YgtilymYywvnVbzj3NjCmxs1sQ
+ IcyDTX1loQbUVbjMAnC2QcoEjSfhGTEenkQeD6zi+12JO5MfHiKFDOKiZg9xF3D/xsuHSi3hi
+ CUv+nvzyE1iDl4JvopKEIRauDA1pARd189tIBV1cuZP5cE9xcxhi+36AzVWWqs0USPikgAHZs
+ Z8+GpHs+aWA7Ddv7nsOhWP2DCbcAr9GLGXzm1W94J8RSortCMkERyHptrwvHHntROkASGADAn
+ +Ta5hVVxGgbY3sQOnS2Bew7Cv88=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,122 +90,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10/16/23 08:45, Masahisa Kojima wrote:
+> UEFI specification does not mandate to support the short-form
+> of the CDROM media device path.
+> Fedora installation ISO image is identified as CDROM media
+> device path, supporting short-form CDROM media device path is
+> required to automatically add the boot option having default
+> file of Fedora installation image.
 
+How is the CDROM media path created?
+Why would the image not be found if the path is not shortened?
+What is Fedora specific here?
+What does EDK II do?
 
-On 2023/10/18 18:11, Marek Vasut wrote:
-> On 10/18/23 05:46, Minda Chen wrote:
->>
->>
->> On 2023/10/18 10:35, Marek Vasut wrote:
->>> On 10/18/23 03:22, Minda Chen wrote:
->>>>
->>>>
->>>> On 2023/10/17 19:20, Marek Vasut wrote:
->>>>> On 10/17/23 08:20, Minda Chen wrote:
->>>>>> xhci_wait_for_event() waiting TRB_TRANSFER event may return
->>>>>> NULL. Checking the return value to avoid crash.
->>>>>>
->>>>>> Signed-off-by: Minda Chen <minda.chen@starfivetech.com>
->>>>>
->>>>> How did you trigger this error ? Is there a reproducer ? Details pl=
-ease ...
->>>>
->>>> While Scanning a lenovo usb2.0 udisk=EF=BC=8C not 100 % reproduce
->>>
->>> Can you include Linux
->>>
->>> lsusb -vvv
->>>
->>> output for this device and include that information in the commit mes=
-sage ? (or the U-Boot info below, that works too, just please add it into=
- the commit message, it is important for future reference).
->>>
->> OK=EF=BC=8C I will add lsusb -vvv Linux udisk message and crash dump i=
-nfo to commit message
->=20
-> Thank you
->=20
->>>> This is log.
->>>>
->>>> StarFive # usb reset
->>>> resetting USB...
->>>> Bus xhci_pci: Register 5000420 NbrPorts 5
->>>> Starting the controller
->>>> USB XHCI 1.00
->>>> scanning bus xhci_pci for devices... WARN halted endpoint, queueing =
-URB anyway.
->>>> Unexpected XHCI event TRB, skipping... (f77141f0 00000000 13000000 0=
-2008401)
->>>> Unhandled exception: Load access fault
->>>> EPC: 00000000f7f563c6 RA: 00000000f7f563c6 TVAL: 000000000000000c
->>>> EPC: 000000004024a3c6 RA: 000000004024a3c6 reloc adjusted
->>>
->>> Where does the crash point to in code, can you disassemble the PC poi=
-nter ? (or maybe you can use scripts/decodecode I think)
->>>
->> OK=EF=BC=8C I will add EPC pointer disassemble=C2=A0 to commit message
->=20
-> This part probably doesn't need to be in the commit message. I'd like t=
-o know where the crash occurred in the code.
+Best regards
 
+Heinrich
 
-000000004024a376 <abort_td>:
-{
-    4024a376:   7179                    addi    sp,sp,-48
-    4024a378:   f406                    sd      ra,40(sp)
-    4024a37a:   f022                    sd      s0,32(sp)
-    4024a37c:   ec26                    sd      s1,24(sp)
-    4024a37e:   e84a                    sd      s2,16(sp)
-    4024a380:   e44e                    sd      s3,8(sp)
-    4024a382:   e052                    sd      s4,0(sp)
-    4024a384:   89ae                    mv      s3,a1
-    4024a386:   84aa                    mv      s1,a0
-        struct xhci_ctrl *ctrl =3D xhci_get_ctrl(udev);
-    4024a388:   8c4fe0ef                jal     ra,4024844c <xhci_get_ctr=
-l>
-        struct xhci_ring *ring =3D  ctrl->devs[udev->slot_id]->eps[ep_ind=
-ex].ring;
-    4024a38c:   6785                    lui     a5,0x1
-    4024a38e:   94be                    add     s1,s1,a5
-    4024a390:   9444a603                lw      a2,-1724(s1)
-    4024a394:   00198713                addi    a4,s3,1
-    4024a398:   0712                    slli    a4,a4,0x4
-    4024a39a:   02061793                slli    a5,a2,0x20
-    4024a39e:   9381                    srli    a5,a5,0x20
-    4024a3a0:   07c9                    addi    a5,a5,18
-    4024a3a2:   078e                    slli    a5,a5,0x3
-    4024a3a4:   97aa                    add     a5,a5,a0
-    4024a3a6:   679c                    ld      a5,8(a5)
-        xhci_queue_command(ctrl, NULL, udev->slot_id, ep_index, TRB_STOP_=
-RING);
-    4024a3a8:   2981                    sext.w  s3,s3
-    4024a3aa:   86ce                    mv      a3,s3
-        struct xhci_ring *ring =3D  ctrl->devs[udev->slot_id]->eps[ep_ind=
-ex].ring;
-    4024a3ac:   97ba                    add     a5,a5,a4
-        xhci_queue_command(ctrl, NULL, udev->slot_id, ep_index, TRB_STOP_=
-RING);
-    4024a3ae:   4581                    li      a1,0
-    4024a3b0:   473d                    li      a4,15
-        struct xhci_ring *ring =3D  ctrl->devs[udev->slot_id]->eps[ep_ind=
-ex].ring;
-    4024a3b2:   0087ba03                ld      s4,8(a5) # 1008 <_start-0=
-x401feff8>
-        struct xhci_ctrl *ctrl =3D xhci_get_ctrl(udev);
-    4024a3b6:   842a                    mv      s0,a0
-        xhci_queue_command(ctrl, NULL, udev->slot_id, ep_index, TRB_STOP_=
-RING);
-    4024a3b8:   d75ff0ef                jal     ra,4024a12c <xhci_queue_c=
-ommand>
-        event =3D xhci_wait_for_event(ctrl, TRB_TRANSFER);
-    4024a3bc:   02000593                li      a1,32
-    4024a3c0:   8522                    mv      a0,s0
-    4024a3c2:   ebdff0ef                jal     ra,4024a27e <xhci_wait_fo=
-r_event>
-        field =3D le32_to_cpu(event->trans_event.flags);
-epc-> 4024a3c6:   455c                    lw      a5,12(a0)        =20
-        BUG_ON(TRB_TO_SLOT_ID(field) !=3D udev->slot_id);
-    4024a3c8:   9444a703                lw      a4,-1724(s1)
-        field =3D le32_to_cpu(event->trans_event.flags);
-    4024a3cc:   0007891b                sext.w  s2,a5
+>
+> Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> ---
+>   lib/efi_loader/efi_device_path.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_devic=
+e_path.c
+> index ed7214f3a3..ac673ab117 100644
+> --- a/lib/efi_loader/efi_device_path.c
+> +++ b/lib/efi_loader/efi_device_path.c
+> @@ -110,7 +110,8 @@ struct efi_device_path *efi_dp_shorten(struct efi_de=
+vice_path *dp)
+>   	while (dp) {
+>   		if (EFI_DP_TYPE(dp, MESSAGING_DEVICE, MSG_USB_WWI) ||
+>   		    EFI_DP_TYPE(dp, MEDIA_DEVICE, HARD_DRIVE_PATH) ||
+> -		    EFI_DP_TYPE(dp, MEDIA_DEVICE, FILE_PATH))
+> +		    EFI_DP_TYPE(dp, MEDIA_DEVICE, FILE_PATH) ||
+> +		    EFI_DP_TYPE(dp, MEDIA_DEVICE, CDROM_PATH))
+>   			return dp;
+>
+>   		dp =3D efi_dp_next(dp);
 
