@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78EA1CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 17:21:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A63D2CDB482
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 17:23:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8B8E86FE9;
-	Wed, 18 Oct 2023 19:21:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E484A86FDC;
+	Wed, 18 Oct 2023 19:23:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UTwjEGWD";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D0Jlp8Tj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A97C586FF7; Wed, 18 Oct 2023 19:21:31 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 15E0086FE9; Wed, 18 Oct 2023 19:23:18 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A507386F8B
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 19:21:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1C3C86F8B
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 19:23:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1c9d132d92cso17765425ad.0
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 10:21:28 -0700 (PDT)
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-65b0e623189so41539506d6.1
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 10:23:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697649687; x=1698254487; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=81hdfF7G20OpylybowfHBGeQwv0pao71kYtOIaYPAGk=;
- b=UTwjEGWD47XhIxJ8ewfBoCd7VoPB2b5Wm1VE8/GvNSZwEFsDYeYBDI7sdCSZ9gaLzw
- QogabmRbVclezjqoWLa9NF+9e4m8girJNwyUwFgIcVgEQ2LMYVD22StHwm8F2e3BTfok
- k0Oxrq22Evrvrp8oUYyFGvjSNjQ120Hev4rkQhOrA+WQA/RXlDInx6yB2IjfNeUSskUA
- p3XQYMMJSBBHyAxyx4EGMJV4vmfK89iPeJwe5ZJmd7svbr78uN6tXI3PhKgiU8ZTPH3J
- gygVLdhMpFf/PnwbHpo303thflz4u6Ovw9eTIBdD/+gQioYGOKs7gX2DjwLW8oMhilBa
- ttPA==
+ d=gmail.com; s=20230601; t=1697649795; x=1698254595; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BC+Frd53ND0vQJ6yleg8nC4V7rHKJeyQQQKO6zcHXXI=;
+ b=D0Jlp8TjhANceCaNKkZUmKJcpI/fZpt/x3IDXZ6YlQ1IJOU9ESTYDJDAL8XKy691bL
+ BrY4Ehq/kpu1xi61zbuTPNynXNSO89hWHYVrODNKmaESaKfvUzrhgMFAGgG1KBKggmfs
+ aaKXIimDu9KJXVDAC+/eECgMVvkP4qjI73ngeJZYxS6QINwbRH9PTYrNwU2f1kbOMYQd
+ dYlsCAx4q9BhlSzYznLQF3CnCGrsws0r/2NSEf/3QKGCIffo+0wHHbBhX2O46KnICE0q
+ hrUMUsGw1YveQBTZveOtlGLSTGJLocpb6dZDOZn+AQ0fcfQVPt+Yx4afQ8BoTpGeaBuC
+ LcDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697649687; x=1698254487;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=81hdfF7G20OpylybowfHBGeQwv0pao71kYtOIaYPAGk=;
- b=pAjgH7WpCJu12wqwha+DRU8yqdhXcyPXOpHbE0ZxAbuqDSSDFkG8csrMrnOJufqZlq
- zE8CKJNk9HaaP83JL1uto+dHbCekjI9mtZSsHIV/LziXRQQ0nKAumqZ5a08DVu+AWbIJ
- Nt2y7lZxj0EZQ4MwcEA0R5F2Pt1Oy1Fp+nH4mC1ljdArPbnPRG6SO26+J1G+vo4C8pwz
- vgrWWwBDuBs5vSbC31TYwAI1G/nOEot+75ALDBrX1YIR8DdSDtDAMxPX23y3nG/lottZ
- tgrnSB4ScDUxwrKlfP6XzWu+p4Y112x9c0HY3Op6xRlqNLcBNRj70JpQCkaQJR626Ccz
- gC4Q==
-X-Gm-Message-State: AOJu0YyvOOaT1Q4SlV999DmEBji2How+GbPVWlMSHSSNcia/tbd2IoA9
- bbsHBNUBunGETEnZJZCVy6VbNUjc4HI=
-X-Google-Smtp-Source: AGHT+IENyLrxi+6YAkbjdfy5x+tP2bbB2Q8ROJgzE4DVa7CCpJaUYB/6W0KpPdYX3j8gRnVLXx+Ggw==
-X-Received: by 2002:a17:903:27cd:b0:1bf:349f:b85c with SMTP id
- km13-20020a17090327cd00b001bf349fb85cmr1773plb.1.1697649686856; 
- Wed, 18 Oct 2023 10:21:26 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:f7a7:7252:9ef9:ef88])
- by smtp.gmail.com with ESMTPSA id
- jc13-20020a17090325cd00b001b898595be7sm164636plb.291.2023.10.18.10.21.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 10:21:26 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: marex@denx.de,
-	u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH] imx8mp-dhcom-pdk3-overlay-rev100: Pass
- #address-cells/size-cells
-Date: Wed, 18 Oct 2023 14:21:03 -0300
-Message-Id: <20231018172103.1197671-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1697649795; x=1698254595;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BC+Frd53ND0vQJ6yleg8nC4V7rHKJeyQQQKO6zcHXXI=;
+ b=iYYwMs4qyi/sI20LglE4qoW45Sg0jbFUheHOn+7YV2PkVaBKDIeilT8aW8jeTvJd+2
+ iOnhxPW6eu+zmlzMGhq8g4pbc5IajEUVCuOblFFIPGZDncRmp9dJTzvks88ubuGsYP0W
+ PJ9RcBCvJ8tnZaR8D6KFksOxDuTkokLL136Qjrhumwxb55tHw8Ckd5rJx/DAa/o/TI61
+ KCXT8QzjMIM8/k5aiUUUOemLQ1CgXE7zvytBNp5Q22cwek+yrne+Aq/3wuO5YAKxSGgh
+ 61dSMOwfnCPP5ERGVa+vv7H/YqurJe0ncFXIs9gZxFX+dfmTPPaPfdTWp5f1KUdBPTBF
+ bMhQ==
+X-Gm-Message-State: AOJu0YzE55M7BhV0Wd5SBVdi6kwCzmyL7IY0kJjdd51eqbyZzzqpl1av
+ uYJvp7uNeyqhWtVAfSSpnXE=
+X-Google-Smtp-Source: AGHT+IEPIEWG5nlZhtjxMPSbCrCCCTYPTgpOBjH2OnvsAJFLeTqlMAyAzFk6MzOsAxta+ORFRtGFMQ==
+X-Received: by 2002:ad4:5f09:0:b0:653:5960:8959 with SMTP id
+ fo9-20020ad45f09000000b0065359608959mr7935680qvb.41.1697649794772; 
+ Wed, 18 Oct 2023 10:23:14 -0700 (PDT)
+Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
+ [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
+ ph5-20020a0562144a4500b0066d11e63ba1sm110098qvb.5.2023.10.18.10.23.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 18 Oct 2023 10:23:14 -0700 (PDT)
+Message-ID: <fc59685f-4c31-1859-73db-04fac964df4f@gmail.com>
+Date: Wed, 18 Oct 2023 13:23:13 -0400
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH v3 06/32] sifive: Drop an unnecessary #ifdef
+Content-Language: en-US
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20231016222835.596572-1-sjg@chromium.org>
+ <20231016222835.596572-7-sjg@chromium.org>
+ <8ce172b2-8665-442c-8e41-6b36f1255e5b@gmx.de>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <8ce172b2-8665-442c-8e41-6b36f1255e5b@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,41 +96,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
-
-Pass #address-cells/size-cells in the mdio node to avoid the following
-DTC warning:
-
-  DTCO    arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dtbo
-Warning (reg_format): /fragment@0/__overlay__:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
-Warning (avoid_default_addr_size): /fragment@0/__overlay__: Relying on default #address-cells value
-Warning (avoid_default_addr_size): /fragment@0/__overlay__: Relying on default #size-cells value
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
- arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
-index f27e6429ab..94bee3c508 100644
---- a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
-+++ b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
-@@ -5,6 +5,13 @@
- /dts-v1/;
- /plugin/;
- 
--&ethphy0g {
--	reg = <7>;
-+&eqos {
-+	mdio {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		ethphy0g: ethernet-phy@7 {
-+			reg = <7>;
-+		};
-+	};
- };
--- 
-2.34.1
-
+T24gMTAvMTgvMjMgMDk6NTEsIEhlaW5yaWNoIFNjaHVjaGFyZHQgd3JvdGU6DQo+IE9uIDEw
+LzE3LzIzIDAwOjI3LCBTaW1vbiBHbGFzcyB3cm90ZToNCj4+IFRoaXMgY29kZSBpcyBub3Jt
+YWxseSBjb21waWxlZCBmb3Igc2lmaXZlLCBidXQgc2FuZGJveCBjYW4gYWxzbyBjb21waWxl
+DQo+PiBpdC4gV2Ugc2hvdWxkIG5vdCB1c2UgVU5JVF9URVNUIGFzIGEgc3lub255bSBmb3Ig
+U0FOREJPWCwgc2luY2UgaXQgaXMNCj4+IHBvc3NpYmxlIHRvIGRpc2FibGUgVU5JVF9URVNU
+IGZvciBzYW5kYm94Lg0KPj4NCj4+IERyb3AgdGhlIGNvbmRpdGlvbiBzaW5jZSBpdCBpc24n
+dCBuZWVkZWQuDQo+IA0KPiBUaGlzIGlzIG5vdCB3aGF0IHRoZSBwYXRjaCBkb2VzLiBJdCBp
+bnRyb2R1Y2VzIGFub3RoZXIgY29uZGl0aW9uLg0KPiANCj4+DQo+PiBTaWduZWQtb2ZmLWJ5
+OiBTaW1vbiBHbGFzcyA8c2pnQGNocm9taXVtLm9yZz4NCj4+IFN1Z2dlc3RlZC1ieTogU2Vh
+biBBbmRlcnNvbiA8c2VhbmdhMkBnbWFpbC5jb20+DQo+PiAtLS0NCj4+DQo+PiBDaGFuZ2Vz
+IGluIHYzOg0KPj4gLSBKdXN0IGRyb3AgdGhlIGNvbmRpdGlvbiBpbnN0ZWFkDQo+Pg0KPj4g
+wqAgaW5jbHVkZS9rMjEwL3BsbC5oIHwgMiArLQ0KPj4gwqAgMSBmaWxlIGNoYW5nZWQsIDEg
+aW5zZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pDQo+Pg0KPj4gZGlmZiAtLWdpdCBhL2luY2x1
+ZGUvazIxMC9wbGwuaCBiL2luY2x1ZGUvazIxMC9wbGwuaA0KPj4gaW5kZXggZmQxNmE4OWNi
+MjAzLi42ZGQ2MGIyZWI0ZmMgMTAwNjQ0DQo+PiAtLS0gYS9pbmNsdWRlL2syMTAvcGxsLmgN
+Cj4+ICsrKyBiL2luY2x1ZGUvazIxMC9wbGwuaA0KPj4gQEAgLTEzLDcgKzEzLDcgQEAgc3Ry
+dWN0IGsyMTBfcGxsX2NvbmZpZyB7DQo+PiDCoMKgwqDCoMKgIHU4IG9kOw0KPj4gwqAgfTsN
+Cj4+DQo+PiAtI2lmZGVmIENPTkZJR19VTklUX1RFU1QNCj4+ICsjaWZkZWYgQ09ORklHX1NB
+TkRCT1gNCj4gDQo+IFdlIHNob3VsZCBiZSBhYmxlIHRvIGNvbXBpbGUgd2l0aCBhbmQgd2l0
+aG91dCB1bml0IHRlc3RzIG9uIHRoZSBNQUlYDQo+IGJvYXJkcy4gV2h5IHNob3VsZCBDT05G
+SUdfU0FOREJPWCBoYXZlIGFueSByZWxldmFuY2UgaGVyZT8NCj4gDQo+IFdoeSBkb24ndCB3
+ZSBtYWtlIGsyMTBfcGxsX2NhbGNfY29uZmlnKCkgbm9uLXN0YXRpYyBpbiBhbGwgY2FzZXM/
+DQoNClUtQm9vdCBpcyBzbWFsbGVyIHdoZW4gaXQgaXMgc3RhdGljLiBCdXQgdGhlIGZvcndh
+cmQgZGVjbGFyYXRpb24gY2FuIGJlIG1hZGUNCnVuY29uZGl0aW9uYWxseSwgYXMgbG9uZyBh
+cyBpdCBpcyB1bnVzZWQuDQoNCi0tU2Vhbg0K
