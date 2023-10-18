@@ -4,77 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FFEACDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 18:55:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBD03CDB47E
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 19:01:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED45686FF6;
-	Wed, 18 Oct 2023 20:55:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2914486FD2;
+	Wed, 18 Oct 2023 21:01:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Nipq4RDM";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AED58702E; Wed, 18 Oct 2023 20:55:49 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1697655667;
+	bh=o93AOjOUHK3/WffVrh0Ank3oMOg5KRhzgmDj2tn7m2M=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=SiSE3tzjNLKNncOubjhQ2zTsyEBQEdvZagi51aALSRjftsCpVoKIRBb3xzOdsytFP
+	 0TS4Aqw9Lmm9PXODJmNKnTDcb7IUDxX5UxbwaX0r9yRt9S+3h5ImHI0aViRN9mNmbn
+	 QLgF2KuTwaTm4grYGTCBFZsW8gwRnbwNt81ap/rrpQU79de1E+EwsU6iYH7PEhzX5E
+	 FfFmXaVMXuIayWz3ZzO0O/Vw5+keH9+B0IoX7O/9pOTKtmklD48cw9kjryeXr34YRe
+	 0vmswwtmUZ1cGIKBomV6o4UenSINZeE3t7YYDhqF3zo19ptcO+ak0OQ92VTeRoFcMO
+	 t0gJMnFAy21NA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48ED586FE3
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 20:55:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6b390036045so1168626b3a.1
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 11:55:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1697655345; x=1698260145; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hE0HNkTj94IIlpZ1Ogp+guT82KbHw6aI+b/3DFvV25A=;
- b=Nipq4RDMVeG1I/uPdEMpJf6KWeLFK2jM8PvTqIeS+sEv5+vQ51e8MLV8xnkYcWh7yB
- kCCN8CwR7RcdWuG6w5XO4cK9f830orXweTAO2OPK7yWtXqo/hgWayqT71U9BEls0GSPZ
- KfMfojWmOY+rq7Zfkh9EnFeTODoBgmSOi4AMYRfLmsAZr1j8S7BOpSZU3dxldtirw3WJ
- +hO3URNxnSpZjLh2hhY6eALGE8Pw0YH5hvR9WOWzvKSNoZ8aH9PdNCt58M8mY6Z8AN+A
- OdkLbkOldN+0DcxOxbCqMkxrZFu27nJPmA5hYfh+u2Z2q3Djc+WZZr5v7gbR15mC5DVT
- 2oIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697655345; x=1698260145;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hE0HNkTj94IIlpZ1Ogp+guT82KbHw6aI+b/3DFvV25A=;
- b=hPiF4Uykg69p+tCMOg6S9R+bhhMB+XYTNsmrz69DFHG2uVGh2Hxjp6C5r9+Hwi+fXX
- TaY4WdqKWNZF1YB7m3obdLR76cpR2OiIPn6lJbjX4tvoHiY/fJHLsfj1Vl+Q/B7IrpOT
- N9rI/tsaPHrMQzimkwQBbVeytt0vuRBPTxmmFXdz5zlmetCSCDSISdwP4uDbd1GuNo+N
- Cl3UC+FcsaSr+hMpa9fL2+AS+j+oy+EhY0LhcYhc8JHwe3onFYnqRYtSFMkcYFK38ewm
- eiPz4uPmmazDGl8flghA3dlVq3k997wCqVn8QYEfIDkS5oL0n3+1lcish6amlDCPgX+E
- P02w==
-X-Gm-Message-State: AOJu0YznYnSwrYcAzz6qcbGrkgJuiGFoZKFUQuBE3TLgiLyIC4YCLo6a
- 4oPKrApDY+vS25FJgMAEKNk=
-X-Google-Smtp-Source: AGHT+IEkFklRLlALjP2B85Q5EybnsxSHwSxmCeGqyj7/OTsZZXG3sNDd0LoAoSn0RUMHWWs+pW8mOg==
-X-Received: by 2002:a05:6a00:1d9b:b0:692:ad93:e852 with SMTP id
- z27-20020a056a001d9b00b00692ad93e852mr6224084pfw.2.1697655345542; 
- Wed, 18 Oct 2023 11:55:45 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:f7a7:7252:9ef9:ef88])
- by smtp.gmail.com with ESMTPSA id
- t15-20020a056a0021cf00b006b2677d3684sm3682302pfj.206.2023.10.18.11.55.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 11:55:45 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: sbabic@denx.de
-Cc: marex@denx.de,
-	u-boot@lists.denx.de,
-	Fabio Estevam <festevam@denx.de>
-Subject: [PATCH v4] imx8mp-dhcom-pdk3-overlay-rev100: Pass
- #address-cells/size-cells
-Date: Wed, 18 Oct 2023 15:55:30 -0300
-Message-Id: <20231018185530.1272005-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5A77686F8F;
+ Wed, 18 Oct 2023 21:01:00 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1697655660;
+ bh=o93AOjOUHK3/WffVrh0Ank3oMOg5KRhzgmDj2tn7m2M=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=J1ndxPnckLnwutaeiKVSXSX9f10BOY01oiMwaXbTHiLZZo7cg8fQt6qIBAq47t7N+
+ deBB2fgMchyO0xHQ87uKKKfFIbk1Pb8ao/UUHcgEKIwh23IWMQ9/nG1Avp+7skU9a1
+ vnlP3A5kJbOGnI1oy4SjDt9twH5BgCcegXl1LLeAshYWJjXJtEMaJHXWzNGMEDXJXI
+ Vtwfpn5HWuMfSy3z9OiASgQvCPF6iQ+Zv1Z6LpHNcIWZxTjhlq9ZVAAcX9BDzLJOQB
+ kb65hebhB4t2RWOW8OpaI8ayewjjxT54wFCE+Rj6VhE7QxIVAfYbVT1IzMNXo8fcjf
+ VszDoc8bamz8w==
+Message-ID: <35cc73f7-3b96-4a3d-9f90-ab8ff9dacc26@denx.de>
+Date: Wed, 18 Oct 2023 21:00:59 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] imx8mp-dhcom-pdk3-overlay-rev100: Pass
+ #address-cells/size-cells
+Content-Language: en-US
+To: Fabio Estevam <festevam@gmail.com>, sbabic@denx.de
+Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+References: <20231018185530.1272005-1-festevam@gmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20231018185530.1272005-1-festevam@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,46 +69,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Fabio Estevam <festevam@denx.de>
+On 10/18/23 20:55, Fabio Estevam wrote:
+> From: Fabio Estevam <festevam@denx.de>
+> 
+> Pass #address-cells/size-cells in the mdio node to avoid the following
+> DTC warning:
+> 
+>    DTCO    arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dtbo
+> Warning (reg_format): /fragment@0/__overlay__:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+> Warning (avoid_default_addr_size): /fragment@0/__overlay__: Relying on default #address-cells value
+> Warning (avoid_default_addr_size): /fragment@0/__overlay__: Relying on default #size-cells value
+> 
+> Also change the Ethernet PHY address to 5, as per Marek's feedback.
+> 
+> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> ---
+> Changes since v3:
+> - Change the Ethernet PHY address to 5 for good :-). (Marek)
+> 
+>   arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts | 11 +++++++++--
+>   1 file changed, 9 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
+> index f27e6429abe4..bad015536166 100644
+> --- a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
+> +++ b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
+> @@ -5,6 +5,13 @@
+>   /dts-v1/;
+>   /plugin/;
+>   
+> -&ethphy0g {
+> -	reg = <7>;
+> +&eqos {
+> +	mdio {
+> +		#address-cells = <1>;
+> +		#size-cells = <0>;
+> +
+> +		ethernet-phy@5 {
+> +			reg = <5>;
 
-Pass #address-cells/size-cells in the mdio node to avoid the following
-DTC warning:
-
-  DTCO    arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dtbo
-Warning (reg_format): /fragment@0/__overlay__:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
-Warning (avoid_default_addr_size): /fragment@0/__overlay__: Relying on default #address-cells value
-Warning (avoid_default_addr_size): /fragment@0/__overlay__: Relying on default #size-cells value
-
-Also change the Ethernet PHY address to 5, as per Marek's feedback.
-
-Signed-off-by: Fabio Estevam <festevam@denx.de>
----
-Changes since v3:
-- Change the Ethernet PHY address to 5 for good :-). (Marek)
-
- arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts | 11 +++++++++--
- 1 file changed, 9 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
-index f27e6429abe4..bad015536166 100644
---- a/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
-+++ b/arch/arm/dts/imx8mp-dhcom-pdk3-overlay-rev100.dts
-@@ -5,6 +5,13 @@
- /dts-v1/;
- /plugin/;
- 
--&ethphy0g {
--	reg = <7>;
-+&eqos {
-+	mdio {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		ethernet-phy@5 {
-+			reg = <5>;
-+		};
-+	};
- };
--- 
-2.34.1
-
+The reg should be 'reg = <7>' ;-) It's just the node name which should 
+be 'ethernet-phy@5'. (Yes, I know, it is not consistent, that's because 
+the DTO cannot "rename" the node itself easily).
