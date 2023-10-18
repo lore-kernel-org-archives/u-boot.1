@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F931CDB47E
-	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 12:42:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08666CDB482
+	for <u-boot@archiver.kernel.org>; Wed, 18 Oct 2023 12:43:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C60A86F21;
-	Wed, 18 Oct 2023 14:42:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3C6CE86F93;
+	Wed, 18 Oct 2023 14:43:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bVa9qWha";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dBFbn7zU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F223586F8A; Wed, 18 Oct 2023 14:42:13 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 8568386F94; Wed, 18 Oct 2023 14:43:20 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 62E5F86ED5
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 14:42:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7048586F92
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 14:43:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-5a7c95b8d14so86345287b3.3
- for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 05:42:10 -0700 (PDT)
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-5a7be88e9ccso85206047b3.2
+ for <u-boot@lists.denx.de>; Wed, 18 Oct 2023 05:43:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1697632929; x=1698237729; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1697632997; x=1698237797; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6USxvaNx4XtQzzHPoIaUV+yJWGkQuNa7/MjkzQ7tXbM=;
- b=bVa9qWhava/g9FcZ4hT+wIbGmG3bDEsYBLYjXSh2QmHsOsJviiBv5bR+5CogsVD2pb
- KBkyZCg4wYijXiCC3AvYAQaq4/0PVgnToQ3N3RQWdpBgfQyfYJs781Z5BQ2fwW1fpZI6
- FLg9eafI27N9WQ3DPH0sORLju3PqF52NwY81A=
+ bh=F7UJ8m+IJ+A1KqZLlUSdbXGd6xpQJ94Ladgc8ximp0U=;
+ b=dBFbn7zULsFVIy4a+ij67FzZS+s8Pw1asAKvFo0ifaM83ioabaAVH+ExCPLnHXMvGf
+ aDZ1esyTu99Kf+j1XuAnMsx71IAnnRwpDzqqcjhhX0Dq4J3fgHdxEozE9zWpIKt3tVlK
+ DIVcNRb+THUbIysAq4IR7mcj9RK4arqdKP/5w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697632929; x=1698237729;
+ d=1e100.net; s=20230601; t=1697632997; x=1698237797;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6USxvaNx4XtQzzHPoIaUV+yJWGkQuNa7/MjkzQ7tXbM=;
- b=EdzllRdD5+5Gz9a6s29Ig450dRYZtXX8Uplhbj5Blkthv/hk08FfbDESKBLyqBfyH8
- jIb0NxZqfweNXPpTyAw+lTYIaosFefRgwpMxVvjxgPsJGaryER860+iqiaNTl8Cf9/kn
- qTVAPXiAD6gMWftoNAZjiUnFM43NVm1aOhL0m5GMozzCvavaZJmwY6XhVkl8gMJ2vBF6
- zeY8TsgA8zdLt2yhOGZEzWt50juK5GaAa/DMXoGQGjvTYF597QvXQfXF6eM9GNMP9CgL
- p57S7eazy+P2VeFDBbHMX5BwUZ9dTG8iz9opJdSzoHzZePqUaO+GcKl4dQf7PKgmz15Q
- TogA==
-X-Gm-Message-State: AOJu0Yx7npB3+n+WmsvvjdEFGqfkxpNvWPyOuiddzkttWPFq+oJgqRvP
- Z1eZ0MD8+/1G0vR87wDaFDm+3bk+m4aVVNmjm3hkng==
-X-Google-Smtp-Source: AGHT+IGZ3KmCFui2+r39ovqkcDk5qJCCZy8NVSNbJKgWjqC/tdStK8tm+OQlSJZvG5/K4LiP2ft0gg==
-X-Received: by 2002:a0d:d74c:0:b0:5a7:c01d:268 with SMTP id
- z73-20020a0dd74c000000b005a7c01d0268mr5382284ywd.18.1697632929113; 
- Wed, 18 Oct 2023 05:42:09 -0700 (PDT)
+ bh=F7UJ8m+IJ+A1KqZLlUSdbXGd6xpQJ94Ladgc8ximp0U=;
+ b=kxIDV3TqiZnbAagvtzKJ2XW4IT/jc1sL/EnIMLbEBhlYAil4HULgH/vhCmjH6PuGr8
+ eoHHTOaYRODzEW3gCwyiVAg+jhZkuBwzC7C1DJL+kC9u4gilgbLbRsqyCRS2XG34mRH7
+ DUcWnHecfAham5WAdvM+SSdRA1MHa1L1TZtMM9fxc9FQtfqK226aSk4DdAyikNn1+RGQ
+ cjw4pYahaedZjftNbY3fvt0fB291lIvxn0CIpavhCbGCA02rigcgvvuZ3zQMU8u2jhBo
+ V/0wBd4NV3BUM4wDrkCJrePGfIbLfo1vxWyOTzq0GZGvwlt1uVwEbS/b5WLushpgDGuq
+ hTQQ==
+X-Gm-Message-State: AOJu0Yz8O0rgNeEAlLtVR067JpVybwjVZV2WWJGoKANISKzzlL6wQsam
+ lqZgtunJn9CLpoWinVRvxF0KRQ==
+X-Google-Smtp-Source: AGHT+IGcbU4+al46ZQVXHZmB9JSVDGjPqIiZk1nQaDj1nMNposWLl6qrZWd0iLYGC3HNeDdHimDYKA==
+X-Received: by 2002:a81:92cf:0:b0:5a7:cc14:9e40 with SMTP id
+ j198-20020a8192cf000000b005a7cc149e40mr5493228ywg.5.1697632996781; 
+ Wed, 18 Oct 2023 05:43:16 -0700 (PDT)
 Received: from bill-the-cat
  (2603-6081-7b00-6400-0000-0000-0000-0f48.res6.spectrum.com.
  [2603:6081:7b00:6400::f48]) by smtp.gmail.com with ESMTPSA id
- v186-20020a0dd3c3000000b0057736c436f1sm1441502ywd.141.2023.10.18.05.42.08
+ m7-20020a817107000000b00589b653b7adsm1469339ywc.136.2023.10.18.05.43.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 05:42:08 -0700 (PDT)
-Date: Wed, 18 Oct 2023 08:42:06 -0400
+ Wed, 18 Oct 2023 05:43:16 -0700 (PDT)
+Date: Wed, 18 Oct 2023 08:43:14 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Anatolij Gustschin <agust@denx.de>
-Subject: Re: [PATCH v3 19/32] video: Dont require the font command
-Message-ID: <20231018124206.GP3119521@bill-the-cat>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 22/32] efi: Update EFI_LOADER to depend on DM_ETH
+Message-ID: <20231018124314.GQ3119521@bill-the-cat>
 References: <20231016222835.596572-1-sjg@chromium.org>
- <20231016222835.596572-20-sjg@chromium.org>
- <20231017140741.GA3119521@bill-the-cat>
- <CAPnjgZ2HkabXgrx6yMEZnM4fFiU7UyYRt0qCHecRd_K_ALjuSg@mail.gmail.com>
+ <20231016222835.596572-23-sjg@chromium.org>
+ <20231017140925.GB3119521@bill-the-cat>
+ <CAPnjgZ3QDBJSmdOc=DMOUur0NgbytfWC6SQMNLs9_zX4WCFDqA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GWx1mH/cSnbo44+p"
+ protocol="application/pgp-signature"; boundary="4dUsSD08C3ojLiFD"
 Content-Disposition: inline
-In-Reply-To: <CAPnjgZ2HkabXgrx6yMEZnM4fFiU7UyYRt0qCHecRd_K_ALjuSg@mail.gmail.com>
+In-Reply-To: <CAPnjgZ3QDBJSmdOc=DMOUur0NgbytfWC6SQMNLs9_zX4WCFDqA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,75 +95,75 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---GWx1mH/cSnbo44+p
+--4dUsSD08C3ojLiFD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 17, 2023 at 09:31:29PM -0600, Simon Glass wrote:
-> Hi Tom,
+On Tue, Oct 17, 2023 at 09:31:34PM -0600, Simon Glass wrote:
+> Hi,
 >=20
-> On Tue, 17 Oct 2023 at 08:07, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 17 Oct 2023 at 08:09, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Mon, Oct 16, 2023 at 04:28:10PM -0600, Simon Glass wrote:
-> > > While it is nice to have the font command, using 'select' makes it
-> > > impossible to build the console code without it. Change this to use
-> > > 'imply' instead.
+> > On Mon, Oct 16, 2023 at 04:28:13PM -0600, Simon Glass wrote:
+> >
+> > > Since efi_device_path.c calls eth_get_dev() and assumes that Ethernet=
+ is
+> > > available, add it as an explicit dependency.
 > > >
 > > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > > ---
 > > >
-> > > (no changes since v1)
+> > > (no changes since v2)
 > > >
-> > >  drivers/video/Kconfig | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > Changes in v2:
+> > > - Add new patch to update EFI_LOADER to depend on DM_ETH
 > > >
-> > > diff --git a/drivers/video/Kconfig b/drivers/video/Kconfig
-> > > index ab927641bb7a..21ea5c860cca 100644
-> > > --- a/drivers/video/Kconfig
-> > > +++ b/drivers/video/Kconfig
-> > > @@ -180,7 +180,7 @@ config CONSOLE_ROTATION
+> > >  lib/efi_loader/Kconfig | 1 +
+> > >  1 file changed, 1 insertion(+)
 > > >
-> > >  config CONSOLE_TRUETYPE
-> > >       bool "Support a console that uses TrueType fonts"
-> > > -     select CMD_SELECT_FONT
-> > > +     imply CMD_SELECT_FONT
-> > >       help
-> > >         TrueTrype fonts can provide outline-drawing capability rather=
- than
-> > >         needing to provide a bitmap for each font and size that is ne=
-eded.
+> > > diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> > > index 13cad6342c36..fca4b3eef270 100644
+> > > --- a/lib/efi_loader/Kconfig
+> > > +++ b/lib/efi_loader/Kconfig
+> > > @@ -11,6 +11,7 @@ config EFI_LOADER
+> > >       # We need EFI_STUB_32BIT to be set on x86_32 with EFI_STUB
+> > >       depends on !EFI_STUB || !X86 || X86_64 || EFI_STUB_32BIT
+> > >       depends on BLK
+> > > +     depends on DM_ETH
+> > >       depends on !EFI_APP
+> > >       default y if !ARM || SYS_CPU =3D armv7 || SYS_CPU =3D armv8
+> > >       select CHARSET
 > >
-> > This is one of those cases where "if CMDLINE" makes sense to add
-> > somewhere.
+> > Does this work for you Heinrich, or do you want to clarify the
+> > dependencies (and re-organize the code as needed) around networking?
 >=20
-> Maybe, if you can explain it a bit more. I want boards to be able to
-> enable or disable this command, independently of whether truetype
-> fonts are supported. Using 'select' here seems quite inflexible.
+> It would be great to tidy up networking in lots of ways...perhaps we
+> should add ~CMDLINE support to the list of post-lwip tasks if it lands
 
-Ah, OK.  Checking the command itself, we should drop the select here and
-make CMD_SELECT_FONT default y if CONSOLE_TRUETYPE (and drop the default
-n line it has).
+But this isn't even directly networking.  It's I believe that the
+network related portion of EFI loader isn't optional today.  But perhaps
+it could / should be?
 
 --=20
 Tom
 
---GWx1mH/cSnbo44+p
+--4dUsSD08C3ojLiFD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUv0p4ACgkQFHw5/5Y0
-tywp5Qv9H8GLSTyQ11L4+3EoWEbDSUnL+BVFLQ+5kIeycmneU6IG0WdMYEt0Lcg+
-oPlPgXyvayBIlwdSSM48NzccC3O1mEBH566ahG/A+PTicbvn86rdPWp91dMlT5Cc
-i7JV8vm0ViILjB60JwvVoufjtEHPLRDiC6lcY00TQ4GhdUPBdQnANCd+Ya0p1OMF
-K3QIMC9JvTFip02Fq1YaxEozgpgot0peRYu8N2HkgBsIJo5vr0pHii5FKbY8e0Ka
-PwObBTGg8WCKrX3fqT+3u7xG8SV7K2CYp7TsrARWoDX2xczWoBXA8ThhMMMEFgFj
-nb7nDkQ7+SuPOfI0sNz+CsBubVckSJEMu4uYN3YQ5UbrxjIe6LHBg5veYDtsnaPK
-cm/s2yoSrDTblVYzyshiBNKk0r0/S69P+wCqd3yBDYQPc5HUN4gfTQUaciN+1ENF
-samVoKcpx8LqaqJlReiXpcsZ/iyiRSXKndw/iHB1VG9B4LkkwZ9PFWj2zuBmPXsy
-mdzNjydV
-=W+sr
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmUv0uIACgkQFHw5/5Y0
+tyxDgQv+KLP8mvXB4lB2YXmljoyIX3jXLuoEIpy7+X9c61qILA84bGfX3D+vDdfA
+Snz2vBNb0ABvUxNeFerUDxZt7ixzS7dgjRYcPQCXmM9TFtbFqXHjzIJfCjkzBnpu
+ZsNBJgiAHab5x5t0pO559+GsJk5MPSVFQWmUFuAt3YYihTggb2Mqk1Ls0hZCM3Z+
+ycRFR0PivWI9vqrnf6VndC5Kl7YvkhrpvFg3jCGJhBxQwIBv30yAI/A6vSJXoYtQ
+bZPG8f6LkN+L4QGMh9Myg2zWAblH8r87lDKuWng2KuvrlTfs9SDOGkevQLORfaHW
+YpWK2f2lFEfYcvMJfgwm21CuNyYjsVtBiT0s76MrGyYEZhn+CXq0ccFQ56iSRc+e
+x7CNHM5OHmI+lWj0asWrYQVBPbEBd609LE8HkSHT9ghyRqiUcWBuiypAtv66wwSf
+B/jFK/NIivGL9QD/lRvXOT+aPhYqMIz34AX6Zk8USA8bH+qrptnemSthj7EVr6/f
+wAH0aNe8
+=4t8/
 -----END PGP SIGNATURE-----
 
---GWx1mH/cSnbo44+p--
+--4dUsSD08C3ojLiFD--
